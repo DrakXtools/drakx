@@ -1,3 +1,394 @@
+2005/02/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fr.po: updated French file
+
+	* share/po/ja.po: updated Japanese file
+
+2005/02/10  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm: 
+	  - Added help text for printers used with HPLIP.
+	  - Let "ask_warn()" messages not embed in the wizard, this breaks the
+	"Cancel" button (help texts when MF device queue is added).
+
+	* printer/printerdrake.pm: Tell that card reader is USB storage in the
+	HPLIP help text only if the device is actually connected via USB.
+	  - Added help text for printers used with HPLIP.
+	  - Let "ask_warn()" messages not embed in the wizard, this breaks the
+	"Cancel" button (help texts when MF device queue is added).
+
+2005/02/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* detect_devices.pm (isTVcard) only look for drivers configurable by
+	drakxtv
+	(getTVcards) rely on "multimedia/tv" category
+	add various/serial category and thus add support for mice and modems
+	connected to multiport serial cards
+	add network/modem category, thus adding support for ACP (Mwave) modems
+
+	* network/netconnect.pm: fix ndiswrapper installing: always install it if
+	needed (btw run faster if
+	already installed)
+	fix stepping back from lan interface step (impossible when using
+	ndiswrapper
+	and when there's only one interface)
+	simplify ndiwrapper step chaining
+
+	* drakxtools.spec: typo fix in 10.2-0.24mdk's changelog
+	10.2-0.24mdk
+	fix 10.2-0.23mdk's changelog
+	10.2-0.23mdk
+
+	* modules.pm (write_preload_conf) typo fix
+	(write_preload_conf) rely on "multimedia/tv" category, thus managing
+	more TV cards
+	(write_preload_conf) minimal joystick support: preload proper modules
+	(though
+	only those on sound cards from Creative Labs and Fortemedia are
+	detectable by
+	pci_probe()...)
+	(write_preload_conf) simplify and support multiple different AGP
+	controllers
+	(though unprobable)
+	(write_preload_conf) minimal DVB support: preload proper modules
+	add various/laptop category (only toshiba is detectable by pci_probe()
+	though...)
+
+	* mygtk2.pm (main) fix FileSelection (inactive & unusable window)
+
+	* share/po/br.po: update
+
+	* standalone/drakxtv: do not complain about no tv cards when there're but
+	they do not
+	require any configuration beyond loading proper module (#7443, #11270
+	and the like)
+
+	* harddrake/data.pm: do not detect speakers as keyboards
+	rely on new "multimedia/webcam" category for detecting webcams
+
+2005/02/09  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/02/09  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_applet: perl_checker fixes
+
+2005/02/09  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/ltg.po,
+	share/po/ky.po, share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po, share/po/eu.po,
+	share/po/lv.po, share/po/hu.po, share/po/id.po, share/po/ru.po,
+	share/po/br.po, share/po/sl.po, share/po/nn.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/mn.po, share/po/uk.po,
+	share/po/am.po, share/po/lt.po, share/po/cy.po, share/po/tg.po,
+	share/po/bs.po, share/po/fur.po, share/po/mk.po, share/po/wa.po,
+	share/po/is.po, share/po/hi.po, share/po/af.po, share/po/az.po,
+	share/po/pt.po, share/po/vi.po, share/po/fr.po, share/po/ta.po,
+	share/po/nl.po, share/po/de.po, share/po/tl.po, share/po/eo.po,
+	share/po/el.po, share/po/bg.po, share/po/cs.po, share/po/uz@Latn.po:
+	updated pot file
+
+	* share/po/sv.po, share/po/nb.po: updated pot file
+	updated Swedish and Norwegian files
+
+	* share/po/it.po: updated Italian file
+	updated pot file
+
+	* share/rpmsrate: Arabic-only fonts are useless for "fa" or "ur" locales
+
+	* share/po/fa.po: updated Persian file
+	updated pot file
+
+	* share/po/es.po: updated po file
+	updated pot file
+
+	* lang.pm: changed arabic font for KDE ("Roya" doesn't have ascii glyphs;
+	"Terafik" does)
+
+2005/02/09  peroyvind
+
+	* share/po/nb.po: * translate the word "daemon" to norwegian
+	* various corrections
+	updated
+
+2005/02/09  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: fix ugly typo (especially causing acpi to not be set in
+	drakboot --boot)
+
+2005/02/09  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* ugtk2.pm: Add the possibility to call a callback just after widget
+	initialisation in
+	ask_browse_tree_info_given_widgets().
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/ltg.po,
+	share/po/nb.po, share/po/ky.po, share/po/uz.po, share/po/ro.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/sl.po, share/po/nn.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/mn.po, share/po/uk.po,
+	share/po/am.po, share/po/lt.po, share/po/cy.po, share/po/tg.po,
+	share/po/bs.po, share/po/fur.po, share/po/mk.po, share/po/wa.po,
+	share/po/is.po, share/po/hi.po, share/po/af.po, share/po/az.po,
+	share/po/pt.po, share/po/fr.po, share/po/ta.po, share/po/vi.po,
+	share/po/nl.po, share/po/de.po, share/po/tl.po, share/po/eo.po,
+	share/po/bg.po, share/po/cs.po, share/po/el.po, share/po/uz@Latn.po:
+	Make an error message more user-friendly
+
+	* install_any.pm: Make an error message more user-friendly
+	make perl_checko, the little bot, happy
+	Remove "Cancel" button from the supplementary media selection window
+
+2005/02/09  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: Added automatic setup of HP printers with
+	HPLIP.
+
+	* printer/main.pm: Added reading the printing technology type in the HPLIP
+	model database.
+	Added automatic setup of HP printers with HPLIP.
+	Added subroutine to parse HPLIP device database XML file.
+
+2005/02/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* fs.pm (mount) let's support ntfs and reorder fs list btw (#3653)
+
+	* drakxtools.spec: 10.2-0.22mdk
+	10.2-0.21mdk
+	add bug reference in 10.1-14mdk's changelog
+
+	* standalone/service_harddrake: prevent adding spurious empty lines at end
+	of /etc/hotplub/blacklist on stop
+
+2005/02/08  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/02/08  mareklaane
+
+	* share/po/et.po: Menus and some more translation fixes.
+
+2005/02/08  Olivier Blin <oblin at mandrakesoft.com>
+
+	* drakxtools.spec: start automatically net_applet in fluxbox and XFce4 too
+
+2005/02/08  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fr.po: updated pot file
+	updated French file
+	updated pot file
+
+	* share/po/gl.po: updated pot file
+	updated pot file
+	updated pot file
+
+	* share/keyboards.tar.bz2, keyboard.pm: synchronized keyboards with X11;
+	added second bengali layout;
+	make Serbian cyrillic use Serbian latin (isntead of "us") for latin
+	layout
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/pt_BR.po,
+	share/po/th.po, share/po/et.po, share/po/hr.po, share/po/be.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/he.po, share/po/ca.po,
+	share/po/da.po, share/po/ar.po, share/po/ltg.po, share/po/nb.po,
+	share/po/ky.po, share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/lv.po, share/po/hu.po,
+	share/po/fa.po, share/po/id.po, share/po/ru.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/uk.po, share/po/mn.po, share/po/am.po,
+	share/po/lt.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/el.po, share/po/bg.po, share/po/cs.po,
+	share/po/uz@Latn.po: updated pot file
+	updated pot file
+
+	* share/po/ja.po: updated pot file
+	updated pot file
+	updated Japanese file
+
+	* printer/printerdrake.pm: translatable string already in use
+
+	* standalone/drakbug: "%s" is not a translatable thing (changed N() ->
+	translate())
+
+	* share/po/cy.po: updated Welsh file
+	updated pot file
+	updated pot file
+
+2005/02/08  peroyvind
+
+	* share/po/nb.po: complete translation from Eskild:)
+
+2005/02/08  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: allow mounting isOtherAvailableFS filesystems read-only
+
+	* ugtk2.pm: {rwindow} is more probably a mygtk2::MagicWindow
+
+	* standalone/drakbug: cleanup this mess
+
+	* fs/format.pm: workaround perl limitation
+
+	* fs/type.pm: add iso9660 in isOtherAvailableFS
+	detect iso9660 filesystem
+
+	* fsedit.pm: when the partition table is empty, try to see if we are not
+	using the plain disk
+
+	* install2.pm, fs.pm, modules.pm, mdk-stage1/probing.c: new kernel doesn't
+	like usbdevfs any more, it wants usbfs
+
+2005/02/08  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps_gtk.pm: Better wording for a couple of strings
+	Don't propose to copy RPMs on disk for ISO installation method
+
+	* any.pm: Allow upper case letters in users' real names.
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/ltg.po,
+	share/po/nb.po, share/po/ky.po, share/po/uz.po, share/po/ro.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/sl.po, share/po/nn.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/mn.po, share/po/uk.po,
+	share/po/am.po, share/po/lt.po, share/po/cy.po, share/po/tg.po,
+	share/po/bs.po, share/po/fur.po, share/po/mk.po, share/po/wa.po,
+	share/po/is.po, share/po/hi.po, share/po/af.po, share/po/az.po,
+	share/po/pt.po, share/po/vi.po, share/po/fr.po, share/po/ta.po,
+	share/po/nl.po, share/po/de.po, share/po/tl.po, share/po/eo.po,
+	share/po/bg.po, share/po/cs.po, share/po/el.po, share/po/uz@Latn.po:
+	Better wording for a couple of strings
+
+	* docs/HACKING: Add some more necessary RPMs
+
+2005/02/08  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm: Fixed (worked around?) bug of parallel HP MF devices
+	not being set up correctly with HPOJ (probably bad interaction with
+	udev).
+	  - Corrected recognition of driver name in Foomatic-generated PPDs.
+	  - Conserve auto-detection data when a Foomatic printer entry is
+	replaced by an
+	entry from a native PostScript PPD.
+
+	* printer/detect.pm: 
+	  - Prevented restarting of HPOJ and reloading the parallel port kernel
+	modules
+	when printerdrake's queue generator is called by the hotplug script.
+
+	* printer/printerdrake.pm: Updated device destinctions for HPOJ to the
+	newest models.
+	  - Prevented restarting of HPOJ and reloading the parallel port kernel
+	modules
+	when printerdrake's queue generator is called by the hotplug script.
+	Limited automatically generated print queue names to 12 characters and
+	warn user if he manually enters longer names. Names longer than 12
+	characters will make the printer unaccessible for certain Windows
+	clients (bug #12674).
+
+	* printer/data.pm: Added hplip-model-data package to be installed.
+
+2005/02/08  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.2-0.20mdk
+	10.1-27.5.101mdk
+
+2005/02/08  vljubovic
+
+	* share/po/bs.po: Update translation
+
+2005/02/07  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2005/02/07  mareklaane
+
+	* share/po/et.po: Some more translation fixes.
+	First round of translation fixes ended...
+
+2005/02/07  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/network.pm: do not require perl-Gnome2-Gconf in drakxtools, but
+	use gconftool-2
+	make it easy to use other GConf interfaces
+
+	* network/adsl_consts.pm: add missing methods
+
+	* network/netconnect.pm: select manual adsl connection type if the network
+	interface was static
+
+2005/02/07  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po,
+	share/po/it.po, share/po/eu.po, share/po/es.po, share/po/lv.po,
+	share/po/hu.po, share/po/id.po, share/po/ru.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/fr.po,
+	share/po/ta.po, share/po/vi.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/bg.po, share/po/cs.po,
+	share/po/el.po, share/po/uz@Latn.po: updated pot file
+
+	* share/po/wa.po: updated Walloon file
+	updated pot file
+
+	* share/po/zh_TW.po, share/po/fa.po: updated Farsi file
+	updated pot file
+
+2005/02/07  Pixel  <pixel at mandrakesoft.com>
+
+	* mygtk2.pm: 
+	  ->get('window-position') should be done on real_window
+
+	* install_steps_interactive.pm: really fix "Graphical interface - not
+	configured" bug
+
+	* fs/mount_options.pm: ensure some options are not set for
+	directories_needed_to_boot (bugzilla #13433)
+
+	* pkgs.pm: fix setting @hdlists when deselectionAllowed is false
+
+2005/02/07  shivahuang
+
+	* share/po/zh_TW.po: conflicts between 1.336 & 1.337 solved
+
+2005/02/07  Till Kamppeter  <till at mandrakesoft.com>
+
+	* share/rpmsrate: Updated rpmsrate for new printing packages
+
+	* standalone/printerdrake: Adjusted version number.
+
+	* printer/data.pm: Use "hplip-hpijs" for HPIJS package.
+
 2005/02/07  mareklaane
 
 	* share/po/et.po: More translation fixes.
@@ -44350,7 +44741,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1006 2005/02/04 18:17:51 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1007 2005/02/07 09:11:50 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
