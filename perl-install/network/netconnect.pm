@@ -283,24 +283,6 @@ If you don't want to use the auto detection, deselect the checkbox.
                     },
                    },
                    
-                   cable => 
-                   {
-                    name => N("Connect to the Internet") . "\n\n" .
-                    N("Which dhcp client do you want to use ? (default is dhcp-client)"),
-                    data =>
-                    [ { val => \$netcnx->{dhcp_client}, list => ["dhcp-client", "dhcpcd", "dhcpxd"] } ],
-                    
-                    post => sub {
-                        $in->do_pkgs->install($netcnx->{dhcp_client});
-                                 write_cnx_script($netc, "cable", qq(
-/sbin/ifup $netc->{NET_DEVICE}
-),
-                                                  qq(
-/sbin/ifdown $netc->{NET_DEVICE}
-), $netcnx->{type});
-                        return "go_ethernet";
-                    },
-                            },
                    
                    go_ethernet => 
                    {
