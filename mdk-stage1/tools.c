@@ -229,7 +229,7 @@ int total_memory(void)
 
 int ramdisk_possible(void)
 {
-	if (total_memory() > (IS_RESCUE ? MEM_LIMIT_RESCUE : MEM_LIMIT_RAMDISK))
+	if (total_memory() > (IS_RESCUE ? MEM_LIMIT_RESCUE : MEM_LIMIT_DRAKX))
 		return 1;
 	else {
 		log_message("warning, ramdisk is not possible due to low mem!");
