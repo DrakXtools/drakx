@@ -552,9 +552,9 @@ enum return_type perform_dhcp(struct interface_info * intf)
 			
 			if (*dhcp_hostname && *dhcp_domain) {
 				/* if we have both, then create client id from them */
-				client_id_str = memdup(dhcp_hostname, strlen(dhcp_domain) + 2);
-				strcat(client_id_str, ".");
-				strcat(client_id_str, dhcp_domain);
+				client_id_str = malloc(1 + strlen(dhcp_hostname) + 1 + strlen(dhcp_domain) + 1);
+				client_id_str[0] = '\0';
+				sprintf(client_id_str+1, "%s.%s", dhcp_hostname, dhcp_domain);
 			}
 		}
 	}
@@ -575,7 +575,7 @@ enum return_type perform_dhcp(struct interface_info * intf)
 	/* add pieces needed to have DDNS/DHCP IP selection based on requested name */
 	if (dhcp_hostname && *dhcp_hostname) { /* pick client id form based on absence or presence of domain name */
 		if (*dhcp_domain) /* alternate style <hostname>.<domainname> */
-			add_vendor_code(&breq, DHCP_OPTION_CLIENT_IDENTIFIER, strlen(client_id_str), client_id_str);
+			add_vendor_code(&breq, DHCP_OPTION_CLIENT_IDENTIFIER, strlen(client_id_str+1)+1, client_id_str);
 		else { /* usual style (aka windows / dhcpcd) */
 			/* but put MAC in form required for client identifier first */
 			client_id_hwaddr = malloc(IFHWADDRLEN+2);
@@ -630,7 +630,7 @@ enum return_type perform_dhcp(struct interface_info * intf)
 	/* if used the first time, then have to use it again */
 	if (dhcp_hostname && *dhcp_hostname) { /* add pieces needed to have DDNS/DHCP IP selection based on requested name */
 		if (dhcp_domain && *dhcp_domain) /* alternate style */
-			add_vendor_code(&breq, DHCP_OPTION_CLIENT_IDENTIFIER, strlen(client_id_str), client_id_str);
+			add_vendor_code(&breq, DHCP_OPTION_CLIENT_IDENTIFIER, strlen(client_id_str+1)+1, client_id_str);
 		else /* usual style (aka windows / dhcpcd) */
 			add_vendor_code(&breq, DHCP_OPTION_CLIENT_IDENTIFIER, IFHWADDRLEN+1, client_id_hwaddr);
 		/* this is the one that the dhcp server really wants for DDNS updates */
