@@ -20,7 +20,7 @@ sub configure_monitor {
     Xconfig::monitor::configure($in, $raw_X, int($raw_X->get_devices)) or return;
     if ($raw_X->prepare_write ne $before) {
 	$raw_X->write;
-	'config_changed';
+	'need_restart';
     } else {
 	'';
     }
@@ -29,13 +29,14 @@ sub configure_monitor {
 sub configure_resolution {
     my ($in, $raw_X) = @_;
 
-    my $card = Xconfig::card::from_raw_X($raw_X);
-    my $monitors = [ $raw_X->get_monitors ];
+    my $X = { 
+	card => Xconfig::card::from_raw_X($raw_X),
+	monitors => [ $raw_X->get_monitors ],
+    };
     my $before = $raw_X->prepare_write;
-    Xconfig::resolution_and_depth::configure($in, $raw_X, $card, $monitors) or return;
+    $X->{resolution} = Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitors}) or return;
     if ($raw_X->prepare_write ne $before) {
-	$raw_X->write;
-	'config_changed';
+	&write($raw_X, $X);
     } else {
 	'';
     }
@@ -51,10 +52,11 @@ sub configure_everything_auto_install {
     Xconfig::screen::configure($raw_X) or return;
     $X->{resolution} = Xconfig::resolution_and_depth::configure_auto_install($raw_X, $X->{card}, $X->{monitors}, $old_X);
 
-    &write($raw_X, $X);
+    my $action = &write($raw_X, $X);
 
     Xconfig::various::runlevel(exists $old_X->{xdm} && !$old_X->{xdm} ? 3 : 5);
-    'config_changed';
+
+    $action;
 }
 
 sub configure_everything {
@@ -76,9 +78,7 @@ sub configure_everything {
     }
     $X->{various} ||= Xconfig::various::various($in, $X->{card}, $options, $auto);
 
-    $ok = may_write($in, $raw_X, $X, $ok);
-    
-    $ok && 'config_changed';
+    may_write($in, $raw_X, $X, $ok);
 }
 
 sub configure_chooser_raw {
@@ -150,8 +150,7 @@ sub configure_chooser {
     my ($ok) = configure_chooser_raw($in, $raw_X, $do_pkgs, $options, $X);
 
     if ($raw_X->prepare_write ne $before) {
-	may_write($in, $raw_X, $X, $ok) or return;
-	'config_changed';
+	may_write($in, $raw_X, $X, $ok);
     } else {
 	'';
     }
@@ -168,13 +167,14 @@ sub configure_everything_or_configure_chooser {
 	$raw_X = [];
     }
 
+    my $rc;
     if (is_empty_array_ref($raw_X)) {
 	$raw_X = Xconfig::default::configure($in->do_pkgs, $o_keyboard, $o_mouse);
-	Xconfig::main::configure_everything($in, $raw_X, $in->do_pkgs, $auto, $options) or return;
-    } else {
-	Xconfig::main::configure_chooser($in, $raw_X, $in->do_pkgs, $options) or return if !$auto;
+	$rc = Xconfig::main::configure_everything($in, $raw_X, $in->do_pkgs, $auto, $options);
+    } elsif (!$auto) {
+	$rc = Xconfig::main::configure_chooser($in, $raw_X, $in->do_pkgs, $options);
     }
-    $raw_X;
+    $rc && $raw_X, $rc;
 }
 
 
@@ -186,23 +186,25 @@ The current configuration is:
 
 %s", Xconfig::various::info($raw_X, $X->{card})), 1);
 
-    &write($raw_X, $X) if $ok;
-    $ok;
+    $ok && &write($raw_X, $X);
 }
 
 sub write {
     my ($raw_X, $X) = @_;
-    export_to_install_X($X);
+    export_to_install_X($X) if $::isInstall;
     $raw_X->write;
     Xconfig::various::check_XF86Config_symlink();
     symlinkf "../../usr/X11R6/bin/Xorg", "$::prefix/etc/X11/X";
+    if ($X->{resolution}{bios}) {
+	'need_reboot';
+    } else {
+	'need_restart';
+    }
 }
 
 
 sub export_to_install_X {
     my ($X) = @_;
-
-    $::isInstall or return;
 
     $::o->{X}{resolution_wanted} = $X->{resolution}{X};
     $::o->{X}{default_depth} = $X->{resolution}{Depth};
