@@ -24,34 +24,12 @@ my $in = interactive->vnew('su');
 
 require 'bootlook.pm' if ref($in) =~ /gtk/;
 
-if (!$::isEmbedded) {
-    my %l = (
-	     arch() !~ /sparc|alpha/ ? (
-					_("Configure LILO/GRUB") => '',
-					_("Create a boot floppy") => ['/usr/X11R6/bin/drakfloppy'],
-				       ) : (),
-	     _("Format floppy") => [ '/usr/bin/kfloppy', '/usr/bin/gfloppy' ],
-	    );
-
-    while (my ($k, $v) = each %l) {
-	$v or next;
-	foreach (@$v) {
-	    -x $_ and $l{$k} = $_, last;
-	}
-	-x $l{$k} or delete $l{$k};
-    }
-
-    if ($ENV{DISPLAY} && c::Xtest($ENV{DISPLAY})) {
-	my $cmd = $l{$in->ask_from_list(_("Choice"), _("What do you want to do?"), [ keys %l ])};
-	exec $cmd if $cmd;
-    }
-}
 
 my $bootloader = bootloader::read('', '/etc/lilo.conf');
 local ($_) = `detectloader`;
 $bootloader->{methods} = { lilo => 1, grub => !!/grub/i };
 
-my $hds = catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) } sub { 1 };
+my ($hds) = catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) } sub { 1 };
 my $fstab = [ fsedit::get_fstab(@$hds) ];
 fs::get_mntpoints_from_fstab($fstab);
 
