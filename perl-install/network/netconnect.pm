@@ -80,12 +80,7 @@ sub detect {
     network::modem->import;
     my ($modem, @pci_modems) = detect_devices::getModem();
     $modem->{device} and $auto_detect->{modem} = $modem->{device};
-    show_pci_modems(@pci_modems) if @pci_modems;
-}
-
-sub show_pci_modems {
-    my @l = map { ' - ' . $_->{description} } @_;
-    $in->ask_warn(_("Warning"), _("You have internal winmodem(s) :\n\n%s\n\n Go to http://www.linmodem.org for further information", join ("\n", @l)));
+    @pci_modems and $auto_detect->{winmodem}{$_->{driver}} = $_->{description} foreach @pci_modems;
 }
 
 sub pre_func {
@@ -188,21 +183,22 @@ If you don't want to use the auto detection, deselect the checkbox.
 
     my $set_default;
     my %conf;
-    $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach 'modem', 'adsl', 'cable', 'lan';
+    $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach 'modem', 'winmodem', 'adsl', 'cable', 'lan';
     $conf{isdn} = $netc->{autodetect}{isdn}{description} ? 1: 0;
-    my @l = (
-	     [_("Normal modem connection"), $netc->{autodetect}{modem}, __("detected on port %s"), \$conf{modem}],
-	     [_("ISDN connection"), $netc->{autodetect}{isdn}{description}, __("detected %s"), \$conf{isdn}],
-	     [_("ADSL connection"), $netc->{autodetect}{adsl}, __("detected"), \$conf{adsl}],
-	     [_("Cable connection"), $netc->{autodetect}{cable}, __("cable connection detected"), \$conf{cable}],
-	     [_("LAN connection"), $netc->{autodetect}{lan}, __("ethernet card(s) detected"), \$conf{lan}]
-	);
+#     my @l = (
+# 	     [_("Normal modem connection"), $netc->{autodetect}{modem}, __("detected on port %s"), \$conf{modem}],
+# 	     [_("ISDN connection"), $netc->{autodetect}{isdn}{description}, __("detected %s"), \$conf{isdn}],
+# 	     [_("ADSL connection"), $netc->{autodetect}{adsl}, __("detected"), \$conf{adsl}],
+# 	     [_("Cable connection"), $netc->{autodetect}{cable}, __("cable connection detected"), \$conf{cable}],
+# 	     [_("LAN connection"), $netc->{autodetect}{lan}, __("ethernet card(s) detected"), \$conf{lan}]
+# 	);
     my $i = 0;
     map { defined $set_default or do { $_->[1] and $set_default = $i }; $i++ } @l;
     @l = (
 [_("Normal modem connection") . if_($netc->{autodetect}{modem}, " - " . _("detected on port %s", $netc->{autodetect}{modem})), \$conf{modem}],
+[_("Winmodem connection") . if_($netc->{autodetect}{winmodem}, " - " . _("detected")), \$conf{winmodem}],
 [_("ISDN connection") . if_($netc->{autodetect}{isdn}{description}, " - " . _("detected %s", $netc->{autodetect}{isdn}{description})), \$conf{isdn}],
-[_("ADSL connection") . if_($netc->{autodetect}{adsl}, " - " . _("detected", $netc->{autodetect}{adsl})), \$conf{adsl}],
+[_("ADSL connection") . if_($netc->{autodetect}{adsl}, " - " . _("detected")), \$conf{adsl}],
 [_("Cable connection") . if_($netc->{autodetect}{cable}, " - " . _("cable connection detected")), \$conf{cable}],
 [_("LAN connection") . if_($netc->{autodetect}{lan}, " - " . _("ethernet card(s) detected")), \$conf{lan}]
 );
@@ -221,6 +217,7 @@ If you don't want to use the auto detection, deselect the checkbox.
 
 #    load_conf ($netcnx, $netc, $intf);
     $conf{modem} and do { pre_func("modem"); require network::modem; network::modem::configure($netcnx, $mouse, $netc) or goto step_2 };
+    $conf{winmodem} and do { pre_func("winmodem"); require network::modem; network::modem::winmodemConfigure($netc) or goto step_2 }; 
     $conf{isdn} and do { pre_func("isdn"); require network::isdn; network::isdn::configure($netcnx, $netc) or goto step_2 };
     $conf{adsl} and do { pre_func("adsl"); require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2 };
     $conf{cable} and do { pre_func("cable"); require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1 };
