@@ -1,0 +1,200 @@
+#!/usr/bin/perl
+
+#- Synchronize mulitple RPMS/SRPMS directories.
+#- Copyright (C) 1999 MandrakeSoft (fpons@mandrakesoft.com)
+#-
+#- This program is free software; you can redistribute it and/or modify
+#- it under the terms of the GNU General Public License as published by
+#- the Free Software Foundation; either version 2, or (at your option)
+#- any later version.
+#-
+#- This program is distributed in the hope that it will be useful,
+#- but WITHOUT ANY WARRANTY; without even the implied warranty of
+#- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#- GNU General Public License for more details.
+#-
+#- You should have received a copy of the GNU General Public License
+#- along with this program; if not, write to the Free Software
+#- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+
+use strict qw(subs vars refs);
+
+#- get basename for a file.
+sub basename { $_[0] =~ /([^\/]*)$/ ? $1 : $_[0]; }
+
+#- compare a version string.
+sub version_compare {
+    my ($a, $b) = @_;
+    local $_;
+
+    while ($a && $b) {
+	my ($sb, $sa) =  map { $1 if $a =~ /^\W*\d/ ? s/^\W*0*(\d+)// : s/^\W*(\D+)// } ($b, $a);
+	$_ = length($sa) cmp length($sb) || $sa cmp $sb and return $_;
+    }
+}
+
+#- system functions.
+sub cp {
+    my $pid;
+    if ($pid = fork()) {
+	waitpid($pid, 0);
+    } else {
+	exec '/bin/cp', @_;
+    }
+}
+sub rm {
+    my $pid;
+    if ($pid = fork()) {
+	waitpid($pid, 0);
+    } else {
+	exec '/bin/rm', '-f', @_;
+    }
+}
+
+#- get a hash on name of srpms/rpms in a directory.
+sub get_rpms {
+    my ($dir, $rpms, $flag) = @_;
+
+    opendir D, $dir or die "cannot open directory $dir\n";
+    map { 
+	if (/([^\/]*?)-([^-]*)-([^-]*)\.([^-]*)(?:\.src)?\.rpm$/) {
+	    if ($rpms->{$1}) {
+		if (version_compare($rpms->{$1}{version}, $2) > 0 ||
+		    version_compare($rpms->{$1}{version}, $2) == 0 && version_compare($rpms->{$1}{release}, $3) > 0) {
+		    if ($flag->{clean}) {
+			print "removing obseleted $rpms->{$1}{file} by $_ in $rpms->{$1}{dir}\n" if $flag->{verbose};
+			rm("$rpms->{$1}{dir}/$rpms->{$1}{file}");
+		    }
+		    $rpms->{$1} = { name => $1,
+				    version => $2,
+				    release => $3,
+				    arch => $4,
+				    dir => $dir,
+				    file => $_,
+				};
+		} else {
+		    if ($flag->{clean}) {
+			print "removing older or equal $_ by $rpms->{$1}{file} in $dir\n" if $flag->{verbose};
+			rm("$dir/$_");
+		    }
+		}
+	    } else {
+		$rpms->{$1} = { name => $1,
+				version => $2,
+				release => $3,
+				arch => $4,
+				dir => $dir,
+				file => $_,
+			    };
+	    }
+	} else {
+	    print STDERR "unable to parse filename $_\n";
+	}
+    } grep { /\.rpm$/ } readdir D;
+    closedir D;
+}
+
+#- sync two hashes of rpms, update rpms and printer newer version that are not taken into account.
+sub sync_rpms {
+    my ($source, $target, $flag) = @_;
+
+    #- search in source part.
+    foreach (keys %$source) {
+	unless ($target->{$_}) {
+	    if ($flag->{verbose}) {
+		print "adding $source->{$_}{file}" . (-d $flag->{add} ? " to $flag->{add}\n" : " is neccessary!\n");
+	    }
+	    if (-d $flag->{add}) {
+		cp("$source->{$_}{dir}/$source->{$_}{file}", $flag->{add});
+	    }
+	}
+    }
+
+    #- search in both part.
+    foreach (keys %$source) {
+	if ($target->{$_}) {
+	    if (version_compare($source->{$_}{version}, $target->{$_}{version}) > 0 ||
+		version_compare($source->{$_}{version}, $target->{$_}{version}) == 0 && 
+		version_compare($source->{$_}{release}, $target->{$_}{release}) > 0) {
+		if ($flag->{verbose}) {
+		    print "updating $target->{$_}{dir}/$target->{$_}{file} with newer version $source->{$_}{file}\n";
+		}
+		if ($flag->{update}) {
+		    cp("$source->{$_}{dir}/$source->{$_}{file}", $target->{$_}{dir});
+		    unless (-e "$target->{$_}{dir}/$source->{$_}{file}") {
+			die "unable to copy $source->{$_}{file} from $source->{$_}{dir} into $target->{$_}{dir}\n";
+		    }
+		    rm("$target->{$_}{dir}/$target->{$_}{file}");
+		}
+	    } elsif (version_compare($source->{$_}{version}, $target->{$_}{version}) != 0 ||
+		     version_compare($source->{$_}{release}, $target->{$_}{release}) != 0) {
+		if ($flag->{verbose}) {
+		    print STDERR "keeping more up-to-date version $target->{$_}{dir}/$source->{$_}{file} against $source->{$_}{dir}/$source->{$_}{file}, check your repository !\n";
+		}
+	    } #- say nothing if source is equal to target.
+	}
+    }
+
+    #- search in target part.
+    foreach (keys %$target) {
+	unless ($source->{$_}) {
+	    if ($flag->{verbose}) {
+		print "removing $target->{$_}{file}" . ($flag->{remove} ? " from $target->{$_}{dir}\n" : " is neccessary!\n")
+		}
+	    if ($flag->{remove}) {
+		rm("$target->{$_}{dir}/$target->{$_}{file}");
+	    }
+	}
+    }
+}
+
+#- main program.
+sub main {
+    my @from_rpms;
+    my @to_rpms;
+    my $target_rpms;
+    my %flag;
+    my %source;
+    my %target;
+
+    foreach (@_) {
+	if (/^--(\w*)$/) {
+	    if ($1 eq 'verbose' || $1 eq 'update' || $1 eq 'remove' || $1 eq 'clean') {
+		$flag{$1} = 1;
+	    } elsif ($1 eq 'add') {
+		$flag{add} = undef;
+	    } elsif ($1 eq 'from') {
+		$target_rpms = \@from_rpms;
+	    } elsif ($1 eq 'to') {
+		$target_rpms = \@to_rpms;
+	    } else {
+		die "unknown option: $1\n";
+	    }
+	} else {
+	    if (exists $flag{add} && ! $flag{add}) {
+		$flag{add} = $_;
+		die "cannot add to non-directory: $_\n" unless -d $flag{add};
+	    } else {
+		die "unknown parameter: $_\n" unless $target_rpms;
+		push @$target_rpms, $_;
+	    }
+	}
+    }
+
+    die "usage: syncrpms [--update] [--remove] [--clean] [--add <dir>] --from <dir_sources> --to <dir_target>\n"
+	unless scalar(@from_rpms) > 0 && scalar(@to_rpms) > 0;
+
+    #- parse directory structures.
+    get_rpms($_, \%source, \%flag) foreach @from_rpms;
+    get_rpms($_, \%target, \%flag) foreach @to_rpms;
+
+    print STDERR "reading " . scalar(keys %source) . " packages as source rpms from\n";
+    print STDERR "    $_\n" foreach @from_rpms;
+    print STDERR "reading " . scalar(keys %target) . " packages as target rpms from\n";
+    print STDERR "    $_\n" foreach @to_rpms;
+
+    sync_rpms(\%source, \%target, \%flag);
+}
+
+main(@ARGV);

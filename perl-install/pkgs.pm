@@ -86,9 +86,9 @@ $PKGS_UNSKIP    = 0x10000000;
 #- size and deps are grouped to save memory too and make a much
 #- simpler and faster depslist reader, this gets (sizeDeps).
 sub packageHeaderFile { my ($pkg) = @_; $pkg->{file} }
-sub packageName       { my ($pkg) = @_; $pkg->{file} =~ /(.*)-[^-]+-[^-]+/ && $1 or die "invalid file `$pkg->{file}'" }
-sub packageVersion    { my ($pkg) = @_; $pkg->{file} =~ /.*-([^-]+)-[^-]+/ && $1 or die "invalid file `$pkg->{file}'" }
-sub packageRelease    { my ($pkg) = @_; $pkg->{file} =~ /.*-[^-]+-([^-]+)/ && $1 or die "invalid file `$pkg->{file}'" }
+sub packageName       { my ($pkg) = @_; $pkg->{file} =~ /(.*)-[^-]+-[^-]+/ ? $1 : die "invalid file `$pkg->{file}'" }
+sub packageVersion    { my ($pkg) = @_; $pkg->{file} =~ /.*-([^-]+)-[^-]+/ ? $1 : die "invalid file `$pkg->{file}'" }
+sub packageRelease    { my ($pkg) = @_; $pkg->{file} =~ /.*-[^-]+-([^-]+)/ ? $1 : die "invalid file `$pkg->{file}'" }
 
 sub packageSize   { my ($pkg) = @_; to_int($pkg->{sizeDeps}) }
 sub packageDepsId { my ($pkg) = @_; split ' ', ($pkg->{sizeDeps} =~ /^\d*\s+(.*)/)[0] }
@@ -752,7 +752,7 @@ sub install($$$;$$) {
     #- place (install_steps_gtk.pm,...).
     installCallback("Starting installation", $nb, $total);
 
-    my ($i, $min, $medium) = (0, 0, install_any::medium());
+    my ($i, $min, $medium) = (0, 0);
     do {
 	my @transToInstall;
 

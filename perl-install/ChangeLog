@@ -1,3 +1,14 @@
+2000-03-13  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm, install_any.pm: small correction for multiple media
+	installation.
+	* tools/syncrpms: added for handling synchronisation of multiple source
+	rpm directories (and multiple target), include cleaning.
+	* tools/closurepkgs: tools to get rpm that may be installed by DrakX
+	after normal packages installation (printer, network, X11...), may
+	be used to duplicate on other CD some important stuff of the first
+	one.
+
 2000-03-11  Pixel  <pixel@mandrakesoft.com>
 
 	* devices.pm (set_loop): created, searches for an available
@@ -8,6 +19,11 @@
 	* interactive_gtk.pm (wait_message_nextW): do not update if same
 	message, otherwise silly gtk won't do anything and we'll wait
 	forever :(
+
+2000-03-10  François Pons  <fpons@mandrakesoft.com>
+
+	* *.pm: heavy modification to take into account multiple media
+	installation.
 
 2000-03-10  Pixel  <pixel@mandrakesoft.com>
 

@@ -1,0 +1,52 @@
+#!/usr/bin/perl
+
+use strict;
+
+sub chop_version($) {
+    ($_[0] =~ /(.*)-[^-]+-[^-]+/)[0] || $_[0];
+}
+
+sub read_depslist {
+    my ($file) = @_;
+    my $depslist = { 'ordered' => [], 'packages' => {} };
+
+    local *F;
+    open F, $file or die "closurepkgs: unable to open ordered dependencies list file $file\n";
+    foreach (<F>) {
+	my ($name, $size, @deps) = split;
+	push @{$depslist->{ordered}}, { name => $name, size => $size, deps => \@deps };
+    }
+    close F;
+
+    foreach (@{$depslist->{ordered}}) {
+	$depslist->{packages}{chop_version($_->{name})} = $_;
+    }
+
+    print STDERR "closurepkgs: read " . scalar(@{$depslist->{ordered}}) . " package dependancies\n";
+
+    $depslist;
+}
+
+sub main {
+    my ($file) = @_;
+    my $depslist = read_depslist($file);
+
+    my @pkgs = qw(XFree86 dhcpcd pump ppp ypbind rhs-printfilters samba ncpfs kernel-fb);
+    push @pkgs, "XFree86-$_" foreach qw(3DLabs 3dfx 8514 AGX FBDev I128 Mach8 Mach32 Mach64 Mono P9000 Rage128 S3 S3V SVGA VGA16 W32);
+
+    my %closure;
+    foreach (@pkgs) {
+	$closure{$_} = 1;
+	map { $closure{chop_version($_->{name})} = 1 } map { ($depslist->{ordered}[$_]) } @{$depslist->{packages}{$_}{deps}};
+    }
+
+    #- remove base package, which are already installed.
+    foreach (qw(basesystem sed initscripts console-tools utempter ldconfig chkconfig ntsysv setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep gzip hdparm info kernel less ldconfig logrotate losetup man mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash ash setserial shadow-utils sh-utils stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which perl-base msec)) {
+	delete $closure{$_};
+	map { delete $closure{chop_version($_->{name})} } map { ($depslist->{ordered}[$_]) } @{$depslist->{packages}{$_}{deps}};
+    }
+
+    map { print $depslist->{packages}{$_}{name}, "\n" } grep { $closure{$_} } keys %closure;
+}
+
+main(@ARGV);

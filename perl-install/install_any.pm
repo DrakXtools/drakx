@@ -35,7 +35,6 @@ use log;
 $current_medium = '';
 $asked_medium = '';
 %refused_media = ();
-sub medium() { $current_medium }
 sub useMedium($) { $asked_medium eq $_[0] or log::l("selecting new medium $_[0]"); $asked_medium = $_[0] }
 sub changeMedium($$) {
     my ($method, $medium) = @_;
