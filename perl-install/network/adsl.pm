@@ -118,28 +118,6 @@ sub adsl_conf {
     1;
 }
 
-sub load_firmware_floppy {
-    my ($file, $destination) = @_;
-    my $floppy = detect_devices::floppy();
-    my $failed;
-    
-    $in->ask_okcancel(N("Insert floppy"), 
-		      N("Insert a FAT formatted floppy in drive %s with %s in root directory and press %s", $floppy, $file, N("Next"))) or return;
-    
-    eval { fs::mount(devices::make($floppy), "/mnt", "vfat", 'readonly'); 1 } or $failed = N("Floppy access error, unable to mount device %s", $floppy);
-    my $_b = before_leaving { fs::umount("/mnt") };
-    
-    if (-e "/mnt/$file") {
-	cp_af("/mnt/$file", $destination);
-    } else { $failed ||= N("Firmware copy failed, file %s not found", $file) }
-    
-    eval { $in->ask_warn('', $failed || N("Firmware copy succeeded")) }; $in->exit if $@ =~ /wizcancel/;
-    log::explanations($failed || "Firmware copy $file in $destination succeeded");
-    $failed and return;
-    
-    1;
-}
-
 sub adsl_conf_backend {
     my ($adsl, $netc, $adsl_type, $o_netcnx) = @_;
     defined $o_netcnx and $netc->{adsltype} = $o_netcnx->{type};
@@ -242,12 +220,15 @@ user "$adsl->{login}"
 You can provide it now via a floppy or your windows partition,
 or skip and do it later."), $l) or return;
 	
-	$answer eq "Use a floppy" and load_firmware_floppy("mgmt.o", "/usr/share/speedtouch/") || goto firmware;
-	$answer eq "Use my Windows partition" and goto firmware; # to be done
-	$answer eq "Do it later" and $in->ask_warn('', N("You need the Alcatel microcode.
+	my $destination = '/usr/share/speedtouch/';
+	$answer eq 'Use a floppy' and network::tools::copy_firmware('floppy', $destination, 'mgmt.o') || goto firmware;
+	$answer eq 'Use my Windows partition' and network::tools::copy_firmware('windows', $destination, 'alcaudsl.sys') || goto firmware;
+	$answer eq 'Do it later' and $in->ask_warn('', N("You need the Alcatel microcode.
 Download it at:
 %s
 and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.net/speedtouch/speedtouch-20011007.tar.bz2'));
+	
+	-e "$destination/alcaudsl.sys" and rename "$destination/alcaudsl.sys", "$destination/mgmt.o";
     }
     
     if ($adsl_type eq 'eci') {
