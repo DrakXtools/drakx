@@ -1,3 +1,18 @@
+2000-07-07  François Pons  <fpons@mandrakesoft.com>
+
+	* install2.pm (choosePackages): always execute setPackage to copy
+	hdlist* and depslist files (support mixed partitionDisks and
+	choosePackages).
+	* install_any.pm (setPackages): avoid clearing upgrade flag.
+	* install_steps.pm (choosePackages): use $first_time to avoid
+	reselection of packages according to compssList.
+	* install_steps_interactive (choosePackages): use $first_time and
+	$individual to avoid reselection of packages according if user go
+	back to step choosePackages.
+	* pkgs.pm: added psUpdateHdlistsDeps to restore hdlist* and
+	depslist files in /var/lib/urpmi.
+	* diskdrake.pm: fixed uneditable combo for Mount point action.
+
 2000-06-23  François Pons  <fpons@mandrakesoft.com>
 
 	* Xconfigurator.pm: better approach for Sun* server in newbie.
