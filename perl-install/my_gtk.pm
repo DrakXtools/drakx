@@ -164,6 +164,7 @@ sub create_notebook(@) {
 	my $book = shift;
 
 	my ($w1, $w2) = map { new Gtk::Label($_) } $title, $title;
+	$book->{widget_title} = $w1;
 	$n->append_page_menu($book, $w1, $w2);
 	$book->show;
 	$w1->show;

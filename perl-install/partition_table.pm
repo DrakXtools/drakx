@@ -78,7 +78,7 @@ my %fs2type = reverse %type2fs;
 
 1;
 
-sub type2name($) { $types{$_[0]} }
+sub type2name($) { $types{$_[0]} || 'unknown' }
 sub type2fs($) { $type2fs{$_[0]} }
 sub name2type($) { $types_rev{$_[0]} }
 sub fs2type($) { $fs2type{$_[0]} }
@@ -137,6 +137,20 @@ sub assign_device_numbers($) {
     my $i = 1; foreach (@{$hd->{primary}->{raw}}, map { $_->{normal} } @{$hd->{extended}}) { 
 	$_->{device} = $hd->{prefix} . $i++;
     }
+
+    # try to figure what the windobe drive letter could be!
+    #
+    # first verify there's at least one primary dos partition, otherwise it
+    # means it is a secondary disk and all will be false :(
+    my ($c, @others) = grep { isDos($_) || isWin($_) } @{$hd->{primary}->{raw}};
+    $c or return;
+
+    $i = ord 'D';
+    foreach (grep { isDos($_) || isWin($_) } @{$hd->{extended}}) {
+	$_->{device_windobe} = chr($i++);
+    }
+    $c->{device_windobe} = 'C';
+    $_->{device_windobe} = chr($i++) foreach @others;
 }
 
 sub get_normal_parts($) {

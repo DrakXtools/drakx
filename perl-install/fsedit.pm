@@ -39,8 +39,9 @@ sub hds($$) {
 	my $file = devices::make($_->{device});
 
 	my $hd = partition_table_raw::get_geometry($file) or die _("An error occurred while getting the geometry of block device %s: %s", $file, "$!");
+	$hd = { (%$_, %$hd) };
 	$hd->{file} = $file;
-	$hd->{prefix} = $hd->{device} = $_->{device};
+	$hd->{prefix} = $hd->{device};
 	# for RAID arrays of format c0d0p1 
 	$hd->{prefix} .= "p" if $hd->{prefix} =~ m,(rd|ida)/,;
 
