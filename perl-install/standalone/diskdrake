@@ -66,11 +66,15 @@ if ($fileshare) {
 my ($all_hds) =
     catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) }
     sub {
-	my ($err) = $@ =~ /(.*) at /;
-	$@ =~ /overlapping/ and $in->ask_warn('', $@), return 1;
-	$in->ask_okcancel(_("Error"),
+	my $err = formatError($@);
+	if ($err =~ /overlapping/) {
+	    $in->ask_warn('', $err);
+	    1;
+	} else {
+	    !$in->ask_okcancel(_("Error"),
 [_("I can't read your partition table, it's too corrupted for me :(
 I'll try to go on blanking bad partitions"), $err]);
+        }
     };
 
 $SIG{__DIE__} = sub { my $m = chomp_($_[0]); log::l("ERROR: $m") };

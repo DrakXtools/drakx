@@ -954,7 +954,7 @@ sub getHds {
     my $all_hds = catch_cdie { fsedit::hds(\@drives, $flags) }
       sub {
 	  $ok = 0;
-	  my $err = $@; $err =~ s/ at (.*?)$//;
+	  my $err = formatError($@);
 	  log::l("error reading partition table: $err");
 	  !$flags->{readonly} && $f_err and $f_err->($err);
       };

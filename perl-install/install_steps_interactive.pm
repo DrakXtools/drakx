@@ -64,7 +64,7 @@ use log;
 #-######################################################################################
 sub errorInStep($$) {
     my ($o, $err) = @_;
-    $o->ask_warn(_("Error"), [ _("An error occurred"), common::formatError($err) ]);
+    $o->ask_warn(_("Error"), [ _("An error occurred"), formatError($err) ]);
 }
 
 sub kill_action {
