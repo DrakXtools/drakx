@@ -753,6 +753,8 @@ sub set_help {
 sub create_steps_window {
     my ($o) = @_;
 
+    my $PIX_H = my $PIX_W = 21;
+
     $o->{steps_window}->destroy if $o->{steps_window};
 
     my $w = bless {}, 'my_gtk';
@@ -763,35 +765,44 @@ sub create_steps_window {
     $w->{rwindow}->set_events('button_press_mask');
     $w->show;
 
-    my @steps_icons = map { [ gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/step-$_.xpm") ] } qw(green orange red);
-    my $style = Gtk::Widget->get_default_style->copy;
+    my @steps_icons_names = map { "$ENV{SHARE_PATH}/step-$_.xpm" } qw(green orange red);
+    my @steps_icons_names_on = map { "$ENV{SHARE_PATH}/step-$_-on.xpm" } qw(green orange red);
+    my @steps_icons_names_click = map { "$ENV{SHARE_PATH}/step-$_-click.xpm" } qw(green orange red);
 
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::VBox(0,0),
 		    (map {; 1, $_ } map {
+		        my $style = Gtk::Widget->get_default_style;
 			my $step_name = $_;
 			my $step = $o->{steps}{$_};
 			my $w = new Gtk::Label(translate($step->{text}));
-			my $pixmap = new Gtk::Pixmap(@{$steps_icons[$step->{done} ? 0 : $step->{entered} ? 1 : 2]});
-			$pixmap->set_sensitive(0) if !$step->{reachable};
-			gtkpack_(my $b = new Gtk::HBox(0,5), 0, $pixmap, 0, $w);
+			my $darea = new Gtk::DrawingArea;
+			my $draw_pix = sub {
+			  my $pixmap = Gtk::Gdk::Pixmap->create_from_xpm(
+									 $darea->window,
+									 $style->bg('normal'),
+									 $_[1]
+									) or die;
+			  $darea->window->draw_pixmap (
+						       $darea->style->fg_gc('normal'), #area->style->fg_gc[GTK_WIDGET_STATE(area)],
+						       $pixmap,
+						       0, 0,
+						       ($darea->allocation->[2]-$PIX_W)/2,#(area->allocation.width-LARG_PIX)/2,
+						       ($darea->allocation->[3]-$PIX_H)/2,
+						       $PIX_W , $PIX_H );#LARG_PIX, HAUT_PIX);
+			};
 
-#(dam's) BUGGY : pixmaps cannot be signaled directly (well I think)
-			$pixmap->set_events('visibility-notify-mask');#'enter-notify-mask');
-			$pixmap->signal_connect(visibility_notify_event => sub {   print "HERE\n" });
-#
-#			$pixmap->set_events('clicked');
-#			$pixmap->signal_connect(clicked => sub { print "CLICKED\n" });
+			$darea->set_usize($PIX_W,$PIX_H);
+			$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
+			$darea->signal_connect(expose_event => $draw_pix, my $name= $steps_icons_names[$step->{done} ? 0 : $step->{entered} ? 1 : 2]);
 			if ($step->{reachable}) {
-			  my $button = new Gtk::Button;
-			  $button->set_relief('none');
-			  gtksignal_connect(gtkadd($button, $b), clicked => sub { die "setstep $step_name\n" });
-#			  $button->set_events('enter_notify_mask');
-#			  $button->signal_connect(enter_notify_event => sub { print "HERE\n" });
-			  $b=$button;
+			  $darea->signal_connect(enter_notify_event => $draw_pix, my $name_on = $steps_icons_names_on[$step->{done} ? 0 : $step->{entered} ? 1 : 2]);
+			  $darea->signal_connect(leave_notify_event => $draw_pix, $name);
+			  $darea->signal_connect(button_press_event => $draw_pix, $steps_icons_names_click[$step->{done} ? 0 : $step->{entered} ? 1 : 2]);
+			  $darea->signal_connect(button_release_event => sub { $draw_pix, $name_on; die "setstep $step_name\n" });
 			}
+			gtkpack_(my $b = new Gtk::HBox(0,5), 0, $darea, 0, $w);
 			$b;
-
 		    } grep {
 			!eval $o->{steps}{$_}{hidden};
 		    } @{$o->{orderedSteps}}),
