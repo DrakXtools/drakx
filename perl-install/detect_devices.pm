@@ -500,13 +500,13 @@ sub stringlist {
 }
 
 sub tryOpen($) {
-    local *F;
-    sysopen F, devices::make($_[0]), c::O_NONBLOCK() and *F;
+    my $F;
+    sysopen $F, devices::make($_[0]), c::O_NONBLOCK() and $F;
 }
 
 sub tryWrite($) {
-    local *F;
-    sysopen F, devices::make($_[0]), 1 | c::O_NONBLOCK() and *F;
+    my $F;
+    sysopen $F, devices::make($_[0]), 1 | c::O_NONBLOCK() and $F;
 }
 
 sub syslog {
@@ -566,11 +566,11 @@ sub whatParport() {
     my @res;
     foreach (0..3) {
 	my $elem = {};
-	local *F;
-	open F, "/proc/parport/$_/autoprobe" or open F, "/proc/sys/dev/parport/parport$_/autoprobe" or next;
+	my $F;
+	open $F, "/proc/parport/$_/autoprobe" or open $F, "/proc/sys/dev/parport/parport$_/autoprobe" or next;
 	{
 	    local $_;
-	    while (<F>) { 
+	    while (<$F>) { 
 		if (/(.*):(.*);/) { #-#
 		    $elem->{$1} = $2;
 		    $elem->{$1} =~ s/Hewlett[-\s_]Packard/HP/;
@@ -591,11 +591,10 @@ sub usbStorage   { grep { $_->{media_type} =~ /Mass Storage\|/ } usb_probe() }
 
 sub usbKeyboard2country_code {
     my ($usb_kbd) = @_;
-    local *F;
-    my $tmp;
-    sysopen(F, sprintf("/proc/bus/usb/%03d/%03d", $usb_kbd->{pci_bus}, $usb_kbd->{pci_device}), 0) and
-      sysseek F, 0x28, 0 and
-      sysread F, $tmp, 1 and
+    my ($F, $tmp);
+    sysopen($F, sprintf("/proc/bus/usb/%03d/%03d", $usb_kbd->{pci_bus}, $usb_kbd->{pci_device}), 0) and
+      sysseek $F, 0x28, 0 and
+      sysread $F, $tmp, 1 and
       unpack("C", $tmp);
 }
 
@@ -616,8 +615,7 @@ sub whatUsbport() {
 	my $realport = devices::make($port);
 	next if !$realport;
 	next if ! -r $realport;
-	local *PORT;
-	open PORT, $realport or next;
+	open my $PORT, $realport or next;
 	my $idstr = "";
 	# Calculation of IOCTL function 0x84005001 (to get device ID
 	# string):
@@ -629,13 +627,13 @@ sub whatUsbport() {
 	# Use "eval" so that program does not stop when IOCTL fails
 	eval { 
 	    my $output = "\0" x 1024; 
-	    ioctl(PORT, 0x84005001, $output);
+	    ioctl($PORT, 0x84005001, $output);
 	    $idstr = $output;
         } or do {
-	    close PORT;
+	    close $PORT;
 	    next;
 	};
-	close PORT;
+	close $PORT;
 	# Remove non-printable characters
 	$idstr =~ tr/[\x00-\x1f]/\./;
 	# Extract the printer data from the ID string
@@ -714,13 +712,10 @@ sub probeSerialDevices {
     print STDERR "Please wait while probing serial ports...\n";
     #- start probing all serial ports... really faster than before ...
     #- ... but still take some time :-)
-    local *F; open F, "$ENV{LD_LOADER} serial_probe |";
-    local $_;
-    my %current; while (<F>) {
+    my %current; foreach (run_program::get_stdout('serial_probe')) {
 	$serialprobe{$current{DEVICE}} = { %current } and %current = () if /^\s*$/ && $current{DEVICE};
 	$current{$1} = $2 if /^([^=]+)=(.*?)\s*$/;
     }
-    close F;
 
     foreach (values %serialprobe) {
 	$_->{DESCRIPTION} =~ /modem/i and $_->{CLASS} = 'MODEM'; #- hack to make sure a modem is detected.
@@ -740,9 +735,8 @@ sub hasMousePS2 {
 }
 
 sub raidAutoStartIoctl {
-    local *F;
-    sysopen F, devices::make("md0"), 2 or return;
-    ioctl F, 2324, 0;
+    sysopen my $F, devices::make("md0"), 2 or return;
+    ioctl $F, 2324, 0;
 }
 
 sub raidAutoStartRaidtab {
