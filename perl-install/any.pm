@@ -241,11 +241,14 @@ sub setAutologin {
   my $t1 = "USER=";
   my $t2 = "EXEC=";
   my $t3 = "AUTOLOGIN=";
+  $wm=uc($wm);
   substInFile { s/^(\Q$t1\E|\Q$t2\E|\Q$t3\E).*\n//; $_ .= "$t1$user\n$t2$exe\n$t3=$flag" if eof } $f;
   `chmod 644 $f`;
   local *F;
   open F, ">$prefix/etc/sysconfig/desktop" or die "Can't open $!";
-  print F "$wm";
+  print F <<END;
+$wm
+END
 }
 
 
