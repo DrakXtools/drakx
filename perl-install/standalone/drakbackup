@@ -744,12 +744,13 @@ sub advanced {
 }
 
 sub restore_step2 {
-
+#$retore_box2
 }
 
 sub restore {
     my $retore_box;
     my $retore_box2;
+    my $retore_box3;
     my ($pix_u_map, $pix_u_mask) = gtkcreate_png("../pixmaps/backup_title.png");
     my ($pix_l_map, $pix_l_mask) = gtkcreate_png("../pixmaps/backup_left2.png");
     my ($pix_r_map, $pix_r_mask) = gtkcreate_png("../pixmaps/backup_bot2.png");
@@ -760,20 +761,28 @@ sub restore {
 		1, gtkpack_(new Gtk::HBox(0, 0),
 		     0, new Gtk::Pixmap($pix_l_map, $pix_l_mask), 
 		     1, gtkadd(new Gtk::Frame(_("Restoration Step.")),
-			       $retore_box2 = gtkpack_(new Gtk::VBox(0,10),
+			       $retore_box2 = gtkpack(new Gtk::VBox(0,10),
+				   $retore_box3 = gtkpack_(new Gtk::VBox(0,10),
 				     1, _("Please choose that you want to restore."),
 				     0, gtkpack_(new Gtk::HBox(0,10),
 						 1, new Gtk::HBox(0,10),
 						 1, gtkpack_(new Gtk::VBox(0,10),
 						       0, gtksignal_connect(new Gtk::Button(_("Restore all backups")), clicked => sub {
-						       $retore_box2->destroy(); }),
+							   $retore_box3->destroy();
+						       }),
 						       0, gtksignal_connect(new Gtk::Button(_("Custom Restore")), clicked => sub {
-						       $retore_box2->destroy(); restore_step2() }),
-							),
+							   $retore_box3->destroy();  
+							   gtkpack($retore_box2,
+								   $retore_box3 = gtkpack_(new Gtk::VBox(0,10),
+											   new Gtk::VBox(0,10),
+											   new Gtk::Button("toto"),),
+								   ),					     
+						       }),
+							     ),
 						 1, new Gtk::HBox(0,10),
 						 ),
 				     1, new Gtk::HBox(0,10),
-						       ),),),
+						       ),),),),
 		      0, new Gtk::Pixmap($pix_r_map, $pix_r_mask),
 		      0, new Gtk::HSeparator,
 		      0, gtkpack_(new Gtk::HBox(0, 0),
