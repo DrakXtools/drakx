@@ -3,7 +3,7 @@ use vars qw(@ISA @EXPORT);
 @ISA = qw(Exporter);
 @EXPORT = qw(@isdndata);
 
-my @isdndata =
+our @isdndata =
   (
    { description => "Teles 16.0 (ISA)",               #1 irq, mem, io
     driver => 'hisax',
