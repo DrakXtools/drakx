@@ -962,12 +962,8 @@ try to force installation even if that destroys the first partition?"));
 	    unlink "$o->{prefix}/tmp/.error";
 	    die "already displayed";
 	} elsif (arch() =~ /ppc/) {
-		open(FILE, "$o->{prefix}/tmp/of_boot_dev") || die "Can't open $o->{prefix}/tmp/of_boot_dev";
-		my $of_boot = "";
-		local $_ = "";
-		while (<FILE>){
-			$of_boot = $_;
-		}
+		my $of_boot = cat_("$o->{prefix}/tmp/of_boot_dev") || die "Can't open $o->{prefix}/tmp/of_boot_dev";
+		chop($of_boot);
 		unlink "$o->{prefix}/tmp/.error";
 		$o->ask_warn('', _("You will need to change your Open Firmware boot-device to\n enable the bootloader.  Hold down Command-Option-O-F\n at reboot and enter:\n setenv boot-device $of_boot,\\ofboot.b\n Then type: shut-down\nAt your next boot you should see the bootloader prompt."));
     }

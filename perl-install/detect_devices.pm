@@ -55,14 +55,15 @@ sub burners    { grep { $_->{type} eq 'cdrom' && isBurner($_->{device}) } get() 
 sub IDEburners { grep { $_->{type} eq 'cdrom' && isBurner($_->{device}) } getIDE() }
 
 sub get_mac_model() {
-	open(FILE, "/proc/device-tree/model") || die "Can't open /proc/device-tree/model";
-	my $mac_model = "";
-	local $_ = "";
-	while (<FILE>){
-		$mac_model = $_;
-	}
-	close(FILE);
-	chop($mac_model);
+#	open(FILE, "/proc/device-tree/model") || die "Can't open /proc/device-tree/model";
+#	my $mac_model = "";
+#	local $_ = "";
+#	while (<FILE>){
+#		$mac_model = $_;
+#	}
+#	close(FILE);
+	my $mac_model = cat_("/proc/device-tree/model") || die "Can't open /proc/device-tree/model";
+#	chop($mac_model);
 	log::l("Mac model: $mac_model");
 	$mac_model;	
 }
