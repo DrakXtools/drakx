@@ -792,12 +792,12 @@ sub readBootloaderConfigBeforeInstall {
     foreach my $e (@{$o->{bootloader}{entries}}) {
 	while (my $v = readlink "$o->{prefix}/$e->{kernel_or_dev}") {
 	    $v = "/boot/$v" if $v !~ m|^/|; -e "$o->{prefix}$v" or last;
-	    log::l("renaming /boot/$e->{kernel_or_dev} entry by $v");
+	    log::l("renaming $e->{kernel_or_dev} entry by $v");
 	    $e->{kernel_or_dev} = $v;
 	}
 	while (my $v = readlink "$o->{prefix}/$e->{initrd}") {
 	    $v = "/boot/$v" if $v !~ m|^/|; -e "$o->{prefix}$v" or last;
-	    log::l("renaming /boot/$e->{initrd} entry by $v");
+	    log::l("renaming $e->{initrd} entry by $v");
 	    $e->{initrd} = $v;
 	}
     }
