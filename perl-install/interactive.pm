@@ -230,6 +230,7 @@ sub ask_from_entries_refH_powered_normalize {
     #- don't display empty lists
     @$l = grep { !($_->{list} && @{$_->{list}} == () && $_->{not_edit}) } @$l;
 
+    $common->{advanced_label} ||= _("Advanced");
     $common->{$_} = [ deref($common->{$_}) ] foreach qw(messages advanced_messages);
     add2hash_($common, { ok => _("Ok"), cancel => _("Cancel") }) if !exists $common->{ok};
     add2hash_($common->{callbacks} ||= {}, { changed => sub {}, focus_out => sub {}, complete => sub { 0 }, canceled => sub { 0 } });
