@@ -122,14 +122,12 @@ sub getFile {
     do {
 	if ($method =~ /crypto/i) {
 	    require crypto;
-	    log::l("crypto::getFile $f");
 	    crypto::getFile($f);
 	} elsif ($::o->{method} eq "ftp") {
 	    require ftp;
 	    ftp::getFile($rel);
 	} elsif ($::o->{method} eq "http") {
 	    require http;
-	    log::l("http getFile $f");
 	    http::getFile($rel);
 	} else {
 	    #- try to open the file, but examine if it is present in the repository, this allow
@@ -137,7 +135,6 @@ sub getFile {
 	    #- to other to avoid media change...
 	    my $f2 = "$postinstall_rpms/$f";
 	    $f2 = "/tmp/rhimage/$rel" unless $postinstall_rpms && -e $f2;
-	    log::l("local getFile $f2");
 	    open GETFILE, $f2 and *GETFILE;
 	}
     } || errorOpeningFile($f);
