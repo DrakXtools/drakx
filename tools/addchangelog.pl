@@ -12,7 +12,7 @@ $date = (split('/', `grep ChangeLog perl-install/CVS/Entries`))[3];
 open F, ">perl-install/ChangeLog";
 print F foreach @changelog, @before;
 
-`cvs commit -m '' perl-install/ChangeLog` =~ /new revision: (.*?);/;
+#`cvs commit -m '' perl-install/ChangeLog` =~ /new revision: (.*?);/;
 
 print "$1\n";
 print foreach @changelog;
