@@ -874,6 +874,8 @@ sub miscellaneous {
 
     local $_ = $o->{bootloader}{perImageAppend};
 
+    $_ .= ' devfs=mount' if !/devfs=/;
+
     if ($o->{lnx4win} and !/mem=/) {
 	$_ .= ' mem=' . availableRamMB() . 'M';
     }
