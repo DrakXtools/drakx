@@ -70,7 +70,7 @@ rescue: modules
 
 network_ks.rdz pcmcia_ks.rdz: %_ks.rdz: %.rdz
 
-network.rdz pcmcia.rdz hd.rdz cdrom.rdz: dirs modules
+network.rdz pcmcia.rdz hd.rdz cdrom.rdz live.rdz tftp.rdz tftprd.rdz: dirs modules
 	./make_boot_img $@ $(@:%.rdz=%)
 
 $(BOOT_IMG): %.img: %.rdz

@@ -244,6 +244,7 @@ sub xmodmap_file {
 }
 
 sub setup($) {
+    return if arch() =~ /^sparc/;
     my ($keyboard) = @_;
     my $o = $keyboards{$keyboard} or return;
 

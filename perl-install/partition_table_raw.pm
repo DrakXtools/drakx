@@ -78,6 +78,7 @@ sub get_geometry($) {
     local *F; sysopen F, $dev, 0 or return;
     ioctl(F, c::HDIO_GETGEO(), $g) or return;
     my %geom; @geom{qw(heads sectors cylinders start)} = unpack "CCSL", $g;
+    $geom{totalcylinders} = $geom{cylinders};
 
     #- $geom{cylinders} is no good (only a ushort, that means less than 2^16 => at best 512MB)
     if (my $total = c::total_sectors(fileno F)) {

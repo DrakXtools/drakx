@@ -54,6 +54,7 @@ sub new($$) {
 
 	my $f = "/tmp/Xconf";
 	createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{wacom});
+	devices::make("/dev/kbd");
 
 	if ($ENV{DISPLAY} eq ":0") {
 	    my $launchX = sub {
@@ -88,9 +89,10 @@ sub new($$) {
 
 	    foreach (@servers) {
 		log::l("Trying with server $_");
+		sleep 3;
 		my $dir = "/usr/X11R6/bin";
 		my $prog = /Xsun/ ? $_ : "XF86_$_";
-		unless (-x "$dir/XF86_$_") {
+		unless (-x "$dir/$prog") {
 		    unlink $_ foreach glob_("$dir/X*");
 		    install_any::getAndSaveFile("$dir/$prog", "$dir/$prog") or die "failed to get server: $!";
 		    chmod 0755, "$dir/$prog";
@@ -822,7 +824,7 @@ sub init_sizes() {
 sub createXconf {
     my ($file, $mouse_type, $mouse_dev, $wacom_dev) = @_;
 
-    devices::make("/dev/kdb") if arch() =~ /^sparc/; #- used by Xsun style server.
+    devices::make("/dev/kbd") if arch() =~ /^sparc/; #- used by Xsun style server.
     symlinkf($mouse_dev, "/dev/mouse");
 
     #- needed for imlib to start on 8-bit depth visual.
@@ -944,6 +946,9 @@ Section "Screen"
     EndSubsection
 EndSection
 
+END
+    if (arch() =~ /^sparc/) {
+	print F <<END_FBDEV_SPARC;
 Section "Screen"
     Driver "svga"
     Device      "svga"
@@ -954,7 +959,9 @@ Section "Screen"
         ViewPort    0 0
     EndSubsection
 EndSection
-
+END_FBDEV_SPARC
+    } else {
+	print F <<END_FBDEV;
 Section "Screen"
     Driver      "accel"
     Device      "svga"
@@ -965,8 +972,8 @@ Section "Screen"
         ViewPort    0 0
     EndSubsection
 EndSection
-END
-
+END_FBDEV
+    }
 }
 #-   ModeLine "640x480"     28     640  672  768  800   480  490  492  525
 #-######################################################################################

@@ -959,7 +959,7 @@ sub miscellaneous {
     exists $u->{LAPTOP} or $u->{LAPTOP} = 1;
     my $s = $o->{security};
 
-    add2hash_ $o, { useSupermount => $s < 4 };
+    add2hash_ $o, { useSupermount => $s < 4 && arch() =~ /^sparc/ };
     $s = $l{$s} || $s;
 
     !$::beginner || $clicked and $o->ask_from_entries_refH('',
@@ -967,7 +967,8 @@ sub miscellaneous {
 _("Use hard drive optimisations?") => { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause data corruption)") },
 _("Choose security level") => { val => \$s, list => [ map { $l{$_} } ikeys %l ], not_edit => 1 },
 _("Precise RAM size if needed (found %d MB)", availableRam / 1024 + 3) => \$u->{memsize}, #- add three for correction.
-_("Removable media automounting") => { val => \$o->{useSupermount}, type => 'bool', text => 'supermount' },
+arch() !~ /^sparc/ ? (
+_("Removable media automounting") => { val => \$o->{useSupermount}, type => 'bool', text => 'supermount' }, ) : (),
      $::expert ? (
 _("Clean /tmp at each boot") => { val => \$u->{CLEAN_TMP}, type => 'bool' },
      ) : (),
