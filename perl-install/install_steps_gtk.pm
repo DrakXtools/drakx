@@ -55,7 +55,7 @@ sub new($$) {
 
 	    push @options, $xpmac_opts !~ /ofonly/ ? ('-mode', '17', '-depth', '32') : '-mach64' if $server =~ /Xpmac/;
 	    push @options, '-fp', '/usr/X11R6/lib/X11/fonts:unscaled' if $server =~ /Xsun|Xpmac/;
-	    push @options, '-geometry', '800x600' if $server eq 'Xnest';
+	    push @options, '-geometry', $o->{vga16} ? '640x480' : '800x600' if $server eq 'Xnest';
 
 	    unless (fork()) {
 		exec $server, @options or exit 1;
@@ -64,7 +64,7 @@ sub new($$) {
 		sleep 1;
 		log::l("Server died"), return 0 if !$ok;
 		if (c::Xtest($wanted_DISPLAY)) {
-		    fork() || exec("aewm-drakx") || exec("true");
+		    fork() || exec("aewm-drakx") || c::_exit(0);
 		    return 1;
 		}
 	    }
