@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-02-12 00:01+0100\n"
+"PO-Revision-Date: 2003-02-28 00:56+0100\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
@@ -24,16 +24,18 @@ msgstr ""
 "A felhasználónkénti megosztás a \"fileshare\" csoportot használja.\n"
 "A UserDrake programmal lehet felhasználót felvenni ebbe a csoportba."
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Mégsem"
@@ -101,30 +103,29 @@ msgid "More"
 msgstr "Egyéb"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Here is the full list of available countries"
-msgstr "Itt található a billentyûzetek listája"
+msgstr "Itt található az elérhetõ országok listája"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your country."
-msgstr "Adja meg az egér típusát."
+msgstr "Válassza ki az országot."
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Country"
-msgstr "Ország:"
+msgstr "Ország"
+
+#: ../../any.pm:1
+#, c-format
+msgid "All languages"
+msgstr "Az összes nyelv"
 
 #: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
-msgstr ""
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "Mind"
+msgstr "Unicode használata alapértelmezésben"
 
 #: ../../any.pm:1
 #, c-format
@@ -506,6 +507,16 @@ msgstr "A parancssorban átadható paraméterek korlátozása"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr "APIC ne legyen használva"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Enable ACPI"
+msgstr "ACPI bekapcsolása"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "Várakozási idõ az alapértelmezett rendszer betöltése elõtt"
 
@@ -555,9 +566,14 @@ msgid "Skip"
 msgstr "Kihagyás"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "On Floppy"
-msgstr "Rendszerindító floppy"
+msgstr "Hajlékonylemez"
+
+#: ../../any.pm:1
+#, c-format
+msgid "First sector of the root partition"
+msgstr "A gyökérpartíció elsõ szektora"
 
 #: ../../any.pm:1
 #, c-format
@@ -808,243 +824,6 @@ msgstr ""
 "%d masodpercig, amig az alapertelmezett elindul.\n"
 "\n"
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "OK"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "Legyen automatikus bejelentkezés (felhasználónév, grafikus környezet)"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "Ne legyen automatikus bejelentkezés"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "Rendszerindításkor induljon el a grafikus környezet"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "Rendszer-mód"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr "Indítási kép"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr "LILO-képernyõ"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-"\n"
-"Válasszon egy LILO- és\n"
-"egy indításikép-témát\n"
-"(egymástól függetlenül\n"
-"választhatók)."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "Témák"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Splash selection"
-msgstr "Indítási kép választása"
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Beállítás"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Jelenleg a(z) %s programot használja rendszerindításra.\n"
-"Kattintson a Beállítás gombra a beállításvarázsló elindításához."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "A LILO- és az indításikép-témák telepítése megtörtént"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr "A témákat nem sikerült telepíteni."
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr "Megjegyzés"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "Hiba"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr "A LILO elindítása"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-"A LILO elindítása sikertelen.\n"
-"A LILO-téma telepítésének befejezéséhez adja ki parancssorban a \"lilo\"\n"
-"parancsot rendszergazdaként."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr "Indítási RAM-diszk elõállítása: 'mkinitrd -f /boot/initrd-%s.img %s'."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr "Nem indítható el: mkinitrd -f /boot/initrd-%s.img %s."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-"A /etc/sysconfig/bootsplash fájl nem írható:\n"
-"a fájl nem található."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "Írás: %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr "A /etc/sysconfig/bootsplash fájl nem írható."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "LILO-üzenet nem található"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "\"%s\" másolása ebbe: \"%s\""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr "\"%s\" mentése \"%s.old\" névre"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "Új téma létrehozása"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-"Téma megjelenítése\n"
-"a konzolon"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr "Témák telepítése"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "LILO/GRUB mód"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "Yaboot mód"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "Az Aurora indítása rendszerindításkor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "Hagyományos GTK+-monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "Hagyományos monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "Új stílusú monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "Új stílusú kategorizáló monitor"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/Fájl/Ki_lépés"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_Fájl"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "A rendszerindítás beállításai"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1202,8 +981,24 @@ msgstr "Nem használható LVM logikai kötet a(z) %s csatlakoztatási ponthoz"
 
 #: ../../fsedit.pm:1
 #, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"Szoftveres RAID partíciót választott ki gyökérpartíciónak (/).\n"
+"Egyik rendszerindító program sem tudja ezt kezelni /boot partíció nélkül,\n"
+"ezért mindenképpen hozzon létre egy /boot partíciót."
+
+#: ../../fsedit.pm:1
+#, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Már van egy partíció amelynek %s a csatlakoztatási pontja\n"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr "A csatolási pontoknak betûkbõl és számokból kell állni"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1238,6 +1033,15 @@ msgstr ""
 "\n"
 "Törölni szeretné az összes partíciót?\n"
 
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "Hiba"
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "server"
@@ -1254,9 +1058,9 @@ msgid "simple"
 msgstr "egyszerû"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enabling swap partition %s"
-msgstr "A(z) %s partíció formázása"
+msgstr "A(z) %s lapozópartíció bekapcsolása"
 
 #: ../../fs.pm:1 ../../partition_table.pm:1
 #, c-format
@@ -1269,14 +1073,14 @@ msgid "mounting partition %s in directory %s failed"
 msgstr "a(z) %s partíció ide történõ csatolása sikertelen: %s"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mounting partition %s"
-msgstr "A(z) %s partíció formázása"
+msgstr "A(z) %s partíció csatolása"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Checking %s"
-msgstr "%s másolása"
+msgstr "%s ellenõrzése"
 
 #: ../../fs.pm:1
 #, c-format
@@ -1299,7 +1103,7 @@ msgid "%s formatting of %s failed"
 msgstr "%s formázás sikertelen a(z) %s eszközön"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Click on \"Next ->\" if you want to delete all data and partitions present\n"
 "on this hard drive. Be careful, after clicking on \"Next ->\", you will not\n"
@@ -1309,12 +1113,13 @@ msgid ""
 "Click on \"<- Previous\" to stop this operation without losing any data and\n"
 "partitions present on this hard drive."
 msgstr ""
-"Kattintson az \"OK\" gombra, ha a lemezen található összes adatot\n"
-"és partíciót törölni szeretné. Figyelem! Az \"OK\" gomb megnyomása után\n"
-"nincs mód a törölt adatok és partíciók visszaállítására, természetesen\n"
+"Kattintson a \"Következõ ->\" gombra, ha a lemezen található összes adatot\n"
+"és partíciót törölni szeretné. Figyelem! A \"Következõ ->\" gomb megnyomása\n"
+"után nincs mód a törölt adatok és partíciók visszaállítására - "
+"természetesen\n"
 "akkor sem, ha egy Windows-partíció törlõdött.\n"
 "\n"
-"Kattintson a \"Mégsem\" gombra, ha nem kívánja végrehajtani a mûveletet\n"
+"Kattintson az \"<- Elõzõ\" gombra, ha nem kívánja végrehajtani a mûveletet\n"
 "(a lemezen található partíciók és adatok ez esetben nem változnak)."
 
 #: ../../help.pm:1
@@ -1329,7 +1134,7 @@ msgstr ""
 "késõbb nem nyerhetõk vissza!"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "As a review, DrakX will present a summary of various information it has\n"
 "about your system. Depending on your installed hardware, you may have some\n"
@@ -1346,8 +1151,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1360,7 +1165,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1378,7 +1183,7 @@ msgid ""
 "displayed here. You can click on the button to change the parameters\n"
 "associated with the card."
 msgstr ""
-"Itt a gépének a különbözõ tulajdonságait láthatja. A telepített hardvertõl\n"
+"Itt a gépérõl összegyûjtött adatokat láthatja. A telepített hardvertõl\n"
 "függõen a következõk jelenhetnek meg:\n"
 "\n"
 "  - \"Egér\": ellenõrizze a jelenlegi egérbeállításokat; a módosításukhoz\n"
@@ -1387,10 +1192,13 @@ msgstr ""
 "  - \"Billentyûzet\": ellenõrizze a jelenlegi billentyûzet-kiosztást; a\n"
 "módosításához kattintson a gombra.\n"
 "\n"
+"  - \"Ország\": ellenõrizze a jelenlegi országbeállítást. Ha az nem\n"
+"megfelelõ, kattintson a gombra és válasszon egy másik országot.\n"
+"\n"
 "  - \"Idõzóna\": a telepítõ alapértelmezésben felkínál egy általa\n"
-"megfelelõnek tartott idõzóna-beállítást, amelyet az Ön által választott\n"
-"nyelv alapján határoz meg. Ugyanúgy, mint a billentyûzet esetén, itt\n"
-"is elképzelhetõ, hogy Ön nem abban az országban tartózkodik, amelyre\n"
+"megfelelõnek tartott idõzóna-beállítást, amelyet az Ön által kiválasztott\n"
+"elsõdleges nyelv alapján határoz meg. Ugyanúgy, mint a billentyûzet esetén,\n"
+"itt is elképzelhetõ, hogy Ön nem abban az országban tartózkodik, amelyre\n"
 "a kiválasztott nyelv alapján következtetni lehet. Ezért szükség lehet\n"
 "arra, hogy az \"Idõzóna\" gombra kattintson - hogy az órát a megfelelõ\n"
 "idõzónához igazítsa.\n"
@@ -1400,14 +1208,27 @@ msgstr ""
 "információkat a felhasználói kézikönyvbõl lehet szerezni. Az ott\n"
 "bemutatott felület hasonló ahhoz, ami a telepítéskor megjelenik.\n"
 "\n"
+"  - \"Rendszerbetöltõ\": ha szeretné módosítani a rendszerbetöltõ\n"
+"beállításait, kattintson a megfelelõ gombra. Elsõsorban a komolyabb\n"
+"ismeretekkel rendelkezõ felhasználóknak javasolt.\n"
+"\n"
+"  - \"Grafikus felület\": a telepítõ alapértelmezésben \"800x600\"-as\n"
+"felbontást állít be a grafikus felülethez. Ha ez nem felel meg Önnek,\n"
+"kattintson a gombra a grafikus felület beállításainak módosításához.\n"
+"\n"
+"  - \"Hálózat\": ha be szeretné állítani az internet vagy a helyi hálózat\n"
+"elérését most, akkor kattintson a gombra.\n"
+"\n"
 "  - \"Hangkártya\": ha a telepítõ hangkártyát észlel a gépben, az itt fog\n"
-"megjelenni. A telepítés során nincs lehetõség ennek a módosítására.\n"
+"megjelenni. Ha az itt megjelenõ hangkártya nem azonos a gépben levõvel,\n"
+"akkor kattintson a gombra és válasszon egy másik meghajtóprogramot.\n"
 "\n"
 "  - \"Tévékártya\": ha a telepítõ tévékártyát észlel a gépben, az itt\n"
-"fog megjelenni. A telepítés során nincs lehetõség ennek a módosítására.\n"
+"fog megjelenni. Ha a telepítõ nem észleli a gépben levõ tévékártyát,\n"
+"akkor kattintson a gombra és állítsa be kézzel.\n"
 "\n"
 "  - \"ISDN-kártya\": ha a telepítõ ISDN-kártyát észlel a gépben, az itt fog\n"
-"megjelenni. Ha a gombra kattint, módosíthatja a paramétereit."
+"megjelenni. Ha a gombra kattint, módosíthatja a kártya paramétereit."
 
 #: ../../help.pm:1
 #, c-format
@@ -1417,9 +1238,12 @@ msgid ""
 "actually present on your system, you can click on the button and choose\n"
 "another driver."
 msgstr ""
+"\"Hangkártya\": ha a telepítõ hangkártyát észlel a gépben, az itt fog\n"
+"megjelenni. Ha az itt megjelenõ hangkártya nem azonos a gépben levõvel,\n"
+"akkor kattintson a gombra és válasszon egy másik meghajtóprogramot."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Yaboot is a bootloader for NewWorld Macintosh hardware and can be used to\n"
 "boot GNU/Linux, MacOS or MacOSX. Normally, MacOS and MacOSX are correctly\n"
@@ -1454,10 +1278,10 @@ msgid ""
 msgstr ""
 "A Yaboot egy rendszerindító program a \"NewWorld\" Macintosh gépekhez.\n"
 "Elindíthatók vele a gépen található Linux, MacOS és MacOS X példányok.\n"
-"Általában a telepítõprogram felismeri ezeket az operációs rendszereket és\n"
-"létrehozza a megfelelõ bejegyzéseket. De ha nem így történik, akkor kézzel,\n"
-"utólag is létrehozható a megfelelõ bejegyzés. Gondosan ellenõrizze a\n"
-"megadott paramétereket.\n"
+"Általában a telepítõprogram felismeri a MacOS és a MacOS X rendszereket, és\n"
+"létrehozza a megfelelõ menübejegyzéseket. De ha nem így történik, akkor\n"
+"kézzel, utólag is létrehozható a megfelelõ bejegyzés. Gondosan ellenõrizze\n"
+"a megadott paramétereket.\n"
 "\n"
 "A Yaboot legfontosabb paraméterei:\n"
 "\n"
@@ -1488,7 +1312,7 @@ msgstr ""
 "letelte után."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can add additional entries in yaboot for other operating systems,\n"
 "alternate kernels, or for an emergency boot image.\n"
@@ -1567,25 +1391,26 @@ msgstr ""
 "RAM-diszkes fájl betöltésére.\n"
 "\n"
 "  - Az indítási RAM-diszk mérete: az alapértelmezett RAM-diszk-méret\n"
-"általában 4096 bájt. Ha nagyobb méretet szeretne, használja ezt a\n"
+"általában 4096 kilobájt. Ha nagyobb méretet szeretne, használja ezt a\n"
 "lehetõséget.\n"
 "\n"
 "  - Írható-olvasható: általában a gyökérpartíció csatlakoztatása elõször\n"
 "csak-olvasható módban történik, hogy az aktiválás elõtt ellenõrizni\n"
-"lehessen a fájlrendszer integritását. Itt lehet felülbírálni ezt az\n"
-"eljárást.\n"
+"lehessen a fájlrendszer integritását. Ezzel az opcióval felülbírálható az\n"
+"alapértelmezés.\n"
 "\n"
 "  - NoVideo: ha például egy Apple gép videokártyáját nem sikerül mûködésre\n"
 "bírni, válassza ezt az opciót a \"novideo\" módú indításhoz (natív\n"
 "framebuffer-támogatással).\n"
 "\n"
-"  - Alapértelmezés: az ezzel megjelölt bejegyzés lesz az alapértelmezett\n"
-"operációs rendszer, melynek kiválasztásához elég megnyomni az Enter\n"
-"billentyût a Yaboot-promptnál. A bejegyzés mellett megjelenik egy \"*\"\n"
-"karakter, ha Ön megjeleníti a lehetõségek listáját a Tab billentyûvel."
+"  - Alapértelmezés: alapértelmezettnek jelöli a bejegyzést. A\n"
+"Yaboot-promptnál az alapértelmezett bejegyzés kiválasztásához elegendõ\n"
+"megnyomni az Enter billentyût. Ha megjeleníti a lehetõségek listáját (a\n"
+"Tab billentyûvel), akkor a szóban forgó bejegyzés mellett egy \"*\" jel\n"
+"lesz látható."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "DrakX will first detect any IDE devices present in your computer. It will\n"
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
@@ -1609,30 +1434,30 @@ msgid ""
 "which parameters need to be passed to the hardware, you'll need to manually\n"
 "configure the driver."
 msgstr ""
-"A DrakX (a telepítõ) most megkeresi a gépben levõ IDE-eszközöket. Felderíti\n"
+"A DrakX (a telepítõ) megkeresi a gépben levõ IDE-eszközöket. Felderíti\n"
 "a PCI SCSI-kártyákat is. A program a felismert SCSI-kártyákhoz\n"
 "automatikusan feltelepíti a megfelelõ meghajtóprogramokat.\n"
 "\n"
 "Mivel a hardverfelderítés nem mindig ismeri fel a gépben levõ eszközöket,\n"
 "ezért a telepítõ rá fog kérdezni, van-e a gépben PCI SCSI-kártya.\n"
-"Ha tudja, hogy van a gépben SCSI-kártya, kattintson az \"Igen\"-re.\n"
-"Ez esetben egy listából lehet kijelölni a kártyát. Ha nincsen SCSI\n"
-"hardver a gépben, akkor kattintson a \"Nem\" gombra. Ha nem biztos a\n"
-"válaszban, megtekintheti a megtalált hardverelemek listáját\n"
-"\"A hardverjellemzõk megjelenítése\" funkciót kiválasztva, majd\n"
-"az \"OK\"-ra kattintva. Vizsgálja meg a listát, majd kattintson az\n"
-"\"OK\" gombra a SCSI-val kapcsolatos kérdéshez való visszatéréshez.\n"
+"Ha az \"Igen\"-re kattint, akkor egy listából kijelölheti a SCSI-kártyát.\n"
+"Ha viszont biztos abban, hogy nincsen SCSI hardver a gépben, akkor\n"
+"a \"Nem\" gombra kattintson. Ha nem biztos a válaszban, megtekintheti a\n"
+"megtalált hardverelemek listáját \"A hardverjellemzõk megjelenítése\"\n"
+"funkciót kiválasztva, majd a \"Következõ ->\" gombra kattintva. Vizsgálja\n"
+"meg a listát, majd kattintson a \"Következõ ->\" gombra a SCSI-val\n"
+"kapcsolatos kérdéshez való visszatéréshez.\n"
 "\n"
-"Ha kézzel kell megadnia a kártya típusát, a telepítõ megkérdezi, hogy\n"
-"szeretné-e megadni a kártya jellemzõit. Általában erre nincs szükség,\n"
-"mivel a program le tudja kérdezni a megfelelõ beállításokat. A legtöbb\n"
-"esetben ez jól mûködik.\n"
+"Ha kézzel kellett megadnia a PCI SCSI-kártya típusát, a telepítõ\n"
+"megkérdezi, hogy szeretné-e megadni a kártya jellemzõit. Általában nincs\n"
+"szükség saját kezûleg való beállításra, mivel a telepítõ a legtöbb esetben\n"
+"le tudja kérdezni a megfelelõ beállításokat.\n"
 "\n"
 "Ha a telepítõ nem tudja meghatározni a szükséges jellemzõket, akkor\n"
 "Önnek kell megadnia a meghajtóprogram paramétereit."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Now, it's time to select a printing system for your computer. Other OSs may\n"
 "offer you one, but Mandrake Linux offers two. Each of the printing systems\n"
@@ -1661,29 +1486,34 @@ msgid ""
 msgstr ""
 "Itt lehet nyomtatórendszert választani a gép számára. Más operációs\n"
 "rendszerekben általában csak egy van, a Mandrake Linuxban viszont kettõ is.\n"
+"Mindkettõnek megvannak a maga elõnyei bizonyos környezetben használva.\n"
 "\n"
 "  - \"pdq\": \"print, don't queue\", azaz sorba tevés nélkül történõ\n"
 "nyomtatás. Akkor válassza ezt, ha közvetlen kapcsolat van a\n"
 "nyomtatóval, és nincsen hálózati nyomtatója. Ez a módszer csak a\n"
 "legegyszerûbb hálózati szolgáltatásokat nyújtja, és hálózaton eléggé\n"
 "lassú. Válassza a \"pdq\" módszert, ha nem rendelkezik komolyabb linuxos\n"
-"ismeretekkel. Lehetõsége van arra, hogy telepítés után módosítsa ezt a\n"
-"beállítást; ehhez a PrinterDrake programot kell futtatni a Mandrake\n"
-"Vezérlõközpontban - a szakértõi beállításokat kell módosítani.\n"
+"ismeretekkel.\n"
 "\n"
 "  - \"CUPS\": \"Common UNIX Printing System\", azaz általános UNIX\n"
 "nyomtatórendszer. Helyi és távoli nyomtatókra való nyomtatáshoz remekül\n"
-"használható. Ez egy egyszerû rendszer, és képes a régi \"lpd\"\n"
-"nyomtatórendszer kiszolgálójaként vagy klienseként funkcionálni -\n"
-"vagyis kompatibilis a régebbi rendszerekkel. Nagy tudású rendszer,\n"
-"viszont az alapvetõ beállítások majdnem olyan egyszerûen elvégezhetõk\n"
-"benne, mint a \"pdq\" esetében. Ha arra használja, hogy egy \"lpd\"\n"
-"kiszolgálót emuláljon vele, akkor aktiválnia kell a \"cups-lpd\"\n"
-"szolgáltatást. Rendelkezik grafikus felülettel, amely nyomtatásra\n"
-"illetve a nyomtatóparaméterek kiválasztására használható."
+"használható. Ez egy egyszerûen beállítható rendszer, és képes a régi\n"
+"\"lpd\" nyomtatórendszer kiszolgálójaként vagy klienseként funkcionálni -\n"
+"vagyis kompatibilis a régebbi operációs rendszerekkel. Nagy tudású\n"
+"rendszer, viszont az alapvetõ beállítások majdnem olyan egyszerûen\n"
+"elvégezhetõk benne, mint a \"pdq\" esetében. Ha arra használja, hogy egy\n"
+"\"lpd\" kiszolgálót emuláljon vele, akkor aktiválnia kell a \"cups-lpd\"\n"
+"szolgáltatást. A \"CUPS\" rendelkezik grafikus felülettel, amely\n"
+"nyomtatásra, a nyomtatóparaméterek kiválasztására illetve nyomtatókezelésre\n"
+"használható.\n"
+"\n"
+"Telepítés után lehetõsége lesz a nyomtatórendszer lecserélésére (ha mégsem\n"
+"felel meg az itt kiválasztott) - ehhez a PrinterDrake programot kell\n"
+"elindítani a Mandrake Vezérlõközpontban, majd megfelelõen módosítani kell\n"
+"a szakértõi beállításokat."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
 "automated. DrakX will analyze the disk boot sector and act according to\n"
@@ -1704,7 +1534,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1729,12 +1559,34 @@ msgid ""
 "floppy disk must be blank or have non-critical data on it - DrakX will\n"
 "format the floppy and will rewrite the whole disk."
 msgstr ""
-"A Mandrake Linux CD-nek van egy beépített helyreállítási üzemmódja. Ezen\n"
+"A LILO és a GRUB linuxos rendszerindító programok. Ez a fázis általában\n"
+"teljesen automatikus. A telepítõ elemzi a lemez betöltõszektorát, és\n"
+"annak megfelelõen cselekszik, hogy ott mit talál:\n"
+"\n"
+"  - Ha windowsos betöltõszektort talál, akkor azt helyettesíteni fogja egy\n"
+"GRUB/LILO betöltõszektorral. Ezért Önnek lehetõsége lesz arra is, hogy\n"
+"Linuxt indítson, és arra is, hogy egy másik operációs rendszert.\n"
+"\n"
+"  - Ha GRUB vagy LILO betöltõszektort talál, helyettesíti azt egy új\n"
+"példánnyal.\n"
+"\n"
+"Ha a telepítõ nem tud dönteni, akkor kérdést tesz fel Önnek a\n"
+"rendszerindító elhelyezésével kapcsolatban.\n"
+"\n"
+"\"Rendszerindítási eszköz\": a legtöbb esetben nincs szükség az\n"
+"alapértelmezett érték (\"A lemezmeghajtó legelsõ szektora (MBR)\")\n"
+"módosítására, de ha kívánja, a rendszerbetöltõ telepíthetõ a második\n"
+"merevlemezre (\"/dev/hdb\"), vagy akár floppylemezre (\"Hajlékonylemez\").\n"
+"\n"
+"Az \"Indítólemez készítése\" opció bejelölésével rendszerindításra képes\n"
+"helyreállítólemezt készíthet.\n"
+"\n"
+"A Mandrake Linux CD rendelkezik beépített helyreállítási üzemmóddal. Ezen\n"
 "üzemmód a következõképpen érhetõ el: indítsa a rendszert a CD-rõl, majd\n"
 "nyomja le az \"F1\" billentyût, és gépelje be a megjelenõ parancssorban\n"
 "azt, hogy \"rescue\". Ha viszont a gép nem képes CD-rõl való\n"
-"rendszerindításra, akkor vissza kell térnie ezen lépéshez segítségért - ez\n"
-"legalább két esetben szükséges lehet:\n"
+"rendszerindításra, akkor legalább két olyan eset van, amelyben szükség van\n"
+"egy rendszerindítási floppy elkészítésére:\n"
 "\n"
 "  - A rendszerbetöltõ telepítésekor (hacsak Ön nem használ más\n"
 "rendszerindító programot) a telepítõ módosítja a fõ lemez\n"
@@ -1747,7 +1599,8 @@ msgstr ""
 "  - Ha probléma merül fel, és Ön nem tudja elindítani a Linux rendszert\n"
 "a merevlemezrõl, akkor ezen floppy fogja jelenteni az egyetlen lehetõséget\n"
 "arra, hogy elindítsa a rendszert. A floppy programokat tartalmaz a rendszer\n"
-"helyreállításához (arra az esetre, ha például áramkimaradás történt).\n"
+"helyreállításához (arra az esetre, ha például áramkimaradás történt, vagy\n"
+"a felhasználó elfelejtette a rendszergazdai jelszót).\n"
 "\n"
 "Ha kéri ennek a lépésnek a végrehajtását, akkor a telepítõ megkéri Önt\n"
 "arra, hogy tegyen be egy floppyt a meghajtóba. Ügyeljen arra, hogy a\n"
@@ -1755,7 +1608,7 @@ msgstr ""
 "elõzetesen formázni, mivel a telepítõ felülírja a teljes lemez tartalmát."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After you have configured the general bootloader parameters, the list of\n"
 "boot options that will be available at boot time will be displayed.\n"
@@ -1775,19 +1628,20 @@ msgstr ""
 "Miután beállította az általános rendszerbetöltõ-paramétereket, megjelenik\n"
 "a betöltési lehetõségek listája, amely rendszerindításkor lesz elérhetõ.\n"
 "\n"
-"Ha van másik operációs rendszer a gépen, az automatikusan fel lesz véve a\n"
-"betöltési menübe. Itt módosíthatók az aktuális beállítások. Egy elem\n"
-"módosításához illetve eltávolításához jelölje ki az elemet, majd kattintson\n"
-"a \"Módosítás\" gombra. Új elemet a \"Hozzáadás\" funkcióval lehet\n"
-"felvenni. A telepítés következõ lépésére való ugrás a \"Kész\" gombbal\n"
-"lehetséges.\n"
+"Ha vannak más operációs rendszerek is a gépen, azok automatikusan fel\n"
+"lesznek véve a betöltési menübe. Az aktuális beállítások módosíthatók. Új\n"
+"elemet a \"Hozzáadás\" funkcióval lehet felvenni. Egy elem módosításához\n"
+"jelölje ki az elemet, majd kattintson a \"Módosítás\" gombra; "
+"eltávolításhoz\n"
+"pedig a kijelölést követõen az \"Eltávolítás\" gombra. A módosítások az\n"
+"\"OK\" gombbal érvényesíthetõk.\n"
 "\n"
 "Ha valamelyik operációs rendszert nem akarja elérhetõvé tenni, akkor\n"
 "törölheti annak rendszerbetöltési bejegyzéseit, de ebben az esetben\n"
 "késõbb csak indítólemezzel tudja majd azt az operációs rendszert elindítani."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This dialog allows to finely tune your bootloader:\n"
 "\n"
@@ -1816,48 +1670,36 @@ msgid ""
 "Clicking the \"Advanced\" button in this dialog will offer advanced options\n"
 "that are reserved for the expert user."
 msgstr ""
-"A LILO és a GRUB linuxos rendszerindító programok. Ez a fázis általában\n"
-"teljesen automatikus. A telepítõ elemzi a lemez betöltõszektorát, és\n"
-"annak megfelelõen cselekszik, hogy ott mit talál:\n"
-"\n"
-"  - Ha windowsos betöltõszektort talál, akkor azt helyettesíteni fogja egy\n"
-"GRUB/LILO betöltõszektorral. Ezért Önnek lehetõsége lesz arra is, hogy\n"
-"Linuxt indítson, és arra is, hogy egy másik operációs rendszert.\n"
-"\n"
-"  - Ha GRUB vagy LILO betöltõszektort talál, helyettesíti azt egy új\n"
-"példánnyal.\n"
-"\n"
-"Ha a telepítõ nem tud dönteni, akkor megjelenít egy párbeszédablakot\n"
-"különféle lehetõségekkel.\n"
+"Ez a párbeszédablak lehetõvé teszi a rendszerbetöltõ beállítását:\n"
 "\n"
 "  - \"A használni kívánt rendszerbetöltõ\": három lehetõség van:\n"
 "\n"
 "      - \"GRUB\": ha a GRUB-ot szeretné használni (szöveges menü).\n"
 "\n"
-"      - \"LILO, grafikus menüvel\": ha grafikus felületû LILO-t szeretne.\n"
-"\n"
 "      - \"LILO, szöveges menüvel\": ha szöveges felületû LILO-t szeretne.\n"
+"\n"
+"      - \"LILO, grafikus menüvel\": ha grafikus felületû LILO-t szeretne.\n"
 "\n"
 "  - \"Rendszerindítási eszköz\": a legtöbb esetben nincs szükség az\n"
 "alapértelmezett érték (\"/dev/hda\") módosítására, de ha kívánja, a\n"
-"rendszerbetöltõ telepíthetõ a második merevlemezre is (\"/dev/hdb\"),\n"
-"vagy akár floppylemezre is (\"/dev/fd0\").\n"
+"rendszerbetöltõ telepíthetõ a második merevlemezre (\"/dev/hdb\"),\n"
+"vagy akár floppylemezre (\"/dev/fd0\").\n"
 "\n"
 "  - \"Várakozási idõ az alapértelmezett rendszer betöltése elõtt\": a gép\n"
-"újraindításakor ennyi ideje van a felhasználónak a rendszerbetöltõ\n"
+"(újra)indításakor ennyi ideje van a felhasználónak a rendszerbetöltõ\n"
 "menüjének megjelenését követõen arra, hogy kiválassza, melyik rendszert\n"
 "kívánja elindítani (ha nem az alapértelmezettet).\n"
 "\n"
-"Legyen óvatos: ha nem telepít rendszerbetöltõt (azaz a \"Mégsem\" gombot\n"
+"Legyen óvatos: ha nem telepít rendszerbetöltõt (azaz a \"Kihagyás\" gombot\n"
 "nyomja le), akkor biztosítania kell egy másféle módszert a Mandrake Linux\n"
-"rendszer elindítására. Továbbá: csak akkor módosítsa az opciókat, ha biztos\n"
-"abban, hogy tisztában van a funkciójukkal.\n"
+"rendszer elindítására. Csak akkor módosítsa az opciókat, ha biztos abban,\n"
+"hogy tisztában van a funkciójukkal.\n"
 "\n"
 "A párbeszédablak \"Speciális\" gombjára kattintva további opciók válnak\n"
 "elérhetõvé - ezek a szakértõ felhasználók számára lesznek lényegesek."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This is the most crucial decision point for the security of your GNU/Linux\n"
 "system: you have to enter the \"root\" password. \"Root\" is the system\n"
@@ -1884,7 +1726,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -1902,13 +1744,12 @@ msgstr ""
 "Röviden szólva: a \"root\" felhasználó bármit megtehet a rendszeren.\n"
 "Ez az, amiért a jelszót úgy kell megválasztani, hogy azt minél nehezebb\n"
 "legyen kitalálni. A telepítõ jelzi az Ön számára, ha a jelszót könnyen\n"
-"kitalálhatónak tartja. Nem kötelezõ megadni jelszót, de erõsen javasolt;\n"
-"ha másért nem is, a következõ miatt: ne gondolja, hogy ha Ön Linux\n"
-"rendszert indít, akkor a gépen levõ többi operációs rendszer feltétlenül\n"
-"védve van az esetlegesen elkövetett hibáktól. A \"root\" felhasználóra nem\n"
-"vonatkoznak a korlátozások; ha például óvatlanul kezeli a partíciókat,\n"
-"akkor akár le is törölheti az azokon levõ adatokat; ezért fontos, hogy\n"
-"a rendszeradminisztrátori azonosító védve legyen.\n"
+"kitalálhatónak tartja. Nem kötelezõ megadni jelszót, de erõsen javasolt.\n"
+"A Linux rendszert - ugyanúgy, mint bármely más rendszert - tönkre lehet\n"
+"tenni rendszeradminisztrátori hibákkal. Mivel a \"root\" felhasználóra\n"
+"nem vonatkoznak a korlátozások, ezért ha például óvatlanul kezeli a\n"
+"partíciókat, akkor akár le is törölheti az azokon levõ adatokat - ezért\n"
+"fontos, hogy a rendszeradminisztrátori azonosító védve legyen.\n"
 "\n"
 "A jelszónak betûkbõl és számokból kell állni, és legalább 8 karakter\n"
 "hosszúságúnak kell lenni. Soha ne írja le a rendszeradminisztrátori\n"
@@ -1917,21 +1758,23 @@ msgstr ""
 "A fentiek ellenére ne válasszon túl hosszú vagy túl bonyolult jelszót, mert\n"
 "Önnek fejben kell tartania azt.\n"
 "\n"
-"A jelszó nem jelenik meg a képernyõn, amikor Ön begépeli azt. Emiatt\n"
-"kétszer kell azt beírni - ezáltal csökken az esélye annak, hogy Ön elgépeli\n"
-"a jelszót. Ha esetleg ugyanazt a gépelési hibát követi el a jelszó elsõ\n"
-"és második megadásánál, akkor ezen - helytelenül írt - jelszóval kell majd\n"
+"A jelszó nem jelenik meg a képernyõn, amikor Ön begépeli azt. Az esetleges\n"
+"gépelési hibák miatti problémák elkerülése érdekében kétszer kell beírni a\n"
+"jelszót. Ha esetleg ugyanazt a gépelési hibát követi el a jelszó elsõ és\n"
+"második megadásánál, akkor ezen - helytelenül írt - jelszóval kell majd\n"
 "bejelentkezni a rendszerbe.\n"
 "\n"
-"Szakértõi mód esetén a telepítõ megkérdi, hogy szükség van-e azonosítási\n"
-"kiszolgáló (authentication server) használatára (NIS, LDAP, ...).\n"
+"Ha szeretné a géphez való hozzáférést azonosítási kiszolgálóval\n"
+"(authentication server) vezérelni, akkor kattintson a \"Speciális\" gombra.\n"
 "\n"
 "Ha az Ön hálózata LDAP-t, NIS-t vagy PDC-t használ azonosításhoz, akkor\n"
 "válassza az ennek megfelelõ tételt azonosítási módszerként. Ha nem tudja,\n"
 "hogy mit kellene megadni, kérdezze meg a rendszergazdát.\n"
 "\n"
-"Ha a számítógép nem kapcsolódik semmilyen adminisztrált hálózathoz, akkor\n"
-"válassza a \"Helyi fájlok\" lehetõséget."
+"Ha Önnek problémája van a jelszavak megjegyzésével kapcsolatban, akkor\n"
+"amennyiben a számítógép nem kapcsolódik az internetre és Ön megbízik\n"
+"mindenkiben, aki elérheti a gépet, abban az esetben válassza a\n"
+"\"Nincs jelszó\" lehetõséget."
 
 #: ../../help.pm:1
 #, c-format
@@ -1943,7 +1786,7 @@ msgstr ""
 "neve Linux alatt \"ttyS0\"."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
 "mouse. If it does, it assumes you have a two-button mouse and will\n"
@@ -1972,28 +1815,32 @@ msgid ""
 msgstr ""
 "A DrakX általában felismeri, hogy hány gomb van az egéren. Ha ez nem így\n"
 "történik, akkor azt feltételezi, hogy Ön kétgombos egérrel rendelkezik,\n"
-"és ez esetben beállítja a harmadik egérgomb emulálását. A program "
-"felismeri,\n"
-"hogy milyen fajtájú az egér: PS/2, soros vagy USB.\n"
+"és ez esetben beállítja a harmadik egérgomb emulálását. Kétgombos egér\n"
+"esetén a \"harmadik\" gomb lenyomása a két gomb egyidejû lenyomását\n"
+"jelenti (ha az emulálás be van állítva). A telepítõ felismeri, hogy\n"
+"milyen fajtájú az egér: PS/2, soros vagy USB.\n"
 "\n"
 "Ha Ön másféle egértípust szeretne megadni, válassza ki a megfelelõ típust\n"
 "a listából.\n"
 "\n"
 "Ha az alapértelmezettõl eltérõ egeret választ, akkor megjelenik egy\n"
 "tesztelési képernyõ. Használja az egérgombokat és a görgõt, hogy\n"
-"ellenõrizze a beállítások helyességét. Ha az egér nem mûködik helyesen,\n"
-"akkor nyomja le a Szóköz vagy az Enter (Return) billentyût, és válasszon\n"
-"egy másik fajta egeret.\n"
+"ellenõrizze a beállítások helyességét és az egér helyes mûködését.\n"
+"Ha az egér nem mûködik helyesen, akkor nyomja le a Szóköz vagy az Enter\n"
+"(Return) billentyût, és válasszon egy másik fajta egeret a listából.\n"
 "\n"
 "A görgõs egereket nem mindig ismeri fel a rendszer. Ha az egér nem lett\n"
 "felismerve, válassza ki saját kezûleg a listából. Ügyeljen arra, hogy az\n"
-"egér portjának megfelelõ tételt válassza ki. Miután lenyomta az \"OK\"\n"
-"gombot, egy egeret ábrázoló kép jelenik meg. A helyes beállításhoz\n"
-"mozgatni kell az egér görgõjét. Ez után letesztelhetõ, hogy megfelelõ-e\n"
-"a beállítás, azaz mûködnek-e a gombok és a mozgatás."
+"egér portjának megfelelõ tételt válassza ki. Miután kiválasztotta a kívánt\n"
+"típust, majd lenyomta a \"Következõ ->\" gombot, egy egeret ábrázoló kép\n"
+"jelenik meg a képernyõn. Mozgassa az egér görgõjét, hogy az megfelelõen\n"
+"aktiválva legyen. Ha a képernyõn levõ görgõt mozogni látja az egérgörgõ\n"
+"mozgatásakor, akkor tesztelje le egyrészt az egér gombjainak mûködését,\n"
+"másrészt azt, hogy megfelelõen mozog-e az egérkurzor a képernyõn az egér\n"
+"mozgatásakor."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your choice of preferred language will affect the language of the\n"
 "documentation, the installer and the system in general. Select first the\n"
@@ -2015,27 +1862,29 @@ msgid ""
 "language used by the entire system. Running the command as a regular user\n"
 "will only change the language settings for that particular user."
 msgstr ""
-"Az elsõ lépés a kívánt nyelv kiválasztása.\n"
-"\n"
-"Válassza ki a telepítéshez és a telepített rendszerhez használandó nyelvet.\n"
+"A kiválasztott nyelv befolyásolja a dokumentációnak, a telepítõnek és a\n"
+"rendszer többi részének a nyelvét is. Válassza ki a megfelelõ földrajzi\n"
+"helyet, majd a kívánt nyelvet.\n"
 "\n"
 "A \"Speciális\" nyomógombra kattintva kiválaszthatók további telepítendõ\n"
 "nyelvek. További nyelvek választása esetén telepítésre kerülnek az adott\n"
 "nyelvekhez tartozó fájlok is - a rendszerdokumentáció és az alkalmazások\n"
 "szövegei. Ha például a gépet spanyol felhasználók is használni fogják,\n"
-"akkor a fõ nyelvnek (például magyar) a fában történõ kiválasztását követõen\n"
-"a Speciális részben kattintson a \"Spanish|Spain\" (spanyol|Spanyolország)\n"
-"bejegyzéshez tartozó négyzetre.\n"
+"akkor az alapértelmezett nyelvnek (például magyar) a fában történõ\n"
+"kiválasztását követõen a Speciális részben jelölje be az \"Espanol\"\n"
+"lehetõséget.\n"
 "\n"
-"Több nyelv is telepíthetõ. Ha kijelölte az összes kívánt nyelvet,\n"
-"kattintson az \"OK\" gombra a folytatáshoz.\n"
+"Több nyelv is telepíthetõ az alapértelmezett nyelven felül. Ha kijelölte\n"
+"az összes kívánt nyelvet, kattintson a \"Következõ ->\" gombra a\n"
+"folytatáshoz.\n"
 "\n"
-"A nyelvek közti váltáshoz a \"/usr/sbin/localedrake\" program használható.\n"
-"Rendszergazdai jogosultsággal az összes felhasználó nyelvbeállításait lehet\n"
-"módosítani, a nélkül pedig csak a saját beállításokat."
+"A rendszerre telepített nyelvek közti váltáshoz a\n"
+"\"/usr/sbin/localedrake\" program használható. Rendszergazdai\n"
+"jogosultsággal az összes felhasználó nyelvbeállításait lehet módosítani,\n"
+"a nélkül pedig csak a saját beállításokat."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Depending on the default language you chose in Section , DrakX will\n"
 "automatically select a particular type of keyboard configuration. However,\n"
@@ -2053,19 +1902,20 @@ msgid ""
 "dialog will allow you to choose the key binding that will switch the\n"
 "keyboard between the Latin and non-Latin layouts."
 msgstr ""
-"Normál esetben a telepítõ (a DrakX) kiválasztja a megfelelõ billentyûzetet\n"
-"(a választott nyelvtõl függõen). Viszont elképzelhetõ, hogy Önnek nem a\n"
+"A telepítõ a kiválasztott alapnyelvtõl függõen automatikusan kiválaszt\n"
+"egy bizonyos billentyûzetbeállítást. Elképzelhetõ viszont, hogy Önnek nem a\n"
 "nyelvének megfelelõ billentyûzete van; például ha Ön egy angolul beszélõ\n"
-"magyar ember, akkor lehet, hogy magyar billentyûzetkiosztást szeretne.\n"
+"magyar ember, akkor lehetséges, hogy magyar billentyûzete van.\n"
 "Hasonló helyzet adódhat, ha az Ön nyelve magyar, de Ön Quebecben\n"
-"tartózkodik. Mindkét esetben vissza kell lépnie erre a telepítési lépésre\n"
-"és ki kell választania egy megfelelõ billentyûzetet a listából.\n"
+"tartózkodik - az Ön által beszélt nyelv nem feltétlenül egyezik meg a\n"
+"billentyûzet nyelvével. Ez a telepítési lépés lehetõvé teszi a hasonló\n"
+"esetekre, hogy kiválasszon egy megfelelõ billentyûzetet egy listából.\n"
 "\n"
 "Hogy megjelenjen a támogatott billentyûzetek teljes listája, kattintson\n"
 "az \"Egyéb\" nyomógombra.\n"
 "\n"
 "Ha nem latin ábécére épülõ billentyûzetkiosztást választ, akkor a\n"
-"következõ lépésben választania kell egy billentyûkombinációt, amellyel\n"
+"következõ lépésben kijelölhet egy billentyûkombinációt, amellyel\n"
 "majd a latin és a nem-latin kiosztások közt lehet váltani."
 
 #: ../../help.pm:1
@@ -2092,6 +1942,24 @@ msgid ""
 "running version \"8.1\" or later. Performing an Upgrade on versions prior\n"
 "to Mandrake Linux version \"8.1\" is not recommended."
 msgstr ""
+"Erre a lépésre csak akkor kerül sor, ha a gépen már van linuxos partíció.\n"
+"\n"
+"Most közölnie kell a telepítõvel, hogy új telepítést szeretne-e végezni\n"
+"vagy pedig egy meglevõ Mandrake Linux rendszert kíván frissíteni:\n"
+"\n"
+"  - \"Telepítés\": a korábbi rendszer felülírásra kerül. Ha szeretné\n"
+"módosítani a merevlemezek partícionálását vagy a fájlrendszereket,\n"
+"akkor ezt a lehetõséget használja. Attól függõen, hogy milyen partíciók\n"
+"találhatók a gépen, bizonyos partíciók változatlan tartalommal\n"
+"megõrizhetõk.\n"
+"\n"
+"  - \"Frissítés\": lehetõvé teszi egy korábbi Mandrake Linux telepítés\n"
+"csomagjainak frissítését. A merevlemezek partícionálása változatlanul\n"
+"marad, a felhasználók adatai sem módosulnak. A többi beállítási lépés közül\n"
+"a legtöbb elérhetõ lesz - a folyamat hasonló a normál telepítéshez.\n"
+"\n"
+"Frissítés használata akkor javasolt, ha a számítógépen Mandrake\n"
+"Linux 8.1 vagy újabb kiadás van."
 
 #: ../../help.pm:1
 #, c-format
@@ -2099,6 +1967,8 @@ msgid ""
 "\"Country\": check the current country selection. If you are not in this\n"
 "country, click on the button and choose another one."
 msgstr ""
+"\"Ország\": ellenõrizze a jelenlegi országbeállítást. Ha az nem\n"
+"megfelelõ, kattintson a gombra és válasszon egy másik országot."
 
 #: ../../help.pm:1
 #, c-format
@@ -2165,7 +2035,7 @@ msgstr ""
 "(az elsõ lemez vagy partíció neve \"C:\")."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to choose which partition(s) will be used for the\n"
 "installation of your Mandrake Linux system. If partitions have already been\n"
@@ -2291,12 +2161,16 @@ msgstr ""
 "\n"
 "  - \"Átváltás normál módba\" illetve \"Átváltás szakértõi módba\":\n"
 "szakértõi módba való kapcsolás esetén több funkció válik elérhetõvé\n"
-"(partíciótípus, opciók, formázás) és több információt kap a felhasználó.\n"
+"(partíciótípus, opciók, formázás) és több információt kap a felhasználó\n"
+"a merevlemezekkel kapcsolatosan.\n"
 "\n"
 "  - \"Kész\": a partícionálás befejezése után ezzel lehet a módosításokat\n"
 "elmenteni a lemezre.\n"
 "\n"
-"Az összes funkció elérhetõ a billentyûzetrõl is. A partíciók között a Tab\n"
+"Egy partíció méretének megadásakor finombeállítást végezhet a billentyûzet\n"
+"nyílbillentyûivel.\n"
+"\n"
+"Az összes funkció elérhetõ a billentyûzetrõl. A partíciók között a Tab\n"
 "billentyûvel és a fel/le nyilakkal lehet mozogni.\n"
 "\n"
 "Ha egy partíció ki van jelölve, használni lehet a következõket:\n"
@@ -2317,7 +2191,7 @@ msgstr ""
 "illetve RAM-diszk képfájlok (image-ek) esetleges rendszerhibák esetére."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, DrakX will allow you to choose the security level desired\n"
 "for the machine. As a rule of thumb, the security level should be set\n"
@@ -2329,9 +2203,10 @@ msgid ""
 "\n"
 "If you do not know what to choose, keep the default option."
 msgstr ""
-"Most ki kell választani egy biztonsági szintet a gép számára. Alapszabály,\n"
-"hogy minél inkább elérhetõ a gép, illetve minél kritikusabb adatok vannak\n"
-"azon tárolva, annál magasabbra érdemes venni a biztonsági szintet. Magasabb\n"
+"Most kiválaszthat egy biztonsági szintet a gép számára. Alapszabály,\n"
+"hogy ha fontos adatok vannak tárolva a gépen, vagy a gép kapcsolódni fog\n"
+"az internetre, akkor érdemes magasabbra venni a biztonsági szintet. "
+"Magasabb\n"
 "szint esetén viszont általában nehézkesebb a gép használata. A szintek\n"
 "jelentésével kapcsolatban a kézikönyv \"msec\" fejezetében találhatók\n"
 "további információk.\n"
@@ -2340,7 +2215,7 @@ msgstr ""
 "alapértelmezés szerinti lehetõséget."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
@@ -2371,7 +2246,7 @@ msgstr ""
 "csomagokat telepíteni, akkor a \"Mégsem\" gombot nyomja le."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Any partitions that have been newly defined must be formatted for use\n"
 "(formatting means creating a file system).\n"
@@ -2415,16 +2290,16 @@ msgstr ""
 "Gondosan ellenõrizze, mely partíciókat jelöli ki, mert a formázás során az\n"
 "adott partíciókon levõ adatok törlõdnek, és késõbb nem nyerhetõk vissza.\n"
 "\n"
-"Kattintson az \"OK\" gombra a formázás megkezdéséhez.\n"
+"Kattintson a \"Következõ ->\" gombra a formázás megkezdéséhez.\n"
 "\n"
-"Kattintson a \"Mégsem\" gombra, ha más partícióra szeretné telepíteni a\n"
+"Kattintson az \"<- Elõzõ\" gombra, ha más partícióra szeretné telepíteni a\n"
 "Mandrake Linux operációs rendszert.\n"
 "\n"
 "Kattintson a \"Speciális\" gombra, ha bizonyos partíciókat ellenõriztetni\n"
 "kíván (hibás blokkok keresése)."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "There you are. Installation is now complete and your GNU/Linux system is\n"
 "ready to use. Just click \"Next ->\" to reboot the system. The first thing\n"
@@ -2458,9 +2333,9 @@ msgid ""
 "\"mformat a:\")"
 msgstr ""
 "A telepítés befejezõdött; a Linux rendszer készen áll a használatra.\n"
-"A rendszer újraindításához kattintson az \"OK\" gombra. Amikor a gép\n"
-"újraindul, elindíthatja a Linuxt vagy más operációs rendszert (ha több\n"
-"operációs rendszer van a gépen).\n"
+"A rendszer újraindításához kattintson a \"Következõ ->\" gombra. Miután a\n"
+"gép elvégzi az indítási hardverteszteket, megjelenik a rendszerbetöltõ\n"
+"menüje, amelybõl kiválasztható, melyik operációs rendszer induljon el.\n"
 "\n"
 "A \"Speciális\" gomb (csak szakértõi módban) lenyomására két újabb gomb\n"
 "jelenik meg:\n"
@@ -2472,8 +2347,8 @@ msgstr ""
 "\n"
 "Két lehetõség közül lehet választani a gomb lenyomása után:\n"
 "\n"
-"      - \"Újrajátszás\". Ez részben automatizált telepítést jelent;\n"
-"a partícionálási lépés (csak az az egy) interaktív marad.\n"
+"      - \"Újrajátszás\". Részben automatizált telepítést jelent;\n"
+"a partícionálási lépés az egyetlen interaktív tevékenység.\n"
 "\n"
 "      - \"Automatikus\". Teljesen automatizált telepítés; a merevlemez\n"
 "tartalma felülíródik, az összes korábbi adat elvész.\n"
@@ -2482,11 +2357,11 @@ msgstr ""
 "kell a rendszert feltelepíteni. Az automatikus telepítéssel\n"
 "kapcsolatban a Mandrake honlapján találhatók további információk.\n"
 "\n"
-"  - \"Csomagösszeállítás mentése\"(*): elmenti a korábban tett\n"
-"csomagkijelölést (a kijelölt csomagok listáját). Ha egy újabb telepítés\n"
-"alkalmával fel kívánja használni az elmentett listát, akkor helyezze be\n"
-"az azt tartalmazó floppyt a telepítés megkezdésekor, majd nyomjon\n"
-"\"F1\"-et, ez után pedig adja ki a következõ parancsot:\n"
+"  - \"Csomagösszeállítás mentése\"(*): elmenti a telepítés során\n"
+"kiválasztott csomagok listáját. Ha egy újabb telepítés alkalmával fel\n"
+"kívánja használni az elmentett listát, akkor helyezze be az azt tartalmazó\n"
+"floppyt a telepítés megkezdésekor, majd - amikor a gép billentyûlenyomásra\n"
+"vár - nyomjon \"F1\"-et, ez után pedig írja be a következõt:\n"
 "linux defcfg=\"floppy\"\n"
 "\n"
 "\n"
@@ -2495,7 +2370,7 @@ msgstr ""
 "\"mformat a:\""
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to decide where you want to install the Mandrake\n"
 "Linux operating system on your hard drive. If your hard drive is empty or\n"
@@ -2566,30 +2441,17 @@ msgstr ""
 "újrafelosztását jelenti - erre a Mandrake Linux telepítéséhez szükséges\n"
 "hely létrehozása érdekében van szükség.\n"
 "\n"
-"A partícionálás veszélyes mûvelet. Hiba esetén adatvesztéssel járhat,\n"
-"ráadásul általában nincs lehetõség visszatérni egy korábbi állapothoz.\n"
-"Emiatt kezdõ felhasználóknak sok nehézséget okozhat. Ez a varázsló\n"
-"megkönnyíti a mûvelet végrehajtását, de mielõtt elindítaná, érdemes\n"
-"alaposan átolvasni a kézikönyv idevágó részét.\n"
+"A partícionálás veszélyes mûvelet. Hiba esetén adatvesztéssel járhat\n"
+"(ha a lemez nem volt üres), ráadásul általában nincs lehetõség visszatérni\n"
+"egy korábbi állapothoz. Emiatt kezdõ felhasználóknak sok nehézséget\n"
+"okozhat. A telepítõ tartalmaz egy varázslót, amely megkönnyíti a mûvelet\n"
+"végrehajtását, de mielõtt használatba venné, olvassa végig a leírást.\n"
 "\n"
-"Ha a telepítést szakértõi módban futtatja, el fog indulni a DiskDrake nevû\n"
-"program, amely a Mandrake Linux rendszer partícionálóeszköze. Ezen program\n"
-"lehetõvé teszi a partíciók módosítását. További információkat a\n"
-"felhasználói kézikönyv DiskDrake-rõl szóló szakaszában olvashat. Az ott\n"
-"ismertetett varázslók a telepítõbõl is elindíthatók, ehhez a \"Varázsló\"\n"
-"gombot kell lenyomni.\n"
-"\n"
-"Ha a partíciók már definiálva vannak - akár egy korábbi telepítés által,\n"
-"akár egy másféle partícionálóeszköz által -, akkor egyszerûen válassza ki\n"
-"azokat a Linux rendszer telepítése számára.\n"
-"\n"
-"Ha a szükséges partíciók még nem állnak rendelkezésre, létre kell hozni\n"
-"azokat a varázslóval. A lemezek tartalmától függõen többféle módon lehet\n"
-"eljárni:\n"
+"A lemezek tartalmától függõen többféle lehetõség van:\n"
 "\n"
 "  - \"A szabad terület felhasználása\": ez a lehetõség az üres meghajtók\n"
-"automatikus partícionálását jelenti. További kérdést nem tesz fel a\n"
-"telepítõ.\n"
+"automatikus partícionálását jelenti. Ebben az esetben a telepítõ nem tesz\n"
+"fel további kérdéseket.\n"
 "\n"
 "  - \"Már létezõ partíciók használata\": a varázsló talált egy vagy több\n"
 "linuxos partíciót a lemezen. Ha ezeket szeretné használni a\n"
@@ -2602,15 +2464,16 @@ msgstr ""
 "Windows úgy van feltelepítve a lemezre, hogy elfoglalja az összes\n"
 "elérhetõ területet, akkor annak egy részét fel kell szabadítani a Linux\n"
 "számára. Ez történhet a Windows-partíció törlésével (lásd \"A teljes\n"
-"lemez törlése\" és a \"Szakértõi mód\" lehetõségeket) vagy\n"
-"átméretezésével. Az átméretezés végrehajtható a lemezen levõ adatok\n"
+"lemez törlése\" lehetõséget) vagy átméretezésével (az utóbbi csak FAT\n"
+"partíció esetén javasolt).\n"
+"Az átméretezés FAT partíció esetén végrehajtható a lemezen levõ adatok\n"
 "elvesztése nélkül - feltéve, hogy azt megelõzõen töredezettségmentesítve\n"
-"lett a Windows-partíció. Javasolt továbbá az adatok mentése is.\n"
+"lett a kérdéses partíció. Javasolt továbbá az adatok mentése is.\n"
 "Ezen módszer a javasolt abban az esetben, ha a Mandrake Linuxt és a\n"
-"Microsoft Windowst ugyanazon a gépen szeretné használni.\n"
+"Windowst ugyanazon a gépen szeretné használni.\n"
 "\n"
 "Ha ezt a lehetõséget választja, ne feledkezzen meg arról, hogy ennek\n"
-"hatására a Microsoft Windows partíció mérete a mostaninál kisebb lesz,\n"
+"hatására a windowsos partíció mérete a korábbinál kisebb lesz,\n"
 "tehát a Windows használatakor kevesebb hely lesz az adatok tárolására\n"
 "és új szoftverek telepítésére.\n"
 "\n"
@@ -2620,25 +2483,25 @@ msgstr ""
 "nagyon óvatos ezzel a lehetõséggel, mert a lemezen levõ adatok\n"
 "véglegesen elvesznek a megerõsítés után.\n"
 "\n"
-"Ha ezt a lehetõséget választja, a lemezen levõ összes adat elvész.\n"
+"Ha ezt a lehetõséget választja, a lemezen levõ összes adat törlésre kerül.\n"
 "\n"
 "  - \"A Windows(TM) eltávolítása\": ez a funkció egyszerûen letöröl mindent\n"
 "a lemezrõl, és újrapartícionálja azt. A lemezen levõ összes adat elvész.\n"
 "\n"
 "Ha ezt a lehetõséget választja, a lemezen levõ összes adat elvész.\n"
 "\n"
-"  - \"Szakértõi mód\": ha közvetlenül (varázsló nélkül) szeretné elvégezni\n"
-"a partícionálást, akkor válassza ezt a lehetõséget. Legyen óvatos - sok\n"
-"minden elvégezhetõ ebben az üzemmódban, de a használata veszélyes. Könnyen\n"
-"elveszítheti a lemezen levõ összes adatot ennek a használatával, ezért\n"
-"csak indokolt esetben válassza ezt a funkciót. A DiskDrake program\n"
-"használatáról a felhasználói kézikönyv partíciókezelésrõl szóló szakaszában\n"
-"találhat további információt."
+"  - \"Egyéni lemezpartícionálás\": ha közvetlenül (varázsló nélkül)\n"
+"szeretné elvégezni a partícionálást, akkor válassza ezt a lehetõséget.\n"
+"Legyen óvatos - sok minden elvégezhetõ ebben az üzemmódban, de a\n"
+"használata veszélyes. Könnyen elveszítheti a lemezen levõ összes adatot\n"
+"ennek a használatával, ezért csak indokolt esetben válassza ezt a\n"
+"funkciót. A DiskDrake program használatáról a felhasználói kézikönyv\n"
+"partíciókezelésrõl szóló szakaszában találhat további információt."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -2663,12 +2526,15 @@ msgid ""
 "floppy disk must be blank or have non-critical data on it - DrakX will\n"
 "format the floppy and will rewrite the whole disk."
 msgstr ""
-"A Mandrake Linux CD-nek van egy beépített helyreállítási üzemmódja. Ezen\n"
+"Az \"Indítólemez készítése\" opció bejelölésével rendszerindításra képes\n"
+"helyreállítólemezt készíthet.\n"
+"\n"
+"A Mandrake Linux CD rendelkezik beépített helyreállítási üzemmóddal. Ezen\n"
 "üzemmód a következõképpen érhetõ el: indítsa a rendszert a CD-rõl, majd\n"
 "nyomja le az \"F1\" billentyût, és gépelje be a megjelenõ parancssorban\n"
 "azt, hogy \"rescue\". Ha viszont a gép nem képes CD-rõl való\n"
-"rendszerindításra, akkor vissza kell térnie ezen lépéshez segítségért - ez\n"
-"legalább két esetben szükséges lehet:\n"
+"rendszerindításra, akkor legalább két olyan eset van, amelyben szükség van\n"
+"egy rendszerindítási floppy elkészítésére:\n"
 "\n"
 "  - A rendszerbetöltõ telepítésekor (hacsak Ön nem használ más\n"
 "rendszerindító programot) a telepítõ módosítja a fõ lemez\n"
@@ -2681,7 +2547,8 @@ msgstr ""
 "  - Ha probléma merül fel, és Ön nem tudja elindítani a Linux rendszert\n"
 "a merevlemezrõl, akkor ezen floppy fogja jelenteni az egyetlen lehetõséget\n"
 "arra, hogy elindítsa a rendszert. A floppy programokat tartalmaz a rendszer\n"
-"helyreállításához (arra az esetre, ha például áramkimaradás történt).\n"
+"helyreállításához (arra az esetre, ha például áramkimaradás történt, vagy\n"
+"a felhasználó elfelejtette a rendszergazdai jelszót).\n"
 "\n"
 "Ha kéri ennek a lépésnek a végrehajtását, akkor a telepítõ megkéri Önt\n"
 "arra, hogy tegyen be egy floppyt a meghajtóba. Ügyeljen arra, hogy a\n"
@@ -2709,6 +2576,8 @@ msgid ""
 "without 3D acceleration, you are then proposed to choose the server that\n"
 "best suits your needs."
 msgstr ""
+"Ha több grafikus modul is elérhetõ az Ön kártyájához - 3D gyorsítással\n"
+"illetve a nélkül -, akkor kiválaszthatja az Önnek leginkább megfelelõt."
 
 #: ../../help.pm:1
 #, c-format
@@ -2717,9 +2586,16 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
+"Felbontás\n"
+"\n"
+"Itt kiválaszthatja a kívánt felbontást és színmélységet az elérhetõ\n"
+"értékek listájából. Válassza ki az igényeinek legjobban megfelelõ\n"
+"értékeket. A beállítások tetszõlegesen módosíthatók a telepítés után is.\n"
+"A képernyõn egy mintakép fog megjelenni a kiválasztott beállítások\n"
+"szemléltetésére."
 
 #: ../../help.pm:1
 #, c-format
@@ -2730,6 +2606,11 @@ msgid ""
 "monitor connected to your machine. If it is not the case, you can choose in\n"
 "this list the monitor you actually own."
 msgstr ""
+"Monitor\n"
+"\n"
+"A telepítõ általában automatikusan megállapítja a monitor típusát, és\n"
+"beállítja azt. Ha nem így történik, kiválaszthatja ebbõl a listából a\n"
+"monitor típusát."
 
 #: ../../help.pm:1
 #, c-format
@@ -2763,7 +2644,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -2786,6 +2667,62 @@ msgid ""
 "\"No\" if your machine is to act as a server, or if you were not successful\n"
 "in getting the display configured."
 msgstr ""
+"Az X (teljes néven: X Window System) a Linux grafikus felületét nyújtó\n"
+"rendszer. A Mandrake Linuxban levõ grafikus környezetek (KDE, GNOME,\n"
+"AfterStep, WindowMaker, ...) ezen grafikus rendszert használják.\n"
+"\n"
+"Egy listát fog látni az elérhetõ paraméterekrõl, amelyekkel optimalizálható\n"
+"a grafikus megjelenítés.\n"
+"\n"
+"\n"
+"\n"
+"Grafikus kártya\n"
+"\n"
+"A telepítõ általában felismeri és beállítja a gépben levõ grafikus kártyát.\n"
+"Ha nem így történik, kiválaszthatja a grafikus kártyák listájából a\n"
+"megfelelõt.\n"
+"\n"
+"Ha több grafikus modul is elérhetõ az Ön kártyájához - 3D gyorsítással\n"
+"illetve a nélkül -, akkor kiválaszthatja az Önnek leginkább megfelelõt.\n"
+"\n"
+"\n"
+"\n"
+"Monitor\n"
+"\n"
+"A telepítõ általában automatikusan megállapítja a monitor típusát, és\n"
+"beállítja azt. Ha nem így történik, kiválaszthatja ebbõl a listából a\n"
+"monitor típusát.\n"
+"\n"
+"\n"
+"\n"
+"Felbontás\n"
+"\n"
+"Itt kiválaszthatja a kívánt felbontást és színmélységet az elérhetõ\n"
+"értékek listájából. Válassza ki az igényeinek legjobban megfelelõ\n"
+"értékeket. A beállítások tetszõlegesen módosíthatók a telepítés után is.\n"
+"A képernyõn egy mintakép fog megjelenni a kiválasztott beállítások\n"
+"szemléltetésére.\n"
+"\n"
+"\n"
+"\n"
+"Teszt\n"
+"\n"
+"A rendszer megnyit egy grafikus képernyõt a kívánt felbontással, ha ez\n"
+"lehetséges. Ha látható a tesztelés közben megjelenõ üzenet, akkor nyomja\n"
+"le az \"Igen\" gombot; a telepítõ ekkor a következõ lépésre ugrik. Ha\n"
+"viszont az üzenet nem látható, az azt jelenti, hogy a beállítás nem\n"
+"megfelelõ. A beállítás tesztelése 12 másodperc elteltével automatikusan\n"
+"véget ér, és ismét a menü jelenik meg a képernyõn. Módosítsa a\n"
+"beállításokat, amíg el nem ér egy megfelelõ beállítást.\n"
+"\n"
+"\n"
+"\n"
+"Beállítások\n"
+"\n"
+"Itt beállítható, hogy rendszerindításkor grafikus üzemmódba váltson-e a\n"
+"rendszer. Ha a gép kiszolgálóként fog üzemelni, vagy nem sikerült\n"
+"megfelelõen beállítani a grafikus üzemmódot, akkor javasolt a \"Nem\"\n"
+"lehetõséget választani."
 
 #: ../../help.pm:1
 #, c-format
@@ -2800,9 +2737,17 @@ msgid ""
 "without 3D acceleration, you are then proposed to choose the server that\n"
 "best suits your needs."
 msgstr ""
+"Grafikus kártya\n"
+"\n"
+"A telepítõ általában felismeri és beállítja a gépben levõ grafikus kártyát.\n"
+"Ha nem így történik, kiválaszthatja a grafikus kártyák listájából a\n"
+"megfelelõt.\n"
+"\n"
+"Ha több grafikus modul is elérhetõ az Ön kártyájához - 3D gyorsítással\n"
+"illetve a nélkül -, akkor kiválaszthatja az Önnek leginkább megfelelõt."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it to\n"
 "local time according to the time zone you selected. If the clock on your\n"
@@ -2818,20 +2763,22 @@ msgid ""
 "server that can used by other machines on your local network."
 msgstr ""
 "A Linux az idõt a GMT (Greenwich Mean Time) alapján kezeli - a\n"
-"kiválasztott idõzónának megfelelõ helyi idõre konvertálja azt. Az\n"
-"idõzónához való igazítás kikapcsolható \"A gép órája GMT-idõt mutat\"\n"
-"opció kikapcsolásával - ekkor a rendszeróra szerinti idõ azonos lesz a\n"
-"gép órája szerintivel. Ez akkor hasznos, ha van a gépen más operációs\n"
-"rendszer is (például Windows).\n"
+"kiválasztott idõzónának megfelelõ helyi idõre konvertálja azt. Ha a gép\n"
+"alaplapjának órája helyi idõre van állítva, akkor kapcsolja ki az\n"
+"idõzónához való igazítást \"A gép órája GMT-idõt mutat\" opció\n"
+"kikapcsolásával - ekkor a rendszeróra szerinti idõ azonos lesz a gép órája\n"
+"szerintivel (azaz a két óra ugyanazon idõzóna szerint mutatja az idõt). Ez\n"
+"akkor hasznos, ha van a gépen más operációs rendszer is (például Windows).\n"
 "\n"
 "Az \"Automatikus idõszinkronizáció\" opció automatikusan beállítja az órát\n"
-"egy internetes géphez kapcsolódva. Az erre alkalmas gépek megjelenõ\n"
-"listájából válasszon ki egy Önhöz közel levõt. Természetesen ehhez szükség\n"
-"van mûködõ internetkapcsolatra. Ez a funkció feltelepít az Ön gépére\n"
-"egy idõkiszolgálót, amelyet a helyi hálózat többi gépe is használhat."
+"egy internetes idõkiszolgálóhoz kapcsolódva. Ehhez szükség van egy "
+"beállított\n"
+"internetkapcsolatra. Az idõkiszolgálók közül lehetõleg egy Önhöz közel\n"
+"levõt válasszon. Ez a funkció feltelepít az Ön gépére egy idõkiszolgálót,\n"
+"amelyet a helyi hálózat többi gépe is használhat."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This step is used to choose which services you wish to start at boot time.\n"
 "\n"
@@ -2849,14 +2796,15 @@ msgid ""
 "enabled on a server. In general, select only the services you really need.\n"
 "!!"
 msgstr ""
-"Most lehet kijelölni az automatikusan elindítandó szolgáltatásokat.\n"
+"Ebben a lépésben lehet kijelölni az automatikusan elindítandó\n"
+"szolgáltatásokat.\n"
 "\n"
-"Itt látható a jelenleg telepített összes szolgáltatás listája.\n"
+"A telepítõ megjeleníti a jelenleg telepített összes szolgáltatás listáját.\n"
 "Vizsgálja meg a listát alaposan, és törölje a kijelölést azok mellõl,\n"
 "amelyek automatikus elindítására nincs szükség.\n"
 "\n"
-"Egy szolgáltatás kiválasztásakor mindig megjelenik a hozzá tartozó rövid\n"
-"leírás. Ha nem tudja biztosan, hogy a szolgáltatásra szükség van-e vagy\n"
+"Egy szolgáltatás kiválasztásakor megjelenik a hozzá tartozó rövid leírás.\n"
+"Ha nem tudja biztosan, hogy a szolgáltatásra szükség van-e vagy\n"
 "sem, akkor ne változtassa meg az alapértelmezett indítási módot.\n"
 "\n"
 "Gondosan járjon el, ha a gépet kiszolgálónak fogja használni,\n"
@@ -2872,9 +2820,13 @@ msgid ""
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation."
 msgstr ""
+"\"Nyomtató\": a \"Nincs nyomtató\" gombra kattintva elindul a\n"
+"nyomtatóbeállítási varázsló. Nyomtatóbeállítással kapcsolatos további\n"
+"információkat a felhasználói kézikönyvbõl lehet szerezni. Az ott\n"
+"bemutatott felület hasonló ahhoz, ami a telepítéskor megjelenik."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You will now set up your Internet/network connection. If you wish to\n"
 "connect your computer to the Internet or to a local network, click \"Next\n"
@@ -2897,31 +2849,29 @@ msgid ""
 msgstr ""
 "Itt beállíthatja az internetkapcsolatot illetve a hálózati kapcsolatot.\n"
 "Ha szeretné a gépét az internetre vagy egy helyi hálózatra csatlakoztatni,\n"
-"akkor kattintson az \"OK\" gombra. A telepítõ felderíti a hálózati\n"
-"eszközöket és a modemeket. Ha a felderítés nem jár sikerrel, akkor a\n"
-"következõ alkalommal kapcsolja ki az \"Automatikus detektálás\" opciót. Ha\n"
-"nem kívánja beállítani a hálózatot, vagy késõbb kívánja azt beállítani,\n"
-"akkor kattintson a \"Mégsem\" gombra.\n"
+"akkor kattintson a \"Következõ ->\" gombra. A telepítõ felderíti a hálózati\n"
+"eszközöket és a modemeket. Ha a felderítés nem jár sikerrel, akkor\n"
+"kapcsolja ki az \"Automatikus detektálás\" opciót. Ha nem kívánja\n"
+"beállítani a hálózatot, vagy késõbb kívánja azt beállítani, akkor\n"
+"kattintson a \"Mégsem\" gombra a következõ lépésre való ugráshoz.\n"
 "\n"
-"A lehetséges kapcsolatok: hagyományos modem, ISDN-modem, ADSL-kapcsolat,\n"
-"kábelmodem, egyszerû helyi hálózati (LAN) kapcsolat (Ethernet).\n"
+"A hálózat beállításakor az elérhetõ kapcsolattípusok a következõk:\n"
+"hagyományos modem, ISDN-modem, ADSL-kapcsolat, kábelmodem, egyszerû helyi\n"
+"hálózati (LAN) kapcsolat (Ethernet).\n"
 "\n"
-"A lehetséges beállítások itt nem kerülnek részletezésre. A szükséges\n"
-"paramétereket az internet-szolgáltatótól illetve a\n"
+"A beállítási lehetõségek itt nem kerülnek részletezésre. Szükség lesz\n"
+"bizonyos paraméterekre, mint például: IP-cím, alapértelmezett átjáró\n"
+"(gateway), DNS-kiszolgálók. Ezeket az internet-szolgáltatótól illetve a\n"
 "rendszeradminisztrátortól tudhatja meg.\n"
 "\n"
 "A beállításokkal kapcsolatban a felhasználói kézikönyv\n"
 "internetkapcsolatokkal foglalkozó fejezetébõl szerezhet további\n"
 "információkat. A kapcsolat beállítását nem szükséges a telepítés közben\n"
 "elvégezni; a kézikönyv leírja, hogyan lehet azt megtenni egy feltelepített\n"
-"rendszeren.\n"
-"\n"
-"Ha a hálózat beállítását a telepítés után kívánja elvégezni, illetve ha\n"
-"befejezte a hálózati kapcsolat beállítását, akkor kattintson a \"Mégsem\"\n"
-"gombra."
+"rendszeren."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you told the installer that you wanted to individually select packages,\n"
 "it will present a tree containing all packages classified by groups and\n"
@@ -2957,18 +2907,13 @@ msgid ""
 "end of another installation. See the second tip of last step on how to\n"
 "create such a floppy."
 msgstr ""
-"Végül, attól függõen, hogy kívánt-e egyedi csomagkiválasztást használni,\n"
-"megjelenik egy fa, amely az összes telepíthetõ programcsomagot tartalmazza\n"
-"csoportokba és alcsoportokba kategorizálva. A fa böngészése közben\n"
-"nem csak csomagokat jelölhet ki, hanem egész csoportokat illetve\n"
-"alcsoportokat is.\n"
+"Ha egyedi csomagkiválasztást választott, megjelenik egy fa, amely az\n"
+"összes telepíthetõ programcsomagot tartalmazza csoportokba és\n"
+"alcsoportokba kategorizálva. A fa böngészése közben nem csak csomagokat\n"
+"jelölhet ki, hanem egész csoportokat illetve alcsoportokat is.\n"
 "\n"
 "Amikor kiválaszt egy csomagot a fában, a jobb oldalon megjelenik egy leírás\n"
-"az adott csomagról. Ha végzett a kijelölésekkel, kattintson a \"Telepítés\"\n"
-"gombra; ennek hatására megkezdõdik a programok telepítése. A gép\n"
-"sebességétõl illetve a telepítendõ csomagok számától függõen a folyamat\n"
-"jelentõs idõt vehet igénybe. A telepítõ megjelenít egy becslést arra\n"
-"vonatkozóan, hogy mennyi idõ van hátra a telepítés befejeztéig.\n"
+"az adott csomagról.\n"
 "\n"
 "Ha kiszolgálócsomagok is ki lettek választva - akár közvetlenül, akár\n"
 "bizonyos csoportok tagjaként -, a telepítõ megerõsítést kér Öntõl arra\n"
@@ -2981,21 +2926,27 @@ msgstr ""
 "szolgáltatásnak mi a feladata illetve miért kerül telepítésre, akkor\n"
 "kattintson a \"Nem\" gombra. Ha az \"Igen\" gombra kattint, akkor a\n"
 "felsorolt szolgáltatások telepítésre kerülnek, és alapértelmezés szerint\n"
-"automatikusan elindításra kerülnek majd.\n"
+"automatikusan elindításra kerülnek majd rendszerindításkor.\n"
 "\n"
-"\"Az automatikusan kijelölt csomagok mutatása\" opció bejelölésének\n"
-"hatására a telepítõ jelezni fogja, ha automatikusan jelöl ki csomagokat\n"
-"telepítésre. Ilyesmi azért fordul elõ, mert bizonyos függõségek miatt\n"
-"szükség lehet további csomagok telepítésére is.\n"
+"Az \"Automatikus függõségek\" opcióval kikapcsolható az a figyelmeztetés,\n"
+"amely akkor jelenik meg, amikor a telepítõ - függõségi okokból -\n"
+"automatikusan kijelöl meghatározott csomagokat. Bizonyos csomagok közt\n"
+"függõségi kapcsolat van, ami azt jelenti, hogy egy bizonyos csomagnak a\n"
+"telepítése csak akkor történhet meg, ha egy meghatározott másik csomag\n"
+"már telepítve van. A telepítõ képes meghatározni, hogy egy bizonyos\n"
+"függõség esetén mely csomagokra van szükség a telepítés sikeres\n"
+"végrehajtásához.\n"
 "\n"
 "A lista alatt levõ, floppylemezt ábrázoló ikon lehetõvé teszi egy korábbi\n"
-"telepítés során elmentett csomaglista betöltését. Ezen ikonra kattintva a\n"
-"telepítõ megkéri Önt, hogy tegyen be egy floppyt, amely egy korábbi\n"
-"telepítés végén készült. Ha szeretné megtudni, hogyan lehet ilyen floppyt\n"
-"készíteni, tekintse meg a telepítés elõzõ lépésében szereplõ második tippet."
+"telepítés során elmentett csomaglista betöltését. Ez akkor hasznos, ha\n"
+"több gépre szeretné ugyanazon csomagokat telepíteni. Az említett ikonra\n"
+"kattintva a telepítõ megkéri Önt, hogy tegyen be egy floppyt, amely egy\n"
+"korábbi telepítés végén készült. Ha szeretné megtudni, hogyan lehet ilyen\n"
+"floppyt készíteni, tekintse meg a telepítés utolsó lépésében szereplõ\n"
+"második tippet."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "It is now time to specify which programs you wish to install on your\n"
 "system. There are thousands of packages available for Mandrake Linux, and\n"
@@ -3049,30 +3000,29 @@ msgid ""
 "updating an existing system."
 msgstr ""
 "Most meg kell adnia, mely programokat kívánja telepíteni a rendszerére.\n"
-"Több ezer program létezik Mandrake Linuxhoz; természetesen Önnek nem\n"
-"szükséges mindet ismernie.\n"
-"\n"
-"Ha szabványos telepítést végez CD-rõl, akkor elõször meg kell adnia, mely\n"
-"CD-kkel rendelkezik (csak a szakértõi módra igaz). Nézze át a CD-k címeit,\n"
-"és jelölje be az elérhetõ CD-ket a listában. Ha készen áll a folytatásra,\n"
-"kattintson az \"OK\" gombra.\n"
+"Több ezer program létezik Mandrake Linuxhoz; a kezelésük megkönnyítése\n"
+"érdekében a programok (hasonlóság alapján) csoportokba lettek sorolva.\n"
 "\n"
 "A csomagok a gép lehetséges felhasználási területei szerint csoportokba\n"
-"vannak rendezve. Maguk a csoportok négy szakaszba vannak sorolva:\n"
+"vannak rendezve. A Mandrake Linux rendszerben négy elõredefiniált\n"
+"telepítési osztály van meghatározva. Ezeket a telepítési osztályokat\n"
+"felfoghatja úgy is, mint csomagok gyûjteményét. A különbözõ gyûjteményekben\n"
+"levõ csomagok keverhetõk is, tehát egy \"Munkaállomás\" típusú telepítés\n"
+"tartalmazhat olyan alkalmazásokat is, amelyek csak a \"Fejlesztés\"\n"
+"osztályban vannak benne.\n"
 "\n"
 "  - \"Munkaállomás\": ha munkaállomásként tervezi használni a gépet, akkor\n"
-"válasszon az ennek megfelelõ csoportok közül.\n"
+"válogasson a \"Munkaállomás\" gyûjteményben szereplõ alkalmazások közül.\n"
 "\n"
 "  - \"Fejlesztés\": ha a gép programozásra is lesz használva, akkor\n"
-"válassza ki a kívánt csoportokat.\n"
+"válassza ki a kívánt csomagokat a gyûjteménybõl.\n"
 "\n"
-"  - \"Kiszolgáló\": ha a gép kiszolgálóként lesz használva, itt lehetõség\n"
-"van annak kiválasztására, hogy a gyakrabban használt szolgáltatások közül\n"
-"melyeket kívánja telepíteni a gépre.\n"
+"  - \"Kiszolgáló\": ha a gép kiszolgálóként lesz használva, válassza ki,\n"
+"hogy a gyakrabban használt szolgáltatások közül melyeket kívánja\n"
+"telepíteni a gépre.\n"
 "\n"
 "  - \"Grafikus környezet\": itt választható ki a kívánt grafikus környezet.\n"
-"Ha grafikus munkaállomást szeretne, akkor legalább egyet ki kell\n"
-"választani.\n"
+"Ha szeretne grafikus felületet, akkor legalább egyet ki kell választani.\n"
 "\n"
 "Ha az egérkurzort egy csoport neve fölé viszi, akkor megjelenik egy rövid\n"
 "magyarázat az adott csoportról. Ha telepítéskor az összes csoport\n"
@@ -3086,9 +3036,9 @@ msgstr ""
 "  - \"Alapvetõ dokumentációval\": az alaprendszer az alapvetõ programokkal\n"
 "és azok dokumentációjával. Megfelel például kiszolgáló telepítéséhez.\n"
 "\n"
-"  - \"Valóban minimális telepítés\": a lehetõ legkisebb telepítés;\n"
-"parancssorból használható Linux rendszer. Körülbelül 65 megabájt méretû\n"
-"telepítés.\n"
+"  - \"Valóban minimális telepítés\": a lehetõ legkevesebb csomag\n"
+"telepítése; csak parancssoros felülettel rendelkezõ Linux rendszer.\n"
+"65 megabájt méretû telepítés.\n"
 "\n"
 "Bejelölheti a \"Csomagok egyedi kiválasztása\" opciót; ez akkor hasznos,\n"
 "ha Ön ismeri a felkínált csomagokat, illetve ha teljes mértékben\n"
@@ -3100,7 +3050,7 @@ msgstr ""
 "kíván helyreállítani vagy frissíteni."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The Mandrake Linux installation is distributed on several CD-ROMs. DrakX\n"
 "knows if a selected package is located on another CD-ROM so it will eject\n"
@@ -3109,10 +3059,10 @@ msgstr ""
 "A Mandrake Linux telepítõanyag több CD-n helyezkedik el. Ha egy "
 "kiválasztott\n"
 "csomag egy másik CD-n található, akkor a DrakX (a telepítõ) kiadja az\n"
-"aktuális CD-t, és megkéri Önt, hogy helyezzen be egy másikat."
+"aktuális CD-t, és megkéri Önt, hogy helyezze be a megfelelõt."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Here are Listed the existing Linux partitions detected on your hard drive.\n"
 "You can keep the choices made by the wizard, since they are good for most\n"
@@ -3144,7 +3094,7 @@ msgid ""
 "With SCSI hard drives, an \"a\" means \"lowest SCSI ID\", a \"b\" means\n"
 "\"second lowest SCSI ID\", etc."
 msgstr ""
-"Fent láthatók a lemezen talált, már létezõ linuxos partíciók.\n"
+"Itt láthatók a lemezen talált, már létezõ linuxos partíciók.\n"
 "A varázsló javaslatai általában elfogadhatók, általános célú telepítésnél\n"
 "általában megfelelnek. Ha megváltoztatja a beállításokat, mindenképpen\n"
 "jelölje ki a gyökérpartíciót (\"/\"). Ne válassza túl kicsire, mert akkor\n"
@@ -3177,7 +3127,7 @@ msgstr ""
 "SCSI-azonosító\", ..."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "GNU/Linux is a multi-user system, meaning each user can have their own\n"
 "preferences, their own files and so on. You can read the ``Starter Guide''\n"
@@ -3222,29 +3172,34 @@ msgstr ""
 "Ezzel kapcsolatosan további információkat a felhasználói kézikönyvbõl\n"
 "lehet megtudni. A \"root\" nevû felhasználótól (ez az azonosító a\n"
 "rendszergazdát jelöli) eltérõen az itt felvett felhasználóknak csak a\n"
-"saját fájljaikat és a saját beállításaikat lesz joguk módosítani.\n"
+"saját fájljaikat és a saját beállításaikat lesz joguk módosítani - az\n"
+"esetleges véletlen vagy rosszindulatú rendszermódosítások elkerülése\n"
+"érdekében.\n"
 "Javasolt legalább egy \"normál\" felhasználót felvenni az Ön saját\n"
 "használatára. Ezen normál felhasználói azonosítóval érdemes elvégezni\n"
 "az olyan tevékenységeket, amelyek nem igényelnek rendszergazdai\n"
 "jogosultságot. Bár nagyon praktikus minden alkalommal rendszergazdaként\n"
-"jelentkezni be, ez nagyon veszélyes is. Rendszergazdaként használva a\n"
-"legapróbb hiba hatására is meghibásodhat a rendszer. Ha normál\n"
-"felhasználóként követ el hibát, akkor esetleg elveszít bizonyos\n"
-"adatokat, de a rendszert nem teheti tönkre.\n"
+"jelentkezni be, ez nagyon veszélyes is. Egy rendszergazdaként elkövetett\n"
+"hiba hatására meghibásodhat a rendszer. Ha normál felhasználóként követ\n"
+"el hibát, akkor esetleg elveszít bizonyos adatokat, de a rendszert nem\n"
+"teheti tönkre.\n"
 "\n"
-"Elõször is meg kell adnia a valódi nevét. Ez természetesen nem kötelezõ;\n"
+"Az elsõ mezõben a valódi nevét adhatja meg. Ez természetesen nem kötelezõ;\n"
 "bármit be lehet írni névként. A telepítõ a megadott név elsõ szavát\n"
 "ajánlja fel a \"Felhasználónév\" mezõben. Ez utóbbi az a név, amellyel\n"
-"az adott felhasználó be tud majd jelentkezni a rendszerbe. A felkínált név\n"
-"módosítható. A felhasználónév megadása után meg kell adni az ahhoz tartozó\n"
+"az adott felhasználó be tud majd jelentkezni a rendszerbe. A felkínált\n"
+"felhasználónév módosítható.\n"
+"A felhasználónév megadása után meg kell adni az ahhoz tartozó\n"
 "kívánt jelszót. Egy normál felhasználó jelszava biztonsági szempontból nem\n"
 "annyira kritikus, mint a rendszergazdáé; ez viszont nem ok arra, hogy\n"
-"felületesen legyen kezelve - végül is az Ön fájljairól van szó.\n"
+"felületesen legyen kezelve (üres vagy túl egyszerû jelszó megadásával) -\n"
+"végül is az Ön fájljai is veszélybe kerülhetnek.\n"
 "\n"
-"A \"Név elfogadása\" gombbal vehetõ fel újabb felhasználó. Bármennyi\n"
+"A \"Név elfogadása\" gomb lenyomása után felvehetõk újabb felhasználók is.\n"
+"Bármennyi\n"
 "felhasználó létrehozható. Vegyen fel egy-egy felhasználónevet mindazok\n"
 "számára, akik a gépet használni fogják. Amikor végzett a felhasználónevek\n"
-"létrehozásával, kattintson a \"Kész\" gombra.\n"
+"létrehozásával, kattintson a \"Következõ ->\" gombra.\n"
 "\n"
 "Ha a \"Speciális\" gombra kattint, módosíthatja az adott felhasználó\n"
 "alapértelmezett parancsértelmezõjét (alapértelmezés szerint ez a \"bash\").\n"
@@ -3253,22 +3208,23 @@ msgstr ""
 "bejelentkezést írjon elõ. Ehhez meg kell adni a gépindításkor automatikusan\n"
 "bejelentkeztetendõ felhasználó azonosítóját. Ha használni kívánja ezt a\n"
 "(biztonsági kockázatot jelentõ) funkciót, akkor válassza ki a kívánt\n"
-"felhasználói azonosítót és ablakkezelõt, majd kattintson az \"Igen\"\n"
-"gombra. Ellenkezõ esetben kattintson a \"Nem\" gombra."
+"felhasználói azonosítót és ablakkezelõt, majd kattintson a \"Következõ ->\"\n"
+"gombra. Ellenkezõ esetben távolítsa el a kijelölést a \"Szeretné használni\n"
+"ezt a lehetõséget?\" opció mellõl."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Before continuing, you should carefully read the terms of the license. It\n"
 "covers the entire Mandrake Linux distribution. If you do agree with all the\n"
 "terms in it, check the \"Accept\" box. If not, simply turn off your\n"
 "computer."
 msgstr ""
-"Mielõtt továbblépne, olvassa át alaposan a licencegyezményt, mely az\n"
-"egész Mandrake Linux disztribúcióra érvényes, és ha nem fogadja el\n"
-"valamelyik feltételt, kattintson a \"Nem fogadom el\" gombra. Ekkor a\n"
-"telepítés azonnal félbeszakad. A telepítés folytatásához kattintson\n"
-"az \"Elfogadom\" gombra."
+"Mielõtt továbblépne, olvassa át alaposan a licencegyezményt, amely az\n"
+"egész Mandrake Linux disztribúcióra érvényes. Ha elfogadja az abban "
+"szereplõ\n"
+"feltételeket, akkor jelölje be az \"Elfogadom\" opciót. Ha nem fogadja el\n"
+"valamelyik feltételt, kapcsolja ki a számítógépet."
 
 #: ../../install2.pm:1
 #, c-format
@@ -3340,18 +3296,20 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Nem"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Igen"
 
 #: ../../install_any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
 "\n"
@@ -3366,9 +3324,9 @@ msgstr ""
 "A következõ kiszolgálóprogramo(ka)t választotta ki: %s\n"
 "\n"
 "\n"
-"Alapértelmezés szerint ezek lesznek aktiválva. Nem tartozik hozzájuk ismert\n"
-"biztonsági javítás, de újak megjelenhetnek. Ha ez bekövetkezik, akkor minél\n"
-"hamarabb el kell végezni a frissítést.\n"
+"Ezek alapértelmezésben aktiválva lesznek. Nem tartozik hozzájuk ismert\n"
+"biztonsági probléma, de késõbb ismertté válhatnak újak. Ha ez bekövetkezik,\n"
+"akkor frissítést kell végezni minél hamarabb.\n"
 "\n"
 "\n"
 "Biztosan telepíteni szeretné a kiszolgálóprogramo(ka)t?\n"
@@ -3453,6 +3411,16 @@ msgstr "A Windows(TM) eltávolítása"
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr "Nincs átméretezhetõ FAT partíció, vagy nincs elég hely"
 
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
+"Az adatok épségének biztosítása érdekében a legközelebbi Windows-"
+"indításnál \n"
+"fájlrendszer-ellenõrzés lesz végezve"
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "FAT resizing failed: %s"
@@ -3510,9 +3478,9 @@ msgstr ""
 "Mandrake Linux telepítését."
 
 #: ../../install_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Computing the size of the Windows partition"
-msgstr "A Windows partíción található szabad hely felhasználása"
+msgstr "A windowsos partíció méretének meghatározása"
 
 # msgstr "A Windows fájlrendszer bounds kiszámítása"
 #: ../../install_interactive.pm:1
@@ -3653,9 +3621,9 @@ msgstr ""
 "felhasználói kézikönyvében talál további információkat."
 
 #: ../../install_messages.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "http://www.mandrakelinux.com/en/91errata.php3"
-msgstr "http://www.mandrakelinux.com/en/90errata.php3"
+msgstr "http://www.mandrakelinux.com/en/91errata.php3"
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -3982,6 +3950,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "A következõ lépés: \"%s\"\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Help"
+msgstr "Segítség"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "not configured"
+msgstr "nincs beállítva"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Beállítás"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -4034,9 +4022,9 @@ msgid "%d packages"
 msgstr "%d csomag"
 
 #: ../../install_steps_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "No details"
-msgstr "Részletek"
+msgstr "Részletek nélkül"
 
 #: ../../install_steps_gtk.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1
@@ -4197,14 +4185,6 @@ msgstr "Következõ ->"
 msgid "Individual package selection"
 msgstr "Csomagok egyedi kiválasztása"
 
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "Segítség"
-
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Package Group Selection"
@@ -4328,17 +4308,17 @@ msgid "Do you want to use aboot?"
 msgstr "Szeretné az aboot-ot használni?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown\n"
 " machine, the yaboot bootloader will not work for you.\n"
 "The install will continue, but you'll\n"
 " need to use BootX or some other means to boot your machine"
 msgstr ""
-"A gép típusa feltehetõen OldWorld vagy Ismeretlen,\n"
+"A gép típusa feltehetõen OldWorld vagy ismeretlen,\n"
 "ezért a Yaboot rendszerindító program nem fog mûködni.\n"
-"A telepítés folytatható, de az indításhoz\n"
-"a BootX-et kell majd használni."
+"A telepítés folytatható, de a gép indításához\n"
+"BootX-re vagy egyéb módszerre lesz szükség."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4366,7 +4346,7 @@ msgid "Authentication Windows Domain"
 msgstr "Hitelesítési Windows-tartomány"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "For this to work for a W2K PDC, you will probably need to have the admin "
 "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
@@ -4391,7 +4371,7 @@ msgstr ""
 "lépést követõen fogja megkísérelni a tartományhoz való csatlakozást.\n"
 "Ha a beállítás nem sikerül, és a tartományhitelesítés nem mûködik, akkor a "
 "rendszer indítását követõen futtassa az 'smbpasswd -j TARTOMÁNY -U "
-"FELHASZNÁLÓ%JELSZÓ' parancsot a windowsos tartomány és a megfelelõ "
+"FELHASZNÁLÓ%%JELSZÓ' parancsot a windowsos tartomány és a megfelelõ "
 "adminisztrátori név illetve jelszó használatával.\n"
 "A 'wbinfo -t' parancs használatával letesztelhetõ, hogy a hozzáférés "
 "(illetve a létrehozott gépazonosító) mûködik-e."
@@ -4452,12 +4432,13 @@ msgstr "Felhasználóazonosítás"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Ez a jelszó túl rövid (legalább %d karakter hosszúnak kell lennie)"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "Nincs jelszó"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "Rendszergazdai (root) jelszó beállítása"
@@ -4465,7 +4446,7 @@ msgstr "Rendszergazdai (root) jelszó beállítása"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
-msgstr ""
+msgstr "Az X grafikus rendszert nem állította be. Biztosan megfelel így?"
 
 #: ../../install_steps_interactive.pm:1 ../../services.pm:1
 #, c-format
@@ -4489,24 +4470,24 @@ msgid "Bootloader"
 msgstr "Rendszerbetöltõ"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Boot"
-msgstr "Gyökér"
+msgstr "Rendszerindítás"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "disabled"
-msgstr "Letiltás"
+msgstr "kikapcsolva"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "activated"
-msgstr "aktiválás most"
+msgstr "aktiválva"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Firewall"
-msgstr "Tûzfal/útválasztó (router)"
+msgstr "Tûzfal"
 
 #: ../../install_steps_interactive.pm:1 ../../steps.pm:1
 #, c-format
@@ -4514,14 +4495,9 @@ msgid "Security"
 msgstr "Biztonság"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "Security Level"
-msgstr "Biztonsági szint:"
-
-#: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "not configured"
-msgstr "nincs beállítva"
+msgid "Security Level"
+msgstr "Biztonsági szint"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -4529,9 +4505,9 @@ msgid "Network"
 msgstr "Hálózat"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network & Internet"
-msgstr "Hálózati csatolófelület"
+msgstr "Hálózat és internet"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4539,9 +4515,9 @@ msgid "Graphical interface"
 msgstr "Grafikus felület"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Hardware"
-msgstr "HardDrake"
+msgstr "Hardver"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4629,6 +4605,16 @@ msgid "Which is your timezone?"
 msgstr "Melyik idõzónát választja?"
 
 #: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "Szeretné beállítani a nyomtatókezelést?"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Unable to contact mirror %s"
+msgstr "Nem sikerült létrehozni új példányt: %s"
+
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr ""
@@ -4649,7 +4635,7 @@ msgstr ""
 "tükörkiszolgálók listájának lekérdezése..."
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
 "have been updated after the distribution was released. They may\n"
@@ -4665,7 +4651,7 @@ msgstr ""
 "\n"
 "A funkció használatához szükség van egy beállított internetkapcsolatra.\n"
 "\n"
-"Szeretné feltelepíteni a frissítéseket ?"
+"Szeretné feltelepíteni a frissítéseket?"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4713,6 +4699,11 @@ msgstr ""
 "a Mégsem gombra.\n"
 "Ha a felsoroltak közül néhány CD hiányzik, törölje a kijelölésüket, majd\n"
 "kattintson az OK gombra."
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "Mind"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4793,6 +4784,11 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "A rendelkezésre álló csomagok keresése..."
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "A frissítendõ csomagok keresése..."
 
@@ -4800,11 +4796,6 @@ msgstr "A frissítendõ csomagok keresése..."
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "A már telepített csomagok vizsgálata..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "A rendelkezésre álló csomagok keresése..."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4920,21 +4911,16 @@ msgstr "Adja meg az egér típusát."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Upgrade"
-msgstr "Frissítés"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
 msgid "Upgrade %s"
-msgstr "Frissítés"
+msgstr "Frissítés: %s"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "Új telepítés vagy frissítés?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Install/Upgrade"
 msgstr "Telepítés/frissítés"
 
@@ -4948,15 +4934,19 @@ msgstr "Itt található a billentyûzetek listája"
 msgid "Please choose your keyboard layout."
 msgstr "Válasszon billentyûzetkiosztást."
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Kilépés"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr "Licencegyezmény"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "default:LTR"
-msgstr "alapértelmezés"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5045,9 +5035,9 @@ msgid "Advanced"
 msgstr "Speciális"
 
 #: ../../interactive.pm:1 ../../interactive/gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove"
-msgstr "Lista eltávolítása"
+msgstr "Eltávolítás"
 
 #: ../../interactive.pm:1 ../../interactive/gtk.pm:1
 #, c-format
@@ -5172,14 +5162,14 @@ msgid "Thai keyboard"
 msgstr "thaiföldi billentyûzet"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Tamil (Typewriter-layout)"
-msgstr "örmény (írógép)"
+msgstr "tamil (írógép-kiosztás)"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Tamil (ISCII-layout)"
-msgstr "tamil (TSCII)"
+msgstr "tamil (ISCII kiosztás)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -5284,7 +5274,7 @@ msgstr "macedón"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Malayalam"
-msgstr ""
+msgstr "malayalam"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -5513,6 +5503,11 @@ msgstr "azerbajdzsáni (latin)"
 
 #: ../../keyboard.pm:1
 #, c-format
+msgid "Arabic"
+msgstr "arab"
+
+#: ../../keyboard.pm:1
+#, c-format
 msgid "Armenian (phonetic)"
 msgstr "örmény (fonetikus)"
 
@@ -5557,9 +5552,9 @@ msgid "South Africa"
 msgstr "Dél-Afrika"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Serbia"
-msgstr "Soros"
+msgstr "Szerbia"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5577,9 +5572,9 @@ msgid "Samoa"
 msgstr "Samoa"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Wallis and Futuna"
-msgstr "Wallis és Futuna-szigetek"
+msgstr "Wallis és Futuna"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5587,7 +5582,7 @@ msgid "Vanuatu"
 msgstr "Vanuatu"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Vietnam"
 msgstr "Vietnam"
 
@@ -5612,9 +5607,9 @@ msgid "Saint Vincent and the Grenadines"
 msgstr "Saint Vincent és Grenadines"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Vatican"
-msgstr "lett"
+msgstr "Vatikán"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5644,12 +5639,12 @@ msgstr "Ukrajna"
 #: ../../lang.pm:1
 #, c-format
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzánia"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Taiwan"
-msgstr "Thaiföld"
+msgstr "Tajvan"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5728,9 +5723,9 @@ msgid "Swaziland"
 msgstr "Szváziföld"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Syria"
-msgstr "Suriname"
+msgstr "Szíria"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5818,9 +5813,9 @@ msgid "Rwanda"
 msgstr "Ruanda"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Russia"
-msgstr "orosz"
+msgstr "Oroszország"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5853,9 +5848,9 @@ msgid "Portugal"
 msgstr "Portugália"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Palestine"
-msgstr "Útvonal választása"
+msgstr "Palesztina"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6063,9 +6058,9 @@ msgid "Morocco"
 msgstr "Marokkó"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Libya"
-msgstr "Libéria"
+msgstr "Líbia"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6115,7 +6110,7 @@ msgstr "Libanon"
 #: ../../lang.pm:1
 #, c-format
 msgid "Laos"
-msgstr ""
+msgstr "Laosz"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6133,14 +6128,14 @@ msgid "Kuwait"
 msgstr "Kuvait"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Korea"
-msgstr "Egyéb"
+msgstr "Korea"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Korea (North)"
-msgstr ""
+msgstr "Korea (Észak-)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6178,7 +6173,7 @@ msgid "Japan"
 msgstr "Japán"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Jordan"
 msgstr "Jordánia"
 
@@ -6193,9 +6188,9 @@ msgid "Iceland"
 msgstr "Izland"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Iran"
-msgstr "Irak"
+msgstr "Irán"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6248,9 +6243,9 @@ msgid "Honduras"
 msgstr "Honduras"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Heard and McDonald Islands"
-msgstr "Heard-sziget és McDonald-szigetek"
+msgstr "Heard- és McDonald-szigetek"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6278,9 +6273,9 @@ msgid "Guatemala"
 msgstr "Guatemala"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "Dél-Georgia és a Dél-Sandwich-sziget"
+msgstr "Dél-Georgia és a Dél-Sandwich-szigetek"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6485,7 +6480,7 @@ msgstr "Svájc"
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Brazzaville)"
-msgstr ""
+msgstr "Kongó (Brazzaville)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6495,7 +6490,7 @@ msgstr "Közép-Afrikai Köztársaság"
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Kinshasa)"
-msgstr ""
+msgstr "Kongó (Kinshasa)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6671,6 +6666,11 @@ msgstr "Andorra"
 #, c-format
 msgid "Afghanistan"
 msgstr "Afganisztán"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "default:LTR"
+msgstr "default:LTR"
 
 #: ../../loopback.pm:1
 #, c-format
@@ -7101,11 +7101,11 @@ msgstr ""
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 "Közvetlen elérésû (raw) eszközök blokkeszközökhöz való rendelése (például\n"
-"merevlemezes partíciókhoz), hogy az alkalmazásokból (például: Oracle)\n"
-"hozzáférhetõk legyenek."
+"merevlemezes partíciókhoz), hogy az alkalmazásokból (Oracle, DVD-lejátszók,\n"
+"...) hozzáférhetõk legyenek."
 
 #: ../../services.pm:1
 #, c-format
@@ -7387,8 +7387,8 @@ msgstr ""
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
 
 #: ../../standalone.pm:1
@@ -7428,9 +7428,9 @@ msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 msgstr ""
 
 #: ../../standalone.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "[keyboard]"
-msgstr "Billentyûzet"
+msgstr "[billentyûzet]"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7495,7 +7495,7 @@ msgid ""
 msgstr ""
 
 #: ../../standalone.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This program is free software; you can redistribute it and/or modify\n"
 "it under the terms of the GNU General Public License as published by\n"
@@ -7511,19 +7511,19 @@ msgid ""
 "along with this program; if not, write to the Free Software\n"
 "Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
 msgstr ""
-" Ez a program szabad szoftver; terjeszthetõ és/vagy módosítható\n"
-" a Free Software Foundation által publikált GNU General Public\n"
-" License 2. vagy annál újabb verziója alapján.\n"
+"Ez a program szabad szoftver; terjeszthetõ és/vagy módosítható\n"
+"a Free Software Foundation által publikált GNU General Public\n"
+"License 2. vagy annál újabb verziója alapján.\n"
 "\n"
-" A program annak reményében kerül terjesztésre, hogy hasznosnak\n"
-" bizonyul, de GARANCIA NÉLKÜL; még a PIACKÉPESSÉG illetve\n"
-" egy BIZONYOS CÉLRA VALÓ ALKALMASSÁG sincs garantálva. További\n"
-" részletek a GNU General Public License-ben.\n"
+"A program annak reményében kerül terjesztésre, hogy hasznosnak\n"
+"bizonyul, de GARANCIA NÉLKÜL; még a PIACKÉPESSÉG illetve\n"
+"egy BIZONYOS CÉLRA VALÓ ALKALMASSÁG sincs garantálva. További\n"
+"részletek a GNU General Public License-ben.\n"
 "\n"
-" A programmal együtt Önnek kapnia kellett egy példányt a GNU General\n"
-" Public License-bõl; ha nem így történt, írjon a következõ címre:\n"
-" Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,\n"
-" MA 02111-1307, USA."
+"A programmal együtt Önnek kapnia kellett egy példányt a GNU General\n"
+"Public License-bõl; ha nem így történt, írjon a következõ címre:\n"
+"Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,\n"
+"MA 02111-1307, USA.\n"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7534,8 +7534,8 @@ msgstr "Kilépés a telepítõbõl"
 #  ebbõl az utolsó 2 betû nem fért ki
 #: ../../steps.pm:1
 #, c-format
-msgid "Install system updates"
-msgstr "Rendszerfrissítés-telepítés"
+msgid "Install updates"
+msgstr "Frissítések telepítése"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7560,7 +7560,12 @@ msgstr "Hálózat beállítása"
 #: ../../steps.pm:1
 #, c-format
 msgid "Add a user"
-msgstr "Felhasználó hozzáadása"
+msgstr "Felhasználó felvétele"
+
+#: ../../steps.pm:1
+#, c-format
+msgid "Root password"
+msgstr "Rendszergazdai jelszó"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7609,13 +7614,21 @@ msgstr "Licenc"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
-msgstr "Válasszon nyelvet"
+msgid "Language"
+msgstr "Nyelv"
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
-msgstr ""
+msgstr "utopia 25"
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "OK"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -7796,7 +7809,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Beállítások"
@@ -7820,14 +7833,6 @@ msgstr "Monitor"
 #, c-format
 msgid "Graphic Card"
 msgstr "Grafikus kártya"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Kilépés"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -8166,9 +8171,9 @@ msgid "Empty"
 msgstr "Üres"
 
 #: ../../diskdrake/hd_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Windows"
-msgstr "Windowsos tartomány"
+msgstr "Windows"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -8206,14 +8211,13 @@ msgid "Please click on a partition"
 msgstr "Kattintson egy partícióra"
 
 #: ../../diskdrake/hd_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have one big MicroSoft Windows partition.\n"
 "I suggest you first resize that partition\n"
 "(click on it, then click on \"Resize\")"
 msgstr ""
-"Egy nagy FAT partíció van\n"
-"(ez gyakran egy Microsoft DOS/Windows partíció).\n"
+"Egy nagy windowsos partíció van.\n"
 "Célszerû elõször átméretezni a partíciót\n"
 "(kattintson a partícióra, majd az \"Átméretezés\" gombra)."
 
@@ -8338,7 +8342,7 @@ msgstr ""
 "rendszert lehessen indítani).\n"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Chances are, this partition is\n"
@@ -8493,41 +8497,6 @@ msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "A(z) \"%s\" meghajtó partíciótáblájának mentése következik!"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"Szoftveres RAID partíciót választott ki gyökérpartíciónak (/).\n"
-"Egyik rendszerindító program sem tudja ezt kezelni /boot partíció nélkül,\n"
-"ezért mindenképpen hozzon létre egy /boot partíciót."
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"Az a partíció, amelyet gyökérpartíciónak (/) jelölt ki, fizikailag az 1024.\n"
-"cilinder után található, és a rendszerben nincs /boot partíció.\n"
-"Ha a LILO-t szeretné használni, hozzon létre egy /boot partíciót."
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"Nem hozhatom létre a /boot-ot ennyire távol a merevlemez elejétõl (cilinder\n"
-"> 1024). Ha a LILO-t használja, akkor az nem fog mûködni, ha pedig nem\n"
-"használja a LILO-t, akkor nincs szükség a /boot-ra."
-
-#: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "The package %s is needed. Install it?"
 msgstr "Szükség van a(z) %s csomagra. Szeretné telepíteni?"
@@ -8573,7 +8542,7 @@ msgid "File already exists. Use it?"
 msgstr "A fájl már létezik, használjam?"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr ""
 "Ez a fájl már egy másik loopback-hez van rendelve, válasszon egy másikat"
@@ -8714,9 +8683,9 @@ msgid "Where do you want to mount device %s?"
 msgstr "Hová szeretné csatlakoztatni a(z) %s eszközt?"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Where do you want to mount the loopback file %s?"
-msgstr "Hová szeretné csatlakoztatni a(z) %s loopback fájlt?"
+msgstr "Hová szeretné csatolni a(z) %s loopback fájlt?"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -9006,27 +8975,32 @@ msgstr "Nem sikerült bejelentkezni %s néven (helytelen jelszó?)"
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "cpu # "
-msgstr ""
+msgstr "CPU # "
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
-msgstr ""
+msgstr "SMBus-vezérlõk"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "USB controllers"
-msgstr ""
+msgstr "USB-vezérlõk"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SCSI controllers"
-msgstr ""
+msgstr "SCSI-vezérlõk"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Firewire controllers"
+msgstr "Firewire-vezérlõk"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "(E)IDE/ATA controllers"
-msgstr ""
+msgstr "(E)IDE-/ATA-vezérlõk"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -9039,14 +9013,14 @@ msgid "Scanner"
 msgstr "Lapolvasó"
 
 #: ../../harddrake/data.pm:1 ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown/Others"
-msgstr "Ismeretlen|Általános"
+msgstr "Ismeretlen/Egyéb"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Bridges and system controllers"
-msgstr ""
+msgstr "Hidak és rendszervezérlõk"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -9061,12 +9035,12 @@ msgstr "Ethernet-kártya"
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Processors"
-msgstr ""
+msgstr "Processzorok"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Webcam"
-msgstr ""
+msgstr "Web-kamera"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -9074,9 +9048,9 @@ msgid "Soundcard"
 msgstr "Hangkártya"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Other MultiMedia devices"
-msgstr "Egyéb médium"
+msgstr "Egyéb multimédia-eszközök"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -9084,9 +9058,9 @@ msgid "Tvcard"
 msgstr "Tévékártya"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Videocard"
-msgstr "Képernyõmód"
+msgstr "Videokártya"
 
 #: ../../harddrake/data.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -9096,12 +9070,12 @@ msgstr "Szalag"
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "DVD-ROM"
-msgstr ""
+msgstr "DVD-ROM"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "CD/DVD burners"
-msgstr ""
+msgstr "CD-/DVD-írók"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -9109,24 +9083,24 @@ msgid "CDROM"
 msgstr "CD-ROM"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disk"
-msgstr "dán"
+msgstr "Lemez"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Zip"
-msgstr ""
+msgstr "Zip"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Floppy"
-msgstr "Rendszerindító floppy"
+msgstr "Floppy"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
-msgstr ""
+msgstr "Szeretnék meghajtót választani"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -9142,11 +9116,15 @@ msgid ""
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
+"Ha tudja, hogy melyik meghajtó felel meg a hangkártyájának, akkor válassza\n"
+"ki a megfelelõt a fenti listából.\n"
+"\n"
+"A jelenlegi meghajtó a(z) \"%s\" hangkártyához: \"%s\""
 
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Choosing an arbitratry driver"
-msgstr ""
+msgstr "Tetszõleges meghajtó kiválasztása"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -9157,7 +9135,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -9171,16 +9149,36 @@ msgid ""
 "\n"
 "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
 msgstr ""
+"Hangprobléma esetén a következõ parancsokat érdemes használni:\n"
+"\n"
+"\n"
+"- \"lspcidrake -v | fgrep AUDIO\": kiírja, melyik meghajtót használja\n"
+"alapértelmezésben a hangkártya\n"
+"\n"
+"- \"grep sound-slot /etc/modules.conf\": kiírja, milyen meghajtó használata\n"
+"van jelenleg beállítva\n"
+"\n"
+"- \"/sbin/lsmod\": ezzel ellenõrizhetõ, hogy be van-e töltve a megfelelõ\n"
+"modul (meghajtó)\n"
+"\n"
+"- \"/sbin/chkconfig --list sound\" és \"/sbin/chkconfig --list alsa\":\n"
+"kiírják, hogy a hangszolgáltatások futtatva vannak-e bizonyos futási\n"
+"szinteken\n"
+"\n"
+"- \"aumix -q\": kiírja, hogy a hangerõ le van-e véve vagy sem\n"
+"\n"
+"- \"/sbin/fuser -v /dev/dsp\": kiírja, hogy melyik program használja a\n"
+"hangkártyát\n"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Sound trouble shooting"
-msgstr ""
+msgstr "Hangprobléma elhárítása"
 
 #: ../../harddrake/sound.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Error: The \"%s\" driver for your sound card is unlisted"
-msgstr "Nincs ismert meghajtó a hangkártyához (%s)"
+msgstr "Hiba: a hangkártya meghajtója (%s) nem elérhetõ"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -9199,18 +9197,18 @@ msgstr "Nincs ismert meghajtó"
 
 # a 2. %s egy drivert jelöl
 #: ../../harddrake/sound.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
 "driver at \"%s\"."
 msgstr ""
-"Nincs ismert OSS/ALSA alternatív meghajtó a hangkártyához (%s) - a kártya "
-"jelenleg ezt a meghajtót használja: \"%s\""
+"Nincs szabadon használható meghajtó a hangkártyához (%s), viszont létezik "
+"kötött licencelésû meghajtó: \"%s\"."
 
 #: ../../harddrake/sound.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "No open source driver"
-msgstr "Nincs ismert meghajtó"
+msgstr "Nincs nyílt forrású meghajtó"
 
 #: ../../harddrake/sound.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -9235,7 +9233,7 @@ msgstr ""
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Trouble shooting"
-msgstr ""
+msgstr "Problémaelhárítás"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -9384,9 +9382,9 @@ msgid "Auto-detect"
 msgstr "Automatikus felderítés"
 
 #: ../../interactive/newt.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Do"
-msgstr "Le"
+msgstr "Végrehajtás"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -9601,6 +9599,10 @@ msgid ""
 "http://www.speedtouchdsl.com/dvrreg_lx.htm\n"
 "and copy the mgmt.o in /usr/share/speedtouch"
 msgstr ""
+"Szüksége lesz az Alcatel mikrokódra.\n"
+"Töltse le a http://www.speedtouchdsl.com/dvrreg_lx.htm\n"
+"weblapról, majd másolja az mgmt.o fájlt a\n"
+"/usr/share/speedtouch helyre."
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -9620,8 +9622,8 @@ msgstr "Csatlakozás az internethez"
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
-msgstr ""
+msgid "Sagem (using pppoa) usb"
+msgstr "Sagem (PPPoA-t használó) USB"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -9736,17 +9738,17 @@ msgstr "Webkiszolgáló"
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Zeroconf host name must not contain a ."
-msgstr ""
-
-#: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, fuzzy, c-format
-msgid "Zeroconf Host name"
-msgstr "Gépnév"
+msgstr "A Zeroconf gépnév nem tartalmazhat pontot."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Host name"
 msgstr "Gépnév"
+
+#: ../../network/ethernet.pm:1 ../../network/network.pm:1
+#, c-format
+msgid "Zeroconf Host name"
+msgstr "Zeroconf gépnév"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9756,18 +9758,10 @@ msgid ""
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
 msgstr ""
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-"Most adja meg a gép nevét (ha ismeri).\n"
-"Néhány DHCP-kiszolgáló csak a gépnév megadása után használható.\n"
-"A teljes nevet kell beírni, például: \"gep.vallalat.hu\"."
+"\n"
+"\n"
+"Adjon meg egy Zeroconf gépnevet (pontok nélkül), ha nem az\n"
+"alapértelmezett gépnevet kívánja használni."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9784,8 +9778,8 @@ msgstr "nem találtam hálózati kártyát"
 msgid ""
 "Please choose which network adapter you want to use to connect to Internet."
 msgstr ""
-"Válassza ki, hogy melyik hálózati adapteren keresztül szeretne csatlakozni "
-"az internetre."
+"Válassza ki, hogy melyik hálózati csatolón keresztül szeretne csatlakozni az "
+"internetre."
 
 #: ../../network/ethernet.pm:1 ../../standalone/drakgw:1
 #: ../../standalone/drakpxe:1
@@ -9827,7 +9821,7 @@ msgstr ""
 "egy PCI kártyát a következõ képernyõn."
 
 #: ../../network/isdn.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Which of the following is your ISDN card?"
 msgstr "Milyen ISDN-kártyája van?"
 
@@ -9907,7 +9901,7 @@ msgstr ""
 "D csatorna nélkül (bérelt vonal)"
 
 #: ../../network/isdn.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "European protocol"
 msgstr "Európai protokoll"
 
@@ -9979,25 +9973,27 @@ msgstr ""
 "Ha nincs kizáró ok, akkor inkább az utóbbit válassza.\n"
 
 #: ../../network/modem.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Do nothing"
-msgstr "de ezzel nem egyezõ"
+msgstr "Ne tegyen semmit"
 
 #: ../../network/modem.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Install rpm"
-msgstr "Telepítés"
+msgstr "RPM csomag telepítése"
 
 #: ../../network/modem.pm:1
 #, c-format
 msgid ""
 "\"%s\" based winmodem detected, do you want to install needed software ?"
 msgstr ""
+"\"%s\"-alapú winmodem van a gépben - szeretné telepíteni a szükséges "
+"szoftvert?"
 
 #: ../../network/modem.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Title"
-msgstr "Tábla"
+msgstr "Cím"
 
 #: ../../network/modem.pm:1
 #, c-format
@@ -10005,6 +10001,8 @@ msgid ""
 "Your modem isn't supported by the system.\n"
 "Take a look at http://www.linmodems.org"
 msgstr ""
+"Az Ön modeme nem támogatott.\n"
+"Látogasson el a következõ helyre: http://www.linmodems.org"
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -10114,9 +10112,9 @@ msgstr ""
 "%s"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The network needs to be restarted. Do you want to restart it ?"
-msgstr "A(z) %s csomagot telepíteni kell. Szeretné telepíteni?"
+msgstr "A hálózatot újra kell indítani. Szeretné újraindítani?"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -10399,6 +10397,8 @@ msgid ""
 "Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add "
 "enough '0' (zeroes)."
 msgstr ""
+"Az átviteli sebesség k, M vagy G utótagot kaphat (például \"11M\"), vagy "
+"ehelyett ki lehet írni a nullákat."
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10406,6 +10406,8 @@ msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
 "frequency), or add enough '0' (zeroes)."
 msgstr ""
+"A frekvencia k, M vagy G utótagot kaphat (például a \"2,46G\" 2,46 GHz-es "
+"frekvenciát jelöl), vagy ehelyett ki lehet írni a nullákat."
 
 #: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -10419,8 +10421,13 @@ msgstr "Indítás rendszerbetöltésnél"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
+msgid "Assign host name from DHCP address"
+msgstr "Adja meg a gépnevet vagy az IP-címet."
+
+#: ../../network/network.pm:1
+#, c-format
 msgid "Network Hotplugging"
-msgstr "Hálózatbeállítás"
+msgstr "Hálózati hotplugging"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10429,13 +10436,8 @@ msgstr "A hálózati kártya azonosítójának követése (laptopoknál hasznos)"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
-msgid "(bootp/dhcp/zeroconf)"
-msgstr "(BOOTP/DHCP)"
-
-#: ../../network/network.pm:1
-#, c-format
-msgid "Automatic IP"
-msgstr "Automatikus IP-cím"
+msgid "DHCP host name"
+msgstr "Gépnév"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -10443,10 +10445,21 @@ msgstr "Automatikus IP-cím"
 msgid "Netmask"
 msgstr "Hálózati maszk"
 
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
 #, c-format
 msgid "IP address"
 msgstr "IP-cím"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "(bootp/dhcp/zeroconf)"
+msgstr "(BOOTP/DHCP/Zeroconf)"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Automatic IP"
+msgstr "Automatikus IP-cím"
 
 # %s: modulnév
 # _(" (driver %s)", $module)
@@ -10588,23 +10601,23 @@ msgid "Connection Configuration"
 msgstr "A kapcsolat beállítása"
 
 #: ../../network/tools.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The system doesn't seem to be connected to the Internet.\n"
 "Try to reconfigure your connection."
 msgstr ""
 "Az internetkapcsolat feltehetõen nem aktív.\n"
-"Próbálja meg újból elvégezni a beállítást."
+"Próbálja meg újból elvégezni a kapcsolat beállítását."
 
 #: ../../network/tools.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "For security reasons, it will be disconnected now."
-msgstr "Biztonsági okokból lebontom a kapcsolatot."
+msgstr "Biztonsági okokból a kapcsolat most lebontásra kerül."
 
 #: ../../network/tools.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The system is now connected to the Internet."
-msgstr "A rendszer internetes kapcsolata él."
+msgstr "A rendszer internetes kapcsolata létrejött."
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -10622,7 +10635,7 @@ msgid "Internet configuration"
 msgstr "Internet-beállítások"
 
 #: ../../partition_table/raw.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Something bad is happening on your drive. \n"
 "A test to check the integrity of data has failed. \n"
@@ -10699,7 +10712,7 @@ msgstr "PDQ"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Print, Don't Queue"
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr "Ismeretlen modell"
@@ -10710,24 +10723,29 @@ msgid "Unknown model"
 msgstr "Ismeretlen modell"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
-msgid "Host %s"
-msgstr "Gépnév"
+#, c-format
+msgid "%s (Port %s)"
+msgstr "%s (port: %s)"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
+msgid "Host %s"
+msgstr "Gép: %s"
+
+#: ../../printer/main.pm:1
+#, c-format
 msgid "Network %s"
-msgstr "Hálózat"
+msgstr "Hálózat: %s"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Interface \"%s\""
-msgstr "%s csatoló"
+msgstr "\"%s\" csatoló"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Local network(s)"
-msgstr "Helyi hálózati cím"
+msgstr "Helyi hálózat(ok)"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -10780,24 +10798,24 @@ msgid ", multi-function device on USB"
 msgstr ", többfunkciós eszköz USB-n"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ", multi-function device on parallel port \\#%s"
-msgstr ", többfunkciós eszköz ezen a párhuzamos porton: \\/*%s"
+msgstr ", többfunkciós eszköz ezen a párhuzamos porton: \\#%s"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ", USB printer"
-msgstr ", USB nyomtató \\/*%s"
+msgstr ", USB nyomtató"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ", USB printer \\#%s"
-msgstr ", USB nyomtató \\/*%s"
+msgstr ", USB nyomtató: \\#%s"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid " on parallel port \\#%s"
-msgstr " ezen a párhuzamos porton: \\/*%s"
+msgstr " ezen a párhuzamos porton: \\#%s"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -10861,11 +10879,6 @@ msgstr "PrinterDrake"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr "Szeretne beállítani egy másik nyomtatót?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "A(z) \"%s\" nyomtató eltávolítása..."
 
@@ -10881,8 +10894,8 @@ msgstr "Nyomtató eltávolítása"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Know how to use this printer"
-msgstr "Hogyan kell használni ezt a nyomtatót"
+msgid "Learn how to use this printer"
+msgstr "Információ a nyomtató használatáról"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10987,11 +11000,6 @@ msgid "Printer connection type"
 msgstr "A nyomtató kapcsolódási típusa"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Learn how to use this printer"
-msgstr "Hogyan kell használni ezt a nyomtatót"
-
-#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Raw printer"
 msgstr "\"Nyers\" nyomtató"
@@ -11028,6 +11036,7 @@ msgid "Add a new printer"
 msgstr "Nyomtató hozzáadása"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Normál mód"
@@ -11038,9 +11047,9 @@ msgid "Change the printing system"
 msgstr "Nyomtatási rendszer módosítása"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer sharing"
-msgstr "Fájlmegosztás"
+msgstr "Nyomtatómegosztás"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11053,6 +11062,11 @@ msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr ""
 "Nyomtatók listájának frissítése (az összes elérhetõ távoli CUPS-nyomtató "
 "megjelenítése érdekében)"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Display all available remote CUPS printers"
+msgstr "Az elérhetõ távoli CUPS-nyomtatók megjelenítése"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11086,16 +11100,6 @@ msgstr "Nyomtatási rendszer: "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Would you like to configure printing?"
-msgstr "Szeretné beállítani a nyomtatókezelést?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr "A PrinterDrake elõkészítése..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Checking installed software..."
 msgstr "A telepített szoftverek ellenõrzése..."
 
@@ -11105,9 +11109,9 @@ msgid "Installing Foomatic..."
 msgstr "A Foomatic telepítése..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to configure printer \"%s\"!"
-msgstr "A(z) \"%s\" nyomtató beállítása..."
+msgstr "A(z) \"%s\" nyomtató beállítása nem sikerült."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11130,14 +11134,19 @@ msgid "Select Printer Spooler"
 msgstr "Válassza ki a nyomtatási rendszert"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Installing %s ..."
-msgstr "Csomagok telepítése..."
+#, c-format
+msgid "Setting Default Printer..."
+msgstr "Az alapértelmezett nyomtató beállítása..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
+msgid "Installing %s ..."
+msgstr "%s telepítése..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Removing %s ..."
-msgstr "%s eltávolítása"
+msgstr "%s eltávolítása..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11861,7 +11870,7 @@ msgstr ""
 "hasonlót."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
@@ -11871,11 +11880,9 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Ellenõrizze, hogy a PrinterDrake helyesen\n"
-"határozta-e meg a nyomtató típusát. Ha a\n"
-"kurzor egy nem megfelelõ típuson áll, vagy\n"
-"a \"Nyers nyomtató\" bejegyzésen, akkor\n"
-"keresse meg a megfelelõ típust a listában."
+"Ellenõrizze, hogy a PrinterDrake helyesen határozta-e meg a nyomtató "
+"típusát. Ha egy nem megfelelõ típus vagy a \"Nyers nyomtató\" bejegyzés van "
+"kijelölve, akkor keresse meg a megfelelõ típust a listában."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11965,42 +11972,42 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Enter Printer Name and Comments"
-msgstr ""
+msgstr "Adja meg a nyomtatónevet és a megjegyzéseket"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Making printer port available for CUPS..."
-msgstr ""
+msgstr "A nyomtatási port elérhetõvé tétele a CUPS számára..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Photo memory card access on your HP multi-function device"
-msgstr ""
+msgstr "Fotókártya-elérés a HP többfunkciós eszközön"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scanning on your HP multi-function device"
-msgstr ", többfunkciós eszköz"
+msgstr "Lapolvasás a HP többfunkciós eszközön"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installing mtools packages..."
-msgstr "Csomagok telepítése..."
+msgstr "Az mtools csomagok telepítése..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installing SANE packages..."
-msgstr "Csomagok telepítése..."
+msgstr "A SANE csomagok telepítése..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Checking device and configuring HPOJ..."
-msgstr ""
+msgstr "Az eszköz ellenõrzése és a HPOJ beállítása..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installing HPOJ package..."
-msgstr "Csomagok telepítése..."
+msgstr "A HPOJ csomag telepítése..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12009,16 +12016,20 @@ msgid ""
 "LaserJet 1100/1200/1220/3200/3300 with scanner, Sony IJP-V100), an HP "
 "PhotoSmart or an HP LaserJet 2200?"
 msgstr ""
+"Az Ön nyomtatója egy HP vagy Sony többfunkciós eszköz (OfficeJet, PSC, "
+"LaserJet 1100/1200/1220/3200/3300 lapolvasóval, Sony IJP-V100), egy HP "
+"PhotoSmart vagy egy HP LaserJet 2200?"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "A command line must be entered!"
-msgstr "Érvényes URI-t kell megadni."
+msgstr "Meg kell adni egy parancsot."
 
+# Pipe into command
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Command line"
-msgstr "Tartománynév"
+msgstr "Parancs"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12026,11 +12037,13 @@ msgid ""
 "Here you can specify any arbitrary command line into which the job should be "
 "piped instead of being sent directly to a printer."
 msgstr ""
+"Itt megadhat egy tetszõleges parancsot, amelynek a nyomtatási feladat el "
+"lesz küldve (ahelyett, hogy közvetlenül egy nyomtatóra lenne küldve)."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Pipe into command"
-msgstr "A feladat kimenetének átirányítása egy parancsba"
+msgstr "Átirányítás egy parancsba"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12381,86 +12394,81 @@ msgstr ""
 "eszköznevet illetve fájlnevet a beviteli sorban"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the printer to which the print jobs should go."
-msgstr "Válassza ki, melyik portra van csatlakoztatva a nyomtató."
+msgstr "Válassza ki, melyik nyomtatóra legyenek küldve a nyomtatási feladatok."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please choose the printer you want to set up. The configuration of the "
 "printer will work fully automatically. If your printer was not correctly "
 "detected or if you prefer a customized printer configuration, turn on "
 "\"Manual configuration\"."
 msgstr ""
-"A rendszer a következõ nyomtatókat találta. Válassza ki, melyik nyomtatót "
-"kívánja beállítani. A nyomtató automatikusan beállításra kerül. Ha a "
-"nyomtató helytelenül volt felismerve, vagy ha Ön szeretné módosítani annak "
-"beállításait, akkor kapcsolja be a \"Kézi beállítás\" opciót."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Here is a list of all auto-detected printers. "
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Currently, no alternative possibility is available"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid ""
-"The configuration of the printer will work fully automatically. If your "
-"printer was not correctly detected or if you prefer a customized printer "
-"configuration, turn on \"Manual configuration\"."
-msgstr ""
-"A rendszer a következõ nyomtatót találta. A nyomtató automatikusan "
+"Válassza ki, melyik nyomtatót kívánja beállítani. A nyomtató automatikusan "
 "beállításra kerül. Ha a nyomtató helytelenül volt felismerve, vagy ha Ön "
 "szeretné módosítani annak beállításait, akkor kapcsolja be a \"Kézi beállítás"
 "\" opciót."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "The following printer was auto-detected. "
-msgstr ""
-"A következõ nyomtatók\n"
-"\n"
+#, c-format
+msgid "Here is a list of all auto-detected printers. "
+msgstr "A rendszer a következõ nyomtatókat találta. "
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
+msgid "Currently, no alternative possibility is available"
+msgstr "Jelenleg nincs alternatív lehetõség"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The configuration of the printer will work fully automatically. If your "
+"printer was not correctly detected or if you prefer a customized printer "
+"configuration, turn on \"Manual configuration\"."
+msgstr ""
+"A nyomtató automatikusan beállításra kerül. Ha a nyomtató helytelenül volt "
+"felismerve, vagy ha Ön szeretné módosítani annak beállításait, akkor "
+"kapcsolja be a \"Kézi beállítás\" opciót."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "The following printer was auto-detected. "
+msgstr "A rendszer a következõ nyomtatót találta. "
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid ""
 "Please choose the printer to which the print jobs should go or enter a "
 "device name/file name in the input line"
 msgstr ""
-"Válassza ki, melyik portra van csatlakoztatva a nyomtató, vagy adjon meg egy "
-"eszköznevet illetve fájlnevet a beviteli sorban"
+"Válassza ki, melyik nyomtatóra legyenek küldve a nyomtatási feladatok, vagy "
+"adjon meg egy eszköznevet illetve fájlnevet a beviteli sorban"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please choose the printer you want to set up or enter a device name/file "
 "name in the input line"
 msgstr ""
-"Válassza ki, melyik portra van csatlakoztatva a nyomtató, vagy adjon meg egy "
+"Válassza ki, melyik nyomtatót szeretné beállítani, vagy adjon meg egy "
 "eszköznevet illetve fájlnevet a beviteli sorban"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
-msgstr ""
-"Válassza ki, melyik portra van csatlakoztatva a nyomtató, vagy adjon meg egy "
-"eszköznevet illetve fájlnevet a beviteli sorban"
+msgstr "Ehelyett megadhat egy eszköznevet illetve fájlnevet a beviteli sorban"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If it is not the one you want to configure, enter a device name/file name in "
 "the input line"
 msgstr ""
-"A rendszer a következõ nyomtatót találta. Ha nem ezt szeretné beállítani, "
-"akkor adjon meg egy eszköznevet illetve fájlnevet a beviteli sorban."
+"Ha nem ezt szeretné beállítani, akkor adjon meg egy eszköznevet illetve "
+"fájlnevet a beviteli sorban"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12497,14 +12505,14 @@ msgid "Local Printer"
 msgstr "Helyi nyomtató"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "USB printer \\#%s"
-msgstr "USB nyomtató: \\/*%s"
+msgstr "USB nyomtató: \\#%s"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer on parallel port \\#%s"
-msgstr "Nyomtató ezen a párhuzamos porton: \\/*%s"
+msgstr "Nyomtató ezen a párhuzamos porton: \\#%s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12573,7 +12581,7 @@ msgid "Auto-detect printers connected to this machine"
 msgstr "A helyi nyomtatók automatikus felderítése"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -12596,11 +12604,11 @@ msgstr ""
 "Ha van nyomtató csatlakoztatva ehhez a számítógéphez, kapcsolja be azt, hogy "
 "felderíthetõ legyen a típusa.\n"
 "\n"
-" A folytatáshoz kattintson a \"Következõ\" gombra. Ha viszont most nem "
+"A folytatáshoz kattintson a \"Következõ\" gombra. Ha viszont most nem "
 "kívánja telepíteni a nyomtatókat, akkor a \"Mégsem\" gombra kattintson."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -12633,11 +12641,11 @@ msgstr ""
 "igénybe, mint csak a helyi nyomtatóké, ezért ha nincs szükség a hálózati "
 "nyomtatókra, akkor kapcsolja ki a hálózati nyomtatók felderítését.\n"
 "\n"
-" A folytatáshoz kattintson a \"Következõ\" gombra. Ha viszont most nem "
+"A folytatáshoz kattintson a \"Következõ\" gombra. Ha viszont most nem "
 "kívánja telepíteni a nyomtatókat, akkor a \"Mégsem\" gombra kattintson."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -12675,7 +12683,7 @@ msgstr ""
 "nyomtatókra, akkor kapcsolja ki a hálózati és/vagy a windowsos gépre "
 "csatlakozó nyomtatók felderítését.\n"
 "\n"
-" A folytatáshoz kattintson a \"Következõ\" gombra. Ha viszont most nem "
+"A folytatáshoz kattintson a \"Következõ\" gombra. Ha viszont most nem "
 "kívánja telepíteni a nyomtatókat, akkor a \"Mégsem\" gombra kattintson."
 
 #: ../../printer/printerdrake.pm:1
@@ -12702,9 +12710,42 @@ msgstr ""
 "beállításaihoz, továbbá a nyomtatók kapcsolattípusát is képes beállítani."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+"\n"
+"\n"
+"A PrinterDrake nem tudta meghatározni, milyen modellazonosítójú eszköz a(z) "
+"\"%s\" nyomtató. Válassza ki a megfelelõ modellt a listából."
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ")"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr " itt: "
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr "("
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Configuring printer ..."
+msgstr "A nyomtató beállítása..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Searching for new printers..."
-msgstr "Az elérhetõ nyomtatók"
+msgstr "Új nyomtatók keresése..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12769,51 +12810,50 @@ msgstr ""
 "Egy ismeretlen nyomtató közvetlenül csatlakozik a géphez"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following printer\n"
 "\n"
 "%s%s\n"
 "is directly connected to your system"
 msgstr ""
+"A következõ nyomtató közvetlenül csatlakozik a géphez:\n"
 "\n"
-"Egy ismeretlen nyomtató közvetlenül csatlakozik a géphez"
+"%s%s"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following printer\n"
 "\n"
 "%s%s\n"
 "are directly connected to your system"
 msgstr ""
+"A következõ nyomtató közvetlenül csatlakozik a géphez:\n"
 "\n"
-"Egy ismeretlen nyomtató közvetlenül csatlakozik a géphez"
+"%s%s"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following printers\n"
 "\n"
 "%s%s\n"
 "are directly connected to your system"
 msgstr ""
+"A következõ nyomtatók közvetlenül csatlakoznak a géphez:\n"
 "\n"
-"Egy ismeretlen nyomtató közvetlenül csatlakozik a géphez"
+"%s%s"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "and %d unknown printers"
-msgstr ""
-"\n"
-"és %d ismeretlen nyomtató "
+msgstr "és %d ismeretlen nyomtató"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "and one unknown printer"
-msgstr ""
-"\n"
-"és egy ismeretlen nyomtató "
+msgstr "és egy ismeretlen nyomtató"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12822,48 +12862,87 @@ msgstr "A rendszer ellenõrzése..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "IP address of host/network:"
+msgid "Restarting CUPS..."
+msgstr "A CUPS újraindítása..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr "Ez a kiszolgáló már szerepel a listában; nem vehetõ fel még egyszer.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr "Példák helyesen megadott IP-címekre:\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "A megadott IP-cím helytelen.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Server IP missing!"
+msgstr "A kiszolgáló IP-címe nincs megadva."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
+"Adja meg azon gép IP-címét és portszámát, amelynek a nyomtatóit használni "
+"szeretné."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "Távoli CUPS-kiszolgálókon levõ nyomtatók elérése"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Remove selected server"
+msgstr "A kijelölt kiszolgáló eltávolítása"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Edit selected server"
+msgstr "A kijelölt kiszolgáló szerkesztése"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Add server"
+msgstr "Kiszolgáló felvétele"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+"Adja meg azon CUPS-kiszolgálók azonosítóját, amelyek nyomtatóit használni "
+"szeretné. Ezt csak akkor kell megtennie, ha a kiszolgálók nem tudatják a "
+"helyi hálózat gépeivel a nyomtatóinformációikat."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "IP address of host/network:"
+msgstr "A gép/hálózat IP-címe:"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "This host/network is already in the list, it cannot be added again.\n"
 msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr ""
+"Ez a gép/hálózat már szerepel a listában; nem vehetõ fel még egyszer.\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "The entered host/network IP is not correct.\n"
-msgstr ""
+msgstr "A géphez/hálózathoz megadott IP-cím helytelen.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
+msgstr "A gép/hálózat IP-címe nincs megadva."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12871,26 +12950,28 @@ msgid ""
 "Choose the network or host on which the local printers should be made "
 "available:"
 msgstr ""
+"Válassza ki, melyik hálózat illetve gép számára legyenek elérhetõvé téve a "
+"helyi nyomtatók:"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sharing of local printers"
-msgstr "Az elérhetõ nyomtatók"
+msgstr "Helyi nyomtatók megosztása"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove selected host/network"
-msgstr "Kijelöltek eltávolítása"
+msgstr "A kijelölt gép/hálózat eltávolítása"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Edit selected host/network"
-msgstr ""
+msgstr "A kijelölt gép/hálózat szerkesztése"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Add host/network"
-msgstr ""
+msgstr "Gép/hálózat felvétele"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12898,6 +12979,8 @@ msgid ""
 "These are the machines and networks on which the locally connected printer"
 "(s) should be available:"
 msgstr ""
+"A következõ gépek illetve hálózatok számára legyenek elérhetõk a helyi "
+"nyomtatók:"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12915,36 +12998,82 @@ msgid ""
 "If some of these measures lead to problems for you, turn this option off, "
 "but then you have to take care of these points."
 msgstr ""
+"Ha ez az opció be van kapcsolva, akkor a CUPS minden indításakor "
+"automatikusan el lesznek végezve a következõ mûveletek illetve "
+"ellenõrzések:\n"
+"\n"
+"- ha telepítve van az LPD/LPRng, akkor a CUPS nem írja felül a /etc/printcap "
+"fájlt\n"
+"\n"
+"- ha nem létezik /etc/cups/cupsd.conf nevû fájl, akkor létre lesz hozva\n"
+"\n"
+"- a nyomtatóinformációknak a hálózatra való küldésekor nem \"localhost\" fog "
+"szerepelni kiszolgálónévként\n"
+"\n"
+"Ha ezek közül valamelyik problémát okoz Önnek, akkor kapcsolja ki az opciót. "
+"Ebben az esetben viszont Önnek kell figyelnie a fenti esetekre."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Automatic correction of CUPS configuration"
-msgstr "Automatikus CUPS-beállítás"
+msgstr "A CUPS-beállítások automatikus javítása"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+"Ha szeretne hozzáférni a helyi hálózat távoli CUPS-kiszolgálóin levõ "
+"nyomtatókhoz, akkor be kell kapcsolnia \"A távoli gépeken elérhetõ nyomtatók "
+"automatikus megkeresése\" opciót. A CUPS-kiszolgálók automatikusan "
+"informálják a gépet a rajtuk levõ nyomtatókkal kapcsolatosan. A gép által "
+"ismert nyomtatók listája a PrinterDrake fõablakának \"Távoli nyomtatók\" "
+"részében tekinthetõ meg. Ha a CUPS-kiszolgálók nem a helyi hálózaton vannak, "
+"akkor meg kell adni itt a megfelelõ IP-címeket és portszámokat (az utóbbi "
+"nem kötelezõ) ahhoz, hogy a kiszolgálók nyomtatóinformációi elérhetõvé "
+"váljanak."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "None"
+msgstr "Nincs"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Additional CUPS servers: "
+msgstr "További CUPS-kiszolgálók: "
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "No remote machines"
-msgstr "(ezen a gépen)"
+msgstr "Nincs távoli gép"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Custom configuration"
-msgstr "figyelmeztetés beállítása"
+msgstr "Egyéni beállítás"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer sharing on hosts/networks: "
-msgstr "Fájlmegosztás"
+msgstr "Nyomtatómegosztás a következõ gépek/hálózatok felé: "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Automatically find available printers on remote machines"
-msgstr ""
+msgstr "A távoli gépeken elérhetõ nyomtatók automatikus megkeresése"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "The printers on this machine are available to other computers"
-msgstr ""
+msgstr "A gép nyomtatói elérhetõk más gépek számára"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12952,6 +13081,8 @@ msgid ""
 "You can also decide here whether printers on remote machines should be "
 "automatically made available on this machine."
 msgstr ""
+"Meghatározhatja, hogy a távoli gépek nyomtatói automatikusan elérhetõvé "
+"legyenek-e téve ezen a gépen."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12959,11 +13090,13 @@ msgid ""
 "Here you can choose whether the printers connected to this machine should be "
 "accessable by remote machines and by which remote machines."
 msgstr ""
+"Itt megadható, hogy a gép nyomtatói elérhetõk legyenek-e távoli gépek "
+"számára, és ha igen, akkor melyek számára."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "CUPS printer sharing configuration"
-msgstr "OKI windowsos nyomtató beállítása"
+msgstr "A CUPS-nyomtatók megosztásának beállítása"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12971,7 +13104,7 @@ msgid "Printer auto-detection (Local, TCP/Socket, and SMB printers)"
 msgstr "Automatikus nyomtatófelderítés (helyi, TCP/socket és SMB nyomtatók)"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Printers on remote CUPS servers do not need to be configured here; these "
@@ -13079,8 +13212,8 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -14287,7 +14420,7 @@ msgstr "Automatikus telepítõfloppy készítése"
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "manual"
-msgstr ""
+msgstr "kézi"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -14304,9 +14437,9 @@ msgid "Automatic Steps Configuration"
 msgstr "Az automatikus lépések beállításai"
 
 #: ../../standalone/drakautoinst:1
-#, fuzzy, c-format
+#, c-format
 msgid "replay"
-msgstr "Újrajátszás"
+msgstr "újrajátszás"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -14393,7 +14526,7 @@ msgstr ""
 "\n"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Description:\n"
 "\n"
@@ -14459,7 +14592,6 @@ msgstr ""
 "  A beállításokat tartalmazó fájl:\n"
 "\t/etc/drakconf/drakbackup/drakbackup.conf\n"
 "\n"
-"\n"
 "Mentés visszatöltése:\n"
 "\n"
 "  Visszatöltés közben a DrakBackup eltávolítja az\n"
@@ -14478,12 +14610,13 @@ msgstr ""
 "com>"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s\\@epita."
 "fr>"
 msgstr ""
-" Copyright (C) 2001 MandrakeSoft - DUPONT Sebastien <dupont_s\\@epita.fr>"
+" Copyright (C) 2001-2002, MandrakeSoft - DUPONT Sebastien <dupont_s\\@epita."
+"fr>"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14634,7 +14767,7 @@ msgstr ""
 "\n"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "options description:\n"
 "\n"
@@ -14672,9 +14805,9 @@ msgstr ""
 " - Tömörítési mód:\n"
 "    \n"
 "      Ha bzip2 tömörítést választ, az adatok jobban lesznek\n"
-"      tömörítve, mint a gzip esetén (körülbelül 2-10 %-kal).\n"
+"      tömörítve, mint a gzip esetén (körülbelül 2-10 %%-kal).\n"
 "      Alapértelmezésben nincs bejelölve ez az opció, mivel ez a\n"
-"      tömörítési mód több idõt igényel (körülbelül 1000 %-kal többet).\n"
+"      tömörítési mód több idõt igényel (körülbelül 1000 %%-kal többet).\n"
 " \n"
 " - Frissítési mód:\n"
 "\n"
@@ -14778,6 +14911,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr "%s"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr "Válassza ki a mentendõ adatokat..."
 
@@ -14792,9 +14930,9 @@ msgid "Please select data to restore..."
 msgstr "Válassza ki a visszatöltendõ adatokat..."
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "The following packages need to be installed:\n"
-msgstr "A telepítõ a következõ csomagokat fogja telepíteni"
+msgstr "A következõ csomagokat szükséges telepíteni:\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15036,16 +15174,6 @@ msgstr "Adja meg a könyvtárt, ahol a mentések vannak"
 #, c-format
 msgid "Restore from Hard Disk."
 msgstr "Visszatöltés merevlemezrõl"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Secure Connection"
-msgstr "Biztonságos kapcsolat"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "FTP Connection"
-msgstr "FTP-kapcsolat"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15980,6 +16108,196 @@ msgstr "A Cron egyelõre csak a rendszergazda számára elérhetõ"
 msgid "Installation of %s failed. The following error occured:"
 msgstr "A(z) %s telepítése nem sikerült a következõ hiba miatt:"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "Ne legyen automatikus bejelentkezés"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "Legyen automatikus bejelentkezés (felhasználónév, grafikus környezet)"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "Rendszerindításkor induljon el a grafikus környezet"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "Rendszer-mód"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr "Indítási kép"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr "LILO-képernyõ"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+"\n"
+"Válasszon egy LILO- és\n"
+"egy indításikép-témát\n"
+"(egymástól függetlenül\n"
+"választhatók)."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "Témák"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Indítási kép választása"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"Jelenleg a(z) %s programot használja rendszerindításra.\n"
+"Kattintson a Beállítás gombra a beállításvarázsló elindításához."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr "A LILO- és az indításikép-témák telepítése megtörtént"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr "A témákat nem sikerült telepíteni."
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr "Megjegyzés"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr "A LILO elindítása"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+"A LILO elindítása sikertelen.\n"
+"A LILO-téma telepítésének befejezéséhez adja ki parancssorban a \"lilo\"\n"
+"parancsot rendszergazdaként."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr "Indítási RAM-diszk elõállítása: 'mkinitrd -f /boot/initrd-%s.img %s'."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr "Nem indítható el: mkinitrd -f /boot/initrd-%s.img %s."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+"A /etc/sysconfig/bootsplash fájl nem írható:\n"
+"a fájl nem található."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "Írás: %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr "A /etc/sysconfig/bootsplash fájl nem írható."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "LILO-üzenet nem található"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "\"%s\" másolása ebbe: \"%s\""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr "\"%s\" mentése \"%s.old\" névre"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "Új téma létrehozása"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"Téma megjelenítése\n"
+"a konzolon"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr "Témák telepítése"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "LILO/GRUB mód"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "Yaboot mód"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/Fájl/Ki_lépés"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_Fájl"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "A rendszerindítás beállításai"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -15991,9 +16309,9 @@ msgid "connecting to Bugzilla wizard ..."
 msgstr "csatlakozás a Bugzilla varázslóhoz..."
 
 #: ../../standalone/drakbug:1
-#, fuzzy, c-format
+#, c-format
 msgid "Package not installed"
-msgstr "Nincs telepítve"
+msgstr "A csomag nincs telepítve"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -16118,6 +16436,16 @@ msgstr "Mandrake hibabejelentõ program"
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "Paraméterek"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "Internetkapcsolat beállítása"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "DHCP-kliens"
 
@@ -16131,11 +16459,6 @@ msgstr "Ethernet-kártya"
 msgid "Gateway"
 msgstr "Átjáró (gateway)"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "Paraméterek"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -16145,11 +16468,6 @@ msgstr "A csatlakozás típusa: "
 #, c-format
 msgid "Profile: "
 msgstr "Profil: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "Internetkapcsolat beállítása"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -16370,11 +16688,14 @@ msgid ""
 "into your system with the X Window System running and supports running\n"
 "several different X sessions on your local machine at the same time."
 msgstr ""
+"Az X11 Bejelentkezéskezelõ lehetõvé teszi a grafikus felületen történõ\n"
+"bejelentkezést az X grafikus rendszer segítségével. Támogatja több X\n"
+"rendszer azonos gépen történõ egyidejû futtatását is."
 
 #: ../../standalone/drakedm:1
 #, c-format
 msgid "Choosing a display manager"
-msgstr ""
+msgstr "Bejelentkezéskezelõ kiválasztása"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16423,8 +16744,8 @@ msgstr "Modul eltávolítása"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr "a RAID modulok kihagyása"
+msgid "Add a module"
+msgstr "Modul hozzáadása"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16438,13 +16759,13 @@ msgstr "ha szükséges"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "felülírás"
+msgid "omit raid modules"
+msgstr "a RAID modulok kihagyása"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "Modul hozzáadása"
+msgid "force"
+msgstr "felülírás"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16458,23 +16779,18 @@ msgstr "Csak szakértõknek"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "Általános"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "a kernel verziója"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "DrakFloppy hiba: %s"
+msgid "default"
+msgstr "alapértelmezés"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "alapértelmezés"
+msgid "General"
+msgstr "Általános"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16495,11 +16811,6 @@ msgstr "Méret"
 #, c-format
 msgid "Module name"
 msgstr "Modulnév"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-iso8859-2,*"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16609,7 +16920,7 @@ msgid "Choose the applications that will support the fonts:"
 msgstr "Válassza ki, mely alkalmazások fogják használni a betûtípusokat:"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " Copyright (C) 2001-2002 by MandrakeSoft \n"
@@ -16641,6 +16952,11 @@ msgid ""
 "\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
 "             Convert ttf font files to afm and pfb fonts\n"
 msgstr ""
+"\n"
+" Copyright (C) 2001-2002, MandrakeSoft\n"
+"    DUPONT Sebastien (eredeti verzió)\n"
+"    CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
+"\n"
 " Ez a program szabad szoftver; terjeszthetõ és/vagy módosítható\n"
 " a Free Software Foundation által publikált GNU General Public\n"
 " License 2. vagy annál újabb verziója alapján.\n"
@@ -16653,12 +16969,20 @@ msgstr ""
 " A programmal együtt Önnek kapnia kellett egy példányt a GNU General\n"
 " Public License-bõl; ha nem így történt, írjon a következõ címre:\n"
 " Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,\n"
-" MA 02111-1307, USA."
+" MA 02111-1307, USA.\n"
+"\n"
+" Köszönetnyilvánítás:\n"
+"  - pfm2afm: windowsos .pfm fájl konvertálása .afm (Adobe Font Metrics)\n"
+"    formátumra; szerzõ: Ken Borgendale\n"
+"  - type1inst: fonts.dir, fonts.scale és Fontmap fájlok elõállítása;\n"
+"    szerzõ: James Macnicol\n"
+"  - ttf2pt1: TTF betûtípus konvertálása AFM/PFB betûtípusra;\n"
+"    szerzõk: Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin\n"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "About"
-msgstr "Megszakítás"
+msgstr "Névjegy"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16930,7 +17254,7 @@ msgid "Local Network adress"
 msgstr "Helyi hálózati cím"
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "I can keep your current configuration and assume you already set up a DHCP "
 "server; in that case please verify I correctly read the Network that you use "
@@ -16980,9 +17304,9 @@ msgstr ""
 "Meghajtó: %s"
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid "Current interface configuration"
-msgstr "Jelenlegi csatolóbeállítás megjelenítése"
+msgstr "Jelenlegi csatolóbeállítás"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16992,7 +17316,7 @@ msgstr "Jelenlegi csatolóbeállítás megjelenítése"
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "No (experts only)"
-msgstr ""
+msgstr "Nem (szakértõk számára)"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -17052,8 +17376,8 @@ msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
 "hardware configuration tool."
 msgstr ""
-"Nem található Ethernet hálózati adapter a rendszerben. Futtassa a "
-"hardverkonfigurációs eszközt."
+"Nem található Ethernet hálózati csatoló a rendszerben. Futtassa a "
+"hardverbeállítási eszközt."
 
 #: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
 #, c-format
@@ -17125,15 +17449,15 @@ msgid "enable"
 msgstr "Engedélyezés"
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently disabled.\n"
 "\n"
 "What would you like to do?"
 msgstr ""
-"Az internetkapcsolat megosztása korábban már megtörtént.\n"
-"A megosztott kapcsolat használata nincs engedélyezve.\n"
+"Az internetkapcsolat megosztása már korábban megtörtént.\n"
+"A kapcsolatmegosztás jelenleg nincs bekapcsolva.\n"
 "\n"
 "Mit szeretne tenni?"
 
@@ -17186,6 +17510,13 @@ msgid ""
 "No browser is installed on your system, Please install one if you want to "
 "browse the help system"
 msgstr ""
+"Nincs telepítve böngészõ a gépre. Ha szeretné elérni a segítségrendszert, "
+"telepítsen egy böngészõt."
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Path"
+msgstr "Útvonal"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17248,11 +17579,6 @@ msgstr "Tulajdonság"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Path"
-msgstr "Útvonal"
-
-#: ../../standalone/drakperm:1
-#, c-format
 msgid "Permissions"
 msgstr "Engedélyek"
 
@@ -17265,23 +17591,6 @@ msgstr "Aktuális felhasználó"
 #, c-format
 msgid "browse"
 msgstr "böngészés"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr "válassza ki a megjelenítendõ/módosítandó engedélyfájlt"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
-msgstr ""
-"A Drakperm az \"msec\" által kezelt engedélyeknek, tulajdonosoknak és "
-"csoportoknak a karbantartására használható.\n"
-"A felhasználó módosíthatja a saját szabályait, felüldefiniálva ezzel az "
-"alapértelmezett szabályokat."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17335,6 +17644,23 @@ msgstr "Fel"
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "select perm file to see/edit"
+msgstr "válassza ki a megjelenítendõ/módosítandó engedélyfájlt"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
+msgstr ""
+"A Drakperm az \"msec\" által kezelt engedélyeknek, tulajdonosoknak és "
+"csoportoknak a karbantartására használható.\n"
+"A felhasználó módosíthatja a saját szabályait, felüldefiniálva ezzel az "
+"alapértelmezett szabályokat."
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "permissions"
 msgstr "engedélyek"
 
@@ -17354,9 +17680,9 @@ msgid "path"
 msgstr "útvonal"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Location of auto_install.cfg file"
-msgstr "Automatikus telepítõfloppy készítése"
+msgstr "Az auto_install.cfg fájl helye"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -17366,22 +17692,28 @@ msgid ""
 "Leave it blank if you do not want to set up automatic installation mode.\n"
 "\n"
 msgstr ""
+"Adja meg az auto_install.cfg fájl helyét.\n"
+"\n"
+"Ha nem kíván automatikus telepítési módot beállítani, akkor hagyja üresen.\n"
+"\n"
 
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
 "No CD or DVD image found, please copy the installation program and rpm files."
 msgstr ""
+"Nem található sem CD-, sem DVD-képfájl. Másolja le a telepítõprogramot és az "
+"RPM fájlokat."
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "No image found"
-msgstr "Nyomtató nem található."
+msgstr "Képfájl (image) nem található"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installation image directory"
-msgstr "Xpmac (telepítési meghajtóprogram)"
+msgstr "A telepítési képfájl könyvtára"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -17392,15 +17724,19 @@ msgid ""
 "contents.\n"
 "\n"
 msgstr ""
+"Adja meg a telepítési képfájl helyét.\n"
+"\n"
+"Ha nincs ilyen könyvtár, akkor másolja le a CD illetve a DVD tartalmát.\n"
+"\n"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "The DHCP end ip"
 msgstr "A DHCP-címtartomány vége"
 
 # IP Range Lower Limit: The lowest IP address that should be served by a DHCP server.
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "The DHCP start ip"
 msgstr "A DHCP-címtartomány kezdete"
 
@@ -17413,22 +17749,26 @@ msgid ""
 "The network address is %s using a netmask of %s.\n"
 "\n"
 msgstr ""
+"A DHCP-kiszolgáló lehetõvé teszi más gépek számára a PXE módszerrel való "
+"rendszerindítást - a megadott címtartományt használva.\n"
+"\n"
+"A hálózati cím %s a következõ hálózati maszkot használva: %s.\n"
+"\n"
 
-# az interface (hálókártya) milyen modult használ
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Interface %s (on network %s)"
-msgstr "\"%s\" csatoló (a felhasznált modul: %s)"
+msgstr "\"%s\" csatoló (ezen a hálózaton: %s)"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose which network interface will be used for the dhcp server."
 msgstr ""
-"Válassza ki, hogy melyik hálózati adapteren keresztül szeretne csatlakozni "
-"az internetre."
+"Válassza ki, melyik hálózati csatolót szeretné használni a DHCP-"
+"kiszolgálóhoz."
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You are about to configure your computer to install a PXE server as a DHCP "
 "server\n"
@@ -17442,25 +17782,27 @@ msgid ""
 "Note: you need a dedicated Network Adapter to set up a Local Area Network "
 "(LAN)."
 msgstr ""
-"Az internetkapcsolat megosztásának beállítása következik.\n"
-"Ennek segítségével a helyi hálózat más gépei is elérhetik az internetet\n"
-"ezen a kapcsolaton keresztül.\n"
+"A következõ lépésben a számítógépen beállításra kerül egy PXE-kiszolgáló,\n"
+"amely DHCP- és TFTP-szolgáltatásokat lesz képes nyújtani. Ez lehetõvé\n"
+"teszi, hogy a gép telepítési kiszolgálóként funkcionáljon a helyi hálózat\n"
+"más gépei számára, vagyis a többi gép telepíthetõ lesz ezen gép\n"
+"segítségével.\n"
 "\n"
 "Mielõtt továbblépne, állítsa be a hálózat- illetve internetelérést\n"
 "a DrakConnect programmal (ha ez még nem történt meg).\n"
 "\n"
-"Megjegyzés: a helyi hálózat (LAN) használatához legalább egy hálózati\n"
-"csatolókártya szükséges."
+"Megjegyzés: helyi hálózat (LAN) létrehozásához szükség lesz egy speciálisan\n"
+"erre a célra használt hálózati csatolóra."
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installation Server Configuration"
-msgstr "A dhcpd kiszolgáló beállítása"
+msgstr "Telepítési kiszolgáló beállítása"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "PXE Server Configuration"
-msgstr "A dhcpd kiszolgáló beállítása"
+msgstr "PXE-kiszolgáló beállítása"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -17488,13 +17830,13 @@ msgid "Network Options"
 msgstr "Hálózati opciók"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following options can be set to customize your\n"
 "system security. If you need an explanation, look at the help tooltip.\n"
 msgstr ""
 "A következõ opciókkal be lehet állítani a rendszer biztonságát.\n"
-"Ha magyarázatra van szüksége, kattintson a Segítség gombra.\n"
+"Ha magyarázatra van szüksége, olvassa el a tippszöveget.\n"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -17507,14 +17849,14 @@ msgid "Security Alerts:"
 msgstr "Biztonsági figyelmeztetések:"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
-msgid "(default value: %s)"
-msgstr " (alapértelmezés: %s)"
-
-#: ../../standalone/draksec:1
 #, c-format
 msgid "Security Level:"
 msgstr "Biztonsági szint:"
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid "(default value: %s)"
+msgstr "(alapértelmezés: %s)"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -17530,7 +17872,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -17539,7 +17881,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 "Szabványos: Ez a szabványos biztonsági szint, amely akkor javasolt, ha a gép "
 "kliensként fog\n"
@@ -17932,26 +18274,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/Beállítások"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect jazz drives"
-msgstr "Automatikusan felderítve"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect modems"
-msgstr "Automatikusan felderítve"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect printers"
-msgstr "Automatikusan felderítve"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr "elsõdleges"
 
@@ -17965,6 +18287,18 @@ msgstr "másodlagos"
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr ""
+"Ha a bal oldali fában rákattint egy eszközre, megjelennek itt az eszköz "
+"adatai."
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Unknown"
+msgstr "Ismeretlen"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "unknown"
+msgstr "ismeretlen"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18025,11 +18359,6 @@ msgstr "A HardDrake névjegye"
 msgid "/_About..."
 msgstr "/_Névjegy..."
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/_Segítség"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -18043,9 +18372,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Select a device !"
-msgstr "Válasszon egy lapolvasót"
+msgstr "Válasszon egy eszközt"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18066,15 +18395,20 @@ msgstr "HardDrake segítség"
 msgid "/_Fields description"
 msgstr "Leírás"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/_Segítség"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/_Quit"
+msgstr "/_Kilépés"
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "Automatikusan felderítve"
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_Beállítások"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -18086,15 +18420,15 @@ msgstr "Automatikusan felderítve"
 msgid "/Autodetect _printers"
 msgstr "Automatikusan felderítve"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
-msgid "/_Quit"
-msgstr "/_Kilépés"
+msgid "/_Options"
+msgstr "/_Beállítások"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "the vendor name of the processor"
-msgstr "az eszköz gyártójának neve"
+msgstr "a processzor gyártójának neve"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18102,9 +18436,9 @@ msgid "the vendor name of the device"
 msgstr "az eszköz gyártójának neve"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "The type of bus on which the mouse is connected"
-msgstr "Válassza ki, hogy melyik soros porthoz csatlakozik az egere."
+msgstr "Az egér által használt busz típusa"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18117,24 +18451,24 @@ msgid "Model stepping"
 msgstr "terhelésbeállítás"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "the number of the processor"
-msgstr "a folyamatjelzõ színe"
+msgstr "a processzor száma"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Processor ID"
-msgstr ""
+msgstr "Processzorazonosító"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "network printer port"
-msgstr ", hálózati nyomtató: \"%s\", port: %s"
+msgstr "hálózati nyomtatóport"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Name"
-msgstr "Név: "
+msgstr "Név"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18188,7 +18522,7 @@ msgstr "szint"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -18341,6 +18675,16 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
 msgid "Size of the (second level) cpu cache"
 msgstr ""
 
@@ -18485,7 +18829,7 @@ msgid "load setting"
 msgstr "terhelésbeállítás"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
@@ -18821,8 +19165,8 @@ msgstr "Hálózatbeállítás"
 
 #: ../../standalone/printerdrake:1
 #, c-format
-msgid "Reading printer data ..."
-msgstr "A nyomtatóadatok beolvasása..."
+msgid "Reading data of installed printers..."
+msgstr "A telepített nyomtatók adatainak beolvasása..."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18931,55 +19275,6 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-"Az Ön \"%s\" lapolvasója beállításra került.\n"
-"Dokumentumok beolvasására használhatja például az \"XSane\" programot, amely "
-"az alkalmazásmenü \"Multimédia/Grafika\" részében található."
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-"A(z) \"%s\" lapolvasót a PrinterDrake programmal lehet beállítani.\n"
-"A PrinterDrake-et a Mandrake Vezérlõközpont \"Hardver\" részében indíthatja "
-"el."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "válassza ki az eszközt"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Please select the device where your %s is attached"
-msgstr ""
-"A ScannerDrake nem találta meg az Ön \"%s\" lapolvasóját.\n"
-"Válassza ki, melyik eszközhöz csatlakozik a lapolvasó."
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "The %s is unsupported"
-msgstr "Ez a lapolvasó nincs támogatva: %s"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr "A Mandrake Linux jelenleg használt verziója nem támogatja ezt: %s."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr "A Mandrake Linux jelenleg használt verziója nem támogatja ezt: %s."
-
-#: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Re-generating list of configured scanners ..."
 msgstr ""
@@ -19037,8 +19332,92 @@ msgstr ""
 "Egy ismeretlen nyomtató közvetlenül csatlakozik a géphez"
 
 #: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+"Az Ön \"%s\" lapolvasója beállításra került.\n"
+"Dokumentumok beolvasására használhatja például az \"XSane\" programot, amely "
+"az alkalmazásmenü \"Multimédia/Grafika\" részében található."
+
+#: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
+msgid "choose device"
+msgstr "válassza ki az eszközt"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Please select the device where your %s is attached"
+msgstr ""
+"A ScannerDrake nem találta meg az Ön \"%s\" lapolvasóját.\n"
+"Válassza ki, melyik eszközhöz csatlakozik a lapolvasó."
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Searching for scanners ..."
+msgstr "Az elérhetõ nyomtatók"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Auto-detect available ports"
+msgstr "Automatikusan felderítve"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+"A(z) \"%s\" lapolvasót a PrinterDrake programmal lehet beállítani.\n"
+"A PrinterDrake-et a Mandrake Vezérlõközpont \"Hardver\" részében indíthatja "
+"el."
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "The %s is unsupported"
+msgstr "Ez a lapolvasó nincs támogatva: %s"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr "A Mandrake Linux jelenleg használt verziója nem támogatja ezt: %s."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr "A Mandrake Linux jelenleg használt verziója nem támogatja ezt: %s."
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Port: %s"
+msgstr "Port"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Detected model: %s"
+msgstr "Felismert modell: %s %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Select a scanner model"
 msgstr "Válasszon egy lapolvasót"
 
 #: ../../standalone/scannerdrake:1
@@ -19052,9 +19431,9 @@ msgid "%s found on %s, configure it automatically?"
 msgstr "\"%s\" található itt: \"%s\"; kívánja beállítani?"
 
 #: ../../standalone/service_harddrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Hardware probing in progress"
-msgstr "Felderítés folyamatban"
+msgstr "Hardverfelderítés folyamatban"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -19129,6 +19508,10 @@ msgstr "Segédprogramok a számítógép beállításához"
 #: ../../share/compssUsers:999
 msgid "Scientific Workstation"
 msgstr "Tudományos munkaállomás"
+
+#: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr "Tudományos alkalmazások, mint például a Gnuplot"
 
 #: ../../share/compssUsers:999
 msgid "Console Tools"
@@ -19206,12 +19589,12 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache, Pro-ftpd"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "E-mail/csoportmunka/hírek"
+msgid "Mail"
+msgstr "Levelezés"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr "Postfix email-kiszolgáló, Inn hírkiszolgáló"
+msgid "Postfix mail server"
+msgstr "Postfix email-kiszolgáló"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -19308,6 +19691,151 @@ msgstr "Személyes pénzügyek"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programok a személyes pénzügyek kezeléséhez (például: GnuCash)"
+
+#~ msgid ""
+#~ "Please enter your host name if you know it.\n"
+#~ "Some DHCP servers require the hostname to work.\n"
+#~ "Your host name should be a fully-qualified host name,\n"
+#~ "such as ``mybox.mylab.myco.com''."
+#~ msgstr ""
+#~ "Most adja meg a gép nevét (ha ismeri).\n"
+#~ "Néhány DHCP-kiszolgáló csak a gépnév megadása után használható.\n"
+#~ "A teljes nevet kell beírni, például: \"gep.vallalat.hu\"."
+
+#~ msgid ""
+#~ "The classic bug sound tester is to run the following commands:\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card "
+#~ "use\n"
+#~ "by default\n"
+#~ "\n"
+#~ "- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+#~ "currently uses\n"
+#~ "\n"
+#~ "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
+#~ "loaded or not\n"
+#~ "\n"
+#~ "- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" "
+#~ "will\n"
+#~ "tell you if sound and alsa services're configured to be run on\n"
+#~ "initlevel 3\n"
+#~ "\n"
+#~ "- \"aumix -q\" will tell you if the sound volume is muted or not\n"
+#~ "\n"
+#~ "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound "
+#~ "card.\n"
+#~ msgstr ""
+#~ "Hangprobléma esetén a következõ parancsokat érdemes használni:\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | fgrep AUDIO\": kiírja, melyik meghajtót használja\n"
+#~ "alapértelmezésben a hangkártya\n"
+#~ "\n"
+#~ "- \"grep snd-slot /etc/modules.conf\": kiírja, milyen meghajtó "
+#~ "használata\n"
+#~ "van jelenleg beállítva\n"
+#~ "\n"
+#~ "- \"/sbin/lsmod\": ezzel ellenõrizhetõ, hogy be van-e töltve a megfelelõ\n"
+#~ "modul (meghajtó)\n"
+#~ "\n"
+#~ "- \"/sbin/chkconfig --list sound\" és \"/sbin/chkconfig --list alsa\":\n"
+#~ "kiírják, hogy a hangszolgáltatások futtatva vannak-e bizonyos futási\n"
+#~ "szinteken\n"
+#~ "\n"
+#~ "- \"aumix -q\": kiírja, hogy a hangerõ le van-e véve vagy sem\n"
+#~ "\n"
+#~ "- \"/sbin/fuser -v /dev/dsp\": kiírja, hogy melyik program használja a\n"
+#~ "hangkártyát\n"
+
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "DrakFloppy hiba: %s"
+
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-iso8859-2,*"
+
+#~ msgid "Launch Aurora at boot time"
+#~ msgstr "Az Aurora indítása rendszerindításkor"
+
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr "Hagyományos GTK+-monitor"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "Hagyományos monitor"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "Új stílusú monitor"
+
+#~ msgid "NewStyle Categorizing Monitor"
+#~ msgstr "Új stílusú kategorizáló monitor"
+
+#~ msgid "Secure Connection"
+#~ msgstr "Biztonságos kapcsolat"
+
+#~ msgid "FTP Connection"
+#~ msgstr "FTP-kapcsolat"
+
+#~ msgid "Mail/Groupware/News"
+#~ msgstr "E-mail/csoportmunka/hírek"
+
+#~ msgid "Postfix mail server, Inn news server"
+#~ msgstr "Postfix email-kiszolgáló, Inn hírkiszolgáló"
+
+#~ msgid "/Options"
+#~ msgstr "/Beállítások"
+
+#, fuzzy
+#~ msgid "/Autodetect jazz drives"
+#~ msgstr "Automatikusan felderítve"
+
+#, fuzzy
+#~ msgid "/Autodetect modems"
+#~ msgstr "Automatikusan felderítve"
+
+#, fuzzy
+#~ msgid "/Autodetect printers"
+#~ msgstr "Automatikusan felderítve"
+
+#~ msgid ""
+#~ "The partition you've selected to add as root (/) is physically located "
+#~ "beyond\n"
+#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
+#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
+#~ "partition"
+#~ msgstr ""
+#~ "Az a partíció, amelyet gyökérpartíciónak (/) jelölt ki, fizikailag az "
+#~ "1024.\n"
+#~ "cilinder után található, és a rendszerben nincs /boot partíció.\n"
+#~ "Ha a LILO-t szeretné használni, hozzon létre egy /boot partíciót."
+
+#~ msgid ""
+#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
+#~ "> 1024).\n"
+#~ "Either you use LILO and it won't work, or you don't use LILO and you "
+#~ "don't need /boot"
+#~ msgstr ""
+#~ "Nem hozhatom létre a /boot-ot ennyire távol a merevlemez elejétõl "
+#~ "(cilinder\n"
+#~ "> 1024). Ha a LILO-t használja, akkor az nem fog mûködni, ha pedig nem\n"
+#~ "használja a LILO-t, akkor nincs szükség a /boot-ra."
+
+#~ msgid "Upgrade"
+#~ msgstr "Frissítés"
+
+#~ msgid "Do you want to configure another printer?"
+#~ msgstr "Szeretne beállítani egy másik nyomtatót?"
+
+#~ msgid "Know how to use this printer"
+#~ msgstr "Hogyan kell használni ezt a nyomtatót"
+
+#~ msgid "Would you like to configure printing?"
+#~ msgstr "Szeretné beállítani a nyomtatókezelést?"
+
+#~ msgid "Preparing Printerdrake..."
+#~ msgstr "A PrinterDrake elõkészítése..."
+
+#~ msgid "Reading printer data ..."
+#~ msgstr "A nyomtatóadatok beolvasása..."
 
 #~ msgid ""
 #~ "You must indicate where you wish to place the information required to "

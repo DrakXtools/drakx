@@ -22,16 +22,18 @@ msgid ""
 "You can use userdrake to add a user to this group."
 msgstr ""
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Kanselleer"
@@ -762,232 +764,6 @@ msgstr ""
 "%d sekonde vir die verstekopsie.\n"
 "\n"
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "OK"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "Ja, ek verlang outoaanteken met hierdie (gebruiker,werkskerm)"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "Nee, ek verlang outo-aanteken"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "Laai X-Windowstelsel met herlaai"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "Stelselmode"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Splash selection"
-msgstr "Stoor pakketseleksie"
-
-#: ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Konfigureer"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"U gebruik huidig %s as herlaaibestuurder.\n"
-"Kliek op Konfigureer om opstelassistent te laai."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Theme installation failed!"
-msgstr "Kies installasieklas"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, fuzzy, c-format
-msgid "Notice"
-msgstr "Geen video"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "Fout"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Write %s"
-msgstr "XFree %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Create new theme"
-msgstr "Kies 'n nuwe grootte"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Install themes"
-msgstr "Installeer stelsel"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "LILO/GRUB metode"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "Yaboot metode"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "Laai Aurora met herlaaityd"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "Tradisionele Gtk+ Monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "Tradisionele monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "Nuwe styl monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "Nuwe monitorkategoriasiestyl"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/Lêer/_Verlaat"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_Lêer"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "Herlaaistylkonfigurasie"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1193,6 +969,15 @@ msgstr ""
 "(fout is %s)\n"
 "\n"
 "Will u al die partisies verwyder?\n"
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "Fout"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -2533,12 +2318,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Nee"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Ja"
@@ -2637,6 +2424,13 @@ msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Daar is geen FAT partisies om te verander of om as teruglus (nie genoeg "
 "spasie nie) te gebruik nie"
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3006,6 +2800,7 @@ msgstr "Gaan stap '%s' binne\n"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Help"
 msgstr ""
@@ -3014,6 +2809,12 @@ msgstr ""
 #, fuzzy, c-format
 msgid "not configured"
 msgstr "herkonfigureer"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Konfigureer"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -3623,6 +3424,16 @@ msgid "Which is your timezone?"
 msgstr "Wat is u tydsone?"
 
 #: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "Wil u 'n drukwerk nou konfigureer?"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Unable to contact mirror %s"
+msgstr "Kon nie vurk nie: %s"
+
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Spieël word gekontak vir die lys van pakkette"
@@ -3922,6 +3733,15 @@ msgstr "Hierdie is die volledige lys van beskikbare sleutelborde"
 msgid "Please choose your keyboard layout."
 msgstr "Wat is u sleutelborduitleg?"
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Verlaat"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
@@ -4000,7 +3820,7 @@ msgstr "OK"
 #: ../../interactive/newt.pm:1
 #, c-format
 msgid "Finish"
-msgstr "Finnies"
+msgstr ""
 
 #: ../../interactive.pm:1 ../../standalone/draksec:1
 #, c-format
@@ -6558,6 +6378,14 @@ msgstr "Kies u taal"
 msgid "utopia 25"
 msgstr ""
 
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "OK"
+
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
 msgid "logdrake"
@@ -6739,7 +6567,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Opsies"
@@ -6763,14 +6591,6 @@ msgstr "Monitor"
 #, fuzzy, c-format
 msgid "Graphic Card"
 msgstr "Videokaart"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Verlaat"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -7905,6 +7725,11 @@ msgstr ""
 
 #: ../../harddrake/data.pm:1
 #, c-format
+msgid "Firewire controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr ""
 
@@ -8037,7 +7862,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -8451,7 +8276,7 @@ msgstr "Konnekteer aan die internet"
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
+msgid "Sagem (using pppoa) usb"
 msgstr ""
 
 #: ../../network/adsl.pm:1
@@ -8556,14 +8381,14 @@ msgstr ""
 
 #
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, fuzzy, c-format
-msgid "Zeroconf Host name"
+#, c-format
+msgid "Host name"
 msgstr "Rekenaarnaam"
 
 #
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid "Host name"
+#, fuzzy, c-format
+msgid "Zeroconf Host name"
 msgstr "Rekenaarnaam"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
@@ -8574,19 +8399,6 @@ msgid ""
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
 msgstr ""
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-"Tik asb die rekenaarnaam in.\n"
-"Sekere DHCP-bedieners benodig die rekenaarnaam.\n"
-"Dit moet 'n volle gekwalifiseerde naam wees,\n"
-"bv. ``myne.mywerk.co.za''."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9224,6 +9036,12 @@ msgstr "IP-adres moet in 1.2.3.4. formaat wees"
 msgid "Start at boot"
 msgstr "Gelaai tydens herlaaityd"
 
+#
+#: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "Assign host name from DHCP address"
+msgstr "Toets asb. die muis"
+
 #: ../../network/network.pm:1
 #, fuzzy, c-format
 msgid "Network Hotplugging"
@@ -9234,15 +9052,11 @@ msgstr "Netwerkkonfigurasie"
 msgid "Track network card id (useful for laptops)"
 msgstr "Volg netwerkkart ID. (nuttig vir skootrekenaars)"
 
+#
 #: ../../network/network.pm:1
 #, fuzzy, c-format
-msgid "(bootp/dhcp/zeroconf)"
-msgstr "(bootp/dhcp)"
-
-#: ../../network/network.pm:1
-#, c-format
-msgid "Automatic IP"
-msgstr "Outomatiese IP"
+msgid "DHCP host name"
+msgstr "Rekenaarnaam"
 
 #
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
@@ -9257,6 +9071,16 @@ msgstr "Netmasker"
 #, c-format
 msgid "IP address"
 msgstr "IP adres"
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "(bootp/dhcp/zeroconf)"
+msgstr "(bootp/dhcp)"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Automatic IP"
+msgstr "Outomatiese IP"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -9832,6 +9656,7 @@ msgid "Add a new printer"
 msgstr "Voeg drukker by"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Normale modus"
@@ -13123,6 +12948,11 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup:1
+#, c-format
+msgid "%s"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Please select data to backup..."
 msgstr "Kies asb. 'n taal om te gebruik."
@@ -13370,16 +13200,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Restore from Hard Disk."
 msgstr "Herstel vanaf floppie"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Secure Connection"
-msgstr "Kies drukkerkonneksie"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "FTP Connection"
-msgstr "LAN konneksie"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -14221,6 +14041,184 @@ msgstr ""
 msgid "Installation of %s failed. The following error occured:"
 msgstr "%s installasie het gefaal a.g.v. hierdie fout: "
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "Nee, ek verlang outo-aanteken"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "Ja, ek verlang outoaanteken met hierdie (gebruiker,werkskerm)"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "Laai X-Windowstelsel met herlaai"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "Stelselmode"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Splash selection"
+msgstr "Stoor pakketseleksie"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"U gebruik huidig %s as herlaaibestuurder.\n"
+"Kliek op Konfigureer om opstelassistent te laai."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Theme installation failed!"
+msgstr "Kies installasieklas"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, fuzzy, c-format
+msgid "Notice"
+msgstr "Geen video"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Write %s"
+msgstr "XFree %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Create new theme"
+msgstr "Kies 'n nuwe grootte"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Install themes"
+msgstr "Installeer stelsel"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "LILO/GRUB metode"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "Yaboot metode"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/Lêer/_Verlaat"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_Lêer"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "Herlaaistylkonfigurasie"
+
 #: ../../standalone/drakbug:1
 #, fuzzy, c-format
 msgid "No browser available! Please install one"
@@ -14352,6 +14350,16 @@ msgstr ""
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "Parameters"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "Internetkonneksiekonfigurasie"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "DHCP-Kliënt"
 
@@ -14365,11 +14373,6 @@ msgstr "Ethernetkaart"
 msgid "Gateway"
 msgstr "Portaal"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "Parameters"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -14379,11 +14382,6 @@ msgstr "Konneksietipe:"
 #, c-format
 msgid "Profile: "
 msgstr "Profiel:"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "Internetkonneksiekonfigurasie"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -14645,8 +14643,8 @@ msgstr "Verwyder module"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr "laat RAID-modules weg"
+msgid "Add a module"
+msgstr "Voeg module by"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -14660,13 +14658,13 @@ msgstr "indien nodig"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "forseer"
+msgid "omit raid modules"
+msgstr "laat RAID-modules weg"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "Voeg module by"
+msgid "force"
+msgstr "forseer"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -14680,23 +14678,18 @@ msgstr "Kundige area"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "Algemeen"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "bedryfstelselkernweergawe"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "DrakFloppy Fout: %s"
+msgid "default"
+msgstr "verstek"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "verstek"
+msgid "General"
+msgstr "Algemeen"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -14717,11 +14710,6 @@ msgstr "Grootte"
 #, c-format
 msgid "Module name"
 msgstr "Modulenaam"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
@@ -15346,6 +15334,11 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakperm:1
+#, c-format
+msgid "Path"
+msgstr ""
+
+#: ../../standalone/drakperm:1
 #, fuzzy, c-format
 msgid "group :"
 msgstr "Werkgroep:"
@@ -15403,11 +15396,6 @@ msgid "Property"
 msgstr "Poort"
 
 #: ../../standalone/drakperm:1
-#, c-format
-msgid "Path"
-msgstr ""
-
-#: ../../standalone/drakperm:1
 #, fuzzy, c-format
 msgid "Permissions"
 msgstr "Weergawe: %s\n"
@@ -15420,19 +15408,6 @@ msgstr "Aanvaar gebruiker"
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "browse"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -15483,6 +15458,19 @@ msgstr ""
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Up"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -16082,11 +16070,6 @@ msgstr ""
 msgid "/_About..."
 msgstr "/_Aangaande..."
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/_Help"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -16121,6 +16104,11 @@ msgstr ""
 msgid "/_Fields description"
 msgstr "Beskrywing"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/_Help"
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "/_Quit"
@@ -16131,11 +16119,6 @@ msgstr "Verlaat"
 msgid "/Autodetect _jazz drives"
 msgstr "Gebruik outobespeuring"
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_Opsies"
-
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "/Autodetect _modems"
@@ -16145,6 +16128,11 @@ msgstr "Gebruik outobespeuring"
 #, fuzzy, c-format
 msgid "/Autodetect _printers"
 msgstr "Gebruik outobespeuring"
+
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Options"
+msgstr "/_Opsies"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16393,6 +16381,16 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Coma bug"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -17037,14 +17035,6 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "choose device"
 msgstr "Herlaaitoestel"
@@ -17067,6 +17057,14 @@ msgstr "Gebruik outobespeuring"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
@@ -17282,11 +17280,12 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache, Pro-ftpd"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "E-pos/Groepware/Netnuus"
+msgid "Mail"
+msgstr ""
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
+#, fuzzy
+msgid "Postfix mail server"
 msgstr "Postfix e-posbediener, Inn netnuusbediener"
 
 #: ../../share/compssUsers:999
@@ -17386,6 +17385,52 @@ msgstr "Persoonlike finansies"
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programme om u finansies te bestuur, soos GNUcash"
 
+#~ msgid ""
+#~ "Please enter your host name if you know it.\n"
+#~ "Some DHCP servers require the hostname to work.\n"
+#~ "Your host name should be a fully-qualified host name,\n"
+#~ "such as ``mybox.mylab.myco.com''."
+#~ msgstr ""
+#~ "Tik asb die rekenaarnaam in.\n"
+#~ "Sekere DHCP-bedieners benodig die rekenaarnaam.\n"
+#~ "Dit moet 'n volle gekwalifiseerde naam wees,\n"
+#~ "bv. ``myne.mywerk.co.za''."
+
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "DrakFloppy Fout: %s"
+
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+
+#~ msgid "Launch Aurora at boot time"
+#~ msgstr "Laai Aurora met herlaaityd"
+
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr "Tradisionele Gtk+ Monitor"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "Tradisionele monitor"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "Nuwe styl monitor"
+
+#~ msgid "NewStyle Categorizing Monitor"
+#~ msgstr "Nuwe monitorkategoriasiestyl"
+
+#, fuzzy
+#~ msgid "Secure Connection"
+#~ msgstr "Kies drukkerkonneksie"
+
+#, fuzzy
+#~ msgid "FTP Connection"
+#~ msgstr "LAN konneksie"
+
+#~ msgid "Mail/Groupware/News"
+#~ msgstr "E-pos/Groepware/Netnuus"
+
+#~ msgid "Postfix mail server, Inn news server"
+#~ msgstr "Postfix e-posbediener, Inn netnuusbediener"
+
 #~ msgid "/Options"
 #~ msgstr "/Opsies"
 
@@ -17437,9 +17482,6 @@ msgstr "Programme om u finansies te bestuur, soos GNUcash"
 #, fuzzy
 #~ msgid "Know how to use this printer"
 #~ msgstr "Wil u die konfigurasie toets?"
-
-#~ msgid "Would you like to configure printing?"
-#~ msgstr "Wil u 'n drukwerk nou konfigureer?"
 
 #, fuzzy
 #~ msgid "Preparing Printerdrake..."

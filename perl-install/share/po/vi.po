@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX for Mandrake Linux 9.x\n"
 "POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-02-15 20:46+0700\n"
+"PO-Revision-Date: 2003-02-28 05:22+0700\n"
 "Last-Translator: Trinh Minh Thanh <tmthanh@yahoo.com>\n"
 "Language-Team: Gnome-Vi <Gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -22,16 +22,18 @@ msgstr ""
 "Việc chia sẻ tập tin sử dụng nhóm \"chia sẻ tập tin\".\n"
 "Có thể dùng userdrake để thêm người dùng vào nhóm này."
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Bỏ qua"
@@ -110,14 +112,13 @@ msgstr "Quốc gia"
 
 #: ../../any.pm:1
 #, c-format
+msgid "All languages"
+msgstr "Mọi ngôn ngữ"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Use Unicode by default"
 msgstr "Dùng Unicode theo mặc định"
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "Toàn bộ"
 
 #: ../../any.pm:1
 #, c-format
@@ -496,6 +497,16 @@ msgstr "Các tùy chọn dòng lệnh hạn chế"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr "Ép không có APIC"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Enable ACPI"
+msgstr "Bật chạy ACPI"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "Thời gian trễ trước khi khởi động ảnh mặc định"
 
@@ -548,6 +559,11 @@ msgstr "Cho qua"
 #, c-format
 msgid "On Floppy"
 msgstr "Trên đĩa mềm"
+
+#: ../../any.pm:1
+#, c-format
+msgid "First sector of the root partition"
+msgstr "Sector đầu tiên của phân vùng root"
 
 #: ../../any.pm:1
 #, c-format
@@ -757,243 +773,6 @@ msgstr ""
 "cho+` %d gia^y dde^? kho+?i ddo^.ng he^. ddie^`u ha`nh ma(.c ddi.nh.\n"
 "\n"
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "OK"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "Tôi muốn đăng nhập tự động với cái này (người dùng, màn hình nền)"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "Tôi không muốn đăng nhập tự động"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "Chạy hệ thống X-Window khi khởi động"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "Chế độ hệ thống"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr "Bootsplash"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr "Màn hình LiLo"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-"\n"
-"Hãy chọn theme cho\n"
-"LiLo và Bootsplash.\n"
-"Bạn có thể chọn\n"
-"chúng riêng biệt"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "Themes"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Splash selection"
-msgstr "Chọn splash"
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Cấu hình"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Hiện thời bạn đang dùng %s làm Trình Quản Lý Khởi Động.\n"
-"Nhấn lên Cấu Hình để chạy đồ thuật cho thiết lập."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "Hoàn thành cài đặt theme cho Bootsplash và LiLo"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr "Không cài đặt được theme!"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr "Thông báo"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "Lỗi"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr "Chạy lại 'lilo'"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-"Không thể chạy lại LiLo!\n"
-"Hãy chạy \"lilo\" bằng root trong dòng lệnh để hoàn thành cài đặt theme của "
-"LiLo."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr "Tạo initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr "Không thể chạy mkinitrd -f /boot/initrd-%s.img %s."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-"Không thể ghi /etc/sysconfig/bootsplash\n"
-"Không thấy tập tin."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "Ghi %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr "Không thể ghi /etc/sysconfig/bootsplash."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "Không tìm thấy thông điệp của LiLo"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "Sao chép %s sang %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr "Sao lưu %s thành %s.old"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "Tạo theme mới"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-"Hiển thị theme\n"
-"dưới console"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr "Cài đặt các theme"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "Chế độ Lilo/Grub"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "Chế độ Yaboot"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "Chạy Aurora khi khởi động"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "Màn hình truyền thống Gtk+"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "Màn hình truyền thống"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "Màn hình kiểu mới"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "Màn hình phân loại kiểu mới"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/Tệp/T_hoát"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_Tệp"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "Cấu Hình Khuôn Thức Khởi Động"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1151,8 +930,24 @@ msgstr "Không thể dùng một ổ lý luận LVM cho điểm gắn kết %s"
 
 #: ../../fsedit.pm:1
 #, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"Phân vùng phần mềm RAID được chọn là root (/).\n"
+"Không có trình khởi động nào xử lý nó khi thiếu phân vùng /boot.\n"
+"Vì vậy, hãy đảm bảo thêm phân vùng /boot"
+
+#: ../../fsedit.pm:1
+#, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Đang có một phân vùng có điểm gắn kết %s rồi\n"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr "Các điểm gắn kết chỉ nên dùng các ký tự chữ và số"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1185,6 +980,15 @@ msgstr ""
 "(Lỗi như sau %s)\n"
 "\n"
 "Bạn có đồng ý để mất toàn bộ các phân vùng?\n"
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "Lỗi"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1277,7 +1081,7 @@ msgstr ""
 "phục lại được."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "As a review, DrakX will present a summary of various information it has\n"
 "about your system. Depending on your installed hardware, you may have some\n"
@@ -1294,8 +1098,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1308,7 +1112,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1671,7 +1475,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1720,7 +1524,7 @@ msgstr ""
 "toàn bộ đĩa."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After you have configured the general bootloader parameters, the list of\n"
 "boot options that will be available at boot time will be displayed.\n"
@@ -1737,18 +1541,23 @@ msgid ""
 "bootloader menu, but you will need a boot disk in order to boot those other\n"
 "operating systems!"
 msgstr ""
-"LILO (the LInux LOader) và GRUB là các trình quản lý khởi động không chỉ\n"
-"cho GNU/Linux mà còn cho cả các hệ điều hành khác trong máy tính của bạn.\n"
-"Thông thường, các hệ điều hành khác được phát hiện chính xác và được cài\n"
-"đặt. Nếu không được như vậy, bạn có thể nhập thủ công thêm vào màn hình\n"
-"này. Hãy thận trọng chọn chính xác các thông số.\n"
+"Sau khi cấu hình các tham số của trình nạp khởi động, một danh sách\n"
+"các tùy chọn khởi động sẽ hiển thị lúc khởi động.\n"
 "\n"
-"Bạn cũng có thể không muốn cho người khác truy cập vào các hệ điều hành\n"
-"khác này, trường hợp này bạn có thể xoá các mục nhập tương ứng. Nhưng\n"
-"bạn phải tạo một đĩa khởi động để khởi động chúng!"
+"Nếu có các hệ điều hành khác cài trong máy, chúng sẽ được tự động\n"
+"thêm vào menu khởi động. Bạn có thể tinh chỉnh các tùy chọn hiện hành\n"
+"bằng việc nhấn \"Thêm\" để tạo mục nhập mới, chọn một mục rồi nhấn\n"
+"\"Biến đổi\" hoặc \"Bỏ\" để thay đổi hay bỏ nó. Nhấn \"OK\" để lưu các\n"
+"thay đổi.\n"
+"\n"
+"Cũng có thể bạn muốn cấp quyền truy cập vào các hệ điều hành này cho\n"
+"người khác để vào được console và khởi động lại máy. Bạn có thể xóa các\n"
+"mục tương ứng với các hệ điều hành để bỏ chúng khỏi menu của trình nạp\n"
+"khởi động, nhưng sẽ cần đĩa mềm khởi động để khởi động các hệ điều hành\n"
+"khác đó!"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This dialog allows to finely tune your bootloader:\n"
 "\n"
@@ -1777,62 +1586,37 @@ msgid ""
 "Clicking the \"Advanced\" button in this dialog will offer advanced options\n"
 "that are reserved for the expert user."
 msgstr ""
-"LILO và GRUB là trình nạp khởi động cho GNU/Linux. Thông thường, giai đoạn\n"
-"này tự động hoàn toàn. Thực tế, DrakX sẽ phân tích sector khởi động của đĩa "
-"và\n"
-"thực hiện sao cho phù hợp với những gì tìm thấy ở đây:\n"
+"Thoại này cho phép bạn tinh chỉnh trình nạp khởi động của bạn:\n"
 "\n"
-" * nếu tìm thấy sector khởi động của Windows, nó sẽ thay thế bằng sector "
-"khởi\n"
-"động của GRUB/LILO để cho bạn có thể khởi chạy Linux hoặc hệ điều hành\n"
-"khác\n"
+" * \"Trình nạp khởi động được dùng\": có ba lựa chọn:\n"
 "\n"
-" * nếu tìm thấy sector khởi động GRUB hay LILO, nó sẽ thay thế bằng một cái\n"
-"mới;\n"
+"    * \"GRUB\": nếu bạn thích dùng GRUB (với menu dạng text).\n"
 "\n"
-"Nếu nghi ngờ, DrakX sẽ hiển thị một hộp thoại với các tùy chọn khác nhau.\n"
-"\n"
-" * \"Trình nạp khởi động được dùng\": có ba lựa chọn cho bạn:\n"
-"\n"
-"    * \"GRUB\": nếu bạn thích dùng GRUB (với menu dạng văn bản).\n"
-"\n"
+"    * \"LILO với menu dạng text\": nếu thích dùng LILO với menu dạng văn\n"
+"bản.\n"
 "    * \"LILO với menu đồ họa\": khi bạn thích dùng LILO với giao diện đồ\n"
 "họa\n"
 "\n"
-"    * \"LILO\" với menu dạng văn bản: nếu thích dùng LILO với menu dạng văn\n"
-"bản.\n"
+" * \"Thiết bị khởi động\": thường thì bạn không thay đổi mặc định\n"
+"(\"/dev/hda\"), nhưng nếu thích, trình nạp khởi động có thể được ghi lên "
+"đĩa\n"
+"cứng thứ hai (\"/dev/ hdb\"), hay thậm chí trên đĩa mềm (\"/dev/fd0\").\n"
 "\n"
-" * \"Thiết bị khởi động\": thường thì bạn không thay đổi mặc định (\"/dev/hda"
-"\"),\n"
-"nhưng nếu thích, trình nạp khởi động có thể được ghi lên ổ đĩa cứng thứ hai\n"
-"(\"/dev/ hdb\"), hay thậm chí trên đĩa mềm (\"/dev/fd0\").\n"
-"\n"
-" * \"Trì hoãn trước khi nạp ảnh mặc định\": khi khởi động lại máy, đây là "
-"thời\n"
-"gian trễ cho phép để người dùng có thể chọn trên menu của trình nạp khởi "
-"động\n"
+" * \"Trì hoãn trước khi nạp ảnh mặc định\": sau khi khởi động hay khởi động\n"
+"lại máy, đây là thời gian trễ cho phép để người dùng tại console có thể "
+"chọn\n"
 "một mục nhập khởi động khác với mặc định.\n"
 "\n"
-"!! Chú ý: nếu chọn không cài đặt trình nạp khởi động (bằng nhấn \"Bỏ qua\" "
-"ở\n"
-"đây), thì phải đảm bảo là đã có một cách khác để khởi động hệ thống Linux\n"
-"Mandrake! Cũng nên biết chắc về việc đang làm trước khi thay đổi bất kỳ tùy\n"
-"chọn nào. !!\n"
+"!! Chú ý: nếu chọn không cài đặt trình nạp khởi động (bằng nhấn \"Bỏ qua\")\n"
+"thì phải đảm bảo việc có một cách khác để khởi động hệ thống Linux\n"
+"Mandrake! Nên biết rõ về việc đang làm trước khi thay đổi bất kỳ tùy chọn "
+"nào. !!\n"
 "\n"
 "Nhấn nút \"Nâng cao\" trong hộp thoại này sẽ có thêm nhiều tùy chọn nâng\n"
-"cao để đáp ứng cho người dùng thành thạo.\n"
-"\n"
-"sau khi cấu hình các thông số của trình nạp khởi động, một danh sách cho\n"
-"các tùy chọn khởi động sẽ hiển thị khi khởi động.\n"
-"\n"
-"Nếu như có một hệ điều hành khác đã được cài đặt trên máy, nó sẽ tự động\n"
-"được bổ xung vào menu khởi động. Tại đây, bạn có thể chọn đúng các tùy\n"
-"chọn hiện có. Nhấn đúp lên một mục hiện có sẽ cho phép bạn thay đổi các\n"
-"thông số hay xóa bỏ nó. Nhấn nút \"Thêm\" để tạo mục nhập mới; nhấn nút\n"
-"\"Hoàn thành\" để tiếp tục các bước cài đặt."
+"cao để đáp ứng cho người dùng thành thạo."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This is the most crucial decision point for the security of your GNU/Linux\n"
 "system: you have to enter the \"root\" password. \"Root\" is the system\n"
@@ -1859,7 +1643,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -1869,41 +1653,40 @@ msgid ""
 "have \"No password\", if your computer won't be connected to the Internet,\n"
 "and if you trust anybody having access to it."
 msgstr ""
-"Đây là thời điểm chủ chốt nhất đối với vấn đề bảo mật cho hệ thống Linux:\n"
-"cần phải nhập một mật khẩu cho \"root\". \"root\" là người quản trị hệ "
-"thống,\n"
+"Đây là thời điểm quan trọng nhất cho việc bảo mật hệ thống GNU/Linux:\n"
+"cần phải nhập mật khẩu cho \"root\". \"Root\" là người quản trị hệ thống,\n"
 "là người duy nhất được phép tiến hành cập nhật, thêm người dùng, thay đổi\n"
-"toàn bộ cấu hình hệ thống, v.v... Nói ngắn gọn là \"root\" có thể thực hiện\n"
-"mọi thứ! Đó là lý do tại sao bạn cần chọn một mật khẩu phải thật khó đoán;\n"
-"DrakX sẽ thông báo nếu nó quá dễ đoán. Như đã thấy, bạn có thể không\n"
-"nhập mật khẩu, nhưng chúng tôi khuyên bạn rất nên nhập mật khẩu, vì một\n"
-"lý do: đừng cho rằng chỉ một mình bạn khởi động Linux thì các hệ điều\n"
-"hành khác vẫn an toàn khi gặp lỗi. Điều đó không đúng vì \"root\" có thể\n"
-"vượt qua mọi giới hạn và vô ý xóa toàn bộ dữ liệu trên các phân vùng do\n"
-"tự nó truy cập thiếu thận trọng! Quan trọng là phải để thật khó khăn nếu\n"
-"muốn trở thành \"root\".\n"
+"mọi cấu hình hệ thống, v.v... Nói ngắn gọn là \"root\" có thể thực hiện tất "
+"cả!\n"
+"Đó là lý do tại sao bạn cần chọn một mật khẩu phải thật khó đoán.\n"
+"DrakX sẽ cho bạn biết nếu nó quá dễ đoán. Như bạn biết, bạn không bị ép\n"
+"nhập mật khẩu, nhưng chúng tôi khuyên bạn rất nên thực hiện. GNU/Linux\n"
+"có thể bị lỗi như các hệ điều hành khác. Do \"root\" có thể vượt quyền và\n"
+"vô ý xóa toàn bộ dữ liệu trên các phân vùng bởi việc tự nó truy cập thiếu\n"
+"thận trọng! Quan trọng là phải để thật khó khăn nếu muốn trở thành \"root"
+"\".\n"
 "\n"
-"Mật khẩu nên pha trộn bằng các ký tự số và chữ cái và có độ dài ít nhất 8\n"
-"ký tự. Và không nên ghi mật khẩu \"root\" vào đâu cả - để tránh hệ thống.\n"
+"Mật khẩu nên pha trộn các ký tự số và chữ cái và có độ dài ít nhất 8\n"
+"ký tự. Không nên ghi mật khẩu \"root\" vào đâu cả để tránh hệ thống.\n"
 "bị xâm hại\n"
 "\n"
-"Đừng nên dùng mật khẩu quá dài hoặc phức tạp để cho phép bạn có khả\n"
-"năng nhớ nó một cách không khó khăn lắm.\n"
+"Cũng đừng dùng mật khẩu quá dài hoặc phức tạp vì bạn phải nhớ nó!\n"
 "\n"
 "Mật khẩu sẽ không hiển thị trên màn hình khi bạn nhập vào. Vì vậy,\n"
-"phải nhập mật khẩu hai lần để tránh gặp lỗi khi gõ bàn phím\n"
-"Nếu cả hai lần bạn đều gõ sai như nhau thì mật khẩu \"sai\" sẽ\n"
-"được dùng vào lần đầu bạn thực hiện kết nối.\n"
+"phải nhập mật khẩu hai lần để tránh gặp lỗi khi gõ bàn phím. Nếu cả\n"
+"hai lần bạn đều gõ sai như nhau thì mật khẩu \"sai\" sẽ được dùng vào\n"
+"lần đầu bạn thực hiện kết nối.\n"
 "\n"
-"Trong chế độ chuyên gia, bạn sẽ được hỏi khi kết nối với máy chủ\n"
-"chứng thực, như NIS hoặc LDAP.\n"
+"Nếu bạn muốn truy cập vào máy này sẽ được máy chủ chứng thực\n"
+"quản lý, hãy nhấn nút \"Nâng cao\".\n"
 "\n"
-"Nếu mạng làm việc dùng giao thức LDAP hay NIS để chứng thực,\n"
-"hãy chọn \"LDAP\" hay \"NIS\". Nếu bạn không biết rõ, hãy hỏi\n"
-"nhà quản trị hệ thống mạng.\n"
+"Nếu mạng của bạn dùng trong số LDAP, NIS hay các dịch vụ chứng\n"
+"thực Miền Windows PDC, hãy chọn một cái thích hợp làm \"chứng thực\".\n"
+"Nếu bạn không biết rõ là dùng cái nào, hãy hỏi nhà quản trị mạng.\n"
 "\n"
-"Nếu máy tính này không kết nối với bất kỳ hệ thống mạng được quản\n"
-"trị nào, bạn sẽ chọn \"Các tập tin Cục bộ\" để chứng thực."
+"Nếu gặp trục trặc với việc nhắc mật khẩu, bạn có thể chọn \"Không\n"
+"dùng mật khẩu\" khi bạn không nối vào internet hoặc tin tưởng người\n"
+"cùng dùng máy với bạn."
 
 #: ../../help.pm:1
 #, c-format
@@ -1915,7 +1698,7 @@ msgstr ""
 "là ttyS0 trong GNU/Linux."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
 "mouse. If it does, it assumes you have a two-button mouse and will\n"
@@ -1942,24 +1725,29 @@ msgid ""
 "the buttons and check that the mouse pointer moves on-screen as you move\n"
 "your mouse."
 msgstr ""
-"Theo mặc định, DrakX cho là bạn có một chuột loại 2 nút và sẽ thiết lập\n"
-"mô phỏng nút thứ ba. DrakX sẽ tự động nhận ra chuột là loại PS/2,\n"
-"serial hay USB.\n"
+"Thông thường, DrakX phát hiện đúng số nút của thiết bị chuột bạn có.\n"
+"Theo mặc định, DrakX cho là chuột có 2 nút và sẽ cấu hình việc mô\n"
+"phỏng nút thứ ba. Nút mô phỏng thứ ba này sẽ là việc nhấn đồng thời\n"
+"hai nút phải và trái. DrakX cũng sẽ tự động nhận ra chuột là loại PS/2,\n"
+"serial hay giao tiếp USB.\n"
 "\n"
-"Nếu bạn muốn chỉ định một loại chuột khác, hãy chọn loại thích hợp\n"
-"từ danh sách.\n"
+"Nếu bạn muốn định rõ loại chuột bạn có khác với mặc định khác, hãy\n"
+"chọn từ danh sách được cung cấp.\n"
 "\n"
-"Nếu chọn chuột khác với mặc định, bạn sẽ nhận một màn hình để\n"
-"chạy thử chuột. Sử dụng các nút và bánh xe để xác minh các thiết\n"
-"lập là đúng. Nếu chuột không hoạt động đúng, hãy nhấn space bar\n"
-"hoặc Trở Lại để  \"Bỏ qua\" và chọn lại. \n"
-"Đôi khi chuột có bánh xe lăn không được tự động phát hiện, Bạn cần\n"
-"tự chọn nó trong danh sách. Sau khi nhấn nút \"OK\", một ảnh chuột\n"
-"sẽ hiện lên. Bạn sẽ cần lăn bánh xe để kich hoạt nó chính xác rồi hãy\n"
-"kiểm tra các nút khác và di chuột."
+"Nếu chọn chuột khác với mặc định, bạn sẽ nhận một màn hình để chạy\n"
+"thử chuột. Sử dụng các nút và lăn bánh xe để xác minh các thiết lập\n"
+"là đúng. Nếu chuột không hoạt động đúng, hãy nhấn thanh space hoặc\n"
+"phím [Return] để bỏ qua việc chạy thử và chọn lại từ danh sách.\n"
+"\n"
+"Đôi khi chuột có bánh xe cuộn không được tự động phát hiện, nên bạn\n"
+"phải chọn nó trong danh sách. Đảm bảo là bạn chọn đúng cổng nối\n"
+"của chuột. Sau khi chọn chuột và nhấn nút \"Tiếp theo ->\", sẽ hiện lên\n"
+"màn hình một ảnh chuột. Hãy lăn bánh xe để khẳng định nó được kích\n"
+"hoạt đúng rồi hãy nhấn để kiểm tra các nút khác và di chuột trên màn\n"
+"hình."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your choice of preferred language will affect the language of the\n"
 "documentation, the installer and the system in general. Select first the\n"
@@ -1981,20 +1769,27 @@ msgid ""
 "language used by the entire system. Running the command as a regular user\n"
 "will only change the language settings for that particular user."
 msgstr ""
-"Hãy chọn ngôn ngữ ưa thích để thực hiện cài đặt và dùng trong hệ thống.\n"
+"Việc chọn ngôn ngữ để dùng sẽ tác động lên ngôn ngữ hiển thị tài liệu,\n"
+"trình cài đặt và hệ thống chung. Trước tiên hãy chọn nơi bạn sống rồi\n"
+"đến ngôn ngữ của bạn.\n"
 "\n"
 "Nút \"Nâng cao\" sẽ cho phép lựa chọn các ngôn ngữ khác sẽ được\n"
-"cài đặt lên máy trạm làm việc. Việc chọn các ngôn ngữ khác thì các file\n"
-"đặc trưng cho ngôn ngữ sẽ được cài đặt giành cho tài liệu và các ứng\n"
-"dụng. Lấy ví dụ: bạn có một người từ Tây ban nha đến và dùng máy\n"
-"tính của bạn, chọn tiếng Anh là ngôn ngữ chính trong danh sách, và\n"
-"trong phần Nâng cao, đánh dấu vào hộp tương ứng với \"Spanish|Spain\".\n"
+"cài đặt lên máy trạm làm việc. Việc chọn các ngôn ngữ khác sẽ cài đặt\n"
+"các tập tin của ngôn ngữ đó cho phần tài liệu hệ thống và các ứng\n"
+"dụng. Ví dụ: bạn có một người từ Tây ban nha đến và dùng máy của\n"
+"bạn, chọn tiếng Anh là ngôn ngữ chính trong danh sách, và \"Espanol\"\n"
+"trong phần Nâng cao.\n"
 "\n"
-"Lưu ý: có thể cài đặt đa ngôn ngữ. Một khi đã chọn xong thêm bất kỳ\n"
-"các locale, nhấn vào nút \"OK\" để tiếp tục."
+"Lưu ý: có thể cài đặt đa ngôn ngữ. Một khi đã chọn xong các locale,\n"
+"nhấn nút \"Tiếp theo ->\" để tiếp tục.\n"
+"\n"
+"Để chuyển đổi sang các ngôn ngữ khác nhau đã cài đặt trong hệ thống,\n"
+"bạn có thể chạy dòng lệnh \"/usr/sbin/localedrake\" bằng \"root\" để áp\n"
+"dụng cho toàn bộ hệ thống. Nếu chạy dòng lệnh này bằng người dùng\n"
+"thông thường thì việc thay đổi sẽ chỉ được áp dụng riêng cho người dùng đó."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Depending on the default language you chose in Section , DrakX will\n"
 "automatically select a particular type of keyboard configuration. However,\n"
@@ -2012,17 +1807,20 @@ msgid ""
 "dialog will allow you to choose the key binding that will switch the\n"
 "keyboard between the Latin and non-Latin layouts."
 msgstr ""
-"Thông thường, DrakX sẽ chọn bàn phím thích hợp (phụ thuộc vào ngôn\n"
-"ngữ đã được chọn) và thậm chí sẽ không thấy bước này. Dù sao, cũng có\n"
-"khả năng là bàn phím không tương ứng chính xác với ngôn ngữ : ví dụ,\n"
-"bạn là người Anh nói tiếng Thụy sĩ, bạn vẫn muốn giữ bàn phím là bàn\n"
-"phím Thụy sĩ. Hay bạn nói tiếng Anh nhưng lại đang ở Quebec, bạn có\n"
-"thể liên hệ theo tình huống tương tự. Trong cả hai trường hợp, bạn sẽ\n"
-"phải quay lại bước cài đặt này và chọn một bàn phím thích hợp\n"
-"trong danh sách.\n"
+"Thông thường, theo ngôn ngữ đã chọn mà DrakX sẽ chọn loại cấu hình\n"
+"bàn phím thích ứng. Tuy nhiên, cũng có khả năng là bàn phím không tương\n"
+"ứng chính xác với ngôn ngữ. Ví dụ: bạn là người Thụy sĩ nói tiếng Anh và\n"
+"bạn có bàn phím Thụy sĩ. Hay bạn nói tiếng Anh nhưng lại đang ở Quebec,\n"
+"bạn có thể liên hệ theo tình huống tương tự khi ngôn ngữ và bàn phím\n"
+"không tương ứng với nhau. Trong các trường hợp đó, bước cài đặt này\n"
+"cho phép bạn chọn một bàn phím thích hợp từ danh sách.\n"
 "\n"
-"Nhấp chuột lên nút \"Thêm\" để có một danh sách đầy đủ các bàn\n"
-"phím được hỗ trợ."
+"Nhấp chuột lên nút \"Thêm\" để có một danh sách đầy đủ các bàn phím\n"
+"được hỗ trợ.\n"
+"\n"
+"Nếu bạn chọn tổ chức bàn phím không dựa trên bảng chữ cái la tinh,\n"
+"hộp thoại tiếp theo sẽ cho phép chọn tổ hợp phím nóng để chuyển đổi\n"
+"tổ chức bàn phím La tinh và không phải La tinh."
 
 #: ../../help.pm:1
 #, c-format
@@ -2589,9 +2387,9 @@ msgstr ""
 "biết tường tận mọi thứ."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -2616,17 +2414,20 @@ msgid ""
 "floppy disk must be blank or have non-critical data on it - DrakX will\n"
 "format the floppy and will rewrite the whole disk."
 msgstr ""
-"CDROM của Mandrake Linux có chế độ cứu giải. Bạn có thể truy cập nó bằng\n"
-"cách khởi động từ CDROM, nhấn phím >>F1<< và gõ  >>rescue<< tại dấu\n"
-"nhắc. Nhưng trong trường hợp máy tính không thể khởi động từ CDROM,\n"
-"hãy trở lại bước này để nhận sự chỉ dẫn trong ít nhất hai thường hợp:\n"
+"Đánh dấu kiểm vào \"Tạo đĩa khởi động\" cho phép tạo tạo phương tiện khởi\n"
+"động cứu giải.\n"
+"\n"
+"CDROM của Mandrake Linux có kèm chế độ cứu giải. Bạn có thể truy cập\n"
+"nó bằng cách khởi động từ CDROM, nhấn phím >>F1<< và gõ  >>rescue<<\n"
+"tại dấu nhắc. Nếu máy tính không khởi động được từ CDROM, có ít nhất hai\n"
+"khả năng để có đĩa mềm khởi động:\n"
 "\n"
 " * Khi cài đặt trình nạp khởi động, DrakX sẽ ghi lại boot sector (MBR) của\n"
-"ổ đĩa cứng chính (trừ khi bạn sử dụng một trình quản lý khởi động khác) do\n"
-"đó bạn có thể khởi chạy Windows hoặc GNU/Linux (nếu hệ thống của bạn có\n"
-"cài đặt Windows). Nếu cần phải cài lại Windows, quá trình cài đặt Microsoft\n"
-"Windows sẽ ghi lại boot sector, và như vậy bạn sẽ không thể khởi chạy\n"
-"GNU/Linux!\n"
+"đĩa cứng chính (trừ khi bạn sử dụng một trình quản lý khởi động khác) do\n"
+"đó bạn có thể khởi chạy Windows hoặc GNU/Linux (cho là hệ thống có\n"
+"cài đặt Windows). Khi phải cài lại Windows, quá trình cài đặt Microsoft\n"
+"Windows sẽ ghi lại boot sector và sẽ xóa bỏ phương tiện để bạn khởi\n"
+"chạy GNU/Linux!\n"
 "\n"
 " * Nếu gặp vấn đề này và bạn không thể khởi chạy GNU/Linux từ đĩa cứng,\n"
 "đĩa mềm này sẽ là phương tiện duy nhất để khởi chạy GNU/Linux. Nó chứa\n"
@@ -2634,10 +2435,9 @@ msgstr ""
 "cố nguồn điện, một lỗi đánh máy vô ý, một lỗi gõ phím trong mật khẩu, và\n"
 "bất kỳ một nguyên do khác.\n"
 "\n"
-"Khi nhấn chuột vào bước này, bạn sẽ được yêu cầu nạp một đĩa mềm vào ổ.\n"
-"Đĩa mềm này phải là đĩa sạch hoặc chỉ chứa các dữ liệu mà bạn không cần\n"
-"nữa. Bạn sẽ không phải thực hiện format đĩa; drakX sẽ ghi lại\n"
-"toàn bộ đĩa."
+"Nếu nhấn \"Có\", bạn sẽ được yêu cầu nạp một đĩa mềm vào ổ. Đĩa mềm\n"
+"này phải là đĩa trắng hoặc chỉ chứa các dữ liệu mà bạn không cần nữa.\n"
+"DrakX sẽ thực hiện format đĩa và ghi lại toàn bộ đĩa."
 
 #: ../../help.pm:1
 #, c-format
@@ -2672,7 +2472,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 "Độ Phân Giải\n"
@@ -2729,7 +2529,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -3361,12 +3161,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Không"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Có"
@@ -3474,6 +3276,13 @@ msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Không có phân vùng FAT nào để đặt lại kích thước (hoặc không đủ không gian "
 "trống)"
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3952,6 +3761,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "Đi vào giai đoạn `%s'\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Help"
+msgstr "Giúp"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "not configured"
+msgstr "chưa được cấu hình"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Cấu hình"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -4163,14 +3992,6 @@ msgstr "Tiếp theo ->"
 #, c-format
 msgid "Individual package selection"
 msgstr "Các gói riêng được chọn"
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "Giúp"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -4417,12 +4238,13 @@ msgstr "Xác nhận"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Mật khẩu này đơn giản quá ( phải gồm ít nhất %d ký tự)"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "Không có mật khẩu"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "Thiết lập mật khẩu root"
@@ -4482,11 +4304,6 @@ msgstr "Bảo mật"
 #, c-format
 msgid "Security Level"
 msgstr "Mức Bảo Mật"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "not configured"
-msgstr "chưa được cấu hình"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -4591,6 +4408,16 @@ msgid "Which is your timezone?"
 msgstr "Múi giờ nào là của bạn?"
 
 #: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "Bạn có muốn cấu hình in ấn không?"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Unable to contact mirror %s"
+msgstr "Không thể fork: %s"
+
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Đang liên hệ với mirror để lấy danh sách các gói hiện có"
@@ -4673,6 +4500,11 @@ msgstr ""
 "Nếu bạn không có CD nào trong số này, nhấn Bỏ qua.\n"
 "Nếu chỉ thiếu một số CD, bỏ chọn chúng, rồi nhấn OK."
 
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "Toàn bộ"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
@@ -4751,6 +4583,11 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "Đang tìm các gói hiện có"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Đang tìm các gói để nâng cấp"
 
@@ -4758,11 +4595,6 @@ msgstr "Đang tìm các gói để nâng cấp"
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Đang nhìn vào các gói đã được cài đặt..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "Đang tìm các gói hiện có"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4874,11 +4706,6 @@ msgstr "Hãy chọn loại chuột."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Upgrade"
-msgstr "Nâng cấp"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
 msgid "Upgrade %s"
 msgstr "Nâng cấp %s"
 
@@ -4902,15 +4729,19 @@ msgstr "Đây là danh sách đầy đủ các bàn phím hiện có "
 msgid "Please choose your keyboard layout."
 msgstr "Hãy chọn tổ chức bàn phím."
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Thoát"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr "Chấp thuận giấy phép"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "default:LTR"
-msgstr "mặc định:LTR"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5463,6 +5294,11 @@ msgstr "Bỉ"
 #, c-format
 msgid "Azerbaidjani (latin)"
 msgstr "Azerbaidjani (latin)"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Arabic"
+msgstr "Arabic"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6624,6 +6460,11 @@ msgstr "Andorra"
 msgid "Afghanistan"
 msgstr "Afghanistan"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "default:LTR"
+msgstr "default:LTR"
+
 #: ../../loopback.pm:1
 #, c-format
 msgid "Circular mounts %s\n"
@@ -7038,10 +6879,10 @@ msgstr ""
 "thêm các giao thức định tuyến phức tạp cho các mạng phức tạp."
 
 #: ../../services.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 "Chỉ định thiết bị raw dể  ngăn chặn các thiết bị khác(ví dụ như phân vùng "
 "đĩa cứng)\n"
@@ -7326,11 +7167,11 @@ msgstr ""
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7531,8 +7372,8 @@ msgstr "Thoát khỏi cài đặt"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Install system updates"
-msgstr "Cài đặt các cập nhật hệ thống"
+msgid "Install updates"
+msgstr "Cài đặt các cập nhật"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7558,6 +7399,11 @@ msgstr "Cấu hình mạng làm việc"
 #, c-format
 msgid "Add a user"
 msgstr "Thêm người dùng"
+
+#: ../../steps.pm:1
+#, c-format
+msgid "Root password"
+msgstr "Mật khẩu Root"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7606,13 +7452,21 @@ msgstr "Giấy phép"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
+msgid "Language"
 msgstr "Chọn ngôn ngữ"
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
 msgstr "utopia 25"
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "OK"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -7792,7 +7646,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Tùy chọn"
@@ -7816,14 +7670,6 @@ msgstr "Monitor"
 #, c-format
 msgid "Graphic Card"
 msgstr "Card Đồ Họa"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Thoát"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -8482,42 +8328,6 @@ msgstr "Bảng phân vùng của drive %s sắp được ghi lên đĩa!"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"Phân vùng phần mềm RAID được chọn là root (/).\n"
-"Không có trình khởi động nào xử lý nó khi thiếu phân vùng /boot.\n"
-"Vì vậy, hãy đảm bảo thêm phân vùng /boot"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"Phân vùng bạn chọn để thêm là root (/) được định vị vật lý vượt quá\n"
-"cylinder thứ 1024 của đĩa cứng , và bạn không có phân vùng /boot.\n"
-"Nếu định dùng trình khởi động LILO, thận trọng thêm một phân vùng /boot"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"Xin lỗi. Không chấp thuận việc tạo /boot quá mức trên ổ đĩa (lên cylinder > "
-"1024).\n"
-"Hoặc bạn dùng LILO thì nó sẽ không làm việc, hoặc bạn không dùng LILO thì "
-"không cần /boot"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
 msgid "The package %s is needed. Install it?"
 msgstr "Cần gói tin %s. Cài đặt nó không?"
 
@@ -9007,6 +8817,11 @@ msgid "SCSI controllers"
 msgstr "SCSI controllers"
 
 #: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "Firewire controllers"
+msgstr "USB controllers"
+
+#: ../../harddrake/data.pm:1
 #, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr "(E)IDE/ATA controllers"
@@ -9144,7 +8959,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -9164,7 +8979,7 @@ msgstr ""
 "- \"lspcidrake -v | fgrep AUDIO\" cho bạn biết driver nào card dùng\n"
 "làm mặc định\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" cho bạn biết driver nào hiện\n"
+"- \"grep sound-slot /etc/modules.conf\" cho bạn biết driver nào hiện\n"
 "thời nó đang dùng\n"
 "\n"
 "- \"/sbin/lsmod\" cho phép bạn kiểm tra xem module của nó (driver)\n"
@@ -9626,8 +9441,8 @@ msgstr "Kết nối vào Internet"
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
-msgstr "Sagem (dùng pppoe) usb"
+msgid "Sagem (using pppoa) usb"
+msgstr "Sagem (dùng pppoa) usb"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -9746,13 +9561,13 @@ msgstr "Tên chủ Zeroconf phải không chứa dấu chấm"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
-msgid "Zeroconf Host name"
-msgstr "Tên chủ Zeroconf"
+msgid "Host name"
+msgstr "Tên máy chủ"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
-msgid "Host name"
-msgstr "Tên máy chủ"
+msgid "Zeroconf Host name"
+msgstr "Tên chủ Zeroconf"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9766,19 +9581,6 @@ msgstr ""
 "\n"
 "Nhập tên chủ Zeroconf mà không có dấu chấm nếu bạn\n"
 "không muốn dùng tên chủ mặc định."
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-"Hãy điền tên máy chủ của bạn nếu bạn biết. Một số\n"
-"máy chủ DHCP cần tên chủ (hostname) để hoạt động.\n"
-"Tên máy chủ của bạn phải có đủ thành phần, ví dụ như\n"
-" ``mybox.mylab.myco.com''."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -10432,6 +10234,11 @@ msgid "Start at boot"
 msgstr "Chạy lúc khởi động "
 
 #: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "Assign host name from DHCP address"
+msgstr "Bạn phải nhập tên chủ (hostname) hay địa chỉ IP.\n"
+
+#: ../../network/network.pm:1
 #, c-format
 msgid "Network Hotplugging"
 msgstr "Cắm nóng cho mạng"
@@ -10442,6 +10249,23 @@ msgid "Track network card id (useful for laptops)"
 msgstr "Kiểm tra định danh card mạng (hữu ích cho laptop)"
 
 #: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "DHCP host name"
+msgstr "Tên máy chủ"
+
+#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "Netmask"
+msgstr "Mặt nạ mạng"
+
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "IP address"
+msgstr "Địa chỉ IP"
+
+#: ../../network/network.pm:1
 #, c-format
 msgid "(bootp/dhcp/zeroconf)"
 msgstr "(bootp/dhcp/zeroconf)"
@@ -10450,17 +10274,6 @@ msgstr "(bootp/dhcp/zeroconf)"
 #, c-format
 msgid "Automatic IP"
 msgstr "IP tự động"
-
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Netmask"
-msgstr "Mặt nạ mạng"
-
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "IP address"
-msgstr "Địa chỉ IP"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10710,7 +10523,7 @@ msgstr "PDQ"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - In, không xếp hàng"
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr "Model không xác định"
@@ -10719,6 +10532,11 @@ msgstr "Model không xác định"
 #, c-format
 msgid "Unknown model"
 msgstr "Kiểu không xác định"
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid "%s (Port %s)"
+msgstr "%s (Cổng %s)"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -10872,11 +10690,6 @@ msgstr "Printerdrake"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr "Bạn có muốn cấu hình một máy in khác?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Đang gỡ bỏ máy in \"%s\" ..."
 
@@ -10892,8 +10705,8 @@ msgstr "Bỏ máy in"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Know how to use this printer"
-msgstr "Để biết sử dụng máy in này"
+msgid "Learn how to use this printer"
+msgstr "Học cách sử dụng máy in này"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10991,11 +10804,6 @@ msgstr "Kiểu kết nối máy in"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Learn how to use this printer"
-msgstr "Học cách sử dụng máy in này"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Raw printer"
 msgstr "máy in Raw"
 
@@ -11031,6 +10839,7 @@ msgid "Add a new printer"
 msgstr "Thêm máy in mới"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Chế độ bình thường"
@@ -11059,6 +10868,11 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Display all available remote CUPS printers"
+msgstr "Hiển thị toàn bộ các máy in CUPS ở xa sẵn có"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; or to view information about "
@@ -11084,16 +10898,6 @@ msgstr ""
 #, c-format
 msgid "Printing system: "
 msgstr "Hệ thống in ấn: "
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Would you like to configure printing?"
-msgstr "Bạn có muốn cấu hình in ấn không?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr "Đang chuẩn bị Printerdrake..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11129,6 +10933,11 @@ msgstr "Bạn muốn sử dụng hệ thống in ấn (spooler) nào?"
 #, c-format
 msgid "Select Printer Spooler"
 msgstr "Chọn Spooler Máy In"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Setting Default Printer..."
+msgstr "Đang thiết lập máy in mặc định ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12674,6 +12483,39 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+"\n"
+"\n"
+"Printerdrake không thể định ra được model của máy in %s. Hãy chọn model đúng "
+"từ danh sách."
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ")"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr " trên "
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr "("
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Configuring printer ..."
+msgstr "Đang cấu hình máy in ..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Searching for new printers..."
 msgstr "Đang tìm máy in mới..."
 
@@ -12795,6 +12637,64 @@ msgstr "Đang kiểm tra hệ thống của bạn..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Restarting CUPS..."
+msgstr "Khởi chạy lại CUPS..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr "Máy chủ này có trong danh sách rồi, không thể thêm nữa.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr "Những ví dụ IP đúng:\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "IP nhập vào không đúng.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Server IP missing!"
+msgstr "Thiếu IP máy chủ!"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr "Hãy nhập địa chỉ IP và cổng của host của máy in mà bạn muốn dùng."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "Đang truy cập các máy in trên máy chủ CUPS ở xa"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Remove selected server"
+msgstr "Bỏ máy chủ được chọn"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Edit selected server"
+msgstr "Hiệu chỉnh máy chủ được chọn"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Add server"
+msgstr "Thêm máy chủ"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "IP address of host/network:"
 msgstr "Địa chỉ IP của host/mạng:"
 
@@ -12805,38 +12705,13 @@ msgstr "Host/mạng này đã có trong danh sách rồi, không thể thêm n�
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr "192.168.100.0/255.255.255.0\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr "192.168.100.0/24\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr "10.1.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr "10.0.0.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr "192.168.100.194\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr "Những ví dụ IP đúng:\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
 msgstr "IP của host/mạng đã nhập không đúng.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
+msgstr "Thiếu địa chỉ IP cau Host/Mạng."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12906,6 +12781,29 @@ msgstr ""
 #, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "Tự động hiệu chỉnh cấu hình CUPS"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "None"
+msgstr "Không"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Additional CUPS servers: "
+msgstr "Các máy chủ CUPS bổ sung: "
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -13085,11 +12983,11 @@ msgstr "nếu đặt là có, báo cáo kết quả kiểm tra tới syslog."
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
-"nếu đặt là có, kiểm tra xem có mật khẩu trống hay không, hoặc mật khẩu khi "
-"nó nên nằm trong /etc/shadow hay các người dùng khác với ID 0."
+"nếu đặt là có, kiểm tra mật khẩu trống hay không có mật khẩu trong /etc/"
+"shadow và các người dùng với id 0 khác với root."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -15040,6 +14938,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr "%s"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr "Hãy chọn dữ liệu để sao lưu..."
 
@@ -15298,16 +15201,6 @@ msgstr "Hãy nhập thư mục, nơi sẽ để các sao lưu"
 #, c-format
 msgid "Restore from Hard Disk."
 msgstr "Khôi phục từ đĩa cứng"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Secure Connection"
-msgstr "Kết nối Bảo mật"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "FTP Connection"
-msgstr "Kết nối FTP"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16238,6 +16131,196 @@ msgstr "Vẫn chưa có sẵn cron nếu không phải root"
 msgid "Installation of %s failed. The following error occured:"
 msgstr "Không cài đặt được %s. Xảy ra lỗi như sau:"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "Tôi không muốn đăng nhập tự động"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "Tôi muốn đăng nhập tự động với cái này (người dùng, màn hình nền)"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "Chạy hệ thống X-Window khi khởi động"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "Chế độ hệ thống"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr "Bootsplash"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr "Màn hình LiLo"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+"\n"
+"Hãy chọn theme cho\n"
+"LiLo và Bootsplash.\n"
+"Bạn có thể chọn\n"
+"chúng riêng biệt"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "Themes"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Chọn splash"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"Hiện thời bạn đang dùng %s làm Trình Quản Lý Khởi Động.\n"
+"Nhấn lên Cấu Hình để chạy đồ thuật cho thiết lập."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr "Hoàn thành cài đặt theme cho Bootsplash và LiLo"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr "Không cài đặt được theme!"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr "Thông báo"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr "Chạy lại 'lilo'"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+"Không thể chạy lại LiLo!\n"
+"Hãy chạy \"lilo\" bằng root trong dòng lệnh để hoàn thành cài đặt theme của "
+"LiLo."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr "Tạo initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr "Không thể chạy mkinitrd -f /boot/initrd-%s.img %s."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+"Không thể ghi /etc/sysconfig/bootsplash\n"
+"Không thấy tập tin."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "Ghi %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr "Không thể ghi /etc/sysconfig/bootsplash."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "Không tìm thấy thông điệp của LiLo"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "Sao chép %s sang %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr "Sao lưu %s thành %s.old"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "Tạo theme mới"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"Hiển thị theme\n"
+"dưới console"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr "Cài đặt các theme"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "Chế độ Lilo/Grub"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "Chế độ Yaboot"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/Tệp/T_hoát"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_Tệp"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "Cấu Hình Khuôn Thức Khởi Động"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -16375,6 +16458,16 @@ msgstr "Công Cụ Báo Cáo Lỗi Mandrake"
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "Các thông số"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "Cấu Hình Kết Nối Internet"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "DHCP Client"
 
@@ -16388,11 +16481,6 @@ msgstr "Card Ethernet"
 msgid "Gateway"
 msgstr "Cổng kết nối"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "Các thông số"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -16402,11 +16490,6 @@ msgstr "Kiểu kết nối:"
 #, c-format
 msgid "Profile: "
 msgstr "Lý lịch: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "Cấu Hình Kết Nối Internet"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -16680,8 +16763,8 @@ msgstr "Gỡ bỏ 1 module"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr "bỏ  các mo-đun raid"
+msgid "Add a module"
+msgstr "Thêm 1 module"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16695,13 +16778,13 @@ msgstr "Nếu cần thiết"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "cưỡng chế"
+msgid "omit raid modules"
+msgstr "bỏ  các mo-đun raid"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "Thêm 1 module"
+msgid "force"
+msgstr "cưỡng chế"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16715,23 +16798,18 @@ msgstr "Khu vực cho chuyên gia"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "Tổng quát"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "phiên bản của kernel"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "Lỗi DrakFloppy: %s"
+msgid "default"
+msgstr "mặc định"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "mặc định"
+msgid "General"
+msgstr "Tổng quát"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16752,11 +16830,6 @@ msgstr "Cỡ"
 #, c-format
 msgid "Module name"
 msgstr "Tên module"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -17452,6 +17525,11 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "Path"
+msgstr "Đường dẫn"
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "group :"
 msgstr "Nhóm :"
 
@@ -17511,11 +17589,6 @@ msgstr "Đặc tính"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Path"
-msgstr "Đường dẫn"
-
-#: ../../standalone/drakperm:1
-#, c-format
 msgid "Permissions"
 msgstr "Sự chấp thuận"
 
@@ -17528,23 +17601,6 @@ msgstr "Người dùng hiện thời"
 #, c-format
 msgid "browse"
 msgstr "duyệt"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr "chọn tập tin perm để xem/biên soạn"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
-msgstr ""
-"Drakperm được dùng để xem các tập tin dùng để sửa lỗi quyền truy cập, sở "
-"hữu, và nhóm thông qua msec.\n"
-"Bạn cũng có thể biên soạn quy tắc riêng, nó sẽ ghi đè lên các quy tắc mặc "
-"định."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17595,6 +17651,23 @@ msgstr "Nâng quy tắc được chọn lên một mức"
 #, c-format
 msgid "Up"
 msgstr "Lên"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr "chọn tập tin perm để xem/biên soạn"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
+msgstr ""
+"Drakperm được dùng để xem các tập tin dùng để sửa lỗi quyền truy cập, sở "
+"hữu, và nhóm thông qua msec.\n"
+"Bạn cũng có thể biên soạn quy tắc riêng, nó sẽ ghi đè lên các quy tắc mặc "
+"định."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17782,16 +17855,16 @@ msgstr "Cảnh Báo Bảo Mật:"
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid "(default value: %s)"
-msgstr "(giá trị mặc định: %s)"
-
-#: ../../standalone/draksec:1
-#, c-format
 msgid "Security Level:"
 msgstr "Mức độ bảo mật:"
 
 #: ../../standalone/draksec:1
 #, c-format
+msgid "(default value: %s)"
+msgstr "(giá trị mặc định: %s)"
+
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
 msgid ""
 "Standard: This is the standard security recommended for a computer that will "
 "be used to connect\n"
@@ -17804,7 +17877,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -17813,7 +17886,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 "Chuẩn: Đây là bảo mật chuẩn nên dùng cho máy tính sẽ được dùng để kết nối\n"
 "               với Internet theo kiểu máy khách.\n"
@@ -18195,26 +18268,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/Tuỳ chọn"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect jazz drives"
-msgstr "/Tự động phát hiện jazz drive"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect modems"
-msgstr "/Tự động dò modem"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect printers"
-msgstr "/Tự động dò máy in"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr "chính"
 
@@ -18228,6 +18281,16 @@ msgstr "phụ"
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr "Nhấn chuột lên thiết bị ở cây bên trái để xem thông tin về nó tại đây."
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Unknown"
+msgstr "Không xác định"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "unknown"
+msgstr "không xác định"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18288,11 +18351,6 @@ msgstr "Nói về Harddrake"
 msgid "/_About..."
 msgstr "/Giới thiệ_u..."
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/Trợ _giúp"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -18331,15 +18389,20 @@ msgstr "Trợ Giúp Mandrake"
 msgid "/_Fields description"
 msgstr "/Mô tả các t_rường"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/Trợ _giúp"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/_Quit"
+msgstr "/T_hoát"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "/Tự động phát hiện _jazz drive"
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/Tuỳ _chọn"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18351,10 +18414,10 @@ msgstr "/Tự động dò mo_dem"
 msgid "/Autodetect _printers"
 msgstr "/Tự động dò Máy _in"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
-msgid "/_Quit"
-msgstr "/T_hoát"
+msgid "/_Options"
+msgstr "/Tuỳ _chọn"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18453,7 +18516,7 @@ msgstr "Mức độ"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr "Định dạng của đĩa mềm được chấp nhận"
 
 #: ../../standalone/harddrake2:1
@@ -18610,6 +18673,16 @@ msgstr "CPU này có Cyrix 6x86 Coma bug hay không"
 #, c-format
 msgid "Coma bug"
 msgstr "Lỗi Coma"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -19093,8 +19166,8 @@ msgstr "Giám sát mạng"
 
 #: ../../standalone/printerdrake:1
 #, c-format
-msgid "Reading printer data ..."
-msgstr "Đang đọc dữ liệu máy in..."
+msgid "Reading data of installed printers..."
+msgstr "Đang đọc dữ liệu các máy in đã cài đặt..."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19209,53 +19282,6 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-"%s của bạn đã được cấu hình.\n"
-"Bây giờ có thể quét các tài liệu bằng \"XSane\" từ menu của các ứng dụng đồ "
-"họa và đa phương tiện."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-"%s phải được cấu hình bằng printerdrake.\n"
-"Có thể chạy printerdrake trong mục Phần Cứng tại Trung Tâm Điều Khiển "
-"Mandrake."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "Chọn thiết bị"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Please select the device where your %s is attached"
-msgstr "Hãy chọn thiết bị nơi mà %s được gắn vào"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is unsupported"
-msgstr "%s không được hỗ trợ"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr "Phiên bản này của Scannerdrake không xác định được %s."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr "%s không được hỗ trợ bởi phiên bản này của Mandrake Linux."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
 msgid "Re-generating list of configured scanners ..."
 msgstr "Đang tạo lại danh sách các máy quét đã cấu hình ..."
 
@@ -19317,8 +19343,90 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
-msgstr "Chọn máy quét"
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+"%s của bạn đã được cấu hình.\n"
+"Bây giờ có thể quét các tài liệu bằng \"XSane\" từ menu của các ứng dụng đồ "
+"họa và đa phương tiện."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "choose device"
+msgstr "Chọn thiết bị"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Please select the device where your %s is attached"
+msgstr "Hãy chọn thiết bị nơi mà %s được gắn vào"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Searching for scanners ..."
+msgstr "Đang tìm máy quét ..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Auto-detect available ports"
+msgstr "Tự động phát hiện các cổng hiện có"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr "(Lưu ý: Không thể tự động phát hiện các cổng song song)"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+"%s phải được cấu hình bằng printerdrake.\n"
+"Có thể chạy printerdrake trong mục Phần Cứng tại Trung Tâm Điều Khiển "
+"Mandrake."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is unsupported"
+msgstr "%s không được hỗ trợ"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr "Phiên bản này của Scannerdrake không xác định được %s."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr "%s không được hỗ trợ bởi phiên bản này của Mandrake Linux."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Port: %s"
+msgstr "Cổng: %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ", "
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Detected model: %s"
+msgstr "Phát hiện được model: %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr " ("
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Select a scanner model"
+msgstr "Chọn model máy quét"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19411,6 +19519,10 @@ msgid "Scientific Workstation"
 msgstr "Trạm làm việc khoa học"
 
 #: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr "Các ứng dụng khoa học như là GnuPlot"
+
+#: ../../share/compssUsers:999
 msgid "Console Tools"
 msgstr "Các công cụ console"
 
@@ -19486,12 +19598,12 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache và Pro-ftpd"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "Thư/Phần mềm nhóm/Tin tức"
+msgid "Mail"
+msgstr "Thư"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr "Máy chủ thư Postfix , Máy chủ news Inn"
+msgid "Postfix mail server"
+msgstr "Máy chủ thư Postfix"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -19588,6 +19700,190 @@ msgstr "Tài chính cá nhân"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Các chương trình quản lý tài chính của bạn, như là gnucash"
+
+#~ msgid ""
+#~ "Please enter your host name if you know it.\n"
+#~ "Some DHCP servers require the hostname to work.\n"
+#~ "Your host name should be a fully-qualified host name,\n"
+#~ "such as ``mybox.mylab.myco.com''."
+#~ msgstr ""
+#~ "Hãy điền tên máy chủ của bạn nếu bạn biết. Một số\n"
+#~ "máy chủ DHCP cần tên chủ (hostname) để hoạt động.\n"
+#~ "Tên máy chủ của bạn phải có đủ thành phần, ví dụ như\n"
+#~ " ``mybox.mylab.myco.com''."
+
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "Lỗi DrakFloppy: %s"
+
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+
+#~ msgid "Launch Aurora at boot time"
+#~ msgstr "Chạy Aurora khi khởi động"
+
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr "Màn hình truyền thống Gtk+"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "Màn hình truyền thống"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "Màn hình kiểu mới"
+
+#~ msgid "NewStyle Categorizing Monitor"
+#~ msgstr "Màn hình phân loại kiểu mới"
+
+#~ msgid "Secure Connection"
+#~ msgstr "Kết nối Bảo mật"
+
+#~ msgid "FTP Connection"
+#~ msgstr "Kết nối FTP"
+
+#~ msgid "Mail/Groupware/News"
+#~ msgstr "Thư/Phần mềm nhóm/Tin tức"
+
+#~ msgid "Postfix mail server, Inn news server"
+#~ msgstr "Máy chủ thư Postfix , Máy chủ news Inn"
+
+#~ msgid "/Options"
+#~ msgstr "/Tuỳ chọn"
+
+#~ msgid "/Autodetect jazz drives"
+#~ msgstr "/Tự động phát hiện jazz drive"
+
+#~ msgid "/Autodetect modems"
+#~ msgstr "/Tự động dò modem"
+
+#~ msgid "/Autodetect printers"
+#~ msgstr "/Tự động dò máy in"
+
+#~ msgid ""
+#~ "The partition you've selected to add as root (/) is physically located "
+#~ "beyond\n"
+#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
+#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
+#~ "partition"
+#~ msgstr ""
+#~ "Phân vùng bạn chọn để thêm là root (/) được định vị vật lý vượt quá\n"
+#~ "cylinder thứ 1024 của đĩa cứng , và bạn không có phân vùng /boot.\n"
+#~ "Nếu định dùng trình khởi động LILO, thận trọng thêm một phân vùng /boot"
+
+#~ msgid ""
+#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
+#~ "> 1024).\n"
+#~ "Either you use LILO and it won't work, or you don't use LILO and you "
+#~ "don't need /boot"
+#~ msgstr ""
+#~ "Xin lỗi. Không chấp thuận việc tạo /boot quá mức trên ổ đĩa (lên cylinder "
+#~ "> 1024).\n"
+#~ "Hoặc bạn dùng LILO thì nó sẽ không làm việc, hoặc bạn không dùng LILO thì "
+#~ "không cần /boot"
+
+#~ msgid "Upgrade"
+#~ msgstr "Nâng cấp"
+
+#~ msgid "192.168.100.0/255.255.255.0\n"
+#~ msgstr "192.168.100.0/255.255.255.0\n"
+
+#~ msgid "192.168.100.0/24\n"
+#~ msgstr "192.168.100.0/24\n"
+
+#~ msgid "10.1.*\n"
+#~ msgstr "10.1.*\n"
+
+#~ msgid "10.0.0.*\n"
+#~ msgstr "10.0.0.*\n"
+
+#~ msgid "192.168.100.194\n"
+#~ msgstr "192.168.100.194\n"
+
+#~ msgid ""
+#~ "This step is activated only if an ols GNU/Linux partition has been found "
+#~ "on\n"
+#~ "your machine.\n"
+#~ "\n"
+#~ "DrakX now needs to know if you want to perform a new install or an "
+#~ "upgrade\n"
+#~ "of an existing Mandrake Linux system:\n"
+#~ "\n"
+#~ " * \"Install\": For the most part, this completely wipes out the old\n"
+#~ "system. If you wish to change how your hard drives are partitioned, or\n"
+#~ "change the file system, you should use this option. However, depending "
+#~ "on\n"
+#~ "your partitioning scheme, you can prevent some of your existing data "
+#~ "from\n"
+#~ "being over- written.\n"
+#~ "\n"
+#~ " * \"Upgrade\": this installation class allows you to update the "
+#~ "packages\n"
+#~ "currently installed on your Mandrake Linux system. Your current\n"
+#~ "partitioning scheme and user data is not altered. Most of other\n"
+#~ "configuration steps remain available, similar to a standard "
+#~ "installation.\n"
+#~ "\n"
+#~ "Using the ``Upgrade'' option should work fine on Mandrake Linux systems\n"
+#~ "running version \"8.1\" or later. Performing an Upgrade on versions "
+#~ "prior\n"
+#~ "to Mandrake Linux version \"8.1\" is not recommended."
+#~ msgstr ""
+#~ "Bước này chỉ được kích hoạt khi phát hiện thấy một phân vùng GNU/Linux\n"
+#~ "cũ trên máy của bạn.\n"
+#~ "\n"
+#~ "DrakX cần được biết là bạn muốn thực hiện cài đặt mới hay là nâng cấp\n"
+#~ "hệ thống Mandrake Linux hiện có:\n"
+#~ "\n"
+#~ " * \"Cài đặt\": hầu hết các trường hợp, việc này sẽ xóa sạch hệ thống\n"
+#~ "cũ. Nếu bạn muốn thay đổi các phân vùng của đĩa cứng, hoặc thay đổi\n"
+#~ "hệ thống tập tin, bạn nên dùng tùy chọn này. Dù sao, tùy theo sắp xếp\n"
+#~ "phân vùng, bạn có thể tránh việc mất dữ liệu hiện có do việc ghi đè\n"
+#~ "lên.\n"
+#~ "\n"
+#~ " * \"Nâng cấp\": loại cài đặt này cho phép bạn nâng cấp các gói hiện "
+#~ "thời\n"
+#~ "đã cài trên hệ thống Mandrake Linux của bạn. Việc sắp xếp phân vùng\n"
+#~ "hiện thời và dữ liệu không bị thay đổi. Hầu hết các bước cấu hình khác\n"
+#~ "vẫn sẵn có để dùng, giống như việc cài đặt chuẩn.\n"
+#~ "\n"
+#~ "Tùy chọn ``Nâng cấp'' sẽ hoạt động tốt trên hệ thống Mandrake Linux\n"
+#~ "phiên bản \"8.1\" hay mới hơn. Không nên thực hiện nâng cấp cho các\n"
+#~ "phiên bản cũ hơn Mandrake Linux \"8.1\" ."
+
+#~ msgid ""
+#~ "Assign raw devices to block devices (such as hard drive\n"
+#~ "partitions), for the use of applications such as Oracle"
+#~ msgstr ""
+#~ "Chỉ định thiết bị raw dể  ngăn chặn các thiết bị khác(ví dụ như phân vùng "
+#~ "đĩa cứng)\n"
+#~ ", để sử dụng các phần mềm như Oracle"
+
+#~ msgid ""
+#~ "[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-"
+#~ "usbtable] [--dynamic=dev]"
+#~ msgstr ""
+#~ "[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-"
+#~ "usbtable] [--dynamic=dev]"
+
+#~ msgid "Do you want to configure another printer?"
+#~ msgstr "Bạn có muốn cấu hình một máy in khác?"
+
+#~ msgid "Know how to use this printer"
+#~ msgstr "Để biết sử dụng máy in này"
+
+#~ msgid "Preparing Printerdrake..."
+#~ msgstr "Đang chuẩn bị Printerdrake..."
+
+#~ msgid ""
+#~ "if set to yes, check for empty password, or a password while it should be "
+#~ "in /etc/shadow or other users with id 0."
+#~ msgstr ""
+#~ "nếu đặt là có, kiểm tra xem có mật khẩu trống hay không, hoặc mật khẩu "
+#~ "khi nó nên nằm trong /etc/shadow hay các người dùng khác với ID 0."
+
+#~ msgid "Reading printer data ..."
+#~ msgstr "Đang đọc dữ liệu máy in..."
+
+#~ msgid "Select a scanner"
+#~ msgstr "Chọn máy quét"
 
 #~ msgid ""
 #~ "Click on \"OK\" if you want to delete all data and partitions present on\n"

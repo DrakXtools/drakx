@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX pl\n"
 "POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-02-16 13:00+0100\n"
+"PO-Revision-Date: 2003-02-26 14:27+0100\n"
 "Last-Translator: Arkadiusz Lipiec <alipiec@elka.pw.edu.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,16 +23,18 @@ msgstr ""
 "Współdzielenie zależne od użytkownika używa grupy \"fileshare\". \n"
 "Można użyć programu userdrake aby dodać użytkownika do tej grupy."
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Anuluj"
@@ -65,8 +67,10 @@ msgstr "Brak wymaganego pakietu %s"
 
 #: ../../any.pm:1
 #, c-format
-msgid "You can export using NFS or Samba. Please select which you'd like to use."
-msgstr "Można eksportować używając NFP lub Samby. Którego protokołu chcesz użyć?"
+msgid ""
+"You can export using NFS or Samba. Please select which you'd like to use."
+msgstr ""
+"Można eksportować używając NFP lub Samby. Którego protokołu chcesz użyć?"
 
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
@@ -113,14 +117,13 @@ msgstr "Kraj"
 
 #: ../../any.pm:1
 #, c-format
+msgid "All languages"
+msgstr "Wszystkie języki"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Use Unicode by default"
 msgstr "Domyślnie używaj Unicode"
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "Wszystkie"
 
 #: ../../any.pm:1
 #, c-format
@@ -237,8 +240,10 @@ msgstr "Nazwa użytkownika jest za długa"
 
 #: ../../any.pm:1
 #, c-format
-msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr "Nazwa użytkownika może składać się tylko z małych liter, cyfr, `-'i `_'"
+msgid ""
+"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgstr ""
+"Nazwa użytkownika może składać się tylko z małych liter, cyfr, `-'i `_'"
 
 #: ../../any.pm:1
 #, c-format
@@ -457,7 +462,8 @@ msgstr "Podstawowe opcje programu rozruchowego"
 
 #: ../../any.pm:1
 #, c-format
-msgid "Option ``Restrict command line options'' is of no use without a password"
+msgid ""
+"Option ``Restrict command line options'' is of no use without a password"
 msgstr "Opcja \"Ograniczenie opcji wiersza poleceń\" nie działa bez hasła"
 
 #: ../../any.pm:1
@@ -494,6 +500,16 @@ msgstr "ograniczenie"
 #, c-format
 msgid "Restrict command line options"
 msgstr "Ograniczenie opcji wiersza poleceń"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Force No APIC"
+msgstr "Wymuszanie braku ACPI"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Enable ACPI"
+msgstr "Włączanie ACPI"
 
 #: ../../any.pm:1
 #, c-format
@@ -552,6 +568,11 @@ msgstr "Na dyskietce"
 
 #: ../../any.pm:1
 #, c-format
+msgid "First sector of the root partition"
+msgstr "Pierwszy sektor głównej partycji"
+
+#: ../../any.pm:1
+#, c-format
 msgid ""
 "You decided to install the bootloader on a partition.\n"
 "This implies you already have a bootloader on the hard drive you boot (eg: "
@@ -579,7 +600,8 @@ msgstr "Włóż dyskietkę do stacji %s"
 #: ../../any.pm:1
 #, c-format
 msgid "Choose the floppy drive you want to use to make the bootdisk"
-msgstr "Wybierz stację dyskietek, której użyjesz do utworzenia dysku startowego"
+msgstr ""
+"Wybierz stację dyskietek, której użyjesz do utworzenia dysku startowego"
 
 #: ../../any.pm:1
 #, c-format
@@ -715,7 +737,8 @@ msgstr "komendy przed zaladowaniem albo 'c' , aby pracowac w linii polecen."
 #: ../../bootloader.pm:1
 #, c-format
 msgid "Press enter to boot the selected OS, 'e' to edit the"
-msgstr "Nacisnij Enter, aby zaladowac wybrany system operacyjny, `e' aby wyedytowac"
+msgstr ""
+"Nacisnij Enter, aby zaladowac wybrany system operacyjny, `e' aby wyedytowac"
 
 # NOTE: this message will be displayed by grub at boot time; that is
 # using the BIOS font; that means cp437 charset on 99.99% of PC computers
@@ -791,243 +814,6 @@ msgstr ""
 "Wybierz system operacyjny z listy powyzej lub\n"
 "czekaj %d sekund na domyslny start.\n"
 "\n"
-
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "OK"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "Tak, chcę dla tego użytkownika korzystać z automatycznego logowania"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "Nie, nie chcę automatycznego logowania"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "Uruchamiaj środowisko graficzne po uruchomieniu systemu"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "Tryb pracy systemu"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr "Ekran powitalny"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr "Ekran Lilo"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-"\n"
-"Wybierz temat dla\n"
-"lilo i ekranu\n"
-"powitalnego, można\n"
-"wybrać je oddzielnie"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "Tematy"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Splash selection"
-msgstr "Wybór ekranu"
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Konfiguruj"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"%s jest programem uruchamiającym system (bootloaderem)\n"
-"Wybierz \"Konfiguruj\", by uruchomić druida instalacji."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "Tematy LILO i ekranu powitalnego zostały pomyślnie zainstalowane"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr "Instalacja tematu zakończyła się niepowodzeniem!"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr "Uwaga"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "Błąd"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr "Ponownie uruchom \"lilo\""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-"Nie można ponownie uruchomić Lilo!\n"
-"Uruchom \"lilo\" jako root w wierszu poleceń aby zakończyć\n"
-"instalację tematu Lilo."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr "Wpisz initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr "Nie można uruchomić mkinitrd -f /boot/initrd-%s.img %s."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-"Nie można zapisać pliku /etc/sysconfig/bootsplash,\n"
-"gdyż nie został on znaleziony."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "Zapis %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr "Nie można zapisać pliku /etc/sysconfig/bootspash."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "Nie odnaleziono komunikatu lilo"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "Kopiowanie %s do %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr "Archiwizacja %s do %s.old"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "Utwórz nowy temat"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-"Wyświetl temat\n"
-"spod konsoli"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr "Zainstaluj tematy"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "Tryb Lilo/Grub"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "Tryb Yaboot"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "Uaktywnij graficzny start"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "Wygląd tradycyjny Gtk+"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "Wygląd tradycyjny"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "Styl nowoczesny"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "Wygląd nowoczesny z kategoriami"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/Plik/_Wyjście"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_Plik"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "Konfiguracja sposobu uruchamiania"
 
 #: ../../common.pm:1
 #, c-format
@@ -1186,8 +972,24 @@ msgstr "Nie można użyć Logicznego Woluminu LVM dla punktu montowania %s"
 
 #: ../../fsedit.pm:1
 #, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"Jako partycję root (/) wybrano programową partycję RAID.\n"
+"Żaden program rozruchowy nie jest w stanie obsłużyć jej bez partycji /boot.\n"
+"Pamiętaj więc o dodaniu partycji /boot."
+
+#: ../../fsedit.pm:1
+#, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Istnieje partycja z punktem montowania %s\n"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr "Punkty montowania powinny składać się ze znaków alfanumerycznych"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1221,6 +1023,15 @@ msgstr ""
 " (wystąpił błąd: %s)\n"
 "\n"
 "Czy zgadzasz się na utratę wszystkich partycji?\n"
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "Błąd"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1330,8 +1141,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1344,7 +1155,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1609,7 +1420,8 @@ msgid ""
 "configure the driver."
 msgstr ""
 "Instalator próbuje najpierw wykryć urządzenia IDE obecne w komputerze.\n"
-"Przeszukiwana jest także jedna (lub więcej) karta PCI SCSI. Jeśli karta SCSI\n"
+"Przeszukiwana jest także jedna (lub więcej) karta PCI SCSI. Jeśli karta "
+"SCSI\n"
 "zostanie znaleziona, instalator automatycznie zainstaluje odpowiedni\n"
 "sterownik.\n"
 "\n"
@@ -1619,7 +1431,8 @@ msgstr ""
 "z których można jedną wybrać. Kliknij \"Nie\" jeśli sprzęt SCSI nie jest\n"
 "obecny w komputerze. Jeśli nie masz pewności, można sprawdzić listę\n"
 "sprzętu wykrytego na komputerze po kliknięciu przycisku \"Wyświetl\n"
-"informacje o sprzęcie\" oraz \"Dalej ->\". Sprawdź listę sprzętu a następnie\n"
+"informacje o sprzęcie\" oraz \"Dalej ->\". Sprawdź listę sprzętu a "
+"następnie\n"
 "kliknij przycisk \"Dalej ->\" aby wrócić do pytania o interfejs SCSI.\n"
 "\n"
 "Jeśli należy ręcznie wybrać kartę SCSI, instalator zapyta czy dla niej mają\n"
@@ -1707,7 +1520,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1802,7 +1615,8 @@ msgstr ""
 "\n"
 "Jeśli na komputerze zainstalowane są inne systemy operacyjne, zostaną\n"
 "one automatycznie dodane do menu startowego. Można dostosować te\n"
-"opcje poprzez kliknięcie przycisku \"Dodaj\", aby utworzyć nowy wpis, wybrania\n"
+"opcje poprzez kliknięcie przycisku \"Dodaj\", aby utworzyć nowy wpis, "
+"wybrania\n"
 "opcji \"Zmień\" lub \"Usuń\" aby zmienić lub usunąć odpowiedni wpis.\n"
 "Przycisk \"OK\" umożliwia zatwierdzenie i sprawdzenie poprawności zmian.\n"
 "\n"
@@ -1848,8 +1662,8 @@ msgstr ""
 "\n"
 "    * \"GRUB\": jeśli ma być użyty grub (menu tekstowe).\n"
 "\n"
-"    * \"LILO z menu tekstowym\": jeśli ma zostać użyty LILO z "
-"interfejsem tekstowym.\n"
+"    * \"LILO z menu tekstowym\": jeśli ma zostać użyty LILO z interfejsem "
+"tekstowym.\n"
 "\n"
 "    * \"LILO z graficznym menu\": jeśli ma zostać użyty LILO\n"
 "z interfejsem graficznym.\n"
@@ -1900,7 +1714,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -1943,8 +1757,7 @@ msgstr ""
 "\n"
 "Można wybrać odpowiednią metodę \"uwierzytelniania\" spośród LDAP,\n"
 "NIS lub Domeny PDC Windows. Jeśli nie wierz, której opcji wybrać, zapytaj\n"
-"administratora sieci"
-"\n"
+"administratora sieci\n"
 "Jeśli masz problemy z zapamiętywaniem haseł, można wybrać opcję \"Bez\n"
 " hasła\", w przypadku, gdy komputer nie jest połączony z Internetem i ufasz\n"
 "wszystkim osobom posiadającym dostęp do tego komputera."
@@ -2000,8 +1813,7 @@ msgstr ""
 "ekran testowy. Użytkownik powinien sprawdzić przyciski oraz kółka\n"
 "aby upewnić się co do poprawności konfiguracji. Jeśli mysz nie pracuje\n"
 "poprawnie, należy nacisnąć klawisz spacji lub [Enter] aby anulować test\n"
-"oraz wrócić do listy wyboru. "
-"\n"
+"oraz wrócić do listy wyboru. \n"
 "Mysz z kółkiem czasem nie jest wykrywana automatycznie, więc należy\n"
 "wówczas wybrać odpowiednią wartość z listy. Upewnij się, żeby wybrać\n"
 "mysz podłączoną do odpwoiedniego portu. Po zakończeniu wybierania\n"
@@ -2048,8 +1860,7 @@ msgstr ""
 "\"Hiszpański\".\n"
 "\n"
 "Można zainstalować więcej niż jeden język. Po wybraniu dodatkowych\n"
-"ustawień lokalnych, kliknij przycisk \"Dalej ->\" aby kontynuować. "
-"\n"
+"ustawień lokalnych, kliknij przycisk \"Dalej ->\" aby kontynuować. \n"
 "Aby przełączać się pomiędzy zainstalowanymi w systemie językami, można\n"
 "uruchomić polecenie \"/usr/sbin/localedrake\" jako \"root\". Spowoduje to\n"
 "zmianę języka wykorzystywanego przez cały system. Uruchomienie\n"
@@ -2078,15 +1889,15 @@ msgstr ""
 "W zależności od wybranego domyślnego języka, instalator automatycznie\n"
 "wybierze określony typ konfiguracji klawiatury. Jednak można nie posiadać\n"
 "klawiatury odpowiadającej danemu językowi: na przykład, Szwajcar mówiący\n"
-"po angielski, może wciąż chcieć używać klawiatury Szwajcarskiej. Albo\n"
-"jeśli osoba porozumiewa się po angielsku i mieszka w Quebecu,  język rodzimy\n"
-"oraz układ klawiatury nie będą się ze sobą zgadzać. Jeśli zachodzi taka\n"
-"sytuacja można wrócić wybrać odpowiedni układ klawiatury z listy.\n"
+"po angielsku, może wciąż chcieć używać klawiatury szwajcarskiej. Albo\n"
+"jeśli osoba porozumiewa się po angielsku i mieszka w prowincji Quebec,\n"
+"język rodzimy oraz układ klawiatury nie będą się ze sobą zgadzać.\n"
+"Jeśli zachodzi taka sytuacja można wrócić aby wybrać odpowiedni\n"
+"układ klawiatury z listy.\n"
 "\n"
-"Kliknij przycisk \"Więcej\", aby wyświetlić kompletną listę\n"
-"obsługiwanych klawiatur. "
-"\n"
-"Po wybraniu układu klawiatury bazującym na alfabecie niełacińskim, następne\n"
+"Kliknij przycisk \"Więcej\", aby wyświetlić pełną listę\n"
+"obsługiwanych klawiatur.\n"
+"Po wybraniu układu klawiatury opartym na alfabecie niełacińskim, następne\n"
 "okno umożliwi wybranie skrótów klawiszowych przełączających układ\n"
 "klawiatury z łacińskiego na narodowy."
 
@@ -2452,10 +2263,12 @@ msgstr ""
 "\n"
 "Wybierz \"Dalej ->\", jeśli już można przystąpić do formatowania partycji.\n"
 "\n"
-"Wybierz \"<- Wstecz\", jeśli chcesz wybrać inne partycje dla nowej instalacji\n"
+"Wybierz \"<- Wstecz\", jeśli chcesz wybrać inne partycje dla nowej "
+"instalacji\n"
 "Linuksa Mandrake.\n"
 "\n"
-"Kliknij \"Zaawansowane\" jeśli chcesz wybrać sprawdzić niektóre z partycji\n"
+"Kliknij \"Zaawansowane\" jeśli chcesz wybrać sprawdzanie niektórych "
+"partycji\n"
 "w poszukiwaniu uszkodzonych sektorów."
 
 #: ../../help.pm:1
@@ -2501,10 +2314,9 @@ msgstr ""
 "Przycisk \"Zaawansowane\" (tylko w trybie Zaawansowanym) powoduje\n"
 "wyświetlenie dwóch dodatkowych przycisków:\n"
 "\n"
-" * \"generowanie dyskietki automatycznej instalacji\": aby utworzyć "
-"dyskietkę,\n"
-"która służy do przeprowadzenia instalacji bez pomocy operatora, w ten\n"
-"sam sposób co dopiero przeprowadzona instalacja.\n"
+" * \"tworzenie dyskietki automatycznej instalacji\": aby utworzyć dyskietkę\n"
+"służącą do przeprowadzenia instalacji bez pomocy operatora, w ten\n"
+"sam sposób jak przeprowadzona przed chwilą instalacja.\n"
 "\n"
 "   Uwaga: po kliknięciu przycisku dostępne będą dwie różne opcje:\n"
 "\n"
@@ -2594,7 +2406,8 @@ msgid ""
 "DiskDrake utility, refer to the ``Managing Your Partitions '' section in\n"
 "the ``Starter Guide''."
 msgstr ""
-"W tym etapie instalacji należy określić, gdzie na dysku zostanie zainstalowany\n"
+"W tym etapie instalacji należy określić, gdzie na dysku zostanie "
+"zainstalowany\n"
 "Mandrake Linux. Jeśli dysk jest pusty lub istniejące systemy operacyjne\n"
 "zajmują całe dostępne miejsce, należy podzielić dysk na partycje\n"
 "Partycjonowanie to po prostu logiczny podział twardego dysku na oddzielne\n"
@@ -2636,7 +2449,8 @@ msgstr ""
 "* \"Kasowanie zawartości całego dysku\": Jeśli chcesz usunąć z dysku\n"
 "wszystkie dane i wszystkie partycje istniejące na dysku oraz zainstalować\n"
 "w to miejsce nowy system Mandrake Linux, wybierz to rozwiązanie.\n"
-"Pamiętaj, że po zatwierdzeniu tego wyboru nie nie będzie możliwości odwrotu.\n"
+"Pamiętaj, że po zatwierdzeniu tego wyboru nie nie będzie możliwości "
+"odwrotu.\n"
 "\n"
 "\n"
 "    !! Po wybraniu tej opcji wszystkie dane zostaną utracone !!\n"
@@ -2659,7 +2473,7 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -2745,7 +2559,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 "Rozdzielczość\n"
@@ -2803,7 +2617,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -2967,7 +2781,8 @@ msgstr ""
 "ma pracować jako serwer - zazwyczaj nie będzie potrzeby uruchamiania\n"
 "niektórych usług. Należy pamiętać, że uruchomienie niektórych z nich na\n"
 "serwerze może być niebezpieczne.\n"
-"W ogólności, należy uruchamiać tylko te usługi, które naprawdę są potrzebne.\n"
+"W ogólności, należy uruchamiać tylko te usługi, które naprawdę są "
+"potrzebne.\n"
 "!!"
 
 #: ../../help.pm:1
@@ -3008,7 +2823,8 @@ msgid ""
 msgstr ""
 "Teraz zostanie dokonana konfiguracja Internetu/połączenia z siecią.\n"
 "Jeśli chcesz połączyć komputer do Internetu lub sieci lokalnej, kliknij\n"
-"\"Dalej ->\". Zostanie uruchomione automatyczne wykrywanie urządzeń sieciowych\n"
+"\"Dalej ->\". Zostanie uruchomione automatyczne wykrywanie urządzeń "
+"sieciowych\n"
 "oraz modemów. Jeśli wykrywanie zakończy się niepowodzeniem, kolejnym razem\n"
 "należy odznaczyć opcję \"Użyj automatycznego wykrywania\". Można także\n"
 "nie wybierać konfiguracji sieci, lub też zrobić to w późniejszym czasie.\n"
@@ -3160,8 +2976,7 @@ msgstr ""
 "zdefiniowane kategorie instalacji. Można je traktować jako sekcje\n"
 "zawierające różne aplikacje. Można mieszać i dopasowywać aplikacje\n"
 "z różnych pojemników, tak więc na przykład instalacja \"Stacji roboczej\"\n"
-"może wciąż zawierać aplikacje z sekcji \"Programowanie\"."
-"\n"
+"może wciąż zawierać aplikacje z sekcji \"Programowanie\".\n"
 " * \"Stacja robocza\": jeśli komputer będzie pracował jako stacja\n"
 "robocza, należy wybrać jedną lub więcej związanych z tą sekcją aplikacji\n"
 "\n"
@@ -3257,7 +3072,8 @@ msgstr ""
 "(jest to możliwe tylko, jeśli\n"
 "dostępnych jest więcej niż jedna partycja linuksowa)\n"
 "\n"
-"Dla informacji, każda partycja jest określona przez \"Nazwę\" i \"Rozmiar\".\n"
+"Dla informacji, każda partycja jest określona przez \"Nazwę\" i \"Rozmiar"
+"\".\n"
 "\n"
 "\"Nazwa\" jest określana następująco: \"typ dysku\",\"numer dysku\",\n"
 "\"numer partycji\". (na przykład \"hda1\").\n"
@@ -3353,9 +3169,9 @@ msgstr ""
 "pytanie o to, który użytkownik będzie mogł być automatycznie logowany\n"
 "podczas uruchamiania komputera. Jeśli masz ochotę używać tej funkcji\n"
 "(oraz nie dbasz za bardzo o bezpieczeństwo lokalne), wybierz żądanego\n"
-"użytkownika oraz menedżer okien, a następnie kliknij \"Dalej ->\". "
-"Jeśli nie chcesz używać tej funkcji, odznacz opcję \"Czy chcesz użyć\n"
-"tej funkcji?\".."
+"użytkownika oraz menedżera okien, a następnie kliknij \"Dalej ->\". Jeśli "
+"nie chcesz używać tej funkcji, odznacz opcję \"Czy chcesz użyć\n"
+"tej funkcji?\"."
 
 #: ../../help.pm:1
 #, c-format
@@ -3439,12 +3255,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Nie"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Tak"
@@ -3536,7 +3354,8 @@ msgstr ""
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr "Masz więcej niż 1 dysk twardy, na którym z nich ma być zainstalowany Linux?"
+msgstr ""
+"Masz więcej niż 1 dysk twardy, na którym z nich ma być zainstalowany Linux?"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3551,7 +3370,18 @@ msgstr "Usuń Windows(TM)"
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr "Brak partycji FAT do zmiany rozmiaru (lub brak wystarczającej ilości miejsca)"
+msgstr ""
+"Brak partycji FAT do zmiany rozmiaru (lub brak wystarczającej ilości miejsca)"
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
+"Aby upewnić się co do spójności danych po zmianie rozmiaru partycji,\n"
+"podczas kolejnego uruchamiania systemu Windows(TM) zostanie\n"
+"uruchomione sprawdzanie systemu plików"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -4065,6 +3895,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "Przechodzę do kroku `%s'\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Help"
+msgstr "Pomoc"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "not configured"
+msgstr "nie skonfigurowano"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Konfiguruj"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -4225,7 +4075,8 @@ msgstr "Zostaną zainstalowane następujące pakiety"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
-msgid "You can't select this package as there is not enough space left to install it"
+msgid ""
+"You can't select this package as there is not enough space left to install it"
 msgstr "Nie możesz wybrać tego pakietu. Nie ma już miejsca, by go zainstalować"
 
 #: ../../install_steps_gtk.pm:1
@@ -4275,14 +4126,6 @@ msgstr "Dalej ->"
 #, c-format
 msgid "Individual package selection"
 msgstr "Samodzielny wybór pakietów"
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "Pomoc"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -4386,7 +4229,8 @@ msgstr ""
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
-msgstr "Instalacja programu rozruchowego nie powiodła się. Wystąpił następujący błąd:"
+msgstr ""
+"Instalacja programu rozruchowego nie powiodła się. Wystąpił następujący błąd:"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4532,12 +4376,13 @@ msgstr "Autentykacja"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "To hasło jest zbyt krótkie (musi zawierać co najmniej %d znaków)"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "Bez hasła"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "Hasło roota"
@@ -4597,11 +4442,6 @@ msgstr "Bezpieczeństwo"
 #, c-format
 msgid "Security Level"
 msgstr "Poziom bezpieczeństwa"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "not configured"
-msgstr "nie skonfigurowano"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -4709,6 +4549,16 @@ msgid "Which is your timezone?"
 msgstr "Wybierz strefę czasową."
 
 #: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "Czy chcesz skonfigurować drukowanie?"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Unable to contact mirror %s"
+msgstr "Nie można rozdzielić procesów: %s"
+
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Łączenie z serwerem - pobieranie listy dostępnych pakietów..."
@@ -4720,7 +4570,8 @@ msgstr "Wybierz serwer lustrzany, z którego chcesz pobrać pakiety"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Contacting Mandrake Linux web site to get the list of available mirrors..."
+msgid ""
+"Contacting Mandrake Linux web site to get the list of available mirrors..."
 msgstr ""
 "Łączenie ze stroną Mandrake Linux w celu pobrania listy dostępnych "
 "serwerów..."
@@ -4789,6 +4640,11 @@ msgstr ""
 "Jeżeli posiadasz wszystkie płyty CD z listy, kliknij Ok.\n"
 "Jeżeli nie masz żadnej z płyt z listy, kliknij Anuluj.\n"
 "Jeżeli nie posiadasz niektórych płyt z listy, odznacz je i kliknij Ok."
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "Wszystkie"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4868,6 +4724,11 @@ msgstr "Zbyt mało miejsca na instalację lub uaktualnienie (%d > %d)"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "Wyszukiwanie dostępnych pakietów..."
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Wyszukiwanie pakietów do uaktualnienia..."
 
@@ -4875,11 +4736,6 @@ msgstr "Wyszukiwanie pakietów do uaktualnienia..."
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Wyszukiwanie już zainstalowanych pakietów..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "Wyszukiwanie dostępnych pakietów..."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4903,7 +4759,7 @@ msgstr ""
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Check bad blocks?"
-msgstr "Sprawdzić fizycznie partycje?"
+msgstr "Sprawdzić partycje w poszukiwaniu uszkodzonych sektorów?"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4993,11 +4849,6 @@ msgstr "Wybierz typ myszy."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Upgrade"
-msgstr "Uaktualnienie"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
 msgid "Upgrade %s"
 msgstr "Uaktualnienie %s"
 
@@ -5021,15 +4872,19 @@ msgstr "Oto lista dostępnych układów klawiatury"
 msgid "Please choose your keyboard layout."
 msgstr "Wybierz układ klawiatury."
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Zakończ"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr "Umowa licencyjna"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "default:LTR"
-msgstr "domyślnie:LTR"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5038,8 +4893,10 @@ msgstr "Wystąpił błąd"
 
 #: ../../install_steps_newt.pm:1
 #, c-format
-msgid "  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
-msgstr " <Tab>/<Alt-Tab> między element.  | <Spacja> wybór | <F12> następny ekran "
+msgid ""
+"  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
+msgstr ""
+" <Tab>/<Alt-Tab> między element.  | <Spacja> wybór | <F12> następny ekran "
 
 #: ../../install_steps_newt.pm:1
 #, c-format
@@ -5580,6 +5437,11 @@ msgstr "belgijski"
 #, c-format
 msgid "Azerbaidjani (latin)"
 msgstr "azerski (latin)"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Arabic"
+msgstr "arabski"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6741,6 +6603,11 @@ msgstr "Andora"
 msgid "Afghanistan"
 msgstr "Afganistan"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "default:LTR"
+msgstr "default:LTR"
+
 #: ../../loopback.pm:1
 #, c-format
 msgid "Circular mounts %s\n"
@@ -6753,8 +6620,10 @@ msgstr "Zacznij od usunięcia logicznych dysków (LV)\n"
 
 #: ../../modules.pm:1
 #, c-format
-msgid "PCMCIA support no longer exists for 2.2 kernels. Please use a 2.4 kernel."
-msgstr "Standard PCMCIA nie jest dłużej obsługiwany w jądrach 2.2. Użyj jądra 2.4."
+msgid ""
+"PCMCIA support no longer exists for 2.2 kernels. Please use a 2.4 kernel."
+msgstr ""
+"Standard PCMCIA nie jest dłużej obsługiwany w jądrach 2.2. Użyj jądra 2.4."
 
 #: ../../mouse.pm:1
 #, c-format
@@ -7159,10 +7028,10 @@ msgstr ""
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 "Przypisuje \"surowe\" urządzenia do urządzeń blokowych\n"
-"(np dysków) dla aplikacji typu Oracle"
+"(np. partycji twardych dysków) dla aplikacji typu Oracle lub odtwarzacze DVD"
 
 #: ../../services.pm:1
 #, c-format
@@ -7178,7 +7047,8 @@ msgstr ""
 msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
 "one machine to another."
-msgstr "Postfix to agent pocztowy (MTA), przesyłający pocztę między komputerami."
+msgstr ""
+"Postfix to agent pocztowy (MTA), przesyłający pocztę między komputerami."
 
 #: ../../services.pm:1
 #, c-format
@@ -7346,7 +7216,8 @@ msgstr ""
 
 #: ../../services.pm:1
 #, c-format
-msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid ""
+"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "Apache to serwer WWW. Jest używany do udostępniania plików \n"
 "HTML i CGI w Internecie/Intranecie."
@@ -7442,11 +7313,11 @@ msgstr ""
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_katalog_źródłowy] [--update-"
+"usbtable] [--dynamic=dev]"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7645,7 +7516,7 @@ msgstr "Wyjście z instalacji"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Install system updates"
+msgid "Install updates"
 msgstr "Aktualizacja systemu"
 
 #: ../../steps.pm:1
@@ -7672,6 +7543,11 @@ msgstr "Konfiguracja sieci"
 #, c-format
 msgid "Add a user"
 msgstr "Użytkownicy"
+
+#: ../../steps.pm:1
+#, c-format
+msgid "Root password"
+msgstr "Hasło roota"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7720,13 +7596,21 @@ msgstr "Licencja"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
+msgid "Language"
 msgstr "Wybór języka"
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
 msgstr "utopia 25"
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "OK"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -7908,7 +7792,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Opcje"
@@ -7932,14 +7816,6 @@ msgstr "Monitor"
 #, c-format
 msgid "Graphic Card"
 msgstr "Karta graficzna"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Zakończ"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -8603,42 +8479,6 @@ msgstr "Tablica partycji napędu %s zostanie zapisana na dysk!"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"Jako partycję root (/) wybrano programową partycję RAID.\n"
-"Żaden program rozruchowy nie jest w stanie obsłużyć jej bez partycji /boot.\n"
-"Pamiętaj więc o dodaniu partycji /boot."
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"Dodano partycję root (/) na dysku poza cylindrem 1024, brak również\n"
-"partycji /boot. Jeżeli więc chcesz używać programu rozruchowego lilo\n"
-"dodaj partycję /boot poniżej cylindra 1024"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"Niestety, nie można utworzyć /boot tak daleko na dysku (poza cylindrem "
-"1024)\n"
-"Albo użyjesz LILO, (nie będzie działać), lub nie będziesz używać lilo\n"
-"i nie potrzebujesz /boot"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
 msgid "The package %s is needed. Install it?"
 msgstr "Wymagany jest pakiet %s. Czy chcesz go zainstalować?"
 
@@ -8785,7 +8625,8 @@ msgstr "Zmień rozmiar"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr "Po zmianie rozmiaru partycji %s, wszystkie dane na niej zostaną utracone"
+msgstr ""
+"Po zmianie rozmiaru partycji %s, wszystkie dane na niej zostaną utracone"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8843,7 +8684,8 @@ msgstr "Zmiana typu partycji"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
-msgid "After changing type of partition %s, all data on this partition will be lost"
+msgid ""
+"After changing type of partition %s, all data on this partition will be lost"
 msgstr "Po zmianie typu partycji %s, wszystkie dane na niej zostaną utracone"
 
 #: ../../diskdrake/interactive.pm:1
@@ -9082,7 +8924,8 @@ msgstr "Nazwa użytkownika"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
-msgid "Please enter your username, password and domain name to access this host."
+msgid ""
+"Please enter your username, password and domain name to access this host."
 msgstr ""
 "Wprowadź swoją nazwę użytkownika, hasło oraz nazwę domeny aby uzyskać dostęp "
 "do tego komputera."
@@ -9105,7 +8948,8 @@ msgstr "Jaka nazwa użytkowika"
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Can't login using username %s (bad password?)"
-msgstr "Nie można zalogować się z użyciem nazwy użytkownika %s (niepoprawne hasło?)"
+msgstr ""
+"Nie można zalogować się z użyciem nazwy użytkownika %s (niepoprawne hasło?)"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -9126,6 +8970,11 @@ msgstr "Kontrolery USB"
 #, c-format
 msgid "SCSI controllers"
 msgstr "Kontrolery SCSI"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "Firewire controllers"
+msgstr "Kontrolery USB"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -9265,7 +9114,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -9286,7 +9135,7 @@ msgstr ""
 "- \"lspcidrake -v | fgrep AUDIO\" powie, który ze sterowników jest\n"
 "domyślnie używany przez kartę\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" powie, który sterownik jest\n"
+"- \"grep sound-slot /etc/modules.conf\" powie, który sterownik jest\n"
 "aktualnie używany\n"
 "\n"
 "- \"/sbin/lsmod\" umożliwi sprawdzenie czy moduł (sterownik)\n"
@@ -9749,8 +9598,8 @@ msgstr "Połączenie z Internetem"
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
-msgstr "Sagem (wykorzystujący pppoe) usb"
+msgid "Sagem (using pppoa) usb"
+msgstr "Sagem (wykorzystujący pppoa) usb"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -9869,13 +9718,13 @@ msgstr "Nazwa komputera zeroconf nie może zawierać kropki."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
-msgid "Zeroconf Host name"
-msgstr "Nazwa komputera zeroconf"
+msgid "Host name"
+msgstr "Nazwa komputera"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
-msgid "Host name"
-msgstr "Nazwa komputera"
+msgid "Zeroconf Host name"
+msgstr "Nazwa komputera zeroconf"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9890,19 +9739,6 @@ msgstr ""
 "Podaj nazwę komputera zeroconf nie zawierającą żadnych\n"
 "kropek jeśli nie chcesz używać domyślnej nazwy."
 
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-"Podaj nazwę komputera, jeśli ją znasz.\n"
-"Niektóre serwery DHCP wymagają tej nazwy do działania.\n"
-"Powinna być ona zapisana w pełnej postaci (bez polskich znaków),\n"
-"np. \"mojkomputer.mojadomena.pl\"."
-
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Configuring network"
@@ -9915,7 +9751,8 @@ msgstr "nie znaleziono karty sieciowej"
 
 #: ../../network/ethernet.pm:1
 #, c-format
-msgid "Please choose which network adapter you want to use to connect to Internet."
+msgid ""
+"Please choose which network adapter you want to use to connect to Internet."
 msgstr "Wybierz kartę sieciową, którą ma być używana do łączenia z Internetem"
 
 #: ../../network/ethernet.pm:1 ../../standalone/drakgw:1
@@ -10122,7 +9959,8 @@ msgstr "Zainstaluj rpm"
 
 #: ../../network/modem.pm:1
 #, c-format
-msgid "\"%s\" based winmodem detected, do you want to install needed software ?"
+msgid ""
+"\"%s\" based winmodem detected, do you want to install needed software ?"
 msgstr "Wykryto winmodem \"%s\", czy chcesz zainstalować wymagane programy ?"
 
 #: ../../network/modem.pm:1
@@ -10249,7 +10087,8 @@ msgstr ""
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "The network needs to be restarted. Do you want to restart it ?"
-msgstr "Sieć musi zostać ponownie uruchomiona. Czy chcesz ją ponownie uruchomić ?"
+msgstr ""
+"Sieć musi zostać ponownie uruchomiona. Czy chcesz ją ponownie uruchomić ?"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -10492,7 +10331,7 @@ msgstr "Konfiguracja pośredników (proxy)"
 #: ../../network/network.pm:1
 #, c-format
 msgid "Gateway address should be in format 1.2.3.4"
-msgstr "Adres IP brami powinien być w formacie typu 1.2.3.4"
+msgstr "Adres IP bramy powinien być w formacie typu 1.2.3.4"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10553,7 +10392,12 @@ msgstr "Adres IP powinien być w formacie typu 192.168.1.1"
 #: ../../network/network.pm:1
 #, c-format
 msgid "Start at boot"
-msgstr "Uruchom przy starcie"
+msgstr "Uruchamianie przy starcie"
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "Assign host name from DHCP address"
+msgstr "Należy podać nazwę komputera lub adres IP.\n"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10566,6 +10410,23 @@ msgid "Track network card id (useful for laptops)"
 msgstr "Śledzenie ID karty sieciowej (użyteczne przy laptopach)"
 
 #: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "DHCP host name"
+msgstr "Nazwa komputera"
+
+#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "Netmask"
+msgstr "Maska"
+
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "IP address"
+msgstr "Adres IP"
+
+#: ../../network/network.pm:1
 #, c-format
 msgid "(bootp/dhcp/zeroconf)"
 msgstr "(bootp/dhcp/zeroconf)"
@@ -10574,17 +10435,6 @@ msgstr "(bootp/dhcp/zeroconf)"
 #, c-format
 msgid "Automatic IP"
 msgstr "Automatyczne IP"
-
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Netmask"
-msgstr "Maska"
-
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "IP address"
-msgstr "Adres IP"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10836,7 +10686,7 @@ msgstr "PDQ"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Print, Don't Queue"
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr "Nieznany model"
@@ -10845,6 +10695,11 @@ msgstr "Nieznany model"
 #, c-format
 msgid "Unknown model"
 msgstr "Nieznany model"
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid "%s (Port %s)"
+msgstr "%s (Port %s)"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -10998,11 +10853,6 @@ msgstr "Printerdrake"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr "Czy chcesz skonfigurować inną drukarkę?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Usuwanie drukarki \"%s\"..."
 
@@ -11018,7 +10868,7 @@ msgstr "Usuń drukarkę"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Know how to use this printer"
+msgid "Learn how to use this printer"
 msgstr "Dowiedz się jak używać tą drukarkę"
 
 #: ../../printer/printerdrake.pm:1
@@ -11028,7 +10878,8 @@ msgstr "Wydrukuj strony testowe"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP."
+msgid ""
+"Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP."
 msgstr "Nie można usunąć drukarki \"%s\" ze Star Office/OpenOffice.org/GIMP"
 
 #: ../../printer/printerdrake.pm:1
@@ -11036,7 +10887,8 @@ msgstr "Nie można usunąć drukarki \"%s\" ze Star Office/OpenOffice.org/GIMP"
 msgid ""
 "The printer \"%s\" was successfully removed from Star Office/OpenOffice.org/"
 "GIMP."
-msgstr "Drukarka \"%s\" została pomyślnie usunięta ze Star Office/OpenOffice.org/GIMP"
+msgstr ""
+"Drukarka \"%s\" została pomyślnie usunięta ze Star Office/OpenOffice.org/GIMP"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11055,8 +10907,10 @@ msgstr "Nie można dodać drukarki \"%s\" do Star Office/OpenOffice.org/GIMP"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "The printer \"%s\" was successfully added to Star Office/OpenOffice.org/GIMP."
-msgstr "Drukarka \"%s\" została pomyślnie dodana do Star Office/OpenOffice.org/GIMP."
+msgid ""
+"The printer \"%s\" was successfully added to Star Office/OpenOffice.org/GIMP."
+msgstr ""
+"Drukarka \"%s\" została pomyślnie dodana do Star Office/OpenOffice.org/GIMP."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11115,11 +10969,6 @@ msgstr "Typ połączenia drukarki"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Learn how to use this printer"
-msgstr "Dowiedz się jak używać tą drukarkę"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Raw printer"
 msgstr "Drukarka surowa (raw)"
 
@@ -11155,6 +11004,7 @@ msgid "Add a new printer"
 msgstr "Dodaj nową drukarkę"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Tryb zwykły"
@@ -11178,6 +11028,11 @@ msgstr "Konfiguracja CUPS"
 #, c-format
 msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr "Odśwież listę drukarek (aby wyświetlić dostępne zdalne drukarki CUPS)"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Display all available remote CUPS printers"
+msgstr "Wyświetl wszystkie dostępne zdalne drukarki CUPS"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11207,16 +11062,6 @@ msgstr ""
 #, c-format
 msgid "Printing system: "
 msgstr "System wydruku: "
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Would you like to configure printing?"
-msgstr "Czy chcesz skonfigurować drukowanie?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr "Przygotowywanie Printerdrake..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11252,6 +11097,11 @@ msgstr "Jakiego systemu wydruku zamierzasz używać?"
 #, c-format
 msgid "Select Printer Spooler"
 msgstr "Wybierz system wydruku"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Setting Default Printer..."
+msgstr "Ustawianie drukarki domyślnej..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11440,7 +11290,8 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer should contain only letters, numbers and the underscore"
-msgstr "Nazwa drukarki powinna zawierać tylko litery, cyfry i znak podkreślenia"
+msgstr ""
+"Nazwa drukarki powinna zawierać tylko litery, cyfry i znak podkreślenia"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12561,8 +12412,10 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Alternatively, you can specify a device name/file name in the input line"
-msgstr "Inną możliwością, jest wybranie nazwy urządzenia/pliku w wierszu wejściowym"
+msgid ""
+"Alternatively, you can specify a device name/file name in the input line"
+msgstr ""
+"Inną możliwością, jest wybranie nazwy urządzenia/pliku w wierszu wejściowym"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12815,6 +12668,39 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+"\n"
+"\n"
+"Program Printerdrake nie mógł określić modelu drukarki %s. Wybierz poprawny "
+"model z listy."
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ")"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr " na "
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr "("
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Configuring printer ..."
+msgstr "Konfigurowanie drukarki ..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Searching for new printers..."
 msgstr "Wyszukiwanie nowych drukarek..."
 
@@ -12858,7 +12744,8 @@ msgstr " (Upewnij się że wszystkie drukarki są podłączone i włączone).\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "There are no printers found which are directly connected to your machine"
+msgid ""
+"There are no printers found which are directly connected to your machine"
 msgstr "Nie wykryto drukarek bezpośrednio podłączonych do komputera"
 
 #: ../../printer/printerdrake.pm:1
@@ -12935,6 +12822,67 @@ msgstr "Sprawdzanie systemu..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Restarting CUPS..."
+msgstr "Ponowne uruchamianie CUPS..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr "Ten serwer już jest na liście, nie można go ponownie dodać.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr "Przykłady poprawnych adresów IP:\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "Wprowadzony adres IP jest niepoprawny.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Server IP missing!"
+msgstr "Brakuje adresu IP serwera!"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr "Podaj adres IP i port komputera, którego chcesz używać."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "Uzyskiwanie dostępu do zdalnych serwerów CUPS"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Remove selected server"
+msgstr "Usuwanie wybranego serwera"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Edit selected server"
+msgstr "Edycja wybranego serwera"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Add server"
+msgstr "Dodawanie serwera"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+"Dodaj tutaj serwery CUPS, których drukarki mają zostać użyte. Potrzebne jest "
+"to tylko gdy serwery nie rozgłaszają informacji o swoich drukarkach w sieci "
+"lokalnej."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "IP address of host/network:"
 msgstr "Adres IP komputera/sieci:"
 
@@ -12945,45 +12893,21 @@ msgstr "Ten komputer/sieć już jest na liście, nie można go ponownie dodać.\
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr "192.168.100.0/255.255.255.0\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr "192.168.100.0/24\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr "10.1.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr "10.0.0.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr "192.168.100.194\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr "Przykłady poprawnych adresów IP:\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
 msgstr "Wprowadzony adres IP komputera/sieci jest niepoprawny.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
+msgstr "Brak adresu IP komputera/sieci."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
 "Choose the network or host on which the local printers should be made "
 "available:"
-msgstr "Wybierz sieć lub komputer, dla których powinny być dostępne drukarki lokalne:"
+msgstr ""
+"Wybierz sieć lub komputer, dla których powinny być dostępne drukarki lokalne:"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13048,6 +12972,37 @@ msgstr ""
 #, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "Automatyczne poprawianie konfiguracji CUPS"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+"Aby uzyskać dostęp do drukarek na zdalnych serwerach CUPS w sieci lokalnej "
+"potrzebne jest tylko włączenie opcji \"Automatyczne wyszukiwanie dostępnych "
+"drukarek na komputerach zdalnych\". Serwery CUPS informują komputer "
+"autmatycznie o podłączonych drukarkach. Wszystkie aktualnie znane "
+"komputerowi drukarki wą wypisane w sekcji \"Zdalne drukarki\" głównego okna "
+"programu Printerdrake. Jeśli twój serwer(y) CUPS nie jest (nie są) w sieci "
+"lokalnej, należy podać w tym miejscu adres(y) IP oraz opcjonalnie numer(y) "
+"portu aby uzyskać z serwera (serwerów) informacje na temat drukarek."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "None"
+msgstr "Brak"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Additional CUPS servers: "
+msgstr "Dodatkowe serwery CUPS: "
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -13171,8 +13126,10 @@ msgstr "jeśli ustawiono na tak, sprawdź otwarte porty."
 
 #: ../../security/help.pm:1
 #, c-format
-msgid "if set, send the mail report to this email address else send it to root."
-msgstr "jeśli ustawiono, wysyła raport pocztowy na ten adres lub do administratora."
+msgid ""
+"if set, send the mail report to this email address else send it to root."
+msgstr ""
+"jeśli ustawiono, wysyła raport pocztowy na ten adres lub do administratora."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13225,16 +13182,17 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, report check result to syslog."
-msgstr "jeśli ustawiono na tak, przesyła wyniki sprawdzenia do dziennika systemowego."
+msgstr ""
+"jeśli ustawiono na tak, przesyła wyniki sprawdzenia do dziennika systemowego."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
-"jeśli ustawiono na tak, sprawdza puste hasła, lub hasła, które powinny "
-"znajdować się w pliku /etc/shadow lub innych użytkowników z id 0."
+"jeśli ustawiono na tak, sprawdza puste hasła w pliku /etc/shadow oraz "
+"użytkowników z identyfikatorem 0 innych niż root."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13644,7 +13602,8 @@ msgstr "Administrator zabezpieczeń (login lub e-mail)"
 
 #: ../../security/level.pm:1
 #, c-format
-msgid "A library which defends against buffer overflow and format string attacks."
+msgid ""
+"A library which defends against buffer overflow and format string attacks."
 msgstr ""
 "Biblioteka, która chroni przed przepełnieniem bufora oraz przed atakami "
 "odpowiednio spreparowanych ciągów znaków."
@@ -13662,7 +13621,7 @@ msgstr "Poziom bezpieczeństwa"
 #: ../../security/level.pm:1
 #, c-format
 msgid "Please choose the desired security level"
-msgstr "wybierz żądany poziom bezpieczeństwa"
+msgstr "Wybierz żądany poziom bezpieczeństwa"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -13856,7 +13815,8 @@ msgstr "Gry"
 msgid ""
 "Mandrake Linux 9.1 provides a powerful tool to fully customize and configure "
 "your machine"
-msgstr "Mandrake Linux 9.1 dostarcza silne narzędzie do konfiguracji komputera."
+msgstr ""
+"Mandrake Linux 9.1 dostarcza silne narzędzie do konfiguracji komputera."
 
 #: ../../share/advertising/06-mcc.pl:1 ../../standalone/drakbug:1
 #, c-format
@@ -13889,7 +13849,8 @@ msgstr ""
 #: ../../share/advertising/08-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.1 is the ultimate development platform"
-msgstr "Mandrake Linux 9.1 jest najlepsza platformą dla twórców oprogramowania."
+msgstr ""
+"Mandrake Linux 9.1 jest najlepsza platformą dla twórców oprogramowania."
 
 #: ../../share/advertising/08-development.pl:1
 #, c-format
@@ -14761,7 +14722,8 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid " updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
+msgid ""
+" updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
 msgstr ""
 " uaktualnienia 2002 Mandrakesoft, Stew Benedict <sbenedict\\@mandrakesoft."
 "com>"
@@ -15073,6 +15035,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr "%s"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr "Wybierz dane do archiwizacji..."
 
@@ -15331,16 +15298,6 @@ msgstr "Podaj katalog zawierający archiwa"
 #, c-format
 msgid "Restore from Hard Disk."
 msgstr "Odtwórz z twardego dysku."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Secure Connection"
-msgstr "Bezpieczne połączenie"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "FTP Connection"
-msgstr "Połączenie FTP"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15953,7 +15910,8 @@ msgstr "Nie dołączaj plików podręcznych przeglądarki"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please check all users that you want to include in your backup."
-msgstr "Zaznacz wszystkich użytkowników, którzy mają zostać uwzględnieni w archiwum."
+msgstr ""
+"Zaznacz wszystkich użytkowników, którzy mają zostać uwzględnieni w archiwum."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15981,7 +15939,8 @@ msgstr "Archiwizuj pliki systemowe. (katalog /etc)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "These options can backup and restore all files in your /etc directory.\n"
+msgid ""
+"These options can backup and restore all files in your /etc directory.\n"
 msgstr ""
 "Za pomocą tych opcji można zarchiwizować i przywrócić wszystkie pliki\n"
 "z katalogu /etc.\n"
@@ -16269,6 +16228,196 @@ msgstr "Cron nie jest jeszcze dostępny dla zwykłego użytkownika"
 msgid "Installation of %s failed. The following error occured:"
 msgstr "Instalacja %s nie powiodła się. Wystąpił następujący błąd:"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "Nie, nie chcę automatycznego logowania"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "Tak, chcę dla tego użytkownika korzystać z automatycznego logowania"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "Uruchamiaj środowisko graficzne po uruchomieniu systemu"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "Tryb pracy systemu"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr "Ekran powitalny"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr "Ekran Lilo"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+"\n"
+"Wybierz temat dla\n"
+"lilo i ekranu\n"
+"powitalnego, można\n"
+"wybrać je oddzielnie"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "Tematy"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Wybór ekranu"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"%s jest programem uruchamiającym system (bootloaderem)\n"
+"Wybierz \"Konfiguruj\", by uruchomić druida instalacji."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr "Tematy LILO i ekranu powitalnego zostały pomyślnie zainstalowane"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr "Instalacja tematu zakończyła się niepowodzeniem!"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr "Uwaga"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr "Ponownie uruchom \"lilo\""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+"Nie można ponownie uruchomić Lilo!\n"
+"Uruchom \"lilo\" jako root w wierszu poleceń aby zakończyć\n"
+"instalację tematu Lilo."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr "Wpisz initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr "Nie można uruchomić mkinitrd -f /boot/initrd-%s.img %s."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+"Nie można zapisać pliku /etc/sysconfig/bootsplash,\n"
+"gdyż nie został on znaleziony."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "Zapis %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr "Nie można zapisać pliku /etc/sysconfig/bootspash."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "Nie odnaleziono komunikatu lilo"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "Kopiowanie %s do %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr "Archiwizacja %s do %s.old"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "Utwórz nowy temat"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"Wyświetl temat\n"
+"spod konsoli"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr "Zainstaluj tematy"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "Tryb Lilo/Grub"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "Tryb Yaboot"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/Plik/_Wyjście"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_Plik"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "Konfiguracja sposobu uruchamiania"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -16408,6 +16557,16 @@ msgstr "Narzędzie raportowania błędów Mandrake"
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "Parametry"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "Konfiguracja połączenia z Internetem"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "Klient DHCP"
 
@@ -16421,11 +16580,6 @@ msgstr "Karta ethernet"
 msgid "Gateway"
 msgstr "Router"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "Parametry"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -16435,11 +16589,6 @@ msgstr "Rodzaj połączenia:"
 #, c-format
 msgid "Profile: "
 msgstr "Profil: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "Konfiguracja połączenia z Internetem"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -16714,8 +16863,8 @@ msgstr "Usuń moduł"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr "pomiń moduły RAID"
+msgid "Add a module"
+msgstr "Dodaj moduł"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16729,13 +16878,13 @@ msgstr "jeśli potrzebny"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "wymuś"
+msgid "omit raid modules"
+msgstr "pomiń moduły RAID"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "Dodaj moduł"
+msgid "force"
+msgstr "wymuś"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16749,23 +16898,18 @@ msgstr "Obszar zaawansowany"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "Ogólne"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "Wersja jądra"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "Błąd DrakFloppy: %s"
+msgid "default"
+msgstr "domyślna"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "domyślna"
+msgid "General"
+msgstr "Ogólne"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16786,11 +16930,6 @@ msgstr "Rozmiar"
 #, c-format
 msgid "Module name"
 msgstr "Nazwa modułu"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -17160,7 +17299,8 @@ msgstr "Problemy z instalacją pakietu %s"
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Configuring scripts, installing software, starting servers..."
-msgstr "Konfiguracja skryptów, instalowanie programów, uruchamianie serwerów..."
+msgstr ""
+"Konfiguracja skryptów, instalowanie programów, uruchamianie serwerów..."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -17170,7 +17310,8 @@ msgstr "Konfiguracja..."
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
-msgstr "W bieżącej konfiguracji wykryto możliwy konflikt adresów sieciowych: %s!\n"
+msgstr ""
+"W bieżącej konfiguracji wykryto możliwy konflikt adresów sieciowych: %s!\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -17355,7 +17496,8 @@ msgstr "Interfejs sieciowy"
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
 "hardware configuration tool."
-msgstr "Nie wykryto w systemie karty sieciowej. Uruchom program konfiguracji sprzętu."
+msgstr ""
+"Nie wykryto w systemie karty sieciowej. Uruchom program konfiguracji sprzętu."
 
 #: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
 #, c-format
@@ -17492,6 +17634,11 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "Path"
+msgstr "Ścieżka"
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "group :"
 msgstr "grupa :"
 
@@ -17551,11 +17698,6 @@ msgstr "Właściowść"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Path"
-msgstr "Ścieżka"
-
-#: ../../standalone/drakperm:1
-#, c-format
 msgid "Permissions"
 msgstr "Prawa dostępu"
 
@@ -17568,22 +17710,6 @@ msgstr "Bieżący użytkownik"
 #, c-format
 msgid "browse"
 msgstr "przeglądaj"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr "wybierz plik do podglądu/edycji"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
-msgstr ""
-"Drakperm jest używany do podglądania plików w celu korekty ich praw dostępu, "
-"właścicielaoraz grupy poprzez msec.\n"
-"Można także tworzyć swoje własne reguły, które nadpiszą domyślne."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17637,6 +17763,22 @@ msgstr "Góra"
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "select perm file to see/edit"
+msgstr "wybierz plik do podglądu/edycji"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
+msgstr ""
+"Drakperm jest używany do podglądania plików w celu korekty ich praw dostępu, "
+"właścicielaoraz grupy poprzez msec.\n"
+"Można także tworzyć swoje własne reguły, które nadpiszą domyślne."
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "permissions"
 msgstr "prawa dostępu"
 
@@ -17676,8 +17818,10 @@ msgstr ""
 
 #: ../../standalone/drakpxe:1
 #, c-format
-msgid "No CD or DVD image found, please copy the installation program and rpm files."
-msgstr "Nie znaleziono obrazów CD lub DVD, skopiuj program instalacyjny i pliki rpm."
+msgid ""
+"No CD or DVD image found, please copy the installation program and rpm files."
+msgstr ""
+"Nie znaleziono obrazów CD lub DVD, skopiuj program instalacyjny i pliki rpm."
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -17822,13 +17966,13 @@ msgstr "Alarmy bezpieczeństwa:"
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid "(default value: %s)"
-msgstr "(domyślna wartość: %s)"
+msgid "Security Level:"
+msgstr "Poziom bezpieczeństwa:"
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid "Security Level:"
-msgstr "Poziom bezpieczeństwa:"
+msgid "(default value: %s)"
+msgstr "(domyślna wartość: %s)"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -17844,7 +17988,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -17853,7 +17997,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 "Standardowy: To jest standardowy poziom bezpieczeństwa zalecany dla "
 "komputera używanego jako\n"
@@ -18237,26 +18381,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/Opcje"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect jazz drives"
-msgstr "/Automatycznie wykryj urządzenia jazz"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect modems"
-msgstr "/Automatycznie wykryj modemy"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect printers"
-msgstr "/Automatycznie wykryj drukarki"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr "główny"
 
@@ -18267,10 +18391,21 @@ msgstr "drugorzędny"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
 msgstr ""
 "Kliknij urządzenie w lewym drzewie w celu pobrania informacji, które zostaną "
 "tutaj wyświetlone."
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Unknown"
+msgstr "Nieznany"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "unknown"
+msgstr "nieznany"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18331,11 +18466,6 @@ msgstr "Informacje o Harddrake"
 msgid "/_About..."
 msgstr "/O _programie..."
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/Pomo_c"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -18374,15 +18504,20 @@ msgstr "Pomoc Harddrake"
 msgid "/_Fields description"
 msgstr "/_Opis pól"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/Pomo_c"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/_Quit"
+msgstr "/_Zakończ"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "/Automatycznie wykryj urządzenia _jazz"
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_Opcje"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18394,10 +18529,10 @@ msgstr "/Automatycznie wykryj _modemy"
 msgid "/Autodetect _printers"
 msgstr "/Automatycznie wykryj _drukarki"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
-msgid "/_Quit"
-msgstr "/_Zakończ"
+msgid "/_Options"
+msgstr "/_Opcje"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18496,7 +18631,7 @@ msgstr "Poziom"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr "Format dyskietek akceptowanych przez urządzenie"
 
 #: ../../standalone/harddrake2:1
@@ -18533,7 +18668,8 @@ msgstr "Błąd F00F"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr "tak - oznacza, że kooprocesor arytmetyczny posiada dołączony wektor  przerwań"
+msgstr ""
+"tak - oznacza, że kooprocesor arytmetyczny posiada dołączony wektor  przerwań"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18662,6 +18798,16 @@ msgstr "Błąd przecinka"
 
 #: ../../standalone/harddrake2:1
 #, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr "specjalne funkcje sterownika (możliwość wypalania i/lub obsługa DVD)"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
+msgstr "Funkcje sterownika"
+
+#: ../../standalone/harddrake2:1
+#, c-format
 msgid "Size of the (second level) cpu cache"
 msgstr "Rozmiar pamięci podręcznej procesora (drugiego poziomu)"
 
@@ -18728,7 +18874,8 @@ msgstr "Kanał"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
 "to jest fizyczna szyna, do której podłączone jest urządzenie (np: PCI, "
 "USB, ...)"
@@ -18812,7 +18959,8 @@ msgstr "wczytaj ustawienia"
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
-msgstr "Otrzymasz ostrzeżenie jeśli jedna lub więcej zaznaczonych usług nie zadziała"
+msgstr ""
+"Otrzymasz ostrzeżenie jeśli jedna lub więcej zaznaczonych usług nie zadziała"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -19140,8 +19288,8 @@ msgstr "Monitorowanie sieci"
 
 #: ../../standalone/printerdrake:1
 #, c-format
-msgid "Reading printer data ..."
-msgstr "Odczyt danych drukarki ..."
+msgid "Reading data of installed printers..."
+msgstr "Odczytywanie danych zainstalowanych drukarek..."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19213,7 +19361,8 @@ msgstr "Wszystkie zdalne komputery"
 msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
 "available:"
-msgstr "To są maszyny, na których powinny być dostępne lokalnie podłączone skanery:"
+msgstr ""
+"To są maszyny, na których powinny być dostępne lokalnie podłączone skanery:"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19253,52 +19402,6 @@ msgstr ""
 "W tym miejscu można określić czy skanery podłączone do tego komputera "
 "powinny być dostępne za pośrednictwem zdalnych komputerów i poprzez zdalne "
 "komputery."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-"Skaner %s został skonfigurowany.\n"
-"Można skanować dokumenty przy użyciu programu ``XSane'' z menu Multimedia/"
-"Grafika z menu programów."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-"Ten skaner %s musi być skonfigurowany przez program printerdrake.\n"
-"Można uruchomić go z Centrum Setrowania Mandrake w dziale Sprzęt."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "wybierz urządzenie"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Please select the device where your %s is attached"
-msgstr "Wybierz urządzenie, do którego jest podłączony skaner %s."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is unsupported"
-msgstr "Skaner %s nie jest obsługiwany"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr "Skaner %s nie jest znany tej wersji Scannerdrake."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr "%s nie jest obsługiwany przez tą wersję Mandrake Linux."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19363,8 +19466,89 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
-msgstr "Wybierz skaner"
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+"Skaner %s został skonfigurowany.\n"
+"Można skanować dokumenty przy użyciu programu ``XSane'' z menu Multimedia/"
+"Grafika z menu programów."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "choose device"
+msgstr "wybierz urządzenie"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Please select the device where your %s is attached"
+msgstr "Wybierz urządzenie, do którego jest podłączony skaner %s."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Searching for scanners ..."
+msgstr "Wyszukiwanie skanerów ..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Auto-detect available ports"
+msgstr "Automatycznie wykryj dostępne porty"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr "(Uwaga: porty równoległe nie mogą być automatycznie wykrywane)"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+"Ten skaner %s musi być skonfigurowany przez program printerdrake.\n"
+"Można uruchomić go z Centrum Setrowania Mandrake w dziale Sprzęt."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is unsupported"
+msgstr "Skaner %s nie jest obsługiwany"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr "Skaner %s nie jest znany tej wersji Scannerdrake."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr "%s nie jest obsługiwany przez tą wersję Mandrake Linux."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Port: %s"
+msgstr "Port: %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ", "
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Detected model: %s"
+msgstr "Wykryty model: %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr " ("
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Select a scanner model"
+msgstr "Wybierz model skanera"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19456,6 +19640,10 @@ msgid "Scientific Workstation"
 msgstr "Stacja robocza dla naukowca"
 
 #: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr "Aplikacje naukowe takie jak np. gnuplot"
+
+#: ../../share/compssUsers:999
 msgid "Console Tools"
 msgstr "Narzędzia dla konsoli"
 
@@ -19471,7 +19659,8 @@ msgstr "Stacja robocza z KDE"
 msgid ""
 "The K Desktop Environment, the basic graphical environment with a collection "
 "of accompanying tools"
-msgstr "KDE - podstawowe środowisko graficzne wraz z zestawem towarzyszących narzędzi"
+msgstr ""
+"KDE - podstawowe środowisko graficzne wraz z zestawem towarzyszących narzędzi"
 
 #: ../../share/compssUsers:999
 msgid "Graphical Environment"
@@ -19530,12 +19719,12 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache oraz Pro-ftpd"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "Poczta/Narzędzia pracy grupowej/News"
+msgid "Mail"
+msgstr "Poczta"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr "Serwer pocztowy Postfix, serwer grup dyskusyjnych Inn"
+msgid "Postfix mail server"
+msgstr "Serwer pocztowy Postfix"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -19632,3 +19821,166 @@ msgstr "Finanse osobiste"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programy do zarządzania finansami, np gnucash"
+
+#~ msgid ""
+#~ "Please enter your host name if you know it.\n"
+#~ "Some DHCP servers require the hostname to work.\n"
+#~ "Your host name should be a fully-qualified host name,\n"
+#~ "such as ``mybox.mylab.myco.com''."
+#~ msgstr ""
+#~ "Podaj nazwę komputera, jeśli ją znasz.\n"
+#~ "Niektóre serwery DHCP wymagają tej nazwy do działania.\n"
+#~ "Powinna być ona zapisana w pełnej postaci (bez polskich znaków),\n"
+#~ "np. \"mojkomputer.mojadomena.pl\"."
+
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "Błąd DrakFloppy: %s"
+
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+
+#~ msgid "Launch Aurora at boot time"
+#~ msgstr "Uaktywnij graficzny start"
+
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr "Wygląd tradycyjny Gtk+"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "Wygląd tradycyjny"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "Styl nowoczesny"
+
+#~ msgid "NewStyle Categorizing Monitor"
+#~ msgstr "Wygląd nowoczesny z kategoriami"
+
+#~ msgid "Secure Connection"
+#~ msgstr "Bezpieczne połączenie"
+
+#~ msgid "FTP Connection"
+#~ msgstr "Połączenie FTP"
+
+#~ msgid "Mail/Groupware/News"
+#~ msgstr "Poczta/Narzędzia pracy grupowej/News"
+
+#~ msgid "Postfix mail server, Inn news server"
+#~ msgstr "Serwer pocztowy Postfix, serwer grup dyskusyjnych Inn"
+
+#~ msgid "/Options"
+#~ msgstr "/Opcje"
+
+#~ msgid "/Autodetect jazz drives"
+#~ msgstr "/Automatycznie wykryj urządzenia jazz"
+
+#~ msgid "/Autodetect modems"
+#~ msgstr "/Automatycznie wykryj modemy"
+
+#~ msgid "/Autodetect printers"
+#~ msgstr "/Automatycznie wykryj drukarki"
+
+#~ msgid ""
+#~ "The partition you've selected to add as root (/) is physically located "
+#~ "beyond\n"
+#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
+#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
+#~ "partition"
+#~ msgstr ""
+#~ "Dodano partycję root (/) na dysku poza cylindrem 1024, brak również\n"
+#~ "partycji /boot. Jeżeli więc chcesz używać programu rozruchowego lilo\n"
+#~ "dodaj partycję /boot poniżej cylindra 1024"
+
+#~ msgid ""
+#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
+#~ "> 1024).\n"
+#~ "Either you use LILO and it won't work, or you don't use LILO and you "
+#~ "don't need /boot"
+#~ msgstr ""
+#~ "Niestety, nie można utworzyć /boot tak daleko na dysku (poza cylindrem "
+#~ "1024)\n"
+#~ "Albo użyjesz LILO, (nie będzie działać), lub nie będziesz używać lilo\n"
+#~ "i nie potrzebujesz /boot"
+
+#~ msgid "Upgrade"
+#~ msgstr "Uaktualnienie"
+
+#~ msgid "Install system updates"
+#~ msgstr "Aktualizacja systemu"
+
+#~ msgid ""
+#~ "Standard: This is the standard security recommended for a computer that "
+#~ "will be used to connect\n"
+#~ "               to the Internet as a client.\n"
+#~ "\n"
+#~ "High:       There are already some restrictions, and more automatic "
+#~ "checks are run every night.\n"
+#~ "\n"
+#~ "Higher:    The security is now high enough to use the system as a server "
+#~ "which can accept\n"
+#~ "              connections from many clients. If your machine is only a "
+#~ "client on the Internet, you\n"
+#~ "           should choose a lower level.\n"
+#~ "\n"
+#~ "Paranoid:  This is similar to the previous level, but the system is "
+#~ "entirely closed and security\n"
+#~ "                features are at their maximum\n"
+#~ "\n"
+#~ "Security Administrator:\n"
+#~ "               If the 'Security Alerts' option is set, security alerts "
+#~ "will be sent to this user (username or\n"
+#~ "\t       email)"
+#~ msgstr ""
+#~ "Standardowy: To jest standardowy poziom bezpieczeństwa zalecany dla "
+#~ "komputera używanego jako\n"
+#~ "maszyna kliencka podłączona do Internetu.\n"
+#~ "\n"
+#~ "Wysoki:       Istnieją wciąż pewne ograniczenia. Kilka automatycznych "
+#~ "procesów\n"
+#~ "sprawdzających uruchamianych jest co noc.\n"
+#~ "\n"
+#~ "Wyższy: Poziom bezpieczeństwa jest wystarczający do wykorzystywania "
+#~ "komputera\n"
+#~ "jako serwera akceptującego połączenia od wielu klientów. Jeśli twoja "
+#~ "masztna jest tylko\n"
+#~ "klientem internetowym, należy wybrać niższy poziom bezpieczeństwa.\n"
+#~ "\n"
+#~ "Paranoidalny:  Poziom podobny do poprzedniego, lecz system jest "
+#~ "całkowicie zamknięty\n"
+#~ "zaś funkcje bezpieczeństwa są ustawione na maksimum.\n"
+#~ "\n"
+#~ "Administrator zabezpieczeń:\n"
+#~ "               Jeśli jest ustawiona opcja 'Alarmy bezpieczeństwa', "
+#~ "wysyłane będą wiadomości o naruszeniu bezpieczeństwa do tego użytkownika."
+
+#~ msgid "192.168.100.0/255.255.255.0\n"
+#~ msgstr "192.168.100.0/255.255.255.0\n"
+
+#~ msgid "192.168.100.0/24\n"
+#~ msgstr "192.168.100.0/24\n"
+
+#~ msgid "10.1.*\n"
+#~ msgstr "10.1.*\n"
+
+#~ msgid "10.0.0.*\n"
+#~ msgstr "10.0.0.*\n"
+
+#~ msgid "192.168.100.194\n"
+#~ msgstr "192.168.100.194\n"
+
+#~ msgid "Do you want to configure another printer?"
+#~ msgstr "Czy chcesz skonfigurować inną drukarkę?"
+
+#~ msgid "Know how to use this printer"
+#~ msgstr "Dowiedz się jak używać tą drukarkę"
+
+#~ msgid "Preparing Printerdrake..."
+#~ msgstr "Przygotowywanie Printerdrake..."
+
+#~ msgid ""
+#~ "if set to yes, check for empty password, or a password while it should be "
+#~ "in /etc/shadow or other users with id 0."
+#~ msgstr ""
+#~ "jeśli ustawiono na tak, sprawdza puste hasła, lub hasła, które powinny "
+#~ "znajdować się w pliku /etc/shadow lub innych użytkowników z id 0."
+
+#~ msgid "Reading printer data ..."
+#~ msgstr "Odczyt danych drukarki ..."

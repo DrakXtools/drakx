@@ -24,16 +24,18 @@ msgid ""
 "You can use userdrake to add a user to this group."
 msgstr ""
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Отказ"
@@ -813,236 +815,6 @@ msgstr ""
 "%d секунди за подразбиращо стартиране.\n"
 "\n"
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "OK"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "Да, искам autologin с това (потребител, десктоп)"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "Не, не искам autologin"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "Пусни X-Window системата при стартиране"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "Системен режим"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr "Lilo екран"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "Теми"
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Splash selection"
-msgstr "Запази избор на пакети"
-
-#: ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Настрока"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"В момента използвате %s като програма за стартиране.\n"
-"Цъкнете на Настройка, за да стартирате установяващия магьосник."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "LiLo и Bootsplash теми са успешно инсталирани"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr "Инсталацията на тема е неуспешна!"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr "Бележка"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "Грешка"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr "Престартира 'lilo'"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr "Прави initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr "Не мога да стартирам mkinitrd -f /boot/initrd-%s.img %s."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-"Не мога да пиша в /etc/sysconfig/bootsplash\n"
-"Файла не е намерен."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "Пише %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr "Не мога да пиша в /etc/sysconfig/bootsplash."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "Lilo съобщение не е намерено"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "Копира %s в %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr "Резервно копие %s в  %s.old"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "Създава нова тема"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-"Показва тема\n"
-"на конзола"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr "Инсталиране на теми"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "Режим на Lilo/grub"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "Режим на Yaboot"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "Пусни Aurora при стартиране"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "Обикновен Gtk+ монитор"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "Обикновен монитор"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "NewStyle монитор"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "NewStyle категоризиран монитор"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/Файл/_Излиза"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_Файл"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "Настройка на начина на стартиране"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1253,6 +1025,15 @@ msgstr ""
 "(грешката е %s)\n"
 "\n"
 "Съгласни ли сте да загубите всички дялове?\n"
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "Грешка"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -3094,12 +2875,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Не"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Да"
@@ -3205,6 +2988,13 @@ msgstr "Премахни Windows(TM)"
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr "Няма FAT дялове за смяна на големината (или няма достаъчно място)"
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3722,6 +3512,7 @@ msgstr "Навлизам в етап `%s'\n"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Help"
 msgstr "Помощ"
@@ -3730,6 +3521,12 @@ msgstr "Помощ"
 #, c-format
 msgid "not configured"
 msgstr "не е конфигуриран"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Настрока"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -4349,6 +4146,16 @@ msgid "Which is your timezone?"
 msgstr "Коя е времевата ви зона ?"
 
 #: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "Искате ли да настроите печата ?"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Unable to contact mirror %s"
+msgstr "Не мога да направя 'fork': %s"
+
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Свързване с огледалния сървър за получаване на списъка с пакетите"
@@ -4654,6 +4461,15 @@ msgstr "Ето пълен списък на достръпните клавиатури"
 #, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Моля, изберете подреждане на клавиатурата."
+
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Изход"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -7306,6 +7122,14 @@ msgstr "Избор на език"
 msgid "utopia 25"
 msgstr "utopia 25"
 
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "OK"
+
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
 msgid "logdrake"
@@ -7488,7 +7312,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Опции"
@@ -7512,14 +7336,6 @@ msgstr "Монитор"
 #, c-format
 msgid "Graphic Card"
 msgstr "Графична карта"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Изход"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -8663,6 +8479,11 @@ msgid "SCSI controllers"
 msgstr "SCSI контролери"
 
 #: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "Firewire controllers"
+msgstr "USB контролери"
+
+#: ../../harddrake/data.pm:1
 #, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr "(E)IDE/ATA контролери"
@@ -8800,7 +8621,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -9231,8 +9052,8 @@ msgstr "Свържи се към Интернет"
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
-msgstr "Sagem (използва pppoe) usb"
+msgid "Sagem (using pppoa) usb"
+msgstr "Sagem (използва pppoa) usb"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -9350,13 +9171,13 @@ msgid "Zeroconf host name must not contain a ."
 msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, fuzzy, c-format
-msgid "Zeroconf Host name"
+#, c-format
+msgid "Host name"
 msgstr "Име на хост:"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid "Host name"
+#, fuzzy, c-format
+msgid "Zeroconf Host name"
 msgstr "Име на хост:"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
@@ -9367,19 +9188,6 @@ msgid ""
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
 msgstr ""
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-"Моля, въведете име на хост ако го знаете.\n"
-"Някой DHCP сървъри изискват това за да работят.\n"
-"Host името трябва да буде напълно квалифицирано име,\n"
-"като ``mybox.mylab.myco.com''."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -10028,6 +9836,11 @@ msgstr "Изпълнение при стартиране"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
+msgid "Assign host name from DHCP address"
+msgstr "Моля, пробвайте мишката си"
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
 msgid "Network Hotplugging"
 msgstr "Настройка на мрежата"
 
@@ -10037,14 +9850,9 @@ msgid "Track network card id (useful for laptops)"
 msgstr "Проследяване на ID на мрежовата карта (полезно при лаптопи)"
 
 #: ../../network/network.pm:1
-#, c-format
-msgid "(bootp/dhcp/zeroconf)"
-msgstr "(bootp/dhcp/zeroconf)"
-
-#: ../../network/network.pm:1
-#, c-format
-msgid "Automatic IP"
-msgstr "Автоматичен IP адрес"
+#, fuzzy, c-format
+msgid "DHCP host name"
+msgstr "Име на хост:"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -10057,6 +9865,16 @@ msgstr "Мрежова маска"
 #, c-format
 msgid "IP address"
 msgstr "IP адрес"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "(bootp/dhcp/zeroconf)"
+msgstr "(bootp/dhcp/zeroconf)"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Automatic IP"
+msgstr "Автоматичен IP адрес"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10626,6 +10444,7 @@ msgid "Add a new printer"
 msgstr "Добави нов принтер"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Нормален режим"
@@ -14115,6 +13934,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr "Моля, изберете данни за резервно копие..."
 
@@ -14362,16 +14186,6 @@ msgstr ""
 #, c-format
 msgid "Restore from Hard Disk."
 msgstr "Възстановява от твърд диск."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Secure Connection"
-msgstr "Защитена връзка"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "FTP Connection"
-msgstr "FTP връзка"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15228,6 +15042,188 @@ msgstr ""
 msgid "Installation of %s failed. The following error occured:"
 msgstr "Инсталацията на %s провалена. Появи се следната грешка:"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "Не, не искам autologin"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "Да, искам autologin с това (потребител, десктоп)"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "Пусни X-Window системата при стартиране"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "Системен режим"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr "Lilo екран"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "Теми"
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Splash selection"
+msgstr "Запази избор на пакети"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"В момента използвате %s като програма за стартиране.\n"
+"Цъкнете на Настройка, за да стартирате установяващия магьосник."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr "LiLo и Bootsplash теми са успешно инсталирани"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr "Инсталацията на тема е неуспешна!"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr "Бележка"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr "Престартира 'lilo'"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr "Прави initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr "Не мога да стартирам mkinitrd -f /boot/initrd-%s.img %s."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+"Не мога да пиша в /etc/sysconfig/bootsplash\n"
+"Файла не е намерен."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "Пише %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr "Не мога да пиша в /etc/sysconfig/bootsplash."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "Lilo съобщение не е намерено"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "Копира %s в %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr "Резервно копие %s в  %s.old"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "Създава нова тема"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"Показва тема\n"
+"на конзола"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr "Инсталиране на теми"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "Режим на Lilo/grub"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "Режим на Yaboot"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/Файл/_Излиза"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_Файл"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "Настройка на начина на стартиране"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -15358,6 +15354,16 @@ msgstr ""
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "Параметри"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "Настройка на Интернет връзка"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "DHCP клиент"
 
@@ -15371,11 +15377,6 @@ msgstr "Ethernet карта"
 msgid "Gateway"
 msgstr "Gateway"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "Параметри"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -15385,11 +15386,6 @@ msgstr "Тип на връзката: "
 #, c-format
 msgid "Profile: "
 msgstr "Профил: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "Настройка на Интернет връзка"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -15656,8 +15652,8 @@ msgstr "Премахни модула"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr "без raid модули"
+msgid "Add a module"
+msgstr "Добави модула"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15671,13 +15667,13 @@ msgstr "ако е нужно"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "принудително"
+msgid "omit raid modules"
+msgstr "без raid модули"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "Добави модула"
+msgid "force"
+msgstr "принудително"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15691,23 +15687,18 @@ msgstr "Допълнителни"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "Основно"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "версия на ядрото"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "Грешка DrakFloppy: %s"
+msgid "default"
+msgstr "по подрабиране"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "по подрабиране"
+msgid "General"
+msgstr "Основно"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15728,11 +15719,6 @@ msgstr "Големина"
 #, c-format
 msgid "Module name"
 msgstr "Име на модул"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
@@ -16367,6 +16353,11 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "Path"
+msgstr "Път"
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "group :"
 msgstr "група :"
 
@@ -16424,11 +16415,6 @@ msgstr "Собственост"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Path"
-msgstr "Път"
-
-#: ../../standalone/drakperm:1
-#, c-format
 msgid "Permissions"
 msgstr "Права"
 
@@ -16441,19 +16427,6 @@ msgstr "Текущ потребител"
 #, c-format
 msgid "browse"
 msgstr "преглед"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
-msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16503,6 +16476,19 @@ msgstr ""
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Up"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -17113,11 +17099,6 @@ msgstr "Относно Harddrake"
 msgid "/_About..."
 msgstr "/_Относно..."
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/_Помощ"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -17154,6 +17135,11 @@ msgstr "Harddrake помощ"
 msgid "/_Fields description"
 msgstr "/_Полета описание"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/_Помощ"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Quit"
@@ -17164,11 +17150,6 @@ msgstr "/_Излиза"
 msgid "/Autodetect _jazz drives"
 msgstr "/Автоматично открива _jazz устройства"
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_Опции"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/Autodetect _modems"
@@ -17178,6 +17159,11 @@ msgstr "/Автоматично открива _модеми"
 #, c-format
 msgid "/Autodetect _printers"
 msgstr "/Автоматично открива _принтери"
+
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Options"
+msgstr "/_Опции"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17425,6 +17411,16 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Coma bug"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -18074,14 +18070,6 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
 msgid "choose device"
 msgstr "избира устройство"
 
@@ -18103,6 +18091,14 @@ msgstr "Използвай автоматично засичане"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
@@ -18314,12 +18310,14 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache и Pro-ftpd"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "Сървър, Поща/Groupware/Новини"
+#, fuzzy
+msgid "Mail"
+msgstr "Мали"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr "Postfix пощенски сървър, Inn новинарски сървър"
+#, fuzzy
+msgid "Postfix mail server"
+msgstr "Postfix Пощенски сървър"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -18416,6 +18414,50 @@ msgstr "Лични финанси"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Програми за обработка на финанси, като gnucash"
+
+#~ msgid ""
+#~ "Please enter your host name if you know it.\n"
+#~ "Some DHCP servers require the hostname to work.\n"
+#~ "Your host name should be a fully-qualified host name,\n"
+#~ "such as ``mybox.mylab.myco.com''."
+#~ msgstr ""
+#~ "Моля, въведете име на хост ако го знаете.\n"
+#~ "Някой DHCP сървъри изискват това за да работят.\n"
+#~ "Host името трябва да буде напълно квалифицирано име,\n"
+#~ "като ``mybox.mylab.myco.com''."
+
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "Грешка DrakFloppy: %s"
+
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+
+#~ msgid "Launch Aurora at boot time"
+#~ msgstr "Пусни Aurora при стартиране"
+
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr "Обикновен Gtk+ монитор"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "Обикновен монитор"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "NewStyle монитор"
+
+#~ msgid "NewStyle Categorizing Monitor"
+#~ msgstr "NewStyle категоризиран монитор"
+
+#~ msgid "Secure Connection"
+#~ msgstr "Защитена връзка"
+
+#~ msgid "FTP Connection"
+#~ msgstr "FTP връзка"
+
+#~ msgid "Mail/Groupware/News"
+#~ msgstr "Сървър, Поща/Groupware/Новини"
+
+#~ msgid "Postfix mail server, Inn news server"
+#~ msgstr "Postfix пощенски сървър, Inn новинарски сървър"
 
 #~ msgid "/Options"
 #~ msgstr "/Опции"
@@ -19885,9 +19927,6 @@ msgstr "Програми за обработка на финанси, като gnucash"
 
 #~ msgid "Know how to use this printer"
 #~ msgstr "Знаете ли как да изпозлвате принера"
-
-#~ msgid "Would you like to configure printing?"
-#~ msgstr "Искате ли да настроите печата ?"
 
 #~ msgid "Preparing Printerdrake..."
 #~ msgstr "Подготвяне на PinterDrake..."

@@ -25,16 +25,18 @@ msgstr ""
 "每個使用者的分享都是使用『fileshare』該群組的設定。\n"
 "您可以執行『userdrake』程式在該群組內加入使用者即可。"
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "取消"
@@ -110,15 +112,14 @@ msgid "Country"
 msgstr "國家："
 
 #: ../../any.pm:1
+#, fuzzy, c-format
+msgid "All languages"
+msgstr "選擇語系"
+
+#: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
 msgstr ""
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "所有"
 
 #: ../../any.pm:1
 #, c-format
@@ -494,6 +495,16 @@ msgstr "限制在 boot: 指令行輸入參數"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr ""
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Enable ACPI"
+msgstr "允許 CD 開機？"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "在啟動作業系統前先延遲的時間"
 
@@ -546,6 +557,11 @@ msgstr "略過"
 #, fuzzy, c-format
 msgid "On Floppy"
 msgstr "開機片"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "First sector of the root partition"
+msgstr "開機分割區的第一個磁區"
 
 #: ../../any.pm:1
 #, c-format
@@ -756,241 +772,6 @@ msgstr ""
 "wait %d seconds for default boot.\n"
 "\n"
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "確定"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "是的，我需要用這個 (使用者、桌面) 來自動登入"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "不，我不需要自動登入 (AutoLogin)"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "開機時啟動 X Window 圖形作業環境"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "系統模式"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr "開機圖片"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr "Lilo 螢幕"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-"\n"
-"請選擇 lilo 與開機載入畫面項目，\n"
-"您可以分開選擇"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "佈景"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Splash selection"
-msgstr "畫面選取"
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "設定"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"你目前是選用 %s 當作您目前的開機管理程式。\n"
-"您可以點選設定來啟動設定精靈"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "lilo 與開機進度畫面的佈景檔案已經安裝成功"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr "佈景安裝失敗"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr "注意"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "錯誤"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr "執行執行 'lilo'"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-"無法執行執行 lilo!\n"
-"請使用 root 身份在命令提示字元執行 \"lilo\" 程式，以便於完成 lilo 佈景的安"
-"裝。"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr "執行 'kinird -f /boot/initrd-%s.img %s'。"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr "無法執行 mkinitrd -f /boot/initrd-%s.img %s。"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-"無法寫入 /etc/sysconfig/bootsplash\n"
-"檔案找不到。"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "寫入 %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr "無法寫入 /etc/sysconfig/bootsplash。"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "lilo 訊息檔案遺失"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "正在複製 %s 至 %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr "將 %s 檔案備份至 %s.old"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "建立新的佈景"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-"在 console\n"
-"顯示佈景"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr "安裝佈景"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "Lilo/grub 模式"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "Yaboot 模式"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "開機時啟動 Aurora 圖形介面"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "Traditional Gtk+ Monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "Traditional Monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "NewStyle Monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "NewStyle Categorizing Monitor"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/檔案/結束 (_Q)"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/檔案 (_F)"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "開機樣式組態設定"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1146,9 +927,25 @@ msgid "You can't use a LVM Logical Volume for mount point %s"
 msgstr "您不能使用 LVM Logical Volume 來最為 %s 的掛載點"
 
 #: ../../fsedit.pm:1
+#, fuzzy, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"你已經選擇了一塊 software RAID 的分割區當作為 根分割區 (/) 的掛載點\n"
+"您要另外劃分一個不是在 software RAID 的分割區作為 /boot 的掛載點使用，\n"
+"如此開機管理程式才能夠正常啟動您的系統。"
+
+#: ../../fsedit.pm:1
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "已經有分割區分配到掛載點 %s 了\n"
+
+#: ../../fsedit.pm:1
+#, fuzzy, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr "印表機的名稱應該只有包含英文字母、數字與底線這類字元"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1175,6 +972,15 @@ msgid ""
 "\n"
 "Do you agree to loose all the partitions?\n"
 msgstr ""
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "錯誤"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1280,8 +1086,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1294,7 +1100,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1607,7 +1413,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1778,7 +1584,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -2401,7 +2207,7 @@ msgstr ""
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -2474,7 +2280,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 
@@ -2520,7 +2326,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -2948,12 +2754,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "否"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "是的"
@@ -3060,6 +2868,13 @@ msgstr "移除 Windows(TM)"
 #, fuzzy, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr "沒有可用的 FAT 分割區能夠調整大小，或者是該分割區沒足夠空間"
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3448,6 +3263,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "進入步驟 `%s'\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Help"
+msgstr "求助"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "not configured"
+msgstr "重新設定"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "設定"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -3659,14 +3494,6 @@ msgstr "下一步 ->"
 #, c-format
 msgid "Individual package selection"
 msgstr "選取單一套件"
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "求助"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -3910,12 +3737,13 @@ msgstr "認證方式"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "這個密碼太簡單了 (一定至少要有 %d 個字元才行)"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "沒有密碼"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "設定 root 密碼"
@@ -3975,11 +3803,6 @@ msgstr "安全性設定"
 #, fuzzy, c-format
 msgid "Security Level"
 msgstr "安全等級:"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "not configured"
-msgstr "重新設定"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -4083,6 +3906,16 @@ msgid "Which is your timezone?"
 msgstr "您的時區為何 ?"
 
 #: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "您要設定印表機列印項目嗎？"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Unable to contact mirror %s"
+msgstr "無法建立另一行程：%s"
+
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "向 FTP 映射站台查詢可用的程式套件列表"
@@ -4164,6 +3997,11 @@ msgstr ""
 "如果都沒有的話，請選擇取消。\n"
 "如果有一些項目您並沒有的話，把該項目取消選取，然後按下確定繼續。"
 
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "所有"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
@@ -4241,6 +4079,11 @@ msgstr "您的系統沒有足夠的空間可以用來安裝或升級了 (%d > %d)"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "正在搜尋可以安裝的套件"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "正在搜尋需要升級的套件"
 
@@ -4248,11 +4091,6 @@ msgstr "正在搜尋需要升級的套件"
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "正在搜尋已經安裝過的套件..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "正在搜尋可以安裝的套件"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4362,11 +4200,6 @@ msgid "Please choose your type of mouse."
 msgstr "請選取滑鼠的形式。"
 
 #: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Upgrade"
-msgstr "升級"
-
-#: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
 msgid "Upgrade %s"
 msgstr "升級"
@@ -4391,15 +4224,19 @@ msgstr "下面清單是可供選擇的鍵盤列表"
 msgid "Please choose your keyboard layout."
 msgstr "請選取鍵盤排列的格式是那一種。"
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "結束"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr "版權協議"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "default:LTR"
-msgstr "預設"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4946,6 +4783,11 @@ msgstr "比利時"
 #, c-format
 msgid "Azerbaidjani (latin)"
 msgstr "蘇聯共和國 (latin)"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Arabic"
+msgstr ""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6107,6 +5949,11 @@ msgstr "Andorra"
 msgid "Afghanistan"
 msgstr "Afghanistan"
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "default:LTR"
+msgstr "預設"
+
 #: ../../loopback.pm:1
 #, c-format
 msgid "Circular mounts %s\n"
@@ -6521,10 +6368,10 @@ msgstr ""
 "一般來說，RIP 是給小型網路用途使用。"
 
 #: ../../services.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 "給 block 這類區塊裝置指派 raw 裝置 (就像是硬碟的分割區)，\n"
 "一般是給 oracle 這類特殊程式使用。"
@@ -6786,8 +6633,8 @@ msgstr ""
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
 
 #: ../../standalone.pm:1
@@ -6917,8 +6764,8 @@ msgid "Exit install"
 msgstr "離開安裝程式"
 
 #: ../../steps.pm:1
-#, c-format
-msgid "Install system updates"
+#, fuzzy, c-format
+msgid "Install updates"
 msgstr "安裝系統更新"
 
 #: ../../steps.pm:1
@@ -6945,6 +6792,11 @@ msgstr "設定網路連線"
 #, c-format
 msgid "Add a user"
 msgstr "新增使用者"
+
+#: ../../steps.pm:1
+#, fuzzy, c-format
+msgid "Root password"
+msgstr "沒有密碼"
 
 #: ../../steps.pm:1
 #, c-format
@@ -6993,13 +6845,21 @@ msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
+msgid "Language"
 msgstr "選擇語系"
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
 msgstr ""
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "確定"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -7179,7 +7039,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "選項"
@@ -7203,14 +7063,6 @@ msgstr "螢幕"
 #, c-format
 msgid "Graphic Card"
 msgstr "顯示卡"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "結束"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -7859,40 +7711,6 @@ msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "準備寫入磁碟 %s 的硬碟分割表!"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"你已經選擇了一塊 software RAID 的分割區當作為 根分割區 (/) 的掛載點\n"
-"您要另外劃分一個不是在 software RAID 的分割區作為 /boot 的掛載點使用，\n"
-"如此開機管理程式才能夠正常啟動您的系統。"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"您選取作為根目錄 (/) 的分割區位置在硬碟的第 1024 個磁柱之後，\n"
-"而且您也沒有設定 /root 分割區，假如您準備用 LILO 當開機程式的話，\n"
-"記得要加入一個 /boot 分割區"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"不好意思，程式不接受在這個磁碟上建立 /boot 分割區的指令 (磁柱 > 1024).\n"
-"因為 LILO 會失效導致無法開機；若您不用 LILO，根本不需要 /boot 分割區"
-
-#: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "The package %s is needed. Install it?"
 msgstr "這個 %s 套件需要安裝上，您要安裝該套件嗎？"
@@ -8382,6 +8200,11 @@ msgstr ""
 
 #: ../../harddrake/data.pm:1
 #, c-format
+msgid "Firewire controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr ""
 
@@ -8514,7 +8337,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -8938,7 +8761,7 @@ msgstr "連線到 Internet"
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
+msgid "Sagem (using pppoa) usb"
 msgstr ""
 
 #: ../../network/adsl.pm:1
@@ -9052,13 +8875,13 @@ msgid "Zeroconf host name must not contain a ."
 msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, fuzzy, c-format
-msgid "Zeroconf Host name"
+#, c-format
+msgid "Host name"
 msgstr "主機名稱"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid "Host name"
+#, fuzzy, c-format
+msgid "Zeroconf Host name"
 msgstr "主機名稱"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
@@ -9069,18 +8892,6 @@ msgid ""
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
 msgstr ""
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-"請輸入您的主機名稱，某些 DHCP 主機會要求有\n"
-"主機名稱才能使用，您的主機名稱應該要是一個\n"
-"合格主機全名 (FQDN)，如 「mybox.mylab.myco.com」。"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9726,6 +9537,11 @@ msgstr "於開機時啟動"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
+msgid "Assign host name from DHCP address"
+msgstr "請輸入主機名稱或是 IP"
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
 msgid "Network Hotplugging"
 msgstr "網路設定"
 
@@ -9736,13 +9552,8 @@ msgstr "紀錄網路卡的 ID (對於筆記型電腦相當有用)"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
-msgid "(bootp/dhcp/zeroconf)"
-msgstr "(bootp/dhcp)"
-
-#: ../../network/network.pm:1
-#, c-format
-msgid "Automatic IP"
-msgstr "自動分配 IP"
+msgid "DHCP host name"
+msgstr "主機名稱"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -9750,10 +9561,21 @@ msgstr "自動分配 IP"
 msgid "Netmask"
 msgstr "網路遮罩"
 
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
 #, c-format
 msgid "IP address"
 msgstr "IP 位址"
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "(bootp/dhcp/zeroconf)"
+msgstr "(bootp/dhcp)"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Automatic IP"
+msgstr "自動分配 IP"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10003,7 +9825,7 @@ msgstr "PDQ"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Print, Don't Queue"
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr "未知的型號"
@@ -10012,6 +9834,11 @@ msgstr "未知的型號"
 #, c-format
 msgid "Unknown model"
 msgstr "未知的型號"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "%s (Port %s)"
+msgstr "連接埠"
 
 #: ../../printer/main.pm:1
 #, fuzzy, c-format
@@ -10165,11 +9992,6 @@ msgstr "PrinterDrake"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr "您還需要設定另外一台印表機嗎？"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "移除「%s」印表機中 ..."
 
@@ -10184,8 +10006,8 @@ msgid "Remove printer"
 msgstr "刪除印表機"
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Know how to use this printer"
+#, fuzzy, c-format
+msgid "Learn how to use this printer"
 msgstr "瞭解如何使用這台印表機"
 
 #: ../../printer/printerdrake.pm:1
@@ -10284,11 +10106,6 @@ msgid "Printer connection type"
 msgstr "印表機連線方式"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Learn how to use this printer"
-msgstr "瞭解如何使用這台印表機"
-
-#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Raw printer"
 msgstr "Raw 印表機"
@@ -10325,6 +10142,7 @@ msgid "Add a new printer"
 msgstr "新增印表機"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "一般模式"
@@ -10347,6 +10165,11 @@ msgstr "CUPS 組態"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Refresh printer list (to display all available remote CUPS printers)"
+msgstr "更新印表機清單 (重新尋找遠端可用的所有 CUPS 印表機)"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Display all available remote CUPS printers"
 msgstr "更新印表機清單 (重新尋找遠端可用的所有 CUPS 印表機)"
 
 #: ../../printer/printerdrake.pm:1
@@ -10376,16 +10199,6 @@ msgstr ""
 #, c-format
 msgid "Printing system: "
 msgstr "列印系統："
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Would you like to configure printing?"
-msgstr "您要設定印表機列印項目嗎？"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr "正在準備 Printerdrake 印表機設定精靈..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10421,6 +10234,11 @@ msgstr "您打算用那一套列印系統？"
 #, c-format
 msgid "Select Printer Spooler"
 msgstr "選擇印表列印系統"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Setting Default Printer..."
+msgstr "預設印表機"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -11899,6 +11717,35 @@ msgstr ""
 "額外參數等。"
 
 #: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Configuring printer ..."
+msgstr "正在設定「%s」印表機中 ..."
+
+#: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "Searching for new printers..."
 msgstr "可用的印表機"
@@ -12015,6 +11862,64 @@ msgid "Checking your system..."
 msgstr "正在檢查您的系統..."
 
 #: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Restarting CUPS..."
+msgstr "重新啟動 XFS 服務"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "該型號正確"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Server IP missing!"
+msgstr "NCP 伺服器名稱沒指定!"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "遠端的 CUPS 伺服器印表機"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Remove selected server"
+msgstr "移除選取項目"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Edit selected server"
+msgstr "偵測到 %s "
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Add server"
+msgstr "新增使用者"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address of host/network:"
 msgstr ""
@@ -12026,37 +11931,12 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -12114,6 +11994,29 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "CPUS 自動化設定"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "None"
+msgstr "完成"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Additional CUPS servers: "
+msgstr "位於 CUPS 伺服器 \"%s\""
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, fuzzy, c-format
@@ -12273,8 +12176,8 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -13829,6 +13732,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr "請選擇用來備份資料的裝置..."
 
@@ -14085,16 +13993,6 @@ msgstr "請輸入備份資料所要回存的目錄"
 #, c-format
 msgid "Restore from Hard Disk."
 msgstr "由硬碟回存。"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Secure Connection"
-msgstr "安全連線"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "FTP Connection"
-msgstr "FTP 連線"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15011,6 +14909,194 @@ msgstr "Cron 使用非 root 身份執行時無法使用"
 msgid "Installation of %s failed. The following error occured:"
 msgstr "安裝 %s 失敗，發生如下之錯誤："
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "不，我不需要自動登入 (AutoLogin)"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "是的，我需要用這個 (使用者、桌面) 來自動登入"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "開機時啟動 X Window 圖形作業環境"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "系統模式"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr "開機圖片"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr "Lilo 螢幕"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+"\n"
+"請選擇 lilo 與開機載入畫面項目，\n"
+"您可以分開選擇"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "佈景"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "畫面選取"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"你目前是選用 %s 當作您目前的開機管理程式。\n"
+"您可以點選設定來啟動設定精靈"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr "lilo 與開機進度畫面的佈景檔案已經安裝成功"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr "佈景安裝失敗"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr "注意"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr "執行執行 'lilo'"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+"無法執行執行 lilo!\n"
+"請使用 root 身份在命令提示字元執行 \"lilo\" 程式，以便於完成 lilo 佈景的安"
+"裝。"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr "執行 'kinird -f /boot/initrd-%s.img %s'。"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr "無法執行 mkinitrd -f /boot/initrd-%s.img %s。"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+"無法寫入 /etc/sysconfig/bootsplash\n"
+"檔案找不到。"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "寫入 %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr "無法寫入 /etc/sysconfig/bootsplash。"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "lilo 訊息檔案遺失"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "正在複製 %s 至 %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr "將 %s 檔案備份至 %s.old"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "建立新的佈景"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"在 console\n"
+"顯示佈景"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr "安裝佈景"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "Lilo/grub 模式"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "Yaboot 模式"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/檔案/結束 (_Q)"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/檔案 (_F)"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "開機樣式組態設定"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -15148,6 +15234,16 @@ msgstr "Mandrake 臭蟲報告工具"
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "參數"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "Internet 連線設定"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "DHCP 用戶端"
 
@@ -15161,11 +15257,6 @@ msgstr "Etnernet 介面卡"
 msgid "Gateway"
 msgstr "閘道"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "參數"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -15175,11 +15266,6 @@ msgstr "連線項目： "
 #, c-format
 msgid "Profile: "
 msgstr "設定檔："
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "Internet 連線設定"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -15445,8 +15531,8 @@ msgstr "移除模組"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr "省略 raid 模組"
+msgid "Add a module"
+msgstr "新增模組"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15460,13 +15546,13 @@ msgstr "當需要時"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "強迫"
+msgid "omit raid modules"
+msgstr "省略 raid 模組"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "新增模組"
+msgid "force"
+msgstr "強迫"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15480,23 +15566,18 @@ msgstr "專家區域"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "一般"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "核心版本"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "DrakFloppy 錯誤：%s"
+msgid "default"
+msgstr "預設"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "預設"
+msgid "General"
+msgstr "一般"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15517,11 +15598,6 @@ msgstr "大小"
 #, c-format
 msgid "Module name"
 msgstr "模組名稱"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16170,6 +16246,11 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "Path"
+msgstr "路徑"
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "group :"
 msgstr "群組："
 
@@ -16229,11 +16310,6 @@ msgstr "特性"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Path"
-msgstr "路徑"
-
-#: ../../standalone/drakperm:1
-#, c-format
 msgid "Permissions"
 msgstr "權限"
 
@@ -16246,21 +16322,6 @@ msgstr "使用目前檔案目錄的擁有者"
 #, c-format
 msgid "browse"
 msgstr "瀏覽"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr "選取要查看編輯的檔案"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
-msgstr ""
-"Drakperm 程式能夠讓使用者檢視以及修改重要檔案的權限，包含擁有者、\n"
-"群組等資訊。另外您也可以自行編輯創造更多屬於自訂的規則項目。"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16311,6 +16372,21 @@ msgstr ""
 #, c-format
 msgid "Up"
 msgstr "向上"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr "選取要查看編輯的檔案"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
+msgstr ""
+"Drakperm 程式能夠讓使用者檢視以及修改重要檔案的權限，包含擁有者、\n"
+"群組等資訊。另外您也可以自行編輯創造更多屬於自訂的規則項目。"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16475,14 +16551,14 @@ msgid "Security Alerts:"
 msgstr "安全警示："
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
-msgid "(default value: %s)"
-msgstr " (預設：%s)"
-
-#: ../../standalone/draksec:1
 #, c-format
 msgid "Security Level:"
 msgstr "安全等級:"
+
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "(default value: %s)"
+msgstr " (預設：%s)"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -16498,7 +16574,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -16507,7 +16583,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 
 #: ../../standalone/draksound:1
@@ -16859,26 +16935,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/選項 (O)"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect jazz drives"
-msgstr "自動偵測"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect modems"
-msgstr "自動偵測"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect printers"
-msgstr "自動偵測"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr ""
 
@@ -16892,6 +16948,16 @@ msgstr ""
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "Unknown"
+msgstr "未知的型號"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "unknown"
+msgstr "未知的型號"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16952,11 +17018,6 @@ msgstr "關於 Harddrake"
 msgid "/_About..."
 msgstr "/關於 (_A)"
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/說明 (_H)"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -16993,15 +17054,20 @@ msgstr "Harddrake 說明"
 msgid "/_Fields description"
 msgstr "描述"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/說明 (_H)"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/_Quit"
+msgstr "/結束 (_Q)"
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "自動偵測"
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/選項 (_O)"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -17013,10 +17079,10 @@ msgstr "自動偵測"
 msgid "/Autodetect _printers"
 msgstr "自動偵測"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
-msgid "/_Quit"
-msgstr "/結束 (_Q)"
+msgid "/_Options"
+msgstr "/選項 (_O)"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -17115,7 +17181,7 @@ msgstr "階層"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -17264,6 +17330,16 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Coma bug"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -17736,9 +17812,9 @@ msgid "Network Monitoring"
 msgstr "網路設定"
 
 #: ../../standalone/printerdrake:1
-#, c-format
-msgid "Reading printer data ..."
-msgstr "讀取印表機資料 ..."
+#, fuzzy, c-format
+msgid "Reading data of installed printers..."
+msgstr "可用的印表機"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -17847,54 +17923,6 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-"您的 %s 掃描器已經設定完成了。\n"
-"您可以執行執行 ``XSane'' 程式進行文件掃描的工作。或者您也可以在程式集內，於多"
-"媒體/圖形項目內找到該程式。"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-"這台 %s 掃描器需要先執行 printerdrake 程式進行設定。\n"
-"您可以透過 Mandrake 控制台內的硬體項目內執行該程式。"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "選取裝置"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Please select the device where your %s is attached"
-msgstr ""
-"ScannerDrake 程式無法偵測您的 %s 掃描器。\n"
-"請選擇您目前掃描器安裝的裝置項目"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "The %s is unsupported"
-msgstr "目前還不支援這款 %s 掃描器"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr "Mandrake Linux 目前的版本還不支援 %s"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr "Mandrake Linux 目前的版本還不支援 %s"
-
-#: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Re-generating list of configured scanners ..."
 msgstr ""
@@ -17952,8 +17980,91 @@ msgstr ""
 "目前有一台未知類型的印表機安裝在您本機上。"
 
 #: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+"您的 %s 掃描器已經設定完成了。\n"
+"您可以執行執行 ``XSane'' 程式進行文件掃描的工作。或者您也可以在程式集內，於多"
+"媒體/圖形項目內找到該程式。"
+
+#: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
+msgid "choose device"
+msgstr "選取裝置"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Please select the device where your %s is attached"
+msgstr ""
+"ScannerDrake 程式無法偵測您的 %s 掃描器。\n"
+"請選擇您目前掃描器安裝的裝置項目"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Searching for scanners ..."
+msgstr "可用的印表機"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Auto-detect available ports"
+msgstr "自動偵測"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+"這台 %s 掃描器需要先執行 printerdrake 程式進行設定。\n"
+"您可以透過 Mandrake 控制台內的硬體項目內執行該程式。"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "The %s is unsupported"
+msgstr "目前還不支援這款 %s 掃描器"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr "Mandrake Linux 目前的版本還不支援 %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr "Mandrake Linux 目前的版本還不支援 %s"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Port: %s"
+msgstr "連接埠"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Detected model: %s"
+msgstr "偵測到的型號：%s %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Select a scanner model"
 msgstr "選取您的掃描器"
 
 #: ../../standalone/scannerdrake:1
@@ -18045,6 +18156,10 @@ msgid "Scientific Workstation"
 msgstr "科學計算平台"
 
 #: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr ""
+
+#: ../../share/compssUsers:999
 msgid "Console Tools"
 msgstr "Console 工具"
 
@@ -18117,12 +18232,14 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache、ProFTPD"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "郵件/群組軟體/新聞群組"
+#, fuzzy
+msgid "Mail"
+msgstr "Mali"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr "Postfix MTA 軟體、INN 新聞群組軟體"
+#, fuzzy
+msgid "Postfix mail server"
+msgstr "Postfix 郵件伺服器"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -18219,6 +18336,99 @@ msgstr "個人理財"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "來管理您財務金錢的工具，比方像是 gnucash"
+
+#~ msgid ""
+#~ "Please enter your host name if you know it.\n"
+#~ "Some DHCP servers require the hostname to work.\n"
+#~ "Your host name should be a fully-qualified host name,\n"
+#~ "such as ``mybox.mylab.myco.com''."
+#~ msgstr ""
+#~ "請輸入您的主機名稱，某些 DHCP 主機會要求有\n"
+#~ "主機名稱才能使用，您的主機名稱應該要是一個\n"
+#~ "合格主機全名 (FQDN)，如 「mybox.mylab.myco.com」。"
+
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "DrakFloppy 錯誤：%s"
+
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+
+#~ msgid "Launch Aurora at boot time"
+#~ msgstr "開機時啟動 Aurora 圖形介面"
+
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr "Traditional Gtk+ Monitor"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "Traditional Monitor"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "NewStyle Monitor"
+
+#~ msgid "NewStyle Categorizing Monitor"
+#~ msgstr "NewStyle Categorizing Monitor"
+
+#~ msgid "Secure Connection"
+#~ msgstr "安全連線"
+
+#~ msgid "FTP Connection"
+#~ msgstr "FTP 連線"
+
+#~ msgid "Mail/Groupware/News"
+#~ msgstr "郵件/群組軟體/新聞群組"
+
+#~ msgid "Postfix mail server, Inn news server"
+#~ msgstr "Postfix MTA 軟體、INN 新聞群組軟體"
+
+#~ msgid "/Options"
+#~ msgstr "/選項 (O)"
+
+#, fuzzy
+#~ msgid "/Autodetect jazz drives"
+#~ msgstr "自動偵測"
+
+#, fuzzy
+#~ msgid "/Autodetect modems"
+#~ msgstr "自動偵測"
+
+#, fuzzy
+#~ msgid "/Autodetect printers"
+#~ msgstr "自動偵測"
+
+#~ msgid ""
+#~ "The partition you've selected to add as root (/) is physically located "
+#~ "beyond\n"
+#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
+#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
+#~ "partition"
+#~ msgstr ""
+#~ "您選取作為根目錄 (/) 的分割區位置在硬碟的第 1024 個磁柱之後，\n"
+#~ "而且您也沒有設定 /root 分割區，假如您準備用 LILO 當開機程式的話，\n"
+#~ "記得要加入一個 /boot 分割區"
+
+#~ msgid ""
+#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
+#~ "> 1024).\n"
+#~ "Either you use LILO and it won't work, or you don't use LILO and you "
+#~ "don't need /boot"
+#~ msgstr ""
+#~ "不好意思，程式不接受在這個磁碟上建立 /boot 分割區的指令 (磁柱 > 1024).\n"
+#~ "因為 LILO 會失效導致無法開機；若您不用 LILO，根本不需要 /boot 分割區"
+
+#~ msgid "Upgrade"
+#~ msgstr "升級"
+
+#~ msgid "Do you want to configure another printer?"
+#~ msgstr "您還需要設定另外一台印表機嗎？"
+
+#~ msgid "Know how to use this printer"
+#~ msgstr "瞭解如何使用這台印表機"
+
+#~ msgid "Preparing Printerdrake..."
+#~ msgstr "正在準備 Printerdrake 印表機設定精靈..."
+
+#~ msgid "Reading printer data ..."
+#~ msgstr "讀取印表機資料 ..."
 
 #~ msgid ""
 #~ "You must indicate where you wish to place the information required to "

@@ -21,16 +21,18 @@ msgid ""
 "You can use userdrake to add a user to this group."
 msgstr ""
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "ยกเลิก"
@@ -105,15 +107,14 @@ msgid "Country"
 msgstr "เม้าท์"
 
 #: ../../any.pm:1
+#, fuzzy, c-format
+msgid "All languages"
+msgstr "เลือกภาษาที่คุณใช้"
+
+#: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
 msgstr ""
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "ทั้งหมด"
 
 #: ../../any.pm:1
 #, c-format
@@ -489,6 +490,16 @@ msgstr "อ็อปชั่นจำเพาะที่ใช้กับค
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr ""
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Enable ACPI"
+msgstr "Enable CD Boot?"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "หน่วงเวลาก่อนทำการบูตอิมเมจที่ใช้"
 
@@ -541,6 +552,11 @@ msgstr "ข้ามไป"
 #, fuzzy, c-format
 msgid "On Floppy"
 msgstr "บันทึกลงแผ่นฟล้อปปี้"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "First sector of the root partition"
+msgstr "เซ็กเตอร์แรกของบูตพาร์ติชั่น"
 
 #: ../../any.pm:1
 #, c-format
@@ -739,234 +755,6 @@ msgstr ""
 "รอ %d วินาทีเพื่อใช้การบูตจากตัวเลือกตั้งต้น\n"
 "\n"
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "OK"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "ใช่แล้ว ผมต้องการ autologin สำหรับผู้ใช้รายนี้"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "ไม่ต้องการ autologin"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "รัน X-Window เมื่อเริ่มทำงาน"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "System mode"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Splash selection"
-msgstr "บันทึกกลุ่มแพ็คเก็จที่เลือก"
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "การปรับแต่ง"
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"ยินดีต้อนรับสู่เครื่องมือในการติดต่อ internet แบบ share\n"
-"\n"
-"%s\n"
-"\n"
-"กด ``Ok'' ถ้าคุณต้องการเริ่มการทำงานของ setup wizard"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Theme installation failed!"
-msgstr "เลือกชุดการติดตั้ง"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, fuzzy, c-format
-msgid "Notice"
-msgstr "NoVideo"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "ผิดพลาด"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Write %s"
-msgstr "XFree %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Create new theme"
-msgstr "สร้างพาร์ติชั่นใหม่"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Install themes"
-msgstr "ติดตั้งระบบ"
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Lilo/grub mode"
-msgstr "การหมุนโทรศัพท์ด้วยโมเด็ม"
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Yaboot mode"
-msgstr "Boot mode"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "รัน Aurora ขณะ boot"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "Gtk+ Monitor ทั่วไป"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "จอภาพทั่วไป"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "จอภาพชนิดใหม่"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "NewStyle Categorizing Monitor"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/ไฟล์/_เลิก"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_ไฟล์"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "Boot Style Configuration"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1121,9 +909,25 @@ msgid "You can't use a LVM Logical Volume for mount point %s"
 msgstr "คุณไม่สามารถใช้ LVM Logical Volume สำหรับ %s"
 
 #: ../../fsedit.pm:1
+#, fuzzy, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"คุณได้เลือก Software RAID พาร์ติชั่น เป็น root (/) \n"
+"bootloader ไม่สามารถทำงานโดยไม่มี /boot พาร์ติชั่น \n"
+"เพราะฉนั้นจำเป็นต้องเพิ่ม /boot พาร์ติชั่น"
+
+#: ../../fsedit.pm:1
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "มีพาร์ติชั่นที่เป็นจุดเม้าท์ที่ %s เรียบร้อยแล้ว\n"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr ""
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1156,6 +960,15 @@ msgstr ""
 "ข้อความผิดพลาดคือ %s\n"
 "\n"
 "คุณแน่ใจว่าจะยอมให้พาร์ติชั่นทั้งหมดถูกลบไป\n"
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "ผิดพลาด"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1263,8 +1076,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1277,7 +1090,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1486,7 +1299,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1590,7 +1403,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -1988,7 +1801,7 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -2039,7 +1852,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 
@@ -2085,7 +1898,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -2440,12 +2253,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "ไม่ต้อง"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "ใช่"
@@ -2542,6 +2357,13 @@ msgstr "ลบ Windows(TM)"
 #, fuzzy, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr "ไม่มี พาร์ติชั่น FAT เพื่อทำการเปี่ยนขนาดหรือให้ใช้เป็น loopback (พื้นที่ไม่พอ)"
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3019,6 +2841,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "เข้าสู่ขั้นตอน `%s'\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "Help"
+msgstr "/_ช่วยเหลือ"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "not configured"
+msgstr "คอนฟิกใหม่"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "การปรับแต่ง"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -3230,14 +3072,6 @@ msgstr "Next ->"
 #, c-format
 msgid "Individual package selection"
 msgstr "Individual package selection"
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, fuzzy, c-format
-msgid "Help"
-msgstr "/_ช่วยเหลือ"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -3458,12 +3292,13 @@ msgstr "การตรวจสอบสิทธิ์การใช้งา
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "รหัสลับง่ายเกินไป (ต้องมีอย่างน้อย %d ตัวอักษร)"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "ไม่มีรหัสผ่าน"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "เซ็ตรหัสผ่านรูท"
@@ -3523,11 +3358,6 @@ msgstr "ระบบความป้องกัน"
 #, fuzzy, c-format
 msgid "Security Level"
 msgstr "เลือกระดับระบบรักษาความปลอดภัย"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "not configured"
-msgstr "คอนฟิกใหม่"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -3631,6 +3461,16 @@ msgid "Which is your timezone?"
 msgstr "คุณใช้ย่านเวลาใด? "
 
 #: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "คุณต้องการคอนฟิกเครื่องพิมพ์ด้วยหรือไม่"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Unable to contact mirror %s"
+msgstr "ไม่สามารถ forkได้.%s"
+
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "กำลังติดต่อกับมิลเรอร์ไซต์เพื่อหารายการของแพ็คเก็จที่มีให้"
@@ -3703,6 +3543,11 @@ msgstr ""
 "ถ้าคุณมี CD ทุกอย่าง กด OK\n"
 "ถ้าไม่มีเลย กด ยกเลิก (cancel)\n"
 "ถ้ามีแค่บางแผ่น เลือกเท่าที่มีแล้วกด OK"
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "ทั้งหมด"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3777,6 +3622,11 @@ msgstr "เครื่องของคุณไม่มีเนื้อท
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "กำลังหาแพ็คเก็จที่มีอยู่"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "กำลังหาแพ็คเก็จที่จะทำการอัพเกรด"
 
@@ -3784,11 +3634,6 @@ msgstr "กำลังหาแพ็คเก็จที่จะทำกา
 #, fuzzy, c-format
 msgid "Looking at packages already installed..."
 msgstr "คุณไม่สามารถไม่เลือกแพกเกจนี้เพราะมันได้ถูกติดตั้งไปแล้ว"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "กำลังหาแพ็คเก็จที่มีอยู่"
 
 #: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
@@ -3896,11 +3741,6 @@ msgstr "คุณมีเม้าส์ชนิดใด"
 
 #: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
-msgid "Upgrade"
-msgstr "Update"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
 msgid "Upgrade %s"
 msgstr "Update"
 
@@ -3924,15 +3764,19 @@ msgstr "ต่อไปนี้คือ keyboard ที่ใช้ได้"
 msgid "Please choose your keyboard layout."
 msgstr "คุณต้องการเลือกคีย์บอร์ดเลย์เอ้าท์แบบใด "
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "ออก"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr "License agreement"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "default:LTR"
-msgstr "default"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4006,7 +3850,7 @@ msgstr "ตกลง"
 #: ../../interactive/newt.pm:1
 #, c-format
 msgid "Finish"
-msgstr "ฟินแลนด์"
+msgstr "เสร็จแล้ว"
 
 #: ../../interactive.pm:1 ../../standalone/draksec:1
 #, c-format
@@ -4481,6 +4325,11 @@ msgstr "เบลเยี่ยม"
 #, c-format
 msgid "Azerbaidjani (latin)"
 msgstr "Azerbaidjani (latin)"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Arabic"
+msgstr ""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -5642,6 +5491,11 @@ msgstr "ยกเลิก"
 msgid "Afghanistan"
 msgstr "Iranian"
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "default:LTR"
+msgstr "default"
+
 #: ../../loopback.pm:1
 #, c-format
 msgid "Circular mounts %s\n"
@@ -6047,7 +5901,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 
 #: ../../services.pm:1
@@ -6302,8 +6156,8 @@ msgstr ""
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
 
 #: ../../standalone.pm:1
@@ -6434,7 +6288,7 @@ msgstr "ออกจากการติดตั้ง"
 
 #: ../../steps.pm:1
 #, fuzzy, c-format
-msgid "Install system updates"
+msgid "Install updates"
 msgstr "ติดตั้งระบบ"
 
 #: ../../steps.pm:1
@@ -6461,6 +6315,11 @@ msgstr "คอนฟิกระบบเน็ตเวิร์ก"
 #, c-format
 msgid "Add a user"
 msgstr "เพิ่มผู้ใช้"
+
+#: ../../steps.pm:1
+#, fuzzy, c-format
+msgid "Root password"
+msgstr "ไม่มีรหัสผ่าน"
 
 #: ../../steps.pm:1
 #, c-format
@@ -6509,13 +6368,21 @@ msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
+msgid "Language"
 msgstr "เลือกภาษาที่คุณใช้"
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
 msgstr ""
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "OK"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -6695,7 +6562,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "Options"
 msgstr "/Options/ทดลอง"
@@ -6719,14 +6586,6 @@ msgstr "จอภาพ"
 #, fuzzy, c-format
 msgid "Graphic Card"
 msgstr "กราฟฟิคการ์ด"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "ออก"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -7366,40 +7225,6 @@ msgstr "ตารางพาร์ติชั่นของไดรฟ์ %s
 
 #: ../../diskdrake/interactive.pm:1
 #, fuzzy, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"คุณได้เลือก Software RAID พาร์ติชั่น เป็น root (/) \n"
-"bootloader ไม่สามารถทำงานโดยไม่มี /boot พาร์ติชั่น \n"
-"เพราะฉนั้นจำเป็นต้องเพิ่ม /boot พาร์ติชั่น"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"พาร์ติชั่นที่คุณเลือกให้เป็น root (/) มีการกำหนดทางกายภาพให้มีขนาดเกิน\n"
-"ไซลินเดอร์ที่ 1024 ของฮาร์ดดิสก์ และคุณไม่มีพาร์ติชั่น /boot\n"
-"ถ้าคุณต้องการใช้ LILO เป็นบูตแมเนเจอร์ โปรดระมัดระวังในการเพิ่มพาร์ติชั่น /boot"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"ขออภัย โปรแกรมไม่สามารถสร้าง /boot บนไดรฟ์ (ที่มีขนาดไซลินเดอร์มากกว่า 1024)\n"
-"หรือคุณใช้ LILO และโปรแกรมไม่ทำงาน หรือคุณไม่ได้ใช้ LILO และคุณไม่ต้องการ /boot"
-
-#: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
 msgid "The package %s is needed. Install it?"
 msgstr ""
 "แพกเกจนี้จำเป็นต้องถูก upgrade\n"
@@ -7889,6 +7714,11 @@ msgstr ""
 
 #: ../../harddrake/data.pm:1
 #, c-format
+msgid "Firewire controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr ""
 
@@ -8021,7 +7851,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -8436,7 +8266,7 @@ msgstr "ต่อเข้า Internet "
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
+msgid "Sagem (using pppoa) usb"
 msgstr ""
 
 #: ../../network/adsl.pm:1
@@ -8540,13 +8370,13 @@ msgid "Zeroconf host name must not contain a ."
 msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, fuzzy, c-format
-msgid "Zeroconf Host name"
+#, c-format
+msgid "Host name"
 msgstr "ชื่อโฮสต์:"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid "Host name"
+#, fuzzy, c-format
+msgid "Zeroconf Host name"
 msgstr "ชื่อโฮสต์:"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
@@ -8557,19 +8387,6 @@ msgid ""
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
 msgstr ""
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-"โปรดใส่ชื่อของโฮสต์\n"
-"ชื่อของโฮสต์ควรใส่เต็มรูปแบบ (รวมชื่อโดเมนด้วย)\n"
-"ตัวอย่างเช่น ``mybox.mylab.yco.com''\n"
-"คุณอาจจะใส่ค่า IP ของเกตเวย์ด้วยถ้าคุณมีเครื่องที่ทำหน้าที่เป็นเกตเวย์อยู่"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9195,6 +9012,11 @@ msgstr "เริ่มทำงานตอน boot"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
+msgid "Assign host name from DHCP address"
+msgstr "กรุณาทดสอบเม้าส์"
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
 msgid "Network Hotplugging"
 msgstr "การคอนฟิกระบบเน็ตเวิร์ก"
 
@@ -9205,13 +9027,8 @@ msgstr ""
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
-msgid "(bootp/dhcp/zeroconf)"
-msgstr "(bootp/dhcp)"
-
-#: ../../network/network.pm:1
-#, c-format
-msgid "Automatic IP"
-msgstr "กำหนดค่า IP แบบอัตโนมัติ"
+msgid "DHCP host name"
+msgstr "ชื่อโฮสต์:"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -9219,10 +9036,21 @@ msgstr "กำหนดค่า IP แบบอัตโนมัติ"
 msgid "Netmask"
 msgstr "เน็ตมาสก์"
 
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
 #, c-format
 msgid "IP address"
 msgstr "ค่า IP"
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "(bootp/dhcp/zeroconf)"
+msgstr "(bootp/dhcp)"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Automatic IP"
+msgstr "กำหนดค่า IP แบบอัตโนมัติ"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -9470,7 +9298,7 @@ msgstr ""
 msgid "PDQ - Print, Don't Queue"
 msgstr ""
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr ""
@@ -9479,6 +9307,11 @@ msgstr ""
 #, c-format
 msgid "Unknown model"
 msgstr ""
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "%s (Port %s)"
+msgstr "Port"
 
 #: ../../printer/main.pm:1
 #, fuzzy, c-format
@@ -9632,11 +9465,6 @@ msgstr "เครื่องพิมพ์"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
-msgid "Do you want to configure another printer?"
-msgstr "คุณต้องการทดสอบการคอนฟิกหรือไม่"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "อ่าน CUPS drivers database..."
 
@@ -9652,7 +9480,7 @@ msgstr "เครื่องพิมพ์แบบรีโมท"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
-msgid "Know how to use this printer"
+msgid "Learn how to use this printer"
 msgstr "คุณต้องการทดสอบการคอนฟิกหรือไม่"
 
 #: ../../printer/printerdrake.pm:1
@@ -9751,11 +9579,6 @@ msgstr "การเชื่อมต่อกับ Internet แบบ sharing
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
-msgid "Learn how to use this printer"
-msgstr "คุณต้องการทดสอบการคอนฟิกหรือไม่"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
 msgid "Raw printer"
 msgstr "ไม่มีเครื่องพิมพ์"
 
@@ -9789,6 +9612,7 @@ msgid "Add a new printer"
 msgstr "ไม่มีเครื่องพิมพ์"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "โหมดธรรมดา"
@@ -9811,6 +9635,11 @@ msgstr "การปรับแต่ง LAN"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Refresh printer list (to display all available remote CUPS printers)"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Display all available remote CUPS printers"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -9838,16 +9667,6 @@ msgstr ""
 #, c-format
 msgid "Printing system: "
 msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Would you like to configure printing?"
-msgstr "คุณต้องการคอนฟิกเครื่องพิมพ์ด้วยหรือไม่"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Preparing Printerdrake..."
-msgstr "อ่าน CUPS drivers database..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9883,6 +9702,11 @@ msgstr "ประเภทของการพิมพ์ชนิดไหน
 #, fuzzy, c-format
 msgid "Select Printer Spooler"
 msgstr "เลือกการเชื่อมต่อกับเครื่องพิมพ์"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Setting Default Printer..."
+msgstr "เครื่องพิมพ์โลคอล (ต่อติดกับตัวเครื่อง)"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -11141,6 +10965,35 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Configuring printer ..."
+msgstr "การคอนฟิกเครื่องพิมพ์"
+
+#: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "Searching for new printers..."
 msgstr "เครื่องพิมพ์โลคอล (ต่อติดกับตัวเครื่อง)"
@@ -11242,6 +11095,64 @@ msgid "Checking your system..."
 msgstr "ประเภทของการพิมพ์ชนิดไหนที่คุณต้องการ"
 
 #: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Restarting CUPS..."
+msgstr "จำเพาะ"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "ถูกต้องหรือไม่?"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Server IP missing!"
+msgstr "ชื่อของเครื่องพิมพ์"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "Remote CUPS server"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Remove selected server"
+msgstr "ลบคิว"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Edit selected server"
+msgstr "ค้นพบ %s"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Add server"
+msgstr "เพิ่มผู้ใช้"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address of host/network:"
 msgstr ""
@@ -11253,37 +11164,12 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -11341,6 +11227,29 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "Boot Style Configuration"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "None"
+msgstr "ทำเรียบร้อยแล้ว"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Additional CUPS servers: "
+msgstr "ค่า IP ของ CUPS เซิร์ฟเวอร์"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, fuzzy, c-format
@@ -11500,8 +11409,8 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -12954,6 +12863,11 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup:1
+#, c-format
+msgid "%s"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Please select data to backup..."
 msgstr "กรุณาเลือกภาษาที่ต้องการใช้"
@@ -13198,16 +13112,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Restore from Hard Disk."
 msgstr "เรียกคืนจากแผ่นฟล้อปปี้"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Secure Connection"
-msgstr "เลือกการเชื่อมต่อกับเครื่องพิมพ์"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "FTP Connection"
-msgstr "LAN connection"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -14044,6 +13948,187 @@ msgstr ""
 msgid "Installation of %s failed. The following error occured:"
 msgstr "การติดตั้ง %s ล้มเหลว ต่อไปนี้เป็นข้อผิดพลาดที่เกิดขึ้น"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "ไม่ต้องการ autologin"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "ใช่แล้ว ผมต้องการ autologin สำหรับผู้ใช้รายนี้"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "รัน X-Window เมื่อเริ่มทำงาน"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "System mode"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Splash selection"
+msgstr "บันทึกกลุ่มแพ็คเก็จที่เลือก"
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"ยินดีต้อนรับสู่เครื่องมือในการติดต่อ internet แบบ share\n"
+"\n"
+"%s\n"
+"\n"
+"กด ``Ok'' ถ้าคุณต้องการเริ่มการทำงานของ setup wizard"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Theme installation failed!"
+msgstr "เลือกชุดการติดตั้ง"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, fuzzy, c-format
+msgid "Notice"
+msgstr "NoVideo"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Write %s"
+msgstr "XFree %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Create new theme"
+msgstr "สร้างพาร์ติชั่นใหม่"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Install themes"
+msgstr "ติดตั้งระบบ"
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Lilo/grub mode"
+msgstr "การหมุนโทรศัพท์ด้วยโมเด็ม"
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Yaboot mode"
+msgstr "Boot mode"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/ไฟล์/_เลิก"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_ไฟล์"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "Boot Style Configuration"
+
 #: ../../standalone/drakbug:1
 #, fuzzy, c-format
 msgid "No browser available! Please install one"
@@ -14174,6 +14259,16 @@ msgstr ""
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "Parameters"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "การปรับแต่งการติดต่อเข้า internet"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "DHCP Client"
 
@@ -14187,11 +14282,6 @@ msgstr "Ethernet Card"
 msgid "Gateway"
 msgstr "เกตเวย์"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "Parameters"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -14201,11 +14291,6 @@ msgstr "ชนิดการเชื่อมต่อ"
 #, c-format
 msgid "Profile: "
 msgstr "Profile: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "การปรับแต่งการติดต่อเข้า internet"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -14467,8 +14552,8 @@ msgstr "ลบทิ้ง 1 module"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr "ยกเว้น raid modules"
+msgid "Add a module"
+msgstr "เพิ่ม 1 module"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -14482,13 +14567,13 @@ msgstr "ถ้าต้องการ"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "บังคับ"
+msgid "omit raid modules"
+msgstr "ยกเว้น raid modules"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "เพิ่ม 1 module"
+msgid "force"
+msgstr "บังคับ"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -14502,23 +14587,18 @@ msgstr "ส่วนของผู้เชี่ยวชาญ"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "ทั่วไป"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "kernel version"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "ข้อผิดพลาด DrakFloppy: %s"
+msgid "default"
+msgstr "default"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "default"
+msgid "General"
+msgstr "ทั่วไป"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -14539,11 +14619,6 @@ msgstr "ขนาด"
 #, c-format
 msgid "Module name"
 msgstr "ชี่อ module"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr "mise-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
@@ -15160,6 +15235,11 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakperm:1
+#, c-format
+msgid "Path"
+msgstr ""
+
+#: ../../standalone/drakperm:1
 #, fuzzy, c-format
 msgid "group :"
 msgstr "เวิร์กกรุ๊ป (workgroup)"
@@ -15217,11 +15297,6 @@ msgid "Property"
 msgstr "Port"
 
 #: ../../standalone/drakperm:1
-#, c-format
-msgid "Path"
-msgstr ""
-
-#: ../../standalone/drakperm:1
 #, fuzzy, c-format
 msgid "Permissions"
 msgstr "เวอร์ชั่น: %s\n"
@@ -15234,19 +15309,6 @@ msgstr "ยอมรับผู้ใช้"
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "browse"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -15297,6 +15359,19 @@ msgstr ""
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Up"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -15464,13 +15539,13 @@ msgstr "เลือกระดับระบบรักษาความป
 
 #: ../../standalone/draksec:1
 #, fuzzy, c-format
-msgid "(default value: %s)"
-msgstr " (Default)"
+msgid "Security Level:"
+msgstr "เลือกระดับระบบรักษาความปลอดภัย"
 
 #: ../../standalone/draksec:1
 #, fuzzy, c-format
-msgid "Security Level:"
-msgstr "เลือกระดับระบบรักษาความปลอดภัย"
+msgid "(default value: %s)"
+msgstr " (Default)"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -15486,7 +15561,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -15495,7 +15570,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 
 #: ../../standalone/draksound:1
@@ -15814,26 +15889,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/Options"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect jazz drives"
-msgstr "ใช้ auto detection"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect modems"
-msgstr "ใช้ auto detection"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect printers"
-msgstr "ใช้ auto detection"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr ""
 
@@ -15846,6 +15901,16 @@ msgstr "%d วินาที"
 #, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "Unknown"
+msgstr "Generic"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "unknown"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -15905,11 +15970,6 @@ msgstr ""
 msgid "/_About..."
 msgstr "/ช่วยเหลือ/_เกี่ยวกับ..."
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/_ช่วยเหลือ"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -15944,15 +16004,20 @@ msgstr ""
 msgid "/_Fields description"
 msgstr "รายละเอียด"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/_ช่วยเหลือ"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "/_Quit"
+msgstr "ออก"
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "ใช้ auto detection"
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_Options"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -15964,10 +16029,10 @@ msgstr "ใช้ auto detection"
 msgid "/Autodetect _printers"
 msgstr "ใช้ auto detection"
 
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/_Quit"
-msgstr "ออก"
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Options"
+msgstr "/_Options"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16066,7 +16131,7 @@ msgstr "ระดับ"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -16215,6 +16280,16 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Coma bug"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -16679,8 +16754,8 @@ msgstr "การคอนฟิกระบบเน็ตเวิร์ก"
 
 #: ../../standalone/printerdrake:1
 #, fuzzy, c-format
-msgid "Reading printer data ..."
-msgstr "อ่าน CUPS drivers database..."
+msgid "Reading data of installed printers..."
+msgstr "เครื่องพิมพ์โลคอล (ต่อติดกับตัวเครื่อง)"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -16790,47 +16865,6 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "choose device"
-msgstr "อุปกรณ์บูต"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Please select the device where your %s is attached"
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is unsupported"
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
 msgid "Re-generating list of configured scanners ..."
 msgstr ""
 
@@ -16883,8 +16917,84 @@ msgid ""
 msgstr "ไม่มีอุปกรณ์ Network บนเครื่องคุณ"
 
 #: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
-msgid "Select a scanner"
+msgid "choose device"
+msgstr "อุปกรณ์บูต"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Please select the device where your %s is attached"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Searching for scanners ..."
+msgstr "เครื่องพิมพ์โลคอล (ต่อติดกับตัวเครื่อง)"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Auto-detect available ports"
+msgstr "ใช้ auto detection"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is unsupported"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Port: %s"
+msgstr "Port"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Detected model: %s"
+msgstr "ค้นพบ %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Select a scanner model"
 msgstr "เลือกกราฟฟิคการ์ด"
 
 #: ../../standalone/scannerdrake:1
@@ -16979,6 +17089,10 @@ msgid "Scientific Workstation"
 msgstr "Workstation ทางวิทยาศาสตร์"
 
 #: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr ""
+
+#: ../../share/compssUsers:999
 msgid "Console Tools"
 msgstr ""
 
@@ -17054,12 +17168,13 @@ msgid "Apache, Pro-ftpd"
 msgstr ""
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
+msgid "Mail"
 msgstr ""
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr ""
+#, fuzzy
+msgid "Postfix mail server"
+msgstr "ชื่อเซิร์ฟเวอร์ของพรินเตอร์"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -17163,6 +17278,101 @@ msgstr "การเงินส่วนตัว"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "โปรแกรมที่ช่วยจัดการเรื่องการเงิน เช่น gnucash"
+
+#~ msgid ""
+#~ "Please enter your host name if you know it.\n"
+#~ "Some DHCP servers require the hostname to work.\n"
+#~ "Your host name should be a fully-qualified host name,\n"
+#~ "such as ``mybox.mylab.myco.com''."
+#~ msgstr ""
+#~ "โปรดใส่ชื่อของโฮสต์\n"
+#~ "ชื่อของโฮสต์ควรใส่เต็มรูปแบบ (รวมชื่อโดเมนด้วย)\n"
+#~ "ตัวอย่างเช่น ``mybox.mylab.yco.com''\n"
+#~ "คุณอาจจะใส่ค่า IP ของเกตเวย์ด้วยถ้าคุณมีเครื่องที่ทำหน้าที่เป็นเกตเวย์อยู่"
+
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "ข้อผิดพลาด DrakFloppy: %s"
+
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr "mise-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+
+#~ msgid "Launch Aurora at boot time"
+#~ msgstr "รัน Aurora ขณะ boot"
+
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr "Gtk+ Monitor ทั่วไป"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "จอภาพทั่วไป"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "จอภาพชนิดใหม่"
+
+#~ msgid "NewStyle Categorizing Monitor"
+#~ msgstr "NewStyle Categorizing Monitor"
+
+#, fuzzy
+#~ msgid "Secure Connection"
+#~ msgstr "เลือกการเชื่อมต่อกับเครื่องพิมพ์"
+
+#, fuzzy
+#~ msgid "FTP Connection"
+#~ msgstr "LAN connection"
+
+#~ msgid "/Options"
+#~ msgstr "/Options"
+
+#, fuzzy
+#~ msgid "/Autodetect jazz drives"
+#~ msgstr "ใช้ auto detection"
+
+#, fuzzy
+#~ msgid "/Autodetect modems"
+#~ msgstr "ใช้ auto detection"
+
+#, fuzzy
+#~ msgid "/Autodetect printers"
+#~ msgstr "ใช้ auto detection"
+
+#~ msgid ""
+#~ "The partition you've selected to add as root (/) is physically located "
+#~ "beyond\n"
+#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
+#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
+#~ "partition"
+#~ msgstr ""
+#~ "พาร์ติชั่นที่คุณเลือกให้เป็น root (/) มีการกำหนดทางกายภาพให้มีขนาดเกิน\n"
+#~ "ไซลินเดอร์ที่ 1024 ของฮาร์ดดิสก์ และคุณไม่มีพาร์ติชั่น /boot\n"
+#~ "ถ้าคุณต้องการใช้ LILO เป็นบูตแมเนเจอร์ โปรดระมัดระวังในการเพิ่มพาร์ติชั่น /boot"
+
+#~ msgid ""
+#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
+#~ "> 1024).\n"
+#~ "Either you use LILO and it won't work, or you don't use LILO and you "
+#~ "don't need /boot"
+#~ msgstr ""
+#~ "ขออภัย โปรแกรมไม่สามารถสร้าง /boot บนไดรฟ์ (ที่มีขนาดไซลินเดอร์มากกว่า 1024)\n"
+#~ "หรือคุณใช้ LILO และโปรแกรมไม่ทำงาน หรือคุณไม่ได้ใช้ LILO และคุณไม่ต้องการ /boot"
+
+#, fuzzy
+#~ msgid "Upgrade"
+#~ msgstr "Update"
+
+#, fuzzy
+#~ msgid "Do you want to configure another printer?"
+#~ msgstr "คุณต้องการทดสอบการคอนฟิกหรือไม่"
+
+#, fuzzy
+#~ msgid "Know how to use this printer"
+#~ msgstr "คุณต้องการทดสอบการคอนฟิกหรือไม่"
+
+#, fuzzy
+#~ msgid "Preparing Printerdrake..."
+#~ msgstr "อ่าน CUPS drivers database..."
+
+#, fuzzy
+#~ msgid "Reading printer data ..."
+#~ msgstr "อ่าน CUPS drivers database..."
 
 #, fuzzy
 #~ msgid ""

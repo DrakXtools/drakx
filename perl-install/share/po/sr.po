@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-01-19 16:00-0500\n"
-"Last-Translator: \n"
-"Language-Team:  <sr@li.org>\n"
+"PO-Revision-Date: 2003-02-27 21:17+0100\n"
+"Last-Translator: Toma Jankovic_<tomaja@net.yu>\n"
+"Language-Team: Serbian <i18n@mandrake.co.yu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,16 +24,18 @@ msgstr ""
 "per-user deljenje resursa koristi grupu \"fileshare\". \n"
 "Vi pomoæu userdrake-a mo¾ete dodati korisnika u ovu grupu."
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Poni¹ti"
@@ -97,30 +99,29 @@ msgid "More"
 msgstr "Jo¹"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Here is the full list of available countries"
-msgstr "Ovde je predstavljena cela lista dostupnih tastatura"
+msgstr "Ovde je predstavljena cela lista dostupnih zemalja"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Please choose your country."
+msgstr "Izaberite svoju zemlju."
+
+#: ../../any.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Country"
+msgstr "Zemlja"
 
 #: ../../any.pm:1
 #, fuzzy, c-format
-msgid "Please choose your country."
-msgstr "Izaberite tip mi¹a"
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "Country"
-msgstr "Zemlja:"
+msgid "All languages"
+msgstr "Izaberite jezik"
 
 #: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
-msgstr ""
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "Sve"
+msgstr "Koristi Unicode po default-u"
 
 #: ../../any.pm:1
 #, c-format
@@ -146,16 +147,14 @@ msgid "Choose the default user:"
 msgstr "Izaberite default (osnovnog) korisnika:"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to use this feature?"
-msgstr "Da li ¾elite da koristite aboot ?"
+msgstr "Da li ¾elite da koristite ovu opciju ?"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "I can set up your computer to automatically log on one user."
-msgstr ""
-"Ja mogu podesti va¹ raèunar da automatski uloguje jednog korisnika.\n"
-"Da li ¾elite da korisitite ovu opciju ?"
+msgstr "Ja mogu podesti va¹ raèunar da automatski uloguje jednog korisnika."
 
 #: ../../any.pm:1
 #, c-format
@@ -497,6 +496,16 @@ msgstr "Ogranièena komandna linika - opcije"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr ""
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Enable ACPI"
+msgstr "Omoguæi startanje sa CD-a?"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "Pauza pre startanja default image-a"
 
@@ -546,9 +555,14 @@ msgid "Skip"
 msgstr "Preskoèi"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "On Floppy"
-msgstr "Boot Floppy"
+msgstr "Na disketu"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "First sector of the root partition"
+msgstr "Prvi sektor startne particije"
 
 #: ../../any.pm:1
 #, c-format
@@ -786,243 +800,6 @@ msgstr ""
 "Izaberite operativni sistem, ili\n"
 "sacekate %d sekundi za startanje pretpostavljenog OS.\n"
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "OK"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "Da, ja ¾elim autologovanje sa ovim(korisnik,desktop)"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "Ne, ja ne ¾elim autologovanje"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "Pokreni X-Window sistem pri stratanju"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "Sistemski mod"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr "Bootsplash"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr "Lilo ekran"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-"\n"
-"Izaberite temu za\n"
-"lilo i bootsplash,\n"
-"a mo¾ete ih odabrati\n"
-"odvojeno"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "Teme"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Splash selection"
-msgstr "Splash selekcija"
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Podesi"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Trenutno koristite %s kao Boot menad¾er \n"
-"Kliknite na Podesi (Configure) da bi pokrenuli pode¹avavanje."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "Instalacija LiLo-a i Bootsplash tema uspela"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr "Instalacija teme nije uspela!"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr "Napomena"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "Gre¹ka"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr "Restartuj 'lilo'"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-"Ne mogu da restartujem LiLo!\n"
-"Pokrenite \"lilo\" kao root iz komandne linije da bi zavr¹ili instalciju "
-"teme za LiLo starter."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr "Izvr¹i initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr "Ne mogu da pokrenem mkinitrd -f /boot/initrd-%s.img %s."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-"Ne mogu da upi¹em u /etc/sysconfig/bootsplash\n"
-"Fajl ne postoji."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "Upi¹i %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr "Ne mogu da upisujem u /etc/sysconfig/bootsplash."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "Lilo poruka nije pronaðena"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "Kopiraj %s u %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr "Backup %s to %s.old"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "Kreiraj novu temu"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-"Prika¾i teme\n"
-"u konzoli"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr "Instaliraj teme"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "Lilo/Grub mod"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "Yaboot mod"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "Pokreni Auroru pri startanje"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "Tradicionalni Gtk+ Monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "Tradicionalni Monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "NewStyle Monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "NewStyle Monitor za kategorizaciju"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/Fajl/_Kraj"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_Fajl"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "Konfiguracija stila startanja"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1180,8 +957,24 @@ msgstr "Ne mo¾ete koristiti logièku LVM particiju za taèku montiranja %s"
 
 #: ../../fsedit.pm:1
 #, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"Izabrali ste softversku RAID particiju kao root (/).\n"
+"Nijedan starter ne mo¾e da radi sa tim bez /boot particije.\n"
+"Zato treba da dodate /boot particiju"
+
+#: ../../fsedit.pm:1
+#, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Veæ postoji particija sa taèkom montiranja %s\n"
+
+#: ../../fsedit.pm:1
+#, fuzzy, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr "Ime ¹tampaèa treba da sadr¾i samo slova, brojeve i underscore"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1217,6 +1010,15 @@ msgstr ""
 "\n"
 "Da li se pristajete da izgubite sve particije?\n"
 
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "Gre¹ka"
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "server"
@@ -1233,9 +1035,9 @@ msgid "simple"
 msgstr "jednostavno"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enabling swap partition %s"
-msgstr "Formatiranje particije %s"
+msgstr "Omoguæavam swap particiju %s"
 
 #: ../../fs.pm:1 ../../partition_table.pm:1
 #, c-format
@@ -1248,14 +1050,14 @@ msgid "mounting partition %s in directory %s failed"
 msgstr "montiranje particije %s u direktorijum %s nije uspelo"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mounting partition %s"
-msgstr "Formatiranje particije %s"
+msgstr "Montiram particiju %s"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Checking %s"
-msgstr "Kopiranje %s"
+msgstr "Proveravam %s"
 
 #: ../../fs.pm:1
 #, c-format
@@ -1278,7 +1080,7 @@ msgid "%s formatting of %s failed"
 msgstr "%s Formatiranje  %s nije uspelo"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Click on \"Next ->\" if you want to delete all data and partitions present\n"
 "on this hard drive. Be careful, after clicking on \"Next ->\", you will not\n"
@@ -1288,13 +1090,13 @@ msgid ""
 "Click on \"<- Previous\" to stop this operation without losing any data and\n"
 "partitions present on this hard drive."
 msgstr ""
-"Kliknite na \"U redu\" ukoliko ¾elite da izbri¹ete sve podatke i \n"
+"Kliknite na \"Sledeæe ->\" ukoliko ¾elite da izbri¹ete sve podatke i \n"
 "particije na ovom hard disku.Budite pa¾ljivi, posle klika na \"U redu\", vi\n"
 "neæete moæi da povratite bilo koji podatak ili particiju na hard disku,\n"
 "pa i bilo koje Windows podatke.\n"
 "\n"
-"Kliknite na \"Poni¹ti\" da bi poni¹ti ovu operaciju bez gubljenja podataka "
-"i\n"
+"Kliknite na \"<- Pprethodno\" da bi poni¹ti ovu operaciju bez gubljenja "
+"podataka i\n"
 "particija koje su prisutne na ovom hard disku."
 
 #: ../../help.pm:1
@@ -1327,8 +1129,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1341,7 +1143,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1400,9 +1202,15 @@ msgid ""
 "actually present on your system, you can click on the button and choose\n"
 "another driver."
 msgstr ""
+"\"Zvuèna kartica\": ukoliko je zvuèna kartica detektovana na va¹em sistemu, "
+"onda je prikazana\n"
+"ovde. Ukoliko primetite da prikazana kartica nije ona koja je stvarno "
+"prisutna\n"
+"u va¹em raèunaru, mo¾ete kliknuti na taster i\n"
+"drugi drajver."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Yaboot is a bootloader for NewWorld Macintosh hardware and can be used to\n"
 "boot GNU/Linux, MacOS or MacOSX. Normally, MacOS and MacOSX are correctly\n"
@@ -1443,7 +1251,7 @@ msgstr ""
 "\n"
 "Osnovne opcije Yaboot-a su:\n"
 "\n"
-"  - Inicijalna poruka: Jednostavna tekstualna poruka koja se prikazuje pre \n"
+" * Inicijalna poruka: Jednostavna tekstualna poruka koja se prikazuje pre \n"
 "statrtnog\n"
 "prompta.\n"
 "\n"
@@ -1477,7 +1285,7 @@ msgstr ""
 "pauza zavr¹i."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can add additional entries in yaboot for other operating systems,\n"
 "alternate kernels, or for an emergency boot image.\n"
@@ -1580,11 +1388,10 @@ msgstr ""
 "\n"
 " * Default: Kako je ovo default Linux selekcija, dovoljno je da samo\n"
 "pritisnete ENTER pri yaboot promptu.  Ovaj unos æe takoðe biti dodatno \n"
-"oznaèen sa \"*\", ukoliko\n"
-"pritisnete [Tab] da bi videli startnu selekciju."
+"oznaèen sa \"*\", ukolik pritisnete [Tab] da bi videli startnu selekciju."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "DrakX will first detect any IDE devices present in your computer. It will\n"
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
@@ -1610,8 +1417,8 @@ msgid ""
 msgstr ""
 "DrakX sada treba da detektuje IDE ureðaje prisutne u ve¹em raèunaru.DrakX "
 "æe \n"
-"potra¾iti PCI SCSI adapter(e).\n"
-"Ukoliko DrakX pronaðe SCSI adapter(e) i bude znao koji upravljaèki program \n"
+"potra¾iti PCI SCSI adapter(e). Ukoliko DrakX pronaðe SCSI adapter(e) i bude "
+"znao koji upravljaèki program \n"
 "(drajver) koristion æe ga(ih) automatski instalirati.\n"
 "\n"
 "Po¹to se mo¾e desiti da pri detekciji neka komponenta ne bude detektovana \n"
@@ -1625,7 +1432,7 @@ msgstr ""
 "listu a onda kiknite na \"U redu\" da bi se vratili na pitanje o SCSI \n"
 "ureðajima.\n"
 "\n"
-"Ukoliko morate ruèno da specificirate va¹ adapter, DrakX æe\n"
+"Ukoliko morate ruèno da specificirate va¹ PCI SCSI adapter, DrakX æe\n"
 "vas upitati da odredite opcije za njega.Treba li bi da dozvolite DrakX-u da\n"
 "ispita adapter radi tih opcija. Ovo obièno i uspe.\n"
 "\n"
@@ -1639,7 +1446,7 @@ msgstr ""
 "veb sajta (ukoliko imate pristup internetu)."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Now, it's time to select a printing system for your computer. Other OSs may\n"
 "offer you one, but Mandrake Linux offers two. Each of the printing systems\n"
@@ -1678,7 +1485,7 @@ msgstr ""
 "\"pdq\"\n"
 "ukoliko upoznajete GNU/Linux. Va¹ izbor naravno mo¾ete promeniti\n"
 "nakon isntalacije pokreæuæi PrinterDrake from iz Mandrake Kontrolnog\n"
-"CCentra i klikom na expert taster.\n"
+"Centra i klikom na expert taster.\n"
 "\n"
 " * \"CUPS\"``Common Unix Printing System'', je izvrstan za ¹tampanje na "
 "va¹em\n"
@@ -1693,13 +1500,6 @@ msgstr ""
 "an \"lpd\" server, morate da pokrenete \"cups-lpd\" demon. On poseduje\n"
 "grafièki interfejs za ¹tapanje i izbor opcija za ¹tampanje.\n"
 "\n"
-" * \"lprNG\"``line printer daemon New Generation''. Ovaj sistem mo¾e da "
-"uradi ono\n"
-"¹to otprilike mogu i ostali, ali æe ¹tampati na ¹tampaèima koji su\n"
-"montirani na Novell Network, zato ¹to podr¾ava IPX protokol,\n"
-"i mo¾e direktno da ¹tampa pomoæu shell komandi. Ukoliko iamte Novell ili\n"
-"¹tampate sa komandama bez kori¹æenja odvojenih pipe konstrukcija, koristite "
-"lprNG.\n"
 "Ako to nij sluèaj, CUPS je onda prava stvar jer je jednostavniji i bolji za "
 "rad preko\n"
 "mre¾a."
@@ -1726,7 +1526,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1781,7 +1581,7 @@ msgstr ""
 "celu disketu."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After you have configured the general bootloader parameters, the list of\n"
 "boot options that will be available at boot time will be displayed.\n"
@@ -1798,19 +1598,26 @@ msgid ""
 "bootloader menu, but you will need a boot disk in order to boot those other\n"
 "operating systems!"
 msgstr ""
-"LILO (the LInux LOader) i Grub su starteri: oni omoguæavaju da startate \n"
-"ili Linux ili bilo koji drugi operativni sistem prisutan na va¹em raèunaru.\n"
-"Naravno, ovi drugi operativni sistemi su ispravno detektovani i \n"
-"instalirani. Ukoliko to nije tako,mo¾ete to sami urediti ovde.\n"
-"Pazite kada unosite parametre.\n"
+"nakon ¹to podesite op¹te parametre startera , lista startnih opcija\n"
+"æe biti dostupna za vreme pokretanja sistema.\n"
 "\n"
-"Takoðe,mo¾ete ¾eleti da ostalim operat.sistemima onemoguæite da pristupe "
-"drugi\n"
-"U tom sluèaju, treba da izbri¹ete odgovarajuæe linije za te sisteme. Ali\n"
-"onda morate imati boot disketu da bi ih vi mogli pokrenuti!"
+"Ukoliko postoji jo¹ operativnih sistema na va¹em raèunaru oni æe automatski\n"
+"biti dodani u startni meni. Mo¾ete ih i detaljno podesiti\n"
+"ako kliknete na  \"Dodaj\" da bi kreirali novi uos, izaberete postojeæi \n"
+"klikom na \"Izmeni\" ili \"Ukloni\" ako ¾elite da ih izmenite ili uklonite. "
+"\"U redu\" prihvata\n"
+"va¹e izmene.\n"
+"\n"
+"Ako budete ¾eleli da dozvolite nekom drugom da ima pristup ostalim "
+"operativnim sistemima\n"
+"ako restartuje sistem. Mo¾ete da izbri¹ete\n"
+"odgovarajuæe unose za operativne sisteme iz startnog menija, ali æe vam onda "
+"biti \n"
+"potrebna startna disketa da bi mogli da pristupite ovim\n"
+"operativnim sistemima!"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This dialog allows to finely tune your bootloader:\n"
 "\n"
@@ -1839,19 +1646,7 @@ msgid ""
 "Clicking the \"Advanced\" button in this dialog will offer advanced options\n"
 "that are reserved for the expert user."
 msgstr ""
-"LILO i GRUB su starteri (boot loaders) za GNU/Linux. Ovaj korak je , "
-"naravno,\n"
-"potpuno automatizovan. U stvari, DrakX analizira boot sektor hard diska\n"
-"i reaguje na osnovu onog ¹to je prona¹ao:\n"
-"\n"
-" * ukoliko je pronaðen Windows boot sektor, on æe ga zameniti sa GRUB/LILO\n"
-"boot sektorom. Sreæom, moæi æete da startujete ili GNU/Linux ili neki drugi "
-"OS;\n"
-"\n"
-" * ukoliko je pronaðen GRUB ili LILO boot sektor, on æe ga zameniti sa \n"
-"novim;\n"
-"\n"
-"Ukoliko je u dilemi, DrakX æe prikazadi dijalog sa razlièitim opcijama.\n"
+"Ovaj dijalog vam nudi moguænost za fino pode¹avanje va¹eg startera:\n"
 "\n"
 " * \"Ponuðeni starteri\": imate tri opcije:\n"
 "\n"
@@ -1878,18 +1673,7 @@ msgstr ""
 "\n"
 "Klikom na opciju \"Napredno\" u ovom dijalogu æe vam biti ponuðene mnoge "
 "napredne\n"
-"opcije, koje su rezervisane za napredne korisnike.\n"
-"\n"
-"Mandrake Linux instalira svoj sopstveni bootloader iliti starter, koji vam "
-"omoguæava da startujete\n"
-"GNU/Linux ili bilo koje druge operativne sistemeakoje imate na raèuanaru.\n"
-"\n"
-"Ukoliko postoji neki drugi operativnisistem na va¹oj ma¹ini, on æe\n"
-"automatski biti dodan u boot meni. Ovde, mo¾ete da fino podesite\n"
-"postojeæe opcije. Dvoklikom na postojæi unos mo¾ete da izmenite\n"
-"njegove parametre ili a ga uklonite; \"Dodaj\" kreira novi unos; a \"Zavr¹eno"
-"\" vas ¹alje\n"
-"na sledeæi korak u instalaciji."
+"opcije, koje su rezervisane za napredne korisnike"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -1919,7 +1703,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -1978,7 +1762,7 @@ msgstr ""
 " u Linux-u ima oznaku ttyS0."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
 "mouse. If it does, it assumes you have a two-button mouse and will\n"
@@ -2019,10 +1803,20 @@ msgstr ""
 "test ekran. Koristite tastere i toèkiæe da bi proverili da li su postavke\n"
 "dobre. Ukoliko mi¹ ne radi ispravno pritisnite taster za razmak (space bar) "
 "ili\n"
-"taster [Return] za \"Poni¹ti\" i izaberite ponovo."
+"taster [Return] da bi poni¹tili test i vratili se da bi poku¹ali ponovo.\n"
+"\n"
+"Toèkiæi na mi¹u se ponekad ne detektuju automatski, pa æete sami morati da\n"
+"izaberete mi¹a sa liste. Pazite da izaberete odgovarajuæi vezano\n"
+"za port na koji je mi¹ povezan. nakon izbora mi¹a\n"
+"i pritiska na taster \"Sledeæi ->\", slika mi¹a æe biti prikazana na "
+"ekranu.\n"
+"Pokrenite to¹kiæ da bi proverili da li je pravilno aktiviran. Kada \n"
+"vidite da se toèkiæ na ekranu pomera kao i toèkiæ na mi¹u, testirajte\n"
+"tastere i proverite da li kursor na ekrani prati va¹e \n"
+"pomeranje mi¹a."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your choice of preferred language will affect the language of the\n"
 "documentation, the installer and the system in general. Select first the\n"
@@ -2044,7 +1838,9 @@ msgid ""
 "language used by the entire system. Running the command as a regular user\n"
 "will only change the language settings for that particular user."
 msgstr ""
-"Izaberite va¹ jezik za instalaciju i kori¹æenje sistema.\n"
+"Va¹ izbor jeika æe uticati na jezik dokumentacije,\n"
+"instalacije i sistema uop¹te. Prvo izaberite region u kojem se nalazite,\n"
+"a zatim jezik koji govorite.\n"
 "\n"
 "Klikom na taster \"Napredno\" omoguæiæete sebi da vidite druge\n"
 "jezike koje mo¾ete instalirati na va¹u radnu stranicu. Biranjem drugih "
@@ -2057,10 +1853,18 @@ msgstr ""
 "oznaèite i \"©paniski|©panija\".\n"
 "\n"
 "Zapamtite da mo¾ete instalirati vi¹e jezika. Kada izaberete sve ¾eljene\n"
-"dodatne lokalizacije kliknite na taster \"U redu\" da bi nastavili."
+"dodatne lokalizacije kliknite na taster \"U redu\" da bi nastavili.\n"
+"\n"
+"Da bi menjali razlièite jezike koji su instalirani na va¹em sistemu, mo¾ete "
+"pokrenuti\n"
+" \"/usr/sbin/localedrake\" komandu kao \"root\" da bi promenili jezik koji "
+"se \n"
+"koristi u celom sistemu. pokretanjem komande kao regularni korisnik samo "
+"æete promeniti\n"
+"postavke jezika za datog korisnika."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Depending on the default language you chose in Section , DrakX will\n"
 "automatically select a particular type of keyboard configuration. However,\n"
@@ -2088,7 +1892,11 @@ msgstr ""
 "odgovarajuæu tastaturu sa liste.\n"
 "\n"
 "Kliknite na taster \"Jo¹\" da bi dobili kompletnu listu\n"
-"podr¾anih tastatura."
+"podr¾anih tastatura.\n"
+"\n"
+"Ukoliko izaberete raspored tastature baziran na non-Latin alfabetu, sledeæi\n"
+"dijalog æe vam ponuditi da izaberete kombinaciju tastera koji æe slu¾iti\n"
+"da menjate Latin i non-Latin rasporede."
 
 #: ../../help.pm:1
 #, c-format
@@ -2114,6 +1922,32 @@ msgid ""
 "running version \"8.1\" or later. Performing an Upgrade on versions prior\n"
 "to Mandrake Linux version \"8.1\" is not recommended."
 msgstr ""
+"Ovaj korak se aktivira samo u sluèaju da postoji stara GNU/Linux particija "
+"na\n"
+"va¹ioj mo¹ini.\n"
+"\n"
+"DrakX sada treba da zna da li ¾elite da izvedete èistu instalaciju ili "
+"a¾uriranje\n"
+"postojeæeg Mandrake Linux sistema:\n"
+"\n"
+" * \"Instalacija\": U veæini sluèajeva, ova opcija kompletno bri¹e stari\n"
+"sistem. Ukoliko ¾elite da izmenite broj particija, ili\n"
+"promenite fajl sistem, trebali bi da koristite ovu opciju. Ipak,  u "
+"zavisnosti od\n"
+"¹eme particija, mo¾ete za¹tititi neke postojeæe podatke\n"
+"od formatiranja.\n"
+"\n"
+" * \"A¾uriranje\": ova instalaciona klasa vam dozvoljava da uradite "
+"a¾uriranje paketa\n"
+"na trenutno instaliranom Mandrake Linux sistemu. Va¹a trenutna\n"
+"¹ema particija i korisnièki podaci se ne menjaju. Veæina drugih\n"
+"konfiguracionih koraka i dalje ostaje dostupna, slièno standardnoj "
+"instalaciji.\n"
+"\n"
+"Upotreba opcije ``A¾uriranje'' bi trebalo da bude bez problema na Mandrake "
+"Linux sistemima\n"
+"od verzije \"8.1\" ili novije. Izvoðenje a¾uriranja na verzijama \n"
+"Mandrake Linux pre \"8.1\" nije preporuèljivo."
 
 #: ../../help.pm:1
 #, c-format
@@ -2121,6 +1955,8 @@ msgid ""
 "\"Country\": check the current country selection. If you are not in this\n"
 "country, click on the button and choose another one."
 msgstr ""
+"\"Dr¾ava\": proverava trenutni izbor zemlje. Ukoliko se ne nalazite u ovojs\n"
+"dr¾avi, kliknite na taster i i izaberite drugu."
 
 #: ../../help.pm:1
 #, c-format
@@ -2188,7 +2024,7 @@ msgstr ""
 "ili particija se zove \"C:\")."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to choose which partition(s) will be used for the\n"
 "installation of your Mandrake Linux system. If partitions have already been\n"
@@ -2286,6 +2122,8 @@ msgstr ""
 "swap particije na slobodnom prostoru \n"
 "     hard diska.\n"
 "\n"
+"\"Jo¹\": daje pristup dodatnim opcijama:\n"
+"\n"
 "   * \"Spasi tabelu particija\": ukoliko je va¹a tabela particija "
 "o¹teæena, \n"
 "mo¾ete da probate da je oporavite koristeæi ovu opciju. Budite\n"
@@ -2312,6 +2150,8 @@ msgstr ""
 "   * \"Uraðeno\": kada zavr¹ite sa particioniranjem hard diska, iskoristite "
 "ovu opciju da bi snimili promene.\n"
 "\n"
+"Kada defini¹ete velièinu particija, mo¾ete konaèno podesiti velièinu\n"
+"particija pomoæu tastera sa strelicama na va¹oj strelicama\n"
 "Za vi¹e informacija, mo¾ete za svaku ocpiju  dobiti kretanjem pomoæu "
 "tastature: navigacijom kroz particije pomoæu [Tab] tastera i [Up/Down] "
 "strelica.\n"
@@ -2324,6 +2164,10 @@ msgstr ""
 "\n"
 " * Ctrl-m za postavljanje taèke montiranja.\n"
 "\n"
+"Da bi dobili informacije o razlièitim dostupnim tipovima sistema, "
+"proèitajte\n"
+"ext2FS poglavlje iz ``Upustva''.\n"
+"\n"
 "Ukoliko radite instalaciju na PPC Ma¹inu, mo¾da æete ¾eleti da kreirate "
 "malu\n"
 "HFS 'bootstrap' particiju od najmanje 1MB za upotrebu\n"
@@ -2332,7 +2176,7 @@ msgstr ""
 "rezervnog kernela i ramdisk image za startanje u hitnim situacijama."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, DrakX will allow you to choose the security level desired\n"
 "for the machine. As a rule of thumb, the security level should be set\n"
@@ -2344,17 +2188,18 @@ msgid ""
 "\n"
 "If you do not know what to choose, keep the default option."
 msgstr ""
-"Na ovom mestu, vreme je da izaberete ¾eljeni nivo sigurnosti za va¹u\n"
-"ma¹inu. Kako pravilo nala¾e, ¹to je ma¹ina vi¹e izlo¾ena, i ¹to je vi¹e\n"
-"podataka koji su ubaèeni znaèajniji, mora biti i veæi nivo sigurnosti.\n"
-"Ipak, veæi nivo sigurnosti ida na u¹trb brzine i\n"
-"lakoæe upotrebe. Pogledajte MSEC poglavlje u ``Upustvu'' da\n"
-"bi dobili vi¹e informacija o znaèenju ovih nivoa.\n"
+"na ovom mestu, DrakX æe vam dozvoliti da odredite ¾eljeni nivo sigurnosti\n"
+"za va¹ raèunar. Kao nepisano pravilo, nivo sigurnosti bi trebao\n"
+"veæi ukoliko ma¹ina sadr¾i va¾ne podatke, ili ukoliko je ma¹ina\n"
+"direktno vezana na Internet. Spu¹tanje sigurnosti uglavnom\n"
+"se vidi u opveæanju lakoæe rada sa sistemom. Pogledajte \"msec\"\n"
+"poglavlje u ``Upupstvo za komandnu liniju''da bi dobavili vi¹e informacija\n"
+"o nivioima sigurnosti.\n"
 "\n"
-"Ukoliko ne znate ¹ta da izaberete, ostanite na default opciji."
+"Ukoliko ne znate da izaberete, zadr¾ite default postavku."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
@@ -2373,7 +2218,7 @@ msgstr ""
 "biti ispravljeni, a sigurnosni propusti zatvorene. Da bi mogli da koristite "
 "ove novije verzije\n"
 "mi vam predla¾emo da ih skinete sa Interneta. Izaberite\n"
-"Da ili \"Yes\" ukoliko imate pode¹enu Internet konekciju, ili Ne ili \"No\" "
+"Da ili \"Da\" ukoliko imate pode¹enu Internet konekciju, ili Ne ili \"No\" "
 "ukoliko vi¹e volite da\n"
 "instalirate te nove pakete kasnije.\n"
 "\n"
@@ -2381,12 +2226,11 @@ msgstr ""
 "verzije \n"
 "paketa. Izaberite mesto koje vam je najbli¾e. Zatim æe se pojaviti stablo sa "
 "slelekcijom paketa:\n"
-"pregledajte selekciju, i pritisnite Instaliraj ili \"Install\" da bi skinuli "
-"i\n"
-"instalirali selektovni(e) paket(e), ili \"Cancel\" za odustajanje."
+"pregledajte selekciju, i pritisnite \"Instaliraj\" da bi skinuli i\n"
+"instalirali selektovni(e) paket(e), ili \"Poni¹ti\" za odustajanje."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Any partitions that have been newly defined must be formatted for use\n"
 "(formatting means creating a file system).\n"
@@ -2423,28 +2267,26 @@ msgstr ""
 "\n"
 "\n"
 "Zapamtite da nije potrebno da reformatirate sve postojeæe particije.\n"
-"Morate da reformatirate particije koje sadr¾e operativni sistem (kao ¹to su "
-"\"/\",\n"
-"\"/usr\" ili  \"/var\") ali ne morate da reformatirate particije koje sadr¾e "
-"podatke\n"
+"Morate da reformatirate particije koje sadr¾e operativni sistem \n"
+"(kao ¹to su \"/\", \"/usr\" ili  \"/var\") ali ne morate da reformatirate "
+"particije koje sadr¾e podatke\n"
 "koje ¾elite da zadr¾ite (obièno /home).\n"
-"\n"
 "\n"
 "Pazite pri biranju particija, posle formatiranja, sv podaci æe \n"
 "biti izbrisani i neæete ih moæi povratiti.\n"
 "\n"
+"Kliknite na \"Sledeæe ->\" kada bude spremni da formatirate particije\n"
 "\n"
-"Kliknite na \"U redu\" kada budete spreni za formatiranje particija.\n"
+"Kliknite na \"<- Prethodno\" ako ¾elite da izaberete drugu particiju za svoj "
+"novi\n"
+"Mandrake Linux sistem.\n"
 "\n"
-"\n"
-"Kliknite na  \"Poni¹ti\" ukoliko ¾elite da izabereete druge particije za "
-"instalaciju novog\n"
-"Mandrake Linux operativnog sistema. Kliknite na \"Napredno\" ukoliko ¾elite "
-"da izaberete particije koje æe biti proverene\n"
-"od lo¹ih blokova na disku."
+"Kliknite na \"Napredno\" ukoliko ¾elite da izaberete particije koje æe biti "
+"proverene\n"
+"da li imaju lo¹e sektore."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "There you are. Installation is now complete and your GNU/Linux system is\n"
 "ready to use. Just click \"Next ->\" to reboot the system. The first thing\n"
@@ -2479,7 +2321,7 @@ msgid ""
 msgstr ""
 "I stigli ste do kraja. Instalacija je sada zavr¹ena i va¹ GNU/Linux sistem "
 "je \n"
-"spreman za upotrebu. Samo kliknite na U redu ili \"OK\" da bi restartovali "
+"spreman za upotrebu. Samo kliknite na \"Sledeæi -\" da bi restartovali "
 "sistem. Mo¾ete pokrenuti\n"
 "GNU/Linux ili Windows, ¹ta god vi¹e preferirate (ukoliko imate instalirana "
 "dva sistema), èim\n"
@@ -2520,7 +2362,7 @@ msgstr ""
 "\"mformat a:\")"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to decide where you want to install the Mandrake\n"
 "Linux operating system on your hard drive. If your hard drive is empty or\n"
@@ -2662,17 +2504,19 @@ msgstr ""
 "   !! Ukoliko izaberete ovu opciju, svi podaci na disku æe biti "
 "izgubljeni. !!\n"
 "\n"
-"* \"Ekspertni mod\": ukoliko ¾elite da ruèno particionirate hard disk, "
-"mo¾ete da \n"
-"izaberete ovu opciju. Budite pa¾ljivi pre nego\n"
-"izaberete ovu pociju. ¹er je ovo dobra ali i opasna stvar. Mo¾ete lako \n"
-"izgubiti sve podatke. Dakle,\n"
-"nemojte birati ovu opciju ukoliko ne znate ¹ta radite."
+" * \"Custom particionisanje diska\": izaberite ovu opciju ukoliko ¾elite\n"
+"da ruèno va¹ hard disk. Budite pa¾ljivi -- ovo je moæan\n"
+"ali opasan izbor i vrlo lako mo¾ete izgubiti svoje podatke. Zbog toga se\n"
+"ova opcija preporuèuje samo onima koji imaju iskustva\n"
+"od ranije. Za vi¹e podataka o tome kako da koristite\n"
+"program DiskDrake, pogledajte poglavlje ``Upravljajte svojim particijama '' "
+"u\n"
+"``Poèetnièki vodiè''."
 
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -2749,6 +2593,9 @@ msgid ""
 "without 3D acceleration, you are then proposed to choose the server that\n"
 "best suits your needs."
 msgstr ""
+"U sluèaju da su dostupni razlièiti serveri za va¹u karticu, sa ili\n"
+"bez 3D akceleracije, najbolje je da izaberete server koji\n"
+"najvi¹e odgovara va¹im potrebama."
 
 #: ../../help.pm:1
 #, c-format
@@ -2757,7 +2604,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 
@@ -2770,6 +2617,11 @@ msgid ""
 "monitor connected to your machine. If it is not the case, you can choose in\n"
 "this list the monitor you actually own."
 msgstr ""
+"Monitor\n"
+"\n"
+"   Program za instalaciju obièno automatski detektuje i pode¹ava\n"
+"monitor povezan na va¹u ma¹inu. Ukoliko se to nedesi, mo¾ete sami\n"
+"sami da izaberete model monitora sa liste."
 
 #: ../../help.pm:1
 #, c-format
@@ -2803,7 +2655,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -2840,9 +2692,19 @@ msgid ""
 "without 3D acceleration, you are then proposed to choose the server that\n"
 "best suits your needs."
 msgstr ""
+"Grafièka kartica\n"
+"\n"
+"   Program za instalaciju obièno automatski detektuje i pode¹ava\n"
+"grafièku kartu koja je instalirana u va¹oj ma¹ini. Ukoliko to nije sluèaj, "
+"mo¾ete\n"
+"da je izaberete sami sa liste ponuðenih kartica.\n"
+"\n"
+"   U sluèaju da je vi¹e grafièkih servera dostupno za va¹u karticu, sa ili\n"
+"bez 3D akceleracije, onda sami odaberite onu koja najbolje odgovara\n"
+"va¹im potrebama."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it to\n"
 "local time according to the time zone you selected. If the clock on your\n"
@@ -2877,7 +2739,7 @@ msgstr ""
 "strane drugih ma¹ina na va¹oj lokalnoj mre¾i."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This step is used to choose which services you wish to start at boot time.\n"
 "\n"
@@ -2898,7 +2760,7 @@ msgstr ""
 "Sada mo¾ete odabrati koje servise ¾elite da se startaju pri podizanju "
 "sistema.\n"
 "\n"
-"Ovde su prikazani svi dostupni servisi na trenutnoj\n"
+"DrakX æe prikazati sve dostupni servise na trenutnoj\n"
 "instalaciji. Pregledajte ih pa¾ljivo i deselektujte one koji vam neæe biti "
 "uvek\n"
 "potrebni pri podizanju sistema.\n"
@@ -2923,9 +2785,15 @@ msgid ""
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation."
 msgstr ""
+"\"©tampaè\": ako kliknete na taster \"Bez ¹tampaèa\" pokrenuti æete "
+"konfiguracioni\n"
+"program za ¹tampaèe. Pogledajte i odgovoarajuæe upustvo u``Starter\n"
+"Guide'' za vi¹e informacija o tome kako da podesite novi ¹tampaè. Program "
+"koje se\n"
+"tada aktivira je slièan onom koji se koristi tokom instalacije."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You will now set up your Internet/network connection. If you wish to\n"
 "connect your computer to the Internet or to a local network, click \"Next\n"
@@ -2949,15 +2817,15 @@ msgstr ""
 "Sada treba da podesite va¹u Internet/mre¾nu konekciju. Ukoliko\n"
 "¾elite da konektujete svoj kompjuter na Internet ili na lokalnu mre¾u, "
 "kliknite\n"
-"\"OK\" ili U redu. Nakon toga æe se pokrenuti autodetekcija mre¾nih ureðaja "
-"i modema. Ukoliko\n"
+"\"Sledeæi ->\". Nakon toga æe se pokrenuti autodetekcija mre¾nih ureðaja i "
+"modema. Ukoliko\n"
 "ova autodetekcija ne uspe, deselektujte \"Koristi autodetekciju\" sledeæi "
 "put.Vi\n"
 "takoðe mo¾ete izabrati da ne pode¹avate mre¾u sada , nego kasnije; u tom "
 "sluèaju,\n"
-"jednostavno kliknite na taster \"Cancel\" ili Poni¹ti.\n"
+"jednostavno kliknite na taster \"Poni¹ti\".\n"
 "\n"
-"Mandrake Linux nudi pode¹avanje Internet konekcije u\n"
+"Ovaj program nudi pode¹avanje Internet konekcije u\n"
 "toku instalacije. Moguæe konekcije su: tradicionalni modem, ISDN\n"
 "modem, ADSL konekcija, kablovski modem, i na kraju jednostavna LAN "
 "konekcija\n"
@@ -2965,18 +2833,16 @@ msgstr ""
 "\n"
 "Ovde neæemo detaljno opisivati svaku konfiguraciju. Jednostavno proverite da "
 "li imate\n"
-"sve parametre od va¹eg Internet Provajdera ili sistemskog\n"
-"administratora.\n"
+"sve parametre, kao ¹to su IP adresa, default gateway, DNS serveri, itd. \n"
+"od va¹eg Internet Provajdera ili sistemskog administratora.\n"
 "\n"
-"Mo¾ete konsultovati i deo upustva o Internet konekcijama za detalje\n"
+"Mo¾ete konsultovati i deo upustva o Internet konekcijama ``Starter Guide'' "
+"za detalje\n"
 "o konfiguraciji, ili jednostavno saèekajte da vam se sistem instalira i\n"
-"onda pokrenite program koji je tamo opisan za pode¹avanje va¹e konekcije.\n"
-"\n"
-"Ukoliko ¾elite da mre¾u nakon isntalacije ili ste zavr¹ili\n"
-"konfigurisanje mre¾ne konekcije, kliknite na Poni¹ti ili \"Cancel\"."
+"onda pokrenite program koji je tamo opisan za pode¹avanje va¹e konekcije."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you told the installer that you wanted to individually select packages,\n"
 "it will present a tree containing all packages classified by groups and\n"
@@ -3018,14 +2884,7 @@ msgstr ""
 "grupe, podgrupe, ili individualne pakete.\n"
 "\n"
 "Kada kod selektujete paket na stablu, opis se pojavljuje sa desne\n"
-"strane. Kada je va¹a selekcija zavr¹ena, kliknite na Instalacija \"Install\" "
-"taster koji\n"
-"æe pokreuti instalacioni proces. U zavisnosti brzine va¹eg\n"
-"hardvera i broja paketa koje treba da se instaliraju, instalacija mo¾e\n"
-"i potrajati. Procenjeno vreme do zavr¹etka instalacije je prikazano\n"
-"na ekranu da bi vam pomoglo da vi¹ak vremena iskoristite da popijete ¹olju "
-"èaja ili\n"
-"kafe.\n"
+"strane. da bi mogli da se upoznate namenom paketa.\n"
 "\n"
 "!! Ukoliko je server paket izabran sluèajno ili kao deo\n"
 "cele grupe, biæete upitani da li zaista ¾elite da instalirate\n"
@@ -3040,9 +2899,9 @@ msgstr ""
 "instalirati prikazane servis i oni æe biti pokrenuti automatski po\n"
 "default-u. !!\n"
 "\n"
-"Opcija Automatske zavisnosti ili \"Automatic dependencies\" jednostavno "
-"iskljuèuje dijalog sa upozorenjem\n"
-"koji se javlja svaki put kada instaer automatski selektuje pakete. Ovo se\n"
+"Opcija  \"Automatske meðuzavisnosti\" jednostavno iskljuèuje dijalog sa "
+"upozorenjem\n"
+"koji se javlja svaki put kada instaler automatski selektuje pakete. Ovo se\n"
 "javlja zato ¹to on odreðuje da mora da zadovolji zavisnosti sa drugim\n"
 "paketom da bi uspe¹no zavr¹io instalaciju.\n"
 "\n"
@@ -3054,7 +2913,7 @@ msgstr ""
 "takvu disketu."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "It is now time to specify which programs you wish to install on your\n"
 "system. There are thousands of packages available for Mandrake Linux, and\n"
@@ -3110,22 +2969,20 @@ msgstr ""
 "Sada je vreme da odredimo koje programe ¾elite da instalirate na va¹\n"
 "sistem. Postoje hiljade paketa dostupnih za instalaciju na Mandrake Linux, "
 "i \n"
-"predpostavljamo da ne morate da ih sve poznajete, naravno.\n"
-"\n"
-"Ukoliko izvodite standardnu instalaciju sa CDROM-a, prvo æete biti\n"
-"upitani da specificirate koje CD-ove imate (samo u Expert modu). Proverite\n"
-"oznake na CD-ovima i oznaèite one koje posedujete\n"
-"za instalaciju. Kliknite na U redu \"OK\" kada ste spremni da nastavite.\n"
+"da bi ih uèinili dostupnijim, smeðteni su u grupe sliènih aplikacija.\n"
 "\n"
 "Paketi su sortirani u grupe u odnosu na odgovarajuæu upotrebu na va¹oj\n"
-"ma¹ini. Same grupe su sortirane u èetiri sekcije:\n"
+"ma¹ini. Same grupe su sortirane u èetiri klase. Ove klase mo¾ete posmatrati\n"
+"kao kontejnere za razlièite pakete\n"
+"Mo¾ete me¹ati aplikacije iz razlièitih kontejnera, tako da\n"
+"iinstalacija ``Radna stanica'' mo¾e da sadr¾i aplikacije iz \n"
+"kontejnera ``Razvojna stanica'' .\n"
 "\n"
 " * \"Radna stanica\": ukoliko planirate da koristite va¹u ma¹inu kao radnu "
 "stanicu, izaberite jednu ili vi¹e odgovarajuæih grupa.\n"
 "\n"
-" * \"Razvoj\": ukoliko ma¹ina treba da se koristi za programiranje, "
-"izaberite ¾eljenu(e)\n"
-"grupu(e).\n"
+" * \"Razvojna stanica\": ukoliko ma¹ina treba da se koristi za "
+"programiranje, izaberite ¾eljenu(e) grupu(e).\n"
 "\n"
 " * \"Server\": ukoliko æe se ma¹ina koristiti kao server, moæi æete da \n"
 "izaberete koje od najèe¹æih servisa¾elite da instalirate na\n"
@@ -3153,19 +3010,18 @@ msgstr ""
 "zauzima\n"
 "samo 65 Mb\n"
 "\n"
-"Mo¾ete selektovati i Pojedinaèno biranje paketa \"Individual package "
-"selection\", koje je korisno ukoliko\n"
+"Mo¾ete selektovati i  \"Pojedinaèno biranje paketa\", koje je korisno "
+"ukoliko\n"
 "su vam poznati ponuðeni paketi i ¾elite da imate potpunu \n"
 "kontrolu nad svim ¹to æe biti instalirano.\n"
 "\n"
-"Ukoliko ste pokrenuli a¾uriranje ili \"Upgrade\" mod, mo¾ete deselektovati "
-"sve\n"
+"Ukoliko ste pokrenuli mod \"A¾uriranje\",  mo¾ete deselektovati sve\n"
 "grupe da bi izbegli instalaciju bilo kog novog paketa. Ovo je korisno za "
 "popravljanje ili\n"
 "a¾uriranje postojeæeg sistema."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The Mandrake Linux installation is distributed on several CD-ROMs. DrakX\n"
 "knows if a selected package is located on another CD-ROM so it will eject\n"
@@ -3178,7 +3034,7 @@ msgstr ""
 "trenutni CD te tra¾iti od vas da ubacite odgovarajuæi."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Here are Listed the existing Linux partitions detected on your hard drive.\n"
 "You can keep the choices made by the wizard, since they are good for most\n"
@@ -3218,22 +3074,19 @@ msgstr ""
 "da\n"
 "instalirate ovoljno softvera. Ukoliko ¾elite da podatke staviljate na "
 "posebnu particiju ,\n"
-"morate da izaberetei i \"/home\" (moguæe je ukoliko imate vi¹e od jedne\n"
+"morate da izaberete i \"/home\" (moguæe je ukoliko imate vi¹e od jedne\n"
 "Linux particije).\n"
 "\n"
 "\n"
 "Informacija: svaka particija je prikazana na sledeæi naèin: \"Ime\", "
 "\"Kapacitet\".\n"
 "\n"
-"\n"
 "\"Ime\" je kodirano na sledeæi naèin: \"tip hard diska\", \"broj hard diska"
 "\",\n"
 "\"proj particije\" (na primer, \"hda1\").\n"
 "\n"
-"\n"
 "\"Tip hard diska\" je \"hd\" ukoliko je hard disk IDE ureðaj i  \"sd\"\n"
 "ukoliko je SCSI hard disk.\n"
-"\n"
 "\n"
 "\"Broj hard diska\" je uvek slovo posle \"hd\" ili \"sd\". Za IDE hard "
 "diskove:\n"
@@ -3247,11 +3100,12 @@ msgstr ""
 "   * \"d\" znaèi \"slave hard disk na sekundarnom IDE kontroleru\".\n"
 "\n"
 "\n"
-"Sa SCSI hard diskovima, a \"a\" znaèi \"primarni hard disk\", a \"b\" znaèi "
+"Sa SCSI hard diskovima, a \"a\" znaèi \"primarni hard disk\", a \"b\" "
+"znaèi \n"
 "\"sekundarni hard disk \", itd..."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "GNU/Linux is a multi-user system, meaning each user can have their own\n"
 "preferences, their own files and so on. You can read the ``Starter Guide''\n"
@@ -3318,17 +3172,29 @@ msgstr ""
 "opu¹tanje\n"
 "- nakon svega, va¹i fajlovi su u pitanju.\n"
 "\n"
-"Ukoliko kliknete na Prihvati korisnika \"Accept user\", mo¾ete dodati jo¹ "
-"korisnika. Dodajte\n"
+"Ukoliko kliknete na \"Prihvati korisnikar\", mo¾ete dodati jo¹ korisnika. "
+"Dodajte\n"
 "korisnika za svakog va¹eg prijatelja: za va¹eg oca ili sestru, na\n"
-"primer. Kada zar¹ite dodavanje svih ¾eljenih korisnika, izaberite Zvr¹eno "
-"\"Done\".\n"
+"primer. Kada zar¹ite dodavanje svih ¾eljenih korisnika, izaberite \"Zavr¹eno"
+"\".\n"
 "\n"
-"Klikom na taster Napredno \"Advanced\" mo¾ete izmeniti default \"shell\"\n"
-"za trenutnog korisnika (bash po default)."
+"Klikom na taster Napredno \"Napredno opcije\" mo¾ete izmeniti default \"shell"
+"\"\n"
+"za trenutnog korisnika (bash po default). \n"
+"\n"
+"Kada zavr¹ite sa dodavanjem korisnika, raèunar æe tra¾iti da izaberete "
+"korisnika\n"
+"koji æe se automatski prijavljivati na sistem pri njegovom startanju. "
+"Ukoliko\n"
+"vas zanima ova moguænost (i ne vodite mnogo raèuna o lokalnoj\n"
+"sigurnosti), izaberite ¾eljenog korisnika i window mena¾er, a zatim kliknite "
+"na \"Sledeæi\n"
+"->\". Ukoliko niste zainteresovani za ovu opciju, deselektujte  \"Da li "
+"¾elite\n"
+"da koristite ovu opciju?\" ."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Before continuing, you should carefully read the terms of the license. It\n"
 "covers the entire Mandrake Linux distribution. If you do agree with all the\n"
@@ -3336,11 +3202,10 @@ msgid ""
 "computer."
 msgstr ""
 "Pre nego ¹to nastavite pa¾ljivo proèitajte uslove licence. Ona\n"
-"pokriva celu Mandrake Linux distribuciju, i ukoliko se ne sla¾ete\n"
-"sa svim uslovima koji se nalaze u njoj, kliknite na \"Odbijam\" taster koji "
-"æe odmah\n"
-"zaustaviti instalaciju. Da bi nastavili sa instalacijom, kliknite \n"
-"taster \"Prihvatam\"."
+"pokriva celu Mandrake Linux distribuciju, i ukoliko se  sla¾ete\n"
+"sa svim uslovima koji se nalaze u njoj, kliknite na \"Prihvatam\" taster\n"
+"Ukoliko ne prihvatate, jednostavno iskljuèite \n"
+"raèunar."
 
 #: ../../install2.pm:1
 #, c-format
@@ -3412,18 +3277,20 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Ne"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Da"
 
 #: ../../install_any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
 "\n"
@@ -3448,14 +3315,14 @@ msgstr ""
 "Da li zaista ¾elite da instalirate ove servise?\n"
 
 #: ../../install_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "System configuration"
-msgstr "Custom konfiguracija"
+msgstr "Konfiguracija sistema"
 
 #: ../../install_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "System installation"
-msgstr "SILO instalacija"
+msgstr "Instalacija sistema"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3524,11 +3391,18 @@ msgid "Remove Windows(TM)"
 msgstr "Ukloni Windows(TM)"
 
 #: ../../install_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
-"Ne postoje FAT particije kojima se mo¾e promeniti velièina ili koje se mogu "
-"korisititi za loopback (ili nema dovoljno slobodnog prostora)"
+"Ne postoje FAT particije kojima se mo¾e promeniti velièina  (ili nema "
+"dovoljno slobodnog prostora)"
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3585,9 +3459,9 @@ msgstr ""
 "Va¹a Windows particija je previ¹e fragmentirana, prvo pokrenite ``defrag''"
 
 #: ../../install_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Computing the size of the Windows partition"
-msgstr "Korisiti slobodan prostor na Windows particiji"
+msgstr "Proraèunavam velièinu Windows particije"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3610,11 +3484,11 @@ msgid "Use the free space on the Windows partition"
 msgstr "Korisiti slobodan prostor na Windows particiji"
 
 #: ../../install_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
-"Ne postoje FAT particije kojima se mo¾e promeniti velièina ili koje se mogu "
-"korisititi za loopback (ili nema dovoljno slobodnog prostora)"
+"Ne postoje FAT particije kojima se mo¾e promeniti velièina (ili nema "
+"dovoljno slobodnog prostora)"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3731,9 +3605,9 @@ msgstr ""
 "poglavlju zvaniènog Mandrake Linux 'Vodièa za korisnike'."
 
 #: ../../install_messages.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "http://www.mandrakelinux.com/en/91errata.php3"
-msgstr "http://www.mandrakelinux.com/en/90errata.php3"
+msgstr "http://www.mandrakelinux.com/en/91errata.php3"
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -4041,6 +3915,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "Pokreæem korak `%s'\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Help"
+msgstr "Pomoæ"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "not configured"
+msgstr "nije pode¹eno"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Podesi"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -4093,9 +3987,9 @@ msgid "%d packages"
 msgstr "%d paketa"
 
 #: ../../install_steps_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "No details"
-msgstr "Detalji"
+msgstr "Bez detalja"
 
 #: ../../install_steps_gtk.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1
@@ -4254,14 +4148,6 @@ msgstr "Sledeæi  ->"
 msgid "Individual package selection"
 msgstr "Pojedinaèno biranje paketa"
 
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "Pomoæ"
-
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Package Group Selection"
@@ -4317,9 +4203,9 @@ msgid "Generate auto install floppy"
 msgstr "Kreiraj auto instalacionu disketu"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Reboot"
-msgstr "Root"
+msgstr "Restart"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4384,7 +4270,7 @@ msgid "Do you want to use aboot?"
 msgstr "Da li ¾elite da koristite aboot ?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown\n"
 " machine, the yaboot bootloader will not work for you.\n"
@@ -4393,8 +4279,8 @@ msgid ""
 msgstr ""
 "Po¹to izgleda da imate staromodnu ili nepoznatu \n"
 " ma¹inu, yaboot starter neðe raditi kod vas.\n"
-"Instalacija ðe biti nastavljena, ali ðete morati da\n"
-" BootX da bi podigli sistem"
+"Instalacija æe biti nastavljena, ali æete morati da\n"
+"koristite  BootX ili ne¹to drugo da bi podigli sistem"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4505,12 +4391,13 @@ msgstr "Autentifikacija"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Ova lozinka je suvi¹e jednostavna (treba da ima bar %d znakova)"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "Bez lozinke"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "Unesi root lozinku"
@@ -4518,7 +4405,7 @@ msgstr "Unesi root lozinku"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
-msgstr ""
+msgstr "Niste podesili X. Da li ste sigurni da ¾elite to?"
 
 #: ../../install_steps_interactive.pm:1 ../../services.pm:1
 #, c-format
@@ -4542,24 +4429,24 @@ msgid "Bootloader"
 msgstr "Starter"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Boot"
-msgstr "Root"
+msgstr "Startanje"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "disabled"
-msgstr "onemoguæi"
+msgstr "onemoguæeno"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "activated"
-msgstr "Aktiviraj sad"
+msgstr "Aktivirano"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Firewall"
-msgstr "Server, Firewall/Router"
+msgstr "Za¹titni zid (Firewall)"
 
 #: ../../install_steps_interactive.pm:1 ../../steps.pm:1
 #, c-format
@@ -4567,14 +4454,9 @@ msgid "Security"
 msgstr "Sigurnost"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "Security Level"
-msgstr "Nivo sigurnosti:"
-
-#: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "not configured"
-msgstr "nije pode¹eno"
+msgid "Security Level"
+msgstr "Nivo sigurnosti"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -4582,9 +4464,9 @@ msgid "Network"
 msgstr "Mre¾a"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network & Internet"
-msgstr "Mre¾ni interfejs"
+msgstr "Mre¾a i Internet"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4592,9 +4474,9 @@ msgid "Graphical interface"
 msgstr "Grafièki interfejs"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Hardware"
-msgstr "HardDrake"
+msgstr "Hardver"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4680,6 +4562,16 @@ msgid "Which is your timezone?"
 msgstr "Koja je va¹a vremenska zona ?"
 
 #: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "Da li biste da podesite ¹tampaè?"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Unable to contact mirror %s"
+msgstr "Ne mogu da forkujem: %s"
+
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Kantaktirajte mirror za listu moguæih paketa"
@@ -4697,7 +4589,7 @@ msgstr ""
 "KOntaktirajte Mandrake Linux web sajt da bi dobili listu dostupnih mirror-a"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
 "have been updated after the distribution was released. They may\n"
@@ -4760,6 +4652,11 @@ msgstr ""
 "Ukoliko imate gore navedene CD-ove, kliknite na  Ok.\n"
 "Ukoliko nemate nijedan CD, kliknite na  Cancel.\n"
 "Ako vam nedostaju  samo neki CD-ovi , deselektujte ix, a onda kliknite na Ok."
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "Sve"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4838,6 +4735,11 @@ msgstr "Va¹ sistem nema dovoljno mesta za instalaciju ili a¾uriranje (%d > %d)"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "Tra¾im pakete"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Tra¾im pakete za a¾uriranje..."
 
@@ -4845,11 +4747,6 @@ msgstr "Tra¾im pakete za a¾uriranje..."
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Tra¾im veæ instalirane pakete..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "Tra¾im pakete"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4962,13 +4859,8 @@ msgstr "Izaberite tip mi¹a."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Upgrade"
-msgstr "A¾uriranje"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
 msgid "Upgrade %s"
-msgstr "A¾uriranje"
+msgstr "A¾uriranje %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4990,15 +4882,19 @@ msgstr "Ovde je predstavljena cela lista dostupnih tastatura"
 msgid "Please choose your keyboard layout."
 msgstr "Izaberite  raspored tastature."
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Kraj"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr "LIcencirani ugovor"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "default:LTR"
-msgstr "default"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5213,14 +5109,14 @@ msgid "Thai keyboard"
 msgstr " Thai tastatura"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Tamil (Typewriter-layout)"
-msgstr "Jermenski (typewriter)"
+msgstr "Tamilski (raspored na pisaæoj ma¹ini)"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Tamil (ISCII-layout)"
-msgstr "Tamilski (TSCII)"
+msgstr "Tamilski (ISCII-raspored)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -5554,6 +5450,11 @@ msgstr "Azerbejdzan  (latinica)"
 
 #: ../../keyboard.pm:1
 #, c-format
+msgid "Arabic"
+msgstr "Arapski"
+
+#: ../../keyboard.pm:1
+#, c-format
 msgid "Armenian (phonetic)"
 msgstr "Jermenski (fonetski)"
 
@@ -5598,9 +5499,9 @@ msgid "South Africa"
 msgstr "Ju¾na Afrika"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Serbia"
-msgstr "serijski"
+msgstr "Srbija"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5618,9 +5519,9 @@ msgid "Samoa"
 msgstr "Samoa"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Wallis and Futuna"
-msgstr "Valis i Futuna Ostrva"
+msgstr "Valis i Futuna"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5628,7 +5529,7 @@ msgid "Vanuatu"
 msgstr "Vanuatu"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Vietnam"
 msgstr "Vijetnam"
 
@@ -5653,9 +5554,9 @@ msgid "Saint Vincent and the Grenadines"
 msgstr "Sveti Vinsent i Grenandini"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Vatican"
-msgstr "Letonski"
+msgstr "Vatikan"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5685,12 +5586,12 @@ msgstr "Ukrajina"
 #: ../../lang.pm:1
 #, c-format
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzanija"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Taiwan"
-msgstr "Tajland"
+msgstr "Tajvan"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5768,9 +5669,9 @@ msgid "Swaziland"
 msgstr "Svazilend"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Syria"
-msgstr "Surinam"
+msgstr "Sirija"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5858,9 +5759,9 @@ msgid "Rwanda"
 msgstr "Ruanda"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Russia"
-msgstr "Ruski"
+msgstr "Rusija"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5893,9 +5794,9 @@ msgid "Portugal"
 msgstr "Portugal"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Palestine"
-msgstr "Selekcija putanje"
+msgstr "Palestina"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6103,9 +6004,9 @@ msgid "Morocco"
 msgstr "Maroko"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Libya"
-msgstr "Liberija"
+msgstr "Libija"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6153,9 +6054,9 @@ msgid "Lebanon"
 msgstr "Liban"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Laos"
-msgstr "Logovi"
+msgstr "Laos"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6173,14 +6074,14 @@ msgid "Kuwait"
 msgstr "Kuvajt"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Korea"
-msgstr "Jo¹"
+msgstr "Koreja"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Korea (North)"
-msgstr ""
+msgstr "Koreja (Severna)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6218,7 +6119,7 @@ msgid "Japan"
 msgstr "Japan"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Jordan"
 msgstr "Jordan"
 
@@ -6233,9 +6134,9 @@ msgid "Iceland"
 msgstr "Island"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Iran"
-msgstr "Irak"
+msgstr "Iran"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6288,9 +6189,9 @@ msgid "Honduras"
 msgstr "Honduras"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Heard and McDonald Islands"
-msgstr "Herdova Ostrva i McDonald Ostrva"
+msgstr "Herdova i McDonald Ostrva"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6318,7 +6219,7 @@ msgid "Guatemala"
 msgstr "Gvatemala"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Ju¾na D¾ord¾ija i Ju¾na Sendvièka Ostrva"
 
@@ -6525,7 +6426,7 @@ msgstr "©vajcarska"
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Brazzaville)"
-msgstr ""
+msgstr "Kongo (Brazavil)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6535,7 +6436,7 @@ msgstr "Centralno Afrièka Republika"
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Kinshasa)"
-msgstr ""
+msgstr "Kongo (Kin¹asa)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6711,6 +6612,11 @@ msgstr "Andora"
 #, c-format
 msgid "Afghanistan"
 msgstr "Avganistan"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "default:LTR"
+msgstr "default:LTR"
 
 #: ../../loopback.pm:1
 #, c-format
@@ -7129,10 +7035,11 @@ msgstr ""
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 "Dodeljuje raw ureæaje za blok ureæaje (kao ¹to su hard disk\n"
-"particije), ¹to moðe biti korisno za aplikacije kao ¹to je Oracle"
+"particije), ¹to moðe biti korisno za aplikacije kao ¹to je Oracle ili DVD "
+"plejeri"
 
 #: ../../services.pm:1
 #, c-format
@@ -7414,11 +7321,11 @@ msgstr ""
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7561,7 +7468,7 @@ msgstr ""
 "  --incident        - program treba da bude jedan od mandrake alata"
 
 #: ../../standalone.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[--config-info] [--daemon] [--debug] [--default] [--show-conf]\n"
 "Backup and Restore application\n"
@@ -7625,8 +7532,8 @@ msgid "Exit install"
 msgstr "Izlaz iz instalacije"
 
 #: ../../steps.pm:1
-#, c-format
-msgid "Install system updates"
+#, fuzzy, c-format
+msgid "Install updates"
 msgstr "Instaliraj sistemske update-ove"
 
 #: ../../steps.pm:1
@@ -7655,6 +7562,11 @@ msgid "Add a user"
 msgstr "Dodaj korisnika"
 
 #: ../../steps.pm:1
+#, fuzzy, c-format
+msgid "Root password"
+msgstr "Bez lozinke"
+
+#: ../../steps.pm:1
 #, c-format
 msgid "Install system"
 msgstr "Instaliraj sistem"
@@ -7670,9 +7582,9 @@ msgid "Format partitions"
 msgstr "Formatiraj particije"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Partitioning"
-msgstr "©tampanje"
+msgstr "Particionisanje"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7697,17 +7609,25 @@ msgstr "Pode¹avanje mi¹a"
 #: ../../steps.pm:1
 #, c-format
 msgid "License"
-msgstr ""
+msgstr "Licenca"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
+msgid "Language"
 msgstr "Izaberite jezik"
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
 msgstr "utopia 25"
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "OK"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -7806,13 +7726,13 @@ msgid "Select the memory size of your graphics card"
 msgstr "Kolièina memorije na grafièkoj kartici"
 
 #: ../../Xconfig/card.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system supports multiple head configuration.\n"
 "What do you want to do?"
 msgstr ""
 "Va¹ sistem podr¾ava multiple head konfiguraciju.\n"
-"Da li to ¾elte da uradite?"
+"©ta ¾elite da uradite?"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -7889,7 +7809,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Opcije"
@@ -7913,14 +7833,6 @@ msgstr "Monitor"
 #, c-format
 msgid "Graphic Card"
 msgstr "Grafièka kartica"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Kraj"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -8014,14 +7926,14 @@ msgid "256 colors (8 bits)"
 msgstr "256 boja (8-bitna paleta)"
 
 #: ../../Xconfig/test.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Is this the correct setting?"
-msgstr "Da li je ovo ispravno ?"
+msgstr "Da li je ovo ispravno pode¹eno?"
 
 #: ../../Xconfig/test.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Leaving in %d seconds"
-msgstr "%d sekundi"
+msgstr "Izlazim za %d sekundi"
 
 #: ../../Xconfig/test.pm:1
 #, c-format
@@ -8253,9 +8165,9 @@ msgid "Empty"
 msgstr "Prazno"
 
 #: ../../diskdrake/hd_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Windows"
-msgstr "Windows Domen"
+msgstr "Windows"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -8293,14 +8205,13 @@ msgid "Please click on a partition"
 msgstr "Kliknite na particiju"
 
 #: ../../diskdrake/hd_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have one big MicroSoft Windows partition.\n"
 "I suggest you first resize that partition\n"
 "(click on it, then click on \"Resize\")"
 msgstr ""
-"Disk sadr¾i jednu veliku FAT particiju\n"
-"(uglavnom je koriste MicroSoft Dos/Windows-i, na ¾alost).\n"
+"Vi imate jednu veliku MicroSoft Windows particiju.\n"
 "Predla¾em da prvo izmenite veliènu (resize) te particije (kliknite na nju,\n"
 "a potom na \"Promeni velièinu\")"
 
@@ -8426,7 +8337,7 @@ msgstr ""
 "dual-booting va¹eg sistema.\n"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Chances are, this partition is\n"
@@ -8435,7 +8346,7 @@ msgid ""
 msgstr ""
 "\n"
 "Najverovatnije je, da je ova particija\n"
-"Driver particija, pa nebi trebali\n"
+"Driver particija, pa ne bi trebali\n"
 "da je dirate.\n"
 
 #: ../../diskdrake/interactive.pm:1
@@ -8583,41 +8494,6 @@ msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Tabela particija za ureðaj %s æe biti zapisana na disk!"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"Izabrali ste softversku RAID particiju kao root (/).\n"
-"Nijedan starter ne mo¾e da radi sa tim bez /boot particije.\n"
-"Zato pazite da dodate /boot particiju"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"Particija koju ste izabrali za root (/) je fizièki locirana iznad\n"
-"1024-tog cilindra hard diska,i nemate /boot particiju.\n"
-"Ukoliko planirate da korisitite LILO boot menad¾er, morate\n"
-"dodati /boot particiji."
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"Nije moguæe kreirati /boot za sada na hard disku (na cilindru > 1024).\n"
-"Ili koristite LILO koji ne radi, ili ga ne koristite pa vam ne treba /boot"
-
-#: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "The package %s is needed. Install it?"
 msgstr "Paket %s je potreban. Da li ¾elite da ga instalirate?"
@@ -8663,7 +8539,7 @@ msgid "File already exists. Use it?"
 msgstr "Datoteka veæ postoji.Da li da ga koristim ?"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "Fajl se veæ koristi od strane drugog loopback-a,izaberite drugi"
 
@@ -8802,9 +8678,9 @@ msgid "Where do you want to mount device %s?"
 msgstr "Gde biste da montirate %s ureðaj ?"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Where do you want to mount the loopback file %s?"
-msgstr "Gde biste da montirate loopback datoteku  %s?"
+msgstr "Gde biste da montirate loopback fajl %s?"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -9099,82 +8975,87 @@ msgstr "cpu # "
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
-msgstr ""
+msgstr "SMBus kontroleri"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "USB controllers"
-msgstr ""
+msgstr "USB kontroleri"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SCSI controllers"
+msgstr "SCSI kontroleri"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Firewire controllers"
 msgstr ""
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "(E)IDE/ATA controllers"
-msgstr ""
+msgstr "(E)IDE/ATA kontroleri"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Joystick"
-msgstr ""
+msgstr "D¾ojstik"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner"
-msgstr "Izaberite skener"
+msgstr "Skener"
 
 #: ../../harddrake/data.pm:1 ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown/Others"
-msgstr "Nepoznati|Generic"
+msgstr "Nepoznati/Ostali"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Bridges and system controllers"
-msgstr ""
+msgstr "Mostovi i sistemski kontroleri"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Modem"
-msgstr "Model"
+msgstr "Modem"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Ethernetcard"
 msgstr "Mre¾na kartica"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Processors"
-msgstr "ID procesora"
+msgstr "Procesori"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Webcam"
-msgstr ""
+msgstr "Veb kamera"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Soundcard"
 msgstr "Zvuèna kartica"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Other MultiMedia devices"
-msgstr "Drugi Medij"
+msgstr "Drugi multimedijalni ureðaji"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Tvcard"
-msgstr "TV katica"
+msgstr "TV kartica"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Videocard"
-msgstr "Video mod"
+msgstr "Video kartica"
 
 #: ../../harddrake/data.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -9184,37 +9065,37 @@ msgstr "Traka"
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "DVD-ROM"
-msgstr ""
+msgstr "DVD-ROM"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "CD/DVD burners"
-msgstr ""
+msgstr "CD/DVD rezaèi"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "CDROM"
-msgstr "na CD ureðaju"
+msgstr "CDROM"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disk"
-msgstr "Danski"
+msgstr "Disk"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Zip"
-msgstr ""
+msgstr "Zip"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Floppy"
-msgstr "Boot Floppy"
+msgstr "Flopi"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
-msgstr ""
+msgstr "Doozvoli da izaberem bilo koji ureðaj"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -9230,11 +9111,15 @@ msgid ""
 "\n"
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
+"Ukoliko zaista mislite da znate koji je pravi drajver za va¹u karticu\n"
+"mo¾ete izabrati jednu sa gornje liste.\n"
+"\n"
+"Trenutni drajver za va¹u \"%s\" zvuènu karticu je \"%s\" "
 
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Choosing an arbitratry driver"
-msgstr ""
+msgstr "Biram odgovarajuæi drajver"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -9245,7 +9130,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -9266,7 +9151,8 @@ msgstr ""
 "kartica koristi \n"
 "po default-u\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" æe vam reæi koji je drajver trenutno\n"
+"- \"grep sound-slot /etc/modules.conf\" æe vam reæi koji je drajver "
+"trenutno\n"
 "u upotrebi\n"
 "\n"
 "- \"/sbin/lsmod\" æe vam omoguæiti da proverite da li njegov je drajverov "
@@ -9288,9 +9174,9 @@ msgid "Sound trouble shooting"
 msgstr "Pomoæ za pode¹avanje zvuka"
 
 #: ../../harddrake/sound.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Error: The \"%s\" driver for your sound card is unlisted"
-msgstr "Drajver \"%s\" za  va¹u zvuènu karticu nije prikazan"
+msgstr "Gre¹ka: drajver \"%s\" za  va¹u zvuènu karticu nije prikazan"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -9308,18 +9194,18 @@ msgid "No known driver"
 msgstr "Nema poznatog drajvera"
 
 #: ../../harddrake/sound.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
 "driver at \"%s\"."
 msgstr ""
-"Ne postoji poznati alternativni OSS/ALSA drajver za va¹u zvuènu karticu (%s) "
-"koja trenutno koristi \"%s\""
+"Ne postoji besplatan drajver za va¹u zvuènu karticu (%s), ali postoji "
+"licencirani drajver na \"%s\"."
 
 #: ../../harddrake/sound.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "No open source driver"
-msgstr "Nema poznatog drajvera"
+msgstr "Nema open source drajvera"
 
 #: ../../harddrake/sound.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -9491,9 +9377,9 @@ msgid "Auto-detect"
 msgstr "Auto-detekcija"
 
 #: ../../interactive/newt.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Do"
-msgstr "Dole"
+msgstr "Uradi"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -9728,8 +9614,8 @@ msgstr "Konektuj na internet"
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
-msgstr "Sagem (koristi pppoe) usb"
+msgid "Sagem (using pppoa) usb"
+msgstr "Sagem (koristi pppoa) usb"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -9844,17 +9730,17 @@ msgstr "Veb Server"
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Zeroconf host name must not contain a ."
-msgstr ""
-
-#: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, fuzzy, c-format
-msgid "Zeroconf Host name"
-msgstr "Ime hosta:"
+msgstr "Zeroconf ime domaæina (host name) ne sme da sadr¾i a."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Host name"
 msgstr "Ime hosta:"
+
+#: ../../network/ethernet.pm:1 ../../network/network.pm:1
+#, c-format
+msgid "Zeroconf Host name"
+msgstr "Zeroconf ime domaæina (Host name)"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9864,19 +9750,10 @@ msgid ""
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
 msgstr ""
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-"Molim unesite  ime hosta ukoiko ga znate\n"
-"'Neki DHCP serveri zahtevaju ime hosta da bi radili.\n"
-"Va¹e ime hosta treba da bude puno ime kao npr.\n"
-"``mybox.mylab.myco.com''."
+"\n"
+"\n"
+"Unesite Zeroconf host name bez taèaka osim ako ne ¾elite\n"
+"koristite default host name."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9932,9 +9809,9 @@ msgstr ""
 "karticu na sledeæem ekranu."
 
 #: ../../network/isdn.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Which of the following is your ISDN card?"
-msgstr "Koja je va¹a ISDN kartica ?"
+msgstr "Koja je od ponuðenih va¹a ISDN kartica ?"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -10011,7 +9888,7 @@ msgstr ""
 " bez D-kanala (zakupljene linije)"
 
 #: ../../network/isdn.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "European protocol"
 msgstr "Evropski protokol"
 
@@ -10222,9 +10099,9 @@ msgstr ""
 "%s"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The network needs to be restarted. Do you want to restart it ?"
-msgstr "Paket %s mora biti instaliran. Da li ¾elite da ga instalirate?"
+msgstr "Mre¾a mora da se restartuje. Da li ¾elite da je restartujete ?"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -10504,22 +10381,22 @@ msgstr ""
 "Ako nemate dodatnih 'nameserver'-a, ostavite ta polja prazna."
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add "
 "enough '0' (zeroes)."
 msgstr ""
 "Raspon treba da ima predznak k, M ili G (na primer, \"11M\" za 11M), ili "
-"dodajte dovoljno '0'."
+"dodajte dovoljno '0' (nula)."
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
 "frequency), or add enough '0' (zeroes)."
 msgstr ""
 "Frekvencija treba da ima predznak k, M ili G (na primer, \"2.46G\" za 2.46 "
-"GHz frekvenciju), ili dodajte dovoljno '0'."
+"GHz frekvenciju), ili dodajte dovoljno '0'(nula)."
 
 #: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -10533,8 +10410,13 @@ msgstr "Pokreni pri startanju"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
+msgid "Assign host name from DHCP address"
+msgstr "Molim Vas unesete ime hosta ili IP adresu.\n"
+
+#: ../../network/network.pm:1
+#, c-format
 msgid "Network Hotplugging"
-msgstr "Praæenje stanja mre¾e"
+msgstr "Direktno prikljuèivanje na mre¾u"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10543,13 +10425,8 @@ msgstr "Track mre¾na kartica id (korisno za laptop raèunare)"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
-msgid "(bootp/dhcp/zeroconf)"
-msgstr "(bootp/dhcp)"
-
-#: ../../network/network.pm:1
-#, c-format
-msgid "Automatic IP"
-msgstr "Automatski IP"
+msgid "DHCP host name"
+msgstr "Ime hosta:"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -10557,10 +10434,21 @@ msgstr "Automatski IP"
 msgid "Netmask"
 msgstr "Mre¾na maska"
 
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
 #, c-format
 msgid "IP address"
 msgstr "IP adresa"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "(bootp/dhcp/zeroconf)"
+msgstr "(bootp/dhcp/zeroconf)"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Automatic IP"
+msgstr "Automatski IP"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10701,7 +10589,7 @@ msgid "Connection Configuration"
 msgstr "Konfiguracija Internet konekcije"
 
 #: ../../network/tools.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The system doesn't seem to be connected to the Internet.\n"
 "Try to reconfigure your connection."
@@ -10710,14 +10598,14 @@ msgstr ""
 "Probajte da promenite konfiguraciju."
 
 #: ../../network/tools.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "For security reasons, it will be disconnected now."
 msgstr "Iz sigurnosnih razloga, on æe sada biti diskonektovan."
 
 #: ../../network/tools.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The system is now connected to the Internet."
-msgstr "Sistem je trenutno konektovan na Internet"
+msgstr "Sistem je trenutno konektovan na Internet."
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -10735,7 +10623,7 @@ msgid "Internet configuration"
 msgstr "Konfiguracija interneta"
 
 #: ../../partition_table/raw.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Something bad is happening on your drive. \n"
 "A test to check the integrity of data has failed. \n"
@@ -10811,7 +10699,7 @@ msgstr "PDQ"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - ©tampaj, nemoj da pamti¹"
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr "Nepoznati Model"
@@ -10820,6 +10708,11 @@ msgstr "Nepoznati Model"
 #, c-format
 msgid "Unknown model"
 msgstr "Nepoznati model"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "%s (Port %s)"
+msgstr "Port"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -10897,9 +10790,9 @@ msgid ", multi-function device on parallel port \\#%s"
 msgstr ", multi-funkcionalni ureðaj na paralelnom portu \\#%s"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ", USB printer"
-msgstr ", USB ¹tampaè \\#%s"
+msgstr ", USB ¹tampaè"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -10973,11 +10866,6 @@ msgstr "Printerdrake"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr "Da li hoæete da podesite jo¹ jedan ¹tampaè?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Uklanjam ¹tampaè \"%s\" ..."
 
@@ -10993,8 +10881,8 @@ msgstr "Ukloni ¹tampaè"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Know how to use this printer"
-msgstr "Da li znate kako da koristite ovaj ¹tampaè"
+msgid "Learn how to use this printer"
+msgstr "Nauèite kako da koristite ovaj ¹tampaè"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11094,11 +10982,6 @@ msgid "Printer connection type"
 msgstr "Tip konekcije ¹tampaèa"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Learn how to use this printer"
-msgstr "Da li znate kako da koristite ovaj ¹tampaè"
-
-#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Raw printer"
 msgstr "Raw ¹tampaè"
@@ -11135,6 +11018,7 @@ msgid "Add a new printer"
 msgstr "Dodajte novi ¹tampaè"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Normalni Mod"
@@ -11157,6 +11041,12 @@ msgstr "CUPS konfiguracija"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Refresh printer list (to display all available remote CUPS printers)"
+msgstr ""
+"Osve¾i listu ¹tampaèa (da bi prikazao sve dostupne udaljene CUPS ¹tampaèe)"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Display all available remote CUPS printers"
 msgstr ""
 "Osve¾i listu ¹tampaèa (da bi prikazao sve dostupne udaljene CUPS ¹tampaèe)"
 
@@ -11191,16 +11081,6 @@ msgstr "Sistem za ¹tampanje: "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Would you like to configure printing?"
-msgstr "Da li biste da podesite ¹tampaè?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr "Pripremam PrinterDrake ..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Checking installed software..."
 msgstr "Proveravam instalirani softver..."
 
@@ -11210,9 +11090,9 @@ msgid "Installing Foomatic..."
 msgstr "Instaliram Foomatic ..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to configure printer \"%s\"!"
-msgstr "Pode¹avam ¹tampaè \"%s\" ..."
+msgstr "Neuspelo pode¹avanje ¹tampaèa \"%s\"!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11233,6 +11113,11 @@ msgstr "Koji sistem za ¹tampanje (spooler) ¾elite da koristite ?"
 #, c-format
 msgid "Select Printer Spooler"
 msgstr "Izaberite Spooler za ¹tampaè"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Setting Default Printer..."
+msgstr "Pode¹avanje Default ¹tampaèa..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11954,7 +11839,7 @@ msgstr ""
 "(pogledajte upustvo za ¹tampaè) ili  slièan njemu."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
@@ -12474,87 +12359,81 @@ msgstr ""
 "ureðaja u liniju za unos"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the printer to which the print jobs should go."
-msgstr "Izaberite port na koji je va¹ raèunar povezan."
+msgstr "Izaberite ¹tampaè na koji æe te upuæivati sve dokumente."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please choose the printer you want to set up. The configuration of the "
 "printer will work fully automatically. If your printer was not correctly "
 "detected or if you prefer a customized printer configuration, turn on "
 "\"Manual configuration\"."
 msgstr ""
-"Ovde se nalazi lista svih auto-detektovanih ¹tampaèa. Izaberite ¹tampaè koji "
-"æelite da podesite. Pode¹avanje ¹tampaèa æe biti potpuno automatsko. Ukoliko "
-"va ¹tampaè nije pravilno detektovan ili vi¹e ¾elite da ga sami podesite, "
-"ukljuèite \"Ruèna konfiguracija\"."
+"Izaberite ¹tampaè koji ¾elite da podesite. Pode¹avanje ¹tampaèa æe biti "
+"potpuno automatsko. Ukoliko va ¹tampaè nije pravilno detektovan ili vi¹e "
+"¾elite da ga sami podesite, ukljuèite \"Ruèna konfiguracija\"."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Here is a list of all auto-detected printers. "
-msgstr ""
+msgstr "Ovde se nalazi lista auto-detektovanih ¹tampaèa. "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Currently, no alternative possibility is available"
-msgstr ""
+msgstr "Trenutno, ne postoji dtruga alternativa"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The configuration of the printer will work fully automatically. If your "
 "printer was not correctly detected or if you prefer a customized printer "
 "configuration, turn on \"Manual configuration\"."
 msgstr ""
-"Prikazani ¹tampaè je auto-detektovan. Pode¹avanje ¹tampaèa æe biti potpuno "
-"automatsko. Ukoliko va¹ ¹tampaè nije ispravno detektovan ili ¾elite da sami "
-"pode¹avate ¹tampaè, ukljuèite \"Ruèna konfiguracija\"."
+"Pode¹avanje ¹tampaèa æe biti potpuno automatsko. Ukoliko va¹ ¹tampaè nije "
+"ispravno detektovan ili ¾elite da sami pode¹avate ¹tampaè, ukljuèite \"Ruèna "
+"konfiguracija\"."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The following printer was auto-detected. "
-msgstr ""
-"Sledeæi ¹tamaè\n"
-"\n"
-"%s%s\n"
-"je direktno povezan na va¹ sistem"
+msgstr "Sledeæi ¹tamaè je auto-detektovan."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please choose the printer to which the print jobs should go or enter a "
 "device name/file name in the input line"
 msgstr ""
-"Izaberite port na koji je va¹ ¹tampaè povezan ili unesite ime/ime fajla "
-"ureðaja u liniju za unos"
+"Izaberite ¹tampaè na koji ¾elite da ¹aljete dokumente za ¹tampanje ili "
+"unesite  ime/ime fajla ureðaja u liniju za unos"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please choose the printer you want to set up or enter a device name/file "
 "name in the input line"
 msgstr ""
-"Izaberite port na koji je va¹ ¹tampaè povezan ili unesite ime/ime fajla "
-"ureðaja u liniju za unos"
+"Izaberite ¹tampaè koji ¾elite da podesite unesite ime/ime fajla ureðaja u "
+"liniju za unos"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
 msgstr ""
-"Izaberite port na koji je va¹ ¹tampaè povezan ili unesite ime/ime fajla "
-"ureðaja u liniju za unos"
+"Alternativno, mo¾ete da odredite ime/ime fajla ureðaja u liniju za unos"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If it is not the one you want to configure, enter a device name/file name in "
 "the input line"
 msgstr ""
-"Prikazani ¹tampaè je auto-detektovan, a ukoliko to nije onaj koji ¾elite da "
-"podesite, unesite ime/ime fajla ureðaja u liniju za unos"
+"Ukoliko to nije onaj koji ¾elite da podesite, unesite ime/ime fajla ureðaja "
+"u liniju za unos"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12666,7 +12545,7 @@ msgid "Auto-detect printers connected to this machine"
 msgstr "Auto-detekcija ¹tampaèa povezanih sa ovom ma¹inom"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -12686,15 +12565,14 @@ msgstr ""
 "Ovaj èarobnjak æe vam pomoæi da instalirate svoj(e) ¹ampa¹(e) povezane na "
 "ovaj raèunar, poezan direktno na mre¾u.\n"
 "\n"
-"Ukoliko imate ¹tampaè(e) povezane na ovu ma¹inu, prikljuèite ih na ra¹unar i "
-"u elektrièno napajanje da bi mogli biti auto-detektovani. Takoðe i mre¾ni "
-"¹tampaè(i)moraju  biti povezani i ukljuèeni.\n"
+"Ukoliko imate ¹tampaè(e) povezane na ovu ma¹inu, prikljuèite ih na raèunar "
+"kao i u elektrièno napajanje da bi mogli biti auto-detektovani.\n"
 "\n"
 "Kliknite na \"Next\" kada ste spremni, i na \"Cancel\" ako ne ¾elite da sada "
 "pode¹avate va¹ ¹tampaè(e)."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -12716,7 +12594,7 @@ msgstr ""
 "\n"
 "Dobrodo¹li u Èarobnjak za pode¹avanje ¹tampaèa\n"
 "\n"
-"Ovaj èarobnjak æe vam pomoæi da instalirate svoj(e) ¹ampa¹(e) povezane na "
+"Ovaj èarobnjak æe vam pomoæi da instalirate svoj(e) ¹ampaè(e) povezane na "
 "ovaj raèunar, poezan direktno na mre¾u.\n"
 "\n"
 "Ukoliko imate ¹tampaè(e) povezane na ovu ma¹inu, prikljuèite ih na ra¹unar i "
@@ -12727,11 +12605,11 @@ msgstr ""
 "¹tampaèe koji se nalaze poveani direktno na va¹ raèunar. Zato iskljuèite "
 "auto-detekciju mre¾nih ¹tampaèa ako vam to nije potrebno.\n"
 "\n"
-"Kliknite na \"Next\" kada ste spremni, i na \"Cancel\" ako ne ¾elite da sada "
-"pode¹avate va¹ ¹tampaè(e)."
+"Kliknite na \"Sledeæi\" kada ste spremni, i na \"Poni¹ti\" ako ne ¾elite da "
+"sada pode¹avate va¹ ¹tampaè(e)."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -12758,17 +12636,17 @@ msgstr ""
 "Ovaj èarobnjak æe vam pomoæi da instalirate svoj(e) ¹ampa¹(e) povezane na "
 "ovaj raèunar, poezan direktno na mre¾u ili udaljenoj Windows ma¹ini.\n"
 "\n"
-"Ukoliko imate ¹tampaè(e) povezane na ovu ma¹inu, prikljuèite ih na ra¹unar i "
-"u elektrièno napajanje da bi mogli biti auto-detektovani. Takoðe i mre¾ni "
-"¹tampaè(i)i Windows ma¹ine moraju biti povezane i ukljuèene.\n"
+"Ukoliko imate ¹tampaè(e) povezane na ovu ma¹inu, prikljuèite ih na raèunar "
+"kao i u elektrièno napajanje da bi mogli biti auto-detektovani. Takoðe i "
+"mre¾ni ¹tampaè(i)i Windows ma¹ine moraju biti povezane i ukljuèene.\n"
 "\n"
 "Nemojte da zaboravite da auto-detekcija ¹tampaèa na mre¾i traje du¾e nego za "
 "¹tampaèe koji se nalaze poveani direktno na va¹ raèunar. Zato iskljuèite "
 "auto-detekciju mre¾nih i/ili Windows-hosted ¹tampaèa ako vam to nije "
 "potrebno.\n"
 "\n"
-"Kliknite na \"Next\" kada ste spremni, i na \"Cancel\" ako ne ¾elite da sada "
-"pode¹avate va¹ ¹tampaè(e)."
+"Kliknite na \"Sledeæi\" kada ste spremni, i na \"Poni¹ti\" ako ne ¾elite da "
+"sada pode¹avate va¹ ¹tampaè(e)."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12794,9 +12672,38 @@ msgstr ""
 "konekcije ¹tampaèa."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ")"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Configuring printer ..."
+msgstr "Pode¹avanje ¹tampaèa ..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Searching for new printers..."
-msgstr "Deljenje lokalnih ¹tampaèa"
+msgstr "Tra¾im nove ¹tampaèe..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12915,6 +12822,64 @@ msgid "Checking your system..."
 msgstr "Proveravam va¹ sistem..."
 
 #: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Restarting CUPS..."
+msgstr "Restartuj XFS"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr "Ovaj host/mre¾a veæ postoji na listi, i ne mo¾e se ponovo dodati.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr "Primeri pravilnih IP adresa:\n"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "Une¹ena host/mre¾na IP adresa nije ispravna.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Server IP missing!"
+msgstr "Nedostaje ime NCP servera!"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "©tampaè ili Udaljeni CUPS server"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Remove selected server"
+msgstr "Ukloni selektovanog hosta/mre¾u"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Edit selected server"
+msgstr "Uredi selektovanog hosta/mre¾u"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Add server"
+msgstr "Dodaj korisnika"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address of host/network:"
 msgstr "IP adresa hosta/mre¾e:"
@@ -12926,38 +12891,13 @@ msgstr "Ovaj host/mre¾a veæ postoji na listi, i ne mo¾e se ponovo dodati.\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr "192.168.100.0/255.255.255.0\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr "192.168.100.0/24\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr "10.1.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr "10.0.0.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr "192.168.100.194\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr "Primeri pravilnih IP adresa:\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
 msgstr "Une¹ena host/mre¾na IP adresa nije ispravna.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12997,7 +12937,7 @@ msgstr ""
 "trebali biti dostupni:"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "When this option is turned on, on every startup of CUPS it is automatically "
 "made sure that\n"
@@ -13015,7 +12955,7 @@ msgstr ""
 "Kada se ova opcija ukljuèi, svako pokretanje CUPS automatski osiguravamo da\n"
 "\n"
 "- ukoliko je LPD/LPRng instaliran, /etc/printcap neæe biti preisan od strane "
-"CUPS\n"
+"CUPS-a\n"
 "\n"
 "- ukoliko /etc/cups/cupsd.conf nedostaje, biæe kreiran\n"
 "\n"
@@ -13023,12 +12963,35 @@ msgstr ""
 "servera.\n"
 "\n"
 "Ukoliko vam neke od ovih mera predstavljaju problem, iskljuèite ovu opciju, "
-"ali æete sami morati da obratite pa¾nju na ove moguænosti."
+"ali æete sami morati da podesite ove opcije."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "Automatska korekcija CUPS konfiguracije"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "None"
+msgstr "Uraðeno"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Additional CUPS servers: "
+msgstr "Na CUPS server \"%s\""
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -13041,9 +13004,9 @@ msgid "Custom configuration"
 msgstr "Custom konfiguracija"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer sharing on hosts/networks: "
-msgstr "IP adresa hosta/mre¾e:"
+msgstr "Zajednièko deljenje ¹tampaèa na domaæinima(hosts)/mre¾ama: "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13084,14 +13047,14 @@ msgid "Printer auto-detection (Local, TCP/Socket, and SMB printers)"
 msgstr "Auto-detekcija ¹tampaèa (Lokalni, TCP/Socket, i SMB ¹tampaèi)"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Printers on remote CUPS servers do not need to be configured here; these "
 "printers will be automatically detected."
 msgstr ""
 "\n"
-"©tampaèe na udaljenom CUPS serveru nemate da bi ih ovde podesili; ovi "
+"©tampaèe na udaljenom CUPS serveru ne moraju da budu pode¹eni ovde; ovi "
 "¹tampaèi æe biti automatski detektovani."
 
 #: ../../printer/printerdrake.pm:1
@@ -13111,6 +13074,9 @@ msgid ""
 "\n"
 "Set the user umask."
 msgstr ""
+"Argumenti: (umask)\n"
+"\n"
+"Pode¹avanje korisnièkog umask."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13119,6 +13085,9 @@ msgid ""
 "\n"
 "Set the shell timeout. A value of zero means no timeout."
 msgstr ""
+"Argumenti: (val)\n"
+"\n"
+"Podesite shell pauzu. Vrednost zero - nula znaèi da nema pauze."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13127,94 +13096,108 @@ msgid ""
 "\n"
 "Set shell commands history size. A value of -1 means unlimited."
 msgstr ""
+"Argumenti: (size)\n"
+"\n"
+"Podesite shell velièinu istorije za komande. Vrednost -1 znaèi da nema "
+"linita."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check additions/removals of sgid files."
-msgstr ""
+msgstr "ukoliko je pode¹eno na da, oznaèite dodavanje/uklanjanje sgid fajlova."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
-msgstr ""
+msgstr "ukoliko je pode¹eno na da, oznaèite otvorene portove."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
 "if set, send the mail report to this email address else send it to root."
 msgstr ""
+"ukoliko je pode¹eno, po¹aljite izve¹taj na ovu email adresu uli je po¹aljite "
+"root-u."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, report check result by mail."
-msgstr ""
+msgstr "ukoliko ka¾ete da, po¹aljite rezultat provere mail-om."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check files/directories writable by everybody."
 msgstr ""
+"ukoliko je pode¹eno na da, oznaèite fajlove/diretorijume upisivim za sve "
+"korisnike."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, reports check result to tty."
-msgstr ""
+msgstr "ukoliko je pode¹eno na da, izve¹taj o proveri po¹aljite na tty."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, run some checks against the rpm database."
-msgstr ""
+msgstr "ukoliko je pode¹eno na da, pokrenite proveru rpm baze podataka."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
 msgstr ""
+"ukoliko je pode¹eno na da, proverite da li su mre¾ni ureðaji u promiscuous "
+"modu."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, run chkrootkit checks."
-msgstr ""
+msgstr "ukoliko je pode¹eno na da, pokrenite chkrootkit provere."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
 msgstr ""
+"ukoliko je pode¹eno na da, proverite ovla¹æenja za fajlove u korisnièkom "
+"home diretorijumu."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
 msgstr ""
+"ukoliko je pode¹eno na da, oznaèite dodavanje/uklanjanje za suid root "
+"fajlove."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, report check result to syslog."
-msgstr ""
+msgstr "ukoliko je pode¹eno na da, po¹aljite izve¹taj o proveri u syslog."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, run the daily security checks."
-msgstr ""
+msgstr "ukoliko je pode¹eno na da, pokrenite dnevne sigurnosne provere."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, verify checksum of the suid/sgid files."
-msgstr ""
+msgstr "ukoliko je pode¹eno na da, proverite checksum za suid/sgid fajlove."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check empty password in /etc/shadow."
-msgstr ""
+msgstr "ukoliko je pode¹eno na da, prverite praznu lozinku u /etc/shadow."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, report unowned files."
-msgstr ""
+msgstr "ukoliko je pode¹eno na da, prijavite fajlove bez vlasnika."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13223,6 +13206,9 @@ msgid ""
 "\n"
 "Set the root umask."
 msgstr ""
+"Argumenti: (umask)\n"
+"\n"
+"Podesite root umask."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13232,6 +13218,10 @@ msgid ""
 "Set the password minimum length and minimum number of digit and minimum "
 "number of capitalized letters."
 msgstr ""
+"Argumenti: (length, ndigits=0, nupper=0)\n"
+"\n"
+"Podesite najmanju du¾inu lozinke i najmanji broj brojeva i minimalan broj "
+"velikih slova."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13240,6 +13230,9 @@ msgid ""
 "\n"
 "Set the password history length to prevent password reuse."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+"Podesite istoriju pamæenja lozinki da bi spreèili ponovnu upotrebu lozinke."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13249,6 +13242,10 @@ msgid ""
 "Set password aging to \\fImax\\fP days and delay to change to \\fIinactive"
 "\\fP."
 msgstr ""
+"Argumenti: (max, inactive=-1)\n"
+"\n"
+"Podesite lozinku ciljajuæi na \\fImax\\fP dana i izmena pauze na  "
+"\\fIinactive\\fP."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13257,6 +13254,9 @@ msgid ""
 "\n"
 "Add the name as an exception to the handling of password aging by msec."
 msgstr ""
+"Argumenti: (name)\n"
+"\n"
+"Add the name as an exception to the handling of password aging by msec."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13265,6 +13265,9 @@ msgid ""
 "\n"
 " Enable/Disable sulogin(8) in single user level."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+" Omoguæi/Onemoguæi sulogin(8) u single user nivou."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13273,6 +13276,9 @@ msgid ""
 "\n"
 " Activate/Disable daily security check."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+" Aktiviraj/Deaktiviraj dnevne sigurnosne provere."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13281,6 +13287,9 @@ msgid ""
 "\n"
 "Activate/Disable ethernet cards promiscuity check."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+"Aktiviraj/Deaktiviraj proveru promiskuiteta mre¾nih kartica."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13289,6 +13298,9 @@ msgid ""
 "\n"
 "Use password to authenticate users."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+"Koristi lozinku za autentifikaciju korisnika."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13297,6 +13309,9 @@ msgid ""
 "\n"
 " Enabling su only from members of the wheel group or allow su from any user."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+" Omoguæavanje su samo za korisnije wheel grupe ili za svakog korisnika."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13305,6 +13320,9 @@ msgid ""
 "\n"
 "Enable/Disable msec hourly security check."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+"Omoguæi/Onemoguæi msec proveru sigurnosti na svaki èas."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13313,6 +13331,9 @@ msgid ""
 "\n"
 "Enable/Disable the logging of IPv4 strange packets."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+"Omoguæi/Onemoguæi prijavljivanje IPv4 strange paketa."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13321,6 +13342,9 @@ msgid ""
 "\n"
 "Enable/Disable libsafe if libsafe is found on the system."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+"Omoguæi/Onemoguæi libsafe ako je libsafe pronaðen na sistemu."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13329,6 +13353,9 @@ msgid ""
 "\n"
 "Enable/Disable IP spoofing protection."
 msgstr ""
+"Argumenti: (arg, alert=1)\n"
+"\n"
+"Omoguæi/Onemoguæi IP spoofing za¹titu."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13338,6 +13365,10 @@ msgid ""
 "Enable/Disable name resolution spoofing protection.  If\n"
 "\\fIalert\\fP is true, also reports to syslog."
 msgstr ""
+"Argumenti: (arg, alert=1)\n"
+"\n"
+"Omoguæi/Onemoguæi za¹titu za name resolution spoofing.  Ako je\n"
+"\\fIalert\\fP istinit, i to prijavite u syslog."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13348,6 +13379,12 @@ msgid ""
 "expression describing what to log (see syslog.conf(5) for more details) and\n"
 "dev the device to report the log."
 msgstr ""
+"Argumenti: (arg, expr='*.*', dev='tty12')\n"
+"\n"
+"Omoguæi/Onemoguæi syslog izve¹taje u konzoli 12. \\fIexpr\\fP je\n"
+"izraz koji opisuje ¹ta treba da se upi¹e u log (pogledajte syslog.conf(5) za "
+"vi¹e detalja) i\n"
+"dev ureðaj za prijavljivanje na log."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13358,6 +13395,11 @@ msgid ""
 "allow and /etc/at.allow\n"
 "(see man at(1) and crontab(1))."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+"Omoguæi/Onemoguæi crontab i at za korisnike. Postavite korisnike sa "
+"dozvolama u /etc/cron.allow i /etc/at.allow\n"
+"(proèitajte man at(1) i crontab(1))."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13373,6 +13415,16 @@ msgid ""
 "the file\n"
 "during the installation of packages."
 msgstr ""
+"Argumenti: ()\n"
+"\n"
+"Ukoliko je SERVER_LEVEL (ili je SECURE_LEVEL odsutan) veæi od 3\n"
+"u /etc/security/msec/security.conf, kreira simbolièki link /etc/security/"
+"msec/server\n"
+"da upuæuje na /etc/security/msec/server.<SERVER_LEVEL>.  /etc/security/msec/"
+"server\n"
+"se koristi od strane chkconfig --add da bi dodali servis ukoliko je prisutan "
+"u fajlu\n"
+"tokom instalacije paketa."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13385,6 +13437,13 @@ msgid ""
 "services you need, use /etc/hosts.allow\n"
 "(see hosts.allow(5))."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+"Autorizuje sve servise koje kontroli¹e tcp_wrappers (see hosts.deny(5)) ako "
+"je \\fIarg\\fP = ALL. Samo lokalni\n"
+"if \\fIarg\\fP = LOCAL and none if \\fIarg\\fP = NONE. Za autorizaciju vama "
+"potrebnih servisa , koristite /etc/hosts.allow\n"
+"(see hosts.allow(5))."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13394,6 +13453,10 @@ msgid ""
 "The argument specifies if clients are authorized to connect\n"
 "to the X server on the tcp port 6000 or not."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+"Argument odreðuje da li klijent autorzivan za konekovanje na\n"
+"X server na tcp portu 6000 ili nije."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13404,6 +13467,11 @@ msgid ""
 "on the client side: ALL (all connections are allowed), LOCAL (only\n"
 "local connection) and NONE (no connection)."
 msgstr ""
+"Argumenti: (arg, listen_tcp=None)\n"
+"\n"
+"Dozvoljava/Nedozvoljava X konekciju. Prvi argument odreðije ¹ta je uraðeno\n"
+"sa strane klijenta: ALL (sve konekcije su dozvoljene), LOCAL (samo\n"
+"lpkalne konekcije) i NONE (bez konekcije)."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13413,6 +13481,10 @@ msgid ""
 "Allow/Forbid the list of users on the system on display managers (kdm and "
 "gdm)."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+"Dozvoli/Ne dozvoli listu korisnika na sistemu u menad¾erima za displej (kdm "
+"i gdm)."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13421,6 +13493,9 @@ msgid ""
 "\n"
 "Allow/Forbid direct root login."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+"Dozvoli/Ne dozvoli diektno root logovanje."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13429,6 +13504,9 @@ msgid ""
 "\n"
 "Allow/Forbid remote root login."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+"Dozvoli/Ne dozvoli udaljeno root logovanje."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13437,6 +13515,9 @@ msgid ""
 "\n"
 "Allow/Forbid reboot by the console user."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+"Dozvoli/Ne dozvoli restartovanje od strane konzlolnog korisnika."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13447,6 +13528,11 @@ msgid ""
 "\\fP = NONE no issues are\n"
 "allowed else only /etc/issue is allowed."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+"Ako je \\fIarg\\fP = ALL allow /etc/issue i /etc/issue.net ne postoji. Ako "
+"je \\fIarg\\fP = NONE nijedana radnja nije\n"
+"dozvoljena ili je samo /etc/issue dozvoljen."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13455,6 +13541,9 @@ msgid ""
 "\n"
 "Allow/Forbid autologin."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+"Dozvoli/Ne dozvoli autologovanje."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13463,6 +13552,9 @@ msgid ""
 "\n"
 " Accept/Refuse icmp echo."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+" Prihvati/Odbij icmp echo."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13471,6 +13563,9 @@ msgid ""
 "\n"
 " Accept/Refuse broadcasted icmp echo."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+" Prihvati/Odbij prenosivi icmp echo."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13479,6 +13574,9 @@ msgid ""
 "\n"
 "Accept/Refuse bogus IPv4 error messages."
 msgstr ""
+"Argumenti: (arg)\n"
+"\n"
+"Prihvati/Odbij IPv4 poruke o gre¹kama."
 
 #: ../../security/level.pm:1
 #, c-format
@@ -14124,9 +14222,9 @@ msgid "Build All Kernels -->"
 msgstr "Kompajliraj Sve Kernele -->"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "No NIC selected!"
-msgstr "Nijedan nic nije izabran!"
+msgstr "Nijedan NIC nije selektovan!"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -14523,7 +14621,7 @@ msgstr ""
 "\n"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Description:\n"
 "\n"
@@ -14568,7 +14666,7 @@ msgstr ""
 "\t- Sistemske fajlove, \n"
 "\t- Korisnièke fajlove, \n"
 "\t- Ostale fajlove.\n"
-"\tili  Sve va¹ sistem ...  i Drugo (kao ¹to su Windows Particije)\n"
+"\tili  Ceo va¹ sistem ...  i Druge (kao ¹to su Windows Particije)\n"
 "\n"
 "  Drakbackup vam dozovoljava backup yva¹eg sistema na:\n"
 "\t- Hard disk.\n"
@@ -14908,6 +15006,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr "Izaberite podatke koji ¾elite da backup-ujete..."
 
@@ -15166,16 +15269,6 @@ msgstr "Unesite direktorijum gde je sme¹ten backup"
 #, c-format
 msgid "Restore from Hard Disk."
 msgstr "Povrati (restore) sa Hard Diska"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Secure Connection"
-msgstr "Sigurnosna Konekcija"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "FTP Connection"
-msgstr "FTP konekcija"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16105,6 +16198,196 @@ msgstr "Cron nije dostupan jo¹ uvek za non-root"
 msgid "Installation of %s failed. The following error occured:"
 msgstr "Instalacija %s-a neuspela. Gre¹ka je:"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "Ne, ja ne ¾elim autologovanje"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "Da, ja ¾elim autologovanje sa ovim(korisnik,desktop)"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "Pokreni X-Window sistem pri stratanju"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "Sistemski mod"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr "Bootsplash"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr "Lilo ekran"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+"\n"
+"Izaberite temu za\n"
+"lilo i bootsplash,\n"
+"a mo¾ete ih odabrati\n"
+"odvojeno"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "Teme"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Splash selekcija"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"Trenutno koristite %s kao Boot menad¾er \n"
+"Kliknite na Podesi (Configure) da bi pokrenuli pode¹avavanje."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr "Instalacija LiLo-a i Bootsplash tema uspela"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr "Instalacija teme nije uspela!"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr "Napomena"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr "Restartuj 'lilo'"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+"Ne mogu da restartujem LiLo!\n"
+"Pokrenite \"lilo\" kao root iz komandne linije da bi zavr¹ili instalciju "
+"teme za LiLo starter."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr "Izvr¹i initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr "Ne mogu da pokrenem mkinitrd -f /boot/initrd-%s.img %s."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+"Ne mogu da upi¹em u /etc/sysconfig/bootsplash\n"
+"Fajl ne postoji."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "Upi¹i %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr "Ne mogu da upisujem u /etc/sysconfig/bootsplash."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "Lilo poruka nije pronaðena"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "Kopiraj %s u %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr "Backup %s to %s.old"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "Kreiraj novu temu"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"Prika¾i teme\n"
+"u konzoli"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr "Instaliraj teme"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "Lilo/Grub mod"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "Yaboot mod"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/Fajl/_Kraj"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_Fajl"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "Konfiguracija stila startanja"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -16244,6 +16527,16 @@ msgstr "Mandrake Program za Prijavljivanje Gre¹aka"
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "Parametri"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "Konfiguracija Internet Konekcija"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "DHCP klijent"
 
@@ -16257,11 +16550,6 @@ msgstr "Mre¾na kartica"
 msgid "Gateway"
 msgstr "Gateway"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "Parametri"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -16271,11 +16559,6 @@ msgstr "Tip konekcije: "
 #, c-format
 msgid "Profile: "
 msgstr "Profil: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "Konfiguracija Internet Konekcija"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -16493,11 +16776,15 @@ msgid ""
 "into your system with the X Window System running and supports running\n"
 "several different X sessions on your local machine at the same time."
 msgstr ""
+"X11 Menad¾er za displej vam dozvoljava da se grafièki\n"
+"prijavite u va¹ sistem sa pokrenutim X Window Sistemom i podr¾ava "
+"pokretanje\n"
+"nekoliko razlièitih X sesija na lokalnoj ma¹ini u isto vreme."
 
 #: ../../standalone/drakedm:1
 #, c-format
 msgid "Choosing a display manager"
-msgstr ""
+msgstr "Izbor menad¾era za displej"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16546,8 +16833,8 @@ msgstr "Ukloni modul"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr "omit raid moduli"
+msgid "Add a module"
+msgstr "Dodaj modul"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16561,13 +16848,13 @@ msgstr "ukoliko je potrebno"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "silom"
+msgid "omit raid modules"
+msgstr "omit raid moduli"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "Dodaj modul"
+msgid "force"
+msgstr "silom"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16581,23 +16868,18 @@ msgstr "Deo za eksperte"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "Op¹te"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "Verzija kernela"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "DrakFloppy gre¹ka: %s"
+msgid "default"
+msgstr "default"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "default"
+msgid "General"
+msgstr "Op¹te"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16618,11 +16900,6 @@ msgstr "Velièina"
 #, c-format
 msgid "Module name"
 msgstr "Ime modula"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16730,7 +17007,7 @@ msgid "Choose the applications that will support the fonts:"
 msgstr "Izaberite aplikacije koje æe podr¾avati fontove :"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " Copyright (C) 2001-2002 by MandrakeSoft \n"
@@ -16765,6 +17042,7 @@ msgstr ""
 "\n"
 " Copyright (C) 2001-2002 by MandrakeSoft \n"
 "\tDUPONT Sebastien sdupont\\@mandrakesoft.com\n"
+"        CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
 "\n"
 " Ovaj program je bespaltan; mo¾ete ga redistribuirati i/ili menjati\n"
 " pod uslovima GNU General Public License kako je objavljeno\n"
@@ -16791,13 +17069,11 @@ msgstr ""
 "    -  ttf2pt1:   \n"
 "\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
 "             Konvertuje ttf font fajlove u afm i pfb fontove\n"
-"\n"
-"\n"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "About"
-msgstr "Prekini"
+msgstr "O"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -17256,7 +17532,7 @@ msgid "enable"
 msgstr "omoguæi"
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently disabled.\n"
@@ -17322,6 +17598,11 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "Path"
+msgstr "Putanja"
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "group :"
 msgstr "grupa:"
 
@@ -17381,11 +17662,6 @@ msgstr "Svojstvo"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Path"
-msgstr "Putanja"
-
-#: ../../standalone/drakperm:1
-#, c-format
 msgid "Permissions"
 msgstr "Dozvole"
 
@@ -17398,23 +17674,6 @@ msgstr "Trenutni korisnik"
 #, c-format
 msgid "browse"
 msgstr "pretra¾i"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr "izaberite perm fajl da bi videli/izmenili"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
-msgstr ""
-"Drakperm se koristi da videli fajlove u cilju pode¹avanja dozvola, vlasnika "
-"i grupa preko msec.\n"
-"VI takoðe mo¾ete da editujete svoja sopstvena pravila koja æe biti iznad "
-"default pravila."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17468,6 +17727,23 @@ msgstr "gore"
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "select perm file to see/edit"
+msgstr "izaberite perm fajl da bi videli/izmenili"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
+msgstr ""
+"Drakperm se koristi da videli fajlove u cilju pode¹avanja dozvola, vlasnika "
+"i grupa preko msec.\n"
+"VI takoðe mo¾ete da editujete svoja sopstvena pravila koja æe biti iznad "
+"default pravila."
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "permissions"
 msgstr "dozvole "
 
@@ -17487,9 +17763,9 @@ msgid "path"
 msgstr "putanja"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Location of auto_install.cfg file"
-msgstr "Kreiram auto instalacionu disketu"
+msgstr "Lokacija auto_install.cfg fajla"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -17499,22 +17775,27 @@ msgid ""
 "Leave it blank if you do not want to set up automatic installation mode.\n"
 "\n"
 msgstr ""
+"Uka¾ite na mesto gde se auto_install.cfg fajl nalazi.\n"
+"\n"
+"Ostavite ga nepopunjenim ukoliko ne ¾elite da automatski instalacioni mod.\n"
+"\n"
 
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
 "No CD or DVD image found, please copy the installation program and rpm files."
 msgstr ""
+"Nije pronaðen CD ili DVD image, kopirajte instalacioni program i rpm fajlove."
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "No image found"
-msgstr "Nije pronaðen ¹tampaè!"
+msgstr "NIje pronaðen image"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installation image directory"
-msgstr "Xpmac (Instalacija displej drajver)"
+msgstr "Instalacioni image direktorijum"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -17525,16 +17806,20 @@ msgid ""
 "contents.\n"
 "\n"
 msgstr ""
+"Uka¾ite na mesto gde se nalazi instalacioni image.\n"
+"\n"
+"Ukoliko nemate takav direktorijum, kopirajte sadr¾aj CD ili DVD diska.\n"
+"\n"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "The DHCP end ip"
-msgstr "DHCP kraj raspona"
+msgstr "DHCP krajnji ip"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "The DHCP start ip"
-msgstr "DHCP poèetak raspona"
+msgstr "DHCP startni ip"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -17545,20 +17830,24 @@ msgid ""
 "The network address is %s using a netmask of %s.\n"
 "\n"
 msgstr ""
+"DHCP server æe omoguæiti drugi raèunarima da startuju koristeæi PXE u datom "
+"rasponu adresa.\n"
+"\n"
+"Mre¾na adresa %s koristi netmask od %s.\n"
+"\n"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Interface %s (on network %s)"
-msgstr "Interfejs %s (koristeæi modul %s)"
+msgstr "Interfejs %s (na mre¾i %s)"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose which network interface will be used for the dhcp server."
-msgstr ""
-"Izaberite mre¾ni adapter koji ¾elite da koristite za konekciju na internet"
+msgstr "Izaberite mre¾ni interfejs koji ¾elite da koristite za dhcp server."
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You are about to configure your computer to install a PXE server as a DHCP "
 "server\n"
@@ -17572,9 +17861,10 @@ msgid ""
 "Note: you need a dedicated Network Adapter to set up a Local Area Network "
 "(LAN)."
 msgstr ""
-"Va¹ raèunar mo¾ete podesiti za deljenje njegove Internet konekcije.\n"
-"sa ovom opcijom, drugi kompjuteri na va¹oj lokalnoj mre¾i æe moæi da "
-"koristeInternet konekciju sa ovog raèunara.\n"
+"Va¹ raèunar mo¾ete podesiti da instalira PXE server kao DHCP server.\n"
+"kao i TFTP sever da bi kreirao instalacioni server.\n"
+"Sa ovom opcijom, drugi kompjuteri na va¹oj lokalnoj mre¾i æe moæi da koriste "
+"instalaciju sa ovog raèunara.\n"
 "\n"
 "Proverite da li je pode¹ena va¹a Mre¾ni/Internet pristup preko drakconnect "
 "pre nego ¹to nastavimo.\n"
@@ -17582,14 +17872,14 @@ msgstr ""
 "Napomena: potrebana vam je mre¾na kartica da bi podesili lokalnu mre¾u(LAN)."
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installation Server Configuration"
-msgstr "dhcpd Server konfiguracija"
+msgstr "Pode¹avanje Instalacionog servera"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "PXE Server Configuration"
-msgstr "dhcpd Server konfiguracija"
+msgstr "Pode¹avanje PXE Servera"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -17617,12 +17907,12 @@ msgid "Network Options"
 msgstr "Mre¾ne opcije"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following options can be set to customize your\n"
 "system security. If you need an explanation, look at the help tooltip.\n"
 msgstr ""
-"SLedeæe opcije se mogu postaviti da podese va¹\n"
+"Sledeæe opcije se mogu postaviti da podese va¹\n"
 "sigurnosni sistem. Ukoliko vam treba obja¹njenje, kliknite na pomoæ.\n"
 
 #: ../../standalone/draksec:1
@@ -17636,17 +17926,17 @@ msgid "Security Alerts:"
 msgstr "Sigurnosni alarmi:"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
-msgid "(default value: %s)"
-msgstr " (podrazumevana vrednost: %s)"
-
-#: ../../standalone/draksec:1
 #, c-format
 msgid "Security Level:"
 msgstr "Nivo sigurnosti:"
 
 #: ../../standalone/draksec:1
 #, c-format
+msgid "(default value: %s)"
+msgstr "(podrazumevana vrednost: %s)"
+
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
 msgid ""
 "Standard: This is the standard security recommended for a computer that will "
 "be used to connect\n"
@@ -17659,7 +17949,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -17668,7 +17958,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 "Standardni: Ovo je standardna sigurnost koja se preporuèuje za raèunare koji "
 "æe se povezivati\n"
@@ -18053,26 +18343,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/Opcije"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect jazz drives"
-msgstr "/Autodetekcija jazz ureðaja"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect modems"
-msgstr "/Autodetekcija modema"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect printers"
-msgstr "/Autodetekcija ¹tampaèa"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr "primarno"
 
@@ -18082,10 +18352,20 @@ msgid "secondary"
 msgstr "sekundarno"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr "Kliknite na ureðaj u levom stablu da bi ovde prikazali informacije."
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Unknown"
+msgstr "Nepoznato"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "unknown"
+msgstr "Nepoznato"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18146,18 +18426,13 @@ msgstr "O Harddrake-u"
 msgid "/_About..."
 msgstr "/_O..."
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/_Pomoæ"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
 msgstr "/_Prijavite Bag"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Once you've selected a device, you'll be able to see the device information "
 "in fields displayed on the right frame (\"Information\")"
@@ -18185,19 +18460,24 @@ msgid "Harddrake help"
 msgstr "Harddrake pomoæ"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Fields description"
-msgstr "Opis"
+msgstr "/_Opis polja"
+
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/_Pomoæ"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/_Quit"
+msgstr "/_Kraj"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "/Autodetekcija _jazz ureðaja"
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_Opcije"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18209,10 +18489,10 @@ msgstr "/Autodetekcija _modema"
 msgid "/Autodetect _printers"
 msgstr "/Autodetekcija _¹tampaèa"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
-msgid "/_Quit"
-msgstr "/_Kraj"
+msgid "/_Options"
+msgstr "/_Opcije"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18311,7 +18591,7 @@ msgstr "Nivo"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr "Format disketa koje ureðaj prihvata"
 
 #: ../../standalone/harddrake2:1
@@ -18402,9 +18682,9 @@ msgid "Module"
 msgstr "Modul"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "new dynamic device name generated by core kernel devfs"
-msgstr "novo dinamièko ime ureðaja generisano od strane incore kernel devfs"
+msgstr "novo dinamièko ime ureðaja generisano od strane core kernel devfs"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18473,6 +18753,16 @@ msgstr "Coma bug"
 
 #: ../../standalone/harddrake2:1
 #, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
 msgid "Size of the (second level) cpu cache"
 msgstr "Velièina (drugi nivo) procesorskog ke¹a"
 
@@ -18498,7 +18788,7 @@ msgid "Location on the bus"
 msgstr "Lokacija na busu"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "- PCI and USB devices: this lists the vendor, device, subvendor and "
 "subdevice PCI/USB ids"
@@ -18512,15 +18802,15 @@ msgid "Bus identification"
 msgstr "Identifikacija busa"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The GNU/Linux kernel needs to run a calculation loop at boot time to "
 "initialize a timer counter.  Its result is stored as bogomips as a way to "
 "\"benchmark\" the cpu."
 msgstr ""
 "GNU/Linux kernel mora da pokrene raèunsku petlju  pri startanju da bi "
-"inicijalizovao  brojaè vremena.  Njegov rezultat je uskladi¹ten kao bogomips "
-"kao neka vrsta \"benchmark\" za procesor."
+"inicijalizovao brojaè vremena.  Njegov rezultat je uskladi¹ten kao bogomips "
+"kao neka vrsta \"benchmarka\" za procesor."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18618,11 +18908,11 @@ msgid "load setting"
 msgstr "uèitaj postavku"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
-msgstr "Oglasiæe se alarm ukoliko jedan od izabranih servisa nijevi¹e aktivan"
+msgstr "Oglasiæe se alarm ukoliko jedan od izabranih servisa nije vi¹e aktivan"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -18904,7 +19194,7 @@ msgid "Connecting to the Internet "
 msgstr "Povezivanje na Internet"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disconnecting from the Internet "
 msgstr "Diskonektovanje sa Interneta"
 
@@ -18950,145 +19240,194 @@ msgstr "Praæenje stanja mre¾e"
 
 #: ../../standalone/printerdrake:1
 #, c-format
-msgid "Reading printer data ..."
-msgstr "Uèitavam podatke za ¹tampaè ..."
+msgid "Reading data of installed printers..."
+msgstr "Èitam podatke sa instaliranih ¹tampaèa..."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Name/IP address of host:"
-msgstr "IP adresa hosta/mre¾e:"
+msgstr "Ime/IP adresa hosta:"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
-msgstr "Ovaj host/mre¾a veæ postoji na listi, i ne mo¾e se ponovo dodati.\n"
+msgstr "Ovaj host veæ postoji na listi, i ne mo¾e se ponovo dodati.\n"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scannerdrake"
-msgstr "Izaberite skener"
+msgstr "Scannerdrake"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "You must enter a host name or an IP address.\n"
-msgstr "Molim Vas unesete ime hosta ili IP."
+msgstr "Molim Vas unesete ime hosta ili IP adresu.\n"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-"Izaberite mre¾u ili hosta na kojem bi lokalni ¹tampaèi trebali biti dostupni:"
+msgstr "Izaberite hosta na kojem bi lokalni ¹tampaèi trebali biti dostupni:"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sharing of local scanners"
-msgstr "Deljenje lokalnih ¹tampaèa"
+msgstr "Zajednièko deljenje lokalnih skenera"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "This machine"
-msgstr "(na ovoj ma¹ini)"
+msgstr "Ova ma¹ina"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove selected host"
-msgstr "Ukloni selektovanog hosta/mre¾u"
+msgstr "Ukloni selektovanog hosta"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Edit selected host"
-msgstr "Uredi selektovanog hosta/mre¾u"
+msgstr "Uredi selektovanog hosta"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add host"
-msgstr "Dodaj hosa/mre¾u"
+msgstr "Dodaj hosta"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "These are the machines from which the scanners should be used:"
 msgstr ""
-"Ovo su ma¹ine i mre¾e na kojima se nalaze lokalno povezani ¹tamaè(i) koji bi "
+"Ovo su ma¹ine i mre¾e na kojima se nalaze lokalno povezani skeneri koji bi "
 "trebali biti dostupni:"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Usage of remote scanners"
-msgstr "Koristi slobodan prostor"
+msgstr "Kori¹æenje udaljenih skenera"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "All remote machines"
-msgstr "Nema udaljenih ma¹ina"
+msgstr "Sve udaljene ma¹ine"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
 "available:"
 msgstr ""
-"Ovo su ma¹ine i mre¾e na kojima se nalaze lokalno povezani ¹tamaè(i) koji bi "
+"Ovo su ma¹ine  na kojima se nalaze lokalno povezani skener(i) koji bi "
 "trebali biti dostupni:"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
-msgstr ""
+msgstr "Koristi skenere na hostovima: "
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use scanners on remote computers"
-msgstr ""
+msgstr "Koristi skenere na udaljenim raèunarima"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner sharing to hosts: "
-msgstr "IP adresa hosta/mre¾e:"
+msgstr "Deljenje skenera za hostove: "
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "The scanners on this machine are available to other computers"
-msgstr "©tampaèi na ovoj ma¹ini su dostupni za ostale raèunare"
+msgstr "Skeneri  na ovoj ma¹ini su dostupni za ostale raèunare"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can also decide here whether scanners on remote machines should be made "
 "available on this machine."
 msgstr ""
-"Takoðe mo¾ete odluèiti da li ¾elite da ¹tampaèi na udaljenim ma¹inama budu "
+"Takoðe mo¾ete odluèiti da li ¾elite da skeneri na udaljenim ma¹inama budu "
 "automatski dostupni na ovoj ma¹ini."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Here you can choose whether the scanners connected to this machine should be "
 "accessable by remote machines and by which remote machines."
 msgstr ""
-"Ovde mo¾ete izabrati da li ¾elite da ¹tampaèi na ovoj ma¹ini treba da budu "
+"Ovde mo¾ete izabrati da li ¾elite da skeneri na ovoj ma¹ini treba da budu "
 "dostupni na drugim udaljenim ma¹inama i na kojim udaljenim ma¹inama."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
+msgid "Re-generating list of configured scanners ..."
+msgstr "Osve¾avanje liste pode¹enih skenera ..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Searching for new scanners ..."
+msgstr "Tra¾im nove skenere ..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Searching for configured scanners ..."
+msgstr "Tra¾im pode¹ene skenere ..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Scanner sharing"
+msgstr "Zajednièko deljenje skenera"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Add a scanner manually"
+msgstr "Ruèno instalacija skenera"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Search for new scanners"
+msgstr "Tra¾im nove skenere"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr "Nema skenera koji su direktno povezani na va¹u ma¹inu.\n"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The following scanner\n"
+"\n"
+"%s\n"
+"is available on your system.\n"
+msgstr ""
+"Sledeæi skener\n"
+"\n"
+"%s\n"
+"je direktno povezan na va¹ sistem\n"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The following scanners\n"
+"\n"
+"%s\n"
+"are available on your system.\n"
+msgstr ""
+"Sledeæi skeneri\n"
+"\n"
+"%s\n"
+"su direktno povezani na va¹ sistem.\n"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
 msgid ""
 "Your %s has been configured.\n"
 "You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
 "applications menu."
 msgstr ""
-"Va¹ %s skener je pode¹en.\n"
-"Sada mo¾ete skenirati va¹e dokunete pomoæu ``XSane''programa iz Multimedija/"
+"Va¹ %s je pode¹en.\n"
+"Sada mo¾ete skenirati va¹e dokunete pomoæu \"XSane\"programa iz Multimedija/"
 "Grafika podmenija iz menija Aplikacije."
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-"Ovaj %s skener mora biti pode¹en u printerdrake.\n"
-"Mo¾ete pokrenuti printerdrake iz Mandrake Kontrolnog Centra iz Hardver "
-"sekcije."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19096,21 +19435,45 @@ msgid "choose device"
 msgstr "izaberite ureðaj"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please select the device where your %s is attached"
+msgstr "Izaberite port na koji je va¹ ureðaj %s konekovan"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Searching for scanners ..."
+msgstr "Tra¾im skenere ..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Auto-detect available ports"
+msgstr "Autodetekcija dostupnih portova"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr "(Napomena: Paralelni portovi ne mogu biti auto-detektovani)"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
 msgstr ""
-"Scannerdrake nije mogao da detektuje va¹ %s skener.\n"
-"Izaberite port na koji je va¹ skener prikljuèen"
+"Ovaj %s mora biti pode¹en u printerdrake.\n"
+"Mo¾ete pokrenuti printerdrake iz Mandrake Kontrolnog Centra iz Hardver "
+"sekcije."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "The %s is unsupported"
-msgstr "Ovaj %s skener nije podr¾an"
+msgstr "%s nije podr¾an"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "The %s is not known by this version of Scannerdrake."
-msgstr "%s nije podr¾an u ovoj verziji Mandrake Linux-a."
+msgstr "%s nije podr¾an u ovoj verziji Scannerdrake."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19119,69 +19482,28 @@ msgstr "%s nije podr¾an u ovoj verziji Mandrake Linux-a."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Re-generating list of configured scanners ..."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Searching for new scanners ..."
-msgstr "Deljenje lokalnih ¹tampaèa"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Searching for configured scanners ..."
-msgstr "Deljenje lokalnih ¹tampaèa"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Scanner sharing"
-msgstr "Zajednièko deljenje ¹tampaèa"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Add a scanner manually"
-msgstr "Izaberite korisnike ruèno"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Search for new scanners"
-msgstr "Deljenje lokalnih ¹tampaèa"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr "Nema ¹tampaèa koji su direktno povezani na va¹u ma¹inu"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"The following scanner\n"
-"\n"
-"%s\n"
-"is available on your system.\n"
-msgstr ""
-"Sledeæi ¹tamaè\n"
-"\n"
-"%s%s\n"
-"je direktno povezan na va¹ sistem"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"The following scanners\n"
-"\n"
-"%s\n"
-"are available on your system.\n"
-msgstr ""
-"Sledeæi ¹tamaèi\n"
-"\n"
-"%s%s\n"
-"su direktno povezani na va¹ sistem"
+msgid "Port: %s"
+msgstr "Port: %s"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
-msgstr "Izaberite skener"
+msgid ", "
+msgstr ", "
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Detected model: %s"
+msgstr "Detektovani model: %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr " ("
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Select a scanner model"
+msgstr "Izaberite model skenera"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19191,9 +19513,9 @@ msgstr ""
 "podesite?"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s found on %s, configure it automatically?"
-msgstr "%s pronaðen na %s, da li da ga podesim ?"
+msgstr "%s pronaðen na %s, da li da ga podesim automatski?"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -19275,6 +19597,10 @@ msgid "Scientific Workstation"
 msgstr "Nauèna radna stanica"
 
 #: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr ""
+
+#: ../../share/compssUsers:999
 msgid "Console Tools"
 msgstr "Konzolni alati"
 
@@ -19350,12 +19676,14 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache, Pro-ftpd"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "Server, El.po¹ta/Groupware/Vesti"
+#, fuzzy
+msgid "Mail"
+msgstr "Mali"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr "Postfix mail server, Inn news server"
+#, fuzzy
+msgid "Postfix mail server"
+msgstr "Postfix mail server"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -19452,6 +19780,749 @@ msgstr "Liène finansije"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programi za upravljanje va¹im finansijama, kao ¹to je gnucash"
+
+#~ msgid "Force ACPI"
+#~ msgstr "Prisili na ACPI"
+
+#~ msgid "Launch Aurora at boot time"
+#~ msgstr "Pokreni Auroru pri startanje"
+
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr "Tradicionalni Gtk+ Monitor"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "Tradicionalni Monitor"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "NewStyle Monitor"
+
+#~ msgid "NewStyle Categorizing Monitor"
+#~ msgstr "NewStyle Monitor za kategorizaciju"
+
+#~ msgid ""
+#~ "As a review, DrakX will present a summary of various information it has\n"
+#~ "about your system. Depending on your installed hardware, you may have "
+#~ "some\n"
+#~ "or all of the following entries:\n"
+#~ "\n"
+#~ " * \"Mouse\": check the current mouse configuration and click on the "
+#~ "button\n"
+#~ "to change it if necessary.\n"
+#~ "\n"
+#~ " * \"Keyboard\": check the current keyboard map configuration and click "
+#~ "on\n"
+#~ "the button to change that if necessary.\n"
+#~ "\n"
+#~ " * \"Country\": check the current country selection. If you are not in "
+#~ "this\n"
+#~ "country, click on the button and choose another one.\n"
+#~ "\n"
+#~ " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
+#~ "primary language you have chosen. But here, just as in your choice of a\n"
+#~ "keyboard, you may not be in the country for which the chosen language\n"
+#~ "should correspond. You may need to click on the \"Timezone\" button to\n"
+#~ "configure the clock for the correct timezone.\n"
+#~ "\n"
+#~ " * \"Printer\": clicking on the \"No Printer\" button will open the "
+#~ "printer\n"
+#~ "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
+#~ "Guide'' for more information on how to setup a new printer. The "
+#~ "interface\n"
+#~ "presented there is similar to the one used during installation.\n"
+#~ "\n"
+#~ " * \"Bootloader\": if you wish to change your bootloader configuration,\n"
+#~ "click that button. This should be reserved to advanced users.\n"
+#~ "\n"
+#~ " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
+#~ "interface in \"800x600\" resolution. If that does not suits you, click "
+#~ "on\n"
+#~ "the button to reconfigure your grapical interface.\n"
+#~ "\n"
+#~ " * \"Network\": If you want to configure your Internet or local network\n"
+#~ "access now, you can by clicking on this button.\n"
+#~ "\n"
+#~ " * \"Sound card\": if a sound card is detected on your system, it is\n"
+#~ "displayed here. If you notice the sound card displayed is not the one "
+#~ "that\n"
+#~ "is actually present on your system, you can click on the button and "
+#~ "choose\n"
+#~ "another driver.\n"
+#~ "\n"
+#~ " * \"TV card\": if a TV card is detected on your system, it is displayed\n"
+#~ "here. If you have a TV card and it is not detected, click on the button "
+#~ "to\n"
+#~ "try to configure it manually.\n"
+#~ "\n"
+#~ " * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
+#~ "displayed here. You can click on the button to change the parameters\n"
+#~ "associated with the card."
+#~ msgstr ""
+#~ "Ovde æe za vas, DrakX, prikazati za¾etu informaciju o va¹em sistemu. U "
+#~ "zavisnosti\n"
+#~ "od va¹eg instaliranog hardvera, mo¾etey - ili ne morate, pogledajte "
+#~ "sledeæe \n"
+#~ "unose:\n"
+#~ "\n"
+#~ " * \"Mi¹\": proverite trenutne postavke za mi¹a i kliknite na taster\n"
+#~ "da bih promenili ukoliko je neophodno.\n"
+#~ "\n"
+#~ " * \"Tastatura\": proverite trenutni rasored tastature tion i kliknite "
+#~ "na\n"
+#~ "taster da bi napravili izmene ukoliko su potrebne.\n"
+#~ "\n"
+#~ " * \"Vremenska zona\": DrakX, po default-u, pogaða va¹u vremensku zonu "
+#~ "u \n"
+#~ "zavisnosti koji se jezik\n"
+#~ "odabrali. Ali opet, mo¾da ste izabrali tastaturu koja se razlikuje\n"
+#~ "od tastature zemlje koju ste naveli.\n"
+#~ "Moraæete da kliknete na taster \"Vremenska zona\" da bi\n"
+#~ "podesili èasovnik u skladu sa vremenskom zonom u kojoj se nalazite.\n"
+#~ "\n"
+#~ " * \"©tampaè\": kilkom na taster \"©tampaè\" pokrenuæete èarobnjaka za\n"
+#~ "konfigurisanje ¹tampaèa. Proèitajte odgovoarajuæe poglavlje u ``Starter\n"
+#~ "Guide'' za vi¹e informacija o tome kako podesiti novi ¹tampaè. Interfejs\n"
+#~ "koji je ovde prikazan je slièan onom koji se koristi pri instalaciji;\n"
+#~ "\n"
+#~ " * \"Zvuèna kartica\": ukoliko je zvuèna kartica detektovana, onda je\n"
+#~ "ovde prikazana. Nisu moguæe promene u toku instalacije.\n"
+#~ "\n"
+#~ " * \"TV kartica\": ukoliko je TV kartica detektovana, onda je\n"
+#~ "prikazana ovde. Nisu moguæe promene u toku instalacije.\n"
+#~ "\n"
+#~ " * \"ISDN kartica\": ukoliko je ISDN kartica detektovana, onda je\n"
+#~ "prikazana ovde. Mo¾ete kliknuti na tester da bi promenili parametre\n"
+#~ "koji su vezani za nju."
+
+#~ msgid ""
+#~ "LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
+#~ "automated. DrakX will analyze the disk boot sector and act according to\n"
+#~ "what it finds there:\n"
+#~ "\n"
+#~ " * if a Windows boot sector is found, it will replace it with a grub/"
+#~ "LILO\n"
+#~ "boot sector. This way you will be able to load either GNU/Linux or "
+#~ "another\n"
+#~ "OS.\n"
+#~ "\n"
+#~ " * if a grub or LILO boot sector is found, it will replace it with a new\n"
+#~ "one.\n"
+#~ "\n"
+#~ "If it cannot make a determination, DrakX will ask you where to place the\n"
+#~ "bootloader.\n"
+#~ "\n"
+#~ "\"Boot device\": in most cases, you will not change the default (\"First\n"
+#~ "sector of drive (MBR)\"), but if you prefer, the bootloader can be\n"
+#~ "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy "
+#~ "disk\n"
+#~ "(\"On Floppy\").\n"
+#~ "\n"
+#~ "Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+#~ "handy.\n"
+#~ "\n"
+#~ "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it "
+#~ "by\n"
+#~ "booting the CD-ROM, pressing the >> F1<< key at boot and typing "
+#~ ">>rescue<<\n"
+#~ "at the prompt. If your computer cannot boot from the CD-ROM, there are "
+#~ "at\n"
+#~ "least two situations where having a boot floppy is critical:\n"
+#~ "\n"
+#~ " * when installing the bootloader, DrakX will rewrite the boot sector "
+#~ "(MBR)\n"
+#~ "of your main disk (unless you are using another boot manager), to allow "
+#~ "you\n"
+#~ "to start up with either Windows or GNU/Linux (assuming you have Windows "
+#~ "on\n"
+#~ "your system). If at some point you need to reinstall Windows, the "
+#~ "Microsoft\n"
+#~ "install process will rewrite the boot sector and remove your ability to\n"
+#~ "start GNU/Linux!\n"
+#~ "\n"
+#~ " * if a problem arises and you cannot start GNU/Linux from the hard "
+#~ "disk,\n"
+#~ "this floppy will be the only means of starting up GNU/Linux. It contains "
+#~ "a\n"
+#~ "fair number of system tools for restoring a system that has crashed due "
+#~ "to\n"
+#~ "a power failure, an unfortunate typing error, a forgotten root password, "
+#~ "or\n"
+#~ "any other reason.\n"
+#~ "\n"
+#~ "If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
+#~ "floppy disk must be blank or have non-critical data on it - DrakX will\n"
+#~ "format the floppy and will rewrite the whole disk."
+#~ msgstr ""
+#~ "LILO i grub su GNU/Linux starteri. U principu, ovaj korak je u "
+#~ "potpunosti\n"
+#~ "automatizovan. DrakX æe analizirati boot sektor hard diska i pona¹ati se "
+#~ "u skladu \n"
+#~ "sa onim ¹ta tamo detektuje:\n"
+#~ "\n"
+#~ " * ukoliko pronaðe Windows boot sektor, on æe ga zameniti sa grub/LILO\n"
+#~ "boot sektorom. Na ovaj naèin æete biti u stanju da pokrenete ili GNU/"
+#~ "Linux ili neki drugi\n"
+#~ "OS.\n"
+#~ "\n"
+#~ " * ukoliko se pronaðe grub ili LILO boot sektor, on æe biti zamenjen sa\n"
+#~ "novim.\n"
+#~ "\n"
+#~ "Ukoliko ne mo¾e da pravilno detektuje, DrakX æe vas pitati gde da "
+#~ "instalira\n"
+#~ "starter.\n"
+#~ "\n"
+#~ "\"Boot ureðaj\": u veæini sluèajeva, neæete promeniti default (\"Prvi\n"
+#~ "sektor na disku (MBR)\"), ali ukoliko to ¾elite, starter æe biti\n"
+#~ "instaliran na drugi hard disk (\"/dev/hdb\"), ili èak na disketu\n"
+#~ "(\"Na disketu\").\n"
+#~ "\n"
+#~ "Selektovanjem \"Kreiraj startni disk\" æete moæi kreirati korisni "
+#~ "pomoæni\n"
+#~ "starter.\n"
+#~ "\n"
+#~ "Mandrake Linux CD-ROM ima ugra¾eni mod za pomoæ. Mo¾ete mu pristupiti\n"
+#~ "startanjem direktno sa CD-ROM, pritiskom na  >> F1<< taster pri startanju "
+#~ "i ukucavanjem >>rescue<<\n"
+#~ "u promptu. Ukoliko va¹ raèunar ne mo¾e da startuje direktno sa CD-ROM, "
+#~ "postoje bar dva\n"
+#~ "re¹enja gde je startna disketa od velike va¾nosti:\n"
+#~ "\n"
+#~ " * kada instalirate starter, DrakX æe ponovo upisati boot sektor (MBR)\n"
+#~ "va¹eg glavnog diska (osim ako ne koristite drugi boot menad¾er), da bi "
+#~ "vam\n"
+#~ "omoguæio da pokrenete Windows ili GNU/Linux (pretpostavljajuæi da imate "
+#~ "Windows\n"
+#~ "na va¹em raèunaru). Ukoliko u odreðenom momentu treba da reinstalirate "
+#~ "Windows, Microsoft\n"
+#~ "instalacioni proces æe ponovo upisati boot sektor i ukloniti moguænost da "
+#~ "startujete\n"
+#~ "GNU/Linux!\n"
+#~ "\n"
+#~ " * ukoliko se pojavi i ne mo¾ete da startujete GNU/Linux sa hard diska,\n"
+#~ "ova disketa æe biti jedini naèin da pokrenete GNU/Linux. Ona sadr¾i\n"
+#~ "prilièan broj sistemskih alata koji slu¾e za obnavljanje sistema koji je "
+#~ "pao\n"
+#~ "usled nestanka struje ili nesreæne gre¹ke u kucanju, zaboravljene root "
+#~ "lozinke, ili\n"
+#~ "iz bilo kog drugog razloga.\n"
+#~ "\n"
+#~ "Ukoliko ka¾ete \"Da\", tra¾iæe od vas da ubacite disketu u ureðaj.\n"
+#~ "Disketa mora biti prazna ili bez va¾nih podataka - DrakX æe\n"
+#~ "formatirati disketu."
+
+#~ msgid ""
+#~ "This is the most crucial decision point for the security of your GNU/"
+#~ "Linux\n"
+#~ "system: you have to enter the \"root\" password. \"Root\" is the system\n"
+#~ "administrator and is the only one authorized to make updates, add users,\n"
+#~ "change the overall system configuration, and so on. In short, \"root\" "
+#~ "can\n"
+#~ "do everything! That is why you must choose a password that is difficult "
+#~ "to\n"
+#~ "guess - DrakX will tell you if the password that you chose too easy. As "
+#~ "you\n"
+#~ "can see, you are not forced to enter a password, but we strongly advise "
+#~ "you\n"
+#~ "against. GNU/Linux is as prone to operator error as any other operating\n"
+#~ "system. Since \"root\" can overcome all limitations and unintentionally\n"
+#~ "erase all data on partitions by carelessly accessing the partitions\n"
+#~ "themselves, it is important that it be difficult to become \"root\".\n"
+#~ "\n"
+#~ "The password should be a mixture of alphanumeric characters and at least "
+#~ "8\n"
+#~ "characters long. Never write down the \"root\" password -- it makes it "
+#~ "too\n"
+#~ "easy to compromise a system.\n"
+#~ "\n"
+#~ "One caveat -- do not make the password too long or complicated because "
+#~ "you\n"
+#~ "must be able to remember it!\n"
+#~ "\n"
+#~ "The password will not be displayed on screen as you type it in. To "
+#~ "reduce\n"
+#~ "the chance of a blind typing error you will need to enter the password\n"
+#~ "twice. If you do happen to make the same typing error twice, this\n"
+#~ "``incorrect'' password will have to be used the first time you connect.\n"
+#~ "\n"
+#~ "If you wish access to this computer to be controlled by an "
+#~ "authentication\n"
+#~ "server, clisk the \"Advanced\" button.\n"
+#~ "\n"
+#~ "If your network uses either LDAP, NIS, or PDC Windows Domain "
+#~ "authentication\n"
+#~ "services, select the appropriate one as \"authentication\". If you do "
+#~ "not\n"
+#~ "know which to use, ask your network administrator.\n"
+#~ "\n"
+#~ "If you happen to have problems with reminding passwords, you can choose "
+#~ "to\n"
+#~ "have \"No password\", if your computer won't be connected to the "
+#~ "Internet,\n"
+#~ "and if you trust anybody having access to it."
+#~ msgstr ""
+#~ "Ovo je najzanaèajnija taèka u odluèivanju o sigurnosti va¹eg GNU/Linux\n"
+#~ "sistema: morate da unesete \"root\" lozinku. \"root\" je administrator\n"
+#~ "sistema i jedini je ovla¹ten da vr¹i izmene, dodaje korisnike,\n"
+#~ "menja osnovnu konfiguraciju sistema, itd. Ukratko, \"root\" mo¾e\n"
+#~ "da uradi sve! Zbog toga morate da izaberete lozinku koja te¹ko mo¾e da "
+#~ "se\n"
+#~ "pogodi - DrakX æe vam reæi ukoliko je ona suvi¹e jednostavna. Kao ¹to "
+#~ "mo¾ete da vidite, mo¾ete da\n"
+#~ "izaberete i da ne unesete lozinku, ali vam ozbiljno preporuèujemo da to\n"
+#~ "neradite iz jednog razloga: nemojte da mislite da to ¹to ste startovali "
+#~ "GNU/Linux da\n"
+#~ "va¹i drugi operativni sistemi sigurni od gre¹aka. Kako \"root\" mo¾e da\n"
+#~ "preskoèi sva ogranièenja i nenamerno izbri¹e sve podatke na particiji\n"
+#~ "neopreznim pristupom, va¾no je da je te¹ko\n"
+#~ "postati \"root\".\n"
+#~ "\n"
+#~ "Lozinka treba da bude me¹avina brojeva i slova i treba da sadr¾i najmanje "
+#~ "8\n"
+#~ "karaktera. Nikada ne zapisujte na papir \"root\" lozinku - tako lako\n"
+#~ "mo¾ete ugroziti sistem.\n"
+#~ "\n"
+#~ "Meðutim, potrudite se da lozinka ne bude previ¹e duga ili komlikovana "
+#~ "zato\n"
+#~ "¹to treba da je zapamtite bez mnogo napora.\n"
+#~ "\n"
+#~ "Lozinka neæe biti prikazana na ekranu kada je ukucavate. Sreæom, moæi "
+#~ "æete\n"
+#~ "da je ukucate dva puta da bi smanjili moguænost gre¹e u kucanju.\n"
+#~ "Ukoliko ipak pogre¹ite u kucanju, ali dva puta, ova\n"
+#~ "``neispravna'' lozinka æe biti kori¹tena kada se budete prvi put "
+#~ "konektovali.\n"
+#~ "\n"
+#~ "Ukoliko va¹a mre¾a koristi LDAP, NIS, ili PDC Windows Domain  protokol za "
+#~ "autentifikaciju, selektujte\n"
+#~ "odgovorajuæi za autentifikaciju. Ukoliko to ne znate, pitajte\n"
+#~ "va¹eg mre¾nog administratora.\n"
+#~ "\n"
+#~ "Ukoliko se va¹ raèunar ne konektuje na administrirane mre¾e, treba da\n"
+#~ "izaberete \"Lokalni fajlovi\" za autentifikaciju."
+
+#~ msgid ""
+#~ "Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+#~ "handy.\n"
+#~ "\n"
+#~ "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it "
+#~ "by\n"
+#~ "booting the CD-ROM, pressing the >> F1<< key at boot and typing "
+#~ ">>rescue<<\n"
+#~ "at the prompt. If your computer cannot boot from the CD-ROM, there are "
+#~ "at\n"
+#~ "least two situations where having a boot floppy is critical:\n"
+#~ "\n"
+#~ " * when installing the bootloader, DrakX will rewrite the boot sector "
+#~ "(MBR)\n"
+#~ "of your main disk (unless you are using another boot manager), to allow "
+#~ "you\n"
+#~ "to start up with either Windows or GNU/Linux (assuming you have Windows "
+#~ "on\n"
+#~ "your system). If at some point you need to reinstall Windows, the "
+#~ "Microsoft\n"
+#~ "install process will rewrite the boot sector and remove your ability to\n"
+#~ "start GNU/Linux!\n"
+#~ "\n"
+#~ " * if a problem arises and you cannot start GNU/Linux from the hard "
+#~ "disk,\n"
+#~ "this floppy will be the only means of starting up GNU/Linux. It contains "
+#~ "a\n"
+#~ "fair number of system tools for restoring a system that has crashed due "
+#~ "to\n"
+#~ "a power failure, an unfortunate typing error, a forgotten root password, "
+#~ "or\n"
+#~ "any other reason.\n"
+#~ "\n"
+#~ "If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
+#~ "floppy disk must be blank or have non-critical data on it - DrakX will\n"
+#~ "format the floppy and will rewrite the whole disk."
+#~ msgstr ""
+#~ "Ukoliko selektujete  \"Kreiraj startni disk\" moæi æete da kreirate\n"
+#~ "startni disk.\n"
+#~ "\n"
+#~ "Mandrake Linux CDROM ima ugraðen spasilaèki mod. Mo¾ete mu pristupiti\n"
+#~ "podizaem sistema preko CDROM-a, pritisnite >>F1<< taster pri startanju i "
+#~ "ukucajte >>rescue<< u\n"
+#~ "promptu. Ukoliko ne mo¾ete da butujete sa CDROM-a, trebali\n"
+#~ "bi da se vratite  na ove korake u najmanje dve situacije:\n"
+#~ "\n"
+#~ " * kada instalirate starter, DrakX æe prepisati sadr¾aj boot sektora "
+#~ "(MBR)\n"
+#~ "va¹eg osnovnog diska (osim ukoliko ne koristite neki drugi starter) da bi "
+#~ "mogli \n"
+#~ "da pokrenete ili Windows ili GNU/Linux (pretpostavljajuæi da imate "
+#~ "instliran Windows na\n"
+#~ "va¹em sistemu). Ukoliko treba da reinstalirate Windows,  Microsoft-ov "
+#~ "instalacioni\n"
+#~ "proces æe opet prepisati boot sektor, pa ona neæete biti u moguænosti\n"
+#~ "da pokrene GNU/Linux!\n"
+#~ "\n"
+#~ " * ukoliko se problem javlja i ne mo¾ete da pokrenete GNU/Linux sa hard "
+#~ "diska,\n"
+#~ "ovaj flopi disk æe onda biti jedini naèin za startanje GNU/Linux-a. On\n"
+#~ "sadr¾i dobar broj sistemskih alata za obnovu sistema, koji se\n"
+#~ "sru¹io usled nestanka el.energije, nesretne gre¹ke u kucanju, pogre¹ne\n"
+#~ "lozinke, ili bilo kog drugog razloga.\n"
+#~ "\n"
+#~ "Ukoliko ka¾ete \"Da\", tra¾iæe se od vas da ubacite praznu disketu\n"
+#~ "u ureðaj. Flopi disketa  mora biti prazna ili da sadr¾i podatke koji vam "
+#~ "nisu neophodni\n"
+#~ "Nema potrebe da je formatirate jer æe DrakX sam ponovo upisati\n"
+#~ "celu disketu."
+
+#~ msgid ""
+#~ "Resolution\n"
+#~ "\n"
+#~ "   You can choose here resolutions and color depth between those "
+#~ "available\n"
+#~ "for your hardware. Choose the one that best suit your needs (you will be\n"
+#~ "able to change that after installation though). Asample of the chosen\n"
+#~ "configuration is shown in the monitor."
+#~ msgstr ""
+#~ "Rezolucija\n"
+#~ "\n"
+#~ "   Ovde mo¾ete da izaberete rezoluciju i broj broja od onih\n"
+#~ "koji su onuðeni za va¹ hardver. Izaberite ono ¹to najvi¹e odgovara va¹im "
+#~ "potrebama (moæi \n"
+#~ "æete da monjate ove opcije i nakon instalacije. Primer izabrane\n"
+#~ "konfiguracije je prikazan na monitoru."
+
+#~ msgid ""
+#~ "X (for X Window System) is the heart of the GNU/Linux graphical "
+#~ "interface\n"
+#~ "on which all the graphical environments (KDE, GNOME, AfterStep,\n"
+#~ "WindowMaker, etc.) bundled with Mandrake Linux rely upon.\n"
+#~ "\n"
+#~ "You will be presented the list of different parameters to change to get "
+#~ "an\n"
+#~ "optimal graphical display: Graphic Card\n"
+#~ "\n"
+#~ "   The installer can normally automatically detect and configure the\n"
+#~ "graphic card installed on your machine. If it is not the case, you can\n"
+#~ "choose in this list the card you actually own.\n"
+#~ "\n"
+#~ "   In the case that different servers are available for your card, with "
+#~ "or\n"
+#~ "without 3D acceleration, you are then proposed to choose the server that\n"
+#~ "best suits your needs.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Monitor\n"
+#~ "\n"
+#~ "   The installer can normally automatically detect and configure the\n"
+#~ "monitor connected to your machine. If it is not the case, you can choose "
+#~ "in\n"
+#~ "this list the monitor you actually own.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Resolution\n"
+#~ "\n"
+#~ "   You can choose here resolutions and color depth between those "
+#~ "available\n"
+#~ "for your hardware. Choose the one that best suit your needs (you will be\n"
+#~ "able to change that after installation though). Asample of the chosen\n"
+#~ "configuration is shown in the monitor.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Test\n"
+#~ "\n"
+#~ "   the system will try to open a graphical screen at the desired\n"
+#~ "resolution. If you can see the message during the test and answer \"Yes"
+#~ "\",\n"
+#~ "then DrakX will proceed to the next step. If you cannot see the message, "
+#~ "it\n"
+#~ "means that some part of the autodetected configuration was incorrect and\n"
+#~ "the test will automatically end after 12 seconds, bringing you back to "
+#~ "the\n"
+#~ "menu. Change settings until you get a correct graphical display.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Options\n"
+#~ "\n"
+#~ "   You can here choose whether you want to have your machine "
+#~ "automatically\n"
+#~ "switch to a graphical interface at boot. Obviously, you want to check\n"
+#~ "\"No\" if your machine is to act as a server, or if you were not "
+#~ "successful\n"
+#~ "in getting the display configured."
+#~ msgstr ""
+#~ "X (ili  X Window Sistem) je srce GNU/Linux grafièkog interfejsa\n"
+#~ "na koji se oslanjaju sva grafièka okru¾enja (KDE, GNOME, AfterStep,\n"
+#~ "WindowMaker, itd.) koja se nalaze u Mandrake Linux-u.\n"
+#~ "\n"
+#~ "Biæe vam prikazana lista sa razlièitim parametrima èijom izmenom\n"
+#~ "mo¾ete dobiti optimalan grafièki prikaz: Grafièka kartica\n"
+#~ "\n"
+#~ "\n"
+#~ "   Program za instalaciju obièno automatski detektuje i pode¹ava\n"
+#~ "grafièku kartu koja se nalazi u va¹em raèunu. Ukoliko to nije sluèaj, "
+#~ "mo¾ete\n"
+#~ "sami da izaberete karticu sa liste.\n"
+#~ "\n"
+#~ "   Ukoliko su razlièiti serveri dostupni za va¹u karticu, sa ili\n"
+#~ "vez 3D akceleracije, onda treba da izaberete onaj koji najvi¹e\n"
+#~ "odgovara va¹im potrebama.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Monitor\n"
+#~ "\n"
+#~ "   Program za instalaciju obièno automatski detektuje i pode¹ava\n"
+#~ "monitor koji povezan sa va¹im raèunarom. Ukoliko se to ne desi mo¾ete "
+#~ "izabrati\n"
+#~ "sami sa liste ponuðenih monitora\n"
+#~ "\n"
+#~ "   Ovde mo¾ete izabrati rezoluciju i broj boja od\n"
+#~ "onih koje su ponuðene za va¹ hardver. Izaberite ono ¹to najvi¹e odgovara "
+#~ "va¹im potrebama\n"
+#~ "(ove opcije æete moæi izmeniti i nakon instalacije). Izabrana\n"
+#~ "konfiguracije se vidi na monitoru.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Test\n"
+#~ "\n"
+#~ "   sistem æe poku¹ati da otvori grafièki ekran u ¾eljenoj\n"
+#~ "rezoluciji. Ukoliko mo¾ete da vidite poruku tokom testa odgovorite sa \"Da"
+#~ "\",\n"
+#~ "i DrakX æe nastaviti sa sledeæim korakom. Ukoliko ne mo¾ete da vidite "
+#~ "poruku, to\n"
+#~ "znaèi da je neki deo autotedekcije bio nepravilan i\n"
+#~ "test æe automatski zavr¹iti nakon 12 sekundi, otavarajuæi meni za\n"
+#~ "konfiguraciju. Izmenite opcije sve dok ne dobijete korektan grafièki "
+#~ "prikaz.\n"
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Opcije\n"
+#~ "\n"
+#~ "   Ovde mo¾ete da izaberete da li ¾elite da va¹ raèuanr automatski\n"
+#~ "preðe na grafièki interfejs pri startanju. Oèigledno, izabraæete\n"
+#~ "\"Ne\" ukoliko je va¹a ma¹ina server, ili ukoliko niste uspeli da "
+#~ "uspe¹no \n"
+#~ "podesite grafièki prikaz."
+
+#~ msgid "Upgrade"
+#~ msgstr "A¾uriranje"
+
+#~ msgid "Install system updates"
+#~ msgstr "Instaliraj sistemske update-ove"
+
+#~ msgid "Choose your language"
+#~ msgstr "Izaberite jezik"
+
+#~ msgid ""
+#~ "The partition you've selected to add as root (/) is physically located "
+#~ "beyond\n"
+#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
+#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
+#~ "partition"
+#~ msgstr ""
+#~ "Particija koju ste izabrali za root (/) je fizièki locirana iznad\n"
+#~ "1024-tog cilindra hard diska,i nemate /boot particiju.\n"
+#~ "Ukoliko planirate da korisitite LILO boot menad¾er, morate\n"
+#~ "dodati /boot particiji."
+
+#~ msgid ""
+#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
+#~ "> 1024).\n"
+#~ "Either you use LILO and it won't work, or you don't use LILO and you "
+#~ "don't need /boot"
+#~ msgstr ""
+#~ "Nije moguæe kreirati /boot za sada na hard disku (na cilindru > 1024).\n"
+#~ "Ili koristite LILO koji ne radi, ili ga ne koristite pa vam ne treba /boot"
+
+#~ msgid ""
+#~ "The classic bug sound tester is to run the following commands:\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card "
+#~ "use\n"
+#~ "by default\n"
+#~ "\n"
+#~ "- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+#~ "currently uses\n"
+#~ "\n"
+#~ "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
+#~ "loaded or not\n"
+#~ "\n"
+#~ "- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" "
+#~ "will\n"
+#~ "tell you if sound and alsa services're configured to be run on\n"
+#~ "initlevel 3\n"
+#~ "\n"
+#~ "- \"aumix -q\" will tell you if the sound volume is muted or not\n"
+#~ "\n"
+#~ "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound "
+#~ "card.\n"
+#~ msgstr ""
+#~ "Klasièni tester zvuka treba da pokrene sledeæe komande:\n"
+#~ "\n"
+#~ "\n"
+#~ "- \"lspcidrake -v | fgrep AUDIO\" æe vam reæi koji drajver va¹a zvuèna "
+#~ "kartica koristi \n"
+#~ "po default-u\n"
+#~ "\n"
+#~ "- \"grep snd-slot /etc/modules.conf\" æe vam reæi koji je drajver "
+#~ "trenutno\n"
+#~ "u upotrebi\n"
+#~ "\n"
+#~ "- \"/sbin/lsmod\" æe vam omoguæiti da proverite da li njegov je drajverov "
+#~ "modul\n"
+#~ "uèitan ili nije\n"
+#~ "\n"
+#~ "- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" "
+#~ "æe\n"
+#~ "vam reæi da li su server za zvuk i alsa pode¹eni za pokretanje u\n"
+#~ "initlevel 3\n"
+#~ "\n"
+#~ "- \"aumix -q\" æe vam reæi kakav je nivo jaèine zvuka\n"
+#~ "\n"
+#~ "- \"/sbin/fuser -v /dev/dsp\" æe vam reæi koji program koristi dzvuènu "
+#~ "karticu.\n"
+
+#~ msgid "Sagem (using pppoe) usb"
+#~ msgstr "Sagem (koristi pppoe) usb"
+
+#~ msgid ""
+#~ "Please enter your host name if you know it.\n"
+#~ "Some DHCP servers require the hostname to work.\n"
+#~ "Your host name should be a fully-qualified host name,\n"
+#~ "such as ``mybox.mylab.myco.com''."
+#~ msgstr ""
+#~ "Molim unesite  ime hosta ukoiko ga znate\n"
+#~ "'Neki DHCP serveri zahtevaju ime hosta da bi radili.\n"
+#~ "Va¹e ime hosta treba da bude puno ime kao npr.\n"
+#~ "``mybox.mylab.myco.com''."
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Printerdrake could not determine which model your printer is. Please "
+#~ "choose the correct model from the list."
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "Printerdrake nije mogao da odredi koji model ¹tampaèa posedujete. Sami "
+#~ "izaberite pravilan model sa liste."
+
+#~ msgid "192.168.100.0/255.255.255.0\n"
+#~ msgstr "192.168.100.0/255.255.255.0\n"
+
+#~ msgid "192.168.100.0/24\n"
+#~ msgstr "192.168.100.0/24\n"
+
+#~ msgid "10.1.*\n"
+#~ msgstr "10.1.*\n"
+
+#~ msgid "10.0.0.*\n"
+#~ msgstr "10.0.0.*\n"
+
+#~ msgid "192.168.100.194\n"
+#~ msgstr "192.168.100.194\n"
+
+#~ msgid ""
+#~ "if set to yes, check for empty passwords, for no password in /etc/shadow "
+#~ "and for"
+#~ msgstr ""
+#~ "ukoliko je pode¹eno na da, proverite praznu lozinku, bez lozinke u  /etc/"
+#~ "shadow i za"
+
+#~ msgid "Secure Connection"
+#~ msgstr "Sigurnosna Konekcija"
+
+#~ msgid "FTP Connection"
+#~ msgstr "FTP konekcija"
+
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "DrakFloppy gre¹ka: %s"
+
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+
+#~ msgid ""
+#~ "Standard: This is the standard security recommended for a computer that "
+#~ "will be used to connect\n"
+#~ "               to the Internet as a client.\n"
+#~ "\n"
+#~ "High:       There are already some restrictions, and more automatic "
+#~ "checks are run every night.\n"
+#~ "\n"
+#~ "Higher:    The security is now high enough to use the system as a server "
+#~ "which can accept\n"
+#~ "              connections from many clients. If your machine is only a "
+#~ "client on the Internet, you\n"
+#~ "\t      should choose a lower level.\n"
+#~ "\n"
+#~ "Paranoid:  This is similar to the previous level, but the system is "
+#~ "entirely closed and security\n"
+#~ "                features are at their maximum\n"
+#~ "\n"
+#~ "Security Administrator:\n"
+#~ "               If the 'Security Alerts' option is set, security alerts "
+#~ "will be sent to this user (username or\n"
+#~ "\t       email)"
+#~ msgstr ""
+#~ "Standardni: Ovo je standardna sigurnost koja se preporuèuje za raèunare "
+#~ "koji æe se povezivati\n"
+#~ "               na Internet kao klijenti.\n"
+#~ "\n"
+#~ "Visoki:       Veæ postoje neke restrikcije, i vi¹e automatskih provera "
+#~ "koje se  pokreæu svake noæi.\n"
+#~ "\n"
+#~ "Vi¹lji:    Sigurnost je sada dovoljno visoka da bi mogli da koristite "
+#~ "sistem kao server koji mo¾e da prihvati\n"
+#~ "              konekcije velikog broja klijenata. Ukoliko je ma¹ina samo "
+#~ "klijent na Internetu, trebali bi \n"
+#~ "\t      da izaberete ni¾i nivo.\n"
+#~ "\n"
+#~ "Paranoja:  Ovo je slièno predhodnom nivou, ali je u potpunosti zatvoren i "
+#~ "sigurnosne\n"
+#~ "                opcije su na njihovom maksimumu\n"
+#~ "\n"
+#~ "Administrator sigurnosti:\n"
+#~ "               Ukoliko je opcija 'Sigurnosni alarmi' aktivna, alarmi æe "
+#~ "biti poslani  ka svojim korisnicima (korisnièko ime ili\n"
+#~ "\t       email)"
+
+#~ msgid "/Options"
+#~ msgstr "/Opcije"
+
+#~ msgid "/Autodetect jazz drives"
+#~ msgstr "/Autodetekcija jazz ureðaja"
+
+#~ msgid "/Autodetect modems"
+#~ msgstr "/Autodetekcija modema"
+
+#~ msgid "/Autodetect printers"
+#~ msgstr "/Autodetekcija ¹tampaèa"
+
+#~ msgid "Format of floppies the drive accept"
+#~ msgstr "Format disketa koje ureðaj prihvata"
+
+#~ msgid "Mail/Groupware/News"
+#~ msgstr "Server, El.po¹ta/Groupware/Vesti"
+
+#~ msgid "Postfix mail server, Inn news server"
+#~ msgstr "Postfix mail server, Inn news server"
+
+#~ msgid "Do you want to configure another printer?"
+#~ msgstr "Da li hoæete da podesite jo¹ jedan ¹tampaè?"
+
+#~ msgid "Know how to use this printer"
+#~ msgstr "Da li znate kako da koristite ovaj ¹tampaè"
+
+#~ msgid "Would you like to configure printing?"
+#~ msgstr "Da li biste da podesite ¹tampaè?"
+
+#~ msgid "Preparing Printerdrake..."
+#~ msgstr "Pripremam PrinterDrake ..."
+
+#~ msgid "Reading printer data ..."
+#~ msgstr "Uèitavam podatke za ¹tampaè ..."
 
 #~ msgid ""
 #~ "You must indicate where you wish to place the information required to "

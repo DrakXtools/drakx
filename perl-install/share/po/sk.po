@@ -1,4 +1,4 @@
-# Translatrion file of Mandrake graphic install
+# Translation file of Mandrake graphic install
 # Copyright (C) 1999 Mandrakesoft
 # Jan Matis <damned@hq.alert.sk>, 2000
 # Pavol Cvengros <orpheus@hq.alert.sk>, 2000
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
 "POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-02-10 17:53--100\n"
+"PO-Revision-Date: 2003-02-27 03:45--100\n"
 "Last-Translator: Tibor Pittich <Tibor.Pittich@phuture.sk>\n"
 "Language-Team: sk <i18n@mandrake.sk>\n"
 "MIME-Version: 1.0\n"
@@ -24,16 +24,18 @@ msgstr ""
 "Zdieµanie podµa pou¾ívateµov pou¾íva skupinu \"fileshare\".\n"
 "Mô¾ete pou¾i» userdrake na pridanie pou¾ívateµa do tejto skupiny."
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Zru¹"
@@ -97,30 +99,29 @@ msgid "More"
 msgstr "Viac"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Here is the full list of available countries"
-msgstr "Tu je zoznam dostupných klávesníc"
+msgstr "Tu je celý zoznam dostupných krajín"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your country."
-msgstr "Prosím, zvoµte typ va¹ej my¹i."
+msgstr "Prosím, zvoµte si Va¹u krajinu."
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Country"
-msgstr "Pripoj"
+msgstr "Krajina"
+
+#: ../../any.pm:1
+#, c-format
+msgid "All languages"
+msgstr "V¹etky jazyky"
 
 #: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
-msgstr ""
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "V¹etko"
+msgstr "Pou¾i» ¹tandardne Unicode"
 
 #: ../../any.pm:1
 #, c-format
@@ -497,6 +498,16 @@ msgstr "Obmedz voµby príkazového riadku"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr "Vnúti» nepou¾ívanie APIC"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Enable ACPI"
+msgstr "Povoli» ACPI"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "Pauza pred ¹tartom predvoleného jadra"
 
@@ -549,6 +560,11 @@ msgstr "Vynechaj"
 #, c-format
 msgid "On Floppy"
 msgstr "Na diskete"
+
+#: ../../any.pm:1
+#, c-format
+msgid "First sector of the root partition"
+msgstr "Prvý sektor hlavného oddielu"
 
 #: ../../any.pm:1
 #, c-format
@@ -750,243 +766,6 @@ msgstr ""
 "èakajte %d sekúnd pre predvolenú akciu.\n"
 "\n"
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "OK"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "Áno, chcem automatické prihlásenie (pou¾ívateµ, desktop)"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "Nie, nechcem automatické prihlásenie"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "Spusti» grafické rozhranie po ¹tarte systému"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "Mód systému"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr "Úvodná obrazovka"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr "Obrazovka Lilo"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-"\n"
-"Zvoµte tému pre\n"
-"Lilo a úvodnú obrazovku,\n"
-"mô¾ete si vybra»\n"
-"ka¾dú zvlá¹»"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "Témy"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Splash selection"
-msgstr "Voµba úvodnej obrazovky"
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Konfigurova»"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Momentálne pou¾ívate %s ako ¹tartovací mana¾ér.\n"
-"Kliknite na Konfigurácia pre spustenie sprievodcu nastavením."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "In¹talácia Lilo a úvodnej obrazovky bola úspe¹ne dokonèená"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr "In¹talácia témy zlyhala!"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr "Poznámka"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "Chyba"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr "Znovu spustite 'lilo'"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-"Nemô¾em znovu spusti» Lilo!\n"
-"Spustite \"lilo\" ako root v príkazovom riadku pre dokonèenie in¹talácie "
-"témy."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr "Vytváranie initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr "Nemô¾em spusti» mkinitrd -f /boot/initrd-%s.img %s."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-"Nemô¾em zapísa» /etc/sysconfig/bootsplash\n"
-"Súbor nebol nájdený"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "Zapisujem %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr "Nemô¾em zapísa» /etc/sysconfig/bootsplash."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "Nena¹iel som správy Lilo"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "Kopírujem %s do %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr "Zálohuj %s ako %s.old"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "Vytvor novú tému"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-"Zobrazi» tému\n"
-"pod konzolou"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr "In¹talácia tém"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "Lilo/Grub mód"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "Yaboot mód"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "Spusti» Auroru pri ¹tarte"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "©tandardný Gtk+ monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "©tandardný monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "Nový ¹týl monitora"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "Nový ¹týl kategórii monitorov"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>K"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/Súbor/_Koniec"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_Súbory"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "Konfigurácia ¹týlu ¹tartovania"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1144,8 +923,24 @@ msgstr "Nemô¾ete pou¾i» logický zväzok LVM pre bod pripojenia %s"
 
 #: ../../fsedit.pm:1
 #, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"Nastavili ste softvérovú RAID oblas» ako koreòový oddiel (/).\n"
+"®iaden zavádzaè systému nedoká¾e zavies» systém bez /boot oddielu.\n"
+"Uistite sa, ¾e ste pridali /boot oddiel"
+
+#: ../../fsedit.pm:1
+#, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Oddiel s bodom pripojenia %s u¾ existuje\n"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr "Meno tlaèiarne mô¾e obsahova» iba alfanumerické znaky"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1180,6 +975,15 @@ msgstr ""
 "\n"
 "Ste si vedomí straty v¹etkých oddielov?\n"
 
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "Chyba"
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "server"
@@ -1196,9 +1000,9 @@ msgid "simple"
 msgstr "jednoduché"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enabling swap partition %s"
-msgstr "Formátuje sa oddiel %s"
+msgstr "Povoµujem swap oddiel %s"
 
 #: ../../fs.pm:1 ../../partition_table.pm:1
 #, c-format
@@ -1211,14 +1015,14 @@ msgid "mounting partition %s in directory %s failed"
 msgstr "pripojenie diskovej oblasti %s k adresáru %s zlyhalo"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mounting partition %s"
-msgstr "Formátuje sa oddiel %s"
+msgstr "Pripájam oddiel %s"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Checking %s"
-msgstr "Kopírujem %s"
+msgstr "Kontrolujem %s"
 
 #: ../../fs.pm:1
 #, c-format
@@ -1241,7 +1045,7 @@ msgid "%s formatting of %s failed"
 msgstr "%s formátovanie %s zlyhalo"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Click on \"Next ->\" if you want to delete all data and partitions present\n"
 "on this hard drive. Be careful, after clicking on \"Next ->\", you will not\n"
@@ -1251,11 +1055,11 @@ msgid ""
 "Click on \"<- Previous\" to stop this operation without losing any data and\n"
 "partitions present on this hard drive."
 msgstr ""
-"Kliknite na \"OK\" ak chcete vymaza» v¹etky údaje a oddiely, ktoré\n"
+"Kliknite na \"Pokraèova» ->\" ktoré\n"
 "sa nachádzajú na Va¹om pevnom disku. Buïte opatrní, po kliknutí na\n"
-"\"OK\" nebudete ma» mo¾nos» obnovi» údaje na oddieloch, ktoré boli\n"
+"\"Pokraèova»\" nebudete ma» mo¾nos» obnovi» údaje na oddieloch, ktoré boli\n"
 "predtým na Va¹om disku, vrátane Windows údajov.\n"
-"Kliknite na \"Zru¹\" pre zru¹enie tejto operácie bez straty údajov\n"
+"Kliknite na \"<- Spä»\" pre zru¹enie tejto operácie bez straty údajov\n"
 "a oddielov, ktoré sa momentálne nachádzajú na Va¹om pevnom disku."
 
 #: ../../help.pm:1
@@ -1270,7 +1074,7 @@ msgstr ""
 "nachádzajú budú vymazané a nebude mo¾nos» ich obnovi»!!"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "As a review, DrakX will present a summary of various information it has\n"
 "about your system. Depending on your installed hardware, you may have some\n"
@@ -1287,8 +1091,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1301,7 +1105,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1319,18 +1123,20 @@ msgid ""
 "displayed here. You can click on the button to change the parameters\n"
 "associated with the card."
 msgstr ""
-"Na tomto mieste sú zobrazené niektoré nastavenia vz»ahujúce sa k Vá¹mu "
-"poèítaèu.\n"
-"V závislosti na nain¹talovanom hardvéry mô¾ete (alebo nemusíte) vidie» tieto "
-"kategórie:\n"
+"DrakX Vám prezentuje sumár informácií o Va¹om systéme. V závislosti od\n"
+"nain¹talovaného hardvéru mô¾ete (alebo nemusíte) vidie» tieto polo¾ky:\n"
 "\n"
 " * \"My¹\": skontrolujte aktuálne nastavenie my¹i a kliknite na toto "
-"tlaèítko pre zmenu,\n"
-"ak je to potrebné;\n"
+"tlaèidlo pre zmenu,\n"
+"ak je to potrebné.\n"
 "\n"
 " * \"Klávesnica\": skontrolujte aktuálne nastavenie klávesovej mapy a "
-"kliknite na tlaèítko,\n"
-"ak potrebujete toto nastavenie zmeni»;\n"
+"kliknite na tlaèidlo,\n"
+"ak potrebujete toto nastavenie zmeni».\n"
+"\n"
+" * \"Krajina\": skontrolujte aktuálne nastavenie krajiny. Ak sa nenachádzate "
+"v tejto\n"
+"krajine, kliknite na tlaèidlo a zvoµte si inú.\n"
 "\n"
 " * \"Èasová zóna\": DrakX sa ¹tandardne sna¾í uhádnu» správnu èasovú zónu v "
 "závislosti\n"
@@ -1338,11 +1144,9 @@ msgstr ""
 "nemusíte si vybra» krajinu\n"
 "ktorá kore¹ponduje s èasovým pásmom v ktorom sa nachádzate. Preto máte "
 "mo¾nos» kliknú»\n"
-"na tlaèítko \"Èasová zóna\" pre nakonfigurovanie správnej èasovej zóny v "
-"akej sa práve\n"
-"nachádzate;\n"
+"na tlaèidlo \"Èasová zóna\" pre nakonfigurovanie správnej èasovej zóny.\n"
 "\n"
-" * \"Tlaèiareò\": kliknutím na tlaèítko \"Bez tlaèiarne\" sa spustí "
+" * \"Tlaèiareò\": kliknutím na tlaèidlo \"Bez tlaèiarne\" sa spustí "
 "sprievodca nastavením\n"
 "tlaèiarne. Prezite si zodpovedajúcu kapitolu v ``Úvodnej príruèke'' pre "
 "ïal¹ie informácie\n"
@@ -1350,16 +1154,29 @@ msgstr ""
 "prebieha,\n"
 "je podobné ako poèas in¹talácie;\n"
 "\n"
-" * \"Zvuková karta\": ak je vo Va¹om poèítaèi nájdená zvuková karta, bude "
-"zobrazená\n"
-"na tomto mieste.\n"
+" * \"Zavádzaè\": ak si ¾eláte zmeni» konfiguráciu zavádzaèa, kliknite na "
+"toto tlaèidlo.\n"
+"Táto mo¾nos» je pre skúsených pou¾ívateµov.\n"
+"\n"
+" * \"Grafické rozhranie\": ¹tandardne, DrakX nastaví Va¹e grafické "
+"rozhranie\n"
+"v rozlí¹ení \"800x600\". Ak Vám to nevyhovuje, kliknite na toto tlaèidlo.\n"
+"\n"
+" * \"Sie»\": ak si ¾eláte nakonfigurova» Va¹e pripojenie k INternetu, alebo\n"
+"k lokálnej sieti, kliknite na toto tlaèidlo.\n"
+"\n"
+" * \"Zvuková karta\": ak je vo Va¹om poèítaèi nájdená zvuková karta, bude\n"
+"zobrazená na tomto mieste. Ak nie je zobrazená karta tou, ktorú máte\n"
+"nain¹talovanú v poèítaèi, kliknite na toto tlaèidlo a vyberte si iný "
+"ovládaè.\n"
 "\n"
 " * \"TV karta\": ak je vo Va¹om poèítaèi nájdená TV karta, bude na tomto\n"
-"mieste zobrazená.\n"
+"mieste zobrazená. Ak máte TV kartu a nie je zdetekovaná, kliknite na toto\n"
+"tlaèidlo a pokúste sa ju nastavi» ruène.\n"
 "\n"
 " * \"ISDN karta\": ak je vo Va¹om poèítaèi nájdená ISDN karta bude tu "
 "zobrazená.\n"
-"Mô¾ete kliknú» na toto tlaèítko, ak si ¾eláte zmeni» parametre ktoré s òou "
+"Mô¾ete kliknú» na toto tlaèidlo, ak si ¾eláte zmeni» parametre ktoré s òou "
 "súvisia."
 
 #: ../../help.pm:1
@@ -1370,9 +1187,12 @@ msgid ""
 "actually present on your system, you can click on the button and choose\n"
 "another driver."
 msgstr ""
+"\"Zvuková karta\": ak je zdetekovaná vo Va¹om systéme zvuková karta, je tu\n"
+"zobrazená. Ak si myslíte, ¾e to nie je tá karta, ktorá sa nachádza vo Va¹om\n"
+"systéme, mô¾ete kliknú» na tlaèidlo a vybra» si iný ovládaè."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Yaboot is a bootloader for NewWorld Macintosh hardware and can be used to\n"
 "boot GNU/Linux, MacOS or MacOSX. Normally, MacOS and MacOSX are correctly\n"
@@ -1405,11 +1225,11 @@ msgid ""
 " * Default OS: you can select which OS will boot by default when the Open\n"
 "Firmware Delay expires."
 msgstr ""
-"Yaboot je zavádzaè pre Macintosh hardvér. Je schopný spusti» buï\n"
-"GNU/Linux, MacOS, alebo MacOSX ak sa nachádzajú na Va¹om poèítaèi.\n"
-"Spravidla sú tieto systémy správne zdetekované. V prípade, ¾e nie, je\n"
-"mo¾né prida» ich polo¾ky ruène na tejto obrazovke. Buïte pozorní pri\n"
-"výbere správnych parametrov.\n"
+"Yaboot je zavádzaè pre Macintosh hardvér a mô¾e by» pou¾itý pre spustenie\n"
+"GNU/Linux, MacOS, alebo MacOSX. Väè¹inou je MacOS a MacOSX správne\n"
+"zdetekovaný a nain¹talovaný do menu zavádzaèa. Ak sa tak nestalo, mô¾ete\n"
+"prida» polo¾ku ruène v tomto kroku. Buïte opatrní pri výbere správnych\n"
+"parametrov.\n"
 "\n"
 "Hlavné parametre Yaboot sú:\n"
 "\n"
@@ -1444,7 +1264,7 @@ msgstr ""
 "pauza pre Open Firmware."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can add additional entries in yaboot for other operating systems,\n"
 "alternate kernels, or for an emergency boot image.\n"
@@ -1549,7 +1369,7 @@ msgstr ""
 "výberu."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "DrakX will first detect any IDE devices present in your computer. It will\n"
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
@@ -1575,39 +1395,33 @@ msgid ""
 msgstr ""
 "DrakX sa teraz pokúsi vyhµada» IDE zariadenia vo Va¹om poèítaèi. Je mo¾né\n"
 "tie¾ vyhµada» PCI SCSI karty vo Va¹om systéme. Ak bude nájdená SCSI karta,\n"
-"DrakX automaticky nain¹taluje zodpovedajúci ovládaè.\n"
+"DrakX automaticky nain¹taluje adekvátny ovládaè.\n"
 "\n"
 "Preto¾e detekcia hardvéru nemusí nájs» v¹etky zariadenia, DrakX sa mô¾e\n"
-"opýta» èi je PCI SCSI radiè prítomný. Kliknite na \"Áno\" ak ste sa "
-"uistili,\n"
-"¾e SCSI karta je nain¹talovaná vo Va¹om poèítaèi. Potom bude zobrazený "
+"opýta» èi je PCI SCSI radiè prítomný. Kliknutím na \"Áno\" sa zobrazí "
 "zoznam\n"
-"SCSI kariet z ktorého si mô¾ete vybra». Kliknite na \"Nie\" ak nemáte "
-"¾iaden\n"
-"SCSI radiè. Ak sa potrebujete uisti», mô¾ete si prezrie» zoznam hardvéru\n"
-"prítomného vo Va¹om poèítaèi kliknutím na \"Prezrie» hardvérové informácie\" "
-"a kliknutím na \"OK\". Prehliadnite si tento zoznam a kliknite na \"OK\" "
-"tlaèidlo\n"
-"pre návrat k výberu SCSI kariet.\n"
-"\n"
-"Ak ste ¹pecifikovali Vá¹ radiè ruène, DrakX sa Vás opýta èi chcete\n"
+"z ktorého si mô¾ete vybra». Kliknite na \"Nie\" ak viete, ¾e nemáte ¾iaden "
+"SCSI\n"
+"hardvér vo Va¹om poèítaèi. Ak ste si nie istý, mô¾ete si prezrie» zoznam "
+"zdetekovaného\n"
+"hardvéru vo Va¹om poèítaèi oznaèením polo¾ky \"Prezrie» hardvérové informácie"
+"\"\n"
+"a kliknutím na \"Pokraèova» ->\". Po prehliadnutí zoznamu hardvéru kliknite "
+"na\n"
+"tlaèidlo \"Pokraèova» ->\" pre návrat k dialógu o SCSI rozhraní.\n"
+" \n"
+"Ak ste ¹pecifikovali Vá¹ PCI SCSI radiè ruène, DrakX sa Vás opýta èi chcete\n"
 "¹pecifikova» nastavenia preò. DrakX bude potrebova» vyskú¹a» aj\n"
-"¹pecifické nastavenia potrebné pre inicializáciu hardvéru. Toto obvykle\n"
-"funguje celkom dobre.\n"
+"¹pecifické nastavenia potrebné pre inicializáciu hardvéru. Obvykle DrakX\n"
+"doká¾e vykona» tento krok bez problémov.\n"
 "\n"
-"Ak DrakX nebude môc» vyskú¹a» nastavenia, ktoré sú potrebné, budete\n"
-"musie» zada» tieto nastavenia manuálne. Prosím, pozrite si \"Pou¾ívateµskú "
-"príruèku\"\n"
-"(kapitola 3, \"Získavanie informácií o Va¹om hardvéry\") kde sú rady pre "
-"zistenie\n"
-"mo¾ných parametrov, ktoré sú vy¾adované, z hardvérovej dokumentácie, z web "
-"stránok\n"
-"výrobcu, (ak máte pripojenie k Internetu), alebo z Microsoft Windows (ak "
-"pou¾ívate\n"
-"tento hardvér na Va¹om Windows systéme)."
+"Ak DrakX nebude môc» vyskú¹a» nastavenia pre automatické rozpoznanie\n"
+"parametrov ktoré sú vy¾adované, budete musie» zada» tieto nastavenia pre "
+"ovádaè\n"
+"manuálne."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Now, it's time to select a printing system for your computer. Other OSs may\n"
 "offer you one, but Mandrake Linux offers two. Each of the printing systems\n"
@@ -1634,42 +1448,34 @@ msgid ""
 "system you may change it by running PrinterDrake from the Mandrake Control\n"
 "Center and clicking the expert button."
 msgstr ""
-"Na tomto mieste si mô¾ete vybra» tlaèový systém pre Vá¹ poèítaè. Iné\n"
-"systémy Vám poskytujú iba jediný, Mandrake Linux Vám poskytuje tri.\n"
+"Teraz nastal èas výberu tlaèového systému pre Vá¹ poèítaè. Iné\n"
+"systémy Vám poskytujú iba jediný, Mandrake Linux Vám poskytuje dva.\n"
 "\n"
 " * \"pdq\" - èo znamená ``tlaè, neukladaj do fronty'', je vhodný výber ak\n"
 "máte priamo pripojenú tlaèiareò k Vá¹mu poèítaèu a chcete sa vyhnú»\n"
-"problémom so zaseknutým papierom v tlaèiarni a nemáte sie»ovú tlaèiareò.\n"
-"Mô¾e by» pou¾itý v prípade veµmi jednoduchých sietí a je vcelku pomalý\n"
-"pre siete. Zvoµte si \"pdq\" ak nemáte skúsenosti s GNU/Linux-om. Mô¾ete\n"
-"si zmeni» túto voµbu po in¹talácii pomocou Printerdrake z Kontrolného "
-"centra\n"
-"Mandrake a kliknutím na tlaèidlo Expert.\n"
+"problémom so zaseknutým papierom v tlaèiarni a nechcete ma» sie»ovú "
+"tlaèiareò.\n"
+"(\"pdq\" mô¾e fungova» aj v malom sie»ovom prostredí). Je odporuèené pou¾i»\n"
+"ak nemáte skúsenosti s GNU/Linux systémom.\n"
 "\n"
-" * \"CUPS\" - ``Common Unix Print System'' je skvelý pri tlaèení na Va¹u\n"
-"lokálnu tlaèiareò ako aj na sie»ovú tlaèiareò a rovnako aj pri poskytovaní\n"
-"tlaèiarne v sieti. Je jednoduchý a doká¾e fungova» ako server aj klient. "
-"Dokonca\n"
-"je kompatibilný so systémami, ktoré sa be¾ne pou¾ívajú. Základné nastavenie\n"
+" * \"CUPS\" - ``Common Unix Print System'' je vynikajúci výber pre tlaèenie\n"
+"na Va¹u lokálnu tlaèiareò ako aj na sie»ovú tlaèiareò a rovnako aj pri "
+"poskytovaní\n"
+"tlaèiarne v sieti. Je jednoduchý a doká¾e fungova» ako server aj klient pre\n"
+"star¹í tlaèový systém \"lpd\", ktorý je kompatibilný so star¹ími operaènými\n"
+"systémami, ktoré stále vy¾adujú tlaèové slu¾by. Základné nastavenie\n"
 "je tak isto jednoduché ako v prípade \"pdq\". Ak potrebujete emulova» \"ldp"
 "\"\n"
-"server budete musie» spusti» \"cups-lpd\" démona. CUPS obsahuje grafické\n"
-"nástroje pre tlaèenie, alebo výber tlaèiarní.\n"
-" * \"lprNG\" - ``line printer daemon New Generation''. Je to systém ktorý "
-"umo¾òuje\n"
-"pribli¾ne rovnaké veci ako iné systémy, ale je mo¾né napríklad tlaèi» na "
-"tlaèiaròach\n"
-"pripojených vrámci siete Novell, preto¾e podporuje protokol IPX a umo¾òuje "
-"tlaèi»\n"
-"priamo pomocou príkazového riadku. Ak potrebujete podporu Novellu, alebo\n"
-"príkazového re¾imu bez potreby pou¾ívania rúr (pipe) pou¾ite lprNG.\n"
-" Inak je\n"
-"odporúèané pou¾itie CUPS-u, preto¾e je jednoduch¹í a lep¹ie pracuje v "
-"sie»ovom\n"
-"prostredí,"
+"server budete musie» spusti» \"cups-lpd\" démona. \"CUPS\" obsahuje "
+"grafické\n"
+"nástroje pre tlaèenie, pre výber tlaèiarní, alebo ich mene¾ovanie.\n"
+"\n"
+"Ak neskôr budete chciet svoju voµbu zmeni», alebo budete chcie» zru¹i»\n"
+"tlaèový systém mô¾ete tak spravi» za pomoci PrinterDrake z Mandrake\n"
+"Kontrolného centra kliknutím na tlaèidlo expert."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
 "automated. DrakX will analyze the disk boot sector and act according to\n"
@@ -1690,7 +1496,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1715,14 +1521,36 @@ msgid ""
 "floppy disk must be blank or have non-critical data on it - DrakX will\n"
 "format the floppy and will rewrite the whole disk."
 msgstr ""
+"LILO a Grub sú GNU/Linux zavádzaèe. Be¾ne je táto èas» plne automatizovaná.\n"
+"DrakX zanalyzuje zavádací sektor na disku a podµa toho èo nájde vykoná\n"
+"nasledovné:\n"
+"\n"
+" * ak je nájdený Windows zavádzaè, bude nahradený Grub/LILOm. Takto\n"
+"budete ma» mo¾nos» spusti» GNU/Linux, alebo iný operaèný systém.\n"
+"\n"
+" * ak bude nájdený Grub, alebo LILO zavádzaè, bude nahradený novým.\n"
+"\n"
+"Ak nebude vedie» in¹talátor spravi» rozhodnutie, opýta sa Vás kde si\n"
+"¾eláte umiestni» zavádzaè.\n"
+"\n"
+"\"©tartovacie zariadenie\": v mnohých prípadoch nebudete potrebova» meni»\n"
+"predvolené (\"Prvý sektor na disku (MBR)\", ale ak uprednostòujete ma»\n"
+"zavádzaè nain¹talovaný na druhom disku (\"/dev/hdb\"), alebo na diskete\n"
+"(\"Disketa\") mô¾ete tak urobi».\n"
+"\n"
+"Zvolením \"Vytvori» spú¹»ací disk\" Vám bude umo¾nené vytvori» záchranné\n"
+"¹tartovacie médium.\n"
+"\n"
 "Mandrake Linux CD-ROM obsahuje záchranný mód. Je mo¾né sa k nemu\n"
-"dosta» tak, ¾e spustíte poèítaè z CD-ROM média, stlaèíte ``F1'' pred\n"
-"spustením a napí¹ete ``rescue'' ako parameter Lilo. Ale v prípade, ¾e Vá¹\n"
-"poèítaè nie je schopný spusti» sa z CD-ROM, mali by ste sa vráti» spä» k "
-"tomuto\n"
+"dosta» tak, ¾e spustíte poèítaè z CD-ROM, stlaèíte >> F1 << pred\n"
+"spustením systému a napí¹ete >> rescue << ako parameter zavádzaèa.\n"
+"V prípade, ¾e Vá¹ poèítaè nie je schopný na¹tartova» z CD-ROM, mô¾u\n"
+"nasta» dve situácie kedy bude ¹tartovacia disketa nevyhnutná:\n"
+"\n"
+"mali by ste sa vráti» spä» k tomuto\n"
 "kroku v nasledovných dvoch situáciách:\n"
 "\n"
-" * ak in¹talujete zavádzaè, DrakX prepí¹e zavádzací sektor (MBR) na Va¹om "
+" * keï in¹talujete zavádzaè, DrakX prepí¹e zavádzací sektor (MBR) na Va¹om "
 "disku\n"
 "(s výnimkou, ak pou¾ívate iný boot mana¾ér) kvôli tomu, aby Vám bolo "
 "umo¾nené\n"
@@ -1748,7 +1576,7 @@ msgstr ""
 "disketu."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After you have configured the general bootloader parameters, the list of\n"
 "boot options that will be available at boot time will be displayed.\n"
@@ -1765,18 +1593,22 @@ msgid ""
 "bootloader menu, but you will need a boot disk in order to boot those other\n"
 "operating systems!"
 msgstr ""
-"LILO (LInux LOader) a Grub sú zavádzaèe: umo¾òujú spú¹»a» buï\n"
-"GNU/Linux systém, alebo mnoho iných operaèných systémov prítomných\n"
-"na Va¹om poèítaèi. Väè¹inou sú tieto systémy korektne zdetekované a pridané\n"
-"do zavádzaèa. V prípade ¾e nie, je mo¾né prida» záznam ruène na tejto\n"
-"obrazovke. Buïte opatrní pri výbere správnych parametrov.\n"
+"Ak ste u¾ nastavili základné parametre zavádzaèa, zobrazí sa zoznam\n"
+"nastavení pri ¹tarte.\n"
 "\n"
-"Mô¾ete tie¾ chcie» nema» prístup k týmto operaèným systémom. V takomto\n"
-"prípade vyma¾te zodpovedajúce polo¾ky. Potom ale budete potrebova»\n"
-"spú¹»aciu disketu pre mo¾nos» spustenia týchto systémov."
+"Ak je na Va¹om poèítaèi nain¹talovaný iný operaèný systém, bude automaticky\n"
+"pridaný do ¹tartovacieho menu. Mô¾ete prida» k existujúcim polo¾kám inú\n"
+"kliknutím na \"Prida»\"; vybraním polo¾ky a kliknutím na \"Upravi»\", alebo\n"
+"\"Odstráni»\" ju mô¾ete upravi», alebo odstráni». \"OK\" potvrdí Va¹e "
+"zmeny.\n"
+"\n"
+"Mo¾no nebudete chcie» aby bolo umo¾nené hocikomu získa» prístup k týmto\n"
+"operaèným systémom ak z konzoly re¹tartne poèítaè. Mô¾ete odstráni»\n"
+"tieto polo¾ky pre operaèné systémy z menu zavádzaèa, ale budete potom\n"
+"potrebova» zavádzací disk, ak budete tieto systémy chcie» spusti»!"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This dialog allows to finely tune your bootloader:\n"
 "\n"
@@ -1805,63 +1637,34 @@ msgid ""
 "Clicking the \"Advanced\" button in this dialog will offer advanced options\n"
 "that are reserved for the expert user."
 msgstr ""
-"LILO a Grub sú GNU/Linux zavádzaèe. Táto èas» je väè¹inou úplne\n"
-"automatizovaná. DrakX zanalyzuje zavádzací sektor pevného disku\n"
-"a vykoná akciu v závislosti od toho èo nájde:\n"
+"Tento dialóg Vám umo¾ní detailne upravi» Vá¹ zavádzaè:\n"
 "\n"
-" * ak bude nájdený zavádzaè Windows, bude prepísaný Grub/LILO-m\n"
-"èo Vám umo¾ní ¹tartova» GNU/Linux, alebo iný operaèný systém,\n"
-"namiesto pôvodného zavádzaèa.;\n"
+" * \"Zavádzaè, ktorý bude pou¾itý\": tu máte n výber z troch mo¾ností:\n"
 "\n"
-" * ak bude nájdený Grub, alebo LILO, v zavádzacom sektore, budú nahradené\n"
-"novou verziou.\n"
+"    * \"GRUB\": ak preferujete Grub (textové menu).\n"
 "\n"
-"Ak sa DrakX nevie rozhodnú», zobrazí dialóg s rôznymi mo¾nos»ami.\n"
-"\n"
-"* \"Pou¾i» zavádzaè\": na výber máte tri mo¾nosti:\n"
-"\n"
-"    * \"GRUB\": ak preferujete grub (textové menu).\n"
+"    * \"LILO s textovým menu\": ak preferujete LILO s textovým menu\n"
 "\n"
 "    * \"LILO s grafickým menu\": ak preferujete LILO s grafickým\n"
 "rozhraním.\n"
 "\n"
-"    * \"LILO s textovým menu\": ak preferujete LILO s textovým\n"
-"rozhraním.\n"
+" * \"©tartovacie zariadenie\": v mnohých prípadoch nie je potrebné meni»\n"
+"prednastavené (\"/dev/hda\"), ale ak chcete, je mo¾né zavádzaè nain¹talova»\n"
+"na druhý pevný disk (\"/dev/hdb\"), prípadne na disketu (\"/dev/fd0\")\n"
 "\n"
-" * \"Boot zariadenie\": v mnohých prípadoch nepotrebujete meni» "
-"prednastavené\n"
-"(\"/dev/hda\"), ale ak chcete, je mo¾né zavádzaè nain¹talova» na druhý "
-"pevný\n"
-"disk (\"/dev/hdb\"), alebo na disketu (\"/dev/fd0\");\n"
+" * \"Pauza pred spustením\": po ¹tarte, alebo re¹tarte poèítaèa je poèas "
+"tejto\n"
+"pauzy mo¾né na konzole zvoli» polo¾ku, inú ako predvolenú, ktorá sa má "
+"spusti».\n"
 "\n"
-" * \"Pauza pred ¹tartom predvoleného jadra\": keï sa re¹tartuje poèítaè, je "
-"mo¾né\n"
-"vïaka menu zavádzaèa vybra» polo¾ku, ktorú chcete spusti». Táto pauza urèuje "
-"èas\n"
-"po ktorého uplynutí sa spustí predvolená polo¾ka.\n"
+"!! Dávajte si pozor ak nezvolíte in¹taláciu zavádzaèa (oznaèením \"Zru¹i»"
+"\"), musíte\n"
+"si by» istý ¾e budete ma» ako spusti» Mandrake Linux systém! Buïte si istý, "
+"¾e\n"
+"viete èo robíte pred zmenou tohto nastavenia. !!\n"
 "\n"
-"!! Dávajte pozor, ak si zvolíte, ¾e nechcete in¹talova» zavádzaè (kliknutím "
-"na\n"
-"\"Zru¹\" na tomto mieste). Uistite sa, ¾e budete ma» mo¾nos» ako spusti»\n"
-"Vá¹ Mandrake Linux systém! Ak chcete zmeni» niektoré tunaj¹ie nastavenie,\n"
-"uistite sa, ¾e viete èo robíte.!!\n"
-"\n"
-"Kliknutím na tlaèidlo \"Roz¹írené\" v tomto dialógu získate prístup k "
-"rôznym\n"
-"roz¹íreným nastaveniam, ktoré sú urèené pokroèilým pou¾ívateµom.\n"
-"\n"
-"Po tom, ako máte nakonfigurované hlavné parametre zavádzaèa, zobrazí sa "
-"zoznam\n"
-"v¹etkých parametrov ktoré je mo¾né pou¾i» pre zavádzaè.\n"
-"\n"
-"Ak je nain¹talovaný aj iný operaèný systém na Va¹om poèítaèi, bude "
-"automaticky\n"
-"pridaný do ¹tartovacieho menu. Mô¾ete si doladi» nastavenie existujúcich\n"
-"nastavení. Oznaèením polo¾ky a kliknutím na \"Modifikova»\" modifikova», "
-"alebo\n"
-"odstráni»; \"Pridaj\" vytvorí nový záznam; a kliknutím na \"Hotovo\" sa "
-"bude\n"
-"pokraèova» v in¹talácii ïal¹ím krokom."
+"Kliknutím na tlaèidlo \"Roz¹írené\" zíkate prístup k roz¹íreným nastaveniam\n"
+"ktoré sú urèené pre skusených pou¾ívateµov."
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -1891,7 +1694,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -1956,7 +1759,7 @@ msgstr ""
 "GNU/Linux nazýva ttyS0."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
 "mouse. If it does, it assumes you have a two-button mouse and will\n"
@@ -1983,22 +1786,38 @@ msgid ""
 "the buttons and check that the mouse pointer moves on-screen as you move\n"
 "your mouse."
 msgstr ""
-"DrakX v princípe doká¾e zdetekova» poèet tlaèidiel, ktoré má Va¹a my¹. Ak\n"
-"nie, zrejme to znamená, ¾e máte dvojtlaèidlovú my¹ a mali by ste nastavi»\n"
-"emuláciu trojtlaèidlovej. DrakX by mal automaticky vedie» èi je my¹ "
-"pripojená\n"
-"na PS/2, sériový, alebo USB konektor.\n"
+"DrakX v princípe doká¾e zdetekova» poèet tlaèidiel, ktoré má Va¹a my¹. Ak "
+"sa\n"
+"tak stalo a máte dvojtlaèidlovú my¹, mô¾ete ju nakonfigurova» aby emulovala\n"
+"trojtlaèidlovú. Funkia tretieho tlaèidla bude potom dostupná po súèastnom\n"
+"stlaèení µavého a pravého tlaèidla. DrakX by mal automaticky vedie» èi je "
+"my¹\n"
+"pripojená na PS/2, sériový, alebo USB port.\n"
 "\n"
-"Ak si ¾eláte ¹pecifikova» iný typ my¹i, vyberte si zodpovedajúci typ zo\n"
-"zoznamu.\n"
+"Ak z dákeho dôvodu potrebujete ¹pecifikova» iný typ my¹i, vyberte si "
+"zodpovedajúci\n"
+"typ zo zoznamu.\n"
 "\n"
 "Ak si vyberiete iný typ my¹i ako je predvolený, zobrazí sa testovacia\n"
 "obrazovka. Pou¾ite tlaèidlá a koliesko na kontrolu toho, èi sú nastavenia\n"
-"správne. Ak my¹ nepracuje správne, stlaète medzerník, alebo [Enter]\n"
-"pre \"Zru¹enie\" a opakovanie výberu."
+"správne a èi my¹ pracuje správne. Ak my¹ nepracuje správne, stlaète "
+"medzerník,\n"
+"alebo [Enter] pre zru¹enie testu a opakovanie výberu.\n"
+"\n"
+"Obèas sa stane, ¾e my¹ s kolieskom nie je správne automaticky zdetekovaná, "
+"vtedy\n"
+"je potrebné vybra» Va¹u my¹ zo zoznamu. Buïte si istý, ¾e ste si správne "
+"vybrali\n"
+"port, kam je Va¹a my¹ pripojená. Po výbere my¹i kliknite na tlaèidlo "
+"\"Pokraèova» ->\"\n"
+"a zobrazí sa Vám obrázok my¹i. Vyskú¹ajte potoèi» kolieskom a uistite sa, ¾e "
+"funguje\n"
+"správne. Mali by ste vidie» ako sa posúva Va¹e koliesko, vyskú¹ajte si aj "
+"funkènos»\n"
+"tlaèidiel, prípadne súste my¹ou aj pohýba»."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your choice of preferred language will affect the language of the\n"
 "documentation, the installer and the system in general. Select first the\n"
@@ -2020,21 +1839,31 @@ msgid ""
 "language used by the entire system. Running the command as a regular user\n"
 "will only change the language settings for that particular user."
 msgstr ""
-"Vyberte si prosím Vá¹ preferovaný jazyk pre in¹taláciu a pre systém.\n"
+"Vá¹ výber preferovaného jazyka bude ma» za následok nastavenie tohto\n"
+"jazyka pre dokumentáciu, in¹talátor a v¹eobecne pre celý systém. Vyberte\n"
+"si najprv región v ktorom sa nacházate a potom jazyk, ktorým hovoríte.\n"
 "\n"
 "Kliknutím na tlaèidlo \"Roz¹írené\" Vám bude umo¾nené vybra» si aj iné\n"
-"jazyky, ktoré sa nain¹talujú na Vá¹ stroj. Výberom iných jazykov sa\n"
-"nain¹talujú súbory ¹pecifické pre daný jazyk, pre systémovú dokumentáciu\n"
-"a aplikácie. Napríklad, ak na Va¹om poèítaèi máte pou¾ívateµov aj zo\n"
-"©panielska, vyberte slovenèinu ako hlavný jazyk a v zozname\n"
-"roz¹írenej sekcie kliknite na tlaèidlo kore¹pondujúce s \"©paniel¹tinou|"
-"©panielskom\".\n"
+"jazyky, ktoré sa nain¹talujú do Vá¹ho systému, èím sa nain¹talujú súbory\n"
+"¹pecifické pre daný jazyk, pre systémovú dokumentáciu a aplikácie.\n"
+"Napríklad, ak na Va¹om poèítaèi máte pou¾ívateµov aj zo ©panielska,\n"
+"vyberte si slovenèinu ako hlavný jazyk a v zozname roz¹írenej sekcie\n"
+"kliknite na tlaèidlo \"¹panielsky\".\n"
 "\n"
-"Nain¹talovaných mô¾e by» viacero doplòujúcicich jazykov, zaka¾dým vybraným\n"
-"stlaète \"OK\" pre pokraèovanie."
+"V¹imnite si, ¾e nie ste obmedzení vo výbere iba jedného prídavného jazyka.\n"
+"Ak ste si u¾ vybrali v¹etky potrebné jazykové prostredia, kliknite na "
+"tlaèidlo\n"
+"\"Pokraèova» ->\" pre pokraèovanie.\n"
+"\n"
+"Na prepínanie medzi viacerými jazykmi, ktoré máte v systéme nain¹talované\n"
+"mô¾ete pou¾i» \"/usr/sbin/localedrake\" príkaz, ktorý spustíte ako \"root\", "
+"èím\n"
+"zmeníte pou¾ívaný jazyk pre celý systém. Spustením tohto príkazu ako\n"
+"obyèajný pou¾ívateµ dosiahnete zmenu nastavenia jazykov pre tohto "
+"pou¾ívateµa."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Depending on the default language you chose in Section , DrakX will\n"
 "automatically select a particular type of keyboard configuration. However,\n"
@@ -2052,18 +1881,21 @@ msgid ""
 "dialog will allow you to choose the key binding that will switch the\n"
 "keyboard between the Latin and non-Latin layouts."
 msgstr ""
-"DrakX u¾ vybral klávesnicu pre Vás (v závislosti na jazyku aký ste si "
-"zvolili)\n"
-"a nepotrebovali by ste vidie» tento krok. Je ale mo¾né, ¾e\n"
-"nechcete ma» nastavenú klávesnicu, ktorá presne kore¹ponduje s jazykom:\n"
+"V závislosti na predvolenom jazyku DrakX automaticky vybral vhodný\n"
+"typ klávesnice. Je ale mo¾né, ¾e nechcete ma» nastavenú klávesnicu,\n"
+"ktorá presne kore¹ponduje s jazykom:\n"
 "napríklad, ak hovoríte po slovensky, nemusí to automaticky znamena», ¾e\n"
 "chcete ma» nastavenú slovenskú klávesnicu a naopak, ak chcete ma»\n"
 "nastavenú slovenskú klávesnicu, nemusí to znamena» ¾e hovoríte po\n"
-"slovensky. V obidvoch prípadoch sa mô¾ete vráti» k tomuto kroku\n"
-"in¹talácie a vybra» si zodpovedajúcu klávesnicu zo zoznamu.\n"
+"slovensky. V takomto prípade Vám tento krok umo¾ní vybra» si Vami\n"
+"po¾adovaný typ klávesnice zo zoznamu.\n"
 "\n"
 "Kliknite na tlaèidlo \"Viac\" èo bude ma» za následok výpis kompletného\n"
-"zoznamu podporovaných klávesníc."
+"zoznamu podporovaných klávesníc.\n"
+"\n"
+"Ak si vyberiete klávesnicovú mapu, ktorá obsahuje ne-latinkové znaky,\n"
+"potom ïal¹í krok Vám umo¾ní vybra» si kombináciu kláves, pomocou\n"
+"ktorej si budete môc» prepína» medzi latin a ne-latin mapou."
 
 #: ../../help.pm:1
 #, c-format
@@ -2096,6 +1928,9 @@ msgid ""
 "\"Country\": check the current country selection. If you are not in this\n"
 "country, click on the button and choose another one."
 msgstr ""
+"\"Krajina\": skontrolujte nastavenie krajiny. Ak sa nenachádzate v tejto "
+"krajine\n"
+"kliknite na tlaèidlo a vyberte si inú."
 
 #: ../../help.pm:1
 #, c-format
@@ -2161,7 +1996,7 @@ msgstr ""
 "systémom Windows (prvý disk, alebo oddiel sa volá \"C:\"."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to choose which partition(s) will be used for the\n"
 "installation of your Mandrake Linux system. If partitions have already been\n"
@@ -2251,32 +2086,31 @@ msgstr ""
 "Pri rozdeµovaní vybraného disku je mo¾né pou¾i» tieto mo¾nosti:\n"
 "\n"
 " * \"Zma¾ v¹etko\": táto voµba vyma¾e v¹etky oblasti na vybranom pevnom\n"
-"disku;\n"
+"disku\n"
 "\n"
-" * \"Automaticky prerozdeµ\": táto voµba umo¾ní automatické vytvorenie \"Ext2"
-"\"\n"
-"a swap oblasti na voµnom mieste Vá¹ho disku;\n"
+" * \"Automaticky prerozdeµ\": táto voµba umo¾ní automatické vytvorenie ext3\n"
+"a swap oblasti na voµnom mieste Vá¹ho disku\n"
 "\n"
 " * \"Viac\": získate prístup k roz¹íreným mo¾nostiam:\n"
 "\n"
-"    * \"Ulo¾ tabuµku rozdelenia disku\": ulo¾í tabuµku rozdelenia na "
-"disketu.\n"
+" * \"Ulo¾ tabuµku rozdelenia disku\": ulo¾í tabuµku rozdelenia na disketu.\n"
 "Je to vhodné pre neskor¹iu obnovu tabuµky, ak to bude potrebné. Je veµmi\n"
-"odporúèané aby ste absolvovali tento krok;\n"
+"odporúèané aby ste absolvovali tento krok\n"
 "\n"
-"    * \"Obnov tabuµku rozdelenia disku\": umo¾òuje obnovi» predtým ulo¾enú\n"
+" * \"Obnov tabuµku rozdelenia disku\": umo¾òuje obnovi» predtým ulo¾enú\n"
 "tabuµku z diskety;\n"
 "\n"
-"    * \"Zachráni» tabuµku rozdelenia disku\": ak je Va¹a tabuµka rozdelenia "
+" * \"Zachráni» tabuµku rozdelenia disku\": ak je Va¹a tabuµka rozdelenia "
 "disku znièená,\n"
 "mô¾ete sa pokúsi» zachráni» ju pou¾itím tejto mo¾nosti. Buïte opatrní a "
 "pamätajte si, ¾e\n"
-"sa to nemusí podari»;\n"
+"sa to nemusí podari»\n"
 "\n"
-"    * \"Znovunaèíta» tabuµku rozdelenia disku\": zru¹i» v¹etky zmeny a "
-"naèíta» znova\n"
-"tabuµku rozdelenia disku;\n"
-"    * \"Automatické pripojenie vymeniteµného média\": odznaèením tejto "
+" * \"Znovunaèíta» tabuµku rozdelenia disku\": zru¹i» v¹etky zmeny a naèíta» "
+"znova\n"
+"tabuµku rozdelenia disku\n"
+"\n"
+" * \"Automatické pripojenie vymeniteµných médií\": odznaèením tejto "
 "mo¾nosti\n"
 "prinútite pou¾ívateµov k manuálnemu pripájaniu a odpájaniu vymeniteµných "
 "médií\n"
@@ -2285,18 +2119,22 @@ msgstr ""
 " * \"Sprievodca\": pou¾ite toto nastavenie ak si ¾eláte pou¾i» sprievodcu "
 "pre rozdelenie\n"
 "Vá¹ho disku. Táto mo¾nos» je doporuèená ak nemáte dobré znalosti o "
-"rozdeµovaní pevného\n"
-"disku;\n"
+"rozdeµovaní\n"
+"pevného disku\n"
 "\n"
-" * \"Spä»\": pou¾ité túto mo¾nos» pre zru¹enie Va¹ich zmien;\n"
+" * \"Spä»\": pou¾ite túto mo¾nos» pre zru¹enie Va¹ich zmien\n"
 "\n"
-" * \"Prepni do normálneho/expert re¾imu\": umo¾òuje iné akcie na oblastiach "
-"(typ, voµby,\n"
-"formátovanie) a vypisuje viac informácií;\n"
+" * \"Prepni do normálneho/expertného re¾imu\": umo¾òuje vykona» ïal¹ie "
+"akcie\n"
+"na oblastiach (typ, voµby, formátovanie) a vypisuje viac informácií;\n"
 "\n"
-" * \"Hotovo\": ak ste skonèili s rozdeµovaním Vá¹ho pevného disku, tak táto "
+" * \"Hotovo\": ak ste skonèili s rozdeµovaním Vá¹ho pevného disku, táto "
 "voµba\n"
 "ulo¾í Va¹e zmeny na disk.\n"
+"\n"
+"Ak ste definovali veµkos» partícií, mô¾ete e¹te donastavi» veµkos» týchto "
+"partícií\n"
+"pomocou ¹ípiek na klávesnici.\n"
 "\n"
 "Poznámka: je mo¾né dosiahnu» v¹etky voµby a nastavenia pomocou klávesnice. "
 "Výber\n"
@@ -2304,15 +2142,15 @@ msgstr ""
 "\n"
 "Ak je oblas» vybraná, je mo¾né pou¾i»:\n"
 "\n"
-" * Ctrl-c pre vytvorenie novej oblasti (ak je vybraná prázdna oblas»);\n"
+" * Ctrl-c pre vytvorenie novej oblasti (ak je vybraná prázdna oblas»)\n"
 "\n"
 " * Ctrl-d pre zru¹enie oblasti\n"
 "\n"
-" * Ctrl-m pre nastavenie bodu pripojenia.\n"
+" * Ctrl-m pre nastavenie bodu pripojenia\n"
 "\n"
-"Pre získanie informácií o iných súborových systémoch, ktoré sú dostupné, si "
+"Pre získanie informácií o iných súborových systémoch, ktoré sú dostupné, "
 "preèítajte\n"
-"ext2fs kapitolu z ``Referenènej príruèky''.\n"
+"si ext2fs kapitolu z ``Referenènej príruèky''.\n"
 "\n"
 "Ak prevádzate in¹taláciu na PPC stroj budete zrejme chcie» vytvori» malý "
 "HFS\n"
@@ -2322,7 +2160,7 @@ msgstr ""
 "situácie, ktoré mô¾u nasta»."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, DrakX will allow you to choose the security level desired\n"
 "for the machine. As a rule of thumb, the security level should be set\n"
@@ -2334,18 +2172,20 @@ msgid ""
 "\n"
 "If you do not know what to choose, keep the default option."
 msgstr ""
-"Na tomto mieste je èas nastavi» po¾adovanú bezpeènostnú úroveò pre\n"
-"tento poèítaè. Èím viac slu¾ieb poèítaè poskytuje a èím viac sú údaje\n"
-"na òom ulo¾ené dôle¾itej¹ie, tým vy¹¹iu úroveò by ste mali nastavi». V "
-"ka¾dom\n"
-"prípade, vy¹¹ia úroveò zásadne mení jednoduchos» pou¾ívania\n"
-"systému. V¹imnite si kapitolu \"msec\" v \"Referenènej príruèke\", ak\n"
-"si ¾eláte získa» viac informácií o tom, èo znamenajú tieto úrovne.\n"
+"Na tomto mieste Vám DrakX umo¾òuje nastavi» bezpeènostnú úroveò pre\n"
+"tento poèítaè. Ako pomôcku mô¾ete pou¾i» pravidlo, ¾e èím dôle¾itej¹ie\n"
+"údaje, alebo ak poèítaè bude pripojený do Internetu, tým vy¹¹ia úroveò\n"
+"by mala by» zvolená. Treba si uvedomi», ¾e so zvy¹ovaním bezpeènostnej "
+"úrovne\n"
+"sa zni¾uje pohodlie pou¾ívania. V¹imnite si kapitolu \"msec\" v "
+"\"Referenènej\n"
+"príruèke\", ak si ¾eláte získa» viac informácií o tom, èo znamenajú tieto "
+"úrovne.\n"
 "\n"
 "Ak si neviete vybra», ponechajte ¹tandardné nastavenie."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
@@ -2374,7 +2214,7 @@ msgstr ""
 "si vyberte \"Zru¹\" pre zru¹enie."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Any partitions that have been newly defined must be formatted for use\n"
 "(formatting means creating a file system).\n"
@@ -2401,14 +2241,15 @@ msgid ""
 "Click on \"Advanced\" if you wish to select partitions that will be checked\n"
 "for bad blocks on the disk."
 msgstr ""
-"Ka¾dý nanovo definovaný diskový oddiel musí by» naformátovaný.\n"
-"Formátovanie znamená vytváranie súborového systému.\n"
+"Ka¾dý nanovo definovaný diskový oddiel musí by» naformátovaný pred jeho "
+"pou¾itím.\n"
+"(formátovanie znamená vytváranie súborového systému).\n"
 "\n"
 "Teraz si mô¾ete zvoli», èi si ¾eláte formátova» existujúce oddiely aby ste "
 "odstránili\n"
 "údaje, ktoré sa na nich nachádzajú. Ak si to ¾eláte, zvoµte prosím oddiely, "
 "ktoré\n"
-"si ¾eláte formátova».\n"
+"chcete naformátova».\n"
 "\n"
 "Uvedomte si, ¾e nie je nutné opätovne formátova» v¹etky existujúce oddiely.\n"
 "Urèite musíte formátova» oddiely obsahujúce operaèný systém (napríklad  \"/"
@@ -2421,9 +2262,10 @@ msgstr ""
 "v¹etky údaje na zvolených oddieloch zmazané a nebude ¾iadna mo¾nos»\n"
 "ako ich obnovi»\n"
 "\n"
-"Kliknite na \"OK\" ak ste pripravený formátova» vybrané oddiely.\n"
+"Kliknite na \"Pokraèova» ->\" ak ste pripravený formátova» vybrané oddiely.\n"
 "\n"
-"Kliknite na \"Zru¹\" ak chcete zvoli» iné oddiely pre novú in¹taláciu Vá¹ho\n"
+"Kliknite na \"<- Spä»\" ak si chcete zvoli» iné oddiely pre novú in¹taláciu "
+"Vá¹ho\n"
 "nového Mandrake Linux systému.\n"
 "\n"
 "Kliknite na \"Roz¹írené\" ak si chcete vybra» oddiely, ktoré budú "
@@ -2431,7 +2273,7 @@ msgstr ""
 "na prítomnos» chybných blokov na disku."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "There you are. Installation is now complete and your GNU/Linux system is\n"
 "ready to use. Just click \"Next ->\" to reboot the system. The first thing\n"
@@ -2465,17 +2307,17 @@ msgid ""
 "\"mformat a:\")"
 msgstr ""
 "Hotovo. In¹talácia je teraz kompletná a Vá¹ GNU/Linux systém je\n"
-"pripravený na pou¾ívanie. Iba kliknite na \"OK\" pre re¹tart systému. "
-"Mô¾ete\n"
-"spusti» GNU/Linux, alebo Windows, podµa toho ktorý systém preferujete (ak\n"
-"máte duálne spú¹»anie), hneï ako sa poèítaè znova zaène spú¹»a».\n"
+"pripravený na pou¾ívanie. Iba kliknite na \"Pokraèova» ->\" pre re¹tart\n"
+"systému. Prvá vec, ktorú mô¾ete vidie» po ukonèení hardverových testov je\n"
+"menu zavádzaèa, ktorý Vám dáva mo¾nos» výberu aký operaèný systém chcete\n"
+"spusti».\n"
 "\n"
-"Tlaèítko \"Roz¹írené\" (iba v Expertnom re¾ime) zobrazí dve ïal¹ie "
-"tlaèidla:\n"
+"Tlaèidlo \"Roz¹írené\" (iba v Expertnom re¾ime) zobrazí dve ïal¹ie "
+"tlaèidlá:\n"
 "\n"
 " * \"vytvorenie autoin¹talaènej diskety\": èím sa vytvorí disketa, pomocou\n"
 "ktorej mô¾ete automaticky vykona» celú in¹taláciu bez potreby zásahu,\n"
-"èi¾e podobnú in¹taláciu ako ste práve nakonfigurovali.\n"
+"èi¾e podobnú in¹taláciu ako ste práve previedli.\n"
 "\n"
 "   V¹imnite si dve rôzne nastavenia po kliknutí na toto tlaèidlo:\n"
 "\n"
@@ -2484,24 +2326,25 @@ msgstr ""
 "\n"
 "    * \"Automatická\". Plne automatizovaná in¹talácia: pevný disk je "
 "kompletne\n"
-"prepísaný, v¹etky údaje stratené.\n"
+"prepísaný, v¹etky údaje budú stratené.\n"
 "\n"
 "   Táto mo¾nos» je veµmi u¾itoèná, ak in¹talujete veµké mno¾stvo podobných\n"
 "poèítaèov. Pozrite si sekciu venovanú automatickej in¹talácii na na¹ej web "
 "stránke;\n"
 "\n"
-" * \"Ulo¾i» výber balíkov\"(*): ulo¾í výber balíkov tak, ako boli "
-"prednedávnom\n"
-"vybrané. Potom, ak chcete vykona» ïal¹iu in¹taláciu, vlo¾te túto disketu do\n"
+" * \"Ulo¾i» výber balíkov\"(*): ulo¾í výber balíkov tak, ako vybrané v "
+"tejto\n"
+"in¹talácii. Potom, ak chcete vykona» ïal¹iu in¹taláciu, vlo¾te túto disketu "
+"do\n"
 "mechaniky a pri spustení in¹talácie stlaète klávesu [F1] a napí¹te:\n"
-"``linux defcfg=\"floppy\"''.\n"
+">>linux defcfg=\"floppy\" <<.\n"
 "\n"
 "(*) Potrebujete ma» pripravenú FAT formátovanú disketu (pre jej vytvorenie "
 "pod\n"
-"GNU/Linux systémom napí¹te \"mformat a:\")"
+"GNU/Linux systémom pou¾ite \"mformat a:\")"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to decide where you want to install the Mandrake\n"
 "Linux operating system on your hard drive. If your hard drive is empty or\n"
@@ -2565,47 +2408,37 @@ msgid ""
 "DiskDrake utility, refer to the ``Managing Your Partitions '' section in\n"
 "the ``Starter Guide''."
 msgstr ""
-"Teraz si mô¾ete zvoli», kam si ¾eláte in¹talova» Mandrake Linux\n"
-"systém na Va¹om disku. Ak je Vá¹ disk prázdny, alebo ak na òom\n"
+"Teraz si mô¾ete zvoli», kam si ¾eláte nain¹talova» Mandrake Linux\n"
+"systém na Vá¹ disk. Ak je Vá¹ disk prázdny, alebo ak na òom\n"
 "existuje operaèný systém, ktorý zaberá v¹etko dostupné miesto bude\n"
 "potrebné ho prerozdeli». Prerozdeµovanie pozostáva z logického\n"
 "rozdelenia a vytvorenia priestoru pre novú in¹taláciu Vá¹ho Mandrake\n"
 "Linux systému.\n"
 "\n"
-"Preto¾e je efekt rozdeµovacieho procesu nenávratný, prerozdelenie\n"
+"Preto¾e je efekt rozdeµovacieho procesu nevratný, prerozdelenie\n"
 "disku mô¾e byt pre neskúsených pou¾ívateµov stresujúce. Na¹»astie\n"
-"tento nástroj zjednodu¹uje tento krok. Pred zaèatím tejto operácie\n"
-"prosím venujte svoj èas preèítaniu dokumentácie.\n"
+"DrakX obsahuje sprievodcu, ktorý tento proces znaène zjednodu¹uje.\n"
+"Pred zaèatím tejto operácie\n"
+" prosím venujte svoj èas preèítaniu\n"
+"si zodpovedajúcich èastí dokumentácie.\n"
 "\n"
-"Ak sa nachádzate v Expertnom re¾ime, mô¾ete pou¾i» DiskDrake, Mandrake\n"
-"Linux nástroj pre správu diskových oblastí, ktorý Vám umo¾ní nastavi»\n"
-"oddiely podµa va¹ich po¾iadaviek. Pozrite si sekciu DiskDrake v manuály.\n"
-"Z in¹talaèného rozhrania mô¾ete pou¾i» pomocníka tu popísaného kliknutím\n"
-"na tlaèidlo \"Sprievodca\".\n"
-"\n"
-"Ak u¾ máte oddiely zadefinované, napríklad z predchádzajúcej in¹talácie,\n"
-"alebo vïaka inému nástroju pre správu oblastí, jednoducho ich vyberte pre\n"
-"nain¹talovanie Vá¹ho Linux systému.\n"
-"\n"
-"Ak e¹te oddiely nie sú definované, je potrebné ich vytvori» pou¾itím\n"
-"sprievodcu. V závislosti na rozdelení Vá¹ho disku Vám budú ponúknuté rôzne "
-"mo¾nosti:\n"
+"V závislosti na rozdelení Vá¹ho disku Vám budú ponúknuté rôzne mo¾nosti:\n"
 "\n"
 " * \"Pou¾i» voµné miesto\": táto mo¾nos» bude jednoducho vies» k "
 "automatickému\n"
 "rozdeleniu Vá¹ho voµného miesta na disku(och). Na niè viac nebudete musie» "
-"odpoveda»;\n"
+"odpoveda».\n"
 "\n"
 " * \"Pou¾i» existujúce oddiely\": sprievodca zdetekuje jeden, alebo viac "
 "existujúcich\n"
 "Linux oddielov na Va¹om pevnom disku. Ak si to ¾eláte, vyberte si túto "
 "mo¾nos».\n"
-"Potom budete musie» nastavi» body pripojenia asociované s ka¾dým oddielom.\n"
+"Potom budete musie» nastavi» body pripojenia, ktoré priradíte oddielom.\n"
 "Hlavné body pripojenia budú vybrané ¹tandardne a mali by ste ich podµa "
 "mo¾nosti\n"
 "zachova».\n"
 "\n"
-" * \"Pou¾i» voµné miesto z Windows oddielu\": ak je nain¹talovaný systém "
+" * \"Pou¾i» voµné miesto z Windows oddielu\": ak máte nain¹talovaný systém "
 "Microsoft\n"
 "Windows na Va¹om pevnom disku a zaberá v¹etko voµné miesto ktoré je na òom\n"
 "k dispozícii je potrebné vytvori» Linux oddiel pre údaje. Tak¾e mô¾ete "
@@ -2627,19 +2460,19 @@ msgstr ""
 "menej\n"
 "priestoru pre ukladanie Va¹ich údajov, alebo in¹taláciu nových programov "
 "pod\n"
-"Va¹ím Microsoft Windows systémom;\n"
+"Va¹ím Microsoft Windows systémom.\n"
 "\n"
 " * \"Vymaza» celý disk\": ak si ¾eláte vymaza» v¹etky údaje a v¹etky "
 "oddiely\n"
 "prítomné na Va¹om pevnom disku a nahradi» ich Va¹im novým Mandrake Linux\n"
 "systémom, zvoµte si túto voµbu. Buïte opatrní pri tejto mo¾nosti, preto¾e "
 "nebude\n"
-"¾iadna mo¾nos» zvráti» Va¹e rozhodnutie keï ho potvrdíte;\n"
+"¾iadna mo¾nos» zvráti» Va¹e rozhodnutie keï ho potvrdíte.\n"
 "\n"
 "   !! Ak si vyberiete túto mo¾nos», v¹etky údaje na Va¹om disku budú "
 "stratené. !!\n"
 "\n"
-" * \"Odstráni» Windows(TM)\": jednoducho bude v¹etko odstránené z pevného\n"
+" * \"Odstráni» Windows\": jednoducho bude v¹etko odstránené z pevného\n"
 "disku a bude potrebné prerozdeli» disk odznova. V¹etky údaje na Va¹om disku\n"
 "budú znièené;\n"
 "\n"
@@ -2651,16 +2484,16 @@ msgstr ""
 "pevný disk. Buïte opatrní - je to veµmi mocná, ale nebezpeèná voµba. Mô¾ete\n"
 "veµmi jednoducho prís» o v¹etky Va¹e údaje. Preto si ju nevyberajte bez "
 "toho\n"
-"aby ste skutoène vedeli èo robíte. Ak chcete vedie» bli¾¹ie ako je tu "
-"pou¾itý\n"
-"nástroj DiskDrake, preèítajte si ``Mene¾ovanie Va¹ich oblastí'' v "
+"aby ste skutoène vedeli èo robíte. Ak chcete vedie» bli¾¹ie ako pou¾íva» "
+"nástroj\n"
+"DiskDrake, preèítajte si ``Mene¾ovanie Va¹ich oblastí'' v "
 "````Pou¾ívateµskej\n"
 "príruèke''''"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -2739,6 +2572,9 @@ msgid ""
 "without 3D acceleration, you are then proposed to choose the server that\n"
 "best suits your needs."
 msgstr ""
+"V prípade, ¾e sú k dispozícii rôzne servery pre Va¹u kartu (s, alebo bez\n"
+"3D akcelerácie), bude Vám polo¾ená otázka s výberom serveru, ktorý bude\n"
+"vyhovova» Va¹im potrebám."
 
 #: ../../help.pm:1
 #, c-format
@@ -2747,7 +2583,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 
@@ -2760,6 +2596,11 @@ msgid ""
 "monitor connected to your machine. If it is not the case, you can choose in\n"
 "this list the monitor you actually own."
 msgstr ""
+"Monitor\n"
+"\n"
+"   In¹talátor doká¾e automaticky zdetekova» monitor, ktorý je pripojený\n"
+"k Vá¹mu poèítaèu. Ak monitor nebol správne zdetekovaný máte mo¾nos»\n"
+"vybra» si zo zoznamu monitor, ktorý máte aktuálne pripojený."
 
 #: ../../help.pm:1
 #, c-format
@@ -2793,7 +2634,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -2830,9 +2671,18 @@ msgid ""
 "without 3D acceleration, you are then proposed to choose the server that\n"
 "best suits your needs."
 msgstr ""
+"Grafická karta\n"
+"\n"
+"   In¹talátor be¾ne doká¾e zdetekova» a nakonfigurova» grafickú kartu\n"
+"vo Va¹om poèítaèi. Ak tomu tak nie je vo Va¹om prípade, mô¾ete si\n"
+"vybra» zo zoznamu kartu, ktorú aktuálne pou¾ívate.\n"
+"\n"
+"   V prípade dostupnosti viacerých serverov pre Va¹u kartu, s alebo bez\n"
+"3D akcelerácie, budete si musie» vybra» server, ktorý bude zodpoveda» Va¹im\n"
+"po¾iadavkám."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it to\n"
 "local time according to the time zone you selected. If the clock on your\n"
@@ -2848,23 +2698,27 @@ msgid ""
 "server that can used by other machines on your local network."
 msgstr ""
 "GNU/Linux spracováva èas v GMT (Greenwichský èas) a transformuje ho do\n"
-"lokálneho èasu v závislosti od nastavenej èasovej zóny. Toto je kedykoµvek\n"
-"mo¾né deaktivova» odznaèením \"Hardvérové hodiny nastavené na GMT\",\n"
-"následkom èoho budú hardvérové hodiny rovnaké ako systémový èas. Toto je\n"
-"vhodné, ak na poèítaèi je aj iný operaèný systém, napríklad Windows.\n"
+"lokálneho èasu v závislosti od nastavenej èasovej zóny. Ak je èas na va¹ej\n"
+"matiènej doske nastavený ako lokálny èas, mô¾ete toto deaktivova» "
+"odznaèením\n"
+"\"Hardvérové hodiny nastavené na GMT\" následkom èoho bude systém vedie», "
+"¾e\n"
+"hardvérové hodiny sú nastavené tak, ¾e zodpovedajú èasovej zóne. Toto je\n"
+"u¾itoèné, ak na poèítaèi prevádzkujete zároveò aj iný operaèný systém,\n"
+"napríklad Windows\n"
 "\n"
-"Nastavenie \"Automatická synchronizácia èasu\" doká¾e nastavi» veµmi\n"
-"presne hodiny po pripojení na vzdialený èasový server na Internete. V "
-"zozname,\n"
-"si vyberte server, ktorý je najbli¾¹ie k Vám. Samozrejme, musíte ma» "
-"funkèné\n"
-"Internetové pripojenie, aby táto funkcionalita bola dostupná. Na Vá¹ "
-"poèítaè\n"
-"bude nain¹talovaný èasový server, ktorý mô¾ete pou¾íva» aj pre poèítaèe vo\n"
-"Va¹ej lokálnej sieti."
+"Nastavenie \"Automatická synchronizácia èasu\" doká¾e automaticky dolaïova»\n"
+"hodiny na základe pripojenia k vzdialenému èasovému serveru v Internete. "
+"Pre\n"
+"správnu funkcionalitu tejto mo¾nosti je potrebné, aby ste mali funkèné\n"
+"pripojenie k Internetu. Je vhodné vybra» si èasový server, ktorý je vo "
+"Va¹ej\n"
+"blízkosti. Táto mo¾nos» tie¾ nain¹taluje èasový server, ktorý je potom "
+"mo¾né\n"
+"pou¾íva» vo Va¹ej lokálnej sieti."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This step is used to choose which services you wish to start at boot time.\n"
 "\n"
@@ -2884,7 +2738,7 @@ msgid ""
 msgstr ""
 "Teraz by ste si mali zvoli» slu¾by, ktoré chcete spú¹»a» pri ¹tarte.\n"
 "\n"
-"Sú tu zobrazené v¹etky slu¾by dostupné pre aktuálnu in¹taláciu.\n"
+"DrakX zobrazí v¹etky slu¾by dostupné pre aktuálnu in¹taláciu.\n"
 "Pozorne si ich prezrite a zru¹te tie, ktoré nikdy nebudete potrebova»\n"
 "pri ¹tarte systému.\n"
 "\n"
@@ -2908,9 +2762,16 @@ msgid ""
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation."
 msgstr ""
+"\"Tlaèiareò\": ak kliknite na \"®iadna tlaèiareò\" tlaèidlo - otvorí sa "
+"sprievodca\n"
+"konfiguráciou tlaèiarne. Ak chcete získa» viac informácií o tom, ako "
+"nastavi»\n"
+"novú tlaèiareò, pou¾ite ``Úvodnú príruèku'. Rozhranie, ktoré tu vidíte je "
+"podobné\n"
+"ako to, ktoré bolo pou¾ité pri in¹talácii."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You will now set up your Internet/network connection. If you wish to\n"
 "connect your computer to the Internet or to a local network, click \"Next\n"
@@ -2932,27 +2793,28 @@ msgid ""
 "installed and use the program described there to configure your connection."
 msgstr ""
 "Teraz budete po¾iadaní o nakonfigurovanie Vá¹ho Internetového/sie»ového\n"
-"pripojenia. Ak chcete ma» Vá¹ poèítaè pripojený k Internetu, alebo lokálnej\n"
-"siete kliknite na \"OK\". Spustí sa autodetekcia sie»ových zariadení, alebo\n"
-"modemu. Ak táto detekcia zlyhá, odznaète polo¾ku \"Pou¾i» autodetekciu\".\n"
+"pripojenia. Ak chcete ma» Vá¹ poèítaè pripojený k Internetu, alebo k "
+"lokálnej\n"
+"sieti kliknite na \"Pokraèova» ->\". Spustí sa autodetekcia sie»ových "
+"zariadení,\n"
+"alebo modemov. Ak táto detekcia zlyhá, odznaète polo¾ku \"Pou¾i» autodetekciu"
+"\".\n"
 "Ak nechcete teraz konfigurova» sie»ové pripojenie, alebo to chcete spravi»\n"
 "neskôr, jednoducho kliknite na tlaèidlo \"Zru¹\".\n"
 "\n"
 "Mo¾né typy pripojenia sú: tradièný modem, ISDN modem, ADSL pripojenie,\n"
 "káblový modem a nakoniec jednoduché LAN pripojenie (Ethernet).\n"
 "\n"
-"Na tomto mieste nie je mo¾né popísa» celú konfiguráciu. Jednoducho si "
+"Na tomto mieste nie je mo¾né popísa» celú konfiguráciu - jednoducho si "
 "musíte\n"
-"by» istí vo v¹etkých nastaveniach. Získa» ich mô¾ete od Vá¹ho Internet "
-"providera,\n"
-"alebo systémového administrátora.\n"
-"\n"
-"Ak si ¾eláte nakonfigurova» sie»ové parametre a¾ po skonèení in¹talácie, "
-"alebo\n"
-"chcete ukonèi» konfiguráciu Vá¹ho sie»ového pripojenia, kliknite na \"Zru¹\"."
+"by» istí vo v¹etkých nastaveniach, ako napríklad IP adresa, ¹tandardná "
+"brána,\n"
+"adresy DNS serverov atï. Ak tieto informácie nepoznáte, získate ich od "
+"svojho\n"
+"poskytovateµa pripojenia, alebo systémového administrátora."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you told the installer that you wanted to individually select packages,\n"
 "it will present a tree containing all packages classified by groups and\n"
@@ -2988,26 +2850,19 @@ msgid ""
 "end of another installation. See the second tip of last step on how to\n"
 "create such a floppy."
 msgstr ""
-"Nakoniec, v závislosti na tom èi ste vybrali výber jednotlivých balíkov, "
-"bude zobrazená\n"
-"stromová ¹truktúra obsahujúca v¹etky balíky zoradené podµa skupín\n"
-"a podskupín. Poèas prehliadania stromu mô¾ete oznaèi» celú skupinu,\n"
-"podskupinu, ale aj jednotlivý balík.\n"
+"Nakoniec, v závislosti na tom èi ste si vybrali výber jednotlivých balíkov,\n"
+"bude zobrazená stromová ¹truktúra obsahujúca v¹etky balíky zoradené podµa\n"
+"skupín a podskupín. Poèas prehliadania stromu mô¾ete oznaèi» celú skupinu,\n"
+"podskupinu, ale aj jednotlivé balíky.\n"
 "\n"
-"V¾dy keï vyberiete niektorý balík zo stromu, vpravo sa zobrazí jeho popis.\n"
-"Ak dokonèíte výber, kliknite na tlaèidlo \"In¹talácia\", èo bude ma» za "
-"následok\n"
-"spustenie in¹talaèného procesu. V závislosti od rýchlosti Vá¹ho hardvéru\n"
-"a poètu balíkov, ktoré ste si vybrali, alebo sú potrebné pre in¹taláciu, "
-"bude\n"
-"trva» tento proces. Odhadovaný èas ukonèenia in¹talácie bude zobrazovaný\n"
-"na obrazovke symbolickým meraèom, aby ste vedeli, koµko èasu máte na\n"
-"dopitie svojej kávy..\n"
+"V¾dy keï vyberiete niektorý balík zo stromu, vpravo sa zobrazí jeho popis,\n"
+"aby ste vedeli k èomu pribli¾ne slú¾i\n"
 "\n"
 "!! Ak boli vybrané balíky, ktoré sú urèené pre server, buï zámerne, alebo\n"
 "preto ¾e sú súèas»ou celej skupiny, budete musie» potvrdi», èi skutoène\n"
-"chcete tieto slu¾by nain¹talova». V prípade Mandrake Linux, v¹etky\n"
-"nain¹talované slu¾by sú spustené pri ¹tarte systému. Aj keï sú bezpeèné\n"
+"chcete tieto slu¾by nain¹talova». V prípade Mandrake Linux, sú ¹tandardne "
+"v¹etky\n"
+"nain¹talované slu¾by spustené pri ¹tarte systému. Aj keï sú bezpeèné\n"
 "a v èase keï bola distribúcia vydaná neobsahovali ¾iadne známe problémy\n"
 "je mo¾né, ¾e tieto bezpeènostné problémy budú odhalené a¾ po dokonèení\n"
 "tejto verzie Mandrake Linux. Ak neviete èo jednotlivé servisy znamenajú, "
@@ -3016,21 +2871,25 @@ msgstr ""
 "vypísané slu¾by nain¹talované a na¹tartované pri spustení systému\n"
 "automaticky. !!\n"
 "\n"
-"Voµba \"Automatické závislosti\" jednoducho potlaèí varovný dialóg, ktorý\n"
-"sa objaví v¾dy, keï in¹talátor automaticky vyberá balíky. Toto sa vyskytuje\n"
-"preto, ¾e je potrebné vyrie¹i» závislosti s inými balíkmi pre správne "
-"dokonèenie\n"
-"in¹talácie.\n"
+"Voµba \"Automatické závislosti\" potlaèí varovný dialóg, ktorý sa objaví "
+"v¾dy,\n"
+"keï in¹talátor automaticky vyberá balíky pre uspokojenie závislostí. "
+"Niektoré\n"
+"balíky majú závislosti medzi sebou, alebo vy¾adujú prítomnos» iných "
+"programov.\n"
+"In¹talátor doká¾e tieto závislosti medzi balíkmy vyrie¹i» a úspe¹ne tak\n"
+"dokonèi» in¹taláciu.\n"
 "\n"
 "Malá ikona diskety na spodku zoznamu Vám umo¾ní naèíta» zoznam balíèkov,\n"
-"ktoré boli vybrané pri predchádzajúcej in¹talácii. Po kliknutí na túto "
+"ktoré boli vybrané pri predchádzajúcej in¹talácii. Toto je u¾itoèné ak máte\n"
+"mno¾stvo poèítaèov, ktoré chcete nain¹talova» identicky. Po kliknutí na túto "
 "ikonu\n"
 "budete po¾iadaní o vlo¾enie diskety, ktorú ste si vytvorili na konci inej\n"
 "in¹talácie. Pozrite si ïal¹í tip pri poslednom kroku, ako vytvori» takúto\n"
 "disketu."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "It is now time to specify which programs you wish to install on your\n"
 "system. There are thousands of packages available for Mandrake Linux, and\n"
@@ -3084,31 +2943,32 @@ msgid ""
 "updating an existing system."
 msgstr ""
 "Teraz nastal èas ¹pecifikácie programov, ktoré si ¾eláte nain¹talova»\n"
-"do Vá¹ho systému. Mandrake Linux obsahuje tisíce balíkov, tak¾e sa\n"
-"nedá oèakáva», ¾e budete pozna» úplne v¹etky.\n"
-"Ak ste sa rozhodli pre ¹tandardnú in¹taláciu z CD-ROM budete musie»\n"
-"¹pecifikova» CDèka, ktoré máte (iba v Expertnom móde). Pozrite si\n"
-"popis CDèka a za¹krtnite políèka kore¹pondujúce s CDèkami, ktoré máte\n"
-"k dispozícii pre in¹taláciu. Kliknite na \"OK\" ak ste pripravený\n"
-"pokraèova».\n"
+"do Vá¹ho systému. Mandrake Linux obsahuje tisíce balíkov, ktoré sú\n"
+"pre lep¹iu orientáciu a jednoduch¹iu správu usporiadané do skupín, kde\n"
+"sú podobné aplikácie.\n"
 "\n"
 "Balíèky sú zoradené v skupinách zodpovedajúcim konkrétnemu pou¾itiu\n"
-"Vá¹ho poèítaèa. Samotné skupiny sú zoradené do ¹tyroch sekcií:\n"
+"Vá¹ho poèítaèa. Mandrake Linux má ¹tyri preddefinované triedy in¹talácie.\n"
+"Mô¾ete pou¾i» tieto triedy, prièom je mo¾né samozrejme doplni» niektoré\n"
+"jednotlivé balíky. Mô¾ete kombinova» a pou¾íva» aplikácie z rôznych skupín,\n"
+"napríklad in¹talácia ``Pracovná stanica'' mô¾e obsahova» aplikácie, ktoré\n"
+"sú zahrnuté v triede ``Vývojárska``.\n"
 "\n"
 " * \"Pracovná stanica\": ak plánujete pou¾íva» Vá¹ poèítaè ako pracovnú\n"
-"stanicu, za¹krtnite túto jednu, alebo viacero podobných skupín;\n"
+"stanicu, za¹krtnite túto jednu, alebo viacero podobných skupín\n"
 "\n"
-" * \"Vývojárska\": ak Vá¹ stroj bude pou¾ívaný na programovanie, vyberte\n"
-"si túto skupinu;\n"
+" * \"Vývojárska\": ak Vá¹ stroj bude pou¾ívaný na programovanie a vývoj,\n"
+"vyberte si túto skupinu\n"
 "\n"
 " * \"Server\": ak je urèenie Vá¹ho poèítaèa ako server, mô¾ete si vybra», "
 "ktoré\n"
-" z najbe¾nej¹ích slu¾ieb si ¾eláte nain¹talova» na Vá¹\n"
-"poèítaè;\n"
+"z najbe¾nej¹ích slu¾ieb si ¾eláte nain¹talova» na Vá¹ poèítaè\n"
 "\n"
-" * \"Grafické prostredie\": a nakoniec, toto je voµba kde si mô¾ete vybra»\n"
-"Va¹e obµúbené grafické prostredie. Minimálne jedno musí by» zvolené, ak\n"
-"si ¾eláte ma» grafickú pracovnú stanicu!\n"
+" * \"Grafické prostredie\": toto je voµba kde si mô¾ete vybra» Va¹e "
+"obµúbené\n"
+"grafické prostredie. Minimálne jedno musí by» zvolené, ak si ¾eláte "
+"nain¹talova»\n"
+"grafickú pracovnú stanicu\n"
 "\n"
 "Pohybom kurzora my¹i cez meno skupiny je mo¾né zobrazi» krátky popisný\n"
 "text o danej skupine. Ak odznaèíte v¹etky skupiny v prípade, ¾e vykonávate\n"
@@ -3116,9 +2976,8 @@ msgstr ""
 "rôznymi\n"
 "nastaveniami pre minimálnu in¹taláciu:\n"
 "\n"
-" * \"S X-window\": bude nain¹talovaných zopár balíkov potrebných pre "
-"grafické\n"
-"prostredie;\n"
+" * \"S X-window\": bude nain¹talované minimálne mno¾stvo balíkov potrebných\n"
+"pre grafické prostredie\n"
 "\n"
 " * \"So základnou dokumentáciou\": nain¹taluje sa základ systému plus "
 "základné\n"
@@ -3133,6 +2992,7 @@ msgstr ""
 "Mô¾ete si zvoli» \"individuálny výber balíkov\", èo mô¾e by» u¾itoèné ak\n"
 "dobre poznáte balíky, ktoré sú Vám poskytnuté, alebo ak chcete ma» úplnú\n"
 "kontrolu nad tým èo bude nain¹talované.\n"
+"\n"
 "Ak ste spustili in¹taláciu ako \"Aktualizácia\", mô¾ete odznaèi» v¹etky "
 "skupiny,\n"
 "ak sa chcete vyhnú» in¹talovaniu akéhokoµvek nového balíka. Toto je "
@@ -3140,18 +3000,19 @@ msgstr ""
 "pre obnovu, alebo aktualizáciu existujúceho systému."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The Mandrake Linux installation is distributed on several CD-ROMs. DrakX\n"
 "knows if a selected package is located on another CD-ROM so it will eject\n"
 "the current CD and ask you to insert the correct CD as required."
 msgstr ""
-"Mandrake Linux in¹talácia je rozdelená na viacerých CD-ROM diskoch. DrakX\n"
+"In¹talácia Mandrake Linuxu je distribuovaná na viacerých CD-ROM diskoch. "
+"DrakX\n"
 "vie zisti», ak je vybraný balík umiestnený na inom CD-ROM disku, vysunie\n"
-"aktuálne CD a vypýta si od Vás to ktoré je potrebné."
+"aktuálne CD a vypýta si od Vás to ktoré je práve potrebné."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Here are Listed the existing Linux partitions detected on your hard drive.\n"
 "You can keep the choices made by the wizard, since they are good for most\n"
@@ -3183,26 +3044,26 @@ msgid ""
 "With SCSI hard drives, an \"a\" means \"lowest SCSI ID\", a \"b\" means\n"
 "\"second lowest SCSI ID\", etc."
 msgstr ""
-"Ni¾¹ie je zoznam oblastí s existujúcimi Linux oddielmi, ktoré boli "
-"zdetekované\n"
+"Tu je zoznam oblastí s existujúcimi Linux oddielmi, ktoré boli zdetekované\n"
 "na Va¹om disku. Mô¾ete zachova» nastavenia vygenerované sprievodcom, èo\n"
 "mô¾e by» vhodné pre be¾né in¹talácie. Ak chcete vykona» zmeny, najprv "
 "musíte\n"
-"definova» hlavný oddiel (\"/\"). Nevoµte si príli¹ malú oddiel, preto¾e Vám "
+"definova» hlavný oddiel (\"/\"). Nevoµte si príli¹ malý oddiel, preto¾e Vám "
 "nemusí\n"
 "by» umo¾nené in¹talova» v¹etok softvér, ktorý by ste si ¾elali. Ak budete "
 "chcie»\n"
 "uklada» pou¾ívateµské údaje na iný oddiel, bude potrebné vytvori» oddiel\n"
-" pre \n"
-"\"/home\" (to je mo¾né ak máte spolu k dispozícii viac ako jeden Linux "
-"oddiel).\n"
+" pre \"/home\" oblas» (to je mo¾né ak máte spolu k dispozícii viac ako "
+"jeden\n"
+"Linux oddiel).\n"
 "\n"
-"V¹etky oddiely sú zobrazené s nasledovným: \"Meno\", \"Kapacita\".\n"
+"V¹etky oddiely sú zobrazené s nasledovnými údajmi: \"Meno\", \"Kapacita\".\n"
 "\n"
-"\"Meno\" je tvorené ako: \"typ disku\", \"èíslo disku\", \"èíslo oddielu\"\n"
+"\"Meno\" je vytvorené ako: \"typ disku\", \"èíslo disku\", \"èíslo oddielu"
+"\"\n"
 "(napríklad \"hda1\").\n"
 "\n"
-"\"Èíslo disku\" je v¾dy písmeno za \"hd\", alebo \"sd\". V prípade IDE\n"
+"\"Typ disku\" je v¾dy písmeno za \"hd\", alebo \"sd\". V prípade IDE\n"
 "diskov:\n"
 "\n"
 " * \"a\" znamená \"master disk na primárnom IDE radièi\";\n"
@@ -3217,7 +3078,7 @@ msgstr ""
 "\"druhé najni¾¹ie SCSI ID\" a tak ïalej."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "GNU/Linux is a multi-user system, meaning each user can have their own\n"
 "preferences, their own files and so on. You can read the ``Starter Guide''\n"
@@ -3274,10 +3135,10 @@ msgstr ""
 "mô¾ete prís» o niektoré údaje, ale nepodarí sa Vám po¹kodi» celý systém.\n"
 "\n"
 "Najprv by ste mali zada» Va¹e skutoèné meno. Samozrejme, toto nie je\n"
-"povinnos», mô¾ete zada» µubovoµné meno. DrakX si potom vyberie prvé\n"
+"povinnos», mô¾ete zada» µubovoµné meno. DrakX potom pou¾ije prvé\n"
 "slovo z mena, ktoré ste zadali a toto Vám ponúkne ako \"pou¾ívateµské meno"
-"\". Toto mô¾e by» prihlasovacie meno tohto be¾ného pou¾ívateµa. Tie¾ by ste "
-"na\n"
+"\".\n"
+"Toto mô¾e by» prihlasovacie meno tohto be¾ného pou¾ívateµa. Tie¾ by ste na\n"
 "tomto mieste mali zada» heslo. Heslo be¾ného (neprivilegovaného) "
 "pou¾ívateµa\n"
 "nie je také kritické ako heslo superpou¾ívateµa \"root\"a z pohµadu "
@@ -3288,14 +3149,25 @@ msgstr ""
 "Ak kliknete na \"Akceptuj pou¾ívateµa\", mô¾ete prida» aj ïal¹ích "
 "pou¾ívateµov\n"
 "ak si to ¾eláte (Va¹ich priateµov, otca, sestru a podobne). Ak ste skonèili\n"
-"s pridávaním, zvoµte \"Hotovo\".\n"
+"s pridávaním, zvoµte \"Pokraèova» ->\".\n"
 "\n"
 "Kliknutím na \"Roz¹írené\" mô¾ete zmeni» predvolený \"interpreter\" pre "
 "daného\n"
-"pou¾ívateµa (¹tandardne bash)."
+"pou¾ívateµa (¹tandardne bash).\n"
+"\n"
+"Ak ste skonèili s pridávaním pou¾ívateµov, v nasledovnom kroku budete môc»\n"
+"nastavi» pou¾ívateµa, ktorý bude automaticky prihlásený do systému po "
+"na¹tartovaní.\n"
+"Ak Vás zaujíma táto mo¾nos» (a nezále¾í Vám na lokálnej bezpeènosti), zvoµte "
+"si\n"
+"po¾adovaného pou¾ívateµa a správcu okien, potom kliknite na \"Pokraèova» ->"
+"\". Ak\n"
+"nemáte záujem pou¾íva» túto mo¾nos», odznaète polo¾ku \"Chcete pou¾íva» "
+"túto\n"
+"mo¾nos»?\"."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Before continuing, you should carefully read the terms of the license. It\n"
 "covers the entire Mandrake Linux distribution. If you do agree with all the\n"
@@ -3303,10 +3175,9 @@ msgid ""
 "computer."
 msgstr ""
 "Pred tým, ne¾ budete pokraèova», mali by ste si pozorne preèíta»\n"
-"licenèné podmienky. Pokrývajú celú distribúciu Linux Mandrake\n"
-"a ak nesúhlasíte so v¹etkými z nich kliknite na tlaèidlo \"Odmietam\",\n"
-"èo okam¾ite ukonèí in¹taláciu. Pre pokraèovanie v in¹talácii\n"
-"kliknite na tlaèidlo \"Akceptujem\"."
+"licenèné podmienky. Pokrývajú celú distribúciu Mandrake Linux\n"
+"Ak súhlasíte so v¹etkými jej bodmi kliknite na tlaèidlo \"Akceptujem\".\n"
+"Ak nesúhlasíte, jednoducho vypnite Vá¹ poèítaè."
 
 #: ../../install2.pm:1
 #, c-format
@@ -3379,12 +3250,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Nie"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Áno"
@@ -3494,6 +3367,13 @@ msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Neexistuje oddiel FAT, ktorému by sa dala zmeni» veµkos» (alebo tam nie je "
 "dostatok voµného miesta)"
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3700,9 +3580,9 @@ msgstr ""
 "prekladateµský tím mailom na adrese: i18n@mandrake.sk"
 
 #: ../../install_messages.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "http://www.mandrakelinux.com/en/91errata.php3"
-msgstr "http://www.mandrakelinux.com/en/90errata.php3"
+msgstr "http://www.mandrakelinux.com/en/91errata.php3"
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -4010,6 +3890,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "Spú¹»am krok %s'\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Help"
+msgstr "Pomoc"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "not configured"
+msgstr "nenakonfigurované"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Konfigurova»"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -4062,9 +3962,9 @@ msgid "%d packages"
 msgstr "%d balíky"
 
 #: ../../install_steps_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "No details"
-msgstr "Detaily"
+msgstr "Be detailov"
 
 #: ../../install_steps_gtk.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1
@@ -4223,14 +4123,6 @@ msgstr "Ïalej ->"
 #, c-format
 msgid "Individual package selection"
 msgstr "Osobitná voµba balíkov"
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "Pomoc"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -4473,12 +4365,13 @@ msgstr "Autentifikácia"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Toto heslo je príli¹ jednoduché(musí by» minimálne %d znakov dlhé)"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "Bez hesla"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "Nastavenie root hesla"
@@ -4486,7 +4379,7 @@ msgstr "Nastavenie root hesla"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
-msgstr ""
+msgstr "Nemáte nakonfigurovaný X Window systém. Ste si istý, ¾e to tak chcete?"
 
 #: ../../install_steps_interactive.pm:1 ../../services.pm:1
 #, c-format
@@ -4510,24 +4403,24 @@ msgid "Bootloader"
 msgstr "Zavádzaè"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Boot"
-msgstr "Root"
+msgstr "Boot"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "disabled"
-msgstr "zakáza»"
+msgstr "zakázané"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "activated"
-msgstr "aktivuj teraz"
+msgstr "aktivované"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Firewall"
-msgstr "Firewall/Router"
+msgstr "Firewall"
 
 #: ../../install_steps_interactive.pm:1 ../../steps.pm:1
 #, c-format
@@ -4535,14 +4428,9 @@ msgid "Security"
 msgstr "Bezpeènos»"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "Security Level"
-msgstr "Úroveò bezpeènosti:"
-
-#: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "not configured"
-msgstr "nenakonfigurované"
+msgid "Security Level"
+msgstr "Úroveò bezpeènosti"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -4550,9 +4438,9 @@ msgid "Network"
 msgstr "Sie»"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network & Internet"
-msgstr "Sie»ové rozhranie"
+msgstr "Sie» a Internet"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4560,9 +4448,9 @@ msgid "Graphical interface"
 msgstr "Grafické rozhranie"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Hardware"
-msgstr "HardDrake"
+msgstr "Hardvér"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4644,6 +4532,16 @@ msgstr "Hardvérové hodiny nastavené na GMT"
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Ktoré je va¹e èasové pásmo?"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "Chybná voµba, skúste znovu\n"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Unable to contact mirror %s"
+msgstr "Nemo¾ný fork: %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4728,6 +4626,11 @@ msgstr ""
 "Ak nemáte ¾iadne, stlaète Zru¹.\n"
 "Ak Vám chýbajú iba niektoré, odznaète ich a potom stlaète OK."
 
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "V¹etko"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
@@ -4808,6 +4711,11 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "Hµadám dostupné balíky..."
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Hµadám balíky pre aktualizáciu..."
 
@@ -4815,11 +4723,6 @@ msgstr "Hµadám balíky pre aktualizáciu..."
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Hµadám balíky, ktoré sú u¾ nain¹talované..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "Hµadám dostupné balíky..."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4931,11 +4834,6 @@ msgstr "Prosím, zvoµte typ va¹ej my¹i."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Upgrade"
-msgstr "Aktualizácia"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
 msgid "Upgrade %s"
 msgstr "Aktualizácia %s"
 
@@ -4959,15 +4857,19 @@ msgstr "Tu je zoznam dostupných klávesníc"
 msgid "Please choose your keyboard layout."
 msgstr "Prosím, zvoµte si typ Va¹ej klávesnice."
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Koniec"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr "Súhlas s licenciou"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "default:LTR"
-msgstr "prednastavené"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5522,6 +5424,11 @@ msgstr "Azerbajd¾an (latin)"
 
 #: ../../keyboard.pm:1
 #, c-format
+msgid "Arabic"
+msgstr "Arabsky"
+
+#: ../../keyboard.pm:1
+#, c-format
 msgid "Armenian (phonetic)"
 msgstr "Arménska (fonetická)"
 
@@ -5566,9 +5473,9 @@ msgid "South Africa"
 msgstr "Ju¾ná Afrika"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Serbia"
-msgstr "sériová"
+msgstr "Srbsko"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5586,9 +5493,9 @@ msgid "Samoa"
 msgstr "Samoa"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Wallis and Futuna"
-msgstr "Wallis a Futuna ostrovy"
+msgstr "Wallis a Futuna"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5596,7 +5503,7 @@ msgid "Vanuatu"
 msgstr "Vanuatu"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Vietnam"
 msgstr "Vietnam"
 
@@ -5621,9 +5528,9 @@ msgid "Saint Vincent and the Grenadines"
 msgstr "Svätý Vincent a Grenadiny"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Vatican"
-msgstr "Loti¹sky"
+msgstr "Vatikán"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5653,12 +5560,12 @@ msgstr "Ukrajina"
 #: ../../lang.pm:1
 #, c-format
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzánijská"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Taiwan"
-msgstr "Thajsko"
+msgstr "Taiwan"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5736,9 +5643,9 @@ msgid "Swaziland"
 msgstr "Swazijsko"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Syria"
-msgstr "Surinam"
+msgstr "Sýria"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5826,9 +5733,9 @@ msgid "Rwanda"
 msgstr "Rwanda"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Russia"
-msgstr "Ruská"
+msgstr "Rusko"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5843,7 +5750,7 @@ msgstr "Reunion"
 #: ../../lang.pm:1
 #, c-format
 msgid "Qatar"
-msgstr "Qatar"
+msgstr "Katar"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5861,9 +5768,9 @@ msgid "Portugal"
 msgstr "Portugalsko"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Palestine"
-msgstr "Výber cesty"
+msgstr "Palestína"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6071,9 +5978,9 @@ msgid "Morocco"
 msgstr "Maroko"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Libya"
-msgstr "Libéria"
+msgstr "Líbia"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6121,9 +6028,9 @@ msgid "Lebanon"
 msgstr "Libanon"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Laos"
-msgstr "Logy"
+msgstr "Laos"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6141,14 +6048,14 @@ msgid "Kuwait"
 msgstr "Kuvajt"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Korea"
-msgstr "Viac"
+msgstr "Kórea"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Korea (North)"
-msgstr ""
+msgstr "Severo-Kórejská"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6186,9 +6093,9 @@ msgid "Japan"
 msgstr "Japonsko"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Jordan"
-msgstr "Jordán"
+msgstr "Jordánsko"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6201,9 +6108,9 @@ msgid "Iceland"
 msgstr "Island"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Iran"
-msgstr "Irak"
+msgstr "Irán"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6256,7 +6163,7 @@ msgid "Honduras"
 msgstr "Honduras"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Heard and McDonald Islands"
 msgstr "Heard a McDonald ostrovy"
 
@@ -6286,9 +6193,9 @@ msgid "Guatemala"
 msgstr "Guatemala"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "Ju¾ná Gergia a Ju¾ný Sandwitch ostrov"
+msgstr "Ju¾ná Gergia a Ju¾né Sandwitch ostrovy"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6493,7 +6400,7 @@ msgstr "©vajèiarsko"
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Brazzaville)"
-msgstr ""
+msgstr "Kon¾ská (Brazzaville)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6503,7 +6410,7 @@ msgstr "Stredná Africká Republika"
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Kinshasa)"
-msgstr ""
+msgstr "Kon¾ská (Kinshasa)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6679,6 +6586,11 @@ msgstr "Andorra"
 #, c-format
 msgid "Afghanistan"
 msgstr "Afganistan"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "default:LTR"
+msgstr "¹tandardne:LTR"
 
 #: ../../loopback.pm:1
 #, c-format
@@ -7096,10 +7008,10 @@ msgstr ""
 "komplexnej¹ie siete je potrebný komplexný smerovací protokol."
 
 #: ../../services.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 "Priradí základné zariadenie k blokovému (ako napríklad oddiely\n"
 "pevného disku) pre pou¾itie v aplikáciách ako Oracle"
@@ -7371,10 +7283,10 @@ msgstr ""
 "       XFdrake rozlí¹enie"
 
 #: ../../standalone.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
 "[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
 "[--dynamic=dev]"
@@ -7586,8 +7498,8 @@ msgstr "Koniec in¹talácie"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Install system updates"
-msgstr "In¹talácia aktualizácií systému"
+msgid "Install updates"
+msgstr "In¹talácia aktualizácií"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7613,6 +7525,11 @@ msgstr "Sie»ové slu¾by"
 #, c-format
 msgid "Add a user"
 msgstr "Vytváranie pou¾ívateµov"
+
+#: ../../steps.pm:1
+#, c-format
+msgid "Root password"
+msgstr "Heslo root-a"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7661,13 +7578,21 @@ msgstr "Licencia"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
+msgid "Language"
 msgstr "Voµba jazyka"
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
 msgstr "utopia 25"
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "OK"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -7766,7 +7691,7 @@ msgid "Select the memory size of your graphics card"
 msgstr "Zvoµte veµkos» pamäti na grafickej karte"
 
 #: ../../Xconfig/card.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system supports multiple head configuration.\n"
 "What do you want to do?"
@@ -7849,7 +7774,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Parametre"
@@ -7873,14 +7798,6 @@ msgstr "Monitor"
 #, c-format
 msgid "Graphic Card"
 msgstr "Grafická karta"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Koniec"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -8214,9 +8131,9 @@ msgid "Empty"
 msgstr "Prázdny"
 
 #: ../../diskdrake/hd_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Windows"
-msgstr "Windows doména"
+msgstr "Windows"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -8539,42 +8456,6 @@ msgstr "Aby sa úpravy prejavili, musíte re¹tartova» poèítaè"
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Tabuµka rozdelenia disku zariadenia %s sa zapí¹e na disk!"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"Nastavili ste softvérovú RAID oblas» ako koreòový oddiel (/).\n"
-"®iaden zavádzaè systému nedoká¾e zavies» systém bez /boot oddielu.\n"
-"Uistite sa, ¾e ste pridali /boot oddiel"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"Oddiel, ktorý chcete prida» ako root (/) sa na disku fyzicky nachádza a¾ za "
-"cylindrom 1024, a nemáte zadefinovaný oddiel /boot. \n"
-"Ak plánujete pou¾i» LILO, prosím pridajte najprv oddiel /boot"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"Prepáète, ale nemô¾em akceptova» vytvorenie /boot tak ïaleko na disku (na "
-"cylindri > 1024).\n"
-")Pou¾ívate LILO a tým pádom to nebude pracova», alebo ho nepou¾ívate a tým "
-"pádom nepotrebujete /boot"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -9071,6 +8952,11 @@ msgid "SCSI controllers"
 msgstr "SCSI kontrolér"
 
 #: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "Firewire controllers"
+msgstr "USB kontrolér"
+
+#: ../../harddrake/data.pm:1
 #, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr "(E)IDE/ATA kontrolér"
@@ -9200,7 +9086,7 @@ msgid "Choosing an arbitratry driver"
 msgstr "Vyberte si niektorý ovládaè"
 
 #: ../../harddrake/sound.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "The classic bug sound tester is to run the following commands:\n"
 "\n"
@@ -9208,7 +9094,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -9677,8 +9563,8 @@ msgstr "Pripojenie k internetu"
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
-msgstr "Sagem (pou¾íva pppoe) usb"
+msgid "Sagem (using pppoa) usb"
+msgstr "Sagem (pou¾íva pppoa) usb"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -9792,17 +9678,17 @@ msgstr "Web server"
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Zeroconf host name must not contain a ."
-msgstr ""
-
-#: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid "Zeroconf Host name"
-msgstr "Názov poèítaèa pri nulovej konfigurácii"
+msgstr "Meno poèítaèa pri nulovej konfigurácii nemô¾e obsahova» ."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Host name"
 msgstr "Názov poèítaèa"
+
+#: ../../network/ethernet.pm:1 ../../network/network.pm:1
+#, c-format
+msgid "Zeroconf Host name"
+msgstr "Názov poèítaèa pri nulovej konfigurácii"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9812,19 +9698,10 @@ msgid ""
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
 msgstr ""
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-"Prosím zadajte meno Vá¹ho poèítaèa ak ho viete.\n"
-"Niektoré DHCP servre ho vy¾adujú pre svoju funkènos».\n"
-"Meno Vá¹ho poèítaèa by malo byt plne kvalifikované meno poèítaèa,\n"
-"ako napríklad ``server.linux.sk''."
+"\n"
+"\n"
+"Vlo¾te meno poèítaèa pre nulovú konfiguráciu bez bodiek,\n"
+"ak nechcet pou¾íva» ¹tandardné meno poèítaèa."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -10170,9 +10047,9 @@ msgstr ""
 "%s"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The network needs to be restarted. Do you want to restart it ?"
-msgstr "Je potrebné in¹talova» balík %s. Súhlasíte ?"
+msgstr "Je potrebné re¹tartova» sie». ®eláte si to?"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -10480,13 +10357,35 @@ msgstr "Spusti» pri ¹tarte"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
+msgid "Assign host name from DHCP address"
+msgstr "Musíte vlo¾i» meno poèítaèa, alebo IP adresu.\n"
+
+#: ../../network/network.pm:1
+#, c-format
 msgid "Network Hotplugging"
-msgstr "Monitorovanie siete"
+msgstr "Sie»ové dynamické pripojenie"
 
 #: ../../network/network.pm:1
 #, c-format
 msgid "Track network card id (useful for laptops)"
 msgstr "Podµa id sie»ovej karty (vhodné pre prenosné poèítaèe)"
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "DHCP host name"
+msgstr "Názov poèítaèa"
+
+#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "Netmask"
+msgstr "Maska siete"
+
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "IP address"
+msgstr "IP adresa"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10497,17 +10396,6 @@ msgstr "bootp/dhcp/nulová konfigurácia"
 #, c-format
 msgid "Automatic IP"
 msgstr "Automatická IP"
-
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Netmask"
-msgstr "Maska siete"
-
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "IP address"
-msgstr "IP adresa"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10757,7 +10645,7 @@ msgstr "PDQ"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Tlaè, neukladaj do fronty."
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr "Neznámy model"
@@ -10766,6 +10654,11 @@ msgstr "Neznámy model"
 #, c-format
 msgid "Unknown model"
 msgstr "Neznámy model"
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid "%s (Port %s)"
+msgstr "%s (Port %s)"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -10919,11 +10812,6 @@ msgstr "Printerdrake"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr "®eláte si nastavi» inú tlaèiareò ?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Odstraòujem tlaèiareò \"%s\"..."
 
@@ -10939,8 +10827,8 @@ msgstr "Odstráni» tlaèiareò"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Know how to use this printer"
-msgstr "Viem, ako pou¾íva» túto tlaèiareò"
+msgid "Learn how to use this printer"
+msgstr "Ako pou¾íva» túto tlaèiareò"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11040,11 +10928,6 @@ msgstr "Typ pripojenia tlaèiarne"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Learn how to use this printer"
-msgstr "Ako pou¾íva» túto tlaèiareò"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Raw printer"
 msgstr "Základná tlaèiareò"
 
@@ -11080,6 +10963,7 @@ msgid "Add a new printer"
 msgstr "Pridaj novú tlaèiareò"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Normálny mód"
@@ -11104,6 +10988,11 @@ msgstr "Konfigurácia CUPS"
 msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr ""
 "Obnovi» zoznam tlaèiarní (pre zobrazenie v¹etkých prístupných CUPS tlaèiarní)"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Display all available remote CUPS printers"
+msgstr "Zobrazi» v¹etky dostupné vzdialené CUPS tlaèiarne"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11132,16 +11021,6 @@ msgstr ""
 #, c-format
 msgid "Printing system: "
 msgstr "Tlaèový systém:"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Would you like to configure printing?"
-msgstr "®eláte si nastavi» tlaèiareò?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr "Pripravujem Printerdrake..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11177,6 +11056,11 @@ msgstr "Aký typ tlaèového systému chcete pou¾íva»?"
 #, c-format
 msgid "Select Printer Spooler"
 msgstr "Zvoµte tlaèovú frontu"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Setting Default Printer..."
+msgstr "Nastavenie predvolenej tlaèiarne..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12595,7 +12479,7 @@ msgstr "Autodetekcia tlaèiarní pripojených priamo do siete"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Auto-detect printers connected to this machine"
-msgstr "Automatická detekcia tlaèiarní pripojených k tomuto stroju"
+msgstr "Automatická detekcia tlaèiarní pripojených k tomuto poèítaèu"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12621,9 +12505,8 @@ msgstr ""
 "Ak máte tlaèiareò(ne) pripojenú(né) k tomuto poèítaèu pripojte ju prosím, "
 "zapnite a mala by by» automaticky zdetekovaná.\n"
 "\n"
-"sssssssssssssssssssssssssssssssssssssss Kliknite na \"Ïalej\" ak ste "
-"pripravení, alebo na \"Zru¹\" ak si ne¾eláte nastavi» tlaèiareò(tlaèiarne) "
-"teraz."
+"Kliknite na \"Ïalej\" ak ste pripravení, alebo na \"Zru¹\" ak si ne¾eláte "
+"nastavi» tlaèiareò(tlaèiarne) teraz."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12726,6 +12609,35 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ")"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr " na"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr "("
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Configuring printer ..."
+msgstr "Konfigurujem tlaèiareò ..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Searching for new printers..."
 msgstr "Hµadanie nových tlaèiarní..."
 
@@ -12772,7 +12684,7 @@ msgstr " (Presvedète sa èi sú v¹etky tlaèiarne zapnuté a pripojené).\n"
 msgid ""
 "There are no printers found which are directly connected to your machine"
 msgstr ""
-"Nebola nájdená ¾iadna tlaèiareò, ktorá by bola pripojená v Vá¹mu poèítaèu"
+"Nebola nájdená ¾iadna tlaèiareò, ktorá by bola pripojená k Vá¹mu poèítaèu"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12848,6 +12760,66 @@ msgstr "Prehµadávam Vá¹ systém..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Restarting CUPS..."
+msgstr "Re¹tartujem CUPS..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr "Tento server je u¾ v zozname, nemô¾e by» pridaný znova.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr "Príklad korektnej IP adresy:\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "Zadaná IP adresa nie je korektná.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Server IP missing!"
+msgstr "Chýba IP adresa servera!"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr "Vlo¾te IP adresu a port hostiteµa, ktorého tlaèiareò chcete pou¾íva»."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "Dostupné tlaèiarne na vzdialenom CUPS serveri"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Remove selected server"
+msgstr "Odstráni» zvolený server"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Edit selected server"
+msgstr "Editova» zvolený server"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Add server"
+msgstr "Prida» server"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+"Pridajte sem CUPS server, ktorého tlaèiarne chcete pou¾íva». Toto je "
+"potrebné iba vtedy, ak server neoznamuje informácie o sebe do lokálnej siete."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "IP address of host/network:"
 msgstr "IP adresa hostiteµa/siete:"
 
@@ -12859,38 +12831,13 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr "192.168.100.0/255.255.255.0\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr "192.168.100.0/24\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr "10.1.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr "10.0.0.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr "192.168.100.194\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr "Príklad korektnej IP adresy:\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
 msgstr "Vlo¾ená IP adresa hostiteµa/siete nie je korektná.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
+msgstr "Adresa hostiteµa/siete chýba."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12960,6 +12907,36 @@ msgstr ""
 #, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "Automatická korekcia nastavenia CUPS"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+"Pre získanie prístupu k tlaèiaròam na vzdialených CUPS serveroch vo Va¹ej "
+"lokálnej sieti potrebujete zapnú» voµbu \"Automatické vyhµadanie dostupných "
+"tlaèiarní na vzdialených poèítaèoch\"; CUPS servre budú informova» Vá¹ "
+"poèítaè o svojich tlaèiaròach. V¹etky tlaèiarne o ktorých vie Vá¹ poèítaè sú "
+"zobrazené v sekcii \"Vzdialené tlaèiarne\" v hlavnom okne Printerdrake. Ak "
+"Vá¹ CUPS server nie je vo Va¹ej lokálnej sieti, musíte tu zada» IP adresu, "
+"prípadne èíslo portu pre získanie informácií zo servera."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "None"
+msgstr "Niè"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Additional CUPS servers: "
+msgstr "Dal¹ie CUPS servre:"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -13147,11 +13124,11 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
-"ak je nastavené na áno, budú sa hµada» prázdne heslá, alebo heslo pokiaµ by "
-"malo by» v /etc/shadow, alebo iný pou¾ívatelia s id 0."
+"ak je nastavené na áno, budú sa kontrolova» prázdne heslá, ¾iadne heslá v /"
+"etc/shadow a pou¾ívatelia s id 0 iní ako root."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13349,7 +13326,7 @@ msgstr ""
 "Argumenty: (hodnota, varovanie=1)\n"
 "\n"
 "Povoli»/Zakáza» ochranu proti spoofingu pri rozli¹ovaní mien.\n"
-"Ak je nastavené \fIvarovanie\\fP tak sa udalos» zaloguje pomocou syslog-u."
+"Ak je nastavené \\fIvarovanie\\fP tak sa udalos» zaloguje pomocou syslog-u."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -15095,6 +15072,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr "%s"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr "Prosím, zvoµte médium pre zálohovanie..."
 
@@ -15353,16 +15335,6 @@ msgstr "Prosím, zadajte, kde sú ulo¾ené zálohy"
 #, c-format
 msgid "Restore from Hard Disk."
 msgstr "Obnova z pevného disku."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Secure Connection"
-msgstr "Bezpeèné pripojenie"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "FTP Connection"
-msgstr " FTP spojenie"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16289,6 +16261,196 @@ msgstr "Cron zatiaµ nie je dostupný pre ne-root pou¾ívateµa"
 msgid "Installation of %s failed. The following error occured:"
 msgstr "In¹talácia %s zlyhala. Vyskytla sa nasledujúca chyba:"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "Nie, nechcem automatické prihlásenie"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "Áno, chcem automatické prihlásenie (pou¾ívateµ, desktop)"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "Spusti» grafické rozhranie po ¹tarte systému"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "Mód systému"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr "Úvodná obrazovka"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr "Obrazovka Lilo"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+"\n"
+"Zvoµte tému pre\n"
+"Lilo a úvodnú obrazovku,\n"
+"mô¾ete si vybra»\n"
+"ka¾dú zvlá¹»"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "Témy"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Voµba úvodnej obrazovky"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"Momentálne pou¾ívate %s ako ¹tartovací mana¾ér.\n"
+"Kliknite na Konfigurácia pre spustenie sprievodcu nastavením."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr "In¹talácia Lilo a úvodnej obrazovky bola úspe¹ne dokonèená"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr "In¹talácia témy zlyhala!"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr "Poznámka"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr "Znovu spustite 'lilo'"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+"Nemô¾em znovu spusti» Lilo!\n"
+"Spustite \"lilo\" ako root v príkazovom riadku pre dokonèenie in¹talácie "
+"témy."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr "Vytváranie initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr "Nemô¾em spusti» mkinitrd -f /boot/initrd-%s.img %s."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+"Nemô¾em zapísa» /etc/sysconfig/bootsplash\n"
+"Súbor nebol nájdený"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "Zapisujem %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr "Nemô¾em zapísa» /etc/sysconfig/bootsplash."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "Nena¹iel som správy Lilo"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "Kopírujem %s do %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr "Zálohuj %s ako %s.old"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "Vytvor novú tému"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"Zobrazi» tému\n"
+"pod konzolou"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr "In¹talácia tém"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "Lilo/Grub mód"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "Yaboot mód"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>K"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/Súbor/_Koniec"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_Súbory"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "Konfigurácia ¹týlu ¹tartovania"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -16426,6 +16588,16 @@ msgstr "Nástroj pre oznámenie chýb Mandrake"
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "Parametre"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "Konfigurácia pripojenia internetu"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "DHCP klient"
 
@@ -16439,11 +16611,6 @@ msgstr "Ethernet karta"
 msgid "Gateway"
 msgstr "Brána"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "Parametre"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -16453,11 +16620,6 @@ msgstr "Typ pripojenia: "
 #, c-format
 msgid "Profile: "
 msgstr "Profil: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "Konfigurácia pripojenia internetu"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -16674,11 +16836,14 @@ msgid ""
 "into your system with the X Window System running and supports running\n"
 "several different X sessions on your local machine at the same time."
 msgstr ""
+"X11 Grafický mana¾ér Vám umo¾ní prihlási» sa v grafickom\n"
+"prostredí do Vá¹ho systému a umo¾òuje aj vytvorenie viacerých\n"
+"súèastných X spojení na Vá¹ poèítaè v jednom èase."
 
 #: ../../standalone/drakedm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Choosing a display manager"
-msgstr "Vyberte si niektorý ovládaè"
+msgstr "Vyberte si grafický mana¾ér"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16727,8 +16892,8 @@ msgstr "Odstráni» tento modul"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr "vynecha» moduly pre raid"
+msgid "Add a module"
+msgstr "Pridaj modul"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16742,13 +16907,13 @@ msgstr "ak je potrebné"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "vynúti»"
+msgid "omit raid modules"
+msgstr "vynecha» moduly pre raid"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "Pridaj modul"
+msgid "force"
+msgstr "vynúti»"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16762,23 +16927,18 @@ msgstr "Expertný mód"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "Hlavné"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "verzia jadra"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "Chyba : %s"
+msgid "default"
+msgstr "prednastavené"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "prednastavené"
+msgid "General"
+msgstr "Hlavné"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16799,11 +16959,6 @@ msgstr "Veµkos»"
 #, c-format
 msgid "Module name"
 msgstr "Meno modulu"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16911,7 +17066,7 @@ msgid "Choose the applications that will support the fonts:"
 msgstr "Zvoµte aplikácie ktoré budú podporova» fonty:"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " Copyright (C) 2001-2002 by MandrakeSoft \n"
@@ -16970,6 +17125,11 @@ msgstr ""
 "\t od Kena Borgendale:\n"
 "\t    Konverzia Windows .pfm súborov do a .afm (Adobe Font Metrics)\n"
 "    -  type1inst:\n"
+"\t od James Macnicol: \n"
+"\t    type1inst generuje súbory fonts.dir fonts.scale & Fontmap.\n"
+"    -  ttf2pt1:   \n"
+"\t od Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
+"             Konverzia ttf fontov do afm a pfb fontov\n"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -17497,6 +17657,11 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "Path"
+msgstr "Cesta"
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "group :"
 msgstr "skupina :"
 
@@ -17556,11 +17721,6 @@ msgstr "Vlastníctvo"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Path"
-msgstr "Cesta"
-
-#: ../../standalone/drakperm:1
-#, c-format
 msgid "Permissions"
 msgstr "Práva"
 
@@ -17573,23 +17733,6 @@ msgstr "Aktuálny pou¾ívateµ"
 #, c-format
 msgid "browse"
 msgstr "prehliadanie"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr "vyberte súbor s právami ktorý chcete zobrazi»/editova»"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
-msgstr ""
-"Drakperm je pou¾ívaný pre zobrazenie súborov, alebo na nastavenie práv, "
-"vlastníkov a skupín pomocou msec.\n"
-"Je mo¾né tie¾ editova» Va¹e vlastné pravidlá, ktorými budú prepísané "
-"prednastavené."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17640,6 +17783,23 @@ msgstr "Presunú» zvolené pravidlo o jednu úroveò vy¹¹ie"
 #, c-format
 msgid "Up"
 msgstr "Hore"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr "vyberte súbor s právami ktorý chcete zobrazi»/editova»"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
+msgstr ""
+"Drakperm je pou¾ívaný pre zobrazenie súborov, alebo na nastavenie práv, "
+"vlastníkov a skupín pomocou msec.\n"
+"Je mo¾né tie¾ editova» Va¹e vlastné pravidlá, ktorými budú prepísané "
+"prednastavené."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17830,13 +17990,13 @@ msgstr "Bezpeènostné varovania:"
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid "(default value: %s)"
-msgstr "(¹tandardná hodnota: %s)"
+msgid "Security Level:"
+msgstr "Úroveò bezpeènosti:"
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid "Security Level:"
-msgstr "Úroveò bezpeènosti:"
+msgid "(default value: %s)"
+msgstr "(¹tandardná hodnota: %s)"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -17852,7 +18012,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -17861,24 +18021,24 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 "©tandardná: Toto je ¹tandardné nastavenie bezpeènosti pre poèítaè, ktorý je "
 "pou¾ívaný pre\n"
-"                  pripájanie k Internetu ako klient.\n"
+"                  pripájanie sa k Internetu ako klient.\n"
 "\n"
 "Vysoká:       Sú tu prítomné niektoré obmedzenia a viac automatických "
 "kontrol spú¹»aných\n"
-"                  v noci.\n"
+"                  ka¾dú noc.\n"
 "\n"
 "Vy¹¹ia:        Bezpeènos» je tu dos» vysoká, ale systém je stále pou¾iteµný "
 "ako server, ktorý\n"
 "                  akceptuje spojenia z mnohých klientov. Ak je Vá¹ poèítaè "
-"iba ako klient Internetu,\n"
+"iba ako klient v Internete,\n"
 "                  mô¾ete si zvoli» ni¾¹iu úroveò.\n"
 "\n"
 "Paranoidná: Podobne ako predchádzajúca úroveò, ale systém je úplne uzavretý\n"
-"                  a bezpeènostné mo¾nosti sú nastavené na maximum.\n"
+"                  a bezpeènostné mo¾nosti sú nastavené na ich maximum.\n"
 "\n"
 "Bezpeènostný administrátor:\n"
 "                  Ak je zapnutá voµba 'Bezpeènostné varovania', budú "
@@ -18245,26 +18405,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/Nastavenia"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect jazz drives"
-msgstr "/Auto-detekcia jazz mechaník"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect modems"
-msgstr "/Auto-detekcia modemov"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect printers"
-msgstr "/Auto-detekcia tlaèiarní"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr "primárne"
 
@@ -18280,6 +18420,16 @@ msgid ""
 msgstr ""
 "Kliknite na zariadenie v µavej stromovej ¹truktúre pre získanie informácií o "
 "òom."
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Unknown"
+msgstr "Neznámy"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "unknown"
+msgstr "neznámy"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18340,11 +18490,6 @@ msgstr "O Harddrake"
 msgid "/_About..."
 msgstr "/_O aplikácii..."
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/_Pomoc"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -18383,15 +18528,20 @@ msgstr "Harddrake pomoc"
 msgid "/_Fields description"
 msgstr "/_Popis polo¾iek"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/_Pomoc"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/_Quit"
+msgstr "/_Koniec"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "/Auto-detekcia _jazz mechaník"
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_Nastavenia"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18403,10 +18553,10 @@ msgstr "/Auto-detekcia _modemov"
 msgid "/Autodetect _printers"
 msgstr "/Auto-detekcia _tlaèiarní"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
-msgid "/_Quit"
-msgstr "/_Koniec"
+msgid "/_Options"
+msgstr "/_Nastavenia"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18505,7 +18655,7 @@ msgstr "Úroveò"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr "Formátovanie diskiet v mechanike akceptované"
 
 #: ../../standalone/harddrake2:1
@@ -18663,6 +18813,16 @@ msgstr "Èi má toto cpu Coma bug prítomný na Cyrix 6x86 procesoroch"
 #, c-format
 msgid "Coma bug"
 msgstr "Coma chyba"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr "¹peciálne mo¾nosti ovládaèa (mo¾nos» napaµovania, alebo DVD podpora)"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
+msgstr "Kapacita disku"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -19144,123 +19304,182 @@ msgstr "Monitorovanie siete"
 
 #: ../../standalone/printerdrake:1
 #, c-format
-msgid "Reading printer data ..."
-msgstr "Naèítavam údaje tlaèiarne ..."
+msgid "Reading data of installed printers..."
+msgstr "Naèítavanie údajov nain¹talovaných tlaèiarní..."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Name/IP address of host:"
-msgstr "IP adresa hostiteµa/siete:"
+msgstr "Meno/IP adresa hostiteµa:"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
-msgstr ""
-"Záznam pre hostiteµa/sie» u¾ je v zozname, nie je mo¾né ho znovu prida».\n"
+msgstr "Tento hostiteµ u¾ je v zozname, nie je mo¾né ho znovu prida».\n"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scannerdrake"
-msgstr "Skener"
+msgstr "Scannerdrake"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "You must enter a host name or an IP address.\n"
-msgstr "Prosím vlo¾te meno poèítaèa alebo IP."
+msgstr "Musíte vlo¾i» meno poèítaèa, alebo IP adresu.\n"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Choose the host on which the local scanners should be made available:"
-msgstr "Vyberte si sie» alebo hostiteµa kde je zdieµaná lokálna tlaèiareò:"
+msgstr "Vyberte si hostiteµa na ktorom je zdieµaný lokálny skener:"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sharing of local scanners"
-msgstr "Zdieµanie lokálnych tlaèiarní"
+msgstr "Zdieµanie lokálnych skenerov"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "This machine"
-msgstr "(na tomto stroji)"
+msgstr "Tento poèítaè"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove selected host"
-msgstr "Odstránenie oznaèeného hostiteµa/siete"
+msgstr "Odstráni» oznaèeného hostiteµa"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Edit selected host"
-msgstr "Upravi» hostiteµa/sie»"
+msgstr "Upravi» oznaèeného hostiteµa"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add host"
-msgstr "Prida» hostiteµa/sie»"
+msgstr "Prida» hostiteµa"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "These are the machines from which the scanners should be used:"
-msgstr ""
-"Toto sú poèítaèe, alebo siete kde je lokálne pripojená tlaèiareò/tlaèiarne "
-"dostupné:"
+msgstr "Toto sú poèítaèe z ktorých bude mo¾né skenery pou¾íva»:"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Usage of remote scanners"
-msgstr "Pou¾i» voµné miesto"
+msgstr "Pou¾itie pre vzdialené skenery"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "All remote machines"
-msgstr "®iadne vzdialené poèítaèe"
+msgstr "V¹etky vzdialené poèítaèe"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
 "available:"
 msgstr ""
-"Toto sú poèítaèe, alebo siete kde je lokálne pripojená tlaèiareò/tlaèiarne "
+"Toto sú poèítaèe na ktorých sú dostupné lokálne pripojené skenery a mô¾u by» "
 "dostupné:"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
-msgstr ""
+msgstr "Pou¾i» skenery na týchto systémoch:"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use scanners on remote computers"
-msgstr ""
+msgstr "Pou¾i» skenery na vzdialených poèítaèoch"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner sharing to hosts: "
-msgstr "Zdiela» tlaèiareò pre hosty/siete:"
+msgstr "Skener ponúknutý týmto hostiteµom: "
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "The scanners on this machine are available to other computers"
-msgstr "Tlaèiarne na tomto poèítaèi sú dostupné pre iné poèítaèe"
+msgstr "Skenery na tomto poèítaèi sú dostupné pre iné poèítaèe"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can also decide here whether scanners on remote machines should be made "
 "available on this machine."
 msgstr ""
-"Mô¾ete sa rozhodnú» èi tlaèiarne na vzdialených systémoch budú automaticky "
-"prístupné na tomto poèítaèi."
+"Mô¾ete sa tie¾ rozhodnú» èi skenery na vzdialených systémoch budú "
+"automaticky prístupné na tomto poèítaèi."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Here you can choose whether the scanners connected to this machine should be "
 "accessable by remote machines and by which remote machines."
 msgstr ""
-"Mô¾ete si vybra» èi tlaèiarne pripojené k tomuto poèítaèu budú prístupné "
+"Mô¾ete si vybra» èi skenery pripojené k tomuto poèítaèu budú prístupné "
 "vzdialeným poèítaèom a zo vzdialených poèítaèov."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Re-generating list of configured scanners ..."
+msgstr "Znovunaèítanie zoznamu nakonfigurovaných skenerov ..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Searching for new scanners ..."
+msgstr "Hµadanie nových skenerov ..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Searching for configured scanners ..."
+msgstr "Hµadanie nain¹talovaných skenerov ..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Scanner sharing"
+msgstr "Zdieµanie skenera"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Add a scanner manually"
+msgstr "Prida» skener manuálne"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Search for new scanners"
+msgstr "Hµadanie nových tlaèiarní..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr ""
+"Nebol nájdený ¾iaden skener, ktorá by bol pripojený k Vá¹mu poèítaèu.\n"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The following scanner\n"
+"\n"
+"%s\n"
+"is available on your system.\n"
+msgstr ""
+"Tento skener\n"
+"\n"
+"%s\n"
+"je priamo pripojený k Vá¹mu systému.\n"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The following scanners\n"
+"\n"
+"%s\n"
+"are available on your system.\n"
+msgstr ""
+"Tento skener\n"
+"\n"
+"%s\n"
+"je dostupný pre Vá¹ systém.\n"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19275,6 +19494,31 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
+msgid "choose device"
+msgstr "vyberte si zariadenie"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Please select the device where your %s is attached"
+msgstr "Prosím, vyberte zariadenie kde je Vá¹ %s pripojený"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Searching for scanners ..."
+msgstr "Hµadanie skenerov ..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Auto-detect available ports"
+msgstr "Auto-detekcia dostupných portov"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr "(Poznámka: Paralelné porty nemô¾u by» auto detekované)"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
 msgid ""
 "The %s must be configured by printerdrake.\n"
 "You can launch printerdrake from the Mandrake Control Center in Hardware "
@@ -19286,25 +19530,13 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid "choose device"
-msgstr "vyberte si zariadenie"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Please select the device where your %s is attached"
-msgstr ""
-"Scannerdrake nedokázal nájs» Vá¹ %s.\n"
-"Zvoµte prosím zariadenie, ku ktorému je Vá¹ skener pripojený"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
 msgid "The %s is unsupported"
 msgstr "%s nie je podporovaný"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "The %s is not known by this version of Scannerdrake."
-msgstr "%s nie je podporovaný touto verziou scannerdrake."
+msgstr "%s nie je podporovaný touto verziou Scannerdrake."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19313,70 +19545,28 @@ msgstr "%s nie je podporované touto verziou Mandrake Linux-u."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Re-generating list of configured scanners ..."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Searching for new scanners ..."
-msgstr "Hµadanie nových tlaèiarní..."
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Searching for configured scanners ..."
-msgstr "Hµadanie nových tlaèiarní..."
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Scanner sharing"
-msgstr "Zdieµanie tlaèiarne"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Add a scanner manually"
-msgstr "Vybra» pou¾ívateµov manuálne"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Search for new scanners"
-msgstr "Hµadanie nových tlaèiarní..."
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr ""
-"Nebola nájdená ¾iadna tlaèiareò, ktorá by bola pripojená v Vá¹mu poèítaèu"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"The following scanner\n"
-"\n"
-"%s\n"
-"is available on your system.\n"
-msgstr ""
-"Táto tlaèiareò\n"
-"\n"
-"%s%s\n"
-"je priamo pripojená k Vá¹mu systému"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"The following scanners\n"
-"\n"
-"%s\n"
-"are available on your system.\n"
-msgstr ""
-"Tieto tlaèiarne\n"
-"\n"
-"%s%s\n"
-"sú priamo pripojené k Vá¹mu systému"
+msgid "Port: %s"
+msgstr "Port: %s"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
-msgstr "Zvoµte skener"
+msgid ", "
+msgstr ","
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Detected model: %s"
+msgstr "Nájdený model: %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr " ("
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Select a scanner model"
+msgstr "Zvoµte si model skenera"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19468,6 +19658,10 @@ msgid "Scientific Workstation"
 msgstr "Vedecká stanica"
 
 #: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr "Vedecké aplikácie ako napríklad gnuplot"
+
+#: ../../share/compssUsers:999
 msgid "Console Tools"
 msgstr "Konzolové nástroje"
 
@@ -19541,12 +19735,12 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache a Pro-ftpd"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "Mail/Groupware/News"
+msgid "Mail"
+msgstr "Mail"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr "Postfix email server, Inn news server"
+msgid "Postfix mail server"
+msgstr "Postfix mail server"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -19645,195 +19839,18 @@ msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programy na správu va¹ich financií, napr. gnucash"
 
 #~ msgid ""
-#~ "You must indicate where you wish to place the information required to "
-#~ "boot\n"
-#~ "GNU/Linux.\n"
-#~ "\n"
-#~ "Unless you know exactly what you are doing, choose \"First sector of "
-#~ "drive\n"
-#~ "(MBR)\"."
+#~ "Please enter your host name if you know it.\n"
+#~ "Some DHCP servers require the hostname to work.\n"
+#~ "Your host name should be a fully-qualified host name,\n"
+#~ "such as ``mybox.mylab.myco.com''."
 #~ msgstr ""
-#~ "Musíte sa rozhodnú», kam umiestni» informácie potrebné pre spustenie\n"
-#~ "systému.\n"
-#~ "Pokiaµ presne neviete èo robi» zvoµte \"Prvý sektor disku (MBR)\"."
+#~ "Prosím zadajte meno Vá¹ho poèítaèa ak ho viete.\n"
+#~ "Niektoré DHCP servre ho vy¾adujú pre svoju funkènos».\n"
+#~ "Meno Vá¹ho poèítaèa by malo byt plne kvalifikované meno poèítaèa,\n"
+#~ "ako napríklad ``server.linux.sk''."
 
-#~ msgid ""
-#~ "DrakX now needs to know if you want to perform a default (\"Recommended"
-#~ "\")\n"
-#~ "installation or if you want to have greater control (\"Expert\") over "
-#~ "your\n"
-#~ "installation. You can also choose to do a new installation or upgrade "
-#~ "your\n"
-#~ "existing Mandrake Linux system:\n"
-#~ "\n"
-#~ " * \"Install\": completely wipes out the old system. However, depending "
-#~ "on\n"
-#~ "what is currently installed on your machine, you may be able to keep "
-#~ "some\n"
-#~ "old partitions (Linux or otherwise) unchanged;\n"
-#~ "\n"
-#~ " * \"Upgrade\": this installation class allows to simply update the\n"
-#~ "packages currently installed on your Mandrake Linux system. It keeps "
-#~ "your\n"
-#~ "hard drives' current partitions as well as user configurations. All "
-#~ "other\n"
-#~ "configuration steps remain available, similar to a normal installation;\n"
-#~ "\n"
-#~ " * \"Upgrade Packages Only\": this new installation class allows you to\n"
-#~ "upgrade an existing Mandrake Linux system while keeping all system\n"
-#~ "configurations unchanged. Adding new packages to the current "
-#~ "installation\n"
-#~ "is also possible.\n"
-#~ "\n"
-#~ "Upgrades should work fine on Mandrake Linux systems using version \"8.1"
-#~ "\"\n"
-#~ "or later.\n"
-#~ "\n"
-#~ "Depending on your GNU/Linux knowledge, select one of the following "
-#~ "choices:\n"
-#~ "\n"
-#~ " * Recommended: choose this if you have never installed a GNU/Linux\n"
-#~ "operating system. The installation will be very easy and you will only "
-#~ "be\n"
-#~ "asked a few questions;\n"
-#~ "\n"
-#~ " * Expert: if you have a good GNU/Linux understanding, you may wish to\n"
-#~ "perform a highly customized installation. Some of the decisions you will\n"
-#~ "have to make may be difficult if you do not have good GNU/Linux "
-#~ "knowledge,\n"
-#~ "so it is not recommended that those without a fair amount of experience\n"
-#~ "select this installation class."
-#~ msgstr ""
-#~ "DrakX teraz potrebuje vedie» èi chcete uskutoèni» predvolenú (\"Odporúèaná"
-#~ "\")\n"
-#~ "in¹taláciu, alebo chcete ma» väè¹iu kontrolu (\"Expertná\"). Mô¾ete si "
-#~ "tie¾ vybra»\n"
-#~ "medzi novou in¹taláciou, aktualizáciou u¾ nain¹talovaného Mandrake Linux\n"
-#~ "systému, alebo iba aktualizáciou balíèkov:\n"
-#~ "\n"
-#~ " * \"In¹talácia\": úplne zru¹í starý systém. V skutoènosti ale zále¾í na "
-#~ "tom, èo máte\n"
-#~ "na poèítaèi nain¹talované a je mo¾nos» niektoré staré oddiely (Linux, "
-#~ "alebo iné)\n"
-#~ "ponecha» bez zmeny;\n"
-#~ "\n"
-#~ " * \"Aktualizácia\": táto mo¾nos» umo¾òuje jednoduchú aktualizáciu "
-#~ "balíkov, ktoré\n"
-#~ "sú momentálne nain¹talované vo Va¹om Mandrake Linux systéme. Zachováva\n"
-#~ "aktuálne diskové oddiely na Va¹om disku bez zmeny. V¹etky ostatné kroky "
-#~ "ktoré sa\n"
-#~ "vykonávajú pri in¹talácii je potrebné vykona», podobne ako pri klasickej\n"
-#~ "in¹talácii.\n"
-#~ "\n"
-#~ " * \"Iba aktualizácia balíèkov\": táto úplne nová mo¾nos» umo¾òuje "
-#~ "aktualizova»\n"
-#~ "existujúci Mandrake Linux systém tak, ¾e sa zachovajú v¹etky nastavenia\n"
-#~ "systému. Je taktie¾ mo¾né pridávanie nových balíkov do systému.\n"
-#~ "\n"
-#~ "Aktualizácia by mala fungova» s Mandrake Linux systémami od verzie\n"
-#~ "\"8.1\"\n"
-#~ "\n"
-#~ "Na základe va¹ich skúseností s GNU/Linux systémom si vyberte z "
-#~ "nasledujúcich\n"
-#~ "mo¾ností:\n"
-#~ "\n"
-#~ " * Odporúèaná: vyberte si túto mo¾nos» ak ste nikdy nein¹talovali GNU/"
-#~ "Linux\n"
-#~ "systém. In¹talaèná procedúra bude veµmi jednoduchá a polo¾í Vám iba\n"
-#~ "zopár základných otázok;\n"
-#~ "\n"
-#~ " * Expertná: ak máte skúsenosti s GNU/Linux systémom, mô¾ete si zvoli» "
-#~ "túto\n"
-#~ "mo¾nos». Tento druh in¹talácie Vám umo¾ní do podrobností vy¹pecifikova»\n"
-#~ "in¹taláciu. Odpoveda» na niektoré otázky mô¾e by» veµmi zlo¾ité v "
-#~ "prípade,\n"
-#~ "¾e nemáte dobré znalosti GNU/Linux systému. Nevyberajte si túto mo¾nos»,\n"
-#~ "ak skutoène neviete èo robíte."
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "Chyba : %s"
 
-#~ msgid "Please be patient. This operation can take several minutes."
-#~ msgstr "Prosím buïte trpezlivý. Táto operácia mô¾e trva» niekoµko minút."
-
-#~ msgid ""
-#~ "Your new Mandrake Linux operating system is currently being installed.\n"
-#~ "Depending on the number of packages you will be installing and the speed "
-#~ "of\n"
-#~ "your computer, this operation could take from a few minutes to a\n"
-#~ "significant amount of time.\n"
-#~ "\n"
-#~ "Please be patient."
-#~ msgstr ""
-#~ "Teraz sa in¹taluje Vá¹ nový operaèný systém Linux Mandrake.\n"
-#~ "V závislosti na mno¾stve balíèkov a rýchlosti Vá¹ho poèítaèa\n"
-#~ "mô¾e táto operácia trva» od niekoµkých minút a¾ po rádovo hodiny.\n"
-#~ "\n"
-#~ "Prosím, buïte trpezliví..."
-
-#~ msgid ""
-#~ "X (for X Window System) is the heart of the GNU/Linux graphical "
-#~ "interface\n"
-#~ "on which all the graphical environments (KDE, GNOME, AfterStep,\n"
-#~ "WindowMaker, etc.) bundled with Mandrake Linux rely.\n"
-#~ "\n"
-#~ "You will be presented the list of available resolutions and color depth\n"
-#~ "available for your hardware. Choose the one that best suit your needs "
-#~ "(you\n"
-#~ "will be able to change that after installation though). When you are\n"
-#~ "satisfied with the sample shown in the monitor, click \"OK\". A window "
-#~ "will\n"
-#~ "then appear and ask you if you can see it.\n"
-#~ "\n"
-#~ "If you are doing an \"Expert\" installation, you will enter the X\n"
-#~ "configuration wizard. See the corresponding section of the manual for "
-#~ "more\n"
-#~ "information about this wizard.\n"
-#~ "\n"
-#~ "If you can see the message during the test, and answer \"Yes\", then "
-#~ "DrakX\n"
-#~ "will proceed to the next step. If you cannot see the message, it simply\n"
-#~ "means that the configuration was wrong and the test will automatically "
-#~ "end\n"
-#~ "after 10 seconds, restoring the screen. Refer then to the video\n"
-#~ "configuration section of the user guide for more information on how to\n"
-#~ "configure your display."
-#~ msgstr ""
-#~ "X (X Window system) je srdcom grafického rozhrania GNU/Linux a tie¾\n"
-#~ "sa naò spoliehajú v¹etky grafické systémy (KDE, GNOME, AfterStep,\n"
-#~ "WindowMaker a iné) ktoré obsahuje Mandrake Linux. Teraz sa DrakX\n"
-#~ "pokúsi automaticky nakonfigurova» Vá¹ X Window systém.\n"
-#~ "\n"
-#~ "Je veµmi nepravdepodobné, ¾e sa to nepodarí, iba ak by bol Vá¹\n"
-#~ "hardvér veµmi starý (alebo príli¹ nový). Ak sa to podarí, na¹tartujú sa X-"
-#~ "sy\n"
-#~ "automaticky v najvy¹¹om mo¾nom rozlí¹ení, v závislosti na veµkosti "
-#~ "monitora.\n"
-#~ "Zobrazí sa dialóg, kde by ste mali potvrdi» ¾e ho vidíte.\n"
-#~ "\n"
-#~ "Ak vykonávate \"Expertnú\" in¹taláciu spustí sa X konfiguraèný "
-#~ "sprievodca.\n"
-#~ "Pozrite si zodpovedajúce kapitoly v manuály pre viac informácií o tomto\n"
-#~ "sprievodcovi.\n"
-#~ "\n"
-#~ "Ak uvidíte otázku o funkènosti poèas testu a odpoviete \"Áno\", DrakX "
-#~ "bude\n"
-#~ "pokraèova» ïalej. Ak nebudete vidie» tento dialóg, jednoducho to znamená, "
-#~ "¾e\n"
-#~ "konfigurácia je zlá a test skonèí automaticky po 10 sekundách a obnoví "
-#~ "sa\n"
-#~ "obrazovka."
-
-#~ msgid "Switching between ALSA and OSS help"
-#~ msgstr "Pomoc pri zmenách medzi ALSA a OSS"
-
-#, fuzzy
-#~ msgid "quit"
-#~ msgstr "Koniec"
-
-#, fuzzy
-#~ msgid "save"
-#~ msgstr "Ulo¾"
-
-#~ msgid "Detecting devices ..."
-#~ msgstr "Zis»ujem zariadenia..."
-
-#~ msgid "Test ports"
-#~ msgstr "Test portov"
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"

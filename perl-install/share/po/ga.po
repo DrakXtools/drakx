@@ -19,16 +19,18 @@ msgid ""
 "You can use userdrake to add a user to this group."
 msgstr ""
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Cealaigh"
@@ -101,15 +103,14 @@ msgid "Country"
 msgstr "Tír:"
 
 #: ../../any.pm:1
+#, fuzzy, c-format
+msgid "All languages"
+msgstr "Roghnaigh do theanga"
+
+#: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
 msgstr ""
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "Gach Rud"
 
 #: ../../any.pm:1
 #, c-format
@@ -481,6 +482,16 @@ msgstr "Teorannaigh roghanna líne ordú"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr ""
+
+#: ../../any.pm:1
+#, c-format
+msgid "Enable ACPI"
+msgstr ""
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr ""
 
@@ -533,6 +544,11 @@ msgstr "Scipeáil"
 #, fuzzy, c-format
 msgid "On Floppy"
 msgstr "Sabháil ar dhiosca flapach"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "First sector of the root partition"
+msgstr "Níl aon ranna agat!"
 
 #: ../../any.pm:1
 #, c-format
@@ -709,229 +725,6 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "Ceart go Leor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "Mód Coras"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Splash selection"
-msgstr "Roghnú Grúpa Pacáistí"
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Cumraigh"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Theme installation failed!"
-msgstr "Roghnaigh rang feistiú"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, fuzzy, c-format
-msgid "Notice"
-msgstr "GanBhideó"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "Earráid"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Write %s"
-msgstr "Freastalaí XFree86: %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Create new theme"
-msgstr "Cruthaigh rann nua"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Install themes"
-msgstr "Feistigh córas"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "Mód Lilo/Grub"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "Mód Yaboot"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "Tosnaigh Aurora "
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "Monatóir Tradisiúnta Gtk+"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "Scáileán Tradisiúnta"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "Scáileán Stíl Nua"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr ""
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>E"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/Comhad/_Ealu"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_Comhad"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "Cumraíocht Stíl Tosnú"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1087,7 +880,20 @@ msgstr ""
 
 #: ../../fsedit.pm:1
 #, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+
+#: ../../fsedit.pm:1
+#, c-format
 msgid "There is already a partition with mount point %s\n"
+msgstr ""
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid "Mount points should contain only alphanumerical characters"
 msgstr ""
 
 #: ../../fsedit.pm:1
@@ -1117,6 +923,15 @@ msgid ""
 msgstr ""
 "Ni féidir liom an tábla rainn a léamh, tá máchaillí ann :(\n"
 "Leanfaidh mé orm ag cealú droch rainn"
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "Earráid"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1216,8 +1031,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1230,7 +1045,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1420,7 +1235,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1524,7 +1339,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -1922,7 +1737,7 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1973,7 +1788,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 
@@ -2019,7 +1834,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -2373,12 +2188,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Níl"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Tá"
@@ -2472,6 +2289,13 @@ msgstr "Dealaigh Windows(TM)"
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
+msgstr ""
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
 
 #: ../../install_interactive.pm:1
@@ -2807,6 +2631,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "Ag tosnú ar céim `%s'\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "Help"
+msgstr "/C_úidiú"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "not configured"
+msgstr "Cumraigh"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Cumraigh"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -3012,14 +2856,6 @@ msgstr ""
 #, c-format
 msgid "Individual package selection"
 msgstr ""
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, fuzzy, c-format
-msgid "Help"
-msgstr "/C_úidiú"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -3228,12 +3064,13 @@ msgstr "Deimniú"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr ""
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "Gan pasfhocal"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "Socraigh pasfhocal root"
@@ -3293,11 +3130,6 @@ msgstr "Slándáil"
 #, fuzzy, c-format
 msgid "Security Level"
 msgstr "Roghnaigh liebhéal slándáil"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "not configured"
-msgstr "Cumraigh"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -3401,6 +3233,16 @@ msgid "Which is your timezone?"
 msgstr "Cén ceann do chrois ama"
 
 #: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "An dteastaìonn uait printéir a chumrú?"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Unable to contact mirror %s"
+msgstr "Teip ar glaoch `fork': %s"
+
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr ""
@@ -3470,6 +3312,11 @@ msgid ""
 "If you have none of those CDs, click Cancel.\n"
 "If only some CDs are missing, unselect them, then click Ok."
 msgstr ""
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "Gach Rud"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3544,6 +3391,11 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "Ag curdach do na pacáistí atá ar fáil"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Ag cúrdach pacáistí le húasgrádú"
 
@@ -3551,11 +3403,6 @@ msgstr "Ag cúrdach pacáistí le húasgrádú"
 #, fuzzy, c-format
 msgid "Looking at packages already installed..."
 msgstr "Roghnaigh pacáistí ..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "Ag curdach do na pacáistí atá ar fáil"
 
 #: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
@@ -3663,11 +3510,6 @@ msgstr "Cén cinéal luchóg atá agat?"
 
 #: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
-msgid "Upgrade"
-msgstr "Uasgrádaigh"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
 msgid "Upgrade %s"
 msgstr "Uasgrádaigh"
 
@@ -3691,15 +3533,19 @@ msgstr ""
 msgid "Please choose your keyboard layout."
 msgstr "Cén leagan amach atá ar d'eocharchlársa"
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Éalaigh"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr "Ceadúnas"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "default:LTR"
-msgstr "gnáth"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3769,7 +3615,7 @@ msgstr "Ceart go Leor"
 #: ../../interactive/newt.pm:1
 #, c-format
 msgid "Finish"
-msgstr "Fionnlainnis"
+msgstr "Criochnaigh"
 
 #: ../../interactive.pm:1 ../../standalone/draksec:1
 #, c-format
@@ -4243,6 +4089,11 @@ msgstr "Belgáiris"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Azerbaidjani (latin)"
+msgstr ""
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Arabic"
 msgstr ""
 
 #: ../../keyboard.pm:1
@@ -5405,6 +5256,11 @@ msgstr ""
 msgid "Afghanistan"
 msgstr "An Afghanastáin"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "default:LTR"
+msgstr "default:LTR"
+
 #: ../../loopback.pm:1
 #, c-format
 msgid "Circular mounts %s\n"
@@ -5806,7 +5662,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 
 #: ../../services.pm:1
@@ -6027,8 +5883,8 @@ msgstr ""
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
 
 #: ../../standalone.pm:1
@@ -6159,7 +6015,7 @@ msgstr "Eirigh as Feistiú"
 
 #: ../../steps.pm:1
 #, fuzzy, c-format
-msgid "Install system updates"
+msgid "Install updates"
 msgstr "Feistigh córas"
 
 #: ../../steps.pm:1
@@ -6186,6 +6042,11 @@ msgstr "Cumraigh gréasánú"
 #, c-format
 msgid "Add a user"
 msgstr "Suimigh úsáideoir"
+
+#: ../../steps.pm:1
+#, fuzzy, c-format
+msgid "Root password"
+msgstr "Gan pasfhocal"
 
 #: ../../steps.pm:1
 #, c-format
@@ -6234,13 +6095,21 @@ msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
+msgid "Language"
 msgstr "Roghnaigh do theanga"
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
 msgstr ""
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "Ceart go Leor"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -6407,7 +6276,7 @@ msgstr "Coimead an cumraíocht IP atá ann"
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Roghnachais"
@@ -6431,14 +6300,6 @@ msgstr "Scáileán"
 #, fuzzy, c-format
 msgid "Graphic Card"
 msgstr "Carta Grafach"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Éalaigh"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -7060,39 +6921,6 @@ msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Scríobhfar clár diosca %s go dhiosca!"
 
 #: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"Tá an rann atá roghnaithe agat don fréamh (/) suitithe i ndhiadh an 1024ú\n"
-"sorcóir ar an dhiosca, agus níl aon rann /boot agat.\n"
-"Má tá tú chun LILO a úsáid, beidh ort rann /boot a cruthú ar ball."
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"Níl mé sasta /boot a cruthú comh fada sin isteach sa diosca, (ar sorcóir > "
-"1024).\n"
-"Má tá tú ag úsáid LILO ní oibróidh sé, nó níl /boot uait muna n-úsáideann tú "
-"LILO"
-
-#: ../../diskdrake/interactive.pm:1
 #, fuzzy, c-format
 msgid "The package %s is needed. Install it?"
 msgstr "Roghnaigh pacáistí ..."
@@ -7579,6 +7407,11 @@ msgstr ""
 
 #: ../../harddrake/data.pm:1
 #, c-format
+msgid "Firewire controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr ""
 
@@ -7711,7 +7544,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -8113,7 +7946,7 @@ msgstr ""
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
+msgid "Sagem (using pppoa) usb"
 msgstr ""
 
 #: ../../network/adsl.pm:1
@@ -8217,13 +8050,13 @@ msgid "Zeroconf host name must not contain a ."
 msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, fuzzy, c-format
-msgid "Zeroconf Host name"
+#, c-format
+msgid "Host name"
 msgstr "ÓstAinm"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid "Host name"
+#, fuzzy, c-format
+msgid "Zeroconf Host name"
 msgstr "ÓstAinm"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
@@ -8233,15 +8066,6 @@ msgid ""
 "\n"
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
-msgstr ""
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
 msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
@@ -8829,6 +8653,11 @@ msgstr "Cruthaigh an diosca "
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
+msgid "Assign host name from DHCP address"
+msgstr "Teastáil an luchóg, le do thoil"
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
 msgid "Network Hotplugging"
 msgstr "Cumraíocht Gréasánú"
 
@@ -8839,13 +8668,8 @@ msgstr ""
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
-msgid "(bootp/dhcp/zeroconf)"
-msgstr "(bootp/dhcp)"
-
-#: ../../network/network.pm:1
-#, c-format
-msgid "Automatic IP"
-msgstr "Uath-IP"
+msgid "DHCP host name"
+msgstr "ÓstAinm"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -8853,10 +8677,21 @@ msgstr "Uath-IP"
 msgid "Netmask"
 msgstr ""
 
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
 #, c-format
 msgid "IP address"
 msgstr "Seoladh IP"
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "(bootp/dhcp/zeroconf)"
+msgstr "(bootp/dhcp)"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Automatic IP"
+msgstr "Uath-IP"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
@@ -9093,7 +8928,7 @@ msgstr ""
 msgid "PDQ - Print, Don't Queue"
 msgstr ""
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr ""
@@ -9102,6 +8937,11 @@ msgstr ""
 #, c-format
 msgid "Unknown model"
 msgstr ""
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "%s (Port %s)"
+msgstr "Poirt"
 
 #: ../../printer/main.pm:1
 #, fuzzy, c-format
@@ -9255,11 +9095,6 @@ msgstr "Clódóir"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
-msgid "Do you want to configure another printer?"
-msgstr "An bhfuil tú ag iarraidh an cumraíocht a thrial?"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Scríos Printéir"
 
@@ -9275,7 +9110,7 @@ msgstr "Scríos Printéir"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
-msgid "Know how to use this printer"
+msgid "Learn how to use this printer"
 msgstr "An bhfuil tú ag iarraidh an cumraíocht a thrial?"
 
 #: ../../printer/printerdrake.pm:1
@@ -9374,11 +9209,6 @@ msgstr "Nasc Printéir"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
-msgid "Learn how to use this printer"
-msgstr "An bhfuil tú ag iarraidh an cumraíocht a thrial?"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
 msgid "Raw printer"
 msgstr "Gan  Printéir"
 
@@ -9412,6 +9242,7 @@ msgid "Add a new printer"
 msgstr "Gan  Printéir"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, fuzzy, c-format
 msgid "Normal Mode"
 msgstr "Luchóg ar bith"
@@ -9438,6 +9269,11 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Display all available remote CUPS printers"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; or to view information about "
@@ -9457,16 +9293,6 @@ msgstr ""
 #, c-format
 msgid "Printing system: "
 msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Would you like to configure printing?"
-msgstr "An dteastaìonn uait printéir a chumrú?"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Preparing Printerdrake..."
-msgstr "Scríos Printéir"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9502,6 +9328,11 @@ msgstr "Cén rann atá uait?"
 #, fuzzy, c-format
 msgid "Select Printer Spooler"
 msgstr "Nasc Printéir"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Setting Default Printer..."
+msgstr "Printéir áitiúl"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -10737,6 +10568,35 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Configuring printer ..."
+msgstr "Cumraigh printéir"
+
+#: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "Searching for new printers..."
 msgstr "Printéir áitiúl"
@@ -10839,6 +10699,64 @@ msgstr "Scríos Printéir"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Restarting CUPS..."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "An bhfuil seo ceart?"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Server IP missing!"
+msgstr "Óstainm Printéir"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "Scrios Freastalaí CUPS"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Remove selected server"
+msgstr "Scrios ciú"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Edit selected server"
+msgstr "Scrios ciú"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Add server"
+msgstr "Suimigh úsáideoir"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "IP address of host/network:"
 msgstr ""
 
@@ -10849,37 +10767,12 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -10937,6 +10830,29 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "Cumraigh ADSL"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "None"
+msgstr "Críochnithe"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Additional CUPS servers: "
+msgstr "IP freastalaí SMP"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, fuzzy, c-format
@@ -11093,8 +11009,8 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -12547,6 +12463,11 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup:1
+#, c-format
+msgid "%s"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Please select data to backup..."
 msgstr "Roghnaight do theangam le do thoil."
@@ -12791,16 +12712,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Restore from Hard Disk."
 msgstr "Aisig ó dhiosca flapach"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Secure Connection"
-msgstr "Nasc Printéir"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "FTP Connection"
-msgstr "Nasc LAN"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -13637,6 +13548,182 @@ msgstr ""
 msgid "Installation of %s failed. The following error occured:"
 msgstr ""
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "Mód Coras"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Splash selection"
+msgstr "Roghnú Grúpa Pacáistí"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Theme installation failed!"
+msgstr "Roghnaigh rang feistiú"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, fuzzy, c-format
+msgid "Notice"
+msgstr "GanBhideó"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Write %s"
+msgstr "Freastalaí XFree86: %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Create new theme"
+msgstr "Cruthaigh rann nua"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Install themes"
+msgstr "Feistigh córas"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "Mód Lilo/Grub"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "Mód Yaboot"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>E"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/Comhad/_Ealu"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_Comhad"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "Cumraíocht Stíl Tosnú"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -13767,6 +13854,16 @@ msgstr ""
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr ""
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Internet Connection Configuration"
+msgstr "Nasc na hIdirlíon agus cumraíocht"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr ""
 
@@ -13780,11 +13877,6 @@ msgstr ""
 msgid "Gateway"
 msgstr "Inneal Geata:"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr ""
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, fuzzy, c-format
 msgid "Connection type: "
@@ -13794,11 +13886,6 @@ msgstr "Athraigh cineál ranna"
 #, c-format
 msgid "Profile: "
 msgstr ""
-
-#: ../../standalone/drakconnect:1
-#, fuzzy, c-format
-msgid "Internet Connection Configuration"
-msgstr "Nasc na hIdirlíon agus cumraíocht"
 
 #: ../../standalone/drakconnect:1
 #, fuzzy, c-format
@@ -14054,9 +14141,9 @@ msgid "Remove a module"
 msgstr "Scríos modúil"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
-msgid "omit raid modules"
-msgstr "Scríos modúil"
+#, c-format
+msgid "Add a module"
+msgstr "Suimigh Modúil"
 
 #: ../../standalone/drakfloppy:1
 #, fuzzy, c-format
@@ -14069,14 +14156,14 @@ msgid "if needed"
 msgstr ""
 
 #: ../../standalone/drakfloppy:1
-#, c-format
-msgid "force"
-msgstr "forsáil"
+#, fuzzy, c-format
+msgid "omit raid modules"
+msgstr "Scríos modúil"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "Suimigh Modúil"
+msgid "force"
+msgstr "forsáil"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -14090,23 +14177,18 @@ msgstr "Roghnachais Saineoiaí"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "Gnáth"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "leagan `kernel'"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "Earraidh DrakFloppy: %s"
+msgid "default"
+msgstr "gnáth"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "gnáth"
+msgid "General"
+msgstr "Gnáth"
 
 #: ../../standalone/drakfloppy:1
 #, fuzzy, c-format
@@ -14127,11 +14209,6 @@ msgstr "Méid"
 #, c-format
 msgid "Module name"
 msgstr "Ainm Modúl"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
@@ -14731,6 +14808,11 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakperm:1
+#, c-format
+msgid "Path"
+msgstr ""
+
+#: ../../standalone/drakperm:1
 #, fuzzy, c-format
 msgid "group :"
 msgstr "Grupa na hOibre"
@@ -14788,11 +14870,6 @@ msgid "Property"
 msgstr "Poirt"
 
 #: ../../standalone/drakperm:1
-#, c-format
-msgid "Path"
-msgstr ""
-
-#: ../../standalone/drakperm:1
 #, fuzzy, c-format
 msgid "Permissions"
 msgstr "Leagan: %s\n"
@@ -14805,19 +14882,6 @@ msgstr ""
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "browse"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -14868,6 +14932,19 @@ msgstr ""
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Up"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -15030,13 +15107,13 @@ msgstr "Roghnaigh liebhéal slándáil"
 
 #: ../../standalone/draksec:1
 #, fuzzy, c-format
-msgid "(default value: %s)"
-msgstr "Gnáth"
+msgid "Security Level:"
+msgstr "Roghnaigh liebhéal slándáil"
 
 #: ../../standalone/draksec:1
 #, fuzzy, c-format
-msgid "Security Level:"
-msgstr "Roghnaigh liebhéal slándáil"
+msgid "(default value: %s)"
+msgstr "Gnáth"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -15052,7 +15129,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -15061,7 +15138,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 
 #: ../../standalone/draksound:1
@@ -15380,26 +15457,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/Roghanna"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect jazz drives"
-msgstr "Scríos Printéir"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect modems"
-msgstr "Scríos Printéir"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect printers"
-msgstr "Scríos Printéir"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr ""
 
@@ -15412,6 +15469,16 @@ msgstr "%d siocand"
 #, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "Unknown"
+msgstr "Gnáth"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "unknown"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -15471,11 +15538,6 @@ msgstr ""
 msgid "/_About..."
 msgstr "/Cúidiú/_Faoi..."
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/C_úidiú"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -15510,15 +15572,20 @@ msgstr ""
 msgid "/_Fields description"
 msgstr "Cuntas"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/C_úidiú"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "/_Quit"
+msgstr "Éalaigh"
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "Scríos Printéir"
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_Roghanna"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -15530,10 +15597,10 @@ msgstr "Scríos Printéir"
 msgid "/Autodetect _printers"
 msgstr "Scríos Printéir"
 
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/_Quit"
-msgstr "Éalaigh"
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Options"
+msgstr "/_Roghanna"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15632,7 +15699,7 @@ msgstr "leibhéal"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -15781,6 +15848,16 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Coma bug"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -16245,8 +16322,8 @@ msgstr "Cumraíocht Gréasánú"
 
 #: ../../standalone/printerdrake:1
 #, fuzzy, c-format
-msgid "Reading printer data ..."
-msgstr "Scríos Printéir"
+msgid "Reading data of installed printers..."
+msgstr "Printéir áitiúl"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -16356,47 +16433,6 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "choose device"
-msgstr "Gaireas bootáil"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Please select the device where your %s is attached"
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is unsupported"
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
 msgid "Re-generating list of configured scanners ..."
 msgstr ""
 
@@ -16449,8 +16485,84 @@ msgid ""
 msgstr "Níl aon gaireas ghreasán san do chorás!"
 
 #: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
-msgid "Select a scanner"
+msgid "choose device"
+msgstr "Gaireas bootáil"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Please select the device where your %s is attached"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Searching for scanners ..."
+msgstr "Printéir áitiúl"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Auto-detect available ports"
+msgstr "Scríos Printéir"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is unsupported"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Port: %s"
+msgstr "Poirt"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Detected model: %s"
+msgstr "Pointe taca dublach %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Select a scanner model"
 msgstr "Roghnaigh carta grafachach"
 
 #: ../../standalone/scannerdrake:1
@@ -16543,6 +16655,10 @@ msgid "Scientific Workstation"
 msgstr "Stáisiún Oibre"
 
 #: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr ""
+
+#: ../../share/compssUsers:999
 msgid "Console Tools"
 msgstr ""
 
@@ -16616,12 +16732,14 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache, Pro-ftpd"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "Post/Nuacht/Groupware"
+#, fuzzy
+msgid "Mail"
+msgstr "An Bhrasail"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr ""
+#, fuzzy
+msgid "Postfix mail server"
+msgstr "Freastalaí Printéir"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -16723,6 +16841,93 @@ msgstr ""
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr ""
+
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "Earraidh DrakFloppy: %s"
+
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+
+#~ msgid "Launch Aurora at boot time"
+#~ msgstr "Tosnaigh Aurora "
+
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr "Monatóir Tradisiúnta Gtk+"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "Scáileán Tradisiúnta"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "Scáileán Stíl Nua"
+
+#, fuzzy
+#~ msgid "Secure Connection"
+#~ msgstr "Nasc Printéir"
+
+#, fuzzy
+#~ msgid "FTP Connection"
+#~ msgstr "Nasc LAN"
+
+#~ msgid "Mail/Groupware/News"
+#~ msgstr "Post/Nuacht/Groupware"
+
+#~ msgid "/Options"
+#~ msgstr "/Roghanna"
+
+#, fuzzy
+#~ msgid "/Autodetect jazz drives"
+#~ msgstr "Scríos Printéir"
+
+#, fuzzy
+#~ msgid "/Autodetect modems"
+#~ msgstr "Scríos Printéir"
+
+#, fuzzy
+#~ msgid "/Autodetect printers"
+#~ msgstr "Scríos Printéir"
+
+#~ msgid ""
+#~ "The partition you've selected to add as root (/) is physically located "
+#~ "beyond\n"
+#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
+#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
+#~ "partition"
+#~ msgstr ""
+#~ "Tá an rann atá roghnaithe agat don fréamh (/) suitithe i ndhiadh an "
+#~ "1024ú\n"
+#~ "sorcóir ar an dhiosca, agus níl aon rann /boot agat.\n"
+#~ "Má tá tú chun LILO a úsáid, beidh ort rann /boot a cruthú ar ball."
+
+#~ msgid ""
+#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
+#~ "> 1024).\n"
+#~ "Either you use LILO and it won't work, or you don't use LILO and you "
+#~ "don't need /boot"
+#~ msgstr ""
+#~ "Níl mé sasta /boot a cruthú comh fada sin isteach sa diosca, (ar sorcóir "
+#~ "> 1024).\n"
+#~ "Má tá tú ag úsáid LILO ní oibróidh sé, nó níl /boot uait muna n-úsáideann "
+#~ "tú LILO"
+
+#, fuzzy
+#~ msgid "Upgrade"
+#~ msgstr "Uasgrádaigh"
+
+#, fuzzy
+#~ msgid "Do you want to configure another printer?"
+#~ msgstr "An bhfuil tú ag iarraidh an cumraíocht a thrial?"
+
+#, fuzzy
+#~ msgid "Know how to use this printer"
+#~ msgstr "An bhfuil tú ag iarraidh an cumraíocht a thrial?"
+
+#, fuzzy
+#~ msgid "Preparing Printerdrake..."
+#~ msgstr "Scríos Printéir"
+
+#, fuzzy
+#~ msgid "Reading printer data ..."
+#~ msgstr "Scríos Printéir"
 
 #, fuzzy
 #~ msgid "quit"

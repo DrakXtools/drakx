@@ -26,16 +26,18 @@ msgstr ""
 "நீங்கள் பின்னர் \"fileshare\". \n"
 "என்ற குழுவிற்கு பயனரை டிரேக்பயனர் மூலம் எளிதாகச் சேர்க்கலாம்"
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "தவிர்"
@@ -114,15 +116,14 @@ msgid "Country"
 msgstr "நாடு"
 
 #: ../../any.pm:1
+#, fuzzy, c-format
+msgid "All languages"
+msgstr "உங்கள் மொழியைத்  தேர்வுச் செய்க"
+
+#: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
 msgstr ""
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "அனைத்து"
 
 #: ../../any.pm:1
 #, c-format
@@ -501,6 +502,16 @@ msgstr "உரைவழியில் பயன்படுத்தக்க�
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr ""
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Enable ACPI"
+msgstr "சிடியில் இருந்து தொடங்கலாமா?"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "கொடாநிலை உருவம் துவங்குவதற்கான தாமதம்"
 
@@ -553,6 +564,11 @@ msgstr "தவிர்"
 #, fuzzy, c-format
 msgid "On Floppy"
 msgstr "நெகிழ்வட்டில்"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "First sector of the root partition"
+msgstr "துவங்குவகிர்தலின் முதல் வில்ைல"
 
 #: ../../any.pm:1
 #, c-format
@@ -754,242 +770,6 @@ msgstr ""
 "wait %d seconds for default boot.\n"
 "\n"
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "சரி"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "ஆம், எனக்கு தன்னியக்க நுழைவு(பயனர்,மேசையமைப்பு) வேண்டும்"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "இல்ைல, எனக்கு தன்னியக்க நுழைவு வேண்டாம்"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "இயக்கத் தொடக்கத்தில் வரைவியல்வழி முறைமைக்குச் செல்லவும்"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "இயக்க முறைமை"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr "தொடங்குத்திரை"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr "லிலோ திரை"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-"\n"
-"லிலோ மற்றும் தொடங்குத்திரைக்கு\n"
-"உருகருக்களை தேர்வு செய்,\n"
-"இரண்ைடயும் தனியாகவும் தேர்வு\n"
-"செய்யலாம்"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "உருகரு"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Splash selection"
-msgstr "தொடங்குத்திரை தேர்வு"
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "வடிவமை"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"நீங்கள் தற்போது %s தொடங்குதல் மேலாளராக பயன்படுத்துகிறீர்கள்\n"
-"அமைப்பு மாயாவியை துவக்க வடிவமை என்ற பொத்தானை கிளிக் செய்"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "லிலோ, தொடங்குபட உருகருக்கள் நிறுவுதல் வெற்றியடைந்தது"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr "உருகருக்கள் நிறுவுதல் வெற்றியடையவில்ைல"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr "குறிப்பு"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "பிழை"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr "லிலோவை மீண்டும் துவக்கு"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-"லிலோவை மீண்டும் துவக்க முடியவில்ைல\n"
-"\"லிலோ\" என்ற கட்டளையை நிர்வாகியாக மாறிக் கொடு"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr "'mkinitrd -f /boot/initrd-%s.img %s'.துவங்குநிரலுருவத்ைத உருவாக்கு"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr "mkinitrd -f /boot/initrd-%s.img %s என்பதை துவக்க முடியவில்ைல"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-"/etc/sysconfig/bootsplash என்ற கோப்பில் எழுத  முடியவில்ைல\n"
-"கோப்ேபா காண முடியவில்ைல"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "%s எழுது"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr "/etc/sysconfig/bootsplash.என்ற கோப்பில் எழுத முடியவில்ைல"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "லிலோ தகவலை காண முடியவில்ைல"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "%s என்பதை  %s என நகலெடு"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr "%s என்பதை  %s.old என காப்ெபடு"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "உருகரு ஒன்றை உருவாக்கு "
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-"உருகருக்களை முனையத்தில்\n"
-"காட்டு"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr "உருகருக்களை நிறுவுங்கள்"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "லிலோ/க்ரப் முறைமை"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "யாதொடக்க முறைமை"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "அரோரவை துவங்கலின் போது துவக்கிவிடு"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "பழைய Gtk+ முகப்பு"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "பழைய  முகப்பு"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "புதிய முகப்பு"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "புதிய வகைப்படுத்தப்பட்ட முகப்பு"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/கோப்பு/_வெளிச்செல்"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_கோப்பு"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "தொடங்கல் பாந்த வடிவமைப்பு"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1145,9 +925,24 @@ msgid "You can't use a LVM Logical Volume for mount point %s"
 msgstr "%s என்ற ஏற்றப் புள்ளியில் LVM வகிர் ஆகையால் ஏற்ற முடியாது"
 
 #: ../../fsedit.pm:1
+#, fuzzy, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"உங்கள்  root (/) வகிர்  RAID வகையில் உள்ளது.நீங்கள் லிலோ பயன்படுத்தினால் அது வேலை "
+"செய்ய. /boot தேவை. அதனால்  /boot உருவாக்கவும்"
+
+#: ../../fsedit.pm:1
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr " %s என்ற ஏற்றப் புள்ளியுடன் ஏற்கனவே வகிர் ஒன்று உள்ளது\n"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr ""
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1178,6 +973,15 @@ msgstr ""
 "%s என்ற பிழை நேர்ந்துள்ளது\n"
 "\n"
 "உங்கள் வன் வட்டில் உள்ள அனைத்து விவரங்களையும் இழக்க சம்மதமா?\n"
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "பிழை"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1290,8 +1094,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1304,7 +1108,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1652,7 +1456,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1837,7 +1641,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -2552,7 +2356,7 @@ msgstr ""
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -2632,7 +2436,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 
@@ -2678,7 +2482,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -3236,12 +3040,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "இல்ைல"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "ஆம்"
@@ -3348,6 +3154,13 @@ msgstr "வின்டோைஸ நீக்கி விடு"
 #, fuzzy, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr "அளவை மாற்றுவதற்கு அல்லது கண்ணியாக்க  FAT வகிர் ஏதுமில்ைல, "
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3835,6 +3648,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "தற்போது இந்த  `%s நிலைக்கு செல்கிறோம்' \n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Help"
+msgstr "உதவி"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "not configured"
+msgstr "மறுவடிவமை"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "வடிவமை"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -4048,14 +3881,6 @@ msgstr "அடுத்து ->"
 #, c-format
 msgid "Individual package selection"
 msgstr "தனித்னி பொதியாக தேர்வுச் செய்"
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "உதவி"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -4291,12 +4116,13 @@ msgstr ""
 "உங்கள் கடவுச்ெசால் மிக சிறியதாக உள்ளது (குறைந்த பட்சம் இது %d எழுத்துக்கள் இருக்க "
 "வேண்டும்)  "
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "கடவுச்ெசால் ஏதுமில்ைல"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "உங்கள் கடவுச்ெசால்ைல உருவாக்கவும்"
@@ -4356,11 +4182,6 @@ msgstr "பாதுகாப்பு"
 #, fuzzy, c-format
 msgid "Security Level"
 msgstr "பாதுகாப்பு நிலை"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "not configured"
-msgstr "மறுவடிவமை"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -4464,6 +4285,16 @@ msgid "Which is your timezone?"
 msgstr "நீங்கள் எந்த கால மண்டலத்ைதச் சேர்ந்தவர்?"
 
 #: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "தவறான தேர்வு, மீண்டும் முயற்சித்து பார்க்கவும்\n"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Unable to contact mirror %s"
+msgstr ""
+
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "இணைப் பதிப்புதளங்களில் தற்போதுள்ள பொதிகளை அறிய இணையதளம் தொடர்புகொள்ளப்படுகிறது"
@@ -4545,6 +4376,11 @@ msgstr ""
 "ஒன்று கூட இல்ைலயென்றால் நீக்கு என்பதை கிளிக் செய்யவும்\n"
 "சில சிடிகள் மட்டும் இல்ைலயென்றால் இல்லாதவற்றை மட்டும் நீக்கிவிட்டு சரி என கிளிக் செய்யவும்"
 
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "அனைத்து"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
@@ -4622,6 +4458,11 @@ msgstr "உங்கள் வட்டில் போதுமான இடம
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "இருக்கும் பொதிகள் பார்வையிடப்படுகின்றன"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "மேம்படுத்தப்பட வேண்டிய பொதிகள் அறியப்படுகின்றன"
 
@@ -4629,11 +4470,6 @@ msgstr "மேம்படுத்தப்பட வேண்டிய பொ�
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "ஏற்கனவே நிறுவப்பட்டுள்ள பொதிகள் பார்வையிடப்படுகின்றன"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "இருக்கும் பொதிகள் பார்வையிடப்படுகின்றன"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4742,11 +4578,6 @@ msgid "Please choose your type of mouse."
 msgstr "தயவுசெய்து, உங்கள் எலியின் வகையைத் தேர்வுச் செய்யுங்கள் "
 
 #: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Upgrade"
-msgstr "நிகழ்நிலைப்படுத்துதல்"
-
-#: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
 msgid "Upgrade %s"
 msgstr "நிகழ்நிலைப்படுத்துதல்"
@@ -4771,15 +4602,19 @@ msgstr "உங்கள் பயன்பாட்டிற்கு உள்�
 msgid "Please choose your keyboard layout."
 msgstr "தயவுசெய்து உங்கள் விசைப்பலகை இட அமைவைத் தேர்வு செய்க "
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "வெளிச்செல்"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr "அனுமதி ஒப்பந்தம்"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "default:LTR"
-msgstr "கொடாநிலை"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5332,6 +5167,11 @@ msgstr "பெல்ஜியன்"
 #, c-format
 msgid "Azerbaidjani (latin)"
 msgstr "அசர்பைஜான்"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Arabic"
+msgstr ""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6493,6 +6333,11 @@ msgstr "அந்தோரா"
 msgid "Afghanistan"
 msgstr "ஆப்கானிஸ்தான்"
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "default:LTR"
+msgstr "கொடாநிலை"
+
 #: ../../loopback.pm:1
 #, c-format
 msgid "Circular mounts %s\n"
@@ -6898,7 +6743,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 
 #: ../../services.pm:1
@@ -7119,8 +6964,8 @@ msgstr ""
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
 
 #: ../../standalone.pm:1
@@ -7250,8 +7095,8 @@ msgid "Exit install"
 msgstr "நிறுவல் நிரலை விட்டு வெளிச்செல்"
 
 #: ../../steps.pm:1
-#, c-format
-msgid "Install system updates"
+#, fuzzy, c-format
+msgid "Install updates"
 msgstr "இயக்கத்திற்கு தேவையான நிகழ்நிலைப்படுத்தப்பட்ட பொதிகளை நிறுவுதல்"
 
 #: ../../steps.pm:1
@@ -7278,6 +7123,11 @@ msgstr "வலையமைப்பாக்கங்களை வடிவம�
 #, c-format
 msgid "Add a user"
 msgstr "பயனரைச் சேருங்கள்- இது முக்கியம்"
+
+#: ../../steps.pm:1
+#, fuzzy, c-format
+msgid "Root password"
+msgstr "கடவுச்ெசால் ஏதுமில்ைல"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7326,13 +7176,21 @@ msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
+msgid "Language"
 msgstr "உங்கள் மொழியைத்  தேர்வுச் செய்க"
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
 msgstr ""
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "சரி"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, fuzzy, c-format
@@ -7513,7 +7371,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "விருப்பத்ேதர்வுகள்"
@@ -7537,14 +7395,6 @@ msgstr "திரையகம்"
 #, c-format
 msgid "Graphic Card"
 msgstr "காட்சியமைப்பு அட்ைட"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "வெளிச்செல்"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -8198,39 +8048,6 @@ msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "%s வட்டின் வகிர் அமைப்பு தட்டில் எழுதப்படவுள்ளது"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"உங்கள்  root (/) வகிர்  RAID வகையில் உள்ளது.நீங்கள் லிலோ பயன்படுத்தினால் அது வேலை "
-"செய்ய. /boot தேவை. அதனால்  /boot உருவாக்கவும்"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"root (/) வகிர் 1024 உருளைக்கு மேல் உருவாக்கி உள்ளேன்.\n"
-"நீங்கள் லிலோ பயன்படுத்தினால் அது வேலை செய்ய. /boot தேவை. அதனால்  /boot உருவாக்கவும்"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"மன்னிக்கவும்,  /boot 1024 உருளைக்கு மேல் உருவாக்க மாட்டேன்.\n"
-"நீங்கள் லிலோ பயன்படுத்தினால் அது வேலை செய்யாது. அல்லது நீங்கள் லிலோ பயன்படுத்தாவிட்டால் /"
-"boot உங்களுக்கு தேவையில்ைல"
-
-#: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "The package %s is needed. Install it?"
 msgstr "%s என்ற பொதி நிறுவப்படவேண்டும். ஓப்புதல் தரவும்?"
@@ -8722,6 +8539,11 @@ msgstr ""
 
 #: ../../harddrake/data.pm:1
 #, c-format
+msgid "Firewire controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr ""
 
@@ -8854,7 +8676,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -9278,7 +9100,7 @@ msgstr "இணையத்ைத பயன்படுத்த தொடர்�
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
+msgid "Sagem (using pppoa) usb"
 msgstr ""
 
 #: ../../network/adsl.pm:1
@@ -9388,13 +9210,13 @@ msgid "Zeroconf host name must not contain a ."
 msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, fuzzy, c-format
-msgid "Zeroconf Host name"
+#, c-format
+msgid "Host name"
 msgstr "கணினிப்ெபயர்: "
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid "Host name"
+#, fuzzy, c-format
+msgid "Zeroconf Host name"
 msgstr "கணினிப்ெபயர்: "
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
@@ -9405,19 +9227,6 @@ msgid ""
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
 msgstr ""
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-"உங்கள் தெரிந்தால் கணினியின் பெயரைத் தேர்வுச் செய்யவும்\n"
-"சில DHCP-சேவையகங்களுக்கு கணினிப்ெபயர் தேவை\n"
-"உங்கள் கணினிப்ெபயர் சரியானதாக இருக்க வேண்டும்\n"
-"உதாரனம் ``mybox.mylab.myco.com''."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -10037,6 +9846,11 @@ msgid "Start at boot"
 msgstr "தொடங்கலில்  துவக்கிவிடு "
 
 #: ../../network/network.pm:1
+#, c-format
+msgid "Assign host name from DHCP address"
+msgstr ""
+
+#: ../../network/network.pm:1
 #, fuzzy, c-format
 msgid "Network Hotplugging"
 msgstr "வலையமைப்பாக்க  வடிவமைப்பு "
@@ -10044,6 +9858,23 @@ msgstr "வலையமைப்பாக்க  வடிவமைப்பு 
 #: ../../network/network.pm:1
 #, c-format
 msgid "Track network card id (useful for laptops)"
+msgstr ""
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "DHCP host name"
+msgstr "கணினிப்ெபயர்: "
+
+#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "Netmask"
+msgstr ""
+
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "IP address"
 msgstr ""
 
 #: ../../network/network.pm:1
@@ -10055,17 +9886,6 @@ msgstr ""
 #, c-format
 msgid "Automatic IP"
 msgstr "தன்னியக்க IP"
-
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Netmask"
-msgstr ""
-
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "IP address"
-msgstr ""
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10304,7 +10124,7 @@ msgstr "PDQ-அச்சு செயலியின் சாரம்"
 msgid "PDQ - Print, Don't Queue"
 msgstr ""
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr "தெரியாத சாதனம்"
@@ -10313,6 +10133,11 @@ msgstr "தெரியாத சாதனம்"
 #, c-format
 msgid "Unknown model"
 msgstr "தெரியாத மாடல் "
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "%s (Port %s)"
+msgstr "துறை"
 
 #: ../../printer/main.pm:1
 #, fuzzy, c-format
@@ -10466,11 +10291,6 @@ msgstr "டிரேக்அச்சுப்ெபறி"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr "நீங்கள் மேலும் ஒரு அச்சுப்ெபறியை வடிவமைக்க வேண்டுமா?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "அச்சுபொறி நீக்கப்படுகிறது  \"%s\"..."
 
@@ -10485,8 +10305,8 @@ msgid "Remove printer"
 msgstr "அச்சுப்ெபறியை நீக்கு"
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Know how to use this printer"
+#, fuzzy, c-format
+msgid "Learn how to use this printer"
 msgstr "அச்சுப்ெபறியை எப்படி பயன்படுத்துவது"
 
 #: ../../printer/printerdrake.pm:1
@@ -10584,11 +10404,6 @@ msgid "Printer connection type"
 msgstr "அச்சுப்ெபறியின் தொடர்பு வகை: "
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Learn how to use this printer"
-msgstr "அச்சுப்ெபறியை எப்படி பயன்படுத்துவது"
-
-#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Raw printer"
 msgstr "வெற்று அச்சுப்ெபறி "
@@ -10623,6 +10438,7 @@ msgid "Add a new printer"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr ""
@@ -10649,6 +10465,11 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Display all available remote CUPS printers"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; or to view information about "
@@ -10668,16 +10489,6 @@ msgstr ""
 #, c-format
 msgid "Printing system: "
 msgstr "அச்சு இயக்கம்: "
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Would you like to configure printing?"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr "டிரேக்அச்சு துவக்கப்படுகிறது..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10713,6 +10524,11 @@ msgstr "நீங்கள் எந்த அஇயக்க அமைப்ப
 #, c-format
 msgid "Select Printer Spooler"
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Setting Default Printer..."
+msgstr "கொடாநிலை அச்சுப்ெபறி"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -11950,6 +11766,35 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Configuring printer ..."
+msgstr "அச்சுப்ெபறி வடிவமைக்கப்படுகிறது... \"%s\"..."
+
+#: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "Searching for new printers..."
 msgstr "உள்ளமைக் அச்சுப்ெபறி"
@@ -12055,6 +11900,64 @@ msgid "Checking your system..."
 msgstr "உங்கள் கணினி சோதிக்கப்படுகிறது..."
 
 #: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Restarting CUPS..."
+msgstr "மறுதொடக்கம்"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "அச்சுபொறியின் மாடல் சரி"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Server IP missing!"
+msgstr "தொலைவு அச்சுப்ெபறியின் பெயர் இல்ைல!"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "தொலைவு CUPS சேவையகத்தில் உள்ள அச்சுப்ெபறி"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Remove selected server"
+msgstr "நுழைவிடத்தை நீக்கு"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Edit selected server"
+msgstr " %s  கண்டுபிடிக்கப்பட்டுள்ளது"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Add server"
+msgstr "பயனரைச் சேர்"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address of host/network:"
 msgstr ""
@@ -12066,37 +11969,12 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -12154,6 +12032,29 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "தானியக்க CUPS வடிவமைப்பு"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "None"
+msgstr "முடிந்தது"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Additional CUPS servers: "
+msgstr "CUPS சேவையக IP"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, fuzzy, c-format
@@ -12310,8 +12211,8 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -13795,6 +13696,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr ""
 
@@ -14038,16 +13944,6 @@ msgstr ""
 #, c-format
 msgid "Restore from Hard Disk."
 msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Secure Connection"
-msgstr "இணையத் தொடர்பு பரிமாறி"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "FTP Connection"
-msgstr "தொடர்பு வகை: "
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14884,6 +14780,195 @@ msgstr "Cron நிர்வாகியாகமல் இயங்காது
 msgid "Installation of %s failed. The following error occured:"
 msgstr ""
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "இல்ைல, எனக்கு தன்னியக்க நுழைவு வேண்டாம்"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "ஆம், எனக்கு தன்னியக்க நுழைவு(பயனர்,மேசையமைப்பு) வேண்டும்"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "இயக்கத் தொடக்கத்தில் வரைவியல்வழி முறைமைக்குச் செல்லவும்"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "இயக்க முறைமை"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr "தொடங்குத்திரை"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr "லிலோ திரை"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+"\n"
+"லிலோ மற்றும் தொடங்குத்திரைக்கு\n"
+"உருகருக்களை தேர்வு செய்,\n"
+"இரண்ைடயும் தனியாகவும் தேர்வு\n"
+"செய்யலாம்"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "உருகரு"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "தொடங்குத்திரை தேர்வு"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"நீங்கள் தற்போது %s தொடங்குதல் மேலாளராக பயன்படுத்துகிறீர்கள்\n"
+"அமைப்பு மாயாவியை துவக்க வடிவமை என்ற பொத்தானை கிளிக் செய்"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr "லிலோ, தொடங்குபட உருகருக்கள் நிறுவுதல் வெற்றியடைந்தது"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr "உருகருக்கள் நிறுவுதல் வெற்றியடையவில்ைல"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr "குறிப்பு"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr "லிலோவை மீண்டும் துவக்கு"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+"லிலோவை மீண்டும் துவக்க முடியவில்ைல\n"
+"\"லிலோ\" என்ற கட்டளையை நிர்வாகியாக மாறிக் கொடு"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr "'mkinitrd -f /boot/initrd-%s.img %s'.துவங்குநிரலுருவத்ைத உருவாக்கு"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr "mkinitrd -f /boot/initrd-%s.img %s என்பதை துவக்க முடியவில்ைல"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+"/etc/sysconfig/bootsplash என்ற கோப்பில் எழுத  முடியவில்ைல\n"
+"கோப்ேபா காண முடியவில்ைல"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "%s எழுது"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr "/etc/sysconfig/bootsplash.என்ற கோப்பில் எழுத முடியவில்ைல"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "லிலோ தகவலை காண முடியவில்ைல"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "%s என்பதை  %s என நகலெடு"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr "%s என்பதை  %s.old என காப்ெபடு"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "உருகரு ஒன்றை உருவாக்கு "
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"உருகருக்களை முனையத்தில்\n"
+"காட்டு"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr "உருகருக்களை நிறுவுங்கள்"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "லிலோ/க்ரப் முறைமை"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "யாதொடக்க முறைமை"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/கோப்பு/_வெளிச்செல்"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_கோப்பு"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "தொடங்கல் பாந்த வடிவமைப்பு"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -15017,6 +15102,16 @@ msgstr "டிரேக்பிழை  அறிவிப்பாளன் க
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "வரைமுறை"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "இணையத்தொடர்பு  வடிவமைக்கப்பாளன்"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "DHCP வேண்டி"
 
@@ -15030,11 +15125,6 @@ msgstr "வலையமைப்பு அட்ைட"
 msgid "Gateway"
 msgstr "நுழைவாயில்"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "வரைமுறை"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -15044,11 +15134,6 @@ msgstr "தொடர்பு வகை: "
 #, c-format
 msgid "Profile: "
 msgstr "பயனர்குறிப்பு: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "இணையத்தொடர்பு  வடிவமைக்கப்பாளன்"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -15318,8 +15403,8 @@ msgstr "கூறுகளை நீக்கிவிடு"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr " raid கூறுகளை சேர்க்காதே"
+msgid "Add a module"
+msgstr "கூற்றைச் சேர்"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15333,13 +15418,13 @@ msgstr "தேவைப்பட்டால்"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "வலிந்து செய்"
+msgid "omit raid modules"
+msgstr " raid கூறுகளை சேர்க்காதே"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "கூற்றைச் சேர்"
+msgid "force"
+msgstr "வலிந்து செய்"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15353,23 +15438,18 @@ msgstr "தனித்துவமிக்க துறை"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "பொது"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "கரு வெளியீடு"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "டிரேக்நெகிழ்தட்டு பிழை: %s"
+msgid "default"
+msgstr "கொடாநிலை"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "கொடாநிலை"
+msgid "General"
+msgstr "பொது"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15390,12 +15470,6 @@ msgstr "அளவு"
 #, c-format
 msgid "Module name"
 msgstr "கூற்றின் பெயர்"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr ""
-"-unknown-tsc_avarangal-medium-r-normal--0-0-0-0-p-0-adobe-fontspecific,*"
 
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
@@ -16032,6 +16106,11 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "Path"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "group :"
 msgstr ""
 
@@ -16088,11 +16167,6 @@ msgid "Property"
 msgstr "மோசமான"
 
 #: ../../standalone/drakperm:1
-#, c-format
-msgid "Path"
-msgstr ""
-
-#: ../../standalone/drakperm:1
 #, fuzzy, c-format
 msgid "Permissions"
 msgstr "வெளியீடு: %s\n"
@@ -16105,19 +16179,6 @@ msgstr "பயனரை ஏற்றுக்ெகாள்ளவும்"
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "browse"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -16168,6 +16229,19 @@ msgstr ""
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Up"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -16334,13 +16408,13 @@ msgstr "பாதுகாப்பு நிலை"
 
 #: ../../standalone/draksec:1
 #, fuzzy, c-format
-msgid "(default value: %s)"
-msgstr " (கொடாநிலை)"
+msgid "Security Level:"
+msgstr "பாதுகாப்பு நிலை"
 
 #: ../../standalone/draksec:1
 #, fuzzy, c-format
-msgid "Security Level:"
-msgstr "பாதுகாப்பு நிலை"
+msgid "(default value: %s)"
+msgstr " (கொடாநிலை)"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -16356,7 +16430,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -16365,7 +16439,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 
 #: ../../standalone/draksound:1
@@ -16684,26 +16758,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/விருப்பத்ேதர்வு"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect jazz drives"
-msgstr "தானியக்கத்தால் கண்டுபிடிக்கப்பட்டது"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect modems"
-msgstr "தானியக்கத்தால் கண்டுபிடிக்கப்பட்டது"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect printers"
-msgstr "தானியக்கத்தால் கண்டுபிடிக்கப்பட்டது"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr "தொடக்கநிலை"
 
@@ -16717,6 +16771,16 @@ msgstr "இடைநிலை"
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "Unknown"
+msgstr "தெரியாத மாடல் "
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "unknown"
+msgstr "தெரியாத மாடல் "
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16777,11 +16841,6 @@ msgstr "டிரேக்வன்பொருள் பற்றி"
 msgid "/_About..."
 msgstr "/_பற்றி"
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/_உதவி"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -16818,15 +16877,20 @@ msgstr "டிரேக்வன்பொருள் உதவி"
 msgid "/_Fields description"
 msgstr "குறிப்பு"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/_உதவி"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/_Quit"
+msgstr "/_வெளிச்செல்"
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "தானியக்கத்தால் கண்டுபிடிக்கப்பட்டது"
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_விருப்பத்ேதர்வு"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -16838,10 +16902,10 @@ msgstr "தானியக்கத்தால் கண்டுபிடி�
 msgid "/Autodetect _printers"
 msgstr "தானியக்கத்தால் கண்டுபிடிக்கப்பட்டது"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
-msgid "/_Quit"
-msgstr "/_வெளிச்செல்"
+msgid "/_Options"
+msgstr "/_விருப்பத்ேதர்வு"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -16940,7 +17004,7 @@ msgstr "நிலை"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -17089,6 +17153,16 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Coma bug"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -17556,9 +17630,9 @@ msgid "Network Monitoring"
 msgstr "வலையமைப்பாக்க  வடிவமைப்பு "
 
 #: ../../standalone/printerdrake:1
-#, c-format
-msgid "Reading printer data ..."
-msgstr "அச்சுபொறியின் தரவு படிக்கப்படுகிறது"
+#, fuzzy, c-format
+msgid "Reading data of installed printers..."
+msgstr "உள்ளமைக் அச்சுப்ெபறி"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -17667,53 +17741,6 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-"உங்கள் %s வருடி வடிவமைக்கப்பட்டுவிட்டது\n"
-"நீங்கள் பல்லூடகம்-வரைவியல்-வருடி என்ற நிரலை பயன்படுத்துங்கள்"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-"உங்கள் %s வருடி வடிவமைக்கப்பட வேண்டும்\n"
-"அதற்கு டிரேக்அச்சு நிரலை பயன்படுத்துங்கள்"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "சாதனத்ைத தேர்வுச் செய்யுங்கள்"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Please select the device where your %s is attached"
-msgstr ""
-"உங்கள் %s வருடி வடிவமைக்கப்படவில்லை \n"
-"சாதனத்தை சரியாகத் தேர்வுச் செய்யுங்கள்"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "The %s is unsupported"
-msgstr "உங்கள் %s வருடி தற்போது வேலைச் செய்யாது"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Re-generating list of configured scanners ..."
 msgstr ""
@@ -17767,8 +17794,90 @@ msgid ""
 msgstr "நேரடியாக  கணிணியுடன் இணைந்துள்ளது"
 
 #: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+"உங்கள் %s வருடி வடிவமைக்கப்பட்டுவிட்டது\n"
+"நீங்கள் பல்லூடகம்-வரைவியல்-வருடி என்ற நிரலை பயன்படுத்துங்கள்"
+
+#: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
+msgid "choose device"
+msgstr "சாதனத்ைத தேர்வுச் செய்யுங்கள்"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Please select the device where your %s is attached"
+msgstr ""
+"உங்கள் %s வருடி வடிவமைக்கப்படவில்லை \n"
+"சாதனத்தை சரியாகத் தேர்வுச் செய்யுங்கள்"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Searching for scanners ..."
+msgstr "உள்ளமைக் அச்சுப்பொறி"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Auto-detect available ports"
+msgstr "தானியக்கத்தால் கண்டுபிடிக்கப்பட்டது"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+"உங்கள் %s வருடி வடிவமைக்கப்பட வேண்டும்\n"
+"அதற்கு டிரேக்அச்சு நிரலை பயன்படுத்துங்கள்"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "The %s is unsupported"
+msgstr "உங்கள் %s வருடி தற்போது வேலைச் செய்யாது"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Port: %s"
+msgstr "துறை"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Detected model: %s"
+msgstr "கண்டுபிடிக்கப்பட்ட மாடல்: %s %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Select a scanner model"
 msgstr "வருடியை தேர்வுச் செய்யுங்கள்"
 
 #: ../../standalone/scannerdrake:1
@@ -17857,6 +17966,10 @@ msgid "Scientific Workstation"
 msgstr "அறிவியல் பணிக்கணினி"
 
 #: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr ""
+
+#: ../../share/compssUsers:999
 msgid "Console Tools"
 msgstr "முனையக் கருவிகள்"
 
@@ -17929,11 +18042,13 @@ msgid "Apache, Pro-ftpd"
 msgstr "அப்பாச்சி, ftpd போன்ற பரிமாற்று நிரல்கள்"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "மின்னஞ்சல்/செய்தியஞ்சல்"
+#, fuzzy
+msgid "Mail"
+msgstr "மின்னஞ்சல்"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
+#, fuzzy
+msgid "Postfix mail server"
 msgstr "மின்னஞ்சல் பரிமாறி"
 
 #: ../../share/compssUsers:999
@@ -18031,6 +18146,103 @@ msgstr "உங்கள் சொந்தகணக்குகளை சரி�
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "உங்கள் வரவுசெலவு விவரங்களை இந்த நிரல்கள் மூலம் பேனலாம்"
+
+#~ msgid ""
+#~ "Please enter your host name if you know it.\n"
+#~ "Some DHCP servers require the hostname to work.\n"
+#~ "Your host name should be a fully-qualified host name,\n"
+#~ "such as ``mybox.mylab.myco.com''."
+#~ msgstr ""
+#~ "உங்கள் தெரிந்தால் கணினியின் பெயரைத் தேர்வுச் செய்யவும்\n"
+#~ "சில DHCP-சேவையகங்களுக்கு கணினிப்ெபயர் தேவை\n"
+#~ "உங்கள் கணினிப்ெபயர் சரியானதாக இருக்க வேண்டும்\n"
+#~ "உதாரனம் ``mybox.mylab.myco.com''."
+
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "டிரேக்நெகிழ்தட்டு பிழை: %s"
+
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr ""
+#~ "-unknown-tsc_avarangal-medium-r-normal--0-0-0-0-p-0-adobe-fontspecific,*"
+
+#~ msgid "Launch Aurora at boot time"
+#~ msgstr "அரோரவை துவங்கலின் போது துவக்கிவிடு"
+
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr "பழைய Gtk+ முகப்பு"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "பழைய  முகப்பு"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "புதிய முகப்பு"
+
+#~ msgid "NewStyle Categorizing Monitor"
+#~ msgstr "புதிய வகைப்படுத்தப்பட்ட முகப்பு"
+
+#, fuzzy
+#~ msgid "Secure Connection"
+#~ msgstr "இணையத் தொடர்பு பரிமாறி"
+
+#, fuzzy
+#~ msgid "FTP Connection"
+#~ msgstr "தொடர்பு வகை: "
+
+#~ msgid "Mail/Groupware/News"
+#~ msgstr "மின்னஞ்சல்/செய்தியஞ்சல்"
+
+#~ msgid "Postfix mail server, Inn news server"
+#~ msgstr "மின்னஞ்சல் பரிமாறி"
+
+#~ msgid "/Options"
+#~ msgstr "/விருப்பத்ேதர்வு"
+
+#, fuzzy
+#~ msgid "/Autodetect jazz drives"
+#~ msgstr "தானியக்கத்தால் கண்டுபிடிக்கப்பட்டது"
+
+#, fuzzy
+#~ msgid "/Autodetect modems"
+#~ msgstr "தானியக்கத்தால் கண்டுபிடிக்கப்பட்டது"
+
+#, fuzzy
+#~ msgid "/Autodetect printers"
+#~ msgstr "தானியக்கத்தால் கண்டுபிடிக்கப்பட்டது"
+
+#~ msgid ""
+#~ "The partition you've selected to add as root (/) is physically located "
+#~ "beyond\n"
+#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
+#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
+#~ "partition"
+#~ msgstr ""
+#~ "root (/) வகிர் 1024 உருளைக்கு மேல் உருவாக்கி உள்ளேன்.\n"
+#~ "நீங்கள் லிலோ பயன்படுத்தினால் அது வேலை செய்ய. /boot தேவை. அதனால்  /boot உருவாக்கவும்"
+
+#~ msgid ""
+#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
+#~ "> 1024).\n"
+#~ "Either you use LILO and it won't work, or you don't use LILO and you "
+#~ "don't need /boot"
+#~ msgstr ""
+#~ "மன்னிக்கவும்,  /boot 1024 உருளைக்கு மேல் உருவாக்க மாட்டேன்.\n"
+#~ "நீங்கள் லிலோ பயன்படுத்தினால் அது வேலை செய்யாது. அல்லது நீங்கள் லிலோ பயன்படுத்தாவிட்டால் /"
+#~ "boot உங்களுக்கு தேவையில்ைல"
+
+#~ msgid "Upgrade"
+#~ msgstr "நிகழ்நிலைப்படுத்துதல்"
+
+#~ msgid "Do you want to configure another printer?"
+#~ msgstr "நீங்கள் மேலும் ஒரு அச்சுப்ெபறியை வடிவமைக்க வேண்டுமா?"
+
+#~ msgid "Know how to use this printer"
+#~ msgstr "அச்சுப்ெபறியை எப்படி பயன்படுத்துவது"
+
+#~ msgid "Preparing Printerdrake..."
+#~ msgstr "டிரேக்அச்சு துவக்கப்படுகிறது..."
+
+#~ msgid "Reading printer data ..."
+#~ msgstr "அச்சுபொறியின் தரவு படிக்கப்படுகிறது"
 
 #~ msgid ""
 #~ "Click on \"OK\" if you want to delete all data and partitions present on\n"
@@ -20217,9 +20429,6 @@ msgstr "உங்கள் வரவுசெலவு விவரங்கள�
 
 #~ msgid "ISDN card"
 #~ msgstr "ISDN அட்ைட"
-
-#~ msgid "CUPS server IP"
-#~ msgstr "CUPS சேவையக IP"
 
 #~ msgid ""
 #~ "The following printer\n"

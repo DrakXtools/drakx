@@ -21,16 +21,18 @@ msgid ""
 "You can use userdrake to add a user to this group."
 msgstr ""
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "ביטול"
@@ -107,15 +109,14 @@ msgid "Country"
 msgstr "ארץ:"
 
 #: ../../any.pm:1
+#, fuzzy, c-format
+msgid "All languages"
+msgstr "בחירת שפה"
+
+#: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
 msgstr ""
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "הכל"
 
 #: ../../any.pm:1
 #, c-format
@@ -490,6 +491,16 @@ msgstr "הגבלת אפשרויות שורת הפקודה"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr ""
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Enable ACPI"
+msgstr "לאפשר אתחול עם דיסק(cd)?"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "המתנה לפני אתחול מערכת ברירת המחדל"
 
@@ -542,6 +553,11 @@ msgstr "דלג"
 #, c-format
 msgid "On Floppy"
 msgstr ""
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "First sector of the root partition"
+msgstr "סקטור ראשון של מחיצת אתחול המערכת"
 
 #: ../../any.pm:1
 #, c-format
@@ -713,237 +729,6 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "אישור"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "כן, ברצוני כניסה אוטומטית עם זה (משתמש, שולחן עבודה)"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "לא, לא רוצה כניסה אוטומטית"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "הפעל את הסביבה הגרפית כאשר המערכת שלך מתחילה"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "מצב מערכת"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr "טעינת ספלאש"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr "מסך Lilo"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "ערכות נושא"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Splash selection"
-msgstr "בחירת ספלאש"
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "הגדרות"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"השימוש הוא כרגע ב%s כמנהל טעינה.\n"
-"יש ללחוץ על הגדרות כדי להריץ את אשף ההגדרה."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "התקנת ערכות נושא לטוען הספלאש וLilo  הושלמה בהצלחה"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr "התקנת ערכת נושא נכשלה!"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr "לשים לב"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "שגיאה"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr "טען מחדש 'lilo'"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-"לא יכול להפעיל מחדש את LiLo!\n"
-"יש להריץ את \"lilo\" כמשתמש ראשי(root) משורת הפקודה להשלמת התקנת ערכת הנושא."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr "לא יכול להפעיל mkinitrd -f /boot/initrd-%s.img %s."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-"לא יכול לרשום ל/etc/sysconfig/bootsplash\n"
-"הקובץ לא קיים."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "כתוב %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr "לא יכול לכתוב אל /etc/sysconfig/bootsplash."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "הודעת Lilo לא נמצאה"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "מעתיק %s ל%s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr "מגבה %s ל%s.old"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "יצירת ערכת נושא חדשה"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-"הצגת ערכת נושא\n"
-"תחת מסוף"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr "התקנתערכות נושא"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "מצב Lilo/grub "
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "מצב Yaboot"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "יש לטעון את Aurora בזמן טעינת המערכת"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "תצוגת Gtk+ מסורתית"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "תצוגה מסורתית"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "תצוגה בסגנון החדש"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "תצוגה בסגנון החדש לפי קטגוריות"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<Ctrl>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/קובץ/_יציאה"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_קובץ"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "הגדרת סגנון טעינת המערכת"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1101,8 +886,21 @@ msgstr "אינך יכול/ה להשתמש בכרך לוגי של LVM לנקוד�
 
 #: ../../fsedit.pm:1
 #, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+
+#: ../../fsedit.pm:1
+#, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "זוהי כבר מחיצה עם נקודת חיבור %s\n"
+
+#: ../../fsedit.pm:1
+#, fuzzy, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr "שם המדפסת צריך להכיל רק אותיות, מספרים וקו תחתון"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1135,6 +933,15 @@ msgstr ""
 "(השגיאה היא %s)\n"
 "\n"
 "הם את/ה מסכימ/ה  לאבד את כל המחיצות?\n"
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "שגיאה"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1241,8 +1048,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1255,7 +1062,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1445,7 +1252,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1549,7 +1356,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -1949,7 +1756,7 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -2004,7 +1811,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 
@@ -2050,7 +1857,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -2411,12 +2218,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "לא"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "כן"
@@ -2513,6 +2322,13 @@ msgstr "הסר את חלונות(TM)"
 #, fuzzy, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr "אין מחיצת FAT לשינוי גודל או לשימוש כloopback - לא מספיק מקום נותר"
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -2853,6 +2669,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "נכנס לשלב `%s'\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Help"
+msgstr "עזרה"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "not configured"
+msgstr "לא מוגדר"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "הגדרות"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -2959,7 +2795,7 @@ msgstr "טען או שמור בדיסקט"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "<- Previous"
-msgstr "קודם ->"
+msgstr "<- קודם"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #: ../../standalone/drakbackup:1
@@ -3058,20 +2894,12 @@ msgstr "גודל כללי: %d / %d MB"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Next ->"
-msgstr "<- הבא"
+msgstr "הבא ->"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Individual package selection"
 msgstr "בחירת חבילות באופן ספציפי"
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "עזרה"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -3288,12 +3116,13 @@ msgstr ""
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "הסיסמא הזו קצרה מידיי (חייבת להכיל לפחות %d אותיות או סימנים)"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "אין סיסמה"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "הגדרת סיסמה ראשית (root)"
@@ -3353,11 +3182,6 @@ msgstr "אבטחה"
 #, fuzzy, c-format
 msgid "Security Level"
 msgstr "רמת אבטחה:"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "not configured"
-msgstr "לא מוגדר"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -3461,6 +3285,16 @@ msgid "Which is your timezone?"
 msgstr "איזה הוא איזור הזמן שלך?"
 
 #: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "האם ברצונך להגדיר הדפסה?"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Unable to contact mirror %s"
+msgstr ""
+
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "מתקשר עם המראה כדי לקבל את הרשימה של חבילות זמינות..."
@@ -3533,6 +3367,11 @@ msgstr ""
 "אם יש לך את כל הדיסקים הרשומים יש ללחוץ אישור.\n"
 "אם אין לך אף דיסק יש ללחוץ ביטול.\n"
 "אם חסרים לך דיסקים מסויימים יש לבטל בחירתם ואז ללחוץ אישור."
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "הכל"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3609,6 +3448,11 @@ msgstr "למערכת שלך אין מספיק שטח פנוי להתקנה או 
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "מחפש חבילות זמינות..."
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "מוצא חבילות לשדרוג..."
 
@@ -3616,11 +3460,6 @@ msgstr "מוצא חבילות לשדרוג..."
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "מחפש חבילות שכבר מותקנות..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "מחפש חבילות זמינות..."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3729,11 +3568,6 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Upgrade"
-msgstr "לשדרג"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
 msgid "Upgrade %s"
 msgstr ""
 
@@ -3757,15 +3591,19 @@ msgstr "הנה הרשימה המלאה של המקלדות הזמינות"
 msgid "Please choose your keyboard layout."
 msgstr "נא לבחור את פלט המקלדת שלך."
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "יציאה"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr "הסכם רישוי"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "default:LTR"
-msgstr "ברירת מחדל"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4314,6 +4152,11 @@ msgstr "בלגית"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Azerbaidjani (latin)"
+msgstr ""
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Arabic"
 msgstr ""
 
 #: ../../keyboard.pm:1
@@ -5476,6 +5319,11 @@ msgstr "אנדורה"
 msgid "Afghanistan"
 msgstr "אפגניסטן"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "default:LTR"
+msgstr "default:RTL"
+
 #: ../../loopback.pm:1
 #, c-format
 msgid "Circular mounts %s\n"
@@ -5882,7 +5730,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 
 #: ../../services.pm:1
@@ -6111,10 +5959,10 @@ msgstr ""
 "       XFdrake resolution"
 
 #: ../../standalone.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
 "[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
 "[--dynamic=dev]"
@@ -6265,8 +6113,8 @@ msgid "Exit install"
 msgstr "יציאה מההתקנה"
 
 #: ../../steps.pm:1
-#, c-format
-msgid "Install system updates"
+#, fuzzy, c-format
+msgid "Install updates"
 msgstr "התקנת עדכוני מערכת"
 
 #: ../../steps.pm:1
@@ -6293,6 +6141,11 @@ msgstr "הגדרת הרשת"
 #, c-format
 msgid "Add a user"
 msgstr "הוספת משתמש"
+
+#: ../../steps.pm:1
+#, fuzzy, c-format
+msgid "Root password"
+msgstr "אין סיסמה"
 
 #: ../../steps.pm:1
 #, c-format
@@ -6341,13 +6194,21 @@ msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
+msgid "Language"
 msgstr "בחירת שפה"
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
 msgstr "utopia 25"
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "אישור"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -6525,7 +6386,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "אפשריות"
@@ -6549,14 +6410,6 @@ msgstr "מסך"
 #, c-format
 msgid "Graphic Card"
 msgstr "כרטיס מסך"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "יציאה"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -7186,32 +7039,6 @@ msgstr "שולחן מחיצות של כונן %s עומד להכתב לדיסק!
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
 msgid "The package %s is needed. Install it?"
 msgstr "החבילה %s דרושה. האם להתקינה?"
 
@@ -7695,6 +7522,11 @@ msgstr ""
 
 #: ../../harddrake/data.pm:1
 #, c-format
+msgid "Firewire controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr ""
 
@@ -7827,7 +7659,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -8241,8 +8073,8 @@ msgstr "חיבור לאינטרנט"
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
-msgstr "Sagem (using pppoe) usb"
+msgid "Sagem (using pppoa) usb"
+msgstr "Sagem (using pppoa) usb"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -8346,13 +8178,13 @@ msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
-msgid "Zeroconf Host name"
-msgstr ""
+msgid "Host name"
+msgstr "שם מארח"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
-msgid "Host name"
-msgstr "שם מארח"
+msgid "Zeroconf Host name"
+msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -8361,15 +8193,6 @@ msgid ""
 "\n"
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
-msgstr ""
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
 msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
@@ -8974,6 +8797,11 @@ msgid "Start at boot"
 msgstr "התחל באתחול"
 
 #: ../../network/network.pm:1
+#, c-format
+msgid "Assign host name from DHCP address"
+msgstr ""
+
+#: ../../network/network.pm:1
 #, fuzzy, c-format
 msgid "Network Hotplugging"
 msgstr "תצוגת מצב רשת"
@@ -8984,6 +8812,23 @@ msgid "Track network card id (useful for laptops)"
 msgstr ""
 
 #: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "DHCP host name"
+msgstr "שם מארח"
+
+#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "Netmask"
+msgstr ""
+
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "IP address"
+msgstr "כתובת IP"
+
+#: ../../network/network.pm:1
 #, c-format
 msgid "(bootp/dhcp/zeroconf)"
 msgstr ""
@@ -8992,17 +8837,6 @@ msgstr ""
 #, c-format
 msgid "Automatic IP"
 msgstr "IP אוטומטי"
-
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Netmask"
-msgstr ""
-
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "IP address"
-msgstr "כתובת IP"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -9239,7 +9073,7 @@ msgstr "PDQ"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - הדפס, אל תמתין"
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr "מודל לא ידוע"
@@ -9248,6 +9082,11 @@ msgstr "מודל לא ידוע"
 #, c-format
 msgid "Unknown model"
 msgstr "מודל לא ידוע"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "%s (Port %s)"
+msgstr "מארח %s"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -9401,11 +9240,6 @@ msgstr "הדפסדרייק"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr "האם ברצונך להגדיר מדפסת אחרת?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "מסיר את מדפסת \"%s\"..."
 
@@ -9421,8 +9255,8 @@ msgstr "הסרת מדפסת"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Know how to use this printer"
-msgstr "דע/י איך להשתמש במדפסת הזאת"
+msgid "Learn how to use this printer"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9520,11 +9354,6 @@ msgstr "סוג חיבור מדפסת"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Learn how to use this printer"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Raw printer"
 msgstr ""
 
@@ -9560,6 +9389,7 @@ msgid "Add a new printer"
 msgstr "הוספת מדפסת חדשה"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "מצב נורמלי"
@@ -9582,6 +9412,11 @@ msgstr "הגדרת CUPS"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Refresh printer list (to display all available remote CUPS printers)"
+msgstr "ריענון רשימת מדפסות (כדי להציג את כל מדפסות הCUPS המרוחקות הזמינות)"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Display all available remote CUPS printers"
 msgstr "ריענון רשימת מדפסות (כדי להציג את כל מדפסות הCUPS המרוחקות הזמינות)"
 
 #: ../../printer/printerdrake.pm:1
@@ -9610,16 +9445,6 @@ msgstr ""
 #, c-format
 msgid "Printing system: "
 msgstr "מערכת ההדפסה:"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Would you like to configure printing?"
-msgstr "האם ברצונך להגדיר הדפסה?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr "מכין את הדפסדרייק..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9655,6 +9480,11 @@ msgstr ""
 #, c-format
 msgid "Select Printer Spooler"
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Setting Default Printer..."
+msgstr "מדפסת ברירת מחדל"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10927,6 +10757,35 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Configuring printer ..."
+msgstr "מגדיר את מדפסת \"%s\"..."
+
+#: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "Searching for new printers..."
 msgstr "קורא מידע על המדפסת..."
@@ -11029,6 +10888,64 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Restarting CUPS..."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "המודל נכון"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Server IP missing!"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "מדפסת על שרת cups מרוחק"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Remove selected server"
+msgstr "למחוק את הכלל הנבחר"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Edit selected server"
+msgstr "זוהה %s"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Add server"
+msgstr "הוספת משתמש"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "IP address of host/network:"
 msgstr ""
 
@@ -11039,37 +10956,12 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -11127,6 +11019,29 @@ msgstr ""
 #, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "None"
+msgstr "סיום"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Additional CUPS servers: "
+msgstr "על שרת CUPS \"%s\""
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -11283,8 +11198,8 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -12104,7 +12019,7 @@ msgstr ""
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Add User -->"
-msgstr "<-- הוספת משתמש"
+msgstr "הוספת משתמש -->"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -12738,6 +12653,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr ""
 
@@ -12980,16 +12900,6 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Restore from Hard Disk."
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Secure Connection"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "FTP Connection"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -13827,6 +13737,190 @@ msgstr ""
 msgid "Installation of %s failed. The following error occured:"
 msgstr ""
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "לא, לא רוצה כניסה אוטומטית"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "כן, ברצוני כניסה אוטומטית עם זה (משתמש, שולחן עבודה)"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "הפעל את הסביבה הגרפית כאשר המערכת שלך מתחילה"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "מצב מערכת"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr "טעינת ספלאש"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr "מסך Lilo"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "ערכות נושא"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "בחירת ספלאש"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"השימוש הוא כרגע ב%s כמנהל טעינה.\n"
+"יש ללחוץ על הגדרות כדי להריץ את אשף ההגדרה."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr "התקנת ערכות נושא לטוען הספלאש וLilo  הושלמה בהצלחה"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr "התקנת ערכת נושא נכשלה!"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr "לשים לב"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr "טען מחדש 'lilo'"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+"לא יכול להפעיל מחדש את LiLo!\n"
+"יש להריץ את \"lilo\" כמשתמש ראשי(root) משורת הפקודה להשלמת התקנת ערכת הנושא."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr "לא יכול להפעיל mkinitrd -f /boot/initrd-%s.img %s."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+"לא יכול לרשום ל/etc/sysconfig/bootsplash\n"
+"הקובץ לא קיים."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "כתוב %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr "לא יכול לכתוב אל /etc/sysconfig/bootsplash."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "הודעת Lilo לא נמצאה"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "מעתיק %s ל%s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr "מגבה %s ל%s.old"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "יצירת ערכת נושא חדשה"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"הצגת ערכת נושא\n"
+"תחת מסוף"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr "התקנתערכות נושא"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "מצב Lilo/grub "
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "מצב Yaboot"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<Ctrl>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/קובץ/_יציאה"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_קובץ"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "הגדרת סגנון טעינת המערכת"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -13957,6 +14051,16 @@ msgstr ""
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr ""
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr ""
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr ""
 
@@ -13970,11 +14074,6 @@ msgstr ""
 msgid "Gateway"
 msgstr ""
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr ""
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -13983,11 +14082,6 @@ msgstr ""
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Profile: "
-msgstr ""
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
 msgstr ""
 
 #: ../../standalone/drakconnect:1
@@ -14245,8 +14339,8 @@ msgstr "הסרת מודול"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr ""
+msgid "Add a module"
+msgstr "הוספת מודול"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -14260,13 +14354,13 @@ msgstr "אם דרוש"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "הכרח/י"
+msgid "omit raid modules"
+msgstr ""
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "הוספת מודול"
+msgid "force"
+msgstr "הכרח/י"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -14280,23 +14374,18 @@ msgstr "איזור מומחים"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr ""
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "גירסת גרעין"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr ""
+msgid "default"
+msgstr "ברירת מחדל"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "ברירת מחדל"
+msgid "General"
+msgstr ""
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -14316,11 +14405,6 @@ msgstr "גודל"
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Module name"
-msgstr ""
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 msgstr ""
 
 #: ../../standalone/drakfont:1
@@ -14928,6 +15012,11 @@ msgstr "לא מותקן סייר במערכת שלך, נא להתקין אחד �
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "Path"
+msgstr "מיקום תיקייה"
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "group :"
 msgstr "קבוצה :"
 
@@ -14985,11 +15074,6 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Path"
-msgstr "מיקום תיקייה"
-
-#: ../../standalone/drakperm:1
-#, c-format
 msgid "Permissions"
 msgstr "הרשאות"
 
@@ -15002,19 +15086,6 @@ msgstr "משתמש נוכחי"
 #, c-format
 msgid "browse"
 msgstr "סייר"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
-msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -15065,6 +15136,19 @@ msgstr ""
 #, c-format
 msgid "Up"
 msgstr "לעלות"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
+msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -15226,13 +15310,13 @@ msgstr "התראות אבטחה:"
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid "(default value: %s)"
-msgstr ""
+msgid "Security Level:"
+msgstr "רמת אבטחה:"
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid "Security Level:"
-msgstr "רמת אבטחה:"
+msgid "(default value: %s)"
+msgstr ""
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -15248,7 +15332,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -15257,7 +15341,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 
 #: ../../standalone/draksound:1
@@ -15576,26 +15660,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "אפשריות"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect jazz drives"
-msgstr "/זהה אוטומטית כונני jazz"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect modems"
-msgstr "/זהה אוטומטית מודמים"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect printers"
-msgstr "/זהה אוטומטית מדפסות"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr "ראשי"
 
@@ -15609,6 +15673,16 @@ msgstr "משני"
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "Unknown"
+msgstr "מודל לא ידוע"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "unknown"
+msgstr "מודל לא ידוע"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15667,11 +15741,6 @@ msgstr "על חומרדרייק"
 msgid "/_About..."
 msgstr "/_על זה..."
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/_עזרה"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -15706,15 +15775,20 @@ msgstr "עזרת חומרדרייק"
 msgid "/_Fields description"
 msgstr ""
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/_עזרה"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/_Quit"
+msgstr "/_יציאה"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "/זיהוי אוטומטי של כונני _jazz"
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_אפשרויות"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15726,10 +15800,10 @@ msgstr "/זיהוי אוטומטי של _מודמים"
 msgid "/Autodetect _printers"
 msgstr "/זיהוי _מדפסות אוטומטי"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
-msgid "/_Quit"
-msgstr "/_יציאה"
+msgid "/_Options"
+msgstr "/_אפשרויות"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15828,7 +15902,7 @@ msgstr "שלב"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -15981,6 +16055,16 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
 msgid "Size of the (second level) cpu cache"
 msgstr "גודל מטמון המעבד (שלב שני)"
 
@@ -16061,7 +16145,7 @@ msgstr "התקנים אלטרנטיבים"
 #: ../../standalone/keyboarddrake:1
 #, c-format
 msgid "Do you want the BackSpace to return Delete in console?"
-msgstr "האם ברצונך להשתמש במקש הBackSpace (->) כדי להחזיר מחיקה במסוף?"
+msgstr "האם ברצונך להשתמש במקש הBackSpace (<-) כדי להחזיר מחיקה במסוף?"
 
 #: ../../standalone/keyboarddrake:1
 #, c-format
@@ -16447,8 +16531,8 @@ msgid "Network Monitoring"
 msgstr "תצוגת מצב רשת"
 
 #: ../../standalone/printerdrake:1
-#, c-format
-msgid "Reading printer data ..."
+#, fuzzy, c-format
+msgid "Reading data of installed printers..."
 msgstr "קורא מידע על המדפסת..."
 
 #: ../../standalone/scannerdrake:1
@@ -16559,51 +16643,6 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-"סורק ה%s הזה חייב להיות מוגדר על ידיי מדפסתדרייק.\n"
-"את/ה יכול/ה להפעיל את מדפסתדרייק ממרכז ההגדרות של מנדרייק באזור החומרה."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "בחר/י התקן"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Please select the device where your %s is attached"
-msgstr ""
-"סורקדרייק לא היה מסוגל למצוא את סורק ה%s שלך.\n"
-"אנא בחר/י את ההתקן שאליו הסורק שלך מחובד"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "The %s is unsupported"
-msgstr "סורק ה%s הזה לא נתמך"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr "ה%s לא נתמך בגרסא הנוכחית של לינוקס מנדרייק."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr "ה%s לא נתמך בגרסא הנוכחית של לינוקס מנדרייק."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
 msgid "Re-generating list of configured scanners ..."
 msgstr ""
 
@@ -16657,7 +16696,87 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "choose device"
+msgstr "בחר/י התקן"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Please select the device where your %s is attached"
+msgstr ""
+"סורקדרייק לא היה מסוגל למצוא את סורק ה%s שלך.\n"
+"אנא בחר/י את ההתקן שאליו הסורק שלך מחובד"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Searching for scanners ..."
+msgstr "קורא מידע על המדפסת..."
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Auto-detect available ports"
+msgstr "/זהה אוטומטית מדפסות"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+"סורק ה%s הזה חייב להיות מוגדר על ידיי מדפסתדרייק.\n"
+"את/ה יכול/ה להפעיל את מדפסתדרייק ממרכז ההגדרות של מנדרייק באזור החומרה."
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "The %s is unsupported"
+msgstr "סורק ה%s הזה לא נתמך"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr "ה%s לא נתמך בגרסא הנוכחית של לינוקס מנדרייק."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr "ה%s לא נתמך בגרסא הנוכחית של לינוקס מנדרייק."
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Port: %s"
+msgstr "מארח %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Detected model: %s"
+msgstr "זוהה מודל: %s %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Select a scanner model"
 msgstr "בחר/י סורק"
 
 #: ../../standalone/scannerdrake:1
@@ -16749,6 +16868,10 @@ msgid "Scientific Workstation"
 msgstr "תחנת עבודה מדעית"
 
 #: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr ""
+
+#: ../../share/compssUsers:999
 msgid "Console Tools"
 msgstr "כלי מסוף"
 
@@ -16821,12 +16944,14 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache, Pro-ftpd"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "דואל/קבוצות דיון/חדשות"
+#, fuzzy
+msgid "Mail"
+msgstr "מאלי"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr ""
+#, fuzzy
+msgid "Postfix mail server"
+msgstr "שרת דואל"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -16923,6 +17048,51 @@ msgstr "פיננסיה אישית"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr ""
+
+#~ msgid "Launch Aurora at boot time"
+#~ msgstr "יש לטעון את Aurora בזמן טעינת המערכת"
+
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr "תצוגת Gtk+ מסורתית"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "תצוגה מסורתית"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "תצוגה בסגנון החדש"
+
+#~ msgid "NewStyle Categorizing Monitor"
+#~ msgstr "תצוגה בסגנון החדש לפי קטגוריות"
+
+#~ msgid "Mail/Groupware/News"
+#~ msgstr "דואל/קבוצות דיון/חדשות"
+
+#~ msgid "/Options"
+#~ msgstr "אפשריות"
+
+#~ msgid "/Autodetect jazz drives"
+#~ msgstr "/זהה אוטומטית כונני jazz"
+
+#~ msgid "/Autodetect modems"
+#~ msgstr "/זהה אוטומטית מודמים"
+
+#~ msgid "/Autodetect printers"
+#~ msgstr "/זהה אוטומטית מדפסות"
+
+#~ msgid "Upgrade"
+#~ msgstr "לשדרג"
+
+#~ msgid "Do you want to configure another printer?"
+#~ msgstr "האם ברצונך להגדיר מדפסת אחרת?"
+
+#~ msgid "Know how to use this printer"
+#~ msgstr "דע/י איך להשתמש במדפסת הזאת"
+
+#~ msgid "Preparing Printerdrake..."
+#~ msgstr "מכין את הדפסדרייק..."
+
+#~ msgid "Reading printer data ..."
+#~ msgstr "קורא מידע על המדפסת..."
 
 #~ msgid ""
 #~ "You must indicate where you wish to place the information required to "

@@ -24,16 +24,18 @@ msgstr ""
 "Li pårtaedje pa uzeu eploye li groupe «fileshare».\n"
 "Vos ploz radjouter on uzeu dins ç' groupe la avou userdrake."
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Rinoncî"
@@ -112,14 +114,13 @@ msgstr "Payis"
 
 #: ../../any.pm:1
 #, c-format
+msgid "All languages"
+msgstr "Tos les lingaedjes"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Use Unicode by default"
 msgstr "Eployî l' ecôdaedje unicôde"
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "Tos"
 
 #: ../../any.pm:1
 #, c-format
@@ -418,12 +419,12 @@ msgstr "Prémetou sistinme d' operance?"
 #: ../../any.pm:1
 #, c-format
 msgid "Enable OF Boot?"
-msgstr "Mete en alaedje l' enondaedje pa l' Open Firmware?"
+msgstr "Permete l' enondaedje pa l' Open Firmware?"
 
 #: ../../any.pm:1
 #, c-format
 msgid "Enable CD Boot?"
-msgstr "Mete en alaedje l' enondaedje pa plake lazer?"
+msgstr "Permete l' enondaedje pa plake lazer?"
 
 #: ../../any.pm:1
 #, c-format
@@ -500,6 +501,16 @@ msgstr "Rastrinde les tchuzes del roye di cmande"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr "Foircî a n' nén eployî ACPI"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Enable ACPI"
+msgstr "Mete en alaedje ACPI"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "Tins divant d' enonder li prémetowe imådje"
 
@@ -552,6 +563,11 @@ msgstr "Passer hute"
 #, c-format
 msgid "On Floppy"
 msgstr "So plakete"
+
+#: ../../any.pm:1
+#, c-format
+msgid "First sector of the root partition"
+msgstr "Prumî secteu del pårticion raecene"
 
 #: ../../any.pm:1
 #, c-format
@@ -621,7 +637,7 @@ msgstr ""
 "ou si èn ôte sistinme d' operance oistêye LILO ou co si LILO ni va nén\n"
 "so voste éndjole.\n"
 "Vosse plakete d' enondaedje pout siervi eto come imådje di såvrité (rescue\n"
-"image), çu ki vos schaprè li djoû ki vosse sistinme toumrè en rac po do "
+"image), çou ki vos schaprè li djoû ki vosse sistinme toumrè en rac po do "
 "bon.\n"
 "Voloz vs fé ene plakete d' enondaedje po vosse sistinme?\n"
 "%s"
@@ -664,7 +680,7 @@ msgstr ""
 "ahessåve si vos n' voloz nén astaler SILO so vosse sistinme, ou si èn ôte\n"
 "sistinme d' operance oistêye SILO ou co si SILO ni va nén so voste éndjole.\n"
 "Vosse plakete d' enondaedje pout siervi eto come imådje di såvrité (rescue\n"
-"image), çu ki vos schaprè li djoû ki vosse sistinme toumrè en rac po do "
+"image), çou ki vos schaprè li djoû ki vosse sistinme toumrè en rac po do "
 "bon.\n"
 "\n"
 "Si vos vloz fé ene plakete d' enondaedje po vosse sistinme, metoz ene\n"
@@ -755,245 +771,6 @@ msgstr ""
 "\n"
 "Tchoezixhoz li sistinme d' operance el djiveye\n"
 "ou taordjiz %d segondes po l' enondaedje premetou.\n"
-
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "'l est bon"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "Oyi, dji vou l' elodjaedje otomatike po ci (uzeu, scribanne) chal"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "Neni, dji n' vou nén di l' elodjaedje otomatike"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "Enonder li sistinme X-Windows a l' enonda di l' éndjole"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "Môde do sistinme"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr "Waitroûle d' enondaedje"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr "Waitroûlêye di lilo"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-"\n"
-"Tchoezixhoz on tinme po lilo\n"
-"ey ene imådje pol waitroûle\n"
-"d' enondaedje, vos les ploz\n"
-"tchoezi sepårumint"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "Tinmes"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Splash selection"
-msgstr "Tchoezixhaexdje del waitroûle d' enondaedje"
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Apontyî"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Vos eployîz ddja %s come enondrece po tchoezi\n"
-"li do sistinme d' operance a enonder.\n"
-"Clitchîz so «Apontyî» po-z enonder li macrea d' apontiaedje."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr ""
-"L' astalaedje di lilo et des tinmes del waitroûle d' enondaedje a stî comufåt"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr "L' astalaedje do tinme a fwait berwete!"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr "Note"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "Aroke"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr "Renonder «lilo»"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-"Dji n' sai renonder lilo!\n"
-"Enondez «lilo» come root e l' roye di comande po completer l' astalaedje do "
-"tinme di lilo."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr "Fé on initrd avou « mkinitrd -f /boot/initrd-%s.img %s »."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr "Dji n' sai enonder mkinitrd -f /boot/initrd-%s.img %s."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-"Dji n'| sai scrire /etc/sysconfig/bootsplash\n"
-"Li fitchî n' a nén stî trové."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "Sicrire %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr "Dji n' sai scrire /etc/sysconfig/bootsplash."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "Li messaedje di lilo n' a nén stî trové"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "Copyî %s viè %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr "Fé ene copeye di såvrité di %s viè %s.old"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "Askepyî on novea tinme"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-"Håyner tinme\n"
-"dizo l' conzôle"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr "Astaler tinmes"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "Môde di lilo/grub"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "Môde di yaboot"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "Enonder Aurora a l' enondaedje del éndjole"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "Corwaiteu stîle tradicionel e Gtk+"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "Corwaiteu stîle tradicionel"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "Corwaitoe novea stîle"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "Categorijhaedje novea stîle do corwaitoe"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/Fitchî/Moussî _foû"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_Fitchî"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "Apontiaedje del sôre d' enondaedje"
 
 #: ../../common.pm:1
 #, c-format
@@ -1153,8 +930,24 @@ msgstr "Vos n' poloz nén on volume lodjike LVM pol pont di montaedje %s"
 
 #: ../../fsedit.pm:1
 #, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"Vos avoz tchoezi ene pårticion RAID e cotuzreye pol pårticion raecene (/).\n"
+"Nole enondrece pout manaedjî çoula sins ene pårticion /boot.\n"
+"Adon pinsez a radjouter ene pårticion /boot"
+
+#: ../../fsedit.pm:1
+#, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "I gn a ddja ene pårticion avou li pont di montaedje %s\n"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr "Les ponts di montaedje dvèt aveur seulmint des letes et des chifes"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1189,6 +982,15 @@ msgstr ""
 "(l' aroke esta «%s»)\n"
 "\n"
 "Estoz vs d' acoird di piede totes les pårticions?\n"
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "Aroke"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1300,8 +1102,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1314,7 +1116,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1425,6 +1227,43 @@ msgid ""
 " * Default OS: you can select which OS will boot by default when the Open\n"
 "Firmware Delay expires."
 msgstr ""
+"Yaboot est ene enondrece po ls éndjoles Macintosh NewWorld et ele pout\n"
+"esse eployeye po-z enonder GNU/Linux, MacOS ou MacOSX. Normålmint,\n"
+"MacOS eyet MacOSX sont detectés comufåt eyet metous dins l' menu del\n"
+"enondrece. Ci c' est nén l' cas, vos ploz radjouter des intrêyes\n"
+"al mwin a pårti di ci purnea chal. Prindoz asteme di bén tchoezi les\n"
+"bons parametes.\n"
+"\n"
+"Les mwaissès tchuzes di Yaboot sont:\n"
+"\n"
+" * «Messaedje d' enondaedje»: on simpe messaedje e môde tecse ki srè\n"
+"håyné dvant ki l' enondrece dene li tchamp d' intrêye po tchoezi\n"
+"li sistinme d' operance.\n"
+"\n"
+"* «Éndjin d' enondaedje»: po dire wice ki vos vloz mete l' informåcion\n"
+"k' end a mezåjhe po-z enonder GNU/Linux. Djenerålmint, vos fjhoz ene\n"
+"pårticion d' enondaedje (bootstrap) pus tård po-z î mete ciste informåcion\n"
+"chal.\n"
+" * «Tårdjaedje di l' Open Firmware»: i gn a deus tårdjaedjes avou yaboot\n"
+"(dismeatant k' avou LILO end n' a k' onk). Li prumî tårdjaedje est mzuré\n"
+"e segondes, eyet asteure vos ploz tchoezi inte l' enondaedje so CD,\n"
+"avou l' OpenFirmware (OF), di MacOS ou di Linux;\n"
+"\n"
+"* «Tårdjaedje po l' enondaedje do nawea»: ci tårdjaedje chal est l' minme\n"
+"k' avou LILO. On côp ki vos tchoezixhoz Linux, vos åroz ci tårdjaedje\n"
+"chal, et dijhinmes di segonde, divant ki l' tchoezi nawea soeye enondé;\n"
+"\n"
+" * «Permete l' enondaedje pa plake lazer?»: si vos clitchîz cisse\n"
+"tchuze chal vos pôroz tchoezi « C » dins l' enondrece po-z enonder a\n"
+"pårti d' ene plake lazer.\n"
+"\n"
+" * «Permete l' enondaedje pa l' Open Firmware?»: si vos clitchîz cisse\n"
+"tchuze chal vos pôroz tchoezi « N » dins l' enondrece po-z aveur\n"
+"l' Open Firmware.\n"
+"\n"
+" * «Prémetou sistinme d' operance?»: vos ploz tchoezi li ké sistinme\n"
+"d' operance srè-st enondé otomaticmint on côp kel tårdjaedje di\n"
+"l' Open Firmware est houte."
 
 #: ../../help.pm:1
 #, c-format
@@ -1630,7 +1469,7 @@ msgstr ""
 "clitchant sol boton «Sipepieus»."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
 "automated. DrakX will analyze the disk boot sector and act according to\n"
@@ -1651,7 +1490,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1676,6 +1515,28 @@ msgid ""
 "floppy disk must be blank or have non-critical data on it - DrakX will\n"
 "format the floppy and will rewrite the whole disk."
 msgstr ""
+"LILO eyet grub sont des enondreces po GNU/Linux. Normålmint, ciste etape\n"
+"chal est totafwaitmint otomatike. DrakX va analijhî li cmince del deure\n"
+"plake eyet ovrer sorlon çou ki srè trové la:\n"
+"\n"
+" * si c' est on secteu d' enondaedje Windows k' est trové, i srè\n"
+"replaecî avou on secteu d' enondaedje di grub/LILO. Come çoula vos pôroz\n"
+"enonder GNU/Linux ou èn ôte S.O.\n"
+"\n"
+" * si c' est on secteu d' enondaedje di grub ou LILO k' est trové,\n"
+"i srè replaecî avou on pus novea.\n"
+"\n"
+"Si nou secteut d' enondaedje n' est trové, DrakX vos dmandrè wice\n"
+"mete l' enondrece.\n"
+"\n"
+"«Éndjin d' enondaedje»: dins l' plupårt des cas, vos n' duvoz nén\n"
+"candjî li prémetowe valixhance («Prumî secteu del plake (MBR)»), mins\n"
+"si vos l' voloz, l' enondrece pout esse astalêye sol deujhinme\n"
+"deure plake («/dev/hdb») ou minme so ene plakete («So plakete»);\n"
+"\n"
+"Clitchî so «Fé ene plakete d' enondaedje» vos permete d' aveur ene\n"
+"plake ki vos ploz enonder eyet rapexhî l' sistinme avou.\n"
+"\n"
 "Li plake lazer di Mandrake Linux a-st on môde rapexhaedje. Vos l' poloz\n"
 "eployî tot-z enondant l' éndjole sol plake lazer eyet tchoukî sol tape\n"
 "«F1» poy sicrire «rescue» sol roye d' intrêye. Mins si vosse copiutrece\n"
@@ -1697,13 +1558,13 @@ msgstr ""
 "côpeure electrike, d' ene aroke tot tapant ene comande, on roviaedje\n"
 "do scret di root, ou tot l' minme li kéne råjhon).\n"
 "\n"
-"Cwand vos clitchîz so ciste étape chal, i vos srè dmandé di mete ene\n"
-"plakete dins l' lijheu. Li plakete doet esse vude oudonbén aveur des\n"
-"informåcions ki polèt esse disfacêyes. I gn a nén mezåjhe ki vos\n"
-"l' abwesnîz, ca DrakX va riscrire totafwait li plactêye."
+"Si vos djhoz «Oyi», i vos srè dmandé di mete ene plakete dins l' lijheu.\n"
+"Li plakete doet esse vude oudonbén aveur des informåcions ki polèt esse\n"
+"disfacêyes. I gn a nén mezåjhe ki vos l' abwesnîz, ca DrakX va riscrire\n"
+"totafwait li plactêye."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After you have configured the general bootloader parameters, the list of\n"
 "boot options that will be available at boot time will be displayed.\n"
@@ -1720,19 +1581,25 @@ msgid ""
 "bootloader menu, but you will need a boot disk in order to boot those other\n"
 "operating systems!"
 msgstr ""
-"LILO (LInux LOader, ou enondrece di GNU/Linux) eyet Grub siervèt a enonder\n"
-"GNU/Linux ou tot l' minme li kén ôte sistinme d' operance k' i gn åreut\n"
-"so voste éndjole.  Normålmint, les ôtes sistinmes d' operance\n"
-"sont foirt bén ricnoxhous et astalés.  Si ça n' va nén tot seu, vos poloz\n"
-"radjouter ene intrêye al mwin dins cisse pådje ci.  Loukîz do dner les\n"
-"bons parametes, seulmint. \n"
+"Dispoy aveur apontyî les parametes djenerås di l' enondrece, li djivêye\n"
+"des tchuzes d' enondaedje ki sront disponibes å moumint d' l' enondaedje\n"
+"vont esse håynêyes.\n"
 "\n"
-"Vos poloz eto tchoezi di n' nén leyî tot l' minme kî enonder ces sistinmes\n"
-"d' operance la.  Mins a ç' moumint la, i vos fårè ene plakete d' enondaedje\n"
-"(boot disk) po ls enonder."
+"S' i gn a des ôtes sistinmes d' operance d' astalés so voste éndjole\n"
+"i sront otomaticmint radjoutés å menu d' l' enondrece. Vos ploz apontyî\n"
+"pus spepieuzmint les tchuzes tot clitchant so «Radjouter» po fé ene novele\n"
+"intrêye; tchoezi ene intrêye k' i gn a eyet clitchî so «Candjî» oudonbén\n"
+"so «Oister» pol candjî ou l' disfacer. «'l est bon» po-z acertiner vos\n"
+"candjmints et les scrire sol deure plake.\n"
+"\n"
+"Motoit k' vos n' vôrîz nén dner accès a ces ôtes sistinmes d' operance\n"
+"a tot l' minme kî ki pôreut aveur accès al conzôle eyet renonder l' éndjole\n"
+"Vos ploz disfacer les intrêyes corespondantes po k' ele n' aparexhe pus\n"
+"dins l' menu d' l' enondrece, mins vos åroz adon mezåjhe d' ene plakete\n"
+"d' enondaedje po pleur enonder ces sistinme d' operance la!"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This dialog allows to finely tune your bootloader:\n"
 "\n"
@@ -1761,28 +1628,17 @@ msgid ""
 "Clicking the \"Advanced\" button in this dialog will offer advanced options\n"
 "that are reserved for the expert user."
 msgstr ""
-"LILO eyet grub sont des enondreces po GNU/Linux. Ciste etape est normålmint\n"
-"otomatike. DrakX analijhe li secteu d' enondaedje del deure plake et fwait\n"
-"çou k' i fåt sorlon çou k' i trove la:\n"
-"\n"
-" * si on secteu d' enondaedje Windows est trové, i srè replaecî pa on\n"
-"secteu d' enondaedje grub/LILO. Come çoula vos pôroz enonder GNU/Linux\n"
-"ou èn ôte sistinme d' operance;\n"
-"\n"
-" * si on secteu d' enondaedje grub ou LILO est trové, i srè replaecî pa\n"
-"on novea.\n"
-"\n"
-"S' i gn a del dotance, DrakX vos håyneyrè on purnea avou sacwantès tchuzes.\n"
+"Ci purnea chal vos permete d' apontyî spepiuzmint voste enondrece:\n"
 "\n"
 " * «Enondrece a-z eployî»: vos avoz troes tchuzes:\n"
 "\n"
-"    * «Grub»: si vos voeyoz pus voltî grub (menu tecse).\n"
-"\n"
-"    * «LILO avou on menu grafike»: si vos voeyoz pus voltî LILO avou\n"
-"si eterface di menus grafikes.\n"
+"    * «GRUB»: si vos voeyoz pus voltî grub (menu tecse).\n"
 "\n"
 "    * «LILO avou on menu e môde tecse»: si vos voeyoz pus voltî LILO avou\n"
 "si eterface di menus e môde tecse.\n"
+"\n"
+"    * «LILO avou on menu grafike»: si vos voeyoz pus voltî LILO avou\n"
+"si eterface di menus grafikes.\n"
 "\n"
 " * «Éndjin d' enondaedje»: dins l' plupårt des cas, vos n' duvoz nén\n"
 "candjî li prémetou éndjin («/dev/hda»), mins si vos l' voloz, l' enondrece\n"
@@ -1794,22 +1650,12 @@ msgstr ""
 "do sistinme d' operance a-z enonder dins l' menu di l' enondrece.\n"
 "\n"
 "!! Atincion ki si vos tchoezixhoz di n' nén astaler d' enondrece (si vos\n"
-"clitchîs so «Rinoncî» chal), vos vos dvoz acertiner d' aveur on moyén\n"
+"clitchîz so «Passer hute» chal), vos vos dvoz acertiner d' aveur on moyén\n"
 "d' enonder vosse sistinme Mandrake Linux! Ossu, i vs fåt bén esse seur\n"
 "di çou k' vos fjhoz dvant d' candjî les tchuzes. !!\n"
 "\n"
 "Si vos clitchîz sol boton «Sipepieus» di ç' purnea chal, vos åroz\n"
-"sacwantès tchuzes di pus, ki sont po des uzeus pus avancîs.\n"
-"\n"
-"On côp ki vos åroz apontyî les parametes djenerås del enondrece, li djivêye\n"
-"des tchuzes d' enondaedje vos srè mostrêye.\n"
-"\n"
-"S' i gn a èn ôte sistinme d' operance d' astalé so voste éndjole, i srè\n"
-"otomaticmint radjouté å menu d' enondaedje. Chal vos ploz tchoezi di\n"
-"candjî spepieuzmint les tchuzes k' i gn a. Tchoezixhoz ene intrêye et\n"
-"clitchîz so «Candjî» pol candjî ou l' oister; so «Radjouter» po radjouter\n"
-"ene nouve intrêye; et so «Fini» po passer a l' etape shuvante\n"
-"di l' astalåcion."
+"sacwantès tchuzes di pus, ki sont po des uzeus pus avancîs."
 
 #: ../../help.pm:1
 #, c-format
@@ -1839,7 +1685,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -2051,6 +1897,29 @@ msgid ""
 "running version \"8.1\" or later. Performing an Upgrade on versions prior\n"
 "to Mandrake Linux version \"8.1\" is not recommended."
 msgstr ""
+"Ciste etape est enondêye seulmint si ene viye pårticion GNU/Linux a stî\n"
+"trovêye so voste éndjole.\n"
+"\n"
+"DrakX asteure a mezåjhe di saveur si vos vloz fé ene novele astalåcion\n"
+"oudonbén fé on metaedje a djoû d' on sistinme Mandrake Linux k' i gn a\n"
+"ddja sol plake:\n"
+"\n"
+" * «Astalaedje»: çouchal va spotchî ttafwait l' vî sistinme k' i gn\n"
+"aveut sol plake. Si vos vloz candjî l' manire ki vos deurès plakes sont\n"
+"pårteyes, oudonbén candjî li sistinme di fitchîs, vos dvrîz tchoezi\n"
+"çouchal. Sorlon vosse pårtixhaedje, si vos avoz « /home » so ene\n"
+"pårticion da sinne metans, vos ploz wårder on boket di vos dnêyes\n"
+"ki n' seront nén spotcheyes.\n"
+"\n"
+" * «Metaedje a djoû»: cisse classe d' astalaedje chal vos permete di\n"
+"mete a djoû les pacaedjes k' i gn a so vosse sistinme Mandrake Linux.\n"
+"Vosse pårtixhaedje est wårdé et les dnêyes des uzeus n' sont nén\n"
+"candjeyes. Li plupårt des ôtès etapes d' apontiaedje dimorèt, come\n"
+"pol cas d' èn astalaedje sitandård.\n"
+"\n"
+"Eployî l' tchuze «Metaedje a djoû» rote comufåt po mete a djoû des\n"
+"sistinmes Mandrake Linux modêye «8.1» ou pus nouve. Mins l' fé po\n"
+"des modêyes di Mandrake Linux pus viyes kel «8.1» n' est nén ricmandé."
 
 #: ../../help.pm:1
 #, c-format
@@ -2128,7 +1997,7 @@ msgstr ""
 "«C:»)."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to choose which partition(s) will be used for the\n"
 "installation of your Mandrake Linux system. If partitions have already been\n"
@@ -2207,8 +2076,8 @@ msgstr ""
 "Chal, vos dvoz tchoezi so kéne/kénès pårticion(s) ki vos voloz astaler\n"
 "vosse sistinme Mandrake Linux. Si vos pårticions ont ddja stî fwaites\n"
 "(p. egz. li dierin côp ki vos avoz astalé GNU/Linux ou bén avou ene ôte\n"
-"usteye di pårtixhaedje). Dins les ôtes cas, des pårticions dvèt esse \n"
-"defineyes so vosse deure plake. Ça vout dire ki vos alez dispårti\n"
+"usteye di pårtixhaedje), vos les ploz eployî. Ôtrumint, des pårticions dvèt\n"
+"esse defineyes so vosse deure plake. Ça vout dire ki vos alez dispårti\n"
 "lodjicmint li deure plake di voste éndjole e diferinnes coines separêyes\n"
 "di ene l' ôte.\n"
 "\n"
@@ -2226,30 +2095,43 @@ msgstr ""
 "et ene di swap e prindant li plaece di libe k' i gn a sol deure plake et "
 "carculant otomaticmint li grandeu li meyeuse.\n"
 "\n"
+"«Co ds ôtes» dene des ôtes tchuzes, pus spepieuses:\n"
+"\n"
+"   * Schaper li tåvlea di pårtixhaedje: po schaper li tåvlea di "
+"pårtixhaedje\n"
+"so ene plakete. Ahessåve pol poleur rapexhî pus tård, s' i fåt.\n"
+"C' est hôtmint ricmindé del fé.\n"
+"\n"
+"   * Rimete li tåvlea di pårtixhaedje come divant: vos permete di rapexhî\n"
+"on tåvlea di pårtixhaedje k' a stî schapé so plakete d' avace.\n"
+"\n"
 "   * Rapexhî li tåvlea di pårtixhaedje: si vosse tåvlea di pårtixhaedje est "
 "crombe, vos ploz sayî del rapexhî avou cisse tchuze chal. Prindoz asteme et "
 "rimimbrez vs ki çoula pout ni nén roter a tos les côps.\n"
 "\n"
-"   * Disfé: clitchîz so ci boton la po disfé tos vos candjmints.\n"
+"   * Ritcherdjî li tåvlea di pårtixhaedje: Cisse tchuze chal c' est si vos\n"
+"vloz disfé tos les candjmints et tcherdjî vosse tåvlea di pårtixhaedje\n"
+"di dpårt.\n"
 "\n"
-"   * Ritcherdjî: Cisse tchuze chal c' est si vos vloz disfé tos les "
-"candjmints et tcherdjî vosse tåvlea di pårtixhaedje di dpårt.\n"
+"   * Montaedje otomatike des sopoirts bodjåves: disclitchîz cisse tchuze\n"
+"chal si vos n' voloz nén ki les bodjåves sopoirts (plakes lazer,\n"
+"plaketes,...) soeyexhe montés otomaticmint mins l' fé al mwin.\n"
 "\n"
 "   * Macrea: Si vos vloz aveur l' aidance d' on macrea po fé li pårtixhaedje "
 "del deure plake, vos ploz tchoezi cisse tchuze chal. Ele est ricomandêye si "
 "vos n' estoz nén on spepieus e pårtixhaedje.\n"
 "\n"
-"   * Rifé a pårti d' ene plakete: si vos avîz schapé vosse tåvlea di "
-"pårtixhaedje dins ene plakete å moumint d' ene ôte astalåcion, vos l' poloz "
-"rapexhî avou cisse tchuze chal.\n"
+"   * Disfé: clitchîz so ci boton la po disfé tos vos candjmints.\n"
 "\n"
-"   * Schaper e ene plakete: si vos vloz schaper vosse tåvlea di pårtixhaedje "
-"dins ene plakete, ki vos pôroz eployî pus tård pol rapexhî. C' est bråmint "
-"ricomande del fé.\n"
+"   * Candjî pol môde normå/spepieus: vos dene des ôtès tchuzes po les\n"
+"pårticions (sôre, tchuzes, abwesnaedje) eyet dene pus d' informåcions\n"
+"sol deure plake.\n"
 "\n"
 "   * Fwait: on côp ki vos avoz fini li pårtixhaedje del deure plake, "
 "tchoezixhoz çouchal po schaper po d' bon les candjmints.\n"
 "\n"
+"Cwand vos dnez l' grandeu del pårticion, vos l' poloz tchoezi finmint avou\n"
+"les tapes fretches di vosse taprece.\n"
 "Note: vos ploz tot fé pår avou l' taprece: naivyîz d' ene pårticion a l' ôte "
 "avou li tape Tab et les fretches Up/Down.\n"
 "\n"
@@ -2262,14 +2144,17 @@ msgstr ""
 "\n"
 "     * Ctrl-m  po defini li pont di montaedje\n"
 "\n"
-"si vos alez astaler sor ene éndjole PPC, motoit ki vos voroz fé ene pitite "
+"Po-z aveur des informåcions so les diferins sistinmes di fitchîs k' i gn a,\n"
+"lijhoz li tchaptrea so «ext2FS» do «Manuel di Referince».\n"
+"\n"
+"Si vos alez astaler sor ene éndjole PPC, motoit ki vos voroz fé ene pitite "
 "pårticion HFS «d' enondaedje» di 1 Mo å moens po l' eployî avou l' enondrece "
 "«yaboot». Si vos decidez del fé on pô pus grande, par egzimpe 50 Mo, çoula "
 "pôreut fé ene clapante plaece po-z î mete on nawea et ene imådje ramdisk po "
 "des cas d' urdjince k' i gn åreut."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, DrakX will allow you to choose the security level desired\n"
 "for the machine. As a rule of thumb, the security level should be set\n"
@@ -2285,14 +2170,14 @@ msgstr ""
 "Ene rîle simpe c' est ki pus voste éndjole est egzposêye, pus les dnêyes\n"
 "k' i gn a å dvins sont impôrtantes, pus li livea di såvrité doet esse hôt.\n"
 "Mins ossu, on hôt livea di såvrité çoula vout dire ki c' est moens åjhey\n"
-"d' eployî li copiutrece. Lijhoz li tchaptrea so MSEC el\n"
+"d' eployî li copiutrece. Lijhoz li tchaptrea so «msec» el\n"
 "«Manuel di Referince» po-z aveur pus d' informåcions so les diferins\n"
 "liveas k' i gn a.\n"
 "\n"
 "Si vos n' savoz cwè tchoezi, leyîz li prémetou livea."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
@@ -2322,7 +2207,7 @@ msgstr ""
 "po leyî ouve."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Any partitions that have been newly defined must be formatted for use\n"
 "(formatting means creating a file system).\n"
@@ -2366,17 +2251,17 @@ msgstr ""
 "On côp l' abwesnaedje fwait, totes les dnêyes del pårticion sront\n"
 "pierdowes; vos n' les pôroz nén rapexhî.\n"
 "\n"
-"Clitchîz so «'l est bon» cwand vos estoz presse po l' abwesnaedje des\n"
+"Clitchîz so «Shuvant» cwand vos estoz presse po l' abwesnaedje des\n"
 "pårticions.\n"
 "\n"
-"Clitchîz so «Rinoncî» si vos vloz tchoezi ene ôte pårticion po-z astaler\n"
+"Clitchîz so «Di dvant» si vos vloz tchoezi ene ôte pårticion po-z astaler\n"
 "vosse novea sistinme d' operance Mandrake Linux.\n"
 "\n"
 "Clitchîz so «Sipepieus» si vos vloz tchoezi les pårticions ki sront\n"
 "verifieyes po vey s' i gn a des måvas blocs sol deure plake."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "There you are. Installation is now complete and your GNU/Linux system is\n"
 "ready to use. Just click \"Next ->\" to reboot the system. The first thing\n"
@@ -2410,7 +2295,7 @@ msgid ""
 "\"mformat a:\")"
 msgstr ""
 "Vo nos la. L' astalåcion a stî fineye et asteure vosse sistinme GNU/Linux\n"
-"est presse a-z esse eployî. Vos n' avoz k' a clitchî sol boton «'l est bon»\n"
+"est presse a-z esse eployî. Vos n' avoz k' a clitchî sol boton «Shuvant»\n"
 "po renonder l' éndjole.\n"
 "Vos ploz enonder avou GNU/Linux ou Windows, li ci k' vos vloz (si vos avoz\n"
 "les deus sistinmes d' operance so l' éndjole), ossu rade ki l' copiutrece\n"
@@ -2446,7 +2331,7 @@ msgstr ""
 "tapez « mformat a: » sol roye di comande)."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to decide where you want to install the Mandrake\n"
 "Linux operating system on your hard drive. If your hard drive is empty or\n"
@@ -2529,14 +2414,8 @@ msgstr ""
 "eployî les macreas, po çoula clitchîz sol boton «Macrea» del usteye di "
 "pårtixhaedje.\n"
 "\n"
-"Si les pårticions ont ddja stî fwaites (d' on astalaedje fwait d' avance\n"
-"oudonbén avou ene ôte usteye di pårtixhaedje), i sufit di tchoezi\n"
-"ces pårticions la po les eployî pol astalaedje di vosse sistinme GNU/Linux.\n"
-"\n"
-"Si les pårticions n' ont nén ddja stî fwaites, vos les dvoz askepyî.\n"
-"Po fé çoula, eployîz l' macrea k' i gn a chal pa dzeur. Sorlon "
-"l' apontiaedje\n"
-"di vosse deure plake, pluzieurès solucions sont possibes:\n"
+"Sorlon l' apontiaedje di vosse deure plake, pluzieurès solucions\n"
+"sont possibes:\n"
 "\n"
 " * Eployî l' plaece libe: çouchal frè tot simplumint on pårtixhaedje\n"
 "otomatike del plaece vude so les deures plakes da vosse;\n"
@@ -2552,12 +2431,14 @@ msgstr ""
 "disfacer li pårticion Microsoft Windows et totes ses dnêyes (veyoz les\n"
 "solucions «Disfacer li plake etire» ou «Môde sipepieus») oudonbén raptixhî\n"
 "vosse pårticion Microsoft Windows.\n"
-"Li candjmint d' grandeu des pårticions si pout fé sins piede des dnêyes.\n"
-"Cisse solucions est rcomindêye si vos vloz eployî Mandrake Linux et\n"
+"Li candjmint d' grandeu des pårticions si pout fé sins piede des dnêyes,\n"
+"a condicion del disfragminter d' aprume, eyet kel pårticion soeye ene\n"
+"pårticion FAT. C' est hôtmint ricmandé di fé ene copêye di såvrité.\n"
+"Cisse solucions est ricmindêye si vos vloz eployî Mandrake Linux et\n"
 "Microsoft Windows sol minme copiutrece.\n"
 "\n"
 "Divant di tchoezi cisse solucion, i vos fåt comprinde kel grandeu di vosse\n"
-"pårticion Microsoft Windows srè pus ptite ki çu k' ele est asteure.\n"
+"pårticion Microsoft Windows srè pus ptite ki çk' ele est asteure.\n"
 "Dj' ô bén, vos åroz moens di plaece libe so Microsoft Windows po wårder\n"
 "les dnêyes da vosse ou astaler des noveas programes.\n"
 "\n"
@@ -2574,20 +2455,21 @@ msgstr ""
 "deure plake eyet cmincî on novea pårtixhaedje. Totes les dnêyes sol\n"
 "deure plake vont esse pierdowes.\n"
 "\n"
-"  !! Avou cisse tchuze chal, Tot çu k' i gn a el deure plake srè "
-"pierdou. !!\n"
+"  !! Avou cisse tchuze chal, Tot çk' i gn a el deure plake srè pierdou. !!\n"
 "\n"
-" * Môde sipepieus: si vos vloz fé manuwelmint li pårtixhaedje del deure "
-"plake,\n"
-"vos ploz tchoezi çouchal. Mins prindoz asteme, avou cisse solucion chal\n"
-"vos pôroz fé des poûxhantès mins dandjureusès sacwès.\n"
+" * Pårtixhaedje da vosse del deure plake: si vos vloz fé manuwelmint\n"
+"li pårtixhaedje del deure plake, vos ploz tchoezi çouchal.\n"
+"Mins prindoz asteme, avou cisse solucion chal vos pôroz fé des poûxhantès\n"
+"mins dandjureusès sacwès.\n"
 "Vos ploz åjheymint piede totes vos dnêyes. Adon, ni tchoezixhoz nén\n"
-"çouchal, a moens di vormint saveur çu k' vos fjhoz."
+"çouchal, a moens di vormint saveur çou k' vos fjhoz.\n"
+"Po pus di racsegnes sol manire d' eployî  l' usteye DrakDisk,\n"
+"loukîz li seccion «Manaedjî vos pårticions» do manuel."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -2612,6 +2494,9 @@ msgid ""
 "floppy disk must be blank or have non-critical data on it - DrakX will\n"
 "format the floppy and will rewrite the whole disk."
 msgstr ""
+"Clitchî so «Fé ene plakete d' enondaedje» vos permete d' aveur ene\n"
+"plake ki vos ploz enonder eyet rapexhî l' sistinme avou.\n"
+"\n"
 "Li plake lazer di Mandrake Linux a-st on môde rapexhaedje. Vos l' poloz\n"
 "eployî tot-z enondant l' éndjole sol plake lazer eyet tchoukî sol tape\n"
 "«F1» poy sicrire «rescue» sol roye d' intrêye. Mins si vosse copiutrece\n"
@@ -2633,10 +2518,10 @@ msgstr ""
 "côpeure electrike, d' ene aroke tot tapant ene comande, on roviaedje\n"
 "do scret di root, ou tot l' minme li kéne råjhon).\n"
 "\n"
-"Cwand vos clitchîz so ciste étape chal, i vos srè dmandé di mete ene\n"
-"plakete dins l' lijheu. Li plakete doet esse vude oudonbén aveur des\n"
-"informåcions ki polèt esse disfacêyes. I gn a nén mezåjhe ki vos\n"
-"l' abwesnîz, ca DrakX va riscrire totafwait li plactêye."
+"Si vos djhoz «Oyi», i vos srè dmandé di mete ene plakete dins l' lijheu.\n"
+"Li plakete doet esse vude oudonbén aveur des informåcions ki polèt esse\n"
+"disfacêyes. I gn a nén mezåjhe ki vos l' abwesnîz, ca DrakX va riscrire\n"
+"totafwait li plactêye."
 
 #: ../../help.pm:1
 #, c-format
@@ -2660,6 +2545,9 @@ msgid ""
 "without 3D acceleration, you are then proposed to choose the server that\n"
 "best suits your needs."
 msgstr ""
+"S' i gn a des sierveus grafikes diferins po vosse cåte grafike, des cis\n"
+"k' i gn a avou del acceleråcion 3D, des ôtes sins, on vs propôzrè di\n"
+"tchoezi l' ci ki vs convént l' mî."
 
 #: ../../help.pm:1
 #, c-format
@@ -2668,9 +2556,15 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
+"Finté\n"
+"\n"
+"   Vos ploz tchoezi chal les fintés eyet nombe di coleurs emey les tchuzes\n"
+"possibes po voste éndjolreye. Tchoezixhoz çou ki vs convént l' mî (vos\n"
+"pôroz candjî çoula pus tård, après l' astalaedje, si vos vloz). Èn egzimpe\n"
+"do tchoezi apontiaedje est håyné e l' waitroûle."
 
 #: ../../help.pm:1
 #, c-format
@@ -2681,6 +2575,11 @@ msgid ""
 "monitor connected to your machine. If it is not the case, you can choose in\n"
 "this list the monitor you actually own."
 msgstr ""
+"Waitroûle\n"
+"\n"
+"    L' astalaeu fwait normålmint li deteccion eyet apontiaedje otomatike\n"
+"del waitroûle raloyeye a voste éndjole. Si ça n' va nén tot seu, vos ploz\n"
+"tchoezi vosse waitroûle dins ene djivêye."
 
 #: ../../help.pm:1
 #, c-format
@@ -2714,7 +2613,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -2737,6 +2636,58 @@ msgid ""
 "\"No\" if your machine is to act as a server, or if you were not successful\n"
 "in getting the display configured."
 msgstr ""
+"X (po Sistinme di Purneas X) est l' miercour di l' eterface grafike di\n"
+"GNU/Linux, ki tos les evironmints grafikes (KDE, Gnome, AfterStep,\n"
+"WindowsMaker, evnd.) ki vnèt avou Mandrake Linux end ont mezåjhe.\n"
+"\n"
+"Vos åroz ene djivêye des diferins parametes a candjî po-z aveur\n"
+"voste eterface grafike a l' idêye:\n"
+"\n"
+"Cåte grafike\n"
+"\n"
+"   Li programe d' astalaedje fwait normålmint otomaticmint li deteccion\n"
+"eyet l' apontiaedje del cåte grafike k' i gn a dins voste éndjole.\n"
+"Si c' est nén l' cas, vos ploz tchozi e l' djivêye li cåte ki vos\n"
+"avoz po d' bon.\n"
+"\n"
+"S' i gn a des sierveus grafikes diferins po vosse cåte grafike, des cis\n"
+"k' i gn a avou del acceleråcion 3D, des ôtes sins, on vs propôzrè di\n"
+"tchoezi l' ci ki vs convént l' mî.\n"
+"\n"
+"\n"
+"\n"
+"Waitroûle\n"
+"\n"
+"    L' astalaeu fwait normålmint li deteccion eyet apontiaedje otomatike\n"
+"del waitroûle raloyeye a voste éndjole. Si ça n' va nén tot seu, vos ploz\n"
+"tchoezi vosse waitroûle dins ene djivêye.\n"
+"\n"
+"\n"
+"Finté\n"
+"\n"
+"   Vos ploz tchoezi chal les fintés eyet nombe di coleurs emey les tchuzes\n"
+"possibes po voste éndjolreye. Tchoezixhoz çou ki vs convént l' mî (vos\n"
+"pôroz candjî çoula pus tård, après l' astalaedje, si vos vloz). Èn egzimpe\n"
+"do tchoezi apontiaedje est håyné e l' waitroûle.\n"
+"\n"
+"\n"
+"Saye\n"
+"\n"
+"   Li sistinme sayrè d' enonder ene waitroûle grafike al finté dmandêye.\n"
+"Si vos ploz vey li messaedje håyné tins del saye, clitchîz so «Oyi», eyet\n"
+"DrakX pasrè a l' etape shuvante. Si vos n' savoz vey li messaedje, çoula\n"
+"vout dire k' ene sacwè n' a nén stî avou l' apontiaedje, eyet l' saye\n"
+"si va djoker après 12 segondes, vos ramoennant å menu. Vos î pôroz candjî\n"
+"les valixhances disk' a-z aveur ene eterface grafike ki rote comufåt.\n"
+"\n"
+"\n"
+"\n"
+"Tchuzes\n"
+"\n"
+"   Chal vos ploz tchoezi si vos vloz ou nén ki l' éndjole enonde\n"
+"otomaticmint l' eterface grafike a l' enondaedje. Bén seur, vos aloz\n"
+"dire «Neni» si voste éndjole va fé do sierveu, ou si vos n' avoz nén\n"
+"polou apontyî comufåt l' eterface grafike."
 
 #: ../../help.pm:1
 #, c-format
@@ -2751,9 +2702,19 @@ msgid ""
 "without 3D acceleration, you are then proposed to choose the server that\n"
 "best suits your needs."
 msgstr ""
+"Cåte grafike\n"
+"\n"
+"   Li programe d' astalaedje fwait normålmint otomaticmint li deteccion\n"
+"eyet l' apontiaedje del cåte grafike k' i gn a dins voste éndjole.\n"
+"Si c' est nén l' cas, vos ploz tchozi e l' djivêye li cåte ki vos\n"
+"avoz po d' bon.\n"
+"\n"
+"   S' i gn a des sierveus grafikes diferins po vosse cåte grafike, des cis\n"
+"k' i gn a avou del acceleråcion 3D, des ôtes sins, on vs propôzrè di\n"
+"tchoezi l' ci ki vs convént l' mî."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it to\n"
 "local time according to the time zone you selected. If the clock on your\n"
@@ -2786,7 +2747,7 @@ msgstr ""
 "copiutreces, par egzimpe les cenes d' ene rantoele locåle, si vos vloz."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This step is used to choose which services you wish to start at boot time.\n"
 "\n"
@@ -2812,13 +2773,17 @@ msgstr ""
 "Prindoz sogne delzès verifyî et disclitchîz les cis k' i gn end a pont\n"
 "tofer mezåjhe a l' enondaedje.\n"
 "\n"
-"Cwand vosse sori passe å dzeu d' on siervice, ene racsegne aparet po\n"
-"vos dire çu ki l' siervice fwait. Si vos n' estoz nén seur si on siervice\n"
+"Cwand vosse tchozixhoz on siervice, ene racsegne aparexhe po vs\n"
+"dire çou ki l' siervice fwait. Si vos n' estoz nén seur si on siervice\n"
 "est ahessåve por vos ou nén, vos estoz todi a houte tot l' leyant a si\n"
 "prémetowe valixhance.\n"
 "\n"
+"!!\n"
 "Loukîz a vosse sogne si voste éndjole serè eployeye come sierveu: c' est\n"
-"dandjureu mî di n' nén enonder les siervices ki vos n' avoz nén dandjî!"
+"dandjureu mî di n' nén enonder les siervices ki vos n' avoz nén dandjî!\n"
+"Rimimbrez vs ki des siervices k' i gn a polèt esse riskeus s' i sont\n"
+"metous so on sierveu. Tchoezixhoz djusse les siervices ki vos avoz dandjî.\n"
+"!!"
 
 #: ../../help.pm:1
 #, c-format
@@ -2835,7 +2800,7 @@ msgstr ""
 "di l' astalåcion."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You will now set up your Internet/network connection. If you wish to\n"
 "connect your computer to the Internet or to a local network, click \"Next\n"
@@ -2858,28 +2823,28 @@ msgid ""
 msgstr ""
 "Asteure vos ploz apontyî li raloyaedje åzès rantoeles. Si vos vloz raloyî\n"
 "li copiutrece da vosse al daegntoele oudonbén a ene rantoele locåle,\n"
-"tchoezixhoz li boune tchuze s' i vs plait. Verifyîz ki l' éndjin pol\n"
-"raloyaedje est en alaedje divant di clitchî sol tchuze po DrakX poleur\n"
-"detecter otomaticmint l' éndjolreye.\n"
-"Mandrake Linux vos propoze l' apontiaedje d' on raloyaedje al daegntoele\n"
-"tins di l' astalåcion. Les sôres di raloyaedjes k' i gn a sont: pa modem,\n"
-"cåte RDIS (ISDN), raloyaedje ADSL, modem cåbe, et po fini on simpe\n"
-"raloyaedje al rantoele locåle (avou ene cåte rantoele).\n"
+"clitchîz so «Shuvant» s' i vs plait. Mandrake Linux va sayî di detecter\n"
+"otomaticmint les eterfaces rantoele eyet les modems. Si cisse deteccion\n"
+"fwait berwete, disclitchîz li boesse «Eployî li deteccion otomatike».\n"
+"Vos ploz eto tchoezi di n' nén apontyî l' rantoele, ou del fé pus tård,\n"
+"dins ç' cas clitchîz so «Rinoncî» po passer a l' etape shuvante.\n"
+"\n"
+"Cwand vos apontyîz vosse rantoele, les sôres di raloyaedje k' i gn a\n"
+"sont: pa modem, cåte RDIS (ISDN), raloyaedje ADSL, modem cåbe, et po fini\n"
+"on simpe raloyaedje al rantoele locåle (avou ene cåte rantoele).\n"
 "\n"
 "Chal on n' denrè nén les detays po tchaeskene di ces tchuzes. Verifyîz\n"
 "seulmint ki vs avoz bén tos les parametes et racsegnmints di voste ahesseu\n"
-"al daegntoele, ou di vosse administrateu sistinme.\n"
+"al daegntoele, ou di vosse administrateu sistinme: adresses IP, prémetowe\n"
+"pasrele, sierveus DNS, evnd.\n"
 "\n"
 "Vos ploz loukî li tchaptrea do manuel so les raloyaedjes al daegntoele po\n"
 "pus di detays so l' apontiaedje, ou simplumint ratinde kel sistinme da\n"
 "vosse soeye astalé eyet eployî li programe k' î est discrit po-z\n"
-"apontyî vosse raloyaedje.\n"
-"\n"
-"Si vos vloz apontyî li rantoele pus tård, après l' astalåcion, ou si vos\n"
-"avoz fini d' apontyî vosse raloyaedje al rantoele, clitchîz so «Rinoncî»."
+"apontyî vosse raloyaedje."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you told the installer that you wanted to individually select packages,\n"
 "it will present a tree containing all packages classified by groups and\n"
@@ -2921,12 +2886,7 @@ msgstr ""
 "ou des sorgroupes etirs, ou des pacaedjes tot seus.\n"
 "\n"
 "Tchaeke côp ki vos tchoezixhoz on pacaedje dins l' åbe, si discrijhaedje\n"
-"est mostré sol droete. Cwand vosse relijha est fini, clitchîz sol boton\n"
-"«Astalaedje» k' enondrè adon li processus d' astalaedje. Sorlon li\n"
-"raddisté di voste éndjole, eyet li nombe di pacaedjes a-z astaler, çoula\n"
-"prindrè ene houbonde pol processus completer. Li tins estimé k' ça prindrè\n"
-"est mostré sol waitroûle, po vs aidî a vey s' i gn a l' tins por vos\n"
-"d' aler boere ene jate di cafè.\n"
+"est mostré sol droete ki vs dit a cwè i pout bén siervi.\n"
 "\n"
 "!! Si on pacaedje di sierveu a stî tchoezi, soeye-t i en esprès, ou k' i\n"
 "fwait pårteye d' on groupe, on vos dmandrè d' acertiner ki vos vloz\n"
@@ -2956,7 +2916,7 @@ msgstr ""
 "fé ene sifwaite plakete."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "It is now time to specify which programs you wish to install on your\n"
 "system. There are thousands of packages available for Mandrake Linux, and\n"
@@ -3011,25 +2971,24 @@ msgid ""
 msgstr ""
 "Asteure c' est l' moumint di specifyî kés programes ki vos vloz astaler\n"
 "so voste éndjole. I gn a des meyes et des meyes di pacaedjes pol Mandrake\n"
-"Linux, eyet vos n' estoz nén supozé les cnoxhe tos.\n"
-"\n"
-"Si vos fjhoz on astalaedje sitandård a pårti d' ene plake lazer, i vos srè\n"
-"dmandé d' aprume di dire les CDs ki vos avoz (e môde sipepieus seulmint).\n"
-"Loukîz les etiketes k' i gn a so les plakes lazer et noerixhoz les boesses\n"
-"ki corespondèt ås cis k' vos avoz. Clitchîz so «'l est bon» cwand vos estoz\n"
-"presse a continuwer.\n"
+"Linux, po rinde li tchoezixhaedje pus simpe il ont stî metous dins des\n"
+"groupes di programes sorlon les bouyes k' i permetèt d' fé.\n"
 "\n"
 "Les pacaedjes sont metous dins des groupes corespondant a des uzaedjes\n"
 "ki pôrént esse fwaits. Les groupes zels minmes sont metous dins cwate\n"
-"grandès seccions:\n"
+"grandès classes; tuzez a ces classes d' astalaedje come des boesses\n"
+"k' ont å dvins sacwants pacaedjes. Vos ploz prinde et maxhî des programes\n"
+"di sacwantès di ces boesses la, par egzimpe èn astalaedje «Posse "
+"éndjolrece»\n"
+"n' espaitche nén d' astaler des programes del sôre «Programaedje».\n"
 "\n"
 " * «Posse éndjolrece»: si vos tuzez a-z eployî voste éndjole come on posse\n"
 "éndjolrece (dj' ô bén: on uzaedje personel, å contråve d' on uzaedje\n"
-"come sierveu metans), adon tchoezixhoz onk ou pluzieurs des groupes\n"
-"corespondants.\n"
+"come sierveu metans), adon tchoezixhoz onk ou pluzieurs des programes\n"
+"di ç' groupe chal.\n"
 "\n"
 " * «Programaedje»: si l' éndjole va-z esse eployeye po programer,\n"
-"tchoezixhoz li/les groupe(s) ki vos vloz chal.\n"
+"tchoezixhoz les pacaedjes ki vos vloz chal.\n"
 "\n"
 " * «Sierveu»: al fén, si l' såme di l' éndjole c' est d' esse on sierveu,\n"
 "vos pôroz les kés siervices vos vloz voer astalés so l' éndjole.\n"
@@ -3039,7 +2998,7 @@ msgstr ""
 "on posse éndjolrece avou ene eterface grafike!\n"
 "\n"
 "Cwand vos alez avou l' sori å dzeu do no d' on groupe, ene racsegne srè\n"
-"håynêye avou on court discrijhaedje di çu a cwè i pout siervi.\n"
+"håynêye avou on court discrijhaedje di çou a cwè i pout siervi.\n"
 "Si vos n' tchoezixhoz nou groupe po l' astalaedje (et k' c' est nén on\n"
 "metaedje a djoû), on purnea vos dmandrè li sôre del astalåcion minimom ki\n"
 "vos vloz. Çoula pout esse:\n"
@@ -3055,9 +3014,9 @@ msgstr ""
 "l' éndjole s' enonde eyet aveur on sistinme Linux en alaedje; rén k' e\n"
 "roye di comande. Ciste astalåcion chal a mezåjhe di 65 Mo seulmint.\n"
 "\n"
-"Vos ploz clitchî sol tchuze «Tchoezi tchaeke pacaedje separemint». C' est\n"
-"ahessåve si vos cnoxhoz on pô les pacaedjes k' i gn a et çu ki vos vloz;\n"
-"oudonbén si vos vloz on contrôle totå so çu ki srè astalé ou nén.\n"
+"Vos ploz clitchî sol tchuze «Tchoezi tchaeke pacaedje sepårumint». C' est\n"
+"ahessåve si vos cnoxhoz on pô les pacaedjes k' i gn a et çki vos vloz;\n"
+"oudonbén si vos vloz on contrôle totå so çki srè astalé ou nén.\n"
 "\n"
 "Si vos cmincîz l' astalaedje e môde «Metaedje a djoû», vos ploz disclitchî\n"
 "tos les groupes po nén aveur des noveas pacaedjes d' astalés, seulmint les\n"
@@ -3065,7 +3024,7 @@ msgstr ""
 "reparer ou mete a djoû on sistinme k' est ddja sol deure plake."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The Mandrake Linux installation is distributed on several CD-ROMs. DrakX\n"
 "knows if a selected package is located on another CD-ROM so it will eject\n"
@@ -3074,10 +3033,10 @@ msgstr ""
 "L' astalaedje del distribucion Mandrake Linux a si télmint di pacaedjes\n"
 "k' il a bén falou les mete so sacwantes plakes lazer. DrakX sait si on\n"
 "pacaedje k' a stî tchoezi est so ene ôte plake lazer, et i drovrè\n"
-"l' lijheu di plakes lazer po vos l' candjî et mete li çu k' i fåt."
+"l' lijheu di plakes lazer po vos l' candjî et mete li çou k' i fåt."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Here are Listed the existing Linux partitions detected on your hard drive.\n"
 "You can keep the choices made by the wizard, since they are good for most\n"
@@ -3116,7 +3075,8 @@ msgstr ""
 "Ni prindoz nén ene trop ptite grandeu ôtrumint vos n' pôrîz astaler "
 "åjheymint\n"
 "des programes, fåte di plaece. Si vos vloz mete vos dnêyes so ene pårticion\n"
-"diferinne, vos dvroz ossu fé ene po «/home» (çu ki vos pôroz fé seulmint si\n"
+"diferinne, vos dvroz ossu fé ene po «/home» (çou ki vos pôroz fé seulmint "
+"si\n"
 "vos avoz pus d' ene pårticion del sôre Linux).\n"
 "\n"
 "Pol informåcion, tchaeke pårticion est mostrêye come çoula: «no», "
@@ -3140,12 +3100,11 @@ msgstr ""
 "\n"
 "   * «d» pol plake esclave sol deujhinme controleu IDE.\n"
 "\n"
-"\n"
 "Avou les plakes SCSI, «a» vout dire «prumire deure plake», «b» vout dire "
 "«deujhinme deure plake», evnd..."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "GNU/Linux is a multi-user system, meaning each user can have their own\n"
 "preferences, their own files and so on. You can read the ``Starter Guide''\n"
@@ -3187,7 +3146,7 @@ msgid ""
 msgstr ""
 "GNU/Linux est on sistinme multi-uzeus, dj' ô bén, tchaeke uzeu pout aveur\n"
 "on evironmint, des preferinces eyet des fitchîs da lu. Vos ploz lere li\n"
-"«Guide di l' Uzeu» po ndè savu pus long. Mins, å contråve di «root»,\n"
+"«Guide di l' Uzeu» po ndè saveur pus long. Mins, å contråve di «root»,\n"
 "k' est l' administrateu, les uzeus ki vos alez radjouter chal n' åront\n"
 "nén l' droet di candjî ene sacwè so l' éndjole apu k' les fitchîs eyet\n"
 "apontiaedjes da zels. Vos dvroz fé pol moens on uzeu normå po vos minme.\n"
@@ -3199,14 +3158,14 @@ msgstr ""
 "piede sacwants fitchîs et informåcions, mins nén li sistinme en etir.\n"
 "\n"
 "D' aprume, vos dvoz dner vosse no. C' est nén obligatwere, bén seur - et\n"
-"vos ploz bén î mete çu k' vos vloz. DrakX irè adon prinde li prumî mot ki\n"
+"vos ploz bén î mete çou k' vos vloz. DrakX irè adon prinde li prumî mot ki\n"
 "vos avoz tapé eyet l' passer el tchamp «No di l' uzeu». Ci no la c' est\n"
-"l' no ki l' éndjole vos cnoxhe; çu ki vos dvoz taper el purnea di bénvnowe\n"
-"po moussî el copiutrece. Vos l' poloz candjî. Vos ploz mete çu k' vos vloz\n"
-"mins di moens di ût letes; et rén ki des ptitès letes, sins accints ou des\n"
+"l' no ki l' éndjole vos cnoxhe; çou ki vos dvoz taper el purnea di bénvnowe\n"
+"po moussî el copiutrece. Vos l' poloz candjî. Vos ploz mete çou k' vos vloz\n"
+"mins di moens di ût letes; et rén ki des ptitès letes sins accints, des\n"
 "chifes, li loyeure («-») ou li sene sorlignî («_»).\n"
 "Après çoula, vos dvoz taper vosse sicret. Li scret d' on uzeu normå, sins\n"
-"priviledjes sipeciås n' est nén ossu impôrtant kel ci da «root», do pont\n"
+"advantaedjes sipeciås n' est nén ossu impôrtant kel ci da «root», do pont\n"
 "d' vuwe del såvrité, mins c' est tolminme nén ene råjhon po n' nén\n"
 "fé atincion ås screts des uzeus - c' est vos fitchîs ki sont-st e risse.\n"
 "\n"
@@ -3214,13 +3173,19 @@ msgstr ""
 "les informåcions ki vs avoz dné, et les tchamps sront vudîs po vos pleur\n"
 "e radjouter on ôte. Vos e ploz radjouter ostant ki vos vloz: onk po tchaeke\n"
 "di vos soçons, po vosse pére, vosse sour, par egzimpe. Cwand vos avoz fini\n"
-"d' endè radjouter, clitchîz so «Fini».\n"
+"d' endè radjouter, clitchîz so «Shuvant».\n"
 "\n"
 "Si vos clitchîz sol boton «Sipepieus» vos ploz candjî li shell eployî pa\n"
-"cist uzeu la (li prémetou shell est li «bash»)."
+"cist uzeu la (li prémetou shell est li «bash»).\n"
+"Cwand vos avoz fini di radjouter tos les uzeus, on vs dimandrè di tchoezi\n"
+"èn uzeu ki srè otomaticmint elodjî cwand l' copiutrece est enondêye.\n"
+"Si cisse fonccionålité la vos interesse (et ki l' såvrité n' est nén\n"
+"on problinme locålmint), tchoezixhoz l' uzeu eyet li manaedjeu di\n"
+"purneas ki vos vloz, et clitchîz so «Shuvant». Si vos n' voloz nén\n"
+"cisse fonccionålité, disclitchîz «Voloz vs eployî cisse fonccionålité chal?»."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Before continuing, you should carefully read the terms of the license. It\n"
 "covers the entire Mandrake Linux distribution. If you do agree with all the\n"
@@ -3228,10 +3193,9 @@ msgid ""
 "computer."
 msgstr ""
 "Divant d' aler pus avant, vos dvrîz lere atintivmint l' licince.\n"
-"Ele covere li distribucion Mandrake Linux, si vos n' estoz nén d' acoird\n"
-"avou les termes del licince, clitchîz sol boton «Nén accepter». Çoula\n"
-"aresteyrè pår l' astalaedje. Po continuwer avou l' astalaedje clitchîz\n"
-"sol boton «Accepter»."
+"Ele covere li distribucion Mandrake Linux, si vos estoz d' acoird\n"
+"avou les termes del licince, clitchîz sol boton «Accepter».\n"
+"Ôtrumint, distindoz tot simplumint li copiutrece."
 
 #: ../../install2.pm:1
 #, c-format
@@ -3258,7 +3222,7 @@ msgid ""
 "filesystems. Please check your hardware for the cause of this problem"
 msgstr ""
 "Ene sacwè n' a nén stî: dji n' a trové nou valåbe éndjin po fé des noveas "
-"sistinmes di fitchîs. Loukîz vos éndjolreyes po savu çu ki n' va nén"
+"sistinmes di fitchîs. Loukîz vos éndjolreyes po saveur çou ki n' va nén"
 
 #: ../../install_any.pm:1 ../../partition_table.pm:1
 #, c-format
@@ -3305,12 +3269,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Neni"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Oyi"
@@ -3373,7 +3339,7 @@ msgstr "Li Macrea di Pårtixhaedje di DrakX a trové les solucions shuvantes:"
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "I can't find any room for installing"
-msgstr "Dji n' a savu trover del plaece po l' astalåcion"
+msgstr "Dji n' a savou trover del plaece po l' astalåcion"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3422,6 +3388,13 @@ msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "I gn a pont di pårticions FAT po candjî leu grandeu  (oudonbén i n' resse "
 "nén del plaece assez)"
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3786,6 +3759,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "Intrant e l' étape '%s'\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Help"
+msgstr "Aidance"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "not configured"
+msgstr "nén apontyî"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Apontyî"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -3839,15 +3832,15 @@ msgid "%d packages"
 msgstr "%d pacaedjes"
 
 #: ../../install_steps_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "No details"
-msgstr "Po ndè savu d' pus"
+msgstr "Po vey les rclames"
 
 #: ../../install_steps_gtk.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Details"
-msgstr "Po ndè savu d' pus"
+msgstr "Po ndè saveur di pus"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -4000,15 +3993,7 @@ msgstr "Shuvant ->"
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Individual package selection"
-msgstr "Tchoezi tchaeke pacaedje separemint"
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "Aidance"
+msgstr "Tchoezi tchaeke pacaedje sepårumint"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -4245,12 +4230,13 @@ msgstr "Verifiaedje"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Ci scret chal est trop simpe (i doet esse d' å moens %d letes)"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "Nou scret"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "Sicret di root"
@@ -4284,9 +4270,9 @@ msgid "Bootloader"
 msgstr "Enondrece"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Boot"
-msgstr "Raecene"
+msgstr "Enondaedje"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4312,11 +4298,6 @@ msgstr "Såvrité"
 #, c-format
 msgid "Security Level"
 msgstr "Livea di såvrité"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "not configured"
-msgstr "nén apontyî"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -4421,6 +4402,16 @@ msgstr "Dins kéne coisse d' eureye vikez?"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Would you like to try again?"
+msgstr "Voloz vs rissayî?"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Unable to contact mirror %s"
+msgstr "Dji n' a savou m' raloyî å muroe %s"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Dj' atôche li miroe po-z avu l' djivêye des pacaedjes"
 
@@ -4504,6 +4495,11 @@ msgstr ""
 "Si seulmint sacwantès plakes ki vos n' avoz nén, adon vos poloz\n"
 "les distchoezi et clitchî so «'l est bon»."
 
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "Tos"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
@@ -4584,6 +4580,11 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "Dji cwir après les pacaedjes k' i gn a"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Dji cwir après les pacaedjes a mete a djoû"
 
@@ -4591,11 +4592,6 @@ msgstr "Dji cwir après les pacaedjes a mete a djoû"
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Dji cwir après les pacaedjes ki sont ddja astalés..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "Dji cwir après les pacaedjes k' i gn a"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4709,11 +4705,6 @@ msgstr "Tchoezixhoz li sôre di vosse sori."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Upgrade"
-msgstr "Metaedje a djoû"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
 msgid "Upgrade %s"
 msgstr "Metaedje a djoû di %s"
 
@@ -4737,15 +4728,19 @@ msgstr "Vochal li djivêye di totes les tapreces k' i gn a"
 msgid "Please choose your keyboard layout."
 msgstr "Tchoezixhoz li sôre di vosse taprece."
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Cwiter"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr "Acoird sol licince"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "default:LTR"
-msgstr "prémetou"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5302,6 +5297,11 @@ msgstr "Azerbaydjanesse (latene)"
 
 #: ../../keyboard.pm:1
 #, c-format
+msgid "Arabic"
+msgstr "Arabe"
+
+#: ../../keyboard.pm:1
+#, c-format
 msgid "Armenian (phonetic)"
 msgstr "Årmenyinne (fonetike)"
 
@@ -5436,9 +5436,9 @@ msgid "Tanzania"
 msgstr "Tanzaneye"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Taiwan"
-msgstr "Taylande"
+msgstr "Taiwan"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5598,7 +5598,7 @@ msgstr "Iyes Solomon"
 #: ../../lang.pm:1
 #, c-format
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "Arabeye Sawoudite"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5788,7 +5788,7 @@ msgstr "Male"
 #: ../../lang.pm:1
 #, c-format
 msgid "Montserrat"
-msgstr ""
+msgstr "Montserrat"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5893,7 +5893,7 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Lucia"
-msgstr ""
+msgstr "Sinte Luciye"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6460,6 +6460,11 @@ msgstr "Andorre"
 msgid "Afghanistan"
 msgstr "Afganistan"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "default:LTR"
+msgstr "defailt:LTR"
+
 #: ../../loopback.pm:1
 #, c-format
 msgid "Circular mounts %s\n"
@@ -6887,11 +6892,11 @@ msgstr ""
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 "Assinaedje di peur éndjins (raw devices) po les éndjins di sôre blok (come\n"
-"les pårticions des deures plakes), po des programas come Oracle s' endè "
-"siervi"
+"les pårticions des deurès plakes), po des programas come Oracle\n"
+"ou des lijheus d' plakes lazer DVD s' endè siervi"
 
 #: ../../services.pm:1
 #, c-format
@@ -7188,10 +7193,10 @@ msgstr ""
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
-"[--manual] [--device=éndjin] [--update-sane=ridant_discr_sane] [--update-"
+"[--manual] [--device=éndjin] [--update-sane=ridant_sourd_sane] [--update-"
 "usbtable] [--dynamic=éndjin]"
 
 #: ../../standalone.pm:1
@@ -7344,8 +7349,8 @@ msgstr "Moussî foû"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Install system updates"
-msgstr "Metaedjes a djoû do sistinme"
+msgid "Install updates"
+msgstr "Metaedjes a djoû"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7371,6 +7376,11 @@ msgstr "Apontyî li rantoele"
 #, c-format
 msgid "Add a user"
 msgstr "Radjouter èn uzeu"
+
+#: ../../steps.pm:1
+#, c-format
+msgid "Root password"
+msgstr "Sicret di root"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7419,13 +7429,21 @@ msgstr "Licince"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
-msgstr "Tchoezi vosse lingaedje"
+msgid "Language"
+msgstr "Lingaedje"
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
 msgstr "utopia 25"
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "'l est bon"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -7504,7 +7522,7 @@ msgstr "Eployî l' egztension «Xinerama»"
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "Configure all heads independently"
-msgstr "Apontyî totes les waitroûles separemint"
+msgstr "Apontyî totes les waitroûles sepårumint"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -7606,7 +7624,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Tchuzes"
@@ -7630,14 +7648,6 @@ msgstr "Waitroûle"
 #, c-format
 msgid "Graphic Card"
 msgstr "Cåte grafike"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Cwiter"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -7667,8 +7677,7 @@ msgstr ""
 "rafristaedje d' astampé (vertical refresh rate) eyet, co pus impôrtant,\n"
 "li frécwénce di rafristaedje di coûtchî (horizontal refresh rate).\n"
 "\n"
-"Ni tchoezixhoz MÅY ene frécwénce pus foite ki çu ki vosse waitroûle "
-"sopoite,\n"
+"Ni tchoezixhoz MÅY ene frécwénce pus foite ki çki vosse waitroûle sopoite,\n"
 "sins cwè vos pôrîz distrure vosse waitroûle."
 
 #: ../../Xconfig/monitor.pm:1
@@ -8307,44 +8316,6 @@ msgstr "Li tåvlea di pårtixhaedje del plake %s va esse scrite sol plake!"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"Vos avoz tchoezi ene pårticion RAID e cotuzreye pol pårticion raecene (/).\n"
-"Nole enondrece pout manaedjî çoula sins ene pårticion /boot.\n"
-"Adon pinsez a radjouter ene pårticion /boot"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"Li pårticion ki vos avoz tchoezi pol ridant raecene (/) est fizicmint\n"
-"hute do 1024e cilinde del deure plake, eyet vos n' avoz nole pårticion\n"
-"/boot. Si vos vs contez siervi do manaedjeu d' enondaedje lomé LILO, loukîz\n"
-"a vos: vos dvoz radjouter ene pårticion /boot."
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"Dji rgrete, mins dji n' pou nén fé /boot si lon sol plake (so on cilinde > "
-"1024).\n"
-"Soeye-t i vos eployîz LILO eyet ça n' rotrè nén, soeye-t i vos n' eployîz "
-"nén\n"
-"LILO et vos n' avoz nén dandjî di /boot"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
 msgid "The package %s is needed. Install it?"
 msgstr "I gn a mezåjhe do pacaedje «%s». El voloz astaler?"
 
@@ -8837,6 +8808,11 @@ msgid "SCSI controllers"
 msgstr "Controleus SCSI"
 
 #: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "Firewire controllers"
+msgstr "Controleus USB"
+
+#: ../../harddrake/data.pm:1
 #, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr "Controleus (E)IDE/ATA"
@@ -8974,7 +8950,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -9440,8 +9416,8 @@ msgstr "Si raloyî al rantoele daegnrece"
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
-msgstr "Sagem usb (eployant pppoe)"
+msgid "Sagem (using pppoa) usb"
+msgstr "Sagem usb (eployant pppoa)"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -9557,17 +9533,17 @@ msgstr "Sierveu waibe"
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Zeroconf host name must not contain a ."
-msgstr ""
-
-#: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid "Zeroconf Host name"
-msgstr "No do lodjoe Zero-apontiaedje"
+msgstr "Li no d' lodjoe po zeroconf doet aveur on pont (.)"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Host name"
 msgstr "No do lodjoe"
+
+#: ../../network/ethernet.pm:1 ../../network/network.pm:1
+#, c-format
+msgid "Zeroconf Host name"
+msgstr "No do lodjoe Zero-apontiaedje"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9577,19 +9553,10 @@ msgid ""
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
 msgstr ""
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-"Intrez chal li no IP di voste éndjole (host name) si vos l' cnoxhoz.\n"
-"Sacwants sierveus DHCP ont mezåjhe do no po-z ovrer.\n"
-"Li no doet esse etir, metans: «mybox.mylab.myco.com».\n"
-"Vos poloz dner eto l' adresse IP del pasrele s' i gn en a ene."
+"\n"
+"\n"
+"Dinez on no d' lodjoe po zeroconf sins pont si vos n' voloz\n"
+"nén eployî li prémetou no d' lodjoe."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -10251,6 +10218,11 @@ msgid "Start at boot"
 msgstr "En alaedje a l' enondaedje"
 
 #: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "Assign host name from DHCP address"
+msgstr "Vos dvoz dner on no d' lodjoe ou ene adresse IP.\n"
+
+#: ../../network/network.pm:1
 #, c-format
 msgid "Network Hotplugging"
 msgstr "Tchôcaedje a tchôd del rantoele"
@@ -10262,6 +10234,23 @@ msgstr ""
 "Aler vey l' idintifiant del cåte rantoele (ça pout siervi po les poirtåves)"
 
 #: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "DHCP host name"
+msgstr "No do lodjoe"
+
+#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "Netmask"
+msgstr "Maske rantoele"
+
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "IP address"
+msgstr "Adresse IP"
+
+#: ../../network/network.pm:1
 #, c-format
 msgid "(bootp/dhcp/zeroconf)"
 msgstr "(bootp/dhcp/zeroconf)"
@@ -10270,17 +10259,6 @@ msgstr "(bootp/dhcp/zeroconf)"
 #, c-format
 msgid "Automatic IP"
 msgstr "Adresses IP otomatikes"
-
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Netmask"
-msgstr "Maske rantoele"
-
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "IP address"
-msgstr "Adresse IP"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10465,7 +10443,7 @@ msgid ""
 msgstr ""
 "Ene sacwè di mwais arive a vosse deure plake. \n"
 "Åk n' a nén stî tot sayant di verifyî l' etegrité des dnêyes. \n"
-"Çoula vout dire ki tot çu ki vos alez scrire el plake va fini come \n"
+"Çoula vout dire ki tot çki vos alez scrire el plake va fini come \n"
 "des crombès sacwès a l' astcheyance."
 
 #: ../../printer/cups.pm:1 ../../printer/printerdrake.pm:1
@@ -10533,7 +10511,7 @@ msgstr "PDQ"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Eprimer sins caweye"
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr "Modele nén cnoxhou"
@@ -10542,6 +10520,11 @@ msgstr "Modele nén cnoxhou"
 #, c-format
 msgid "Unknown model"
 msgstr "Modele nén cnoxhou"
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid "%s (Port %s)"
+msgstr "%s (Pôrt %s)"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -10695,11 +10678,6 @@ msgstr "Printerdrake"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr "Voloz vs apontyî ene ôte sicrirece?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Dji oistêye li scrirece «%s»..."
 
@@ -10715,8 +10693,8 @@ msgstr "Oister ene sicrirece"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Know how to use this printer"
-msgstr "Saveur kimint rexhe so cisse sicrirece chal"
+msgid "Learn how to use this printer"
+msgstr "Aprinde kimint rexhe so cisse sicrirece chal"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10818,11 +10796,6 @@ msgstr "Sôre di raloyaedje del sicrirece"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Learn how to use this printer"
-msgstr "Aprinde kimint rexhe so cisse sicrirece chal"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Raw printer"
 msgstr "Eprimaedje direk"
 
@@ -10858,6 +10831,7 @@ msgid "Add a new printer"
 msgstr "Radjouter ene novele sicrirece"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Môde normå"
@@ -10883,6 +10857,11 @@ msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr ""
 "Rafrister li djivêye des scrireces (po-z aveur veyåves totes les scrireces "
 "CUPS å lon)"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Display all available remote CUPS printers"
+msgstr "Håyner totes les scrireces CUPS då lon k' i gn a"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10912,16 +10891,6 @@ msgstr ""
 #, c-format
 msgid "Printing system: "
 msgstr "Sistinme d' eprimaedje: "
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Would you like to configure printing?"
-msgstr "Voloz vs apontyî l' eprimaedje?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr "Dji prepare PrinterDrake..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10957,6 +10926,11 @@ msgstr "Ké sistinme d' eprimaedje (sôre di caweyaedje) voloz vs eployî?"
 #, c-format
 msgid "Select Printer Spooler"
 msgstr "Tchoezixhoz li caweye di scrirece"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Setting Default Printer..."
+msgstr "Definixhant li prémetowe sicrirece..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11675,7 +11649,7 @@ msgid ""
 "not work. Your connection type setting will be ignored by the driver."
 msgstr ""
 "Vos estoz po-z apontyî ene sicrirece OKI laser winprinter.\n"
-"Ces scrireces la eployèt on protocole di comunicåcion foirt sipeciål, çu ki "
+"Ces scrireces la eployèt on protocole di comunicåcion foirt sipeciål, çou ki "
 "fwait k' ele ni polèt roter comufåt ki raloyeyes å prumî pôrt paralele. "
 "Cwand li scrirece est raloyeye a on ôte pôrt ou raloyeye a on sierveu "
 "d' eprimaedje, i vos l' fåt mete sol prumî pôrt paralele divant d' poleur "
@@ -12520,6 +12494,39 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+"\n"
+"\n"
+"Printerdrake n' a nén savou vey li modele di vosse sicrirece %s. Tchoezixhoz "
+"l' modele corek e l' djivêye s' i vs plait."
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ")"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr " so "
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr "("
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Configuring printer ..."
+msgstr "Apontiant li scrirece..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Searching for new printers..."
 msgstr "Dji cwir après des nouvès scrireces..."
 
@@ -12644,6 +12651,67 @@ msgstr "Verifiant vosse sistinme..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Restarting CUPS..."
+msgstr "Dji renonde CUPS..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr ""
+"Ci sierveu chal est ddja el djivêye, i n' pout nén esse radjouté co ene "
+"feye.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr "Egzimpes d' adresses IP corekes:\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "L' adresse IP dnêye n' est nén coreke.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Server IP missing!"
+msgstr "Nole adresse IP pol sierveu!"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr ""
+"Dinez l' adresse IP eyet l' pôrt do lodjoe ki vos vloz eployî ses scrireces."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "Accès åzès scrireces sor on sierveu CUPS å lon"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Remove selected server"
+msgstr "Oister li tchoezi sierveu"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Edit selected server"
+msgstr "Candjî li tchoezi sierveu"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Add server"
+msgstr "Radjouter sierveu"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "IP address of host/network:"
 msgstr "Adresse IP do lo lodjoe/del rantoele:"
 
@@ -12656,38 +12724,13 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr "192.168.100.0/255.255.255.0\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr "192.168.100.0/24\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr "10.1.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr "10.0.0.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr "192.168.100.194\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr "Egzimpes d' adresses IP corekes:\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
 msgstr "L' adresse IP dnêye pol lodjoe/rantoele n' est nén coreke.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
+msgstr "I manke l' adresse IP do lodjoe/del rantoele."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12748,6 +12791,29 @@ msgstr ""
 #, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "Coridjaedje otomatike di l' apontiaedje di CUPS"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "None"
+msgstr "Nole"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Additional CUPS servers: "
+msgstr "Sierveus CUPS di rawete: "
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -12912,8 +12978,8 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -13371,7 +13437,7 @@ msgid ""
 "your personal information with Evolution and Kmail"
 msgstr ""
 "Mandrake Linux 9.1 vs dene li meyeuse dressêye di programes po-z aveur accès "
-"a tot çu k' i gn a sol daegntoele. Naivyîz so les pådjes waibe et vey les "
+"a tot çk' i gn a sol daegntoele. Naivyîz so les pådjes waibe et vey les "
 "animåcions avou Mozilla ou Konqueror, lejhoz vos emiles eyet manaedjîz les "
 "informåcions da vosse avou Evolution et Kmail, et co des ôtes"
 
@@ -13587,7 +13653,7 @@ msgstr "Divnoz on espert Mandrake so MandrakeExpert"
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
 "technical expert."
-msgstr ""
+msgstr "Tos les incidints sront shuvous pa èn espert cwålifyî di MandrakeSoft."
 
 #: ../../share/advertising/15-mdkexpert-corporate.pl:1
 #, c-format
@@ -13611,6 +13677,12 @@ msgid ""
 "competititve edge, if you want to support Mandrake Linux development, join "
 "MandrakeClub!"
 msgstr ""
+"Li Club di Mandrake eyet li Club Corporate di Mandrake fourît fwaits po ls "
+"eterprijhes eyet po les uzeus privés di Mandrake Linux ki volnut sopoirter "
+"directumint leu distribucion favorite, tot rçuvant des avantaedjes speciås. "
+"Si vos eployîz voltî nos prodûts, si vosse eterprijhe gråces a nos prodûts a "
+"ene meyeuse competitivité, si vos vloz sopoirter li diswalpaedje di Mandrake "
+"Linux, adon vnoz radjonde li Club di Mandrake!"
 
 #: ../../share/advertising/17-mdkclub.pl:1
 #, c-format
@@ -14463,6 +14535,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr ""
 
@@ -14709,16 +14786,6 @@ msgstr ""
 #, c-format
 msgid "Restore from Hard Disk."
 msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Secure Connection"
-msgstr "Raloyaedje di såvrité"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "FTP Connection"
-msgstr "Raloyaedje FTP"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15603,6 +15670,198 @@ msgstr "Cron nén co disponibe po les uzeus nén root"
 msgid "Installation of %s failed. The following error occured:"
 msgstr "Åk n' a nén stî e l' astalaedje di %s. Vochal l' aroke:"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "Neni, dji n' vou nén di l' elodjaedje otomatike"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "Oyi, dji vou l' elodjaedje otomatike po ci (uzeu, scribanne) chal"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "Enonder li sistinme X-Windows a l' enonda di l' éndjole"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "Môde do sistinme"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr "Waitroûle d' enondaedje"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr "Waitroûlêye di lilo"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+"\n"
+"Tchoezixhoz on tinme po lilo\n"
+"ey ene imådje pol waitroûle\n"
+"d' enondaedje, vos les ploz\n"
+"tchoezi sepårumint"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "Tinmes"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Tchoezixhaexdje del waitroûle d' enondaedje"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"Vos eployîz ddja %s come enondrece po tchoezi\n"
+"li do sistinme d' operance a enonder.\n"
+"Clitchîz so «Apontyî» po-z enonder li macrea d' apontiaedje."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr ""
+"L' astalaedje di lilo et des tinmes del waitroûle d' enondaedje a stî comufåt"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr "L' astalaedje do tinme a fwait berwete!"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr "Note"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr "Renonder «lilo»"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+"Dji n' sai renonder lilo!\n"
+"Enondez «lilo» come root e l' roye di comande po completer l' astalaedje do "
+"tinme di lilo."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr "Fé on initrd avou « mkinitrd -f /boot/initrd-%s.img %s »."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr "Dji n' sai enonder mkinitrd -f /boot/initrd-%s.img %s."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+"Dji n'| sai scrire /etc/sysconfig/bootsplash\n"
+"Li fitchî n' a nén stî trové."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "Sicrire %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr "Dji n' sai scrire /etc/sysconfig/bootsplash."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "Li messaedje di lilo n' a nén stî trové"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "Copyî %s viè %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr "Fé ene copeye di såvrité di %s viè %s.old"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "Askepyî on novea tinme"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"Håyner tinme\n"
+"dizo l' conzôle"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr "Astaler tinmes"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "Môde di lilo/grub"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "Môde di yaboot"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/Fitchî/Moussî _foû"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_Fitchî"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "Apontiaedje del sôre d' enondaedje"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -15740,6 +15999,16 @@ msgstr "Usteye di rapoirtaedje di bugs di Mandrake"
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "Parametes"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "Apontiaedje do raloyaedje al rantoele daegnrece"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "Cliyant DHCP"
 
@@ -15753,11 +16022,6 @@ msgstr "Cåte rantoele"
 msgid "Gateway"
 msgstr "Pasrele"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "Parametes"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -15767,11 +16031,6 @@ msgstr "Sôre di raloyaedje: "
 #, c-format
 msgid "Profile: "
 msgstr "Profil: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "Apontiaedje do raloyaedje al rantoele daegnrece"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -16047,8 +16306,8 @@ msgstr "Oister on module"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr "sins les modules raid"
+msgid "Add a module"
+msgstr "Radjouter on module"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16062,13 +16321,13 @@ msgstr "s' i fåt"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "foirci"
+msgid "omit raid modules"
+msgstr "sins les modules raid"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "Radjouter on module"
+msgid "force"
+msgstr "foirci"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16082,23 +16341,18 @@ msgstr "Po les spepieus"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "Djenerå"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "modêye do nawea"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "Aroke di DrakFloppy: %s"
+msgid "default"
+msgstr "prémetou"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "prémetou"
+msgid "General"
+msgstr "Djenerå"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16119,11 +16373,6 @@ msgstr "Grandeu"
 #, c-format
 msgid "Module name"
 msgstr "No do module"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16834,6 +17083,11 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "Path"
+msgstr "Tchimin"
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "group :"
 msgstr "groupe:"
 
@@ -16894,11 +17148,6 @@ msgstr "Prôpietés"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Path"
-msgstr "Tchimin"
-
-#: ../../standalone/drakperm:1
-#, c-format
 msgid "Permissions"
 msgstr "Permissions"
 
@@ -16911,22 +17160,6 @@ msgstr "Uzeu do moumint"
 #, c-format
 msgid "browse"
 msgstr "foyter"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr "tchoezixhoz li fitchî perm a håyner/candjî"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
-msgstr ""
-"Drakperm est eployî po vey les fitchîs a-z eployî po coridjî les "
-"permissions, prôpietaires, et groupes avou msec.\n"
-"Vos ploz eto fé vos prôpès rîles a-z eployî el plaece des prémetowès rîles."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16977,6 +17210,22 @@ msgstr "Monter li tchoezeye rîle d' on livea"
 #, c-format
 msgid "Up"
 msgstr "Monter"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr "tchoezixhoz li fitchî perm a håyner/candjî"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
+msgstr ""
+"Drakperm est eployî po vey les fitchîs a-z eployî po coridjî les "
+"permissions, prôpietaires, et groupes avou msec.\n"
+"Vos ploz eto fé vos prôpès rîles a-z eployî el plaece des prémetowès rîles."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17167,13 +17416,13 @@ msgstr "Abranles di såvrité:"
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid "(default value: %s)"
-msgstr "(prémetowe valixhance: %s)"
+msgid "Security Level:"
+msgstr "Livea di såvrité:"
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid "Security Level:"
-msgstr "Livea di såvrité:"
+msgid "(default value: %s)"
+msgstr "(prémetowe valixhance: %s)"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -17189,7 +17438,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -17198,8 +17447,27 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
+"Tipike:      Çouchal est l' livea di såvrité standård ricmandé po\n"
+"             ene copiutrece raloyeye al daegntoele come cliyint.\n"
+"\n"
+"Hôte:        Avou ci la i gn a ddja sacwantès restriccions, et pus di\n"
+"             verifiaedjes otomatikes enondés del nute.\n"
+"\n"
+"Co pus hôte: Li såvrité est hôte assez ki po-z eployî l' sistinme\n"
+"             come sierveu ki pout accepter des raloyaedjes di bråmint\n"
+"             d' cliyints. Si voste éndjole est seulmint cliyin sol\n"
+"             daegntoele, vos dvrîz tchoezi on livea pus bas.\n"
+"\n"
+"Couyon:      Çouchal ravize li lvea di dvant, mins li sistinme est\n"
+"             totafwaitmint seré eyet les fonccions di såvrité a leu "
+"macsimom.\n"
+"\n"
+"Manaedjeu pol såvrité:\n"
+"              Si les «abranles di såvrité» ont stî metous, i sront-st "
+"evoyîs\n"
+"              a l' uzeu dné chal (no d' uzeu ou adresse emile)"
 
 #: ../../standalone/draksound:1
 #, c-format
@@ -17559,26 +17827,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/Tchuzes"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect jazz drives"
-msgstr "/Oto-detecter les lijheus jazz"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect modems"
-msgstr "/Oto-detecter les modems"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect printers"
-msgstr "/Oto-detecter les scrireces"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr "prumî"
 
@@ -17594,6 +17842,16 @@ msgid ""
 msgstr ""
 "Clitchî so èn éndjin del djivêye di hintche po-z aveur ses informåcions di "
 "håyneyes chal."
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Unknown"
+msgstr "Nén cnoxhou"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "unknown"
+msgstr "nén cnoxhou"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17655,11 +17913,6 @@ msgstr "Å dfait di Harddrake"
 msgid "/_About..."
 msgstr "/Å _dfait..."
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/_Aidance"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -17698,15 +17951,20 @@ msgstr "Aidance di Harddrake"
 msgid "/_Fields description"
 msgstr "/Discrijhaedje des _tchamps"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/_Aidance"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/_Quit"
+msgstr "/Moussî _foû"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "/Oto-detecter les lijheus _jazz"
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_Tchuzes"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17718,10 +17976,10 @@ msgstr "/Oto-detecter les _modems"
 msgid "/Autodetect _printers"
 msgstr "/Oto-detecter les _scrireces"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
-msgid "/_Quit"
-msgstr "/Moussî _foû"
+msgid "/_Options"
+msgstr "/_Tchuzes"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17820,7 +18078,7 @@ msgstr "Livea"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr "Sôre di plaketes ki sont-st acceptêyes på mineu"
 
 #: ../../standalone/harddrake2:1
@@ -17982,6 +18240,18 @@ msgstr "Si ç' processeu chal a l' bug di coma des Cyrix 6x86 ou nén"
 #, c-format
 msgid "Coma bug"
 msgstr "Bug «coma»"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+"Capacités speciåles do mineu (possibilité di fé do broûleu di plakes lazer "
+"oudonbén sopoirt po les DVD)"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
+msgstr "Capacités do mineu"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18470,8 +18740,8 @@ msgstr "Corwaitaedje del rantoele"
 
 #: ../../standalone/printerdrake:1
 #, c-format
-msgid "Reading printer data ..."
-msgstr "Lijhant les dnêyes del sicrirece..."
+msgid "Reading data of installed printers..."
+msgstr "Lijhant les dnêyes des scrireces d' astalêyes..."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18593,53 +18863,6 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-"Vosse %s a stî apontieye.\n"
-"Vos ploz asteure sicaner des documints avou «XSane» a pårti di l' intrêye "
-"«Multimedia/Grafikes» do menu des programes."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-"Li %s doet esse apontieye pa printerdrake.\n"
-"Vos ploz enonder printerdrake a pårti do cinte di contrôle di Mandrake, el "
-"seccion «Éndjolreye»."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "tchoezixhoz on éndjin"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Please select the device where your %s is attached"
-msgstr "Tchoezixhoz l' éndjin ki vosse %s est raloyeye avou"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is unsupported"
-msgstr "Li %s n' est nén sopoirtêye"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr "Li %s n' est nén cnoxhou pa cisse modêye chal di scannerdrake."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr "Li %s n' est nén sopoirté pa cisse modêye chal di Mandrake Linux."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
 msgid "Re-generating list of configured scanners ..."
 msgstr "Dji rfwait l' djivêye des scanreces d' apontieyes..."
 
@@ -18701,8 +18924,90 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
-msgstr "Tchoezixhoz ene sicanrece"
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+"Vosse %s a stî apontieye.\n"
+"Vos ploz asteure sicaner des documints avou «XSane» a pårti di l' intrêye "
+"«Multimedia/Grafikes» do menu des programes."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "choose device"
+msgstr "tchoezixhoz on éndjin"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Please select the device where your %s is attached"
+msgstr "Tchoezixhoz l' éndjin ki vosse %s est raloyeye avou"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Searching for scanners ..."
+msgstr "Dji cwir après des scanreces..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Auto-detect available ports"
+msgstr "Oto-detecter les pôrts k' i gn a"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr "(Note: les pôrts paraleles èn polèt nén esse detectés otomaticmint)"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+"Li %s doet esse apontieye pa printerdrake.\n"
+"Vos ploz enonder printerdrake a pårti do cinte di contrôle di Mandrake, el "
+"seccion «Éndjolreye»."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is unsupported"
+msgstr "Li %s n' est nén sopoirtêye"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr "Li %s n' est nén cnoxhou pa cisse modêye chal di scannerdrake."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr "Li %s n' est nén sopoirté pa cisse modêye chal di Mandrake Linux."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Port: %s"
+msgstr "Pôrt: %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ", "
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Detected model: %s"
+msgstr "Modele detecté: %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr " ("
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Select a scanner model"
+msgstr "Tchoezixhoz ene sôre di scanrece"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18796,6 +19101,10 @@ msgid "Scientific Workstation"
 msgstr "Posse éndjolrece syintifike"
 
 #: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr "Programes syintifikes come gnuplot"
+
+#: ../../share/compssUsers:999
 msgid "Console Tools"
 msgstr "Usteyes pol conzôle"
 
@@ -18872,12 +19181,12 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache eyet Pro-ftpd"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "Sierveu, Emilaedje/Groupware/News"
+msgid "Mail"
+msgstr "Emilaedje"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr "Sierveu d' emilaedje postfix, sierveu di news INN"
+msgid "Postfix mail server"
+msgstr "Sierveu d' emilaedje postfix"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -18978,6 +19287,117 @@ msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programes po vos manaedjî vos çanses, come li gnucash"
 
 #~ msgid ""
+#~ "Please enter your host name if you know it.\n"
+#~ "Some DHCP servers require the hostname to work.\n"
+#~ "Your host name should be a fully-qualified host name,\n"
+#~ "such as ``mybox.mylab.myco.com''."
+#~ msgstr ""
+#~ "Intrez chal li no IP di voste éndjole (host name) si vos l' cnoxhoz.\n"
+#~ "Sacwants sierveus DHCP ont mezåjhe do no po-z ovrer.\n"
+#~ "Li no doet esse etir, metans: «mybox.mylab.myco.com».\n"
+#~ "Vos poloz dner eto l' adresse IP del pasrele s' i gn en a ene."
+
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "Aroke di DrakFloppy: %s"
+
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+
+#~ msgid "Launch Aurora at boot time"
+#~ msgstr "Enonder Aurora a l' enondaedje del éndjole"
+
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr "Corwaiteu stîle tradicionel e Gtk+"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "Corwaiteu stîle tradicionel"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "Corwaitoe novea stîle"
+
+#~ msgid "NewStyle Categorizing Monitor"
+#~ msgstr "Categorijhaedje novea stîle do corwaitoe"
+
+#~ msgid "Secure Connection"
+#~ msgstr "Raloyaedje di såvrité"
+
+#~ msgid "FTP Connection"
+#~ msgstr "Raloyaedje FTP"
+
+#~ msgid "Mail/Groupware/News"
+#~ msgstr "Sierveu, Emilaedje/Groupware/News"
+
+#~ msgid "Postfix mail server, Inn news server"
+#~ msgstr "Sierveu d' emilaedje postfix, sierveu di news INN"
+
+#~ msgid "/Options"
+#~ msgstr "/Tchuzes"
+
+#~ msgid "/Autodetect jazz drives"
+#~ msgstr "/Oto-detecter les lijheus jazz"
+
+#~ msgid "/Autodetect modems"
+#~ msgstr "/Oto-detecter les modems"
+
+#~ msgid "/Autodetect printers"
+#~ msgstr "/Oto-detecter les scrireces"
+
+#~ msgid ""
+#~ "The partition you've selected to add as root (/) is physically located "
+#~ "beyond\n"
+#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
+#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
+#~ "partition"
+#~ msgstr ""
+#~ "Li pårticion ki vos avoz tchoezi pol ridant raecene (/) est fizicmint\n"
+#~ "hute do 1024e cilinde del deure plake, eyet vos n' avoz nole pårticion\n"
+#~ "/boot. Si vos vs contez siervi do manaedjeu d' enondaedje lomé LILO, "
+#~ "loukîz\n"
+#~ "a vos: vos dvoz radjouter ene pårticion /boot."
+
+#~ msgid ""
+#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
+#~ "> 1024).\n"
+#~ "Either you use LILO and it won't work, or you don't use LILO and you "
+#~ "don't need /boot"
+#~ msgstr ""
+#~ "Dji rgrete, mins dji n' pou nén fé /boot si lon sol plake (so on cilinde "
+#~ "> 1024).\n"
+#~ "Soeye-t i vos eployîz LILO eyet ça n' rotrè nén, soeye-t i vos n' eployîz "
+#~ "nén\n"
+#~ "LILO et vos n' avoz nén dandjî di /boot"
+
+#~ msgid "Upgrade"
+#~ msgstr "Metaedje a djoû"
+
+#~ msgid "192.168.100.0/255.255.255.0\n"
+#~ msgstr "192.168.100.0/255.255.255.0\n"
+
+#~ msgid "192.168.100.0/24\n"
+#~ msgstr "192.168.100.0/24\n"
+
+#~ msgid "10.1.*\n"
+#~ msgstr "10.1.*\n"
+
+#~ msgid "10.0.0.*\n"
+#~ msgstr "10.0.0.*\n"
+
+#~ msgid "192.168.100.194\n"
+#~ msgstr "192.168.100.194\n"
+
+#~ msgid "Do you want to configure another printer?"
+#~ msgstr "Voloz vs apontyî ene ôte sicrirece?"
+
+#~ msgid "Know how to use this printer"
+#~ msgstr "Saveur kimint rexhe so cisse sicrirece chal"
+
+#~ msgid "Preparing Printerdrake..."
+#~ msgstr "Dji prepare PrinterDrake..."
+
+#~ msgid "Reading printer data ..."
+#~ msgstr "Lijhant les dnêyes del sicrirece..."
+
+#~ msgid ""
 #~ "You must indicate where you wish to place the information required to "
 #~ "boot\n"
 #~ "GNU/Linux.\n"
@@ -18990,7 +19410,7 @@ msgstr "Programes po vos manaedjî vos çanses, come li gnucash"
 #~ "l' informåcion ki GNU/Linux end a mezåjhe po s' enonder.\n"
 #~ "\n"
 #~ "Tchoezixhoz «Prumî secteu del plake (MBR)»... a pus ki vos\n"
-#~ "sårîz foirt bén çu ki vos fjhoz."
+#~ "sårîz foirt bén çki vos fjhoz."
 
 #~ msgid ""
 #~ "DrakX now needs to know if you want to perform a default (\"Recommended"
@@ -19067,11 +19487,11 @@ msgstr "Programes po vos manaedjî vos çanses, come li gnucash"
 #~ "\n"
 #~ " * Sipepieus: si vos estoz èn espert di GNU/Linux eyet ki vos voloz en "
 #~ "astalaedje tot etir a vosse môde, cisse tchuze chal est por vos! Vos "
-#~ "pôroz tchoezi li sôre d' astalaedje sorlon çu ki vos vloz fé avou voste "
+#~ "pôroz tchoezi li sôre d' astalaedje sorlon çki vos vloz fé avou voste "
 #~ "éndjole del minme manire k' avou «A vosse môde».\n"
 #~ "Çoula pout esse målåjhey di rsponde a des kesses k' i gn a si vos n' avoz "
 #~ "nén ene grande conoxhance di GNU/Linux. Adon ni tchoezixhoz cisse classe "
-#~ "d' astalaedje chal si vos n' savoz nén çu ki vos fjhoz."
+#~ "d' astalaedje chal si vos n' savoz nén çou ki vos fjhoz."
 
 #~ msgid "Please be patient. This operation can take several minutes."
 #~ msgstr ""

@@ -1,12 +1,13 @@
-# Support for Uzbek language in DrakeX.
+# Support for Uzbek language in DrakX.
 # Copyright (C) 2003 Free Software Foundation, Inc.
+# Copyright (C) 2003 MandrakeSoft.
 # Mashrab Kuvatov <kmashrab@uni-bremen.de>, 2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DrakX 0.1\n"
+"Project-Id-Version: drakxtools-newt 1.1.9\n"
 "POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-02-05 15:58+0500\n"
+"PO-Revision-Date: 2003-02-27 06:22+0000\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <uz-li@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -21,16 +22,18 @@ msgid ""
 "You can use userdrake to add a user to this group."
 msgstr ""
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Bekor qilish"
@@ -87,33 +90,32 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "More"
-msgstr "Ko'proq..."
+msgstr "Ko'proq"
 
 #: ../../any.pm:1
 #, c-format
 msgid "Here is the full list of available countries"
-msgstr ""
+msgstr "Mavjud bo'lgan davlatlarning to'liq ro'yxati"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your country."
-msgstr "Iltimos sichqonchani turini tanlang."
+msgstr "Davlatingizni tanlang."
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Country"
-msgstr "Ulash"
+msgstr "Davlat"
+
+#: ../../any.pm:1
+#, c-format
+msgid "All languages"
+msgstr "Hamma tillar"
 
 #: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
 msgstr ""
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "Hammasi"
 
 #: ../../any.pm:1
 #, c-format
@@ -136,7 +138,7 @@ msgstr ""
 #: ../../any.pm:1
 #, c-format
 msgid "Choose the default user:"
-msgstr ""
+msgstr "Andoza foydalanuvchini tanlang:"
 
 #: ../../any.pm:1
 #, fuzzy, c-format
@@ -151,7 +153,7 @@ msgstr ""
 #: ../../any.pm:1
 #, c-format
 msgid "Autologin"
-msgstr ""
+msgstr "Sistemaga avtomatik ravishda kirish"
 
 #: ../../any.pm:1
 #, c-format
@@ -166,7 +168,7 @@ msgstr "Shell"
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Password (again)"
-msgstr "Maxfiy so'z (yana bir marta)"
+msgstr "Maxfiy so'z (yana)"
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../network/modem.pm:1
@@ -205,6 +207,8 @@ msgid ""
 "Enter a user\n"
 "%s"
 msgstr ""
+"Foydalanuvchini kiriting\n"
+"%s"
 
 #: ../../any.pm:1
 #, c-format
@@ -212,14 +216,14 @@ msgid "Add user"
 msgstr "Foydalanuvchini qo'shish"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "This user name has already been added"
 msgstr "Foydalanuvchining ismi allaqachon qo'shilgan"
 
 #: ../../any.pm:1
 #, c-format
 msgid "The user name is too long"
-msgstr "Foydalanuvchining ismi judda uzun"
+msgstr "Foydalanuvchining ismi juda uzun"
 
 #: ../../any.pm:1
 #, c-format
@@ -237,23 +241,23 @@ msgstr "Iltimos foydalanuvchining ismini kiriting"
 #: ../../any.pm:1
 #, c-format
 msgid "This password is too simple"
-msgstr "Bu maxfiy so'z judda oddiy"
+msgstr "Bu maxfiy so'z juda oddiy"
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Please try again"
-msgstr "Iltimos yana bir marta urinib ko'ring."
+msgstr "Iltimos yana urinib ko'ring"
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "The passwords do not match"
-msgstr "Maxfiy so'zlar mos kelmaydi."
+msgstr "Maxfiy so'zlar mos kelmaydi"
 
 #: ../../any.pm:1
 #, c-format
 msgid "(already added %s)"
-msgstr ""
+msgstr "(allaqachon %s qo'shilgan)"
 
 #: ../../any.pm:1
 #, c-format
@@ -263,27 +267,27 @@ msgstr ""
 #: ../../any.pm:1
 #, c-format
 msgid "access to network tools"
-msgstr ""
+msgstr "tarmoq asboblardan foydalanishni ruxsat etish"
 
 #: ../../any.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid "access to administrative files"
-msgstr ""
+msgstr "boshqaruv fayllariga ruxsat"
 
 #: ../../any.pm:1
 #, c-format
 msgid "allow \"su\""
-msgstr ""
+msgstr "\"su\" buyrug'idan foydalanishga ruxsat etish"
 
 #: ../../any.pm:1
 #, c-format
 msgid "access to rpm tools"
-msgstr ""
+msgstr "RPM asboblardan foydalanishga ruxsat etish"
 
 #: ../../any.pm:1
 #, c-format
 msgid "access to X programs"
-msgstr ""
+msgstr "X dasturlaridan foydalanishga ruxsat etish"
 
 #: ../../any.pm:1
 #, c-format
@@ -325,7 +329,7 @@ msgstr ""
 #: ../../any.pm:1
 #, c-format
 msgid "You must specify a root partition"
-msgstr ""
+msgstr "Diskning tub qismini kiritishingiz shart"
 
 #: ../../any.pm:1
 #, c-format
@@ -340,7 +344,7 @@ msgstr ""
 #: ../../any.pm:1 ../../harddrake/v4l.pm:1
 #, c-format
 msgid "Default"
-msgstr "Andaza"
+msgstr "Andoza"
 
 #: ../../any.pm:1
 #, c-format
@@ -400,7 +404,7 @@ msgstr ""
 #: ../../any.pm:1
 #, c-format
 msgid "Default OS?"
-msgstr "Andaza OS?"
+msgstr "Andoza OS?"
 
 #: ../../any.pm:1
 #, c-format
@@ -485,6 +489,16 @@ msgstr ""
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr ""
+
+#: ../../any.pm:1
+#, c-format
+msgid "Enable ACPI"
+msgstr ""
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr ""
 
@@ -534,9 +548,14 @@ msgid "Skip"
 msgstr "O'tkazib yuborish"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "On Floppy"
 msgstr "Disketga saqlash"
+
+#: ../../any.pm:1
+#, c-format
+msgid "First sector of the root partition"
+msgstr "Tub qismining birinchi sektori"
 
 #: ../../any.pm:1
 #, c-format
@@ -695,7 +714,7 @@ msgstr "SILO"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #: ../../bootloader.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Welcome to %s the operating system chooser!\n"
 "\n"
@@ -706,233 +725,8 @@ msgstr ""
 "%s, operasion sistemani tanlash, dasturiga marhamat!\n"
 "\n"
 "Yuqoridagi ro'yxatdan operasion sistemani tanlang\n"
-"yoki andaza uchun %d soniya kutib turing.\n"
+"yoki andoza uchun %d soniya kutib turing.\n"
 "\n"
-
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "Ok"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "Ha, avtomatik ravishda sistemaga kirishni istayman"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "Yo'q, avtomatik ravishda sistemaga kirishni istamayman"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "Mavzular"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Splash selection"
-msgstr ""
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Moslash"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr "Mavzuni o'rnatish muvaffaqiyatsiz yakunlandi!"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr ""
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "Xato"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr "initrd yaratish 'mkinitrd -f /boot/initrd-%s.img %s'."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr "Buyruqni, mkinitrd -f /boot/initrd-%s.img %s, ishga tushirolmayapman."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-"Faylni (/etc/sysconfig/bootsplash) yozolmayapman.\n"
-"Fayl topilmadi."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "Faylni (%s) yozish"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr "Faylni (/etc/sysconfig/bootsplash) yozolmayapman."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "Lilo-ning xabari topilmadi"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "%s-dan %s-ga nusxa ko'chirish"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "Yangi mavzuni yaratish"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr "Mavzularni o'rnatish"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "An'anaviy Gtk+ monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "An'anaviy monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "Yangi uslubdagi monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr ""
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/Fayl/Chi_qish"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_Fayl"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr ""
 
 #: ../../common.pm:1
 #, c-format
@@ -1008,7 +802,7 @@ msgstr "Italiya"
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Netherlands"
-msgstr "Gollandiya"
+msgstr "Niderlandiya"
 
 #: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
@@ -1043,7 +837,7 @@ msgstr "Belgiya"
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "France"
-msgstr "Fratsiya"
+msgstr "Frantsiya"
 
 #: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
@@ -1089,7 +883,20 @@ msgstr ""
 
 #: ../../fsedit.pm:1
 #, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+
+#: ../../fsedit.pm:1
+#, c-format
 msgid "There is already a partition with mount point %s\n"
+msgstr ""
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid "Mount points should contain only alphanumerical characters"
 msgstr ""
 
 #: ../../fsedit.pm:1
@@ -1101,11 +908,15 @@ msgstr "Ulash nuqtalari \"/\" belgisi bilan boshlanishi shart"
 #, c-format
 msgid "You can't use ReiserFS for partitions smaller than 32MB"
 msgstr ""
+"Hajmi 32 Mb'dan kichik bo'lgan qismlar uchun ReiserFS fayl sistemasini "
+"ishlatolmaysiz"
 
 #: ../../fsedit.pm:1
 #, c-format
 msgid "You can't use JFS for partitions smaller than 16MB"
 msgstr ""
+"Hajmi 16 Mb'dan kichik bo'lgan qismlar uchun JFS fayl sistemasini "
+"ishlatolmaysiz"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1117,6 +928,15 @@ msgid ""
 "\n"
 "Do you agree to loose all the partitions?\n"
 msgstr ""
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "Xato"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1146,12 +966,12 @@ msgstr ""
 #: ../../fs.pm:1
 #, c-format
 msgid "mounting partition %s in directory %s failed"
-msgstr ""
+msgstr "Disk qismini (%s) direktoriyaga (%s) ulash muvaffaqiyatsiz tugadi"
 
 #: ../../fs.pm:1
 #, c-format
 msgid "Mounting partition %s"
-msgstr ""
+msgstr "Disk qismini (%s) ulayapman"
 
 #: ../../fs.pm:1
 #, c-format
@@ -1161,7 +981,7 @@ msgstr ""
 #: ../../fs.pm:1
 #, c-format
 msgid "Formatting partition %s"
-msgstr ""
+msgstr "Disk qismini (%s) format qilayapman"
 
 #: ../../fs.pm:1
 #, c-format
@@ -1216,8 +1036,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1230,7 +1050,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1420,7 +1240,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1524,7 +1344,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -1922,7 +1742,7 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1973,7 +1793,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 
@@ -2019,7 +1839,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -2370,12 +2190,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Yo'q"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Ha"
@@ -2412,12 +2234,12 @@ msgstr ""
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Bringing up the network"
-msgstr ""
+msgstr "Tarmoqni ishga tushirayapman"
 
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Partitioning failed: %s"
-msgstr ""
+msgstr "Diskni qismlarga bo'lish muvaffaqaiyatsiz tugadi: %s"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -2435,11 +2257,13 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, don't forget to save using `w'"
 msgstr ""
+"Endi siz diskni (%s) qismlarga bo'lishingiz mumkin.\n"
+"Tugatgach \"w\" bilan saqlash esingizdan chiqmasin"
 
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Use fdisk"
-msgstr ""
+msgstr "fdisk dasturidan foydalanish"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -2471,6 +2295,13 @@ msgstr ""
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "FAT resizing failed: %s"
@@ -2489,7 +2320,7 @@ msgstr "Hajmini o'zgartiraypman"
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "partition %s"
-msgstr ""
+msgstr "diskning %s qismi"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -2532,7 +2363,7 @@ msgstr ""
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Which partition do you want to resize?"
-msgstr ""
+msgstr "Diskning qaysi qismining hajmini o'zgartirmoqchisiz?"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -2547,12 +2378,12 @@ msgstr ""
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Swap partition size in MB: "
-msgstr ""
+msgstr "Diskning swap qismi Mb'da: "
 
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Root partition size in MB: "
-msgstr ""
+msgstr "Diskning tub qismi Mb'da: "
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -2562,7 +2393,7 @@ msgstr "Hajmni tanlang"
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr ""
+msgstr "Linux4Win uchun diskning qaysi qismini ishlatmoqchisiz?"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -2577,12 +2408,12 @@ msgstr ""
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Use existing partitions"
-msgstr ""
+msgstr "Diskda bor qismlarni ishlatish"
 
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Not enough free space to allocate new partitions"
-msgstr ""
+msgstr "Yangi qism yaratish uchun diskda etarli joy yo'q"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -2592,7 +2423,7 @@ msgstr "Bo'sh joydan foydalanish"
 #: ../../install_interactive.pm:1 ../../install_steps.pm:1
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr ""
+msgstr "Sizda /boot/efl'ga ulangan diskning FAT qismi bo'lishi shart"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -2601,6 +2432,9 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"Sizda diskning swap qismi yo'q.\n"
+"\n"
+"Bunga qaramasdan davom etaymi?"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -2609,6 +2443,9 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
+"Sizda diskning tub qismi bo'lishi shart.\n"
+"Bu uchun, diskda yangi qism yarating (yoki borini tanlang).\n"
+"Kegin, \"Ulash niqtasi\" amalini tanlang va uni \"/\"ga o'rnating"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -2639,7 +2476,7 @@ msgstr ""
 #: ../../install_messages.pm:1
 #, c-format
 msgid "http://www.mandrakelinux.com/en/91errata.php3"
-msgstr ""
+msgstr "http://www.mandrakelinux.com/en/91errata.php3"
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -2801,6 +2638,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr ""
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Help"
+msgstr "Yordam"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "not configured"
+msgstr "moslanmagan"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Moslash"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -2848,9 +2705,9 @@ msgid "%d packages"
 msgstr ""
 
 #: ../../install_steps_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "No details"
-msgstr "Tafsilotlar"
+msgstr "Tafsilotlarsiz"
 
 #: ../../install_steps_gtk.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1
@@ -2866,7 +2723,7 @@ msgstr "Iltimos kutib turing, o'rnatishga tayorlanaypman..."
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Time remaining "
-msgstr "Qolgan vaqt"
+msgstr "Qolgan vaqt "
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -3007,14 +2864,6 @@ msgstr "Keyingisi ->"
 msgid "Individual package selection"
 msgstr ""
 
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "Yordam"
-
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Package Group Selection"
@@ -3060,9 +2909,9 @@ msgid "Generate auto install floppy"
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Reboot"
-msgstr "Yaboot"
+msgstr "O'chirib-yoqish"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3169,7 +3018,7 @@ msgstr ""
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "NIS Server"
-msgstr "NIS server"
+msgstr "NIS serveri"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3189,7 +3038,7 @@ msgstr "NIS"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "LDAP Server"
-msgstr "LDAP server"
+msgstr "LDAP serveri"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3223,12 +3072,13 @@ msgid "This password is too short (it must be at least %d characters long)"
 msgstr ""
 "Bu maxfiy so'z judda qisqa (u eng kami %d belgidan iborat bo'lishi shart)"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "Maxfiy so'zsiz"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "root uchun maxfiy so'z"
@@ -3282,27 +3132,22 @@ msgstr ""
 #: ../../install_steps_interactive.pm:1 ../../steps.pm:1
 #, c-format
 msgid "Security"
-msgstr ""
+msgstr "Xavfsizlik"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Security Level"
 msgstr "Xavfsizlik darajasi"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "not configured"
-msgstr "Moslash"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Network"
-msgstr ""
+msgstr "Tarmoq"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network & Internet"
-msgstr "Internetga ulanish"
+msgstr "Tarmoq va Internet"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3312,7 +3157,7 @@ msgstr ""
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Hardware"
-msgstr ""
+msgstr "Asbob-uskunalar"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3379,7 +3224,7 @@ msgstr ""
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "NTP Server"
-msgstr "NTP Server"
+msgstr "NTP serveri"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3394,6 +3239,16 @@ msgstr ""
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Which is your timezone?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Would you like to try again?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Unable to contact mirror %s"
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
@@ -3464,6 +3319,11 @@ msgid ""
 "If you have none of those CDs, click Cancel.\n"
 "If only some CDs are missing, unselect them, then click Ok."
 msgstr ""
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "Hammasi"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3538,17 +3398,17 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr ""
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Looking at packages already installed..."
-msgstr ""
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
@@ -3576,7 +3436,7 @@ msgstr ""
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Choose the partitions you want to format"
-msgstr ""
+msgstr "Format qilish uchun diskining qismlarini tanlang"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3641,24 +3501,19 @@ msgid "Buttons emulation"
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/mousedrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose which serial port your mouse is connected to."
-msgstr "Iltimos sichqoncha ulangan portni tanlang."
+msgstr "Iltimos sichqoncha ulangan ketma-ket portini tanlang."
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/mousedrake:1
 #, c-format
 msgid "Mouse Port"
-msgstr "Sichqonchani porti"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "Please choose your type of mouse."
-msgstr "Iltimos sichqonchani turini tanlang."
+msgstr "Sichqonchaning porti"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Upgrade"
-msgstr "Yangilash"
+msgid "Please choose your type of mouse."
+msgstr "Iltimos sichqonchaning turini tanlang."
 
 #: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
@@ -3671,7 +3526,7 @@ msgid "Is this an install or an upgrade?"
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Install/Upgrade"
 msgstr "O'rnatish/Yangilash"
 
@@ -3685,20 +3540,24 @@ msgstr ""
 msgid "Please choose your keyboard layout."
 msgstr ""
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Chiqish"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr "Lisenziya kelishuvi"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "default:LTR"
-msgstr "Andaza"
-
-#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "An error occurred"
-msgstr ""
+msgstr "Xato ro'y berdi"
 
 #: ../../install_steps_newt.pm:1
 #, c-format
@@ -3719,7 +3578,7 @@ msgstr ""
 #: ../../install_steps.pm:1
 #, c-format
 msgid "Welcome to %s"
-msgstr ""
+msgstr "%s-ga marhamat"
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -3761,7 +3620,7 @@ msgstr "Ok"
 #: ../../interactive/newt.pm:1
 #, c-format
 msgid "Finish"
-msgstr "Tayyor bo'ldi"
+msgstr "Tayyor"
 
 #: ../../interactive.pm:1 ../../standalone/draksec:1
 #, c-format
@@ -3774,9 +3633,9 @@ msgid "Advanced"
 msgstr "Qo'shimcha"
 
 #: ../../interactive.pm:1 ../../interactive/gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove"
-msgstr "Yozuvni olib tashlash"
+msgstr "Olib tashlash"
 
 #: ../../interactive.pm:1 ../../interactive/gtk.pm:1
 #, c-format
@@ -3850,12 +3709,12 @@ msgstr "O'ng Alt tugmasi"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Yugoslavian (latin)"
-msgstr ""
+msgstr "Yugoslavcha (lotin)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Vietnamese \"numeric row\" QWERTY"
-msgstr ""
+msgstr "Vetnamcha \"raqamli qator\" QWERTY"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -3875,17 +3734,17 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukraincha"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Turkish (modern \"Q\" model)"
-msgstr ""
+msgstr "Turkcha (zamonaviy \"Q\" modeli)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Turkish (traditional \"F\" model)"
-msgstr ""
+msgstr "Turkcha (an'anaviy \"F\" modeli)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -3905,82 +3764,82 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Tamil (ISCII-layout)"
-msgstr ""
+msgstr "Tamilcha (ISCII)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Serbian (cyrillic)"
-msgstr ""
+msgstr "Serbcha (kirilcha)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Slovakian (QWERTY)"
-msgstr ""
+msgstr "Slovakcha (QWERTY)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Slovakian (QWERTZ)"
-msgstr ""
+msgstr "Slovakcha (QWERTZ)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Slovenian"
-msgstr ""
+msgstr "Slovencha"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Swedish"
-msgstr ""
+msgstr "Shvedcha"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Russian (Yawerty)"
-msgstr ""
+msgstr "Ruscha (Yawerty)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Russian"
-msgstr ""
+msgstr "Ruscha"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Romanian (qwerty)"
-msgstr ""
+msgstr "Rumincha (qwerty)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Romanian (qwertz)"
-msgstr ""
+msgstr "Rumincha (qwertz)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Canadian (Quebec)"
-msgstr ""
+msgstr "Kanadcha (Kvebek)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugalcha"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Polish (qwertz layout)"
-msgstr ""
+msgstr "Polyakcha (qwertz)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Polish (qwerty layout)"
-msgstr ""
+msgstr "Polyakcha (qwerty)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Norwegian"
-msgstr ""
+msgstr "Norvegcha"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Dutch"
-msgstr ""
+msgstr "Gollandcha"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -3995,7 +3854,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Mongolian (cyrillic)"
-msgstr ""
+msgstr "Mug'ulcha (kirilcha)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -4045,7 +3904,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latin American"
-msgstr ""
+msgstr "Lotin Amerikacha"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -4055,7 +3914,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Japanese 106 keys"
-msgstr ""
+msgstr "Yaponcha 106 tugma"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -4065,7 +3924,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Italian"
-msgstr ""
+msgstr "Italiyancha"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -4075,7 +3934,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Iranian"
-msgstr ""
+msgstr "Eroncha"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -4090,12 +3949,12 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Croatian"
-msgstr ""
+msgstr "Xorvatcha"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Hungarian"
-msgstr ""
+msgstr "Vengircha"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -4105,27 +3964,27 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Gujarati"
-msgstr ""
+msgstr "Gujarati"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Greek"
-msgstr ""
+msgstr "Grekcha"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Georgian (\"Latin\" layout)"
-msgstr ""
+msgstr "Gruzincha (lotin)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Georgian (\"Russian\" layout)"
-msgstr ""
+msgstr "Gruzincha (rus)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "French"
-msgstr ""
+msgstr "Frantsuzcha"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -4135,27 +3994,27 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Spanish"
-msgstr ""
+msgstr "Ispancha"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Estonian"
-msgstr ""
+msgstr "Estoncha"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Dvorak (Swedish)"
-msgstr ""
+msgstr "Dvorak (Shvedcha)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Dvorak (Norwegian)"
-msgstr ""
+msgstr "Dvorak (Norvegcha)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Dvorak (US)"
-msgstr ""
+msgstr "Dvorak (AQSH)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -4175,17 +4034,17 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "German"
-msgstr ""
+msgstr "Olmoncha"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Czech (QWERTY)"
-msgstr ""
+msgstr "Chexcha (QWERTY)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Czech (QWERTZ)"
-msgstr ""
+msgstr "Chexcha (QWERTZ)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -4200,7 +4059,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Belarusian"
-msgstr ""
+msgstr "Beloruscha"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -4210,22 +4069,22 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Brazilian (ABNT-2)"
-msgstr ""
+msgstr "Brazilcha (ABNT-2)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Bulgarian (BDS)"
-msgstr ""
+msgstr "Bolgarcha (BDS)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Bulgarian (phonetic)"
-msgstr ""
+msgstr "Bolgarcha (fonetik)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Bengali"
-msgstr ""
+msgstr "Bengalcha"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -4235,12 +4094,17 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Azerbaidjani (latin)"
-msgstr ""
+msgstr "Ozarbayjoncha (lotin)"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Arabic"
+msgstr "Arabcha"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Armenian (phonetic)"
-msgstr ""
+msgstr "Armancha (fonetik)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -4250,107 +4114,107 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Armenian (old)"
-msgstr ""
+msgstr "Armancha (eski)"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Albanian"
-msgstr ""
+msgstr "Albancha"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Polish"
-msgstr ""
+msgstr "Polyakcha"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Dvorak"
-msgstr ""
+msgstr "Dvorak"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Zimbabwe"
-msgstr ""
+msgstr "Zimbabve"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
-msgstr ""
+msgstr "Zambiya"
 
 #: ../../lang.pm:1 ../../standalone/drakxtv:1
 #, c-format
 msgid "South Africa"
-msgstr ""
+msgstr "Janubiy Afrika"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Serbia"
-msgstr "Ketma-ket"
+msgstr "Serbiya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Mayotte"
-msgstr ""
+msgstr "Mayot"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Yemen"
-msgstr ""
+msgstr "Yaman"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Samoa"
-msgstr ""
+msgstr "Samoa"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "Uollis va Futuna Orollari"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Vanuatu"
-msgstr ""
+msgstr "Vanuatu"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Vietnam"
-msgstr ""
+msgstr "Vietnam"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Virgin Islands (U.S.)"
-msgstr ""
+msgstr "Virginiya Orollari (AQSH)"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Virgin Islands (British)"
-msgstr ""
+msgstr "Virginiya Orollari (Angliya)"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Venezuela"
-msgstr ""
+msgstr "Venesuela"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "Sent-Vinsent va Grenadina"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Vatican"
-msgstr ""
+msgstr "Vatikan"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Uzbekistan"
-msgstr ""
+msgstr "O'zbekiston"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Uruguay"
-msgstr ""
+msgstr "Urugvay"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4358,79 +4222,79 @@ msgid "United States Minor Outlying Islands"
 msgstr ""
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Uganda"
-msgstr "Yangilash"
+msgstr "Uganda"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Ukraine"
-msgstr "Fratsiya"
+msgstr "Ukraina"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzaniya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Taiwan"
-msgstr ""
+msgstr "Tayvan"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Tuvalu"
-msgstr ""
+msgstr "Tuvalu"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "Trinidad va Tobago"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Turkey"
-msgstr ""
+msgstr "Turkiya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Tonga"
-msgstr ""
+msgstr "Tonga"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Tunisia"
-msgstr ""
+msgstr "Tunis"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Turkmaniston"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "East Timor"
-msgstr ""
+msgstr "Sharqiy Timur"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Tokelau"
-msgstr ""
+msgstr "Tokelau"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Tajikistan"
-msgstr ""
+msgstr "Tojikiston"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Thailand"
-msgstr ""
+msgstr "Tailand"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Togo"
-msgstr ""
+msgstr "Togo"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4440,492 +4304,492 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Chad"
-msgstr ""
+msgstr "Chad"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "Turks va Kaikos Orollari"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Swaziland"
-msgstr ""
+msgstr "Svazilend"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Syria"
-msgstr ""
+msgstr "Suriya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "El Salvador"
-msgstr ""
+msgstr "Salvador"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "San-Tome va Prinsipi"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Suriname"
-msgstr "Foydalanuvchi"
+msgstr "Surinam"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Somalia"
-msgstr ""
+msgstr "Somali"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Senegal"
-msgstr ""
+msgstr "Senegal"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "San Marino"
-msgstr ""
+msgstr "San-Marino"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Sierra Leone"
-msgstr ""
+msgstr "Serra-Leone"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Slovakia"
-msgstr ""
+msgstr "Slovakiya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Svalbard and Jan Mayen Islands"
-msgstr ""
+msgstr "Svalbard va Yan Mayen Orollari"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Slovenia"
-msgstr ""
+msgstr "Sloveniya"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Saint Helena"
-msgstr "Iltimos kutib turing"
+msgstr "Avliyo Elena Oroli"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Singapore"
-msgstr ""
+msgstr "Singapur"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sudan"
-msgstr "SunOS"
+msgstr "Sudan"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Seychelles"
-msgstr "Shell"
+msgstr "Seyshel Orollari"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Solomon Islands"
-msgstr ""
+msgstr "Solomon Orollari"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "Saudiya Arabistoni"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Rwanda"
-msgstr ""
+msgstr "Rvanda"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Russia"
-msgstr "Avstriya"
+msgstr "Rossiya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Romania"
-msgstr ""
+msgstr "Ruminiya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Reunion"
-msgstr ""
+msgstr "Reyunion"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Qatar"
-msgstr ""
+msgstr "Qatar"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Palau"
-msgstr ""
+msgstr "Palau"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Paraguay"
-msgstr ""
+msgstr "Paraguay"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Portugal"
-msgstr ""
+msgstr "Portugaliya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Palestine"
-msgstr ""
+msgstr "Falastin"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Puerto Rico"
-msgstr "Protokol"
+msgstr "Puerto Rico"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Pitcairn"
-msgstr ""
+msgstr "Pitkern"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "Sent-Per va Mikelon"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Poland"
-msgstr ""
+msgstr "Polsha"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Pakistan"
-msgstr ""
+msgstr "Pokiston"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Philippines"
-msgstr ""
+msgstr "Filippin"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "Papua Yangi Gvineya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "French Polynesia"
-msgstr ""
+msgstr "Frantsuz Polineziya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Peru"
-msgstr ""
+msgstr "Peru"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Panama"
-msgstr ""
+msgstr "Panama"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Oman"
-msgstr ""
+msgstr "Ummon"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "New Zealand"
-msgstr "Gollandiya"
+msgstr "Yangi Zelandiya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Niue"
-msgstr ""
+msgstr "Niue"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Nauru"
-msgstr ""
+msgstr "Nauru"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Nepal"
-msgstr ""
+msgstr "Nepal"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Nicaragua"
-msgstr ""
+msgstr "Nikaragua"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Nigeria"
-msgstr "Ketma-ket"
+msgstr "Nigeriya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Norfolk Island"
-msgstr ""
+msgstr "Norfolk Oroli"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Niger"
-msgstr "Judda yuqori"
+msgstr "Niger"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "New Caledonia"
-msgstr ""
+msgstr "Yangi Kaledoniya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Namibia"
-msgstr ""
+msgstr "Namibiya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Mozambique"
-msgstr ""
+msgstr "Mozambik"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Malaysia"
-msgstr ""
+msgstr "Malayziya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Mexico"
-msgstr ""
+msgstr "Meksika"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Malawi"
-msgstr ""
+msgstr "Malavi"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Maldives"
-msgstr ""
+msgstr "Maldiv Orollari"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mauritius"
-msgstr "Har xil"
+msgstr "Mavrikiy"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Malta"
-msgstr ""
+msgstr "Malta"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Montserrat"
-msgstr "Sichqonchani porti"
+msgstr "Montserrat"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Mauritania"
-msgstr ""
+msgstr "Mavritaniya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Martinique"
-msgstr ""
+msgstr "Martinika"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Shimoliy Mariana Orollari"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Mongolia"
-msgstr ""
+msgstr "Mug'iliston"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Myanmar"
-msgstr ""
+msgstr "Myanmar"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Mali"
-msgstr ""
+msgstr "Mali"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Macedonia"
-msgstr ""
+msgstr "Makedoniya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Marshall Islands"
-msgstr ""
+msgstr "Marshall Orollari"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Madagascar"
-msgstr ""
+msgstr "Madagaskar"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Moldova"
-msgstr ""
+msgstr "Moldova"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Monaco"
-msgstr "Monitor"
+msgstr "Monako"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Morocco"
-msgstr ""
+msgstr "Marokash"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Libya"
-msgstr ""
+msgstr "Libya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Latvia"
-msgstr ""
+msgstr "Latviya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Luxembourg"
-msgstr ""
+msgstr "Lyuksemburg"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Lithuania"
-msgstr ""
+msgstr "Litva"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Lesotho"
-msgstr ""
+msgstr "Lesoto"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Liberia"
-msgstr "Ketma-ket"
+msgstr "Liberiya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Shri Lanka"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Liechtenstein"
-msgstr ""
+msgstr "Lixtenshteyn"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Lucia"
-msgstr ""
+msgstr "Sent-Lyusiya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Lebanon"
-msgstr ""
+msgstr "Lebanon"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Laos"
-msgstr ""
+msgstr "Laos"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Kazakhstan"
-msgstr ""
+msgstr "Qozog'iston"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Kayman Orollari"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Kuwait"
-msgstr "Chiqish"
+msgstr "Kuvayt"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Korea"
-msgstr "Ko'proq..."
+msgstr "Koreya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Korea (North)"
-msgstr ""
+msgstr "Shimoliy Koreya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "Sent-Kristofer va Nevis"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Comoros"
-msgstr ""
+msgstr "Komoros"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Kiribati"
-msgstr ""
+msgstr "Kiribati"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Cambodia"
-msgstr ""
+msgstr "Kambodja"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "Qirg'iziston"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Kenya"
-msgstr ""
+msgstr "Keniya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Japan"
-msgstr ""
+msgstr "Yaponiya"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Jordan"
-msgstr "Fratsiya"
+msgstr "Iordan"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Jamaica"
-msgstr ""
+msgstr "Yamaiyka"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Iceland"
-msgstr ""
+msgstr "Islandiya"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Iran"
-msgstr "Fratsiya"
+msgstr "Eron"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Iraq"
-msgstr ""
+msgstr "Iroq"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4935,227 +4799,227 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "India"
-msgstr ""
+msgstr "Hindiston"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Israel"
-msgstr "Ketma-ket"
+msgstr "Isroil"
 
 #: ../../lang.pm:1 ../../standalone/drakxtv:1
 #, c-format
 msgid "Ireland"
-msgstr ""
+msgstr "Irlandiya"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Indonesia"
-msgstr "yo'q"
+msgstr "Indoneziya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Hungary"
-msgstr ""
+msgstr "Vengriya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Haiti"
-msgstr ""
+msgstr "Gaiti"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Croatia"
-msgstr "Yaratish"
+msgstr "Xorvatiya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Honduras"
-msgstr ""
+msgstr "Gonduras"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Heard and McDonald Islands"
-msgstr ""
+msgstr "Xerd va MakDonald Orollari"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Hong Kong"
-msgstr ""
+msgstr "Gonkong"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Guyana"
-msgstr ""
+msgstr "Gviana"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Gvineya-Bissu"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Guam"
-msgstr ""
+msgstr "Guam"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Guatemala"
-msgstr ""
+msgstr "Gvatemala"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "Janubiy Jorjiya va Janubiy Sendvich Orollari"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Ekvatorial Gvineya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Gvadelupa"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Guinea"
-msgstr ""
+msgstr "Gvineya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Gambia"
-msgstr ""
+msgstr "Gambiya"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Greenland"
-msgstr "Gollandiya"
+msgstr "Grenlandiya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Gibraltar"
-msgstr ""
+msgstr "Gibraltar"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Ghana"
-msgstr ""
+msgstr "Gana"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "French Guiana"
-msgstr ""
+msgstr "Frantsuz Gvineya"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Georgia"
-msgstr "Ketma-ket"
+msgstr "Gruziya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Grenada"
-msgstr ""
+msgstr "Grenada"
 
 #: ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "United Kingdom"
-msgstr ""
+msgstr "Buyuk Britaniya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Gabon"
-msgstr ""
+msgstr "Gabon"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Faroe Islands"
-msgstr ""
+msgstr "Farer Orollari"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Micronesia"
-msgstr ""
+msgstr "Mikroneziya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Falkland Islands (Malvinas)"
-msgstr ""
+msgstr "Folklend (Malvin) Orollari"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Fiji"
-msgstr "Tayyor bo'ldi"
+msgstr "Fiji"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Finland"
-msgstr ""
+msgstr "Finlyandiya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Ethiopia"
-msgstr ""
+msgstr "Efiopiya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Spain"
-msgstr ""
+msgstr "Ispaniya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Eritrea"
-msgstr ""
+msgstr "Eritriya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Western Sahara"
-msgstr ""
+msgstr "G'arbiy Saxara"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Egypt"
-msgstr "Bo'sh"
+msgstr "Misr"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Estonia"
-msgstr ""
+msgstr "Estoniya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Ecuador"
-msgstr ""
+msgstr "Ekvador"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Algeria"
-msgstr "Ketma-ket"
+msgstr "Jazoir"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Dominican Republic"
-msgstr "Chex Respublikasi"
+msgstr "Dominikana Respublikasi"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Dominica"
-msgstr ""
+msgstr "Dominika"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Denmark"
-msgstr ""
+msgstr "Daniya"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Djibouti"
-msgstr "Ulash"
+msgstr "Jibuti"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Cyprus"
-msgstr ""
+msgstr "Kipt"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5165,237 +5029,242 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Cape Verde"
-msgstr ""
+msgstr "Kabo Verde"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Cuba"
-msgstr ""
+msgstr "Kuba"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Colombia"
-msgstr ""
+msgstr "Kolumbiya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "China"
-msgstr ""
+msgstr "Xitoy"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Cameroon"
-msgstr ""
+msgstr "Kamerun"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Chile"
-msgstr ""
+msgstr "Chili"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Cook Islands"
-msgstr ""
+msgstr "Kuk Orollari"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "Kot d'Ivuar"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Switzerland"
-msgstr "Gollandiya"
+msgstr "Shveytsariya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Brazzaville)"
-msgstr ""
+msgstr "Kongo (Brazzaville)"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Central African Republic"
-msgstr "Chex Respublikasi"
+msgstr "Markaziy Afrika Respublikasi"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Kinshasa)"
-msgstr ""
+msgstr "Kongo (Kinshasa)"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "Kocos (Kiling) Orollari"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Canada"
-msgstr ""
+msgstr "Kanada"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Belize"
-msgstr "Xajmini o'zgartirish"
+msgstr "Beliz"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Belarus"
-msgstr ""
+msgstr "Belorus"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Botswana"
-msgstr ""
+msgstr "Botsvana"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bouvet Island"
-msgstr ""
+msgstr "Buve Oroli"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bhutan"
-msgstr ""
+msgstr "Butan"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bahamas"
-msgstr ""
+msgstr "Bagama Orollari"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Brazil"
-msgstr ""
+msgstr "Braziliya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bolivia"
-msgstr ""
+msgstr "Boliviya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "Bruney Dorussalom"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bermuda"
-msgstr ""
+msgstr "Bermuda Orollari"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Benin"
-msgstr ""
+msgstr "Benin"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Burundi"
-msgstr ""
+msgstr "Burundi"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bahrain"
-msgstr ""
+msgstr "Bahrayn"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bulgaria"
-msgstr ""
+msgstr "Bolgariya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Burkina-Fasso"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bangladesh"
-msgstr ""
+msgstr "Bangladesh"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Barbados"
-msgstr ""
+msgstr "Barbados"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Bosniya va Gertsogovina"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Azerbaijan"
-msgstr ""
+msgstr "Ozarbayjon"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Aruba"
-msgstr "Grub"
+msgstr "Aruba"
 
 #: ../../lang.pm:1 ../../standalone/drakxtv:1
 #, c-format
 msgid "Australia"
-msgstr ""
+msgstr "Avstraliya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "American Samoa"
-msgstr ""
+msgstr "Amerika Samoasi"
 
 #: ../../lang.pm:1 ../../standalone/drakxtv:1
 #, c-format
 msgid "Argentina"
-msgstr ""
+msgstr "Argentina"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Antarctica"
-msgstr ""
+msgstr "Antarktika"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Angola"
-msgstr ""
+msgstr "Angola"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Netherlands Antilles"
-msgstr "Gollandiya"
+msgstr "Niderlandiya Antil Orollari"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Armenia"
-msgstr ""
+msgstr "Armaniston"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Albania"
-msgstr ""
+msgstr "Albaniya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Anguilla"
-msgstr ""
+msgstr "Angvilla"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Antigua and Barbuda"
-msgstr ""
+msgstr "Antigua va Barbuda"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "United Arab Emirates"
-msgstr "Qo'shma Shtatlar"
+msgstr "Birlashgan Arab Amirliklari"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Andorra"
-msgstr "Ishlab chiqaruvchi"
+msgstr "Andorra"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Afghanistan"
-msgstr ""
+msgstr "Afg'oniston"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "default:LTR"
+msgstr "Andaza"
 
 #: ../../loopback.pm:1
 #, c-format
@@ -5511,12 +5380,12 @@ msgstr "Microsoft IntelliMouse"
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 3 Button Mouse"
-msgstr "Andaza 3 tugmali sichqon"
+msgstr "Andoza 3 tugmali sichqon"
 
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 2 Button Mouse"
-msgstr "Andaza 2 tugmali sichqon"
+msgstr "Andoza 2 tugmali sichqon"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -5561,7 +5430,7 @@ msgstr "Logitech MouseMan+"
 #: ../../mouse.pm:1 ../../security/level.pm:1
 #, c-format
 msgid "Standard"
-msgstr "Andaza"
+msgstr "Andoza"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -5601,7 +5470,7 @@ msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Error writing to file %s"
-msgstr ""
+msgstr "Faylga (%s) yozishda xato"
 
 #: ../../partition_table.pm:1
 #, c-format
@@ -5611,7 +5480,7 @@ msgstr ""
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Restoring from file %s failed: %s"
-msgstr ""
+msgstr "Fayldan (%s) qayta tiklash muvaffaqiyatsiz tugadi: %s"
 
 #: ../../partition_table.pm:1
 #, c-format
@@ -5629,12 +5498,12 @@ msgstr ""
 #: ../../partition_table.pm:1
 #, c-format
 msgid "mount failed: "
-msgstr ""
+msgstr "ulash muvaffaqiyatsiz tugadi: "
 
 #: ../../pkgs.pm:1
 #, c-format
 msgid "maybe"
-msgstr ""
+msgstr "balki"
 
 #: ../../pkgs.pm:1
 #, c-format
@@ -5649,12 +5518,12 @@ msgstr ""
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
-msgstr ""
+msgstr "muhim"
 
 #: ../../pkgs.pm:1
 #, c-format
 msgid "must have"
-msgstr ""
+msgstr "bo'lishi shart"
 
 #: ../../raid.pm:1
 #, c-format
@@ -5679,12 +5548,12 @@ msgstr ""
 #: ../../services.pm:1
 #, c-format
 msgid "Stop"
-msgstr ""
+msgstr "To'xtatish"
 
 #: ../../services.pm:1
 #, c-format
 msgid "Start"
-msgstr ""
+msgstr "Ishga tushirish"
 
 #: ../../services.pm:1
 #, c-format
@@ -5697,6 +5566,8 @@ msgid ""
 "No additional information\n"
 "about this service, sorry."
 msgstr ""
+"Uzr, bu xizmat haqida\n"
+"qo'shimcha ma'lumot yo'q."
 
 #: ../../services.pm:1
 #, c-format
@@ -5706,17 +5577,18 @@ msgstr ""
 #: ../../services.pm:1
 #, c-format
 msgid "stopped"
-msgstr ""
+msgstr "to'xtatilgan"
 
 #: ../../services.pm:1
 #, c-format
 msgid "running"
-msgstr ""
+msgstr "ishlayapti"
 
 #: ../../services.pm:1
 #, c-format
 msgid "Choose which services should be automatically started at boot time"
 msgstr ""
+"Kompyuter ishga tushganda ishga tushishi kerak bo'lgan xizmatlarni tanlang"
 
 #: ../../services.pm:1
 #, c-format
@@ -5726,7 +5598,7 @@ msgstr ""
 #: ../../services.pm:1
 #, c-format
 msgid "Remote Administration"
-msgstr ""
+msgstr "Uzoqdan turib boshqarish"
 
 #: ../../services.pm:1
 #, c-format
@@ -5736,12 +5608,12 @@ msgstr ""
 #: ../../services.pm:1
 #, c-format
 msgid "Internet"
-msgstr ""
+msgstr "Internet"
 
 #: ../../services.pm:1
 #, c-format
 msgid "Printing"
-msgstr ""
+msgstr "Bosib chiqish"
 
 #: ../../services.pm:1
 #, c-format
@@ -5798,7 +5670,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 
 #: ../../services.pm:1
@@ -5994,6 +5866,7 @@ msgstr ""
 #, c-format
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
 msgstr ""
+"ALSA (Advanced Linux Sound Architecture) tovush sistemasini ishga tushirish"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -6019,8 +5892,8 @@ msgstr ""
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
 
 #: ../../standalone.pm:1
@@ -6147,22 +6020,22 @@ msgstr ""
 #: ../../steps.pm:1
 #, c-format
 msgid "Exit install"
-msgstr ""
+msgstr "O'rnatishdan chiqish"
 
 #: ../../steps.pm:1
-#, c-format
-msgid "Install system updates"
-msgstr ""
+#, fuzzy, c-format
+msgid "Install updates"
+msgstr "Mavzularni o'rnatish"
 
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
-msgstr ""
+msgstr "Xizmatlarni moslash"
 
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure X"
-msgstr ""
+msgstr "X serverni moslash"
 
 #: ../../steps.pm:1
 #, c-format
@@ -6172,17 +6045,22 @@ msgstr ""
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure networking"
-msgstr ""
+msgstr "Tarmoqni moslash"
 
 #: ../../steps.pm:1
 #, c-format
 msgid "Add a user"
-msgstr ""
+msgstr "Foydalanuvchini qo'shish"
+
+#: ../../steps.pm:1
+#, c-format
+msgid "Root password"
+msgstr "Root-ning maxfiy so'zi"
 
 #: ../../steps.pm:1
 #, c-format
 msgid "Install system"
-msgstr ""
+msgstr "Sistemani o'rnatish"
 
 #: ../../steps.pm:1
 #, c-format
@@ -6192,12 +6070,12 @@ msgstr ""
 #: ../../steps.pm:1
 #, c-format
 msgid "Format partitions"
-msgstr ""
+msgstr "Diskning qismlarini format qilish"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Partitioning"
-msgstr "Ogohnoma"
+msgstr "Diskning qismlarga bo'lish"
 
 #: ../../steps.pm:1
 #, c-format
@@ -6207,7 +6085,7 @@ msgstr ""
 #: ../../steps.pm:1
 #, c-format
 msgid "Select installation class"
-msgstr ""
+msgstr "O'rnatish sinfini tanlang"
 
 #: ../../steps.pm:1
 #, c-format
@@ -6217,22 +6095,30 @@ msgstr ""
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure mouse"
-msgstr ""
+msgstr "Sichqonni moslash"
 
 #: ../../steps.pm:1
 #, c-format
 msgid "License"
-msgstr ""
+msgstr "Lisenziya"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
-msgstr ""
+msgid "Language"
+msgstr "Til"
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
-msgstr ""
+msgstr "utopia 25"
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "Ok"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -6242,7 +6128,7 @@ msgstr ""
 #: ../../ugtk.pm:1
 #, c-format
 msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-msgstr ""
+msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -6334,14 +6220,14 @@ msgid "Multi-head configuration"
 msgstr ""
 
 #: ../../Xconfig/card.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an X server"
-msgstr "X server"
+msgstr "X serverni tanlang"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "X server"
-msgstr "X serverni tanlash"
+msgstr "X server"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -6399,7 +6285,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr ""
@@ -6423,14 +6309,6 @@ msgstr "Monitor"
 #, c-format
 msgid "Graphic Card"
 msgstr "Grafik karta"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Chiqish"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -6495,22 +6373,22 @@ msgstr ""
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "4 billion colors (32 bits)"
-msgstr "4 milliard rang (32 bit)"
+msgstr "4 milliardta rang (32 bit)"
 
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "16 million colors (24 bits)"
-msgstr "16 million rang (24 bit)"
+msgstr "16 millionta rang (24 bit)"
 
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "65 thousand colors (16 bits)"
-msgstr "65 ming rang (16 bit)"
+msgstr "65 mingta rang (16 bit)"
 
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "32 thousand colors (15 bits)"
-msgstr "32 ming rang (15 bit)"
+msgstr "32 mingta rang (15 bit)"
 
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
@@ -6518,14 +6396,14 @@ msgid "256 colors (8 bits)"
 msgstr "256 rang (8 bit)"
 
 #: ../../Xconfig/test.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Is this the correct setting?"
 msgstr "Bu to'g'rimi?"
 
 #: ../../Xconfig/test.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Leaving in %d seconds"
-msgstr "%d soniya"
+msgstr "%d soniyadan kegin yopiladi"
 
 #: ../../Xconfig/test.pm:1
 #, c-format
@@ -6534,11 +6412,16 @@ msgid ""
 "%s\n"
 "Try to change some parameters"
 msgstr ""
+"Xato ro'y berdi:\n"
+"%s\n"
+"Ba'zi bir parametrlarni o'zgartirib sinab ko'ring"
 
 #: ../../Xconfig/test.pm:1
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr ""
+"Ogohnoma: bu grafik kartani sinab ko'rish kompyuterni qotib qolishiga olib "
+"kelishi mumkin"
 
 #: ../../Xconfig/test.pm:1
 #, c-format
@@ -6584,12 +6467,12 @@ msgstr ""
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "XFree86 driver: %s\n"
-msgstr "XFree86 drayver: %s\n"
+msgstr "XFree86 drayveri: %s\n"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "XFree86 server: %s\n"
-msgstr "XFree86 server: %s\n"
+msgstr "XFree86 serveri: %s\n"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -6614,12 +6497,12 @@ msgstr "Grafik karta: %s\n"
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Monitor VertRefresh: %s\n"
-msgstr ""
+msgstr "Monitorning VertRefresh: %s\n"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Monitor HorizSync: %s\n"
-msgstr ""
+msgstr "Monitorning HorizSync: %s\n"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -6659,12 +6542,12 @@ msgstr "Server: "
 #: ../../diskdrake/dav.pm:1
 #, c-format
 msgid "The URL must begin with http:// or https://"
-msgstr "URL http:// yoki https:// bilan boshlanishi shart"
+msgstr "URL \"http://\" yoki \"https://\" bilan boshlanishi shart"
 
 #: ../../diskdrake/dav.pm:1
 #, c-format
 msgid "Please enter the WebDAV server URL"
-msgstr "Iltimos WebDAV serverining URLni kiriting"
+msgstr "Iltimos WebDAV serverining URL-ini kiriting"
 
 #: ../../diskdrake/dav.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/removable.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
@@ -6687,7 +6570,7 @@ msgstr "Ulash"
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Unmount"
-msgstr "Ajratish"
+msgstr "Uzish"
 
 #: ../../diskdrake/dav.pm:1
 #, c-format
@@ -6706,7 +6589,7 @@ msgstr ""
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Use ``%s'' instead"
-msgstr ""
+msgstr "Buning o'rniga \"%s\"-ni ishlating"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/removable.pm:1 ../../standalone/harddrake2:1
@@ -6717,7 +6600,7 @@ msgstr "Turi"
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Use ``Unmount'' first"
-msgstr ""
+msgstr "Avvalo \"Unmount\"-ni ishlating"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -6742,7 +6625,7 @@ msgstr "Bo'sh"
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -6858,9 +6741,9 @@ msgid "on channel %d id %d\n"
 msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid "Partition table type: %s\n"
-msgstr ""
+msgstr "Diskning qismlar jadvalining turi: %s\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7002,17 +6885,17 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Removing %s"
-msgstr ""
+msgstr "%s-ni olib tashlayapman"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Copying %s"
-msgstr ""
+msgstr "%s-dan nusxa ko'chirayapman"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Moving files to the new partition"
-msgstr ""
+msgstr "Fayllarni diskning yangi qismiga ko'chirayapman"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7029,12 +6912,13 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Move files to the new partition"
-msgstr ""
+msgstr "Fayllarni diskning yangi qismiga ko'chirish"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
+"Diskning %s qismi format qilgandan kegin u erdagi hamma ma'lumot yo'qoladi"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7044,32 +6928,6 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
-msgstr ""
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
 msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
@@ -7095,12 +6953,12 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "level"
-msgstr "daraja"
+msgstr "Daraja"
 
 #: ../../diskdrake/interactive.pm:1 ../../standalone/drakfloppy:1
 #, c-format
 msgid "device"
-msgstr "uskuna"
+msgstr "Uskuna"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7150,7 +7008,7 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "This partition can't be used for loopback"
-msgstr ""
+msgstr "Diskning bu qismini loopback uchun ishlatib bo'lmaydi"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7175,7 +7033,7 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Moving partition..."
-msgstr ""
+msgstr "Diskning qismini ko'chirayapman..."
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7215,7 +7073,7 @@ msgstr "Yangi hajmni tanlang"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Resize"
-msgstr "Xajmini o'zgartirish"
+msgstr "Hajmini o'zgartirish"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7306,7 +7164,7 @@ msgstr "Boshlang'ich sektor: "
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Create a new partition"
-msgstr ""
+msgstr "Diskda yangi qism yaratish"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7478,12 +7336,12 @@ msgstr "Chiqish"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Choose a partition"
-msgstr ""
+msgstr "Diskning qismini tanlash"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Choose another partition"
-msgstr ""
+msgstr "Diskning boshqa qismini tanlash"
 
 #: ../../diskdrake/removable.pm:1
 #, c-format
@@ -7519,12 +7377,12 @@ msgstr ""
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Another one"
-msgstr ""
+msgstr "Boshqasi"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Which username"
-msgstr ""
+msgstr "Qaysi foydalanuvchi"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -7534,122 +7392,127 @@ msgstr ""
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "cpu # "
-msgstr ""
+msgstr "protsessor # "
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
-msgstr ""
+msgstr "SMBus kontrollerlar"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "USB controllers"
-msgstr ""
+msgstr "USB kontrollerlar"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SCSI controllers"
+msgstr "SCSI kontrolerlar"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Firewire controllers"
 msgstr ""
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "(E)IDE/ATA controllers"
-msgstr ""
+msgstr "(E)IDE/ATA kontrollerlar"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Joystick"
-msgstr ""
+msgstr "Joystik"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Scanner"
-msgstr ""
+msgstr "Skanner"
 
 #: ../../harddrake/data.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Unknown/Others"
-msgstr ""
+msgstr "Noma'lum/Boshqalar"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Bridges and system controllers"
-msgstr ""
+msgstr "Ko'priklar va sistemaning kontrollerlari"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Modem"
-msgstr "Ko'chirish"
+msgstr "Modem"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Ethernetcard"
-msgstr ""
+msgstr "Ethernet karta"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Processors"
-msgstr ""
+msgstr "Protsessorlar"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Webcam"
-msgstr ""
+msgstr "Web-kamera"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Soundcard"
 msgstr "Tovush karta"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Other MultiMedia devices"
-msgstr ""
+msgstr "Boshqa multimedia uskunalar"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Tvcard"
 msgstr "TV karta"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Videocard"
-msgstr "TV karta"
+msgstr "Video karta"
 
 #: ../../harddrake/data.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Tape"
-msgstr ""
+msgstr "Magnit tasma"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "DVD-ROM"
-msgstr ""
+msgstr "DVD-ROM"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "CD/DVD burners"
-msgstr ""
+msgstr "Yozadigan CD/DVD"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "CDROM"
-msgstr ""
+msgstr "CD-ROM"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Disk"
-msgstr ""
+msgstr "Disk"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Zip"
-msgstr ""
+msgstr "Zip"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Floppy"
-msgstr ""
+msgstr "Disket"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -7685,7 +7548,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -7755,7 +7618,7 @@ msgstr ""
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Trouble shooting"
-msgstr ""
+msgstr "Nosozliklarni topish va bartaraf qilish"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -7843,7 +7706,7 @@ msgstr ""
 #: ../../harddrake/v4l.pm:1
 #, c-format
 msgid "Card model:"
-msgstr ""
+msgstr "Kartaning modeli:"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -7872,17 +7735,17 @@ msgstr ""
 #: ../../harddrake/v4l.pm:1
 #, c-format
 msgid "Auto-detect"
-msgstr ""
+msgstr "Avtoaniqlash"
 
 #: ../../interactive/newt.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Do"
-msgstr "Tayyor"
+msgstr "Bajarish"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "Your choice? (default %s) "
-msgstr ""
+msgstr "Siz nimani tanlaysiz? (andoza: %s)"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -7892,7 +7755,7 @@ msgstr ""
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "Re-submit"
-msgstr ""
+msgstr "Boshqadan yuborish"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -7917,7 +7780,7 @@ msgstr ""
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "Your choice? (default `%s'%s) "
-msgstr ""
+msgstr "Siz nimani tanlaysiz? (andoza: \"%s\"%s) "
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -7932,12 +7795,12 @@ msgstr ""
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "Button `%s': %s"
-msgstr "Button \"%s\": %s"
+msgstr "Tugma \"%s\": %s"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "Your choice? (0/1, default `%s') "
-msgstr ""
+msgstr "Siz nimani tanlaysiz? (0/1, andoza: \"%s\")"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -8011,7 +7874,7 @@ msgstr "(modul %s)"
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "Installing driver for %s card %s"
-msgstr "%s kartasi (%s) uchun drayver o'rnatilmoqda"
+msgstr "%s kartasi (%s) uchun drayver o'rnataypman"
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -8087,7 +7950,7 @@ msgstr "Internetga ulanish"
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
+msgid "Sagem (using pppoa) usb"
 msgstr ""
 
 #: ../../network/adsl.pm:1
@@ -8113,7 +7976,7 @@ msgstr "PPPOE-dan foydalanish"
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Other ports"
-msgstr ""
+msgstr "Boshqa portlar"
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -8127,6 +7990,9 @@ msgid ""
 "The proper format is \"port/tcp\" or \"port/udp\", \n"
 "where port is between 1 and 65535."
 msgstr ""
+"Noto'g'ri port kiritilgan: %s\n"
+"Portning to'g'ri formati \"port/tcp\" yoki \"port/udp\",\n"
+"bu erda port 1-65535 oralig'idagi raqam."
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -8135,11 +8001,14 @@ msgid ""
 "Valid examples are: 139/tcp 139/udp.\n"
 "Have a look at /etc/services for information."
 msgstr ""
+"Har xil portlarni kiritishingiz mumkin.\n"
+"Masalan: 139/tcp 139/udp.\n"
+"Ma'lumot uchun /etc/services fayliga qarang."
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Which services would you like to allow the Internet to connect to?"
-msgstr ""
+msgstr "Internetdan qaysi xizmatlarga ulanishga ruxsat berasiz?"
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -8163,27 +8032,27 @@ msgstr ""
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "No network card"
-msgstr ""
+msgstr "Tarmoq kartasi yo'q"
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "POP and IMAP Server"
-msgstr ""
+msgstr "POP va IMAP serveri"
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Mail Server"
-msgstr ""
+msgstr "Xat-xabar serveri"
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Domain Name Server"
-msgstr "DNS server"
+msgstr "DNS serveri"
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Web Server"
-msgstr "Web server"
+msgstr "Web serveri"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -8192,12 +8061,12 @@ msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
-msgid "Zeroconf Host name"
-msgstr ""
+msgid "Host name"
+msgstr "Kompyuterning nomi"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
-msgid "Host name"
+msgid "Zeroconf Host name"
 msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
@@ -8209,24 +8078,15 @@ msgid ""
 "want to use the default host name."
 msgstr ""
 
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Configuring network"
-msgstr ""
+msgstr "Tarmoqni moslayapman"
 
 #: ../../network/ethernet.pm:1
 #, c-format
 msgid "no network card found"
-msgstr ""
+msgstr "tarmoq kartasi topilmadi"
 
 #: ../../network/ethernet.pm:1
 #, fuzzy, c-format
@@ -8253,11 +8113,13 @@ msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcp-client."
 msgstr ""
+"Qaysi DHCP klientidan foydalanmoqchisiz?\n"
+"Andoza - DHCP-klienti"
 
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "No ISDN PCI card found. Please select one on the next screen."
-msgstr ""
+msgstr "ISDN PCI karta topilmadi. Iltimos keyingi oynada birortani tanlang."
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -8265,6 +8127,8 @@ msgid ""
 "I have detected an ISDN PCI card, but I don't know its type. Please select a "
 "PCI card on the next screen."
 msgstr ""
+"Men ISDN PCI kartani topdim, ammo menga uning turi noma'lum. Iltimos keyingi "
+"oynada PCI kartani tanlang."
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -8274,17 +8138,17 @@ msgstr ""
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "ISDN Configuration"
-msgstr ""
+msgstr "ISDN-ni moslash"
 
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "Abort"
-msgstr ""
+msgstr "To'xtatish"
 
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "Continue"
-msgstr ""
+msgstr "Davom etish"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -8299,22 +8163,22 @@ msgstr ""
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "I don't know"
-msgstr ""
+msgstr "Men bilmayman"
 
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "PCI"
-msgstr ""
+msgstr "PCI"
 
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "ISA / PCMCIA"
-msgstr ""
+msgstr "ISA / PCMCIA"
 
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "What kind of card do you have?"
-msgstr ""
+msgstr "Sizda qanaqa karta bor?"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -8324,7 +8188,7 @@ msgstr ""
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "Which protocol do you want to use?"
-msgstr ""
+msgstr "Qaysi protokoldan foydalanmoqchisiz?"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -8358,12 +8222,12 @@ msgstr ""
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "External ISDN modem"
-msgstr ""
+msgstr "Tashqi ISDN modem"
 
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "Internal ISDN card"
-msgstr ""
+msgstr "Ichki ISDN karta"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -8373,7 +8237,7 @@ msgstr ""
 #: ../../network/isdn.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "Network Configuration Wizard"
-msgstr ""
+msgstr "Tarmoqni moslash yordamchisi"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -8430,12 +8294,12 @@ msgstr ""
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Second DNS Server (optional)"
-msgstr ""
+msgstr "Ikkinchi DNS serveri (tanlab bo'ladi)"
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "First DNS Server (optional)"
-msgstr ""
+msgstr "Birinchi DNS serveri (tanlab bo'ladi)"
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -8445,7 +8309,7 @@ msgstr ""
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "CHAP"
-msgstr ""
+msgstr "CHAP"
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -8460,17 +8324,17 @@ msgstr ""
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "PAP"
-msgstr ""
+msgstr "PAP"
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Login ID"
-msgstr ""
+msgstr "Foydalanuvchi"
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Phone number"
-msgstr ""
+msgstr "Telefon raqami"
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -8485,12 +8349,12 @@ msgstr ""
 #: ../../network/modem.pm:1
 #, c-format
 msgid "Please choose which serial port your modem is connected to."
-msgstr ""
+msgstr "Modem ulangan ketma-ket portni tanlang."
 
 #: ../../network/netconnect.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Network Configuration"
-msgstr ""
+msgstr "Tarmoqni moslash"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8506,6 +8370,9 @@ msgid ""
 "After this is done, we recommend that you restart your X environment to "
 "avoid any hostname-related problems."
 msgstr ""
+"Bu tugaganidan so'ng, kompyuterning nomi bilan bog'liq bo'lgan muammolarni "
+"oldini olish uchun X muhitingizni boshqadan ishga tushirishni biz tavsiya "
+"qilamiz."
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8514,6 +8381,9 @@ msgid ""
 "The configuration will now be applied to your system.\n"
 "\n"
 msgstr ""
+"Tabriklaymiz, tarmoqni va Internetni moslash tugadi.\n"
+"Hozir moslamalar sistemangizga qo'llaniladi.\n"
+"\n"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8522,26 +8392,31 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"Tarmoqni boshqadan ishga tushirishda quyidagi xato ro'y berdi.\n"
+"\n"
+"%s"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "The network needs to be restarted. Do you want to restart it ?"
 msgstr ""
+"Tarmoqni boshqadan ishga tushirish kerak. Uni boshqadan ishga tushirishni "
+"istaysizmi?"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Network configuration"
-msgstr ""
+msgstr "Tarmoqni moslash"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Do you want to start the connection at boot?"
-msgstr ""
+msgstr "Kompyuter ishga tushayotganida ulanishni istaysizmi?"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Internet connection"
-msgstr ""
+msgstr "Internetga ulanish"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8550,71 +8425,74 @@ msgid ""
 "Choose the one you want to use.\n"
 "\n"
 msgstr ""
+"Internetga ulanish uchun siz bir necha usullarni mosladingiz.\n"
+"Foydanish uchun bittasini tanlang.\n"
+"\n"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Choose the connection you want to configure"
-msgstr ""
+msgstr "Siz moslamoqchi bo'lgan ulanishni tanlang"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "ethernet card(s) detected"
-msgstr ""
+msgstr "ethernet karta(lar) topildi"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
-msgstr ""
+msgstr "LAN orqali ulanish"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "cable connection detected"
-msgstr ""
+msgstr "kabel orqali ulanish aniqlandi"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Cable connection"
-msgstr ""
+msgstr "Kabel orqali ulanish"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "detected"
-msgstr ""
+msgstr "topildi"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "ADSL connection"
-msgstr ""
+msgstr "ADSL orqali ulanish"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "detected %s"
-msgstr ""
+msgstr "%s topildi"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "ISDN connection"
-msgstr ""
+msgstr "ISDN orqali ulanish"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Winmodem connection"
-msgstr ""
+msgstr "Winmodem orqali ulanish"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "detected on port %s"
-msgstr ""
+msgstr "%s portida topildi"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
-msgstr ""
+msgstr "Modem orqali oddiy ulanish"
 
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Detecting devices..."
-msgstr ""
+msgstr "Uskunalarni aniqlayapman..."
 
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
 #: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
@@ -8625,7 +8503,7 @@ msgstr ""
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Use auto detection"
-msgstr ""
+msgstr "Avto-aniqlashdan foydalanish"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8649,6 +8527,10 @@ msgid ""
 "Click on Ok to keep your configuration, or cancel to reconfigure your "
 "Internet & Network connection.\n"
 msgstr ""
+"Tarmoqdan o'rnatayotganingiz uchun tarmoq allaqachon moslangan.\n"
+"Tarmoqni moslamalarini saqlab qolish uchun \"Ok\" tugmasini bosing, "
+"Internetga va tarmoqga ulanishni boshqadan moslash uchun \"Bekor qilish\" "
+"tugmasini bosing.\n"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8661,21 +8543,28 @@ msgid ""
 "\n"
 "Press OK to continue."
 msgstr ""
+"\n"
+"\n"
+"\n"
+"Endi biz %s ulanishni moslaymiz.\n"
+"\n"
+"\n"
+"Davom etish uchun \"Ok\" tugmasini bosing."
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "We are now going to configure the %s connection."
-msgstr ""
+msgstr "Endi biz %s ulanishni moslaymiz."
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Internet connection & configuration"
-msgstr ""
+msgstr "Internetga ulanish va moslash"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Configure the connection"
-msgstr ""
+msgstr "Ulanishni moslash"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8685,7 +8574,7 @@ msgstr ""
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Connect"
-msgstr ""
+msgstr "Ulanish"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8693,6 +8582,8 @@ msgid ""
 "\n"
 "You can reconfigure your connection."
 msgstr ""
+"\n"
+"Ulanishni boshqadan moslashingiz mumkin."
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8700,11 +8591,13 @@ msgid ""
 "\n"
 "You can connect to the Internet or reconfigure your connection."
 msgstr ""
+"\n"
+"Siz Internetga ulanishingiz yoki ulanishni boshqadan moslashingiz mumkin."
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "You are not currently connected to the Internet."
-msgstr "Internetga ulanish"
+msgstr "Siz hozir Internetga ulanmagansiz."
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8714,14 +8607,14 @@ msgid ""
 msgstr ""
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "You are currently connected to the Internet."
-msgstr "Internetga ulanish"
+msgstr "Siz hozir Internetga ulangansiz."
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "URL should begin with 'ftp:' or 'http:'"
-msgstr "URL http:// yoki https:// bilan boshlanishi shart"
+msgstr "URL \"ftp:\" yoki \"http:\" bilan boshlanishi shart"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -8731,12 +8624,12 @@ msgstr ""
 #: ../../network/network.pm:1
 #, c-format
 msgid "FTP proxy"
-msgstr ""
+msgstr "FTP proksi"
 
 #: ../../network/network.pm:1
 #, c-format
 msgid "HTTP proxy"
-msgstr ""
+msgstr "HTTP proksi"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -8751,7 +8644,7 @@ msgstr ""
 #: ../../network/network.pm:1
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
-msgstr ""
+msgstr "DNS serverning manzili quyidagi formatda bo'lishi shart: 1.2.3.4"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -8766,7 +8659,7 @@ msgstr ""
 #: ../../network/network.pm:1
 #, c-format
 msgid "DNS server"
-msgstr ""
+msgstr "DNS serveri"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -8794,11 +8687,16 @@ msgstr ""
 #: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
-msgstr ""
+msgstr "IP raqami quyidagi formatda bo'lishi shart: 1.2.3.4"
 
 #: ../../network/network.pm:1
 #, c-format
 msgid "Start at boot"
+msgstr ""
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Assign host name from DHCP address"
 msgstr ""
 
 #: ../../network/network.pm:1
@@ -8812,14 +8710,9 @@ msgid "Track network card id (useful for laptops)"
 msgstr ""
 
 #: ../../network/network.pm:1
-#, c-format
-msgid "(bootp/dhcp/zeroconf)"
-msgstr ""
-
-#: ../../network/network.pm:1
-#, c-format
-msgid "Automatic IP"
-msgstr ""
+#, fuzzy, c-format
+msgid "DHCP host name"
+msgstr "Kompyuterning nomi"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -8827,20 +8720,31 @@ msgstr ""
 msgid "Netmask"
 msgstr ""
 
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
 #, c-format
 msgid "IP address"
 msgstr "IP raqami"
 
 #: ../../network/network.pm:1
 #, c-format
+msgid "(bootp/dhcp/zeroconf)"
+msgstr "(bootp/dhcp/zeroconf)"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Automatic IP"
+msgstr "Avtomatik IP"
+
+#: ../../network/network.pm:1
+#, c-format
 msgid " (driver %s)"
-msgstr ""
+msgstr " (drayver %s)"
 
 #: ../../network/network.pm:1
 #, c-format
 msgid "Configuring network device %s"
-msgstr ""
+msgstr "Tarmoq uskunasini (%s) moslayapman"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -8874,12 +8778,12 @@ msgstr ""
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Password"
-msgstr ""
+msgstr "Maxfiy so'z"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Login (user name)"
-msgstr ""
+msgstr "Foydalanuvchi"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -8889,7 +8793,7 @@ msgstr ""
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Connection speed"
-msgstr ""
+msgstr "Aloqaning tezligi"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -8899,7 +8803,7 @@ msgstr ""
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Choose your country"
-msgstr ""
+msgstr "Davlatingizni tanlang"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -8924,32 +8828,32 @@ msgstr ""
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Your personal phone number"
-msgstr ""
+msgstr "Shaxsiy telefon raqamingiz"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO_1"
-msgstr ""
+msgstr "Kartaning IO_1-si"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO_0"
-msgstr ""
+msgstr "Kartaning IO_0-si"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO"
-msgstr ""
+msgstr "Kartaning IO-si"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card mem (DMA)"
-msgstr ""
+msgstr "Kartaning xotirasi (DMA)"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IRQ"
-msgstr ""
+msgstr "Kartaning IRQ-si"
 
 #: ../../network/tools.pm:1
 #, c-format
@@ -8959,7 +8863,7 @@ msgstr ""
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Connection Configuration"
-msgstr ""
+msgstr "Ulanishni moslash"
 
 #: ../../network/tools.pm:1
 #, c-format
@@ -8967,6 +8871,8 @@ msgid ""
 "The system doesn't seem to be connected to the Internet.\n"
 "Try to reconfigure your connection."
 msgstr ""
+"Sistema Internetga ulanmaganga o'xshaydi.\n"
+"Ulanishni boshqadan moslashga urinib ko'ring."
 
 #: ../../network/tools.pm:1
 #, c-format
@@ -8974,24 +8880,24 @@ msgid "For security reasons, it will be disconnected now."
 msgstr ""
 
 #: ../../network/tools.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The system is now connected to the Internet."
-msgstr "Internetga ulanish"
+msgstr "Sistema Internetga ulangan."
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Testing your connection..."
-msgstr ""
+msgstr "Aloqani sinab ko'rayapman..."
 
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Do you want to try to connect to the Internet now?"
-msgstr ""
+msgstr "Internetga ulanishga urinib ko'rishni istaysizmi?"
 
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Internet configuration"
-msgstr ""
+msgstr "Internetni moslash"
 
 #: ../../partition_table/raw.pm:1
 #, c-format
@@ -9005,87 +8911,92 @@ msgstr ""
 #: ../../printer/cups.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid " (Default)"
-msgstr ""
+msgstr " (Andoza)"
 
 #: ../../printer/cups.pm:1
 #, c-format
 msgid "On CUPS server \"%s\""
-msgstr ""
+msgstr "CUPS serverida \"%s\""
 
 #: ../../printer/cups.pm:1 ../../printer/main.pm:1
 #, c-format
 msgid "Remote Printers"
-msgstr ""
+msgstr "Uzoqdagi printerlar"
 
 #: ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
 msgid "CUPS"
-msgstr ""
+msgstr "CUPS"
 
 #: ../../printer/cups.pm:1
 #, c-format
 msgid "(on this machine)"
-msgstr ""
+msgstr "(shu kompyuterda)"
 
 #: ../../printer/cups.pm:1
 #, c-format
 msgid "(on %s)"
-msgstr ""
+msgstr "(%s-da)"
 
 #: ../../printer/data.pm:1
 #, c-format
 msgid "CUPS - Common Unix Printing System"
-msgstr ""
+msgstr "CUPS - Common Unix Printing System"
 
 #: ../../printer/data.pm:1
 #, c-format
 msgid "LPRng"
-msgstr ""
+msgstr "LPRng"
 
 #: ../../printer/data.pm:1
 #, c-format
 msgid "LPRng - LPR New Generation"
-msgstr ""
+msgstr "LPRng - LPR-ning yangi avlodi"
 
 #: ../../printer/data.pm:1
 #, c-format
 msgid "LPD"
-msgstr ""
+msgstr "LPD"
 
 #: ../../printer/data.pm:1
 #, c-format
 msgid "LPD - Line Printer Daemon"
-msgstr ""
+msgstr "LPD - Line Printer Daemon"
 
 #: ../../printer/data.pm:1
 #, c-format
 msgid "PDQ"
-msgstr ""
+msgstr "PDQ"
 
 #: ../../printer/data.pm:1
 #, c-format
 msgid "PDQ - Print, Don't Queue"
-msgstr ""
+msgstr "PDQ - Print, Don't Queue"
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
-msgstr ""
+msgstr "Noma'lum model"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown model"
-msgstr ""
+msgstr "Noma'lum model"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
+msgid "%s (Port %s)"
+msgstr "%s (Port %s)"
+
+#: ../../printer/main.pm:1
+#, c-format
 msgid "Host %s"
-msgstr "%s-dan %s-ga nusxa ko'chirish"
+msgstr "Kompyuterning nomi %s"
 
 #: ../../printer/main.pm:1
 #, c-format
 msgid "Network %s"
-msgstr ""
+msgstr "Tarmoq %s"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -9095,7 +9006,7 @@ msgstr ""
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Local network(s)"
-msgstr ""
+msgstr "Lokal tarmoq(lar)"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -9105,7 +9016,7 @@ msgstr ""
 #: ../../printer/main.pm:1
 #, c-format
 msgid ", using command %s"
-msgstr ""
+msgstr ", %s buyrug'i yordamida"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -9130,12 +9041,12 @@ msgstr ""
 #: ../../printer/main.pm:1
 #, c-format
 msgid ", printing to %s"
-msgstr ""
+msgstr ", %s yordamida bosib chiqarayapman"
 
 #: ../../printer/main.pm:1
 #, c-format
 msgid ", multi-function device"
-msgstr ""
+msgstr ", ko'p amalli uskuna"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -9145,32 +9056,32 @@ msgstr ""
 #: ../../printer/main.pm:1
 #, c-format
 msgid ", multi-function device on USB"
-msgstr ""
+msgstr ", ko'p amalli uskuna USB portida"
 
 #: ../../printer/main.pm:1
 #, c-format
 msgid ", multi-function device on parallel port \\#%s"
-msgstr ""
+msgstr ", ko'p amalli uskuna \\#%s parallel portida"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ", USB printer"
-msgstr "Printer yo'q"
+msgstr ", USB printer"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid ", USB printer \\#%s"
-msgstr ""
+msgstr ", USB printer \\#%s"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid " on parallel port \\#%s"
-msgstr ""
+msgstr " \\#%s parallel portida"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Local Printers"
-msgstr ""
+msgstr "Lokal printerlar"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -9180,82 +9091,77 @@ msgstr ""
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Enter a printer device URI"
-msgstr ""
+msgstr "Bosib chiqish uskunasining URI-ni kiriting"
 
 #: ../../printer/main.pm:1
 #, c-format
 msgid "Printer on NetWare server"
-msgstr ""
+msgstr "NetWare serveridagi printer"
 
 #: ../../printer/main.pm:1
 #, c-format
 msgid "Printer on SMB/Windows 95/98/NT server"
-msgstr ""
+msgstr "SMB/Windows 95/98/NT serveridagi printer"
 
 #: ../../printer/main.pm:1
 #, c-format
 msgid "Network printer (TCP/Socket)"
-msgstr ""
+msgstr "Tarmoqdagi printer (TCP/Socket)"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer on remote lpd server"
-msgstr ""
+msgstr "Uzoqdagi LPD serveridagi printer"
 
 #: ../../printer/main.pm:1
 #, c-format
 msgid "Printer on remote CUPS server"
-msgstr ""
+msgstr "Uzoqdagi CUPS serveridagi printer"
 
 #: ../../printer/main.pm:1
 #, c-format
 msgid "Remote printer"
-msgstr ""
+msgstr "Uzoqdagi printer"
 
 #: ../../printer/main.pm:1
 #, c-format
 msgid "Local printer"
-msgstr ""
+msgstr "Lokal printer"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Configuring applications..."
-msgstr ""
+msgstr "Dasturlarni moslayapman"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Printerdrake"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Do you want to configure another printer?"
-msgstr ""
+msgstr "Printerdrake"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Removing printer \"%s\"..."
-msgstr ""
+msgstr "Printerni (\"%s\") olib tashlayapman"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Do you really want to remove the printer \"%s\"?"
-msgstr ""
+msgstr "Rosdan printerni (\"%s\") olib tashlashni istaysizmi?"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove printer"
-msgstr ""
+msgstr "Printerni olib tashlash"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Know how to use this printer"
-msgstr ""
+msgid "Learn how to use this printer"
+msgstr "Printerdan foydalanishni o'rganish"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Print test pages"
-msgstr ""
+msgstr "Sinov betini bosib chiqish"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9304,17 +9210,17 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "The printer \"%s\" is set as the default printer now."
-msgstr ""
+msgstr "Printer (\"%s\") andoza deb belgilandi."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Default printer"
-msgstr ""
+msgstr "Andoza printer"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Set this printer as the default"
-msgstr ""
+msgstr "Bu printerni andoza deb belgilash"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9324,32 +9230,27 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer manufacturer, model"
-msgstr ""
+msgstr "Printerning ishlab chiqaruvchisi, modeli"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer manufacturer, model, driver"
-msgstr ""
+msgstr "Printerning ishlab chiqaruvchisi, modeli, drayveri"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Removing old printer \"%s\"..."
-msgstr ""
+msgstr "Eski printerni (\"%s\") olib tashlashlayapman"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer name, description, location"
-msgstr ""
+msgstr "Printerning nomi, ta'rifi, manzili"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer connection type"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Learn how to use this printer"
-msgstr ""
+msgstr "Printerning ulanish turi"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9359,14 +9260,14 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Do it!"
-msgstr ""
+msgstr "Bajarish!"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
 #: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Close"
-msgstr ""
+msgstr "Yopish"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9374,18 +9275,21 @@ msgid ""
 "Printer %s\n"
 "What do you want to modify on this printer?"
 msgstr ""
+"Printer %s\n"
+"Bu printerning nimasini o'zgartirishni istaysiz?"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Modify printer configuration"
-msgstr ""
+msgstr "Printerning moslamalarini o'zgartirish"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Add a new printer"
-msgstr ""
+msgstr "Yangi printerni qo'shish"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr ""
@@ -9393,7 +9297,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Change the printing system"
-msgstr ""
+msgstr "Bosib chiqish sistemasini o'zgartirish"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -9403,11 +9307,16 @@ msgstr "Printer"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "CUPS configuration"
-msgstr ""
+msgstr "CUPS-ni moslash"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Refresh printer list (to display all available remote CUPS printers)"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Display all available remote CUPS printers"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -9430,42 +9339,32 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printing system: "
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Would you like to configure printing?"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr ""
+msgstr "Bosib chiqish sistemasi: "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Checking installed software..."
-msgstr ""
+msgstr "O'rnatilgan dasturlarni tekshirayapman"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Installing Foomatic..."
-msgstr ""
+msgstr "Foomatic-ni o'rnatayapman"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Failed to configure printer \"%s\"!"
-msgstr ""
+msgstr "Printerni (\"%s\") moslash muvaffaqiyatsiz tugadi!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Configuring printer \"%s\"..."
-msgstr ""
+msgstr "Printerni (\"%s\") moslayapman"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Reading printer data..."
-msgstr ""
+msgstr "Printer ma'lumotini o'qiyapman..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9479,13 +9378,18 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Installing %s ..."
+msgid "Setting Default Printer..."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Installing %s ..."
+msgstr "\"%s\"-ni o'rnatayapman"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Removing %s ..."
-msgstr ""
+msgstr "\"%s\"-ni olib tashlayapman"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9534,7 +9438,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "high"
-msgstr ""
+msgstr "yuqori"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9592,7 +9496,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Starting network..."
-msgstr ""
+msgstr "Tarmoqni ishga tushirayapman..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9619,7 +9523,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "New printer name"
-msgstr ""
+msgstr "Printerning yangi nomi"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9734,7 +9638,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printing test page(s)..."
-msgstr ""
+msgstr "Sinov betn(lar)i bosib chiqayapman..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9854,7 +9758,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Did it work properly?"
-msgstr ""
+msgstr "To'g'ri bosib chiqildimi?"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9862,6 +9766,8 @@ msgid ""
 "Test page(s) have been sent to the printer.\n"
 "It may take some time before the printer starts.\n"
 msgstr ""
+"Sinov bet(lar) printerga yuborildi.\n"
+"Printer ishini boshlaguncha biroz vaqt o'tishi mumkin.\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9872,11 +9778,16 @@ msgid ""
 "%s\n"
 "\n"
 msgstr ""
+"Sinov bet(lar) printerga yuborildi.\n"
+"Printer ishini boshlaguncha biroz vaqt o'tishi mumkin.\n"
+"Bosib chiqishning holati:\n"
+"%s\n"
+"\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Do not print any test page"
-msgstr ""
+msgstr "Sinov betni boshib chiqmash"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9896,12 +9807,12 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Standard test page"
-msgstr ""
+msgstr "Andoza sinov beti"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Print"
-msgstr ""
+msgstr "Bosib chiqish"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9920,7 +9831,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Test pages"
-msgstr ""
+msgstr "Sinov betlari"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9928,6 +9839,8 @@ msgid ""
 "Do you want to set this printer (\"%s\")\n"
 "as the default printer?"
 msgstr ""
+"Bu printerni (\"%s\") andoza deb\n"
+"belgilashni istaysizmi?"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10052,7 +9965,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer model selection"
-msgstr ""
+msgstr "Printerning modelini tanlash"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10087,7 +10000,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Your printer model"
-msgstr ""
+msgstr "Printerning modeli"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10097,17 +10010,17 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Location"
-msgstr ""
+msgstr "Manzili"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Description"
-msgstr ""
+msgstr "Ta'rifi"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Name of printer"
-msgstr ""
+msgstr "Printerning nomi"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10189,7 +10102,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Detected model: %s %s"
-msgstr ""
+msgstr "Aniqlangan model: %s %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10199,7 +10112,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer Device URI"
-msgstr ""
+msgstr "Printer uskunasining URI-i"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10212,22 +10125,22 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer host name or IP"
-msgstr ""
+msgstr "Kompyuterning nomi yoki IP raqami"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "The port number should be an integer!"
-msgstr ""
+msgstr "Portning raqami butun son bo'lishi shart!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer host name or IP missing!"
-msgstr ""
+msgstr "Kompyuterning nomi yoki IP raqami aniqlanmagan!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10253,42 +10166,42 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Host \"%s\", port %s"
-msgstr ""
+msgstr "Kompyuter \"%s\", port %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ", host \"%s\", port %s"
-msgstr ""
+msgstr ", kompyuter \"%s\", port %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Scanning network..."
-msgstr ""
+msgstr "Tarmoqni qidirayapman..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer auto-detection"
-msgstr ""
+msgstr "Printerni avtoaniqlash"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "NCP queue name missing!"
-msgstr ""
+msgstr "NCP navbatning nomi aniqlanmagan!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "NCP server name missing!"
-msgstr ""
+msgstr "NCP serverning nomi aniqlanmagan!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Print Queue Name"
-msgstr ""
+msgstr "Bosib chiqarish navbatining nomi"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer Server"
-msgstr ""
+msgstr "Printer server"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10364,12 +10277,12 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Auto-detected"
-msgstr ""
+msgstr "Avtoaniqlandi"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Workgroup"
-msgstr ""
+msgstr "Ishchi guruh"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10410,32 +10323,32 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer \"%s\" on server \"%s\""
-msgstr ""
+msgstr "\"%s\" serverdagi \"%s\" printer"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ", printer \"%s\" on server \"%s\""
-msgstr ""
+msgstr ", \"%s\" serverdagi \"%s\" printer"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remote printer name missing!"
-msgstr ""
+msgstr "Uzoqdagi printerning nomi aniqlanmagan!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remote host name missing!"
-msgstr ""
+msgstr "Uzoqdagi kompyuterning nomi aniqlanmagan!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remote printer name"
-msgstr ""
+msgstr "Uzoqdagi printerning nomi"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remote host name"
-msgstr ""
+msgstr "Uzoqdagi kompyuterning nomi"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10457,7 +10370,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "You must choose/enter a printer/device!"
-msgstr ""
+msgstr "Printer yoki uskunani tanlashingiz yoki kiritishingiz shart!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10465,11 +10378,13 @@ msgid ""
 " (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., "
 "1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."
 msgstr ""
+" (Parallel portlar: /dev/lp0, /dev/lp1, ..., LPT1:, LPT2:, ... ga teng, 1-"
+"chi USB printer: /dev/usb/lp0, 2-chi USB printer: /dev/usb/lp1, ...)."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the port that your printer is connected to."
-msgstr "Iltimos sichqoncha ulangan portni tanlang."
+msgstr "Iltimos printeringiz ulangan portni tanlang."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10513,7 +10428,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "The following printer was auto-detected. "
-msgstr ""
+msgstr "Quyidagi printer avtomatik ravishda topildi. "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10545,17 +10460,17 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Available printers"
-msgstr ""
+msgstr "Mavjud bo'lgan printerlar"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "No printer found!"
-msgstr ""
+msgstr "Hech qanaqa printer topilmadi!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "You must enter a device or file name!"
-msgstr ""
+msgstr "Uskunaning yoki faylning nomini kiritishingiz shart!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10569,42 +10484,42 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Local Printer"
-msgstr ""
+msgstr "Lokal printer"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "USB printer \\#%s"
-msgstr "Printer yo'q"
+msgstr "USB printer \\#%s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer on parallel port \\#%s"
-msgstr ""
+msgstr "\\#%s parallel portidagi printer"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer \"%s\" on SMB/Windows server \"%s\""
-msgstr ""
+msgstr "\"%s\" SMB/Windows serveridagi \"%s\" printer"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Network printer \"%s\", port %s"
-msgstr ""
+msgstr "Tarmoqdagi printer \"%s\", port %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Detected %s"
-msgstr ""
+msgstr "%s aniqlandi"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ", printer \"%s\" on SMB/Windows server \"%s\""
-msgstr ""
+msgstr ", \"%s\" SMB/Windows serveridagi \"%s\" printer"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ", network printer \"%s\", port %s"
-msgstr ""
+msgstr ", tarmoqdagi printer \"%s\", port %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10629,12 +10544,12 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Auto-detect printers connected directly to the local network"
-msgstr ""
+msgstr "Lokal tarmoqqa ulangan printerlarni avtomatik ravishda aniqlash"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Auto-detect printers connected to this machine"
-msgstr ""
+msgstr "Bu kompyuterga ulangan printerlarni avtomatik ravishda aniqlash"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10712,8 +10627,37 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Searching for new printers..."
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ")"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr "("
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Configuring printer ..."
+msgstr "Printerni moslayapman..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Searching for new printers..."
+msgstr "Yangi printerlarni qidirayapman..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10721,11 +10665,13 @@ msgid ""
 "NOTE: Depending on the printer model and the printing system up to %d MB of "
 "additional software will be installed."
 msgstr ""
+"Printerning modeliga va bosib chiqarish sistemasiga bog'liq ravishda hajmi "
+"to %d Mb bo'lgan qo'shimcha dasturlar o'rnatiladi."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Are you sure that you want to set up printing on this machine?\n"
-msgstr ""
+msgstr "Bu kompyuterga bosib chiqarish imkoniyatini o'rnatishga aminmisiz?\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10748,12 +10694,13 @@ msgstr ""
 #, c-format
 msgid " (Make sure that all your printers are connected and turned on).\n"
 msgstr ""
+" (Hamma printerlar ulanganligiga va yoqilganligiga ishonch hosil qiling).\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
 "There are no printers found which are directly connected to your machine"
-msgstr ""
+msgstr "Sizning kompyuteringizga to'g'ridan-to'g'ri ulangan printer topilmadi"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10761,6 +10708,8 @@ msgid ""
 "\n"
 "There are %d unknown printers directly connected to your system"
 msgstr ""
+"\n"
+"%d noma'lum printer sistemangizga to'g'ridan-to'g'ri ulangan."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10768,6 +10717,8 @@ msgid ""
 "\n"
 "There is one unknown printer directly connected to your system"
 msgstr ""
+"\n"
+"Bitta noma'lum printer sistemangizga to'g'ridan-to'g'ri ulangan."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10777,6 +10728,10 @@ msgid ""
 "%s%s\n"
 "is directly connected to your system"
 msgstr ""
+"Quyidagi printer\n"
+"\n"
+"%s%s\n"
+"sistemangizga to'g'ridan-to'g'ri ulangan."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10786,6 +10741,10 @@ msgid ""
 "%s%s\n"
 "are directly connected to your system"
 msgstr ""
+"Quyidagi printerlar\n"
+"\n"
+"%s%s\n"
+"sistemangizga to'g'ridan-to'g'ri ulangan."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10795,20 +10754,82 @@ msgid ""
 "%s%s\n"
 "are directly connected to your system"
 msgstr ""
+"Quyidagi printerlar\n"
+"\n"
+"%s%s\n"
+"sistemangizga to'g'ridan-to'g'ri ulangan."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "and %d unknown printers"
-msgstr ""
+msgstr "va %d noma'lum printer"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "and one unknown printer"
-msgstr ""
+msgstr "va bitta noma'lum printer"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Checking your system..."
+msgstr "Sistemangizni tekshirayapman..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Restarting CUPS..."
+msgstr "CUPS-ni boshqadan ishga tushiraypman..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "The entered IP is not correct.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Server IP missing!"
+msgstr "Serverning IP raqami aniqlanmagan!"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Remove selected server"
+msgstr "Tanlanga serverni olib tashlash"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Edit selected server"
+msgstr "Tanlangan serverni tuzatish"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Add server"
+msgstr "Serverni qo'shish"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -10823,37 +10844,12 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -10912,6 +10908,29 @@ msgstr ""
 msgid "Automatic correction of CUPS configuration"
 msgstr ""
 
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "None"
+msgstr "Tayyor"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Additional CUPS servers: "
+msgstr "Qo'shimcha CUPS serverlar: "
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "No remote machines"
@@ -10960,6 +10979,7 @@ msgstr "O'rnatishdan kegin moslash"
 #, c-format
 msgid "Printer auto-detection (Local, TCP/Socket, and SMB printers)"
 msgstr ""
+"Printerni avtomatik ravishda aniqlash (lokal, TCP/Socket va SMB printerlar)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10968,16 +10988,19 @@ msgid ""
 "Printers on remote CUPS servers do not need to be configured here; these "
 "printers will be automatically detected."
 msgstr ""
+"\n"
+"Uzoqdagi CUPS serveridagi printerlarni moslashingiz shart emas, ular "
+"avtomatik ravishda aniqlanadi."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "How is the printer connected?"
-msgstr ""
+msgstr "Printer qaday ulangan?"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Select Printer Connection"
-msgstr ""
+msgstr "Printerga ulanishni tanlang"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -11067,8 +11090,8 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -11469,12 +11492,12 @@ msgstr ""
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world"
-msgstr ""
+msgstr "Open Source olamiga marhamat"
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
 msgid "Thank you for choosing Mandrake Linux 9.1"
-msgstr ""
+msgstr "Mandrake Linux 9.1 sistemasini tanlaganingiz uchun raxmat!"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
@@ -11487,6 +11510,7 @@ msgstr ""
 #, c-format
 msgid "Want to know more about the Open Source community?"
 msgstr ""
+"Open Source uyushmasi haqida ko'proq ma'lumotga ega bo'lishni istaysizmi?"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
@@ -11533,7 +11557,7 @@ msgstr ""
 #: ../../share/advertising/05-games.pl:1
 #, c-format
 msgid "Games"
-msgstr ""
+msgstr "O'yinlar"
 
 #: ../../share/advertising/06-mcc.pl:1
 #, c-format
@@ -11545,7 +11569,7 @@ msgstr ""
 #: ../../share/advertising/06-mcc.pl:1 ../../standalone/drakbug:1
 #, c-format
 msgid "Mandrake Control Center"
-msgstr ""
+msgstr "Mandrake boshqaruv markazi"
 
 #: ../../share/advertising/07-desktop.pl:1
 #, c-format
@@ -11680,7 +11704,7 @@ msgstr ""
 #: ../../share/advertising/14-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
-msgstr ""
+msgstr "MandrakeExpert bo'ling"
 
 #: ../../share/advertising/15-mdkexpert-corporate.pl:1
 #, c-format
@@ -12176,7 +12200,7 @@ msgstr ""
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Congratulations!"
-msgstr ""
+msgstr "Tabriklaymiz!"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -12243,7 +12267,7 @@ msgstr ""
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "Error!"
-msgstr ""
+msgstr "Xato!"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12522,6 +12546,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr ""
 
@@ -12563,13 +12592,13 @@ msgstr "Keyingisi"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Previous"
-msgstr ""
+msgstr "Oldingisi"
 
 #: ../../standalone/drakbackup:1 ../../standalone/drakperm:1
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Save"
-msgstr ""
+msgstr "Saqlash"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12764,16 +12793,6 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Restore from Hard Disk."
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Secure Connection"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "FTP Connection"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -13121,22 +13140,22 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "monthly"
-msgstr ""
+msgstr "har oy"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "weekly"
-msgstr ""
+msgstr "har hafta"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "daily"
-msgstr ""
+msgstr "har kun"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "hourly"
-msgstr ""
+msgstr "har soat"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13146,7 +13165,7 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "CDROM / DVDROM"
-msgstr ""
+msgstr "CD-ROM / DVD-ROM"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13314,7 +13333,7 @@ msgstr "Foydalanuvchilar"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Windows (FAT32)"
-msgstr ""
+msgstr "Windows (FAT32)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13324,7 +13343,7 @@ msgstr ""
 #: ../../standalone/drakbackup:1 ../../standalone/drakfont:1
 #, c-format
 msgid "Remove Selected"
-msgstr ""
+msgstr "Tanlanganni olib tashlash"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13379,7 +13398,7 @@ msgstr ""
 #: ../../standalone/drakbackup:1 ../../standalone/drakfont:1
 #, c-format
 msgid "File Selection"
-msgstr ""
+msgstr "Fayl tanlash"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13387,9 +13406,9 @@ msgid "Can't create catalog!"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid " Error while sending mail. \n"
-msgstr "Faylni (%s) o'qishda xato ro'y berdi"
+msgstr " Xatni yuborishda xato ro'y berdi. \n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13599,7 +13618,7 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "WARNING"
-msgstr ""
+msgstr "Ogohnoma"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13609,6 +13628,184 @@ msgstr ""
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Installation of %s failed. The following error occured:"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "Yo'q, avtomatik ravishda sistemaga kirishni istamayman"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "Ha, avtomatik ravishda sistemaga kirishni istayman"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "Mavzular"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr "Mavzuni o'rnatish muvaffaqiyatsiz yakunlandi!"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr "initrd yaratish 'mkinitrd -f /boot/initrd-%s.img %s'."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr "Buyruqni, mkinitrd -f /boot/initrd-%s.img %s, ishga tushirolmayapman."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+"Faylni (/etc/sysconfig/bootsplash) yozolmayapman.\n"
+"Fayl topilmadi."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "Faylni (%s) yozish"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr "Faylni (/etc/sysconfig/bootsplash) yozolmayapman."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "Lilo-ning xabari topilmadi"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "%s-dan %s-ga nusxa ko'chirish"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "Yangi mavzuni yaratish"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr "Mavzularni o'rnatish"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr ""
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/Fayl/Chi_qish"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_Fayl"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
 msgstr ""
 
 #: ../../standalone/drakbug:1
@@ -13629,7 +13826,7 @@ msgstr ""
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Not installed"
-msgstr ""
+msgstr "O'rnatilmagan"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -13639,7 +13836,7 @@ msgstr ""
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Report"
-msgstr ""
+msgstr "Xabar berish"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -13672,17 +13869,17 @@ msgstr ""
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Application:"
-msgstr ""
+msgstr "Dastur:"
 
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Configuration Wizards"
-msgstr ""
+msgstr "Moslash yordamchilari"
 
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Userdrake"
-msgstr ""
+msgstr "Userdrake"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -13692,7 +13889,7 @@ msgstr ""
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Urpmi"
-msgstr ""
+msgstr "Urpmi"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -13702,7 +13899,7 @@ msgstr ""
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Remote Control"
-msgstr ""
+msgstr "Uzoqdan boshqarish"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -13712,22 +13909,22 @@ msgstr ""
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Menudrake"
-msgstr ""
+msgstr "Menudrake"
 
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Mandrake Online"
-msgstr ""
+msgstr "Mandrake Online"
 
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "HardDrake"
-msgstr ""
+msgstr "HardDrake"
 
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Synchronization tool"
-msgstr ""
+msgstr "Tenglashtirish asbobi"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -13741,28 +13938,33 @@ msgstr ""
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "Parameterlar"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "Internetga ulanishni moslash"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
-msgstr ""
+msgstr "DHCP klienti"
 
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Ethernet Card"
-msgstr ""
+msgstr "Ethernet karta"
 
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Gateway"
 msgstr ""
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr ""
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
-msgstr ""
+msgstr "Ulanishning turi: "
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -13771,13 +13973,8 @@ msgstr ""
 
 #: ../../standalone/drakconnect:1
 #, c-format
-msgid "Internet Connection Configuration"
-msgstr ""
-
-#: ../../standalone/drakconnect:1
-#, c-format
 msgid "Internet connection configuration"
-msgstr ""
+msgstr "Internetga ulanishni moslash"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -13806,7 +14003,7 @@ msgstr ""
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "DHCP client"
-msgstr ""
+msgstr "DHCP klienti"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -13826,7 +14023,7 @@ msgstr ""
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "LAN Configuration"
-msgstr ""
+msgstr "Lokal tarmoqni moslash"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -13843,7 +14040,7 @@ msgstr ""
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Connect..."
-msgstr ""
+msgstr "Ulanish"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -13853,12 +14050,12 @@ msgstr ""
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Not connected"
-msgstr ""
+msgstr "Ulanmagan"
 
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connected"
-msgstr ""
+msgstr "Ulangan"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -13880,17 +14077,17 @@ msgstr ""
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Apply"
-msgstr ""
+msgstr "Qo'llash"
 
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Click here to launch the wizard ->"
-msgstr ""
+msgstr "Yordamchini qo'shish uchun bu erni bosing ->"
 
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Wizard..."
-msgstr ""
+msgstr "Yordamchi"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -13905,7 +14102,7 @@ msgstr "Turi:"
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Internet access"
-msgstr ""
+msgstr "Internetga ulanish"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -13915,7 +14112,7 @@ msgstr "Kompyuterning nomi:"
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Configure Local Area Network..."
-msgstr ""
+msgstr "Lokal tarmoqni moslash"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -13940,7 +14137,7 @@ msgstr ""
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Configure Internet Access..."
-msgstr ""
+msgstr "Internetga ulanishni moslash"
 
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
@@ -14015,7 +14212,7 @@ msgstr ""
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Build the disk"
-msgstr ""
+msgstr "Diskni yaratish"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -14025,31 +14222,31 @@ msgstr ""
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Remove a module"
-msgstr ""
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "omit raid modules"
-msgstr ""
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "omit scsi modules"
-msgstr ""
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "if needed"
-msgstr ""
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "force"
-msgstr ""
+msgstr "Modulni olib tashlash"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Add a module"
+msgstr "Modulni qo'shish"
+
+#: ../../standalone/drakfloppy:1
+#, c-format
+msgid "omit scsi modules"
+msgstr "SCSI modullarsiz"
+
+#: ../../standalone/drakfloppy:1
+#, c-format
+msgid "if needed"
+msgstr "agar kerak bo'lsa"
+
+#: ../../standalone/drakfloppy:1
+#, c-format
+msgid "omit raid modules"
+msgstr "RAID modullarsiz"
+
+#: ../../standalone/drakfloppy:1
+#, c-format
+msgid "force"
 msgstr ""
 
 #: ../../standalone/drakfloppy:1
@@ -14060,12 +14257,7 @@ msgstr ""
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Expert Area"
-msgstr ""
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "General"
-msgstr ""
+msgstr "Ekspert uchun"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -14074,13 +14266,13 @@ msgstr ""
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr ""
+msgid "default"
+msgstr "Andoza"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr ""
+msgid "General"
+msgstr "Umumiy"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -14090,22 +14282,17 @@ msgstr ""
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "drakfloppy"
-msgstr ""
+msgstr "DrakFloppy"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Size"
-msgstr ""
+msgstr "Hajmi"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Module name"
-msgstr ""
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr ""
+msgstr "Modulning nomi"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -14115,22 +14302,22 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Remove fonts on your system"
-msgstr ""
+msgstr "Sistemangizdan shriftlarni olib tashlash"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "Initial tests"
-msgstr "Mavzularni o'rnatish"
+msgstr "Boshlang'ich sinovlar"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Post Install"
-msgstr ""
+msgstr "O'rnatishdan kegin amallar"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Install & convert Fonts"
-msgstr ""
+msgstr "Shriftlarni o'rnatish va aylantirish"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -14140,17 +14327,17 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Remove List"
-msgstr ""
+msgstr "Ro'yxatni olib tashlash"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Selected All"
-msgstr ""
+msgstr "Hammasini tanlash"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Unselected All"
-msgstr ""
+msgstr "Hech qaysini tanlamash"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -14165,12 +14352,13 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Install List"
-msgstr ""
+msgstr "Ro'yxatni o'rnatish"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Select the font file or directory and click on 'Add'"
 msgstr ""
+"Shrift faylini yoki direktoriyani tanlang va \"Qo'shish\" tugmasini bosing"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -14190,17 +14378,17 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Abiword"
-msgstr ""
+msgstr "Abiword"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "StarOffice"
-msgstr ""
+msgstr "StarOffice"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Ghostscript"
-msgstr ""
+msgstr "Ghostscript"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -14242,14 +14430,14 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "About"
-msgstr "Ulash"
+msgstr "Haqida"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Font List"
-msgstr ""
+msgstr "Shriftlarning ro'yxati"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -14269,17 +14457,17 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Import Fonts"
-msgstr ""
+msgstr "Shriftlarni import qilish"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "done"
-msgstr ""
+msgstr "Tayyor"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "xfs restart"
-msgstr ""
+msgstr "XFS-ni boshqadan ishga tushirish"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -14289,7 +14477,7 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Restart XFS"
-msgstr ""
+msgstr "XFS-ni boshqadan ishga tushirish"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -14319,12 +14507,12 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Fonts conversion"
-msgstr ""
+msgstr "Shriftlarni aylantirish"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "True Type install done"
-msgstr ""
+msgstr "True Type shriftlar o'rnatildi"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -14334,7 +14522,7 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "True Type fonts installation"
-msgstr ""
+msgstr "True Type shriftlarini o'rnatish"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -14344,12 +14532,12 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Search for fonts in installed list"
-msgstr ""
+msgstr "O'rnatilgan ro'yxatda shriftlarni qidirish"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "could not find any font.\n"
-msgstr ""
+msgstr "hech qanaqa shriftni topolmadim.\n"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -14364,7 +14552,7 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "no fonts found"
-msgstr ""
+msgstr "Shriftlar topilmadi"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -14379,7 +14567,7 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Search installed fonts"
-msgstr ""
+msgstr "O'rnatilgan shriftlarni qidirish"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -14428,11 +14616,13 @@ msgstr ""
 #, c-format
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr ""
+"Skriptlarni moslayapman, dasturlarni o'rnatayapman, serverlarni ishga "
+"tushirayapman..."
 
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Configuring..."
-msgstr ""
+msgstr "Moslayapman..."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -14706,18 +14896,23 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "Path"
+msgstr "Yo'l"
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "group :"
-msgstr ""
+msgstr "Guruh:"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "user :"
-msgstr ""
+msgstr "Foydalanuvchi:"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Path selection"
-msgstr ""
+msgstr "Yo'lni tanlash"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -14744,47 +14939,92 @@ msgstr ""
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Set-GID"
-msgstr ""
+msgstr "GID-ni o'rnatish"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Set-UID"
-msgstr ""
+msgstr "UID-ni o'rnatish"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "sticky-bit"
-msgstr ""
+msgstr "Yopishqoq"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Property"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Path"
-msgstr ""
+msgstr "Egalik"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Permissions"
-msgstr ""
+msgstr "Huquqlar"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Current user"
-msgstr ""
+msgstr "Joriy foydalanuvchi"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "browse"
-msgstr ""
+msgstr "Tanlash"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Edit current rule"
+msgstr "Joriy qoidani tuzatish"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "edit"
+msgstr "Tuzatish"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Delete selected rule"
+msgstr "Belgilangan qoidani o'chirish"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "delete"
+msgstr "O'chirish"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Add a new rule at the end"
+msgstr "Yangi qoidani oxiriga qo'shish"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "add a rule"
+msgstr "Qoidani qo'shish"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Move selected rule down one level"
+msgstr "Belgilangan qoidani bir daraja pastga tushirish"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Down"
+msgstr "Pastga"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Move selected rule up one level"
+msgstr "Belgilangan qoidani bir daraja yuqoriga ko'tarish"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Up"
+msgstr "Yuqoriga"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "select perm file to see/edit"
-msgstr ""
+msgstr "Ko'rish yoki tuzatish uchun huquqlar faylini tanlang"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -14796,73 +15036,23 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Edit current rule"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "edit"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Delete selected rule"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "delete"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Add a new rule at the end"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "add a rule"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Move selected rule down one level"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Down"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Move selected rule up one level"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Up"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
 msgid "permissions"
-msgstr ""
+msgstr "Huquqlar"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "group"
-msgstr ""
+msgstr "Guruh"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "user"
-msgstr ""
+msgstr "Foydalanuvchi"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "path"
-msgstr ""
+msgstr "Yo'l"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -14956,9 +15146,9 @@ msgid "Installation Server Configuration"
 msgstr "O'rnatishdan kegin moslash"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "PXE Server Configuration"
-msgstr "XFree-ni moslash"
+msgstr "PXE serverini moslash"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -14968,7 +15158,7 @@ msgstr ""
 #: ../../standalone/draksec:1
 #, c-format
 msgid "Please wait, setting security level..."
-msgstr ""
+msgstr "Iltimos kutib turing, xavfsizlik darajasini o'rnatayapman"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -15000,17 +15190,17 @@ msgstr ""
 #: ../../standalone/draksec:1
 #, c-format
 msgid "Security Alerts:"
-msgstr ""
-
-#: ../../standalone/draksec:1
-#, fuzzy, c-format
-msgid "(default value: %s)"
-msgstr "(modul %s)"
+msgstr "Xafvsizlik xabarnomasi:"
 
 #: ../../standalone/draksec:1
 #, c-format
 msgid "Security Level:"
-msgstr ""
+msgstr "Xavfsizlik darajasi:"
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid "(default value: %s)"
+msgstr "(andoza qiymati: %s)"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -15026,7 +15216,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -15035,7 +15225,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 
 #: ../../standalone/draksound:1
@@ -15064,7 +15254,7 @@ msgstr ""
 #: ../../standalone/draksound:1
 #, c-format
 msgid "No Sound Card detected!"
-msgstr ""
+msgstr "Tovush kartasi topilmadi!"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -15099,7 +15289,7 @@ msgstr ""
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "choose image file"
-msgstr ""
+msgstr "Tasvir faylini tanlash"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -15119,17 +15309,17 @@ msgstr ""
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Choose color"
-msgstr ""
+msgstr "Rangini tanlash"
 
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Save theme"
-msgstr ""
+msgstr "Mavzuni saqlash"
 
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Preview"
-msgstr ""
+msgstr "Ko'rib chiqish"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -15187,12 +15377,12 @@ msgstr ""
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Browse"
-msgstr ""
+msgstr "Tanlash"
 
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Theme name"
-msgstr ""
+msgstr "Mavzuning nomi"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -15227,7 +15417,7 @@ msgstr ""
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "No TV Card detected!"
-msgstr ""
+msgstr "TV karta topilmadi!"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -15237,7 +15427,7 @@ msgstr ""
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Have a nice day!"
-msgstr ""
+msgstr "Kuningiz maroqli o'tsin!"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -15284,22 +15474,22 @@ msgstr ""
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Newzealand"
-msgstr ""
+msgstr "Yangi Zelandiya"
 
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "France [SECAM]"
-msgstr ""
+msgstr "Frantsiya [SECAM]"
 
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "East Europe"
-msgstr ""
+msgstr "Sharqiy Oyropa"
 
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "West Europe"
-msgstr ""
+msgstr "G'arbiy Oyropa"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -15309,7 +15499,7 @@ msgstr ""
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Japan (cable)"
-msgstr ""
+msgstr "Yaponiya (kabel)"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -15319,7 +15509,7 @@ msgstr ""
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Canada (cable)"
-msgstr ""
+msgstr "Kanada (kabel)"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -15329,7 +15519,7 @@ msgstr ""
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "USA (cable)"
-msgstr ""
+msgstr "AQSH (kabel)"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -15354,26 +15544,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr ""
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect jazz drives"
-msgstr ""
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect modems"
-msgstr ""
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect printers"
-msgstr ""
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr ""
 
@@ -15390,8 +15560,18 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
+msgid "Unknown"
+msgstr "Noma'lum"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "unknown"
+msgstr "noma'lum"
+
+#: ../../standalone/harddrake2:1
+#, c-format
 msgid "Running \"%s\" ..."
-msgstr ""
+msgstr "\"%s\" dasturini ishga tushirayapman..."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15401,17 +15581,17 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Configure module"
-msgstr ""
+msgstr "Modulni moslash"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Information"
-msgstr ""
+msgstr "Ma'lumot"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Detected hardware"
-msgstr ""
+msgstr "Aniqlangan asbob-uskunalar"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15421,12 +15601,12 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Detection in progress"
-msgstr ""
+msgstr "Aniqlash ketayapti"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Author:"
-msgstr ""
+msgstr "Muallif:"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15434,26 +15614,23 @@ msgid ""
 "This is HardDrake, a Mandrake hardware configuration tool.\n"
 "Version:"
 msgstr ""
+"HardDrake - asbob-uskunalarni moslaydigan asbob.\n"
+"Versiyasi:"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "About Harddrake"
-msgstr ""
+msgstr "Harddrake haqida"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_About..."
-msgstr ""
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr ""
+msgstr "/_Haqida"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
-msgstr ""
+msgstr "/_Xato haqida xabar qilish"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15465,7 +15642,7 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Select a device !"
-msgstr ""
+msgstr "Uskunani tanlang!"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15477,21 +15654,26 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Harddrake help"
-msgstr ""
+msgstr "Harddrake yordam"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Fields description"
-msgstr ""
+msgstr "/_Maydonlar ta'rifi"
+
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/_Yordam"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/_Quit"
+msgstr "/Chi_qish"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/Autodetect _jazz drives"
-msgstr ""
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -15504,20 +15686,20 @@ msgstr ""
 msgid "/Autodetect _printers"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
-msgid "/_Quit"
+msgid "/_Options"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "the vendor name of the processor"
-msgstr ""
+msgstr "Protsessorni ishlab chiqargan firmaning nomi"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "the vendor name of the device"
-msgstr ""
+msgstr "Uskunani ishlab chiqargan firmaning nomi"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15537,37 +15719,37 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "the number of the processor"
-msgstr ""
+msgstr "Protsessorlar soni"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Processor ID"
-msgstr ""
+msgstr "Protsessorning ID-si"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "network printer port"
-msgstr ""
+msgstr "Tarmoqdagi printerning porti"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Name"
-msgstr ""
+msgstr "Nomi"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Number of buttons"
-msgstr ""
+msgstr "Tugmalar soni"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Official vendor name of the cpu"
-msgstr ""
+msgstr "Protsessor ishlab chiqaruvchining rasmiy nomi"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Model name"
-msgstr ""
+msgstr "Modelning nomi"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15577,7 +15759,7 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Model"
-msgstr ""
+msgstr "Model"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15602,17 +15784,17 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Level"
-msgstr ""
+msgstr "Daraja"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Floppy format"
-msgstr ""
+msgstr "Disketning formati"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15687,7 +15869,7 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Module"
-msgstr ""
+msgstr "Modul"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15697,7 +15879,7 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "New devfs device"
-msgstr ""
+msgstr "Yangi DevFS uskunasi"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15707,7 +15889,7 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Old device file"
-msgstr ""
+msgstr "Uskunaning eski fayli"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15755,6 +15937,16 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Coma bug"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -15808,12 +16000,12 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "EIDE/SCSI channel"
-msgstr ""
+msgstr "EIDE/SCSI kanal"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Channel"
-msgstr ""
+msgstr "Kanal"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15871,12 +16063,12 @@ msgstr ""
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Save as.."
-msgstr ""
+msgstr "...sifatida saqlash"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Please enter your email address below "
-msgstr ""
+msgstr "Iltimos emaillingizni kiriting"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -15898,7 +16090,7 @@ msgstr ""
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
-msgstr ""
+msgstr "Agar tanlangan xizmatlarning ishi to'xtasa sizga xabar jo'natiladi"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -15908,32 +16100,32 @@ msgstr ""
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Xinetd Service"
-msgstr ""
+msgstr "Xinetd xizmati"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Webmin Service"
-msgstr ""
+msgstr "Webmin xizmati"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "SSH Server"
-msgstr ""
+msgstr "SSH serveri"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Samba Server"
-msgstr ""
+msgstr "Samba serveri"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Postfix Mail Server"
-msgstr ""
+msgstr "Postfix xat-xabar serveri"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Ftp Server"
-msgstr ""
+msgstr "FTP serveri"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -15943,7 +16135,7 @@ msgstr ""
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Apache World Wide Web Server"
-msgstr ""
+msgstr "Apache WWW serveri"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -15956,12 +16148,12 @@ msgstr ""
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Mail alert configuration"
-msgstr ""
+msgstr "Email orqali xabar berishni moslash"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Mail alert"
-msgstr ""
+msgstr "Email orqali xabar berish"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -15971,32 +16163,32 @@ msgstr ""
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Content of the file"
-msgstr ""
+msgstr "Faylning tarkibi"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Calendar"
-msgstr ""
+msgstr "Kalendar"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Choose file"
-msgstr ""
+msgstr "Faylni tanlash"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "but not matching"
-msgstr ""
+msgstr "mos kelmaydigan"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "matching"
-msgstr ""
+msgstr "mos keladigan"
 
 #: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Settings"
-msgstr ""
+msgstr "Moslamalar"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -16006,7 +16198,7 @@ msgstr ""
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "search"
-msgstr ""
+msgstr "Qidirish"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -16021,17 +16213,17 @@ msgstr ""
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Messages"
-msgstr ""
+msgstr "Xabarlar"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "User"
-msgstr ""
+msgstr "Foydalanuvchi"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "/Help/_About..."
-msgstr ""
+msgstr "/Yordam/_Haqida"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -16041,47 +16233,47 @@ msgstr ""
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "/File/-"
-msgstr ""
+msgstr "/Fayl/-"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "/File/Save _As"
-msgstr ""
+msgstr "/Fayl/...sifatida s_aqlash"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "<control>S"
-msgstr ""
+msgstr "<control>S"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "/File/_Save"
-msgstr ""
+msgstr "/Fayl/_Saqlash"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "<control>O"
-msgstr ""
+msgstr "<control>O"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "/File/_Open"
-msgstr ""
+msgstr "/Fayl/_Ochish"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "<control>N"
-msgstr ""
+msgstr "<control>Y"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "/File/_New"
-msgstr ""
+msgstr "/Fayl/_Yangi"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Show only for the selected day"
-msgstr ""
+msgstr "Faqat tanlangan kun uchun ko'rsatish"
 
 #: ../../standalone/mousedrake:1
 #, c-format
@@ -16089,14 +16281,14 @@ msgid "Emulate third button?"
 msgstr ""
 
 #: ../../standalone/mousedrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your mouse type."
 msgstr "Iltimos sichqonchani turini tanlang."
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Connect %s"
-msgstr ""
+msgstr "%s-ni ulash"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -16113,22 +16305,22 @@ msgstr ""
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "received"
-msgstr ""
+msgstr "qabul qilingan"
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "transmitted"
-msgstr ""
+msgstr "yuborilgan"
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "received: "
-msgstr ""
+msgstr "qabul qilingan: "
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "sent: "
-msgstr ""
+msgstr "yuborilgan: "
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -16138,12 +16330,12 @@ msgstr ""
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "average"
-msgstr ""
+msgstr "o'rtachasi"
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Color configuration"
-msgstr ""
+msgstr "Rangni moslash"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -16168,9 +16360,9 @@ msgid "Disconnection from the Internet failed."
 msgstr "Internetga ulanish"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Connecting to the Internet "
-msgstr "Internetga ulanish"
+msgstr "Internetga ulanayapman "
 
 #: ../../standalone/net_monitor:1
 #, fuzzy, c-format
@@ -16195,17 +16387,17 @@ msgstr ""
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Receiving Speed:"
-msgstr ""
+msgstr "Qabul qilish tezligi:"
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Sending Speed:"
-msgstr ""
+msgstr "Yuborish tezligi:"
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Statistics"
-msgstr ""
+msgstr "Statistika"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -16215,11 +16407,11 @@ msgstr ""
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Network Monitoring"
-msgstr ""
+msgstr "Tarmoqni nazorat qilish"
 
 #: ../../standalone/printerdrake:1
 #, c-format
-msgid "Reading printer data ..."
+msgid "Reading data of installed printers..."
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
@@ -16233,9 +16425,9 @@ msgid "This host is already in the list, it cannot be added again.\n"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scannerdrake"
-msgstr "userdrake-ni ishga tushirish"
+msgstr "Scannerdrake"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -16255,22 +16447,22 @@ msgstr ""
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "This machine"
-msgstr ""
+msgstr "Shu kompyuter"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Remove selected host"
-msgstr ""
+msgstr "Tanlangan kompyuterni olib tashlash"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Edit selected host"
-msgstr ""
+msgstr "Tanlangan kompyuterni tuzatish"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add host"
-msgstr "Foydalanuvchini qo'shish"
+msgstr "Kompyuterni qo'shish"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -16330,47 +16522,6 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Please select the device where your %s is attached"
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is unsupported"
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
 msgid "Re-generating list of configured scanners ..."
 msgstr ""
 
@@ -16424,7 +16575,83 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "choose device"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Please select the device where your %s is attached"
+msgstr "Iltimos %s ulangan uskunani tanlang"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Searching for scanners ..."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Auto-detect available ports"
+msgstr "Mavjud portlarni avtomatik ravishda topish"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is unsupported"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Port: %s"
+msgstr "Port: %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ", "
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Detected model: %s"
+msgstr "Aniqlangan model: %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr " ("
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Select a scanner model"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
@@ -16445,7 +16672,7 @@ msgstr ""
 #: ../../standalone/service_harddrake:1
 #, c-format
 msgid "Some devices were added:\n"
-msgstr ""
+msgstr "Ba'zi bir uskunalar qo'shildi:\n"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -16494,7 +16721,7 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Network Computer (client)"
-msgstr ""
+msgstr "Tarmoqdagi kompyuter (klient)"
 
 #: ../../share/compssUsers:999
 msgid "Clients for different protocols including ssh"
@@ -16502,7 +16729,7 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Configuration"
-msgstr ""
+msgstr "Moslash"
 
 #: ../../share/compssUsers:999
 msgid "Tools to ease the configuration of your computer"
@@ -16510,6 +16737,10 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Scientific Workstation"
+msgstr ""
+
+#: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
 msgstr ""
 
 #: ../../share/compssUsers:999
@@ -16532,7 +16763,7 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Graphical Environment"
-msgstr ""
+msgstr "Grafik muhit"
 
 #: ../../share/compssUsers:999
 msgid "Gnome Workstation"
@@ -16550,7 +16781,7 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr ""
+msgstr "Icewm, Window Maker, Enlightenment, Fvwm, va hokazo"
 
 #: ../../share/compssUsers:999
 msgid "Development"
@@ -16562,7 +16793,7 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Documentation"
-msgstr ""
+msgstr "Qo'llanmalar"
 
 #: ../../share/compssUsers:999
 msgid "Books and Howto's on Linux and Free Software"
@@ -16570,7 +16801,7 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "LSB"
-msgstr ""
+msgstr "LSB"
 
 #: ../../share/compssUsers:999
 msgid "Linux Standard Base. Third party applications support"
@@ -16578,19 +16809,20 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Web/FTP"
-msgstr ""
+msgstr "Web/FTP"
 
 #: ../../share/compssUsers:999
 msgid "Apache, Pro-ftpd"
 msgstr ""
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
+msgid "Mail"
 msgstr ""
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr ""
+#, fuzzy
+msgid "Postfix mail server"
+msgstr "X server"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -16610,23 +16842,23 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "DNS/NIS "
-msgstr ""
+msgstr "DNS/NIS "
 
 #: ../../share/compssUsers:999
 msgid "Domain Name and Network Information Server"
-msgstr ""
+msgstr "DNS va NIS"
 
 #: ../../share/compssUsers:999
 msgid "Network Computer server"
-msgstr ""
+msgstr "Tarmoqdagi kompyuter (server)"
 
 #: ../../share/compssUsers:999
 msgid "NFS server, SMB server, Proxy server, ssh server"
-msgstr ""
+msgstr "NFS server, SMB server, Proksi server, SSH server"
 
 #: ../../share/compssUsers:999
 msgid "Office"
-msgstr ""
+msgstr "Idora uchun dasturlar"
 
 #: ../../share/compssUsers:999
 msgid "Set of tools for mail, news, web, file transfer, and chat"
@@ -16634,15 +16866,15 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Multimedia - Graphics"
-msgstr ""
+msgstr "Multimedia - Grafika"
 
 #: ../../share/compssUsers:999
 msgid "Graphics programs such as The Gimp"
-msgstr ""
+msgstr "Gimp kabi tasvirlar bian ishlaydigan dasturlar"
 
 #: ../../share/compssUsers:999
 msgid "Multimedia - Sound"
-msgstr ""
+msgstr "Multimedia - Tovush"
 
 #: ../../share/compssUsers:999
 msgid "Audio-related tools: mp3 or midi players, mixers, etc"
@@ -16650,7 +16882,7 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Multimedia - Video"
-msgstr ""
+msgstr "Multimedia - Video"
 
 #: ../../share/compssUsers:999
 msgid "Video players and editors"
@@ -16658,7 +16890,7 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Multimedia - CD Burning"
-msgstr ""
+msgstr "Multimedia - CD yozish"
 
 #: ../../share/compssUsers:999
 msgid "Tools to create and burn CD's"
@@ -16670,23 +16902,128 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr ""
+msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, va hokazo"
 
 #: ../../share/compssUsers:999
 msgid "Personal Information Management"
-msgstr ""
+msgstr "Shaxsiy ma'lumot boshqaruvi"
 
 #: ../../share/compssUsers:999
 msgid "Tools for your Palm Pilot or your Visor"
-msgstr ""
+msgstr "Palm Pilot yoki Visor uchun asboblar"
 
 #: ../../share/compssUsers:999
 msgid "Personal Finance"
-msgstr ""
+msgstr "Shaxsiy moliya"
 
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr ""
 
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr "An'anaviy Gtk+ monitor"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "An'anaviy monitor"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "Yangi uslubdagi monitor"
+
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "DrakFloppy xato: %s"
+
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+
+#~ msgid "Remove entry"
+#~ msgstr "Yozuvni olib tashlash"
+
+#~ msgid "Desktop"
+#~ msgstr "Desktop"
+
+#~ msgid "Start Menu"
+#~ msgstr "Start Menu"
+
+#~ msgid "FAT"
+#~ msgstr "FAT"
+
 #~ msgid "Formatting"
 #~ msgstr "Format qilayapman"
+
+#~ msgid "Recommended"
+#~ msgstr "Tavsiya qilinadi"
+
+#~ msgid "Expert"
+#~ msgstr "Ekspert"
+
+#~ msgid "ISDN card"
+#~ msgstr "ISDN karta"
+
+#~ msgid "modinfo is not available"
+#~ msgstr "modinfo mavjud emas"
+
+#~ msgid "Specify CUPS server"
+#~ msgstr "CUPS serverni kiriting"
+
+#~ msgid "CUPS server IP"
+#~ msgstr "CUPS serverning IP raqami"
+
+#~ msgid ""
+#~ "The following printer\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Quyidagi printer\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "are "
+#~ msgstr ""
+#~ "\n"
+#~ " "
+
+#~ msgid ""
+#~ "\n"
+#~ "is "
+#~ msgstr ""
+#~ "\n"
+#~ " "
+
+#~ msgid "directly connected to your system"
+#~ msgstr "to'g'ridan-to'g'ri sistemangizga ulangan"
+
+#~ msgid "Preparing Printerdrake..."
+#~ msgstr "Printerdrake dasturini tayorlayapman"
+
+#~ msgid "Do you want to configure another printer?"
+#~ msgstr "Boshqa printerni moslashni istaysizmi?"
+
+#~ msgid "Fonts Importation"
+#~ msgstr "Shriftlarni import qilish"
+
+#~ msgid "Up selected rule one level"
+#~ msgstr "Belgilangan qoidani bir daraja yuqoriga ko'tarish"
+
+#~ msgid "/_Help..."
+#~ msgstr "/_Yordam"
+
+#~ msgid "Please, choose the type of your mouse."
+#~ msgstr "Iltimos sichqonning turini tanlang."
+
+#~ msgid "Connecting to Internet "
+#~ msgstr "Internetga ulanayapman "
+
+#~ msgid "Detecting devices ..."
+#~ msgstr "Uskunalarni aniqlayapman..."
+
+#~ msgid "Test ports"
+#~ msgstr "Portlarni sinash"
+
+#~ msgid "Choose your language"
+#~ msgstr "Tilingizni tanlang"
+
+#~ msgid "Setup filesystems"
+#~ msgstr "Fayl sistemalarini o'rnatish"
+
+#~ msgid "Install system updates"
+#~ msgstr "Sistemani yangilash"

@@ -22,16 +22,18 @@ msgid ""
 "You can use userdrake to add a user to this group."
 msgstr ""
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Бекор кардан"
@@ -105,14 +107,13 @@ msgstr "Васл кунӣ"
 
 #: ../../any.pm:1
 #, c-format
-msgid "Use Unicode by default"
+msgid "All languages"
 msgstr ""
 
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
+#: ../../any.pm:1
 #, c-format
-msgid "All"
-msgstr "Ҳама"
+msgid "Use Unicode by default"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -489,6 +490,16 @@ msgstr "Маҳдуди хосиятҳои сатри фармон"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr ""
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Enable ACPI"
+msgstr "CD Худборшавро дар гиронем?"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "Пеш аз худборшавӣ андармони симои пешфарз"
 
@@ -541,6 +552,11 @@ msgstr ""
 #, c-format
 msgid "On Floppy"
 msgstr "Дискет"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "First sector of the root partition"
+msgstr "Соҳаи аввал дар базшбандии худборшавӣ"
 
 #: ../../any.pm:1
 #, c-format
@@ -715,231 +731,6 @@ msgstr ""
 "барои худборшавии пешфарз %d сония интизор шавед.\n"
 "\n"
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "OK"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "Ҳа, ман худдохилшавиро бо ин (корванд, мизи корӣ) мехоҳам"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "Не, ман худдохилшавиро намехоҳам"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "Сардиҳии вазъияти графикӣ ҳангоми оғози системи худ"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "Усули системи"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "Мавзӯъҳо"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Splash selection"
-msgstr ""
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Танзим додан"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Шумо ҳозир %s-ро ҳамчун мудири худборшавӣ истифода бурда истодаед.\n"
-"Барои сардиҳии устози гузориш ба Танзим додан ангушт занед."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr ""
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr "Хулоса"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "Хатогӣ"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "Навиштан %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "%s-ро ба %s нусхабардоред"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "Мавзӯи нав офаред"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "Lilo/усули ҷустуҷӯ"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "Усули Yaboot"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "Сардиҳии Aurora дар вақти худборшавӣ"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr " Монитори Gtk+ Оддӣ"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "Монитори Оддӣ"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "Монитори Навъи Нав"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "Монитори Синфбанди Навъи Нав"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<идора>Б"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/Файл/_Баромадан"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_Файл"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "Танзимдарории Навъи Худборшавӣ"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1100,8 +891,24 @@ msgstr ""
 
 #: ../../fsedit.pm:1
 #, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"Шумо бахши нармафзори RAID-ро ҳамчун root (/) интихоб кардед.\n"
+"Ягон корандози boot инро бе бахши /boot даста карда наметевонад.\n"
+"Барои иловаи бахши /boot эҳтиёт бошед"
+
+#: ../../fsedit.pm:1
+#, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Аллакай бахш бо нуқтаи васли %s ҳаст \n"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr ""
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1128,6 +935,15 @@ msgid ""
 "\n"
 "Do you agree to loose all the partitions?\n"
 msgstr ""
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "Хатогӣ"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1227,8 +1043,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1241,7 +1057,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1431,7 +1247,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1610,7 +1426,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -2358,7 +2174,7 @@ msgstr ""
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -2451,7 +2267,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 
@@ -2497,7 +2313,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -3037,12 +2853,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Не"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Ҳа"
@@ -3136,6 +2954,13 @@ msgstr ""
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
+msgstr ""
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
 
 #: ../../install_interactive.pm:1
@@ -3471,6 +3296,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr ""
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Help"
+msgstr ""
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "not configured"
+msgstr "танзимдода нашуда"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Танзим додан"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -3675,14 +3520,6 @@ msgstr ""
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Individual package selection"
-msgstr ""
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
 msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
@@ -3892,12 +3729,13 @@ msgstr ""
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr ""
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr ""
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr ""
@@ -3957,11 +3795,6 @@ msgstr ""
 #, c-format
 msgid "Security Level"
 msgstr ""
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "not configured"
-msgstr "танзимдода нашуда"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -4066,6 +3899,16 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Would you like to try again?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Unable to contact mirror %s"
+msgstr ""
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr ""
 
@@ -4132,6 +3975,11 @@ msgid ""
 "If you have none of those CDs, click Cancel.\n"
 "If only some CDs are missing, unselect them, then click Ok."
 msgstr ""
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "Ҳама"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4206,17 +4054,17 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr ""
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Looking at packages already installed..."
-msgstr ""
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
@@ -4326,11 +4174,6 @@ msgstr "Лутфан намуди мушатонро интихоб кунед."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Upgrade"
-msgstr ""
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
 msgid "Upgrade %s"
 msgstr ""
 
@@ -4354,15 +4197,19 @@ msgstr ""
 msgid "Please choose your keyboard layout."
 msgstr "Лутфан, ороиши забонакро интихоб кунед."
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Баромадан"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr ""
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "default:LTR"
-msgstr "пешфарз"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4904,6 +4751,11 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Azerbaidjani (latin)"
+msgstr ""
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Arabic"
 msgstr ""
 
 #: ../../keyboard.pm:1
@@ -6066,6 +5918,11 @@ msgstr "Баранда"
 msgid "Afghanistan"
 msgstr ""
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "default:LTR"
+msgstr "пешфарз"
+
 #: ../../loopback.pm:1
 #, c-format
 msgid "Circular mounts %s\n"
@@ -6467,7 +6324,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 
 #: ../../services.pm:1
@@ -6688,8 +6545,8 @@ msgstr ""
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
 
 #: ../../standalone.pm:1
@@ -6819,9 +6676,9 @@ msgid "Exit install"
 msgstr ""
 
 #: ../../steps.pm:1
-#, c-format
-msgid "Install system updates"
-msgstr ""
+#, fuzzy, c-format
+msgid "Install updates"
+msgstr "Санҷишҳои шиносоӣ"
 
 #: ../../steps.pm:1
 #, c-format
@@ -6847,6 +6704,11 @@ msgstr ""
 #, c-format
 msgid "Add a user"
 msgstr ""
+
+#: ../../steps.pm:1
+#, fuzzy, c-format
+msgid "Root password"
+msgstr "Гузарвожа"
 
 #: ../../steps.pm:1
 #, c-format
@@ -6895,13 +6757,21 @@ msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
+msgid "Language"
 msgstr ""
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
 msgstr ""
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "OK"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -7087,7 +6957,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Хосиятҳо"
@@ -7111,14 +6981,6 @@ msgstr "Монитор"
 #, c-format
 msgid "Graphic Card"
 msgstr "Карти Графикӣ"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Баромадан"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -7770,42 +7632,6 @@ msgstr "Ҷадвали бахши гардони %s дар диск навишт
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"Шумо бахши нармафзори RAID-ро ҳамчун root (/) интихоб кардед.\n"
-"Ягон корандози boot инро бе бахши /boot даста карда наметевонад.\n"
-"Барои иловаи бахши /boot эҳтиёт бошед"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"Бахше, ки шумо барои ҳамчун root (/) илова кардан интихоб кардедберун аз\n"
-"силиндри 1024-и сахтгардон ҷойгир аст, ва шумо /бахши худборшав надоред.\n"
-"Агар шумо мақсади истифодаи менеҷери пурборкунии LILO-ро дошт бошед, "
-"албаттабахши пурборкуниро илова кунед"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"Узр, ман офаридан /boot дар гардон (дар силиндр > 1024) қабул  намекунам.\n"
-"Ё шумо LILO-ро истифода мебаред ва он кор намекунад, ё шумо LILO-ро истифода "
-"намебаред ва шумо ба /boot эҳтиёҷ надоред"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
 msgid "The package %s is needed. Install it?"
 msgstr ""
 
@@ -8292,6 +8118,11 @@ msgstr ""
 
 #: ../../harddrake/data.pm:1
 #, c-format
+msgid "Firewire controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr ""
 
@@ -8424,7 +8255,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -8838,7 +8669,7 @@ msgstr ""
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
+msgid "Sagem (using pppoa) usb"
 msgstr ""
 
 #: ../../network/adsl.pm:1
@@ -8943,12 +8774,12 @@ msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
-msgid "Zeroconf Host name"
+msgid "Host name"
 msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
-msgid "Host name"
+msgid "Zeroconf Host name"
 msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
@@ -8958,15 +8789,6 @@ msgid ""
 "\n"
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
-msgstr ""
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
 msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
@@ -9555,6 +9377,11 @@ msgid "Start at boot"
 msgstr ""
 
 #: ../../network/network.pm:1
+#, c-format
+msgid "Assign host name from DHCP address"
+msgstr ""
+
+#: ../../network/network.pm:1
 #, fuzzy, c-format
 msgid "Network Hotplugging"
 msgstr "Монитори Навъи Нав"
@@ -9566,12 +9393,7 @@ msgstr ""
 
 #: ../../network/network.pm:1
 #, c-format
-msgid "(bootp/dhcp/zeroconf)"
-msgstr ""
-
-#: ../../network/network.pm:1
-#, c-format
-msgid "Automatic IP"
+msgid "DHCP host name"
 msgstr ""
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
@@ -9580,9 +9402,20 @@ msgstr ""
 msgid "Netmask"
 msgstr ""
 
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
 #, c-format
 msgid "IP address"
+msgstr ""
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "(bootp/dhcp/zeroconf)"
+msgstr ""
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Automatic IP"
 msgstr ""
 
 #: ../../network/network.pm:1
@@ -9820,7 +9653,7 @@ msgstr ""
 msgid "PDQ - Print, Don't Queue"
 msgstr ""
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr ""
@@ -9829,6 +9662,11 @@ msgstr ""
 #, c-format
 msgid "Unknown model"
 msgstr ""
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "%s (Port %s)"
+msgstr "Соҳиб %s"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -9982,11 +9820,6 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Хориҷкунии чопгар \"%s\"..."
 
@@ -10002,7 +9835,7 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Know how to use this printer"
+msgid "Learn how to use this printer"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -10101,11 +9934,6 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Learn how to use this printer"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Raw printer"
 msgstr ""
 
@@ -10139,6 +9967,7 @@ msgid "Add a new printer"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr ""
@@ -10165,6 +9994,11 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Display all available remote CUPS printers"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; or to view information about "
@@ -10183,16 +10017,6 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printing system: "
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Would you like to configure printing?"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -10229,6 +10053,11 @@ msgstr ""
 #, c-format
 msgid "Select Printer Spooler"
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Setting Default Printer..."
+msgstr "Хориҷкунии чопгар \"%s\"..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11464,6 +11293,35 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Configuring printer ..."
+msgstr "Танзимдарории замимаҳо..."
+
+#: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "Searching for new printers..."
 msgstr "Хориҷкунии чопгар \"%s\"..."
@@ -11566,6 +11424,64 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Restarting CUPS..."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "The entered IP is not correct.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Server IP missing!"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Remove selected server"
+msgstr "Хориҷи интихоб шуда соҳиб/шабака"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Edit selected server"
+msgstr "Хориҷи интихоб шуда соҳиб/шабака"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Add server"
+msgstr "Иловаи корванд"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "IP address of host/network:"
 msgstr ""
 
@@ -11576,37 +11492,12 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -11664,6 +11555,29 @@ msgstr ""
 #, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "Мунтазамкунии автоматикии Танзимдарории CUPS"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "None"
+msgstr "Шуд"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Additional CUPS servers: "
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -11820,8 +11734,8 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -13275,6 +13189,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr ""
 
@@ -13519,16 +13438,6 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Restore from Hard Disk."
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Secure Connection"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "FTP Connection"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -14368,6 +14277,184 @@ msgstr ""
 msgid "Installation of %s failed. The following error occured:"
 msgstr "Коргузориши %s нагузашт. Хатогии зерин рух дод:"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "Не, ман худдохилшавиро намехоҳам"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "Ҳа, ман худдохилшавиро бо ин (корванд, мизи корӣ) мехоҳам"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "Сардиҳии вазъияти графикӣ ҳангоми оғози системи худ"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "Усули системи"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "Мавзӯъҳо"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"Шумо ҳозир %s-ро ҳамчун мудири худборшавӣ истифода бурда истодаед.\n"
+"Барои сардиҳии устози гузориш ба Танзим додан ангушт занед."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr ""
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr "Хулоса"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "Навиштан %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "%s-ро ба %s нусхабардоред"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "Мавзӯи нав офаред"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "Lilo/усули ҷустуҷӯ"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "Усули Yaboot"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<идора>Б"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/Файл/_Баромадан"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_Файл"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "Танзимдарории Навъи Худборшавӣ"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -14498,6 +14585,16 @@ msgstr ""
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr ""
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr ""
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr ""
 
@@ -14511,11 +14608,6 @@ msgstr ""
 msgid "Gateway"
 msgstr ""
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr ""
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -14524,11 +14616,6 @@ msgstr ""
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Profile: "
-msgstr ""
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
 msgstr ""
 
 #: ../../standalone/drakconnect:1
@@ -14786,8 +14873,8 @@ msgstr "Хориҷи модул"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr ""
+msgid "Add a module"
+msgstr "Иловаи модул"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -14801,13 +14888,13 @@ msgstr ""
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "зӯрӣ"
+msgid "omit raid modules"
+msgstr ""
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "Иловаи модул"
+msgid "force"
+msgstr "зӯрӣ"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -14821,23 +14908,18 @@ msgstr "Соҳаи Мутахассис"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr ""
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
-msgstr ""
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "DrakFloppy Error: %s"
 msgstr ""
 
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "default"
 msgstr "пешфарз"
+
+#: ../../standalone/drakfloppy:1
+#, c-format
+msgid "General"
+msgstr ""
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -14858,11 +14940,6 @@ msgstr "Ҳаҷм"
 #, c-format
 msgid "Module name"
 msgstr "Номи модул"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -15463,6 +15540,11 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "Path"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "group :"
 msgstr ""
 
@@ -15520,11 +15602,6 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Path"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
 msgid "Permissions"
 msgstr ""
 
@@ -15536,19 +15613,6 @@ msgstr "Корванди равона"
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "browse"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -15599,6 +15663,19 @@ msgstr ""
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Up"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -15761,13 +15838,13 @@ msgstr ""
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid "(default value: %s)"
-msgstr "(арзиши пешфарз: %s)"
+msgid "Security Level:"
+msgstr ""
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid "Security Level:"
-msgstr ""
+msgid "(default value: %s)"
+msgstr "(арзиши пешфарз: %s)"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -15783,7 +15860,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -15792,7 +15869,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 
 #: ../../standalone/draksound:1
@@ -16111,26 +16188,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/Хосиятҳо"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect jazz drives"
-msgstr ""
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect modems"
-msgstr ""
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect printers"
-msgstr ""
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr ""
 
@@ -16143,6 +16200,16 @@ msgstr "дуюмдараҷа"
 #, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Unknown"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "unknown"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -16202,11 +16269,6 @@ msgstr ""
 msgid "/_About..."
 msgstr ""
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr ""
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -16241,15 +16303,20 @@ msgstr ""
 msgid "/_Fields description"
 msgstr ""
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/_Quit"
+msgstr "/_Баромадан"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/Autodetect _jazz drives"
 msgstr ""
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_Хосиятҳо"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16261,10 +16328,10 @@ msgstr ""
 msgid "/Autodetect _printers"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
-msgid "/_Quit"
-msgstr "/_Баромадан"
+msgid "/_Options"
+msgstr "/_Хосиятҳо"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16363,7 +16430,7 @@ msgstr "Савия"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -16512,6 +16579,16 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Coma bug"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -16975,9 +17052,9 @@ msgid "Network Monitoring"
 msgstr "Монитори Навъи Нав"
 
 #: ../../standalone/printerdrake:1
-#, c-format
-msgid "Reading printer data ..."
-msgstr ""
+#, fuzzy, c-format
+msgid "Reading data of installed printers..."
+msgstr "Хориҷкунии чопгар \"%s\"..."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -17087,47 +17164,6 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "дастгоҳ инхоб кунед"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Please select the device where your %s is attached"
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is unsupported"
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
 msgid "Re-generating list of configured scanners ..."
 msgstr ""
 
@@ -17180,8 +17216,84 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "choose device"
+msgstr "дастгоҳ инхоб кунед"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Please select the device where your %s is attached"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
-msgid "Select a scanner"
+msgid "Searching for scanners ..."
+msgstr "Хориҷкунии чопгар \"%s\"..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Auto-detect available ports"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is unsupported"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Port: %s"
+msgstr "Соҳиб %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Detected model: %s"
+msgstr "Сахтафзори муайяншуда"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Select a scanner model"
 msgstr "Карти графикиро интихоб кунед"
 
 #: ../../standalone/scannerdrake:1
@@ -17270,6 +17382,10 @@ msgid "Scientific Workstation"
 msgstr ""
 
 #: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr ""
+
+#: ../../share/compssUsers:999
 msgid "Console Tools"
 msgstr ""
 
@@ -17342,12 +17458,13 @@ msgid "Apache, Pro-ftpd"
 msgstr ""
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
+msgid "Mail"
 msgstr ""
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr ""
+#, fuzzy
+msgid "Postfix mail server"
+msgstr "Хидматгори Пост"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -17444,6 +17561,47 @@ msgstr ""
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr ""
+
+#~ msgid "Launch Aurora at boot time"
+#~ msgstr "Сардиҳии Aurora дар вақти худборшавӣ"
+
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr " Монитори Gtk+ Оддӣ"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "Монитори Оддӣ"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "Монитори Навъи Нав"
+
+#~ msgid "NewStyle Categorizing Monitor"
+#~ msgstr "Монитори Синфбанди Навъи Нав"
+
+#~ msgid "/Options"
+#~ msgstr "/Хосиятҳо"
+
+#~ msgid ""
+#~ "The partition you've selected to add as root (/) is physically located "
+#~ "beyond\n"
+#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
+#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
+#~ "partition"
+#~ msgstr ""
+#~ "Бахше, ки шумо барои ҳамчун root (/) илова кардан интихоб кардедберун аз\n"
+#~ "силиндри 1024-и сахтгардон ҷойгир аст, ва шумо /бахши худборшав надоред.\n"
+#~ "Агар шумо мақсади истифодаи менеҷери пурборкунии LILO-ро дошт бошед, "
+#~ "албаттабахши пурборкуниро илова кунед"
+
+#~ msgid ""
+#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
+#~ "> 1024).\n"
+#~ "Either you use LILO and it won't work, or you don't use LILO and you "
+#~ "don't need /boot"
+#~ msgstr ""
+#~ "Узр, ман офаридан /boot дар гардон (дар силиндр > 1024) қабул  "
+#~ "намекунам.\n"
+#~ "Ё шумо LILO-ро истифода мебаред ва он кор намекунад, ё шумо LILO-ро "
+#~ "истифода намебаред ва шумо ба /boot эҳтиёҷ надоред"
 
 #~ msgid "Please be patient. This operation can take several minutes."
 #~ msgstr "Илтимос пуртоқат бошед. Ин омил метавонад якчанд дақиқаро гирад."

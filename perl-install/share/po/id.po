@@ -27,16 +27,18 @@ msgstr ""
 "Sharing tiap pengguna menggunakan grup \"fileshare\". \n"
 "Anda dapat memakai userdrake utk menambah pengguna di grup ini."
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Batal"
@@ -114,15 +116,14 @@ msgid "Country"
 msgstr "Negara:"
 
 #: ../../any.pm:1
+#, fuzzy, c-format
+msgid "All languages"
+msgstr "Pilih bahasa"
+
+#: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
 msgstr ""
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "Semua"
 
 #: ../../any.pm:1
 #, c-format
@@ -499,6 +500,16 @@ msgstr "Batasi parameter command line"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr ""
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Enable ACPI"
+msgstr "Aktifkan boot dari CD?"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "Delay sebelum boot ke image default"
 
@@ -551,6 +562,11 @@ msgstr "Lewatkan"
 #, fuzzy, c-format
 msgid "On Floppy"
 msgstr "Disket boot"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "First sector of the root partition"
+msgstr "Sektor pertama di partisi boot"
 
 #: ../../any.pm:1
 #, c-format
@@ -760,241 +776,6 @@ msgstr ""
 "default.\n"
 "\n"
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "OK"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "Ya, saya mau autologin dg (pengguna, desktop) ini"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "Tidak, saya tak mau autologin"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "Jalankan X-Window saat sistem dimulai"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "Mode sistem"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr "Bootsplash"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr "Layar lilo"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-"\n"
-"Pilih tema untuk\n"
-"lilo dan bootsplash,\n"
-"Anda dapat memilih\n"
-"secara terpisah"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "Tema"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Splash selection"
-msgstr "Pilihan Splash"
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Konfigurasikan"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr "Manajer Boot: %s. Klik Configure untuk memanggil ahli setup."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "Instalasi tema LiLo dan Bootsplash sukses"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr "Instalasi tema gagal!"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr "Catatan"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "Ada Kesalahan"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr "Luncur ulang 'lilo'"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-"Gagal meluncurkan LiLo!\n"
-"Luncurkan \"lilo\" sbg root di baris perintah utk menyelesaikan instalasi "
-"tema LiLo."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr "Buat initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr "Tak dapat meluncurkan mkinitrd -f /boot/initrd-%s.img %s."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-"Tak dapat menulis /etc/sysconfig/bootsplash\n"
-"File tak ditemukan."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "Tulis %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr "Tak dapat menulis /etc/sysconfig/bootsplash."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "Pesan lilo tak ditemukan"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "Salin %s ke %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr "Backup %s ke %s.old"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "Buat tema baru"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-"Display tema\n"
-"di konsol"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr "Instal tema"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "mode Lilo/Grub"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "mode Yaboot"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "Jalankan aurora saat boot"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "Monitor Biasa Gtk+"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "Monitor Biasa"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "Monitor GayaBaru"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "Kategori Monitor Gaya Baru"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/File/_Keluar"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_File"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "Konfigurasi Tipe Boot"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1151,9 +932,25 @@ msgid "You can't use a LVM Logical Volume for mount point %s"
 msgstr "Anda tak dapat menggunakan LVM Logical Volume untuk titik mount %s."
 
 #: ../../fsedit.pm:1
+#, fuzzy, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"Anda memilih partisi RAID software sebagai root (/).\n"
+"Sekarang bootloader tak ada yang bisa handel tanpa partisi /boot.\n"
+"Jadi hati-hati dalam menambahkan partisi /boot"
+
+#: ../../fsedit.pm:1
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Partisi dengan titik mount %s sudah ada\n"
+
+#: ../../fsedit.pm:1
+#, fuzzy, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr "Nama printer harus hanya berupa huruf, angka, atau garisbawah"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1186,6 +983,15 @@ msgstr ""
 "(pesan errornya adalah %s)\n"
 "\n"
 "Anda setuju untuk menghapus semua partisi?\n"
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "Ada Kesalahan"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1294,8 +1100,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1308,7 +1114,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1638,7 +1444,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1810,7 +1616,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -2475,7 +2281,7 @@ msgstr ""
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -2549,7 +2355,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 
@@ -2595,7 +2401,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -3133,12 +2939,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Tidak"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Ya"
@@ -3244,6 +3052,13 @@ msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Tidak ada partisi FAT untuk diubah ukurannya atau untuk digunakan sebagai "
 "loopback (atau tidak ada cukup ruangan)"
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3758,6 +3573,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "Memulai langkah `%s'\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Help"
+msgstr "Pertolongan"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "not configured"
+msgstr "konfigurasi ulang"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Konfigurasikan"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -3969,14 +3804,6 @@ msgstr "Lanjutkan ->"
 #, c-format
 msgid "Individual package selection"
 msgstr "Pilih paket sendiri"
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "Pertolongan"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -4219,12 +4046,13 @@ msgstr "Otentikasi"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Katasandinya terlalu mudah (harus paling tidak %d karakter)"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "Tiada katasandi"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "Set katasandi root"
@@ -4284,11 +4112,6 @@ msgstr "Keamanan"
 #, fuzzy, c-format
 msgid "Security Level"
 msgstr "Tingkat Keamanan:"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "not configured"
-msgstr "konfigurasi ulang"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -4392,6 +4215,16 @@ msgid "Which is your timezone?"
 msgstr "Pilih zonawaktu Anda"
 
 #: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "Ingin konfigurasi printer?"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Unable to contact mirror %s"
+msgstr "Fork gagal: %s"
+
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Saya sedang mencek mirror untuk mengambil daftar paket yang tersedia"
@@ -4471,6 +4304,11 @@ msgstr ""
 "Kalau tak punya sama sekali, click Cancel.\n"
 "Kalau cuma punya beberapa aja, pilih aja, trus klik Ok."
 
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "Semua"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
@@ -4548,6 +4386,11 @@ msgstr "Tak cukup ruang untuk instalasi atau upgrade (%d > %d)"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "Sedang mencari paket yang tersedia..."
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Sedang mencari paket untuk diupgrade"
 
@@ -4555,11 +4398,6 @@ msgstr "Sedang mencari paket untuk diupgrade"
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Paket terinstal sedang dicari..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "Sedang mencari paket yang tersedia..."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4669,11 +4507,6 @@ msgid "Please choose your type of mouse."
 msgstr "Pilihlah tipe mouse Anda."
 
 #: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Upgrade"
-msgstr "Upgrade"
-
-#: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
 msgid "Upgrade %s"
 msgstr "Upgrade"
@@ -4698,15 +4531,19 @@ msgstr "Ini adalah daftar papanketik yang tersedia"
 msgid "Please choose your keyboard layout."
 msgstr "Pilih layout papanketik Anda"
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Keluar"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr "Persetujuan Lisensi"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "default:LTR"
-msgstr "standar"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5258,6 +5095,11 @@ msgstr "Belgia"
 #, c-format
 msgid "Azerbaidjani (latin)"
 msgstr "Azerbaijan (latin)"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Arabic"
+msgstr ""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6419,6 +6261,11 @@ msgstr "Andorra"
 msgid "Afghanistan"
 msgstr "Afghanistan"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "default:LTR"
+msgstr "default:LTR"
+
 #: ../../loopback.pm:1
 #, c-format
 msgid "Circular mounts %s\n"
@@ -6833,10 +6680,10 @@ msgstr ""
 "maka protokol routing yang canggih pun semakin dibutuhkan."
 
 #: ../../services.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 "Tunjuk raw device ke block devices (misalnya partisi hard drive),\n"
 "utk digunakan oleh aplikasi semacam Oracle"
@@ -7114,8 +6961,8 @@ msgstr ""
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
 
 #: ../../standalone.pm:1
@@ -7256,8 +7103,8 @@ msgid "Exit install"
 msgstr "Keluar dari proses instalasi"
 
 #: ../../steps.pm:1
-#, c-format
-msgid "Install system updates"
+#, fuzzy, c-format
+msgid "Install updates"
 msgstr "Instal update sistem"
 
 #: ../../steps.pm:1
@@ -7284,6 +7131,11 @@ msgstr "Konfigurasi jaringan"
 #, c-format
 msgid "Add a user"
 msgstr "Tambahkan pengguna"
+
+#: ../../steps.pm:1
+#, fuzzy, c-format
+msgid "Root password"
+msgstr "Tiada katasandi"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7332,13 +7184,21 @@ msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
+msgid "Language"
 msgstr "Pilih bahasa"
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
 msgstr ""
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "OK"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -7519,7 +7379,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Pilihan"
@@ -7543,14 +7403,6 @@ msgstr "Monitor"
 #, c-format
 msgid "Graphic Card"
 msgstr "Kartu Grafik"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Keluar"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -8205,41 +8057,6 @@ msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Tabel partisi pada drive %s akan ditulis ke disk!"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"Anda memilih partisi RAID software sebagai root (/).\n"
-"Sekarang bootloader tak ada yang bisa handel tanpa partisi /boot.\n"
-"Jadi hati-hati dalam menambahkan partisi /boot"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"Anda menambahkan partisi root di luar silinder 1024,\n"
-"dan Anda tidak memiliki partisi /boot. Apabila Anda akan menggunakan lilo\n"
-"(boot manager), hati-hati dalam menambahkan partisi /boot"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"Maaf, Saya tidak mau membuat /boot di drive ini (silindernya > 1024).\n"
-"Kalau Anda pakai LILO dan tak jalan, atau Anda tak mau LILO dan tak mau /"
-"boot juga"
-
-#: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "The package %s is needed. Install it?"
 msgstr "Perlu paket %s. Anda ingin instal?"
@@ -8732,6 +8549,11 @@ msgstr ""
 
 #: ../../harddrake/data.pm:1
 #, c-format
+msgid "Firewire controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr ""
 
@@ -8864,7 +8686,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -9318,7 +9140,7 @@ msgstr "Hubungan ke Internet"
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
+msgid "Sagem (using pppoa) usb"
 msgstr ""
 
 #: ../../network/adsl.pm:1
@@ -9437,13 +9259,13 @@ msgid "Zeroconf host name must not contain a ."
 msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, fuzzy, c-format
-msgid "Zeroconf Host name"
+#, c-format
+msgid "Host name"
 msgstr "Nama Host"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid "Host name"
+#, fuzzy, c-format
+msgid "Zeroconf Host name"
 msgstr "Nama Host"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
@@ -9454,18 +9276,6 @@ msgid ""
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
 msgstr ""
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-"Masukkan hostname sebab ada server DHCP yg mengharuskan adanya hostname.\n"
-"Hostname (nama komputer) sebaiknya merupakan nama host yg fully-qualified\n"
-"misalnya ``mesinku.labku.kotaku.com''."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -10117,6 +9927,11 @@ msgstr "Start saat boot"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
+msgid "Assign host name from DHCP address"
+msgstr "Masukkan nama host atau IP."
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
 msgid "Network Hotplugging"
 msgstr "Konfigurasi Jaringan"
 
@@ -10127,13 +9942,8 @@ msgstr "Lacak ID kartu network (berguna di laptop)"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
-msgid "(bootp/dhcp/zeroconf)"
-msgstr "(bootp/dhcp)"
-
-#: ../../network/network.pm:1
-#, c-format
-msgid "Automatic IP"
-msgstr "IP otomatis"
+msgid "DHCP host name"
+msgstr "Nama Host"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -10141,10 +9951,21 @@ msgstr "IP otomatis"
 msgid "Netmask"
 msgstr "Netmask"
 
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
 #, c-format
 msgid "IP address"
 msgstr "Alamat IP"
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "(bootp/dhcp/zeroconf)"
+msgstr "(bootp/dhcp)"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Automatic IP"
+msgstr "IP otomatis"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10396,7 +10217,7 @@ msgstr "PDQ"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Print, Don't Queue"
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr "Model Tak Dikenal"
@@ -10405,6 +10226,11 @@ msgstr "Model Tak Dikenal"
 #, c-format
 msgid "Unknown model"
 msgstr "Model tak dikenal"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "%s (Port %s)"
+msgstr "Port"
 
 #: ../../printer/main.pm:1
 #, fuzzy, c-format
@@ -10558,11 +10384,6 @@ msgstr "Printerdrake"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr "Ingin konfigurasikan printer lain?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Menghapus printer \"%s\"..."
 
@@ -10577,8 +10398,8 @@ msgid "Remove printer"
 msgstr "Hapus printer"
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Know how to use this printer"
+#, fuzzy, c-format
+msgid "Learn how to use this printer"
 msgstr "Cara penggunaan printer ini"
 
 #: ../../printer/printerdrake.pm:1
@@ -10676,11 +10497,6 @@ msgid "Printer connection type"
 msgstr "Tipe koneksi printer"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Learn how to use this printer"
-msgstr "Cara penggunaan printer ini"
-
-#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Raw printer"
 msgstr "Printer telanjang"
@@ -10717,6 +10533,7 @@ msgid "Add a new printer"
 msgstr "Tambah printer baru"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Modus Normal"
@@ -10739,6 +10556,11 @@ msgstr "konfigurasi CUPS"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Refresh printer list (to display all available remote CUPS printers)"
+msgstr "Penyegaran daftar printer (utk menampilkan semua printer CUPS remote)"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Display all available remote CUPS printers"
 msgstr "Penyegaran daftar printer (utk menampilkan semua printer CUPS remote)"
 
 #: ../../printer/printerdrake.pm:1
@@ -10768,16 +10590,6 @@ msgstr ""
 #, c-format
 msgid "Printing system: "
 msgstr "Sistem cetak: "
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Would you like to configure printing?"
-msgstr "Ingin konfigurasi printer?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr "Persiapan PrinterDrake..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10813,6 +10625,11 @@ msgstr "Sistem (spooler) printer mana yang ingin digunakan?"
 #, c-format
 msgid "Select Printer Spooler"
 msgstr "Pilih spooler printer"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Setting Default Printer..."
+msgstr "Printer standar"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -12335,6 +12152,35 @@ msgstr ""
 "printer."
 
 #: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Configuring printer ..."
+msgstr "Konfigurasikan printer \"%s\"..."
+
+#: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "Searching for new printers..."
 msgstr "Printer yg tersedia"
@@ -12454,6 +12300,64 @@ msgid "Checking your system..."
 msgstr "Pengecekan sistem..."
 
 #: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Restarting CUPS..."
+msgstr "Jalankan ulang XFS"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "Model sudah benar"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Server IP missing!"
+msgstr "Nama server NCP hilang!"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "Printer di server CUPS remote"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Remove selected server"
+msgstr "Hapus Pilihan"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Edit selected server"
+msgstr "%s telah terdeteksi"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Add server"
+msgstr "Tambah pengguna"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address of host/network:"
 msgstr ""
@@ -12465,37 +12369,12 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -12553,6 +12432,29 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "Konfigurasi CUPS otomatis"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "None"
+msgstr "Selesai"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Additional CUPS servers: "
+msgstr "Di server CUPS \"%s\""
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, fuzzy, c-format
@@ -12712,8 +12614,8 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -14380,6 +14282,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr "Pilih data backup..."
 
@@ -14638,16 +14545,6 @@ msgstr "Masukkan direktori tempat backup disimpan"
 #, c-format
 msgid "Restore from Hard Disk."
 msgstr "Restorasi dari Hard Disk."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Secure Connection"
-msgstr "Koneksi Aman"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "FTP Connection"
-msgstr "Koneksi FTP"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15568,6 +15465,194 @@ msgstr "Cron non-root belum tersedia"
 msgid "Installation of %s failed. The following error occured:"
 msgstr "Instalasi %s gagal. Ada kesalahan berikut:"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "Tidak, saya tak mau autologin"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "Ya, saya mau autologin dg (pengguna, desktop) ini"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "Jalankan X-Window saat sistem dimulai"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "Mode sistem"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr "Bootsplash"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr "Layar lilo"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+"\n"
+"Pilih tema untuk\n"
+"lilo dan bootsplash,\n"
+"Anda dapat memilih\n"
+"secara terpisah"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "Tema"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Pilihan Splash"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr "Manajer Boot: %s. Klik Configure untuk memanggil ahli setup."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr "Instalasi tema LiLo dan Bootsplash sukses"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr "Instalasi tema gagal!"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr "Catatan"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr "Luncur ulang 'lilo'"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+"Gagal meluncurkan LiLo!\n"
+"Luncurkan \"lilo\" sbg root di baris perintah utk menyelesaikan instalasi "
+"tema LiLo."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr "Buat initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr "Tak dapat meluncurkan mkinitrd -f /boot/initrd-%s.img %s."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+"Tak dapat menulis /etc/sysconfig/bootsplash\n"
+"File tak ditemukan."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "Tulis %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr "Tak dapat menulis /etc/sysconfig/bootsplash."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "Pesan lilo tak ditemukan"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "Salin %s ke %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr "Backup %s ke %s.old"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "Buat tema baru"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"Display tema\n"
+"di konsol"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr "Instal tema"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "mode Lilo/Grub"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "mode Yaboot"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/File/_Keluar"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_File"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "Konfigurasi Tipe Boot"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -15705,6 +15790,16 @@ msgstr "Pelapor Kutu Mandrake"
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "Parameter"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "konfigurasi koneksi Internet"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "Klien DHCP"
 
@@ -15718,11 +15813,6 @@ msgstr "Kartu Ethernet"
 msgid "Gateway"
 msgstr "Gateway"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "Parameter"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -15732,11 +15822,6 @@ msgstr "Tipe koneksi"
 #, c-format
 msgid "Profile: "
 msgstr "Profil: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "konfigurasi koneksi Internet"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -16005,8 +16090,8 @@ msgstr "Hapus modul"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr "abaikan modul RAID"
+msgid "Add a module"
+msgstr "tambah modul"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16020,13 +16105,13 @@ msgstr "jika perlu"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "paksa"
+msgid "omit raid modules"
+msgstr "abaikan modul RAID"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "tambah modul"
+msgid "force"
+msgstr "paksa"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16040,23 +16125,18 @@ msgstr "Area Pakar"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "Umum"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "versi kernel"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "Error DrakFloppy: %s"
+msgid "default"
+msgstr "standar"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "standar"
+msgid "General"
+msgstr "Umum"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16077,11 +16157,6 @@ msgstr "Ukuran"
 #, c-format
 msgid "Module name"
 msgstr "Nama modul"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16758,6 +16833,11 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "Path"
+msgstr "Path"
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "group :"
 msgstr "grup :"
 
@@ -16817,11 +16897,6 @@ msgstr "Properti"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Path"
-msgstr "Path"
-
-#: ../../standalone/drakperm:1
-#, c-format
 msgid "Permissions"
 msgstr "Izin"
 
@@ -16834,23 +16909,6 @@ msgstr "Pengguna saat ini"
 #, c-format
 msgid "browse"
 msgstr "jelajah"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr "pilih file izin yg akan dilihat/edit"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
-msgstr ""
-"Drakperm digunakan utk melihat file yg digunakan utk membetulkan izin, "
-"pemilik, dan grup via msec.\n"
-"Anda dapat juga mengedit aturan Anda sendiri yang akan menindas aturan "
-"standar."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16901,6 +16959,23 @@ msgstr "Naikkan aturan terpilih satu level"
 #, c-format
 msgid "Up"
 msgstr "Naik"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr "pilih file izin yg akan dilihat/edit"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
+msgstr ""
+"Drakperm digunakan utk melihat file yg digunakan utk membetulkan izin, "
+"pemilik, dan grup via msec.\n"
+"Anda dapat juga mengedit aturan Anda sendiri yang akan menindas aturan "
+"standar."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17072,17 +17147,17 @@ msgid "Security Alerts:"
 msgstr "Pemberitahuan Keamanan:"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
-msgid "(default value: %s)"
-msgstr " (standar: %s)"
-
-#: ../../standalone/draksec:1
 #, c-format
 msgid "Security Level:"
 msgstr "Tingkat Keamanan:"
 
 #: ../../standalone/draksec:1
-#, c-format
+#, fuzzy, c-format
+msgid "(default value: %s)"
+msgstr " (standar: %s)"
+
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
 msgid ""
 "Standard: This is the standard security recommended for a computer that will "
 "be used to connect\n"
@@ -17095,7 +17170,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -17104,7 +17179,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 "Standar: Keamanan standar dianjurkan utk komputer yg terhubung ke "
 "Internet               sbg klien.\n"
@@ -17483,26 +17558,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/Pilihan"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect jazz drives"
-msgstr "Otomatis terdeteksi"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect modems"
-msgstr "Otomatis terdeteksi"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect printers"
-msgstr "Otomatis terdeteksi"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr "primer"
 
@@ -17516,6 +17571,16 @@ msgstr "sekunder"
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "Unknown"
+msgstr "Model tak dikenal"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "unknown"
+msgstr "Model tak dikenal"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17576,11 +17641,6 @@ msgstr "Tentang Harddrake"
 msgid "/_About..."
 msgstr "/_About..."
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/_Tolong"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -17617,15 +17677,20 @@ msgstr "Pertolongan Harddrake"
 msgid "/_Fields description"
 msgstr "Keterangan"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/_Tolong"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/_Quit"
+msgstr "/_Keluar"
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "Otomatis terdeteksi"
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_Pilihan"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -17637,10 +17702,10 @@ msgstr "Otomatis terdeteksi"
 msgid "/Autodetect _printers"
 msgstr "Otomatis terdeteksi"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
-msgid "/_Quit"
-msgstr "/_Keluar"
+msgid "/_Options"
+msgstr "/_Pilihan"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -17739,7 +17804,7 @@ msgstr "level"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -17888,6 +17953,16 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Coma bug"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -18361,9 +18436,9 @@ msgid "Network Monitoring"
 msgstr "Konfigurasi Jaringan"
 
 #: ../../standalone/printerdrake:1
-#, c-format
-msgid "Reading printer data ..."
-msgstr "Pembacaan data printer ..."
+#, fuzzy, c-format
+msgid "Reading data of installed printers..."
+msgstr "Printer yg tersedia"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18472,55 +18547,6 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-"Scanner %s telah dikonfigurasikan.\n"
-"Anda dapat men-scan dokumen dengan ``XSane'' dari Multimedia/Grafik di menu "
-"aplikasi."
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-"Scanner %s ini harus dikonfigurasikan oleh printerdrake.\n"
-"Anda dapat meluncurkan printerdrake dari Pusat Kontrol Mandrake bagian "
-"Hardware."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "pilih device"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Please select the device where your %s is attached"
-msgstr ""
-"Scannerdrake gagal mendeteksi scanner %s Anda.\n"
-"Pilihlah device tempat scanner terhubung"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "The %s is unsupported"
-msgstr "Scanner %s ini tak disupport"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr "Tiada support utk %s pada Linux Mandrake versi ini."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr "Tiada support utk %s pada Linux Mandrake versi ini."
-
-#: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Re-generating list of configured scanners ..."
 msgstr ""
@@ -18578,8 +18604,92 @@ msgstr ""
 "Sebuah printer tak dikenal terhubung langsung dengan sistem Anda"
 
 #: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+"Scanner %s telah dikonfigurasikan.\n"
+"Anda dapat men-scan dokumen dengan ``XSane'' dari Multimedia/Grafik di menu "
+"aplikasi."
+
+#: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
+msgid "choose device"
+msgstr "pilih device"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Please select the device where your %s is attached"
+msgstr ""
+"Scannerdrake gagal mendeteksi scanner %s Anda.\n"
+"Pilihlah device tempat scanner terhubung"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Searching for scanners ..."
+msgstr "Printer yg tersedia"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Auto-detect available ports"
+msgstr "Otomatis terdeteksi"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+"Scanner %s ini harus dikonfigurasikan oleh printerdrake.\n"
+"Anda dapat meluncurkan printerdrake dari Pusat Kontrol Mandrake bagian "
+"Hardware."
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "The %s is unsupported"
+msgstr "Scanner %s ini tak disupport"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr "Tiada support utk %s pada Linux Mandrake versi ini."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr "Tiada support utk %s pada Linux Mandrake versi ini."
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Port: %s"
+msgstr "Port"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Detected model: %s"
+msgstr "Terdeteksi model: %s %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Select a scanner model"
 msgstr "Pilih scanner"
 
 #: ../../standalone/scannerdrake:1
@@ -18672,6 +18782,10 @@ msgid "Scientific Workstation"
 msgstr "Aplikasi Ilmu pengetahuan"
 
 #: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr ""
+
+#: ../../share/compssUsers:999
 msgid "Console Tools"
 msgstr "Alat konsol"
 
@@ -18748,12 +18862,14 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache dan Pro-ftpd"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "Server, Mail/Groupware/News"
+#, fuzzy
+msgid "Mail"
+msgstr "Mali"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr "Server mail Postfix, server news Inn"
+#, fuzzy
+msgid "Postfix mail server"
+msgstr "Server Mail Postfix"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -18850,6 +18966,102 @@ msgstr "Keuangan Pribadi"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Program untuk mengelola keuangan, misalnya gnucash"
+
+#~ msgid ""
+#~ "Please enter your host name if you know it.\n"
+#~ "Some DHCP servers require the hostname to work.\n"
+#~ "Your host name should be a fully-qualified host name,\n"
+#~ "such as ``mybox.mylab.myco.com''."
+#~ msgstr ""
+#~ "Masukkan hostname sebab ada server DHCP yg mengharuskan adanya hostname.\n"
+#~ "Hostname (nama komputer) sebaiknya merupakan nama host yg fully-"
+#~ "qualified\n"
+#~ "misalnya ``mesinku.labku.kotaku.com''."
+
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "Error DrakFloppy: %s"
+
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+
+#~ msgid "Launch Aurora at boot time"
+#~ msgstr "Jalankan aurora saat boot"
+
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr "Monitor Biasa Gtk+"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "Monitor Biasa"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "Monitor GayaBaru"
+
+#~ msgid "NewStyle Categorizing Monitor"
+#~ msgstr "Kategori Monitor Gaya Baru"
+
+#~ msgid "Secure Connection"
+#~ msgstr "Koneksi Aman"
+
+#~ msgid "FTP Connection"
+#~ msgstr "Koneksi FTP"
+
+#~ msgid "Mail/Groupware/News"
+#~ msgstr "Server, Mail/Groupware/News"
+
+#~ msgid "Postfix mail server, Inn news server"
+#~ msgstr "Server mail Postfix, server news Inn"
+
+#~ msgid "/Options"
+#~ msgstr "/Pilihan"
+
+#, fuzzy
+#~ msgid "/Autodetect jazz drives"
+#~ msgstr "Otomatis terdeteksi"
+
+#, fuzzy
+#~ msgid "/Autodetect modems"
+#~ msgstr "Otomatis terdeteksi"
+
+#, fuzzy
+#~ msgid "/Autodetect printers"
+#~ msgstr "Otomatis terdeteksi"
+
+#~ msgid ""
+#~ "The partition you've selected to add as root (/) is physically located "
+#~ "beyond\n"
+#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
+#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
+#~ "partition"
+#~ msgstr ""
+#~ "Anda menambahkan partisi root di luar silinder 1024,\n"
+#~ "dan Anda tidak memiliki partisi /boot. Apabila Anda akan menggunakan "
+#~ "lilo\n"
+#~ "(boot manager), hati-hati dalam menambahkan partisi /boot"
+
+#~ msgid ""
+#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
+#~ "> 1024).\n"
+#~ "Either you use LILO and it won't work, or you don't use LILO and you "
+#~ "don't need /boot"
+#~ msgstr ""
+#~ "Maaf, Saya tidak mau membuat /boot di drive ini (silindernya > 1024).\n"
+#~ "Kalau Anda pakai LILO dan tak jalan, atau Anda tak mau LILO dan tak mau /"
+#~ "boot juga"
+
+#~ msgid "Upgrade"
+#~ msgstr "Upgrade"
+
+#~ msgid "Do you want to configure another printer?"
+#~ msgstr "Ingin konfigurasikan printer lain?"
+
+#~ msgid "Know how to use this printer"
+#~ msgstr "Cara penggunaan printer ini"
+
+#~ msgid "Preparing Printerdrake..."
+#~ msgstr "Persiapan PrinterDrake..."
+
+#~ msgid "Reading printer data ..."
+#~ msgstr "Pembacaan data printer ..."
 
 #~ msgid ""
 #~ "You must indicate where you wish to place the information required to "

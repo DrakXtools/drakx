@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-02-12 11:35-0000\n"
+"PO-Revision-Date: 2003-02-27 17:22-0000\n"
 "Last-Translator: Rhoslyn Prys <rhoslyn.prys@meddal.org.uk>\n"
 "Language-Team: Cymraeg <cy@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -22,16 +22,18 @@ msgstr ""
 "Mae'r rhannu yn ôl defnyddiwr yn defnyddio grwp \"rhannu ffeiliau\" .\n"
 "Mae modd defnyddio userdrake i ychwanegu defnyddiwr i'r grwp."
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Diddymu"
@@ -96,30 +98,29 @@ msgid "More"
 msgstr "Rhagor"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Here is the full list of available countries"
-msgstr "Dyma restr lawn o'r allweddellau ar gael"
+msgstr "Dyma restr lawn o'r gwledydd sydd ar gael"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your country."
-msgstr "Dewiswch math eich llygoden"
+msgstr "Dewiswch eich gwlad."
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Country"
-msgstr "Gosod"
+msgstr "Gwlad"
+
+#: ../../any.pm:1
+#, c-format
+msgid "All languages"
+msgstr "Pob iaith"
 
 #: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
-msgstr ""
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "Popeth"
+msgstr "Defnyddio Unicode drwy rhagosodiad"
 
 #: ../../any.pm:1
 #, c-format
@@ -498,6 +499,16 @@ msgstr "Cyfyngu dewisiadau llinell orchymyn"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr "Peidio Gorfodi APIC"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Enable ACPI"
+msgstr "Galluogi ACPI"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "Oedi cyn cychwyn y ddelwedd rhagosodedig"
 
@@ -550,6 +561,11 @@ msgstr "Hepgor"
 #, c-format
 msgid "On Floppy"
 msgstr "Ar Ddisg Meddal"
+
+#: ../../any.pm:1
+#, c-format
+msgid "First sector of the root partition"
+msgstr "Adran gyntaf o'r rhaniad gwraidd"
 
 #: ../../any.pm:1
 #, c-format
@@ -754,243 +770,6 @@ msgstr ""
 "arhoswch %d eiliad am gychwyn rhagosodedig\n"
 "\n"
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "Iawn"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "Iawn, rwyf eisiau awto-mewngofnodi gyda (defnyddiwr, bwrdd gwaith)"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "Na, tydw i ddim eisiau awto-mewngofnodi"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "Cychwyn yr amgylchedd graffigol wrth gychwyn eich system"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "Modd system"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr "Croeso Cychwyn"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr "Sgrin Lilo"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-"\n"
-"Dewis thema ar\n"
-"gyfer lilo a bootsplash,\n"
-"mae modd eu dewis\n"
-"ar wahân"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "Themâu"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Splash selection"
-msgstr "Dewis sgrin croeso"
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Ffurfweddu"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Rydych yn defnyddio %s fel rheolwr cychwyn.\n"
-"Cliciwch Ffurfweddu i gychwyn dewin gosod"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "Themâu LiLo a Croeso Cychwyn wedi eu gosod yn llwyddiannus"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr "Methodd gosod y thema!"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr "Nodyn"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "Gwall"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr "Ail gychwyh 'lilo'"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-"Methu ailgychwyn LiLo!\n"
-"Cychwyn \"lilo\" fel gwraidd ar y linell orchymyn i gwblhau gosod thema "
-"LiLo'n llawn."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr "Methu cychwyn mkinitrd -f /boot/initrd-%s.img %s."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-"Methu ysgrifennu  /etc/sysconfig/bootsplash.\\\\\n"
-"Heb ganfod y ffeil"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "Ysgrifennu  %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr "Methu ysgrifennu  /etc/sysconfig/bootsplash."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "Heb ganfod neges lilo"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "Copïo %s i %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr "Cadw %s i %s.old wrth gefn"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "Creu thema newydd"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-"Dangos thema\n"
-"yn y consol"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr "Gosod themâu"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "Modd Lilo/grub"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "Modd Yaboot"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "Cychwyn Auora wrth gychwyn y cyfrifiadur"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "Monitor Gtk+ Traddodiadol"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "Monitor Traddodiadol"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "Monitor NewStyle"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "Monitor Categoreiddio NewStyle"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/Ffeil/_Gadael"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_Ffeil"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "Ffurfweddu'r Math o Gychwyn"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1148,8 +927,24 @@ msgstr "Does dim modd defnyddio Cyfrol Resymegol LVM ar gyfer pwynt gosod %s"
 
 #: ../../fsedit.pm:1
 #, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"Rydych wedi dewis meddalwedd rhannu RAID fel gwraidd (/)\n"
+"Nid oes llwythwr cychwyn yn medru trin hwn heb rhaniad /boot\n"
+"Cofiwch ychwanegu rhaniad /boot"
+
+#: ../../fsedit.pm:1
+#, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Mae yna eisoes raniad gyda phwynt gosod %s\n"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr "Dylai enw'r pwyntiau gosod gynnwys llythrennau a  rhifau'n unig"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1183,6 +978,15 @@ msgstr ""
 "\n"
 "Ydych chi'n cytuno i golli'r holl raniadau?\n"
 
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "Gwall"
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "server"
@@ -1199,9 +1003,9 @@ msgid "simple"
 msgstr "syml"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enabling swap partition %s"
-msgstr "Yn fformatio rhaniad %s"
+msgstr "Galluogi rhaniad cyfnewid %s"
 
 #: ../../fs.pm:1 ../../partition_table.pm:1
 #, c-format
@@ -1214,14 +1018,14 @@ msgid "mounting partition %s in directory %s failed"
 msgstr "methodd gosod rhaniad %s yng nghyfeiriadur %s"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mounting partition %s"
 msgstr "Yn fformatio rhaniad %s"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Checking %s"
-msgstr "Copïo %s"
+msgstr "Gwirio %s"
 
 #: ../../fs.pm:1
 #, c-format
@@ -1244,7 +1048,7 @@ msgid "%s formatting of %s failed"
 msgstr "methodd  fformatio %s o %s"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Click on \"Next ->\" if you want to delete all data and partitions present\n"
 "on this hard drive. Be careful, after clicking on \"Next ->\", you will not\n"
@@ -1254,13 +1058,14 @@ msgid ""
 "Click on \"<- Previous\" to stop this operation without losing any data and\n"
 "partitions present on this hard drive."
 msgstr ""
-"Cliciwch \"Iawn\" os ydych am ddileu'r holl ddata a rhaniadau sy'n bresennol "
-"ar y disg caled hwn. Byddwch ofalus, wedi i chi glicio \"Iawn\" ni fydd modd "
-"i chi adfer unrhyw ddata na rhaniadau presennol ar y disg caled, gan gynnwys "
+"Cliciwch \"Iawn\" os ydych am ddileu'r holl ddata a rhaniadau sy'n "
+"bresennol\n"
+"ar y disg. Byddwch ofalus, wedi i chi glicio \"Iawn ->\" ni fydd modd i chi\n"
+"adfer unrhyw ddata na rhaniadau presennol ar y disg caled, gan gynnwys\n"
 "data Windows.\n"
 "\n"
-"Cliciwch \" Diddymu\" i ddiddymu'r weithred hon heb golli unrhyw ddata a "
-"rhaniadau sy'n bresennol ar y ddisg galed."
+"Cliciwch \" <- Blaenorol\" i atal y weithred hon heb golli unrhyw ddata\n"
+"a rhaniadau sy'n bresennol ar y ddisg galed."
 
 #: ../../help.pm:1
 #, c-format
@@ -1274,7 +1079,7 @@ msgstr ""
 "cael ei ddileu ac ni fydd modd ei adfer!"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "As a review, DrakX will present a summary of various information it has\n"
 "about your system. Depending on your installed hardware, you may have some\n"
@@ -1291,8 +1096,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1305,7 +1110,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1323,28 +1128,36 @@ msgid ""
 "displayed here. You can click on the button to change the parameters\n"
 "associated with the card."
 msgstr ""
-"Dyma amrywiol baramedrau ynghylch eich peiriant. Yn ddibynnol ar eich\n"
-"caledwedd, mae'n bosibl i chi weld y rhain, neu beidio\n"
+"I adolygu, bydd DrakX yn cyflwyno crynodeb amrywiol wybodaeth\n"
+"ynghylch eich peiriant. Yn ddibynnol ar eich caledwedd, mae'n bosibl fod\n"
+"gwnnych chai o'r rhain:\n"
 "\n"
-" *\"Llygoden\": edrychwch ar ffurfweddiad presennol y llygoden a chliciwch "
-"ar y\n"
-" botwm i'w newid os oes angen.\n"
+" *\"Llygoden\": gwirio ffurfweddiad presennol y llygoden a chliciwch ar y\n"
+" botwm a dewis un arall.\n"
 "\n"
-" *\"Bysellfwrdd\" edrychwch ar ffurfweddiad presennol y bysellfwrdd a "
-"chliciwch\n"
-"ar y\n"
-" botwm i'w newid os oes angen.\n"
+" *\"Bysellfwrdd\" gwirio ffurfweddiad presennol y bysellfwrdd a chliciwch\n"
+"ar y  botwm a'i newid.\n"
 "\n"
-" *\"Cylchfa amser\" Mae DrakX, yn dyfalu eich cylchfa amser o'r iaith "
-"rydych\n"
-" wedi ei dewis. Eto fel gyda bysellfwrdd efallai nad ydych yn y wlad sy'n "
-"cyfateb i'r\n"
-" dewis iaith. Felly, mae'n bosibl y bydd angen i chi glicio ar fotwm "
-"\"Cylchfa\n"
-" amser\" i ffurfweddi'r cloc yn ôl y gylchfa amser rydych ynddi.\n"
+" *\"Cylchfa amser\" Mae DrakX, yn dyfalu eich cylchfa amser o'r iaith\n"
+"rydych wedi ei dewis. Eto fel gyda bysellfwrdd efallai nad ydych yn y wlad\n"
+"sy'n cyfateb i'r  dewis iaith. Felly, mae'n bosibl y bydd angen i chi glicio "
+"arfotwm \"Cylchfa amser\" i ffurfweddi'r cloc yn ôl y gylchfa amser "
+"rydychynddi.\n"
 "\n"
-" *\"Argraffydd\": bydd clicio ar y botwm \"Dim argraffydd\" yn agor y dewin\n"
-" ffurfweddi.\n"
+" *\"Argraffydd\": bydd clicio ar y botwm \"Dim argraffydd\" yn agor y\n"
+"dewin ffurfweddi. Darllenwch y bennod berthnasol o'r 'Starter Guide'\n"
+"am wybodaeth ar sut mae gosod yr argraffydd. Mae'r rhyngwyneb yno'n\n"
+"debyg i'r un sy'n cael ei ddefnyddio wrth osod y system.\n"
+"\n"
+" * \"Cychwynnydd\": os hoffech newid ffurfweddiad eich cychwynnydd,\n"
+"cliciwch y botwm. Ar gyfer defnyddwyr uwch yn unig.\n"
+"\n"
+" * \"Rhyngwyneb Graffigol\": Mae DraKX yn gosod eich rhyngwyneb i\n"
+"gydraniad \"800x600\". Os nad yw hynny'n addas cliciwch y botwm\n"
+"i ailffurfweddu eich rhyngwyneb graffigol.\n"
+"\n"
+" * \"Rhwydwaith\": Os hoffech chi ffurfweddu eich rhwydwaith\n"
+"Rhyngrwyd neu lleol cliciwch y botwm.\n"
 "\n"
 " *\"Cerdyn sain\": os oes cerdyn sain yn cael ei ganfod ar eich system, bydd "
 "yn\n"
@@ -1366,9 +1179,14 @@ msgid ""
 "actually present on your system, you can click on the button and choose\n"
 "another driver."
 msgstr ""
+"\"Cerdyn sain\": os yw cerdyn sain yn cael ei ganfod ar eich cyfrifiadur, "
+"bydd \n"
+"yn cael ei ddangos yma. Os ydych yn sylwi nad y cerdyn sain sydd ar eich\n"
+"cyfrifiadur sy'n cael ei ddangos, yna cliciwch ar y botwm a dewis\n"
+" gyrrwr arall."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Yaboot is a bootloader for NewWorld Macintosh hardware and can be used to\n"
 "boot GNU/Linux, MacOS or MacOSX. Normally, MacOS and MacOSX are correctly\n"
@@ -1401,46 +1219,40 @@ msgid ""
 " * Default OS: you can select which OS will boot by default when the Open\n"
 "Firmware Delay expires."
 msgstr ""
-"Yaboot yw llwythwr cychwyn ar gyfer caledwedd NewWorld MacIntosh. Mae'n \n"
-"medru cychwyn GNU/Linux, MacOS neu MacOSX os ydynt ar eich peiriant. Fel\n"
-" rheol, mae'r systemau gweithredu hyn yn cael eu canfod yn gywir a'u gosod. "
-"Os\n"
-" nad yw hyn yn digwydd, mae modd i chi ychwanegu eu cofnod gyda llaw ar y\n"
-" sgrin hwn. Byddwch ofalus i ddewis y paramedrau cywir.\n"
+"Yaboot yw'r cychwynnydd ar gyfer caledwedd NewWorld MacIntosh. Mae'n\n"
+"medru cychwyn GNU/Linux, MacOS neu MacOSX os ydynt ar eich peiriant.\n"
+"Fel rheol, mae'r systemau gweithredu hyn yn cael eu canfod yn gywir a'u\n"
+"gosod. Os nad yw hyn yn digwydd, mae modd i chi ychwanegu eu cofnod\n"
+"gyda llaw ar y sgrîn hwn. Byddwch ofalus i ddewis y paramedrau cywir.\n"
 "\n"
 "Prif ddewisiadau Yaboot yw:\n"
 "\n"
 " * Cychwyn Neges: neges testun syml sy'n cael ei ddangos cyn yr anogwr\n"
 " cychwyn\n"
 "\n"
-" * Cychwyn y Ddyfais: yn dangos lle rydych am osod yr wybodaeth "
-"angenrheidiol\n"
-"i gychwyn GNU/Linux. Yn gyffredinol, byddwch wedi creu rhaniad ymlwythwr yn\n"
-" gynt, i ddal yr wybodaeth.\n"
+" * Cychwyn y Ddyfais: yn dangos lle rydych am osod yr wybodaeth\n"
+"angenrheidiol i gychwyn GNU/Linux. Yn gyffredinol, byddwch wedi creu\n"
+"rhaniad ymlwythwr yn gynt, i ddal yr wybodaeth.\n"
 "\n"
-" * Oediad Open Firmware: yn wahanol i LILO, mae yna ddau oediad ar gael "
-"gyda\n"
-" yaboot. Mae'r cyntaf yn cael ei fesur mewn eiliadau a dyma pryd hyn mae "
-"modd\n"
-" dewis rhwng CD, cychwyn OF, MacOS neu Linux\n"
+" * Oediad Open Firmware: yn wahanol i LILO, mae yna ddau oediad ar gael\n"
+"gyda yaboot. Mae'r cyntaf yn cael ei fesur mewn eiliadau a dyma pryd hyn\n"
+"mae modd dewis rhwng CD, cychwyn OF, MacOS neu Linux\n"
 "\n"
-" * Oediad Cychwyn y Cnewyllyn: mae'r oediad yn debyg i oediad cychwyn LILO.\n"
-"WEdi dewis Linux, bydd oediad o 0.1 eiliad cyn bod eich cnewyllyn "
-"rhagosodedig\n"
-" yn cael ei ddewis.\n"
+" * Oediad Cychwyn y Cnewyllyn: mae'r oediad yn debyg i oediad cychwynLILO. "
+"Wedi dewis Linux, bydd oediad o 0.1 eiliad cyn bod eich cnewyllyn\n"
+"rhagosodedig yn cael ei ddewis.\n"
 "\n"
-" * Galluogi Cychwyn o'r CD?: mae dewis hwn yn caniatáu i chi ddewis \"C\" "
-"am\n"
-"CD ar anogwr y cychwyn cyntaf.\n"
+" * Galluogi Cychwyn o'r CD?: mae dewis hwn yn caniatáu i chi ddewis \"C\"\n"
+"am CD ar anogwr y cychwyn cyntaf.\n"
 "\n"
-" * Galluogi Cychwyn OF?: mae dewis hwn yn caniatáu i chi ddewis |\"N\" am\n"
-" Open Firmware ar anogwr y cychwyn cyntaf.\n"
+" * Galluogi Cychwyn OF?: mae dewis hwn yn caniatáu i chi ddewis |\"N\"\n"
+"am Open Firmware ar anogwr y cychwyn cyntaf.\n"
 "\n"
-" * System Weithredu Rhagosodedig: mae modd dewis pa system weithredu fydd\n"
-"yn cychwyn drwy ragosodiad pan ddaw'r Open Firmware i ben."
+" * System Weithredu Rhagosodedig: mae modd dewis pa system weithredu\n"
+"fydd yn cychwyn drwy ragosodiad pan ddaw'r Open Firmware i ben."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can add additional entries in yaboot for other operating systems,\n"
 "alternate kernels, or for an emergency boot image.\n"
@@ -1489,16 +1301,15 @@ msgid ""
 "highlighted with a ``*'' if you press [Tab] to see the boot selections."
 msgstr ""
 "Mae modd i chi gynnig cofnodion eraill ar gyfer yaboot, un ai systemau\n"
-" gweithredol eraill, cnewyll eraill, neu ddelwedd cychwyn argyfwng.\n"
+"gweithredol eraill, cnewyll eraill, neu ddelwedd cychwyn argyfwng.\n"
 "\n"
-"Ar gyfer systemau gweithredu eraill, mae'r cofnod yn cynnwys label a'r "
-"rhaniad\n"
-" root yn unig\n"
+"Ar gyfer systemau gweithredu eraill, mae'r cofnod yn cynnwys label a'r\n"
+"rhaniad root yn unig\n"
 "\n"
 "Ar gyfer LInux, mae yna rhai dewisiadau:\n"
 "\n"
-" *Label:sef yr enw fyddwch yn ei deipio yn anogwr yaboot i ddewis y dewis\n"
-" cychwyn.\n"
+" *Label:sef yr enw fyddwch yn ei deipio yn anogwr yaboot i ddewis ydewis "
+"cychwyn.\n"
 "\n"
 " *Image: hwn fydd enw'r cnewyllyn i'w gychwyn. Fel rheol, vimlinux neu\n"
 "amrywiad ohono gydag estyniad\n"
@@ -1506,12 +1317,12 @@ msgstr ""
 " *Root: y ddyfais \"root\" neu \"/\" ar gyfer eich gosodiad Linux.\n"
 "\n"
 " *Append: ar galedwedd Apple, mae dewis atodi cnewyllyn yn cael ei\n"
-" ddefnyddio'n eithaf aml i gynorthwyo cychwyn caledwedd fideo neu i alluogi\n"
-" efelychiad o'r llygoden bysellfwrdd sydd ar goll ar yr ail a'r trydydd "
-"botwm\n"
-"llygoden llygod arferol Apple. Dyma rhai enghreifftiau:\n"
+"ddefnyddio'n eithaf aml i gynorthwyo cychwyn caledwedd fideo neu i\n"
+"alluogi  efelychiad o'r llygoden bysellfwrdd sydd ar goll ar yr ail a'r "
+"trydydd\n"
+"botwm llygoden llygod arferol Apple. Dyma rhai enghreifftiau:\n"
 "\n"
-"       video=aty128fb:vmode:17,cmode:32,mclk:71 adb_buttons=103,111 "
+"       video=aty128fb:vmode:17,cmode:32,mclk:71 adb_buttons=103,111\n"
 "hda=autotune\n"
 "\n"
 "         video=atyfb:vmode:12,cmode:24 adb_buttons=103,111\n"
@@ -1542,7 +1353,7 @@ msgstr ""
 " bwyso ar [Tab] i weld dewisiadau'r cychwyn."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "DrakX will first detect any IDE devices present in your computer. It will\n"
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
@@ -1577,29 +1388,22 @@ msgstr ""
 "Bydd rhestr o gardiau SCSI'n ymddangos i chi ddewis un. Cliciwch \"Na\" os\n"
 "nad oes gennych galedwedd SCSI. Os nad ydych yn siwr, gallwch edrych ar y\n"
 " rhestr o galedwedd sydd wedi ei ganfod ar eich peiriant drwy ddewis\n"
-" \"Gwybodaeth am galedwedd\" a chlicio \"Iawn\". Edrychwch yn fanwl ar y\n"
-"rhestr a chlicio'r botwm \"Iawn\" i fynd yn ôl i'r cwestiwn rhag wyneb "
+" \"Gwybodaeth am galedwedd\" a chlicio \"Nesaf ->\". Edrychwch yn fanwl ar "
+"y\n"
+"rhestr a chlicio'r botwm \"Nesaf ->\" i fynd yn ôl i'r cwestiwn rhynwyneb "
 "SCSI.\n"
 "\n"
-"Os ydych wedi pennu eich addaswr gyda llaw, bydd DrakX yn gofyn i chi s\n"
-" ydych am bennu dewisiadau ar ei gyfer. Dylech adael i DrakX ofyn i'r cerdyn "
-"am\n"
-" ddewisiadau penodol i'r cerdyn mae angen i'r caledwedd eu cychwyn. Mae hyn\n"
-"fel rheol yn gweithio'n dda\n"
+"Os ydych wedi pennu eich addaswr PCI SCS gyda llaw, bydd DrakX yn\n"
+"gofyn i chi ydych am bennu dewisiadau ar ei gyfer. Dylech adael i DrakX "
+"ofyn\n"
+"i'r cerdyn am ddewisiadau penodol i'r cerdyn mae angen i'r caledwedd eu\n"
+"cychwyn. Mae hyn fel rheol yn gweithio'n dda\n"
 "\n"
 "Os nad yw DrakX yn medru holi am y dewisiadau sydd eu hangen, bydd rhaid i\n"
-" chi ddarparu'r dewisiadau gyda llaw. Darllenwch yr ``User "
-"Guide'' (pennod3,\n"
-" adran \"Collecting Information on Your Hardware\") am syniadau ar sut i "
-"gael y\n"
-" paramedrau angenrheidiol o ddogfennau'r caledwedd, o safle gwe'r "
-"gwneuthurwr\n"
-" (os oes gennych gysylltiad â'r Rhyngrwyd) neu oddi wrth Microsoft Windows "
-"(os\n"
-" ydych wedi defnyddio'r caledwedd gyda Windows ar eich system)."
+" chi ffurfweddu'r gyrrwr gyda llaw. "
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Now, it's time to select a printing system for your computer. Other OSs may\n"
 "offer you one, but Mandrake Linux offers two. Each of the printing systems\n"
@@ -1627,20 +1431,18 @@ msgid ""
 "Center and clicking the expert button."
 msgstr ""
 "Yma byddwn yn dewis system argraffu i'ch cyfrifiadur ei ddefnyddio. Efallai\n"
-"bod systemau eraill yn cynnig un i chi, ond mae Mandrake yn cynnig tri.\n"
+"bod systemau eraill yn cynnig un i chi, ond mae Mandrake yn cynnig dwy.\n"
+"Mae 'r systemau'n addas gar gyfer ffurfweddiad arbennig.\n"
 "\n"
-" *pdq\" - sy'n golygu \"print, don't queue\", Hwn yw'r dewis os oes gennych\n"
+" *pdq\" - sy'n golygu \"print, don't queue\", yw'r dewis os oes gennych\n"
 "gysylltiad uniongyrchol â'ch argraffydd a'ch bod eisiau medru tynnu allan o "
 "waith\n"
 "argraffu pan mae'r papur wedi mynd yn sownd ac nad oes gennych "
 "argraffyddion\n"
-"wedi eu cysylltu drwy rwydwaith. Mae'n medru trin rhwydweithiau syml ac mae\n"
-"rhywfaint yn araf ar gyfer rhwydweithiau. Dewiswch \"pdq\" os mai dyma yw "
-"eich\n"
-"tro cyntaf yn GNU/Linux., mae modd i chi newid eich dewis ar ôl gosod drwy\n"
-" ddefnyddio PrinterDrake o Ganolfan Rheoli Mandrake a chlicio botwm "
-"arbenigwr\n"
-"\n"
+"wedi eu cysylltu drwy rwydwaith. (\"Dim ond rhwydweithiau syml mae \"pdq\" "
+"yn ei\n"
+"drin ac mae'n araf ar rhwydweithiau) Dewiswch \"pdq\" os mai dyma yw eich\n"
+"tro cyntaf yn GNU/Linux.\n"
 " *\"CUPS\" - \"Common Unix Printing System\". Mae hwn yn wych ar gyfer\n"
 "argraffu i argraffyddion lleol a hanner ffordd rownd y byd. Mae'n symlach, "
 "yn\n"
@@ -1651,19 +1453,15 @@ msgstr ""
 "nifer o driciau, ond mae bron mor syml i'w osod  \"pdq\". Os ydych amgen "
 "hwn\n"
 "i efelychu gwasanaethwr \"lpd\", yna rhaid cychwyn daemon \"cups-lpd\".\n"
-"Mae ganddo wyneb graffigol ar gyfer argraffu neu ddewis dewisiadau "
-"argraffu.\n"
+"Mae gan \"CUPS\" wyneb graffigol ar gyfer argraffu neu reolia'r argraffu.\n"
 "\n"
-" *\"lprNG\" - \"line printer daemon New Generation\" Mae'r system yma'n\n"
-"medru gwneud yn fras yr un pethau a'r lleill, ond mae'n medru argraffu i\n"
-"argraffyddion ar Novell Network, gan ei fod yn cynnal protocol IPX, ac\n"
-"mae'n medru argraffu 'n uniongyrchol i orchmynion cragen.. Os oes\n"
-"angen Novell neu argraffu i orchmynion heb luniad peipen ar wahân,\n"
-"defnyddiwch lprNG. Yn gyffredinol, mae CUPS yn well am ei fod yn syml\n"
-"ac yn well wrth weithio ar draws rhwydwaith."
+"\n"
+"Os ydych yn dewis yn awr ac yn ddiweddarach yn penderfynu eich bod\n"
+"am newid eich system argraffu gallwch ei newid drwy gyfrwng PrinterDrake\n"
+"yng Nghanolfan Rheoli Mandrake a chlicio'r botwm arbenigwr."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
 "automated. DrakX will analyze the disk boot sector and act according to\n"
@@ -1684,7 +1482,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1709,6 +1507,30 @@ msgid ""
 "floppy disk must be blank or have non-critical data on it - DrakX will\n"
 "format the floppy and will rewrite the whole disk."
 msgstr ""
+"Mae LILO a grub yn gychwynwyr ar gyfer GNU/Linux. Fel rheol mae'r cam\n"
+"yma'n gwbl awtomatig. Mae DrakX yn dadansoddi'r adran gychwyn ac yn\n"
+"gweithredu ar yr hyn mae'n ei ganfod yma:\n"
+"\n"
+" *os yw'n canfod adran gychwyn Windows mae'n gosod adran cychwyn\n"
+"grub/LILO yno yn ei le. Felly bydd modd i chi gychwyn un ai GNU/Linux\n"
+"neu system weithredu arall.\n"
+"\n"
+" *os fydd yn canfod adran gychwyn grub neu LILO, bydd yn gosod un mwy\n"
+"diweddar yn ei le.\n"
+"\n"
+"Os oes amheuaeth, bydd DrakX yn dangos blwch deialog gyda dewisiadau.\n"
+"\n"
+" * \"Dyfais cychwyn\": yn y rhan fwyaf o achosion ni fyddwch yn newid\n"
+"y rhagosodedig (\"/Adran Gyntaf y gyrrwr (MBR)\"), ond os yw'n well "
+"gennych,\n"
+"gall y cychwynnwr gael ei osod ar yr ail ddisg caled (\"/dev/hdb\"), neu hyd "
+"yn\n"
+"oed ar ddisg meddal (\"Ar Ddisg Meddal\")\n"
+"\n"
+"Mae ticio \"Creu disg cychwyn\" yn caniatau i chi gael cyfrwng achub wrth "
+"law\n"
+"ar gyfer argyfyngau.\n"
+"\n"
 "Mae gan yr CD-ROM Mandrake Linux modd achub. Gallwch ei gyrraedd drwy\n"
 "gychwyn y peiriant o'r CD-ROM, gwasgu'r fysell >>F1<< o'r cychwyn a theipio\n"
 " >>rescue<<wrth yr anogwr. Ond os nad yw eich cyfrifiadur yn medru cychwyn\n"
@@ -1732,14 +1554,12 @@ msgstr ""
 "cyfrinair neu\n"
 "rhesymau eraill\n"
 "\n"
-"Pan fyddwch yn clicio ar y cam hwn, bydd gofyn i chi rhoi disg meddal yn y "
-"gyrrwr.\n"
-"Rhaid i'r ddisg fod yn wag neu fod dim gwahaniaeth colli'r data arno.Does "
-"dim\n"
-"angen ei fformatio gan y bydd DrakX yn ailysgrifennu'r holl ddisg."
+"Os ddywedwch \"Iawn\", bydd gofyn i chi roi disg meddal yn y gyrrwr Rhaid \n"
+"ei fod yn wag neu bod dim o werth arno - bydd DrakX yn fformatio'r ddisg\n"
+"a'i ailysgrifennu."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After you have configured the general bootloader parameters, the list of\n"
 "boot options that will be available at boot time will be displayed.\n"
@@ -1756,22 +1576,24 @@ msgid ""
 "bootloader menu, but you will need a boot disk in order to boot those other\n"
 "operating systems!"
 msgstr ""
-"Mae LILO (the LInux LOader) a grub yn llwythwyr cychwyn: maent yn medru\n"
-"cychwyn un ai GNU/Linux neu unrhyw system weithredu arall sy'n bresennol\n"
-"ar eich cyfrifiadur.\n"
+"Ar ôl ffurfweddu  paramedrau cyffredinol y cychwynnwr, bydd y  rhestr o\n"
+"ddewisiadau cychwyn ar gael wrth gyvchwyn yn cael eu harddangos.\n"
 "\n"
-" Fel rheol mae'r systemau hyn wedi eu canfod a'u gosod yn\n"
-"gywir. Os nad yw hyn yn gywir y tro yma, mae modd i chi ychwanegu cofnod\n"
-" gyda llaw ar y sgrin hwn. Byddwch ofalus i ddewis y paramedrau cywir\n"
+"Os oes yna systemau gweithredu eraill ar eich cyfrifiadur byddant yn cael\n"
+"eu hychwanegu i'r ddewislen cychwyn. Mae modd addasu'r dewisiadau\n"
+"eraill dwy glicio \"Ychwanegu\" i greu cofnod newydd; dewis cofnod\n"
+"a chlicio \"Newid\" neu \"Tynnu\" i'w nweid neu ei dynnu. Mae \"Iawn\"\n"
+"yn gwirio'r newidiadau\n"
 "\n"
-"Efallai na fyddwch eisiau rhoi mynediad i'r systemau gweithredu hyn i neb "
-"arall\n"
-"Os felly, gallwch ddileu'r cofnodion perthnasol.Ond bydd rhaid i chi greu "
-"disg\n"
-" cychwyn ar gyfer y systemau gweithredu rheini!"
+"Efallai na fyddwch eisiau rhoi mynediad i'r systemau gweithredu hyn i neb\n"
+"arall fydd yn mynd i'r consol ac yn ailgychwyn y cyfrifiadur. Gallwch "
+"ddileu'r\n"
+"cofnodion perthnasol o'r system weithredu i'w tynnu o ddewislwn y\n"
+"cychwynnwr,ond bydd rhaid i chi greu disg  cychwyn ar gyfer y systemau\n"
+"gweithredu eraill rheini!"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This dialog allows to finely tune your bootloader:\n"
 "\n"
@@ -1800,20 +1622,9 @@ msgid ""
 "Clicking the \"Advanced\" button in this dialog will offer advanced options\n"
 "that are reserved for the expert user."
 msgstr ""
-"Mae LILO a grub yn llwythwyr cychwyn ar gyfer GNU/Linux. Fel rheol\n"
-"mae'r cam yma'n gwbl awtomatig. Mewn gwirionedd mae DrakX yn\n"
-"dadansoddi'r adran gychwyn ac yn gweithredu ar yr hyn mae'n ei ganfod\n"
-"yma:\n"
-" *os yw'n canfod adran gychwyn Windows mae'n gosod adran cychwyn\n"
-"grub/LILO yno yn ei le. Felly bydd modd i chi gychwyn un ai GNU/Linux\n"
-"neu system weithredu arall.\n"
+"Mae'r deialog yn caniatau i chi wenud mân newidiadau i'ch cychwynnwr:\n"
 "\n"
-" *os fydd yn canfod adran gychwyn grub neu LILO, bydd yn gosod un mwy\n"
-"diweddar yn ei le.\n"
-"\n"
-"Os oes amheuaeth, bydd DrakX yn dangos blwch deialog gyda dewisiadau.\n"
-"\n"
-" * \"Llwythwr cychwyn i'w ddefnyddio\": mae gennych dri dewis:\n"
+" * \"Cychwynnwr i'w ddefnyddio\": mae gennych dri dewis:\n"
 "\n"
 "    * \"GRUB\":os mae'n well gennych grub (dewislen testun)\n"
 "\n"
@@ -1848,7 +1659,7 @@ msgstr ""
 "sydd yn cael eu cadw ar gyfer y defnyddiwr arbenigol."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This is the most crucial decision point for the security of your GNU/Linux\n"
 "system: you have to enter the \"root\" password. \"Root\" is the system\n"
@@ -1875,7 +1686,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -1900,6 +1711,7 @@ msgstr ""
 " drwy fynd at y rhaniadau'n ddi-hid, yna mae'n bwysig ei gwneud hi'n anodd "
 "bod\n"
 " yn \"root\".n\n"
+"\n"
 "Dylai'r cyfrinair fod yn gyfuniad o rifau a llythrennau ac o leiaf 8 nod o "
 "hyd.\n"
 " Peidiwch ysgrifennu'r cyfrinair ar bapur - bydd yn ei gwneud hi'n rhy "
@@ -1918,16 +1730,17 @@ msgstr ""
 "cyfrinair\n"
 " \"anghywir\" i gychwyn y tro cyntaf.\n"
 "\n"
-"Yn y modd arbenigwr, bydd  gofyn os fyddwch yn cysylltu â gwasanaethwr\n"
-"dilysu, megis NIS neu LDAPl\n"
+"Os hoffech i fynediad i'r cyfrifiadur gael ei reoli gan wasanaethwr dilysu, "
+"cliciwch\n"
+"y botwm \"Uwch\".\n"
+"Os yw eich rhwydwaith yn defnyddio protocol gwasanaethau dilysu LDAP, NIS\n"
+"neu PDC Windows Domain, dewiswch un addas fel \"dilysu\",\n"
+"Os nad ydych yn gwybod,  gofynnwch i'ch gweinyddwr rhwydwaith\n"
 "\n"
-"Os yw eich rhwydwaith yn defnyddio protocol LDAP (neu NIS) ar gyfer dilysu,\n"
-" dewiswch \"LDAP\" (neu \"NIS\") fel dilyswr. Os nad ydych yn gwybod,\n"
-" gofynnwch i'ch gweinyddwr system.\n"
-"\n"
-"Os nad yw eich cyfrifiadur wedi ei gysylltu i unrhyw rwydwaith wedi ei "
-"weinyddu,\n"
-" byddwch angen dewis \"Ffeiliau lleol\" ar gyfer dilysu."
+"Os ydych yn cael anhawsterau atgoffa cyfrineiriau, gallwch ddewis\n"
+"\"Dim cyfineiriau\", os na fydd eich cyfrifiadur yn cael cyswllt â'r we ac "
+"rydych\n"
+"yn ymddiried yn y defnyddiwr."
 
 #: ../../help.pm:1
 #, c-format
@@ -1940,7 +1753,7 @@ msgstr ""
 "\"ttyS0\" yn GNU/Linux, e.e."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
 "mouse. If it does, it assumes you have a two-button mouse and will\n"
@@ -1984,12 +1797,17 @@ msgstr ""
 "chi\n"
 "eu dewis o'r rhestr. Gwnewch yn siwr eich bod yn dewis yr un sy'n cyfateb "
 "i'r porth\n"
-"mae wedi ei gysylltu iddo. Wedi i chi wasgu'r botwm \"Iawn\" bydd delwedd\n"
+"mae wedi ei gysylltu iddo. Wedi i chi wasgu'r botwm \"Nesaf ->\" bydd "
+"delwedd\n"
 "llygoden yn cael ei ddangos. Bydd angen i chi symud olwyn y llygoden iddo \n"
-"weithio'n gywir.Yna profwch fod pob botwm a symudiad yn gywir."
+"weithio'n gywir. Wrth i chi wedl yr olwyn sgroli ar y sgrin yn symud wrth i "
+"chi droi'r\n"
+"olwyn, profwch y botymau a gwirio fod cyfeirydd y llygoden yn symud ar y "
+"sgrin\n"
+"wrth i chi symud eich l;lygoden."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your choice of preferred language will affect the language of the\n"
 "documentation, the installer and the system in general. Select first the\n"
@@ -2011,23 +1829,27 @@ msgid ""
 "language used by the entire system. Running the command as a regular user\n"
 "will only change the language settings for that particular user."
 msgstr ""
-"Dewiswch eich dewis iaith ar gyfer y gosod a'r defnydd o'r system\n"
+"Dewiswch eich dewis iaith ar gyfer y gosod a'r defnydd o'r system yn\n"
+" effeithio iaith y ddogfennaeth, y gosodwr a'r system yn gyffredinol.\n"
+"Dewiswch eich ardal ac yna eich iaith.\n"
 "\n"
-"Bydd clicio ar y botwm \"Uwch\" yn caniatáu i chi ddewis ieithoedd eraill "
-"i'w\n"
-" gosod ar eich peiriant gwaith. Bydd dewis ieithoedd eraill yn gosod "
-"ffeiliau\n"
-" penodol sy'n cynnwys dogfennaeth a rhaglenni yn yr ieithoedd hynny.\n"
-"Er enghraifft, os ydych yn westeiwr ar gyfer defnyddwyr o Sbaen, dewiswch \n"
-" Gymraeg fel y brif iaith yn golwg coeden ac yn yr adran Uwch cliciwch ar "
-"y \n"
-"seren lwyd sy'n cyfateb i \"Spaeneg|Sbaen\". \n"
+"Bydd clicio ar y botwm \"Uwch\" yn caniatáu i chi ddewis ieithoedd eraill\n"
+"i'w gosod ar eich peiriant gwaith. Bydd dewis ieithoedd eraill yn gosod\n"
+"ffeiliau  penodol sy'n cynnwys dogfennaeth a rhaglenni yn yr ieithoedd\n"
+" hynny. Er enghraifft, os ydych yn westeiwr ar gyfer defnyddwyr o Sbaen,\n"
+" dewiswch \"Gymraeg\" fel y brif iaith yng ngolwg coeden ac yn yr Uwch\n"
+" cliciwch ar y seren lwyd sy'n cyfateb i \"Spaeneg\". \n"
 "\n"
-"Sylwer bod modd gosod myw nag un iaith. Unwaith i chi ddewis unrhyw \n"
-"leoleiddiad ychwanegol cliciwch y botwm \"Iawn\" i barhau."
+"Sylwer bod modd gosod mwy nag un iaith. Unwaith i chi ddewis unrhyw \n"
+"leoleiddiad ychwanegol cliciwch y botwm \"Nesaf ->\" i barhau.\n"
+"\n"
+"I newid rhwng yr ieithoedd amrywiol sydd ar y system medrwch gychwyn\n"
+"y gorchymyn  \"/usr/sbin/localedrake\" fel \"gwraidd\" i newid yr iaith\n"
+"sy'n cael ei ddefnyddio gan y system gyfan. Bydd rhedeg y gorchymyn fel\n"
+"defnyddiwr cyffredin yn gweithio dim ond ar gyfer yr unigolyn hwnnw."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Depending on the default language you chose in Section , DrakX will\n"
 "automatically select a particular type of keyboard configuration. However,\n"
@@ -2060,7 +1882,12 @@ msgstr ""
 "Cliciwch ar fotwm \"Rhagor\" i dderbyn y rhestr lawn o fysellfyrddau sy'n "
 "cael eu\n"
 " cynnal.\n"
-" "
+" \n"
+"Os fyddwch yn dewis cynllun bysellfwrdd wedi ei seilio ar wyddor an-"
+"Lladinaidd, \n"
+"bydd y deialog nesaf yn caniatáu i chi ddewis rwymiad allwedd fydd yn newid "
+"y\n"
+"bysellfwrdd rhwng cynlluniau Lladin ac an-Lladin."
 
 #: ../../help.pm:1
 #, c-format
@@ -2086,6 +1913,25 @@ msgid ""
 "running version \"8.1\" or later. Performing an Upgrade on versions prior\n"
 "to Mandrake Linux version \"8.1\" is not recommended."
 msgstr ""
+"Mae'r cam hwn yn cael ei weithredu os oes hen raniad GNU/Linux wedi\n"
+"ei ganfod ar y cyfrifiadur.\n"
+"\n"
+"Bydd DrakX angen gwybod a ydych am osod o'r newydd neu uwchraddio\n"
+"system Mandrake Linux presennol.\n"
+"\n"
+" *\"Gosod\" Ar y cyfan, mae hwn yn tynnu'r hen system gyfan oddi ar eich\n"
+"cyfrifiadur. Os ydych am newid rhaniadau eich disgiau caled, neu newid y\n"
+"system ffeil, dylech ddewis hwn. Er hynny, yn ddibynnol ar eich trefn\n"
+"rhannu, mae modd atal peth o'ch data rhag cael ei ysgrifennu drosto gan\n"
+"y gosodiad newydd.\n"
+" *\"Uwchraddio\": mae'r dosbarth gosod hwn yn caniatáu i chi ddiweddaru'r\n"
+"pecynnau sydd wedi eu gosod ar eich system Mandrake Linux. Bydd eich\n"
+"rhaniadau presenol a'ch data personol yn cael eu cadw. Bydd y rhan fwyaf\n"
+"o'r camau ffurfweddu ar gael fel gyda'r gosod arferol.\n"
+"\n"
+"Dylai defnyddio \"Uwchraddio\" weithio'n iawn ar systemau Mandrake Linux\n"
+"sy'n rhedeg systemau \"8.1\" neu'n ddiweddarach. Nid yw uwchraddio\n"
+"fersiynau cyn Mandrake Linux \"8.1\" yn cael ei gymeradwyo."
 
 #: ../../help.pm:1
 #, c-format
@@ -2093,6 +1939,8 @@ msgid ""
 "\"Country\": check the current country selection. If you are not in this\n"
 "country, click on the button and choose another one."
 msgstr ""
+"\"Gwlad\":gwiriwch y dewis gwlad. Os nad ydych yn y wlad hon\n"
+"cliciwch y botwm a dewis un arall."
 
 #: ../../help.pm:1
 #, c-format
@@ -2158,7 +2006,7 @@ msgstr ""
 " Windows (\"C:\" yw'r ddisg  neu raniad cyntaf)."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to choose which partition(s) will be used for the\n"
 "installation of your Mandrake Linux system. If partitions have already been\n"
@@ -2312,7 +2160,7 @@ msgstr ""
 " sefyllfaoedd cychwyn argyfyngus!"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, DrakX will allow you to choose the security level desired\n"
 "for the machine. As a rule of thumb, the security level should be set\n"
@@ -2326,14 +2174,15 @@ msgid ""
 msgstr ""
 "Yma mae angen dewis lefel diogelwch ar gyfer y peiriant. Fel rheol,\n"
 "y mwyaf agored yw'r peiriant, y mwyaf pwysig yw'r data yr uchaf\n"
-"ddylai'r lefel diogelwch fod. Er hynny, mae diogelwch yn dod ar draul\n"
-"hwylustod. Gw. pennod MSEC yn y \"Reference Manual\" am\n"
+"ddylai'r lefel diogelwch fod neu fod gan y peiriant gysylltiad uniongyrchol\n"
+"gyda'r rhyngrwyd. Er hynny, mae diogelwch yn dod ar draul\n"
+"hwylustod. Gw. pennod \"msec\" y \"Command Line Manual\" am\n"
 "wybodaeth ar ystyr y lefelau hyn\n"
 "\n"
 "Os nad ydych yn siwr beth i'w ddewis, dewiswch y rhagosodedig."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
@@ -2360,7 +2209,7 @@ msgstr ""
 "\"Gosod\" i estyn a gosod y pecynnau hynny neu \"Diddymu\" i beidio."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Any partitions that have been newly defined must be formatted for use\n"
 "(formatting means creating a file system).\n"
@@ -2404,16 +2253,17 @@ msgstr ""
 "Byddwch ofalus wrth ddewis rhaniadau. Ar ôl fformatio bydd yr holl ddata ar\n"
 "y rhaniadau'n cael eu dileu ac ni fydd modd ei adfer.\n"
 "\n"
-"Cliciwch \"Iawn\" pan ydych yn barod i fformatio rhaniadau.\n"
+"Cliciwch \"Nesaf ->\" pan ydych yn barod i fformatio rhaniadau.\n"
 "\n"
-"Cliciwch \"Dileu\" os ydych am ddewis rhaniad arall ar gyfer eich gosodiad\n"
+"Cliciwch \"<- Cynt\" os ydych am ddewis rhaniad arall ar gyfer eich "
+"gosodiad\n"
 "Mandrake Linux newydd\n"
 "\n"
 "Cliciwch \"Uwch\" os ydych am ddewis rhaniadau i'w gwirio am flociau\n"
 "gwallus ar y ddisg."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "There you are. Installation is now complete and your GNU/Linux system is\n"
 "ready to use. Just click \"Next ->\" to reboot the system. The first thing\n"
@@ -2453,7 +2303,7 @@ msgstr ""
 "(os oes gennych y ddwy system ar eich peiriant), gynted ag y bydd eich\n"
 "peiriant yn ail gychwyn. \n"
 "\n"
-"Mae'r botwm \"Uwch\" yn dangos dau fotwm:\n"
+"Mae'r botwm \"Uwch\" (Modd Arbennigwr yn unig)yn dangos dau fotwm arall:\n"
 "\n"
 " *\" creu disg meddal awto-gosod\": i greu disg meddal gosod fydd yn creu\n"
 "gosodiad cyflawn heb gymorth gweithredwr, yn debyg i'r gosodiad sydd\n"
@@ -2481,7 +2331,7 @@ msgstr ""
 "teipiwch \"mformat a:\")"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to decide where you want to install the Mandrake\n"
 "Linux operating system on your hard drive. If your hard drive is empty or\n"
@@ -2552,75 +2402,65 @@ msgstr ""
 "yn golygu ei rhannu'n rhesymegol i greu lle i osod eich system Mandrake\n"
 "Linux newydd.\n"
 "\n"
-"Gan bo effaith y broses rannu'n ddidroi nôl gall creu rhaniadau fod yn "
-"broses\n"
-"bygythiol a straenus os ydych yn ddefnyddiwr dibrofiad. Yn ffodus, mae na\n"
-"ddewin sy'n symleiddio'r broses. Cyn cychwyn, darllenwch y llawlyfr a\n"
-"cymerwch bwyll.\n"
+"Gan bo effaith y broses rannu'n ddidroi nôl  gan arwain at golli data os "
+"oes\n"
+"system weithredol eisoes ar y gyrrwr, rhall rhannu gall creu rhaniadau fod\n"
+"yn broses bygythiol a straenusos ydych yn ddefnyddiwr dibrofiad.\n"
+"Yn ffodus, mae gan DrakX  ddewin sy'n symleiddio'r broses. Cyn cychwyn,\n"
+"darllenwch y llawlyfr a chymerwch bwyll.\n"
 "\n"
-"Os ydych yn rhedeg y gosodiad ym modd Arbenigwr, byddwch yn agor\n"
-"DiskDrake, rhaglen rhannu Mandrake Linux, sy'n caniatáu i chi wneud mân\n"
-"newidiadau i'ch rhaniadau. Gw. pennawd DiskDrake yn y llawlyfr. O'r\n"
-"rhyngwyneb gosod, gallwch ddefnyddio'r dewiniaid drwy glicio ar fotwm\n"
-"\"Dewin\" yn y ddeialog.\n"
-"\n"
-"Os oes yna raniadau wedi eu diffinio, un ai o osodiad blaenorol neu\n"
-"gan offeryn rhannu arall, dewiswch y rheini i osod eich system Linux.\n"
-"\n"
-"Os nad oes rhaniadau wedi eu diffinio, bydd angen i chi eu creu gan\n"
-"ddefnyddio'r dewin. Gan ddibynnu ar ffurfweddiad eich disg caled, mae\n"
-"nifer o ddewisiadau ar gael:\n"
+"Yn ddibynnol ar ffurfweddiad eich disg caled, mae dewisiadau ar gael:\n"
 "\n"
 " * \"Defnyddiwch lle gwag\": mae'r dewis hwn yn arwain at greu rhaniadau\n"
-"awtomatig o'ch disg(iau) caled. Bydd dim cwestiynau eraill.\n"
+"awtomatig o'ch disg(iau) caled gwag. Bydd dim cwestiynau eraill os byddwch\n"
+"yn defnyddio'r dewis hwn.\n"
 "\n"
 " * \"Defnyddiwch y rhaniad cyfredol\": mae'r dewin wedi canfod un neu fwy\n"
 "o raniadau Linux cyfredol ar eich disg caled. Os ydych am eu defnyddio,\n"
-"cliciwch y dewis hwn.\n"
+"dewiswch y dewis hwn. Bydd gofyn i chi ddewis pwyntiau gosod ygysylltiaedig\n"
+"âphob rhaniad. Mae'r pwyntiau gosod gosodedig wedi eu dewis, ac ar y\n"
+"cyfan mae'n syniad da cadw atynt.\n"
 "\n"
 " * \"Defnyddiwch le gwag ar raniad Windows\": os yw Microsoft Windows ar\n"
 "eich disg caled ac yn cymryd y lle i gyd, bydd rhaid i chi greu lle ar gyfer "
 "data\n"
 "Linux. I wneud hynny gallwch ddileu eich rhaniad a data Microsoft Windows\n"
-"(gw. atebion\"Dileu'r ddisg gyfan\" neu \"Modd Arbenigwr) neu ail-lunio "
-"maint\n"
-"rhaniad Microsoft Windows. Mae modd ail lunio maint y rhaniad heb golli "
-"data.\n"
-"Argymhellir gwneud hyn os ydych am ddefnyddio Mandrake Linux a Microsoft\n"
-"Windows ar yr un cyfrifiadur.\n"
+"(Gw. atebion \"Dileu'r ddisg gyfan \" neu ail-lunio maint rhaniad FAT "
+"Microsoft\n"
+"Windows. Mae modd ail lunio maint y rhaniad heb golli data cynbelled eich\n"
+"bod wedi dad-ddarnio rhaniad Windows ac mae'n defnyddio fformat Windows.\n"
+"Argymellir cadw data wrth gefn hefyd.Argymhellir gwneud hyn os ydych am\n"
+"ddefnyddio Mandrake Linux a Microsoft Windows ar yr un cyfrifiadur.\n"
 "\n"
-"  Cyn gwneud y dewis hwn, cofiwch y bydd maint eich rhaniad Microsoft "
-"Windows\n"
-"yn llai nag yw ar hyn o bryd. Bydd gennych llai o le yn Microsoft Windows i "
-"gadw\n"
-"data neu i osod meddalwedd newydd.\n"
+"  Cyn gwneud y dewis hwn, cofiwch y bydd maint eich rhaniad Microsoft\n"
+"Windows yn llai nag yw ar hyn o bryd ar âl dilyn y drefn yma. Bydd\n"
+"gennych llai o le yn Microsoft Windows i gadw data neu i osod\n"
+"meddalwedd newydd.\n"
 "\n"
-" * \"Dileu'r holl ddisg\" os ydych am ddileu'r holl ddata a rhaniadau "
-"presennol\n"
-"ar eich disg caled a'u cyfnewid am system Mandrake Linux, yna dewiswch hwn.\n"
-"Byddwch yn ofalus wrth wneud hyn gan na fydd modd troi'n ôl ar ôl "
-"cadarnhau.\n"
+" * \"Dileu'r holl ddisg\" os ydych am ddileu'r holl ddata a rhaniadau\n"
+"presennol ar eich disg caled a'u cyfnewid am system Mandrake Linux,\n"
+"yna dewiswch hwn. Byddwch yn ofalus wrth wneud hyn gan na fydd\n"
+"modd troi'n ôl ar ôl cadarnhau.\n"
 "\n"
 "  !! Os ydych yn dewis hwn, byddwch yn colli'r holl ddata ar eich disg.  !!\n"
 "\n"
-" * \"Tynnu Windows\": bydd hwn yn dileu popeth o'r disg caled a chychwyn "
-"popeth\n"
-"o'r newydd, gan gynnwys creu rhaniadau newydd. Bydd yr holl ddata ar y ddisg "
-"yn\n"
-"cael ei golli\n"
+" * \"Tynnu Windows\": bydd hwn yn dileu popeth o'r disg caled a \n"
+"chychwyn popeth o'r newydd, gan gynnwys creu rhaniadau newydd.\n"
+"Bydd yr holl ddata ar y ddisg yn cael ei golli\n"
 "\n"
 "  !! Os ydych yn dewis hwn, byddwch yn colli'r holl ddata ar eich disg.  !!\n"
 "\n"
-" * \"Modd Arbenigwr\": dewiswch hwn os ydych am rannu'r disg caled\n"
+" * \"Rhannu disg gyda llaw\": dewiswch hwn os ydych am rannu'r disg caled\n"
 "gyda llaw. Byddwch ofalus - mae'n ddewis pwerus a pheryglus. Mae modd\n"
 "i chi golli'ch holl ddata. Peidiwch dewis hwn oni bai eich bod yn gwybod "
 "beth\n"
-"ydych yn ei wneud."
+"ydych yn ei wneud.. Am rhagor o wybodaeth ar sut i ddefnyddio DiskDrake, \n"
+"darllennwch adran \"Managing your Partitions\" yn y \"Starter Guide\"."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -2645,6 +2485,9 @@ msgid ""
 "floppy disk must be blank or have non-critical data on it - DrakX will\n"
 "format the floppy and will rewrite the whole disk."
 msgstr ""
+"Mae ticio |2Creu disg meddal cychwyn\" yn caniatáu i chi gael cyfrwng\n"
+"achub wrth law.\n"
+"\n"
 "Mae gan yr CD-ROM Mandrake Linux modd achub. Gallwch ei gyrraedd drwy\n"
 "gychwyn y peiriant o'r CD-ROM, gwasgu'r fysell >>F1<< o'r cychwyn a theipio\n"
 " >>rescue<<wrth yr anogwr. Ond os nad yw eich cyfrifiadur yn medru cychwyn\n"
@@ -2668,11 +2511,10 @@ msgstr ""
 "cyfrinair neu\n"
 "rhesymau eraill\n"
 "\n"
-"Pan fyddwch yn clicio ar y cam hwn, bydd gofyn i chi rhoi disg meddal yn y "
-"gyrrwr.\n"
-"Rhaid i'r ddisg fod yn wag neu fod dim gwahaniaeth colli'r data arno.Does "
-"dim\n"
-"angen ei fformatio gan y bydd DrakX yn ailysgrifennu'r holl ddisg."
+"Pan fyddwch yn clicio \"Iawn\"yma, bydd gofyn i chi rhoi disg meddal yn\n"
+"y gyrrwr. Rhaid i'r ddisg fod yn wag neu fod dim gwahaniaeth colli'r data\n"
+"arno.Does dim angen ei fformatio gan y bydd DrakX yn ailysgrifennu'r holl "
+"ddisg."
 
 #: ../../help.pm:1
 #, c-format
@@ -2696,6 +2538,9 @@ msgid ""
 "without 3D acceleration, you are then proposed to choose the server that\n"
 "best suits your needs."
 msgstr ""
+"Mewn achos lle mae gwasanaethwyr eraill i'w cael i'ch cerdyn, gyda\n"
+"neu heb gyflymydd 3D, mae cynnig i chi ddewis y gwasanaethwr gorau\n"
+"ar eich cyfer."
 
 #: ../../help.pm:1
 #, c-format
@@ -2704,9 +2549,15 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
+"Cydraniad\n"
+"\n"
+"   Cewch ddewis yma gydraniad a dyfnder lliw rhwng y rhai sydd ar gael\n"
+"ar gyfer eich caledwedd. Dewiswch yr un sydd orau ar eich cyfer (bydd\n"
+"modd newid hynny wedi'r gosod) Mae enghraifft o ffurfweddiad i'w weld\n"
+"ar y dangosydd."
 
 #: ../../help.pm:1
 #, c-format
@@ -2717,6 +2568,11 @@ msgid ""
 "monitor connected to your machine. If it is not the case, you can choose in\n"
 "this list the monitor you actually own."
 msgstr ""
+"Dangosydd\n"
+"\n"
+"    Mae'r gosodwr fel rheol yn canfod ac yn ffurfweddu'n awtomatig\n"
+"y dangosydd sy'n gysylltiedig â'ch cyfrifiadur. Os nad yw hyn yn wir,\n"
+"dewiswch eich dangosydd."
 
 #: ../../help.pm:1
 #, c-format
@@ -2750,7 +2606,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -2773,6 +2629,50 @@ msgid ""
 "\"No\" if your machine is to act as a server, or if you were not successful\n"
 "in getting the display configured."
 msgstr ""
+"X (sef X System) yw calon rhyngwyneb graffigol GNU/Linux a'r hyn mae'r\n"
+"holl amgylcheddau graffigol (KDE, Gnome, AterStep, WindowMaker, etc)\n"
+"sy'n dod gyda Mandrake Linux yn dibynnu arno.\n"
+"\n"
+"Byddwch yn derbyn rhestr o baramedrau gwahanol i'w newid i gael\n"
+"y dangosiad graffigol gorau: Cerdyn Graffig\n"
+"\n"
+"    Mae'r gosodwr fel rheol yn canfod ac yn ffurfweddu'n awtomatig\n"
+"y cerdyn graffig sydd ar eich cyfrifiadur. Os nad yw hyn yn wir,\n"
+"dewiswch eich cerdyn.\n"
+"\n"
+"  Mewn achos lle mae gwasanaethwyr eraill i'w cael i'ch cerdyn, gyda\n"
+"neu heb gyflymydd 3D, mae cynnig i chi ddewis y gwasanaethwr gorau\n"
+"ar eich cyfer.\n"
+"\n"
+"\n"
+"Dangosydd\n"
+"\n"
+"    Mae'r gosodwr fel rheol yn canfod ac yn ffurfweddu'n awtomatig\n"
+"y dangosydd sy'n gysylltiedig â'ch cyfrifiadur. Os nad yw hyn yn wir,\n"
+"dewiswch eich dangosydd.\n"
+"\n"
+"Cydraniad\n"
+"\n"
+"   Cewch ddewis yma gydraniad a dyfnder lliw rhwng y rhai sydd ar gael\n"
+"ar gyfer eich caledwedd. Dewiswch yr un sydd orau ar eich cyfer (bydd\n"
+"modd newid hynny wedi'r gosod) Mae enghraifft o ffurfweddiad i'w weld\n"
+"ar y dangosydd.\n"
+"\n"
+"Prawf\n"
+"\n"
+"  bydd y system yn ceisio agor sgrîn graffigol yn unol â'r cydraniad "
+"dewisol.\n"
+"Os ydych yn gweld y neges yn ystod y prawf ac ateb \"Iawn\", yna bydd\n"
+"DrakX yn symud ymlaen i'r cam nesaf. Os nad ydych yn gweld y neges nesaf\n"
+"mae'n golygu fod rhan o'r drefn awtoganfod yn anghywir a bydd y prawf\n"
+"yn dod iben ar âl 12 eiliad, gan ddod a chi nôl i'r ddewislen. Newidiwch y\n"
+"gosodiadau nes i chi gael y sgrîn i edrych yn iawn.\n"
+"Dewisiadau\n"
+"\n"
+"   Yma cewch ddewis p'un ai i drefnu i'ch cyfrifiadur newid yn awtomatig i\n"
+"rhyngwyneb graffigol wrth gychwyn. Yn amlwg byddwch angen ticio \"Iawn\"\n"
+"os yw eich peiriant i weithredu fel gwasanaethwr, neu os na fuoch yn\n"
+"llwyddiannus yn ffurfweddu'r dangosydd."
 
 #: ../../help.pm:1
 #, c-format
@@ -2787,9 +2687,18 @@ msgid ""
 "without 3D acceleration, you are then proposed to choose the server that\n"
 "best suits your needs."
 msgstr ""
+"Cerdyn Greaffig\n"
+"\n"
+"    Mae'r gosodwr fel rheol yn canfod ac yn ffurfweddu'n awtomatig\n"
+"y cerdyn graffig sydd ar eich cyfrifiadur. Os nad yw hyn yn wir,\n"
+"dewiswch eich cerdyn o'r rhestr.\n"
+"\n"
+"  Mewn achos lle mae gwasanaethwyr eraill i'w cael i'ch cerdyn, gyda\n"
+"neu heb gyflymydd 3D, mae cynnig i chi ddewis y gwasanaethwr gorau\n"
+"ar eich cyfer."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it to\n"
 "local time according to the time zone you selected. If the clock on your\n"
@@ -2804,14 +2713,14 @@ msgid ""
 "choose a time server located near you. This option actually installs a time\n"
 "server that can used by other machines on your local network."
 msgstr ""
-"Mae gGNU/Linux yn rheoli amser drwy GMT (Greenwich Mean Time)\n"
-"a'idrosi i amser lleol yn ôl y parth amser rycych wedi ei ddewis.\n"
-"Mae'n bosib dad-ddewis hyn drwy dad-ddewis \"Cloc caledwedd wedi ei osod i "
-"GMT\"\n"
-"fel bod y cloc caledwedd yr un a chloc y system yr un peth. Mae hyn yn\n"
-"ddefnyddiol pan mae'r peiriant yn westai i system arall megis Windows.\n"
+"Mae GNU/Linux yn rheoli amser drwy GMT (Greenwich Mean Time)\n"
+"a'i drosi i amser lleol yn ôl y parth amser rydych wedi ei ddewis.\n"
+"Mae'n bosib dad-ddewis hyn drwy ddad-ddewis \"Cloc caledwedd wedi ei\n"
+"osod i GMT\" fel bod y cloc caledwedd yr un a chloc y system yr un peth.\n"
+"Mae hyn yn ddefnyddiol pan fo'r peiriant yn westai i system arall megis\n"
+"Windows.\n"
 "\n"
-"Bydd y dewis \"Cydamseriad amse awtomatig\" yn rheoli'r cloc yn awtomatig\n"
+"Bydd y dewis \"Cydamseriad amser awtomatig\" yn rheoli'r cloc yn awtomatig\n"
 "drwy gysylltu â gwasanaethwr amser ar y Rhyngrwyd. Yn y rhestr sy'n cael ei\n"
 "gynnig dewiswch yr agosaf atoch. Rhaid i'ch cyswllt â'r we fod yn gweithio\n"
 "i hyn ddigwydd. Bydd yn gosod ar eich peiriant wasanaethwr amser fydd\n"
@@ -2819,7 +2728,7 @@ msgstr ""
 "rhwydwaith."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This step is used to choose which services you wish to start at boot time.\n"
 "\n"
@@ -2837,22 +2746,26 @@ msgid ""
 "enabled on a server. In general, select only the services you really need.\n"
 "!!"
 msgstr ""
-"Mae modd i chi ddewis pa wasanaethau rydych am eu cychwyn\n"
-"wrth gychwyn eich cyfrifiadur.\n"
+"Yma dewiswch pa wasanaethau rydych am eu cychwyn wrth gychwyn eich "
+"cyfrifiadur.\n"
 "\n"
-"Dyma'r holl wasanaethau sydd ar gael gyda'r gosodiad cyfredol. Darllenwch\n"
-"y rhestr yn ofalus a dad-diciwch y rhai nad oes eu hangen bob tro wrth "
+"Bydd DrakX yn rhestri'r holl wasanaethau sydd ar gael gyda'r gosodiad "
+"cyfredol.\n"
+"Darllenwch y rhestr yn ofalus a dad-diciwch y rhai nad oes eu hangen bob tro "
+"wrth\n"
 "gychwyn.\n"
 "\n"
 "Mae modd cael esboniad byr am wasanaeth wrth eu dewis. Ond, os nad ydych\n"
 "yn siwr a yw'r gwasanaeth o werth neu beidio, mae'n well cadw at y drefn\n"
 "rhagosodedig\n"
 "\n"
-"!!Mae angen i chi fod yn ofalus iawn os ydych am ddefnyddio eich peiriant\n"
-"fel gwasanaethwr: mwy na thebyg na fyddwch eisiau cychwyn unrhyw\n"
-"wasanaethau nad oes eu hangen. Cofiwch fod cael nifer o wasanaethau\n"
-"wedi eu galluogi ar y gwasanaethwr, fod yn beryglus. Yn gyffredinol,\n"
-"mae'n well dewis dim ond y gwasanaethau mae'n rhaid eu cael.\n"
+"!!Byddwch yn ofalus iawn os ydych am ddefnyddio eich peiriant fel "
+"gwasanaethwr:\n"
+"mwy na thebyg na fyddwch eisiau cychwyn unrhyw wasanaethau nad oes eu\n"
+"hangen. Cofiwch fod cael nifer o wasanaethau wedi eu galluogi ar y "
+"gwasanaethwr,\n"
+"fod yn beryglus. Yn gyffredinol, dim ond dewis y gwasanaethau mae'n rhaid eu "
+"cael.\n"
 "!!"
 
 #: ../../help.pm:1
@@ -2863,9 +2776,13 @@ msgid ""
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation."
 msgstr ""
+"\"Argraffydd\": mae clicio ar y botwm\"Dim Argraffydd\" yn agor dewin\n"
+"ffurfweddu'r argraffydd. Darllenwch y pennawd penodol yn y 'Starter Guide'\n"
+"am ragor o wybodaeth am sut i osod argraffydd newydd. Mae'r rhyngwyneb\n"
+"yn debyg i'r un welwyd wrth osod y system."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You will now set up your Internet/network connection. If you wish to\n"
 "connect your computer to the Internet or to a local network, click \"Next\n"
@@ -2888,8 +2805,8 @@ msgid ""
 msgstr ""
 "Dyma eich cyfle i gysylltu gyda'r rhyngrwyd/rhwydwaith.Os hoffech chi\n"
 "gysylltu eich cyfrifiadur i'r Rhyngrwyd neu i rwydwaith lleol, cliciwch\n"
-"\"Iawn\" . Bydd awtoganfod dyfeisiadan rhwwydwaith a modem yn\n"
-"cychwyn. Os yw'r canfod yn methu, dad-diciwch y blwch \"Defnyddiwch\n"
+"\"Nesaf ->\" . Bydd Mandrake Linux yn awtoganfod dyfeisiadau rhwydwaitha "
+"modem. Os yw'r canfod yn methu, dad-diciwch y blwch \"Defnyddiwch\n"
 "awto ganfod\" y tro nesaf. Mae gennych y dewis i beidio ffurfweddi eich\n"
 "rhwydwaith, neu i'w wneud rhywbryd eto. Os fell, cliciwch y botwm  \"Diddymu"
 "\".\n"
@@ -2901,16 +2818,12 @@ msgstr ""
 "fod gennych yr holl fanylion gan eich darparwr gwasanaeth rhyngrwyd (ISP)\n"
 "neu weinyddwr system\n"
 "\n"
-"Mae modd i chi edrych ar bennawd yn y llawlyfr ar gyswllt a'r Rhyngrwyd am\n"
-"fanylion ffurfweddiad, neu aros nes i'ch system gael ei osod a defnyddio'r\n"
-"rhaglen sydd yno i ffurfweddu eich cyswllt.\n"
-"\n"
-"Os ydych am ffurfweddu eich rhwydwaith yn hwyrach ar ôl y gosodiad neu\n"
-"os ydych wedi gorffen ffurfweddi eich cyswllt a'r rhwydwaith, yna cliciwch\n"
-"\" Diddymu.\"."
+"Mae modd i chi edrych ar bennawd yn y \"Starter Guide\" ar gyswllt a'r\n"
+"Rhyngrwyd am fanylion ffurfweddiad, neu aros nes i'ch system gael ei\n"
+"osod a defnyddio'r rhaglen sydd yno i ffurfweddu eich cyswllt."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you told the installer that you wanted to individually select packages,\n"
 "it will present a tree containing all packages classified by groups and\n"
@@ -2946,20 +2859,13 @@ msgid ""
 "end of another installation. See the second tip of last step on how to\n"
 "create such a floppy."
 msgstr ""
-"Yn olaf, yn dibynnu ar eich dewis o becynnau unigol, bydd coeden yn cynnwys\n"
-"yr holl becynnau wedi eu dosbarthu yn ôl grwp ac is grwp. Wrth bori'r "
-"goeden,\n"
-"gallwch ddewis grwp cyfan, isgrwp neu becyn unigol.\n"
+"Os ydych wedi dweud wrth y gosodwr  eich bod am ddewis pecynnau'n unigol\n"
+"bydd coeden yn cynnwys yr holl becynnau wedi eu dosbarthu yn ôl grwp ac\n"
+"isgrwp. Wrth bori'r goeden, gallwch ddewis grwp cyfan, isgrwp neu becyn\n"
+"unigol.\n"
 "\n"
 "Pryd bynnag fyddwch wedi dewis pecyn ar y goeden, bydd disgrifiad yn\n"
-"ymddangos ar y dde. Pan fyddwch wedi gorffen dewis , cliciwch y botwm\n"
-" \"Gosod\" fydd yn cychwyn y drefn osod. Gan ddibynnu ar gyflymder eich\n"
-"caledwedd a'r nifer o becynnau i'w gosod, gall gymryd peth amser i'w "
-"gwblhau.\n"
-"Bydd amser tan orffen yn cael ei ddangos ar y sgrin er mwyn i chi weld a "
-"oes\n"
-"amser i wneud paned!\n"
-"\n"
+"ymddangos ar y dde. \n"
 "!! Os oes pecyn gwasanaethwr wedi ei ddewis yn fwriadol neu am ei fod yn "
 "rhan\n"
 "o grwp cyfan, bydd angen i chi gadarnhau eich bod eisiau i'r gwasanaethwyr\n"
@@ -2972,7 +2878,7 @@ msgstr ""
 "\"Na\". Bydd clicio \"Iawn\" yn gosod y gwasanaethau hynny a byddant yn\n"
 "cael eu cychwyn yn ddiofyn drwy ragosodiad!!\n"
 "\n"
-"Mae'r dewis \"Dibyniad Awtomatig\"yn analluogi'r deialog rhybudd sy'n\n"
+"Mae'r dewis \"Dibyniaethau Awtomatig\"yn analluogi'r deialog rhybudd sy'n\n"
 "ymddangos bob tro fydd y gosodwr yn dewis pecyn yn awtomatig.\n"
 "Mae hyn yn digwydd am ei fod wedi penderfynu ei fod angen bodloni\n"
 "dibyniad gyda phecyn arall er mwyn cwblhau'r gosodiad yn llwyddiannus\n"
@@ -2984,7 +2890,7 @@ msgstr ""
 "greu disg meddal o'r fath."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "It is now time to specify which programs you wish to install on your\n"
 "system. There are thousands of packages available for Mandrake Linux, and\n"
@@ -3041,10 +2947,10 @@ msgstr ""
 "system. Mae yna filoedd o becynnau ar gael ar gyfer Mandrake Linux, ond\n"
 "does dim disgwyl i chi wybod amdanyn nhw i gyd.\n"
 "\n"
-"Os ydych chi'n gwneud gosodiad safonol o'r CD-ROM, bydd gofyn i chi\n"
-"ddweud pa CDau sydd gennych. Gwiriwch labeli'r CDau ac amlygu'r blychau\n"
-"sy'n cyfateb i'r CDau sydd gennych ar gyfer y gosodiad. Cliciwch \"Iawn\"\n"
-"pan ydych yn barod i barhau.\n"
+"Mae pecynnau wedi eu trefnu i grwpiau yn dibynnu ar ddefnydd penodol\n"
+"eich peiriant. Mae gan Mandrake Linux bedair gosodiad rhagosodedig. Mae\n"
+"modd meddwl amdanynt fel blychau ar gyfer pecynnau amrywiol, fel mae modd\n"
+"i \"Fan Gwaith\" fod a rhaglenni o \"Datblygu\" wedi eu gosod.\n"
 "\n"
 "Mae'r pecynnau wedi eu didoli yn grwpiau sy'n cyfateb i ddefnydd penodol\n"
 "ar eich peiriant. Mae'r grwpiau wedi eu rhannu yn bedair adran:\n"
@@ -3052,7 +2958,7 @@ msgstr ""
 " * \"Man Gwaith\": os ydych yn bwriadu defnyddio eich peiriant fel man\n"
 "gwaith yna dewiswch un o'r grwpiau cyfatebol.\n"
 "\n"
-" * \"Datblygiadol\": os yw'r peiriant yn cael ei ddefnyddio i raglenni, "
+" * \"Datblygu\": os yw'r peiriant yn cael ei ddefnyddio i raglenni, "
 "dewiswch\n"
 " y grwpiau perthnasol\n"
 "\n"
@@ -3086,21 +2992,22 @@ msgstr ""
 " chi ddad-ddewis pob grwp er mwyn osgoi gosod unrhyw becyn newydd.\n"
 "Mae hyn yn ddefnyddiol ar gyfer trwsio neu ddiweddaru system sy'n bod "
 "eisoes.\n"
+"\n"
 " "
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The Mandrake Linux installation is distributed on several CD-ROMs. DrakX\n"
 "knows if a selected package is located on another CD-ROM so it will eject\n"
 "the current CD and ask you to insert the correct CD as required."
 msgstr ""
-"Mae gosodiad Mandrake Linux ar gael ar draws nifer o CD-ROMau. Mae DrakX\n"
+"Mae gosodiad Mandrake Linux yn cynnwys nifer o CD-ROMau. Mae DrakX\n"
 "yn gwybod os yw pecyn penodol wedi ei leoli ar CD-ROM arall a bydd yn bwrw\n"
 "allan y CD cyfredol a gofyn am y llall."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Here are Listed the existing Linux partitions detected on your hard drive.\n"
 "You can keep the choices made by the wizard, since they are good for most\n"
@@ -3132,7 +3039,7 @@ msgid ""
 "With SCSI hard drives, an \"a\" means \"lowest SCSI ID\", a \"b\" means\n"
 "\"second lowest SCSI ID\", etc."
 msgstr ""
-"Dyma'r rhaniadau Linux sydd wedi canfod ar eich disg caled\n"
+"Dyma'r rhaniadau Linux sydd wedi canfod ar eich disg caled.\n"
 "Gallwch gadw'r dewisiadau sydd wedi eu gwneud gan y dewin, mae'n nhw'n iawn\n"
 "ar gyfer y rhan fwyaf o osodiadau. Os ydych am wneud newidiadau, rhaid i chi "
 "ol eiaf\n"
@@ -3167,7 +3074,7 @@ msgstr ""
 "\"ID SCSI ail isaf\", ag ati."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "GNU/Linux is a multi-user system, meaning each user can have their own\n"
 "preferences, their own files and so on. You can read the ``Starter Guide''\n"
@@ -3210,9 +3117,10 @@ msgstr ""
 "Mae GNU/Linux yn system aml-ddefnyddiwr, ac mae hyn yn golygu bod pob\n"
 "defyddiwr yn medru cael ei ddewisiadau ei hun, ei ffeiliau ei hun ac yn y "
 "blaen.\n"
-"Gallwch ddarllen yr \"User Guide\" i ddysgu mwy. Ond yn anhebyg i \"gwraidd"
-"\", sef\n"
-"y gweinyddwr, ni fydd modd i'r defnyddiwr fyddwch yn eu creu yma'n medru\n"
+"Gallwch ddarllen yr \"Starter Guide\" i ddysgu mwy. Ond yn anhebyg i "
+"\"gwraidd\",\n"
+"sef y gweinyddwr, ni fydd modd i'r defnyddiwr fyddwch yn eu creu yma'n "
+"medru\n"
 "newid dim ond eu ffeiliau a'u ffurfweddiad ei hun. Bydd rhaid i chi greu un\n"
 "defnyddiwr cyffredin ar gyfer chi eich hun. Dyma'r cyfrif ddylech "
 "mewngofnodi\n"
@@ -3223,6 +3131,7 @@ msgstr ""
 "system yn gweithio ragor. Os wnewch chi gamgymeriad mawr  fel defnyddiwr\n"
 "cyffredin, byddwch ond yn colli rhywfaint o wybodaeth, ac nid y system "
 "gyfan.\n"
+"\n"
 "Yn gyntaf rhowch eich enw go iawn. Dose dim rhaid, wrth gwrs  - mae modd\n"
 "i chi rhoi beth bynnag hoffech chi. Bydd DraX yn cymryd yr enw cyntafa'i roi "
 "yn\n"
@@ -3234,17 +3143,17 @@ msgstr ""
 "mewn\n"
 "perygl\n"
 "\n"
-"Os wnewch chi glicio \"Derbyn Defnyddiwr\", bydd modd ychwanegu fanint\n"
+"Os wnewch chi glicio \"Derbyn defnyddiwr\", bydd modd ychwanegu fanint\n"
 "fynnoch. Ychwanegwch ddefnyddiwr ar gyfer pob un o'ch ffrindiau: eich tad\n"
-"neu eich chwaer, e.e. Ao ôl ychwanegu'r holl ddefnyddwyr, cliciwch \"Gorffen"
+"neu eich chwaer, e.e. Ar ôl ychwanegu'r holl ddefnyddwyr, cliciwch \"Nesaf ->"
 "\".\n"
 "\n"
-"Bydd clicio'r botwm \"Uwch\" yn caniatáu i chi newid y \"gragen\" "
+"Bydd clicio'r botwm \"Uwch\" yn caniatáu i chi newid y \"cragen\" "
 "rhagosodedig\n"
 "ar gyfer y defnyddiwr hwnnw (bash yw'r rhagosodedig)."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Before continuing, you should carefully read the terms of the license. It\n"
 "covers the entire Mandrake Linux distribution. If you do agree with all the\n"
@@ -3252,9 +3161,9 @@ msgid ""
 "computer."
 msgstr ""
 "Cyn parhau dylech ddarllen amodau'r drwydded yn ofalus. Mae'n ymwneud\n"
-"â holl ddosbarthiad Mandrake Linux, ac os nad ydych yn cytuno â'r holl\n"
-"amodau, cliciwch ar fotwm \"Gwrthod\" fydd yn terfynu'r gosodiad yn syth.\n"
-"I barhau gyda'r gosodiad, cliciwch fotwm \"Derbyn\"."
+"â holl ddosbarthiad Mandrake Linux. Os ydych yn cytuno â'r holl amodau,\n"
+"cliciwch blwch \"Derbyn\". \n"
+"Os nad, ddiffoddwch eich cyfrifiadur."
 
 #: ../../install2.pm:1
 #, c-format
@@ -3326,12 +3235,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Na"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Iawn"
@@ -3436,6 +3347,16 @@ msgstr "Tynnu Windows(TM)"
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr "Nid oes rhaniadau FAT i newid eu maint (neu nad oes digon o le ar ôl)"
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
+"I siugrhau cywirdeb data'r rhaniad ar ôl ailfeintiol'r rhaniad(au),bydd \n"
+"gwiriadau'r system ffeiliau'n cael eu gwneud wrth i chi ail gychwyn Windows "
+"(TM)"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3638,9 +3559,9 @@ msgstr ""
 "yr Official Mandrake Linux User's Guide."
 
 #: ../../install_messages.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "http://www.mandrakelinux.com/en/91errata.php3"
-msgstr "http://www.mandrakelinux.com/en/90errata.php3"
+msgstr "http://www.mandrakelinux.com/en/91errata.php3"
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -3944,6 +3865,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "Cychwyn cam '%s\"\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Help"
+msgstr "Cymorth"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "not configured"
+msgstr "heb ffurfweddu"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Ffurfweddu"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -3995,9 +3936,9 @@ msgid "%d packages"
 msgstr "%d pecyn"
 
 #: ../../install_steps_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "No details"
-msgstr "Manylion"
+msgstr "Dim manylion"
 
 #: ../../install_steps_gtk.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1
@@ -4155,14 +4096,6 @@ msgstr "Nesaf ->"
 #, c-format
 msgid "Individual package selection"
 msgstr "Dewis pecynnau unigol."
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "Cymorth"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -4410,12 +4343,13 @@ msgstr "Dilysu"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Mae'r cyfrinair yn rhy syml ( rhaid iddo fod o leiaf %d nod o hyd)"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "Dim cyfrinair"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "Gosod cyfrinair gwraidd"
@@ -4447,24 +4381,24 @@ msgid "Bootloader"
 msgstr "Cychwynydd ar waith"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Boot"
-msgstr "Gwraidd"
+msgstr "Cychwyn"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "disabled"
-msgstr "dymunol"
+msgstr "anablwyd"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "activated"
-msgstr "cychwyn nawr"
+msgstr "gweithredu"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Firewall"
-msgstr "Mur Gwarchod/Llwybrydd"
+msgstr "Mur Cadarn"
 
 #: ../../install_steps_interactive.pm:1 ../../steps.pm:1
 #, c-format
@@ -4472,14 +4406,9 @@ msgid "Security"
 msgstr "Diogelwch"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "Security Level"
-msgstr "Lefel diogelwch:"
-
-#: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "not configured"
-msgstr "heb ffurfweddu"
+msgid "Security Level"
+msgstr "Lefel Diogelwch"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -4487,9 +4416,9 @@ msgid "Network"
 msgstr "Rhwydwaith"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network & Internet"
-msgstr "Rhyngwyneb rhwydwaith"
+msgstr "Rhwydwaith a'r Rhyngrwyd"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4497,9 +4426,9 @@ msgid "Graphical interface"
 msgstr "Rhyngwyneb graffigol"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Hardware"
-msgstr "HardDrake"
+msgstr "Caledwedd"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4581,6 +4510,16 @@ msgstr "Cloc caledwedd wedi ei osod i GMT"
 #, c-format
 msgid "Which is your timezone?"
 msgstr "Pa un yw eich parth amser?"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "Dewis gwael, ceisiwch eto\n"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Unable to contact mirror %s"
+msgstr "Methu fforchio: %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4665,6 +4604,11 @@ msgstr ""
 "Os nad oes gennych un ohonynt, Cliciwch Diddymu.\n"
 "Os mae dim ond rhai CDau sydd ar goll, yna cliciwch Iawn."
 
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "Popeth"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
@@ -4744,6 +4688,11 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "Chwilio am y pecynnau sydd ar gael"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Canfod pecynnau i'w uwchraddio"
 
@@ -4751,11 +4700,6 @@ msgstr "Canfod pecynnau i'w uwchraddio"
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Edrych arbecynnau wedieu gosod yn barod"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "Chwilio am y pecynnau sydd ar gael"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4869,11 +4813,6 @@ msgstr "Dewiswch math eich llygoden"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Upgrade"
-msgstr "Diweddaru"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
 msgid "Upgrade %s"
 msgstr "Diweddaru %s"
 
@@ -4897,15 +4836,19 @@ msgstr "Dyma restr lawn o'r allweddellau ar gael"
 msgid "Please choose your keyboard layout."
 msgstr "Dewiswch gynllun eich alweddell"
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Gadael"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr "Cytundeb trwyddedu"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "default:LTR"
-msgstr "rhagosodedig"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5461,6 +5404,11 @@ msgstr "Azerbaidjan (lladin)"
 
 #: ../../keyboard.pm:1
 #, c-format
+msgid "Arabic"
+msgstr "Arabeg"
+
+#: ../../keyboard.pm:1
+#, c-format
 msgid "Armenian (phonetic)"
 msgstr "Armenaidd (ffonetig)"
 
@@ -5490,14 +5438,14 @@ msgid "Dvorak"
 msgstr "Dvorak"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Zimbabwe"
-msgstr "efallai"
+msgstr "Zimbabwe"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
-msgstr ""
+msgstr "Zambia"
 
 #: ../../lang.pm:1 ../../standalone/drakxtv:1
 #, c-format
@@ -5505,664 +5453,664 @@ msgid "South Africa"
 msgstr "De Affrica"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Serbia"
-msgstr "cyfresol"
+msgstr "Serbia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Mayotte"
-msgstr ""
+msgstr "Mayotte"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Yemen"
-msgstr ""
+msgstr "Yemen"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Samoa"
-msgstr ""
+msgstr "Samoa"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "Wallis a Futuna"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Vanuatu"
-msgstr "llaw"
+msgstr "Vanuatu"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Vietnam"
-msgstr ""
+msgstr "Fietnam"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Virgin Islands (U.S.)"
-msgstr ""
+msgstr "Virgin Islands (U.S.)"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Virgin Islands (British)"
-msgstr ""
+msgstr "Virgin Islands (British)"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Venezuela"
-msgstr ""
+msgstr "Venezuela"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "Saint Vincent and the Grenadines"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Vatican"
-msgstr "Latfiaidd"
+msgstr "Vatican"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Uzbekistan"
-msgstr ""
+msgstr "Uzbekistan"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Uruguay"
-msgstr ""
+msgstr "Uruguay"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "United States Minor Outlying Islands"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Uganda"
-msgstr "Diweddaru"
+msgstr "Uganda"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Ukraine"
-msgstr "Wcranaidd"
+msgstr "Wcrain"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzania"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Taiwan"
-msgstr "Latfiaidd"
+msgstr "Taiwan"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Tuvalu"
-msgstr ""
+msgstr "Tuvalu"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "Trinidad a Tobago"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Turkey"
-msgstr ""
+msgstr "Twrci"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Tonga"
-msgstr ""
+msgstr "Tonga"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Tunisia"
-msgstr ""
+msgstr "Tunisia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Turkmenistan"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "East Timor"
-msgstr ""
+msgstr "Dwyrain Timor"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Tokelau"
-msgstr ""
+msgstr "Tokelau"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Tajikistan"
-msgstr ""
+msgstr "Tajikistan"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Thailand"
-msgstr ""
+msgstr "Gwlad Thail"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Togo"
-msgstr ""
+msgstr "Togo"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "French Southern Territories"
-msgstr ""
+msgstr "French Southern Territories"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Chad"
-msgstr ""
+msgstr "Chad"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "Turks and Caicos Islands"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Swaziland"
-msgstr "Zeland Newydd"
+msgstr "Swaziland"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Syria"
-msgstr ""
+msgstr "Syria"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "El Salvador"
-msgstr ""
+msgstr "El Salvador"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "Sao Tome a Principe"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Suriname"
-msgstr "Rhannu enw"
+msgstr "Suriname"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Somalia"
-msgstr "Parth"
+msgstr "Somalia"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Senegal"
-msgstr "Bengali"
+msgstr "Senegal"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "San Marino"
-msgstr ""
+msgstr "San Marino"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Sierra Leone"
-msgstr ""
+msgstr "Sierra Leone"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Slovakia"
-msgstr "Slfenaidd"
+msgstr "Slofacia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Svalbard and Jan Mayen Islands"
-msgstr ""
+msgstr "Svalbard and Jan Mayen Islands"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Slovenia"
-msgstr "Slfenaidd"
+msgstr "Slovenia"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Saint Helena"
-msgstr "Arhoswch"
+msgstr "Saint Helena"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Singapore"
-msgstr ""
+msgstr "Singapore"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sudan"
-msgstr "SunOS"
+msgstr "Swdan"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Seychelles"
-msgstr "Cragen"
+msgstr "Seychelles"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Solomon Islands"
-msgstr ""
+msgstr "Solomon Islands"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "Saudi Arabia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Rwanda"
-msgstr ""
+msgstr "Rwanda"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Russia"
-msgstr "Rwsiaidd"
+msgstr "Rwsia"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Romania"
-msgstr "Parth"
+msgstr "Rwmania"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Reunion"
-msgstr "Cydraniad"
+msgstr "Reunion"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Qatar"
-msgstr "Cychwyn"
+msgstr "Qatar"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Palau"
-msgstr ""
+msgstr "Palau"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Paraguay"
-msgstr ""
+msgstr "Paraguay"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Portugal"
-msgstr "Porth"
+msgstr "Portiwgal"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Palestine"
-msgstr "Dewis llwybr"
+msgstr "Palestinia"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Puerto Rico"
-msgstr "Protocol"
+msgstr "Puerto Rico"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Pitcairn"
-msgstr "Argraffu"
+msgstr "Pitcairn"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "Saint Pierre a Miquelon"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Poland"
-msgstr "Iwerddon"
+msgstr "Gwlad Pwyl"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Pakistan"
-msgstr ""
+msgstr "Pacistan"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Philippines"
-msgstr ""
+msgstr "Philippines"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "Papua New Guinea"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "French Polynesia"
-msgstr ""
+msgstr "French Polynesia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Peru"
-msgstr ""
+msgstr "Periw"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Panama"
-msgstr ""
+msgstr "Panama"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Oman"
-msgstr "llaw"
+msgstr "Oman"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "New Zealand"
-msgstr "Zeland Newydd"
+msgstr "Seland Newydd"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Niue"
-msgstr "Nodyn"
+msgstr "Niue"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Nauru"
-msgstr ""
+msgstr "Nauru"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Nepal"
-msgstr ""
+msgstr "Nepal"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Nicaragua"
-msgstr ""
+msgstr "Nicaragua"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Nigeria"
-msgstr "cyfresol"
+msgstr "Nigeria"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Norfolk Island"
-msgstr ""
+msgstr "Norfolk Island"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Niger"
-msgstr "Uwch"
+msgstr "Niger"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "New Caledonia"
-msgstr "Macedonaidd"
+msgstr "New Caledonia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Namibia"
-msgstr ""
+msgstr "Namibia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Mozambique"
-msgstr ""
+msgstr "Mozambique"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Malaysia"
-msgstr "Malayalam"
+msgstr "Malaysia"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mexico"
-msgstr "Msec"
+msgstr "Mecsico"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Malawi"
-msgstr ""
+msgstr "Malawi"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Maldives"
-msgstr ""
+msgstr "Maldives"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mauritius"
-msgstr "Amrywiol"
+msgstr "Mauritius"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Malta"
-msgstr ""
+msgstr "Malta"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Montserrat"
-msgstr "Porth Llygoden"
+msgstr "Montserrat"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Mauritania"
-msgstr ""
+msgstr "Mauritania"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Martinique"
-msgstr ""
+msgstr "Martinique"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Northern Mariana Islands"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Mongolia"
-msgstr ""
+msgstr "Mongolia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Myanmar"
-msgstr ""
+msgstr "Myanmar"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Mali"
-msgstr ""
+msgstr "Mali"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Macedonia"
-msgstr "Macedonaidd"
+msgstr "Macedonia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Marshall Islands"
-msgstr ""
+msgstr "Marshall Islands"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Madagascar"
-msgstr ""
+msgstr "Madagascar"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Moldova"
-msgstr ""
+msgstr "Moldova"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Monaco"
-msgstr "Monitor"
+msgstr "Monaco"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Morocco"
-msgstr ""
+msgstr "Morocco"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Libya"
-msgstr ""
+msgstr "Libya"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Latvia"
-msgstr "Latfiaidd"
+msgstr "Latfia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Luxembourg"
-msgstr ""
+msgstr "Luxembourg"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Lithuania"
-msgstr ""
+msgstr "Lithuania"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Lesotho"
-msgstr ""
+msgstr "Lesotho"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Liberia"
-msgstr "cyfresol"
+msgstr "Liberia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Sri Lanka"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Liechtenstein"
-msgstr "Trwydded"
+msgstr "Liechtenstein"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Lucia"
-msgstr ""
+msgstr "Saint Lucia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Lebanon"
-msgstr ""
+msgstr "Lubanus"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Laos"
-msgstr "Cofnodion"
+msgstr "Laos"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Kazakhstan"
-msgstr ""
+msgstr "Kazakhstan"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Cayman Islands"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Kuwait"
-msgstr "Gadael"
+msgstr "Kuwait"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Korea"
-msgstr "Rhagor"
+msgstr "Corea"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Korea (North)"
-msgstr ""
+msgstr "Corea (Gogledd)"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "Saint Kitts a Nevis"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Comoros"
-msgstr ""
+msgstr "Comoros"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Kiribati"
-msgstr ""
+msgstr "Kiribati"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Cambodia"
-msgstr ""
+msgstr "Cambodia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "Kyrgyzstan"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Kenya"
-msgstr "Allweddell"
+msgstr "Kenya"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Japan"
-msgstr ""
+msgstr "Siapan"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Jordan"
-msgstr ""
+msgstr "Yr Iorddonen"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Jamaica"
-msgstr ""
+msgstr "Jamaica"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Iceland"
-msgstr "Eislandaidd"
+msgstr "Ynys yr Iâ"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Iran"
-msgstr "Iranaidd"
+msgstr "Iran"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Iraq"
-msgstr ""
+msgstr "Irac"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "British Indian Ocean Territory"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "India"
-msgstr "Iranaidd"
+msgstr "India"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Israel"
-msgstr "Israelaidd"
+msgstr "Israel"
 
 #: ../../lang.pm:1 ../../standalone/drakxtv:1
 #, c-format
@@ -6170,114 +6118,114 @@ msgid "Ireland"
 msgstr "Iwerddon"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Indonesia"
-msgstr "dim"
+msgstr "Indonesia"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Hungary"
-msgstr "Hwngaraidd"
+msgstr "Hwngari"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Haiti"
-msgstr ""
+msgstr "Haiti"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Croatia"
-msgstr "Croataidd"
+msgstr "Croatia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Honduras"
-msgstr ""
+msgstr "Honduras"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Heard and McDonald Islands"
-msgstr ""
+msgstr "Heard and McDonald Islands"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Hong Kong"
-msgstr ""
+msgstr "Hong Kong"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Guyana"
-msgstr ""
+msgstr "Guyana"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Guinea-Bissau"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Guam"
-msgstr "Gemau"
+msgstr "Guam"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Guatemala"
-msgstr "Mynedfa"
+msgstr "Guatemala"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "South Georgia and the South Sandwich Islands"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Equatorial Guinea"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Guadeloupe"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Guinea"
-msgstr "Cyffredinol"
+msgstr "Guinea"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Gambia"
-msgstr ""
+msgstr "Gambia"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Greenland"
-msgstr "Iwerddon"
+msgstr "Greenland"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Gibraltar"
-msgstr ""
+msgstr "Gibraltar"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Ghana"
-msgstr ""
+msgstr "Ghana"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "French Guiana"
-msgstr "Ffrengig"
+msgstr "French Guiana"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Georgia"
-msgstr "Norwyaidd"
+msgstr "Georgia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Grenada"
-msgstr ""
+msgstr "Grenada"
 
 #: ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
@@ -6287,272 +6235,272 @@ msgstr "Y Deyrnas Unedig"
 #: ../../lang.pm:1
 #, c-format
 msgid "Gabon"
-msgstr ""
+msgstr "Gabon"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Faroe Islands"
-msgstr "Iwerddon"
+msgstr "Ynysoedd Faroe"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Micronesia"
-msgstr "Macedonaidd"
+msgstr "Micronesia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Falkland Islands (Malvinas)"
-msgstr ""
+msgstr "Falkland Islands (Malvinas)"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Fiji"
-msgstr "Gorffen"
+msgstr "Ffiji"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Finland"
-msgstr ""
+msgstr "Y Ffindir"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Ethiopia"
-msgstr "Estonaidd"
+msgstr "Ethiopia"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Spain"
-msgstr "Spaenaidd"
+msgstr "Sbaen"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Eritrea"
-msgstr "Maes Uwch"
+msgstr "Eritrea"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Western Sahara"
-msgstr ""
+msgstr "Western Sahara"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Egypt"
-msgstr "Gwag"
+msgstr "Yr Aifft"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Estonia"
-msgstr "Estonaidd"
+msgstr "Estonia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Ecuador"
-msgstr ""
+msgstr "Ecuador"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Algeria"
-msgstr "Yr Ariannin"
+msgstr "Algeria"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Dominican Republic"
-msgstr "Gweriniaeth Tsiec"
+msgstr "Dominican Republic"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Dominica"
-msgstr "Parth"
+msgstr "Dominica"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Denmark"
-msgstr ""
+msgstr "Denmarc"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Djibouti"
-msgstr "Ynghylch"
+msgstr "Djibouti"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Cyprus"
-msgstr ""
+msgstr "Cyprus"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Christmas Island"
-msgstr ""
+msgstr "Christmas Island"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Cape Verde"
-msgstr "Cau'r goeden"
+msgstr "Cape Verde"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Cuba"
-msgstr ""
+msgstr "Ciwba"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Colombia"
-msgstr ""
+msgstr "Colombia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "China"
-msgstr ""
+msgstr "Tsieina"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Cameroon"
-msgstr "zeroconf"
+msgstr "Cameroon"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Chile"
-msgstr "Dewis ffeil"
+msgstr "Chile"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Cook Islands"
-msgstr ""
+msgstr "Cook Islands"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "Cote d'Ivoire"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Switzerland"
-msgstr "Zeland Newydd"
+msgstr "Y Swisdir"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Brazzaville)"
-msgstr ""
+msgstr "Congo (Brazzaville)"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Central African Republic"
-msgstr "Gweriniaeth Tsiec"
+msgstr "Central African Republic"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Kinshasa)"
-msgstr ""
+msgstr "Congo (Kinshasa)"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "Cocos (Keeling) Islands"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Canada"
-msgstr "Calendr"
+msgstr "Canada"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Belize"
-msgstr "Newid maint"
+msgstr "Belize"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Belarus"
-msgstr "Belarusaidd"
+msgstr "Belarus"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Botswana"
-msgstr "Bosnieg"
+msgstr "Botswana"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bouvet Island"
-msgstr ""
+msgstr "Bouvet Island"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bhutan"
-msgstr ""
+msgstr "Bhutan"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bahamas"
-msgstr ""
+msgstr "Bahamas"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Brazil"
-msgstr ""
+msgstr "Brazil"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bolivia"
-msgstr ""
+msgstr "Bolivia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "Brunei Darussalam"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Bermuda"
-msgstr "Almaeneg"
+msgstr "Bermuda"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Benin"
-msgstr "Belgaidd"
+msgstr "Benin"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Burundi"
-msgstr ""
+msgstr "Burundi"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bahrain"
-msgstr ""
+msgstr "Bahrain"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Bulgaria"
-msgstr "Hwngaraidd"
+msgstr "Bwlgaria"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Burkina Faso"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bangladesh"
-msgstr ""
+msgstr "Bangladesh"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Barbados"
-msgstr ""
+msgstr "Barbados"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Bosnia ac Herzegovina"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Azerbaijan"
-msgstr "Albaniaidd"
+msgstr "Azerbaijan"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Aruba"
-msgstr "Grub"
+msgstr "Aruba"
 
 #: ../../lang.pm:1 ../../standalone/drakxtv:1
 #, c-format
@@ -6562,7 +6510,7 @@ msgstr "Awstralia"
 #: ../../lang.pm:1
 #, c-format
 msgid "American Samoa"
-msgstr ""
+msgstr "American Samoa"
 
 #: ../../lang.pm:1 ../../standalone/drakxtv:1
 #, c-format
@@ -6572,52 +6520,57 @@ msgstr "Yr Ariannin"
 #: ../../lang.pm:1
 #, c-format
 msgid "Antarctica"
-msgstr ""
+msgstr "Antarctica"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Angola"
-msgstr ""
+msgstr "Angola"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Netherlands Antilles"
-msgstr "Yr Iseldiroedd"
+msgstr "Netherlands Antilles"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Armenia"
-msgstr "Yr Ariannin"
+msgstr "Armenia"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Albania"
-msgstr "Albaniaidd"
+msgstr "Albania"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Anguilla"
-msgstr ""
+msgstr "Anguilla"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Antigua and Barbuda"
-msgstr ""
+msgstr "Antigua a Barbuda"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "United Arab Emirates"
-msgstr "Yr Unol Daleithiau"
+msgstr "United Arab Emirates"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Andorra"
-msgstr "Gwerthwr"
+msgstr "Andorra"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Afghanistan"
-msgstr "Albaniaidd"
+msgstr "Afghanistan"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "default:LTR"
+msgstr "rhagosodedig: D>Ch"
 
 #: ../../loopback.pm:1
 #, c-format
@@ -7042,8 +6995,10 @@ msgstr ""
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
-msgstr "Dynodi dyfeisiadau"
+"partitions), for the use of applications such as Oracle or DVD players"
+msgstr ""
+"Dynodi dyfeisiadau bras i ddyfeisiau bloc(megis dig caled\n"
+"rhaniadau), ar gyfer defnydd rhaglenni megis Oracle neu chwaraewyr DVD"
 
 #: ../../services.pm:1
 #, c-format
@@ -7334,11 +7289,11 @@ msgstr ""
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7542,8 +7497,8 @@ msgstr "Gadael gosod"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Install system updates"
-msgstr "Diweddariadau system gosod"
+msgid "Install updates"
+msgstr "Gosod diweddariadau"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7569,6 +7524,11 @@ msgstr "Ffurfweddu rhwydwaith"
 #, c-format
 msgid "Add a user"
 msgstr "Ychwanegu defnyddiwr"
+
+#: ../../steps.pm:1
+#, c-format
+msgid "Root password"
+msgstr "Cyfrinair gwraidd"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7617,13 +7577,21 @@ msgstr "Trwydded"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
+msgid "Language"
 msgstr "Dewis eich iaith"
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
 msgstr "utopia 25"
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "Iawn"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -7808,7 +7776,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Dewisiadau"
@@ -7832,14 +7800,6 @@ msgstr "Monitor"
 #, c-format
 msgid "Graphic Card"
 msgstr "Cerdyn Graffeg"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Gadael"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -8503,43 +8463,6 @@ msgstr "Mae tabl rhaniad gyrrwr %s yn mynd i gael ei ysgrifennu i'r ddisg!"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"Rydych wedi dewis meddalwedd rhannu RAID fel gwraidd (/)\n"
-"Nid oes llwythwr cychwyn yn medru trin hwn heb rhaniad /boot\n"
-"Cofiwch ychwanegu rhaniad /boot"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"Mae'r rhaniad rydych wedi dewis ychwanegu fel gwraidd (/) wedi'i leoli yn "
-"bellach na 1024ed silindr eich disg a nid oes gennych rhaniad /boot.\n"
-"Os ydych yn bwriadu defnyddio y rheolwr cychwyn LILO,  fe ddylech greu "
-"rhaniad /boot"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"Nid oes modd dderbyn creu /boot mor bell o ddechrau'r disg (ar silindr > "
-"1024).\n"
-"Naill ai rydych yn defnyddio LILO ac nid yw'n gweithio oot neu byddwch yn "
-"defnyddio LILO ac ni fydd yn gweithio."
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
 msgid "The package %s is needed. Install it?"
 msgstr "Rhaid cael pecyn %s. Ydych chi am ei osod?"
 
@@ -9036,6 +8959,11 @@ msgid "SCSI controllers"
 msgstr "Rheolyddion SCSI"
 
 #: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "Firewire controllers"
+msgstr "Rheolyddion USB"
+
+#: ../../harddrake/data.pm:1
 #, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr "Rheolyddion (E)IDE/ATA"
@@ -9173,7 +9101,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -9193,7 +9121,7 @@ msgstr ""
 "- \"lspcidrake -v | fgrep AUDIO\" pa yrrwyr i'w defnyddio\n"
 "drwy ragosodiad\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" pa yrrwyr mae'n defnyddio\n"
+"- \"grep sound-slot /etc/modules.conf\" pa yrrwyr mae'n defnyddio\n"
 "ar hyn o bryd\n"
 "\n"
 "- \"/sbin/lsmod\" gwirio os yw ei yrrwr wedi ei lwytho\n"
@@ -9659,8 +9587,8 @@ msgstr "Cysylltu â'r We"
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
-msgstr "USB Sagem (defnyddio pppoe)"
+msgid "Sagem (using pppoa) usb"
+msgstr "USB Sagem (defnyddio pppoa)"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -9775,17 +9703,17 @@ msgstr "Gwasanaethwr Gwe"
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Zeroconf host name must not contain a ."
-msgstr ""
-
-#: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid "Zeroconf Host name"
-msgstr "Enw Gwesteiwr Zeroconf"
+msgstr "Rhaid i enw gwesteiwr Zeroconf heidio cynnwys ."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Host name"
 msgstr "Enw gwesteiwr"
+
+#: ../../network/ethernet.pm:1 ../../network/network.pm:1
+#, c-format
+msgid "Zeroconf Host name"
+msgstr "Enw Gwesteiwr Zeroconf"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9795,19 +9723,10 @@ msgid ""
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
 msgstr ""
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-"Rhowch eich enw gwesteiwr os ydych yn gwybod\n"
-"beth ydyw Mae rhai gwasanaethwyr angen gwybod\n"
-"yr enw gwesteiwr i weithio. Dylai eich enw gwesteiwr\n"
-"fod yn enw cymhwysol llawn megis \"fymlwch.fynesg.fyco.com\""
+"\n"
+"\n"
+"Rhowch enw gwesteiwr Zeroconf heb ddot os nad ydych\n"
+"am ddefnyddio'r ewn gwesteiwr rhagosodedig."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -10155,9 +10074,9 @@ msgstr ""
 "%s"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The network needs to be restarted. Do you want to restart it ?"
-msgstr "Rhaid i becyn %s gael ei osod. Ydych chi am ei osod?"
+msgstr "Rhaid i'r rhwydwaith gael ei ailgychwyn.  Ydych chi am ei ailgychwyn?"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -10466,13 +10385,35 @@ msgstr "Cychwyn y peiriant"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
+msgid "Assign host name from DHCP address"
+msgstr "Rhowch enw'r gwesteiwr neu'r cyfeiriad IP.\n"
+
+#: ../../network/network.pm:1
+#, c-format
 msgid "Network Hotplugging"
-msgstr "Monitro'r Rhwydwaith"
+msgstr "Plygiobyw'rRhwydwaith"
 
 #: ../../network/network.pm:1
 #, c-format
 msgid "Track network card id (useful for laptops)"
 msgstr "Dilynnwch cyfernod cerdyn rhwydwaith (defnyddiol ar gyfer gliniadur)"
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "DHCP host name"
+msgstr "Enw gwesteiwr"
+
+#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "Netmask"
+msgstr "Netmask"
+
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "IP address"
+msgstr "Cyfeiriad IP"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10483,17 +10424,6 @@ msgstr "(bootp/dhcp/zeroconf)"
 #, c-format
 msgid "Automatic IP"
 msgstr "IP awtomatig"
-
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Netmask"
-msgstr "Netmask"
-
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "IP address"
-msgstr "Cyfeiriad IP"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10744,7 +10674,7 @@ msgstr "PDQ"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Print, Don't Queue"
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr "Model anhysbys"
@@ -10753,6 +10683,11 @@ msgstr "Model anhysbys"
 #, c-format
 msgid "Unknown model"
 msgstr "Model anhysbys"
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid "%s (Port %s)"
+msgstr "%s(Porth %s)"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -10906,11 +10841,6 @@ msgstr "Printerdrake"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr "Ydych chi eisiau ffurfwedu argraffydd arall?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Tynnu argraffydd \"%s\"..."
 
@@ -10926,7 +10856,7 @@ msgstr "Tynnu argraffydd"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Know how to use this printer"
+msgid "Learn how to use this printer"
 msgstr "Gwybod sut i ddefnyddio'r argraffydd"
 
 #: ../../printer/printerdrake.pm:1
@@ -11030,11 +10960,6 @@ msgstr "Math o gyswllt argraffydd"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Learn how to use this printer"
-msgstr "Gwybod sut i ddefnyddio'r argraffydd"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Raw printer"
 msgstr "Argraffydd bras"
 
@@ -11070,6 +10995,7 @@ msgid "Add a new printer"
 msgstr "Ychwanegu argraffydd newydd"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Modd Arferol"
@@ -11094,6 +11020,11 @@ msgstr "Furfweddiad CUPS"
 msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr ""
 "Adnewyddu rhestr argraffyddion (dangos pob argraffydd CUPS pell sydd ar gael)"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Display all available remote CUPS printers"
+msgstr "Arddangos pob  argraffydd CUPS pell sydd ar gael"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11122,16 +11053,6 @@ msgstr ""
 #, c-format
 msgid "Printing system: "
 msgstr "System argraffu."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Would you like to configure printing?"
-msgstr "Hoffech chi ffurfweddu argraffu?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr "Paratoi PrinterDrake..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11167,6 +11088,11 @@ msgstr "Pa system argraffu(sbwlydd) ydych chi am ei ddefnyddio?"
 #, c-format
 msgid "Select Printer Spooler"
 msgstr "Dewiswch Sbwlydd Argraffydd"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Setting Default Printer..."
+msgstr "Gosod yr Argraffydd Rhagosodedig"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12731,6 +12657,39 @@ msgstr ""
 "gyrwyr a mathau o gysylltiadau argraffyddion."
 
 #: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+"\n"
+"\n"
+"Nid oedd Printerdrake yn adnabod eich argraffydd. Dewiswch yr un cywir o'r "
+"rhestr."
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ")"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr "ar "
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr "("
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Configuring printer ..."
+msgstr "Ffurfweddu argraffydd  ..."
+
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Searching for new printers..."
 msgstr "Chwilio am argraffyddion newydd..."
@@ -12856,6 +12815,69 @@ msgstr "Gwirio eich system..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Restarting CUPS..."
+msgstr "Ail gychwynCUPS"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr ""
+"Mae'r gwesteiwr ar y rhestr yn barod, does dim modd ei ychwanegu eto.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr "Esiamplau cywir ar gyfer IP:\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "Nid yw'r IP'n gywir.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Server IP missing!"
+msgstr "IP'r gwasanaethwr ar goll!"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr ""
+"Rhowch gyfeiriad IP a porth gwesteiwr yr argraffydd rydych am ei ddefnyddio."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "Mynediad at argraffydd ar wasanaethwr CUPS pell"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Remove selected server"
+msgstr "Tynnu'r gwesteiwr"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Edit selected server"
+msgstr "Golygu'r gwesteiwr"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Add server"
+msgstr "Ychwanegu gwasanaethwr"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+"Ychwanegwch y gwasanaethwyr CUPS yr argraffwyr rydych am eu defnyddio. Bydd "
+"angen gwneud hyn dim ond os nad yw'r gwasanaethwyr yn darlledu eu gwybodaeth "
+"argraffu i'r rhwydwaith leol."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "IP address of host/network:"
 msgstr "Cyfeiriad IP gwesteiwr/rhwydwaith"
 
@@ -12868,38 +12890,13 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr "192.168.100.0/255.255.255.0\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr "192.168.100.0/24\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr "10.1.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr "10.0.0.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr "192.168.100.194\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr "Esiamplau cywir ar gyfer IP:\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
 msgstr "Nid yw IP'r gwesteiwr/rhwydwaith yn gywir.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
+msgstr "Cyfeiriad y gwestriwr/rhwydwaith ar goll."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12972,6 +12969,37 @@ msgstr ""
 #, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "Cywiro cyswllt CUPS yn awtomatig"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+"I gael mynediad at argraffyddion ar wasanaethwyr CUPS pell yn eich "
+"rhwydwaith lleol dim ond angen i chi  gychwyn yr dewis \"Canfod "
+"argraffyddion ar gyfrifiaduron pell\" ; bydd y gwasanaethwyr CUPS yn dweud "
+"wrth eich cyfrifiadur am eu argraffydd. Mae pob argraffydd sy'n hysbys i'ch "
+"cyfrifiadur yn cael ei restri yn adran \"Argraffyddion pell\" prif ffenestr "
+"Printerdrake. Os yw/nad yw eich gwasanaethwr(wyr) CUPS ar eich rhwydwaith "
+"lleol rhaid rhoi cyfeiriad(au) IP ac yn ddewisol rhif(au) porth yma i gael "
+"gwybodaeth am yr argraffydd gan y gwasanaethwr(wyr)."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "None"
+msgstr "Dim"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Additional CUPS servers: "
+msgstr "Gasanaethwyr CUPS ychwanegol:"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -13151,10 +13179,10 @@ msgstr "os wedi ei osod i iawn, adrodd y gwirio i syslog."
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
-"os wedi ei osod i iawn, , gwirio am gyfrinair gwag, neu un arall ddyllai fod "
+"os wedi ei osod i iawn,  gwirio am gyfrinair gwag, neu un arall ddyllai fod "
 "yn /etc/shadow neu eraill gyda enw 0."
 
 #: ../../security/help.pm:1
@@ -15103,6 +15131,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr "%s"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr "Dewiswch y data i'w gadw wrth gefn..."
 
@@ -15363,16 +15396,6 @@ msgstr "Rhowch y cyfeiriadur lle mae'r ffeiliau wrth gefn yn cael eu cadw"
 #, c-format
 msgid "Restore from Hard Disk."
 msgstr "Adfer o'r Ddisg Caled."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Secure Connection"
-msgstr "Cysylltiad Diogel"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "FTP Connection"
-msgstr "Cysylltiad FTP"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16303,6 +16326,196 @@ msgstr "Nid yw cron ar gael et ar gyfer di-wraidd"
 msgid "Installation of %s failed. The following error occured:"
 msgstr "Mae gosod %s wedi methu. Digwyddodd y gwall canlynol:"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "Na, tydw i ddim eisiau awto-mewngofnodi"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "Iawn, rwyf eisiau awto-mewngofnodi gyda (defnyddiwr, bwrdd gwaith)"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "Cychwyn yr amgylchedd graffigol wrth gychwyn eich system"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "Modd system"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr "Croeso Cychwyn"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr "Sgrin Lilo"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+"\n"
+"Dewis thema ar\n"
+"gyfer lilo a bootsplash,\n"
+"mae modd eu dewis\n"
+"ar wahân"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "Themâu"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Dewis sgrin croeso"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"Rydych yn defnyddio %s fel rheolwr cychwyn.\n"
+"Cliciwch Ffurfweddu i gychwyn dewin gosod"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr "Themâu LiLo a Croeso Cychwyn wedi eu gosod yn llwyddiannus"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr "Methodd gosod y thema!"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr "Nodyn"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr "Ail gychwyh 'lilo'"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+"Methu ailgychwyn LiLo!\n"
+"Cychwyn \"lilo\" fel gwraidd ar y linell orchymyn i gwblhau gosod thema "
+"LiLo'n llawn."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr "Methu cychwyn mkinitrd -f /boot/initrd-%s.img %s."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+"Methu ysgrifennu  /etc/sysconfig/bootsplash.\\\\\n"
+"Heb ganfod y ffeil"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "Ysgrifennu  %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr "Methu ysgrifennu  /etc/sysconfig/bootsplash."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "Heb ganfod neges lilo"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "Copïo %s i %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr "Cadw %s i %s.old wrth gefn"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "Creu thema newydd"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"Dangos thema\n"
+"yn y consol"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr "Gosod themâu"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "Modd Lilo/grub"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "Modd Yaboot"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/Ffeil/_Gadael"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_Ffeil"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "Ffurfweddu'r Math o Gychwyn"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -16440,6 +16653,16 @@ msgstr "Offeryn Adross Gwall Mandrake"
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "Paramedrau"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "Ffurfweddu Cysylltiad â'r Rhyngrwyd"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "Cleient DHCP"
 
@@ -16453,11 +16676,6 @@ msgstr "Cerdyn Ethernet"
 msgid "Gateway"
 msgstr "Mynedfa"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "Paramedrau"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -16467,11 +16685,6 @@ msgstr "Math o gyswllt:"
 #, c-format
 msgid "Profile: "
 msgstr "Proffil:"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "Ffurfweddu Cysylltiad â'r Rhyngrwyd"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -16747,8 +16960,8 @@ msgstr "Tynnu modiwl"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr "peidio cynnwys modiwlau raid"
+msgid "Add a module"
+msgstr "Ychwanegu modiwl"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16762,13 +16975,13 @@ msgstr "os oes angen"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "grym"
+msgid "omit raid modules"
+msgstr "peidio cynnwys modiwlau raid"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "Ychwanegu modiwl"
+msgid "force"
+msgstr "grym"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16782,23 +16995,18 @@ msgstr "Maes Uwch"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "Cyffredinol"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "fersiwn cnewyllyn"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "Gwall Drakfloppy: %s"
+msgid "default"
+msgstr "rhagosodedig"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "rhagosodedig"
+msgid "General"
+msgstr "Cyffredinol"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16819,11 +17027,6 @@ msgstr "Maint"
 #, c-format
 msgid "Module name"
 msgstr "Enw'r modiwl"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16931,7 +17134,7 @@ msgid "Choose the applications that will support the fonts:"
 msgstr "Dewiswch y rhaglenni fydd yn cynnal ffontiau:"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " Copyright (C) 2001-2002 by MandrakeSoft \n"
@@ -16965,7 +17168,8 @@ msgid ""
 msgstr ""
 "\n"
 " Hawlfraint (C) 2001-2002  MandrakeSoft \n"
-"\tDUPONT Sebastien sdupont\\@mandrakesoft.com\n"
+"\tDUPONT Sebastien sdupont(fersiwn wreiddiol)\n"
+"        CHAUMETTE Damien<dchaumette\\@mandrakesoft.com\n"
 "\n"
 "Mae'r rhaglen hon yn feddalwedd rhydd; medrwch ei ailddosbarthu\n"
 "a/neu ei newid o dan amodau Trwydded Gyhoeddus Gyffredinol GNU\n"
@@ -17525,6 +17729,11 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "Path"
+msgstr "Llwybr"
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "group :"
 msgstr "grwp:"
 
@@ -17585,11 +17794,6 @@ msgstr "Eiddo"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Path"
-msgstr "Llwybr"
-
-#: ../../standalone/drakperm:1
-#, c-format
 msgid "Permissions"
 msgstr "Caniatadau"
 
@@ -17602,23 +17806,6 @@ msgstr "Derbyn presennol"
 #, c-format
 msgid "browse"
 msgstr "pori"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr "dewis ffeil perm i weld/golygu"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
-msgstr ""
-"Mae Drakperm yn cael ei ddefnyddio i weld ffeiliau i'w defnyddio i drwsio "
-"caniatad, perchnogion, a grwpiau drwy msec.\n"
-"Mae modd i chi olygu eich rheolau eich hunfydd yn ysgrifennu droe y rheolau "
-"rhagosodedig."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17669,6 +17856,23 @@ msgstr "Symud y rheol i fyny un lefel"
 #, c-format
 msgid "Up"
 msgstr "I fyny"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr "dewis ffeil perm i weld/golygu"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
+msgstr ""
+"Mae Drakperm yn cael ei ddefnyddio i weld ffeiliau i'w defnyddio i drwsio "
+"caniatad, perchnogion, a grwpiau drwy msec.\n"
+"Mae modd i chi olygu eich rheolau eich hunfydd yn ysgrifennu droe y rheolau "
+"rhagosodedig."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17859,13 +18063,13 @@ msgstr "Rhybuddion Diogelwch:"
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid "(default value: %s)"
-msgstr "(gwerth rhagosodedig: %s)"
+msgid "Security Level:"
+msgstr "Lefel diogelwch:"
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid "Security Level:"
-msgstr "Lefel diogelwch:"
+msgid "(default value: %s)"
+msgstr "(gwerth rhagosodedig: %s)"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -17881,7 +18085,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -17890,21 +18094,24 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 "Safonol: Dyma'r safon diogelwch sy'n cael ei argymell ar gyfer cyfrifiadur "
-"i'w ddefnyddio i gysylltu â'r Rhyngrwyd fel cleient.\n"
+"i'w ddefnyddio\n"
+"              i gysylltu â'r Rhyngrwyd fel cleient.\n"
 "\n"
 "Uchel:      Mae rhai cyfyngiadau eisoes, ac mae gwiriadau'n cael eu rhedeg "
 "bob nos.\n"
 "\n"
 "Uchaf:      Mae diogelwch yn ddigon uchel i ddefnyddio'r system fel "
-"gwasanaethwr sy'n medru derbyn\n"
-"                 cysylltiadau o nifer o gleientiau. Os mai eich peiriant "
-"yw'r unig gleient ar y Rhyngrwyd, dylech\t              ddewis lefel is.\n"
+"gwasanaethwr sy'n medru\n"
+"                derbyn cysylltiadau o nifer o gleientiau. Os mai eich "
+"peiriant yw'r unig gleient ar y\n"
+"              Rhyngrwyd, dylech ddewis lefel is.\n"
 "\n"
-"Paranoia:  Mae'n debyg i'r lefel blaenorol ond mae'r system wedi ei gau'n "
-"llwyr a nodweddion diogelwch ar eu heithaf.\n"
+"Paranoia:  Mae'n debyg i'r lefel cynt ond mae'r system wedi ei gau'n llwyr a "
+"nodweddion diogelwch\n"
+" ar eu                   heithaf.\n"
 "\n"
 "Gweinyddwr Diogelwch:\n"
 "                 Os yw'r dewis 'Rhybuddion Diogelwch' wedi ei ddewis, bydd "
@@ -18269,26 +18476,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/Dewisiadau"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect jazz drives"
-msgstr "/Awtoganfod gyrrwyr jazz"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect modems"
-msgstr "/Awtoganfod modem"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect printers"
-msgstr "/Awtoganfod argraffydd"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr "cynradd"
 
@@ -18302,6 +18489,16 @@ msgstr "eilradd"
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr "Cliciwch ar ddyfais yn y goeden chwith i gael at ei wybodaeth"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Unknown"
+msgstr "Anhysbys"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "unknown"
+msgstr "anhysbys"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18362,11 +18559,6 @@ msgstr "Ynghylch Harddrake"
 msgid "/_About..."
 msgstr "/_Ynghylch..."
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/_Cymorth"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -18405,15 +18597,20 @@ msgstr "Cymoerh Harddrake"
 msgid "/_Fields description"
 msgstr "/_Disgrifiad meysydd"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/_Cymorth"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/_Quit"
+msgstr "/_Gadael"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "/Awtoganfod_gyrrwr jazz"
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_Dewisiadau"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18425,10 +18622,10 @@ msgstr "/Awtoganfod_modem"
 msgid "/Autodetect _printers"
 msgstr "/Awtoganfod_argraffydd"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
-msgid "/_Quit"
-msgstr "/_Gadael"
+msgid "/_Options"
+msgstr "/_Dewisiadau"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18527,7 +18724,7 @@ msgstr "Lefel"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr "Fformatio disgiau meddal derbyniol i'r gyrrwr"
 
 #: ../../standalone/harddrake2:1
@@ -18684,6 +18881,16 @@ msgstr "A oes gan y cpu y Cyrix 6x86 Coma bug"
 #, c-format
 msgid "Coma bug"
 msgstr "Coma bug"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr "nodweddion arbennig y gyrrwr (llosgi neu gynnal DVD)"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
+msgstr "Maint y gyrrwr"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -19167,126 +19374,180 @@ msgstr "Monitro'r Rhwydwaith"
 
 #: ../../standalone/printerdrake:1
 #, c-format
-msgid "Reading printer data ..."
-msgstr "Darllen data argraffydd..."
+msgid "Reading data of installed printers..."
+msgstr "Darllen data am argraffyddion gosodedig..."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Name/IP address of host:"
-msgstr "Cyfeiriad IP gwesteiwr/rhwydwaith"
+msgstr "Enw/cyfeiriad IP gwesteiwr"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
-msgstr ""
-"Mae'r gwesteiwr/rhwydwaith ar y rhestr yn barod, does dim modd ei "
-"ychwanegu.\n"
+msgstr "Mae'r gwesteiwr ar y rhestr yn barod, does dim modd ei ychwanegu.\n"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scannerdrake"
-msgstr "Sganiwr"
+msgstr "Scannerdrake"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "You must enter a host name or an IP address.\n"
-msgstr "Rhowch enw'r gwesteiwr neu'r IP"
+msgstr "Rhowch enw'r gwesteiwr neu'r cyfeiriad IP.\n"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-"Dewis y rhwydwaith neu westeiwr ddylai'r argraffyddion lleol fod ar gael "
-"iddynt:"
+msgstr "Dewis y gwesteiwr ddylai'r sganiwr lleol fod ar gael iddynt:"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sharing of local scanners"
-msgstr "Rhannu argraffyddion lleol"
+msgstr "Rhannu sganwyr lleol"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "This machine"
-msgstr "(ar y peiriant hwn)"
+msgstr "Y peiriant hwn"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove selected host"
-msgstr "Tynnu'r gwesteiwr/rhwydwaith"
+msgstr "Tynnu'r gwesteiwr"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Edit selected host"
-msgstr "Golygu'r gwesteiwr/rhwydwaith"
+msgstr "Golygu'r gwesteiwr"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add host"
-msgstr "Ychwanegu gwesteiwr/rhwydwaith"
+msgstr "Ychwanegu gwesteiwr"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "These are the machines from which the scanners should be used:"
-msgstr ""
-"Dyma'r cyfrifiaduron a rhwydweithiau ddylai'r argraffydd(ion) lleol fod ar "
-"gael:"
+msgstr "Dyma'r cyfrifiaduron ddylai'r sganwyr fod ar gael:"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Usage of remote scanners"
-msgstr "Defnyddiwch le gwag"
+msgstr "Defnyddiwch o sganwyr pell"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "All remote machines"
-msgstr "Dim cyfrifiaduron pell"
+msgstr "Pob cyfrifiadur pell"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
 "available:"
 msgstr ""
-"Dyma'r cyfrifiaduron a rhwydweithiau ddylai'r argraffydd(ion) lleol fod ar "
-"gael:"
+"Dyma'r cyfrifiaduron a rhwydweithiau ddylai'r sganiwr lleol fod ar gael:"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
-msgstr ""
+msgstr "Defnyddio sganwyr ar westeiwyr:"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use scanners on remote computers"
-msgstr ""
+msgstr "Defnyddio sganer ar gyfrifiaduron pell"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner sharing to hosts: "
-msgstr "Rhannu argraffydd ar gwesteiwr/rhwydwaith:"
+msgstr "Rhannu sganwyr i westeiwyr:"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "The scanners on this machine are available to other computers"
-msgstr "Mae' argraffyddion y cyfrifiadur hwn ar gael ar gyfer rhai eraill"
+msgstr "Mae' sganwyr y cyfrifiadur hwn ar gael ar gyfer rhai eraill"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can also decide here whether scanners on remote machines should be made "
 "available on this machine."
 msgstr ""
-"Medrwch benderfynu a ddylai argraffydd ar gyfrifiadur pell fod ar gael ar "
-"gyfer y cyfrifiadur hwn."
+"Medrwch benderfynu a ddylai sganwyr ar gyfrifiadur pell fod ar gael ar gyfer "
+"y cyfrifiadur hwn."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Here you can choose whether the scanners connected to this machine should be "
 "accessable by remote machines and by which remote machines."
 msgstr ""
-"Yma medrwch benderfynu a ddylai'r argraffyddion sy'n gysylltiedig â'r "
-"cyfrifiadur hwn fod ar gael i gyfrifiaduron pell a pha rai."
+"Yma medrwch benderfynu a ddylai'r sganwyr sy'n gysylltiedig â'r cyfrifiadur "
+"hwn fod ar gael i gyfrifiaduron pell a pha rai."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Re-generating list of configured scanners ..."
+msgstr "Ailgynhyrchu rhestr o sganwyr wedi eu ffurfweddu..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Searching for new scanners ..."
+msgstr "Chwilio am sganiwr newydd..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Searching for configured scanners ..."
+msgstr "Chwilio am sganiwr wedi ei ffurfweddu..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Scanner sharing"
+msgstr "Rhannu sganiwr"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Add a scanner manually"
+msgstr "Ychwanegu sganiwr gyda llaw"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Search for new scanners"
+msgstr "Chwilio am sganwyr newydd"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "There are no scanners found which are available on your system.\n"
+msgstr "Does unrhyw sganiwr wedi ei ganfod ar gael ar eich cyfrifiadur.\n"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The following scanner\n"
+"\n"
+"%s\n"
+"is available on your system.\n"
+msgstr ""
+"Mae'r argraffydd canlynol\n"
+"\n"
+"%s\n"
+"ar gael ar eich system.\n"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The following scanners\n"
+"\n"
+"%s\n"
+"are available on your system.\n"
+msgstr ""
+"Mae argraffyddion canlynol\n"
+"\n"
+"%s\n"
+"ar gael ar eich system.\n"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19301,6 +19562,31 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
+msgid "choose device"
+msgstr "dewis dyfais"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Please select the device where your %s is attached"
+msgstr "Dewiswch y ddyfais lle mae %s wedi ei gysylltu"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Searching for scanners ..."
+msgstr "Chwilio am sganiwyr..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Auto-detect available ports"
+msgstr "Awtoganfod pyrth ar gael"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr "(Sylwer: Nid oes modd awtoganfod pyrth paralel)"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
 msgid ""
 "The %s must be configured by printerdrake.\n"
 "You can launch printerdrake from the Mandrake Control Center in Hardware "
@@ -19311,25 +19597,13 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid "choose device"
-msgstr "dewis dyfais"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Please select the device where your %s is attached"
-msgstr ""
-"Nid oedd Scannerdrake yn medru canfod eich  %s.\n"
-"Dewiswch y ddyfais lle mae'r sganiwr wedi ei gysylltu"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
 msgid "The %s is unsupported"
 msgstr "Nid yw %s yn cael ei gynnal"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "The %s is not known by this version of Scannerdrake."
-msgstr "Nid yw %s yn cael ei gynnal gan y fersiwn hwn o scannerdrake."
+msgstr "Nid yw %s yn hysbys gan y fersiwn hwn o Scannerdrake."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19338,71 +19612,28 @@ msgstr "Nid yw %s yn cael ei gynnal gan y fersiwn hwn o Mandrake Linux"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Re-generating list of configured scanners ..."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Searching for new scanners ..."
-msgstr "Chwilio am argraffyddion newydd..."
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Searching for configured scanners ..."
-msgstr "Chwilio am argraffyddion newydd..."
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Scanner sharing"
-msgstr "Rhannu argraffydd"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Add a scanner manually"
-msgstr "Dewis defnyddwyr gyda llaw"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Search for new scanners"
-msgstr "Chwilio am argraffyddion newydd..."
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "There are no scanners found which are available on your system.\n"
-msgstr ""
-"Nid oes unrhyw argraffydd wedi ei ganfod wedi ei gysylltu'n uniongyrchol "
-"â'ch cyfrifiadur"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"The following scanner\n"
-"\n"
-"%s\n"
-"is available on your system.\n"
-msgstr ""
-"Mae'r argraffydd canlynol\n"
-"\n"
-"%s%s\n"
-"wedi ei gysylltu'n uniongyrchol â'ch system"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"The following scanners\n"
-"\n"
-"%s\n"
-"are available on your system.\n"
-msgstr ""
-"Mae argraffyddion canlynol\n"
-"\n"
-"%s%s\n"
-"wedi eu cysylltu'n uniongyrchol â'ch system"
+msgid "Port: %s"
+msgstr "Porth: %s"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
-msgstr "Dewiswch sganiwr"
+msgid ", "
+msgstr ", "
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Detected model: %s"
+msgstr "Canfyddwyd model: %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr " ("
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Select a scanner model"
+msgstr "Dewiswch model sganiwr"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19495,6 +19726,10 @@ msgid "Scientific Workstation"
 msgstr "Gweithfan Gwyddonol"
 
 #: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr "Rhaglenni gwyddonol megis gnuplot"
+
+#: ../../share/compssUsers:999
 msgid "Console Tools"
 msgstr "Offer y Consol"
 
@@ -19571,12 +19806,12 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache, Pro-ftpd"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "E-bost/Offer Grwp/Newyddion"
+msgid "Mail"
+msgstr "E-bost"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr "Gwasanaethwr e-bost Postfix, gwasanaethwr newyddion Inn"
+msgid "Postfix mail server"
+msgstr "Gwasanaethwr e-bost Postfix"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -19678,192 +19913,18 @@ msgid "Programs to manage your finances, such as gnucash"
 msgstr "Rhaglenni i reoli eich cyllid, fel gnucash"
 
 #~ msgid ""
-#~ "You must indicate where you wish to place the information required to "
-#~ "boot\n"
-#~ "GNU/Linux.\n"
-#~ "\n"
-#~ "Unless you know exactly what you are doing, choose \"First sector of "
-#~ "drive\n"
-#~ "(MBR)\"."
+#~ "Please enter your host name if you know it.\n"
+#~ "Some DHCP servers require the hostname to work.\n"
+#~ "Your host name should be a fully-qualified host name,\n"
+#~ "such as ``mybox.mylab.myco.com''."
 #~ msgstr ""
-#~ "Rhaid i chi ddangos lle rydych am osod yr wybodaeth angenrheidiol i "
-#~ "gychwyn\n"
-#~ "GNU/Linux\n"
-#~ "Os nad ydych yn gwybod yn union beth rydych yn ei wneud, dewiswch "
-#~ "\"First\n"
-#~ "sector of drive (MBR)\"."
+#~ "Rhowch eich enw gwesteiwr os ydych yn gwybod\n"
+#~ "beth ydyw Mae rhai gwasanaethwyr angen gwybod\n"
+#~ "yr enw gwesteiwr i weithio. Dylai eich enw gwesteiwr\n"
+#~ "fod yn enw cymhwysol llawn megis \"fymlwch.fynesg.fyco.com\""
 
-#~ msgid ""
-#~ "DrakX now needs to know if you want to perform a default (\"Recommended"
-#~ "\")\n"
-#~ "installation or if you want to have greater control (\"Expert\") over "
-#~ "your\n"
-#~ "installation. You can also choose to do a new installation or upgrade "
-#~ "your\n"
-#~ "existing Mandrake Linux system:\n"
-#~ "\n"
-#~ " * \"Install\": completely wipes out the old system. However, depending "
-#~ "on\n"
-#~ "what is currently installed on your machine, you may be able to keep "
-#~ "some\n"
-#~ "old partitions (Linux or otherwise) unchanged;\n"
-#~ "\n"
-#~ " * \"Upgrade\": this installation class allows to simply update the\n"
-#~ "packages currently installed on your Mandrake Linux system. It keeps "
-#~ "your\n"
-#~ "hard drives' current partitions as well as user configurations. All "
-#~ "other\n"
-#~ "configuration steps remain available, similar to a normal installation;\n"
-#~ "\n"
-#~ " * \"Upgrade Packages Only\": this new installation class allows you to\n"
-#~ "upgrade an existing Mandrake Linux system while keeping all system\n"
-#~ "configurations unchanged. Adding new packages to the current "
-#~ "installation\n"
-#~ "is also possible.\n"
-#~ "\n"
-#~ "Upgrades should work fine on Mandrake Linux systems using version \"8.1"
-#~ "\"\n"
-#~ "or later.\n"
-#~ "\n"
-#~ "Depending on your GNU/Linux knowledge, select one of the following "
-#~ "choices:\n"
-#~ "\n"
-#~ " * Recommended: choose this if you have never installed a GNU/Linux\n"
-#~ "operating system. The installation will be very easy and you will only "
-#~ "be\n"
-#~ "asked a few questions;\n"
-#~ "\n"
-#~ " * Expert: if you have a good GNU/Linux understanding, you may wish to\n"
-#~ "perform a highly customized installation. Some of the decisions you will\n"
-#~ "have to make may be difficult if you do not have good GNU/Linux "
-#~ "knowledge,\n"
-#~ "so it is not recommended that those without a fair amount of experience\n"
-#~ "select this installation class."
-#~ msgstr ""
-#~ "Mae DrakX am wybod a ydych am wneud gosodiad rhagosodedig.\n"
-#~ "Hwn sy'n cael ei (\"Argymell\") neu a ydych eisiau mwy o reolaeth\n"
-#~ " (\"Arbenigwr\"). Mae gennych hefyd y dewis o wneud gosodiad newydd neu\n"
-#~ " uwchraddio system Mandrake Linux cyfredol.\n"
-#~ "\n"
-#~ " *\"Gosod\" Mae hwn yn dileu'r hen system yn llwyr. Mewn gwirionedd, yn\n"
-#~ "dibynnu ar ffurf eich peiriant, bydd modd cadw rhai hen raniadau (Linux "
-#~ "neu\n"
-#~ "eraill) heb eu newid.\n"
-#~ "\n"
-#~ " *\"Uwchraddio\" Mae'r gosodiad yn caniatáu i chi uwchraddio'r pecynnau\n"
-#~ "sydd wedi eu gosod ar eich system Mandrake Linux. Bydd yn cadw'r "
-#~ "rhaniadau\n"
-#~ "cyfredol ar eich disg caled yn ogystal â ffurfweddiad defnyddwyr. Mae "
-#~ "pob\n"
-#~ "cam ffurfweddiad arall ar gael fel mewn gosodiad arferol.\n"
-#~ "\n"
-#~ " *\"Uwchraddio Pecynnau'n Unig\" Mae hwn yn ddewis newydd i ganiatáu\n"
-#~ "uwchraddio system Mandrake Linux cyfredol tra'n cadw'r holl ffurfweddiad\n"
-#~ "system heb ei newid. Mae ychwanegu pecynnau newydd i'r system hefyd \n"
-#~ "yn bosibl.\n"
-#~ "\n"
-#~ "Dylai'r uwchraddiad weithio gyda systemau Mandrake Linux yn cychwyn\n"
-#~ "o rifyn \"8.1\" \n"
-#~ "\n"
-#~ "Gan ddibynnu ar eich gwybodaeth am GNH/Linux, dewiswch un o'r canlynol:\n"
-#~ "\n"
-#~ " *Argymhellir: dewiswch hwn os nad ydych wedi gosod system weithredu\n"
-#~ "GNU/Linux o'r blaen. Bydd y gosod yn hawdd a bydd ond rhaid i chi ateb\n"
-#~ "rhai cwestiynau\n"
-#~ "\n"
-#~ " *Arbenigwr: os oes gennych wybodaeth drylwyr am GNU/Linux, mae modd\n"
-#~ "i chi ddewis y math yma o osodiad. Bydd hwn yn caniatáu i chi osod y "
-#~ "system\n"
-#~ "yn ôl eich gofynion eich hun. Bydd ateb rhai o'r cwestiynau'n anodd os "
-#~ "nad\n"
-#~ "oes gennych wybodaeth drylwyr o GNU/Linux, felly peidiwch â dewis hwn os\n"
-#~ " nad ydych yn gwybod beth rydych yn ei wneud."
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "Gwall Drakfloppy: %s"
 
-#~ msgid "Please be patient. This operation can take several minutes."
-#~ msgstr "Amynedd... Gall y weithred hon gymryd rhai munudau."
-
-#~ msgid ""
-#~ "Your new Mandrake Linux operating system is currently being installed.\n"
-#~ "Depending on the number of packages you will be installing and the speed "
-#~ "of\n"
-#~ "your computer, this operation could take from a few minutes to a\n"
-#~ "significant amount of time.\n"
-#~ "\n"
-#~ "Please be patient."
-#~ msgstr ""
-#~ "Mae eich system weithredu Mandrake Linux newydd yn cael ei osod.\n"
-#~ "Yn dibynnu ar y nifer o becynnau byddwch yn eu gosod a chyflymder\n"
-#~ "eich cyfrifiadur, bydd yn cymryd rhwng ychydig o amser a sbel go lew.\n"
-#~ "\n"
-#~ "Amynedd..."
-
-#~ msgid ""
-#~ "X (for X Window System) is the heart of the GNU/Linux graphical "
-#~ "interface\n"
-#~ "on which all the graphical environments (KDE, GNOME, AfterStep,\n"
-#~ "WindowMaker, etc.) bundled with Mandrake Linux rely.\n"
-#~ "\n"
-#~ "You will be presented the list of available resolutions and color depth\n"
-#~ "available for your hardware. Choose the one that best suit your needs "
-#~ "(you\n"
-#~ "will be able to change that after installation though). When you are\n"
-#~ "satisfied with the sample shown in the monitor, click \"OK\". A window "
-#~ "will\n"
-#~ "then appear and ask you if you can see it.\n"
-#~ "\n"
-#~ "If you are doing an \"Expert\" installation, you will enter the X\n"
-#~ "configuration wizard. See the corresponding section of the manual for "
-#~ "more\n"
-#~ "information about this wizard.\n"
-#~ "\n"
-#~ "If you can see the message during the test, and answer \"Yes\", then "
-#~ "DrakX\n"
-#~ "will proceed to the next step. If you cannot see the message, it simply\n"
-#~ "means that the configuration was wrong and the test will automatically "
-#~ "end\n"
-#~ "after 10 seconds, restoring the screen. Refer then to the video\n"
-#~ "configuration section of the user guide for more information on how to\n"
-#~ "configure your display."
-#~ msgstr ""
-#~ "X (am X Window System) yw calon rhag wyneb graffigol GNU/Linux\n"
-#~ "y mae pob amgylchedd graffig megis KDE, Gnome, AfterStep\n"
-#~ "WindowMaker ag ati, sydd o fewn Mandrake Linux, yn dibynnu. Yn yr\n"
-#~ "adran hon bydd DrakX yn ceisio ffurfweddu  X yn awtomatig.\n"
-#~ "\n"
-#~ "Mae'n anarferol iddo fethu oni bai bod y caledwedd yn hen iawn (neu yn\n"
-#~ "newydd iawn). Os yw'n llwyddo, bydd yn cychwyn X ar y  X cydraniad\n"
-#~ "gorau posibl yn ddibynnol ar faint y monitor. Bydd ffenestr yn ymddangos\n"
-#~ "gan ofyn os ydych yn ei weld.\n"
-#~ "\n"
-#~ "Os ydych yn gwneud gosodiad \"Arbenigwr\", byddwch yn defnyddio'r \n"
-#~ "dewin ffurfweddu  X. Gwelwch yr adran gyfatebol o'r llawlyfr am ragor o\n"
-#~ "wybodaeth am y dewin.\n"
-#~ "\n"
-#~ "Os ydych yn medru gweld y neges ac ateb \"Iawn\", yna bydd DrakX yn\n"
-#~ "mynd ymlaen i'r cam nesaf. Os nad ydych yn gweld y neges mae'n golygu\n"
-#~ "bod y ffurfweddiad yn anghywir a daw i ben ymhen 10 eiliad, gan adfer y "
-#~ "sgrin."
-
-#~ msgid "Formatting partitions"
-#~ msgstr "Yn fformatio rhaniadau"
-
-#~ msgid "Formatting loopback file %s"
-#~ msgstr "Yn fformatio ffeil cylch-ôl %s"
-
-#~ msgid "Formatting"
-#~ msgstr "Fformatio"
-
-#~ msgid "Switching between ALSA and OSS help"
-#~ msgstr "Newid o gymorth ALSA i OSS"
-
-#~ msgid "The network needs to be restarted"
-#~ msgstr "Rhaid ail gychwyn y rhwydwaith"
-
-#~ msgid "(bootp/dhcp)"
-#~ msgstr "(bootp/dhcp)"
-
-#~ msgid "Detecting devices ..."
-#~ msgstr "Canfod dyfeisiadau..."
-
-#~ msgid "Test ports"
-#~ msgstr "Profwch y pyrth"
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"

@@ -22,16 +22,18 @@ msgid ""
 "You can use userdrake to add a user to this group."
 msgstr ""
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Ləğv et"
@@ -804,233 +806,6 @@ msgstr ""
 "duymesine basin ve ya esas acilis ucun %d saniye gozleyin.\n"
 "\n"
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "Oldu"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr ""
-"Bəli, bu istifadəçi üçün avtomatik giriş istəyirəm (istifadəçi, masa üstü)"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "Xeyr, Avtomatik giriş istəmirəm"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "Açılışda X-Window sistemini başlat"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "Sistem modu"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "Örtüklər"
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Splash selection"
-msgstr "Paket seçkilərini saxla"
-
-#: ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Qur"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Açılış İdarəçisi olaraq hazırda %s işlədirsiniz.\n"
-"Quraşdırma sehirbazını başlatmaq üçün tıqlayın."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Theme installation failed!"
-msgstr "Quruluş sinifini seçin"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, fuzzy, c-format
-msgid "Notice"
-msgstr "NoVİdeo"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "Xəta"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Write %s"
-msgstr "XFree %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Create new theme"
-msgstr "Yeni bölmə yarat"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-
-#: ../../bootlook.pm:1
-#, fuzzy, c-format
-msgid "Install themes"
-msgstr "Sistemi qur"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "Lilo/grub modu"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "Yaboot modu"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "Açılışda Auroranı başlat"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "Ənənəvi Gtk+ Monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "Ənənəvi Monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "NewStyle Monitor"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "NewStyle Kateqoriyasından Monitor"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/Fayl/_Çıx"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_Fayl"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "Qurulum Tərzi Quraşdırılması"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1241,6 +1016,15 @@ msgstr ""
 "(xəta %s)\n"
 "\n"
 "Bütün bölmələri itirmək istəyirsiniz?\n"
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "Xəta"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -2865,12 +2649,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Xeyr"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Bəli"
@@ -2980,6 +2766,13 @@ msgstr "\"Windows\"u sil"
 #, fuzzy, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr "FAT bölməsi yoxdur ya da loopback üçün lazımi yer buraxılmayıb"
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3487,6 +3280,7 @@ msgstr "Başlanğıc addımı `%s'\n"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "Help"
 msgstr "/_Yardım"
@@ -3495,6 +3289,12 @@ msgstr "/_Yardım"
 #, fuzzy, c-format
 msgid "not configured"
 msgstr "yenidən quraşdır"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Qur"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -4105,6 +3905,16 @@ msgid "Which is your timezone?"
 msgstr "Sisteminiz hansı məqsədlə istifadə ediləcək?"
 
 #: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "Bir çap edici qurmaq istəyirsiniz?"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Unable to contact mirror %s"
+msgstr "Fork edilə bilmir: %s"
+
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Əks ünvanına bağlantı qurulur"
@@ -4401,6 +4211,15 @@ msgstr "Bütün mövcud klaviaturaların siyahısı"
 #, fuzzy, c-format
 msgid "Please choose your keyboard layout."
 msgstr "Klaviatura quruluşunu seçiniz."
+
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Çıx"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -7050,6 +6869,14 @@ msgstr "İşlətdiyiniz dili seçin"
 msgid "utopia 25"
 msgstr ""
 
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "Oldu"
+
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
 msgid "logdrake"
@@ -7234,7 +7061,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Seçənəklər"
@@ -7258,14 +7085,6 @@ msgstr "Monitor"
 #, fuzzy, c-format
 msgid "Graphic Card"
 msgstr "Ekran kartı"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Çıx"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -8400,6 +8219,11 @@ msgstr ""
 
 #: ../../harddrake/data.pm:1
 #, c-format
+msgid "Firewire controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr ""
 
@@ -8532,7 +8356,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -8947,7 +8771,7 @@ msgstr "İnternetə bağlan"
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
+msgid "Sagem (using pppoa) usb"
 msgstr ""
 
 #: ../../network/adsl.pm:1
@@ -9057,13 +8881,13 @@ msgid "Zeroconf host name must not contain a ."
 msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, fuzzy, c-format
-msgid "Zeroconf Host name"
+#, c-format
+msgid "Host name"
 msgstr "Ev sahibi adı"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid "Host name"
+#, fuzzy, c-format
+msgid "Zeroconf Host name"
 msgstr "Ev sahibi adı"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
@@ -9074,18 +8898,6 @@ msgid ""
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
 msgstr ""
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-"Xahiş edirik kompüterinizın adını girin.\n"
-"Məsələn``kompüteradı.sahəadı.com''.\n"
-"Əgə şəbəkə keçidi istifadə edirsinizsə bunun da IP nömrəsini girməlisiniz."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9719,6 +9531,11 @@ msgstr "Açılışda başladılır"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
+msgid "Assign host name from DHCP address"
+msgstr "Xahiş edirik siçanınızı seçin"
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
 msgid "Network Hotplugging"
 msgstr "Şəbəkə quraşdırılması"
 
@@ -9729,13 +9546,8 @@ msgstr ""
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
-msgid "(bootp/dhcp/zeroconf)"
-msgstr "(bootp/dhcp)"
-
-#: ../../network/network.pm:1
-#, c-format
-msgid "Automatic IP"
-msgstr "Avtomatlaşdırılmış IP"
+msgid "DHCP host name"
+msgstr "Ev sahibi adı"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -9748,6 +9560,16 @@ msgstr "Netmask"
 #, c-format
 msgid "IP address"
 msgstr "IP ünvanı"
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "(bootp/dhcp/zeroconf)"
+msgstr "(bootp/dhcp)"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Automatic IP"
+msgstr "Avtomatlaşdırılmış IP"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10309,6 +10131,7 @@ msgid "Add a new printer"
 msgstr "Çap Edicisiz"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Normal Mod"
@@ -13572,6 +13395,11 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup:1
+#, c-format
+msgid "%s"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid "Please select data to backup..."
 msgstr "Xahiş edirik istifadə üçün bir dil seçin."
@@ -13816,16 +13644,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Restore from Hard Disk."
 msgstr "Disketdən geri çağır"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "Secure Connection"
-msgstr "Çap Edici Bağlantısı Seçin"
-
-#: ../../standalone/drakbackup:1
-#, fuzzy, c-format
-msgid "FTP Connection"
-msgstr "Yerli Şəbəkə quraşdırılması"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -14662,6 +14480,185 @@ msgstr ""
 msgid "Installation of %s failed. The following error occured:"
 msgstr "%s qurulumu iflas etdi. Olan xəta:"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "Xeyr, Avtomatik giriş istəmirəm"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr ""
+"Bəli, bu istifadəçi üçün avtomatik giriş istəyirəm (istifadəçi, masa üstü)"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "Açılışda X-Window sistemini başlat"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "Sistem modu"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "Örtüklər"
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Splash selection"
+msgstr "Paket seçkilərini saxla"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"Açılış İdarəçisi olaraq hazırda %s işlədirsiniz.\n"
+"Quraşdırma sehirbazını başlatmaq üçün tıqlayın."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Theme installation failed!"
+msgstr "Quruluş sinifini seçin"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, fuzzy, c-format
+msgid "Notice"
+msgstr "NoVİdeo"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Write %s"
+msgstr "XFree %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Create new theme"
+msgstr "Yeni bölmə yarat"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+
+#: ../../standalone/drakboot:1
+#, fuzzy, c-format
+msgid "Install themes"
+msgstr "Sistemi qur"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "Lilo/grub modu"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "Yaboot modu"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/Fayl/_Çıx"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_Fayl"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "Qurulum Tərzi Quraşdırılması"
+
 #: ../../standalone/drakbug:1
 #, fuzzy, c-format
 msgid "No browser available! Please install one"
@@ -14792,6 +14789,16 @@ msgstr ""
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "Parametrlər"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "İnternet Bağlantısı Quraşdırılması"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "DHCP Alıcısı"
 
@@ -14805,11 +14812,6 @@ msgstr "Eternet Kartı"
 msgid "Gateway"
 msgstr "Keçit"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "Parametrlər"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -14819,11 +14821,6 @@ msgstr "Bağlantı növü:"
 #, c-format
 msgid "Profile: "
 msgstr "Profil: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "İnternet Bağlantısı Quraşdırılması"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -15089,8 +15086,8 @@ msgstr "Modulu çıxart"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr "raid modulları keç"
+msgid "Add a module"
+msgstr "Modul əlavə et"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15104,13 +15101,13 @@ msgstr "lazım olarsa"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "zorla"
+msgid "omit raid modules"
+msgstr "raid modulları keç"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "Modul əlavə et"
+msgid "force"
+msgstr "zorla"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15124,23 +15121,18 @@ msgstr "Ustaların Sahəsi"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "Ümumi"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "çəyirdək buraxılışı"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "DrakFloppy xətası: %s"
+msgid "default"
+msgstr "əsas"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "əsas"
+msgid "General"
+msgstr "Ümumi"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15161,11 +15153,6 @@ msgstr "Böyüklük"
 #, c-format
 msgid "Module name"
 msgstr "Modul adı"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
@@ -15795,6 +15782,11 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakperm:1
+#, c-format
+msgid "Path"
+msgstr ""
+
+#: ../../standalone/drakperm:1
 #, fuzzy, c-format
 msgid "group :"
 msgstr "İş qrupu"
@@ -15852,11 +15844,6 @@ msgid "Property"
 msgstr "Qapı"
 
 #: ../../standalone/drakperm:1
-#, c-format
-msgid "Path"
-msgstr ""
-
-#: ../../standalone/drakperm:1
 #, fuzzy, c-format
 msgid "Permissions"
 msgstr "Buraxılış: %s\n"
@@ -15869,19 +15856,6 @@ msgstr "İstifadəçini qəbul et"
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "browse"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -15932,6 +15906,19 @@ msgstr ""
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Up"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -16531,11 +16518,6 @@ msgstr ""
 msgid "/_About..."
 msgstr "/Kömək/_Haqqında..."
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/_Kömək"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -16570,6 +16552,11 @@ msgstr ""
 msgid "/_Fields description"
 msgstr "İzah"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/_Kömək"
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "/_Quit"
@@ -16580,11 +16567,6 @@ msgstr "Çıx"
 msgid "/Autodetect _jazz drives"
 msgstr "Avtomatik təsbit işlət"
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_Seçənəklər"
-
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "/Autodetect _modems"
@@ -16594,6 +16576,11 @@ msgstr "Avtomatik təsbit işlət"
 #, fuzzy, c-format
 msgid "/Autodetect _printers"
 msgstr "Avtomatik təsbit işlət"
+
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Options"
+msgstr "/_Seçənəklər"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16841,6 +16828,16 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Coma bug"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -17478,14 +17475,6 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "choose device"
 msgstr "Açılış avadanlığı"
@@ -17508,6 +17497,14 @@ msgstr "Avtomatik təsbit işlət"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
@@ -17717,11 +17714,13 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache və Pro-ftpd"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "Verici, ePoçt/Groupware/Xəbərlər"
+#, fuzzy
+msgid "Mail"
+msgstr "Mali"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
+#, fuzzy
+msgid "Postfix mail server"
 msgstr "Postfix məktub vericisi, Inn xəbər vericisi"
 
 #: ../../share/compssUsers:999
@@ -17821,6 +17820,51 @@ msgstr "Şəxsi Maliyyə"
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Şəxsi maliyyə idarəçiləri, məsələn gnucash"
 
+#~ msgid ""
+#~ "Please enter your host name if you know it.\n"
+#~ "Some DHCP servers require the hostname to work.\n"
+#~ "Your host name should be a fully-qualified host name,\n"
+#~ "such as ``mybox.mylab.myco.com''."
+#~ msgstr ""
+#~ "Xahiş edirik kompüterinizın adını girin.\n"
+#~ "Məsələn``kompüteradı.sahəadı.com''.\n"
+#~ "Əgə şəbəkə keçidi istifadə edirsinizsə bunun da IP nömrəsini girməlisiniz."
+
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "DrakFloppy xətası: %s"
+
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+
+#~ msgid "Launch Aurora at boot time"
+#~ msgstr "Açılışda Auroranı başlat"
+
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr "Ənənəvi Gtk+ Monitor"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "Ənənəvi Monitor"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "NewStyle Monitor"
+
+#~ msgid "NewStyle Categorizing Monitor"
+#~ msgstr "NewStyle Kateqoriyasından Monitor"
+
+#, fuzzy
+#~ msgid "Secure Connection"
+#~ msgstr "Çap Edici Bağlantısı Seçin"
+
+#, fuzzy
+#~ msgid "FTP Connection"
+#~ msgstr "Yerli Şəbəkə quraşdırılması"
+
+#~ msgid "Mail/Groupware/News"
+#~ msgstr "Verici, ePoçt/Groupware/Xəbərlər"
+
+#~ msgid "Postfix mail server, Inn news server"
+#~ msgstr "Postfix məktub vericisi, Inn xəbər vericisi"
+
 #~ msgid "/Options"
 #~ msgstr "/Seçənəklər"
 
@@ -17870,10 +17914,6 @@ msgstr "Şəxsi maliyyə idarəçiləri, məsələn gnucash"
 #, fuzzy
 #~ msgid "Know how to use this printer"
 #~ msgstr "Qurğuları sınamaq istəyirsiniz?"
-
-#, fuzzy
-#~ msgid "Would you like to configure printing?"
-#~ msgstr "Bir çap edici qurmaq istəyirsiniz?"
 
 #, fuzzy
 #~ msgid "Preparing Printerdrake..."

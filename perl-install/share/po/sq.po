@@ -24,16 +24,18 @@ msgstr ""
 "duhet të shtoni të gjithë përdoruesit po në atë grup \"fileshare\". \n"
 "Kjo mund të arrihet falas programit userdrake."
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Anulo"
@@ -115,15 +117,14 @@ msgid "Country"
 msgstr "Vendi:"
 
 #: ../../any.pm:1
+#, fuzzy, c-format
+msgid "All languages"
+msgstr "Zgjedheni gjuhën tuaj"
+
+#: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
 msgstr ""
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "Të gjitha"
 
 #: ../../any.pm:1
 #, c-format
@@ -506,6 +507,16 @@ msgstr "Mbrojtja e pëlqimeve me parullë"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr ""
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Enable ACPI"
+msgstr "Autorizo nisje nga CD?"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "Afat para se të niset me udhëzim imazhi me marrëvshje"
 
@@ -558,6 +569,11 @@ msgstr "Hedhe"
 #, c-format
 msgid "On Floppy"
 msgstr "Mbi Diskete Floppy"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "First sector of the root partition"
+msgstr "Sektori i par në ndarjen e nisjes me udhëzues"
 
 #: ../../any.pm:1
 #, c-format
@@ -768,247 +784,6 @@ msgstr ""
 "ose pritni %d sekonda për nisje të udhëzuar.\n"
 "\n"
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "OK"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr ""
-"Po, dhëshiroj një autokyqje me këtë (zgjedhje e përdoruesit dhe tryezës)"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "Jo, nuk dëshiroj autokyqje"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "Nise interfac e mjedisit me grafik kur sistemi juaj niset"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "Modë i sistemit"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr "Imazh gjatë nisjes me udhëzim"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr "Ekran i Lilo"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-"\n"
-"Zgjedhe një temë për\n"
-"lilo dhe imazhin për nisje të udhëzuar,\n"
-"ju mund ti zgjidhni\n"
-"veqmas"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "Temat"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Splash selection"
-msgstr "Zgjedhës i mazhit"
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Konfiguro"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Ju jeni duke përdorur momentalisht sistemin e eksploatimit të qeverisur nga %"
-"s.\n"
-"Kliko në Konfigurim për të ndryshuar listën e nisjes me udhëzim"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr ""
-"Instalimi i temës për imazhë të nisjes së udhëzuar për LILO, përfundoi me "
-"sukses"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr "Dështim gjatë instalimit të temës"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr "Njoftim"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "Gabim"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr "Rinise 'lilo'"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-"E pa mundur nisja e Lilo!\n"
-"Nise \"lilo\" në linjën komanduese si përdorues administrator (root) për të "
-"përfunduar instalimin e temës LILO."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr "Krijo initrd me 'mkinitrd -f /boot/initrd-%s.img %s'."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr "E pa mundur nisja e mkinitrd -f /boot/initrd-%s.img %s."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-"Nuk mund të shruhet në /etc/sysconfig/bootsplash\n"
-"Skedarja nuk gjindet."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "Shkruarja e %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr "Nuk mund të shruhet në /etc/sysconfig/bootsplash."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "Lajmë LILO nuk gjindet"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "Kopjo nga %s në %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr "Regjistro nga %s në %s.old"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "Krijo temë të re"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-"Çfaqe temën\n"
-"ndër konsol"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr "Intalim i temave"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "Modë Lilo/grub"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "Modë me nisje të udhëzuar"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "Nisje e plotë grafike (Aurora)"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "Monitor tradicionel Gtk+"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "Monitor tradicionel"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "Monitor me stil të ri"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "Monitor me stil të ri në kategorizim"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/Skedare/_Braktise"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_Skedare"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "Konfigurim i Stilit të nisjes"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1171,8 +946,27 @@ msgstr ""
 
 #: ../../fsedit.pm:1
 #, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"Ju keni zgjedhur një program me ndarje RAID sikur ndarje rrënjëzore root "
+"(/).\n"
+"Që sistemi i juaj të funksionoj pa problem, shtoni një ndarje jo RAID\n"
+"të repertorit ndarës /boot"
+
+#: ../../fsedit.pm:1
+#, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Pika montuese %s është në përdorim e sipër\n"
+
+#: ../../fsedit.pm:1
+#, fuzzy, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr ""
+"Emri i stampuesit duhet të posedoj vetëm shkronja, numëra dhe vija të ulta "
+"(_)"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1207,6 +1001,15 @@ msgstr ""
 "(gabimi është %s)\n"
 "\n"
 "A jeni i pajtimit që të hymbni të gjitha ndarjetë?\n"
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "Gabim"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1316,8 +1119,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1330,7 +1133,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1693,7 +1496,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1886,7 +1689,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -2641,7 +2444,7 @@ msgstr ""
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -2721,7 +2524,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 
@@ -2767,7 +2570,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -3386,12 +3189,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Jo"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Po"
@@ -3500,6 +3305,13 @@ msgstr "Zhdukeni Windows(TM)"
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Asnjë ndarje FAT për të ridimenziunuar (ose nuk ka hapësirë të mjaftueshme)"
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -4007,6 +3819,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "Nisje e etapës `%s'\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Help"
+msgstr "Ndihmë"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "not configured"
+msgstr "i pa konfiguruar"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Konfiguro"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -4221,14 +4053,6 @@ msgstr "Tjetri ->"
 #, c-format
 msgid "Individual package selection"
 msgstr "Zgjedhni pakot individualisht"
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "Ndihmë"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -4479,12 +4303,13 @@ msgstr ""
 "Kjo parullë është shumë e shkurtër (duhet të jetë më së paku prej %d "
 "simboleve)"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "Ska nevojë për parullë"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "Parulla root"
@@ -4544,11 +4369,6 @@ msgstr "Siguria"
 #, fuzzy, c-format
 msgid "Security Level"
 msgstr "Nivel i Sigurisë:"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "not configured"
-msgstr "i pa konfiguruar"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -4652,6 +4472,16 @@ msgid "Which is your timezone?"
 msgstr "Cila është zona juaj orare?"
 
 #: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "A dëshironi të konfiguroni stampimin?"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Unable to contact mirror %s"
+msgstr "I pa mundur furkimi: %s"
+
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Transferim i listës së pasqyreve me pako të lira..."
@@ -4736,6 +4566,11 @@ msgstr ""
 "Nëse ju nuk posedoni asnjë nga këto CD-e, kliko mbi Anulo.\n"
 "Nëse vetëm disa nga CD-të mungojnë, çzgjedhi, dhe kliko Ok."
 
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "Të gjitha"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
@@ -4815,6 +4650,11 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "Kërkim i pakove disponible..."
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Gjetja pakove për t'azhurnuar..."
 
@@ -4822,11 +4662,6 @@ msgstr "Gjetja pakove për t'azhurnuar..."
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Kërkim i pakove t'instaluara më parë..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "Kërkim i pakove disponible..."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4944,11 +4779,6 @@ msgstr "Ju lutemi zgjedheni tipin e minit tuaj."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Upgrade"
-msgstr "Azhurno"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
 msgid "Upgrade %s"
 msgstr "Azhurno %s"
 
@@ -4972,15 +4802,19 @@ msgstr "Ja ku është lista komplete e tastierave në disponibilitet"
 msgid "Please choose your keyboard layout."
 msgstr "Ju lutemi zgjedhni tipin tuaj të tastierës"
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Braktise"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr "Licenc e pajtueshmërisë"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "default:LTR"
-msgstr "default"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5533,6 +5367,11 @@ msgstr "Belgjik"
 #, c-format
 msgid "Azerbaidjani (latin)"
 msgstr "Azerbeigjan (latine)"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Arabic"
+msgstr ""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6694,6 +6533,11 @@ msgstr "Andora"
 msgid "Afghanistan"
 msgstr "Afganistani"
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "default:LTR"
+msgstr "default"
+
 #: ../../loopback.pm:1
 #, c-format
 msgid "Circular mounts %s\n"
@@ -7115,10 +6959,10 @@ msgstr ""
 "e vogla, dhe prtokolet më komplekse nevojiten për rrjete më komplekse."
 
 #: ../../services.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 "Mundëson paraqitjen e mjeteve të tipit blok (për shembull shpërndarjen e "
 "diskut\n"
@@ -7417,10 +7261,10 @@ msgstr ""
 "       XFdrake resolution"
 
 #: ../../standalone.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
 "[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
 "[--dynamic=dev]"
@@ -7625,8 +7469,8 @@ msgid "Exit install"
 msgstr "Fund i instalimit"
 
 #: ../../steps.pm:1
-#, c-format
-msgid "Install system updates"
+#, fuzzy, c-format
+msgid "Install updates"
 msgstr "Instalo sistemin e azhurnimeve"
 
 #: ../../steps.pm:1
@@ -7653,6 +7497,11 @@ msgstr "Konfiguroje rrjetin"
 #, c-format
 msgid "Add a user"
 msgstr "Shto një përdorues"
+
+#: ../../steps.pm:1
+#, fuzzy, c-format
+msgid "Root password"
+msgstr "Ska nevojë për parullë"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7701,13 +7550,21 @@ msgstr "Licenca"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
+msgid "Language"
 msgstr "Zgjedheni gjuhën tuaj"
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
 msgstr "utopi 25"
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "OK"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -7893,7 +7750,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Mundësit"
@@ -7917,14 +7774,6 @@ msgstr "Monitor"
 #, c-format
 msgid "Graphic Card"
 msgstr "Kartelë Grafike"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Braktise"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -8596,46 +8445,6 @@ msgstr "Tabela e ndarjeve të %s tani do të shkruhet në diskë!"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"Ju keni zgjedhur një program me ndarje RAID sikur ndarje rrënjëzore root "
-"(/).\n"
-"Që sistemi i juaj të funksionoj pa problem, shtoni një ndarje jo RAID\n"
-"të repertorit ndarës /boot"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"Kujdes, ndarja e juaj rrënjëzore (root) gjindet më largë se cilindri i 1024-"
-"ti.\n"
-"Dhe nëse mendoni të përdorni një program me nisje të ushëzuar LILO, atëher "
-"ju\n"
-"duhet të krijoni një ndarje për repertorin /boot ndër cilindrin e 1024-të "
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"Programi i nisjes me udhëzim LILO nuk mund të funksionoj nëse ju e vendosni\n"
-"ndarjen e repertorit /boot aq largë në disk (d.m.th. me largë se cilindri i "
-"1024-ti).\n"
-"Nëse ju nuk e përdorni LILO, atëher nuk keni nevojë për një ndarje të "
-"repertori /boot."
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
 msgid "The package %s is needed. Install it?"
 msgstr "Pakoja %s është e nevojshme. Instalojeni atë?"
 
@@ -9134,6 +8943,11 @@ msgid "SCSI controllers"
 msgstr "Kontrolluesit SCSI"
 
 #: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "Firewire controllers"
+msgstr "Kontrolluesit USB"
+
+#: ../../harddrake/data.pm:1
 #, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr "Kontrolluesit (E)IDE/ATA"
@@ -9271,7 +9085,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -9292,7 +9106,7 @@ msgstr ""
 "kartela\n"
 "juaj me marrëveshje\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" do të ju tregoj se cili pilot "
+"- \"grep sound-slot /etc/modules.conf\" do të ju tregoj se cili pilot "
 "përdoret\n"
 "aktualisht\n"
 "\n"
@@ -9759,8 +9573,8 @@ msgstr "Kyqje në internet"
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
-msgstr "Sagem (duke përdorur pppoe) usb"
+msgid "Sagem (using pppoa) usb"
+msgstr "Sagem (duke përdorur pppoa) usb"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -9880,13 +9694,13 @@ msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
-msgid "Zeroconf Host name"
-msgstr "Zona konfiguruese dhe Emri i ftuesit"
+msgid "Host name"
+msgstr "Emri i ftuesit"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
-msgid "Host name"
-msgstr "Emri i ftuesit"
+msgid "Zeroconf Host name"
+msgstr "Zona konfiguruese dhe Emri i ftuesit"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9896,18 +9710,6 @@ msgid ""
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
 msgstr ""
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-"Ju lutemi hyni emrin e ftuesit nëse ju e njifni.\n"
-"Disa server DHCP kanë nevojë për emrin e ftuesit për të funksionuar.\n"
-"Ky duhet të jetë i plotëfuqishëm sikur për shembull:``mybox.mylab.myco.com''."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -10570,6 +10372,11 @@ msgstr "Nise në nisje të sistemit"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
+msgid "Assign host name from DHCP address"
+msgstr "Ju lutemi futni emrin e ftuesit apo IP."
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
 msgid "Network Hotplugging"
 msgstr "Vështrim i Rrjetit (Network)"
 
@@ -10580,6 +10387,23 @@ msgstr ""
 "Identifukues i kartelës së rrjetit (i pëdorueshëm për kompjuter bartës)"
 
 #: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "DHCP host name"
+msgstr "Emri i ftuesit"
+
+#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "Netmask"
+msgstr "Maskë ndër rrjet"
+
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "IP address"
+msgstr "Adresa IP"
+
+#: ../../network/network.pm:1
 #, c-format
 msgid "(bootp/dhcp/zeroconf)"
 msgstr "(bootp/dhcp/konfigurimzero)"
@@ -10588,17 +10412,6 @@ msgstr "(bootp/dhcp/konfigurimzero)"
 #, c-format
 msgid "Automatic IP"
 msgstr "Shpërndarje automatike e adresës IP"
-
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Netmask"
-msgstr "Maskë ndër rrjet"
-
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "IP address"
-msgstr "Adresa IP"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10849,7 +10662,7 @@ msgstr "PDQ"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Stampo, Mos prit në Rresht"
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr "Model i pa njoftur"
@@ -10858,6 +10671,11 @@ msgstr "Model i pa njoftur"
 #, c-format
 msgid "Unknown model"
 msgstr "Model i pa njoftur"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "%s (Port %s)"
+msgstr "Porta"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -11011,11 +10829,6 @@ msgstr "Printerdrake"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr "A dëshironi të konfiguroni një stampues tjetër?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Zhdukje e stampuesit \"%s\"..."
 
@@ -11031,8 +10844,8 @@ msgstr "Zhduke stampuesin"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Know how to use this printer"
-msgstr "Doracak i përdorimit të këtij stampuesi"
+msgid "Learn how to use this printer"
+msgstr "Mëso mbi përdorimin e këtij stampuesi"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11137,11 +10950,6 @@ msgstr "Tip i kyqjes së stampuesit"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Learn how to use this printer"
-msgstr "Mëso mbi përdorimin e këtij stampuesi"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Raw printer"
 msgstr "Stampues me hyrje direkte"
 
@@ -11177,6 +10985,7 @@ msgid "Add a new printer"
 msgstr "Shto një stampues të ri"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Modë Normal"
@@ -11199,6 +11008,13 @@ msgstr "Konfigurim CUPS"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Refresh printer list (to display all available remote CUPS printers)"
+msgstr ""
+"Rifreskoje listën e stampuesve (për të çfaqurë të gjithë stampuesit në "
+"distancë CUPS)"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Display all available remote CUPS printers"
 msgstr ""
 "Rifreskoje listën e stampuesve (për të çfaqurë të gjithë stampuesit në "
 "distancë CUPS)"
@@ -11230,16 +11046,6 @@ msgstr ""
 #, c-format
 msgid "Printing system: "
 msgstr "Sistem stampues: "
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Would you like to configure printing?"
-msgstr "A dëshironi të konfiguroni stampimin?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr "Pregatitje e Printerdrake..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11275,6 +11081,11 @@ msgstr "Çfarë sistemi stampues (spooler) dëshironi të përdorni?"
 #, c-format
 msgid "Select Printer Spooler"
 msgstr "Zgjedheni qeverisësin e stampimit"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Setting Default Printer..."
+msgstr "Stampues me marrëvshje"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12861,6 +12672,35 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Configuring printer ..."
+msgstr "Konfigurim i stampuesit %s\"..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Searching for new printers..."
 msgstr "Kërkim i stampuesëve të rinjë..."
 
@@ -12982,6 +12822,64 @@ msgid "Checking your system..."
 msgstr "Verifikim i sistemit tuaj..."
 
 #: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Restarting CUPS..."
+msgstr "Rinise XFS"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr "Ky ftues/rrjet gjindet në listë, dhe nuk mund të shtohet përsëri.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr "Shembull për kyqjet IP:\n"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "Hyrja e ftuesit/rrjetit IP nuk është e kyqur.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Server IP missing!"
+msgstr "Emri i Serverit NCP mungon!"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "Stampues në server të distancës CUPS"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Remove selected server"
+msgstr "Zhduke ftusin/rrjetin e zgjedhur"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Edit selected server"
+msgstr "Boto ftusin/rrjetin e zgjedhur"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Add server"
+msgstr "Shto një përdorues"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address of host/network:"
 msgstr "Adresa IP e ftuesit/rrejtit:"
@@ -12993,38 +12891,13 @@ msgstr "Ky ftues/rrjet gjindet në listë, dhe nuk mund të shtohet përsëri.\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr "192.168.100.0/255.255.255.0\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr "192.168.100.0/24\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr "10.1.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr "10.0.0.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr "192.168.100.194\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr "Shembull për kyqjet IP:\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
 msgstr "Hyrja e ftuesit/rrjetit IP nuk është e kyqur.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13097,6 +12970,29 @@ msgstr ""
 #, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "Korigjues automatik i konfigurimit CUPS"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "None"
+msgstr "Përfundim"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Additional CUPS servers: "
+msgstr "Mbi severin CUPS \"%s\""
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -13260,8 +13156,8 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -15109,6 +15005,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr "Ju lutemi zgjedhni të dhënat që duhet të regjistrohen..."
 
@@ -15369,16 +15270,6 @@ msgstr "Ju lutemi futni repertorin, në të cilin regjistrimet janë riparuar"
 #, c-format
 msgid "Restore from Hard Disk."
 msgstr "Riparo nga Disku i Fortë"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Secure Connection"
-msgstr "Kyqje e Siguaruar"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "FTP Connection"
-msgstr "Kyqje FTP"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16324,6 +16215,200 @@ msgstr "Cron nuk është disponible për momentin jashtë administratorit (root)."
 msgid "Installation of %s failed. The following error occured:"
 msgstr "Instalimi i %s dështoj. Për këto arësye të radhitura:"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "Jo, nuk dëshiroj autokyqje"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr ""
+"Po, dhëshiroj një autokyqje me këtë (zgjedhje e përdoruesit dhe tryezës)"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "Nise interfac e mjedisit me grafik kur sistemi juaj niset"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "Modë i sistemit"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr "Imazh gjatë nisjes me udhëzim"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr "Ekran i Lilo"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+"\n"
+"Zgjedhe një temë për\n"
+"lilo dhe imazhin për nisje të udhëzuar,\n"
+"ju mund ti zgjidhni\n"
+"veqmas"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "Temat"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Zgjedhës i mazhit"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"Ju jeni duke përdorur momentalisht sistemin e eksploatimit të qeverisur nga %"
+"s.\n"
+"Kliko në Konfigurim për të ndryshuar listën e nisjes me udhëzim"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr ""
+"Instalimi i temës për imazhë të nisjes së udhëzuar për LILO, përfundoi me "
+"sukses"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr "Dështim gjatë instalimit të temës"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr "Njoftim"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr "Rinise 'lilo'"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+"E pa mundur nisja e Lilo!\n"
+"Nise \"lilo\" në linjën komanduese si përdorues administrator (root) për të "
+"përfunduar instalimin e temës LILO."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr "Krijo initrd me 'mkinitrd -f /boot/initrd-%s.img %s'."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr "E pa mundur nisja e mkinitrd -f /boot/initrd-%s.img %s."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+"Nuk mund të shruhet në /etc/sysconfig/bootsplash\n"
+"Skedarja nuk gjindet."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "Shkruarja e %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr "Nuk mund të shruhet në /etc/sysconfig/bootsplash."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "Lajmë LILO nuk gjindet"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "Kopjo nga %s në %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr "Regjistro nga %s në %s.old"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "Krijo temë të re"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"Çfaqe temën\n"
+"ndër konsol"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr "Intalim i temave"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "Modë Lilo/grub"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "Modë me nisje të udhëzuar"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/Skedare/_Braktise"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_Skedare"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "Konfigurim i Stilit të nisjes"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -16462,6 +16547,16 @@ msgstr "Vegël Sinjalizuese i bug në Mandrake"
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "Parametrat"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "Konfigurim i Kyqjes Internet"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "Klient DHCP"
 
@@ -16475,11 +16570,6 @@ msgstr "Kartelë ethernet"
 msgid "Gateway"
 msgstr "Portë hyrëse"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "Parametrat"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -16489,11 +16579,6 @@ msgstr "Tip i kyqjes:"
 #, c-format
 msgid "Profile: "
 msgstr "Profil: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "Konfigurim i Kyqjes Internet"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -16765,8 +16850,8 @@ msgstr "Zhduke një modul"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr "mos i merrë parasysh modulet raid"
+msgid "Add a module"
+msgstr "Shtoje një modul"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16780,13 +16865,13 @@ msgstr "nëse nevojitet"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "detyroje"
+msgid "omit raid modules"
+msgstr "mos i merrë parasysh modulet raid"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "Shtoje një modul"
+msgid "force"
+msgstr "detyroje"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16800,23 +16885,18 @@ msgstr "Zonë Experti"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "Përgjithshëm"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "versioni i bërthamës"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "Gabim DrakFloppy: %s"
+msgid "default"
+msgstr "default"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "default"
+msgid "General"
+msgstr "Përgjithshëm"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16837,11 +16917,6 @@ msgstr "Madhësia"
 #, c-format
 msgid "Module name"
 msgstr "Emri i Modulit"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -17549,6 +17624,11 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "Path"
+msgstr "Shtegu"
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "group :"
 msgstr "grupi :"
 
@@ -17609,11 +17689,6 @@ msgstr "Prona"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Path"
-msgstr "Shtegu"
-
-#: ../../standalone/drakperm:1
-#, c-format
 msgid "Permissions"
 msgstr "Autorizimet"
 
@@ -17626,23 +17701,6 @@ msgstr "Përdorues aktuel"
 #, c-format
 msgid "browse"
 msgstr "lundrues"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr "zgjedhe skedaren autorizuese për të shiqur/botuar"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
-msgstr ""
-"Drakperm mundëson vështrimin e skedareve për korogjimin e autorizimeve, dhe "
-"pronarve të grupeve falas msec.\n"
-"Ju keni mundësi ti botoni rregullat tuaja, të cilat do ti zëvendojnë ato me "
-"marrëveshje."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17693,6 +17751,23 @@ msgstr "Hypë një nivel në rregullën"
 #, c-format
 msgid "Up"
 msgstr "Lartë"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr "zgjedhe skedaren autorizuese për të shiqur/botuar"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
+msgstr ""
+"Drakperm mundëson vështrimin e skedareve për korogjimin e autorizimeve, dhe "
+"pronarve të grupeve falas msec.\n"
+"Ju keni mundësi ti botoni rregullat tuaja, të cilat do ti zëvendojnë ato me "
+"marrëveshje."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17885,16 +17960,16 @@ msgstr "Siguria e Alarmeve:"
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid "(default value: %s)"
-msgstr "(vlerë me marrëveshje: %s)"
-
-#: ../../standalone/draksec:1
-#, c-format
 msgid "Security Level:"
 msgstr "Nivel i Sigurisë:"
 
 #: ../../standalone/draksec:1
 #, c-format
+msgid "(default value: %s)"
+msgstr "(vlerë me marrëveshje: %s)"
+
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
 msgid ""
 "Standard: This is the standard security recommended for a computer that will "
 "be used to connect\n"
@@ -17907,7 +17982,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -17916,7 +17991,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 "Standart: Ky është një nivel standart i sigurisë dhe rekomadohet për një "
 "kompjuter i cili kyqet\n"
@@ -18304,26 +18379,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/Mundësi"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect jazz drives"
-msgstr "/Auto-zbulues i pilotve jazz"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect modems"
-msgstr "Auto-zbulues i modeve"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect printers"
-msgstr "Auto-zbulues i stampuesve"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr "primar"
 
@@ -18339,6 +18394,16 @@ msgid ""
 msgstr ""
 "Kliko në një mjet në anën e majtë të drurit, në urdhër për të paraqitur "
 "informacionin e tij këtu."
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "Unknown"
+msgstr "Model i pa njoftur"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "unknown"
+msgstr "Model i pa njoftur"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18399,11 +18464,6 @@ msgstr "Në lidhje me Harddrake"
 msgid "/_About..."
 msgstr "/_Në lidhje me..."
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/_Ndihmë"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -18442,15 +18502,20 @@ msgstr "Ndihmë Harddrake"
 msgid "/_Fields description"
 msgstr "/_Zonat përshkuese"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/_Ndihmë"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/_Quit"
+msgstr "/_Braktise"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "/Auto-zbulues i pilotve _jazz"
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_Mundësi"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18462,10 +18527,10 @@ msgstr "Auto-zbulues _modeme"
 msgid "/Autodetect _printers"
 msgstr "/Auto-zbulues _stampuesve"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
-msgid "/_Quit"
-msgstr "/_Braktise"
+msgid "/_Options"
+msgstr "/_Mundësi"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18564,7 +18629,7 @@ msgstr "Nivel"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr "Formatimin e disketave flopi, lexuesi i pranon"
 
 #: ../../standalone/harddrake2:1
@@ -18723,6 +18788,16 @@ msgstr "Nëse ky cpu posedon një bug me presje Cyrix 6x86 ?"
 #, c-format
 msgid "Coma bug"
 msgstr "Bug me presje"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
+msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -19207,9 +19282,9 @@ msgid "Network Monitoring"
 msgstr "Vështrim i Rrjetit (Network)"
 
 #: ../../standalone/printerdrake:1
-#, c-format
-msgid "Reading printer data ..."
-msgstr "Lexim i të dhënate të stampuesit..."
+#, fuzzy, c-format
+msgid "Reading data of installed printers..."
+msgstr "Kërkim i stampuesëve të rinjë..."
 
 #: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
@@ -19327,55 +19402,6 @@ msgstr ""
 "duhet të jenë me hyrje në makinën e largët dhe nga cila makinë e largët."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-"Skaneri juaj %s është konfiguruar.\n"
-"Ju keni mundësi të skanoni dokumente duke përdorur ``XSane'' nga Multimedia/"
-"Graphike në menytë a aplikacioneve."
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-"Ky skaner %s duhet të konfigurohet nga printerdrake.\n"
-"Ju mund ta nisni printerdrake nga Qendra Kontrolluese Mandrake në sektorin "
-"Hardware"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "zgjedhe mjetin"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Please select the device where your %s is attached"
-msgstr ""
-"Scannerdrake nuk ka qenë në gjendje të zbuloj skanerit tuaj %s.\n"
-"Ju lutemi zgjedheni mjetin, në të cilin dëshironi ta kyqni atë"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "The %s is unsupported"
-msgstr "Ky skaner %s nuk përkrahet"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr "%s nuk përkrahet nga ky version i Mandrake Linux."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr "%s nuk përkrahet nga ky version i Mandrake Linux."
-
-#: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Re-generating list of configured scanners ..."
 msgstr ""
@@ -19438,8 +19464,92 @@ msgstr ""
 "a është i kyqur direkt në sistemin tuaj"
 
 #: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+"Skaneri juaj %s është konfiguruar.\n"
+"Ju keni mundësi të skanoni dokumente duke përdorur ``XSane'' nga Multimedia/"
+"Graphike në menytë a aplikacioneve."
+
+#: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
+msgid "choose device"
+msgstr "zgjedhe mjetin"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Please select the device where your %s is attached"
+msgstr ""
+"Scannerdrake nuk ka qenë në gjendje të zbuloj skanerit tuaj %s.\n"
+"Ju lutemi zgjedheni mjetin, në të cilin dëshironi ta kyqni atë"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Searching for scanners ..."
+msgstr "Kërkim i stampuesëve të rinjë..."
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Auto-detect available ports"
+msgstr "Auto-zbulues i stampuesve"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+"Ky skaner %s duhet të konfigurohet nga printerdrake.\n"
+"Ju mund ta nisni printerdrake nga Qendra Kontrolluese Mandrake në sektorin "
+"Hardware"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "The %s is unsupported"
+msgstr "Ky skaner %s nuk përkrahet"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr "%s nuk përkrahet nga ky version i Mandrake Linux."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr "%s nuk përkrahet nga ky version i Mandrake Linux."
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Port: %s"
+msgstr "Porta"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Detected model: %s"
+msgstr "Model i zbuluar: %s %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Select a scanner model"
 msgstr "Zgjedhe një skaner"
 
 #: ../../standalone/scannerdrake:1
@@ -19532,6 +19642,10 @@ msgid "Scientific Workstation"
 msgstr "Stacion Punues Shkencor"
 
 #: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr ""
+
+#: ../../share/compssUsers:999
 msgid "Console Tools"
 msgstr "Vegla në konsolë"
 
@@ -19607,12 +19721,14 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache, Pro-ftpd"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "E-mail/Groupware/News"
+#, fuzzy
+msgid "Mail"
+msgstr "Mali"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr "Server i letrave Postfix, server i lajmeve Inn"
+#, fuzzy
+msgid "Postfix mail server"
+msgstr "Server i letrave Postfix"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -19710,6 +19826,118 @@ msgstr "Financat Personale"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programe për të qeverisur financat tuaja, sikur gnucash"
+
+#~ msgid ""
+#~ "Please enter your host name if you know it.\n"
+#~ "Some DHCP servers require the hostname to work.\n"
+#~ "Your host name should be a fully-qualified host name,\n"
+#~ "such as ``mybox.mylab.myco.com''."
+#~ msgstr ""
+#~ "Ju lutemi hyni emrin e ftuesit nëse ju e njifni.\n"
+#~ "Disa server DHCP kanë nevojë për emrin e ftuesit për të funksionuar.\n"
+#~ "Ky duhet të jetë i plotëfuqishëm sikur për shembull:``mybox.mylab.myco."
+#~ "com''."
+
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "Gabim DrakFloppy: %s"
+
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+
+#~ msgid "Launch Aurora at boot time"
+#~ msgstr "Nisje e plotë grafike (Aurora)"
+
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr "Monitor tradicionel Gtk+"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "Monitor tradicionel"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "Monitor me stil të ri"
+
+#~ msgid "NewStyle Categorizing Monitor"
+#~ msgstr "Monitor me stil të ri në kategorizim"
+
+#~ msgid "Secure Connection"
+#~ msgstr "Kyqje e Siguaruar"
+
+#~ msgid "FTP Connection"
+#~ msgstr "Kyqje FTP"
+
+#~ msgid "Mail/Groupware/News"
+#~ msgstr "E-mail/Groupware/News"
+
+#~ msgid "Postfix mail server, Inn news server"
+#~ msgstr "Server i letrave Postfix, server i lajmeve Inn"
+
+#~ msgid "/Options"
+#~ msgstr "/Mundësi"
+
+#~ msgid "/Autodetect jazz drives"
+#~ msgstr "/Auto-zbulues i pilotve jazz"
+
+#~ msgid "/Autodetect modems"
+#~ msgstr "Auto-zbulues i modeve"
+
+#~ msgid "/Autodetect printers"
+#~ msgstr "Auto-zbulues i stampuesve"
+
+#~ msgid ""
+#~ "The partition you've selected to add as root (/) is physically located "
+#~ "beyond\n"
+#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
+#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
+#~ "partition"
+#~ msgstr ""
+#~ "Kujdes, ndarja e juaj rrënjëzore (root) gjindet më largë se cilindri i "
+#~ "1024-ti.\n"
+#~ "Dhe nëse mendoni të përdorni një program me nisje të ushëzuar LILO, "
+#~ "atëher ju\n"
+#~ "duhet të krijoni një ndarje për repertorin /boot ndër cilindrin e 1024-të "
+
+#~ msgid ""
+#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
+#~ "> 1024).\n"
+#~ "Either you use LILO and it won't work, or you don't use LILO and you "
+#~ "don't need /boot"
+#~ msgstr ""
+#~ "Programi i nisjes me udhëzim LILO nuk mund të funksionoj nëse ju e "
+#~ "vendosni\n"
+#~ "ndarjen e repertorit /boot aq largë në disk (d.m.th. me largë se cilindri "
+#~ "i 1024-ti).\n"
+#~ "Nëse ju nuk e përdorni LILO, atëher nuk keni nevojë për një ndarje të "
+#~ "repertori /boot."
+
+#~ msgid "Upgrade"
+#~ msgstr "Azhurno"
+
+#~ msgid "192.168.100.0/255.255.255.0\n"
+#~ msgstr "192.168.100.0/255.255.255.0\n"
+
+#~ msgid "192.168.100.0/24\n"
+#~ msgstr "192.168.100.0/24\n"
+
+#~ msgid "10.1.*\n"
+#~ msgstr "10.1.*\n"
+
+#~ msgid "10.0.0.*\n"
+#~ msgstr "10.0.0.*\n"
+
+#~ msgid "192.168.100.194\n"
+#~ msgstr "192.168.100.194\n"
+
+#~ msgid "Do you want to configure another printer?"
+#~ msgstr "A dëshironi të konfiguroni një stampues tjetër?"
+
+#~ msgid "Know how to use this printer"
+#~ msgstr "Doracak i përdorimit të këtij stampuesi"
+
+#~ msgid "Preparing Printerdrake..."
+#~ msgstr "Pregatitje e Printerdrake..."
+
+#~ msgid "Reading printer data ..."
+#~ msgstr "Lexim i të dhënate të stampuesit..."
 
 #~ msgid ""
 #~ "You must indicate where you wish to place the information required to "
