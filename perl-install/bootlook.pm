@@ -21,13 +21,15 @@
 
 
 use Gtk;
+use my_gtk qw(:helpers :wrappers);
+use common;
 use Config;
 init Gtk;
 use POSIX;
 use Locale::GetText;
 use any;
 
-my $path_to_pixmaps = "/usr/share/libDrakX/pixmaps/";
+my $path_to_pixmaps = "/usr/share/libDrakX/pixmaps";
 setlocale (LC_ALL, "");
 Locale::GetText::textdomain ("Drakboot");
 
@@ -45,14 +47,13 @@ local $_ = join '', @ARGV;
 
 /-h/ and die _("no help implemented yet.\n");
 
-my @users;
-my $x_mode = isXlaunched();
+my $x_mode = any::runlevel('') == 5;
 my $a_mode = (-e "/etc/aurora/Monitor") ? 1 : 0;
 my $l_mode = isAutologin();
 
 my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window ("toplevel");
-$window->signal_connect( 'delete_event', sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0) });
-$window->set_title( _("Boot Style Configuration") );
+$window->signal_connect(delete_event => sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0) });
+$window->set_title(_("Boot Style Configuration"));
 #$window->set_policy('automatic', 'automatic');
 #$window->set_policy(0, 0, 0);
 $window->border_width (10);
@@ -60,9 +61,9 @@ $window->realize;
 
 # now for the pixmap from gdk
 
-my ( $t_pixmap, $t_mask ) = Gtk::Gdk::Pixmap->create_from_xpm( $window->window, $window->get_style()->bg( 'normal' ), $path_to_pixmaps."tradi.xpm" );
-my ( $h_pixmap, $h_mask ) = Gtk::Gdk::Pixmap->create_from_xpm( $window->window, $window->get_style()->bg( 'normal' ), $path_to_pixmaps."hori.xpm" );
-my ( $v_pixmap, $v_mask ) = Gtk::Gdk::Pixmap->create_from_xpm( $window->window, $window->get_style()->bg( 'normal' ), $path_to_pixmaps."verti.xpm" );
+my ($t_pixmap, $t_mask) = gtkcreate_xpm($window, "$path_to_pixmaps/tradi.xpm");
+my ($h_pixmap, $h_mask) = gtkcreate_xpm($window, "$path_to_pixmaps/hori.xpm");
+my ($v_pixmap, $v_mask) = gtkcreate_xpm($window, "$path_to_pixmaps/verti.xpm");
 
 # a pixmap widget to contain the pixmap
 my $pixmap = new Gtk::Pixmap( $h_pixmap, $h_mask );
@@ -112,24 +113,21 @@ $global_vbox->pack_start (new Gtk::Label(_("Boot style configuration")), 0, 0, 0
 my $a_dedans = new Gtk::VBox( 0, 10 );
 $a_dedans->border_width (5);
 my $a_box = new Gtk::VBox(0, 0 );
-my $a_button = new Gtk::CheckButton( _("Launch Aurora at boot time") );
-$a_button->signal_connect( "clicked", sub {
-			     if ($a_mode) { 
-				 $a_box->set_sensitive(0); $pixmap->set($t_pixmap, $t_mask);
-			     } else { 
-				 $a_box->set_sensitive(1); $pixmap->set($h_pixmap, $h_mask);
-			     }
+my $a_button = new Gtk::CheckButton(_("Launch Aurora at boot time"));
+$a_button->signal_connect( clicked => sub {
+			     $a_box->set_sensitive(!$a_mode); 
+			     $pixmap->set($a_mode ? ($t_pixmap, $t_mask) : ($h_pixmap, $h_mask));
 			     $a_mode = !$a_mode;
 			   });
 $a_dedans->pack_start ($a_button, 0, 0, 0);
 
 my $a_h_button = new Gtk::RadioButton _("horizontal nice looking aurora");
-$a_h_button->signal_connect( "clicked", sub { $pixmap->set($h_pixmap, $h_mask) });
+$a_h_button->signal_connect( clicked => sub { $pixmap->set($h_pixmap, $h_mask) });
 $a_h_button->set_active(1);
 $a_box->pack_start($a_h_button, 0, 0, 0);
 
 my $a_v_button = new Gtk::RadioButton _("vertical traditional aurora"), $a_h_button;
-$a_v_button->signal_connect( "clicked", sub { $pixmap->set($v_pixmap, $v_mask) });
+$a_v_button->signal_connect( clicked => sub { $pixmap->set($v_pixmap, $v_mask) });
 $a_box->pack_start($a_v_button, 0, 0, 0);
 
 my $a_g_button = new Gtk::RadioButton _("gMonitor"), $a_h_button;
@@ -158,8 +156,8 @@ $x_box->border_width (10);
 
 my $x_button = new Gtk::CheckButton _("Launch the X-Window system at start");
 $x_button->set_active($x_mode);
-$x_button->signal_connect( "clicked", sub {
-			       ($x_mode) ? $x_box->set_sensitive(0) : $x_box->set_sensitive(1);
+$x_button->signal_connect( clicked => sub {
+			       $x_box->set_sensitive(!$x_mode);
 			       $x_mode = !$x_mode;
 			   });
 $x_dedans->pack_start ($x_button, 0, 0, 0);
@@ -173,15 +171,14 @@ $user_dedans->border_width (0);
 my $x_yes_button = new Gtk::RadioButton _("yes, I want autologin with this (user, desktop)"), $x_no_button;
 $x_yes_button->set_active($l_mode);
 my $user_combo = new Gtk::Combo;
-\&parse_etc_passwd;
-$user_combo->set_popdown_strings(@users);
+$user_combo->set_popdown_strings(parse_etc_passwd());
 my $desktop_combo = new Gtk::Combo;
 $user_dedans->pack_start($x_yes_button, 0, 0, 0);
 $user_dedans->pack_start($user_combo, 0, 0, 0);
 $user_dedans->pack_start($desktop_combo, 0, 0, 0);
 $x_box->pack_start ($user_dedans, 0, 0, 0);
 
-($x_mode) ? $x_box->set_sensitive(1) : $x_box->set_sensitive(0);
+$x_box->set_sensitive(!$x_mode);
 $x_dedans->pack_start ($x_box, 0, 0, 0);
 my $x_main_frame = new Gtk::Frame _("System mode");
 $x_main_frame->add($x_dedans);
@@ -191,8 +188,8 @@ $global_vbox->pack_start ($x_main_frame, 1, 1, 0);
 my $build_button = new Gtk::Button _("OK");
 my $cancel_button = new Gtk::Button _("Cancel");
 my $fin_hbox = new Gtk::HBox( 0, 0 );
-$cancel_button->signal_connect( 'clicked', sub {$::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0)});
-$build_button->signal_connect('clicked', sub { updateInit(); updateAutologin();});
+$cancel_button->signal_connect( clicked => sub {$::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0)});
+$build_button->signal_connect( clicked => sub { any::runlevel('', $x_mode ? 5 : 3); updateAutologin() });
 $fin_hbox->pack_end($cancel_button, 0, 0, 0);
 $fin_hbox->pack_end($build_button,  0, 0, 10);
 $global_vbox->pack_start ($fin_hbox, 0, 0, 0);
@@ -203,17 +200,15 @@ $window->add( $global_vbox );
 $window->show_all();
 print "---->$a_mode<----\n";
 
+$a_button->set_active(!$a_mode);
+$a_box->set_sensitive(!$a_mode);
+$pixmap->set($a_mode ? ($h_pixmap, $h_mask) : ($t_pixmap, $t_mask));
+
 if ($a_mode) {
     print "some where aurora exists ...\n";
-    $a_button->set_active(1);
-    $a_box->set_sensitive(1);
 #we need to choose acording the aurora style
-    $pixmap->set($h_pixmap, $h_mask);
 } else { 
     print "here aurora does not exist..\n";
-    $a_button->set_active(0);
-    $a_box->set_sensitive(0); 
-    $pixmap->set($t_pixmap, $t_mask)
 }
 
 Gtk->main_iteration while Gtk->events_pending;
@@ -223,17 +218,8 @@ Gtk->main;
 # get user names to put in combo  
 #-------------------------------------------------------------
 
-sub parse_etc_passwd
-{
-    setpwent();
-    do {
-	@user_info = getpwent();
-	my ($uname, $uid) = @user_info[0,2];
-	print "$user_info[0]";
-	if ($uid == 0 || $uid >500){
-	    push (@users, $uname);
-	}
-    } while (@user_info);
+sub parse_etc_passwd {
+    map { $_->[0] } grep { $_->[2] >= 500 } common::list_passwd();
 }
 
 #-------------------------------------------------------------
@@ -245,36 +231,13 @@ sub print_hello {
 }
 
 sub get_main_menu {
-  my ( $window ) = @_;
+  my ($window) = @_;
 
   my $accel_group = new Gtk::AccelGroup();
   my $item_factory = new Gtk::ItemFactory( 'Gtk::MenuBar', '<main>', $accel_group );
-  $item_factory->create_items( @menu_items );
-  $window->add_accel_group( $accel_group );
-  return ( $item_factory->get_widget( '<main>' ) );
-}
-
-#-------------------------------------------------------------
-# launch X functions
-#-------------------------------------------------------------
-
-sub isXlaunched
-{
-    my $line;
-    
-    open INITTAB, "/etc/inittab" or die _("can not open /etc/inittab for reading: $!");
-    while (<INITTAB>) {
-	if (/id:([1-6]):initdefault:/) { $line = $_; last; }
-    }
-    close INITTAB;
-    $line =~ s/id:([1-6]):initdefault:/$1/;
-    return ($line-3);
-}
-
-sub updateInit
-{
-    my $level = ($x_mode) ? 5 : 3;
-    system ("perl -pi -e 's/id:([1-6]):initdefault:/id:$level:initdefault:/' /etc/inittab");
+  $item_factory->create_items(@menu_items);
+  $window->add_accel_group($accel_group);
+  return $item_factory->get_widget('<main>');
 }
 
 
@@ -282,25 +245,16 @@ sub updateInit
 # launch autologin functions
 #-------------------------------------------------------------
 
-sub isAutologin
-{
-    my $line;
-    
-    open AUTOLOGIN, "/etc/sysconfig/autologin" or die _("can not open /etc/sysconfig/autologin for reading: $!");
-    while (<AUTOLOGIN>) {
-	if (/AUTOLOGIN=(yes|no)/) { $line = $_; last; }
-    }
-    close AUTOLOGIN;
-    $line =~ s/AUTOLOGIN=(yes|no)/$1/;
-    chomp ($line);
-    $line =  ($line eq "yes");
-    return ($line);
+sub isAutologin {
+    ${{ getVarsFromSh("/etc/sysconfig/autologin") }}{AUTOLOGIN} eq 'yes';
 }
 
 sub updateAutologin
-{
-    $l_mode = $x_yes_button->get_active();
-    my $level = ($l_mode) ? "yes" : "no";
-    system ("perl -pi -e 's/AUTOLOGIN=(yes|no)/AUTOLOGIN=$level/' /etc/sysconfig/autologin");
+{    
+    my ($autologin) = @_;
+    substInFile { 
+	s/^AUTOLOGIN=.*//; 
+	$_ .= 'AUTOLOGIN=' . bool2yesno($autologin) . "\n" if eof;
+    } '/etc/sysconfig/autologin';
 }
  
