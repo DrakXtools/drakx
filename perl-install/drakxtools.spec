@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 3mdk
+Release: 4mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -315,6 +315,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Nov  7 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-4mdk
+- drakconnect:
+  o mcc view: fix network interfaces list update (really remove from
+    the Gtk+ list lost interfaces)
+  o prevent droping wireless parameters for modules not listed in
+    wireless modules list
+  o more usb wireless detection fix
+
 * Thu Nov  6 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-3mdk
 - drakconnect:
   o fix wireless cards detection (#3690, #5814, ...)
