@@ -406,7 +406,7 @@ sub main {
 	    fdisk => sub { $o->{partitioning}{fdisk} = 1 },
 	    g_auto_install => sub { $::testing = $::g_auto_install = 1; $o->{partitioning}{auto_allocate} = 1 },
 	    nomouseprobe => sub { $o->{nomouseprobe} = $v },
-	    blank         => sub { $o->{blank} = 1},
+	    blank         => sub { $o->{blank} = $::blank = 1},
 	    updatemodules => sub { $o->{updatemodules} = 1},
 	}}{lc $n}; &$f if $f;
     } %cmdline;
