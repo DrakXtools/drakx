@@ -268,7 +268,7 @@ sub prepare_write_fstab {
 	} else {
 	    ()
 	}
-    } grep { $_->{device} && ($_->{mntpoint} || $_->{real_mntpoint}) && $_->{type} && !$_->{notFormatted} } @$fstab;
+    } grep { $_->{device} && ($_->{mntpoint} || $_->{real_mntpoint}) && $_->{type} && ($_->{isFormatted} || !$_->{notFormatted}) } @$fstab;
 
     join('', map { $_->[1] } sort { $a->[0] cmp $b->[0] } @l), \@smb_credentials;
 }
