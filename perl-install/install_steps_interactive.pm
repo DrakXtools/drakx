@@ -128,13 +128,22 @@ sub selectKeyboard {
 sub selectInstallClass {
     my ($o) = @_;
 
-    my $installMode = $o->{isUpgrade} ? $o->{keepConfiguration} ? N_("Upgrade packages only") : N_("Upgrade") : N_("Install");
-
-    $installMode = exists $o->{isUpgrade} || $::live ? 'Update' : $o->ask_from_list_(N("Install/Update"), N("Is this an install or an update?"), [ N_("Install"), N_("Upgrade"), N_("Upgrade packages only") ], $installMode);
-
-    log::l("install class: $installMode");
-    $o->{isUpgrade} = $installMode =~ /Upgrade/;
-    $o->{keepConfiguration} = $installMode =~ /packages only/;
+    if (my @l = install_any::find_root_parts($o->{fstab}, $o->{prefix})) {
+	log::l("proposing to upgrade partitions " . join(" ", map { $_->{device} } @l));
+	$p = $o->ask_from_listf(N("Install/Upgrade"),
+				N("Is this an install or an upgrade?"),
+				sub {
+				    ref $_[0] ? (@l > 1 ? 
+						   N("Upgrade partition %s", partition_table::description($_[0])) : 
+						   N("Upgrade")) : 
+						 translate($_[0]);
+				}, [ @l, N_("Install") ]);
+	if (ref $p) {
+	    log::l("choosing to upgrade partition $p->{device}");
+	    install_any::use_root_part($o->{all_hds}, $p, $o->{prefix});
+	    $o->{isUpgrade} = 1;
+	}
+    }
 }
 
 #------------------------------------------------------------------------------
@@ -199,6 +208,8 @@ sub setupSCSI {
     modules::interactive::load_category($o, 'disk/scsi|hardware_raid', !$::expert && !$clicked, 0);
 
     install_interactive::tellAboutProprietaryModules($o) if !$clicked;
+
+    install_any::getHds($o, $o);
 }
 
 sub ask_mntpoint_s {
@@ -233,8 +244,6 @@ sub ask_mntpoint_s {
 sub doPartitionDisks {
     my ($o) = @_;
 
-    install_any::getHds($o, $o);
-
     if (arch() =~ /ppc/ && detect_devices::get_mac_generation() =~ /NewWorld/) { #- need to make bootstrap part if NewWorld machine - thx Pixel ;^)
 	if (defined $partition_table::mac::bootstrap_part) {
 	    #- don't do anything if we've got the bootstrap setup
@@ -254,17 +263,7 @@ sub doPartitionDisks {
 	}
     }
 
-    if ($o->{isUpgrade}) {
-	# either one root is defined (and all is ok), or we take the first one we find
-	my $p = fsedit::get_root_($o->{fstab});
-        if (!$p) {
-            my @l = install_any::find_root_parts($o->{fstab}, $o->{prefix}) or die N("No root partition found to perform an upgrade");
-	    $p = $o->ask_from_listf(N("Root Partition"),
-			            N("What is the root partition (/) of your system?"),
-			            \&partition_table::description, \@l) or die "setstep exitInstall\n";
-        }
-	install_any::use_root_part($o->{all_hds}, $p, $o->{prefix});
-    } else {
+    if (!$o->{isUpgrade}) {
         install_interactive::partitionWizard($o);
     }
 }
