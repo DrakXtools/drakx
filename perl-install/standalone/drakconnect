@@ -102,14 +102,14 @@ $button_del->signal_connect(clicked => sub {
 				 my $bbox_dialog = new Gtk2::HButtonBox;
 				 $dialog->action_area->add($bbox_dialog);
 				 $bbox_dialog->set_layout('end');
-				 my $button_ok = new Gtk2::Button N("OK");
+				 my $button_ok = new Gtk2::Button(N("OK"));
 				 $button_ok->signal_connect (clicked => sub {
 								  network::netconnect::del_profile($netcnx, $combo_dialog->entry->get_text());
 								  $netcnx->{PROFILE} eq $combo_dialog->entry->get_text() and $netcnx->{PROFILE} = "default";
 								  Gtk->main_quit();
 							      });
 				 $bbox_dialog->add($button_ok);
-				 my $button_cancel = new Gtk2::Button N("Cancel");
+				 my $button_cancel = new Gtk2::Button(N("Cancel"));
 				 $button_cancel->signal_connect (clicked => sub { Gtk->main_quit() });
 				 $bbox_dialog->add($button_cancel);
 				 $dialog->show_all;
@@ -134,14 +134,14 @@ $button_new->signal_connect(clicked => sub {
 				 my $bbox_dialog = new Gtk2::HButtonBox;
 				 $dialog->action_area->add($bbox_dialog);
 				 $bbox_dialog->set_layout('end');
-				 my $button_ok = new Gtk2::Button N("OK");
+				 my $button_ok = new Gtk2::Button(N("OK"));
 				 $button_ok->signal_connect (clicked => sub {
 								  network::netconnect::add_profile($netcnx, $entry_dialog->get_text());
 								  $netcnx->{PROFILE} = $entry_dialog->get_text();
 								  Gtk->main_quit();
 							      });
 				 $bbox_dialog->add($button_ok);
-				 my $button_cancel = new Gtk2::Button N("Cancel");
+				 my $button_cancel = new Gtk2::Button(N("Cancel"));
 				 $button_cancel->signal_connect (clicked => sub { Gtk->main_quit() });
 				 $bbox_dialog->add($button_cancel);
 				 $dialog->show_all;
@@ -161,12 +161,12 @@ $hbox2->pack_start($label_host,0,0,0);
 
 #$vbox1->pack_start(new Gtk2::HSeparator,1,1,5);
 
-my $frame1 = new Gtk2::Frame (N("Internet access"));
+my $frame1 = new Gtk2::Frame(N("Internet access"));
 $vbox1->pack_start($frame1,1,1,0);
 my $vbox_frame1 = new Gtk2::VBox(0,0);
 $vbox_frame1->set_border_width(5);
 $frame1->add($vbox_frame1);
-my $table1 = new Gtk2::Table (3,3, 0);
+my $table1 = new Gtk2::Table(3,3, 0);
 $table1->set_border_width(5);
 $table1->set_row_spacings(5);
 $table1->set_col_spacings(5);
@@ -220,7 +220,7 @@ $vbox_frame1->pack_start($hbox_frame1_button,0,0,0);
 
 #$vbox1->pack_start(new Gtk2::HSeparator,1,1,5);
 
-my $frame2 = new Gtk2::Frame (N("LAN configuration"));
+my $frame2 = new Gtk2::Frame(N("LAN configuration"));
 $vbox1->pack_start($frame2,1,1,0);
 my $vbox2 = new Gtk2::VBox(0,0);
 $vbox2->set_border_width(5);
@@ -250,7 +250,7 @@ $bbox0->set_layout('end');
 
 
 $bbox0->add(new Gtk2::Label(N("Click here to launch the wizard ->")));
-my $button_wizard = new Gtk2::Button N("Wizard...");
+my $button_wizard = new Gtk2::Button(N("Wizard..."));
 $button_wizard->signal_connect(clicked => sub {
 				     $::isWizard = 1;
 				     system("drakconnect --wizard");
@@ -268,7 +268,7 @@ $vbox1->pack_start($bbox1,0,0,0);
 $bbox1->set_layout('end');
 #$bbox1->set_border_width(5);
 
-my $button_expert = new Gtk2::Button N("Expert Mode");
+my $button_expert = new Gtk2::Button(N("Expert Mode"));
 $button_expert->signal_connect (clicked => sub {
 				     foreach ($button1, $button3) { $expert_mode ? $_->hide() : $_->show() }
 				     $button_expert->child->set($expert_mode ? N("Expert Mode") : N("Normal Mode"));
@@ -276,21 +276,21 @@ $button_expert->signal_connect (clicked => sub {
 				 });
 $bbox1->add($button_expert);
 
-my $button_apply = new Gtk2::Button N("Apply");
+my $button_apply = new Gtk2::Button(N("Apply"));
 $button_apply->signal_connect (clicked => sub {
 				 apply();
 			     });
 $button_apply->set_sensitive(0);
 $bbox1->add($button_apply);
 
-my $button_cancel = new Gtk2::Button N("Cancel");
+my $button_cancel = new Gtk2::Button(N("Cancel"));
 $button_cancel->signal_connect (clicked => sub {
 				     $combo1->entry->set_text($old_profile);
 				     update();
 				     quit_global();
 				 });
 $bbox1->add($button_cancel);
-my $button_ok = new Gtk2::Button N("OK");
+my $button_ok = new Gtk2::Button(N("OK"));
 $button_ok->signal_connect (clicked => sub {
 				 my $dialog = new Gtk2::Dialog();
 				 $dialog->set_position('center');
@@ -353,7 +353,7 @@ sub apply {
     $netcnx->{type} eq 'isdn_external' and any::pppConfig($in, $netcnx->{$netcnx->{type}}, '');
     my $a = $netcnx->{type};
     $a =~ s/adsl_//;
-    $netcnx->{type} =~ 'adsl' and network::adsl::adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, $a, $netcnx);
+    $netcnx->{type} =~ /adsl/ and network::adsl::adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, $a, $netcnx);
 
     $netcnx->{dhcp_client} and $netc->{dhcp_client} = $netcnx->{dhcp_client};
     network::configureNetwork2($in, $prefix, $netc, $intf);
@@ -429,7 +429,7 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	my $bbox_dialog = new Gtk2::HButtonBox;
 	$dialog->action_area->add($bbox_dialog);
 	$bbox_dialog->set_layout('end');
-	my $button_ok = new Gtk2::Button N("OK");
+	my $button_ok = new Gtk2::Button(N("OK"));
 	$button_ok->signal_connect (clicked => sub { Gtk->main_quit() });
 	$bbox_dialog->add($button_ok);
 	$dialog->show_all;
@@ -558,7 +558,7 @@ Create one first by clicking on 'Configure'")),1,1,0);
 	my $bbox_dialog = new Gtk2::HButtonBox;
 	$dialog->action_area->add($bbox_dialog);
 	$bbox_dialog->set_layout('end');
-	my $button_ok = new Gtk2::Button N("OK");
+	my $button_ok = new Gtk2::Button(N("OK"));
 	$button_ok->signal_connect (clicked => sub {
 					 Gtk->main_quit();
 				     });
@@ -584,7 +584,7 @@ Create one first by clicking on 'Configure'")),1,1,0);
     $vbox1->pack_start(new Gtk2::Label(N("Internet Connection Configuration")),0,1,0);
 
     $vbox1->pack_start(new Gtk2::HSeparator,0,0,5);
-    my $table1 = new Gtk2::Table (2, 4, 0);
+    my $table1 = new Gtk2::Table(2, 4, 0);
     $table1->set_row_spacings(5);
     $table1->set_col_spacings(5);
     $vbox1->pack_start($table1,0,0,0);
@@ -596,7 +596,7 @@ Create one first by clicking on 'Configure'")),1,1,0);
 #    $table1->attach($button1, 2, 4, 0, 2, 'fill', 'fill',0,0);
     $vbox1->pack_start(new Gtk2::HSeparator,0,0,5);
 
-    my $frame1 = new Gtk2::Frame (N("Parameters"));
+    my $frame1 = new Gtk2::Frame(N("Parameters"));
     $vbox1->pack_start($frame1,1,1,0);
     my $vbox2 = new Gtk2::VBox(0,0);
     $frame1->add($vbox2);
@@ -654,7 +654,7 @@ Create one first by clicking on 'Configure'")),1,1,0);
 @mask = (0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1) if $netcnx->{type} eq'isdn_internal'&& defined $cnx->{vendor} && defined $cnx->{id};
 @mask = (1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1) if $netcnx->{type} eq'isdn_internal'&&(!defined $cnx->{vendor}||!defined $cnx->{id});
 @mask = (0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0) if ($netcnx->{type} eq 'modem'||$netcnx->{type} eq 'isdn_external');
-@mask = (0,0,0,0,0,0,1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0) if $netcnx->{type} =~ 'adsl';
+@mask = (0,0,0,0,0,0,1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0) if $netcnx->{type} =~ /adsl/;
 @mask = (0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0) if $netcnx->{type} eq 'cable';
     $vbox1->pack_start(new Gtk2::HSeparator,0,0,5);
 
@@ -662,7 +662,7 @@ Create one first by clicking on 'Configure'")),1,1,0);
     my $bbox1 = new Gtk2::HButtonBox;
     $vbox1->pack_start($bbox1,0,0,0);
     $bbox1->set_layout('end');
-    my $button_ok = new Gtk2::Button N("OK");
+    my $button_ok = new Gtk2::Button(N("OK"));
     $button_ok->signal_connect (clicked => sub {
 				     $i = 0;
 				     foreach (@mask) {
@@ -674,8 +674,8 @@ Create one first by clicking on 'Configure'")),1,1,0);
 				     $window->destroy(); Gtk->main_quit;
 				 });
     $bbox1->add($button_ok);
-    my $button_cancel = new Gtk2::Button N("Cancel");
-    $button_cancel->signal_connect (clicked => sub { $window->destroy(); Gtk->main_quit });
+    my $button_cancel = new Gtk2::Button(N("Cancel"));
+    $button_cancel->signal_connect(clicked => sub { $window->destroy(); Gtk->main_quit });
     $bbox1->add($button_cancel);
 
     $window->set_modal(1);

@@ -315,9 +315,9 @@ sub h2widget {
 sub create_entry_element {
     my ($text, $value, $label) = @_;
     my $e;
-    if(ref ($text) =~ /HASH/) {
+    if(ref $text =~ /HASH/) {
 	return ([ "$label : ", h2widget($text, $label) ]);
-    } elsif (ref ($text) =~ /ARRAY/) {
+    } elsif (ref $text =~ /ARRAY/) {
 	return ([ "$label : ", h2widget($text, $label) ]);
     } else {
 	$e = new Gtk2::Entry;

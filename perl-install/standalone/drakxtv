@@ -133,7 +133,7 @@ my @devices = grep { ($_->{media_type} eq 'MULTIMEDIA_VIDEO') || $_->{driver} eq
 if (@devices) {
     # TODO: That need some work for multiples TV cards
     foreach (@devices) {
-	   if (( $< == 0) && (grep { $_->{driver} =~ '(bttv|saa7134)' } @devices)) {
+	   if (( $< == 0) && (grep { $_->{driver} =~ /(bttv|saa7134)/ } @devices)) {
 		  require harddrake::v4l;
 		  require modules;
 		  no strict 'subs';

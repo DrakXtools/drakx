@@ -600,7 +600,7 @@ sub save_cron_files {
 sub read_conf_file {
     if (-e $cfg_file) {
 #        %config = getVarsFromSh($cfg_file) || print "You must be root to read configuration file. \n";
-        open (CONF_FILE, "<" . $cfg_file) || print "You must be root to read configuration file. \n";
+        open(CONF_FILE, "<" . $cfg_file) || print "You must be root to read configuration file. \n";
         local $_;
         while (<CONF_FILE>) {
 	    	next unless /\S/;
@@ -1881,12 +1881,12 @@ sub advanced_where_cd {
 			0, gtkpack_(new Gtk2::HBox(0,10),
 			0, gtkset_sensitive(new Gtk2::Label(N("Please choose your CD/DVD device\n(Press Enter to propogate settings to other fields.\nThis field isn't necessary, only a tool to fill in the form.)")), $where_cd),
 				1, new Gtk2::VBox(0, 5),
-				0, gtkset_sensitive(gtkset_size_request ($combo_where_cd_device, 200, 20), $where_cd),
+				0, gtkset_sensitive(gtkset_size_request($combo_where_cd_device, 200, 20), $where_cd),
 			),
 			0, gtkpack_(new Gtk2::HBox(0,10),
 			0, gtkset_sensitive(new Gtk2::Label(N("Please choose your CD/DVD media size (Mb)")), $where_cd),
 				1, new Gtk2::VBox(0, 5),
-				0, gtkset_sensitive(gtkset_size_request ($combo_where_cd_time, 200, 20), $where_cd),
+				0, gtkset_sensitive(gtkset_size_request($combo_where_cd_time, 200, 20), $where_cd),
 			),
 			0, new Gtk2::VBox(0, 5),
 			0, gtkpack_(new Gtk2::HBox(0,10),
@@ -1930,8 +1930,8 @@ sub advanced_where_cd {
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				0, gtkset_sensitive(new Gtk2::Label(N("Please enter your CD Writer device name\n ex: 0,1,0")),  $where_cd),
 				1, new Gtk2::VBox(0, 5),
-#				0, gtkset_size_request (gtkset_sensitive($cd_device_entry = new Gtk2::Entry(), $where_cd), 200, 20),
-				0, gtkset_sensitive(gtkset_size_request ($combo_where_cdrecord_device, 200, 20), $where_cd),
+#				0, gtkset_size_request(gtkset_sensitive($cd_device_entry = new Gtk2::Entry(), $where_cd), 200, 20),
+				0, gtkset_sensitive(gtkset_size_request($combo_where_cdrecord_device, 200, 20), $where_cd),
 			),
 		),
 	);
@@ -2003,7 +2003,7 @@ sub advanced_where_tape {
 
     my $box_where_tape;
     my $button;
-    my $adj = new Gtk2::Adjustment 550.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
+    my $adj = new Gtk2::Adjustment(550.0, 1.0, 10000.0, 1.0, 5.0, 0.0);
     #my ($pix_fs_map, $pix_fs_mask) = gtkcreate_img("filedialog");
     
     gtkpack($advanced_box,
@@ -2014,7 +2014,7 @@ sub advanced_where_tape {
 		 	0, gtkpack_(new Gtk2::HBox(0,10),
 				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the device name to use for backup")), $where_tape),
 				1, new Gtk2::VBox(0, 6),
-				0, gtkset_sensitive(gtkset_size_request ($combo_where_tape_device, 200, 20), $where_tape),
+				0, gtkset_sensitive(gtkset_size_request($combo_where_tape_device, 200, 20), $where_tape),
 			),
 			0, new Gtk2::VBox(0, 5),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
@@ -2038,7 +2038,7 @@ sub advanced_where_tape {
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup")), $where_tape),
 				1, new Gtk2::VBox(0, 6),
-				0, gtkset_size_request (gtkset_sensitive(my $spinner = new Gtk2::SpinButton($adj, 0, 0), $where_tape), 200, 20),
+				0, gtkset_size_request(gtkset_sensitive(my $spinner = new Gtk2::SpinButton($adj, 0, 0), $where_tape), 200, 20),
 			),
 			0, gtkpack_(new Gtk2::HBox(0,10),),
 		),
@@ -2092,7 +2092,7 @@ sub advanced_where_hd {
     my ($previous_function) = @_,
     my $box_where_hd;
     my $button;
-    my $adj = new Gtk2::Adjustment 550.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
+    my $adj = new Gtk2::Adjustment(550.0, 1.0, 10000.0, 1.0, 5.0, 0.0);
     
     gtkpack($advanced_box,
 	    $box_where_hd = gtkpack_(new Gtk2::VBox(0, 6),
@@ -2102,7 +2102,7 @@ sub advanced_where_hd {
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the directory to save to:")), $where_hd),
 				1, new Gtk2::VBox(0, 6),
-				0, gtkset_size_request (gtkset_sensitive($save_path_entry = new Gtk2::Entry(), $where_hd), 152, 20),
+				0, gtkset_size_request(gtkset_sensitive($save_path_entry = new Gtk2::Entry(), $where_hd), 152, 20),
 				0, gtkset_sensitive($button = gtksignal_connect(new Gtk2::Button(),  clicked => sub {
 					filedialog_where_hd() 
 				}), $where_hd),
@@ -2111,7 +2111,7 @@ sub advanced_where_hd {
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup")),  $where_hd),
 				1, new Gtk2::VBox(0, 6),
-				0, gtkset_size_request (gtkset_sensitive(my $spinner = new Gtk2::SpinButton($adj, 0, 0), $where_hd), 200, 20),
+				0, gtkset_size_request(gtkset_sensitive(my $spinner = new Gtk2::SpinButton($adj, 0, 0), $where_hd), 200, 20),
 			),
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				1, new Gtk2::VBox(0, 6),
@@ -3049,7 +3049,7 @@ sub restore_other_media_hd {
     my ($previous_function) = @_,
     my $box_where_hd;
     my $button;
-    my $adj = new Gtk2::Adjustment 550.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
+    my $adj = new Gtk2::Adjustment(550.0, 1.0, 10000.0, 1.0, 5.0, 0.0);
     
     gtkpack($advanced_box,
 	    $box_where_hd = gtkpack_(new Gtk2::VBox(0, 6),
@@ -3059,7 +3059,7 @@ sub restore_other_media_hd {
 			0, gtkpack_(new Gtk2::HBox(0,10),
 		    	0, gtkset_sensitive(new Gtk2::Label(N("Please enter the directory to save:")), $where_hd),
 		    	1, new Gtk2::VBox(0, 6),
-		    	0, gtkset_size_request (gtkset_sensitive($save_path_entry = new Gtk2::Entry(), $where_hd), 152, 20),
+		    	0, gtkset_size_request(gtkset_sensitive($save_path_entry = new Gtk2::Entry(), $where_hd), 152, 20),
 		    	0, gtkset_sensitive($button = gtksignal_connect(new Gtk2::Button(),  clicked => sub {
 				filedialog_where_hd() }), $where_hd),
 			),
@@ -3067,7 +3067,7 @@ sub restore_other_media_hd {
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
 	    		0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup")),  $where_hd),
 	    		1, new Gtk2::VBox(0, 6),
-	    		0, gtkset_size_request (gtkset_sensitive(my $spinner = new Gtk2::SpinButton($adj, 0, 0), $where_hd), 200, 20),
+	    		0, gtkset_size_request(gtkset_sensitive(my $spinner = new Gtk2::SpinButton($adj, 0, 0), $where_hd), 200, 20),
 			),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
 	    		1, new Gtk2::VBox(0, 6),
@@ -3135,7 +3135,7 @@ sub restore_other_media {
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the directory where backups are stored")), $other_media_hd),
 				1, new Gtk2::VBox(0, 6),
-				0, gtkset_size_request (gtkset_sensitive($restore_find_path_entry = new Gtk2::Entry(), $other_media_hd), 152, 20),
+				0, gtkset_size_request(gtkset_sensitive($restore_find_path_entry = new Gtk2::Entry(), $other_media_hd), 152, 20),
 				0, gtkset_sensitive($button = gtksignal_connect(new Gtk2::Button(),  clicked => sub {
 				     filedialog_restore_find_path(); 
 				}), $other_media_hd),
@@ -4206,7 +4206,7 @@ sub install_rpm {
     my $box_what_user;
     gtkpack($advanced_box,
 	    $box_what_user = gtkpack_(new Gtk2::VBox(0, 15),
-			0, N("The following packages need to be installed:\n @list_of_rpm_to_install"),
+			0, N("The following packages need to be installed:\n") . join(' ', @list_of_rpm_to_install),
 				0, new Gtk2::HSeparator,
 				0, gtksignal_connect(new Gtk2::Button(N("Install")), clicked => sub {  
 					system("/usr/sbin/urpmi --X @list_of_rpm_to_install"); 

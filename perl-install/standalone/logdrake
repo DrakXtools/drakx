@@ -192,7 +192,7 @@ gtkadd($my_win->{window},
 					   create_scrolled_window($log_text)
 					   )) : (1, create_scrolled_window($log_text)),
 		if_(!$::isExplain, 0, gtkadd (gtkset_border_width(gtkset_layout(Gtk2::HButtonBox->new, 'end'), 5),
-					      if_(!$::isFile, gtksignal_connect(new Gtk2::Button (N("Mail alert")), 
+					      if_(!$::isFile, gtksignal_connect(new Gtk2::Button(N("Mail alert")), 
 										clicked => sub { eval { alert_config() };  
 												 if ($@ =~ /wizcancel/) {
 												     $::Wizard_no_previous = 1;
@@ -200,8 +200,8 @@ gtkadd($my_win->{window},
 												     $::WizardWindow->destroy if defined $::WizardWindow;
 												     undef $::WizardWindow;
 												 } })),
-					      gtksignal_connect(new Gtk2::Button (N("Save")), clicked => \&save),
-					      gtksignal_connect(new Gtk2::Button ($::isEmbedded ? N("Cancel") : N("Quit")), clicked => \&quit)
+					      gtksignal_connect(new Gtk2::Button(N("Save")), clicked => \&save),
+					      gtksignal_connect(new Gtk2::Button($::isEmbedded ? N("Cancel") : N("Quit")), clicked => \&quit)
 					      )
 		    )
 		)
@@ -383,7 +383,7 @@ my $r = "*** ". chomp_(`date`) . " ***\n";
 
 my $initdir = "/etc/init.d";
 
-    my ($load,$mail,$email,$smtp,); 
+    my ($load,$mail,$email,$smtp); 
     $load = 3;
 
   begin:

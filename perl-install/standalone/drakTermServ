@@ -140,7 +140,7 @@ interactive_mode() if $#ARGV < 1;
 
 sub read_conf_file {
 	if (-e $cfg_file) {
-		open (CONF_FILE, "<" . $cfg_file) || print "You must be root to read configuration file. \n";
+		open(CONF_FILE, "<" . $cfg_file) || print "You must be root to read configuration file. \n";
 		while (<CONF_FILE>) {
 			next unless /\S/;
 			next if /^#/;
@@ -456,7 +456,7 @@ sub help {
         		
         		A basic example of creating a boot floppy for a 3Com 3c509 manually:
         		
-        		cat /usr/lib/etherboot/boot1a.bin /\
+        		cat /usr/lib/etherboot/boot1a.bin \\
         			/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0
  
 
@@ -1325,7 +1325,6 @@ sub deluser {
 	# del a user from the shadow$$CLIENT$$ file
 	my ($cmd_line, $username) = @_;
 	my $i;
-	my $user;
 	my $user_deleted;
 		
 	my @ts_users = cat_("/etc/shadow\$\$CLIENT\$\$");
@@ -1333,7 +1332,7 @@ sub deluser {
 	
 	if ($is_ts_user) {
 		$i = 0;
-		foreach $user (@ts_users) {
+		foreach my $user (@ts_users) {
 			if ($user =~ /$username/) {
 				splice (@ts_users, $i, 1);
 				$user_deleted = 1;
@@ -1342,7 +1341,7 @@ sub deluser {
 			$i++;
 		}			
 		open(FHANDLE, "> /etc/shadow\$\$CLIENT\$\$");
-		foreach $user (@ts_users) {
+		foreach my $user (@ts_users) {
 			print FHANDLE "$user";
 		} 
 		close FHANDLE;
@@ -1365,11 +1364,10 @@ sub addclient {
 	my $host_in_use = 0;
 	my $mac_in_use = 0;
 	my $ip_in_use = 0;
-	my $client;
 			
 	my %ts_clients = read_dhcpd_conf();
 
-	foreach $client(keys(%ts_clients)){
+	foreach my $client(keys(%ts_clients)){
 		$host_in_use = 1 if ($hostname eq $client);
 		$mac_in_use = 1 if ($mac eq $ts_clients{$client}{hardware});
 		$ip_in_use = 1 if ($ip eq $ts_clients{$client}{address});
@@ -1406,12 +1404,11 @@ sub addclient {
 sub delclient {
 	#- find a client and delete the entry in dhcpd.conf
 	my ($cmd_line, $hostname) = @_;
-	my $client;
 	my $host_found;
 	
 	my %ts_clients = read_dhcpd_conf();
 	
-	foreach $client(keys(%ts_clients)){
+	foreach my $client (keys(%ts_clients)){
 		if ($hostname eq $client) {
 			$host_found = 1;
 			delete $ts_clients{$client};
@@ -1500,10 +1497,9 @@ sub format_client_entry {
 sub write_dhcpd_conf {
 	my %ts_clients = @_;
 	my $clients = "/etc/dhcpd.conf.etherboot.clients";
-	my $key;
 		
 	open(CLIENT, "> $clients") || warn ("Can't open $clients!");
-	foreach $key(keys(%ts_clients)){
+	foreach my $key(keys(%ts_clients)){
 		my $client_entry = format_client_entry($key, %ts_clients);
 		print CLIENT $client_entry;
 	}

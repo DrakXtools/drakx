@@ -63,10 +63,10 @@ my $global_vbox = new Gtk::VBox();
 $global_vbox->pack_start(new Gtk::Label(N("boot disk creation")), 0, 0, 0) unless $::isEmbedded;
 
 ######## up part
-my $up_vbox  = new Gtk::VBox (0, 0);
+my $up_vbox  = new Gtk::VBox(0, 0);
 
 # device part
-my $dev_hbox = new Gtk::HBox (1, 0);
+my $dev_hbox = new Gtk::HBox(1, 0);
 my $device_combo = new Gtk::Combo();
 my $device_button = new Gtk::Button(N("default"));
 
@@ -79,7 +79,7 @@ $dev_hbox->pack_start($device_button, 0, 0, 0);
 $up_vbox->pack_start($dev_hbox, 0, 0, 0);
 
 # kernel part
-my $ker_hbox = new Gtk::HBox (1, 0);
+my $ker_hbox = new Gtk::HBox(1, 0);
 my $kernel_combo = new Gtk::Combo();
 my $kernel_button = new Gtk::Button(N("default"));
 $kernel_combo->disable_activate();
