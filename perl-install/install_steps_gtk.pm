@@ -14,6 +14,7 @@ use install_steps_interactive;
 use interactive::gtk;
 use xf86misc::main;
 use common;
+use mygtk2;
 use ugtk2 qw(:helpers :wrappers :create);
 use devices;
 use modules;
@@ -213,40 +214,33 @@ sub reallyChooseGroups {
     my ($o, $size_to_display, $individual, $_compssUsers) = @_;
 
     my $w = ugtk2->new('');
-    my $tips = Gtk2::Tooltips->new;
-    my $w_size = Gtk2::Label->new(&$size_to_display);
+    my $w_size = gtknew('Label', text => &$size_to_display);
 
     my $entry = sub {
 	my ($e) = @_;
-	my $text = translate($e->{label});
-	my $help = translate($e->{descr});
 
-	my $check = Gtk2::CheckButton->new($text);
-	$check->set_active($e->{selected});
-	$check->signal_connect(clicked => sub { 
-	    $e->{selected} = $check->get_active;
-	    $w_size->set_label(&$size_to_display);
-	});
-	gtkset_tip($tips, $check, $help);
-	$check;
+	gtknew('CheckButton', 
+	       text => translate($e->{label}), 
+	       tip => translate($e->{descr}),
+	       active_ref => \$e->{selected},
+	       toggled => sub { 
+		   gtkset($w_size, text => &$size_to_display);
+	       });
     };
     #- when restarting this step, it might be necessary to reload the compssUsers.pl (bug 11558). kludgy.
     if (!ref $o->{gtk_display_compssUsers}) { install_any::load_rate_files($o) }
-    gtkadd($w->{window},
+    ugtk2::gtkadd($w->{window},
 	   gtkpack_($w->create_box_with_title(N("Package Group Selection")),
 		    1, $o->{gtk_display_compssUsers}->($entry),
 		    1, '',
-		   0, gtkadd(Gtk2::HBox->new(0, 0),
-			  gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => $o->interactive_help_sub_display_id('choosePackages')),
+		   0, gtknew('HBox', children_loose => [
+			  gtknew('Button', text => N("Help"), clicked => $o->interactive_help_sub_display_id('choosePackages')),
 			  $w_size,
-			  if_($individual, do {
-			      my $check = Gtk2::CheckButton->new(N("Individual package selection"));
-			      $check->set_active($$individual);
-			      $check->signal_connect(clicked => sub { $$individual = $check->get_active });
-			      $check;
-			  }),
-			  gtksignal_connect(Gtk2::Button->new(N("Next")), clicked => sub { Gtk2->main_quit }),
-			 ),
+			  if_($individual,
+			      gtknew('CheckButton', text => N("Individual package selection"), active_ref => $individual),
+			  ),
+			  gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
+			 ]),
 		  ),
 	  );
     $w->main;
@@ -440,39 +434,21 @@ sub installPackages {
 
     my $w = ugtk2->new(N("Installing"));
     $w->sync;
-    my $text = Gtk2::Label->new;
+    my $text = gtknew('Label');
     my ($advertising, $change_time, $i);
     my $show_advertising if 0;
     $show_advertising = to_bool(@install_any::advertising_images) if !defined $show_advertising;
 
-    my ($msg, $msg_time_remaining) = map { Gtk2::Label->new($_) } '', N("Estimating");
+    my ($msg, $msg_time_remaining) = map { gtknew('Label', text => $_) } '', N("Estimating");
     my ($progress, $progress_total) = map { Gtk2::ProgressBar->new } (1..2);
-    gtkadd($w->{window}, my $box = Gtk2::VBox->new(0,10));
-    $box->pack_end(gtkshow(gtkpack(Gtk2::VBox->new(0,5),
-			   $msg, $progress,
-			   create_packtable({},
-					    [N("Time remaining "), $msg_time_remaining],
-					   ),
-			   $text,
-			   $progress_total,
-			   gtkadd(create_hbox(),
-				  my $cancel = Gtk2::Button->new(N("Cancel")),
-				  my $details = Gtk2::Button->new(''),
-				  ),
-			  )), 0, 1, 0);
-    $details->hide if !@install_any::advertising_images;
-    $w->sync;
-    $msg->set_label(N("Please wait, preparing installation..."));
-    foreach ($cancel, $details) {
-	gtkset_mousecursor_normal($_->window);
-    }
+    ugtk2::gtkadd($w->{window}, my $box = gtknew('VBox', spacing => 10));
+
     my $advertize = sub {
 	my ($update) = @_;
 	@install_any::advertising_images or return;
 	foreach ($msg, $progress, $text) {
 	    $show_advertising ? $_->hide : $_->show;
 	}
-	$details->set_label($show_advertising ? N("Details") : N("No details"));
 
 	gtkdestroy($advertising) if $advertising;
 	if ($show_advertising && $update) {
@@ -485,10 +461,10 @@ sub installPackages {
 	    -e $pl and $draw_text = 1;
 	    eval(cat_($pl)) if $draw_text;
 	    my $pix = gtkcreate_pixbuf($f);
-	    my $darea = Gtk2::DrawingArea->new;
+	    my $darea = gtknew('DrawingArea');
 	    gtkpack($box, $advertising = !$draw_text ?
 		    gtkcreate_img($f) :
-		    gtksignal_connect(gtkset_size_request($darea, $width, $height), expose_event => sub {
+		    gtkset($darea, width => $width, height => $height, expose_event => sub {
 			       my (undef, undef, $dx, $dy) = $darea->allocation->values;
 				   $darea->window->draw_rectangle($darea->style->bg_gc('active'), 1, 0, 0, $dx, $dy);
 				   $pix->render_to_drawable($darea->window, $darea->style->bg_gc('normal'), 0, 0,
@@ -510,11 +486,28 @@ sub installPackages {
 	}
     };
 
-    $cancel->signal_connect(clicked => sub { $pkgs::cancel_install = 1 });
-    $details->signal_connect(clicked => sub {
-	invbool \$show_advertising;
-	$advertize->(1);
-    });
+    my $cancel = gtknew('Button', text => N("Cancel"), clicked => sub { $pkgs::cancel_install = 1 });
+    my $details = gtknew('Button', text_ref => \$show_advertising, 
+			 format => sub { $show_advertising ? N("Details") : N("No details") },
+			 clicked => sub {
+			     gtkval_modify(\$show_advertising, !$show_advertising);
+			     $advertize->('update');
+			 });
+
+    $box->pack_end(gtkshow(gtknew('VBox', spacing => 5, children_loose => [
+			   $msg, $progress,
+			   gtknew('Table', children => [ [ N("Time remaining "), $msg_time_remaining ] ]),
+			   $text,
+			   $progress_total,
+			   gtknew('HButtonBox', children_loose => [ $cancel, $details ]),
+			  ])), 0, 1, 0);
+    $details->hide if !@install_any::advertising_images;
+    $w->sync;
+    gtkset($msg, text => N("Please wait, preparing installation..."));
+    foreach ($cancel, $details) {
+	gtkset_mousecursor_normal($_->window);
+    }
+
     $advertize->(0);
 
     my $oldInstallCallback = \&pkgs::installCallback;
@@ -525,15 +518,15 @@ sub installPackages {
 	    $nb = $amount;
 	    $total_size = $total; $current_total_size = 0;
 	    $start_time = time();
-	    $msg->set_label(N("%d packages", $nb));
+	    gtkset($msg, text => N("%d packages", $nb));
 	    $w->flush;
 	} elsif ($type eq 'inst' && $subtype eq 'start') {
 	    $progress->set_fraction(0);
 	    my $p = $data->{depslist}[$id];
-	    $msg->set_label(N("Installing package %s", $p->name));
+	    gtkset($msg, text => N("Installing package %s", $p->name));
 	    $current_total_size += $last_size;
 	    $last_size = $p->size;
-	    $text->set_label((split /\n/, c::from_utf8($p->summary))[0] || '');
+	    gtkset($text, text => (split /\n/, c::from_utf8($p->summary))[0] || '');
 	    $advertize->(1) if $show_advertising && $total_size > 20_000_000 && time() - $change_time > 20;
 	    $w->flush;
 	} elsif ($type eq 'inst' && $subtype eq 'progress') {
@@ -548,7 +541,7 @@ sub installPackages {
 
 	    $progress_total->set_fraction($ratio);
 	    if ($dtime != $last_dtime && $current_total_size > 80_000_000) {
-		$msg_time_remaining->set_label(formatTime(10 * round(max($total_time - $dtime, 0) / 10) + 10));
+		gtkset($msg_time_remaining, text => formatTime(10 * round(max($total_time - $dtime, 0) / 10) + 10));
 		$last_dtime = $dtime;
 	    }
 	    $w->flush;
@@ -615,13 +608,12 @@ sub summary_prompt {
     foreach my $e (@$l) {
 	if ($group ne $e->{group}) {
 	    $group = $e->{group};
-	    push @table, [ gtkpack__(Gtk2::HBox->new(0, 0), $group), '' ];
+	    push @table, [ gtknew('HBox', children_tight => [ $group ]), '' ];
 	}
-	$e->{widget} = Gtk2::Label->new;
-	$e->{widget}->set_property(wrap => 1);
-	$e->{widget}->set_size_request($::real_windowwidth * 0.72, -1);
-	push @table, [], [ gtkpack__(Gtk2::HBox->new(0, 30), '', $e->{widget}),
-			   gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub { 
+	$e->{widget} = gtknew('WrappedLabel', width => $::real_windowwidth * 0.72);
+
+	push @table, [], [ gtknew('HBox', spacing => 30, children_tight => [ '', $e->{widget} ]),
+			   gtknew('Button', text => N("Configure"), clicked => sub { 
 						 $w->{rwindow}->hide;
 						 $e->{clicked}(); 
 						 $w->{rwindow}->show;
@@ -633,18 +625,18 @@ sub summary_prompt {
 	foreach (@$l) {
 	    my $t = $_->{val}() || '<span foreground="red">' . N("not configured") . '</span>';
 	    $t =~ s/&/&amp;/g;
-	    $_->{widget}->set_markup($_->{label} . ' - ' . $t);
+	    gtkset($_->{widget}, text_markup => $_->{label} . ' - ' . $t);
 	}
     };
     $set_entry_labels->();
 
     my $help_sub = $o->interactive_help_sub_display_id('summary');
 
-    gtkadd($w->{window},
-	   gtkpack_(Gtk2::VBox->new(0,5),
-		    1, create_scrolled_window(create_packtable({ mcc => 1 }, @table)),
+    ugtk2::gtkadd($w->{window},
+	   gtknew('VBox', spacing => 5, children => [
+		    1, gtknew('ScrolledWindow', child => gtknew('Table', mcc => 1, children => \@table)),
 		    0, $w->create_okcancel(undef, '', '', if_($help_sub, [ N("Help"), $help_sub, 1 ]))
-		  ));
+		  ]));
 
     $w->main($check_complete);
 }
