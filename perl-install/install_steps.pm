@@ -438,6 +438,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 	install_any::install_urpmi($o->{prefix}, 
 				   $::oem ? 'cdrom' : $o->{method}, #- HACK
 				   $o->{packages}{mediums});
+	pkgs::saveCompssUsers($o->{prefix}, $o->{packages}, $o->{compssUsers}, $o->{compssUsersSorted});
     }
     if (my $charset = lang::charset($o->{lang}, $o->{prefix})) {
 	eval { update_userkderc("$o->{prefix}/usr/share/config/kdeglobals", 'Locale', Charset => $charset) };
