@@ -278,7 +278,7 @@ sub read_configured_queues($) {
 		if (!$printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{ppd}) {
 		    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{ppd} = '1';
 		}
-		$printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{driver} = 'CUPS/PPD';
+		$printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{driver} = 'PPD';
 		$printer->{OLD_QUEUE} = "";
 	    }
 	    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{make} ||= "";
@@ -305,7 +305,7 @@ sub read_configured_queues($) {
 
 sub make_menuentry {
     my ($printer, $queue) = @_;
-    my $spooler = $shortspooler_inv{$printer->{SPOOLER}}{short_name};
+    my $spooler = $spoolers{$printer->{SPOOLER}}{short_name};
     my $connect = $printer->{configured}{$queue}{queuedata}{connect};
     my $localremote;
     if ($connect =~ m!^(file|parallel|usb|serial):! || 
@@ -630,7 +630,7 @@ sub set_usermode {
     if (!(-f $file)) {
 	@file_content = ();
     } else {
-	open F, "< $file" or die "Cannot open $file!";
+	open F, "< $file" or die "Cannot open $file for reading!";
 	@file_content = <F>;
 	close F;
     }
@@ -646,7 +646,7 @@ sub set_usermode {
     }
 
     # Write back modified file
-    open F, "> $file" or die "Cannot open $file!";
+    open F, "> $file" or die "Cannot open $file for writing!";
     print F @file_content;
     close F;
 

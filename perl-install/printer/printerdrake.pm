@@ -1881,56 +1881,76 @@ sub get_db_entry {
 		$printer->{DBENTRY} = "$make|$model|$driverstr";
 		# database key contains the "(recommended)" for the
 		# recommended driver, so add it if necessary
-		if (!member($printer->{DBENTRY}, keys(%printer::main::thedb))) {
+		if (!member($printer->{DBENTRY}, 
+			    keys(%printer::main::thedb))) {
 		    $printer->{DBENTRY} .= " (recommended)";
 		}
 	    } else {
 		$printer->{DBENTRY} = "$make|$model";
 	    }
 	    $printer->{OLD_CHOICE} = $printer->{DBENTRY};
-	} elsif ($printer->{SPOOLER} eq "cups" &&
-		 $printer->{configured}{$queue}{queuedata}{ppd}) {
+	} elsif ($printer->{configured}{$queue}{queuedata}{ppd}) {
 	    # Do we have a native CUPS driver or a PostScript PPD file?
-	    $printer->{DBENTRY} = printer::main::get_descr_from_ppd($printer) || $printer->{DBENTRY};
+	    $printer->{DBENTRY} =
+		printer::main::get_descr_from_ppd($printer) ||
+		$printer->{DBENTRY};
+	    if (!member($printer->{DBENTRY}, 
+			keys(%printer::main::thedb))) {
+		$printer->{DBENTRY} .= " (recommended)";
+	    }
 	    $printer->{OLD_CHOICE} = $printer->{DBENTRY};
-	} else {
-	    # Point the list cursor at least to manufacturer and model of the
-	    # printer
+	}
+	my ($make, $model);
+	if ($printer->{DBENTRY} eq "") {
+	    # Point the list cursor at least to manufacturer and model of 
+	    # the printer
 	    $printer->{DBENTRY} = "";
-	    my $make = uc($printer->{configured}{$queue}{queuedata}{make});
-	    my $model = $printer->{configured}{$queue}{queuedata}{model};
+	    if ($printer->{configured}{$queue}{queuedata}{foomatic}) {
+		$make = uc($printer->{configured}{$queue}{queuedata}{make});
+		$model = $printer->{configured}{$queue}{queuedata}{model};
+	    } elsif ($printer->{configured}{$queue}{queuedata}{ppd}) {
+		my $makemodel =
+		    printer::main::get_descr_from_ppd($printer);
+		$makemodel =~ m!^([^\|]+)\|([^\|]+)(|\|.*)$!;
+		$make = $1;
+		$model = $2;
+	    }
+	    foreach my $key (keys %printer::main::thedb) {
+		if ($::expert &&
+		    $key =~ /^$make\|$model\|.*\(recommended\)$/ ||
+		    !$::expert && $key =~ /^$make\|$model$/) {
+		    $printer->{DBENTRY} = $key;
+		}
+	    }
+	}
+	if ($printer->{DBENTRY} eq "") {
+	    # Exact match of make and model did not work, try to clean
+	    # up the model name
+	    $model =~ s/PS//;
+	    $model =~ s/PostScript//i;
+	    $model =~ s/Series//i;
 	    foreach my $key (keys %printer::main::thedb) {
 		if ($::expert && $key =~ /^$make\|$model\|.*\(recommended\)$/ ||
 		    !$::expert && $key =~ /^$make\|$model$/) {
 		    $printer->{DBENTRY} = $key;
 		}
 	    }
-	    if ($printer->{DBENTRY} eq "") {
-		# Exact match of make and model did not work, try to clean
-		# up the model name
-		$model =~ s/PS//;
-		$model =~ s/PostScript//;
-		$model =~ s/Series//;
-		foreach my $key (keys %printer::main::thedb) {
-		    if ($::expert && $key =~ /^$make\|$model\|.*\(recommended\)$/ ||
-			!$::expert && $key =~ /^$make\|$model$/) {
-			$printer->{DBENTRY} = $key;
-		    }
-		}
-	    }
-	    if ($printer->{DBENTRY} eq "" && $make ne "") {
-		# Exact match with cleaned-up model did not work, try a best match
-		my $matchstr = "$make|$model";
-		$printer->{DBENTRY} = bestMatchSentence($matchstr, keys %printer::main::thedb);
-		# If the manufacturer was not guessed correctly, discard the
-		# guess.
-		$printer->{DBENTRY} =~ /^([^\|]+)\|/;
-		my $guessedmake = lc($1);
-		if ($matchstr !~ /$guessedmake/i &&
-		    ($guessedmake ne "hp" ||
-		     $matchstr !~ /Hewlett[\s-]+Packard/i))
-		{ $printer->{DBENTRY} = "" };
-	    }
+	}
+	if ($printer->{DBENTRY} eq "" && $make ne "") {
+	    # Exact match with cleaned-up model did not work, try a best match
+	    my $matchstr = "$make|$model";
+	    $printer->{DBENTRY} = 
+		bestMatchSentence($matchstr, keys %printer::main::thedb);
+	    # If the manufacturer was not guessed correctly, discard the
+	    # guess.
+	    $printer->{DBENTRY} =~ /^([^\|]+)\|/;
+	    my $guessedmake = lc($1);
+	    if ($matchstr !~ /$guessedmake/i &&
+		($guessedmake ne "hp" ||
+		 $matchstr !~ /Hewlett[\s-]+Packard/i))
+	    { $printer->{DBENTRY} = "" };
+	}
+	if ($printer->{DBENTRY} eq "") {
 	    # Set the OLD_CHOICE to a non-existing value
 	    $printer->{OLD_CHOICE} = "XXX";
 	}
@@ -2014,16 +2034,10 @@ my %lexmarkinkjet_options = (
 
 sub get_printer_info {
     my ($printer, $in) = @_;
-    #- Read the printer driver database if necessary
-    #if ((keys %printer::main::thedb) == 0) {
-    #    my $_w = $in->wait_message(N("Printerdrake"), 
-    #                              N("Reading printer database..."));
-    #    printer::main::read_printer_db($printer->{SPOOLER});
-    #}
     my $queue = $printer->{OLD_QUEUE};
     my $oldchoice = $printer->{OLD_CHOICE};
     my $newdriver = 0;
-    if (!$printer->{configured}{$queue} ||      # New queue  or
+    if (!$printer->{configured}{$queue} ||    # New queue  or
 	($oldchoice && $printer->{DBENTRY} && # make/model/driver changed
 	 ($oldchoice ne $printer->{DBENTRY} ||
 	  $printer->{currentqueue}{driver} ne 
@@ -2040,105 +2054,124 @@ sub get_printer_info {
     # Use the "printer" and not the "foomatic" field to identify a Foomatic
     # queue because in a new queue "foomatic" is not set yet.
     if ($printer->{currentqueue}{printer} || # We have a Foomatic queue
-	$printer->{currentqueue}{ppd}) { # We have a CUPS+PPD queue
+	$printer->{currentqueue}{ppd}) { # We have a PPD queue
 	if ($printer->{currentqueue}{printer}) { # Foomatic queue?
 	    # In case of a new queue "foomatic" was not set yet
 	    $printer->{currentqueue}{foomatic} = 1;
-	    # Now get the options for this printer/driver combo
-	    if ($printer->{configured}{$queue} && $printer->{configured}{$queue}{queuedata}{foomatic}) {
+	    $printer->{currentqueue}{ppd} = undef;
+	} elsif ($printer->{currentqueue}{ppd}) { # PPD queue?
+	    # If we had a Foomatic queue before, unmark the flag and
+	    # initialize the "printer" and "driver" fields
+	    $printer->{currentqueue}{foomatic} = 0;
+	    $printer->{currentqueue}{printer} = undef;
+	    $printer->{currentqueue}{driver} = "PPD";
+	}
+	# Now get the options for this printer/driver combo
+	if (($printer->{configured}{$queue}) && 
+	    (($printer->{configured}{$queue}{queuedata}{foomatic}) ||
+	     ($printer->{configured}{$queue}{queuedata}{ppd}))) {
+	    if (!$newdriver) {
+		# The user didn't change the printer/driver
+		$printer->{ARGS} = $printer->{configured}{$queue}{args};
+	    } elsif ($printer->{currentqueue}{foomatic}) {
 		# The queue was already configured with Foomatic ...
-		if (!$newdriver) {
-		    # ... and the user didn't change the printer/driver
-		    $printer->{ARGS} = $printer->{configured}{$queue}{args};
+		# ... and the user has chosen another printer/driver
+		$printer->{ARGS} = 
+		    printer::main::read_foomatic_options($printer);
+	    } elsif ($printer->{currentqueue}{ppd}) {
+		# ... and the user has chosen another printer/driver
+		$printer->{ARGS} = 
+		    printer::main::read_ppd_options($printer);
+	    }
+	} else {
+	    # The queue was not configured with Foomatic before
+	    # Set some special options
+	    $printer->{SPECIAL_OPTIONS} = '';
+	    # Default page size depending on the country/language
+	    # (US/Canada -> Letter, Others -> A4)
+	    my $pagesize;
+	    if ($printer->{PAPERSIZE}) {
+		$printer->{SPECIAL_OPTIONS} .= 
+		    " -o PageSize=$printer->{PAPERSIZE}";
+	    } elsif (($pagesize = $in->{lang}) ||
+		     ($pagesize = $ENV{LC_PAPER}) ||
+		     ($pagesize = $ENV{LANG}) ||
+		     ($pagesize = $ENV{LANGUAGE}) ||
+		     ($pagesize = $ENV{LC_ALL})) {
+		if ($pagesize =~ /^en_CA/ ||
+		    $pagesize =~ /^fr_CA/ || 
+		    $pagesize =~ /^en_US/) {
+		    $pagesize = "Letter";
 		} else {
-		    # ... and the user has chosen another printer/driver
-		    $printer->{ARGS} = printer::main::read_foomatic_options($printer);
+		    $pagesize = "A4";
 		}
-	    } else {
-		# The queue was not configured with Foomatic before
-		# Set some special options
-		$printer->{SPECIAL_OPTIONS} = '';
-		# Default page size depending on the country/language
-		# (US/Canada -> Letter, Others -> A4)
-		my $pagesize;
-		if ($printer->{PAPERSIZE}) {
-		    $printer->{SPECIAL_OPTIONS} .= 
-			" -o PageSize=$printer->{PAPERSIZE}";
-		} elsif (($pagesize = $in->{lang}) ||
-			 ($pagesize = $ENV{LC_PAPER}) ||
-			 ($pagesize = $ENV{LANG}) ||
-			 ($pagesize = $ENV{LANGUAGE}) ||
-			 ($pagesize = $ENV{LC_ALL})) {
-		    if ($pagesize =~ /^en_CA/ ||
-			$pagesize =~ /^fr_CA/ || 
-			$pagesize =~ /^en_US/) {
-			$pagesize = "Letter";
-		    } else {
-			$pagesize = "A4";
-		    }
-		    $printer->{SPECIAL_OPTIONS} .= 
-			" -o PageSize=$pagesize";
+		$printer->{SPECIAL_OPTIONS} .= 
+		    " -o PageSize=$pagesize";
+	    }
+	    # oki4w driver -> OKI winprinter which needs the
+	    # oki4daemon to work
+	    if ($printer->{currentqueue}{driver} eq 'oki4w') {
+		if ($printer->{currentqueue}{connect} !~ 
+		    m!^(parallel|file):/dev/lp0$!) {
+		    $in->ask_warn(N("OKI winprinter configuration"),
+				  N("You are configuring an OKI laser winprinter. These printers\nuse a very special communication protocol and therefore they work only when connected to the first parallel port. When your printer is connected to another port or to a print server box please connect the printer to the first parallel port before you print a test page. Otherwise the printer will not work. Your connection type setting will be ignored by the driver."));
 		}
-		# oki4w driver -> OKI winprinter which needs the
-		# oki4daemon to work
-		if ($printer->{currentqueue}{driver} eq 'oki4w') {
-		    if ($printer->{currentqueue}{connect} !~ 
-			m!^(parallel|file):/dev/lp0$!) {
-			$in->ask_warn(N("OKI winprinter configuration"),
-				      N("You are configuring an OKI laser winprinter. These printers\nuse a very special communication protocol and therefore they work only when connected to the first parallel port. When your printer is connected to another port or to a print server box please connect the printer to the first parallel port before you print a test page. Otherwise the printer will not work. Your connection type setting will be ignored by the driver."));
-		    }
-		    $printer->{currentqueue}{connect} = 'file:/dev/null';
-		    # Start the oki4daemon
-		    services::start_service_on_boot('oki4daemon');
-		    printer::services::start('oki4daemon');
-		    # Set permissions
-
-              my $h = {
-                  cups => sub { set_permissions('/dev/oki4drv', '660', 'lp', 'sys') },
-                  pdq  => sub { set_permissions('/dev/oki4drv', '666') }
-              };
-              my $s = $h->{$printer->{SPOOLER}} ||= sub { set_permissions('/dev/oki4drv', '660', 'lp', 'lp') };
-              &$s;
-		} elsif ($printer->{currentqueue}{driver} eq 'lexmarkinkjet') {
-		    # Set "Port" option
-              my $opt = $lexmarkinkjet_options{$printer->{currentqueue}{connect}};
-              if ($opt) {
-                  $printer->{SPECIAL_OPTIONS} .= $opt;
-		    } else {
-			$in->ask_warn(N("Lexmark inkjet configuration"),
-				      N("The inkjet printer drivers provided by Lexmark only support local printers, no printers on remote machines or print server boxes. Please connect your printer to a local port or configure it on the machine where it is connected to."));
-			return 0;
-		    }
-		    # Set device permissions
-		    $printer->{currentqueue}{connect} =~ 
-			/^\s*(file|parallel|usb):(\S*)\s*$/;
-		    if ($printer->{SPOOLER} eq 'cups') {
-			set_permissions($2, '660', 'lp', 'sys');
-		    } elsif ($printer->{SPOOLER} eq 'pdq') {
-			set_permissions($2, '666');
-		    } else {
-			set_permissions($2, '660', 'lp', 'lp');
-		    }
-		    # This is needed to have the device not blocked by the
-		    # spooler backend.
-		    $printer->{currentqueue}{connect} = 'file:/dev/null';
-		    #install packages
-		    my $drivertype = $printer->{currentqueue}{model};
-		    if ($drivertype eq 'Z22') { $drivertype = 'Z32' }
-		    if ($drivertype eq 'Z23') { $drivertype = 'Z33' }
-		    $drivertype = lc($drivertype);
-		    if (!files_exist("/usr/local/lexmark/$drivertype/$drivertype")) {
-			eval { $in->do_pkgs->install("lexmark-drivers-$drivertype") };
-		    }
-		    if (!files_exist("/usr/local/lexmark/$drivertype/$drivertype")) {
-			# Driver installation failed, probably we do not have
-			# the commercial CDs
-			$in->ask_warn(N("Lexmark inkjet configuration"),
-				      N("To be able to print with your Lexmark inkjet and this configuration, you need the inkjet printer drivers provided by Lexmark (http://www.lexmark.com/). Click on the \"Drivers\" link. Then choose your model and afterwards \"Linux\" as operating system. The drivers come as RPM packages or shell scripts with interactive graphical installation. You do not need to do this configuration by the graphical frontends. Cancel directly after the license agreement. Then print printhead alignment pages with \"lexmarkmaintain\" and adjust the head alignment settings with this program."));
-		    }
-		} elsif ($printer->{currentqueue}{driver} eq 'pbmtozjs') {
-		    $in->ask_warn(N("GDI Laser Printer using the Zenographics ZJ-Stream Format"),
-				  N("Your printer belongs to the group of GDI laser printers (winprinters) sold by different manufacturers which uses the Zenographics ZJ-stream raster format for the data sent to the printer. The driver for these printers is still in a very early development stage and so it will perhaps not always work properly. Especially it is possible that the printer only works when you choose the A4 paper size.
+		$printer->{currentqueue}{connect} = 'file:/dev/null';
+		# Start the oki4daemon
+		services::start_service_on_boot('oki4daemon');
+		printer::services::start('oki4daemon');
+		# Set permissions
+		
+		my $h = {
+		    cups => sub { set_permissions('/dev/oki4drv', '660', 
+						  'lp', 'sys') },
+		    pdq  => sub { set_permissions('/dev/oki4drv', '666') }
+		};
+		my $s = $h->{$printer->{SPOOLER}} ||= 
+		    sub { set_permissions('/dev/oki4drv', '660',
+					  'lp', 'lp') };
+		&$s;
+	    } elsif ($printer->{currentqueue}{driver} eq 'lexmarkinkjet') {
+		# Set "Port" option
+		my $opt =
+		    $lexmarkinkjet_options{$printer->{currentqueue}{connect}};
+		if ($opt) {
+		    $printer->{SPECIAL_OPTIONS} .= $opt;
+		} else {
+		    $in->ask_warn(N("Lexmark inkjet configuration"),
+				  N("The inkjet printer drivers provided by Lexmark only support local printers, no printers on remote machines or print server boxes. Please connect your printer to a local port or configure it on the machine where it is connected to."));
+		    return 0;
+		}
+		# Set device permissions
+		$printer->{currentqueue}{connect} =~ 
+		    /^\s*(file|parallel|usb):(\S*)\s*$/;
+		if ($printer->{SPOOLER} eq 'cups') {
+		    set_permissions($2, '660', 'lp', 'sys');
+		} elsif ($printer->{SPOOLER} eq 'pdq') {
+		    set_permissions($2, '666');
+		} else {
+		    set_permissions($2, '660', 'lp', 'lp');
+		}
+		# This is needed to have the device not blocked by the
+		# spooler backend.
+		$printer->{currentqueue}{connect} = 'file:/dev/null';
+		#install packages
+		my $drivertype = $printer->{currentqueue}{model};
+		if ($drivertype eq 'Z22') { $drivertype = 'Z32' }
+		if ($drivertype eq 'Z23') { $drivertype = 'Z33' }
+		$drivertype = lc($drivertype);
+		if (!files_exist("/usr/local/lexmark/$drivertype/$drivertype")) {
+		    eval { $in->do_pkgs->install("lexmark-drivers-$drivertype") };
+		}
+		if (!files_exist("/usr/local/lexmark/$drivertype/$drivertype")) {
+		    # Driver installation failed, probably we do not have
+		    # the commercial CDs
+		    $in->ask_warn(N("Lexmark inkjet configuration"),
+				  N("To be able to print with your Lexmark inkjet and this configuration, you need the inkjet printer drivers provided by Lexmark (http://www.lexmark.com/). Click on the \"Drivers\" link. Then choose your model and afterwards \"Linux\" as operating system. The drivers come as RPM packages or shell scripts with interactive graphical installation. You do not need to do this configuration by the graphical frontends. Cancel directly after the license agreement. Then print printhead alignment pages with \"lexmarkmaintain\" and adjust the head alignment settings with this program."));
+		}
+	    } elsif ($printer->{currentqueue}{driver} eq 'pbmtozjs') {
+		$in->ask_warn(N("GDI Laser Printer using the Zenographics ZJ-Stream Format"),
+			      N("Your printer belongs to the group of GDI laser printers (winprinters) sold by different manufacturers which uses the Zenographics ZJ-stream raster format for the data sent to the printer. The driver for these printers is still in a very early development stage and so it will perhaps not always work properly. Especially it is possible that the printer only works when you choose the A4 paper size.
 
 Some of these printers, as the HP LaserJet 1000, for which this driver was originally created, need their firmware to be uploaded to them after they are turned on. In the case of the HP LaserJet 1000 you have to search the printer's Windows driver CD or your Windows partition for the file \"sihp1000.img\" and upload the file to the printer with one of the following commands:
 
@@ -2147,35 +2180,15 @@ Some of these printers, as the HP LaserJet 1000, for which this driver was origi
 
 The first command can be given by any normal user, the second must be given as root. After having done so you can print normally.
 "));
-		}
-		$printer->{ARGS} = printer::main::read_foomatic_options($printer);
-		delete($printer->{SPECIAL_OPTIONS});
 	    }
-	} elsif ($printer->{currentqueue}{ppd}) { # CUPS+PPD queue?
-	    # If we had a Foomatic queue before, unmark the flag and initialize
-	    # the "printer" and "driver" fields
-	    $printer->{currentqueue}{foomatic} = 0;
-	    $printer->{currentqueue}{printer} = undef;
-	    $printer->{currentqueue}{driver} = "CUPS/PPD";
-	    # Now get the options from this PPD file
-	    if ($printer->{configured}{$queue}) {
-		# The queue was already configured
-		if (!$printer->{DBENTRY} || !$oldchoice ||
-		    $printer->{DBENTRY} eq $oldchoice) {
-		    # ... and the user didn't change the printer/driver
-		    $printer->{ARGS} = $printer->{configured}{$queue}{args};
-		    use Data::Dumper;
-		    print Dumper($printer->{ARGS});
-		} else {
-		    # ... and the user has chosen another printer/driver
-		    $printer->{ARGS} = 
-			printer::main::read_ppd_options($printer);
-		}
-	    } else {
-		# The queue was not configured before
+	    if ($printer->{currentqueue}{foomatic}) { # Foomatic queue?
+		$printer->{ARGS} = 
+		    printer::main::read_foomatic_options($printer);
+	    }  elsif ($printer->{currentqueue}{ppd}) { # PPD queue?
 		$printer->{ARGS} =
 		    printer::main::read_ppd_options($printer);
 	    }
+	    delete($printer->{SPECIAL_OPTIONS});
 	}
     }
     1;
@@ -2300,8 +2313,8 @@ sub setup_options {
 		$oldgroup[$advanced] = $printer->{ARGS}[$i]{group};
 		if ($printer->{ARGS}[$i]{group}) {
 		    push(@widgets,
-			 { val => join
-			       (" / ", @{$printer->{ARGS}[$i]{grouptrans}}),
+			 { val => 
+			   join(" / ", @{$printer->{ARGS}[$i]{grouptrans}}),
 			   advanced => $advanced });
 		}
 	    }
@@ -2377,7 +2390,7 @@ sub setup_options {
 		    } else {
 			$driver = printer::main::get_descr_from_ppd($printer);
 			if ($driver =~ /^[^\|]*\|[^\|]*$/) { # No driver info
-			    $driver = "CUPS/PPD";
+			    $driver = "PPD";
 			} else {
 			    $driver =~ /^[^\|]*\|[^\|]*\|(.*)$/;
 			    $driver = $1;
@@ -3389,11 +3402,6 @@ sub main {
 		    # Toggle expert mode and standard mode
 		    if ($menuchoice eq "\@usermode") {
 			printer::main::set_usermode(!$::expert);
-			# make sure that the "cups-drivers" package gets
-			# installed when switching into expert mode
-			if ($::expert && $printer->{SPOOLER} eq "cups") {
-			    install_spooler($printer, $in, $upNetwork);
-			}
 			# Read printer database for the new user mode
 			%printer::main::thedb = ();
 			#my $_w = $in->wait_message(N("Printerdrake"), 

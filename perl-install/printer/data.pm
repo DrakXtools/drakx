@@ -72,12 +72,12 @@ our %spoolers = ('pdq' => {
 		     'short_name' => N("CUPS"),
 		     'boot_spooler' => 'cups',
 		     'service' => 'cups',
-		     'packages2add' => [ ['cups', 'net-tools', 'xpp', if_($::expert, 'cups-drivers'),
+		     'packages2add' => [ ['cups', 'net-tools', 'xpp', 'cups-drivers',
 					  $::isInstall ? 'curl' : 'webfetch'],
 					 [ qw(/usr/lib/cups/cgi-bin/printers.cgi
 					      /sbin/ifconfig
-					      /usr/bin/xpp),
-					   if_($::expert, "/usr/share/cups/model/postscript.ppd.gz"),
+					      /usr/bin/xpp,
+					      /usr/share/cups/model/postscript.ppd.gz),
 					   $::isInstall ? '/usr/bin/curl' : '/usr/bin/wget' ] ],
 		     'alternatives' => [
 					[ 'lpr', '/usr/bin/lpr-cups' ],
