@@ -226,7 +226,7 @@ sub search_installed_fonts_full_path {
 
 sub search_windows_font {
     foreach my $fstab_line (grep { /vfat|ntfs/ } cat_('/etc/mtab')) {
-        my $win_dir = (split ('\s', $fstab_line))[1];
+        my $win_dir = (split('\s', $fstab_line))[1];
         my @list_fonts_win   = all("$win_dir/windows/fonts");
         my @list_fonts_winnt = all("$win_dir/winnt/fonts");
         my $nb_dir           = @list_fonts_win + @list_fonts_winnt;
@@ -244,7 +244,7 @@ sub search_windows_font {
                     }
                 }
                 !$replace && any { /$i/ } @installed_fonts and next;
-                grep (/$i$/, @font_list)
+                grep(/$i$/, @font_list)
                   or push @font_list, "$win_dir/$_->[1]/fonts/$i";
             }
         }
@@ -275,9 +275,8 @@ sub is_a_font {
 sub search_dir_font {
     foreach my $fn (@install) {
         my @font_list_tmp;
-        my @font_list_tmpp;
         my $dir;
-        if (!(-e $fn)) { print "$_ :: no such file or directory \n" }
+        if (!(-e $fn)) { print "$fn :: no such file or directory \n" }
         else {
             if (-d $fn) {
                 $dir = $fn;
@@ -286,7 +285,7 @@ sub search_dir_font {
                         push @font_list_tmp, "$i";
                         foreach my $i (@font_list_tmp) {
                             !$replace && any { /$i/ } @installed_fonts and next;
-                            grep /$i/, @font_list or push @font_list, "$fn/$i";
+                            grep(/$i/, @font_list) or push @font_list, "$fn/$i";
                         }
                     }
                 }
@@ -311,15 +310,15 @@ sub search_dir_font_uninstall {
     my $fn  = $_;
     if (-d $fn) {
         foreach my $i (all($fn)) {
-            if (is_a_font($i)) { push @font_list_tmp, "$i" }
+            push @font_list_tmp, "$i" if is_a_font($i);
         }
     }
     else {
-        if (is_a_font($fn)) { push @font_list_tmp, "$fn" }
+        push @font_list_tmp, "$fn" if is_a_font($fn);
     }
     foreach my $i (@installed_fonts_full_path) {
         foreach my $j (@font_list_tmp) {
-            if ($i =~ /$j/) { push @font_list, "$i" }
+            push @font_list, "$i" if $i =~ /$j/;
         }
     }
     print "Fonts to uninstal: " . $_ . "\n" foreach @font_list;
@@ -347,7 +346,6 @@ sub dir_created {
 
 sub put_font_dir {
     my @tmpl;
-    my @list_ttf;
     -e "/usr/share/ghostscript"
       or $gs = 0 && print "ghostscript is not installed on your system...\n";
     if (@font_list) {
@@ -476,8 +474,8 @@ sub remove_gs_fonts {
         chomp($FontmapGS);
         my @FontmapGS_list = cat_($FontmapGS);
         foreach my $font_gs (@FontmapGS_list) {
-            my @tmp_list = split (' ', $font_gs);
-            grep ($_ =~ /$tmp_list[0]/, @Fontmap_out)
+            my @tmp_list = split(' ', $font_gs);
+            grep(/$tmp_list[0]/, @Fontmap_out)
               or push @Fontmap_new, $font_gs;
         }
         print $_ foreach @Fontmap_new;
@@ -506,7 +504,7 @@ sub remove_fonts {
             }
         }
         $i =~ s/\/\w*\.\w*//gi;
-        grep ($i, (@list_dir)) or push @list_dir, $i;
+        grep($i, (@list_dir)) or push @list_dir, $i;
         $interactive
           and progress($pbar1, 1 / @font_list, N("Suppress Fonts Files"));
     }
@@ -546,7 +544,7 @@ sub backend_mod {
         system("xlsfonts");
     }
     if ($list_all_font_path) {
-        system("$chkfontpath");
+        system($chkfontpath);
     }
     if ($windows) {
         license_msg();
@@ -563,7 +561,7 @@ sub backend_mod {
         license_msg();
         print "\nInstall Specifics Fonts...........\n";
         search_installed_fonts();
-        search_dir_font;
+        search_dir_font();
         print "Font to install: " . $_ . "\n" foreach @font_list;
         put_font_dir();
         print "\nThe End...........................\n";
@@ -587,7 +585,6 @@ sub create_fontsel {
 
 sub display_error {
     my ($message) = @_;
-    my $label;
     my $error_box;
     ${$central_widget}->destroy();
     gtkpack(
@@ -959,17 +956,17 @@ sub font_choice {
 }
 
 sub file_ok_sel {
-    my ($widget, $file_selection) = @_;
+    my ($_widget, $file_selection) = @_;
     my $file_name = $file_selection->get_filename();
     print "-- @install\n";
     if (!member($file_name, @install)) {
-        push (@install, $file_name);
+        push @install, $file_name;
         $list->add(gtkshow(new Gtk2::ListItem($file_name)));
     }
 }
 
 sub list_remove {
-    my ($widget, $list) = @_;
+    my ($_widget, $list) = @_;
     my @to_remove;
     push @to_remove, $list->child_position($_) foreach $list->selection;
     splice @install, $_, 1 foreach reverse sort @to_remove;
@@ -977,7 +974,6 @@ sub list_remove {
 }
 
 sub advanced_install {
-    my $scrolled_window;
     my $adv_box;
     $list = new Gtk2::List();
     $list->set_selection_mode('extended');
@@ -1063,8 +1059,6 @@ sub show_list_to_remove {
 }
 
 sub uninstall {
-    my $scrolled_window;
-    my $scrolled_window2;
     my $uninst_box;
     @install              = ();
     @installed_fonts_path = ();
