@@ -1079,7 +1079,7 @@ sub install($$$;$$) {
 		if (@killpid) {
 		    foreach (@killpid) {
 			my ($prog, @para) = split("\0", cat_("/proc/$_/cmdline"));
-			log::l("ERROR: DrakX should not have to clean the packages shit. Killing $_: " . join(' ', $prog, @para) . ".");
+			log::l("ERROR: DrakX should not have to clean the packages shit. Killing $_: " . join(' ', $prog, @para) . ".") if $prog ne '/usr/lib/gconfd-2';
 		    }
 		    kill 15, @killpid;
 		    sleep 2;
