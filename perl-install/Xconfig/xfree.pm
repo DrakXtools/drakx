@@ -56,7 +56,7 @@ sub get_both {
     my ($getter, $both) = @_;
 
     if (is_empty_array_ref($both->{xfree3})) {
-	$both->{xfree3}->$getter;
+	$both->{xfree4}->$getter;
     } elsif (is_empty_array_ref($both->{xfree4})) {
 	$both->{xfree3}->$getter;
     } else {
