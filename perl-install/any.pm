@@ -289,6 +289,12 @@ sub setupBootloader__general {
     #- remove bios mapping if the user changed the boot device
     delete $b->{bios} if $b->{boot} ne $prev_boot;
 
+    if ($b->{boot} =~ m!/dev/md\d+$!) {
+	$b->{'raid-extra-boot'} = 'mbr';
+    } else {
+	delete $b->{'raid-extra-boot'} if $b->{'raid-extra-boot'} eq 'mbr';
+    }
+
     if ($b->{method} eq 'grub') {
 	$in->do_pkgs->ensure_binary_is_installed('grub', "grub", 1) or return 0;
     }
