@@ -32,7 +32,7 @@ $resolution_wanted = "1024x768";
 );
 @svgaservers = grep { $serversdriver{$_} eq "svga" } keys(%serversdriver);#-qw(SVGA Rage128);
 @accelservers = grep { $serversdriver{$_} eq "accel" } keys(%serversdriver);#-qw(S3 Mach32 Mach8 8514 P9000 AGX W32 Mach64 I128 S3V 3DLabs);
-@allservers = keys(%serversdrivers);#-(qw(Mono VGA16), @svgaservers, @accelservers);
+@allservers = keys(%serversdriver);#-(qw(Mono VGA16), @svgaservers, @accelservers);
 
 { #- @monitorSize2resolution
     my %l = my @l = ( #- size in inch

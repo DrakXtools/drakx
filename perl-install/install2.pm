@@ -440,6 +440,10 @@ sub main {
     }
 
     unlink "/sbin/insmod"  unless $::testing;
+    unlink "/modules/pcmcia_core.o" unless $::testing; #- always use module from archive.
+    unlink "/modules/i82365.o" unless $::testing;
+    unlink "/modules/tcic.o" unless $::testing;
+    unlink "/modules/ds.o" unless $::testing;
 
     print STDERR "in second stage install\n";
     log::openLog(($::testing || $o->{localInstall}) && 'debug.log');
