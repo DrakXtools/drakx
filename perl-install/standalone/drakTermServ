@@ -123,7 +123,7 @@ if ("@ARGV" =~ /--deluser/) {
 if ("@ARGV" =~ /--addclient/) {
 	die "$0 $ARGV[0] requires hostname, MAC address, IP, nbi-image, 0/1 for THIN_CLIENT...\n" if $#ARGV < 5;
 	my $cmd_line = 1;
-	addclient($cmd_line, $ARGV[1], $ARGV[2], $ARGV[3], $ARGV[4], $ARGV[5]);
+	addclient($cmd_line, @ARGV[1..5]);
 	exit(0);	
 }
 
@@ -193,7 +193,7 @@ ca::ctrlaltdel:/sbin/reboot -f
 x:5:respawn:/usr/X11R6/bin/X -ac -query $server_ip\n";
 
 	my $inittab_file = "/etc/inittab\$\$IP=$client_ip\$\$";
-     local *INITTAB;
+	local *INITTAB;
 	open(INITTAB, "> $inittab_file") or warn("Can't open $inittab_file!");
 	print INITTAB $inittab;
 	close INITTAB	
@@ -217,14 +217,14 @@ sub display_error {
     $$central_widget->destroy;
     gtkpack($status_box,
 	    $error_box = gtkpack_(new Gtk2::VBox(0,0),
-		  1, new Gtk2::Label($message),
-				  0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
-					    gtksignal_connect(new Gtk2::Button(N("OK")), clicked => sub {
-						$$central_widget->destroy;
-					    }),
-					    ),
-				  )
-	    );
+			1, new Gtk2::Label($message),
+			0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
+				gtksignal_connect(new Gtk2::Button(N("OK")), clicked => sub {
+					$$central_widget->destroy;
+				}),
+			),
+		)
+	);
     $central_widget = \$error_box;
 }
 
@@ -363,7 +363,9 @@ sub help() {
         - Create Etherboot Enabled Boot Images:
         		To boot a kernel via etherboot, a special kernel/initrd image must be created.
         		mkinitrd-net does much of this work and drakTermServ is just a graphical interface
-        		to help manage/customize these images.
+        		to help manage/customize these images. To create the file 
+        		/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an include in 
+        		dhcpd.conf, you should create the etherboot images for at least one full kernel.
 
         - Maintain /etc/dhcpd.conf:
         		To net boot clients, each client needs a dhcpd.conf entry, assigning an IP address
@@ -387,11 +389,12 @@ sub help() {
 			of client-specific configuration files that ClusterNFS provides.
 			
 			Note: The \"#type\" entry is only used by drakTermServ.  Clients can either be \"thin\"
-			or 'fat'.  Thin clients run most software on the server via xdmcp, while fat clients run most
-			software on the client machine. A special inittab, /etc/inittab\$\$IP=client_ip\$\$ is
-			written for thin clients. System config files xdm-config, kdmrc, and gdm.conf are modified
-			if thin clients are used, to enable xdmcp. Since there are security issues in using xdmcp,
-			hosts.deny and hosts.allow are modified to limit access to the local subnet.
+			or 'fat'.  Thin clients run most software on the server via xdmcp, while fat clients run 
+			most software on the client machine. A special inittab, /etc/inittab\$\$IP=client_ip\$\$ is
+			written for thin clients. System config files xdm-config, kdmrc, and gdm.conf are 
+			modified if thin clients are used, to enable xdmcp. Since there are security issues in 
+			using xdmcp, hosts.deny and hosts.allow are modified to limit access to the local
+			subnet.
 			
 			Note: You must stop/start the server after adding or changing clients.
 			
@@ -420,8 +423,8 @@ sub help() {
         - Per client system configuration files:
         		Through clusternfs, each diskless client can have it's own unique configuration files
         		on the root filesystem of the server. In the future, drakTermServ can help create files
-        		such as /etc/modules.conf, /etc/sysconfig/mouse, /etc/sysconfig/keyboard on a per-client
-        		basis.
+        		such as /etc/modules.conf, /etc/sysconfig/mouse, /etc/sysconfig/keyboard on a
+        		per-client basis.
 
         - /etc/xinetd.d/tftp:
         		drakTermServ will configure this file to work in conjunction with the images created by
@@ -508,7 +511,7 @@ sub make_nbi() {
 		"aironet4500_card", "bcm5700", "dgrs", "dl2k", "dmfe", "e100",
 		"e1000", "eepro100", "epic100", "fealnx", "hamachi", "hp100",
 		"hysdn", "natsemi", "natsemi_old", "ne", "ne2k-pci", "ns83820",
-		"pcnet32", "prism2_pci", "prism2_plx", "rcpci", "sis900",
+		"pcnet32", "pegasus", "prism2_pci", "prism2_plx", "rcpci", "sis900",
 		"starfire", "sundance", "sungem", "sunhme", "tlan", "tulip-old",
 		"via-rhine", "winbond-840", "xircom_cb", "xircom_tulip_cb", "yellowfin");
 	
@@ -647,6 +650,8 @@ sub maintain_users() {
 	my $user_box;
 	my @sys_users = cat_("/etc/shadow");
 	my @ts_users = cat_("/etc/shadow\$\$CLIENT\$\$");
+	my $tmodel;
+	my $titer;
 	
 	#- use /homes to filter system daemons
 	my @homes = all("/home");
@@ -687,13 +692,14 @@ sub maintain_users() {
 		my @system_entry = grep { /$t_label/ } @sys_users; 
 		$t_label = $t_label . " !!!" if $_ ne $system_entry[0];
 		$list_model->append($iter);
-    	$list_model->set($iter, [ 0 => $t_label ]);
+		$list_model->set($iter, [ 0 => $t_label ]);
 	}
 	
 	$list_ts_users->get_selection->signal_connect(changed => sub {
-    	my ($model, $iter) = $_[0]->get_selected;
-    	$model && $iter or return;
-    	$ts_user = $model->get($iter, 0);
+		($tmodel, $titer) = $_[0]->get_selected;
+		$tmodel && $titer or return;
+		$ts_user = $tmodel->get($titer, 0);
+		$ts_user =~ s| !!!||;
 	});
 		
 	gtkpack($status_box,
@@ -712,7 +718,7 @@ sub maintain_users() {
 						}),
 					gtksignal_connect(new Gtk2::Button(N("<-- Del User")), clicked => 
 						sub { deluser(0, $ts_user);
-							$list_model->remove($iter);
+							$list_model->remove($titer);
 						}),
 					new Gtk2::HBox(0,10),
 				),
@@ -814,7 +820,7 @@ sub maintain_clients() {
 				gtkadd(new Gtk2::VBox(1,10),
 					gtkadd(new Gtk2::HBox(0,1),
 						gtksignal_connect($check_thin = new Gtk2::CheckButton(N("Thin Client")), clicked =>
-							sub { invbool \$is_thin }),
+						sub { invbool \$is_thin }),
 						$check_allow_thin = new Gtk2::CheckButton(N("Allow Thin Clients")),
 					), 
 #					new Gtk2::HBox(1,1),
@@ -880,8 +886,7 @@ sub maintain_clients() {
 							}
 						}),
 					gtksignal_connect(new Gtk2::Button(N("dhcpd Config...")), clicked => 
-						sub { $$central_widget->destroy; dhcpd_config }),
-#					new Gtk2::HBox(1,1),
+						sub { $client_box->destroy; dhcpd_config() }),
 				),
 				create_scrolled_window($tree_clients),
 			),),
@@ -1121,7 +1126,7 @@ sub write_dhcpd_config {
 	$nfs_subnet = $subnet;
 	$nfs_mask = $subnet_mask;
 	
-     local *FHANDLE;
+	local *FHANDLE;
 	open(FHANDLE, "> /etc/dhcpd.conf");
 	print FHANDLE "#dhcpd.conf - generated by drakTermServ\n\n";
 	print FHANDLE "ddns-update-style none;\n\n";
@@ -1266,9 +1271,9 @@ sub toggle_chkconfig {
 sub service_change {
 	my ($service, $command, $buff_index) = @_;
 	system("BOOTUP=serial /sbin/service $service $command > /tmp/drakTSservice.status 2>&1");
-     local *STATUS;
+	local *STATUS;
 	open(STATUS, "/tmp/drakTSservice.status");
-     local $_;
+	local $_;
 	while (<STATUS>) {
 		$buff[$buff_index] = "\t$_";
 		$buff_index++;
@@ -1281,18 +1286,23 @@ sub service_change {
 sub start_ts {
 	#- start the terminal server
 	my $cmd_line = @_;
+	my $pcimap = "/etc/dhcpd.conf.etherboot-pcimap.include";
 	
 	@buff = ();
-	$buff[0] = "Starting Terminal Server...\n\n";
-	my $buff_index = service_change("dhcpd", "start", 2);
-	$buff_index = service_change("clusternfs", "start", $buff_index);
-	$buff[$buff_index] = "\n\tDone!";	
+	if (-f $pcimap) {
+		$buff[0] = "Starting Terminal Server...\n\n";
+		my $buff_index = service_change("dhcpd", "start", 2);
+		$buff_index = service_change("clusternfs", "start", $buff_index);
+		$buff[$buff_index] = "\n\tDone!";	
+	} else {
+		$buff[0] = "Missing $pcimap - please create net boot images for at least one kernel.";
+	}
 	
 	if ($cmd_line == 1) {
 		print "@buff\n";
 		return;
 	}
-
+	
 	show_status(@buff);
 }
 
@@ -1342,7 +1352,7 @@ sub adduser {
 			}
 		} else {
 			# new ts user
-               local *FHANDLE;
+			local *FHANDLE;
 			open(FHANDLE, ">> /etc/shadow\$\$CLIENT\$\$");
 			print FHANDLE $shadow_entry[0] or $add_fail = 1; 
 			close FHANDLE;
@@ -1382,8 +1392,8 @@ sub deluser {
 				last;
 			}
 			$i++;
-          }
-          local *FHANDLE;
+		}
+		local *FHANDLE;
 		open(FHANDLE, "> /etc/shadow\$\$CLIENT\$\$");
 		print FHANDLE $_ foreach @ts_users;
 		close FHANDLE;
@@ -1557,7 +1567,7 @@ sub read_dhcpd_conf() {
 	my $hostname;
 	
 	#- read and parse current client entries
-     local *CLIENTS;
+	local *CLIENTS;
 	open(CLIENTS, $clients) or warn("Can't open $clients\n"); 
 	while (<CLIENTS>) {
 		my ($name, $val, $val2) = split ' ';
