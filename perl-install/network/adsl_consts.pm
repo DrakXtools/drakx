@@ -24,9 +24,10 @@ our %adsl_data = (
                   #     5 RFC2364 PPPoA LLC,
                   #     6 RFC2364 PPPoA VCmux
                   # dns are provided for when !usepeerdns in peers config file
-                  # method : PPPoA, pppoe or static
+                  # method : PPPoA, pppoe, static or dhcp
                   # please forward updates to http://forum.eagle-usb.org
                   # order alphabetically by country (in English) / ISP (local language)
+
                   N("Argentina") . "|Speedy" =>
                   {
                    vpi => 1,
@@ -451,6 +452,14 @@ our %adsl_data = (
                    method => 'pppoe',
                   },
 
+                  N("Israel") . "|Bezeq" =>
+                  {
+                   vpi => 8,
+                   vci => 30,
+                   Encapsulation => 6,
+                   method => 'pppoa',
+                  },
+
                   N("Italy") . "|Telecom Italia" =>
                   {
                    vpi => 8,
@@ -468,7 +477,7 @@ our %adsl_data = (
                    Encapsulation => 3,
                   },
 
-                  N("Italy") . "|Tiscali.it" =>
+                  N("Italy") . "|Tiscali.it, Alice" =>
                   {
                    vpi => 8,
                    vci => 23,
@@ -502,6 +511,30 @@ our %adsl_data = (
                    method => 'pppoa',
                   },
 
+                  N("Netherlands") . "|Eager Telecom" =>
+                  {
+                   vpi => 0,
+                   vci => 21,
+                   Encapsulation => 3,
+                   method => 'dhcp',
+                  },
+
+                  N("Netherlands") . "|Tiscali" =>
+                  {
+                   vpi => 0,
+                   vci => 22,
+                   Encapsulation => 3,
+                   method => 'dhcp',
+                  },
+
+                  N("Netherlands") . "|Versatel" =>
+                  {
+                   vpi => 0,
+                   vci => 20,
+                   Encapsulation => 3,
+                   method => 'dhcp',
+                  },
+
                   N("Poland") . "|Telekomunikacja Polska (TPSA/neostrada)" =>
                   {
                    vpi => 0,
@@ -510,6 +543,14 @@ our %adsl_data = (
                    dnsServer2 => '194.204.152.34',
                    dnsServer3 => '217.98.63.164',
                    method => 'pppoa',
+                  },
+
+                  N("Poland") . "|Netia neostrada" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
                   },
 
                   N("Portugal") . "|PT" =>
@@ -589,6 +630,14 @@ our %adsl_data = (
                    vpi => 0,
                    vci => 64,
                    Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("United Arab Emirates") . "|Etisalat" =>
+                  {
+                   vpi => 0,
+                   vci => 32,
+                   Encapsulation => 5,
                    method => 'pppoe',
                   },
 
