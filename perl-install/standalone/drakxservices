@@ -13,7 +13,7 @@ $::isStandalone = 1;
 
 my $in = vnew interactive('su');
 
-my @l = map { chop; $_ } `cd /etc/rc.d/init.d ; grep -l "chkconfig:" *`;
+my @l = grep { !/\.rpmsave$/ } map { chop; $_ } `cd /etc/rc.d/init.d ; grep -l "chkconfig:" *`;
 my @before = map { bool(@_ = glob("/etc/rc.d/rc*.d/*$_"))  } @l;
 
 my $after = $in->ask_many_from_list("drakxservices",
@@ -25,6 +25,6 @@ mapn {
     if ($before != $after) {
 	system("chkconfig", $after ? "--add" : "--del", $name);
     }
-} \@l, \@before, $after;
+} \@l, \@before, $after if $after;
 
 $in->exit(0);

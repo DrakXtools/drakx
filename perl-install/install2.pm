@@ -373,8 +373,6 @@ sub miscellaneous {
 
 	local $ENV{LILO_PASSWORD} = $o->{lilo}{password};
 	run_program::rooted($o->{prefix}, "/etc/security/msec/init.sh", $o->{security});
-	chmod 0755, map { "$o->{prefix}/etc/X11/$_" } qw(xdm/Xsession xinit/xinitrc);
-
     } 'doInstallStep';
 }
 
@@ -469,7 +467,7 @@ sub exitInstall { $o->exitInstall(getNextStep() eq "exitInstall") }
 #- MAIN
 #-######################################################################################
 sub main {
-    $SIG{__DIE__} = sub { chomp(my $err = $_[0]); log::l("WARNING: $err") };
+    $SIG{__DIE__} = sub { chomp(my $err = $_[0]); log::l("warning: $err") };
 
     $::beginner = $::expert = $::g_auto_install = 0;
 
