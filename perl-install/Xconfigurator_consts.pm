@@ -13,7 +13,15 @@ use common qw(:common);
 
 @window_managers = qw(icewm wmaker kwm afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox);
 
-%serversdriver = (
+%serversdriver = arch() =~ /^sparc/ ? (
+    'Mach64'    => "accel",
+    '3DLabs'    => "accel",
+    'Sun'       => "fbdev",
+    'Sun24'     => "fbdev",
+    'SunMono'   => "fbdev",
+    'VGA16'     => "vga16",
+    'FBDev'     => "fbdev",
+) : (
     'SVGA'      => "svga",
     'Rage128'   => "svga",
     '3dfx'      => "svga",
@@ -34,7 +42,7 @@ use common qw(:common);
 );
 @svgaservers = grep { $serversdriver{$_} eq "svga" } keys(%serversdriver);
 @accelservers = grep { $serversdriver{$_} eq "accel" } keys(%serversdriver);
-@allbutfbservers = grep { $serversdriver{$_} ne "fbdev" } keys(%serversdriver);
+@allbutfbservers = grep { arch() =~ /^sparc/ || $serversdriver{$_} ne "fbdev" } keys(%serversdriver);
 @allservers = keys(%serversdriver);
 
 %vgamodes = (
