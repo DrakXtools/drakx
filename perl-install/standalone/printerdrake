@@ -61,28 +61,6 @@ my $commandline = $_;
 my $us = {};
 $us->{VERSION} = '10.1';
 
-# GTK2 splash screen
-my $window_splash;
-if (0 && !$::isInstall && !$::isEmbedded) {
-    $window_splash = Gtk2::Window->new('popup');
-#BUG    $window_splash->signal_connect(delete_event => \&quit_global);
-    $window_splash->set_title(N("Printerdrake") . $us->{VERSION});
-    $window_splash->set_position('center_always');
-    $window_splash->add(gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'etched_out'),
-			       gtkpack(Gtk2::VBox->new(0, 0),
-				       gtkcreate_img("$pixdir/about.png"),
-				       Gtk2::Label->new(N("Loading printer configuration... Please wait"))
-				       )
-			       )
-			);
-    $window_splash->show_all;
-    gtkflush();
-}
-
-#my $wait = $in->wait_message(N("Please wait"),
-#			     N("Loading printer configuration... "));
-#gtkflush();
-
 # Check whether Foomatic is installed and install it if necessary
 #printer::printerdrake::install_foomatic($in);
 
@@ -133,7 +111,7 @@ printer::printerdrake::init($printer, $security, $in, undef);
 
 my $stringsearch = '';
 
-sub HelpSystem() { exec("drakhelp --id printerdrake") unless fork() };
+sub HelpSystem() { exec("drakhelp --id printerdrake") unless fork() }
 
 $us->{wnd} = ugtk2->new(N("%s Printer Management Tool", $distroname) . " " . $us->{VERSION});
 gtkset_size_request($us->{wnd}{rwindow}, 660, 460);
@@ -188,9 +166,7 @@ my ($menu, $factory) = create_factory_menu($::isEmbedded ? $::Plug : $us->{wnd}{
                                             [ N("/_Help") . N("/_About..."), undef, \&About, undef, '<StockItem>', 'gtk-preferences' ]
 					   )
 					  );
-%buttorcheck = map {
-    $_ => $factory->get_widget("<main>" . join '', map { s/_//; $_ } @{$options{$_}})
-}('add', 'default', 'edit', 'delete', 'expert');
+%buttorcheck = map {  $_ => $factory->get_widget("<main>" . join '', map { s/_//; $_ } @{$options{$_}}) } ('add', 'default', 'edit', 'delete', 'expert');
 
 if (defined $buttorcheck{expert}) {
     $buttorcheck{expert}->set_active($printer->{expert});
@@ -266,7 +242,7 @@ my @toolbwg = map {
   );
 my ($tbadd, $tbdefault, $tbedit, $tbdel, $_tbref, $_tbconfig) = @toolbwg;
 GrayDelEdit();
-foreach ($tbadd, $buttorcheck{add}) { defined $_ and $_->set_sensitive($printer->{SPOOLER} ne "rcups") };
+foreach ($tbadd, $buttorcheck{add}) { defined $_ and $_->set_sensitive($printer->{SPOOLER} ne "rcups") }
 $localtree->parent->parent->set_sensitive($printer->{SPOOLER} ne "rcups");
 $nb->set_current_page(1) if $printer->{SPOOLER} eq "rcups";
 
@@ -275,11 +251,6 @@ Refresh($stringsearch);
 $nb->signal_connect('switch-page' => sub { NotebookSwitch() });
 $us->{wnd}{rwindow}->show_all;
 set_selection($printer->{DEFAULT});
-#undef $wait;
-if (0 && !$::isInstall && !$::isEmbedded) {
-    $window_splash->destroy;
-    undef $window_splash;
-}
 gtkset_mousecursor_normal();
 
 # Prevent subwindows to embed themselves in the mcc which has already the
@@ -287,17 +258,17 @@ gtkset_mousecursor_normal();
 my $isEmbedded = $::isEmbedded;
 local $::isEmbedded = 0;
 
-Gtk2->main;
+$us->{wnd}->main;
 ugtk2->exit;
 
 sub GrayDelEdit() {
-    foreach ($tbdefault, $tbedit, $tbdel, $buttorcheck{default}, $buttorcheck{edit}, $buttorcheck{delete}) { defined $_ and $_->set_sensitive(0) };
+    foreach ($tbdefault, $tbedit, $tbdel, $buttorcheck{default}, $buttorcheck{edit}, $buttorcheck{delete}) { defined $_ and $_->set_sensitive(0) }
 }
 
 sub TreeUnselect {
     my $treev = shift;
     $treev->get_selection->unselect_all;
-    GrayDelEdit()
+    GrayDelEdit();
 }
 sub NotebookSwitch() { 
     TreeUnselect($localtree);
@@ -321,7 +292,7 @@ sub RefreshLocalPrintersFull {
 	my $location = $printer->{configured}{$p}{queuedata}{loc};
 	my $searchstr = "$p|$model|$connect|$description|$location";
 	push(@LocalReal, $p) if $searchstr =~ /\Q$strfilt/i;
-    };
+    }
     foreach my $p (sort { lc($a) cmp lc($b) } @LocalReal) {
 	my $state = ($printer->{SPOOLER} !~ /cups/ ? N("Unknown") :
 		     (printer::cups::queue_enabled($p) ? N("Enabled") :
@@ -356,7 +327,7 @@ sub RefreshRemotePrintersFull {
 	my $searchstr = "$queue|$server|$description|$location";
 	# All remaining to which the search term applies
 	push(@RemoteReal, $p) if $searchstr =~ /\Q$strfilt/i;
-    };
+    }
     foreach my $p (sort { lc($a->{queuename}) cmp lc($b->{queuename}) } 
 		   @RemoteReal) {
 	my $queue = $p->{queuename};
@@ -430,7 +401,7 @@ sub Delete() {
 sub ConfigCUPS() {
     deactivate_mainwindow();
     printer::printerdrake::config_cups($printer, $security, $in, undef);
-    foreach ($tbadd, $buttorcheck{add}) { defined $_ and $_->set_sensitive($printer->{SPOOLER} ne "rcups") };
+    foreach ($tbadd, $buttorcheck{add}) { defined $_ and $_->set_sensitive($printer->{SPOOLER} ne "rcups") }
     $localtree->parent->parent->set_sensitive($printer->{SPOOLER} ne "rcups");
     $nb->set_current_page(1) if $printer->{SPOOLER} eq "rcups";
     Refresh($stringsearch);
@@ -511,7 +482,7 @@ sub GetNameEntFromIter {
     my (undef, $iter) = $tree->get_selection->get_selected;
     return undef if !defined($iter);
     my $name = $model->get($iter, $rank);
-    $name
+    $name;
 }
 
 sub CreateTree {
@@ -541,7 +512,7 @@ sub CreateTree {
 			       my (undef, $event) = @_;
 			       my (undef, $iter) = $tree->get_selection->get_selected;
 			       return unless $iter;
-			       foreach ($tbdefault, $tbedit, $tbdel, $buttorcheck{default}, $buttorcheck{edit}, $buttorcheck{delete}) { $_->set_sensitive(1) };
+			       foreach ($tbdefault, $tbedit, $tbdel, $buttorcheck{default}, $buttorcheck{edit}, $buttorcheck{delete}) { $_->set_sensitive(1) }
 			       my $queue = $tree_model->get($iter, 1);
 			       if (!defined($printer->{configured}{$queue})) {
 				   foreach ($tbdel, $buttorcheck{delete}) { 
@@ -561,7 +532,7 @@ sub CreateTree {
 			       return unless $iter;
 			       Edit() if $event->keyval == $Gtk2::Gdk::Keysyms{Return};
 			   });
-    $tree
+    $tree;
 }
 
 sub NewDialog {
