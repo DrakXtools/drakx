@@ -1,3 +1,583 @@
+2001/05/29  François Pons  <fpons@mandrakesoft.com>
+
+	* printerdrake.pm: added fix from Michael Brown to handle pipe in queue
+	name for lpr.
+
+2001/05/28  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/newt-frontend.c: use Axalon patch to hide passwords (highly
+	rewritten..)
+
+2001/05/25  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* rescue/list.ppc, bootloader.pm: add hfs support to rescue - PPC, fix
+	bootstrap creation, formatting sequence
+
+	* install_steps_interactive.pm: fix bootstrap information screen back to
+	orig with missing ":" - PPC
+	add hfs support to rescue - PPC, fix bootstrap creation, formatting
+	sequence
+
+2001/05/25  siegel
+
+	* share/po/de.po: updated time
+	moved to UTF-8
+
+2001/05/24  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/tr.po: updated Turkish file
+
+2001/05/24  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (g_auto_install): autoExitInstall set if not replay (was
+	the opposite)
+
+2001/05/23  Pixel  <pixel@mandrakesoft.com>
+
+	* rescue/list: add scd0...
+
+2001/05/22  siegel
+
+	* share/po/de.po: updates
+
+2001/05/21  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* tools/ppc/mkhybrid-1.12b5.4-x86, tools/ppc/mkINSTALLCD: enable creation
+	of PPC boot CD on x86 platform
+
+2001/05/18  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/network.c: 
+	  - better detect when IP is not good
+	  - error_msg when netmask seems invalid
+	  - don't log too much `guessing netmask'
+
+	* mdk-stage1/probing.c: be sure to print pci vendor and id with 4 digits
+	each
+
+2001/05/17  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem: fixed parted that ask for confirmation if partition
+	table is not right (MAXDATA
+	for example), this cause parted to ignore warning.
+	added blank space between partition windows and linux to help resolving
+	above case.
+	fixed hole in partitionning (need testing), use fdisk to get disk
+	geometry and
+	create partition that matches cylinder boundaries (no more
+	approximation).
+	make sure to create all partitions including /home.
+
+2001/05/17  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/modules.c: add log for modules aliasing of SCSI drivers
+	don't write nonsense code to separate frontend from stage1,
+	but rather, try to do some clever things
+
+	* mdk-stage1/probing.c: unify user notification of network and scsi
+	devices that make load of drivers
+	don't write nonsense code to separate frontend from stage1,
+	but rather, try to do some clever things
+
+	* mdk-stage1/stage1.c, mdk-stage1/frontend.h, mdk-stage1/stage1.h,
+	mdk-stage1/tools.c, mdk-stage1/stdio-frontend.c, mdk-stage1/cdrom.c,
+	mdk-stage1/Makefile, mdk-stage1/dhcp.c, mdk-stage1/newt-frontend.c,
+	mdk-stage1/disk.c, mdk-stage1/network.c: don't write nonsense code to
+	separate frontend from stage1,
+	but rather, try to do some clever things
+
+	* mdk-stage1/frontend-common.c: plop
+
+2001/05/16  dam's  <damien@mandrakesoft.com>
+
+	* pixmaps/bootloader.png, pixmaps/user.png, pixmaps/security.png,
+	pixmaps/rootpasswd.png, pixmaps/harddrive.png, pixmaps/keyboard.png,
+	pixmaps/default.png, pixmaps/X.png, pixmaps/mouse.png,
+	pixmaps/bootdisk.png, pixmaps/services.png: added icons
+
+	* standalone/printerdrake, standalone/keyboarddrake, standalone/drakboot,
+	standalone/draksec, standalone/drakxservices, standalone/drakgw,
+	standalone/XFdrake, standalone/adduserdrake: added icon management
+
+	* my_gtk.pm, interactive.pm: icons management
+
+	* install2.pm: added icons management
+
+	* standalone/draknet: added icon managment
+
+	* pixmaps/printer.png: added icon
+
+2001/05/16  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem: added support for /var creation, and more specific
+	package selection for server.
+	Include option support by VERSION file.
+
+2001/05/16  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/stage1.c, mdk-stage1/HACKING, mdk-stage1/frontend.h,
+	mdk-stage1/TECH-INFOS, mdk-stage1/WHY-DIETLIBC, mdk-stage1/stage1.h,
+	mdk-stage1/stdio-frontend.c, mdk-stage1/Makefile, mdk-stage1/README,
+	mdk-stage1/newt-frontend.c: have a 100% independence between UI stuff
+	and code from stage1
+
+2001/05/16  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/wa.po, share/po/de.po, share/po/DrakX.pot, share/po/tr.po:
+	updated Turkish file
+
+2001/05/16  Pixel  <pixel@mandrakesoft.com>
+
+	* share/po/Makefile: fix yet again DrakX.pot making
+
+	* partition_table.pm: re-add reiserfs as it should
+	add xfs
+
+2001/05/15  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem: added missing Aurora, added icewm-light that may be
+	usefull.
+
+2001/05/15  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/Makefile: libresolv deprecated in GLIBC
+	have stage1-full with pcmcia also compile with dietlibc, cool!
+
+	* mdk-stage1/network.c: fix guess netmask
+	configure_net_device is only used internally
+
+	* mdk-stage1/modules.c, mdk-stage1/modules.h: better modules handling
+	interface (use of enum rather than guessing single numbers..)
+
+	* mdk-stage1/newt-frontend.c: allow wait_message calls to be multi-lines
+
+	* mdk-stage1/pcmcia/cardmgr.c: have stage1-full with pcmcia also compile
+	with dietlibc, cool!
+	  - build glibc and dietlibc targets
+	  - bzero string buffer before sscanf call (dietlibc implementation)
+	  - verify returns of ioperm so that I can use it in test mode
+
+	* mdk-stage1/dietlibc/include/sys/file.h,
+	mdk-stage1/dietlibc/include/sys/io.h,
+	mdk-stage1/dietlibc/syscalls.s/ioperm.S: have stage1-full with pcmcia
+	also compile with dietlibc, cool!
+
+	* mdk-stage1/stage1.c: a bit of size reduction plus some language change
+	blurk
+
+	* mdk-stage1/WHY-DIETLIBC: advocate dietlibc
+
+	* mdk-stage1/dietlibc/lib/vsscanf.c: import vsscanf fix from author
+
+	* mdk-stage1/disk.c: bzero string buffer before sscanf call, security for
+	dietlibc implementation
+
+	* mdk-stage1/network.h: configure_net_device is only used internally
+
+	* mdk-stage1/pcmcia/Makefile, mdk-stage1/pcmcia/pcmcia_probe.c: 
+	  - build glibc and dietlibc targets
+	  - bzero string buffer before sscanf call (dietlibc implementation)
+	  - verify returns of ioperm so that I can use it in test mode
+
+	* standalone/drakgw: full path for iptables
+
+	* mdk-stage1/probing.c: allow wait_message calls to be multi-lines
+	nicer layout for PCI detection messages
+	better modules handling interface (use of enum rather than guessing
+	single numbers..)
+
+2001/05/15  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/tr.po, share/po/ar.po: Updated Turkish file
+
+	* share/keyboards.tar.bz2: Added north-african keyboard
+
+	* keyboard.pm: added arabic azerty keyboard
+
+2001/05/15  Pixel  <pixel@mandrakesoft.com>
+
+	* share/po/Makefile: fix messages to i18n extracting
+
+2001/05/14  Chmouel Boudjnah  <chmouel@mandrakesoft.com>
+
+	* fs.pm: s|mkxfs|mkfs.xfs|;
+
+2001/05/14  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/nfsmount.c: use new gethostby* interface
+
+	* mdk-stage1/stage1-data/stage1-with-busybox.tar.bz2: add stage1-data
+	which provides the busybox
+
+	* mdk-stage1/network.c: Have the wait_message() with the sleep()
+	  - complies to gethostby functions
+	  - add sleep(2) so that net intf is really up before operation
+	  - more logs
+	  - FTP: don't try to close control connection with data socket, erhm
+	:-(
+	  - debug netmask guessing, with stdio-frontend
+
+	* mdk-stage1/Makefile: i can compile slang and newt with dietlibc now
+	every targets build with dietlibc
+
+	* mdk-stage1/make_boot_img: use busybox for my debugging purpose
+
+	* mdk-stage1/tools.c: no need to poll() for data at beginning of
+	load_ramdisk_fd, it was a fix of another problem (bug with file stdio
+	operations with sockets in dietlibc)
+
+	* mdk-stage1/dietlibc/Makefile: build this new dietlibc
+	import new version of dietlibc
+
+	* mdk-stage1/dns.c, mdk-stage1/dns.h: now use gethostby* functions
+	provided by dietlibc
+
+	* mdk-stage1/url.c: use poll() rather than select(), smaller code size
+
+	* mdk-stage1/stage1.c: we don't use this sucking sash no more
+	we now use `busybox' compiled with the marvellous dietlibc, which
+	provides no less than 73 usefull binaries
+
+	* mdk-stage1/dietlibc/alpha/semop.S, mdk-stage1/dietlibc/lib/sendmsg.c,
+	mdk-stage1/dietlibc/alpha/shmget.S, mdk-stage1/dietlibc/lib/clearerr.c,
+	mdk-stage1/dietlibc/include/sys/ipc.h,
+	mdk-stage1/dietlibc/alpha/sendmsg.S,
+	mdk-stage1/dietlibc/lib/tcgetpgrp.c, mdk-stage1/dietlibc/lib/fwrite.c,
+	mdk-stage1/dietlibc/sparc/__testandset.S,
+	mdk-stage1/dietlibc/syscalls.s/open.S,
+	mdk-stage1/dietlibc/alpha/semget.S, mdk-stage1/dietlibc/dietstdarg.h,
+	mdk-stage1/dietlibc/syscalls.s/sched_get_priority_max.S,
+	mdk-stage1/dietlibc/lib/nop.c, mdk-stage1/dietlibc/start.h,
+	mdk-stage1/dietlibc/include/sys/syscall.h,
+	mdk-stage1/dietlibc/alpha/accept.S, mdk-stage1/dietlibc/lib/sigjmp.c,
+	mdk-stage1/dietlibc/syscalls.s/ptrace.s,
+	mdk-stage1/dietlibc/lib/isprint.c,
+	mdk-stage1/dietlibc/syscalls.s/dietstat.S,
+	mdk-stage1/dietlibc/alpha/shutdown.S, mdk-stage1/dietlibc/lib/sendto.c,
+	mdk-stage1/dietlibc/sparc/shmat.c, mdk-stage1/dietlibc/include/time.h,
+	mdk-stage1/dietlibc/lib/stat_convert.c, mdk-stage1/dietlibc/lib/send.c,
+	mdk-stage1/dietlibc/lib/isxdigit.c, mdk-stage1/dietlibc/alpha/waitpid.S,
+	mdk-stage1/dietlibc/lib/atexit.c, mdk-stage1/dietlibc/lib/readdir.c,
+	mdk-stage1/dietlibc/include/sys/sem.h,
+	mdk-stage1/dietlibc/syscalls.s/query_module.S,
+	mdk-stage1/dietlibc/lib/strchr.c,
+	mdk-stage1/dietlibc/syscalls.s/dietfstat64.S,
+	mdk-stage1/dietlibc/syscalls.s/lstat64.S,
+	mdk-stage1/dietlibc/i386/setjmp.S, mdk-stage1/dietlibc/lib/alloc.c,
+	mdk-stage1/dietlibc/lib/perror.c,
+	mdk-stage1/dietlibc/include/sys/socket.h,
+	mdk-stage1/dietlibc/lib/creat64.c, mdk-stage1/dietlibc/lib/closedir.c,
+	mdk-stage1/dietlibc/sparc/pipe.S, mdk-stage1/dietlibc/lib/msgrcv.c,
+	mdk-stage1/dietlibc/include/utmp.h,
+	mdk-stage1/dietlibc/syscalls.s/sendfile.S,
+	mdk-stage1/dietlibc/syscalls.s/nice.S,
+	mdk-stage1/dietlibc/syscalls.s/sigprocmask.S,
+	mdk-stage1/dietlibc/syscalls.s/select.S,
+	mdk-stage1/dietlibc/include/sys/mtio.h,
+	mdk-stage1/dietlibc/i386/strchr.S, mdk-stage1/dietlibc/alpha/divl.S,
+	mdk-stage1/dietlibc/syscalls.s/sched_rr_get_interval.S,
+	mdk-stage1/dietlibc/lib/__telldir.c,
+	mdk-stage1/dietlibc/i386/__testandset.S,
+	mdk-stage1/dietlibc/lib/remove.c,
+	mdk-stage1/dietlibc/syscalls.s/sched_get_priority_min.S,
+	mdk-stage1/dietlibc/lib/fputc.c, mdk-stage1/dietlibc/lib/msgctl.c,
+	mdk-stage1/dietlibc/alpha/clone.S, mdk-stage1/dietlibc/lib/connect.c,
+	mdk-stage1/dietlibc/include/sys/un.h,
+	mdk-stage1/dietlibc/alpha/connect.S,
+	mdk-stage1/dietlibc/include/termios.h,
+	mdk-stage1/dietlibc/lib/sigfillset.c,
+	mdk-stage1/dietlibc/lib/sigismember.c,
+	mdk-stage1/dietlibc/syscalls.s/dietstat64.S,
+	mdk-stage1/dietlibc/i386/start.S, mdk-stage1/dietlibc/lib/shmget.c,
+	mdk-stage1/dietlibc/lib/strtok.c, mdk-stage1/dietlibc/lib/fclose.c,
+	mdk-stage1/dietlibc/lib/tcsetpgrp.c,
+	mdk-stage1/dietlibc/sparc/Makefile.add,
+	mdk-stage1/dietlibc/include/sys/shm.h, mdk-stage1/dietlibc/alpha/send.S,
+	mdk-stage1/dietlibc/i386/__longjmp.S, mdk-stage1/dietlibc/lib/recvmsg.c,
+	mdk-stage1/dietlibc/include/inttypes.h,
+	mdk-stage1/dietlibc/syscalls.s/sched_getscheduler.S,
+	mdk-stage1/dietlibc/lib/semget.c, mdk-stage1/dietlibc/lib/open64.c,
+	mdk-stage1/dietlibc/alpha/recvmsg.S,
+	mdk-stage1/dietlibc/syscalls.s/fork.S,
+	mdk-stage1/dietlibc/lib/strcasecmp.c, mdk-stage1/dietlibc/lib/htonl.c,
+	mdk-stage1/dietlibc/lib/accept.c, mdk-stage1/dietlibc/alpha/shmat.S,
+	mdk-stage1/dietlibc/include/features.h,
+	mdk-stage1/dietlibc/include/syslog.h, mdk-stage1/dietlibc/lib/isascii.c,
+	mdk-stage1/dietlibc/syscalls.s/writev.S,
+	mdk-stage1/dietlibc/lib/fputs.c,
+	mdk-stage1/dietlibc/alpha/sigprocmask.S,
+	mdk-stage1/dietlibc/lib/ntohs.c, mdk-stage1/dietlibc/include/sys/uio.h,
+	mdk-stage1/dietlibc/syscalls.s/nanosleep.S,
+	mdk-stage1/dietlibc/syscalls.s/creat.S,
+	mdk-stage1/dietlibc/include/sys/sysinfo.h,
+	mdk-stage1/dietlibc/lib/atof.c, mdk-stage1/dietlibc/alpha/msgsnd.S,
+	mdk-stage1/dietlibc/lib/vsprintf.c, mdk-stage1/dietlibc/lib/toupper.c,
+	mdk-stage1/dietlibc/lib/strlcpy.3, mdk-stage1/dietlibc/lib/sigaddset.c,
+	mdk-stage1/dietlibc/i386/select.S, mdk-stage1/dietlibc/i386/unified.S,
+	mdk-stage1/dietlibc/include/dirent.h,
+	mdk-stage1/dietlibc/include/getopt.h, mdk-stage1/dietlibc/lib/seekdir.c,
+	mdk-stage1/dietlibc/include/net/route.h,
+	mdk-stage1/dietlibc/syscalls.s/exit.S,
+	mdk-stage1/dietlibc/include/pthread.h,
+	mdk-stage1/dietlibc/lib/sprintf.c, mdk-stage1/dietlibc/alpha/msgget.S,
+	mdk-stage1/dietlibc/include/limits.h, mdk-stage1/dietlibc/lib/qsort.c,
+	mdk-stage1/dietlibc/lib/execvp.c,
+	mdk-stage1/dietlibc/syscalls.s/__reboot.S,
+	mdk-stage1/dietlibc/lib/stdin.c,
+	mdk-stage1/dietlibc/syscalls.s/getitimer.S,
+	mdk-stage1/dietlibc/include/grp.h, mdk-stage1/dietlibc/lib/usleep.c,
+	mdk-stage1/dietlibc/lib/lstat.c, mdk-stage1/dietlibc/sparc/setjmp.S,
+	mdk-stage1/dietlibc/sparc/fork.S,
+	mdk-stage1/dietlibc/syscalls.s/__pread.S,
+	mdk-stage1/dietlibc/include/sys/poll.h,
+	mdk-stage1/dietlibc/syscalls.s/personality.S,
+	mdk-stage1/dietlibc/lib/lseek64.c, mdk-stage1/dietlibc/include/setjmp.h,
+	mdk-stage1/dietlibc/lib/recv.c, mdk-stage1/dietlibc/include/string.h,
+	mdk-stage1/dietlibc/include/sys/time.h, mdk-stage1/dietlibc/lib/fstat.c,
+	mdk-stage1/dietlibc/lib/memcmp.c, mdk-stage1/dietlibc/lib/isupper.c,
+	mdk-stage1/dietlibc/include/sys/param.h,
+	mdk-stage1/dietlibc/syscalls.s/__getpagesize.S,
+	mdk-stage1/dietlibc/lib/exec_lib.c, mdk-stage1/dietlibc/alpha/shmdt.S,
+	mdk-stage1/dietlibc/include/dlfcn.h, mdk-stage1/dietlibc/lib/isdigit.c,
+	mdk-stage1/dietlibc/lib/fdopen.c, mdk-stage1/dietlibc/lib/exec_lib.h,
+	mdk-stage1/dietlibc/lib/__lxstat.c, mdk-stage1/dietlibc/alpha/remq.S,
+	mdk-stage1/dietlibc/include/sys/kd.h,
+	mdk-stage1/dietlibc/syscalls.s/read.S, mdk-stage1/dietlibc/lib/fopen.c,
+	mdk-stage1/dietlibc/syscalls.s/sched_yield.S,
+	mdk-stage1/dietlibc/include/sys/mman.h,
+	mdk-stage1/dietlibc/lib/__readdir.c,
+	mdk-stage1/dietlibc/lib/cfgetospeed.c,
+	mdk-stage1/dietlibc/lib/__dtostr.c, mdk-stage1/dietlibc/lib/execv.c,
+	mdk-stage1/dietlibc/alpha/reml.S,
+	mdk-stage1/dietlibc/syscalls.s/fcntl.S,
+	mdk-stage1/dietlibc/include/errno.h, mdk-stage1/dietlibc/lib/ferror.c,
+	mdk-stage1/dietlibc/syscalls.s/ipc.S,
+	mdk-stage1/dietlibc/syscalls.s/mlockall.S,
+	mdk-stage1/dietlibc/lib/fgetc.c, mdk-stage1/dietlibc/lib/strtoull.c,
+	mdk-stage1/dietlibc/include/sys/msg.h,
+	mdk-stage1/dietlibc/syscalls.s/sigsuspend.S,
+	mdk-stage1/dietlibc/lib/isgraph.c, mdk-stage1/dietlibc/lib/vsscanf.c,
+	mdk-stage1/dietlibc/lib/ftell.c, mdk-stage1/dietlibc/include/unistd.h,
+	mdk-stage1/dietlibc/lib/msgsnd.c, mdk-stage1/dietlibc/lib/semop.c,
+	mdk-stage1/dietlibc/include/net/if_arp.h,
+	mdk-stage1/dietlibc/lib/execlp.c,
+	mdk-stage1/dietlibc/syscalls.s/stat64.S,
+	mdk-stage1/dietlibc/dietfeatures.h, mdk-stage1/dietlibc/dietstdio.h,
+	mdk-stage1/dietlibc/lib/feof.c, mdk-stage1/dietlibc/lib/opendir.c,
+	mdk-stage1/dietlibc/syscalls.s/fstat64.S,
+	mdk-stage1/dietlibc/syscalls.s/sched_setparam.S,
+	mdk-stage1/dietlibc/include/sys/reboot.h,
+	mdk-stage1/dietlibc/lib/sigdelset.c, mdk-stage1/dietlibc/lib/execl.c,
+	mdk-stage1/dietlibc/include/sys/sendfile.h,
+	mdk-stage1/dietlibc/include/sys/syslog.h,
+	mdk-stage1/dietlibc/syscalls.s/iopl.S, mdk-stage1/dietlibc/lib/msgget.c,
+	mdk-stage1/dietlibc/syscalls.s/sched_getparam.S,
+	mdk-stage1/dietlibc/lib/vsnprintf.c,
+	mdk-stage1/dietlibc/include/signal.h,
+	mdk-stage1/dietlibc/syscalls.s/pause.S,
+	mdk-stage1/dietlibc/include/arpa/inet.h,
+	mdk-stage1/dietlibc/include/sys/wait.h,
+	mdk-stage1/dietlibc/alpha/time.S, mdk-stage1/dietlibc/lib/ttyname.c,
+	mdk-stage1/dietlibc/lib/__lstat64.c, mdk-stage1/dietlibc/lib/__stat64.c,
+	mdk-stage1/dietlibc/alpha/recv.S, mdk-stage1/dietlibc/lib/fgets.c,
+	mdk-stage1/dietlibc/lib/strncat.c, mdk-stage1/dietlibc/lib/__lltostr.c,
+	mdk-stage1/dietlibc/lib/__ltostr.c,
+	mdk-stage1/dietlibc/sparc/__longjmp.S, mdk-stage1/dietlibc/lib/puts.c,
+	mdk-stage1/dietlibc/lib/rand.c, mdk-stage1/dietlibc/syscalls.s/fsync.S,
+	mdk-stage1/dietlibc/include/fnmatch.h, mdk-stage1/dietlibc/lib/fflush.c,
+	mdk-stage1/dietlibc/lib/htons.c,
+	mdk-stage1/dietlibc/syscalls.s/sigaltstack.S,
+	mdk-stage1/dietlibc/include/sys/resource.h,
+	mdk-stage1/dietlibc/lib/__stat64_cvt.c,
+	mdk-stage1/dietlibc/lib/localtime.c,
+	mdk-stage1/dietlibc/alpha/seteuid.c,
+	mdk-stage1/dietlibc/syscalls.s/stime.S,
+	mdk-stage1/dietlibc/include/resolv.h, mdk-stage1/dietlibc/lib/__xstat.c,
+	mdk-stage1/dietlibc/ppc/Makefile.add,
+	mdk-stage1/dietlibc/sparc/unified.S, mdk-stage1/dietlibc/lib/bsearch.c,
+	mdk-stage1/dietlibc/include/net/if.h,
+	mdk-stage1/dietlibc/include/shadow.h,
+	mdk-stage1/dietlibc/lib/__rewinddir.c,
+	mdk-stage1/dietlibc/include/daemon.h, mdk-stage1/dietlibc/lib/mkfifo.c,
+	mdk-stage1/dietlibc/include/paths.h, mdk-stage1/dietlibc/include/pwd.h,
+	mdk-stage1/dietlibc/lib/strrchr.c, mdk-stage1/dietlibc/lib/__seekdir.c,
+	mdk-stage1/dietlibc/syscalls.h, mdk-stage1/dietlibc/alpha/shmctl.S,
+	mdk-stage1/dietlibc/lib/fdglue.c, mdk-stage1/dietlibc/lib/fseek.c,
+	mdk-stage1/dietlibc/include/regex.h,
+	mdk-stage1/dietlibc/include/sys/ptrace.h,
+	mdk-stage1/dietlibc/lib/tcdrain.c,
+	mdk-stage1/dietlibc/syscalls.s/lstat.S,
+	mdk-stage1/dietlibc/alpha/semctl.S, mdk-stage1/dietlibc/lib/recvfrom.c,
+	mdk-stage1/dietlibc/lib/random.c,
+	mdk-stage1/dietlibc/syscalls.s/times.S,
+	mdk-stage1/dietlibc/lib/getpgrp.c, mdk-stage1/dietlibc/lib/cfmakeraw.c,
+	mdk-stage1/dietlibc/lib/stat.c, mdk-stage1/dietlibc/syscalls.s/write.S,
+	mdk-stage1/dietlibc/syscalls.s/dietlstat64.S,
+	mdk-stage1/dietlibc/ppc/__testandset.S,
+	mdk-stage1/dietlibc/include/mntent.h,
+	mdk-stage1/dietlibc/include/sys/file.h,
+	mdk-stage1/dietlibc/syscalls.s/fstat.S,
+	mdk-stage1/dietlibc/syscalls.s/llseek.S,
+	mdk-stage1/dietlibc/lib/strsep.c,
+	mdk-stage1/dietlibc/include/sys/stat.h,
+	mdk-stage1/dietlibc/syscalls.s/munlockall.S,
+	mdk-stage1/dietlibc/syscalls.s/setpriority.S,
+	mdk-stage1/dietlibc/include/assert.h,
+	mdk-stage1/dietlibc/include/strings.h,
+	mdk-stage1/dietlibc/include/alloca.h, mdk-stage1/dietlibc/lib/gmtime.c,
+	mdk-stage1/dietlibc/lib/shmat.c, mdk-stage1/dietlibc/lib/__isnan.c,
+	mdk-stage1/dietlibc/ppc/__longjmp.S,
+	mdk-stage1/dietlibc/lib/__closedir.c,
+	mdk-stage1/dietlibc/include/sys/signal.h,
+	mdk-stage1/dietlibc/lib/rewinddir.c, mdk-stage1/dietlibc/lib/stdout.c,
+	mdk-stage1/dietlibc/lib/vfprintf.c, mdk-stage1/dietlibc/.cvsignore,
+	mdk-stage1/dietlibc/lib/telldir.c, mdk-stage1/dietlibc/include/glob.h,
+	mdk-stage1/dietlibc/lib/tm_conv.c,
+	mdk-stage1/dietlibc/syscalls.s/reboot.S,
+	mdk-stage1/dietlibc/syscalls.s/sched_setscheduler.S,
+	mdk-stage1/dietlibc/syscalls.s/umount2.S,
+	mdk-stage1/dietlibc/syscalls.s/readv.S,
+	mdk-stage1/dietlibc/lib/__fxstat.c,
+	mdk-stage1/dietlibc/include/sys/select.h,
+	mdk-stage1/dietlibc/syscalls.s/syslog.S,
+	mdk-stage1/dietlibc/syscalls.s/sysinfo.S,
+	mdk-stage1/dietlibc/lib/fprintf.c,
+	mdk-stage1/dietlibc/include/sys/cdefs.h, mdk-stage1/dietlibc/README,
+	mdk-stage1/dietlibc/lib/fread.c, mdk-stage1/dietlibc/lib/getpwnam.c,
+	mdk-stage1/dietlibc/syscalls.s/getcwd.S,
+	mdk-stage1/dietlibc/lib/getservent.c, mdk-stage1/dietlibc/lib/tolower.c,
+	mdk-stage1/dietlibc/diet.c, mdk-stage1/dietlibc/alpha/recvfrom.S,
+	mdk-stage1/dietlibc/include/elf.h, mdk-stage1/dietlibc/alpha/sendto.S,
+	mdk-stage1/dietlibc/lib/fileno.c, mdk-stage1/dietlibc/i386/clone.S,
+	mdk-stage1/dietlibc/lib/__opendir.c,
+	mdk-stage1/dietlibc/include/sched.h, mdk-stage1/dietlibc/alpha/__time.c,
+	mdk-stage1/dietlibc/lib/ispunct.c, mdk-stage1/dietlibc/lib/printf.c,
+	mdk-stage1/dietlibc/lib/strtod.c, mdk-stage1/dietlibc/lib/strncasecmp.c,
+	mdk-stage1/dietlibc/lib/__getcwd.c,
+	mdk-stage1/dietlibc/include/netinet/in.h,
+	mdk-stage1/dietlibc/lib/shmctl.c,
+	mdk-stage1/dietlibc/syscalls.s/dietlstat.S,
+	mdk-stage1/dietlibc/include/arpa/nameser.h,
+	mdk-stage1/dietlibc/lib/assert_fail.c, mdk-stage1/dietlibc/lib/semctl.c,
+	mdk-stage1/dietlibc/lib/shmdt.c, mdk-stage1/dietlibc/lib/shutdown.c,
+	mdk-stage1/dietlibc/lib/setpgrp.c, mdk-stage1/dietlibc/alpha/msgrcv.S,
+	mdk-stage1/dietlibc/lib/stderr.c,
+	mdk-stage1/dietlibc/syscalls.s/close.S,
+	mdk-stage1/dietlibc/syscalls.s/dietfstat.S,
+	mdk-stage1/dietlibc/include/locale.h,
+	mdk-stage1/dietlibc/syscalls.s/getpriority.S,
+	mdk-stage1/dietlibc/lib/__fstat64.c, mdk-stage1/dietlibc/lib/isalpha.c,
+	mdk-stage1/dietlibc/lib/reboot.c, mdk-stage1/dietlibc/lib/isspace.c,
+	mdk-stage1/dietlibc/include/sys/mount.h,
+	mdk-stage1/dietlibc/lib/creat.c, mdk-stage1/dietlibc/syscalls.s/lseek.S,
+	mdk-stage1/dietlibc/sparc/clone.S, mdk-stage1/dietlibc/dietwarning.h,
+	mdk-stage1/dietlibc/lib/islower.c,
+	mdk-stage1/dietlibc/alpha/Makefile.add, mdk-stage1/dietlibc/lib/abort.c,
+	mdk-stage1/dietlibc/alpha/msgctl.S, mdk-stage1/dietlibc/lib/isalnum.c,
+	mdk-stage1/dietlibc/include/ctype.h,
+	mdk-stage1/dietlibc/include/netdb.h,
+	mdk-stage1/dietlibc/include/memory.h, mdk-stage1/dietlibc/lib/iscntrl.c,
+	mdk-stage1/dietlibc/i386/Makefile.add, mdk-stage1/dietlibc/lib/getopt.c,
+	mdk-stage1/dietlibc/syscalls.s/waitpid.S,
+	mdk-stage1/dietlibc/lib/strtoul.c,
+	mdk-stage1/dietlibc/syscalls.s/stat.S,
+	mdk-stage1/dietlibc/syscalls.s/sysctl.S: import new version of dietlibc
+
+	* mdk-stage1/insmod-busybox/busybox.h: fix conflicts with dietlibc headers
+
+	* mdk-stage1/dietlibc/include/stdio.h,
+	mdk-stage1/dietlibc/include/stdlib.h,
+	mdk-stage1/dietlibc/include/math.h,
+	mdk-stage1/dietlibc/include/sys/times.h: have slang and newt compile
+	with dietlibc
+	import new version of dietlibc
+
+	* mdk-stage1/Makefile.common: new dietlibc binaries location
+
+	* mdk-stage1/newt-frontend.c: i can compile slang and newt with dietlibc
+	now
+
+	* mdk-stage1/dietlibc/lib/abs.c: have slang and newt compile with dietlibc
+
+	* mdk-stage1/dhcp.c: Have the wait_message() with the sleep()
+	  - add a sleep(2) after ioctl ifupping so that further operation can
+	work normally
+	  - more logs
+
+2001/05/14  kjx
+
+	* share/po/zh_CN.GB2312.po: process untranslated
+
+2001/05/14  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm, fsedit.pm, partition_table.pm, install_any.pm: basic xfs handling
+
+2001/05/11  François Pons  <fpons@mandrakesoft.com>
+
+	* tools/oem-prepare: fixed missing package which may be selected on
+	hardware during real install.
+
+	* rescue/tree/etc/oem: added support to change boot entries when invoking
+	oem script.
+	fixed missing SCSI support and driver module loading.
+	fixed missing speficic packages not installed on HW detected.
+
+2001/05/08  dam's  <damien@mandrakesoft.com>
+
+	* my_gtk.pm: VBox -> HBox in Embedded mode
+
+	* standalone/mousedrake: code cleaned and debugged
+	added mouse test. Ugly
+
+2001/05/08  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/stdio-frontend.c: fix minor stuff
+	re-include correct layout for [] choices, in a smaller way than before
+
+	* mdk-stage1/tools.c: minor fix
+	needs to poll() for available data before loading ramdisk because ftp
+	transfers would fail in some situations
+
+	* mdk-stage1/init.c: new maxim
+
+	* mdk-stage1/config-stage1.h: adjust COMPRESSION_RATIO so that last star
+	is printed when last blocks of file are read
+
+	* mdk-stage1/dhcp.c: use poll() rather than select() to win some bytesCVS:
+	----------------------------------------------------------------------
+
+2001/05/08  siegel
+
+	* share/po/de.po: fixed plenty ugly typos
+
+2001/05/07  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/pt_BR.po: updated Brazilian file
+
+2001/05/07  yduret
+
+	* docs/README.devel: fix one typo
+
+	* any.pm, bootloader.pm: updated install_lilo() according to new lilo
+	package
+	(/boot/lilo-{menu,graphic,text})
+
+2001/05/06  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: corrected bad output and bad adsl script
+
+2001/05/06  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* install2.pm: workaround for msec hang on PPC
+
+2001/05/04  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/rpmsrate: KDE+SOUND -> 4 xmms-arts
+
+2001/05/04  tvignaud
+
+	* mdk-stage1/mar/mar-extract-only.c: text size micro-opt
+
 2001/05/04  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* share/rpmsrate: KDE+SOUND -> 4 xmms-arts
