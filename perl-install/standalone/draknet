@@ -94,12 +94,15 @@ $vbox1->pack_start(new Gtk::HSeparator,1,1,5);
 
 my $frame1 = new Gtk::Frame (_("Internet access"));
 $vbox1->pack_start($frame1,1,1,0);
+my $vbox_frame1 = new Gtk::VBox(0,0);
+$vbox_frame1->set_border_width(5);
+$frame1->add($vbox_frame1);
 my $table1 = new Gtk::Table (3,3, 0);
 $table1->set_border_width(5);
 $table1->set_row_spacings(5);
 $table1->set_col_spacings(5);
 #$table1->border_width(10);
-$frame1->add($table1);
+$vbox_frame1->pack_start($table1,1,1,0);
 #attach (table, child, left_attach, right_attach, top_attach, bottom_attach, xoptions, yoptions, xpadding, ypadding)
 #$table->attach($button[0], 0, 1, 0, 1, {expand=>1,fill=>1}, {expand=>1,fill=>1},0,0);
 $table1->attach(new Gtk::Label(_("Type:")), 0, 1, 0, 1, 'fill', 'fill',0,0);
@@ -115,12 +118,16 @@ $table1->attach($label7, 0, 1, 2, 3, 'fill', 'fill',0,0);
 my $label8 = new Gtk::Label(_("not connected"));
 $table1->attach($label8, 1, 2, 2, 3, 'fill', 'fill',0,0);
 
-my $button1 = new Gtk::Button(_("Configure..."));
-$table1->attach($button1, 2, 3, 1, 2, 'fill', 'fill',0,0);
-$button1->signal_connect( clicked => [ \&configure_net, '', $netcnx, $netc, $intf]);
-
 my $button2 = new Gtk::Button(_("Connect..."));
 $table1->attach($button2, 2, 3, 2, 3, 'fill', 'fill',0,0);
+
+#$table1->attach($button1, 2, 3, 1, 2, 'fill', 'fill',0,0);
+
+my $hbox_frame1_button = new Gtk::HBox(0,0);
+my $button1 = new Gtk::Button(_("Configure Internet Access..."));
+$button1->signal_connect( clicked => [ \&configure_net, '', $netcnx, $netc, $intf]);
+$hbox_frame1_button->pack_start($button1, 0, 0, 0);
+$vbox_frame1->pack_start($hbox_frame1_button,0,0,0);
 
 my $separator2 = new Gtk::HSeparator;
 $vbox1->pack_start($separator2,1,1,5);
@@ -141,9 +148,10 @@ my $vbox2 = new Gtk::VBox(0,0);
 $vbox2->set_border_width(5);
 $frame2->add($vbox2);
 my $clist1 = new_with_titles Gtk::CList(_("Adapter"), _("Interface"), _("IP address"), _("Protocole"), _("Driver"));
-$clist1->set_column_width (2, 80);
-$clist1->set_column_width (4, 60);
-$vbox2->pack_start($clist1, 0, 0, 0);
+$clist1->set_column_auto_resize($_,1) foreach (0..4);
+$clist1->column_titles_passive();
+$clist1->set_shadow_type('etched_out');
+$vbox2->pack_start($clist1, 0, 0, 5);
 #$scrolled1->add_with_viewport($table2);
 
 foreach (0..$#all_cards) {
@@ -159,9 +167,11 @@ $clist1->set_selectable($_, 0);
     print "-----\n";
 }
 
-my $button3 = new Gtk::Button(_("Configure..."));
+my $hbox3 = new Gtk::HBox(0,0);
+my $button3 = new Gtk::Button(_("Configure Local Area Network..."));
 $button3->signal_connect( clicked => [ \&configure_lan, '', $netcnx, $netc, $intf]);
-$vbox2->pack_start($button3, 0, 0, 5);
+$hbox3->pack_start($button3, 0, 0, 0);
+$vbox2->pack_start($hbox3, 0, 0, 0);
 
 
 #  my $label9 = new Gtk::Label(_("Network adaptater 1 (eth0):"));
