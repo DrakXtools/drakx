@@ -1,3 +1,77 @@
+2002/07/10  daouda
+
+	* standalone/drakbug: 
+	  - code update
+	  - use local http server for test.
+
+2002/07/10  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps.pm, install_steps_gtk.pm, crypto.pm, share/list, pkgs.pm,
+	install_any.pm, install2.pm, install_steps_interactive.pm: use perl-URPM
+	instead of rpmtools.
+
+	* tools/Makefile: use vendor_perl instead of site_perl (check of
+	rpmtools.pm and packdrake.pm presence).
+
+2002/07/10  Pixel  <pixel@mandrakesoft.com>
+
+	* tools/Makefile: nicer use of vendor_perl instead of site_perl (check of
+	rpmtools.pm and
+	packdrake.pm presence) ... i had forgot to commit :-(
+
+	* ftp.pm: don't let Timeout kill us
+
+	* modparm.pm: rollback titi's modif
+
+	* detect_devices.pm: cleanup
+
+	* share/list: add integer.pm (needed by Time::Local (needed by Net::FTP))
+
+2002/07/10  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* drakxtools.spec: list and describe all gui tools from drakxtools
+	enhance cohenrency: step 1
+	  - ide and scsi devices use channel rather than bus to store their
+	  physical connection, which is more logic (at least for eide)
+	  - all devices have their connection bus in bus field, not in bus for
+	  {pci,usb,...} and interface_type for {scsi,eide,other_block_devices}
+	
+	  - detect_devices:getIDE() : add eide_hds hash in order to be able to
+	  split info field between model and vendor
+	
+	  - harddrake::ui : code reduction allowed by the above changes
+	fix parrallel build
+	fix perl depandancy on new perl
+
+	* diskdrake/interactive.pm, detect_devices.pm, install_steps.pm,
+	harddrake/ui.pm: enhance cohenrency: step 1
+	  - ide and scsi devices use channel rather than bus to store their
+	  physical connection, which is more logic (at least for eide)
+	  - all devices have their connection bus in bus field, not in bus for
+	  {pci,usb,...} and interface_type for {scsi,eide,other_block_devices}
+	
+	  - detect_devices:getIDE() : add eide_hds hash in order to be able to
+	  split info field between model and vendor
+	
+	  - harddrake::ui : code reduction allowed by the above changes
+
+	* modparm.pm: typo fix
+	no need to test two times if modinfo is executable in normal (ie not
+	in drakx) case ...
+
+	* Makefile, Makefile.drakxtools: remove all
+	(use\s+(diagnostics|vars|strict)' instances
+
+2002/07/09  Pixel  <pixel@mandrakesoft.com>
+
+	* Makefile: have MDK::Common's in TAGS
+
+	* detect_devices.pm: rewrite getSCSI, now handling scanners
+
+	* share/list: adapt to new perl 5.8.0
+
+	* common.pm, modparm.pm: move join_lines to common
+
 2002/07/09  Pixel  <pixel@mandrakesoft.com>
 
 	* Makefile: have MDK::Common's in TAGS
