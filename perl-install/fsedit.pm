@@ -2,6 +2,7 @@ package fsedit; # $Id$
 
 use diagnostics;
 use strict;
+use vars qw(%suggestions);
 
 #-######################################################################################
 #- misc imports
@@ -17,19 +18,28 @@ use loopback;
 use log;
 use fs;
 
-#-#####################################################################################
-#- Globals
-#-#####################################################################################
-my @suggestions = (
-  { mntpoint => "/boot",    size =>  16 << 11, type => 0x83, ratio => 1, maxsize =>  30 << 11 },
-  { mntpoint => "/",        size =>  50 << 11, type => 0x83, ratio => 1, maxsize => 300 << 11 },
-  { mntpoint => "swap",     size =>  30 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
-  { mntpoint => "/usr",     size => 200 << 11, type => 0x83, ratio => 6, maxsize =>3000 << 11 },
-  { mntpoint => "/home",    size =>  50 << 11, type => 0x83, ratio => 3 },
-  { mntpoint => "/var",     size => 200 << 11, type => 0x83, ratio => 1, maxsize =>1000 << 11 },
-  { mntpoint => "/tmp",     size =>  50 << 11, type => 0x83, ratio => 3, maxsize => 500 << 11 },
+%suggestions = (
+  __("simple") => [
+    { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 5, maxsize =>3500 << 11 },
+    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
+    { mntpoint => "/home", size => 300 << 11, type => 0x83, ratio => 3 },
+  ], 'with usr' => [
+    { mntpoint => "/",     size => 150 << 11, type => 0x83, ratio => 1, maxsize => 500 << 11 },
+    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
+    { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 4, maxsize =>3000 << 11 },
+    { mntpoint => "/home", size => 100 << 11, type => 0x83, ratio => 5 },
+  ], __("server") => [
+    { mntpoint => "/",     size => 150 << 11, type => 0x83, ratio => 1, maxsize => 250 << 11 },
+    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 2, maxsize => 400 << 11 },
+    { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 3, maxsize =>3000 << 11 },
+    { mntpoint => "/var",  size => 100 << 11, type => 0x83, ratio => 4 },
+    { mntpoint => "/home", size => 100 << 11, type => 0x83, ratio => 5 },
+  ],
 );
-my @suggestions_mntpoints = ( "/root", "/var/ftp", "/var/www", arch() =~ /sparc/ ? "/mnt/sunos" : "/mnt/windows" );
+my @suggestions_mntpoints = (
+    "/root", "/var/ftp", "/var/www", 
+    arch() =~ /sparc/ ? "/mnt/sunos" : "/mnt/windows",
+);
 
 my @partitions_signatures = (
     [ 0x83, 0x438, "\x53\xEF" ],
@@ -155,8 +165,7 @@ sub computeSize {
 
 sub suggest_part {
     my ($part, $hds, $suggestions) = @_;
-    $suggestions ||= \@suggestions;
-
+    $suggestions ||= $suggestions{server};
 
     my $has_swap = grep { isSwap($_) } get_fstab(@$hds);
 
@@ -185,7 +194,7 @@ sub suggest_part {
 sub suggestions_mntpoint {
     my ($hds) = @_;
     sort grep { !/swap/ && !has_mntpoint($_, $hds) }
-      (@suggestions_mntpoints, map { $_->{mntpoint} } @suggestions);
+      (@suggestions_mntpoints, map { $_->{mntpoint} } $suggestions{expert});
 }
 
 #-sub partitionDrives {
@@ -291,9 +300,9 @@ sub allocatePartitions($$) {
     }
 }
 
-sub auto_allocate($;$) {
+sub auto_allocate {
     my ($hds, $suggestions) = @_;    
-    allocatePartitions($hds, $suggestions || \@suggestions);
+    allocatePartitions($hds, $suggestions || $suggestions{simple});
     map { partition_table::assign_device_numbers($_) } @$hds;
 }
 

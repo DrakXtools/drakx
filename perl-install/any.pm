@@ -253,6 +253,14 @@ arch() !~ /sparc/ ? (
     1;
 }
 
+sub partitions_suggestions {
+    my ($in) = @_;
+    my $t = $::expert ? 
+      $in->ask_from_list_('', _("What type of partitioning?"), [ keys %fsedit::suggestions ]) :
+      'simple';
+    $fsedit::suggestions{$t};
+}
+
 my @etc_pass_fields = qw(name pw uid gid realname home shell);
 sub unpack_passwd {
     my ($l) = @_;

@@ -81,41 +81,6 @@ arch() !~ /alpha/ ? (
 
 my @install_classes = qw(normal developer server);
 
-#-#####################################################################################
-#-Default value
-#-#####################################################################################
-#- partition layout
-my %suggestedPartitions = (
-arch() =~ /^sparc/ ? (
-  normal => [
-    { mntpoint => "/",     size => 150 << 11, type => 0x83, ratio => 1, maxsize =>1000 << 11 },
-    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
-    { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 4, maxsize =>3000 << 11 },
-    { mntpoint => "/home", size => 300 << 11, type => 0x83, ratio => 3 },
-  ],
-) : (
-  normal => [
-    { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 5, maxsize =>3500 << 11 },
-    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
-    { mntpoint => "/home", size => 300 << 11, type => 0x83, ratio => 3 },
-  ],
-),
-  developer => [
-    { mntpoint => "/",     size => 150 << 11, type => 0x83, ratio => 1, maxsize => 500 << 11 },
-    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
-    { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 4, maxsize =>3000 << 11 },
-    { mntpoint => "/home", size => 100 << 11, type => 0x83, ratio => 5 },
-  ],
-  server => [
-    { mntpoint => "/",     size => 150 << 11, type => 0x83, ratio => 1, maxsize => 250 << 11 },
-    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 2, maxsize => 400 << 11 },
-    { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 3, maxsize =>3000 << 11 },
-    { mntpoint => "/var",  size => 100 << 11, type => 0x83, ratio => 4 },
-    { mntpoint => "/home", size => 100 << 11, type => 0x83, ratio => 5 },
-  ],
-);
-$suggestedPartitions{corporate} = $suggestedPartitions{server};
-
 #-#######################################################################################
 #-$O
 #-the big struct which contain, well everything (globals + the interactive methods ...)
@@ -129,33 +94,6 @@ $o = $::o = {
 #-    packages   => [ qw() ],
     partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0 }, #-, readonly => 0 },
     security => 2,
-#arch() =~ /^sparc/ ? (
-#  partitions => [
-#    { mntpoint => "/",     size => 600 << 11, type => 0x83, ratio => 5, maxsize =>1000 << 11 },
-#    { mntpoint => "swap",  size => 128 << 11, type => 0x82, ratio => 1, maxsize => 400 << 11 },
-#    { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 3, maxsize =>1500 << 11 },
-#    { mntpoint => "/home", size => 300 << 11, type => 0x83, ratio => 5 },
-#  ],
-#) : (
-#  partitions => [
-#    { mntpoint => "/boot", size =>  10 << 11, type => 0x83, maxsize => 30 << 11 },
-#    { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 5, maxsize => 1500 << 11 },
-#    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
-#    { mntpoint => "/home", size => 300 << 11, type => 0x83, ratio => 5 },
-#  ],
-#),
-#-    partitions => [
-#-		      { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
-#-		      { mntpoint => "/",     size => 256 << 11, type => 0x83 },
-#-		      { mntpoint => "/usr",  size => 512 << 11, type => 0x83, growable => 1 },
-#-		      { mntpoint => "/var",  size => 256 << 11, type => 0x83 },
-#-		      { mntpoint => "/home", size => 512 << 11, type => 0x83, growable => 1 },
-#-		      { mntpoint => "swap",  size =>  64 << 11, type => 0x82 }
-#-		    { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
-#-		    { mntpoint => "/",     size => 300 << 11, type => 0x83 },
-#-		    { mntpoint => "swap",  size =>  64 << 11, type => 0x82 },
-#-		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 },
-#-	     ],
     authentication => { md5 => 1, shadow => 1 },
     lang         => 'en_US',
     isUpgrade    => 0,

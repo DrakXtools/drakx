@@ -32,7 +32,7 @@ sub partition_with_diskdrake {
     do {
 	$ok = 1;
 	require diskdrake;
-	diskdrake::main($hds, $o->{raid}, interactive_gtk->new, $o->{partitions}, $nowizard);
+	diskdrake::main($hds, $o->{raid}, interactive_gtk->new, $nowizard);
 	delete $o->{wizard} and return partitionWizard($o, 'nodiskdrake');
 	my @fstab = fsedit::get_fstab(@$hds, $o->{raid});
 	
@@ -65,7 +65,7 @@ sub partitionWizardSolutions {
 
     my @good_hds = grep { partition_table::can_raw_add($_) } @$hds;
     if (fsedit::free_space(@good_hds) > $min_linux and !$readonly) {
-	$solutions{free_space} = [ 20, _("Use free space"), sub { fsedit::auto_allocate($hds, $o->{partitions}); 1 } ]
+	$solutions{free_space} = [ 20, _("Use free space"), sub { fsedit::auto_allocate($hds); 1 } ]
     } else { 
 	push @wizlog, _("Not enough free space to allocate new partitions") . ": " .
 	  (@good_hds ? 
@@ -138,7 +138,7 @@ When sure, press Ok.")) or return;
 		partition_table::adjust_local_extended($hd, $part);
 		partition_table::adjust_main_extended($hd);
 
-		fsedit::auto_allocate($hds, $o->{partitions});
+		fsedit::auto_allocate($hds);
 		1;
 	    } ] if !$readonly;
     } else {
@@ -156,7 +156,7 @@ When sure, press Ok.")) or return;
 		$o->set_help('takeOverHdConfirm');
 		$o->ask_okcancel('', _("ALL existing partitions and their data will be lost on drive %s", partition_table_raw::description($hd))) or return;
 		partition_table_raw::zero_MBR($hd);
-		fsedit::auto_allocate($hds, $o->{partitions});
+		fsedit::auto_allocate($hds);
 		1;
 	    } ];
     }
