@@ -81,7 +81,8 @@ sub charsetChanged {}
 sub selectLanguage {
     my ($o) = @_;
 
-    $o->{lang} = any::selectLanguage($o, $o->{lang}, $o->{langs} ||= {});
+    $o->{lang} = any::selectLanguage($o, $o->{lang}, $o->{langs} ||= {})
+      || return $o->ask_yesorno('', _("Do you really want to leave the installation?")) ? $o->exit : &selectLanguage;
     install_steps::selectLanguage($o);
 
     $o->charsetChanged;
