@@ -1264,8 +1264,8 @@ sub dhcpd_config() {
 	$entry_name_server2->set_text($nservers[2]);
 	$entry_name_server3->set_text($nservers[3]);
 
-	my @dhcpd = cat_("/etc/dhcpd.conf");
-	if (-e "/etc/dhcpd.conf" && @dhcpd[0] !~ /drakTermServ/) {
+	my $dhcpd_conf = cat_("/etc/dhcpd.conf");
+	if (-e "/etc/dhcpd.conf" && $dhcpd_conf !~ /drakTermServ/) {
 		$button_msg = N("Append TS Includes To Existing Config");
 	} else {
 		$button_msg = N("Write Config");
@@ -1317,7 +1317,7 @@ sub dhcpd_config() {
 								$entry_ip_range_start->get_text,
 								$entry_ip_range_end->get_text) 
 						} else {
-							write_dhcpd_config("append", @nothing) unless any { /dhcpd.conf.terminal-server/ } @dhcpd; 
+							write_dhcpd_config("append", @nothing) if $dhcpd_conf !~ /dhcpd.conf.terminal-server/; 
 						}
 					}
 				),
@@ -1479,10 +1479,10 @@ sub enable_ts {
 	@buff = ();
 	$buff[0] = "Enabling Terminal Server...\n\n";
 	$buff[1] = "\tChecking default /etc/dhcpd.conf...\n";	
-	my @my_conf = cat_("/etc/dhcpd.conf");
-	if ($my_conf[0] !~ /drakTermServ/) {
+	my $dhcpd_conf = cat_("/etc/dhcpd.conf");
+	if ($dhcpd_conf !~ /drakTermServ/) {
 		if (-e "/etc/dhcpd.conf") {
-			write_dhcpd_config("append", @nothing) if ! any { /dhcpd.conf.terminal-server/ } @my_conf;
+			write_dhcpd_config("append", @nothing) if $dhcpd_conf !~ /dhcpd.conf.terminal-server/;
 		} else {
 			if ($cmd_line == 1) {
 				print("No /etc/dhcpd.conf built yet - use GUI to create!!\n");
