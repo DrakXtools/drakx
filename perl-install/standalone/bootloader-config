@@ -10,33 +10,46 @@ $::isStandalone = 1; #- not using standalone which messes with @ARGV and usage
 
 my %options = (
 	       'action=s' => \ (my $action),
+
+	       'label=s' => \ (my $label),
+
+	       'chainload=s' => \ (my $chainload),
+
+	       'image=s' => \ (my $image), 
 	       'kernel-version=s' => \ (my $kernel_version), 
 
-	       'vmlinuz=s' => \ (my $vmlinuz), 
 	       'initrd-options=s' => \ (my $initrd_options),
-
 	       'no-short-name' => \ (my $no_short_name),
 	       'no-entry' => \ (my $no_entry),
 	       'no-launch' => \ (my $no_launch),
-	       'no-initrd' => \ (my $no_initrd),	       
+	       'no-initrd' => \ (my $no_initrd),
 	      );
 
-GetOptions(%options) or die "usage: Releve " . join(' ', map { "[--$_]" } keys %options) . "\n";
+GetOptions(%options) or die <<'EOF';
+usage: Releve --action add-kernel (--image <vmlinuz> | --kernel-version <2.6.xxx>) [--label <...>] [--no-short-name] [--initrd-options <options>]
+       Releve --action remove-kernel (--image <vmlinuz> | --kernel-version <2.6.xxx>)
 
-my @known_actions = qw(add-kernel remove-kernel update-splash remove-splash detectloader);
+       Releve --action add-entry (--image <image> | --chainload <device>) --label <...>
+       Releve --action remove-entry (--image <image> | --chainload <device> | --label <...>)
+
+       Releve --action update-splash
+       Releve --action remove-splash
+EOF
+
+my @known_actions = qw(add-kernel remove-kernel update-splash remove-splash detectloader add-entry remove-entry);
 $action && member($action, @known_actions) or die "<action> must be one of " . join(' ', @known_actions) . "\n";
 
-if ($vmlinuz) {
-    if (my $ver = bootloader::vmlinuz2version($vmlinuz)) {
+if ($image) {
+    if (my $ver = bootloader::vmlinuz2version($image)) {
 	if ($kernel_version) {
-	    $kernel_version eq $ver or die "$kernel_version and $ver don't match (hint: don't pass both --vmlinuz and --kernel-version)\n";
+	    $kernel_version eq $ver or die "$kernel_version and $ver don't match (hint: don't pass both --image and --kernel-version)\n";
 	} else {
 	    $kernel_version = $ver;
 	}
     }
-    $vmlinuz = "/boot/$vmlinuz" if $vmlinuz !~ m!^/!;
+    $image = "/boot/$image" if $image !~ m!^/!;
 } elsif ($kernel_version) {
-    $vmlinuz = "/boot/vmlinuz-$kernel_version";
+    $image = "/boot/vmlinuz-$kernel_version";
 }
 
 
@@ -65,13 +78,13 @@ sub remove_kernel() {
 
 
     my ($to_remove, $to_keep) = partition {
-	$_->{kernel_or_dev} && $_->{kernel_or_dev} eq $vmlinuz;
+	$_->{kernel_or_dev} && $_->{kernel_or_dev} eq $image;
     } @{$bootloader->{entries}};
 
     $_->{initrd} && unlink $_->{initrd} foreach @$to_remove;
 
 #    foreach (@$to_keep) {
-#	$_->{kernel_or_dev} && bootloader::expand_vmlinuz_symlink($_->{kernel_or_dev}) eq $vmlinuz or next;
+#	$_->{kernel_or_dev} && bootloader::expand_vmlinuz_symlink($_->{kernel_or_dev}) eq $image or next;
 #    }
 
     @{$bootloader->{entries}} = @$to_keep;
@@ -85,7 +98,7 @@ sub remove_kernel() {
 sub add_kernel() {
     bootloader::create_link_source();
 
-    my $kernel_str = bootloader::vmlinuz2kernel_str($vmlinuz);
+    my $kernel_str = bootloader::vmlinuz2kernel_str($image);
     $kernel_str->{use_long_name} = $no_short_name;
 
     my $root_part = fsedit::get_root([ fsedit::get_fstab(@$hds) ]);
@@ -93,6 +106,7 @@ sub add_kernel() {
 			   { 
 			    root => "/dev/$root_part->{device}", 
 			    initrd_options => $initrd_options,
+			    if_($label, label => $label),
 			    if_($bootloader->{default_vga}, vga => $bootloader->{default_vga}),
 			   }, $no_short_name, $no_initrd);
 
@@ -104,6 +118,33 @@ sub modify_bootloader() {
 
     bootloader::action($bootloader, 'write', $hds);
     bootloader::action($bootloader, 'when_config_changed', $hds) if !$no_launch;
+}
+
+#-###############################################################################
+sub add_entry() {
+    $label or die "you must give a label\n";
+    ($image xor $chainload) or die "you must give an image or a chainload\n";
+
+    my $entry = {
+		  type => $image ? 'image' : 'other',
+		  label => $label,
+		  kernel_or_dev => $image || $other,
+		 };
+    bootloader::add_entry($bootloader, $entry);
+    modify_bootloader();
+}
+
+sub remove_entry() {
+    listlength(grep { $_ } $label, $image, $chainload) == 1 or die "you must give one of --label, --image and --chainload\n";
+
+    my $e = $label ? bootloader::get_label($label, $bootloader) : 
+                     find { $_->{kernel_or_dev} && $_->{kernel_or_dev} eq ($image || $chainload) } @{$bootloader->{entries}};
+
+    if ($e) {
+	@{$bootloader->{entries}} = grep { $_ != $e } @{$bootloader->{entries}};
+    }
+
+    modify_bootloader();
 }
 
 #-###############################################################################
