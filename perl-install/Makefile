@@ -1,6 +1,6 @@
 PACKAGE=drakxtools
-PKGVERSION:=$(shell rpm -q --qf '%{VERSION}\n' --specfile $(PACKAGE).spec|head -1)
-RELEASE:=$(shell rpm -q --qf '%{RELEASE}\n' --specfile $(PACKAGE).spec|head -1)
+PKGVERSION:=$(shell rpm -q --qf '%{VERSION}\n' --specfile $(PACKAGE).spec|head -n 1)
+RELEASE:=$(shell rpm -q --qf '%{RELEASE}\n' --specfile $(PACKAGE).spec|head -n 1)
 TAG := $(shell echo "V$(PKGVERSION)_$(RELEASE)" | tr -- '-.' '__')
 
 include Makefile.config
