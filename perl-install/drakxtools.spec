@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.27mdk
+Release: 0.28mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Aug  7 2003 Pixel <pixel@mandrakesoft.com> 9.2-0.28mdk
+- drakxservices: xinetd services have a special treatment
+- localedrake: fix the "zh_TW with country China" case
+- no more stock icons 
+
 * Mon Aug  4 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.2-0.27mdk
 - ugtk2.pm:
   - revert "use checkboxes instead of icons"
