@@ -57,6 +57,7 @@ install_pms: $(DIRS)
 	for i in `perl -ne 's/sub (\w+?)_? {.*/$$1/ and print' commands.pm` sync; do ln -sf commands $(DEST)/usr/bin/$$i; done
 
 	install -d $(DESTREP4PMS)
+	find $(DESTREP4PMS) -name "*.gz.pm" | xargs rm -f
 	for i in $(PMS); do \
 		dest=$(DESTREP4PMS)/`dirname $$i`; \
 		install -d $$dest; \
@@ -191,6 +192,8 @@ full_stage2:
 
 stage2:
 	$(MAKE) install_pms
+	find $(DEST)/usr -name "*.pm" | xargs gzip -9f
+	cd $(DEST)/usr/lib/perl5 ; gunzip 5.*/{PerlIO,Exporter}.pm.gz 5.*/*-linux-thread-multi/{XSLoader,lib}.pm.gz vendor_perl/*/*-linux-thread-multi/PerlIO/gzip.pm.gz
 	$(ROOTDEST)/misc/make_mdkinst_stage2 $(DEST) $(ROOTDEST)/Mandrake/base/mdkinst_stage2
 
 # rules to build a test rpm
