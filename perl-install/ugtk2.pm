@@ -582,7 +582,7 @@ sub _find_imgfile {
     @extensions or @extensions = qw(.png .xpm);
     if ($f !~ m|^/|) {
 	foreach my $path (icon_paths()) {
-	    -e "$path/$f$_" and $f = "$path/$f$_" foreach '', @extensions;
+	    -f "$path/$f$_" and $f = "$path/$f$_" foreach '', @extensions;
 	}
     }
     return $f;
