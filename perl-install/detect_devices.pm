@@ -195,7 +195,7 @@ sub getSCSI() {
 
     each_index {
 	put_in_hash $_, { media_type => 'scanner' };
-    } grep { $_->{raw_type} =~ /Scanner/ } @l;
+    } grep { $_->{raw_type} =~ /Scanner/ || $_->{raw_type} =~ /Processor /} @l;
 
     get_devfs_devices(@l);
     get_sys_cdrom_info(@l);
