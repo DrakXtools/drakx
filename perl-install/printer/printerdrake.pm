@@ -672,8 +672,9 @@ sub first_time_dialog {
 
     my $w = $in->wait_message(N("Printerdrake"), N("Checking your system..."));
 
-    # Auto-detect local printers   
+    # Auto-detect local printers
     my @autodetected = printer::detect::local_detect();
+    $printer->{AUTODETECTEDLOCALPRINTERSFIRSTTIME} = \@autodetected if @autodetected;
     my $msg = do {
 	if (@autodetected) {
 	    my @printerlist = 
@@ -776,6 +777,7 @@ sub configure_new_printers {
 
     # Auto-detect local printers
     my @autodetected = printer::detect::local_detect();
+    $printer->{AUTODETECTEDPRINTERSNONINTERACTIVE} = \@autodetected if @autodetected;
 
     # We are ready with auto-detection, so we restart HPOJ here. If it 
     # is not installed or not configured, this command has no effect.
@@ -1152,6 +1154,7 @@ sub setup_local_autoscan {
 	    $expert_or_modify || $printer->{AUTODETECTLOCAL} ? printer::detect::local_detect() : (),
 	    !$expert_or_modify ? printer::detect::whatNetPrinter($printer->{AUTODETECTNETWORK}, $printer->{AUTODETECTSMB}, $printer->{TIMEOUT}) : (),
         );
+	$printer->{AUTODETECTEDPRINTERSADDPRINTERSTANDARD} = \@autodetected if @autodetected;
 	# We have more than one printer, so we must ask the user for a queue
 	# name in the fully automatic printer configuration.
 	$printer->{MORETHANONE} = $#autodetected > 0;
@@ -1523,7 +1526,8 @@ sub setup_smb {
 	}
 	my $_w = $in->wait_message(N("Printer auto-detection"), N("Scanning network..."));
 	@autodetected = printer::detect::net_smb_detect($printer->{TIMEOUT});
-     my ($server, $share);
+	$printer->{AUTODETECTEDPRINTERSADDPRINTEREXPERTSMB} = \@autodetected if @autodetected;
+	my ($server, $share);
 	foreach my $p (@autodetected) {
 	    my $menustr;
 	    if ($p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!) {
@@ -1776,7 +1780,8 @@ sub setup_socket {
 	$autodetect = 1;
 	my $_w = $in->wait_message(N("Printer auto-detection"), N("Scanning network..."));
 	@autodetected = printer::detect::net_detect($printer->{TIMEOUT});
-     my ($host, $port);
+	$printer->{AUTODETECTEDPRINTERSEXPERTSOCKET} = \@autodetected if @autodetected;
+	my ($host, $port);
 	foreach my $p (@autodetected) {
 	    my $menustr;
 	    if ($p->{port} =~ m!^socket://([^:]+):(\d+)$!) {
