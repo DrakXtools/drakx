@@ -679,6 +679,7 @@ sub install2::startMove {
 
     run_program::run('hwclock', '-s', '--localtime');
     run_program::run('chown', "$username.root", '/var/run/rebootctl');
+    substInFile { $_ = '' if m!\s/home\s! } $_ foreach '/etc/fstab', '/etc/mtab';
 
     touch '/var/run/utmp';
     run_program::run('runlevel_set', '5');
