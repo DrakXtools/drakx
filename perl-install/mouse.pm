@@ -262,7 +262,7 @@ sub detect() {
 
 	if (modules::get_probeall("usb-interface")) {
 	    if (my (@l) = detect_devices::usbMice()) {
-		log::l("found usb mouse $_->{driver} $_->{description} ($_->{type})") foreach @l;
+		log::l(join('', "found usb mouse $_->{driver} $_->{description} (", if_($_->{type}, $_->{type}), ")")) foreach @l;
 		eval { modules::load(qw(hid mousedev usbmouse)) };
 		if (!$@ && detect_devices::tryOpen("usbmouse")) {
 		    my $mouse = fullname2mouse($l[0]{driver} =~ /Mouse:(.*)/ ? $1 : "USB|Wheel");
