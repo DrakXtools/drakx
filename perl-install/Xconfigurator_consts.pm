@@ -485,6 +485,10 @@ Section "ServerFlags"
     # sequences.  This allows clients to receive these key events.
     #DontZoom
 
+    # This  allows  the  server  to start up even if the
+    # mouse device can\'t be opened/initialised.
+    AllowMouseOpenFail
+
 EndSection
 
 # **********************************************************************

@@ -35,7 +35,7 @@ sub new {
 	$options{Port} = $ENV{PROXYPORT} if $ENV{PROXYPORT};
 	unless ($login) {
 	    $login = 'anonymous';
-	    $password = 'DrakX@vivelinuxabaszindozs';
+	    $password = '-drakx@';
 	}
 
 	my $ftp = Net::FTP->new(network::resolv($host), %options) or die '';

@@ -186,8 +186,8 @@ sub umount_all($;$) {
 }
 
 #- do some stuff before calling write_fstab
-sub write($$$) {
-    my ($prefix, $fstab, $manualFstab) = @_;
+sub write($$$$) {
+    my ($prefix, $fstab, $manualFstab, $useSupermount) = @_;
     $fstab = [ @{$fstab||[]}, @{$manualFstab||[]} ];
 
     log::l("resetting /etc/mtab");
@@ -195,23 +195,26 @@ sub write($$$) {
     open F, "> $prefix/etc/mtab" or die "error resetting $prefix/etc/mtab";
 
     my @to_add = (
-#-       [ split ' ', '/dev/fd0 /mnt/floppy auto sync,user,noauto,nosuid,nodev,unhide 0 0' ],
-       [ split ' ', '/mnt/floppy /mnt/floppy supermount fs=vfat,dev=/dev/fd0 0 0' ],
+       $useSupermount ?
+       [ split ' ', '/mnt/floppy /mnt/floppy supermount fs=vfat,dev=/dev/fd0 0 0' ] :
+       [ split ' ', '/dev/fd0 /mnt/floppy auto sync,user,noauto,nosuid,nodev,unhide 0 0' ],
        [ split ' ', 'none /proc proc defaults 0 0' ],
        [ split ' ', 'none /dev/pts devpts mode=0620 0 0' ],
        (map_index {
 	   my $i = $::i ? $::i + 1 : '';
 	   mkdir "$prefix/mnt/cdrom$i", 0755 or log::l("failed to mkdir $prefix/mnt/cdrom$i: $!");
 	   symlinkf $_->{device}, "$prefix/dev/cdrom$i" or log::l("failed to symlink $prefix/dev/cdrom$i: $!");
-#-	   [ "/dev/cdrom$i", "/mnt/cdrom$i", "auto", "user,noauto,nosuid,exec,nodev,ro", 0, 0 ];
-	   [ "/mnt/cdrom$i", "/mnt/cdrom$i", "supermount", "fs=iso9660,dev=/dev/cdrom$i", 0, 0 ];
+	   $useSupermount ?
+	     [ "/mnt/cdrom$i", "/mnt/cdrom$i", "supermount", "fs=iso9660,dev=/dev/cdrom$i", 0, 0 ] :
+	     [ "/dev/cdrom$i", "/mnt/cdrom$i", "auto", "user,noauto,nosuid,exec,nodev,ro", 0, 0 ];
        } detect_devices::cdroms()),
        (map_index { #- for zip drives, the right partition is the 4th.
 	   my $i = $::i ? $::i + 1 : '';
 	   mkdir "$prefix/mnt/zip$i", 0755 or log::l("failed to mkdir $prefix/mnt/zip$i: $!");
 	   symlinkf "$_->{device}4", "$prefix/dev/zip$i" or log::l("failed to symlink $prefix/dev/zip$i: $!");
-#-	   [ "/dev/zip$i", "/mnt/zip$i", "auto", "user,noauto,nosuid,exec,nodev", 0, 0 ];
-	   [ "/mnt/zip$i", "/mnt/zip$i", "supermount", "fs=vfat,dev=/dev/zip$i", 0, 0 ];
+	   $useSupermount ?
+	     [ "/mnt/zip$i", "/mnt/zip$i", "supermount", "fs=vfat,dev=/dev/zip$i", 0, 0 ] :
+	     [ "/dev/zip$i", "/mnt/zip$i", "auto", "user,noauto,nosuid,exec,nodev", 0, 0 ];
        } detect_devices::zips()));
     write_fstab($fstab, $prefix, @to_add);
 }

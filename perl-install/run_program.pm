@@ -18,7 +18,10 @@ sub rooted {
 
     $root ? $root .= '/' : ($root = '');
 
-    fork and wait, return $? == 0;
+    if (my $pid = fork) {
+	waitpid $pid, 0;
+	return $? == 0;
+    }
     {
 	my ($stdout, $stdoutm, $stderr, $stderrm);
 	($stdoutm, $stdout, @args) = @args if $args[0] =~ /^>>?$/;

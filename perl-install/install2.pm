@@ -59,7 +59,7 @@ my (%installSteps, @orderedInstallSteps);
   addUser            => [ __("Add a user"), 1, 1, '', "doInstallStep" ],
   createBootdisk     => [ __("Create a bootdisk"), 1, 0, '', "doInstallStep" ],
   setupBootloader    => [ __("Install bootloader"), 1, 1, '', "doInstallStep" ],
-  configureX         => [ __("Configure X"), 1, 0, '', ["formatPartitions", "setupBootloader"] ],
+  configureX         => [ __("Configure X"), 1, 0, '', ["formatPartitions"] ],
   exitInstall        => [ __("Exit install"), 0, 0, 'beginner' ],
 );
     for (my $i = 0; $i < @installSteps; $i += 2) {
@@ -343,7 +343,7 @@ sub doInstallStep {
 
     #- some packages need such files for proper installation.
     install_any::write_ldsoconf($o->{prefix});
-    fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab});
+    fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
 
     $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
@@ -605,7 +605,7 @@ sub main {
 
     run_program::rooted($o->{prefix}, "kudzu", "-q"); # -q <=> fermetagueuleconnard
 
-    fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab});
+    fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
 
     install_any::lnx4win_postinstall($o->{prefix}) if $o->{lnx4win};

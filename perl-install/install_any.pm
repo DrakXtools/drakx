@@ -340,12 +340,20 @@ sub killCardServices {
     $pid and kill(15, $pid); #- send SIGTERM
 }
 
+sub hdInstallPath() {
+    cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/hdimage| or return;
+    my ($part) = grep { $_->{device} eq $1 } @{$::o->{fstab}};    
+    $part->{mntpoint} or grep { $_->{mntpoint} eq "/mnt/hd" } @{$::o->{fstab}} and return;
+    $part->{mntpoint} ||= "/mnt/hd";
+    $part->{mntpoint} . first(readlink("/tmp/rhimage") =~ m|^/tmp/hdimage/(.*)|);
+}
+
 sub unlockCdrom() {
-    cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/rhimage|;
+    cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/rhimage| or return;
     eval { ioctl detect_devices::tryOpen($1), c::CDROM_LOCKDOOR(), 0 };
 }
 sub ejectCdrom() {
-    cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/rhimage|;
+    cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/rhimage| or return;
     my $f = eval { detect_devices::tryOpen($1) } or return;
     getFile("XXX"); #- close still opened filehandle
     eval { fs::umount("/tmp/rhimage") };
@@ -401,7 +409,7 @@ sub g_auto_install(;$) {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade manualFstab nomouseprobe crypto modem); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade manualFstab nomouseprobe crypto modem useSupermount); #- TODO modules bootloader 
 
     if (my $card = $::o->{X}{card}) {
 	$o->{X}{card}{$_} = $card->{$_} foreach qw(default_depth);
@@ -486,6 +494,7 @@ sub install_urpmi {
 	open LIST, ">$prefix/etc/urpmi/list.$name" or log::l("failed to write list.$name"), return;
 
 	my $dir = ${{ nfs => "file://mnt/nfs", 
+                      hd => "file:/" . hdInstallPath,
 		      ftp => $ENV{URLPREFIX}, 
 		      http => $ENV{URLPREFIX}, 
 		      cdrom => "removable_cdrom_1://mnt/cdrom" }}{$method};

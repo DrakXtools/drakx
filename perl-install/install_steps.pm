@@ -562,6 +562,7 @@ sub miscellaneousNetwork {
 sub miscellaneous {
     my ($o) = @_;
     $ENV{SECURE_LEVEL} = $o->{security};
+    add2hash_ $o, { useSupermount => $o->{security} < 4 };
 
     cat_("/proc/cmdline") =~ /mem=(\S+)/;
     add2hash_($o->{miscellaneous} ||= {}, { numlock => !$o->{pcmcia}, $1 ? (memsize => $1) : () });

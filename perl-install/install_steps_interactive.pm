@@ -737,11 +737,14 @@ sub miscellaneous {
     my $s = $o->{security};
     $s = $l{$s} || $s;
 
+    add2hash_ $o, { useSupermount => $s < 4 };
+
     !$::beginner || $clicked and $o->ask_from_entries_refH('',
 	_("Miscellaneous questions"), [
 _("Use hard drive optimisations?") => { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause data corruption)") },
 _("Choose security level") => { val => \$s, list => [ map { $l{$_} } ikeys %l ], not_edit => 1 },
 _("Precise RAM size if needed (found %d MB)", availableRam / 1024 + 3) => \$u->{memsize}, #- add three for correction.
+_("Removable media automounting") => { val => $o->{useSupermount}, type => 'bool', text => 'supermount' },
      $u->{numlock} ? (
 _("Enable num lock at startup") => { val => \$u->{numlock}, type => 'bool' },
      ) : (),
@@ -774,6 +777,7 @@ sub setupXfree {
 
     { local $::testing = 0; #- unset testing
       local $::auto = $::beginner;
+      local $::noauto = $::expert && !$o->ask_yesorno('', _("Try to find PCI devices?"), 1);
 
       Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, sub {
          install_any::pkg_install($o, "XFree86-$_[0]");
