@@ -42,6 +42,7 @@ sub readCardsDB {
 	},
 	CHIPSET => sub {
 	    $card->{chipset} = $val;
+	    $card->{flags}{needChipset} = 1 if $val eq 'GeForce DDR';
 	    $card->{flags}{needVideoRam} = 1 if member($val, qw(mgag10 mgag200 RIVA128));
 	},
 	SERVER => sub { $card->{server} = $val; },
@@ -83,9 +84,13 @@ sub cardName2RealName {
     }
     $name;
 }
-sub cardName2card {
-    my ($name) = @_;
-    readCardsDB("/usr/X11R6/lib/X11/Cards+")->{$name};
+sub updateCardAccordingName {
+    my ($card, $name) = @_;
+    my $cards = readCardsDB("/usr/X11R6/lib/X11/Cards+");
+
+    add2hash($card->{flags}, $cards->{$name}{flags});
+    add2hash($card, $cards->{$name});
+    $card;
 }
 
 sub readMonitorsDB {
@@ -165,14 +170,14 @@ sub cardConfiguration(;$$$) {
     my ($card, $noauto, $allowFB) = @_;
     $card ||= {};
 
-    add2hash($card, cardName2card($card->{type})) if $card->{type}; #- try to get info from given type
+    updateCardAccordingName($card, $card->{type}) if $card->{type}; #- try to get info from given type
     undef $card->{type} unless $card->{server}; #- bad type as we can't find the server
     add2hash($card, cardConfigurationAuto()) unless $card->{server} || $noauto;
     $card->{server} = 'FBDev' unless !$allowFB || $card->{server} || $card->{type} || $noauto;
     $card->{type} = cardName2RealName($in->ask_from_treelist(_("Graphic card"), _("Select a graphic card"), '|', ['Unlisted', readCardsNames()])) unless $card->{type} || $card->{server};
     undef $card->{type}, $card->{server} = $in->ask_from_list(_("X server"), _("Choose a X server"), $allowFB ? \@allservers : \@allbutfbservers ) if $card->{type} eq "Unlisted";
 
-    add2hash($card, cardName2card($card->{type})) if $card->{type};
+    updateCardAccordingName($card, $card->{type}) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX.
@@ -190,13 +195,13 @@ sub cardConfiguration(;$$$) {
 
     #- try to figure if 3D acceleration is supported
     #- by XFree 3.3 but not XFree 4.0 then ask user to keep XFree 3.3 ?
+    !$::force_xf3 && $card->{driver} && !$card->{flags}{unsupported} or $card->{driver} = ''; #- disable XFree 4.0
     if ($card->{driver} && $card->{Utah_glx} && !$card->{DRI_glx}) {
 	$::beginner || $in->ask_yesorno('',
 					_("Your card can have 3D acceleration but only with XFree 3.3.
 Do You want to use XFree 3.3 instead of XFree 4.0?"), 1) and $card->{driver} = '';
     }
 
-    !$::force_xf3 && $card->{driver} && !$card->{flags}{unsupported} or $card->{driver} = ''; #- disable XFree 4.0
     $card->{prog} = "/usr/X11R6/bin/" . ($card->{driver} ? 'XFree86' : $card->{server} =~ /Sun (.*)/x ?
 					 "Xsun$1" : "XF86_$card->{server}");
 
@@ -830,7 +835,9 @@ EndSection
     print F qq(    BoardName   "$O->{board}"\n);
     print G qq(    BoardName   "$O->{board}"\n);
 
-    print G qq(    Driver   "$O->{driver}"\n);
+    print F "#" if $O->{chipset} && !$O->{flags}{needChipset};
+    print F qq(    Chipset     "$O->{chipset}"\n) if $O->{chipset};
+    print G qq(    Driver      "$O->{driver}"\n);
 
     print F "#" if $O->{memory} && !$O->{flags}{needVideoRam};
     print G "#" if $O->{memory} && !$O->{flags}{needVideoRam};
@@ -858,7 +865,7 @@ EndSection
 
     # Uncomment following option if you see a big white block        
     # instead of the cursor!                                          
-    #Option	"sw_cursor"
+    #    Option      "sw_cursor"
 
 ); 
     print F map { (!$O->{options}{$_} && '#') . qq(    Option      "$_"\n) } keys %{$O->{options} || {}};

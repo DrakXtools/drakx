@@ -1,6 +1,11 @@
 2000-08-01  François Pons  <fpons@mandrakesoft.com>
 
 	* pkgs.pm: fixed the below fixe, now ok.
+	* Xconfigurator.pm: fixed a bug for using default card flags
+	setting, add support for GeForce DDR for both 3.3 and 4.0.
+	* pci_probing/pcitable: fixed NV15 (GeForce2) card entry, now use
+	XFree 3.3 as unsupported in XFree 4.0.
+	* share/Cards+: added "NVIDIA GeForce2 DDR (generic)".
 
 2000-07-31  François Pons  <fpons@mandrakesoft.com>
 

@@ -78,7 +78,7 @@ sub new($$) {
 	    if (arch() eq "alpha") {
 		require Xconfigurator;
 		my $card = Xconfigurator::cardConfigurationAuto();
-		add2hash($card, Xconfigurator::cardName2card($card->{type})) if $card && $card->{type};
+		Xconfigurator::updateCardAccordingName($card, $card->{type}) if $card && $card->{type};
 		@servers = $card->{server} || "TGA";
 		#-@servers = qw(SVGA 3DLabs TGA) 
 	    } elsif (arch() =~ /^sparc/) {
