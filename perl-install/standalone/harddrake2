@@ -1,6 +1,13 @@
 #!/usr/bin/perl -w
 
 use lib qw(/usr/lib/libDrakX);
+use standalone;
 use harddrake::ui;
 
-harddrake::ui->run;
+if ("@ARGV" =~ /--help|-h/) {
+    print "Harddrake 2\n", $license, "\nUsage: harddrake [-h|--help]\n";
+    exit;
+}
+$::isStandalone=1;
+
+harddrake::ui->new;
