@@ -429,7 +429,7 @@ sub create_box_with_title($@) {
 
     $o->{box_size} = sum(map { round(length($_) / 60 + 1/2) } map { split "\n" } @_);
     $o->{box} = new Gtk::VBox(0,0);
-    $o->{icon} and eval { gtkpack__($o->{box}, gtkset_border_width(gtkpack_(new Gtk::HBox(0,0), 1, gtkpng($o->{icon})),5)); };
+    $o->{icon} && !$::isWizard and eval { gtkpack__($o->{box}, gtkset_border_width(gtkpack_(new Gtk::HBox(0,0), 1, gtkpng($o->{icon})),5)); };
     if (@_ <= 2 && $o->{box_size} > 4) {
 	my $wanted = n_line_size($o->{box_size}, 'text', $o->{box});
 	my $height = min(250, $wanted);
