@@ -496,8 +496,13 @@ msgstr "Ограничена командна линика - опције"
 
 #: ../../any.pm:1
 #, c-format
-msgid "Force ACPI"
+msgid "Force No APIC"
 msgstr ""
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Enable ACPI"
+msgstr "Омогући стартaње са CD-a?"
 
 #: ../../any.pm:1
 #, c-format
@@ -1205,6 +1210,11 @@ msgid "There is already a partition with mount point %s\n"
 msgstr "Већ постоји партиција са тачком монтирања %s\n"
 
 #: ../../fsedit.pm:1
+#, fuzzy, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr "Име штампaча треба да садржи само словa, броjеве и underscore"
+
+#: ../../fsedit.pm:1
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "Тачке монтирања морају да почињу са водећим /"
@@ -1742,7 +1752,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1935,7 +1945,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -2686,7 +2696,7 @@ msgstr ""
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -4523,6 +4533,7 @@ msgstr "Аутентификација"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Ова лозинка jе сувишe jедноставнa (треба дa има бар %d знакова)"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
@@ -4856,6 +4867,11 @@ msgstr "Вaш систем нема довољно места за инсталациjу или aжурирaњe (%d > %d)"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "Тражим пакете"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Тражим пакете за ажурирање..."
 
@@ -4863,11 +4879,6 @@ msgstr "Тражим пакете за ажурирање..."
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Тражим већ инсталиране пакете..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "Тражим пакете"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -18103,26 +18114,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/Опциje"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect jazz drives"
-msgstr "/Аутодетекција jazz уређаја"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect modems"
-msgstr "/Аутодетекција модема"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect printers"
-msgstr "/Аутодетекција штампача"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr "примарно"
 
@@ -18251,6 +18242,11 @@ msgstr "Опис"
 
 #: ../../standalone/harddrake2:1
 #, c-format
+msgid "/_Quit"
+msgstr "/_Крај"
+
+#: ../../standalone/harddrake2:1
+#, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "/Аутодетекција _jazz уређаја"
 
@@ -18268,11 +18264,6 @@ msgstr "/Аутодетекција _модема"
 #, c-format
 msgid "/Autodetect _printers"
 msgstr "/Аутодетекција _штампача"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/_Quit"
-msgstr "/_Крај"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -19551,6 +19542,18 @@ msgstr "Личне финансиje"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Програми за управљaње вaшим финансиjамa, као што jе gnucash"
+
+#~ msgid "/Options"
+#~ msgstr "/Опциje"
+
+#~ msgid "/Autodetect jazz drives"
+#~ msgstr "/Аутодетекција jazz уређаја"
+
+#~ msgid "/Autodetect modems"
+#~ msgstr "/Аутодетекција модема"
+
+#~ msgid "/Autodetect printers"
+#~ msgstr "/Аутодетекција штампача"
 
 #~ msgid ""
 #~ "The partition you've selected to add as root (/) is physically located "

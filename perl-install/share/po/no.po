@@ -494,8 +494,13 @@ msgstr "Begrense kommandolinje-opsjoner"
 
 #: ../../any.pm:1
 #, c-format
-msgid "Force ACPI"
+msgid "Force No APIC"
 msgstr ""
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Enable ACPI"
+msgstr "Skal det være mulig å boote fra CD?"
 
 #: ../../any.pm:1
 #, c-format
@@ -1173,6 +1178,11 @@ msgid "There is already a partition with mount point %s\n"
 msgstr "Det finnes allerede en partisjon med monteringspunkt %s\n"
 
 #: ../../fsedit.pm:1
+#, fuzzy, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr "Skrivernavn bør inneholde kun bokstaver, tall og understrek"
+
+#: ../../fsedit.pm:1
 #, c-format
 msgid "Mount points must begin with a leading /"
 msgstr "Monteringspunkter må begynne med /"
@@ -1697,7 +1707,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1907,7 +1917,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -2493,7 +2503,7 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -4209,6 +4219,7 @@ msgstr "Autentifikasjon"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Dette passordet er for enkelt (må være minst %d tegn langt)"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
@@ -4544,6 +4555,11 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "Søker etter tilgjengelige pakker"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Finner pakker som skal oppgraderes"
 
@@ -4551,11 +4567,6 @@ msgstr "Finner pakker som skal oppgraderes"
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Ser på pakker som allerede er installert..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "Søker etter tilgjengelige pakker"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -17092,26 +17103,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/Valg"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect jazz drives"
-msgstr "Utfør automatisk detektering"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect modems"
-msgstr "Utfør automatisk detektering"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect printers"
-msgstr "Utfør automatisk detektering"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr "primær"
 
@@ -17237,6 +17228,11 @@ msgid "/_Fields description"
 msgstr "Beskrivelse"
 
 #: ../../standalone/harddrake2:1
+#, c-format
+msgid "/_Quit"
+msgstr "/_Avslutt"
+
+#: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "Utfør automatisk detektering"
@@ -17255,11 +17251,6 @@ msgstr "Utfør automatisk detektering"
 #, fuzzy, c-format
 msgid "/Autodetect _printers"
 msgstr "Utfør automatisk detektering"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/_Quit"
-msgstr "/_Avslutt"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18529,6 +18520,21 @@ msgstr "Personlig finans"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programmer for å håndtere dine finanser, så som gnucash"
+
+#~ msgid "/Options"
+#~ msgstr "/Valg"
+
+#, fuzzy
+#~ msgid "/Autodetect jazz drives"
+#~ msgstr "Utfør automatisk detektering"
+
+#, fuzzy
+#~ msgid "/Autodetect modems"
+#~ msgstr "Utfør automatisk detektering"
+
+#, fuzzy
+#~ msgid "/Autodetect printers"
+#~ msgstr "Utfør automatisk detektering"
 
 #~ msgid ""
 #~ "The partition you've selected to add as root (/) is physically located "
