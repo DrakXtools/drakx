@@ -25,7 +25,7 @@ if (my @l = grep { ! /^-/ } @ARGV) {
 }
 
 system("adduser", $_->{name}) foreach @$users;
-any::write_passwd_user('', $_, $isMD5) foreach @$users;
+any::write_passwd_user($_, $isMD5) foreach @$users;
 system("pwconv") if $isShadow;
 
 any::addUsers($users);
