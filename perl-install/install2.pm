@@ -141,6 +141,7 @@ sub selectInstallClass {
     if ($o->{isUpgrade}) {
 	@{$o->{orderedSteps}} = map { /setupSCSI/ ? ($_, "doPartitionDisks") : $_ }
 	                        grep { !/doPartitionDisks/ } @{$o->{orderedSteps}};
+	$o->{keepConfiguration} and @{$o->{orderedSteps}} = grep { !/selectMouse|selectKeyboard|miscellaneous|setRootPassword|addUser|configureNetwork|installUpdates|summary|configureServices|configureX/ } @{$o->{orderedSteps}};
 	my $s; foreach (@{$o->{orderedSteps}}) {
 	    $s->{next} = $_ if $s;
 	    $s = $o->{steps}{$_};
