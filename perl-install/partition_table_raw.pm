@@ -5,6 +5,7 @@ use strict;
 
 use common qw(:common :system :file :constant);
 use devices;
+use log;
 use c;
 
 my @MBR_signatures = (
@@ -143,7 +144,7 @@ sub test_for_bad_drives {
     my $sector = $hd->{geom}{sectors} - 1;
     
 
-    local *F; partition_table_raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
+    local *F; openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
 
     my $seek = sub {
 	c::lseek_sector(fileno(F), $sector, 0) or die "seeking to sector $sector failed";
