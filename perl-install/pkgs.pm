@@ -636,10 +636,11 @@ sub getProvides($) {
     #- packages can be managed by DrakX (currently about 2000).
     my $i = 0;
     foreach my $pkg (@{$packages->{depslist}}) {
-	packageFlagBase($pkg) and next;
-	foreach (map { split '\|' } grep { !/^NOTFOUND_/ } packageDepsId($pkg)) {
-	    my $provided = $packages->{depslist}[$_] or die "invalid package index $_";
-	    packageFlagBase($provided) or $provided->[$PROVIDES] = pack "s*", (unpack "s*", $provided->[$PROVIDES]), $i;
+	unless (packageFlagBase($pkg)) {
+	    foreach (map { split '\|' } grep { !/^NOTFOUND_/ } packageDepsId($pkg)) {
+		my $provided = $packages->{depslist}[$_] or die "invalid package index $_";
+		packageFlagBase($provided) or $provided->[$PROVIDES] = pack "s*", (unpack "s*", $provided->[$PROVIDES]), $i;
+	    }
 	}
 	++$i;
     }
