@@ -154,7 +154,8 @@ sub cardConfiguration(;$$) {
     $card->{type} = undef unless $card->{server}; #- bad type as we can't find the server
 	
     add2hash($card, cardConfigurationAuto()) unless $card->{server} || $noauto;
-    add2hash($card, { type => $in->ask_from_list('', _("Choose a graphic card"), [keys %cards]) }) unless $card->{type} || $card->{server};
+    $card->{type} = $in->ask_from_list('', _("Choose a graphic card"), ['Unlisted', keys %cards]) unless $card->{type} || $card->{server};
+    $card->{type} = undef, $card->{server} = $in->ask_from_list('', _("Choose a X server"), \@allservers) if $card->{type} eq "Unlisted";
 
     add2hash($card, $cards{$card->{type}}) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
@@ -369,7 +370,8 @@ sub chooseResolutions($$) {
 					map { 0, $w2widget{$_} } ikeys(%w2widget),
 					),
 			       ),
-		    0, $W->create_okcancel,
+		    0, gtkadd($W->create_okcancel,
+			      gtksignal_connect(new Gtk::Button('Show all'), clicked => sub { $W->{retval} = 1; $chosen_w = 0; Gtk->main_quit })),
 		    ));
     $depth_combo->disable_activate;
     $depth_combo->set_use_arrows_always(1);
@@ -383,7 +385,6 @@ sub chooseResolutions($$) {
     &$set_depth();
 
     $W->main or return;
-
     ($chosen_depth, $chosen_w);
 }
 
@@ -456,6 +457,11 @@ Try with another video card or monitor")), return;
 
     $auto or ($depth, $res) = chooseResolutions($card, $depth) or return;
 
+    unless ($res) {
+	delete $card->{depth};
+	return resolutionsConfiguration($o, 'noauto');
+    }
+
     #- needed in auto mode when all has been provided by the user
     $card->{depth}{$depth} or die "you fixed an unusable depth";
 
@@ -509,7 +515,7 @@ sub write_XF86Config {
 
     #- Write monitor section.     
     $O = $o->{monitor};
-    $O->{modelines} ||= $o->{card}{type} eq "TG 96" ? $modelines_text_Trident_TG_96xx : $modelines_text;
+    $O->{modelines} .= $o->{card}{type} eq "TG 96" ? $modelines_text_Trident_TG_96xx : $modelines_text;
 
     print F $monitorsection_text1;
     print F qq(    Identifier "$O->{type}"\n);

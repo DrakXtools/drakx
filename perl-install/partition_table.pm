@@ -375,7 +375,6 @@ The only solution is to move your primary partitions to have the hole next to th
     }
 
     if ($e && $part->{start} < $e->{start}) {
-
 	my $l = first (@{$hd->{extended}});
 
 	#- the first is a special case, must recompute its real size
@@ -385,7 +384,6 @@ The only solution is to move your primary partitions to have the hole next to th
 	unshift @{$hd->{extended}}, { type => 5, raw => [ $part, $ext, {}, {} ], normal => $part, extended => $ext };
 	#- size will be autocalculated :)
     } else {
-
 	my ($ext, $ext_size) = is_empty_array_ref($hd->{extended}) ?
 	  ($hd->{primary}, -1) : #- -1 size will be computed by adjust_main_extended
 	  (top(@{$hd->{extended}}), $part->{size});
@@ -401,15 +399,15 @@ The only solution is to move your primary partitions to have the hole next to th
     adjust_main_extended($hd);
 }
 
-sub add($$;$) {
-    my ($hd, $part, $primaryOrExtended) = @_;
+sub add($$;$$) {
+    my ($hd, $part, $primaryOrExtended, $forceNoAdjust) = @_;
 
     $part->{notFormatted} = 1;
     $part->{isFormatted} = 0;
     $part->{rootDevice} = $hd->{device};
     $hd->{isDirty} = $hd->{needKernelReread} = 1;
     $part->{start} ||= 1; #- starting at sector 0 is not allowed
-    adjustStartAndEnd($hd, $part);
+    adjustStartAndEnd($hd, $part) unless $forceNoAdjust;
 
     my $e = $hd->{primary}{extended};
 

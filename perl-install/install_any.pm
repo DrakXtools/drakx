@@ -38,7 +38,6 @@ sub getFile($) {
 	*install_any::getFile = \&ftp::getFile;
     } else {
 	*install_any::getFile = sub($) {
-	    print ">>>>>> /tmp/rhimage/" . relGetFile($_[0]), "\n";
 	    open getFile, "/tmp/rhimage/" . relGetFile($_[0]) or sleep(1000), return;
 	    \*getFile;
 	};
@@ -115,23 +114,25 @@ sub getAvailableSpace {
 sub setPackages($$) {
     my ($o, $install_classes) = @_;
 
-    unless ($o->{packages}) {
+    if ($o->{packages}) {
+	$_->{selected} = 0 foreach values %{$o->{packages}};
+    } else {
 	my $useHdlist = $o->{method} !~ /nfs|hd/;
 	eval { $o->{packages} = pkgs::psUsingHdlist() }  if $useHdlist;
 	$o->{packages} = pkgs::psUsingDirectory() if !$useHdlist || $@;
 
 	pkgs::getDeps($o->{packages});
 	
-	$o->{compss}     = pkgs::readCompss    ($o->{packages});
+	$o->{compss} = pkgs::readCompss($o->{packages});
 	$o->{compssListLevels} = pkgs::readCompssList($o->{packages});
 	$o->{compssListLevels} ||= $install_classes;
 	push @{$o->{base}}, "kernel-smp" if detect_devices::hasSMP();
-
-	do {
-	    my $p = $o->{packages}{$_} or log::l(), next;
-	    pkgs::select($o->{packages}, $p, 1);
-	} foreach @{$o->{base}};
     }
+    
+    do {
+	my $p = $o->{packages}{$_} or log::l("missing base package $_"), next;
+	pkgs::select($o->{packages}, $p, 1);
+    } foreach @{$o->{base}};
     
     pkgs::setShowFromCompss($o->{compss}, $o->{installClass}, $o->{lang});
     pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang});

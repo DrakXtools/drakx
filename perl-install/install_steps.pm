@@ -127,9 +127,12 @@ sub formatPartitions {
 }
 
 #------------------------------------------------------------------------------
-sub choosePackages($$$) {
-    my ($o, $packages, $compss, $install_classes) = @_;
+sub setPackages {
+    my ($o, $install_classes) = @_;
     install_any::setPackages($o, $install_classes);
+}
+sub choosePackages($$$) {
+    my ($o, $packages, $compss) = @_;
 }
 
 sub beforeInstallPackages {

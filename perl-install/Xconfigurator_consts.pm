@@ -2,7 +2,7 @@ use common qw(:common);
 
 %depths = (
       8 => __("256 colors"),
-#-     15 => __("32 thousand colors"),
+     15 => __("32 thousand colors"),
      16 => __("65 thousand colors"),
      24 => __("16 million colors"),
      32 => __("4 billion colors"),

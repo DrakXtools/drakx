@@ -41,7 +41,8 @@ sub lsmod { print "Module                  Size  Used by\n"; cat("/proc/modules"
 
 sub grep_ { 
     my ($h, $v) = getopts(\@_, qw(hv));
-    my $r = shift and !$h or die "usage: grep <regexp> [files...]\n"; 
+    @_ == 0 || $h and die "usage: grep <regexp> [files...]\n";
+    my $r = shift;
     @ARGV = @_; (/$r/ ? $v || print : $v && print) while <> 
 }
 
@@ -57,13 +58,17 @@ sub tr_ {
 sub mount {
     @_ or return cat("/proc/mounts");
     my ($t) = getopts(\@_, qw(t));
-    my $fs = $t ? shift : $_[0] =~ /:/ ? "nfs" : "ext2";
+    my $fs = $t && shift;
 
     @_ == 2 or die "usage: mount [-t <fs>] <device> <dir>\n",
     "       (if /dev/ is left off the device name, a temporary node will be created)\n";
 
+    my ($dev, $where) = @_;
+    $fs ||= $where =~ /:/ ? "nfs" : 
+            $dev =~ /fd/ ? "vfat" : "ext2";
+
     require 'fs.pm';
-    fs::mount(@_, $fs, 0, 1);
+    fs::mount($dev, $where, $fs, 0, 1);
 }
 
 sub umount {

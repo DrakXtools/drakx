@@ -188,7 +188,7 @@ my @installSteps = (
   addUser            => [ __("Add a user"), 1, 1, "doInstallStep" ],                         
   createBootdisk     => [ __("Create bootdisk"), 1, 0, "doInstallStep" ],                    
   setupBootloader    => [ __("Install bootloader"), 1, 1, "doInstallStep" ],                 
-  configureX         => [ __("Configure X"), 1, 0, "doInstallStep" ],                        
+  configureX         => [ __("Configure X"), 1, 0, "formatPartitions" ],
   exitInstall        => [ __("Exit install"), 0, 0, "alldone" ],                             
 );
 
@@ -369,7 +369,7 @@ sub selectInstallClass {
     $::beginner = $o->{installClass} eq "beginner";
     $o->{partitions} ||= $suggestedPartitions{$o->{installClass}};
 
-    install_any::setPackages($o, \@install_classes) if $o->{steps}{choosePackages}{entered} > 1;
+    $o->setPackages(\@install_classes) if $o->{steps}{choosePackages}{entered} >= 1;
 }
 
 #------------------------------------------------------------------------------
@@ -428,8 +428,10 @@ sub formatPartitions {
 }
 
 #------------------------------------------------------------------------------
+#-PADTODO
 sub choosePackages {
-    $o->choosePackages($o->{packages}, $o->{compss}, \@install_classes); 
+    $o->setPackages($o, \@install_classes) if $_[1] == 1;
+    $o->choosePackages($o->{packages}, $o->{compss}); 
     $o->{packages}{$_}{selected} = 1 foreach @{$o->{base}};
 }
 

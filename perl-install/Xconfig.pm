@@ -95,8 +95,20 @@ sub getinfoFromDDC {
     my $o = shift || {};
     my $O = $o->{monitor} ||= {};
     return $o if $O->{hsyncrange} && $O->{vsyncrange} && $O->{modelines};
-    my ($h, $v, @l) = `ddcxinfo`;
+    my ($m, @l) = `ddcxinfos`;
     $? == 0 or return $o;
+
+    $o->{card}{memory} = to_int($m);
+    while (($_ = shift @l) ne "\n") {
+	my ($depth, $x, $y) = split;
+	$depth = int(log($depth) / log(2));
+	if ($depth >= 8 && $x >= 640) {
+	    push @{$o->{card}{depth}{$depth}}, [ $x, $y ];
+	    push @{$o->{card}{depth}{32}}, [ $x, $y ] if $depth == 24;
+	}
+    }
+    my ($h, $v, @m) = @l;
+
     chop $h; chop $v;
     $O->{hsyncrange} ||= $h;
     $O->{vsyncrange} ||= $v;

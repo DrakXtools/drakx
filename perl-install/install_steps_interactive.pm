@@ -118,7 +118,12 @@ sub formatPartitions {
     }
 }
 #------------------------------------------------------------------------------
-#-choosePackage
+sub setPackages {
+    my ($o, $install_classes) = @_;
+    my $w = $o->wait_message('', _("Searching for available packages"));
+    $o->SUPER::setPackages($install_classes);
+}
+
 #------------------------------------------------------------------------------
 #-mouse
 

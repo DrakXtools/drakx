@@ -287,6 +287,34 @@ sub move {
     }
 }
 
+sub rescuept($) {
+    my ($hd) = @_;
+    my ($ext, @hd);
+
+    my $dev = devices::make($hd->{device});
+    open F, "rescuept $dev|";
+    foreach (<F>) {
+	my ($st, $si, $id) = /start=\s*(\d+),\s*size=\s*(\d+),\s*Id=\s*(\d+)/ or next;
+	my $part = { start => $st, size => $si, type => hex($id) };
+	if (isExtended($part)) {
+	    $ext = $part;
+	} else {
+	    push @hd, $part;
+	}
+    }
+    close F or die "rescuept failed";
+
+    partition_table_raw::zero_MBR($hd);
+    foreach (@hd) {
+	my $b = partition_table::verifyInside($_, $ext);
+	if ($b) {
+	    $_->{start}--;
+	    $_->{size}++;
+	}
+	partition_table::add($hd, $_, ($b ? 'Extended' : 'Primary'), 1);
+    }
+}
+
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################
