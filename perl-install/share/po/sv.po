@@ -1,3 +1,4 @@
+# translation of DrakX-sv.po to 
 # Översättning av DrakX-sv.po till Svenska
 # translation of DrakX-sv.po to Svenska
 # Översättning av DrakX-sv.po till svenska
@@ -12,10 +13,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-sv\n"
-"POT-Creation-Date: 2003-08-13 03:40+0200\n"
-"PO-Revision-Date: 2003-08-12 22:49+0200\n"
-"Last-Translator: Mattias Newzella <newzella@linux.nu>\n"
-"Language-Team: Svenska <sv@li.org>\n"
+"POT-Creation-Date: 2003-09-09 17:07+0200\n"
+"PO-Revision-Date: 2003-09-12 15:39+0200\n"
+"Last-Translator: Lars Westergren <lars.westergren@home.se>\n"
+"Language-Team:  <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -56,6 +57,8 @@ msgid ""
 "Differential backups only save files that have changed or are new since the "
 "original 'base' backup."
 msgstr ""
+"Differentiella säkerhetskopior sparar endast de filer som förändrats eller "
+"som är nya sedan den första grundläggande säkerhetskopieringen."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -66,6 +69,11 @@ msgstr "nätverksskrivarport"
 #, c-format
 msgid "Please insert floppy disk:"
 msgstr "Sätt in en diskett:"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "DrakTermServ"
+msgstr "DrakTermServ"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -95,6 +103,11 @@ msgstr "Vilket sorts post vill du lägga till?"
 #, c-format
 msgid "Restore partition table"
 msgstr "Återskapa partitionstabell"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Configure hostname..."
+msgstr "Konfigurera värddatornamn..."
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -212,11 +225,6 @@ msgstr "Gränssnitt:"
 msgid "Select installation class"
 msgstr "Välj installationsklass"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "on CDROM"
-msgstr "på cd-rom"
-
 #: ../../network/tools.pm:1
 #, c-format
 msgid ""
@@ -278,6 +286,11 @@ msgstr "Följande paket kommer att installeras"
 #, c-format
 msgid "CUPS configuration"
 msgstr "CUPS-konfiguration"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Total progress"
+msgstr "Total fortskridning"
 
 #: ../../lang.pm:1
 #, c-format
@@ -431,6 +444,11 @@ msgstr "Ändringen är genomförd, vill du starta om dm-tjänsten?"
 msgid "Swiss (French layout)"
 msgstr "Schweiziskt (Fransk uppsättning)"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "August"
+msgstr "augusti"
+
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed (maybe raidtools are missing?)"
@@ -450,6 +468,11 @@ msgstr "storlek på processorcache (andra nivån)"
 #, c-format
 msgid "Soundcard"
 msgstr "Ljudkort"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Month"
+msgstr "Månad"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -601,6 +624,11 @@ msgstr "Användarnamn"
 msgid "Left \"Windows\" key"
 msgstr "Vänstra \"Windows\"-tangenten"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Guyana"
+msgstr "Guyana"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "dhcpd Server Configuration"
@@ -615,15 +643,15 @@ msgstr ""
 "Används för katalog:\n"
 " endast ägaren av kataloger eller filer i den här katalogen kan ta bort dem"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Guyana"
-msgstr "Guyana"
-
 #: ../../printer/main.pm:1
 #, c-format
 msgid " on Novell server \"%s\", printer \"%s\""
 msgstr " på Novell-server \"%s\", skrivare \"%s\""
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Printer Name"
+msgstr "Skrivarnamn"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -1069,20 +1097,15 @@ msgstr ""
 
 #: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Q"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"Please be sure that the cron daemon is included in your services. \n"
-"\n"
-"Note that currently all 'net' media also use the hard drive."
-msgstr ""
-"Kontrollera att cron-demonen är inkluderad i dina tjänster.\n"
-"\n"
-"Observera att för tillfället använder alla \"net\"-medier hårddisken."
+msgid "Unable to find backups to restore...\n"
+msgstr "Kund einte hitta säkerhetskopior att återställa...\n"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -1203,11 +1226,6 @@ msgstr "Stegvis genomgång av modell"
 msgid "Rwanda"
 msgstr "Rwanda"
 
-#: ../../modules/interactive.pm:1
-#, c-format
-msgid "Do you have any %s interfaces?"
-msgstr "Har du något %s-gränssnitt?"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Switzerland"
@@ -1217,6 +1235,11 @@ msgstr "Schweiz"
 #, c-format
 msgid "Brunei Darussalam"
 msgstr "Brunei"
+
+#: ../../modules/interactive.pm:1
+#, c-format
+msgid "Do you have any %s interfaces?"
+msgstr "Har du något %s-gränssnitt?"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -1311,6 +1334,11 @@ msgstr ""
 msgid "Configure Internet Access..."
 msgstr "Konfigurera Internetåtkomst..."
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Please choose the time interval between each backup"
+msgstr "Välj tidsintervallet mellan varje säkerhetskopiering"
+
 #: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Norway"
@@ -1362,15 +1390,20 @@ msgstr ""
 msgid "When checked, owner and group won't be changed"
 msgstr "Om markerad kommer ägare och grupp inte att ändras"
 
-#: ../../harddrake/data.pm:1
-#, c-format
-msgid "Processors"
-msgstr "Processorer"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Bulgaria"
 msgstr "Bulgarien"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Tuesday"
+msgstr "tisdag"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Processors"
+msgstr "Processorer"
 
 #: ../../lang.pm:1
 #, c-format
@@ -1403,15 +1436,15 @@ msgstr "partitionen %s är känd som %s"
 msgid "Backup Other files..."
 msgstr "Säkerhetskopiera andra filer..."
 
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "SMB server IP"
-msgstr "SMB-serverns IP-adress"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Kinshasa)"
 msgstr "Kongo (Kinshasa)"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "SMB server IP"
+msgstr "SMB-serverns IP-adress"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -1511,11 +1544,6 @@ msgstr "Använd Unicode som standard"
 msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "modulen i GNU/Linux-kärnan som hanterar enheten"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "DVDR device"
-msgstr "DVDR-enhet"
-
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
@@ -1547,6 +1575,10 @@ msgid ""
 "moved to the other media.  Enabling this option will remove the hard drive "
 "tar files after the backup."
 msgstr ""
+"Vid säkerhetskopiering till andra media skapas fortfarande filerna på "
+"hårdisken, och flyttas sedan till det andra mediet.  Aktiveras denna "
+"funktion raderas tar filerna från hårddisken efter säkerhetskopieringen "
+"slutförts."
 
 #: ../../standalone/livedrake:1
 #, c-format
@@ -1596,24 +1628,6 @@ msgstr "Anslutning med kabelmodem"
 #, c-format
 msgid "User"
 msgstr "Användare"
-
-#: ../../fsedit.pm:1
-#, c-format
-msgid ""
-"I can't read the partition table of device %s, it's too corrupted for me :(\n"
-"I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
-"The other solution is to not allow DrakX to modify the partition table.\n"
-"(the error is %s)\n"
-"\n"
-"Do you agree to loose all the partitions?\n"
-msgstr ""
-"Partitionstabellen på enhet %s kan inte läsas, den är alldeles för trasig.\n"
-"Vi kan gå vidare genom att rensa dåliga partitioner (ALLA DATA försvinner!)\n"
-"Den andra lösningen är att förhindra DrakX från att ändra "
-"partitionstabellen.\n"
-"(felet är %s)\n"
-"\n"
-"Accepterar du att förlora alla partitioner?\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -1687,15 +1701,6 @@ msgstr "Skrivarens namn, beskrivning, plats"
 msgid "USA (broadcast)"
 msgstr "USA (broadcast)"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please choose the\n"
-"media for backup."
-msgstr ""
-"Välj mediet för\n"
-"säkerhetskopiering."
-
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "Use Xinerama extension"
@@ -1706,21 +1711,15 @@ msgstr "Använd Xinerama-utökning"
 msgid "Loopback"
 msgstr "Loopback"
 
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid ""
-"Unable to properly close mkbootdisk: \n"
-" %s \n"
-" %s"
-msgstr ""
-"Kunde inte stänga mkbootdisk säkert: \n"
-" %s \n"
-" %s"
-
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "West Europe"
 msgstr "Västeuropa"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "On CD-R"
+msgstr "på cd-rom"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -1754,6 +1753,11 @@ msgstr "Inställningar"
 msgid "Swaziland"
 msgstr "Swaziland"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Dominican Republic"
+msgstr "Dominikanska republiken"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Copying %s"
@@ -1763,11 +1767,6 @@ msgstr "Kopierar %s"
 #, c-format
 msgid "Choose color"
 msgstr "välj färg"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Dominican Republic"
-msgstr "Dominikanska republiken"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -2173,6 +2172,11 @@ msgstr ""
 "Lämna den tom om du inte vill sätta upp en automatisk installation.\n"
 "\n"
 
+#: ../../printer/cups.pm:1 ../../standalone/printerdrake:1
+#, c-format
+msgid "Configured on other machines"
+msgstr "Konfigurerad på andra datorer"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "information level that can be obtained through the cpuid instruction"
@@ -2485,6 +2489,11 @@ msgstr ""
 msgid "Netmask:"
 msgstr "Nätmask:"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Do it later"
+msgstr "Gör det senare"
+
 #: ../../any.pm:1
 #, c-format
 msgid "Append"
@@ -2524,41 +2533,6 @@ msgstr ""
 "\n"
 "Om någon av dessa åtgärder leder till problem så kan du inaktivera\n"
 "detta alternativ, men då måste du åtgärda dessa saker manuellt."
-
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid ""
-"OSS (Open Sound System) was the first sound API. It's an OS independant "
-"sound API (it's available on most unices systems) but it's a very basic and "
-"limited API.\n"
-"What's more, OSS drivers all reinvent the wheel.\n"
-"\n"
-"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
-"which\n"
-"supports quite a large range of ISA, USB and PCI cards.\n"
-"\n"
-"It also provides a much higher API than OSS.\n"
-"\n"
-"To use alsa, one can either use:\n"
-"- the old compatibility OSS api\n"
-"- the new ALSA api that provides many enhanced features but requires using "
-"the ALSA library.\n"
-msgstr ""
-"OSS (Open Sound System) var det första ljudgränssnittet. Det är ett OS-"
-"oberoende ljudgränssnitt (det finns tillgängligt på de flesta Unix-system) "
-"men är ett väldigt grundläggande och begränsat gränssnitt.\n"
-"OSS-drivrutiner uppfinner alla hjulet på nytt.\n"
-"\n"
-"Alsa (Advanced Linux Sound Architecture) är en modulariserad arkitektur "
-"vilken\n"
-"stödjer ett stort antal ISA-, USB- och PCI-kort.\n"
-"\n"
-"Det tillhandahåller också ett mycket högre gränssnitt än OSS.\n"
-"\n"
-"För att använda Alsa kan man antingen använda:\n"
-"- det gamla kompatibla OSS-gränssnittet\n"
-"- det nya Alsa-gränssnittet som tillhandahåller många utökade funktioner men "
-"kräver att Alsa-biblioteket används.\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -2666,6 +2640,11 @@ msgstr "Somalia"
 msgid "No open source driver"
 msgstr "Ingen drivrutin med öppen källkod"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Def."
+msgstr "Def."
+
 #: ../../security/level.pm:1
 #, c-format
 msgid ""
@@ -2689,6 +2668,11 @@ msgstr "Nya Caledonien"
 #, c-format
 msgid "European protocol (EDSS1)"
 msgstr "Protokoll för Europa (EDSS1)"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Delete"
+msgstr "/_Ta bort"
 
 #: ../../any.pm:1
 #, c-format
@@ -3056,6 +3040,11 @@ msgstr ""
 msgid "Saint Lucia"
 msgstr "Sankt Lucia"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "November"
+msgstr "november"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Disconnect..."
@@ -3243,6 +3232,11 @@ msgstr ""
 msgid "All primary partitions are used"
 msgstr "Alla primära partitioner används"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid "LPD server \"%s\", printer \"%s\""
+msgstr "LPD-server \"%s\", skrivare \"%s\""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
@@ -3299,13 +3293,13 @@ msgstr "Värddator %s"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Armenia"
-msgstr "Armenien"
+msgid "Fiji"
+msgstr "Fiji"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Fiji"
-msgstr "Fiji"
+msgid "Armenia"
+msgstr "Armenien"
 
 #: ../../any.pm:1
 #, c-format
@@ -3316,6 +3310,11 @@ msgstr "Andra diskettstationen"
 #, c-format
 msgid "About Harddrake"
 msgstr "Om Harddrake"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Authorize TCP connections to X Window"
+msgstr "Tillåt TPC-anslutningar X Window"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -3389,6 +3388,11 @@ msgstr ""
 "\n"
 "%s\n"
 "är direktanslutna till datorn\n"
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid "Multi-function device on parallel port #%s"
+msgstr "Flerfunktionsenhet på parallellport nummer %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -3522,15 +3526,15 @@ msgstr "Rumänien"
 msgid "Group"
 msgstr "Grupp"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "välj enhet"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Canada"
 msgstr "Kanada"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "choose device"
+msgstr "välj enhet"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -3551,7 +3555,7 @@ msgid "German"
 msgstr "Tyskt"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
+#: ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Next ->"
@@ -3599,7 +3603,7 @@ msgstr "Guinea-Bissau"
 msgid "Horizontal refresh rate"
 msgstr "Horisontell uppdateringsfrekvens"
 
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakperm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Edit"
 msgstr "Redigera"
@@ -3722,6 +3726,11 @@ msgstr ""
 msgid "Re-generating list of configured scanners ..."
 msgstr "Gör om listan på konfigurerade bildläsare"
 
+#: ../../modules/interactive.pm:1
+#, c-format
+msgid "Module configuration"
+msgstr "Modul konfiguration"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Scanner"
@@ -3731,11 +3740,6 @@ msgstr "Bildläsare"
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr "Varning: att testa det här grafikkortet kan låsa datorn"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Bad Ip"
-msgstr "Felaktigt IP"
 
 #: ../../any.pm:1
 #, c-format
@@ -3779,15 +3783,15 @@ msgstr "Avbryt"
 msgid "No password prompt on %s at port %s"
 msgstr "Ingen lösenordsprompt på %s vid port %s"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Kensington Thinking Mouse with Wheel emulation"
+msgstr "Kensington Thinking Mouse med hjulemulering"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Usage of remote scanners"
 msgstr "Användning av fjärrbildläsare"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "\t-CDROM.\n"
-msgstr "\t-Cd-rom.\n"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3808,7 +3812,7 @@ msgstr "Dvorak (Norskt)"
 msgid "Hard Disk Backup Progress..."
 msgstr "Fortskridning av hårddisksäkerhetskopiering..."
 
-#: ../../standalone/drakfloppy:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
 #, c-format
 msgid "Unable to fork: %s"
 msgstr "Kan inte dela: %s"
@@ -4044,6 +4048,11 @@ msgstr "Återställ från band"
 msgid "Choose the profile to configure"
 msgstr "Välj profil att konfigurera"
 
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Password minimum length and number of digits and upcase letters"
+msgstr "Lösenordets minimumlängd och antal siffror och stora bokstäver"
+
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid ""
@@ -4076,6 +4085,11 @@ msgstr "Startar om skrivarsystem..."
 #, c-format
 msgid "See hardware info"
 msgstr "Visa hårdvaruinformation"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Day"
+msgstr "Dag"
 
 #: ../../any.pm:1
 #, c-format
@@ -4129,15 +4143,17 @@ msgstr ""
 msgid "Subnet Mask:"
 msgstr "Undernätmask:"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "Installation av teman för Lilo och startskärm lyckades"
-
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Set password expiration and account inactivation delays"
 msgstr "Sätt bäst före datum på lösenord, och fördröjning av kontoavstängning."
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid ""
+"_: load here is a noun, the load of the system\n"
+"Load"
+msgstr "Ladda"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -4184,6 +4200,11 @@ msgstr ""
 #, c-format
 msgid "Need hostname, username and password!"
 msgstr "Behöver värddatornamn, användarnamn och lösenord."
+
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Insert floppy"
+msgstr "Sätt i en diskett"
 
 #: ../../diskdrake/dav.pm:1
 #, c-format
@@ -4247,6 +4268,15 @@ msgstr ""
 msgid "Do not include the browser cache"
 msgstr "Inkludera inte webbläsarcachen"
 
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid ""
+"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
+"you can lose data)"
+msgstr ""
+"Misslyckades med att kontrollera filsystemet %s. Vill du reparera felen? (du "
+"kan förlora data)"
+
 #: ../../standalone/keyboarddrake:1
 #, c-format
 msgid "Please, choose your keyboard layout."
@@ -4302,6 +4332,11 @@ msgstr "GlidePoint"
 msgid "Start: sector %s\n"
 msgstr "Start: sektor %s\n"
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "No Mask"
+msgstr "Ingen mask"
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Network interface already configured"
@@ -4327,6 +4362,11 @@ msgstr "E-postserver"
 msgid "Please click on a partition"
 msgstr "Klicka på en partition"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid "Multi-function device on HP JetDirect"
+msgstr "Flerfunktionsenhet på HP JetDirect"
+
 #: ../../any.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Linux"
@@ -4336,11 +4376,6 @@ msgstr "Linux"
 #, c-format
 msgid "Have a nice day!"
 msgstr "Ha en trevlig dag!"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "across Network"
-msgstr "över nätverk"
 
 #: ../../help.pm:1
 #, c-format
@@ -4469,6 +4504,17 @@ msgstr ""
 "Du har inte valt några gruppaket.\n"
 "Välj den minimala installationen du vill ha:"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid ""
+"You need the Alcatel microcode.\n"
+"You can provide it now via a floppy or your windows partition,\n"
+"or skip and do it later."
+msgstr ""
+"Nu behövs Alcatel microkod.\n"
+"Du kan göra den tillgänglig via diskett eller eventuell windowspartition,\n"
+"eller så kan du hoppa över detta steg och göra det senare."
+
 #: ../../diskdrake/dav.pm:1
 #, c-format
 msgid "Please enter the WebDAV server URL"
@@ -4486,6 +4532,7 @@ msgid "Accept"
 msgstr "Accepterar"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/harddrake2:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "Description"
 msgstr "Beskrivning"
@@ -4509,11 +4556,6 @@ msgstr "Kortet kan få hårdvarustöd för 3D-acceleration med XFree %s."
 #, c-format
 msgid "Choose a monitor"
 msgstr "Välj bildskärm"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Bad Mask"
-msgstr "Felaktig mask"
 
 #: ../../any.pm:1
 #, c-format
@@ -4621,6 +4663,11 @@ msgstr "Kap Verde"
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
 msgstr "om den här processorn har Cyrix 6x86 Coma-felet eller inte"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Loading printer configuration... Please wait"
+msgstr "Laddar skrivarkonfiguration.... Vänta."
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
@@ -4678,11 +4725,6 @@ msgstr "Userdrake"
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Vilken partition vill du använda för Linux4Win?"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system"
-msgstr "Säkerhetskopiera system"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5179,12 +5221,12 @@ msgstr "Tabell"
 msgid "I don't know how to format %s in type %s"
 msgstr "Vet inte hur man formaterar %s i typ %s"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Model"
 msgstr "Modell"
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "USB printer #%s"
 msgstr "USB-skrivare \\nummer %s"
@@ -5275,6 +5317,11 @@ msgstr "Hitta automatiskt tillgängliga skrivare på fjärrdatorer"
 #, c-format
 msgid "East Timor"
 msgstr "Öst Timor"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "On Tape Device"
+msgstr "på bandenhet"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -5389,15 +5436,15 @@ msgstr ""
 msgid "Start sector: "
 msgstr "Startsektor: "
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Read"
-msgstr "Läs"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Brazzaville)"
 msgstr "Kongo (Brazzaville)"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Read"
+msgstr "Läs"
 
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
@@ -5453,6 +5500,15 @@ msgstr ""
 msgid "Right Control key"
 msgstr "Högra kontroll-tangenten"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid ""
+"Insert a FAT formatted floppy in drive %s with %s in root directory and "
+"press %s"
+msgstr ""
+"Sätt in en FAT-formaterad diskett i diskettstationen %s med %s i "
+"rotkatalogen ochb klicka på %s"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -5478,15 +5534,15 @@ msgstr "Rumänskt (qwerty)"
 msgid "Under Devel ... please wait."
 msgstr "Under utveckling... vänta."
 
-#: ../../crypto.pm:1 ../../lang.pm:1
-#, c-format
-msgid "Czech Republic"
-msgstr "Tjeckiskt"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Egypt"
 msgstr "Egypten"
+
+#: ../../crypto.pm:1 ../../lang.pm:1
+#, c-format
+msgid "Czech Republic"
+msgstr "Tjeckiskt"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -5620,6 +5676,11 @@ msgstr "Ekvatorialguinea"
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "Backup System"
+msgstr "Säkerhetskopiera system"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Build Backup"
 msgstr "Bygg säkerhetskopia"
 
@@ -5663,10 +5724,127 @@ msgstr ""
 msgid "Kiribati"
 msgstr "Kiribati"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Logitech Mouse (serial, old C7 type) with Wheel emulation"
+msgstr "Logitech Mouse (seriell, gammal C7-typ) med hjulemulering"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Other (not drakbackup) keys in place already"
 msgstr "Andra (inte Drakbackup-) nycklar finns redan"
+
+#: ../../help.pm:1
+#, c-format
+msgid ""
+"X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
+"on which all the graphical environments (KDE, GNOME, AfterStep,\n"
+"WindowMaker, etc.) bundled with Mandrake Linux rely upon.\n"
+"\n"
+"You will be presented with a list of different parameters to change to get\n"
+"an optimal graphical display: Graphic Card\n"
+"\n"
+"   The installer will normally automatically detect and configure the\n"
+"graphic card installed on your machine. If it is not the case, you can\n"
+"choose from this list the card you actually have installed.\n"
+"\n"
+"   In the case that different servers are available for your card, with or\n"
+"without 3D acceleration, you are then asked to choose the server that best\n"
+"suits your needs.\n"
+"\n"
+"\n"
+"\n"
+"Monitor\n"
+"\n"
+"   The installer will normally automatically detect and configure the\n"
+"monitor connected to your machine. If it is incorrect, you can choose from\n"
+"this list the monitor you actually have connected to your computer.\n"
+"\n"
+"\n"
+"\n"
+"Resolution\n"
+"\n"
+"   Here you can choose the resolutions and color depths available for your\n"
+"hardware. Choose the one that best suits your needs (you will be able to\n"
+"change that after installation though). A sample of the chosen\n"
+"configuration is shown in the monitor.\n"
+"\n"
+"\n"
+"\n"
+"Test\n"
+"\n"
+"   the system will try to open a graphical screen at the desired\n"
+"resolution. If you can see the message during the test and answer \"%s\",\n"
+"then DrakX will proceed to the next step. If you cannot see the message, it\n"
+"means that some part of the autodetected configuration was incorrect and\n"
+"the test will automatically end after 12 seconds, bringing you back to the\n"
+"menu. Change settings until you get a correct graphical display.\n"
+"\n"
+"\n"
+"\n"
+"Options\n"
+"\n"
+"   Here you can choose whether you want to have your machine automatically\n"
+"switch to a graphical interface at boot. Obviously, you want to check\n"
+"\"%s\" if your machine is to act as a server, or if you were not successful\n"
+"in getting the display configured."
+msgstr ""
+"X (som står för X Window System) är hjärtat i det grafiska gränssnittet\n"
+"i GNU/Linux. Alla grafiska miljöer som följer med Mandrake Linux\n"
+"(KDE, GNOME, AfterStep, WindowMaker osv) är beroende av det\n"
+"för att fungera.\n"
+"\n"
+"Du kommer att kunna välja ett antal parametrar för att få den optimala\n"
+"grafiska bilden: Grafikkort\n"
+"\n"
+"   Installationsprogrammet kommer vanligtvis automatiskt att\n"
+"känna av och konfigurera grafikkortet som är installerat på\n"
+"datorn. Om detta är inte fungerar så kan du välja ditt kort från\n"
+"en lista.\n"
+"\n"
+"   Om det finns flera servrar tillgängliga för ditt kort, med eller utan\n"
+"3D-acceleration, kommer du att ombedas välja den server som\n"
+"bäst passar dina behov.\n"
+"\n"
+"\n"
+"\n"
+"Skärm\n"
+"\n"
+"   Installationsprogrammet kommer vanligtvis automatiskt att\n"
+"känna av och konfigurera vilken skärm som är kopplad till\n"
+"datorn. Om detta är inte fungerar så kan du välja din skärm från\n"
+"en lista.\n"
+"\n"
+"\n"
+"\n"
+"Upplösning\n"
+"\n"
+"   Här kan du välja vilken upplösning och antal färger som din\n"
+"hårdvara ska använda. Välj den som bäst passar dina behov\n"
+"(du kan alltid ändra det när installationen är klar). Ett exempel\n"
+"av den valda konfigurationen visas i bildskärmen.\n"
+"\n"
+"\n"
+"\n"
+"Testa\n"
+"\n"
+"   Systemet kommer att försöka öppna en grafisk skärm med önskad\n"
+"upplösning. Om du kan se meddelandet under testet och svara \"%s\"\n"
+"kommer DrakX att gå vidare till nästa steg. Om du inte kan se\n"
+"meddelandet så betyder det att någonting var fel med den automatiska\n"
+"konfigureringen och testet kommer automatiskt att avslutas efter 12 "
+"sekunder\n"
+"och du kommer tillbaka till menyn. Ändra inställningarna tills du får en\n"
+"korrekt konfigurerad grafisk bild.\n"
+"\n"
+"\n"
+"\n"
+"Alternativ\n"
+"\n"
+"Här kan du välja om du vill att datorn automatiskt ska starta ett grafiskt\n"
+"gränssnitt vid uppstart. Du bör kryssa för \"%s\" om din dator ska\n"
+"agera som server, eller om du inte lyckades med att konfigurera\n"
+"bilden."
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -5743,328 +5921,6 @@ msgstr ""
 "in IP-nummer och eventuellt portnummer här för att få skrivarinformation\n"
 "från servern."
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"drakTermServ Overview\n"
-"\t\t\t   \n"
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel.\n"
-"\n"
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:\n"
-"        \t\t\n"
-"\t\t\t\thost curly {\n"
-"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
-"\t\t\t\t\tfixed-address              192.168.192.3;\n"
-"\t\t\t\t\t#type                          fat;\n"
-"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
-"nbi\";\n"
-"\t\t\t\t\t#hdw_config                true;\n"
-"\t\t\t\t}\n"
-"\t\t\t\n"
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating seperate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login priviledges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing "
-"clients.\n"
-"\t\t\t\n"
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network.\n"
-"        \t\t\n"
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file.\n"
-"\n"
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files.\n"
-"\n"
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have it's own "
-"unique configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured.\n"
-"\t\t\n"
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"        \t\t(\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs it's images.\n"
-"\n"
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
-" \n"
-"\n"
-msgstr ""
-"Översikt av drakTermServ\n"
-"\t\t\t   \n"
-"        - Skapa Etherboot-baserad startavbild:\n"
-"        \t\tFör att starta en kärna via Etherboot, måste en speciell kärn/"
-"initrd-\n"
-"avbild skapas.\n"
-"        \t\tmkinitrd-net gör det mesta av arbetet och drakTermServ är "
-"enbart \n"
-"ett grafiskt gränssnitt \n"
-"        \t\tsom hjälper dig skapa/konfigurera dessa avbilder. För att skapa "
-"filen \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include som inkluderas i \n"
-"        \t\tdhcpd.conf, så bör du skapa Etherboot-avbilder för minst en "
-"komplett kärna.\n"
-"\n"
-"        - Underhåll av /etc/dhcpd.conf:\n"
-"        \t\tVarje net boot-klient behöver en post i dhcpd.conf som tilldelar "
-"dem en IP-adress\n"
-"        \t\toch en net boot-avbild. drakTermServ hjälper dig skapa/radera "
-"dessa poster.\n"
-"\t\t\t\n"
-"        \t\t(PCI-kort kan utlämna avbilden - Etherboot kommer att be om "
-"korrekt avbild. Du bör också\n"
-"        \t\ttänka på att när Etherboot söker efter avbilder så förväntar "
-"den \n"
-"sig namn enligt mallen\n"
-"        \t\tboot-3c59x.nbi, snarare än boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\n"
-"        \t\tEn typisk dhcpd.conf-post för att stödja en klient utan "
-"hårddisk\n"
-"ser ut på följande vis:\n"
-"\n"
-"\t\t\t\thost curly {\n"
-"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
-"\t\t\t\t\tfixed-address              192.168.192.3;\n"
-"\t\t\t\t\t#type                          fat;\n"
-"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
-"nbi\";\n"
-"\t\t\t\t\t#hdw_config                true;\n"
-"\t\t\t\t}\n"
-"\t\t\t\n"
-"\t\t\tDu kan använda en samling av IP-adresser istället för en specifik post "
-"för varje\n"
-"\t\t\tklient, men fasta adresser underlättar användandet av klient-"
-"specifikakonfigurationsfiler\n"
-"\t\t\tsom ClusterNFS tillhandahåller.\n"
-"\t\t\t\n"
-"\t\t\tObs: The \"#type\"-raden används endast av drakTermServ. Klienter kan "
-"vara antingen \"thin\"\n"
-"\t\t\teller \"fat\".  Tunna klienter kör de flesta programmen på servern "
-"genom xdmcp, feta klienter kör \n"
-"\t\t\tde flesta programmen lokalt på klienten. En specifik inittab-fil, /etc/"
-"inittab\\$\\$IP=client_ip\\$\\$ skrivs\n"
-"\t\t\tför tunna klienter. Systemkonfigurationsfilerna xdm-config, kdmrc, och "
-"gdm.conf modifieras \n"
-"\t\t\tom tunna klienter används, för att möjliggöra xdmcp. Eftersom det "
-"finns vissa säkerhetsaspekter vid användningen \n"
-"\t\t\tav xdmcp modifieras hosts.deny och hosts.allow för att begränsa "
-"tillgång till det lokala\n"
-"\t\t\tsubnätet.\n"
-"\t\t\t\n"
-"\t\t\tObs: \"#hdw_config\"-raden används också enbart av drakTermServ.  "
-"Klienter kan vara \n"
-"\t\t\t\"true\" eller \"false\". \"true\" tillåter root-inloggning vid "
-"klientdatorn och tillåter lokal \n"
-"\t\t\tkonfigurering av hårdvara för ljud, mus, och X via \"drak\"-verktygen. "
-"Detta möjliggörs genom\n"
-"\t\t\tatt skapa separata konfigurationsfiler associerade med klientens IP-"
-"address and skapa \n"
-"\t\t\tläs/skriv-monteringspunkter som gör det möjligt för klienterna att "
-"ändra filen. När du är nöjd \n"
-"\t\t\tmed konfigurationen kan du ta bort root-inloggningsmöjligheten från "
-"klienten.\n"
-"\t\t\t\n"
-"\t\t\tObs: Du måste stoppa/starta om servern efter att du lagt till eller "
-"ändrat klienter.\n"
-"\t\t\t\n"
-"        - Underhåll av /etc/exports:\n"
-"        \t\tClusternfs tillåter export av rotfilsystemet till hårddisklösa "
-"klienter. drakTermServ\n"
-"        \t\tskriver en post som tillåter anonym tillgång till rotfilsystemet "
-"från hårdisk-\n"
-"        \t\tlösa klienter.\n"
-"\n"
-"        \t\tEn typisk export-post för clusternfs:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tMed SUBNET/MASK definierat för ditt nätverk.\n"
-"        \t\t\n"
-"        - Underhåll av /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFör att användare ska kunna logga in i systemet från en "
-"hårddisklösklient behöver deras post i\n"
-"        \t\t/etc/shadow kopieras till /etc/shadow\\$\\$CLIENTS\\$\\$. "
-"drakTermServ hjälper till\n"
-"        \t\tgenom att lägga till eller ta bort användare från denna fil.\n"
-"\n"
-"        - Klientspecifik /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tGenom clusternfs kan varje hårdisklös klient ha sina egen unika "
-"konfigurationsfiler\n"
-"        \t\tpå serverns rot filsystem. Genom att tillåta lokal "
-"hårdvarukonfigurering per klient, \n"
-"        \t\thjälper drakTermServ dig att skapa dessa filer.\n"
-"\n"
-"        - Klientspecifika systemkonfigureringsfiler:\n"
-"        \t\tGenom clusternfs kan varje hårddisklös klient ha sina egna unika "
-"konfigurationsfiler\n"
-"        \t\tpå serverns rotfilsystem. Genom att tillåta lokal "
-"hårdvarukonfiguration på klienterna kan filer, \n"
-"\t\t\t\tsom /etc/modules.conf, /etc/sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard konfigureras per klient.\n"
-"\n"
-"        Obs: Lokal hårdvarukonfigurering gör det möjligt att logga in som "
-"root på terminalservern \n"
-"        på varje klient som har detta aktiverat. Lokal konfigurering kan "
-"stängas av igen när klientdatorn konfigurerats färdigt, \n"
-"        konfigurationsfilerna kommer att sparas.\n"
-"\t\t\n"
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ konfigurerar denna fil så den fungerar tillsammans "
-"med avbilderna som skapats av \n"
-"        \t\tmkinitrd-net, och posterna i /etc/dhcpd.conf, för att skicka "
-"startavbilden till respektive\n"
-"        \t\thårddisklös klient.\n"
-"\n"
-"        \t\tEn typisk tftp-konfigurationsfil ser ut på följande sätt:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"        \t\t(\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tDe förändringar av grundinställningarna som görs är att ändra "
-"\"disable\"-flaggan till\n"
-"        \t\t\"no\", och ändra sökvägen där mkinitrd-net sparar sina avbilder "
-"till  \n"
-"/var/lib/tftpboot \n"
-"\n"
-"        - Skapa Etherboot-diskett/cd:\n"
-"        \t\tDe hårddisklösa klientdatorerna behöver antingen ROM-avbilder på "
-"nätverkskortet, en startdiskett eller\n"
-"        \t\ten CD för att starta. drakTermServ hjälper dig att skapa dessa "
-"avbilder,\n"
-"        \t\tbaserade på nätverkskortet i respektive klient.\n"
-"        \t\t\n"
-"        \t\tEtt enkelt exempel på en manuellt skapad startdiskett för ett "
-"3Com 3c509-kort:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
-" \n"
-"\n"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "%s is not in the scanner database, configure it manually?"
@@ -6120,8 +5976,7 @@ msgstr "Hittade %s"
 msgid "/Autodetect _printers"
 msgstr "/Identifiera skrivare a_utomatiskt"
 
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../interactive/newt.pm:1
+#: ../../interactive.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #, c-format
 msgid "Finish"
 msgstr "Slutför"
@@ -6178,7 +6033,7 @@ msgstr "Välj enskilda paket"
 msgid "This partition is not resizeable"
 msgstr "Denna partition kan inte ändra storlek"
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Location"
 msgstr "Placering"
@@ -6187,6 +6042,11 @@ msgstr "Placering"
 #, c-format
 msgid "USA (cable-hrc)"
 msgstr "USA (kabel-hrc)"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Guatemala"
+msgstr "Guatemala"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -6198,11 +6058,6 @@ msgstr "Journalförande FS"
 msgid "Ethernet cards promiscuity check"
 msgstr "Promiscuity-kontroll för Ethernet-kort"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Guatemala"
-msgstr "Guatemala"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "This machine"
@@ -6213,15 +6068,15 @@ msgstr "Den här datorn"
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS-enhetsbokstav: %s (bara en gissning)\n"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Select the files or directories and click on 'OK'"
-msgstr "Välj filerna eller katalogerna och klicka på \"OK\""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Bahrain"
 msgstr "Bahrain"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Select the files or directories and click on 'OK'"
+msgstr "Välj filerna eller katalogerna och klicka på \"OK\""
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -6269,6 +6124,11 @@ msgstr ""
 msgid "Maltese (US)"
 msgstr "Maltese (US)"
 
+#: ../../standalone/drakfloppy:1
+#, c-format
+msgid "The creation of the boot floppy has been successfully completed \n"
+msgstr "Startdisketten har skapats \n"
+
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -6313,15 +6173,13 @@ msgstr "Logitech MouseMan+/FirstMouse+"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "Not the correct tape label. Tape is labelled %s."
-msgstr "Inte korrekt bandetikett. Bandet har etikett %s."
+msgid "Thursday"
+msgstr "torsdag"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"For a mulitsession CD, only the first session will erase the cdrw. Otherwise "
-"the cdrw is erased before each backup."
-msgstr ""
+msgid "Not the correct tape label. Tape is labelled %s."
+msgstr "Inte korrekt bandetikett. Bandet har etikett %s."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -6440,6 +6298,11 @@ msgstr ""
 "mot den.\n"
 "Observera: om datorn enbart är en klient bör du välja en lägre nivå."
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Server Name"
+msgstr "Servernamn"
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Password"
@@ -6468,6 +6331,30 @@ msgstr ""
 "(t ex System Commander).\n"
 "\n"
 "Vilken hårddisk startar du på?"
+
+#: ../../install_interactive.pm:1
+#, c-format
+msgid ""
+"WARNING!\n"
+"\n"
+"DrakX will now resize your Windows partition. Be careful: this\n"
+"operation is dangerous. If you have not already done so, you\n"
+"first need to exit the installation, run \"chkdsk c:\" from a\n"
+"Command Prompt under Windows (beware, running graphical program\n"
+"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a\n"
+"Command Prompt!), optionally run defrag, then restart the\n"
+"installation. You should also backup your data.\n"
+"When sure, press Ok."
+msgstr ""
+"VARNING!\n"
+"\n"
+"DrakX kommer nu att ändra storleken på Windows-partitionen.\n"
+"Var försiktig: detta moment är riskfyllt. Om du inte redan gjort\n"
+"det, ska du först avsluta installationen och köra \"chkdsk c:\" från ett "
+"terminalfönster i Windows (OBS att köra dett grafiska programmet Scandisk "
+"räcker inte). Defragmentera också hårddisken om det behövs, du bör också "
+"säkerhetskopiera dina data. Starta sedan installationen på nytt.\n"
+"När du är säker, klicka OK."
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6608,15 +6495,6 @@ msgstr ""
 "Sparar och återladdar enropi-poolen för att ge högre kvalitet\n"
 "på systemets slumptalsgenerator."
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid ""
-"Failed to check filesystem %s. Do you want to repair the errors? (beware, "
-"you can loose data)"
-msgstr ""
-"Misslyckades med att kontrollera filsystemet %s. Vill du reparera felen? (du "
-"kan förlora data)"
-
 #: ../../share/advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
@@ -6720,6 +6598,11 @@ msgstr " ("
 msgid "Cpuid level"
 msgstr "Cpuid-nivå"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid "Novell server \"%s\", printer \"%s\""
+msgstr "Novell-server \"%s\", skrivare \"%s\""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Mongolian (cyrillic)"
@@ -6788,6 +6671,11 @@ msgstr "Uruguay"
 msgid "Benin"
 msgstr "Benin"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid "SMB/Windows server \"%s\", share \"%s\""
+msgstr "SMB/Windows-server \"%s\", utdelning \"%s\""
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Path selection"
@@ -6802,6 +6690,11 @@ msgstr "Namn/IP-adress på värddator:"
 #, c-format
 msgid "Monitor: %s\n"
 msgstr "Bildskärm: %s\n"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Custom & system settings"
+msgstr "Anpassade och systeminställningar"
 
 #: ../../partition_table/raw.pm:1
 #, c-format
@@ -6860,6 +6753,11 @@ msgstr "Fortsätt"
 #, c-format
 msgid "Custom Restore"
 msgstr "Egen återställning"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Saturday"
+msgstr "lördag"
 
 #: ../../help.pm:1
 #, c-format
@@ -6934,6 +6832,11 @@ msgstr "Installera/Uppdatera"
 msgid "%d packages"
 msgstr "%d paket"
 
+#: ../../crypto.pm:1 ../../lang.pm:1
+#, c-format
+msgid "Costa Rica"
+msgstr "Costa Ricanskt"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -6984,11 +6887,6 @@ msgstr ""
 "\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
 "\n"
 
-#: ../../crypto.pm:1 ../../lang.pm:1
-#, c-format
-msgid "Costa Rica"
-msgstr "Costa Ricanskt"
-
 #: ../../security/level.pm:1
 #, c-format
 msgid "Use libsafe for servers"
@@ -7019,25 +6917,15 @@ msgstr ""
 "Maximal storlek\n"
 " som tillåts för Drakbackup (MB)"
 
-#: ../../my_gtk.pm:1
+#: ../../loopback.pm:1
 #, c-format
-msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
-msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
+msgid "Circular mounts %s\n"
+msgstr "Cirkulära monteringar %s\n"
 
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Lilo/grub mode"
 msgstr "Lilo/Grub-läge"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "Output"
-msgstr "Utdata"
-
-#: ../../loopback.pm:1
-#, c-format
-msgid "Circular mounts %s\n"
-msgstr "Cirkulära monteringar %s\n"
 
 #: ../../lang.pm:1
 #, c-format
@@ -7084,6 +6972,11 @@ msgstr ""
 "Du kommer att få en underrättelse om en av de valda tjänsterna inte längre "
 "körs"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Weekday"
+msgstr "Veckodag"
+
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Filesystem types:"
@@ -7117,6 +7010,37 @@ msgstr ""
 #, c-format
 msgid "Floppy"
 msgstr "Diskett"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \t\tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \t\tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \t\tdiskless clients.\n"
+"\n"
+"        \t\tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t\t/                  (ro,all_squash)\n"
+"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tWith SUBNET/MASK being defined for your network."
+msgstr ""
+"        - Underhåll av /etc/exports:\n"
+"        \t\tClusternfs tillåter export av rotfilsystemet till hårddisklösa "
+"klienter. drakTermServ\n"
+"        \t\tskriver en post som tillåter anonym tillgång till rotfilsystemet "
+"från hårdisk-\n"
+"        \t\tlösa klienter.\n"
+"\n"
+"        \t\tEn typisk export-post för clusternfs:\n"
+"        \t\t\n"
+"        \t\t/                  (ro,all_squash)\n"
+"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tMed SUBNET/MASK definierat för ditt nätverk."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7152,6 +7076,11 @@ msgstr "SMB-servervärddator"
 #, c-format
 msgid "Name Servers:"
 msgstr "Namnservrar:"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Minute"
+msgstr "Minut"
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -7214,6 +7143,11 @@ msgstr ""
 "respektive upphovsmän, och är skyddade av\n"
 "imaterialrätt/copyright-lagstiftning som kan appliceras på mjukvara.\n"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Expert mode"
+msgstr "/_Expertläge"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove this printer from Star Office/OpenOffice.org/GIMP"
@@ -7228,15 +7162,15 @@ msgstr ""
 "Linux Virtual Server, används för att bygga en högpresterande\n"
 "och tillgänglig server."
 
-#: ../../Xconfig/resolution_and_depth.pm:1
-#, c-format
-msgid "4 billion colors (32 bits)"
-msgstr "4 miljarder färger (32 bitar)"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Micronesia"
 msgstr "Mikronesien"
+
+#: ../../Xconfig/resolution_and_depth.pm:1
+#, c-format
+msgid "4 billion colors (32 bits)"
+msgstr "4 miljarder färger (32 bitar)"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7247,6 +7181,96 @@ msgstr "Licens"
 #, c-format
 msgid "This may take a moment to generate the keys."
 msgstr "Det kan ta en stund att generera nycklarna."
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid ""
+"Here, you can setup the security level and administrator of your machine.\n"
+"\n"
+"\n"
+"The Security Administrator is the one who will receive security alerts if "
+"the\n"
+"'Security Alerts' option is set. It can be a username or an email.\n"
+"\n"
+"\n"
+"The Security Level menu allows you to select one of the six preconfigured "
+"security levels\n"
+"provided with msec. These levels range from poor security and ease of use, "
+"to\n"
+"paranoid config, suitable for very sensitive server applications:\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
+"very\n"
+"easy to use security level. It should only be used for machines not "
+"connected to\n"
+"any network and that are not accessible to everybody.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
+"security\n"
+"recommended for a computer that will be used to connect to the Internet as "
+"a\n"
+"client.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">High</span>: There are already some\n"
+"restrictions, and more automatic checks are run every night.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
+"enough\n"
+"to use the system as a server which can accept connections from many "
+"clients. If\n"
+"your machine is only a client on the Internet, you should choose a lower "
+"level.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
+"previous\n"
+"level, but the system is entirely closed and security features are at their\n"
+"maximum"
+msgstr ""
+"Nu kan du välja säkerhetsnivå och administratör för din dator.\n"
+"\n"
+"\n"
+"Säkerhetsadministratören är den som kommer att få säkerhetslarm om\n"
+"alternativet \"Säkerhetslarm\" har valts. Säkerhetsadministratören kan\n"
+"identifieras genom ett användarnamn eller en e-postadress.\n"
+"\n"
+"\n"
+"Menyn för säkerhetsnivåer gör det möjligt att välja en av sex\n"
+"fördefinierade säkerhetsnivåer för msec. Dessa nivåer går från\n"
+"enkel användning men med dålig säkerhet till en \"paranoid\"\n"
+"inställning som är lämplig för mycket känsliga serverprogram.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Låg</span>: Detta är en totalt\n"
+"osäker men mycket lättanvänd säkerhetsnivå. Den bör endast användas\n"
+"för datorer som inte är uppkopplade mot något nätverk och som inte är "
+"placerad\n"
+"så att den kan användas av obehöriga.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Normal</span>: Denna standardnivå\n"
+"rekommenderas för datorer som kommer att vara uppkopplade mot\n"
+"Internet som en klient.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Hög</span>: Det finns några\n"
+"begränsningar, och flera automatiska kontroller körs varje natt.\n"
+"\n"
+"\n"
+"<span foreground=\"royalblue3\">Högre</span>: På den här \n"
+"säkerhetsnivån är det möjligt att använda datorn som en server.\n"
+"Säkerheten är hög nog för en server som tillåter att många klienter ansluter "
+"mot den.\n"
+"Observera: om datorn enbart är en klient bör du välja en lägre nivå.\n"
+"\n"
+"\n"
+" <span foreground=\"royalblue3\">Paranoid</span>:Baserat på föregående nivå, "
+"men systemet är helt stängt.\n"
+"Alla säkerhetsfunktioner är aktiverade."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7293,10 +7317,10 @@ msgstr "Felsökning av ljud"
 msgid "Polish (qwerty layout)"
 msgstr "Polskt (querty-layout)"
 
-#: ../../standalone/drakconnect:1
+#: ../../standalone/printerdrake:1
 #, c-format
-msgid "activate now"
-msgstr "aktivera nu"
+msgid "/_Add Printer"
+msgstr "/_Lägg till Skrivare"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7590,15 +7614,15 @@ msgstr "Vilken partition vill du ändra storlek på?"
 msgid "United States Minor Outlying Islands"
 msgstr "USA:s mindre avlägsna öar"
 
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "A tool to monitor your logs"
-msgstr "Verktyg för att övervaka loggar"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Djibouti"
 msgstr "Djibouti"
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "A tool to monitor your logs"
+msgstr "Verktyg för att övervaka loggar"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -7615,6 +7639,11 @@ msgstr "LPD"
 msgid "Graphics card: %s\n"
 msgstr "Grafikkort: %s\n"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/Set as _Default"
+msgstr "/Välj som _Standard"
+
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Accept icmp echo"
@@ -7624,6 +7653,11 @@ msgstr "Acceptera icmp echo"
 #, c-format
 msgid "Yaboot"
 msgstr "Yaboot"
+
+#: ../../mouse.pm:1
+#, c-format
+msgid "Logitech CC Series with Wheel emulation"
+msgstr "Logitech CC Series med hjulemulering"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -7718,6 +7752,11 @@ msgstr "Välj en enhet."
 #, c-format
 msgid "Remove selected server"
 msgstr "Ta bort vald server"
+
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Sagem (using dhcp) usb"
+msgstr "Sagem (använder dhcp) usb"
 
 #: ../../lang.pm:1
 #, c-format
@@ -7862,6 +7901,11 @@ msgstr "Grekiskt"
 msgid "Saint Kitts and Nevis"
 msgstr "Sankt Kitts Nevis"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic 3 Button Mouse with Wheel emulation"
+msgstr "Allmän 3-knapparsmus med hjulemulering"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -7915,6 +7959,11 @@ msgstr ""
 "Ett fel uppstod:\n"
 "%s\n"
 "Försök att ändra några parametrar"
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid "TCP/IP host \"%s\", port %s"
+msgstr "TCP/IP-värddator \"%s\", port %s"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -8026,6 +8075,11 @@ msgstr "Mongoliet"
 msgid "Mounted\n"
 msgstr "Monterad\n"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Configure CUPS"
+msgstr "Konfigurera CUPS"
+
 #: ../../help.pm:1
 #, c-format
 msgid "Graphical Interface"
@@ -8114,11 +8168,6 @@ msgstr ", värddator \"%s\", port %s"
 msgid "Monaco"
 msgstr "Monaco"
 
-#: ../../security/l10n.pm:1
-#, c-format
-msgid "Do not send mails when uneeded"
-msgstr "Skicka inte onödig e-post"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Partitioning failed: %s"
@@ -8133,6 +8182,11 @@ msgstr "%s formatering av %s misslyckades"
 #, c-format
 msgid "Canada (cable)"
 msgstr "Kanada (kabel)"
+
+#: ../../standalone/drakfloppy:1
+#, c-format
+msgid "Floppy creation completed"
+msgstr "Disketten har skapats klart"
 
 #: ../../help.pm:1
 #, c-format
@@ -8158,6 +8212,11 @@ msgstr ""
 msgid "Kyrgyzstan"
 msgstr "Kirgisistan"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid "Multi-function device on USB"
+msgstr "Flerfunktionsenhet på USB"
+
 #: ../../help.pm:1
 #, c-format
 msgid "With basic documentation"
@@ -8179,6 +8238,11 @@ msgstr ""
 "För detta, skapa en partition (eller klicka på en befintlig).\n"
 "Välj sedan åtgärden \"monteringspunkt\" och ange den som \"/\"."
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Western Sahara"
+msgstr "Västsahara"
+
 #: ../../network/network.pm:1
 #, c-format
 msgid "Proxy should be http://..."
@@ -8188,11 +8252,6 @@ msgstr "Proxy ska vara http://..."
 #, c-format
 msgid "South Africa"
 msgstr "Sydafrika"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Western Sahara"
-msgstr "Västsahara"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8238,6 +8297,11 @@ msgstr ""
 "Uppdatera inte inode-åtkomsttider på detta filsystem\n"
 "(ger snabbare tillgång till \"news spool\" för att snabba upp "
 "diskussionsgruppsservrar)"
+
+#: ../../mouse.pm:1
+#, c-format
+msgid "3 buttons with Wheel emulation"
+msgstr "3 knappar med hjulemulering"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -8312,6 +8376,11 @@ msgstr "Malawi"
 msgid "local config: false"
 msgstr "Lokal konfigurering: falsk"
 
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "System settings"
+msgstr "Systeminställningar"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Please choose your type of mouse."
@@ -8341,15 +8410,15 @@ msgstr "Storbritannien"
 msgid "running"
 msgstr "startad"
 
-#: ../../standalone/draksec:1
-#, c-format
-msgid "default"
-msgstr "standard"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Indonesia"
 msgstr "Indonesien"
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid "default"
+msgstr "standard"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -8393,6 +8462,11 @@ msgid ""
 msgstr ""
 "Ett fullt utbud av Linux-lösningar, samt specialerbjudanden på produkter och "
 "annat \"godis\" återfinns i vår nätbutik."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "March"
+msgstr "mars"
 
 #: ../../any.pm:1
 #, c-format
@@ -8456,6 +8530,11 @@ msgstr "Tv-kort"
 #, c-format
 msgid "Printer on SMB/Windows 95/98/NT server"
 msgstr "Skrivare på SMB/Windows-server"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Configure CUPS"
+msgstr "/_Konfigurera CUPS"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -8550,6 +8629,11 @@ msgstr ""
 "Utöka din datorprestanda med hjälp av ett antal företag som erbjuder "
 "professionella lösningar kompatibla med Mandrake Linux"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Authors: "
+msgstr "Upphovsmän: "
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Internet Connection Sharing is now disabled."
@@ -8608,12 +8692,22 @@ msgstr "Ingen"
 msgid "The entered IP is not correct.\n"
 msgstr "Den angivna IP-adressen är inte korrekt.\n"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Please be sure that the cron daemon is included in your services."
+msgstr "Kontrollera att cron-demonen är inkluderad i dina tjänster."
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Ethernet Card"
 msgstr "Ethernet-kort"
 
-#: ../../my_gtk.pm:1 ../../services.pm:1 ../../ugtk2.pm:1
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Delete selected printer"
+msgstr "Ta bort vald skrivare"
+
+#: ../../services.pm:1 ../../ugtk2.pm:1
 #, c-format
 msgid "Info"
 msgstr "Information"
@@ -8737,15 +8831,6 @@ msgstr "Sök efter nya bildläsare"
 msgid "Disabling servers..."
 msgstr "Inaktiverar servrar..."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please choose the time \n"
-"interval between each backup"
-msgstr ""
-"Välj tidsintervallet mellan varje \n"
-"säkerhetskopiering"
-
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Installation of %s failed. The following error occured:"
@@ -8850,11 +8935,6 @@ msgstr "Installation av Lilo/Grub"
 #, c-format
 msgid "Israeli"
 msgstr "Israeliskt"
-
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "load setting"
-msgstr "ladda inställning"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8977,13 +9057,13 @@ msgstr "Sierra Leone"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Andorra"
-msgstr "Andorra"
+msgid "Botswana"
+msgstr "Botswana"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Botswana"
-msgstr "Botswana"
+msgid "Andorra"
+msgstr "Andorra"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -9075,17 +9155,17 @@ msgstr ""
 msgid "Automatic Steps Configuration"
 msgstr "Konfiguration av automatiska steg"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Barbados"
+msgstr "Barbados"
+
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
 "involved in the Free Software world!"
 msgstr "Vill du veta mer om öppen källkod? Gå med i den fria mjukvarans värld!"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Barbados"
-msgstr "Barbados"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9133,6 +9213,11 @@ msgstr "Slutområde för IP:"
 msgid "High"
 msgstr "Hög"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Add a new printer to the system"
+msgstr "Lägg till en skrivare till systemet"
+
 #: ../../any.pm:1
 #, c-format
 msgid "NoVideo"
@@ -9148,7 +9233,7 @@ msgstr "det här fältet beskriver enheten"
 msgid "Adding printer to Star Office/OpenOffice.org/GIMP"
 msgstr "Lägger till skrivaren till Star Office/OpenOffice.org/GIMP"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Local Printers"
 msgstr "Lokala skrivare"
@@ -9222,6 +9307,11 @@ msgstr "Kuwait"
 #, c-format
 msgid "Choose the window manager to run:"
 msgstr "Välj fönsterhanteraren som ska användas:"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "December"
+msgstr "december"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9331,15 +9421,15 @@ msgstr "Grafiskt gränssnitt"
 msgid "Chad"
 msgstr "Tchad"
 
-#: ../../Xconfig/card.pm:1 ../../Xconfig/various.pm:1
-#, c-format
-msgid "XFree %s with 3D hardware acceleration"
-msgstr "XFree %s med hårdvarubaserad 3D-acceleration"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "India"
 msgstr "Indien"
+
+#: ../../Xconfig/card.pm:1 ../../Xconfig/various.pm:1
+#, c-format
+msgid "XFree %s with 3D hardware acceleration"
+msgstr "XFree %s med hårdvarubaserad 3D-acceleration"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9575,6 +9665,8 @@ msgid ""
 "Expect is an extension to the Tcl scripting language that allows interactive "
 "sessions without user intervention."
 msgstr ""
+"Expect är en utökning av skriptspråket Tcl som gör det möjligt att använda "
+"interaktiva sessioner utan användarens närvaro."
 
 #: ../../lang.pm:1
 #, c-format
@@ -9615,18 +9707,27 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
-"En del hårdvara i datorn behöver \"proprietära\" drivrutiner för att\n"
+"En del hårdvara i datorn behöver slutna drivrutiner för att\n"
 "fungera. Du kan hitta en del information om dem här: %s"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Haiti"
+msgstr "Haiti"
 
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Detecting devices..."
 msgstr "Letar efter enheter..."
 
-#: ../../lang.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "Haiti"
-msgstr "Haiti"
+msgid ""
+"Custom allows you to specify your own day and time.  The other options use "
+"run-parts in /etc/crontab."
+msgstr ""
+"Anpassade låter dig specificera din egen dag och tid. De andra alternativen "
+"använder run-parts i /etc/crontab."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9819,14 +9920,6 @@ msgstr "om ja, kontrollera om nätverksenheter är i läget \"promiscuous\"."
 msgid "Looking for available packages..."
 msgstr "Söker efter tillgängliga paket..."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"This should be a comma-seperated list of local users or email addresses that "
-"you want the backup results sent to. You will need a functioning mail "
-"transfer agent setup on your system."
-msgstr ""
-
 #: ../../any.pm:1
 #, c-format
 msgid "Init Message"
@@ -9837,15 +9930,15 @@ msgstr "Init-meddelande"
 msgid "Rescue partition table"
 msgstr "Rädda partitionstabell"
 
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Connection complete."
-msgstr "Anslutning klar."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Cyprus"
 msgstr "Cypern"
+
+#: ../../standalone/net_monitor:1
+#, c-format
+msgid "Connection complete."
+msgstr "Anslutning klar."
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -9867,6 +9960,11 @@ msgstr "Konfigurationsguider"
 #, c-format
 msgid "ISDN connection"
 msgstr "ISDN-uppkoppling"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "CD-R / DVD-R"
+msgstr "Cd-rom/Dvd-rom"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9942,6 +10040,11 @@ msgstr ""
 "processorfrekvensen i MHz (vilken som en första uppskattning grovt kan "
 "jämföras med det antal instruktioner processorn kan utföra per sekund.)"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr "Mandrake Linux-verktyg för skrivarhantering"
+
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
@@ -9951,6 +10054,24 @@ msgstr "viktigt"
 #, c-format
 msgid "Total Progress"
 msgstr "Totalt förlopp"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+"        \t\tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
+"\\$. drakTermServ helps\n"
+"        \t\tin this respect by adding or removing system users from this "
+"file."
+msgstr ""
+"        - Underhåll av /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+"        \t\tFör att användare ska kunna logga in i systemet från en "
+"hårddisklösklient behöver deras post i\n"
+"        \t\t/etc/shadow kopieras till /etc/shadow\\$\\$CLIENTS\\$\\$. "
+"drakTermServ hjälper till\n"
+"        \t\tgenom att lägga till eller ta bort användare från denna fil."
 
 #: ../../help.pm:1
 #, c-format
@@ -9986,15 +10107,15 @@ msgstr ""
 "Om DrakX inte klarar av att undersöka hårdvaran kommer du att \n"
 "behöva konfigurera drivrutinen manuellt."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Users"
-msgstr "Användare"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Aruba"
 msgstr "Aruba"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Users"
+msgstr "Användare"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -10015,6 +10136,11 @@ msgstr "Du angav inte samma lösenord"
 #, c-format
 msgid "Examples for correct IPs:\n"
 msgstr "Exempel på korrekta IP:n:\n"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Please choose the media for backup."
+msgstr "Välj mediet för säkerhetskopiering."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -10213,6 +10339,11 @@ msgstr ""
 "Disketten har genererats.\n"
 "Du kan nu göra en repris av installationen."
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use CD-R/DVD-R to backup"
+msgstr "Använd cd/dvd-rom för säkerhetskopiering"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "the number of buttons the mouse has"
@@ -10384,6 +10515,11 @@ msgstr ""
 "\n"
 "Säkerhetskopieringskällor: \n"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "custom"
+msgstr "anpassad"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Content of the file"
@@ -10440,6 +10576,7 @@ msgid "Theme name"
 msgstr "Temanamn"
 
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Help"
 msgstr "/_Hjälp"
@@ -10448,6 +10585,11 @@ msgstr "/_Hjälp"
 #, c-format
 msgid "Choosing an arbitrary driver"
 msgstr "Väljer en godtycklig drivrutin"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cook Islands"
+msgstr "Cooköarna"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -10462,11 +10604,6 @@ msgstr ""
 #, c-format
 msgid "the width of the progress bar"
 msgstr "bredden på förloppsraden"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Cook Islands"
-msgstr "Cooköarna"
 
 #: ../../fs.pm:1
 #, c-format
@@ -10485,17 +10622,16 @@ msgstr "Avmarkera installerade teckensnitt"
 
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../interactive/http.pm:1
-#: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
-#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
-#: ../../standalone/drakperm:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
-#: ../../standalone/net_monitor:1
+#: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/gtk.pm:1
+#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
+#: ../../interactive/stdio.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/drakgw:1 ../../standalone/drakperm:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Avbryt"
@@ -10540,31 +10676,15 @@ msgstr "Ta bort skrivare"
 msgid "View Last Log"
 msgstr "Visa senaste logg"
 
-#: ../../install_interactive.pm:1
-#, c-format
-msgid ""
-"WARNING!\n"
-"\n"
-"DrakX will now resize your Windows partition. Be careful:\n"
-"this operation is dangerous. If you have not already done\n"
-"so, you should first exit the installation, run scandisk\n"
-"under Windows (and optionally run defrag), then restart the\n"
-"installation. You should also backup your data.\n"
-"When sure, press Ok."
-msgstr ""
-"VARNING!\n"
-"\n"
-"DrakX kommer nu att ändra storleken på Windows-partitionen.\n"
-"Var försiktig: detta moment är riskfyllt. Om du inte redan gjort\n"
-"det, ska du först avsluta installationen och köra Scandisk i Windows\n"
-"(och möjligtvis även Defrag), starta sedan installationen på nytt.\n"
-"Du bör också säkerhetskopiera dina data.\n"
-"När du är säker, klicka OK."
-
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Which services would you like to allow the Internet to connect to?"
 msgstr "Vilka tjänster vill du tilllåta att Internet ansluter till?"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Connection Type"
+msgstr "Anslutningstyp"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -10633,11 +10753,6 @@ msgstr "Det uppstod ett fel vid sökning efter tv-kanaler"
 #, c-format
 msgid "US keyboard (international)"
 msgstr "Amerikanskt (internationellt)"
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Saami (swedish/finish)"
-msgstr "Saami (svenskt/finskt)"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -10748,23 +10863,10 @@ msgstr "Rapportera kontrollresultat till tty"
 msgid "You must enter a device or file name!"
 msgstr "Du måste ange en enhet eller ett filnamn."
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Quit"
 msgstr "/_Avsluta"
-
-#: ../../network/adsl.pm:1
-#, c-format
-msgid ""
-"You need the alcatel microcode.\n"
-"Download it at\n"
-"http://www.speedtouchdsl.com/dvrreg_lx.htm\n"
-"and copy the mgmt.o in /usr/share/speedtouch"
-msgstr ""
-"Du behöver Alcatel microcode.\n"
-"Ladda ner den från\n"
-"http://www.speedtouchdsl.com/dvrreg_lx.htm\n"
-"och kopiera mgmt.o till /usr/share/speedtouch"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -10912,11 +11014,6 @@ msgstr "Ange katalogen som ska sparas:"
 msgid "Printing"
 msgstr "Skrivare"
 
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid "Unkown driver"
-msgstr "Okänd drivrutin"
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -11058,6 +11155,11 @@ msgstr "Oriya"
 msgid "Add a new rule at the end"
 msgstr "Lägg till en ny regel vid slutet"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successful"
+msgstr "Installation av teman för Lilo och startskärm lyckades"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -11088,6 +11190,11 @@ msgstr "Avsluta utan att skriva partitionstabellen?"
 msgid "Genius NetScroll"
 msgstr "Genius NetScroll"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "On Hard Drive"
+msgstr "på hårddisk"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid "Installing packages..."
@@ -11098,15 +11205,15 @@ msgstr "Installerar paket..."
 msgid "Dutch"
 msgstr "Holländskt"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "The following packages need to be installed:\n"
-msgstr "Följande paket måste installeras:\n"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Angola"
 msgstr "Angola"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "The following packages need to be installed:\n"
+msgstr "Följande paket måste installeras:\n"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -11183,6 +11290,80 @@ msgstr ""
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
+"entry for\n"
+"\t\t\ta client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
+"\\$IP=client_ip\\$\\$ is\n"
+"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"\t\t\tsubnet.\n"
+"\t\t\t\n"
+"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
+"and allows local \n"
+"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
+"This is enabled \n"
+"\t\t\tby creating separate config files associated with the client's IP "
+"address and creating \n"
+"\t\t\tread/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"\t\t\twith the configuration, you can remove root login privileges from the "
+"client.\n"
+"\t\t\t\n"
+"\t\t\tNote: You must stop/start the server after adding or changing clients."
+msgstr ""
+"\t\t\tDu kan använda en samling av IP-adresser istället för en specifik post "
+"för varje\n"
+"\t\t\tklient, men fasta adresser underlättar användandet av klient-"
+"specifikakonfigurationsfiler\n"
+"\t\t\tsom ClusterNFS tillhandahåller.\n"
+"\t\t\t\n"
+"\t\t\tObs: The \"#type\"-raden används endast av drakTermServ. Klienter kan "
+"vara antingen \"thin\"\n"
+"\t\t\teller \"fat\".  Tunna klienter kör de flesta programmen på servern "
+"genom xdmcp, feta klienter kör \n"
+"\t\t\tde flesta programmen lokalt på klienten. En specifik inittab-fil, /etc/"
+"inittab\\$\\$IP=client_ip\\$\\$ skrivs\n"
+"\t\t\tför tunna klienter. Systemkonfigurationsfilerna xdm-config, kdmrc, och "
+"gdm.conf modifieras \n"
+"\t\t\tom tunna klienter används, för att möjliggöra xdmcp. Eftersom det "
+"finns vissa säkerhetsaspekter vid användningen \n"
+"\t\t\tav xdmcp modifieras hosts.deny och hosts.allow för att begränsa "
+"tillgång till det lokala\n"
+"\t\t\tsubnätet.\n"
+"\t\t\t\n"
+"\t\t\tObs: \"#hdw_config\"-raden används också enbart av drakTermServ.  "
+"Klienter kan vara \n"
+"\t\t\t\"true\" eller \"false\". \"true\" tillåter root-inloggning vid "
+"klientdatorn och tillåter lokal \n"
+"\t\t\tkonfigurering av hårdvara för ljud, mus, och X via \"drak\"-verktygen. "
+"Detta möjliggörs genom\n"
+"\t\t\tatt skapa separata konfigurationsfiler associerade med klientens IP-"
+"address and skapa \n"
+"\t\t\tläs/skriv-monteringspunkter som gör det möjligt för klienterna att "
+"ändra filen. När du är nöjd \n"
+"\t\t\tmed konfigurationen kan du ta bort root-inloggningsmöjligheten från "
+"klienten.\n"
+"\t\t\t\n"
+"\t\t\tObs: Du måste stoppa/starta om servern efter att du lagt till eller "
+"ändrat klienter."
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Configure Local Area Network..."
@@ -11223,15 +11404,15 @@ msgstr "Information"
 msgid "No network card"
 msgstr "Inget nätverkskort"
 
-#: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#, c-format
-msgid "Which filesystem do you want?"
-msgstr "Vilket filsystem vill du använda?"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "3 buttons"
 msgstr "3-knappars"
+
+#: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
+#, c-format
+msgid "Which filesystem do you want?"
+msgstr "Vilket filsystem vill du använda?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11289,15 +11470,15 @@ msgstr "Grafikkort"
 msgid "Resizing Windows partition"
 msgstr "Ändrar storlek på Windows-partition"
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Provider dns 1 (optional)"
-msgstr "Leverantörens DNS 1 (frivilligt)"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Cameroon"
 msgstr "Kamerun"
+
+#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Provider dns 1 (optional)"
+msgstr "Leverantörens DNS 1 (frivilligt)"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -11308,9 +11489,15 @@ msgstr ""
 "Du kan nu partitionera %s.\n"
 "Glöm inte att spara med \"w\" när du är klar."
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Saami (swedish/finnish)"
+msgstr "Saami (svenskt/finskt)"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
 #: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "Close"
 msgstr "Stäng"
@@ -11356,6 +11543,11 @@ msgstr ""
 msgid "Iceland"
 msgstr "Island"
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Network & Internet Configuration"
+msgstr "Konfiguration av nätverk och Internet"
+
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -11376,7 +11568,7 @@ msgstr "Om FPU:n har en IRQ-vektor"
 msgid "Ext2"
 msgstr "Ext2"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Expand Tree"
 msgstr "Expandera träd"
@@ -11398,7 +11590,6 @@ msgstr ""
 "\"."
 
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Expert Mode"
 msgstr "Expertläge"
@@ -11476,6 +11667,24 @@ msgstr "Zimbabwe"
 msgid "When"
 msgstr "När"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid ""
+"You need the Alcatel microcode.\n"
+"Download it at:\n"
+"%s\n"
+"and copy the mgmt.o in /usr/share/speedtouch"
+msgstr ""
+"Du behöver Alcatel microcode.\n"
+"Ladda ner den från\n"
+"%s\n"
+"och kopiera mgmt.o till /usr/share/speedtouch"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Hour"
+msgstr "Timme"
+
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Second DNS Server (optional)"
@@ -11528,11 +11737,6 @@ msgstr ""
 "Du kan också redigera dina egna regler vilka kommer att överskrida "
 "standardreglerna."
 
-#: ../../ugtk.pm:1
-#, c-format
-msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-
 #: ../../any.pm:1
 #, c-format
 msgid ""
@@ -11574,6 +11778,41 @@ msgstr "/dev/hda"
 #, c-format
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP address\n"
+"        \t\tand net boot images to the machine. drakTermServ helps create/"
+"remove these entries.\n"
+"\t\t\t\n"
+"        \t\t(PCI cards may omit the image - etherboot will request the "
+"correct image. You should\n"
+"        \t\talso consider that when etherboot looks for the images, it "
+"expects names like\n"
+"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
+msgstr ""
+"        - Underhåll av /etc/dhcpd.conf:\n"
+"        \t\tVarje net boot-klient behöver en post i dhcpd.conf som tilldelar "
+"dem en IP-adress\n"
+"        \t\toch en net boot-avbild. drakTermServ hjälper dig skapa/radera "
+"dessa poster.\n"
+"\t\t\t\n"
+"        \t\t(PCI-kort kan utlämna avbilden - Etherboot kommer att be om "
+"korrekt avbild. Du bör också\n"
+"        \t\ttänka på att när Etherboot söker efter avbilder så förväntar "
+"den \n"
+"sig namn enligt mallen\n"
+"        \t\tboot-3c59x.nbi, snarare än boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\n"
+"        \t\tEn typisk dhcpd.conf-post för att stödja en klient utan "
+"hårddisk\n"
+"ser ut på följande vis:"
 
 #: ../../services.pm:1
 #, c-format
@@ -11620,11 +11859,6 @@ msgstr ", USB-skrivare \\nummer %s"
 msgid "SILO Installation"
 msgstr "SILO-installation"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Use CD/DVDROM to backup"
-msgstr "Använd cd/dvd-rom för säkerhetskopiering"
-
 #: ../../install_messages.pm:1
 #, c-format
 msgid ""
@@ -11659,6 +11893,16 @@ msgstr ""
 #, c-format
 msgid "paranoid"
 msgstr "paranoid"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Do not send mails when unneeded"
+msgstr "Skicka inte onödig e-post"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Your scanner(s) will not be available on the network."
+msgstr "Din scanner kommer inte att vara tillgänglig över nätverket."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -11742,7 +11986,7 @@ msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
 "to play videos, audio files and to handle your images or photos."
 msgstr ""
-"Mandrake Linux 9.1 erbjuder dig de senaste programmen för att spela "
+"Mandrake Linux 9.2 erbjuder dig de senaste programmen för att spela "
 "ljudfiler, redigera och organisera bilder och foton, titta på tv och video."
 
 #: ../../printer/printerdrake.pm:1
@@ -11831,15 +12075,20 @@ msgstr "Säkerhetskopiera dina data först"
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "Du har mer än en hårddisk, vilken vill du installera Linux på?"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Eritrea"
+msgstr "Eritrea"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Boot ISO"
 msgstr "Start-ISO"
 
-#: ../../lang.pm:1
+#: ../../network/adsl.pm:1
 #, c-format
-msgid "Eritrea"
-msgstr "Eritrea"
+msgid "Firmware needed"
+msgstr "Fastprogram krävs"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -11970,6 +12219,11 @@ msgstr ""
 msgid "Add a scanner manually"
 msgstr "Lägg till en bildläsare manuellt"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Refresh"
+msgstr "Uppdatera"
+
 #: ../../help.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Reload partition table"
@@ -12000,6 +12254,11 @@ msgstr "Det lokala nätverket slutade inte med \".0\", avbryter."
 #, c-format
 msgid "Boot"
 msgstr "Starta"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid " and the CD is in the drive"
+msgstr "och CDn är i läsaren"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -12090,6 +12349,11 @@ msgstr "Säkerhetsadministratör:"
 msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr "Ange skalets tidsgräns. Värdet noll betyder ingen tidsgräns."
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Firmware copy succeeded"
+msgstr "Fastprogramkopiering lyckades"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
@@ -12130,6 +12394,11 @@ msgstr "Skrivare \"%s\" har tagits bort från Star Office/OpenOffice.org/GIMP."
 #, c-format
 msgid "Save packages selection"
 msgstr "Spara paketval"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Actions"
+msgstr "/_Åtgärder"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -12197,15 +12466,15 @@ msgstr "Storlek: "
 msgid "Which sector do you want to move it to?"
 msgstr "Vilken sektor vill du flytta den till?"
 
-#: ../../interactive/stdio.pm:1
-#, c-format
-msgid "Do you want to click on this button?"
-msgstr "Vill du klicka på den här knappen?"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Bahamas"
 msgstr "Bahamas"
+
+#: ../../interactive/stdio.pm:1
+#, c-format
+msgid "Do you want to click on this button?"
+msgstr "Vill du klicka på den här knappen?"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12330,10 +12599,40 @@ msgstr ""
 "OBS: Du behöver en dedikerat nätverkskort för att skapa ett lokalt nätverk "
 "(LAN)."
 
-#: ../../security/l10n.pm:1
+#: ../../harddrake/sound.pm:1
 #, c-format
-msgid "Authorize TCP connections X Window"
-msgstr "Tillåt TPC-anslutningar X Window"
+msgid ""
+"OSS (Open Sound System) was the first sound API. It's an OS independent "
+"sound API (it's available on most UNIX(tm) systems) but it's a very basic "
+"and limited API.\n"
+"What's more, OSS drivers all reinvent the wheel.\n"
+"\n"
+"ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
+"which\n"
+"supports quite a large range of ISA, USB and PCI cards.\n"
+"\n"
+"It also provides a much higher API than OSS.\n"
+"\n"
+"To use alsa, one can either use:\n"
+"- the old compatibility OSS api\n"
+"- the new ALSA api that provides many enhanced features but requires using "
+"the ALSA library.\n"
+msgstr ""
+"OSS (Open Sound System) var det första ljudgränssnittet. Det är ett OS-"
+"oberoende ljudgränssnitt (det finns tillgängligt på de flesta Unix(tm)-"
+"system) men är ett väldigt grundläggande och begränsat gränssnitt.\n"
+"OSS-drivrutiner uppfinner alla hjulet på nytt.\n"
+"\n"
+"Alsa (Advanced Linux Sound Architecture) är en modulariserad arkitektur "
+"vilken\n"
+"stödjer ett stort antal ISA-, USB- och PCI-kort.\n"
+"\n"
+"Det tillhandahåller också ett mycket högre gränssnitt än OSS.\n"
+"\n"
+"För att använda Alsa kan man antingen använda:\n"
+"- det gamla kompatibla OSS-gränssnittet\n"
+"- det nya Alsa-gränssnittet som tillhandahåller många utökade funktioner men "
+"kräver att Alsa-biblioteket används.\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -12376,11 +12675,6 @@ msgid ""
 msgstr ""
 "Harddrake letar efter hårdvara och kan användas för att\n"
 "konfigurera ny/ändrad hårdvara."
-
-#: ../../printer/cups.pm:1 ../../printer/main.pm:1
-#, c-format
-msgid "Remote Printers"
-msgstr "Fjärrskrivare"
 
 #: ../../fs.pm:1
 #, c-format
@@ -12445,6 +12739,11 @@ msgstr "Använd bildläsarna på följande värddatorer:"
 msgid "Unselected All"
 msgstr "Avmarkera alla"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Printer Management \n"
+msgstr "Skrivarhantering \n"
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Domain Name Resolver"
@@ -12484,6 +12783,23 @@ msgstr "modem"
 #, c-format
 msgid "Welcome to %s"
 msgstr "Välkommen till %s"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" drakhelp 0.1\n"
+"Copyright (C) 2003 MandrakeSoft.\n"
+"This is free software and may be redistributed under the terms of the GNU "
+"GPL.\n"
+"\n"
+"Usage: \n"
+msgstr ""
+" drakhelp 0.1\n"
+"Copyright (C) 2003 MandrakeSoft.\n"
+"Detta är fri mjukvara som kan spridas under de villkor som definieras i GNU "
+"GPL.\n"
+"\n"
+"Användning: \n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -12568,15 +12884,20 @@ msgstr ""
 msgid "Cuba"
 msgstr "Kuba"
 
-#: ../../printer/printerdrake.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "Searching for new printers..."
-msgstr "Söker efter nya skrivare..."
+msgid "October"
+msgstr "oktober"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Belize"
 msgstr "Belize"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Searching for new printers..."
+msgstr "Söker efter nya skrivare..."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12601,6 +12922,11 @@ msgstr ""
 #, c-format
 msgid " Activate/Disable daily security check."
 msgstr " Aktivera/Inaktivera dagliga säkerhetskontroller."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "\t-CD-R.\n"
+msgstr "\t-Cd-rom.\n"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -12630,6 +12956,11 @@ msgstr ""
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Automatisk tidsynkronisering (med NTP)"
+
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Use my Windows partition"
+msgstr "Använd Windows-partition"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -12666,6 +12997,39 @@ msgid ""
 msgstr ""
 "\n"
 "- Systemfiler:\n"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \t\tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be turned\n"
+"        back off, retaining the configuration files, once the client machine "
+"is configured."
+msgstr ""
+"        - Klientspecifika systemkonfigureringsfiler:\n"
+"        \t\tGenom clusternfs kan varje hårddisklös klient ha sina egna unika "
+"konfigurationsfiler\n"
+"        \t\tpå serverns rotfilsystem. Genom att tillåta lokal "
+"hårdvarukonfiguration på klienterna kan filer, \n"
+"\t\t\t\tsom /etc/modules.conf, /etc/sysconfig/mouse, \n"
+"        \t\t/etc/sysconfig/keyboard konfigureras per klient.\n"
+"\n"
+"        Obs: Lokal hårdvarukonfigurering gör det möjligt att logga in som "
+"root på terminalservern \n"
+"        på varje klient som har detta aktiverat. Lokal konfigurering kan "
+"stängas av igen när klientdatorn konfigurerats färdigt, \n"
+"        konfigurationsfilerna kommer att sparas."
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -12716,6 +13080,17 @@ msgstr "Krypteringsnyckel"
 msgid "Microsoft IntelliMouse"
 msgstr "Microsoft IntelliMouse"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid ""
+"This setting will be activated after the installation.\n"
+"During installation, you will need to use the Right Control\n"
+"key to switch between the different keyboard layouts."
+msgstr ""
+"Denna funktion kommer att aktiveras efter installationen slutförts.\n"
+"Under istallationen måste du använda höger Control tangent för att byta "
+"mellan olika tangentbordskonfigurationer."
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Christmas Island"
@@ -12735,6 +13110,11 @@ msgstr "EIDE/SCSI-kanal"
 #, c-format
 msgid "Set this printer as the default"
 msgstr "Använd denna skrivare som standardskrivare"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Verify that %s is the correct path"
+msgstr "Verifiera att %s är korrekt sökväg"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12796,8 +13176,13 @@ msgstr "Mottagningshastighet:"
 msgid "Turks and Caicos Islands"
 msgstr "Turks- och Caicosöarna"
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "No Ip"
+msgstr "Inget IP"
+
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
+#: ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "<- Previous"
@@ -12818,7 +13203,7 @@ msgstr "Ange root-lösenord och metoder för nätverksautentisering"
 msgid "Internet Connection Sharing configuration"
 msgstr "Konfigurera Internetanslutning och delning"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Toggle between flat and group sorted"
 msgstr "Byt mellan rak och gruppvis sortering"
@@ -12852,6 +13237,11 @@ msgstr "Konfiguration av OKI winprinter"
 msgid "Saint Helena"
 msgstr "Sankt Helena"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid "Parallel port #%s"
+msgstr "Pararellport nummer %s"
+
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Security Level"
@@ -12882,6 +13272,17 @@ msgstr "Polskt (qwertz-layout)"
 #, c-format
 msgid "Syria"
 msgstr "Syrien"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, "
+"LaserJet 1100/1200/1220/3200/3300 with scanner, DeskJet 450, Sony IJP-V100), "
+"an HP PhotoSmart or an HP LaserJet 2200?"
+msgstr ""
+"Är din skrivare en flerfunktionsprodukt från HP eller Sony (OfficeJet, PSC, "
+"LaserJet 1100/1200/1220/3200/3300 med bildläsare, DeskJet 450, Sony IJP-"
+"V100), en HP PhotoSmart eller en HP LaserJet 2200?"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #: ../../bootloader.pm:1
@@ -12933,6 +13334,11 @@ msgstr "Nya Zeeland"
 #, c-format
 msgid "This directory should remain within the root filesystem"
 msgstr "Denna katalog bör lämnas i rotfilsystemet."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Across Network"
+msgstr "över nätverk"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -13020,7 +13426,7 @@ msgstr "Det interna domännamnet"
 msgid "Card IRQ"
 msgstr "Kortets IRQ"
 
-#: ../../ugtk.pm:1 ../../standalone/logdrake:1
+#: ../../standalone/logdrake:1
 #, c-format
 msgid "logdrake"
 msgstr "logdrake"
@@ -13156,11 +13562,6 @@ msgstr "Open Firmware-fördröjning"
 msgid "Hungary"
 msgstr "Ungern"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Total progess"
-msgstr "Total fortskridning"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "New Zealand"
@@ -13185,6 +13586,11 @@ msgstr ""
 msgid "please choose the date to restore"
 msgstr "välj datumet som ska återställas"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Netherlands Antilles"
+msgstr "Nederländska Antillerna"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Switching from ext2 to ext3"
@@ -13194,11 +13600,6 @@ msgstr "Byter från Ext2 till Ext3"
 #, c-format
 msgid "LPRng"
 msgstr "LPRng"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Netherlands Antilles"
-msgstr "Nederländska Antillerna"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13280,8 +13681,15 @@ msgstr " ange \"tom\" för tom post"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid "on Hard Drive"
-msgstr "på hårddisk"
+msgid "Backups on unmountable media - Use Catalog to restore"
+msgstr ""
+"Säkerhetskopior på media som ej går att montera. Använd Katalog för att "
+"återställa."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "January"
+msgstr "januari"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -13404,6 +13812,21 @@ msgstr "Sydgeorgien och södra Sandwichöarna"
 msgid "Japan (broadcast)"
 msgstr "Japan (broadcast)"
 
+#: ../../help.pm:1
+#, c-format
+msgid ""
+"Monitor\n"
+"\n"
+"   The installer will normally automatically detect and configure the\n"
+"monitor connected to your machine. If it is incorrect, you can choose from\n"
+"this list the monitor you actually have connected to your computer."
+msgstr ""
+"Bildskärm\n"
+"\n"
+"   Installationsprogrammet kan vanligtvis automatiskt identifiera och\n"
+"konfigurera din bildskärm. Om så inte är fallet kan du från denna lista\n"
+"välja den bildskärm som faktiskt är ansluten till datorn."
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Mozambique"
@@ -13459,6 +13882,11 @@ msgstr "Bygg Linux framtid!"
 msgid "Local Printer"
 msgstr "Lokal skrivare"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Floppy access error, unable to mount device %s"
+msgstr "Kan inte komma åt diskett, kan inte montera enhet %s"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
@@ -13489,20 +13917,20 @@ msgstr "kabelanslutning har hittats"
 msgid "Permission denied transferring %s to %s"
 msgstr "Åtkomst nekas vid överföring av %s till %s"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Report Bug"
 msgstr "/_Rapportera fel"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Resize"
-msgstr "Ändra storlek"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Dominica"
 msgstr "Dominica"
+
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Resize"
+msgstr "Ändra storlek"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -13558,6 +13986,61 @@ msgstr "Musenhet: %s\n"
 #, c-format
 msgid "Reselect correct fonts"
 msgstr "Välj om korrekta teckensnitt"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ will configure this file to work in conjunction "
+"with the images created by\n"
+"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to each\n"
+"        \t\tdiskless client.\n"
+"\n"
+"        \t\tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \t\tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t\t}\n"
+"        \t\t\n"
+"        \t\tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \t\tputs its images."
+msgstr ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ konfigurerar denna fil så den fungerar tillsammans "
+"med avbilderna som skapats av \n"
+"        \t\tmkinitrd-net, och posterna i /etc/dhcpd.conf, för att skicka "
+"startavbilden till respektive\n"
+"        \t\thårddisklös klient.\n"
+"\n"
+"        \t\tEn typisk tftp-konfigurationsfil ser ut på följande sätt:\n"
+"        \t\t\n"
+"        \t\tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t\t}\n"
+"        \t\t\n"
+"        \t\tDe förändringar av grundinställningarna som görs är att ändra "
+"\"disable\"-flaggan till\n"
+"        \t\t\"no\", och ändra sökvägen där mkinitrd-net sparar sina avbilder "
+"till  \n"
+"/var/lib/tftpboot "
 
 #: ../../help.pm:1
 #, c-format
@@ -13678,6 +14161,11 @@ msgstr ""
 "%s%s\n"
 "är direktanslutna till datorn"
 
+#: ../../network/modem.pm:1
+#, c-format
+msgid "You don't have any winmodem"
+msgstr "Du har inget winmodem"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "type: %s"
@@ -13687,6 +14175,17 @@ msgstr "typ: %s"
 #, c-format
 msgid "Slovakian (QWERTY)"
 msgstr "Slovakiskt (QWERTY)"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"This should be a comma-separated list of local users or email addresses that "
+"you want the backup results sent to. You will need a functioning mail "
+"transfer agent setup on your system."
+msgstr ""
+"Det krävs en komma-separerad lista av lokala användare eller email adresser "
+"som du vill att en sammanfattning av säkerhetskopieringen skickas till. Det "
+"behövs en agent för att skicka mail igång på ditt system."
 
 #: ../../standalone/draksound:1
 #, c-format
@@ -13863,6 +14362,11 @@ msgstr ""
 msgid "Comoros"
 msgstr "Comorerna"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "May"
+msgstr "maj"
+
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Yaboot mode"
@@ -13989,6 +14493,11 @@ msgstr ""
 "aldrig varit enklare tack vare GNU GCC 3 och de bästa utvecklingsmiljöerna "
 "med öppen källkod."
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "No devices found"
+msgstr "Inga enheter hittades"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
@@ -14031,15 +14540,15 @@ msgstr ""
 msgid "Where do you want to mount %s?"
 msgstr "Var vill du montera %s?"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Restore Via Network"
-msgstr "Återställ via nätverk"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Algeria"
 msgstr "Algeriet"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Restore Via Network"
+msgstr "Återställ via nätverk"
 
 #: ../../any.pm:1
 #, c-format
@@ -14062,15 +14571,30 @@ msgstr ""
 msgid "\tBackups use tar and gzip\n"
 msgstr "\tSäkerhetskopiera med tar och gzip\n"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Set as default"
+msgstr "Välj som standard"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "2 MB"
 msgstr "2 MB"
 
+#: ../../printer/main.pm:1 ../../standalone/printerdrake:1
+#, c-format
+msgid "Configured on this machine"
+msgstr "Konfigurerad på denna dator"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Both Control keys simultaneously"
 msgstr "Båda ctrl-tangenterna samtidigt"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid " --help                - display this help     \n"
+msgstr " --help                - visa denna hjälp     \n"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -14180,18 +14704,6 @@ msgstr ""
 msgid "Kenya"
 msgstr "Kenya"
 
-#: ../../share/advertising/04-configuration.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 provides you with the Mandrake Control Center, a powerful "
-"tool to fully adapt your computer to the use you make of it. Configure and "
-"customize elements such as the security level, the peripherals (screen, "
-"mouse, keyboard...), the Internet connection and much more!"
-msgstr ""
-"Mandrake Linux 9.1 tillhandahåller Mandrakes kontrollcentral, ett kraftfullt "
-"verktyg. Ställ in och anpassa saker som säkerhetsnivå, kringutrustning "
-"(skärm, mus, tangentbord), Internetanslutning och mycket mer!"
-
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Use ``Unmount'' first"
@@ -14216,6 +14728,42 @@ msgstr "skapar första steget"
 #, c-format
 msgid "Both Shift keys simultaneously"
 msgstr "Båda skift-tangenterna nedtryckta samtidigt"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
+msgstr ""
+" --id <id_label>       - ladda html hjälpsidan som refererar till id_label\n"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \t\tThe diskless client machines need either ROM images on the NIC, "
+"or a boot floppy\n"
+"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these images,\n"
+"        \t\tbased on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgstr ""
+"        - Skapa Etherboot-diskett/cd:\n"
+"        \t\tDe hårddisklösa klientdatorerna behöver antingen ROM-avbilder på "
+"nätverkskortet, en startdiskett eller\n"
+"        \t\ten CD för att starta. drakTermServ hjälper dig att skapa dessa "
+"avbilder,\n"
+"        \t\tbaserade på nätverkskortet i respektive klient.\n"
+"        \t\t\n"
+"        \t\tEtt enkelt exempel på en manuellt skapad startdiskett för ett "
+"3Com 3c509-kort:\n"
+"        \t\t\n"
+"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -14414,22 +14962,22 @@ msgstr "utopia 25"
 msgid "Pipe job into a command"
 msgstr "Skicka jobbet till kommando"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Cote d'Ivoire"
+msgstr "Elfenbenskusten"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "new dynamic device name generated by core kernel devfs"
 msgstr "nytt dynamiskt enhetsnamn genererat av core-kärn-devfs"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/drakgw:1 ../../standalone/harddrake2:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Ja"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Cote d'Ivoire"
-msgstr "Elfenbenskusten"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -14516,11 +15064,6 @@ msgstr "Välj den anslutning du vill konfigurera"
 #, c-format
 msgid "Please wait, setting security level..."
 msgstr "Vänta, ställer in säkerhetsnivå..."
-
-#: ../../share/advertising/06-development.pl:1
-#, c-format
-msgid "Mandrake Linux 9.1: the ultimate development platform"
-msgstr "Mandrake Linux 9.1 är den ultimata utvecklingsplattformen"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -14616,8 +15159,8 @@ msgstr "Utdelning av lokala skrivare"
 
 #: ../../install_messages.pm:1
 #, c-format
-msgid "http://www.mandrakelinux.com/en/91errata.php3"
-msgstr "http://www.mandrakelinux.com/en/91errata.php3"
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
+msgstr "http://www.mandrakelinux.com/en/92errata.php3"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14633,118 +15176,6 @@ msgstr "Tillgängliga skrivare"
 #, c-format
 msgid "Empty"
 msgstr "Tom"
-
-#: ../../help.pm:1
-#, c-format
-msgid ""
-"X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
-"on which all the graphical environments (KDE, GNOME, AfterStep,\n"
-"WindowMaker, etc.) bundled with Mandrake Linux rely upon.\n"
-"\n"
-"You will be presented with a list of different parameters to change to get\n"
-"an optimal graphical display: Graphic Card\n"
-"\n"
-"   The installer will normally automatically detect and configure the\n"
-"graphic card installed on your machine. If it is not the case, you can\n"
-"choose from this list the card you actually have installed.\n"
-"\n"
-"   In the case that different servers are available for your card, with or\n"
-"without 3D acceleration, you are then asked to choose the server that best\n"
-"suits your needs.\n"
-"\n"
-"\n"
-"\n"
-"Monitor\n"
-"\n"
-"   The installer will normally automatically detect and configure the\n"
-"monitor connected to your machine. If it is correct, you can choose from\n"
-"this list the monitor you actually have connected to your computer.\n"
-"\n"
-"\n"
-"\n"
-"Resolution\n"
-"\n"
-"   Here you can choose the resolutions and color depths available for your\n"
-"hardware. Choose the one that best suits your needs (you will be able to\n"
-"change that after installation though). A sample of the chosen\n"
-"configuration is shown in the monitor.\n"
-"\n"
-"\n"
-"\n"
-"Test\n"
-"\n"
-"   the system will try to open a graphical screen at the desired\n"
-"resolution. If you can see the message during the test and answer \"%s\",\n"
-"then DrakX will proceed to the next step. If you cannot see the message, it\n"
-"means that some part of the autodetected configuration was incorrect and\n"
-"the test will automatically end after 12 seconds, bringing you back to the\n"
-"menu. Change settings until you get a correct graphical display.\n"
-"\n"
-"\n"
-"\n"
-"Options\n"
-"\n"
-"   Here you can choose whether you want to have your machine automatically\n"
-"switch to a graphical interface at boot. Obviously, you want to check\n"
-"\"%s\" if your machine is to act as a server, or if you were not successful\n"
-"in getting the display configured."
-msgstr ""
-"X (som står för X Window System) är hjärtat i det grafiska gränssnittet\n"
-"i GNU/Linux. Alla grafiska miljöer som följer med Mandrake Linux\n"
-"(KDE, GNOME, AfterStep, WindowMaker osv) är beroende av det\n"
-"för att fungera.\n"
-"\n"
-"Du kommer att kunna välja ett antal parametrar för att få den optimala\n"
-"grafiska bilden: Grafikkort\n"
-"\n"
-"   Installationsprogrammet kommer vanligtvis automatiskt att\n"
-"känna av och konfigurera grafikkortet som är installerat på\n"
-"datorn. Om detta är inte fungerar så kan du välja ditt kort från\n"
-"en lista.\n"
-"\n"
-"   Om det finns flera servrar tillgängliga för ditt kort, med eller utan\n"
-"3D-acceleration, kommer du att ombedas välja den server som\n"
-"bäst passar dina behov.\n"
-"\n"
-"\n"
-"\n"
-"Skärm\n"
-"\n"
-"   Installationsprogrammet kommer vanligtvis automatiskt att\n"
-"känna av och konfigurera vilken skärm som är kopplad till\n"
-"datorn. Om detta är inte fungerar så kan du välja din skärm från\n"
-"en lista.\n"
-"\n"
-"\n"
-"\n"
-"Upplösning\n"
-"\n"
-"   Här kan du välja vilken upplösning och antal färger som din\n"
-"hårdvara ska använda. Välj den som bäst passar dina behov\n"
-"(du kan alltid ändra det när installationen är klar). Ett exempel\n"
-"av den valda konfigurationen visas i bildskärmen.\n"
-"\n"
-"\n"
-"\n"
-"Testa\n"
-"\n"
-"   Systemet kommer att försöka öppna en grafisk skärm med önskad\n"
-"upplösning. Om du kan se meddelandet under testet och svara \"%s\"\n"
-"kommer DrakX att gå vidare till nästa steg. Om du inte kan se\n"
-"meddelandet så betyder det att någonting var fel med den automatiska\n"
-"konfigureringen och testet kommer automatiskt att avslutas efter 12 "
-"sekunder\n"
-"och du kommer tillbaka till menyn. Ändra inställningarna tills du får en\n"
-"korrekt konfigurerad grafisk bild.\n"
-"\n"
-"\n"
-"\n"
-"Alternativ\n"
-"\n"
-"Här kan du välja om du vill att datorn automatiskt ska starta ett grafiskt\n"
-"gränssnitt vid uppstart. Du bör kryssa för \"%s\" om din dator ska\n"
-"agera som server, eller om du inte lyckades med att konfigurera\n"
-"bilden."
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -14773,6 +15204,33 @@ msgstr ""
 "\n"
 "\n"
 "Klicka \"%s\" för att fortsätta."
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
+"must be created.\n"
+"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical interface\n"
+"        \t\tto help manage/customize these images. To create the file \n"
+"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \t\tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
+"        - Skapa Etherboot-baserad startavbild:\n"
+"        \t\tFör att starta en kärna via Etherboot, måste en speciell kärn/"
+"initrd-\n"
+"avbild skapas.\n"
+"        \t\tmkinitrd-net gör det mesta av arbetet och drakTermServ är "
+"enbart \n"
+"ett grafiskt gränssnitt \n"
+"        \t\tsom hjälper dig skapa/konfigurera dessa avbilder. För att skapa "
+"filen \n"
+"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include som inkluderas i \n"
+"        \t\tdhcpd.conf, så bör du skapa Etherboot-avbilder för minst en "
+"komplett kärna."
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -14848,8 +15306,7 @@ msgstr "Konfigurera mus"
 msgid "Choose the mount points"
 msgstr "Välj monteringspunkter"
 
-#: ../../help.pm:1 ../../ugtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakfont:1
+#: ../../help.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakfont:1
 #, c-format
 msgid "OK"
 msgstr "OK"
@@ -14863,6 +15320,11 @@ msgstr "Jugoslaviskt (latinsk)"
 #, c-format
 msgid "Installing"
 msgstr "Installerar"
+
+#: ../../mouse.pm:1
+#, c-format
+msgid "Logitech MouseMan with Wheel emulation"
+msgstr "Logitech MouseMan med hjulemulering"
 
 #: ../../any.pm:1
 #, c-format
@@ -14991,15 +15453,15 @@ msgstr "Låg"
 msgid "Report check result by mail"
 msgstr "Rapportera kontrollresultat via e-post"
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "The DHCP start range"
-msgstr "Startområde för DHCP"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Grenada"
 msgstr "Grenada"
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "The DHCP start range"
+msgstr "Startområde för DHCP"
 
 #: ../../any.pm:1
 #, c-format
@@ -15012,22 +15474,11 @@ msgid ", %s sectors"
 msgstr ", %s sektorer"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Nej"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, "
-"LaserJet 1100/1200/1220/3200/3300 with scanner, Sony IJP-V100), an HP "
-"PhotoSmart or an HP LaserJet 2200?"
-msgstr ""
-"Är din skrivare en flerfunktionsprodukt från HP eller Sony (OfficeJet, PSC, "
-"LaserJet 1100/1200/1220/3200/3300 med bildläsare, Sony IJP-V100), en HP "
-"PhotoSmart eller en HP LaserJet 2200?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -15094,15 +15545,15 @@ msgstr "Skrivarinställningar för Netware"
 msgid "%s BootSplash (%s) preview"
 msgstr "%s-startskärm (%s)-förhandsgranskning"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "February"
+msgstr "februari"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "General"
 msgstr "Allmän"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printing system: "
-msgstr "Skrivarsystem: "
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -15119,6 +15570,16 @@ msgstr "Lägg till användare"
 msgid "Network configuration (%d adapters)"
 msgstr "Nätverkskonfiguration (%d kort)"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "April"
+msgstr "april"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Deactivate now"
+msgstr "Inaktivera nu"
+
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
 msgid "Mandatory package %s is missing"
@@ -15129,7 +15590,7 @@ msgstr "Det obligatoriska paketet %s saknas"
 msgid "Philippines"
 msgstr "Filippinerna"
 
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1
@@ -15140,6 +15601,11 @@ msgstr "Filippinerna"
 #, c-format
 msgid "Ok"
 msgstr "OK"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "drakTermServ Overview"
+msgstr "Översikt av drakTermServ"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15366,6 +15832,11 @@ msgstr "Använd till loopback"
 msgid "Mandrake Bug Report Tool"
 msgstr "Felrapporteringsverkyg för Mandrake"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Apply filter"
+msgstr "Tillämpa filter"
+
 #: ../../network/adsl.pm:1
 #, c-format
 msgid "use pppoe"
@@ -15396,11 +15867,6 @@ msgstr "Överför"
 msgid "Dvorak (Swedish)"
 msgstr "Dvorak (Svenskt)"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "More Options"
-msgstr "Fler alternativ"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Afghanistan"
@@ -15408,9 +15874,19 @@ msgstr "Afganistan"
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "More Options"
+msgstr "Fler alternativ"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Delete Hard Drive tar files after backup to other media."
 msgstr ""
 "Ta bort tar-filer på hårddisken efter säkerhetskopiering till annat media."
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Burundi"
+msgstr "Burundi"
 
 #: ../../services.pm:1
 #, c-format
@@ -15424,11 +15900,6 @@ msgstr ""
 "Den här cron-demonen, vixie cron har ett antal utökningar och\n"
 "förbättringar över standard Unix cron, bland annat högre säkerhet\n"
 "och bättre inställningsmöjligheter."
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Burundi"
-msgstr "Burundi"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -15486,15 +15957,25 @@ msgstr "Set-GID"
 msgid "The encryption keys do not match"
 msgstr "Krypteringsnycklarna matchar inte"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"For a multisession CD, only the first session will erase the cdrw. Otherwise "
+"the cdrw is erased before each backup."
+msgstr ""
+"Vid en multisessionsCD kommer endast den första sessionen att radera cdrw "
+"skivan. Vid en icke-multisessions CD raderas hela skivan innan varje "
+"säkerhetskopiering."
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid "USB printer"
+msgstr "USB-skrivare"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Right \"Windows\" key"
 msgstr "Högra \"Windows\"-tangenten"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "CDROM / DVDROM"
-msgstr "Cd-rom/Dvd-rom"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -15582,6 +16063,11 @@ msgstr "TB"
 msgid "FATAL"
 msgstr "Allvarligt"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Refresh the list"
+msgstr "Uppdatera listan"
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -15598,7 +16084,7 @@ msgstr ""
 "\n"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakperm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Delete"
 msgstr "Ta bort"
@@ -15652,6 +16138,12 @@ msgstr "Protokoll för Europa"
 #, c-format
 msgid ", printer \"%s\" on server \"%s\""
 msgstr ", skrivare \"%s\" på server \"%s\""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Note that currently all 'net' media also use the hard drive."
+msgstr ""
+"Observera att för tillfället använder också alla \"net\"-medier hårddisken."
 
 #: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
@@ -15777,6 +16269,11 @@ msgstr "enhet"
 msgid "Enter the directory to save to:"
 msgstr "Ange katalogen att spara till:"
 
+#: ../../crypto.pm:1 ../../lang.pm:1
+#, c-format
+msgid "Greece"
+msgstr "Grekiskt"
+
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
 #, c-format
 msgid "All"
@@ -15787,10 +16284,15 @@ msgstr "Alla"
 msgid "Which printing system (spooler) do you want to use?"
 msgstr "Vilket utskriftssystem (spooler) vill du använda?"
 
-#: ../../crypto.pm:1 ../../lang.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "Greece"
-msgstr "Grekiskt"
+msgid "July"
+msgstr "juli"
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid "Prints into %s"
+msgstr "Skriver ut på %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -15867,6 +16369,11 @@ msgstr "Skrivare på Netware-server"
 msgid "Give the ram size in MB"
 msgstr "Ange RAM-storlek i MB"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Friday"
+msgstr "fredag"
+
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Disconnection from Internet complete."
@@ -15928,6 +16435,13 @@ msgstr "Kan inte hitta %s på %s"
 msgid "Japanese 106 keys"
 msgstr "Japanskt 106 tangenter"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Could not install the packages needed to share your scanner(s)."
+msgstr ""
+"Misslyckades med att installera de paket som krävdes för att dela ut din "
+"scanner."
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "This will take a few minutes."
@@ -15937,6 +16451,11 @@ msgstr "Detta kommer att ta ett par minuter."
 #, c-format
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "June"
+msgstr "juni"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -15992,6 +16511,18 @@ msgstr ", flerfunktionsenhet"
 #, c-format
 msgid "Laos"
 msgstr "Laos"
+
+#: ../../share/advertising/04-configuration.pl:1
+#, c-format
+msgid ""
+"Mandrake Linux 9.2 provides you with the Mandrake Control Center, a powerful "
+"tool to fully adapt your computer to the use you make of it. Configure and "
+"customize elements such as the security level, the peripherals (screen, "
+"mouse, keyboard...), the Internet connection and much more!"
+msgstr ""
+"Mandrake Linux 9.2 tillhandahåller Mandrakes kontrollcentral, ett kraftfullt "
+"verktyg. Ställ in och anpassa saker som säkerhetsnivå, kringutrustning "
+"(skärm, mus, tangentbord), Internetanslutning och mycket mer!"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -16058,6 +16589,11 @@ msgstr ""
 #, c-format
 msgid "Saint Pierre and Miquelon"
 msgstr "Saint-Pierre och Miquelon"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "September"
+msgstr "september"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16178,7 +16714,7 @@ msgstr "Bygg ett nätverkskort -->"
 msgid "Marshall Islands"
 msgstr "Marshallöarna"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Is this correct?"
 msgstr "Är detta korrekt?"
@@ -16249,10 +16785,20 @@ msgstr "Server-IP saknas."
 msgid "Suriname"
 msgstr "Surinam"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Use a floppy"
+msgstr "Använd en diskett"
+
 #: ../../any.pm:1
 #, c-format
 msgid "Enable ACPI"
 msgstr "Aktivera ACPI"
+
+#: ../../fs.pm:1
+#, c-format
+msgid "Give write access to ordinary users"
+msgstr "Ge skrivrättigheter till vanliga användare."
 
 #: ../../help.pm:1
 #, c-format
@@ -16263,11 +16809,6 @@ msgstr "Grafisk miljö"
 #, c-format
 msgid "Gibraltar"
 msgstr "Gibraltar"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "on Tape Device"
-msgstr "på bandenhet"
 
 #: ../../network/modem.pm:1
 #, c-format
@@ -16309,6 +16850,7 @@ msgstr "Optimera din säkerhet genom att använda Mandrake Linux"
 #: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
 #: ../../standalone/drakconnect:1 ../../standalone/drakfont:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Help"
@@ -16388,6 +16930,11 @@ msgstr ""
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr "SMB-skrivarinställningar (Windows 9x/NT)"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid "URI: %s"
+msgstr "URI: %s"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Valid user list changed, rewriting config file."
@@ -16412,15 +16959,15 @@ msgstr ""
 msgid "Protocol for the rest of the world"
 msgstr "Protokoll för resten av världen"
 
-#: ../../security/l10n.pm:1
-#, c-format
-msgid "Password minimum length and number of digit and upcase letters"
-msgstr "Lösenordets minimumlängd och antal siffror och stora bokstäver"
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Print test pages"
 msgstr "Skriv ut testsidor"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Activate now"
+msgstr "Aktivera nu"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -16529,6 +17076,11 @@ msgstr "Starta om XFS"
 msgid "Add host/network"
 msgstr "Lägg till värddator/nätverk"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Scannerdrake will not be started now."
+msgstr "Scannerdrake kommer inte startas nu."
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Model name"
@@ -16539,11 +17091,6 @@ msgstr "Modellnamn"
 msgid "Albania"
 msgstr "Albanien"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "No CDR/DVDR in drive!"
-msgstr "Ingen cdr/dvdr i enhet."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "British Indian Ocean Territory"
@@ -16553,6 +17100,11 @@ msgstr "Brittisk-Indiska territoriet"
 #, c-format
 msgid "Normal Mode"
 msgstr "Normalläge"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "No CD-R/DVD-R in drive!"
+msgstr "Ingen cdr/dvdr i enhet."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16675,6 +17227,11 @@ msgstr "Andra multimedia-enheter"
 msgid "burner"
 msgstr "brännare"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid " (Default is all users)"
+msgstr " (Standard är alla användare)"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "No remote machines"
@@ -16725,6 +17282,11 @@ msgstr ""
 msgid "Internet Connection Sharing currently enabled"
 msgstr "Internetdelning är för närvarande aktiverat"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "United Arab Emirates"
+msgstr "Förenade Arabemiraten"
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO_0"
@@ -16737,11 +17299,6 @@ msgstr "Inaktivera lokal konfiguration"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "United Arab Emirates"
-msgstr "Förenade Arabemiraten"
-
-#: ../../lang.pm:1
-#, c-format
 msgid "Thailand"
 msgstr "Thailand"
 
@@ -16749,6 +17306,11 @@ msgstr "Thailand"
 #, c-format
 msgid "Card IO_1"
 msgstr "Kortets IO_1"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Search:"
+msgstr "Sök:"
 
 #: ../../lang.pm:1
 #, c-format
@@ -16775,113 +17337,30 @@ msgstr "Visa alla tillgängliga CUPS-fjärrskrivare"
 msgid "Mandrake Linux Installation %s"
 msgstr "Mandrake Linux installation %s"
 
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid "Unknown driver"
+msgstr "Okänd drivrutin"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Thai keyboard"
 msgstr "Thailändskt"
-
-#: ../../network/modem.pm:1
-#, c-format
-msgid "Dialup options"
-msgstr "Uppringningsalternativ"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Bouvet Island"
 msgstr "Bouvetön"
 
+#: ../../network/modem.pm:1
+#, c-format
+msgid "Dialup options"
+msgstr "Uppringningsalternativ"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
 msgstr "Om ingen port anges används 631 som standard."
-
-#: ../../standalone/draksec:1
-#, c-format
-msgid ""
-"Here, you can setup the security level and administrator of your machine.\n"
-"\n"
-"\n"
-"The Security Administrator is the one who will receive security alerts if "
-"the\n"
-"'Security Alerts' option is set. It can be a username or an email.\n"
-"\n"
-"\n"
-"The Security Level menu enable to select one of the six preconfigured "
-"security\n"
-"provided with msec. These levels range from poor security and ease of use, "
-"to\n"
-"paranoid config, suitable for very sensitive server applications:\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but "
-"very\n"
-"easy to use security level. It should only be used for machines not "
-"connected to\n"
-"any network and that are not accessible to everybody.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Standard</span>: This is the standard "
-"security\n"
-"recommended for a computer that will be used to connect to the Internet as "
-"a\n"
-"client.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">High</span>: There are already some\n"
-"restrictions, and more automatic checks are run every night.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Higher</span>: The security is now high "
-"enough\n"
-"to use the system as a server which can accept connections from many "
-"clients. If\n"
-"your machine is only a client on the Internet, you should choose a lower "
-"level.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the "
-"previous\n"
-"level, but the system is entirely closed and security features are at their\n"
-"maximum"
-msgstr ""
-"Nu kan du välja säkerhetsnivå och administratör för din dator.\n"
-"\n"
-"\n"
-"Säkerhetsadministratören är den som kommer att få säkerhetslarm om\n"
-"alternativet \"Säkerhetslarm\" har valts. Säkerhetsadministratören kan\n"
-"identifieras genom ett användarnamn eller en e-postadress.\n"
-"\n"
-"\n"
-"Menyn för säkerhetsnivåer gör det möjligt att välja en av sex\n"
-"fördefinierade säkerhetsnivåer för msec. Dessa nivåer går från\n"
-"enkel användning men med dålig säkerhet till en \"paranoid\"\n"
-"inställning som är lämplig för mycket känsliga serverprogram.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Låg</span>: Detta är en totalt\n"
-"osäker men mycket lättanvänd säkerhetsnivå. Den bör endast användas\n"
-"för datorer som inte är uppkopplade mot något nätverk och som inte är "
-"placerad\n"
-"så att den kan användas av obehöriga.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Normal</span>: Denna standardnivå\n"
-"rekommenderas för datorer som kommer att vara uppkopplade mot\n"
-"Internet som en klient.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Hög</span>: Det finns några\n"
-"begränsningar, och flera automatiska kontroller körs varje natt.\n"
-"\n"
-"\n"
-"<span foreground=\"royalblue3\">Högre</span>: På den här \n"
-"säkerhetsnivån är det möjligt att använda datorn som en server.\n"
-"Säkerheten är hög nog för en server som tillåter att många klienter ansluter "
-"mot den.\n"
-"Observera: om datorn enbart är en klient bör du välja en lägre nivå. <span "
-"foreground=\"royalblue3\">Paranoid</span>:Baserat på föregående nivå, men "
-"systemet är helt stängt.\n"
-"Alla säkerhetsfunktioner är aktiverade."
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -16913,6 +17392,11 @@ msgstr "Mandrake Online"
 msgid "\t-Network by webdav.\n"
 msgstr "\t-Nätverk med webdav.\n"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on a parallel port"
+msgstr ", flerfunktionsenhet på parallellport"
+
 #: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -16935,13 +17419,13 @@ msgstr "Inga hårddiskar hittade"
 
 #: ../../mouse.pm:1
 #, c-format
-msgid "Logitech CC Series"
-msgstr "Logitech CC Series"
+msgid "2 buttons"
+msgstr "2-knappars"
 
 #: ../../mouse.pm:1
 #, c-format
-msgid "2 buttons"
-msgstr "2-knappars"
+msgid "Logitech CC Series"
+msgstr "Logitech CC Series"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -16962,6 +17446,11 @@ msgstr "Spara på diskett"
 #, c-format
 msgid "Check open ports"
 msgstr "Kontrollera öppna portar"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Edit selected printer"
+msgstr "Redigera vald skrivare"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17103,7 +17592,7 @@ msgstr ""
 "(Pararellportar: /dev/lp0, /dev/lp1,..., lika med LPT1:, LPT2:,..., Första "
 "USB-skrivaren: /dev/usb/lp0, andra USB-skrivaren: /dev/usb/lp1,...)."
 
-#: ../../network/netconnect.pm:1
+#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "Next"
 msgstr "Nästa"
@@ -17178,6 +17667,11 @@ msgstr "Anguilla"
 msgid "NIS Domain"
 msgstr "NIS-domän"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Antarctica"
+msgstr "Antarktis"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -17186,11 +17680,6 @@ msgid ""
 msgstr ""
 "\n"
 "- Användarfiler:\n"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Antarctica"
-msgstr "Antarktis"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -17266,6 +17755,11 @@ msgstr "LPD och LPRng stödjer inte IPP-skrivare.\n"
 msgid "Host name or IP."
 msgstr "Värddatornamn eller IP:"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Edit"
+msgstr "/R_edigera"
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "simple"
@@ -17281,20 +17775,25 @@ msgstr "Nollställ"
 msgid "No test pages"
 msgstr "Inga testsidor"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Adapter %s: %s"
-msgstr "Kort %s: %s"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Falkland Islands (Malvinas)"
 msgstr "Falklandsöarna (Malvinas)"
 
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Adapter %s: %s"
+msgstr "Kort %s: %s"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Boot disk creation"
 msgstr "Skapa startdiskett"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Monday"
+msgstr "måndag"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -17318,6 +17817,7 @@ msgstr "Säkerhetskopiera nu"
 
 #: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_File"
 msgstr "/_Arkiv"
@@ -17335,6 +17835,11 @@ msgid ""
 msgstr ""
 "Starta paketfiltrering för 2.2-serien av Linuxkärnan, för att sätta\n"
 "upp en brandvägg som skyddar datorn från nätverksattacker."
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Editable"
+msgstr "Redigerbar"
 
 #: ../../network/ethernet.pm:1
 #, c-format
@@ -17468,7 +17973,7 @@ msgstr "Söker efter TV-kanaler"
 msgid "Kernel:"
 msgstr "Kärna:"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_About..."
 msgstr "/_Om..."
@@ -17535,6 +18040,11 @@ msgstr ""
 msgid "Show current interface configuration"
 msgstr "Visa aktuell gränssnittskonfiguration"
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Add Printer"
+msgstr "Lägg till Skrivare"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -17563,15 +18073,15 @@ msgstr "Klar"
 msgid "Web Server"
 msgstr "Webbserver"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "\tDo not include System Files\n"
-msgstr "\tInkludera inte systemfiler\n"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Chile"
 msgstr "Chile"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "\tDo not include System Files\n"
+msgstr "\tInkludera inte systemfiler\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17822,6 +18332,11 @@ msgstr "Ladda från diskett"
 msgid "The following printer was auto-detected. "
 msgstr "Följande skrivare identifierades automatiskt "
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid "Uses command %s"
+msgstr "Med kommando %s"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Boot Floppy"
@@ -17859,6 +18374,11 @@ msgstr "Konfigurera startkärmbild"
 
 #: ../../lang.pm:1
 #, c-format
+msgid "Georgia"
+msgstr "Georgien"
+
+#: ../../lang.pm:1
+#, c-format
 msgid "China"
 msgstr "Kina"
 
@@ -17866,11 +18386,6 @@ msgstr "Kina"
 #, c-format
 msgid " (Make sure that all your printers are connected and turned on).\n"
 msgstr " (Se till så att alla skrivare är anslutna och påslagna).\n"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Georgia"
-msgstr "Georgien"
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -17934,10 +18449,20 @@ msgstr "Välja en inloggningshanterare"
 msgid "Zeroconf Host name"
 msgstr "Zeroconf-värddatornamn"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Custom setup/crontab entry:"
+msgstr "Egen inställning/crontab-post:"
+
 #: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP-adressen ska vara i formatet 1.2.3.4"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Configure CUPS printing system"
+msgstr "Konfigurera CUPS skrivarsystem"
 
 #: ../../lang.pm:1
 #, c-format
@@ -18005,15 +18530,15 @@ msgstr "Azerbaidjani (latin)"
 msgid "Package not installed"
 msgstr "Paketet är inte installerat"
 
-#: ../../share/advertising/12-mdkexpert.pl:1
-#, c-format
-msgid "Become a MandrakeExpert"
-msgstr "Bli en Mandrake-expert"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "American Samoa"
 msgstr "Amerikanska Samoa"
+
+#: ../../share/advertising/12-mdkexpert.pl:1
+#, c-format
+msgid "Become a MandrakeExpert"
+msgstr "Bli en Mandrake-expert"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -18087,8 +18612,9 @@ msgstr "Det kan ta en stund att radera mediet."
 msgid "You can't select/unselect this package"
 msgstr "Du kan inte välja/välja bort detta paket."
 
-#: ../../diskdrake/interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../network/modem.pm:1 ../../standalone/drakfloppy:1
+#: ../../keyboard.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../harddrake/sound.pm:1 ../../network/modem.pm:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Warning"
 msgstr "Varning"
@@ -18107,11 +18633,6 @@ msgstr ""
 msgid "Remote host name"
 msgstr "Fjärrvärddatornamn"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "deactivate now"
-msgstr "inaktivera nu"
-
 #: ../../any.pm:1
 #, c-format
 msgid "access to X programs"
@@ -18121,6 +18642,11 @@ msgstr "åtkomst till X-program"
 #, c-format
 msgid "Computing the size of the Windows partition"
 msgstr "Räknar ut storleken på Windows-partitionen"
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Refresh"
+msgstr "/Uppdate_ra"
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #: ../../standalone/drakxtv:1
@@ -18194,6 +18720,11 @@ msgstr "Zip"
 msgid "Left Alt key"
 msgstr "Vänstra alt-tangenten"
 
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "Load setting"
+msgstr "Ladda inställning"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -18206,6 +18737,11 @@ msgstr ""
 "\n"
 "Printerdrake kunde inte avgöra vilken modell skrivaren %s är. Välj korrekt "
 "modell från listan."
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Set selected printer as the default printer"
+msgstr "Använd vald skrivare som standardskrivare"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18386,6 +18922,11 @@ msgstr " adsl"
 msgid "format of floppies supported by the drive"
 msgstr "diskettformat som enheten accepterar"
 
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "Firmware copy failed, file %s not found"
+msgstr "Misslyckades med att kopiera fastprogram, filen %s hittades inte"
+
 #: ../../raid.pm:1
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
@@ -18478,6 +19019,7 @@ msgid "Georgian (\"Russian\" layout)"
 msgstr "Georgiskt (\"Rysk\" uppsättning)"
 
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Options"
 msgstr "/A_lternativ"
@@ -18838,6 +19380,11 @@ msgstr ""
 "Linuxconf kommer emellanåt att utföra olika aktiviteter\n"
 "vid start för att hålla systemet i skick."
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "DVD-R device"
+msgstr "DVDR-enhet"
+
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer on remote lpd server"
@@ -18923,10 +19470,10 @@ msgstr ""
 "* Default OS: du kan välja vilket operativsystem som ska starta som \n"
 "standard när \"Open Firmware\"-fördröjningen är över."
 
-#: ../../mouse.pm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "No mouse"
-msgstr "Ingen mus"
+msgid "Wednesday"
+msgstr "onsdag"
 
 # Noteraatt de tidigare namnen, med a på slutet (t.ex. svenska) angav
 # plural. Men vad jag vet anges alltid tangentbordslaouter i singular
@@ -18940,6 +19487,11 @@ msgstr "Tyskt"
 #, c-format
 msgid "Austria"
 msgstr "Österrikiskt"
+
+#: ../../mouse.pm:1
+#, c-format
+msgid "No mouse"
+msgstr "Ingen mus"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18956,7 +19508,7 @@ msgstr "Kontrollera filrättigheter i användarnas hemkatalog"
 msgid "Run \"sndconfig\" after installation to configure your sound card"
 msgstr "Kör \"sndconfig\" efter installationen för att konfigurera ljudkortet."
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../ugtk2.pm:1
 #, c-format
 msgid "Collapse Tree"
 msgstr "Komprimera träd"
@@ -19035,10 +19587,10 @@ msgstr ""
 msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr "%s stöds inte av den här versionen av Mandrake Linux."
 
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakbackup:1
 #, c-format
-msgid "Level 1"
-msgstr "Nivå 1"
+msgid "tape"
+msgstr "band"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -19050,35 +19602,33 @@ msgstr "DHCP-klient"
 msgid "List users on display managers (kdm and gdm)"
 msgstr "Visa användare på inloggningshanterarna (KDM och GDM)"
 
-#: ../../standalone/drakperm:1
+#: ../../mouse.pm:1
 #, c-format
-msgid "Level 2"
-msgstr "Nivå 2"
+msgid "Logitech Mouse (serial, old C7 type)"
+msgstr "Logitech Mouse (seriell, gammal C7-typ)"
 
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Restoring from file %s failed: %s"
 msgstr "Återställning från fil %s misslyckades: %s"
 
-#: ../../mouse.pm:1
+#: ../../fsedit.pm:1
 #, c-format
-msgid "Logitech Mouse (serial, old C7 type)"
-msgstr "Logitech Mouse (seriell, gammal C7-typ)"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Level 3"
-msgstr "Nivå 3"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Level 4"
-msgstr "Nivå 4"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Level 5"
-msgstr "Nivå 5"
+msgid ""
+"I can't read the partition table of device %s, it's too corrupted for me :(\n"
+"I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
+"The other solution is to not allow DrakX to modify the partition table.\n"
+"(the error is %s)\n"
+"\n"
+"Do you agree to lose all the partitions?\n"
+msgstr ""
+"Partitionstabellen på enhet %s kan inte läsas, den är alldeles för trasig.\n"
+"Vi kan gå vidare genom att rensa dåliga partitioner (ALLA DATA försvinner!)\n"
+"Den andra lösningen är att förhindra DrakX från att ändra "
+"partitionstabellen.\n"
+"(felet är %s)\n"
+"\n"
+"Accepterar du att förlora alla partitioner?\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -19110,11 +19660,6 @@ msgstr "Automatisk tidsynkronisering"
 msgid "Backup files not found at %s."
 msgstr "Säkerhetskopior hittades inte på %s."
 
-#: ../../share/advertising/01-thanks.pl:1
-#, c-format
-msgid "Thank you for choosing Mandrake Linux 9.1"
-msgstr "Tack för att du valde Mandrake Linux 9.1"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Armenian (phonetic)"
@@ -19129,6 +19674,11 @@ msgstr "Kortmodell:"
 #, c-format
 msgid "Thin Client"
 msgstr "Tunn klient"
+
+#: ../../share/advertising/01-thanks.pl:1
+#, c-format
+msgid "Thank you for choosing Mandrake Linux 9.2"
+msgstr "Tack för att du valde Mandrake Linux 9.2"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -19282,6 +19832,17 @@ msgstr ""
 msgid ", USB printer"
 msgstr ", USB-skrivare"
 
+#: ../../standalone/drakfloppy:1
+#, c-format
+msgid ""
+"Unable to properly close mkbootdisk:\n"
+"\n"
+"<span foreground=\"Red\"><tt>%s</tt></span>"
+msgstr ""
+"Kunde inte stänga mkbootdisk säkert:\n"
+"\n"
+"<span foreground=\"Red\"><tt>%s</tt></span>"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -19300,6 +19861,11 @@ msgstr "Välj de program som ska använda teckensnitten:"
 #, c-format
 msgid "Configure X"
 msgstr "Konfigurera X"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "hd"
+msgstr "hd"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -19420,6 +19986,11 @@ msgstr "Gambia"
 msgid "Mandrake Control Center"
 msgstr "Mandrakes kontrollcentral"
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid "Multi-function device"
+msgstr "Flerfunktionsenhet"
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid ""
@@ -19430,21 +20001,6 @@ msgstr ""
 "Du kan ange diverse portar. \n"
 "Giltiga exempel är: 139/tcp 139/udp.\n"
 "Se /etc/services för information."
-
-#: ../../help.pm:1
-#, c-format
-msgid ""
-"Monitor\n"
-"\n"
-"   The installer will normally automatically detect and configure the\n"
-"monitor connected to your machine. If it is correct, you can choose from\n"
-"this list the monitor you actually have connected to your computer."
-msgstr ""
-"Bildskärm\n"
-"\n"
-"   Installationsprogrammet kan vanligtvis automatiskt identifiera och\n"
-"konfigurera din bildskärm. Om så inte är fallet kan du från denna lista\n"
-"välja den bildskärm som faktiskt är ansluten till datorn."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -19520,6 +20076,11 @@ msgstr "Välj paketen som du vill installera"
 #, c-format
 msgid "Papua New Guinea"
 msgstr "Papua Nya Guinea"
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid "Multi-function device on a parallel port"
+msgstr "Flerfunktionsenhet på en parallellport"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -19607,6 +20168,16 @@ msgid ""
 msgstr ""
 "LPD är en skrivardemon som behövs för att LPR ska fungera korrekt.\n"
 "Det är i princip en server som tilldelar utskrifter till skrivare."
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Irish"
+msgstr "Irländska"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Sunday"
+msgstr "söndag"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -19700,6 +20271,14 @@ msgstr "RAID-diskar %s\n"
 msgid "Liberia"
 msgstr "Liberia"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
+msgstr ""
+"Kunde inte installera de paket som krävs för att installera en scanner med "
+"Scannerdrake."
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid ""
@@ -19741,6 +20320,23 @@ msgstr "Kör \"%s\"..."
 #, c-format
 msgid "enable radio support"
 msgstr "aktivera radiostöd"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
+"        \t\tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \t\ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \t\tdrakTermServ will help create these files."
+msgstr ""
+"        - Klientspecifik /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
+"        \t\tGenom clusternfs kan varje hårdisklös klient ha sina egen unika "
+"konfigurationsfiler\n"
+"        \t\tpå serverns rot filsystem. Genom att tillåta lokal "
+"hårdvarukonfigurering per klient, \n"
+"        \t\thjälper drakTermServ dig att skapa dessa filer."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19909,6 +20505,11 @@ msgstr ""
 "Du kan kontrollera cd-skivan på en redan installerad\n"
 "Mandrake Linux-dator med kommandot \"rpm -qpl Mandrake/RPMS/*.rpm\".\n"
 
+#: ../../share/advertising/06-development.pl:1
+#, c-format
+msgid "Mandrake Linux 9.2: the ultimate development platform"
+msgstr "Mandrake Linux 9.2 är den ultimata utvecklingsplattformen"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Detected model: %s"
@@ -19935,11 +20536,6 @@ msgstr ""
 msgid "if set to yes, run the daily security checks."
 msgstr "om ja, kör de dagliga säkerhetskontrollerna."
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Device name to use for backup"
-msgstr "Enhetsnamn som ska användas för säkerhetskopiering"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Azerbaijan"
@@ -19947,8 +20543,22 @@ msgstr "Azerbajdzjan"
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "Device name to use for backup"
+msgstr "Enhetsnamn som ska användas för säkerhetskopiering"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "No tape in %s!"
 msgstr "Inget band i %s."
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" --doc <link>          - link to another web page ( for WM welcome "
+"frontend)\n"
+msgstr ""
+" --doc <länk>          - länk till en annan websida ( för WM välkomst "
+"frontend)\n"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20164,3 +20774,24 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Samling verktyg för att läsa och skicka e-post och nyheter och för att "
 "utforska Internet"
+
+#~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
+#~ msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
+
+#~ msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
+#~ msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
+
+#~ msgid "Error while parsing \"MODULES\" line from %s"
+#~ msgstr "Fel vid tydning av \"MODULES\"-rad från %s"
+
+#~ msgid "Hostname configuration"
+#~ msgstr "Konfiguration av värddatornamn"
+
+#~ msgid "Hostname"
+#~ msgstr "Värddatornamn"
+
+#~ msgid "Remote Printers"
+#~ msgstr "Fjärrskrivare"
+
+#~ msgid "Printing system: "
+#~ msgstr "Skrivarsystem: "
