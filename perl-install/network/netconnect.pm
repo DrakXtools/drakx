@@ -24,7 +24,7 @@ sub detect {
              lan => sub { # ethernet
                  modules::load_category('network/main|gigabit|usb');
                  require network::ethernet;
-                 $auto_detect->{lan} = { map { $_->[0] => $_->[1] } network::ethernet::conf_network_card_backend() };
+                 $auto_detect->{lan} = { map { $_->[0] => $_->[1] } network::ethernet::get_eth_cards() };
              },
              adsl => sub {
                  require network::adsl;
@@ -941,7 +941,7 @@ See iwpriv(8) man page for further information."),
                     pre => sub {
                         #-type =static or dhcp
                         modules::interactive::load_category($in, 'network/main|gigabit|usb', !$::expert, 1);
-                        @all_cards = conf_network_card_backend($netc, $intf, $type, undef, $ipadr, $netadr) or 
+                        @all_cards = network::ethernet::get_eth_cards() or 
                           # FIXME: fix this
                           $in->ask_warn(N("Error"), N("No ethernet network adapter has been detected on your system.
 I cannot set up this connection type.")), return;

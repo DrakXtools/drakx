@@ -368,7 +368,7 @@ sub easy_dhcp {
     require modules;
     require network::ethernet;
     modules::load_category('network/main|gigabit|usb');
-    my @all_cards = network::ethernet::conf_network_card_backend();
+    my @all_cards = network::ethernet::get_eth_cards();
 
     #- only for a single network card
     (any { $_->[0] eq 'eth0' } @all_cards) && (every { $_->[0] ne 'eth1' } @all_cards) or return;

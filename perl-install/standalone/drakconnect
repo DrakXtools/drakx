@@ -579,7 +579,7 @@ sub get_intf_ip {
 my %intf;
 
 sub update_list() {
-    @all_cards = network::ethernet::conf_network_card_backend($netc, $intf);
+    @all_cards = network::ethernet::get_eth_cards();
     my %new_intf = map { @$_ } @all_cards;
     my @new_intf = sort keys %new_intf;
     foreach my $interface (difference2(\@new_intf, [ keys %intf ])) {
@@ -919,7 +919,7 @@ Please run \"Internet access\" in control center."));
 sub reread_net_conf() {
     network::netconnect::read_net_conf('', $netcnx, $netc);
     modules::load_category('net');
-    @all_cards = network::ethernet::conf_network_card_backend($netc, $intf);
+    @all_cards = network::ethernet::get_eth_cards();
     network::netconnect::load_conf($netcnx, $netc, $intf);
     network::network::probe_netcnx_type('', $netc, $intf, $netcnx);
 }
