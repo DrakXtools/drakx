@@ -292,7 +292,11 @@ sub setPackages {
     $rebuild_needed and pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix});
 }
 
-sub deselectFoundMedia { '' }
+sub deselectFoundMedia {
+    my (undef, $hdlists) = @_;
+    @$hdlists;
+}
+
 sub selectSupplMedia { '' }
 
 sub choosePackages {
