@@ -105,24 +105,6 @@ sub fatal_quit ($)
     quit_global($in, -1);
 }
 
-
-# while ($::isEmbedded) {
-#     kill USR2, $::CCPID;
-#     my $setup_state = grep(/disabled/, cat_($drakgw_setup)) ? _("The setup has already been done, but it's currently disabled.") :
-#                       grep(/enabled/, cat_($drakgw_setup))  ? _("The setup has already been done, and it's currently enabled.") :
-#                       _("No Internet Connection Sharing has ever been configured.");
-    
-#     $in->ask_okcancel('', 
-# _("Welcome to the Internet Connection Sharing utility!
-
-# %s
-
-# Click on ``Ok'' if you want to launch the setup wizard.", $setup_state)) and system("/usr/sbin/drakgw");
-
-#     kill USR1, $::CCPID;
-# }
-
-
 begin:
 
 #- **********************************
@@ -656,6 +638,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.38  2001/04/09 18:09:38  yduret
+#- deyvounification : remove some un-useful comments in code
+#-
 #- Revision 1.37  2001/04/09 16:29:20  gc
 #- do not die when an initscript returns non-0 (initscripts too buggy)
 #-
