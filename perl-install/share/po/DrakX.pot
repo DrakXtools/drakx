@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-09-11 14:12+0200\n"
+"POT-Creation-Date: 2001-09-12 17:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -720,12 +720,12 @@ msgid "Do you have any %s interfaces?"
 msgstr ""
 
 #: ../../any.pm_.c:606 ../../any.pm_.c:765 ../../interactive.pm_.c:112
-#: ../../my_gtk.pm_.c:678
+#: ../../my_gtk.pm_.c:712
 msgid "No"
 msgstr ""
 
 #: ../../any.pm_.c:606 ../../any.pm_.c:764 ../../interactive.pm_.c:112
-#: ../../my_gtk.pm_.c:678
+#: ../../my_gtk.pm_.c:712
 msgid "Yes"
 msgstr ""
 
@@ -892,48 +892,48 @@ msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:833
+#: ../../bootloader.pm_.c:835
 msgid "Welcome to GRUB the operating system chooser!"
 msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:836
+#: ../../bootloader.pm_.c:838
 #, c-format
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:839
+#: ../../bootloader.pm_.c:841
 msgid "Press enter to boot the selected OS, 'e' to edit the"
 msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:842
+#: ../../bootloader.pm_.c:844
 msgid "commands before booting, or 'c' for a command-line."
 msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:845
+#: ../../bootloader.pm_.c:847
 #, c-format
 msgid "The highlighted entry will be booted automatically in %d seconds."
 msgstr ""
 
-#: ../../bootloader.pm_.c:849
+#: ../../bootloader.pm_.c:851
 msgid "not enough room in /boot"
 msgstr ""
 
 #. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
 #. -PO: so you may need to put them in English or in a different language if MS-windows doesn't exist in your language
-#: ../../bootloader.pm_.c:949
+#: ../../bootloader.pm_.c:951
 msgid "Desktop"
 msgstr ""
 
 #. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
-#: ../../bootloader.pm_.c:951
+#: ../../bootloader.pm_.c:953
 msgid "Start Menu"
 msgstr ""
 
@@ -1021,10 +1021,10 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: ../../bootlook.pm_.c:156 ../../install_steps_gtk.pm_.c:505
+#: ../../bootlook.pm_.c:156 ../../install_steps_gtk.pm_.c:506
 #: ../../interactive.pm_.c:122 ../../interactive.pm_.c:286
 #: ../../interactive.pm_.c:308 ../../interactive_stdio.pm_.c:27
-#: ../../my_gtk.pm_.c:415 ../../my_gtk.pm_.c:418 ../../my_gtk.pm_.c:679
+#: ../../my_gtk.pm_.c:415 ../../my_gtk.pm_.c:418 ../../my_gtk.pm_.c:713
 #: ../../printerdrake.pm_.c:982 ../../standalone/drakgw_.c:647
 #: ../../standalone/draknet_.c:115 ../../standalone/draknet_.c:147
 #: ../../standalone/draknet_.c:309 ../../standalone/draknet_.c:512
@@ -1152,7 +1152,7 @@ msgstr ""
 msgid "Please click on a partition"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:254 ../../install_steps_gtk.pm_.c:506
+#: ../../diskdrake.pm_.c:254 ../../install_steps_gtk.pm_.c:507
 msgid "Details"
 msgstr ""
 
@@ -1184,8 +1184,8 @@ msgstr ""
 msgid "Empty"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:369 ../../install_steps_gtk.pm_.c:362
-#: ../../install_steps_gtk.pm_.c:422 ../../mouse.pm_.c:162
+#: ../../diskdrake.pm_.c:369 ../../install_steps_gtk.pm_.c:363
+#: ../../install_steps_gtk.pm_.c:423 ../../mouse.pm_.c:162
 msgid "Other"
 msgstr ""
 
@@ -1899,8 +1899,8 @@ msgid ""
 "Listed above are the existing Linux partitions detected on your hard drive.\n"
 "You can keep the choices made by the wizard, they are good for most common\n"
 "installs. If you make any changes, you must at least define a root\n"
-"partition (\"/\"). Do not choose too small a partition or you will not\n"
-"be able to install enough software. If you want to store your data on a\n"
+"partition (\"/\"). Do not choose too small a partition or you will not be\n"
+"able to install enough software. If you want to store your data on a\n"
 "separate partition, you will also need to create a partition for \"/home\"\n"
 "(only possible if you have more than one Linux partition available).\n"
 "\n"
@@ -2230,7 +2230,7 @@ msgid ""
 " * \"Save packages selection\"(*): saves the packages selection as made\n"
 "previously. Then, when doing another installation, insert the floppy inside\n"
 "the driver and run the installation going to the help screen by pressing on\n"
-"the F1 key, and by issuing >>linux defcfg=\"floppy\"<<.\n"
+"the [F1] key, and by issuing >>linux defcfg=\"floppy\"<<.\n"
 "\n"
 "(*) You need a FAT-formatted floppy (to create one under GNU/Linux, type\n"
 "\"mformat a:\")"
@@ -2340,7 +2340,7 @@ msgid ""
 "save your changes back to disc.\n"
 "\n"
 "Note: you can reach any option using the keyboard. Navigate through the\n"
-"partitions using Tab and Up/Down arrows.\n"
+"partitions using [Tab] and [Up/Down] arrows.\n"
 "\n"
 "When a partition is selected, you can use:\n"
 "\n"
@@ -2614,7 +2614,7 @@ msgid ""
 "\n"
 " * Default: selects this entry as being the default Linux selection,\n"
 "selectable by just pressing ENTER at the yaboot prompt. This entry will\n"
-"also be highlighted with a \"*\", if you press Tab to see the boot\n"
+"also be highlighted with a \"*\", if you press [Tab] to see the boot\n"
 "selections."
 msgstr ""
 
@@ -2749,7 +2749,7 @@ msgstr ""
 #: ../../interactive.pm_.c:286 ../../interactive.pm_.c:308
 #: ../../interactive_http.pm_.c:104 ../../interactive_newt.pm_.c:170
 #: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:414
-#: ../../my_gtk.pm_.c:679 ../../my_gtk.pm_.c:701
+#: ../../my_gtk.pm_.c:713 ../../my_gtk.pm_.c:735
 msgid "Ok"
 msgstr ""
 
@@ -2971,17 +2971,17 @@ msgstr ""
 msgid "Total size: "
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:376
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:377
 #, c-format
 msgid "Version: %s\n"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:377
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:378
 #, c-format
 msgid "Size: %d KB\n"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:470
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:471
 #: ../../install_steps_interactive.pm_.c:508
 msgid "Choose the packages you want to install"
 msgstr ""
@@ -2990,12 +2990,12 @@ msgstr ""
 msgid "Info"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:446
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:447
 #: ../../install_steps_interactive.pm_.c:212
 msgid "Install"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:486
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:487
 #: ../../install_steps_interactive.pm_.c:694
 msgid "Installing"
 msgstr ""
@@ -3004,7 +3004,7 @@ msgstr ""
 msgid "Please wait, "
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:499
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:500
 msgid "Time remaining "
 msgstr ""
 
@@ -3017,17 +3017,17 @@ msgstr ""
 msgid "Preparing installation"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:547
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:548
 #, c-format
 msgid "Installing package %s"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:624
-#: ../../install_steps_gtk.pm_.c:628
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:625
+#: ../../install_steps_gtk.pm_.c:629
 msgid "Go on anyway?"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:624
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:625
 msgid "There was an error ordering packages:"
 msgstr ""
 
@@ -3095,85 +3095,85 @@ msgstr ""
 msgid "Total size: %d / %d MB"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:374
+#: ../../install_steps_gtk.pm_.c:375
 msgid "Bad package"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:375
+#: ../../install_steps_gtk.pm_.c:376
 #, c-format
 msgid "Name: %s\n"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:378
+#: ../../install_steps_gtk.pm_.c:379
 #, c-format
 msgid "Importance: %s\n"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:400
+#: ../../install_steps_gtk.pm_.c:401
 msgid ""
 "You can't select this package as there is not enough space left to install it"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:405
+#: ../../install_steps_gtk.pm_.c:406
 msgid "The following packages are going to be installed"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:406
+#: ../../install_steps_gtk.pm_.c:407
 msgid "The following packages are going to be removed"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:418
+#: ../../install_steps_gtk.pm_.c:419
 msgid "You can't select/unselect this package"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:430
+#: ../../install_steps_gtk.pm_.c:431
 msgid "This is a mandatory package, it can't be unselected"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:432
+#: ../../install_steps_gtk.pm_.c:433
 msgid "You can't unselect this package. It is already installed"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:436
+#: ../../install_steps_gtk.pm_.c:437
 msgid ""
 "This package must be upgraded\n"
 "Are you sure you want to deselect it?"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:440
+#: ../../install_steps_gtk.pm_.c:441
 msgid "You can't unselect this package. It must be upgraded"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:445
+#: ../../install_steps_gtk.pm_.c:446
 msgid "Show automatically selected packages"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:449
+#: ../../install_steps_gtk.pm_.c:450
 msgid "Load/Save on floppy"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:450
+#: ../../install_steps_gtk.pm_.c:451
 msgid "Updating package selection"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:455
+#: ../../install_steps_gtk.pm_.c:456
 msgid "Minimal install"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:492
+#: ../../install_steps_gtk.pm_.c:493
 msgid "Estimating"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:511
+#: ../../install_steps_gtk.pm_.c:512
 msgid "Please wait, preparing installation"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:542
+#: ../../install_steps_gtk.pm_.c:543
 #, c-format
 msgid "%d packages"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:581
+#: ../../install_steps_gtk.pm_.c:582
 msgid ""
 "\n"
 "Warning\n"
@@ -3205,15 +3205,15 @@ msgid ""
 "copyright laws applicable to software programs.\n"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:609 ../../install_steps_interactive.pm_.c:148
+#: ../../install_steps_gtk.pm_.c:610 ../../install_steps_interactive.pm_.c:148
 msgid "Accept"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:609 ../../install_steps_interactive.pm_.c:148
+#: ../../install_steps_gtk.pm_.c:610 ../../install_steps_interactive.pm_.c:148
 msgid "Refuse"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:610
+#: ../../install_steps_gtk.pm_.c:611
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -3223,7 +3223,7 @@ msgid ""
 "If you don't have it, press Cancel to avoid installation from this Cd-Rom."
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:628
+#: ../../install_steps_gtk.pm_.c:629
 msgid "There was an error installing packages:"
 msgstr ""
 
@@ -4398,15 +4398,15 @@ msgstr ""
 msgid "No mouse"
 msgstr ""
 
-#: ../../mouse.pm_.c:474
+#: ../../mouse.pm_.c:482
 msgid "Please test the mouse"
 msgstr ""
 
-#: ../../mouse.pm_.c:475
+#: ../../mouse.pm_.c:483
 msgid "To activate the mouse,"
 msgstr ""
 
-#: ../../mouse.pm_.c:476
+#: ../../mouse.pm_.c:484
 msgid "MOVE YOUR WHEEL!"
 msgstr ""
 
@@ -4426,7 +4426,7 @@ msgstr ""
 msgid "<- Previous"
 msgstr ""
 
-#: ../../my_gtk.pm_.c:679
+#: ../../my_gtk.pm_.c:713
 msgid "Is this correct?"
 msgstr ""
 
@@ -4489,8 +4489,8 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../network/ethernet.pm_.c:68 ../../network/netconnect.pm_.c:129
-#: ../../network/netconnect.pm_.c:236 ../../network/tools.pm_.c:52
+#: ../../network/ethernet.pm_.c:68 ../../network/netconnect.pm_.c:130
+#: ../../network/netconnect.pm_.c:245 ../../network/tools.pm_.c:52
 msgid "Network Configuration"
 msgstr ""
 
@@ -4540,10 +4540,10 @@ msgid "Host name"
 msgstr ""
 
 #: ../../network/isdn.pm_.c:21 ../../network/isdn.pm_.c:44
-#: ../../network/netconnect.pm_.c:91 ../../network/netconnect.pm_.c:105
-#: ../../network/netconnect.pm_.c:154 ../../network/netconnect.pm_.c:164
-#: ../../network/netconnect.pm_.c:190 ../../network/netconnect.pm_.c:206
-#: ../../network/netconnect.pm_.c:214
+#: ../../network/netconnect.pm_.c:92 ../../network/netconnect.pm_.c:106
+#: ../../network/netconnect.pm_.c:155 ../../network/netconnect.pm_.c:165
+#: ../../network/netconnect.pm_.c:191 ../../network/netconnect.pm_.c:215
+#: ../../network/netconnect.pm_.c:223
 msgid "Network Configuration Wizard"
 msgstr ""
 
@@ -4750,12 +4750,12 @@ msgstr ""
 msgid "Internet connection & configuration"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:96
+#: ../../network/netconnect.pm_.c:97
 #, c-format
 msgid "We are now going to configure the %s connection."
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:105
+#: ../../network/netconnect.pm_.c:106
 #, c-format
 msgid ""
 "\n"
@@ -4767,7 +4767,7 @@ msgid ""
 "Press OK to continue."
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:130
+#: ../../network/netconnect.pm_.c:131
 msgid ""
 "Because you are doing a network installation, your network is already "
 "configured.\n"
@@ -4775,7 +4775,7 @@ msgid ""
 "Internet & Network connection.\n"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:155
+#: ../../network/netconnect.pm_.c:156
 msgid ""
 "Welcome to The Network Configuration Wizard\n"
 "\n"
@@ -4783,88 +4783,88 @@ msgid ""
 "If you don't want to use the auto detection, deselect the checkbox.\n"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:157
+#: ../../network/netconnect.pm_.c:158
 msgid "Choose the profile to configure"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:158
+#: ../../network/netconnect.pm_.c:159
 msgid "Use auto detection"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:164
+#: ../../network/netconnect.pm_.c:165
 msgid "Detecting devices..."
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:175 ../../network/netconnect.pm_.c:184
+#: ../../network/netconnect.pm_.c:176 ../../network/netconnect.pm_.c:185
 msgid "Normal modem connection"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:175 ../../network/netconnect.pm_.c:184
+#: ../../network/netconnect.pm_.c:176 ../../network/netconnect.pm_.c:185
 #, c-format
 msgid "detected on port %s"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:176 ../../network/netconnect.pm_.c:185
+#: ../../network/netconnect.pm_.c:177 ../../network/netconnect.pm_.c:186
 msgid "ISDN connection"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:176 ../../network/netconnect.pm_.c:185
+#: ../../network/netconnect.pm_.c:177 ../../network/netconnect.pm_.c:186
 #, c-format
 msgid "detected %s"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:177 ../../network/netconnect.pm_.c:186
+#: ../../network/netconnect.pm_.c:178 ../../network/netconnect.pm_.c:187
 msgid "ADSL connection"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:177 ../../network/netconnect.pm_.c:186
+#: ../../network/netconnect.pm_.c:178 ../../network/netconnect.pm_.c:187
 #, c-format
 msgid "detected on interface %s"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:178 ../../network/netconnect.pm_.c:187
+#: ../../network/netconnect.pm_.c:179 ../../network/netconnect.pm_.c:188
 msgid "Cable connection"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:178 ../../network/netconnect.pm_.c:187
+#: ../../network/netconnect.pm_.c:179 ../../network/netconnect.pm_.c:188
 msgid "cable connection detected"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:179 ../../network/netconnect.pm_.c:188
+#: ../../network/netconnect.pm_.c:180 ../../network/netconnect.pm_.c:189
 msgid "LAN connection"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:179 ../../network/netconnect.pm_.c:188
+#: ../../network/netconnect.pm_.c:180 ../../network/netconnect.pm_.c:189
 msgid "ethernet card(s) detected"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:190
+#: ../../network/netconnect.pm_.c:191
 msgid "Choose the connection you want to configure"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:207
+#: ../../network/netconnect.pm_.c:216
 msgid ""
 "You have configured multiple ways to connect to the Internet.\n"
 "Choose the one you want to use.\n"
 "\n"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:208
+#: ../../network/netconnect.pm_.c:217
 msgid "Internet connection"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:214
+#: ../../network/netconnect.pm_.c:223
 msgid "Do you want to start the connection at boot?"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:228
+#: ../../network/netconnect.pm_.c:237
 msgid ""
 "Congratulations, the network and internet configuration is finished.\n"
 "\n"
 "The configuration will now be applied to your system.\n"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:231
+#: ../../network/netconnect.pm_.c:240
 msgid ""
 "After that is done, we recommend you to restart your X\n"
 "environnement to avoid hostname changing problem."
