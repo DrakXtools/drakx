@@ -409,7 +409,12 @@ sub unload($;$) {
     if ($::testing) {
 	log::l("rmmod $m");
     } else {
-	run_program::run("rmmod", $m) && delete $conf{$m}{loaded};
+	if (run_program::run("rmmod", $m)) {
+	    delete $conf{$m}{loaded};
+	}
+    }
+    foreach (keys %loaded) {
+	@{$loaded{$_}} = grep { $m ne $_ } @{$loaded{$_}};
     }
     remove_alias($m) if $remove_alias;
 }
