@@ -33,6 +33,9 @@ sub last_usable_sector {
 
 sub get_rawCHS {
     my ($part) = @_;
+
+    exists $part->{start_cyl} or internal_error("get_rawCHS $part->{device}");
+
     [ $part->{start_cyl}, $part->{start_head}, $part->{start_sec} ],
       [ $part->{end_cyl}, $part->{end_head}, $part->{end_sec} ];
 }
