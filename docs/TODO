@@ -1,10 +1,11 @@
 -URGENT---------------------------------------------------------------------------------
-check for fpons/pixel both that resize_fat is clean for current version
+check for fpons/pixel BOTH that resize_fat is clean for current version
 relative to 7.0-2.
 
-diskdrake can olverlap partitions (resize lower, resize original typically
-after clear all and auto allocate, try maximal size available).
-
+heavy testing of diskdrake to avoid corrupting partition table, current version
+should be available to fix bogus partition table, writing enabled only when
+partition is Ok (fixme? allow primary partition inside extended one, but with
+warning on diskdrake startup, made them as warning ?).
 
 -to test--------------------------------------------------------------------------------
 configure services at install
@@ -19,57 +20,76 @@ diskdrake should warn if nb_ide_parts > 63, nb_scsi_parts > 15
 
 RAID upgrades
 
--choices--------------------------------------------------------------------------------
-horizontal sub-steps
+-features-------------------------------------------------------------------------------
+(NEED 7.1) auto-install for corporate, very important (need consolidation).
 
-better help for partitioning in newbie 
+(7.1 or later) clean SCSI CDROM autoboot.
+(7.1) sparc ehancement, avoid V7+ machine target (div and mul not in v7 standard)
 
-firewall configuration (instant firewalling?)
+(7.1) improve printerdrake to at least same functionalities of printtool.
 
-install in 800x600
+(7.2 or later)horizontal sub-steps
+
+(7.1)better help for partitioning in newbie, keyboard shortcut.
+
+(???)free provider auto configuration facility (to be discussed).
+
+(7.1 or later?)help in some configuration files.
+
+(7.1)progression bar on crypto.
+
+(7.1)manage a lot of language (ergonomic issue as it already exists)
+
+(?)firewall configuration (instant firewalling?)
+
+(7.1)syslinux in graphical mode to be improved for heavily bogus BIOSes.
+
+(7.1)install in 800x600
 - need handling of both 640x480 (mostly for VGA16) and 800x600
 
-tree for choosing things like timezone, monitors, graphic cards, modules, mice, keyboard? ...
+(?)tree for choosing things like timezone, monitors, graphic cards, modules, mice, keyboard? ...
 
-index/compress hdlist? (for multi-cd)
-! for multi-cd live is mandatory
+(7.1)index/compress hdlist? (for multi-cd)
+! for multi-cd live is mandatory, small transaction are mandatory too.
 
-widget for displaying fdisk (dindinx)
+(7.1 or later)widget for displaying fdisk (dindinx)
 
-on laptop, configure the MMU to use swap not very often
+(?)on laptop, configure the MMU to use swap not very often
 
-rescue: 
+(7.1, other persons)rescue: 
 - small modification for stage1 to get the rescue stage2
 - create a stage2 with many tools (fdisk, bash...)
 the rescue could be on another cd (if multi-cd)
 ! care must be taken about modules (if ide is in module...)
 
-checkboxes in groups based on compssList (and availableSpace?)
+(?)checkboxes in groups based on compssList (and availableSpace?)
 
+(7.1)Improved network configuration (PPP and/or Ethernet)
 PPPoE install and configuration (SuSE includes it, DHCP-like)
 
-loopback partitions (even root one)
+(7.1?)loopback partitions (even root one)
 
-standalone applications for configuration (netdrake, authentificationconf, soundcard)
+(7.1)standalone applications for configuration (netdrake, authentificationconf, soundcard)
 
-feature missing: cancel installation
+(7.1)feature missing: cancel installation
 crypto: add a cancel & progress bar while downloading
 error handling (like reading hdlist)
 
-diskdrake in text mode
+(7.2 or later)diskdrake in text mode
 
-add fdisk using the zvt widget (taken in gnome-libs)
+(see above)add fdisk using the zvt widget (taken in gnome-libs)
 
-see what can be done with nvram (50 bytes to save information)
+(?)see what can be done with nvram (50 bytes to save information)
 
+(7.1)Generally improved package selection /ergonmic issue.
 Tree -> CTree, ``all'' branch with all packages
 show the value associated (100->a must, 90->great, 80->nice, ... 10->useless, 0->do not install)
 
-sound config
+(7.1)sound config, although very simple, no dedicated steps and only PCI (or maybe ISA-PNP if time left ?)
 
-grub, chos, gag
+(7.1?)grub, chos, gag
 
-enable the testing of the mouse type (under X) (wheel)
+(?)enable the testing of the mouse type (under X) (wheel)
 possibility to specify the mouse
 
 ----
@@ -247,6 +267,9 @@ the list is too big for USA
 
 
 -done---------------------------------------------------------------------------------
+(done,fpons)diskdrake can olverlap partitions (resize lower, resize original typically
+after clear all and auto allocate, try maximal size available).
+
 (done,fpons)rewrite mouseconfig in perl?
 
 (done,pix)kudzu or not in miscellaneous
