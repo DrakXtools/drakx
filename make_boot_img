@@ -11,8 +11,8 @@ rename 'all.kernels', 'kernel/all.kernels';
 rename 'all.modules', 'kernel/all.modules';
 
 my $default_append = "ramdisk_size=128000 root=/dev/ram3";
-# full acpi support for amd64, enough acpi support for x86 ht, no acpi for others
-my $default_acpi = $arch =~ /i.86/ ? "acpi=ht" : $arch =~ /x86_64/ ? "acpi=off" : "acpi=off";
+# full acpi support for x86_64, enough acpi support for x86 ht, no acpi for others
+my $default_acpi = $arch =~ /i.86/ ? "acpi=ht" : $arch =~ /x86_64/ ? "" : "acpi=off";
 my $default_vga = "vga=788";
 
 my $instdir = "mdk-stage1";
@@ -41,8 +41,7 @@ my @kernels = grep { /^2/ } all('kernel/all.kernels');
 
 
 my @all_images = (
-		  if_($arch =~ /i.86/, 'cdrom.img', 'cdrom-changedisk.img', 'pcmcia.img', 'isolinux', 'boot.iso', 'hd_grub.img', 'network.img', 'network_drivers.img'),
-		  if_($arch =~ /x86_64/, 'cdrom.img', 'isolinux', 'boot.iso'),
+		  if_($arch =~ /i.86|x86_64/, 'cdrom.img', 'cdrom-changedisk.img', 'pcmcia.img', 'isolinux', 'boot.iso', 'hd_grub.img', 'network.img', 'network_drivers.img'),
 		  if_($arch =~ /ia64/, 'all.img'),
 		  if_($arch =~ /ppc/, 'all.img'),
 		 );
