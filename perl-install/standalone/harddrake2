@@ -176,11 +176,15 @@ $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                                                                                               })
                                                      ),
                                             ),
-                           if_($::isEmbedded, 0, gtkpack(create_hbox(),
-                                                         gtksignal_connect(Gtk2::Button->new(N("Options")), event => popup_menu($opt_menu), $menubar),
-                                                         gtksignal_connect(Gtk2::Button->new(N("Help")), event => popup_menu($help_menu), $menubar),
-                                                         gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => \&quit_global),
-                                                         ),
+                           if_($::isEmbedded, 0, gtkpack(Gtk2::HBox->new,
+                                                         gtkpack(create_hbox('start'),
+                                                                 gtksignal_connect(Gtk2::Button->new(N("Help")), event => popup_menu($help_menu), $menubar),
+                                                                 gtksignal_connect(Gtk2::Button->new(N("Options")), event => popup_menu($opt_menu), $menubar),
+                                                                ),
+                                                         gtkpack(create_hbox('end'),
+                                                                 gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => \&quit_global),
+                                                                ),
+                                                        ),
                                )
                            )
                   );
