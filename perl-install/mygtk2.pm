@@ -394,12 +394,20 @@ sub _gtk__Frame {
     $w;
 }
 
-sub _gtk__Window {
-    my ($w, $opts) = @_;
+sub _gtk__Window { &_gtk_any_Window }
+sub _gtk__Dialog { &_gtk_any_Window }
+sub _gtk_any_Window {
+    my ($w, $opts, $class) = @_;
 
     if (!$w) {
-	$w = Gtk2::Window->new(delete $opts->{type} || 'toplevel');
+	if ($class eq 'Window') {
+	    $w = "Gtk2::$class"->new(delete $opts->{type} || 'toplevel');
+	} else {
+	    $w = "Gtk2::$class"->new;
+	}
+
 	$w->set_modal(delete $opts->{modal}) if exists $opts->{modal};
+	$w->set_transient_for(delete $opts->{transient_for}) if exists $opts->{transient_for};
 	$w->set_border_width(delete $opts->{border_width}) if exists $opts->{border_width};
 	$w->set_shadow_type(delete $opts->{shadow_type}) if exists $opts->{shadow_type};
 	$w->set_position(delete $opts->{position_policy}) if exists $opts->{position_policy};
@@ -410,22 +418,6 @@ sub _gtk__Window {
 	$w->add($child);
 	$child->show;
     }
-    $w;
-}
-
-sub _gtk__Dialog {
-    my ($w, $opts) = @_;
-
-    if (!$w) {
-	$w = Gtk2::Dialog->new;
-
-	$w->set_modal(delete $opts->{modal}) if exists $opts->{modal};
-	$w->set_border_width(delete $opts->{border_width}) if exists $opts->{border_width};
-	$w->set_transient_for(delete $opts->{transient_for}) if exists $opts->{transient_for};
-	$w->set_position(delete $opts->{position_policy}) if exists $opts->{position_policy};
-    }
-    $w->set_title(delete $opts->{title}) if exists $opts->{title};
-
     $w;
 }
 
