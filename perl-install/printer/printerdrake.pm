@@ -84,7 +84,9 @@ sub config_cups {
 	     [
 	      { text => N("The printers on this machine are available to other computers"), type => 'bool',
 		val => \$printer->{cupsconfig}{localprintersshared} },
-	      { val => N("Local printers available on: ") .
+	      { text => N("Automatically find available printers on remote machines"), type => 'bool',
+		val => \$printer->{cupsconfig}{remotebroadcastsaccepted} },
+	      { val => N("Printer sharing on hosts/networks: ") .
 		    ($printer->{cupsconfig}{customsharingsetup} ?
 		     N("Custom configuration") :
 		     ($#{$sharehosts->{list}} >= 0 ?
@@ -98,10 +100,9 @@ sub config_cups {
 		    1;
 		},
 		disabled => sub {
-		    (!$printer->{cupsconfig}{localprintersshared});
+		    (!$printer->{cupsconfig}{localprintersshared} &&
+		     !$printer->{cupsconfig}{remotebroadcastsaccepted});
 		} },
-	      { text => N("Automatically find available printers on remote machines"), type => 'bool',
-		val => \$printer->{cupsconfig}{remotebroadcastsaccepted} },
 	      if_($::expert,
 		  { text => N("Automatic correction of CUPS configuration"),
 		    type => 'bool',
@@ -288,10 +289,12 @@ N("192.168.100.0/255.255.255.0\n")
 			# We have modified the configuration now
 			$printer->{cupsconfig}{customsharingsetup} = 0;
 		    }
-		    # If we have no entry in the list, we do not
-		    # share the local printers, mark this
-		    $printer->{cupsconfig}{localprintersshared} =
-			($#{$printer->{cupsconfig}{clientnetworks}} >= 0);
+		}
+		# If we have no entry in the list, we do not
+		# share the local printers, mark this
+		if ($#{$printer->{cupsconfig}{clientnetworks}} < 0) {
+		    $printer->{cupsconfig}{localprintersshared} = 0;
+		    $printer->{cupsconfig}{remotebroadcastsaccepted} = 0;
 		}
 	    } else {
 		# We have clicked "OK"

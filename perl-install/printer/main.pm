@@ -13,6 +13,7 @@ use printer::gimp;
 use printer::cups;
 use printer::office;
 use printer::detect;
+use handle_configs;
 use services;
 
 use vars qw(@ISA @EXPORT);
@@ -674,95 +675,6 @@ sub write_cupsd_conf {
     printer::services::restart("cups");
 }
 
-sub read_directives {
-
-    # Read one or more occurences of a directive from the cupsd.conf file 
-    # or from a ripped-out location block
-
-    my ($lines_ptr, $directive) = @_;
-
-    my @result = ();
-    ($_ =~ /^\s*$directive\s+(\S.*)$/ and push(@result, $1)) 
-	foreach @{$lines_ptr};
-    (chomp) foreach @result;
-    return @result;
-}
-
-sub read_unique_directive {
-
-    # Read a directive from the from the cupsd.conf file or from a
-    # ripped-out location block, if the directive appears more than once,
-    # use the last occurence and remove all the others, if it does not
-    # occur, return the default value
-
-    my ($lines_ptr, $directive, $default) = @_;
-
-    if ((my @d = read_directives($lines_ptr, $directive)) > 0) {
-	my $value = @d[$#d];
-	set_directive($lines_ptr, "$directive $value");
-	return $value;
-    } else {
-        return $default;
-    }
-}
-
-sub insert_directive {
-
-    # Insert a directive into the cupsd.conf file or into a ripped-out
-    # location block (but only if it is not already there)
-
-    my ($lines_ptr, $directive) = @_;
-
-    ($_ =~ /^\s*$directive$/ and return 0) foreach @{$lines_ptr};
-    splice(@{$lines_ptr}, -1, 0, "$directive\n");
-    return 1;
-}
-
-sub remove_directive {
-
-    # Remove a directive from the cupsd.conf file or from a ripped-out
-    # location block
-
-    my ($lines_ptr, $directive) = @_;
-
-    my $success = 0;
-    ($_ =~ /^\s*$directive/ and $_ = "" and $success = 1)
-	foreach @{$lines_ptr};
-    return $success;
-}
-
-sub replace_directive {
-
-    # Replace a directive in the cupsd.conf file or from a ripped-out
-    # location block, if the directive appears more than once, remove
-    # the additional occurences
-
-    my ($lines_ptr, $olddirective, $newdirective) = @_;
-
-    $newdirective = "$newdirective\n";
-    my $success = 0;
-    ($_ =~ /^\s*$olddirective/ and $_ = $newdirective and 
-     $success = 1 and $newdirective = "") foreach @{$lines_ptr};
-    return $success;
-}
-
-sub set_directive {
-
-    # Set a directive in the cupsd.conf, replace the old definition or
-    # a commented definition
-
-    my ($cupsd_conf_ptr, $directive) = @_;
-
-    my $olddirective = $directive;
-    $olddirective =~ s/^\s*(\S+)\s+.*$/$1/s;
-
-    return (replace_directive($cupsd_conf_ptr, $olddirective,
-			      $directive) or
-	    replace_directive($cupsd_conf_ptr, "\#$olddirective", 
-			      $directive) or 
-	    insert_directive($cupsd_conf_ptr, $directive));
-}
-
 sub read_location {
 
     # Return the lines inside the [path] location block
@@ -866,7 +778,7 @@ sub add_to_location {
     my ($cupsd_conf_ptr, $path, $directive) = @_;
 
     my ($location_start, @location) = rip_location($cupsd_conf_ptr, $path);
-    my $success = insert_directive(\@location, $directive);
+    my $success = handle_configs::insert_directive(\@location, $directive);
     insert_location($cupsd_conf_ptr, $location_start, @location);
     return $success;
 }
@@ -878,7 +790,7 @@ sub remove_from_location {
     my ($cupsd_conf_ptr, $path, $directive) = @_;
 
     my ($location_start, @location) = rip_location($cupsd_conf_ptr, $path);
-    my $success = remove_directive(\@location, $directive);
+    my $success = handle_configs::remove_directive(\@location, $directive);
     insert_location($cupsd_conf_ptr, $location_start, @location);
     return $success;
 }
@@ -890,8 +802,9 @@ sub replace_in_location {
     my ($cupsd_conf_ptr, $path, $olddirective, $newdirective) = @_;
 
     my ($location_start, @location) = rip_location($cupsd_conf_ptr, $path);
-    my $success = replace_directive(\@location, $olddirective, 
-				    $newdirective);
+    my $success = handle_configs::replace_directive(\@location, 
+						    $olddirective, 
+						    $newdirective);
     insert_location($cupsd_conf_ptr, $location_start, @location);
     return $success;
 }
@@ -901,7 +814,8 @@ sub add_allowed_host {
     # Add a host or network which should get access to the local printer(s)
     my ($cupsd_conf_ptr, $host) = @_;
     
-    return (insert_directive($cupsd_conf_ptr, "BrowseAddress $host") and
+    return (handle_configs::insert_directive($cupsd_conf_ptr, 
+					     "BrowseAddress $host") and
 	    add_to_location($cupsd_conf_ptr, "/", "Allow From $host"));
 }
 
@@ -911,8 +825,9 @@ sub remove_allowed_host {
     # printer(s)
     my ($cupsd_conf_ptr, $host) = @_;
     
-    return (remove_directive($cupsd_conf_ptr, "BrowseAddress $host") and
-	    remove_from_location($cupsd_conf_ptr, "/", "Allow From $host"));
+    return (handle_configs::remove_directive($cupsd_conf_ptr, "BrowseAddress $host") and
+	    remove_from_location($cupsd_conf_ptr, "/",
+				 "Allow From $host"));
 }
 
 sub replace_allowed_host {
@@ -921,8 +836,9 @@ sub replace_allowed_host {
     # printer(s)
     my ($cupsd_conf_ptr, $oldhost, $newhost) = @_;
     
-    return (replace_directive($cupsd_conf_ptr, "BrowseAddress $oldhost",
-			      "BrowseAddress $newhost") and
+    return (handle_configs::replace_directive($cupsd_conf_ptr,
+					      "BrowseAddress $oldhost",
+					      "BrowseAddress $newhost") and
 	    replace_in_location($cupsd_conf_ptr, "/", "Allow From $newhost",
 				"Allow From $newhost"));
 }
@@ -1049,17 +965,27 @@ sub clientnetworks {
     # Check for a "Deny From All" line
     my $havedenyfromall =
 	(join('', @{$printer->{cupsconfig}{root}{DenyFrom}}) =~
-	 /All/im);
+	 /All/im ? 1 : 0);
 
-    # Check for "Order Deny,Allow"
-    my $orderdenyallow =
-	($printer->{cupsconfig}{root}{Order} =~
-	 /deny\s*,\s*allow/i);
+    # Check for "Deny From XXX" with XXX != All
+    my $havedenyfromnotall =
+	($#{$printer->{cupsconfig}{root}{DenyFrom}} - $havedenyfromall < 0 ?
+	 0 : 1);
+    
+    # Check for a "BrowseDeny All" line
+    my $havebrowsedenyall =
+	(join('', @{$printer->{cupsconfig}{keys}{BrowseDeny}}) =~
+	 /All/im ? 1 : 0);
+
+    # Check for "BrowseDeny XXX" with XXX != All
+    my $havebrowsedenynotall =
+	($#{$printer->{cupsconfig}{keys}{BrowseDeny}} - 
+	 $havebrowsedenyall < 0 ? 0 : 1);
     
     my @sharehosts;
     my $haveallowfromlocalhost = 0;
     my $haveallowedhostwithoutbrowseaddress = 0;
-
+    my $haveallowedhostwithoutbrowseallow = 0;
     # Go through all "Allow From" lines
     for my $line (@{$printer->{cupsconfig}{root}{AllowFrom}}) {
 	if ($line =~ /^\s*(localhost|0*127\.0+\.0+\.0*1)\s*$/i) {
@@ -1073,6 +999,10 @@ sub clientnetworks {
 	    if (!member(broadcastaddress($line),
 			@{$printer->{cupsconfig}{keys}{BrowseAddress}})) {
 		$haveallowedhostwithoutbrowseaddress = 1;
+	    }
+	    if (!member($line,
+			@{$printer->{cupsconfig}{keys}{BrowseAllow}})) {
+		$haveallowedhostwithoutbrowseallow = 1;
 	    }
 	}
     }
@@ -1089,11 +1019,28 @@ sub clientnetworks {
 	    $havebrowseaddresswithoutallowedhost = 1;
 	}
     }
+    my $havebrowseallowwithoutallowedhost = 0;
+    # Go through all "BrowseAllow" lines
+    for my $line (@{$printer->{cupsconfig}{keys}{BrowseAllow}}) {
+	if ($line =~ /^\s*(localhost|0*127\.0+\.0+\.0*1)\s*$/i) {
+	    # Skip lines pointing to localhost
+	} elsif ($line =~ /^\s*(none)\s*$/i) {
+	    # Skip "BrowseAllow None" lines
+	} elsif (!member($line, @sharehosts)) {
+	    # Line pointing to remote server
+	    push(@sharehosts, $line);
+	    $havebrowseallowwithoutallowedhost = 1;
+	}
+    }
 
-    my $configunsupported = (!$havedenyfromall || !$orderdenyallow ||
+   print "##### (!$havedenyfromall || $havedenyfromnotall || !$havebrowsedenyall || $havebrowsedenynotall || !$haveallowfromlocalhost || $haveallowedhostwithoutbrowseaddress || $havebrowseaddresswithoutallowedhost || $haveallowedhostwithoutbrowseallow || $havebrowseallowwithoutallowedhost)\n";
+    my $configunsupported = (!$havedenyfromall || $havedenyfromnotall ||
+			     !$havebrowsedenyall || $havebrowsedenynotall ||
 			     !$haveallowfromlocalhost ||
 			     $haveallowedhostwithoutbrowseaddress ||
-			     $havebrowseaddresswithoutallowedhost);
+			     $havebrowseaddresswithoutallowedhost ||
+			     $haveallowedhostwithoutbrowseallow ||
+			     $havebrowseallowwithoutallowedhost);
 
     return ($configunsupported, @sharehosts);
 }
@@ -1151,33 +1098,33 @@ sub read_cups_config {
 
     # Keyword "Browsing" 
     $printer->{cupsconfig}{keys}{Browsing} =
-	read_unique_directive($printer->{cupsconfig}{cupsd_conf},
-			      'Browsing', 'On');
+	handle_configs::read_unique_directive($printer->{cupsconfig}{cupsd_conf},
+					      'Browsing', 'On');
 
     # Keyword "BrowseInterval" 
     $printer->{cupsconfig}{keys}{BrowseInterval} =
-	read_unique_directive($printer->{cupsconfig}{cupsd_conf},
-			      'BrowseInterval', '30');
+	handle_configs::read_unique_directive($printer->{cupsconfig}{cupsd_conf},
+					      'BrowseInterval', '30');
 
     # Keyword "BrowseAddress" 
     @{$printer->{cupsconfig}{keys}{BrowseAddress}} =
-	read_directives($printer->{cupsconfig}{cupsd_conf},
-			'BrowseAddress');
+	handle_configs::read_directives($printer->{cupsconfig}{cupsd_conf},
+					'BrowseAddress');
 
     # Keyword "BrowseAllow" 
     @{$printer->{cupsconfig}{keys}{BrowseAllow}} =
-	read_directives($printer->{cupsconfig}{cupsd_conf},
-			'BrowseAllow');
+	handle_configs::read_directives($printer->{cupsconfig}{cupsd_conf},
+					'BrowseAllow');
 
     # Keyword "BrowseDeny" 
     @{$printer->{cupsconfig}{keys}{BrowseDeny}} =
-	read_directives($printer->{cupsconfig}{cupsd_conf},
-			'BrowseDeny');
+	handle_configs::read_directives($printer->{cupsconfig}{cupsd_conf},
+					'BrowseDeny');
 
     # Keyword "BrowseOrder" 
     $printer->{cupsconfig}{keys}{BrowseOrder} =
-	read_unique_directive($printer->{cupsconfig}{cupsd_conf},
-			      'BrowseOrder', 'deny,allow');
+	handle_configs::read_unique_directive($printer->{cupsconfig}{cupsd_conf},
+					      'BrowseOrder', 'deny,allow');
 
     # Root location
     @{$printer->{cupsconfig}{rootlocation}} =
@@ -1185,18 +1132,18 @@ sub read_cups_config {
 
     # Keyword "Allow from" 
     @{$printer->{cupsconfig}{root}{AllowFrom}} =
-	read_directives($printer->{cupsconfig}{rootlocation},
-			'Allow From');
+	handle_configs::read_directives($printer->{cupsconfig}{rootlocation},
+					'Allow From');
 
     # Keyword "Deny from" 
     @{$printer->{cupsconfig}{root}{DenyFrom}} =
-	read_directives($printer->{cupsconfig}{rootlocation},
-			'Deny From');
+	handle_configs::read_directives($printer->{cupsconfig}{rootlocation},
+					'Deny From');
 
     # Keyword "Order" 
     $printer->{cupsconfig}{root}{Order} =
-	read_unique_directive($printer->{cupsconfig}{rootlocation},
-			      'Order', 'Deny,Allow');
+	handle_configs::read_unique_directive($printer->{cupsconfig}{rootlocation},
+					      'Order', 'Deny,Allow');
 
     # Widget settings
 
@@ -1224,51 +1171,43 @@ sub write_cups_config {
 
     # Local printers available to other machines?
     if ($printer->{cupsconfig}{localprintersshared}) {
-	set_directive($printer->{cupsconfig}{cupsd_conf},
-		      'Browsing On');
+	handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
+				      'Browsing On');
 	if ($printer->{cupsconfig}{keys}{BrowseInterval} == 0) {
-	    set_directive($printer->{cupsconfig}{cupsd_conf},
-			  'BrowseInterval 30');
+	    handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
+					  'BrowseInterval 30');
 	}  
     } else {
-	set_directive($printer->{cupsconfig}{cupsd_conf},
-		      'BrowseInterval 0');
+	handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
+				      'BrowseInterval 0');
     }
 
     # This machine is accepting printers shared by remote machines?
     if ($printer->{cupsconfig}{remotebroadcastsaccepted}) {
-	set_directive($printer->{cupsconfig}{cupsd_conf},
-		      'Browsing On');
-	if (($printer->{cupsconfig}{localprintersshared}) &&
-	    ($#{$printer->{cupsconfig}{clientnetworks}} > 0) &&
-	    (!$printer->{cupsconfig}{customsharingsetup})) {
+	handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
+				      'Browsing On');
+	if (!$printer->{cupsconfig}{customsharingsetup}) {
 	    # If we broadcast our printers, let's accept the broadcasts
 	    # from the machines to which we broadcast
-	    set_directive($printer->{cupsconfig}{cupsd_conf},
-			  'BrowseDeny All');
-	    set_directive($printer->{cupsconfig}{cupsd_conf},
-			  'BrowseOrder Deny,Allow');
-	    set_directive($printer->{cupsconfig}{cupsd_conf},
-			  'BrowseAllow ' .
-			  join ("\nBrowseAllow ", 
-				@{$printer->{cupsconfig}{clientnetworks}}));
-	} elsif (!remotebroadcastsaccepted($printer)) {
-	    # Use default settings if the "BrowseDeny"/"BrowseAllow"
-	    # configuration does not accept broadcasts
-	    set_directive($printer->{cupsconfig}{cupsd_conf},
-			  'BrowseDeny All');
-	    set_directive($printer->{cupsconfig}{cupsd_conf},
-			  'BrowseOrder Deny,Allow');
-	    set_directive($printer->{cupsconfig}{cupsd_conf},
-			  'BrowseOrder @LOCAL');
+	    handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
+					  'BrowseDeny All');
+	    handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
+					  'BrowseOrder Deny,Allow');
 	}
     } else {
-	# Deny all broadcasts, but leave all "BrowseAllow" lines
-	# untouched
-	set_directive($printer->{cupsconfig}{cupsd_conf},
-		      'BrowseDeny All');
-	set_directive($printer->{cupsconfig}{cupsd_conf},
-		      'BrowseOrder Allow,Deny');
+	if ($printer->{cupsconfig}{localprintersshared}) {
+	    # Deny all broadcasts, but leave all "BrowseAllow" lines
+	    # untouched
+	    handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
+					  'BrowseDeny All');
+	      handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
+					    'BrowseOrder Allow,Deny');
+	} else {
+	    # We also do not share printers, so we turn browsing off to
+	    # do not need to deal with any addresses
+	    handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
+					  'Browsing Off');
+	}
     }
 
     # To which machines are the local printers available?
@@ -1276,24 +1215,42 @@ sub write_cups_config {
 	# root location block
 	@{$printer->{cupsconfig}{rootlocation}} =
 	    "<Location />\n" .
-	    "Order Deny,Allow\n" .
+	    ($printer->{cupsconfig}{localprintersshared} ?
+	     "Order Deny,Allow\n" :
+	     "Order Allow,Deny\n") .
 	    "Deny From All\n" .
 	    "Allow From 127.0.0.1\n" .
-	    "Allow From " .
-	    join ("\nAllow From ", 
-		  @{$printer->{cupsconfig}{clientnetworks}}) .
-	    "\n" .
+	    ($#{$printer->{cupsconfig}{clientnetworks}} >= 0 ?
+	     "Allow From " .
+	     join ("\nAllow From ", 
+		   @{$printer->{cupsconfig}{clientnetworks}}) .
+	     "\n" : "").
 	    "</Location>\n";
 	my ($location_start, @location) = 
 	    rip_location($printer->{cupsconfig}{cupsd_conf}, "/");
 	insert_location($printer->{cupsconfig}{cupsd_conf}, $location_start,
 			@{$printer->{cupsconfig}{rootlocation}});
 	# "BrowseAddress" lines
-	set_directive($printer->{cupsconfig}{cupsd_conf},
-		      'BrowseAddress ' .
-		      join ("\nBrowseAddress ",
-			    map {broadcastaddress($_)}
-			    @{$printer->{cupsconfig}{clientnetworks}}));
+	if ($#{$printer->{cupsconfig}{clientnetworks}} >= 0) {
+	    handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
+					  'BrowseAddress ' .
+					  join ("\nBrowseAddress ",
+						map {broadcastaddress($_)}
+						@{$printer->{cupsconfig}{clientnetworks}}));
+	} else {
+	    handle_configs::comment_directive($printer->{cupsconfig}{cupsd_conf},
+					      'BrowseAddress')
+	}
+	# Set "BrowseAllow" lines
+	if ($#{$printer->{cupsconfig}{clientnetworks}} >= 0) {
+	    handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
+					  'BrowseAllow ' .
+					  join ("\nBrowseAllow ", 
+						@{$printer->{cupsconfig}{clientnetworks}}));
+	} else {
+	    handle_configs::comment_directive($printer->{cupsconfig}{cupsd_conf},
+					      'BrowseAllow');
+	}
     }
 
 }
