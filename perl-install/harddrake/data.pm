@@ -55,7 +55,7 @@ our @tree =
          my @usbnet = qw(CDCEther catc kaweth nvnet pegasus usbnet); # rought hack for nforce2's nvet
          # should be taken from detect_devices.pm or modules.pm. it's identical
          
-         grep { $_->{media_type} =~ /^NETWORK/ || member($_->{driver}, @usbnet) || $_->{type} eq 'network' } @devices }, 1 ],
+         grep { $_->{media_type} && $_->{media_type} =~ /^NETWORK/ || member($_->{driver}, @usbnet) || $_->{type} && $_->{type} eq 'network' } @devices }, 1 ],
      [ "MODEM", , N("Modem"), "modem.png", "", sub { detect_devices::getSpeedtouch(), detect_devices::getSagem(), detect_devices::getModem() }, 0 ],
      [ "BRIDGE", , N("Bridges and system controllers"), "memory.png", "", sub { grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM/ && $_->{driver} ne 'nvnet' } @devices }, 0 ],
      [ "UNKNOWN", , N("Unknown/Others"), "unknown.png", "", \&unknown, 0 ],
