@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 55mdk
+Release: 56mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -318,6 +318,24 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Jul 19 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-56mdk
+- bootloader-config (pixel):
+  o save prior boot loader config file (#10072)
+  o don't unset prompt when timeout is undefined (and don't care when
+    timeout is 0)
+  o also add long name when adding add short name
+- net_monitor:
+  o add a border spacing of 5 pixel (Fabrice Facorat, #10299)
+  o disable the connect button if up interface is found (there is
+    currently no reliable way to find the gateway interface)
+    (olivier blin)
+  o use ifup/ifdown to connect/disconnect (olivier blin)
+  o no need to be root to monitor connection (olivier blin)
+- drakconnect (olivier blin):
+  o make connection status check work as non root
+  o do not write wireless encryption key if empty
+  o use blacklist too for adsl connections
+
 * Sat Jul 17 2004 Daouda LO <daouda@mandrakesoft.com> 10-55mdk
 - remove historical consolehelper files (pam.d and console.apps)
 
