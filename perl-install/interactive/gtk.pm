@@ -623,7 +623,10 @@ sub ask_fromW {
 	$first_time = 0;
 	$set_all->(); #- must be done when showing advanced lists (to center selected value)
     };
-    my $advanced_button = [ $common->{advanced_label}, 
+    if ($::expert && @$l2) {
+        $common->{advanced_state} = 1;
+    }
+    my $advanced_button = [ $common->{advanced_state} ? $common->{advanced_label_close} : $common->{advanced_label},
 			    sub { 
 				my ($w) = @_;
 				$set_advanced->(!$advanced);
@@ -638,10 +641,6 @@ sub ask_fromW {
 			      }, 1 ]),
 			if_($common->{more_buttons}, @{$common->{more_buttons}}),
 		       );
-    if ($::expert && @$l2) {
-        $common->{advanced_state} = 1;
-        $advanced_button->[0] = $common->{advanced_label_close};
-    }
     my $buttons_pack = ($common->{ok} || !exists $common->{ok}) && $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @more_buttons, if_(@$l2, $advanced_button));
     
     my @widgets_to_pack;
