@@ -552,6 +552,7 @@ sub main {
     $o->{meta_class} = 'download' if $VERSION =~ /download/i;
     $o->{meta_class} = 'firewall' if $VERSION =~ /firewall/i;
     $o->{meta_class} = 'server' if $VERSION =~ /server|prosuite/i;
+    $o->{meta_class} eq 'discovery' and $o->{meta_class} = 'desktop';
     if ($::oem) {
 	$o->{partitioning}{use_existing_root} = 1;
 	$o->{compssListLevel} = 4;
