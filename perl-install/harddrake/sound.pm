@@ -141,7 +141,7 @@ sub get_alternative {
 }
 
 sub do_switch {
-    my ($old_driver, $new_driver, $index) = @_;
+    my ($in, $old_driver, $new_driver, $index) = @_;
     my $wait = $in->wait_message(N("Please wait"), N("Please Wait... Applying the configuration"));
     log::explanations("removing old $old_driver\n");
     rooted("service sound stop") unless $blacklisted;
@@ -215,7 +215,7 @@ To use alsa, one can either use:
             $in->ask_warn(N("Warning"), N("The old \"%s\" driver is blacklisted.\n
 It has been reported to oops the kernel on unloading.\n
 The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)) if $blacklisted;
-            do_switch($driver, $new_driver, $device->{sound_slot_index});
+            do_switch($in, $driver, $new_driver, $device->{sound_slot_index});
         }
     } elsif ($driver =~ /^Bad:/) {
         $driver =~ s/^Bad://;
@@ -280,7 +280,7 @@ The current driver for your \"%s\" sound card is \"%s\" ", $device->{description
                                { label => N("Driver:"), val => \$driver, list => [ category2modules("multimedia/sound") ], type => 'combo', default => $driver, sort =>1, separator => '|' },
                               ]
                              )) {
-                do_switch($old_driver, $driver, $device->{sound_slot_index});
+                do_switch($in, $old_driver, $driver, $device->{sound_slot_index});
                 goto end;
             }
         }
