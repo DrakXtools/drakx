@@ -75,6 +75,7 @@ sub add2dll {
 
 sub configured() {
     my @res;
+    my $parportscannerfound = 0;
     # Run "scanimage -L", to find the scanners which are already working
     local *LIST;
     open LIST, "LC_ALL=C scanimage -L |";
@@ -83,6 +84,10 @@ sub configured() {
 	    # Extract port and description
 	    my $port = $1;
 	    my $description = $2;
+	    # Is the scanner hooked to a parallel or serial port?
+	    if ($port =~ /(parport|pt_drv|parallel|ttys)/i) {
+		$parportscannerfound = 1;
+	    }
 	    # Remove duplicate scanners appearing through saned and the
 	    # "net" backend
 	    next if $port =~ /^net:(localhost|127.0.0.1):/;
@@ -96,7 +101,96 @@ sub configured() {
 	}
     }
     close LIST;
+    # We have a parallel port scanner, make it working for non-root users
+    nonroot_access_for_parport($parportscannerfound);
     return @res;
+}
+
+sub nonroot_access_for_parport {
+
+    # This function configures a non-root access for parallel port
+    # scanners by running saned as root, esporting the scanner to
+    # localhost and letting the user's frontend use the "net" backend
+    # to access the scanner through the loopback network device.
+
+    # See also
+    # http://www.linuxprinting.org/download/digitalimage/Scanning-as-Normal-User-on-Wierd-Scanner-Mini-HOWTO.txt
+
+    # Desired state of this facility: 1: Enable, 0: Disable
+    my ($enable) = @_;
+    # Is saned running?
+    my $sanedrunning = services::starts_on_boot("saned");
+    # Is the "net" SANE backend active
+    my $netbackendactive = grep { /^\s*net\s*$/ }
+      cat_("/etc/sane.d/dll.conf");
+    # Set this to 1 to tell the caller that the list of locally available
+    # scanners has changed (Here if the SANE client configuration has
+    # changed)
+    my $changed = 0;
+    my $importschanged = 0;
+    if ($enable) {
+	# Enable non-root access
+	
+	# Install/start saned
+	if (!$sanedrunning) {
+	    # Make sure saned and xinetd is installed and 
+	    # running
+	    if (!files_exist('/usr/sbin/xinetd',
+			     '/usr/sbin/saned')) {
+		if (!$in->do_pkgs->install('xinetd', 'saned')) {
+		    $in->ask_warn(N("Scannerdrake"),
+				  N("Could not install the packages needed to share your scanner(s).") . " " .
+				  N("Your scanner(s) will not be available for non-root users."));
+		}
+		return 0;
+	    }
+	}
+
+	# Modify /etc/xinetd.d/saned to let saned run as root
+	my @sanedxinetdconf = cat_("/etc/xinetd.d/saned");
+	( s/(user\s*=\s*).*$/$1root/ ) foreach @sanedxinetdconf;
+	( s/(group\s*=\s*).*$/$1root/ ) foreach @sanedxinetdconf;
+	output("/etc/xinetd.d/saned", @sanedxinetdconf);
+
+	# Read list of hosts to where to export the local scanners
+	my @exports = cat_("/etc/sane.d/saned.conf");
+	# Read list of hosts from where to import scanners
+	my @imports = cat_("/etc/sane.d/net.conf");
+	# Add "localhost" to the machines which saned exports
+	handle_configs::set_directive(\@exports, "localhost")
+	    if !member("localhost\n", @exports);
+	# Add "localhost" to the machines which "net" imports
+	handle_configs::set_directive(\@imports, "localhost")
+	    if !member("localhost\n", @imports);
+	# Write /etc/sane.d/saned.conf
+	output("/etc/sane.d/saned.conf", @exports);
+	# Write /etc/sane.d/net.conf
+	output("/etc/sane.d/net.conf", @imports);
+
+	# Make sure that the "net" backend is active
+	scanner::add2dll("net");
+	
+	# (Re)start saned and make sure that it gets started on
+	# every boot
+	services::start_service_on_boot("saned");
+	services::start_service_on_boot("xinetd");
+	services::restart("xinetd");
+
+    } else {
+	# Disable non-root access
+
+	if (-r "/etc/xinetd.d/saned") {
+	    # Modify /etc/xinetd.d/saned to let saned run as saned
+	    my @sanedxinetdconf = cat_("/etc/xinetd.d/saned");
+	    ( s/(user\s*=\s*).*$/$1saned/ ) foreach @sanedxinetdconf;
+	    ( s/(group\s*=\s*).*$/$1saned/ ) foreach @sanedxinetdconf;
+	    output("/etc/xinetd.d/saned", @sanedxinetdconf);
+	    # Restart xinetd
+	    services::restart("xinetd") if $sanedrunning;
+	}
+    }
+
+    return 1;
 }
 
 sub detect {
