@@ -1,14 +1,14 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.14mdk
+Release: 0.15mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
-# Temporary requires for tools that still use gtk+1 (that is net_monitor; drakcronat is being ported)
+# Temporary requires for tools that still use gtk+1 (that is drakcronat which is currently being renewed)
 Requires: perl-GTK >= 0.7008-29mdk, perl-GTK-GdkImlib, perl-GTK-GdkPixbuf
-Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 0.26.cvs.2003.07.09.1-2mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.2-2mdk
+Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 0.26.cvs.2003.07.10.1-3mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.2-2mdk
 Conflicts: drakconf < 9.1-14mdk
 BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.9, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.3-1mdk
 BuildRoot: %_tmppath/%name-buildroot
@@ -312,6 +312,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Jul 15 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.15mdk
+- draksec: wrap labels
+- drakfloppy:
+  o use option menus rather than non editable combo
+  o grey remove button if no module to remove in modules list 
+
 * Mon Jul 14 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.14mdk
 - drakboot: fix /etc/lilo.conf generation when reading grub config by setting
   valid "boot=" parameter
@@ -332,7 +338,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o support new 2.5.x kernels' kbuild
   o fix old brown paper bug (mdk8.2/9.0 :-() not passing extra selected modules
     to mkinitrd
-  o fix unable to pick a module again after having removed ot from selection
+  o fix unable to pick a module again after having removed it from selection
   o renew GUI:
     * window with enabled expert options is too big when embedded: let's move
       expert options into a sub dialog
