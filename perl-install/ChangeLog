@@ -1,3 +1,139 @@
+2003/08/21  Pixel  <pixel at mandrakesoft.com>
+
+	* fsedit.pm: simplify
+	allocatePartitions() resulted in a small unallocated area at the end of
+	the
+	drive when:
+	  - suggest_part() reserves some room for the other partitions which are
+	going to
+	be added next. For maxsize limited partition, it reserves maxsize (if
+	maxsize
+	is reached)
+	  - suggest_part() which adds the last partition limited by maxsize can
+	be
+	called on a partition a little bigger than maxsize due to cylinder
+	boundary
+	adjustments on previous partition creations. In that case, it doesn't
+	use the
+	full area.
+	It occured for example with the current $fsedit::suggestions{server}.
+	The fix chosen is to ensure the last suggest_part() is called with a
+	size
+	defined as maxsize <= size < maxsize + cylinder_size.
+
+2003/08/20  erwan
+
+	* share/rpmsrate: Decreasing weight of pbs (pro),
+	Increasing weight of ScalablePBS & Maui
+
+2003/08/20  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/08/20  François Pons  <fpons at mandrakesoft.com>
+
+	* mouse.pm: added emulate wheel support (a bit hacky though) (bug 3976)
+
+	* install_any.pm: added missing require.
+	added pubkey and rpmdb key importation.
+
+	* Xconfig/parse.pm: fix bug 3976.
+
+	* pkgs.pm: added pubkey support for medium.
+
+	* share/list: added URPM::Signature module needed to parse pubkey and
+	import them to rpmdb.
+
+2003/08/20  gbeauchesne
+
+	* tools/x86_64/busybox: Add busybox/amd64 compiled with dietlibc
+
+	* c/smp.c: Use x86 smp detection scheme on amd64 instead of the ugly dmesg
+	workaround.
+
+	* mdk-stage1/pcmcia_/cardmgr.c: Use "%p" specifier as "Base" is likely to
+	be an address.
+
+	* mdk-stage1/ppp/pppd/sys-linux.c: Use <net/if_arp.h> thusly bypassing
+	need for <linux/byteorder/generic.h>
+
+	* Makefile: Use busybox in stage2 on AMD64
+
+2003/08/20  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* share/fonts.tar.bz2: re-put etc/fonts/fonts.conf, pablo removed it in
+	previous commit, it broke the whole installation program starting up :)
+
+	* tools/make_lang_png_transparent.c: this file allows to make an
+	antialiased black-on-white png, antialiased black-on-transparent
+	it's used for perl-install/pixmaps/langs/lang-*.png
+
+	* pixmaps/langs/lang-ve.png, pixmaps/langs/lang-gu.png,
+	pixmaps/langs/lang-as.png, pixmaps/langs/lang-se.png,
+	pixmaps/langs/lang-mr.png, pixmaps/langs/lang-uz.png,
+	pixmaps/langs/lang-xh.png, pixmaps/langs/lang-ne.png,
+	pixmaps/langs/lang-ml.png, pixmaps/langs/lang-li.png,
+	pixmaps/langs/lang-zu.png, pixmaps/langs/lang-ku.png,
+	pixmaps/langs/lang-uz@Cyrl.png, pixmaps/langs/lang-te.png,
+	pixmaps/langs/lang-st.png, pixmaps/langs/lang-ss.png: make them
+	transparent
+
+2003/08/20  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/tg.po, share/po/da.po, share/po/ro.po, share/po/sv.po,
+	share/po/bs.po, share/po/DrakX.pot, share/po/az.po, share/po/uz.po,
+	share/po/cs.po, share/po/ar.po, share/po/ko.po, share/po/cy.po,
+	share/po/tr.po, share/po/gl.po, share/po/ga.po, share/po/nl.po,
+	share/po/ja.po, share/po/eo.po, share/po/wa.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/be.po, share/po/fr.po, share/po/ta.po,
+	share/po/sl.po, share/po/es.po, share/po/fi.po, share/po/hu.po,
+	share/po/pl.po, share/po/el.po, share/po/et.po, share/po/eu.po,
+	share/po/sk.po, share/po/lv.po, share/po/bg.po, share/po/pt.po,
+	share/po/zh_CN.po, share/po/sr.po, share/po/uk.po, share/po/af.po,
+	share/po/zh_TW.po, share/po/he.po, share/po/hr.po, share/po/vi.po,
+	share/po/id.po, share/po/uz@Cyrl.po, share/po/th.po, share/po/de.po,
+	share/po/ru.po, share/po/fa.po, share/po/pt_BR.po, share/po/mt.po,
+	share/po/nb.po, share/po/ca.po, share/po/lt.po, share/po/is.po: updated
+	pot file
+
+	* keyboard.pm, share/keyboards.tar.bz2: Added choice of Irish keyboard;
+	updated the Georgian "latin layout" one.
+
+	* share/po/it.po: updated pot file
+	updated Italian file
+
+2003/08/20  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_interactive.pm, modules.pm, install_steps.pm: load
+	detected firewire modules during install
+
+	* detect_devices.pm: add firewire_probe() and use it in probeall()
+
+	* fsedit.pm, security/l10n.pm: fix english (thanks to Arpad Biro)
+
+2003/08/20  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup, standalone/drakTermServ: Text typos - Arpad Biro
+
+2003/08/20  siegel
+
+	* share/po/de.po: updates
+
+2003/08/20  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm: standalone wizards: increase height to prevent some hidden or
+	cutted
+	buttons (some locales and some steps may still be partially hidden)
+
+	* standalone/logdrake: annotate load for translators (Arpad Biro)
+	only complain if an error really happened
+
+	* standalone.pm: frederic crozat said that border is ugly for standalone
+	tools.
+	so let it be used only by install.
+
+	* share/po/fr.po: fix #4787
+
 2003/08/20  Pixel  <pixel at mandrakesoft.com>
 
 	* detect_devices.pm: add firewire_probe() and use it in probeall()
@@ -19095,7 +19231,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.819 2003/08/18 17:55:29 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.820 2003/08/20 01:15:53 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
