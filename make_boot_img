@@ -102,8 +102,6 @@ sub initrd {
 	my $install = ${{
 	    network => "stage1-network",
 	    cdrom => "stage1-cdrom",
-	    hd => "stage1-disk",
-	    hdcdrom_usb => "stage1-medias-usb",
 	}}{$type} || 'stage1-full';
 	install_stripped("$instdir/init", "$mnt/sbin");
 	install_stripped("$instdir/$install", "$mnt/sbin/stage1");
@@ -140,9 +138,7 @@ sub initrd {
 sub entries_append {
     my ($type) = @_;
 
-    my $automatic = "";
-    $automatic = "automatic=method:cdrom" if $type eq "cdrom";
-    $automatic = "automatic=method:disk" if $type eq "hd";
+    my $automatic = $type eq "cdrom" ? 'automatic=method:cdrom' : '';
 
     my @simple_entries = (
 	linux => $default_vga,
@@ -170,9 +166,7 @@ sub boot_img_i386 {
 
     __ "$sudo umount $mnt 2>/dev/null";
 
-    if ($type eq "hd") {
-	_ "bunzip2 -c $instdir/init-data/msgboot.img.bz2 > $img";
-    } elsif ($type eq "all") {
+    if ($type eq "all") {
 	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo-2880.img.bz2 > $img";
     } else {
 	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo.img.bz2 > $img";
