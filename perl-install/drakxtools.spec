@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 2mdk
+Release: 3mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Aug 26 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-3mdk
+- drakconnect (non wizard gui):
+  o add --skip-wizard option to get into non wizard mode
+  o hide profile in "internet config" dialog if profiles are disabled
+  o "Configure hostname..." button: offer to configure DNS too
+  o only allow to run one wizard at once
+  o reload the configuration once the wizard exited
+  o prevent one to do concurrent config changes from the gui while the
+    wizard is run
+  o only write conf & install packages on exit if something really has
+    been altered so that we do not write the config twice if the
+    "apply" button was already pressed
+
 * Tue Aug 26 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-2mdk
 - diskdrake: (pixel)
   o fix WebDAV configuration embedding (#4703)
