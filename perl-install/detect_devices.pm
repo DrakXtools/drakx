@@ -570,7 +570,8 @@ sub getNet() {
 
 sub getUPS() {
     # MGE serial PnP devices:
-    my @usb_devices = usb_probe();
+    my @usb_devices = map { ($_->{name} = $_->{description}) =~ s/.*\|// } usb_probe();
+
     (map {
         $_->{port} = $_->{DEVICE};
         $_->{bus} = "Serial";
@@ -583,10 +584,9 @@ sub getUPS() {
       # USB UPSs;
       (grep { $_->{description} =~ /American Power Conversion\|Back-UPS/ } @usb_devices),
       (map {
-          ($_->{name} = $_->{description}) =~ s/.*\|//;
-          $_->{port} = "auto";
+          $_->{port} = "/dev/hiddev0";
           $_->{media_type} = 'UPS';
-          $_->{driver} =~ s/^UPS://;
+          $_->{driver} = 'hidups';
           $_;
       } grep { $_->{driver} =~ /ups$/ } @usb_devices);
 }
