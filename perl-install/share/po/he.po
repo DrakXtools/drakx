@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-03-04 11:25+0200\n"
+"PO-Revision-Date: 2005-03-04 15:05+0200\n"
 "Last-Translator: dovix <dovix2003@yahoo.com>\n"
 "Language-Team: Hebrew <mdk-hebrew@iglu.org.il>\n"
 "MIME-Version: 1.0\n"
@@ -55,6 +55,8 @@ msgid ""
 "The USB key seems to have write protection enabled. Please\n"
 "unplug it, remove write protection, and then plug it again."
 msgstr ""
+"נראה שהתקן זיכרון ה-USB מוגן בפני כתיבה. עליך לשלוף\n"
+"אותו מהמחשב, לבטל את הגנת הכתיבה, ולחבר אותו מחדש."
 
 #: ../move/move.pm:452
 #, c-format
@@ -390,7 +392,7 @@ msgstr "השתמש בהרחבת Xinerama"
 #: Xconfig/card.pm:390
 #, c-format
 msgid "Configure only card \"%s\"%s"
-msgstr ""
+msgstr "הגדר רק את הכרטיס \"%s\"%s"
 
 #: Xconfig/card.pm:402 Xconfig/various.pm:23
 #, c-format
@@ -465,7 +467,7 @@ msgstr "אפשרויות"
 #: Xconfig/main.pm:168
 #, c-format
 msgid "Your Xorg configuration file is broken, we will ignore it."
-msgstr "הגדרות השרת הגרפי Xorg שלך שבורות, ולכן לא נתייחס אליהן."
+msgstr "הגדרות השרת הגרפי Xorg שלך אינן תקינות, ולכן לא נתייחס אליהן."
 
 #: Xconfig/main.pm:186
 #, c-format
@@ -483,7 +485,7 @@ msgstr ""
 #: Xconfig/monitor.pm:112
 #, c-format
 msgid "Choose a monitor for head #%d"
-msgstr ""
+msgstr "בחירת צג למסך #%d"
 
 #: Xconfig/monitor.pm:112
 #, c-format
@@ -740,6 +742,13 @@ msgid ""
 "\n"
 "Do you have this feature?"
 msgstr ""
+"כנראה שלכרטיס המסך שלך יש יציאת טלויזיה TV-OUT.\n"
+"יש אפשרות להגדיל יציאה זו לשימוש עם frame-buffer.\n"
+"\n"
+"כדי לבצע זאת עליך לחבר את הטלויזיה שלך לכרטיס המסך לפני אתחול המחשב.\n"
+"לאחר מכן עליך לבחור את הכניסה \"TVout\" בטוען המערכת\n"
+"\n"
+"האם ברצונך להגדיר אפשרות זו?"
 
 #: Xconfig/various.pm:99
 #, c-format
@@ -931,7 +940,7 @@ msgstr "הודעת אתחול"
 #: any.pm:304
 #, c-format
 msgid "Open Firmware Delay"
-msgstr ""
+msgstr "השהיית קושחה (Firmware) פתוחה"
 
 #: any.pm:305
 #, c-format
@@ -946,7 +955,7 @@ msgstr "האם לאפשר אתחול מתקליטור?"
 #: any.pm:307
 #, c-format
 msgid "Enable OF Boot?"
-msgstr ""
+msgstr "האם לאפשר אתחול OF?"
 
 #: any.pm:308
 #, c-format
@@ -1291,7 +1300,7 @@ msgstr ""
 msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
 "systems."
-msgstr ""
+msgstr "SMB: מערכת שיתוף קבצים הנמצאת בשימוש בחלונות, Mac OS X ומערכות לינוקס מודרניות רבות."
 
 #: any.pm:941
 #, c-format
@@ -2462,7 +2471,7 @@ msgstr "המחיצה %s זמינה כעת כ-%s"
 #: diskdrake/interactive.pm:1147
 #, c-format
 msgid "Partitions have been renumbered: "
-msgstr ""
+msgstr "מספרי המחיצות שונו: "
 
 #: diskdrake/interactive.pm:1167 diskdrake/interactive.pm:1226
 #, c-format
@@ -2546,6 +2555,8 @@ msgid ""
 "Loopback file(s):\n"
 "   %s\n"
 msgstr ""
+"קבצי Loopback:\n"
+"   %s\n"
 
 #: diskdrake/interactive.pm:1198
 #, c-format
@@ -2569,12 +2580,12 @@ msgstr "גודל חתיכה %d KiB\n"
 #: diskdrake/interactive.pm:1202
 #, c-format
 msgid "RAID-disks %s\n"
-msgstr ""
+msgstr "כונני RAID %s\n"
 
 #: diskdrake/interactive.pm:1204
 #, c-format
 msgid "Loopback file name: %s"
-msgstr ""
+msgstr "שם קובץ Loopback: %s"
 
 #: diskdrake/interactive.pm:1207
 #, c-format
@@ -2680,7 +2691,7 @@ msgstr "אין אפשרות כניסה עם שם משתמש %s (סיסמה שג�
 #: diskdrake/smbnfs_gtk.pm:167 diskdrake/smbnfs_gtk.pm:176
 #, c-format
 msgid "Domain Authentication Required"
-msgstr ""
+msgstr "נדרש אימות שם המתחם"
 
 #: diskdrake/smbnfs_gtk.pm:168
 #, c-format
@@ -2918,11 +2929,14 @@ msgid ""
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
+"בחרת במחיצת RAID המוגדרת בתוכנה כשורש מערכת הקבצים שלך (/).\n"
+"תצורה זו לא נתמכת ע\"י טוען המערכת ללא מחיצת /boot.\n"
+"עליך להגדיר מחיצת /boot מתאימה"
 
 #: fsedit.pm:408
 #, c-format
 msgid "You can not use a LVM Logical Volume for mount point %s"
-msgstr "אינך יכול/ה להשתמש במחיצה לוגית של LVM לנקודת חיבור %s"
+msgstr "אין באפשרותך להשתמש במחיצה לוגית מסוג LVM לעיגון %s"
 
 #: fsedit.pm:410
 #, c-format
@@ -2931,13 +2945,16 @@ msgid ""
 "The bootloader is not able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
+"בחרת להשתמש ב-LVM Logical Volume כשורש מערכת הקבצים שלך (/).\n"
+"תצורה זו לא נתמכת ע\"י טוען המערכת ללא מחיצת /boot.\n"
+"עליך להגדיר מחיצת /boot מתאימה"
 
 #: fsedit.pm:413
 #, c-format
 msgid ""
 "You may not be able to install lilo (since lilo does not handle a LV on "
 "multiple PVs)"
-msgstr ""
+msgstr "יתכן ולא יהיה ניתן להתקין את טוען המערכת Lilo (מאחר ו-Lilo אינו יודע לטפל ב-LV על PV מרובים)"
 
 #: fsedit.pm:416 fsedit.pm:418
 #, c-format
@@ -3263,7 +3280,7 @@ msgstr "אין מנהל התקן בקוד פתוח"
 msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
 "driver at \"%s\"."
-msgstr ""
+msgstr "לא קיים מנהל התקן חופשי עבור כרטיס המסך שלך (%s), אבל קיים מנהל התקן קנייני באתר \"%s\"."
 
 #: harddrake/sound.pm:282
 #, c-format
@@ -3349,7 +3366,7 @@ msgstr "לא ידוע|כללי"
 #: harddrake/v4l.pm:105
 #, c-format
 msgid "Unknown|CPH05X (bt878) [many vendors]"
-msgstr ""
+msgstr "לא מוכר|CPH05X (bt878) [יצרנים רבים]"
 
 #: harddrake/v4l.pm:106
 #, c-format
@@ -5050,6 +5067,9 @@ msgid ""
 "missing), this generally means your boot floppy in not in sync with the "
 "Installation medium (please create a newer boot floppy)"
 msgstr ""
+"אין באפשרותי למצוא את מודולי הקרנל המתאימים לקרנל שלך (הקובץ %s חסר). "
+"הסיבה לכך נובעת בדרך כלל מתקליטון אתחול שאינו מותאם למדיית ההתקנה (עליך ליצור "
+"תקליטון אתחול חדש)"
 
 #: install2.pm:167
 #, c-format
@@ -5123,7 +5143,7 @@ msgstr "כתובת URL של אתר המראה?"
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
-msgstr ""
+msgstr "אין באפשרותי למצוא קובץ המכיל רשימת חבילות במקור זה. עלייך לוודא שהכתובת תקינה."
 
 #: install_any.pm:633
 #, c-format
@@ -6047,6 +6067,9 @@ msgid ""
 "It will then continue from the hard drive and the packages will remain "
 "available once the system is fully installed."
 msgstr ""
+"ניתן להעתיק את תכולת התקליטורים לכונן הקשיח לפני תחילת ההתקנה.\n"
+"אם אפשרות זו מופעלת, ההתקנה תמשיך מהכונן הקשיח, וכל החבילות מתקליטורי ההתקנה "
+"יהיו זמינות אחרי סיום ההתקנה מהכונן הקשיח."
 
 #: install_steps_gtk.pm:686
 #, c-format
@@ -6166,6 +6189,8 @@ msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
 "system, you'll need to create the bootstrap partition in DiskDrake"
 msgstr ""
+"לא נמצא מקום פנוי עבור bootstrap בגודל 1MB! ההתקנה תמשיך, אבל בכדי לאתחל את המערכת שלך, "
+"יהיה עליך ליצור מחיצת bootstrap באופן ידני בעזרת DiskDrake"
 
 #: install_steps_interactive.pm:317
 #, c-format
@@ -6174,6 +6199,8 @@ msgid ""
 "to boot your system, you'll need to create the bootstrap partition in "
 "DiskDrake"
 msgstr ""
+"עליך ליצור PPC PReP Boot bootstrap! ההתקנה תמשיך, אבל בכדי  לאתחל את המערכת "
+"יהיה עליך ליצור מחיצת bootstrap באופן ידני בעזרת DiskDrak "
 
 #: install_steps_interactive.pm:353
 #, c-format
@@ -6237,6 +6264,8 @@ msgid ""
 "Please choose load or save package selection.\n"
 "The format is the same as auto_install generated files."
 msgstr ""
+"עליך לבחור באם לטעון או לשמור את בחירת החבילות.\n"
+"מבנה הקובץ זהה לקובץ auto_install הנוצר באופן אוטומטי."
 
 #: install_steps_interactive.pm:497
 #, c-format
@@ -6516,7 +6545,7 @@ msgstr ""
 msgid ""
 "In this security level, access to the files in the Windows partition is "
 "restricted to the administrator."
-msgstr ""
+msgstr "ברמת אבטחה זו, גישה לקבצים במחיצת החלונות תתאפשר רק למנהל המערכת."
 
 #: install_steps_interactive.pm:1286 standalone/drakautoinst:76
 #, c-format
@@ -11170,7 +11199,7 @@ msgstr "כתובת ה- IP של המארח/רשת:"
 msgid ""
 "Choose the network or host on which the local printers should be made "
 "available:"
-msgstr "עליך לבחור רשת או מארח שמהם יש לאפשר נגישות למדפסות המקומיות:"
+msgstr "עליך לבחור רשת או מארח שמהם יש לאפשר גישה למדפסות המקומיות:"
 
 #: printer/printerdrake.pm:238
 #, c-format
@@ -12335,7 +12364,7 @@ msgstr ""
 #: printer/printerdrake.pm:2162
 #, c-format
 msgid "Please remove the file manually and restart HPOJ."
-msgstr ""
+msgstr "נא להסיר את הקובץ ידנית ולהפעיל מחדש את HPOJ."
 
 #: printer/printerdrake.pm:2170 printer/printerdrake.pm:2287
 #, c-format
@@ -12547,7 +12576,7 @@ msgstr ""
 msgid ""
 "Here you can choose the PPD file to be installed on your machine, it will "
 "then be used for the setup of your printer."
-msgstr ""
+msgstr "כאן באפשרותך לבחור את קובץ PPD שיותקן במחשבך, קובץ זה ישמש להגדרת המדפסת שלך."
 
 #: printer/printerdrake.pm:2927
 #, c-format
@@ -13969,27 +13998,27 @@ msgstr "קביעת ה-umask של המשתמש."
 #: security/l10n.pm:11
 #, c-format
 msgid "Accept bogus IPv4 error messages"
-msgstr ""
+msgstr "אפשר הודעות שגיאה IPv4 מוזרות"
 
 #: security/l10n.pm:12
 #, c-format
 msgid "Accept broadcasted icmp echo"
-msgstr ""
+msgstr "אפשר broadcasted icmp echo"
 
 #: security/l10n.pm:13
 #, c-format
 msgid "Accept icmp echo"
-msgstr ""
+msgstr "אפשר icmp echo"
 
 #: security/l10n.pm:15
 #, c-format
 msgid "/etc/issue* exist"
-msgstr ""
+msgstr "/etc/issue* קיים"
 
 #: security/l10n.pm:16
 #, c-format
 msgid "Reboot by the console user"
-msgstr ""
+msgstr "אתחול המערכת ע\"י משתמש בטרמינל"
 
 #: security/l10n.pm:17
 #, c-format
@@ -14199,12 +14228,12 @@ msgstr "אל תשלח הודעות דוא\"ל כשאין בכך צורך"
 #: security/l10n.pm:58
 #, c-format
 msgid "If set, send the mail report to this email address else send it to root"
-msgstr ""
+msgstr "אם נבחר, שלח את הדו\"ח לכתובת דוא\"ל זו, אחרת שלח את הדו\"ח למנהל המערכת"
 
 #: security/l10n.pm:59
 #, c-format
 msgid "Report check result by mail"
-msgstr ""
+msgstr "דווח על תוצאות הבדיקה בדוא\"ל"
 
 #: security/l10n.pm:60
 #, c-format
@@ -14259,7 +14288,7 @@ msgstr ""
 msgid ""
 "Passwords are now enabled, but use as a networked computer is still not "
 "recommended."
-msgstr ""
+msgstr "הסיסמאות מאופשרות כעת, אבל השימוש כמחשב ברשת אינו מומלץ למרות זאת."
 
 #: security/level.pm:45
 #, c-format
@@ -14318,12 +14347,12 @@ msgstr "סף האבטחה"
 #: security/level.pm:62
 #, c-format
 msgid "Use libsafe for servers"
-msgstr ""
+msgstr "השתמש ב-libsafe עבור כל השרתים"
 
 #: security/level.pm:63
 #, c-format
 msgid "A library which defends against buffer overflow and format string attacks."
-msgstr ""
+msgstr "זוהי ספרייה המגנה בפני buffer overflow והתקפות format string."
 
 #: security/level.pm:64
 #, c-format
@@ -14896,7 +14925,7 @@ msgstr "Discovery - גרסת הלינוקס השולחנית למשתמשים ח
 #: share/advertising/06.pl:15
 #, c-format
 msgid "You are now installing <b>Mandrakelinux Discovery</b>."
-msgstr ""
+msgstr "מנדרייק-לינוקס Discovery מותקנת כעת."
 
 #: share/advertising/06.pl:17
 #, c-format
@@ -14913,12 +14942,12 @@ msgstr ""
 #: share/advertising/07.pl:13
 #, c-format
 msgid "<b>PowerPack, The Ultimate Linux Desktop</b>"
-msgstr ""
+msgstr "PowerPack, שולחן העבודה האולטימטיבי למשתמשי לינוקס"
 
 #: share/advertising/07.pl:15
 #, c-format
 msgid "You are now installing <b>Mandrakelinux PowerPack</b>."
-msgstr ""
+msgstr "מנדרייק-לינוקס PowerPack מותקנת כעת."
 
 #: share/advertising/07.pl:17
 #, c-format
@@ -14927,16 +14956,18 @@ msgid ""
 "includes <b>thousands of applications</b> - everything from the most popular "
 "to the most advanced."
 msgstr ""
+"גרסת PowerPack היא הפצת מנדרייק-לינוקס הבכירה. הגרסה כוללת אלפי יישומים - הכל החל מהתוכנות "
+"הנפוצות ביותר ועד המתקדמות ביותר."
 
 #: share/advertising/08.pl:13
 #, c-format
 msgid "<b>PowerPack+, The Linux Solution for Desktops and Servers</b>"
-msgstr ""
+msgstr "PowerPack+, פתרון לינוקס לשולחנות עבודה ושרתים"
 
 #: share/advertising/08.pl:15
 #, c-format
 msgid "You are now installing <b>Mandrakelinux PowerPack+</b>."
-msgstr ""
+msgstr "כעת מותקנת מנדרייק-לינוקס PowerPack+"
 
 #: share/advertising/08.pl:17
 #, c-format
@@ -15062,7 +15093,7 @@ msgstr ""
 msgid ""
 "KDE will make your <b>first steps</b> with Linux so <b>easy</b> that you "
 "will not ever think of running another operating system!"
-msgstr ""
+msgstr "סביבת העבודה KDE תאפשר לך הכרות נעימה עם מערכת ההפעלה גנו/לינוקס!"
 
 #: share/advertising/12.pl:19
 #, c-format
@@ -15070,6 +15101,8 @@ msgid ""
 "KDE also includes a lot of <b>well integrated applications</b> such as "
 "Konqueror, the web browser and Kontact, the personal information manager."
 msgstr ""
+"סביבת העבודה KDE מכילה מספר קב של יישומים משולבים, כגון דפדפן האינטרנט Konqueror, "
+"ומנהל המידע האישי Kontact."
 
 #: share/advertising/13-a.pl:13 share/advertising/13-b.pl:13
 #, c-format
@@ -15196,7 +15229,7 @@ msgstr "הנאה מיישומי מולטימדיה"
 #: share/advertising/17.pl:15
 #, c-format
 msgid "Discovery will also make <b>multimedia</b> very easy for you:"
-msgstr ""
+msgstr "גרסת Discovery תאפשר לך הנאה ונוחות בהפעלת מולטימדיה:"
 
 #: share/advertising/17.pl:16
 #, c-format
@@ -15216,14 +15249,14 @@ msgstr "\t* עריכת ויצירת תמונות בעזרת GIMP."
 #: share/advertising/18.pl:13
 #, c-format
 msgid "<b>Enjoy the Wide Range of Applications</b>"
-msgstr "מגוון רחב של יישומים מהנים"
+msgstr "הנאה ממגוון רחב של יישומים"
 
 #: share/advertising/18.pl:15
 #, c-format
 msgid ""
 "In the Mandrakelinux menu you will find <b>easy-to-use</b> applications for "
 "<b>all of your tasks</b>:"
-msgstr "בתפריט של מנדרייק-לינוקס נמצאים ישומים קלים לשימוש לכל צרכיך: "
+msgstr "בתפריט של מנדרייק-לינוקס נמצאים יישומים קלים לשימוש לכל צרכיך: "
 
 #: share/advertising/18.pl:16
 #, c-format
@@ -15242,24 +15275,24 @@ msgstr ""
 #: share/advertising/18.pl:18
 #, c-format
 msgid "\t* Browse the web with <b>Mozilla</b> and <b>Konqueror</b>."
-msgstr ""
+msgstr "\t* גלישה באינטרנט עם הדפדפנים מוזילה ו-Konqueror."
 
 #: share/advertising/18.pl:19
 #, c-format
 msgid "\t* Participate in online chat with <b>Kopete</b>."
-msgstr ""
+msgstr "\t* השתתפות בצ'אט מקוון עם <b>Kopete</b>."
 
 #: share/advertising/18.pl:20
 #, c-format
 msgid ""
 "\t* Listen to your <b>audio CDs</b> and <b>music files</b>, watch your "
 "<b>videos</b>."
-msgstr ""
+msgstr "\t* האזנה לתקליטורי שמע וקבצי מוזיקה, צפייה בסרטים."
 
 #: share/advertising/18.pl:21
 #, c-format
 msgid "\t* Edit and create images with the <b>GIMP</b>."
-msgstr ""
+msgstr "\t* עריכת ויצירת תמונות עם GIMP."
 
 #: share/advertising/19.pl:13
 #, c-format
@@ -15269,7 +15302,7 @@ msgstr "סביבות פיתוח"
 #: share/advertising/19.pl:15 share/advertising/22.pl:15
 #, c-format
 msgid "PowerPack gives you the best tools to <b>develop</b> your own applications."
-msgstr ""
+msgstr "גרסת PowerPack מכילה את הכלים הטובים ביותר לפתח את התוכנות שלך."
 
 #: share/advertising/19.pl:17
 #, c-format
@@ -15293,24 +15326,24 @@ msgstr "עורכי פיתוח"
 #: share/advertising/20.pl:15
 #, c-format
 msgid "PowerPack will let you choose between those <b>popular editors</b>:"
-msgstr ""
+msgstr "גרסת PowerPack תאפשר לך לבחור בין עורכים נפוצים אלו:"
 
 #: share/advertising/20.pl:16
 #, c-format
 msgid "\t* <b>Emacs</b>: a customizable and real time display editor."
-msgstr ""
+msgstr "\t* Emacs: עורך מתקדם במיוחד הניתן להתאמה אישית."
 
 #: share/advertising/20.pl:17
 #, c-format
 msgid ""
 "\t* <b>XEmacs</b>: another open source text editor and application "
 "development system."
-msgstr ""
+msgstr "\t* XEmacs: עורך טקסט קוד פתוח אחר ומערכת פיתוח יישומים."
 
 #: share/advertising/20.pl:18
 #, c-format
 msgid "\t* <b>Vim</b>: an advanced text editor with more features than standard Vi."
-msgstr ""
+msgstr "\t* Vim: עורך טקסט מתקדם עם יותר אפשרויות מהעורך הסטנדרטי Vi."
 
 #: share/advertising/21.pl:13
 #, c-format
@@ -15322,17 +15355,17 @@ msgstr "שפות פיתוח"
 msgid ""
 "With all these <b>powerful tools</b>, you will be able to write applications "
 "in <b>dozens of programming languages</b>:"
-msgstr ""
+msgstr "בעזרת כל הכלים המשוכללים הללו, יהיה באפשרותך לכתוב יישומים בתריסרי שפות תכנות שונות:"
 
 #: share/advertising/21.pl:16
 #, c-format
 msgid "\t* The famous <b>C language</b>."
-msgstr ""
+msgstr "\t* שפת התכנות המפורסמת C"
 
 #: share/advertising/21.pl:17
 #, c-format
 msgid "\t* Object oriented languages:"
-msgstr ""
+msgstr "\t* שפות מונחות עצמים:"
 
 #: share/advertising/21.pl:18
 #, c-format
@@ -15362,7 +15395,7 @@ msgstr "\t\t* Python"
 #: share/advertising/21.pl:23 share/advertising/28.pl:22
 #, c-format
 msgid "\t* And many more."
-msgstr ""
+msgstr "\t* ועוד רבות אחרות."
 
 #: share/advertising/22.pl:13
 #, c-format
@@ -15508,19 +15541,19 @@ msgstr "בחנות המקוונת שלנו ניתן למצוא מגוון מוצ
 #: share/advertising/27.pl:17
 #, c-format
 msgid "There you can find all our products, services and third-party products."
-msgstr ""
+msgstr "שם ניתן למצוא את מגוון המוצרים והשרותים שלנו, כמו גם מוצרי צד שלישי."
 
 #: share/advertising/27.pl:19
 #, c-format
 msgid ""
 "This platform has just been <b>redesigned</b> to improve its efficiency and "
 "usability."
-msgstr ""
+msgstr "המערכת שודרגה ועוצבה מחדש כדי לשפר את היעילות והשמישות שלה."
 
 #: share/advertising/27.pl:21
 #, c-format
 msgid "Stop by today at <b>store.mandrakesoft.com</b>!"
-msgstr "אנו מזמינים אותך לבקר כבר היום בכתובת store.mandrakesoft.com"
+msgstr "אנו מזמינים אותך לבקר כבר היום בכתובת store.mandrakesoft.com!"
 
 #: share/advertising/28.pl:13
 #, c-format
@@ -15532,12 +15565,12 @@ msgstr "Mandrakeclub"
 msgid ""
 "<b>Mandrakeclub</b> is the <b>perfect companion</b> to your Mandrakelinux "
 "product.."
-msgstr ""
+msgstr "מועדון מנדרייק הוא השרות המושלם למוצר מנדרייק-לינוקס שברשותך."
 
 #: share/advertising/28.pl:17
 #, c-format
 msgid "Take advantage of <b>valuable benefits</b> by joining Mandrakeclub, such as:"
-msgstr "הצטרפות ל מועדון-מנדרייק תעניק לך גישה להטבות רבות ערך, מוצרים ושרותים, כגון:"
+msgstr "הצטרפות למועדון-מנדרייק תעניק לך גישה להטבות רבות ערך, מוצרים ושרותים, כגון:"
 
 #: share/advertising/28.pl:18
 #, c-format
@@ -15553,65 +15586,65 @@ msgstr ""
 msgid ""
 "\t* Access to <b>commercial applications</b> (for example to NVIDIA® or ATI™ "
 "drivers)."
-msgstr ""
+msgstr "\t* גישה לחבילות תוכנה קנייניות (למשל מנהלי התקן לכרטיסי מסך NVIDIA® או ATI™)."
 
 #: share/advertising/28.pl:20
 #, c-format
 msgid "\t* Participation in Mandrakelinux <b>user forums</b>."
-msgstr ""
+msgstr "\t* השתתפות בפורומי המשתמשים של מנדרייק-לינוקס"
 
 #: share/advertising/28.pl:21
 #, c-format
 msgid ""
 "\t* <b>Early and privileged access</b>, before public release, to "
 "Mandrakelinux <b>ISO images</b>."
-msgstr ""
+msgstr "\t* גישה ראשונית ומועדפת לתמונות תקליטור של גרסאות ציבוריות של מנדרייק-לינוקס, לפני הציבור הרחב."
 
 #: share/advertising/29.pl:13
 #, c-format
 msgid "<b>Mandrakeonline</b>"
-msgstr "חנות מנדרייק"
+msgstr "מנדרייק-אונליין"
 
 #: share/advertising/29.pl:15
 #, c-format
 msgid ""
 "<b>Mandrakeonline</b> is a new premium service that Mandrakesoft is proud to "
 "offer its customers!"
-msgstr ""
+msgstr "מנדרייק-אונליין הוא שרות ערך מוסף חדש שמנדרייקסופט גאה להציע ללקוחותיה!"
 
 #: share/advertising/29.pl:17
 #, c-format
 msgid ""
 "Mandrakeonline provides a wide range of valuable services for <b>easily "
 "updating</b> your Mandrakelinux systems:"
-msgstr ""
+msgstr "מנדרייק-אונליין מספק מגוון רחב של שרותים רבי ערך לעדכון קל של מערכות מנדרייק-לינוקס שברשותך:"
 
 #: share/advertising/29.pl:18
 #, c-format
 msgid "\t* <b>Perfect</b> system security (automated software updates)."
-msgstr ""
+msgstr "\t* אבטחת מערכת מושלמת (עדכוני תוכנה אוטומטיים)."
 
 #: share/advertising/29.pl:19
 #, c-format
 msgid ""
 "\t* <b>Notification</b> of updates (by e-mail or by an applet on the "
 "desktop)."
-msgstr ""
+msgstr "\t* הודעה על עדכונים זמינים (דרך דואר אלקטרוני או יישומון על שולחן העבודה שלך)."
 
 #: share/advertising/29.pl:20
 #, c-format
 msgid "\t* Flexible <b>scheduled</b> updates."
-msgstr ""
+msgstr "\t* עדכונים גמישים במועדים מתוכננים מראש."
 
 #: share/advertising/29.pl:21
 #, c-format
 msgid "\t* Management of <b>all your Mandrakelinux systems</b> with one account."
-msgstr ""
+msgstr "\t* ניהול כל מערכות מנדרייק-לינוקס שברשותך בעזרת חשבון אחד."
 
 #: share/advertising/30.pl:13
 #, c-format
 msgid "<b>Mandrakeexpert</b>"
-msgstr "מומחי מנדרייק"
+msgstr "Mandrakeexpert"
 
 #: share/advertising/30.pl:15
 #, c-format
@@ -15619,13 +15652,15 @@ msgid ""
 "Do you require <b>assistance?</b> Meet Mandrakesoft's technical experts on "
 "<b>our technical support platform</b> www.mandrakeexpert.com."
 msgstr ""
+"האם דרושה לך עזרה? המומחים המקצועניים של מנדרייקסופט מחכים לך במערכת התמיכה שלנו באתר "
+"www.mandrakeexpert.com."
 
 #: share/advertising/30.pl:17
 #, c-format
 msgid ""
 "Thanks to the help of <b>qualified Mandrakelinux experts</b>, you will save "
 "a lot of time."
-msgstr ""
+msgstr "הודות לעזרה של מומחי מנדרייק-לינוקס מוסמכים, ייחסך לך זמן רב."
 
 #: share/advertising/30.pl:19
 #, c-format
@@ -15633,6 +15668,8 @@ msgid ""
 "For any question related to Mandrakelinux, you have the possibility to "
 "purchase support incidents at <b>store.mandrakesoft.com</b>."
 msgstr ""
+"אם יש לך שאלות הנוגעות למנדרייק-לינוקס, יש באפשרותך לרכוש יחידות תמיכה בחנות שלנו "
+"store.mandrakesoft.com"
 
 #: share/compssUsers.pl:25
 #, c-format
@@ -16197,7 +16234,7 @@ msgstr ""
 #: standalone/drakTermServ:106 standalone/drakTermServ:112
 #, c-format
 msgid "%s: %s requires a username...\n"
-msgstr ""
+msgstr "%s: %s דורש שם משתמש...\n"
 
 #: standalone/drakTermServ:123
 #, c-format
@@ -16309,7 +16346,7 @@ msgstr "ביטול האשף"
 #: standalone/drakTermServ:392
 #, c-format
 msgid "Please save dhcpd config!"
-msgstr ""
+msgstr "נא לשמור את הגדרות dhcpd!"
 
 #: standalone/drakTermServ:420
 #, c-format
@@ -16730,7 +16767,7 @@ msgstr ""
 #: standalone/drakTermServ:1172
 #, c-format
 msgid "All clients will use %s"
-msgstr ""
+msgstr "כל הלקוחות ישתמשו ב-%s"
 
 #: standalone/drakTermServ:1204
 #, c-format
@@ -16765,7 +16802,7 @@ msgstr "שם מתחם:"
 #: standalone/drakTermServ:1247
 #, c-format
 msgid "Name Servers:"
-msgstr ""
+msgstr "שרתי שמות מתחם:"
 
 #: standalone/drakTermServ:1258
 #, c-format
@@ -16845,12 +16882,12 @@ msgstr ""
 #: standalone/drakTermServ:1502
 #, c-format
 msgid "Something went wrong! - Is mkisofs installed?"
-msgstr ""
+msgstr "הפעולה נכשלה! - האם mkisofs מותקן?"
 
 #: standalone/drakTermServ:1523
 #, c-format
 msgid "Need to create /etc/dhcpd.conf first!"
-msgstr ""
+msgstr "צריך ליצור קודם כל את /etc/dhcpd.conf!"
 
 #: standalone/drakTermServ:1683
 #, c-format
@@ -16875,7 +16912,7 @@ msgstr ""
 #: standalone/drakTermServ:1701
 #, c-format
 msgid "%s added to Terminal Server\n"
-msgstr ""
+msgstr "%s הוסף לשרת שורת הפקודה\n"
 
 #: standalone/drakTermServ:1718
 #, c-format
@@ -16885,7 +16922,7 @@ msgstr "%s נמחק...\n"
 #: standalone/drakTermServ:1720 standalone/drakTermServ:1793
 #, c-format
 msgid "%s not found...\n"
-msgstr ""
+msgstr "%s לא נמצא...\n"
 
 #: standalone/drakTermServ:1821
 #, c-format
@@ -16905,7 +16942,7 @@ msgstr "שגיאה!"
 #: standalone/drakautoinst:39
 #, c-format
 msgid "I can not find needed image file `%s'."
-msgstr ""
+msgstr "איני יכול למצוא את קובץ התמונה '%s'."
 
 #: standalone/drakautoinst:41
 #, c-format
@@ -16927,34 +16964,43 @@ msgid ""
 "\n"
 "Press ok to continue."
 msgstr ""
+"כעת יוגדר תקליטון להתקנה אוטומטית. זוהי תכונה מתקדמת שיש להשתמש בה בזהירות.\n"
+"\n"
+"תכונה זו תאפשר לך לשחזר את ההתקנה שביצעת במחשב זה באופן אוטומטי, כאשר יתאפשר לך "
+"להתערב במהלך ההתקנה בשלבים שיוגדרו מראש.\n"
+"\n"
+"להגנת המערכת, שלבי חלוקת המחיצות והפירמוט לא יבוצעו לעולם באופן אוטומטי, ללא קשר "
+"לבחירותיך במהלך ההתקנה של מחשב זה.\n"
+"\n"
+"עליך ללחוץ על \"המשך\" בכדי להגדיר את התקליטון."
 
 #: standalone/drakautoinst:60
 #, c-format
 msgid "replay"
-msgstr ""
+msgstr "שחזר התקנה"
 
 #: standalone/drakautoinst:60 standalone/drakautoinst:69
 #, c-format
 msgid "manual"
-msgstr ""
+msgstr "ידנית"
 
 #: standalone/drakautoinst:64
 #, c-format
 msgid "Automatic Steps Configuration"
-msgstr ""
+msgstr "הגדרת שלבים אוטומטיים"
 
 #: standalone/drakautoinst:65
 #, c-format
 msgid ""
 "Please choose for each step whether it will replay like your install, or it "
 "will be manual"
-msgstr "נא לבחור עבור כל צעד האם להריץ מחדש את ההתקנה, או האם היא תעשה ידנית."
+msgstr "עליך לבחור עבור כל שלב האם לשחזר את ההתקנה, או האם השלב יבוקר באופן ידני."
 
 #: standalone/drakautoinst:77 standalone/drakautoinst:78
 #: standalone/drakautoinst:92
 #, c-format
 msgid "Creating auto install floppy"
-msgstr "יצירת תקליטון התקנה אוטומטי"
+msgstr "יוצר תקליטון התקנה אוטומטי"
 
 #: standalone/drakautoinst:90
 #, c-format
@@ -16964,7 +17010,7 @@ msgstr "עליך להכניס תקליטון ריק נוסף לכונן %s (עב
 #: standalone/drakautoinst:91
 #, c-format
 msgid "Creating auto install floppy (drivers disk)"
-msgstr "יצירת תקליטון התקנה אוטומטי (תקליטון מנהלי התקנים)"
+msgstr "יוצר תקליטון התקנה אוטומטי (תקליטון מנהלי התקנים)"
 
 #: standalone/drakautoinst:158
 #, c-format
@@ -16974,6 +17020,10 @@ msgid ""
 "\n"
 "The parameters of the auto-install are available in the sections on the left"
 msgstr ""
+"\n"
+"ברוך בואך.\n"
+"\n"
+"המאפיינים להתקנה אוטומטית זמינים בסעיפים שבצד שמאל"
 
 #: standalone/drakautoinst:252 standalone/drakgw:597 standalone/drakvpn:902
 #: standalone/scannerdrake:405
@@ -16987,6 +17037,8 @@ msgid ""
 "The floppy has been successfully generated.\n"
 "You may now replay your installation."
 msgstr ""
+"התקליטון נוצר בהצלחה.\n"
+"כעת באפשרותך לשחזר את ההתקנה."
 
 #: standalone/drakautoinst:289
 #, c-format
@@ -16996,7 +17048,7 @@ msgstr "התקנה אוטומטית"
 #: standalone/drakautoinst:358
 #, c-format
 msgid "Add an item"
-msgstr ""
+msgstr "הוספת פריט"
 
 #: standalone/drakautoinst:365
 #, c-format
@@ -17011,14 +17063,14 @@ msgstr "כונן קשיח"
 #: standalone/drakbackup:88
 #, c-format
 msgid "tape"
-msgstr "טייפ"
+msgstr "קלטת"
 
 #: standalone/drakbackup:152
 #, c-format
 msgid ""
 "Expect is an extension to the TCL scripting language that allows interactive "
 "sessions without user intervention."
-msgstr ""
+msgstr "Expect היא הרחבה לשפת התסריטים TCL המאפשרת מיכון תהליכים ללא מעורבות משתמש."
 
 #: standalone/drakbackup:153
 #, c-format
@@ -17031,6 +17083,8 @@ msgid ""
 "For a multisession CD, only the first session will erase the cdrw. Otherwise "
 "the cdrw is erased before each backup."
 msgstr ""
+"עבור תקליטור עם multisession, רק ה-session הראשון ימחק את התקליטור מסוג CDRW. "
+"אחרת, ה-CDRW יימחק לפני כל גיבוי."
 
 #: standalone/drakbackup:155
 #, c-format
@@ -17038,20 +17092,22 @@ msgid ""
 "This option will save files that have changed.  Exact behavior depends on "
 "whether incremental or differential mode is used."
 msgstr ""
+"אפשרות זו תשמור קבצים שעברו שינוי. ההתנהגות המדויקת תלויה באם נבחן אופן פעולה Incremental "
+"או Differential"
 
 #: standalone/drakbackup:156
 #, c-format
 msgid ""
 "Incremental backups only save files that have changed or are new since the "
 "last backup."
-msgstr ""
+msgstr "אופן הגיבוי Incremental מגבה רק קבצים שעברו שינוי או שנוצרו מאז הגיבוי האחרון."
 
 #: standalone/drakbackup:157
 #, c-format
 msgid ""
 "Differential backups only save files that have changed or are new since the "
 "original 'base' backup."
-msgstr ""
+msgstr "אופן הגיבוי Differential שומר רק קבצים ששונו או שנוצרו ממועד יצירת הגיבוי הבסיסי 'base'."
 
 #: standalone/drakbackup:158
 #, c-format
@@ -17059,6 +17115,8 @@ msgid ""
 "This should be a local user or email address that you want the backup "
 "results sent to. You will need to define a functioning mail server."
 msgstr ""
+"זוהי כתובת דוא\"ל או משתמש במחשב במקומי אליהם ברצונך לשלוח את תוצאות הגיבוי. יהיה עליך "
+"להגדיר שרת דוא\"ל פעיל כדי לאפשר תכונה זו."
 
 #: standalone/drakbackup:159
 #, c-format
@@ -17129,12 +17187,12 @@ msgstr ""
 #: standalone/drakbackup:477
 #, c-format
 msgid "Old user list:\n"
-msgstr ""
+msgstr "רשימת המשתמשים הישנה:\n"
 
 #: standalone/drakbackup:479
 #, c-format
 msgid "New user list:\n"
-msgstr ""
+msgstr "רשימת המשתמשים החדשה:\n"
 
 #: standalone/drakbackup:524
 #, c-format
@@ -17198,22 +17256,22 @@ msgstr "אין בקשה לסיסמה ב-%s ביציאה %s"
 #: standalone/drakbackup:643
 #, c-format
 msgid "Bad password on %s"
-msgstr ""
+msgstr "סיסמא שגויה ב-%s"
 
 #: standalone/drakbackup:644
 #, c-format
 msgid "Permission denied transferring %s to %s"
-msgstr ""
+msgstr "אין הרשאה להעביר את %s ל-%s"
 
 #: standalone/drakbackup:645
 #, c-format
 msgid "Can not find %s on %s"
-msgstr ""
+msgstr "לא ניתן למצוא את %s ב-%s"
 
 #: standalone/drakbackup:649
 #, c-format
 msgid "%s not responding"
-msgstr ""
+msgstr "%s אינו מגיב"
 
 #: standalone/drakbackup:653
 #, c-format
@@ -17239,22 +17297,22 @@ msgstr "העברת WebDAV נכשלה!"
 #: standalone/drakbackup:722
 #, c-format
 msgid "No CD-R/DVD-R in drive!"
-msgstr ""
+msgstr "לא נמצא תקליטור CD-R/DVD-R בכונן!"
 
 #: standalone/drakbackup:726
 #, c-format
 msgid "Does not appear to be recordable media!"
-msgstr ""
+msgstr "המדיה בכונן אינה ניתנת לכתיבה!"
 
 #: standalone/drakbackup:731
 #, c-format
 msgid "Not erasable media!"
-msgstr "זהי לא מדיה הניתנת למחיקה!"
+msgstr "המדיה בכונן לא ניתנת למחיקה!"
 
 #: standalone/drakbackup:773
 #, c-format
 msgid "This may take a moment to erase the media."
-msgstr ""
+msgstr "יתכן וייקח זמן מה למחוק את המדיה."
 
 #: standalone/drakbackup:831
 #, c-format
@@ -17264,7 +17322,7 @@ msgstr "בעיית הרשאה בעת גישה אל התקליטור"
 #: standalone/drakbackup:858
 #, c-format
 msgid "No tape in %s!"
-msgstr ""
+msgstr "לא נמצאה קלטת ב-%s!"
 
 #: standalone/drakbackup:965
 #, c-format
@@ -17276,32 +17334,32 @@ msgstr ""
 #: standalone/drakbackup:984 standalone/drakbackup:1017
 #, c-format
 msgid "Backup system files..."
-msgstr "גבוי של קבצי מערכת..."
+msgstr "מגבה קבצי מערכת..."
 
 #: standalone/drakbackup:1018 standalone/drakbackup:1059
 #, c-format
 msgid "Hard Disk Backup files..."
-msgstr "קובצי גיבוי של הדיסק קשיח..."
+msgstr "מגבה קבצים מהכונן הקשיח..."
 
 #: standalone/drakbackup:1058
 #, c-format
 msgid "Backup User files..."
-msgstr ""
+msgstr "מגבה קבצי משתמש..."
 
 #: standalone/drakbackup:1093
 #, c-format
 msgid "Backup Other files..."
-msgstr "גיבוי של קבצים שונים ...."
+msgstr "מגבה קבצים אחרים ...."
 
 #: standalone/drakbackup:1094
 #, c-format
 msgid "Hard Disk Backup Progress..."
-msgstr "התקדמות גיבוי של הכונן קשיח..."
+msgstr "התקדמות גיבוי הכונן קשיח..."
 
 #: standalone/drakbackup:1099
 #, c-format
 msgid "No changes to backup!"
-msgstr ""
+msgstr "אין שינויים לגיבוי!"
 
 #: standalone/drakbackup:1117 standalone/drakbackup:1141
 #, c-format
@@ -17339,6 +17397,9 @@ msgid ""
 "Drakbackup activities via CD:\n"
 "\n"
 msgstr ""
+"\n"
+"פעולות Drakbackup דרך תקליטור:\n"
+"\n"
 
 #: standalone/drakbackup:1151
 #, c-format
@@ -17347,21 +17408,24 @@ msgid ""
 "Drakbackup activities via tape:\n"
 "\n"
 msgstr ""
+"\n"
+"פעולות Drakbackup דרך קלטת:\n"
+"\n"
 
 #: standalone/drakbackup:1160
 #, c-format
 msgid "Error sending mail. Your report mail was not sent."
-msgstr ""
+msgstr "חלה שגיאה בעת משלוח דוא\"ל. דו\"ח הגיבוי שלך לא יישלח."
 
 #: standalone/drakbackup:1161
 #, c-format
 msgid " Error while sending mail. \n"
-msgstr ""
+msgstr " חלה שגיאה בעת משלוח דוא\"ל.\n"
 
 #: standalone/drakbackup:1191
 #, c-format
 msgid "Can not create catalog!"
-msgstr ""
+msgstr "אין אפשרות לייצר את הקטלוג!"
 
 #: standalone/drakbackup:1420
 #, c-format
@@ -17555,7 +17619,7 @@ msgstr "שם התקן לשימוש עבור גיבוי"
 #: standalone/drakbackup:1878
 #, c-format
 msgid "Backup directly to tape"
-msgstr ""
+msgstr "גיבוי ישירות לקלטת"
 
 #: standalone/drakbackup:1884
 #, c-format
@@ -17779,7 +17843,7 @@ msgstr ""
 #: standalone/drakbackup:2157
 #, c-format
 msgid "If your machine is not on all the time, you might want to install anacron."
-msgstr ""
+msgstr "אם מחשבך אינו דלוק כל הזמן, מומלץ לך להתקין את anacron."
 
 #: standalone/drakbackup:2158
 #, c-format
@@ -18693,7 +18757,7 @@ msgstr "Menudrake"
 #: standalone/drakbug:53
 #, c-format
 msgid "Msec"
-msgstr ""
+msgstr "Msec"
 
 #: standalone/drakbug:54
 #, c-format
@@ -18703,7 +18767,7 @@ msgstr "שליטה מרחוק"
 #: standalone/drakbug:55
 #, c-format
 msgid "Software Manager"
-msgstr "ניהול מאגרי תכנות"
+msgstr "מנהל מקורות תוכנה"
 
 #: standalone/drakbug:56
 #, c-format
@@ -18713,7 +18777,7 @@ msgstr "Urpmi"
 #: standalone/drakbug:57
 #, c-format
 msgid "Windows Migration tool"
-msgstr ""
+msgstr "כלי ההסבה מחלונות"
 
 #: standalone/drakbug:58
 #, c-format
@@ -18723,12 +18787,12 @@ msgstr "Userdrake"
 #: standalone/drakbug:59
 #, c-format
 msgid "Configuration Wizards"
-msgstr ""
+msgstr "אשפי ההגדרות"
 
 #: standalone/drakbug:81
 #, c-format
 msgid "Select Mandrakesoft Tool:"
-msgstr ""
+msgstr "עליך לבחור את תוכנת מנדרייקסופט בה חלה תקלה: "
 
 #: standalone/drakbug:82
 #, c-format
@@ -18736,6 +18800,8 @@ msgid ""
 "or Application Name\n"
 "(or Full Path):"
 msgstr ""
+"או שם התוכנה\n"
+"(או מסלול מלא):"
 
 #: standalone/drakbug:85
 #, c-format
@@ -18745,7 +18811,7 @@ msgstr "איתור חבילה"
 #: standalone/drakbug:87
 #, c-format
 msgid "Package: "
-msgstr ""
+msgstr "חבילה: "
 
 #: standalone/drakbug:88
 #, c-format
@@ -18785,7 +18851,7 @@ msgstr "החבילה לא מותקנת"
 #: standalone/drakbug:191
 #, c-format
 msgid "No browser available! Please install one"
-msgstr ""
+msgstr "לא נמצא אף דפדפן! עליך להתקין אחד"
 
 #: standalone/drakclock:29
 #, c-format
@@ -18898,7 +18964,7 @@ msgstr "מצב"
 #: standalone/drakconnect:133
 #, c-format
 msgid "Hostname: "
-msgstr ""
+msgstr "שם מארח: "
 
 #: standalone/drakconnect:135
 #, c-format
@@ -18984,7 +19050,7 @@ msgstr "השתמש בקובץ נעילה"
 #: standalone/drakconnect:511
 #, c-format
 msgid "Wait for dialup tone before dialing"
-msgstr ""
+msgstr "המתן לצליל חיוג לפני חיוג"
 
 #: standalone/drakconnect:514
 #, c-format
@@ -19066,7 +19132,7 @@ msgstr ""
 #: standalone/drakconnect:716
 #, c-format
 msgid "Congratulations, the \"%s\" network interface has been successfully deleted"
-msgstr ""
+msgstr "איחולינו! ממשק הרשת \"%s\" נמחק בהצלחה"
 
 #: standalone/drakconnect:732
 #, c-format
@@ -19239,7 +19305,7 @@ msgid ""
 "several different X sessions on your local machine at the same time."
 msgstr ""
 "מנהל ההפעלה מאפשר לך להתחבר לחשבון המשתמש שלך\n"
-"לאחר הפעלת המנשק הגרפי. כמו כן מנהל ההפעלה יאפשר\n"
+"לאחר הפעלת הממשק הגרפי. כמו כן מנהל ההפעלה יאפשר\n"
 "לך להתחבר למספר סביבות עבודה גרפיות בו זמנית."
 
 #: standalone/drakedm:79
@@ -19458,7 +19524,7 @@ msgstr ""
 #: standalone/drakfont:361
 #, c-format
 msgid "Restart XFS"
-msgstr ""
+msgstr "מפעיל מחדש את XFS"
 
 #: standalone/drakfont:407 standalone/drakfont:417
 #, c-format
@@ -19816,7 +19882,7 @@ msgstr ""
 #: standalone/drakgw:237
 #, c-format
 msgid "Interface %s"
-msgstr ""
+msgstr "ממשק %s"
 
 #: standalone/drakgw:246 standalone/drakpxe:137
 #, c-format
@@ -19873,17 +19939,17 @@ msgstr "הגדרת תצורה מחדש באופן אוטומטי"
 #: standalone/drakgw:296
 #, c-format
 msgid "No (experts only)"
-msgstr ""
+msgstr "לא (מומחים בלבד)"
 
 #: standalone/drakgw:297
 #, c-format
 msgid "Show current interface configuration"
-msgstr "הראה את הגדרות המנשק הנוכחי"
+msgstr "הראה את הגדרות הממשק הנוכחי"
 
 #: standalone/drakgw:298
 #, c-format
 msgid "Current interface configuration"
-msgstr "הגדרות המנשק הנוכחי"
+msgstr "הגדרות הממשק הנוכחי"
 
 #: standalone/drakgw:299
 #, c-format
@@ -20366,12 +20432,12 @@ msgstr ""
 #: standalone/drakpxe:196
 #, c-format
 msgid "No image found"
-msgstr ""
+msgstr "לא נמצאה תמונה"
 
 #: standalone/drakpxe:197
 #, c-format
 msgid "No CD or DVD image found, please copy the installation program and rpm files."
-msgstr ""
+msgstr "לא נמצאה תמונת CD או DVD, נא להעתיק את תכנית ההתקנה וקבצי ה-RPM."
 
 #: standalone/drakpxe:210
 #, c-format
@@ -20385,12 +20451,12 @@ msgstr ""
 #: standalone/drakpxe:215
 #, c-format
 msgid "Location of auto_install.cfg file"
-msgstr ""
+msgstr "מיקום קובץ auto_install.cfg"
 
 #: standalone/draksec:49
 #, c-format
 msgid "ALL"
-msgstr ""
+msgstr "הכל"
 
 #: standalone/draksec:50
 #, c-format
@@ -20469,7 +20535,7 @@ msgstr ""
 #: standalone/draksec:168
 #, c-format
 msgid "(default value: %s)"
-msgstr ""
+msgstr "(ערך ברירת המחדל: %s)"
 
 #: standalone/draksec:210
 #, c-format
@@ -20586,7 +20652,7 @@ msgstr "סייר"
 #: standalone/draksplash:93 standalone/draksplash:158
 #, c-format
 msgid "Configure bootsplash picture"
-msgstr ""
+msgstr "הגדרת תמונת מסך פתיחה"
 
 #: standalone/draksplash:96
 #, c-format
@@ -21087,7 +21153,7 @@ msgstr ""
 #: standalone/drakvpn:368
 #, c-format
 msgid "ipsec.conf entries"
-msgstr ""
+msgstr "ערכי ipsec.conf"
 
 #: standalone/drakvpn:369
 #, c-format
@@ -21418,7 +21484,7 @@ msgstr ""
 #: standalone/drakvpn:728
 #, c-format
 msgid "racoonf.conf entries"
-msgstr ""
+msgstr "ערכי racoonf.conf"
 
 #: standalone/drakvpn:729
 #, c-format
@@ -23740,7 +23806,7 @@ msgstr "יציאה: %s"
 #: standalone/scannerdrake:138 standalone/scannerdrake:141
 #, c-format
 msgid " (UNSUPPORTED)"
-msgstr ""
+msgstr " (לא נתמך)"
 
 #: standalone/scannerdrake:144
 #, c-format
@@ -23930,7 +23996,7 @@ msgstr ""
 #: standalone/scannerdrake:400
 #, c-format
 msgid "edit the configuration file /etc/sane.d/%s.conf. "
-msgstr ""
+msgstr "עריכת קובץ ההגדרות /etc/sane.d/%s.conf."
 
 #: standalone/scannerdrake:406
 #, c-format
