@@ -482,9 +482,10 @@ sub test_mouse {
 						  ($darea->allocation->[2]-$width)/2, ($darea->allocation->[3]-$height)/2,
 						  210, 350);
 		      if ($::isInstall) {
+			  my $bad_mouse = member($mouse->{XMOUSETYPE}, 'IMPS/2', 'ExplorerPS/2');
 			  $draw_text->(_("Please test the mouse"), $height - 120);
-			  $draw_text->(_("To activate the mouse,"), $height - 105) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
-			  $draw_text->(_("MOVE YOUR WHEEL!"), $height - 90) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+			  $draw_text->(_("To activate the mouse,"), $height - 105) if $bad_mouse;
+			  $draw_text->(_("MOVE YOUR WHEEL!"), $height - 90) if $bad_mouse
 			  $darea->window->draw_rectangle($darea->style->bg_gc('normal'), 1, 0, $height-65, $width, $height);
 		      }
 		  };
