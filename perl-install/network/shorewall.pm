@@ -46,8 +46,8 @@ sub get_config_file {
     map { [ split ' ' ] } grep { !/^#/ } cat_("$::prefix/etc/shorewall/$file");
 }
 
-sub default_interfaces_silent($) {
-	my ($in) = @_;
+sub default_interfaces_silent {
+	my ($_in) = @_;
 	my %conf;
 	my @l = detect_devices::getNet() or return;
 	if (@l == 1) {
@@ -59,7 +59,7 @@ sub default_interfaces_silent($) {
     \%conf;
 }
 
-sub default_interfaces($) {
+sub default_interfaces {
 	my ($in) = @_;
 	my %conf;
 	my $card_netconnect = network::netconnect::get_net_device() || "eth0";
@@ -88,10 +88,9 @@ Examples:
     \%conf;
 }
 
-sub read($$) {
-    my %conf;
-    my ($in,$mode) = @_;
-    $conf{disabled} = !glob_("$::prefix/etc/rc3.d/S*shorewall");
+sub read {
+    my ($in, $mode) = @_;
+    my %conf = { disabled => !glob_("$::prefix/etc/rc3.d/S*shorewall") };
 
     $conf{ports} = 
       join(' ', map { 
