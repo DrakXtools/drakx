@@ -462,7 +462,8 @@ Operating System.");
 			    cancel => N("Continue without USB key") }) or return;
 
     }
-    0;
+    key_mount($o, 'reread');
+    check_key($o);
 }
 
 sub install2::verifyKey {
@@ -470,9 +471,7 @@ sub install2::verifyKey {
 
     log::l("automatic transparent key support is disabled"), return if $key_disabled;
 
-    while (!check_key($o)) {
-	key_mount($o, 'reread');
-    } 
+    check_key($o) or return;
 
     my $_wait = $using_existing_host_config
                 || $o->wait_message(N("Setting up USB key"), N("Please wait, setting up system configuration files on USB key..."));
