@@ -112,7 +112,7 @@ gtkpack2__(
 	   gtkpack2__(my $vbx = new Gtk::VBox(0,5),
 		      gtkadd($table),
 		      gtkpack(new Gtk::HBox(0,0),
-			      gtkpack(gtkset_justify(new Gtk::Label(_("\n\nTo submit a bug report, click on the button report.\nThis will open  a web browser window  on https://www.bugzilla.com\n where you'll find a form to fill in.The information displayed above will be \ntransferred to that server\n\n")),"left")),
+			      gtkpack(gtkset_justify(new Gtk::Label(_("\n\nTo submit a bug report, click on the button report.\nThis will open  a web browser window  on https://drakbug.mandrakesoft.com\n where you'll find a form to fill in.The information displayed above will be \ntransferred to that server\n\n")),"left")),
 			     ),
 		      gtkpack(new Gtk::HSeparator),
 		      
@@ -138,6 +138,7 @@ $Report_Button->signal_connect(clicked => sub { my $options = "mdkwizard=1";
 						$options.="?package=$p" ;
 						$options.="?kernel=$k";
 						$options.="?mdkrelease=$r";
+						print "$bugzilla_url/wizard?"."$options" ."\n";
 						connect_bugzilla("$bugzilla_url/wizard?"."$options") });
 $hbx->pack_end($Report_Button,0,0,0);
 $vbx->pack_start($hbx,0,0,0);
