@@ -36,18 +36,8 @@ sub cylinder_size($) {
     $hd->{geom}{sectors} * $hd->{geom}{heads};
 }
 
-#- defaults methods for adjusting start and end for partitions, these
-#- methods will shrink the partition inside current limits, but think
-#- of this: hidden extended partitions that contains logical ones are
-#- not specified, so end is always almost above a cylinders boundaries
-#- by the start of a logical partitions (sectors, ie 63 generally) inside
-#- its hidden extended containers. so for adjustEnd, it is very important
-#- to round_down to cylinder boundarie else partitions will overlap.
-#- furthermore on the interface, choosing 1Mb more is possible that
-#- will go again beyond the normal cylinders boundaries, which may
-#- cause overlaping partitions again :-(
-#- until all the code in diskdrake is not cleaned up perfectly, rounding
-#- down for the end is necessary.
+#- default method for starting a partition, only head size or twice it
+#- is allowed for starting a partition after a cylinder boundarie.
 sub adjustStart($$) {
     my ($hd, $part) = @_;
     my $end = $part->{start} + $part->{size};
@@ -57,23 +47,29 @@ sub adjustStart($$) {
    			      $hd->{geom}{sectors} : cylinder_size($hd));
     $part->{size} = $end - $part->{start};
 }
+#- this method could be used for when partitions informations will be accurate.
+#- $end2 is updated to take into account logical partitions where two heads of
+#- sectors (typically 63 each) exists before the real start of the partition (used
+#- by hidden magic extended partition.
+#- if size go above the first two heads of a cylinder, the whole cylinder is eaten
+#- by the partition, so overlapping can occur in such case (but it is not allowed).
 sub adjustEnd($$) {
     my ($hd, $part) = @_;
     my $end = $part->{start} + $part->{size};
-    my $end2 = round_down($end, cylinder_size($hd));
-    unless ($part->{start} < $end2) {
-	$end2 = round_up($end, cylinder_size($hd));
-    }
+    my $end2 = round_up($end - 2 * $hd->{geom}{sectors}, cylinder_size($hd));
+    $end2 = $hd->{geom}{cylinders} * cylinder_size($hd) if $end2 > $hd->{geom}{cylinders} * cylinder_size($hd);
     $part->{size} = $end2 - $part->{start};
 }
-#- this method could be used for when partitions informations will be accurate.
-#- sub adjustEnd($$) {
-#-     my ($hd, $part) = @_;
-#-     my $end = $part->{start} + $part->{size} - $hd->{geom}{sectors} - 1; #- magically reduces the end, will be rounded up.
-#-     my $end2 = round_up($end, cylinder_size($hd));
-#-     $end2 = $hd->{geom}{cylinders} * cylinder_size($hd) if $end2 > $hd->{geom}{cylinders} * cylinder_size($hd);
-#-     $part->{size} = $end2 - $part->{start};
-#-}
+#- original method for adjustEnd, keep it while the above has not been tested completely.
+#sub adjustEnd($$) {
+#    my ($hd, $part) = @_;
+#    my $end = $part->{start} + $part->{size};
+#    my $end2 = round_down($end, cylinder_size($hd));
+#    unless ($part->{start} < $end2) {
+#	$end2 = round_up($end, cylinder_size($hd));
+#    }
+#    $part->{size} = $end2 - $part->{start};
+#}
 
 sub get_geometry($) {
     my ($dev) = @_;
