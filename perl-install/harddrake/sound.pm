@@ -146,20 +146,22 @@ sub do_switch {
     return if $old_driver eq $new_driver;
     my $_wait = $in->wait_message(N("Please wait"), N("Please Wait... Applying the configuration"));
     log::explanations("removing old $old_driver\n");
-    rooted("service sound stop") unless $blacklisted;
-    rooted("service alsa stop") if $old_driver =~ /^snd-/ && !$blacklisted;
-    unload($old_driver);    # run_program("/sbin/modprobe -r $driver"); # just in case ...
+    if ($::isStandalone) {
+        rooted("service sound stop") unless $blacklisted;
+        rooted("service alsa stop") if $old_driver =~ /^snd-/ && !$blacklisted;
+        unload($old_driver);    # run_program("/sbin/modprobe -r $driver"); # just in case ...
+    }
     modules::remove_module($old_driver); # completed by the next add_alias()
     modules::add_alias("sound-slot-$index", $new_driver);
     modules::write_conf();
     if ($new_driver =~ /^snd-/) {   # new driver is an alsa one
-        rooted("service alsa start") unless $blacklisted;
-        rooted("/sbin/chkconfig --add alsa");
+        rooted("service alsa start") if $::isStandalone && ! $blacklisted;
+        rooted("/sbin/chkconfig --add alsa")  if $::isStandalone;
         load($new_driver);   # service alsa is buggy
     } else { rooted("/sbin/chkconfig --del alsa") }
     log::explanations("loading new $new_driver\n");
     rooted("/sbin/chkconfig --add sound"); # just in case ...
-    rooted("service sound start") unless $blacklisted;
+    rooted("service sound start") if $::isStandalone && !$blacklisted;
 }
 
 sub switch {
