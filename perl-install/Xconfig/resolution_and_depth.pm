@@ -239,7 +239,10 @@ sub choose_gtk {
     my $chosen_ratio = resolution2ratio($chosen_res) || '4/3';
 
     my $filter_on_ratio = sub {
-	grep { $_->{ratio} eq $chosen_ratio } @_;
+	grep { 
+	    $_->{ratio} eq $chosen_ratio 
+	      || $chosen_ratio eq '4/3' && "$_->{X}x$_->{Y}" eq '1280x1024';
+	} @_;
     };
     my $filter_on_Depth = sub {
 	grep { $_->{Depth} == $chosen_Depth } @_;
