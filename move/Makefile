@@ -90,7 +90,7 @@ live_tree_boot:
 	$(MAKE) /tmp/live_tree_always.clp
 	$(MAKE) /tmp/live_tree_boot.clp
 	$(MAKE) /tmp/live_tree_totem.clp
-	$(MAKE) /tmp/live_tree_nvidia.clp
+	-$(MAKE) /tmp/live_tree_nvidia.clp
 	$(MAKE) $(patsubst %, /tmp/live_tree_always_i18n_%.clp, $(LANG_FILES))
 
 un_live_tree_boot:
