@@ -393,7 +393,7 @@ sub computeSize {
 
 sub suggest_part {
     my ($part, $all_hds, $suggestions) = @_;
-    $suggestions ||= $suggestions{server};
+    $suggestions ||= $suggestions{server} || $suggestions{simple};
 
     my $has_swap = grep { isSwap($_) } get_all_fstab($all_hds);
 
@@ -422,7 +422,7 @@ sub suggest_part {
 sub suggestions_mntpoint {
     my ($all_hds) = @_;
     sort grep { !/swap/ && !has_mntpoint($_, $all_hds) }
-      (@suggestions_mntpoints, map { $_->{mntpoint} } @{$suggestions{server}});
+      (@suggestions_mntpoints, map { $_->{mntpoint} } @{$suggestions{server} || $suggestions{simple}});
 }
 
 #-sub partitionDrives {
