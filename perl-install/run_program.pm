@@ -70,7 +70,7 @@ sub raw {
 		alarm 0;
 	    };
 	    if ($@) {
-		log::l("ERROR: killing runaway process");
+		log::l("ERROR: killing runaway process (process=$str, pid=$pid, args=@args, error=$@)");
 		kill 9, $pid;
 		return;
 	    }
