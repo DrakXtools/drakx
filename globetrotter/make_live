@@ -289,6 +289,18 @@ fs::write_fstab($all_hds, $::prefix);
 append_to_file("$::prefix/etc/fstab", "none /dev/pts devpts mode=0620 0 0");
 doRootSubst("$::prefix/etc/fstab");
 
+my ($home) = grep { $_->{mntpoint} eq "/home" } @parts;
+my ($mnt_pkgs) = grep { $_->{mntpoint} eq "/mnt/packages" } @parts;
+run_program::run('tune2fs', '-L', "MDK-HOME", "/dev/$home->{device}") if $home;
+run_program::run('tune2fs', '-L', "MDK-PKGS", "/dev/$mnt_pkgs->{device}") if $mnt_pkgs;
+
+substInFile {
+    s!defaults\s!defaults,ro ! if m!/mnt/packages!;
+    s!/dev/$home->{device}!LABEL=MDK-HOME!g;
+    s!/dev/$mnt_pkgs->{device}!LABEL=MDK-PKGS!g;
+} "$::prefix/etc/fstab";
+
+
 #-------------------------------------------------------------------
 #- Bootloader
 print "Configuring bootloader\n";
