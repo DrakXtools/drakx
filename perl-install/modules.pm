@@ -398,7 +398,6 @@ qw(
 sk98lin acenic
 aironet4500_card com20020-pci hamachi starfire winbond-840
 
-kaweth
 dc395x_trm
 BusLogic seagate fdomain g_NCR5380 tmscsim
 )
@@ -407,6 +406,7 @@ BusLogic seagate fdomain g_NCR5380 tmscsim
 my @skip_modules_on_stage1 = (
   qw(olympic sktr tmspci ibmtr abyss), # token ring
   qw(old_tulip rtl8139), # doesn't exist in 2.4
+  qw(kaweth pegasus), # usb net
   if_(arch() =~ /alpha|ppc/, qw(sb1000)),
   "apa1480_cb",
   "imm",
