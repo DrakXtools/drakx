@@ -1,3 +1,86 @@
+2002/03/01  dam's  <damien@mandrakesoft.com>
+
+	* services.pm: corrected translation used for shell command
+
+	* my_gtk.pm: style & font correction
+
+2002/03/01  François Pons  <fpons@mandrakesoft.com>
+
+	* share/rpmsrate: updated INSTALL category with NOCOPY new flag added.
+
+	* rescue/tree/etc/oem: added ext3 support.
+
+	* share/rpmsrate.server: synced with rpmsrate INSTALL category.
+
+	* install_any.pm: reset correct setup_postinstall_rpms calling.
+	removed some card where 3D is not installed by default:
+	Riva128, Radeon 8500 and Rage Mobility card.
+	removed staling debug code.
+	fixed bad copied package (if one is not found).
+
+	* tools/oem-prepare: added handling of newer rpmsrate format with INSTALL
+	category.
+
+	* pkgs.pm: added pixel comments for handling INSTALL category and NOCOPY
+	handling.
+	only copy package in INSTALL category with a rate of at least 2.
+
+2002/03/01  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: a few missing trads
+	please translators, keep two newlines when
+	there are two newlines in original string,
+	it's on purpose
+
+2002/03/01  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/DrakX.pot, share/po/es.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/cy.po, share/po/nl.po,
+	share/po/ja.po, share/po/wa.po, share/po/sv.po, share/po/is.po,
+	share/po/hu.po, share/po/it.po, share/po/id.po, share/po/pl.po,
+	share/po/fi.po, share/po/no.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/ar.po, share/po/sl.po,
+	share/po/vi.po, share/po/br.po, share/po/ca.po, share/po/gl.po,
+	share/po/lv.po, share/po/uk.po, share/po/eo.po, share/po/ro.po,
+	share/po/bs.po, share/po/da.po, share/po/zh_TW.po, share/po/cs.po,
+	share/po/af.po: updated po files
+
+	* share/po/fr.po: fixed two typos
+	small corrections (non breakable spaces)
+
+2002/03/01  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm: handle leaving X for both Xdrakres and XFdrake (=>
+	Xdrakres completly obsolete)
+
+	* standalone/localedrake: restrict localedrake to installed lang
+
+	* lang.pm: restrict localedrake to installed lang
+	add 'C' in %charset2kde_font (so that english has normal fonts)
+
+	* bootloader.pm: 
+	  - do not indent "disk=... bios=..."
+	  - $lilo->{first_hd_device} can be used to tell which drive is the
+	first one
+	for the BIOS. Useful when the bootloader is installed on a partition and
+	not
+	on the MBR.
+	read "disk=/dev/xxx bios=0x8x" and save it
+
+	* any.pm: restrict localedrake to installed lang
+	ask which hard drive is the booting one when there is mixed kind of
+	drives
+	(scsi+ide, ide2+ide) and the bootloader is not installed on MBR
+
+2002/03/01  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm: Reduced the paths to search for Star/Open Office, on systems
+	without these applications installed the search needed a significant
+	time.
+
 2002/03/01  François Pons  <fpons@mandrakesoft.com>
 
 	* share/rpmsrate: updated INSTALL category with NOCOPY new flag added.
