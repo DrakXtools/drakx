@@ -182,7 +182,9 @@ sub get() {
 }
 
 sub set {
-    my ($in, $netc, $authentication, $when_network_is_up) = @_;
+    my ($in, $netc, $authentication, $o_when_network_is_up) = @_;
+
+    my $when_network_is_up = $o_when_network_is_up || sub { my ($f) = @_; $f->() };
 
     any::enableShadow() if $authentication->{shadow};    
 
