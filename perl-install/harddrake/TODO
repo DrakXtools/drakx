@@ -7,23 +7,28 @@
 *** enable the user to force a module (isa, isapnp, ...)
 *** pci freeze (fseek ?)
 *** print "NOT LOADED" if module isn't loaded
+** add bus_position to make unique id in ui
+** cdrom
+*** ide-scsi / ide-cd switch
+*** supermount switch
 
 ** draksound
 *** add a dialog so that the user choose its wavetable.
 *** list all availlables drivers, defaulting to first alternative, prepending old one with '*'
 *** add 'ALSA/OSS': tag to modules list
 
-* Postponed
-*** detect isapnp devices
-** more use of my_gtk/ugtk
-** use fbgtk+2 when booting on fbcon for smoother GUI => interactive::fbgtk
-*** fpons, convert perl-GTK to gtk+2 :-)
+** detect isapnp devices
+** ui
+*** more use of my_gtk/ugtk
+*** use fbgtk+2 when booting on fbcon for smoother GUI => interactive::fbgtk
+**** fpons, convert perl-GTK to gtk+2 :-)
+
 ** move all drakx tools into just a small one-liner that uses real <tool>.pm
     so that harddrake and mcc reduces their memory usage pattern and
     be faster (the next fast step will be to use perl6/parrot)
+
 ** check there're enough parameters in module config
 ** for to send a message for unknown hardware to install@mandrakesoft.com
-*** use drakbugreport ?
 
     Subject: [UNKNOW HARDWARE] or a new other ml
         -> do you konw how to configure it under linux ?

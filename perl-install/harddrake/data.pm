@@ -33,13 +33,13 @@ our @tree =
 	["VIDEO","Videocard", "video.png", "$sbindir/XFdrake", 
 	 sub { grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ 'DISPLAY_VGA' } @devices }, 1 ],
 	["TV","Tvcard", "tv.png", "/usr/bin/XawTV", 
-	 sub { grep { $_->{media_type} =~ 'MULTIMEDIA_VIDEO' } @devices}, 0 ],
+	 sub { grep { $_->{media_type} =~ 'MULTIMEDIA_VIDEO' && $_->{bus} eq 'PCI' } @devices}, 0 ],
 	["MULTIMEDIA_OTHER","Other MultiMedia devices", "multimedia.png", "", 
 	 sub { grep { $_->{media_type} =~ 'MULTIMEDIA_OTHER' } @devices}, 0 ],
 	["AUDIO","Soundcard", "sound.png", "$sbindir/draksound", 
 	 sub { grep { $_->{media_type} =~ 'MULTIMEDIA_AUDIO' } @devices}, 0 ],
 #	"MULTIMEDIA_AUDIO" => "/usr/bin/X11/sounddrake";
-	["WEBCAM","Webcam", "webcam.png", "", sub {}, 0 ],
+	["WEBCAM","Webcam", "webcam.png", "", sub { grep { $_->{media_type} =~ 'MULTIMEDIA_VIDEO' && $_->{bus} ne 'PCI'} @devices }, 0 ],
 	["ETHERNET","Ethernetcard", "hw_network.png", "$sbindir/drakconnect", sub {
 	    #- generic NIC detection for USB seems broken (class, subclass, 
 	    #- protocol report are not accurate) so I'll need to verify against
