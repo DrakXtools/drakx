@@ -24,11 +24,11 @@ sub configure {
 #    $netcnx->{$netcnx->{type}}->{connection} = ($netcnx->{$netcnx->{type}}->{auth} eq 'PAP' || $netcnx->{$netcnx->{type}}->{auth} eq 'CHAP') && $intf->{ppp0}{PAPNAME};
 #    $modem->{device} = readlink "$prefix/dev/modem";
     foreach (cat_("/usr/share/config/kppprc")) {
-	/^DNS=(.*)$/ and ($modem->{dns1}, $modem->{dns2}) = split (',', $1);
+	/^DNS=(.*)$/ and ($modem->{dns1}, $modem->{dns2}) = split(',', $1);
     }
     my $secret = network::tools::read_secret_backend();
     foreach (@$secret) {
-	$modem->{passwd} = $_->{passwd} if ($_->{login} eq $modem->{login});
+	$modem->{passwd} = $_->{passwd} if $_->{login} eq $modem->{login};
     }
     foreach (cat_("/etc/sysconfig/network-scripts/chat-ppp0")) {
 	if (/.*ATDT(\d*).*/) {
@@ -65,7 +65,7 @@ sub pppConfig {
     }
     $::isStandalone || $in->set_help('configureNetworkISP');
     $in->ask_from('', N("Dialup options"), [
-{ label => N("Connection name"), val => \$modem->{connection}},
+{ label => N("Connection name"), val => \$modem->{connection} },
 { label => N("Phone number"), val => \$modem->{phone} },
 { label => N("Login ID"), val => \$modem->{login} },
 { label => N("Password"), val => \$modem->{passwd}, hidden => 1 },

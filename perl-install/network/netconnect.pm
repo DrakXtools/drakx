@@ -415,19 +415,19 @@ ISDNHomePhone=$isdn->{phone_in}
 ISDNLogin=$isdn->{login}
 ISDNPassword=$isdn->{passwd}
 ISDNConfirmPassword=$isdn->{passwd2}
-".
+" .
 #PPPInterfacesList=
 "PPPDevice=$modem->{device}
 PPPDeviceSpeed=
 PPPConnectionName=$modem->{connection}
-".
+" .
 #PPPProviderPhone=$modem->{phone}
 "PPPProviderDomain=$modem->{domain}
-".
+" .
 #PPPProviderDNS1=$modem->{dns1}
 #PPPProviderDNS2=$modem->{dns2}
 "PPPLogin=$modem->{login}
-".
+" .
 #PPPPassword=$modem->{passwd}
 #PPPConfirmPassword=$modem->{passwd}
 "PPPAuthentication=$modem->{auth}
