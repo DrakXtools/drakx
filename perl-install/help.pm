@@ -448,12 +448,39 @@ You have to enter some informations here.
      you want, for example \"2nd floor\").
 "),
 
+configurePrinterLPR => 
+__("You need to enter some informations here.
+
+   * Name of queue: the print spooler uses "lp" as default printer name. So, you need have a printer named \"lp\".
+    If you have only one printer, you can use several names for it. You just need to separate them by a pipe
+    character (a \"|\"). So, if you prefer to have a more meaningful name, you have to put it first, eg: \"My printer|lp\".
+    The printer having \"lp\" in its name(s) will be the default printer.
+  
+   * Spool directory: it is in this directory that printing jobs are stored. Keep the default choice
+     if you don't know what to use
+
+   * Printer Connection: If your printer is physically connected to your computer, select \"Local printer\".
+     If you want to access a printer located on a remote Unix machine, select \"Remote lpd printer\".
+
+   If you want to access a printer located on a remote Microsoft Windows machine (or on Unix machine using SMB
+   protocol), select \"SMB/Windows 95/98/NT\".
+
+   If you want to acces a printer located on NetWare network, select \"NetWare\".
+"),
+
 configurePrinterDev => 
 __("Your printer has not been detected. Please enter the name of the device on
 which it is connected.
 
 For information, most printers are connected on the first parallel port. This
 one is called \"/dev/lp0\" under GNU/Linux and \"LPT1\" under Microsoft Windows."),
+
+configurePrinterOptions => 
+__("Please select rights options according to your printer.
+Please see its documentation if you don't know what choose here.
+	
+You will able to test your configuration in next step and
+you will be able to modify it if it doesn't work as you want."),
 
 configurePrinterType => __("You must now select your printer in the above list."),
 

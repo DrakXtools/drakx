@@ -415,7 +415,7 @@ _("Location") => { val => \$printer->{Location} },
 							       $printer->{str_type},
 							      );
 		} else {
-		    $in->set_help('configurePrinterLocal');
+		    $in->set_help('configurePrinterLPR');
 		    $in->ask_from_entries_refH([_("Select Printer Connection"), _("Ok"), $::beginner ? () : _("Remove queue")],
 _("Every print queue (which print jobs are directed to) needs a
 name (often lp) and a spool directory associated with it. What
