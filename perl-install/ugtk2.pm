@@ -317,7 +317,15 @@ sub create_box_with_title {
 	$wtext->signal_connect(button_press_event => sub { 1 }); #- disable selecting text and popping the contextual menu (GUI team says it's *horrible* to be able to do select text!)
 	chomp(my $text = join("\n", @_));
 	my $scroll = create_scrolled_window(gtktext_insert($wtext, $text));
-	$scroll->set_size_request(400, $o->{box_size});
+     my $width = 400;
+     $scroll->signal_connect(realize => sub {
+                                my $layout = $wtext->create_pango_layout ($text);
+                                $layout->set_width(($width - 10) * Gtk2::Pango->scale);
+                                $wtext->set_size_request($width,  min(200, ($layout->get_pixel_size)[1] + 10));
+                                $scroll->set_size_request($width, min(200, ($layout->get_pixel_size)[1] + 10));
+                                $o->{rwindow}->queue_resize;
+                            });
+     $scroll->set_size_request($width, 200);
 	gtkpack_($box, 0, $scroll);
     } else {
 	my $a = !$::no_separator;
