@@ -67,6 +67,7 @@ install:
 	rmdir $(LIBDEST)/icons/harddrake2/menu
 	mv $(LIBDEST)/icons/harddrake2/ $(DATADIR)/pixmaps/
 	mv $(SBINDEST)/service_harddrake.sh $(INITDIR)/harddrake
+	install share/rpmsrate $(DATADIR)/harddrake/
 	mv $(SBINDEST)/convert $(DATADIR)/harddrake
 	mv $(SBINDEST)/service_harddrake $(DATADIR)/harddrake/
 	ln -s {XFdrake,$(SBINDEST)/drakx11}
