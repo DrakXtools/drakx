@@ -101,7 +101,8 @@ sub packageFlagBase      { my ($pkg) = @_; $pkg->{flags} & $PKGS_BASE }
 sub packageFlagSkip      { my ($pkg) = @_; $pkg->{flags} & $PKGS_SKIP }
 sub packageFlagUnskip    { my ($pkg) = @_; $pkg->{flags} & $PKGS_UNSKIP }
 
-sub packageSetFlagSelected  { my ($pkg, $v) = @_; $v ? ($pkg->{flags} |= $PKGS_SELECTED)  : ($pkg->{flags} &= ~$PKGS_SELECTED); }
+sub packageSetFlagSelected  { my ($pkg, $v) = @_; $pkg->{flags} &= ~$PKGS_SELECTED; $pkg->{flags} |= $v & $PKGS_SELECTED; }
+
 sub packageSetFlagForce     { my ($pkg, $v) = @_; $v ? ($pkg->{flags} |= $PKGS_FORCE)     : ($pkg->{flags} &= ~$PKGS_FORCE); }
 sub packageSetFlagInstalled { my ($pkg, $v) = @_; $v ? ($pkg->{flags} |= $PKGS_INSTALLED) : ($pkg->{flags} &= ~$PKGS_INSTALLED); }
 sub packageSetFlagBase      { my ($pkg, $v) = @_; $v ? ($pkg->{flags} |= $PKGS_BASE)      : ($pkg->{flags} &= ~$PKGS_BASE); }
@@ -202,13 +203,14 @@ sub selectPackage($$;$$) {
 		#- deps have been closed except for choices, so no need to
 		#- recursively apply selection, expand base on it.
 		my $dep = packageById($packages, $_);
+#		printf ">>> $dep->{file}: %x\n", $dep->{flags};
 		$base and packageSetFlagBase($dep, 1);
 		$otherOnly and !packageFlagSelected($dep) and $otherOnly->{packageName($dep)} = 1;
 		$otherOnly or packageSetFlagSelected($dep, 1+packageFlagSelected($dep));
 	    }
 	}
     }
-    $otherOnly and packageFlagSelected($pkg) and $otherOnly->{packageName($pkg)} = 1;
+    $otherOnly and !packageFlagSelected($pkg) and $otherOnly->{packageName($pkg)} = 1;
     $otherOnly or packageSetFlagSelected($pkg, 1+packageFlagSelected($pkg));
     1;
 }
@@ -226,11 +228,13 @@ sub unselectPackage($$;$) {
     #- provides are closed and are taken into account to get possible
     #- unselection of package (value false on otherOnly) or strict
     #- unselection (value true on otherOnly).
-    foreach my $providedPkg ($pkg, packageProvides($pkg)) {
-	packageFlagBase($providedPkg) and die "a provided package cannot be a base package";
-	$otherOnly or packageSetFlagSelected($providedPkg, 0);
-	$otherOnly and $otherOnly->{packageName{$providedPkg}} = 1;
-	foreach (map { split '\|' } packageDepsId($providedPkg)) {
+    foreach my $provided ($pkg, packageProvides($pkg)) {
+	packageFlagBase($provided) and die "a provided package cannot be a base package";
+	if (packageFlagSelected($provided)) {
+	    $otherOnly or packageSetFlagSelected($provided, 0);
+	    $otherOnly and $otherOnly->{packageName($provided)} = 1;
+	}
+	foreach (map { split '\|' } packageDepsId($provided)) {
 	    my $dep = packageById($packages, $_);
 	    packageFlagBase($dep) and next;
 	    packageFlagSelected($dep) or next;
@@ -243,9 +247,9 @@ sub unselectPackage($$;$) {
     }
     1;
 }
-sub togglePackageSelection($$) {
-    my ($packages, $pkg) = @_;
-    packageFlagSelected($pkg) ? unselectPackage($packages, $pkg) : selectPackage($packages, $pkg);
+sub togglePackageSelection($$;$) {
+    my ($packages, $pkg, $otherOnly) = @_;
+    packageFlagSelected($pkg) ? unselectPackage($packages, $pkg, $otherOnly) : selectPackage($packages, $pkg, 0, $otherOnly);
 }
 sub setPackageSelection($$$) {
     my ($packages, $pkg, $value) = @_;
@@ -254,7 +258,7 @@ sub setPackageSelection($$$) {
 
 sub unselectAllPackages($) {
     my ($packages) = @_;
-    packageSetFlagSelected($_, packageFlagBase($_) && 1) foreach values %{$packages->[0]};
+    packageFlagBase($_) or packageSetFlagSelected($_, 0) foreach values %{$packages->[0]};
 }
 
 sub skipSetWithProvides {
@@ -337,8 +341,8 @@ sub getProvides($) {
     #- needed by a large number of package.
 
     foreach my $pkg (@{$packages->[1]}) {
-	map { my $providedPkg = $packages->[1][$_] or die "invalid package index $_";
-	      packageFlagBase($providedPkg) or push @{$providedPkg->{provides} ||= []}, $pkg;
+	map { my $provided = $packages->[1][$_] or die "invalid package index $_";
+	      packageFlagBase($provided) or push @{$provided->{provides} ||= []}, $pkg;
 	  } map { split '\|' } packageDepsId($pkg);
     }
 }
@@ -385,7 +389,7 @@ sub readCompssList {
 	    $p->{values} = [ map { $_ + 90 } @{$p->{values} || [ (0) x @levels ]} ];
 	}
     }
-    return { map_index { $_ => $::i } @levels };
+    my $l = { map_index { $_ => $::i } @levels };
 }
 
 sub readCompssUsers {
@@ -426,7 +430,7 @@ sub readCompssUsers {
 
 sub setSelectedFromCompssList {
     my ($compssListLevels, $packages, $min_level, $max_size, $install_class) = @_;
-    my $ind = $compssListLevels->{$install_class} or log::l("unknown install class $install_class in compssList"), return;
+    my $ind = $compssListLevels->{$install_class}; defined $ind or log::l("unknown install class $install_class in compssList"), return;
 
     my @packages = allPackages($packages);
     my @places = do {

@@ -85,7 +85,7 @@ sub ask_from_treelistW {
 	    my $s; $tree->expand($wtree{$s .= "$_$separator"}) foreach split $sep, $root;
 	    foreach my $nb (1 .. @$l) {
 		if ($tree->node_nth($nb) == $node) {
-		    $tree->focus_row($nb);
+		    $tree->set_focus_row($nb);
 		    Gtk->idle_add(sub { $tree->node_moveto($node, 0, 0.5, 0); 0 });
 		    last;
 		}
@@ -104,7 +104,7 @@ sub ask_from_treelistW {
 	Gtk->main_quit;
     };
     $w->{ok_clicked} = $leave;
-    $w->{cancel_clicked} = sub { $o->destroy; die "ask_from_list cancel" }; #- make sure windows doesn't live any more.
+    $w->{cancel_clicked} = sub { $w->destroy; die "ask_from_list cancel" }; #- make sure windows doesn't live any more.
     gtkadd($w->{window},
 	   gtkpack($w->create_box_with_title(@$messages),
 		   gtkpack_(new Gtk::VBox(0,7),

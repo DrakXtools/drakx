@@ -122,7 +122,7 @@ sub setPackages($) {
     my ($o) = @_;
 
     require pkgs;
-    if (is_empty_array_ref($o->{packages})) {
+    if (!$o->{packages} || is_empty_hash_ref($o->{packages}[0])) {
 	$o->{packages} = pkgs::psUsingHdlist($o->{prefix});
 
 	push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
@@ -147,6 +147,15 @@ sub setPackages($) {
 	$_->{values} = [ map { $_ + 50 } @{$_->{values}} ] foreach grep {$_} map { $o->{packages}{$_} } @l;
 
 	grep { !pkgs::packageByName($o->{packages}, $_) && log::l("missing base package $_") } @{$o->{base}} and die "missing some base packages";
+
+	foreach (@{$o->{base}}) {
+	    my $p = pkgs::packageByName($o->{packages}, $_) or log::l("missing base package $_"), next;
+	    pkgs::selectPackage($o->{packages}, $p, 1);
+	}
+
+	#- must be done after selecting base packages (to save memory)
+	pkgs::getProvides($o->{packages});
+
     } else {
 	pkgs::unselectAllPackages($o->{packages});
     }
@@ -154,14 +163,10 @@ sub setPackages($) {
     #- this will be done if necessary in the selectPackagesToUpgrade,
     #- move the selection here ? this will remove the little window.
     unless ($o->{isUpgrade}) {
-	do {
-	    my $p = pkgs::packageByName($o->{packages}, $_) or log::l("missing base package $_"), next;
-	    pkgs::selectPackage($o->{packages}, $p, 1);
-	} foreach @{$o->{base}};
-	do {
+	foreach (@{$o->{default_packages}}) {
 	    my $p = pkgs::packageByName($o->{packages}, $_) or log::l("missing add-on package $_"), next;
 	    pkgs::selectPackage($o->{packages}, $p);
-	} foreach @{$o->{default_packages}};
+	}
     }
 }
 
@@ -501,6 +506,10 @@ sub install_urpmi {
 
     (my $name = _("installation")) =~ s/\s/_/g; #- in case translators are too good :-/
 
+    {
+	local *F = getFile("depslist");
+	output("$prefix/var/lib/urpmi/depslist", <F>);
+    }
     {
 	local *LIST;
 	open LIST, ">$prefix/var/lib/urpmi/list.$name" or log::l("failed to write list.$name"), return;

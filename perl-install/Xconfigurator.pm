@@ -83,12 +83,12 @@ sub readCardsDB {
     \%cards;
 }
 sub readCardsNames {
-    my $file = "$prefix/usr/X11R6/lib/X11/CardsNames";
+    my $file = "/usr/X11R6/lib/X11/CardsNames";
     local *F; open F, $file or die "can't find $file\n";
     map { (split '=>')[0] } <F>;
 }
 sub cardName2RealName {
-    my $file = "$prefix/usr/X11R6/lib/X11/CardsNames";
+    my $file = "/usr/X11R6/lib/X11/CardsNames";
     my ($name) = @_;
     local *F; open F, $file or die "can't find $file\n";
     foreach (<F>) { chop;

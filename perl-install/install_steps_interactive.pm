@@ -266,23 +266,21 @@ sub choosePackages {
 
 	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted);
 
-	my %save_selected; $save_selected{pkgs::packageName($_)} = pkgs::packageFlagSelected($_) foreach values %{$packages->[0]};
+	my %save_selected; $save_selected{$_->{file}} = pkgs::packageFlagSelected($_) foreach values %{$packages->[0]};
 	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, 0, $o->{installClass});
 	my $max_size = pkgs::selectedSize($packages);
-	pkgs::packageSetFlagSelected($_, $save_selected{$_->{name}}) foreach values %{$packages->[0]};
+	pkgs::packageSetFlagSelected($_, $save_selected{$_->{file}}) foreach values %{$packages->[0]};
 
-	if (!$::beginner && $max_size > $available) {
-	    $o->ask_okcancel('', 
+	 if (!$::beginner && $max_size > $available) {
+	     $o->ask_okcancel('', 
 _("You need %dMB for a full install of the groups you selected.
 You can go on anyway, but be warned that you won't get all packages", $max_size / sqr(1024)), 1) or goto &choosePackages
-	}
+	 }
 
-	my $size2install = $::beginner ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, min($max_size, $available * 0.9)) or goto &choosePackages;
+	 my $size2install = $::beginner ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, min($max_size, $available * 0.9)) or goto &choosePackages;
 
-	($o->{packages_}{ind}) = 
-	  pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, $size2install, $o->{installClass});
-
-#	$_->{selected} and print "$_->{name}\n" foreach values %$packages;
+	 ($o->{packages_}{ind}) = 
+	   pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, $size2install, $o->{installClass});
     }
     $o->choosePackagesTree($packages, $compss) if $::expert;
 }
@@ -626,7 +624,7 @@ sub addUser($) {
     my @shells = install_any::shells($o);
 
     if ($o->{security} < 2 && !$clicked || $o->ask_from_entries_refH(
-        [ _("Add user"), _("Accept user"), $o->{security} > 4 && !@{$o->{users}} ? () : _("Done") ],
+        [ _("Add user"), _("Accept user"), $o->{security} >= 4 && !@{$o->{users}} ? () : _("Done") ],
         _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @{$o->{users}})) : ''),
         [ 
 	 _("Real name") => \$u->{realname},
@@ -1154,7 +1152,7 @@ sub load_thiskind {
 	install_any::ultra66($o);
 
 	if (my ($c) = pci_probing::main::probe('AUDIO')) {
-	    modules::add_alias("sound", $c->[1]);
+	    modules::add_alias("sound", $c->[1]) if pci_probing::main::check($c->[1]);
 	}
     }
     modules::load_thiskind($type, sub { $w = wait_load_module($o, $type, @_) }, $pcmcia);

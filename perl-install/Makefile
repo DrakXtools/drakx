@@ -116,7 +116,7 @@ endif
 	cd share ; cp -a consolefonts $(DEST)/usr/share
 	cd share ; cp template.in/*.in $(DEST)/usr/share
 	cd share ; cp MonitorsDB CardsNames $(DEST)/usr/X11R6/lib/X11
-	cd share ; cp logo-mandrake.xpm $(DEST)/usr/share
+	cd share ; cp *.xpm $(DEST)/usr/share
 	cd share ; cp -a themes $(DEST)/usr/share/gtk
 	cd share ; cp compss compssUsers compssList $(ROOTDEST)/Mandrake/base
 
