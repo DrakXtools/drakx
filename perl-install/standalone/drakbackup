@@ -2002,14 +2002,10 @@ sub advanced_where_cd {
 			),
 			0, new Gtk2::VBox(0, 5),
 			0, gtkpack_(new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(new Gtk2::Label(N("Please check for multisession CD")), $where_cd),
 				1, new Gtk2::VBox(0, 5),
+				0, gtkset_sensitive(new Gtk2::Label(N("Multisession CD")), $where_cd),
 				0, gtkset_sensitive(my $check_multisession = new Gtk2::CheckButton(), $where_cd),
-			),
-			0, new Gtk2::VBox(0, 5),
-			0, gtkpack_(new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(new Gtk2::Label(N("Please check if you are using CDRW media")), $where_cd),
-				1, new Gtk2::VBox(0, 5),
+				0, gtkset_sensitive(new Gtk2::Label(N("CDRW media")), $where_cd),
 				0, gtkset_sensitive(my $check_cdrw = new Gtk2::CheckButton(), $where_cd),
 			),
 			0, new Gtk2::VBox(0, 5),
@@ -2021,14 +2017,10 @@ sub advanced_where_cd {
 			),
 			0, new Gtk2::VBox(0, 5),
 			0, gtkpack_(new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(new Gtk2::Label(N("Please check if you are using a DVDR device")), $where_cd),
 				1, new Gtk2::VBox(0, 5),
+				0, gtkset_sensitive(new Gtk2::Label(N("DVDR device")), $where_cd),
 				0, gtkset_sensitive(my $check_dvdr = new Gtk2::CheckButton(), $where_cd),
-			),
-			0, new Gtk2::VBox(0, 5),
-			0, gtkpack_(new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(new Gtk2::Label(N("Please check if you are using a DVDRAM device")), $where_cd),
-				1, new Gtk2::VBox(0, 5),
+				0, gtkset_sensitive(new Gtk2::Label(N("DVDRAM device")), $where_cd),
 				0, gtkset_sensitive(my $check_dvdram = new Gtk2::CheckButton(), $where_cd),
 			),
 # don't know what this is about - hold off for now (SB)
@@ -4635,6 +4627,9 @@ sub interactive_mode() {
     $in = 'interactive'->vnew;
 
     my $box;
+	my $winht = 400;
+	$winht = 320 if $::isEmbedded;
+	
     $my_win = ugtk2->new('drakbackup');
     $window1 = $my_win->{window};
     unless ($::isEmbedded) {
@@ -4646,7 +4641,7 @@ sub interactive_mode() {
 
     gtkadd($window1,
 		gtkpack(new Gtk2::VBox(0,0),
-			gtkpack(gtkset_size_request($up_box = new Gtk2::VBox(0, 5), 540, 400),
+			gtkpack(gtkset_size_request($up_box = new Gtk2::VBox(0, 5), 540, $winht),
 				$box = gtkpack_(new Gtk2::VBox(0, 3),
 					if_(!$::isEmbedded, 0, gtkcreate_img("drakbackup.540x57")),
 					1, gtkpack_(new Gtk2::HBox(0, 3),
