@@ -95,10 +95,10 @@ sub new {
 	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, [-fill, -expand], [-fill, -expand], 0, 0);
     }
 
-    $::isEmbedded && !$my_gtk::pop_it or return $o;
+    $::isEmbedded && !$my_gtk::pop_it && !eval { $::Plug->child } or return $o;
     $o->{window} = new Gtk::HBox(0,0);
     $o->{rwindow} = $o->{window};
-    defined($::Plug) or $::Plug = new Gtk::Plug ($::XID);
+    $::Plug ||= new Gtk::Plug ($::XID);
     $::Plug->show;
     flush();
     $::Plug->add($o->{window});
