@@ -6,11 +6,11 @@ use MDK::Common;
 use class_discard;
 
 our (@ISA, @EXPORT_OK) = (qw(Exporter), (qw(version tree)));
-our ($version, $sbindir, $bindir) = ("1.1.5", "/usr/sbin", "/usr/bin");
+our ($version, $sbindir, $bindir) = ("1.1.6", "/usr/sbin", "/usr/bin");
 
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown {
-    grep { $_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO)|STORAGE_IDE|BRIDGE|NETWORK|MULTIMEDIA_AUDIO/ } detect_devices::probeall(1);
+    grep { $_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|Printer|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|STORAGE_IDE|BRIDGE|NETWORK/ } detect_devices::probeall(1);
 }
 
 
@@ -24,7 +24,9 @@ our @tree =
     (
 	["FLOPPY","Floppy", "floppy.png", "",\&detect_devices::floppies],
 	["HARDDISK","Disk", "harddisk.png", "$sbindir/diskdrake", \&detect_devices::hds],
-	["CDROM","Cdrom", "cd.png", "", \&detect_devices::cdroms],
+	["CDROM","CDROM", "cd.png", "", sub { grep { !(detect_devices::isBurner($_) || detect_devices::isDvdDrive($_))} &detect_devices::cdroms}],
+	["BURNER","CD/DVD burners", "cd.png", "", \&detect_devices::burners],
+	["DVDROM","DVD-ROM", "cd.png", "", \&detect_devices::dvdroms],
 	["TAPE","Tape", "tape.png", "", \&detect_devices::tapes],
 #	["CDBURNER","Cd burners", "cd.png", "", \&detect_devices::burners],
 
@@ -32,6 +34,8 @@ our @tree =
 	 sub {grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ 'DISPLAY_VGA' } @devices }],
 	["TV","Tvcard", "tv.png", "/usr/bin/XawTV", 
 	 sub {grep { $_->{media_type} =~ 'MULTIMEDIA_VIDEO' } @devices}],
+	["MULTIMEDIA_OTHER","Other MultiMedia devices", "tv.png", "", 
+	 sub {grep { $_->{media_type} =~ 'MULTIMEDIA_OTHER' } @devices}],
 	["AUDIO","Soundcard", "sound.png", "$bindir/aumix", 
 	 sub {grep { $_->{media_type} =~ 'MULTIMEDIA_AUDIO' } @devices}],
 #	"MULTIMEDIA_AUDIO" => "/usr/bin/X11/sounddrake";
@@ -62,7 +66,7 @@ our @tree =
 	["JOYSTICK","Joystick", "joystick.png", "", sub {}],
 
 	["ATA_STORAGE","(E)IDE/ATA controllers", "ide_hd.png", "", sub {grep { $_->{media_type} =~ 'STORAGE_IDE' } @devices}],
-#	["","Scsiinterface", "Scsiinterface.png", "", \&detect_devices::getSCSI],
+	["SCSI_CONTROLLER","SCSI controllers", "scsi.png", "", \&detect_devices::getSCSI],
 	["USB_CONTROLLER","USB controllers", "usb.png", "", sub {grep { $_->{media_type} =~ 'SERIAL_USB' } @devices}],
 	["SMB_CONTROLLER","SMBus controllers", "usb.png", "", sub {grep { $_->{media_type} =~ 'SERIAL_SMBUS' } @devices}],
 	);
