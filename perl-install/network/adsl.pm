@@ -33,30 +33,30 @@ If you don't know, choose 'use pppoe'"),
 				  ) or return;
     $type = find { $l{$_} eq $type } keys %l;
     if ($type eq 'pppoe') {
-	$in->do_pkgs->install("rp-$type");
+	$in->do_pkgs->install("rp-$type") if !$::testing;
 	$netcnx->{type} = "adsl_$type";
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
     }
     if ($type eq 'dhcp') {
-	$in->do_pkgs->install(qw(dhcpcd));
+	$in->do_pkgs->install(qw(dhcpcd)) if !$::testing;
 	go_ethernet($netc, $intf, 'dhcp', '', '', $first_time) or goto conf_adsl_step1;
     }
     if ($type eq 'pptp') {
-	$in->do_pkgs->install(qw(pptp-adsl));
+	$in->do_pkgs->install(qw(pptp-adsl)) if !$::testing;
 	$netcnx->{type} = "adsl_$type";
 	$netcnx->{"adsl_$type"} = {};
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
     }
     if ($type =~ /Sagem/) {
 	$type = 'sagem' . ($type =~ /dhcp/ ? "_dhcp" : "");
-	$in->do_pkgs->install(qw(adiusbadsl), if_($type =~ /dhcp/, qw(dhcpcd)));
+	$in->do_pkgs->install(qw(adiusbadsl), if_($type =~ /dhcp/, qw(dhcpcd))) if !$::testing;
 	$netcnx->{type} = "adsl_$type";
 	$netcnx->{"adsl_$type"} = {};
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
     }
     if ($type =~ /speedtouch/) {
 	$type = 'speedtouch';
-	$in->do_pkgs->install(qw(speedtouch));
+	$in->do_pkgs->install(qw(speedtouch)) if !$::testing;
 	$netcnx->{type} = "adsl_$type";
 	$netcnx->{"adsl_$type"} = {};
 	$netcnx->{"adsl_$type"}{vpivci} = '';
@@ -64,7 +64,7 @@ If you don't know, choose 'use pppoe'"),
     }
     # if ($type =~ /ECI/) {
 # 	$type = 'eci';
-# 	$in->do_pkgs->install(qw(eciadsl));
+# 	$in->do_pkgs->install(qw(eciadsl)) if !$::testing;
 # 	$netcnx->{type} = "adsl_$type";
 # 	$netcnx->{"adsl_$type"} = {};
 # 	$netcnx->{"adsl_$type"}{vpivci} = '';
