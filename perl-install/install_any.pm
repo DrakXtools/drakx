@@ -494,15 +494,6 @@ sub kdeicons_postinstall {
 			  1, %$_) if $name;
     }
 
-    my @l = list_skels($prefix, 'Desktop/Doc.kdelnk');
-    if (my ($lang) = all("$prefix/usr/doc/mandrake")) {
-	substInFile { s|^(URL=.*?)/?$|$1/$lang/index.html| } @l;
-	substInFile { s|^(url=/usr/doc/mandrake/)$|$1$lang/index.html| } "$prefix/usr/lib/desktop-links/mandrake.links";
-    } else {
-	unlink @l;
-	substInFile { $_ = '' if /^\[MDKsupport\]$/ .. /^\s*$/ } "$prefix/usr/lib/desktop-links/mandrake.links";
-    }
-
     # rename the .kdelnk to the name found in the .kdelnk as kde doesn't use it
     # for displaying
     foreach my $dir (grep { -d $_ } list_skels($prefix, 'Desktop')) {
