@@ -528,7 +528,7 @@ my %charset2kde_font = (
   'viscii'  => [ "misc-fixed,13", "misc-fixed,13", "misc-fixed,10", ],
   #- TSCII uses pseudo iso-8859-1 fonts, it is important to choose them
   #- correctly
-  'tscii'  => [ "tsc_paranar,13", "mylaitsc,13", "tsc_paranar,10", ],
+  'tscii'  => [ "tsc_paranar,13", "mylaifixtsc,13", "tsc_paranar,10", ],
   'default' => [ "misc-fixed,13", "misc-fixed,13", "misc-fixed,10", ],
 );
 
