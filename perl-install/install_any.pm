@@ -131,7 +131,10 @@ sub getFile {
     log::l("getFile $f:$method");
     my $rel = relGetFile($f);
     do {
-	if ($method =~ /crypto/i) {
+	if ($f =~ m|^http://|) {
+	    require http;
+	    http::getFile($f);
+	} elsif ($method =~ /crypto/i) {
 	    require crypto;
 	    crypto::getFile($f);
 	} elsif ($::o->{method} eq "ftp") {
@@ -139,7 +142,7 @@ sub getFile {
 	    ftp::getFile($rel);
 	} elsif ($::o->{method} eq "http") {
 	    require http;
-	    http::getFile($rel);
+	    http::getFile("$ENV{URLPREFIX}/$rel");
 	} else {
 	    #- try to open the file, but examine if it is present in the repository, this allow
 	    #- handling changing a media when some of the file on the first CD has been copied

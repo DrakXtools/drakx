@@ -9,12 +9,12 @@ my $sock;
 sub getFile {
     local($^W) = 0;
 
-    my ($host, $port, $path) = $ENV{URLPREFIX} =~ m,^http://([^/:]+)(?::(\d+))?(/\S*)?$,;
+    my ($url) = @_;
+    my ($host, $port, $path) = $url =~ m,^http://([^/:]+)(?::(\d+))?(/\S*)?$,;
     $host = network::resolv($host);
-    $path .= "/$_[0]";
 
     $sock->close if $sock;
-    $_[0] eq 'XXX' and return; #- force closing connection.
+    $url =~ m|/XXX$| and return; #- force closing connection.
     $sock = IO::Socket::INET->new(PeerAddr => $host,
 				  PeerPort => $port || 80,
 				  Proto    => 'tcp',
