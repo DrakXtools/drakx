@@ -3874,8 +3874,8 @@ sub add_printer {
     $printer->{OLD_QUEUE} = $printer->{QUEUE} = $queue;
     #- Do all the configuration steps for a new queue
   step_0:
-    if (!$::isEmbedded && !$::isInstall &&
-    #if ((!$::isInstall) &&
+    #if (!$::isEmbedded && !$::isInstall &&
+    if ((!$::isInstall) &&
 	$in->isa('interactive::gtk')) {
 	# Enter wizard mode
 	$::Wizard_pix_up = "wiz_printerdrake.png";
