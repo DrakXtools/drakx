@@ -982,10 +982,10 @@ sub when_config_changed_yaboot {
     run_program::rooted($::prefix, "/usr/sbin/ybin", "2>", \$error) or die "ybin failed: $error";
 }
 
-sub install_cromwell { 
+sub install_cromwell() { 
     log::l("XBox/Cromwell - nothing to install...");
 }
-sub write_cromwell { 
+sub write_cromwell() { 
     log::l("XBox/Cromwell - nothing to write...");
 }
 sub when_config_changed_cromwell {
