@@ -294,7 +294,7 @@ sub detect {
         my $synaptics_mouse;
         if (my $mouse_nb = scalar grep { /^H: Handlers=mouse/ } @input_devices) {
             if (is_xbox()) {
-                return fullname2mouse('Universal|Microsoft Xbox Controller S');
+                return fullname2mouse('Universal|Microsoft Xbox Controller S', if_($::isInstall, alternate_install => fullname2mouse('Universal|Microsoft Xbox Controller S')));
             }
             my $univ_mouse = fullname2mouse('Universal|Any PS/2 & USB mice', wacom => \@wacom);
             if (my $synaptics_name = find { m!^N: Name="(?:SynPS/2 Synaptics TouchPad|AlpsPS/2 ALPS TouchPad)"$! } @input_devices) {
@@ -421,7 +421,15 @@ sub various_xfree_conf {
 	    output_with_perm($f, 0755, "xinput set-button-map Mouse2 1 2 3 6 7 4 5\n");
 	}
     }
-
+    {
+	my $f = "$::prefix/etc/X11/xinit.d/xpad";
+	if ($mouse->{name} !~ /^Microsoft Xbox Controller/) {
+	    unlink($f);
+	} else {
+	    output_with_perm($f, 0755, "xset m 1/8 1\n");
+	}
+    }
+    
     if (member(N_("Synaptics Touchpad"), $mouse->{name}, $mouse->{auxmouse} && $mouse->{auxmouse}{name})) {
 	$do_pkgs->install("synaptics");
     }
