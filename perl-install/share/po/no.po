@@ -7,33 +7,33 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2002-02-20 12:09+0100\n"
+"POT-Creation-Date: 2002-02-21 12:50+0100\n"
 "PO-Revision-Date: 2002-02-03 14:34CET\n"
-"Last-Translator: Andreas Bergstrøm <andreas.bergstrom@hiof.no>\n"
+"Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: Norsk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.5\n"
 
-#: ../../Xconfigurator.pm_.c:230
+#: ../../Xconfigurator.pm_.c:242
 msgid "Configure all heads independently"
 msgstr "Konfigurere all hoder uavhengig"
 
-#: ../../Xconfigurator.pm_.c:231
+#: ../../Xconfigurator.pm_.c:243
 msgid "Use Xinerama extension"
 msgstr "Bruk Xinerama utvidelse"
 
-#: ../../Xconfigurator.pm_.c:234
+#: ../../Xconfigurator.pm_.c:246
 #, c-format
 msgid "Configure only card \"%s\" (%s)"
 msgstr "Konfigurer bare kort \"%s\" (%s)"
 
-#: ../../Xconfigurator.pm_.c:237
+#: ../../Xconfigurator.pm_.c:249
 msgid "Multi-head configuration"
 msgstr "Multi-hode konfigurasjon"
 
-#: ../../Xconfigurator.pm_.c:238
+#: ../../Xconfigurator.pm_.c:250
 msgid ""
 "Your system support multiple head configuration.\n"
 "What do you want to do?"
@@ -41,33 +41,43 @@ msgstr ""
 "Systemet ditt støtter konfigurasjon for flere hoder.\n"
 "Hva ønsker du å gjøre?"
 
-#: ../../Xconfigurator.pm_.c:247
+#: ../../Xconfigurator.pm_.c:261
 msgid "Graphic card"
 msgstr "Grafikk-kort"
 
-#: ../../Xconfigurator.pm_.c:247
+#: ../../Xconfigurator.pm_.c:262
 msgid "Select a graphic card"
 msgstr "Velg et grafikk-kort"
 
-#: ../../Xconfigurator.pm_.c:248
+#: ../../Xconfigurator.pm_.c:286
 msgid "Choose a X server"
 msgstr "Velg en X-tjener"
 
-#: ../../Xconfigurator.pm_.c:248
+#: ../../Xconfigurator.pm_.c:286
 msgid "X server"
 msgstr "X-tjener"
 
-#: ../../Xconfigurator.pm_.c:313 ../../Xconfigurator.pm_.c:319
-#: ../../Xconfigurator.pm_.c:369 ../../Xconfigurator.pm_.c:1446
+#: ../../Xconfigurator.pm_.c:293
+#, fuzzy
+msgid "Choose a X driver"
+msgstr "Velg en X-tjener"
+
+#: ../../Xconfigurator.pm_.c:293
+#, fuzzy
+msgid "X driver"
+msgstr "X-tjener"
+
+#: ../../Xconfigurator.pm_.c:353 ../../Xconfigurator.pm_.c:359
+#: ../../Xconfigurator.pm_.c:409 ../../Xconfigurator.pm_.c:1486
 #, c-format
 msgid "XFree %s"
 msgstr "XFree %s"
 
-#: ../../Xconfigurator.pm_.c:316
+#: ../../Xconfigurator.pm_.c:356
 msgid "Which configuration of XFree do you want to have?"
 msgstr "Hvilken konfigurasjon av XFree vil du ha?"
 
-#: ../../Xconfigurator.pm_.c:327
+#: ../../Xconfigurator.pm_.c:367
 #, c-format
 msgid ""
 "Your card can have 3D hardware acceleration support but only with XFree %s.\n"
@@ -77,18 +87,18 @@ msgstr ""
 "%s.\n"
 "Kortet ditt er støttet av XFree %s som kan ha bedre støtte i 2D."
 
-#: ../../Xconfigurator.pm_.c:329 ../../Xconfigurator.pm_.c:362
+#: ../../Xconfigurator.pm_.c:369 ../../Xconfigurator.pm_.c:402
 #, c-format
 msgid "Your card can have 3D hardware acceleration support with XFree %s."
 msgstr "Kortet ditt kan ha støtte for maskinvare 3D akselerasjon med XFree %s."
 
-#: ../../Xconfigurator.pm_.c:331 ../../Xconfigurator.pm_.c:364
-#: ../../Xconfigurator.pm_.c:1446
+#: ../../Xconfigurator.pm_.c:371 ../../Xconfigurator.pm_.c:404
+#: ../../Xconfigurator.pm_.c:1486
 #, c-format
 msgid "XFree %s with 3D hardware acceleration"
 msgstr "XFree %s med maskinvare 3D akselerasjon"
 
-#: ../../Xconfigurator.pm_.c:339 ../../Xconfigurator.pm_.c:353
+#: ../../Xconfigurator.pm_.c:379 ../../Xconfigurator.pm_.c:393
 #, c-format
 msgid ""
 "Your card can have 3D hardware acceleration support with XFree %s,\n"
@@ -97,12 +107,12 @@ msgstr ""
 "Kortet ditt kan ha støtte for maskinvare 3D akselerasjon med XFree %s,\n"
 "MERK AT DETTE ER EKSPERIMENTELL STØTTE OG KAN 'FRYSE' MASKINEN DIN."
 
-#: ../../Xconfigurator.pm_.c:341 ../../Xconfigurator.pm_.c:355
+#: ../../Xconfigurator.pm_.c:381 ../../Xconfigurator.pm_.c:395
 #, c-format
 msgid "XFree %s with EXPERIMENTAL 3D hardware acceleration"
 msgstr "XFree %s med EKSPERIMENTELL maskinvare 3D akselerasjon"
 
-#: ../../Xconfigurator.pm_.c:350
+#: ../../Xconfigurator.pm_.c:390
 #, c-format
 msgid ""
 "Your card can have 3D hardware acceleration support but only with XFree %s,\n"
@@ -114,31 +124,31 @@ msgstr ""
 "MERK AT DETTE ER EKSPERIMENTELL STØTTE OG KAN 'FRYSE' MASKINEN DIN.\n"
 "Kortet ditt er støttet av XFree %s som kan ha bedre støtte i 2D."
 
-#: ../../Xconfigurator.pm_.c:370
+#: ../../Xconfigurator.pm_.c:410
 msgid "Xpmac (installation display driver)"
 msgstr "Xpmac (installasjons skjermdriver)"
 
-#: ../../Xconfigurator.pm_.c:374
+#: ../../Xconfigurator.pm_.c:414
 msgid "XFree configuration"
 msgstr "XFree konfigurasjon"
 
-#: ../../Xconfigurator.pm_.c:445
+#: ../../Xconfigurator.pm_.c:485
 msgid "Select the memory size of your graphic card"
 msgstr "Velg minnestørrelsen til grafikk-kortet ditt"
 
-#: ../../Xconfigurator.pm_.c:499
+#: ../../Xconfigurator.pm_.c:539
 msgid "Choose options for server"
 msgstr "Velg opsjoner for tjener"
 
-#: ../../Xconfigurator.pm_.c:523
+#: ../../Xconfigurator.pm_.c:563
 msgid "Choose a monitor"
 msgstr "Velg en monitor"
 
-#: ../../Xconfigurator.pm_.c:523
+#: ../../Xconfigurator.pm_.c:563
 msgid "Monitor"
 msgstr "Monitor"
 
-#: ../../Xconfigurator.pm_.c:526
+#: ../../Xconfigurator.pm_.c:566
 msgid ""
 "The two critical parameters are the vertical refresh rate, which is the "
 "rate\n"
@@ -162,39 +172,39 @@ msgstr ""
 "skjermen din.\n"
 "Hvis du er usikker, velg en konservativ innstilling."
 
-#: ../../Xconfigurator.pm_.c:533
+#: ../../Xconfigurator.pm_.c:573
 msgid "Horizontal refresh rate"
 msgstr "Horisontal oppfrisknings-rate"
 
-#: ../../Xconfigurator.pm_.c:534
+#: ../../Xconfigurator.pm_.c:574
 msgid "Vertical refresh rate"
 msgstr "Vertikal oppfrisknings-rate"
 
-#: ../../Xconfigurator.pm_.c:571
+#: ../../Xconfigurator.pm_.c:611
 msgid "Monitor not configured"
 msgstr "Monitor er ikke konfigurert"
 
-#: ../../Xconfigurator.pm_.c:574
+#: ../../Xconfigurator.pm_.c:614
 msgid "Graphic card not configured yet"
 msgstr "Grafikk-kort er ikke konfigurert ennå"
 
-#: ../../Xconfigurator.pm_.c:577
+#: ../../Xconfigurator.pm_.c:617
 msgid "Resolutions not chosen yet"
 msgstr "Oppløsninger er ikke valgt ennå"
 
-#: ../../Xconfigurator.pm_.c:595
+#: ../../Xconfigurator.pm_.c:635
 msgid "Do you want to test the configuration?"
 msgstr "Vil du teste konfigurasjonen?"
 
-#: ../../Xconfigurator.pm_.c:599
+#: ../../Xconfigurator.pm_.c:639
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr "Advarsel: testing av dette grafikk-kortet kan `fryse' maskinen din"
 
-#: ../../Xconfigurator.pm_.c:602
+#: ../../Xconfigurator.pm_.c:642
 msgid "Test of the configuration"
 msgstr "Test konfigurasjon"
 
-#: ../../Xconfigurator.pm_.c:641 ../../Xconfigurator.pm_.c:653
+#: ../../Xconfigurator.pm_.c:681 ../../Xconfigurator.pm_.c:693
 msgid ""
 "\n"
 "try to change some parameters"
@@ -202,157 +212,157 @@ msgstr ""
 "\n"
 "prøv å endre noen parametere"
 
-#: ../../Xconfigurator.pm_.c:641 ../../Xconfigurator.pm_.c:653
+#: ../../Xconfigurator.pm_.c:681 ../../Xconfigurator.pm_.c:693
 msgid "An error has occurred:"
 msgstr "En feil oppsto:"
 
-#: ../../Xconfigurator.pm_.c:677
+#: ../../Xconfigurator.pm_.c:717
 #, c-format
 msgid "Leaving in %d seconds"
 msgstr "Slutter om %d sekunder"
 
-#: ../../Xconfigurator.pm_.c:688
+#: ../../Xconfigurator.pm_.c:728
 msgid "Is this the correct setting?"
 msgstr "Er dette den riktige innstillingen?"
 
-#: ../../Xconfigurator.pm_.c:697
+#: ../../Xconfigurator.pm_.c:737
 msgid "An error has occurred, try to change some parameters"
 msgstr "En feil oppsto, prøv å endre noen parametere"
 
-#: ../../Xconfigurator.pm_.c:768
+#: ../../Xconfigurator.pm_.c:808
 msgid "Resolution"
 msgstr "Oppløsning"
 
-#: ../../Xconfigurator.pm_.c:819
+#: ../../Xconfigurator.pm_.c:859
 msgid "Choose the resolution and the color depth"
 msgstr "Velg oppløsning og fargedybde"
 
-#: ../../Xconfigurator.pm_.c:821
+#: ../../Xconfigurator.pm_.c:861
 #, c-format
 msgid "Graphic card: %s"
 msgstr "Grafikk-kort: %s"
 
-#: ../../Xconfigurator.pm_.c:822
+#: ../../Xconfigurator.pm_.c:862
 #, c-format
 msgid "XFree86 server: %s"
 msgstr "XFree86-tjener: %s"
 
-#: ../../Xconfigurator.pm_.c:838 ../../printerdrake.pm_.c:2400
+#: ../../Xconfigurator.pm_.c:878 ../../printerdrake.pm_.c:2400
 #: ../../standalone/draknet_.c:275 ../../standalone/draknet_.c:278
 msgid "Expert Mode"
 msgstr "Ekspertmodus"
 
-#: ../../Xconfigurator.pm_.c:839
+#: ../../Xconfigurator.pm_.c:879
 msgid "Show all"
 msgstr "Vis alle"
 
-#: ../../Xconfigurator.pm_.c:884
+#: ../../Xconfigurator.pm_.c:924
 msgid "Resolutions"
 msgstr "Oppløsninger"
 
-#: ../../Xconfigurator.pm_.c:1448
+#: ../../Xconfigurator.pm_.c:1488
 #, c-format
 msgid "Keyboard layout: %s\n"
 msgstr "Tastatur-oppsett: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1449
+#: ../../Xconfigurator.pm_.c:1489
 #, c-format
 msgid "Mouse type: %s\n"
 msgstr "Type mus: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1450
+#: ../../Xconfigurator.pm_.c:1490
 #, c-format
 msgid "Mouse device: %s\n"
 msgstr "Enhet mus: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1451
+#: ../../Xconfigurator.pm_.c:1491
 #, c-format
 msgid "Monitor: %s\n"
 msgstr "Monitor: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1452
+#: ../../Xconfigurator.pm_.c:1492
 #, c-format
 msgid "Monitor HorizSync: %s\n"
 msgstr "Monitor HorizSync: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1453
+#: ../../Xconfigurator.pm_.c:1493
 #, c-format
 msgid "Monitor VertRefresh: %s\n"
 msgstr "Monitor VertRefresh: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1454
+#: ../../Xconfigurator.pm_.c:1494
 #, c-format
 msgid "Graphic card: %s\n"
 msgstr "Grafikk-kort: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1455
+#: ../../Xconfigurator.pm_.c:1495
 #, c-format
 msgid "Graphic card identification: %s\n"
 msgstr "Grafikk-kort identifisering: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1456
+#: ../../Xconfigurator.pm_.c:1496
 #, c-format
 msgid "Graphic memory: %s kB\n"
 msgstr "Minne grafikk: %s kB\n"
 
-#: ../../Xconfigurator.pm_.c:1458
+#: ../../Xconfigurator.pm_.c:1498
 #, c-format
 msgid "Color depth: %s\n"
 msgstr "Fargedybde: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1459
+#: ../../Xconfigurator.pm_.c:1499
 #, c-format
 msgid "Resolution: %s\n"
 msgstr "Oppløsning: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1461
+#: ../../Xconfigurator.pm_.c:1501
 #, c-format
 msgid "XFree86 server: %s\n"
 msgstr "XFree86-tjener: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1462
+#: ../../Xconfigurator.pm_.c:1502
 #, c-format
 msgid "XFree86 driver: %s\n"
 msgstr "XFree86 driver: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1480
+#: ../../Xconfigurator.pm_.c:1520
 msgid "Preparing X-Window configuration"
 msgstr "Forbereder X-Window konfigurasjon"
 
-#: ../../Xconfigurator.pm_.c:1500
+#: ../../Xconfigurator.pm_.c:1540
 msgid "What do you want to do?"
 msgstr "Hva ønsker du å gjøre?"
 
-#: ../../Xconfigurator.pm_.c:1505
+#: ../../Xconfigurator.pm_.c:1545
 msgid "Change Monitor"
 msgstr "Endre monitor"
 
-#: ../../Xconfigurator.pm_.c:1506
+#: ../../Xconfigurator.pm_.c:1546
 msgid "Change Graphic card"
 msgstr "Endre grafikk-kort"
 
-#: ../../Xconfigurator.pm_.c:1508
+#: ../../Xconfigurator.pm_.c:1549
 msgid "Change Server options"
 msgstr "Endre opsjoner for tjener"
 
-#: ../../Xconfigurator.pm_.c:1509
+#: ../../Xconfigurator.pm_.c:1550
 msgid "Change Resolution"
 msgstr "Endre oppløsning"
 
-#: ../../Xconfigurator.pm_.c:1510
+#: ../../Xconfigurator.pm_.c:1551
 msgid "Show information"
 msgstr "Vis informasjon"
 
-#: ../../Xconfigurator.pm_.c:1511
+#: ../../Xconfigurator.pm_.c:1552
 msgid "Test again"
 msgstr "Test igjen"
 
-#: ../../Xconfigurator.pm_.c:1512 ../../printerdrake.pm_.c:2403
+#: ../../Xconfigurator.pm_.c:1553 ../../printerdrake.pm_.c:2403
 #: ../../standalone/logdrake_.c:217
 msgid "Quit"
 msgstr "Avslutt"
 
-#: ../../Xconfigurator.pm_.c:1520
+#: ../../Xconfigurator.pm_.c:1561
 #, c-format
 msgid ""
 "Keep the changes?\n"
@@ -365,20 +375,20 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../../Xconfigurator.pm_.c:1541
+#: ../../Xconfigurator.pm_.c:1582
 #, c-format
 msgid "Please relog into %s to activate the changes"
 msgstr "Vennligst logg inn i %s på nytt for å aktivere endringene"
 
-#: ../../Xconfigurator.pm_.c:1556
+#: ../../Xconfigurator.pm_.c:1597
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "Vennligst logg ut og bruk så Ctrl-Alt-BackSpace"
 
-#: ../../Xconfigurator.pm_.c:1560
+#: ../../Xconfigurator.pm_.c:1601
 msgid "X at startup"
 msgstr "X ved oppstart"
 
-#: ../../Xconfigurator.pm_.c:1561
+#: ../../Xconfigurator.pm_.c:1602
 msgid ""
 "I can set up your computer to automatically start X upon booting.\n"
 "Would you like X to start when you reboot?"
@@ -406,87 +416,87 @@ msgstr "16 millioner farger (24 bits)"
 msgid "4 billion colors (32 bits)"
 msgstr "4 milliarder farger (32 bits)"
 
-#: ../../Xconfigurator_consts.pm_.c:104
+#: ../../Xconfigurator_consts.pm_.c:109
 msgid "256 kB"
 msgstr "256 kB"
 
-#: ../../Xconfigurator_consts.pm_.c:105
+#: ../../Xconfigurator_consts.pm_.c:110
 msgid "512 kB"
 msgstr "512 kB"
 
-#: ../../Xconfigurator_consts.pm_.c:106
+#: ../../Xconfigurator_consts.pm_.c:111
 msgid "1 MB"
 msgstr "1 MB"
 
-#: ../../Xconfigurator_consts.pm_.c:107
+#: ../../Xconfigurator_consts.pm_.c:112
 msgid "2 MB"
 msgstr "2 MB"
 
-#: ../../Xconfigurator_consts.pm_.c:108
+#: ../../Xconfigurator_consts.pm_.c:113
 msgid "4 MB"
 msgstr "4 MB"
 
-#: ../../Xconfigurator_consts.pm_.c:109
+#: ../../Xconfigurator_consts.pm_.c:114
 msgid "8 MB"
 msgstr "8 MB"
 
-#: ../../Xconfigurator_consts.pm_.c:110
+#: ../../Xconfigurator_consts.pm_.c:115
 msgid "16 MB"
 msgstr "16 MB"
 
-#: ../../Xconfigurator_consts.pm_.c:111
+#: ../../Xconfigurator_consts.pm_.c:116
 msgid "32 MB"
 msgstr "32 MB"
 
-#: ../../Xconfigurator_consts.pm_.c:112
+#: ../../Xconfigurator_consts.pm_.c:117
 msgid "64 MB or more"
 msgstr "64 MB eller mer"
 
-#: ../../Xconfigurator_consts.pm_.c:120
+#: ../../Xconfigurator_consts.pm_.c:125
 msgid "Standard VGA, 640x480 at 60 Hz"
 msgstr "Standard VGA, 640x480 ved 60 Hz"
 
-#: ../../Xconfigurator_consts.pm_.c:121
+#: ../../Xconfigurator_consts.pm_.c:126
 msgid "Super VGA, 800x600 at 56 Hz"
 msgstr "Super VGA 800x600 ved 56 Hz"
 
-#: ../../Xconfigurator_consts.pm_.c:122
+#: ../../Xconfigurator_consts.pm_.c:127
 msgid "8514 Compatible, 1024x768 at 87 Hz interlaced (no 800x600)"
 msgstr "8514 kompatibel, 1024x768 ved 87 Hz interlaced (ikke 800x600)"
 
-#: ../../Xconfigurator_consts.pm_.c:123
+#: ../../Xconfigurator_consts.pm_.c:128
 msgid "Super VGA, 1024x768 at 87 Hz interlaced, 800x600 at 56 Hz"
 msgstr "Super VGA, 1024x768 ved 87 Hz interlaced, 800x600 ved 56 Hz"
 
-#: ../../Xconfigurator_consts.pm_.c:124
+#: ../../Xconfigurator_consts.pm_.c:129
 msgid "Extended Super VGA, 800x600 at 60 Hz, 640x480 at 72 Hz"
 msgstr "Utvidet Super VGA, 800x600 ved 60 Hz, 640x480 ved 72 Hz"
 
-#: ../../Xconfigurator_consts.pm_.c:125
+#: ../../Xconfigurator_consts.pm_.c:130
 msgid "Non-Interlaced SVGA, 1024x768 at 60 Hz, 800x600 at 72 Hz"
 msgstr "Ikke-interlaced SVGA, 1024x768 ved 60 Hz, 800x600 ved 72 Hz"
 
-#: ../../Xconfigurator_consts.pm_.c:126
+#: ../../Xconfigurator_consts.pm_.c:131
 msgid "High Frequency SVGA, 1024x768 at 70 Hz"
 msgstr "Høyfrekvens SVGA, 1024x768 ved 70 Hz"
 
-#: ../../Xconfigurator_consts.pm_.c:127
+#: ../../Xconfigurator_consts.pm_.c:132
 msgid "Multi-frequency that can do 1280x1024 at 60 Hz"
 msgstr "Flerfrekvens som kan klare 1280x1024 ved 60 Hz"
 
-#: ../../Xconfigurator_consts.pm_.c:128
+#: ../../Xconfigurator_consts.pm_.c:133
 msgid "Multi-frequency that can do 1280x1024 at 74 Hz"
 msgstr "Flerfrekvens som kan klare 1280x1024 ved 74 Hz"
 
-#: ../../Xconfigurator_consts.pm_.c:129
+#: ../../Xconfigurator_consts.pm_.c:134
 msgid "Multi-frequency that can do 1280x1024 at 76 Hz"
 msgstr "Flerfrekvens som kan klare 1280x1024 ved 76 Hz"
 
-#: ../../Xconfigurator_consts.pm_.c:130
+#: ../../Xconfigurator_consts.pm_.c:135
 msgid "Monitor that can do 1600x1200 at 70 Hz"
 msgstr "Monitor som kan klare 1600x1200 ved 70 Hz"
 
-#: ../../Xconfigurator_consts.pm_.c:131
+#: ../../Xconfigurator_consts.pm_.c:136
 msgid "Monitor that can do 1600x1200 at 76 Hz"
 msgstr "Monitor som kan klare 1600x1200 ved 76 Hz"
 
@@ -571,14 +581,14 @@ msgid "Delay before booting default image"
 msgstr "Forsinkelse før oppstart av standard bilde"
 
 #: ../../any.pm_.c:175 ../../any.pm_.c:777
-#: ../../install_steps_interactive.pm_.c:1094 ../../network/modem.pm_.c:48
+#: ../../install_steps_interactive.pm_.c:1095 ../../network/modem.pm_.c:48
 #: ../../printerdrake.pm_.c:729 ../../printerdrake.pm_.c:805
 #: ../../standalone/draknet_.c:624
 msgid "Password"
 msgstr "Passord"
 
 #: ../../any.pm_.c:176 ../../any.pm_.c:778
-#: ../../install_steps_interactive.pm_.c:1095
+#: ../../install_steps_interactive.pm_.c:1096
 msgid "Password (again)"
 msgstr "Passord (igjen)"
 
@@ -615,12 +625,12 @@ msgstr ""
 
 #: ../../any.pm_.c:189 ../../any.pm_.c:754
 #: ../../diskdrake/interactive.pm_.c:1132
-#: ../../install_steps_interactive.pm_.c:1089
+#: ../../install_steps_interactive.pm_.c:1090
 msgid "Please try again"
 msgstr "Vennligst prøv igjen"
 
 #: ../../any.pm_.c:189 ../../any.pm_.c:754
-#: ../../install_steps_interactive.pm_.c:1089
+#: ../../install_steps_interactive.pm_.c:1090
 msgid "The passwords do not match"
 msgstr "Passordene stemmer ikke overens"
 
@@ -771,12 +781,12 @@ msgid "Do you have any %s interfaces?"
 msgstr "Har du noen %s grensesnitt?"
 
 #: ../../any.pm_.c:642 ../../any.pm_.c:813 ../../interactive.pm_.c:124
-#: ../../my_gtk.pm_.c:1017
+#: ../../my_gtk.pm_.c:1018
 msgid "No"
 msgstr "Nei"
 
 #: ../../any.pm_.c:642 ../../any.pm_.c:812 ../../interactive.pm_.c:124
-#: ../../my_gtk.pm_.c:1017
+#: ../../my_gtk.pm_.c:1018
 msgid "Yes"
 msgstr "Ja"
 
@@ -959,7 +969,7 @@ msgstr "Vennligst velg språk som skal brukes."
 msgid "You can choose other languages that will be available after install"
 msgstr "Du kan velge andre språk som vil være tilgjengelige etter installasjon"
 
-#: ../../any.pm_.c:839 ../../install_steps_interactive.pm_.c:714
+#: ../../any.pm_.c:839 ../../install_steps_interactive.pm_.c:715
 #: ../../standalone/drakxtv_.c:43
 msgid "All"
 msgstr "Alle"
@@ -976,7 +986,7 @@ msgstr "Skreddersydd"
 msgid "No sharing"
 msgstr "Ingen deling"
 
-#: ../../any.pm_.c:936 ../../network/smbnfs.pm_.c:39
+#: ../../any.pm_.c:936 ../../network/smbnfs.pm_.c:45
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr "Pakken %s må installeres. Vil du installere den?"
@@ -985,7 +995,7 @@ msgstr "Pakken %s må installeres. Vil du installere den?"
 msgid "You can export using NFS or Samba. Which one do you want"
 msgstr "Du kan eksportere med NFS eller Samba. Hvilken av dem ønsker du"
 
-#: ../../any.pm_.c:947 ../../network/smbnfs.pm_.c:43
+#: ../../any.pm_.c:947 ../../network/smbnfs.pm_.c:49
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr "Obligatorisk pakke %s mangler"
@@ -1070,12 +1080,11 @@ msgstr ""
 "godtar oppkoblinger fra mange klienter. "
 
 #: ../../any.pm_.c:1025
-#, fuzzy
 msgid ""
 "Based on the previous level, but the system is entirely closed.\n"
 "Security features are at their maximum."
 msgstr ""
-"Vi tar funksjonene for nivå 4, men nå er systemet fullstendig stengt.\n"
+"Basert på forrige nivå, men nå er systemet fullstendig stengt.\n"
 "Sikkerhetsfunksjonene er nå på maksimum."
 
 #: ../../any.pm_.c:1031
@@ -1114,52 +1123,52 @@ msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:900
+#: ../../bootloader.pm_.c:901
 msgid "Welcome to GRUB the operating system chooser!"
 msgstr "Velkommen til GRUB, operativsystem-velgeren!"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:903
+#: ../../bootloader.pm_.c:904
 #, c-format
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Bruk %c og %c tastene for å velge hvilken inngang som er markert."
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:906
+#: ../../bootloader.pm_.c:907
 msgid "Press enter to boot the selected OS, 'e' to edit the"
 msgstr "Trykk enter for † starte opp valgt OS, 'e' for † redigere"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:909
+#: ../../bootloader.pm_.c:910
 msgid "commands before booting, or 'c' for a command-line."
 msgstr "kommandoer for oppstart, eller 'c' for en kommandolinje."
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:912
+#: ../../bootloader.pm_.c:913
 #, c-format
 msgid "The highlighted entry will be booted automatically in %d seconds."
 msgstr "Den markerte inngangen vil bli startet automatisk om %d sekunder."
 
-#: ../../bootloader.pm_.c:916
+#: ../../bootloader.pm_.c:917
 msgid "not enough room in /boot"
 msgstr "ikke nok plass i /boot"
 
 #. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
 #. -PO: so you may need to put them in English or in a different language if MS-windows doesn't exist in your language
-#: ../../bootloader.pm_.c:1016
+#: ../../bootloader.pm_.c:1017
 msgid "Desktop"
 msgstr "Skrivebord"
 
 #. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
-#: ../../bootloader.pm_.c:1018
+#: ../../bootloader.pm_.c:1019
 msgid "Start Menu"
 msgstr "Startmeny"
 
-#: ../../bootloader.pm_.c:1037
+#: ../../bootloader.pm_.c:1038
 #, c-format
 msgid "You can't install the bootloader on a %s partition\n"
 msgstr "Du kan ikke installere oppstartslasteren på en %s partisjon\n"
@@ -1219,7 +1228,7 @@ msgstr ""
 
 #: ../../bootlook.pm_.c:105 ../../standalone/drakbackup_.c:1458
 #: ../../standalone/drakbackup_.c:1467 ../../standalone/drakgw_.c:706
-#: ../../standalone/draknet_.c:257 ../../standalone/tinyfirewall_.c:59
+#: ../../standalone/tinyfirewall_.c:59
 msgid "Configure"
 msgstr "Konfigurer"
 
@@ -1252,9 +1261,10 @@ msgstr "OK"
 
 #: ../../bootlook.pm_.c:160 ../../diskdrake/smbnfs_gtk.pm_.c:85
 #: ../../install_steps_gtk.pm_.c:463 ../../install_steps_gtk.pm_.c:521
-#: ../../interactive.pm_.c:134 ../../interactive.pm_.c:309
-#: ../../interactive.pm_.c:341 ../../interactive_stdio.pm_.c:141
-#: ../../my_gtk.pm_.c:686 ../../my_gtk.pm_.c:689 ../../my_gtk.pm_.c:1018
+#: ../../install_steps_interactive.pm_.c:590 ../../interactive.pm_.c:134
+#: ../../interactive.pm_.c:309 ../../interactive.pm_.c:341
+#: ../../interactive_stdio.pm_.c:141 ../../my_gtk.pm_.c:687
+#: ../../my_gtk.pm_.c:690 ../../my_gtk.pm_.c:1019
 #: ../../network/netconnect.pm_.c:47 ../../printerdrake.pm_.c:1554
 #: ../../standalone/drakautoinst_.c:204 ../../standalone/drakbackup_.c:2251
 #: ../../standalone/drakbackup_.c:2276 ../../standalone/drakbackup_.c:2297
@@ -1446,7 +1456,7 @@ msgid "Empty"
 msgstr "Tom"
 
 #: ../../diskdrake/hd_gtk.pm_.c:321 ../../install_steps_gtk.pm_.c:378
-#: ../../install_steps_gtk.pm_.c:438 ../../mouse.pm_.c:161
+#: ../../install_steps_gtk.pm_.c:438 ../../mouse.pm_.c:162
 #: ../../services.pm_.c:157 ../../standalone/drakbackup_.c:943
 msgid "Other"
 msgstr "Andre"
@@ -2135,9 +2145,8 @@ msgid "Please click on a media"
 msgstr "Vennligst klikk på ett media"
 
 #: ../../diskdrake/smbnfs_gtk.pm_.c:165
-#, fuzzy
 msgid "Search servers"
-msgstr "DNS-tjener"
+msgstr "Søk tjenere"
 
 #: ../../fs.pm_.c:476 ../../fs.pm_.c:486 ../../fs.pm_.c:490 ../../fs.pm_.c:494
 #: ../../fs.pm_.c:498 ../../fs.pm_.c:502
@@ -2171,6 +2180,10 @@ msgstr "feil ved demontering av %s: %s"
 #: ../../fsedit.pm_.c:21
 msgid "simple"
 msgstr "enkel"
+
+#: ../../fsedit.pm_.c:25
+msgid "with /usr"
+msgstr ""
 
 #: ../../fsedit.pm_.c:30
 msgid "server"
@@ -2431,7 +2444,8 @@ msgid ""
 "setting up a server.\n"
 "\n"
 " * \"Truly minimal install\" Will install the strict minimum necessary to\n"
-"get a working Linux system, in command line only.\n"
+"get a working Linux system, in command line only. This installation is\n"
+"about 65Mb large.\n"
 "\n"
 "You can check the \"Individual package selection\" box, which is useful if\n"
 "you are familiar with the packages being offered or if you want to have\n"
@@ -2442,51 +2456,59 @@ msgid ""
 "updating an existing system."
 msgstr ""
 "Det er nå på tide å spesifisere hvilke programmer du ønsker å installere på\n"
-"ditt system. Det er tusenvis av pakker tilgjengelig for Mandrake Linux, og\n"
+"systemet ditt. Det er tusenvis av pakker tilgjengelig for Mandrake Linux, "
+"og\n"
 "det er ikke meningen at du skal kunne navnet på samtlige.\n"
 "\n"
-"Hvis du utfører en standard installasjon fra CDROM, vil du først bli bett om "
-"å\n"
-"spesifisere de CDer du har for øyeblikket (i ekspertmodus). Sjekk CDene\n"
+"Hvis du utfører en standard installasjon fra CDROM, vil du først bli bedt "
+"om\n"
+"å spesifisere de CDer du har for øyeblikket (i ekspertmodus). Sjekk CDene\n"
 "og velg de bokser som tilsvarer de CDer som du har klare for installasjon. "
-"Klikk\n"
-"\"OK\" når du er klar til å fortsette.\n"
+"Klikk \"OK\" når du er klar til å fortsette.\n"
 "\n"
-"Pakkene er delt inn i gruper som korresponderer til en typisk "
-"arbeidsoppgave\n"
-"for din maskin. Gruppene er igjen delt inn i fire seksjoner:\n"
+"Pakkene er delt inn i grupper som korresponderer til typisk bruk av din "
+"maskin.\n"
+"Gruppene er igjen delt inn i fire seksjoner:\n"
 "\n"
 " * \"Arbeidsstasjon\": hvis du planlagger å bruke din maskin som "
-"arbeidsstasjon, \n"
-"velg en eller flere av de tilhørenede grupper.\n"
+"arbeidsstasjon, velg\n"
+"en eller flere av de tilhørenede grupper.\n"
 "\n"
-" * \"Utvikling\": hvis maskinen skal brukes til programmering, velg \n"
-"de ønskede grupper.\n"
+" * \"Utvikling\": hvis maskinen skal brukes til programmering, velg ønskede "
+"grupper.\n"
 "\n"
 " * \"Server\": Hvis maskinen skal brukes som server, vil du kunne velge\n"
-"velgte hvilke av de mest vanlige tjenester som du ønsker installert på\n"
+"hvilke av de mest vanlige tjenester som du ønsker installert på\n"
 "maskinen.\n"
 "\n"
-" * \"Grafisk miljø\": til slutt, det er her du kan velge ditt ønske "
-"graftiske miljø\n"
-"Du må velge minst ett hvis du ønsker å ha en grafisk arbeidsstasjon!\n"
+" * \"Grafisk miljø\": til slutt, det er her du kan velge ditt ønskede "
+"grafiske\n"
+"miljø. Du må velge minst ett hvis du ønsker å ha en grafisk arbeidsstasjon!\n"
 "\n"
 "Ved å flytte musepekeren over ett gruppenavn vil en kort forklarende\n"
 "tekst dukke opp over den gruppen. Hvis du ønsker å ikke velge noen grupper\n"
 "under installasjon (og du ikke oppgraderer), så vil en dialog spørre deg om\n"
-"hva slags minimal installasjon du ønsker. Det kan være \"Base system only\"\n"
-"for den minste installasjon mulig, \"Ingen X\" for en litt større "
-"installasjon \n"
-"eller \"Med X\" For en minste installasjon med X-tjener inkludert.\n"
+"hva slags minimal installasjon du ønsker:\n"
 "\n"
-"Du kan velge \"Individuelt pakkevalg\", noe som er brukbart hvis\n"
-"du kjenner til pakkene som tilbys eller hvis du ønsker full kontroll.\n"
+"* \"Med X\" For en minste installasjon med X-tjener inkludert;\n"
 "\n"
-"Hvis du starter installasjonen i \"Oppgraderings\" modus kan du avvelge\n"
-"alle grupper for å unngå installasjon av nye pakker. Det er brukbart for\n"
-"reparasjon eller oppdatering av ett eksisterende system."
+" * \"With basic documentation\" Installerer basesystemet pluss standard\n"
+"verktøy og dokumentasjon for disse. Denne installasjonen passer til å sette\n"
+"opp en server.\n"
+"\n"
+" * \"Truly minimal install\" vil installere minimum som er nødvendig for å\n"
+"Linux systemet opp og gå, kun kommandolinje.\n"
+"\n"
+"Du kan merke av \"Individual package selection\" boksen, som er nyttig\n"
+"hvis du kjenner til pakkene som blir tilbydt eller hvis du ønsker å ha\n"
+"total kontroll over hva som vil bli installert.\n"
+"\n"
+"Hvis du startet installasjonen i \"Upgrade\" modus, kan du velge vekk alle\n"
+"grupper for å unngå å installere noen nye pakker. Dette er nyttig for "
+"reparasjon\n"
+"eller oppdatering av et eksisterende system."
 
-#: ../../help.pm_.c:127
+#: ../../help.pm_.c:128
 msgid ""
 "Finally, depending on your choice of whether or not to select individual\n"
 "packages, you will be presented a tree containing all packages classified\n"
@@ -2524,16 +2546,17 @@ msgid ""
 "a floppy."
 msgstr ""
 
-#: ../../help.pm_.c:163
+#: ../../help.pm_.c:164
 msgid ""
-"If you wish to connect your computer to the Internet or to a local network,\n"
-"please choose the correct option. Please turn on your device before\n"
-"choosing the correct option to let DrakX detect it automatically.\n"
+"You are now proposed to setup your internet/network connection. If you wish\n"
+"to connect your computer to the Internet or to a local network, click\n"
+"\"OK\". The autodetection of network devices and modem will be launched. If\n"
+"this detection fails, uncheck the \"Use auto detection\" box next time. You\n"
+"may also choose not to configure the network, or do it later; in that case\n"
+"simply click the \"Cancel\" button.\n"
 "\n"
-"Mandrake Linux proposes the configuration of an Internet connection at\n"
-"installation time. Available connections are: traditional modem, ISDN\n"
-"modem, ADSL connection, cable modem, and finally a simple LAN connection\n"
-"(Ethernet).\n"
+"Available connections are: traditional modem, ISDN modem, ADSL connection,\n"
+"cable modem, and finally a simple LAN connection (Ethernet).\n"
 "\n"
 "Here, we will not detail each configuration. Simply make sure that you have\n"
 "all the parameters from your Internet Service Provider or system\n"
@@ -2547,7 +2570,7 @@ msgid ""
 "have finished configuring your network connection, click \"Cancel\"."
 msgstr ""
 
-#: ../../help.pm_.c:184
+#: ../../help.pm_.c:186
 msgid ""
 "You may now choose which services you wish to start at boot time.\n"
 "\n"
@@ -2566,21 +2589,23 @@ msgid ""
 "!!"
 msgstr ""
 
-#: ../../help.pm_.c:201
+#: ../../help.pm_.c:203
 msgid ""
 "GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it in\n"
 "local time according to the time zone you selected. It is however possible\n"
-"to deactivate this by deselcting \"Hardware clock set to GMT\" so that the\n"
+"to deactivate this by deselecting \"Hardware clock set to GMT\" so that the\n"
 "hardware clock is the same as the system clock. This is useful when the\n"
 "machine is hosting another operating system like Windows.\n"
 "\n"
 "The \"Automatic time synchronization\" option will automatically regulate\n"
 "the clock by connecting to a remote time server on the internet. In the\n"
 "list that is presented, choose a server located near you. Of course you\n"
-"must have a working internet connection for this feature to function."
+"must have a working internet connection for this feature to function. It\n"
+"will actually install on your machine a time server that can be optionally\n"
+"used by other machines on your local network."
 msgstr ""
 
-#: ../../help.pm_.c:213
+#: ../../help.pm_.c:217
 msgid ""
 "X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
 "on which all the graphics environments (KDE, GNOME, AfterStep,\n"
@@ -2602,7 +2627,7 @@ msgid ""
 "after 10 seconds, restoring the screen."
 msgstr ""
 
-#: ../../help.pm_.c:233
+#: ../../help.pm_.c:237
 msgid ""
 "The first time you try the X configuration, you may not be very satisfied\n"
 "with its display (screen is too small, shifted left or right...). Hence,\n"
@@ -2616,7 +2641,7 @@ msgid ""
 "with any modern graphics card. Then choose \"Test again\" to be sure."
 msgstr ""
 
-#: ../../help.pm_.c:245
+#: ../../help.pm_.c:249
 msgid ""
 "Finally, you will be asked whether you want to see the graphical interface\n"
 "at boot. Note this question will be asked even if you chose not to test the\n"
@@ -2625,7 +2650,7 @@ msgid ""
 "configured."
 msgstr ""
 
-#: ../../help.pm_.c:252
+#: ../../help.pm_.c:256
 msgid ""
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
 "booting from the CD-ROM, press the >>F1<< key at boot and type >>rescue<<\n"
@@ -2653,7 +2678,7 @@ msgid ""
 "the whole disk."
 msgstr ""
 
-#: ../../help.pm_.c:276
+#: ../../help.pm_.c:280
 msgid ""
 "At this point you need to choose where on your hard drive to install your\n"
 "Mandrake Linux operating system. If your hard drive is empty or if an\n"
@@ -2720,7 +2745,7 @@ msgid ""
 "know what you are doing."
 msgstr ""
 
-#: ../../help.pm_.c:340
+#: ../../help.pm_.c:344
 msgid ""
 "There you are. Installation is now complete and your GNU/Linux system is\n"
 "ready to use. Just click \"OK\" to reboot the system. You can start\n"
@@ -2753,7 +2778,7 @@ msgid ""
 "\"mformat a:\")"
 msgstr ""
 
-#: ../../help.pm_.c:371
+#: ../../help.pm_.c:375
 msgid ""
 "Any partitions that have been newly defined must be formatted for use\n"
 "(formatting means creating a file system).\n"
@@ -2781,7 +2806,7 @@ msgid ""
 "for bad blocks on the disc."
 msgstr ""
 
-#: ../../help.pm_.c:397
+#: ../../help.pm_.c:401
 msgid ""
 "Your new Mandrake Linux operating system is currently being installed.\n"
 "Depending on the number of packages you will be installing and the speed of\n"
@@ -2791,13 +2816,13 @@ msgid ""
 "Please be patient."
 msgstr ""
 
-#: ../../help.pm_.c:405
+#: ../../help.pm_.c:409
 msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
-"packages have been updated since the initial release. Some bugfixes may\n"
+"packages have been updated since the initial release. Some bug-fixes may\n"
 "have been fixed, and security issues solved. To allow you to benefit from\n"
 "this updates you are now proposed to download them from the internet.\n"
-"Choose \"Yes\" if you have a working intertnet connection, or \"No\" if you\n"
+"Choose \"Yes\" if you have a working internet connection, or \"No\" if you\n"
 "prefer to install updated packages later.\n"
 "\n"
 "Choosing \"Yes\" displays a list of places from which updates can be\n"
@@ -2806,8 +2831,7 @@ msgid ""
 "install the selected package or \"Cancel\" to abort."
 msgstr ""
 
-#: ../../help.pm_.c:418
-#, fuzzy
+#: ../../help.pm_.c:422
 msgid ""
 "Before continuing you should read carefully the terms of the license. It\n"
 "covers the whole Mandrake Linux distribution, and if you do not agree with\n"
@@ -2817,10 +2841,11 @@ msgid ""
 msgstr ""
 "Før du går videre bør du lese lisensen nøye.\n"
 "Den dekker hele Mandrake Linux distribusjonen og hvis du ikke er enig\n"
-"med alt den sier, klikk på 'Jeg nekter' knappen. Det vil avsluttet\n"
-"installasjonen. For å fortsette installasjonen, klikk på 'Jeg aksepterer'."
+"med alt den sier, klikk på \"Jeg nekter\" knappensom øyeblikkelig\n"
+"avslutter installasjonen. For å fortsette installasjonen, klikk på\n"
+"\"Jeg aksepterer\" knappen."
 
-#: ../../help.pm_.c:425
+#: ../../help.pm_.c:429
 msgid ""
 "At this point, it is time to choose the security level desired for the\n"
 "machine. As a rule of thumb, the more exposed the machine is, and the more\n"
@@ -2832,7 +2857,7 @@ msgid ""
 "If you do not know what to choose, keep the default option."
 msgstr ""
 
-#: ../../help.pm_.c:435
+#: ../../help.pm_.c:439
 #, fuzzy
 msgid ""
 "At this point, you need to choose what partition(s) will be used for the\n"
@@ -2902,7 +2927,7 @@ msgid ""
 "\n"
 " * Ctrl-m to set the mount point.\n"
 "\n"
-"To get information about the different filesystem types available, pease\n"
+"To get information about the different filesystem types available, please\n"
 "read the chapter ext2fs from the ``Reference Manual''.\n"
 "\n"
 "If you are installing on a PPC machine, you will want to create a small HFS\n"
@@ -2990,7 +3015,7 @@ msgstr ""
 "laoss si 50 MB, så kan du kanskje lagre en ekstra kjene og ramdiskbilde for "
 "nødsituasjoner."
 
-#: ../../help.pm_.c:506
+#: ../../help.pm_.c:510
 msgid ""
 "More than one Microsoft Windows partition has been detected on your hard\n"
 "drive. Please choose the one you want to resize in order to install your\n"
@@ -3059,11 +3084,11 @@ msgstr ""
 "disken\n"
 "eller partisjonen er kalt \"C:\")."
 
-#: ../../help.pm_.c:537
+#: ../../help.pm_.c:541
 msgid "Please be patient. This operation can take several minutes."
 msgstr "Vær tålmodig. Denne operasjonen kan ta flere minutter."
 
-#: ../../help.pm_.c:540
+#: ../../help.pm_.c:544
 msgid ""
 "DrakX now needs to know if you want to perform a default (\"Recommended\")\n"
 "installation or if you want to have greater control (\"Expert\"). You also\n"
@@ -3084,6 +3109,9 @@ msgid ""
 "unchanged. Adding new packages to the current installation will be also\n"
 "possible.\n"
 "\n"
+"Upgrades should work fine for Mandrake Linux systems starting from \"8.1\"\n"
+"release.\n"
+"\n"
 "Depending on your knowledge of GNU/Linux, select one of the following\n"
 "choices:\n"
 "\n"
@@ -3098,7 +3126,7 @@ msgid ""
 "this unless you know what you are doing."
 msgstr ""
 
-#: ../../help.pm_.c:573
+#: ../../help.pm_.c:580
 msgid ""
 "Normally, DrakX selects the right keyboard for you (depending on the\n"
 "language you have chosen) and you will not even see this step. However, you\n"
@@ -3113,7 +3141,7 @@ msgid ""
 "supported keyboards."
 msgstr ""
 
-#: ../../help.pm_.c:586
+#: ../../help.pm_.c:593
 msgid ""
 "Please choose your preferred language for installation and system usage.\n"
 "\n"
@@ -3128,7 +3156,7 @@ msgid ""
 "additional locales click the \"OK\" button to continue."
 msgstr ""
 
-#: ../../help.pm_.c:599
+#: ../../help.pm_.c:606
 msgid ""
 "By default, DrakX assumes you have a two-button mouse and will set it up\n"
 "for third-button emulation. DrakX will automatically know whether it is a\n"
@@ -3143,16 +3171,15 @@ msgid ""
 "[Return] to \"Cancel\" and choose again."
 msgstr ""
 
-#: ../../help.pm_.c:612
-#, fuzzy
+#: ../../help.pm_.c:619
 msgid ""
 "Please select the correct port. For example, the \"COM1\" port under\n"
 "Windows is named \"ttyS0\" under GNU/Linux."
 msgstr ""
-"Vennligst velg den riktige porten. F.eks., COM1 porten\n"
-"under MS Windows blir kalt ttyS0 i GNU/Linux."
+"Vennligst velg den riktige porten. F.eks., \"COM1\" porten under\n"
+"Windows blir kalt \"ttyS0\" i GNU/Linux."
 
-#: ../../help.pm_.c:616
+#: ../../help.pm_.c:623
 msgid ""
 "This is the most crucial decision point for the security of your GNU/Linux\n"
 "system: you have to enter the \"root\" password. \"root\" is the system\n"
@@ -3190,7 +3217,7 @@ msgid ""
 "want to choose \"Local files\" for authentication."
 msgstr ""
 
-#: ../../help.pm_.c:652
+#: ../../help.pm_.c:659
 msgid ""
 "LILO and grub are boot loaders for GNU/Linux. This stage, normally, is\n"
 "totally automated. In fact, DrakX analyzes the disk boot sector and acts\n"
@@ -3231,7 +3258,7 @@ msgid ""
 "Clicking the \"Advanced\" button in this dialog will offer many advanced\n"
 "options, which are reserved to the expert user.\n"
 "\n"
-"After you have configured the general bootloader parameters, you are\n"
+"After you have configured the general boot-loader parameters, you are\n"
 "presented the list of boot options that will be available at boot time.\n"
 "\n"
 "If there is another operating system installed on your machine, it will be\n"
@@ -3241,7 +3268,7 @@ msgid ""
 "installation step."
 msgstr ""
 
-#: ../../help.pm_.c:700
+#: ../../help.pm_.c:707
 #, fuzzy
 msgid ""
 "LILO (the LInux LOader) and grub are boot loaders: they are able to boot\n"
@@ -3265,7 +3292,7 @@ msgstr ""
 "andre kan du fjerne linjene for disse. Men i så tilfelle trenger du\n"
 "en oppstartsdiskett for å starte disse!"
 
-#: ../../help.pm_.c:711
+#: ../../help.pm_.c:718
 msgid ""
 "You must indicate where you wish to place the information required to boot\n"
 "to GNU/Linux.\n"
@@ -3279,7 +3306,7 @@ msgstr ""
 "Med mindre du vet akkurat hva du gjør, velg \"Første sektor av\n"
 "disken (MBR)\"."
 
-#: ../../help.pm_.c:718
+#: ../../help.pm_.c:725
 msgid ""
 "Here we select a printing system for your computer to use. Other OSes may\n"
 "offer you one, but Mandrake offers three.\n"
@@ -3310,7 +3337,7 @@ msgid ""
 "networks."
 msgstr ""
 
-#: ../../help.pm_.c:746
+#: ../../help.pm_.c:753
 msgid ""
 "DrakX is now detecting any IDE devices present in your computer. It will\n"
 "also scan for one or more PCI SCSI card(s) on your system. If a SCSI card\n"
@@ -3339,7 +3366,7 @@ msgid ""
 "on your system)."
 msgstr ""
 
-#: ../../help.pm_.c:773
+#: ../../help.pm_.c:780
 #, fuzzy
 msgid ""
 "You can add additional entries for yaboot, either for other operating\n"
@@ -3457,7 +3484,7 @@ msgstr ""
 "with a '*', if you\n"
 "press TAB to see the boot selections."
 
-#: ../../help.pm_.c:818
+#: ../../help.pm_.c:825
 #, fuzzy
 msgid ""
 "Yaboot is a boot loader for NewWorld MacIntosh hardware. It is able to boot\n"
@@ -3536,7 +3563,7 @@ msgstr ""
 "  - Standard OS: Du kan velge hvilket OS som skal lastes når\n"
 "Open Firmwareforsinkelsen er utløpt."
 
-#: ../../help.pm_.c:851
+#: ../../help.pm_.c:858
 msgid ""
 "Here are presented various parameters concerning your machine. Depending on\n"
 "your installed hardware, you may - or not, see the following entries:\n"
@@ -3568,18 +3595,17 @@ msgid ""
 "associated to it."
 msgstr ""
 
-#: ../../help.pm_.c:880
-#, fuzzy
+#: ../../help.pm_.c:887
 msgid ""
 "Choose the hard drive you want to erase to install your new Mandrake Linux\n"
 "partition. Be careful, all data present on it will be lost and will not be\n"
 "recoverable!"
 msgstr ""
-"Velg den harddisken du ønsker å slette for å installere din\n"
-"nye Mandrake Linux partisjon. Vær forsiktig, alle data på denne vil gå tapt\n"
-"og kan ikke bli gjenopprettet."
+"Velg den harddisken du ønsker å slette for å installere din nye Mandrake\n"
+"Linux partisjon. Vær forsiktig, alle data på denne vil gå tapt og vil ikke\n"
+"kunne gjenopprettes!"
 
-#: ../../help.pm_.c:885
+#: ../../help.pm_.c:892
 #, fuzzy
 msgid ""
 "Click on \"OK\" if you want to delete all data and partitions present on\n"
@@ -3611,7 +3637,7 @@ msgstr ""
 msgid "You must also format %s"
 msgstr ""
 
-#: ../../install_any.pm_.c:410
+#: ../../install_any.pm_.c:406
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -3635,20 +3661,20 @@ msgstr ""
 "\n"
 "Ønsker du virkelig å installere disse tjenerene?\n"
 
-#: ../../install_any.pm_.c:446
+#: ../../install_any.pm_.c:442
 msgid "Can't use broadcast with no NIS domain"
 msgstr "Kan ikke bruke broadcast med intet NIS domene"
 
-#: ../../install_any.pm_.c:785
+#: ../../install_any.pm_.c:781
 #, c-format
 msgid "Insert a FAT formatted floppy in drive %s"
 msgstr "Sett inn en FAT-formatert diskett i stasjon %s"
 
-#: ../../install_any.pm_.c:789
+#: ../../install_any.pm_.c:785
 msgid "This floppy is not FAT formatted"
 msgstr "Denne disketten er ikke FAT-formatert"
 
-#: ../../install_any.pm_.c:801
+#: ../../install_any.pm_.c:797
 msgid ""
 "To use this saved packages selection, boot installation with ``linux "
 "defcfg=floppy''"
@@ -3656,7 +3682,7 @@ msgstr ""
 "For å bruke dette valget av pakker, start installasjonen med'linux "
 "defcfg=floppy'"
 
-#: ../../install_any.pm_.c:823 ../../partition_table.pm_.c:763
+#: ../../install_any.pm_.c:819 ../../partition_table.pm_.c:763
 #, c-format
 msgid "Error reading file %s"
 msgstr "Feil ved lesing av fil %s"
@@ -3666,7 +3692,7 @@ msgstr "Feil ved lesing av fil %s"
 #: ../../interactive.pm_.c:309 ../../interactive.pm_.c:341
 #: ../../interactive_http.pm_.c:104 ../../interactive_newt.pm_.c:170
 #: ../../interactive_stdio.pm_.c:141 ../../interactive_stdio.pm_.c:142
-#: ../../my_gtk.pm_.c:685 ../../my_gtk.pm_.c:1018 ../../my_gtk.pm_.c:1040
+#: ../../my_gtk.pm_.c:686 ../../my_gtk.pm_.c:1019 ../../my_gtk.pm_.c:1041
 #: ../../standalone/drakbackup_.c:2285 ../../standalone/drakbackup_.c:2356
 #: ../../standalone/drakbackup_.c:2372
 msgid "Ok"
@@ -3932,7 +3958,6 @@ msgid "Install Class"
 msgstr "Installeringsklasse"
 
 #: ../../install_steps_gtk.pm_.c:162
-#, fuzzy
 msgid "Please choose one of the following classes of installation:"
 msgstr "Vennligst velg en av følgende installasjonsklasser:"
 
@@ -3982,15 +4007,15 @@ msgstr "Du vil kunne velge disse mere spesifisert i neste trinn."
 msgid "Percentage of packages to install"
 msgstr "Prosentdel av pakker å installere"
 
-#: ../../install_steps_gtk.pm_.c:291 ../../install_steps_interactive.pm_.c:700
+#: ../../install_steps_gtk.pm_.c:291 ../../install_steps_interactive.pm_.c:701
 msgid "Package Group Selection"
 msgstr "Valg pakkegruppe"
 
-#: ../../install_steps_gtk.pm_.c:322 ../../install_steps_interactive.pm_.c:715
+#: ../../install_steps_gtk.pm_.c:322 ../../install_steps_interactive.pm_.c:716
 msgid "Individual package selection"
 msgstr "Individuelt pakkevalg"
 
-#: ../../install_steps_gtk.pm_.c:345 ../../install_steps_interactive.pm_.c:640
+#: ../../install_steps_gtk.pm_.c:345 ../../install_steps_interactive.pm_.c:641
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Total størrelse: %d / %d MB"
@@ -4083,7 +4108,7 @@ msgstr "Minimal installasjon"
 msgid "Choose the packages you want to install"
 msgstr "Velg pakkene du ønsker å installere"
 
-#: ../../install_steps_gtk.pm_.c:502 ../../install_steps_interactive.pm_.c:782
+#: ../../install_steps_gtk.pm_.c:502 ../../install_steps_interactive.pm_.c:783
 msgid "Installing"
 msgstr "Installerer"
 
@@ -4110,17 +4135,17 @@ msgid "Installing package %s"
 msgstr "Installerer pakke %s"
 
 #: ../../install_steps_gtk.pm_.c:656 ../../install_steps_interactive.pm_.c:179
-#: ../../install_steps_interactive.pm_.c:806
+#: ../../install_steps_interactive.pm_.c:807
 #: ../../standalone/drakautoinst_.c:203
 msgid "Accept"
 msgstr "Godta"
 
 #: ../../install_steps_gtk.pm_.c:656 ../../install_steps_interactive.pm_.c:179
-#: ../../install_steps_interactive.pm_.c:806
+#: ../../install_steps_interactive.pm_.c:807
 msgid "Refuse"
 msgstr "Nekte"
 
-#: ../../install_steps_gtk.pm_.c:657 ../../install_steps_interactive.pm_.c:807
+#: ../../install_steps_gtk.pm_.c:657 ../../install_steps_interactive.pm_.c:808
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -4136,16 +4161,16 @@ msgstr ""
 "Hvis du ikke har den trykk Avbryt for å unngå installasjon fra denne CD'en."
 
 #: ../../install_steps_gtk.pm_.c:671 ../../install_steps_gtk.pm_.c:675
-#: ../../install_steps_interactive.pm_.c:819
-#: ../../install_steps_interactive.pm_.c:823
+#: ../../install_steps_interactive.pm_.c:820
+#: ../../install_steps_interactive.pm_.c:824
 msgid "Go on anyway?"
 msgstr "Fortsette uansett?"
 
-#: ../../install_steps_gtk.pm_.c:671 ../../install_steps_interactive.pm_.c:819
+#: ../../install_steps_gtk.pm_.c:671 ../../install_steps_interactive.pm_.c:820
 msgid "There was an error ordering packages:"
 msgstr "Det var en feil ved endring av pakkenes rekkefølge:"
 
-#: ../../install_steps_gtk.pm_.c:675 ../../install_steps_interactive.pm_.c:823
+#: ../../install_steps_gtk.pm_.c:675 ../../install_steps_interactive.pm_.c:824
 msgid "There was an error installing packages:"
 msgstr "Det var en feil ved installering av pakkene:"
 
@@ -4214,9 +4239,8 @@ msgid "An error occurred"
 msgstr "En feil oppsto"
 
 #: ../../install_steps_interactive.pm_.c:85
-#, fuzzy
 msgid "Do you really want to leave the installation?"
-msgstr "Ønsker du virkelig å fjerne skriveren \"%s\"?"
+msgstr "Ønsker du virkelig å forlate installasjonen?"
 
 #: ../../install_steps_interactive.pm_.c:102
 msgid "License agreement"
@@ -4461,13 +4485,12 @@ msgstr ""
 "For any question on this document, please contact MandrakeSoft S.A.  \n"
 
 #: ../../install_steps_interactive.pm_.c:199
-#: ../../install_steps_interactive.pm_.c:1025
+#: ../../install_steps_interactive.pm_.c:1026
 #: ../../standalone/keyboarddrake_.c:28
 msgid "Keyboard"
 msgstr "Tastatur"
 
 #: ../../install_steps_interactive.pm_.c:200
-#, fuzzy
 msgid "Please choose your keyboard layout."
 msgstr "Vennligst velg tastatur-oppsettet ditt."
 
@@ -4498,24 +4521,21 @@ msgstr "Ekspert"
 
 #: ../../install_steps_interactive.pm_.c:240
 #: ../../install_steps_interactive.pm_.c:244
-#, fuzzy
 msgid "Upgrade"
-msgstr "Oppdater"
+msgstr "Oppgrader"
 
 #: ../../install_steps_interactive.pm_.c:240
 #: ../../install_steps_interactive.pm_.c:244
-#, fuzzy
 msgid "Upgrade packages only"
-msgstr "Oppdaterer pakkevalg"
+msgstr "Oppgrader kun pakker"
 
 #: ../../install_steps_interactive.pm_.c:260
-#, fuzzy
 msgid "Please choose the type of your mouse."
 msgstr "Vennligst velg din musetype."
 
 #: ../../install_steps_interactive.pm_.c:266 ../../standalone/mousedrake_.c:65
 msgid "Mouse Port"
-msgstr "Museport"
+msgstr "Port mus"
 
 #: ../../install_steps_interactive.pm_.c:267 ../../standalone/mousedrake_.c:66
 msgid "Please choose on which serial port your mouse is connected to."
@@ -4692,33 +4712,33 @@ msgstr "Sett inn en diskett med pakkevalget"
 msgid "Save on floppy"
 msgstr "Lagre på diskett"
 
-#: ../../install_steps_interactive.pm_.c:653
+#: ../../install_steps_interactive.pm_.c:654
 msgid "Selected size is larger than available space"
 msgstr "Valgt størrelse er større enn tilgjengelig plass"
 
-#: ../../install_steps_interactive.pm_.c:666
+#: ../../install_steps_interactive.pm_.c:667
 msgid "Type of install"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:667
+#: ../../install_steps_interactive.pm_.c:668
 msgid ""
 "You do not have selected any group of packages\n"
 "Please choose the minimal installation you want"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:670
+#: ../../install_steps_interactive.pm_.c:671
 msgid "With X"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:672
+#: ../../install_steps_interactive.pm_.c:673
 msgid "With basic documentation (recommended!)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:673
+#: ../../install_steps_interactive.pm_.c:674
 msgid "Truly minimal install (especially no urpmi)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:757
+#: ../../install_steps_interactive.pm_.c:758
 msgid ""
 "If you have all the CDs in the list below, click Ok.\n"
 "If you have none of those CDs, click Cancel.\n"
@@ -4728,16 +4748,16 @@ msgstr ""
 "Hvis du ikke har noen av disse CDene, klikk Avbryt.\n"
 "Hvis bare noen av CDene mangler, fjern disse, klikk så Ok."
 
-#: ../../install_steps_interactive.pm_.c:762
+#: ../../install_steps_interactive.pm_.c:763
 #, c-format
 msgid "Cd-Rom labeled \"%s\""
 msgstr "CD-ROMen ved navnet \"%s\""
 
-#: ../../install_steps_interactive.pm_.c:782
+#: ../../install_steps_interactive.pm_.c:783
 msgid "Preparing installation"
 msgstr "Forbereder installasjon"
 
-#: ../../install_steps_interactive.pm_.c:791
+#: ../../install_steps_interactive.pm_.c:792
 #, c-format
 msgid ""
 "Installing package %s\n"
@@ -4746,21 +4766,21 @@ msgstr ""
 "Installerer pakke %s\n"
 "%d%%"
 
-#: ../../install_steps_interactive.pm_.c:837
+#: ../../install_steps_interactive.pm_.c:838
 msgid "Post-install configuration"
 msgstr "Konfigurasjon postinstallering"
 
-#: ../../install_steps_interactive.pm_.c:843
+#: ../../install_steps_interactive.pm_.c:844
 #, c-format
 msgid "Please insert the Boot floppy used in drive %s"
 msgstr "Sett inn en oppstartsdiskett i stasjon %s"
 
-#: ../../install_steps_interactive.pm_.c:849
+#: ../../install_steps_interactive.pm_.c:850
 #, c-format
 msgid "Please insert the Update Modules floppy in drive %s"
 msgstr "Sett inn oppdater moduler disketten i stasjon %s"
 
-#: ../../install_steps_interactive.pm_.c:869
+#: ../../install_steps_interactive.pm_.c:870
 msgid ""
 "You have now the possibility to download software aimed for encryption.\n"
 "\n"
@@ -4834,7 +4854,7 @@ msgstr ""
 "Altadena California 91001\n"
 "USA"
 
-#: ../../install_steps_interactive.pm_.c:907
+#: ../../install_steps_interactive.pm_.c:908
 msgid ""
 "You have now the possibility to download updated packages that have\n"
 "been released after the distribution has been made available.\n"
@@ -4845,134 +4865,134 @@ msgid ""
 "Do you want to install the updates ?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:921
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:922
 msgid "Contacting Mandrake Linux web site to get the list of available mirrors"
-msgstr "Kontakter speilet for å få en liste over tilgjengelige pakker"
+msgstr ""
+"Kontakter Mandrake Linux web-sted for å få en liste over tilgjengelige speil"
 
-#: ../../install_steps_interactive.pm_.c:926
+#: ../../install_steps_interactive.pm_.c:927
 msgid "Choose a mirror from which to get the packages"
 msgstr "Velg et speil som pakkene kan hentes fra"
 
-#: ../../install_steps_interactive.pm_.c:935
+#: ../../install_steps_interactive.pm_.c:936
 msgid "Contacting the mirror to get the list of available packages"
 msgstr "Kontakter speilet for å få en liste over tilgjengelige pakker"
 
-#: ../../install_steps_interactive.pm_.c:962
+#: ../../install_steps_interactive.pm_.c:963
 msgid "Which is your timezone?"
 msgstr "Hva er din tidsone?"
 
-#: ../../install_steps_interactive.pm_.c:967
+#: ../../install_steps_interactive.pm_.c:968
 msgid "Hardware clock set to GMT"
 msgstr "Maskinvareklokken din satt til GMT"
 
-#: ../../install_steps_interactive.pm_.c:968
+#: ../../install_steps_interactive.pm_.c:969
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Automatisk tidssynkronisering (ved hjelp av NTP)"
 
-#: ../../install_steps_interactive.pm_.c:975
+#: ../../install_steps_interactive.pm_.c:976
 msgid "NTP Server"
 msgstr "NTP-tjener"
 
-#: ../../install_steps_interactive.pm_.c:1009
-#: ../../install_steps_interactive.pm_.c:1017 ../../printerdrake.pm_.c:103
+#: ../../install_steps_interactive.pm_.c:1010
+#: ../../install_steps_interactive.pm_.c:1018 ../../printerdrake.pm_.c:103
 msgid "Remote CUPS server"
 msgstr "Fjern-CUPS tjener"
 
-#: ../../install_steps_interactive.pm_.c:1010
+#: ../../install_steps_interactive.pm_.c:1011
 msgid "No printer"
 msgstr "Ingen skriver"
 
-#: ../../install_steps_interactive.pm_.c:1021 ../../steps.pm_.c:27
+#: ../../install_steps_interactive.pm_.c:1022 ../../steps.pm_.c:27
 msgid "Summary"
 msgstr "Oppsummering"
 
-#: ../../install_steps_interactive.pm_.c:1024
+#: ../../install_steps_interactive.pm_.c:1025
 msgid "Mouse"
 msgstr "Mus"
 
-#: ../../install_steps_interactive.pm_.c:1026
+#: ../../install_steps_interactive.pm_.c:1027
 msgid "Timezone"
 msgstr "Tidssone"
 
-#: ../../install_steps_interactive.pm_.c:1027 ../../printerdrake.pm_.c:2224
+#: ../../install_steps_interactive.pm_.c:1028 ../../printerdrake.pm_.c:2224
 #: ../../printerdrake.pm_.c:2295
 msgid "Printer"
 msgstr "Skriver"
 
-#: ../../install_steps_interactive.pm_.c:1029
+#: ../../install_steps_interactive.pm_.c:1030
 msgid "ISDN card"
 msgstr "ISDN-kort"
 
-#: ../../install_steps_interactive.pm_.c:1032
+#: ../../install_steps_interactive.pm_.c:1033
 msgid "Sound card"
 msgstr "Lydkort"
 
-#: ../../install_steps_interactive.pm_.c:1035
+#: ../../install_steps_interactive.pm_.c:1036
 msgid "TV card"
 msgstr "TV-kort"
 
-#: ../../install_steps_interactive.pm_.c:1073
-#: ../../install_steps_interactive.pm_.c:1097
-#: ../../install_steps_interactive.pm_.c:1101
+#: ../../install_steps_interactive.pm_.c:1074
+#: ../../install_steps_interactive.pm_.c:1098
+#: ../../install_steps_interactive.pm_.c:1102
 msgid "LDAP"
 msgstr "LDAP"
 
-#: ../../install_steps_interactive.pm_.c:1074
-#: ../../install_steps_interactive.pm_.c:1097
-#: ../../install_steps_interactive.pm_.c:1110
+#: ../../install_steps_interactive.pm_.c:1075
+#: ../../install_steps_interactive.pm_.c:1098
+#: ../../install_steps_interactive.pm_.c:1111
 msgid "NIS"
 msgstr "NIS"
 
-#: ../../install_steps_interactive.pm_.c:1075
-#: ../../install_steps_interactive.pm_.c:1097
+#: ../../install_steps_interactive.pm_.c:1076
+#: ../../install_steps_interactive.pm_.c:1098
 msgid "Local files"
 msgstr "Lokale filer"
 
-#: ../../install_steps_interactive.pm_.c:1084
-#: ../../install_steps_interactive.pm_.c:1085 ../../steps.pm_.c:24
+#: ../../install_steps_interactive.pm_.c:1085
+#: ../../install_steps_interactive.pm_.c:1086 ../../steps.pm_.c:24
 msgid "Set root password"
 msgstr "Sett root-passord"
 
-#: ../../install_steps_interactive.pm_.c:1086
+#: ../../install_steps_interactive.pm_.c:1087
 msgid "No password"
 msgstr "Intet passord"
 
-#: ../../install_steps_interactive.pm_.c:1091
+#: ../../install_steps_interactive.pm_.c:1092
 #, c-format
 msgid "This password is too simple (must be at least %d characters long)"
 msgstr "Dette passordet er for enkelt (må være minst %d tegn langt)"
 
-#: ../../install_steps_interactive.pm_.c:1097 ../../network/modem.pm_.c:49
+#: ../../install_steps_interactive.pm_.c:1098 ../../network/modem.pm_.c:49
 #: ../../standalone/draknet_.c:625 ../../standalone/logdrake_.c:172
 msgid "Authentication"
 msgstr "Autentifikasjon"
 
-#: ../../install_steps_interactive.pm_.c:1105
+#: ../../install_steps_interactive.pm_.c:1106
 msgid "Authentication LDAP"
 msgstr "Autentisering LDAP"
 
-#: ../../install_steps_interactive.pm_.c:1106
+#: ../../install_steps_interactive.pm_.c:1107
 msgid "LDAP Base dn"
 msgstr "LDAP grunnleggende dn"
 
-#: ../../install_steps_interactive.pm_.c:1107
+#: ../../install_steps_interactive.pm_.c:1108
 msgid "LDAP Server"
 msgstr "LDAP-tjener"
 
-#: ../../install_steps_interactive.pm_.c:1113
+#: ../../install_steps_interactive.pm_.c:1114
 msgid "Authentication NIS"
 msgstr "Autentisering NIS"
 
-#: ../../install_steps_interactive.pm_.c:1114
+#: ../../install_steps_interactive.pm_.c:1115
 msgid "NIS Domain"
 msgstr "NIS-domene"
 
-#: ../../install_steps_interactive.pm_.c:1115
+#: ../../install_steps_interactive.pm_.c:1116
 msgid "NIS Server"
 msgstr "NIS-tjener"
 
-#: ../../install_steps_interactive.pm_.c:1150
+#: ../../install_steps_interactive.pm_.c:1151
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -5003,19 +5023,19 @@ msgstr ""
 "en diskett\n"
 "i den første stasjonen og trykk \"Ok\"."
 
-#: ../../install_steps_interactive.pm_.c:1166
+#: ../../install_steps_interactive.pm_.c:1167
 msgid "First floppy drive"
 msgstr "Første diskettstasjon"
 
-#: ../../install_steps_interactive.pm_.c:1167
+#: ../../install_steps_interactive.pm_.c:1168
 msgid "Second floppy drive"
 msgstr "Andre diskettstasjon"
 
-#: ../../install_steps_interactive.pm_.c:1168 ../../printerdrake.pm_.c:1816
+#: ../../install_steps_interactive.pm_.c:1169 ../../printerdrake.pm_.c:1816
 msgid "Skip"
 msgstr "Dropp"
 
-#: ../../install_steps_interactive.pm_.c:1173
+#: ../../install_steps_interactive.pm_.c:1174
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -5040,28 +5060,28 @@ msgstr ""
 "etter systemsvikt. Ønsker du å opprette en oppstartsdiskett for systemet "
 "ditt?"
 
-#: ../../install_steps_interactive.pm_.c:1182
+#: ../../install_steps_interactive.pm_.c:1183
 msgid "Sorry, no floppy drive available"
 msgstr "Beklager, ingen diskettstasjon tilgjengelig"
 
-#: ../../install_steps_interactive.pm_.c:1186
+#: ../../install_steps_interactive.pm_.c:1187
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr "Velg diskettstasjonen du ønsker å bruke for å lage oppstartsdisketten"
 
-#: ../../install_steps_interactive.pm_.c:1190
-#, fuzzy, c-format
+#: ../../install_steps_interactive.pm_.c:1191
+#, c-format
 msgid "Insert a floppy in %s"
-msgstr "Sett inn en diskett i stasjon %s"
+msgstr "Sett inn en diskett i %s"
 
-#: ../../install_steps_interactive.pm_.c:1193
+#: ../../install_steps_interactive.pm_.c:1194
 msgid "Creating bootdisk"
 msgstr "Oppretter oppstartdiskett"
 
-#: ../../install_steps_interactive.pm_.c:1200
+#: ../../install_steps_interactive.pm_.c:1201
 msgid "Preparing bootloader"
 msgstr "Klargjør oppstartslaster"
 
-#: ../../install_steps_interactive.pm_.c:1211
+#: ../../install_steps_interactive.pm_.c:1212
 msgid ""
 "You appear to have an OldWorld or Unknown\n"
 " machine, the yaboot bootloader will not work for you.\n"
@@ -5073,11 +5093,11 @@ msgstr ""
 "Installasjonen vil fortsette, men du må\n"
 "bruke BootX for å starte din maskin."
 
-#: ../../install_steps_interactive.pm_.c:1217
+#: ../../install_steps_interactive.pm_.c:1218
 msgid "Do you want to use aboot?"
 msgstr "Ønsker du å bruke aboot?"
 
-#: ../../install_steps_interactive.pm_.c:1220
+#: ../../install_steps_interactive.pm_.c:1221
 msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
@@ -5085,16 +5105,15 @@ msgstr ""
 "Feil ved installasjon av aboot, \n"
 "prøve å installere selv om det ødelegger den første partisjonen?"
 
-#: ../../install_steps_interactive.pm_.c:1227
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:1228
 msgid "Installing bootloader"
 msgstr "Installer oppstartslaster"
 
-#: ../../install_steps_interactive.pm_.c:1233
+#: ../../install_steps_interactive.pm_.c:1234
 msgid "Installation of bootloader failed. The following error occured:"
 msgstr "Installasjon av oppstartslaster mislykket. Følgende feil oppsto:"
 
-#: ../../install_steps_interactive.pm_.c:1241
+#: ../../install_steps_interactive.pm_.c:1242
 #, c-format
 msgid ""
 "You may need to change your Open Firmware boot-device to\n"
@@ -5105,18 +5124,18 @@ msgid ""
 "At your next boot you should see the bootloader prompt."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1285
+#: ../../install_steps_interactive.pm_.c:1286
 #: ../../standalone/drakautoinst_.c:81
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Sett inn en tom diskett i stasjon %s"
 
-#: ../../install_steps_interactive.pm_.c:1289
+#: ../../install_steps_interactive.pm_.c:1290
 #: ../../standalone/drakautoinst_.c:83
 msgid "Creating auto install floppy"
 msgstr "Oppretter diskett for autoinstallasjon"
 
-#: ../../install_steps_interactive.pm_.c:1300
+#: ../../install_steps_interactive.pm_.c:1301
 msgid ""
 "Some steps are not completed.\n"
 "\n"
@@ -5126,7 +5145,7 @@ msgstr ""
 "\n"
 "Ønsker du virkelig å avslutte nå?"
 
-#: ../../install_steps_interactive.pm_.c:1311
+#: ../../install_steps_interactive.pm_.c:1312
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -5148,11 +5167,11 @@ msgstr ""
 "Informasjon om konfigurering av systemet ditt finnes i post\n"
 "install-kapittelet i Official Mandrake Linux User's Guide."
 
-#: ../../install_steps_interactive.pm_.c:1323
+#: ../../install_steps_interactive.pm_.c:1324
 msgid "Generate auto install floppy"
 msgstr "Oppretter diskett for autoinstallasjon"
 
-#: ../../install_steps_interactive.pm_.c:1325
+#: ../../install_steps_interactive.pm_.c:1326
 msgid ""
 "The auto install can be fully automated if wanted,\n"
 "in that case it will take over the hard drive!!\n"
@@ -5166,15 +5185,15 @@ msgstr ""
 "\n"
 "Du kanskje ønske å kjøre installasjonen omigjen.\n"
 
-#: ../../install_steps_interactive.pm_.c:1330
+#: ../../install_steps_interactive.pm_.c:1331
 msgid "Automated"
 msgstr "Automatisert"
 
-#: ../../install_steps_interactive.pm_.c:1330
+#: ../../install_steps_interactive.pm_.c:1331
 msgid "Replay"
 msgstr "Gjør igjen"
 
-#: ../../install_steps_interactive.pm_.c:1333
+#: ../../install_steps_interactive.pm_.c:1334
 msgid "Save packages selection"
 msgstr "Lagre pakkevalg"
 
@@ -5240,31 +5259,32 @@ msgid ""
 "Entries you'll have to fill:\n"
 "%s"
 msgstr ""
+"Innganger du må fylle:\n"
+"%s"
 
 #: ../../interactive_stdio.pm_.c:68
-#, fuzzy, c-format
+#, c-format
 msgid "Your choice? (0/1, default `%s') "
-msgstr "Ditt valg? (standard %s) "
+msgstr "Ditt valg? (0/1, standard `%s') "
 
 #: ../../interactive_stdio.pm_.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Button `%s': %s"
-msgstr "Valg: %s"
+msgstr "Valg: `%s': %s"
 
 #: ../../interactive_stdio.pm_.c:94
-#, fuzzy
 msgid "Do you want to click on this button? "
-msgstr "Ønsker du å bruke aboot?"
+msgstr "Ønsker du å klikke på denne knappen? "
 
 #: ../../interactive_stdio.pm_.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Your choice? (default `%s'%s) "
-msgstr "Ditt valg? (standard %s) "
+msgstr "Ditt valg? (standard `%s'%s) "
 
 #: ../../interactive_stdio.pm_.c:121
 #, c-format
 msgid "=> There are many things to choose from (%s).\n"
-msgstr ""
+msgstr "=> Det er mange ting å velge fra (%s).\n"
 
 #: ../../interactive_stdio.pm_.c:124
 msgid ""
@@ -5357,14 +5377,12 @@ msgid "Belgian"
 msgstr "Belgisk"
 
 #: ../../keyboard.pm_.c:166
-#, fuzzy
 msgid "Bulgarian (phonetic)"
-msgstr "Armensk (phonétic)"
+msgstr "Bulgarsk (phonetic)"
 
 #: ../../keyboard.pm_.c:167
-#, fuzzy
 msgid "Bulgarian (BDS)"
-msgstr "Bulgarisk"
+msgstr "Bulgarsk (BDS)"
 
 #: ../../keyboard.pm_.c:168
 msgid "Brazilian (ABNT-2)"
@@ -5403,9 +5421,8 @@ msgid "Dvorak (Norwegian)"
 msgstr "Dvorak (Norsk)"
 
 #: ../../keyboard.pm_.c:182
-#, fuzzy
 msgid "Dvorak (Swedish)"
-msgstr "Dvorak (US)"
+msgstr "Dvorak (Svensk)"
 
 #: ../../keyboard.pm_.c:183
 msgid "Estonian"
@@ -5480,9 +5497,8 @@ msgid "Lithuanian \"phonetic\" QWERTY"
 msgstr "Litauisk \"phonétic\" QWERTY"
 
 #: ../../keyboard.pm_.c:208
-#, fuzzy
 msgid "Latvian"
-msgstr "Lokasjon"
+msgstr "Lotvisk"
 
 #: ../../keyboard.pm_.c:209
 msgid "Macedonian"
@@ -5534,21 +5550,19 @@ msgstr "Slovakisk (QWERTY)"
 
 #: ../../keyboard.pm_.c:229
 msgid "Serbian (cyrillic)"
-msgstr ""
+msgstr "Serbisk (cyrillic)"
 
 #: ../../keyboard.pm_.c:231
-#, fuzzy
 msgid "Tamil"
-msgstr "Tabell"
+msgstr "Tamilsk"
 
 #: ../../keyboard.pm_.c:232
 msgid "Thai keyboard"
 msgstr "Thai-tastatur"
 
 #: ../../keyboard.pm_.c:234
-#, fuzzy
 msgid "Tajik keyboard"
-msgstr "Thai-tastatur"
+msgstr "Tajik-tastatur"
 
 #: ../../keyboard.pm_.c:235
 msgid "Turkish (traditional \"F\" model)"
@@ -5571,9 +5585,8 @@ msgid "Vietnamese \"numeric row\" QWERTY"
 msgstr "Vietnamesisk \"nummer-rekke\" QWERTY"
 
 #: ../../keyboard.pm_.c:242
-#, fuzzy
 msgid "Yugoslavian (latin)"
-msgstr "Azerbaidjansk (latin)"
+msgstr "Jugoslavisk (latin)"
 
 #: ../../loopback.pm_.c:32
 #, c-format
@@ -5609,11 +5622,11 @@ msgstr "Generisk PS2 hjulmus"
 msgid "GlidePoint"
 msgstr "GlidePoint"
 
-#: ../../mouse.pm_.c:36 ../../mouse.pm_.c:62
+#: ../../mouse.pm_.c:36 ../../mouse.pm_.c:63
 msgid "Kensington Thinking Mouse"
 msgstr "Kensington Thinking Mouse"
 
-#: ../../mouse.pm_.c:37 ../../mouse.pm_.c:58
+#: ../../mouse.pm_.c:37 ../../mouse.pm_.c:59
 msgid "Genius NetMouse"
 msgstr "Genius NetMouse"
 
@@ -5621,116 +5634,115 @@ msgstr "Genius NetMouse"
 msgid "Genius NetScroll"
 msgstr "Genius NetScroll"
 
-#: ../../mouse.pm_.c:43 ../../mouse.pm_.c:67
+#: ../../mouse.pm_.c:43 ../../mouse.pm_.c:68
 msgid "1 button"
 msgstr "1 knapp"
 
-#: ../../mouse.pm_.c:44
-msgid "Generic"
-msgstr "Generisk"
-
-#: ../../mouse.pm_.c:45
-msgid "Wheel"
-msgstr "Hjul"
-
-#: ../../mouse.pm_.c:48
-msgid "serial"
-msgstr "seriell"
-
-#: ../../mouse.pm_.c:50
+#: ../../mouse.pm_.c:44 ../../mouse.pm_.c:51
 msgid "Generic 2 Button Mouse"
 msgstr "Generisk 2-knappers mus"
 
-#: ../../mouse.pm_.c:51
+#: ../../mouse.pm_.c:45
+msgid "Generic"
+msgstr "Generisk"
+
+#: ../../mouse.pm_.c:46
+msgid "Wheel"
+msgstr "Hjul"
+
+#: ../../mouse.pm_.c:49
+msgid "serial"
+msgstr "seriell"
+
+#: ../../mouse.pm_.c:52
 msgid "Generic 3 Button Mouse"
 msgstr "Generisk 3-knappers mus"
 
-#: ../../mouse.pm_.c:52
+#: ../../mouse.pm_.c:53
 msgid "Microsoft IntelliMouse"
 msgstr "Microsoft IntelliMouse"
 
-#: ../../mouse.pm_.c:53
+#: ../../mouse.pm_.c:54
 msgid "Logitech MouseMan"
 msgstr "Logitech MouseMan"
 
-#: ../../mouse.pm_.c:54
+#: ../../mouse.pm_.c:55
 msgid "Mouse Systems"
 msgstr "Mouse Systems"
 
-#: ../../mouse.pm_.c:56
+#: ../../mouse.pm_.c:57
 msgid "Logitech CC Series"
 msgstr "Logitech CC-seriene (seriell)"
 
-#: ../../mouse.pm_.c:57
+#: ../../mouse.pm_.c:58
 msgid "Logitech MouseMan+/FirstMouse+"
 msgstr "Logitech MouseMan+/FirstMouse+"
 
-#: ../../mouse.pm_.c:59
+#: ../../mouse.pm_.c:60
 msgid "MM Series"
 msgstr "MM-seriene"
 
-#: ../../mouse.pm_.c:60
+#: ../../mouse.pm_.c:61
 msgid "MM HitTablet"
 msgstr "MM HitTablet"
 
-#: ../../mouse.pm_.c:61
+#: ../../mouse.pm_.c:62
 msgid "Logitech Mouse (serial, old C7 type)"
 msgstr "Logitech Mouse (seriell, gammel C7 type)"
 
-#: ../../mouse.pm_.c:65
+#: ../../mouse.pm_.c:66
 msgid "busmouse"
 msgstr "bussmus"
 
-#: ../../mouse.pm_.c:68
+#: ../../mouse.pm_.c:69
 msgid "2 buttons"
 msgstr "2 knapper"
 
-#: ../../mouse.pm_.c:69
+#: ../../mouse.pm_.c:70
 msgid "3 buttons"
 msgstr "3 knapper"
 
-#: ../../mouse.pm_.c:72
+#: ../../mouse.pm_.c:73
 msgid "none"
 msgstr "ingen"
 
-#: ../../mouse.pm_.c:74
+#: ../../mouse.pm_.c:75
 msgid "No mouse"
 msgstr "Ingen mus"
 
-#: ../../mouse.pm_.c:482
+#: ../../mouse.pm_.c:483
 msgid "Please test the mouse"
 msgstr "Vennligst test musen."
 
-#: ../../mouse.pm_.c:483
+#: ../../mouse.pm_.c:484
 msgid "To activate the mouse,"
 msgstr "For å aktivere musen,"
 
-#: ../../mouse.pm_.c:484
+#: ../../mouse.pm_.c:485
 msgid "MOVE YOUR WHEEL!"
 msgstr "BEVEG HJULET DITT!"
 
-#: ../../my_gtk.pm_.c:411
-#, fuzzy
+#: ../../my_gtk.pm_.c:412
 msgid "-adobe-utopia-medium-r-normal-*-12-*-*-*-p-*-iso8859-*,*-r-*"
-msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
+msgstr "-adobe-utopia-medium-r-normal-*-12-*-*-*-p-*-iso8859-*,*-r-*"
 
-#: ../../my_gtk.pm_.c:650
+#: ../../my_gtk.pm_.c:651
 msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 
-#: ../../my_gtk.pm_.c:685
+#: ../../my_gtk.pm_.c:686
 msgid "Finish"
 msgstr "Avslutt"
 
-#: ../../my_gtk.pm_.c:685 ../../printerdrake.pm_.c:1556
+#: ../../my_gtk.pm_.c:686 ../../printerdrake.pm_.c:1556
 msgid "Next ->"
 msgstr "Neste ->"
 
-#: ../../my_gtk.pm_.c:686 ../../printerdrake.pm_.c:1554
+#: ../../my_gtk.pm_.c:687 ../../printerdrake.pm_.c:1554
 msgid "<- Previous"
 msgstr "<- Forrige"
 
-#: ../../my_gtk.pm_.c:1018
+#: ../../my_gtk.pm_.c:1019
 msgid "Is this correct?"
 msgstr "Er dette riktig?"
 
@@ -5749,9 +5761,8 @@ msgstr ""
 "Hvis du ikke vet, velg 'bruk pppoe'"
 
 #: ../../network/adsl.pm_.c:22
-#, fuzzy
 msgid "Alcatel speedtouch usb"
-msgstr "speedtouch usb"
+msgstr "Alcatel speedtouch usb"
 
 #: ../../network/adsl.pm_.c:22
 msgid "use dhcp"
@@ -6039,19 +6050,16 @@ msgid "You are not currently connected to Internet."
 msgstr "Du er for øyeblikket ikke koblet opp mot Internett."
 
 #: ../../network/netconnect.pm_.c:41
-#, fuzzy
 msgid "Connect"
-msgstr "Tilkoblet"
+msgstr "Koble til"
 
 #: ../../network/netconnect.pm_.c:43
-#, fuzzy
 msgid "Disconnect"
-msgstr "Koble fra..."
+msgstr "Koble fra"
 
 #: ../../network/netconnect.pm_.c:45
-#, fuzzy
 msgid "Configure the connection"
-msgstr "Konfigurer nettverk"
+msgstr "Konfigurer tilkoblingen"
 
 #: ../../network/netconnect.pm_.c:50
 msgid "Internet connection & configuration"
@@ -6561,80 +6569,78 @@ msgid "Pipe job into a command"
 msgstr "Pipe inn i kommando"
 
 #: ../../printer.pm_.c:497 ../../printer.pm_.c:688 ../../printer.pm_.c:1010
-#: ../../printerdrake.pm_.c:1633 ../../printerdrake.pm_.c:2652
+#: ../../printerdrake.pm_.c:1633 ../../printerdrake.pm_.c:2653
 msgid "Unknown model"
 msgstr "Ukjent modell"
 
 #: ../../printer.pm_.c:525
-#, fuzzy
 msgid "Local Printers"
-msgstr "Lokal skriver"
+msgstr "Lokale skrivere"
 
 #: ../../printer.pm_.c:527 ../../printer.pm_.c:865
-#, fuzzy
 msgid "Remote Printers"
-msgstr "Fjern-skriver"
+msgstr "Fjern-skrivers"
 
 #: ../../printer.pm_.c:534 ../../printerdrake.pm_.c:299
 #, c-format
 msgid " on parallel port \\/*%s"
-msgstr ""
+msgstr " på parallelport \\/*%s"
 
 #: ../../printer.pm_.c:537 ../../printerdrake.pm_.c:301
 #, c-format
 msgid ", USB printer \\/*%s"
-msgstr ""
+msgstr ", USB skriver \\/*%s"
 
 #: ../../printer.pm_.c:542
 #, c-format
 msgid ", multi-function device on parallel port \\/*%s"
-msgstr ""
+msgstr ", multifunksjonsenhet på parallelport \\/*%s"
 
 #: ../../printer.pm_.c:545
 msgid ", multi-function device on USB"
-msgstr ""
+msgstr ", multifunksjonsenhet på USB"
 
 #: ../../printer.pm_.c:547
 msgid ", multi-function device on HP JetDirect"
-msgstr ""
+msgstr ", multifunksjonsenhet på HP JetDirect"
 
 #: ../../printer.pm_.c:549
 msgid ", multi-function device"
-msgstr ""
+msgstr ", multifunksjonsenhet"
 
 #: ../../printer.pm_.c:552
-#, fuzzy, c-format
+#, c-format
 msgid ", printing to %s"
-msgstr "Feil ved skriving til fil %s"
+msgstr ", skriver til %s"
 
 #: ../../printer.pm_.c:554
 #, c-format
 msgid "on LPD server \"%s\", printer \"%s\""
-msgstr ""
+msgstr "på LPD tjener \"%s\", skriver \"%s\""
 
 #: ../../printer.pm_.c:556
 #, c-format
 msgid ", TCP/IP host \"%s\", port %s"
-msgstr ""
+msgstr ", TCP/IP vert \"%s\", port %s"
 
 #: ../../printer.pm_.c:560
 #, c-format
 msgid "on Windows server \"%s\", share \"%s\""
-msgstr ""
+msgstr "på Windows tjener \"%s\", del \"%s\""
 
 #: ../../printer.pm_.c:564
 #, c-format
 msgid "on Novell server \"%s\", printer \"%s\""
-msgstr ""
+msgstr "på Novell tjener \"%s\", skriver \"%s\""
 
 #: ../../printer.pm_.c:566
 #, c-format
 msgid ", using command %s"
-msgstr ""
+msgstr ", bruker kommando %s"
 
 #: ../../printer.pm_.c:685 ../../printerdrake.pm_.c:1114
 msgid "Raw printer (No driver)"
-msgstr ""
+msgstr "Rå skriver (ingen driver)"
 
 #: ../../printer.pm_.c:834
 #, c-format
@@ -6646,14 +6652,14 @@ msgid "(on this machine)"
 msgstr "(på denne maskin)"
 
 #: ../../printer.pm_.c:861
-#, fuzzy, c-format
+#, c-format
 msgid "On CUPS server \"%s\""
-msgstr "CUPS tjener IP"
+msgstr "På CUPS tjener \"%s\""
 
 #: ../../printer.pm_.c:867 ../../printerdrake.pm_.c:2332
 #: ../../printerdrake.pm_.c:2343 ../../printerdrake.pm_.c:2539
 #: ../../printerdrake.pm_.c:2593 ../../printerdrake.pm_.c:2620
-#: ../../printerdrake.pm_.c:2768 ../../printerdrake.pm_.c:2770
+#: ../../printerdrake.pm_.c:2769 ../../printerdrake.pm_.c:2771
 msgid " (Default)"
 msgstr " (Standard)"
 
@@ -6673,20 +6679,17 @@ msgid ""
 "printers will be automatically detected."
 msgstr ""
 "\n"
-"Med en fjern-CUPS tjener behøver du ikke å konfigurere\n"
-"noen skrivere her; skrivere vil bli oppdaget automatisk.\n"
-"Vennligst velg \"Skriver på en fjern-CUPS tjener\" i dette tilfellet."
+"Skrivere på fjern CUPS tjenere trenger du ikke å konfigurere her; disse "
+"skriverene vil bli oppdaget automatisk."
 
 #: ../../printerdrake.pm_.c:83 ../../printerdrake.pm_.c:87
 #: ../../printerdrake.pm_.c:88 ../../printerdrake.pm_.c:142
-#, fuzzy
 msgid "None"
-msgstr "Ferdig"
+msgstr "Ingen"
 
 #: ../../printerdrake.pm_.c:84 ../../printerdrake.pm_.c:143
-#, fuzzy
 msgid "Choose a default printer!"
-msgstr "Velg standard bruker:"
+msgstr "Velg en standard skriver!"
 
 #: ../../printerdrake.pm_.c:104
 #, fuzzy
@@ -6743,7 +6746,7 @@ msgstr "IP-adresse bør være i format 1.2.3.4"
 msgid "The port number should be an integer!"
 msgstr "Portnummer burde være numerisk"
 
-#: ../../printerdrake.pm_.c:124 ../../printerdrake.pm_.c:2729
+#: ../../printerdrake.pm_.c:124 ../../printerdrake.pm_.c:2730
 msgid "Default printer"
 msgstr "Standardskriver"
 
@@ -6756,14 +6759,12 @@ msgid "Port"
 msgstr "Port"
 
 #: ../../printerdrake.pm_.c:132
-#, fuzzy
 msgid "Automatic CUPS configuration"
-msgstr "Konfigurasjon av automatiske skritt"
+msgstr "Automatisk CUPS konfigurasjon"
 
 #: ../../printerdrake.pm_.c:199 ../../standalone/scannerdrake_.c:42
-#, fuzzy
 msgid "Detecting devices ..."
-msgstr "Finner enheter..."
+msgstr "Finner enheter ..."
 
 #: ../../printerdrake.pm_.c:199 ../../standalone/scannerdrake_.c:42
 msgid "Test ports"
@@ -6771,9 +6772,8 @@ msgstr "Test porter"
 
 #: ../../printerdrake.pm_.c:221 ../../printerdrake.pm_.c:2376
 #: ../../printerdrake.pm_.c:2481
-#, fuzzy
 msgid "Add a new printer"
-msgstr "Legg til skriver"
+msgstr "Legg til en ny skriver"
 
 #: ../../printerdrake.pm_.c:222
 msgid ""
@@ -6791,7 +6791,6 @@ msgstr ""
 #: ../../printerdrake.pm_.c:230 ../../printerdrake.pm_.c:257
 #: ../../printerdrake.pm_.c:426 ../../printerdrake.pm_.c:441
 #: ../../printerdrake.pm_.c:451 ../../printerdrake.pm_.c:510
-#, fuzzy
 msgid "Local Printer"
 msgstr "Lokal skriver"
 
@@ -6814,9 +6813,8 @@ msgid ""
 msgstr ""
 
 #: ../../printerdrake.pm_.c:240
-#, fuzzy
 msgid "Auto-detect printers"
-msgstr "Fjern-skriver"
+msgstr "Finn skrivere automatisk"
 
 #: ../../printerdrake.pm_.c:258
 msgid ""
@@ -6834,7 +6832,7 @@ msgstr ""
 
 #: ../../printerdrake.pm_.c:277
 msgid "Auto-Detection of Printers"
-msgstr ""
+msgstr "Automatisk detektering av skrivere"
 
 #: ../../printerdrake.pm_.c:278
 msgid ""
@@ -6848,31 +6846,29 @@ msgstr ""
 
 #: ../../printerdrake.pm_.c:281 ../../printerdrake.pm_.c:283
 #: ../../printerdrake.pm_.c:284
-#, fuzzy
 msgid "Do auto-detection"
-msgstr "Bruk automatisk detektering"
+msgstr "Utfør automatisk detektering"
 
 #: ../../printerdrake.pm_.c:282
-#, fuzzy
 msgid "Set up printer manually"
-msgstr "Fjern-skrivers navn"
+msgstr "Sett opp skriver manuellt"
 
 #: ../../printerdrake.pm_.c:307
-#, fuzzy, c-format
+#, c-format
 msgid "Detected %s"
-msgstr "oppdaget %s"
+msgstr "Oppdaget %s"
 
 #: ../../printerdrake.pm_.c:311 ../../printerdrake.pm_.c:338
 #: ../../printerdrake.pm_.c:354
 #, c-format
 msgid "Printer on parallel port \\/*%s"
-msgstr ""
+msgstr "Skriver på parallelport \\/*%s"
 
 #: ../../printerdrake.pm_.c:313 ../../printerdrake.pm_.c:340
 #: ../../printerdrake.pm_.c:359
 #, c-format
 msgid "USB printer \\/*%s"
-msgstr ""
+msgstr "USB skriver \\/*%s"
 
 #: ../../printerdrake.pm_.c:427
 msgid ""
@@ -6883,16 +6879,14 @@ msgid ""
 msgstr ""
 
 #: ../../printerdrake.pm_.c:431
-#, fuzzy
 msgid "You must enter a device or file name!"
-msgstr "Skriverenhetens URI"
+msgstr "Du må legge til en enhet eller et filnavn!"
 
 #: ../../printerdrake.pm_.c:442
-#, fuzzy
 msgid ""
 "No local printer found!\n"
 "\n"
-msgstr "Lokal skriver"
+msgstr "Ingen lokal skriver funnet!\n"
 
 #: ../../printerdrake.pm_.c:443
 msgid ""
@@ -7346,7 +7340,7 @@ msgstr ""
 msgid "Did it work properly?"
 msgstr "Virker det som det skal?"
 
-#: ../../printerdrake.pm_.c:1635 ../../printerdrake.pm_.c:2654
+#: ../../printerdrake.pm_.c:1635 ../../printerdrake.pm_.c:2655
 #, fuzzy
 msgid "Raw printer"
 msgstr "Ingen skriver"
@@ -7748,7 +7742,7 @@ msgid "Installing Foomatic ..."
 msgstr "Installerer pakke %s"
 
 #: ../../printerdrake.pm_.c:2257 ../../printerdrake.pm_.c:2289
-#: ../../printerdrake.pm_.c:2655 ../../printerdrake.pm_.c:2722
+#: ../../printerdrake.pm_.c:2656 ../../printerdrake.pm_.c:2723
 msgid "Printer options"
 msgstr "Opsjoner for skriver"
 
@@ -7795,7 +7789,7 @@ msgstr "Normalt modus"
 
 #: ../../printerdrake.pm_.c:2503 ../../printerdrake.pm_.c:2546
 #: ../../printerdrake.pm_.c:2563 ../../printerdrake.pm_.c:2598
-#: ../../printerdrake.pm_.c:2785
+#: ../../printerdrake.pm_.c:2786
 #, fuzzy
 msgid "Do you want to configure another printer?"
 msgstr "Vil du teste konfigurasjonen?"
@@ -7817,55 +7811,55 @@ msgstr ""
 msgid "Do it!"
 msgstr "Gjør det!"
 
-#: ../../printerdrake.pm_.c:2644 ../../printerdrake.pm_.c:2696
+#: ../../printerdrake.pm_.c:2645 ../../printerdrake.pm_.c:2697
 msgid "Printer connection type"
 msgstr "Skrivertilkoblingstype"
 
-#: ../../printerdrake.pm_.c:2645 ../../printerdrake.pm_.c:2700
+#: ../../printerdrake.pm_.c:2646 ../../printerdrake.pm_.c:2701
 msgid "Printer name, description, location"
 msgstr "Skrivernavn, beskrivelse, sted"
 
-#: ../../printerdrake.pm_.c:2647 ../../printerdrake.pm_.c:2715
+#: ../../printerdrake.pm_.c:2648 ../../printerdrake.pm_.c:2716
 msgid "Printer manufacturer, model, driver"
 msgstr "Skriverprodusent, modell, driver"
 
-#: ../../printerdrake.pm_.c:2648 ../../printerdrake.pm_.c:2716
+#: ../../printerdrake.pm_.c:2649 ../../printerdrake.pm_.c:2717
 msgid "Printer manufacturer, model"
 msgstr "Skriverprodusent, modell"
 
-#: ../../printerdrake.pm_.c:2657 ../../printerdrake.pm_.c:2726
+#: ../../printerdrake.pm_.c:2658 ../../printerdrake.pm_.c:2727
 msgid "Set this printer as the default"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2658 ../../printerdrake.pm_.c:2731
+#: ../../printerdrake.pm_.c:2659 ../../printerdrake.pm_.c:2732
 msgid "Print test pages"
 msgstr "Skriver ut testsider"
 
-#: ../../printerdrake.pm_.c:2659 ../../printerdrake.pm_.c:2733
+#: ../../printerdrake.pm_.c:2660 ../../printerdrake.pm_.c:2734
 #, fuzzy
 msgid "Know how to use this printer"
 msgstr "Vil du teste konfigurasjonen?"
 
-#: ../../printerdrake.pm_.c:2661 ../../printerdrake.pm_.c:2735
+#: ../../printerdrake.pm_.c:2662 ../../printerdrake.pm_.c:2736
 msgid "Remove printer"
 msgstr "Fjern skriver"
 
-#: ../../printerdrake.pm_.c:2705
+#: ../../printerdrake.pm_.c:2706
 #, fuzzy, c-format
 msgid "Removing old printer \"%s\" ..."
 msgstr "Leser skriverdata: ..."
 
-#: ../../printerdrake.pm_.c:2730
+#: ../../printerdrake.pm_.c:2731
 #, c-format
 msgid "The printer \"%s\" is set as the default printer now."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2737
+#: ../../printerdrake.pm_.c:2738
 #, c-format
 msgid "Do you really want to remove the printer \"%s\"?"
 msgstr "Ønsker du virkelig å fjerne skriveren \"%s\"?"
 
-#: ../../printerdrake.pm_.c:2739
+#: ../../printerdrake.pm_.c:2740
 #, fuzzy, c-format
 msgid "Removing printer \"%s\" ..."
 msgstr "Leser skriverdata: ..."
@@ -10147,6 +10141,10 @@ msgstr "Konfigurer lokalt nettverk"
 msgid "Click here to launch the wizard ->"
 msgstr ""
 
+#: ../../standalone/draknet_.c:257
+msgid "Wizard..."
+msgstr "Wizard..."
+
 #: ../../standalone/draknet_.c:283
 msgid "Apply"
 msgstr "Bruk"
@@ -10256,7 +10254,7 @@ msgstr "Ethernettkort"
 msgid "DHCP Client"
 msgstr "DHCP-klient"
 
-#: ../../standalone/draksec_.c:34
+#: ../../standalone/draksec_.c:31
 msgid "Setting security level"
 msgstr "Setter sikkerhetsnivå"
 
@@ -10688,25 +10686,25 @@ msgid "Configure networking"
 msgstr "Konfigurer nettverk"
 
 #: ../../steps.pm_.c:28
-#, fuzzy
-msgid "Install system updates"
-msgstr "Installer systemet"
-
-#: ../../steps.pm_.c:29
 msgid "Configure services"
 msgstr "Konfigurer tjenester"
 
-#: ../../steps.pm_.c:30
+#: ../../steps.pm_.c:29
 msgid "Install bootloader"
 msgstr "Installer oppstartslaster"
 
-#: ../../steps.pm_.c:32
+#: ../../steps.pm_.c:31
 msgid "Create a bootdisk"
 msgstr "Opprett en oppstartdiskett"
 
-#: ../../steps.pm_.c:34
+#: ../../steps.pm_.c:33
 msgid "Configure X"
 msgstr "Konfigurer X"
+
+#: ../../steps.pm_.c:34
+#, fuzzy
+msgid "Install system updates"
+msgstr "Installer systemet"
 
 #: ../../steps.pm_.c:35
 msgid "Exit install"

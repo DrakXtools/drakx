@@ -33,7 +33,7 @@ $(PMSCFILES): %_.c: %
 	./fake_c.pl $< > $@
 
 $(POFILES): DrakX.pot
-	perl -ne 'print unless /^#.*\Qdrakx-help.xml/ .. /^$$/' $@ > $@t
+	perl -ne 'print unless /^# DO NOT BOTHER TO MODIFY HERE, SEE:|^#.*\Qdrakx-help.xml/ .. /^$$/' $@ > $@t
 	if [ -e help-$@t ]; then perl -pe 's|^#~ ||' -i $@t ; msgmerge -C $@t help-$@t $< > $@; else msgmerge $@t $< > $@; fi
 	rm $@t
 
