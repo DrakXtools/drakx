@@ -152,14 +152,9 @@ sub dynamic() {
 	if (member($_->{val}{DESCRIPTION}, keys %$scanner::scannerDB)) {
 	    $name = $_->{val}{DESCRIPTION};
 	    $name =~ s/\s$//; #some HP entry have a trailing space, i will correct usbtable asap
-	    if ($scanner::scannerDB->{$name}{flags}{unsupported}) {
-		$in->ask_warn('Scannerdrake', N("The %s is not supported by this version of %s.", removeverticalbar($name), $distroname));
-		next;
-	    }
+	    next if ($scanner::scannerDB->{$name}{flags}{unsupported});
 	    scanner::confScanner($name, $_->{port},
 				 $_->{val}{vendor}, $_->{val}{id}, "");
-	} else {
-	    $in->ask_warn('Scannerdrake', N("The %s is not known by this version of Scannerdrake.", removeverticalbar($name))); 
 	}
     }
 }
