@@ -227,7 +227,7 @@ $notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0,
                                                                                        my $opt = $inv_fields{$i} || $i;
                                                                                        $security_checks_value{$i} = new_nonedit_combo([ 'yes', 'no', 'default' ], $msec->get_check_value($opt));
                                                                                        my $entry = $security_checks_value{$i}->entry;
-                                                                                       set_help_tip($entry, $msec->get_check_default($opt), $i);
+                                                                                       set_help_tip($entry, $msec->get_check_default($opt), $opt);
                                                                                        [ gtkshow(new_wrapped_label($i)), resize($security_checks_value{$i}) ];
                                                                                    } sort map { $fields{$_} || $_} $msec->list_checks)))),
                        new Gtk2::Label(N("Periodic Checks")));
