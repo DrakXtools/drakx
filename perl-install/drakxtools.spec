@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 9.1
-Release: 38mdk
+Version: 9.2
+Release: 0.1mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -311,6 +311,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue May 20 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.1mdk
+- draksec: fix #3616 (draksec discarding changes)
+- my_gtk: fix #3952 (non working drakcronat)
+
 * Fri May 16 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-38mdk
 - drakboot:
   o do not install both lilo and grub when grub is choosen
