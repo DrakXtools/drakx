@@ -360,7 +360,7 @@ sub explain_conf() {
 	print "HD_QUOTA                   Use quota to limit hard drive space used for backups.\n";
 	print "                             (not supported yet).\n";
 	print "USE_HD                     Use Hard Drive for backups (currently all modes use HD also).\n";
-	print "MAX_SPACE=                 Maximum Hard Drive Space(Mb) to consume for backups. \n";   	
+	print "MAX_SPACE=                 Maximum Hard Drive Space(MB) to consume for backups. \n";   	
 	print "USE_CD                     Use CD for backups.\n";
 	print "USE_NET                    Use network for backups (driven by NET_PROTO).\n";
 	print "USE_TAPE                   Use tape for backup.\n";
@@ -1270,7 +1270,7 @@ sub build_backup_files() {
 	}
 	my $used_space = check_storage_quota($save_path);
 	if ($used_space) {
-		my $msg = N("Backup quota exceeded!\n%d Mb used vs %d Mb allocated.", $used_space, $max_space);
+		my $msg = N("Backup quota exceeded!\n%d MB used vs %d MB allocated.", $used_space, $max_space);
 		show_warning("f", $msg);
 		$interactive and cursor_norm();
 		$results .= $msg;
@@ -2119,7 +2119,7 @@ sub advanced_where_cd {
 	}  
 	
     my $combo_where_cd_time = new Gtk2::OptionMenu();
-    $combo_where_cd_time->set_popdown_strings("650 Mb", "700 Mb", "750 Mb", "800 Mb");    
+    $combo_where_cd_time->set_popdown_strings("650 MB", "700 MB", "750 MB", "800 MB");    
  
 	my $combo_where_cdrecord_device = new Gtk2::Combo();
 	my @dev_codes;
@@ -2140,7 +2140,7 @@ sub advanced_where_cd {
 				0, gtkset_sensitive($combo_where_cd_device, $where_cd),
 			),
 			0, gtkpack_(new Gtk2::HBox(0,10),
-			0, gtkset_sensitive(new Gtk2::Label(N("Choose your CD/DVD media size (Mb)")), $where_cd),
+			0, gtkset_sensitive(new Gtk2::Label(N("Choose your CD/DVD media size (MB)")), $where_cd),
 				1, new Gtk2::VBox(0, 5),
 				0, gtkset_sensitive($combo_where_cd_time, $where_cd),
 			),
@@ -2292,7 +2292,7 @@ sub advanced_where_tape {
 			0, new Gtk2::VBox(0, 6),
 # not appropriate - disable
 #			0, gtkpack_(new Gtk2::HBox(0,10),
-#				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup (Mb)")), $where_tape),
+#				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup (MB)")), $where_tape),
 #				1, new Gtk2::VBox(0, 6),
 #				0, gtkset_size_request(gtkset_sensitive($spinner = new Gtk2::SpinButton($adj, 0, 0), $where_tape), 200, 20),
 #			),
@@ -2369,7 +2369,7 @@ sub advanced_where_hd {
 			),
 			0, new Gtk2::VBox(0, 6),
 			0, gtkpack_(new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(new Gtk2::Label(N("Maximum size\n allowed for Drakbackup (Mb)")),  $where_hd),
+				0, gtkset_sensitive(new Gtk2::Label(N("Maximum size\n allowed for Drakbackup (MB)")),  $where_hd),
 				1, new Gtk2::VBox(0, 6),
 				0, gtkset_size_request(gtkset_sensitive($spinner = new Gtk2::SpinButton($adj, 0, 0), $where_hd), 200, 20),
 			),
@@ -2810,7 +2810,7 @@ sub system_state() {
         @list_other and $system_state .= N("\n- Other Files:\n"); 
         @list_other and $system_state .= "\t\t$_\n" foreach @list_other;
         $where_hd and $system_state .= N("\n- Save on Hard drive on path: %s\n", $save_path);
-		$where_hd and $system_state .= N("\tLimit disk usage to %s Mb\n", $max_space);
+		$where_hd and $system_state .= N("\tLimit disk usage to %s MB\n", $max_space);
 
 		if ($del_hd_files && ($where_cd || $where_tape || $where_net) && $daemon_media ne 'hd')  {
 			$system_state .= N("\n- Delete hard drive tar files after backup.\n");	
@@ -3342,7 +3342,7 @@ sub restore_other_media_hd {
 			),
 	 		0, new Gtk2::VBox(0, 6),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
-	    		0, gtkset_sensitive(new Gtk2::Label(N("Enter the maximum size\n allowed for Drakbackup (Mb)")),  $where_hd),
+	    		0, gtkset_sensitive(new Gtk2::Label(N("Enter the maximum size\n allowed for Drakbackup (MB)")),  $where_hd),
 	    		1, new Gtk2::VBox(0, 6),
 	    		0, gtkset_size_request(gtkset_sensitive($spinner = new Gtk2::SpinButton($adj, 0, 0), $where_hd), 200, 20),
 			),
