@@ -194,7 +194,11 @@ my $selection = gtksignal_connect($tree->get_selection(), 'changed' => sub {
                 # this ensures proper displaying of names like /dev/fd0 (otherwise it gets 'dev/fd0/').
                 # it must come *after* the space, as the space must follow the colon following the direction of writting.
                 if_($fields{$_}[0], [ $fields{$_}[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => Gtk2::Pango->WEIGHT_BOLD } ],
-                    [ ($_ && $current_device->{$_} =~ /^(unknown)/ ? N("unknown") : $_ && $current_device->{$_} =~ /^(Unknown)/ ? N("Unknown") : $current_device->{$_}) . "\n\n", { 'foreground' => ($_ eq 'driver' && $current_device->{$_} =~ /^(unknown|Bad:|Removable:)/ ? 'indian red' : 'black') } ])
+                    [ ($_ && $current_device->{$_} =~ /^(unknown)/ ? N("unknown") :
+                       $_ && $current_device->{$_} =~ /^(Unknown)/ ? N("Unknown") : 
+                       $_ && $current_device->{$_} eq 'yes' ? N("Yes") : 
+                       $_ && $current_device->{$_} eq 'no'  ? N("No") : 
+                       $current_device->{$_}) . "\n\n", { 'foreground' => ($_ eq 'driver' && $current_device->{$_} =~ /^unknown|^Bad:/ ? 'indian red' : 'black') } ])
                 } sort keys %$current_device ]);
 
             foreach (keys %$current_device) {
@@ -202,7 +206,7 @@ my $selection = gtksignal_connect($tree->get_selection(), 'changed' => sub {
             };
             
             # if we've valid driver, let's offer to configure it, else hide buttons 
-            show_hide(defined($current_device->{driver}) && $current_device->{driver} !~ /^(unknown|Bad|Card|Hsf|.*\|.*)/, $module_cfg_button);
+            show_hide(defined($current_device->{driver}) && $current_device->{driver} !~ /^unknown|^Bad|^Card|^Hsf|^Removable:|\|/, $module_cfg_button);
             
             $current_configurator = $configurators{$id};
             show_hide(-x first(split /\s+/, $current_configurator), $config_button);  # strip arguments for -x test
@@ -252,9 +256,8 @@ foreach (@harddrake::data::tree) {
             my $i = $_;
             $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_}) } qw(bus id);
         }
-        if ($Ident =~ /FLOPPY|ZIP|DVDROM|CDROM|BURNER/) {
-            $configurator = "/usr/sbin/diskdrake --removable=$_->{device}";
-        } elsif ($Ident eq "AUDIO") {
+        harddrake::data::set_removable_configurator($Ident, $_, \$configurator);
+        if ($Ident eq "AUDIO") {
             require harddrake::sound;
             my $alter = harddrake::sound::get_alternative($_->{driver});
             $_->{alternative_drivers} = join(':', @$alter) if $alter->[0] ne 'unknown';
