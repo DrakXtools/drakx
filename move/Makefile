@@ -29,7 +29,8 @@ install: build
 	 #- todo: make_boot_img alike to create boot volume from ../mdk-stage1/stage1-cdrom (isolinux mandatory since stock kernel is so big)
 	sudo cp -f $(STAGE1)/init-move $(DEST_LIVETREE)/sbin/init
 
-	sudo cp -f runstage2 xwait $(DEST_LIVETREE)/usr/bin
+	sudo cp -f xwait $(DEST_LIVETREE)/usr/bin
+	sudo cp -f runstage2 $(DEST_LIVETREE)/usr/bin/runstage2.pl
 	sudo rm -rf $(DEST_STAGE2)
 	sudo mkdir -p $(DEST_STAGE2)
 	sudo cp -f *.pm $(DEST_STAGE2)
