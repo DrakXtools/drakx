@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.22mdk
+Release: 0.23mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -327,6 +327,21 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Sep  7 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.23mdk
+- bootloader-config: take care of symlink based bootloader entries (pixel)
+- diskdrake (pixel):
+  o ignore first line of /proc/swaps
+  o partially handle /udev/xxx device names in fstab
+  o ignore rootfs "device"
+  o don't warn for loopback files
+- drakbug: fix --report and --incident (daouda)
+- drakconnect (blino):
+  o "delete network interface" wizard:
+    * use long device names
+    * be aware of internet service -> regular ifcfg files
+  o misc fixes (especially regarding sagem ADSL modems)
+- harddrake service: really autoconf TV cards
+
 * Mon Sep  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.22mdk
 - diskdrake (pixel):
   o detect linux software raid magic
