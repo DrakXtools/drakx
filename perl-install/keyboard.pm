@@ -266,8 +266,8 @@ arch() =~ /^sparc/ ? (
  "syr_p" => [ N_("Syriac (phonetic)"), "us",        "syr_phonetic",  1 ],
  "tel" => [ N_("Telugu"),         "us",             "tel",  1 ],
 # no console kbd that I'm aware of
- "tml" => [ N_("Tamil (ISCII-layout)"), "us",       "tml",   1 ],
- "tscii" => [ N_("Tamil (Typewriter-layout)"), "us", "ta(UNI)", 1 ],
+ "tml" => [ N_("Tamil (ISCII-layout)"), "us",       "tml(INSCRIPT)",   1 ],
+ "tscii" => [ N_("Tamil (Typewriter-layout)"), "us", "tml(UNI)", 1 ],
  "th" => [ N_("Thai keyboard"),  "th",              "th",    1 ],
 # TODO: console map
  "tj" => [ N_("Tajik keyboard"), "ru4",             "tj",    1 ],
