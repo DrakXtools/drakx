@@ -264,7 +264,7 @@ sub reallyChooseGroups {
 	my $file = do {
 	    my $f = "$ENV{SHARE_PATH}/icons/" . ($o->{compssUsers}{$e}{icons} || 'default');
 	    -e "$f.png" or $f .= "_section";
-	    -e "$f.png" or $f = '$ENV{SHARE_PATH}/icons/default_section';
+	    -e "$f.png" or $f = "$ENV{SHARE_PATH}/icons/default_section";
 	    "$f.png";
 	};
 	my $check = Gtk::CheckButton->new($text);
