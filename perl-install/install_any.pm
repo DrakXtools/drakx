@@ -1176,12 +1176,12 @@ sub install {
 sub ensure_is_installed {
     my ($do, $pkg, $file, $auto) = @_;
 
-    if (! -e $file) {
+    if (! -e "$::prefix$file") {
 	$do->{o}->ask_okcancel('', _("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
 	  or return if !$auto;
 	$do->{o}->do_pkgs->install($pkg);
     }
-    if (! -e $file) {
+    if (! -e "$::prefix$file") {
 	$do->{o}->ask_warn('', _("Mandatory package %s is missing", $pkg));
 	return;
     }
