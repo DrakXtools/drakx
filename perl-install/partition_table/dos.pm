@@ -215,8 +215,10 @@ sub read {
 
 # write the partition table (and extended ones)
 # for each entry, it uses fields: start, size, pt_type, active
-sub write($$$;$) {
+sub write {
     my ($hd, $sector, $pt) = @_;
+
+    log::l("partition::dos::write $hd->{device}" . backtrace());
 
     #- handle testing for writing partition table on file only!
     my $F;
