@@ -324,7 +324,7 @@ sub syscall_ {
 
 sub salt($) {
     my ($nb) = @_;
-    require 'devices.pm';
+    require devices;
     open F, devices::make("random") or die "missing random";
     my $s; read F, $s, $nb;
     local $_ = pack "b8" x $nb, unpack "b6" x $nb, $s;
