@@ -735,7 +735,7 @@ sub get_that_type {
 
     grep {
 	if ($type eq 'isdn') {
-	    my $b = $_->{driver} =~ /ISDN:(.*),?(.*)/;
+	    my $b = $_->{driver} =~ /ISDN:([^,]*),?(.*)/;
 	    if ($b) {
 		$_->{driver} = $1;
 		$_->{options} = $2;

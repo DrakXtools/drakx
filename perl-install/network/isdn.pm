@@ -1,6 +1,6 @@
 package network::isdn;
 
-use common qw(:common :file);
+use common qw(:common :file :system);
 use any;
 use modules;
 use log;
@@ -42,16 +42,18 @@ sub isdn_write_config {
     my $e = $in->ask_from_list_(_("Network Configuration Wizard"),
 				    _("Which ISDN configuration do you prefer?
 
-* The full configuration uses isdn4net. It contains powerfull tools, but is tricky to configure for a newbie, and not standard.
+* The Old configuration uses isdn4net. It contains powerfull tools, but is tricky to configure for a newbie, and not standard.
 
-* The light configuration is easier to understand, more standard, but with less tools.
+* The New configuration is easier to understand, more standard, but with less tools.
 
 We recommand the light configuration.
 
-"), [ __("Light configuration"), __("Full configuration (isdn4net)")]
+"), [ __("New configuration (isdn-light)"), __("Old configuration (isdn4net)")]
 				   ) or return;
-    $install->($e =~ /Light/ ? 'isdn-light' : 'isdn4net', 'isdn4k-utils');
-    isdn_write_config_backend($isdn, $e =~ /Light/);
+    #FIXME debug only
+    system('urpmi --auto --best-output ' . join(' ', $e =~ /light/ ? 'isdn-light' : 'isdn4net', 'isdn4k-utils'));
+    #$install->($e =~ /light/ ? 'isdn-light' : 'isdn4net', 'isdn4k-utils');
+    isdn_write_config_backend($isdn, $e =~ /light/);
     $::isStandalone and ask_connect_now($isdn, 'ippp0');
     1;
 }
@@ -66,7 +68,12 @@ We recommand the light configuration.
 sub isdn_write_config_backend {
     my ($isdn, $light) = @_;
     if ($light) {
-	any::setup_thiskind($in, 'isdn', !$::expert, 1);
+	modules::mergein_conf("$prefix/etc/modules.conf");
+	@c = any::setup_thiskind($in, 'isdn', !$::expert, 1);
+	modules::add_alias("ippp0", $c[0]{driver});
+	isdn_detect_backend($isdn);
+
+	$::isStandalone and modules::write_conf($prefix);
 	foreach my $f ('ioptions1B', 'ioptions2B') {
 	    substInFile { s/^name .*\n//; $_ .= "name $isdn->{login}\n" if eof  } "$prefix/etc/ppp/$f";
 	    chmod 0600, $f;
@@ -99,6 +106,7 @@ I4L_MEMBASE="$isdn->{mem}"
 I4L_PORT="$isdn->{io}"
 I4L_IO0="$isdn->{io0}"
 I4L_IO1="$isdn->{io1}"
+I4L_ID="isdn_card"
 );
 
 	output "$prefix/etc/ppp/ioptions",
@@ -212,6 +220,7 @@ sub isdn_detect {
 	    isdn_ask($isdn, $netc, _("I have detected an ISDN PCI Card, but I don't know the type. Please select one PCI card on the next screen.")) or return;
 	} else {
 	  isdn_detect_step_1:
+	    print "plop isdn protocol\n";
 	    $isdn->{protocol}=isdn_ask_protocol() or return;
 	  isdn_detect_step_2:
 	    isdn_ask_info($isdn, $netc) or goto isdn_detect_step_1;
@@ -236,7 +245,11 @@ sub isdn_detect_backend {
   	$isdn->{$_} = $c->{$_} foreach qw(description vendor id driver options);
 	$isdn->{$_} = sprintf("%0x", $isdn->{$_}) foreach ('vendor', 'id');
 	$isdn->{card_type} = 'pci';
-	$isdn->{type} = $network::netconnect::isdnid2type{$isdn->{vendor} . $isdn->{id}}; #If the card is not listed, type is void. You have to ask it then.
+	($isdn->{type}) = $isdn->{options} =~ /type=(\d+)/;
+	if ($c->{options} !~ /protocol/ && $isdn->{protocol}) {
+	    $c->{options} .= "protocol=" . $isdn->{protocol};
+	}
+	$c->{options} =~ /protocol=(\w+)/ and $isdn->{protocol} = $1;
     }
 }
 

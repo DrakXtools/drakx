@@ -156,7 +156,6 @@ ifdown eth0
 	);
     my $i=0;
     map { defined $set_default or do { $_->[1] and $set_default=$i; }; $i++; } @l;
-    foreach (keys %{$netc->{autodetect}}) { print "plop $_\n" };
     my $e = $in->ask_from_entries_refH(_("Network Configuration Wizard"),
 				       _("Choose"),
 				       [

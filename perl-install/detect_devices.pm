@@ -190,8 +190,21 @@ sub getDAC960() {
 }
 
 sub getNet() {
+#      my @a;
+#      foreach (@netdevices) {
+#  	$::isStandalone && /plip/ and next;
+#  	print (" hhhhh $_ \n");
+#  	/ippp/ and run_program::rooted("", "/sbin/isdnctrl addif $_");
+#  	c::hasNetDevice($_) and push @a, $_;
+#      }
+#      /ippp/ and run_program::rooted("", "/sbin/isdnctrl delif $_") foreach @netdevices;
+#      @a;
     grep { !($::isStandalone && /plip/) && c::hasNetDevice($_) } @netdevices;
 }
+
+#sub getISDN() {
+#    mapgrep(sub {member (($_[0] =~ /\s*(\w*):/), @netdevices), $1 }, split(/\n/, cat_("/proc/net/dev")));
+#}
 
 sub pci_probe {
     my ($probe_type) = @_;

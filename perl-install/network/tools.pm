@@ -1,6 +1,6 @@
 package network::tools;
 
-use common qw(:common :file);
+use common qw(:common :file :system);
 use run_program;
 use vars qw(@ISA @EXPORT);
 use globals "network", qw($in $prefix $install $disconnect_file $connect_prog);
@@ -11,8 +11,8 @@ use globals "network", qw($in $prefix $install $disconnect_file $connect_prog);
 
 sub write_secret_backend {
     my ($a, $b) = @_;
-    foreach ("pap-secrets", "chap-secrets") {
-	substInFile { s/^$a.*\n//; $_ .= "\n'$a' * '$b' * \n" if eof  } "$prefix/etc/ppp/$_";
+    foreach my $i ("pap-secrets", "chap-secrets") {
+	substInFile { s/^$a.*\n//; $_ .= "\n'$a' * '$b' * \n" if eof  } "$prefix/etc/ppp/$i";
     }
 }
 
