@@ -875,7 +875,7 @@ sub set {
 	#- removing everything
 	#- except in model locale: only removing LC_COLLATE if it is there
 	#eval { rm_rf($_ eq $model_locale ? "$dir/$_/LC_COLLATE" : "$dir/$_") } foreach all($dir);
-	eval { if ($_ ne $model_locale) { rm_rf("$dir/$_"); }; } foreach all($dir);
+	eval { $_ ne $model_locale and rm_rf("$dir/$_") } foreach all($dir);
 	
 	if (!-e "$dir/$model_locale") {
 	    #- getting the model locale
