@@ -24,7 +24,6 @@ use interactive;
 use standalone;
 use netconnect;
 use c;
-use Data::Dumper;
 
 my $xpm_path="/usr/share/libDrakX/pixmaps";
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
@@ -349,7 +348,6 @@ sub configure_lan {
     my @infos;
     my @conf_data;
 
-    print "#############\n" . Data::Dumper->Dump([$intf],["$intf"]) . "\n";
     $window->set_policy (1, 1, 1);
     $window->signal_connect ( delete_event => sub { Gtk->main_quit; });
     $window->set_position(1);
