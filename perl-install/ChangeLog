@@ -1,3 +1,390 @@
+2004/07/26  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/be.po: small fix
+
+2004/07/26  Pixel  <pixel at mandrakesoft.com>
+
+	* tools/make_mdkinst_stage2, install_steps_gtk.pm, docs/README,
+	Makefile.config, mdk-stage1/disk.c, pkgs.pm, mdk-stage1/doc/TECH-INFOS,
+	share/po/Makefile, install_steps.pm, standalone/drakpxe,
+	Makefile.drakxtools, Makefile, mdk-stage1/config-stage1.h, lang.pm,
+	tools/Makefile, install2.pm, modules.pm, rescue/Makefile,
+	share/advertising/Makefile, mdk-stage1/network.c,
+	tools/i386/netboot/menu.lst.example, install_any.pm: adapt to new
+	directories layout:
+	  - Mandrake/mdkinst -> install/stage2/live
+	  - Mandrake/base/mdkinst_stage2.bz2 ->
+	install/stage2/mdkinst_stage2.bz2
+	  - Mandrake/base/rpmsrate -> media/media_info/rpmsrate
+	  - Mandrake/RPMS -> media/main
+	  - images -> install/images
+	  - isolinux -> install/isolinux
+	  - Mandrake/share/advertising -> install/extra/advertising
+
+	* fs/format.pm: fix typo
+
+2004/07/23  fisher
+
+	* share/po/uk.po: Ukrainian translation update.
+
+2004/07/23  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakconnect: remove useless $lan_button and $host_button in
+	old drakconnect
+	cosmetics (remove useless blanks at end of line)
+	prepare for network::tools::reread_net_conf removal
+
+	* network/network.pm: hey, I suck, that's DIAL_ON_IFUP, not DIAL_ON_BOOT
+	  - introduce ONBOOT and DIAL_ON_BOOT settings for isdn connections
+	  - write this settings with configureNetwork2, kill the old tweak in
+	isdn.pm
+	  - use the isdn_dial_on_boot step instead of nework_on_boot in
+	netconnect.pm
+
+	* network/adsl.pm: pptp connections are now handled by pppd (#6515)
+
+	* network/isdn.pm: 
+	  - introduce ONBOOT and DIAL_ON_BOOT settings for isdn connections
+	  - write this settings with configureNetwork2, kill the old tweak in
+	isdn.pm
+	  - use the isdn_dial_on_boot step instead of nework_on_boot in
+	netconnect.pm
+	FIRMWARE isn't used by ifup-ippp
+
+	* network/netconnect.pm: hey, I suck, that's DIAL_ON_IFUP, not
+	DIAL_ON_BOOT
+	perl_checker compliance
+	one more FIXME comment
+	  - introduce ONBOOT and DIAL_ON_BOOT settings for isdn connections
+	  - write this settings with configureNetwork2, kill the old tweak in
+	isdn.pm
+	  - use the isdn_dial_on_boot step instead of nework_on_boot in
+	netconnect.pm
+
+2004/07/23  Pixel  <pixel at mandrakesoft.com>
+
+	* fs.pm, fs/format.pm: replace pt_type2name($part->{pt_type}) with
+	part2name($part)
+	(hoisting the dereferencing {pt_type})
+	  - move format related functions out of fs.pm to new module
+	fs/format.pm
+	  - remove swap.pm, moving its few functions to fs/format.pm or fs.pm
+
+	* diskdrake/hd_gtk.pm, install_any.pm: replace
+	pt_type2name($part->{pt_type}) with part2name($part)
+	(hoisting the dereferencing {pt_type})
+
+	* tools/mkhdlist: obsolete since 4 years
+
+	* partition_table.pm: replace pt_type2name($part->{pt_type}) with
+	part2name($part)
+	(hoisting the dereferencing {pt_type})
+	  - simplify partition table entry names (based on fdisk's names)
+	  - rename some internal variables
+	old dos is not useful anymore
+	simplify
+
+	* tools/updatehdlist: remove fpons only tool
+
+	* diskdrake/interactive.pm: replace pt_type2name($part->{pt_type}) with
+	part2name($part)
+	(hoisting the dereferencing {pt_type})
+	  - move format related functions out of fs.pm to new module
+	fs/format.pm
+	  - remove swap.pm, moving its few functions to fs/format.pm or fs.pm
+	fix indentation
+
+	* loopback.pm, raid.pm, commands.pm, swap.pm: 
+	  - move format related functions out of fs.pm to new module
+	fs/format.pm
+	  - remove swap.pm, moving its few functions to fs/format.pm or fs.pm
+
+2004/07/23  Vincent Guardiola <vguardiola at mandrakesoft.com>
+
+	* authentication.pm: remove print coin and pwet in find_srv_name function
+	clean function find_srv_name
+	Add "net time set -S $server" to AD et SMBKRB config, for clock sync
+	(kerberos require)
+
+2004/07/22  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/network.pm: rewrite read_tmdns_conf to use cat_
+	perl_checker/misc fixes
+
+2004/07/22  Pixel  <pixel at mandrakesoft.com>
+
+	* modules/any_conf.pm: perl_checker enhancement
+	add $Id
+	modules::modprobe_conf now works (at least a little :)
+
+	* fsedit.pm: shorter and faster
+	set {is_removable} directly in fsedit::hds()
+
+	* modules/modprobe_conf.pm, modules/modules_conf.pm: add $Id
+	modules::modprobe_conf now works (at least a little :)
+
+	* drakxtools.spec: need latest MDK::Common
+
+	* modules.pm: cleanup
+	modules::modprobe_conf now works (at least a little :)
+
+	* fs.pm: set {is_removable} directly in fsedit::hds()
+
+	* detect_devices.pm: 
+	  - isRemovableDrive() removed, partially replaced with may_be_a_hd()
+	  - the main difference is that isRemovableDrive() checked
+	isRemovableUsb() whereas
+	may_be_a_hd() allows more usb removable drives
+	  (esp. memory cards and some usb keys declared as memory cards (0x0c76
+	0x0005))
+	simplify
+	  - re-indent
+	  - use begins_with()
+	more cleanup
+	cleanup
+	isRemovableDrive() doesn't check isRemovableUsb() anymore allowing more
+	usb
+	removable drives (esp. some usb keys declared as memory cards (0x0c76
+	0x0005))
+
+	* network/network.pm: perl_checker compliance
+	  - don't use if_() when not needed and strange
+	  - read_tmdns_conf() now knows which file it reads, don't give it as
+	argument
+
+2004/07/22  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone.pm (rename) only log succesfull renamings
+
+	* network/network.pm (read_tmdns_conf) unbreak oblin code
+	(read_tmdns_conf) reinsert parameter naming for parameter checking
+
+	* drakxtools.spec: bump drakconf conflict due to new drakconnect API
+
+2004/07/21  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/drakautoinst: perl_checker fixes
+
+	* standalone/drakboot, standalone/drakfloppy: remove unused variable
+
+	* standalone/draksec, standalone/drakpxe, network/smb.pm: perl_checker
+	compliance
+
+	* harddrake/autoconf.pm, standalone/service_harddrake: use
+	do_pkgs_standalone->new instead of class_discard
+	  - %modules::conf is no more a global, so many functions need passing
+	$modules_conf
+	  - $modules_conf is a class choosing modules.conf or modprobe.conf
+	(esp. useful after install) (but not working yet!)
+	  - modules::load() doesn't use $modules_conf, use
+	modules::load_and_configure()
+	  - modules::load() doesn't allow options, use either
+	modules::load_raw() or modules::load_and_configure()
+	  - some functions used to want an array ref for modules options and
+	some a string, now every functions use a string
+	  - many functions (like modules::get_alias()) are now methods on
+	$modules_conf
+	  - some functions in mouse.pm needed a $in where a $do_pkgs is enough
+	  - some perl_checker compliance
+	  - small fixes
+
+	* do_pkgs.pm: 
+	  - do_pkgs_standalone->new doesn't *need* a $in anymore
+	  - ->in replace ->{in} so that it can be created on demand (ugly,
+	but...)
+	  ->{in}->do_pkgs gives the same kind of object, removing it
+
+	* standalone/XFdrake: XFdrake doesn't modify modules_conf! (or does it?)
+
+	* network/network.pm, install_steps.pm, network/isdn.pm,
+	install_steps_interactive.pm, network/netconnect.pm, mouse.pm,
+	install2.pm, modules/modprobe_conf.pm, harddrake/v4l.pm,
+	modules/interactive.pm, standalone/mousedrake, commands.pm,
+	printer/detect.pm, printer/main.pm, standalone/printerdrake,
+	harddrake/sound.pm, install_steps_auto_install.pm, network/ethernet.pm,
+	modules/any_conf.pm, standalone/drakconnect, modules/modules_conf.pm,
+	standalone/drakgw, harddrake/data.pm, network/adsl.pm,
+	detect_devices.pm, modules.pm, network/shorewall.pm, network/tools.pm,
+	Xconfig/default.pm, standalone/draksound, install_any.pm,
+	printer/printerdrake.pm, standalone/drakxtv: 
+	  - %modules::conf is no more a global, so many functions need passing
+	$modules_conf
+	  - $modules_conf is a class choosing modules.conf or modprobe.conf
+	(esp. useful after install) (but not working yet!)
+	  - modules::load() doesn't use $modules_conf, use
+	modules::load_and_configure()
+	  - modules::load() doesn't allow options, use either
+	modules::load_raw() or modules::load_and_configure()
+	  - some functions used to want an array ref for modules options and
+	some a string, now every functions use a string
+	  - many functions (like modules::get_alias()) are now methods on
+	$modules_conf
+	  - some functions in mouse.pm needed a $in where a $do_pkgs is enough
+	  - some perl_checker compliance
+	  - small fixes
+
+2004/07/21  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* .perl_checker: blacklist URPM::Resolve
+
+	* standalone/drakauth: perl_checker fix
+
+	* lang.pm: fix xmodifiers setting which is broken since
+	perl-MDK-Common-1.1.13-1mdk
+
+	* drakxtools.spec: 10-57mdk
+	bump requires on perl-MDK-Common b/c of localedrake vs CJK issue
+
+2004/07/21  Vincent Guardiola <vguardiola at mandrakesoft.com>
+
+	* authentication.pm: Add service smb et winbind restart in smbkrb config
+
+2004/07/20  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/tools.pm: merge netconnect::load_conf in netconnect::read_conf
+	(and replace all calls to lload_conf with read_conf, remove all previous
+	calls to read_conf)
+	don't probe again connection type here since now
+	network::netconnect::load_conf does it as intended initially
+
+	* install_steps_interactive.pm: use correct method variable in chooseCD
+	(even if this code is used only in expert
+	mode which isn't anymore supported)
+
+	* network/netconnect.pm: fix perl_checker combo (yeah)
+	oops, fix suckiness
+	use read_net_conf to avoid code duplication
+	merge netconnect::load_conf in netconnect::read_conf (and replace all
+	calls to lload_conf with read_conf, remove all previous calls to
+	read_conf)
+	unused variable
+	don't forget to send $netcnx to network::network::read_all_conf ...
+	(or else we won't get back the probed connection type)
+
+	* standalone/draksound: do not probe devices twice (and avoid to grep on
+	detect_devices::probeall()), cosmetics
+
+	* standalone/net_monitor: merge netconnect::load_conf in
+	netconnect::read_conf (and replace all calls to lload_conf with
+	read_conf, remove all previous calls to read_conf)
+	cosmetics
+	do not allocate new Gtk2::Gdk::GC at each redraw (last memory leak
+	fixed ?)
+	use the power of the Gtk2::Dialog widget, thus giving change_color()
+	more luck to succeed
+	translate connection type (Fabrice Facorat)
+	fix spacing (from Fabrice Facorat, #10300), remove blank line
+
+	* standalone/drakconnect: maxi perl_checker compliance combo
+	do not read conf in add_intf, this is already done by the netconnect
+	wizard
+	merge netconnect::load_conf in netconnect::read_conf (and replace all
+	calls to lload_conf with read_conf, remove all previous calls to
+	read_conf)
+
+2004/07/20  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/translation_size.pl, share/po/be.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/he.po, share/po/ca.po,
+	share/po/da.po, share/po/ar.po, share/po/ltg.po, share/po/nb.po,
+	share/po/ky.po, share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/lv.po, share/po/hu.po,
+	share/po/fa.po, share/po/id.po, share/po/ru.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/uk.po, share/po/mn.po, share/po/am.po, lang.pm,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/validate.pl, share/po/eo.po,
+	share/po/bg.po, share/po/cs.po, share/po/el.po, share/po/uz@Latn.po:
+	changed MandrakeSoft -> Mandrakesoft
+
+2004/07/20  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: remove debugging code
+
+	* authentication.pm, install_steps_gtk.pm: perl_checker compliance
+
+	* mdk-stage1/dns.c, mdk-stage1/pcmcia_/cardmgr.c, standalone/drakfirewall,
+	share/advertising/pwp-02.pl, rescue/restore_ms_boot,
+	mdk-stage1/mkinitrd_helper/mkinitrd_helper.c, tools/genmodparm,
+	tools/gencryptofiles, rescue/tree/sbin/fakeshutdown, standalone/drakpxe,
+	mdk-stage1/config-stage1.h, standalone/drakvpn, standalone/drakboot,
+	standalone.pm, mdk-stage1/init-libc-headers.h, standalone/drakTermServ,
+	mdk-stage1/mar/mar-frontend.c, mdk-stage1/probing.h,
+	standalone/drakbackup, mdk-stage1/pcmcia_/probe.c,
+	mdk-stage1/insmod-busybox/insmod-frontend.c,
+	tools/serial_probe/serial_probe.c, mdk-stage1/disk.h,
+	mdk-stage1/modules.c, mdk-stage1/mount.c, standalone/printerdrake,
+	standalone/fileshareset, standalone/drakedm, mdk-stage1/modules.h,
+	share/advertising/dwd-01.pl, mdk-stage1/mar/mar.h,
+	share/advertising/dis-01.pl, standalone/drakhelp, standalone/XFdrake,
+	mdk-stage1/insmod.h, mdk-stage1/rp-pppoe/src/Makefile,
+	mdk-stage1/pcmcia_/pcmcia.h, standalone/drakupdate_fstab,
+	mdk-stage1/bzlib/Makefile, scanner.pm, mdk-stage1/Makefile.common,
+	mdk-stage1/stdio-frontend.c, standalone/drakproxy,
+	tools/ppc/mkINSTALLCD, share/advertising/dwd-06.pl,
+	mdk-stage1/rescue-gui.c, mdk-stage1/nfsmount.c, mdk-stage1/network.h,
+	mdk-stage1/doc/README, mdk-stage1/log.h, standalone/drakfloppy,
+	mdk-stage1/newt/Makefile, standalone/drakfont,
+	mdk-stage1/newt-frontend.c, share/advertising/ppp-01.pl,
+	rescue/tree/etc/profile, share/advertising/dis-09.pl,
+	mdk-stage1/network.c, mdk-stage1/disk.c, rescue/guessmounts,
+	mdk-stage1/url.c, standalone/logdrake, mdk-stage1/automatic.h,
+	mdk-stage1/frontend.h, mdk-stage1/insmod-modutils/insmod-frontend.c,
+	rescue/lsparts, mdk-stage1/usb-resource/Makefile, mdk-stage1/url.h,
+	mdk-stage1/probing.c, mdk-stage1/mar/mar-extract-only.h,
+	mdk-stage1/cdrom.c, mouse.pm, mdk-stage1/lomount.h, mdk-stage1/dhcp.h,
+	standalone/net_monitor, mdk-stage1/stage1.c, diskdrake/diskdrake.html,
+	mdk-stage1/dhcp.c, mdk-stage1/init.c, mdk-stage1/pci-resource/Makefile,
+	mdk-stage1/mkinitrd_helper/Makefile, install2, mdk-stage1/Makefile,
+	rescue/install_bootloader, mdk-stage1/lomount.c, mdk-stage1/adsl.h,
+	share/advertising/ppp-09.pl, mdk-stage1/adsl.c, mdk-stage1/dns.h,
+	mdk-stage1/automatic.c, mdk-stage1/mar/mar-extract-only.c,
+	standalone/drakconnect, tools/shift_img.c, standalone/drakbug,
+	tools/make_lang_png_transparent.c, mdk-stage1/frontend-common.c,
+	standalone/draksound, standalone/drakxtv, mdk-stage1/tools.h,
+	share/compssUsers.server, mdk-stage1/slang/Makefile,
+	mdk-stage1/minilibc.h, standalone/drakautoinst, mdk-stage1/cdrom.h,
+	mdk-stage1/Makefile.mkinitrd_helper, mdk-stage1/stage1.h,
+	standalone/diskdrake, mdk-stage1/doc/documented..frontend.h,
+	mdk-stage1/mount.h, mdk-stage1/directory.c, rescue/drvinst,
+	mdk-stage1/mar/Makefile, mdk-stage1/directory.h, mdk-stage1/log.c,
+	install_messages.pm, mdk-stage1/modules_descr.h, standalone/drakgw,
+	mdk-stage1/pcmcia_/Makefile, mdk-stage1/tools.c,
+	share/advertising/pwp-01.pl, tools/syncrpms,
+	share/advertising/pwp-08.pl, mdk-stage1/ppp/pppd/Makefile,
+	standalone/scannerdrake, mdk-stage1/minilibc.c: MandrakeSoft ->
+	Mandrakesoft
+
+	* share/list: adapt to file renaming
+
+2004/07/20  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* authentication.pm: better looking wizard
+
+	* lang.pm (write) better check parameter rather than EUID
+	(write) do not bother trying to write /etc/menu-methods/lang.h when
+	run as a user
+
+	* standalone/drakauth: better looking wizard
+	put help out of the radiobutton
+
+2004/07/20  Vincent Guardiola <vguardiola at mandrakesoft.com>
+
+	* authentication.pm: remove ask_warn winbind or SFU and add new entry in
+	kinds
+	Add desciption for authentification type
+	Add Entry for IDMAP
+	clean code
+
+	* standalone/drakauth: Add type => 'list' in ask_from
+
 2004/07/20  Pixel  <pixel at mandrakesoft.com>
 
 	* share/list: adapt to file renaming
@@ -32865,7 +33252,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.932 2004/07/15 02:21:22 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.933 2004/07/20 02:11:20 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
