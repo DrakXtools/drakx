@@ -38,7 +38,7 @@ sub options {
 }
 sub mount_point { 
     my ($in, $raw_hd, $all_hds) = @_;
-    diskdrake::interactive::Mount_point_raw_hd($in, $raw_hd, $all_hds);
+    diskdrake::interactive::Mount_point_raw_hd($in, $raw_hd, $all_hds, [ "/mnt/$raw_hd->{device}" ] );
 }
 sub type {
     my ($in, $raw_hd) = @_;
