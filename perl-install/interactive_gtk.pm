@@ -528,8 +528,8 @@ sub ask_fromW {
     $pack->pack_start($advanced_pack, 1, 1, 0);
     gtkadd($mainw->{window}, $pack);
     if (!$::isEmbedded && !$::isWizard || $my_gtk::pop_it) {
-	$mainw->{rwindow}->set_default_size($mainw->{box_width}, $mainw->{box_height}) if $has_scroll;
-	$mainw->{rwindow}->set_default_size($mainw->{box_width}, 0) if $has_horiz_scroll;
+	$mainw->{rwindow}->set_default_size($mainw->{box_width}+6+$my_gtk::shape_width, $mainw->{box_height}+6+3+$my_gtk::shape_width) if $has_scroll;
+	$mainw->{rwindow}->set_default_size($mainw->{box_width}+6+$my_gtk::shape_width, 0) if $has_horiz_scroll;
     }
     $set_advanced->(0);
     (@widgets ? $widgets[0]{focus_w} : $common->{focus_cancel} ? $mainw->{cancel} : $mainw->{ok})->grab_focus();
