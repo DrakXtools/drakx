@@ -98,7 +98,7 @@ $window->{window}->add(
                                                              ),
                                                    ),
                                          ),
-                                
+                                1, Gtk2::VBox->new,
                                 0, gtkpack__(new Gtk2::HButtonBox(),
                                              gtksignal_connect(Gtk2::Button->new(N("Cancel")),
                                                                clicked => sub { ugtk2->exit(0) }

@@ -235,8 +235,8 @@ Launch \"lilo\" as root in command line to complete LiLo theme installation."));
 my $x_box;
 
 gtkadd($window,
-       gtkpack__(new Gtk2::VBox(0,0),
-                 gtkadd(new Gtk2::Frame($disp_mode),
+       gtkpack_(new Gtk2::VBox(0,0),
+                0, gtkadd(new Gtk2::Frame($disp_mode),
                         #			  gtkpack__(new Gtk2::VBox(0,0),
                         (gtkpack_(gtkset_border_width(new Gtk2::HBox(0, 0),5),
                                   1, my $boot_label = Gtk2::WrappedLabel->new(""),
@@ -248,7 +248,7 @@ gtkadd($window,
                        ),
                  #Splash Selector
                  if_($splash_working,
-                 gtkadd(my $thm_frame = new Gtk2::Frame(N("Splash selection")),
+                 0, gtkadd(my $thm_frame = new Gtk2::Frame(N("Splash selection")),
                         gtkpack(gtkset_border_width(new Gtk2::HBox(0, 5), 5),
                                   gtkpack__(new Gtk2::VBox(0, 5),
                                             N("Themes"),
@@ -269,7 +269,7 @@ gtkadd($window,
                                             $thm_button))
                        ),
                     ),
-                 gtkadd(new Gtk2::Frame(N("System mode")),
+                 0, gtkadd(new Gtk2::Frame(N("System mode")),
                         gtkpack__(new Gtk2::VBox(0, 5),
                                   gtksignal_connect(gtkset_active(new Gtk2::CheckButton(N("Launch the graphical environment when your system starts")), $x_mode), clicked => sub {
                                                         $x_box->set_sensitive(!$x_mode);
@@ -295,7 +295,8 @@ gtkadd($window,
                                            )
                                  )
                        ),
-                 gtkadd(Gtk2::HButtonBox->new,
+                 1, Gtk2::VBox->new,
+                 0, gtkadd(Gtk2::HButtonBox->new,
                         gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { ugtk2->exit(0) }),
                         gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub { 
                                               Xconfig::various::runlevel($x_mode ? 5 : 3);
@@ -303,7 +304,7 @@ gtkadd($window,
                                               ugtk2->exit(0);
                                           }),
                        )
-                )
+               )
       );
 
 $auto_buttons[0]->signal_connect('toggled' => sub { $auto_box->set_sensitive($auto_buttons[0]->get_active) });
