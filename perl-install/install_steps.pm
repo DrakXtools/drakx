@@ -93,20 +93,22 @@ sub selectLanguage {
     if ($o->{keyboard_unsafe} || !$o->{keyboard}) {
 	$o->{keyboard_unsafe} = 1;
 	$o->{keyboard} = keyboard::lang2keyboard($o->{lang});
-	selectKeyboard($o) if !$::live;
+	keyboard::setup($o->{keyboard}) if !$::live;
     }
+
+    addToBeDone {
+	lang::write_langs($o->{prefix}, $o->{langs});
+    } 'formatPartitions' unless $::g_auto_install;
+    addToBeDone {
+	lang::write($o->{prefix}, $o->{lang});
+    } 'installPackages' unless $::g_auto_install;
 }
 #------------------------------------------------------------------------------
 sub selectKeyboard {
     my ($o) = @_;
     keyboard::setup($o->{keyboard});
 
-    #- if we go back to the selectKeyboard, you must rewrite
     addToBeDone {
-	lang::write_langs($o->{prefix}, $o->{langs});
-    } 'formatPartitions' unless $::g_auto_install;
-    addToBeDone {
-	lang::write($o->{prefix}, $o->{lang});
 	keyboard::write($o->{prefix}, $o->{keyboard}, lang::lang2charset($o->{lang}));
     } 'installPackages' unless $::g_auto_install;
 }

@@ -365,7 +365,7 @@ sub write {
     my ($prefix, $keyboard, $charset, $isNotDelete) = @_;
 
     my $config = read_raw($prefix);
-    put_in_hash($config, { 
+    put_in_hash($config, {
 			  KEYTABLE => keyboard2kmap($keyboard), 
 			  KBCHARSET => $charset,
 			 });
@@ -373,7 +373,7 @@ sub write {
 			DISABLE_WINDOWS_KEY => bool2yesno(detect_devices::isLaptop()),
 			BACKSPACE => $isNotDelete ? "BackSpace" : "Delete",
 		       });
-    setVarsInSh("$prefix/etc/sysconfig/keyboard", %$config);
+    setVarsInSh("$prefix/etc/sysconfig/keyboard", $config);
     run_program::rooted($prefix, "dumpkeys > /etc/sysconfig/console/default.kmap") or log::l("dumpkeys failed");
 }
 

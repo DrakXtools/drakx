@@ -155,7 +155,8 @@ sub selectKeyboard {
     my $l = keyboard::lang2keyboards($o->{lang});
 
     #- good guess, don't ask
-    return if !$::expert && !$clicked && $l->[0][1] > 90;
+    return install_steps::selectKeyboard($o) 
+      if !$::expert && !$clicked && $l->[0][1] > 90;
 
     my @best = map { $_->[0] } @$l;
     push @best, 'us_intl' if !member('us_intl', @best);
