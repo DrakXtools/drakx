@@ -169,7 +169,11 @@ lomount(char *loopfile, char *where, char **dev, int gz)
 	flag = MS_MGC_VAL;
 	flag |= MS_RDONLY;
 
+#ifdef MANDRAKE_MOVE
+	my_insmod("change_loop", ANY_DRIVER_TYPE, NULL);
+#else
 	my_insmod("loop", ANY_DRIVER_TYPE, NULL);
+#endif
 
         if (!(loopdev = find_free_loop())) {
 		log_message("could not find a free loop");
