@@ -297,8 +297,26 @@ sub assign_device_numbers($) {
     my ($hd) = @_;
 
     my $i = 1;
-    $_->{device} = $hd->{prefix} . $i++ foreach @{$hd->{primary}{raw}},
+    my $start = 1; 
+    
+    #- on PPC we need to assign device numbers to the holes too - big FUN!
+    if (arch() =~ /ppc/) {
+	#- first sort the normal parts
+	$hd->{primary}{normal} = [sort { $a->{start} <=> $b->{start} } @{$hd->{primary}{normal}} ];
+    
+	#- now loop through them, assigning partition numbers - reserve one for the holes
+	foreach (@{$hd->{primary}{normal}}) {
+	    if ($_->{start} > $start) {
+		log::l("PPC: found a hole on $hd->{prefix} before $_->{start}, skipping device..."); 
+		$i++;
+	    }
+	    $_->{device} = $hd->{prefix} . $i++;
+	    $start = $_->{start} + $_->{size};
+	}
+    } else {	    
+	$_->{device} = $hd->{prefix} . $i++ foreach @{$hd->{primary}{raw}},
                                                 map { $_->{normal} } @{$hd->{extended} || []};
+    }
 
     #- try to figure what the windobe drive letter could be!
     #
@@ -560,7 +578,7 @@ sub add_primary($$) {
 }
 
 sub add_extended {
-    arch() =~ /^sparc/ and die _("Extended partition not supported on this platform");
+    arch() =~ /^sparc|ppc/ and die _("Extended partition not supported on this platform");
 
     my ($hd, $part, $extended_type) = @_;
     $extended_type =~ s/Extended_?//;

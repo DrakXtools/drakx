@@ -362,9 +362,9 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 			    code => sub { log::l("Using XFree $xf4_ver with 3D hardware acceleration") } };
     }
     if (arch() =~ /ppc/) {
-	#- not much choice for PPC - we only have XF4    
-	@choices = { text => _("XFree %s", $xf4_ver), code => '' };
-	log::l("Using XFree $xf4_ver");
+	#- not much choice for PPC - we only have XF4, and Xpmac from the installer   
+	@choices = { text => _("XFree %s", $xf4_ver), code => sub { $card->{xpmac} = ''; log::l("Using XFree $xf4_ver") } };
+	push @choices, { text => _("Xpmac (installation display driver)"), code => sub { $card->{xpmac} = 1 }} if ($ENV{DISPLAY});
     }
     #- examine choice of user, beware the list MUST NOT BE REORDERED AS the first item should be the
     #- proposed one by DrakX.
@@ -373,7 +373,14 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     $tc or $tc = $choices[0];
     $tc->{code} and $tc->{code}();
     
-	
+    if ($card->{xpmac} eq "1") {
+	log::l("Use Xpmac - great...");
+	#- define this stuff just so XF86Config isn't empty - we don't need it for Xpmac
+	$card->{type} = "Xpmac Frame Buffer Driver";
+	$card->{vendor} = $card->{board} = "None";
+	$card->{driver} = $card->{server} = "Xpmac";
+    }
+    	
     $card->{prog} = "/usr/X11R6/bin/" . ($card->{use_xf4} ? 'XFree86' : $card->{server} =~ /Sun(.*)/ ?
 					 "Xsun$1" : "XF86_$card->{server}");
 
@@ -390,7 +397,13 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     if ($card->{Utah_glx}) {
 	push @l, 'Mesa' if !$card->{use_xf4};
     }
-
+    if ($card->{xpmac} eq "1") {
+	push @l, 'XFree86-Xpmac';
+	$card->{use_xf4} = '';
+	$card->{prog} = "/usr/X11R6/bin/Xpmac";
+	$card->{server} = 'Xpmac';
+    }
+    
     -x "$prefix$card->{prog}" or $install && $install->($card->{use_xf4} ? 'XFree86-server' : "XFree86-$card->{server}", @l);
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
 
@@ -1424,7 +1437,9 @@ Current configuration is:
 		rename "$f-4", "$f-4.old";
 		rename "$f.test", $f;
 		rename "$f.test-4", "$f-4";
-		symlinkf "../..$o->{card}{prog}", "$prefix/etc/X11/X";
+		if ($o->{card}{server} !~ /Xpmac/) {
+		    symlinkf "../..$o->{card}{prog}", "$prefix/etc/X11/X";
+		}
 	    }
 	}
 

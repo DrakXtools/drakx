@@ -224,7 +224,7 @@ sub keyboard2kmap { $keyboards{$_[0]} && $keyboards{$_[0]}[1] }
 sub keyboard2xkb  { $keyboards{$_[0]} && $keyboards{$_[0]}[2] }
 
 sub loadkeys_files {
-    my $archkbd = arch() =~ /^sparc/ ? "sun" : arch() =~ /i.86/ ? "i386" : arch();
+    my $archkbd = arch() =~ /^sparc/ ? "sun" : arch() =~ /i.86/ ? "i386" : arch() =~ /ppc/ ? "mac" : arch();
     my $p = "/usr/lib/kbd/keymaps/$archkbd";
     my $post = ".kmap.gz";
     my %trans = ("cz-latin2" => "cz-lat2");
@@ -304,7 +304,17 @@ sub xmodmap_file {
 }
 
 sub setup {
-    return if arch() =~ /^sparc|ppc/;
+    return if arch() =~ /^sparc/;
+
+    #- Xpmac doesn't map keys quite right
+    if (arch() =~ /ppc/ && !$::testing && $ENV{DISPLAY}) {
+	log::l("Fixing Mac keyboard");
+	run_program::run('xmodmap', "-e",  "keycode 59 = BackSpace" );
+	run_program::run('xmodmap', "-e",  "keycode 131 = Shift_R" );
+	run_program::run('xmodmap', "-e",  "add shift = Shift_R" );
+	return;
+    }
+
     my ($keyboard) = @_;
     my $o = $keyboards{$keyboard} or return;
 

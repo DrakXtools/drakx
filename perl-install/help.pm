@@ -376,7 +376,17 @@ Please be patient."),
 selectMouse => 
  __( "You can now test your mouse. Use buttons and wheel to verify
 if settings are good. If not, you can click on \"Cancel\" to choose another
-driver."),
+driver.
+
+
+If you are installing on an Apple machine with a 1-button mouse, you will
+be given the opportunity to define some keyboard keys to emulate the 2nd
+and 3rd mouse buttons.  This will allow you to be able to access the full
+functionality of the mouse in both the Linux console and the X Window GUI.
+
+
+If you have an ADB mouse, please select USB, as the Linux kernel will take
+care of mapping your mouse hardware correctly."),
 
 selectSerialPort => 
  __("Please select the correct port. For example, the COM1
