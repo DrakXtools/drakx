@@ -33,7 +33,7 @@
 #   Drakbackup allows you to backup your system on:
 # 	- Harddrive.
 # 	- NFS.
-# 	- CDR (CDRW), DVDR (with autoboot, rescue and autoinstall.).
+# 	- CD-R (CDRW), DVD-R (with autoboot, rescue and autoinstall.).
 # 	- FTP.
 # 	- Rsync.
 # 	- Webdav.
@@ -191,7 +191,7 @@ my $remove_user_before_restore = 0;
 my @file_list_to_send_by_ftp;
 my $results;
 my @net_methods = ("ftp", "rsync", "ssh", "webdav");
-my @media_types = ("cd", "hd", "tape");
+my @media_types = ("cd", translate(N_("hd")), translate(N_("tape")));
 my %cd_devices;
 my $std_device;
 my @tape_devices;
@@ -1072,7 +1072,7 @@ sub check_for_cd() {
 	my $command = "cdrecord dev=$cd_device -atip";
 	spawn_progress($command, "Check for media in drive");
 	if ($log_buff =~ /No disk/) {
-		show_warning("f", N("No CDR/DVDR in drive!"));
+		show_warning("f", N("No CD-R/DVD-R in drive!"));
 		return 1;
 	}
 	if ($log_buff !~ /ATIP info from disk/) {
@@ -2187,7 +2187,7 @@ sub advanced_where_cd {
 
     gtkpack($advanced_box,
 		$box_where_cd = gtkpack_(new Gtk2::VBox(0, 6),
-			0, my $check_where_cd = new Gtk2::CheckButton(N("Use CD/DVDR to backup")),
+			0, my $check_where_cd = new Gtk2::CheckButton(N("Use CD-R/DVD-R to backup")),
 			0, new Gtk2::HSeparator,
 			0, gtkpack_(new Gtk2::HBox(0,10),
 			0, gtkset_sensitive(new Gtk2::Label(N("Choose your CD/DVD device")), $where_cd),
@@ -2217,7 +2217,7 @@ sub advanced_where_cd {
 			0, new Gtk2::VBox(0, 5),
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				1, new Gtk2::VBox(0, 5),
-				0, gtkset_sensitive(new Gtk2::Label(N("DVDR device")), $where_cd),
+				0, gtkset_sensitive(new Gtk2::Label(N("DVD-R device")), $where_cd),
 				0, gtkset_sensitive(my $check_dvdr = new Gtk2::CheckButton(), $where_cd),
 				0, gtkset_sensitive(new Gtk2::Label(N("DVDRAM device")), $where_cd),
 				0, gtkset_sensitive(my $check_dvdram = new Gtk2::CheckButton(), $where_cd),
@@ -2506,7 +2506,7 @@ sub advanced_where() {
 	));
     $button_where_cd->add(gtkpack(new Gtk2::HBox(0,10),
 		gtkcreate_img("ic82-CD-40"),
-		new Gtk2::Label(N("CDR / DVDR")),
+		new Gtk2::Label(N("CD-R / DVD-R")),
 		new Gtk2::HBox(0, 5)
 	));
     $button_where_hd->add(gtkpack(new Gtk2::HBox(0,10),
@@ -2814,7 +2814,7 @@ sub wizard_step2() {
 					}), $where_net),
 				),
  				0, gtkpack_(new Gtk2::HBox(0, 15),	      
- 					0, my $check_wizard_cd = new Gtk2::CheckButton(N("On CDR")),
+ 					0, my $check_wizard_cd = new Gtk2::CheckButton(N("On CD-R")),
  					1, new Gtk2::VBox(0, 5),	
  					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
  						destroy_widget();
@@ -3014,7 +3014,7 @@ sub system_state() {
 		
 		$daemon_media and $system_state .= N("\n- Daemon (%s) include:\n", $when_space);
 		$daemon_media eq 'hd' and $system_state .= N("\t-Hard drive.\n");    
-		$daemon_media eq 'cd' and $system_state .= N("\t-CDR.\n");
+		$daemon_media eq 'cd' and $system_state .= N("\t-CD-R.\n");
 		$daemon_media eq 'tape' and $system_state .= N("\t-Tape \n");    
 		$daemon_media eq 'ftp' and $system_state .= N("\t-Network by FTP.\n");    
 		$daemon_media eq 'ssh' and $system_state .= N("\t-Network by SSH.\n");    
