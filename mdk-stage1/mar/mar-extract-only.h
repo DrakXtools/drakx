@@ -28,8 +28,8 @@
 
 #include "mar.h"
 
-mar_stream * open_marfile(char *filename);
-int extract_file(mar_stream *s, char *filename, char *dest_dir);
-int calc_integrity(mar_stream *s);
+int open_marfile(char *filename, struct mar_stream *s);
+int extract_file(struct mar_stream *s, char *filename, char *dest_dir);
+int calc_integrity(struct mar_stream *s);
 
 #endif

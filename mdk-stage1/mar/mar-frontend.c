@@ -28,9 +28,9 @@
 #include "mar-extract-only.h"
 
 void
-list_files(mar_stream *s)
+list_files(struct mar_stream *s)
 {
-	mar_element * elem = s->first_element;
+	struct mar_element * elem = s->first_element;
 	printf("%-20s%8s\n", "FILENAME", "LENGTH");
 	while (elem)
 	{
@@ -86,7 +86,7 @@ create_marfile(char *dest_file, char **files)
 		total_length += fsiz;
 		filenum++;
 	}
-	temp_marfile_buffer = (char *) malloc(total_length); /* create the whole file in-memory  */
+	temp_marfile_buffer = (char *) alloca(total_length); /* create the whole file in-memory  */
 	DEBUG_MAR(printf("D: mar::create_marfile total-length %d\n", total_length););
 
 	current_offset_filetable = sizeof(int); /* first file is after the crc */
@@ -178,11 +178,14 @@ main(int argc, char **argv)
 	{
 		if (strcmp(argv[1], "-l") == 0)
 		{
-			mar_stream *s = open_marfile(argv[2]);
-			if (!s)
+			struct mar_stream s;
+			if (open_marfile(argv[2], &s) != 0)
+			{
+				fprintf(stderr, "E: open-marfile-failed\n");
 				exit(-1);
-			list_files(s);
-			if (s->crc32 == calc_integrity(s))
+			}
+			list_files(&s);
+			if (s.crc32 == calc_integrity(&s))
 				printf("CRC OK\n");
 			else
 				printf("CRC FAILED!\n");
@@ -190,13 +193,13 @@ main(int argc, char **argv)
 		}
 		if ((strcmp(argv[1], "-x") == 0) && argc >= 4)
 		{
-			mar_stream *s = open_marfile(argv[2]);
+			struct mar_stream s;
 			int i = 3;
-			if (!s)
+			if (open_marfile(argv[2], &s) != 0)
 				exit(-1);
 			while (i < argc)
 			{
-				int res = extract_file(s, argv[i], "./");
+				int res = extract_file(&s, argv[i], "./");
 				if (res == 1)
 					fprintf(stderr, "W: file-not-found-in-archive %s\n", argv[i]);
 				if (res == -1)
@@ -215,7 +218,14 @@ main(int argc, char **argv)
 				i++;
 			}
 			files[argc-3] = NULL;
-			exit(create_marfile(argv[2], files));
+			{
+				int results;
+				results = create_marfile(argv[2], files);
+				if (results != 0)
+					fprintf(stderr, "E: create-marfile-failed\n");
+				exit(results);
+			}
+					
 		}
 	}
 	

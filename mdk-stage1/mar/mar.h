@@ -53,20 +53,20 @@
  *
  */
 
-typedef struct mar_element_s
+struct mar_element
 {
 	char * filename;             /* filename (ASCIIZ) of the element */
 	int file_length;             /* length (in bytes) of the raw data of the element */
 	int data_offset;             /* seek start of the raw data in the underlying mar stream */
-	struct mar_element_s * next_element;  /* pointer to the next element in the mar stream; NULL if last */
-} mar_element;
+	struct mar_element * next_element;  /* pointer to the next element in the mar stream; NULL if last */
+};
 
-typedef struct mar_stream_s
+struct mar_stream
 {
 	int crc32;                    /* crc32 of the mar stream; it is the addition of all the 8-bit char's from the stream */
-	mar_element * first_element;  /* pointer to the first element inside the mar stream */
+	struct mar_element * first_element;  /* pointer to the first element inside the mar stream */
 	gzFile mar_gzfile;            /* associated gzFile (opened) */
-} mar_stream;
+};
 
 int gz_errnum;
 

@@ -34,7 +34,7 @@ gzerr(gzFile f) /* decrease code size */
 }
 
 int
-calc_integrity(mar_stream *s)
+calc_integrity(struct mar_stream *s)
 {
 	char buf[4096];
 	int current_crc = 0;
@@ -64,9 +64,9 @@ calc_integrity(mar_stream *s)
 
 
 int
-extract_file(mar_stream *s, char *filename, char *dest_dir)
+extract_file(struct mar_stream *s, char *filename, char *dest_dir)
 {
-	mar_element * elem = s->first_element;
+	struct mar_element * elem = s->first_element;
 	while (elem)
 	{
 		if (strcmp(elem->filename, filename) == 0)
@@ -74,7 +74,7 @@ extract_file(mar_stream *s, char *filename, char *dest_dir)
 			char *buf;
 			char *dest_file;
 			int fd;
-			dest_file = (char *) malloc(strlen(dest_dir) + strlen(filename) + 1);
+			dest_file = (char *) alloca(strlen(dest_dir) + strlen(filename) + 1);
 			strcpy(dest_file, dest_dir);
 			strcat(dest_file, filename);
 			fd = creat(dest_file, 00660);
@@ -83,7 +83,7 @@ extract_file(mar_stream *s, char *filename, char *dest_dir)
 				perror(dest_file);
 				return -1;
 			}
-			buf = (char *) malloc(elem->file_length);
+			buf = (char *) alloca(elem->file_length);
 			if (!buf)
 			{
 				perror(dest_file);
@@ -113,26 +113,25 @@ extract_file(mar_stream *s, char *filename, char *dest_dir)
 }
 
 
-mar_stream *
-open_marfile(char *filename)
+int
+open_marfile(char *filename, struct mar_stream *s)
 {
 	int end_filetable = 0;
-	mar_stream * s = (mar_stream *) malloc(sizeof(mar_stream));
-	mar_element * previous_element = NULL;
+	struct mar_element * previous_element = NULL;
 
 	/* mar_gzfile */
 	s->mar_gzfile = gzopen(filename, "rb");
 	if (!s->mar_gzfile)
 	{
 		perror(filename);
-		return NULL;
+		return -1;
 	}
 
 	/* crc32 */
 	if (gzread(s->mar_gzfile, &(s->crc32), sizeof(int)) != sizeof(int))
 	{
 		gzerr(s->mar_gzfile);
-		return NULL;
+		return -1;
 	}
 
 	DEBUG_MAR(printf("D: mar::open_marfile crc-in-marfile %d\n", s->crc32););
@@ -140,13 +139,13 @@ open_marfile(char *filename)
 	if (s->crc32 != calc_integrity(s))
 	{
 		fprintf(stderr, "E: mar::open_marfile CRC check failed\n");
-		return NULL;
+		return -1;
 	}
 	else
 		if (gzseek(s->mar_gzfile, sizeof(int), SEEK_SET) != sizeof(int))
 		{
 			gzerr(s->mar_gzfile);
-			return NULL;
+			return -1;
 		}
 
 	while (end_filetable == 0)
@@ -159,27 +158,27 @@ open_marfile(char *filename)
 			if (gzread(s->mar_gzfile, &(buf[ptr]), sizeof(char)) != sizeof(char))
 			{
 				gzerr(s->mar_gzfile);
-				return NULL;
+				return -1;
 			}
 			ptr++;
 		} while ((buf[ptr-1] != 0) && (ptr < 512));
 		/* ptr == 1 when we arrive on the "char 0" of the end of the filetable */
 		if (ptr > 1)
 		{
-			mar_element * e = (mar_element *) malloc(sizeof(mar_element));
+			struct mar_element * e = (struct mar_element *) malloc(sizeof(struct mar_element));
 			e->filename = strdup(buf);
 			DEBUG_MAR(printf("D: mar::open_marfile processing-file %s\n", e->filename););
 			/* read file_length */
 			if (gzread(s->mar_gzfile, &(e->file_length), sizeof(int)) != sizeof(int))
 			{
 				gzerr(s->mar_gzfile);
-				return NULL;
+				return -1;
 			}
 			/* read data_offset */
 			if (gzread(s->mar_gzfile, &(e->data_offset), sizeof(int)) != sizeof(int))
 			{
 				gzerr(s->mar_gzfile);
-				return NULL;
+				return -1;
 			}
 			/* write down chaining */
 			if (previous_element)
@@ -195,6 +194,6 @@ open_marfile(char *filename)
 	/* chaining for last element */
 	previous_element->next_element = NULL;
 
-	return s;
+	return 0;
 }
 
