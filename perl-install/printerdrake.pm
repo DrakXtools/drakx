@@ -756,7 +756,6 @@ sub choose_model {
     if (!$printer::thedb{$printer->{DBENTRY}}) {
 	$printer->{DBENTRY} = _("Raw printer (No driver)");
     }
-    $in->set_help('configurePrinterType') if $::isInstall;
     # Choose the printer/driver from the list
     return ($printer->{DBENTRY} = $in->ask_from_treelist(_("Printer model selection"),
 							 _("Which printer model do you have?"), '|',
