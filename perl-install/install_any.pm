@@ -142,7 +142,7 @@ sub getFile {
     } || errorOpeningFile($f);
 }
 sub getAndSaveFile {
-    my ($file, $local) = @_;
+    my ($file, $local) = @_ == 1 ? ("Mandrake/mdkinst$_[0]", $_[0]) : @_;
     local *F; open F, ">$local" or return;
     local $/ = \ (16 * 1024);
     my $f = ref($file) ? $file : getFile($file) or return;
@@ -886,5 +886,44 @@ sub write_fstab {
 	if !$::live;
 }
 
+my @bigseldom_used_groups = (
+  [ qw(pvcreate pvdisplay vgchange vgcreate vgdisplay vgextend vgremove vgscan lvcreate lvdisplay lvremove /lib/liblvm.so) ],
+);
+
+sub check_prog {
+    my ($f, $prefix) = @_;
+
+    my @l = $f !~ m|^/| ?
+        map { "$_/$f" } split(":", $ENV{PATH}) :
+	$f;
+    return if grep { -x "$prefix$_" } @l;
+
+    #remove_bigseldom_used();
+    foreach (@bigseldom_used_groups) {
+	my ($f_, @l) = map { m|^/| ? $_ : "/usr/bin/$_" } $f, @$_;
+	if (member($f_, @l)) {
+	    foreach (@l) {
+		getAndSaveFile("Mandrake/mdkinst$_", "$prefix$_");
+		chmod 0755, "$prefix$_";
+	    }
+	    last;
+	}
+    }
+}
+
+sub remove_bigseldom_used {
+    log::l("remove_bigseldom_used");
+    unlink glob_("/usr/share/gtk/themes/$_*") foreach qw(DarkMarble marble3d);
+    if (ref($::o) =~ /gtk/) {
+	unlink glob_("/lib/lib$_*") foreach qw(slang newt);
+	unlink "/usr/bin/perl-install/auto/Newt/Newt.so";
+    } else {
+	unlink glob_("/usr/X11R6/bin/XF*");
+    }
+    unlink(m|^/| ? $_ : "/usr/bin/$_") foreach 
+      ((map { @$_ } @bigseldom_used_groups),
+       qw(mkreiserfs resize_reiserfs),
+      );
+}
 
 1;
