@@ -1,3 +1,35 @@
+2002/01/16  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_steps_interactive.pm: installUpdates: use formatAlaTeX
+
+2002/01/16  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm: fix cancel on scsi module loading
+
+	* install_steps_interactive.pm: don't drop default_packages in "Base
+	system only"
+
+	* standalone/fileshareset: add locking to ensure things are in a proper
+	state
+
+2002/01/15  dam's  <damien@mandrakesoft.com>
+
+	* install_steps_gtk.pm: advertising engine amelioration
+
+	* my_gtk.pm: automatic icon placement in icon_labels_widget
+
+2002/01/15  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake_interactive.pm: remove the test trick
+	encrypted filesystem handling:
+	  - using losetup
+	  - add "Options" for partitions in diskdrake (expert mode)
+
+	* c/stuff.xs.pm, fs.pm, share/list, fsedit.pm, devices.pm, install_any.pm,
+	diskdrake.pm: encrypted filesystem handling:
+	  - using losetup
+	  - add "Options" for partitions in diskdrake (expert mode)
+
 2002/01/15  dam's  <damien@mandrakesoft.com>
 
 	* network/isdn_consts.pm: updated
