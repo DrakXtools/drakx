@@ -609,7 +609,7 @@ notation (for example, 1.2.3.4).");
                              { label => N("Sensitivity threshold"), val => \$ethntf->{WIRELESS_SENS} },
                              { label => N("Bitrate (in b/s)"), val => \$ethntf->{WIRELESS_RATE} },
                              { label => N("Encryption key"), val => \$ethntf->{WIRELESS_ENC_KEY} },
-                             { label => N("RTS/CTS)"), val => \$ethntf->{WIRELESS_RTS},
+                             { label => N("RTS/CTS"), val => \$ethntf->{WIRELESS_RTS},
                                help => N("RTS/CTS adds a handshake before each packet transmission to make sure that the
 channel is clear. This adds overhead, but increase performance in case of hidden
 nodes or large number of active nodes. This parameters set the size of the
