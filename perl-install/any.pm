@@ -243,14 +243,23 @@ arch() !~ /sparc/ ? (
     1;
 }
 
+my @etc_pass_fields = qw(name pw uid gid realname home shell);
+sub unpack_passwd {
+    my ($l) = @_;
+    chomp $l;
+    my %l; @l{@etc_pass_fields} = split ':', $l;
+    \%l;
+}
+sub pack_passwd {
+    my ($l) = @_;
+    join(':', @$l{@etc_pass_fields}) . "\n";
+}
+
 sub setAutologin {
   my ($prefix, $user, $desktop) = @_;
-  if ($user) {
-      local *F;
-      open F, ">$prefix/etc/sysconfig/desktop" or die "Can't open $!";
-      print F uc($desktop) . "\n";
-      close F;
-  }
+
+  output "$prefix/etc/sysconfig/desktop", uc($desktop), "\n" if $user;
+
   setVarsInSh("$prefix/etc/sysconfig/autologin",
 	      { USER => $user, AUTOLOGIN => bool2yesno($user), EXEC => "/usr/X11R6/bin/startx" });
 }
