@@ -60,7 +60,7 @@ install:
 	sudo cp -f $(patsubst %, $(INSTALL)/pixmaps/langs/lang-%.png, $(LANG_FILES)) $(DEST_LIVETREE)/usr/share/langs
 
 	 #- overwrite /usr/lib/libDrakX files of the live tree with those in CVS
-	(cd $(DEST_LIVETREE)/usr/lib/libDrakX ; find -name "*.pm") | egrep -v 'ctxhelp|drakfirsttime' | (cd $(INSTALL) ; sudo cpio -pLumd $(DEST_LIVETREE)/usr/lib/libDrakX/)
+	(cd $(DEST_LIVETREE)/usr/lib/libDrakX ; find -name "*.pm") | egrep -v 'ctxhelp|drakfirsttime|xfree3|xfree4|xfreeX' | (cd $(INSTALL) ; sudo cpio -pLumd $(DEST_LIVETREE)/usr/lib/libDrakX/)
 
 	 #- overwrite stuff.so of drakxtools because it doesn't contain C_DRAKX stuff
 	sudo cp -f ../perl-install/c/blib/arch/auto/stuff/stuff.so $(DEST_LIVETREE)/usr/lib/libDrakX/auto/c/stuff
