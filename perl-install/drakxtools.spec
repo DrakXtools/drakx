@@ -399,7 +399,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
     (#5429)  (pixel)
   o remove /boot/grub/messages and don't use the i18n command which
     are obsolete since grub doesn't handle it anymore (pixel)
-- drakconnect: fix sagem800 configuratio (poulpy)
+- drakconnect: fix sagem800 configuration (poulpy)
 - drakdisk: basic lvm2 support (pixel)
 - drakfloppy must not be in drakxtools-newt, must now require mkbootdisk
   (which is not installed by default anymore)
