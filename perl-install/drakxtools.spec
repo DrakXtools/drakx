@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.19mdk
+Release: 0.20mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Feb 19 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.20mdk
+- fix broken "advanced" and "help" buttons (pixel)
+- switch japanese from kinput2 to uim input method
+- fix file dialog when embedded (#7984) (pixel)
+- drakbackup (stew):
+  o fix issue with multisession CDs (Anthill #349)
+  o encourage user to finish configuring media before leaving wizard.
+- drakvpn (florin):
+  o add plenty of help files, add anonymous support for sainfo
+  o add quite much help explanations
+  o add anonymous support in sainfo
+- harddrake2: sanitize buttons layout when embedded
+
 * Wed Feb 18 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.19mdk
 - diskdrake: type 0x17 can be ntfs
 - drakbackup: rework backupignore behavior (Anthill #306) (stew)
