@@ -252,7 +252,7 @@ sub trouble {
 - \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use
 by default
 
-- \"grep snd-slot /etc/modules.conf\" will tell you what driver it
+- \"grep sound-slot /etc/modules.conf\" will tell you what driver it
 currently uses
 
 - \"/sbin/lsmod\" will enable you to check if its module (driver) is
