@@ -116,6 +116,7 @@ $my_win->{window}->add(gtkpack_(gtkset_border_width(Gtk2::VBox->new, $::isEmbedd
                                                             #verify that we have a valid hostname (thx sam)
                                                             $choosed_serv =~ s/[^-a-zA-Z0-9.]//g;
                                                             system("/usr/sbin/ntpdate", $choosed_serv);
+                                                            update_time(); #- get the new time before updating the hwclock
                                                             system("service ntpd start");
                                                         } else {
                                                             if (-e $ntpdlock) { 
