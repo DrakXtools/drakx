@@ -429,6 +429,7 @@ sub del_intf() {
                               N("Congratulations, the \"%s\" network interface has been succesfully deleted", $intf2delete)
                              )
                          },
+                         end => 1,
                         },
                 },
       };
