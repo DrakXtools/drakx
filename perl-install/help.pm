@@ -325,7 +325,7 @@ act as a server, or if you were not successful in getting the display
 configured."),
 
 createBootdisk => 
-N_("Checking \"Create a boot disk\" allows you to have a rescue bot media
+N_("Checking \"Create a boot disk\" allows you to have a rescue boot media
 handy.
 
 The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by
@@ -721,7 +721,7 @@ twice. If you do happen to make the same typing error twice, this
 ``incorrect'' password will have to be used the first time you connect.
 
 If you wish access to this computer to be controlled by an authentication
-server, clisk the \"Advanced\" button.
+server, click the \"Advanced\" button.
 
 If your network uses either LDAP, NIS, or PDC Windows Domain authentication
 services, select the appropriate one as \"authentication\". If you do not
