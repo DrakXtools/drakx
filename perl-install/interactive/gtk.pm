@@ -548,7 +548,7 @@ sub ask_fromW {
 
     gtkpack_($pack,
 	     1, $create_widgets->($always_total_size, @widgets_always),
-	     if_($common->{ok} || $::isWizard, 
+	     if_($common->{ok} || !exists $common->{ok},
 		 0, $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', if_(@$l2, $advanced_button))));
     my $has_scroll_always = $has_scroll;
     my @adv = map { warp_text($_) } @{$common->{advanced_messages}};
