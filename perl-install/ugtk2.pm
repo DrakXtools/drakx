@@ -12,8 +12,8 @@ $::o = { locale => lang::read() } if !$::isInstall;
     wrappers => [ qw(gtkadd gtkappend gtkappend_page gtkappenditems gtkcombo_setpopdown_strings gtkdestroy
                      gtkentry gtkflush gtkhide gtkmodify_font gtkmove gtkpack gtkpack2 gtkpack2_
                      gtkpack2__ gtkpack_ gtkpack__ gtkpowerpack gtkput gtkradio gtkresize gtkroot
-                     gtkset_active gtkset_border_width gtkset_editable gtkset_justify gtkset_alignment gtkset_layout gtkset_markup
-                     gtkset_modal gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_name
+                     gtkset_active gtkset_border_width gtkset_editable gtkset_justify gtkset_alignment gtkset_layout gtkset_line_wrap
+                     gtkset_markup gtkset_modal gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_name
                      gtkset_property gtkset_relief gtkset_selectable gtkset_sensitive gtkset_shadow_type gtkset_size_request
                      gtkset_text gtkset_tip gtkset_visibility gtksetstyle gtkshow gtksignal_connect gtksize gtktext_append
                      gtktext_insert ) ],
