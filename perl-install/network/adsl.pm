@@ -19,9 +19,9 @@ sub get_wizard {
 	     'pppoe' =>  N("use pppoe"),
 	     'pptp'  =>  N("use pptp"),
 	     'dhcp'  =>  N("use dhcp"),
-	     'speedtouch' => N("Alcatel speedtouch usb") . if_($netc->{autodetect}{adsl}{speedtouch}, N(" - detected")),
-	     'sagem' =>  N("Sagem (using pppoa) usb") . if_($netc->{autodetect}{adsl}{sagem}, N(" - detected")),
-	     'sagem_dhcp' =>  N("Sagem (using dhcp) usb") . if_($netc->{autodetect}{adsl}{sagem}, N(" - detected")),
+	     'speedtouch' => N("Alcatel Speedtouch USB") . if_($netc->{autodetect}{adsl}{speedtouch}, N(" - detected")),
+	     'sagem' =>  N("Sagem (using PPPOA) USB") . if_($netc->{autodetect}{adsl}{sagem}, N(" - detected")),
+	     'sagem_dhcp' =>  N("Sagem (using DHCP) USB") . if_($netc->{autodetect}{adsl}{sagem}, N(" - detected")),
           # 'eci' => N("ECI Hi-Focus"), # this one needs eci agreement
 	    );
     
