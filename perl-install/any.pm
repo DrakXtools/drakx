@@ -261,7 +261,7 @@ sub setupBootloader__general {
             { label => N("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert, format => sub { $bootloader::vga_modes{$_[0]} }, advanced => 1 },
 		),
             { label => N("Delay before booting default image"), val => \$b->{timeout} },
-            { label => N("Force ACPI"), val => \$force_acpi, type => 'bool' },
+            { label => N("Enable ACPI"), val => \$force_acpi, type => 'bool' },
             { label => N("Force No APIC"), val => \$force_noapic, type => 'bool' },
 		if_($security >= 4 || $b->{password} || $b->{restricted},
             { label => N("Password"), val => \$b->{password}, hidden => 1 },
