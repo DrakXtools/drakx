@@ -45,7 +45,7 @@ while (my $e = shift @l) {
     }
 }
 
-my @types = qw(hd nfs smb dav removable fileshare list-hd);
+my @types = qw(hd nfs smb dav removable fileshare list-hd change-geometry);
 my ($type, $para) = ('hd', '');
 foreach (@types) {
     if (exists $options{$_}) {
@@ -80,6 +80,13 @@ $all_hds->{current_fstab} = fs::fstab_to_string($all_hds, '');
 
 if ($type eq 'list-hd') {
     print partition_table::description($_), "\n" foreach fsedit::get_all_fstab($all_hds);    
+} elsif ($type eq 'change-geometry') {
+    $para =~ s|^/dev/||;
+    my ($device, undef, $heads, $sectors) = $para =~ /(.+)=(\d+,)?(\d+),(\d+)$/ or die "usage: diskdrake --change-geometry=<device>=[<cylinders>,]<heads>,<sectors>\n";
+    my $hd = find { $_->{device} eq $device } @{$all_hds->{hds}};
+    put_in_hash($hd->{geom}, { heads => $heads, sectors => $sectors });
+    $hd->{isDirty} = 1;
+    partition_table::write($hd);
 } elsif ($type eq 'hd') {
     require diskdrake::interactive;
     diskdrake::interactive::main($in, $all_hds, 0, '', sub { 
