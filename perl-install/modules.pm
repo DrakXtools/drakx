@@ -818,20 +818,6 @@ sub configure_pcmcia {
     read_already_loaded();
 }
 
-sub get_pcmcia_devices {
-    my (@devs, $desc);
-
-    foreach (cat_("/var/run/stab")) {
-	if (/^Socket\s+\d+:\s+(.*)/) {
-	    $desc = $1;
-	} else {
-	    my (undef, $type, $module, undef, $device) = split;
-	    push @devs, { description => $desc, driver => $module, type => $type, device => $device };
-	}
-    }
-    @devs;
-}
-
 sub write_pcmcia {
     my ($prefix, $pcmcia) = @_;
 

@@ -236,14 +236,28 @@ sub usb_probe {
     } c::usb_probe();
 }
 
+sub pcmcia_probe {
+    -e "/var/run/stab" or return ();
+
+    my (@devs, $desc);
+    foreach (cat_("/var/run/stab")) {
+	if (/^Socket\s+\d+:\s+(.*)/) {
+	    $desc = $1;
+	} else {
+	    my (undef, $type, $module, undef, $device) = split;
+	    push @devs, { description => $desc, driver => $module, type => $type, device => $device };
+	}
+    }
+    @devs;
+}
+
 # pci_probe with $probe_type is unsafe for pci! (bug in kernel&hardware)
-# get_pcmcia_devices provides field "device", used in network.pm
+# pcmcia_probe provides field "device", used in network.pm
 # => probeall with $probe_type is unsafe
 sub probeall {
     my ($probe_type) = @_;
     require sbus_probing::main;
-    require modules;
-    pci_probe($probe_type), usb_probe(), sbus_probing::main::probe(), modules::get_pcmcia_devices();
+    pci_probe($probe_type), usb_probe(), pcmcia_probe(), sbus_probing::main::probe();
 }
 sub matching_desc {
     my ($regexp) = @_;
