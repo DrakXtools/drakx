@@ -18,7 +18,6 @@ my $default_vga = "vga=788";
 my $instdir = "mdk-stage1";
 my $tmp_mnt = '/tmp/drakx_mnt';
 my $tmp_mnt_initrd = '/tmp/drakx_mnt2';
-my $mke2fs = "/sbin/mke2fs -q -m 0 -F -s 1";
 
 my $sudo;
 if ($>) {
@@ -28,6 +27,11 @@ if ($>) {
 
 sub __ { print @_, "\n"; system(@_) }
 sub _ { __ @_; $? and die }
+sub mke2fs { 
+    my ($f) = @_;
+    _ "/sbin/mke2fs -q -m 0 -F -s 1 $f";
+    _ "/sbin/tune2fs -c 0 -U clear -T 1970010101 $f";
+}
 
 _ "$sudo mkdir -p $tmp_mnt $tmp_mnt_initrd";
 mkdir "images";
@@ -59,7 +63,7 @@ foreach my $img (@images) {
 	isolinux($main, @kernels);
 
 	if (my ($tftpboot) = grep { -e $_ } qw(/tftpboot /var/lib/tftpboot)) {
-	    system("/bin/cp -f isolinux/alt0/* $tftpboot 2>/dev/null");
+	    system("/bin/cp -f isolinux/alt0/* $tftpboot");
 	}
     } elsif ($img =~ /move/) {
 	isolinux_move($main);
@@ -131,7 +135,7 @@ sub initrd {
 
     __ "$sudo umount $tmp $mnt 2>/dev/null";
     _ "dd if=/dev/zero of=$tmp bs=1k count=" . ($arch =~ /ia64/ ? ($type eq "all" ? 16386 : 16384) : ($type eq "all" ? 5000 : 2000));
-    _ "$mke2fs $tmp";
+    mke2fs($tmp);
     _ "$sudo mount -t ext2 $tmp $mnt -o loop";
 
     _ "$sudo tar xjC $mnt -f $tar";
@@ -271,7 +275,7 @@ sub boot_img_alpha {
 
     __ "$sudo umount $mnt 2>/dev/null";
     _ "dd if=/dev/zero of=$img bs=1k count=1440";
-    _ "$mke2fs $img";
+    mke2fs($img);
     _ "/sbin/e2writeboot $img /boot/bootlx";
     _ "$sudo mount -t ext2 $img $mnt -o loop";
     _ "cp -f vmlinux.gz $mnt";
@@ -800,7 +804,7 @@ sub drivers {
     my ($type, $I, $img) = @_;
 
     _ "dd if=/dev/zero of=$img bs=1k count=1440";
-    _ "$mke2fs $img";
+    mke2fs($img);
     _ "$sudo mount -t ext2 $img $tmp_mnt -o loop";
 
     my ($ext) = $img =~ /img-(.*)/ or die "bad image name ($img)";
