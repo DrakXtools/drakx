@@ -33,7 +33,7 @@ local $_ = join '', @ARGV;
 
 /-h/ and die "usage: XFdrake [--xf3] [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
 
-my $i = {};
+my $X = {};
 
 $::force_xf3 = /-xf3/;
 $::beginner = /-beginner/;
@@ -41,7 +41,7 @@ $::expert = /-expert/;
 $::auto = /-auto/;
 $::noauto = /-noauto/;
 $::testing = /-testing/;
-$i->{skiptest} = /-skiptest/;
+$X->{skiptest} = /-skiptest/;
 
 my $in = 'interactive'->vnew('su', 'X');
 
@@ -51,13 +51,13 @@ my $f = "/usr/X11R6/lib/X11/rgb.txt"; #- this one is on all platform (instead of
 $in->do_pkgs->install('XFree86', 'XFree86-75dpi-fonts') if !-e $f;
 -e $f or die "install XFree86 first!\n";
 
-`pidof xfs` > 0 or system("/etc/rc.d/init.d/xfs start") if !$i->{skiptest};
+`pidof xfs` > 0 or system("/etc/rc.d/init.d/xfs start") if !$X->{skiptest};
 
 system("mount /proc 2>/dev/null"); # ensure /proc is mounted for pci probing
 
 begin:
-Xconfig::getinfo($i);
-Xconfig::getinfoFromXF86Config($i); #- take default from here at least.
+Xconfig::getinfo($X);
+Xconfig::getinfoFromXF86Config($X); #- take default from here at least.
 
 my $allowNVIDIA_rpms;
 {
@@ -93,7 +93,7 @@ my $allowNVIDIA_rpms;
 }
 
 $::isEmbedded and kill USR2, $::CCPID;
-Xconfigurator::main($i, $in, $in->do_pkgs, 
+Xconfigurator::main($X, $in, $in->do_pkgs, 
 		    { allowFB          => $::expert,
 		      allowNVIDIA_rpms => $allowNVIDIA_rpms });
 !$::isEmbedded and $in->exit(0);
