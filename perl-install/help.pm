@@ -7,12 +7,12 @@ use common;
 #            from the manuals !!! 
 #            Write a mail to <documentation@mandrakesoft.com> if
 #            you want it changed.
-sub acceptLicense {
+sub acceptLicense() {
     N("Before continuing, you should carefully read the terms of the license. It
 covers the entire Mandrake Linux distribution. If you do agree with all the
 terms in it, check the \"%s\" box. If not, simply turn off your computer.", N("Accept"));
 }
-sub addUser {
+sub addUser() {
     N("GNU/Linux is a multi-user system, meaning each user may have their own
 preferences, their own files and so on. You can read the ``Starter Guide''
 to learn more about multi-user systems. But unlike \"root\", who is the
@@ -50,7 +50,7 @@ you are interested in that feature (and do not care much about local
 security), choose the desired user and window manager, then click \"%s\".
 If you are not interested in this feature, uncheck the \"%s\" box.", N("User name"), N("Accept user"), N("Next ->"), N("Advanced"), N("Next ->"), N("Do you want to use this feature?"));
 }
-sub ask_mntpoint_s {
+sub ask_mntpoint_s() {
     N("Listed here are the existing Linux partitions detected on your hard drive.
 You can keep the choices made by the wizard, since they are good for most
 common installations. If you make any changes, you must at least define a
@@ -81,12 +81,12 @@ hard drives:
 With SCSI hard drives, an \"a\" means \"lowest SCSI ID\", a \"b\" means
 \"second lowest SCSI ID\", etc.");
 }
-sub chooseCd {
+sub chooseCd() {
     N("The Mandrake Linux installation is distributed on several CD-ROMs. DrakX
 knows if a selected package is located on another CD-ROM so it will eject
 the current CD and ask you to insert the correct CD as required.");
 }
-sub choosePackages {
+sub choosePackages() {
     N("It is now time to specify which programs you wish to install on your
 system. There are thousands of packages available for Mandrake Linux, and
 to make it simpler to manage the packages have been placed into groups of
@@ -136,7 +136,7 @@ If you started the installation in \"%s\" mode, you can unselect all groups
 to avoid installing any new package. This is useful for repairing or
 updating an existing system.", N("Workstation"), N("Development"), N("Server"), N("Graphical Environment"), N("With X"), N("With basic documentation"), N("Truly minimal install"), N("Individual package selection"), N("Upgrade"));
 }
-sub choosePackagesTree {
+sub choosePackagesTree() {
     N("If you told the installer that you wanted to individually select packages,
 it will present a tree containing all packages classified by groups and
 subgroups. While browsing the tree, you can select entire groups,
@@ -171,7 +171,7 @@ on this icon will ask you to insert a floppy disk previously created at the
 end of another installation. See the second tip of last step on how to
 create such a floppy.", N("No"), N("Yes"), N("Automatic dependencies"));
 }
-sub configureNetwork {
+sub configureNetwork() {
     N("You will now set up your Internet/network connection. If you wish to
 connect your computer to the Internet or to a local network, click \"%s\".
 Mandrake Linux will attempt to autodetect network devices and modems. If
@@ -191,13 +191,13 @@ You can consult the ``Starter Guide'' chapter about Internet connections
 for details about the configuration, or simply wait until your system is
 installed and use the program described there to configure your connection.", N("Next ->"), N("Use auto detection"), N("Cancel"));
 }
-sub configurePrinter {
+sub configurePrinter() {
     N("\"%s\": clicking on the \"%s\" button will open the printer configuration
 wizard. Consult the corresponding chapter of the ``Starter Guide'' for more
 information on how to setup a new printer. The interface presented there is
 similar to the one used during installation.", N("Printer"), N("Configure"));
 }
-sub configureServices {
+sub configureServices() {
     N("This dialog is used to choose which services you wish to start at boot
 time.
 
@@ -215,7 +215,7 @@ need. Please remember that several services can be dangerous if they are
 enabled on a server. In general, select only the services you really need.
 !!");
 }
-sub configureTimezoneGMT {
+sub configureTimezoneGMT() {
     N("GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it to
 local time according to the time zone you selected. If the clock on your
 motherboard is set to local time, you may deactivate this by unselecting
@@ -229,7 +229,7 @@ a working Internet connection. It is best to choose a time server located
 near you. This option actually installs a time server that can used by
 other machines on your local network as well.", N("Hardware clock set to GMT"), N("Automatic time synchronization"));
 }
-sub configureX_card_list {
+sub configureX_card_list() {
     N("Graphic Card
 
    The installer will normally automatically detect and configure the
@@ -240,7 +240,7 @@ choose from this list the card you actually have installed.
 without 3D acceleration, you are then asked to choose the server that best
 suits your needs.");
 }
-sub configureX_chooser {
+sub configureX_chooser() {
     N("X (for X Window System) is the heart of the GNU/Linux graphical interface
 on which all the graphical environments (KDE, GNOME, AfterStep,
 WindowMaker, etc.) bundled with Mandrake Linux rely upon.
@@ -293,14 +293,14 @@ switch to a graphical interface at boot. Obviously, you want to check
 \"%s\" if your machine is to act as a server, or if you were not successful
 in getting the display configured.", N("Yes"), N("No"));
 }
-sub configureX_monitor {
+sub configureX_monitor() {
     N("Monitor
 
    The installer will normally automatically detect and configure the
 monitor connected to your machine. If it is correct, you can choose from
 this list the monitor you actually have connected to your computer.");
 }
-sub configureX_resolution {
+sub configureX_resolution() {
     N("Resolution
 
    Here you can choose the resolutions and color depths available for your
@@ -308,12 +308,12 @@ hardware. Choose the one that best suits your needs (you will be able to
 change that after installation though). A sample of the chosen
 configuration is shown in the monitor.");
 }
-sub configureX_xfree_and_glx {
+sub configureX_xfree_and_glx() {
     N("In the case that different servers are available for your card, with or
 without 3D acceleration, you are then asked to choose the server that best
 suits your needs.");
 }
-sub configureXxdm {
+sub configureXxdm() {
     N("Options
 
    Here you can choose whether you want to have your machine automatically
@@ -321,7 +321,7 @@ switch to a graphical interface at boot. Obviously, you want to check
 \"%s\" if your machine is to act as a server, or if you were not successful
 in getting the display configured.", N("No"));
 }
-sub doPartitionDisks {
+sub doPartitionDisks() {
     N("At this point, you need to decide where you want to install the Mandrake
 Linux operating system on your hard drive. If your hard drive is empty or
 if an existing operating system is using all the available space you will
@@ -382,7 +382,7 @@ experience. For more instructions on how to use the DiskDrake utility,
 refer to the ``Managing Your Partitions '' section in the ``Starter
 Guide''.", N("Use free space"), N("Use existing partition"), N("Use the free space on the Windows partition"), N("Erase entire disk"), N("Remove Windows"), N("Custom disk partitioning"));
 }
-sub exitInstall {
+sub exitInstall() {
     N("There you are. Installation is now complete and your GNU/Linux system is
 ready to use. Just click \"%s\" to reboot the system. The first thing you
 should see after your computer has finished doing its hardware tests is the
@@ -413,7 +413,7 @@ defcfg=\"floppy\" <<.
 (*) You need a FAT-formatted floppy (to create one under GNU/Linux, type
 \"mformat a:\")", N("Reboot"), N("Advanced"), N("generate auto-install floppy"), N("Replay"), N("Automated"), N("Save packages selection"));
 }
-sub formatPartitions {
+sub formatPartitions() {
     N("Any partitions that have been newly defined must be formatted for use
 (formatting means creating a file system).
 
@@ -439,7 +439,7 @@ Mandrake Linux operating system installation.
 Click on \"%s\" if you wish to select partitions that will be checked for
 bad blocks on the disk.", N("Next ->"), N("<- Previous"), N("Advanced"));
 }
-sub installUpdates {
+sub installUpdates() {
     N("At the time you are installing Mandrake Linux, it is likely that some
 packages have been updated since the initial release. Bugs may have been
 fixed, security issues resolved. To allow you to benefit from these
@@ -452,7 +452,7 @@ retrieved. You should choose one nearer to you. A package-selection tree
 will appear: review the selection, and press \"%s\" to retrieve and install
 the selected package(s), or \"%s\" to abort.", N("Yes"), N("No"), N("Yes"), N("Install"), N("Cancel"));
 }
-sub miscellaneous {
+sub miscellaneous() {
     N("At this point, DrakX will allow you to choose the security level desired
 for the machine. As a rule of thumb, the security level should be set
 higher if the machine will contain crucial data, or if it will be a machine
@@ -461,7 +461,7 @@ is generally obtained at the expense of ease of use.
 
 If you do not know what to choose, stay with the default option.");
 }
-sub partition_with_diskdrake {
+sub partition_with_diskdrake() {
     N("At this point, you need to choose which partition(s) will be used for the
 installation of your Mandrake Linux system. If partitions have already been
 defined, either from a previous installation of GNU/Linux or by another
@@ -533,7 +533,7 @@ bootloader. If you opt to make the partition a bit larger, say 50MB, you
 may find it a useful place to store a spare kernel and ramdisk images for
 emergency boot situations.", N("Clear all"), N("Auto allocate"), N("More"), N("Save partition table"), N("Restore partition table"), N("Rescue partition table"), N("Reload partition table"), N("Removable media automounting"), N("Wizard"), N("Undo"), N("Toggle between normal/expert mode"), N("Done"));
 }
-sub resizeFATChoose {
+sub resizeFATChoose() {
     N("More than one Microsoft partition has been detected on your hard drive.
 Please choose which one you want to resize in order to install your new
 Mandrake Linux operating system.
@@ -564,13 +564,13 @@ With SCSI hard drives, an \"a\" means \"lowest SCSI ID\", a \"b\" means
 \"Windows name\" is the letter of your hard drive under Windows (the first
 disk or partition is called \"C:\").");
 }
-sub selectCountry {
+sub selectCountry() {
     N("\"%s\": check the current country selection. If you are not in this
 country, click on the \"%s\" button and choose another one. If your country
 is not in the first list shown, click the \"%s\" button to get the complete
 country list.", N("Country"), N("Configure"), N("More"));
 }
-sub selectInstallClass {
+sub selectInstallClass() {
     N("This step is activated only if an old GNU/Linux partition has been found on
 your machine.
 
@@ -591,7 +591,7 @@ Using the ``Upgrade'' option should work fine on Mandrake Linux systems
 running version \"8.1\" or later. Performing an Upgrade on versions prior
 to Mandrake Linux version \"8.1\" is not recommended.", N("Install"), N("Upgrade"));
 }
-sub selectKeyboard {
+sub selectKeyboard() {
     N("Depending on the default language you chose in Section , DrakX will
 automatically select a particular type of keyboard configuration. However,
 you may not have a keyboard that corresponds exactly to your language: for
@@ -608,7 +608,7 @@ If you choose a keyboard layout based on a non-Latin alphabet, the next
 dialog will allow you to choose the key binding that will switch the
 keyboard between the Latin and non-Latin layouts.", N("More"));
 }
-sub selectLanguage {
+sub selectLanguage() {
     N("Your choice of preferred language will affect the language of the
 documentation, the installer and the system in general. Select first the
 region you are located in, and then the language you speak.
@@ -633,7 +633,7 @@ launch the \"/usr/sbin/localedrake\" command as \"root\" to change the
 language used by the entire system. Running the command as a regular user
 will only change the language settings for that particular user.", N("Advanced"), N("Espanol"), N("All languages"), N("Use Unicode by default"));
 }
-sub selectMouse {
+sub selectMouse() {
     N("Usually, DrakX has no problems detecting the number of buttons on your
 mouse. If it does, it assumes you have a two-button mouse and will
 configure it for third-button emulation. The third-button mouse button of a
@@ -659,11 +659,11 @@ on-screen scroll wheel moving as you scroll your mouse wheel, test the
 buttons and check that the mouse pointer moves on-screen as you move your
 mouse.", N("Next ->"));
 }
-sub selectSerialPort {
+sub selectSerialPort() {
     N("Please select the correct port. For example, the \"COM1\" port under
 Windows is named \"ttyS0\" under GNU/Linux.");
 }
-sub setRootPassword {
+sub setRootPassword() {
     N("This is the most crucial decision point for the security of your GNU/Linux
 system: you have to enter the \"root\" password. \"Root\" is the system
 administrator and is the only user authorized to make updates, add users,
@@ -701,7 +701,7 @@ If you happen to have problems with remembering passwords, if your computer
 will never be connected to the internet or that you absolutely trust
 everybody who uses your computer, you can choose to have \"%s\".", N("Advanced"), N("authentication"), N("No password"));
 }
-sub setupBootloader {
+sub setupBootloader() {
     N("This dialog allows you to fine tune your bootloader:
 
  * \"%s\": there are three choices for your bootloader:
@@ -728,7 +728,7 @@ options. !!
 Clicking the \"%s\" button in this dialog will offer advanced options which
 are normally reserved for the expert user.", N("Bootloader to use"), N("GRUB"), N("LILO with text menu"), N("LILO with graphical menu"), N("Boot device"), N("/dev/hda"), N("/dev/hdb"), N("/dev/fd0"), N("Delay before booting the default image"), N("Skip"), N("Advanced"));
 }
-sub setupBootloaderAddEntry {
+sub setupBootloaderAddEntry() {
     N("After you have configured the general bootloader parameters, the list of
 boot options that will be available at boot time will be displayed.
 
@@ -744,7 +744,7 @@ corresponding entries for the operating systems to remove them from the
 bootloader menu, but you will need a boot disk in order to boot those other
 operating systems!", N("Add"), N("Modify"), N("Remove"), N("OK"));
 }
-sub setupBootloaderBeginner {
+sub setupBootloaderBeginner() {
     N("LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally
 automated. DrakX will analyze the disk boot sector and act according to
 what it finds there:
@@ -759,7 +759,7 @@ one.
 If it cannot make a determination, DrakX will ask you where to place the
 bootloader.");
 }
-sub setupDefaultSpooler {
+sub setupDefaultSpooler() {
     N("Now, it's time to select a printing system for your computer. Other OSs may
 offer you one, but Mandrake Linux offers two. Each of the printing system
 is best suited to particular types of configuration.
@@ -785,7 +785,7 @@ If you make a choice now, and later find that you don't like your printing
 system you may change it by running PrinterDrake from the Mandrake Control
 Center and clicking the expert button.", N("pdq"), N("pdq"), N("CUPS"), N("CUPS"));
 }
-sub setupSCSI {
+sub setupSCSI() {
     N("DrakX will first detect any IDE devices present in your computer. It will
 also scan for one or more PCI SCSI cards on your system. If a SCSI card is
 found, DrakX will automatically install the appropriate driver.
@@ -803,7 +803,7 @@ If DrakX is not able to probe for the options to automatically determine
 which parameters need to be passed to the hardware, you'll need to manually
 configure the driver.");
 }
-sub setupYabootAddEntry {
+sub setupYabootAddEntry() {
     N("You can add additional entries in yaboot for other operating systems,
 alternate kernels, or for an emergency boot image.
 
@@ -850,7 +850,7 @@ native frame buffer support.
 selectable by pressing ENTER at the yaboot prompt. This entry will also be
 highlighted with a ``*'' if you press [Tab] to see the boot selections.");
 }
-sub setupYabootGeneral {
+sub setupYabootGeneral() {
     N("Yaboot is a bootloader for NewWorld Macintosh hardware and can be used to
 boot GNU/Linux, MacOS or MacOSX. Normally, MacOS and MacOSX are correctly
 detected and installed in the bootloader menu. If this is not the case, you
@@ -882,13 +882,13 @@ Open Firmware at the first boot prompt.
  * Default OS: you can select which OS will boot by default when the Open
 Firmware Delay expires.");
 }
-sub sound_config {
+sub sound_config() {
     N("\"%s\": if a sound card is detected on your system, it is displayed here.
 If you notice the sound card displayed is not the one that is actually
 present on your system, you can click on the button and choose another
 driver.", N("Sound card"));
 }
-sub summary {
+sub summary() {
     N("As a review, DrakX will present a summary of information it has about your
 system. Depending on your installed hardware, you may have some or all of
 the following entries. Each entry is made up of the configuration item to
@@ -950,12 +950,12 @@ button. This should be reserved to advanced users.
 on your machine. If you plan to use this machine as a server it's a good
 idea to review this setup.", N("Configure"), N("Keyboard"), N("Country"), N("Configure"), N("More"), N("Timezone"), N("Configure"), N("Mouse"), N("Printer"), N("Configure"), N("Sound card"), N("Graphical Interface"), N("Configure"), N("TV card"), N("Configure"), N("ISDN card"), N("Configure"), N("Network"), N("Security Level"), N("Firewall"), N("Bootloader"), N("Services"));
 }
-sub takeOverHdChoose {
+sub takeOverHdChoose() {
     N("Choose the hard drive you want to erase in order to install your new
 Mandrake Linux partition. Be careful, all data present on this partition
 will be lost and will not be recoverable!");
 }
-sub takeOverHdConfirm {
+sub takeOverHdConfirm() {
     N("Click on \"%s\" if you want to delete all data and partitions present on
 this hard drive. Be careful, after clicking on \"%s\", you will not be able
 to recover any data and partitions present on this hard drive, including
