@@ -182,7 +182,7 @@ $notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0,
                                                                1, create_packtable($common_opts,
                                                                                    map {
                                                                                        my $i = $_;
-                                                                                       $security_checks_value{$i} = new_editable_combo([ 'yes', 'no', 'default'], $msec->get_check_value($i));
+                                                                                       $security_checks_value{$i} = new_editable_combo([ 'yes', 'no', 'default' ], $msec->get_check_value($i));
                                                                                        my $entry = $security_checks_value{$i}->entry;
                                                                                        set_help_tip($entry, $msec->get_check_default($i), $i);
                                                                                        [ gtkshow(new Gtk2::Label(translate($i))), $security_checks_value{$i} ];
