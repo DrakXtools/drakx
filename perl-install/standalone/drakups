@@ -65,7 +65,7 @@ sub add_device_wizard {
                    auto => N("Connected through a serial port or an usb cable"),
                    manual => N("Manual configuration"),
                   );
-    my $method = $methods{manual};
+    my $method = $methods{auto};
     $wiz = {
             #defaultimage => "logdrake.png",    # FIXME
             name => N("Add an UPS device"),
