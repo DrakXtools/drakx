@@ -121,6 +121,8 @@ my $label3;
 my $label4;
 my $list_path;
 my $path_list;
+my $current_path;
+
 
 foreach (@ARGV) {
     /--xls_fonts/ and $xlsfonts = 1, $mode=-1;
@@ -157,7 +159,7 @@ foreach my $i (@application) {
 
 # PATH and binary full path
 my $xfs_conffile = '/etc/X11/fs/config';
-my $drakfont_dir = '/home/seb/new2_drakfont'; # '/usr/X11R6/lib/X11/fonts/drakfont';
+my $drakfont_dir = '/usr/X11R6/lib/X11/fonts/drakfont';
 my $ttf2pt1 = '/usr/sbin/ttf2pt1';
 my $pfm2afm = '/usr/sbin/pfm2afm';
 my $type1inst = '/usr/sbin/type1inst';
@@ -285,6 +287,12 @@ sub search_dir_font_uninstall {
     print "Fonts to uninstal : " . $_ . "\n" foreach (@font_list);
 }
 
+sub search_dir_font_uninstall_gi {
+    @font_list = @uninstall;
+    $interactive and progress($pbar, 1, _("Search fonts in installed list"));
+}
+
+
 sub print_list { print "Font(s) to Install :\n\n"; print "$_\n" foreach (@font_list) }
 
 sub dir_created {
@@ -392,31 +400,40 @@ sub remove_gs_fonts {
     }
 }
 
+# remove this directory of the de fontpath if there is only 2 files in directory (fonts.dir & fonts.scale)
+# do type1inst in this path
+# peu etre un petit pb avec "/etc/rc.d/init.d/xfs restart"
+
+
 sub remove_fonts {
     my @list_dir;
     -e $drakfont_dir . "/remove"  || mkdir_p($drakfont_dir . "/remove");
+    $interactive and  progress($pbar, 0.75, _("done"));
     foreach my $i (@font_list) {
 	$_ = $i;
 	if ( /.pfb$/ || /.gsf$/ || /.pfm$/ || /.pfa$/ ) {
-	    system ("cp $_ $drakfont_dir/remove ");
+	    system ("mv $_ $drakfont_dir/remove ");
 	} else {
 	    rm_rf($i);
 	}
 	$i =~ s/\/\w*\.\w*//gi;
 	grep ( $i, (@list_dir)) or push @list_dir, $i;
+	$interactive and  progress($pbar1, 1/@font_list, _("Suppress Fonts Files"));
     }
+    $interactive and  progress($pbar1, 0.01, _("done"));
     -e "/usr/share/ghostscript" and  remove_gs_fonts();
     foreach my $i (@list_dir) {
 	if (listlength all("$i") < 3)  {
-	    # remove this directory of the de fontpath
 	    system("chkfontpath -r $i") or print "PERL::system command failed during chkfontpath\n";
 	} else {
-	    #	    # do type1inst in this path
 	    system("cd $i && type1inst") or print "PERL::system command failed during cd or type1inst\n";
 	}
+	$interactive and  progress($pbar2, 1/@list_dir, _("Suppress Fonts Files"));
     }
+    $interactive and  progress($pbar2, 0.01, _("xfs restart"));
     system ("/etc/rc.d/init.d/xfs restart");
     -e "/usr/share/ghostscript" and  rm_rf("$drakfont_dir/remove");
+    $interactive and  progress($pbar2, 0.01, _("done"));
 }
 
 sub license_msg {
@@ -431,32 +448,32 @@ sub backend_mod {
     }
     if ($windows) {
 	license_msg();
-	print "........Windows fonts Installation........\n\n";
+	print "\nWindows fonts Installation........\n";
 	search_installed_fonts();
 	if(search_windows_font()) {
 	    print_list();
 	    put_font_dir();
 	}
-	print "\n...............The End...................\n";
+	print "\nThe End...........................\n";
     }
 
     if (@install) {
 	license_msg();
-	print ".......Install Specifics Fonts...........\n\n";
+	print "\nInstall Specifics Fonts...........\n";
 	search_installed_fonts();
 	search_dir_font $_ foreach (@install);
 	print "Font to install : " . $_ . "\n" foreach (@font_list);
 	put_font_dir();
-	print "\n...............The End...................\n";
+	print "\nThe End...........................\n";
     }
 
     if (@uninstall) {
-	license_msg();
-	print "........Uninstall Specifics Fonts........\n\n";
+	print "\nUninstall Specifics Fonts.........\n";
 	search_installed_fonts_full_path();
-	search_dir_font_uninstall $_ foreach (@uninstall);
+	if ($interactive) { search_dir_font_uninstall_gi() }
+	else { search_dir_font_uninstall $_ foreach (@uninstall) }
 	remove_fonts();
-	print "\n...............The End...................\n";
+	print "\nThe End............................\n";
     }
 }
 
@@ -722,46 +739,43 @@ sub advanced_install {
     $adv_box->show_all();
 }
 
-sub show_path_list {
-	my($widget, $list) = @_;
-	my @to_remove;
-	push @to_remove, $list->child_position($_) foreach($list->selection);
-	splice @install, $_, 1 foreach(reverse sort @to_remove);
-	$list->remove_items($list->selection);
-}
-
-
-# sub show_path_list {
-#  	my($widget, $list) = @_;
-# #	my $list = @_;
-# #    print "$_\n" foreach ($list->selected);
-# #    $list->add(gtkshow(new Gtk::ListItem($_))) foreach (all($list->selection));
-
-# # 	Gtk->main_iteration while Gtk->events_pending;
-# 	my @to_remove;
-#  	push @to_remove, $list->child_position($_) foreach($list->selection);
-# 	print "$_\n" foreach (@to_remove);
-# # 	my @to_remove;
-# # 	push @to_remove, $list->child_position($_) foreach($list->selection);
-# # 	splice @install, $_, 1 foreach(reverse sort @to_remove);
-# # 	$list->remove_items($list->selection);
-# }
-
 sub list_to_remove {
-	my($widget, $list) = @_;
-	my @to_remove;
-	push @to_remove, $list->child_position($_) foreach($list->selection);
-#	splice @install, $_, 1 foreach(reverse sort @to_remove);
-#	$list->remove_items($list->selection);
-	print "$_ \n" foreach (@to_remove);
+	my @number_to_remove;
+	my @files_path = grep( !/fonts/ ,all($current_path));
+	Gtk->main_iteration while Gtk->events_pending;
+	push @number_to_remove, $path_list->child_position($_) foreach($path_list->selection);
+	@uninstall = ();
+	push @uninstall, $current_path . "/"  . $files_path[$_] foreach (@number_to_remove);
+	${$central_widget}->destroy(); 
+	show_list_to_remove();
 }
 
-
+sub show_list_to_remove {
+    my $show_box;
+    my $show_list = new Gtk::List();
+    $show_list->add(gtkshow(new Gtk::ListItem($_))) foreach @uninstall ;
+    gtkpack($font_box,
+	    $show_box = gtkpack_(new Gtk::VBox(0,10),
+				   1, gtkpack_(new Gtk::HBox(0,4),
+					       1, createScrolledWindow($show_list)
+					      ),
+				   0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+					     gtksignal_connect(new Gtk::Button(_("click here if you are sure.")), clicked => 
+							       sub {  ${$central_widget}->destroy(); import_status_uninstall() }),
+					     gtksignal_connect(new Gtk::Button(_("here if no.")), clicked => 
+							       sub {  ${$central_widget}->destroy(); create_fontsel() } ),
+					     ),
+				  )
+	    );
+    $central_widget = \$show_box;
+    $show_box->show_all();
+}
 
 sub uninstall {
     my $scrolled_window;
     my $scrolled_window2;
     my $uninst_box;
+    @install=  ();
     @installed_fonts_path = ();
     list_fontpath();    
     $list_path = new Gtk::List();
@@ -769,6 +783,7 @@ sub uninstall {
     foreach (@installed_fonts_path) {
 	my $t = $_;
 	$list_path->add(gtkshow(gtksignal_connect(new Gtk::ListItem($t), select => sub {
+						      $current_path = $t;
 						      $path_list->clear_items(0, -1);
 						      $path_list->append_items(map { /fonts/ ? () : gtkshow(new Gtk::ListItem($_)) } all($t)); })));
     }
@@ -788,7 +803,7 @@ sub uninstall {
 					     gtksignal_connect(new Gtk::Button(_("Selected All")), clicked => 
 							       sub {$path_list->select_all (); } ),
 					     gtksignal_connect(new Gtk::Button(_("Remove List")), clicked => 
-							       sub { ${$central_widget}->destroy(); \&list_to_remove(), $path_list}),
+							       sub { list_to_remove() }),
 					     ),
 				  )
 	    );
@@ -827,7 +842,7 @@ sub import_status_uninstall {
    ["",""], ["",""],
    [_("Initials tests"), $pbar, $pbar->{label} = new Gtk::Label(' ' )],
    [_("Remove fonts on your system"), $pbar1,$pbar1->{label} = new Gtk::Label(' ' ) ],
-   [_("Post Uinnstall"), $pbar2,$pbar2->{label} = new Gtk::Label(' ' ) ],
+   [_("Post Uninstall"), $pbar2,$pbar2->{label} = new Gtk::Label(' ' ) ],
 			    ),
 	   );
     $central_widget = \$table;
