@@ -3,6 +3,7 @@ package install_steps_auto_install;
 use diagnostics;
 use strict;
 use netconnect;
+use lang;
 use vars qw(@ISA);
 
 @ISA = qw(install_steps);
@@ -57,6 +58,16 @@ sub errorInStep {
     print "Press <Enter> to reboot\n";
     <STDIN>;
     c::_exit(0);
+}
+
+
+#-######################################################################################
+#- Steps Functions
+#-######################################################################################
+sub selectLanguage {
+    my ($o) = @_;
+    $o->SUPER::selectLanguage;
+    lang::load_console_font($o->{lang});
 }
 
 sub exitInstall {

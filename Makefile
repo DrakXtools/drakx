@@ -3,7 +3,7 @@ ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
 RELEASE_BOOT_IMG = hd.img cdrom.img network.img
 ifeq (i386,$(ARCH))
-RELEASE_BOOT_IMG += pcmcia.img
+RELEASE_BOOT_IMG += pcmcia.img blank.img
 endif
 ifeq (sparc,$(ARCH))
 BOOT_IMG = live.img tftp.img tftprd.img live64.img tftp64.img tftprd64.img
