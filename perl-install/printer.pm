@@ -546,7 +546,7 @@ sub read_printer_db(;$) {
 	$entry->{ENTRY} = _("Raw printer (No driver)");
 	$entry->{driver} = "raw";
 	$entry->{make} = "";
-	$entry->{model} = "Unknown model";
+	$entry->{model} = _("Unknown model");
 	map { $thedb{$entry->{ENTRY}}->{$_} = $entry->{$_} } keys %$entry;
     }
 
