@@ -110,12 +110,10 @@ images() if "@ARGV" =~ /images/;
 check() if "@ARGV" =~ /check/;
 pci_modules4stage1($1) if "@ARGV" =~ /pci_modules4stage1:(.*)/;
 
-sub images {
+sub images() {
     while (my ($image, $l) = each %images) {
 	my @modules = if_($image !~ /drivers/, @modules_always_on_stage1);
-	foreach (split(' ', $l)) { 
-	    push @modules, category2modules($_);
-	}
+	push @modules, map { category2modules($_) } split(' ', $l);
 	
 	@modules = difference2(\@modules, \@modules_removed_from_stage1);
 
@@ -131,14 +129,14 @@ sub pci_modules4stage1 {
     print "$_\n" foreach uniq(map { dependencies_closure($_) } difference2([ category2modules($_[0]) ], \@modules_removed_from_stage1));
 }
 
-sub check {
+sub check() {
     my $error;
     my %listed;
     while (my ($t1, $l) = each %list_modules::l) {
 	while (my ($t2, $l) = each %$l) {
 	    ref $l or die "bad $l in $t1/$t2";
 	    foreach (@$l) {
-		$listed{$_} = 1; 
+		$listed{$_} = "$t1/$t2"; 
 	    }
 	}
     }
@@ -149,7 +147,7 @@ sub check {
 	my ($msg, $verbose, @l) = @_;
 	my %not_listed;
 	foreach (@l) {
-	    my ($mod) = m|([^/]*)\.o(\.gz)?$| or next;
+	    my ($mod) = m|([^/]*)\.k?o(\.gz)?$| or next;
 	    delete $deprecated_modules{$mod};
 	    next if $listed{$mod};
 	    s|.*?mdk(BOOT)?/||;
@@ -163,9 +161,15 @@ sub check {
 	    print "$msg $_: ", join(" ", @{$not_listed{$_}}), "\n" foreach sort keys %not_listed;
 	}
     };
-    $not_listed->('NOT LISTED', 1, `cd all.kernels/2.4* ; find -name "*.o" -o -name "*.o.gz"`);
-    $not_listed->('not listed', $verbose, `rpm -qpl /RPMS/kernel-2.4*`);
-    print "bad/old modules : ", join(" ", sort keys %deprecated_modules), "\n" if %deprecated_modules;
+    $not_listed->('NOT LISTED', 1, `cd all.kernels/2.6* ; find -name "*.k?o" -o -name "*.k?o.gz"`);
+    $not_listed->('not listed', $verbose, `rpm -qpl /RPMS/kernel-2.6*`);
+    if (%deprecated_modules) {
+	my %per_cat;
+	push @{$per_cat{$listed{$_}}}, $_ foreach keys %deprecated_modules;
+	foreach my $cat (sort keys %per_cat) {
+	    print "bad/old modules ($cat) : ", join(" ", sort @{$per_cat{$cat}}), "\n";
+	}
+    }
 
     {
 	require '/usr/bin/merge2pcitable.pl';
