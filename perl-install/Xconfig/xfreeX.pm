@@ -87,7 +87,7 @@ sub get_devices {
     map {
 	my $raw_device = $_;
 	my $device = raw_export_section($raw_device, [ 'Identifier', $raw_X->get_device_section_fields ]);
-	$device->{Options} = raw_export_section($raw_device, [ grep { (deref_array($raw_device->{$_}))[0]{Option} } keys %$raw_device ]);
+	$device->{Options} = raw_export_section($raw_device, [ grep { (deref_array($raw_device->{$_}))[0]->{Option} } keys %$raw_device ]);
 	$device;
     } @raw_devices;
 }
