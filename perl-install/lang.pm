@@ -805,8 +805,8 @@ sub check {
     };
     
     my @wanted_charsets = uniq map { lang2charset($_) } list();
-    $err->("unknown charset $_ ($_ does not exist in \%charsets") foreach difference2(\@wanted_charsets, [ keys %charsets ]);
-    $warn->("unused charset $_ (given in \%charsets, but not used in \%languages") foreach difference2([ keys %charsets ], \@wanted_charsets);
+    $err->("unknown charset $_ ($_ does not exist in \%charsets)") foreach difference2(\@wanted_charsets, [ keys %charsets ]);
+    $warn->("unused charset $_ (given in \%charsets, but not used in \%languages)") foreach difference2([ keys %charsets ], \@wanted_charsets);
 
     $warn->("unused entry $_ in \%xim") foreach difference2([ keys %xim ], [ list() ]);
 
