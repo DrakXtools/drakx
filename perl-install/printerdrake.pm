@@ -2291,6 +2291,13 @@ sub main {
 		$printer->{DEFAULT} = '';
 	    }
 	}
+
+	# Configure the current printer queues in applications
+	{
+	    my $w = $in->wait_message('', _("Configuring applications..."));
+	    printer::configureapplications($printer);
+	}
+
 	if ($editqueue) {
 	    # The user was either in the printer modification dialog and did
 	    # not close it or he had set up a new queue and said that the test
@@ -2799,6 +2806,14 @@ What do you want to modify on this printer?",
 			 $menushown ||
 			 $in->ask_yesorno('',_("Do you want to configure another printer?")));
 	}
+
+	# Configure the current printer queue in applications when main menu
+	# will not be shown (During installation in "Recommended" mode)
+	if ($::isInstall && !$::expert && !$menushown && !$continue) {
+	    my $w = $in->wait_message('', _("Configuring applications..."));
+	    printer::configureapplications($printer);
+	}
+
 	# Delete some variables
 	$printer->{OLD_QUEUE} = "";
 	$printer->{QUEUE} = "";

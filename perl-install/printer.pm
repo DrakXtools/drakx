@@ -1248,6 +1248,7 @@ sub remove_queue($$) {
     $printer->{ARGS} = {};
     $printer->{DBENTRY} = "";
     $printer->{currentqueue} = {};
+    removeprinterfromapplications($printer, $queue);
 }
 
 sub restart_queue($) {
@@ -1595,6 +1596,494 @@ sub config_sane {
 	die "can't write SANE config in /etc/sane.d/dll.conf: $!";
     print F "hp\n";
     close F;
+}
+
+# ------------------------------------------------------------------
+#
+# Configuration of printers in Applications
+#
+# ------------------------------------------------------------------
+
+sub configureapplications {
+    my ($printer) = @_;
+    configurestaroffice($printer);
+    configureopenoffice($printer);
+}
+
+sub removeprinterfromapplications {
+    my ($printer, $queue) = @_;
+    removeprinterfromstaroffice($printer, $queue);
+    removeprinterfromopenoffice($printer, $queue);
+}
+
+sub configurestaroffice {
+    my ($printer) = @_;
+    # Do we have Star Office installed?
+    my $configfilename = findsofficeconfigfile();
+    return 0 if !$configfilename;
+    $configfilename =~ m!^(.*)/share/xp3/Xpdefaults$!;
+    my $configprefix = $1;
+    # Load Star Office printer config file
+    my $configfilecontent = readsofficeconfigfile($configfilename);
+    # Update remote CUPS queues
+    if (0 && ($printer->{SPOOLER} eq "cups") && 
+	(-x "$prefix/usr/bin/wget")) {
+	my @printerlist = getcupsremotequeues();
+	for my $listentry (@printerlist) {
+	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
+	    my $queue = $1;
+	    my $server = $2;
+	    eval(run_program::rooted
+		 ($prefix, "wget", "-O", "/etc/foomatic/$queue.ppd",
+		  "http://$server:631/printers/$queue.ppd"));
+	    if (-r "$prefix/etc/foomatic/$queue.ppd") {
+		$configfilecontent = 
+		    makestarofficeprinterentry($printer, $queue,
+					       $configprefix,
+					       $configfilecontent);
+	    }
+	}
+    }
+    # Update local printer queues
+    for my $queue (keys(%{$printer->{configured}})) {
+	# Check if we have a PPD file
+	if (! -r "$prefix/etc/foomatic/$queue.ppd") {
+	    if (-r "$prefix/etc/cups/ppd/$queue.ppd") {
+		# If we have a PPD file in the CUPS config dir, link to it
+		run_program::rooted($prefix, 
+				    "ln", "-sf",
+				    "/etc/cups/ppd/$queue.ppd",
+				    "/etc/foomatic/$queue.ppd");
+	    } elsif (-r "$prefix/usr/share/postscript/ppd/$queue.ppd") {
+		# Check PPD directory of GPR, too
+		run_program::rooted($prefix, 
+				    "ln", "-sf",
+				    "/usr/share/postscript/ppd/$queue.ppd",
+				    "/etc/foomatic/$queue.ppd");
+	    } else {
+		# No PPD file at all? We cannot set up this printer
+		next;
+	    }
+	}
+	$configfilecontent = 
+	    makestarofficeprinterentry($printer, $queue, $configprefix,
+				       $configfilecontent);
+    }
+    # Write back Star Office configuration file
+    writesofficeconfigfile($configfilename, $configfilecontent);
+}
+
+sub configureopenoffice {
+    my ($printer) = @_;
+    # Do we have Open Office installed?
+    my $configfilename = findopenofficeconfigfile();
+    return 0 if !$configfilename;
+    $configfilename =~ m!^(.*)/share/psprint/psprint.conf$!;
+    my $configprefix = $1;
+    # Load Open Office printer config file
+    my $configfilecontent = readsofficeconfigfile($configfilename);
+    # Update remote CUPS queues
+    if (0 && ($printer->{SPOOLER} eq "cups") && 
+	(-x "$prefix/usr/bin/wget")) {
+	my @printerlist = getcupsremotequeues();
+	for my $listentry (@printerlist) {
+	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
+	    my $queue = $1;
+	    my $server = $2;
+	    eval(run_program::rooted
+		 ($prefix, "wget", "-O", "/etc/foomatic/$queue.ppd",
+		  "http://$server:631/printers/$queue.ppd"));
+	    if (-r "$prefix/etc/foomatic/$queue.ppd") {
+		$configfilecontent = 
+		    makeopenofficeprinterentry($printer, $queue,
+					       $configprefix,
+					       $configfilecontent);
+	    }
+	}
+    }
+    # Update local printer queues
+    for my $queue (keys(%{$printer->{configured}})) {
+	# Check if we have a PPD file
+	if (! -r "$prefix/etc/foomatic/$queue.ppd") {
+	    if (-r "$prefix/etc/cups/ppd/$queue.ppd") {
+		# If we have a PPD file in the CUPS config dir, link to it
+		run_program::rooted($prefix, 
+				    "ln", "-sf",
+				    "/etc/cups/ppd/$queue.ppd",
+				    "/etc/foomatic/$queue.ppd");
+	    } elsif (-r "$prefix/usr/share/postscript/ppd/$queue.ppd") {
+		# Check PPD directory of GPR, too
+		run_program::rooted($prefix, 
+				    "ln", "-sf",
+				    "/usr/share/postscript/ppd/$queue.ppd",
+				    "/etc/foomatic/$queue.ppd");
+	    } else {
+		# No PPD file at all? We cannot set up this printer
+		next;
+	    }
+	}
+	$configfilecontent = 
+	    makeopenofficeprinterentry($printer, $queue, $configprefix,
+				       $configfilecontent);
+    }
+    # Write back Open Office configuration file
+    writesofficeconfigfile($configfilename, $configfilecontent);
+}
+
+sub removeprinterfromstaroffice {
+    my ($printer, $queue) = @_;
+    # Do we have Star Office installed?
+    my $configfilename = findsofficeconfigfile();
+    return 0 if !$configfilename;
+    $configfilename =~ m!^(.*)/share/xp3/Xpdefaults$!;
+    my $configprefix = $1;
+    # Load Star Office printer config file
+    my $configfilecontent = readsofficeconfigfile($configfilename);
+    # Remove the printer entry
+    $configfilecontent = 
+	removestarofficeprinterentry($printer, $queue, $configprefix,
+				     $configfilecontent);
+    # Write back Star Office configuration file
+    writesofficeconfigfile($configfilename, $configfilecontent);
+}
+
+sub removeprinterfromopenoffice {
+    my ($printer, $queue) = @_;
+    # Do we have Open Office installed?
+    my $configfilename = findopenofficeconfigfile();
+    return 0 if !$configfilename;
+    $configfilename =~ m!^(.*)/share/psprint/psprint.conf$!;
+    my $configprefix = $1;
+    # Load Open Office printer config file
+    my $configfilecontent = readsofficeconfigfile($configfilename);
+    # Remove the printer entry
+    $configfilecontent = 
+	removeopenofficeprinterentry($printer, $queue, $configprefix,
+				     $configfilecontent);
+    # Write back Open Office configuration file
+    writesofficeconfigfile($configfilename, $configfilecontent);
+}
+
+sub makestarofficeprinterentry {
+    my ($printer, $queue, $configprefix, $configfile) = @_;
+    # Set default printer
+    if ($queue eq $printer->{DEFAULT}) {
+	$configfile = removeentry("windows", "device=", $configfile);
+	$configfile = addentry("windows", 
+			       "device=$queue,$queue PostScript,$queue",
+			       $configfile);
+    }
+    # Make an entry in the "[devices]" section
+    $configfile = removeentry("devices", "$queue=", $configfile);
+    $configfile = addentry("devices", 
+			   "$queue=$queue PostScript,$queue",
+			   $configfile);
+    # Make an entry in the "[ports]" section
+    $configfile = removeentry("ports", "$queue=", $configfile);
+    $configfile = addentry("ports", 
+			   "$queue=lpr -P $queue",
+			   $configfile);
+    # Make printer's section
+    $configfile = addsection("$queue,PostScript,$queue", $configfile);
+    # Load PPD file
+    my $ppd = cat_("$prefix/etc/foomatic/$queue.ppd");
+    # Set the PostScript level
+    my $pslevel;
+    if ($ppd =~ /^\s*\*LanguageLevel:\s*\"?([^\s\"]+)\"?\s*$/m) {
+	$pslevel = $1;
+	$pslevel = "2" if $pslevel eq "3";
+    } else {
+	$pslevel = "2";
+    }
+    $configfile = removeentry("$queue.PostScript.$queue",
+			      "Level=", $configfile);
+    $configfile = addentry("$queue.PostScript.$queue", 
+			   "Level=$pslevel", $configfile);
+    # Set Color/BW
+    my $color;
+    if ($ppd =~ /^\s*\*ColorDevice:\s*\"?([Tt]rue)\"?\s*$/m) {
+	$color = "1";
+    } else {
+	$color = "0";
+    }
+    $configfile = removeentry("$queue.PostScript.$queue",
+			      "BitmapColor=", $configfile);
+    $configfile = addentry("$queue.PostScript.$queue", 
+			   "BitmapColor=$color", $configfile);
+    # Set the default paper size
+    if ($ppd =~ /^\s*\*DefaultPageSize:\s*(\S+)\s*$/m) {
+	my $papersize=$1;
+	$configfile = removeentry("$queue.PostScript.$queue",
+				  "PageSize=", $configfile);
+	$configfile = removeentry("$queue.PostScript.$queue",
+				  "PPD_PageSize=", $configfile);
+	$configfile = addentry("$queue.PostScript.$queue", 
+			       "PageSize=$papersize", $configfile);
+	$configfile = addentry("$queue.PostScript.$queue", 
+			       "PPD_PageSize=$papersize", $configfile);
+    }
+    # Link the PPD file
+    run_program::rooted($prefix, 
+			"ln", "-sf", "/etc/foomatic/$queue.ppd", 
+			"$configprefix/share/xp3/ppds/$queue.PS");
+    return $configfile;
+}
+
+sub makeopenofficeprinterentry {
+    my ($printer, $queue, $configprefix, $configfile) = @_;
+    # Make printer's section
+    $configfile = addsection($queue, $configfile);
+    # Load PPD file
+    my $ppd = cat_("$prefix/etc/foomatic/$queue.ppd");
+    # "PPD_PageSize" line
+    if ($ppd =~ /^\s*\*DefaultPageSize:\s*(\S+)\s*$/m) {
+	my $papersize=$1;
+	$configfile = removeentry($queue,
+				  "PPD_PageSize=", $configfile);
+	$configfile = addentry($queue, 
+			       "PPD_PageSize=$papersize", $configfile);
+    }
+    # "Command" line
+    $configfile = removeentry($queue, "Command=", $configfile);
+    $configfile = addentry($queue, 
+			   "Command=lpr -P $queue",
+			   $configfile);
+    # "Comment" line 
+    $configfile = removeentry($queue, "Comment=", $configfile);
+    if (($printer->{configured}{$queue}) &&
+	($printer->{configured}{$queue}{queuedata}{desc})) {
+	$configfile = addentry
+	    ($queue, 
+	     "Comment=$printer->{configured}{$queue}{queuedata}{desc}",
+	     $configfile);
+    } else {
+	$configfile = addentry($queue, 
+			       "Comment=",
+			       $configfile);
+    }
+    # "Location" line 
+    $configfile = removeentry($queue, "Location=", $configfile);
+    if (($printer->{configured}{$queue}) &&
+	($printer->{configured}{$queue}{queuedata}{loc})) {
+	$configfile = addentry
+	    ($queue, 
+	     "Location=$printer->{configured}{$queue}{queuedata}{loc}",
+	     $configfile);
+    } else {
+	$configfile = addentry($queue, 
+			       "Location=",
+			       $configfile);
+    }
+    # "DefaultPrinter" line
+    $configfile = removeentry($queue, "DefaultPrinter=", $configfile);
+    my $default = "0";
+    if ($queue eq $printer->{DEFAULT}) {
+	$default = "1";
+    }
+    $configfile = addentry($queue, 
+			   "DefaultPrinter=$default",
+			   $configfile);
+    # "Printer" line 
+    $configfile = removeentry($queue, "Printer=", $configfile);
+    $configfile = addentry($queue, 
+			   "Printer=$queue/$queue",
+			   $configfile);
+    # Link the PPD file
+    run_program::rooted($prefix, 
+			"ln", "-sf", "/etc/foomatic/$queue.ppd", 
+			"$configprefix/share/psprint/driver/$queue.PS");
+    return $configfile;
+}
+
+sub removestarofficeprinterentry {
+    my ($printer, $queue, $configprefix, $configfile) = @_;
+    # Remove default printer entry
+    $configfile = removeentry("windows", "device=$queue,", $configfile);
+    # Remove entry in the "[devices]" section
+    $configfile = removeentry("devices", "$queue=", $configfile);
+    # Remove entry in the "[ports]" section
+    $configfile = removeentry("ports", "$queue=", $configfile);
+    # Remove "[$queue,PostScript,$queue]" section
+    $configfile = removesection("$queue,PostScript,$queue", $configfile);
+    # Remove Link of PPD file
+    run_program::rooted($prefix, 
+			"rm", "-f", 
+			"$configprefix/share/xp3/ppds/$queue.PS");
+    return $configfile;
+}
+
+sub removeopenofficeprinterentry {
+    my ($printer, $queue, $configprefix, $configfile) = @_;
+    # Remove printer's section
+    $configfile = removesection("$queue", $configfile);
+    # Remove Link of PPD file
+    run_program::rooted($prefix, 
+			"rm", "-f", 
+			"$configprefix/share/psprint/driver/$queue.PS");
+    return $configfile;
+}
+
+sub findsofficeconfigfile {
+    my @configfilenames = ("/usr/lib/office52/share/xp3/Xpdefaults",
+			   "/usr/local/lib/office52/share/xp3/Xpdefaults",
+			   "/usr/local/office52/share/xp3/Xpdefaults",
+			   "/opt/office52/share/xp3/Xpdefaults");
+    my $configfilename = "";
+    for $configfilename (@configfilenames) {
+	if (-r "$prefix$configfilename") {
+	    return $configfilename;
+	}
+    }
+    return "";
+}
+
+sub findopenofficeconfigfile {
+    my @configfilenames =
+	("/usr/lib/OpenOffice.org*/share/psprint/psprint.conf",
+	 "/usr/local/lib/OpenOffice.org*/share/psprint/psprint.conf",
+	 "/usr/local/OpenOffice.org*/share/psprint/psprint.conf",
+	 "/opt/OpenOffice.org*/share/psprint/psprint.conf");
+    my $configfilename = "";
+    for $configfilename (@configfilenames) {
+	local *F;
+	if (open F, "ls -r $prefix$configfilename 2> /dev/null |") {
+	    my $filename = <F>;
+	    close F;
+	    if ($filename) {return $filename};
+	}
+    }
+    return "";
+}
+
+sub readsofficeconfigfile {
+    my ($file) = @_;
+    local *F; 
+    open F, "< $prefix$file" ||
+	die "Could not read $file!\n";
+    my $filecontent = join("", <F>);
+    close F;
+    return $filecontent;
+}
+
+sub writesofficeconfigfile {
+    my ($file, $filecontent) = @_;
+    local *F; 
+    open F, "> $prefix$file" ||
+	die "Could not write $file!\n";
+    print F $filecontent;
+    close F;
+}
+
+sub getcupsremotequeues {
+    # The following code reads in a list of all remote printers which the
+    # local CUPS daemon knows due to broadcasting of remote servers or 
+    # "BrowsePoll" entries in the local /etc/cups/cupsd.conf
+    local *F;
+    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+	"lpstat -v |" || return ();
+    my @printerlist = ();
+    my $line;
+    while ($line = <F>) {
+	if ($line =~ m/^\s*device\s+for\s+([^:\s]+):\s*(\S+)\s*$/) {
+	    my $queuename = $1;
+	    if (($2 =~ m!^ipp://([^/:]+)[:/]!) &&
+		(!$printer->{configured}{$queuename})) {
+		my $server = $1;
+		push (@printerlist, "$queuename|$server");
+	    }
+	}
+    }
+    close F;
+    return @printerlist;
+}
+
+sub addentry {
+    my ($section, $entry, $filecontent) = @_;
+    my $sectionfound = 0;
+    my $entryinserted = 0;
+    my @lines = split("\n", $filecontent);
+    local $_;
+    for (@lines) {
+	if (!$sectionfound) {
+	    if ($_ =~ /^\s*\[\s*$section\s*\]\s*$/) {
+		$sectionfound = 1;
+	    }
+	} else {
+	    if (($_ !~ /^\s*$/) && ($_ !~ /^\s*;/)) {
+		$_ = "$entry\n$_";
+		$entryinserted = 1;
+		last;
+	    }
+	}
+    }
+    if ($sectionfound && !$entryinserted) {
+	push(@lines, $entry);
+    }
+    return join ("\n", @lines);
+}
+
+sub addsection {
+    my ($section, $filecontent) = @_;
+    my $entryinserted = 0;
+    my @lines = split("\n", $filecontent);
+    local $_;
+    for (@lines) {
+	if ($_ =~ /^\s*\[\s*$section\s*\]\s*$/) {
+	    # section already there, nothing to be done
+	    return $filecontent;
+	}
+    }
+    return $filecontent . "\n[$section]";
+}
+
+sub removeentry {
+    my ($section, $entry, $filecontent) = @_;
+    my $sectionfound = 0;
+    my $done = 0;
+    my @lines = split("\n", $filecontent);
+    local $_;
+    for (@lines) {
+	$_ = "$_\n";
+	next if ($done);
+	if (!$sectionfound) {
+	    if ($_ =~ /^\s*\[\s*$section\s*\]\s*$/) {
+		$sectionfound = 1;
+	    }
+	} else {
+	    if ($_ =~ /^\s*\[.*\]\s*$/) { # Next section
+		$done = 1;
+	    } elsif ($_ =~ /^\s*$entry/) {
+		$_ = "";
+		$done = 1;
+	    }
+	}
+    }
+    return join ("", @lines);
+}
+
+sub removesection {
+    my ($section, $filecontent) = @_;
+    my $sectionfound = 0;
+    my $done = 0;
+    my @lines = split("\n", $filecontent);
+    local $_;
+    for (@lines) {
+	$_ = "$_\n";
+	next if ($done);
+	if (!$sectionfound) {
+	    if ($_ =~ /^\s*\[\s*$section\s*\]\s*$/) {
+		$_ = "";
+		$sectionfound = 1;
+	    }
+	} else {
+	    if ($_ =~ /^\s*\[.*\]\s*$/) { # Next section
+		$done = 1;
+	    } else {
+		$_ = "";
+	    }
+	}
+    }
+    return join ("", @lines);
 }
 
 #-######################################################################################
