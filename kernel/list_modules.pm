@@ -18,7 +18,7 @@ our %l = (
       if_(arch() =~ /^sparc/, qw(sunbmac sunhme sunqe)),
       if_(arch() !~ /alpha|sparc/,
         qw(3c501 3c503 3c505 3c507 3c509 3c515 3c90x 3c990 3c990fx),
-        qw(82596 abyss ac3200 acenic aironet4500_card at1700 atp),
+        qw(82596 abyss ac3200 acenic aironet4500_card amd8111e at1700 atp),
         qw(b44 bcm4400 com20020-pci cs89x0 de2104x de600 de620),
         qw(defxx), # most unused
         qw(depca dgrs dmfe e100 e2100 eepro eepro100 eexpress epic100 eth16i),
@@ -27,14 +27,14 @@ our %l = (
         qw(lance lanstreamer natsemi ne ne2k-pci ni5010 ni52 ni65 nvnet),
         qw(olympic pcnet32 plip prism2_plx rcpci),
         qw(sb1000 sdladrv sis900 skfp smc-ultra smc9194 starfire),
-        qw(tc35815 tlan tmspci tulip via-rhine),
+        qw(tc35815 tlan tmspci tulip typhoon via-rhine),
         qw(wd winbond-840 forcedeth),
       ),
       qw(3c59x 8139too 8139cp sundance), #rtl8139
     ],
     firewire => [ qw(eth1394) ],
     gigabit => [
-      qw(dl2k myri_sbus yellowfin ns83820 r8169 tg3 e1000 sk98lin),
+      qw(dl2k e1000 ixgb myri_sbus ns83820 r8169 s2io sk98lin tg3 via-velocity yellowfin ),
       qw(bcm5820 bcm5700), #- encrypted
     ],
 
@@ -50,9 +50,9 @@ our %l = (
       qw(catc CDCEther kaweth pegasus rtl8150 usbnet),
     ],
     wireless => [
-      qw(acx100_pci airo airo_cs aironet4500_cs aironet_cs at76c503-rfmd atmel_cs),
+      qw(acx100_pci airo airo_cs aironet4500_cs aironet_cs at76c503-rfmd atmel_cs atmel_pci hostap_pci hostap_plx),
       qw(ipw2100 ipw2200 madwifi_pci netwave_cs orinoco orinoco_cs orinoco_pci orinoco_plx),
-      qw(prism2_usb prism54 ray_cs usbvnet_rfmd vt_ar5k wavelan_cs wvlan_cs),
+      qw(prism2_pci prism2_usb prism54 ray_cs usbvnet_rfmd vt_ar5k wavelan_cs wvlan_cs),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
     isdn => [
@@ -68,11 +68,11 @@ our %l = (
       if_(arch() =~ /^sparc/, qw(qlogicpti)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
         qw(3w-9xxx 3w-xxxx AM53C974 BusLogic NCR53c406a a100u2w advansys aha152x aha1542 aha1740),
-        qw(atp870u dc395x_trm dtc g_NCR5380 in2000 initio pas16 pci2220i psi240i fdomain),
+        qw(atp870u dc395x dc395x_trm dtc g_NCR5380 in2000 initio pas16 pci2220i psi240i fdomain),
         qw(qla1280 qla2x00 qlogicfas qlogicfc),
         qw(seagate wd7000 sim710 sym53c416 t128 tmscsim u14-34f ultrastor),
         qw(eata eata_pio eata_dma mptscsih nsp32),
-        qw(sata_nv ata_piix sata_promise sata_sil sata_sis sata_svw sata_sx4 sata_via sata_vsc),
+        qw(sata_nv ata_piix sata_promise sata_sil sata_sis sata_svw sata_sx4 sata_via sata_vsc sx8),
       ),
       '53c7,8xx',
       qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicisp sym53c8xx lpfcdd), # ncr53c8xx
@@ -81,7 +81,7 @@ our %l = (
       if_(arch() =~ /^sparc/, qw(pluto)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
         qw(DAC960 dpt_i2o megaraid aacraid cciss cpqarray gdth i2o_block),
-	qw(cpqfc qla2100 qla2200 qla2300 pdc-ultra iteraid),
+	qw(cpqfc ipr iteraid qla2100 qla2200 qla2300 qla2322 qla6312 qla6322 pdc-ultra ),
         qw(ips ppa imm),
        if_(c::kernel_version =~ /^\Q2.4/,
 	qw(ataraid hptraid silraid pdcraid)
