@@ -1172,6 +1172,7 @@ sub check_kernel_module_packages {
 	    $p->flag_available or next;
 	    my $name = "$base_name$ext-$version_release";
 	    pkgs::packageByName($do->{o}{packages}, $name) or next;
+	    log::l("found kernel module packages $name");
 	    push @rpms, $name;
 	}
 	@rpms > 0 and return [ @rpms, if_($ext_name, $ext_name) ];
