@@ -245,14 +245,22 @@ else
 standalone::explanations("Choosing network device: $device");
 
 
-my $lan_address = "192.168.0.0";
-my $server_ip = "192.168.0.1";
+my $lan_address = "192.168.1.0";
+my $server_ip = "192.168.1.1";
+my $nameserver_ip = "192.168.1.1";
+my $netmask = "255.255.255.0";
+my $start_range = "16";
+my $end_range = "253";
+my $default_lease = "21600";
+my $max_lease = "43200";
+my $internal_domain_name = "homeland.net";
 
 my $reconf_dhcp_server_intf = 1;
 
 if (grep(/$device/, @configured_devices)) {
   step_warning_already_conf:
     my $auto = _('Yes');
+		my $dhcp_details = _('Yes');
     my $conf = network::read_interface_conf("/etc/sysconfig/network-scripts/ifcfg-$device");
     $in->ask_from(_("Network interface already configured"),
 		  _("Warning, the network adapter (%s) is already configured.
@@ -276,16 +284,30 @@ Driver: %s", $device, $conf->{NETWORK}, $conf->{IPADDR}, $conf->{BOOTPROTO}, $al
 	$nameserver_ip = $conf->{IPADDR};
 	$lan_address = $conf->{NETWORK};
 	$in->ask_from('',
-		      _("I can keep your current configuration and assume you already set up a DHCP server; in that case please verify I correctly read the C-Class Network that you use for your local network; I will not reconfigure it and I will not touch your DHCP server configuration.
+		      _("I can keep your current configuration and assume you already set up a DHCP server; in that case please verify I correctly read the Network that you use for your local network; I will not reconfigure it and I will not touch your DHCP server configuration.
 
 The default DNS entry is the Caching Nameserver configured on the firewall. You can replace that with your ISP DNS IP, for example.
-									
+		      
 Else, I can reconfigure your interface and (re)configure a DHCP server for you.
 
 ", $device),
-		      [ { label => _("C-Class Local Network"), val => \$lan_address, type => 'entry' },
-			{ label => _("(This) DHCP Server IP"), val => \$server_ip, type => 'entry' },
+      [ { label => _("Local Network adress"), val => \$lan_address, type => 'entry' },
+			{ label => _("Netmask"), val => \$netmask, type => 'entry' } ])
+		  or goto step_warning_already_conf;
+	$in->ask_from('',
+		      _("DHCP Server Configuration.
+
+Here you can select different options for the DHCP server configuration.
+If you don't know the meaning of an option, simply leave it as it is.
+
+", $device),
+			[ { label => _("(This) DHCP Server IP"), val => \$server_ip, type => 'entry' },
 			{ label => _("The DNS Server IP"), val => \$nameserver_ip, type => 'entry' },
+			{ label => _("The internal domain name"), val => \$internal_domain_name, type => 'entry' },
+			{ label => _("The DHCP start range"), val => \$start_range, type => 'entry' },
+			{ label => _("The DHCP end range"), val => \$end_range, type => 'entry' },
+			{ label => _("The default lease (in seconds)"), val => \$default_lease, type => 'entry' },
+			{ label => _("The maximum lease (in seconds)"), val => \$max_lease, type => 'entry' },
 			{ label => _("Re-configure interface and DHCP server"), val => \$reconf_dhcp_server_intf, type => 'bool' } ])
 	  or goto step_warning_already_conf;
     }
@@ -328,7 +350,7 @@ if ($reconf_dhcp_server_intf) {
     output($ifcfg, qq(DEVICE=$device
 BOOTPROTO=static
 IPADDR=$server_ip
-NETMASK=255.255.255.0
+NETMASK=$netmask
 NETWORK=$lan_address.0
 BROADCAST=$lan_address.255
 ONBOOT=yes
@@ -359,7 +381,7 @@ put_in_hash($shorewall ||= {}, {
     disabled => 0,
     net_interface => $card_netconnect,
     if_(@cards > 1, loc_interface => [ grep { $_ ne $device } @cards ]),
-    masquerade => { interface => $device, subnet => "$lan_address.0/24" },
+    masquerade => { interface => $device, subnet => "$lan_address.0/$netmask" },
 });
 
 network::shorewall::write($shorewall);
@@ -374,17 +396,17 @@ substInFile { s/^FORWARD_IPV4.*\n//; $_ .= "FORWARD_IPV4=true\n" if eof } $sysco
 if ($reconf_dhcp_server_intf) {
     standalone::explanations("Configuring a DHCP server on $lan_address.0");
     renamef($dhcpd_conf, "$dhcpd_conf.old");
-    output($dhcpd_conf, qq(subnet $lan_address.0 netmask 255.255.255.0 {
+    output($dhcpd_conf, qq(subnet $lan_address.0 netmask $netmask {
 	# default gateway
 	option routers $server_ip;
-	option subnet-mask 255.255.255.0;
+	option subnet-mask $netmask;
 
-	option domain-name "homelan.org";
+	option domain-name "$internal_domain_name";
 	option domain-name-servers $nameserver_ip;
 
-	range dynamic-bootp $lan_address.16 $lan_address.253;
-	default-lease-time 21600;
-	max-lease-time 43200;
+	range dynamic-bootp $lan_address.$start_range $lan_address.$end_range;
+	default-lease-time $default_lease;
+	max-lease-time $max_lease;
 }
 ));
 }
