@@ -127,7 +127,7 @@ int try_automatic(char ** medias, char ** medias_models)
 		model++;
 		i++;
 	}
-	return 0;
+	return -1;
 }
 
 enum return_type cdrom_prepare(void)
@@ -141,16 +141,16 @@ enum return_type cdrom_prepare(void)
 
 	if (IS_AUTOMATIC) {
 		get_medias(CDROM, &medias, &medias_models, BUS_IDE);
-		if ((i = try_automatic(medias, medias_models)))
+		if ((i = try_automatic(medias, medias_models)) != -1)
 			return do_with_device(medias[i], medias_models[i]);
 		
 		my_insmod("sr_mod", ANY_DRIVER_TYPE, NULL);
 		get_medias(CDROM, &medias, &medias_models, BUS_SCSI);
-		if ((i = try_automatic(medias, medias_models)))
+		if ((i = try_automatic(medias, medias_models)) != -1)
 			return do_with_device(medias[i], medias_models[i]);
 		
 		get_medias(CDROM, &medias, &medias_models, BUS_USB);
-		if ((i = try_automatic(medias, medias_models)))
+		if ((i = try_automatic(medias, medias_models)) != -1)
 			return do_with_device(medias[i], medias_models[i]);
 
 		unset_param(MODE_AUTOMATIC);
