@@ -1,0 +1,606 @@
+#!/usr/bin/perl
+
+if (shift(@ARGV) ne '-f') {
+    print "Call it with option -f, but don't fear loosing all your data, this command is dangerous!";
+    print "
+usage: /etc/oem -f [options]
+where [options] are:
+    server                          : allow server installalation
+    boot_entries=entry1,...,entryN  : set boot entries to use,
+                                      the first one is the default one
+    no<option>                      : disable options <option>
+";
+    exit 1;
+}
+my (%options, $yes, $hd, $hdp, $cd, $fs);
+
+#- avoid globing as it is not available in rescue ramdisk.
+foreach my $device (split ' ', `/bin/ls -d /proc/ide/hd*`) {
+    open F, "$device/media" or next;
+    foreach (<F>) {
+	/disk/  and do { $hd ||= $device; $hd =~ s,/proc/ide/,,; };
+	/cdrom/ and do { $cd ||= $device; $cd =~ s,/proc/ide/,,; };
+    }
+    close F;
+}
+#- examine available SCSI devices (avoid SCSI floppies like LS-120 or ZIP disk or generic floppies).
+eval {
+    system "/usr/bin/drvinst"; #- load scsi drivers else it wont do anything.
+
+    my ($driveNum, $cdromNum) = (0, 0);
+    open F, "/proc/scsi/scsi" or die "no scsi available";
+    local $_ = <F>; /^Attached devices:/ or die "to attached devices found";
+    while ($_ = <F>) {
+	my ($id) = /^Host:.*?Id: (\d+)/ or die "no host found";
+	$_ = <F>; my ($vendor, $model) = /^\s*Vendor:\s*(.*?)\s+Model:\s*(.*?)\s+Rev:/ or die "no vendor nor model found";
+	$_ = <F>; my ($type) = /^\s*Type:\s*(.*)/;
+	if ($type =~ /Direct-Access/ && $model !~ /ZIP\s+\d+|LS-?120|144MB|[Ff]loppy/) {
+	    $hd ||= "sd" . chr($driveNum++ + ord('a'));
+	} elsif ($type =~ /CD-ROM/) {
+	    $cd ||= "scd" . $cdromNum++;
+	}
+    }
+    close F;
+};
+#- examine DAC960 device.
+#- there is a problem as there is no more than 7 partitions available, this means no /home and no /var.
+unless ($hd) {
+    local $_;
+    open F, "dmesg |";
+    while (<F>) {
+	m|/dev/(rd/.*?): .*?,| and $hd ||= $1, last;
+    }
+    close F;
+    if ($hd) {
+	my ($c_id, $d_id) = $hd =~ m|rd/c(\d+)d(\d+)|;
+	-d "/dev/rd" or mkdir "/dev/rd";
+	system "mknod", "/dev/$hd", "b", 48+$c_id, 8*$d_id;
+	foreach (1..7) {
+	    system "mknod", "/dev/${hd}p$_", "b", 48+$c_id, 8*$d_id+$_;
+	}
+	$hdp = $hd . 'p';
+    }
+}
+#- examine Compaq Smart Array device.
+unless ($hd) {
+    foreach ('array/ida', 'cpqarray/ida', 'cciss/cciss') {
+	my $prefix = "/proc/driver/$_"; #- kernel 2.4 places it here
+	$prefix = "/proc/$_" if !-e "${prefix}0"; #- kernel 2.2
+
+	my ($name) = m|/(.*)|;
+	for (my $i = 0; -r ($f = "${prefix}$i"); $i++) {
+	    local $_;
+	    open F, $f;
+	    while (<F>) {
+		if (m|^\s*($name/.*?):|) {
+		    $hd ||= $1;
+		}
+	    }
+	    close F;
+	}
+    }
+    if ($hd) {
+	my ($type, $c_id, $d_id) = $hd =~ m,(ida|cciss)/c(\d+)d(\d+),;
+	-d "/dev/$type" or mkdir "/dev/$type";
+	system "mknod", "/dev/$hd", "b", ($type eq 'ida' ? 72 : 104)+$c_id, 16*$d_id;
+	foreach (1..15) {
+	    system "mknod", "/dev/${hd}p$_", "b", ($type eq 'ida' ? 72 : 104)+$c_id, 16*$d_id+$_;
+	}
+	$hdp = $hd . 'p';
+    }
+}
+$hd && -e "/dev/$hd" or die "unable to access hard disk";
+print "hd: $hd\ncd: $cd\n";
+$hdp ||= $hd;
+
+#- try to free any reference to hard disk which will be used (as in rescue mode it has already loaded
+#- existing partition in /mnt.
+open F, "/proc/mounts";
+while (<F>) {
+    /$hdp(\d*)\s+(\S+)/ and $already_mounted{$2} = "$hdp$1";
+}
+foreach (sort { $b cmp $a } keys %already_mounted) {
+    print "umounting $already_mounted{$_} from $_\n"; 
+    system "umount", $_;
+}
+    
+#- find a cdrom (like) image, normally a true cdrom but if nfs install is running, use it instead.
+mkdir "/cdrom";
+open F, "/proc/cmdline";
+while (<F>) {
+    /automatic=method:nfs,.*server:([^\s,]*),.*directory:([^\s,]*)/
+      and system "mount", "-r", "-t", "nfs", "$1:$2", "/cdrom", "-o", "nolock";
+}
+close F;
+unless (-e "/cdrom/VERSION") {
+    -e "/dev/$cd" or die "unable to access local cdrom";
+    system "mount", "-r", "-t", "iso9660", "/dev/$cd", "/cdrom";
+}
+
+open F, "/cdrom/VERSION" or die "no installation cdrom found on $cd";
+while (<F>) {
+    /\[boot_entries[=:]([^]]*)\]/ and $options{boot_entries} = $1;
+    /\[ext2\]/ and $options{fs} = "ext2";
+    /\[ext3\]/ and $options{fs} = "ext3";
+}
+close F;
+foreach (@ARGV) { /^([^=:]*)[=:]?(.*)/ and $options{$1} = $2; /^no([^=:]*)/ and delete $options{$1} }
+
+foreach (keys %options) {
+    print "Using option [$_" . ($options{$_} && "=$options{$_}") . "]\n";
+}
+
+#- filesystem to use.
+$fs ||= $options{fs} || "ext3";
+$fs eq "ext3" and system "modprobe", "ext3";
+print "Using filesystem of type $fs\n";
+
+#- check for already existing partition table, if none are found
+#- create 3 partitions (one for install, one for swap and one for root).
+#- if only a fat partition is found, resize it do include the above partition.
+#- other combination are really dangerous and are not supported, ask
+#- the user that all data on the disk will be erased and go on.
+my ($heads, $sectors, $cylinders, $hd_size, @hd_parts);
+sub correct_start_end {
+    my ($rstart, $end, $keep_start) = @_;
+    my ($cylinder_size, $c_start, $c_end) = ($sectors*$heads*512/1024/1024, undef, undef);
+    if (abs($cylinder_size*$cylinders-$hd_size)/$hd_size < 0.01) {
+	$c_start = $$rstart+($keep_start ? 0 : $cylinder_size/$heads);
+	$c_end = $cylinder_size*int(1/2+$end/$cylinder_size);
+	$c_end > $hd_size and $c_end = $hd_size;
+	$$rstart = $c_end;
+    } else {
+	$c_start = $$rstart;
+	$c_end = $end;
+	$c_end > $hd_size and $c_end = $hd_size;
+	$$rstart = $c_end+5; #- fall back to use a problable safe method.
+    }
+    $c_start >= $c_end and die "no space left for partitionning\n";
+    ($c_start, $c_end);
+}
+open F, "fdisk -l /dev/$hd |";
+while (<F>) {
+    /(\d+)\s*heads/ and $heads = $1;
+    /(\d+)\s*sectors/ and $sectors = $1;
+    /(\d+)\s*cylinders/ and $cylinders = $1;
+}
+if ($heads == 1 && $cylinders == 1) {
+    $cylinders = $sectors / 255 / 63;
+    $heads = 255;
+    $sectors = 63;
+}
+close F;
+for (1..2) {
+    open F, "parted /dev/$hd -s print |";
+    while (<F>) {
+	/^Disk geometry [^:]*:\s*([\d\.]+)-([\d\.]+)/ and do { $hd_size = $2 - $1 - 1 };
+	#/^Disk label type:\s*msdos/ and do { $hd_type = 'msdos' };
+	/^(\d+)\s+([\d\.]+)\s+([\d\.]+)\s+(primary|logical|extended)\s*(\S*)/ and do {
+	    #- this automatically drops extended partition here!
+	    push @hd_parts, { minor => $1, start => $2, end => $3, type => $4, fstype => $5 };
+	};
+    }
+    close F;
+    $hd_size and last;
+    print "Unable to detect partition on disk, trying with new label\n";
+    do {
+	print "
+
+I'm going to install the OEM version on your hard drive
+[1;31;40m!!ALL DATA WILL BE LOST!![0m
+
+Type \`\`yes'' and [enter] to go on\n"
+    } while (($yes = <STDIN>) !~ /^\s*yes\s*$/i);
+    system "parted", "/dev/$hd", "mklabel", "msdos";
+}
+my ($min_size, $def_size, $trigger_size, $inst_size, $swap_size) = (4000, 3500, 4000, 1500, 128);
+$hd_size > $min_size or die "hard disk is too small to contain oem install (${hd_size}MB found, need $min_size at least)";
+
+my ($fat_pos, $resize_fat_size, $root_size);
+if (@hd_parts == 1 && $hd_parts[$fat_pos = 0]{fstype} eq 'FAT' ||
+    @hd_parts == 2 && $hd_parts[0]{type} eq 'primary' && $hd_parts[$fat_pos = 1]{fstype} eq 'FAT' ||
+    @hd_parts == 3 && $hd_parts[0]{type} eq 'primary' && $hd_parts[1]{type} eq 'primary' && $hd_parts[$fat_pos = 2]{fstype} eq 'FAT' ||
+    @hd_parts == 2 && $hd_parts[0]{type} eq 'extended' && $hd_parts[$fat_pos = 1]{fstype} eq 'FAT' ||
+    @hd_parts == 3 && $hd_parts[0]{type} eq 'extended' && $hd_parts[1]{type} eq 'primary' && $hd_parts[$fat_pos = 5]{fstype} eq 'FAT') {
+    if ($hd_size - $hd_parts[$fat_pos]{end} > $min_size) {
+	#- check first if there are some available space left on the disk.
+	#- so we are using it, root_size is fixed to match hard disk size.
+	$resize_fat_size = 0;
+	$root_size = $hd_size - $hd_parts[$fat_pos]{end} - $inst_size - $swap_size;
+	$root_size > $trigger_size and $root_size = $def_size;
+    } elsif ($hd_size > 2*$min_size) {
+	#- resize this fat partition.
+	$resize_fat_size = 0.5 * $hd_size;
+	$root_size = $hd_size - $resize_fat_size - $inst_size - $swap_size;
+	$root_size > $trigger_size and $root_size = $def_size;
+    }
+}
+unless ($root_size) {
+    #- there have not been defined above, so remove everything and start from
+    #- a blank partition.
+    $resize_fat_size = undef;
+    $root_size = $hd_size - $resize_fat_size - $inst_size - $swap_size;
+    $root_size > $trigger_size and $root_size = $def_size;
+}
+
+#- launch parted to edit partition table, start at minor.
+#- point define where we start.
+my $minor = defined $resize_fat_size && $hd_parts[0]{type} eq 'extended' ? 6 : 5;
+my $point = 0.0;
+
+if (defined $resize_fat_size) {
+    do {
+	print "
+
+[1;31;40m!!An existing Windows partition has been found and will be kept.
+Additional Linux partitions will be created!![0m
+
+Type \`\`yes'' and [enter] to go on\n"
+    } while (($yes = <STDIN>) !~ /^\s*yes\s*$/i);
+    #- keep the current partition table, and try to resize the fat partition
+    #- if the size is not 0.
+    #- KEEP IN MIND there is only one partition defined.
+    open F, "| parted -s /dev/$hd";
+    if ($resize_fat_size) {
+	$point = $hd_parts[$fat_pos]{start};
+	printf F "resize %d %s %s\n", $hd_parts[$fat_pos]{minor}, correct_start_end(\$point, $point+$resize_fat_size, 'keepstart');
+    } else {
+	$point = $hd_parts[$fat_pos]{end};
+    }
+    $point+=9; #- keep blank space between partitions if parted cannot handle partition table correctly.
+} else {
+    unless (defined $yes) {
+	do {
+	    print "
+
+I'm going to install the OEM version on your hard drive
+[1;31;40m!!ALL DATA WILL BE LOST!![0m
+
+Type \`\`yes'' and [enter] to go on\n"
+        } while (($yes = <STDIN>) !~ /^\s*yes\s*$/i);
+    }
+    #- build a new disk label here.
+    open F, "| parted -s /dev/$hd";
+    print F "mklabel msdos\n";
+}
+
+#- at this point, the partition are created.
+my ($instz, $inst, $swap, $root, $var, $home) = ($minor-1, $minor, $minor+1, $minor+2, undef, undef);
+
+#- all linux partition are stored inside an extended partition, this is easier to manipulate after.
+if ($minor == 5) {
+    print F "mkpart extended $point $hd_size\n";
+} else {
+    $hd_parts[0]{type} eq 'extended' or die "first partition assumed to be extended";
+    $point = $hd_parts[0]{start};
+    print F "resize $hd_parts[0]{minor} $point $hd_size\n";
+}
+printf F "mkpart logical ext2 %s %s\n", correct_start_end(\$point, $point+$inst_size);
+printf F "mkpart logical linux-swap %s %s\n", correct_start_end(\$point, $point+$swap_size);
+printf F "mkpart logical %s %s %s\n", $fs, correct_start_end(\$point, $point+$root_size);
+if (exists $options{server} && $hd !~ /^rd\//) {
+    my $var_size = ($hd_size - $point) / 2;
+    if ($var_size > 1500) {
+	$var = $root+1;
+	printf F "mkpart logical %s %s %s\n", $fs, correct_start_end(\$point, $point+$var_size);
+    }
+}
+if ($hd_size - $point > 100 && $hd !~ /^rd\//) {
+    $home = ($var || $root) + 1;
+    printf F "mkpart logical %s %s %s\n", $fs, correct_start_end(\$point, $hd_size);
+}
+print F "quit\n";
+close F or die "unable to partition the disk $hd";
+
+#- we have to build swap and mount it.
+print "Setting swap\n";
+system "mkswap", "/dev/$hdp$swap";
+system "swapon", "/dev/$hdp$swap";
+
+#- we have to format using right fs.
+print "Formatting /dev/$hdp$inst partition\n";
+mkfs("ext2", "/dev/$hdp$inst");
+print "Formatting /dev/$hdp$root partition\n";
+mkfs($fs, "/dev/$hdp$root");
+if ($var) {
+    print "Formatting /dev/$hdp$var partition\n";
+    mkfs($fs, "/dev/$hdp$var");
+}
+if ($home) {
+    print "Formatting /dev/$hdp$home partition\n";
+    mkfs($fs, "/dev/$hdp$home");
+}
+
+print "Mounting partitions\n";
+mkdir "/hd";
+system "mount", "-t", "ext2", "/dev/$hdp$inst", "/hd";
+mkdir "/mnt";
+system "mount", "-t", $fs, "/dev/$hdp$root", "/mnt";
+if ($var) {
+    mkdir "/mnt/var";
+    system "mount", "-t", $fs, "/dev/$hdp$var", "/mnt/var";
+}
+if ($home) {
+    mkdir "/mnt/home";
+    system "mount", "-t", $fs, "/dev/$hdp$home", "/mnt/home";
+}
+
+print "Copying installation on hard drive\n";
+mkdir "/hd/boot";
+if (-e "/cdrom/oem/vmlinuz" && -e "/cdrom/oem/all.rdz") {
+    system "cp", "-a", "/cdrom/oem/vmlinuz", "/hd/boot/vmlinuz";
+    system "cp", "-a", "/cdrom/oem/all.rdz", "/hd/boot/all.rdz";
+} elsif (-e "/cdrom/boot/vmlinuz" && -e "/cdrom/boot/hd.rdz") {
+    system "cp", "-a", "/cdrom/boot/vmlinuz", "/hd/boot/vmlinuz";
+    system "cp", "-a", "/cdrom/boot/hd.rdz", "/hd/boot/all.rdz";
+} elsif (-e "/cdrom/images/hd.img") {
+    mkdir "/tmp/hd";
+    system "modprobe", "loop";
+    system "modprobe", "vfat";
+    system "mount", "-t", "vfat", "/cdrom/images/hd.img", "/tmp/hd", "-o", "loop";
+    system "cp", "-a", "/tmp/hd/vmlinuz", "/hd/boot/vmlinuz";
+    system "cp", "-a", "/tmp/hd/hd.rdz", "/hd/boot/all.rdz";
+    system "umount", "/tmp/hd";
+} else {
+    die "no installation stage1 found";
+}
+
+mkdir "/hd/Mandrake";
+mkdir "/hd/Mandrake/RPMS";
+system "cp", "-a", "/cdrom/VERSION", "/hd";
+system "cp", "-a", "/cdrom/Mandrake/base", "/cdrom/Mandrake/mdkinst", "/hd/Mandrake";
+
+if (open F, ">/hd/Mandrake/oem_patch.pl") {
+    print "Setting OEM specific extension to DrakX\n";
+    if (exists $options{server}) {
+	print F q{
+	    use install_steps;
+	    package install_steps;
+	    undef *choosePackages;
+	    *choosePackages = sub {
+		my ($o, $packages, $compssUsers, $first_time) = @_;
+
+		#- make sure we kept some space left for available else the system may
+		#- not be able to start (xfs at least).
+		my $available = install_any::getAvailableSpace($o);
+		my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
+
+		#- avoid destroying user selection of packages but only
+		#- for expert, as they may have done individual selection before.
+	        install_any::unselectMostPackages($o);
+
+		#- use specific OEM packages selection, go to level 5
+		#- and disable some extension.
+		$o->{compssUsersChoice}{$_} = 0 foreach 'GNOME';
+		$o->{compssUsersChoice}{$_} = 0 
+		    foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
+		$o->{compssListLevel} = 5;
+	        pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $o->{compssListLevel}, $availableCorrected);
+
+		$availableCorrected;
+	    };
+	};
+    } else {
+	print F q{
+	    use install_steps;
+	    package install_steps;
+	    undef *choosePackages;
+	    *choosePackages = sub {
+		my ($o, $packages, $compssUsers, $first_time) = @_;
+
+		#- make sure we kept some space left for available else the system may
+		#- not be able to start (xfs at least).
+		my $available = install_any::getAvailableSpace($o);
+		my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
+
+		#- avoid destroying user selection of packages but only
+		#- for expert, as they may have done individual selection before.
+	        install_any::unselectMostPackages($o);
+
+		#- use specific OEM packages selection, go to level 4.
+		#- and select at least GAMES group, everything else has
+		#- already be selected during master preparation.
+		$o->{compssListLevel} = 4;
+		$o->{compssUsersChoice}{GAMES} = 1;
+	        pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $o->{compssListLevel}, $availableCorrected);
+
+		$availableCorrected;
+	    };
+	};
+    }
+    if ($options{boot_entries}) {
+	print "Setting OEM specific extension for boot entries\n";
+	print F q{
+	    my $sorted_entries = q(} . $options{boot_entries} . q{); #- insert boot_entries options here as string q(...).
+	    my $old_setupBootloaderBefore = \&setupBootloaderBefore;
+	    undef *setupBootloaderBefore;
+	    *setupBootloaderBefore = sub {
+		$old_setupBootloaderBefore->(@_);
+		my @entries = split ',', $sorted_entries;
+		my @result_entries;
+		foreach my $p (@entries) {
+		    foreach (@{$_[0]{bootloader}{entries}}) {
+			$_->{label} eq $p and push @result_entries, $_;
+		    }
+		}
+		if (@result_entries) {
+		    $_[0]{bootloader}{entries} = \@result_entries;
+		    $_[0]{bootloader}{default} = $result_entries[0]{label}; #- first image is default.
+		}
+	    };
+	};
+    }
+    close F;
+}
+
+print "Setting bootloader\n";
+mkdir "/hd/boot/grub";
+foreach (1..2) {
+    -e "/hd/boot/grub/stage$_" or system "cp", "-a", "/boot/grub/stage$_", "/hd/boot/grub";
+}
+open F, ">/hd/boot/grub/menu.lst";
+if (defined $resize_fat_size) {
+    print F "timeout 5\n";
+    print F "color black/cyan yellow/cyan\n\n";
+    print F "title linux\n";
+} else {
+    print F "timeout 0\n\n";
+    print F "title oem\n";
+}
+print F "kernel (hd0,$instz)/boot/vmlinuz ramdisk_size=32000 automatic=method:disk,disk:$hd,partition:$hdp$inst,directory:/ hd vga=788 fbeginner oem defcfg=/tmp/hdimage/Mandrake/oem_patch.pl\n";
+print F "initrd (hd0,$instz)/boot/all.rdz\n";
+#- if a windows partition is available, add an entrie for it.
+if (defined $resize_fat_size) {
+    print F "\ntitle windows\n";
+    printf F "rootnoverify (hd0,%s)\n", $hd_parts[$fat_pos]{minor}-1;
+    print F "makeactive\n";
+    print F "chainloader +1\n";
+}
+close F;
+open F, ">/hd/boot/grub/device.map";
+print F "(hd0) /dev/$hd\n";
+close F;
+open F, "| grub --device-map=/hd/boot/grub/device.map --batch";
+print F "install (hd0,$instz)/boot/grub/stage1 d (hd0) (hd0,$instz)/boot/grub/stage2 p (hd0,$instz)/boot/grub/menu.lst\n";
+print F "quit\n";
+close F or die "error while executing grub";
+
+my $packages = read_depslist("/cdrom/Mandrake/base/depslist.ordered");
+
+my @media;
+open F, "/cdrom/Mandrake/base/hdlists";
+foreach (<F>) {
+    chomp;
+    s/\s*#.*$//;
+    /^\s*$/ and next;
+    m/^\s*(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die "invalid hdlist description \"$_\" in hdlists file";
+
+    push @media, { hdlist => $1, rpmsdir => $2, descr => $3 };
+}
+close F;
+
+#- initialize installation.
+foreach (qw(/etc /etc/sysconfig /etc/rpm /var /var/lib /var/lib/rpm /var/log /proc)) {
+    mkdir "/mnt/$_";
+}
+system "mount", "-t", "proc", "proc", "/mnt/proc";
+open F, ">/mnt/etc/fstab";
+print F "/dev/$hdp$root / $fs defaults 1 1\n";
+if ($var) {
+    print F "/dev/$hdp$var /var $fs defaults 1 2\n";
+}
+if ($home) {
+    print F "/dev/$hdp$home /home $fs defaults 1 2\n";
+}
+close F;
+
+#- keep in mind all the rpm files available (according to hdlists).
+my (%files, %rpms);
+
+require packdrake;
+foreach my $medium (@media) {
+    my $packer = new packdrake("/cdrom/Mandrake/base/$medium->{hdlist}");
+    foreach (@{$packer->{files}}) {
+	$packer->{data}{$_}[0] eq 'f' or next;
+	my ($fullname, $file) = /([^:]*):(.*)/ ? ($1, "$2.rpm") : ($_, "$_.rpm");
+	$files{$fullname} = $file;
+	$rpms{$file} = $medium->{rpmsdir};
+    }
+}
+
+#- copy and install from each cd image.
+foreach my $medium (@media) {
+    while ($cd && ! -d "/cdrom/$medium->{rpmsdir}") {
+	system "unmount", "/dev/$cd";
+	system "eject", "/dev/$cd";
+	print "Please insert the cdrom labeled \"$medium->{descr}\"\n  and press [enter] when done\n";
+	$yes = <STDIN>;
+	system "mount", "-r", "-t", "iso9660", "/dev/$cd", "/cdrom";
+    }
+
+    print "Copying packages from medium labeled \"$medium->{descr}\" to hard disk\n";
+    system "mkdir", "-p", "/hd/$medium->{rpmsdir}";
+    foreach my $pkg (@{$packages->{depslist}}) {
+	$files{rpm_fullname($pkg)} or next;
+	my $file = "/cdrom/$medium->{rpmsdir}/" . $files{rpm_fullname($pkg)};
+	if (-e $file) {
+	    print "  copying " . rpm_fullname($pkg) . "\n";
+	    system "cp", "-a", $file, "/hd/$medium->{rpmsdir}";
+	}
+    }
+}
+
+#- try to figure out if a oem-message-graphic already exists.
+#- if this is the case, rename it to /mnt/boot/message-graphic
+if (-e "/cdrom/Mandrake/base/oem-message-graphic") {
+    print "Using specific oem graphic image\n";
+    if (-e "/mnt/boot/message-graphic") {
+	rename "/mnt/boot/message-graphic", "/mnt/boot/message-graphic.old";
+	system "cp", "-a", "/cdrom/Mandrake/base/oem-message-graphic", "/mnt/boot/message-graphic";
+    } elsif (-e "/mnt/boot/lilo-graphic/message") {
+	rename "/mnt/boot/lilo-graphic/message", "/mnt/boot/lilo-graphic/message.old";
+	system "cp", "-a", "/cdrom/Mandrake/base/oem-message-graphic", "/mnt/boot/lilo-graphic/message";
+    }
+}
+
+#- clean all initrd image which may have been built.
+system "rm -f /mnt/boot/initrd*";
+
+system "umount", "/mnt/proc";
+$home and system "umount", "/mnt/home";
+$var and system "umount", "/mnt/var";
+system "umount", "/mnt";
+system "umount", "/hd";
+system "umount", "/cdrom";
+
+$cd and system "eject", "/dev/$cd";
+
+print "
+Done. OEM hard drive ready!
+The hard drive is now ready for a customer.
+System is now halted.\n\n";
+
+system "halt";
+
+#- gives way to format partition (simpler approach)
+sub mkfs {
+    my ($fs, $dev) = @_;
+    for ($fs) {
+	/ext2/ and do { system "mkfs.ext2", $dev;
+			next };
+	/ext3/ and do { system "mkfs.ext2", "-j", $dev;
+			system "tune2fs", "-c0", "-i0", $dev;
+			next };
+	die "unknown fs: $_\n";
+    }
+}
+
+sub chop_version {
+    ($_[0] =~ /^([^:\s]*)-[^:\-\s]+-[^:\-\s]+\.[^:\.\-\s]*(?::\S*)?/)[0] || die "unable to parse $_[0]";
+}
+sub rpm_fullname {
+    ($_[0]{name} =~ /^([^:\s]*-[^:\-\s]+-[^:\-\s]+\.[^:\.\-\s]*)(?::\S*)?/)[0] || die "unable to parse $_[0]";
+}
+
+sub read_depslist {
+    my ($file) = @_;
+    my $packages = { depslist => [], names => {} };
+
+    #- read depslist.oredered file.
+    my $id = 0;
+
+    open F, "$file" or die "unable to open ordered dependencies list file";
+    while (<F>) {
+	my ($name, $size, @deps) = split;
+	push @{$packages->{depslist}}, { id => $id++, name => $name, size => $size, deps => \@deps };
+    }
+    close F;
+
+    foreach (@{$packages->{depslist}}) {
+	$packages->{names}{chop_version($_->{name})} = $_;
+    }
+
+    print "read " . scalar(@{$packages->{depslist}}) . " package dependancies\n";
+    $packages;
+}
+
