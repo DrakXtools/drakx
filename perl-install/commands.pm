@@ -50,7 +50,7 @@ sub grep_ {
     @_ == 0 || $h and die "usage: grep <regexp> [files...]\n";
     my $r = shift;
     $r = qr/$r/i if $i;
-    @ARGV = @_; (/$r/ ? $v || print : $v && print) while <>
+    @ARGV = @_; (/$r/ ? $v || print : $v && print) while <>;
 }
 
 sub tr_ {
