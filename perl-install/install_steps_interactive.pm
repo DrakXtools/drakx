@@ -167,7 +167,7 @@ sub selectMouse {
     }
     
     if ($o->{mouse}{device} eq "usbmouse") {
-	any::load_category($o, 'bus/usb', 1, 1);
+	modules::interactive::load_category($o, 'bus/usb', 1, 1);
 	eval { 
 	    devices::make("usbmouse");
 	    modules::load(qw(hid mousedev usbmouse));
@@ -193,9 +193,9 @@ sub setupSCSI {
 	my $_w = $o->wait_message(N("IDE"), N("Configuring IDE"));
 	modules::load(modules::category2modules('disk/cdrom'));
     }
-    any::load_category($o, 'bus/firewire', 1);
+    modules::interactive::load_category($o, 'bus/firewire', 1);
 
-    any::load_category($o, 'disk/scsi|hardware_raid', !$::expert && !$clicked, 0);
+    modules::interactive::load_category($o, 'disk/scsi|hardware_raid', !$::expert && !$clicked, 0);
 
     install_interactive::tellAboutProprietaryModules($o) if !$clicked;
 }
