@@ -733,6 +733,21 @@ sub new {
 	    if ($::isInstall) {
 		$::WizardTable->set_size_request($::windowwidth * 0.90, $::windowheight * 0.73);
 		$::WizardWindow->set_uposition($::stepswidth + $::windowwidth * 0.04, $::logoheight + $::windowheight * 0.15);
+		$::WizardWindow->signal_connect(key_press_event => sub {
+		    my (undef, $event) = @_;
+		    my $d = ${{ Gtk2::Gdk::Event::Key->Sym_F1  => 'help',
+			        Gtk2::Gdk::Event::Key->Sym_F2  => 'screenshot' }}{$event->keyval};
+		    
+		    if ($d eq "help") {
+			require install_gtk;
+			install_gtk::create_big_help($::o);
+		    } elsif ($d eq 'screenshot') {
+			common::take_screenshot($o);
+		    } elsif (chr($event->keyval) eq 'e' && member('mod1-mask', @{$event->state})) {  #- alt-e
+			log::l("Switching to " . ($::expert ? "beginner" : "expert"));
+			$::expert = !$::expert;
+		    }
+		});
 	    } else {
 		my $draw1 = Gtk2::DrawingArea->new;
 		$draw1->set_size_request(540, 100);
@@ -881,28 +896,6 @@ sub _create_window($$) {
 	    $w->signal_disconnect($signal);
 	});
     }
-    $w->signal_connect(key_press_event => sub {
-	my (undef, $event) = @_;
-	my $d = ${{ Gtk2::Gdk::Event::Key->Sym_F1  => 'help',
-		    Gtk2::Gdk::Event::Key->Sym_F2  => 'screenshot' }}{$event->keyval};
-
-	if ($event->keyval == Gtk2::Gdk::Event::Key->Sym_Print) {             #- TEMP
-	    print STDERR "Sym Print\n";					      #- TEMP
-	}
-	if ($event->keyval == Gtk2::Gdk::Event::Key->Sym_3270_PrintScreen) {  #- TEMP
-	    print STDERR "Sym 3270_PrintScreen\n";                            #- TEMP
-	}
-
-	if ($d eq "help") {
-	    require install_gtk;
-	    install_gtk::create_big_help($::o);
-	} elsif ($::isInstall && $d eq 'screenshot') {
-	    common::take_screenshot($o);
-	} elsif (chr($event->keyval) eq 'e' && member('mod1-mask', @{$event->state})) {  #- alt-e
-	    log::l("Switching to " . ($::expert ? "beginner" : "expert"));
-	    $::expert = !$::expert;
-	}
-    }); #- if $::isInstall;
 
     my ($wi, $he);
     $w->signal_connect(size_allocate => sub {
