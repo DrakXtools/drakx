@@ -632,6 +632,7 @@ set_default_im('scim',  qw(am ja_JP ja_JP.UTF-8 ko_KR ko_KR.UTF-8 zh_CN zh_CN.UT
 
 # keep the following list in sync with share/rpmsrate:
 my %IM2packages = (
+                   'chinput' =>  { generic => [ 'miniChinput' ] },
                    'scim' => {
                               generic => [ qw(scim scim-m17n scim-tables) ],
                               am => [ qw(scim scim-tables ) ],
