@@ -400,8 +400,8 @@ sub g_auto_install(;$) {
 sub loadO {
     my ($O, $f) = @_; $f ||= auto_inst_file;
     my $o;
-    if ($f eq "floppy") {
-	my $f = "auto_inst.cfg";
+    if ($f =~ /^(floppy|patch)$/) {
+	my $f = $f eq "floppy" ? "auto_inst.cfg" : "patch";
 	unless ($::testing) {
 	    fs::mount(devices::make("fd0"), "/mnt", "vfat", 0);
 	    $f = "/mnt/$f";

@@ -726,7 +726,7 @@ sub main {
     }
     my $ok = resolutionsConfiguration($o, auto => $::auto, noauto => $::noauto);
 
-    $ok &&= testFinalConfig($o, $::auto);
+    $ok &&= testFinalConfig($o, $::auto) unless $::skiptest;
 
     my $quit;
     until ($ok || $quit) {
@@ -743,9 +743,11 @@ sub main {
 	   __("Test again") => sub { $ok = testFinalConfig($o, 1) },
 	   __("Quit") => sub { $quit = 1 },
         );
-	&{$c{$in->ask_from_list_([''],
+	my $f = $in->ask_from_list_([''],
 				 _("What do you want to do?"),
-				 [ grep { !ref } @c ])}};
+				 [ grep { !ref } @c ]);
+	eval { &{$c{$f}} };
+	$@ =~ /^ask_from_list cancel/ or die;
     }
 
     if ($ok) {

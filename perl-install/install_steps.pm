@@ -11,6 +11,8 @@ use install_any qw(:all);
 use partition_table qw(:types);
 use detect_devices;
 use timezone;
+use Xconfig;
+use Xconfigurator;
 use modules;
 use run_program;
 use lilo;
@@ -473,8 +475,36 @@ sub setupBootloader($) {
 }
 
 #------------------------------------------------------------------------------
+sub setupXfreeBefore {
+    my ($o) = @_;
+    $o->{X}{keyboard}{xkb_keymap} ||= keyboard::keyboard2xkb($o->{keyboard});
+    $o->{X}{mouse} = $o->{mouse};
+
+    Xconfig::getinfoFromDDC($o->{X});
+
+    #- keep this here if the package has to be updated.
+    install_any::pkg_install($o, "XFree86");
+}
 sub setupXfree {
     my ($o) = @_;
+    $o->setupXfreeBefore;
+
+    { local $::testing = 0; #- unset testing
+      local $::auto = 1;
+      local $::skiptest = 1;
+      Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, sub {
+         install_any::pkg_install($o, "XFree86-$_[0]");
+      });
+    }
+    $o->setupXfreeAfter;
+}
+sub setupXfreeAfter {
+    my ($o) = @_;
+    if ($o->{X}{card}{server} eq 'FBDev') {
+	unless (install_any::setupFB($o, Xconfigurator::getVGAMode($o->{X}))) {
+	    Xconfigurator::rewriteInittab(3) unless $::testing; #- disable automatic start-up of X11 on error.
+	}
+    }
 }
 
 #------------------------------------------------------------------------------

@@ -476,7 +476,7 @@ sub install($$) {
 
     log::ld("starting installation: ", $nb, " packages, ", $total, " bytes");
 
-    #- !! do not translate these messages, they are used when catched (cf install_steps_graphical)
+    #- !! do not translate these messages, they are used when catched (cf install_steps_gtk)
     my $callbackOpen = sub {
 	my $f = (my $p = $packages{$_[0]})->{file};
 	print LOG "$f\n";

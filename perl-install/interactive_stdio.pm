@@ -9,7 +9,7 @@ use vars qw(@ISA);
 use interactive;
 use common qw(:common);
 
-1;
+$| = 1;
 
 sub readln {
     my $l = <STDIN>;
@@ -23,9 +23,10 @@ sub check_it {
 }
 
 sub ask_from_listW {
-    my ($o, $title, $messages, $list, $def) = @_;
-    my $i;
+    my ($o, $title_, $messages, $list, $def) = @_;
+    my ($title, @okcancel) = ref $title_ ? @$title_ : ($title_, _("Ok"), _("Cancel"));
     print map { "$_\n" } @$messages;
+    my $i;
 
     if (@$list < 10 && sum(map { length $_ } @$list) < 50) {
 	my @l;
@@ -81,10 +82,15 @@ sub ask_many_from_list_refW {
     $val;
 }
 
-
 sub wait_messageW {
     my ($o, $title, $message) = @_;
-    print map { "$_\n" } @$message;
+    print join "\n", @$message;
 }
-sub wait_message_nextW { print "$_[1]\n" }
-sub wait_message_endW { print "Done\n" }
+sub wait_message_nextW { 
+    my $m = join "\n", @{$_[1]};
+    print "\r$m", ' ' x (60 - length $m);
+}
+sub wait_message_endW { print "\nDone\n" }
+
+1;
+

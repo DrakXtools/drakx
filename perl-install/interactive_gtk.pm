@@ -74,8 +74,7 @@ sub ask_many_from_list_refW($$$$$) {
 
 sub ask_from_entries_refW {
     my ($o, $title, $messages, $l, $val, %hcallback) = @_;
-    my ($title_, @okcancel) = ref $title ? @$title : $title;
-    my $num_fields = @{$l};
+    my ($title_, @okcancel) = deref($title);
     my $ignore = 0; #-to handle recursivity
 
     my $w = my_gtk->new($title_, %$o);
@@ -122,7 +121,7 @@ sub ask_from_entries_refW {
     } \@widgets, $val;
 
 
-    for (my $i = 0; $i < $num_fields; $i++) {
+    for (my $i = 0; $i < @$l; $i++) {
 	my $ind = $i; #-cos lexical bindings pb !!
 	my $widget = widget($widgets[$i], $val->[$i]);
 	my $changed_callback = sub {
@@ -150,7 +149,7 @@ sub ask_from_entries_refW {
 	if (ref $widget eq "Gtk::Entry") {
 	    $widget->signal_connect(changed => $changed_callback);
 	    my $go_to_next = sub {
-		if ($ind == ($num_fields -1)) {
+		if ($ind == $#$l) {
 		    $w->{ok}->grab_focus();
 		} else {
 		    widget($widgets[$ind+1],$val->[$ind+1])->grab_focus();
@@ -201,20 +200,20 @@ sub ask_from_entries_refW {
 
 
 sub wait_messageW($$$) {
-    my ($o, $title, $message) = @_;
+    my ($o, $title, $messages) = @_;
 
     my $w = my_gtk->new($title, %$o, grab => 1);
-    my $W = pop @$message;
+    my $W = pop @$messages;
     gtkadd($w->{window},
 	   gtkpack(new Gtk::VBox(0,0),
-		   @$message,
+		   @$messages,
 		   $w->{wait_messageW} = new Gtk::Label($W)));
     $w->sync;
     $w;
 }
 sub wait_message_nextW {
-    my ($o, $message, $w) = @_;
-    $w->{wait_messageW}->set($message);
+    my ($o, $messages, $w) = @_;
+    $w->{wait_messageW}->set(join "\n", @$messages);
     $w->sync;
 }
 sub wait_message_endW {

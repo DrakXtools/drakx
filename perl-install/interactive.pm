@@ -81,18 +81,13 @@ sub ask_from_list2_($$$$;$) {
 sub ask_from_list2($$$$;$) {
     my ($o, $title, $message, $l, $def) = @_;
 
-    $message = ref $message ? $message : [ $message ];
-
     @$l > 10 and $l = [ sort @$l ];
 
-    $o->ask_from_listW($title, $message, $l, $def || $l->[0]);
+    $o->ask_from_listW($title, [ deref($message) ], $l, $def || $l->[0]);
 }
 sub ask_many_from_list_ref($$$$;$) {
     my ($o, $title, $message, $l, $val) = @_;
-
-    $message = ref $message ? $message : [ $message ];
-
-    $o->ask_many_from_list_refW($title, $message, $l, $val);
+    $o->ask_many_from_list_refW($title, [ deref($message) ], $l, $val);
 }
 sub ask_many_from_list($$$$;$) {
     my ($o, $title, $message, $l, $def) = @_;
@@ -106,8 +101,7 @@ sub ask_many_from_list($$$$;$) {
 sub ask_from_entry {
     my ($o, $title, $message, $label, $def, %callback) = @_;
 
-    $message = ref $message ? $message : [ $message ];
-    first ($o->ask_from_entries($title, $message, [ $label ], [ $def ], %callback));
+    first ($o->ask_from_entries($title, [ deref($message) ], [ $label ], [ $def ], %callback));
 }
 
 sub ask_from_entries($$$$;$%) {
@@ -137,7 +131,9 @@ sub ask_from_entries_ref($$$$;$%) {
 
     return unless @$l;
 
-    $message = ref $message ? $message : [ $message ];
+    $title = [ deref($title) ];
+    $title->[2] ||= _("Cancel") unless $title->[1];
+    $title->[1] ||= _("Ok");
 
     my $val_hash = [ map {
 	if ((ref $_) eq "SCALAR") {
@@ -148,20 +144,18 @@ sub ask_from_entries_ref($$$$;$%) {
 	}
     } @$val ];
 
-    $o->ask_from_entries_refW($title, $message, $l, $val_hash, %callback)
+    $o->ask_from_entries_refW($title, [ deref($message) ], $l, $val_hash, %callback)
 
 }
 sub wait_message($$$;$) {
     my ($o, $title, $message, $temp) = @_;
 
-    $message = ref $message ? $message : [ $message ];
-
-    my $w = $o->wait_messageW($title, [ _("Please wait"), @$message ]);
+    my $w = $o->wait_messageW($title, [ _("Please wait"), deref($message) ]);
     push @tempory::objects, $w if $temp;
     my $b = before_leaving { $o->wait_message_endW($w) };
 
     #- enable access through set
-    common::add_f4before_leaving(sub { $o->wait_message_nextW($_[1], $w) }, $b, 'set');
+    common::add_f4before_leaving(sub { $o->wait_message_nextW([ deref($_[1]) ], $w) }, $b, 'set');
     $b;
 }
 

@@ -10,9 +10,7 @@ X configuration and bootloader in kickstart
 (pix)diskdrake
 auto_partitions
 
-text install
-
-(pix)options in mkfs
+(pix)options in mkfs, progress bar when formatting
 
 (pix)Tree -> CTree, ``all'' branch with all packages
 
@@ -85,6 +83,7 @@ diskdrake should warn if nb_ide_parts > 63, nb_scsi_parts > 15
 
 (?)strange: no scsi of type 'fd', only 'tape'
 
+compress hdlist?
 
 (done,pix)kudzu or not in miscellaneous
 
@@ -97,3 +96,8 @@ diskdrake should warn if nb_ide_parts > 63, nb_scsi_parts > 15
 (done,fpons)modem config
 
 (done,pix)call kudzu in batch to initialize its list
+
+(done,pix)standalone generator of mdkinst_stage2.gz
+
+(done,pix)text install
+

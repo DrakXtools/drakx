@@ -14,6 +14,8 @@ use common qw(:common :file :functional :system);
 use partition_table qw(:types);
 use install_steps;
 use pci_probing::main;
+use Xconfig;
+use Xconfigurator;
 use install_any;
 use detect_devices;
 use timezone;
@@ -193,7 +195,7 @@ sub choosePartitionsToFormat($$) {
 
     $o->SUPER::choosePartitionsToFormat($fstab);
 
-    my @l = grep { $_->{mntpoint} && !($::beginner && isSwap($_)) } @$fstab;
+    my @l = grep { !$_->{isFormatted} && $_->{mntpoint} && !($::beginner && isSwap($_)) } @$fstab;
     $_->{toFormat} = 1 foreach grep {  $::beginner && isSwap($_) } @$fstab;
 
     return if $::beginner && 0 == grep { ! $_->{toFormat} } @l;
@@ -240,6 +242,28 @@ sub choosePackages {
 			       [ map { \$o->{compssUsersChoice}{$_} } keys %$compssUsers ]
 			       );
 }
+
+#------------------------------------------------------------------------------
+sub installPackages {
+    my ($o, $packages) = @_;
+    my ($current, $total) = 0;
+
+    my $w = $o->wait_message(_("Installing"), _("Preparing installation"));
+
+    my $old = \&log::ld;
+    local *log::ld = sub {
+	my $m = shift;
+	if ($m =~ /^starting installation:/) {
+	    $total = $_[2];
+	} elsif ($m =~ /^starting installing/) {
+	    my $name = $_[0];
+	    $w->set(_("Installing package %s\n%d%%", $name, 100 * $current / $total));
+	    $current += c::headerGetEntry($o->{packages}{$name}{header}, 'size');
+	} else { goto $old }
+    };
+    $o->SUPER::installPackages($packages);
+}
+
 #------------------------------------------------------------------------------
 sub configureNetwork($) {
     my ($o, $first_time) = @_;
@@ -847,13 +871,15 @@ sub miscellaneousNetwork {
 sub miscellaneous {
     my ($o, $clicked) = @_;
     my %l = (
-	#- abusive 0 => _("Windows(TM)"),
-	#- unused 1 => _("Poor"),
+	0 => _("Windows(TM)"),
+	1 => _("Poor"),
 	2 => _("Low"),
 	3 => _("Medium"),
 	4 => _("High"),
-	#- unused 5 => _("Paranoid"),
+	5 => _("Paranoid"),
     );
+    delete @l{0,4,5} unless $::expert;
+
     my $u = $o->{miscellaneous} ||= {};
     exists $u->{LAPTOP} or $u->{LAPTOP} = 1;
     my $s = $o->{security};
@@ -868,7 +894,7 @@ sub miscellaneous {
 	],
 	[ { val => \$u->{LAPTOP}, type => 'bool' },
 	  { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause disk problems)") },
-	  { val => \$s, list => [ map { $l{$_} } ikeys %l ] },
+	  { val => \$s, list => [ map { $l{$_} } ikeys %l ], not_edit => 1 },
 	  \$u->{memsize},
 	],
         complete => sub {
@@ -878,6 +904,32 @@ sub miscellaneous {
     ) || return;
     my %m = reverse %l; $o->{security} = $m{$s};
     install_steps::miscellaneous($o);
+}
+
+#------------------------------------------------------------------------------
+sub setupXfree {
+    my ($o) = @_;
+    $o->setupXfreeBefore;
+
+    #- maybe better to do before getinfoFromDDC (probe for changed config).
+    if ($o->{isUpgrade} && -r "$o->{prefix}/etc/X11/XF86Config" &&
+	($::beginner || $o->ask_yesorno('', _("Use existing configuration for X11?"), 1))) {
+	Xconfig::getinfoFromXF86Config($o->{X}, $o->{prefix});
+    }
+    #- strange, xfs must not be started twice...
+    #- trying to stop and restart it does nothing good too...
+    my $xfs_started if 0;
+    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/xfs", "start") unless $xfs_started;
+    $xfs_started = 1;
+
+    { local $::testing = 0; #- unset testing
+      local $::auto = $::beginner;
+
+      Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, sub {
+         install_any::pkg_install($o, "XFree86-$_[0]");
+      });
+    }
+    $o->setupXfreeAfter;
 }
 
 #------------------------------------------------------------------------------

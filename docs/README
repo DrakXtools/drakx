@@ -29,7 +29,8 @@ just have to update:
 - Mandrake/base/hdlist: use ``misc/genhdlist .''
 - Mandrake/base/depslist: use ``misc/gendepslist -h Mandrake/base/depslist Mandrake/base/hdlist''
 
-Optionnally, you can modify Mandrake/base/compss, compssList and compssUsers
+Optionnally, you can modify Mandrake/base/compss, compssList and compssUsers.
+Also, mdkinst_stage2.gz must be remade if you modify files in Mandrake/mdkinst.
 See below for information about these files.
 
 ********************************************************************************
@@ -64,9 +65,9 @@ Mandrake/mdkinst
 	more.
 
 Mandrake/base/mdkinst_stage2.gz
-	for the ramdisk. 
-	live sytem in ext2 filesystem gzipped. See ``Ramdisk or not'' below for
-	more.
+	for the ramdisk. live sytem in ext2 filesystem gzipped.
+	generated from Mandrake/mdkinst tree using misc/make_mdkinst_stage2
+	See ``Ramdisk or not'' below for more.
 
 images/gi_*.img
 	boot images to use with panoramix. Use:

@@ -31,7 +31,6 @@ use printer;
 use modules;
 use detect_devices;
 use modparm;
-use install_steps_graphical;
 use run_program;
 
 #-######################################################################################
@@ -183,8 +182,8 @@ $o = $::o = {
     steps        => \%installSteps,
     orderedSteps => \@orderedInstallSteps,
 
-#-GOLD    base => [ qw(basesystem sed initscripts console-tools mkbootdisk anacron utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm ash setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which perl-base) ],
-    base => [ qw(basesystem sed initscripts console-tools mkbootdisk anacron utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm ash setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which cpio perl) ],
+    base => [ qw(basesystem sed initscripts console-tools mkbootdisk utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm ash setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which perl-base) ],
+#-GOLD    base => [ qw(basesystem sed initscripts console-tools mkbootdisk anacron utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm ash setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which cpio perl) ],
 
 #- for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
 #-    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],
@@ -444,7 +443,7 @@ sub main {
 
     $::beginner = $::expert = $::g_auto_install = 0;
 
-    my $cfg;
+    my ($cfg, $patch);
     my %cmdline; map { 
 	my ($n, $v) = split '=';
 	$cmdline{$n} = $v || 1;
@@ -469,11 +468,15 @@ sub main {
 	    expert    => sub { $o->{installClass} = 'expert'; $::expert = 1 },
 	    beginner  => sub { $o->{installClass} = 'normal'; $::beginner = 1 },
 	    lnx4win   => sub { $o->{lnx4win} = 1 },
-	    readonly  => sub { $o->{partitioning}{readonly} = 1 },
+	    readonly  => sub { $o->{partitioning}{readonly} = $v ne "0" },
 	    display   => sub { $o->{display} = $v },
 	    security  => sub { $o->{security} = $v },
 	    test      => sub { $::testing = 1 },
+	    patch     => sub { $patch = 1 },
 	    defcfg    => sub { $cfg = $v },
+	    newt      => sub { $o->{interactive} = "newt" },
+	    text      => sub { $o->{interactive} = "newt" },
+	    stdio     => sub { $o->{interactive} = "stdio"},
 #	    ks        => sub { $::auto_install = 1; $cfg = $v; },
 #	    kickstart => sub { $::auto_install = 1; $cfg = $v; },
 	    auto_install => sub { $::auto_install = 1; $cfg = $v; },
@@ -481,7 +484,7 @@ sub main {
 	    alawindows => sub { $o->{security} = 0; $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
 	    g_auto_install => sub { $::testing = $::g_auto_install = 1; $o->{partitioning}{auto_allocate} = 1 },
 	}}{lc $n}; &$f if $f;
-    } %cmdline;
+    } %cmdline;    
 
     unlink "/sbin/insmod"  unless $::testing;
     unlink "/modules/pcmcia_core.o" unless $::testing; #- always use module from archive.
@@ -505,11 +508,18 @@ sub main {
     $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin" unless $::g_auto_install;
     $ENV{LD_LIBRARY_PATH} = "";
 
+    if ($o->{interactive} eq "gtk" && availableMemory < 24 * 1024) {
+	log::l("switching to newt install cuz not enough memory");
+	$o->{interactive} = "newt";
+    }
+
     if ($::auto_install) {
 	require 'install_steps_auto_install.pm';
     } else {
-	require 'install_steps_graphical.pm';
+	$o->{interactive} ||= 'gtk';
+	require"install_steps_$o->{interactive}.pm";
     }
+    eval { $o = $::o = install_any::loadO($o, "patch") } if $patch;
     eval { $o = $::o = install_any::loadO($o, $cfg) } if $cfg;
 
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : "/mnt";
@@ -519,12 +529,18 @@ sub main {
     $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";
     $ENV{LD_LIBRARY_PATH} = "";
 
-    #- needed very early for install_steps_graphical
+    #- needed very early for install_steps_gtk
     eval { $o->{mouse} ||= mouse::detect() };
 
     $::o = $o = $::auto_install ?
       install_steps_auto_install->new($o) :
-      install_steps_graphical->new($o);
+	$o->{interactive} eq "stdio" ?
+      install_steps_stdio->new($o) :
+	$o->{interactive} eq "newt" ?
+      install_steps_newt->new($o) :
+	$o->{interactive} eq "gtk" ?
+      install_steps_gtk->new($o) :
+	die "unknown install type";
 
     $o->{netc} = network::read_conf("/tmp/network");
     if (my ($file) = glob_('/tmp/ifcfg-*')) {

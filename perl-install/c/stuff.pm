@@ -10,8 +10,6 @@ $VERSION = '0.01';
 
 bootstrap c::stuff $VERSION;
 
-1;
-
 sub headerGetEntry {
     my ($h, $q) = @_;
     $h or log::l("empty header in headerGetEntry"), return;
@@ -27,3 +25,4 @@ sub headerGetEntry {
     $q eq 'obsoletes' and return headerGetEntry_string_list($h, RPMTAG_OBSOLETES());
 }
 
+1;

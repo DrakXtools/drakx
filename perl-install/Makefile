@@ -1,30 +1,28 @@
 VERSION     = 2.2.10-BOOT                                                                             
 SUDO        = sudo
-MKE2FS      = /sbin/mke2fs -q -m 0 -F -s 1
 SO_FILES    = c/blib/arch/auto/c/c.so                                                                 
-PMS         = *.pm c/stuff.pm resize_fat/*.pm pci_probing/*.pm commands install2 diskdrake XFdrake g_auto_install
+PMS         = *.pm Newt/*.pm c/stuff.pm resize_fat/*.pm pci_probing/*.pm commands install2 diskdrake XFdrake g_auto_install
 REP4PMS     = /usr/bin/perl-install
 ROOTDEST    = /export
 DEST        = $(ROOTDEST)/Mandrake/mdkinst
 STAGE2      = $(ROOTDEST)/Mandrake/base/mdkinst_stage2
 BASE        = $(ROOTDEST)/Mandrake/base
 DESTREP4PMS = $(DEST)$(REP4PMS)
-STAGE2TMP   = /tmp/stage2_tmp
 PERL        = perl
 LOCALFILES  = pnp_serial mouseconfig ddcxinfos
 LOCALFILES2 = extract_archive
-DIRS        = c po pci_probing resize_fat
+DIRS        = c Newt po pci_probing resize_fat
 EXCLUDE     = $(LOCALFILES) boot.img keymaps consolefonts install
 RPMS        = $(wildcard $(ROOTDEST)/Mandrake/RPMS/*.rpm)
 CFLAGS	    = -Wall
 override CFLAGS  += -pipe
 
-.PHONY: all $(DIRS) tags install clean stage2 full_stage2 verify_c 
+.PHONY: all $(DIRS) install clean stage2 full_stage2 verify_c 
 
-all: $(DIRS)
+all: TAGS $(DIRS)
 
-tags:
-	etags -o - $(PMS) | ./perl2etags > TAGS
+TAGS: $(PMS)
+	etags -o - $^ | ./perl2etags > $@
 
 clean:
 	for i in $(DIRS); do $(MAKE) -C $$i clean; done
@@ -52,8 +50,7 @@ $(DIRS):
 
 test_pms: verify_c
 	./perl2fcalls -excludec -excluderesize_fat::c_rewritten install2
-	perl -cw -I. -Ic -Ic/blib/arch install2
-	perl -cw -I. -Ic -Ic/blib/arch install_steps_graphical.pm
+	for i in install2 install_steps_*.pm; do perl -cw -I. $$i; done
 
 verify_c:
 	./verify_c $(PMS)
@@ -90,7 +87,7 @@ install_pms: $(DIRS)
 get_needed_files: $(DIRS)
 #	export PERL_INSTALL_TEST=1 ; strace -f -e trace=file -o '| grep -v "(No such file or directory)" | sed -e "s/[^\"]*\"//" -e "s/\".*//" | grep "^/" | grep -v -e "^/tmp" -e "^/home" -e "^/proc" -e "^/var" -e "^/dev" -e "^/etc" -e "^/usr/lib/rpm" > /tmp/list ' $(PERL) -d install2 < /dev/null
 	cp -f list /tmp/list
-	ls auto/*/*/*.so >> /tmp/list
+	find auto -follow -name "*.so" >> /tmp/list
 
 	for i in $(LOCALFILES) `cat /tmp/list` ; do \
 		ldd $$i 2>/dev/null | grep -v "not a dynamic" | sed -e 's/.*=> //' -e 's/ .*//' | uniq | sort >> /tmp/list; \
@@ -158,13 +155,6 @@ get_needed_files: $(DIRS)
 
 	tar xyC $(DEST) -f ../install/install1_pcmcia.tar.bz2 ./etc/pcmcia
 
-as_root:
-	/bin/dd if=/dev/zero of=/tmp/initrd bs=1k count=4000
-	$(MKE2FS) /tmp/initrd
-	losetup /dev/loop0 /tmp/initrd
-	mount /dev/loop0 /mnt/initrd
-	chmod a+w /mnt/initrd
-
 full_stage2: $(BASE)/depslist $(BASE)/hdlist
 	sudo rm -rf $(DEST)
 	mkdir -p $(DEST)
@@ -173,36 +163,4 @@ full_stage2: $(BASE)/depslist $(BASE)/hdlist
 
 stage2:
 	$(MAKE) install_pms
-
-	$(SUDO) rm -rf $(STAGE2TMP)
-	install -d $(STAGE2TMP)
-	$(SUDO) cp -a $(DEST)/* $(STAGE2TMP)
-
-	$(SUDO) umount /mnt/stage2 ||:
-	dd if=/dev/zero of=$(STAGE2) bs=1M count=15
-	$(MKE2FS) -N 1000 $(STAGE2)
-	$(SUDO) mount -t ext2 $(STAGE2) /mnt/stage2 -o loop
-
-#	hack to reduce the STAGE2 image
-	rm $(STAGE2TMP)/usr/X11R6/bin/XF86_VGA16
-	for i in /usr/share/locale /usr/share/keymaps /usr/share/xmodmap $(REP4PMS)/po; do \
-		name=`basename $$i` ; \
-		(cd $(STAGE2TMP)/$$i ; find * | cpio -o 2>/dev/null | bzip2 > ../$$name.cpio.bz2 ; cd .. ; rm -rf $$name) \
-	done
-	$(SUDO) cp -a $(STAGE2TMP)/* /mnt/stage2
-	$(SUDO) rm -rf $(STAGE2TMP)
-
-	$(SUDO) umount $(STAGE2)
-	gzip -f -9 $(STAGE2)
-
-	@#rm -rf /mnt/initrd/*
-	@#cp -a $(DEST)/* /mnt/initrd
-	@#sync
-	@#dd if=/dev/loop0 | gzip -9 > /tmp/t/Mandrake/base/stage2.img
-
-# function f() { grep "$*" /usr/include/*.h /usr/include/*/*.h; }
-
-# 
-# install -s install/install install1/bin/install ; install -s installinit/init install1/bin/init
-# mount /tmp/initrd /mnt/disk/ -o loop ;  ; umount /mnt/disk ; gzip -c /tmp/initrd > /tmp/initrd.img ; mcopy -o /tmp/initrd.img a:
-
+	../make_mdkinst_stage2 $(DEST)  $(ROOTDEST)/Mandrake/base/mdkinst_stage2
