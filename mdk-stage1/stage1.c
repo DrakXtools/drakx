@@ -655,8 +655,6 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		*argptr++ = pcmcia_adapter;
 	}
 #endif
-	if (disable_modules)
-		*argptr++ = "--blank";
 	if (stage2_kickstart) {
 		*argptr++ = "--kickstart";
 		*argptr++ = stage2_kickstart;

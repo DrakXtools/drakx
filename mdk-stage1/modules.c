@@ -41,7 +41,6 @@ static struct module_deps_elem * modules_deps = NULL;
 
 static char archive_name[] = "/modules/modules.mar";
 static char additional_archive_name[] = "/tmp/tmpfs/modules.mar";
-int disable_modules = 0;
 int allow_additional_modules_floppy = 1;
 
 extern long init_module(void *, unsigned long, const char *);
@@ -301,8 +300,7 @@ static int load_modules_dependencies(void)
 void init_modules_insmoding(void)
 {
 	if (load_modules_dependencies()) {
-		log_message("warning, error initing modules stuff, modules loading disabled");
-		disable_modules = 1;
+		fatal_error("warning, error initing modules stuff, modules loading disabled");
 	}
 }
 
@@ -425,11 +423,6 @@ enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attr
 
 	log_message("have to insmod %s", real_mod_name);
 
-	if (disable_modules) {
-		log_message("\tdisabled");
-		return INSMOD_OK;
-	}
-
 #ifndef DISABLE_NETWORK
 	if (type == NETWORK_DEVICES)
 		net_devices = get_net_devices();
@@ -509,9 +502,6 @@ enum return_type ask_insmod(enum driver_type type)
 		mytype = "NET";
 	else
 		return RETURN_ERROR;
-
-	if (disable_modules)
-		return RETURN_BACK;
 
 	snprintf(msg, sizeof(msg), "Which driver should I try to gain %s access?", mytype);
 
