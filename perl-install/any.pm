@@ -678,7 +678,7 @@ sub selectLanguage {
 	my $using_images = $in->isa('interactive::gtk') && !$in->{vga16};
 
 	#- to create the default value, use the first location for that value :/
-	$lang = first(lang::l2location($lang))."|$lang";
+	$lang = if_(!$::move, first(lang::l2location($lang)).'|').$lang;
 	
 	my %name2l = map { lang::l2name($_) => $_ } lang::list_langs();
 	my $listval2val = sub { $_[0] =~ /\|(.*)/ ? $1 : $_[0] };
