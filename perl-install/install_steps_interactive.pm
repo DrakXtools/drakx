@@ -916,7 +916,7 @@ Do you want to install the updates ?"))) || return;
 					      \@mirrors,
 					      $u->{mirror});
     };
-    return if $@;
+    return if $@ || !$u->{mirror};
 
     my $update_medium = do {
 	my $w = $o->wait_message('', _("Contacting the mirror to get the list of available packages"));
@@ -927,6 +927,10 @@ Do you want to install the updates ?"))) || return;
 	if ($o->choosePackagesTree($o->{packages}, $update_medium)) {
 	    $o->pkg_install;
 	    $o->install_urpmi;
+	} else {
+	    #- make sure to not try to install the packages (which are automatically selected by getPackage above).
+	    #- this is possible by deselecting the medium (which can be re-selected above).
+	    delete $update_medium->{select};
 	}
     }
  
