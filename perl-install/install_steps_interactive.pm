@@ -360,7 +360,7 @@ sub choosePartitionsToFormat($$) {
 
     $o->SUPER::choosePartitionsToFormat($fstab);
 
-    my @l = grep { !$_->{isFormatted} && $_->{mntpoint} && !($::beginner && isSwap($_)) &&
+    my @l = grep { !$_->{isMounted} && !$_->{isFormatted} && $_->{mntpoint} && !($::beginner && isSwap($_)) &&
 		    (!isOtherAvailableFS($_) || $::expert || $_->{toFormat})
 	       } @$fstab;
     $_->{toFormat} = 1 foreach grep {  $::beginner && isSwap($_) } @$fstab;
