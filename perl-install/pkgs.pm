@@ -287,7 +287,7 @@ sub selectPackage {
     my $state = $packages->{state} ||= {};
     $state->{selected} = {};
     $state->{requested} = packageRequest($packages, $pkg) or return;
-    $packages->resolve_requested($packages->{rpmdb}, $state, no_flag_update => $otherOnly, clear_state => $otherOnly,
+    $packages->resolve_requested($packages->{rpmdb}, $state, no_flag_update => $otherOnly, keep_state => $otherOnly,
 				 callback_choices => \&packageCallbackChoices);
 
     if ($base || $otherOnly) {
@@ -322,7 +322,7 @@ sub unselectPackage($$;$) {
 	my $state = $packages->{state} ||= {};
 	$state->{selected} = { $pkg->id };
 	$state->{requested} = {};
-	$packages->resolve_requested($packages->{rpmdb}, $state, clear_state => 1);
+	$packages->resolve_requested($packages->{rpmdb}, $state, keep_state => 1);
     }
     1;
 }
@@ -346,11 +346,11 @@ sub unselectAllPackages($) {
 	    $selected{$_->id} = undef;
 	}
     }
-    if (%selected) {
+    if (%selected && %{$packages->{state} || {}}) {
 	my $state = $packages->{state} ||= {};
 	$state->{selected} = \%selected;
 	$state->{requested} = {};
-	$packages->resolve_requested($packages->{rpmdb}, $state, clear_state => 1);
+	$packages->resolve_requested($packages->{rpmdb}, $state, keep_state => 1);
     }
 }
 sub unselectAllPackagesIncludingUpgradable($) {
@@ -363,11 +363,11 @@ sub unselectAllPackagesIncludingUpgradable($) {
 	    $selected{$_->id} = undef;
 	}
     }
-    if (%selected) {
+    if (%selected && %{$packages->{state} || {}}) {
 	my $state = $packages->{state} ||= {};
 	$state->{selected} = \%selected;
 	$state->{requested} = {};
-	$packages->resolve_requested($packages->{rpmdb}, $state, clear_state => 1);
+	$packages->resolve_requested($packages->{rpmdb}, $state, keep_state => 1);
     }
 }
 
@@ -781,7 +781,7 @@ sub setSelectedFromCompssList {
 	    $nb = $old_nb;
 	    $min_level = $p->rate;
 	    $state->{requested} = {}; #- ensure no newer package will be selected.
-	    $packages->resolve_requested($packages->{rpmdb}, $state, clear_state => 1);
+	    $packages->resolve_requested($packages->{rpmdb}, $state, keep_state => 1); #- FIXME INCOMPLETE TODO
 	    last;
 	}
 
@@ -800,17 +800,19 @@ sub setSelectedFromCompssList {
 #- just saves the selected packages, call setSelectedFromCompssList and restores the selected packages
 sub saveSelected {
     my ($packages) = @_;
+    my $state = delete $packages->{state};
     my @l = @{$packages->{depslist}};
     my @flags = map { ($_->flag_requested && 1) + ($_->flag_required && 2) + ($_->flag_upgrade && 4) } @l;
-    [ $packages, \@l, \@flags ];
+    [ $packages, $state, \@l, \@flags ];
 }
 sub restoreSelected {
-    my ($packages, $l, $flags) = @{$_[0]};
+    my ($packages, $state, $l, $flags) = @{$_[0]};
+    $packages->{state} = $state;
     mapn { my ($pkg, $flag) = @_;
 	   $pkg->set_flag_requested($flag & 1);
 	   $pkg->set_flag_required($flag & 2);
 	   $pkg->set_flag_upgrade($flag & 4);
-       } $l, $flags;
+         } $l, $flags;
 }
 
 sub computeGroupSize {
