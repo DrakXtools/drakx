@@ -527,7 +527,7 @@ sub pur_gtk_mode {
     my $window1 = ugtk2->new('drakgw');
     $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     unless ($::isEmbedded) {
-        $window1->{rwindow}->set_position(1);
+        $window1->{rwindow}->set_position('center');
         $window1->{rwindow}->set_title(N("Internet connection sharing configuration"));
     }
     $window1->{rwindow}->border_width(10);
@@ -547,7 +547,7 @@ Click on Configure to launch the setup wizard.", $setup_state));
     
     my $bbox1 = new Gtk2::HButtonBox;
     $vbox1->pack_start($bbox1,0,0,0);
-    $bbox1->set_layout(-end);
+    $bbox1->set_layout('end');
     my $button_conf = Gtk2::Button->new(N("Configure"));
     $button_conf->signal_connect(clicked => sub {
 				       system("/usr/sbin/drakgw --wizard");
