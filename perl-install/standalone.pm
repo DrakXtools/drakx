@@ -195,6 +195,40 @@ sub ensure_is_installed {
     1;
 }
 
+sub check_kernel_module_packages {
+    my ($do, $base_name, $ext_name) = @_;
+    my $result;
+    my (%list, %select);
+
+    eval {
+	local *_;
+	require urpm;
+	my $urpm = new urpm;
+	$urpm->read_config(nocheck_access => 1);
+	foreach (grep { !$_->{ignore} } @{$urpm->{media} || []}) {
+	    $urpm->parse_synthesis($_);
+	}
+	foreach (@{$urpm->{depslist} || []}) {
+	    $_->name eq $ext_name and $list{$_->name} = 1;
+	    $_->name =~ /$base_name/ and $list{$_->name} = 1;
+	}
+    };
+    if (!$ext_name || $list{$ext_name}) {
+	eval {
+	    my ($version, $release, $ext) = c::kernel_version() =~ /([^-]*)-([^-]*mdk)(\S*)/;
+	    $ext and $ext = "-$ext";
+	    $list{"$base_name$version-$release$ext"} or die "no NVIDIA kernel for current kernel";
+	    $select{"$base_name$version-$release$ext"} = 1;
+	    foreach (`rpm -qa kernel*`) {
+		($ext, $version, $release) = /kernel[^-]*(-smp|-enterprise|-secure)?(\d+\.\d+\.\d+)\.([^\-]+mdk)$/;
+		$list{"$base_name$version-$release$ext"} and $select{"$base_name$version-$release$ext"} = 1;
+	    }
+	    $result = [ keys(%select), if_($ext_name, $ext_name) ];
+	}
+    }
+    return undef;
+}
+
 sub what_provides {
     my ($_o, $name) = @_;
     my ($what) = split '\n', `urpmq '$name' 2>/dev/null`;
