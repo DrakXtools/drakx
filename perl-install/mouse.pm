@@ -41,7 +41,8 @@ my %mice =
  'USB' =>
  [ [ 'usbmouse' ],
    [ if_(arch() eq 'ppc', [ 1, 'ps/2', 'PS/2', __("1 button") ]),
-     [ 2, 'ps/2', 'PS/2', __("Generic") ],
+     [ 2, 'ps/2', 'PS/2', __("Generic 2 Button Mouse") ],
+     [ 3, 'ps/2', 'PS/2', __("Generic") ],
      [ 5, 'ps/2', 'IMPS/2', __("Wheel") ],
    ]],
 
