@@ -57,7 +57,7 @@ We recommand the light configuration.
     if (!$::isStandalone) {
 	require pkgs;
 	my $p = pkgs::packageByName($in->{packages}, $rmpackage);
-	$p && pkgs::packageFlagSelected($p) and pkgs::unselectPackage($in->{packages}, $p);
+	$p && $p->flag_selected and pkgs::unselectPackage($in->{packages}, $p);
     }
     run_program::rooted($prefix, "rpm", "-e", "$rmpackage");
     $in->do_pkgs->install($instpackage, if_($isdn->{speed} =~ /128/, 'ibod'), 'isdn4k-utils');
