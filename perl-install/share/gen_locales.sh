@@ -8,6 +8,8 @@ for i in LC_ADDRESS LC_COLLATE LC_CTYPE LC_IDENTIFICATION LC_MEASUREMENT LC_MONE
     install -D -m 644 /usr/share/locale/UTF-8/$i usr/share/locale/en_US.UTF-8/$i
 done
 
+perl -I../.. ../gen_locales.pl || exit 1
+
 for i in C en_US.UTF-8 iso8859-1 ; do
     cp -a /usr/X11R6/lib/X11/locale/$i usr/X11R6/lib/X11/locale
 done
