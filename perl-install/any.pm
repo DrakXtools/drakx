@@ -702,9 +702,10 @@ not cause any damage.", $l),
 			      [ __("Autoprobe"), __("Specify options") ], "Autoprobe") ne "Autoprobe") {
       ASK:
 	if (@names >= 0) {
-	    my @l = $in->ask_from_entries('',
-_("You may now provide its options to module %s.", $l),
-					 \@names) or return;
+
+	    my @args = map { my $i = ''; /TOOLTIP=>(.*)/; my $t = $1; s/TOOLTIP=>.*//;print "tooltip : $t\n"; { label => $_, val => \$i, help => $t} } @names;
+	    my @l = $in->ask_from('', _("You may now provide its options to module %s.\nNote that any addresse should be entered with the prefix 0x like '0x123'", $l), \@args) ? map { ${$_->{val}} } @args : undef or return;
+
 	    @options = modparm::get_options_result($m, @l);
 	} else {
 	    @options = split ' ',

@@ -14,7 +14,7 @@ sub get_options_result($@) {
     my ($module, @value) = @_;
     mapn {
 	my ($a, $b) = @_;
-	$b =~ s/^(\w).*/$1/;
+	$b =~ s/^(\w+).*/$1/;
 	$a ? "$b=$a" : ();
     } \@value, [get_options_name($module)];
 }
@@ -24,19 +24,27 @@ sub get_options_name($) {
 
   my @names;
   my @line = `/sbin/modinfo -p $module`;
+  print "yop : @line \n";
   foreach (@line) {
       chomp;
-      s/int/i/;
-      s/string/string/;
-      s/short/h/;
-      s/long/l/;
-      s/(\S) array \(min = (\d+), max = (\d+)\)/$2-$3$1/;
-      s/(\d)-\1i/$1i/;
+      s/int/: (integer/;
+      s/string/: (string/;
+      my ($f, $g) = /array \(min = (\d+), max = (\d+)\)/;
+      my $c;
+      if ($f == 1 && $g == 1) {
+	  $c = _('1 character)');
+      } else {
+	  $c = _("$f-$g %s)", 'characters');
+      }
+      s/array \(min = \d+, max = \d+\)/$c/;
       if (/parm:\s+(.+)/) {
-	  my ($name, $type) = split '\s', $1;
-	  push @names, "$name ($type)";
+	  local $_ = $1;
+	  s/\s+/ /;
+	  s/, description /TOOLTIP=>/;
+	  push @names, $_;
       }
   }
+  print "yop : @names \n";
   @names;
 }
 
