@@ -85,11 +85,12 @@ sub isdn_write_config_backend {
 	    chmod 0600, $f;
 	}
 	foreach my $f ('isdn1B.conf', 'isdn2B.conf') {
-	    my $a;
+	    my $a=1;
 	    substInFile {
 		s/EAZ =.*/EAZ = $isdn->{phone_in}/;
 		s/PHONE_OUT =.*/PHONE_OUT = $isdn->{phone_out}/;
-		$a or s/HUPTIMEOUT =.*/HUPTIMEOUT = $isdn->{huptimeout}/, $a=1;;
+#		s/HUPTIMEOUT =.*/HUPTIMEOUT = $isdn->{huptimeout}/;
+#		$a or s/HUPTIMEOUT =.*/HUPTIMEOUT = $isdn->{huptimeout}/, $a=1;
 	    } "$prefix/etc/isdn/$f";
 	    chmod 0600, $f;
 	}
