@@ -1,3 +1,127 @@
+2004/02/16  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/advertising/list: Removed on Pixel's request (will use list-dwd
+	instead)
+
+	* share/rpmsrate: Add kolab-server in GROUPWARE
+
+	* share/compssUsers.server: Select Groupware by default
+
+2004/02/16  Pixel  <pixel at mandrakesoft.com>
+
+	* pkgs.pm: add in %pkgs::preferred the kernel-source corresponding to the
+	preferred kernel
+
+	* ugtk2.pm: during install, "Ok" is on the right, like gnome not kde
+
+	* share/advertising/Makefile: get the list of files needed from
+	list-PRODUCT
+
+2004/02/15  tsdgeos
+
+	* share/po/ca.po: more updates
+
+2004/02/15  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10-0.16mdk
+
+	* harddrake/data.pm: typo fix :-)
+
+2004/02/15  yrahal
+
+	* share/po/ar.po: Committing Arabeyes.org's Arabic translation
+
+2004/02/14  fwang
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2004/02/14  keld
+
+	* share/po/nb.po: Updates
+	gi/perl-install/share/po/nb.po
+	Updates. I could just as well update the Norwegian version
+	as I wanted to use this as base for my Danish translation.
+	gi/perl-install/share/po/nb.po
+
+	* share/po/da.po: Updates
+	soft/wizard_perl/po/da.po gi/perl-install/share/po/da.po
+	Updates
+	soft/control-center/po/da.po soft/drakfax/po/da.po
+	soft/ftw/po/da.po soft/mdkonline/po/da.po
+	soft/rfbdrake/po/da.po soft/rpmdrake/po/da.po
+	soft/urpmi/po/da.po gi/perl-install/share/po/da.po
+
+2004/02/14  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: FTP restore failure feedback. Allow multiple
+	catalog/file restore selection.
+
+2004/02/14  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm, printer/data.pm: Let printerdrake load the "usblp"
+	instead of the "printer" kernel module if kernel 2.6.x is used.
+
+	* printer/printerdrake.pm: Made printerdrake handling even very weird
+	printer ID strings, as the one of the Brother HL-720 with empty
+	manufacturer and description fields (Bug #7753).
+
+	* printer/detect.pm: Recognize also "SN:" as serial number field in
+	printer ID string (HP PhotoSmart 7760, bug #6534).
+	Let printerdrake load the "usblp" instead of the "printer" kernel module
+	if kernel 2.6.x is used.
+
+2004/02/14  tsdgeos
+
+	* share/po/ca.po: Small updates to catalan translations
+
+2004/02/14  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10-0.15mdk
+
+	* network/netconnect.pm: fix automatically found "...2" dns
+
+	* harddrake/data.pm: fix ISDN detection (#6535)
+	filter out devices to prevent them to appear several times in device
+	tree (#4906)
+
+	* network/isdn.pm (isdn_detect_backend) try harder to detect ISDN devices
+
+	* standalone/harddrake2: break devices loop into two pass:
+	  - first detect devices into each class
+	  - then process them for later display
+
+	* network/tools.pm: fix crash on canceling "already configured net device"
+	configuration (#7679)
+
+2004/02/13  Pixel  <pixel at mandrakesoft.com>
+
+	* modules/interactive.pm: don't have a wait_message above another empty
+	wait_message when probing hardware
+
+	* ugtk2.pm: use center-on-parent for popped windows
+
+	* share/list: perl-MDK-Common has been rebuilt
+
+2004/02/13  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm: do not try setting transcient hint when embedded
+
+	* network/netconnect.pm: by default do not start connection at boot for
+	modems (#7705)
+
+	* drakxtools.spec: 10-0.14mdk
+
+	* wizards.pm: enable default value to be dynamically computed
+	enable to pass untranslated defaut to yes/no or ok/cancel like
+	questions by translating value at runtime
+	default to next/finish when no field is present
+	add 'default' field in order to be able to enforce default answer for
+	yes/no like questions or when data does not conatains any fields
+	(needed for last #7705 bit)
+	missing #7593 bit
+	use interactive->ask_okcancel in order to not have spurious field in
+	text mode (#7593)
+
 2004/02/13  Damien Chaumette  <dchaumette at mandrakesoft.com>
 
 	* standalone/drakconnect: forgotten modem page, to be traduced, not yet
@@ -26150,7 +26274,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.871 2004/02/13 18:21:26 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.872 2004/02/13 18:45:02 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
