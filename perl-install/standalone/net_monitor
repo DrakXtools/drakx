@@ -255,9 +255,9 @@ sub connection() {
     gtkflush();
 
     if ($wasconnected == 1) {
-        $tool_pid = network::tools::start_interface($default_intf);
-    } else {
         $tool_pid = network::tools::stop_interface($default_intf);
+    } else {
+        $tool_pid = network::tools::start_interface($default_intf);
     }
 }
 
