@@ -17,7 +17,7 @@ function create_modules() {
 	| perl -ne 's/\.o//g; s/[ \t]+/ /g; print if /: /' > modules.dep
     perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
 
-    modinfo -f '%{filename} %{description}\n' *.o | perl -lne 'print "$1\t$2" if /(.*?)\.o "(.*)"/' > modules.description
+    /sbin/modinfo -f '%{filename} %{description}\n' *.o | perl -lne 'print "$1\t$2" if /(.*?)\.o "(.*)"/' > modules.description
 
     echo -n "packdrake $kern: "
     ls *.o | packdrake -b9s "modules.cz" 400000
