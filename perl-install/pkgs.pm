@@ -69,7 +69,7 @@ my %ignoreBadPkg = (
 #- simpler and faster depslist reader, this gets (sizeDeps).
 sub packageHeaderFile   { $_[0]->[$FILE] }
 sub packageName         { $_[0]->[$FILE] =~ /^([^:\s]*)-[^:\-\s]+-[^:\-\s]+\.[^:\.\-\s]*(?::.*)?/ ? $1
-			    : die "invalid file `$_[0]->[$FILE]'" }
+			    : die "invalid file `$_[0]->[$FILE]'\n" . backtrace() }
 sub packageVersion      { $_[0]->[$FILE] =~ /^[^:\s]*-([^:\-\s]+)-[^:\-\s]+\.[^:\.\-\s]*(?::.*)?/ ? $1
 			    : die "invalid file `$_[0]->[$FILE]'" }
 sub packageRelease      { $_[0]->[$FILE] =~ /^[^:\s]*-[^:\-\s]+-([^:\-\s]+)\.[^:\.\-\s]*(?::.*)?/ ? $1
@@ -184,7 +184,8 @@ sub packageByName {
 }
 sub packageById {
     my ($packages, $id) = @_;
-    $packages->{depslist}[$id]; #- do not log as id unsupported are still in depslist.
+    my $l = $packages->{depslist}[$id]; #- do not log as id unsupported are still in depslist.
+    $l && @$l && $l;
 }
 sub packagesOfMedium {
     my ($packages, $mediumName) = @_;
@@ -282,7 +283,7 @@ sub unselectPackage($$;$) {
 		    #- if our package is not included in the choice, if this is the
 		    #- case, if must be checked one of the other package are selected.
 		    foreach (split '\|') {
-			my $dep = packageById($packages, $_);
+			my $dep = packageById($packages, $_) or next;
 			$dep == $pkg and $unselect_alone |= 1 and next;
 			packageFlagBase($dep) || packageFlagSelected($dep) and $unselect_alone |= 2;
 		    }
@@ -298,7 +299,7 @@ sub unselectPackage($$;$) {
 	    $otherOnly and $otherOnly->{packageName($provided)} = 1;
 	}
 	foreach (map { split '\|' } packageDepsId($provided)) {
-	    my $dep = packageById($packages, $_);
+	    my $dep = packageById($packages, $_) or next;
 	    packageFlagBase($dep) and next;
 	    packageFlagSelected($dep) or next;
 	    for (packageFlagSelected($dep)) {
@@ -581,7 +582,7 @@ sub getProvides($) {
 	$pkg or next;
 	unless (packageFlagBase($pkg)) {
 	    foreach (map { split '\|' } grep { !/^NOTFOUND_/ } packageDepsId($pkg)) {
-		my $provided = $packages->{depslist}[$_] or next;
+		my $provided = packageById($packages, $_) or next;
 		packageFlagBase($provided) or $provided->[$PROVIDES] = pack "s*", (unpack "s*", $provided->[$PROVIDES]), $i;
 	    }
 	}
@@ -636,7 +637,9 @@ sub read_rpmsrate {
 		if ($packages) {
 		    my $p = packageByName($packages, $_) or next;
 		    
-		    my @m2 = map { packageName(packageById($packages, $_)) =~ /locales-(.*)/ ? qq(LOCALES"$1") : () } packageDepsId($p);
+		    my @m2 = 
+		      map { if_($_ && packageName($_) =~ /locales-(.*)/, qq(LOCALES"$1")) }
+		      map { packageById($packages, $_) } packageDepsId($p);
 		    packageSetRateRFlags($p, $rate, (grep { !/^\d$/ } @m), @m2);
 		} else {
 		    print "$_ = ", join(" && ", @m), "\n";
@@ -1132,8 +1135,8 @@ sub selectPackagesToUpgrade($$$;$$) {
 			    log::l("avoid selecting " . packageName($p) . " as not enough files will be updated");
 			} else {
 			    #- default case is assumed to allow upgrade.
-			    my @deps = map { my $p = $packages->{depslist}[$_];
-					     $p && packageName($p) =~ /locales-/ ? ($p) : () } packageDepsId($p);
+			    my @deps = map { my $p = packageById($packages, $_);
+					     if_($p && packageName($p) =~ /locales-/, $p) } packageDepsId($p);
 			    if (@deps == 0 || @deps > 0 && (grep { !packageFlagSelected($_) } @deps) == 0) {
 				log::l("selecting " . packageName($p) . " by selection on files");
 				selectPackage($packages, $p);
@@ -1513,7 +1516,7 @@ sub selected_leaves {
 
     #- initialize l with all id, not couting base package.
     foreach my $id (0 .. $#{$packages->{depslist}}) {
-	my $pkg = $packages->{depslist}[$id] or next;
+	my $pkg = packageById($packages, $id) or next;
 	packageSelectedOrInstalled($pkg) && !packageFlagBase($pkg) or next;
 	$l{$id} = 1;
     }
