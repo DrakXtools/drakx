@@ -197,13 +197,14 @@ for details about the configuration, or simply wait until your system is
 installed and use the program described there to configure your connection."),
 
 configurePrinter => 
-N_("\"Printer\": clicking on the \"No Printer\" button will open the printer
+N_("\"Printer\": clicking on the \"Configure\" button will open the printer
 configuration wizard. Consult the corresponding chapter of the ``Starter
 Guide'' for more information on how to setup a new printer. The interface
 presented there is similar to the one used during installation."),
 
 configureServices => 
-N_("This step is used to choose which services you wish to start at boot time.
+N_("This dialog is used to choose which services you wish to start at boot
+time.
 
 DrakX will list all the services available on the current installation.
 Review each one carefully and uncheck those which are not always needed at
@@ -324,32 +325,6 @@ configuration. Obviously, you want to answer \"No\" if your machine is to
 act as a server, or if you were not successful in getting the display
 configured."),
 
-createBootdisk => 
-N_("Checking \"Create a boot disk\" allows you to have a rescue boot media
-handy.
-
-The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by
-booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<
-at the prompt. If your computer cannot boot from the CD-ROM, there are at
-least two situations where having a boot floppy is critical:
-
- * when installing the bootloader, DrakX will rewrite the boot sector (MBR)
-of your main disk (unless you are using another boot manager), to allow you
-to start up with either Windows or GNU/Linux (assuming you have Windows on
-your system). If at some point you need to reinstall Windows, the Microsoft
-install process will rewrite the boot sector and remove your ability to
-start GNU/Linux!
-
- * if a problem arises and you cannot start GNU/Linux from the hard disk,
-this floppy will be the only means of starting up GNU/Linux. It contains a
-fair number of system tools for restoring a system that has crashed due to
-a power failure, an unfortunate typing error, a forgotten root password, or
-any other reason.
-
-If you say \"Yes\", you will be asked to insert a disk in the drive. The
-floppy disk must be blank or have non-critical data on it - DrakX will
-format the floppy and will rewrite the whole disk."),
-
 doPartitionDisks => 
 N_("At this point, you need to decide where you want to install the Mandrake
 Linux operating system on your hard drive. If your hard drive is empty or
@@ -380,7 +355,7 @@ and for the most part it's a good idea to keep them.
  * \"Use the free space on the Windows partition\": if Microsoft Windows is
 installed on your hard drive and takes all the space available on it, you
 have to create free space for Linux data. To do so, you can delete your
-Microsoft Windows partition and data (see `` Erase entire disk'' solution)
+Microsoft Windows partition and data (see ``Erase entire disk'' solution)
 or resize your Microsoft Windows FAT partition. Resizing can be performed
 without the loss of any data, provided you previously defragment the
 Windows partition and that it uses the FAT format. Backing up your data is
@@ -405,13 +380,13 @@ will be lost.
 
    !! If you choose this option, all data on your disk will be lost. !!
 
- * \"Custom disk partitionning\": choose this option if you want to
-manually partition your hard drive. Be careful -- it is a powerful but
-dangerous choice and you can very easily lose all your data. That's why
-this option is really only recommended if you have done something like this
-before and have some experience. For more instructions on how to use the
-DiskDrake utility, refer to the ``Managing Your Partitions '' section in
-the ``Starter Guide''."),
+ * \"Custom disk partitioning\": choose this option if you want to manually
+partition your hard drive. Be careful -- it is a powerful but dangerous
+choice and you can very easily lose all your data. That's why this option
+is really only recommended if you have done something like this before and
+have some experience. For more instructions on how to use the DiskDrake
+utility, refer to the ``Managing Your Partitions '' section in the
+``Starter Guide''."),
 
 exitInstall => 
 N_("There you are. Installation is now complete and your GNU/Linux system is
@@ -420,7 +395,7 @@ you should see after your computer has finished doing its hardware tests is
 the bootloader menu, giving you the choice of which operating system to
 start.
 
-The \"Advanced\" button (in Expert mode only) shows two more buttons to:
+The \"Advanced\" button shows two more buttons to:
 
  * \"generate auto-install floppy\": to create an installation floppy disk
 that will automatically perform a whole installation without the help of an
@@ -475,23 +450,21 @@ installUpdates =>
 N_("At the time you are installing Mandrake Linux, it is likely that some
 packages have been updated since the initial release. Bugs may have been
 fixed, security issues resolved. To allow you to benefit from these
-updates, you are now able to download them from the Internet. Choose
-\"Yes\" if you have a working Internet connection, or \"No\" if you prefer
-to install updated packages later.
+updates, you are now able to download them from the Internet. Check \"Yes\"
+if you have a working Internet connection, or \"No\" if you prefer to
+install updated packages later.
 
-Choosing \"Yes\" displays a list of places from which updates can be
+Choosing \"Yes\" will display a list of places from which updates can be
 retrieved. Choose the one nearest you. A package-selection tree will
 appear: review the selection, and press \"Install\" to retrieve and install
-the selected package( s), or \"Cancel\" to abort."),
+the selected package(s), or \"Cancel\" to abort."),
 
 miscellaneous => 
 N_("At this point, DrakX will allow you to choose the security level desired
 for the machine. As a rule of thumb, the security level should be set
 higher if the machine will contain crucial data, or if it will be a machine
 directly exposed to the Internet. The trade-off of a higher security level
-is generally obtained at the expense of ease of use. Refer to the \"msec\"
-chapter of the ``Command Line Manual'' to get more information about the
-meaning of these levels.
+is generally obtained at the expense of ease of use.
 
 If you do not know what to choose, keep the default option."),
 
@@ -603,7 +576,9 @@ disk or partition is called \"C:\")."),
 
 selectCountry => 
 N_("\"Country\": check the current country selection. If you are not in this
-country, click on the button and choose another one."),
+country, click on the \"Configure\" button and choose another one. If your
+country is not in the first list shown, click the \"More\" button to get
+the complete country list."),
 
 selectInstallClass => 
 N_("This step is activated only if an old GNU/Linux partition has been found on
@@ -656,9 +631,14 @@ example, if you will host users from Spain on your machine, select English
 as the default language in the tree view and \"Espanol\" in the Advanced
 section.
 
-Note that you're not limited to choosing a single additional language. Once
-you have selected additional locales, click the \"Next ->\" button to
-continue.
+Note that you're not limited to choosing a single additional language. You
+may choose several ones, or even install them all by selecting the \"All
+languages\" box. Selecting support for a language means translations,
+fonts, spell checkers, etc. for that language will be installed.
+Additionally, the \"Use Unicode by default\" checkbox allows to force the
+system to use unicode (UTF-8). Note however that this is an experimental
+feature. If you select different languages requiring different encoding the
+unicode support will be installed anyway.
 
 To switch between the various languages installed on the system, you can
 launch the \"/usr/sbin/localedrake\" command as \"root\" to change the
@@ -793,32 +773,7 @@ bootloader.
 \"Boot device\": in most cases, you will not change the default (\"First
 sector of drive (MBR)\"), but if you prefer, the bootloader can be
 installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk
-(\"On Floppy\").
-
-Checking \"Create a boot disk\" allows you to have a rescue boot media
-handy.
-
-The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by
-booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<
-at the prompt. If your computer cannot boot from the CD-ROM, there are at
-least two situations where having a boot floppy is critical:
-
- * when installing the bootloader, DrakX will rewrite the boot sector (MBR)
-of your main disk (unless you are using another boot manager), to allow you
-to start up with either Windows or GNU/Linux (assuming you have Windows on
-your system). If at some point you need to reinstall Windows, the Microsoft
-install process will rewrite the boot sector and remove your ability to
-start GNU/Linux!
-
- * if a problem arises and you cannot start GNU/Linux from the hard disk,
-this floppy will be the only means of starting up GNU/Linux. It contains a
-fair number of system tools for restoring a system that has crashed due to
-a power failure, an unfortunate typing error, a forgotten root password, or
-any other reason.
-
-If you say \"Yes\", you will be asked to insert a disk in the drive. The
-floppy disk must be blank or have non-critical data on it - DrakX will
-format the floppy and will rewrite the whole disk."),
+(\"On Floppy\")."),
 
 setupDefaultSpooler => 
 N_("Now, it's time to select a printing system for your computer. Other OSs may
@@ -829,7 +784,7 @@ is best for a particular type of configuration.
 if you have a direct connection to your printer, you want to be able to
 panic out of printer jams, and you do not have networked printers. (\"pdq
 \" will handle only very simple network cases and is somewhat slow when
-used with networks.) It's recommended that you use \"pdq \" if this is your
+used with networks.) It's recommended that you use \"pdq\" if this is your
 first experience with GNU/Linux.
 
  * \"CUPS\" - `` Common Unix Printing System'', is an excellent choice for
@@ -851,13 +806,8 @@ N_("DrakX will first detect any IDE devices present in your computer. It will
 also scan for one or more PCI SCSI cards on your system. If a SCSI card is
 found, DrakX will automatically install the appropriate driver.
 
-Because hardware detection is not foolproof, DrakX will ask you if you have
-a PCI SCSI installed. Clicking \" Yes\" will display a list of SCSI cards
-to choose from. Click \"No\" if you know that you have no SCSI hardware in
-your machine. If you're not sure, you can check the list of hardware
-detected in your machine by selecting \"See hardware info \" and clicking
-the \"Next ->\". Examine the list of hardware and then click on the \"Next
-->\" button to return to the SCSI interface question.
+Because hardware detection is not foolproof, DrakX may fail in detecting
+your hard drives. If so, You'll have to specify your hardware by hand.
 
 If you had to manually specify your PCI SCSI adapter, DrakX will ask if you
 want to configure options for it. You should allow DrakX to probe the
@@ -957,50 +907,65 @@ another driver."),
 summary => 
 N_("As a review, DrakX will present a summary of various information it has
 about your system. Depending on your installed hardware, you may have some
-or all of the following entries:
+or all of the following entries. Each entry is made up of the configuration
+item to be configured, followed by a quick summary of the current
+configuration. Click on the corresponding \"Configure\" button to change
+that.
+
+ * \"Keyboard\": check the current keyboard map configuration and change
+that if necessary.
+
+ * \"Country\": check the current country selection. If you are not in this
+country, click on the \"Configure\" button and choose another one. If your
+country is not in the first list shown, click the \"More\" button to get
+the complete country list.
+
+ * \"Timezone\": By default, DrakX deduces your time zone based on the
+country you have chosen. You can click on the \"Configure\" button here if
+this is not correct.
 
  * \"Mouse\": check the current mouse configuration and click on the button
 to change it if necessary.
 
- * \"Keyboard\": check the current keyboard map configuration and click on
-the button to change that if necessary.
-
- * \"Country\": check the current country selection. If you are not in this
-country, click on the button and choose another one.
-
- * \"Timezone\": By default, DrakX deduces your time zone based on the
-primary language you have chosen. But here, just as in your choice of a
-keyboard, you may not be in a country to which the chosen language
-corresponds. You may need to click on the \"Timezone\" button to
-configure the clock for the correct timezone.
-
- * \"Printer\": clicking on the \"No Printer\" button will open the printer
+ * \"Printer\": clicking on the \"Configure\" button will open the printer
 configuration wizard. Consult the corresponding chapter of the ``Starter
 Guide'' for more information on how to setup a new printer. The interface
 presented there is similar to the one used during installation.
-
- * \"Bootloader\": if you wish to change your bootloader configuration,
-click that button. This should be reserved to advanced users.
-
- * \"Graphical Interface\": by default, DrakX configures your graphical
-interface in \"800x600\" resolution. If that does not suits you, click on
-the button to reconfigure your graphical interface.
-
- * \"Network\": If you want to configure your Internet or local network
-access now, you can by clicking on this button.
 
  * \"Sound card\": if a sound card is detected on your system, it is
 displayed here. If you notice the sound card displayed is not the one that
 is actually present on your system, you can click on the button and choose
 another driver.
 
+ * \"Graphical Interface\": by default, DrakX configures your graphical
+interface in \"800x600\" or \"1024x768\" resolution. If that does not suits
+you, click on \"Configure\" to reconfigure your graphical interface.
+
  * \"TV card\": if a TV card is detected on your system, it is displayed
-here. If you have a TV card and it is not detected, click on the button to
-try to configure it manually.
+here. If you have a TV card and it is not detected, click on \"Configure\"
+to try to configure it manually.
 
  * \"ISDN card\": if an ISDN card is detected on your system, it will be
-displayed here. You can click on the button to change the parameters
-associated with the card."),
+displayed here. You can click on \"Configure\" to change the parameters
+associated with the card.
+
+ * \"Network\": If you want to configure your Internet or local network
+access now.
+
+ * \"Security Level\": this entry offers you to redefine the security level
+as set in a previous step ().
+
+ * \"Firewall\": if you plan to connect your machine to the Internet, it's
+a good idea to protect you from intrusions by setting up a firewall.
+Consult the corresponding section of the ``Starter Guide'' for details
+about firewall settings.
+
+ * \"Bootloader\": if you wish to change your bootloader configuration,
+click that button. This should be reserved to advanced users.
+
+ * \"Services\": you'll be able here to control finely which services will
+be run on your machine. If you plan to use this machine as a server it's a
+good idea to review this setup."),
 
 takeOverHdChoose => 
 N_("Choose the hard drive you want to erase in order to install your new
