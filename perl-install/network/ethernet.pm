@@ -58,8 +58,9 @@ sub get_eth_cards {
                      "p80211_prism2_pci" => 'prism2_pci',
                      "p80211_prism2_usb" => 'prism2_usb',
                      "ip1394" => "eth1394",
+                     "hostap" => undef, #- should be either "hostap_plx", "hostap_pci" or "hostap_cs"
                     );
-        $a = $fixes{$a} if $fixes{$a};
+        $a = $fixes{$a} if exists $fixes{$a};
 
         # 1) try to match a PCMCIA device for device description:
         if (my $b = find { $_->{device} eq $interface } @devs) { # PCMCIA case
