@@ -312,7 +312,7 @@ sub create_box_with_title {
     } else {
 	my $a = !$::no_separator;
 	undef $::no_separator;
-	if ($o->{icon} && !$::isWizard) {
+	if ($o->{icon} && (!$::isWizard || $::isInstall)) {
 	    gtkpack__($box,
 		      gtkpack_(Gtk2::HBox->new(0,0),
 			       0, gtkset_size_request(Gtk2::VBox->new(0,0), 15, 0),
@@ -434,16 +434,18 @@ sub create_packtable {
 
 sub create_okcancel {
     my ($w, $ok, $cancel, $spread, @other) = @_;
-    $spread ||= $::isWizard ? "end" : "spread";
-    $cancel = $::isWizard ? N("<- Previous") : N("Cancel") if !defined $cancel && !defined $ok;
-    $ok = $::isWizard ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok") if !defined $ok;
+    my $wizard_buttons = $::isWizard && !$pop_it;
+    $spread ||= $wizard_buttons ? "end" : "spread";
+    $cancel = $wizard_buttons ? N("<- Previous") : N("Cancel") if !defined $cancel && !defined $ok;
+    $ok = $wizard_buttons ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok") if !defined $ok;
     my $b1 = gtksignal_connect($w->{ok} = Gtk2::Button->new($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk2->main_quit });
     my $b2 = $cancel && gtksignal_connect($w->{cancel} = Gtk2::Button->new($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
-    $::isWizard and gtksignal_connect($w->{wizcancel} = Gtk2::Button->new(N("Cancel")), clicked => sub { die 'wizcancel' });
-    my @l = grep { $_ } $::isWizard ? ($w->{wizcancel}, if_(!$::Wizard_no_previous, $b2), $b1) : ($b1, $b2);
-    push @l, map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } @other;
+    gtksignal_connect($w->{wizcancel} = Gtk2::Button->new(N("Cancel")), clicked => sub { die 'wizcancel' }) if $wizard_buttons && !$::isInstall;
+    my @l = grep { $_ } $wizard_buttons ? (if_(!$::isInstall, $w->{wizcancel}), 
+				       if_(!$::Wizard_no_previous, $b2), $b1) : ($b1, $b2);
+    unshift @l, map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } @other;
 
-    $_->can_default($::isWizard) foreach @l;
+    $_->can_default($wizard_buttons) foreach @l;
     gtkadd(create_hbox($spread), @l);
 }
 
@@ -722,7 +724,6 @@ sub new {
 	$o->{rwindow} = $o->{window};
 	if (!defined($::WizardWindow)) {
 	    $::WizardWindow = Gtk2::Window->new('toplevel');
-	    $::WizardWindow->set_position('center_always');
 	    $::WizardWindow->signal_connect(delete_event => sub { die 'wizcancel' });
 	    $::WizardTable = Gtk2::Table->new(2, 2, 0);
 	    $::WizardWindow->add($::WizardTable);
@@ -752,8 +753,14 @@ sub new {
 									    0, 0, 0, $height*$i, -1, -1, 'none', 0, 0);
 				       }
 				   });
-	    $::WizardTable->attach($draw1, 0, 2, 0, 1, 'fill', 'fill', 0, 0);
-	    $::WizardTable->set_size_request(540,420);
+	    if ($::isInstall) {
+		$::WizardTable->set_size_request($::windowwidth * 0.9, $::windowheight * 0.7);
+		$::WizardWindow->set_uposition($::stepswidth + $::windowwidth * 0.05, $::logoheight + $::windowheight * 0.15);
+	    } else {
+		$::WizardWindow->set_position('center_always');
+		$::WizardTable->attach($draw1, 0, 2, 0, 1, 'fill', 'fill', 0, 0);
+		$::WizardTable->set_size_request(540,420);
+	    }
 	    $::WizardWindow->show_all;
 	    flush();
 	}

@@ -342,6 +342,7 @@ sub main {
     umask 022;
 
     $::isInstall = 1;
+    $::isWizard = 1;
     $::no_ugtk_init = 1;
     $::expert = $::g_auto_install = 0;
 

@@ -416,7 +416,7 @@ sub ask_fromW {
 	    $w = Gtk2::Button->new('');
 	    $w->signal_connect(clicked => sub {
 		$get_all->();
-		if ($::isWizard) {
+		if ($::isWizard && !$::isInstall) {
 		    $mainw->{rwindow}->set_sensitive(0);
 		} else {
 		    $mainw->{rwindow}->hide;
@@ -425,7 +425,7 @@ sub ask_fromW {
 		    $mainw->{retval} = $v;
 		    Gtk2->main_quit;
 		}
-		if ($::isWizard) {
+		if ($::isWizard && !$::isInstall) {
 		    $mainw->{rwindow}->set_sensitive(1);
 		} else {
 		    $mainw->{rwindow}->show;
@@ -630,7 +630,7 @@ sub ask_fromW {
     gtkadd($mainw->{window}, $pack);
     $set_default_size->() if $has_scroll_always;
     $set_advanced->(0);
-    (@widgets ? $widgets[0]{focus_w} : $common->{focus_cancel} ? $mainw->{cancel} : $mainw->{ok})->grab_focus();
+    ($common->{focus_cancel} ? $mainw->{cancel} : $mainw->{ok})->grab_focus();
 
     my $check = sub {
 	my ($f) = @_;

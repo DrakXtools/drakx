@@ -71,7 +71,7 @@ widget "*Steps*" style "small-font"
     gtkset_background(@background1) unless $::live; #- || testing;
 
     create_logo_window($o);
-    create_help_window($o);
+#    create_help_window($o);
 }
 
 #------------------------------------------------------------------------------
@@ -198,7 +198,7 @@ sub init_sizes() {
     #- ($::rootheight,  $::rootwidth)    = (min(768, $::rootheight), min(1024, $::rootwidth));
     ($::stepswidth,  $::stepsheight)  = (145, $::rootheight);
     ($::logowidth,   $::logoheight)   = ($::rootwidth - $::stepswidth, 40);
-    ($::helpwidth,   $::helpheight)   = ($::rootwidth - $::stepswidth, 104);
+    ($::helpwidth,   $::helpheight)   = ($::rootwidth - $::stepswidth, 0);
     ($::windowwidth, $::windowheight) = ($::rootwidth - $::stepswidth, $::rootheight - $::helpheight - $::logoheight);
 }
 

@@ -119,7 +119,7 @@ sub enteringStep {
     printf "Entering step `%s'\n", $o->{steps}{$step}{text};
     $o->SUPER::enteringStep($step);
     install_gtk::create_steps_window($o);
-    install_gtk::create_help_window($o); #- HACK: without this it doesn't work (reaches step doPartitionDisks then fail)
+#    install_gtk::create_help_window($o); #- HACK: without this it doesn't work (reaches step doPartitionDisks then fail)
     $o->set_help($o->{step});
 }
 sub leavingStep {
@@ -204,8 +204,8 @@ sub reallyChooseGroups {
 	translate($path), map { $entry->($_) } grep { $o->{compssUsers}{$_}{path} eq $path } @{$o->{compssUsersSorted}};
     };
     gtkadd($w->{window},
-	   gtkpack($w->create_box_with_title(N("Package Group Selection")),
-		   gtkpack_(Gtk2::VBox->new(0, 0),
+	   gtkpack_($w->create_box_with_title(N("Package Group Selection")),
+		    1, gtkpack_(Gtk2::VBox->new(0, 0),
 			   1, gtkpack_(Gtk2::HBox->new(0, 0),
 			        $o->{meta_class} eq 'server' ? (
 				   1, gtkpack(Gtk2::VBox->new(0, 0), 
@@ -233,8 +233,8 @@ sub reallyChooseGroups {
 					  ),
 				),
 			   )),
-		   '',
-		   gtkadd(Gtk2::HBox->new(0, 0),
+		   1, '',
+		   0, gtkadd(Gtk2::HBox->new(0, 0),
 			  $w_size,
 			  if_($individual, do {
 			      my $check = Gtk2::CheckButton->new(N("Individual package selection"));
@@ -246,7 +246,6 @@ sub reallyChooseGroups {
 			 ),
 		  ),
 	  );
-    $w->{rwindow}->set_default_size($::windowwidth * 0.8, $::windowheight * 0.8);
     $w->main;
     1;    
 }
@@ -420,7 +419,6 @@ sub installPackages {
     $show_advertising = to_bool(@install_any::advertising_images) if !defined $show_advertising;
     my ($msg, $msg_time_remaining, $msg_time_total) = map { Gtk2::Label->new($_) } '', (N("Estimating")) x 2;
     my ($progress, $progress_total) = map { Gtk2::ProgressBar->new } (1..2);
-    $w->{rwindow}->set_resizable(0);  #- so that it will auto shrink when passing from adverts to details
     gtkadd($w->{window}, my $box = Gtk2::VBox->new(0,10));
     $box->pack_end(gtkshow(gtkpack(gtkset_size_request(Gtk2::VBox->new(0,5), $::windowwidth * 0.6, -1),
 			   $msg, $progress,
@@ -601,7 +599,7 @@ sub set_help {
 	join("\n\n", map { s/\n/ /mg; $_ } split("\n\n", translate($help::steps{$_})))
     } @l;
     $o->{current_help} = join("\n\n\n", @l2);
-    gtktext_insert($o->{help_window_text}, $o->{current_help});
+#    gtktext_insert($o->{help_window_text}, $o->{current_help});
     1;
 }
 
