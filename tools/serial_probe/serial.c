@@ -993,7 +993,8 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 		goto endprobe;
 	    
 	    /* see if we found any PnP signature */
-	    if (pnp_strlen != 0) {
+	    if (pnp_strlen != 0 && (pnp_strlen != 1 || pnp_string[0] != 'M')) {
+	      
 		/* fill in the PnP com structure */
 		if (parse_pnp_string( pnp_string, pnp_strlen, &pnp_id )<0) {
 		    DEBUG("Got PNP data back, but failed to parse.  Aborting\n");
