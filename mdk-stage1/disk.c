@@ -264,8 +264,8 @@ static enum return_type try_with_device(char *dev_name)
 #ifndef MANDRAKE_MOVE
 	if (!stat(location_full, &statbuf) && S_ISDIR(statbuf.st_mode)) {
 		char **file;
-		char *stage2_isos[100];
-		int stage2_iso_number = 0;
+		char *stage2_isos[100] = { "Use directory as a mirror tree", "-----" };
+		int stage2_iso_number = 2;
 
 		log_message("\"%s\" exists and is a directory, looking for iso files", location_full);
 
@@ -305,15 +305,30 @@ static enum return_type try_with_device(char *dev_name)
 
 		stage2_isos[stage2_iso_number] = NULL;
 
-		if (stage2_iso_number > 0) {
-			results = ask_from_list("Please choose the ISO image to be used to install the " DISTRIB_NAME
-						" Distribution, or cancel to use this directory as a mirror tree.",
-						stage2_isos, file);
-			if (results == RETURN_OK) {
-				strcat(location_full, "/");
-				strcat(location_full, *file);
-				log_message("installer will use ISO image \"%s\"", location_full);
-			}
+		if (stage2_iso_number > 2) {
+			do {
+				results = ask_from_list("Please choose the ISO image to be used to install the "
+							DISTRIB_NAME " Distribution.",
+							stage2_isos, file);
+				if (results == RETURN_BACK) {
+					umount(disk_own_mount);
+					return try_with_device(dev_name);
+				} else if (results == RETURN_OK) {
+					if (!strcmp(*file, stage2_isos[0])) {
+						/* use directory as a mirror tree */
+						continue;
+					} else if (!strcmp(*file, stage2_isos[1])) {
+						/* the separator has been selected */
+						results = RETURN_ERROR;
+						continue;
+					} else {
+						/* use selected ISO image */
+						strcat(location_full, "/");
+						strcat(location_full, *file);
+						log_message("installer will use ISO image \"%s\"", location_full);
+					}
+				}
+			} while (results == RETURN_ERROR);
 		} else {
 			log_message("no ISO image found in \"%s\" directory", location_full);
 		}
