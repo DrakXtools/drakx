@@ -25,7 +25,7 @@ sub configure {
 	     ];
     my $type = $in->ask_from_list_(N("Connect to the Internet"),
 				   N("The most common way to connect with adsl is pppoe.
-Some connections use pptp, a few ones use dhcp.
+Some connections use pptp, a few use dhcp.
 If you don't know, choose 'use pppoe'"), $l) or return;
     $type =~ s/use //;
     if ($type eq 'pppoe') {
