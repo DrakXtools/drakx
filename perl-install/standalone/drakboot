@@ -20,10 +20,13 @@ $::isStandalone = 1;
 my $in = vnew interactive('su');
 
 my %l = (
+	 arch() !~ /sparc|alpha/ ? (
 	 _("Configure LILO/GRUB") => '',
+				   ) : (),
 	 _("Create a boot floppy") => ['/usr/X11R6/bin/drakfloppy'],
 	 _("Format floppy") => [ '/usr/bin/kfloppy', '/usr/bin/gfloppy' ],
 );
+
 while (my ($k, $v) = each %l) {
     $v or next;
     foreach (@$v) {
