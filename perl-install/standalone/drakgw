@@ -213,16 +213,16 @@ my @all_cards = network::ethernet::get_eth_cards($modules_conf);
 my %net_devices = network::ethernet::get_eth_cards_names(@all_cards);
 put_in_hash(\%net_devices, { 'ppp+' => 'ppp+', 'ippp+' => 'ippp+' });
 
-	$in->ask_from('',
-		      N("Please enter the name of the interface connected to the internet.
+$in->ask_from('',
+              N("Please enter the name of the interface connected to the internet.
 
 Examples:
 		ppp+ for modem or DSL connections, 
 		eth0, or eth1 for cable connection, 
 		ippp+ for a isdn connection.
 "),
-      [ { label => N("Net Device"), val => \$card_netconnect, list => [ sort keys %net_devices ], format => sub { $net_devices{$_[0]} || $_[0] }, not_edit => 0 } ])
-		  or goto step_ask_confirm;
+              [ { label => N("Net Device"), val => \$card_netconnect, list => [ sort keys %net_devices ], format => sub { $net_devices{$_[0]} || $_[0] }, not_edit => 0 } ])
+  or goto step_ask_confirm;
 
 my @cards = grep {
     log::l("[drakgw] Have network card: $_");
@@ -285,8 +285,8 @@ my $reconf_dhcp_server_intf = 1;
 if (any { /$device/ } @configured_devices) {
   step_warning_already_conf:
     my $auto = N("Yes");
-		my $_dhcp_details = N("Yes");
-		
+    my $_dhcp_details = N("Yes");
+
     $in->ask_from(N("Network interface already configured"),
 		  N("Warning, the network adapter (%s) is already configured.
 
@@ -302,7 +302,7 @@ Network: %s
 IP address: %s
 IP attribution: %s
 Driver: %s", $device, $conf->{NETWORK}, $conf->{IPADDR}, $conf->{BOOTPROTO}, $aliased_devices{$device} || '(unknown)')) } } ]) or goto step_interface_choice;
-    
+
     if ($auto ne N("Yes")) {
 	$reconf_dhcp_server_intf = 0;
 	$server_ip = $conf->{IPADDR} ||= network::network::read_dhcpd_conf()->{option_routers}[0] ||= "192.168.1.1";
@@ -316,7 +316,7 @@ The default DNS entry is the Caching Nameserver configured on the firewall. You 
 Otherwise, I can reconfigure your interface and (re)configure a DHCP server for you.
 
 "),
-      [ { label => N("Local Network adress"), val => \$lan_address, type => 'entry' },
+                      [ { label => N("Local Network adress"), val => \$lan_address, type => 'entry' },
 			{ label => N("Netmask"), val => \$netmask, type => 'entry' } ])
 		  or goto step_warning_already_conf;
 	$in->ask_from('',
@@ -335,7 +335,7 @@ If you do not know the meaning of an option, simply leave it as it is."),
 	  or goto step_warning_already_conf;
     }
 }
-    
+
 if (!($lan_address =~ s/\.0$//)) {
     $in->ask_warn('', 
 		  N("The Local Network did not finish with `.0', bailing out."));
@@ -358,7 +358,7 @@ network::shorewall::check_iptables($in) or goto step_detectsetup;
 #- **********************************
 #- * 2nd step: configure
 
-$wait_configuring = $in->wait_message(N("Configuring..."), 
+$wait_configuring = $in->wait_message(N("Configuring..."),
 				      N("Configuring scripts, installing software, starting servers..."));
 
 
@@ -560,17 +560,17 @@ if (-f $cups_conf && !$::testing) {
 	$root_location_start = @cups_conf_content;
 	@root_location = ("<Location />\n", "</Location>\n");
     }
- 
+
     # Delete all former "Order", "Allow", and "Deny" lines from the root location block
     s/^\s*Order.*//, s/^\s*Allow.*//, s/^\s*Deny.*// foreach @root_location;
- 
+
     # Add the new "Order" and "Deny" lines, add an "Allow" line for the local network
     splice(@root_location, -1, 0, $_) foreach "Order Deny,Allow\n", "Deny From All\n", "Allow From 127.0.0.1\n",
 					       "Allow From $lan_address.*\n";
- 
+
     # Put the changed root location block back into the file
     splice(@cups_conf_content, $root_location_start, 0, @root_location);
- 
+
     output $cups_conf, @cups_conf_content;
 }
 
