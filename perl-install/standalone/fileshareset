@@ -171,7 +171,8 @@ sub add {
     foreach (@$exports) {
 	$_->{mntpoint} eq $mntpoint and die 'add';
     }
-    push @$exports, { mntpoint => $mntpoint };
+    push @$exports, my $e = { mntpoint => $mntpoint };
+    $e;
 }
 
 sub remove {
@@ -278,8 +279,9 @@ sub read {
     while (<F>) {
 	if (/^\s*\[.*\]/ || eof F) {
 	    #- first line in the category
+	    my ($label) = $s =~ /^\s*\[(.*)\]/;
 	    my ($mntpoint) = $s =~ /^\s*path\s*=\s*(.*)/m;
-	    push @l, { mntpoint => $mntpoint, raw => $s };
+	    push @l, { mntpoint => $mntpoint, raw => $s, label => $label } if $label && $mntpoint;
 	    $s = '';
 	}
 	$s .= $_;
@@ -293,8 +295,9 @@ sub write {
 	if (!exists $_->{raw}) {
 	    $_->{raw} = <<EOF;
 
-[$_->{mntpoint}]
+[$_->{label}]
    path = $_->{mntpoint}
+   comment = $_->{mntpoint}
    public = yes
    guest ok = yes
    writable = no
@@ -304,6 +307,71 @@ EOF
     local *F;
     open F, ">$conf_file" or die "can't write $conf_file";
     print F $_->{raw} foreach @$smb_exports;
+}
+
+sub add {
+    my ($exports, $mntpoint) = @_;
+    my $e = $exports->exports::add($mntpoint);
+    $e->{label} = name_mangle($mntpoint, map { $_->{label} } @$exports);
+}
+
+sub name_mangle {
+    my ($input, @others) = @_;
+
+    local $_ = $input;
+
+    # 1. first only keep legal characters. "/" is also kept for the moment
+    tr|a-z|A-Z|;
+    s|[^A-Z0-9#\-_!/]|_|g; # "$" is allowed except at the end, remove it in any case
+    
+    # 2. removing non-interesting parts
+    s|^/||;
+    s|^home/||;
+    s|_*/_*|/|g;
+    s|_+|_|g;
+
+    # 3. if size is too small (!), make it bigger
+    $_ .= "_" while length($_) < 3;
+
+    # 4. if size is too big, shorten it
+    while (length > 15) {
+	my ($s) = m|.*?/(.*)|;
+	if (length($s) > 10 && !grep { /\Q$s/ } @others) {
+	    # dropping leading directories when the resulting is still long and meaningful
+	    $_ = $s;
+	    next;
+	}
+	s|(.*)[0-9#\-_!/]|$1| and next;
+
+	# inspired by "Christian Brolin" "Long names are doom" on comp.lang.functional
+	s|(.+)[AEIOU]|$1| and next; # allButFirstVowels
+	s|(.*)(.)\2|$1$2| and next; # adjacentDuplicates
+
+	s|(.*).|$1|; # booh, :'-(
+    }
+
+    # 5. remove "/"s still there
+    s|/|_|g;
+
+    # 6. resolving conflicts
+    my $l = join("|", map { quotemeta } @others);
+    my $conflicts = qr|^($l)$|;
+    if (/$conflicts/) {
+      A: while (1) {
+	    for (my $nb = 1; length("$_$nb") <= 15; $nb++) {
+		if ("$_$nb" !~ /$conflicts/) {
+		    $_ = "$_$nb";
+		    last A;
+		}
+	    }
+	    $_ or die "can't find a unique name";
+	    # can't find a unique name, dropping the last letter
+	    s|(.*).|$1|;
+	}
+    }
+
+    # 7. done
+    $_;
 }
 
 sub update_server {
