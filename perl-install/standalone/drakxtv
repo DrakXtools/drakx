@@ -33,6 +33,7 @@ use strict;
 use detect_devices;
 use common;
 
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 my $in = 'interactive'->vnew('su', 'default');
 
 sub scan4channels {
