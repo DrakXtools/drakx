@@ -273,9 +273,7 @@ sub create_hbox { gtkset_layout(gtkset_border_width(new Gtk::HButtonBox, 3), $_[
 
 sub create_factory_menu_ {
     my ($type, $name, $window, @menu_items) = @_;
-    print "TOTO - $type - $name - $window - @menu_items - \n\n";
     my $widget = new Gtk::ItemFactory($type, $name, my $accel_group = new Gtk::AccelGroup);
-    use Data::Dumper; print "\n\nMenu =", Dumper(\@menu_items),"\n\n";
     $widget->create_items(@menu_items);
     $window->add_accel_group($accel_group); #$accel_group->attach($main_win);
     $widget->get_widget($name); # return menu bar
