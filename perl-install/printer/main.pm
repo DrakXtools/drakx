@@ -256,7 +256,7 @@ sub read_configured_queues($) {
 	#- Poll the queues of the current default spooler
 	local *F; 
 	open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
-	    "foomatic-configure -P -q -s $printer->{SPOOLER} |" or
+	    "foomatic-configure -P -q -s $printer->{SPOOLER} -r |" or
 		die "Could not run foomatic-configure";
 	eval join('', <F>); 
 	close F;
@@ -265,6 +265,13 @@ sub read_configured_queues($) {
     my $i;
     my $N = $#QUEUES + 1;
     for ($i = 0;  $i < $N; $i++) {
+	# Set the default printer
+	$printer->{DEFAULT} = $QUEUES[$i]{queuedata}{queue} if
+	    $QUEUES[$i]{queuedata}{default};
+	# Advance to the next entry if the current is a remotely defined
+	# printer
+	next if $QUEUES[$i]{queuedata}{remote};
+	# Add an entry for a locally defined queue
 	$printer->{configured}{$QUEUES[$i]{queuedata}{queue}} = 
 	    $QUEUES[$i];
 	if (!$QUEUES[$i]{make} || !$QUEUES[$i]{model}) {
@@ -272,9 +279,9 @@ sub read_configured_queues($) {
 		$printer->{OLD_QUEUE} = $QUEUES[$i]{queuedata}{queue};
 		my $descr = get_descr_from_ppd($printer);
 		if ($descr =~ m/^([^\|]*)\|([^\|]*)(\|.*|)$/) {
-              $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{make} ||= $1;
-              $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{model} ||= $2;
-          }
+		    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{make} ||= $1;
+		    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{model} ||= $2;
+	        }
 		# Read out which PPD file was originally used to set up this
 		# queue
 		local *F;
