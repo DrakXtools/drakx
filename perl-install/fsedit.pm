@@ -19,18 +19,18 @@ use fs;
 
 %suggestions = (
   __("simple") => [
-    { mntpoint => "/",     size => 300 << 11, type =>0x483, ratio => 5, maxsize =>3500 << 11 },
+    { mntpoint => "/",     size => 300 << 11, type =>0x483, ratio => 5, maxsize =>5500 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
     { mntpoint => "/home", size => 300 << 11, type =>0x483, ratio => 3 },
   ], __("with /usr") => [
     { mntpoint => "/",     size => 150 << 11, type =>0x483, ratio => 1, maxsize => 500 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
-    { mntpoint => "/usr",  size => 300 << 11, type =>0x483, ratio => 4, maxsize =>3000 << 11 },
+    { mntpoint => "/usr",  size => 300 << 11, type =>0x483, ratio => 4, maxsize =>4000 << 11 },
     { mntpoint => "/home", size => 100 << 11, type =>0x483, ratio => 3 },
   ], __("server") => [
     { mntpoint => "/",     size => 150 << 11, type =>0x483, ratio => 1, maxsize => 250 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 2, maxsize => 400 << 11 },
-    { mntpoint => "/usr",  size => 300 << 11, type =>0x483, ratio => 4, maxsize =>3000 << 11 },
+    { mntpoint => "/usr",  size => 300 << 11, type =>0x483, ratio => 4, maxsize =>4000 << 11 },
     { mntpoint => "/var",  size => 150 << 11, type =>0x483, ratio => 3 },
     { mntpoint => "/home", size => 150 << 11, type =>0x483, ratio => 3 },
     { mntpoint => "/tmp",  size => 150 << 11, type =>0x483, ratio => 2, maxsize => 500 << 11 },
