@@ -497,6 +497,24 @@ sub lang2kde_lang {
     $r ||= first(grep { $valid_lang->($_) } split(':', lang2LANGUAGE($lang)));
     $r || $default || 'C';
 }
+
+sub kde_lang2lang {
+    my ($klang, $default) = @_;
+    first(grep { /^$klang/ } list()) || $default || 'en_US';
+}
+
+sub kde_lang_country2lang {
+    my ($klang, $country, $default) = @_;
+    my $uc_country = uc $country;
+    # country is used to precise the lang
+    my @choices = grep { /^$klang/ } list();
+    my @sorted = 
+      @choices == 2 && length $choices[0] !~ /[._]/ && $choices[1] =~ /UTF-8/ ? @choices :
+      map { $_->[0] } sort { $b->[1] <=> $a->[1] } map { [ $_ => /_$uc_country/ ] } @choices;
+    
+    $sorted[0] || $default || 'en_US';
+}
+
 sub charset2kde_charset {
     my ($charset, $default) = @_;
     my $iocharset = ($charsets{$charset} || [])->[3];

@@ -8,10 +8,16 @@ use interactive;
 use lang;
 use any;
 
+my ($klang, $country, $apply);
 
-if ($ARGV[0] =~ /--kde_country=(.*)/) {
-    my $lang = lang::country2lang($1);
-    lang::write('', $lang, $>);
+foreach (@ARGV) {
+    $apply = /--apply/;
+    $klang = $1 if /--kde_lang=(.*)/;
+    $country = $1 if /--kde_country=(.*)/;
+}
+if ($klang) {
+    my $lang = lang::kde_lang_country2lang($klang, $country);
+    lang::write('', $lang, $>) if $apply;
 
     #- help KDE defaulting to the right charset
     print lang::charset2kde_charset(lang::lang2charset($lang)), "\n";
