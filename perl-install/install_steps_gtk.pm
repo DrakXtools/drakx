@@ -327,6 +327,7 @@ sub choosePackagesTree {
 	    foreach (sort @$compss) {
 		($root, $leaf) = m|(.*)/(.+)|o or ($root, $leaf) = ('', $_);
 		my $pkg = pkgs::packageByName($packages, $leaf);
+		$root .= '/' . _("Other") if pkgs::packageRate($pkg) < 4;
 		$add_node->($leaf, $root) if pkgs::packageMedium($pkg)->{selected};
 	    }
 	}
