@@ -252,21 +252,12 @@ sub build_tree {
 	# FIXME: code duplication, should be in network::modem::read_config
 	$intf->{device} = $netc->{autodetect}{modem};
 	my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
-	$intf->{connection} = $l{Name};
-	$intf->{domain} = $l{Domain};
 	($intf->{dns1}, $intf->{dns2}) = split(',', $l{DNS});
-	
-	foreach (cat_("/etc/sysconfig/network-scripts/chat-ppp0")) {
-	    /.*ATDT(\d*)/ and $intf->{phone} = $1;
-	}
-	foreach (cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0")) {
-	    /NAME=(['"]?)(.*)\1/ and $intf->{login} = $2;
-	}
-	$intf->{login} ||= $l{Username};
-	my $secret = network::tools::read_secret_backend();
-	foreach (@$secret) {
-	    $intf->{passwd} = $_->{passwd} if $_->{login} eq $intf->{login};
-	}
+	$intf->{$_->[0]} = $l{$_->[1]} foreach [ 'connection' , 'Name' ], [ 'domain', 'Domain' ], [ 'login', 'Username' ];
+	/.*ATDT(\d*)/ and $intf->{phone} = $1 foreach cat_("/etc/sysconfig/network-scripts/chat-ppp0");
+	/NAME=(['"]?)(.*)\1/ and $intf->{login} ||= $2 foreach cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0");
+	my $security = network::tools::read_secret_backend();
+	$_->{login} eq $intf->{login} and $intf->{passwd} = $_->{passwd} foreach @$security;
 	$intf->{save} = sub { network::modem::ppp_configure($in, $intf) };
     }
     elsif ($interface eq 'isdn') {
