@@ -283,7 +283,7 @@ static int save_netinfo(struct interface_info * intf) {
 		fprintf(f, "HOSTNAME=%s\n", hostname);
 	if (domain)
 		fprintf(f, "DOMAINNAME=%s\n", domain);
-	if (dhcp_hostname)
+	if (dhcp_hostname && !streq(dhcp_hostname, ""))
 		fprintf(f, "DHCP_HOSTNAME=%s\n", dhcp_hostname);
 	
 	if (gateway.s_addr != 0)
