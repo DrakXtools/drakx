@@ -345,7 +345,7 @@ sub _create_dialog {
     $dialog->signal_connect(delete_event => sub { Gtk2->main_quit });
     $dialog->set_title($title);
     $dialog->set_position('center-on-parent');  # center-on-parent doesn't work
-    $dialog->set_size_request(-1, 400) if !$o_options->{small};
+    $dialog->set_size_request(-1, $o_options->{small} ? -1 : 400);
     $dialog->set_modal(1);
     $dialog;
 }
