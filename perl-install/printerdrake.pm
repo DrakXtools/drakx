@@ -776,8 +776,7 @@ sub main {
 	    unless ((%{$printer->{configured} || {}} == ()) && (!$::expert)) {
 		$in->ask_from_entries_refH_powered(
 		    {messages =>
-                      _("Here are the following print queues.
-                      You can add some more or change the existing ones."),
+                      _("Here are the following print queues.\nYou can add some more or change the existing ones."),
 		      cancel => '',
 		    },
 		    # List the queues
