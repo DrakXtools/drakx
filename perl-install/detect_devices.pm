@@ -827,7 +827,7 @@ sub computer_info() {
 	             $date =~ m!\d\d/\d\d/(\d\d)! && "20$1";
 	
      +{ 
-	 isLaptop => member($Chassis, 'Portable', 'Laptop', 'Notebook', 'Sub Notebook', 'Docking Station'),
+	 isLaptop => member($Chassis, 'Portable', 'Laptop', 'Notebook', 'Hand Held', 'Sub Notebook', 'Docking Station'),
 	 if_($BIOS_Year, BIOS_Year => $BIOS_Year),
      };
 }
