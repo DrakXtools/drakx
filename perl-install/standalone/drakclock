@@ -96,7 +96,7 @@ $my_win->{window}->add(gtkpack_(gtkset_border_width(Gtk2::VBox->new, $::isEmbedd
                                                         0, gtkpack_(Gtk2::HBox->new,
                                                                     0, $drawing_area = gtkset_size_request(Gtk2::DrawingArea->new, @image_size),
                                                                    ),
-                                                        0, gtkpack_(Gtk2::HBox->new(1,0),
+                                                        0, gtkpack_(my $time_box = Gtk2::HBox->new(1,0),
                                                                     0, my $spinner_h = Gtk2::SpinButton->new($adjh, 0, 0),
                                                                     0, my $spinner_m = Gtk2::SpinButton->new($adjm, 0, 0),
                                                                     0, my $spinner_s = Gtk2::SpinButton->new($adjs, 0, 0),
@@ -147,6 +147,8 @@ $my_win->{window}->add(gtkpack_(gtkset_border_width(Gtk2::VBox->new, $::isEmbedd
                                )
                       );
 $button_reset = $w->{buttons}{N("Reset")};
+
+$time_box->set_direction('ltr');
 
 my $servers = get_server();
 $combo_ntpserver->set_popdown_strings(@$servers);
