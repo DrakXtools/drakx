@@ -31,7 +31,6 @@ use ugtk2 qw(:create :dialogs :wrappers :helpers);
 $::isInstall and die "Not supported during install.\n";
 
 my $in = 'interactive'->vnew('su');
-my $cron_hourly = "/etc/cron.hourly/logdrake_service";
 
 #- parse arguments list.
 foreach (@ARGV) {
@@ -384,7 +383,7 @@ my $r = "*** " . chomp_(`date`) . " ***\n";
 
 );
 
-my $initdir = "/etc/init.d";
+    my $initdir = "/etc/init.d";
 
     my ($load, $email); 
     $load = 3;
@@ -468,8 +467,7 @@ To: ), "$email\n";
 print F $r;
 
 # EOF);
-	output $cron_hourly, $cron;
-	chmod 0755, $cron_hourly;
+    output_with_perm "/etc/cron.hourly/logdrake_service", 0755, $cron;
         
     undef $::isWizard; 
     if (defined $::WizardWindow) {
