@@ -1,14 +1,14 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 0.17mdk
+Release: 0.19mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
 # Temporary requires for tools that still use gtk+1 (mainly drakfloppy and net_monitor)
 Requires: perl-GTK >= 0.6123, perl-GTK-GdkImlib, perl-GTK-GdkPixbuf
-Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2003.01.21.1, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.4-14mdk
+Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2003.01.27.1-2mdk, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.4-14mdk
 Conflicts: drakconf < 9.1-0.4mdk 
 BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.8, ncurses-devel, newt-devel, perl-devel, libext2fs-devel, perl-MDK-Common-devel
 BuildRoot: %_tmppath/%name-buildroot
@@ -290,6 +290,29 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Thu Jan 30 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.19mdk
+- 
+- printerdrake: fixes for new foomatic
+- requires a recent enought perl-GTK2
+- harddrake2:
+  o fix misdetection of nvnet part of nvforce2 chips
+  o move nforce system controllers in bridge class (which is renamed
+    "bridges and system controllers")
+  o mark class names as being translatable
+- logdrake works again in both embedded and non embedded cases
+- translation updates, add Tajiki (pablo)
+- interactive: add support for trees on console (pixel)
+- diskdrake: ntfs resizing support (pixel) (acked by ntfsresize author)
+
+* Wed Jan 29 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.18mdk
+- fix locales managment for non interactive tools (aka pure gtk+ tools)
+- harddrake2:
+  o restore cd/dvd burners detection
+  o fix doble detection of pci modems
+  o don't display vendor & description when we don't have them for ata disks
+  o fix ghost modem detection
+  o logdrake is embeddable again
+
 * Tue Jan 28 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.17mdk
 - drakfont updates (poulpy):
   o fix progress bar,
