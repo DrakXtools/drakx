@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.8
-Release: 12mdk
+Release: 13mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -223,7 +223,7 @@ done
 %postun -n harddrake-ui
 %clean_menus
 
-%triggerpostun -n harddrake -- harddrake <= 1.1.0
+%triggerpostun -n harddrake -- harddrake <= 1.1.8-8mdk
 %_sbindir/convert-harddrake
 
 %files newt -f %name.list
@@ -262,6 +262,9 @@ done
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Fri Jul 26 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-13mdk
+- put right version for conversion trigger (plain perl -> storable)
+
 * Thu Jul 25 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-12mdk
 - simplify harddrake service:
 	o we don't need to set media_type, we don't use it
@@ -325,7 +328,7 @@ done
 - remove last draknet reference in harddrake::ui
 - disable diagnostics and strict mode
 
-n* Thu Jul 18 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-6mdk
+* Thu Jul 18 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-6mdk
 - able to restart WindowMaker if needed
 - draknet is dead; vival el drakconnect
 - devices managment:
