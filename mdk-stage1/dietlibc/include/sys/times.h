@@ -3,4 +3,6 @@
 
 #include <linux/times.h>
 
+clock_t times(struct tms *buf);
+
 #endif

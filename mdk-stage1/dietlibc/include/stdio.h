@@ -63,6 +63,7 @@ int fflush(FILE *stream) __THROW;
 
 int fclose(FILE *stream) __THROW;
 
+void clearerr(FILE *stream) __THROW;
 int feof (FILE *stream) __THROW;
 int ferror( FILE *stream) __THROW;
 int fileno( FILE *stream) __THROW;

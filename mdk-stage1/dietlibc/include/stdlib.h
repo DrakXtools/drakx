@@ -57,4 +57,6 @@ void *alloca(size_t size) __THROW; /* gcc built-in */
 
 char *realpath(const char *path, char *resolved_path) __THROW;
 
+int abs(int j) __THROW;
+
 #endif
