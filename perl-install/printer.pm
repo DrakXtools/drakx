@@ -7,6 +7,7 @@ use vars qw(%thedb %thedb_gsdriver %printer_type %printer_type_inv @papersize_ty
 
 use common qw(:common :system :file);
 use commands;
+use run_program;
 
 #-if we are in an DrakX config
 my $prefix = "";
@@ -333,7 +334,6 @@ sub write_cupsd_conf {
     close F;
 
     #- restart cups after updating configuration.
-    require run_program;
     run_program::rooted($prefix, "/etc/rc.d/init.d/cups restart"); sleep 1;
 }
 
@@ -489,7 +489,6 @@ sub configure_queue($) {
 	/CUPS/ && do {
 	    #- at this level, we are using lpadmin to create a local printer (only local
 	    #- printer are supported with printerdrake).
-	    require run_program;
 	    run_program::rooted($prefix, "lpadmin",
 				"-p", $entry->{QUEUE},
 				$entry->{State} eq 'Idle' && $entry->{Accepting} eq 'Yes' ? ("-E") : (),
@@ -634,7 +633,6 @@ sub remove_queue($) {
     $printer->{configured}{$printer->{QUEUE}} or return; #- something strange at this point.
 
     if ($printer->{mode} eq 'CUPS') {
-	require run_program;
 	run_program::rooted($prefix, "lpadmin", "-x", $printer->{QUEUE});
     }
     delete $printer->{configured}{$printer->{QUEUE}};
@@ -647,7 +645,6 @@ sub restart_queue($) {
     for ($printer->{mode}) {
 	/CUPS/ && do {
 	    #- restart cups before cleaning the queue.
-	    require run_program;
 	    run_program::rooted($prefix, "/etc/rc.d/init.d/cups start"); sleep 1;
 	    run_program::rooted($prefix, "lprm-cups", "-P$queue", "-");
 	    last };
@@ -658,7 +655,6 @@ sub restart_queue($) {
 		kill 'TERM', $pidlpd if $pidlpd;
 		unlink "$prefix$_";
 	    }
-	    require run_program;
 	    run_program::rooted($prefix, "lprm-lpd", "-P$queue", "-"); sleep 1;
 	    run_program::rooted($prefix, "lpd"); sleep 1;
 	    last };
@@ -675,7 +671,6 @@ sub print_pages($@) {
 	/lpr/  and ($lpr, $lpq) = ("/usr/bin/lpq-lpd", "/usr/bin/lpq-lpd");
     }
 
-    require run_program;
     foreach (@pages) {
 	run_program::rooted($prefix, $lpr, "-P$queue", $_);
     }
