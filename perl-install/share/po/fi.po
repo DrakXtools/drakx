@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fi - MDK Release 9.1\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
-"PO-Revision-Date: 2003-03-07 15:10+0200\n"
+"POT-Creation-Date: 2003-03-12 17:27+0100\n"
+"PO-Revision-Date: 2003-03-13 16:20+0200\n"
 "Last-Translator: Thomas Backlund <tmb@iki.fi>\n"
 "Language-Team: Finnish <cooker-i18n@linux-mandrake.com>\n"
 "MIME-Version: 1.0\n"
@@ -11094,11 +11094,6 @@ msgstr "Muuta tulostusjärjestelmä"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Printer sharing"
-msgstr "Tulostimen jako"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "CUPS configuration"
 msgstr "CUPS asetus"
 
@@ -11528,11 +11523,12 @@ msgstr "Tulostus/Skannaus/Kuva-Kortit laitteella \"%s\""
 #, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "Saadaksesi tietoja nykyisen tulostimen olemassa olevista optioista, lue joko "
-"alla näytetty lista tai paina \"Tulostusparametrien lista\" painiketta.%s%s\n"
+"alla näytetty lista tai paina \"Tulostusparametrien lista\" painiketta.%s%s%"
+"s\n"
 "\n"
 
 #: ../../printer/printerdrake.pm:1
@@ -11779,51 +11775,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
-msgstr ""
-"Tulostimesi kuuluu GDI lasertulostimien ryhmään (wintulostimia) joita "
-"myydään eri valmistajien nimillä, ja jotka käyttävät Zenographics ZJ-stream "
-"rasterointiformaattia datalle joka lähetetään tulostimelle. Ajuri näille "
-"tulostimille on vielä aikaisessa kehitysvaiheessa, ja tästä syystä se ei "
-"aina toimi oikein. Eli voi olla että se toimii vain jos valitset paperikoon "
-"A4.\n"
-"\n"
-"Jotkin tulostimet, esimerkiksi HP LaserJet 1000, jolle tämä ajuri alun perin "
-"tehtiin, vaativat niiden oman firmwaren lähettämisen niille heti "
-"käynnistyksen jälkeen. HP LaserJet 1000:n tapauksessa sinun pitää etsiä "
-"tulostimesi Windows ajuri-cd:ltä tai Windows-osioltasi tiedosto \"sihp1000."
-"img\" ja lähettä se tulostimelle käyttäen jotain seuraavista komennoista:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"Ensimmäinen komento voidaan suorittaa tavallisena käyttäjänä, mutta toinen "
-"vaihtoehto toimii ainoastaan pääkäyttäjänä. Tämän tehtyäsi voit tulostaa "
-"normaalisti.\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-msgstr "GDI Lasertulostin joka käyttää Zenographics ZJ-Stream formaattia"
+msgid "Firmware-Upload for HP LaserJet 1000"
+msgstr "Firmwaren lataus HP LaserJet 1000 tulostimelle"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12006,6 +11959,11 @@ msgstr "Asetan tulostusporttia CUPS:in käyttöön..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr "Tarkistan laite ja asetan HPOJ..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr "Kuva-muistikortin käyttö HP monitoimilaitteissasi"
 
@@ -12023,11 +11981,6 @@ msgstr "Asennan mtools paketteja..."
 #, c-format
 msgid "Installing SANE packages..."
 msgstr "Asennan SANE paketteja..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr "Tarkistan laite ja asetan HPOJ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12908,6 +12861,11 @@ msgstr "Palvelimen IP puuttuu!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr "Jos porttia ei ole määritetty, käytetään oletusporttia 631"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr "Syötä sen koneen IP-osoite ja portti jonka tulostimia haluat käyttää."
 
@@ -13037,6 +12995,31 @@ msgstr "CUPS asetuksien automaattinen korjaus "
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+"Ottamalla tämä käyttöön, sallit japaninkielisten tekstitiedostojen "
+"tulostaminen. Käytä tämä ainoastaan jos todellakin haluat tulostaa "
+"japaninkielinen teksti. Jos tämä on käytössä et voi enää tulostaa "
+"latinanfonttien erikoismerkkejä eikä asettaa marginaaleja, tekstikokoa, jne. "
+"Tämä asetus koskee ainoastaan tässä koneessa määritettyjä tulostimia. Jos "
+"haluat tulostaa japaninkielinen teksti etäkoneessa olevassaa tulostimessa, "
+"sinun pitää asettaa tämä toimintosiinä koneessa."
+
+# Asennuksen sivuvalikko
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Japanese text printing mode"
+msgstr "Japaninkielen tekstitulostustila"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
 "machines\" option; the CUPS servers inform your machine automatically about "
@@ -13109,8 +13092,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "CUPS printer sharing configuration"
-msgstr "CUPS tulostinjaon asettaminen"
+msgid "CUPS printer configuration"
+msgstr "CUPS tulostus asetukset"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13138,6 +13121,25 @@ msgstr "Miten tulostin on liitetty?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "Valitse tulostinyhteys"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
+"HP LaserJet 1000 tulostimeen pitää lähettää sen firmware-koodi kun sitä on "
+"käynnistetty. Lataa Windows ajuri-pakettia HP:n kotisivulta (ajuri-cd-"
+"levyllä oleva firmware ei toimi) ja purkaa itsepurkautuva '.exe' tiedostoa "
+"käyttäen 'unzip' työkalu ja etsi 'sihp1000.img' tiedosto. Kopioi tämä "
+"tiedosto hakemistoon '/etc/printer'. Sieltä automattinen lataamisskripti "
+"löytää sen ja lataa sen tulosimelle joka kerta kun sitä on litetty ja "
+"käynnistetään.\n"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14895,11 +14897,6 @@ msgid ""
 msgstr ""
 "Asetustiedostoa ei löytynyt\n"
 "valitse joko Velho tai Kehittynyt."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
-msgstr "%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -19908,74 +19905,135 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "NFS-, SMB-, SSH- ja välityspalvelin"
 
 #: ../../share/compssUsers:999
-msgid "Office"
-msgstr "Toimistosovellukset"
+msgid "Audio station"
+msgstr "Ääni-asema"
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr ""
-"Kokoelma työkaluja sähköpostiin, nyytisiin, webiin, tiedostonsiirtoon ja "
-"jutusteluun"
+msgid "Sound playing/editing programs"
+msgstr "Äänen toisto- ja editointiohjelmat"
 
 #: ../../share/compssUsers:999
-msgid "Games"
-msgstr "Pelit"
+msgid "Video station"
+msgstr "Video-asema"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Graphics"
-msgstr "Multimedia - Grafiikka"
+msgid "Video playing programs"
+msgstr "Videoiden toisto- ja editointiohjelmat"
 
 #: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
+msgid "Graphic station"
+msgstr "Grafiikka-asema"
+
+#: ../../share/compssUsers:999
+msgid "Graphics programs"
 msgstr "Grafiikkaohjelmistot, kuten Gimp"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Sound"
-msgstr "Multimedia - Ääni"
+msgid "Set of tools to read and send mail and news and to browse the Web"
+msgstr ""
+"Valikoima työkaluja sähköpostin ja uutisryhmien lukemiseen sekä Internetissä "
+"surffailuun"
 
-#: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "Äänenkäsittely: mp3, midi, mikserit jne"
+#~ msgid "Printer sharing"
+#~ msgstr "Tulostimen jako"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - Video"
-msgstr "Multimedia - Video"
+#~ msgid ""
+#~ "Your printer belongs to the group of GDI laser printers (winprinters) "
+#~ "sold by different manufacturers which uses the Zenographics ZJ-stream "
+#~ "raster format for the data sent to the printer. The driver for these "
+#~ "printers is still in a very early development stage and so it will "
+#~ "perhaps not always work properly. Especially it is possible that the "
+#~ "printer only works when you choose the A4 paper size.\n"
+#~ "\n"
+#~ "Some of these printers, as the HP LaserJet 1000, for which this driver "
+#~ "was originally created, need their firmware to be uploaded to them after "
+#~ "they are turned on. In the case of the HP LaserJet 1000 you have to "
+#~ "search the printer's Windows driver CD or your Windows partition for the "
+#~ "file \"sihp1000.img\" and upload the file to the printer with one of the "
+#~ "following commands:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "The first command can be given by any normal user, the second must be "
+#~ "given as root. After having done so you can print normally.\n"
+#~ msgstr ""
+#~ "Tulostimesi kuuluu GDI lasertulostimien ryhmään (wintulostimia) joita "
+#~ "myydään eri valmistajien nimillä, ja jotka käyttävät Zenographics ZJ-"
+#~ "stream rasterointiformaattia datalle joka lähetetään tulostimelle. Ajuri "
+#~ "näille tulostimille on vielä aikaisessa kehitysvaiheessa, ja tästä syystä "
+#~ "se ei aina toimi oikein. Eli voi olla että se toimii vain jos valitset "
+#~ "paperikoon A4.\n"
+#~ "\n"
+#~ "Jotkin tulostimet, esimerkiksi HP LaserJet 1000, jolle tämä ajuri alun "
+#~ "perin tehtiin, vaativat niiden oman firmwaren lähettämisen niille heti "
+#~ "käynnistyksen jälkeen. HP LaserJet 1000:n tapauksessa sinun pitää etsiä "
+#~ "tulostimesi Windows ajuri-cd:ltä tai Windows-osioltasi tiedosto "
+#~ "\"sihp1000.img\" ja lähettä se tulostimelle käyttäen jotain seuraavista "
+#~ "komennoista:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "Ensimmäinen komento voidaan suorittaa tavallisena käyttäjänä, mutta "
+#~ "toinen vaihtoehto toimii ainoastaan pääkäyttäjänä. Tämän tehtyäsi voit "
+#~ "tulostaa normaalisti.\n"
 
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr "Videon katselu ja editointi"
+#~ msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
+#~ msgstr "GDI Lasertulostin joka käyttää Zenographics ZJ-Stream formaattia"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "Multimedia - CD:n poltto"
+#~ msgid "%s"
+#~ msgstr "%s"
 
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "Työkalut CD:iden luomiseen ja polttamiseen"
+#~ msgid "Office"
+#~ msgstr "Toimistosovellukset"
 
-#: ../../share/compssUsers:999
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "Lisää graafisia työpöytiä (Gnome, IceWM)"
+#~ msgid "Set of tools for mail, news, web, file transfer, and chat"
+#~ msgstr ""
+#~ "Kokoelma työkaluja sähköpostiin, nyytisiin, webiin, tiedostonsiirtoon ja "
+#~ "jutusteluun"
 
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm jne"
+#~ msgid "Games"
+#~ msgstr "Pelit"
 
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr "Henkilökohtaisen tiedon hallinta"
+#~ msgid "Multimedia - Graphics"
+#~ msgstr "Multimedia - Grafiikka"
 
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "Työkalut Palm Pilotin tai Visorin liittämiseksi"
+#~ msgid "Multimedia - Sound"
+#~ msgstr "Multimedia - Ääni"
 
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "Henkilökohtainen kirjanpito"
+#~ msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+#~ msgstr "Äänenkäsittely: mp3, midi, mikserit jne"
 
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "Ohjelmia henkilökohtaisen talouden hallintaan, kuten gnucash"
+#~ msgid "Multimedia - Video"
+#~ msgstr "Multimedia - Video"
+
+#~ msgid "Video players and editors"
+#~ msgstr "Videon katselu ja editointi"
+
+#~ msgid "Multimedia - CD Burning"
+#~ msgstr "Multimedia - CD:n poltto"
+
+#~ msgid "Tools to create and burn CD's"
+#~ msgstr "Työkalut CD:iden luomiseen ja polttamiseen"
+
+#~ msgid "More Graphical Desktops (Gnome, IceWM)"
+#~ msgstr "Lisää graafisia työpöytiä (Gnome, IceWM)"
+
+#~ msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm jne"
+
+#~ msgid "Personal Information Management"
+#~ msgstr "Henkilökohtaisen tiedon hallinta"
+
+#~ msgid "Tools for your Palm Pilot or your Visor"
+#~ msgstr "Työkalut Palm Pilotin tai Visorin liittämiseksi"
+
+#~ msgid "Personal Finance"
+#~ msgstr "Henkilökohtainen kirjanpito"
+
+#~ msgid "Programs to manage your finances, such as gnucash"
+#~ msgstr "Ohjelmia henkilökohtaisen talouden hallintaan, kuten gnucash"
 
 #~ msgid "no network card found"
 #~ msgstr "yhtäkään verkkokorttia ei löytynyt"
