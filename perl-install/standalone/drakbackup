@@ -32,24 +32,27 @@
 #
 #
 # TODO:
-#		replace alors incremental selectionne.
-#		l.380 incremental: date -> si deja existe faire find -m ... | tar ...
-#		non incremental: date + supprime old avant le backup
-#		placer README dans $save_path -> prevenir des danger de supprimer la premier version
-#		ftp choose port to use ftp connexions
-#               ssh & rsync
-#	        calcul disk space.
-#	        backend : --resore_all, --restore_sys, --restore_users
+#		- replace alors incremental selectionne.
+#		- l.380 incremental: date -> si deja existe faire find -m ... | tar ...
+#		- non incremental: date + supprime old avant le backup
+#		- ftp choose port to use ftp connexions
+#		- send mail with results.
+#		- use quota.
+#		- placer README dans $save_path -> prevenir des danger de supprimer la premier version
+#               - ssh & rsync
+#	        - calcul disk space.
+#	        - backend : --resore_all, --restore_sys, --restore_users
 #			  --build_cd_autoinst 	
 #			  --backup_now --backup_default_now
-#		boot floppy disk
-#		webdav
-#		rsync
-#		cd writer detection  -> cdrw: /sys/dev/cdrom/info  /scsi/host0/bus0/target4/lun0 
-#		write on cd
-#		custom deamon
-#		build autoboot with backup and install cd 
-#		use .backupignore like on CVS
+#		- boot floppy disk
+#		- webdav
+#		- rsync
+#		- cd writer detection  -> cdrw: /sys/dev/cdrom/info  /scsi/host0/bus0/target4/lun0 
+#		- write on cd
+#		- total backup.( all partitions wanted, windows partitions for example!)
+#		- custom deamon
+#		- build autoboot with backup and install cd 
+#		- use .backupignore like on CVS
 #		               
 # DONE TODAY:
 #________________________________________________________________
@@ -76,7 +79,6 @@ if ("@ARGV" =~ /--help|-h/) {
 --build_cd       : build restore iso with the currents backups files
                        & rescue options.
 --build_floppy   : build restore floppy.
---replace        : delete backup files before build new do not update.
 --save_dir       : by default the backup files are saved in 
                        in /var/backup directory so write other directory
 	               to change to change it.
@@ -143,7 +145,6 @@ my @list_other = () ;
 my $cfg_file = "/etc/drakxtools/drakbackup/drakbackup.conf";
 my $save_path = "/var/drakbackup";
 my $restore_path = "/tmp";
-my $option_replace = 1;
 my $comp_mode = 0;
 my $backup_sys = 1;
 my $backup_user = 1;
@@ -177,13 +178,13 @@ my $remember_pass = 0;
 my $passwd_user= '';
 my $save_device_tape = ();
 my $cdrw_erase = 0;
+my $no_critical_sys = 1;
 
 
 foreach (@ARGV) {
     /--default/ and $default = 1, $mode=-1;
     /--build_cd/ and $build_cd = 1, $mode=-1;
     /--build_floppy/ and $build_floppy = 1, $mode=-1;
-    /--replace|-r/ and $option_replace = 1, $mode=-1;
     /--conf_file/ and $mode = 0, next;
     /--list/ and $mode = 1, next;
     /--debug/ and $DEBUG = 1, next;
@@ -238,6 +239,8 @@ sub save_conf_file {
 		     "TAPE_DEVICE=$save_device_tape\n",
 		     "HOST_NAME=$host_name\n"
 		     );
+    $no_critical_sys and push @cfg_list, "NO_CRITICAL_SYS\n" ; 
+    $no_critical_sys or push @cfg_list, "CRITICAL_SYS\n" ; 
     $backup_sys_versions and push @cfg_list, "SYS_INCREMENTAL_BACKUPS\n" ; 
     $backup_user_versions and push @cfg_list, "USER_INCREMENTAL_BACKUPS\n" ; 
     $backup_other_versions  and push @cfg_list, "OTHER_INCREMENTAL_BACKUPS\n" ; 
@@ -260,7 +263,6 @@ sub save_conf_file {
     $where_net and  push @cfg_list, "USE_NET\n" ;
     $cdrw and push @cfg_list, "CDRW\n"; 
     $what_no_browser or push @cfg_list, "BROWSER_CACHE\n" ;
-    $option_replace and push @cfg_list, "OPTION_REPLACE\n" ;
     $backup_sys or push @cfg_list,  "NO_SYS_FILES\n";
     if ($comp_mode) {push @cfg_list, "OPTION_COMP=TAR.BZ2\n"} 
     else { push @cfg_list, "OPTION_COMP=TAR.GZ\n"   }
@@ -306,7 +308,6 @@ sub read_conf_file {
 	    if (/^HOME_FILES/)     { s/^HOME_FILES=//gi;   @user_list = split(' ', $_ );	}
 	    if (/^OTHER_FILES/)    { s/^OTHER_FILES=//gi;  @list_other = split(' ', $_ );	}
 	    if (/^PATH_TO_SAVE/)   { s/^PATH_TO_SAVE=//gi; $save_path = $_;	}
-	    if (/^OPTION_REPLACE/) { $option_replace = 1; }
 	    if (/^NO_SYS_FILES/)   { $backup_sys = 0;}
 	    if (/^NO_USER_FILES/)  { $backup_user = 0;}
 	    if (/^OPTION_COMP/)    { s/^OPTION_COMP=//gi; /TAR.GZ/ and  $comp_mode = 0; /TAR.BZ2/ and $comp_mode = 1; }
@@ -338,6 +339,8 @@ sub read_conf_file {
 	    if (/^SYS_INCREMENTAL_BACKUPS/)   { $backup_sys_versions = 1;}
 	    if (/^USER_INCREMENTAL_BACKUPS/)  { $backup_user_versions = 1;}
 	    if (/^OTHER_INCREMENTAL_BACKUPS/) { $backup_other_versions = 1;}
+	    if (/^NO_CRITICAL_SYS/)  { $no_critical_sys = 1;}
+	    if (/^CRITICAL_SYS/)  { $no_critical_sys = 0;}
 	}
 	read_cron_files();
 	$cfg_file_exist = 1;
@@ -377,14 +380,17 @@ sub build_backup_files {
 
     the_time();    
     -d  $save_path or mkdir_p($save_path);
-    if ($comp_mode) { $tar_cmd = "tar cv --use-compress-program /usr/bin/bzip2 "; $tar_ext = "tar.bz2" }
-    else { $tar_cmd = "tar cvz "; $tar_ext = "tar.gz"}
+    if ($comp_mode) { $tar_cmd = "tar cvp --use-compress-program /usr/bin/bzip2 "; $tar_ext = "tar.bz2" }
+    else { $tar_cmd = "tar cvzp "; $tar_ext = "tar.gz"}
     if ($where_hd) {
 	print "backup_sys @sys_files\n";
 	$interactive and progress($pbar, 0.5, _("Backup system files..."));
 	print "$save_path/backup_sys_\n";
 	$backup_sys_versions or system("rm -f $save_path/backup_sys*");
-	$backup_sys and system("$tar_cmd -f $save_path/backup_sys$the_time.$tar_ext @sys_files");
+	if ($backup_sys) { 
+	    $no_critical_sys or system("$tar_cmd -f $save_path/backup_sys$the_time.$tar_ext @sys_files");
+	    $no_critical_sys and system("$tar_cmd --exclude passwd --exclude fstab --exclude group  -f $save_path/backup_sys$the_time.$tar_ext @sys_files");
+	}
 	$interactive and progress($pbar, 0.5, _("Backup system files..."));
 	$interactive and progress($pbar3, 0.3, _("Hard Disk Backup files..."));
 	print "backup_other @list_other\n";
@@ -480,19 +486,19 @@ sub advanced_what_sys {
 				     1, _("This options can backup and restore all files on your /etc directory.\n"),
 				     0, my $check_what_sys = new Gtk::CheckButton( _("Backup your System files. (~ 2Mo)")),
 				     0, my $check_what_versions = new Gtk::CheckButton( _("Use incremental backup  (do not replace old backups)") ),
+				     0, my $check_what_critical = new Gtk::CheckButton( _("Do not include critical files (passwd, goup, fstab)") ),
 				     0, _("With this option you will be able to restore any version\n of your /etc directory."),
 				     1, new Gtk::VBox(0, 15),
 				     ),
 	    );
-    foreach ([$check_what_sys, \$backup_sys]) {
+    foreach ([$check_what_sys, \$backup_sys], [$check_what_critical, \$no_critical_sys]) {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
 	}
     gtksignal_connect(gtkset_active($check_what_versions, $backup_sys_versions), toggled => sub {
 	$backup_sys_versions = $backup_sys_versions ? 0 : 1;
-	$backup_sys_versions and $option_replace = 0; 
     });
-    $custom_help = "";
+    $custom_help = "what";
     $current_widget = \&advanced_what_sys;
     $previous_widget =\&advanced_what;
     $central_widget = \$box_what_sys;
@@ -543,9 +549,8 @@ sub advanced_what_user {
 	}
     gtksignal_connect(gtkset_active($check_what_user_versions, $backup_user_versions), toggled => sub {
 	$backup_user_versions = $backup_user_versions ? 0 : 1;
-	$backup_user_versions and $option_replace = 0; 
     });
-    $custom_help = "";
+    $custom_help = "what";
     if ($previous_function) { $previous_widget =\&$previous_function; $next_widget =\&$previous_function; }
     else { $previous_widget =\&advanced_what; }
     $current_widget = \&advanced_what_user;
@@ -568,16 +573,14 @@ sub advanced_what_other {
 					    gtksignal_connect(new Gtk::Button(_("Add")), clicked => sub {filedialog()  }),
 					    gtksignal_connect(new Gtk::Button(_("Remove Selected")), clicked => \&list_remove, $list_other),
 					    ),
-				  0, new Gtk::HSeparator,
 				  0, my $check_what_other_versions = new Gtk::CheckButton( _("Use Incremental Backups  (do not replace old backups)") ),
 				       ),
 	    );
     gtksignal_connect(gtkset_active($check_what_other_versions, $backup_other_versions), toggled => sub {
 	$backup_other_versions = $backup_other_versions ? 0 : 1;
-	$backup_other_versions and $option_replace = 0; 
     });
 
-    $custom_help = "";
+    $custom_help = "what";
     $current_widget = \&advanced_what_other;
     $previous_widget =\&advanced_what;
     $central_widget = \$box_what_other;
@@ -602,6 +605,8 @@ sub advanced_what{
 							       clicked => sub { ${$central_widget}->destroy(); advanced_what_user();}),
 					  1, gtksignal_connect(my $button_what_other = new Gtk::Button(), 
 							       clicked => sub { ${$central_widget}->destroy(); advanced_what_other(); }),
+					  1, gtksignal_connect(my $button_what_all = new Gtk::Button(), 
+							       clicked => sub { ${$central_widget}->destroy(); message_underdevel(); }),
 					  1, new Gtk::VBox(0, 5),
 					  ),
 				 1, new Gtk::VBox(0, 5),	
@@ -620,6 +625,11 @@ sub advanced_what{
     $button_what_other->add(gtkpack(new Gtk::HBox(0,10),
 				    new Gtk::Pixmap($pix_other_map, $pix_other_mask),
 				    new Gtk::Label(_(" Other ")),
+				    new Gtk::HBox(0, 5)
+				    ));
+    $button_what_all->add(gtkpack(new Gtk::HBox(0,10),
+				    new Gtk::Pixmap($pix_other_map, $pix_other_mask),
+				    new Gtk::Label(_(" All ")),
 				    new Gtk::HBox(0, 5)
 				    ));
     $custom_help = "";
@@ -1046,23 +1056,14 @@ sub advanced_options{
 				 0, new Gtk::HSeparator,
 				 0, gtkpack_(new Gtk::VBox(0,10),
 					     0, my $check_tar_bz2  = new Gtk::CheckButton( _(" Use Tar and bzip2  ( very slow)") ),
- 					     0, my $check_replace = new Gtk::CheckButton( _(" Replace (cancel all incrementals backups.)")),
 					     0, gtkset_sensitive(my $check_backupignore = new Gtk::CheckButton( _(" Use .backupignore files")), 0),
 					     ),
 				 ),
 	    );
-    foreach ([$check_tar_bz2, \$comp_mode], [$check_replace, \$option_replace], [$check_backupignore, \$backupignore]) {
+    foreach ([$check_tar_bz2, \$comp_mode], [$check_backupignore, \$backupignore]) {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
 	}
-    gtksignal_connect(gtkset_active($check_replace, $option_replace ), toggled => sub { 
-	$option_replace = $option_replace  ? 0 : 1; 
-	if ($option_replace) {
-	    $backup_sys_versions = 0;
-	    $backup_user_versions = 0;
-	    $backup_other_versions = 0;
-	}
-    });
     $custom_help = "options";
     $current_widget = \&advanced_options;
     $previous_widget =\&advanced_box;
@@ -1318,8 +1319,6 @@ sub system_state {
         $system_state .= _("\n- Path to save backups: $save_path\n");
 	$system_state .= _("\n- Options:\n");
 	$backup_sys or $system_state .= _("\tDo not include System Files\n");
-	if ($option_replace) { $system_state .= _("\tReplace backups (do not update)\n"); } 
-	else { $system_state .= _("\tUpdate backups (do not replace)\n"); }
 	if ($comp_mode) { $system_state .= _("\tBackups use tar and bzip2\n "); }
 	else { $system_state .= _("\tBackups use tar and gzip\n"); }   
     }
@@ -1739,7 +1738,7 @@ sub button_box_main {
 				      gtksignal_connect(new Gtk::Button(_("close")), clicked => sub {  
 					  Gtk->main_quit() }),
 				      gtksignal_connect(new Gtk::Button(_(" Help ")), clicked => sub { 
-					  ${$central_widget}->destroy(); adv_help(\&interactive_mode_box) }),
+					  ${$central_widget}->destroy(); adv_help(\&interactive_mode_box,$custom_help) }),
 				      ),
 	    );
 }
@@ -1756,7 +1755,7 @@ sub message_norestorefile_box {
 			    1, gtkpack(new Gtk::HBox(0, 15),	
 				       new Gtk::VBox(0, 5),	
 				       new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
-				       _("Please Build backup before to restore it..."),
+				       _("Please Build backup before to restore it...\n or verify that your path to save is correct."),
 				       new Gtk::VBox(0, 5),	
 				       ),
 			    1, new Gtk::VBox(0, 5),	
@@ -1852,6 +1851,29 @@ sub message_noconf_box {
     $central_widget = \$box2;
     $up_box->show_all();    
 }
+
+sub message_underdevel {
+    $box2->destroy();
+    my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
+
+    gtkadd($advanced_box,
+	   $box2 = gtkpack_(new Gtk::HBox(0, 15),	
+			    1, new Gtk::VBox(0, 5),	
+			    1, gtkpack(new Gtk::HBox(0, 15),	
+				       new Gtk::VBox(0, 5),	
+				       new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
+				       _(" Under Devel ... please wait."),
+				       new Gtk::VBox(0, 5),	
+				       ),
+			    1, new Gtk::VBox(0, 5),	
+			    ),
+	   );
+    button_box_restore_main();
+    $central_widget = \$box2;
+    $up_box->show_all();    
+}
+
+
 
 ################################################  BUILD_BACKUP  ################################################  
 
@@ -2176,6 +2198,7 @@ sub interactive_mode_box {
 			    ),
 	   );
     button_box_main();
+    $custom_help = "main";
     $central_widget = \$box2;
     $up_box->show_all();    
 }
@@ -2220,6 +2243,7 @@ sub interactive_mode {
 		   ),
 	   );
     interactive_mode_box();
+    $custom_help = "main";
     button_box_main();
     $central_widget = \$box2;
     $window1->show_all;
@@ -2238,21 +2262,6 @@ sub about {
 	    $about_box = gtkpack_(new Gtk::VBox(0,10),
 				  1, gtkpack_(new Gtk::HBox(0,0),
 					      1, gtktext_insert(gtkset_editable($text, 1), _("
- Copyright (C) 2001 by MandrakeSoft (sdupont\@mandrakesoft.com)
-
- This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2, or (at your option)
- any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 ")),
 					      0, new Gtk::VScrollbar($text->vadj),
@@ -2273,7 +2282,8 @@ sub adv_help {
     my $advanced_box_help;
     
     if ($custom_help eq "toto") { gtktext_insert($text, _("toto")); } 
-    elsif ($custom_help eq "options") { gtktext_insert($text, _("options description:
+    elsif ($custom_help eq "options") { gtktext_insert($text, 
+_("options description:
 
  In this step Drakbacup allow you to change:
 
@@ -2302,7 +2312,93 @@ sub adv_help {
       
 
 ")); }
-    elsif ($custom_help eq "ftp") { gtktext_insert($text, _("options description:
+    elsif ($custom_help eq "what") { gtktext_insert($text, 
+_("options description:
+
+ - Backup system files:
+       
+	This  options allow you to backup your /etc directory,
+	which contain all configuration files please be
+	carreful during restore step to not overwriting
+		/etc/passwd 
+		/etc/group 
+		/etc/fstab
+
+ - Backup User files: 
+
+	This option allow to select all users that you want 
+	to backup.
+	To preserve disk space, it recommeded to not include
+	browsers cache.
+
+ - Backup User files: 
+
+	This option allow to add more data to save.
+ 
+ - Incremental Backups:
+
+	The incremental backup is the most powerfull 
+	option to use backup, this option allow you 
+	to backup all your data the first time, and 
+	only the changed data after.
+	So you will be able during the restore
+	step, to restore your data from a specified
+	date.
+	If you have not selected this options all
+	old backups are deleted before each backup.    
+
+
+")); }
+    elsif ($custom_help eq "main") { gtktext_insert($text, 
+_(" Copyright (C) 2001 by MandrakeSoft (sdupont\@mandrakesoft.com)
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2, or (at your option)
+ any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+                                            _____________________
+
+description:
+
+  Drakbacup is use to backup your system.
+  During the configuration you can select 
+	- System files, 
+	- Users files, 
+	- Other files.
+	or All your system ...  and Other (like windows Partitions)
+
+  Drakbacup allow you to backup your system on:
+	- Harddrive.
+	- NFS.
+	- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).
+	- FTP.
+	- Rsync.
+	- Webdav.
+	- Tape.
+
+  Drakbacup allow you to Restore your system on
+  choosen directory.
+
+  Per default all backup will be stored on your
+  /var/drakbackup directory
+
+  configuration file:
+	/etc/drakconf/drakbackup/drakbakup.conf
+
+
+")); }
+    elsif ($custom_help eq "ftp") { gtktext_insert($text, 
+_("options description:
 
 Please be careful when you are using ftp backup, because only 
 backup already build are send on server.
@@ -2311,27 +2407,52 @@ before to send it.
 
 ")); } 
  
-    else { gtktext_insert($text, _("description:
+    else { gtktext_insert($text,
+_(" Copyright (C) 2001 by MandrakeSoft (sdupont\@mandrakesoft.com)
 
- Drakbacup is use to backup system files and user files
- Drakbacup allow to restore the system (etc, var files)
- from starup or on drakconf utility.
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2, or (at your option)
+ any later version.
 
-backup name format: all the time from the / dir.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-	system backup:
-                   backup_sys.tar.gz 
-	user backup
-		   backup_user_james.tar.gz      
-		   backup_user_seb.tar.gz
-	other directories
-                   backup_other.tar.gz          
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-build iso fs with rescue.
+                                            _____________________
 
-configuration file:
+description:
 
+  Drakbacup is use to backup your system.
+  During the configuration you can select 
+	- System files, 
+	- Users files, 
+	- Other files.
+	or All your system ...  and Other (like windows Partitions)
+
+  Drakbacup allow you to backup your system on:
+	- Harddrive.
+	- NFS.
+	- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).
+	- FTP.
+	- Rsync.
+	- Webdav.
+	- Tape.
+
+  Drakbacup allow you to Restore your system on
+  choosen directory.
+
+  Per default all backup will be stored on your
+  /var/drakbackup directory
+
+  configuration file:
 	/etc/drakconf/drakbackup/drakbakup.conf
+
 
 "));}
 
