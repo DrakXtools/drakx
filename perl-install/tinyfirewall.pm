@@ -187,7 +187,7 @@ my $popimap = sub {
 	@struct = ( @struct, [undef , "Don't Save", "Save & Quit", $quit ] );
 	$messages[9]=$messages[11];
     }
-    if ( ! $in->standalone::pkgs_install(Kernel22() ? "ipchains" : "iptables", "Bastille")) {
+    if ($in->standalone::pkgs_install(Kernel22() ? "ipchains" : "iptables", "Bastille")) {
 	$in->ask_warn('', _("Failure installing the needed packages : %s and Bastille.
  Try to install them manually.", Kernel22() ? "ipchains" : "iptables") );
 	$in->exit(0);
