@@ -139,6 +139,7 @@ if (@devices = @$devices_ok) {
     require modules;
     $modules_conf ||= modules::any_conf->read;
     $modules_conf->write;
+    scan4channels();
 }
 
 if (!$devices && !$devices_ok) {
