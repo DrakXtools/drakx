@@ -148,21 +148,39 @@ sub do_switch {
 sub switch {
     my ($in, $device) = @_;
     my $driver = $device->{driver};
+    $driver = modules::get_alias($driver) if $driver =~ /sound-card/; # alsaconf ...
     my $alternative = get_alternative($driver);
     if ($alternative) {
 	   my $new_driver = $alternative->[0];
 	   if ($new_driver eq 'unknown') {
 		  $in->ask_warn(_("No alternative driver"),
-							_("There's no known OSS/ALSA alternative driver for your sound card (%s)",
-							  $device->{description}));
+							_("There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\"",
+							  $device->{description}, $driver));
 	   } elsif ($in->ask_from(_("Sound configuration"),
-						 _("Here you can select an alternative driver (either OSS or ALSA) for your sound card (%s)",
-							  $device->{description}),
+						 _("Here you can select an alternative driver (either OSS or ALSA) for your sound card (%s).",
+							  $device->{description}) .
+						 _("\n\nYour card currently use the %s\"%s\" driver (default driver for your card is \"%s\")", ($driver =~ /^snd-/ ? "ALSA " : "OSS "), $driver, $device->{driver}),
 						 [
 						  { label => _("Driver:"), val => \$new_driver, list => $alternative, default => $new_driver, sort =>1, format => sub {
 							 my %des = modules::category2modules_and_description('multimedia/sound');
 							 "$_[0] (". $des{$_[0]} . ')'
-						  }, allow_empty_list => 1 }
+						  }, allow_empty_list => 1 },
+						  {
+							 val => _("Help"), disabled => sub { },
+							 clicked => sub {  
+								$in->ask_warn(_("Switching between ALSA and OSS help"),
+										    _("OSS (Open Source Sound) was the firt sound API. It's an OS independant sound API (it's availlable on most unices systems) but it's a very basic and limited API.
+What's more, OSS drivers all reinvent the wheel.
+
+ALSA (Advanced Linux Sound Architecture) is a modularized architecture which
+supports quite a large range of ISA and PCI cards.\n
+It also provides a much higher API than OSS.\n
+To use alsa, one can either use:
+- the old compatibility OSS api
+- the new ALSA api that provides many enhanced features but requires using the ALSA library.
+"))
+								}
+						  }
 						  ]))
 	   {
 		  return if ($new_driver eq $driver);
