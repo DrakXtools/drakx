@@ -39,6 +39,7 @@ foreach (cat_($cfg_file)) {
     $dm = uc($1) if /^DISPLAYMANAGER=(.*)$/; 
 }
 
+start:
 if ($in->ask_from(N("Choosing a display manager"),
                                formatAlaTeX(N("X11 Display Manager allows you to graphically log
 into your system with the X Window System running and supports running
@@ -55,12 +56,12 @@ several different X sessions on your local machine at the same time.")),
                               )
    ) {
     log::explanations("modified file $cfg_file");
+    ! -x $dm{$dm}[1] && do { $in->do_pkgs->ensure_is_installed($dm{$dm}[2], $dm{$dm}[1]) or goto start };
     substInFile {
         s/^(DISPLAYMANAGER)=.*(\n|)//;
         s/^\n//g;
         $_ .= "\nDISPLAYMANAGER=$dm\n" if eof;
     } $cfg_file;
-    $in->do_pkgs->install($dm{$dm}[2]) unless -x $dm{$dm}[1];
 }
 
 $in->exit(0);
