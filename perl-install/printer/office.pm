@@ -47,7 +47,7 @@ sub configureoffice {
     # Load Star Office printer config file
     my $configfilecontent = readsofficeconfigfile($configfilename);
     # Update remote CUPS queues
-    if (0 && ($printer->{SPOOLER} eq "cups") && 
+    if (0 && $printer->{SPOOLER} eq "cups" && 
 	((-x "$::prefix/usr/bin/curl") || (-x "$::prefix/usr/bin/wget"))) {
 	my @printerlist = printer::cups::get_remote_queues();
 	foreach my $listentry (@printerlist) {
@@ -113,7 +113,7 @@ sub add_cups_remote_to_office {
     # Load Star Office printer config file
     my $configfilecontent = readsofficeconfigfile($configfilename);
     # Update remote CUPS queues
-    if (($printer->{SPOOLER} eq "cups") && 
+    if ($printer->{SPOOLER} eq "cups" && 
 	((-x "$::prefix/usr/bin/curl") || (-x "$::prefix/usr/bin/wget"))) {
 	my @printerlist = printer::cups::get_remote_queues();
 	foreach my $listentry (@printerlist) {
@@ -136,8 +136,7 @@ sub add_cups_remote_to_office {
 	    }
 	    # Does the file exist and is it not an error message?
 	    if ((-r "$::prefix/etc/foomatic/$queue.ppd") &&
-		(cat_("$::prefix/etc/foomatic/$queue.ppd") =~ 
-		 /^\*PPD-Adobe/)) {
+		cat_("$::prefix/etc/foomatic/$queue.ppd") =~ /^\*PPD-Adobe/) {
 		$configfilecontent = 
 		    $suites{$suite}{make}($printer, $queue,
 					       $configprefix,
@@ -225,7 +224,7 @@ sub makestarofficeprinterentry {
     $configfile = addentry("$queue.PostScript.$queue", 
 			   "Level=$pslevel", $configfile);
     # Set Color/BW
-    my $color = ($ppd =~ /^\s*\*ColorDevice:\s*\"?([Tt]rue)\"?\s*$/m) ? "1" : "0";
+    my $color = $ppd =~ /^\s*\*ColorDevice:\s*\"?([Tt]rue)\"?\s*$/m ? "1" : "0";
     $configfile = removeentry("$queue.PostScript.$queue", "BitmapColor=", $configfile);
     $configfile = addentry("$queue.PostScript.$queue", "BitmapColor=$color", $configfile);
     # Set the default paper size
@@ -266,8 +265,8 @@ sub makeopenofficeprinterentry {
 			   $configfile);
     # "Comment" line 
     $configfile = removeentry($queue, "Comment=", $configfile);
-    if (($printer->{configured}{$queue}) &&
-	($printer->{configured}{$queue}{queuedata}{desc})) {
+    if ($printer->{configured}{$queue} &&
+	$printer->{configured}{$queue}{queuedata}{desc}) {
 	$configfile = addentry
 	    ($queue, 
 	     "Comment=$printer->{configured}{$queue}{queuedata}{desc}",
@@ -279,8 +278,8 @@ sub makeopenofficeprinterentry {
     }
     # "Location" line 
     $configfile = removeentry($queue, "Location=", $configfile);
-    if (($printer->{configured}{$queue}) &&
-	($printer->{configured}{$queue}{queuedata}{loc})) {
+    if ($printer->{configured}{$queue} &&
+	$printer->{configured}{$queue}{queuedata}{loc}) {
 	$configfile = addentry
 	    ($queue, 
 	     "Location=$printer->{configured}{$queue}{queuedata}{loc}",

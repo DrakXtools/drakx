@@ -54,7 +54,7 @@ sub grep_ {
     @_ == 0 || $h and die "usage: grep <regexp> [files...]\n";
     my $r = shift;
     $r = qr/$r/i if $i;
-    @ARGV = @_; (/$r/ ? $v || print : $v && print) while <>;
+    @ARGV = @_; (/$r/ xor $v) and print while <>;
 }
 
 sub tr_ {
@@ -193,11 +193,11 @@ sub rights {
 	if (vec(pack("S", $_[0]), $i, 1)) {
 	    my ($val, $place) = $i >= 9 ? @{$rights[$i]} : ($rights[$i], $i);
 	    my $old = \substr($r, 8 - $place, 1);
-	    $$old = ($$old eq '-' && $i >= 9) ? uc $val : $val;
+	    $$old = $$old eq '-' && $i >= 9 ? uc $val : $val;
 	}
     }
     my @types = split //, "_pc_d_b_-_l_s";
-    $types[$_[0] >> 12 & 0xf] . $r;
+    $types[($_[0] >> 12) & 0xf] . $r;
 }
 
 sub displaySize {
@@ -268,14 +268,14 @@ sub dd {
 	$h{$1} = $2;
     }
     local (*IF, *OF); my ($tmp, $nb, $read);
-    ref $h{if} eq 'GLOB' ? *IF = $h{if} : sysopen(IF, $h{if}, 0)    || die "error: can't open file $h{if}\n";
-    ref $h{of} eq 'GLOB' ? *OF = $h{of} : sysopen(OF, $h{of}, 0x41) || die "error: can't open file $h{of}\n";
+    ref $h{if} eq 'GLOB' ? (*IF = $h{if}) : sysopen(IF, $h{if}, 0)    || die "error: can't open file $h{if}\n";
+    ref $h{of} eq 'GLOB' ? (*OF = $h{of}) : sysopen(OF, $h{of}, 0x41) || die "error: can't open file $h{of}\n";
 
     $h{bs} = removeXiBSuffix($h{bs});
 
     for ($nb = 0; !$h{count} || $nb < $h{count}; $nb++) {
 	printf "\r%02.1d%%", 100 * $nb / $h{count} if $h{count} && $percent;
-	$read = sysread(IF, $tmp, $h{bs}) or $h{count} ? die "error: can't read block $nb\n" : last;
+	$read = sysread(IF, $tmp, $h{bs}) or ($h{count} ? die "error: can't read block $nb\n" : last);
 	syswrite(OF, $tmp) or die "error: can't write block $nb\n";
 	$read < $h{bs} and $read = 1, last;
     }
@@ -473,9 +473,9 @@ $dev, $size, $used, $free, $use, $mntpoint
 	$use = int(100 * ($size - $free) / $size);
 	$used = $size - $free;
 	if ($h) {
-	    $used = int ($used / 1024) . "M";
-	    $size = int ($size / 1024) . "M";
-	    $free = int ($free / 1024) . "M";
+	    $used = int($used / 1024 . "M");
+	    $size = int($size / 1024 . "M");
+	    $free = int($free / 1024 . "M");
 	}
 	write DF if $size;
     }

@@ -74,7 +74,7 @@ ask_fromW_begin:
 		${$e->{val}} = $i;
 	    }
 	} elsif ($e->{type} =~ /list/) {
-	    ($e->{text} || $e->{label}) and print "=> $e->{label} $e->{text}\n";
+	    $e->{text} || $e->{label} and print "=> $e->{label} $e->{text}\n";
 	    my $n = 0; my $size = 0; my $def_n = 0;
 	    foreach (@{$e->{list}}) {
 		$n++;
@@ -95,7 +95,7 @@ ask_fromW_begin:
 	    print N("Button `%s': %s", $e->{label}, may_apply($e->{format}, ${$e->{val}})), " $e->{text}\n";
 	    print N("Do you want to click on this button?");
 	    my $i = readln();
-	    ($i && $i !~ /^n/i) and $e->{clicked_may_quit}(), $common->{callbacks}{changed}->($ind);
+	    $i && $i !~ /^n/i and $e->{clicked_may_quit}(), $common->{callbacks}{changed}->($ind);
 	} elsif ($e->{type} eq 'label') {
 	    my $t = $format_label->($e);
 	    push @labels, $t;

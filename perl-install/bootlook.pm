@@ -117,8 +117,8 @@ if (member( $cur_res, qw( 785 788 791 794))) {
 #- and check that lilo is the correct loader
 $no_bootsplash ||= chomp_(`detectloader -q`) ne 'LILO';
 my @thms;
-my @lilo_thms = (($themes{'default'}) ?() :qw(default));
-my @boot_thms = (($themes{'default'}) ?() :qw(default));
+my @lilo_thms = ($themes{'default'} ? () : qw(default));
+my @boot_thms = ($themes{'default'} ? () : qw(default));
 chdir($themes{'path'}); #- we must change directory for correct @thms assignement
 foreach (all('.')) {
     if (-d $themes{'path'} . $_ && m/^[^.]/) {
@@ -156,8 +156,8 @@ $B_create->signal_connect(clicked => sub {
 
 $combo{'thms'}->entry->signal_connect(changed => sub {
     my $thm_txt = $combo{'thms'}->entry->get_text();
-    $combo{'lilo'}->entry->set_text(member($thm_txt, @lilo_thms) ? $thm_txt : ($themes{'default'} || 'default'));
-    $combo{'boot'}->entry->set_text(member($thm_txt, @boot_thms) ? $thm_txt : ($themes{'default'} || 'default'));
+    $combo{'lilo'}->entry->set_text(member($thm_txt, @lilo_thms) ? $thm_txt : $themes{'default'} || 'default');
+    $combo{'boot'}->entry->set_text(member($thm_txt, @boot_thms) ? $thm_txt : $themes{'default'} || 'default');
     
 });
 
@@ -376,7 +376,7 @@ sub parse_etc_passwd {
     do {
 	@user_info = getpwent();
 	($uname, $uid) = @user_info[0,2];
-	push (@usernames, $uname) if ($uid > 500) and !($uname eq "nobody");
+	push (@usernames, $uname) if $uid > 500 and !($uname eq "nobody");
     } while @user_info;
 }
 
@@ -408,7 +408,7 @@ sub isXlaunched {
 }
 
 sub updateInit {
-    my $runlevel = ($x_mode) ? 5 : 3;
+    my $runlevel = $x_mode ? 5 : 3;
     substInFile { s/^id:\d:initdefault:\s*$/id:$runlevel:initdefault:\n/ } "/etc/inittab";
 }
 

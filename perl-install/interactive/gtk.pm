@@ -115,7 +115,7 @@ sub create_clist {
 		 $l[($j + $curr) % @l] =~ /$start_reg$word/i and last;
 	    }
 	    $j == @l ?
-	      $starting_word = '' :
+	      ($starting_word = '') :
 	      $select->(($j + $curr) % @l);
 
 	    $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 });

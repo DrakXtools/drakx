@@ -44,7 +44,7 @@ use ftp;
 
 %mirrors = ();
 
-sub mirror2text { $mirrors{$_[0]} && ($mirrors{$_[0]}[0] . '|' . $_[0]) }
+sub mirror2text { $mirrors{$_[0]} && $mirrors{$_[0]}[0] . '|' . $_[0] }
 sub mirrors {
     unless (keys %mirrors) {
 	#- contact the following URL to retrieve list of mirror.

@@ -121,13 +121,13 @@ sub resize {
     $size >= $min or die "Minimum filesystem size is $min sectors";
     $size <= $max or die "Maximum filesystem size is $max sectors";
 
-    log::l("resize_fat: Partition size will be " . ($size * $SECTORSIZE >> 20) . "Mb (well exactly ${size} sectors)");
+    log::l("resize_fat: Partition size will be " . (($size * $SECTORSIZE) >> 20) . "Mb (well exactly ${size} sectors)");
 
     my $new_data_size = $size * $SECTORSIZE - $fs->{cluster_offset};
     my $new_nb_clusters = divide($new_data_size, $fs->{cluster_size});
     my $used_size = used_size($fs);
 
-    log::l("resize_fat: Break point for moving files is " . ($used_size * $SECTORSIZE >> 20) . " Mb ($used_size sectors)");
+    log::l("resize_fat: Break point for moving files is " . (($used_size * $SECTORSIZE) >> 20) . " Mb ($used_size sectors)");
     if ($size < $used_size) {
 	log::l("resize_fat: Allocating new clusters");
 	resize_fat::fat::allocate_remap($fs, $new_nb_clusters);

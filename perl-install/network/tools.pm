@@ -53,8 +53,8 @@ sub ask_connect_now {
 	    my $netc = {};
 	    $up = connected();
 	}
-	my $m = $up ? (N("The system is now connected to Internet.") .
-		     if_($::isInstall, N("For security reason, it will be disconnected now."))) :
+	my $m = $up ? N("The system is now connected to Internet.") .
+		     if_($::isInstall, N("For security reason, it will be disconnected now.")) :
 		       N("The system doesn't seem to be connected to internet.
 Try to reconfigure your connection.");
 	if ($::isWizard) {

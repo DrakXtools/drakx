@@ -21,7 +21,7 @@ sub get_cluster($) {
 }
 sub set_cluster($$) {
     my ($entry, $val) = @_;
-    $entry->{first_cluster} = $val & (1 << 16) - 1;
+    $entry->{first_cluster} = $val & ((1 << 16) - 1);
     $entry->{first_cluster_high} = $val >> 16 if $resize_fat::isFAT32;
 }
 

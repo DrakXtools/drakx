@@ -144,7 +144,7 @@ sub ask_fromW_real {
 		} @{$e->{list}};
 	    };
 	} else {
-	    $w = Newt::Component::Entry(-1, -1, '', 20, ($e->{hidden} && 1 << 11) | 1 << 2);
+	    $w = Newt::Component::Entry(-1, -1, '', 20, ($e->{hidden} && 1 << 11) | (1 << 2));
 	    $get = sub { $w->EntryGetValue };
 	    $set = sub { $w->EntrySet($_[0], 1) };
 	}

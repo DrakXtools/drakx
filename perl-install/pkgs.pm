@@ -743,7 +743,7 @@ sub rpmDbOpen {
     if ($rebuild_needed) {
 	if (my $pid = fork()) {
 	    waitpid $pid, 0;
-	    ($? & 0xff00) and die "rebuilding of rpm database failed";
+	    $? & 0xff00 and die "rebuilding of rpm database failed";
 	} else {
 	    log::l("rebuilding rpm database");
 	    my $rebuilddb_dir = "$prefix/var/lib/rpmrebuilddb.$$";

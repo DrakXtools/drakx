@@ -79,7 +79,7 @@ sub addcupsremoteto {
     return 1 if $#configfilenames < 0;
     my @printerlist = printer::cups::get_remote_queues();
     my $ppdfile = "";
-    if (($printer->{SPOOLER} eq "cups") && 
+    if ($printer->{SPOOLER} eq "cups" && 
 	((-x "$::prefix/usr/bin/curl") || (-x "$::prefix/usr/bin/wget"))) {
 	foreach my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
@@ -101,8 +101,7 @@ sub addcupsremoteto {
 	    }
 	    # Does the file exist and is it not an error message?
 	    if ((-r "$::prefix/etc/foomatic/$queue.ppd") &&
-		(cat_("$::prefix/etc/foomatic/$queue.ppd") =~ 
-		 /^\*PPD-Adobe/)) {
+		cat_("$::prefix/etc/foomatic/$queue.ppd") =~ /^\*PPD-Adobe/) {
 		$ppdfile = "/etc/foomatic/$queue.ppd";
 	    } else {
 		unlink "$::prefix/etc/foomatic/$queue.ppd";
@@ -224,11 +223,11 @@ sub findconfigfiles {
 	chomp;
 	if (/^([^:]+):[^:]*:([^:]+):([^:]+):[^:]*:([^:]+):[^:]*$/) {
 	    my ($username, $uid, $gid, $homedir) = ($1, $2, $3, $4);
-	    if ((($uid == 0) || ($uid >= 500)) && ($username ne "nobody")) {
+	    if (($uid == 0 || $uid >= 500) && $username ne "nobody") {
 		foreach my $file (@configfilenames) {
 		    my $dir = "$homedir/$file";
 		    $dir =~ s,/[^/]*$,,;
-		    next if (-f $dir) && (! -d $dir);
+		    next if (-f $dir) && ! -d $dir;
 		    if (! -d "$::prefix$dir") {
                   mkdir_p("$::prefix$dir") or next;
                   set_permissions("$::prefix$dir", "$uid.$gid") or next;

@@ -128,7 +128,7 @@ sub setupBootloader {
 				    $boot : fsedit::get_root($fstab, 'boot')->{device});
 	}
     } else {
-	$in->set_help(arch() =~ /sparc/ ? "setupSILOGeneral" :  arch() =~ /ppc/ ? 'setupYabootGeneral' :"setupBootloader") unless $::isStandalone; #- TO MERGE ?
+	$in->set_help(arch() =~ /sparc/ ? "setupSILOGeneral" :  arch() =~ /ppc/ ? 'setupYabootGeneral' : "setupBootloader") unless $::isStandalone; #- TO MERGE ?
 
 	my @silo_install_lang = (N("First sector of drive (MBR)"), N("First sector of boot partition"));
 	my $silo_install_lang = $silo_install_lang[$b->{use_partition}];

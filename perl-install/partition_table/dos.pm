@@ -42,7 +42,7 @@ sub CHS2rawCHS {
 	$h = $hd->{geom}{heads} - 1;
 	$s = $hd->{geom}{sectors};
     }
-    ($c & 0xff, $h, $s | ($c >> 2 & 0xc0));
+    ($c & 0xff, $h, $s | (($c >> 2) & 0xc0));
 }
 
 # returns (cylinder, head, sector)

@@ -286,7 +286,7 @@ sub getIDE() {
 	my $type = ${{ disk => 'hd', cdrom => 'cdrom', tape => 'tape', floppy => 'fd' }}{$t} or next;
 	my $info = chomp_(cat_("$d/model")) || "(none)";
 
-	my $num = ord (($d =~ /(.)$/)[0]) - ord 'a';
+	my $num = ord(($d =~ /(.)$/)[0]) - ord 'a';
 	my ($vendor, $model) = map { 
 	    if_($info =~ /^$_(-|\s)*(.*)/, $eide_hds{$_}, $2);
 	} keys %eide_hds;
@@ -640,23 +640,20 @@ sub whatUsbport() {
 	# Extract the printer data from the ID string
 	my ($manufacturer, $model, $serialnumber, $description) =
 	    ("", "", "", "");
-	if (($idstr =~ /MFG:([^;]+);/) ||
-	    ($idstr =~ /MANUFACTURER:([^;]+);/)) {
+	if ($idstr =~ /MFG:([^;]+);/ || $idstr =~ /MANUFACTURER:([^;]+);/) {
 	    $manufacturer = $1;
 	    $manufacturer =~ s/Hewlett[-\s_]Packard/HP/;
 	    $manufacturer =~ s/HEWLETT[-\s_]PACKARD/HP/;
 	}
 	# For HP's multi-function devices the real model name is in the "SKU"
 	# field. So use this field with priority for $model when it exists.
-	if (($idstr =~ /MDL:([^;]+);/) ||
-	    ($idstr =~ /MODEL:([^;]+);/)) {
+	if ($idstr =~ /MDL:([^;]+);/ || $idstr =~ /MODEL:([^;]+);/) {
 	    $model ||= $1;
 	}
 	if ($idstr =~ /SKU:([^;]+);/) {
 	    $model = $1;
 	}
-	if (($idstr =~ /DES:([^;]+);/) ||
-	    ($idstr =~ /DESCRIPTION:([^;]+);/)) {
+	if ($idstr =~ /DES:([^;]+);/ || $idstr =~ /DESCRIPTION:([^;]+);/) {
 	    $description = $1;
 	    $description =~ s/Hewlett[-\s_]Packard/HP/;
 	    $description =~ s/HEWLETT[-\s_]PACKARD/HP/;
@@ -665,7 +662,7 @@ sub whatUsbport() {
 	    $serialnumber = $1;
 	}
 	# Was there a manufacturer and a model in the string?
-	if (($manufacturer eq "") || ($model eq "")) {
+	if ($manufacturer eq "" || $model eq "") {
 	    next;
 	}
 	# No description field? Make one out of manufacturer and model.

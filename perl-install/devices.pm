@@ -27,7 +27,7 @@ sub size($) {
     for ($high = 1; $high > 0 && &$valid_offset($high); $high *= 2) { $low = $high }
 
     while ($low < $high - 1) {
-	$mid = int ($low + $high) / 2;
+	$mid = int(($low + $high) / 2);
 	&$valid_offset($mid) ? $low : $high = $mid;
     }
     $low + 1;

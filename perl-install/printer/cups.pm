@@ -16,8 +16,8 @@ sub get_remote_queues {
     while ($line = <F>) {
 	if ($line =~ m/^\s*device\s+for\s+([^:\s]+):\s*(\S+)\s*$/) {
 	    my $queuename = $1;
-	    if (($2 =~ m!^ipp://([^/:]+)[:/]!) &&
-		(!$printer->{configured}{$queuename})) {
+	    if ($2 =~ m!^ipp://([^/:]+)[:/]! &&
+		!$printer->{configured}{$queuename}) {
 		my $server = $1;
 		push (@printerlist, "$queuename|$server");
 	    }

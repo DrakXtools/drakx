@@ -27,7 +27,7 @@ use common;
   summary            => [ N_("Summary"), 1, 0, '', "installPackages", 'summary' ],
   configureServices  => [ N_("Configure services"), 1, 1, '!$::expert', "installPackages", 'services' ],
   setupBootloader    => [ N_("Install bootloader"), 1, 0, '', "installPackages", 'bootloader' ],
-if_((arch() !~ /alpha/) && (arch() !~ /ppc/),
+if_(arch() !~ /alpha/ && arch() !~ /ppc/,
   createBootdisk     => [ N_("Create a bootdisk"), 1, 0, '', "installPackages", 'bootdisk' ],
 ),
   configureX         => [ N_("Configure X"), 1, 1, '', ["formatPartitions", "setupBootloader"], 'X' ],

@@ -148,7 +148,7 @@ sub detect {
             if (exists $_->{bus} && $_->{bus} eq 'ide') {
                 $_->{channel} = $_->{channel} ? N("secondary") : N("primary");
                 delete $_->{info};
-            } elsif ((exists $_->{id}) && ($_->{bus} ne 'PCI')) {
+            } elsif ((exists $_->{id}) && $_->{bus} ne 'PCI') {
                 # SCSI detection incoherency:
                 my $i = $_;
                 $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_}) } qw(bus id);
@@ -226,7 +226,7 @@ sub new {
             foreach my $i (sort keys %$current_device) {
                 if ($fields{$i}[0]) {
                     $text->insert("", $text->style->black, "", $fields{$i}[0] . ": ");
-                    $text->insert("", ($i eq 'driver' && $current_device->{$i} eq 'unknown') ? $wcolor : $color,
+                    $text->insert("", $i eq 'driver' && $current_device->{$i} eq 'unknown' ? $wcolor : $color,
                                   "", "$current_device->{$i}\n\n");
                 } else { print "Skip \"$i\" field => \"$current_device->{$i}\"\n\n" }
             }

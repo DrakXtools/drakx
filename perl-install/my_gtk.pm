@@ -65,7 +65,7 @@ sub new {
 	    $style->font(Gtk::Gdk::Font->fontset_load(N("-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*")));
 	    my $w = $style->font->string_width($::Wizard_title);
 	    $draw1->signal_connect(expose_event => sub {
-				       for (my $i = 0; $i < (540/$y1); $i++) {
+				       for (my $i = 0; $i < 540/$y1; $i++) {
 					   $draw1->window->draw_pixmap($draw1->style->bg_gc('normal'),
 									$im_up, 0, 0, 0, $y1*$i,
 									$x1, $y1);
@@ -77,7 +77,7 @@ sub new {
 				       }
 				   });
 	    $draw2->signal_connect(expose_event => sub {
-				       for (my $i = 0; $i < (300/$y2); $i++) {
+				       for (my $i = 0; $i < 300/$y2; $i++) {
 					   $draw2->window->draw_pixmap($draw2->style->bg_gc('normal'),
 									$im_left, 0, 0, 0, $y2*$i,
 									$x2, $y2);
@@ -363,7 +363,7 @@ sub ask_browse_tree_info {
 		    0, my $l = new Gtk::HBox(0,15),
 		    0, gtkpack(new Gtk::HBox(0,10),
 			       my $go = gtksignal_connect(new Gtk::Button($common->{ok}), "clicked" => sub { $w->{retval} = 1; Gtk->main_quit }),
-			       $common->{cancel} ? (gtksignal_connect(new Gtk::Button($common->{cancel}), "clicked" => sub { $w->{retval} = 0; Gtk->main_quit })) : (),
+			       $common->{cancel} ? gtksignal_connect(new Gtk::Button($common->{cancel}), "clicked" => sub { $w->{retval} = 0; Gtk->main_quit }) : (),
 			      )
     ));
     gtkpack__($l, my $toolbar = new Gtk::Toolbar('horizontal', 'icons'));

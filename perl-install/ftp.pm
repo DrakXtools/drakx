@@ -56,7 +56,7 @@ sub getFile {
 	eval { $$retr->close if $$retr };
 	$@ and rewindGetFile(); #- in case Timeout got us on "->close"
 	$$retr = $ftp->retr($f) and return $$retr;
-	($ftp->code == 550) and log::l("FTP: 550 file unavailable"), return;
+	$ftp->code == 550 and log::l("FTP: 550 file unavailable"), return;
 	rewindGetFile();
 	log::l("ftp get failed, sleeping before trying again");
 	sleep 1;

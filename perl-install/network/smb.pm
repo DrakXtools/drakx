@@ -92,7 +92,7 @@ sub find_exports {
 	s/^\t//;
 	/NT_STATUS_/ and die $_;
 	my ($name, $type, $comment) = unpack "A15 A10 A*", $_;
-	if ($name eq '---------' && $type eq '----' && $comment eq '-------' .. /^$/) {
+	if (($name eq '---------' && $type eq '----' && $comment eq '-------') .. /^$/) {
 	    push @l, { name => $name, type => $type, comment => $comment, server => $server }
 	      if $type eq 'Disk' && $name !~ /\$$/ && $name !~ /NETLOGON|SYSVOL/;
 	}

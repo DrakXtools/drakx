@@ -396,8 +396,8 @@ sub mount_options_help {
 	    my $prev_tp = $tp;
 	    $tp = /^\.(TP|RE)/;
 	    my ($s) = /^\.B (.*)/;
-	    if ($prev_tp && $s eq '\-o' .. /X^/) {
-		if (my $v = $prev_tp && $s =~ /^[a-z]/i .. $tp) {
+	    if (($prev_tp && $s eq '\-o') .. /X^/) {
+		if (my $v = ($prev_tp && $s =~ /^[a-z]/i) .. $tp) {
 		    if ($v == 1) {
 			$s = $short{$s} || $s;
 			$option = exists $help{$s} && !$help{$s} ? $s : '';

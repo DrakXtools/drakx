@@ -143,7 +143,7 @@ sub spooler_in_security_level {
     # Was the current spooler already added to the current security level?
     my ($spooler, $level) = @_;
     my $sp;
-    $sp = (($spooler eq "lpr") || ($spooler eq "lprng")) ? "lpd" : $spooler;
+    $sp = $spooler eq "lpr" || $spooler eq "lprng" ? "lpd" : $spooler;
     my $file = "$::prefix/etc/security/msec/server.$level";
     if (-f $file) {
 	local *F; 
@@ -162,7 +162,7 @@ sub spooler_in_security_level {
 sub add_spooler_to_security_level {
     my ($spooler, $level) = @_;
     my $sp;
-    $sp = (($spooler eq "lpr") || ($spooler eq "lprng")) ? "lpd" : $spooler;
+    $sp = $spooler eq "lpr" || $spooler eq "lprng" ? "lpd" : $spooler;
     my $file = "$::prefix/etc/security/msec/server.$level";
     if (-f $file) {
 	local *F; 
@@ -268,7 +268,7 @@ sub read_configured_queues($) {
     for ($i = 0;  $i < $N; $i++) {
 	$printer->{configured}{$QUEUES[$i]{queuedata}{queue}} = 
 	    $QUEUES[$i];
-	if ((!$QUEUES[$i]{make}) || (!$QUEUES[$i]{model})) {
+	if (!$QUEUES[$i]{make} || !$QUEUES[$i]{model}) {
 	    if ($printer->{SPOOLER} eq "cups") {
 		$printer->{OLD_QUEUE} = $QUEUES[$i]{queuedata}{queue};
 		my $descr = get_descr_from_ppd($printer);
@@ -323,7 +323,7 @@ sub make_menuentry {
     my $spooler = $shortspooler_inv{$printer->{SPOOLER}}{short_name};
     my $connect = $printer->{configured}{$queue}{queuedata}{connect};
     my $localremote;
-    if (($connect =~ m!^file:!) || ($connect =~ m!^ptal:/mlc:!)) {
+    if ($connect =~ m!^file:! || $connect =~ m!^ptal:/mlc:!) {
 	$localremote = N("Local Printers");
     } else {
 	$localremote = N("Remote Printers");
@@ -356,13 +356,13 @@ sub make_menuentry {
 	$connection = N(" on LPD server \"%s\", printer \"%s\"", $2, $1);
     } elsif ($connect =~ m!^socket://([^/:]+):([^/:]+)/?$!) {
 	$connection = N(", TCP/IP host \"%s\", port %s", $1, $2);
-    } elsif (($connect =~ m!^smb://([^/\@]+)/([^/\@]+)/?$!) ||
-	     ($connect =~ m!^smb://.*/([^/\@]+)/([^/\@]+)/?$!) ||
-	     ($connect =~ m!^smb://.*\@([^/\@]+)/([^/\@]+)/?$!)) {
+    } elsif ($connect =~ m!^smb://([^/\@]+)/([^/\@]+)/?$! ||
+	     $connect =~ m!^smb://.*/([^/\@]+)/([^/\@]+)/?$! ||
+	     $connect =~ m!^smb://.*\@([^/\@]+)/([^/\@]+)/?$!) {
 	$connection = N(" on SMB/Windows server \"%s\", share \"%s\"", $1, $2);
-    } elsif (($connect =~ m!^ncp://([^/\@]+)/([^/\@]+)/?$!) ||
-	     ($connect =~ m!^ncp://.*/([^/\@]+)/([^/\@]+)/?$!) ||
-	     ($connect =~ m!^ncp://.*\@([^/\@]+)/([^/\@]+)/?$!)) {
+    } elsif ($connect =~ m!^ncp://([^/\@]+)/([^/\@]+)/?$! ||
+	     $connect =~ m!^ncp://.*/([^/\@]+)/([^/\@]+)/?$! ||
+	     $connect =~ m!^ncp://.*\@([^/\@]+)/([^/\@]+)/?$!) {
 	$connection = N(" on Novell server \"%s\", printer \"%s\"", $1, $2);
     } elsif ($connect =~ m!^postpipe:(.+)$!) {
 	$connection = N(", using command %s", $1);
@@ -490,7 +490,7 @@ sub read_printer_db(;$) {
     }
 
     #- Load CUPS driver database if CUPS is used as spooler
-    if (($spooler) && ($spooler eq "cups") && ($::expert)) {
+    if ($spooler && $spooler eq "cups" && $::expert) {
 
 	#&$install('cups-drivers') unless $::testing;
 	#my $w;
@@ -570,7 +570,7 @@ sub read_cups_options ($) {
 		    # Remove page size info
 		    $comment =~ s/,\s*size:\s*[0-9\.]+x[0-9\.]+in$//;
 		    $args[$i]{vals}[$j]{comment} = $comment;
-		} elsif (($line =~ /^\s*$/) && ($#{$args[$i]{vals}} > -1)) {
+		} elsif ($line =~ /^\s*$/ && $#{$args[$i]{vals}} > -1) {
 		    $inchoices = 0;
 		    $inoption = 0;
 		}
@@ -652,8 +652,8 @@ sub read_cups_printer_list {
 	if ($line =~ m/^\s*device\s+for\s+([^:\s]+):\s*(\S+)\s*$/) {
 	    my $queuename = $1;
 	    my $comment = "";
-	    if (($2 =~ m!^ipp://([^/:]+)[:/]!) &&
-		(!$printer->{configured}{$queuename})) {
+	    if ($2 =~ m!^ipp://([^/:]+)[:/]! &&
+		!$printer->{configured}{$queuename}) {
 		$comment = N("(on %s)", $1);
 	    } else {
 		$comment = N("(on this machine)");
@@ -679,15 +679,15 @@ sub get_cups_remote_queues {
 	if ($line =~ m/^\s*device\s+for\s+([^:\s]+):\s*(\S+)\s*$/) {
 	    my $queuename = $1;
 	    my $comment = "";
-	    if (($2 =~ m!^ipp://([^/:]+)[:/]!) &&
-		(!$printer->{configured}{$queuename})) {
+	    if ($2 =~ m!^ipp://([^/:]+)[:/]! &&
+		!$printer->{configured}{$queuename}) {
 		$comment = N("On CUPS server \"%s\"", $1);
 		my $sep = "!";
 		push (@printerlist,
 		      ($::expert ? N("CUPS") . $sep : "") .
 		      N("Remote Printers") . "$sep$queuename: $comment"
 		      . ($queuename eq $printer->{DEFAULT} ?
-			 N(" (Default)") : ("")));
+			 N(" (Default)") : ""));
 	    }
 	}
     }
@@ -703,7 +703,7 @@ sub set_cups_autoconf {
     my @file_content = cat_($file);
 
     # Remove all valid "CUPS_CONFIG" lines
-    (/^\s*CUPS_CONFIG/ and $_ = "") foreach @file_content;
+    /^\s*CUPS_CONFIG/ and $_ = "" foreach @file_content;
  
     # Insert the new "CUPS_CONFIG" line
     if ($autoconf) {
@@ -839,13 +839,13 @@ sub get_descr_from_ppd {
     my $lang = $ppd{LanguageVersion};
 
     # Remove manufacturer's name from the beginning of the model name
-    if (($make) && ($model =~ /^$make[\s\-]+([^\s\-].*)$/)) {
+    if ($make && $model =~ /^$make[\s\-]+([^\s\-].*)$/) {
 	$model = $1;
     }
 
     # Put out the resulting description string
     uc($make) . '|' . $model . '|' . $driver .
-      ($lang && (" (" . lc(substr($lang, 0, 2)) . ")"));
+      ($lang && " (" . lc(substr($lang, 0, 2)) . ")");
 }
 
 sub poll_ppd_base {
@@ -912,9 +912,8 @@ sub configure_queue($) {
         run_program::rooted($::prefix, "foomatic-configure", "-q",
 			    "-s", $printer->{currentqueue}{spooler},
 			    "-n", $printer->{currentqueue}{queue},
-			    (($printer->{currentqueue}{queue} ne 
-			      $printer->{OLD_QUEUE}) &&
-			     ($printer->{configured}{$printer->{OLD_QUEUE}}) ?
+			    ($printer->{currentqueue}{queue} ne $printer->{OLD_QUEUE} &&
+			     $printer->{configured}{$printer->{OLD_QUEUE}} ?
 			     ("-C", $printer->{OLD_QUEUE}) : ()),
 			    "-c", $printer->{currentqueue}{connect},
 			    "-p", $printer->{currentqueue}{printer},
@@ -932,7 +931,7 @@ sub configure_queue($) {
 #			        $printer->{Accepting} eq 'Yes' ? ("-E") : (),
 			    "-E",
 			    "-v", $printer->{currentqueue}{connect},
-			    ($printer->{currentqueue}{ppd} ne '1') ?
+			    $printer->{currentqueue}{ppd} ne '1' ?
 			        ("-m", $printer->{currentqueue}{ppd}) : (),
 			    $printer->{currentqueue}{desc} ?
 			        ("-D", $printer->{currentqueue}{desc}) : (),
@@ -949,9 +948,8 @@ sub configure_queue($) {
 	}
 	# Copy the old queue's PPD file to the new queue when it is renamed,
 	# to conserve the option settings
-	if (($printer->{currentqueue}{queue} ne 
-	     $printer->{OLD_QUEUE}) &&
-	    ($printer->{configured}{$printer->{OLD_QUEUE}})) {
+	if ($printer->{currentqueue}{queue} ne $printer->{OLD_QUEUE} &&
+	    $printer->{configured}{$printer->{OLD_QUEUE}}) {
 	    system("cp -f $::prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd $::prefix/etc/cups/ppd/$printer->{currentqueue}{queue}.ppd");
 	}
     } else {
@@ -1058,7 +1056,7 @@ sub restart_queue($) {
 	    last };
 	/lpr|lprng/ && do {
 	    #- restart lpd.
-	    foreach (("/var/spool/lpd/$queue/lock", "/var/spool/lpd/lpd.lock")) {
+	    foreach ("/var/spool/lpd/$queue/lock", "/var/spool/lpd/lpd.lock") {
 		my $pidlpd = (cat_("$::prefix$_"))[0];
 		kill 'TERM', $pidlpd if $pidlpd;
 		unlink "$::prefix$_";
@@ -1121,7 +1119,7 @@ sub help_output {
     open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . sprintf($spoolers{$spooler}{help}, $queue);
     my $helptext = join("", <F>);
     close F;
-    $helptext = "Option list not available!\n" if $spooler eq 'lpq' && (!$helptext || ($helptext eq ""));
+    $helptext = "Option list not available!\n" if $spooler eq 'lpq' && (!$helptext || $helptext eq "");
     return $helptext;
 }
 
@@ -1169,13 +1167,12 @@ sub get_copiable_queues {
 	    if (m!^\s*</queue>\s*$!) {
 		# entry completed
 		$inentry = 0;
-		if (($entry->{foomatic}) && 
-		    ($entry->{spooler} eq $oldspooler)) {
+		if ($entry->{foomatic} && $entry->{spooler} eq $oldspooler) {
 		    # Is the connection type supported by the new
 		    # spooler?
-		    if (($newspooler eq "cups" && ($entry->{connect} =~ /^(file|ptal|lpd|socket|smb|ipp):/)) ||
-                  (($newspooler =~ /^(lpd|lprng)$/) && ($entry->{connect} =~ /^(file|ptal|lpd|socket|smb|ncp|postpipe):/)) ||
-                  ($newspooler eq "pdq" && $entry->{connect} =~ /^(file|ptal|lpd|socket):/)) {
+		    if ($newspooler eq "cups" && $entry->{connect} =~ /^(file|ptal|lpd|socket|smb|ipp):/ ||
+                  $newspooler =~ /^(lpd|lprng)$/ && $entry->{connect} =~ /^(file|ptal|lpd|socket|smb|ncp|postpipe):/ ||
+                  $newspooler eq "pdq" && $entry->{connect} =~ /^(file|ptal|lpd|socket):/) {
                   push(@queuelist, $entry->{name});
 		    }
 		}
@@ -1285,9 +1282,9 @@ sub configure_hpoj {
     my $port = $2;
     if ($device =~ /usb/) {
 	$bus = "usb";
-    } elsif (($device =~ /par/) ||
-	     ($device =~ /\/dev\/lp/) ||
-	     ($device =~ /printers/)) {
+    } elsif ($device =~ /par/ ||
+	     $device =~ /\/dev\/lp/ ||
+	     $device =~ /printers/) {
 	$bus = "par";
 	$address_arg = printer::detect::parport_addr($device);
 	$address_arg =~ /^\s*-base\s+(\S+)/;
@@ -1311,9 +1308,9 @@ sub configure_hpoj {
 	# so in the case of the model name auto-detection having failed leave
 	# the port number or the host name as model name.
 	my $searchunknown = N("Unknown model");
-	if (($_->{val}{MODEL}) &&
-	    ($_->{val}{MODEL} !~ /$searchunknown/i) &&
-	    ($_->{val}{MODEL} !~ /^\s*$/)) {
+	if ($_->{val}{MODEL} &&
+	    $_->{val}{MODEL} !~ /$searchunknown/i &&
+	    $_->{val}{MODEL} !~ /^\s*$/) {
 	    $model = $_->{val}{MODEL};
 	}
 	$serialnumber = $_->{val}{SERIALNUMBER};
@@ -1340,9 +1337,9 @@ sub configure_hpoj {
 		    chomp $model_long;
 		    # If SNMP or local port auto-detection failed but HPOJ
 		    # auto-detection succeeded, fill in model name here.
-		    if ((!$_->{val}{MODEL}) ||
-			($_->{val}{MODEL} =~ /$searchunknown/i) ||
-			($_->{val}{MODEL} =~ /^\s*$/)) {
+		    if (!$_->{val}{MODEL} ||
+			$_->{val}{MODEL} =~ /$searchunknown/i ||
+			$_->{val}{MODEL} =~ /^\s*$/) {
 			if ($model_long =~ /:([^:;]+);/) {
 			    $_->{val}{MODEL} = $1;
 			}
@@ -1644,7 +1641,7 @@ sub removelocalprintersfromapplications {
 
 sub setcupslink {
     my ($printer) = @_;
-    return 1 if !$::isInstall || ($printer->{SPOOLER} ne "cups") || -d "/etc/cups/ppd";
+    return 1 if !$::isInstall || $printer->{SPOOLER} ne "cups" || -d "/etc/cups/ppd";
     system("ln -sf $::prefix/etc/cups /etc/cups");
     return 1;
 }

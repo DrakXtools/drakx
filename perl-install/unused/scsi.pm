@@ -64,7 +64,7 @@ sub ideGetDevices {
 	my $type = ${{ disk => 'hd', cdrom => 'cdrom', tape => 'tape', floppy => 'fd' }}{$t} or next;
 	my ($info) = chomp_(cat_("$d/model")); $info ||= "(none)";
 
-	my $num = ord (($d =~ /(.)$/)[0]) - ord 'a';
+	my $num = ord(($d =~ /(.)$/)[0]) - ord 'a';
 	push @idi, { type => $type, device => basename($d), info => $info, bus => $num/2, id => $num%2 };
     }
     [ @idi ];

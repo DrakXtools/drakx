@@ -48,7 +48,7 @@ sub gtkpack__                 { gtkpowerpack(0, 1, @_) }
 sub gtkpack2                  { gtkpowerpack(1, 0, @_) }
 sub gtkpack2_                 { gtkpowerpack('arg', 0, @_) }
 sub gtkpack2__                { gtkpowerpack(0, 0, @_) }
-sub gtkpack3                  { gtkpowerpack($a ?1 :0, 0, @_) }
+sub gtkpack3                  { gtkpowerpack($a ? 1 : 0, 0, @_) }
 sub gtkput                    { $_[0]->put(gtkshow($_[1]), $_[2], $_[3]); $_[0] }
 sub gtkpixmap                 { new Gtk::Pixmap(gdkpixmap(@_)) }
 sub gtkresize                 { $_[0]->window->resize($_[1], $_[2]); $_[0] }
@@ -718,7 +718,7 @@ sub gtkpowerpack {
     elsif (!ref($_[0])) {
 	$RefDefaultAttrs = {};
 	foreach ("expand", "fill", "padding", "pack_end") {
-	    !ref($_[0]) ? $RefDefaultAttrs->{$_} = shift : last
+	    !ref($_[0]) ? ($RefDefaultAttrs->{$_} = shift) : last
 	}
     }
     my $box = shift;

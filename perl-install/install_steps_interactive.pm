@@ -1063,7 +1063,7 @@ sub configurePrinter {
 
     #- try to determine if a question should be asked to the user or
     #- if he is autorized to configure multiple queues.
-    my $ask_multiple_printer = ($::expert || $clicked) && 2 || ($o && printer::detect::local_detect());
+    my $ask_multiple_printer = ($::expert || $clicked) && 2 || $o && printer::detect::local_detect();
     $ask_multiple_printer-- or return;
 
     #- install packages needed for printer::getinfo()
@@ -1074,9 +1074,9 @@ sub configurePrinter {
     my $printer = $o->{printer} ||= {};
     eval { add2hash($printer, printer::main::getinfo($o->{prefix})) };
 
-    $printer->{PAPERSIZE} = (($o->{lang} =~ /^en_US/) || 
-                             ($o->{lang} =~ /^en_CA/) || 
-                             ($o->{lang} =~ /^fr_CA/)) ? 'Letter' : 'A4';
+    $printer->{PAPERSIZE} = ($o->{lang} =~ /^en_US/ || 
+                             $o->{lang} =~ /^en_CA/ || 
+                             $o->{lang} =~ /^fr_CA/) ? 'Letter' : 'A4';
     printer::printerdrake::main($printer, $o, $ask_multiple_printer, sub { install_interactive::upNetwork($o, 'pppAvoided') });
 
 }
@@ -1156,7 +1156,7 @@ sub addUser {
 	push @{$o->{users}}, { password => 'mandrake', realname => 'default', icon => 'automagic' } 
 	  if !member('mandrake', map { $_->{name} } @{$o->{users}});
     }
-    if (($o->{security} >= 1 || $clicked)) {
+    if ($o->{security} >= 1 || $clicked) {
 	any::ask_users($o->{prefix}, $o, $o->{users}, $o->{security});
     }
     any::get_autologin($o->{prefix}, $o);

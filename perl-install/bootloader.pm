@@ -631,7 +631,7 @@ sub install_yaboot {
 
 	    if ($_->{type} eq "image") {
 		my $of_dev = '';
-		if (($boot !~ /$_->{root}/) && $boot) {
+		if ($boot !~ /$_->{root}/ && $boot) {
 		    $of_dev = get_of_dev($boot);
 		    print F "$_->{type}=$of_dev," . substr($_->{kernel_or_dev}, 5);
 		} else {
@@ -640,7 +640,7 @@ sub install_yaboot {
 		}
 		print F "\tlabel=", substr($_->{label}, 0, 15); #- lilo doesn't handle more than 15 char long labels
 		print F "\troot=$_->{root}";
-		if (($boot !~ /$_->{root}/) && $boot) {
+		if ($boot !~ /$_->{root}/ && $boot) {
 		    print F "\tinitrd=$of_dev," . substr($_->{initrd}, 5) if $_->{initrd};
 		} else {
 		    print F "\tinitrd=$of_dev,$_->{initrd}" if $_->{initrd};
@@ -732,8 +732,8 @@ sub install_silo {
     }
     log::l("Installing boot loader...");
     $::testing and return;
-    run_program::rooted($::prefix, "silo", "2>", "/tmp/.error", $silo->{use_partition} ? ("-t") : ()) or 
-        run_program::rooted_or_die($::prefix, "silo", "2>", "/tmp/.error", "-p", "2", $silo->{use_partition} ? ("-t") : ());
+    run_program::rooted($::prefix, "silo", "2>", "/tmp/.error", $silo->{use_partition} ? "-t" : ()) or 
+        run_program::rooted_or_die($::prefix, "silo", "2>", "/tmp/.error", "-p", "2", $silo->{use_partition} ? "-t" : ());
     unlink "$::prefix/tmp/.error";
 
     #- try writing in the prom.

@@ -284,7 +284,7 @@ sub add_Section {
 }
 sub remove_Section {
     my ($raw_X, $Section, $when) = @_;
-    @$raw_X = grep { $_->{name} ne $Section || ($when && $when->($_->{l})) } @$raw_X;
+    @$raw_X = grep { $_->{name} ne $Section || $when && $when->($_->{l}) } @$raw_X;
     $raw_X;
 }
 sub get_Sections {

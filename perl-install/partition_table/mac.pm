@@ -206,7 +206,7 @@ sub write($$$;$) {
     # Find the partition map.
     my @partstowrite;
     my $part = $pt->[0];
-    (defined $part->{isMap}) or die "the first partition is not the partition map";
+    defined $part->{isMap} or die "the first partition is not the partition map";
     push @partstowrite, $part;
 
     # Now go thru the partitions, sort and fill gaps.

@@ -379,7 +379,7 @@ sub setDefaultPackages {
     $o->{compssUsersChoice}{USB} = 1 if modules::get_probeall("usb-interface");
     $o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
     $o->{compssUsersChoice}{HIGH_SECURITY} = 1 if $o->{security} > 3;
-    $o->{compssUsersChoice}{BIGMEM} = 1 if !$::oem && (availableRamMB() > 800) && (arch() !~ /ia64/);
+    $o->{compssUsersChoice}{BIGMEM} = 1 if !$::oem && availableRamMB() > 800 && arch() !~ /ia64/;
     $o->{compssUsersChoice}{SMP} = 1 if detect_devices::hasSMP();
     $o->{compssUsersChoice}{CDCOM} = 1 if grep { $_->{descr} =~ /commercial/i } values %{$o->{packages}{mediums}};
     $o->{compssUsersChoice}{'3D'} = 1 if 
@@ -963,7 +963,7 @@ sub generate_automatic_stage1_params {
 		   adsluser => 'adslu', adslpass => 'adslp', hostname => 'hos', domain => 'dom', server => 'ser',
 		   directory => 'dir', user => 'use', pass => 'pas', disk => 'dis', partition => 'par');
     
-    'automatic='.join(',', map { (/^([^:]+)(:.*)/ && $aliases{$1}) ? $aliases{$1}.$2 : $_ } @ks);
+    'automatic='.join(',', map { /^([^:]+)(:.*)/ && $aliases{$1} ? $aliases{$1}.$2 : $_ } @ks);
 }
 
 sub guess_mount_point {

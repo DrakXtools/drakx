@@ -181,7 +181,7 @@ sub updateScannerDBfromSane {
 		  mfg => sub { $mfg = $val; $name = undef },#bug when a new mfg comes. should called $fs->{ $name }(); but ??
 		  model => sub {
 		      unless ($name) { $name = $val; next }
-		      $name = (member($mfg, keys %$sane2DB)) ?
+		      $name = member($mfg, keys %$sane2DB) ?
 			(ref $sane2DB->{$mfg}) ? $sane2DB->{$mfg}($name) : "$sane2DB->{ $mfg }|$name" : "$mfg|$name";
 		      if (member($name, keys %$scanner::scannerDB)) {
 			  print "#[$name] already in ScannerDB!\n";

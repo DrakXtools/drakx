@@ -125,7 +125,7 @@ sub getIPsInLocalNetworks {
 	    # ... for a local network (eth = ethernet, 
 	    #     vmnet = VMWare,
 	    #     ethernet card connected to ISP excluded)?
-	    $dev_is_localnet = (($dev =~ /^eth/) || ($dev =~ /^vmnet/));
+	    $dev_is_localnet = ($dev =~ /^eth/ || $dev =~ /^vmnet/);
 	    # delete previous address
 	    $current_bcast = "";
 	}
@@ -185,8 +185,8 @@ sub getSMBPrinterShares {
 	    $insharelist = 1;
 	} elsif ($l =~ /^\s*Server\s+Comment\s*$/i) {
 	    $insharelist = 0;
-	} elsif (($l =~ /^\s*(\S+)\s+Printer\s*(.*)$/i) &&
-		 ($insharelist)) {
+	} elsif ($l =~ /^\s*(\S+)\s+Printer\s*(.*)$/i &&
+		 $insharelist) {
 	    my $name = $1;
 	    my $description = $2;
 	    $description =~ s/^(\s*)//;
@@ -217,8 +217,8 @@ sub getSNMPModel {
 		 };
     while (my $l = <F>) {
 	chomp $l;
-	if (($l =~ /^\s*Manufacturer:\s*(\S.*)$/i) &&
-	    ($l =~ /^\s*Vendor:\s*(\S.*)$/i)) {
+	if ($l =~ /^\s*Manufacturer:\s*(\S.*)$/i &&
+	    $l =~ /^\s*Vendor:\s*(\S.*)$/i) {
 	    $manufacturer = $1;
 	    $manufacturer =~ s/Hewlett[-\s_]Packard/HP/;
 	    $manufacturer =~ s/HEWLETT[-\s_]PACKARD/HP/;
@@ -236,7 +236,7 @@ sub getSNMPModel {
 
     # Was there a manufacturer and a model in the output?
     # If not, get them from the description
-    if (($manufacturer eq "") || ($model eq "")) {
+    if ($manufacturer eq "" || $model eq "") {
 	if ($description =~ /^\s*(\S*)\s+(\S.*)$/) {
 	    $manufacturer = $1 if $manufacturer eq "";
 	    $model = $2 if $model eq "";
@@ -272,9 +272,9 @@ sub network_running {
 	"/bin/sh -c \"export LC_ALL=C; /sbin/ifconfig\" |" or
 	    die "Could not run \"ifconfig\"!";
     while (my $line = <F>) {
-	if (($line !~ /^lo\s+/) && # The loopback device can have been 
+	if ($line !~ /^lo\s+/ && # The loopback device can have been 
                                    # started by the spooler's startup script
-	    ($line =~ /^(\S+)\s+/)) { # In this line starts an entry for a
+	    $line =~ /^(\S+)\s+/) { # In this line starts an entry for a
 	                              # running network
 	    close F;
 	    return 1;

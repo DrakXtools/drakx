@@ -23,7 +23,7 @@ my $signature_page = "\0" x $pagesize;
 my $V0_MAX_PAGES = 8 * $pagesize - 10;
 my $V1_OLD_MAX_PAGES = int 0x7fffffff / $pagesize - 1;
 my $V1_MAX_PAGES = $V1_OLD_MAX_PAGES; #- (1 << 24) - 1;
-my $MAX_BADPAGES = int ($pagesize - 1024 - 128 * $sizeof_int - 10) / $sizeof_int;
+my $MAX_BADPAGES = int(($pagesize - 1024 - 128 * $sizeof_int - 10) / $sizeof_int);
 my $signature_format_v1 = "x1024 I I I I125"; #- bootbits, version, last_page, nr_badpages, padding
 
 1;
@@ -75,7 +75,7 @@ sub make($;$) {
 	$version = 1;
     }
 
-    $nbpages >= 10 or die "swap area needs to be at least " . (10 * $pagesize / 1024) . "kB";
+    $nbpages >= 10 or die "swap area needs to be at least " . 10 * $pagesize / 1024 . "kB";
 
     -b $devicename or $checkBlocks = 0;
     my $rdev = (stat $devicename)[6];
@@ -89,7 +89,7 @@ sub make($;$) {
 
     if ($nbpages > $maxpages) {
 	$nbpages = $maxpages;
-	log::l("warning: truncating swap area to " . ($nbpages * $pagesize / 1024) . "kB");
+	log::l("warning: truncating swap area to " . $nbpages * $pagesize / 1024 . "kB");
     }
 
     if ($checkBlocks) {
@@ -110,7 +110,7 @@ sub make($;$) {
 
     MDK::Common::DataStructure::strcpy($signature_page, $version == 0 ? "SWAP-SPACE" : "SWAPSPACE2", $pagesize - 10);
 
-    my $offset = ($version == 0) ? 0 : 1024;
+    my $offset = $version == 0 ? 0 : 1024;
     sysseek(F, $offset, 0) or die "unable to rewind swap-device: $!";
 
     syswrite(F, substr($signature_page, $offset)) or die "unable to write signature page: $!";
