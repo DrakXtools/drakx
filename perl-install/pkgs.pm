@@ -202,7 +202,7 @@ sub packagesOfMedium {
 }
 sub packagesToInstall {
     my ($packages) = @_;
-    grep { pkgs::packageFlagSelected($_) && !pkgs::packageFlagInstalled($_) } values %{$packages->[0]};
+    grep { $_->{medium}{selected} && packageFlagSelected($_) && !packageFlagInstalled($_) } values %{$packages->[0]};
 }
 
 sub allMediums {

@@ -112,8 +112,8 @@ _("Password") => {val => \$printer->{NCPPASSWD}, hidden => 1} ],
     1;
 }
 
-sub setup_gsdriver($$) {
-    my ($printer, $in) = @_;
+sub setup_gsdriver($$$) {
+    my ($printer, $in, $install) = @_;
     my $action;
     my @action = qw(ascii ps both done);
     my %action = (
@@ -136,6 +136,9 @@ sub setup_gsdriver($$) {
 	}; $@ =~ /^ask_from_list cancel/ and return;
 
 	my %db_entry = %{$printer::thedb{$printer->{DBENTRY}}};
+
+	#- specific printer driver to install.
+	&$install('pnm2ppa') if $db_entry{GSDRIVER} eq 'ppa';
 
 	my @list_res = @{$db_entry{RESOLUTION} || []};
 	my @res = map { "$_->{XDPI}x$_->{YDPI}" } @list_res;
@@ -290,7 +293,7 @@ _("Printer Connection") => { val => \$printer->{str_type}, not_edit => 1, list =
 	}
 
 	#- configure ghostscript driver to be used.
-	if (!$continue && setup_gsdriver($printer, $in)) {
+	if (!$continue && setup_gsdriver($printer, $in, $install)) {
 	    delete $printer->{OLD_QUEUE}
 		if $printer->{QUEUE} ne $printer->{OLD_QUEUE} && $printer->{configured}{$printer->{QUEUE}};
 	    $continue = !$::beginner;

@@ -474,7 +474,7 @@ Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''.
 You may also enter the IP address of the gateway if you have one"),
 			     [_("Host name:"), _("DNS server:"), _("Gateway:"), $::expert ? _("Gateway device:") : ()],
-			     [(map { \$netc->{$_}} qw(HOSTNAME dnsServer GATEWAY)),
+			     [(map { \$netc->{$_} } qw(HOSTNAME dnsServer GATEWAY)),
 			      {val => \$netc->{GATEWAYDEV}, list => \@devices}]
 			    );
 
@@ -497,7 +497,8 @@ sub pppConfig {
     $m->{device} ||= $o->set_help('selectSerialPort') && 
                      mouse::serial_ports_names2dev(
 	$o->ask_from_list('', _("Please choose which serial port your modem is connected to."),
-			  [ mouse::serial_ports_names ]));
+			  [ grep { my $avoidDevice = mouse::serial_ports_name2dev($_);
+				   $o->{mouse}{device} !~ /$avoidDevice/ } mouse::serial_ports_names ]));
 
     $o->set_help('configureNetworkISP');
     install_steps::pppConfig($o) if $o->ask_from_entries_refH('',
@@ -558,7 +559,8 @@ USA")) || return;
     };
     return if $@;
 
-    $o->upNetwork;
+    #- bring all interface up for installing crypto packages.
+    $o->upNetwork();
 
     my @packages = do {
       my $w = $o->wait_message('', _("Contacting the mirror to get the list of available packages"));
@@ -569,6 +571,9 @@ USA")) || return;
 			       \@packages, [ map { \$h{$_} } @packages ]) or return;
     $u->{packages} = [ grep { $h{$_} } @packages ];
     install_steps::installCrypto($o);
+
+    #- stop interface using ppp only.
+    $o->downNetwork('pppOnly');
 }
 
 #------------------------------------------------------------------------------
@@ -597,8 +602,13 @@ sub printerConfig {
     require printerdrake;
 
     if ($::beginner && !$clicked) {
-	printerdrake::auto_detect($o) or return;
+        printerdrake::auto_detect($o) or return;
     }
+
+    #- bring interface up for installing ethernet packages but avoid ppp by default,
+    #- else the guy know what he is doing...
+    $o->upNetwork('pppAvoided');
+
     eval { add2hash($o->{printer} ||= {}, printer::getinfo($o->{prefix})) };
     printerdrake::main($o->{printer}, $o, sub { $o->pkg_install($_[0]) });
 }
@@ -1163,9 +1173,14 @@ sub setup_thiskind {
 }
 
 sub upNetwork {
-    my ($o) = @_;
+    my ($o, $pppAvoided) = @_;
     my $w = $o->wait_message('', _("Bringing up the network"));
-    install_steps::upNetwork($o);
+    install_steps::upNetwork($o, $pppAvoided);
+}
+sub downNetwork {
+    my ($o, $pppOnly) = @_;
+    my $w = $o->wait_message('', _("Bringing down the network"));
+    install_steps::downNetwork($o, $pppOnly);
 }
 
 

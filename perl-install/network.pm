@@ -55,6 +55,11 @@ sub up_it {
     run_program::rooted($prefix, "/etc/rc.d/init.d/network", "start");
     $_->{isUp} = 1 foreach @$intfs;
 }
+sub down_it {
+    my ($prefix, $intfs) = @_;
+    run_program::rooted($prefix, "/etc/rc.d/init.d/network", "stop");
+    $_->{isUp} = 1 foreach @$intfs;
+}
 
 sub write_conf {
     my ($file, $netc) = @_;

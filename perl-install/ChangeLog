@@ -1,3 +1,13 @@
+2000-04-25  François Pons  <fpons@mandrakesoft.com>
+
+	* printerdrake.pm: added support for PPA more easily, allow
+	printers entry using ppa driver event if pnm2ppa not installed,
+	install it if neccessary after.
+	* network.pm, install_steps.pm, install_steps_interactive.pm:
+	added support for stoping a network interface, usefull for ppp0 to
+	avoid using it too long.
+	* install_steps.pm: fixed missing local on pap_secrets file.
+
 2000-04-25  Pixel  <pixel@mandrakesoft.com>
 
 	* lilo.pm (suggest): moved the generation of the keytable here. It

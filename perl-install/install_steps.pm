@@ -477,9 +477,11 @@ sub pppConfig {
 	do { $replaced ||= 1
 	       if s/^\s*$toreplace{login}\s+ppp0\s+(\S+)/$toreplace{login}  ppp0  $toreplace{passwd}/; } foreach @l;
 	if ($replaced) {
+	    local *F;
 	    open F, ">$o->{prefix}/etc/ppp/pap-secrets" or die "Can't open $o->{prefix}/etc/ppp/pap-secrets $!";
 	    print F @l;
 	} else {
+	    local *F;
 	    open F, ">>$o->{prefix}/etc/ppp/pap-secrets" or die "Can't open $o->{prefix}/etc/ppp/pap-secrets $!";
 	    print F "$toreplace{login}  ppp0  $toreplace{passwd}\n";
 	}
@@ -843,14 +845,30 @@ sub generateAutoInstFloppy($) {
 
 #------------------------------------------------------------------------------
 sub upNetwork {
-    my ($o) = @_;
+    my ($o, $pppAvoided) = @_;
 
     modules::write_conf("$o->{prefix}/etc/conf.modules");
     if ($o->{intf} && $o->{netc}{NETWORKING} ne 'false') {
 	network::up_it($o->{prefix}, $o->{intf});
-    } elsif ($o->{modem} && !$o->{modem}{isUp}) {
+    } elsif (!$pppAvoided && $o->{modem} && !$o->{modem}{isUp}) {
 	run_program::rooted($o->{prefix}, "ifup", "ppp0");
 	$o->{modem}{isUp} = 1;
+    } else {
+	$::testing or return;
+    }
+    1;
+}
+
+#------------------------------------------------------------------------------
+sub downNetwork {
+    my ($o, $pppOnly) = @_;
+
+    modules::write_conf("$o->{prefix}/etc/conf.modules");
+    if (!$pppOnly && $o->{intf} && $o->{netc}{NETWORKING} ne 'false') {
+	network::down_it($o->{prefix}, $o->{intf});
+    } elsif ($o->{modem} && $o->{modem}{isUp}) {
+	run_program::rooted($o->{prefix}, "ifup", "ppp0");
+	$o->{modem}{isUp} = 0;
     } else {
 	$::testing or return;
     }

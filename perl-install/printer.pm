@@ -328,7 +328,7 @@ sub getinfo($) {
 sub read_printer_db(;$) {
     my $dbpath = $prefix . ($_[0] || $PRINTER_DB_FILE);
 
-    scalar(keys %thedb) > 3 and return; #- try reparse if using only ppa, POSTSCRIPT, TEXT.
+    scalar(keys %thedb) > 4 and return; #- try reparse if using only ppa, POSTSCRIPT, TEXT.
 
     my %available_devices; #- keep only available devices in our database.
     local *AVAIL; open AVAIL, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/gs --help |";
@@ -338,7 +338,7 @@ sub read_printer_db(;$) {
 	}
     }
     close AVAIL;
-    $available_devices{ppa} = undef if -x "$prefix/usr/bin/pbm2ppa" && -x "$prefix/usr/bin/pnm2ppa";
+    $available_devices{ppa} = undef; #- if -x "$prefix/usr/bin/pbm2ppa" && -x "$prefix/usr/bin/pnm2ppa";
     delete $available_devices{''};
     @available_devices{qw/POSTSCRIPT TEXT/} = (); #- these are always available.
 
