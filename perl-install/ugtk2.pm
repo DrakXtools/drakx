@@ -1434,7 +1434,7 @@ sub gtk_set_treelist {
 sub gtk_TextView_get_log {
     my ($log_w, $log_scroll, $command, $filter_output, $when_command_is_over) = @_;
 
-    my $pid = open(my $F, "$command |") or return sub { 1 };
+    my $pid = open(my $F, "$command |") or return;
     fcntl($F, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
 
     my $gtk_buffer = $log_w->get_buffer;
@@ -1473,7 +1473,7 @@ sub gtk_new_TextView_get_log {
 
     my $log_w = gtkset_editable(Gtk2::TextView->new, 0);
     my $log_scroll = create_scrolled_window($log_w);  #- $log_scroll is a frame, not a ScrolledWindow, so giving $log_scroll->child
-    my $pid = gtk_TextView_get_log($log_w, $log_scroll->child, $command, $filter_output, $when_command_is_over);
+    my $pid = gtk_TextView_get_log($log_w, $log_scroll->child, $command, $filter_output, $when_command_is_over) or return;
     $log_scroll, $pid;
 }
 
