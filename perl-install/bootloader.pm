@@ -1258,7 +1258,7 @@ sub write_grub {
 install $stage1 d $dev $stage2 p $menu_lst
 quit
 EOF
-";
+");
     }
 
     check_enough_space();
