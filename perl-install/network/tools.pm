@@ -37,7 +37,7 @@ sub ask_connect_now {
 	    connect_backend();
 	    sleep 5;
 	    my $netc = {};
-	    $up=connected($netc);
+	    $up=connected();
 	}
 	my $m = $up ? (_("The system is now connected to Internet.") .
 		     if_($::isInstall, _("For Security reason, it will be disconnected now.")) ) :

@@ -181,7 +181,7 @@ my $label5 = new Gtk::Label($netcnx->{type} eq 'lan' ? _("Gateway:") : _("Interf
 $table1->attach($label5, 0, 1, 1, 2, 'fill', 'fill',0,0);
 my $label6 = new Gtk::Label($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netc->{NET_INTERFACE});
 $table1->attach($label6, 1, 2, 1, 2, 'fill', 'fill',0,0);
-my $c=network::tools::connected();
+my $c=connected();
 my $label7 = new Gtk::Label(_("Status:"));
 $table1->attach($label7, 0, 1, 2, 3, 'fill', 'fill',0,0);
 my $label8 = new Gtk::Label($c ? _("Connected") : _("Not connected"));
@@ -204,20 +204,20 @@ $button2->signal_connect (clicked => sub {
 			      $bbox_dialog->add($button_ok );
 			      $dialog->show_all;
 			      $dialog->set_modal(1);
-			      if (!network::tools::connected()) {
+			      if (!connected()) {
 				  $l->set(_("Starting your connection..."));
 				  Gtk->main_iteration while Gtk->events_pending;
-				  network::tools::connect_backend();
+				  connect_backend();
 				  foreach (1..10) { Gtk->main_iteration while Gtk->events_pending; sleep 1; }
-				  my $up=network::tools::connected($netc);
+				  my $up=connected();
 				  $l->set($up ? _("The system is now connected to Internet.") : _("The system doesn't seem to be connected to internet.
 Try to reconfigure your connection."));
 			      } else {
 				  $l->set(_("Closing your connection..."));
 				  Gtk->main_iteration while Gtk->events_pending;
-				  network::tools::disconnect_backend();
+				  disconnect_backend();
 				  foreach (1..10) { Gtk->main_iteration while Gtk->events_pending; sleep 1; }
-				  my $up=network::tools::connected();
+				  my $up=connected();
 				  $l->set($up ? _("The connection is not closed.
 Try to do it manually by running
 /etc/sysconfig/network-scripts/net_cnx_down
@@ -387,7 +387,7 @@ sub update {
     $label4->set($netcnx->{type});
     $label5->set($netcnx->{type} eq 'lan' ? _("Gateway:") : _("Interface:"));
     $label6->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netc->{NET_INTERFACE});
-    my $c = network::tools::connected();
+    my $c = connected();
     $label8->set($c ? _("Connected") : _("Not connected"));
     $button2->child->set($c ? _("Disconnect...") : _("Connect..."));
     $clist1->freeze();
