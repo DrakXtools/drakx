@@ -159,7 +159,7 @@ sub hds {
 	#- special case for type overloading (eg: reiserfs is 0x183)
 	foreach (grep { isExt2($_) } partition_table::get_normal_parts($hd)) {
 	    my $type = typeOfPart($_->{device});
-	    $_->{type} = $type if $type > 0x100;
+	    $_->{type} = $type if $type > 0x100 || $type && $hd->isa('partition_table_gpt');
 	}
 	push @hds, $hd;
     }
