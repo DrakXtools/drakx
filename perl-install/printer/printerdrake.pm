@@ -3057,14 +3057,14 @@ sub get_printer_info {
 	    if ($printer->{PAPERSIZE}) {
 		$printer->{SPECIAL_OPTIONS} .= 
 		    " -o PageSize=$printer->{PAPERSIZE}";
-	    } elsif (($pagesize = $in->{lang}) ||
+	    } elsif (($pagesize = $in->{locale}{country}) ||
 		     ($pagesize = $ENV{LC_PAPER}) ||
+		     ($pagesize = $in->{locale}{lang}) ||
 		     ($pagesize = $ENV{LANG}) ||
 		     ($pagesize = $ENV{LANGUAGE}) ||
 		     ($pagesize = $ENV{LC_ALL})) {
-		if ($pagesize =~ /^en_CA/ ||
-		    $pagesize =~ /^fr_CA/ || 
-		    $pagesize =~ /^en_US/) {
+		if ($pagesize =~ /US/ ||
+		    $pagesize =~ /CA/) {
 		    $pagesize = "Letter";
 		} else {
 		    $pagesize = "A4";
