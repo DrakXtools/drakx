@@ -87,7 +87,7 @@ get_needed_files: $(DIRS) mo_files
 	cat share/list `../tools/specific_arch share/list` | \
 	perl -pe "s/ARCH/$(ARCH)/g ; s/PERL_VERSION/$$version/g ; s|/LIB/|/$(LIB)/|g " | \
 	perl -lpe '@l = glob; m|\*.*/| && @l != 1 and die "no/multiple match for $$_\n"; $$_ = join("\n", @l)' > $(TMPDIR)/list
-	rpm -ql perl-Gtk2 perl-Glib | grep '^/usr/lib/perl5' | grep -v '\.pod$$' >> $(TMPDIR)/list
+	rpm -ql perl-Gtk2 perl-Glib | perl -lne 'print if m!^/usr/lib/perl5! && !/\.pod$$/ && ! -d' >> $(TMPDIR)/list
 
 	@missing=`perl -lne 'print if !-e $$_' $(TMPDIR)/list`; [ -z "$$missing" ] || { echo "missing or multiple files vvvvvvvvvvvvvvvvvvvvvvvvvv" ; echo "$$missing" ; echo "missing or multiple files ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" ; exit 1; }
 
