@@ -62,9 +62,8 @@ sub new {
 	    my ($y1, $x1) = $im_up->get_size;
 	    my ($im_left, $mask_left) = gtkcreate_png($::Wizard_pix_left || "wiz_default_left.png");
 	    my ($y2, $x2) = $im_left->get_size;
-	    my $style= new Gtk::Style;
-	    $style->font(Gtk::Gdk::Font->fontset_load("-adobe-times-bold-r-normal-*-25-*-100-100-p-*-iso8859-*"));
-	    my $w = $style->font->string_width($::Wizard_title);
+	    $draw1->style->font(Gtk::Gdk::Font->fontset_load("-adobe-utopia-bold-r-normal-*-25-*-100-100-p-*-iso8859-*,*-r-*"));
+	    my $w = $draw1->style->font->string_width($::Wizard_title);
 	    $draw1->signal_connect(expose_event => sub {
 				       my $i;
 				       for ($i=0;$i<(540/$y1);$i++) {
@@ -72,7 +71,7 @@ sub new {
 									$im_up, 0, 0, 0, $y1*$i,
 									$x1 , $y1 );
 					   $draw1->window->draw_string(
-								       $style->font,
+								       $draw1->style->font,
 								       $draw1->style->white_gc,
 								       140+(380-$w)/2, 62,
 								       ($::Wizard_title) );
@@ -405,18 +404,19 @@ sub create_pix_text {
     if (ref($background) eq 'Gtk::Gdk::Color') { $color_background = $background }
     elsif ($background =~ /#(\d+)#(\d+)#(\d+)/) { $color_background = gtkcolor(map{$_*65535/255}($1, $2, $3)) }
     elsif (ref($background) eq 'Gtk::Gdk::Pixmap' && $x_back && $y_back) { $backpix = 1 }
-    my $style= new Gtk::Style;
+    my $fake_darea = new Gtk::DrawingArea;
+    my $style= $fake_darea->style->copy();
     if (ref($font) eq 'Gtk::Gdk::Font') {
 	$style->font($font);
     } else {
-	$font ||= _("-adobe-utopia-medium-r-normal-*-12-*-*-*-p-*-iso8859-*,*-r-*");
-#-	$style->font(Gtk::Gdk::Font->fontset_load($font));
+#-	$font ||= _("-adobe-utopia-medium-r-normal-*-12-*-*-*-p-*-iso8859-*,*-r-*");
+	$font and $style->font(Gtk::Gdk::Font->fontset_load($font));
     }
 
     my ($width, $height, $lines, $widths, $heights) = get_text_coord (
         $text, $style, $max_width, $max_height, $can_be_greater, $can_be_smaller, $centeredx, $centeredy);
-
     my $pix = new Gtk::Gdk::Pixmap($w->window, $width, $height);
+
     if ($backpix) {
 	fill_tiled($w, $pix, $background, $x_back, $y_back, $width, $height);
     } else {
