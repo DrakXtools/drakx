@@ -317,7 +317,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %changelog
 * Thu Sep 18 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-15mdk
 - drakboot: (pixel)
-  o fix switching from grubto lilo
+  o fix switching from grub to lilo
   o fix drakboot crashing once bootloader has been altered in text
     mode
 - printerdrake: further fix cups configuration (till)
