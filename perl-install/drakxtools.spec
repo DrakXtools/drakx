@@ -263,13 +263,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Wed Jul 31 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-15mdk
-- harddrake:
+* Thu Aug  1 2002 Pixel <pixel@mandrakesoft.com> 1.1.8-15mdk
+- harddrake (titi):
 	o add embedded mode for drakconf
 	o print less gtk warnings
 	o module configuration window
-- don't require detect-lst
-- Xconfig fixes (pixel)
+- fix mousedrake
+- fix XFdrake in embedded
+- enhance XFdrake
+- don't require detect-lst (titi)
 - printerdrake work in progress (till)
 
 * Wed Jul 31 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-14mdk
