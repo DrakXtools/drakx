@@ -180,9 +180,9 @@ sub hds {
 	require lvm;
 	foreach (@pvs) {
 	    my $name = lvm::get_vg($_) or next;
-	    my ($lvm) = grep { $_->{LVMname} eq $name } @lvms;
+	    my ($lvm) = grep { $_->{VG_name} eq $name } @lvms;
 	    if (!$lvm) {
-		$lvm = bless { disks => [], LVMname => $name }, 'lvm';
+		$lvm = bless { disks => [], VG_name => $name }, 'lvm';
 		lvm::update_size($lvm);
 		lvm::get_lvs($lvm);
 		push @lvms, $lvm;
@@ -253,7 +253,7 @@ sub all_hds {
 }
 sub part2hd {
     my ($part, $all_hds) = @_;
-    my ($hd) = grep { $part->{rootDevice} eq $_->{device} } all_hds($all_hds);
+    my ($hd) = grep { $part->{rootDevice} eq ($_->{device} || $_->{VG_name}) } all_hds($all_hds);
     $hd;
 }
 
@@ -290,7 +290,7 @@ sub get_fstab_and_holes {
 	if (isLVM($_)) {
 	    my @parts = partition_table::get_normal_parts($_);
 	    my $free = $_->{totalsectors} - sum map { $_->{size} } @parts;
-	    my $free_part = { start => 0, size => $free, type => 0, rootDevice => $_->{device} };
+	    my $free_part = { start => 0, size => $free, type => 0, rootDevice => $_->{VG_name} };
 	    @parts, if_($free >= $_->cylinder_size, $free_part);
 	} else {
 	    partition_table::get_normal_parts_and_holes($_);
@@ -551,7 +551,16 @@ sub auto_allocate {
 
     my $suggestions_ = $suggestions || $suggestions{simple};
     allocatePartitions($all_hds, $suggestions_);
-    auto_allocate_raids($all_hds, $suggestions) if $suggestions;
+
+    if ($suggestions) {
+	auto_allocate_raids($all_hds, $suggestions);
+	if (auto_allocate_vgs($all_hds, $suggestions)) {
+	    #- allocatePartitions needs to be called twice, once for allocating PVs, once for allocating LVs
+	    my @vgs = map { $_->{VG_name} } @{$all_hds->{lvms}};
+	    my @suggested_lvs = grep { member($_->{hd}, @vgs) } @$suggestions;
+	    allocatePartitions($all_hds, \@suggested_lvs);
+	}
+    }
 
     partition_table::assign_device_numbers($_) foreach @{$all_hds->{hds}};
 
@@ -585,6 +594,35 @@ sub auto_allocate_raids {
     }
 }
 
+sub auto_allocate_vgs {
+    my ($all_hds, $suggestions) = @_;
+
+    my @pvs = grep { isRawLVM($_) } get_all_fstab($all_hds) or return;
+
+    my @vgs = grep { $_->{VG_name} } @$suggestions or return;
+
+    partition_table::write(@{$all_hds->{hds}});
+
+    require lvm;
+
+    foreach my $vg (@vgs) {
+	my $lvm = bless { disks => [], VG_name => $vg->{VG_name} }, 'lvm';
+	push @{$all_hds->{lvms}}, $lvm;
+	
+	my @pvs_ = grep { !$vg->{parts} || $vg->{parts} =~ /\Q$_->{mntpoint}/ } @pvs;
+	@pvs = difference2(\@pvs, \@pvs_);
+
+	foreach my $part (@pvs_) {
+	    raid::make($all_hds->{raids}, $part) if isRAID($part);
+	    $part->{lvm} = $lvm->{VG_name};
+	    delete $part->{mntpoint};
+	    lvm::vg_add($part);
+	    push @{$lvm->{disks}}, $part;
+	}
+	lvm::update_size($lvm);
+    }
+    1;
+}
 
 sub undo_prepare {
     my ($all_hds) = @_;
