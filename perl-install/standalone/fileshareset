@@ -123,12 +123,13 @@ sub uniq { my %l; $l{$_} = 1 foreach @_; grep { delete $l{$_} } @_ }
 ################################################################################
 package authorisation;
 
+my $F_lock;
 sub read_conf {
     my ($exclusive_lock) = @_;
-    open F_lock, $authorisation_file; # don't care if it's missing
-    flock(F_lock, $exclusive_lock ? 2 : 1) or die "can't lock";
+    open $F_lock, $authorisation_file; # don't care if it's missing
+    flock($F_lock, $exclusive_lock ? 2 : 1) or die "can't lock";
     my %conf;
-    foreach (<F_lock>) {
+    foreach (<$F_lock>) {
 	s/#.*//; # remove comments
 	s/^\s+//; 
 	s/\s+$//;
@@ -136,7 +137,7 @@ sub read_conf {
 	my ($cmd, $value) = split('=', $_, 2);
 	$conf{$cmd} = $value || warn qq(suspicious line "$_" in $authorisation_file\n);
     }
-    # no close F_lock, keep it locked
+    # no close $F_lock, keep it locked
     \%conf
 }
 
@@ -191,12 +192,11 @@ BEGIN { @ISA = 'exports' }
 
 sub read() {
     my $file = $conf_file;
-    local *F;
-    open F, $file or return [];
+    open(my $F, $file) or return [];
 
     my ($prev_raw, $prev_line, @l);
     my $line_nb = 0;
-    foreach my $raw (<F>) {
+    foreach my $raw (<$F>) {
 	$line_nb++;
 	local $_ = $raw;
 	$raw .= "\n" if !/\n/;
@@ -248,9 +248,8 @@ sub write {
 	    $_->{raw} = sprintf("%s %s\n", $mntpoint, $_->{options});
 	}
     }
-    local *F;
-    open F, ">$conf_file" or die "can't write $conf_file";
-    print F $_->{raw} foreach @$nfs_exports;
+    open(my $F, ">$conf_file") or die "can't write $conf_file";
+    print $F $_->{raw} foreach @$nfs_exports;
 }
 
 sub update_server() {
@@ -274,11 +273,10 @@ BEGIN { @ISA = 'exports' }
 
 sub read() {
     my ($s, @l);
-    local *F;
-    open F, $conf_file;
+    open(my $F, $conf_file);
     local $_;
-    while (<F>) {
-	if (/^\s*\[.*\]/ || eof F) {
+    while (<$F>) {
+	if (/^\s*\[.*\]/ || eof $F) {
 	    #- first line in the category
 	    my ($label) = $s =~ /^\s*\[(.*)\]/;
 	    my ($mntpoint) = $s =~ /^\s*path\s*=\s*(.*)/m;
@@ -306,9 +304,8 @@ sub write {
 EOF
 	}
     }
-    local *F;
-    open F, ">$conf_file" or die "can't write $conf_file";
-    print F $_->{raw} foreach @$smb_exports;
+    open(my $F, ">$conf_file") or die "can't write $conf_file";
+    print $F $_->{raw} foreach @$smb_exports;
 }
 
 sub add {
