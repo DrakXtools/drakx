@@ -227,34 +227,35 @@ sub new {
 					}
 					my ($model, $iter) = $select->get_selected();
 					if ($model) {
-					  my $id = $model->get($iter, 1);
-					  $current_device = $data{$id};
-
-					  if ($current_device) {
-					    gtktext_insert($text, [ map  {
-					      if ($fields{$_}[0]) {
-						[  $fields{$_}[0] . ": ", { 'foreground' => 'royalblue3' } ],
-						  [ "$current_device->{$_}\n\n", { 'foreground' => ($_ eq 'driver' && $current_device->{$_} eq 'unknown' ? 'indian red' : 'black') } ]
-						} else {
-						  print "Warning: skip \"$_\" field => \"$current_device->{$_}\"\n\n";
-						}
-					    } sort keys %$current_device ]);
-
-					    # we've valid driver, let's offer to configure it
-					    if (exists $current_device->{driver} &&  $current_device->{driver} !~ /(unknown|.*\|.*)/ &&  $current_device->{driver} !~ /^Card:/) {
-					      $module_cfg_button->show;
-					    }
-
-					    $current_configurator = $configurators{$id};
-					    $config_button->show if -x $current_configurator;
-					    return 1;
-					  }
+                             my $id = $model->get($iter, 1);
+                             $current_device = $data{$id};
+                             
+                             if ($current_device) {
+                                 gtktext_insert($text, [ map  {
+                                     if ($fields{$_}[0]) {
+                                         [  $fields{$_}[0] . ": ", { 'foreground' => 'royalblue3' } ],
+                                           [ "$current_device->{$_}\n\n", { 'foreground' => ($_ eq 'driver' && $current_device->{$_} eq 'unknown' ? 'indian red' : 'black') } ]
+                                       } else {
+                                           print "Warning: skip \"$_\" field => \"$current_device->{$_}\"\n\n";
+                                           ();
+                                       }
+                                 } sort keys %$current_device ]);
+                                 
+                                 # we've valid driver, let's offer to configure it
+                                 if (exists $current_device->{driver} &&  $current_device->{driver} !~ /(unknown|.*\|.*)/ &&  $current_device->{driver} !~ /^Card:/) {
+                                     $module_cfg_button->show;
+                                 }
+                                 
+                                 $current_configurator = $configurators{$id};
+                                 $config_button->show if -x $current_configurator;
+                                 return 1;
+                             }
 					}
 					# hide buttons if needed
 					$text->get_buffer->set_text('', -1); # erase all previous text
 					$config_button->hide;
 					$module_cfg_button->hide;
-				      });
+                     });
 
     # Fill the graphic tree with a "tree branch" widget per device category
     foreach (@class_tree) {
