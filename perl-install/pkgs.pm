@@ -442,21 +442,6 @@ sub psUsingHdlist {
     $m;
 }
 
-#OBSOLETED TODO
-sub getOtherDeps($$) {
-    return; #TODO
-}
-
-#OBSOLETED TODO
-sub getDeps {
-    return; #TODO
-}
-
-#OBSOLETED TODO
-sub getProvides($) {
-    return; #TODO
-}
-
 sub read_rpmsrate {
     my ($packages, $f) = @_;
     my $line_nb = 0;

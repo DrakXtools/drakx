@@ -5,7 +5,7 @@ use common;
 use run_program;
 
 
-sub level_list {
+sub level_list() {
     (
      0 => N("Welcome To Crackers"),
      1 => N("Poor"),
@@ -19,10 +19,10 @@ sub level_list {
 sub to_string { +{ level_list() }->{$_[0]} }
 sub from_string { +{ reverse level_list() }->{$_[0]} || 2 }
 
-sub get_string { to_string(get() || 2) }
-sub get_common_list { map { to_string($_) } (2, 3, 4) }
+sub get_string() { to_string(get() || 2) }
+sub get_common_list() { map { to_string($_) } (2, 3, 4) }
 
-sub get {
+sub get() {
     cat_("$::prefix/etc/profile")           =~ /export SECURE_LEVEL=(\d+)/ && $1 || #- 8.0 msec
     cat_("$::prefix/etc/profile.d/msec.sh") =~ /export SECURE_LEVEL=(\d+)/ && $1 || #- 8.1 msec
       ${{ getVarsFromSh("$::prefix/etc/sysconfig/msec") }}{SECURE_LEVEL}  || #- 8.2 msec

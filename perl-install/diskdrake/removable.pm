@@ -19,7 +19,7 @@ sub main {
     }
 }
 
-sub actions {
+sub actions() {
     (
      N_("Mount point") => \&mount_point,
      N_("Options") => \&options,

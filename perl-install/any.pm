@@ -19,7 +19,7 @@ use modules;
 use log;
 use c;
 
-sub drakx_version { 
+sub drakx_version() { 
     sprintf "DrakX v%s built %s", $::testing ? ('TEST', scalar gmtime()) : (split('/', cat_("$ENV{SHARE_PATH}/VERSION")))[2,3];
 }
 
@@ -80,7 +80,7 @@ sub hdInstallPath() {
     $tail && ($head ? "$head/$tail" : "/mnt/hd/$tail");
 }
 
-sub kernelVersion {
+sub kernelVersion() {
     my $kernel = readlink("$::prefix/boot/vmlinuz") || first(all("$::prefix/boot"));
     first($kernel =~ /vmlinuz-(.*)/);
 }
@@ -863,7 +863,7 @@ You can use userdrake to add a user to this group.")
     }
 }
 
-sub ddcxinfos {
+sub ddcxinfos() {
     return if $::noauto;
 
     my @l;
@@ -881,7 +881,7 @@ sub ddcxinfos {
     @l;
 }
 
-sub running_window_manager {
+sub running_window_manager() {
     my @window_managers = qw(kwin gnome-session icewm wmaker afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish olvwm);
 
     foreach (@window_managers) {

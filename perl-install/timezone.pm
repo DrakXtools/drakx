@@ -16,7 +16,7 @@ sub getTimeZones {
     sort @l;
 }
 
-sub read {
+sub read() {
     my %t = getVarsFromSh("$::prefix/etc/sysconfig/clock") or return {};
     { timezone => $t{ZONE}, UTC => text2bool($t{UTC}) };
 }
@@ -127,7 +127,7 @@ sub fuzzyChoice {
 }
 sub bestTimezone { $c2t{fuzzyChoice($_[0])} || 'GMT' }
 
-sub ntp_servers { 
+sub ntp_servers() { 
 q(Australia (ntp.adelaide.edu.au)
 Australia (ntp.saard.net)
 Australia (time.esec.com.au)

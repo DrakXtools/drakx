@@ -11,7 +11,7 @@ use common;
 
 $| = 1;
 
-sub readln {
+sub readln() {
     my $l = <STDIN>;
     chomp $l;
     $l;

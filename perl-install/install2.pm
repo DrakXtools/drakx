@@ -302,7 +302,7 @@ sub exitInstall {
 }
 
 
-sub start_i810fb {
+sub start_i810fb() {
 
     my ($vga) = cat_('/proc/cmdline') =~ /vga=(\S+)/;
     return if !$vga || listlength(cat_('/proc/fb'));

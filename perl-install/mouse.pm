@@ -128,7 +128,7 @@ my %mouse_btn_keymap = (
     117 => "Num: =",
     96 => "Enter",
 );
-sub ppc_one_button_keys { keys %mouse_btn_keymap }
+sub ppc_one_button_keys() { keys %mouse_btn_keymap }
 sub ppc_one_button_key2text { $mouse_btn_keymap{$_[0]} }
 
 sub raw2mouse {
@@ -139,7 +139,7 @@ sub raw2mouse {
     +{ %l, type => $type };
 }
 
-sub fullnames { 
+sub fullnames() { 
     map_each { 
 	my $type = $::a;
 	grep { $_ } map {
@@ -176,7 +176,7 @@ sub serial_port2text {
     $_[0] =~ /ttyS(\d+)/ ? "$_[0] / COM" . ($1 + 1) : $_[0];
 }
 
-sub read {
+sub read() {
     my %mouse = getVarsFromSh "$::prefix/etc/sysconfig/mouse";
     eval { add2hash_(\%mouse, fullname2mouse($mouse{FULLNAME})) };
     $mouse{nbuttons} ||= $mouse{XEMU3} eq "yes" ? 2 : $mouse{WHEEL} eq "yes" ? 5 : 3;
@@ -212,7 +212,7 @@ sub write {
     }
 }
 
-sub mouseconfig {
+sub mouseconfig() {
     my ($t, $mouse, @wacom);
 
     #- Whouah! probing all devices from ttyS0 to ttyS3 once a time!

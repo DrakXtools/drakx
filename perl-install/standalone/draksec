@@ -50,7 +50,7 @@ sub wait_msg {
 
 sub remove_wait_msg { $_[0]->destroy }
 
-sub basic_seclevel_explanations {
+sub basic_seclevel_explanations() {
     my $text = new Gtk2::TextView;
     $text->set_editable(0);
     gtktext_insert($text,
@@ -115,7 +115,7 @@ my $common_opts = { col_spacings => 10, row_spacings => 5 };
 my $seclevel_entry;
 
 $notebook->append_page(gtkshow(gtkpack(new Gtk2::VBox(0, 0),
-                                       basic_seclevel_explanations($msec),
+                                       basic_seclevel_explanations(),
                                        create_packtable($common_opts,
                                                         [ 
                                                           do {

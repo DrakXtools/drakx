@@ -63,7 +63,7 @@ $_ = join('', @$_) foreach $main_format, $partitionEntry_format, $guid_format;
 
 my $magic = "EFI PART";
 
-sub generate_guid {
+sub generate_guid() {
     my $tmp;
     open(my $F, devices::make("random")) or die "Could not open /dev/random for GUID generation";
     read $F, $tmp, psizeof($guid_format);

@@ -9,7 +9,7 @@ use any;
 use log;
 
 
-sub good_default_monitor {
+sub good_default_monitor() {
     arch() =~ /ppc/ ? 
       (detect_devices::get_mac_model() =~ /^iBook/ ? 'Apple|iBook 800x600' : 'Apple|iMac/PowerBook 1024x768') :
       (detect_devices::isLaptop() ? 'Generic|Flat Panel 1024x768' : 'Generic|1024x768 @ 70 Hz');
@@ -156,7 +156,7 @@ sub configure_automatic {
     return $monitor->{HorizSync} && $monitor->{VertRefresh};
 }
 
-sub getinfoFromDDC {
+sub getinfoFromDDC() {
     my ($VideoRam, @l) = any::ddcxinfos() or return;
 
     my @Modes;
@@ -180,7 +180,7 @@ sub getinfoFromDDC {
     };
 }
 
-sub monitors {
+sub monitors() {
     readMonitorsDB("$ENV{SHARE_PATH}/ldetect-lst/MonitorsDB");
 }
 sub readMonitorsDB {

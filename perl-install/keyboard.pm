@@ -261,9 +261,9 @@ my %grp_toggles = (
 #-######################################################################################
 #- Functions
 #-######################################################################################
-sub KEYBOARDs { keys %keyboards }
+sub KEYBOARDs() { keys %keyboards }
 sub KEYBOARD2text { $keyboards{$_[0]} && $keyboards{$_[0]}[0] }
-sub keyboards { map { { KEYBOARD => $_ } } keys %keyboards }
+sub keyboards() { map { { KEYBOARD => $_ } } keys %keyboards }
 sub keyboard2one {
     my ($keyboard, $nb) = @_;
     ref $keyboard or internal_error();
@@ -351,7 +351,7 @@ sub lang2keyboard {
     { KEYBOARD => $keyboards{$kb} ? $kb : 'us' }; #- handle incorrect keyboard mapping to us.
 }
 
-sub from_usb {
+sub from_usb() {
     return if $::noauto;
     my ($usb_kbd) = detect_devices::usbKeyboards() or return;
     my $country_code = detect_devices::usbKeyboard2country_code($usb_kbd) or return;
@@ -478,7 +478,7 @@ sub write {
     }
 }
 
-sub read {
+sub read() {
     my %keyboard = getVarsFromSh("$::prefix/etc/sysconfig/keyboard") or return;
     if (!$keyboard{KEYBOARD}) {
 	add2hash(\%keyboard, grep { keyboard2kmap($_) eq $keyboard{KEYTABLE} } keyboards());
@@ -488,7 +488,7 @@ sub read {
     keyboard2text(\%keyboard) ? \%keyboard : {};
 }
 
-sub check {
+sub check() {
     require lang;
     $^W = 0;
 

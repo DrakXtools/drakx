@@ -55,7 +55,7 @@ $border = 5;
 # you're building.
 
 sub gtkdestroy                { $_[0] and $_[0]->destroy }
-sub gtkflush                  { Gtk2->update_ui }
+sub gtkflush()                  { Gtk2->update_ui }
 sub gtkhide                   { $_[0]->hide; $_[0] }
 sub gtkmove                   { $_[0]->window->move($_[1], $_[2]); $_[0] }
 sub gtkpack                   { gtkpowerpack(1, 1, @_) }
@@ -145,7 +145,7 @@ sub gtkradio {
     map { gtkset_active($radio = Gtk2::RadioButton->new($radio ? $radio->get_group : undef, $_), $_ eq $def) } @_;
 }
 
-sub gtkroot {
+sub gtkroot() {
     my $root if 0;
     $root ||= Gtk2::Gdk::Window->foreign_new(Gtk2::Gdk->ROOT_WINDOW);
 }
@@ -622,7 +622,8 @@ sub fill_tiled_coords {
 
 sub fill_tiled {
     my ($widget, $pixbuf) = @_;
-    fill_tiled_coords($widget, $pixbuf, $pixbuf->get_width, $pixbuf->get_height, $widget->window->get_size);
+    my ($window_width, $window_height) = $widget->window->get_size;
+    fill_tiled_coords($widget, $pixbuf, $pixbuf->get_width, $pixbuf->get_height, $window_width, $window_height);
 }
 
 sub add2notebook {
@@ -727,7 +728,7 @@ sub gtkset_background {
 }
 
 sub add_icon_path { push @icon_paths, @_ }
-sub icon_paths {
+sub icon_paths() {
    (@icon_paths, (exists $ENV{SHARE_PATH} ? ($ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "$ENV{SHARE_PATH}/libDrakX/pixmaps") : ()),
     "/usr/lib/libDrakX/icons", "pixmaps", 'standalone/icons', '/usr/share/rpmdrake/icons');
 }  
@@ -877,7 +878,7 @@ sub sync {
     show($o);
     flush();
 }
-sub flush { gtkflush() }
+sub flush() { gtkflush() }
 sub exit {
     gtkset_mousecursor_normal(); #- for restoring a normal in any case
     flush();

@@ -13,7 +13,7 @@ use devices;
 use modules;
 use fs;
 
-sub max_nb { 31 }
+sub max_nb() { 31 }
 
 sub nb { 
     my ($nb) = @_;
@@ -174,7 +174,7 @@ sub inactivate_and_dirty {
     $part->{notFormatted} = 1; $part->{isFormatted} = 0;
 }
 
-sub active_mds {
+sub active_mds() {
     map { if_(/^(md\d+) /, $1) } cat_("/proc/mdstat");
 }
 

@@ -414,7 +414,7 @@ sub add_profile {
     cp_af($cmd1, $cmd2);
 }
 
-sub get_profiles {
+sub get_profiles() {
     map { if_(/drakconnect_conf\.(.*)/, $1) } all("$::prefix/etc/sysconfig/network-scripts");
 }
 
@@ -463,7 +463,7 @@ my $file = "$dir/draknet$suffix";
     getVarsFromSh("$dir/drakconnect_conf");
 }
 
-sub get_net_device {
+sub get_net_device() {
 	#${{ read_raw_net_conf() }}{InternetInterface};
 	my $connect_file = "/etc/sysconfig/network-scripts/net_cnx_up";
 	my $network_file = "/etc/sysconfig/network";

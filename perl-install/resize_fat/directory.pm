@@ -28,7 +28,7 @@ my $psizeof_format = psizeof($format);
 
 1;
 
-sub entry_size { $psizeof_format }
+sub entry_size() { $psizeof_format }
 
 #- call `f' for each entry of the directory
 #- if f return true, then modification in the entry are taken back

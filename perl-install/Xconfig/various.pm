@@ -142,7 +142,7 @@ sub configure_FB_TVOUT {
     }
 }
 
-sub check_XF86Config_symlink {
+sub check_XF86Config_symlink() {
     my $f = "$::prefix/etc/X11/XF86Config-4";
     if (!-l $f && -e "$f.tvout") {
 	rename $f, "$f.standard";

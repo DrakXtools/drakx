@@ -46,7 +46,7 @@ sub get_config_file {
     map { [ split ' ' ] } grep { !/^#/ } cat_("$::prefix/etc/shorewall/$file");
 }
 
-sub default_interfaces {
+sub default_interfaces() {
     my %conf;
 
     my @l = detect_devices::getNet() or return;
@@ -59,7 +59,7 @@ sub default_interfaces {
     \%conf;
 }
 
-sub read {
+sub read() {
     my %conf;
 
     $conf{disabled} = !glob_("$::prefix/etc/rc3.d/S*shorewall");

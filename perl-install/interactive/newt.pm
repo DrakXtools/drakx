@@ -14,7 +14,7 @@ use Newt::Newt; #- !! provides Newt and not Newt::Newt
 my ($width, $height) = (80, 25);
 my @wait_messages;
 
-sub new() {
+sub new {
     Newt::Init();
     Newt::Cls();
     Newt::SetSuspendCallback();
@@ -23,12 +23,12 @@ sub new() {
     bless {}, $_[0];
 }
 
-sub enter_console { Newt::Suspend() }
-sub leave_console { Newt::Resume() }
-sub suspend { Newt::Suspend() }
-sub resume { Newt::Resume() }
+sub enter_console() { Newt::Suspend() }
+sub leave_console() { Newt::Resume() }
+sub suspend() { Newt::Suspend() }
+sub resume() { Newt::Resume() }
 sub end() { Newt::Finished() }
-sub exit() { end(); exit($_[1]) }
+sub exit { end(); exit($_[1]) }
 END { end() }
 
 sub messages { 

@@ -5,7 +5,7 @@ use strict;
 
 use common;
 
-sub main_license {
+sub main_license() {
 N("Introduction
 
 The operating system and the different components available in the Mandrake Linux distribution 
@@ -85,14 +85,14 @@ For any question on this document, please contact MandrakeSoft S.A.
 ");
 }
 
-sub warning_about_patents {
+sub warning_about_patents() {
 "Warning: Free Software may not necessarily be patent free, and some Free
 Software included may be covered by patents in your country. For example, the
 MP3 decoders included may require a licence for further usage (see
 http://www.mp3licensing.com for more details). If you are unsure if a patent
 may be applicable to you, check your local laws.";
 }
-sub com_license { 
+sub com_license() { 
 N("
 Warning
 
@@ -124,7 +124,7 @@ copyright laws applicable to software programs.
 ");
 }
 
-sub install_completed {
+sub install_completed() {
 N("Congratulations, installation is complete.
 Remove the boot media and press return to reboot.
 

@@ -37,7 +37,7 @@ sub del_loop {
     my ($dev) = @_;
     run_program::run("losetup", "-d", $dev);
 }
-sub find_free_loop {
+sub find_free_loop() {
     foreach (0..7) {
 	my $dev = make("loop$_");
 	sysopen(my $F, $dev, 2) or next;

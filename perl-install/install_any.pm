@@ -188,13 +188,13 @@ sub clean_postinstall_rpms() {
 #-######################################################################################
 #- Functions
 #-######################################################################################
-sub getNextStep {
+sub getNextStep() {
     my ($s) = $::o->{steps}{first};
     $s = $::o->{steps}{$s}{next} while $::o->{steps}{$s}{done} || !$::o->{steps}{$s}{reachable};
     $s;
 }
 
-sub spawnShell {
+sub spawnShell() {
     return if $::o->{localInstall} || $::testing;
 
     -x "/bin/sh" or die "cannot open shell - /bin/sh doesn't exist";
@@ -280,7 +280,6 @@ sub setPackages {
 	#- open rpm db according to right mode needed.
 	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{prefix}, $rebuild_needed);
 
-	pkgs::getDeps($o->{prefix}, $o->{packages});
 	pkgs::selectPackage($o->{packages},
 			    pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
 
@@ -288,9 +287,6 @@ sub setPackages {
 	#- installed and provides what is necessary).
 	pkgs::selectPackage($o->{packages},
 			    pkgs::bestKernelPackage($o->{packages}) || die("missing kernel package"), 1);
-
-	#- must be done after selecting base packages (to save memory)
-	pkgs::getProvides($o->{packages});
 
 	#- must be done after getProvides
 	pkgs::read_rpmsrate($o->{packages}, getFile("Mandrake/base/rpmsrate"));
@@ -507,7 +503,7 @@ sub write_smb_conf {
 ");
 }
 
-sub killCardServices {
+sub killCardServices() {
     my $pid = chomp_(cat_("/tmp/cardmgr.pid"));
     $pid and kill(15, $pid); #- send SIGTERM
 }
@@ -609,8 +605,8 @@ sub install_urpmi {
   hdlist: hdlist.$name.cz
   with_hdlist: ../base/" . ($_->{update} ? "hdlist.cz" : $_->{hdlist}) . ($need_list ? "
   list: list.$name" : "") . ($dir =~ /removable:/ && "
-  removable: /dev/cdrom") . ("
-  update") . "
+  removable: /dev/cdrom") . "
+  update" . "
 }
 
 ";
@@ -1111,7 +1107,7 @@ sub remove_unused {
     }
 }
 
-sub remove_bigseldom_used {
+sub remove_bigseldom_used() {
     log::l("remove_bigseldom_used");
     $::testing and return;
     remove_unused();

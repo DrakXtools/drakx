@@ -30,7 +30,7 @@ sub cylinder_size {
 
 init();
 
-sub init {
+sub init() {
     eval { modules::load('lvm-mod') };
     run_program::run('vgscan') if !-e '/etc/lvmtab';
     run_program::run('vgchange', '-a', 'y');

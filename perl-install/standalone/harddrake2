@@ -330,7 +330,7 @@ $_->hide foreach $module_cfg_button, $config_button; # hide buttons while no dev
 $w->main;
 
 
-sub quit_global {
+sub quit_global() {
     kill(15, $pid) if $pid;
     setVarsInSh($conffile, \%options);
     ugtk2->exit(0);

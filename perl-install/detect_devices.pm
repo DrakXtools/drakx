@@ -22,10 +22,10 @@ my %serialprobe;
 #-######################################################################################
 #- Functions
 #-######################################################################################
-sub dev_is_devfs { -e "/dev/.devfsd" } #- no $::prefix, returns false during install and that's nice :)
+sub dev_is_devfs() { -e "/dev/.devfsd" } #- no $::prefix, returns false during install and that's nice :)
 
 
-sub get {
+sub get() {
     #- Detect the default BIOS boot harddrive is kind of tricky. We may have IDE,
     #- SCSI and RAID devices on the same machine. From what I see so far, the default
     #- BIOS boot harddrive will be
@@ -35,15 +35,15 @@ sub get {
 
     getIDE(), getSCSI(), getDAC960(), getCompaqSmartArray(), getATARAID();
 }
-sub hds         { grep { $_->{media_type} eq 'hd' && !isRemovableDrive($_) } get() }
-sub tapes       { grep { $_->{media_type} eq 'tape' } get() }
-sub cdroms      { grep { $_->{media_type} eq 'cdrom' } get() }
-sub burners     { grep { isBurner($_) } cdroms() }
-sub dvdroms     { grep { isDvdDrive($_) } cdroms() }
-sub raw_zips    { grep { member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) } get() }
+sub hds()         { grep { $_->{media_type} eq 'hd' && !isRemovableDrive($_) } get() }
+sub tapes()       { grep { $_->{media_type} eq 'tape' } get() }
+sub cdroms()      { grep { $_->{media_type} eq 'cdrom' } get() }
+sub burners()     { grep { isBurner($_) } cdroms() }
+sub dvdroms()     { grep { isDvdDrive($_) } cdroms() }
+sub raw_zips()    { grep { member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) } get() }
 #-sub jazzs     { grep { member($_->{media_type}, 'fd', 'hd') && isJazzDrive($_) } get() }
-sub ls120s      { grep { member($_->{media_type}, 'fd', 'hd') && isLS120Drive($_) } get() }
-sub zips        {
+sub ls120s()      { grep { member($_->{media_type}, 'fd', 'hd') && isLS120Drive($_) } get() }
+sub zips()        {
     map { 
 	$_->{device} .= 4; 
 	$_->{devfs_device} = $_->{devfs_prefix} . '/part4'; 
@@ -51,8 +51,8 @@ sub zips        {
     } raw_zips();
 }
 
-sub cdroms__faking_ide_scsi { grep { $_->{media_type} eq 'cdrom' } cdroms_and_zips__faking_ide_scsi() }
-sub cdroms_and_zips__faking_ide_scsi {
+sub cdroms__faking_ide_scsi() { grep { $_->{media_type} eq 'cdrom' } cdroms_and_zips__faking_ide_scsi() }
+sub cdroms_and_zips__faking_ide_scsi() {
     my @l = grep { $_->{media_type} eq 'cdrom' || member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) } get();
 
     if (my @l_need_fake = grep { !$::isStandalone && $_->{bus} eq 'ide' && !($_->{media_type} eq 'cdrom' && !isBurner($_)) } @l) {
@@ -101,10 +101,10 @@ sub floppies() {
     @ide, @scsi, @fds;
 }
 sub floppies_dev() { map { $_->{device} } floppies() }
-sub floppy { first(floppies_dev()) }
+sub floppy() { first(floppies_dev()) }
 #- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
 
-sub removables {
+sub removables() {
     floppies(), cdroms_and_zips__faking_ide_scsi();
 }
 
@@ -341,7 +341,7 @@ sub getDAC960() {
     values %idi;
 }
 
-sub getATARAID {
+sub getATARAID() {
     my %l;
     foreach (syslog()) {
 	my ($device) = m|^\s*(ataraid/d\d+):| or next;
@@ -361,7 +361,7 @@ sub getATARAID {
 # cpu_freq = arch() =~ /^alpha/ ? "cycle frequency [Hz]" :
 # arch() =~ /^ppc/ ? "clock" : "cpu MHz"
 
-sub getCPUs { 
+sub getCPUs() { 
     my (@cpus, $cpu);
     foreach (cat_("/proc/cpuinfo")) {
 	   if (/^processor/) { # ix86 specific
@@ -375,13 +375,13 @@ sub getCPUs {
     @cpus;
 }
 
-sub getSoundDevices {
+sub getSoundDevices() {
     (arch() =~ /ppc/ ? \&modules::load_category : \&modules::probe_category)->('multimedia/sound');
 }
 
 sub isTVcard { $_[0]{driver} =~ /bttv|saa7134/ }
 
-sub getTVcards { 
+sub getTVcards() { 
     grep { isTVcard($_) } detect_devices::probeall();
 }
 
@@ -411,10 +411,10 @@ sub getModem() {
     getSerialModem({}), @pci_modems;
 }
 
-sub getSpeedtouch {
+sub getSpeedtouch() {
     grep { $_->{description} eq 'Alcatel|USB ADSL Modem (Speed Touch)' } probeall(0);
 }
-sub getSagem {
+sub getSagem() {
     grep { $_->{description} eq 'Analog Devices Inc.|USB ADSL modem' } probeall(0);
 }
 
@@ -478,7 +478,7 @@ sub pci_probe {
     } c::pci_probe($probe_type || 0));
 }
 
-sub usb_probe {
+sub usb_probe() {
     -e "/proc/bus/usb/devices" or return;
 
     add_addons($usbtable_addons, map {
@@ -490,7 +490,7 @@ sub usb_probe {
     } c::usb_probe());
 }
 
-sub pcmcia_probe {
+sub pcmcia_probe() {
     -e '/var/run/stab' || -e '/var/lib/pcmcia/stab' or return ();
 
     my (@devs, $desc);
@@ -541,7 +541,7 @@ sub tryWrite($) {
     sysopen $F, devices::make($_[0]), 1 | c::O_NONBLOCK() and $F;
 }
 
-sub syslog {
+sub syslog() {
     -r "/tmp/syslog" and return map { /<\d+>(.*)/ } cat_("/tmp/syslog");
     my $LD_LOADER = $ENV{LD_LOADER} || "";
     `$LD_LOADER /bin/dmesg`;
@@ -567,23 +567,23 @@ sub get_mac_generation() {
     return "Unknown Generation";	
 }
 
-sub hasSMP { !$::testing && c::detectSMP() }
-sub hasPCMCIA { $::o->{pcmcia} } #- because /proc/pcmcia seems not to be present on 2.4 at least (or use /var/run/stab)
+sub hasSMP() { !$::testing && c::detectSMP() }
+sub hasPCMCIA() { $::o->{pcmcia} } #- because /proc/pcmcia seems not to be present on 2.4 at least (or use /var/run/stab)
 
 #- try to detect a laptop, we assume pcmcia service is an indication of a laptop or
 #- the following regexp to match graphics card apparently only used for such systems.
-sub isLaptop {
+sub isLaptop() {
     hasPCMCIA() || (matching_desc('C&T.*655[45]\d') || matching_desc('C&T.*68554') ||
 		    matching_desc('Neomagic.*Magic(Media|Graph)') ||
 		    matching_desc('ViRGE.MX') || matching_desc('S3.*Savage.*[IM]X') ||
 		    matching_desc('ATI.*(Mobility|LT)'));
 }
 
-sub usbMice      { grep { $_->{media_type} =~ /\|Mouse/ && $_->{driver} !~ /Tablet:wacom/ ||
+sub usbMice()      { grep { $_->{media_type} =~ /\|Mouse/ && $_->{driver} !~ /Tablet:wacom/ ||
 			  $_->{driver} =~ /Mouse:USB/ } usb_probe() }
-sub usbWacom     { grep { $_->{driver} =~ /Tablet:wacom/ } usb_probe() }
-sub usbKeyboards { grep { $_->{media_type} =~ /\|Keyboard/ } usb_probe() }
-sub usbStorage   { grep { $_->{media_type} =~ /Mass Storage\|/ } usb_probe() }
+sub usbWacom()     { grep { $_->{driver} =~ /Tablet:wacom/ } usb_probe() }
+sub usbKeyboards() { grep { $_->{media_type} =~ /\|Keyboard/ } usb_probe() }
+sub usbStorage()   { grep { $_->{media_type} =~ /Mass Storage\|/ } usb_probe() }
 
 sub usbKeyboard2country_code {
     my ($usb_kbd) = @_;
@@ -594,7 +594,7 @@ sub usbKeyboard2country_code {
       unpack("C", $tmp);
 }
 
-sub probeSerialDevices {
+sub probeSerialDevices() {
     foreach (0..3) {
 	#- make sure the device are created before probing,
 	devices::make("/dev/ttyS$_");
@@ -634,7 +634,7 @@ sub hasMousePS2 {
     my $t; sysread(tryOpen($_[0]) || return, $t, 256) != 1 || $t ne "\xFE";
 }
 
-sub raidAutoStartIoctl {
+sub raidAutoStartIoctl() {
     sysopen(my $F, devices::make("md0"), 2) or return;
     ioctl $F, 2324, 0;
 }
@@ -677,7 +677,7 @@ sub raidAutoStart {
     }
 }
 
-sub is_a_recent_computer {
+sub is_a_recent_computer() {
     my ($frequence) = map { /cpu MHz\s*:\s*(.*)/ } cat_("/proc/cpuinfo");
     $frequence > 600;
 }

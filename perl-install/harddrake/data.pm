@@ -11,7 +11,7 @@ our ($version, $sbindir, $bindir) = ("9.1.0", "/usr/sbin", "/usr/bin");
 my @devices = detect_devices::probeall(1);
 
 # Update me each time you handle one more devices class (aka configurator)
-sub unknown {
+sub unknown() {
     grep { $_->{media_type} !~ /BRIDGE|class\|Mouse|DISPLAY|Hub|MEMORY_RAM|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|NETWORK|Printer|SERIAL_(USB|SMBUS)|STORAGE_(IDE|OTHER|SCSI)|tape/
 	       && $_->{driver} !~ /^(ohci1394|scanner|usbvision|mod_quickcam)$|Mouse:USB|class\|Mouse|Removable:zip|www.linmodems.org|nvnet/
 	       && $_->{type} ne 'network'

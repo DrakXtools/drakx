@@ -304,11 +304,11 @@ sub create_buttons4partitions {
 ################################################################################
 # disks: helpers
 ################################################################################
-sub current_hd { 
+sub current_hd() { 
     $current_kind->{type} eq 'hd' or die 'current_hd called but $current_kind is not an hd';
     $current_kind->{val};
 }
-sub current_part {
+sub current_part() {
     current_hd();
     $current_entry;
 }
@@ -369,14 +369,14 @@ sub lvm2kind {
 ################################################################################
 # raids: helpers
 ################################################################################
-sub raid2kind {
+sub raid2kind() {
     { type => 'raid', name => 'raid', val => $all_hds->{raids} };
 }
 
 ################################################################################
 # loopbacks: helpers
 ################################################################################
-sub loopback2kind {
+sub loopback2kind() {
     { type => 'loopback', name => 'loopback', val => $all_hds->{loopbacks} };
 }
 

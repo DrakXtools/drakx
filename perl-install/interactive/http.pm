@@ -17,7 +17,7 @@ my $uid;
 my $pipe_r = "/tmp/interactive_http_r";
 my $pipe_w = "/tmp/interactive_http_w";
 
-sub open_stdout {
+sub open_stdout() {
     open STDOUT, ">$pipe_w" or die;
     $| = 1;
     print CGI::header();
@@ -31,12 +31,12 @@ sub cont_stdout {
     $no_header = 0;
 }
 
-sub new_uid {
+sub new_uid() {
     my ($s, $ms) = gettimeofday();
     $s * 256 + $ms % 256;
 }
 
-sub new() {
+sub new {
     open_stdout();
     bless {}, $_[0];
 }
@@ -49,7 +49,7 @@ sub end() {
     close STDOUT;
     unlink $pipe_r, $pipe_w;
 }
-sub exit() { end(); exit($_[1]) }
+sub exit { end(); exit($_[1]) }
 END { end() }
 
 sub ask_fromW {

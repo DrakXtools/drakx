@@ -78,7 +78,11 @@ Continue at your own risk."), formatError($@) ]) if $@;
     }
 }
 
-sub errorInStep($$) { print "error :(\n"; c::_exit(1) }
+sub errorInStep { 
+    my ($_o, $_err) = @_;
+    print "error :(\n"; 
+    c::_exit(1);
+}
 sub kill_action {}
 
 #-######################################################################################

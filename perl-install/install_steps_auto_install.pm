@@ -90,9 +90,12 @@ sub ask_warn {
     log::l(ref($_[1]) ? join " ", @{$_[1]} : $_[1]);
 }
 
-sub wait_message {}
+sub wait_message {
+    my ($_o, $_title, $_message) = @_;
+}
 
 sub errorInStep {
+    my ($_o, $_err) = @_;
     print "error :(\n"; 
     print "switch to console f2 for a shell\n";
     print "Press <Enter> to reboot\n";

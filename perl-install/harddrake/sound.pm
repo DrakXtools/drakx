@@ -288,7 +288,7 @@ The current driver for your \"%s\" sound card is \"%s\" ", $device->{description
 }
 
 
-sub configure_sound_slots {
+sub configure_sound_slots() {
     each_index {
         modules::add_alias("sound-slot-$::i", $_->{driver});
     } detect_devices::getSoundDevices();

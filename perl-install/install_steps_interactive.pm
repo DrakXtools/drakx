@@ -35,7 +35,7 @@ use log;
 #-######################################################################################
 #- In/Out Steps Functions
 #-######################################################################################
-sub errorInStep($$) {
+sub errorInStep {
     my ($o, $err) = @_;
     $o->ask_warn(N("Error"), [ N("An error occurred"), formatError($err) ]);
 }
@@ -45,7 +45,9 @@ sub kill_action {
     $o->kill;
 }
 
-sub charsetChanged {}
+sub charsetChanged {
+    my ($_o) = @_;
+}
 
 #-######################################################################################
 #- Steps Functions

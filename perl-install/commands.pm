@@ -38,13 +38,13 @@ sub getopts {
     @r;
 }
 
-sub true { exit 0 }
-sub false { exit 1 }
+sub true() { exit 0 }
+sub false() { exit 1 }
 sub cat { @ARGV = @_; print while <> }
 sub dirname_ { print dirname(@_), "\n" }
 sub basename_ { print basename(@_), "\n" }
 sub rmdir_ { foreach (@_) { rmdir $_ or die "rmdir: can't remove $_\n" } }
-sub lsmod { print "Module                  Size  Used by\n"; cat("/proc/modules") }
+sub lsmod() { print "Module                  Size  Used by\n"; cat("/proc/modules") }
 sub which { 
   ARG: foreach (@_) { foreach my $c (split /:/, $ENV{PATH}) { -x "$c/$_" and print("$c/$_\n"), next ARG } }
 }
@@ -447,13 +447,13 @@ sub kill {
     kill $signal, @_ or die "kill failed: $!\n";
 }
 
-sub lspci {
+sub lspci() {
     require detect_devices;
     print join "\n", detect_devices::stringlist(1), '';
 }
 *lssbus = \&lspci;
 
-sub dmesg { print cat_("/tmp/syslog") }
+sub dmesg() { print cat_("/tmp/syslog") }
 
 sub sort {
     my ($n, $h) = getopts(\@_, qw(nh));
@@ -518,6 +518,6 @@ sub loadkeys {
     keyboard::setup({ KEYBOARD => $_[0] });
 }
 
-sub sync { common::sync() }
+sub sync() { common::sync() }
 
 1;

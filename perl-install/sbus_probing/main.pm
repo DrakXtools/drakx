@@ -127,7 +127,7 @@ sub prom_walk {
     $nextnode = c::prom_getsibling($node) and prom_walk($sbus_probed, $nextnode, $sbus, $ebus);
 }
 
-sub probe {
+sub probe() {
     eval { modules::load("openprom") } if arch() =~ /sparc/;
     my $root_node = c::prom_open() or return;
     my @l;

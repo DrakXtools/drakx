@@ -123,7 +123,7 @@ sub list_langs {
     $options{exclude_non_installed} ? grep { -e "/usr/share/locale/".l2locale($_)."/LC_CTYPE" } @l : @l;
 }
 
-sub text_direction_rtl { N("default:LTR") eq "default:RTL" }
+sub text_direction_rtl() { N("default:LTR") eq "default:RTL" }
 
 
 #- key: country name (that should be YY in xx_YY locale)
@@ -978,7 +978,7 @@ sub load_mo {
 
 
 #- used in Makefile during "make get_needed_files"
-sub console_font_files {
+sub console_font_files() {
     map { -e $_ ? $_ : "$_.gz" }
       (map { "/usr/lib/kbd/consolefonts/$_.psf" } uniq grep { $_ } map { $_->[0] } values %charsets),
       (map { -e $_ ? $_ : "$_.sfm" } map { "/usr/lib/kbd/consoletrans/$_" } uniq grep { $_ } map { $_->[1] } values %charsets),
@@ -1026,11 +1026,11 @@ sub during_install__l2charset {
     uc($c);
 }
 
-sub get_unneeded_png_lang_files {
+sub get_unneeded_png_lang_files() {
     print join(' ', map { m|(langs/lang-(.*)\.png)|; if_(!member($2, list_langs()), $1) } glob("pixmaps/langs/lang-*.png"));
 }
 
-sub check {
+sub check() {
     $^W = 0;
     my $ok = 1;
     my $warn = sub {

@@ -235,7 +235,7 @@ sub isdn_ask_info {
     ask_info2($isdn, $netc);
 }
 
-sub isdn_ask_protocol {
+sub isdn_ask_protocol() {
     my @toto = (
 	      { description => $::expert ? N("European protocol (EDSS1)") : N("European protocol"),
 		protokol => 2 },
@@ -327,7 +327,7 @@ sub isdn_detect_backend {
     }
 }
 
-sub isdn_get_list {
+sub isdn_get_list() {
     map { $_->{description} } @isdn::isdndata;
 }
 

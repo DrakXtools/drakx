@@ -261,11 +261,11 @@ sub add_smbnfs {
     $kind;
 }
 
-sub nfs2kind {
+sub nfs2kind() {
     network::nfs->new({ type => 'nfs', name => 'NFS', val => $all_hds->{nfss}, no_auto => 1 });
 }
 
-sub smb2kind {
+sub smb2kind() {
     network::smb->new({ type => 'smb', name => 'Samba', val => $all_hds->{smbs}, no_auto => 1 });
 }
 

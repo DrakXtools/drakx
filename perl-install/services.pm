@@ -276,7 +276,7 @@ sub doit {
 #- returns: 
 #--- the listref of installed services
 #--- the listref of "on" services
-sub services {
+sub services() {
     local $ENV{LANGUAGE} = 'C';
     my @raw_l = map { chomp; $_ } run_program::rooted_get_stdout($::prefix, '/sbin/chkconfig', '--list');
     my @l;
@@ -339,7 +339,7 @@ sub is_service_running ($) {
 
 sub starts_on_boot {
     my ($service) = @_;
-    my (undef, $on_services) = services($::prefix);
+    my (undef, $on_services) = services();
     member($service, @$on_services);
 }
 

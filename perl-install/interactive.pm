@@ -107,16 +107,16 @@ sub vnew {
 
     require 'log.pm'; #- "require log" causes some pb, perl thinking that "log" is the log() function
     undef *log::l;
-    *log::l = sub {}; # otherwise, it will bother us :(
+    *log::l = sub() {}; # otherwise, it will bother us :(
     require interactive::newt;
     interactive::newt->new;
 }
 
-sub enter_console {}
-sub leave_console {}
-sub suspend {}
-sub resume {}
-sub end {}
+sub enter_console() {}
+sub leave_console() {}
+sub suspend() {}
+sub resume() {}
+sub end() {}
 sub exit { exit($_[0]) }
 
 #-######################################################################################
@@ -444,7 +444,7 @@ sub wait_message {
     $b;
 }
 
-sub kill {}
+sub kill() {}
 
 
 

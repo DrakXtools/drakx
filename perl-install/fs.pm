@@ -298,7 +298,7 @@ sub auto_fs() {
     grep { chop; $_ && !/nodev/ } cat_("/etc/filesystems");
 }
 
-sub mount_options {
+sub mount_options() {
     my %non_defaults = (
 			sync => 'async', noatime => 'atime', noauto => 'auto', ro => 'rw', 
 			user => 'nouser', nodev => 'dev', noexec => 'exec', nosuid => 'suid',

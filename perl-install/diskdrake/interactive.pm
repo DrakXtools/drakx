@@ -235,6 +235,7 @@ sub main {
 # general actions
 ################################################################################
 sub general_possible_actions {
+    my ($_in, $_all_hds) = @_;
     N_("Undo"), ($::expert ? N_("Toggle to normal mode") : N_("Toggle to expert mode"));
 }
 
@@ -932,8 +933,8 @@ sub Options {
 
 { 
     no strict; 
-    *{'Toggle to normal mode'} = sub { $::expert = 0 };
-    *{'Toggle to expert mode'} = sub { $::expert = 1 };
+    *{'Toggle to normal mode'} = sub() { $::expert = 0 };
+    *{'Toggle to expert mode'} = sub() { $::expert = 1 };
     *{'Clear all'} = \&Clear_all;
     *{'Auto allocate'} = \&Auto_allocate;
     *{'Mount point'} = \&Mount_point;

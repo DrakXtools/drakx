@@ -137,7 +137,7 @@ sub formatTime {
     }
 }
 
-sub usingRamdisk { any { /ram3/ } cat_("/proc/mounts") }
+sub usingRamdisk() { any { /ram3/ } cat_("/proc/mounts") }
 
 sub expand_symlinks_but_simple {
     my ($f) = @_;
@@ -160,7 +160,7 @@ sub group_n_lm {
     @l
 }
 
-sub screenshot_dir__and_move {
+sub screenshot_dir__and_move() {
     my ($dir1, $dir2) = ("$::prefix/root", '/tmp/stage2');
     if (-e $dir1) {
 	if (-e "$dir2/DrakX-screenshots") {
@@ -173,7 +173,7 @@ sub screenshot_dir__and_move {
     }
 }
 
-sub take_screenshot {
+sub take_screenshot() {
     my $dir = screenshot_dir__and_move() . '/DrakX-screenshots';
     my $warn;
     if (!-e $dir) {
@@ -241,11 +241,11 @@ sub set_permissions {
 	or die "Could not start chmod!";
 }
 
-sub mandrake_release {
+sub mandrake_release() {
     chomp_(cat_("/etc/mandrake-release"))
 }
 
-sub require_root_capability {
+sub require_root_capability() {
     return unless $>; # we're already root
     if (check_for_xserver()) {
 	if (fuzzy_pidofs(qr/\bkwin\b/) > 0) {
@@ -258,7 +258,7 @@ sub require_root_capability {
     die "you must be root to run this program" if $>;
 }
 
-sub check_for_xserver {
+sub check_for_xserver() {
     if (!defined $::xtest) {
         $::xtest = $ENV{DISPLAY} && system('/usr/X11R6/bin/xtest') == 0;
     }

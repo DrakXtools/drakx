@@ -39,7 +39,7 @@ sub unquotify {
     $$word =~ s/^(['"]?)(.*)\1$/$2/;
 }
 
-sub read_secret_backend {
+sub read_secret_backend() {
     my $conf;
     foreach my $i ("pap-secrets", "chap-secrets") {
 	foreach (cat_("$prefix/etc/ppp/$i")) {
@@ -102,9 +102,9 @@ Try to reconfigure your connection.");
     $up;
 }
 
-sub connect_backend { run_program::rooted($prefix, "$connect_prog &") }
+sub connect_backend() { run_program::rooted($prefix, "$connect_prog &") }
 
-sub disconnect_backend { run_program::rooted($prefix, "$disconnect_file &") }
+sub disconnect_backend() { run_program::rooted($prefix, "$disconnect_file &") }
 
 sub read_providers_backend { my ($file) = @_; map { /(.*?)=>/ } catMaybeCompressed($file) }
 
@@ -141,7 +141,7 @@ sub ask_info2 {
     1;
 }
 
-sub detect_timezone {
+sub detect_timezone() {
     my %tmz2country = ( 
 		       'Europe/Paris' => N("France"),
 		       'Europe/Amsterdam' => N("Netherlands"),
@@ -170,7 +170,7 @@ sub type2interface {
 					     [ lan => 'eth' ];
 }
 
-sub connected { gethostbyname("mandrakesoft.com") ? 1 : 0 }
+sub connected() { gethostbyname("mandrakesoft.com") ? 1 : 0 }
 
 my $kid_pipe;
 sub connected_bg {
@@ -235,7 +235,7 @@ sub test_connected {
     return $current_connection_status;
 }
 
-sub connected2 {
+sub connected2() {
     if ($kid_pid = open(my $kid_to_read, "-|")) {
 	#- parent
 	$kid_to_read;
@@ -247,10 +247,10 @@ sub connected2 {
     }
 }
 
-sub disconnected {}
+sub disconnected() {}
 
 
-sub write_initscript {
+sub write_initscript() {
     $::testing and return;
     output_with_perm("$prefix/etc/rc.d/init.d/internet", 0755,
 		     sprintf(<<'EOF', $connect_file, $connect_file, $disconnect_file, $disconnect_file));

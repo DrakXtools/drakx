@@ -104,7 +104,7 @@ sub verifFile {
     undef;
 }
 
-sub prepare_boot {
+sub prepare_boot() {
     my $r = readlink "$::prefix/boot"; 
     unlink "$::prefix/boot"; 
     mkdir_p("$::prefix/boot");

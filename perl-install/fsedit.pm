@@ -78,7 +78,7 @@ sub typeOfPart {
 #-######################################################################################
 #- Functions
 #-######################################################################################
-sub empty_all_hds {
+sub empty_all_hds() {
     { hds => [], lvms => [], raids => [], loopbacks => [], raw_hds => [], nfss => [], smbs => [], davs => [], special => [] };
 }
 sub recompute_loopbacks {

@@ -11,7 +11,7 @@ use list_modules;
 
 %conf = ();
 
-sub modules_descriptions {
+sub modules_descriptions() {
     my $f = '/lib/modules/' . c::kernel_version() . '/modules.description';
     -e $f or $f = '/lib/modules.description';
     map { /(\S+)\s+(.*)/ } cat_($f);
@@ -130,7 +130,7 @@ sub probe_category {
     } detect_devices::probeall($b_probe_type);
 }
 
-sub load_ide {
+sub load_ide() {
     eval { load("ide-cd") }
 }
 
@@ -347,10 +347,10 @@ sub write_pcmcia {
 #-###############################################################################
 #- internal functions
 #-###############################################################################
-sub loaded_modules { 
+sub loaded_modules() { 
     map { /(\S+)/ } cat_("/proc/modules");
 }
-sub read_already_loaded { 
+sub read_already_loaded() { 
     when_load($_) foreach reverse loaded_modules();
 }
 
@@ -372,7 +372,7 @@ sub when_load {
     }
 }
 
-sub cz_file { 
+sub cz_file() { 
     "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz-" . c::kernel_version();
 }
 

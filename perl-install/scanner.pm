@@ -71,7 +71,7 @@ sub add2dll {
     output("$sanedir/dll.conf", @dllconf);
 }
 
-sub configured {
+sub configured() {
     my @res;
     # Run "scanimage -L", to find the scanners which are already working
     local *LIST;
@@ -309,7 +309,7 @@ sub readScannerDB {
     \%cards;
 }
 
-sub updateScannerDBfromUsbtable {
+sub updateScannerDBfromUsbtable() {
     substInFile { s/END// } "ScannerDB";
     my $to_add = "# generated from usbtable by scannerdrake\n";
     foreach (cat_("$ENV{SHARE_PATH}/ldetect-lst/usbtable")) {

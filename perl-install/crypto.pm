@@ -45,7 +45,7 @@ use ftp;
 %mirrors = ();
 
 sub mirror2text { $mirrors{$_[0]} && $mirrors{$_[0]}[0] . '|' . $_[0] }
-sub mirrors {
+sub mirrors() {
     unless (keys %mirrors) {
 	#- contact the following URL to retrieve list of mirror.
 	#- http://www.linux-mandrake.com/mirrorsfull.list
@@ -98,7 +98,7 @@ sub bestMirror {
 }
 
 #- hack to retrieve Mandrake Linux version...
-sub version {
+sub version() {
     require pkgs;
     my $pkg = pkgs::packageByName($::o->{packages}, 'mandrake-release');
     $pkg && $pkg->version || '9.1'; #- safe but dangerous ;-)

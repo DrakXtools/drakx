@@ -109,7 +109,9 @@ sub is_fbdev {
     val($Screen->{Server}) eq 'FBDev';
 }
 
-sub set_Option {}
+sub set_Option {
+    my ($_raw_X, $_category, $_node, @_names) = @_;
+}
 
 
 sub val {

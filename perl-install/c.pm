@@ -5,7 +5,7 @@ use vars qw($AUTOLOAD);
 use c::stuff;
 use MDK::Common;
 
-sub AUTOLOAD {
+sub AUTOLOAD() {
     $AUTOLOAD =~ /::(.*)/;
     my @l = eval { &{$c::stuff::{$1}} };
     if (my $err = $@) {
