@@ -757,7 +757,6 @@ sub main {
     $o->show;
 
     do {
-	local $::setstep = 1;
 	Gtk2->main;
     } while ($o->{retval} ? $completed && !$completed->() : $canceled && !$canceled->());
     $o->destroy;
@@ -873,15 +872,6 @@ sub _create_window($$) {
 	} elsif (chr($event->keyval) eq 'e' && member('mod1-mask', @{$event->state})) {  #- alt-e
 	    log::l("Switching to " . ($::expert ? "beginner" : "expert"));
 	    $::expert = !$::expert;
-	} elsif ($d) {
-	    #- previous field is created here :(
-	    my $s; foreach (reverse @{$::o->{orderedSteps}}) {
-		$s->{previous} = $_ if $s;
-		$s = $::o->{steps}{$_};
-	    }
-	    $s = $::o->{step};
-	    do { $s = $::o->{steps}{$s}{$d} } until !$s || $::o->{steps}{$s}{reachable};
-	    $::setstep && $s and die "setstep $s\n";
 	}
     }); #- if $::isInstall;
 

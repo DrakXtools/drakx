@@ -111,7 +111,6 @@ sub main {
     $o->show;
 
     do {
-	local $::setstep = 1;
 	Gtk->main;
     } while ($o->{retval} ? $completed && !$completed->() : $canceled && !$canceled->());
     $o->destroy;
@@ -240,17 +239,8 @@ sub _create_window($$) {
 	} elsif (chr($_[1]{keyval}) eq 'e' && $_[1]{state} & 8) {
 	    log::l("Switching to " . ($::expert ? "beginner" : "expert"));
 	    $::expert = !$::expert;
-	} elsif ($d) {
-	    #- previous field is created here :(
-	    my $s; foreach (reverse @{$::o->{orderedSteps}}) {
-		$s->{previous} = $_ if $s;
-		$s = $::o->{steps}{$_};
-	    }
-	    $s = $::o->{step};
-	    do { $s = $::o->{steps}{$s}{$d} } until !$s || $::o->{steps}{$s}{reachable};
-	    $::setstep && $s and die "setstep $s\n";
 	}
-    }); #- if $::isInstall;
+    });
 
     $w->signal_connect(size_allocate => sub {
 	my ($wi, $he) = @{$_[1]}[2,3];

@@ -156,7 +156,6 @@ sub create_steps_window {
 			    $darea->signal_connect(enter_notify_event => sub { $in_button = 1; $draw_pix->($f->('-on')) });
 			    $darea->signal_connect(leave_notify_event => sub { undef $in_button; $draw_pix->($f->('')) });
 			    $darea->signal_connect(button_press_event => sub { $draw_pix->($f->('-click')) });
-			    $darea->signal_connect(button_release_event => sub { $in_button && die "setstep $step_name\n" });
 			}
 			gtkpack_(Gtk2::HBox->new(0,5), 0, $darea, 0, Gtk2::Label->new(translate($step->{text})));
 		    } grep {

@@ -572,17 +572,6 @@ sub main {
 	if ($err) {
 	    local $_ = $err;
 	    $o->kill_action;
-	    if (/^setstep (.*)/) {
-		$o->{step} = $1;
-		$o->{steps}{$1}{done} = 0;
-		$clicked = 1;
-		redo MAIN;
-	    }
-	    if (/^set_theme$/) {
-		require install_gtk;
-		install_gtk::install_theme($o, 'marble3d'); 
-		redo MAIN;
-	    }
 	    if (!/^already displayed/) {
 		eval { $o->errorInStep($_) };
 		$o->{steps}{$o->{step}}{auto} = 0;

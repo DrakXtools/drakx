@@ -217,18 +217,12 @@ sub ask_fromW_real {
 
     my ($canceled);
     do {
-	my $r = do {
-	    local $::setstep = 1;
-	    $form->RunForm;
-	};
+	my $r = $form->RunForm;
 	$canceled = $cancel && $$r == $$cancel;
 
 	if (my ($button) = grep { $$r == ${$_->{w}} } @widgets) {
 	    $get_all->();
-	    my $v = do {
-		local $::setstep = 1;
-		$button->{e}{clicked_may_quit}();
-	    };
+	    my $v = $button->{e}{clicked_may_quit}();
 	    $form->FormDestroy;
 	    Newt::PopWindow();
 	    return $v || &ask_fromW;
