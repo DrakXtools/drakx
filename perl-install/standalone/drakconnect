@@ -65,11 +65,11 @@ import ugtk2 qw(:helpers :wrappers);
 my $expert_mode = 0;
 network::netconnect::read_net_conf('', $netcnx, $netc);
 any::load_category_no_message('net', undef);
-my @all_cards = network::ethernet::conf_network_card_backend ($netc, $intf, undef, undef, undef, undef);
+my @all_cards = network::ethernet::conf_network_card_backend($netc, $intf, undef, undef, undef, undef);
 network::netconnect::load_conf($netcnx, $netc, $intf);
 
 my $window1 = ugtk2->new('drakconnect');
-$window1->{rwindow}->signal_connect (delete_event => sub { ugtk2->exit(0) });
+$window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
 unless ($::isEmbedded) {
     $window1->{rwindow}->set_position('center');
     $window1->{rwindow}->set_title(N("Network configuration (%d adapters)", @all_cards));
@@ -83,7 +83,7 @@ $vbox1->pack_start($hbox1,0,0,0);
 $hbox1->pack_start(new Gtk2::Label(N("Profile: ")),0,0,0);
 
 my $combo1 = new Gtk2::Combo;
-$combo1->set_popdown_strings (network::netconnect::get_profiles());
+$combo1->set_popdown_strings(network::netconnect::get_profiles());
 my $old_profile = $netcnx->{PROFILE};
 $combo1->entry->set_text($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
 $combo1->entry->set_editable(0);
@@ -93,17 +93,17 @@ $button_del->signal_connect(clicked => sub {
 				 my $dialog = new Gtk2::Dialog();
 				 $dialog->set_position('center');
 				 $dialog->vbox->set_border_width(10);
-				 $dialog->signal_connect (delete_event => sub { Gtk2->main_quit() });
+				 $dialog->signal_connect(delete_event => sub { Gtk2->main_quit() });
 				 $dialog->vbox->pack_start(new Gtk2::Label(N("Profile to delete:")),1,1,0);
  				 my $combo_dialog = new Gtk2::Combo;
-				 $combo_dialog->set_popdown_strings (grep { ! /default/ } network::netconnect::get_profiles());
+				 $combo_dialog->set_popdown_strings(grep { ! /default/ } network::netconnect::get_profiles());
 				 $combo_dialog->entry->set_editable(0);
 				 $dialog->vbox->pack_start($combo_dialog,1,1,0);
 				 my $bbox_dialog = new Gtk2::HButtonBox;
 				 $dialog->action_area->add($bbox_dialog);
 				 $bbox_dialog->set_layout('end');
 				 my $button_ok = new Gtk2::Button(N("OK"));
-				 $button_ok->signal_connect (clicked => sub {
+				 $button_ok->signal_connect(clicked => sub {
 								  network::netconnect::del_profile($netcnx, $combo_dialog->entry->get_text());
 								  $netcnx->{PROFILE} eq $combo_dialog->entry->get_text() and $netcnx->{PROFILE} = "default";
 								  Gtk2->main_quit();
@@ -116,7 +116,7 @@ $button_del->signal_connect(clicked => sub {
 				 $dialog->set_modal(1);
 				 Gtk2->main();
 				 $dialog->destroy;
-				 $combo1->entry->set_text((-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $combo1->entry->get_text) ? $combo1->entry->get_text : "default");
+				 $combo1->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $combo1->entry->get_text ? $combo1->entry->get_text : "default");
 				 $combo1->set_popdown_strings(network::netconnect::get_profiles());
 				 apply();
 			     });
@@ -127,7 +127,7 @@ $button_new->signal_connect(clicked => sub {
 				 my $dialog = new Gtk2::Dialog();
 				 $dialog->set_position('center');
 				 $dialog->vbox->set_border_width(10);
-				 $dialog->signal_connect (delete_event => sub { Gtk2->main_quit() });
+				 $dialog->signal_connect(delete_event => sub { Gtk2->main_quit() });
 				 $dialog->vbox->pack_start(new Gtk2::Label(N("Name of the profile to create (the new profile is created as a copy of the current one) :")),1,1,0);
 				 my $entry_dialog = new Gtk2::Entry;
 				 $dialog->vbox->pack_start($entry_dialog,1,1,0);
@@ -135,20 +135,20 @@ $button_new->signal_connect(clicked => sub {
 				 $dialog->action_area->add($bbox_dialog);
 				 $bbox_dialog->set_layout('end');
 				 my $button_ok = new Gtk2::Button(N("OK"));
-				 $button_ok->signal_connect (clicked => sub {
+				 $button_ok->signal_connect(clicked => sub {
 								  network::netconnect::add_profile($netcnx, $entry_dialog->get_text());
 								  $netcnx->{PROFILE} = $entry_dialog->get_text();
 								  Gtk2->main_quit();
 							      });
 				 $bbox_dialog->add($button_ok);
 				 my $button_cancel = new Gtk2::Button(N("Cancel"));
-				 $button_cancel->signal_connect (clicked => sub { Gtk2->main_quit() });
+				 $button_cancel->signal_connect(clicked => sub { Gtk2->main_quit() });
 				 $bbox_dialog->add($button_cancel);
 				 $dialog->show_all;
 				 $dialog->set_modal(1);
 				 Gtk2->main();
 				 $dialog->destroy;
-				 $combo1->entry->set_text((-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $netcnx->{PROFILE}) ? $netcnx->{PROFILE} : "default");
+				 $combo1->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
 				 $combo1->set_popdown_strings(network::netconnect::get_profiles());
 });
 $hbox1->pack_start($button_new,0,0,5);
@@ -172,7 +172,7 @@ $table1->set_row_spacings(5);
 $table1->set_col_spacings(5);
 #$table1->border_width(10);
 $vbox_frame1->pack_start($table1,1,1,0);
-#attach (table, child, left_attach, right_attach, top_attach, bottom_attach, xoptions, yoptions, xpadding, ypadding)
+#attach(table, child, left_attach, right_attach, top_attach, bottom_attach, xoptions, yoptions, xpadding, ypadding)
 #$table->attach($button[0], 0, 1, 0, 1, {expand=>1,fill=>1}, {expand=>1,fill=>1},0,0);
 $table1->attach(new Gtk2::Label(N("Type:")), 0, 1, 0, 1, 'fill', 'fill',0,0);
 my $label4 = new Gtk2::Label($netcnx->{type});
@@ -214,7 +214,7 @@ $table1->attach($button2, 2, 3, 2, 3, 'fill', 'fill',0,0);
 
 my $hbox_frame1_button = new Gtk2::HBox(0,0);
 my $button1 = new Gtk2::Button(N("Configure Internet Access..."));
-$button1->signal_connect(clicked => [ \&configure_net, '', $netcnx, $netc, $intf]);
+$button1->signal_connect(clicked => [ \&configure_net, '', $netcnx, $netc, $intf ]);
 $hbox_frame1_button->pack_start($button1, 0, 0, 0);
 $vbox_frame1->pack_start($hbox_frame1_button,0,0,0);
 
@@ -225,7 +225,7 @@ $vbox1->pack_start($frame2,1,1,0);
 my $vbox2 = new Gtk2::VBox(0,0);
 $vbox2->set_border_width(5);
 $frame2->add($vbox2);
-my $clist1 = new_with_titles Gtk2::CList("", N("Interface"), N("IP address"), N("Protocol"), N("Driver"), N("State"));
+my $clist1 = Gtk2::CList->new_with_titles("", N("Interface"), N("IP address"), N("Protocol"), N("Driver"), N("State"));
 $clist1->set_column_auto_resize($_,1) foreach (0..4);
 $clist1->column_titles_passive();
 $clist1->set_shadow_type('etched_out');
@@ -238,7 +238,7 @@ build_clist();
 
 my $hbox3 = new Gtk2::HBox(0,0);
 my $button3 = new Gtk2::Button(N("Configure Local Area Network..."));
-$button3->signal_connect(clicked => [ \&configure_lan, '', $netcnx, $netc, $intf]);
+$button3->signal_connect(clicked => [ \&configure_lan, '', $netcnx, $netc, $intf ]);
 $hbox3->pack_start($button3, 0, 0, 0);
 $vbox2->pack_start($hbox3, 0, 0, 0);
 
@@ -255,7 +255,7 @@ $button_wizard->signal_connect(clicked => sub {
 				     $::isWizard = 1;
 				     system("drakconnect --wizard");
 # netconnect::intro('', $netcnx, $in);
-				     $combo1->entry->set_text((-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $combo1->entry->get_text) ? $combo1->entry->get_text : "default");
+				     $combo1->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $combo1->entry->get_text ? $combo1->entry->get_text : "default");
 				     network::netconnect::load_conf($netcnx, $netc, $intf);
 				     update();
 				 });
@@ -269,7 +269,7 @@ $bbox1->set_layout('end');
 #$bbox1->set_border_width(5);
 
 my $button_expert = new Gtk2::Button(N("Expert Mode"));
-$button_expert->signal_connect (clicked => sub {
+$button_expert->signal_connect(clicked => sub {
 				     foreach ($button1, $button3) { $expert_mode ? $_->hide() : $_->show() }
 				     $button_expert->child->set($expert_mode ? N("Expert Mode") : N("Normal Mode"));
 				     $expert_mode = !$expert_mode;
@@ -277,26 +277,26 @@ $button_expert->signal_connect (clicked => sub {
 $bbox1->add($button_expert);
 
 my $button_apply = new Gtk2::Button(N("Apply"));
-$button_apply->signal_connect (clicked => sub {
+$button_apply->signal_connect(clicked => sub {
 				 apply();
 			     });
 $button_apply->set_sensitive(0);
 $bbox1->add($button_apply);
 
 my $button_cancel = new Gtk2::Button(N("Cancel"));
-$button_cancel->signal_connect (clicked => sub {
+$button_cancel->signal_connect(clicked => sub {
 				     $combo1->entry->set_text($old_profile);
 				     update();
 				     quit_global();
 				 });
 $bbox1->add($button_cancel);
 my $button_ok = new Gtk2::Button(N("OK"));
-$button_ok->signal_connect (clicked => sub {
+$button_ok->signal_connect(clicked => sub {
 				 my $dialog = new Gtk2::Dialog();
 				 $dialog->set_position('center');
 				 $dialog->vbox->set_border_width(10);
 				 my $label = new Gtk2::Label(N("Please Wait... Applying the configuration"));
-				 $dialog->signal_connect (delete_event => sub { Gtk2->main_quit() });
+				 $dialog->signal_connect(delete_event => sub { Gtk2->main_quit() });
 				 $dialog->vbox->pack_start($label,1,1,20);
 				 $dialog->show_all;
 				 gtkflush();
@@ -317,7 +317,7 @@ $combo1->entry->signal_connect('changed', sub {
 				});
 
 $window1->{rwindow}->show_all();
-$_->hide foreach ($button1, $button3);
+$_->hide foreach $button1, $button3;
 gtkflush();
 $::isEmbedded and kill 'USR2', $::CCPID;
 my $tag = Gtk2->timeout_add(4000, \&update2);
@@ -330,15 +330,15 @@ $in->exit(0);
 
 sub build_clist {
     foreach my $i (0..$#all_cards) {
-	my $ip;
+	my ($ip, $state);
 	if (-e "/sbin/ifconfig") {
 	    local $_ = `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig "eth$i"`;
 	    /inet addr\:$ip_regexp/; $ip = if_($1 && $2 && $3, "$1.$2.$3.$4");
 	    $_ = `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig`;
 	    $state = /eth$i/ ? "up" : "down";
 	} else { $ip = $intf->{"eth$_"}{IPADDR}; $state = "n/a" }
-	$clist1->append("", "eth$i", $ip , $intf->{"eth$i"}{BOOTPROTO}, $all_cards[$i]->[1], $state);
-	$clist1->set_pixmap ($i, 0, gtkcreate_img("eth_card_mini2.png"));
+	$clist1->append("", "eth$i", $ip , $intf->{"eth$i"}{BOOTPROTO}, $all_cards[$i][1], $state);
+	$clist1->set_pixmap($i, 0, gtkcreate_img("eth_card_mini2.png"));
 
 	$clist1->set_selectable($i, 0);
     }
@@ -367,7 +367,7 @@ sub ethisup { `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig` =~ /eth$
 my $to_update;
 sub update {
     my $h = chomp_(`hostname`);
-    $label_host->set ($h);
+    $label_host->set($h);
     $label4->set($netcnx->{type});
     $label5->set($netcnx->{type} eq 'lan' ? N("Gateway:") : N("Interface:"));
     $label6->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
@@ -376,7 +376,7 @@ sub update {
     build_clist();
     $clist1->thaw();
     $button_del->set_sensitive(network::netconnect::get_profiles() > 1);
-    $isconnected !=-1 or return 1;
+    $isconnected != -1 or return 1;
     $label8->set($isconnected ? N("Connected") : N("Not connected"));
     $button2->child->set($isconnected ? N("Disconnect...") : N("Connect..."));
     $button2->set_sensitive(1);
@@ -414,8 +414,8 @@ sub quit_global {
 }
 
 sub configure_lan {
-    my (undef, $prefix, $netcnx, $netc, $intf) = @_;
-    my $window = new Gtk2::Window -toplevel;
+    my (undef, $prefix, $netcnx, undef, $intf) = @_;
+    my $window = Gtk2::Window->new('toplevel');
 
     my @card_tab;
 
@@ -423,7 +423,7 @@ sub configure_lan {
 	my $dialog = new Gtk2::Dialog();
 	$dialog->set_position('center');
 	$dialog->vbox->set_border_width(10);
-	$dialog->signal_connect (delete_event => sub { Gtk2->main_quit() });
+	$dialog->signal_connect(delete_event => sub { Gtk2->main_quit() });
 	$dialog->vbox->pack_start(new Gtk2::Label(N("You don't have any configured interface.
 Configure them first by clicking on 'Configure'")),1,1,0);
 	my $bbox_dialog = new Gtk2::HButtonBox;
@@ -439,8 +439,7 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	return;
     }
 
-    $window->set_policy (1, 1, 1);
-    $window->signal_connect (delete_event => sub { Gtk2->main_quit });
+    $window->signal_connect(delete_event => sub { Gtk2->main_quit });
     $window->set_position('center');
     $window->set_title(N("LAN configuration"));
     $window->border_width(10);
@@ -449,7 +448,6 @@ Configure them first by clicking on 'Configure'")),1,1,0);
     $vbox1->pack_start(new Gtk2::Label(N("LAN Configuration")),0,1,0);
     my $notebook = new Gtk2::Notebook;
     $vbox1->pack_start($notebook,0,1,0);
-    my @eth_data;
     foreach (0..$#all_cards) {
 	my @infos;
 	my @conf_data;
@@ -492,8 +490,8 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	if (-e "$prefix/etc/sysconfig/network-scripts/ifcfg-eth$c") {
 	    $widget_temp = gtksignal_connect(new Gtk2::Button(ethisup($c) ? N("deactivate now") : N("activate now")),
 					     clicked => sub {
-						 system("/sbin/if".(ethisup($c)?"down" : "up")." eth$c");
-						 gtkbuttonset($_[0], ethisup($c)? N("deactivate now") : N("activate now"));
+						 system("/sbin/if" . (ethisup($c) ? "down" : "up") . " eth$c");
+						 gtkbuttonset($_[0], ethisup($c) ? N("deactivate now") : N("activate now"));
 					     });
 	} else {
 	    $widget_temp = N("This interface has not been configured yet.\nLaunch the configuration wizard in the main window");
@@ -516,7 +514,7 @@ Configure them first by clicking on 'Configure'")),1,1,0);
     $vbox1->pack_start($bbox1,0,0,10);
     $bbox1->set_layout('end');
     my $button_ok = new Gtk2::Button(N("OK"));
-    $button_ok->signal_connect (clicked => sub {
+    $button_ok->signal_connect(clicked => sub {
 				     foreach (0..$#all_cards) {
 					 my $i = 0;
 					 my @infos = @{$card_tab[2*$_]};
@@ -532,7 +530,7 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 				 });
     $bbox1->add($button_ok);
     my $button_cancel = new Gtk2::Button(N("Cancel"));
-    $button_cancel->signal_connect (clicked => sub { $window->destroy(); Gtk2->main_quit });
+    $button_cancel->signal_connect(clicked => sub { $window->destroy(); Gtk2->main_quit });
     $bbox1->add($button_cancel);
 
     $window->set_modal(1);
@@ -547,19 +545,19 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 
 
 sub configure_net {
-    my (undef, $prefix, $netcnx, $netc, $intf) = @_;
+    my (undef, $_prefix, $netcnx, $netc, $_intf) = @_;
     if (!$netcnx->{type}) {
-	my $dialog = new Gtk2::Dialog();
+	my $dialog = Gtk2::Dialog->new();
 	$dialog->set_position('center');
 	$dialog->vbox->set_border_width(10);
-	$dialog->signal_connect (delete_event => sub { Gtk2->main_quit() });
+	$dialog->signal_connect(delete_event => sub { Gtk2->main_quit() });
 	$dialog->vbox->pack_start(new Gtk2::Label(N("You don't have any internet connection.
 Create one first by clicking on 'Configure'")),1,1,0);
 	my $bbox_dialog = new Gtk2::HButtonBox;
 	$dialog->action_area->add($bbox_dialog);
 	$bbox_dialog->set_layout('end');
 	my $button_ok = new Gtk2::Button(N("OK"));
-	$button_ok->signal_connect (clicked => sub {
+	$button_ok->signal_connect(clicked => sub {
 					 Gtk2->main_quit();
 				     });
 	$bbox_dialog->add($button_ok);
@@ -572,10 +570,8 @@ Create one first by clicking on 'Configure'")),1,1,0);
     my $cnx = {};
     my @infos;
     $cnx = $netcnx->{$netcnx->{type}};
-    my $auto_detect = {};
-    my $window = new Gtk2::Window -toplevel;
-    $window->set_policy (1, 1, 1);
-    $window->signal_connect (delete_event => sub { Gtk2->main_quit });
+    my $window = Gtk2::Window->new('toplevel');
+    $window->signal_connect(delete_event => sub { Gtk2->main_quit });
     $window->set_position('center');
     $window->set_title(N("Internet connection configuration"));
     $window->border_width(10);
@@ -602,32 +598,32 @@ Create one first by clicking on 'Configure'")),1,1,0);
     $frame1->add($vbox2);
     my $i = 0;
 
-    my @conf_data = ([N("Card IRQ"), \$cnx->{irq} ],
-		     [N("Card mem (DMA)"), \$cnx->{mem} ],
-		     [N("Card IO"), \$cnx->{io} ],
-		     [N("Card IO_0"), \$cnx->{io0} ],
-		     [N("Card IO_1"), \$cnx->{io1} ],
-		     [N("Your personal phone number"), \$cnx->{phone_in} ],
-		     [N("Provider name (ex provider.net)"), \$netc->{DOMAINNAME2}],
-		     [N("Provider phone number"), \$cnx->{phone_out} ],
-		     [N("Provider dns 1 (optional)"), \$netc->{dnsServer2}],
-		     [N("Provider dns 2 (optional)"), \$netc->{dnsServer3}],
-		     [N("Account Login (user name)"), \$cnx->{login} ],
-		     [N("Account Password"), \$cnx->{passwd} ],
-		     [N("Dialing mode"), \$cnx->{dialing_mode}, [ "auto", "manual"] ],
-		     [N("Gateway"), \$netc->{GATEWAY}],
-		     [N("Connection name"), \$cnx->{connection} ],
-		     [N("Phone number"), \$cnx->{phone} ],
-		     [N("Login ID"), \$cnx->{login} ],
-		     [N("Password"), \$cnx->{passwd} ],
-		     [N("Authentication"), \$cnx->{auth}, [ N("PAP"), N("Terminal-based"), N("Script-based"), N_("CHAP") ] ],
-		     [N("Domain name"), \$cnx->{domain} ],
-		     [N("First DNS Server (optional)"), \$cnx->{dns1} ],
-		     [N("Second DNS Server (optional)"), \$cnx->{dns2} ],
-		     [N("Ethernet Card"), \$netc->{NET_DEVICE}, [ 'eth0', 'eth1', 'eth2', 'eth3', 'eth4', 'eth5','eth6', 'eth7', 'eth8', 'eth9' ]],
-		     [N("DHCP Client"), \$netcnx->{dhcp_client}, ["dhcp-client", "dhcpcd", "dhcpxd"] ],
-		     [N("Connection speed"), \$cnx->{speed}, ["64 Kb/s", "128 Kb/s"]],
-		     [N("Connection timeout (in sec)"), \$cnx->{huptimeout} ]
+    my @conf_data = ([ N("Card IRQ"), \$cnx->{irq} ],
+		     [ N("Card mem (DMA)"), \$cnx->{mem} ],
+		     [ N("Card IO"), \$cnx->{io} ],
+		     [ N("Card IO_0"), \$cnx->{io0} ],
+		     [ N("Card IO_1"), \$cnx->{io1} ],
+		     [ N("Your personal phone number"), \$cnx->{phone_in} ],
+		     [ N("Provider name (ex provider.net)"), \$netc->{DOMAINNAME2} ],
+		     [ N("Provider phone number"), \$cnx->{phone_out} ],
+		     [ N("Provider dns 1 (optional)"), \$netc->{dnsServer2} ],
+		     [ N("Provider dns 2 (optional)"), \$netc->{dnsServer3} ],
+		     [ N("Account Login (user name)"), \$cnx->{login} ],
+		     [ N("Account Password"), \$cnx->{passwd} ],
+		     [ N("Dialing mode"), \$cnx->{dialing_mode}, [ "auto", "manual" ] ],
+		     [ N("Gateway"), \$netc->{GATEWAY} ],
+		     [ N("Connection name"), \$cnx->{connection} ],
+		     [ N("Phone number"), \$cnx->{phone} ],
+		     [ N("Login ID"), \$cnx->{login} ],
+		     [ N("Password"), \$cnx->{passwd} ],
+		     [ N("Authentication"), \$cnx->{auth}, [ N("PAP"), N("Terminal-based"), N("Script-based"), N_("CHAP") ] ],
+		     [ N("Domain name"), \$cnx->{domain} ],
+		     [ N("First DNS Server (optional)"), \$cnx->{dns1} ],
+		     [ N("Second DNS Server (optional)"), \$cnx->{dns2} ],
+		     [ N("Ethernet Card"), \$netc->{NET_DEVICE}, [ 'eth0', 'eth1', 'eth2', 'eth3', 'eth4', 'eth5', 'eth6', 'eth7', 'eth8', 'eth9' ] ],
+		     [ N("DHCP Client"), \$netcnx->{dhcp_client}, ["dhcp-client", "dhcpcd", "dhcpxd"] ],
+		     [ N("Connection speed"), \$cnx->{speed}, ["64 Kb/s", "128 Kb/s"] ],
+		     [ N("Connection timeout (in sec)"), \$cnx->{huptimeout} ]
 );
     foreach (@conf_data) {
 	$infos[2*$i] = new Gtk2::HBox(0,0);
@@ -651,9 +647,9 @@ Create one first by clicking on 'Configure'")),1,1,0);
     }
     my @mask;
 @mask = (0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0) if $netcnx->{type} eq 'lan';
-@mask = (0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1) if $netcnx->{type} eq'isdn_internal'&& defined $cnx->{vendor} && defined $cnx->{id};
-@mask = (1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1) if $netcnx->{type} eq'isdn_internal'&&(!defined $cnx->{vendor}||!defined $cnx->{id});
-@mask = (0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0) if ($netcnx->{type} eq 'modem'||$netcnx->{type} eq 'isdn_external');
+@mask = (0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1) if $netcnx->{type} eq 'isdn_internal' && defined $cnx->{vendor} && defined $cnx->{id};
+@mask = (1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1) if $netcnx->{type} eq 'isdn_internal' && (!defined $cnx->{vendor} || !defined $cnx->{id});
+@mask = (0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0) if $netcnx->{type} eq 'modem' || $netcnx->{type} eq 'isdn_external';
 @mask = (0,0,0,0,0,0,1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0) if $netcnx->{type} =~ /adsl/;
 @mask = (0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0) if $netcnx->{type} eq 'cable';
     $vbox1->pack_start(new Gtk2::HSeparator,0,0,5);
@@ -663,10 +659,10 @@ Create one first by clicking on 'Configure'")),1,1,0);
     $vbox1->pack_start($bbox1,0,0,0);
     $bbox1->set_layout('end');
     my $button_ok = new Gtk2::Button(N("OK"));
-    $button_ok->signal_connect (clicked => sub {
+    $button_ok->signal_connect(clicked => sub {
 				     $i = 0;
 				     foreach (@mask) {
-					    ${$conf_data[$i]->[1]} = $infos[2*$i+1]->get_text() if ($_);
+					    ${$conf_data[$i]->[1]} = $infos[2*$i+1]->get_text() if $_;
 					    $i++;
 				     }
 				     update();
