@@ -584,9 +584,10 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
     }
 
     #- Search the database entry which matches the detected printer best
+    my $descr = "";
     foreach (@parport) {
 	$device eq $_->{port} or next;
-	my $descr = $_->{val}{DESCRIPTION};
+	$descr = $_->{val}{DESCRIPTION};
 	# Clean up the description from noise which makes the best match
 	# difficult
 	$descr =~ s/\s+Inc\.//;
@@ -608,6 +609,9 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
             (($guessedmake ne "hp") ||
              ($descr !~ /Hewlett[\s-]+Packard/i)))
             {$printer->{DBENTRY} = ""};
+    }
+    if ((!$printer->{currentqueue}{'desc'}) && ($descr)) {
+	$printer->{currentqueue}{'desc'} = $descr;
     }
     1;
 }
@@ -1165,12 +1169,14 @@ sub get_printer_info {
 		if ($printer->{PAPERSIZE}) {
 		    $printer->{SPECIAL_OPTIONS} .= 
 			" -o PageSize=$printer->{PAPERSIZE}";
-		} elsif (($in->{lang}) ||
+		} elsif (($pagesize = $in->{lang}) ||
 			 ($pagesize = $ENV{'LC_PAPER'}) ||
 			 ($pagesize = $ENV{'LANG'}) ||
 			 ($pagesize = $ENV{'LANGUAGE'}) ||
 			 ($pagesize = $ENV{'LC_ALL'})) {
-		    if (($pagesize eq 'en') || ($pagesize eq 'en_US')) {
+		    if (($pagesize =~ /^en_CA/) ||
+			($pagesize =~ /^fr_CA/) || 
+			($pagesize =~ /^en_US/)) {
 			$pagesize = "Letter";
 		    } else {
 			$pagesize = "A4";
@@ -2329,7 +2335,7 @@ sub main {
 		    my @printerlist = 
 			( (sort((map {$printer->{configured}{$_}{'queuedata'}{'menuentry'} 
 				      . ($_ eq $printer->{DEFAULT} ?
-					 _(" (Default)") : ())}
+					 _(" (Default)") : (""))}
 				 keys(%{$printer->{configured}
 					|| {}})),
 				($printer->{SPOOLER} eq "cups" ?

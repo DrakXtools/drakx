@@ -864,7 +864,7 @@ sub get_cups_remote_queues {
 		      ($::expert ? _("CUPS") . $sep : "") .
 		      _("Remote Printers") . "$sep$queuename: $comment"
 		      . ($queuename eq $printer->{DEFAULT} ?
-			 _(" (Default)") : ()));
+			 _(" (Default)") : ("")));
 	    }
 	}
     }

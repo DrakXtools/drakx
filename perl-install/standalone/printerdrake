@@ -32,11 +32,8 @@ local $_ = join '', @ARGV;
 
 /-h/ and die "usage: printerdrake [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing] [--cups] [--lprng] [--lpd] [--pdq]\n";
 
-$::beginner = /-beginner/;
 $::expert = /-expert/;
-$::auto = /-auto/;
 $::noauto = /-noauto/;
-$::skiptest = /-skiptest/;
 $::testing = /-testing/;
 
 my $printer;
