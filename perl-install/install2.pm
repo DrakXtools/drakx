@@ -339,7 +339,6 @@ sub main {
 	install_steps_auto_install_non_interactive::errorInStep();
     };
     $ENV{PERL_BADLANG} = 1;
-    output_p('/mnt/etc/passwd', "root:x:0:0:root:/root:/bin/sh\n"); #- UGLY TEMPORARY FIX
     umask 022;
 
     $::isInstall = 1;
