@@ -210,7 +210,7 @@ sub getFile {
 	    $o_altroot ||= '/tmp/image';
 	    $f2 = "$o_altroot/$rel" if $rel !~ m,^/, && (!$postinstall_rpms || !-e $f2);
 	    #- $f2 = "/$rel" if !$::o->{packages}{mediums}{$asked_medium}{rpmsdir} && !-e $f2; #- not a relative path, should not be necessary with new media layout
-	    my $F; open($F, $f2) && $F or do { log::l("Can't open $f2: $!"); return undef }
+	    my $F; open($F, $f2) && $F or do { $f2 !~ /XXX/ and log::l("Can't open $f2: $!"); return undef }
 	}
     } || errorOpeningFile($f);
 }
