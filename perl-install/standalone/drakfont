@@ -249,16 +249,6 @@ sub search_windows_font {
 	my @list_fonts_win = all("$win_dir/windows/fonts");
 	my @list_fonts_winnt = all("$win_dir/winnt/fonts");
 	my $nb_dir = @list_fonts_win + @list_fonts_winnt;
-	if(!@list_fonts_win && !@list_fonts_winnt) {
-	    print "[35mdrakfont:: could not find any font in $win_dir/win*/fonts [0m\n";
-	    $interactive and display_error(_("could not find any font in %s/win*/fonts", $win_dir));
-	    return 0;
-	}
-	if(!@list_fonts_win && !@list_fonts_winnt) {
-	    print "[35mdrakfont:: could not find any font in $win_dir/win*/fonts [0m\n";
-	    $interactive and display_error(_("could not find any font in %s/win*/fonts", $win_dir));
-	    return 0;
-	}
 	foreach $_ ([\@list_fonts_win, "windows"], [\@list_fonts_winnt, "winnt"]) {
 	    foreach my $i (@{$_->[0]}) {
 		if($interactive) {
@@ -272,6 +262,11 @@ sub search_windows_font {
 	    }
 	}
 	$interactive && $nb_dir and  progress($pbar, 1/4, _("done"));
+    }
+    if(!@font_list) {
+	print "[35mdrakfont:: could not find any font in /win*/fonts [0m\n";
+	$interactive and display_error(_("could not find any font in /win*/fonts"));
+	return 0;
     }
     1;
 }
