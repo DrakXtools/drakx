@@ -42,7 +42,7 @@ foreach (values %suggestions) {
 }
 
 my @suggestions_mntpoints = (
-    "/var/ftp", "/var/www", "/boot",
+    "/var/ftp", "/var/www", "/boot", '/tmp',
     arch() =~ /sparc/ ? "/mnt/sunos" : arch() =~ /ppc/ ? "/mnt/macos" : "/mnt/windows",
 );
 
