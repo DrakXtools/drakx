@@ -25,7 +25,7 @@ our %l = (
         qw(ewrk3  fealnx hamachi hp hp-plus hp100),
         qw(iph5526), #- fibre channel
         qw(lance natsemi ne ne2k-pci ni5010 ni52 ni65 nvnet),
-        qw(pcnet32 plip prism2_plx rcpci),
+        qw(pcnet32 plip prism2_plx rcpci rhineget),
         qw(sb1000 sis900 skfp smc-ultra smc9194 starfire),
         qw(tc35815 tlan tulip typhoon uli526x via-rhine),
         qw(wd winbond-840 forcedeth),
