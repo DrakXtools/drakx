@@ -3,6 +3,7 @@ package Xconfig::monitor; #- $Id$
 use diagnostics;
 use strict;
 
+use Xconfig::xfree;
 use detect_devices;
 use common;
 use any;
@@ -177,7 +178,6 @@ sub getinfoFromDDC() {
     if ($vbe =~ /Memory: (\d+)k/) {
 	$monitor->{VideoRam_probed} = $1;
     }
-    require Xconfig::xfree;
     $monitor->{ModeLine} = Xconfig::xfree::default_ModeLine();
     my $detailed_timings = $monitor->{detailed_timings} || [];
     foreach (grep { !$_->{bad_ratio} } @$detailed_timings) {
