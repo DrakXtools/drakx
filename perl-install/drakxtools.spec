@@ -640,7 +640,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 * Fri Oct  1 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-14mdk
 - mousedrake, harddrake service: do not crash with touchpads (blino)
-- harddrake service: on stop, blacklist snd-usb-audio
+- harddrake service: on stop, blacklist snd-usb-audio (#8004)
 
 * Fri Oct  1 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-13mdk
 - diskdrake: don't die when device-mapper is missing (eg on 2.4
