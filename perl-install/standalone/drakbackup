@@ -385,7 +385,7 @@ sub all_user_list {
     close (PASSWD);
     if ($DEBUG) {
 		print "/--  User list  --/ \n";
-		print " -> $_\n" foreach (@all_user_list);
+		print " -> $_\n" foreach @all_user_list;
 		print "\n";
     }
 }
@@ -411,8 +411,10 @@ sub get_tape_info {
 	my $info = "/tmp/dmesg";
 	@tape_devices = ();
 	system("dmesg | grep 'st[0-9] at' > $info");
-	
+
+	local *INFO;
 	open(INFO, $info) || warn("Can't open $info\n");
+     local $_;
 	while (<INFO>) {
 		@line_data = split(/[ \t,]+/, $_);
 		push @tape_devices, "/dev/" . $line_data[3]; 
@@ -437,7 +439,7 @@ sub get_cd_info {
 			$cd_drives = @line_data-1;
 			chop($line_data[$cd_drives]);
 			@drive_names = @line_data;
-			print "drives: $cd_drives\n" if (!$interactive);
+			print "drives: $cd_drives\n" unless $interactive;
 		}
 		chop($line_data[$cd_drives]) if $cd_drives;
 		if ($line_data[0] eq "drive speed") {
@@ -483,8 +485,9 @@ sub get_cd_info {
 
 	$info = "/tmp/dmesg";
 	system("dmesg | grep sr[0-9] > $info");
-	
+	local *INFO;
 	open(INFO, $info) || warn("Can't open $info\n");
+     local $_;
 	while (<INFO>) {
 		if (/sr[0-9] at/) {
 			@line_data = split(/[ \t,]+/, $_);
@@ -514,7 +517,7 @@ sub get_cd_info {
 		#- in non-interactive mode we just let all the devices through
 		#- as a general purpose probe - in reality we want only burners
 		foreach $key (keys %cd_devices) {
-			delete $cd_devices{$key} if ($cd_devices{$key}{rec_dev} eq '')
+			delete $cd_devices{$key} if $cd_devices{$key}{rec_dev} eq ''
    		}
 	}
 }
@@ -580,7 +583,7 @@ sub save_conf_file {
 	$del_hd_files and push @cfg_list, "DEL_HD_FILES\n" ;
     output_p($cfg_file, @cfg_list);
     chmod(0600, $cfg_file);
-    save_cron_files() if ($backup_daemon);
+    save_cron_files() if $backup_daemon;
 }
 
 sub read_cron_files {
@@ -597,7 +600,7 @@ sub read_cron_files {
 
 sub save_cron_files {
 	if ($nonroot_user) {
-		show_warning("w", N_("Cron not available yet as non-root")) if ($not_warned);
+		show_warning("w", N_("Cron not available yet as non-root")) if $not_warned;
 		$not_warned = 0;
 		$backup_daemon = 0;
 		return(1);
@@ -620,6 +623,7 @@ sub save_cron_files {
 sub read_conf_file {
     if (-e $cfg_file) {
         open (CONF_FILE, "<". $cfg_file) || print "You must be root to read configuration file. \n";
+        local $_;
         while (<CONF_FILE>) {
 	    	next unless /\S/;
 	    	next if /^#/;
@@ -705,11 +709,11 @@ my $in;
 
 sub show_warning {
 	my ($mode, $warning) = @_;
-	$mode = N_("WARNING") if ($mode eq "w");
-	$mode = N_("FATAL") if ($mode eq "f");
-	$mode = N_("INFO") if ($mode eq "i");
+	$mode = N_("WARNING") if $mode eq "w";
+	$mode = N_("FATAL") if $mode eq "f";
+	$mode = N_("INFO") if $mode eq "i";
 	if ($interactive) {
-		$in->ask_warn('',translate("$mode").": ".translate("$warning"));
+		$in->ask_warn('',translate($mode).": ".translate($warning));
 	} else {
 		warn "$mode: $warning\n";
 	}
@@ -787,17 +791,17 @@ sub do_expect {
 	my @send_files = ("$backup_key.pub");
 	
 	#- just bypass progress for sendkey for now
-	$interactive = 0 if ($mode eq "sendkey");
+	$interactive = 0 if $mode eq "sendkey";
 	
-	@send_files = @file_list_to_send_by_ftp if ($mode eq "backup");
+	@send_files = @file_list_to_send_by_ftp if $mode eq "backup";
 	
 	$interactive and $pbar->set_value(0);
 	$interactive and $pbar3->set_value(0);
 	$interactive and progress($pbar, 0.5, "File Transfer...");
 
 	foreach (@send_files) {
-		$exp_command = "scp -P $scp_port $_ $login_user\@$host_name:$host_path" if ($mode eq "backup");
-		$exp_command = "ssh-copy-id -i $_ $login_user\@$host_name" if ($mode eq "sendkey");
+		$exp_command = "scp -P $scp_port $_ $login_user\@$host_name:$host_path" if $mode eq "backup";
+		$exp_command = "ssh-copy-id -i $_ $login_user\@$host_name" if $mode eq "sendkey";
 	
 		if ((-e $backup_key) && ($mode eq "sendkey")) {
 			if ($in->ask_yesorno('', N("%s exists, delete?\n\nWarning: If you've already done this process you'll probably\n need to purge the entry from authorized_keys on the server.", $backup_key))) {
@@ -843,12 +847,12 @@ sub do_expect {
 		); 
 
 		my $exit_stat = $exp->exitstatus;
-		$in->ask_warn('',N("Transfer successful\nYou may want to verify you can login to the server with:\n\nssh -i %s %s\@%s\n\nwithout being prompted for a password.", $backup_key, $login_user, $host_name)) if (($exit_stat eq 0) && ($mode eq "sendkey"));
-		$log_buff .= "$_\n" if (($exit_stat eq 0) && ($mode eq "backup"));
+		$in->ask_warn('',N("Transfer successful\nYou may want to verify you can login to the server with:\n\nssh -i %s %s\@%s\n\nwithout being prompted for a password.", $backup_key, $login_user, $host_name)) if ($exit_stat eq 0) && ($mode eq "sendkey");
+		$log_buff .= "$_\n" if ($exit_stat eq 0) && ($mode eq "backup");
 		$exp->hard_close();
 	}
 	$interactive and progress($pbar, 0.5, "Done...");
-	$interactive = 1 if ($mode eq "sendkey");
+	$interactive = 1 if $mode eq "sendkey";
 }
 
 sub ssh_client {
@@ -866,6 +870,7 @@ sub ssh_client {
 		$interactive and progress($pbar, 0.5, "File Transfer...");
 		$interactive and $stext->set_text($_);
 		$log_buff .= $command . "\n\n";
+          local *TMP;
 		open TMP, "$command 2>&1 |";
 			while ($value = <TMP>) {
 			$log_buff .= $value;
@@ -947,9 +952,9 @@ sub check_for_cd {
 sub write_on_cd {	
 	my $command = "cdrecord -v dev=$cd_device -data ";
 	#- only blank if it's the first session
-	$command .= "blank=fast " if (($media_erase) && ($session_offset eq ''));
+	$command .= "blank=fast " if ($media_erase) && ($session_offset eq '');
 	#- multi-session mode
-	$command .= "-multi -pad " if ($multi_session);
+	$command .= "-multi -pad " if $multi_session;
 	$command .= "$save_path/drakbackup.iso"; 
 	
 	spawn_progress($command, "Running cdrecord");
@@ -980,6 +985,7 @@ sub spawn_progress {
 	$log_buff .= "\n" . $descr . ":\n";
 	$log_buff .= $command . "\n\n";
 	
+     local *TMP;
 	open TMP, "$command 2>&1 |";
 	while ($value = <TMP>) {
 		$log_buff .= $value;
@@ -998,7 +1004,7 @@ sub progress_timeout {
 	my $adj;
 	$new_val = $pbar3->get_value() + 1;
    	$adj = $pbar3->adjustment;
- 	$new_val = $adj->lower if ($new_val > $adj->upper);
+ 	$new_val = $adj->lower if $new_val > $adj->upper;
 	$pbar3->set_value($new_val);	
 	return(1);
 }
@@ -1018,7 +1024,9 @@ sub get_cd_device {
 sub get_cd_volname {
 	#- we want the volname for the catalog
 	my $check_device = get_cd_device();
+     local *TMP;
 	open TMP, "volname $check_device 2>&1 |";
+     local $_;
 	while (<TMP>) {
 		$vol_name = $_;		
 	}
@@ -1128,6 +1136,7 @@ sub send_mail {
     my ($result) = @_;
     my $datem = `date`;
 
+    local *F;
     open F, "|/usr/sbin/sendmail -f$user_mail $user_mail" or return(1);
     print F "From: drakbackup\n";
     print F "To: $user_mail \n";
@@ -1314,12 +1323,12 @@ sub build_backup_files {
 	#- should hit this block if running daemon mode only
 	if ($daemon && $daemon_media) {
 #		ftp_client() if $ftp_daemon;
-		rsync_client() if ($daemon_media eq 'rsync');
-		ssh_client() if (($daemon_media eq 'ssh') && !($use_expect));
-		do_expect("backup", "") if (($daemon_media eq 'ssh') && ($use_expect));
-		webdav_client() if ($daemon_media eq 'webdav');
-		build_cd() if ($daemon_media eq 'cd');
-		build_tape() if ($daemon_media eq 'tape');
+		rsync_client() if $daemon_media eq 'rsync';
+		ssh_client() if $daemon_media eq 'ssh' && !$use_expect;
+		do_expect("backup", "") if ($daemon_media eq 'ssh') && $use_expect;
+		webdav_client() if $daemon_media eq 'webdav';
+		build_cd() if $daemon_media eq 'cd';
+		build_tape() if $daemon_media eq 'tape';
 
 		$results .= N("\nDrakbackup activities via %s:\n\n", $daemon_media) ;
 		$results .= $log_buff;
@@ -1340,10 +1349,10 @@ sub build_backup_files {
 	if (!$daemon) {
 	
 		if ($where_net && $net_proto && ($net_proto ne 'ftp')) {
-			rsync_client() if ($net_proto eq 'rsync');
-			ssh_client() if (($net_proto eq 'ssh') && !($use_expect));
-			do_expect("backup", "") if (($net_proto eq 'ssh') && ($use_expect));
-			webdav_client() if ($net_proto eq 'webdav');
+			rsync_client() if $net_proto eq 'rsync';
+			ssh_client() if ($net_proto eq 'ssh') && !$use_expect;
+			do_expect("backup", "") if ($net_proto eq 'ssh') && ($use_expect);
+			webdav_client() if $net_proto eq 'webdav';
 			$results .= N("\nDrakbackup activities via %s:\n\n", $net_proto);
 		}
 		
@@ -1375,19 +1384,20 @@ sub build_backup_files {
 			$net_proto = '';
 		} 
 		$catalog .= ":$net_proto:$login_user\@$host_name:$host_path" if $net_proto;
-		$catalog .= ":CD:$vol_name:$cd_device" if ($where_cd);
-		$catalog .= ":Tape:$vol_name:$tape_device" if ($where_tape);
-		$catalog .= ":System" if ($backup_sys);
-		$catalog .= ":I" if (($backup_sys_versions) && ($backup_sys));
-		$catalog .= ":F" if ((!$backup_sys_versions) && ($backup_sys));
-		$catalog .= ":Users=(@user_list)" if ($backup_user);
-		$catalog .= ":I" if (($backup_user_versions) && ($backup_user));
-		$catalog .= ":F" if ((!$backup_user_versions) && ($backup_user));
-		$catalog .= ":Other=(@list_other)" if (@list_other);
-		$catalog .= ":I" if (($backup_other_versions) && (@list_other));
-		$catalog .= ":F" if ((!$backup_other_versions) && (@list_other));
+		$catalog .= ":CD:$vol_name:$cd_device" if $where_cd;
+		$catalog .= ":Tape:$vol_name:$tape_device" if $where_tape;
+		$catalog .= ":System" if $backup_sys;
+		$catalog .= ":I" if ($backup_sys_versions) && ($backup_sys);
+		$catalog .= ":F" if (!$backup_sys_versions) && ($backup_sys);
+		$catalog .= ":Users=(@user_list)" if $backup_user;
+		$catalog .= ":I" if ($backup_user_versions) && ($backup_user);
+		$catalog .= ":F" if (!$backup_user_versions) && ($backup_user);
+		$catalog .= ":Other=(@list_other)" if @list_other;
+		$catalog .= ":I" if ($backup_other_versions) && (@list_other);
+		$catalog .= ":F" if (!$backup_other_versions) && (@list_other);
 		$catalog .= "\n";
 			
+          local *CATALOG;
 		open(CATALOG, ">> $cfg_dir/drakbackup_catalog") || show_warning("w", N_("Can't create catalog!"));
 		print(CATALOG $catalog);
 		close(CATALOG);
@@ -1396,8 +1406,8 @@ sub build_backup_files {
 	#- clean up HD files if del_hd_files and media isn't hd
 	if (($del_hd_files) && (($where_cd) || ($where_tape) || ($where_net)) && ($daemon_media ne 'hd'))  {
 		foreach (@file_list_to_send_by_ftp) {
-#			unlink($_) if ((/$tar_ext$/) && (!/backup_base/));
-			unlink($_) if (/$tar_ext$/);
+#			unlink($_) if (/$tar_ext$/) && (!/backup_base/);
+			unlink($_) if /$tar_ext$/;
 		}
 	}
 		
@@ -1432,11 +1442,11 @@ sub require_rpm {
 sub check_pkg_needs {
 	my $extra_pkg = '';
 	if ($where_net) {
-		$extra_pkg = 'rsync' if ($net_proto eq 'rsync');
-		$extra_pkg = 'sitecopy wget' if ($net_proto eq 'webdav');
-		$extra_pkg = 'perl-Expect' if (($net_proto eq 'ssh') && (($use_expect) || ($xfer_keys)));
+		$extra_pkg = 'rsync' if $net_proto eq 'rsync';
+		$extra_pkg = 'sitecopy wget' if $net_proto eq 'webdav';
+		$extra_pkg = 'perl-Expect' if ($net_proto eq 'ssh') && (($use_expect) || ($xfer_keys));
 	}
-	$extra_pkg = 'mt-st' if ($where_tape);
+	$extra_pkg = 'mt-st' if $where_tape;
 	if ($extra_pkg) {
 		if (require_rpm($extra_pkg)) {
 			return(0);
@@ -1484,8 +1494,8 @@ sub show_status {
 sub list_remove {
     my($widget, $list) = @_;
     my @to_remove;
-    push @to_remove, $list->child_position($_) foreach ($list->selection);
-    splice @list_other, $_, 1 foreach (reverse sort @to_remove);
+    push @to_remove, $list->child_position($_) foreach $list->selection;
+    splice @list_other, $_, 1 foreach reverse sort @to_remove;
     $list->remove_items($list->selection);
 }
 
@@ -1533,7 +1543,7 @@ sub filedialog_generic {
 		$file_dialog->destroy() 
 	});
     $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy() });
-	$file_dialog->hide_fileop_buttons() if (!$fileops);
+	$file_dialog->hide_fileop_buttons() if !$fileops;
     $file_dialog->show();
 }
 
@@ -1647,7 +1657,7 @@ sub advanced_what_other {
     my $box_what_other;
     $list_other = new Gtk::List();
     $list_other->set_selection_mode(-extended);
-    $list_other->add(gtkshow(new Gtk::ListItem($_))) foreach (@list_other);
+    $list_other->add(gtkshow(new Gtk::ListItem($_))) foreach @list_other;
     
     gtkpack($advanced_box,
 	    $box_what_other = gtkpack_(new Gtk::VBox(0, 15),
@@ -1819,7 +1829,7 @@ sub advanced_where_net_types {
     $entry_net_type->entry->signal_connect('changed', sub { 
 		$net_proto = $entry_net_type->entry->get_text();
 		my $sensitive = 0;
-		$sensitive = 1 if ($net_proto eq 'ssh');
+		$sensitive = 1 if $net_proto eq 'ssh';
 		$check_use_expect->set_sensitive($sensitive);
 		$check_xfer_keys->set_sensitive($sensitive);
 		$button_xfer_keys->set_sensitive($sensitive);
@@ -1833,7 +1843,7 @@ sub advanced_where_net_types {
 			$where_cd = 0;
 			$where_tape = 0;
 		}
-		$net_proto = '' if ($where_net eq 0); 
+		$net_proto = '' if $where_net eq 0; 
 		${$central_widget}->destroy();
  		$current_widget->();
     });
@@ -1882,7 +1892,7 @@ sub advanced_where_cd {
 	get_cd_info();
 	
 	my $combo_where_cd_device = new Gtk::Combo();
-    $combo_where_cd_device->set_popdown_strings (sort keys %cd_devices) if (keys %cd_devices);  
+    $combo_where_cd_device->set_popdown_strings (sort keys %cd_devices) if keys %cd_devices;  
 	
     my $combo_where_cd_time = new Gtk::Combo();
     $combo_where_cd_time->set_popdown_strings ("650 Mb","700 Mb", "750 Mb", "800 Mb");    
@@ -1895,7 +1905,7 @@ sub advanced_where_cd {
 		push(@dev_codes, $cd_devices{$key}{rec_dev}); 
 	}
 	
-    $combo_where_cdrecord_device->set_popdown_strings (@dev_codes) if (keys %cd_devices);  	 
+    $combo_where_cdrecord_device->set_popdown_strings (@dev_codes) if keys %cd_devices;  	 
 
     gtkpack($advanced_box,
 		$box_where_cd = gtkpack_(new Gtk::VBox(0, 6),
@@ -2022,7 +2032,7 @@ sub advanced_where_tape {
 	get_tape_info();
 
 	my $combo_where_tape_device = new Gtk::Combo();
-    $combo_where_tape_device->set_popdown_strings (@tape_devices) if (@tape_devices);  
+    $combo_where_tape_device->set_popdown_strings (@tape_devices) if @tape_devices;  
 
     my $box_where_tape;
     my $button;
@@ -2583,7 +2593,7 @@ sub system_state {
 		
 		#- tape and CDRW share some features
 		my $erase_media = 'NO';
-		$erase_media = 'YES' if (($media_erase) && ($where_cd || $where_tape)); 
+		$erase_media = 'YES' if ($media_erase) && ($where_cd || $where_tape); 
 		$where_cd and $system_state .= N("\n- Burn to CD");
 		$where_cd and $cdrw and $system_state .= N("RW");
 		$where_cd and $system_state .= N(" on device: %s", $cd_device);
@@ -2689,7 +2699,7 @@ sub select_user_data_to_restore {
 	    	}
 		}
     }
-    $DEBUG and print "real user list to restore:  $_ \n" foreach (@user_list_to_restore);
+    $DEBUG and print "real user list to restore:  $_ \n" foreach @user_list_to_restore;
 }
 
 sub select_sys_data_to_restore {
@@ -2707,7 +2717,7 @@ sub select_sys_data_to_restore {
 	    	$var_eq and push @sys_list_to_restore, $var_exist; 
 	    }
     }
-    $DEBUG and print "sys list to restore: $_\n " foreach (@sys_list_to_restore);
+    $DEBUG and print "sys list to restore: $_\n " foreach @sys_list_to_restore;
 }
 
 sub show_backup_details {
@@ -2733,6 +2743,7 @@ sub show_backup_details {
 	my $command1 = "stat " . $tarfile;
 	$command2 = "tar -tzvf " . $tarfile;
 	
+     local *TMP;
 	open TMP, "$command1 2>&1 |";
 	while ($value = <TMP>) {
 		$archive_file_detail .= $value;			
@@ -2838,7 +2849,7 @@ sub return_path {
     while (defined(my $line = <PASSWD>)) {
 		chomp($line);
 		($usr,$home_dir) = (split(/:/, $line))[0,5];
-		last if ($usr eq $username); 
+		last if $usr eq $username; 
     }
     close (PASSWD);
     return $home_dir;
@@ -3218,9 +3229,9 @@ sub restore_step2 {
     my $user_exist;
 
 	my $restore_info_path = $save_path;
-	$restore_info_path = $path_to_find_restore if (($where_hd) || ($where_cd));
+	$restore_info_path = $path_to_find_restore if ($where_hd) || ($where_cd);
 	my $info_prefix = "backup";
-	$info_prefix = "list" if (($where_net) || ($where_tape));
+	$info_prefix = "list" if ($where_net) || ($where_tape);
 	
     if (-f "$restore_info_path/$info_prefix\_other*") { $other_exist = 1 } 
     else { my $other_exist = 0; $restore_other = 0 }
@@ -3343,12 +3354,12 @@ sub catalog_restore {
 		foreach (@line_data) {
 			if ($indexer != 0) {
 				my $m;
-				$m = "Media: " if ($indexer == 1);
-				$m = "Label or Host: " if ($indexer == 2);
-				$m = "Device or Path: " if ($indexer == 3);
-				$m = "Type: Incremental" if ($_ eq "I");
-				$m = "Type: Full" if ($_ eq "F");
-				$m .= $_ if (($_ ne "I") && ($_ ne "F"));
+				$m = "Media: " if $indexer == 1;
+				$m = "Label or Host: " if $indexer == 2;
+				$m = "Device or Path: " if $indexer == 3;
+				$m = "Type: Incremental" if $_ eq "I";
+				$m = "Type: Full" if $_ eq "F";
+				$m .= $_ if ($_ ne "I") && ($_ ne "F");
 				my $c_det_cat = new_with_label Gtk::TreeItem($m);
 #				gtksignal_connect($k_det_nic, select => sub { $nic = $m;
 #								$kernel = $t; });
@@ -3535,9 +3546,9 @@ sub restore_catalog_entry {
 			return(0);
 		}
 			
-		$restore_result = restore_ftp($cat_entry, $vol_host, $dev_path, $username, $userpass, @restore_files) if ($media eq 'ftp');
+		$restore_result = restore_ftp($cat_entry, $vol_host, $dev_path, $username, $userpass, @restore_files) if $media eq 'ftp';
 		$restore_result = restore_rsync_ssh_webdav($cat_entry, $vol_host, $dev_path, $username, $userpass, $media, @restore_files) 
-			if (($media eq 'rsync') || ($media eq 'ssh') || ($media eq 'webdav'));
+			if ($media eq 'rsync') || ($media eq 'ssh') || ($media eq 'webdav');
 	}
 
 	# cleanup our restore dir - unlink fails here?
@@ -3771,8 +3782,8 @@ sub restore_box {
     my $check_restore_other;
     
 	if ($good_restore_path) {
-		$path_to_find_restore = $save_path if ($where_hd);
-		$path_to_find_restore = "/mnt/cdrom" if ($where_cd);
+		$path_to_find_restore = $save_path if $where_hd;
+		$path_to_find_restore = "/mnt/cdrom" if $where_cd;
 	}
 	
     find_backup_to_restore();
@@ -3821,8 +3832,8 @@ sub restore_find_media_box {
 	my $mount_media = 1;
 	$good_restore_path = 0;
     my $message = "Unable to find backups to restore...\n";
-	$message .= "Verify that $path_to_find_restore is the correct path" if (($where_hd) && ($where_cd));
-	$message .= " and the CD is in the drive" if ($where_cd);
+	$message .= "Verify that $path_to_find_restore is the correct path" if ($where_hd) && ($where_cd);
+	$message .= " and the CD is in the drive" if $where_cd;
 	if ($where_tape || $net_proto) {
 		$message .= "Backups on unmountable media - Use Catalog to restore";
 		$mount_media = 0;
@@ -4637,13 +4648,11 @@ sub interactive_mode_box {
 
 sub interactive_mode {
     $interactive = 1;
-	eval { require my_gtk; };
-	if ($@) {
-		die "Can't load my_gtk...\n";
-	} else {
-  		my_gtk->import(qw(:helpers :wrappers));
-	}
-	$in = 'interactive'->vnew('', 'default');
+    eval { require my_gtk };
+    die "Can't load my_gtk...\n" if $@;
+    my_gtk->import(qw(:helpers :wrappers));
+
+    $in = 'interactive'->vnew('', 'default');
 
     my $box;
     $my_win = my_gtk->new('drakbackup');
