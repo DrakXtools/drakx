@@ -130,7 +130,8 @@ foreach (@ARGV) {
     $i++;
     if (/^-(-help|h)$/) {
 	version();
-	print N("\nUsage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--testing] [-v|--version] ", $progname),  if_($usages{$progname}, $usages{$progname}), "\n";
+	print N("\nUsage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--testing] [-v|--version] ", $progname),
+       if_($usages{$progname}, common::translate($usages{$progname})), "\n";
 #    print N("\nUsage: "), $::usage, "\n" if $::usage;
 	exit(0);
     } elsif (/^-(-version|v)$/) {
