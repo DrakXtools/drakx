@@ -1122,27 +1122,50 @@ sub write {
 
 sub configure_hal {
     my ($locale) = @_;
-    my $options = join("\n", map_each { 
-	if_($::b, qq(\t\t<merge key="volume.policy.mount_option.$::a=$::b" type="bool">true</merge>));
-    } fs_options($locale));
+    my $option = sub {
+	my ($cat, $val) = @_;
+	qq(\t\t<merge key="$cat.policy.mount_option.$val" type="bool">true</merge>);
+    };
+    my %options = (fs_options($locale), utf8 => 1);
+    my %known_options = (
+	auto  => [ 'iocharset', 'codepage' ],
+	vfat  => [ 'iocharset', 'codepage' ],
+	msdos => [ 'iocharset', 'codepage' ],
+	ntfs  => [ 'iocharset', 'utf8' ],
+	cdrom => [ 'iocharset', 'codepage', 'utf8' ],
+    );
+    my $options = sub {
+	my ($cat, $name) = @_;
+	join("\n", map { 
+	    $option->($cat, $_ eq 'utf8' ? $_ : "$_=$options{$_}");
+	} grep { $options{$_} } @{$known_options{$name}});
+    };
+    my $options_per_fs = join('', map {
+	my $s = $options->('volume', $_);
+	$s && sprintf(<<'EOF', $_, $s);
+	<match key="volume.fstype" string="%s">
+%s
+	</match>
+EOF
+    } 'auto', 'vfat', 'msdos', 'ntfs');
     
-    output_p("$::prefix/usr/share/hal/fdi/30osvendor/locale-policy.fdi", sprintf(<<'EOF', $options));
+    output_p("$::prefix/usr/share/hal/fdi/30osvendor/locale-policy.fdi", 
+	     sprintf(<<'EOF', $options_per_fs, $options->('storage', 'cdrom')));
 <?xml version="1.0" encoding="ISO-8859-1"?> <!-- -*- SGML -*- --> 
 
 <deviceinfo version="0.2">
 
   <device>
-    <!-- Normal volumes; use volume label, uuid or drive_type -->
     <match key="block.is_volume" bool="true">
       <match key="volume.fsusage" string="filesystem">
 
-	  <match key="volume.fstype" string="auto">
-%s
-          </match>
-	  
+%s 
       </match>
     </match>
-    
+
+    <match key="storage.drive_type" string="cdrom">
+%s
+    </match>    
   </device>
 
 </deviceinfo>
