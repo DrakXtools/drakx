@@ -33,11 +33,13 @@ use fs;
 use log;
 use c;
 
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 
-print "EMBED\n" if $::isEmbedded;
-print "XID : $::XID\n";
-print "CCPID :  $::CCPID\n";
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
+if ($::isEmbedded) {
+  print "EMBED\n";
+  print "parent XID\t$::XID\n";
+  print "mcc pid\t$::CCPID\n";
+}
 
 local $_ = join '', @ARGV;
 
