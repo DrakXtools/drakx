@@ -261,7 +261,7 @@ sub read_proc_partitions {
 	    $part->{rootDevice} = $devfs2normal{dirname($part->{dev}) . '/disc'};
 	} else {
 	    $dev = $part->{dev};
-	    if (my $hd = find { $part->{dev} =~ /^$_->{device}./ } @$hds) {
+	    if (my $hd = find { $part->{dev} =~ /^\Q$_->{device}\E./ } @$hds) {
 		put_in_hash($part, partition_table::hd2minimal_part($hd));
 	    }
 	}
