@@ -42,11 +42,11 @@ foreach (@harddrake::data::tree) {
     my @was_removed = difference2([ keys %$oldconfig ], [ keys %ID ]);
     if (@was_removed) {
 	$msg .= N("Some devices in the \"%s\" hardware class were removed:\n", $item) .
-	    "- ". harddrake::data::custom_id($oldconfig->{$_}, $item) ." was removed\n" foreach @was_removed . "\n";
+	    "- " . harddrake::data::custom_id($oldconfig->{$_}, $item) . " was removed\n" foreach @was_removed . "\n";
     }
     my @added = difference2([ keys %ID ], [ keys %$oldconfig ]);
     $msg .= N("Some devices were added:\n", $item) if @added;
-    $msg .= "- ". harddrake::data::custom_id($ID{$_}, $item) ." was added\n" foreach @added;
+    $msg .= "- " . harddrake::data::custom_id($ID{$_}, $item) . " was added\n" foreach @added;
     @added || @was_removed or next;
     next unless -x $configurator;
     my ($pid, $no);
