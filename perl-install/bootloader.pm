@@ -612,7 +612,9 @@ sub install_lilo($$) {
 
 	foreach (@{$lilo->{entries}}) {
 	    print F "$_->{type}=$_->{kernel_or_dev}";
-	    print F "\tlabel=", substr($_->{label}, 0, 15); #- lilo doesn't handle more than 15 char long labels
+	    my $label = substr($_->{label}, 0, 15); #- lilo doesn't handle more than 15 char long labels
+	    $label =~ s/\s/_/g; #- lilo doesn't like spaces
+	    print F "\tlabel=$label"; 
 
 	    if ($_->{type} eq "image") {
 		print F "\troot=$_->{root}";
