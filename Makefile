@@ -122,7 +122,7 @@ upload:
 upload_only:
 	function upload() { rsync -qSavz --verbose --exclude '*~' -e ssh --delete $(ROOTDEST)/$$1/$$2 mandrake@ken:/c/cooker/$$1; } ;\
 	upload Mandrake/mdkinst '' ;\
-	upload Mandrake/base compssUsers ;\
+	upload Mandrake/base compssUsers* ;\
 	upload Mandrake/base rpmsrate ;\
 	upload Mandrake/base *_stage2.bz2 ;\
 	upload Mandrake/share/advertising '' ;\

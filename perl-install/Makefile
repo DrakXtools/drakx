@@ -154,7 +154,7 @@ endif
 	-cd share ; cp -f *.png *.xpm $(DEST)/usr/share
 	-cd pixmaps ; cp -f *.png *.xpm $(DEST)/usr/share ; rm -f $(DEST)/usr/share/wiz_*
 	cd share ; cp -a themes $(DEST)/usr/share/gtk
-	cd share ; cp compssUsers compssUsers.desktop rpmsrate $(ROOTDEST)/Mandrake/base
+	cd share ; cp compssUsers compssUsers.* rpmsrate $(ROOTDEST)/Mandrake/base
 
 	clean-rpmsrate $(ROOTDEST)/Mandrake/base/rpmsrate $(ROOTDEST)/Mandrake/RPMS
 
