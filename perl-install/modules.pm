@@ -305,7 +305,7 @@ sub get_pcmcia_devices($$) {
     if (pcmcia_need_config($pcic)) {
 	log::l("i try to configure pcmcia services");
 
-	symlink("/tmp/rhimage/Mandrake/mdkinst/etc/pcmcia", "/etc/pcmcia") unless -e "/etc/pcmcia";
+	symlink("/tmp/stage2/etc/pcmcia", "/etc/pcmcia") unless -e "/etc/pcmcia";
 	symlink("/sbin/install", "/sbin/cardmgr") unless -x "/sbin/cardmgr";
 
 	load("pcmcia_core");
