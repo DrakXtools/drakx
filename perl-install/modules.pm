@@ -140,6 +140,13 @@ arch() =~ /^sparc/ ? (
   "qlogicisp" => "Qlogic ISP",
   "sym53c8xx" => "Symbios 53c8xx",
 }],
+[ 'scsi_raw', {
+  "scsi_mod" => "scsi_mod",
+  "sd_mod" => "sd_mod",
+  "ide-mod" => "ide-mod",
+  "ide-probe" => "ide-probe",
+#-  "ide-probe-mod" => "ide-probe-mod",
+}],
 [ 'disk', {
 arch() =~ /^sparc/ ? (
   "pluto" => "Sun SparcSTORAGE Array SCSI", #- name it "fc4:soc:pluto" ?
@@ -158,6 +165,9 @@ arch() =~ /^sparc/ ? (
   "imm" => "Iomega Zip (new driver)",
 ),
 }],
+[ 'disk_raw', {
+  "ide-disk" => "IDE disk",
+}],
 [ 'cdrom', {
 arch() !~ /^sparc|alpha/ ? (
   "sbpcd" => "SoundBlaster/Panasonic",
@@ -172,6 +182,12 @@ arch() !~ /^sparc|alpha/ ? (
   "cdu31a" => "Sony CDU-31A",
   "sonycd535" => "Sony CDU-5xx",
 ) : (),
+}],
+[ 'cdrom_raw', {
+  "isofs" => "iso9660",
+  "ide-cd" => "ide-cd",
+  "sr_mod" => "SCSI CDROM support",
+  "cdrom" => "cdrom",
 }],
 [ 'sound', {
 arch() !~ /^sparc/ ? (
@@ -290,16 +306,6 @@ arch() !~ /^sparc/ ? (
   "ide-floppy" => "ide-floppy",
   "ide-tape" => "ide-tape",
   "nbd" => "nbd",
-
-  "scsi_mod" => "scsi_mod",
-  "sd_mod" => "sd_mod",
-  "ide-mod" => "ide-mod",
-  "ide-probe" => "ide-probe",
-  "ide-disk" => "IDE disk",
-  "isofs" => "iso9660",
-  "ide-cd" => "ide-cd",
-  "sr_mod" => "SCSI CDROM support",
-  "cdrom" => "cdrom",
 #-  "ide-probe-mod" => "ide-probe-mod",
 }],
 );
@@ -327,6 +333,7 @@ while (my ($k, $v) = each %drivers) {
 
 sub module_of_type__4update_kernel {
     my ($type) = @_;
+    $type = join "|", map { $_, $_ . "_raw" } split ' ', $type;
     my %skip; @skip{@skip_modules_on_stage1} = ();
     grep { !exists $skip{$_} } grep { $drivers{$_}{type} =~ /^($type)$/ } keys %drivers;
 }

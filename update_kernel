@@ -8,10 +8,10 @@ function f() {
 
 ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
 
-f "scsi|disk" ; SCSI_DRIVERS=$v
-f "net|network" ; NETWORK_DRIVERS=$v
-f "scsi|cdrom" ; CD_DRIVERS=$v
-f "pcmcia|network" ; PCMCIA_DRIVERS=$v
+f "scsi disk" ; SCSI_DRIVERS=$v
+f "net network" ; NETWORK_DRIVERS=$v
+f "scsi cdrom" ; CD_DRIVERS=$v
+f "pcmcia network" ; PCMCIA_DRIVERS=$v
 
 [ $ARCH == "i386" ] && FSMODULES="vfat.o fat.o"
 
