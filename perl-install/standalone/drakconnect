@@ -320,7 +320,7 @@ sub build_notebook {
 					       gtkpack(Gtk2::VBox->new(0,0),
 						       Gtk2::Label->new($intf->{dns1} || $netc->{dnsServer}),
 						       Gtk2::Label->new($intf->{dns2} || $netc->{dnsServer2}),
-						       Gtk2::Label->new($intf->{dns3}),
+						       Gtk2::Label->new($intf->{dns3} || $netc->{dnsServer3}),
 						      ),
 					      ),
 				     1, gtkadd(Gtk2::Frame->new(N("Search Domain")),
