@@ -206,13 +206,14 @@ static enum return_type try_with_device(char *dev_name)
 	char location_full[500];
 
 	char * disk_own_mount = "/tmp/hdimage";
+        char * loopdev = NULL;
 
 	char * parts[50];
 	char * parts_comments[50];
 	struct stat statbuf;
 	enum return_type results;
 	char * choice;
-
+        
         if (list_partitions(dev_name, parts, parts_comments)) {
 		stg1_error_message("Could not read partitions information.");
 		return RETURN_ERROR;
@@ -255,7 +256,7 @@ static enum return_type try_with_device(char *dev_name)
 
 	if (!stat(location_full, &statbuf) && !S_ISDIR(statbuf.st_mode)) {
 		log_message("%s exists and is not a directory, assuming this is an ISO image", location_full);
-		if (lomount(location_full, IMAGE_LOCATION, 0)) {
+		if (lomount(location_full, IMAGE_LOCATION, &loopdev, 0)) {
 			stg1_error_message("Could not mount file %s as an ISO image of the " DISTRIB_NAME " Distribution.", answers_location[0]);
 			umount(disk_own_mount);
 			return try_with_device(dev_name);
@@ -270,13 +271,13 @@ static enum return_type try_with_device(char *dev_name)
 				      "(I need the subdirectory " RAMDISK_LOCATION ")\n"
 				      "Here's a short extract of the files in the directory:\n"
 				      "%s", disk_extract_list_directory(IMAGE_LOCATION));
-			loumount();
+			del_loop(loopdev);
 			umount(disk_own_mount);
 			return try_with_device(dev_name);
 		}
 		if (load_ramdisk() != RETURN_OK) {
 			stg1_error_message("Could not load program into memory.");
-			loumount();
+			del_loop(loopdev);
 			umount(disk_own_mount);
 			return try_with_device(dev_name);
 		}
@@ -288,7 +289,7 @@ static enum return_type try_with_device(char *dev_name)
 				      "(I need the subdirectory " LIVE_LOCATION ")\n"
 				      "Here's a short extract of the files in the directory:\n"
 				      "%s", disk_extract_list_directory(IMAGE_LOCATION));
-			loumount();
+			del_loop(loopdev);
 			umount(disk_own_mount);
 			return try_with_device(dev_name);
 		}
@@ -296,7 +297,7 @@ static enum return_type try_with_device(char *dev_name)
 			stg1_error_message("The " DISTRIB_NAME " Distribution seems to be copied on a Windows partition. "
 				      "You need more memory to perform an installation from a Windows partition. "
 				      "Another solution if to copy the " DISTRIB_NAME " Distribution on a Linux partition.");
-			loumount();
+			del_loop(loopdev);
 			umount(disk_own_mount);
 			return try_with_device(dev_name);
 		}
@@ -304,7 +305,7 @@ static enum return_type try_with_device(char *dev_name)
 	}
 
 	if (IS_RESCUE) {
-		loumount();
+                del_loop(loopdev);
 		umount(disk_own_mount);
 	}
 

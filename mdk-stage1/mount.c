@@ -32,13 +32,12 @@
 
 
 
-#ifndef DISABLE_MEDIAS
 /* WARNING: this won't work if the argument is not /dev/ based */
-int ensure_dev_exists(char *dev)
+int ensure_dev_exists(const char * dev)
 {
 	int major, minor;
 	int type = S_IFBLK; /* my default type is block. don't forget to change for chars */
-	char * name;
+	const char * name;
 	struct stat buf;
 	char * ptr;
 	
@@ -127,6 +126,9 @@ int ensure_dev_exists(char *dev)
 		minor = 8 * charstar_to_int(ptr+1);
 		ptr = strchr(ptr, 'p');
 		minor += charstar_to_int(ptr+1);
+	} else if (ptr_begins_static_str(name, "loop")) {
+		major = 7;
+		minor = name[4] - '0';
 	} else {
 		log_message("I don't know how to create device %s, please post bugreport to me!", dev);
 		return -1;
@@ -139,7 +141,6 @@ int ensure_dev_exists(char *dev)
 	
 	return 0;
 }
-#endif /* DISABLE_MEDIAS */
 
 
 /* mounts, creating the device if needed+possible */

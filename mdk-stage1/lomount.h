@@ -15,7 +15,7 @@
 #ifndef LOMOUNT_H
 #define LOMOUNT_H
 
-int lomount(char *loopfile, char *where, int gz);
-int loumount(void);
+int lomount(char *loopfile, char *where, char **loopdev, int gz);
+void del_loop(char *loopdev);
 
 #endif

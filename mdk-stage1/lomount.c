@@ -115,12 +115,40 @@ set_loop (const char *device, const char *file, int gz)
 }
 
 
-char * loopdev = "/dev/loop3"; /* Ugly. But do I care? */
+char* find_free_loop(void)
+{
+        char loopdev[] = "/dev/loop0";
+	struct loop_info loopinfo;
+        int i;
+        for (i=0; i<8; i++) {
+                int fd;
+                loopdev[9] = '0' + i;
+                ensure_dev_exists(loopdev);
+                fd = open(loopdev, O_RDONLY);
+                if (!ioctl(fd, LOOP_GET_STATUS, &loopinfo)) {
+                        close(fd);
+                        continue;
+                }
+                if (errno == ENXIO) {
+                        log_message("%s is available", loopdev);
+                        close(fd);
+                        return strdup(loopdev);
+                } else {
+                        log_perror("LOOP_GET_STATUS(unexpected error)");
+                        close(fd);
+                        continue;
+                }
+        }
+        return NULL;
+}
 
 void
-del_loop(void)
+del_loop(char * loopdev)
 {
 	int fd;
+
+        if (!loopdev)
+                return;
 
 	if ((fd = open (loopdev, O_RDONLY)) < 0)
 		return;
@@ -131,19 +159,24 @@ del_loop(void)
 	close (fd);
 }
 
-
-static char * where_mounted = NULL;
-
 int
-lomount(char *loopfile, char *where, int gz)
+lomount(char *loopfile, char *where, char **dev, int gz)
 {
   
 	long int flag;
+        char * loopdev;
 
 	flag = MS_MGC_VAL;
 	flag |= MS_RDONLY;
 
 	my_insmod("loop", ANY_DRIVER_TYPE, NULL);
+
+        if (!(loopdev = find_free_loop())) {
+		log_message("could not find a free loop");
+		return 1;
+        }
+        if (dev)
+                *dev = loopdev;
 
 	if (set_loop(loopdev, loopfile, gz)) {
 		log_message("set_loop failed on %s (%s)", loopdev, strerror(errno));
@@ -151,24 +184,11 @@ lomount(char *loopfile, char *where, int gz)
 	}
   
 	if (my_mount(loopdev, where, "iso9660", 0)) {
-		del_loop();
+		del_loop(loopdev);
 		return 1;
 	}
 
-	where_mounted = strdup(where);
 	log_message("lomount succeeded for %s on %s", loopfile, where);
-	return 0;
-}
-
-
-int
-loumount()
-{
-	if (where_mounted) {
-		umount(where_mounted);
-		where_mounted = NULL;
-	}
-	del_loop();
 	return 0;
 }
 

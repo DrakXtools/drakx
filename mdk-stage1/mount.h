@@ -27,9 +27,6 @@
 #endif
 
 int my_mount(char *dev, char *location, char *fs, int force_rw);
-
-#ifndef DISABLE_MEDIAS
-int ensure_dev_exists(char *dev);
-#endif
+int ensure_dev_exists(const char * dev);
 
 #endif
