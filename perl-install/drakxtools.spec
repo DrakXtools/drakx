@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 22mdk
+Release: 23mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Oct  8 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-23mdk
+- drakconnect:
+  o fix encapsulation for chinese ISPs (Funda Wang, #10965)
+  o fix H[CS]F modems configuration (adapt to new kernel packages
+    names)
+  o start slmodemd when installing it (thus preventing the average
+    user to have to restart his machine in order to get a working
+    connection)
+
 * Fri Oct  8 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-22mdk
 - bootloader-config: on a recent kernel, remove any existing devfs=
   kernel option in order to enable udev (pixel)
