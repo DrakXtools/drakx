@@ -376,7 +376,6 @@ sub update() {
 	    foreach my $i ([$button_t, $gct], [$button_r, $gcr], [$button_a, $gca]) {
 		$i->[0]->add(gtksignal_connect(gtkshow(gtksize(gtkset_size_request(Gtk2::DrawingArea->new, 10, 10), 10, 10)), expose_event => sub { $_[0]->window->draw_rectangle($i->[1], 1, 0, 0, 10, 10) }));
 	    }
-	    $notebook->set_current_page($notebook->page_num($page));
 	    $monitor->{$intf}{page} = $notebook->page_num($page);
          $darea->{$intf}->realize;
          $pixmap->{$intf} = Gtk2::Gdk::Pixmap->new($darea->{$intf}->window, $width, $height, $darea->{$intf}->window->get_depth);
