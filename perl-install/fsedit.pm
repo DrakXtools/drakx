@@ -97,7 +97,7 @@ sub raids {
     }
 
     fs::get_major_minor(@parts);
-    my %devname2part = map { $_->{dev} => { %$_, device => $_->{dev} } } read_partitions();
+    my %devname2part = map { $_->{dev} => { %$_, device => $_->{dev} } } read_proc_partitions_raw();
 
     my @raids;
     my @mdstat = cat_("/proc/mdstat");
@@ -136,28 +136,76 @@ sub raids {
     \@raids;
 }
 
-sub hds {
-    my ($drives, $flags) = @_;
-    my (@hds);
-    my $rc;
+sub lvms {
+    my ($all_hds) = @_;
+    my @pvs = grep { isRawLVM($_) } get_all_fstab($all_hds) or return;
 
-    foreach (@$drives) {
-	my $file = devices::make($_->{device});
+    #- otherwise vgscan won't find them
+    devices::make($_->{device}) foreach @pvs; 
+    require lvm;
 
-	my $hd = partition_table::raw::get_geometry($file) or log::l("An error occurred while getting the geometry of block device $file: $!"), next;
-	add2hash_($hd, $_);
-	$hd->{file} = $file;
-	$hd->{prefix} = $hd->{device};
-	# for RAID arrays of format c0d0p1
-	$hd->{prefix} .= "p" if $hd->{prefix} =~ m,(rd|ida|cciss|ataraid)/,;
-
-	eval { partition_table::read($hd, $flags->{clearall} || member($_->{device}, @{$flags->{clear} || []})) };
-	if ($@) {
-	    cdie "ask_before_blanking:$@";
-	    partition_table::raw::zero_MBR($hd);
+    my @lvms;
+    foreach (@pvs) {
+	my $name = lvm::get_vg($_) or next;
+	my ($lvm) = grep { $_->{VG_name} eq $name } @lvms;
+	if (!$lvm) {
+	    $lvm = bless { disks => [], VG_name => $name }, 'lvm';
+	    lvm::update_size($lvm);
+	    lvm::get_lvs($lvm);
+	    push @lvms, $lvm;
 	}
-	member($_->{device}, @{$flags->{clear} || []}) and partition_table::remove($hd, $_)
-	  foreach partition_table::get_normal_parts($hd);
+	$_->{lvm} = $name;
+	push @{$lvm->{disks}}, $_;
+    }
+    @lvms;
+}
+
+sub hds {
+    my ($flags, $ask_before_blanking) = @_;
+    $flags ||= {};
+    $flags->{readonly} && ($flags->{clearall} || $flags->{clear}) and die "conflicting flags readonly and clear/clearall";
+
+    my @drives = detect_devices::hds();
+
+    my (@hds);
+    foreach my $hd (@drives) {
+	$hd->{file} = devices::make($hd->{device});
+	$hd->{prefix} ||= $hd->{device};
+	$hd->{readonly} = $flags->{readonly};
+
+	my $h = partition_table::raw::get_geometry($hd->{file}) or log::l("An error occurred while getting the geometry of block device $hd->{file}: $!"), next;
+	add2hash_($hd, $h);
+
+	eval { partition_table::raw::test_for_bad_drives($hd) if $::isInstall };
+	if (my $err = $@) {
+	    if ($err =~ /write error:/) { 
+		$hd->{readonly} = 1;
+	    } else {
+		cdie $err if $err !~ /read error:/;
+		next;
+	    }
+	}
+
+	if ($flags->{clearall} || member($hd->{device}, @{$flags->{clear} || []})) {
+	    partition_table::raw::zero_MBR_and_dirty($hd);
+	} else {
+	    eval { 
+		partition_table::read($hd); 
+		compare_with_proc_partitions($hd) if $::isInstall;
+	    };
+	    if (my $err = $@) {
+		if ($hd->{readonly}) {
+		    use_proc_partitions($hd);
+		} elsif ($ask_before_blanking && $ask_before_blanking->($hd->{device}, $err)) {
+		    partition_table::raw::zero_MBR($hd);
+		} else {
+		    #- using it readonly
+		    use_proc_partitions($hd);
+		}
+	    }
+	    member($_->{device}, @{$flags->{clear} || []}) and partition_table::remove($hd, $_)
+	      foreach partition_table::get_normal_parts($hd);
+	}
 
 	# special case for Various type
 	$_->{type} = typeOfPart($_->{device}) || 0x100 foreach grep { $_->{type} == 0x100 } partition_table::get_normal_parts($hd);
@@ -169,37 +217,40 @@ sub hds {
 	}
 	push @hds, $hd;
     }
+
     #- detect raids before LVM allowing LVM on raid
     my $raids = raids(\@hds);
     my $all_hds = { %{ empty_all_hds() }, hds => \@hds, lvms => [], raids => $raids };
 
-    my @lvms;
-    if (my @pvs = grep { isRawLVM($_) } get_all_fstab($all_hds)) {
-	#- otherwise vgscan won't find them
-	devices::make($_->{device}) foreach @pvs; 
-	require lvm;
-	foreach (@pvs) {
-	    my $name = lvm::get_vg($_) or next;
-	    my ($lvm) = grep { $_->{VG_name} eq $name } @lvms;
-	    if (!$lvm) {
-		$lvm = bless { disks => [], VG_name => $name }, 'lvm';
-		lvm::update_size($lvm);
-		lvm::get_lvs($lvm);
-		push @lvms, $lvm;
-	    }
-	    $_->{lvm} = $name;
-	    push @{$lvm->{disks}}, $_;
-	}
-    }
-    $all_hds->{lvms} = \@lvms;
+    $all_hds->{lvms} = [ lvms($all_hds) ];
 
     fs::get_major_minor(get_all_fstab($all_hds));
 
     $all_hds;
 }
 
+sub get_hds {
+    #- $in is optional
+    my ($flags, $in) = @_;
 
-sub read_partitions() {
+    if ($in) {
+	catch_cdie { hds($flags, sub {
+	    my ($dev, $err) = @_;
+            $in->ask_yesorno(_("Error"), 
+_("I can't read the partition table of device %s, it's too corrupted for me :(
+I can try to go on, erasing over bad partitions (ALL DATA will be lost!).
+The other solution is to not allow DrakX to modify the partition table.
+(the error is %s)
+
+Do you agree to loose all the partitions?
+", $dev, formatError($err)));
+        }) } sub { $in->ask_okcancel('', formatError($@)) };
+    } else {
+	catch_cdie { hds($flags) } sub { 1 }
+    }
+}
+
+sub read_proc_partitions_raw() {
     my (undef, undef, @all) = cat_("/proc/partitions");
     grep {
 	$_->{size} != 1 &&	 # skip main extended partition
@@ -211,10 +262,10 @@ sub read_partitions() {
     } @all;
 }
 
-sub readProcPartitions {
+sub read_proc_partitions {
     my ($hds) = @_;
 
-    my @all = read_partitions();
+    my @all = read_proc_partitions_raw();
     my @parts = grep { $_->{dev} =~ /\d$/ } @all;
     my @disks = grep { $_->{dev} !~ /\d$/ } @all;
 
@@ -226,6 +277,7 @@ sub readProcPartitions {
 	$disk->{dev} => $_->{device};
     } @$hds;
 
+    my $prev_part;
     foreach my $part (@parts) {
 	my $dev;
 	if ($devfs_like) {
@@ -238,10 +290,10 @@ sub readProcPartitions {
 	    }
 	}
 	$part->{device} = $dev;
-	$part->{start} = 0;	# unknown, but we don't care
 	$part->{size} *= 2;	# from KB to sectors
 	$part->{type} = typeOfPart($dev); 
-
+	$part->{start} = $prev_part ? $prev_part->{start} + $prev_part->{size} : 0;
+	$prev_part = $part;
 	delete $part->{dev}; # cleanup
     }
     @parts;
@@ -411,12 +463,6 @@ sub suggest_part {
       grep { !$part->{type} || $part->{type} == $_->{type} || isTrueFS($part) && isTrueFS($_) }
 	@$suggestions or return;
 
-#-    if (arch() =~ /i.86/) {
-#-	  $best = $second if
-#-	    $best->{mntpoint} eq '/boot' &&
-#-	    $part->{start} + $best->{size} > 1024 * $hd->cylinder_size(); #- if the empty slot is beyond the 1024th cylinder, no use having /boot
-#-    }
-
     defined $best or return; #- sorry no suggestion :(
 
     $part->{mntpoint} = $best->{mntpoint};
@@ -431,26 +477,6 @@ sub suggestions_mntpoint {
     sort grep { !/swap/ && !has_mntpoint($_, $all_hds) }
       (@suggestions_mntpoints, map { $_->{mntpoint} } @{$suggestions{server} || $suggestions{simple}});
 }
-
-#-sub partitionDrives {
-#-
-#-    my $cmd = "/sbin/fdisk";
-#-    -x $cmd or $cmd = "/usr/bin/fdisk";
-#-
-#-    my $drives = findDrivesPresent() or die "You don't have any hard drives available! You probably forgot to configure a SCSI controller.";
-#-
-#-    foreach (@$drives) {
-#-	 my $text = "/dev/" . $_->{device};
-#-	 $text .= " - SCSI ID " . $_->{id} if $_->{device} =~ /^sd/;
-#-	 $text .= " - Model " . $_->{info};
-#-	 $text .= " array" if $_->{device} =~ /^c.d/;
-#-
-#-	 #- truncate at 50 columns for now
-#-	 $text = substr $text, 0, 50;
-#-    }
-#-    #-TODO TODO
-#-}
-
 
 sub mntpoint2part {
     my ($mntpoint, $fstab) = @_;
@@ -743,35 +769,27 @@ sub rescuept($) {
     }
 }
 
-sub verifyHds {
-    my ($hds, $readonly, $ok) = @_;
+sub compare_with_proc_partitions {
+    my ($hd) = @_;
 
-    if (is_empty_array_ref($hds)) { #- no way
-	die _("An error occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
+    my @l1 = partition_table::get_normal_parts($hd);
+    my @l2 = grep { $_->{rootDevice} eq $hd->{device} } read_proc_partitions([$hd]);
+    
+    if (int(@l1) != int(@l2) && arch() ne 'ppc') {
+	die sprintf(
+		    "/proc/partitions doesn't agree with drakx %d != %d:\n%s\n", int(@l1), int(@l2),
+		    "/proc/partitions: " . join(", ", map { "$_->{device} ($_->{rootDevice})" } @l2));
     }
+    int @l2;
+}
 
-    my @parts = readProcPartitions($hds);
-    foreach my $hd (@$hds) {
-	my @l1 = partition_table::get_normal_parts($hd);
-	my @l2 = grep { $_->{rootDevice} eq $hd->{device} } @parts;
-	if (int(@l1) != int(@l2) && arch() ne 'ppc') {
-	    log::l(sprintf
-		   "/proc/partitions doesn't agree with drakx %d != %d:\n%s\n", int(@l1), int(@l2),
-		   "/proc/partitions: " . join(", ", map { "$_->{device} ($_->{rootDevice})" } @parts));
-	    $ok = 0;
-	}
-    }
+sub use_proc_partitions {
+    my ($hd) = @_;
 
-    if ($readonly && !$ok) {
-	log::l("using /proc/partitions as diskdrake failed :(");
-	foreach my $hd (@$hds) {
-	    partition_table::raw::zero_MBR($hd);
-	    $hd->{primary} = { normal => [ grep { $hd->{device} eq $_->{rootDevice} } @parts ] };
-	}
-	$ok = 1;
-    }
-    $readonly && get_fstab(@$hds) == 0 and die _("You don't have any partitions!");
-    $ok;
+    log::l("using /proc/partitions since diskdrake failed :(");
+    partition_table::raw::zero_MBR($hd);
+    $hd->{readonly} = 1;
+    $hd->{primary} = { normal => [ grep { $_->{rootDevice} eq $hd->{device} } read_proc_partitions([$hd]) ] };
 }
 
 1;
