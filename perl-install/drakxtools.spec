@@ -6,6 +6,8 @@ Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
+# Temporary requires for tools that still use gtk+1 (mainly drakfloppy and net_monitor)
+Requires: perl-GTK >= 0.6123, perl-GTK-GdkImlib, perl-GTK-GdkPixbuf
 Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2003.01.21.1, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.4-14mdk
 Conflicts: drakconf < 9.1-0.4mdk 
 BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.8, ncurses-devel, newt-devel, perl-devel, libext2fs-devel, perl-MDK-Common-devel
