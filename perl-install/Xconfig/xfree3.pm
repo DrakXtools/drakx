@@ -106,7 +106,7 @@ sub is_fbdev {
 
     my $Screen_ = $Screen || $raw_X->get_default_screen or return;
 
-    val($Screen_->{Driver}) eq 'fbdev';
+    val($Screen_->{Server}) eq 'FBDev';
 }
 
 sub set_Option {}
