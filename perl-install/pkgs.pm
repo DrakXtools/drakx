@@ -169,7 +169,7 @@ sub bestKernelPackage {
     my ($packages) = @_;
     my $best;
 
-    foreach ($packages->{provides}{kernel}) {
+    foreach (keys %{$packages->{provides}{kernel}}) {
 	my $pkg = $packages->{depslist}[$_] or next;
 	$pkg->name =~ /kernel-\d/ or next;
 	!$best || $pkg->compare_pkg($best) > 0 and $best = $pkg;
