@@ -426,7 +426,7 @@ my $update_dhcp = '/usr/sbin/update_dhcp.pl';
 
 #- put the interface for the dhcp server in the sysconfig-dhcp config, for the /etc/init.d script of dhcpd
 
-substInFile { s/^INTERFACES\n//; $_ .= "INTERFACES=\"$device\"\n" if eof } $sysconf_dhcpd;
+substInFile { s/^INTERFACES\n//; $_ .= qq(INTERFACES="$device"\n) if eof } $sysconf_dhcpd;
 
 
 #- Set up /etc/cups/cupsd.conf to make the broadcasting of the printer info
