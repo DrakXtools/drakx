@@ -370,6 +370,7 @@ sub load_po($) {
     foreach (<F>) {
 	/^msgstr/ and $state = 1;
 	/^msgid/  && !$fuzzy and $state = 2;
+	s/@/\\@/g;
 
 	if (/^(#|$)/ && $state != 3) {
 	    $state = 3;
