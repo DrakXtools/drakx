@@ -106,7 +106,7 @@ Do you want to autodetect UPS devices connected to this machine or to manually s
                                name => sub {
                                    if (@new_devices) {
                                        N("Congratulations") . "\n\n" . 
-                                         N("The wizard successfully added the following UPS devices:", join("\n\n-", @new_devices))
+                                         N("The wizard successfully added the following UPS devices:") . join("\n\n-", @new_devices)
                                      } else {
                                          N("No new UPS devices was found");
                                      }
