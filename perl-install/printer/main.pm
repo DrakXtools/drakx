@@ -412,7 +412,8 @@ sub connectionstr {
     } elsif ($connect =~ m!^lpd://([^/]+)/([^/]+)/?$!) {
 	$connection = N("LPD server \"%s\", printer \"%s\"", $1, $2);
     } elsif ($connect =~ m!^socket://([^/:]+):([^/:]+)/?$!) {
-	$connection = N("TCP/IP host \"%s\", port %s", $1, $2);
+        my ($host, $port) = ($1, $2);
+        $connection = N("TCP/IP host \"%s\", port %s", $host, $port);
     } elsif ($connect =~ m!^smb://([^/\@]+)/([^/\@]+)/?$! ||
 	     $connect =~ m!^smb://.*/([^/\@]+)/([^/\@]+)/?$! ||
 	     $connect =~ m!^smb://.*\@([^/\@]+)/([^/\@]+)/?$!) {
