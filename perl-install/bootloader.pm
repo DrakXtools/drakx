@@ -269,7 +269,7 @@ sub get_kernels_and_labels {
     
     require pkgs;
     @kernels = 
-      sort { pkgs::versionCompare($b->[1], $a->[1]) || $weights{$a->[2]} <=> $weights{$b->[2]} } 
+      sort { c::rpmvercmp($b->[1], $a->[1]) || $weights{$a->[2]} <=> $weights{$b->[2]} } 
       map {
 	  if (my ($version, $ext) = /vmlinuz-((?:[\-.\d]*(?:mdk)?)*)(.*)/) {
 	      [ "$version$ext", $version, $ext ];
