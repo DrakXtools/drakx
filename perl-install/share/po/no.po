@@ -58,14 +58,12 @@ msgid "X server"
 msgstr "X-tjener"
 
 #: ../../Xconfigurator.pm_.c:293
-#, fuzzy
 msgid "Choose a X driver"
-msgstr "Velg en X-tjener"
+msgstr "Velg en X driver"
 
 #: ../../Xconfigurator.pm_.c:293
-#, fuzzy
 msgid "X driver"
-msgstr "X-tjener"
+msgstr "X driver"
 
 #: ../../Xconfigurator.pm_.c:354 ../../Xconfigurator.pm_.c:360
 #: ../../Xconfigurator.pm_.c:410 ../../Xconfigurator.pm_.c:1490
@@ -1021,13 +1019,15 @@ msgstr "Obligatorisk pakke %s mangler"
 
 #: ../../any.pm_.c:973
 msgid "Launch userdrake"
-msgstr ""
+msgstr "Start userdrake"
 
 #: ../../any.pm_.c:975
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
 "You can use userdrake to add a user in this group."
 msgstr ""
+"per-user deling bruker gruppen \"fileshare\". \n"
+"Du kan bruke userdrake til å legge til en bruker i denne gruppen."
 
 #: ../../any.pm_.c:1012
 msgid "Welcome To Crackers"
@@ -1046,9 +1046,8 @@ msgid "High"
 msgstr "Høy"
 
 #: ../../any.pm_.c:1016
-#, fuzzy
 msgid "Higher"
-msgstr "Høy"
+msgstr "Høyere"
 
 #: ../../any.pm_.c:1017
 msgid "Paranoid"
@@ -1073,22 +1072,22 @@ msgstr ""
 "anbefalt."
 
 #: ../../any.pm_.c:1024
-#, fuzzy
 msgid ""
 "This is the standard security recommended for a computer that will be used "
 "to connect to the Internet as a client."
 msgstr ""
-"Dette er standard sikkerhet anbefalt for en maskin som vil bli brukt til\n"
-"tilkobling mot Internett som klient. Det er nå sikkerhetskontroller. "
+"Dette er standard sikkerhet anbefalt for en maskin som vil bli brukt til "
+"tilkobling mot Internett som klient."
 
 #: ../../any.pm_.c:1025
 msgid ""
 "There are already some restrictions, and more automatic checks are run every "
 "night."
 msgstr ""
+"Det er allerede noen restriksjoner, og flere automatiske kontroller kjøres "
+"hver natt."
 
 #: ../../any.pm_.c:1026
-#, fuzzy
 msgid ""
 "With this security level, the use of this system as a server becomes "
 "possible.\n"
@@ -1097,8 +1096,9 @@ msgid ""
 "Internet, you should better choose a lower level."
 msgstr ""
 "Med dette sikkerhetsnivået kan systemet brukes som tjener.\n"
-"Sikkerheten er nå høy nok til å bruke systemet som en tjener som\n"
-"godtar oppkoblinger fra mange klienter. "
+"Sikkerheten er nå høy nok til å bruke systemet som en tjener som godtar\n"
+"oppkoblinger fra mange klienter. Merk: Hvis maskinen din kun er en klient på "
+"Internett burde du velge et lavere nivå."
 
 #: ../../any.pm_.c:1029
 msgid ""
@@ -2010,9 +2010,9 @@ msgid ", %s sectors"
 msgstr ", %s sektorer"
 
 #: ../../diskdrake/interactive.pm_.c:1054
-#, fuzzy, c-format
+#, c-format
 msgid "Cylinder %d to %d\n"
-msgstr "Sylinder %d til sylinder %d\n"
+msgstr "Sylinder %d til %d\n"
 
 #: ../../diskdrake/interactive.pm_.c:1055
 msgid "Formatted\n"
@@ -2414,7 +2414,6 @@ msgstr ""
 "CD og be deg sette i en annen en ved behov."
 
 #: ../../help.pm_.c:77
-#, fuzzy
 msgid ""
 "It is now time to specify which programs you wish to install on your\n"
 "system. There are thousands of packages available for Mandrake Linux, and\n"
@@ -2469,23 +2468,23 @@ msgid ""
 "updating an existing system."
 msgstr ""
 "Det er nå på tide å spesifisere hvilke programmer du ønsker å installere på\n"
-"systemet ditt. Det er tusenvis av pakker tilgjengelig for Mandrake Linux, "
-"og\n"
+"systemet ditt. Det er tusenvis av pakker tilgjengelig for Mandrake Linux, og "
 "det er ikke meningen at du skal kunne navnet på samtlige.\n"
 "\n"
 "Hvis du utfører en standard installasjon fra CDROM, vil du først bli bedt "
 "om\n"
-"å spesifisere de CDer du har for øyeblikket (i ekspertmodus). Sjekk CDene\n"
-"og velg de bokser som tilsvarer de CDer som du har klare for installasjon. "
+"å spesifisere de CDene du har for øyeblikket (kun i ekspertmodus). Sjekk "
+"CDene\n"
+"og velg de bokser som tilsvarer de CDer som du har klare for installasjon.\n"
 "Klikk \"OK\" når du er klar til å fortsette.\n"
 "\n"
 "Pakkene er delt inn i grupper som korresponderer til typisk bruk av din "
-"maskin.\n"
+"maskin\n"
 "Gruppene er igjen delt inn i fire seksjoner:\n"
 "\n"
 " * \"Arbeidsstasjon\": hvis du planlagger å bruke din maskin som "
 "arbeidsstasjon, velg\n"
-"en eller flere av de tilhørenede grupper.\n"
+"en eller flere av de tilhørende grupper.\n"
 "\n"
 " * \"Utvikling\": hvis maskinen skal brukes til programmering, velg ønskede "
 "grupper.\n"
@@ -2494,14 +2493,14 @@ msgstr ""
 "hvilke av de mest vanlige tjenester som du ønsker installert på\n"
 "maskinen.\n"
 "\n"
-" * \"Grafisk miljø\": til slutt, det er her du kan velge ditt ønskede "
-"grafiske\n"
-"miljø. Du må velge minst ett hvis du ønsker å ha en grafisk arbeidsstasjon!\n"
+" * \"Grafisk miljø\": til slutt, det er her du kan velge ditt ønskede\n"
+"grafiske miljø. Du må velge minst ett hvis du ønsker å ha en grafisk\n"
+"arbeidsstasjon!\n"
 "\n"
-"Ved å flytte musepekeren over ett gruppenavn vil en kort forklarende\n"
-"tekst dukke opp over den gruppen. Hvis du ønsker å ikke velge noen grupper\n"
-"under installasjon (og du ikke oppgraderer), så vil en dialog spørre deg om\n"
-"hva slags minimal installasjon du ønsker:\n"
+"Ved å flytte musepekeren over et gruppenavn vil en kort forklarende tekst\n"
+"dukke opp over den gruppen. Hvis du ønsker å ikke velge noen grupper under\n"
+"installasjon (og du ikke oppgraderer), så vil en dialog spørre deg om hva\n"
+"slags minimal installasjon du ønsker:\n"
 "\n"
 "* \"Med X\" For en minste installasjon med X-tjener inkludert;\n"
 "\n"
@@ -2510,16 +2509,16 @@ msgstr ""
 "opp en server.\n"
 "\n"
 " * \"Truly minimal install\" vil installere minimum som er nødvendig for å\n"
-"Linux systemet opp og gå, kun kommandolinje.\n"
+"Linux systemet opp og gå, kun kommandolinje. Denne installasjonen er på\n"
+"rundt 65Mb.\n"
 "\n"
 "Du kan merke av \"Individual package selection\" boksen, som er nyttig\n"
 "hvis du kjenner til pakkene som blir tilbydt eller hvis du ønsker å ha\n"
 "total kontroll over hva som vil bli installert.\n"
 "\n"
 "Hvis du startet installasjonen i \"Upgrade\" modus, kan du velge vekk alle\n"
-"grupper for å unngå å installere noen nye pakker. Dette er nyttig for "
-"reparasjon\n"
-"eller oppdatering av et eksisterende system."
+"grupper for å unngå å installere noen nye pakker. Dette er nyttig for\n"
+"reparasjon eller oppdatering av et eksisterende system."
 
 #: ../../help.pm_.c:128
 msgid ""
@@ -2869,6 +2868,15 @@ msgid ""
 "\n"
 "If you do not know what to choose, keep the default option."
 msgstr ""
+"På dette punktet er det tid for å velge sikkerhetsnivået som passer for\n"
+"maskinen. Som en tommelfingerregel, jo mere utsatt maskinen er, og jo mere\n"
+"viktig data som er lagret der, jo høyere bør sikkerhetsnivået være.\n"
+"Men, et høyere sikkerhetsnivå går gjerne på beskostning av "
+"brukvennligheten.\n"
+"Se i MSEC kapittelet i ``Reference Manual'' for å få mer informasjon om\n"
+"disse nivåene.\n"
+"\n"
+"Hvis du ikke vet hva du skal velge, behold standard valg."
 
 #: ../../help.pm_.c:439
 #, fuzzy
@@ -3282,7 +3290,6 @@ msgid ""
 msgstr ""
 
 #: ../../help.pm_.c:707
-#, fuzzy
 msgid ""
 "LILO (the LInux LOader) and grub are boot loaders: they are able to boot\n"
 "either GNU/Linux or any other operating system present on your computer.\n"
@@ -3299,7 +3306,6 @@ msgstr ""
 "Normalt blir de andre operativsystemene korrekt oppdaget og installert.\n"
 "Hvis dette ikke er tilfelle, kan du legge til disse for hånd i dette\n"
 "bildet. Vær nøye med å velge de korrekte parameterene.\n"
-"\n"
 "\n"
 "Hvis du ikke ønsker å gi tilgang til de andre operativsystemene til\n"
 "andre kan du fjerne linjene for disse. Men i så tilfelle trenger du\n"
@@ -3619,7 +3625,6 @@ msgstr ""
 "kunne gjenopprettes!"
 
 #: ../../help.pm_.c:892
-#, fuzzy
 msgid ""
 "Click on \"OK\" if you want to delete all data and partitions present on\n"
 "this hard drive. Be careful, after clicking on \"OK\", you will not be able\n"
@@ -3629,12 +3634,11 @@ msgid ""
 "Click on \"Cancel\" to cancel this operation without losing any data and\n"
 "partitions present on this hard drive."
 msgstr ""
-"Klikk på \"OK\" hvis du ønsker å slette alle data og\n"
-"partisjoner på denne harddisken. Vær forsiktig, etter at du har klikket på "
-"\"OK\",\n"
-"vil du ikke kunne gjenopprette data og partisjoner på denne hard- disken,\n"
-"inkludert Windows data.\n"
-"\n"
+"Klikk på \"OK\" hvis du ønsker å slette alle data og partisjoner på denne\n"
+"harddisken. Vær forsiktig, etter at du har klikket på \"OK\" vil du ikke\n"
+"kunne gjenopprette data og partisjoner på denne harddisken inkludert "
+"Windows\n"
+"data.\n"
 "\n"
 "Klikk på \"Avbryt\" for å avbryte denne operasjonen uten å miste data og\n"
 "partisjoner på denne harddisken."
@@ -3644,11 +3648,13 @@ msgstr ""
 msgid ""
 "Can't access kernel modules corresponding to your kernel (file %s is missing)"
 msgstr ""
+"Kan ikke få tilgang til kjernemodulene som korresponderer med kjernen din"
+"(fil %s mangler)"
 
 #: ../../install2.pm_.c:170
 #, c-format
 msgid "You must also format %s"
-msgstr ""
+msgstr "Du må også formatere %s"
 
 #: ../../install_any.pm_.c:406
 #, c-format
@@ -3800,7 +3806,6 @@ msgstr ""
 "Windows-partisjonen din er for fragmentert, vennligst kjør ``defrag'' først"
 
 #: ../../install_interactive.pm_.c:137
-#, fuzzy
 msgid ""
 "WARNING!\n"
 "\n"
@@ -3813,12 +3818,11 @@ msgid ""
 msgstr ""
 "ADVARSEL!\n"
 "\n"
-"DrakX trenger nå å endre størrelsen på Windows partisjonen din. Vær "
-"forsiktig: denne operasjonen er\n"
-"farlig. Hvis du ikke allerede har gjort det burde du kjøre scandisk først "
-"(og\n"
-"som en opsjon kjøre defrag) på denne partisjonen og ta sikkerhetskopi av "
-"dine data.\n"
+"DrakX vil nå endre størrelsen på Windows partisjonen din. Vær\n"
+"forsiktig: denne operasjonen er farlig. Hvis du ikke allerede har\n"
+"gjort det burde du først kjøre scandisk under Windows (og som en\n"
+"opsjon kjøre defrag) på denne partisjonen og ta sikkerhetskopi av dine "
+"data.\n"
 "Når du er sikker, trykk Ok."
 
 #: ../../install_interactive.pm_.c:147
@@ -4906,17 +4910,17 @@ msgid "No printer"
 msgstr "Ingen skriver"
 
 #: ../../install_steps_interactive.pm_.c:1034
-#, fuzzy
 msgid "Do you have an ISA sound card?"
-msgstr "Har du enda ett?"
+msgstr "Har du et ISA lydkort?"
 
 #: ../../install_steps_interactive.pm_.c:1036
 msgid "Run \"sndconfig\" after installation to configure your sound card"
 msgstr ""
+"Kjør \"sndconfig\" etter installasjonen for å konfigurere lydkortet ditt"
 
 #: ../../install_steps_interactive.pm_.c:1038
 msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr ""
+msgstr "Lydkort ikke oppdaget. Prøv \"harddrake\" etter installasjonen"
 
 #: ../../install_steps_interactive.pm_.c:1043 ../../steps.pm_.c:27
 msgid "Summary"
@@ -6746,7 +6750,6 @@ msgid "How is the printer connected?"
 msgstr "Hvordan er skriveren tilkoblet?"
 
 #: ../../printerdrake.pm_.c:25
-#, fuzzy
 msgid ""
 "\n"
 "Printers on remote CUPS servers you do not have to configure here; these "
@@ -6757,14 +6760,12 @@ msgstr ""
 "skriverene vil bli oppdaget automatisk."
 
 #: ../../printerdrake.pm_.c:69 ../../printerdrake.pm_.c:2411
-#, fuzzy
 msgid "CUPS configuration"
-msgstr "LAN-konfigurasjon"
+msgstr "CUPS konfigurasjon"
 
 #: ../../printerdrake.pm_.c:70 ../../printerdrake.pm_.c:2412
-#, fuzzy
 msgid "Specify CUPS server"
-msgstr "Fjern-CUPS tjener"
+msgstr "Spesifiser CUPS tjener"
 
 #: ../../printerdrake.pm_.c:71
 #, fuzzy
@@ -7736,9 +7737,8 @@ msgid ""
 msgstr ""
 
 #: ../../printerdrake.pm_.c:1900
-#, fuzzy
 msgid "Go on without configuring the network"
-msgstr "Konfigurerer nettverk"
+msgstr "Fortsett uten å konfigurere nettverket"
 
 #: ../../printerdrake.pm_.c:1933
 msgid ""
@@ -7758,19 +7758,16 @@ msgid ""
 msgstr ""
 
 #: ../../printerdrake.pm_.c:1944
-#, fuzzy
 msgid "Restarting printing system ..."
-msgstr "Leser skriverdata: ..."
+msgstr "Starter skriversystemet på nytt ..."
 
 #: ../../printerdrake.pm_.c:1982
-#, fuzzy
 msgid "high"
-msgstr "Høy"
+msgstr "høy"
 
 #: ../../printerdrake.pm_.c:1982
-#, fuzzy
 msgid "paranoid"
-msgstr "Paranoid"
+msgstr "paranoid"
 
 #: ../../printerdrake.pm_.c:1983
 #, c-format
@@ -7833,14 +7830,13 @@ msgid "Which printing system (spooler) do you want to use?"
 msgstr "Hvilket utskriftsystem (spooler) ønsker du å bruke?"
 
 #: ../../printerdrake.pm_.c:2196
-#, fuzzy, c-format
+#, c-format
 msgid "Configuring printer \"%s\" ..."
-msgstr "Konfigurer skriver"
+msgstr "Konfigurerer skriver \"%s\" ..."
 
 #: ../../printerdrake.pm_.c:2209
-#, fuzzy
 msgid "Installing Foomatic ..."
-msgstr "Installerer pakke %s"
+msgstr "Installerer Foomatic ..."
 
 #: ../../printerdrake.pm_.c:2266 ../../printerdrake.pm_.c:2305
 #: ../../printerdrake.pm_.c:2689 ../../printerdrake.pm_.c:2759
@@ -7848,14 +7844,12 @@ msgid "Printer options"
 msgstr "Opsjoner for skriver"
 
 #: ../../printerdrake.pm_.c:2275
-#, fuzzy
 msgid "Preparing PrinterDrake ..."
-msgstr "Leser skriverdata: ..."
+msgstr "Klargjører PrinterDrake ..."
 
 #: ../../printerdrake.pm_.c:2292 ../../printerdrake.pm_.c:2846
-#, fuzzy
 msgid "Configuring applications..."
-msgstr "Konfigurer skriver"
+msgstr "Konfigurerer applikasjoner..."
 
 #: ../../printerdrake.pm_.c:2312
 msgid "Would you like to configure printing?"
@@ -7863,12 +7857,11 @@ msgstr "Ønsker du å konfigurere en skriver?"
 
 #: ../../printerdrake.pm_.c:2324
 msgid "Printing system: "
-msgstr ""
+msgstr "Utskriftssystem: "
 
 #: ../../printerdrake.pm_.c:2372
-#, fuzzy
 msgid "Printerdrake"
-msgstr "Skriver"
+msgstr "Printerdrake"
 
 #: ../../printerdrake.pm_.c:2376
 #, fuzzy
@@ -7895,9 +7888,8 @@ msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr ""
 
 #: ../../printerdrake.pm_.c:2421
-#, fuzzy
 msgid "Change the printing system"
-msgstr "Konfigurer nettverk"
+msgstr "Endrer utskriftssystemet"
 
 #: ../../printerdrake.pm_.c:2426 ../../standalone/draknet_.c:278
 msgid "Normal Mode"
@@ -7905,9 +7897,8 @@ msgstr "Normalt modus"
 
 #: ../../printerdrake.pm_.c:2581 ../../printerdrake.pm_.c:2631
 #: ../../printerdrake.pm_.c:2840
-#, fuzzy
 msgid "Do you want to configure another printer?"
-msgstr "Vil du teste konfigurasjonen?"
+msgstr "Ønsker du å konfigurere enda en skriver?"
 
 #: ../../printerdrake.pm_.c:2667
 msgid "Modify printer configuration"
@@ -7944,33 +7935,32 @@ msgstr "Skriverprodusent, modell"
 
 #: ../../printerdrake.pm_.c:2691 ../../printerdrake.pm_.c:2763
 msgid "Set this printer as the default"
-msgstr ""
+msgstr "Sett denne skriveren som standard"
 
 #: ../../printerdrake.pm_.c:2693 ../../printerdrake.pm_.c:2768
 msgid "Add this printer to Star/Open Office"
-msgstr ""
+msgstr "Legg denne skriveren til Star/Open Office"
 
 #: ../../printerdrake.pm_.c:2694 ../../printerdrake.pm_.c:2777
 msgid "Remove this printer from Star/Open Office"
-msgstr ""
+msgstr "Fjern denne skriveren fra Star/Open Office"
 
 #: ../../printerdrake.pm_.c:2695 ../../printerdrake.pm_.c:2786
 msgid "Print test pages"
 msgstr "Skriver ut testsider"
 
 #: ../../printerdrake.pm_.c:2696 ../../printerdrake.pm_.c:2788
-#, fuzzy
 msgid "Know how to use this printer"
-msgstr "Vil du teste konfigurasjonen?"
+msgstr "Vet hvordan man skal bruke denne skriveren"
 
 #: ../../printerdrake.pm_.c:2698 ../../printerdrake.pm_.c:2790
 msgid "Remove printer"
 msgstr "Fjern skriver"
 
 #: ../../printerdrake.pm_.c:2742
-#, fuzzy, c-format
+#, c-format
 msgid "Removing old printer \"%s\" ..."
-msgstr "Leser skriverdata: ..."
+msgstr "Fjerner gammel skriver \"%s\" ..."
 
 #: ../../printerdrake.pm_.c:2766
 msgid "Default printer"
@@ -7979,16 +7969,16 @@ msgstr "Standardskriver"
 #: ../../printerdrake.pm_.c:2767
 #, c-format
 msgid "The printer \"%s\" is set as the default printer now."
-msgstr ""
+msgstr "Skriveren \"%s\" er nå satt til standard skriver."
 
 #: ../../printerdrake.pm_.c:2771 ../../printerdrake.pm_.c:2774
 msgid "Adding printer to Star/Open Office"
-msgstr ""
+msgstr "Legger skriver til Star/Open Office"
 
 #: ../../printerdrake.pm_.c:2772
 #, c-format
 msgid "The printer \"%s\" was successfully added to Star/Open Office."
-msgstr ""
+msgstr "Skriveren \"%s\" ble vellykket lagt til Star/Open Office."
 
 #: ../../printerdrake.pm_.c:2775
 #, c-format
