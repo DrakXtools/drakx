@@ -1,3 +1,78 @@
+2003/03/02  alafox
+
+	* share/po/ru.po: updated
+
+2003/03/02  alus
+
+	* share/po/pl.po: Hard spell checking
+
+2003/03/02  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/translation_size.pl: add
+
+2003/03/02  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/et.po, share/po/es.po, share/po/ro.po, share/po/hu.po,
+	share/po/fi.po, share/po/ar.po: updated Arabic, Estonian, Finnish,
+	Hungarian and Romanian files
+
+2003/03/02  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/printerdrake.pm: 
+	  - Avoid two overlayed wait messages when installing packages
+	  - Let applications (OpenOffice.org/GIMP) being once on startup of
+	Printerdrake
+	Call function for configuring applications only if really needed.
+	Shortened the texts in some list dialogs to get a better layout.
+	  - When non-interactively creating print queues ask the user for the
+	model
+	  name if the model is not in the database, don't do wild guesses then.
+
+	* printer/data.pm: Make file checks for CUPS package installation
+	independent of whether "curl"
+	or "wget" is installed to fulfill the "webfetch" requirement.
+
+	* printer/detect.pm: Read device ID string for a USB printer up to three
+	times when it does not contain information.
+
+	* printer/gimp.pm: Fixed auto-configuration for printers in the GIMP to
+	work with Foomatic 3.0.
+
+	* printer/main.pm: Correction on reading the Foomatic overview.
+	Fixes on reading of Foomatic data overview ("foomatic-configure -O"):
+	  - Removed usage of on-disk cache
+	  - Made new "<general>" and "<ieee1284>" tags for auto-detection info
+	being recognized.
+
+2003/03/01  fabman
+
+	* share/po/es.po: updated Spanish translation
+	updated Spanish translation
+
+2003/03/01  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/sp.po, share/po/zh_CN.po, share/po/sv.po, share/po/sr.po,
+	share/po/hu.po: updated Chinese, Swedish, Hungarian and Serbian files
+
+2003/03/01  Till Kamppeter  <till@mandrakesoft.com>
+
+	* install_steps_interactive.pm: The generation of the "Summary" button for
+	printer configuration created a blank entry in the
+	$o->{printer}{configures} hash which lead to a blank menu entry in the
+	main menu of printerdrake. This is fixed now.
+
+2003/02/28  alus
+
+	* share/po/pl.po: updated
+
+2003/02/28  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/ja.po: reduce a translation size so that groups choice still
+	has the "ok" button shown
+
+	* detect_devices.pm: let hasSMP don't exit DrakX in testing mode because
+	/dev/mem is not accessible
+
 2003/02/28  alus
 
 	* share/po/pl.po: updated
@@ -13618,7 +13693,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.798 2003/02/28 10:42:40 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.799 2003/02/28 22:36:27 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
