@@ -580,13 +580,26 @@ Create one first by clicking on 'Configure'")));
 
     my $param_vbox = Gtk2::VBox->new(0,0);
     my $i = 0;
-    my @mask;
-@mask = (0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0) if $netcnx->{type} eq 'lan';
-@mask = (0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1) if $netcnx->{type} eq 'isdn_internal' && defined $cnx->{vendor} && defined $cnx->{id};
-@mask = (1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1) if $netcnx->{type} eq 'isdn_internal' && (!defined $cnx->{vendor} || !defined $cnx->{id});
-@mask = (0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0) if $netcnx->{type} eq 'modem' || $netcnx->{type} eq 'isdn_external';
-@mask = (0,0,0,0,0,0,1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0) if $netcnx->{type} =~ /adsl/;
-@mask = (0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0) if $netcnx->{type} eq 'cable';
+    my (@mask, $extra_netdevice);
+    if ($netcnx->{type} eq 'lan') {
+        @mask = (0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0);
+    } elsif ($netcnx->{type} eq 'isdn_internal') {
+        if (defined $cnx->{vendor} && defined $cnx->{id}) {
+            @mask = (0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1);
+        } else {
+            @mask = (1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1)
+        }
+        $extra_netdevice = "ppp0";
+    } elsif ($netcnx->{type} eq 'modem' || $netcnx->{type} eq 'isdn_external') {
+        @mask = (0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0);
+        $extra_netdevice = "ppp0" if $netcnx->{type} eq 'modem';
+    } elsif ($netcnx->{type} =~ /adsl/) {
+        @mask = (0,0,0,0,0,0,1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0);
+        $extra_netdevice = "ppp0";
+    } elsif ($netcnx->{type} eq 'cable') {
+        @mask = (0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0);
+    }
+    $extra_netdevice = "ippp0" if $netcnx->{type} =~ /^isdn/;
 
     #- duplicated code (waiting for 9.1 to be out to merge everything correctly, avoid bug elsewhere).
     if ($netcnx->{type} =~ /adsl/) {
@@ -615,7 +628,7 @@ Create one first by clicking on 'Configure'")));
 		     [ N("Domain name"), \$cnx->{domain} ],
 		     [ N("First DNS Server (optional)"), \$cnx->{dns1} ],
 		     [ N("Second DNS Server (optional)"), \$cnx->{dns2} ],
-		     [ N("Ethernet Card"), \$netc->{NET_DEVICE}, [ 'eth0', 'eth1', 'eth2', 'eth3', 'eth4', 'eth5', 'eth6', 'eth7', 'eth8', 'eth9' ] ],
+		     [ N("Ethernet Card"), \$netc->{NET_DEVICE}, [ detect_devices::getNet(), $extra_netdevice ] ],
 		     [ N("DHCP Client"), \$netcnx->{dhcp_client}, ["dhcp-client", "dhcpcd", "dhcpxd"] ],
 		     [ N("Connection speed"), \$cnx->{speed}, ["64 Kb/s", "128 Kb/s"] ],
 		     [ N("Connection timeout (in sec)"), \$cnx->{huptimeout} ]
