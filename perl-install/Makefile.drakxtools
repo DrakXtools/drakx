@@ -3,7 +3,7 @@ include Makefile.config
 
 INLIBDEST_DIRS = Newt c resize_fat sbus_probing 
 HAVEINST_DIRS = share/po standalone/interactive_http
-DIRS = $(INLIBDEST_DIRS) $(HAVEINST_DIRS) ddcprobe serial_probe
+DIRS = $(INLIBDEST_DIRS) $(HAVEINST_DIRS) ddcprobe serial_probe harddrake
 NAME = libDrakX
 PREFIX = 
 LIBDIR = $(PREFIX)/usr/lib
@@ -14,10 +14,9 @@ ETCDEST = $(PREFIX)/etc/gtk
 BINX11DEST = $(PREFIX)/usr/X11R6/bin
 LIBX11DEST = $(PREFIX)/usr/X11R6/lib/X11
 LIBDEST = $(LIBDIR)/$(NAME)
-NETLIBDEST = $(LIBDIR)/$(NAME)/network
-SECURITYDEST = $(LIBDIR)/$(NAME)/security
 PIXDIR = $(DATADIR)/$(NAME)/pixmaps
-.PHONY: $(DIRS)
+INITDIR =  $(PREFIX)/etc/rc.d/init.d
+PHONY: $(DIRS)
 
 all: rpcinfo-flushed $(DIRS)
 
@@ -27,7 +26,7 @@ $(DIRS):
 	[ ! -e $@/Makefile ] || $(MAKE) -C $@
 
 install:
-	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR) $(LIBDEST) $(NETLIBDEST) $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) $(SECURITYDEST)
+	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/pixmaps $(LIBDEST)/{network,security,harddrake} $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) $(INITDIR)
 	install -d $(INLIBDEST_DIRS:%=$(LIBDEST)/%)
 	install $(STANDALONEPMS) $(SBINDEST)
 	install -s rpcinfo-flushed ddcprobe/ddcxinfos serial_probe/serial_probe $(SBINDEST)
@@ -36,8 +35,7 @@ install:
 	mv -f $(SBINDEST)/lsnetdrake $(BINDEST)/lsnetdrake
 
 	install -m 644 *.pm $(LIBDEST)
-	install -m 644 network/*.pm $(NETLIBDEST)
-	install -m 644 security/*.pm $(SECURITYDEST)
+	for i in network harddrake security; do install -m 644 $$i/*.pm $(LIBDEST)/$$i/;done
 	install -m 644 pixmaps/* $(PIXDIR)
 	install -m 644 share/diskdrake.rc $(DATADIR)/$(NAME)
 
@@ -60,3 +58,5 @@ install:
 
 	find auto -follow -name .exists -o -name "*.bs" | xargs rm -f
 	cp -rfL auto standalone/icons $(LIBDEST)
+	mv $(LIBDEST)/icons/harddrake2/ $(DATADIR)/pixmaps/
+	mv $(SBINDEST)/service_harddrake $(INITDIR)/harddrake
