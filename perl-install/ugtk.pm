@@ -500,46 +500,50 @@ sub gtkicons_labels_widget {
     foreach (@$args) {
 	my $label = $_->[0];
 	die "$label 's icon is missing" unless $exec_hash->{$label};
-	my $dbl_area;
+	my ($dbl_area, $pix, $width, $height); # initialized in call back
 	my $darea = new Gtk::DrawingArea;
 	my ($icon, undef) = gtkcreate_png($_->[1]);
 	my $pixbuf = compose_with_back($_->[1], $back_pixbuf);
+	my $pixbuf_h = compose_with_back($_->[1], $back_pixbuf, 170);
 
-	$darea->{state} = 0;
-	$darea->signal_connect(expose_event => sub {
+	my $draw = sub {
+	    my ($widget, $event) = @_;
 	    my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
-	    if (!defined($dbl_area) || $darea->{state} != $dbl_area->{state}) {
-		   my $state = $darea->{state};
-		   my ($pix, $width, $height) = create_pix_text($darea, $label, $color_text, $widget_for_font->style->font, $x_round, 1,
-											   1, 0, $background, $x_back2, $y_back2, 1, 0, $state);
+	    my $state = $darea->{state};
+	    if (!defined($dbl_area)) {
+		   ($pix, $width, $height) = create_pix_text($darea, $label, $color_text, $widget_for_font->style->font, $x_round, 1,
+										  1, 0, [$background, $background], $x_back2, $y_back2, 1, 0);
 		   ($dx, $dy) = (max($width, $x_round), $y_round + $height);
 		   $darea->set_usize($dx, $dy);
 		   $dbl_area = new Gtk::Gdk::Pixmap($darea->window, max($width, $x_round), $y_round + $height);
-		   $dbl_area->{state} = $darea->{state};
+	    }
+	    # Redraw if state change (selected <=> not selected)
+	    if (!$dbl_area->{state} || $state != $dbl_area->{state}) {
+		   $dbl_area->{state} = $state;
 		   fill_tiled($darea, $dbl_area, $background, $x_back2, $y_back2, $dx, $dy);
-#                     $darea->{state} ? $icon_h : $icon
-		   $pixbuf->render_to_drawable($dbl_area, $darea->style->fg_gc('normal'), 0, 0, 0, 0,
-								 $pixbuf->get_width, $pixbuf->get_height, 'normal', 0, 0);
-		   
-		   $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
-							 $pix, 0, 0, ($dx - $width)/2, $y_round, $width, $height);
+		   ($state ? $pixbuf_h : $pixbuf)
+			  ->render_to_drawable($dbl_area, $darea->style->fg_gc('normal'), 0, 0, 0, 0,
+							   $pixbuf->get_width, $pixbuf->get_height, 'normal', 0, 0);
+		   $dbl_area->draw_pixmap($darea->style->bg_gc('normal'), ($state ? $pix->[1] : $pix->[0]),
+							 0, 0, ($dx - $width)/2, $y_round, $width, $height);
 	    }
 	    $darea->window->draw_pixmap($darea->style->bg_gc('normal'), $dbl_area, 0, 0, 0, 0, $dx, $dy);
 	    ($darea->{dx}, $darea->{dy}) = ($dx, $dy);
-	});
+
+	};
+	$darea->{state} = 0;
+	$darea->signal_connect(expose_event => $draw);
 	$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
 	$darea->signal_connect(enter_notify_event => sub {
 				    if ($darea->{state} == 0) {
 					$darea->{state} = 1;
-					$pixbuf->render_to_drawable($dbl_area, $darea->style->fg_gc('normal'), 0, 0, 0, 0,
-										   $pixbuf->get_width, $pixbuf->get_height, 'normal', 0, 0);
+					&$draw(@_);
 				    }
 				});
 	$darea->signal_connect(leave_notify_event => sub {
 				    if ($darea->{state} == 1) {
 					$darea->{state} = 0;
-					$pixbuf->render_to_drawable($dbl_area, $darea->style->fg_gc('normal'), 0, 0, 0, 0,
-										   $pixbuf->get_width, $pixbuf->get_height, 'normal', 0, 0);
+					&$draw(@_);
 				    }
 				});
 	my $label_exec = $_->[0];
@@ -615,14 +619,9 @@ sub write_on_pixmap {
 #-#######################
 
 sub create_pix_text {
-    #ref widget, txt, color_txt, [font], [width], [height], flag1, flag2, [background, backsize x y], centeredx, centeredy, bold
-    my ($w, $text, $color_text, $font, $max_width, $max_height, $can_be_greater, $can_be_smaller, $background, $x_back, $y_back, $centeredx, $centeredy, $bold) = @_;
+    #ref widget, txt, color_txt, [font], [width], [height], flag1, flag2, [ (background background_highlighted background_selecteded) backsize x y], centeredx, centeredy
+    my ($w, $text, $color_text, $font, $max_width, $max_height, $can_be_greater, $can_be_smaller, $backgrounds,  $x_back, $y_back, $centeredx, $centeredy) = @_;
     my $color_background;
-    my $backpix;
-    if ($color_text =~ /#(\d+)#(\d+)#(\d+)/) { $color_text = gtkcolor(map{$_*65535/255}($1, $2, $3)) }
-    if (ref($background) eq 'Gtk::Gdk::Color') { $color_background = $background }
-    elsif ($background =~ /#(\d+)#(\d+)#(\d+)/) { $color_background = gtkcolor(map{$_*65535/255}($1, $2, $3)) }
-    elsif (ref($background) eq 'Gtk::Gdk::Pixmap' && $x_back && $y_back) { $backpix = 1 }
     my $fake_darea = new Gtk::DrawingArea;
     my $style = $fake_darea->style->copy();
     if (ref($font) eq 'Gtk::Gdk::Font') {
@@ -633,23 +632,26 @@ sub create_pix_text {
     $fake_darea->set_style($style);
     my ($width, $height, $lines, $widths, $heights) = get_text_coord (
         $text, $fake_darea, $max_width, $max_height, $can_be_greater, $can_be_smaller, $centeredx, $centeredy);
-    my $pix = new Gtk::Gdk::Pixmap($w->window, $width, $height);
-
-    if ($backpix) {
-	fill_tiled($w, $pix, $background, $x_back, $y_back, $width, $height);
-    } else {
-	$color_background ||= gtkcolor(65535, 65535, 65535);
-	my $gc_background = new Gtk::Gdk::GC($w->window);
-	$gc_background->set_foreground($color_background);
-	$pix->draw_rectangle($gc_background, 1, 0, 0, $width, $height);
+    my $pix;
+    my $j = 0;
+    foreach (@$backgrounds) { 
+	   $pix->[$j] = new Gtk::Gdk::Pixmap($w->window, $width, $height);
+	   fill_tiled($w, $pix->[$j], $backgrounds->[$j], $x_back, $y_back, $width, $height);
+	   $j++;
     }
+    
+    
     $color_text ||= gtkcolor(0, 0, 0);
     my $gc_text = new Gtk::Gdk::GC($w->window);
     $gc_text->set_foreground($color_text);
     my $i = 0;
     foreach (@{$lines}) {
-	$pix->draw_string($style->font, $gc_text, ${$widths}[$i], ${$heights}[$i], $_);
-	$bold and $pix->draw_string($style->font, $gc_text, ${$widths}[$i] + 1, ${$heights}[$i], $_);
+	$j = 0;
+	foreach my $pix (@$pix) { 
+	  $pix->draw_string($style->font, $gc_text, ${$widths}[$i], ${$heights}[$i], $_);
+	  $pix->draw_string($style->font, $gc_text, ${$widths}[$i] + 1, ${$heights}[$i], $_) if $j;
+	  $j++;
+	}
 	$i++;
     }
     ($pix, $width, $height);
@@ -746,8 +748,8 @@ sub gtkcreate_xpm {
 sub gtkcreate_png_pixbuf {
     my ($f) = shift;
     die 'gdk-pixbuf loibrary is unavaillable' unless ($use_pixbuf);
-    $f =~ m|.png$| or $f = "$f.png";
-    if ($f !~ /\//) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
+    $f =~ /\.png$/ or $f .= '.png';
+    if ($f !~ /^\//) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
     Gtk::Gdk::Pixbuf->new_from_file($f) or die "gtkcreate_png: missing png file $f";
 }
 
@@ -775,18 +777,19 @@ sub gtkcreate_png {
 }
 
 sub compose_pixbufs {
-    my ($pixbuf, $back_pixbuf_unaltered) = @_;
+    my ($pixbuf, $back_pixbuf_unaltered, $alpha_threshold) = @_;
+    $alpha_threshold = 255 unless $alpha_threshold;
     my ($width, $height) = ($pixbuf->get_height, $pixbuf->get_width);
     my $back_pixbuf = Gtk::Gdk::Pixbuf->new('rgb', 0, 8, $height, $width);
 
     $back_pixbuf_unaltered->copy_area(0, 0, $height, $width, $back_pixbuf, 0, 0);
-    $pixbuf->composite($back_pixbuf, 0, 0, $width, $height, 0, 0, 1, 1, 'nearest', 255);
+    $pixbuf->composite($back_pixbuf, 0, 0, $width, $height, 0, 0, 1, 1, 'nearest', $alpha_threshold);
     $back_pixbuf;
 }
 
 sub compose_with_back {
-    my ($f, $back_pixbuf_unaltered) = @_;
-    compose_pixbufs(gtkcreate_png_pixbuf($f), $back_pixbuf_unaltered);
+    my ($f, $back_pixbuf_unaltered, $alpha_threshold) = @_;
+    compose_pixbufs(gtkcreate_png_pixbuf($f), $back_pixbuf_unaltered, $alpha_threshold);
 }
 
 sub xpm_d { my $w = shift; Gtk::Gdk::Pixmap->create_from_xpm_d($w->window, undef, @_) }
