@@ -78,7 +78,11 @@ sub mkbootdisk {
 
 sub read() {
     my $file = sprintf("/etc/%s.conf", arch() =~ /sparc/ ? 'silo' : arch() =~ /ppc/ ? 'yaboot' : 'lilo');
-    $file =~ /lilo/ && detect_bootloader() =~ /GRUB/ ? read_grub("/boot/grub/menu.lst") : read_lilo($file);
+    my $bootloader = $file =~ /lilo/ && detect_bootloader() =~ /GRUB/ ? read_grub("/boot/grub/menu.lst") : read_lilo($file);
+    if (my $default = find { $_ && $_->{append} } get_label($bootloader->{default}, $bootloader), @{$bootloader->{entries}}) {
+	$bootloader->{perImageAppend} ||= $default->{append};
+    }
+    $bootloader;
 }
 
 sub read_grub {
