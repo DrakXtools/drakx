@@ -276,27 +276,27 @@ fi
 sub set_profile {
     my ($netcnx) = @_;
     system("/sbin/set-netprofile $netcnx->{PROFILE}");
-    log::explanations("current profile is $netcnx->{PROFILE}");
+    log::explanations("Switching to \"$netcnx->{PROFILE}\" profile");
 }
 
 sub save_profile {
     my ($netcnx) = @_;
     system("/sbin/save-netprofile $netcnx->{PROFILE}");
-    log::explanations("saved $netcnx->{PROFILE} profile");
+    log::explanations("Saving \"$netcnx->{PROFILE}\" profile");
 }
 
 sub del_profile {
     my ($profile) = @_;
     return if !$profile || $profile eq "default";
     rm_rf("$::prefix/etc/netprofile/profiles/$profile");
-    log::explanations("deleted profile $profile");
+    log::explanations("Deleting \"$profile\"profile ");
 }
 
 sub add_profile {
     my ($netcnx, $profile) = @_;
     return if !$profile || $profile eq "default" || member($profile, get_profiles());
     system("/sbin/clone-netprofile $netcnx->{PROFILE} $profile");
-    log::explanations("created $profile profile");
+    log::explanations("Creating \"$profile\" profile");
 }
 
 sub get_profiles() {
