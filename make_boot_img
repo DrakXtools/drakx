@@ -44,6 +44,12 @@ my @all_images = (
 
 my @images = @ARGV ? @ARGV : map { "images/$_" } @all_images;
 
+if (any { /move/ } @images) {
+    -e "$instdir/init-move" or die "ERROR: $instdir not built for move\n";
+} else {
+    -e "$instdir/init-move" and die "ERROR: $instdir built for move\n";
+}
+
 foreach my $img (@images) {
     my ($type, $I, $extension) = $img =~ m!([^/]*)(64)?\.([^.]*)$!;
 
@@ -54,6 +60,12 @@ foreach my $img (@images) {
 
 	if (my ($tftpboot) = grep { -e $_ } qw(/tftpboot /var/lib/tftpboot)) {
 	    system("/bin/cp -f isolinux/alt0/* $tftpboot 2>/dev/null");
+	}
+    } elsif ($img =~ /move/) {
+	isolinux_move($main);
+
+	if (my ($tftpboot) = grep { -e $_ } qw(/tftpboot /var/lib/tftpboot)) {
+	    system("/bin/cp -f move/isolinux/* $tftpboot/move 2>/dev/null");
 	}
     } elsif ($img =~ /boot.iso/) {
 	boot_iso($img);
@@ -74,9 +86,9 @@ foreach my $img (@images) {
 sub install_stripped { _ "strip $_[0]"; _ "$sudo install $_[0] $_[1]" }
 
 sub initrd {
-    my ($mnt, $type, $I, $img) = @_;
+    my ($mnt, $type, $I, $img, $o_raw_stage1_tree_kind) = @_;
     my $tmp = "$ENV{HOME}/tmp/initrd";
-    my $tar = "$instdir/stage1-data/stage1.tar.bz2";
+    my $tar = "$instdir/stage1-data/stage1$o_raw_stage1_tree_kind.tar.bz2";
 
     __ "$sudo umount $tmp $mnt 2>/dev/null";
     _ "dd if=/dev/zero of=$tmp bs=1k count=" . ($arch =~ /ia64/ ? ($type eq "all" ? 16386 : 16384) : ($type eq "all" ? 5000 : 2000));
@@ -172,7 +184,7 @@ sub boot_img_i386 {
 
     _ "$sudo mount -t vfat -o umask=0 $img $mnt -o loop";
     _ "cat $kernel > $mnt/vmlinuz";
-    bmp_to_msg('isolinux-graphic-simple.bmp', "$mnt/boot.msg", 27, 27);
+    bmp_to_msg('isolinux-graphic-simple.bmp', "$mnt/boot.msg", '397,190,14,6', 27, 27);
 
     (my $rdz = $img) =~ s/\.img/.rdz/;
     (my $initrd_type = $type) =~ s/-changedisk//;
@@ -614,12 +626,12 @@ rescue-net:             boots the rescue image from a network server
 }
 
 sub bmp_to_msg {
-    my ($bmp, $msg, $progress_color, $clear_color) = @_;
+    my ($bmp, $msg, $progress_place, $progress_color, $clear_color) = @_;
     #- change here for newer picture isolinux-graphic.bmp and newer parameters.
     #- for old style pictures (9.1 and previous)
     # lilo-bmp2mdk mode:0x103 progress:425,173,16,7,64+21 clear:600,800,64+59 pos:0,0 <isolinux-graphic.bmp >isolinux/boot.msg
     #- for current 9.2 pictures.
-    -e $bmp and _ "lilo-bmp2mdk mode:0x103 progress:397,190,14,6,64+$progress_color clear:600,800,64+$clear_color pos:0,0 <$bmp >$msg"
+    -e $bmp and _ "lilo-bmp2mdk mode:0x103 progress:$progress_place,64+$progress_color clear:600,800,64+$clear_color pos:0,0 <$bmp >$msg"
 }
 
 sub isolinux {
@@ -635,7 +647,7 @@ sub isolinux {
 	_ "mv images/all.rdz-$_ isolinux/alt$::i/all.rdz";
     } @kernels;
 
-    bmp_to_msg('isolinux-graphic.bmp', 'isolinux/boot.msg', 18, 18);
+    bmp_to_msg('isolinux-graphic.bmp', 'isolinux/boot.msg', '397,190,14,6', 18, 18);
 
     _ "cp /usr/lib/syslinux/isolinux.bin isolinux/isolinux.bin";
     _ "install -m 644 -D /boot/memtest* isolinux/test/memtest.bin";
@@ -711,6 +723,18 @@ You can choose the following kernels :
 " . (-e "isolinux/boot.msg" ?
      "0c[F1-Help] [F2-Advanced Help] [F3-Main]07" :
      "0c[F1-Help] [F2-Advanced Help]07") . "\n";
+}
+
+sub isolinux_move {   
+    my ($main) = @_;
+
+    my ($kernel) = glob("kernel/all.kernels/$main/boot/vmlinu*");
+    _ "cp $kernel move/isolinux/vmlinuz";
+    initrd($tmp_mnt_initrd, 'all', '', "move/isolinux/all.rdz-$main", '-with-busybox');
+    rename "move/isolinux/all.rdz-$main", "move/isolinux/all.rdz";
+
+    bmp_to_msg('move/data/isolinux-graphic.bmp', 'move/isolinux/boot.msg', '371,144,4,4', 11, 127);
+    _ "cp /usr/lib/syslinux/isolinux.bin isolinux/isolinux.bin";
 }
 
 sub hd_grub {
