@@ -66,50 +66,53 @@ sub get_rpms {
 
     opendir D, $dir or die "cannot open directory $dir\n";
     map { 
-	if (/([^\/]*?)-([^-]*)-([^-]*)\.([^-]*)(?:\.src)?\.rpm$/) {
-	    if ($rpms->{$1}) {
-		if (version_compare($2, $rpms->{$1}{version}) > 0 ||
-		    version_compare($2, $rpms->{$1}{version}) == 0 && version_compare($3, $rpms->{$1}{release}) > 0) {
+	if (/([^\/]*?)-([^-]*)-([^-]*)\.([^-]*)\.rpm$/) {
+	    my $key = "$1 $4"; #- get name including architecture.
+	    if ($rpms->{$key}) {
+		if (version_compare($2, $rpms->{$key}{version}) > 0 ||
+		    version_compare($2, $rpms->{$key}{version}) == 0 && version_compare($3, $rpms->{$key}{release}) > 0) {
 		    if ($modifiable) {
 			if ($flag->{sorted}) {
-			    print "you said rpms directory are sorted, so I keep obseleted $rpms->{$1}{file} by $_ in $rpms->{$1}{dir}\n" if $flag->{verbose};
+			    print "you said rpms directory are sorted, so I keep obseleted $rpms->{$key}{file} by $_ in $rpms->{$key}{dir}\n" if $flag->{verbose};
 			} else {
 			    if (-d $flag->{conflict}) {
-				print "moving obseleted $rpms->{$1}{file} by $_ in $rpms->{$1}{dir}\n" if $flag->{verbose};
-				mv("$rpms->{$1}{dir}/$rpms->{$1}{file}", $flag->{conflict});
+				print "moving obseleted $rpms->{$key}{file} by $_ in $rpms->{$key}{dir}\n" if $flag->{verbose};
+				mv("$rpms->{$key}{dir}/$rpms->{$key}{file}", $flag->{conflict});
 			    } elsif ($flag->{clean}) {
-				print "removing obseleted $rpms->{$1}{file} by $_ in $rpms->{$1}{dir}\n" if $flag->{verbose};
-				rm("$rpms->{$1}{dir}/$rpms->{$1}{file}");
+				print "removing obseleted $rpms->{$key}{file} by $_ in $rpms->{$key}{dir}\n" if $flag->{verbose};
+				rm("$rpms->{$key}{dir}/$rpms->{$key}{file}");
 			    }
 			}
 		    }
-		    $rpms->{$1} = { name => $1,
-				    version => $2,
-				    release => $3,
-				    arch => $4,
-				    dir => $dir,
-				    file => $_,
-				};
+		    $rpms->{$key} = { key => $key,
+				      name => $1,
+				      version => $2,
+				      release => $3,
+				      arch => $4,
+				      dir => $dir,
+				      file => $_,
+				    };
 		} else {
 		    if ($modifiable) {
 			if (-d $flag->{conflict}) {
-			    print "copying older or equal $_ by $rpms->{$1}{file} in $flag->{conflict}\n" if $flag->{verbose};
+			    print "copying older or equal $_ by $rpms->{$key}{file} in $flag->{conflict}\n" if $flag->{verbose};
 			    cp("$dir/$_", $flag->{conflict});
 			    chmod 0644, "$flag->{conflict}/$_";
 			} elsif ($flag->{clean}) {
-			    print "removing older or equal $_ by $rpms->{$1}{file} in $dir\n" if $flag->{verbose};
+			    print "removing older or equal $_ by $rpms->{$key}{file} in $dir\n" if $flag->{verbose};
 			    rm("$dir/$_");
 			}
 		    }
 		}
 	    } else {
-		$rpms->{$1} = { name => $1,
-				version => $2,
-				release => $3,
-				arch => $4,
-				dir => $dir,
-				file => $_,
-			    };
+		$rpms->{$key} = { key => $key,
+				  name => $1,
+				  version => $2,
+				  release => $3,
+				  arch => $4,
+				  dir => $dir,
+				  file => $_,
+			        };
 	    }
 	} else {
 	    print STDERR "unable to parse filename $_\n";
@@ -141,12 +144,12 @@ sub sync_medium {
 
     #- check for right directory, and move if necessary.
     foreach (values %$rpms) {
-	unless ($pkg2dir{$_->{name}}) {
+	unless ($pkg2dir{$_->{key}}) {
 	    print "file $_->{file} in $_->{dir} define package \"$_->{name}\" not listed in list files\n" if $flag->{verbose};
-	} elsif ($_->{dir} ne $pkg2dir{$_->{name}}) {
-	    print "moving file $_->{file} in $_->{dir} to $pkg2dir{$_->{name}}\n" if $flag->{verbose};
-	    mv("$_->{dir}/$_->{file}", $pkg2dir{$_->{name}});
-	    $_->{dir} = $pkg2dir{$_->{name}};
+	} elsif ($_->{dir} ne $pkg2dir{$_->{key}}) {
+	    print "moving file $_->{file} in $_->{dir} to $pkg2dir{$_->{key}}\n" if $flag->{verbose};
+	    mv("$_->{dir}/$_->{file}", $pkg2dir{$_->{key}});
+	    $_->{dir} = $pkg2dir{$_->{key}};
 	}
     }
 }
@@ -183,7 +186,7 @@ sub sync_rpms {
 		    unless (-e "$target->{$_}{dir}/$source->{$_}{file}") {
 			die "unable to copy $source->{$_}{file} from $source->{$_}{dir} into $target->{$_}{dir}\n";
 		    }
-		    rm("$target->{$_}{dir}/$target->{$_}{file}");
+		    rm("$target->{$_}{dir}/$target->{$_}{file}") unless $source->{$_}{file} eq $target->{$_}{file}; #- copy on eq
 		}
 	    } elsif (version_compare($source->{$_}{version}, $target->{$_}{version}) != 0 ||
 		     version_compare($source->{$_}{release}, $target->{$_}{release}) != 0) {
@@ -198,8 +201,9 @@ sub sync_rpms {
     foreach (keys %$target) {
 	unless ($source->{$_}) {
 	    if ($flag->{verbose}) {
-		print "removing $target->{$_}{file}" . ($flag->{remove} ? " from $target->{$_}{dir}\n" : " is neccessary!\n")
-		}
+		print "removing $target->{$_}{file}" . ($flag->{remove} ? " from $target->{$_}{dir}\n" : " is neccessary!\n");
+		my $k = $_;
+	    }
 	    if ($flag->{remove}) {
 		rm("$target->{$_}{dir}/$target->{$_}{file}");
 	    }
