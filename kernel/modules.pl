@@ -68,7 +68,6 @@ my %modules_removed_from_stage1 = (
 
   'disk/hardware_raid' => [
     qw(imm ppa),
-    qw(ataraid hptraid silraid pdcraid), # ad-hoc raid which is unsupported in stage1 anyway
   ],
 );
 
