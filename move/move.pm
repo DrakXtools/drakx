@@ -34,7 +34,7 @@ sub init {
 
     #- devfsd needed for devices accessed by old names
     fs::mount("none", "/dev", "devfs", 0);
-    run_program::rooted('', '/sbin/devfsd', '/dev');
+    run_program::run('/sbin/devfsd', '/dev');
 }
 
 
