@@ -201,7 +201,7 @@ sub ask_standalone_gtk {
     my $update_service = sub {
 		my $started = -e "/var/lock/subsys/$_[0]";
                 my $action = $started ? "stop" : "start";
-                $_[1]->set($started ? N("running") : N("stopped"));
+                $_[1]->set_label($started ? N("running") : N("stopped"));
                 $started, $action;
     };
     my $b = Gtk2::EventBox->new;

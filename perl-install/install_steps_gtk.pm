@@ -218,7 +218,7 @@ sub reallyChooseGroups {
 	$check->set_active($val->{$e});
 	$check->signal_connect(clicked => sub { 
 	    $val->{$e} = $check->get_active;
-	    $w_size->set(&$size_to_display);
+	    $w_size->set_label(&$size_to_display);
 	});
 	gtkset_tip($tips, $check, $help);
 	#gtkpack_(Gtk2::HBox->new(0, 0), 0, gtkpng($file), 1, $check);
@@ -460,7 +460,7 @@ sub installPackages {
 			  )), 0, 1, 0);
     $details->hide if !@install_any::advertising_images;
     $w->sync;
-    $msg->set(N("Please wait, preparing installation..."));
+    $msg->set_label(N("Please wait, preparing installation..."));
     gtkset_mousecursor_normal($cancel->window);
     gtkset_mousecursor_normal($details->window);
     my $advertize = sub {
@@ -546,15 +546,15 @@ sub installPackages {
 	    $nb = $amount;
 	    $total_size = $total; $current_total_size = 0;
 	    $start_time = time();
-	    $msg->set(N("%d packages", $nb));
+	    $msg->set_label(N("%d packages", $nb));
 	    $w->flush;
 	} elsif ($type eq 'inst' && $subtype eq 'start') {
 	    $progress->set_fraction(0);
 	    my $p = $data->{depslist}[$id];
-	    $msg->set(N("Installing package %s", $p->name));
+	    $msg->set_label(N("Installing package %s", $p->name));
 	    $current_total_size += $last_size;
 	    $last_size = $p->size;
-	    $text->set((split /\n/, c::from_utf8($p->summary))[0] || '');
+	    $text->set_label((split /\n/, c::from_utf8($p->summary))[0] || '');
 	    $advertize->(1) if $show_advertising && $total_size > 20_000_000 && time() - $change_time > 20;
 	    $w->flush;
 	} elsif ($type eq 'inst' && $subtype eq 'progress') {
@@ -569,9 +569,9 @@ sub installPackages {
 
 	    $progress_total->set_fraction($ratio);
 	    if ($dtime != $last_dtime && $current_total_size > 80_000_000) {
-		$msg_time_total->set(formatTime(10 * round($total_time / 10) + 10));
-#-		$msg_time_total->set(formatTimeRaw($total_time) . "  " . formatTimeRaw($dtime / $ratio2));
-		$msg_time_remaining->set(formatTime(10 * round(max($total_time - $dtime, 0) / 10) + 10));
+		$msg_time_total->set_label(formatTime(10 * round($total_time / 10) + 10));
+#-		$msg_time_total->set_label(formatTimeRaw($total_time) . "  " . formatTimeRaw($dtime / $ratio2));
+		$msg_time_remaining->set_label(formatTime(10 * round(max($total_time - $dtime, 0) / 10) + 10));
 		$last_dtime = $dtime;
 	    }
 	    $w->flush;

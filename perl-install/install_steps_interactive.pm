@@ -340,7 +340,7 @@ sub formatMountPartitions {
         fs::formatMount_all($o->{all_hds}{raids}, $o->{fstab}, $o->{prefix}, sub {
         	my ($msg) = @_;
         	$w ||= $o->wait_message('', $msg);
-        	$w->set($msg);
+        	$w->set_label($msg);
         });
     } sub { 
 	$@ =~ /fsck failed on (\S+)/ or return;
@@ -358,11 +358,11 @@ sub setPackages {
 			     N("Looking for available packages..."));
     install_any::setPackages($o, $rebuild_needed);
 
-    $w->set(N("Looking at packages already installed..."));
+    $w->set_label(N("Looking at packages already installed..."));
     pkgs::selectPackagesAlreadyInstalled($o->{packages}, $o->{prefix});
 
     if ($rebuild_needed) {
-	$w->set(N("Finding packages to upgrade..."));
+	$w->set_label(N("Finding packages to upgrade..."));
 	pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix});
     }
 }
@@ -655,7 +655,7 @@ sub installPackages {
 	    $total = $total_;
 	} elsif ($type eq 'inst' && $subtype eq 'start') {
 	    my $p = $data->{depslist}[$id];
-	    $w->set(N("Installing package %s\n%d%%", $p->name, $total && 100 * $current / $total));
+	    $w->set_label(N("Installing package %s\n%d%%", $p->name, $total && 100 * $current / $total));
 	    $current += $p->size;
 	} else { goto $old }
     };
