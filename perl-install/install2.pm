@@ -48,7 +48,7 @@ my (%installSteps, @orderedInstallSteps);
   miscellaneous      => [ __("Miscellaneous"), 1, 1, '$::beginner' ],
   partitionDisks     => [ __("Setup filesystems"), 1, 0, '', "selectInstallClass" ],
   formatPartitions   => [ __("Format partitions"), 1, -1, '', "partitionDisks" ],
-  choosePackages     => [ __("Choose packages to install"), 1, 1, '$::beginner', "formatPartitions" ],
+  choosePackages     => [ __("Choose packages to install"), 1, -2, '$::beginner', "formatPartitions" ],
   doInstallStep      => [ __("Install system"), 1, -1, '', ["formatPartitions", "selectInstallClass"] ],
   configureNetwork   => [ __("Configure networking"), 1, 1, '$::beginner && !$::corporate', "formatPartitions" ],
   installCrypto      => [ __("Cryptographic"), 1, 1, '!$::expert', "configureNetwork" ],
@@ -399,18 +399,19 @@ sub miscellaneous {
 
 #------------------------------------------------------------------------------
 sub configureNetwork {
-    my ($clicked) = @_;
-
-    if ($o->{isUpgrade} && !$clicked) {
-	$o->{netc} or $o->{netc} = {};
+    #- get current configuration of network device.
+    eval {
+	$o->{netc} ||= {}; $o->{intf} ||= [];
 	add2hash($o->{netc}, network::read_conf("$o->{prefix}/etc/sysconfig/network")) if -r "$o->{prefix}/etc/sysconfig/network";
 	add2hash($o->{netc}, network::read_resolv_conf("$o->{prefix}/etc/resolv.conf")) if -r "$o->{prefix}/etc/resolv.conf";
 	foreach (all("$o->{prefix}/etc/sysconfig/network-scripts")) {
 	    if (/ifcfg-(\w+)/ && $1 !~ /^ppp/) {
-		push @{$o->{intf}}, { getVarsFromSh("$o->{prefix}/etc/sysconfig/network-scripts/$_") };
+		my $intf = network::findIntf($o->{intf}, $1);
+		add2hash($intf, { getVarsFromSh("$o->{prefix}/etc/sysconfig/network-scripts/$_") });
 	    }
 	}
-    }
+    };
+
     $o->configureNetwork($_[1] == 1);
 }
 #------------------------------------------------------------------------------
