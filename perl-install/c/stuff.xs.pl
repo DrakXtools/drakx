@@ -417,7 +417,7 @@ hasNetDevice(device)
     int s = socket(AF_INET, SOCK_DGRAM, 0);
     if (s == -1) { RETVAL = 0; return; }
 
-    strcpy(req.ifr_name, device);
+    strncpy(req.ifr_name, device, IFNAMSIZ);
 
     RETVAL = ioctl(s, SIOCGIFFLAGS, &req) == 0;
     close(s);
@@ -434,7 +434,7 @@ isNetDeviceWirelessAware(device)
     int s = socket(AF_INET, SOCK_DGRAM, 0);
 
     memset(&ifr, 0, sizeof(ifr));
-    strncpy(ifr.ifr_name, device, sizeof(ifr.ifr_name)-1);
+    strncpy(ifr.ifr_name, device, IFNAMSIZ);
     RETVAL = ioctl(s, SIOCGIWNAME, &ifr) != -1;
     close(s);
   OUTPUT:
@@ -452,7 +452,7 @@ getNetDriver(char* device)
     int s = socket(AF_INET, SOCK_DGRAM, 0);
 
     memset(&ifr, 0, sizeof(ifr));
-    strncpy(ifr.ifr_name, device, sizeof(ifr.ifr_name)-1);
+    strncpy(ifr.ifr_name, device, IFNAMSIZ);
 
     drvinfo.cmd = ETHTOOL_GDRVINFO;
     ifr.ifr_data = (caddr_t) &drvinfo;
