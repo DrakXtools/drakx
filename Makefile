@@ -30,7 +30,7 @@ install: dirs images rescue install_only
 dirs:
 	@for n in $(DIRS); do $(MAKE) -C $$n all || exit 1 ; done
 
-images: $(FBOOT_IMG)
+images: $(FBOOT_IMG) images/all.rdz # all.rdz is needed to update isolinux
 
 $(FBOOT_RDZ): kernel/all.modules
 	./make_boot_img $@ `basename $(@:%.rdz=%)`
