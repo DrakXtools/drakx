@@ -32,7 +32,7 @@ my $w = ugtk2->new('drakperm');
 $w->{rwindow}->set_size_request(550, 400) unless $::isEmbedded;
 my $W = $w->{window};
 $W->signal_connect(delete_event => sub { ugtk2->exit });
-my $treeModel = Gtk2::TreeStore->new("Gtk2::Gdk::Pixbuf", ("Glib::String") x 4);
+my $treeModel = Gtk2::ListStore->new("Gtk2::Gdk::Pixbuf", ("Glib::String") x 4);
 my $permList = Gtk2::TreeView->new_with_model($treeModel);
 
 my $pixbuf = gtkcreate_pixbuf('non-editable');
@@ -43,7 +43,6 @@ $permList->append_column(Gtk2::TreeViewColumn->new_with_attributes(N("Editable")
 each_index {
     my $col = Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i + 1);
     $col->set_min_width($column_sizes[$::i+1]);
-#    $col->set_sort_column_id($::i+1);
     $permList->append_column($col);
 } (N("Path"), N("User"), N("Group"), N("Permissions"));
 
@@ -71,28 +70,15 @@ sub del_callback() {
     $modified++;
 }
 
-sub down_callback() {
-    my ($model, $iter) = $permList->get_selection->get_selected;
-    return unless $iter;
-    my $new_iter = $model->iter_next($iter);
-    return if !$new_iter;
-
-    $model->move_after($iter, $new_iter);
-    $model->move_after($iter, $new_iter);
-    $permList->get_selection->select_iter($iter);
-    $permList->queue_draw;
-}
-
-sub up_callback() {
+sub move_callback {
+    my ($direction) = @_;
     my ($model, $iter) = $permList->get_selection->get_selected;
     return if !$iter;
-    my $path = $model->get_path($iter);
-    return if !$path;
-    $path->prev;
-    my $prev_iter = $model->get_iter($path);
-    return if !$prev_iter;
-    $model->move_before($iter, $prev_iter);
-    $model->move_before($iter, $prev_iter);
+    my $path = $model->get_path($iter) or return;
+    $direction eq 'up' ? $path->prev : $path->next;
+    my $iter2 = $model->get_iter($path);
+    return if !$iter2 || $model->get($iter2, 0);
+    $model->swap($iter, $iter2);
     $permList->get_selection->select_iter($iter);
     $permList->queue_draw;
 }
@@ -124,8 +110,8 @@ Select permissions to see/edit", $default_perm_level)),
                                                                     gtkset_tip($tips, 
                                                                                gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[2]),
                                                                                $_->[1]);
-                                                                } ([ N("Up"), N("Move selected rule up one level"), \&up_callback ], 
-                                                                   [ N("Down"), N("Move selected rule down one level"), \&down_callback ], 
+                                                                } ([ N("Up"), N("Move selected rule up one level"), sub { move_callback('up') } ], 
+                                                                   [ N("Down"), N("Move selected rule down one level"), sub { move_callback('down') } ], 
                                                                    [ N("Add a rule"), N("Add a new rule at the end"), \&add_callback ],
                                                                    [ N("Delete"), N("Delete selected rule"), \&del_callback ], 
                                                                    [ N("Edit"), N("Edit current rule"), \&edit_callback ])),
@@ -163,7 +149,7 @@ sub check_save() {
 sub display_perm {
     my $perm_level = shift @_;
     return unless $perm_level;
-    my @files = $perm_level eq 'all' ? values %perm_files : $perm_files{$perm_level};
+    my @files = $perm_level eq 'all' ? (sort values %perm_files) : $perm_files{$perm_level};
     my $sav_ = &check_save;
     if ($modified && ! $sav_) {
      $combo_perm->entry->signal_handler_block($combo_sig);
@@ -183,9 +169,9 @@ sub display_perm {
         my $is_uneditable = $file ne $perm_files{editable};
         while (<F>) {
             if (m/^([^#]\S+)\s+([^.\s]+)\.(\S+)?\s+(\d+)/) {
-                $treeModel->append_set(undef, if_($is_uneditable, 0 => $pixbuf), 1 => $1, 2 => $2, 3 => $3, 4 => $4);
+                $treeModel->append_set(if_($is_uneditable, 0 => $pixbuf), 1 => $1, 2 => $2, 3 => $3, 4 => $4);
             } elsif (m/^([^#]\S+)\s+current?\s+(\d+)/) {
-                $treeModel->append_set(undef, if_($is_uneditable, 0 => $pixbuf), 1 => $1, 2 => 'current', 3 => '', 4 => $2);
+                $treeModel->append_set(if_($is_uneditable, 0 => $pixbuf), 1 => $1, 2 => 'current', 3 => '', 4 => $2);
             }
         }
         close F;
@@ -300,10 +286,7 @@ sub row_setting_dialog {
                     });
     my %perms;
     $ok->signal_connect(clicked => sub {
-                            unless ($iter) {
-                                $iter = $treeModel->append(undef);
-                            }
-                            #BUG
+                            $iter ||= $treeModel->append; # create new item when adding a new one
                             $treeModel->set($iter, 1 => $file->get_text);
                             if ($usr_check->get_active) {
                                 $treeModel->set($iter, 2 => 'current');
