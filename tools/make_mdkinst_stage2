@@ -62,7 +62,7 @@ done
 mkdir -p $MNTPOINT 2>/dev/null
 for i in $MNTPOINT $STAGE2; do $SUDO umount $i 2>/dev/null ; done
 dd if=/dev/zero of=$STAGE2 bs=1k count=$[ `du -s $STAGE2TMP | cut -f1` + 1024 + 200 ]
-$MKE2FS -N 1000 $STAGE2
+$MKE2FS -N 1100 $STAGE2
 $SUDO mount -t ext2 $STAGE2 $MNTPOINT -o loop
 
 rmdir $MNTPOINT/lost+found
