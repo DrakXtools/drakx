@@ -64,20 +64,18 @@ sub conf_network_card {
     my ($netc, $intf, $type, $ipadr, $o_netadr) = @_;
     #-type =static or dhcp
     modules::interactive::load_category($in, 'network/main|gigabit|usb', !$::expert, 1);
-    my @all_cards = conf_network_card_backend($netc, $intf, $type, undef, $ipadr, $o_netadr);
-    my $interface;
-    @all_cards == () and $in->ask_warn('', N("No ethernet network adapter has been detected on your system.
-I cannot set up this connection type.")) and return;
-    @all_cards == 1 and $interface = $all_cards[0][0];
-    while (!$interface) {
-	$interface = $in->ask_from_list(N("Choose the network interface"),
-					N("Please choose which network adapter you want to use to connect to Internet."),
-					[ map { $_->[0] . ($_->[1] ? " (using module $_->[1])" : "") } @all_cards ]
-				       ) or return;
-    }
-    $::isStandalone and modules::write_conf($prefix);
+    my @all_cards = conf_network_card_backend($netc, $intf, $type, undef, $ipadr, $o_netadr) or 
+      $in->ask_warn('', N("No ethernet network adapter has been detected on your system.
+I cannot set up this connection type.")), return;
 
-    my $_device = conf_network_card_backend($netc, $intf, $type, $interface, $ipadr, $o_netadr);
+    my $interface = $in->ask_from_listf(N("Choose the network interface"),
+					N("Please choose which network adapter you want to use to connect to Internet."),
+					sub { $_->[0] . ($_->[1] ? " (using module $_->[1])" : "") },
+					\@all_cards) or return;
+
+    modules::write_conf($prefix) if $::isStandalone;
+
+    my $_device = conf_network_card_backend($netc, $intf, $type, $interface->[0], $ipadr, $o_netadr);
 #      if ( $::isStandalone and !($type eq "dhcp")) {
 #  	$in->ask_yesorno(N("Network interface"),
 #  			  N("I'm about to restart the network device:\n") . $device . N("\nDo you agree?"), 1) and configureNetwork2($in, $prefix, $netc, $intf) and system("$prefix/sbin/ifdown $device;$prefix/sbin/ifup $device");
