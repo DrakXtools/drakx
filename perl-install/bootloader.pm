@@ -430,13 +430,10 @@ sub get_kernels_and_labels {
     my $dir = "$::prefix/boot";
     my @l = grep { /^vmlinuz-/ } all($dir);
     my @kernels = grep { ! -l "$dir/$_" } @l;
-
-    my @preferred = ('', 'secure', 'enterprise', 'smp');
-    my %weights = map_index { $_ => $::i } @preferred;
     
     require pkgs;
     @kernels = 
-      sort { c::rpmvercmp($b->{version}, $a->{version}) || $weights{$a->{ext}} <=> $weights{$b->{ext}} } 
+      sort { c::rpmvercmp($b->{version}, $a->{version}) } 
       grep { -d "$::prefix/lib/modules/$_->{complete_version}" }
       map {
 	  s/vmlinuz-//;
