@@ -163,7 +163,7 @@ sub getinfoFromXF86Config {
     #- try to merge with $o, the previous has been obtained by ddcxinfos.
     add2hash($o->{keyboard} ||= {}, \%keyboard);
     add2hash($o->{mouse} ||= {}, \%mouse);
-    add2hash($o->{mouse}{auxmouse} ||= {}, $mouse{auxmouse});
+    add2hash($o->{mouse}{auxmouse} ||= {}, $mouse{auxmouse}) if $mouse{auxmouse}{XMOUSETYPE};
     @{$o->{wacom}} > 0 or $o->{wacom} = [ keys %wacom ];
     add2hash($o->{monitor} ||= {}, \%monitor);
 
