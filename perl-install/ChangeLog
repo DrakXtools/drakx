@@ -1,3 +1,118 @@
+2003/09/09  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Updated
+
+2003/09/09  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/pt.po, share/po/eu.po, share/po/uk.po: updated Basque,
+	Portuguese and Ukrainian files
+
+2003/09/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* install_steps.pm: fix network install
+
+	* standalone/drakfloppy: fix #5430: do not confuse users with debug
+	messages
+
+2003/09/08  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: last updates
+
+2003/09/08  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/po/sq.po, share/po/vi.po, share/po/gl.po, share/po/ro.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/ta.po, share/po/it.po,
+	share/po/ru.po, share/po/de.po, share/po/zh_CN.po, share/po/ja.po,
+	share/po/ms.po, share/po/ko.po, share/po/tr.po, share/po/lv.po,
+	share/po/ca.po, share/po/ga.po, share/po/el.po, share/po/he.po,
+	share/po/da.po, share/po/uz.po, share/po/af.po, share/po/nb.po,
+	share/po/hr.po, share/po/be.po, share/po/uz@Cyrl.po, share/po/fi.po,
+	share/po/es.po, share/po/id.po, share/po/et.po, share/po/eo.po,
+	share/po/sl.po, share/po/pt_BR.po, share/po/bg.po, share/po/fr.po,
+	share/po/mt.po, share/po/nl.po, share/po/uk.po, share/po/tg.po,
+	share/po/lt.po, share/po/th.po, share/po/pl.po, share/po/hu.po,
+	share/po/sr.po, share/po/sk.po, share/po/pt.po, share/po/fa.po,
+	share/po/az.po, share/po/cs.po, share/po/bs.po, share/po/is.po,
+	share/po/eu.po, share/po/zh_TW.po, share/po/sr@Latn.po, share/po/wa.po,
+	share/po/cy.po, share/po/ar.po: s/9\.1/9\.2/g
+
+	* share/advertising/06-development.pl, share/advertising/01-thanks.pl,
+	share/advertising/04-configuration.pl: Update
+
+2003/09/08  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: 
+	  - do not call anymore network::netconnect::save_conf
+	  - good set_profiles($netcnx) call
+	shrink
+
+	* network/nfs.pm, network/isdn.pm, network/adsl.pm, network/network.pm: 
+	  - fix/use explanations
+	  - fix #5307 (firmware)
+
+	* network/netconnect.pm: 
+	  - do not call anymore network::netconnect::save_conf
+	  - good set_profiles($netcnx) call
+	  - fix/use explanations
+	  - fix #5307 (firmware)
+
+2003/09/08  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fi.po, share/po/et.po, share/po/az.po, share/po/zh_CN.po:
+	updated Azeri, Estonian, Finnish and Chinese files
+
+	* share/po/hu.po, share/po/eu.po: updated Basque and Hungarian files
+
+	* share/po/nb.po, share/po/cy.po: updated Welsh and Norwegian files
+
+2003/09/08  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_interactive.pm: don't warnAboutNaughtyServers when
+	upgrading
+
+	* standalone/diskdrake: remove obsolete code
+	~fix~ calling userdrake in "diskdrake --fileshare"
+
+	* any.pm: perl_checker compliance
+	~fix~ calling userdrake in "diskdrake --fileshare"
+
+	* standalone/XFdrake: Xdrakres is "XFdrake resolution" not simply
+	"XFdrake"
+
+	* Xconfig/resolution_and_depth.pm: 
+	  - use OptionMenu's instead of Combo's (better looking and mcc doesn't
+	like embedding combos)
+	  - cleanup
+
+2003/09/08  Till Kamppeter  <till at mandrakesoft.com>
+
+	* standalone/printerdrake: Fixed copyright notice.
+
+2003/09/08  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakconnect: fix current profile load in wizard mode
+	increase drakconnect robustness regarding profiles managment
+	  - fix set_profiles() call on profiles menu user change
+	  - (set_profiles) consolidate netcnx->{PROFILE} setting where we call
+	  set_profile
+	
+	  - (update_profiles) rely on netcnx->{PROFILE}
+	
+	  - fix profiles list update when wizard exits
+
+	* standalone/drakperm, standalone/draksec: add help buttons
+
+	* network/netconnect.pm: save_conf() really is dead
+
+	* drakxtools.spec: last 9.2-9mdk bits
+	fix net_monitor not working as root
+	9.2-9mdk
+
+	* ugtk.pm, my_gtk.pm: no more used (drakcronat just removed from distro)
+	=> less dependancies :-)
+
+	* standalone/drakfont: fix #4964 (not being able to select directories)
+
 2003/09/08  Alice Lafox  <alice at lafox.com.ua>
 
 	* share/po/ru.po: last updates
@@ -21007,7 +21122,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.830 2003/09/03 17:13:20 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.831 2003/09/08 16:05:52 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
