@@ -456,4 +456,5 @@ run_program::rooted($::prefix, 'urpmi.addmedia', '-h', 'contrib', 'file:///mnt/p
 # for fast test replaying:
 run_program::rooted($::prefix, 'tar', 'cfj', '/root/etc.tar.bz2', '/etc');
 
+system("umount $::prefix/proc");
 eval { fs::umount_all($fstab, $::prefix) } or system("umount $::prefix"); 
