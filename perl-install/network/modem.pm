@@ -30,6 +30,7 @@ sub configure {
     foreach (@$secret) {
 	$modem->{passwd} = $_->{passwd} if $_->{login} eq $modem->{login};
     }
+
     foreach (cat_("/etc/sysconfig/network-scripts/chat-ppp0")) {
 	if (/.*ATDT(\d*).*/) {
 	    $modem->{phone} = $1;

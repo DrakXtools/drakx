@@ -178,38 +178,8 @@ If you don't want to use the auto detection, deselect the checkbox.
     my %conf;
     $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach 'modem', 'winmodem', 'adsl', 'cable', 'lan';
     $conf{isdn} = $netc->{autodetect}{isdn}{description} ? 1 : 0;
-#    my %l;
-#     my @l = (
-# 	     [N("Normal modem connection"), $netc->{autodetect}{modem}, N_("detected on port %s"), \$conf{modem}],
-# 	     [N("ISDN connection"), $netc->{autodetect}{isdn}{description}, N_("detected %s"), \$conf{isdn}],
-# 	     [N("ADSL connection"), $netc->{autodetect}{adsl}, N_("detected"), \$conf{adsl}],
-# 	     [N("Cable connection"), $netc->{autodetect}{cable}, N_("cable connection detected"), \$conf{cable}],
-# 	     [N("LAN connection"), $netc->{autodetect}{lan}, N_("ethernet card(s) detected"), \$conf{lan}]
-# 	);
-#    my $i = 0;
-#    map { defined $set_default or do { $_->[1] and $set_default = $i }; $i++ } @l;
-#     my %l = (
-# 	       1 => [N("Normal modem connection") . if_($netc->{autodetect}{modem}, " - " . N("detected on port %s", $netc->{autodetect}{modem})), "modem"],
-# 	       2 => [N("Winmodem connection") . if_($netc->{autodetect}{winmodem}, " - " . N("detected")), "winmodem"],
-# 	       3 => [N("ISDN connection") . if_($netc->{autodetect}{isdn}{description}, " - " . N("detected %s", $netc->{autodetect}{isdn}{description})), "isdn"],
-# 	       4 => [N("ADSL connection") . if_($netc->{autodetect}{adsl}, " - " . N("detected")), "adsl"],
-# 	       5 => [N("Cable connection") . if_($netc->{autodetect}{cable}, " - " . N("cable connection detected")), "cable"],
-# 	       6 => [N("LAN connection") . if_($netc->{autodetect}{lan}, " - " . N("ethernet card(s) detected")), "lan"]
 	       
-# 	      );
     $::isInstall and $in->set_help('configureNetwork');
-#     my $e = $in->ask_from(N("Network Configuration Wizard"), N("Choose the connection you want to configure"),
-#          [{ val => \$cnx_type, list => [sort keys %l], format => sub { $l{$_}[0] },
-# 			  changed => sub {
-# 			      return if !$netc->{autodetection};
-# 			      my $c = 0;
-# #-			      $conf{adsl} and $c++;
-# 			      $conf{cable} and $c++;
-# 			      my $a = keys(%{$netc->{autodetect}{lan}});
-# 			      0 < $a && $a <= $c and $conf{lan} = undef;
-# 			  }}]
-# 			 ) or goto step_1;
-#     $conf{$l{$cnx_type}[1]} = 1;
     my @l = (
 	  [N("Normal modem connection") . if_($netc->{autodetect}{modem}, " - " . N("detected on port %s", $netc->{autodetect}{modem})), \$conf{modem}],
 	  [N("Winmodem connection") . if_($netc->{autodetect}{winmodem}, " - " . N("detected")), \$conf{winmodem}],
@@ -233,7 +203,7 @@ If you don't want to use the auto detection, deselect the checkbox.
     load_conf($netcnx, $netc, $intf);
     $conf{modem} and do { pre_func("modem"); require network::modem; network::modem::configure($netcnx, $mouse, $netc, $intf) or goto step_2 };
     $conf{winmodem} and do { pre_func("winmodem"); require network::modem; network::modem::winmodemConfigure($netc) or goto step_2 }; 
-    $conf{isdn} and do { pre_func("isdn"); require network::isdn; network::isdn::configure($netcnx, $netc) or goto step_2 };
+    $conf{isdn} and do { pre_func("isdn"); require network::isdn; network::isdn::configure($netcnx, $netc, $isdn) or goto step_2 };
     $conf{adsl} and do { pre_func("adsl"); require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2 };
     $conf{cable} and do { pre_func("cable"); require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1 };
     $conf{lan} and do { pre_func("local network"); require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1 };
@@ -436,9 +406,9 @@ ADSLInterfacesList=
 ADSLModem=" .  q( # Obsolete information. Please don't use it.) . "
 ADSLType=" . ($netcnx->{type} =~ /adsl/ ? $netcnx->{type} : '') . "
 ADSLProviderDomain=$netc->{DOMAINNAME2}
-ADSLProviderDNS1=$netc->{dnsServer2}
-ADSLProviderDNS2=$netc->{dnsServer3}
-ADSLLogin=$adsl->{login}
+".#ADSLProviderDNS1=$netc->{dnsServer2}
+#ADSLProviderDNS2=$netc->{dnsServer3}
+"ADSLLogin=$adsl->{login}
 ADSLPassword=$adsl->{passwd}
 DOMAINNAME2=$netc->{DOMAINNAME2}"
 	  );
@@ -533,25 +503,25 @@ sub load_conf {
 # 	    /^Eth([0-9])OnBoot=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{ONBOOT} = $2;
 # 	    /^Eth([0-9])Hostname=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $netc->{HOSTNAME} = $2;
 # 	    /^Eth([0-9])Driver=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{driver} = $2;
-	    /^ISDNDriver=(.*)$/ and $isdn->{driver} = $1;
-	    /^ISDNDeviceType=(.*)$/ and $isdn->{type} = $1;
-	    /^ISDNIrq=(.*)/ and $isdn->{irq} = $1;
-	    /^ISDNMem=(.*)$/ and $isdn->{mem} = $1;
-	    /^ISDNIo=(.*)$/ and $isdn->{io} = $1;
-	    /^ISDNIo0=(.*)$/ and $isdn->{io0} = $1;
-	    /^ISDNIo1=(.*)$/ and $isdn->{io1} = $1;
-	    /^ISDNProtocol=(.*)$/ and $isdn->{protocol} = $1;
-	    /^ISDNCardDescription=(.*)$/ and $isdn->{description} = $1;
-	    /^ISDNCardVendor=(.*)$/ and $isdn->{vendor} = $1;
-	    /^ISDNId=(.*)$/ and $isdn->{id} = $1;
-	    /^ISDNProviderPhone=(.*)$/ and $isdn->{phone_out} = $1;
-	    /^ISDNDialing=(.*)$/ and $isdn->{dialing_mode} = $1;
-	    /^ISDNISDNSpeed=(.*)$/ and $isdn->{speed} = $1;
-	    /^ISDNTimeout=(.*)$/ and $isdn->{huptimeout} = $1;
-	    /^ISDNHomePhone=(.*)$/ and $isdn->{phone_in} = $1;
-	    /^ISDNLogin=(.*)$/ and $isdn->{login} = $1;
-	    /^ISDNPassword=(.*)$/ and $isdn->{passwd} = $1;
-	    /^ISDNConfirmPassword=(.*)$/ and $isdn->{passwd2} = $1;
+# 	    /^ISDNDriver=(.*)$/ and $isdn->{driver} = $1;
+# 	    /^ISDNDeviceType=(.*)$/ and $isdn->{type} = $1;
+# 	    /^ISDNIrq=(.*)/ and $isdn->{irq} = $1;
+# 	    /^ISDNMem=(.*)$/ and $isdn->{mem} = $1;
+# 	    /^ISDNIo=(.*)$/ and $isdn->{io} = $1;
+# 	    /^ISDNIo0=(.*)$/ and $isdn->{io0} = $1;
+# 	    /^ISDNIo1=(.*)$/ and $isdn->{io1} = $1;
+# 	    /^ISDNProtocol=(.*)$/ and $isdn->{protocol} = $1;
+# 	    /^ISDNCardDescription=(.*)$/ and $isdn->{description} = $1;
+# 	    /^ISDNCardVendor=(.*)$/ and $isdn->{vendor} = $1;
+# 	    /^ISDNId=(.*)$/ and $isdn->{id} = $1;
+# 	    /^ISDNProviderPhone=(.*)$/ and $isdn->{phone_out} = $1;
+# 	    /^ISDNDialing=(.*)$/ and $isdn->{dialing_mode} = $1;
+# 	    /^ISDNISDNSpeed=(.*)$/ and $isdn->{speed} = $1;
+# 	    /^ISDNTimeout=(.*)$/ and $isdn->{huptimeout} = $1;
+# 	    /^ISDNHomePhone=(.*)$/ and $isdn->{phone_in} = $1;
+# 	    /^ISDNLogin=(.*)$/ and $isdn->{login} = $1;
+# 	    /^ISDNPassword=(.*)$/ and $isdn->{passwd} = $1;
+# 	    /^ISDNConfirmPassword=(.*)$/ and $isdn->{passwd2} = $1;
 
 	    #/^PPPDevice=(.*)$/ and $modem->{device} = $1;
 	    /^PPPConnectionName=(.*)$/ and $modem->{connection} = $1; # Keep this for futur multiple cnx support

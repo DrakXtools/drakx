@@ -86,7 +86,9 @@ sub adsl_ask_info {
     my ($adsl, $netc, $_intf, $adsl_type) = @_;
     my $pppoe_file = "/etc/ppp/pppoe.conf";
     my $pppoe_conf = { getVarsFromSh($pppoe_file) } if $adsl_type =~ /pppoe/ && -f $pppoe_file;
-    add2hash($netc, { dnsServer2 => '', dnsServer3 => '', DOMAINNAME2 => '' });
+    $pppoe_conf->{DNS1} ||= '';
+    $pppoe_conf->{DNS2} ||= '';
+    add2hash($netc, { dnsServer2 => $pppoe_conf->{DNS1}, dnsServer3 => $pppoe_conf->{DNS2}, DOMAINNAME2 => '' });
     add2hash($adsl, { login => $pppoe_conf->{USER}, passwd => '', passwd2 => '' });
     ask_info2($adsl, $netc);
 }

@@ -8,7 +8,7 @@ use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_pro
 use MDK::Common::System qw(getVarsFromSh);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(write_cnx_script write_secret_backend write_initscript ask_connect_now connect_backend disconnect_backend read_providers_backend ask_info2 type2interface connected connected_bg test_connected connected2 disconnected);
+@EXPORT = qw(write_cnx_script write_secret_backend read_secret_backend passwd_by_login write_initscript ask_connect_now connect_backend disconnect_backend read_providers_backend ask_info2 type2interface connected connected_bg test_connected connected2 disconnected);
 @EXPORT_OK = qw($in);
 
 sub write_cnx_script {
@@ -33,21 +33,39 @@ sub write_secret_backend {
     }
 }
 
+sub unquotify {
+    my ($word) = @_;
+    ($a, $b, $c) = $$word =~ /"(.*)"|'(.*)'|(.*)/;
+    $$word = $a ? $a : $b ? $b : $c;
+}
+
 sub read_secret_backend {
     my $conf;
     foreach my $i ("pap-secrets", "chap-secrets") {
 	foreach (cat_("$prefix/etc/ppp/$i")) {
 	    my ($login, $server, $passwd) = split(' ');
-	    my ($a, $b, $c) = $passwd =~ /"(.*)"|'(.*)'|(.*)/;
-	    $passwd = $a ? $a : $b ? $b : $c;
-	    push @$conf, {login => $login,
-			  passwd => $passwd,
-			  server => $server };
+	    if ($login && $passwd) {
+		unquotify \$passwd;
+		unquotify \$login;
+		unquotify \$server;
+		push @$conf, {login => $login,
+			      passwd => $passwd,
+			      server => $server };
+	    }
 	}
     }
     $conf;
 }
 
+sub passwd_by_login {
+    my ($login) = @_;
+    
+    unquotify \$login;
+    my $secret = read_secret_backend();
+    foreach (@$secret) {
+	return $_->{passwd} if ($_->{login} eq $login);
+    }
+}
 
 sub ask_connect_now {
     my ($type) = @_;
@@ -68,8 +86,8 @@ sub ask_connect_now {
 	    $up = connected();
 	}
 	my $m = $up ? N("The system is now connected to Internet.") .
-		     if_($::isInstall, N("For security reason, it will be disconnected now.")) :
-		       N("The system doesn't seem to be connected to internet.
+	  if_($::isInstall, N("For security reason, it will be disconnected now.")) :
+	    N("The system doesn't seem to be connected to internet.
 Try to reconfigure your connection.");
 	if ($::isWizard) {
 	    $::Wizard_no_previous = 1;
