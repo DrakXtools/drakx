@@ -36,10 +36,9 @@ sub ask_fileW {
 
 sub create_boxradio {
     my ($e, $may_go_to_next, $changed, $double_click) = @_;
-    my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
 
     my $boxradio = gtkpack2__(Gtk2::VBox->new(0, 0),
-			      my @radios = gtkradio('', @l));
+			      my @radios = gtkradio('', @{$e->{formatted_list}}));
     $boxradio->show;
     my $tips = Gtk2::Tooltips->new;
     mapn {
@@ -71,7 +70,6 @@ sub create_boxradio {
 sub create_treeview_list {
     my ($e, $may_go_to_next, $changed, $double_click) = @_;
     my $curr;
-    my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
 
     my $list = Gtk2::ListStore->new(Gtk2::GType->STRING);
     my $list_tv = Gtk2::TreeView->new_with_model($list);
@@ -104,6 +102,7 @@ sub create_treeview_list {
 		$curr++ if $starting_word eq '' || $starting_word eq $c;
 		$starting_word .= $c unless $starting_word eq $c;
 	    }
+	    my @l = @{$e->{formatted_list}};
 	    my $word = quotemeta $starting_word;
 	    my $j; for ($j = 0; $j < @l; $j++) {
 		 $l[($j + $curr) % @l] =~ /$start_reg$word/i and last;
@@ -122,7 +121,7 @@ sub create_treeview_list {
     });
     $list_tv->show;
 
-    $list->append_set([ 0 => $_ ])->free foreach @l;
+    $list->append_set([ 0 => $_ ])->free foreach @{$e->{formatted_list}};
 
     $list_tv->get_selection->signal_connect(changed => sub {
 	my ($model, $iter) = $_[0]->get_selected;
@@ -149,7 +148,6 @@ sub create_treeview_list {
 
 sub create_treeview_tree {
     my ($e, $may_go_to_next, $changed, $double_click, $tree_expanded) = @_;
-    my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
 
     $tree_expanded = to_bool($tree_expanded); #- to reduce "Use of uninitialized value", especially when debugging
 
@@ -183,7 +181,7 @@ sub create_treeview_tree {
 	$precomp{$pathstr} = { value => $leaf, fullvalue => $_[0], listvalue => $_[1] };
 	push @ordered_keys, $pathstr;
 	$wleaves{$_[0]} = $pathstr;
-    } \@l, $e->{list};
+    } $e->{formatted_list}, $e->{list};
     $_->free foreach values %wtree;
     undef %wtree;
 
@@ -339,7 +337,8 @@ sub ask_fromW {
     my $mainw = ugtk2->new($common->{title}, %$o);
  
     #-the widgets
-    my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack, $has_horiz_scroll, $has_scroll, $total_size, $max_width);
+    my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack, $has_horiz_scroll, $has_scroll, $max_width);
+    my $total_size = 0;
     my $tooltips = Gtk2::Tooltips->new;
 
     my $set_all = sub {
@@ -452,6 +451,8 @@ sub ask_fromW {
 
 	    my @para = ($e, $may_go_to_next, $changed, $quit_if_double_click);
 	    my $use_boxradio = exists $e->{gtk}{use_boxradio} ? $e->{gtk}{use_boxradio} : @{$e->{list}} <= 8;
+
+	    $e->{formatted_list} = [ map { may_apply($e->{format}, $_) } @{$e->{list}} ];
 
 	    if ($e->{help}) {
 		#- used only when needed, as key bindings are dropped by List (ListStore does not seems to accepts Tooltips).
