@@ -131,7 +131,7 @@ sub read_grub() {
     #- sanitize
     foreach (@{$b{entries}}) {
 	my ($vga, $other) = partition { /^vga=/ } split(' ', $_->{append});
-	if ($vga) {
+	if (@$vga) {
 	    $_->{vga} = $vga->[0] =~ /vga=(.*)/ && $1;
 	    $_->{append} = join(' ', @$other);
 	}
@@ -337,7 +337,7 @@ sub pack_append {
 
     #- normalize
     $simple = [ reverse(uniq(reverse @$simple)) ];
-    $dict = [ reverse(uniq_ { my ($k, $v) = @{$_[0]}; $k eq 'mem' ? "$k=$v" : $k } reverse @$dict) ];
+    $dict = [ reverse(uniq_ { my ($k, $v) = @$_; $k eq 'mem' ? "$k=$v" : $k } reverse @$dict) ];
 
     join(' ', @$simple, map { "$_->[0]=$_->[1]" } @$dict);
 }
@@ -492,18 +492,8 @@ sub suggest {
     #- PPC xfs module requires enlarged initrd
     my $xfsroot = isThisFs("xfs", $root_part);
 
-    require c; c::initSilo() if arch() =~ /sparc/;
-
     my ($onmbr, $unsafe) = $bootloader->{crushMbr} ? (1, 0) : suggest_onmbr($hds->[0]);
-    add2hash_($bootloader, arch() =~ /sparc/ ?
-	{
-	 entries => [],
-	 timeout => 10,
-	 use_partition => 0, #- we should almost always have a whole disk partition.
-	 root          => "/dev/$root",
-	 partition     => $partition || 1,
-	 boot          => $root eq $boot && "/boot", #- this helps for getting default partition for silo.
-	} : arch() =~ /ppc/ ?
+    add2hash_($bootloader, arch() =~ /ppc/ ?
 	{
 	 defaultos => "linux",
 	 entries => [],
@@ -596,22 +586,7 @@ wait for default boot.
     add_kernel($bootloader, $labels{''}, '', $root,
 	       { label => 'failsafe', append => 'devfs=nomount failsafe' });
 
-    if (arch() =~ /sparc/) {
-	#- search for SunOS, it could be a really better approach to take into account
-	#- partition type for mounting point.
-	my $sunos = 0;
-	foreach (@$hds) {
-	    foreach (@{$_->{primary}{normal}}) {
-		my $path = $_->{device} =~ m|^/| && $_->{device} !~ m|^/dev/| ? $_->{device} : dev2prompath($_->{device});
-		add_entry($bootloader,
-			  {
-			   type => 'other',
-			   kernel_or_dev => $path,
-			   label => "sunos"   . ($sunos++ ? $sunos : ''),
-			  }) if $path && isSunOS($_) && type2name($_->{type}) =~ /root/i;
-	    }
-	}
-    } elsif (arch() =~ /ppc/) {
+    if (arch() =~ /ppc/) {
 	#- if we identified a MacOS partition earlier - add it
 	if (defined $partition_table::mac::macos_part) {
 	    add_entry($bootloader,
@@ -659,12 +634,10 @@ sub detect_bootloader() {
 sub method_choices {
     my ($fstab, $bootloader) = @_;
     my %choices = (
-	if_(arch() =~ /sparc/,
-	    'silo' => N("SILO"),
-        ), if_(arch() !~ /sparc|ppc/ && !isLoopback(fsedit::get_root($fstab)) && whereis_binary('lilo'),
+	if_(arch() !~ /ppc/ && !isLoopback(fsedit::get_root($fstab)) && whereis_binary('lilo'),
 	    if_(!detect_devices::matching_desc('ProSavageDDR'), 'lilo-graphic' => N("LILO with graphical menu")),
 	    'lilo-menu'    => N("LILO with text menu"),
-	), if_(arch() !~ /sparc|ppc/ && !isRAID(fsedit::get_root($fstab)) && whereis_binary('grub'),
+	), if_(arch() !~ /ppc/ && !isRAID(fsedit::get_root($fstab)) && whereis_binary('grub'),
 	    'grub' => N("Grub"),
         ), if_(arch() =~ /ppc/,
 	    'yaboot' => N("Yaboot"),
@@ -808,80 +781,6 @@ sub install_yaboot {
     run_program::rooted($::prefix, "/usr/sbin/ybin", "2>", \$error) or die "ybin failed: $error";
 }
 
-sub install_silo {
-    my ($silo, $fstab) = @_;
-    my $boot = fsedit::get_root($fstab, 'boot')->{device};
-    my ($wd, $_num) = $boot =~ /^(.*\D)(\d*)$/;
-
-    #- setup boot promvars for.
-    require c;
-    if ($boot =~ /^md/) {
-	#- get all mbr devices according to /boot are listed,
-	#- then join all zero based partition translated to prom with ';'.
-	#- keep bootdev with the first of above.
-	log::l("/boot is present on raid partition which is not currently supported for promvars");
-    } else {
-	if (!$silo->{use_partition}) {
-	    foreach (@$fstab) {
-		if (!$_->{start} && $_->{device} =~ /$wd/) {
-		    $boot = $_->{device};
-		    log::l("found a zero based partition in $wd as $boot");
-		    last;
-		}
-	    }
-	}
-	$silo->{bootalias} = c::disk2PromPath($boot);
-	$silo->{bootdev} = $silo->{bootalias};
-        log::l("preparing promvars for device=$boot");
-    }
-    c::hasAliases() or log::l("clearing promvars alias as non supported"), $silo->{bootalias} = '';
-
-    if ($silo->{message}) {
-	eval { output("$::prefix/boot/message", $silo->{message}) } or $silo->{message} = 0;
-    }
-    {
-        local $\ = "\n";
-	my $f = "$::prefix/boot/silo.conf"; #- always write the silo.conf file in /boot ...
-	symlinkf "../boot/silo.conf", "$::prefix/etc/silo.conf"; #- ... and make a symlink from /etc.
-	local *F;
-	open F, ">$f" or die "cannot create silo config file: $f";
-	log::l("writing silo config to $f");
-
-	$silo->{$_} and print F "$_=$silo->{$_}" foreach qw(partition root default append);
-	$silo->{$_} and print F $_ foreach qw(restricted);
-	print F "password=", $silo->{password} if $silo->{restricted} && $silo->{password}; #- also done by msec
-	print F "timeout=", round(10 * $silo->{timeout}) if $silo->{timeout};
-	print F "message=$silo->{boot}/message" if $silo->{message};
-
-	foreach (@{$silo->{entries}}) { #-my ($v, $e) = each %{$silo->{entries}}) {
-	    my $type = "$_->{type}=$_->{kernel_or_dev}"; $type =~ s|/boot|$silo->{boot}|;
-	    print F $type;
-	    print F "\tlabel=$_->{label}";
-
-	    if ($_->{type} eq "image") {
-		my $initrd = $_->{initrd}; $initrd =~ s|/boot|$silo->{boot}|;
-		print F "\tpartition=$_->{partition}" if $_->{partition};
-		print F "\troot=$_->{root}" if $_->{root};
-		print F "\tinitrd=$initrd" if $_->{initrd};
-		print F qq(\tappend="$1") if $_->{append} =~ /^\s*"?(.*?)"?\s*$/;
-		print F "\tread-write" if $_->{'read-write'};
-		print F "\tread-only" if !$_->{'read-write'};
-	    }
-	}
-    }
-    log::l("Installing boot loader...");
-    if (!$::testing) {
-	my $error;
-	run_program::rooted($::prefix, "silo", \$error, if_($silo->{use_partition}, "-t")) or 
-	  run_program::rooted($::prefix, "silo", "-p", "2", if_($silo->{use_partition}, "-t")) or
-	    die "silo failed: $error";
-
-	#- try writing in the prom.
-	log::l("setting promvars alias=$silo->{bootalias} bootdev=$silo->{bootdev}");
-	require c;
-	c::setPromVars($silo->{bootalias}, $silo->{bootdev});
-    }
-}
 
 sub make_label_lilo_compatible {
     my ($label) = @_; 
