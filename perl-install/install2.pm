@@ -323,7 +323,7 @@ sub start_i810fb {
 #- MAIN
 #-######################################################################################
 sub main {
-    $SIG{__DIE__} = sub { chomp(my $err = $_[0]); log::l("warning: $err") };
+    $SIG{__DIE__} = sub { chomp(my $err = $_[0]); log::l("warning: $err") if $err !~ /^find_index failed/ };
     $SIG{SEGV} = sub { 
 	my $msg = "segmentation fault: seems like memory is missing as the install crashes"; print "$msg\n"; log::l($msg);
 	$o->ask_warn('', $msg);
