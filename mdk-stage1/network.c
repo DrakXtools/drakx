@@ -1037,9 +1037,9 @@ static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port,
 	medialist[media_number] = NULL;
 
 	do {
-		char *hosts[MIRRORLIST_MAX_ITEMS+1];
+		char *hostlist[MIRRORLIST_MAX_ITEMS+1];
 		char *selected_medium;
-		int host_index = 0, mirrorlist_index;
+		int hostlist_index = 0, mirrorlist_index;
 
 		results = ask_from_list("Please select a medium in the list, "
 					"or cancel to specify the mirror.",
@@ -1052,18 +1052,18 @@ static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port,
 		for (mirrorlist_index = 0; mirrorlist_index < mirrorlist_number; mirrorlist_index++) {
 			if (!strcmp(mirrorlist[mirrorlist_index][0], selected_medium) &&
 			    !strcmp(mirrorlist[mirrorlist_index][1], protocol)) {
-				hosts[host_index] = mirrorlist[mirrorlist_index][2];
-				host_index++;
-				if (host_index == MIRRORLIST_MAX_ITEMS)
+				hostlist[hostlist_index] = mirrorlist[mirrorlist_index][2];
+				hostlist_index++;
+				if (hostlist_index == MIRRORLIST_MAX_ITEMS)
 					break;
 			}
 
 		}
-		hosts[host_index] = NULL;
+		hostlist[hostlist_index] = NULL;
 
 		results = ask_from_list("Please select a mirror in the list, "
 					"or cancel to specify it.",
-					hosts, selected_host);
+					hostlist, selected_host);
 		if (results != RETURN_OK) {
 			break;
 		}
