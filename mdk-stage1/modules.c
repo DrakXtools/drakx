@@ -106,7 +106,7 @@ static enum return_type ensure_additional_modules_available(void)
                 stg1_info_message("Please insert the Additional Drivers floppy.");;
                 my_insmod("floppy", ANY_DRIVER_TYPE, NULL, 0);
 
-                while (my_mount("/dev/fd0", floppy_mount_location, "ext2", 0) == -1) {
+                while (my_mount(floppy_device(), floppy_mount_location, "ext2", 0) == -1) {
                         enum return_type results = ask_yes_no(errno == ENXIO ?
                                                               "There is no detected floppy drive, or no floppy disk in drive.\nRetry?"
                                                               : errno == EINVAL ?
@@ -539,7 +539,7 @@ void update_modules(void)
 
 	my_insmod("floppy", ANY_DRIVER_TYPE, NULL, 0);
 
-	if (my_mount("/dev/fd0", floppy_mount_location, "ext2", 0) == -1) {
+	if (my_mount(floppy_device(), floppy_mount_location, "ext2", 0) == -1) {
 		enum return_type results = ask_yes_no("I can't find a Linux ext2 floppy in first floppy drive.\n"
 						      "Retry?");
 		if (results == RETURN_OK)
