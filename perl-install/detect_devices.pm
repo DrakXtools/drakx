@@ -387,16 +387,13 @@ sub getSerialModem {
     #- add an alias for macserial on PPC
     modules::add_alias('serial', $serdev) if arch() =~ /ppc/ && $modem->{device};
     my @devs = pcmcia_probe();
-    foreach (@devs) {
-	$_->{type} =~ /serial/ and $modem->{device} = $_->{device};
-    }
+    foreach (@devs) { $_->{type} =~ /serial/ and $modem->{device} = $_->{device} }
+    grep { if_(defined $_->{device}, $_) } @devs;
 }
 
 sub getModem() {
     my @pci_modems = grep { $_->{driver} =~ /www.linmodems.org/ } probeall(0);
-    my $serial_modem = {};
-    getSerialModem($serial_modem);
-    $serial_modem, @pci_modems;
+    getSerialModem({}), @pci_modems;
 }
 
 sub getSpeedtouch {
