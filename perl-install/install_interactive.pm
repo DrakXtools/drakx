@@ -172,7 +172,12 @@ When sure, press Ok.")) or return;
 		print "\n" x 10, _("You can now partition %s.
 When you are done, don't forget to save using `w'", partition_table_raw::description($_));
 		print "\n\n";
-		my $pid = fork or exec "fdisk", devices::make($_->{device});
+		my $pid = 0;
+		if (arch() =~ /ppc/) {
+			$pid = fork or exec "pdisk", devices::make($_->{device});
+		} else {
+			$pid = fork or exec "fdisk", devices::make($_->{device});
+		}			
 		waitpid($pid, 0);
 	    }
 	    $o->leave_console;

@@ -579,7 +579,7 @@ sub report_bug {
     join '', map { chomp; "$_\n" }
       header("lspci"), detect_devices::stringlist(),
       header("pci_devices"), cat_("/proc/bus/pci/devices"),
-      header("fdisk"), `fdisk -l`,
+      header("fdisk"), arch() =~ /ppc/ ? `pdisk -l` : `fdisk -l`,
       header("scsi"), cat_("/proc/scsi/scsi"),
       header("lsmod"), cat_("/proc/modules"),
       header("cmdline"), cat_("/proc/cmdline"),

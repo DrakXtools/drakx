@@ -640,7 +640,7 @@ sub readBootloaderConfigBeforeInstall {
     my ($image, $v);
 
     require bootloader;
-    add2hash($o->{bootloader} ||= {}, bootloader::read($o->{prefix}, arch() =~ /sparc/ ? "/etc/silo.conf" : "/etc/lilo.conf"));
+    add2hash($o->{bootloader} ||= {}, bootloader::read($o->{prefix}, arch() =~ /sparc/ ? "/etc/silo.conf" : arch() =~ /ppc/ ? "/etc/yaboot.conf" : "/etc/lilo.conf"));
 
     #- since kernel or kernel-smp may not be upgraded, it should be checked
     #- if there is a need to update existing lilo.conf entries by following
@@ -678,7 +678,9 @@ sub setupBootloaderBefore {
 	#- propose the default fb mode for kernel fb, if aurora is installed too.
         bootloader::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion($o),
 			    pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, $::expert ? 'Aurora-wsMonitor' : 'Aurora-mwsMonitor') || {}) && $vga);
+	if (arch() !~ /ppc/) {
         bootloader::suggest_floppy($o->{bootloader}) if $o->{security} <= 3;
+    }
 	$o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
     }
 }
