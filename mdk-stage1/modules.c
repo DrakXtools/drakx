@@ -55,7 +55,7 @@ static enum insmod_return insmod_archived_file(const char * mod_name, char * opt
 	strcat(module_name, ".o");
 	i = mar_extract_file(archive_name, module_name, "/tmp/");
 	if (i == 1) {
-		log_message("file-not-found-in-archive %s", module_name);
+		log_message("file-not-found-in-archive %s (maybe you can try another boot floppy such as 'other.img' for seldom used SCSI modules)", module_name);
 		return INSMOD_FAILED_FILE_NOT_FOUND;
 	}
 	if (i != 0)
