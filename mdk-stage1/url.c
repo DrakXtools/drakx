@@ -492,6 +492,7 @@ int http_download_file(char * hostname, char * remotename, int * size, char * pr
 			}
 
 			*end = '\0';
+                        log_message("HTTP: server response '%s'", start);
 			if (!strcmp(start, "404")) {
 				close(sock);
 				return FTPERR_FILE_NOT_FOUND;
