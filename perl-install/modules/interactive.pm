@@ -112,7 +112,8 @@ sub load_category__prompt {
     my ($in, $modules_conf, $category) = @_;
 
     (my $msg_type = $category) =~ s/\|.*//;
-    my %available_modules = map_each { $::a => $::b ? "$::a ($::b)" : $::a } modules::category2modules_and_description($category);
+
+    my %available_modules = map_each { my $dsc = $::b; $dsc =~ s/\s+/ /g; $::a => $dsc ? "$::a ($dsc)" : $::a } modules::category2modules_and_description($category);
     my $module = $in->ask_from_listf('',
 #-PO: the %s is the driver type (scsi, network, sound,...)
 			       N("Which %s driver should I try?", $msg_type),
