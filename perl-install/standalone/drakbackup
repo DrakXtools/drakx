@@ -117,15 +117,12 @@
 # DONE TODAY:
 #________________________________________________________________
 
-use strict;
+
 use lib qw(/usr/lib/libDrakX);
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
 use interactive;
-#- to make perl_checker happy - comment out to use daemon/command line mode
-use ugtk2 qw(:helpers :wrappers :create);
 use common;
-
 use Time::localtime;
 use detect_devices;
 
@@ -173,6 +170,8 @@ my $plabel1;
 my $plabel2;
 my $plabel3;
 my $stext;
+my $list_model;
+my $iter;
 my $the_time;
 my @user_list_to_restore2;
 my @data_backuped;
@@ -367,7 +366,17 @@ sub daemon_mode {
     exit(0);
 }
 
-interactive_mode();
+if (check_for_xserver()) {
+	# I give up, if I don't wrap this somehow, it never comes back when run in 
+	# console or daemon mode - just pegs cpu to 100%
+	# perl_checker has fits though
+	eval { require ugtk2 };
+	die "Can't load ugtk2...\n" if $@;
+	ugtk2->import(qw(:helpers :wrappers :create));
+	interactive_mode();
+} else {
+	die "Can't run in console mode...";
+}
 
 sub all_user_list {
     my $passwdfile = "/etc/passwd";
@@ -986,10 +995,7 @@ sub spawn_progress {
 
 sub progress_timeout {
 	my $new_val;
-	my $adj;
 	$new_val = $pbar3->fraction + 0.1;
-#   	$adj = $pbar3->adjustment;
-#	$new_val = $adj->lower if $new_val > $adj->upper;
     if ($new_val > 1) { $new_val = 0 }
 	$pbar3->set_fraction($new_val);	
 	return(1);
@@ -1142,7 +1148,6 @@ sub build_backup_files {
     my $tar_cmd_user;
     my $tar_cmd_other;
     my $base_sys_exist = 0;
-    my @list_other_;
     my @dir_content;
 	local $_;
     $results = "";
@@ -1194,7 +1199,7 @@ sub build_backup_files {
 					$results .= "\nfile: $save_path/backup_incr_sys$the_time.$tar_ext\n";
 					$results .= cat_("$save_path/list_incr_sys$the_time.txt");
 		    	}
-			} elsif (grep /^list_base\_sys/,  @dir_content) { 
+			} elsif (grep /^list\_base\_sys/,  @dir_content) { 
 		    	my @more_recent = grep /^list\_base\_sys/, sort @dir_content; 
 		    	$more_recent = pop @more_recent;
 		    	$DEBUG and print "more recent file: $more_recent\n";
@@ -1224,27 +1229,14 @@ sub build_backup_files {
 	  	}
 	  }
 	
-	$interactive and progress($pbar, $plabel, 0.5, N("Backup system files..."));
-	$interactive and progress($pbar3, $plabel3, 0.3, N("Hard Disk Backup files..."));
-
-	if (@list_other) {
-		system("cd $save_path && rm -f backup_other* ");
-		system("$tar_cmd_other -f $save_path/backup_other$the_time.$tar_ext @list_other");
-		push @file_list_to_send_by_ftp, "$save_path/backup_other$the_time.$tar_ext";
-		$results .= "\nfile: $save_path/backup_other$the_time.$tar_ext\n";
-		#old	    foreach (@list_other) { push @list_other_, $_ . "\n"; }
-	    @list_other_ = map { "$_\n" } @list_other;
-	    output_p($save_path . '/list_other', @list_other_);    
-	}
+	  $interactive and progress($pbar, $plabel, 0.5, N("Backup system files..."));
+	  $interactive and progress($pbar3, $plabel3, 0.3, N("Hard Disk Backup files..."));
 	
-	$interactive and progress($pbar1, $plabel1, 1, N("Backup User files..."));
-	$interactive and progress($pbar3, $plabel3, 0.3, N("Hard Disk Backup Progress..."));
-	
-	if ($backup_user) {
+	  if ($backup_user) {
 	    foreach (@user_list) {
-		my $user = $_;
-		$path_name = return_path($user);
-		if ($backup_user_versions) {
+		  my $user = $_;
+		  $path_name = return_path($user);
+		  if ($backup_user_versions) {
 			#- 8/19/2002 - changed these greps to look at the list, rather than the tar file
 			#- we retain the list for other media backups, but the tar file goes away, potentially
 		    if (grep(/^list\_incr\_user\_$user\_/, @dir_content)) { 
@@ -1283,18 +1275,68 @@ sub build_backup_files {
 				push @file_list_to_send_by_ftp, "$save_path/list_base_user_$user$the_time.txt";
 				$results .= "\nfile: $save_path/backup_base_user_$user$the_time.$tar_ext\n";
 		    }
-		} else {
+		  } else {
 		    system("cd $save_path && rm -f backup_user_$_* backup_base_user_$_* backup_incr_user_$_*");
 		    system("$tar_cmd_user -f $save_path/backup_user_$_$the_time.$tar_ext $path_name");
 		    push @file_list_to_send_by_ftp, "$save_path/backup_user_$_$the_time.$tar_ext";
 		    $results .= "\nfile: $save_path/backup_user_$user$the_time.$tar_ext\n";
-		}
+		  }
+	    }
 	  }
-	}
-	$interactive and progress($pbar2, $plabel2, 1, N("Backup Other files..."));
-	$interactive and progress($pbar3, $plabel3, 0.4, N("Hard Disk Backup files..."));
-    }
+	  $interactive and progress($pbar2, $plabel1, 1, N("Backup User files..."));
+	  $interactive and progress($pbar3, $plabel3, 0.4, N("Hard Disk Backup files..."));
 
+	  if (@list_other) {
+		if ($backup_other_versions) {
+ 			if (grep /^list\_incr\_other/, @dir_content) { 
+		    	my @more_recent = grep /^list\_incr\_other/, sort @dir_content; 
+		    	$more_recent = pop @more_recent;
+		    	$DEBUG and print "more recent file: $more_recent\n";
+				system("find @list_other -cnewer $save_path/$more_recent \! -type d -print > $save_path/list_incr_other$the_time.txt");
+		    	if (!cat_("$save_path/list_incr_other$the_time.txt")) {
+					system("rm $save_path/list_incr_other$the_time.txt");
+		    	} else {
+					system("$tar_cmd_other -f $save_path/backup_incr_other$the_time.$tar_ext -T $save_path/list_incr_other$the_time.txt");
+					push @file_list_to_send_by_ftp, "$save_path/backup_incr_other$the_time.$tar_ext";
+					push @file_list_to_send_by_ftp, "$save_path/list_incr_other$the_time.txt";
+					$results .= "\nfile: $save_path/backup_incr_other$the_time.$tar_ext\n";
+					$results .= cat_("$save_path/list_incr_other$the_time.txt");
+		    	}
+			} elsif (grep /^list\_base\_other/,  @dir_content) { 
+		    	my @more_recent = grep /^list\_base\_other/, sort @dir_content; 
+		    	$more_recent = pop @more_recent;
+		    	$DEBUG and print "more recent file: $more_recent\n";
+  		  		system("find @list_other -cnewer $save_path/$more_recent \! -type d -print > $save_path/list_incr_other$the_time.txt");
+		    	if (!cat_("$save_path/list_incr_other$the_time.txt")) {
+					system("rm $save_path/list_incr_other$the_time.txt");
+		    	} else {
+					system("$tar_cmd_other -f $save_path/backup_incr_other$the_time.$tar_ext -T $save_path/list_incr_other$the_time.txt");
+					push @file_list_to_send_by_ftp, "$save_path/backup_incr_other$the_time.$tar_ext";
+					push @file_list_to_send_by_ftp, "$save_path/list_incr_other$the_time.txt";
+					$results .= "\nfile: $save_path/backup_incr_other$the_time.$tar_ext\n";
+					$results .= cat_("$save_path/list_incr_other$the_time.txt");
+		    	}
+			} else {
+				#- need this for the first pass too, if we're offloading the backups to other media (sb)
+				system("find @list_other \! -type d -print > $save_path/list_base_other$the_time.txt"); 
+				system("$tar_cmd_other -f $save_path/backup_base_other$the_time.$tar_ext @list_other"); 
+				push @file_list_to_send_by_ftp, "$save_path/backup_base_other$the_time.$tar_ext";
+				push @file_list_to_send_by_ftp, "$save_path/list_base_other$the_time.txt";
+				$results .= "\nfile: $save_path/backup_base_other$the_time.$tar_ext\n";
+			}
+	  	} else {
+			system("cd $save_path && rm -f backup_other* backup_base_other* backup_incr_other*");
+			system("$tar_cmd_other -f $save_path/backup_other$the_time.$tar_ext @list_other");
+			push @file_list_to_send_by_ftp, "$save_path/backup_other$the_time.$tar_ext";
+			$results .= "\nfile: $save_path/backup_other$the_time.$tar_ext\n";
+	  	}
+	  }
+	  
+	  $interactive and progress($pbar1, $plabel2, 1, N("Backup Other files..."));
+	  $interactive and progress($pbar3, $plabel3, 0.3, N("Hard Disk Backup Progress..."));
+	  
+	}
+	  
 	my $filecount = @file_list_to_send_by_ftp;
 	if (!$filecount) {
 		show_warning("w", N_("No changes to backup!"));
@@ -1476,7 +1518,8 @@ sub file_ok_sel {
     my $file_name = $file_selection->get_filename();
     if (!member($file_name, @list_other)) {
 		push(@list_other, $file_name);
-		$list_other->add(gtkshow(new Gtk2::ListItem($file_name)));
+		$list_model->append($iter);
+		$list_model->set($iter, [ 0 => $file_name ]);
     }
 }
 
@@ -1612,21 +1655,21 @@ sub advanced_what_user {
 sub advanced_what_other {
     my $box_what_other;
 	my $file_iter;
-	my $iter = Gtk2::TreeIter->new;
+	$iter = Gtk2::TreeIter->new;
 	my $other_file;
 	my @to_remove;
 			
-	my $list_model = Gtk2::ListStore->new(Gtk2::GType->STRING);
-	my $list_other = Gtk2::TreeView->new_with_model($list_model);
-	$list_other->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
-	$list_other->set_headers_visible(0);	
+	$list_model = Gtk2::ListStore->new(Gtk2::GType->STRING);
+	my $list_others = Gtk2::TreeView->new_with_model($list_model);
+	$list_others->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+	$list_others->set_headers_visible(0);	
 		
 	foreach (@list_other) {
     	$list_model->append($iter);
     	$list_model->set($iter, [ 0 => $_ ]);		
 	}
 	
-	$list_other->get_selection->signal_connect(changed => sub {
+	$list_others->get_selection->signal_connect(changed => sub {
     	my ($model, $iter) = $_[0]->get_selected;
     	$model && $iter or return;
     	$other_file = $model->get($iter, 0);
@@ -1636,22 +1679,28 @@ sub advanced_what_other {
     gtkpack($advanced_box,
 	    $box_what_other = gtkpack_(new Gtk2::VBox(0, 15),
 			1, gtkpack_(new Gtk2::HBox(0,4),
-				1, create_scrolled_window($list_other),
+				1, create_scrolled_window($list_others),
 			),
 			0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
 				gtksignal_connect(new Gtk2::Button(N("Add")), clicked => sub { filedialog() }),
 				gtksignal_connect(new Gtk2::Button(N("Remove Selected")), clicked => sub { 
 					$list_model->remove($file_iter); 
-    				push @to_remove, $other_file;
-    				splice @list_other, $_, 1 foreach reverse sort @to_remove;
+					my $iindex = 0; 
+					foreach (@list_other) {
+						if ($list_other[$iindex] eq $other_file) {
+							splice(@list_other, $iindex, 1); 
+							last;
+						}
+						$iindex++;
+					}
 				}),
 			),
-			0, gtkset_sensitive(my $check_what_other_versions = new Gtk2::CheckButton(N("Use Incremental Backups  (do not replace old backups)")), 0),
+			0, my $check_what_other_versions = new Gtk2::CheckButton(N("Use Incremental Backups  (do not replace old backups)")),
 		),
 	);
     check_list([$check_what_other_versions, \$backup_other_versions]);
     fonction_env(\$box_what_other, \&advanced_what_other, \&advanced_what, "what");
-    $up_box->show_all();
+    $up_box->show_all();			
 }
 
 sub advanced_what_entire_sys {
@@ -4477,7 +4526,6 @@ sub interactive_mode_box {
 	destroy_widget();
 	my ($mode) = @_;
 	
-#    read_conf_file();
     gtkadd($advanced_box,
 		$box2 = gtkpack_(new Gtk2::HBox(0, 15),	
 			1, new Gtk2::VBox(0, 5),	
@@ -4494,7 +4542,6 @@ sub interactive_mode_box {
 					advanced_box(); 
 				}),
 				1, gtksignal_connect(new Gtk2::Button(N("Backup Now")), clicked => sub { 
-#					destroy_widget();
 					if ($cfg_file_exist) { 
 						build_backup_box();
 					} else { 
@@ -4522,9 +4569,6 @@ sub interactive_mode_box {
 
 sub interactive_mode {
     $interactive = 1;
-    eval { require ugtk2 };
-    die "Can't load ugtk2...\n" if $@;
-    ugtk2->import(qw(:helpers :wrappers :create));
 
     $in = 'interactive'->vnew;
 
@@ -4547,7 +4591,6 @@ sub interactive_mode {
 				  		1, gtkpack_(new Gtk2::HBox(0, 15),	
 							0, new Gtk2::HBox(0, 5),	
 					    	1, $advanced_box = gtkpack_(new Gtk2::HBox(0, 15),	
-#								1, $box2 = gtkpack_(new Gtk2::VBox(0, 15),),
 							),
 					    	0, new Gtk2::HBox(0, 5),	
 						),
