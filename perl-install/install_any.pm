@@ -670,8 +670,10 @@ sub update_userkderc($$$) {
 	} <INFILE>;
 	print OUTFILE "[$cat]\n", values %tosubst if values %tosubst; #- if categorie has not been found above.
 
+	my @l = (stat $inputfile)[4, 5];
 	unlink $inputfile;
 	rename $outputfile, $inputfile;
+	chown @l, $inputfile;
     }
 }
 

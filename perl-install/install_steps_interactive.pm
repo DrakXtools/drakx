@@ -965,6 +965,12 @@ sub setupXfree {
 	    Xconfig::getinfoFromXF86Config($o->{X}, $o->{prefix});
 	}
     }
+    $::xf4 = $o->ask_yesorno('', 
+_("DrakX will generate config files for both XFree 3.3 and XFree 4.0.
+By default, the 3.3 server is used because it works on more graphic cards.
+
+Do you want to try XFree 4.0?")) if $::expert;
+
     #- strange, xfs must not be started twice...
     #- trying to stop and restart it does nothing good too...
     my $xfs_started if 0;

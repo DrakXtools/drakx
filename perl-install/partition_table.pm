@@ -308,12 +308,15 @@ sub adjust_main_extended($) {
 	# the first is a special case, must recompute its real size
 	my $start = round_down($l->{normal}{start} - 1, $hd->{geom}{sectors});
 	my $end = $l->{normal}{start} + $l->{normal}{size};
+	my $only_linux = 1;
 	foreach (map $_->{normal}, @l) {
 	    $start = min($start, $_->{start});
 	    $end = max($end, $_->{start} + $_->{size});
+	    $only_linux &&= isTrueFS($_) || isSwap($_);
 	}
 	$l->{start} = $hd->{primary}{extended}{start} = $start;
 	$l->{size} = $hd->{primary}{extended}{size} = $end - $start;
+	$hd->{primary}{extended}{type} = 0x85 if $only_linux && !$::expert;
     }
     unless (@{$hd->{extended} || []} || !$hd->{primary}{extended}) {
 	%{$hd->{primary}{extended}} = (); #- modify the raw entry
@@ -513,8 +516,9 @@ sub add_primary($$) {
     push @{$hd->{primary}{normal}}, $part; #- really do it
 }
 
-sub add_extended($$) {
-    my ($hd, $part) = @_;
+sub add_extended {
+    my ($hd, $part, $extended_type) = @_;
+    $extended_type =~ s/Extended_?//;
 
     my $e = $hd->{primary}{extended};
 
@@ -547,7 +551,7 @@ The only solution is to move your primary partitions to have the hole next to th
 	my ($ext, $ext_size) = is_empty_array_ref($hd->{extended}) ?
 	  ($hd->{primary}, -1) : #- -1 size will be computed by adjust_main_extended
 	  (top(@{$hd->{extended}}), $part->{size});
-	my %ext = ( type => 5, start => $part->{start}, size => $ext_size );
+	my %ext = ( type => $extended_type || 5, start => $part->{start}, size => $ext_size );
 
 	raw_add($ext->{raw}, \%ext);
 	$ext->{extended} = \%ext;
@@ -574,11 +578,11 @@ sub add($$;$$) {
     my $e = $hd->{primary}{extended};
 
     if ($primaryOrExtended eq 'Primary' ||
-	$primaryOrExtended ne 'Extended' && is_empty_array_ref($hd->{primary}{normal})) {
+	$primaryOrExtended !~ /Extended/ && is_empty_array_ref($hd->{primary}{normal})) {
 	eval { add_primary($hd, $part) };
 	return unless $@;
     }
-    eval { add_extended($hd, $part) } if $hd->hasExtended; #- try adding extended
+    eval { add_extended($hd, $part, $primaryOrExtended) } if $hd->hasExtended; #- try adding extended
     if ($@ || !$hd->hasExtended) {
 	eval { add_primary($hd, $part) };
 	die $@ if $@; #- send the add extended error which should be better

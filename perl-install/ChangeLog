@@ -1,3 +1,20 @@
+2000-04-24  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (setupXfree): add a yesorno
+	question for choosing between XF4 and XF3 in expert
+
+	* install_steps_gtk.pm (choosePackagesTree): enlarge the tree window
+
+	* install_any.pm (update_userkderc): make sure uid and gid are kept
+
+	* diskdrake.pm (Create): add Extended_0x85 as a choice for expert
+
+	* partition_table.pm (add_extended): handle a 3rd arg,
+	$extended_type to tell which kind of extended partition is wanted
+	* partition_table.pm (adjust_main_extended): in non-expert,
+	automatically set extended to linux-extended if there's only
+	linux-type partitions.	
+
 2000-04-22 Pablo Saratxaga <pablo@madrakesoft.com>
 
 	* install_steps_interactive.pm: s/Mb/MB/ as 'b' is symbol for bit
