@@ -148,7 +148,18 @@ mkdir "/mnt";
 system "mount", "-t", "ext2", "/dev/$hd$root", "/mnt";
 
 print "Copying installation on hard drive\n";
-system "cp", "-a", "/boot", "/cdrom/boot", "/hd";
+if (-e "/boot/vmlinuz" && -e "/boot/hd.rdz" || -e "/cdrom/boot/vmlinuz" && -e "/cdrom/boot/hd.rdz") {
+    system "cp", "-a", "/boot", "/cdrom/boot", "/hd";
+} else {
+    mkdir "/hd/boot";
+    unless (-e "/tmp/hd/vmlinuz" && -e "/tmp/hd/hd.rdz") {
+	mkdir "/tmp/hd";
+	system "modprobe", "loop";
+	system "mount", "/cdrom/images/hd.img", "/tmp/hd", "-o", "loop";
+    }
+    system "cp", "-a", "/tmp/hd/vmlinuz", "/tmp/hd/hd.rdz", "/hd/boot";
+}
+
 mkdir "/hd/Mandrake";
 mkdir "/hd/Mandrake/RPMS";
 system "cp", "-a", "/cdrom/Mandrake/base", "/cdrom/Mandrake/mdkinst", "/hd/Mandrake";
