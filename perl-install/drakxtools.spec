@@ -22,8 +22,8 @@ Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
 Requires: perl-base >= 1:5.8.0-10mdk, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.4-1mdk, usermode-consoleonly >= 1.44-4mdk
 Obsoletes: diskdrake setuptool
-Obsoletes: Xconfigurator mouseconfig kbdconfig printtool
-Provides: diskdrake setuptool Xconfigurator mouseconfig kbdconfig printtool
+Obsoletes: mouseconfig kbdconfig printtool
+Provides: diskdrake setuptool mouseconfig kbdconfig printtool
 
 %package http
 Summary: The drakxtools via http
@@ -198,14 +198,13 @@ cat libDrakX.lang >> %name.list
 rm -rf $RPM_BUILD_ROOT
 
 %post
-[[ ! -e /usr/X11R6/bin/Xconfigurator ]] && %__ln_s -f ../sbin/XFdrake /usr/X11R6/bin/Xconfigurator
 [[ ! -e %_sbindir/kbdconfig ]] && %__ln_s -f keyboarddrake %_sbindir/kbdconfig
 [[ ! -e %_sbindir/mouseconfig ]] && %__ln_s -f mousedrake %_sbindir/mouseconfig
 [[ ! -e %_bindir/printtool ]] && %__ln_s -f ../sbin/printerdrake %_bindir/printtool
 :
 
 %postun
-for i in /usr/X11R6/bin/Xconfigurator %_sbindir/kbdconfig %_sbindir/mouseconfig %_bindir/printtool;do
+for i in %_sbindir/kbdconfig %_sbindir/mouseconfig %_bindir/printtool;do
     [[ -L $i ]] && %__rm -f $i
 done
 
