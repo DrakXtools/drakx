@@ -238,3 +238,48 @@ sub detect() {
     #- Oops? using return let return a hash ref, if not using it, it return a list directly :-)
     return fullname2mouse("serial|Generic 2 Button Mouse", unsafe => 1);
 }
+
+#- write_conf : write the mouse infos into the Xconfig files.
+#- input :
+#-  $mouse : the hashtable containing the informations
+#- $mouse input
+#-  $mouse->{nbuttons} : number of buttons : integer
+#-  $mouse->{device} : device of the mouse : string : ex 'psaux'
+#-  $mouse->{XMOUSETYPE} : type of the mouse for gpm : string : ex 'PS/2'
+#-  $mouse->{type} : type (generic ?) of the mouse : string : ex 'PS/2'
+#-  $mouse->{name} : name of the mouse : string : ex 'Standard'
+#-  $mouse->{MOUSETYPE} : type of the mouse : string : ex "ps/2"
+#-  $mouse->{XEMU3} : emulate 3rd button : string : 'yes' or 'no'
+sub write_conf {
+    my ($mouse) = @_;
+
+    mouse::write('', $mouse);
+    modules::write_conf('') if $mouse->{device} eq "usbmouse" && !$::testing;
+
+    my $f = "/etc/X11/XF86Config";
+    my $g = "/etc/X11/XF86Config-4";
+
+    my @zaxis = (
+		 $mouse->{nbuttons} > 3 ? [ "ZAxisMapping", "4 5" ] : (),
+		 $mouse->{nbuttons} > 5 ? [ "ZAxisMapping", "6 7" ] : (),
+		 $mouse->{nbuttons} < 3 ? ([ "Emulate3Buttons" ], [ "Emulate3Timeout", "50" ]) : ()
+		);
+
+    my $zaxis = join('', map { qq(\n    $_->[0]) . ($_->[1] && qq( $_->[1])) } @zaxis);
+    substInFile {
+	if (/^Section\s+"Pointer"/ .. /^EndSection/) {
+	    $_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
+	    s|^(\s*Protocol\s+).*|$1"$mouse->{XMOUSETYPE}"|;
+	    s|^(\s*Device\s+).*|$1"/dev/mouse"$zaxis|;
+	}
+    } $f if -e $f && !$::testing;
+
+    $zaxis = join('', map { qq(\n    Option "$_->[0]") . ($_->[1] && qq( "$_->[1]")) } @zaxis);
+    substInFile {
+	if (/Identifier\s+"Mouse1"/ .. /^EndSection/) {
+	    $_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
+	    s|^(\s*Option\s+"Protocol"\s+).*|$1"$mouse->{XMOUSETYPE}"|;
+	    s|^(\s*Option\s+"Device"\s+).*|$1"/dev/mouse"$zaxis|;
+	}
+    } $g if -e $g && !$::testing;
+}
