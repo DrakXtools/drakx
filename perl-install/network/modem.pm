@@ -6,11 +6,10 @@ use modules;
 use detect_devices;
 use mouse;
 use network::tools;
-use MDK::Common::Globals "network", qw($in);
 use Data::Dumper;
 
 sub configure {
-    my ($netcnx, $mouse, $netc, $intf) = @_;
+    my ($in, $netcnx, $mouse, $netc, $intf) = @_;
     $netcnx->{type} = 'modem';
     my $modem = $netcnx->{$netcnx->{type}};
 #    $netcnx->{$netcnx->{type}} = {};
@@ -33,7 +32,7 @@ sub configure {
 	    last;
 	}
     }
-    ppp_choose($netc, $modem, $mouse) or return;
+    ppp_choose($in, $netc, $modem, $mouse) or return;
     write_cnx_script($netc, "modem",
 q(
 /sbin/route del default
@@ -49,9 +48,13 @@ killall pppd
 sub ppp_configure {
     my ($in, $modem) = @_;
     $modem or return;
-
-    any::devfssymlinkf($modem, 'modem') if $modem->{device} ne "/dev/modem";
     $in->do_pkgs->install('ppp') if !$::testing;
+    ppp_configure_raw($modem);
+}
+
+sub ppp_configure_raw {
+    my ($modem) = @_;
+    any::devfssymlinkf($modem, 'modem') if $modem->{device} ne "/dev/modem";
 
     my %toreplace;
     $toreplace{$_} = $modem->{$_} foreach qw(connection phone login passwd auth domain dns1 dns2);
@@ -211,7 +214,7 @@ END
 }
 
 sub ppp_choose {
-    my ($netc, $modem, $mouse) = @_;
+    my ($in, $netc, $modem, $mouse) = @_;
     $mouse ||= {};
 
     $mouse->{device} ||= readlink "$::prefix/dev/mouse";
@@ -244,7 +247,7 @@ sub ppp_choose {
 
 #- TODO: add choice between hcf/hsf
 sub winmodemConfigure {
-    my ($netc) = @_;
+    my ($in, $netc) = @_;
     my $type;
     
     foreach (keys %{$netc->{autodetect}{winmodem}}) {

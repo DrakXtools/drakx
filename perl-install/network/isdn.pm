@@ -48,7 +48,7 @@ We recommand the light configuration.
 	$netcnx->{isdn_external}{is_light} = $netc->{autodetect}{isdn}{is_light};
 	$netcnx->{isdn_external}{special_command} = 'AT&F&O2B40';
 	require network::modem;
-	network::modem::ppp_choose($netc, $netcnx->{isdn_external}) or goto isdn_step_1;
+	network::modem::ppp_choose($in, $netc, $netcnx->{isdn_external}) or goto isdn_step_1;
     }
     1;
 }
