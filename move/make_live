@@ -104,7 +104,6 @@ sub config_X_proprietary_drivers {
     substInFile { $_ = '' if /^nvidia$/ } "$::prefix/etc/modules";
 }
 
-my $cwd = chomp_(`pwd`);
 $::prefix = $ARGV[0] || '/tmp/live_tree';
 print "Making live in $::prefix directory.\n";
 
