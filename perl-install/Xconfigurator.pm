@@ -398,9 +398,11 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 	$card->{prog} = "/usr/X11R6/bin/Xpmac";
 	$card->{server} = 'Xpmac';
     }
-    
-    -x "$prefix$card->{prog}" or $do_pkgs->install($card->{use_xf4} ? 'XFree86-server' : "XFree86-$card->{server}", @l);
-    -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
+
+    unless ($::g_auto_install) {
+	-x "$prefix$card->{prog}" or $do_pkgs->install($card->{use_xf4} ? 'XFree86-server' : "XFree86-$card->{server}", @l);
+	-x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
+    }
 
     #- check for Matrox G200 PCI cards, disable AGP in such cases, causes black screen else.
     if ($card->{identifier} =~ /Matrox.* G[24]00/ && $card->{identifier} !~ /AGP/) {

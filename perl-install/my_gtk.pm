@@ -533,7 +533,7 @@ sub _create_window($$) {
     my ($o, $title) = @_;
     my $w = new Gtk::Window;
     my $gc = Gtk::Gdk::GC->new(gtkroot());
-    !$::isStandalone && !$::live and $my_gtk::shape_width = 7;
+    !$::isStandalone && !$::live && !$::g_auto_install and $my_gtk::shape_width = 7;
 #-  $gc->set_foreground(gtkcolor(8448, 17664, 40191)); #- in hex : 33, 69, 157
 #-  $gc->set_foreground(gtkcolor(5120, 10752, 22784)); #- in hex : 20, 42, 89
     $gc->set_foreground(gtkcolor(8448, 8448, 8448)); #- in hex : 20, 42, 89
@@ -541,7 +541,7 @@ sub _create_window($$) {
 		       my $f = gtkset_border_width(gtkset_shadow_type(new Gtk::Frame(undef), 'none'), 3)
 		      );
     my $table;
-    if ($::isStandalone || $::live) { gtkadd($w, $inner) } else {
+    if ($::isStandalone || $::live || $::g_auto_install) { gtkadd($w, $inner) } else {
 	gtkadd($w, $table = new Gtk::Table(2, 2, 0));
 	$table->attach( $inner, 0, 1, 0, 1, 1|4, 1|4, 0, 0);
 	$table->attach( gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, 7, 1), expose_event => sub {
@@ -606,7 +606,7 @@ sub _create_window($$) {
 	my ($X, $Y, $Wi, $He) = @{$my_gtk::force_center || $o->{force_center}};
         $w->set_uposition(max(0, $X + ($Wi - $wi) / 2), max(0, $Y + ($He - $he) / 2));
 
-	if (!$::isStandalone && !$::live) {
+	if (!$::isStandalone && !$::live && !$::g_auto_install) {
 	    my $sqw = $my_gtk::shape_width; #square width
 	    my $wia = int(($wi+7)/8);
 	    my $s = "\xFF" x ($wia*$he);
