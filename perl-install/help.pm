@@ -99,7 +99,7 @@ options. This usually works well.
 
 
 If not, you will need to provide options to the driver. Please review the User
-Guide (chapter 3, section \"Collective informations on your hardware) for hints
+Guide (chapter 3, section \"Collective informations on your hardware\") for hints
 on retrieving this information from hardware documentation, from the
 manufacturer's Web site (if you have Internet access) or from Microsoft Windows
 (if you have it on your system)."),
