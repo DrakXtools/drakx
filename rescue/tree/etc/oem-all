@@ -118,11 +118,11 @@ unless (-e "/cdrom/VERSION") {
 }
 
 #- using default options for HP.
-$options{free_size} = 500;
-$options{free_primary} = 1;
-$options{free_fs} = 'fat32';
-$options{boot_entries} = 'linux,linux-nonfb,restore,failsafe,floppy';
-$options{kernel} = "acpi=off";
+#$options{free_size} = 500;
+#$options{free_primary} = 1;
+#$options{free_fs} = 'fat32';
+#$options{boot_entries} = 'linux,linux-nonfb,restore,failsafe,floppy';
+#$options{kernel} = "acpi=off";
 
 open F, "/cdrom/VERSION" or die "no installation cdrom found on $cd";
 while (<F>) {
