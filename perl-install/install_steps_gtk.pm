@@ -32,7 +32,7 @@ sub new($$) {
     $SIG{__DIE__} = sub { $_[0] !~ /ugtk2\.pm/ and goto $old };
 
     $ENV{DISPLAY} ||= $o->{display} || ":0";
-    my $wanted_DISPLAY = $::testing && -x '/usr/X11R6/bin/Xnest' ? ':1' : $ENV{DISPLAY};
+    my $wanted_DISPLAY = $::testing && -x '/usr/X11R6/bin/Xnest' ? ':9' : $ENV{DISPLAY};
 
     if ($ENV{DISPLAY} =~ /^:\d/ && !$::testing || $ENV{DISPLAY} ne $wanted_DISPLAY) { #- is the display local or distant?
 	my $f = "/tmp/Xconf";
@@ -56,7 +56,7 @@ sub new($$) {
 
 	    push @options, $xpmac_opts !~ /ofonly/ ? ('-mode', '17', '-depth', '32') : '-mach64' if $server =~ /Xpmac/;
 	    push @options, '-fp', '/usr/X11R6/lib/X11/fonts:unscaled' if $server =~ /Xsun|Xpmac/;
-	    push @options, '-geometry', $o->{vga16} ? '640x480' : '800x600' if $server eq 'Xnest';
+	    push @options, '-ac', '-geometry', $o->{vga16} ? '640x480' : '800x600' if $server eq 'Xnest';
 
 	    unless (fork()) {
 		exec $server, @options or exit 1;
@@ -448,7 +448,7 @@ sub installPackages {
     my $text = Gtk2::Label->new;
     my ($advertising, $change_time, $i);
     my $show_advertising if 0;
-    $show_advertising = to_bool(@install_any::advertising_images) if !defined $show_advertising;
+    $show_advertising = to_bool(@install_any::advertising_images) && $o->{locale}{lang} =~ /en|fr|es|de/ if !defined $show_advertising;
     my ($msg, $msg_time_remaining, $msg_time_total) = map { Gtk2::Label->new($_) } '', (N("Estimating")) x 2;
     my ($progress, $progress_total) = map { Gtk2::ProgressBar->new } (1..2);
     gtkadd($w->{window}, my $box = Gtk2::VBox->new(0,10));
