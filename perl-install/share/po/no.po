@@ -112,15 +112,14 @@ msgid "Country"
 msgstr "Land"
 
 #: ../../any.pm:1
+#, fuzzy, c-format
+msgid "All languages"
+msgstr "Velg språk"
+
+#: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
 msgstr "Bruk Unicode som standard"
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "Alle"
 
 #: ../../any.pm:1
 #, c-format
@@ -552,6 +551,11 @@ msgstr "Dropp"
 #, c-format
 msgid "On Floppy"
 msgstr "På diskett"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "First sector of the root partition"
+msgstr "Første sektor av oppstartspartisjon"
 
 #: ../../any.pm:1
 #, c-format
@@ -4444,6 +4448,11 @@ msgstr ""
 "Hvis du har alle CDene i listen nedenfor, klikk Ok.\n"
 "Hvis du ikke har noen av disse CDene, klikk Avbryt.\n"
 "Hvis bare noen av CDene mangler, fjern disse, klikk så Ok."
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "Alle"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -12162,8 +12171,23 @@ msgstr ""
 msgid ""
 "\n"
 "\n"
-"Printerdrake could not determine which model your printer is. Please choose "
-"the correct model from the list."
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -18237,11 +18261,6 @@ msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr "%s er ikke støttet i denne versjonen av Mandrake Linux."
 
 #: ../../standalone/scannerdrake:1
-#, c-format
-msgid ")"
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "Port: %s"
 msgstr "Port"
@@ -18354,6 +18373,10 @@ msgstr "Verktøy for å forenkle konfigurasjonen på maskinen din"
 #: ../../share/compssUsers:999
 msgid "Scientific Workstation"
 msgstr "Vitenskaplig arbeidsstasjon"
+
+#: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Console Tools"

@@ -112,15 +112,14 @@ msgid "Country"
 msgstr "Земља:"
 
 #: ../../any.pm:1
+#, fuzzy, c-format
+msgid "All languages"
+msgstr "Изаберите језик"
+
+#: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
 msgstr ""
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "Свe"
 
 #: ../../any.pm:1
 #, c-format
@@ -554,6 +553,11 @@ msgstr "Прескочи"
 #, fuzzy, c-format
 msgid "On Floppy"
 msgstr "Boot Floppy"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "First sector of the root partition"
+msgstr "Први сектор стартне партиције"
 
 #: ../../any.pm:1
 #, c-format
@@ -4758,6 +4762,11 @@ msgstr ""
 "Уколико имaте горе наведене CD-овe, кликните на  Ok.\n"
 "Уколико немате ниjедан CD, кликните на  Cancel.\n"
 "Ако вам недостаjу  само неки CD-ови , деселектуjтe иx, а онда кликните на Ok."
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "Свe"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -12783,8 +12792,23 @@ msgstr ""
 msgid ""
 "\n"
 "\n"
-"Printerdrake could not determine which model your printer is. Please choose "
-"the correct model from the list."
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -19254,11 +19278,6 @@ msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr "%s није подржан у овој верзији Mandrake Linux-а."
 
 #: ../../standalone/scannerdrake:1
-#, c-format
-msgid ")"
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "Port: %s"
 msgstr "Порт"
@@ -19373,6 +19392,10 @@ msgstr "Алати за лако конфигурисaње компjутерa"
 #: ../../share/compssUsers:999
 msgid "Scientific Workstation"
 msgstr "Научнa радна станицa"
+
+#: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Console Tools"
