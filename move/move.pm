@@ -201,8 +201,7 @@ sub key_mount {
 
 sub key_umount {
     my ($o) = @_;
-    eval { fs::umount_part($_) foreach key_parts($o) };
-    !$@;
+    eval { fs::umount_part($_) foreach key_parts($o); 1 };
 }
 
 sub machine_ident {
