@@ -123,7 +123,7 @@ sub ask_from_listf_no_check {
     my ($o, $title, $message, $f, $l, $def, $help) = @_;
 
     if (@$l <= 2) {
-	ask_from_entries_refH_powered($o, { title => $title, messages => [ deref($message) ], ok => may_apply($f, $l->[0]), cancel => may_apply($f, $l->[1]) }, []) 
+	ask_from_entries_refH_powered_no_check($o, { title => $title, messages => $message, ok => $l->[0] && may_apply($f, $l->[0]), cancel => $l->[1] && may_apply($f, $l->[1]) }, []) 
 	  ? $l->[0] : $l->[1];
     } else {
 	ask_from_entries_refH($o, $title, $message, [ { val => \$def, type => 'list', list => $l, help => $help, format => $f } ]);
@@ -196,15 +196,13 @@ sub ask_from_entries {
 #- if you pass a hash with a field hidden -> emulate stty -echo
 sub ask_from_entries_refH {
     my ($o, $title, $message, $l, %callback) = @_;
-
-    return unless @$l;
-    ask_from_entries_refH_powered($o, { title => $title, messages => [ deref($message) ], callbacks => \%callback }, $l);
+    ask_from_entries_refH_powered($o, { title => $title, messages => $message, callbacks => \%callback }, $l);
 }
 
-sub ask_from_entries_refH_powered {
+
+sub ask_from_entries_refH_powered_normalize {
     my ($o, $common, $l) = @_;
 
-    #- normalize
     foreach my $e (@$l) {
 	if (my $l = $e->{list}) {
 	    if ($e->{sort} || @$l > 10 && !$e->{sort}) {
@@ -221,12 +219,29 @@ sub ask_from_entries_refH_powered {
 	    ${$e->{val}} = max($e->{min}, min(${$e->{val}}, $e->{max}));
 	}
     }
-    add2hash_($common->{callbacks} ||= {}, { changed => sub {}, focus_out => sub {}, complete => sub { 0 } });
-    $o->ask_from_entries_refW($common,
-			      [ grep { !$_->{advanced} } @$l ], 
-			      [ grep { $_->{advanced} } @$l ])
 
+    #- don't display empty lists
+    @$l = grep { !($_->{list} && @{$_->{list}} == () && $_->{not_edit}) } @$l;
+
+    $common->{messages} = [ deref($common->{messages}) ];
+    add2hash_($common, { ok => _("Ok"), cancel => _("Cancel") }) if !exists $common->{ok};
+    add2hash_($common->{callbacks} ||= {}, { changed => sub {}, focus_out => sub {}, complete => sub { 0 } });
 }
+
+sub ask_from_entries_refH_powered {
+    my ($o, $common, $l) = @_;
+    ask_from_entries_refH_powered_normalize($o, $common, $l);
+    $o->ask_from_entries_refW($common, [ grep { !$_->{advanced} } @$l ], [ grep { $_->{advanced} } @$l ]);
+    1;
+}
+sub ask_from_entries_refH_powered_no_check {
+    my ($o, $common, $l) = @_;
+    ask_from_entries_refH_powered_normalize($o, $common, $l);
+    @$l or return 1;
+    $o->ask_from_entries_refW($common, [ grep { !$_->{advanced} } @$l ], [ grep { $_->{advanced} } @$l ]);
+}
+
+
 sub wait_message {
     my ($o, $title, $message, $temp) = @_;
 

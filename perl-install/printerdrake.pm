@@ -437,17 +437,18 @@ and optionally the port number."), [
 		    return; #- exit printer configuration, here is another hack for simplification.
 		}
 		$in->set_help('configurePrinterLocal') if $::isInstall;
-		$in->ask_from_entries_refH([_("Select Printer Connection"), _("Ok"),
-					    $::beginner || !$printer->{configured}{$printer->{QUEUE}} ? () : _("Remove queue")],
+		$in->ask_from_entries_refH_powered(
+                    { title => _("Select Printer Connection"),
+		      cancel => $::beginner || !$printer->{configured}{$printer->{QUEUE}} ? '' : _("Remove queue"),
+		      messages =>
 _("Every printer need a name (for example lp).
 Other parameters such as the description of the printer or its location
 can be defined. What name should be used for this printer and
-how is the printer connected?"), [
+how is the printer connected?") }, [
 { label => _("Name of printer"), val => \$printer->{QUEUE} },
 { label => _("Description"), val => \$printer->{Info} },
 { label => _("Location"), val => \$printer->{Location} },
-				  ],
-					   ) or printer::remove_queue($printer), $continue = 1, last;
+				  ]) or printer::remove_queue($printer), $continue = 1, last;
 	    } else {
 		if ($::beginner) {
 		    $printer->{str_type} = $in->ask_from_list_(_("Select Printer Connection"),
@@ -457,18 +458,21 @@ how is the printer connected?"), [
 							      );
 		} else {
 		    $in->set_help('configurePrinterLPR') if $::isInstall;
-		    $in->ask_from_entries_refH([_("Select Printer Connection"), _("Ok"), $::beginner ? () : _("Remove queue")],
+		    $in->ask_from_entries_refH_powered(
+		        { title => _("Select Printer Connection"), 
+			  cancel => $::beginner ? '' : _("Remove queue"),
+			  messages =>
 _("Every print queue (which print jobs are directed to) needs a
 name (often lp) and a spool directory associated with it. What
-name and directory should be used for this queue and how is the printer connected?"), [
+name and directory should be used for this queue and how is the printer connected?"),
+			  callbacks => { changed => sub {
+					     $printer->{SPOOLDIR} = printer::default_spooldir($printer) unless $_[0];
+					 } }
+		        }, [
 { label => _("Name of queue"), val => \$printer->{QUEUE} },
 { label => _("Spool directory"), val => \$printer->{SPOOLDIR} },
 { label => _("Printer Connection"), val => \$printer->{str_type}, list => [ printer::printer_type($printer) ] },
-										      ],
-					       changed => sub {
-						   $printer->{SPOOLDIR} = printer::default_spooldir($printer) unless $_[0];
-					       }
-					      ) or printer::remove_queue($printer), $continue = 1, last;
+]) or printer::remove_queue($printer), $continue = 1, last;
 		}
 		$printer->{TYPE} = $printer::printer_type{$printer->{str_type}};
 	    }

@@ -217,13 +217,15 @@ arch() !~ /sparc/ ? (
 { label => _("Default"), val => \$default, type => 'bool' },
 	);
 
-	if ($in->ask_from_entries_refH($c eq "Add" ? '' : ['', _("Ok"), _("Remove entry")], 
-	    '', \@l,
-	    complete => sub {
-		$e->{label} or $in->ask_warn('', _("Empty label not allowed")), return 1;
-		member($e->{label}, map { $_->{label} } grep { $_ != $e } @{$b->{entries}}) and $in->ask_warn('', _("This label is already used")), return 1;
-		0;
-	    })) {
+	if ($in->ask_from_entries_refH_powered(
+	    { 
+	     if_($c ne "Add", cancel => _("Remove entry")),
+	     callbacks => {
+	       complete => sub {
+		   $e->{label} or $in->ask_warn('', _("Empty label not allowed")), return 1;
+		   member($e->{label}, map { $_->{label} } grep { $_ != $e } @{$b->{entries}}) and $in->ask_warn('', _("This label is already used")), return 1;
+		   0;
+	       } } }, \@l)) {
 	    $b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
 	    $e->{vga} = $bootloader::vga_modes{$e->{vga}} || $e->{vga};
 	    require bootloader;

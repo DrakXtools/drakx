@@ -151,8 +151,7 @@ For any question on this document, please contact MandrakeSoft S.A.
 sub selectKeyboard($) {
     my ($o, $clicked) = @_;
 
-    $o->ask_from_entries_refH(
-			      _("Keyboard"),
+    $o->ask_from_entries_refH(_("Keyboard"),
 			      _("Please, choose your keyboard layout."),
 			      [ { val => \$o->{keyboard}, type => 'list',
 				  format => sub { translate(keyboard::keyboard2text($_[0])) },
@@ -753,8 +752,18 @@ sub setRootPassword {
 		 if_($o->{installClass} =~ "server" || $::expert, "setRootPasswordMd5"),
 		 if_(!$::beginner, "setRootPasswordNIS"));
 
-    $o->ask_from_entries_refH([_("Set root password"), _("Ok"), if_($o->{security} <= 2 && !$::corporate, _("No password"))],
-			 [ _("Set root password"), "\n" ], [
+    $o->ask_from_entries_refH_powered(
+        {
+	 title => _("Set root password"), 
+	 messages => _("Set root password"),
+	 cancel => ($o->{security} <= 2 && !$::corporate ? _("No password") : ''),
+	 callbacks => { 
+	     complete => sub {
+		 $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,1);
+		 length $sup->{password} < 2 * $o->{security}
+		   and $o->ask_warn('', _("This password is too simple (must be at least %d characters long)", 2 * $o->{security})), return (1,0);
+		 return 0
+        } } }, [
 { label => _("Password"), val => \$sup->{password},  hidden => 1 },
 { label => _("Password (again)"), val => \$sup->{password2}, hidden => 1 },
   if_($o->{installClass} eq "server" || $::expert,
@@ -762,15 +771,8 @@ sub setRootPassword {
 { label => _("Use MD5 passwords"), val => \$o->{authentication}{md5}, type => 'bool', text => _("MD5") },
   ), if_(!$::beginner,
 { label => _("Use NIS"), val => \$nis, type => 'bool', text => _("yellow pages") },
-  )
-			 ],
-			 complete => sub {
-			     $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,1);
-			     length $sup->{password} < 2 * $o->{security}
-			       and $o->ask_warn('', _("This password is too simple (must be at least %d characters long)", 2 * $o->{security})), return (1,0);
-			     return 0
-			 }
-    ) or return;
+  ),
+			 ]) or return;
 
     $o->{authentication}{NIS} &&= $nis;
     $o->ask_from_entries_refH('',
@@ -798,10 +800,26 @@ sub addUser {
 
     if (($o->{security} >= 1 || $clicked)) {
 	$u->{icon} = translate($u->{icon});
-	if ($o->ask_from_entries_refH(
-        [ _("Add user"), _("Accept user"), if_($o->{security} < 4 || @{$o->{users}}, _("Done")) ],
-        _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @{$o->{users}})) : ''),
-        [ 
+	if ($o->ask_from_entries_refH_powered(
+	    { title => _("Add user"),
+	      messages => _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @{$o->{users}})) : ''),
+	      ok => _("Accept user"),
+	      cancel => ($o->{security} < 4 || @{$o->{users}} ? _("Done") : ''),
+	      callbacks => {
+	          focus_out => sub {
+		      if ($_[0] eq 0) {
+			  $u->{name} ||= lc first($u->{realname} =~ /((\w|-)+)/);
+		      }
+		  },
+	          complete => sub {
+		      $u->{password} eq $u->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,2);
+		      $o->{security} > 3 && length($u->{password}) < 6 and $o->ask_warn('', _("This password is too simple")), return (1,2);
+		      $u->{name} or $o->ask_warn('', _("Please give a user name")), return (1,0);
+		      $u->{name} =~ /^[a-z0-9_-]+$/ or $o->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
+		      member($u->{name}, map { $_->{name} } @{$o->{users}}) and $o->ask_warn('', _("This user name is already added")), return (1,0);
+		      return 0;
+		  },
+	    } }, [ 
 	 { label => _("Real name"), val => \$u->{realname} },
 	 { label => _("User name"), val => \$u->{name} },
 	   if_($o->{security} >= 2,
@@ -813,19 +831,6 @@ sub addUser {
 	 { label => _("Icon"), val => \$u->{icon}, list => [ any::facesnames($o->{prefix}) ], icon2f => sub { any::face2xpm($_[0], $o->{prefix}) } },
 	   ),
         ],
-        focus_out => sub {
-	    if ($_[0] eq 0) {
-		$u->{name} ||= lc first($u->{realname} =~ /((\w|-)+)/);
-	    }
-	},
-        complete => sub {
-	    $u->{password} eq $u->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,2);
-	    $o->{security} > 3 && length($u->{password}) < 6 and $o->ask_warn('', _("This password is too simple")), return (1,2);
-	    $u->{name} or $o->ask_warn('', _("Please give a user name")), return (1,0);
-	    $u->{name} =~ /^[a-z0-9_-]+$/ or $o->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
-	    member($u->{name}, map { $_->{name} } @{$o->{users}}) and $o->ask_warn('', _("This user name is already added")), return (1,0);
-	    return 0;
-	},
     )) {
 	    push @{$o->{users}}, $o->{user};
 	    $o->{user} = {};
