@@ -1537,9 +1537,9 @@ sub system_state {
     if ($cfg_file_exist) { 
 	$system_state .= _("\nBackup Sources: \n");
         $backup_sys and $system_state .= _("\n- System Files:\n"); 
-        $backup_sys and $system_state .= _("\t\t$_\n") foreach @sys_files; 
+        $backup_sys and $system_state .= "\t\t$_\n" foreach @sys_files; 
         $backup_user and $system_state .= _("\n- Users Files:\n");
-        $backup_user and $system_state .= _("\t\t$_\n") foreach @user_list;
+        $backup_user and $system_state .= "\t\t$_\n" foreach @user_list;
         @list_other and $system_state .= _("\n- Other Files:\n"); 
         @list_other and $system_state .= "\t\t$_\n" foreach @list_other;
         $system_state .= _("\n- Path to save backups: %s\n", $save_path);
@@ -2939,7 +2939,7 @@ _("options description:
       Like with cvs, Drakbackup will ignore all references
       included on  .backupignore files in each directories.
       ex: 
-         \$> cat .backupignore
+         #> cat .backupignore
          *.o
          *~
          ...
