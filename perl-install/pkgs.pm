@@ -163,6 +163,18 @@ sub packageById {
     my $pkg = $packages->{depslist}[$id]; #- do not log as id unsupported are still in depslist.
     $pkg->is_arch_compat && $pkg;
 }
+
+sub bestKernelPackage {
+    my ($packages) = @_;
+    my $best;
+
+    foreach ($packages->{provides}{kernel}) {
+	my $pkg = $packages->{depslist}[$_] or next;
+	$pkg->name =~ /kernel-\d/ or next;
+	!$best || $pkg->compare_pkg($best) > 0 and $best = $pkg;
+    }
+}
+
 sub packagesOfMedium {
     my ($packages, $medium) = @_;
     $medium->{start} <= $medium->{end} ? @{$packages->{depslist}}[$medium->{start} .. $medium->{end}] : ();
