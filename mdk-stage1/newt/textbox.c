@@ -173,7 +173,7 @@ static void doReflow(const char * text, char ** resultPtr, int width,
 	while (*text && text < end) {
 	    if (end - text < width) {
 		if (result) {
-		    strncat(result, text, end - text + 1);
+		    strncat(result, text, end - text);
 		    strcat(result, "\n");
 		    height++;
 		}
@@ -212,7 +212,7 @@ static void doReflow(const char * text, char ** resultPtr, int width,
 		    chptr++;
 		    kanji = 0;
 		  } else {
-		    strncat(result, text, chptr - text + 1);
+		    strncat(result, text, chptr - text);
 		  }
 		    strcat(result, "\n");
 		    height++;
