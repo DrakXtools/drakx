@@ -104,7 +104,7 @@ sub endianness($$) {
 
 sub get_free($) {
     my ($fs) = @_;
-    foreach (my $i = 0; $i < $fs->{nb_clusters}; $i++) {
+    for (my $i = 0; $i < $fs->{nb_clusters}; $i++) {
         my $cluster = ($i + $fs->{last_free_cluster} - 2) % $fs->{nb_clusters} + 2;
         is_available(&next($fs, $cluster)) and return $fs->{last_free_cluster} = $cluster;
     }

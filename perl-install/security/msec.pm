@@ -80,7 +80,7 @@ sub get_default {
     elsif ($category eq "checks") { $default_file = "$::prefix/var/lib/msec/security.conf"; }
 
     open F, $default_file;
-    while(<F>) {
+    while (<F>) {
 	   if ($category eq 'functions') {
 		  if ($_ =~ /^$option/) { (undef, $default_value) = split(/ /, $_) }
 	   } elsif ($category eq 'checks') {
@@ -102,7 +102,7 @@ sub get_value {
 
     if (-e $item_file) {
         open F, $item_file;
-        while(<F>) {
+        while (<F>) {
             if ($_ =~ /^$item/) {
 			 if ($category eq 'functions') {
 				my $i = $_;

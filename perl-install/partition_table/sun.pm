@@ -92,7 +92,7 @@ sub read($$) {
     my @pt;
     my @infos_up = unpack $format1 x $nb_primary, $info{infos};
     my @partitions_up = unpack $format2 x $nb_primary, $info{partitions};
-    for (0..$nb_primary-1) {
+    foreach (0..$nb_primary-1) {
 	my $h = { type => $infos_up[2 * $_], flag => $infos_up[1 + 2 * $_],
 		  start_cylinder => $partitions_up[2 * $_], size => $partitions_up[1 + 2 * $_] };
 	$h->{start} = $sector + $h->{start_cylinder} * $hd->cylinder_size();

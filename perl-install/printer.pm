@@ -91,7 +91,7 @@ sub spooler {
 
 sub printer_type($) {
     my ($printer) = @_;
-    for ($printer->{SPOOLER}) {
+    foreach ($printer->{SPOOLER}) {
 	/cups/ && return @printer_type_inv{qw(LOCAL), 
 					   qw(LPD SOCKET SMB), 
 					   $::expert ? qw(URI) : ()};
@@ -710,7 +710,7 @@ sub read_configured_queues($) {
     $printer->{SPOOLER} ||= get_default_spooler();
     if (!$printer->{SPOOLER}) {
 	#- Find the first spooler where there are queues
-	for my $spooler (qw(cups pdq lprng lpd)) {
+	foreach my $spooler (qw(cups pdq lprng lpd)) {
 	    #- Is the spooler's daemon running?
 	    my $service = $spooler;
 	    if ($service eq "lprng") {
@@ -795,7 +795,7 @@ sub read_configured_queues($) {
 	# Fill in "options" field
 	if (my $args = $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{args}) {
 	    my @options;
-	    for my $arg (@{$args}) {
+	    foreach my $arg (@{$args}) {
 		push(@options, "-o");
 		my $optstr = $arg->{name} . "=" . $arg->{default};
 		push(@options, $optstr);
@@ -914,7 +914,7 @@ sub read_printer_db(;$) {
 		    # Make one database entry per driver with the entry name
 		    # manufacturer|model|driver
 		    if ($::expert) {
-			for my $driver (@{$entry->{drivers}}) {
+			foreach my $driver (@{$entry->{drivers}}) {
 			    my $driverstr;
 			    if ($driver eq "Postscript") {
 				$driverstr = "PostScript";
@@ -1588,7 +1588,7 @@ sub restart_queue($) {
     my $queue = $printer->{QUEUE};
 
     # Restart the daemon(s)
-    for ($printer->{SPOOLER}) {
+    foreach ($printer->{SPOOLER}) {
 	/cups/ && do {
 	    #- restart cups.
 	    restart_service("cups");
@@ -2750,7 +2750,7 @@ sub findsofficeconfigfile {
 	 "/usr/local/lib/*/share/xp3/Xpdefaults",
 	 "/usr/local/*/share/xp3/Xpdefaults",
 	 "/opt/*/share/xp3/Xpdefaults");
-    for my $configfilename (@configfilenames) {
+    foreach my $configfilename (@configfilenames) {
 	local *F;
 	if (open F, "ls -r $prefix$configfilename 2> /dev/null |") {
 	    my $filename = <F>;
@@ -2776,7 +2776,7 @@ sub findopenofficeconfigfile {
 	 "/usr/local/lib/*/share/psprint/psprint.conf",
 	 "/usr/local/*/share/psprint/psprint.conf",
 	 "/opt/*/share/psprint/psprint.conf");
-    for my $configfilename (@configfilenames) {
+    foreach my $configfilename (@configfilenames) {
 	local *F;
 	if (open F, "ls -r $prefix$configfilename 2> /dev/null |") {
 	    my $filename = <F>;
