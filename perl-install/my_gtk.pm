@@ -10,7 +10,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
-    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkset_editable gtksetstyle gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_modal gtkset_border_width gtkmove gtkresize gtkshow gtkhide gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng create_pix_text fill_tiled gtkicons_labels_widget write_on_pixmap gtkcreate_xpm gtkcreate_png gtkbuttonset) ],
+    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkset_editable gtksetstyle gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_modal gtkset_border_width gtkmove gtkresize gtkshow gtkhide gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng create_pix_text get_text_coord fill_tiled gtkicons_labels_widget write_on_pixmap gtkcreate_xpm gtkcreate_png gtkbuttonset) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -385,8 +385,8 @@ sub create_pix_text {
     my $style= new Gtk::Style;
     $style->font(Gtk::Gdk::Font->fontset_load($font));
 
-    my ($width, $height, $lines, $heights, $ascents, $descents) = get_text_coord (
-        $text, $style, $max_width, $max_height, $correction, $can_be_greater, $can_be_smaller);
+    my ($width, $height, $lines, $widths, $heights, $ascents, $descents) = get_text_coord (
+        $text, $style, $max_width, $max_height, $correction, $can_be_greater, $can_be_smaller, 1);
 
     my $pix = new Gtk::Gdk::Pixmap($w->window, $width, $height);
     if ($backpix) {
@@ -402,7 +402,7 @@ sub create_pix_text {
     $gc_text->set_foreground($color_text);
     my $i = 0;
     foreach (@{$lines}) {
-	$pix->draw_string($style->font, $gc_text, 0, ${$ascents}[$i] + ${$heights}[$i], $_);
+	$pix->draw_string($style->font, $gc_text, ${$widths}[$i], ${$ascents}[$i] + ${$heights}[$i], $_);
 	$i++;
     }
     ($pix, $width, $height, ${$ascents}[0], ${$descents}[0]);
@@ -417,6 +417,7 @@ sub get_text_coord {
     my $real_width = 0;
     my $real_height = 0;
     my @lines;
+    my @widths;
     my @heights;
     my @ascents;
     my @descents;
@@ -430,11 +431,12 @@ sub get_text_coord {
 	my $l = $style->font->string_width($_ . if_(!$flag, " "));
 	if ($width + $l > $max_width2 && !$flag) {
 	    $flag = 1;
-	    $width = 0;
 	    $height += $style->font->string_height($lines[$idx]);
 	    (undef, undef, undef, $ascents[$idx], $descents[$idx]) = $style->font->string_extents($lines[$idx]);
 	    $height -= $correction;
 	    $heights[$idx+1] = $height;
+	    $widths[$idx] = ($max_width2-$width)/2;
+	    $width = 0;
 	    $idx++;
 	}
 	$lines[$idx] = $flag ? "$_" : $lines[$idx] . " $_";
@@ -455,7 +457,7 @@ sub get_text_coord {
     $real_height < $max_height && $can_be_smaller and $height = $real_height;
     $real_height > $max_height && $can_be_greater and $height = $real_height;
 
-    ($width, $height, \@lines, \@heights, \@ascents, \@descents)
+    ($width, $height, \@lines, \@widths, \@heights, \@ascents, \@descents)
 }
 
 sub fill_tiled {
