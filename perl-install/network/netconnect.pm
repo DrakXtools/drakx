@@ -195,7 +195,7 @@ sub get_subwizard {
       my $wiz;
       $wiz =
         {
-         defaultimage => "wiz_drakconnect.png",
+         defaultimage => "drakconnect.png",
          name => N("Network & Internet Configuration"),
          pages => {
                    welcome => 
