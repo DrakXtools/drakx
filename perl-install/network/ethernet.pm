@@ -17,30 +17,16 @@ use MDK::Common::Globals "network", qw($in $prefix);
 
 sub configure_cable {
     my ($netcnx, $netc, $intf, $first_time) = @_;
-#    $::isInstall and $in->set_help('configureNetworkCable');
+    
     $netcnx->{type} = 'cable';
-
-    if ($::expert) {
-	my @m = (
-	       { description => "dhcp-client",
-		 c => 1 },
-	       { description => "dhcpcd",
-		 c => 3 },
-	       { description => "dhcpxd",
-		 c => 4 },
-	      );
-	if (my $f = $in->ask_from_listf(N("Connect to the Internet"),
-					N("Which dhcp client do you want to use?
-Default is dhcp-client."),
-					sub { $_[0]{description} },
-					\@m)) {
-	    $f->{c} == 3 and $netcnx->{dhcp_client} = "dhcpcd" and $in->do_pkgs->install(qw(dhcpcd));
-	    $f->{c} == 4 and $netcnx->{dhcp_client} = "dhcpxd" and $in->do_pkgs->install(qw(dhcpxd));
-	    $f->{c} == 1 and $netcnx->{dhcp_client} = "dhcp-client" and $in->do_pkgs->install(qw(dhcp-client));
-	}
-    } else {
-	$in->do_pkgs->install(qw(dhcp-client));
-    }
+    
+    $in->ask_from(N("Connect to the Internet"),
+		  N("Which dhcp client do you want to use ? (default is dhcp-client)"),
+		  [ { val => \$netcnx->{dhcp_client}, list => ["dhcp-client", "dhcpcd", "dhcpxd"] } ],
+		 ) or return;
+    
+    $in->do_pkgs->install($netcnx->{dhcp_client});
+    
     go_ethernet($netc, $intf, 'dhcp', '', '', $first_time);
     write_cnx_script($netc, "cable",
 qq(
