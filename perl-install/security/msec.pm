@@ -227,7 +227,7 @@ sub config_function {
 	   substInFile { s/^$function.*// } $options_file;
     } else {
 	   substInFile { s/^$function.*// } $options_file;
-	   append_to_file($options_file, "$function $value")
+	   append_to_file($options_file, "$function ($value)")
     }
 }
 
