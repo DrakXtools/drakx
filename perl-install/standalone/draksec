@@ -49,15 +49,29 @@ $::isEmbedded and kill USR2, $::CCPID;
 
 $secure_level = ${{ getVarsFromSh("/etc/profile") }}{SECURE_LEVEL} || $ENV{SECURE_LEVEL} || 2;
 
-if (my $level = $in->ask_from_list('', _("Choose security level") . "\n\n" . 
-				   join('', map { "$l{$_}: $help{$_}\n\n" } keys %l), 
-				   [ values %l ], $l{$secure_level})) {
+#$in->ask_from('',
+#	      _("Choose security level")  . "\n\n" . join('', map { "$l{$_}: $help{$_}\n\n" } keys %l),
+#	      { label => _($st->{$f}{text}), val => \$def_choice, list => [ 'replay', 'manual' ] },
+#	      { label => _($st->{$f}{text}), val => \$def_choice, list => [ 'replay', 'manual' ] }
+#	     )
+
+my ($level, $libsafe);
+if ($in->ask_from('', _("Choose security level") . "\n\n" .
+		       join('', map { "$l{$_}: $help{$_}\n\n" } keys %l),
+		       [
+			{ label => _('Security level'), val => \$level, list => [ (values %l) ] },
+		        { label => _('Use libsafe'), val => \$libsafe, type => 'bool' }
+		       ]
+		      )) {
     my $w = $in->wait_message('', _("Setting security level"));
     $in->suspend;
 
     $ENV{LILO_PASSWORD} = ''; # make it non interactive
     system "/usr/sbin/msec", $m{$level};
+    my %t = getVarsFromSh("$prefix/etc/sysconfig/system");
 
+    $t{LIBSAFE} = bool2yesno($libsafe);
+    setVarsInSh("$prefix/etc/sysconfig/system", \%t);
     $in->resume;
 }
 
