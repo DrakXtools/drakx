@@ -791,7 +791,6 @@ sub computeGroupSize {
     while (my ($k, $v) = each %group) {
 	$sizes{$v} += packageSize($packages->{names}{$k});
     }
-    print formatXiB($sizes{$_}) , " => $_ ", join(",", @{$pkgs{$_}}), "\n" foreach sort keys %sizes;
     \%sizes;
 }
 
