@@ -595,7 +595,7 @@ sub reallyChooseGroups {
 			   (map {; 
 				 my $old = $path;
 				 $path = $o->{compssUsers}{$_}{path};
-				 if_($old ne $path, { val => $path }),
+				 if_($old ne $path, { val => translate($path) }),
 				 {
 				  val => \$val->{$_},
 				  type => 'bool',

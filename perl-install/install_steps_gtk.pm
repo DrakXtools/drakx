@@ -286,7 +286,7 @@ sub reallyChooseGroups {
 			 my $old = $path;
 			 $path = $o->{compssUsers}{$e}{path};
 			 (
-			  if_($old ne $path, new Gtk::Label($path)),
+			  if_($old ne $path, new Gtk::Label(translate($path))),
 			  gtkpack_(new Gtk::HBox(0,0), 0, gtkpng($file), 1, $check),
 			 )
 		     } @{$o->{compssUsersSorted}})),
