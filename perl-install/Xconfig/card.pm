@@ -278,7 +278,7 @@ sub configure {
     $card->{prog} = install_server($card, $options, $do_pkgs);
     
     $in->ask_from('', _("Select the memory size of your graphics card"),
-		  [ { val => \$card->{VideoRam},
+		  [ { val => \ ($card->{VideoRam} = 4096),
 		      type => 'list',
 		      list => [ ikeys %VideoRams ],
 		      format => sub { translate($VideoRams{$_[0]}) },
