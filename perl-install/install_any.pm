@@ -85,7 +85,7 @@ sub errorOpeningFile($) {
 
     my $max = 32; #- always refuse after $max tries.
     if ($::o->{method} eq "cdrom") {
-	cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+/tmp/image, and $cdrom = $1;
+	cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image), and $cdrom = $1;
 	return unless $cdrom;
 	ejectCdrom($cdrom);
 	while ($max > 0 && askChangeMedium($::o->{method}, $asked_medium)) {
@@ -457,14 +457,12 @@ sub hdInstallPath() {
 
 sub unlockCdrom(;$) {
     my ($cdrom) = @_;
-    $cdrom or cat_("/proc/mounts") =~ m|(/tmp/\S+)\s+/tmp/image| and $cdrom = $1;
-    $cdrom or cat_("/proc/mounts") =~ m|(/dev/\S+)\s+/mnt/cdrom | and $cdrom = $1;
+    $cdrom or cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image), and $cdrom = $1;
     eval { $cdrom and ioctl detect_devices::tryOpen($1), c::CDROM_LOCKDOOR(), 0 };
 }
 sub ejectCdrom(;$) {
     my ($cdrom) = @_;
-    $cdrom or cat_("/proc/mounts") =~ m|(/tmp/\S+)\s+/tmp/image| and $cdrom = $1;
-    $cdrom or cat_("/proc/mounts") =~ m|(/dev/\S+)\s+/mnt/cdrom | and $cdrom = $1;
+    $cdrom or cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image), and $cdrom = $1;
     my $f = eval { $cdrom && detect_devices::tryOpen($cdrom) } or return;
     getFile("XXX"); #- close still opened filehandle
     eval { fs::umount("/tmp/image") };
