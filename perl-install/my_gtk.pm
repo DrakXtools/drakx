@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border @grabbed);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title) ],
+    helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
     wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkappend gtkadd gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_background gtkset_default_fontset) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list ask_file) ],
 );
@@ -212,7 +212,7 @@ sub create_box_with_title($@) {
 
 sub createScrolledWindow($) {
     my ($W) = @_;
-    if (ref $W eq "Gtk::Text") {
+    if (member(ref $W, qw(Gtk::Text)) {
 	gtkpack_(new Gtk::HBox(0,0), 
 		 1, $W, 
 		 0, new Gtk::VScrollbar($W->vadj));
@@ -334,6 +334,81 @@ sub _create_window($$) {
     $o->{rwindow} = $w;
 }
 
+my ($next_child, $left, $right, $up, $down);
+{
+    my $next_child = sub {
+	my ($c, $dir) = @_;
+
+	my @childs = $c->parent->children;
+   
+	my $i; for ($i = 0; $i < @childs; $i++) {
+	    last if $childs[$i] == $c || $childs[$i]->subtree == $c;
+	}
+	$i += $dir;
+	0 <= $i && $i < @childs ? $childs[$i] : undef;
+    };
+    $left = sub { &$next_child($_[0]->parent, 0); };
+    $right = sub {
+	my ($c) = @_;
+	if ($c->subtree) {
+	    $c->expand;
+	    ($c->subtree->children)[0];
+	} else {
+	    $c;
+	}
+    };
+    $down = sub {
+	my ($c) = @_;
+	return &$right($c) if ref $c eq "Gtk::TreeItem" && $c->subtree && $c->expanded;
+
+	if (my $n = &$next_child($c, 1)) {
+	    $n;
+	} else {
+	    return if ref $c->parent ne 'Gtk::Tree';	
+	    &$down($c->parent);
+	}
+    };
+    $up = sub {
+	my ($c) = @_;
+	if (my $n = &$next_child($c, -1)) {
+	    $n = ($n->subtree->children)[-1] while ref $n eq "Gtk::TreeItem" && $n->subtree && $n->expanded;
+	    $n;
+	} else {
+	    return if ref $c->parent ne 'Gtk::Tree';	
+	    &$left($c);
+	}
+    };
+}
+
+sub create_treeitem($$) {
+    my ($name) = @_;
+    
+    my $w = new Gtk::TreeItem($name);
+    $w->signal_connect(key_press_event => sub {
+        my (undef, $e) = @_;
+        local $_ = chr ($e->{keyval} & 0xff);
+
+	if ($e->{keyval} > 0x100) {
+	    my $n;
+	    $n = &$left($w)  if /[Q´\x96]/;
+	    $n = &$right($w) if /[S¶\x98]/;
+	    $n = &$up($w)    if /[R¸\x97]/;
+	    $n = &$down($w)  if /[T²\x99]/;
+	    if ($n) {
+		$n->focus('up');
+		$w->signal_emit_stop("key_press_event"); 
+	    }
+	    $w->expand if /[+«]/;
+	    $w->collapse if /[-\xad]/;
+	    do { 
+		$w->expanded ? $w->collapse : $w->expand; 
+		$w->signal_emit_stop("key_press_event"); 
+	    } if /[\r\x8d]/;
+	}
+        1;
+    });
+    $w;
+}
 
 
 

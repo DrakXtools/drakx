@@ -46,8 +46,13 @@ sub initrd {
     _ "$sudo cp -f modules/${type}_modules.cgz $mnt/modules/modules.cgz";
     _ "$sudo cp -f modules/modules.dep $mnt/modules/";
     _ "$sudo umount $mnt";
-    _ "gzip -9 -c $tmp > $img";
-    _ "rm -f $tmp";
+
+# Workaround for vfat-loop bug (quite touchy)
+    _ "gzip -9f $tmp";
+    _ "cp -f $tmp.gz $img";
+    _ "rm -f $tmp.gz";
+#    _ "gzip -9 -c $tmp > $img";
+#    _ "rm -f $tmp";
 }
 
 sub boot_img {

@@ -330,7 +330,7 @@ doInstallStep =>
  __("The packages selected are now being installed. This operation
 should only take a few minutes."),
 
-configureMouse =>
+selectMouse =>
  __("If DrakX failed to find your mouse, or if you want to
 check what it has done, you will be presented the list of mice
 above.
