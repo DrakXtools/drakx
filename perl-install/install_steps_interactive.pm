@@ -156,7 +156,9 @@ sub selectInstallClass {
 	    foreach (grep { $_->{mntpoint} } @{$o->{fstab}}) {
 		my ($options, $unknown) = fs::mount_options_unpack($_);
 		$options->{encrypted} or next;
-		$_->{encrypt_key} = $o->ask_from_entry('', N("Encryption key for %s", $_->{mntpoint}));
+		$o->ask_from_({ focus_first => 1 },
+			      [ { label => N("Encryption key for %s", $_->{mntpoint}),
+				  hidden => 1, val => \$_->{encrypt_key} } ]);
 	    }
 	    $o->{isUpgrade} = 1;
 	}
