@@ -15,6 +15,7 @@ use lang;
 use run_program;
 use modules;
 use log;
+use c;
 
 sub drakx_version { 
     sprintf "DrakX v%s built %s", $::testing ? ('TEST', scalar gmtime()) : (split('/', cat_("$ENV{SHARE_PATH}/VERSION")))[2,3];
@@ -905,6 +906,7 @@ sub report_bug {
       header("install.log"), cat_("$prefix/root/drakx/install.log"),
       header("fstab"), cat_("$prefix/etc/fstab"),
       header("modules.conf"), cat_("$prefix/etc/modules.conf"),
+      header("lilo.conf"), cat_("$prefix/etc/lilo.conf"),
       header("/etc/modules"), cat_("$prefix/etc/modules"),
       map_index { even($::i) ? header($_) : $_ } @other;
 }
@@ -959,10 +961,15 @@ Allowing this will permit users to simply click on "Share" in konqueror and naut
     setVarsInSh($file, \%conf);
     if ($r eq $l[2]) {
 	# custom
-	$in->ask_warn('', 
-'The per-user sharing uses the group "fileshare". 
-You can use userdrake to add a user in this group.
-Or on the command line use: "usermod -G fileshare,previous_groups user_name"');
+	if ($in->ask_from_('', 
+	{
+	 -e '/usr/bin/userdrake' ? (ok => _("Launch userdrake")) : (cancel => ''),	     
+	 title =>
+_("The per-user sharing uses the group \"fileshare\". 
+You can use userdrake to add a user in this group.")
+	})) {
+	    if (fork) { exec "userdrake" or c::_exit(0) }
+	}
     }
 }
 
