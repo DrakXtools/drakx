@@ -81,7 +81,6 @@ sub write($;$) {
 
 sub detect() {
     my %l;
-    eval { modules::load("serial") };
     @l{qw(FULLNAME nbuttons MOUSETYPE XMOUSETYPE device)} = split("\n", `mouseconfig --nointeractive 2>/dev/null`) or die "mouseconfig failed";
     \%l;
 }

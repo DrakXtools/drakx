@@ -89,10 +89,11 @@ sub msg_boot_img {
     _ "cat vmlinuz > $mnt/vmlinuz";
     initrd("${mnt}2", "$mnt/$type.rdz");
     
+    my $timeout = $ks ? 1 : 72;
     output("$mnt/syslinux.cfg", "
 default linux
 prompt 1
-timeout 72
+timeout $timeout
 display boot.msg
 F1 boot.msg
 F2 general.msg
