@@ -129,7 +129,7 @@ $o = $::o = {
     mkbootdisk => 1, #- no mkbootdisk if 0 or undef, find a floppy with 1, or fd1
 #-    packages   => [ qw() ],
     partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0 }, #-, readonly => 0 },
-#-    security => 2,
+    security => 2,
 #arch() =~ /^sparc/ ? (
 #  partitions => [
 #    { mntpoint => "/",     size => 600 << 11, type => 0x83, ratio => 5, maxsize =>1000 << 11 },
@@ -163,7 +163,6 @@ $o = $::o = {
     toRemove     => [],
     toSave       => [],
 #-    simple_themes => 1,
-#-    installClass => "normal",
 
     timezone => {
 #-                   timezone => "Europe/Paris",
@@ -258,8 +257,6 @@ sub selectInstallClass {
 
     $o->selectInstallClass($clicked);
    
-    $o->{partitions} ||= $suggestedPartitions{$o->{installClass}};
-
     if ($o->{steps}{choosePackages}{entered} >= 1 && !$o->{steps}{installPackages}{done}) {
         $o->setPackages(\@install_classes);
         $o->selectPackagesToUpgrade if $o->{isUpgrade};
@@ -347,7 +344,6 @@ sub miscellaneous {
 	setVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
             CLEAN_TMP => $o->{miscellaneous}{CLEAN_TMP},
             CLASS => $::expert && 'expert' || 'beginner',
-            TYPE => $o->{installClass},
             SECURITY => $o->{security},
 	    META_CLASS => $o->{meta_class} || 'PowerPack',
         });
@@ -490,8 +486,8 @@ sub main {
 	    vga       => sub { $o->{vga} = $v },
 	    step      => sub { $o->{steps}{first} = $v },
 	    expert    => sub { $::expert = $v },
-	    class     => sub { $o->{installClass} = $v },
-	    fclass    => sub { $o->{installClass} = $v; push @auto, 'selectInstallClass' },
+	    fbeginner => sub { $::expert = 0; push @auto, 'selectInstallClass' },
+	    fexpert   => sub { $::expert = 1; push @auto, 'selectInstallClass' },
 	    desktop   => sub { $o->{meta_class} = 'desktop' },
 	    firewall  => sub { $o->{meta_class} = 'firewall'; push @auto, 'selectInstallClass'},
 	    lnx4win   => sub { $o->{lnx4win} = 1 },
@@ -605,9 +601,6 @@ sub main {
     $o->{lnx4win} = 1 if $VERSION =~ /lnx4win/i;
     $o->{meta_class} = 'desktop' if $VERSION =~ /desktop/i;
     $o->{meta_class} = 'firewall' if $VERSION =~ /firewall/i;
-    if ($o->{meta_class} eq 'desktop') {
-	$o->{installClass} = 'normal';
-    }
     if ($::oem) {
 	$o->{partitioning}{use_existing_root} = 1;
 	$o->{partitioning}{auto_allocate} = 1;
