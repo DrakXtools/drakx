@@ -295,7 +295,7 @@ sub getIDE() {
 	push @idi, { media_type => $type, device => basename($d), 
 		     devfs_prefix => $devfs_prefix,
 		     info => $info, channel => $channel, id => $id, bus => 'ide', 
-		     Vendor => $vendor, Model => $model };
+		     if_($vendor, Vendor => $vendor), if_($model, Model => $model) };
     }
     get_devfs_devices(@idi);
     get_sys_cdrom_info(@idi);
