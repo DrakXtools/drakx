@@ -760,7 +760,8 @@ sub new {
 	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0);
     }
 
-    if ($::isEmbedded && !$pop_it && !eval { $::Plug && $::Plug->child }) {
+    # gtk+-2 is bugged regarding socket/plug support
+    if (0 &&$::isEmbedded && !$pop_it && !eval { $::Plug && $::Plug->child }) {
 	die "embedded mode: todo";
 	$o->{isEmbedded} = 1;
 	$o->{window} = new Gtk2::HBox(0,0);
