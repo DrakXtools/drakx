@@ -91,7 +91,7 @@ my %languages = (
 'ka_GE.UTF-8'=> [ 'Georgian',  		'utf_ka',     'ka', 'ka' ],
 #-'kl'  => [ 'Greenlandic (inuit)',	'iso-8859-1', 'kl', 'kl' ],
   'ko'  => [ 'Korean|EUC-KR',           'ksc5601',    'ko', 'ko' ],
-'ko_KR.UTF-8'=> [ 'Korean|UTF-8',       'utf-ko',     'ko', 'ko' ],
+'ko_KR.UTF-8'=> [ 'Korean|UTF-8',       'utf_ko',     'ko', 'ko' ],
 #-'kw'	=> [ 'Cornish gaelic',		'iso-8859-14','kw', 'kw:en_GB:en' ],
 #-'lo'  => [ 'Laotian',			'mulelao-1',  'lo', 'lo' ],
   'lt'  => [ 'Lithuanian',		'iso-8859-13','lt', 'lt' ],
@@ -331,7 +331,7 @@ my %charsets = (
 	"utf8", "775", std_("iso8859-13") ],
   "iso-8859-14" => [ "tlat8",		"iso14",	"trivial.trans",
 	"iso8859-14", "850", std_("iso8859-14") ],
-  "utf-14" => [ "tlat8",		"iso14",	"trivial.trans",
+  "utf_14" => [ "tlat8",		"iso14",	"trivial.trans",
 	"utf8", undef, std_("iso8859-14") ],
   "iso-8859-15" => [ "lat0-sun16",	undef,		"iso15",
 	"iso8859-15", "850", sub { std("iso8859-15", @_) } ],
@@ -405,6 +405,32 @@ my %bigfonts = (
     unicode  => 'cu12.pcf.gz',
 );
 
+#- for special cases not handled magically
+my %charset2kde_charset = (
+    gb2312 => 'gb2312.1980-0',
+    jisx0208 => 'jisx0208.1983-0',
+    ksc5601 => 'ksc5601.1987-0',
+    Big5 => 'big5-0',
+    cp1251 => 'microsoft-cp1251',
+    utf8 => 'iso10646-1',
+    tis620 => 'tis620-0',
+);
+
+#- for special cases not handled magically
+my %lang2country = (
+  cs => 'cz',
+  da => 'dk',
+  el => 'gr',
+  et => 'ee',
+  mi => 'nz',
+  sl => 'si',
+);
+
+#- for special cases not handled magically
+my %lang2kde_lang = (
+  en => 'C',
+);
+
 #-######################################################################################
 #- Functions
 #-######################################################################################
@@ -415,6 +441,67 @@ sub lang2charset  { exists $languages{$_[0]} && $languages{$_[0]}[1] }
 sub lang2LANG     { exists $languages{$_[0]} && $languages{$_[0]}[2] }
 sub lang2LANGUAGE { exists $languages{$_[0]} && $languages{$_[0]}[3] }
 sub getxim { $xim{$_[0]} }
+
+sub lang2country {
+    my ($lang, $prefix) = @_;
+    my $country;
+    my $dir = "$prefix/usr/share/locale/l10n";
+
+    my @countries = grep { -d "$dir/$_" } all($dir);
+    my %countries; @countries{@countries} = ();
+
+    my $valid_country = sub {
+	my ($country) = @_;
+	#- fast & dirty solution to ensure bad entries do not happen
+	exists $countries{$country} && $country;
+    };
+
+    $country ||= $valid_country->($lang2country{$lang});
+    $country ||= $valid_country->(lc($1)) if $lang =~ /([A-Z]+)/;
+    $country ||= $valid_country->(lc($1)) if lang2LANGUAGE($lang) =~ /([A-Z]+)/;
+    $country ||= $valid_country->(substr($lang, 0, 2));
+    $country ||= first(grep { $valid_country->(substr($_, 0, 2)) } split(':', lang2LANGUAGE($lang)));
+    $country || 'C';
+}
+
+sub lang2kde_lang {
+    my ($lang, $default) = @_;
+
+    my @valid_kde_langs = qw(C ca cs da de el en es et fi fr he hu is it ja ko nl no no_NY pl pt pt_BR ro ru sk sr sv tr uk zh_CN.GB2312 zh_TW.Big5);
+    my %valid_kde_langs; @valid_kde_langs{@valid_kde_langs} = ();
+
+    my $valid_lang = sub {
+	my ($lang) = @_;
+	#- fast & dirty solution to ensure bad entries do not happen
+	$lang eq 'en' ? 'C' :
+	  exists $valid_kde_langs{$lang} ? $lang :
+	  exists $valid_kde_langs{substr($lang, 0, 2)} ? substr($lang, 0, 2) : '';
+    };
+
+    my $r;
+    $r ||= $valid_lang->(lang2LANG($lang));
+    $r ||= first(grep { $valid_lang->($_) } split(':', lang2LANGUAGE($lang)));
+    $r || $default || 'C';
+}
+sub charset2kde_charset {
+    my ($charset, $default) = @_;
+    my $iocharset = ($charsets{$charset} || [])->[3];
+
+    my @valid_kde_charsets = qw(big5-0 gb2312.1980-0 iso10646-1 iso8859-1 iso8859-4 iso8859-6 iso8859-8 iso8859-13 iso8859-14 iso8859-15 iso8859-2 iso8859-3 iso8859-5 iso8859-7 iso8859-9 koi8-r koi8-u ksc5601.1987-0 jisx0208.1983-0 microsoft-cp1251 tis620-0);
+    my %valid_kde_charsets; @valid_kde_charsets{@valid_kde_charsets} = ();
+
+    my $valid_charset = sub {
+	my ($charset) = @_;
+	#- fast & dirty solution to ensure bad entries do not happen
+	exists $valid_kde_charsets{$charset} && $charset;
+    };
+
+    my $r;
+    $r ||= $valid_charset->($charset2kde_charset{$charset});
+    $r ||= $valid_charset->($charset2kde_charset{$iocharset});
+    $r ||= $valid_charset->($iocharset);
+    $r || $default || 'iso10646-1';
+}
 
 sub set { 
     my ($lang) = @_;
@@ -521,8 +608,7 @@ sub write_langs {
 }
 
 sub write { 
-    my ($prefix, $lang, $file, $no_console_stuff) = @_;
-    $file ||= "/etc/sysconfig/i18n";
+    my ($prefix, $lang, $user_only) = @_;
 
     $lang or return;
 
@@ -534,7 +620,7 @@ sub write {
 	add2hash $h, { LANG => $lang, LANGUAGE => lang2LANGUAGE($lang) };
 
 	my $c = $charsets{lang2charset($lang) || ''};
-	if ($c && !$no_console_stuff) {
+	if ($c && !$user_only) {
 	    my $p = "$prefix/usr/lib/kbd";
 	    if ($c->[0]) {
 		eval {
@@ -561,7 +647,14 @@ sub write {
 	}
 	add2hash $h, $xim{$lang};
     }
-    setVarsInSh("$prefix$file", $h);
+    setVarsInSh($prefix . ($user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n'), $h);
+
+    update_gnomekderc($prefix . ($user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config/kdeglobals',
+		      Locale => { 
+				 Charset => charset2kde_charset(lang2charset($lang)),
+				 Country => lang2country($lang),
+				 Language => lang2kde_lang($lang),
+				});
 }
 
 sub load_mo {
@@ -658,6 +751,37 @@ sub charset {
 	/$l:\s+.*\.(\S+)/ and return $1;
     }
     $l =~ /.*\.(\S+)/ and return $1;
+}
+
+
+sub check {
+    my $ok = 1;
+    my $warn = sub {
+	print STDERR "$_[0]\n";
+    };
+    my $err = sub {
+	&$warn;
+	$ok = 0;
+    };
+    
+    my @wanted_charsets = uniq map { lang2charset($_) } list();
+    $err->("unknown charset $_ ($_ does not exist in \%charsets") foreach difference2(\@wanted_charsets, [ keys %charsets ]);
+    $warn->("unused charset $_ (given in \%charsets, but not used in \%languages") foreach difference2([ keys %charsets ], \@wanted_charsets);
+
+    $warn->("unused entry $_ in \%xim") foreach difference2([ keys %xim ], [ list() ]);
+
+    # consolefonts are checked during build via console_font_files()
+
+    if (my @l = grep { lang2country($_) eq 'C' } list()) {
+	$warn->("no country for langs " . join(" ", @l));
+    }
+    if (my @l = grep { lang2kde_lang($_, 'err') eq 'err' } list()) {
+	$warn->("no KDE lang for langs " . join(" ", @l));
+    }
+    if (my @l = grep { charset2kde_charset($_, 'err') eq 'err' } keys %charsets) {
+	$warn->("no KDE charset for charsets " . join(" ", @l));
+    }
+    exit($ok ? 0 : 1);
 }
 
 #-######################################################################################
