@@ -187,7 +187,7 @@ sub setAutoStart {
 sub handle_attack {
     my ($seq, $timestamp, $indev, $prefix, $sensor, $protocol, $addr, $port, $icmp_type) = @_;
 
-    my $ip_addr = activefw::get_ip($addr);
+    my $ip_addr = activefw::get_ip_address($addr);
     my $hostname = activefw::resolve_address($ip_addr);
     my $service = activefw::get_service($port);
 
