@@ -605,6 +605,7 @@ sub main {
 	$o->{installClass} = 'normal';
     }
     if ($oem) {
+	$o->{partitioning}{use_existing_root} = 1;
 	$o->{partitioning}{auto_allocate} = 1;
 	$o->{compssListLevel} = 50;
 	$o->{doNotFormatRootByDefault} = 1;
