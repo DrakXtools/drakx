@@ -1,3 +1,63 @@
+2001/04/12  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: fixed wrong kernel version extraction (typically for
+	upgrade).
+
+	* install_steps_interactive.pm: removed Cancel of Summary.
+	fixed ask printer configuration.
+
+	* detect_devices.pm: fix Hewlett-Packard to HP in case.
+
+	* standalone/printerdrake: never ask to configure a printer in standalone.
+
+	* printerdrake.pm: automatically add a queue if nothing exists.
+	fixed ask to configure a printer.
+
+	* interactive.pm: removed strict die on empty list.
+
+	* live_install2: added some gtk and gdk_imlib missing variables.
+
+	* live_install: removed gtk variable for data, moved to second script.
+
+	* modules.pm, commands.pm, lang.pm, pkgs.pm, keyboard.pm: fixed log of
+	packdrake.
+
+2001/04/12  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/dhcp.c: remove unneeded #define
+
+	* standalone/drakgw: add some rule so later on tinyfirewall will not
+	prevent everything from working
+
+	* share/po/fr.po: minor fix
+	write some ppc translations
+
+2001/04/12  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/it.po: Updated Italian file
+
+2001/04/12  Pixel  <pixel@mandrakesoft.com>
+
+	* printer.pm: use run_program and remove "require run_program"s
+
+	* my_gtk.pm (main): only accept X (gdk) events key_press, key_release and
+	exposure (so
+	that not to receive motion_notify which would generate focus_out in
+	non-interesting cases)
+
+	* interactive.pm (ask_from_entries_refH_powered_normalize): fix the test
+	for empty lists
+	(ask_from_entries_refH_powered_normalize):
+	  - when not_edit and empty list, die.
+	  - when not_edit and single element list, don't display that entry.
+
+	* lang.pm (pack_langs): set RPM_INSTALL_LANG for package "menu"
+
+	* modules.pm (configure_pcmcia): better handling for not running cardmgr
+	many times
+	(configure_pcmcia): always run cardmgr so that it is run even if stage1
+	did create a /var/run/stab. This is just a try :-/
+
 2001/04/12  dam's  <damien@mandrakesoft.com>
 
 	* netconnect.pm: if neuneu but explicited clicked, don't skip
