@@ -4,6 +4,8 @@
 #include <sys/cdefs.h>
 #include <sys/types.h>
 
+#define __LIBC_DIETLIBC__
+
 void *calloc(size_t nmemb, size_t size) __THROW;
 void *malloc(size_t size) __THROW;
 void free(void *ptr) __THROW;
