@@ -307,14 +307,22 @@ sub write($$$$) {
 	     [ "/mnt/cdrom$i", "/mnt/cdrom$i", "supermount", "fs=iso9660,dev=/dev/cdrom$i", 0, 0 ] :
 	     [ "/dev/cdrom$i", "/mnt/cdrom$i", "auto", "user,noauto,nosuid,exec,nodev,ro", 0, 0 ];
        } detect_devices::cdroms()),
-       (map_index { #- for zip drives, the right partition is the 4th.
+       (map_index { #- for zip drives, the right partition is the 4th by default.
 	   my $i = $::i ? $::i + 1 : '';
 	   mkdir "$prefix/mnt/zip$i", 0755 or log::l("failed to mkdir $prefix/mnt/zip$i: $!");
 	   symlinkf "$_->{device}4", "$prefix/dev/zip$i" or log::l("failed to symlink $prefix/dev/zip$i: $!");
 	   $useSupermount ?
 	     [ "/mnt/zip$i", "/mnt/zip$i", "supermount", "fs=vfat,dev=/dev/zip$i", 0, 0 ] :
 	     [ "/dev/zip$i", "/mnt/zip$i", "auto", "user,noauto,nosuid,exec,nodev", 0, 0 ];
-       } detect_devices::zips()));
+       } detect_devices::zips()),
+       (map_index { #- for LS-120 drives, there are no partitions by default.
+	   my $i = $::i ? $::i + 1 : '';
+	   mkdir "$prefix/mnt/floppy-ls$i", 0755 or log::l("failed to mkdir $prefix/mnt/floppy-ls$i: $!");
+	   symlinkf $_->{device}, "$prefix/dev/floppy-ls$i" or log::l("failed to symlink $prefix/dev/floppy-ls$i: $!");
+	   $useSupermount ?
+	     [ "/mnt/floppy-ls$i", "/mnt/floppy-ls$i", "supermount", "fs=vfat,dev=/dev/floppy-ls$i", 0, 0 ] :
+	     [ "/dev/floppy-ls$i", "/mnt/floppy-ls$i", "auto", "user,noauto,nosuid,exec,nodev", 0, 0 ];
+       } detect_devices::ls120s()));
     write_fstab($fstab, $prefix, @to_add);
 }
 

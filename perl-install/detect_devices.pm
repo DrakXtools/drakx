@@ -36,6 +36,7 @@ sub get {
 sub hds() { grep { $_->{type} eq 'hd' && ($::isStandalone || !isRemovableDrive($_)) } get(); }
 sub zips() { grep { $_->{type} eq 'hd' && isZipDrive($_) } get(); }
 #-sub jazzs() { grep { $_->{type} eq 'hd' && isJazDrive($_) } get(); }
+sub ls120s() { grep { $_->{type} =~ /.d/ && isLS120Drive($_) } get(); }
 sub cdroms() { 
     my @l = grep { $_->{type} eq 'cdrom' } get(); 
     if (my @l2 = getIDEBurners()) {
@@ -57,7 +58,8 @@ sub floppies() {
 
 sub isZipDrive() { $_[0]->{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
 #-sub isJazzDrive() { $_[0]->{info} =~ /JAZZ?\s+/ } #- untested.
-sub isRemovableDrive() { &isZipDrive } #-or &isJazzDrive }
+sub isLS120Drive() { $_[0]->{info} =~ /LS-?120/ } #- accept ZIP 100, untested for bigger ZIP drive.
+sub isRemovableDrive() { &isZipDrive || &isLS120Drive } #-or &isJazzDrive }
 
 sub hasSCSI() {
     local *F;
@@ -86,7 +88,7 @@ sub getSCSI() {
 	$_ = <F>; my ($vendor, $model) = /^\s*Vendor:\s*(.*?)\s+Model:\s*(.*?)\s+Rev:/ or return &$err();
 	$_ = <F>; my ($type) = /^\s*Type:\s*(.*)/ or &$err();
 	my $device;
-	if ($type =~ /Direct-Access/) {
+	if ($type =~ /Direct-Access/) { #- what about LS-120 floppy drive, assuming there are Direct-Access...
 	    $type = 'hd';
 	    $device = "sd" . chr($driveNum++ + ord('a'));
 	} elsif ($type =~ /Sequential-Access/) {

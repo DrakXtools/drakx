@@ -679,6 +679,10 @@ sub kdeicons_postinstall($) {
 	    my %toreplace = ( device => $1, id => $2 );
 	    template2userfile($prefix, "/usr/share/zip.fsdev.kdelnk.in", "Desktop/Zip". ($2 && " $2") .".kdelnk",
 			      1, %toreplace);
+	} elsif (m|^/dev/(\S+)\s+/mnt/floppy-ls(\d*)\s+|) {
+	    my %toreplace = ( device => $1, id => $2 );
+	    template2userfile($prefix, "/usr/share/floppy.fsdev.kdelnk.in", "Desktop/LS-120". ($2 && " $2") .".kdelnk",
+			      1, %toreplace);
 	} elsif (m|^/dev/(\S+)\s+/mnt/floppy(\d*)\s+|) {
 	    my %toreplace = ( device => $1, id => $2 );
 	    template2userfile($prefix, "/usr/share/floppy.fsdev.kdelnk.in", "Desktop/Floppy". ($2 && " $2") .".kdelnk",
@@ -690,6 +694,10 @@ sub kdeicons_postinstall($) {
 	} elsif (m|^/mnt/zip(\d*)\s+/mnt/zip\d*\s+supermount|) {
 	    my %toreplace = ( id => $1 );
 	    template2userfile($prefix, "/usr/share/zip.kdelnk.in", "Desktop/Zip". ($1 && " $1") .".kdelnk",
+			      1, %toreplace);
+	} elsif (m|^/mnt/floppy-ls(\d*)\s+/mnt/floppy-ls\d*\s+supermount|) {
+	    my %toreplace = ( id => $1 );
+	    template2userfile($prefix, "/usr/share/floppy.kdelnk.in", "Desktop/LS-120". ($1 && " $1") .".kdelnk",
 			      1, %toreplace);
 	} elsif (m|^/mnt/floppy(\d*)\s+/mnt/floppy\d*\s+supermount|) {
 	    my %toreplace = ( id => $1 );

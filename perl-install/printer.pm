@@ -337,9 +337,10 @@ sub read_printer_db(;$) {
 	    @available_devices{split /\s+/, $_} = () if /^\s+/;
 	}
     }
+    close AVAIL;
+    $available_devices{ppa} = undef if -x "$prefix/usr/bin/pbm2ppa" && -x "$prefix/usr/bin/pnm2ppa";
     delete $available_devices{''};
     @available_devices{qw/POSTSCRIPT TEXT/} = (); #- these are always available.
-    close AVAIL;
 
     local $_; #- use of while (<...
     local *DBPATH; #- don't have to do close ... and don't modify globals at least
@@ -589,8 +590,8 @@ sub configure_queue($) {
 
     #- make general.cfg
     ($filein, $file) = &$get_name_file("general.cfg");
-    $fieldname{ascps_trans} = $entry->{ASCII_TO_PS} ? "YES" : "NO";
-    $fieldname{desiredto}   = ($dbentry->{GSDRIVER} ne "TEXT") ? "ps" : "asc";
+    $fieldname{ascps_trans} = $entry->{ASCII_TO_PS} || $dbentry->{GSDRIVER} eq 'ppa' ? "YES" : "NO";
+    $fieldname{desiredto}   = $dbentry->{GSDRIVER} ne "TEXT" ? "ps" : "asc";
     $fieldname{papersize}   = $entry->{PAPERSIZE} ? $entry->{PAPERSIZE} : "letter";
     $fieldname{printertype} = $entry->{TYPE};
     create_config_file($filein, $file, %fieldname);
