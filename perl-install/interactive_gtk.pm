@@ -415,7 +415,7 @@ sub ask_from_entries_refW {
 	    } else {
 		($w, $set) = $use_boxradio ? create_boxradio(@para) : create_clist(@para);
 	    }
-	    if (@{$e->{list}} > 4) {
+	    if (@{$e->{list}} > (@$l == 1 ? 10 : 4)) {
 		$has_scroll = 1;
 		$expand = 1;
 		$real_w = createScrolledWindow($w);
