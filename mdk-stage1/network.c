@@ -259,11 +259,6 @@ static int save_netinfo(struct interface_info * intf) {
 	char file_intf[500];
 	FILE * f;
 	
-	if (dns_server.s_addr == 0) {
-		log_message("resolvconf needs a dns server");
-		return -1;
-	}
-
 	f = fopen(file_network, "w");
 	if (!f) {
 		log_perror(file_network);
