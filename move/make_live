@@ -9,8 +9,9 @@ my @langs = map { /^../; $& } split /\s/, (cat_('move.pm') =~ /ALLOWED_LANGS = q
 @ARGV <= 1 or die "usage: make_live [live_location=/tmp/live_tree]\n";
 
 sub installPackages {
-    rename "/etc/rpm/macros", "/etc/rpm/macros.";
-    output_p("/etc/rpm/macros", "%_install_langs " . join(":", @langs) . "\n");
+    output_p("$::prefix/etc/rpm/macros", "%_install_langs " . join(":", @langs) . "\n");
+    rename '/etc/rpm/macros', '/etc/rpm/macros.';
+    system('cp', "$::prefix/etc/rpm/macros", '/etc/rpm/macros');
 
     mkdir_p("$::prefix/var/lib/rpm");
     mkdir_p("$::prefix/root/drakx");
@@ -71,10 +72,10 @@ print "Making live in $::prefix directory.\n";
     installPackages();
     run_program::rooted($::prefix, 'ldconfig');
     touch("$::prefix/etc/menu/enable_simplified");
+    $ENV{LC_ALL} = 'en_US'; #- update-menus doesn't work when there is no locale (aka locale "C")
     run_program::rooted($::prefix, 'update-menus', '-n');
     run_program::rooted($::prefix, 'fc-cache');  #- generate cache in all directories mentioned in config file
     run_program::rooted($::prefix, 'kbuildsycoca', '--global');
-    eval { rm_rf("$::prefix/dev") }; # we don't need it, we use devfs
     eval { rm_rf("$::prefix/lib/i686") }; # de-complexify, use the default on any arch
 
     unlink "$::prefix/usr/share/autostart/$_.desktop" foreach 'klipper', 'korgac', 'kalarmd.autostart';
