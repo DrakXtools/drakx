@@ -330,12 +330,17 @@ _("DiskDrake failed to read correctly the partition table.
 Continue at your own risk!")) if !$ok2 && $ok && !$o->{partitioning}{readonly};
 
     my @win = grep { isFat($_) && isFat({ type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
-    my @nt  = grep { isNT($_)  && isNT( { type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
+#    my @nt  = grep { isNT($_)  && isNT( { type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
     log::l("win parts: ", join ",", map { $_->{device} } @win) if @win;
-    log::l("nt parts: ",  join ",", map { $_->{device} } @nt) if @nt;
-    $_->{mntpoint} = @win == 1 ? "/mnt/windows" : "/mnt/win_$_->{device_windobe}" foreach @win;
-    $_->{mntpoint} = @nt  == 1 ? "/mnt/nt"      : "/mnt/nt_$_->{device_windobe}"  foreach @nt;
-
+#    log::l("nt parts: ",  join ",", map { $_->{device} } @nt) if @nt;
+    if (@win == 1) {
+	$win[0]{mntpoint} = "/mnt/windows";
+    } else {
+	my %w; foreach (@win) {
+	    my $v = $w{$_->{device_windobe}}++;
+	    $_->{mntpoint} = "/mnt/win_$_->{device_windobe}" . ($v ? $v+1 : '');
+	}
+    }
     $ok2;
 }
 

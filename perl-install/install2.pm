@@ -43,17 +43,17 @@ my (%installSteps, @orderedInstallSteps);
   selectLanguage     => [ __("Choose your language"), 1, 1, '' ],
   selectInstallClass => [ __("Select installation class"), 1, 1, '' ],
   setupSCSI          => [ __("Hard drive detection"), 1, 0, '' ],
-  selectMouse        => [ __("Configure mouse"), 1, 1, 'beginner', "selectInstallClass" ],
+  selectMouse        => [ __("Configure mouse"), 1, 1, '$::beginner', "selectInstallClass" ],
   selectKeyboard     => [ __("Choose your keyboard"), 1, 1, '', "selectInstallClass" ],
-  miscellaneous      => [ __("Miscellaneous"), 1, 1, 'beginner' ],
+  miscellaneous      => [ __("Miscellaneous"), 1, 1, '$::beginner' ],
   partitionDisks     => [ __("Setup filesystems"), 1, 0, '', "selectInstallClass" ],
   formatPartitions   => [ __("Format partitions"), 1, -1, '', "partitionDisks" ],
-  choosePackages     => [ __("Choose packages to install"), 1, 1, 'beginner', "selectInstallClass" ],
+  choosePackages     => [ __("Choose packages to install"), 1, 1, '$::beginner', "formatPartitions" ],
   doInstallStep      => [ __("Install system"), 1, -1, '', ["formatPartitions", "selectInstallClass"] ],
-  configureNetwork   => [ __("Configure networking"), 1, 1, 'beginner', "formatPartitions" ],
-  installCrypto      => [ __("Cryptographic"), 1, 1, '!expert', "configureNetwork" ],
+  configureNetwork   => [ __("Configure networking"), 1, 1, '$::beginner && !$::corporate', "formatPartitions" ],
+  installCrypto      => [ __("Cryptographic"), 1, 1, '!$::expert', "configureNetwork" ],
   configureTimezone  => [ __("Configure timezone"), 1, 1, '', "doInstallStep" ],
-  configureServices  => [ __("Configure services"), 1, 1, '!expert', "doInstallStep" ],
+  configureServices  => [ __("Configure services"), 1, 1, '!$::expert', "doInstallStep" ],
   configurePrinter   => [ __("Configure printer"), 1, 0, '', "doInstallStep" ],
   setRootPassword    => [ __("Set root password"), 1, 1, '', "formatPartitions" ],
   addUser            => [ __("Add a user"), 1, 1, '' ],
@@ -62,8 +62,8 @@ arch() !~ /alpha/ ? (
 ) : (),
   setupBootloader    => [ __("Install bootloader"), 1, 1, '', "doInstallStep" ],
   configureX         => [ __("Configure X"), 1, 1, '', ["formatPartitions", "setupBootloader"] ],
-  generateAutoInstFloppy => [ __("Auto install floppy"), 1, 1, '!corporate !expert', "doInstallStep" ],
-  exitInstall        => [ __("Exit install"), 0, 0, 'beginner' ],
+  generateAutoInstFloppy => [ __("Auto install floppy"), 1, 1, '!$::corporate || !$::expert', "doInstallStep" ],
+  exitInstall        => [ __("Exit install"), 0, 0, '$::beginner' ],
 );
     for (my $i = 0; $i < @installSteps; $i += 2) {
 	my %h; @h{@installStepsFields} = @{ $installSteps[$i + 1] };
@@ -288,7 +288,7 @@ sub partitionDisks {
     eval { fs::umount_all($o->{fstab}, $o->{prefix}) } if $o->{fstab} && !$::testing;
 
     my $ok = fsedit::get_root($o->{fstab} || []) ? 1 : install_any::getHds($o);
-    my $auto = $ok && !$o->{partitioning}{readonly} &&
+    my $auto = $ok && !$o->{partitioning}{readonly} && !$o->{lnx4win} &&
 	($o->{partitioning}{auto_allocate} || $::beginner && fsedit::get_fstab(@{$o->{hds}}) < 3);
 
     eval { fsedit::auto_allocate($o->{hds}, $o->{partitions}) } if $auto;

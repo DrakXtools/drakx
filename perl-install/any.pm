@@ -90,7 +90,7 @@ _("Restrict command line options") => { val => \$b->{restricted}, type => "bool"
 	@l = @l[0..3] unless $::expert;
 
 	$b->{vga} ||= 'Normal';
-	$in->ask_from_entries_refH('', _("LILO main options"), \@l,
+	$in->ask_from_entries_refH('', _("Bootloader main options"), \@l,
 				 complete => sub {
 #-				     $security > 4 && length($b->{password}) < 6 and $in->ask_warn('', _("At this level of security, a password (and a good one) in lilo is requested")), return 1;
 				     $b->{restricted} && !$b->{password} and $in->ask_warn('', _("Option ``Restrict command line options'' is of no use without a password")), return 1;
@@ -104,7 +104,7 @@ _("Restrict command line options") => { val => \$b->{restricted}, type => "bool"
     until ($::beginner && $more <= 1) {
 	$in->set_help('setupBootloaderAddEntry') unless $::isStandalone;
 	my $c = $in->ask_from_list_([''], 
-_("Here are the following entries in LILO.
+_("Here are the different entries.
 You can add some more or change the existing ones."),
 		[ (sort @{[map { "$_->{label} ($_->{kernel_or_dev})" . ($b->{default} eq $_->{label} && "  *") } @{$b->{entries}}]}), __("Add"), __("Done") ],
 	);

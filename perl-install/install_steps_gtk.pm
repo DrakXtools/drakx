@@ -165,6 +165,8 @@ sub selectInstallClass1 {
     $w->main;
 
     mapn { $verif->($_[1]) if $_[0]->active } \@radios, $l;
+    create_steps_window($o);
+
     $w->{retval};
 }
 
@@ -752,10 +754,7 @@ sub create_steps_window {
 			$reachableSteps{$_} = $b if $step->{reachable};
 			$b;
 		    } grep {
-			local $_ = $o->{steps}{$_}{hidden};
-			/^$/ or $o->{installClass} and !/!expert/ || $::expert
-			                           and !/beginner/ || !$::beginner 
-			                           and !/!corporate/ || $::corporate;
+			!eval $o->{steps}{$_}{hidden};
 		    } @{$o->{orderedSteps}}),
 		    0, gtkpack(new Gtk::HBox(0,0), map {
 			my $t = $_;

@@ -1,4 +1,18 @@
+2000-04-28  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (getHds): changed the mount point setting for
+	windows partitions as device_windobe is not unique
+
 2000-04-27  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm (create_steps_window): changed to adapt to
+	new hidden format
+
+	* install2.pm (@installSteps): changed the way hidden is handled.
+	Now it is a true perl expression (great power now)
+
+	* install_steps_gtk.pm (selectInstallClass1): update steps window
+	before asking normal/devel/server. Nicer!
 
 	* install_steps_interactive.pm (configureNetwork): when "Cancel"
 	pressed at network interface configuration do not skip all

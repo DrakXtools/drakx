@@ -131,12 +131,13 @@ sub doPartitionDisks {
 	my $size = loopback::getFree($handle->{dir}, $real_part); 
 
 	my $max_linux = 1000 << 11; $max_linux *= 10 if $::expert;
-	my $min_linux =  300 << 11; $max_linux /=  3 if $::expert;
-	my $min_freewin = 100 << 11; $min_freewin = 0 if $::expert;
+	my $min_linux =  300 << 11; $min_linux /=  3 if $::expert;
+	my $min_freewin = 100 << 11; $min_freewin /= 10 if $::expert;
 
-	my $swap = { type => 0x82, loopback_file => '/lnx4win/swapfile',     mntpoint => 'swap', size => 64 << 11, device => $real_part, notFormatted => 1 };	
+	my $swap = { type => 0x82, loopback_file => '/lnx4win/swapfile',     mntpoint => 'swap', size => 64 << 11, device => $real_part, notFormatted => 1 };
 	my $root = { type => 0x83, loopback_file => '/lnx4win/linuxsys.img', mntpoint => '/',    size => 0, device => $real_part, notFormatted => 1 };
 	$root->{size} = min($size - $swap->{size} - $min_freewin, $max_linux);
+	log::l("lnx4win $root->{size} <= $min_linux (minlinux), $size (minavail) - $swap->{size} (swapsize) - $min_freewin (minfreewin), $max_linux (maxlinux)");
 	$root->{size} > $min_linux or die "not enough room on that partition for lnx4win";
 
 	$o->doPartitionDisksLnx4winSize(\$root->{size}, \$swap->{size}, $size - 2 * $swap->{size}, 2 * $swap->{size});
@@ -439,9 +440,9 @@ sub configureNetwork($) {
     network::sethostname($o->{netc}) unless $::testing;
     network::addDefaultRoute($o->{netc}) unless $::testing;
 
-    $o->pkg_install("dhcpxd") if grep { $_->{BOOTPROTO} =~ /^(dhcp|bootp)$/ } @{$o->{intf}};
+    $o->pkg_install("dhcpxd") if grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } @{$o->{intf}};
     # Handle also pump (this is still in initscripts no?)
-    $o->pkg_install("pump") if grep { $_->{BOOTPROTO} =~ /^(pump)$/ } @{$o->{intf}};
+    $o->pkg_install("pump") if grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } @{$o->{intf}};
     #-res_init();		#- reinit the resolver so DNS changes take affect
 
     miscellaneousNetwork($o);
@@ -782,6 +783,7 @@ sub setupBootloaderBefore {
 	    $e->{append} .= " prof=Home";
 	}
         lilo::suggest_floppy($o->{bootloader}) if $o->{security} <= 3;
+	$o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
     }
 }
 
