@@ -76,9 +76,11 @@ for i in `/etc/closurepkgs /hd/Mandrake/base/depslist.ordered /hd/Mandrake/base/
     [ -e /cdrom/Mandrake/RPMS/$i.*.rpm ] && rpm --root /mnt -ivh /cdrom/Mandrake/RPMS/$i.*.rpm --nodeps --force
 done
 umount /mnt/proc
+umount /cdrom
+eject
 
 echo
 echo "Done. OEM hard drive ready!"
-echo "Press enter to reboot"
+echo "Press enter to halt"
 read
-reboot
+halt
