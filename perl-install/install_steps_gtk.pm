@@ -474,7 +474,8 @@ sub installPackages {
     $w->sync;
     my $text = new Gtk::Label;
     my ($advertising, $change_time, $i);
-    my $show_advertising = to_bool(@install_any::advertising_images);
+    my $show_advertising if 0;
+    $show_advertising = to_bool(@install_any::advertising_images) if !defined $show_advertising;
     my ($msg, $msg_time_remaining, $msg_time_total) = map { new Gtk::Label($_) } '', (_("Estimating")) x 2;
     my ($progress, $progress_total) = map { new Gtk::ProgressBar } (1..2);
     $w->{rwindow}->set_policy(1, 1, 1);
