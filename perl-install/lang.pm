@@ -334,6 +334,22 @@ sub load_po($) {
 }
 
 
+sub load_console_font {
+    my ($lang) = @_;
+    my ($charset) = $languages{$lang}[1] ;
+    my $f = "-f lat0-sun16";
+
+    if (my $c = $charsets{$charset}) {
+	   if ($c->[0]) { $f = "-f " . $c->[0] ; } 
+	   if ($c->[1]) { $f = $f . " -u " . $c->[1] ; }
+	   if ($c->[2]) { $f = $f . " -m " . $c->[2] ; }
+    }
+
+    log::l("loading console font: consolechars $f");
+    system("consolechars $f"); 
+
+}
+
 #-sub load_font {
 #-    my ($charset) = @_;
 #-    my $fontFile = "lat0-sun16";

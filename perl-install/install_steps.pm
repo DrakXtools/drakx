@@ -90,6 +90,8 @@ sub selectLanguage {
     lang::set($o->{lang});
     $o->{langs} ||= [ $o->{lang} ];
 
+    lang::load_console_font($o->{lang});
+
     if ($o->{keyboard_unsafe} || !$o->{keyboard}) {
 	$o->{keyboard_unsafe} = 1;
 	$o->{keyboard} = keyboard::lang2keyboard($o->{lang});
