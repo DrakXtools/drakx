@@ -873,7 +873,7 @@ sub miscellaneous {
     local $_ = $o->{bootloader}{perImageAppend};
 
     # do not use devfs with root software raid
-    $_ .= ' devfs=' . (isRAID(fsedit::get_root($o->{fstab})) ? 'mount' : 'nomount') if !/devfs=/;
+    $_ .= ' devfs=' . (isRAID(fsedit::get_root($o->{fstab})) ? 'nomount' : 'mount') if !/devfs=/;
 
     if ($o->{lnx4win} and !/mem=/) {
 	$_ .= ' mem=' . availableRamMB() . 'M';
