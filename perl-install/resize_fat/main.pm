@@ -130,7 +130,7 @@ sub resize {
     $size >= $min or die "Minimum filesystem size is $min sectors";
     $size <= $max or die "Maximum filesystem size is $max sectors";
 
-    log::l("resize_fat: Partition size will be ", $size >> 11, "Mb (well exactly ${size} sectors)");
+    log::l("resize_fat: Partition size will be ". ($size * $SECTORSIZE >> 20) ."Mb (well exactly ${size} sectors)");
 
     my $new_data_size = $size * $SECTORSIZE - $fs->{cluster_offset};
     my $new_nb_clusters = divide($new_data_size, $fs->{cluster_size});

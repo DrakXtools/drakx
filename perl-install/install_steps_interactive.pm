@@ -161,7 +161,7 @@ sub selectMouse {
     $o->SUPER::selectMouse;
 }
 #------------------------------------------------------------------------------
-sub setupSCSI { 
+sub setupSCSI {
     my ($o) = @_;
     { my $w = $o->wait_message(_("IDE"), _("Configuring IDE"));
       modules::load_ide() }

@@ -149,11 +149,11 @@ sub ask_from_treelistW {
 
 sub ask_many_from_list_refW {
     my ($o, $title, $messages, $list, $val) = @_;
-    ask_many_from_list_with_help_refW($o, $title, $messages, undef, $list, $val)
+    ask_many_from_list_with_help_refW($o, $title, $messages, $list, undef, $val)
 }
 
 sub ask_many_from_list_with_help_refW {
-    my ($o, $title, $messages, $help, $list, $val) = @_;
+    my ($o, $title, $messages, $list, $help, $val) = @_;
     my $w = my_gtk->new('', %$o);
     my $tips = new Gtk::Tooltips;
     my $box = gtkpack(new Gtk::VBox(0,0),

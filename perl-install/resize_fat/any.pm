@@ -27,7 +27,7 @@ sub min_cluster_count($) {
 }
 sub max_cluster_count($) {
     my ($fs) = @_;
-    2 ** $fs->{fs_type_size} - 11;
+    (1 << $ {{ FAT16 => 16, FAT32 => 28 }}{$fs->{fs_type}}) - 11;
 }
 
 

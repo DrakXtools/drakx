@@ -75,7 +75,7 @@ sub read($) {
 
 	$fs->{nb_root_dir_entries} = 0;
 	$fs->{info_offset} = $fs->{info_offset_in_sectors} * $fs->{sector_size};
-	$resize_fat::bad_cluster_value = 0xffffff7;
+	$resize_fat::bad_cluster_value = 0x0ffffff7;
     }
 
     $fs->{fat_offset} = $fs->{nb_reserved} * $fs->{sector_size};

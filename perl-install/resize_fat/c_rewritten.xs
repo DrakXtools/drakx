@@ -9,15 +9,37 @@ unsigned int *fat_remap = NULL;
 int fat_remap_size;
 int type_size, nb_clusters, bad_cluster_value;
 
+void free_all() {
+#define FREE(p) if (p) free(p), p = NULL;
+  FREE(fat);
+  FREE(fat_flag_map);
+  FREE(fat_remap);
+#undef FREE
+}
+
 unsigned int next(unsigned int cluster) {
   short *p = fat + type_size * cluster;
-  if (cluster > nb_clusters + 2) croak("fat::next: cluster %d outside filesystem", cluster);
+  if (!fat) {
+    free_all();
+    croak("fat::next: trying to use null pointer");
+  }
+  if (cluster > nb_clusters + 2) {
+    free_all();
+    croak("fat::next: cluster %d outside filesystem", cluster);
+  }
   return type_size == 1 ? *p : *((unsigned int *) p);
 }
 
 void set_next(unsigned int cluster, unsigned int val) {
   short *p = fat + type_size * cluster;
-  if (cluster > nb_clusters + 2) croak("fat::set_next: cluster %d outside filesystem", cluster);
+  if (!fat) {
+    free_all();
+    croak("fat::set_next: trying to use null pointer");
+  }
+  if (cluster > nb_clusters + 2) {
+    free_all();
+    croak("fat::set_next: cluster %d outside filesystem", cluster);
+  }
   type_size == 1 ? *p : *((unsigned int *) p) = val;
 }
 
@@ -32,13 +54,17 @@ read_fat(fd, offset, size, magic)
   PPCODE:
 {
   fat = (short *) malloc(size);
+  if (!fat) {
+    free_all();
+    croak("read_fat: not enough memory");
+  }
   if (lseek(fd, offset, SEEK_SET) != offset ||
       read(fd, fat, size) != size) {
-    free(fat); fat = NULL;
+    free_all();
     croak("read_fat: reading FAT failed");
   }
   if (magic != *(unsigned char *) fat) {
-    free(fat); fat = NULL;
+    free_all();
     croak("read_fat: FAT has invalid signature");
   }
 }
@@ -49,17 +75,16 @@ write_fat(fd, size)
   int size
   PPCODE:
 {
-  if (write(fd, fat, size) != size) croak("write_fat: write failed");
+  if (write(fd, fat, size) != size) {
+    free_all();
+    croak("write_fat: write failed");
+  }
 }
 
 void
 free_all()
   PPCODE:
-#define FREE(p) if (p) free(p), p = NULL;
-  FREE(fat);
-  FREE(fat_flag_map);
-  FREE(fat_remap);
-#undef FREE
+  free_all();
 
 void
 scan_fat(nb_clusters_, type_size_)
@@ -74,7 +99,10 @@ scan_fat(nb_clusters_, type_size_)
   type_size = type_size_; nb_clusters = nb_clusters_;
   bad_cluster_value = type_size == 32 ? 0xffffff7 : 0xfff7;
 
-  if (type_size % 16) croak("scan_fat: unable to handle FAT%d", type_size);
+  if (type_size % 16) {
+    free_all();
+    croak("scan_fat: unable to handle FAT%d", type_size);
+  }
   type_size /= 16;
 
   for (p = fat + 2 * type_size; p < fat + type_size * (nb_clusters + 2); p += type_size) {
@@ -112,6 +140,10 @@ allocate_fat_flag(size)
   int size
   CODE:
   fat_flag_map = calloc(size, 1);
+  if (!fat_flag_map) {
+    free_all();
+    croak("allocate_fat_flag: not enough memory");
+  }
 
 int
 checkFat(cluster, type, name)
@@ -121,10 +153,20 @@ checkFat(cluster, type, name)
   CODE:
   int nb = 0;
 
+  if (!fat_flag_map) {
+    free_all();
+    croak("Bad FAT: trying to use null pointer");
+  }
   for (; cluster < bad_cluster_value; cluster = next(cluster)) {
-    if (cluster == 0) croak("Bad FAT: unterminated chain for %s\n", name);
+    if (cluster == 0) {
+      free_all();
+      croak("Bad FAT: unterminated chain for %s\n", name);
+    }
 
-    if (fat_flag_map[cluster]) croak("Bad FAT: cluster %d is cross-linked for %s\n", cluster, name);
+    if (fat_flag_map[cluster]) {
+      free_all();
+      croak("Bad FAT: cluster %d is cross-linked for %s\n", cluster, name);
+    }
     fat_flag_map[cluster] = type;
     nb++;
   }
@@ -136,6 +178,10 @@ unsigned int
 flag(cluster)
   unsigned int cluster
   CODE:
+  if (!fat_flag_map) {
+    free_all();
+    croak("Bad FAT: trying to use null pointer");
+  }
   RETVAL = fat_flag_map[cluster];
   OUTPUT:
   RETVAL
@@ -145,6 +191,10 @@ set_flag(cluster, flag)
   unsigned int cluster
   int flag
   CODE:
+  if (!fat_flag_map) {
+    free_all();
+    croak("Bad FAT: trying to use null pointer");
+  }
   fat_flag_map[cluster] = flag;
 
 void
@@ -153,16 +203,30 @@ allocate_fat_remap(size)
   CODE:
   fat_remap_size = size;
   fat_remap = (unsigned int *) calloc(size, sizeof(unsigned int *));
+  if (!fat_remap) {
+    free_all();
+    croak("allocate_fat_remap: not enough memory");
+  }
 
 unsigned int
 fat_remap(cluster)
   unsigned int cluster
   CODE:
+  if (!fat_remap) {
+    free_all();
+    croak("fat_remap: trying to use null pointer");
+  }
   if (cluster >= bad_cluster_value) {
     RETVAL = cluster; /* special cases */
   } else {
-    if (fat_remap == NULL) croak("fat_remap: NULL in fat_remap");
-    if (cluster >= fat_remap_size) croak("fat_remap: cluster %d >= %d in fat_remap", cluster, fat_remap_size);
+    if (fat_remap == NULL) {
+      free_all();
+      croak("fat_remap: NULL in fat_remap");
+    }
+    if (cluster >= fat_remap_size) {
+      free_all();
+      croak("fat_remap: cluster %d >= %d in fat_remap", cluster, fat_remap_size);
+    }
     RETVAL = fat_remap[cluster];
   }
   OUTPUT:
@@ -173,4 +237,8 @@ set_fat_remap(cluster, val)
   unsigned int cluster
   unsigned int val
   CODE:
+  if (!fat_remap) {
+    free_all();
+    croak("set_fat_remap: trying to use null pointer");
+  }
   fat_remap[cluster] = val;
