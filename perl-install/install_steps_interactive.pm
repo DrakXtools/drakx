@@ -935,7 +935,7 @@ Do you want to install the updates ?"))) || return;
     }
  
     #- stop interface using ppp only. FIXME REALLY TOCHECK isdn (costly network) ?
-    install_interactive::downNetwork($o, 'pppOnly');
+    # FIXME damien install_interactive::downNetwork($o, 'pppOnly');
 }
 
 
