@@ -68,7 +68,7 @@ print "Making live in $::prefix directory.\n";
     installPackages();
     run_program::rooted($::prefix, 'ldconfig');
     touch("$::prefix/etc/menu/enable_simplified");
-    run_program::rooted($::prefix, 'update-menus');
+    run_program::rooted($::prefix, 'update-menus', '-n');
     run_program::rooted($::prefix, 'fc-cache');  #- generate cache in all directories mentioned in config file
     run_program::rooted($::prefix, 'kbuildsycoca', '--global');
     eval { rm_rf("$::prefix/dev") }; # we don't need it, we use devfs
