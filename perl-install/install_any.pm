@@ -338,7 +338,6 @@ sub setDefaultPackages {
     push @{$o->{default_packages}}, "xfsprogs" if grep { isThisFs("xfs", $_) } @{$o->{fstab}};
     push @{$o->{default_packages}}, "jfsprogs" if grep { isThisFs("jfs", $_) } @{$o->{fstab}};
     push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("sound-slot-0") =~ /^snd-card-/;
-    push @{$o->{default_packages}}, "imwheel" if $o->{mouse}{nbuttons} > 3;
 
     #- if no cleaning needed, populate by default, clean is used for second or more call to this function.
     unless ($clean) {
