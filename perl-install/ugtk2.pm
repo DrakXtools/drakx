@@ -469,7 +469,7 @@ sub create_notebook {
     my $n = Gtk2::Notebook->new;
     while (@_) {
 	my ($title, $book) = splice(@_, 0, 2);
-	add2notebook($n, $title, $book);
+	gtkappend_page($n, $title, $book);
     }
     $n
 }
