@@ -317,7 +317,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 * Mon Jun 14 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-44mdk
 - diskdrake: fix hde devfs link (pixel)
 - drakconnect: start to make strings more helpfull
-- drakperm: enable drag 'n drop when looking only at customized settings
+- drakperm: enable drag 'n drop (only when looking at customized settings)
 - draksec: do not show empty pages in notebook if security level is not set
 - draksplash: make it work again...
 - harddrake2:
