@@ -560,7 +560,7 @@ sub g_default_packages {
 
     my $floppy = detect_devices::floppy();
 
-    $o->ask_warn('', _("Insert a FAT formatted floppy in drive %s", $floppy));
+    $o->ask_okcancel('', _("Insert a FAT formatted floppy in drive %s", $floppy), 1) or return;
 
     fs::mount(devices::make($floppy), "/floppy", "vfat", 0);
 
