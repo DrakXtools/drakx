@@ -439,7 +439,7 @@ sub load_po {
 	/^msgid/  && !$fuzzy and $state = 'msgid';
 	s/@/\\@/g;
 
-	if (/^(#|$)/ && $state != 'between') {
+	if (/^(#|$)/ && $state ne 'between') {
 	    $state = 'between';
 	    $to = c::iconv($to, $lang::charset, c::standard_charset());
 	    if (my @l = $to =~ /%(\d+)\$/g) {
@@ -455,8 +455,8 @@ sub load_po {
 	    }
 	    $from = $to = '';
 	}
-	$to .= (/"(.*)"/)[0] if $state == 'msgstr';
-	$from .= (/"(.*)"/)[0] if $state == 'msgid';
+	$to .= (/"(.*)"/)[0] if $state eq 'msgstr';
+	$from .= (/"(.*)"/)[0] if $state eq 'msgid';
 
 	$fuzzy = /^#, fuzzy/;
     }
