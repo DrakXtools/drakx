@@ -240,8 +240,14 @@ image=vmlinux
         label=linux
         root=/dev/ram3
         initrd=$type.rdz
-        append=\"ramdisk_size=120000\"
+        append=\" ramdisk_size=120000\"
         read-only
+
+image=vmlinux
+        label=rescue
+        root=/dev/ram3
+        initrd=$type.rdz
+        append=\" rescue ramdisk_size=120000\"
 ");
     _ "sync";
     _ "df $mnt";
