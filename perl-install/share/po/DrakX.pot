@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2000-01-27 20:06+0100\n"
+"POT-Creation-Date: 2000-01-31 19:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -359,7 +359,7 @@ msgstr ""
 msgid "Monitor that can do 1600x1200 at 76 Hz"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:16 ../../diskdrake.pm_.c:371
+#: ../../diskdrake.pm_.c:16 ../../diskdrake.pm_.c:374
 msgid "Create"
 msgstr ""
 
@@ -367,7 +367,7 @@ msgstr ""
 msgid "Unmount"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:18 ../../diskdrake.pm_.c:373
+#: ../../diskdrake.pm_.c:18 ../../diskdrake.pm_.c:376
 msgid "Delete"
 msgstr ""
 
@@ -375,16 +375,16 @@ msgstr ""
 msgid "Format"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:18 ../../diskdrake.pm_.c:528
+#: ../../diskdrake.pm_.c:18 ../../diskdrake.pm_.c:531
 msgid "Resize"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:18 ../../diskdrake.pm_.c:371
-#: ../../diskdrake.pm_.c:415
+#: ../../diskdrake.pm_.c:18 ../../diskdrake.pm_.c:374
+#: ../../diskdrake.pm_.c:418
 msgid "Type"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:19 ../../diskdrake.pm_.c:431
+#: ../../diskdrake.pm_.c:19 ../../diskdrake.pm_.c:434
 msgid "Mount point"
 msgstr ""
 
@@ -505,151 +505,157 @@ msgstr ""
 msgid "Please make a backup of your data first"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:132 ../../diskdrake.pm_.c:146
-#: ../../diskdrake.pm_.c:459 ../../diskdrake.pm_.c:488
+#: ../../diskdrake.pm_.c:132 ../../diskdrake.pm_.c:149
+#: ../../diskdrake.pm_.c:462 ../../diskdrake.pm_.c:491
 msgid "Read carefully!"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:146
+#: ../../diskdrake.pm_.c:135
+msgid ""
+"If you plan to use aboot, be carefull to leave a free space (1MB is enough)\n"
+"at the beginning of the disk"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:149
 #, c-format
 msgid "After %s partition %s,"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:146
+#: ../../diskdrake.pm_.c:149
 msgid "all data on this partition will be lost"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:165 ../../install_any.pm_.c:197
+#: ../../diskdrake.pm_.c:168 ../../install_any.pm_.c:197
 #: ../../install_steps.pm_.c:71 ../../install_steps_interactive.pm_.c:37
 #: ../../standalone/diskdrake_.c:60 ../../standalone/rpmdrake_.c:294
 #: ../../standalone/rpmdrake_.c:304
 msgid "Error"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:189 ../../diskdrake.pm_.c:611
+#: ../../diskdrake.pm_.c:192 ../../diskdrake.pm_.c:614
 msgid "Mount point: "
 msgstr ""
 
-#: ../../diskdrake.pm_.c:190 ../../diskdrake.pm_.c:228
+#: ../../diskdrake.pm_.c:193 ../../diskdrake.pm_.c:231
 msgid "Device: "
-msgstr ""
-
-#: ../../diskdrake.pm_.c:191
-#, c-format
-msgid "DOS drive letter: %s (just a guess)\n"
-msgstr ""
-
-#: ../../diskdrake.pm_.c:192 ../../diskdrake.pm_.c:231
-msgid "Type: "
-msgstr ""
-
-#: ../../diskdrake.pm_.c:193
-#, c-format
-msgid "Start: sector %s\n"
 msgstr ""
 
 #: ../../diskdrake.pm_.c:194
 #, c-format
-msgid "Size: %s MB"
+msgid "DOS drive letter: %s (just a guess)\n"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:195 ../../diskdrake.pm_.c:234
+msgid "Type: "
 msgstr ""
 
 #: ../../diskdrake.pm_.c:196
 #, c-format
+msgid "Start: sector %s\n"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:197
+#, c-format
+msgid "Size: %s MB"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:199
+#, c-format
 msgid ", %s sectors"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:198
+#: ../../diskdrake.pm_.c:201
 #, c-format
 msgid "Cylinder %d to cylinder %d\n"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:199
+#: ../../diskdrake.pm_.c:202
 msgid "Formatted\n"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:200
+#: ../../diskdrake.pm_.c:203
 msgid "Not formatted\n"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:201
+#: ../../diskdrake.pm_.c:204
 msgid "Mounted\n"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:202
+#: ../../diskdrake.pm_.c:205
 #, c-format
 msgid "RAID md%s\n"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:203
+#: ../../diskdrake.pm_.c:206
 msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:205
+#: ../../diskdrake.pm_.c:208
 #, c-format
 msgid "Level %s\n"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:206
+#: ../../diskdrake.pm_.c:209
 #, c-format
 msgid "Chunk size %s\n"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:207
+#: ../../diskdrake.pm_.c:210
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:224
+#: ../../diskdrake.pm_.c:227
 msgid "Please click on a partition"
-msgstr ""
-
-#: ../../diskdrake.pm_.c:229
-#, c-format
-msgid "Size: %d MB\n"
-msgstr ""
-
-#: ../../diskdrake.pm_.c:230
-#, c-format
-msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr ""
 
 #: ../../diskdrake.pm_.c:232
 #, c-format
-msgid "Partition table type: %s\n"
+msgid "Size: %d MB\n"
 msgstr ""
 
 #: ../../diskdrake.pm_.c:233
 #, c-format
+msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:235
+#, c-format
+msgid "Partition table type: %s\n"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:236
+#, c-format
 msgid "on bus %d id %d\n"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:246
+#: ../../diskdrake.pm_.c:249
 msgid "Mount"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:247
+#: ../../diskdrake.pm_.c:250
 msgid "Active"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:248
+#: ../../diskdrake.pm_.c:251
 msgid "Add to RAID"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:249
+#: ../../diskdrake.pm_.c:252
 msgid "Remove from RAID"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:250
+#: ../../diskdrake.pm_.c:253
 msgid "Modify RAID"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:257
+#: ../../diskdrake.pm_.c:260
 msgid "Choose action"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:350
+#: ../../diskdrake.pm_.c:353
 msgid ""
 "Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
 "1024).\n"
@@ -657,7 +663,7 @@ msgid ""
 "need /boot"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:354
+#: ../../diskdrake.pm_.c:357
 msgid ""
 "The partition you've selected to add as root (/) is physically located "
 "beyond\n"
@@ -665,181 +671,181 @@ msgid ""
 "If you plan to use the LILO boot manager, be careful to add a /boot partition"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:371 ../../diskdrake.pm_.c:373
+#: ../../diskdrake.pm_.c:374 ../../diskdrake.pm_.c:376
 #, c-format
 msgid "Use ``%s'' instead"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:376
+#: ../../diskdrake.pm_.c:379
 msgid "Use ``Unmount'' first"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:377 ../../diskdrake.pm_.c:410
+#: ../../diskdrake.pm_.c:380 ../../diskdrake.pm_.c:413
 msgid "changing type of"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:389
+#: ../../diskdrake.pm_.c:392
 msgid "Continue anyway?"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:394
+#: ../../diskdrake.pm_.c:397
 msgid "Quit without saving"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:394
+#: ../../diskdrake.pm_.c:397
 msgid "Quit without writing the partition table?"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:413
+#: ../../diskdrake.pm_.c:416
 msgid "Change partition type"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:414
+#: ../../diskdrake.pm_.c:417
 msgid "Which partition type do you want?"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:430
+#: ../../diskdrake.pm_.c:433
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:452
+#: ../../diskdrake.pm_.c:455
 msgid "formatting"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:454
+#: ../../diskdrake.pm_.c:457
 msgid "Formatting"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:454 ../../install_steps_interactive.pm_.c:221
+#: ../../diskdrake.pm_.c:457 ../../install_steps_interactive.pm_.c:221
 #, c-format
 msgid "Formatting partition %s"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:459
+#: ../../diskdrake.pm_.c:462
 msgid "After formatting all partitions,"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:459
+#: ../../diskdrake.pm_.c:462
 msgid "all data on these partitions will be lost"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:469
+#: ../../diskdrake.pm_.c:472
 msgid "Move"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:470
+#: ../../diskdrake.pm_.c:473
 msgid "Which disk do you want to move to?"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:474
+#: ../../diskdrake.pm_.c:477
 msgid "Sector"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:475
+#: ../../diskdrake.pm_.c:478
 msgid "Which sector do you want to move to?"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:478
+#: ../../diskdrake.pm_.c:481
 msgid "Moving"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:478
+#: ../../diskdrake.pm_.c:481
 msgid "Moving partition..."
 msgstr ""
 
-#: ../../diskdrake.pm_.c:488
+#: ../../diskdrake.pm_.c:491
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:490
+#: ../../diskdrake.pm_.c:493
 msgid "You'll need to reboot before the modification can take place"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:511 ../../install_steps_gtk.pm_.c:265
+#: ../../diskdrake.pm_.c:514 ../../install_steps_gtk.pm_.c:265
 msgid "Computing fat filesystem bounds"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:511 ../../diskdrake.pm_.c:556
+#: ../../diskdrake.pm_.c:514 ../../diskdrake.pm_.c:559
 #: ../../install_steps_gtk.pm_.c:265
 msgid "Resizing"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:525
+#: ../../diskdrake.pm_.c:528
 msgid "resizing"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:535
+#: ../../diskdrake.pm_.c:538
 msgid "Choose the new size"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:535 ../../install_steps_graphical.pm_.c:287
+#: ../../diskdrake.pm_.c:538 ../../install_steps_graphical.pm_.c:287
 #: ../../install_steps_graphical.pm_.c:334 ../../install_steps_gtk.pm_.c:330
 msgid "MB"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:588
+#: ../../diskdrake.pm_.c:591
 msgid "Create a new partition"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:604
+#: ../../diskdrake.pm_.c:607
 msgid "Start sector: "
 msgstr ""
 
-#: ../../diskdrake.pm_.c:607
+#: ../../diskdrake.pm_.c:610
 msgid "Size in MB: "
 msgstr ""
 
-#: ../../diskdrake.pm_.c:610
+#: ../../diskdrake.pm_.c:613
 msgid "Filesystem type: "
 msgstr ""
 
-#: ../../diskdrake.pm_.c:612
+#: ../../diskdrake.pm_.c:615
 msgid "Preference: "
 msgstr ""
 
-#: ../../diskdrake.pm_.c:654 ../../diskdrake.pm_.c:670
+#: ../../diskdrake.pm_.c:657 ../../diskdrake.pm_.c:673
 msgid "Select file"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:663
+#: ../../diskdrake.pm_.c:666
 msgid ""
 "The backup partition table has not the same size\n"
 "Still continue?"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:671
+#: ../../diskdrake.pm_.c:674
 msgid "Warning"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:672
+#: ../../diskdrake.pm_.c:675
 msgid ""
 "Insert a floppy in drive\n"
 "All data on this floppy will be lost"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:686
+#: ../../diskdrake.pm_.c:689
 msgid "Trying to rescue partition table"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:697
+#: ../../diskdrake.pm_.c:700
 msgid "device"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:698
+#: ../../diskdrake.pm_.c:701
 msgid "level"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:699
+#: ../../diskdrake.pm_.c:702
 msgid "chunk size"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:711
+#: ../../diskdrake.pm_.c:714
 msgid "Choose an existing RAID to add to"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:712
+#: ../../diskdrake.pm_.c:715
 msgid "new"
 msgstr ""
 
@@ -866,27 +872,27 @@ msgstr ""
 msgid "error unmounting %s: %s"
 msgstr ""
 
-#: ../../fsedit.pm_.c:225
+#: ../../fsedit.pm_.c:229
 msgid "Mount points must begin with a leading /"
 msgstr ""
 
-#: ../../fsedit.pm_.c:228
+#: ../../fsedit.pm_.c:232
 #, c-format
 msgid "There is already a partition with mount point %s"
 msgstr ""
 
-#: ../../fsedit.pm_.c:312
+#: ../../fsedit.pm_.c:316
 #, c-format
 msgid "Error opening %s for writing: %s"
 msgstr ""
 
-#: ../../fsedit.pm_.c:394
+#: ../../fsedit.pm_.c:398
 msgid ""
 "An error has occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
 msgstr ""
 
-#: ../../fsedit.pm_.c:409
+#: ../../fsedit.pm_.c:413
 msgid "You don't have any partitions!"
 msgstr ""
 
@@ -1421,46 +1427,46 @@ msgstr ""
 msgid "Add a user"
 msgstr ""
 
-#: ../../install2.pm_.c:61
+#: ../../install2.pm_.c:62
 msgid "Create a bootdisk"
 msgstr ""
 
-#: ../../install2.pm_.c:62
+#: ../../install2.pm_.c:64
 msgid "Install bootloader"
 msgstr ""
 
-#: ../../install2.pm_.c:63
+#: ../../install2.pm_.c:65
 msgid "Configure X"
 msgstr ""
 
-#: ../../install2.pm_.c:64
+#: ../../install2.pm_.c:66
 msgid "Exit install"
 msgstr ""
 
-#: ../../install2.pm_.c:83
+#: ../../install2.pm_.c:85
 msgid "beginner"
 msgstr ""
 
-#: ../../install2.pm_.c:83
+#: ../../install2.pm_.c:85
 msgid "developer"
 msgstr ""
 
-#: ../../install2.pm_.c:83
+#: ../../install2.pm_.c:85
 msgid "expert"
 msgstr ""
 
-#: ../../install2.pm_.c:83
+#: ../../install2.pm_.c:85
 msgid "server"
 msgstr ""
 
-#: ../../install2.pm_.c:312
+#: ../../install2.pm_.c:297
 msgid ""
 "You must have a root partition.\n"
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
 
-#: ../../install2.pm_.c:328
+#: ../../install2.pm_.c:313
 msgid "Not enough swap to fulfill installation, please add some"
 msgstr ""
 
@@ -1612,7 +1618,7 @@ msgid "There was an error ordering packages:"
 msgstr ""
 
 #: ../../install_steps_graphical.pm_.c:577
-#: ../../install_steps_interactive.pm_.c:1011
+#: ../../install_steps_interactive.pm_.c:1015
 msgid "Use existing configuration for X11?"
 msgstr ""
 
@@ -2227,7 +2233,7 @@ msgid "Insert a floppy in drive %s"
 msgstr ""
 
 #: ../../install_steps_interactive.pm_.c:684
-#: ../../install_steps_interactive.pm_.c:1163
+#: ../../install_steps_interactive.pm_.c:1167
 msgid "Creating bootdisk"
 msgstr ""
 
@@ -2418,96 +2424,100 @@ msgstr ""
 msgid "Preparing bootloader"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:949
+#: ../../install_steps_interactive.pm_.c:937
+msgid "Do you want to use aboot?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:953
 msgid "Proxies configuration"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:950
+#: ../../install_steps_interactive.pm_.c:954
 msgid "HTTP proxy"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:951
+#: ../../install_steps_interactive.pm_.c:955
 msgid "FTP proxy"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:957
+#: ../../install_steps_interactive.pm_.c:961
 msgid "Proxy should be http://..."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:958
+#: ../../install_steps_interactive.pm_.c:962
 msgid "Proxy should be ftp://..."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:968 ../../standalone/draksec_.c:20
+#: ../../install_steps_interactive.pm_.c:972 ../../standalone/draksec_.c:20
 msgid "Welcome To Crackers"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:969 ../../standalone/draksec_.c:21
+#: ../../install_steps_interactive.pm_.c:973 ../../standalone/draksec_.c:21
 msgid "Poor"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:970 ../../standalone/draksec_.c:22
+#: ../../install_steps_interactive.pm_.c:974 ../../standalone/draksec_.c:22
 msgid "Low"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:971 ../../standalone/draksec_.c:23
+#: ../../install_steps_interactive.pm_.c:975 ../../standalone/draksec_.c:23
 msgid "Medium"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:972 ../../standalone/draksec_.c:24
+#: ../../install_steps_interactive.pm_.c:976 ../../standalone/draksec_.c:24
 msgid "High"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:973 ../../standalone/draksec_.c:25
+#: ../../install_steps_interactive.pm_.c:977 ../../standalone/draksec_.c:25
 msgid "Paranoid"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:986
+#: ../../install_steps_interactive.pm_.c:990
 msgid "Miscellaneous questions"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:987
+#: ../../install_steps_interactive.pm_.c:991
 msgid "(may cause data corruption)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:987
+#: ../../install_steps_interactive.pm_.c:991
 msgid "Use hard drive optimisations?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:988 ../../standalone/draksec_.c:46
+#: ../../install_steps_interactive.pm_.c:992 ../../standalone/draksec_.c:46
 msgid "Choose security level"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:989
+#: ../../install_steps_interactive.pm_.c:993
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:990
+#: ../../install_steps_interactive.pm_.c:994
 msgid "Removable media automounting"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:992
+#: ../../install_steps_interactive.pm_.c:996
 msgid "Enable num lock at startup"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:995
+#: ../../install_steps_interactive.pm_.c:999
 msgid "Give the ram size in Mb"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1023
-#: ../../install_steps_interactive.pm_.c:1197
+#: ../../install_steps_interactive.pm_.c:1027
+#: ../../install_steps_interactive.pm_.c:1201
 msgid "Try to find PCI devices?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1038
+#: ../../install_steps_interactive.pm_.c:1042
 msgid ""
 "Some steps are not completed.\n"
 "\n"
 "Do you really want to quit now?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1045
+#: ../../install_steps_interactive.pm_.c:1049
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -2520,26 +2530,26 @@ msgid ""
 "install chapter of the Official Linux-Mandrake User's Guide."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1054
+#: ../../install_steps_interactive.pm_.c:1058
 msgid "Shutting down"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1068
+#: ../../install_steps_interactive.pm_.c:1072
 #, c-format
 msgid "Installing driver for %s card %s"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1069
+#: ../../install_steps_interactive.pm_.c:1073
 #, c-format
 msgid "(module %s)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1079
+#: ../../install_steps_interactive.pm_.c:1083
 #, c-format
 msgid "Which %s driver should I try?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1087
+#: ../../install_steps_interactive.pm_.c:1091
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
@@ -2551,20 +2561,20 @@ msgid ""
 "not cause any damage."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1092
+#: ../../install_steps_interactive.pm_.c:1096
 msgid "Autoprobe"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1092
+#: ../../install_steps_interactive.pm_.c:1096
 msgid "Specify options"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1096
+#: ../../install_steps_interactive.pm_.c:1100
 #, c-format
 msgid "You may now provide its options to module %s."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1102
+#: ../../install_steps_interactive.pm_.c:1106
 #, c-format
 msgid ""
 "You may now provide its options to module %s.\n"
@@ -2572,82 +2582,82 @@ msgid ""
 "For instance, ``io=0x300 irq=7''"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1105
+#: ../../install_steps_interactive.pm_.c:1109
 msgid "Module options:"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1115
+#: ../../install_steps_interactive.pm_.c:1119
 #, c-format
 msgid ""
 "Loading module %s failed.\n"
 "Do you want to try again with other parameters?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1128
+#: ../../install_steps_interactive.pm_.c:1132
 msgid "Try to find PCMCIA cards?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1129
+#: ../../install_steps_interactive.pm_.c:1133
 msgid "Configuring PCMCIA cards..."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1129
+#: ../../install_steps_interactive.pm_.c:1133
 msgid "PCMCIA"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1135
+#: ../../install_steps_interactive.pm_.c:1139
 msgid ""
 "Linux does not yet fully support ultra dma 66.\n"
 "As a work-around i can make a custom floppy giving access the hard drive on "
 "ide2 and ide3"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1160
+#: ../../install_steps_interactive.pm_.c:1164
 msgid ""
 "Enter a floppy to create an HTP enabled boot\n"
 "(all data on floppy will be lost)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1177
+#: ../../install_steps_interactive.pm_.c:1181
 msgid "It is necessary to restart installation booting on the floppy"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1178
+#: ../../install_steps_interactive.pm_.c:1182
 msgid "It is necessary to restart installation with the new parameters"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1182
+#: ../../install_steps_interactive.pm_.c:1186
 #, c-format
 msgid ""
 "Failed to create an HTP boot floppy.\n"
 "You may have to restart installation and give ``%s'' at the prompt"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1203
+#: ../../install_steps_interactive.pm_.c:1207
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1204
+#: ../../install_steps_interactive.pm_.c:1208
 msgid "Do you have another one?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1205
+#: ../../install_steps_interactive.pm_.c:1209
 #, c-format
 msgid "Do you have any %s interface?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1207 ../../interactive.pm_.c:79
+#: ../../install_steps_interactive.pm_.c:1211 ../../interactive.pm_.c:79
 #: ../../my_gtk.pm_.c:423 ../../printerdrake.pm_.c:176
 msgid "No"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1207 ../../interactive.pm_.c:79
+#: ../../install_steps_interactive.pm_.c:1211 ../../interactive.pm_.c:79
 #: ../../my_gtk.pm_.c:423
 msgid "Yes"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1208
+#: ../../install_steps_interactive.pm_.c:1212
 msgid "See hardware info"
 msgstr ""
 
