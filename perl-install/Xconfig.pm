@@ -109,8 +109,8 @@ sub getinfoFromSysconfig {
 sub getinfoFromDDC {
     my $o = shift || {};
     my $O = $o->{monitor} ||= {};
-    return $o if $O->{hsyncrange} && $O->{vsyncrange} && $O->{modelines};
-    my ($m, @l) = `ddcxinfos`;
+    #- return $o if $O->{hsyncrange} && $O->{vsyncrange} && $O->{modelines};
+    my ($m, @l) = `./ddcxinfos`;
     $? == 0 or return $o;
 
     $o->{card}{memory} ||= to_int($m);
@@ -118,8 +118,8 @@ sub getinfoFromDDC {
 	my ($depth, $x, $y) = split;
 	$depth = int(log($depth) / log(2));
 	if ($depth >= 8 && $x >= 640) {
-	    push @{$o->{card}{depth}{$depth}}, [ $x, $y ];
-	    push @{$o->{card}{depth}{32}}, [ $x, $y ] if $depth == 24;
+	    push @{$o->{card}{depth}{$depth}}, [ $x, $y ] unless scalar grep { $_->[0] == $x && $_->[1] == $y } @{$o->{card}{depth}{$depth}};
+	    push @{$o->{card}{depth}{32}}, [ $x, $y ] if $depth == 24 && ! scalar grep { $_->[0] == $x && $_->[1] == $y } @{$o->{card}{depth}{32}};
 	}
     }
     my ($h, $v, $size, @m) = @l;
