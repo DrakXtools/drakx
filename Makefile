@@ -64,8 +64,8 @@ endif
 build: $(FBOOT_RDZ) $(FBOOT_IMG)
 
 dirs:
-	@for n in . $(DIRS); do \
-		[ "$$n" = "." ] || $(MAKE) -C $$n all ;\
+	@for n in $(DIRS); do \
+		$(MAKE) -C $$n all || exit 1 ;\
 	done
 
 rescue: all.modules
