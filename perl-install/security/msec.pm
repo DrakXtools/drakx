@@ -157,10 +157,7 @@ sub get_functions {
 
     # read mseclib.py to get each function's name and if it's
     # not in the ignore list, add it to the returned list.
-    local *F;
-    open F, $file;
-    local $_;
-    while (<F>) {
+    foreach (cat_($file)) {
         if (/^def/) {
             (undef, $function) = split(/ /, $_);
             ($function, undef) = split(/\(/, $function);
@@ -169,7 +166,6 @@ sub get_functions {
             }
         }
     }
-    close F;
 
     @functions;
 }
@@ -207,21 +203,7 @@ sub config_function {
 # get_default_checks() -
 #   return a list of periodic checks handled by security.conf
 sub get_default_checks {
-    my ($check, @checks);
-
-    my $check_file = "$::prefix/var/lib/msec/security.conf";
-
-    if (-e $check_file) {
-        local *F;
-        open F, $check_file;
-        local $_;
-        while (<F>) {
-            ($check, undef) = split(/=/, $_);
-            push @checks, $check unless member($check, qw(MAIL_USER))
-        }
-        close F;
-    }
-    @checks;
+    map { if(/(.*?)=/, $1) } cat_("$::prefix/var/lib/msec/security.conf");
 }
 
 # get_check_value(check)
