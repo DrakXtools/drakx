@@ -1,0 +1,39 @@
+Mini-Howto on burning Mandrake PPC Bootable CD's for Apple G3/G4 systems
+-------------------------------------------------------------------------
+email: John Buswell <johnb@mandrakesoft.com>
+
+To create a disk image simply use the mkINSTALLCD script provided in this
+directory. The path you provide the script should point to the root directory
+for the CD.
+
+For example after you have built the gi install with /export, simply pass 
+/export to the script as the distribution path and a name for the image.
+Once the image is built you can use hmount, humount, hdir, hcd and hattrib
+to modify and inspect the image before you commit it to CD-R.
+
+Before you run the script make sure the CD version of iBoot is in the 
+iBoot directory below /export (eg. /export/iBoot), if you want to use some 
+other directory then simply modify the script. Beware, HFS is not case
+sensitive, so if you already have an INSTALL file you cannot create install.
+
+Currently iBoot sports two trees, one for the install CD and another for
+regular usage. These will be merged shortly and a simply #define can be used
+in the Makefile to implement one or the other from a single binary.
+
+Enjoy!!
+
+
+Addendum:	3/15/2001  Stew Benedict <sbenedict@mandrakesoft.com>
+--------------------------------------------------------------------------
+
+A couple of changes.  
+
+I've opted to standardize on yaboot, which is user configurable, so the script 
+is modified now to use yaboot.
+
+Secondly, since mkhybrid merged with mkisofs, the hybrid images it creates are 
+read-only, so one is unable to mount the image and bless the boot directory for
+booting.  Consequently, I've included the binary for mkhybrid-1.12b5.4, which
+does work.
+
+
