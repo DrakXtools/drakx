@@ -125,6 +125,13 @@ sub show($) {
 }
 sub destroy($) {
     my ($o) = @_;
+    return if $^S & 4;
+	#- program is going to leave
+	#- don't do anything, especially don't set the waiting mouse cursor
+	#- another thing is that calling flush() at this moment causes segfault
+	#- so don't do it and no more segfault :)
+        #- (now, if someone finds out what this 4 is about... but you cares, it works :)
+
     $o->{rwindow} and $o->{rwindow}->destroy;
     gtkset_mousecursor_wait();
     flush();
@@ -142,6 +149,9 @@ sub exit {
     $::isEmbedded and kill 'USR1', $::CCPID;
     c::_exit($_[1]) #- workaround 
 }
+
+#- in case "exit" above was not called by the program
+END { &exit() }
 
 #-###############################################################################
 #- createXXX functions
