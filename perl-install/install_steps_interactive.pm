@@ -554,11 +554,9 @@ sub choosePackagesTree {
 
     $o->ask_many_from_list('', _("Choose the packages you want to install"),
 			   {
-			    list => [ 
-				     map { pkgs::packageByName($packages, $_) }
-				     $limit_to_medium ?
-				     (grep { pkgs::packageMedium($packages, $_) == $limit_to_medium } keys %{$packages->{names}}) :
-				     (keys %{$packages->{names}}) ],
+			    list => [ grep { !$limit_to_medium || pkgs::packageMedium($packages, $_) == $limit_to_medium }
+				      map { pkgs::packageByName($packages, $_) }
+				      keys %{$packages->{names}} ],
 			    value => \&pkgs::packageFlagSelected,
 			    label => \&pkgs::packageName,
 			    sort => 1,
