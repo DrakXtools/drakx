@@ -788,14 +788,18 @@ sub copy_advertising {
 
     return if $::rootwidth < 800;
 
-    my $f = getFile('Mandrake/share/advertising/list');
+    my $source_dir = "Mandrake/share/advertising";
+    foreach ("." . $o->{lang}, "." . substr($o->{lang},0,2), '') {
+	$f = getFile("$source_dir$_/list") or next;
+	$source_dir = "$source_dir$_";
+    }
     if (my @files = <$f>) {
 	my $dir = "$o->{prefix}/tmp/drakx-images";
 	mkdir $dir;
 	unlink glob_("$dir/*");
 	foreach (@files) {
 	    chomp;
-	    getAndSaveFile("Mandrake/share/advertising/$_", "$dir/$_");
+	    getAndSaveFile("$source_dir/$_", "$dir/$_");
 	}
 	@advertising_images = map { "$dir/$_" } @files;
     }
