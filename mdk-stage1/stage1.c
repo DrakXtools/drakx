@@ -332,7 +332,7 @@ int main(int argc, char **argv, char **env)
 	spawn_interactive();
 
 	open_log();
-	log_message("welcome to the " DISTRIB_NAME " install (stage1, version " VERSION " built " __DATE__ " " __TIME__")");
+	log_message("welcome to the " DISTRIB_NAME " install (mdk-stage1, version " VERSION " built " __DATE__ " " __TIME__")");
 	process_cmdline();
 	handle_env(env);
 	spawn_shell();
