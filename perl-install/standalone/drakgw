@@ -132,7 +132,7 @@ if (-f $drakgw_setup) {
     if (grep(/enabled/, cat_($drakgw_setup))) {
 	my $r = $in->ask_from_list_(_("Internet Connection Sharing currently enabled"),
 _("The setup of Internet connection sharing has already been done.
-It's currently enabled. 
+It's currently enabled.
 
 What would you like to do?"),
 				   [ __("disable"), __("reconfigure"), __("dismiss") ]) or quit_global($in, 0);
@@ -593,6 +593,9 @@ sub quit_global {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.31  2001/03/31 14:21:10  pablo
+#- Updated po files and help messages (patch from Pixel)
+#-
 #- Revision 1.30  2001/03/29 11:52:15  damien
 #- updated for new wiz png policy
 #-

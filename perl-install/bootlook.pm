@@ -41,8 +41,14 @@ import Locale::GetText I_;
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~/--embedded (\S*) (\S*)/;
 if ($::isEmbedded) {
   print "EMBED\n";
+<<<<<<< bootlook.pm
+  print "XID: $::XID\n";
+  print "CCPID:  $::CCPID\n";
+#  $path_to_pixmaps = "./pixmaps/";
+=======
   print "XID : $::XID\n";
   print "CCPID :  $::CCPID\n";
+>>>>>>> 1.18
 }
 
 my $in = interactive->vnew('su');
@@ -176,7 +182,7 @@ $x_box->pack_start($x_no_button, 0, 0, 0);
 
 my $user_dedans = new Gtk::HBox(0, 10);
 $user_dedans->border_width (0);
-my $x_yes_button = new Gtk::RadioButton _("Yes, I want autologin with this (user , desktop)"), $x_no_button;
+my $x_yes_button = new Gtk::RadioButton _("Yes, I want autologin with this (user, desktop)"), $x_no_button;
 $x_yes_button->set_active($l_mode);
 my $x_combo_vbox = new Gtk::VBox(0, 10);
 my $user_combo = new Gtk::Combo;
@@ -283,7 +289,7 @@ sub isXlaunched
 {
     my $line;
     
-    open INITTAB, "/etc/inittab" or die _("can not open /etc/inittab for reading : $!");
+    open INITTAB, "/etc/inittab" or die _("can not open /etc/inittab for reading: $!");
     while (<INITTAB>) {
 	if (/id:([1-6]):initdefault:/) { $line = $_; last; }
     }
@@ -345,7 +351,7 @@ sub isAutologin
 {
     my $line;
     
-    open AUTOLOGIN, "/etc/sysconfig/autologin" or die _("can not open /etc/sysconfig/autologin for reading : $!");
+    open AUTOLOGIN, "/etc/sysconfig/autologin" or die _("can not open /etc/sysconfig/autologin for reading: $!");
     while (<AUTOLOGIN>) {
 	if (/AUTOLOGIN=(yes|no)/) { $line = $_; last; }
     }

@@ -680,7 +680,18 @@ when booting. The following values are available:
 
     * normal: select normal 80x25 text mode.
 
-    * <number>:  use the corresponding text mode."),
+    * <number>:  use the corresponding text mode.
+
+
+  - Clean \"/tmp\" at each boot: if you want delete all files and directories
+stored in \"/tmp\" when you boot your system, select this option.
+
+
+  - Precise RAM if needed: unfortunately, there is no standard method to ask the
+BIOS about the amount of RAM present in your computer. As consequence, Linux may
+fail to detect your amount of RAM correctly. If this is the case, you can
+specify the correct amount or RAM here. Please note that a difference of 2 or 4
+MB between detected memory and memory present in your system is normal."),
 
 setupYabootGeneral =>
  __("Yaboot is a bootloader for NewWorld MacIntosh hardware. It is able
@@ -825,33 +836,9 @@ configureXxdm =>
 \"No\"."),
 
 miscellaneous =>
- __("You can now select some miscellaneous options for your system.
-
-* Use hard drive optimizations: this option can improve hard disk performance but is only for advanced users. Some buggy
-  chipsets can ruin your data, so beware. Note that the kernel has a builtin blacklist of drives and chipsets, but if
-  you want to avoid bad surprises, leave this option unset.
-
-
-* Choose security level: you can choose a security level for your system. Please refer to the manual for complete
+ __("You can choose a security level for your system. Please refer to the manual for complete
   information. Basically, if you don't know what to choose, keep the default option.
-
-
-* Precise RAM if needed: unfortunately, there is no standard method to ask the BIOS about the amount of RAM present in
-  your computer. As consequence, Linux may fail to detect your amount of RAM correctly. If this is the case, you can
-  specify the correct amount or RAM here. Please note that a difference of 2 or 4 MB between detected memory and memory
-  present in your system is normal.
-
-
-* Removable media automounting: if you would prefer not to manually mount removable media (CD-Rom, floppy, Zip, etc.) by
-  typing \"mount\" and \"umount\", select this option.
-
-
-* Clean \"/tmp\" at each boot: if you want delete all files and directories stored in \"/tmp\" when you boot your system,
-  select this option.
-
-
-* Enable num lock at startup: if you want NumLock key enabled after booting, select this option. Please note that you
-  should not enable this option on laptops and that NumLock may or may not work under X."),
+"),
 
 exitInstall =>
  __("Your system is going to reboot.
