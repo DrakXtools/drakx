@@ -731,7 +731,7 @@ alternate kernels, or for an emergency boot image.
 For other OS's - the entry consists only of a label and the root partition.
 
 
-For Linux, they are a few possible options: 
+For Linux, there are a few possible options: 
 
 
   - Label: This is simply the name will type at the yaboot prompt to select this 
