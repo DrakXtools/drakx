@@ -1151,7 +1151,6 @@ sub setRootPassword {
 	 focus_first => 1,
 	 callbacks => { 
 	     complete => sub {
-		 return 0 if $::testing;
 		 $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return 1,0;
 		 length $sup->{password} < 2 * $o->{security}
 		   and $o->ask_warn('', N("This password is too short (it must be at least %d characters long)", 2 * $o->{security})), return 1,0;
