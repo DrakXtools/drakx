@@ -123,7 +123,7 @@ my $gtk_display_compssUsers = sub {
 			 1, gtkpack(Gtk2::VBox->new(0, 0), 
 				    $entries_in_path->('Workstation'),
 				    '',
-				    map { $entry->($_) } @{$h->{'Development'}},
+				    $entries_in_path->('Develoment'),
 				   ),
 			 0, gtkpack(Gtk2::VBox->new(0, 0), 
 				    $entries_in_path->('Server'),
