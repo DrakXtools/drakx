@@ -1,5 +1,29 @@
 2004/08/16  Olivier Blin <oblin at mandrakesoft.com>
 
+	* install_steps_interactive.pm: alsaconf is in alsa-utils package (bug
+	10358)
+
+	* mdk-stage1/probing.c (probe_that_type) do not prompt in
+	discovered_device() before loading usb controllers (they're not network
+	devices)
+
+	* network/netconnect.pm: NET_INTERFACE should be ppp0 for pppoe too
+	add reminder about external ISDN modems (special init string)
+
+	* network/adsl.pm: do not write noipdefault in /etc/ppp/peers/ppp0 for
+	pptp connections
+
+	* standalone/drakroam: merge with waproamd version
+	add comments from waproamd version
+
+2004/08/16  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/xfree.pm: handle /etc/X11/xorg.conf
+
+	* Xconfig/various.pm: we don't use XF86Config-4 anymore
+
+2004/08/16  Olivier Blin <oblin at mandrakesoft.com>
+
 	* network/adsl.pm (adsl_probe_info) net_cnx_up is obsolete, pptp info is
 	available in
 	ppp config files
@@ -35392,7 +35416,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.946 2004/08/13 09:11:21 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.947 2004/08/16 09:19:13 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
