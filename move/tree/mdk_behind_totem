@@ -36,8 +36,6 @@ trap 'umount_cd' USR1
 
 umount_cd() {
     echo umount_cd
-    busy-files | grep /image/
-    busy-files | grep /image_boot/
 
     umount /image_boot
     losetup -d /dev/$boot_loop
