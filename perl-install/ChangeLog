@@ -1,3 +1,37 @@
+2002/01/18  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: add update flag for urpmi medium.
+
+	* install_steps_interactive.pm: even if user cancel update of package on
+	tree, allow urpmi to install the medium.
+	avoid downNetwork as no difference are made between ethernet or ppp.
+	fixed typo.
+	allow cancel when installUpdates.
+
+	* crypto.pm: add update medium for crypto for urpmi (flag update).
+	fixed typo.
+	allow selection/deselection of update medium (for cancel of
+	installation).
+
+	* install_steps_gtk.pm: allow choosePackageTree to display a cancel if a
+	specific medium has been given.
+
+2002/01/18  Pixel  <pixel@mandrakesoft.com>
+
+	* share/gen_locales.sh, share/locales-skeleton.tar.bz2: find the X11
+	locale on the box so that XI18N_OBJS's and common are included
+
+2002/01/18  sdupont
+
+	* standalone/drakfont: update warning messages (qa).
+
+	* standalone/drakbackup: fix traduction problems and more ...
+
+2002/01/17  Pixel  <pixel@mandrakesoft.com>
+
+	* fsedit.pm, diskdrake_interactive.pm: better error message when auto
+	allocate doesn't do anything
+
 2002/01/17  dam's  <damien@mandrakesoft.com>
 
 	* network/tools.pm, network/netconnect.pm: draknet : success message only
