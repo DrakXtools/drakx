@@ -26,8 +26,7 @@ sub get_options_name($) {
   $modinfo = '/sbin/modinfo';
   -e $modinfo or $modinfo = '/usr/bin/modinfo';
   -e $modinfo or die _('modinfo is not available');
-  my @line = `/sbin/modinfo -p $module`;
-  print "yop : @line \n";
+  my @line = `$modinfo -p $module`;
   foreach (@line) {
       chomp;
       s/int/: (integer/;
