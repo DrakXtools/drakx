@@ -265,8 +265,17 @@ sub hd_possible_actions_interactive {
 
 sub Clear_all {
     my ($in, $hd, $all_hds) = @_;
-    isPartOfLVM($_) and RemoveFromLVM($in, $hd, $_, $all_hds) foreach partition_table::get_normal_parts($hd);
-    partition_table_raw::zero_MBR_and_dirty($hd);
+
+    my @parts = partition_table::get_normal_parts($hd);
+    foreach (@parts) {
+	RemoveFromLVM($in, $hd, $_, $all_hds) if isPartOfLVM($_);
+	RemoveFromRAID($in, $hd, $_, $all_hds) if isPartOfRAID($_);
+    }
+    if (isLVM($hd)) {
+	lvm::lv_delete($hd, $_) foreach @parts
+    } else {
+	partition_table_raw::zero_MBR_and_dirty($hd);
+    }
 }
 
 sub Auto_allocate {
