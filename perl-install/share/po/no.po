@@ -5,13 +5,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 1999-12-16 17:33+0100\n"
+"POT-Creation-Date: 1999-12-18 14:33+0100\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: ../Xconfigurator.pm_.c:158
+#, fuzzy
+msgid "Graphic card"
+msgstr "Grafikk-kort: %s\n"
 
 #: ../Xconfigurator.pm_.c:158
 msgid "Select a graphic card"
@@ -21,19 +26,29 @@ msgstr "Velg et grafikk-kort"
 msgid "Choose a X server"
 msgstr "Velg en X-tjener"
 
-#: ../Xconfigurator.pm_.c:178
+#: ../Xconfigurator.pm_.c:159
+#, fuzzy
+msgid "X server"
+msgstr "tjener"
+
+#: ../Xconfigurator.pm_.c:180
 msgid "Select the memory size of your graphic card"
 msgstr "Velg minnestørrelsen til grafikk-kortet ditt"
 
-#: ../Xconfigurator.pm_.c:200
+#: ../Xconfigurator.pm_.c:202
 msgid "Choose options for server"
 msgstr "Velg opsjoner for tjener"
 
-#: ../Xconfigurator.pm_.c:218
+#: ../Xconfigurator.pm_.c:220
 msgid "Choose a monitor"
 msgstr "Velg en monitor"
 
-#: ../Xconfigurator.pm_.c:221
+#: ../Xconfigurator.pm_.c:220
+#, fuzzy
+msgid "Monitor"
+msgstr "Monitor: %s\n"
+
+#: ../Xconfigurator.pm_.c:223
 msgid ""
 "The two critical parameters are the vertical refresh rate, which is the "
 "rate\n"
@@ -57,39 +72,39 @@ msgstr ""
 "skjermen din.\n"
 "Hvis du er usikker, velg en konservativ innstilling."
 
-#: ../Xconfigurator.pm_.c:228
+#: ../Xconfigurator.pm_.c:230
 msgid "Horizontal refresh rate"
 msgstr "Horisontal oppfrisknings-rate"
 
-#: ../Xconfigurator.pm_.c:228
+#: ../Xconfigurator.pm_.c:230
 msgid "Vertical refresh rate"
 msgstr "Vertikal oppfrisknings-rate"
 
-#: ../Xconfigurator.pm_.c:269
+#: ../Xconfigurator.pm_.c:271
 msgid "Monitor not configured"
 msgstr "Monitor er ikke konfigurert"
 
-#: ../Xconfigurator.pm_.c:272
+#: ../Xconfigurator.pm_.c:274
 msgid "Graphic card not configured yet"
 msgstr "Grafikk-kort er ikke konfigurert ennå"
 
-#: ../Xconfigurator.pm_.c:275
+#: ../Xconfigurator.pm_.c:277
 msgid "Resolutions not chosen yet"
 msgstr "Oppløsninger er ikke valgt ennå"
 
-#: ../Xconfigurator.pm_.c:284
+#: ../Xconfigurator.pm_.c:285
 msgid "Do you want to test the configuration?"
 msgstr "Vil du teste konfigurasjonen?"
 
-#: ../Xconfigurator.pm_.c:284
+#: ../Xconfigurator.pm_.c:285
 msgid "Test configuration"
 msgstr "Test konfigurasjon"
 
-#: ../Xconfigurator.pm_.c:317
+#: ../Xconfigurator.pm_.c:318
 msgid "An error occurred:"
 msgstr "En feil oppsto:"
 
-#: ../Xconfigurator.pm_.c:319
+#: ../Xconfigurator.pm_.c:320
 msgid ""
 "\n"
 "try changing some parameters"
@@ -97,24 +112,24 @@ msgstr ""
 "\n"
 "prøv å endre noen parametere"
 
-#: ../Xconfigurator.pm_.c:340
+#: ../Xconfigurator.pm_.c:341
 #, c-format
 msgid "(leaving in %d seconds)"
 msgstr "(slutter om %d sekunder)"
 
-#: ../Xconfigurator.pm_.c:344 ../my_gtk.pm_.c:423 ../printerdrake.pm_.c:256
+#: ../Xconfigurator.pm_.c:345 ../my_gtk.pm_.c:423
 msgid "Is this correct?"
 msgstr "Er dette riktig?"
 
-#: ../Xconfigurator.pm_.c:352
+#: ../Xconfigurator.pm_.c:353
 msgid "An error occurred, try changing some parameters"
 msgstr "En feil oppsto, prøv å endre noen parametere"
 
-#: ../Xconfigurator.pm_.c:360 ../Xconfigurator.pm_.c:525
+#: ../Xconfigurator.pm_.c:361 ../Xconfigurator.pm_.c:526
 msgid "Automatic resolutions"
 msgstr "Automatiske oppløsninger"
 
-#: ../Xconfigurator.pm_.c:361
+#: ../Xconfigurator.pm_.c:362
 msgid ""
 "To find the available resolutions I will try different ones.\n"
 "Your screen will blink...\n"
@@ -124,19 +139,24 @@ msgstr ""
 "Skjermen din vil blinke...\n"
 "Du kan slå av hvis du vil, du vil høre et bipp når det er ferdig"
 
-#: ../Xconfigurator.pm_.c:412 ../printerdrake.pm_.c:210
+#: ../Xconfigurator.pm_.c:413 ../printerdrake.pm_.c:210
 msgid "Resolution"
 msgstr "Oppløsning"
 
-#: ../Xconfigurator.pm_.c:447
+#: ../Xconfigurator.pm_.c:448
 msgid "Choose resolution and color depth"
 msgstr "Velg oppløsning og fargedybde"
 
-#: ../Xconfigurator.pm_.c:455
+#: ../Xconfigurator.pm_.c:456
 msgid "Show all"
 msgstr "Vis alle"
 
-#: ../Xconfigurator.pm_.c:526
+#: ../Xconfigurator.pm_.c:480
+#, fuzzy
+msgid "Resolutions"
+msgstr "Oppløsning"
+
+#: ../Xconfigurator.pm_.c:527
 msgid ""
 "I can try to find the available resolutions (eg: 800x600).\n"
 "Sometimes, though, it may hang the machine.\n"
@@ -146,7 +166,7 @@ msgstr ""
 "Noen ganger kan dette forårsake at maskinen stopper opp.\n"
 "Ønsker du å prøve?"
 
-#: ../Xconfigurator.pm_.c:531
+#: ../Xconfigurator.pm_.c:532
 msgid ""
 "No valid modes found\n"
 "Try with another video card or monitor"
@@ -154,100 +174,105 @@ msgstr ""
 "Ingen gyldige modus funnet\n"
 "Prøv med et annet skjermkort eller monitor"
 
-#: ../Xconfigurator.pm_.c:723
+#: ../Xconfigurator.pm_.c:724
 #, c-format
 msgid "Keyboard layout: %s\n"
 msgstr "Tastatur-oppsett: %s\n"
 
-#: ../Xconfigurator.pm_.c:724
+#: ../Xconfigurator.pm_.c:725
 #, c-format
 msgid "Mouse type: %s\n"
 msgstr "Type mus: %s\n"
 
-#: ../Xconfigurator.pm_.c:725
+#: ../Xconfigurator.pm_.c:726
 #, c-format
 msgid "Mouse device: %s\n"
 msgstr "Enhet mus: %s\n"
 
-#: ../Xconfigurator.pm_.c:726
+#: ../Xconfigurator.pm_.c:727
 #, c-format
 msgid "Monitor: %s\n"
 msgstr "Monitor: %s\n"
 
-#: ../Xconfigurator.pm_.c:727
+#: ../Xconfigurator.pm_.c:728
 #, c-format
 msgid "Monitor HorizSync: %s\n"
 msgstr "Monitor HorizSync: %s\n"
 
-#: ../Xconfigurator.pm_.c:728
+#: ../Xconfigurator.pm_.c:729
 #, c-format
 msgid "Monitor VertRefresh: %s\n"
 msgstr "Monitor VertRefresh: %s\n"
 
-#: ../Xconfigurator.pm_.c:729
+#: ../Xconfigurator.pm_.c:730
 #, c-format
 msgid "Graphic card: %s\n"
 msgstr "Grafikk-kort: %s\n"
 
-#: ../Xconfigurator.pm_.c:730
+#: ../Xconfigurator.pm_.c:731
 #, c-format
 msgid "Graphic memory: %s kB\n"
 msgstr "Minne grafikk: %s kB\n"
 
-#: ../Xconfigurator.pm_.c:731
+#: ../Xconfigurator.pm_.c:732
 #, c-format
 msgid "XFree86 server: %s\n"
 msgstr "XFree86-tjener: %s\n"
 
-#: ../Xconfigurator.pm_.c:745
+#: ../Xconfigurator.pm_.c:746
 msgid "Preparing X-Window configuration"
 msgstr "Forbereder X-Window konfigurasjon"
 
-#: ../Xconfigurator.pm_.c:759
+#: ../Xconfigurator.pm_.c:760
 msgid "Change Monitor"
 msgstr "Endre monitor"
 
-#: ../Xconfigurator.pm_.c:760
+#: ../Xconfigurator.pm_.c:761
 msgid "Change Graphic card"
 msgstr "Endre grafikk-kort"
 
-#: ../Xconfigurator.pm_.c:761
+#: ../Xconfigurator.pm_.c:762
 msgid "Change Server options"
 msgstr "Endre tjeneropsjoner"
 
-#: ../Xconfigurator.pm_.c:762
+#: ../Xconfigurator.pm_.c:763
 msgid "Change Resolution"
 msgstr "Endre oppløsning"
 
-#: ../Xconfigurator.pm_.c:763
+#: ../Xconfigurator.pm_.c:764
 msgid "Automatical resolutions search"
 msgstr "Automatisk oppløsningssøk"
 
-#: ../Xconfigurator.pm_.c:767
+#: ../Xconfigurator.pm_.c:768
 msgid "Show information"
 msgstr "Vis informasjon"
 
-#: ../Xconfigurator.pm_.c:768
+#: ../Xconfigurator.pm_.c:769
 msgid "Test again"
 msgstr "Test igjen"
 
-#: ../Xconfigurator.pm_.c:769
+#: ../Xconfigurator.pm_.c:770
 msgid "Quit"
 msgstr "Avslutt"
 
-#: ../Xconfigurator.pm_.c:772
+#: ../Xconfigurator.pm_.c:773
 msgid "What do you want to do?"
 msgstr "Hva vil du gjøre?"
 
-#: ../Xconfigurator.pm_.c:781
-msgid "Please relog into KDE to activate the changes"
+#: ../Xconfigurator.pm_.c:793
+#, fuzzy, c-format
+msgid "Please relog into %s to activate the changes"
 msgstr "Vennligst logg inn i KDE på nytt for å aktivere endringene"
 
-#: ../Xconfigurator.pm_.c:789
+#: ../Xconfigurator.pm_.c:809
+msgid "Please log out and then use Ctrl-Alt-BackSpace"
+msgstr ""
+
+#: ../Xconfigurator.pm_.c:811
 msgid "X at startup"
 msgstr "X ved oppstart"
 
-#: ../Xconfigurator.pm_.c:790
+#: ../Xconfigurator.pm_.c:812
 msgid ""
 "I can set up your computer to automatically start X upon booting.\n"
 "Would you like X to start when you reboot?"
@@ -275,79 +300,79 @@ msgstr "16 millioner farger (24 bits)"
 msgid "4 billion colors (32 bits)"
 msgstr "4 milliarder farger (32 bits)"
 
-#: ../Xconfigurator_consts.pm_.c:93
+#: ../Xconfigurator_consts.pm_.c:95
 msgid "256 kB"
 msgstr "256 kB"
 
-#: ../Xconfigurator_consts.pm_.c:94
+#: ../Xconfigurator_consts.pm_.c:96
 msgid "512 kB"
 msgstr "512 kB"
 
-#: ../Xconfigurator_consts.pm_.c:95
+#: ../Xconfigurator_consts.pm_.c:97
 msgid "1 MB"
 msgstr "1 MB"
 
-#: ../Xconfigurator_consts.pm_.c:96
+#: ../Xconfigurator_consts.pm_.c:98
 msgid "2 MB"
 msgstr "2 MB"
 
-#: ../Xconfigurator_consts.pm_.c:97
+#: ../Xconfigurator_consts.pm_.c:99
 msgid "4 MB"
 msgstr "4 MB"
 
-#: ../Xconfigurator_consts.pm_.c:98
+#: ../Xconfigurator_consts.pm_.c:100
 msgid "8 MB"
 msgstr "8 MB"
 
-#: ../Xconfigurator_consts.pm_.c:99
+#: ../Xconfigurator_consts.pm_.c:101
 msgid "16 MB or more"
 msgstr "16 MB eller mer"
 
-#: ../Xconfigurator_consts.pm_.c:103 ../Xconfigurator_consts.pm_.c:104
+#: ../Xconfigurator_consts.pm_.c:105 ../Xconfigurator_consts.pm_.c:106
 msgid "Standard VGA, 640x480 at 60 Hz"
 msgstr "Standard VGA, 640x480 ved 60 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:105
+#: ../Xconfigurator_consts.pm_.c:107
 msgid "Super VGA, 800x600 at 56 Hz"
 msgstr "Super VGA 800x600 ved 56 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:106
+#: ../Xconfigurator_consts.pm_.c:108
 msgid "8514 Compatible, 1024x768 at 87 Hz interlaced (no 800x600)"
 msgstr "8514 kompatibel, 1024x768 ved 87 Hz interlaced (ikke 800x600)"
 
-#: ../Xconfigurator_consts.pm_.c:107
+#: ../Xconfigurator_consts.pm_.c:109
 msgid "Super VGA, 1024x768 at 87 Hz interlaced, 800x600 at 56 Hz"
 msgstr "Super VGA, 1024x768 ved 87 Hz interlaced, 800x600 ved 56 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:108
+#: ../Xconfigurator_consts.pm_.c:110
 msgid "Extended Super VGA, 800x600 at 60 Hz, 640x480 at 72 Hz"
 msgstr "Utvidet Super VGA, 800x600 ved 60 Hz, 640x480 ved 72 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:109
+#: ../Xconfigurator_consts.pm_.c:111
 msgid "Non-Interlaced SVGA, 1024x768 at 60 Hz, 800x600 at 72 Hz"
 msgstr "Ikke-interlaced SVGA, 1024x768 ved 60 Hz, 800x600 ved 72 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:110
+#: ../Xconfigurator_consts.pm_.c:112
 msgid "High Frequency SVGA, 1024x768 at 70 Hz"
 msgstr "Høyfrekvens SVGA, 1024x768 ved 70 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:111
+#: ../Xconfigurator_consts.pm_.c:113
 msgid "Multi-frequency that can do 1280x1024 at 60 Hz"
 msgstr "Flerfrekvens som kan klare 1280x1024 ved 60 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:112
+#: ../Xconfigurator_consts.pm_.c:114
 msgid "Multi-frequency that can do 1280x1024 at 74 Hz"
 msgstr "Flerfrekvens som kan klare 1280x1024 ved 74 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:113
+#: ../Xconfigurator_consts.pm_.c:115
 msgid "Multi-frequency that can do 1280x1024 at 76 Hz"
 msgstr "Flerfrekvens som kan klare 1280x1024 ved 76 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:114
+#: ../Xconfigurator_consts.pm_.c:116
 msgid "Monitor that can do 1600x1200 at 70 Hz"
 msgstr "Monitor som kan klare 1600x1200 ved 70 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:115
+#: ../Xconfigurator_consts.pm_.c:117
 msgid "Monitor that can do 1600x1200 at 76 Hz"
 msgstr "Monitor som kan klare 1600x1200 ved 76 Hz"
 
@@ -1249,7 +1274,7 @@ msgstr ""
 
 # #: ../help.pm_.c:376 ../help.pm_.c:463 ../install2.pm_.c:65
 #: ../help.pm_.c:182 ../help.pm_.c:420 ../help.pm_.c:423 ../help.pm_.c:511
-#: ../install2.pm_.c:67
+#: ../install2.pm_.c:68
 msgid "Help"
 msgstr "Hjelp"
 
@@ -1698,112 +1723,112 @@ msgstr ""
 "bli skrevet ned. Ikke lag passordet for langt eller for komplisert:\n"
 "du må kunne klare å huske det."
 
-#: ../install2.pm_.c:42
+#: ../install2.pm_.c:43
 msgid "Choose your language"
 msgstr "Velg språk"
 
-#: ../install2.pm_.c:43
+#: ../install2.pm_.c:44
 msgid "Select installation class"
 msgstr "Velg installasjonsklasse"
 
-#: ../install2.pm_.c:44
+#: ../install2.pm_.c:45
 msgid "Setup SCSI"
 msgstr "Oppsett SCSI"
 
-#: ../install2.pm_.c:45
+#: ../install2.pm_.c:46
 msgid "Choose install or upgrade"
 msgstr "Velg installer eller oppgrader"
 
-#: ../install2.pm_.c:46
+#: ../install2.pm_.c:47
 msgid "Configure mouse"
 msgstr "Konfigurer mus"
 
-#: ../install2.pm_.c:47
+#: ../install2.pm_.c:48
 msgid "Choose your keyboard"
 msgstr "Velg tastatur"
 
-#: ../install2.pm_.c:48
+#: ../install2.pm_.c:49
 msgid "Miscellaneous"
 msgstr "Forskjellig"
 
-#: ../install2.pm_.c:49
+#: ../install2.pm_.c:50
 msgid "Setup filesystems"
 msgstr "Oppsett filsystemer"
 
-#: ../install2.pm_.c:50
+#: ../install2.pm_.c:51
 msgid "Format partitions"
 msgstr "Formater partisjoner"
 
-#: ../install2.pm_.c:51
+#: ../install2.pm_.c:52
 msgid "Choose packages to install"
 msgstr "Velg pakker for installering"
 
-#: ../install2.pm_.c:52
+#: ../install2.pm_.c:53
 msgid "Install system"
 msgstr "Installer systemet"
 
-#: ../install2.pm_.c:53
+#: ../install2.pm_.c:54
 msgid "Configure networking"
 msgstr "Konfigurer nettverk"
 
-#: ../install2.pm_.c:54
+#: ../install2.pm_.c:55
 msgid "Cryptographic"
 msgstr "Kryptografisk"
 
-#: ../install2.pm_.c:55
+#: ../install2.pm_.c:56
 msgid "Configure timezone"
 msgstr "Konfigurer tidssone"
 
-#: ../install2.pm_.c:57
+#: ../install2.pm_.c:58
 msgid "Configure printer"
 msgstr "Konfigurer skriver"
 
-#: ../install2.pm_.c:58 ../install_steps_interactive.pm_.c:476
+#: ../install2.pm_.c:59 ../install_steps_interactive.pm_.c:476
 #: ../install_steps_interactive.pm_.c:477
 msgid "Set root password"
 msgstr "Sett root-passord"
 
-#: ../install2.pm_.c:59
+#: ../install2.pm_.c:60
 msgid "Add a user"
 msgstr "Legg til en bruker"
 
-#: ../install2.pm_.c:60
+#: ../install2.pm_.c:61
 msgid "Create a bootdisk"
 msgstr "Opprett en oppstartdiskett"
 
-#: ../install2.pm_.c:61
+#: ../install2.pm_.c:62
 msgid "Install bootloader"
 msgstr "Installer oppstartslaster"
 
-#: ../install2.pm_.c:62
+#: ../install2.pm_.c:63
 msgid "Configure X"
 msgstr "Konfigurer X"
 
-#: ../install2.pm_.c:63
+#: ../install2.pm_.c:64
 msgid "Exit install"
 msgstr "Avslutt installering"
 
-#: ../install2.pm_.c:83
+#: ../install2.pm_.c:84
 msgid "beginner"
 msgstr "nybegynner"
 
-#: ../install2.pm_.c:83
+#: ../install2.pm_.c:84
 msgid "developer"
 msgstr "utvikler"
 
-#: ../install2.pm_.c:83
+#: ../install2.pm_.c:84
 msgid "expert"
 msgstr "ekspert"
 
-#: ../install2.pm_.c:83
+#: ../install2.pm_.c:84
 msgid "server"
 msgstr "tjener"
 
-#: ../install2.pm_.c:308
+#: ../install2.pm_.c:309
 msgid "Partitioning failed: no root filesystem"
 msgstr "Partisjonering feilet: intet root-filsystem"
 
-#: ../install2.pm_.c:322
+#: ../install2.pm_.c:323
 msgid "Not enough swap to fulfill installation, please add some"
 msgstr ""
 "Ikke nok vekslingsplass til å fullføre installasjonen, vennligst legg til mer"
@@ -1868,7 +1893,7 @@ msgstr ""
 msgid "Duplicate mount point %s"
 msgstr "Dupliser monteringspunkt %s"
 
-#: ../install_steps.pm_.c:502
+#: ../install_steps.pm_.c:510
 msgid "No floppy drive available"
 msgstr "Ingen diskettstasjon tilgjengelig"
 
@@ -2143,8 +2168,9 @@ msgstr ""
 "%d%%"
 
 #: ../install_steps_interactive.pm_.c:267
-msgid "Post install stuff"
-msgstr "Postinstallerings-saker"
+#, fuzzy
+msgid "Post install configuration"
+msgstr "Proxy-konfigurasjon"
 
 #: ../install_steps_interactive.pm_.c:278
 msgid "Keep the current IP configuration"
@@ -2355,9 +2381,9 @@ msgid "No password"
 msgstr "Intet passord"
 
 #: ../install_steps_interactive.pm_.c:476
-#: ../install_steps_interactive.pm_.c:686 ../interactive.pm_.c:72
-#: ../interactive.pm_.c:82 ../interactive.pm_.c:161
-#: ../interactive_newt.pm_.c:48 ../interactive_newt.pm_.c:92
+#: ../install_steps_interactive.pm_.c:686 ../interactive.pm_.c:74
+#: ../interactive.pm_.c:84 ../interactive.pm_.c:163
+#: ../interactive_newt.pm_.c:50 ../interactive_newt.pm_.c:94
 #: ../interactive_stdio.pm_.c:27 ../my_gtk.pm_.c:192 ../my_gtk.pm_.c:423
 #: ../my_gtk.pm_.c:523
 msgid "Ok"
@@ -2879,12 +2905,12 @@ msgstr "Har du enda ett?"
 msgid "Do you have any %s interface?"
 msgstr "Har du noen %s grensesnitt?"
 
-#: ../install_steps_interactive.pm_.c:913 ../interactive.pm_.c:77
+#: ../install_steps_interactive.pm_.c:913 ../interactive.pm_.c:79
 #: ../my_gtk.pm_.c:422 ../printerdrake.pm_.c:176
 msgid "No"
 msgstr "Nei"
 
-#: ../install_steps_interactive.pm_.c:913 ../interactive.pm_.c:77
+#: ../install_steps_interactive.pm_.c:913 ../interactive.pm_.c:79
 #: ../my_gtk.pm_.c:422
 msgid "Yes"
 msgstr "Ja"
@@ -2904,13 +2930,13 @@ msgid ""
 msgstr ""
 "  <Tab>/<Alt-Tab> mellom elementer  | <Space> velger | <F12> neste skjerm "
 
-#: ../interactive.pm_.c:82 ../interactive.pm_.c:160
-#: ../interactive_newt.pm_.c:48 ../interactive_newt.pm_.c:92
+#: ../interactive.pm_.c:84 ../interactive.pm_.c:162
+#: ../interactive_newt.pm_.c:50 ../interactive_newt.pm_.c:94
 #: ../interactive_stdio.pm_.c:27 ../my_gtk.pm_.c:193 ../my_gtk.pm_.c:423
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: ../interactive.pm_.c:178
+#: ../interactive.pm_.c:180
 msgid "Please wait"
 msgstr "Vennligst vent"
 
@@ -3498,14 +3524,26 @@ msgstr "Opsjoner fargedybde"
 msgid "Do you want to test printing?"
 msgstr "Vil du teste utskrift?"
 
+#: ../printerdrake.pm_.c:236
+#, fuzzy
+msgid "Printing test page(s)..."
+msgstr "Ja, skriv begge testsidene"
+
 #: ../printerdrake.pm_.c:254
 #, c-format
 msgid ""
-"Is this correct? Printing status:\n"
+"Test page(s) have been sent to the printer daemon.\n"
+"This may take a little time before printer start.\n"
+"Does it work properly? Printing status:\n"
 "%s"
 msgstr ""
-"Er dette riktig? Utskriftstatus:\n"
-"%s"
+
+#: ../printerdrake.pm_.c:258
+msgid ""
+"Test page(s) have been sent to the printer daemon.\n"
+"This may take a little time before printer start.\n"
+"Does it work properly?"
+msgstr ""
 
 #: ../raid.pm_.c:36
 #, c-format
@@ -3536,3 +3574,13 @@ msgstr "Velg hvilke tjenester som skal startes automatisk ved oppstart"
 #: ../standalone/mousedrake_.c:30
 msgid "no serial_usb found\n"
 msgstr "ingen serie_usb funnet\n"
+
+#~ msgid "Post install stuff"
+#~ msgstr "Postinstallerings-saker"
+
+#~ msgid ""
+#~ "Is this correct? Printing status:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Er dette riktig? Utskriftstatus:\n"
+#~ "%s"
