@@ -10,7 +10,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
-    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtksetstyle gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_modal gtkset_border_width gtkmove gtkshow gtkhide gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng write_on_pixmap gtkcreate_xpm gtkcreate_png) ],
+    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtksetstyle gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_modal gtkset_border_width gtkmove gtkshow gtkhide gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng write_on_pixmap gtkcreate_xpm gtkcreate_png gtkbuttonset) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_file) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -351,6 +351,16 @@ sub gtkcreate_png {
     $im->render($im->rgb_width, $im->rgb_height);
     ($im->move_image(), $im->move_mask);
 }
+sub gtkbuttonset {
+    my ($button, $str) = @_;
+    require Data::Dumper;
+    print " -- " . Data::Dumper->Dump([$button],['$button']) . "\n";
+    print " -- " . Data::Dumper->Dump([$str],['$str']) . "\n";
+    $button->child->destroy;
+    $button->add(gtkshow(new Gtk::Label $str));
+    $button;
+}
+
 sub xpm_d { my $w = shift; Gtk::Gdk::Pixmap->create_from_xpm_d($w->window, undef, @_) }
 sub gtkxpm { new Gtk::Pixmap(gtkcreate_xpm(@_)) }
 sub gtkpng { new Gtk::Pixmap(gtkcreate_png(@_)) }
@@ -370,7 +380,6 @@ sub write_on_pixmap {
 	$style->font(Gtk::Gdk::Font->fontset_load(_("-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*")));
 	my $y_pos2= $y_pos;
   	foreach (@text) {
-	    print " -- $_ --\n";
   	    $darea->window->draw_string($style->font, $gc, $x_pos, $y_pos2, $_);
   	    $y_pos2 += 20;
   	}
@@ -411,12 +420,12 @@ sub create_okcancel {
 sub create_box_with_title($@) {
     my $o = shift;
 
-    $o->{box_size} = sum(map { round(length($_) / 60 + 0.5) } map { split "\n" } @_);
+    $o->{box_size} = sum(map { round(length($_) / 60 + 1/2) } map { split "\n" } @_);
     $o->{box} = new Gtk::VBox(0,0);
     $o->{icon} and eval { gtkpack__($o->{box}, gtkset_border_width(gtkpack_(new Gtk::HBox(0,0), 1, gtkpng($o->{icon})),5)); };
     if (@_ <= 2 && $o->{box_size} > 4) {
 	my $font = $o->{box}->style->font;
-	my $wanted = $o->{box_size} * ($font->ascent + $font->descent) + 7;
+	my $wanted = $o->{box_size} * ($font->ascent + $font->descent) + 8;
 	my $height = min(250, $wanted);
 	my $has_scroll = $height < $wanted;
 
@@ -432,6 +441,7 @@ sub create_box_with_title($@) {
 	gtkpack__($o->{box},
 		  (map {
 		      my $w = ref $_ ? $_ : new Gtk::Label($_);
+		      $::isWizard and $w->set_justify("left");
 		      $w->set_name("Title");
 		      $w;
 		  } map { ref $_ ? $_ : warp_text($_) } @_),
