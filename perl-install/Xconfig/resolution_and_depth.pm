@@ -33,14 +33,17 @@ my @bios_vga_modes = (
     { bios => 771, X =>  800, Y =>  600, Depth =>  8 },
     { bios => 773, X => 1024, Y =>  768, Depth =>  8 },
     { bios => 775, X => 1280, Y => 1024, Depth =>  8 },
+    { bios => 777, X => 1600, Y => 1200, Depth =>  8 }, 
     { bios => 784, X =>  640, Y =>  480, Depth => 15 },
     { bios => 787, X =>  800, Y =>  600, Depth => 15 },
     { bios => 790, X => 1024, Y =>  768, Depth => 15 },
     { bios => 793, X => 1280, Y => 1024, Depth => 15 },
+    { bios => 796, X => 1600, Y => 1200, Depth => 15 }, 
     { bios => 785, X =>  640, Y =>  480, Depth => 16 },
     { bios => 788, X =>  800, Y =>  600, Depth => 16 },
     { bios => 791, X => 1024, Y =>  768, Depth => 16 },
     { bios => 794, X => 1280, Y => 1024, Depth => 16 },
+    { bios => 797, X => 1600, Y => 1200, Depth => 16 }, 
 );
 
 sub from_bios {
