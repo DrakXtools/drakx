@@ -449,7 +449,7 @@ sub psUsingHdlist {
 	    $synth = $o_fhdlist;
 	    $synth =~ s/hdlist/synthesis.hdlist/ or $synth = undef;
 	}
-	$synth = "media/media_info/synthesis.$hdlist" unless $synth;
+	$synth ||= "media/media_info/synthesis.$hdlist";
 	install_any::getAndSaveFile($synth, $newsf);
 	$m->{synthesis_hdlist_size} = -s $newsf; #- keep track of size for post-check.
 	-s $newsf > 0 or unlink $newsf;
