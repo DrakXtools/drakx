@@ -152,12 +152,6 @@ sub get_subwizard {
           } else { $module = "" }
       };
 
-      my $offer_to_connect = sub {
-          return "ask_connect_now" if $netc->{internet_cnx_choice} eq 'adsl' && $adsl_devices{$ntf_name};
-          return "ask_connect_now" if member($netc->{internet_cnx_choice}, qw(modem isdn));
-          return "end";
-      };
-      
       my %adsl_devices = (
                           speedtouch => N("Alcatel speedtouch USB modem"),
                           sagem => N("Sagem USB modem"),
@@ -190,6 +184,12 @@ sub get_subwizard {
                               3 => N("CHAP"),
                               4 => N("PAP/CHAP"),
                              );
+      
+      my $offer_to_connect = sub {
+	  return "ask_connect_now" if $netc->{internet_cnx_choice} eq 'adsl' && $adsl_devices{$ntf_name};
+          return "ask_connect_now" if member($netc->{internet_cnx_choice}, qw(modem isdn));
+          return "end";
+      };
     
       # main wizard:
       my $wiz;
@@ -1050,8 +1050,10 @@ You may also enter the IP address of the gateway if you have one."),
                     name => N("Configuration is complete, do you want to apply settings ?"),
                     type => "yesorno",
                     post => sub {
-			require Data::Dumper;
-			output('/etc/sysconfig/drakconnect', Data::Dumper->Dump([$config], ['$p']));
+			if (keys %$config) {
+			    require Data::Dumper;
+			    output('/etc/sysconfig/drakconnect', Data::Dumper->Dump([$config], ['$p']));
+			}
 			"network_on_boot" },
                    },
                    
