@@ -131,7 +131,12 @@ sub doPartitionDisksBefore {
 	install_any::getFile("XXX"); #- close still opened filehandle
 	eval { fs::umount("/tmp/hdimage") };
     }
-    eval { fs::umount_all($o->{fstab}, $o->{prefix}) } if $o->{fstab} && !$::testing && !$::live;
+    eval { 
+	close pkgs::LOG;
+	eval { fs::umount("$o->{prefix}/proc") };
+	eval {          fs::umount_all($o->{fstab}, $o->{prefix}) };
+	eval { sleep 1; fs::umount_all($o->{fstab}, $o->{prefix}) } if $@; #- HACK
+    } if $o->{fstab} && !$::testing && !$::live;
 
     $o->{raid} ||= {};
 }
@@ -249,7 +254,7 @@ sub choosePackages {
     #- not be able to start (xfs at least).
     my $available = install_any::getAvailableSpace($o);
     my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
-    log::l("available size $available (corrected $availableCorrected)");
+    log::l(sprintf "available size %dMB (corrected %dMB)", $available / sqr(1024), $availableCorrected / sqr(1024));
 
     foreach (values %{$packages->[0]}) {
 	pkgs::packageSetFlagSkip($_, 0);

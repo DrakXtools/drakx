@@ -195,9 +195,9 @@ sub extractHeaders($$$) {
 #- a limit to change the approximation to use a linear one.
 #- for information above this point, we have the corrected size below the
 #- original size wich is absurd, this point is named D below.
-my $A = -1.922e-05;
-my $B = 1.18411;
-my $C = 13.2; #- doesn't take hdlist's into account as getAvailableSpace will do it.
+my $A = -1.21568e-05;
+my $B = 1.21561;
+my $C = -23.9889; #- doesn't take hdlist's into account as getAvailableSpace will do it.
 my $D = (-sqrt(sqr($B - 1) - 4 * $A * $C) - ($B - 1)) / 2 / $A; #- $A is negative so a positive solution is with - sqrt ...
 sub correctSize { $_[0] < $D ? ($A * $_[0] + $B) * $_[0] + $C : $_[0] } #- size correction in MB.
 sub invCorrectSize { $_[0] < $D ? (sqrt(sqr($B) + 4 * $A * ($_[0] - $C)) - $B) / 2 / $A : $_[0]; } #- size correction in MB.
@@ -652,7 +652,6 @@ sub readCompssList {
 
     my %done;
     foreach (@$langs) {
-	log::l("readCompssList lang: $_");
 	my $p = packageByName($packages, "locales-$_") or next;
 	foreach ($p, @{$p->{provides} || []}, map { packageByName($packages, $_) } @{$by_lang{$_} || []}) {
 	    next if !$_ || $done{$_}; $done{$_} = 1;

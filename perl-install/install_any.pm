@@ -253,7 +253,7 @@ sub getAvailableSpace_mounted {
     my ($prefix) = @_;
     my $dir = -d "$prefix/usr" ? "$prefix/usr" : "$prefix";
     my (undef, $free) = common::df($dir) or return;
-    log::l("getAvailableSpace_mounted $free");
+    log::l("getAvailableSpace_mounted $free KB");
     $free * 1024 || 1;
 }
 sub getAvailableSpace_raw {
@@ -694,7 +694,7 @@ sub getHds {
 sub log_sizes {
     my ($o) = @_;
     my @df = common::df($o->{prefix});
-    log::l(sprintf "Installed: %dMB(df), %dMB(rpm)", ($df[0] - $df[1]) / 1024, sum(`rpm --root $o->{prefix} -qa --queryformat "%{size}\n"`) / sqr(1024));
+    log::l(sprintf "Installed: %dMB(df), %dMB(rpm)", ($df[0] - $df[1]) / 1024, sum(`rpm --root $o->{prefix} -qa --queryformat "%{size}\n"`) / sqr(1024)) if -x "$o->{prefix}/bin/rpm";
 }
 
 1;

@@ -223,6 +223,7 @@ sub mount($$$;$) {
 #- takes the mount point to umount (can also be the device)
 sub umount($) {
     my ($mntpoint) = @_;
+    $mntpoint =~ s|/$||;
     log::l("calling umount($mntpoint)");
     syscall_('umount', $mntpoint) or die _("error unmounting %s: %s", $mntpoint, "$!");
 

@@ -88,7 +88,7 @@ xfs => __("Starts and stops the X Font Server at boot time and shutdown."),
 sub services {
     my ($prefix) = @_;
     my $cmd = $prefix ? "chroot $prefix" : "";
-    my @l = map { [ /(\S+)/, /:on/ ] } sort `LANGUAGE=C $cmd chkconfig --list`;
+    my @l = map { [ /([^\s:]+)/, /\bon\b/ ] } grep { !/:$/ } sort `LANGUAGE=C $cmd chkconfig --list`;
     [ map { $_->[0] } @l ], [ mapgrep { $_->[1], $_->[0] } @l ];
 }
 

@@ -270,6 +270,7 @@ sub doPartitionDisks {
 }
 
 sub formatPartitions {
+    $o->{steps}{choosePackages}{done} = 0;
     unless ($o->{isUpgrade}) {
 	$o->choosePartitionsToFormat($o->{fstab});
 	$o->formatMountPartitions($o->{fstab}) unless $::testing;

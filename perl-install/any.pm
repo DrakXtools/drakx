@@ -251,12 +251,9 @@ sub setAutologin {
 sub writeandclean_ldsoconf {
     my ($prefix) = @_;
     my $file = "$prefix/etc/ld.so.conf";
-
-    log::l("before: ", cat_($file));
     output $file,
       grep { !m|^(/usr)?/lib$| } #- no need to have /lib and /usr/lib in ld.so.conf
 	uniq cat_($file), "/usr/X11R6/lib\n";
-    log::l("after: ", cat_($file));
 }
 
 sub shells {

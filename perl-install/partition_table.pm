@@ -486,6 +486,7 @@ sub active($$) {
 
     $_->{active} = 0 foreach @{$hd->{primary}{normal}};
     $part->{active} = 0x80;
+    hd->{isDirty} = 1;
 }
 
 
