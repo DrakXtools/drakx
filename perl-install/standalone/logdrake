@@ -374,7 +374,7 @@ sub logcolorize {
 #    log_output (Gtk2::TextView, [ [ ... ] ])
 sub log_output {
     my ($text, $font, $col) = @_;
-    my $tag = join($font, $col);
+    my $tag = join('', $font, $col);
     push @logs, [ $text, $tag ];
     $tags{$tag} ||= { if_($font, font => $font), foreground => $col };
 }
