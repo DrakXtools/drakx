@@ -131,6 +131,7 @@ our %l = (
         qw(snd-fm801 snd-hdsp snd-ice1712 snd-ice1724 snd-intel8x0 snd-korg1212 snd-maestro3),
 	   qw(snd-nm256 snd-rme96 snd-rme32 snd-opl3sa2 snd-sb16 snd-sgalaxy snd-sonicvibes),
         qw(snd-trident audio snd-via82xx snd-vx222 snd-wavefront snd-ymfpci),
+        qw(snd-au8810 snd-au8820 snd-au8830),
       ),
     ],
     tv => [ qw(bttv cpia_usb ibmcam mod_quickcam ov511 ov518_decomp ultracam usbvideo cyber2000fb saa7134) ],
