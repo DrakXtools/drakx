@@ -196,17 +196,7 @@ sub prepare_write_fstab {
     my ($all_hds, $prefix, $keep_smb_credentials) = @_;
     $prefix ||= '';
 
-    my @l1 = (fsedit::get_really_all_fstab($all_hds), @{$all_hds->{special}});
-    my @l2 = read_fstab($prefix, "/etc/fstab", 'all_options');
-
-    {
-	#- remove entries from @l2 that are given by @l1
-	#- this is needed to allow to unset a mount point
-	my %new; 
-	$new{$_->{device}} = 1 foreach @l1;
-	delete $new{none}; #- special case for device "none" which can be _mounted_ more than once
-	@l2 = grep { !$new{$_->{device}} } @l2;
-    }
+    my @l_in = (fsedit::get_really_all_fstab($all_hds), @{$all_hds->{special}});
 
     my %new;
     my @smb_credentials;
@@ -270,7 +260,7 @@ sub prepare_write_fstab {
 	} else {
 	    ()
 	}
-    } grep { $_->{device} && ($_->{mntpoint} || $_->{real_mntpoint}) && $_->{type} } (@l1, @l2);
+    } grep { $_->{device} && ($_->{mntpoint} || $_->{real_mntpoint}) && $_->{type} } @l_in;
 
     join('', map { $_->[1] } sort { $a->[0] cmp $b->[0] } @l), \@smb_credentials;
 }
