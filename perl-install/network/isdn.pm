@@ -279,7 +279,7 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
     $e = $in->ask_from_listf(N("ISDN Configuration"),
 			     N("Which of the following is your ISDN card?"),
 			     sub { $_[0]{description} },
-			     [ grep { $_->{card} eq $isdn->{card_type} } @isdn::isdndata ]) or goto isdn_ask_step_1;
+			     [ grep { $_->{card} eq $isdn->{card_type} } @isdndata ]) or goto isdn_ask_step_1;
     $e->{$_} and $isdn->{$_} = $e->{$_} foreach qw(driver type mem io io0 io1 irq firmware);
 
   isdn_ask_step_3:
@@ -327,12 +327,12 @@ sub isdn_detect_backend {
 }
 
 sub isdn_get_list() {
-    map { $_->{description} } @isdn::isdndata;
+    map { $_->{description} } @isdndata;
 }
 
 sub isdn_get_info {
     my ($desc) = @_;
-    foreach (@isdn::isdndata) {
+    foreach (@isdndata) {
 	return $_ if $_->{description} eq $desc;
     }
 }
