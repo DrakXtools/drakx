@@ -150,34 +150,35 @@ my @yesno_choices    = qw(yes no default ignore);
 my @alllocal_choices = qw(ALL LOCAL NONE default);
 my @all_choices = (@yesno_choices, @alllocal_choices);
 my %options_values;
+my $help_msg = N("The following options can be set to customize your\nsystem security. If you need an explanation, look at the help tooltip.\n");
 
 foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ]) {
     my ($domain, $label) = @$_;
     my %values;
-    $notebook->append_page(gtkshow(create_scrolled_window(gtkpack(new Gtk2::VBox(0, 0),
-                                                                  new Gtk2::Label(N("The following options can be set to customize your\nsystem security. If you need an explanation, look at the help tooltip.\n")),
-                                                                  create_packtable($common_opts,
-                                                                                   map {
-                                                                                       my $i = $_;
-
-                                                                                       my $entry;
-                                                                                       my $default = $msec->get_function_default($i);
-                                                                                       if (member($default, @all_choices)) {
-                                                                                           $values{$i} = new_editable_combo();
-                                                                                           $entry = $values{$i}->entry;
-                                                                                           if (member($default, @yesno_choices)) {
-                                                                                               $values{$i}->set_popdown_strings(@yesno_choices);
-                                                                                           } elsif (member($default, @alllocal_choices)) {
-                                                                                               $values{$i}->set_popdown_strings(@alllocal_choices);
+    $notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0, 0),
+                                                                   0, new Gtk2::Label($help_msg),
+                                                                   1, create_packtable($common_opts,
+                                                                                       map {
+                                                                                           my $i = $_;
+                                                                                           
+                                                                                           my $entry;
+                                                                                           my $default = $msec->get_function_default($i);
+                                                                                           if (member($default, @all_choices)) {
+                                                                                               $values{$i} = new_editable_combo();
+                                                                                               $entry = $values{$i}->entry;
+                                                                                               if (member($default, @yesno_choices)) {
+                                                                                                   $values{$i}->set_popdown_strings(@yesno_choices);
+                                                                                               } elsif (member($default, @alllocal_choices)) {
+                                                                                                   $values{$i}->set_popdown_strings(@alllocal_choices);
+                                                                                               }
+                                                                                           } else {
+                                                                                               $values{$i} = new Gtk2::Entry();
+                                                                                               $entry = $values{$i};
                                                                                            }
-                                                                                       } else {
-                                                                                           $values{$i} = new Gtk2::Entry();
-                                                                                           $entry = $values{$i};
-                                                                                       }
-                                                                                       $entry->set_text($msec->get_function_value($i));
-                                                                                       set_default_tip($entry, $default, $i);
-                                                                                       [ new Gtk2::Label($i), $values{$i} ];
-                                                                                   } sort $msec->get_functions($domain))))),
+                                                                                           $entry->set_text($msec->get_function_value($i));
+                                                                                           set_default_tip($entry, $default, $i);
+                                                                                           [ new Gtk2::Label($i), $values{$i} ];
+                                                                                       } sort $msec->get_functions($domain))))),
                            new Gtk2::Label($label));
     $options_values{$domain} = \%values;
 }
@@ -185,20 +186,20 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
 ######################## PERIODIC CHECKS ###################################
 my %security_checks_value;
 
-$notebook->append_page(gtkshow(create_scrolled_window(gtkpack(new Gtk2::VBox(0, 0),
-                                                              new Gtk2::Label(N("The following options can be set to customize your\nsystem security. If you need an explanation, click on Help.\n")),
-                                                              create_packtable($common_opts,
-                                                                               map {
-                                                                                   unless (member(qw(MAIL_WARN MAIL_USER), $_)) {
-                                                                                       my $i = $_;
-                                                                                       $security_checks_value{$i} = new_editable_combo();
-                                                                                       my $entry = $security_checks_value{$i}->entry;
-                                                                                       set_default_tip($entry, $msec->get_check_default, $i);
-                                                                                       $security_checks_value{$i}->set_popdown_strings(qw(yes no default));
-                                                                                       $entry->set_text($msec->get_check_value($i));
-                                                                                       [ gtkshow(new Gtk2::Label(translate($i))), $security_checks_value{$i} ];
-                                                                                   } else { undef }
-                                                                               } sort $msec->get_default_checks)))),
+$notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0, 0),
+                                                               0, new Gtk2::Label($help_msg),
+                                                               1, create_packtable($common_opts,
+                                                                                   map {
+                                                                                       unless (member(qw(MAIL_WARN MAIL_USER), $_)) {
+                                                                                           my $i = $_;
+                                                                                           $security_checks_value{$i} = new_editable_combo();
+                                                                                           my $entry = $security_checks_value{$i}->entry;
+                                                                                           set_default_tip($entry, $msec->get_check_default, $i);
+                                                                                           $security_checks_value{$i}->set_popdown_strings(qw(yes no default));
+                                                                                           $entry->set_text($msec->get_check_value($i));
+                                                                                           [ gtkshow(new Gtk2::Label(translate($i))), $security_checks_value{$i} ];
+                                                                                       } else { undef }
+                                                                                   } sort $msec->get_default_checks)))),
                        new Gtk2::Label(N("Periodic Checks")));
 
 
