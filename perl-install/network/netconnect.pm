@@ -307,7 +307,7 @@ sub real_main {
                              ({ label => N("Account Login (user name)"), val => \$isdn->{login} },
                               { label => N("Account Password"),  val => \$isdn->{passwd}, hidden => 1 },
                              )
-                            ],
+                            ];
                             },
                     post => sub {
                         network::isdn::write_config($isdn);
@@ -508,7 +508,7 @@ Take a look at http://www.linmodems.org"),
                     name => N("Select the modem to configure:"),
                     data => sub {
                         [ { label => N("Modem"), type => "list", val => \$modem_name, allow_empty_list => 1,
-                            list => [ keys %{$netc->{autodetect}{modem}}, N("Manual choice") ], } ],
+                            list => [ keys %{$netc->{autodetect}{modem}}, N("Manual choice") ], } ];
                     },
                     post => sub {
                         $modem ||= $netcnx->{modem} ||= {};
@@ -561,7 +561,7 @@ Take a look at http://www.linmodems.org"),
                     interactive_help_id => 'selectSerialPort',
                     data => sub {
                         [ { val => \$modem->{device}, format => \&mouse::serial_port2text, type => "list",
-                            list => [ grep { $_ ne $o_mouse->{device} } (mouse::serial_ports(), grep { -e $_ } '/dev/modem', '/dev/ttySL0', '/dev/ttyS14',) ] } ],
+                            list => [ grep { $_ ne $o_mouse->{device} } (mouse::serial_ports(), grep { -e $_ } '/dev/modem', '/dev/ttySL0', '/dev/ttyS14',) ] } ];
                         },
                     post => sub {
                         $ntf_name = $modem->{device};
@@ -625,7 +625,7 @@ Take a look at http://www.linmodems.org"),
                              { label => N("Password"), val => \$modem->{passwd}, hidden => 1 },
                              { label => N("Authentication"), val => \$modem->{Authentication}, 
                                list => [ sort keys %ppp_auth_methods ], format => sub { $ppp_auth_methods{$_[0]} } },
-                            ],
+                            ];
                         },
                     next => "ppp_ip",
                    },
@@ -884,7 +884,7 @@ If you do not know, choose 'use PPPoE'"),
                                format => sub { $encapsulations{$_[0]} }, advanced => 1,
                              },
                             ),
-                        ],
+                        ];
                     },
                     post => sub {
                         $netc->{internet_cnx_choice} = 'adsl';
@@ -1015,7 +1015,7 @@ notation (for example, 1.2.3.4).")),
                               { label => N("DHCP client"), val => \$netc->{dhcp_client}, 
                                 list => [ qw(dhcp-client dhcpcd pump dhcpxd) ], advanced => 1 },
                              ),
-                        ],
+                        ];
                     },
                     complete => sub {
                         $ethntf->{BOOTPROTO} = $auto_ip ? "dhcp" : "static";
@@ -1068,7 +1068,7 @@ notation (for example, 1.2.3.4).")),
                              { label => N("Sensitivity threshold"), val => \$ethntf->{WIRELESS_SENS}, advanced => 1 },
                              { label => N("Bitrate (in b/s)"), val => \$ethntf->{WIRELESS_RATE}, advanced => 1 },
                              { label => N("Encryption key"), val => \$ethntf->{WIRELESS_ENC_KEY} },
-                            ],
+                            ];
                     },
                     complete => sub {
                         if ($ethntf->{WIRELESS_FREQ} && $ethntf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
@@ -1209,7 +1209,7 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                                     format => sub { $all_eth_intf{$_[0]} } },
                                  ),
                              ),
-                        ],
+                        ];
                     },
                     complete => sub {
                         foreach my $dns (qw(dnsServer dnsServer2 dnsServer3)) {
