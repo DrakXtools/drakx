@@ -46,9 +46,12 @@ delete @help{0,1,5} unless $::expert;
 
 begin:
 $::isEmbedded and kill USR2, $::CCPID;
+
+$secure_level = ${{ getVarsFromSh("/etc/profile") }}{SECURE_LEVEL} || $ENV{SECURE_LEVEL} || 2;
+
 if (my $level = $in->ask_from_list('', _("Choose security level") . "\n\n" . 
 				   join('', map { "$l{$_}: $help{$_}\n\n" } keys %l), 
-				   [ values %l ], $l{$ENV{SECURE_LEVEL}})) {
+				   [ values %l ], $l{$secure_level})) {
     my $w = $in->wait_message('', _("Setting security level"));
     $in->suspend;
 
