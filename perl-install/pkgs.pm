@@ -355,7 +355,7 @@ sub unselectAllPackages($) {
 sub urpmidir {
     my ($prefix) = @_;
     my $v = "$prefix/var/lib/urpmi";
-    -l $v && !-e _ and unlink $v and mkdir $v, 0755; #- dangling symlink
+#    -l $v && !-e _ and unlink $v and mkdir $v, 0755; #- dangling symlink
     -w $v ? $v : '/tmp';
 }
 

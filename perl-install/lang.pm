@@ -533,7 +533,7 @@ my %IM_config =
                XIM_PROGRAM => 'chinput',
                XMODIFIERS => '@im=Chinput',
                },
-   fctix => {
+   fcitx => {
              XIM => 'fcitx',
              XIM_PROGRAM => 'fcitx',
              XMODIFIERS => '@im=fcitx',
