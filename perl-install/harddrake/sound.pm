@@ -7,9 +7,8 @@ package harddrake::sound;
 #    o pci cards: ad1889,
 # No OSS for ALSA's
 #    o pci cards: snd-als4000, snd-es968, snd-hdsp
-#    o isa cards: snd-azt2320, snd-cs4231,
-#      snd-cs4236, snd-dt0197h, snd-es18xx,snd-es1688,
-#      snd-korg1212, snd-rme32, snd-rme96
+#    o isa cards: snd-azt2320, snd-cs4231, snd-cs4236, 
+#      snd-dt0197h, snd-korg1212, snd-rme32, snd-rme96
 #    o usb cards: snd-usb-audio
 
 # TODO: 
@@ -46,11 +45,11 @@ my %alsa2oss =
      "snd-emu10k1" => [ "audigy", "emu10k1" ],
      "snd-ens1370" => [ "es1370" ],
      "snd-ens1371" => [ "es1371" ],
-     "snd-es1688"  => [ "unknown" ], # isa
-     "snd-es18xx"  => [ "unknown" ], # isa
+     "snd-es1688"  => [ "sb" ], # isa
+     "snd-es18xx"  => [ "sb" ], # isa
      "snd-es1938"  => [ "esssolo1" ],
      "snd-es1968"  => [ "maestro" ], # isa
-     "snd-es968"   => [ "unknown" ],
+     "snd-es968"   => [ "sb" ],
      "snd-fm801"   => [ "forte" ],
      "snd-gusclassic" => [ "gus" ], # isa
      "snd-gusextreme" => [ "gus" ], # isa
@@ -115,7 +114,7 @@ my %oss2alsa =
      "pas2"    => [ "unknown" ],
      "pss" => [ "snd-ad1848" ],
      "rme96xx" => [ "snd-rme9652" ],
-     "sb"      => [ "snd-als100", "snd-cmi8330", "snd-sb8", "snd-sb16" ],
+     "sb"      => [ "snd-als100", "snd-cmi8330", "snd-es1688", "snd-es18xx", "snd-es968", "snd-sb8", "snd-sb16" ],
      "sgalaxy" => [ "snd-sgalaxy" ],
      "sonicvibes" => [ "snd-sonicvibes" ],
      "sscape"  => [ "snd-sb16" ],
