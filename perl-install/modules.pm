@@ -428,6 +428,10 @@ sub when_load {
     if ($type =~ /\bscsi\b/ || $type eq $type_aliases{scsi}) {
 	add_alias('scsi_hostadapter', $name), eval { load('sd_mod') };
     }
+    if ($type eq 'sound') {
+	#- mainly for ppc
+	add_alias('sound-slot-0', $name);
+    }
     if ($name =~ /^snd-card-/) {
 	load('snd-pcm-oss', 'prereq');
     }
@@ -455,11 +459,6 @@ sub load {
     if ($type eq 'net') {
 	add_alias($_, $name) foreach difference2([ detect_devices::getNet() ], \@netdev);
     }
-
-    if ($type eq 'sound' && arch() =~ /ppc/) {
-	add_alias($type, $name);
-    }
-        	
     when_load($name, $type, @options);
 }
 sub load_multi {
