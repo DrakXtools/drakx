@@ -100,7 +100,7 @@ Try to reconfigure your connection.");
     $up;
 }
 
-sub connect_backend() { run_program::rooted($prefix, "$connect_prog &") }
+sub connect_backend() { run_program::rooted($prefix, "$connect_file &") }
 
 sub disconnect_backend() { run_program::rooted($prefix, "$disconnect_file &") }
 
@@ -109,7 +109,6 @@ sub read_providers_backend { my ($file) = @_; map { /(.*?)=>/ } catMaybeCompress
 sub ask_info2 {
     my ($cnx, $netc) = @_;
     
-#    $::isInstall and $in->set_help('configureNetworkDNS');
     $in->ask_from(N("Connection Configuration"),
 		  N("Please fill or check the field below"),
 		  [
