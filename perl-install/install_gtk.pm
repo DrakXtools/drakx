@@ -114,7 +114,7 @@ sub create_steps_window {
 
     my $w = bless {}, 'ugtk2';
     $w->{rwindow} = $w->{window} = Gtk2::Window->new('toplevel');
-    $w->{rwindow}->set_uposition(0, 0);
+    $w->{rwindow}->set_uposition(0, 100);
     $w->{rwindow}->set_size_request($::stepswidth, $::stepsheight);
     $w->{rwindow}->set_name('Steps');
     $w->{rwindow}->set_title('skip');
@@ -142,7 +142,7 @@ sub create_logo_window {
 
     my $w = bless {}, 'ugtk2';
     $w->{rwindow} = $w->{window} = Gtk2::Window->new('toplevel');
-    $w->{rwindow}->set_uposition($::stepswidth, 0);
+    $w->{rwindow}->set_uposition(0, 0);
     $w->{rwindow}->set_size_request($::logowidth, $::logoheight);
     $w->{rwindow}->set_name("logo");
     $w->{rwindow}->set_title('skip');
@@ -167,7 +167,7 @@ sub init_sizes() {
     $::live and $::rootheight -= 80;
     #- ($::rootheight,  $::rootwidth)    = (min(768, $::rootheight), min(1024, $::rootwidth));
     ($::stepswidth,  $::stepsheight)  = (160, $::rootheight);
-    ($::logowidth,   $::logoheight)   = ($::rootwidth - $::stepswidth, 40);
+    ($::logowidth,   $::logoheight)   = (500, 40);
     ($::helpwidth,   $::helpheight)   = ($::rootwidth - $::stepswidth, 0);
     ($::windowwidth, $::windowheight) = ($::rootwidth - $::stepswidth, $::rootheight - $::helpheight - $::logoheight);
 }
