@@ -1376,7 +1376,7 @@ Click on Ok to keep your configuration, or cancel to reconfigure your Internet &
                          mouse => $mouse,
                          intf  => $intf,
                         };
-          wizards->new->safe_process($wiz, $in);
+          wizards->new->process($wiz, $in);
       }
 
     # install needed packages:
@@ -1391,7 +1391,9 @@ sub main {
     eval { real_main('', , $netcnx, $in, $modules_conf, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) };
     my $err = $@;
     if ($err) { # && $in->isa('interactive::gtk')
-        local $::isEmbedded = 0; # to prevent sub window embedding
+	$err =~ /wizcancel/ and $in->exit(0);
+
+	local $::isEmbedded = 0; # to prevent sub window embedding
         local $::isWizard = 0 if !$::isInstall; # to prevent sub window embedding
         #err_dialog(N("Error"), N("An unexpected error has happened:\n%s", $err));
         $in->ask_warn(N("Error"), N("An unexpected error has happened:\n%s", $err));
