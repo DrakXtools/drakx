@@ -59,7 +59,7 @@ foreach my $img (@images) {
     my ($type, $I, $extension) = $img =~ m!([^/]*)(64)?\.([^.]*)$!;
 
     if ($img =~ /hd_grub/) {
-	hd_grub($tmp_mnt, $img);
+	hd_grub($img);
     } elsif ($img =~ /isolinux/) {
 	isolinux($main, @kernels);
 
@@ -81,7 +81,7 @@ foreach my $img (@images) {
 	initrd($tmp_mnt_initrd, $type, $I, "$img-$_") foreach @kernels;
     } elsif ($extension eq 'img') {
 	print STDERR "calling boot_img_$arch for $img\n";
-	$::{"boot_img_$arch"}->($tmp_mnt, $type, $I, "$img-$_", "kernel/all.kernels/$_/vmlinuz") foreach @kernels_BOOT;
+	$::{"boot_img_$arch"}->($type, $I, "$img-$_", "kernel/all.kernels/$_/vmlinuz") foreach @kernels_BOOT;
 	rename("$img-$main_BOOT", $img);
     } else {
 	die "unknown image $img";
@@ -246,36 +246,36 @@ sub syslinux_cfg_all {
 }
 
 sub boot_img_i386 {
-    my ($mnt, $type, $I, $img, $kernel) = @_;
+    my ($type, $I, $img, $kernel) = @_;
 
-    __ "$sudo umount $mnt 2>/dev/null";
+    __ "$sudo umount $tmp_mnt 2>/dev/null";
 
     _ "dd if=/dev/zero of=$img bs=1k count=" . ($type eq 'all' ? 2880 : 1440);
     _ "mkdosfs -f 1 -r 16 -s 2 $img"; # keep the FAT bookkeeping as small as possible
     _ "$sudo syslinux-graphic $img";
 
-    _ "$sudo mount -t vfat -o umask=0 $img $mnt -o loop";
-    _ "cat $kernel > $mnt/vmlinuz";
-    _ "lilo-bmp2mdk file:isolinux-graphic-simple.bmp >$mnt/boot.msg";
+    _ "$sudo mount -t vfat -o umask=0 $img $tmp_mnt -o loop";
+    _ "cat $kernel > $tmp_mnt/vmlinuz";
+    _ "lilo-bmp2mdk file:isolinux-graphic-simple.bmp >$tmp_mnt/boot.msg";
 
-    output("$mnt/help.msg", syslinux_msg('help.msg.xml'));
-    output("$mnt/advanced.msg", syslinux_msg('advanced.msg.xml'));
+    output("$tmp_mnt/help.msg", syslinux_msg('help.msg.xml'));
+    output("$tmp_mnt/advanced.msg", syslinux_msg('advanced.msg.xml'));
 
     (my $rdz = $img) =~ s/\.img/.rdz/;
     (my $initrd_type = $type) =~ s/-changedisk//;
     initrd($tmp_mnt_initrd, $initrd_type, $I, $rdz);
     my $short_type = substr($type, 0, 8);
 
-    output("$mnt/syslinux.cfg", 
+    output("$tmp_mnt/syslinux.cfg", 
 	   syslinux_cfg(map {
 			    { kernel => 'vmlinuz', initrd => "$short_type.rdz", %$_ };
 			} entries_append($type)));
 
-    eval { _ "cp -f $rdz $mnt/$short_type.rdz" };
+    eval { _ "cp -f $rdz $tmp_mnt/$short_type.rdz" };
     if ($@) {
 	#- argh not enough room, try to suggest how to solve this
-	unlink "$mnt/$short_type.rdz";
-	my $avail = (split ' ', `df $mnt`)[-3];
+	unlink "$tmp_mnt/$short_type.rdz";
+	my $avail = (split ' ', `df $tmp_mnt`)[-3];
 	my $s = int((-s $rdz) / 1024);
 
 	my ($ext) = $img =~ /\.img-(.*)/ or die "bad initrd name ($img)";
@@ -294,45 +294,45 @@ sub boot_img_i386 {
     unlink $rdz;
 
     _ "sync";
-    _ "df $mnt";
-    _ "$sudo umount $mnt";
+    _ "df $tmp_mnt";
+    _ "$sudo umount $tmp_mnt";
 }
 
 # alias to x86 variant, slightly bigger with images though
 sub boot_img_x86_64 { &boot_img_i386 }
 
 sub boot_img_alpha {
-    my ($mnt, $type, $I, $img) = @_;
+    my ($type, $I, $img) = @_;
 
-    __ "$sudo umount $mnt 2>/dev/null";
+    __ "$sudo umount $tmp_mnt 2>/dev/null";
     _ "dd if=/dev/zero of=$img bs=1k count=1440";
     mke2fs($img);
     _ "/sbin/e2writeboot $img /boot/bootlx";
-    _ "$sudo mount -t ext2 $img $mnt -o loop";
-    _ "cp -f vmlinux.gz $mnt";
-    -f "$type.rdz" ? _ "cp -f $type.rdz $mnt" : initrd($tmp_mnt_initrd, $type, $I, "$mnt/$type.rdz");
+    _ "$sudo mount -t ext2 $img $tmp_mnt -o loop";
+    _ "cp -f vmlinux.gz $tmp_mnt";
+    -f "$type.rdz" ? _ "cp -f $type.rdz $tmp_mnt" : initrd($tmp_mnt_initrd, $type, $I, "$tmp_mnt/$type.rdz");
 
-    mkdir "$mnt/etc", 0777;
-    output("$mnt/etc/aboot.conf", 
+    mkdir "$tmp_mnt/etc", 0777;
+    output("$tmp_mnt/etc/aboot.conf", 
 "0:vmlinux.gz initrd=$type.rdz rw $default_append $type
 1:vmlinux.gz initrd=$type.rdz rw $default_append text $type
 ");
     _ "sync";
-    _ "df $mnt";
+    _ "df $tmp_mnt";
 }
 
 sub boot_img_ia64 {
-    my ($mnt, $type, $_I, $img, $kernel) = @_;
+    my ($type, $_I, $img, $kernel) = @_;
 	my $rdz = $img; $rdz =~ s/\.img/.rdz/;
 
-    __ "$sudo umount $mnt 2>/dev/null";
+    __ "$sudo umount $tmp_mnt 2>/dev/null";
     _ "dd if=/dev/zero of=$img bs=1k count=16384";
     _ "mkdosfs $img";
-    _ "$sudo mount -t vfat $img $mnt -o loop,umask=000";
-    _ "$sudo cp -f $kernel $mnt/vmlinux";
-    _ "cp -f $rdz $mnt/$type.rdz";
-    _ "$sudo cp -f tools/ia64/elilo.efi $mnt";
-	output("$mnt/elilo.conf", qq(
+    _ "$sudo mount -t vfat $img $tmp_mnt -o loop,umask=000";
+    _ "$sudo cp -f $kernel $tmp_mnt/vmlinux";
+    _ "cp -f $rdz $tmp_mnt/$type.rdz";
+    _ "$sudo cp -f tools/ia64/elilo.efi $tmp_mnt";
+	output("$tmp_mnt/elilo.conf", qq(
 prompt
 timeout=50
 
@@ -348,12 +348,12 @@ image=vmlinux
         append=" rescue ramdisk_size=120000"
 "));
     _ "sync";
-    _ "df $mnt";
+    _ "df $tmp_mnt";
 
 }
 
 sub boot_img_sparc {
-    my ($mnt, $type, $I, $_img) = @_;
+    my ($type, $I, $_img) = @_;
     if ($type =~ /^live(.*)/) {
 	#- hack to produce directly into /export the needed file for cdrom boot.
 	my $dir = "/export";
@@ -453,7 +453,7 @@ To Build a Bootable CD-ROM, try:
 	_ "cp -f vmlinux$1.aout $dir/$boot/$type.img";
     } else {
 	my $dir = "floppy";
-	__ "$sudo umount $mnt 2>/dev/null";
+	__ "$sudo umount $tmp_mnt 2>/dev/null";
 	_ "rm -rf $dir";
 	_ "mkdir -p $dir";
 	_ "cp -f /boot/fd.b /boot/second.b $dir";
@@ -478,13 +478,13 @@ image=/vmlinux$I.gz
   append="ramdisk_size=128000 $type"
 "));
 	_ "genromfs -d $dir -f /dev/ram -A 2048,/.. -a 512 -V 'DrakX boot disk'";
-	_ "$sudo mount -t romfs /dev/ram $mnt";
-	_ "silo -r $mnt -F -i /fd.b -b /second.b -C /silo.conf";
-	_ "$sudo umount $mnt";
+	_ "$sudo mount -t romfs /dev/ram $tmp_mnt";
+	_ "silo -r $tmp_mnt -F -i /fd.b -b /second.b -C /silo.conf";
+	_ "$sudo umount $tmp_mnt";
 	_ "dd if=/dev/ram of=$type.img bs=1440k count=1";
 	_ "sync";
-	_ "$sudo mount -t romfs /dev/ram $mnt";
-	_ "df $mnt";
+	_ "$sudo mount -t romfs /dev/ram $tmp_mnt";
+	_ "df $tmp_mnt";
     }
 }
 
@@ -771,19 +771,19 @@ sub isolinux_move {
 }
 
 sub hd_grub {
-    my ($mnt, $img) = @_;
+    my ($img) = @_;
     my $mapfile = '/tmp/device.map.tmp';
 
     my @grub_files = map { "/boot/grub/$_" } qw(stage1 stage2);
     my $size = 40_000 + sum(map { -s $_ } @grub_files);
 
-    __ "$sudo umount $mnt 2>/dev/null";
+    __ "$sudo umount $tmp_mnt 2>/dev/null";
     _ "dd if=/dev/zero of=$img bs=1 count=$size";
     _ "mkdosfs $img";
-    _ "$sudo mount -t vfat -o umask=0 $img $mnt -o loop";
-    _ "cp @grub_files $mnt";
+    _ "$sudo mount -t vfat -o umask=0 $img $tmp_mnt -o loop";
+    _ "cp @grub_files $tmp_mnt";
 
-    output("$mnt/menu.lst", <<EOF);
+    output("$tmp_mnt/menu.lst", <<EOF);
 timeout 10
 default 0
 fallback 1
@@ -811,7 +811,7 @@ pause .
 pause HELP END
 EOF
 
-    _ "$sudo umount $mnt";
+    _ "$sudo umount $tmp_mnt";
 
     output($mapfile, "(fd0) $img\n");
 
