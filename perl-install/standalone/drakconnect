@@ -414,7 +414,7 @@ sub build_notebook {
 	    $gui->{description} = $interface eq 'speedtouch' ? 'Alcatel|USB ADSL Modem (Speed Touch)' : 'Analog Devices Inc.|USB ADSL modem';
 	}
 	gtkpack_($gui->{sheet}{Account} = Gtk2::VBox->new(0,0),
-		 if_($interface eq 'ipp0',
+		 if_($interface eq 'ippp0',
 		     0, gtkpack_(Gtk2::VBox->new(0,0),
 				 1, Gtk2::Label->new(N("Authentication")),
 				 0, $gui->{intf}{auth} = gtksignal_connect(Gtk2::OptionMenu->new,
