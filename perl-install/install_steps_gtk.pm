@@ -346,7 +346,7 @@ sub choosePackagesTree {
 				my $set_state = shift @_;
 				my $isSelection = 0;
 				my %l = map { my $p = pkgs::packageByName($packages, $_);
-					      $p->flag_selected or ++$isSelection;
+					      $isSelection ||= !$p->flag_selected;
 					      $p->id => 1 } @_;
 				my $state = $packages->{state} ||= {};
 				my @l = $isSelection ? $packages->resolve_requested($packages->{rpmdb}, $state, \%l,
@@ -391,8 +391,8 @@ sub choosePackagesTree {
 							   N("The following packages are going to be removed"),
 							       formatList(20, sort(map { $_->name } @l)) ], 1) or $error = ''; #- defined
 				}
-				$error and $o->ask_warn('', $error);
 				if (defined $error) {
+				    $o->ask_warn('', $error) if $error;
 				    #- disable selection (or unselection).
 				    $isSelection ? $packages->disable_selected($packages->{rpmdb}, $state, @l) :
 				                   $packages->resolve_requested($packages->{rpmdb}, $state, \%l,
