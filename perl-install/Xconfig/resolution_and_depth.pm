@@ -71,7 +71,7 @@ sub to_string {
     my ($resolution) = @_;
     $resolution or return;
 
-    sprintf("%sx%s %dbpp", @$resolution{'X', 'Y', 'Depth'});
+    $resolution->{X} ? sprintf("%sx%s %dbpp", @$resolution{'X', 'Y', 'Depth'}) : 'frame-buffer';
 }
 
 sub allowed {
