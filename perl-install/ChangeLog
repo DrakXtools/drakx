@@ -1,3 +1,125 @@
+2003/02/17  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/nl.po, share/po/da.po, share/po/ta.po, share/po/sv.po,
+	share/po/fi.po: updated Arabic, Dutch, Danish, Finnish, Swedish and
+	Tamil files
+
+	* standalone/harddrake2: correction for non-latin1 locales,
+	made strings "Unknown" and "unknown" translatable in device info
+
+	* share/po/ru.po: updated Russian and Arabic files
+
+	* share/po/ar.po: updated Russian and Arabic files
+	updated Arabic, Dutch, Danish, Finnish, Swedish and Tamil files
+
+	* lang.pm: synchrnoization of locale names with what we ship.
+	updated list of available kde langs
+
+2003/02/17  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm: add module2description()
+
+	* diskdrake/hd_gtk.pm: fix help popping all the time
+
+	* ugtk2.pm: hopefully final fix for pop_it
+	fix setting pop_it for wizard in standalone
+
+	* interactive/gtk.pm: also ->hide in when a button is clicked in
+	standalone
+
+	* Xconfig/card.pm: use fbdev when the graphic card is unknown
+
+	* install_steps_gtk.pm: enhance summary layout
+
+	* install_steps_interactive.pm: better sound card description in summary
+
+	* install2.pm: don't security::various::config_security_user() can fail,
+	don't let it bother us
+
+	* Xconfig/monitor.pm: warn when auto conf fail
+
+	* Xconfig/xfree.pm (get_both): fix typo
+
+	* Xconfig/xfree3.pm (is_fbdev): fix typo
+
+	* Xconfig/resolution_and_depth.pm (to_string): simpler way to handle the
+	"default" resolution of frame-buffer
+
+2003/02/17  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/main.pm: 
+	  - Fixed bug of HP DeskJetb 990C being automatically installed even if
+	there is already a queue for it
+	  - Fixed checking whether a device is known to CUPS
+	  - Restructured function "main()"
+	  - Made automatic queue setup being done during installation
+	  - Support for unknown printers in auto-detection and in automatic
+	queue
+	  setup
+	  - Fixed determination of default printer
+	  - Fixed printer help page display
+	  - Fixed wait message in /usr/sbin/printerdrake
+
+	* printer/detect.pm, printer/data.pm, standalone/printerdrake,
+	printer/printerdrake.pm: 
+	  - Restructured function "main()"
+	  - Made automatic queue setup being done during installation
+	  - Support for unknown printers in auto-detection and in automatic
+	queue
+	setup
+	  - Fixed determination of default printer
+	  - Fixed printer help page display
+	  - Fixed wait message in /usr/sbin/printerdrake
+
+	* drakxtools.spec: 9.1-0.31mdk
+
+2003/02/17  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* network/netconnect.pm, network/ethernet.pm, standalone/drakconnect: perl
+	generate undef indefinitely from the void
+
+	* standalone/logdrake: this was just tested before
+
+	* scanner.pm: 
+	  - (get_usb_ids_for_port, updateScannerDBfromSane) : simplify
+	  - perl_checker fixes
+
+	* drakxtools.spec: 9.1-0.33mdk
+	fix #1718
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/sl.po, share/po/no.po,
+	share/po/et.po, share/po/ja.po, share/po/hr.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/ko.po, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/lt.po, share/po/he.po, share/po/sp.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/tg.po, share/po/bs.po, share/po/uz.po, share/po/ro.po,
+	share/po/wa.po, share/po/is.po, share/po/af.po, share/po/az.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/fr.po, share/po/sq.po, share/po/nl.po,
+	share/po/it.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/lv.po, share/po/cs.po, share/po/bg.po,
+	share/po/el.po, share/po/hu.po: simplify translator job by propaging
+	pixel english typo fix
+
+	* ugtk2.pm: in the old days, on cannot disable shrink1, resize2 or shrink2
+	since they always were true
+
+2003/02/17  Warly  <warly@mandrakesoft.com>
+
+	* share/logo-mandrake.png: 9.1 rc1
+
+2003/02/16  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm: summary written in gtk, isn't it nice (?)
+
+	* install_steps_interactive.pm: handle "not configured" in summary_prompt
+
+2003/02/16  siegel
+
+	* share/po/de.po: updates
+
 2003/02/16  alus
 
 	* share/po/pl.po: updated
@@ -10746,7 +10868,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.782 2003/02/15 00:47:57 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.783 2003/02/16 21:40:59 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
