@@ -144,6 +144,7 @@ sub entry {
 		   "tty"      => [ c::S_IFCHR(),  5, 0  ],
 		   "usbmouse" => [ c::S_IFCHR(), 13, 63 ], #- aka /dev/input/mice
 		   "adbmouse" => [ c::S_IFCHR(), 10, 10 ], #- PPC
+		   "vcsa"     => [ c::S_IFCHR(), 7,  128 ],
 		   "zero"     => [ c::S_IFCHR(), 1,  5  ],		     
 		   "null"     => [ c::S_IFCHR(), 1,  3  ],		     
 	       }}{$_} or die "unknown device $_ (caller is " . join(":", caller()) . ")" };
