@@ -73,11 +73,11 @@ char *promRootName();
 
 ';
 
-$ENV{C_DRAKX} && $Config{archname} =~ /i.86/ and print '
+$Config{archname} =~ /i.86/ and print '
 char *pcmcia_probe(void);
 ';
 
-$ENV{C_RPM} and print '
+print '
 #undef Fflush
 #undef Mkdir
 #undef Stat
@@ -95,7 +95,7 @@ void rpmError_callback(void) {
 
 ';
 
-$ENV{C_DRAKX} and print '
+print '
 
 void log_message(const char * s, ...) {
    va_list args;
@@ -158,7 +158,7 @@ MODULE = c::stuff		PACKAGE = c::stuff
 
 ';
 
-$ENV{C_DRAKX} && $Config{archname} =~ /i.86/ and print '
+$Config{archname} =~ /i.86/ and print '
 char *
 pcmcia_probe()
 ';
@@ -720,7 +720,7 @@ get_iso_volume_ids(int fd)
 
 ';
 
-$ENV{C_RPM} and print '
+print '
 const char *
 rpmErrorString()
 
