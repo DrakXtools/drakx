@@ -54,8 +54,8 @@ foreach (keyboard::loadkeys_files) {
 }
 unlink "$tmp/usr/lib/kbd/keymaps/i386/qwertz/fr.kmap.gz";
 
-
-@files = map { chomp; $_ } (cat_("list"), cat_(`../tools/specific_arch list`));
+my $perl_version = join ".", unpack "C3", $^V;
+@files = map { chomp; s/PERL_VERSION/$perl_version/g; $_ } (cat_("list"), cat_(`../tools/specific_arch list`));
 `ls @files`; 
 $? == 0 or exit 1;
 
