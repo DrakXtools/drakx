@@ -279,7 +279,7 @@ sub ask_warn       { my $w = my_gtk->new(shift @_); $w->_ask_warn(@_); main($w) 
 sub ask_yesorno    { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Yes"), _("No")); main($w) }
 sub ask_okcancel   { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Is this correct?"), _("Ok"), _("Cancel")); main($w) }
 sub ask_from_entry { my $w = my_gtk->new(shift @_); $w->_ask_from_entry(@_); main($w) }
-sub ask_dir        { my $w = my_gtk->new(shift @_); $w->_ask_dir(@_); main($w); }
+sub ask_dir        { my $w = my_gtk->new(shift @_); $w->_ask_dir(@_); main($w) }
 
 sub _ask_from_entry($$@) {
     my ($o, @msgs) = @_;
@@ -496,7 +496,7 @@ sub ask_browse_tree_info_given_widgets {
 	    @{$ptree{$_}} = difference2($ptree{$_}, \@to_remove);
 	}
 	if (exists $wtree{$cat}) {
-	    delete $wtree{$cat}->{$_} foreach qw(state state_stats);
+	    delete $wtree{$cat}{$_} foreach qw(state state_stats);
 	    $w->{tree}->remove_node($wtree{$cat});
 	    delete $wtree{$cat};
 	}

@@ -690,7 +690,7 @@ sub getIPsInLocalNetworks {
     # Read the output of "ifconfig" to determine the broadcast addresses of
     # the local networks
     my $dev_is_localnet = 0;
-    my @local_bcasts = ();
+    my @local_bcasts;
     my $current_bcast = "";
 	
     if (-x "/sbin/ifconfig") {
@@ -727,7 +727,7 @@ sub getIPsInLocalNetworks {
     for my $bcast (@local_bcasts) {
 	local *F;
 	open F, "ping -w 1 -b -n $bcast | cut -f 4 -d \" \" | sed s/:// | egrep \"^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+\" | uniq |" or next;
-	while (<F>) {chomp; push @addresses, $_;}
+	while (<F>) { chomp; push @addresses, $_ }
 	close F;
     }
 
@@ -742,7 +742,7 @@ sub whatNetPrinter {
     my @res;
 
     # Which ports should be scanned?
-    my @portstoscan = ();
+    my @portstoscan;
     if ($smb) {
 	push @portstoscan, "139";
     }

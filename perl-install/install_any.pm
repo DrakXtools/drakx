@@ -479,6 +479,7 @@ sub setAuthentication {
 	#- defer running smbpassword - no network yet
 	$winbind = $winbind . "%" . $winpass;
 	addToBeDone {
+	    require install_steps;
 	    install_steps::upNetwork($o, 'pppAvoided');
 	    run_program::rooted($o->{prefix}, "/usr/bin/smbpasswd", "-j", $domain, "-U", $winbind);
 	} 'configureNetwork';
