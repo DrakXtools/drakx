@@ -39,8 +39,6 @@ our %printer_type_inv = reverse %printer_type;
 
 #------------------------------------------------------------------------------
 
-sub set_prefix($) { $prefix = $_[0] }
-
 sub spooler {
     # LPD is taken from the menu for the moment because the classic LPD is
     # highly unsecure. Depending on how the GNU lpr development is going on
@@ -193,7 +191,7 @@ sub getinfo($) {
     my $printer = {};
     my @QUEUES;
 
-    set_prefix($prefix);
+    $::prefix=$prefix;
 
     # Initialize $printer data structure
     resetinfo($printer);
