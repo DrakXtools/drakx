@@ -277,7 +277,7 @@ sub extract_modules {
     eval {
 	require packdrake;
 	my $packer = new packdrake($cz, quiet => 1);
-	$packer->extract_archive($dir, map { name2file($_) } @modules);
+	$packer->extract_archive($dir, map { name2file($_) } @modules) if @modules;
 	map { $dir . '/' . name2file($_) } @modules;
     };
 }
