@@ -17,6 +17,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
+use strict;
+use diagnostics;
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;
@@ -112,7 +114,7 @@ $hbx->pack_start($Close_Button,0,0,0);
 my $Report_Button = new Gtk2::Button(N("Report"));
 $Report_Button->signal_connect(clicked => sub { my $options = "mdkbugreport=1";
 						$options .= "&incident=1" if $incident;
-						$p = $package->get_text(); $k = $kernel_rel->get_text(); ($r = parse_release()) =~ s/\s//;
+						my $p = $package->get_text(); my $k = $kernel_rel->get_text(); (my $r = parse_release()) =~ s/\s//;
 						$options .= "&package=$p" if $p =~ /mdk/;
 						$options .= "&kernel=$k";
 						$options .= "&version=$r";
@@ -138,7 +140,7 @@ sub update_app {
     } elsif (member($text, keys %{$mdk_app}) && $text ne N("Standalone Tools")) {	
 	$app_choice = get_package($mdk_app->{$text});
     } else {
-	LOOP: while (($key,$value) = each %{$mdk_app}) {
+	LOOP: while (my ($key,$value) = each %{$mdk_app}) {
 	    next if $key eq N("Standalone Tools");
 	    if ($value eq $text) { 
 		$app_choice = get_package($text);
