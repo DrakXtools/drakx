@@ -529,8 +529,10 @@ sub configure_net {
     }
     my @mask;
 @mask=(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type}eq'lan';
-@mask=(0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type}eq'isdn_internal' && $cnx->{card_type} eq 'pci';
-@mask=(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type}eq'isdn_internal' && $cnx->{card_type} ne 'pci';
+@mask=(0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type}eq'isdn_internal'
+&& defined $cnx->{vendor} && defined $cnx->{id};
+@mask=(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type}eq'isdn_internal'
+&& (!defined $cnx->{vendor} || !defined $cnx->{id});
 @mask=(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0) if ($netcnx->{type}eq'modem'||$netcnx->{type} eq 'isdn_external');
 @mask=(0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0) if $netcnx->{type} =~ 'adsl';
 @mask=(0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1) if $netcnx->{type} eq 'cable';
