@@ -328,15 +328,15 @@ sub lilo_choice {
     
   ask:
     local $::isEmbedded = 0;
-    any::setupBootloader($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) or return;
-    eval { bootloader::install($bootloader, $fstab, $all_hds->{hds}) };
-
+    eval {
+        any::setupBootloader($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL});
+        bootloader::install($bootloader, $fstab, $all_hds->{hds});
+    };
     my $loader = arch() =~ /ppc/ ? "Yaboot" : "LILO";
-    if ($@) {
+    my $err = $@;
+    if ($err) {
         $in->ask_warn('', 
-                      [ N("Installation of %s failed. The following error occured:", $loader),
-                        grep { !/^Warning:/ } cat_("/tmp/.error") ]);
-        unlink "/tmp/.error";
+                      [ N("Installation of %s failed. The following error occured:", $loader), $err ]);
         goto ask;
     }
 }
