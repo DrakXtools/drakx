@@ -5,7 +5,7 @@ use MDK::Common;
 
 my $help;
 my $dir = "doc/manual/literal/drakx";
-my @langs = grep { /^..$/ } all($dir) or die "no XML help found in $dir\n";
+my @langs = grep { /^..$/ && -e "$dir/$_/drakx-help.xml" } all($dir) or die "no XML help found in $dir\n";
 
 my %helps = map {
     my $lang = $_;
@@ -20,7 +20,8 @@ save_help($base);
 
 foreach my $lang (keys %helps) {
     local *F;
-    open F, "> help-$lang.pot";
+    my ($charset) = cat_("$lang.po") =~ /charset=([^\\]+)/ or die "missing charset in $lang.po\n";
+    open F, "| iconv -f utf8 -t $charset > help-$lang.pot";
     print F "\n";
     foreach my $id (keys %{$helps{$lang}}) {
 	$base->{$id} or die "$lang:$id doesn't exist in english\n";
