@@ -19,6 +19,13 @@ my $tmpconfig = "/tmp/Xconfig";
 my ($prefix, %monitors, %standard_monitors_);
 
 
+sub xtest {
+    my ($display) = @_;
+    $::isStandalone ? 
+      system("DISPLAY=$display /usr/X11R6/bin/xtest") == 0 : 
+      c::Xtest($display);    
+}
+
 sub getVGAMode($) { $_[0]->{card}{vga_mode} || $vgamodes{"640x480x16"}; }
 
 sub readCardsDB {
@@ -479,11 +486,11 @@ sub testFinalConfig {
 	  ":9" or c::_exit(0);
     }
 
-    do { sleep 1 } until c::Xtest(":9") || waitpid($pid, c::WNOHANG());
+    do { sleep 1 } until xtest(":9") || waitpid($pid, c::WNOHANG());
 
     my $b = before_leaving { unlink $f_err };
 
-    unless (c::Xtest(":9")) {
+    unless (xtest(":9")) {
 	local $_;
 	local *F; open F, $f_err;
       i: while (<F>) {
