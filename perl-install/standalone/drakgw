@@ -442,7 +442,7 @@ close SYSCONF_NETWORK;
 
 $f = "/usr/sbin/dhcpd";
 -e $f or install_rpm("dhcp");
--e $f or ($in->ask_warn('', _("Could not install dhcp RPM with urpmi.")) and $in->exit(0));
+-e $f or fatal_quit(_("Could not install dhcp RPM with urpmi."));
 
 -f $dhcpd_conf and rename($dhcpd_conf, "$dhcpd_conf.old");
 local *DHCPDCONF; open DHCPDCONF, ">$dhcpd_conf" or die "Can't open $dhcpd_conf";
@@ -466,7 +466,7 @@ close DHCPDCONF;
 #- put the interface for the dhcp server in linuxconf config, for the /etc script of dhcpd
 
 -f $conf_linuxconf or install_rpm("linuxconf");
--f $conf_linuxconf or ($in->ask_warn('', _("Could not install linuxconf RPM with urpmi.")) and $in->exit(0));
+-f $conf_linuxconf or fatal_quit(_("Could not install linuxconf RPM with urpmi."));
 
 open CONF_LINUXCONF, "$conf_linuxconf" or die "Can't open $conf_linuxconf";
 my @conf_linuxconf_content = <CONF_LINUXCONF>;
@@ -482,11 +482,11 @@ close CONF_LINUXCONF;
 
 $f = "/usr/sbin/named";
 -e $f or install_rpm("bind");
--e $f or ($in->ask_warn('', _("Could not install bind RPM with urpmi.")) and $in->exit(0));
+-e $f or fatal_quit(_("Could not install bind RPM with urpmi."));
 
 $f = "/var/named/named.local";
 -e $f or install_rpm("caching-nameserver");
--e $f or ($in->ask_warn('', _("Could not install caching-nameserver RPM with urpmi.")) and $in->exit(0));
+-e $f or fatal_quit(_("Could not install caching-nameserver RPM with urpmi."));
 
 
 #- start the daemons
