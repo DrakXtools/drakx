@@ -196,6 +196,7 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
 
 sub isdn_detect_backend() {
     my $isdn = { };
+    require detect_devices;
      each_index {
  	my $c = $_;
  	$isdn->{$::i} = { map { $_ => $c->{$_} } qw(description vendor id driver card_type type) };
@@ -210,7 +211,7 @@ sub isdn_detect_backend() {
 	    modules::set_options($c->{driver}, $c->{options} . " protocol=" . $isdn->{protocol});
 	}
 	$c->{options} =~ /protocol=(\d)/ and $isdn->{protocol} = $1;
-    } modules::probe_category('network/isdn');
+    } modules::probe_category('network/isdn'), grep { $_->{driver} =~ /^ISDN:/ } detect_devices::probeall();
     $isdn;
 }
 
