@@ -55,7 +55,7 @@ sub new($) {
 }
 
 sub vnew {
-    my ($type, $su) = @_;
+    my ($type, $su, $icon) = @_;
     $su = $su eq "su";
     require c;
     if ($ENV{DISPLAY} && system('/usr/X11R6/bin/xtest') == 0) {
@@ -66,7 +66,11 @@ sub vnew {
 	    }
 	}
 	eval { require interactive_gtk };
-	!$@ and return interactive_gtk->new;
+	if (!$@) {
+	    my $o = interactive_gtk->new;
+	    $icon and $o->{icon} = $icon;
+	    return $o;
+	}
     }
 
     if ($su && $>) {

@@ -370,6 +370,7 @@ sub create_box_with_title($@) {
 
     $o->{box_size} = sum(map { round(length($_) / 60 + 0.5) } map { split "\n" } @_);
     $o->{box} = new Gtk::VBox(0,0);
+    $o->{icon} and eval { gtkpack__($o->{box}, gtkset_border_width(gtkpack_(new Gtk::HBox(0,0), 1, gtkpng($o->{icon})),5)); };
     if (@_ <= 2 && $o->{box_size} > 4) {
 	my $font = $o->{box}->style->font;
 	my $wanted = $o->{box_size} * ($font->ascent + $font->descent) + 7;
