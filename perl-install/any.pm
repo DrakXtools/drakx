@@ -639,7 +639,7 @@ when your installation is complete and you restart your system.")),
 	    if_($using_images, image2f => sub { $name2l{$_[0]} =~ /^[a-z]/ ? ('', "langs/lang-$name2l{$_[0]}") : $_[0] }),
 	    format => sub { $_[0] =~ /(.*\|)(.*)/ ? $1.lang::l2name($2) : lang::l2name($_[0]) },
 	    list => \@langs, sort => 0 },
-	    if_($o_langs_ && !$::move, if_($::isInstall,
+	    if_($o_langs_ && !$::move, if_($::isInstall,  #- changing utf8 flag on an installed OS is not supported
 			     { val => \$in->{locale}{utf8}, type => 'bool', text => N("Use Unicode by default"), advanced => 1 }),
 		{ val => \$langs->{all}, type => 'bool', text => N("All languages"), advanced => 1 },
 	        map {
