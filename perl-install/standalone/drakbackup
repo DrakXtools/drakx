@@ -90,6 +90,7 @@ my @list_arg = ();
 my $windows = 0;
 my $central_widget;
 my $previous_widget;
+my $current_widget;
 my $interactive;
 my $up_box;
 my $advanced_box;
@@ -111,7 +112,7 @@ my $other_backuped = 0;
 my @user_list_to_restore= ();
 my $retore_box2;
 my $cd_devive_entry;
-
+my $custom_help;
 
 # config. FILES -> Default PATH  & Global variables.
 my @sys_files = ("/etc");
@@ -493,6 +494,7 @@ sub advanced_what_sys {
 				 1, " ",
 				 ),
 	    );
+    $current_widget = \&advanced_what_sys;
     $previous_widget =\&advanced_what;
     $central_widget = \$box_what_sys;
     $up_box->show_all();
@@ -535,6 +537,7 @@ sub advanced_what_user {
 				      0, my $check_what_browser = new Gtk::CheckButton( _(" do not include the browser cache") ),
 				 ),
 	    );
+    $current_widget = \&advanced_what_user;
     $previous_widget =\&advanced_what;
     $central_widget = \$box_what_user;
     $up_box->show_all();
@@ -558,6 +561,7 @@ sub advanced_what_other {
 					    ),
 				       ),
 	    );
+    $current_widget = \&advanced_what_other;
     $previous_widget =\&advanced_what;
     $central_widget = \$box_what_other;
     $up_box->show_all();
@@ -604,6 +608,7 @@ sub advanced_what{
 			      new Gtk::Label(_(" Other ")),
 			      new Gtk::HBox(0, 5)
 			      ));
+    $current_widget = \&advanced_what;
     $previous_widget =\&advanced_box;
     $central_widget = \$box_what;
     $up_box->show_all();
@@ -660,6 +665,7 @@ sub advanced_where_net_ftp {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
 	}
+    $current_widget = \&advanced_where_net_ftp;
     $previous_widget =\&advanced_where_net;
     $central_widget = \$box_where_net;
     $up_box->show_all();
@@ -674,6 +680,9 @@ sub advanced_where_net_ssh {
 				      1, _("sinon lancer assistant "),
 				      ),
 	    );
+# test si x11
+#print system("xterm -fn 7x14 -bg black -fg white -e ssh-keygen -f ~/.ssh/identity-backup && scp ") . "\n";
+    $current_widget = \&advanced_where_net_ssh;
     $previous_widget =\&advanced_where_net;
     $central_widget = \$box_where_ssh;
     $up_box->show_all();
@@ -698,6 +707,7 @@ sub advanced_where_net {
 				      ),
 	    );
     $previous_widget =\&advanced_where;
+    $current_widget = \&advanced_where_net;
     $central_widget = \$box_where_net;
     $up_box->show_all();
 }
@@ -743,6 +753,7 @@ sub advanced_where_cd {
 
     $combo_where_cd_time->entry->set_text($cd_time);
     $combo_where_cd_time->entry->signal_connect( 'changed', sub { $cd_time = $combo_where_cd_time->entry->get_text()});	       
+    $current_widget = \&advanced_where_cd;
     $previous_widget =\&advanced_where;
     $central_widget = \$box_where_cd;
     $up_box->show_all();
@@ -779,6 +790,7 @@ sub advanced_where_hd {
 	    );
     $save_path_entry->set_text( $save_path );
     $save_path_entry->signal_connect( 'changed', sub { $save_path = $save_path_entry->get_text()});
+    $current_widget = \&advanced_where_hd;
     $previous_widget =\&advanced_where;
     $central_widget = \$box_where_hd;
     $up_box->show_all();
@@ -824,7 +836,7 @@ sub advanced_where{
 			      new Gtk::Label(_(" HardDrive / NFS ")),
 			      new Gtk::HBox(0, 5)
 			      ));
-
+    $current_widget = \&advanced_where;
     $previous_widget =\&advanced_box;
     $central_widget = \$box_where;
     $up_box->show_all();
@@ -868,7 +880,7 @@ sub advanced_when{
     $combo_when_space->entry->set_text( $when_space );
     $combo_when_space->entry->signal_connect( 'changed', sub { 
 	$when_space = $combo_when_space->entry->get_text();  print $when_space."\n";});
-
+    $current_widget = \&advanced_when;
     $previous_widget =\&advanced_box;
     $central_widget = \$box_when;
     $up_box->show_all();
@@ -895,6 +907,8 @@ sub advanced_options{
 					     ),
 				 ),
 	    );
+    $custom_help = "options";
+    $current_widget = \&advanced_options;
     $previous_widget =\&advanced_box;
     $central_widget = \$box_options;
     $up_box->show_all();
@@ -948,7 +962,8 @@ sub advanced_box{
 			      new Gtk::Label(_(" More Options")),
 			      new Gtk::HBox(0, 5)
 			      ));
-
+    $custom_help = "";
+    $current_widget = \&advanced_box;
     $central_widget = \$box_adv;
     $up_box->show_all();
 }
@@ -1005,7 +1020,7 @@ sub advanced {
 				       0, gtksignal_connect(new Gtk::Button(_(" Cancel ")), clicked => 
 							 sub { ${$central_widget}->destroy(); interactive_mode();  }),
 				       0, gtksignal_connect(new Gtk::Button(_(" Help ")), clicked => 
-							 sub { ${$central_widget}->destroy(); help(\&advanced);  }),
+							 sub { ${$central_widget}->destroy(); adv_help(\&$current_widget,$custom_help );  }),
 				       1, new Gtk::HBox(0, 1),	
 				       0, gtksignal_connect(new Gtk::Button(_(" Previous ")), clicked => 
 							 sub { ${$central_widget}->destroy(); $previous_widget->(); }),
@@ -1015,6 +1030,9 @@ sub advanced {
 				       ),
 			    ),
 	    );
+    $custom_help = "";
+    $central_widget = \$box2;
+    $current_widget = \&advanced_box;
     $previous_widget =\&interactive_mode;
 
     $button_what->add(gtkpack(new Gtk::HBox(0,10),
@@ -1037,8 +1055,6 @@ sub advanced {
 			      new Gtk::Label(_(" More Options")),
 			      new Gtk::HBox(0, 5)
 			      ));
-
-    $central_widget = \$box;
     $up_box->show_all();
 }
 
@@ -1966,7 +1982,7 @@ sub help {
     gtkpack($up_box,
 	    $about_box = gtkpack_(new Gtk::VBox(0,10),
 				  1, gtkpack_(new Gtk::HBox(0,0),
-					      1, gtktext_insert(gtkset_editable($text, 1), _("
+					      1, gtktext_insert(gtkset_editable($text, 0), _("
 description:
 
  Drakbacup is use to backup system files and user files
@@ -1999,6 +2015,82 @@ configuration file:
 				  )
 	    );
     $central_widget = \$about_box;
+    $up_box->show_all();
+}
+
+
+sub adv_help {
+    my ($function, $custom_help) = @_,
+    my $text = new Gtk::Text(undef, undef);
+    my $advanced_box_help;
+    
+    if ($custom_help eq "toto") { gtktext_insert($text, _("toto")); } 
+    elsif ($custom_help eq "options") { gtktext_insert($text, _("options description:
+
+ In this step Drakbacup allow you to change:
+
+ - the compression mode:
+    
+      if you check bzip2 compression, you will compress
+      better than gzip your data (about 2-10 %).
+      This options are not checked by default because
+      this compression mode need more time ( about 1000% more).
+ 
+ - the udpate mode:
+
+      This options will update your backup, but this
+      options are not really interesting because you need
+      to decompress your backup before to update it.
+      
+ - the .backupignore mode:
+
+      Like with cvs, Drakbackup will ignore all references
+      included on  .backupignore files in each directories.
+      ex: 
+         \$> cat .backupignore
+         *.o
+         *~
+         ...
+      
+
+")); } 
+    else { gtktext_insert($text, _("description:
+
+ Drakbacup is use to backup system files and user files
+ Drakbacup allow to restore the system (etc, var files)
+ from starup or on drakconf utility.
+
+backup name format: all the time from the / dir.
+
+	system backup:
+                   backup_sys.tar.gz 
+	user backup
+		   backup_user_james.tar.gz      
+		   backup_user_seb.tar.gz
+	other directories
+                   backup_other.tar.gz          
+
+build iso fs with rescue.
+
+configuration file:
+
+	/etc/drakconf/drakbackup/drakbakup.conf
+
+"));}
+
+    gtkpack($advanced_box,
+	    $advanced_box_help = gtkpack_(new Gtk::VBox(0,10),
+				  1, gtkpack_(new Gtk::HBox(0,0),
+					      1, $text, 
+					      0, new Gtk::VScrollbar($text->vadj),
+					      ),
+				  0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+					    gtksignal_connect(new Gtk::Button(_("OK")), clicked => 
+							      sub { ${$central_widget}->destroy(); $function->();  }),
+					    ),
+				  )
+	    );
+    $central_widget = \$advanced_box_help;
     $up_box->show_all();
 }
 
