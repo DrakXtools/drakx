@@ -106,7 +106,7 @@ sub probe_category {
     my @modules = category2modules($category);
 
     grep {
-	if ($category =~ /isdn/) {
+	if ($category eq 'network/isdn') {
 	    my $b = $_->{driver} =~ /ISDN:([^,]*),?([^,]*),?(.*)/;
 	    if ($b) {
 		$_->{driver} = $1;
