@@ -5,7 +5,7 @@ use MDK::Common;
 
 my $help;
 my $dir = "doc/manual/literal/drakx";
-my @langs = grep { /^..$/ } all($dir);
+my @langs = grep { /^..$/ } all($dir) or die "no XML help found in $dir\n";
 
 my %helps = map {
     my $lang = $_;
@@ -20,7 +20,7 @@ save_help($base);
 
 foreach my $lang (keys %helps) {
     local *F;
-    open F, "> help-$lang.po";
+    open F, "> help-$lang.pot";
     print F "\n";
     foreach my $id (keys %{$helps{$lang}}) {
 	$base->{$id} or die "$lang:$id doesn't exist in english\n";

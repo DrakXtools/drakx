@@ -24,8 +24,8 @@ $(PMSCFILES): %_.c: %
 	./fake_c.pl $< > $@
 
 $(POFILES): DrakX.pot
-	perl -ne 'print unless /^#.*\Qdrakx-help.xml/ .. /^$/' $@ > $@t
-	if [ -e help-$@ ]; then msgmerge -C help-$@ $@t $< > $@; else msgmerge $@t $< > $@; fi
+	perl -ne 'print unless /^#.*\Qdrakx-help.xml/ .. /^$$/' $@ > $@t
+	if [ -e help-$@t ]; then msgmerge -C help-$@t $@t $< > $@; else msgmerge $@t $< > $@; fi
 	rm $@t
 
 DrakX.pot: $(PMSFILES)
@@ -41,7 +41,7 @@ install:
 	done
 
 clean:
-	rm -rf drakx-help.xml doc empty.po tmp.* messages tmp.pot *.mo $(POFILES:%=%t) $(PMSCFILES)
+	rm -rf drakx-help.xml help-*.po{t,} doc empty.po tmp.* messages tmp.pot *.mo $(POFILES:%=%t) $(PMSCFILES)
 
 check:
 	@grep -F '$$' DrakX.pot && { echo "bad translation strings (contains \$$) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"; exit 1; } ||:
