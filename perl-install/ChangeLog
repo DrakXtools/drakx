@@ -1,5 +1,24 @@
 2002/02/03  Pixel  <pixel@mandrakesoft.com>
 
+	* any.pm: force a few more "list"s instead of "combo" boxes
+	since "format" is now handled for combo boxes, combo boxes are used in
+	much too many places. Fix this by forcing type "list" for some cases,
+	and using type "list" when a ask_from has only one entry
+
+	* interactive.pm: since "format" is now handled for combo boxes, combo
+	boxes are used in much too many places. Fix this by forcing type "list"
+	for some cases, and using type "list" when a ask_from has only one entry
+
+	* bootloader.pm: fix typo
+	help lilo when there is hdd with no hdc drive (needs testing!)
+
+2002/02/03  warly
+
+	* share/rpmsrate.server, share/compssUsers.server: add rpmsrate.server and
+	compssUsers.server
+
+2002/02/03  Pixel  <pixel@mandrakesoft.com>
+
 	* bootloader.pm: help lilo when there is hdd with no hdc drive (needs
 	testing!)
 
