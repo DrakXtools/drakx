@@ -1064,7 +1064,8 @@ You may have to restart installation and give ``%s'' at the prompt", $ide));
 	}
     }
 
-    modules::load_thiskind($type, sub { $w = wait_load_module($o, $type, @_) }, $pcmcia);
+    eval { modules::load_thiskind($type, sub { $w = wait_load_module($o, $type, @_) }, $pcmcia) };
+    $@ and $o->errorInStep($@);
 }
 
 #------------------------------------------------------------------------------

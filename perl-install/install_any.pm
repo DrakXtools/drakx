@@ -2,6 +2,8 @@ package install_any;
 
 use diagnostics;
 use strict;
+use Config;
+
 use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 
 @ISA = qw(Exporter);
@@ -135,6 +137,8 @@ sub setPackages($) {
 	push @{$o->{default_packages}}, "cdrecord" if detect_devices::getIDEBurners();
 
 	pkgs::getDeps($o->{packages});
+
+	push @{$o->{base}}, @{delete($o->{"base_" . arch()}) || []};
 
 	my $c; ($o->{compss}, $c) = pkgs::readCompss($o->{packages});
 	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, $c);

@@ -56,6 +56,7 @@ install_pms: $(DIRS)
 get_needed_files: $(DIRS)
 #	export PERL_INSTALL_TEST=1 ; strace -f -e trace=file -o '| grep -v "(No such file or directory)" | sed -e "s/[^\"]*\"//" -e "s/\".*//" | grep "^/" | grep -v -e "^/tmp" -e "^/home" -e "^/proc" -e "^/var" -e "^/dev" -e "^/etc" -e "^/usr/lib/rpm" > /tmp/list ' $(PERL) -d install2 < /dev/null
 	cp -f list /tmp/list
+	perl -pi -e "s/ARCH/$(ARCH)/" /tmp/list
 	find auto -follow -name "*.so" >> /tmp/list
 
 	for i in $(LOCALFILES) `cat /tmp/list` ; do \

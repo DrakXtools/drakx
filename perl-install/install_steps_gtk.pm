@@ -17,6 +17,7 @@ use Gtk;
 use devices;
 use fsedit;
 use modules;
+use pkgs;
 use install_steps;
 use install_steps_interactive;
 use interactive_gtk;
@@ -189,25 +190,32 @@ sub new($$) {
 		}
 		0;
 	    };
+	    my @servers = qw(FBDev VGA16);
+	    @servers = qw(FBDev 3DLabs TGA) if arch() eq "alpha";
 
-	     if (!$o->{vga16} && listlength(cat_("/proc/fb"))) {
-		 &$launchX("XF86_FBDev");
-		 $o->{allowFB} = 1; #- keep in mind FB is used.
-	     } else {
+	    foreach (@servers) {
+		log::l("Trying with server $_");
 		my $dir = "/usr/X11R6/bin";
-		unless (-x "$dir/XF86_VGA16") {
-		    unlink "$dir/XF86_FBDev";
-		    local *F; open F, ">$dir/XF86_VGA16" or die '';
+		unless (-x "$dir/XF86_$_") {
+		    unlink $_ foreach glob_("$dir/XF86_*");
+		    local *F; open F, ">$dir/XF86_$_" or die '';
 		    local $/ = \ (16 * 1024);
-		    my $f = install_any::getFile("$dir/XF86_VGA16") or die '';
+		    my $f = install_any::getFile("$dir/XF86_$_") or next;
 		    syswrite F, $_ foreach <$f>;
-		    chmod 0755, "$dir/XF86_VGA16";
+		    chmod 0755, "$dir/XF86_$_";
 		}
-	        &$launchX("XF86_VGA16");
+		if (/FB/) {
+		    !$o->{vga16} && listlength(cat_("/proc/fb")) or next;
+
+		    $o->{allowFB} = &$launchX("XF86_$_") #- keep in mind FB is used.
+		      and last;
+		} else {
+		    &$launchX("XF86_$_") and last;
+		}
 	    }
 	}
     }
-    @themes = @themes_vga16 if $o->{simple_themes} || !$o->{display} && !($o->{allowFB} ||= $::testing);
+    @themes = @themes_vga16 if $o->{simple_themes} || $o->{vga16};
 
     install_theme($o);
     create_logo_window($o);
@@ -851,6 +859,17 @@ Section "Screen"
     Device      "Generic VGA"
     Monitor     "My Monitor"
     Subsection "Display"
+        Modes       "640x480"
+        ViewPort    0 0
+    EndSubsection
+EndSection
+
+Section "Screen"
+    Driver      "accel"
+    Device      "Generic VGA"
+    Monitor     "My Monitor"
+    Subsection "Display"
+        Depth       16
         Modes       "640x480"
         ViewPort    0 0
     EndSubsection

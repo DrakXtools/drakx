@@ -550,7 +550,7 @@ rpmRunTransactions(trans, callbackOpen, callbackClose, callbackMessage, force)
       } break;
 
       case RPMCALLBACK_INST_PROGRESS:
-        if ((amount - last_amount) * 4 / total) {
+        if (total && (amount - last_amount) * 4 / total) {
           msg = "Progressing installing package";
           param_s = n;
           param_ul1 = &amount;

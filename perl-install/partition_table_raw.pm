@@ -54,6 +54,10 @@ sub kernel_read($) {
 
 sub zero_MBR($) {
     my ($hd) = @_;
+#    unless (ref($hd) =~ /partition_table/) {
+	my $type = arch() eq "alpha" ? "bsd" : "dos";
+	bless $hd, "partition_table_$type";
+#    }
     $hd->{isDirty} = $hd->{needKernelReread} = 1;
     $hd->{primary} = $hd->clear_raw();
     delete $hd->{extended};

@@ -1,13 +1,21 @@
+ARCH := $(patsubst i%86,i386,$(shell uname -m))
+ARCH := $(patsubst sparc%,sparc,$(ARCH))
+
 BOOT_IMG = hd.img cdrom.img network.img network_ks.img pcmcia.img pcmcia_ks.img
 BOOT_RDZ = $(BOOT_IMG:%.img=%.rdz)
 BINS = install/install install/full-install install/local-install install/installinit/init
-DIRS = tools install install/installinit perl-install lnx4win
+DIRS = tools install install/installinit perl-install
+ifeq (i386,$(ARCH))
+DIRS += lnx4win
+endif
+
 ROOTDEST = /export
 UPLOAD_DEST_ = ~/oxygen
 UPLOAD_DEST = $(UPLOAD_DEST_)/oxygen
 UPLOAD_DEST_CONTRIB = $(UPLOAD_DEST_)/contrib
 
 AUTOBOOT = $(ROOTDEST)/dosutils/autoboot/mdkinst
+
 
 .PHONY: dirs $(FLOPPY_IMG)
 
@@ -48,7 +56,7 @@ $(BOOT_IMG:%=%f): %f: %
 	xmessage "Floppy done"
 
 clean:
-	rm -rf $(BOOT_IMG) $(BINS) modules install_pcmcia_modules vmlinuz System.map
+	rm -rf $(BOOT_IMG) $(BOOT_RDZ) $(BINS) modules install_pcmcia_modules vmlinuz System.map
 	rm -rf install/*/sbin/install install/*/sbin/init
 	for i in $(DIRS); do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f

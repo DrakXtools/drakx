@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common     => [ qw(__ even odd min max sqr sum and_ or_ sign product bool invbool listlength bool2text text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines deref) ],
+    common     => [ qw(__ even odd arch min max sqr sum and_ or_ sign product bool invbool listlength bool2text text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines deref) ],
     functional => [ qw(fold_left compose map_index grep_index map_each grep_each list2kv map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
     file       => [ qw(dirname basename touch all glob_ cat_ output symlinkf chop_ mode typeFromMagic) ],
     system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh setVarsInCsh substInFile availableRam availableMemory removeXiBSuffix template2file formatTime) ],
@@ -94,6 +94,13 @@ sub gettimeofday { my $t = pack "LL"; syscall_('gettimeofday', $t, 0) or die "ge
 sub remove_spaces { local $_ = shift; s/^ +//; s/ +$//; $_ }
 sub mode { my @l = stat $_[0] or die "unable to get mode of file $_[0]: $!\n"; $l[2] }
 sub psizeof { length pack $_[0] }
+
+sub arch() {
+    require Config;
+    Config->import;
+    no strict;
+    $Config{archname} =~ /(.*)-/ and $1;
+}
 
 sub touch {
     my ($f) = @_;

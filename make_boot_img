@@ -6,13 +6,18 @@
 
 $instdir = "install";
 $ks = "kickstart=floppy" if $type =~ s/_ks//;
-$mnt = "/mnt/disk";
+$mnt = "/tmp/drakx_mnt";
 $mke2fs = "/sbin/mke2fs -q -m 0 -F -s 1";
 
 if ($>) {
     $sudo = "sudo";
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 }
+
+sub __ { print @_, "\n"; system(@_); }
+sub _ { __ @_; $? and die; }
+
+_ "$sudo mkdir $mnt" unless -e $mnt;
 
 $install = $ {{
     pcmcia => "full-install",
@@ -23,9 +28,6 @@ $install = $ {{
 
 $img =~ /rdz$/ ? initrd($mnt, $img) : msg_boot_img($mnt, $img);
 #boot_img($mnt, $img);
-
-sub __ { print @_, "\n"; system(@_); }
-sub _ { __ @_; $? and die; }
 
 sub install_s { _ "strip $_[0]"; _ "$sudo install $_[0] $_[1]" }
 
