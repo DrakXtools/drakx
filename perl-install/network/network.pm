@@ -341,7 +341,9 @@ sub miscellaneous_choose {
 sub proxy_configure {
     my ($u) = @_;
     setExportedVarsInSh("$::prefix/etc/profile.d/proxy.sh",  $u, qw(http_proxy ftp_proxy));
+    chmod 0755, "$::prefix/etc/profile.d/proxy.sh";
     setExportedVarsInCsh("$::prefix/etc/profile.d/proxy.csh", $u, qw(http_proxy ftp_proxy));
+    chmod 0755, "$::prefix/etc/profile.d/proxy.csh";
 }
 
 sub read_all_conf {
