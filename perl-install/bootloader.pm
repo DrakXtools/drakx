@@ -889,7 +889,7 @@ sub create_link_source() {
     }
 }
 
-sub get_of_dev {
+sub dev2yaboot {
     my ($dev) = @_;
 
     devices::make("$::prefix$dev"); #- create it in the chroot
@@ -914,7 +914,7 @@ sub write_yaboot {
 
     my $file2yaboot = sub {
 	my ($part, $file) = fs::get::file2part($fstab, $_[0]);
-	get_of_dev('/dev/' . $part->{device}) . "," . $file;
+	dev2yaboot('/dev/' . $part->{device}) . "," . $file;
     };
 
     #- do not write yaboot.conf for old-world macs
@@ -941,7 +941,7 @@ sub write_yaboot {
 
     if ($bootloader->{boot}) {
 	push @conf, "boot=$bootloader->{boot}";
-	push @conf, "ofboot=" . get_of_dev($bootloader->{boot}) if $mac_type !~ /IBM/;
+	push @conf, "ofboot=" . dev2yaboot($bootloader->{boot}) if $mac_type !~ /IBM/;
     } else {
 	die "no bootstrap partition defined.";
     }
@@ -968,7 +968,7 @@ sub write_yaboot {
 	    push @entry_conf, $entry->{'read-write'} ? "read-write" : "read-only";
 	    push @conf, map { "\t$_" } @entry_conf;
 	} else {
-	    my $of_dev = get_of_dev($entry->{kernel_or_dev});
+	    my $of_dev = dev2yaboot($entry->{kernel_or_dev});
 	    push @conf, "$entry->{label}=$of_dev";
 	}
     }
