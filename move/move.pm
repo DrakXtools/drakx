@@ -125,7 +125,7 @@ sub init {
 
     -d '/lib/modules/' . c::kernel_version() or warn("ERROR: kernel package " . c::kernel_version() . " not installed\n"), c::_exit(1);
 
-    $key_disabled = -e '/image/move/key_disabled';
+    $key_disabled = !-e '/cdrom/live_tree_nvidia.clp' && cat_('/proc/mounts') !~ /nfs/;
 
     run_program::run('/sbin/service', 'syslog', 'start');
     system('sysctl -w kernel.hotplug="/bin/true"');
