@@ -1554,13 +1554,11 @@ sub poll_ppd_base {
 		if (!$::expert) {
 		    # Remove driver from printer list entry when in
 		    # recommended mode
-		    my $simplekey = $key;
-		    $simplekey =~ s/^([^\|]+\|[^\|]+)\|.*$/$1/;
+		    $key =~ s/^([^\|]+\|[^\|]+)\|.*$/$1/;
 		    # Only replace the printer entry when it uses a
 		    # "Foomatic + Postscript" driver
 		    next if (defined($thedb{$key}) &&
 			     ($thedb{$key}{driver} !~ /PostScript/i));
-		    $key = $simplekey;
 		    # Remove the old entry
 		    delete $thedb{$key};
 		} elsif (defined

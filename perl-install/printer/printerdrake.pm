@@ -403,13 +403,12 @@ sub first_time_dialog {
     $in->ask_yesorno(N("Printerdrake"), $dialogtext, 0);
 }
 
-sub find_new_printers {
+sub configure_new_printers {
     my ($printer, $in, $upNetwork) = @_;
 
     # This procedure auto-detects local printers and checks whether
     # there is already a queue for them. If there is no queue for an
-    # auto-detected printer, it gets added to a list, so that we can
-    # install it nom-interactively.
+    # auto-detected printer, a queue gets set up non-interactively.
 
     # Experts can have weird things as self-made CUPS backend, so do not
     # automatically pollute the system with unwished queues in expert
@@ -417,8 +416,8 @@ sub find_new_printers {
     return 1 if $::expert;
     
     # Wait message
-    my $w = $in->wait_message(N("Printerdrake"),
-			      N("Searching for new printers..."));
+    my $_w = $in->wait_message(N("Printerdrake"),
+			       N("Searching for new printers..."));
 
     # When HPOJ is running, it blocks the printer ports on which it is
     # configured, so we stop it here. If it is not installed or not 
@@ -436,9 +435,6 @@ sub find_new_printers {
     # No printer found? So no need of new queues.
     return 1 if !@autodetected;
 
-    # List of detected printers which have no queue yet
-    $printer->{autoconfig} = ();
-
     # Black-list all auto-detected printers for which there is already
     # a queue
     my @blacklist;
@@ -454,18 +450,67 @@ sub find_new_printers {
 	}
     }
 
-    # Now copy all autodetection entries which still need a queue
+    # Now install queues for all auto-detected printers which have no queue
+    # yet
+    $printer->{noninteractive} = 1; # Suppress all interactive steps
     foreach my $p (@autodetected) {
 	if (!member($p->{port}, @blacklist)) {
-	    push(@{$printer->{autoconfig}}, $p);
+	    # Initialize some variables for queue setup
+	    $printer->{NEW} = 1;
+	    $printer->{TYPE} = "LOCAL";
+	    $printer->{currentqueue} = { queue    => "",
+					 foomatic => 0,
+					 desc     => "",
+					 loc      => "",
+					 make     => "",
+					 model    => "",
+					 printer  => "",
+					 driver   => "",
+					 connect  => "",
+					 spooler  => $printer->{SPOOLER},
+				       };
+	    # Generate a queue name from manufacturer and model
+	    my $queue;
+	    my $make = $p->{val}{MANUFACTURER};
+	    if ($p->{val}{SKU}) {
+		$queue = $make . $p->{val}{SKU};
+	    } else {
+		$queue = $make . $p->{val}{MODEL};
+	    }
+	    $queue =~ s/\s+//g;
+	    $queue =~ s/^$make$make/$make/;
+	    if ($printer->{configured}{$queue}) {
+		$queue =~ s/(\d)$/$1_/;
+		my $i = 1;
+		while ($printer->{configured}{"$queue$i"}) {
+		    $i ++;
+		}
+		$queue .= $i;
+	    }
+	    $printer->{currentqueue}{queue} = $queue;
+	    undef $_w;
+	    $_w = $in->wait_message(N("Printerdrake"),
+				    N("Configuring printer \"%s\"...",
+				      $printer->{currentqueue}{queue}));
+	    # Do configuration of multi-function devices and look up
+	    # model name in the printer database
+	    setup_common($printer, $in, $p->{val}{DESCRIPTION}, $p->{port},
+			 1, @autodetected) or next;
+	    # Set also OLD_QUEUE field so that the subroutines for the
+	    # configuration work correctly.
+	    $printer->{OLD_QUEUE} = $printer->{QUEUE} =
+		$printer->{currentqueue}{queue};
+	    # Do the steps of queue setup
+	    get_db_entry($printer, $in) or next;
+	    get_printer_info($printer, $in) or next;
+	    setup_options($printer, $in) or next;
+	    configure_queue($printer, $in) or next;
+	    # If there is no default printer set, let this one get the
+	    # default
+	    $printer->{DEFAULT} ||= $printer->{QUEUE};
 	}
     }
-
-    # For debugging, will be deleted before release of Mandrake 9.1.
-    #print "##### Queues needed:\n";
-    #use Data::Dumper;
-    #print Dumper(@{$printer->{autoconfig}});
-    #print "#####\n";
+    undef $printer->{noninteractive};
 }
 
 sub wizard_welcome {
@@ -1452,8 +1497,10 @@ sub setup_common {
 	    $makemodel =~ /$searchunknown/i ||
 	    $makemodel =~ /^\s*$/) {
 	    local $::isWizard = 0;
-	    $isHPOJ = $in->ask_yesorno(N("Add a new printer"),
-				       N("Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300 with scanner, Sony IJP-V100), an HP PhotoSmart or an HP LaserJet 2200?"), 0);
+	    if (!$printer->{noninteractive}) {
+		$isHPOJ = $in->ask_yesorno(N("Add a new printer"),
+					   N("Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300 with scanner, Sony IJP-V100), an HP PhotoSmart or an HP LaserJet 2200?"), 0);
+	    }
 	}
 	if ($makemodel =~ /HP\s+(OfficeJet|PSC|PhotoSmart|LaserJet\s+(1200|1220|2200|3200|33.0))/i ||
 	    $makemodel =~ /Sony\s+IJP[\s\-]+V[\s\-]+100/i ||
@@ -1464,14 +1511,17 @@ sub setup_common {
 					   /usr/sbin/ptal-init
 					   /usr/bin/xojpanel))) {
 		my $_w = $in->wait_message(N("Printerdrake"),
-					  N("Installing HPOJ package..."));
+					   N("Installing HPOJ package..."))
+		    if (!$printer->{noninteractive});
 		$in->do_pkgs->install('hpoj', 'xojpanel');
 	    }
 	    # Configure and start HPOJ
-	    my $_w = $in->wait_message(
-		 N("Printerdrake"),
-		 N("Checking device and configuring HPOJ..."));
-	    $ptaldevice = printer::main::configure_hpoj($device, @autodetected);
+	    my $_w = $in->wait_message
+		(N("Printerdrake"),
+		 N("Checking device and configuring HPOJ..."))
+		if (!$printer->{noninteractive});
+	    $ptaldevice = printer::main::configure_hpoj
+		($device, @autodetected);
 	    
 	    if ($ptaldevice) {
 		# Configure scanning with SANE on the MF device
@@ -1486,9 +1536,10 @@ sub setup_common {
 						   /usr/lib/libsane-hpoj.so.1),
 						if_(files_exist('/usr/bin/gimp'), 
 						    '/usr/bin/xsane-gimp'))) {
-			my $_w = $in->wait_message(
-			     N("Printerdrake"),
-			     N("Installing SANE packages..."));
+			my $_w = $in->wait_message
+			    (N("Printerdrake"),
+			     N("Installing SANE packages..."))
+			    if (!$printer->{noninteractive});
 			$in->do_pkgs->install('sane-backends',
 					      'sane-frontends',
 					      'xsane', 'libsane-hpoj0',
@@ -1509,29 +1560,32 @@ sub setup_common {
 						  /usr/bin/mcopy
 						  /usr/bin/MToolsFM
 						  ))) {
-			my $_w = $in->wait_message(
-			     N("Printerdrake"),
-			     N("Installing mtools packages..."));
+			my $_w = $in->wait_message
+			    (N("Printerdrake"),
+			     N("Installing mtools packages..."))
+			    if (!$printer->{noninteractive});
 			$in->do_pkgs->install('mtools', 'mtoolsfm');
 		    }
 		    # Configure mtools/MToolsFM for photo card access
 		    printer::main::config_photocard();
 		}
 		
-		my $text = "";
-		# Inform user about how to scan with his MF device
-		$text = scanner_help($makemodel, "ptal:/$ptaldevice");
-		if ($text) {
-		    $in->ask_warn(
-			 N("Scanning on your HP multi-function device"),
-			 $text);
-		}
-		# Inform user about how to access photo cards with his MF
-		# device
-		$text = photocard_help($makemodel, "ptal:/$ptaldevice");
-		if ($text) {
-		    $in->ask_warn(N("Photo memory card access on your HP multi-function device"),
-				  $text);
+		if (!$printer->{noninteractive}) {
+		    my $text = "";
+		    # Inform user about how to scan with his MF device
+		    $text = scanner_help($makemodel, "ptal:/$ptaldevice");
+		    if ($text) {
+			$in->ask_warn
+			    (N("Scanning on your HP multi-function device"),
+			     $text);
+		    }
+		    # Inform user about how to access photo cards with his 
+		    # MF device
+		    $text = photocard_help($makemodel, "ptal:/$ptaldevice");
+		    if ($text) {
+			$in->ask_warn(N("Photo memory card access on your HP multi-function device"),
+				      $text);
+		    }
 		}
 		# make the DeviceURI from $ptaldevice.
 		$printer->{currentqueue}{connect} = "ptal:/" . $ptaldevice;
@@ -1572,13 +1626,19 @@ sub setup_common {
 	$device !~ /^socket:/ &&
 	$device !~ /^http:/ &&
 	$device !~ /^ipp:/) {
-	my $_w = $in->wait_message(N("Printerdrake"), N("Making printer port available for CUPS..."));
-	printer::main::assure_device_is_available_for_cups($ptaldevice || $device);
+	my $_w = $in->wait_message
+	    (N("Printerdrake"),
+	     N("Making printer port available for CUPS..."))
+	    if (!$printer->{noninteractive});
+	printer::main::assure_device_is_available_for_cups($ptaldevice ||
+							   $device);
     }
 
     #- Read the printer driver database if necessary
     if ((keys %printer::main::thedb) == 0) {
-	my $_w = $in->wait_message(N("Printerdrake"), N("Reading printer database..."));
+	my $_w = $in->wait_message
+	    (N("Printerdrake"), N("Reading printer database..."))
+	    if (!$printer->{noninteractive});
         printer::main::read_printer_db($printer->{SPOOLER});
     }
 
@@ -1730,7 +1790,8 @@ sub setup_common {
 	    }
 	}
 	# No matching printer found, try a best match as last mean
-	$printer->{DBENTRY} ||= bestMatchSentence($descr, keys %printer::main::thedb);
+	$printer->{DBENTRY} ||=
+	    bestMatchSentence($descr, keys %printer::main::thedb);
         # If the manufacturer was not guessed correctly, discard the
         # guess.
         $printer->{DBENTRY} =~ /^([^\|]+)\|/;
@@ -1796,11 +1857,13 @@ sub get_db_entry {
     #- Read the printer driver database if necessary
     if ((keys %printer::main::thedb) == 0) {
 	my $_w = $in->wait_message(N("Printerdrake"),
-				  N("Reading printer database..."));
-        printer::main::read_printer_db($printer->{SPOOLER});
+				   N("Reading printer database..."))
+	    if (!$printer->{noninteractive});
+	printer::main::read_printer_db($printer->{SPOOLER});
     }
     my $_w = $in->wait_message(N("Printerdrake"),
-			      N("Preparing printer database..."));
+			       N("Preparing printer database..."))
+	if (!$printer->{noninteractive});
     my $queue = $printer->{OLD_QUEUE};
     if ($printer->{configured}{$queue}) {
 	# The queue was already configured
@@ -2229,8 +2292,10 @@ sub setup_options {
 		       val => \$userinputs[$i], 
 		       not_edit => 1,
 		       list => \@{$choicelists[$i]},
-		       advanced => !member($printer->{ARGS}[$i]{name},
-					   @simple_options) });
+		       advanced => (defined($printer->{ARGS}[$i]{group}) and
+				    ($printer->{ARGS}[$i]{group} !~
+				     /^(|General|.*install.*)$/i)) })
+		    if ($printer->{ARGS}[$i]{name} ne 'PageRegion');
 	    } elsif ($printer->{ARGS}[$i]{type} eq 'bool') {
 		# boolean option
 		push(@choicelists, [$printer->{ARGS}[$i]{name}, 
@@ -2242,8 +2307,9 @@ sub setup_options {
 		       val => \$userinputs[$i],
 		       not_edit => 1,
 		       list => \@{$choicelists[$i]},
-		       advanced => !member($printer->{ARGS}[$i]{name},
-					   @simple_options) });
+		       advanced => (defined($printer->{ARGS}[$i]{group}) and
+				    ($printer->{ARGS}[$i]{group} !~
+				     /^(|General|.*install.*)$/i)) });
 	    } else {
 		# numerical option
 		push(@choicelists, []);
@@ -2257,8 +2323,10 @@ sub setup_options {
 			   #min => $printer->{ARGS}[$i]{min},
 			   #max => $printer->{ARGS}[$i]{max},
 			   val => \$userinputs[$i],
-			   advanced => !member($printer->{ARGS}[$i]{name},
-					       @simple_options) });
+			   advanced => 
+			   (defined($printer->{ARGS}[$i]{group}) and
+			    ($printer->{ARGS}[$i]{group} !~
+			     /^(|General|.*install.*)$/i)) });
 	    }
 	}
 	# Show the options dialog. The call-back function does a
@@ -2294,7 +2362,8 @@ sub setup_options {
 	}
 	# Do not show the options setup dialog when installing a new printer
 	# in recommended mode without "Manual configuration" turned on.
-	if (!$printer->{NEW} or $::expert or $printer->{MANUAL}) {
+	if ((!$printer->{NEW} or $::expert or $printer->{MANUAL}) and
+	    (!$printer->{noninteractive})) {
 	    return 0 if !$in->ask_from(
 		 $windowtitle,
 		 N("Printer default settings
@@ -2352,7 +2421,7 @@ sub setasdefault {
     my ($printer, $in) = @_;
     $in->set_help('setupAsDefault') if $::isInstall;
     if ($printer->{DEFAULT} eq '' || # We have no default printer,
-	                               # so set the current one as default
+	                             # so set the current one as default
 	$in->ask_yesorno('', N("Do you want to set this printer (\"%s\")\nas the default printer?", $printer->{QUEUE}), 0)) { # Ask the user
 	$printer->{DEFAULT} = $printer->{QUEUE};
         printer::default::set_printer($printer);
@@ -3008,7 +3077,8 @@ sub configure_queue {
     my ($printer, $in) = @_;
     my $_w = $in->wait_message(N("Printerdrake"),
 			       N("Configuring printer \"%s\"...",
-				 $printer->{currentqueue}{queue}));
+				 $printer->{currentqueue}{queue}))
+	if (!$printer->{noninteractive});
     $printer->{complete} = 1;
     my $retval = printer::main::configure_queue($printer);
     $printer->{complete} = 0;
@@ -3024,9 +3094,14 @@ sub configure_queue {
 sub install_foomatic {
     my ($in) = @_;
     if (!$::testing &&
-	!files_exist(qw(/usr/bin/foomatic-configure /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm))) {
-	my $_w = $in->wait_message(N("Printerdrake"), N("Installing Foomatic..."));
-	$in->do_pkgs->install('foomatic');
+	!files_exist(qw(/usr/bin/foomatic-configure 
+			/usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm
+			/usr/bin/foomatic-rip
+			/usr/share/foomatic/db/source/driver/ljet4.xml))) {
+	my $_w = $in->wait_message(N("Printerdrake"),
+				   N("Installing Foomatic..."));
+	$in->do_pkgs->install('foomatic-db-engine', 'foomatic-filters',
+			      'foomatic-db');
     }
 }
 
@@ -3050,7 +3125,8 @@ sub main {
     # of Printerdrake
     printer::main::set_usermode($::expert);
 
-    find_new_printers($printer, $in, $upNetwork);
+    # Set up new printers
+    $::isInstall || configure_new_printers($printer, $in, $upNetwork);
 
     # Default printer name, we do not use "lp" so that one can switch the
     # default printer under LPD without needing to rename another printer.
@@ -3064,16 +3140,22 @@ sub main {
 				  N("Checking installed software..."));
 	if (!$::testing &&
 	    !files_exist(qw(/usr/bin/foomatic-configure
-				       /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm
-				       /usr/bin/escputil
-				       /usr/share/printer-testpages/testprint.ps
-				       /usr/bin/nmap
-				       /usr/bin/scli
-				       ),
-				    if_(files_exist("/usr/bin/gimp"), "/usr/lib/gimp/1.2/plug-ins/print")
-				    )) {
-	    $in->do_pkgs->install('foomatic', 'printer-utils', 'printer-testpages', 'nmap', 'scli',
-				  if_($in->do_pkgs->is_installed('gimp'), 'gimpprint'));
+			    /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm
+			    /usr/bin/foomatic-rip
+			    /usr/share/foomatic/db/source/driver/ljet4.xml
+			    /usr/bin/escputil
+			    /usr/share/printer-testpages/testprint.ps
+			    /usr/bin/nmap
+			    /usr/bin/scli
+			    ),
+			 if_(files_exist("/usr/bin/gimp"),
+			     "/usr/lib/gimp/1.2/plug-ins/print")
+			 )) {
+	    $in->do_pkgs->install('foomatic-db-engine', 'foomatic-filters',
+				  'foomatic-db', 'printer-utils',
+				  'printer-testpages', 'nmap', 'scli',
+				  if_($in->do_pkgs->is_installed('gimp'),
+				      'gimpprint'));
 	}
 
 	# only experts should be asked for the spooler
