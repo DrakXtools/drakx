@@ -197,6 +197,7 @@ sub kernelVersion {
     my ($o) = @_;
     local $_ = readlink("$::o->{prefix}/boot/vmlinuz") and return first(/vmlinuz-(.*)/);
 
+    require pkgs;
     my $p = pkgs::packageByName($o->{packages}, "kernel") or die "I couldn't find the kernel package!";
     pkgs::packageVersion($p) . "-" . pkgs::packageRelease($p);
 }
@@ -530,6 +531,7 @@ sub g_auto_install(;$) {
     my ($f) = @_; $f ||= auto_inst_file;
     my $o = {};
 
+    require pkgs;
     $o->{default_packages} = [ map { pkgs::packageName($_) } grep { pkgs::packageFlagSelected($_) && !pkgs::packageFlagBase($_) } values %{$::o->{packages}[0]} ];
 
     my @fields = qw(mntpoint type size);
