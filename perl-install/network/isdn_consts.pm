@@ -140,6 +140,11 @@ package network::isdn; # $Id$
    },
    {description => "DynaLink (PCI)",
     driver => 'hisax',
+    type => '12',
+    card => 'pci',
+   },
+   {description => "DynaLink IS64PH, ASUSCOM (PCI)", #36
+    driver => 'hisax',
     type => '36',
     card => 'pci',
    },
@@ -316,11 +321,6 @@ package network::isdn; # $Id$
     type => '36',
     card => 'pci',
    },
-   {description => "Dynalink 128PH (PCI)", #36
-    driver => 'hisax',
-    type => '36',
-    card => 'pci',
-   }
   );
 
 1;
