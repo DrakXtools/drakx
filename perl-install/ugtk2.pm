@@ -854,36 +854,37 @@ sub new {
 	    $o->{window} = $o->{rwindow};
 	}
     } else {
-	$o->{rwindow} = $o->{window} = gtknew('VBox', border_width => 10);
-	set_main_window_size($o);
+	if (!$::WizardWindow) {
+	    $::WizardTable = gtknew('VBox');
 
-	$::WizardTable ||= gtknew('VBox');
-
-	if (!$::Plug && $::isEmbedded) {
-	    $::Plug = $::WizardWindow = gtknew('Plug',
+	    if ($::isEmbedded) {
+		$::Plug = $::WizardWindow = gtknew('Plug',
 					       socket_id => $::XID,
 					       icon => wm_icon(),
 					       child => $::WizardTable,
 					       title => $title || '',
 					   );
-	} elsif (!$::WizardWindow) {
-	    $::WizardWindow = _create_window(
-		title => $title,
-		child => gtknew('Frame', shadow_type => 'out', child => $::WizardTable),
-		if_(!$::isInstall, icon => wm_icon()),
-		if_(!$::isInstall && !$::isStandalone, position_policy => 'center_always'),
-	    );
-	    
-	    if ($::isInstall) {
-		require install_gtk; #- for perl_checker
-		$::WizardWindow->signal_connect(key_press_event => \&install_gtk::special_shortcuts);
+		mygtk2::sync($::WizardWindow);
 	    } else {
-		eval { gtkpack__($::WizardTable, Gtk2::Banner->new(wm_icon(), $::Wizard_title)) };
-		$@ and log::l("ERROR: missing wizard banner");
+		$::WizardWindow = _create_window(
+		    title => $title,
+		    child => gtknew('Frame', shadow_type => 'out', child => $::WizardTable),
+		    if_(!$::isInstall, icon => wm_icon()),
+		    if_(!$::isInstall && !$::isStandalone, position_policy => 'center_always'),
+		);
+	    
+		if ($::isInstall) {
+		    require install_gtk; #- for perl_checker
+		    $::WizardWindow->signal_connect(key_press_event => \&install_gtk::special_shortcuts);
+		} else {
+		    eval { gtkpack__($::WizardTable, Gtk2::Banner->new(wm_icon(), $::Wizard_title)) };
+		    $@ and log::l("ERROR: missing wizard banner");
+		}
+		$::WizardWindow->show;
 	    }
 	}
-	$::WizardWindow->show;
-	flush();
+	$o->{rwindow} = $o->{window} = gtknew('VBox', border_width => 10);
+	set_main_window_size($o);
 	gtkpack($::WizardTable, $o->{window});
     }
     $o->{rwindow}->signal_connect(destroy => sub { $o->{destroyed} = 1 });
