@@ -6,11 +6,9 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 
 use common;
 use interactive;
+use security::level;
+use authentication;
 use any;
-
-my $isMD5 = cat_("/etc/pam.d/system-auth") =~ /md5/;
-my $isShadow = cat_("/etc/pam.d/system-auth") =~ /shadow/;
-
 
 my $users = []; 
 my $in;
@@ -19,13 +17,9 @@ if (my @l = grep { ! /^-/ } @ARGV) {
     $users = [ map { { name => $_, realname => $_ } } @l ];
 } else {
     $in = 'interactive'->vnew('su');
-    any::ask_users($in, $users, $ENV{SECURE_LEVEL}, []);
+    any::ask_users($in, $users, security::level::get(), []);
 }
 
-system("adduser", $_->{name}) foreach @$users;
-any::write_passwd_user($_, $isMD5) foreach @$users;
-system("pwconv") if $isShadow;
-
-any::addUsers($users);
+any::add_users($users, authentication::get());
 
 $in->exit(0) if $in;

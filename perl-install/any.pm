@@ -53,13 +53,49 @@ sub alloc_user_faces {
     }
 }
 
-sub addUsers {
-    my ($users) = @_;
+sub create_user {
+    my ($u, $isMD5) = @_;
+
+    my @existing = stat("$::prefix/home/$u->{name}");
+
+    if (!getpwnam($u->{name})) {
+	my $uid = $u->{uid} || $existing[4];
+	if ($uid && getpwuid($uid)) {
+	    undef $uid; #- suggested uid already in use
+	}
+	my $gid = $u->{gid} || $existing[5] || int getgrnam($u->{name});
+	if ($gid) {
+	    if (getgrgid($gid)) {
+		undef $gid if getgrgid($gid) ne $u->{name};
+	    } else {
+		run_program::rooted($::prefix, 'groupadd', '-g', $gid, $u->{name});
+	    }
+	}
+	run_program::rooted($::prefix, 
+			    'adduser', 
+			    '-p', user_crypted_passwd($u, $isMD5),
+			    if_($uid, '-u', $uid), if_($gid, '-g', $gid), 
+			    $u->{name});
+    }
+
+    my (undef, undef, $uid, $gid, undef, undef, undef, $home) = getpwnam($u->{name});
+
+    if (@existing && $::isInstall && ($uid != $existing[4] || $gid != $existing[5])) {
+	log::l("chown'ing $home from $existing[4].$existing[5] to $uid.$gid");
+	require commands;
+	eval { commands::chown_("-r", "$uid.$gid", "$::prefix$home") };
+    }
+}
+
+sub add_users {
+    my ($users, $authentication) = @_;
 
     alloc_user_faces($users);
-    foreach my $u (@$users) {
-	run_program::rooted($::prefix, "usermod", "-G", join(",", @{$u->{groups}}), $u->{name}) if !is_empty_array_ref($u->{groups});
-	addKdmIcon($u->{name}, delete $u->{auto_icon} || $u->{icon});
+
+    foreach (@$users) {
+	create_user($_, $authentication->{md5});
+	run_program::rooted($::prefix, "usermod", "-G", join(",", @{$_->{groups}}), $_->{name}) if !is_empty_array_ref($_->{groups});
+	addKdmIcon($_->{name}, delete $_->{auto_icon} || $_->{icon});
     }
 }
 
@@ -790,10 +826,15 @@ sub selectCountry {
     $locale->{country} = $other || !@best ? $ext_country : $country;
 }
 
+sub user_crypted_passwd {
+    my ($u, $isMD5) = @_;
+    $u->{password} ? &crypt($u->{password}, $isMD5) : $u->{pw} || '';
+}
+
 sub write_passwd_user {
     my ($u, $isMD5) = @_;
 
-    $u->{pw} = $u->{password} ? &crypt($u->{password}, $isMD5) : $u->{pw} || '';
+    $u->{pw} = user_crypted_passwd($u, $isMD5);      
     $u->{shell} ||= '/bin/bash';
 
     substInFile {

@@ -777,45 +777,7 @@ sub addUser {
 	symlinkf("$::prefix/etc/group", '/etc/group');
     }
 
-    my (%uids, %gids); 
-    foreach (glob_("$::prefix/home")) { my ($u, $g) = (stat($_))[4,5]; $uids{$u} = 1; $gids{$g} = 1 }
-
-    foreach (@$users) {
-	$_->{home} ||= "/home/$_->{name}";
-
-	my $u = $_->{uid} || ($_->{oldu} = (stat("$::prefix$_->{home}"))[4]) || int getpwnam($_->{name});
-	my $g = $_->{gid} || ($_->{oldg} = (stat("$::prefix$_->{home}"))[5]) || int getgrnam($_->{name});
-	#- search for available uid above 501 else initscripts may fail to change language for KDE.
-	if (!$u || getpwuid($u)) { for ($u = 501; getpwuid($u) || $uids{$u}; $u++) {} }
-	if (!$g)                 { for ($g = 501; getgrgid($g) || $gids{$g}; $g++) {} }
-	
-	$_->{uid} = $u; $uids{$u} = 1;
-	$_->{gid} = $g; $gids{$g} = 1;
-    }
-
-    any::write_passwd_user($_, $o->{authentication}{md5}) foreach @$users;
-
-    append_to_file("$::prefix/etc/group",
-		   map { "$_->{name}:x:$_->{gid}:\n" } grep { ! getgrgid($_->{gid}) } @$users);
-
-    foreach my $u (@$users) {
-	if (! -d "$::prefix$u->{home}") {
-	    my $mode = $o->{security} < 2 ? 0755 : 0750;
-	    eval { cp_af("$::prefix/etc/skel", "$::prefix$u->{home}") };
-	    if ($@) {
-		log::l("copying of skel failed: $@"); mkdir("$::prefix$u->{home}", $mode); 
-	    } else {
-		chmod $mode, "$::prefix$u->{home}";
-	    }
-	}
-	require commands;
-	eval { commands::chown_("-r", "$u->{uid}.$u->{gid}", "$::prefix$u->{home}") }
-	    if $u->{uid} != $u->{oldu} || $u->{gid} != $u->{oldg};
-    }
-    #- since we wrote the password in /etc/passwd, we must convert to shadow
-    run_program::rooted($::prefix, 'pwconv') if $o->{authentication}{shadow};
-
-    any::addUsers($users);
+    any::add_users($users, $o->{authentication});
 
     if ($o->{autologin}) {
 	$o->{desktop} ||= first(any::sessions());
