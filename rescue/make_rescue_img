@@ -103,7 +103,8 @@ installown("rescue-doc", "/usr/bin");
 _ "cd ../mdk-stage1 && make rescue-gui";
 installown("../mdk-stage1/rescue-gui", "/usr/bin");
 
-__ "strip $tmp/{lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
+#- note that on biarch systems, we may need to have both /lib and /lib64
+__ "strip $tmp/{lib,$lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
 
 exit 0 if $ARGV[0];
 
