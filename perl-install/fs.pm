@@ -203,6 +203,7 @@ sub mount($$$;$) {
 	    eval { modules::load('reiserfs') };
 	}
 
+	$where =~ s|/$||;
 	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
 	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die _("mount failed: ") . "$!";
     }

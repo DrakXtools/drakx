@@ -295,7 +295,10 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 
     #- small transaction will be built based on this selection and depslist.
     my @toInstall = pkgs::packagesToInstall($packages);
+
+    $ENV{DURING_INSTALL} = 1;
     pkgs::install($o->{prefix}, $o->{isUpgrade}, \@toInstall, $packages->[1], $packages->[2]);
+    delete $ENV{DURING_INSTALL};
 }
 
 sub afterInstallPackages($) {
@@ -329,10 +332,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     run_program::rooted($o->{prefix}, "chkfontpath", "--add", "/usr/X11R6/lib/X11/fonts/mdk");
 
     #- call update-menus at the end of package installation
-    { 
-	local $ENV{DURING_INSTALL}; delete $ENV{DURING_INSTALL};
-	run_program::rooted($o->{prefix}, "update-menus");
-    }
+    run_program::rooted($o->{prefix}, "update-menus");
 
     #- mainly for auto_install's
     run_program::rooted($o->{prefix}, "sh", "-c", $o->{postInstall}) if $o->{postInstall};

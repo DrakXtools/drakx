@@ -393,9 +393,6 @@ sub miscellaneous {
 	});
 
 	install_any::fsck_option();
-
-	local $ENV{LILO_PASSWORD} = $o->{lilo}{password};
-	run_program::rooted($o->{prefix}, "/usr/sbin/msec", $o->{security});
     } 'doInstallStep';
 }
 
@@ -466,6 +463,9 @@ sub setupBootloader {
 
     $o->setupBootloaderBefore if $_[1] == 1;
     $o->setupBootloader($_[1] - 1);
+    
+    local $ENV{DRAKX_PASSWORD} = $o->{bootloader}{password};
+    run_program::rooted($o->{prefix}, "/usr/sbin/msec", $o->{security});
 }
 #------------------------------------------------------------------------------
 sub configureX {
@@ -498,11 +498,11 @@ sub main {
 		       install_steps_auto_install::errorInStep();
 		   };
     $ENV{SHARE_PATH} ||= "/usr/share";
-    $ENV{DURING_INSTALL} = 1;
+    $ENV{PERL_BADLANG} = 1;
 
     $::beginner = $::expert = $::g_auto_install = 0;
 
-    c::unlimit_core() unless $::testing;
+#-    c::unlimit_core() unless $::testing;
 
     my ($cfg, $patch);
     my %cmdline; map { 

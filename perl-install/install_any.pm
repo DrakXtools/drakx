@@ -533,10 +533,10 @@ sub g_auto_install(;$) {
     exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse wacom netc timezone superuser intf keyboard mkbootdisk users installClass partitioning isUpgrade manualFstab nomouseprobe crypto security modem useSupermount autoExitInstall); #- TODO modules bootloader 
 
     if (my $card = $::o->{X}{card}) {
-	$o->{X}{card}{$_} = $card->{$_} foreach qw(default_depth);
-	if ($card->{default_depth} and my $depth = $card->{depth}{$card->{default_depth}}) {
+	$o->{X}{$_} = $::o->{X}{$_} foreach qw(default_depth resolution_wanted);
+	if ($o->{X}{default_depth} and my $depth = $card->{depth}{$o->{X}{default_depth}}) {
 	    $depth ||= [];
-	    $o->{X}{card}{resolution_wanted} ||= join "x", @{$depth->[0]} unless is_empty_array_ref($depth->[0]);
+	    $o->{X}{resolution_wanted} ||= join "x", @{$depth->[0]} unless is_empty_array_ref($depth->[0]);
 	}
     }
 

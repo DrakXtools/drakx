@@ -323,7 +323,7 @@ _("You have space on your disk for only %d%% of these packages.
 If you wish to install less than this,
 select the percentage of packages that you want to install.
 A low percentage will install only the most important packages;
-a percentage of %d%% will install as many packages as possible.", $percentage + 1, $percentage + 1))
+a percentage of %d%% will install as many packages as possible.", $percentage, $percentage))
 . ($individual ? "\n\n" . _("You will be able to choose them more specifically in the next step.") : ''),
 		 create_packtable({},
 				  [ _("Percentage of packages to install") . '  ', $spin, "%", ],

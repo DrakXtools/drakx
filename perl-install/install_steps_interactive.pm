@@ -585,11 +585,15 @@ sub servicesConfig {
 sub printerConfig {
     my ($o, $clicked) = @_;
 
-    return if $::corporate && $::beginner && !$clicked;
+    return if $::corporate;
 
     require printer;
-    eval { add2hash($o->{printer} ||= {}, printer::getinfo($o->{prefix})) };
     require printerdrake;
+
+    if ($::beginner && !$clicked) {
+	printerdrake::auto_detect($o) or return;
+    }
+    eval { add2hash($o->{printer} ||= {}, printer::getinfo($o->{prefix})) };
     printerdrake::main($o->{printer}, $o, sub { $o->pkg_install($_[0]) });
 }
 

@@ -78,7 +78,7 @@ sub getinfoFromXF86Config {
 	    undef $driver if $s == 1;
 	    $driver = $1 if /^\s*Driver\s+"(.*?)"/;
 	    if ($driver eq $Xconfigurator::serversdriver{$o->{card}{server}}) {
-		$o->{card}{default_depth} ||= $1 if /^\s*DefaultColorDepth\s+(\d+)/;
+		$o->{default_depth} ||= $1 if /^\s*DefaultColorDepth\s+(\d+)/;
 		if (my $i = /^\s*Subsection\s+"Display"/ .. /^\s*EndSubsection/) {
 		    undef $depth if $i == 1;
 		    $depth = $1 if /^\s*Depth\s+(\d*)/;
@@ -94,8 +94,8 @@ sub getinfoFromXF86Config {
     #- get the default resolution according the the current file.
     my @depth = keys %{$o->{card}{depth}};
     $o->{resolution_wanted} ||=
-      ($o->{card}{depth}{$o->{card}{default_depth} || $depth[0]}[0][0]) . "x" .
-	($o->{card}{depth}{$o->{card}{default_depth} || $depth[0]}[0][1]);
+      ($o->{card}{depth}{$o->{default_depth} || $depth[0]}[0][0]) . "x" .
+	($o->{card}{depth}{$o->{default_depth} || $depth[0]}[0][1]);
     $o;
 }
 

@@ -13,18 +13,23 @@ use printer;
 
 1;
 
-sub setup_local($$$) {
-    my ($printer, $in, $install) = @_;
-
+sub auto_detect {
+    my ($in) = @_;
     {
 	my $w = $in->wait_message(_("Test ports"), _("Detecting devices..."));
 	eval { modules::load("parport_pc"); modules::load("parport_probe"); modules::load("lp"); };
     }
+    my $b = before_leaving { eval { modules::unload("parport_probe") } };
+    detect_devices::whatPrinter();
+}
+
+
+sub setup_local($$$) {
+    my ($printer, $in, $install) = @_;
 
     my @port = ();
     my @str = ();
-    my @parport = detect_devices::whatPrinter();
-    eval { modules::unload("parport_probe") };
+    my @parport = auto_detect();
     foreach (@parport) {
 	push @str, _("A printer, model \"%s\", has been detected on ", $_->{val}{DESCRIPTION}) . $_->{port};
     }

@@ -117,7 +117,7 @@ lseek_sector(fd, sector, offset)
   long sector
   long offset
   CODE:
-  RETVAL = llseek(fd, (long long) sector * SECTORSIZE + offset, SEEK_SET) >= 0;
+  RETVAL = lseek64(fd, (long long) sector * SECTORSIZE + offset, SEEK_SET) >= 0;
   OUTPUT:
   RETVAL
 

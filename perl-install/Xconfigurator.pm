@@ -2,7 +2,7 @@ package Xconfigurator;
 
 use diagnostics;
 use strict;
-use vars qw($in $install $isLaptop $resolution_wanted @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $pointersection_text_v4 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $default_monitor $layoutsection_v4);
+use vars qw($in $install $isLaptop @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $pointersection_text_v4 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $default_monitor $layoutsection_v4);
 
 use pci_probing::main;
 use common qw(:common :file :functional :system);
@@ -395,7 +395,7 @@ You can switch if off if you want, you'll hear a beep when it's over"), 1) or re
     #- Configure the modes order.
     my ($ok, $best);
     foreach (reverse @depths) {
-	local $card->{default_depth} = $_;
+	local $o->{default_depth} = $_;
 
 	my ($resolutions, $clocklines) = eval { testConfig($o) };
 	if ($@ || !$resolutions) {
@@ -424,7 +424,7 @@ sub autoDefaultDepth($$) {
     while (my ($d, $r) = each %{$card->{depth}}) {
 	$depth = max($depth || 0, $d);
 
-	#- try to have $resolution_wanted
+	#- try to have resolution_wanted
 	$best = max($best || 0, $d) if $r->[0][0] >= $wres_wanted;
     }
     $best || $depth or die "no valid modes";
@@ -583,8 +583,8 @@ Try with another video card or monitor")), return;
     my $wres = first(split 'x', $res);
 
     #- take the first available resolution <= the wanted resolution
-    $wres = max map { first(grep { $_->[0] <= $wres } @$_)->[0] } values %{$card->{depth}};
-    my $depth = eval { $card->{default_depth} || autoDefaultDepth($card, $wres) };
+    $wres ||= max map { first(grep { $_->[0] <= $wres } @$_)->[0] } values %{$card->{depth}};
+    my $depth = eval { $o->{default_depth} || autoDefaultDepth($card, $wres) };
 
     $options{auto} or ($depth, $wres) = chooseResolutions($card, $depth, $wres) or return;
 
@@ -599,9 +599,9 @@ Try with another video card or monitor")), return;
     #- remove all biggest resolution (keep the small ones for ctl-alt-+)
     #- otherwise there'll be a virtual screen :(
     $card->{depth}{$depth} = [ grep { $_->[0] <= $wres } @{$card->{depth}{$depth}} ];
-    $card->{default_depth} = $depth;
     $card->{default_wres} = $wres;
     $card->{vga_mode} = $vgamodes{"${wres}xx$depth"} || $vgamodes{"${res}x$depth"}; #- for use with frame buffer.
+    $o->{default_depth} = $depth;
     1;
 }
 
@@ -836,7 +836,7 @@ Section "Screen"
 );
 
     if (member($O->{server}, @svgaservers)) {
-	&$screen("svga", $O->{default_depth}, $O->{type}, $O->{depth});
+	&$screen("svga", $o->{default_depth}, $O->{type}, $O->{depth});
     } else {
 	&$screen("svga", '', "Generic VGA", { 8 => [[ 320, 200 ]] });
     }
@@ -849,9 +849,9 @@ Section "Screen"
 	     (member($O->{server}, "Mono", "VGA16") ? $O->{type} : "Generic VGA"),
 	     { '' => [[ 640, 480 ], [ 800, 600 ]]});
 
-    &$screen("accel", $O->{default_depth}, $O->{type}, $O->{depth});
+    &$screen("accel", $o->{default_depth}, $O->{type}, $O->{depth});
 
-    &$screen("fbdev", $O->{default_depth}, $O->{type}, $O->{depth});
+    &$screen("fbdev", $o->{default_depth}, $O->{type}, $O->{depth});
 
 
     print G qq(
@@ -861,7 +861,7 @@ Section "Screen"
     Monitor     "$o->{monitor}{type}"
 );
     #- bpp 32 not handled by XF4
-    $subscreen->(*G, "svga", min($O->{default_depth}, 24), $O->{depth});
+    $subscreen->(*G, "svga", min($o->{default_depth}, 24), $O->{depth});
 
     print G '
 
