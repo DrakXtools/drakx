@@ -637,7 +637,7 @@ sub g_auto_install {
     $_ = { %{$_ || {}} }, delete @$_{qw(oldu oldg password password2)} foreach $o->{superuser}, @{$o->{users} || []};
     
     require Data::Dumper;
-    join('', 
+    my $str = join('', 
 "#!/usr/bin/perl -cw
 #
 # You should check the syntax of this file before using it in an auto-install.
@@ -649,6 +649,8 @@ qq(\npackage install_steps_auto_install;), q(
 $graphical = 1;
 push @graphical_steps, 'doPartitionDisks', 'choosePartitionsToFormat', 'formatMountPartitions';
 )), "\0");
+    $str =~ s/ {8}/\t/g; #- replace all 8 space char by only one tabulation, this reduces file size so much :-)
+    $str;
 }
 
 
@@ -666,10 +668,12 @@ sub g_default_packages {
     }
 
     require Data::Dumper;
+    my $str = Data::Dumper->Dump([ { default_packages => pkgs::selected_leaves($o->{packages}) } ], ['$o']);
+    $str =~ s/ {8}/\t/g;
     output('/floppy/auto_inst.cfg', 
 	   "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl'\n",
 	   "# before testing.  To use it, boot with ``linux defcfg=floppy''\n",
-	   Data::Dumper->Dump([ { default_packages => pkgs::selected_leaves($o->{packages}) } ], ['$o']), "\0");
+	   $str, "\0");
     fs::umount("/floppy");
 
     $quiet or $o->ask_warn('', _("To use this saved packages selection, boot installation with ``linux defcfg=floppy''"));
