@@ -675,8 +675,7 @@ my %charset2kde_font = (
 
 sub charset2kde_font {
     my ($charset, $type) = @_;
-    my $kdecharset = charset2kde_charset($charset);
-    
+
     my $font = $charset2kde_font{$charset} || $charset2kde_font{default};
     my $r = $font->[$type] || $font->[0];
 
