@@ -118,6 +118,7 @@ my %lang2keyboard =
   'sv' => 'se:85 fi:30 dvorak_se:10',
 'sv_FI'=> 'fi:85 sv:20',
 'sv_SE'=> 'se:85 fi:20',
+  'ta' => 'tml:80',
   'tg' => 'tj:80 ru_yawerty:40',
   'th' => 'th:90',
   'tr' => 'tr_q:85 tr_q:30',
@@ -226,6 +227,8 @@ arch() =~ /^sparc/ ? (
  "sk_qwerty" => [ __("Slovakian (QWERTY)"), "sk-qwerty", "sk_qwerty" ],
 # TODO: console map
  "sr" => [ __("Serbian (cyrillic)"), "yu", "sr" ],
+# no console kbd that I'm aware of
+ "tml" => [ __("Tamil"),	 "us",		"tml" ],
  "th" => [ __("Thai keyboard"),  "th",          "th" ],
 # TODO: console map
  "tj" => [ __("Tajik keyboard"),  "tj",          "tj" ],
