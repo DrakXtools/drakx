@@ -531,6 +531,7 @@ sub choosePackages {
 
     $o->choosePackagesTree($packages) if $individual;
 
+    install_any::warnAboutRemovedPackages($o, $o->{packages});
     install_any::warnAboutNaughtyServers($o);
 }
 
