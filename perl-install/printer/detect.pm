@@ -74,75 +74,88 @@ sub whatUsbport() {
 	my $realport = devices::make($port);
 	next if !$realport;
 	next if ! -r $realport;
-	open(my $PORT, $realport) or next;
-	my $idstr = "";
-	# Calculation of IOCTL function 0x84005001 (to get device ID
-	# string):
-	# len = 1024
-	# IOCNR_GET_DEVICE_ID = 1
-	# LPIOC_GET_DEVICE_ID(len) =
-	#     _IOC(_IOC_READ, 'P', IOCNR_GET_DEVICE_ID, len)
-	# _IOC(), _IOC_READ as defined in /usr/include/asm/ioctl.h
-	# Use "eval" so that program does not stop when IOCTL fails
-	eval { 
-	    my $output = "\0" x 1024; 
-	    ioctl($PORT, 0x84005001, $output);
-	    $idstr = $output;
-        } or do {
+	foreach my $j (1..3) {
+	    open(my $PORT, $realport) or next;
+	    my $idstr = "";
+	    # Calculation of IOCTL function 0x84005001 (to get device ID
+	    # string):
+	    # len = 1024
+	    # IOCNR_GET_DEVICE_ID = 1
+	    # LPIOC_GET_DEVICE_ID(len) =
+	    #     _IOC(_IOC_READ, 'P', IOCNR_GET_DEVICE_ID, len)
+	    # _IOC(), _IOC_READ as defined in /usr/include/asm/ioctl.h
+	    # Use "eval" so that program does not stop when IOCTL fails
+	    eval { 
+		my $output = "\0" x 1024; 
+		ioctl($PORT, 0x84005001, $output);
+		$idstr = $output;
+	    } or do {
+		close $PORT;
+		next;
+	    };
 	    close $PORT;
-	    next;
-	};
-	close $PORT;
-	# Remove non-printable characters
-	$idstr =~ tr/[\x00-\x1f]/\./;
-	# Extract the printer data from the ID string
-	my ($manufacturer, $model, $serialnumber, $description, 
-	    $commandset, $sku) =
-	    ("", "", "", "", "");
-	if ($idstr =~ /MFG:([^;]+);/ || $idstr =~ /MANUFACTURER:([^;]+);/) {
-	    $manufacturer = $1;
-	    $manufacturer =~ s/Hewlett[-\s_]Packard/HP/;
-	    $manufacturer =~ s/HEWLETT[-\s_]PACKARD/HP/;
+	    # Remove non-printable characters
+	    $idstr =~ tr/[\x00-\x1f]/\./;
+	    # If we do not find any item in the ID string, we try to read
+	    # it again
+	    my $itemfound = 0;
+	    # Extract the printer data from the ID string
+	    my ($manufacturer, $model, $serialnumber, $description, 
+		$commandset, $sku) =
+		    ("", "", "", "", "");
+	    if ($idstr =~ /MFG:([^;]+);/ || $idstr =~ /MANUFACTURER:([^;]+);/) {
+		$manufacturer = $1;
+		$manufacturer =~ s/Hewlett[-\s_]Packard/HP/;
+		$manufacturer =~ s/HEWLETT[-\s_]PACKARD/HP/;
+		$itemfound = 1;
+	    }
+	    # For HP's multi-function devices the real model name is in the "SKU"
+	    # field. So use this field with priority for $model when it exists.
+	    if ($idstr =~ /MDL:([^;]+);/ || $idstr =~ /MODEL:([^;]+);/) {
+		$model ||= $1;
+		$itemfound = 1;
+	    }
+	    if ($idstr =~ /SKU:([^;]+);/) {
+		$sku = $1;
+		$itemfound = 1;
+	    }
+	    if ($idstr =~ /DES:([^;]+);/ || $idstr =~ /DESCRIPTION:([^;]+);/) {
+		$description = $1;
+		$description =~ s/Hewlett[-\s_]Packard/HP/;
+		$description =~ s/HEWLETT[-\s_]PACKARD/HP/;
+		$itemfound = 1;
+	    }
+	    if ($idstr =~ /SE*R*N:([^;]+);/) {
+		$serialnumber = $1;
+		$itemfound = 1;
+	    }
+	    if ($idstr =~ /CMD:([^;]+);/ || 
+		$idstr =~ /COMMAND\s*SET:([^;]+);/) {
+		$commandset ||= $1;
+		$itemfound = 1;
+	    }
+	    next if !$itemfound;
+	    # Was there a manufacturer and a model in the string?
+	    if ($manufacturer eq "" || $model eq "") {
+		$manufacturer = "";
+		$model = N("Unknown Model");
+	    }
+	    # No description field? Make one out of manufacturer and model.
+	    if ($description eq "") {
+		$description = "$manufacturer $model";
+	    }
+	    # Store this auto-detection result in the data structure
+	    push @res, { port => $port, val => 
+			 { CLASS => 'PRINTER',
+			   MODEL => $model,
+			   MANUFACTURER => $manufacturer,
+			   DESCRIPTION => $description,
+			   SERIALNUMBER => $serialnumber,
+			   'COMMAND SET' => $commandset,
+			   SKU => $sku
+			   } };
+	    last;
 	}
-	# For HP's multi-function devices the real model name is in the "SKU"
-	# field. So use this field with priority for $model when it exists.
-	if ($idstr =~ /MDL:([^;]+);/ || $idstr =~ /MODEL:([^;]+);/) {
-	    $model ||= $1;
-	}
-	if ($idstr =~ /SKU:([^;]+);/) {
-	    $sku = $1;
-	}
-	if ($idstr =~ /DES:([^;]+);/ || $idstr =~ /DESCRIPTION:([^;]+);/) {
-	    $description = $1;
-	    $description =~ s/Hewlett[-\s_]Packard/HP/;
-	    $description =~ s/HEWLETT[-\s_]PACKARD/HP/;
-	}
-	if ($idstr =~ /SE*R*N:([^;]+);/) {
-	    $serialnumber = $1;
-	}
-	if ($idstr =~ /CMD:([^;]+);/ || 
-	    $idstr =~ /COMMAND\s*SET:([^;]+);/) {
-	    $commandset ||= $1;
-	}
-	# Was there a manufacturer and a model in the string?
-	if ($manufacturer eq "" || $model eq "") {
-	    $manufacturer = "";
-	    $model = N("Unknown Model");
-	}
-	# No description field? Make one out of manufacturer and model.
-	if ($description eq "") {
-	    $description = "$manufacturer $model";
-	}
-	# Store this auto-detection result in the data structure
-	push @res, { port => $port, val => 
-		     { CLASS => 'PRINTER',
-		       MODEL => $model,
-		       MANUFACTURER => $manufacturer,
-		       DESCRIPTION => $description,
-		       SERIALNUMBER => $serialnumber,
-		       'COMMAND SET' => $commandset,
-		       SKU => $sku
-		   } };
     }
     @res;
 }
