@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 39mdk
+Release: 40mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri May 28 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-40mdk
+- drakconnect:
+  o blacklist loopback interface in new detection scheme
+  o switch from internet service to regular ifcfg files (poulpy) (WIP)
+  o fallback on sysfs in order to get driver and card description when
+    ethtool is not supported (eg: ipw2100 driver for intel centrino)
+
 * Thu May 27 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-39mdk
 - diskdrake (pixel):
   o allow /home on nfs (#7460)
