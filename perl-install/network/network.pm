@@ -349,7 +349,7 @@ notation (for example, 1.2.3.4).");
                 { label => N("IP address"), val => \$intf->{IPADDR}, disabled => sub { $auto_ip } },
 	           { label => N("Netmask"), val => \$intf->{NETMASK}, disabled => sub { $auto_ip } },
 		   
-                { label => N("DHCP host name"), val => \$intf->{DHCP_HOSTNAME}, disabled => sub { ! $auto_ip }, advanced => 1 },
+                { label => N("DHCP host name"), val => \$intf->{DHCP_HOSTNAME}, disabled => sub { ! ($auto_ip && $needhostname) }, advanced => 1 },
                 { text => N("Track network card id (useful for laptops)"), val => \$track_network_id, type => "bool", advanced => 1 },
                 { text => N("Network Hotplugging"), val => \$hotplug, type => "bool", advanced => 1 },
                 { text => N("Assign host name from DHCP address"), val => \$needhostname, type => "bool", disabled => sub { ! $auto_ip }, advanced => 1 },
