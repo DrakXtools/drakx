@@ -1,3 +1,30 @@
+2004/02/20  tsdgeos
+
+	* share/po/ca.po: Some updates and unfuzzying
+
+2004/02/20  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* detect_devices.pm (getBewan) introduce it in order to detect Bewan ADSL
+	modems (both PCI
+	and USB ones)
+	(getSagem) lookup sagem8xx modems by module rather than relying on
+	strings
+	manually added to ldetect-lst
+
+	* standalone/drakperm: fix "current" checkbox vs "group" and "user"
+	pull-down menus
+
+	* standalone/logdrake: fix title when run from mcc (#8111)
+
+	* network/netconnect.pm: when one refuse to install firmware *now*, she
+	won't be able to select
+	a provider, thus vci and vpi parameters won't be filled
+	remove useless "next" field (since post already handle it)
+	enable to refuse network restarting
+
+	* drakxtools.spec: 10-3mdk
+	10-2mdk
+
 2004/02/20  Damien Chaumette  <dchaumette at mandrakesoft.com>
 
 	* network/adsl.pm: keep provider vpi/vci settings when exist
@@ -26980,7 +27007,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.879 2004/02/20 15:15:33 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.880 2004/02/20 18:13:39 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
