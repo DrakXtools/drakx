@@ -497,7 +497,7 @@ sub main {
     if ($::oem) {
 	$o->{partitioning}{use_existing_root} = 1;
 	$o->{partitioning}{auto_allocate} = 1;
-	$o->{compssListLevel} = 50;
+	$o->{compssListLevel} = 4;
 	push @auto, 'selectInstallClass', 'doPartitionDisks', 'choosePackages', 'configureTimezone', 'exitInstall';
     }
 
