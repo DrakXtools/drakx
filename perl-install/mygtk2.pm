@@ -335,7 +335,7 @@ sub _gtk__ScrolledWindow {
 	
     if (!$w) {
 	$w = Gtk2::ScrolledWindow->new(undef, undef);
-	$w->set_policy(@{delete $opts->{policy} || [ 'automatic', 'automatic' ]});
+	$w->set_policy(delete $opts->{h_policy} || 'automatic', delete $opts->{v_policy} || 'automatic');
     }
 
     if (my $child = delete $opts->{child}) {

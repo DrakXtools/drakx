@@ -1,3 +1,5 @@
+use MDK::Common;
+
 BEGIN {
     @ARGV or warn(<<EOF), exit 1;
 usage: unused/migrate-ugtk2-to-mygtk2.pl -pi <file.pm>
@@ -103,8 +105,22 @@ while ($b) {
     $b = 1 if s/create_hbox\((['"].*?['"])\)/gtknew('HButtonBox', layout => $1)/ ||
               s/create_hbox\(\)/gtknew('HButtonBox')/;
 
-    $b = 1 if s/create_scrolled_window\(($re)\s*,\s*($re)\)/gtknew('ScrolledWindow', policy => $2, child => $1)/ ||
-              s/create_scrolled_window\(($re)\)/gtknew('ScrolledWindow', child => $1)/;
+    if (my ($arg) = /create_scrolled_window\(($re)\)/) {
+	my $val;
+	if (my ($child, $policy) = $arg =~ /^($re)\s*,\s*($re)$/) {
+	    if (my ($h, $v) = $policy =~ /^\[\s*($re)\s*,\s*($re)\s*\]$/) {
+		foreach ($h, $v) {
+		    $_ = /never/i ? 'never' : /always/ ? 'always' : '';
+		}
+		$val = join(', ', if_($h, "h_policy => '$h'"), if_($v, "v_policy => '$v'"), "child => $child");
+	    } else {
+		#- ???
+	    }
+	} else {
+	    $val = "child => $arg";
+	}
+	$b = 1 if $val && s/create_scrolled_window\($re\)/gtknew('ScrolledWindow', $val)/;
+    }
 
     $b = 1 if s/create_packtable\(\{($re)\},/my $s = prepost_chomp($1); "gtknew('Table', " . ($s ? "$s, " : '') . "children => ["/e;
 
