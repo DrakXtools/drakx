@@ -63,7 +63,7 @@ my $in;
 my $splash = -f '/proc/splash';
 # For each hw, class, detect device, compare and offer to reconfigure if needed
 foreach my $hw_class (@harddrake::data::tree) {
-    my ($Ident, $item, $configurator, $detector, $do_it) = @$hw_class{qw(class string configurator_auto detector checked_on_boot)};
+    my ($Ident, $item, $configurator, $detector, $do_it) = @$hw_class{qw(class string configurator detector checked_on_boot)};
     $configurator ||= $hw_class->{configurator};
 
     next unless $do_it ^ $invert_do_it;
