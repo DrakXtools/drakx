@@ -858,7 +858,7 @@ notation (for example, 1.2.3.4).")),
                     data => [
                              { label => N("Operating Mode"), val => \$ethntf->{WIRELESS_MODE}, 
                                list => [ keys %wireless_mode ] },
-                             { label => N("Netwok name (ESSID)"), val => \$ethntf->{WIRELESS_ESSID} },
+                             { label => N("Network name (ESSID)"), val => \$ethntf->{WIRELESS_ESSID} },
                              { label => N("Network ID"), val => \$ethntf->{WIRELESS_NWID} },
                              { label => N("Operating frequency"), val => \$ethntf->{WIRELESS_FREQ} },
                              { label => N("Sensitivity threshold"), val => \$ethntf->{WIRELESS_SENS} },
