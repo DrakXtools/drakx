@@ -332,7 +332,6 @@ sub build_notebook {
 	$gui->{intf}{BOOTPROTO} and $gui->{intf}{BOOTPROTO}->set_popdown_strings(N_("static"), N_("dhcp"));
 	$interface !~ /eth/ and $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK};
 	!$intf->{IPADDR} and ($intf->{IPADDR}, $gui->{active}, $intf->{NETMASK}) = get_intf_ip($interface);
-	$gui->{intf}{$_}->set_text($intf->{$_}) foreach keys %{$gui->{intf}};
 	$gui->{netc}{$_}->set_text($netc->{$_}) foreach keys %{$gui->{netc}};
     }
     
@@ -368,7 +367,6 @@ sub build_notebook {
 			     ),
 			),
 	       );
-	$gui->{intf}{$_}->set_text($intf->{$_}) foreach keys %{$gui->{intf}};
     }
     
     if ($intf->{pages}{Options}) {
@@ -437,7 +435,6 @@ sub build_notebook {
 	$gui->{intf}{passwd}->set_visibility(0);
 	#/^user\s+"([^"]+)"/ and $intf->{login} = $1 foreach cat_("/etc/ppp/peers/adsl");
 	#$_->{login} eq $intf->{login} and $intf->{passwd} = $_->{passwd} foreach @{read_secret_backend()};
-	$gui->{intf}{$_}->set_text($intf->{$_}) foreach keys %{$gui->{intf}};
     }
     
     if ($intf->{pages}{Modem}) {
@@ -486,7 +483,8 @@ sub build_notebook {
 			      ),
 	       );
     }
-    
+
+    $gui->{intf}{$_}->set_text($intf->{$_}) foreach keys %{$gui->{intf}};
     $gui->{notebook} = Gtk2::Notebook->new;
     populate_notebook($gui->{notebook}, $gui);
 }
