@@ -2467,13 +2467,13 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occured: %s"
 msgstr ""
-"FAT resizeren greidde ikke å håndtere din partisjon, \n"
-"følgene feil fant sted: %s"
+"Størrelsesendreren for FAT greide ikke å håndtere din partisjon, \n"
+"følgende feil oppsto: %s"
 
 #: ../../install_interactive.pm_.c:72
 msgid "Your windows partition is too fragmented, please run ``defrag'' first"
 msgstr ""
-"Din windows partisjon er for fragmentert, vennligst kjør 'defrag' først"
+"Windows-partisjonen din er for fragmentert, vennligst kjør ``defrag'' først"
 
 #: ../../install_interactive.pm_.c:73
 msgid ""
@@ -2588,9 +2588,9 @@ msgid "PCMCIA"
 msgstr "PCMCIA"
 
 #: ../../install_interactive.pm_.c:181
-#, fuzzy, c-format
+#, c-format
 msgid "Try to find %s devices?"
-msgstr "Prøve å finne PCI-enheter?"
+msgstr "Prøve å finne %s enheter?"
 
 #: ../../install_interactive.pm_.c:193
 #, c-format
@@ -3012,14 +3012,15 @@ msgid "Choose the mount points"
 msgstr "Velg monteringspunktene"
 
 #: ../../install_steps_interactive.pm_.c:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
 "I'll try to go on blanking bad partitions and ALL DATA will be lost\n"
 "(%s)"
 msgstr ""
 "Jeg kan ikke lese partisjonstabellen din, den er for ødelagt for meg :(\n"
-"Jeg vil førsøke å blanke ut dårlige partisjoner"
+"Jeg vil førsøke å blanke ut dårlige partisjoner, ALLE DATA vil gå tapt\n"
+"(%s)"
 
 #: ../../install_steps_interactive.pm_.c:220
 msgid ""
@@ -3198,9 +3199,8 @@ msgid ""
 msgstr "Vil du konfigurere oppringt med modem for systemet ditt?"
 
 #: ../../install_steps_interactive.pm_.c:519
-#, fuzzy
 msgid "Do you want to configure a ISDN connection for your system?"
-msgstr "Vil du konfigurere lokalt LAN-nettverk for systemet ditt?"
+msgstr "Vil du konfigurere en ISDN oppkobling for systemet ditt?"
 
 #: ../../install_steps_interactive.pm_.c:531
 #: ../../install_steps_interactive.pm_.c:532
@@ -4196,17 +4196,19 @@ msgstr "Er dette riktig?"
 
 #: ../../netconnect.pm_.c:186
 msgid "I have founded an ISDN Card:\n"
-msgstr ""
+msgstr "Jeg har funnet et ISDN-kort:\n"
 
 #: ../../netconnect.pm_.c:194
 msgid ""
 "I have detected an ISDN PCI Card, but I don't know the type. Please select "
 "one PCI card on the next screen."
 msgstr ""
+"Jeg har oppdaget et ISDN PCI-kort, men jeg vet ikke hviklet type. Vennligst "
+"velg et PCI-kort i neste skjermbilde."
 
 #: ../../netconnect.pm_.c:201
 msgid "No ISDN PCI card found. Please select one on the next screen."
-msgstr ""
+msgstr "Ingen ISDN PCI-kort funnet. Vennligst velg et i neste skjermbilde."
 
 #: ../../partition_table.pm_.c:542
 msgid "Extended partition not supported on this platform"
@@ -4850,44 +4852,48 @@ msgstr "Installasjon av LILO mislykket. Følgende feil oppsto:"
 
 #: ../../standalone/drakgw_.c:84
 msgid "Internet Connection Sharing currently enabled"
-msgstr ""
+msgstr "Deling av Internett tilkobling er slått på"
 
 #: ../../standalone/drakgw_.c:85 ../../standalone/drakgw_.c:103
 msgid "The setup of Internet connection sharing has already been done.\n"
 msgstr ""
+"Innstilling av deling av Internett tilkobling har allerede blitt gjort.\n"
 
 #: ../../standalone/drakgw_.c:102
 msgid "Internet Connection Sharing currently disabled"
-msgstr ""
+msgstr "Deling av Internett tilkobling er slått av"
 
 #: ../../standalone/drakgw_.c:120
 msgid "Config file content could not be interpreted."
-msgstr ""
+msgstr "Innhold i konfig-fil kunne ikke bli tolket."
 
 #: ../../standalone/drakgw_.c:130
-#, fuzzy
 msgid "Internet Connection Sharing"
-msgstr "Skrivertilkobling"
+msgstr "Deling av Internett tilkobling"
 
 #: ../../standalone/drakgw_.c:131
 msgid ""
 "Your computer can be configured to share its Internet connection.\n"
 "\n"
 msgstr ""
+"Maskin din kan konfigureres til å dele dens Internett tilkobling.\n"
+"\n"
 
 #: ../../standalone/drakgw_.c:180
 msgid "No network adapter on your system!"
-msgstr ""
+msgstr "Ikke noe nettverksadapter i systemet ditt!"
 
 #: ../../standalone/drakgw_.c:181
 msgid ""
 "No ethernet network adapter is currently configured on your system. Please "
 "run the hardware configuration tool."
 msgstr ""
+"Ikke noe ethernet nettverksadapter er for øyeblikket konfigurert i systemet "
+"ditt. Vennligst bruk verktøyet for maskinvarekonfigurasjon."
 
 #: ../../standalone/drakgw_.c:187
 msgid "Network interface"
-msgstr ""
+msgstr "Nettverksgrensesnitt"
 
 #: ../../standalone/drakgw_.c:188
 msgid ""
@@ -4897,38 +4903,43 @@ msgid ""
 "\n"
 "Would you like to setup your Local Area Network with that adapter?"
 msgstr ""
+"Det er bare ett konfigurert nettverksadapter i systemet ditt:\n"
+"\n"
+"$grensesnitt\n"
+"\n"
+"Ønsker du å sette opp ditt lokale nettverk (LAN) med det adapteret?"
 
 #: ../../standalone/drakgw_.c:192
-#, fuzzy
 msgid "Choose the network interface"
-msgstr "Velg den nye størrelsen"
+msgstr "Velg nettverksgrensesnitt"
 
 #: ../../standalone/drakgw_.c:193
 msgid ""
 "Please choose what network adapter will be connected\n"
 "to your Local Area Network."
 msgstr ""
+"Vennligst velg hvilket nettverksadapter som skal kobles\n"
+"til ditt lokale nettverk (LAN)."
 
 #: ../../standalone/drakgw_.c:205
 msgid "Local Area Network specification"
-msgstr ""
+msgstr "Spesifikasjon lokalt nettverk (LAN)"
 
 #: ../../standalone/drakgw_.c:206
 msgid "You may now decide which class C network to use.\n"
-msgstr ""
+msgstr "Du kan nå bestemme hvilket klasse C nettverk som skal brukes.\n"
 
 #: ../../standalone/drakgw_.c:207
-#, fuzzy
 msgid "Network:"
-msgstr "Nettmaske:"
+msgstr "Nettverk:"
 
 #: ../../standalone/drakgw_.c:225
 msgid "Potential LAN address conflict found in current config of $_!\n"
-msgstr ""
+msgstr "Mulig LAN-adresse konflikt funnet i konfigurasjonen til $_!\n"
 
 #: ../../standalone/drakgw_.c:233
 msgid "Internet Connection Sharing - setup of $device"
-msgstr ""
+msgstr "Deling av Internett tilkobling - oppsett av $enhet"
 
 #: ../../standalone/drakgw_.c:234
 msgid ""
@@ -4937,48 +4948,50 @@ msgid ""
 "$interface\n"
 "\n"
 msgstr ""
+"Følgende grensesnitt er i ferd med å bli konfigurert:\n"
+"\n"
+"$grensesnitt\n"
+"\n"
 
 #: ../../standalone/drakgw_.c:245
 msgid "Configuring scripts, installing software, starting servers..."
-msgstr ""
+msgstr "Konfigurerer script, installerer programvare, starter tjenere..."
 
 #: ../../standalone/drakgw_.c:269
 msgid "Could not install ipchains RPM with urpmi."
-msgstr ""
+msgstr "Kunne ikke installere ipchains RPM med urpmi."
 
 #: ../../standalone/drakgw_.c:395
 msgid "Could not install dhcp RPM with urpmi."
-msgstr ""
+msgstr "Kunne ikke installere dhcp RPM med urpmi."
 
 #: ../../standalone/drakgw_.c:419
 msgid "Could not install linuxconf RPM with urpmi."
-msgstr ""
+msgstr "Kunne ikke installere linuxconf RPM med urpmi."
 
 #: ../../standalone/drakgw_.c:435
 msgid "Could not install bind RPM with urpmi."
-msgstr ""
+msgstr "Kunne ikke installere bind RPM med urpmi."
 
 #: ../../standalone/drakgw_.c:439
 msgid "Could not install caching-nameserver RPM with urpmi."
-msgstr ""
+msgstr "Kunne ikke installere caching-nameserver RPM med urpmi."
 
 #: ../../standalone/drakgw_.c:451
-#, fuzzy
 msgid "Firewalling configuration detected.!"
-msgstr "leser konfigurasjon"
+msgstr "Brannmurkonfigurasjon oppdaget.!"
 
 #: ../../standalone/drakgw_.c:452
 msgid "Warning! An existing firewalling configuration has been detected.\n"
-msgstr ""
+msgstr "Advarsel! En eksisterende brannmurkonfigurasjon har blitt oppdaget.\n"
 
 #: ../../standalone/drakgw_.c:455
-#, fuzzy
 msgid "Everything configured!"
-msgstr "leser konfigurasjon"
+msgstr "Alt er konfigurert!"
 
 #: ../../standalone/drakgw_.c:456
 msgid "Everything has been configured.\n"
-msgstr ""
+msgstr "Alt har blitt konfigurert.\n"
 
 #: ../../standalone/draksec_.c:28
 msgid ""
