@@ -64,21 +64,16 @@ gc ALL=(root) NOPASSWD:/usr/bin/patch,NOPASSWD:/bin/rpm,NOPASSWD:/bin/mount,NOPA
 
 (4) boot kernel
 
-you need one or more kernels and (all?) their modules. it's located in
-subdirectory "all.kernels" in DrakX-*.src.rpm ; if you ever grab (or
-build) another boot kernel, replace or add an entry in "all.kernels" as:
+you need one or more kernels and (all?) their modules. it's
+located in the subdirectory "all.kernels" of the "gi/kernel"
+directory; if you ever grab (or build) another boot kernel,
+replace or add an entry in "all.kernels" as:
 
-	(a) create your modules subdir (useful to describe the
-            VERSION_RELEASE) and untar your kernel
-
-[gc@obiwan ~/cvs/gi/all.kernels] mkdir 2.4.1-BOOTcustom
-[gc@obiwan ~/cvs/gi/all.kernels] cd 2.4.1-BOOTcustom
-[gc@obiwan ~/cvs/gi/all.kernels/2.4.1-BOOTcustom] tar jxvf ~/mycustomkernel.tar.bz2
-[gc@obiwan ~/cvs/gi/all.kernels/2.4.1-BOOTcustom] ls
-boot/  cardmgr/  lib/
-
-	(c) build kernel/modules stuff for stage1 and stage2
-[gc@obiwan ~/cvs/gi] ./update_kernel
+[gc@obiwan ~/cvs/gi/kernel/all.kernels] mkdir 2.4.1-BOOTcustom
+[gc@obiwan ~/cvs/gi/kernel/all.kernels] cd 2.4.1-BOOTcustom
+[gc@obiwan ~/cvs/gi/kernel/all.kernels/2.4.1-BOOTcustom] tar jxvf ~/mycustomkernel.tar.bz2
+[gc@obiwan ~/cvs/gi/kernel/all.kernels/2.4.1-BOOTcustom] ls
+boot/  lib/
 
 
 (5) pray
@@ -93,12 +88,11 @@ The comments written with #- are automatically stripped out at install.
 ---------------------------------------------------------------------------
 testing all:
 
-  go to the perl-install directory and execute ./g_auto_install --test
+  go to the perl-install directory and execute ./install2 --test
 
-  You should be able to test the whole thing in a non-destructive way.
-
-NEVER compile and/or execute DrakX as root!
-
+  NEVER execute DrakX as root! You might need to allow all users
+  to read the block devices of your hard-disks, though (chmod a+w
+  /dev/hda* for example).
 
 
 
