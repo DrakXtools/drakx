@@ -44,9 +44,9 @@ $::direct = /-direct/;
 
 my $sysconf_network = "/etc/sysconfig/network";
 my $sysconf_dhcpd = "/etc/sysconfig/dhcpd";
-my $rc_firewall_generic = "/etc/rc.d/rc.firewall";
-my $rc_firewall_drakgw = "/etc/rc.d/rc.firewall.inet_sharing";
-my $rc_firewall_24 = "/etc/rc.d/rc.firewall.inet_sharing-2.4";
+#my $rc_firewall_generic = "/etc/rc.d/rc.firewall";
+#my $rc_firewall_drakgw = "/etc/rc.d/rc.firewall.inet_sharing";
+#my $rc_firewall_24 = "/etc/rc.d/rc.firewall.inet_sharing-2.4";
 my $masq_file = "/etc/shorewall/masq";
 my $dhcpd_conf = "/etc/dhcpd.conf";
 my $squid_conf = "/etc/squid/squid.conf";
@@ -123,9 +123,9 @@ begin:
 
 if ($shorewall && -f "/etc/shorewall/masq") {
     $::Wizard_no_previous = 1;
-
+    my $r;
     if (!$shorewall->{disabled}) {
-	my $r = $in->ask_from_list_(N("Internet Connection Sharing currently enabled"),
+	$r = $in->ask_from_list_(N("Internet Connection Sharing currently enabled"),
 N("The setup of Internet Connection Sharing has already been done.
 It's currently enabled.
 
@@ -143,7 +143,7 @@ What would you like to do?"),
 			substInFile {
 				s/REDIRECT\tmasq\t$squid_port\ttcp\twww\t\-\n//;
 				s/ACCEPT\tfw\tnet\ttcp\twww\n//;
-			} "$prefix/etc/shorewall/rules";
+			} "/etc/shorewall/rules";
 	    sys("/etc/init.d/shorewall restart >/dev/null");
 	    log::l("[drakgw] Disabled");
 	    $::Wizard_finished = 1;
@@ -154,7 +154,7 @@ What would you like to do?"),
 	    quit_global($in, 0);
 	}
     } else {
-	my $r = $in->ask_from_list_(N("Internet Connection Sharing currently disabled"),
+	$r = $in->ask_from_list_(N("Internet Connection Sharing currently disabled"),
 N("The setup of Internet connection sharing has already been done.
 It's currently disabled.
 
@@ -214,7 +214,7 @@ Examples:
 		ppp+ for modem or DSL connections, 
 		eth0, or eth1 for cable connection, 
 		ippp+ for a isdn connection.
-", $card_netconnect),
+"),
       [ { label => N("Net Device"), val => \$card_netconnect, list => [ detect_devices::getNet() ], not_edit => 0 } ])
 		  or goto step_ask_confirm;
 
@@ -271,7 +271,7 @@ my $default_lease = network::network::read_dhcpd_conf()->{max_lease_time}[0] ||=
 my $max_lease = network::network::read_dhcpd_conf()->{default_lease_time}[0] ||= "43200";
 my $internal_domain_name = network::network::read_dhcpd_conf()->{domain_name}[0] ||= network::network::read_resolv_conf_raw()->{search}[0] ||= "homeland.net";
 my $squid_cache_size = network::network::read_squid_conf()->{cache_size}[1] ||= "100";
-my $squid_admin_mail = network::network::read_squid_conf()->{admin_mail}[0] ||= "admin\@mydomain.com";
+my $squid_admin_mail = network::network::read_squid_conf()->{admin_mail}[0] ||= 'admin@mydomain.com';
 
 my $reconf_dhcp_server_intf = 1;
 
@@ -308,7 +308,7 @@ The default DNS entry is the Caching Nameserver configured on the firewall. You 
 		      
 Otherwise, I can reconfigure your interface and (re)configure a DHCP server for you.
 
-", $device),
+"),
       [ { label => N("Local Network adress"), val => \$lan_address, type => 'entry' },
 			{ label => N("Netmask"), val => \$netmask, type => 'entry' } ])
 		  or goto step_warning_already_conf;
@@ -375,7 +375,6 @@ ONBOOT=yes
 
 #- install and setup the RPM packages
 
-my $rpms_to_install;
 my %rpm2file = ('dhcp-server' => '/usr/sbin/dhcpd',
 		bind => '/usr/sbin/named',
 		shorewall => '/sbin/shorewall',
@@ -402,8 +401,8 @@ put_in_hash($shorewall ||= {}, {
 network::shorewall::write($shorewall);
 print "add rules entries\n";
 substInFile {
-	s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tmasq\t$squid_port\ttcp\twww\t\-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
-} "$prefix/etc/shorewall/rules";
+	s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tmasq\t$squid_port\ttcp\twww\t-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
+} "/etc/shorewall/rules";
 
 #- be sure that FORWARD_IPV4 is enabled in /etc/sysconfig/network
 
@@ -493,7 +492,7 @@ deny_info ERR_CUSTOM_ACCESS_DENIED all
 memory_pools off
 coredump_dir /var/spool/squid
 ie_refresh on
-));
+)) if $::testing;
 
 #- Set up /etc/cups/cupsd.conf to make the broadcasting of the printer info
 #- working correctly: 
