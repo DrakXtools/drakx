@@ -125,6 +125,7 @@ sub read() {
 	}
 	$_->{append} = remove_quotes_and_spaces($_->{append}) foreach \%b, @{$b{entries}};
 	$_->{label}  = remove_quotes_and_spaces($_->{label})  foreach @{$b{entries}};
+	$b{default} = remove_quotes_and_spaces($b{default}) if $b{default};
 	$b{timeout} = $b{timeout} / 10 if $b{timeout};
 	$b{message} = cat_("$::prefix$b{message}") if $b{message};
     }
