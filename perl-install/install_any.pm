@@ -499,29 +499,16 @@ sub install_urpmi {
     delete $packages->{rpmdb};
 
     #- import pubkey in rpmdb.
-    require URPM::Signature;
     my $db = pkgs::rpmDbOpenForInstall($prefix);
     $packages->parse_pubkeys(db => $db);
     foreach my $medium (values %$mediums) {
-	foreach my $k (@{$medium->{pubkey}}) {
-	    my $id;
-	    foreach my $kv (values %{$packages->{keys} || {}}) {
-		URPM::compare_pubkeys($k, $kv) == 0 and $id = $kv->{id}, last;
-	    }
-	    unless ($id) {
-		log::l("importing pubkey block");
-		URPM::import_pubkey(block => $k->{block}, db => $db);
-		$packages->parse_pubkeys(db => $db);
-		foreach my $kv (values %{$packages->{keys} || {}}) {
-		    URPM::compare_pubkeys($k, $kv) == 0 and $id = $kv->{id}, last;
-		}
-	    }
-	    #- the key has been found, take care of it for the given medium.
-	    if ($id) {
-		log::l("found key id=$id for medium $medium->{descr}");
-		$medium->{key_ids}{$id} = undef;
-	    }
-	}
+	$packages->import_needed_pubkeys($medium->{pubkey}, db => $db, callback => sub {
+					     my (undef, undef, $k, $id, $imported) = @_;
+					     if ($id) {
+						 log::l(($imported ? "imported" : "found")." key=$id for medium $medium->{descr}");
+						 $medium->{key_ids}{$id} = undef;
+					     }
+					 });
     }
 
     my @cfg;
