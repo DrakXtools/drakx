@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.34mdk
+Release: 0.35mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sat Aug 23 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.35mdk
+- drakperm:
+  o add new rules at top
+  o always display editable rules before non editable ones
+  o disable up button when selected rule is the first one
+  o disable down button when selected rule is the latest one or when
+    next rule is non editable
+  o fix moving up/down rules
+  o fix no saving if we've sort rules
+
 * Sat Aug 23 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.34mdk
 - disdrake: explain why ntfs resizing had failled (pixel)
 - drakbacup: (stew)
