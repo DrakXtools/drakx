@@ -321,7 +321,7 @@ sub build_notebook {
 				    ),
 			   ),
 		);
-	$gui->{intf}{BOOTPROTO} and $gui->{intf}{BOOTPROTO}->set_popdown_strings(N_("static"), N_("dhcp"));
+	$interface =~ /eth/ ? $gui->{intf}{BOOTPROTO}->set_popdown_strings(N_("static"), N_("dhcp")) : delete $gui->{intf}{BOOTPROTO};
 	$interface !~ /eth/ and $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK};
 	!$intf->{IPADDR} and ($intf->{IPADDR}, $gui->{active}, $intf->{NETMASK}) = get_intf_ip($interface);
 	$gui->{netc}{$_}->set_text($netc->{$_}) foreach keys %{$gui->{netc}};
@@ -491,7 +491,7 @@ sub save {
     my ($netc, $netcnx, $intf, $gui, $apply_button) = @_;
  
     foreach (keys %$intf) {
-	save_notebook($netc, $intf->{$_}, $gui->{$_});
+	save_notebook($netc, $intf->{$_}, $gui->{$_}) or $in->ask_warn(N("Error"), N("IP address should be in format 1.2.3.4")) and return;
 	$intf->{$_}{save} and $intf->{$_}{save}->();
     }
     apply($netc, $netcnx, $intf, $apply_button);
@@ -506,6 +506,14 @@ sub save_notebook {
     $intf->{$_} = bool2yesno($gui->{intf_bool}{$_}->get_active) foreach keys %{$gui->{intf_bool}};
     $gui->{intf_bool}{MII_NOT_SUPPORTED} and $intf->{MII_NOT_SUPPORTED} = bool2yesno(!$gui->{intf_bool}{MII_NOT_SUPPORTED}->get_active);
     $gui->{intf_bool}{HWADDR} and (bool2yesno($gui->{intf_bool}{HWADDR}->get_active) eq 'yes' ? ($intf->{HWADDR} = 'yes') : delete $intf->{HWADDR});
+
+    $intf->{BOOTPROTO} eq 'static' and (check_field($intf, 'IPADDR', 'NETMASK') or return 0);
+    1;
+}
+
+sub check_field {
+    my ($field, @ip) = @_;
+    (map { if_(!is_ip($field->{$_}), 1) } @ip) ? 0 : 1;
 }
 
 sub add_intf() {
