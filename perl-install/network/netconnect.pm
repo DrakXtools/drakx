@@ -219,6 +219,7 @@ If you don't want to use the auto detection, deselect the checkbox.
                     },
                     post => sub {
                         load_conf($netcnx, $netc, $intf) if $::isInstall;  # :-(
+                        get_subwizard($wiz, 'adsl') if $connections{$cnx_type} eq 'adsl';
                         return $type = $connections{$cnx_type};
                     },
                    },
