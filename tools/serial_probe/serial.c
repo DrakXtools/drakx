@@ -269,7 +269,10 @@ static int init_pnp_com_seq1( int fd ) {
 
     modem_lines = get_serial_lines(fd);
 
-    /* turn off RTS */
+    /* COM port initialization, check for device enumerate */
+    
+    /* turn on DTR, turn off RTS */
+    modem_lines |= TIOCM_DTR;
     modem_lines &= ~TIOCM_RTS;
     set_serial_lines(fd, modem_lines);
 
@@ -280,18 +283,15 @@ static int init_pnp_com_seq1( int fd ) {
     /* see if we got DSR coming up */
 
     if (!dsr_status) {
-	/* turn DTR and RTS back on and try alternative methods */
-	modem_lines |= TIOCM_DTR | TIOCM_RTS;
-	set_serial_lines(fd, modem_lines);
-	rc = PNP_COM_OK;
+	DEBUG("Device did not set DSR\n");
     }
 
     /* COM port Setup, 1st phase */
-    /* now we set port to be 1200 baud, 7 bits, no parity, 1 stop bit */
     temp = tcgetattr(fd, &portattr);
     if (temp < 0) 
 	return PNP_COM_FATAL;
-    /* goto 1200 baud, etc etc as PnP requires */
+
+    /* now we set port to be 1200 baud, 7 bits, no parity, 1 stop bit */
     temp = setup_serial_port( fd, 7, &portattr );
     if (temp < 0) 
 	return PNP_COM_FATAL;
@@ -316,6 +316,33 @@ static int init_pnp_com_seq1( int fd ) {
 
 
 /* Request for PnP info from serial device                      */
+/* See page 6 of the pnpcom doc from Microsoft                  */
+/* Always returns PNP_COM_OK                                    */
+static int init_pnp_com_seq2( int fd ) {
+    int modem_lines;
+    int rc = PNP_COM_OK;
+
+    DEBUG("initializing 2nd PNP sequence\n");
+
+    modem_lines = get_serial_lines(fd);
+
+    /* COM port setup, 2nd phase */
+    /* turn off DTR and RTS */
+    modem_lines &= ~(TIOCM_DTR | TIOCM_RTS);
+    set_serial_lines(fd, modem_lines);
+    usleep(200000);
+
+    /* wait for response, 2nd phase */
+    /* turn on DTR and RTS */
+    modem_lines |= (TIOCM_DTR | TIOCM_RTS);
+    set_serial_lines(fd, modem_lines);
+    usleep(200000);
+    
+    return rc;
+}
+
+
+/* Request for PnP info from serial modem device                */
 /* Uses ATI9 code, may not do anything but return 'ERROR'       */
 /* Return code tells us what happened                           */
 /*                                                              */
@@ -643,6 +670,8 @@ static int parse_pnp_string( unsigned char *pnp_id_string, int pnp_len,
 
     char extension_delims[] = {EndPnP1, EndPnP2, ExtendPnP1, ExtendPnP2, 0};
     char end_delims[] = {EndPnP1, EndPnP2, 0};
+    unsigned char* p1end = NULL;
+    unsigned char* p2end = NULL;
 
     /* clear out pnp_id */
     memset(pnp_id, 0, sizeof(*pnp_id));
@@ -655,13 +684,23 @@ static int parse_pnp_string( unsigned char *pnp_id_string, int pnp_len,
     p1 = memchr( pnp_string, BeginPnP1, pnp_len );
     p2 = memchr( pnp_string, BeginPnP2, pnp_len );
 
+
+    if (p1) {
+        int p_len = pnp_len - (p1 - pnp_string);
+        p1end = memchr(p1, EndPnP1, p_len);
+    }
+    if (p2) {
+        int p_len = pnp_len - (p2 - pnp_string);
+        p2end = memchr(p2, EndPnP2, p_len);
+    }
+
     /* use the one which points nearest to start of the string */
     /* and is actually defined                                */
-    if ( p1 && p2 ) {
+    if ( p1 && p1end && p2 && p2end ) {
 	start = (p1 < p2) ? p1 : p2;
-    } else if (p1)
+    } else if ( p1 && p1end )
 	start = p1;
-    else if (p2)
+    else if ( p2 && p2end )
 	start = p2;
     else
 	start = NULL;
@@ -786,77 +825,41 @@ static int parse_pnp_string( unsigned char *pnp_id_string, int pnp_len,
     return 0;
 }
 
-/* UNUSED except for debugging */
-void print_pnp_id( struct pnp_com_id id ) {
-    int i;
-    int extensions_exist;
-    int revision_temp;
-
-    if (id.other_len != 0) {
-	printf("Detected non-PnP data stream at start.\n");
-	printf("  Length   = 0x%x\n",id.other_len);
-	printf("  Contents =");
-	for (i=0; i<id.other_len; i++)
-	    printf(" 0x%x",id.other_id[i]);
-	printf("\n");
-    } else
-	printf("Non-PnP data stream not detected at start.\n");
-
-
-    /* parse PnP revision bytes into a string values (eg. "1.00") */
-    revision_temp = ((id.pnp_rev[0]&0x3f) << 6)+(id.pnp_rev[1]&0x3f);
-    sprintf(id.pnp_rev_str, "%d.%d",revision_temp/100,revision_temp % 100);
-    
-    printf("\nPnP Required fields:\n");
-    printf("    Revision       = %s\n",id.pnp_rev_str);
-    printf("    Manufacturer   = %s\n",id.eisa_id);
-    printf("    Product ID     = %s\n",id.product_id);
-
-    extensions_exist = id.serial_number[0] || id.class_name[0] ||
-                       id.driver_id[0]     || id.user_name[0];
-
-    if (extensions_exist) {
-	printf("\nPnP extension field(s) exist:\n");
-	if (id.serial_number[0])
-	    printf("    Serial Number   = %s\n",id.serial_number);
-	if (id.class_name[0])
-	    printf("    PnP class name  = %s\n",id.class_name);
-	if (id.driver_id[0])
-	    printf("    PnP Compatible  = %s\n",id.driver_id);
-	if (id.user_name[0])
-	    printf("    PnP Description = %s\n",id.user_name);
-    }
-}
-
 static int attempt_pnp_retrieve(int fd, char *pnp_string, int *pnp_strlen, int pnp_stringbuf_size) {
     int pnp_probe_status;
     struct pnp_com_id pnp_id;
-    int tried_at_prodding=0,  give_up=0;
+    int tried_at_prodding=0, give_up=0;
+    
+    DEBUG("Attempting PNP information retrieval\n");
 
     while (!give_up) {
 	pnp_probe_status = init_pnp_com_seq1(fd);
-	if (pnp_probe_status == PNP_COM_FATAL) {
-	    return(PNP_COM_FATAL);
-	} else if (pnp_probe_status == PNP_COM_OK) {
-	    read_pnp_string(fd, pnp_string, pnp_strlen, pnp_stringbuf_size );
-	
-	    DEBUG("\nPNP string = |%s|\n\n",pnp_string);
-	    
-	    if (*pnp_strlen == 1 && pnp_string[0] == 'M') /* legacy mouse */
-	      return PNP_COM_OK;
-	    /* see if we got anything useful, if not try at command */
-	    /* to prod device into correct serial params       */
-	    if (parse_pnp_string( pnp_string, *pnp_strlen, &pnp_id )<0)
-		if (!tried_at_prodding) {
-		    write(fd, "AT\r", 3);
-		    tried_at_prodding=1;
-		} else
-		    give_up = 1;
-	    else
-		return PNP_COM_OK;
+	if (pnp_probe_status == PNP_COM_FATAL)
+	    return PNP_COM_FATAL;
+	pnp_probe_status = read_pnp_string(fd, pnp_string, pnp_strlen,
+					   pnp_stringbuf_size);
+	if (pnp_probe_status == PNP_COM_FAIL) {
+	    init_pnp_com_seq2(fd);	    /* always succeeds */
+
+	    pnp_probe_status = read_pnp_string(fd, pnp_string, pnp_strlen,
+					       pnp_stringbuf_size);
+	}
+
+	if (*pnp_strlen == 1 && pnp_string[0] == 'M') /* legacy mouse */
+	    return PNP_COM_OK;
+	/* see if we got anything useful, if not try AT command */
+	/* to prod device into correct serial params */
+	if (parse_pnp_string( pnp_string, *pnp_strlen, &pnp_id )<0) {
+	    DEBUG("That failed.\n");
+	    if (!tried_at_prodding) {
+		DEBUG("Prod modem with AT command.\n");
+		write(fd, "AT\r", 3);
+		tried_at_prodding=1;
+	    } else
+		give_up = 1;
 	} else
-	    give_up = 1;
-    }
+	    return PNP_COM_OK;
+    }   
 
     /* normal PNP detection has failed. */
     /* try sending a ATI9 code to the modem to see if we get PnP id back */
@@ -941,7 +944,6 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 	(probeClass == CLASS_PRINTER)
 	) {
 	int x;
-	
 	for (x=0; x<=3 ; x++) {
 	    struct stat sbuf;
 	    char lockfile[32];
@@ -982,8 +984,10 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 	    /* try twiddling RS232 control lines and see if it talks to us */
 	    devicetype=-1;
 	    pnp_strlen = 0;
-	    attempt_pnp_retrieve( fd, pnp_string, &pnp_strlen, sizeof(pnp_string) - 1 );
-	
+	    if (attempt_pnp_retrieve( fd, pnp_string, &pnp_strlen,
+				      sizeof(pnp_string) - 1 ) == PNP_COM_FATAL)
+		goto endprobe;
+	    
 	    /* see if we found any PnP signature */
 	    if (pnp_strlen != 0) {
 		if (*pnp_string == 'M') { /* Legacy mouse */
@@ -1007,30 +1011,40 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 			close(fd);
 			continue;
 		}
+
 		/* fill in the PnP com structure */
 		if (parse_pnp_string( pnp_string, pnp_strlen, &pnp_id )<0) {
-			goto endprobe;
+		    DEBUG("Got PNP data back, but failed to parse.  Aborting\n");
+		    goto endprobe;
 		} else {
 		    char *foo;
 		    int len;
 
-		    DEBUG("PnP ID string for serial device on port %s\n",port);
+		    DEBUG("PNP data parsed.\n");
 		    serdev = serialNewDevice(NULL);
+
 		    if (pnp_id.user_name[0]) {
-			    serdev->pnpdesc = strdup(pnp_id.user_name);
-			len = strlen(pnp_id.eisa_id)+strlen(pnp_id.product_id)+strlen(pnp_id.user_name)+3;
+			serdev->pnpdesc = strdup(pnp_id.user_name);
+			len = strlen(pnp_id.eisa_id) +
+			    strlen(pnp_id.product_id) +
+			    strlen(pnp_id.user_name) + 3;
 			foo = malloc(len);
-			snprintf(foo,len,"%s|%s %s",pnp_id.eisa_id,pnp_id.product_id,pnp_id.user_name);
+			snprintf(foo,len,"%s|%s %s",pnp_id.eisa_id,
+				 pnp_id.product_id,pnp_id.user_name);
 		    } else {
-			len = strlen(pnp_id.eisa_id)+strlen(pnp_id.product_id)+3;
+			len = strlen(pnp_id.eisa_id) +
+			    strlen(pnp_id.product_id) + 3;
 			foo = malloc(len);
-			snprintf(foo,len,"%s|%s",pnp_id.eisa_id,pnp_id.product_id);
+			snprintf(foo,len,"%s|%s",pnp_id.eisa_id,
+				 pnp_id.product_id);
 		    }
+		    if (serdev->desc) free(serdev->desc);		    
 		    serdev->desc=strdup(foo);
 		    serdev->device=strdup(port+5);
+		    if (serdev->driver) free(serdev->driver);
 		    serdev->driver=strdup("ignore");
-			serdev->pnpmfr = strdup(pnp_id.eisa_id);
-			serdev->pnpmodel = strdup(pnp_id.product_id);
+		    serdev->pnpmfr = strdup(pnp_id.eisa_id);
+		    serdev->pnpmodel = strdup(pnp_id.product_id);
 			
 		    free(foo);
 		    foo=pnp_id.product_id;
@@ -1039,26 +1053,37 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 			  foo = strstr(pnp_id.driver_id,"PNP")+3;
 			    serdev->pnpcompat = strdup(pnp_id.driver_id);
 		    }
-		    if (!strncmp(foo, "0F", 2))
-		      serdev->type = CLASS_MOUSE;
-		    else if (!strncmp(foo, "C", 1))
-		      serdev->type = CLASS_MODEM;
-		    else if (!strncmp(pnp_id.class_name, "Modem", 5))
-		      serdev->type = CLASS_MODEM;
+
+		    if (*pnp_id.other_id == 'M' ||
+			!strncmp(pnp_id.class_name, "MOUSE", 5) ||
+			!strncmp(foo, "0F", 2)) {
+			serdev->type = CLASS_MOUSE;
+			if (!strncmp(serdev->desc, "|", 1)) {
+			    free(serdev->desc);
+			    serdev->desc=strdup("Generic Serial Mouse");
+			}
+			if (serdev->driver) free(serdev->driver);
+			serdev->driver = strdup("generic");
+		    }
+		    else if (!strncmp(pnp_id.class_name, "MODEM", 5) ||
+			     !strncmp(foo, "C", 1))
+			serdev->type = CLASS_MODEM;
+		    else if (!strncmp(pnp_id.class_name, "PRINTER", 7))
+			serdev->type = CLASS_PRINTER;
 		    else
-		      serdev->type = CLASS_OTHER;
-		    if (serdev->type == probeClass || probeClass == CLASS_UNSPEC) {
-		      if (devlist)
-			serdev->next = devlist;
-		      devlist = (struct device *)serdev;
-		      if (probeFlags & PROBE_ONE) {
-			tcsetattr(fd, TCSANOW, &origattr);
-			tcflush(fd, TCIOFLUSH);
-			close(fd);
-			return devlist;
-		      }
+			serdev->type = CLASS_OTHER;
+		    if (serdev->type & probeClass) {
+			if (devlist)
+			    serdev->next = devlist;
+			devlist = (struct device *)serdev;
+			if (probeFlags & PROBE_ONE) {
+			    tcsetattr(fd, TCSANOW, &origattr);
+			    tcflush(fd, TCIOFLUSH);
+			    close(fd);
+			    return devlist;
+			}
 		    } else {
-		      serdev->freeDevice(serdev);
+			serdev->freeDevice(serdev);
 		    }
 		    goto endprobe;
 		}
