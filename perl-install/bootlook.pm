@@ -45,7 +45,7 @@ if ($::isEmbedded) {
   print "CCPID :  $::CCPID\n";
 }
 
-my $in = interactive->vnew('su');
+my $in = interactive::vnew('su');
 local $_ = join '', @ARGV;
 
 /-h/ and die _("no help implemented yet.\n");
