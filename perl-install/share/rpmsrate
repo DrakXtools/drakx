@@ -200,9 +200,9 @@ NIS_SERVER
   5 ypserv
 
 NETWORKING_REMOTE_ACCESS
-  5 openssh-clients
+  5 openssh-clients telnet
   3 vnc
-  2 rsh telnet vnc-SVGALIB vnc-java
+  2 rsh vnc-SVGALIB vnc-java
   2 BOOKS vnc-doc
   1 sftp
 NETWORKING_REMOTE_ACCESS_SERVER
@@ -366,6 +366,7 @@ DEVELOPMENT
     2 pam-doc python-docs slang-doc kernel-doc nasm-doc qt2-doc ruby-doc lkmpg
 
   KDE
+    4 kdevelop
     3 kdebase-devel kdegraphics-devel kdelibs-devel kdelibs-sound-devel
       kdemultimedia-devel kdenetwork-devel
     1 kdesupport-devel kdeaddutils-devel koffice-devel
