@@ -656,9 +656,9 @@ sub Resize {
 	} elsif (isThisFs('ntfs', $part)) {
 	    write_partitions($in, $hd) or return;
 	    my $dev = devices::make($part->{device});
-	    my $r = run_program::get_stdout('ntfsresize', '-i', $dev);
+	    my $r = run_program::get_stdout('ntfsresize', '-f', '-i', $dev);
 	    if ($r =~ /minimal size: (\d+) KiB/) {
-		$min = $r * 2;
+		$min = $1 * 2;
 		$nice_resize{ntfs} = $dev;
 	    }
 	} elsif (isThisFs("reiserfs", $part)) {
@@ -703,9 +703,19 @@ sub Resize {
     my $_b = before_leaving { $@ and $part->{size} = $oldsize };
     my $w = $in->wait_message(N("Resizing"), '');
 
-    if (isLVM($hd)) {
-	lvm::lv_resize($part, $oldsize) if $size > $oldsize;	
-    }
+    my $adjust = sub {
+	my ($write_partitions) = @_;
+
+	if (isLVM($hd)) {
+	    lvm::lv_resize($part, $oldsize) 
+	  } else {
+	      partition_table::adjust_local_extended($hd, $part);
+	      partition_table::adjust_main_extended($hd);
+	      write_partitions($in, $hd) if $write_partitions;
+	  }
+    };
+
+    $adjust->(1) if $size > $oldsize;
 
     if ($nice_resize{fat}) {
 	local *log::l = sub { $w->set(join(' ', @_)) };
@@ -716,10 +726,10 @@ sub Resize {
 	run_program::run("resize2fs", "-pf", $nice_resize{ext2}, $s);
     } elsif ($nice_resize{ntfs}) {
 	log::l("ntfs resize to $part->{size} sectors");
-	run_program::run_or_die('ntfsresize', '-f', '-s' . $part->{size}/2 . "Ki", devices::make($part->{device}));
+	run_program::run_or_die('ntfsresize', '-ff', '-s' . int($part->{size}/2) . 'ki', devices::make($part->{device}));
     } elsif ($nice_resize{reiserfs}) {
 	log::l("reiser resize to $part->{size} sectors");
-	run_program::run("resize_reiserfs", "-f", "-q", "-s" . $part->{size}/2 . "K", devices::make($part->{device}));
+	run_program::run('resize_reiserfs', '-f', '-q', '-s' . int($part->{size}/2) . 'K', devices::make($part->{device}));
     } elsif ($nice_resize{xfs}) {
 	#- happens only with mounted LVM, see above
 	run_program::run("xfs_growfs", $part->{mntpoint});
@@ -733,12 +743,7 @@ sub Resize {
 	partition_table::verifyParts($hd);
     }
 
-    if (isLVM($hd)) {
-	lvm::lv_resize($part, $oldsize) if $size < $oldsize;
-    } else {
-	partition_table::adjust_local_extended($hd, $part);
-	partition_table::adjust_main_extended($hd);
-    }
+    $adjust->(0) if $size < $oldsize;
 }
 sub Move {
     my ($in, $hd, $part, $all_hds) = @_;
