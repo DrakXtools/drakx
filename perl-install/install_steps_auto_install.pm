@@ -17,7 +17,7 @@ sub new {
 
     # Handle legacy options
     $o->{interactive} ||= 'gtk' if $graphical || !is_empty_array_ref($o->{interactiveSteps});
-    push @{$o->{interactiveSteps}}, qw(installPackages exitInstall), @graphical_steps;
+    push @{$o->{interactiveSteps}}, qw(installPackages exitInstall configureNetwork), @graphical_steps;
 
     if ($o->{interactive}) {
         my $interactiveClass = "install_steps_$o->{interactive}";
@@ -39,6 +39,7 @@ sub new {
 
 sub configureNetwork {
     my ($_o) = @_;
+    log::l("install_steps_auto_install::configureNetwork");
     modules::load_category('network/main|usb');
     goto &install_steps::configureNetwork;
 }
