@@ -80,7 +80,7 @@ Mandrake Terminal Server Configurator
 	      'drakxtv' => "[--no-guess]",
 	      'drakupdate_fstab' => " [--add | --del] <device>\n",
 	      'keyboardrake' => N("[keyboard]"),
-           'logdrake' => N("[--file=myfyle] [--word=myword] [--explain=regexp] [--alert]"),
+           'logdrake' => N("[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"),
            'net_monitor' => N("[OPTIONS]
 Network & Internet connection and monitoring application
 
