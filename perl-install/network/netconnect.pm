@@ -944,7 +944,7 @@ Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''.
 You may also enter the IP address of the gateway if you have one."),
                     data => sub {
-                        [ if_(!$auto_ip, { label => N("Host name"), val => \$netc->{HOSTNAME} }),
+                        [ { label => $auto_ip ? N("Host name (optional)") : N("Host name"), val => \$netc->{HOSTNAME}, advanced => $auto_ip },
                           { label => N("DNS server 1"),  val => \$netc->{dnsServer} },
                           { label => N("DNS server 2"),  val => \$netc->{dnsServer2} },
                           { label => N("DNS server 3"),  val => \$netc->{dnsServer3} },
