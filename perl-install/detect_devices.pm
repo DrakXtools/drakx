@@ -227,7 +227,6 @@ sub getNet() {
 
 $pcitable_addons = <<'EOF';
 # add here lines conforming the pcitable format (0xXXXX\t0xXXXX\t"\w+"\t".*")
-0x10b7	0x9055	"3c90x"	"3Com Corporation|3c905B 100BaseTX [Cyclone]"
 EOF
 
 $usbtable_addons = <<'EOF';
