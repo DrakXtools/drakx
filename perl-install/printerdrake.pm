@@ -1240,7 +1240,7 @@ _("These commands you can also use in the \"Printing command\" field of the prin
 ") .
 (!$raw ?
 _("
-The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\".", "lpr", ($queue ne $default ? "lpr -P $queue -o option=setting -o switch" : "lpr -o option=setting -o switch")) .
+The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -o option=setting -o switch" : "lpr -o option=setting -o switch")) .
 _("To get a list of the options available for the current printer read either the list shown below or click on the \"Print option list\" button.
 
 ") . printer::lphelp_output($printer) : "");
@@ -1252,7 +1252,7 @@ _("This command you can also use in the \"Printing command\" field of the printi
 ") .
 (!$raw ?
 _("
-The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\".", "lpr", ($queue ne $default ? "lpr -P $queue -Z option=setting -Z switch" : "lpr -Z option=setting -Z switch")) .
+The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -Z option=setting -Z switch" : "lpr -Z option=setting -Z switch")) .
 _("To get a list of the options available for the current printer click on the \"Print option list\" button.
 
 ") : "");
@@ -1264,7 +1264,7 @@ _("This command you can also use in the \"Printing command\" field of the printi
 ") .
 (!$raw ?
 _("
-The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\".", "lpr", ($queue ne $default ? "lpr -P $queue -o option=setting -o switch" : "lpr -o option=setting -o switch")) .
+The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -o option=setting -o switch" : "lpr -o option=setting -o switch")) .
 _("To get a list of the options available for the current printer click on the \"Print option list\" button.
 
 ") : "");
