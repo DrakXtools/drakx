@@ -463,7 +463,7 @@ sub interactive_mode {
 					  gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=>
 							    sub { ${$central_widget}->destroy(); $windows = 1; license() }),
 					  gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked =>
-							    sub {  ${$central_widget}->destroy(); $windows = 0; license() }),
+							    sub {  ${$central_widget}->destroy(); $windows = 0; license_adv() }),
 					  gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked => sub { Gtk->main_quit() }),
 					 ),
 				1, new Gtk::VBox(0,0),
@@ -485,6 +485,27 @@ sub interactive_mode {
 }
 
 
+sub license_adv {
+    my $text = new Gtk::Text(undef, undef);
+    my $license_box;
+    gtkpack($font_box,
+	    $license_box = gtkpack_(new Gtk::VBox(0,10),
+	       1, gtkpack_(new Gtk::HBox(0,0),
+			   1, gtktext_insert(gtkset_editable($text, 1), "Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server.\n-You can install the fonts with strong verification. In this case, bogus fonts won't be installed, but some useable fonts won't be too.\n\nIf you have many fonts, or exotic fonts, I recommend strong verification mode."),
+			   0, new Gtk::VScrollbar($text->vadj),
+			   ),
+				    0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+					      gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { 
+						  ${$central_widget}->destroy(); advanced_install(); }),
+					      gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub {
+						  ${$central_widget}->destroy(); create_fontsel() }),
+					      ),
+				    )
+	    );
+    $central_widget = \$license_box;
+    $font_box->show_all();
+}
+
 sub license {
     my $text = new Gtk::Text(undef, undef);
     my $license_box;
@@ -496,9 +517,7 @@ sub license {
 		  ),
 		    0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
 			      gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { 
-				  ${$central_widget}->destroy(); 
-				  !$windows and advanced_install() or appli_choice();
-			      }),
+				  ${$central_widget}->destroy();  appli_choice();  }),
 			      gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { ${$central_widget}->destroy(); create_fontsel() }),
 			      ),
 				    )
@@ -581,7 +600,7 @@ sub appli_choice {
 					       ),
 				   0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
 					     gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { 
-						 ${$central_widget}->destroy(); font_choice() }),
+						 ${$central_widget}->destroy(); import_status() }),
 					     gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { 
 						 ${$central_widget}->destroy(); create_fontsel() }),
 					     ),
@@ -599,25 +618,32 @@ sub appli_choice {
     $font_box->show_all();
 }
 
+my $list;
+# = new Gtk::List();
 
 sub font_choice {
-    my $file_box;
-    gtkpack($font_box,
-	    $file_box = gtkpack_(new Gtk::VBox(0,10),
-				 1, gtkpack_(new Gtk::HBox(0,4),
-#					       1, new Gtk::FileSelection( "choix fontes" ),
-					       0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
-							 gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { 
-#						 ${$central_widget}->destroy(); import_status() }),
-						 ${$central_widget}->destroy(); import_status() }),
-					     gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { 
-						 ${$central_widget}->destroy(); create_fontsel() }),
-							 ),
-					     ),
-				 )
-	    );
-    $central_widget = \$file_box;
-    $font_box->show_all();
+      my $file_dialog;  
+      $file_dialog = new Gtk::FileSelection( "File Selection" );
+      $file_dialog->signal_connect( "destroy", sub { $file_dialog->destroy(); } );  
+      $file_dialog->ok_button->signal_connect( "clicked", \&file_ok_sel,   $file_dialog );            
+      $file_dialog->cancel_button->signal_connect( "clicked",  sub { $file_dialog->destroy(); } );            
+      $file_dialog->set_filename( _("Select your font file or your font directory and Accept ") );            
+      $file_dialog->show();
+
+
+      sub file_ok_sel   { 
+	  my ( $widget, $file_selection ) = @_;     
+	  my $file = $file_selection->get_filename();       
+	  my $list_item = new Gtk::ListItem($file);
+	  $list->add($list_item);
+	  $list_item->show;
+	  print( "$file\n" );   
+      }
+}
+
+sub list_remove {
+	my($widget, $list) = @_;
+	$list->remove_items($list->selection);
 }
 
 
@@ -625,21 +651,23 @@ sub advanced_install {
     my $gtklist = new Gtk::List();
     my $scrolled_window;
     my $adv_box;
-    my @items = ("toto", "ddddd");
-    my $list = new Gtk::List();
+    $list = new Gtk::List();
+    $list->set_selection_mode(-multiple);
+    $list->set_selection_mode(-browse);
+
     gtkpack($font_box,
 	    $adv_box = gtkpack_(new Gtk::VBox(0,10),
 				1, gtkpack_(new Gtk::HBox(0,4),
 					    1, $scrolled_window =new Gtk::ScrolledWindow( undef, undef ),
-					    $scrolled_window->set_usize( 450, 200 ),
+					    $scrolled_window->set_usize( 440, 200 ),
 					    $scrolled_window->add_with_viewport( $list ),
 					    ),
 				0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
-					  gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { 
-#						 ${$central_widget}->destroy(); import_status() }),
+					  gtksignal_connect(new Gtk::Button(_("Add")), clicked => sub { 
+					      font_choice() }),
+					  gtksignal_connect(new Gtk::Button(_("Remove Selected")), "clicked", \&list_remove, $list),
+					  gtksignal_connect(new Gtk::Button(_("Install Selection")), clicked => sub { 
 					      ${$central_widget}->destroy(); import_status() }),
-					  gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { 
-					      ${$central_widget}->destroy(); create_fontsel() }),
 					  ),
 				)
 	    );
@@ -657,9 +685,9 @@ sub import_status {
     gtkpack($font_box,
 	    $table = create_packtable({ col_spacings => 30, row_spacings => 20},
    [_("Search Fonts on your System"), $pbar = new_with_adjustment Gtk::ProgressBar($adj), gtkset_sensitive($check1 = new Gtk::CheckButton(), 0)],
-   ["Supress Doublons ", $pbar1 = new_with_adjustment Gtk::ProgressBar($adj1), gtkset_sensitive($check2 = new Gtk::CheckButton(), 0)],
-   ["Install Fonts ", $pbar2 = new_with_adjustment Gtk::ProgressBar($adj2), gtkset_sensitive($check3 = new Gtk::CheckButton(), 0)],
-   ["Post Install Fonts ", $pbar3 = new_with_adjustment Gtk::ProgressBar($adj3), gtkset_sensitive($check4 = new Gtk::CheckButton(), 0)],
+   [_("Supress Doublons"), $pbar1 = new_with_adjustment Gtk::ProgressBar($adj1), gtkset_sensitive($check2 = new Gtk::CheckButton(), 0)],
+   [_("Install & convert Fonts"), $pbar2 = new_with_adjustment Gtk::ProgressBar($adj2), gtkset_sensitive($check3 = new Gtk::CheckButton(), 0)],
+   [_("Post Install Fonts"), $pbar3 = new_with_adjustment Gtk::ProgressBar($adj3), gtkset_sensitive($check4 = new Gtk::CheckButton(), 0)],
 			    ),
 	   );
     $central_widget = \$table;
