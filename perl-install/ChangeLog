@@ -1,3 +1,89 @@
+2001/04/09  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem: fixes of grub installation using hd.img
+	fix the fix for loopback mounting of hd.img.
+
+	* Xconfigurator.pm: fixed always 8bpp for autoDefaultDepth.
+
+	* pkgs.pm: changed transaction error management this way: if a transaction
+	fails, DrakX
+	tries to make as many transaction as there are package that have failed
+	to be
+	installed (this means one transaction of only one package). This help
+	installing
+	most package that are correct (as a transaction that failed cause all
+	remaining
+	package to be not installed).
+
+2001/04/09  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/Makefile: 8.0rc -> 8.0
+
+	* rescue/tree/etc/oem: fix english thanks to Kevin
+
+	* standalone/drakgw: do not die when an initscript returns non-0
+	(initscripts too buggy)
+
+2001/04/09  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/cy.po, share/po/nl.po,
+	share/po/ja.po, share/po/wa.po, share/po/sv.po, share/po/is.po,
+	share/po/hu.po, share/po/zh_TW.Big5.po, share/po/it.po, share/po/id.po,
+	share/po/pl.po, share/po/fi.po, share/po/no.po,
+	share/po/zh_CN.GB2312.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/sl.po, share/po/vi.po,
+	share/po/br.po, share/po/gl.po, share/po/ca.po, share/po/lv.po,
+	share/po/uk.po, share/po/eo.po, share/po/ro.po, share/po/da.po,
+	share/po/cs.po, share/po/af.po: Updated Danish file
+
+	* any.pm: changed  ISO_8859-1 TO ISO-8859-1
+
+2001/04/09  Pixel  <pixel@mandrakesoft.com>
+
+	* c/stuff.xs.pm, install_steps.pm, any.pm: create to_utf8 from po strings,
+	use it for kdm message
+
+	* diskdrake.pm (Create): check for 40MB instead of 32MB for min reiserfs
+	size as the check is done before rounding.
+
+	* bootloader.pm (install_grub): altconfigfile only if /boot is not
+	reiserfs :-/
+
+	* tools/make_mdkinst_stage2: fix the stage2 too big (was keeping too many
+	modules.cz)
+
+	* install2.pm (main): sets umask (seems like default one is no more 022,
+	kernel change?)
+
+	* Xconfigurator_consts.pm, Xconfig.pm, Xconfigurator.pm: handle XkbModel
+	(especially for abnt2 (br))
+
+	* install_any.pm (setPackages): also have SOUND set in compssUsersChoice
+	based on pciusbtable
+
+	* share/compssUsers, share/rpmsrate: 
+	  - SOUND is now a flag
+	  - AUDIO is the group
+
+	* lang.pm (load_po): sets $lang::charset to the charset used in the po
+
+2001/04/09  siegel
+
+	* share/po/de.po: fixes
+
+	* Xconfigurator.pm: fixed i18n bug
+
+2001/04/09  yduret
+
+	* standalone/tinyfirewall: button policy (thx gc)
+
+	* standalone/drakgw: deyvounification : remove some un-useful comments in
+	code
+
 2001/04/09  dam's  <damien@mandrakesoft.com>
 
 	* tinyfirewall.pm: corrected
