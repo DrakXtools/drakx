@@ -467,6 +467,10 @@ sub read_all_conf {
 	    add2hash($intf, { getVarsFromSh("$prefix/etc/sysconfig/network-scripts/$_") });
 	}
     }
+    $netcnx->{type} or probe_netcnx_type($prefix, $netc, $intf, $netcnx);
+}
+sub probe_netcnx_type {
+    my ($prefix, undef, $intf, $netcnx) = @_;
     #- try to probe $netcnx->{type} which is used almost everywhere.
     unless ($netcnx->{type}) {
 	#- ugly hack to determine network type (avoid saying not configured in summary).
