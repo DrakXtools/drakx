@@ -411,7 +411,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		child_argv[1] = NULL;
 
 		execve(child_argv[0], child_argv, env);
-		printf("error in exec of %s :-(\n", BINARY);
+		printf("error in exec of %s :-( [%d]\n", BINARY, errno);
 		return 0;
 	}
 
