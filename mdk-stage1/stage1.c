@@ -398,9 +398,10 @@ static enum return_type handle_clp(char* clp, char* live, char* location_live, c
                                 return RETURN_ERROR;
                         *is_symlink = 1;
                         return RETURN_OK;
+                } else {
+                        log_message("move: can't find %s nor %s, proceeding hoping files will be there", clp, live);
+                        return RETURN_OK;
                 }
-                log_message("move: panic, can't find %s nor %s", clp, live);
-                return RETURN_ERROR;
         }
 
         if (lomount(clp, location_mount, NULL, 1)) {
