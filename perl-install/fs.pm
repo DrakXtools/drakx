@@ -560,7 +560,7 @@ sub format_ext2($@) {
     my ($dev, @options) = @_;
     $dev =~ m,(rd|ida|cciss)/, and push @options, qw(-b 4096 -R stride=16); #- For RAID only.
     push @options, qw(-b 1024 -O none) if arch() =~ /alpha/;
-    run_program::raw({ timeout => 60 * 60 }, 'mke2fs', '-F', @options, devices::make($dev)) or die \N("%s formatting of %s failed", any { $_ eq '-j' } @options ? "ext3" : "ext2", $dev);
+    run_program::raw({ timeout => 60 * 60 }, 'mke2fs', '-F', @options, devices::make($dev)) or die \N("%s formatting of %s failed", (any { $_ eq '-j' } @options) ? "ext3" : "ext2", $dev);
 }
 sub format_ext3 {
     my ($dev, @options) = @_;
