@@ -139,6 +139,166 @@ our %adsl_data = (
                    method => 'pppoe',
                   },
 
+                  N("China") . "|China Netcom|Beijing" =>
+                  {
+                   vpi => 0,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Netcom|Changchun" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Netcom|Harbin" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Netcom|Jilin" =>
+                  {
+                   vpi => 0,
+                   vci => 27,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Netcom|Lanzhou" =>
+                  {
+                   vpi => 0,
+                   vci => 20,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Netcom|Tianjin" =>
+                  {
+                   vpi => 0,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Netcom|Xi'an" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Telecom|Chongqing" =>
+                  {
+                   vpi => 0,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Telecom|Fujian" =>
+                  {
+                   vpi => 0,
+                   vci => 0xc8,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Telecom|Guangxi" =>
+                  {
+                   vpi => 0,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Telecom|Guangzhou" =>
+                  {
+                   vpi => 8,
+                   vci => 20,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Telecom|Hangzhou" =>
+                  {
+                   vpi => 0,
+                   vci => 20,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Netcom|Hunan" =>
+                  {
+                   vpi => 0,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Telecom|Nanjing" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Telecom|Shanghai" =>
+                  {
+                   vpi => 8,
+                   vci => 51,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Telecom|Shenzhen" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Telecom|Urumqi" =>
+                  {
+                   vpi => 0,
+                   vci => 20,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Telecom|Wuhan" =>
+                  {
+                   vpi => 0,
+                   vci => 20,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Telecom|Yunnan" =>
+                  {
+                   vpi => 0,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("China") . "|China Telecom|Zhuhai" =>
+                  {
+                   vpi => 0,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
                   N("Denmark") . "|Any" =>
                   {
                    vpi => 0,
