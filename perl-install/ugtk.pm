@@ -271,6 +271,18 @@ sub create_box_with_title {
 
 sub create_hbox { gtkset_layout(gtkset_border_width(new Gtk::HButtonBox, 3), $_[0] || 'spread') }
 
+sub create_factory_menu_ {
+    my ($type, $name, $window, @menu_items) = @_;
+    print "TOTO - $type - $name - $window - @menu_items - \n\n";
+    my $widget = new Gtk::ItemFactory($type, $name, my $accel_group = new Gtk::AccelGroup);
+    use Data::Dumper; print "\n\nMenu =", Dumper(\@menu_items),"\n\n";
+    $widget->create_items(@menu_items);
+    $window->add_accel_group($accel_group); #$accel_group->attach($main_win);
+    $widget->get_widget($name); # return menu bar
+}
+
+sub create_factory_menu { create_factory_menu_('Gtk::MenuBar', '<main>', @_) }
+
 sub create_menu {
     my $title = shift;
     my $w = new Gtk::MenuItem($title);
