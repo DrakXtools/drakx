@@ -584,9 +584,9 @@ sub getUPS() {
       # USB UPSs;
       (grep { $_->{description} =~ /American Power Conversion\|Back-UPS/ } @usb_devices),
       (map {
-          $_->{port} = "/dev/hiddev0";
+          $_->{port} = "auto";
           $_->{media_type} = 'UPS';
-          $_->{driver} = 'hidups';
+          $_->{driver} = 'newhidups';
           $_;
       } grep { $_->{driver} =~ /ups$/ } @usb_devices);
 }
