@@ -358,7 +358,7 @@ sub update_list() {
 }
 
 sub apply() {
-    network::sethostname($netc);
+    network::sethostname($netc) if every { $_->{BOOTPROTO} eq "static" } values %$intf;
 
     $netcnx->{type} eq 'modem' and network::modem::ppp_configure($in, $netcnx->{$netcnx->{type}});
     $netcnx->{type} eq 'isdn_internal' and network::isdn::isdn_write_config_backend($netcnx->{$netcnx->{type}}, $netc, $netcnx); #$light
