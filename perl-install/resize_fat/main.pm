@@ -25,7 +25,8 @@ use diagnostics;
 use strict;
 
 use log;
-use common;
+use MDK::Common;
+use MDK::Common::System;
 use resize_fat::boot_sector;
 use resize_fat::info_sector;
 use resize_fat::directory;
@@ -101,7 +102,7 @@ sub construct_dir_tree {
 				    resize_fat::directory::remap($fs, resize_fat::io::read_cluster($fs, $cluster)));
     }
 
-    sync();
+    MDK::Common::System::sync();
 
     #- until now, only free clusters have been written. it's a null operation if we stop here.
     #- it means no corruption :)
@@ -178,7 +179,7 @@ sub resize {
 
     $resize_fat::isFAT32 and eval { resize_fat::info_sector::write($fs) }; #- doesn't matter if this fails - its pretty useless!
 
-    sync();
+    MDK::Common::System::sync();
     close $fs->{fd};
     log::l("resize_fat: done");
 }
