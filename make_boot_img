@@ -205,7 +205,7 @@ sub boot_img_i386 {
 	my $dir = "kernel/all.modules/$ext";
 	my $pcitable = cat_('/usr/share/ldetect-lst/pcitable');
 	my @l = sort { $a <=> $b } map {
-	    my ($name) = /(\w+)\.k?o$/ or die "bad file in .mar";
+	    my ($name) = /(\S+)\.k?o$/ or die "bad file in .mar";
 	    my $gz_size = chomp_(`gzip -c $dir/$_ | wc -c`);
 	    sprintf "%7d  %6d      %s\n", $gz_size, listlength($pcitable =~ /"$name"/g), $name;
 	} split(' ', `mdk-stage1/mar/mar -l $dir/${type}_modules.mar`);
