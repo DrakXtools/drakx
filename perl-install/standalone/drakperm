@@ -247,21 +247,21 @@ sub row_setting_dialog {
     my ($other, $group, $user, $s) = reverse(split(//, $model->get($iter, 4))) if $iter;
     my @bits = qw(sticky gid suid);
     my @rights = qw(read write execute);
-    my @owners = qw(user group other);
+    my @owners = (N_("user"), N_("group"), N_("other"));
     
     my %rights = (user => $user, group => $group, other => $other);
     my %rights_labels = (user => N("User"), group => N("Group"), other => N("Other"));
     my %checks = ('read' => {
                              label => N("Read"),
-                             tip => { map { $_ => N("Enable \"%s\" to read the file", $_) } keys %rights },
+                             tip => { map { $_ => N("Enable \"%s\" to read the file", translate($_)) } keys %rights },
                             },
                   'write' => {
                               label => N("Write"),
-                              tip => { map { $_ => N("Enable \"%s\" to write the file", $_) } keys %rights },
+                              tip => { map { $_ => N("Enable \"%s\" to write the file", translate($_)) } keys %rights },
                              },
                   'execute' => {
                                 label => N("Execute"),
-                                tip => { map { $_ => N("Enable \"%s\" to execute the file", $_) } keys %rights },
+                                tip => { map { $_ => N("Enable \"%s\" to execute the file", translate($_)) } keys %rights },
                                },
                   sticky => { label => N("Sticky-bit"), tip => N("Used for directory:\n only owner of directory or file in this directory can delete it") },
                   suid => { label => N("Set-UID"), tip => N("Use owner id for execution") },
