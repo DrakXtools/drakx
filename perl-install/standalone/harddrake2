@@ -190,12 +190,10 @@ my $selection = gtksignal_connect($tree->get_selection(), 'changed' => sub {
         
         if ($current_device) {
             gtktext_insert($text, [ map  {
-		# The U+200E character is to force LTR display, as what
-		# what follows the colon is always in LTR (device names,
-		# paths, etc), this ensures proper displaying of names
-		# like /dev/fd0 (otherwise it gets 'dev/fd0/').
-		# it must come *after* the space, as the space must follow
-		# the colon following the direction of writting.
+
+                # The U+200E character is to force LTR display, as what what follows the colon is always in LTR (device names, paths, etc),
+                # this ensures proper displaying of names like /dev/fd0 (otherwise it gets 'dev/fd0/').
+                # it must come *after* the space, as the space must follow the colon following the direction of writting.
                 if_($fields{$_}[0], [ $fields{$_}[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => Gtk2::Pango->WEIGHT_BOLD } ],
                     [ ($_ && $current_device->{$_} =~ /^(unknown)/ ? N("unknown") : $_ && $current_device->{$_} =~ /^(Unknown)/ ? N("Unknown") : $current_device->{$_}) . "\n\n", { 'foreground' => ($_ eq 'driver' && $current_device->{$_} =~ /^(unknown|Bad:)/ ? 'indian red' : 'black') } ])
                 } sort keys %$current_device ]);
@@ -204,9 +202,8 @@ my $selection = gtksignal_connect($tree->get_selection(), 'changed' => sub {
                 print "Warning: skip \"$_\" field => \"$current_device->{$_}\"\n\n" unless $fields{$_}[0];
             };
             
-            # hide buttons if needed
-            # we've valid driver, let's offer to configure it
-            show_hide($current_device->{driver} !~ /(unknown|.*\|.*)/ &&  $current_device->{driver} !~ /^Card:/, $module_cfg_button);
+            # if we've valid driver, let's offer to configure it, else hide buttons 
+            show_hide(defined($current_device->{driver}) && $current_device->{driver} !~ /^(unknown|Bad|Card|Hsf|.*\|.*)/, $module_cfg_button);
             
             $current_configurator = $configurators{$id};
             show_hide(-x first(split /\s+/, $current_configurator), $config_button);  # strip arguments for -x test
@@ -256,7 +253,7 @@ foreach (@harddrake::data::tree) {
             my $i = $_;
             $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_}) } qw(bus id);
         }
-	   if ($Ident =~ /FLOPPY|ZIP|DVDROM|CDROM|BURNER/) {
+        if ($Ident =~ /FLOPPY|ZIP|DVDROM|CDROM|BURNER/) {
             $configurator = "/usr/sbin/diskdrake --removable=$_->{device}";
         } elsif ($Ident eq "AUDIO") {
             require harddrake::sound;
