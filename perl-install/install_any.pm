@@ -291,7 +291,7 @@ sub preConfigureTimezone {
     require timezone;
    
     #- can't be done in install cuz' timeconfig %post creates funny things
-    add2hash($o->{timezone}, { timezone::read($o->{prefix}) }) if $o->{isUpgrade};
+    add2hash($o->{timezone}, timezone::read($o->{prefix})) if $o->{isUpgrade};
 
     $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
 
@@ -441,7 +441,6 @@ sub setAuthentication {
     my ($o) = @_;
     my ($shadow, $md5, $ldap, $nis, $winbind, $winpass) = @{$o->{authentication} || {}}{qw(shadow md5 LDAP NIS winbind winpass)};
     my $p = $o->{prefix};
-    #- obsoleted always enabled (in /etc/pam.d/system-auth furthermore) #any::enableMD5Shadow($p, $shadow, $md5);
     any::enableShadow($p) if $shadow;
     if ($ldap) {
 	$o->pkg_install(qw(chkauth openldap-clients nss_ldap pam_ldap));
