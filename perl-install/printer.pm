@@ -22,6 +22,21 @@ my $FOOMATIC_DEFAULT_SPOOLER = "$FOOMATICCONFDIR/defaultspooler";
 #-Did we already read the subroutines of /usr/sbin/ptal-init?
 my $ptalinitread = 0;
 
+my %spoolers = ('ppq' => {
+                          'help' => "/usr/bin/lphelp %s |",
+					 'print_command' => 'lpr-pdq'
+                 },
+                'lpd' => {
+                        'help' => "/usr/bin/pdq -h -P %s 2>&1 |"
+                        'print_command' => 'lpr-cups'
+                 },
+			 'lprng' => {
+				'print_command' => 'lpr-lpd'
+			 },
+			 'cups' => {
+				'print_command' => 'lpr-cups'
+			 }
+            );
 %spooler = (
     _("CUPS - Common Unix Printing System") => "cups",
     _("LPRng - LPR New Generation")         => "lprng",
@@ -37,13 +52,6 @@ my $ptalinitread = 0;
     _("PDQ")    => "pdq"
 );
 %shortspooler_inv = reverse %shortspooler;
-
-%lprcommand = (
-    "cups"   => "lpr-cups",
-    "lprng"  => "lpr-lpd",
-    "lpd"    => "lpr-lpd",
-    "pdq"    => "lpr-pdq"
-);
 
 %printer_type = (
     _("Local printer")                              => "LOCAL",
@@ -1687,13 +1695,6 @@ sub print_pages($@) {
 
 sub help_output {
     my ($printer, $spooler) = @_;
-    my %spoolers = ('lpq' => {
-                              'help' => "/usr/bin/lphelp %s |"
-                     },
-                    'lp' => {
-                            'help' => "/usr/bin/pdq -h -P %s 2>&1 |"
-                     }
-                );
     my $queue = $printer->{QUEUE};
 
     local *F; 
@@ -2371,7 +2372,7 @@ sub configurestaroffice {
 	("ports", "default_queue=", $configfilecontent);
     $configfilecontent = addentry
 	("ports",
-	 "default_queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/$lprcommand{$printer->{SPOOLER}}",
+	 "default_queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/$lprcommand{$printer->{SPOOLER}{print_command}}",
 	 $configfilecontent);
     # Write back Star Office configuration file
     return writesofficeconfigfile($configfilename, $configfilecontent);
@@ -2444,7 +2445,7 @@ sub configureopenoffice {
 	("Generic Printer", "Command=", $configfilecontent);
     $configfilecontent = addentry
 	("Generic Printer", 
-	 "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/$lprcommand{$printer->{SPOOLER}}",
+	 "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/$lprcommand{$printer->{SPOOLER}{print_command}}",
 	 $configfilecontent);
     # Write back OpenOffice.org configuration file
     return writesofficeconfigfile($configfilename, $configfilecontent);
@@ -2640,7 +2641,7 @@ sub makestarofficeprinterentry {
     # symbol correctly.
     $configfile = removeentry("ports", "$queue=", $configfile);
     $configfile = addentry("ports", 
-			   "$queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/$lprcommand{$printer->{SPOOLER}} -P $queue",
+			   "$queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/$lprcommand{$printer->{SPOOLER}{print_command}} -P $queue",
 			   $configfile);
     # Make printer's section
     $configfile = addsection("$queue,PostScript,$queue", $configfile);
@@ -2707,7 +2708,7 @@ sub makeopenofficeprinterentry {
     # symbol correctly.
     $configfile = removeentry($queue, "Command=", $configfile);
     $configfile = addentry($queue, 
-			   "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/$lprcommand{$printer->{SPOOLER}} -P $queue",
+			   "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/$lprcommand{$printer->{SPOOLER}{print_command}} -P $queue",
 			   $configfile);
     # "Comment" line 
     $configfile = removeentry($queue, "Comment=", $configfile);
@@ -3155,7 +3156,7 @@ sub makegimpprinterentry {
 	$configfile = removegimpentry($queue,
 				      "Destination:", $configfile);
 	$configfile = addgimpentry($queue, 
-				   "Destination: /usr/bin/$lprcommand{$printer->{SPOOLER}} -P $queue -o raw", $configfile);
+				   "Destination: /usr/bin/$lprcommand{$printer->{SPOOLER}{print_command}} -P $queue -o raw", $configfile);
     } else {
 	$configfile = removegimpentry($queue,
 				      "PPD-File:", $configfile);
@@ -3168,7 +3169,7 @@ sub makegimpprinterentry {
 	$configfile = removegimpentry($queue,
 				      "Destination:", $configfile);
 	$configfile = addgimpentry($queue, 
-				   "Destination: /usr/bin/$lprcommand{$printer->{SPOOLER}} -P $queue", $configfile);
+				   "Destination: /usr/bin/$lprcommand{$printer->{SPOOLER}{print_command}} -P $queue", $configfile);
     }
     return $configfile;
 }
