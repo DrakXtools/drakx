@@ -265,6 +265,7 @@ floppy_info(name)
      char drivtyp[17];
      ioctl(fd, FDGETDRVTYP, (void *)drivtyp);
      RETVAL = drivtyp;
+     close(fd);
   }
   OUTPUT:
   RETVAL
