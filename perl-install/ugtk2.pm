@@ -1067,7 +1067,7 @@ sub ask_browse_tree_info {
 		    0, my $box2 = Gtk2::HBox->new(0,10),
 		   ));
     #gtkpack__($box2, my $toolbar = Gtk2::Toolbar->new('horizontal', 'icons'));
-    gtkpack__($box2, my $toolbar = Gtk2::Toolbar->new());
+    gtkpack__($box2, my $toolbar = Gtk2::Toolbar->new);
 
     my @l = ([ $common->{ok}, 1 ], if_($common->{cancel}, [ $common->{cancel}, 0 ]));
     @l = reverse @l if !$::isInstall;
@@ -1460,9 +1460,9 @@ sub set {
 
 package Gtk2::Entry;
 sub new_with_text {
-    shift;
+    my ($_class, @text) = @_;
     my $entry = Gtk2::Entry->new;
-    @_ and $entry->set_text(@_);
+    @text and $entry->set_text(@text);
     return $entry;
 }
 
