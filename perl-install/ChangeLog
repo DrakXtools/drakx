@@ -1,3 +1,352 @@
+2004/07/06  Pixel  <pixel at mandrakesoft.com>
+
+	* mdk-stage1/disk.c: 
+	  - when the directory is bad, go back to choose another directory
+	instead of choosing another device
+	(you can still use "Cancel" to choose another device)
+	  - list files in directory given, not the root directory of the device
+
+	* mdk-stage1/config-stage1.h, mdk-stage1/directory.c: doing basename is
+	dumb (is blino too?), really make the symlink relative
+
+2004/07/06  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/service_harddrake: high level explanation
+
+2004/07/05  jjorge
+
+	* share/po/pt.po: rush to beta one man
+
+2004/07/05  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/network.c: properly handle error return code in nfs install
+
+	* install_any.pm: allow medium change in nfs-iso install
+
+	* standalone/net_monitor: try to use $default_intf (and fix the last
+	perl_checker warning, yeah)
+	perl_checker compliance
+	rename $echr and $echt to $scale_r and $scale_t
+	remove unused variable $type
+
+2004/07/05  Pixel  <pixel at mandrakesoft.com>
+
+	* log.pm: use $LOG instead of *LOG
+
+	* standalone/draksec: fix #-PO: comment
+
+	* install_steps.pm: big renaming of field {type} to {pt_type},
+	this will allow defining {fs_type} which will always be a string
+	whereas {pt_type} will always be a number
+	allow getpwnam, getgrnam, getgrid to work
+
+	* any.pm, partition_table/mac.pm, partition_table/bsd.pm,
+	partition_table/dos.pm, diskdrake/removable.pm, partition_table/sun.pm,
+	partition_table/gpt.pm, install_steps_interactive.pm, network/smbnfs.pm,
+	diskdrake/dav.pm, diskdrake/hd_gtk.pm, lvm.pm, raid.pm,
+	install_interactive.pm, install_any.pm, partition_table/raw.pm,
+	partition_table.pm: big renaming of field {type} to {pt_type},
+	this will allow defining {fs_type} which will always be a string
+	whereas {pt_type} will always be a number
+
+	* drakxtools.spec: drakxtools-backend needs ldetect-lst (for
+	complete_usb_storage_info())
+
+	* fsedit.pm: big renaming of field {type} to {pt_type},
+	this will allow defining {fs_type} which will always be a string
+	whereas {pt_type} will always be a number
+	create rationalize_options() and use it (bugzilla #3525)
+	more checks should be done in this function, and used at more places
+	(but where?)
+
+	* bootloader.pm: big renaming of field {type} to {pt_type},
+	this will allow defining {fs_type} which will always be a string
+	whereas {pt_type} will always be a number
+	drop "other" entries in grub conf when the device is unknown
+	  - handle missing root=/dev/xxx kernel commandline parameter
+	  - handle grub splashimage option
+	oops, revert debugging code
+
+	* standalone/bootloader-config: drop --no-link option (already replaced by
+	--no-short-name)
+	  - new option --no-short-name which implies no short labels (usually
+	vmlinuz) and no symlinks (usually /boot/vmlinuz)
+	  - rename --no-link to --no-short-name (keeping compatibility for a few
+	days)
+
+	* fs.pm: big renaming of field {type} to {pt_type},
+	this will allow defining {fs_type} which will always be a string
+	whereas {pt_type} will always be a number
+	create rationalize_options() and use it (bugzilla #3525)
+	more checks should be done in this function, and used at more places
+	(but where?)
+	don't set {major} and {minor} to 0 when the device doesn't exist
+
+	* diskdrake/interactive.pm: fix function call
+	big renaming of field {type} to {pt_type},
+	this will allow defining {fs_type} which will always be a string
+	whereas {pt_type} will always be a number
+
+2004/07/03  jjorge
+
+	* share/po/pt.po: saraiva esta rapido ;-)
+
+2004/07/03  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: fix typo
+
+2004/07/02  fisher
+
+	* share/po/uk.po: Ukrainian translation update.
+
+2004/07/02  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/adsl.pm: remove spurious '"pty ', I suck
+	pptp support (partial fix for #6515)
+
+2004/07/02  Pixel  <pixel at mandrakesoft.com>
+
+	* drakxtools.spec: ensure proper upgrade: explictly tell urpmi that old
+	drakxtools-newt conflicts with drakxtools-backend
+
+	* authentication.pm: cleanup
+
+2004/07/02  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10-52mdk
+
+	* lang.pm: switch to new japanese fonts (UTUMI Hirosi
+	<utuhiro78@yahoo.co.jp>)
+	(write) let be aware of install mode
+	(write) configure menu-method's language too so that altering language
+	is done for KDE menu entries too (instead of just programs' messages)
+
+2004/07/02  vguardiola
+
+	* authentication.pm: Add anonymous bind
+	remove anonymous entry
+	add libsasl2-plug-gssapi when AD is selected
+	Change SSL/TLS to SSL or TLS
+	add uc_domain to realm section in /etc/krb5.conf
+	padbol
+
+2004/07/01  Olivier Blin <oblin at mandrakesoft.com>
+
+	* any.pm: add fluxbox in known window managers list
+
+	* mdk-stage1/network.c: rephrase previous patch, with correct indentation
+	this time
+	add a slash at beginning of the given directory if not already present
+	(ftp and http install)
+
+2004/07/01  Pixel  <pixel at mandrakesoft.com>
+
+	* lang.pm: default consolefont is lat0-16, no more lat0-sun16
+
+	* authentication.pm, bootloader.pm: fix typo
+
+	* standalone/draksplash, standalone/printerdrake, standalone/logdrake,
+	standalone/draksec, standalone/drakfloppy, standalone/drakfont,
+	standalone/drakbug, standalone/drakperm, standalone/harddrake2,
+	standalone/drakTermServ, standalone/net_monitor, standalone/drakclock,
+	standalone/drakups: revert ugly code printing "This program cannot be
+	run in console mode",
+	it is easily done in ugtk2.pm
+
+	* Xconfig/xfree.pm: fix typo causing multiple "Keyboard" entries in
+	XF86Config (bugzilla #10163)
+
+	* drakxtools.spec: create package drakxtools-backend
+
+	* mdk-stage1/modules.c, install2.pm: stage1 used to write files
+	/tmp/network, /tmp/ifcfg-eth0, /etc/modules.conf
+	but those files are in /stage1 after pivot rooting, so:
+	  - write modules.conf in /tmp instead of /etc
+	  - cp those files from /stage1/tmp to /tmp before umounting /stage1
+
+2004/07/01  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm, standalone/harddrake2: typo fix
+
+	* drakxtools.spec: add bug reference
+	10-50mdk
+
+2004/06/30  fisher
+
+	* share/po/uk.po: Ukrainian translation update
+	Sync'ed with .pot
+
+2004/06/30  fwang
+
+	* share/po/zh_CN.po: update
+
+2004/06/30  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_monitor: try to display arrows closely to transmission
+	values
+	always draw an arrow next to transmitted amount
+	always display a speed label for transmitted graph
+	allow the user to use different scales for received and transmitted
+	prepare code to use distinct scales for received and transmitted
+	remove most magic numbers, prefer usage of $width and $height
+
+2004/06/30  Pixel  <pixel at mandrakesoft.com>
+
+	* ugtk2.pm: use print + exit instead of die
+	(so that standalone tools don't need to do it by hand)
+
+	* standalone/bootloader-config: when doing update_splash or remove_splash,
+	call when_config_changed (mainly for lilo)
+	please perl_checker
+
+	* network/smb.pm: shut up "smbclient -L"
+
+	* authentication.pm: for Active Directory, allow: Kerberos, SSL/TLS,
+	simple and anonymous
+
+2004/06/30  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakfloppy (build_it) add translator hint
+
+	* standalone/net_monitor: fix button layout
+
+2004/06/29  fisher
+
+	* share/po/uk.po: translation update
+
+2004/06/29  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/network.c: properly handle "back" behavior in mirror list
+	step
+	do not unset automatic if mirror list selection fails, we know it wasn't
+	automatic at that point
+	remove http proxy settings from interface structure, that was really
+	dumb
+	allow to use a specific ACNAME for pppoe connections
+
+	* standalone/drakupdate_fstab: use fsedit::is_same_hd in drakupdate_fstab
+	and revert previous change in fs::subpart_from_wild_device_name (do not
+	fill both devfs_device and device fields)
+
+	* fs.pm: use fsedit::is_same_hd in drakupdate_fstab and revert previous
+	change in fs::subpart_from_wild_device_name (do not fill both
+	devfs_device and device fields)
+	do not add default device in device hash, it will be filled with result
+	from fs::subpart_from_wild_device_name
+	always update $part{device} in fs::subpart_from_wild_device_name because
+	/dev is stripped (fix #6982, #10175)
+
+	* mdk-stage1/tools.c, mdk-stage1/directory.c, mdk-stage1/probing.c:
+	variable declaration fixes (spotted by neofutur)
+
+	* mdk-stage1/network.h: remove http proxy settings from interface
+	structure, that was really dumb
+	allow to use a specific ACNAME for pppoe connections
+
+	* mdk-stage1/adsl.c: allow to use a specific ACNAME for pppoe connections
+
+2004/06/29  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/uz.po, share/po/et.po, share/po/uz@Latn.po: updated Estonian
+	and Uzbek files
+
+2004/06/29  Pixel  <pixel at mandrakesoft.com>
+
+	* fsedit.pm: in is_same_hd(), both hds can have {device} unset, it doesn't
+	mean they are the same
+
+	* drakxtools.spec: 
+	  - add bootloader-config (used by bootloader-utils and bootsplash
+	scripts)
+	  - drakboot (pixel):
+	o major backend rewrite b/c of code sharing with new installkernel
+	  o when adding a new kernel, have a nicer new name for conflicting
+	    entry
+	  o when modifying kernel parameters in all entries, skip the
+	    "failsafe" entry (#10143)
+	  o when modifying a symlink, ensure we also use the long name for the
+	    old symlink in the existing entries
+	  - drakconnect (Olivier Blin):
+	  o never disable "DHCP host name" entry box, it shouldn't be linked
+	    with "Assign host name from DHCP address" checkbox (#2759, #9981)
+	  o unblacklist sis900 since its link beat detection works with latest
+	    kernels
+	  - draksound: remove unneeded "above" lines in modules::write_conf
+	  (Olivier Blin) (#8288)
+	  - ugtk2 layer: catch missing wizard pixmap, otherwise we end up with
+	  unshown windows and error messages can't pop up (pixel)
+	  - don't require mkbootdisk
+
+	* Makefile: add missing share/net_monitor.desktop
+
+	* bootloader.pm: 
+	  - mkinitrd() calls make-boot-splash after building the initrd
+	(since /sbin/mkinitrd doesn't do it anymore)
+	  - change mkinitrd() parameters
+	  - change add_kernel() parameters and add option b_no_initrd
+	  (it is available in installkernel though i suspect it is unused)
+	  - after reading config file, get {perImageAppend} and {default_vga}
+	  (it was only done for lilo and {perImageAppend})
+	  - keep the current kernel for linux-nonfb too (it was only done for
+	failsafe)
+	  - add create_link_source(), action(),
+	when_config_changed_{lilo,grub,yaboot}
+	  - create write_yaboot()
+
+	* Makefile.config, standalone/bootloader-config: add bootloader-config
+	(tested for adding and removing in simple cases)
+
+	* .perl_checker: add "Getopt::Long" (used by bootloader-config)
+
+2004/06/28  Pixel  <pixel at mandrakesoft.com>
+
+	* share/rpmsrate: fix titi's regexp for matching centrino
+
+	* any.pm: don't set ICEAUTHORITY using $ENV{HOME} for kde (bugzilla
+	#10144)
+
+	* bootloader.pm: after install, when modifying kernel parameters in all
+	entries, skip the "failsafe" entry
+	(bugzilla #10143)
+
+	* ugtk2.pm: make perl_checker a little more happy
+	catch missing wizard pixmap, otherwise we end up with WizardWindow being
+	non
+	shown and error messages can't pop up
+	disallow switching to expert mode using Alt-e
+
+2004/06/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* c/Makefile.PL: drop useless linkage since X11 stuff was split out of c
+	module
+
+2004/06/25  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/directory.c: fix typo
+	do not use ramdisk in nfs install
+	add missing include for basename()
+	use relative symlink to image location in disk/nfs install, to have a
+	working stage2
+
+2004/06/25  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm: remove deprecated rhimage symlink
+
+	* bootloader.pm: when adding a new kernel, have a nicer new name for
+	conflicting entry
+	when modifying a symlink, ensure we also use the long name for the old
+	symlink in the existing entries
+
+	* install_steps.pm: fix blino stage1 change (i think he likes breaking
+	things ;p)
+	bootloader::add_kernel() do a good job at replacing symlinks with the
+	real
+	kernel/initrd file name, so don't need to do it here
+
+	* install_any.pm: use internal_error() instead of die'ing with no
+	arguments
+	fix blino stage1 change (i think he likes breaking things ;p)
+
 2004/06/25  Olivier Blin <oblin at mandrakesoft.com>
 
 	* mdk-stage1/directory.c: fix typo
@@ -32129,7 +32478,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.928 2004/06/25 05:47:27 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.929 2004/06/25 08:44:56 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
