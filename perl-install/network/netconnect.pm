@@ -1158,6 +1158,11 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                     post => sub {
                         my ($res) = @_;
                         $netc->{at_boot} = $res;
+                        $res = bool2yesno($res);
+                        substInFile { s/^ONBOOT.*\n//; $_ .= qq(ONBOOT=$res\n) if eof  } 
+                          $netc->{internet_cnx_choice} eq 'adsl' ? 
+                            "$::prefix/etc/sysconfig/network-scripts/ifcfg-ppp0" :
+                            "$::prefix/etc/sysconfig/network-scripts/ifcfg-ippp0";
                         return $after_start_on_boot_step->();
                     },
                    },
