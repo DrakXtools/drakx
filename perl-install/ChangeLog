@@ -1,3 +1,229 @@
+2002/08/13  alus
+
+	* share/po/pl.po: 2 strings overlapped each other
+	updated translation
+
+2002/08/13  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: fixed stupid typo.
+	allow selecting a choice package according to locales-xx found.
+
+	* crypto.pm: added a true value.
+
+	* share/rpmsrate: removed duplicate aspell-xx as DrakX will take care of
+	them now.
+
+2002/08/13  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/gen_locales.sh: corrected erros that made the script fail
+
+	* share/po/eu.po, share/po/es.po, share/po/DrakX.pot, share/po/ru.po,
+	share/po/ro.po, share/po/pl.po, share/po/gl.po, share/po/fi.po,
+	share/po/pt_BR.po, share/po/et.po, share/po/zh_TW.po, share/po/eo.po,
+	share/po/pt.po, share/po/el.po, share/po/fr.po, share/po/ga.po: updated
+	Portuguese and Chinese files
+
+	* share/po/zh_CN.po: updated Chinese file
+	updated Portuguese and Chinese files
+
+2002/08/13  Pixel  <pixel@mandrakesoft.com>
+
+	* drakxtools.spec: require latest perl-MDK-Common
+
+	* interactive.pm: remove completly setting 'ok' & 'cancel' since it's
+	better done per
+	interactive::* to handle correctly the Wizard mode
+	button "Previous" and "Next" are not only there in interactive::gtk
+
+	* standalone.pm: add ensure_is_installed (which was
+	network::smbnfs::check_raw and is often useful)
+
+	* fsedit.pm, fs.pm: backend davfs (WebDAV) support
+
+	* interactive/gtk.pm: handle the setting of 'ok' and 'cancel'
+
+	* interactive/http.pm, interactive/stdio.pm, interactive/newt.pm: 
+	  - handle setting 'ok' && 'cancel'
+	  - handle isWizard in newt (basic handling)
+
+	* diskdrake/dav.pm: add checking davfs is installed
+	rough WebDAV gui
+
+	* Xconfig/main.pm (export_to_install_X): if monitor is p'n'p, don't save
+	it for auto_install
+
+	* network/dav.pm: nothing useful for the moment
+	use ensure_is_installed
+	backend davfs (WebDAV) support
+
+	* standalone/diskdrake: rough WebDAV gui
+
+	* network/smbnfs.pm, network/smb.pm, network/nfs.pm: use
+	ensure_is_installed
+
+	* diskdrake/interactive.pm: rough WebDAV gui
+	backend davfs (WebDAV) support
+
+2002/08/13  siegel
+
+	* share/po/de.po: updates
+
+2002/08/13  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* drakxtools.spec: harddrake-ui doesn't have to provides kudzu
+
+	* standalone/drakxtv: add "Australian Optus cable TV" support (need xawtv
+	<= 3.76)
+
+	* standalone/service_harddrake: check the config file isn't empty
+
+2002/08/12  alus
+
+	* share/po/pl.po: spell checking
+	updated translation
+
+2002/08/12  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps.pm: allow removing packages on upgrade.
+
+	* pkgs.pm: fixed stupid change (almost hope it was really changes).
+	fix to reduce size of already installed packages.
+
+	* install_steps_interactive.pm: synced to force calling
+	selectPackagesAlreadyInstalled in order to have
+	installed and upgrade computed (necessary to known if a package is
+	already
+	installed or will be upgradable to compute size more precisely).
+
+2002/08/12  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/wa.po, share/po/et.po, share/po/zh_TW.po, share/po/vi.po,
+	share/po/eu.po, share/po/uk.po, share/po/es.po, share/po/eo.po,
+	share/po/el.po: updated po files
+
+	* share/po/zh_CN.po: updated Chinese file
+	updated po files
+
+	* share/gen_locales.sh, share/locales-skeleton.tar.bz2, share/Makefile:
+	locale name <-> charset correspondances better matching what DrakX uses
+
+	* share/po/bs.po, share/po/br.po, share/po/be.po, share/po/cy.po,
+	share/po/ca.po, share/po/cs.po, share/po/bg.po: updated Chinese file
+
+2002/08/12  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone.pm: 
+	  - add setExportedVarsInSh and setExportedVarsInCsh
+	  - remove setVarsInCsh (obsoleted by setExportedVarsInCsh)
+
+	* bootloader.pm: fix typo
+
+	* interactive.pm: don't switch to 2 buttons dialog box if the labels are
+	too long in ask_from_list
+	(otherwise it's ugly (reported for XFdrake multi-head choice with 67 &
+	58
+	chars strings) (fix bug #62)
+
+	* Xconfig/xfreeX.pm: create a backup of XF86Config (XF86Config.old)
+
+	* any.pm: use setExportedVarsInSh for setting /etc/profile.d/proxy.sh so
+	that http_proxy
+	and ftp_proxy are exported (thanks to Pascal <pascal@vmfacility.fr>)
+
+	* keyboard.pm, network/network.pm, install_steps.pm: 
+	  - fix reading previous keyboard config on upgrade (for displaying in
+	summary)
+	  - ensure keyboard and mouse configuration are not overwritten if not
+	explictly modified on upgrade
+	  - propagate pci=xxx at install to bootloader (since "pci=bios,biosirq"
+	is needed on some box, see http://islay.dyndns.org/taz/index.html for
+	more)
+
+	* proxy.pm: allow ftp_proxy beginning with http: (thanks to Christophe
+	Combelles)
+
+	* install2.pm: 
+	  - fix reading previous keyboard config on upgrade (for displaying in
+	summary)
+	  - ensure keyboard and mouse configuration are not overwritten if not
+	explictly modified on upgrade
+	  - propagate pci=xxx at install to bootloader (since "pci=bios,biosirq"
+	is needed on some box, see http://islay.dyndns.org/taz/index.html for
+	more)
+	use $::prefix
+
+	* mouse.pm, Xconfig/default.pm: use $::prefix
+
+	* bootlook.pm: fix embedding
+
+2002/08/12  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* ugtk.pm: consolidate create_factory_menu
+	  - ugtk::gtkexpand : new function
+	  - harddrake::ui : uses it
+	write_on_pixmap: kill unused variable
+	tree_set_icon: new function
+	create_okcancel isn't in ugtk so don't export it (warning fix)
+
+	* harddrake/ui.pm: print fields values in blue, paint unknown module in
+	red
+	consolidate create_factory_menu
+	  - on exit, kill the running configurator if any
+	  - modules::get_parameters : consolidate some code
+	  - harddrake::ui : uses it
+	  - ugtk::gtkexpand : new function
+	  - harddrake::ui : uses it
+	  - perl_checker fix
+	  - simplifications
+	  - put signals ids in %IDs
+	  - consolidate duplicated disconnection code into disconnect
+	tree_set_icon: new function
+
+	* modules.pm: 
+	  - modules::get_parameters : consolidate some code
+	  - harddrake::ui : uses it
+
+	* scanner.pm: update TODO list
+
+	* harddrake/TODO: 
+	  - on exit, kill the running configurator if any
+
+2002/08/12  Warly  <warly@mandrakesoft.com>
+
+	* share/compssUsers: update LSB text
+
+	* share/logo-mandrake.png: logo for beta 3
+
+	* share/rpmsrate: remove useless 2 GNOME
+
+2002/08/11  alus
+
+	* share/po/pl.po: updated
+
+2002/08/11  Pixel  <pixel@mandrakesoft.com>
+
+	* partition_table/raw.pm: add Acronis bootloader magic
+
+	* share/rpmsrate: adding aspell-LANGS before evolution to workaround the
+	choices limitation (=> allow to choose the right aspell-LANG)
+
+	* docs/comparisons: comprehensive feature-to-feature comparison with
+	redhat 8.0
+
+	* diskdrake/interactive.pm: allow to enter any mount point even in
+	non-expert (why was it still the other way??)
+
+	* drakxtools.spec: add "PreReq: rpm-helper" in drakxtools-http as advised
+	by rpmlint
+
+	* bootloader.pm: 
+	  - compare_entries is now called same_entries
+	  - same_entries try hard to return true even if the files not the same
+	but symlinks to the same file
+	  - rework add_entry (it handles weird case which used to give old_linux
+	and old2_linux even if they are the same)
+	  - ensure the old failsafe entry doesn't give any old_failsafe
+
 2002/08/11  alus
 
 	* share/po/pl.po: updated
