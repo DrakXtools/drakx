@@ -575,8 +575,8 @@ sub load_conf {
 	}
     }
     $system_name && $domain_name and $netc->{HOSTNAME}=join ('.', $system_name, $domain_name);
-    $adsl_pptp->{$_}=$adsl_pppoe->{$_} foreach ('login', 'passwd', 'passwd2');
-    $isdn_external->{$_}=$modem->{$_} foreach ('device', 'connection', 'phone', 'domain', 'dns1', 'dns2', 'login', 'passwd', 'auth');
+    $adsl_pptp->{$_}=$adsl_pppoe->{$_} foreach 'login', 'passwd', 'passwd2';
+    $isdn_external->{$_}=$modem->{$_} foreach 'device', 'connection', 'phone', 'domain', 'dns1', 'dns2', 'login', 'passwd', 'auth';
     $netcnx->{adsl_pptp}=$adsl_pptp;
     $netcnx->{adsl_pppoe}=$adsl_pppoe;
     $netcnx->{modem}=$modem;

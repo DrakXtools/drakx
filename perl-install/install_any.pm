@@ -60,7 +60,7 @@ sub askChangeMedium($$) {
     my $allow;
     do {
 	eval { $allow = changeMedium($method, $medium) };
-    } while ($@); #- really it is not allowed to die in changeMedium!!! or install will cores with rpmlib!!!
+    } while $@; #- really it is not allowed to die in changeMedium!!! or install will cores with rpmlib!!!
     log::l($allow ? "accepting medium $medium" : "refusing medium $medium");
     $allow;
 }
@@ -1180,10 +1180,9 @@ sub remove_bigseldom_used {
     unlink "/usr/X11R6/lib/modules/xf86Wacom.so";
     unlink glob_("/usr/share/gtk/themes/$_*") foreach qw(marble3d);
     unlink(m|^/| ? $_ : "/usr/bin/$_") foreach 
-      ((map { @$_ } @bigseldom_used_groups),
-       qw(pvcreate pvdisplay vgchange vgcreate vgdisplay vgextend vgremove vgscan lvcreate lvdisplay lvremove /lib/liblvm.so),
-       qw(mkreiserfs resize_reiserfs mkfs.xfs fsck.jfs),
-      );
+      (map { @$_ } @bigseldom_used_groups),
+      qw(pvcreate pvdisplay vgchange vgcreate vgdisplay vgextend vgremove vgscan lvcreate lvdisplay lvremove /lib/liblvm.so),
+      qw(mkreiserfs resize_reiserfs mkfs.xfs fsck.jfs);
 }
 
 ################################################################################

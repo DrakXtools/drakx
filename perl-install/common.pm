@@ -139,7 +139,7 @@ sub sync { &MDK::Common::System::sync }
 sub group_n_lm {
     my $n = shift;
     my @l;
-    push @l, [ splice(@_, 0, $n) ] while (@_);
+    push @l, [ splice(@_, 0, $n) ] while @_;
     @l
 }
 

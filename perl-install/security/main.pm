@@ -57,7 +57,7 @@ sub basic_seclevel_option {
 	my @sec_levels = $msec->get_seclevel_list();
 	my $current_level = $msec->get_secure_level();
 
-	push(@sec_levels, $current_level) if ($current_level eq "Dangerous" || $current_level eq "Poor");
+	push(@sec_levels, $current_level) if $current_level eq "Dangerous" || $current_level eq "Poor";
 
 	$$seclevel_entry->entry->set_editable(0);
 	$$seclevel_entry->set_popdown_strings(@sec_levels);

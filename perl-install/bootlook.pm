@@ -84,10 +84,10 @@ my $menubar = ugtk::create_factory_menu($window, @menu_items);
 
 my $user_combo = new Gtk::Combo;
 $user_combo->set_popdown_strings(@usernames);
-$user_combo->entry->set_text($auto_mode{autologin}) if ($auto_mode{autologin});
+$user_combo->entry->set_text($auto_mode{autologin}) if $auto_mode{autologin};
 my $desktop_combo =new Gtk::Combo;
 $desktop_combo->set_popdown_strings(get_wm());
-$desktop_combo->entry->set_text($auto_mode{desktop}) if ($auto_mode{desktop});
+$desktop_combo->entry->set_text($auto_mode{desktop}) if $auto_mode{desktop};
 my $a_c_button = new Gtk::RadioButton (N("NewStyle Categorizing Monitor"));
 my $a_h_button = new Gtk::RadioButton N("NewStyle Monitor"), $a_c_button;
 my $a_v_button = new Gtk::RadioButton N("Traditional Monitor"), $a_c_button;
@@ -136,7 +136,7 @@ foreach (keys (%combo)) {
 
 $combo{'thms'}->set_popdown_strings(@thms);
 $combo{'lilo'}->set_popdown_strings(@lilo_thms);
-$combo{'boot'}->set_popdown_strings(@boot_thms) if(! $no_bootsplash);
+$combo{'boot'}->set_popdown_strings(@boot_thms) if !$no_bootsplash;
 my $lilo_pixbuf;
 my $lilo_pic = gtkpng($themes{'def_thmb'});
 
@@ -377,7 +377,7 @@ sub parse_etc_passwd {
 	@user_info = getpwent();
 	($uname, $uid) = @user_info[0,2];
 	push (@usernames, $uname) if ($uid > 500) and !($uname eq "nobody");
-    } while (@user_info);
+    } while @user_info;
 }
 
 sub get_wm {
@@ -477,7 +477,7 @@ sub updateAutologin {
 	$in->do_pkgs->install('autologin') if $x_mode;
 	set_autologin('',$usern,$deskt);
     } else {
-	set_autologin('',undef) if ($x_no_button->get_active());
+	set_autologin('',undef) if $x_no_button->get_active();
     }
 }
  

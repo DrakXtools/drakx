@@ -195,7 +195,7 @@ sub get_functions {
             (undef, $function) = split(/ /, $_);
             ($function, undef) = split(/\(/, $function);
             if (!(member($function, @ignore_list))) {
-                push(@functions, $function) if (member($function, @{$options{$category}}));
+                push(@functions, $function) if member($function, @{$options{$category}});
             }
         }
     }
@@ -250,7 +250,7 @@ sub get_default_checks {
         open F, $check_file;
         while (<F>) {
             ($check, undef) = split(/=/, $_);
-            push @checks, $check if (!(member($check, qw(MAIL_USER))))
+            push @checks, $check if !(member($check, qw(MAIL_USER)))
         }
         close F;
     }

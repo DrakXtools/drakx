@@ -27,7 +27,7 @@ points, select \"New\".")) },
 			 { val => N("New"), clicked_may_quit => sub { create($in, $all_hds); 1 } },
 			 { val => N("Quit"), icon => "exit", clicked_may_quit => sub { $quit = 1 } },
 		       ]);
-    } until ($quit);
+    } until $quit;
 
     diskdrake::interactive::Done($in, $all_hds);
 }

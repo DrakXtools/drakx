@@ -1047,7 +1047,7 @@ sub summary {
 	      harddrake::v4l::config($o, $driver);
 	  }
         }
-    } grep { $_->{driver} =~ '(bttv|saa7134)' } detect_devices::probeall()),
+    } grep { $_->{driver} =~ /(bttv|saa7134)/ } detect_devices::probeall()),
 ]);
     install_steps::configureTimezone($o);  #- do not forget it.
 }

@@ -629,7 +629,7 @@ sub add_spooler_to_security_level {
 sub files_exist {
     my @files = @_;
     foreach my $file (@files) {
-	   return 0 if (! -f "$prefix$file"),
+	   return 0 if ! -f "$prefix$file";
     }
     return 1;
 }

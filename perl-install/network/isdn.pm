@@ -25,7 +25,7 @@ sub configure {
       intern_pci:
 	$netc->{isdntype}='isdn_internal';
 	$netcnx->{isdn_internal}={};
-	$netcnx->{isdn_internal}{$_} = $netc->{autodetect}{isdn}{$_} foreach ('description', 'vendor', 'id', 'driver', 'card_type', 'type');
+	$netcnx->{isdn_internal}{$_} = $netc->{autodetect}{isdn}{$_} foreach 'description', 'vendor', 'id', 'driver', 'card_type', 'type';
 	isdn_detect($netcnx->{isdn_internal}, $netc) or return;
     } else {
 	$netc->{isdntype}='isdn_external';
@@ -259,7 +259,7 @@ sub isdn_detect_backend {
     my ($isdn) = @_;
     if (my ($c) = (modules::probe_category('network/isdn'))) {
   	$isdn->{$_} = $c->{$_} foreach qw(description vendor id driver options firmware);
-	$isdn->{$_} = sprintf("%0x", $isdn->{$_}) foreach ('vendor', 'id');
+	$isdn->{$_} = sprintf("%0x", $isdn->{$_}) foreach 'vendor', 'id';
 	$isdn->{card_type} = 'pci';
 	($isdn->{type}) = $isdn->{options} =~ /type=(\d+)/;
 #	$c->{options} !~ /id=HiSax/ && $isdn->{driver} eq "hisax" and $c->{options} .= " id=HiSax";

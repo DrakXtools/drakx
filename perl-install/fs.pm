@@ -338,7 +338,7 @@ sub mount_options_unpack {
     my @unknown;
     foreach (split(",", $packed_options)) {
 	if ($_ eq 'user') {
-	    $options{$_} = 1 foreach ('user', @$user_implies);
+	    $options{$_} = 1 foreach 'user', @$user_implies;
 	} elsif (exists $non_defaults->{$_}) {
 	    $options{$_} = 1;
 	} elsif ($defaults->{$_}) {
@@ -401,7 +401,7 @@ sub mount_options_help {
 		    if ($v == 1) {
 			$s = $short{$s} || $s;
 			$option = exists $help{$s} && !$help{$s} ? $s : '';
-		    } elsif ($v !~ 'E0') {
+		    } elsif ($v !~ /E0/) {
 			s/\\//g;
 			s/\s*"(.*?)"\s*/$1/g if s/^\.BR\s+//;
 			s/^\.B\s+//;

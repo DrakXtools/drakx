@@ -29,7 +29,7 @@ sub good_choice {
 	defined $i and print N("Bad choice, try again\n");
 	print N("Your choice? (default %s) ", $def_s);
 	$i = readln();
-    } until (!$i || check_it($i, $max));
+    } until !$i || check_it($i, $max);
     $i;
 }
 
@@ -149,7 +149,7 @@ Your choice? ");
 	    defined $i and print N("Bad choice, try again\n");
 	    print N("Your choice? (default %s) ", $common->{focus_cancel} ? $common->{cancel} : $common->{ok});
 	    $i = readln() || ($common->{focus_cancel} ? "2" : "1");
-	} until (check_it($i, 9));
+	} until check_it($i, 9);
 	$i == 9 and goto ask_fromW_begin;
     } else {
 	$i = 1;

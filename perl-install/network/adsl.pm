@@ -142,13 +142,13 @@ usepeerdns
 defaultroute
 user "$adsl->{login}"
 ));
-	modules::add_alias($_->[0], $_->[1]) foreach (['char-major-108', 'ppp_generic'],
+	modules::add_alias($_->[0], $_->[1]) foreach  ['char-major-108', 'ppp_generic'],
 						      ['tty-ldisc-3', 'ppp_async'],
 						      ['tty-ldisc-13', 'n_hdlc'],
 						      ['tty-ldisc-14', 'ppp_synctty'],
 						      ['ppp-compress-21', 'bsd_comp'],
 						      ['ppp-compress-24', 'ppp_deflate'],
-						      ['ppp-compress-26', 'ppp_deflate']);
+						      ['ppp-compress-26', 'ppp_deflate'];
 	$::isStandalone and modules::write_conf($prefix);
 	$in->do_pkgs->what_provides("speedtouch_mgmt") and $in->do_pkgs->install('speedtouch_mgmt');
 	-e "$prefix/usr/share/speedtouch/mgmt.o" or $in->ask_warn('', N("You need the alcatel microcode.
@@ -178,9 +178,9 @@ usepeerdns
 noauth
 lcp-echo-interval 0
 ));
-    modules::add_alias($_->[0], $_->[1]) foreach (['char-major-108', 'ppp_generic'],
+    modules::add_alias($_->[0], $_->[1]) foreach  ['char-major-108', 'ppp_generic'],
 						  ['tty-ldisc-14', 'ppp_synctty'],
-						  ['tty-ldisc-13', 'n_hdlc']);
+						  ['tty-ldisc-13', 'n_hdlc'];
     $::isStandalone and modules::write_conf($prefix);
 }
 

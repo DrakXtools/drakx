@@ -2226,8 +2226,7 @@ Note: the photo test page can take a rather long time to get printed and on lase
 	   { text => N("Do not print any test page"), type => 'bool', 
 	     val => \$res2 } : ())
 	  ]);
-    $res2 = 1 if (!($standard || $altletter || $alta4 || $photo ||
-		    $ascii));
+    $res2 = 1 if !($standard || $altletter || $alta4 || $photo || $ascii);
     if ($res1 && !$res2) {
 	my @lpq_output;
 	{

@@ -233,7 +233,7 @@ sub ask_fromW_real {
 	    Newt::PopWindow();
 	    return $v || &ask_fromW;
 	}
-    } until ($check->($common->{callbacks}{$canceled ? 'canceled' : 'complete'}));
+    } until $check->($common->{callbacks}{$canceled ? 'canceled' : 'complete'});
 
     $form->FormDestroy;
     Newt::PopWindow();

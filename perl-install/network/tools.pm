@@ -14,7 +14,7 @@ use MDK::Common::System qw(getVarsFromSh);
 sub write_cnx_script {
     my ($netc, $type, $up, $down, $type2) = @_;
     if ($type) {
-	$netc->{internet_cnx}{$type}{$_->[0]}=$_->[1] foreach ([$connect_file, $up], [$disconnect_file, $down]);
+	$netc->{internet_cnx}{$type}{$_->[0]}=$_->[1] foreach [$connect_file, $up], [$disconnect_file, $down];
 	$netc->{internet_cnx}{$type}{type} = $type2;
     } else {
 	foreach ($connect_file, $disconnect_file) {
@@ -128,13 +128,12 @@ sub detect_timezone {
 
 sub type2interface {
     my ($i) = @_;
-    $i=~/$_->[0]/ and return $_->[1] foreach (
-					      [ modem => 'ppp'],
-					      [ isdn_internal => 'ippp'],
-					      [ isdn_external => 'ppp'],
-					      [ adsl => 'ppp'],
-					      [ cable => 'eth'],
-					      [ lan => 'eth']);
+    $i=~/$_->[0]/ and return $_->[1] foreach [ modem => 'ppp'],
+					     [ isdn_internal => 'ippp'],
+					     [ isdn_external => 'ppp'],
+					     [ adsl => 'ppp'],
+					     [ cable => 'eth'],
+					     [ lan => 'eth'];
 }
 
 sub connected { gethostbyname("mandrakesoft.com") ? 1 : 0 }

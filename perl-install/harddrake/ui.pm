@@ -117,7 +117,7 @@ sub detect {
     my @class_tree;
     foreach (@harddrake::data::tree) {
         my ($Ident, $title, $icon, $configurator, $detector) = @$_;
-        next if (ref($detector) ne "CODE"); #skip class witouth detector
+        next if ref($detector) ne "CODE"; #skip class witouth detector
         next if $Ident =~ /(MODEM|PRINTER)/ && "@ARGV" =~ /test/;
         next if $Ident =~ /MODEM/ && !$options{MODEMS_DETECTION};
         next if $Ident =~ /PRINTER/ && !$options{PRINTERS_DETECTION};
@@ -125,7 +125,7 @@ sub detect {
 #    standalone::explanations("Probing %s class\n", $Ident);
 
         my @devices = &$detector;
-        next if (!listlength(@devices)); # Skip empty class (no devices)
+        next if !listlength(@devices); # Skip empty class (no devices)
         my $devices_list;
         foreach (@devices) {
             $_->{custom_id} = harddrake::data::custom_id($_, $title);

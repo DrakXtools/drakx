@@ -1094,7 +1094,7 @@ sub install($$$;$$) {
 	    }
 	}
 	cleanHeaders($prefix);
-    } while ($nb > 0 && !$pkgs::cancel_install);
+    } while $nb > 0 && !$pkgs::cancel_install;
 
     closeInstallLog();
 

@@ -27,11 +27,11 @@ our @tree =
      ["BURNER","CD/DVD burners", "cd.png", "", \&detect_devices::burners(), 0 ],
      ["DVDROM","DVD-ROM", "cd.png", "", sub { grep { ! detect_devices::isBurner($_) } detect_devices::dvdroms() }, 0 ],
      ["TAPE","Tape", "tape.png", "", \&detect_devices::tapes, 0 ],
-     ["VIDEO","Videocard", "video.png", "$sbindir/XFdrake",  sub { grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ 'DISPLAY_VGA' } @devices }, 1 ],
-     ["TV","Tvcard", "tv.png", "/usr/bin/XawTV", sub { grep { $_->{media_type} =~ 'MULTIMEDIA_VIDEO' && $_->{bus} eq 'PCI' } @devices }, 0 ],
-     ["MULTIMEDIA_OTHER","Other MultiMedia devices", "multimedia.png", "", sub { grep { $_->{media_type} =~ 'MULTIMEDIA_OTHER' } @devices }, 0 ],
-     ["AUDIO","Soundcard", "sound.png", "$sbindir/draksound", sub { grep { $_->{media_type} =~ 'MULTIMEDIA_AUDIO' } @devices }, 0 ],
-     ["WEBCAM","Webcam", "webcam.png", "", sub { grep { $_->{media_type} =~ 'MULTIMEDIA_VIDEO' && $_->{bus} ne 'PCI' } @devices }, 0 ],
+     ["VIDEO","Videocard", "video.png", "$sbindir/XFdrake",  sub { grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ /DISPLAY_VGA/ } @devices }, 1 ],
+     ["TV","Tvcard", "tv.png", "/usr/bin/XawTV", sub { grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} eq 'PCI' } @devices }, 0 ],
+     ["MULTIMEDIA_OTHER","Other MultiMedia devices", "multimedia.png", "", sub { grep { $_->{media_type} =~ /MULTIMEDIA_OTHER/ } @devices }, 0 ],
+     ["AUDIO","Soundcard", "sound.png", "$sbindir/draksound", sub { grep { $_->{media_type} =~ /MULTIMEDIA_AUDIO/ } @devices }, 0 ],
+     ["WEBCAM","Webcam", "webcam.png", "", sub { grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} ne 'PCI' } @devices }, 0 ],
      ["CPU","Processors", "cpu.png", "", sub { detect_devices::getCPUs() }, 0 ],
      ["ETHERNET","Ethernetcard", "hw_network.png", "$sbindir/drakconnect", sub {
          #- generic NIC detection for USB seems broken (class, subclass, 
@@ -42,7 +42,7 @@ our @tree =
          
          grep { $_->{media_type} =~ /^NETWORK/ || member($_->{driver}, @usbnet) || $_->{type} eq 'network' } @devices }, 1 ],
      ["MODEM","Modem", "modem.png", "", sub { detect_devices::getModem() }, 0 ],
-     ["BRIDGE","Bridge(s)", "memory.png", "", sub { grep { $_->{media_type} =~ 'BRIDGE' } @devices }, 0 ],
+     ["BRIDGE","Bridge(s)", "memory.png", "", sub { grep { $_->{media_type} =~ /BRIDGE/ } @devices }, 0 ],
      ["UNKNOWN","Unknown/Others", "unknown.png", "", \&unknown, 0 ],
 
      ["PRINTER","Printer", "hw_printer.png", "$sbindir/printerdrake", sub { 
@@ -56,10 +56,10 @@ our @tree =
          &mouse::detect() }, 1 ],
      ["JOYSTICK","Joystick", "joystick.png", "", sub {}, 0 ],
 
-     ["ATA_STORAGE","(E)IDE/ATA controllers", "ide_hd.png", "", sub { grep { $_->{media_type} =~ 'STORAGE_(IDE|OTHER)' } @devices }, 0 ],
-     ["SCSI_CONTROLLER","SCSI controllers", "scsi.png", "", sub { grep { $_->{media_type} =~ 'STORAGE_SCSI' } @devices }, 0 ],
-     ["USB_CONTROLLER","USB controllers", "usb.png", "", sub { grep { $_->{media_type} =~ 'SERIAL_USB' } @devices }, 0 ],
-     ["SMB_CONTROLLER","SMBus controllers", "usb.png", "", sub { grep { $_->{media_type} =~ 'SERIAL_SMBUS' } @devices }, 0 ],
+     ["ATA_STORAGE","(E)IDE/ATA controllers", "ide_hd.png", "", sub { grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices }, 0 ],
+     ["SCSI_CONTROLLER","SCSI controllers", "scsi.png", "", sub { grep { $_->{media_type} =~ /STORAGE_SCSI/ } @devices }, 0 ],
+     ["USB_CONTROLLER","USB controllers", "usb.png", "", sub { grep { $_->{media_type} =~ /SERIAL_USB/ } @devices }, 0 ],
+     ["SMB_CONTROLLER","SMBus controllers", "usb.png", "", sub { grep { $_->{media_type} =~ /SERIAL_SMBUS/ } @devices }, 0 ],
      );
 
 

@@ -616,7 +616,7 @@ sub whatUsbport() {
 	next if !$realport;
 	next if ! -r $realport;
 	local *PORT;
-	open PORT, $realport or do next;
+	open PORT, $realport or next;
 	my $idstr = "";
 	# Calculation of IOCTL function 0x84005001 (to get device ID
 	# string):

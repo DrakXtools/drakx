@@ -34,7 +34,7 @@ sub getFile {
 	$last = $now;
 	&$read; &$read if $buf =~ /\015/;
 	$now = $buf =~ /\012/;
-    } until ($now && $last);
+    } until $now && $last;
 
     $tmp =~ /^.*\b200\b/ ? $sock : undef;
 }

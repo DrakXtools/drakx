@@ -171,8 +171,8 @@ sub doPartitionDisksAfter {
 
     if ($o->{partitioning}{use_existing_root}) {
 	#- ensure those partitions are mounted so that they are not proposed in choosePartitionsToFormat
-	fs::mount_part($_, $o->{prefix}) foreach (sort { $a->{mntpoint} cmp $b->{mntpoint} }
-						  grep { $_->{mntpoint} && maybeFormatted($_) } @{$o->{fstab}});
+	fs::mount_part($_, $o->{prefix}) foreach sort { $a->{mntpoint} cmp $b->{mntpoint} }
+						 grep { $_->{mntpoint} && maybeFormatted($_) } @{$o->{fstab}};
     }
 
     cat_("/proc/mounts") =~ m|(\S+)\s+/tmp/image nfs| &&
