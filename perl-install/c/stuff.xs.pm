@@ -98,7 +98,6 @@ void log_message(const char * s, ...) {}
 ';
 
 print '
-long long llseek(int fd, long long offset,  int whence);
 
 MODULE = c::stuff		PACKAGE = c::stuff
 
@@ -164,7 +163,7 @@ lseek_sector(fd, sector, offset)
   long sector
   long offset
   CODE:
-  RETVAL = llseek(fd, (long long) sector * SECTORSIZE + offset, SEEK_SET) >= 0;
+  RETVAL = lseek64(fd, (off64_t) sector * SECTORSIZE + offset, SEEK_SET) >= 0;
   OUTPUT:
   RETVAL
 
