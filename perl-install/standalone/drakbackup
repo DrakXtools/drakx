@@ -83,7 +83,7 @@
 #	        2 - calcul disk space.
 #		   use quota.
 #               3 - ssh & rsync -> expect or .identity.pub/authorized_keys 
-#		4 - write on cd
+#		4 - write on cd --> ! change Joliet to HFS for Apple
 #		5 - cd writer detection  -> cdrw: /sys/dev/cdrom/info  /scsi/host0/bus0/target4/lun0 
 #			/proc/sys/dev/cdrom/
 #		6 - total backup.( all partitions wanted, windows partitions for example!)
@@ -449,10 +449,14 @@ sub read_conf_file {
 
 sub complete_results {
     system_state();
-    $daemon or $results .= _("\n********************* DrakBackup Report *********************\n\n");
-    $daemon and $results .= _("\n**************** DrakBackup Daemon Report ********************\n\n");
+    $daemon or $results .=  _("***********************************************************************\n\n");
+    $daemon or $results .=  _("\n                      DrakBackup Report \n\n");
+    $daemon and $results .= _("\n                      DrakBackup Daemon Report\n\n\n");
+    $daemon or $results .=  _("***********************************************************************\n\n");
     $results .= $system_state;
-    $results .= _("\n\n****************** DrakBackup Report Details ****************\n\n");
+    $daemon or $results .=  _("\n\n***********************************************************************\n\n");
+    $results .=             _("\n                    DrakBackup Report Details\n\n\n");
+    $daemon or $results .=  _("***********************************************************************\n\n");
 }
 
 
@@ -477,8 +481,15 @@ sub ssh_client {
 
 sub send_mail {
     my ($result) = @_;
-    my $date_ = `date`;
-    system("mail $user_mail -s 'DrakBackup report on $date_' < $save_path/$result "); 
+    my $datem = `date`;
+
+    open F, "|/usr/sbin/sendmail -f$user_mail $user_mail" or die "fork: $!";
+    print F "From: drakbackup\n";
+    print F "To: $user_mail \n";
+    print F "Subject: DrakBackup report on $datem \n";
+    print F "\n";
+    print F "$result\n";
+    close F or die "sending: $!";
 }
 
 sub build_backup_files {
@@ -646,8 +657,9 @@ sub build_backup_files {
     }
     if (($where_cd && !$daemon) || ($daemon && $cd_daemon)) {
     }
-    output_p( $save_path . "/results/results$the_time", $results);    
-    $send_mail and send_mail("/results/results$the_time");
+#    output_p( $save_path . "/results/results$the_time", $results);    
+#    $send_mail and send_mail("/results/results$the_time");
+    $send_mail and send_mail("$results");
 }
 
 sub list_remove {
