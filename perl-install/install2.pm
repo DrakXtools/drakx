@@ -360,9 +360,10 @@ sub miscellaneous {
 
 	my $f = "$o->{prefix}/etc/sysconfig/usb";
 	output $f,
-"MOUSE=
+"USB=yes
+MOUSE=
 KEYBOARD=
-ZIP=
+STORAGE=
 " if modules::get_alias("usb-interface") && ! -e $f;
 
 	install_any::fsck_option($o);
