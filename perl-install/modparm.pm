@@ -14,8 +14,10 @@ sub parameters {
   my ($module) = @_;
 
   my $modinfo = '/sbin/modinfo';
-  -x $modinfo or $modinfo = '/usr/bin/modinfo';
-  -x $modinfo or die _('modinfo is not available');
+  -x $modinfo or {
+	 $modinfo = '/usr/bin/modinfo';
+	 -x $modinfo or die _('modinfo is not available');
+  }
 
   if (!$::isStandalone && !$::testing) {
       modules::extract_modules('/tmp', $module);
