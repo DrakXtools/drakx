@@ -330,13 +330,20 @@ sub real_main {
                         ];
                     },
                     post => sub {
-                        unless ($cable_no_auth->()) {
-                            substInFile {
-                                s/username\s+.*\n/username $netcnx->{login}\n/;
-                                s/password\s+.*\n/password $netcnx->{passwd}\n/;
-                            } "$::prefix/etc/bpalogin.conf";
-                            if ($in->do_pkgs->install("bpalogin")) {
+                        if ($cable_no_auth->()) {
+                            if (-f "$::prefix/etc/rc.d/init.d/bpalogin") {
                                 require services;
+                                services::stop("bpalogin");
+                                services::do_not_start_service_on_boot("bpalogin");
+                            }
+                        } else {
+                            if ($in->do_pkgs->install("bpalogin")) {
+                                substInFile {
+                                    s/username\s+.*\n/username $netcnx->{login}\n/;
+                                    s/password\s+.*\n/password $netcnx->{passwd}\n/;
+                                } "$::prefix/etc/bpalogin.conf";
+                                require services;
+                                services::start_service_on_boot("bpalogin");
                                 services::restart("bpalogin");
                             }
                         }
