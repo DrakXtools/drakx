@@ -596,7 +596,7 @@ sub autologin {
     my @users = map { $_->{name} } @{$o->{users} || []};
 
     if (@wm > 1 && @users && !$o->{authentication}{NIS} && $o->{security} <= 2) {
-	my $use_autologin = 1;
+	my $use_autologin = @users == 1;
 
 	$in->ask_from_(
 		       { title => N("Autologin"),
