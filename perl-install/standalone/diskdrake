@@ -27,14 +27,12 @@ use lib qw(/usr/lib/libDrakX);
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
 use common;
-use diskdrake::interactive;
 use interactive;
 use detect_devices;
 use fsedit;
 use fs;
 use log;
 use c;
-
 
 my %options;
 my @l = @ARGV;
@@ -83,6 +81,7 @@ fs::merge_info_from_mtab([ fsedit::get_really_all_fstab($all_hds) ]);
 $all_hds->{current_fstab} = fs::fstab_to_string($all_hds);
 
 if ($type eq 'hd') {
+    require diskdrake::interactive;
     diskdrake::interactive::main($in, $all_hds);
 } elsif ($type eq 'removable') {
     require diskdrake::removable;
