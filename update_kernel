@@ -20,9 +20,14 @@ function create_marfile() {
               && echo "WARNING! in $marfile, $k is missing (required by $i)"
         done
     done
-    ../mdk-stage1/mar/mar -c $marfile $*
+    ../mdk-stage1/mar/mar -c $marfile $(ls $*)
 }
 
+[ -e kernel/cardmgr ] && (
+    cd kernel/cardmgr
+    echo "int main(int argc, char **argv) { cardmgr_main(argc, argv); }" > main.c
+    gcc -o cardmgr *.o main.c
+)
 
 ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
 
