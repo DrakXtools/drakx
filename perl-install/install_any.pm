@@ -1593,7 +1593,7 @@ sub move_clp_to_disk() {
     my ($loop, $current_clp) = devices::find_clp_loop($clp_name) or return;
     log::l("move_clp_to_disk: copying $current_clp to ", clp_on_disk());
     cp_af($current_clp, clp_on_disk());
-    run_program::run('losetup', $loop, clp_on_disk());
+    run_program::run('losetup', '-r', $loop, clp_on_disk());
 
     #- in $current_clp eq "/tmp/$clp_name"
     unlink "/tmp/$clp_name";
