@@ -1,3 +1,80 @@
+2002/03/12  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakbackup, standalone/drakfont: minor bug correction
+
+	* standalone/net_monitor: greater timeout
+
+	* network/tools.pm, network/netconnect.pm: changed timeout for testing
+	internet connection
+
+2002/03/12  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: remove synthesis if not found (filesize is 0)
+
+	* Xconfigurator.pm: avoid Utah GLX only if > 800MB, not if <= 800MB (!)
+
+	* install_any.pm: added fix to support update hdlist renaming (ie hdlist
+	of update are always hdlist.cz).
+	remove old synthesis file, to make sure gzip can build a new one.
+
+	* share/rpmsrate: added nforce support (hack by adding kernel version
+	inside)
+
+2002/03/12  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/da.po: updated Danish file
+
+	* share/po/ga.po: fixed email address
+
+	* share/po/zh_TW.po: updated po file
+
+2002/03/12  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm, bootloader.pm: don't have "quiet" boot in the server
+	meta_class
+
+	* pkgs.pm: "fam" is not a naughtyServers
+	remove the old "boa" comment
+	adapt naughtyServers for 8.2
+
+2002/03/11  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: a few missing translations
+
+2002/03/11  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/pt.po, share/po/ga.po, share/po/de.po, share/po/az.po,
+	share/po/pt_BR.po, share/po/nl.po, share/po/ja.po, share/po/id.po,
+	share/po/ar.po, share/po/mt.po, share/po/eo.po, share/po/da.po: updated
+	po files
+
+	* share/po/eu.po, share/po/it.po: updated po files
+	merged with new strings from manuals
+
+	* share/po/DrakX.pot, share/po/fr.po: merged with new strings from manuals
+
+	* share/po/be.po, share/po/bg.po, share/po/et.po, share/po/hr.po,
+	share/po/ko.po, share/po/is.po, share/po/pl.po, share/po/no.po,
+	share/po/fi.po, share/po/el.po, share/po/lt.po, share/po/br.po,
+	share/po/ca.po, share/po/gl.po, share/po/lv.po, share/po/bs.po,
+	share/po/cs.po, share/po/af.po: updated po files (finished merging with
+	manual strings)
+	updated po files
+
+	* share/po/hu.po: updated po files
+	updated po files
+
+	* share/po/cy.po: updated po file
+	updated po files
+
+	* share/po/es.po: updated Spanish
+
+	* share/po/sp.po, share/po/zh_CN.po, share/po/sr.po, share/po/tr.po,
+	share/po/ru.po, share/po/wa.po, share/po/sv.po, share/po/th.po,
+	share/po/sk.po, share/po/sl.po, share/po/vi.po, share/po/uk.po,
+	share/po/ro.po, share/po/zh_TW.po: updated po files (finished merging
+	with manual strings)
+
 2002/03/11  dam's  <damien@mandrakesoft.com>
 
 	* Makefile.config: added drakproxy
