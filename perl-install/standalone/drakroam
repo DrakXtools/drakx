@@ -350,7 +350,7 @@ sub SetInterval() {
 sub ConnectNow {
 	my ($row) = @_;
 	my @command = "";
-	push @command, "$IWConfig essid $KnownList->{data}[$row][0] ";
+	push @command, "$IWConfig $device essid $KnownList->{data}[$row][0] ";
 	if ($KnownList->{data}[$row][1]) {
 		push @command, "mode $KnownList->{data}[$row][1] ";
 	}
