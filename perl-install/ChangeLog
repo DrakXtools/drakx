@@ -1,3 +1,218 @@
+2001/04/09  dam's  <damien@mandrakesoft.com>
+
+	* modules.pm: removed use install_any
+
+	* tinyfirewall.pm: corrected
+
+	* netconnect.pm: corrected buggy cable
+	removed buggy modem screen repetition
+	corrected bad bug when creating new profile
+
+	* standalone.pm: install function now returns the return value of the
+	system.
+
+	* Makefile: removed install_any
+
+2001/04/09  François Pons  <fpons@mandrakesoft.com>
+
+	* standalone/mousedrake: fixed mousedrake (with interactive.pm fixes
+	applied).
+	fixed cancel support.
+	added conditional restart of gpm on mouse configuration change.
+
+	* rescue/tree/etc/oem: fixed hd.img access right.
+	make kernel22 installed for every oem install...
+	moved some package to closure instead of installed.
+	added some missing packages.
+	added nolock option for nfsmount.
+	added missing package to copy.
+
+	* fs.pm: removed notail option for reiserfs.
+
+	* standalone/keyboarddrake: fixed exit on cancel (should cause trouble in
+	DrakConf only).
+
+	* printer.pm: added Till patch for printer (raw queue and PostScript
+	queue).
+
+	* install_any.pm: added missing package to copy.
+
+2001/04/09  kjx
+
+	* share/po/zh_CN.GB2312.po: translate before 8.0 release
+
+2001/04/09  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm (main): log the umask
+
+	* interactive.pm (ask_from_treelistf): make it behaves correctly when
+	"cancel" is clicked
+
+	* devices.pm (entry): add hd[ijkl]*
+
+	* bootloader.pm (install_lilo): better handling of map-drive (there's not
+	always only 2 disks!)
+
+2001/04/09  yduret
+
+	* bootlook.pm: fix, added lilo/grub frame
+	fixed till bug
+
+2001/04/08  dam's  <damien@mandrakesoft.com>
+
+	* rescue/tree/etc/oem, rescue/tree/etc/closurepkgs, install_any.pm: get
+	rid of kisdn
+
+	* tinyfirewall.pm: updated
+	added package installation
+
+	* netconnect.pm: get rid of kisdn
+	updated
+	no more askwarn in wizard mode
+	updated
+
+	* standalone/tinyfirewall, standalone/drakgw, my_gtk.pm,
+	netconnect_consts.pm: updated
+
+	* standalone/net_monitor: removed Data::Dumper
+	typo
+
+	* standalone/draknet: updated
+	typo
+	corrected bad isdn field
+
+2001/04/08  daouda
+
+	* share/rpmsrate: increase quanta weight .
+
+2001/04/08  fabman
+
+	* share/po/es.po: updated spanish .po files
+
+2001/04/08  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* modules.pm: correct my mistakes on removing some modules from stage1 and
+	stage2 (-> remove only from stage1)
+
+2001/04/08  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/compssUsers.desktop, standalone/draknet: Fixed some english typos
+
+	* standalone/net_monitor, netconnect.pm: Some English changes
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/cy.po, share/po/nl.po,
+	share/po/ja.po, share/po/wa.po, share/po/sv.po, share/po/is.po,
+	share/po/hu.po, share/po/zh_TW.Big5.po, share/po/it.po, share/po/id.po,
+	share/po/pl.po, share/po/fi.po, share/po/no.po,
+	share/po/zh_CN.GB2312.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/sl.po, share/po/vi.po,
+	share/po/br.po, share/po/ca.po, share/po/gl.po, share/po/lv.po,
+	share/po/uk.po, share/po/eo.po, share/po/ro.po, share/po/da.po,
+	share/po/cs.po, share/po/af.po: Fixed some english typos
+	Updated pot file and various po files
+
+2001/04/08  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm (write): remove debugging info :-(
+
+	* bootloader.pm (suggest): add option "quiet" to the kernel in fb
+	(requested by chmou)
+
+	* install_steps.pm (afterInstallPackages): remove setting of kde charset
+	in kdeglobals (kde is a grown-up now)
+
+2001/04/08  siegel
+
+	* share/po/de.po: new german version
+	updates
+
+2001/04/07  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: typo
+	typo
+	net_monitor incorporation
+
+	* standalone/net_monitor, Makefile.config: net_monitor incorporation
+
+2001/04/07  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/hr.po: updated Croatian files
+
+	* share/po/wa.po, share/po/sr.po, share/po/sp.po, share/po/DrakX.pot,
+	share/po/ko.po, share/po/it.po: Updated Korean, Italian, Serbian and
+	Walloon files
+
+2001/04/07  warly
+
+	* share/compssUsers: PCL-CVS release v2_9_9
+	Repository       : :ext:warly@cvs.mandrakesoft.com:/home/cvs/cooker
+	Working directory: /home/warly/local/share/mdk/gi/perl-install/share/
+	In directory .:
+	              Modified                compssUsers
+	In directory po:
+	patched       Up-To-Date              po/DrakX.pot
+	patched       Up-To-Date              po/ca.po
+	patched       Up-To-Date              po/de.po
+	patched       Up-To-Date              po/hr.po
+	patched       Up-To-Date              po/id.po
+	patched       Up-To-Date              po/it.po
+	patched       Up-To-Date              po/ja.po
+	patched       Up-To-Date              po/ko.po
+	patched       Up-To-Date              po/sp.po
+	patched       Up-To-Date              po/sr.po
+	patched       Up-To-Date              po/vi.po
+	patched       Up-To-Date              po/wa.po
+	
+	  --------------------- End ---------------------
+	  -- last cmd: cvs -f update -d -P --
+
+	* share/rpmsrate: PCL-CVS release v2_9_9
+	Repository       : :ext:warly@cvs.mandrakesoft.com:/home/cvs/cooker
+	Working directory: /home/warly/local/share/mdk/gi/perl-install/share/
+	In directory .:
+	              Modified                rpmsrate
+	
+	  --------------------- End ---------------------
+	  -- last cmd: cvs -f update -d -P --
+
+2001/04/06  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem: fixed absence of /boot in install CD for oem stuff.
+
+2001/04/06  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* modules.pm: use jeff's suggestions to remove some old stuff
+	Sun Happy Meal only for Sparc
+
+	* mdk-stage1/stdio-frontend.c, mdk-stage1/probing.c, mdk-stage1/modules.c:
+	
+	  - do not print warning when we are in AUTOMATIC and insmod failed
+	because of file-not-found in mar file (raid cards, etc)
+	  - print "please include msg from Alt-F3" for this warning message to
+	ease further support
+	  - print pci entry of cards found in te logs
+
+	* mdk-stage1/mkinitrd_helper/mkinitrd_helper.c,
+	mdk-stage1/mkinitrd_helper/Makefile: steal raid_autorun from rh
+
+2001/04/06  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ca.po, share/po/id.po: Updated Catalan and Indonesian files
+
+	* share/po/ja.po, share/po/vi.po: Updated Japanese and Vietnamese files
+
+2001/04/06  siegel
+
+	* share/po/de.po: updates
+
+2001/04/06  yduret
+
+	* standalone/drakgw: swap cancel/configure button
+
 2001/04/06  dam's  <damien@mandrakesoft.com>
 
 	* standalone/draknet2: dead code
