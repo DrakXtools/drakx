@@ -784,7 +784,9 @@ sub isLaptop() {
 }
 
 sub is_i586() {
-    cat_('/proc/cpuinfo') =~ /^cpu family\s*:\s*(\d+)/m && $1 < 6;
+    my $cpuinfo = cat_('/proc/cpuinfo');
+    $cpuinfo =~ /^cpu family\s*:\s*(\d+)/m && $1 < 6 ||
+      $cpuinfo !~ /^flags.*\bcmov\b/m;
 }
 
 sub matching_type {
