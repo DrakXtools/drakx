@@ -419,12 +419,13 @@ sub adjust_main_extended {
 
 sub adjust_local_extended {
     my ($hd, $part) = @_;
-    
-    foreach (@{$hd->{extended} || []}) {
-	$_->{normal} == $part or next;
-	$_->{size} = $part->{size} + $part->{start} - $_->{start};
-	last;
-    }
+
+    my $extended = find { $_->{normal} == $part } @{$hd->{extended} || []} or return;
+    $extended->{size} = $part->{size} + $part->{start} - $extended->{start};
+
+    #- must write it there too because values are not shared
+    my $prev = find { $_->{extended}{start} == $extended->{start} } @{$hd->{extended} || []} or return;
+    $prev->{extended}{size} = $part->{size} + $part->{start} - $prev->{extended}{start};
 }
 
 sub get_normal_parts {
