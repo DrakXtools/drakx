@@ -154,52 +154,45 @@ sub setup_printer_connection {
 
 sub first_time_dialog {
     my ($printer, $in, $upNetwork) = @_;
-    return 1 if printer::default::get_spooler() or $::isInstall;
+    return 1 if printer::default::get_spooler() || $::isInstall;
 
     # Wait message
     my $w = $in->wait_message(N("Printerdrake"), N("Checking your system..."));
 
-    # Auto-detect local printers
+    # Auto-detect local printers   
     my @autodetected = printer::detect::local_detect();
-    my @printerlist;
-    my $localprinterspresent;
-    if (@autodetected == ()) {
-	$localprinterspresent = 0;
-	push @printerlist, N("There are no printers found which are directly connected to your machine");
-    } else {
-	$localprinterspresent = 1;
-	foreach my $printer (@autodetected) {
-	    my $entry = $printer->{val}{DESCRIPTION};
-	    if ($entry) { push @printerlist, "  -  $entry\n" }
-	}
-	my $morethanoneprinters = $#printerlist > 0;
-	my $unknown_printers = $#autodetected - $#printerlist;
-	if (@printerlist != ()) {
-	    unshift @printerlist, 
-		     ($morethanoneprinters ?
-		      N("The following printers\n\n") :
-		      N("The following printer\n\n"));
-	    if ($unknown_printers == 1) {
-		push @printerlist, N("\nand one unknown printer are ");
-	    } elsif ($unknown_printers > 1) {
-		push @printerlist, N("\nand %d unknown printers are ",
-				      $unknown_printers);
+    my $msg = do {
+	if (@autodetected) {
+	    my @printerlist = 
+	      map {
+		  my $entry = $_->{val}{DESCRIPTION};
+		  if_($entry, "  -  $entry\n");
+	      } @autodetected;
+	    my $unknown_printers = @autodetected - @printerlist;
+	    if (@printerlist) {
+		my $unknown_msg = 
+		  $unknown_printers == 1 ? 
+		    "\n" . N("and one unknown printer") :
+		  $unknown_printers > 1 ?
+		    "\n" . N("and %d unknown printers", $unknown_printers) :
+		    '';
+		my $main_msg = 
+		  @printerlist > 1 ?
+		    N_("The following printers\n\n%s%s\nare directly connected to your system") :
+		  $unknown_printers ?
+		    N_("The following printer\n\n%s%s\nare directly connected to your system") :
+		    N_("The following printer\n\n%s%s\nis directly connected to your system");
+		sprintf($main_msg, join('', @printerlist), $unknown_msg);
 	    } else {
-		push @printerlist, ($morethanoneprinters ? N("\nare ") : N("\nis "));
+		$unknown_printers == 1 ?
+		  N("\nThere is one unknown printer directly connected to your system") :
+		  N("\nThere are %d unknown printers directly connected to your system", $unknown_printers);
 	    }
-	    push @printerlist, N("directly connected to your system");
 	} else {
-	    if ($unknown_printers == 1) {
-		push @printerlist, N("\nThere is one unknown printer directly connected to your system");
-	    } elsif ($unknown_printers > 1) {
-		push @printerlist, N("\nThere are %d unknown printers directly connected to your system",
-				      $unknown_printers);
-	    }
+	    N("There are no printers found which are directly connected to your machine");
 	}
-    }
-    push @printerlist,
-	  N(" (Make sure that all your printers are connected and turned on).\n");
-    my $localprinters = join('', @printerlist);
+    };
+    $msg .= N(" (Make sure that all your printers are connected and turned on).\n");
 
     # Do we have a local network?
 
@@ -211,14 +204,14 @@ sub first_time_dialog {
 
     # Finish building the dialog text
     my $question = ($havelocalnetworks ?
-		    ($localprinterspresent ?
+		    (@autodetected ?
 		     N("Do you want to enable printing on the printers mentioned above or on printers in the local network?\n") :
 		     N("Do you want to enable printing on printers in the local network?\n")) :
-		    ($localprinterspresent ?
+		    (@autodetected ?
 		     N("Do you want to enable printing on the printers mentioned above?\n") :
 		     N("Are you sure that you want to set up printing on this machine?\n")));
     my $warning = N("NOTE: Depending on the printer model and the printing system up to %d MB of additional software will be installed.", 80);
-    my $dialogtext = "$localprinters\n$question\n$warning";
+    my $dialogtext = "$msg\n$question\n$warning";
 
     # Close wait message
     undef $w;
