@@ -385,9 +385,7 @@ sub selectInstallClass {
     $::beginner = $o->{installClass} eq "beginner";
     $o->{partitions} = $suggestedPartitions{$o->{installClass}};
 
-    addToBeDone {
-	install_any::setPackages($o); #update package list
-    }  'formatPartitions' unless $o->{steps}{doInstallStep}{done};
+    install_any::setPackages($o) if $o->{steps}{choosePackages}{entered} > 1;
 }
 
 #------------------------------------------------------------------------------
@@ -448,7 +446,7 @@ sub formatPartitions {
 #------------------------------------------------------------------------------
 #PADTODO
 sub choosePackages {
-    install_any::setPackages($o) if $_[1] == 1;
+    install_any::setPackages($o);
     $o->choosePackages($o->{packages}, $o->{compss}); 
     $o->{packages}{$_}{selected} = 1 foreach @{$o->{base}};
 }
@@ -456,7 +454,6 @@ sub choosePackages {
 #------------------------------------------------------------------------------
 #PADTODO
 sub doInstallStep {
-    install_any::setPackages($o) unless $_[1]; # FIXME
     $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
     $o->afterInstallPackages;
