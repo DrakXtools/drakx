@@ -84,7 +84,7 @@ sub create_treeview_list {
     my $timeout;
     $list_tv->signal_connect(key_press_event => sub {
         my ($_w, $event) = @_;
-	my $c = chr($event->keyval & );
+	my $c = chr($event->keyval & 0xff);
 
 	Glib::Source->remove($timeout) if $timeout; $timeout = '';
 	
