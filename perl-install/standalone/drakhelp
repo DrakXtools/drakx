@@ -16,11 +16,13 @@ die "Usage: drakhelp <help_path>" if @ARGV != 1;
 my $in = interactive->vnew;
 
 my $locale = lang::read('', $>);
-$locale->{lang} = 'en' unless member($locale->{lang}, qw(de en es fr it ru));
+printf("lang is %s\n",$locale->{lang});
+$locale->{lang} = 'en' unless member($locale->{lang}, qw(en es fr));
 my $path2help = "/usr/share/doc/mandrake/" . $locale->{lang} . "/";
 my $path = $ARGV[0] =~ /^http|^www/ ? $ARGV[0] : $path2help . $ARGV[0];
 
 -e $path or $in->do_pkgs->install('mandrake_doc-drakxtools-' . $locale->{lang});
+-e $path or $in->ask_warn('Mandrake Help Center', N("%s cannot be displayed \n. No Help entry of this type\n", $path));
 
 my $wm = any::running_window_manager();
 my %launchhelp = (
@@ -32,6 +34,6 @@ my %launchhelp = (
 				}
 		 );
 member($wm, 'kwin', 'gnome-session') or $wm = 'other';
-eval { $launchhelp{$wm}->() };
+-e $path and eval { $launchhelp{$wm}->() };
 
 
