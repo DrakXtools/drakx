@@ -289,7 +289,7 @@ sub handleI18NClp {
 sub clean_partition_table_and_format_key {
     my ($in) = @_;
     my @keys = grep { detect_devices::isKeyUsb($_) } detect_devices::getSCSI();
-    my $key = $in->ask_from_listf('', "Which key?",
+    my $key = $in->ask_from_listf('', N("Which USB key do you want to format?"),
 				 sub { "$_->{usb_description} ($_->{device})" },
 				 \@keys);
     $key->{prefix} ||= $key->{device};
