@@ -38,7 +38,7 @@ require Gtk;
 init Gtk;
 
 my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
-$window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
+$window1->signal_connect (delete_event => sub { Gtk->exit(0) });
 $window1->set_position(1);
 $window1->set_title(_("Firewalling configuration"));
 $window1->border_width(10);
@@ -56,13 +56,13 @@ my $bbox1 = new Gtk::HButtonBox;
 $vbox1->pack_start($bbox1,0,0,0);
 $bbox1->set_layout(-end);
 my $button_conf = new Gtk::Button _("Configure");
-$button_conf->signal_connect ( clicked => sub {
+$button_conf->signal_connect (clicked => sub {
 				 system("/usr/sbin/tinyfirewall --wizard");
 				 update();
 			     });
 $bbox1->add($button_conf);
 my $button_ok = new Gtk::Button _("Cancel");
-$button_ok->signal_connect ( clicked => sub {
+$button_ok->signal_connect (clicked => sub {
 				 quit_global();
 			     });
 $bbox1->add($button_ok);

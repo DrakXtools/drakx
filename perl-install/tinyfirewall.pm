@@ -116,9 +116,9 @@ sub DoInterface {
 	$settings{PUBLIC_INTERFACES} = join(' ', uniq(split(' ', $settings{PUBLIC_INTERFACES}), $iface));
 	$settings{PUBLIC_INTERFACES} =~ $fulliface and $settings{PUBLIC_INTERFACES} =~ s/$iface *//;
 	$settings{INTERNAL_IFACES} = join(' ', uniq(split(' ', $settings{INTERNAL_IFACES}),
-            map { my $i=$_; my $f=$i; $f=~s/[0-9]+/\\\+/;
-		  if_(and_( map {$settings{$_} !~ /$i/ and $settings{$_} !~ /$f/ } ('TRUSTED_IFACES', 'PUBLIC_IFACES', 'INTERNAL_IFACES')), $i)
-	    } @interfaces ));
+            map { my $i = $_; my $f = $i; $f =~ s/[0-9]+/\\\+/;
+		  if_(and_(map { $settings{$_} !~ /$i/ and $settings{$_} !~ /$f/ } ('TRUSTED_IFACES', 'PUBLIC_IFACES', 'INTERNAL_IFACES')), $i)
+	    } @interfaces));
     };
 #    my $popimap = sub {	$_[0] or return; $settings{FORCE_PASV_FTP} = 11;  mapn {$settings{"$_[0]"} = "$_[1]"; }
 #[ qw(FORCE_PASV_FTP TCP_BLOCKED_SERVICES UDP_BLOCKED_SERVICES ICMP_ALLOWED_TYPES ENABLE_SRC_ADDR_VERIFY IP_MASQ_NETWORK IP_MASQ_MODULES REJECT_METHOD) ] ,
@@ -142,7 +142,7 @@ sub DoInterface {
     my $dhcp = sub { if ($_[0]) {
 	$settings{DHCP_IFACES} and return;
 	my (undef, undef, @netstat) = `/bin/netstat -in`;
-	$settings{DHCP_IFACES} = join(' ', split(' ', $settings{DHCP_IFACES}), map { /(\S+)/ } @netstat );
+	$settings{DHCP_IFACES} = join(' ', split(' ', $settings{DHCP_IFACES}), map { /(\S+)/ } @netstat);
     } else { $settings{DHCP_IFACES} = "" } };
     my $quit = sub {
 	$_[0] or $in->exit(0);
@@ -157,8 +157,8 @@ sub DoInterface {
 	$_[0] or $in->exit(0);
 	cp_af($config_file, $config_file . ".orig");
 	substInFile {
-	    if(/^(.+)\s*\=/) {
-		$a=$settings{$1};
+	    if (/^(.+)\s*\=/) {
+		$a = $settings{ $1 };
 		s/".*"/"$a"/;
 	    }
 	} $config_file;
@@ -166,7 +166,7 @@ sub DoInterface {
 			    "/bin/cp /usr/share/Bastille/bastille-firewall /etc/rc.d/init.d/",
 			    "/bin/chmod 0700 /etc/rc.d/init.d/bastille-firewall", "/bin/chmod 0700 /sbin/bastille-ipchains",
 			    "/bin/chmod 0700 /sbin/bastille-netfilter", "/sbin/chkconfig bastille-firewall on",
-			    "/etc/rc.d/init.d/bastille-firewall stop", "/etc/rc.d/init.d/bastille-firewall start"); };
+			    "/etc/rc.d/init.d/bastille-firewall stop", "/etc/rc.d/init.d/bastille-firewall start") };
     my @struct = (
 		  [$GetNetworkInfo],
 		  [],
@@ -183,10 +183,10 @@ sub DoInterface {
 		 );
     if (!Kernel22()) { 
 	pop @struct; pop @struct; pop @struct;
-	@struct = ( @struct, [undef , _("Don't Save"), _("Save & Quit"), $quit ] );
+	@struct = (@struct, [undef , _("Don't Save"), _("Save & Quit"), $quit ]);
 	$messages[9]=$messages[11];
     }
-    for (my $i=0;$i<@struct;$i++) {
+    for (my $i = 0; $i<@struct; $i++) {
 	$::Wizard_no_previous = $i == 0;
 	$::Wizard_finished = $i == $#struct;
 	my $l = $struct[$i];
@@ -200,7 +200,7 @@ sub DoInterface {
 	my $yes = $l->[2] ? $l->[2] : _("Yes (allow this through the firewall)");
 	if (my $e = $in->ask_from_list_(_("Firewall Configuration Wizard"),
 				       $messages[$i],
-				       [ $yes, $no ], or_( map { $_ && CheckService($_->[0], $_->[1]) } (@$l[4..6])) ? $yes : $no
+				       [ $yes, $no ], or_(map { $_ && CheckService($_->[0], $_->[1]) } (@$l[4..6])) ? $yes : $no
 				      )) {
 	    map { $_ and Service($e=~/Yes/, $_->[0], $_->[1]) } (@{$struct[$i]}[4..6]);
 	    $struct[$i][3] and $struct[$i][3]->($e=~/Yes/ || $e eq _("Save & Quit"));
@@ -219,7 +219,7 @@ sub Service {
     @l = uniq($add ? (@l, $port) : grep { $_ ne $port } @l);
     $settings{uc($protocol) . "_PUBLIC_SERVICES"} = join(' ', @l);
 }
-sub CheckService { member($_[1], unbox_service($_[0])); }
+sub CheckService { member($_[1], unbox_service($_[0])) }
 sub Kernel22 {
     my ($major, $minor, $patchlevel) = (cat_("/proc/version"))[0] =~ m/^Linux version ([0-9]+)\.([0-9]+)\.([0-9]+)/;
     $major eq "2" && $minor eq "2";
@@ -230,7 +230,7 @@ sub main {
     $dialog->set_position(1);
     $dialog->vbox->set_border_width(10);
     my $label = new Gtk::Label(_("Please Wait... Verifying installed packages"));
-    $dialog->signal_connect ( delete_event => sub { Gtk->main_quit(); });
+    $dialog->signal_connect (delete_event => sub { Gtk->main_quit() });
     $dialog->vbox->pack_start($label,1,1,20);
     $dialog->show_all;
     Gtk->main_iteration while Gtk->events_pending;
