@@ -141,9 +141,7 @@ sub selectInstallClass {
 					 interactive_help_id => 'selectInstallClass',
 					 },
 				   sub {
-				       ref($_[0]) ? (@l > 1 ? 
-						     N("Upgrade %s", $_[0]{release}) : 
-						     N("Upgrade")) : 
+				       ref($_[0]) ? N("Upgrade %s", $_[0]{release}) : 
 						    translate($_[0]);
 				   }, [ @l, N_("Install") ]);
 	if (ref $p) {
