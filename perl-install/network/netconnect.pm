@@ -514,7 +514,8 @@ Take a look at http://www.linmodems.org"),
                             $driver =~ /^Hcf:/ and $type = "hcfpcimodem";
                             $driver =~ /^Hsf:/ and $type = "hsflinmodem";
                             $driver =~ /^LT:/  and $type = "ltmodem";
-                            member($driver, list_modules::category2modules('network/slmodem')) and $type = "slmodem";
+                            #- we need a better agreement to use list_modules::category2modules('network/slmodem')
+                            member($driver, qw(slamr slusb)) and $type = "slmodem";
                             $type = undef if !($type && (-f $pkgs2path{$type} || $in->do_pkgs->ensure_is_installed_if_available($type, $pkgs2path{$type})));
                             $modem->{device} = $devices{$type} || '/dev/modem' if $type; # automatically linked by /etc/devfs/conf entry
                         }
