@@ -22,9 +22,11 @@ int vsscanf(const char *str, const char *format, va_list arg_ptr)
 
   unsigned long width;
 
+#ifdef WANT_FLOATING_POINT_IN_SCANF
   /* arg_ptr tmps */
   double d,*pd;
   float *pf;
+#endif
 
   long l=0,*pl;
   short *ph;
