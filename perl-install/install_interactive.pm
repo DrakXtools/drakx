@@ -163,6 +163,8 @@ When you are done, don't forget to save using `w'", partition_table_raw::descrip
 #--------------------------------------------------------------------------------
 sub wait_load_module {
     my ($o, $type, $text, $module) = @_;
+#-PO: the first %s is the card type (scsi, network, sound,...)
+#-PO: the second is the vendor+model name
     $o->wait_message('',
 		     [ _("Installing driver for %s card %s", $type, $text),
 		       $::beginner ? () : _("(module %s)", $module)
@@ -175,6 +177,7 @@ sub load_module {
     my @options;
 
     my $m = $o->ask_from_listf('',
+#-PO: the %s is the driver type (scsi, network, sound,...)
 			       _("Which %s driver should I try?", $type),
 			       \&modules::module2text,
 			       [ modules::module_of_type($type) ]) or return;
