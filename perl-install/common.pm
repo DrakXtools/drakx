@@ -41,6 +41,14 @@ sub N {
 }
 sub N_ { $_[0] }
 
+# translation with context, kde-like 
+sub NC {
+    my ($s) = N(@_);
+    $s =~ s/_:.*\n//;
+    $s;
+}
+
+
 sub salt {
     my ($nb) = @_;
     require devices;
