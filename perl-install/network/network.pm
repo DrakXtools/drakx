@@ -139,17 +139,23 @@ sub write_interface_conf {
     my @ip = split '\.', $intf->{IPADDR};
     my @mask = split '\.', $intf->{NETMASK};
 
-    $netc->{DHCP} ? ($intf->{DHCP_HOSTNAME} = $netc->{HOSTNAME}) : add2hash($intf, { NEEDHOSTNAME => "yes" });
-    
+    if ($netc->{DHCP} && $netc->{HOSTNAME}) {
+	$intf->{DHCP_HOSTNAME} = $netc->{HOSTNAME};
+	$intf->{NEEDHOSTNAME} = "no";
+    } else { 
+	$intf->{DHCP_HOSTNAME} = "";
+	$intf->{NEEDHOSTNAME} = "yes" 
+    }
+
     add2hash($intf, {
 		     BROADCAST => join('.', mapn { int($_[0]) | ((~int($_[1])) & 255) } \@ip, \@mask),
 		     NETWORK   => join('.', mapn { int($_[0]) &        $_[1]          } \@ip, \@mask),
 		     ONBOOT => bool2yesno(!member($intf->{DEVICE}, map { $_->{device} } detect_devices::probeall())),
 		    });
-    
+
     $intf->{BOOTPROTO} =~ s/dhcp.*/dhcp/; #- TODO: avoid obfuscating BOOTPROTO, waiting for zeroconf conf details 
 
-    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR), if_($intf->{wireless_eth}, qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)), if_($netc->{DHCP}, 'DHCP_HOSTNAME'), if_(!$netc->{DHCP}, 'NEEDHOSTNAME'));
+    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR), if_($intf->{wireless_eth}, qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)), if_($intf->{DHCP_HOSTNAME}, 'DHCP_HOSTNAME'), if_(!$intf->{DHCP_HOSTNAME}, 'NEEDHOSTNAME'));
 }
 
 sub add2hosts {
@@ -335,6 +341,7 @@ notation (for example, 1.2.3.4).");
 		     $intf->{BOOTPROTO} = $auto_ip ? join('', if_($auto_ip, "dhcp") , if_($zeroconf, "zeroconf")) : "static";
 		     $netc->{DHCP} = $auto_ip;
 		     $netc->{ZEROCONF} = $zeroconf if $auto_ip;
+		     return 0 if $auto_ip;
 
 		     if (my @bad = map_index { if_(!is_ip($intf->{$_}), $::i) } @fields) {
 			 $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
