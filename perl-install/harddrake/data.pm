@@ -57,8 +57,8 @@ our @tree =
          #- generic NIC detection for USB seems broken (class, subclass, 
          #- protocol report are not accurate) so I'll need to verify against
          #- known drivers :-(
-         my @usbnet = qw(CDCEther catc kaweth nvnet pegasus usbnet); # rought hack for nforce2's nvet
-         # should be taken from detect_devices.pm or modules.pm. it's identical
+         require list_modules;
+         my @usbnet = (list_modules::category2modules('network/usb'), "nvnet"); # rought hack for nforce2's nvet
          
          grep { $_->{media_type} && $_->{media_type} =~ /^NETWORK/ || member($_->{driver}, @usbnet) || $_->{type} && $_->{type} eq 'network' } @devices }, 1 ],
      [ "MODEM", , N("Modem"), "modem.png", "", sub { detect_devices::getSpeedtouch(), detect_devices::getSagem(), detect_devices::getModem() }, 0 ],
