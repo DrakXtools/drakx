@@ -299,11 +299,21 @@ EOF
 close IFCFG;
 
 
-#- install and setup the FORWARD and MASQ stuff with IPCHAINS
+#- install and setup the RPM packages
 
-my $f = "/sbin/ipchains";
--e $f or install_rpm("ipchains");
--e $f or fatal_quit(_("Could not install ipchains RPM with urpmi."));
+my $rpms_to_install;
+my %bin2rpm = ( "/sbin/ipchains" => "ipchains",
+		"/usr/sbin/dhcpd" => "dhcp",
+		$conf_linuxconf => "linuxconf",
+		"/usr/sbin/named" => "bind",
+		"/var/named/named.local" => "caching-nameserver" );
+
+-e $_ or $rpms_to_install .= "$bin2rpm{$_} " foreach (keys %bin2rpm);
+install_rpm($rpms_to_install);
+-e $_ or fatal_quit(_("Problems installing package $bin2rpm{$_}")) foreach (keys %bin2rpm);
+
+
+#- setup the masquerading configuration
 
 if (-f "/etc/rc.d/rc.firewall")
 {
@@ -449,11 +459,7 @@ print SYSCONF_NETWORK @sysconf_network_content;
 close SYSCONF_NETWORK;
 
 
-#- install and setup the DHCP server
-
-$f = "/usr/sbin/dhcpd";
--e $f or install_rpm("dhcp");
--e $f or fatal_quit(_("Could not install dhcp RPM with urpmi."));
+#- setup the DHCP server
 
 -f $dhcpd_conf and rename($dhcpd_conf, "$dhcpd_conf.old");
 local *DHCPDCONF; open DHCPDCONF, ">$dhcpd_conf" or die "Can't open $dhcpd_conf";
@@ -476,9 +482,6 @@ close DHCPDCONF;
 
 #- put the interface for the dhcp server in linuxconf config, for the /etc script of dhcpd
 
--f $conf_linuxconf or install_rpm("linuxconf");
--f $conf_linuxconf or fatal_quit(_("Could not install linuxconf RPM with urpmi."));
-
 open CONF_LINUXCONF, "$conf_linuxconf" or die "Can't open $conf_linuxconf";
 my @conf_linuxconf_content = <CONF_LINUXCONF>;
 close CONF_LINUXCONF;
@@ -487,17 +490,6 @@ grep(/DHCP.interface/, @conf_linuxconf_content) or push @conf_linuxconf_content,
 open CONF_LINUXCONF, ">$conf_linuxconf" or die "Can't open $conf_linuxconf";
 print CONF_LINUXCONF @conf_linuxconf_content;
 close CONF_LINUXCONF;
-
-
-#- install the BIND and caching nameserver stuff
-
-$f = "/usr/sbin/named";
--e $f or install_rpm("bind");
--e $f or fatal_quit(_("Could not install bind RPM with urpmi."));
-
-$f = "/var/named/named.local";
--e $f or install_rpm("caching-nameserver");
--e $f or fatal_quit(_("Could not install caching-nameserver RPM with urpmi."));
 
 
 #- start the daemons
@@ -518,3 +510,9 @@ log::l("[drakgw] Installation complete, exiting\n");
 $in->exit(0);
 
 
+
+#-------------------------------------------------
+#- $Log$
+#- Revision 1.16  2000/10/10 15:31:50  gc
+#- make only one call to urpmi in order to install all the needed rpm's
+#-
