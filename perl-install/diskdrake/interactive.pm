@@ -482,10 +482,11 @@ sub Create {
 
 	    check($in, $hd, $part, $all_hds) or return 1;
 	    $migrate_files = need_migration($in, $part->{mntpoint}) or return 1;
-
+	    
+	    my $seen;
 	    eval { 
 		catch_cdie { fsedit::add($hd, $part, $all_hds, { force => 1, primaryOrExtended => $primaryOrExtended }) }
-		  sub { $in->ask_warn('', formatError($@)); 1 };
+		  sub { $seen = 1; $in->ask_okcancel('', formatError($@)) };
 	    };
 	    if (my $err = $@) {
 		if ($err =~ /raw_add/ && $hd->hasExtended && !$hd->{primary}{extended}) {
@@ -494,7 +495,7 @@ sub Create {
 First remove a primary partition and create an extended partition."));
 		    return 0;
 		} else {
-		    $in->ask_warn(N("Error"), formatError($err));
+		    $in->ask_warn(N("Error"), formatError($err)) if !$seen;
 		    return 1;
 		}
 	    }
@@ -1016,12 +1017,13 @@ sub check_type {
 }
 sub check_mntpoint {
     my ($in, $mntpoint, $hd, $part, $all_hds) = @_;
+    my $seen;
     eval { 
 	catch_cdie { fsedit::check_mntpoint($mntpoint, $hd, $part, $all_hds) }
-	  sub { $in->ask_warn('', formatError($@)); 1 };
+	  sub { $seen = 1; $in->ask_okcancel('', formatError($@)) };
     };
     if (my $err = $@) {
-	$in->ask_warn('', formatError($err));
+	$in->ask_warn('', formatError($err)) if !$seen;
 	return;
     }
     1;
