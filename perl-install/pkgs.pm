@@ -782,7 +782,7 @@ sub computeGroupSize {
 	push @{$pkgs{$v}}, $k;
 	$sizes{$v} += packageSize($packages->{names}{$k});
     }
-    log::l(sprintf "%s %sMB %s", $_, $sizes{$_} / sqr(1024), join(',', @{$pkgs{$_}})) foreach keys %sizes;
+    log::l(sprintf "%s %dMB %s", $_, $sizes{$_} / sqr(1024), join(',', @{$pkgs{$_}})) foreach keys %sizes;
     \%sizes;
 }
 
