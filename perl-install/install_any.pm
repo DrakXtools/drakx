@@ -595,7 +595,6 @@ sub load_rate_files {
 	getFile(-e "/tmp/rpmsrate" ? "/tmp/rpmsrate" : "media/media_info/rpmsrate")
     );
     ($o->{compssUsers}, $o->{gtk_display_compssUsers}) = pkgs::readCompssUsers(
-	$o->{meta_class},
 	-e '/tmp/compssUsers.pl' ? '/tmp/compssUsers.pl' : 'media/media_info/compssUsers.pl'
     );
 }

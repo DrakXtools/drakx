@@ -623,9 +623,9 @@ sub read_rpmsrate {
 }
 
 sub readCompssUsers {
-    my ($meta_class, $file) = @_;
+    my ($file) = @_;
 
-    my $f = $meta_class && install_any::getFile("$file.$meta_class") || install_any::getFile($file)
+    my $f = install_any::getFile($file)
 	or do { log::l("can't find $file: $!"); return (undef, undef) };
     my ($compssUsers, $gtk_display_compssUsers) = eval join('', <$f>);
     if ($@) {
