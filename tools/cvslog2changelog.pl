@@ -77,8 +77,10 @@ BEGIN {
               'fcrozat' => 'Frederic Crozat  <fcrozat at mandrakesoft.com>',
               'flepied' => 'Frederic Lepied  <flepied at mandrakesoft.com>',
               'florin'  => 'Florin Grad  <florin at mandrakesoft.com>',
+              'fwang'   => 'Funda Wang <fundawang at linux.net.cn>',
               'gc'      => 'Guillaume Cottenceau  <gc at mandrakesoft.com>',
               'install' => 'DrakX  <install at mandrakesoft.com>',
+              'jjorge'  => 'José JORGE <jjorge at free.fr>',
               'nplanel' => 'Nicolas Planel  <nplanel at mandrakesoft.com>',
               'oblin' => 'Olivier Blin <oblin at mandrakesoft.com>',
               'pablo'   => 'Pablo Saratxaga  <pablo at mandrakesoft.com>',
@@ -87,9 +89,10 @@ BEGIN {
               'rvojta' => 'Robert Vojta <robert.vojta at mandrake.cz>',
               'sbenedict' => 'Stew Benedict  <sbenedict at mandrakesoft.com>',
               'tkamppeter' => 'Till Kamppeter  <till at mandrakesoft.com>',
+              'tsdgeos ' => 'Albert Astals Cid <astals11 at terra.es>',
               'tvignaud' => 'Thierry Vignaud  <tvignaud at mandrakesoft.com>',
               'vguardiola' => 'Vincent Guardiola <vguardiola at mandrakesoft.com>',
               'warly'   => 'Warly  <warly at mandrakesoft.com>',
-
+              'yrahal'  => 'Youcef Rabah Rahal <rahal at arabeyes.org>',
 	     );
 }
