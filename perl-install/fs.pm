@@ -596,7 +596,7 @@ sub mount_part {
 	    } elsif (loopback::carryRootLoopback($part)) {
 		$mntpoint = "/initrd/loopfs";
 	    }
-	    my $dev = devices::make($part->{real_device} || $part->{device});
+	    my $dev = $part->{real_device} || part2wild_device_name('', $part);
 	    mount($dev, $mntpoint, $part->{fs_type}, $b_rdonly, $part->{options}, $o_wait_message);
 	    rmdir "$mntpoint/lost+found";
 	}
