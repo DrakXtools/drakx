@@ -410,6 +410,10 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     any::writeandclean_ldsoconf($o->{prefix});
 
+    #- make sure wins is disabled in /etc/nsswitch.conf
+    #- else if eth0 is not existing, glibc get SEGV.
+    substInFile { s/^\s*(hosts\s*:.*)\s*wins(\s*.*)/$1$2/ } "$o->{prefix}/etc/nsswitch.conf";
+
     #- make sure some services have been enabled (or a catastrophic restart will occur).
     #- these are normally base package post install scripts or important services to start.
     run_program::rooted($o->{prefix}, "chkconfig", "--add", $_) foreach
