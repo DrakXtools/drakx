@@ -363,15 +363,6 @@ our @tree =
      },
 
      {
-      class => "UPS",
-      string => N("UPS"),
-      icon => "ups.png",
-      configurator => "$sbindir/drakups",
-      detector => sub { f(detect_devices::getUPS()) },
-      checked_on_boot => 0,
-     },
-     
-     {
       class => "KEYBOARD",
       string => N("Keyboard"),
       icon => "usb.png",
@@ -396,6 +387,15 @@ our @tree =
       },
       checked_on_boot => 1,
       automatic => 1,
+     },
+     
+     {
+      class => "UPS",
+      string => N("UPS"),
+      icon => "ups.png",
+      configurator => "$sbindir/drakups",
+      detector => sub { f(detect_devices::getUPS()) },
+      checked_on_boot => 0,
      },
      
      {
