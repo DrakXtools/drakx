@@ -157,7 +157,7 @@ $combo{lilo}->entry->signal_connect(changed => sub {
     my $new_file = $themes{path} . $combo{lilo}->entry->get_text() . $themes{lilo}{thumb};
     undef($lilo_pixbuf);
     $lilo_pixbuf = gtkcreate_pixbuf(-r $new_file ? $new_file : $themes{def_thmb});
-    $lilo_pixbuf = $lilo_pixbuf->scale_simple(155,116,'nearest');
+    $lilo_pixbuf = $lilo_pixbuf->scale_simple(155, 116, 'nearest');
     $lilo_pic->set_from_pixbuf($lilo_pixbuf);
 });
 
