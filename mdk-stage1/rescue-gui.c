@@ -141,13 +141,19 @@ int main(int argc, char **argv)
 	enum return_type results;
 
 	char install_bootloader[] = "Re-install Boot Loader";
+#ifdef __i386__
+	char restore_ms_boot[] = "Restore Windows Boot Loader";
+#endif
 	char mount_parts[] = "Mount your partitions under /mnt";
 	char go_to_console[] = "Go to console";
 	char reboot_[] = "Reboot";
 	char doc[] = "Doc: what's addressed by this Rescue?";
 
-
-	char * actions[] = { install_bootloader, mount_parts, go_to_console, reboot_, doc, NULL };
+	char * actions[] = { install_bootloader,
+#ifdef __i386__
+			     restore_ms_boot,
+#endif
+			     mount_parts, go_to_console, reboot_, doc, NULL };
 	char * choice;
 
 	init_frontend("Welcome to " DISTRIB_NAME " Rescue (" VERSION ") " __DATE__ " " __TIME__);
@@ -162,6 +168,11 @@ int main(int argc, char **argv)
 		if (ptr_begins_static_str(choice, install_bootloader)) {
 			binary = "/usr/bin/install_bootloader";
 		}
+#ifdef __i386__
+		if (ptr_begins_static_str(choice, restore_ms_boot)) {
+			binary = "/usr/bin/restore_ms_boot";
+		}
+#endif
 		if (ptr_begins_static_str(choice, mount_parts)) {
 			binary = "/usr/bin/guessmounts";
 		}

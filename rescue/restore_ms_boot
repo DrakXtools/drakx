@@ -1,0 +1,108 @@
+#!/usr/bin/perl
+#
+# Guillaume Cottenceau (gc@mandrakesoft.com)
+#
+# Copyright 2002 MandrakeSoft
+#
+# This software may be freely redistributed under the terms of the GNU
+# public license.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+
+sub arch() {
+    my $t = `uname -m`;
+    chomp $t;
+    $t;
+}
+sub if_($@) {
+    my $b = shift;
+    $b or return ();
+    wantarray || @_ <= 1 or die("if_ called in scalar context with more than one argument " . join(":", caller()));
+    wantarray ? @_ : $_[0];
+}
+sub cat_ { local *F; open F, $_[0] or $_[1] ? die "cat of file $_[0] failed: $!\n" : return; my @l = <F>; wantarray ? @l : join '', @l }
+sub member { my $e = shift; foreach (@_) { $e eq $_ and return 1 } 0 }
+
+@known_boot_loaders = qw(lilo grub yaboot);
+
+# keep this in sync with DrakX
+@MBR_signatures = (
+    [ 'empty', 0, "\0\0\0\0" ],
+    [ 'grub', 0x6,  "GRUB" ],
+    [ 'grub', 0, "\xEBG", 0x17d, "stage1 \0" ],
+    [ 'grub', 0, "\xEBH", 0x17e, "stage1 \0" ],
+    [ 'grub', 0, "\xEBH", 0x18a, "stage1 \0" ],
+    [ 'grub', 0, "\xEBH", 0x181, "GRUB \0" ],
+    [ 'lilo', 0x2,  "LILO" ],
+    [ 'lilo', 0x6,  "LILO" ],
+if_(arch() =~ /ppc/,
+    map { [ 'yaboot', 0, "PM", 0x200 * $_ + 0x10, "bootstrap\0" ] } 0 .. 61
+),
+);
+
+sub typeFromMagic {
+    my $f = shift;
+    local *F; sysopen F, $f, 0 or return;
+
+    my $tmp;
+  M: foreach (@MBR_signatures) {
+	my ($name, @l) = @$_;
+	while (@l) {
+	    my ($offset, $signature) = splice(@l, 0, 2);
+	    sysseek(F, $offset, 0) or next M;
+	    sysread(F, $tmp, length $signature);
+	    $tmp eq $signature or next M;
+	}
+	return $name;
+    }
+    return 0;
+}
+
+
+my (undef, undef, @parts) = cat_('/proc/partitions');
+
+my @possibilities;
+
+P: foreach (@parts) {
+    my (undef, undef, $blocks, $dev) = split or next;
+    next if $blocks <= 1;
+    my $type = typeFromMagic("/dev/$dev");
+    $type && member($type, @known_boot_loaders) and push @possibilities, [ $dev, $type ];
+}
+
+my $choice;
+
+if (!@possibilities) {
+    print "No known Linux bootloader has been found, nothing to do.\n";
+} elsif (@possibilities == 1) {
+    print "I've found a Linux bootloader only on </dev/$possibilities[0]->[0]>.\n\n";
+    $choice = $possibilities[0];
+} else {
+    print "I've found the following Linux bootloaders:\n";
+    my $i;
+    print "\t", ++$i, ": <$_->[1]> \ton <$_->[0]>\n" foreach @possibilities;
+    print "\n";
+    print "Which disk/partition do you want to overwrite with the Windows bootloader?\n";
+    print "\t<enter the number or press 'n' and Enter to cancel> ";
+    <STDIN> !~ /^(\d+)$/i && $1 >= 1 and $choice = $possibilities[$1-1];
+}
+
+if ($choice) {
+    print "I'm going to overwrite bootloader on </dev/$choice->[0]> with
+Windows bootloader.
+
+Ok? <press Enter to continue, 'n' and Enter to cancel> ";
+    <STDIN> =~ /^n/i and exit 0;
+    
+    system("/bin/dd if=/usr/lib/extipl/aldebaran.bin of=/dev/$choice->[0]\n") and print "\tFailed!\n";
+}
+
+#-------------------------------------------------
+#- $Log$
+#- Revision 1.1  2002/02/27 13:31:30  gc
+#- add "restore Windows Boot Loader" to rescue
+#-
+#-
