@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-10-30 19:27+0200\n"
+"POT-Creation-Date: 1999-11-02 20:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,12 +82,12 @@ msgid ""
 "try changing some parameters"
 msgstr ""
 
-#: ../Xconfigurator.pm_.c:317
+#: ../Xconfigurator.pm_.c:317 ../t2.pm_.c:15
 #, c-format
 msgid "(leaving in %d seconds)"
 msgstr ""
 
-#: ../Xconfigurator.pm_.c:321 ../my_gtk.pm_.c:431
+#: ../Xconfigurator.pm_.c:321 ../my_gtk.pm_.c:431 ../t2.pm_.c:19
 msgid "Is this correct?"
 msgstr ""
 
@@ -106,8 +106,8 @@ msgid ""
 "You can switch if off if you want, you'll hear a beep when it's over"
 msgstr ""
 
-#: ../Xconfigurator.pm_.c:391 ../install_steps_interactive.pm_.c:471
-#: ../install_steps_interactive.pm_.c:472
+#: ../Xconfigurator.pm_.c:391 ../install_steps_interactive.pm_.c:469
+#: ../install_steps_interactive.pm_.c:470
 msgid "Resolution"
 msgstr ""
 
@@ -350,15 +350,15 @@ msgstr ""
 msgid "Format"
 msgstr ""
 
-#: ../diskdrake.pm_.c:17 ../diskdrake.pm_.c:384
+#: ../diskdrake.pm_.c:17 ../diskdrake.pm_.c:388
 msgid "Move"
 msgstr ""
 
-#: ../diskdrake.pm_.c:17 ../diskdrake.pm_.c:442
+#: ../diskdrake.pm_.c:17 ../diskdrake.pm_.c:446
 msgid "Resize"
 msgstr ""
 
-#: ../diskdrake.pm_.c:17 ../diskdrake.pm_.c:331
+#: ../diskdrake.pm_.c:17 ../diskdrake.pm_.c:335
 msgid "Type"
 msgstr ""
 
@@ -394,8 +394,8 @@ msgstr ""
 msgid "Save on floppy"
 msgstr ""
 
-#: ../diskdrake.pm_.c:39 ../install_steps_interactive.pm_.c:562
-#: ../install_steps_interactive.pm_.c:677
+#: ../diskdrake.pm_.c:39 ../install_steps_interactive.pm_.c:569
+#: ../install_steps_interactive.pm_.c:684
 msgid "Done"
 msgstr ""
 
@@ -441,130 +441,134 @@ msgstr ""
 msgid "Reload"
 msgstr ""
 
-#: ../diskdrake.pm_.c:95
-msgid "Details"
-msgstr ""
-
-#: ../diskdrake.pm_.c:99
+#: ../diskdrake.pm_.c:93
 msgid "Legend:"
 msgstr ""
 
-#: ../diskdrake.pm_.c:103
+#: ../diskdrake.pm_.c:97
 msgid "Empty"
 msgstr ""
 
-#: ../diskdrake.pm_.c:103
+#: ../diskdrake.pm_.c:97
 msgid "Ext2"
 msgstr ""
 
-#: ../diskdrake.pm_.c:103
+#: ../diskdrake.pm_.c:97
 msgid "FAT"
 msgstr ""
 
-#: ../diskdrake.pm_.c:103
+#: ../diskdrake.pm_.c:97
 msgid "Other"
 msgstr ""
 
-#: ../diskdrake.pm_.c:103
+#: ../diskdrake.pm_.c:97
 msgid "Swap"
 msgstr ""
 
-#: ../diskdrake.pm_.c:123
+#: ../diskdrake.pm_.c:100
+msgid "Choose action"
+msgstr ""
+
+#: ../diskdrake.pm_.c:102
+msgid "Details"
+msgstr ""
+
+#: ../diskdrake.pm_.c:127
 #, c-format
 msgid "After %s partition %s,"
 msgstr ""
 
-#: ../diskdrake.pm_.c:123 ../diskdrake.pm_.c:374 ../diskdrake.pm_.c:402
+#: ../diskdrake.pm_.c:127 ../diskdrake.pm_.c:378 ../diskdrake.pm_.c:406
 msgid "Read carefully!"
 msgstr ""
 
-#: ../diskdrake.pm_.c:123
+#: ../diskdrake.pm_.c:127
 msgid "all data on this partition will be lost"
 msgstr ""
 
-#: ../diskdrake.pm_.c:142 ../install_any.pm_.c:168 ../install_steps.pm_.c:70
+#: ../diskdrake.pm_.c:146 ../install_any.pm_.c:170 ../install_steps.pm_.c:70
 #: ../install_steps_interactive.pm_.c:38
 msgid "Error"
 msgstr ""
 
-#: ../diskdrake.pm_.c:163 ../diskdrake.pm_.c:519
+#: ../diskdrake.pm_.c:170 ../diskdrake.pm_.c:523
 msgid "Mount point: "
 msgstr ""
 
-#: ../diskdrake.pm_.c:164 ../diskdrake.pm_.c:186
+#: ../diskdrake.pm_.c:171 ../diskdrake.pm_.c:195
 msgid "Device: "
 msgstr ""
 
-#: ../diskdrake.pm_.c:165
+#: ../diskdrake.pm_.c:172
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr ""
 
-#: ../diskdrake.pm_.c:166 ../diskdrake.pm_.c:189
+#: ../diskdrake.pm_.c:173 ../diskdrake.pm_.c:198
 msgid "Type: "
 msgstr ""
 
-#: ../diskdrake.pm_.c:167
+#: ../diskdrake.pm_.c:174
 #, c-format
 msgid "Start: sector %s\n"
 msgstr ""
 
-#: ../diskdrake.pm_.c:168
+#: ../diskdrake.pm_.c:175
 msgid "Size: %s MB (%s%%)"
 msgstr ""
 
-#: ../diskdrake.pm_.c:169
+#: ../diskdrake.pm_.c:176
 #, c-format
 msgid ", %s sectors"
 msgstr ""
 
-#: ../diskdrake.pm_.c:171
+#: ../diskdrake.pm_.c:178
 #, c-format
 msgid "Cylinder %d to cylinder %d\n"
 msgstr ""
 
-#: ../diskdrake.pm_.c:172
+#: ../diskdrake.pm_.c:179
 msgid "Formatted\n"
 msgstr ""
 
-#: ../diskdrake.pm_.c:173
+#: ../diskdrake.pm_.c:180
 msgid "Not formatted\n"
 msgstr ""
 
-#: ../diskdrake.pm_.c:174
+#: ../diskdrake.pm_.c:181
 msgid "Mounted\n"
 msgstr ""
 
-#: ../diskdrake.pm_.c:175
+#: ../diskdrake.pm_.c:182
 msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
 msgstr ""
 
-#: ../diskdrake.pm_.c:187
+#: ../diskdrake.pm_.c:196
 #, c-format
 msgid "Size: %d MB\n"
 msgstr ""
 
-#: ../diskdrake.pm_.c:188
+#: ../diskdrake.pm_.c:197
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr ""
 
-#: ../diskdrake.pm_.c:190
+#: ../diskdrake.pm_.c:199
 #, c-format
 msgid "on bus %d id %d\n"
 msgstr ""
 
-#: ../diskdrake.pm_.c:202
+#: ../diskdrake.pm_.c:211
 msgid "Mount"
 msgstr ""
 
-#: ../diskdrake.pm_.c:204
+#: ../diskdrake.pm_.c:213
 msgid "Active"
 msgstr ""
 
-#: ../diskdrake.pm_.c:293
+#: ../diskdrake.pm_.c:297
 msgid ""
 "Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
 "1024).\n"
@@ -572,7 +576,7 @@ msgid ""
 "need /boot"
 msgstr ""
 
-#: ../diskdrake.pm_.c:297
+#: ../diskdrake.pm_.c:301
 msgid ""
 "The partition you've selected to add as root (/) is physically located "
 "beyond\n"
@@ -580,137 +584,139 @@ msgid ""
 "If you plan to use the LILO boot manager, be careful to add a /boot partition"
 msgstr ""
 
-#: ../diskdrake.pm_.c:311
+#: ../diskdrake.pm_.c:315
 msgid "Quit without saving"
 msgstr ""
 
-#: ../diskdrake.pm_.c:311
+#: ../diskdrake.pm_.c:315
 msgid "Quit without writing the partition table?"
 msgstr ""
 
-#: ../diskdrake.pm_.c:326
+#: ../diskdrake.pm_.c:330
 msgid "changing type of"
 msgstr ""
 
-#: ../diskdrake.pm_.c:329
+#: ../diskdrake.pm_.c:333
 msgid "Change partition type"
 msgstr ""
 
-#: ../diskdrake.pm_.c:330
+#: ../diskdrake.pm_.c:334
 msgid "Which partition type do you want?"
 msgstr ""
 
-#: ../diskdrake.pm_.c:346
+#: ../diskdrake.pm_.c:350
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr ""
 
-#: ../diskdrake.pm_.c:347
+#: ../diskdrake.pm_.c:351
 msgid "Mount point"
 msgstr ""
 
-#: ../diskdrake.pm_.c:368
+#: ../diskdrake.pm_.c:372
 msgid "formatting"
 msgstr ""
 
-#: ../diskdrake.pm_.c:374
+#: ../diskdrake.pm_.c:378
 msgid "After formatting all partitions,"
 msgstr ""
 
-#: ../diskdrake.pm_.c:374
+#: ../diskdrake.pm_.c:378
 msgid "all data on these partitions will be lost"
 msgstr ""
 
-#: ../diskdrake.pm_.c:385
+#: ../diskdrake.pm_.c:389
 msgid "Which disk do you want to move to?"
 msgstr ""
 
-#: ../diskdrake.pm_.c:389
+#: ../diskdrake.pm_.c:393
 msgid "Sector"
 msgstr ""
 
-#: ../diskdrake.pm_.c:390
+#: ../diskdrake.pm_.c:394
 msgid "Which sector do you want to move to?"
 msgstr ""
 
-#: ../diskdrake.pm_.c:393
+#: ../diskdrake.pm_.c:397
 msgid "Moving"
 msgstr ""
 
-#: ../diskdrake.pm_.c:393
+#: ../diskdrake.pm_.c:397
 msgid "Moving partition..."
 msgstr ""
 
-#: ../diskdrake.pm_.c:402
+#: ../diskdrake.pm_.c:406
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr ""
 
-#: ../diskdrake.pm_.c:404
+#: ../diskdrake.pm_.c:408
 msgid "You'll need to reboot before the modification can take place"
 msgstr ""
 
-#: ../diskdrake.pm_.c:425
+#: ../diskdrake.pm_.c:429
 msgid "Computing fat filesystem bounds"
 msgstr ""
 
-#: ../diskdrake.pm_.c:425 ../diskdrake.pm_.c:470
+#: ../diskdrake.pm_.c:429 ../diskdrake.pm_.c:474
 msgid "Resizing"
 msgstr ""
 
-#: ../diskdrake.pm_.c:439
+#: ../diskdrake.pm_.c:443
 msgid "resizing"
 msgstr ""
 
-#: ../diskdrake.pm_.c:449
+#: ../diskdrake.pm_.c:453
 msgid "Choose the new size"
 msgstr ""
 
-#: ../diskdrake.pm_.c:449 ../install_steps_graphical.pm_.c:305
+#: ../diskdrake.pm_.c:453 ../install_steps_graphical.pm_.c:283
+#: ../install_steps_graphical.pm_.c:329
+#: ../unused/install_steps_graphical.pm_.c:313
 msgid "MB"
 msgstr ""
 
-#: ../diskdrake.pm_.c:496
+#: ../diskdrake.pm_.c:500
 msgid "Create a new partition"
 msgstr ""
 
-#: ../diskdrake.pm_.c:512
+#: ../diskdrake.pm_.c:516
 msgid "Start sector: "
 msgstr ""
 
-#: ../diskdrake.pm_.c:515
+#: ../diskdrake.pm_.c:519
 msgid "Size in MB: "
 msgstr ""
 
-#: ../diskdrake.pm_.c:518
+#: ../diskdrake.pm_.c:522
 msgid "Filesystem type: "
 msgstr ""
 
-#: ../diskdrake.pm_.c:520
+#: ../diskdrake.pm_.c:524
 msgid "Preference: "
 msgstr ""
 
-#: ../diskdrake.pm_.c:562 ../diskdrake.pm_.c:578
+#: ../diskdrake.pm_.c:566 ../diskdrake.pm_.c:582
 msgid "Select file"
 msgstr ""
 
-#: ../diskdrake.pm_.c:571
+#: ../diskdrake.pm_.c:575
 msgid ""
 "The backup partition table has not the same size\n"
 "Still continue?"
 msgstr ""
 
-#: ../diskdrake.pm_.c:579
+#: ../diskdrake.pm_.c:583
 msgid "Warning"
 msgstr ""
 
-#: ../diskdrake.pm_.c:580
+#: ../diskdrake.pm_.c:584
 msgid ""
 "Insert a floppy in drive\n"
 "All data on this floppy will be lost"
 msgstr ""
 
-#: ../diskdrake.pm_.c:594
+#: ../diskdrake.pm_.c:598
 msgid "Trying to rescue partition table"
 msgstr ""
 
@@ -1153,8 +1159,8 @@ msgstr ""
 msgid "Configure printer"
 msgstr ""
 
-#: ../install2.pm_.c:54 ../install_steps_interactive.pm_.c:532
-#: ../install_steps_interactive.pm_.c:533
+#: ../install2.pm_.c:54 ../install_steps_interactive.pm_.c:530
+#: ../install_steps_interactive.pm_.c:531
 msgid "Set root password"
 msgstr ""
 
@@ -1198,42 +1204,50 @@ msgstr ""
 msgid "Partitioning failed: no root filesystem"
 msgstr ""
 
-#: ../install_any.pm_.c:169
+#: ../install2.pm_.c:315
+msgid "Not enough swap to fulfill installation, please add some"
+msgstr ""
+
+#: ../install_any.pm_.c:171
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
 "I'll try to go on blanking bad partitions"
 msgstr ""
 
-#: ../install_any.pm_.c:185
+#: ../install_any.pm_.c:187
 msgid ""
 "DiskDrake failed to read correctly the partition table.\n"
 "Continue at your own risk!"
 msgstr ""
 
-#: ../install_any.pm_.c:224
+#: ../install_any.pm_.c:226
 msgid "Information"
 msgstr ""
 
-#: ../install_any.pm_.c:225
+#: ../install_any.pm_.c:227
 #, c-format
 msgid "%s: This is not a root partition, please select another one."
 msgstr ""
 
-#: ../install_any.pm_.c:227
+#: ../install_any.pm_.c:229
 msgid "No root partition found"
 msgstr ""
 
-#: ../install_any.pm_.c:343
+#: ../install_any.pm_.c:265
+msgid "Can't use broadcast with no NIS domain"
+msgstr ""
+
+#: ../install_any.pm_.c:358
 msgid ""
 "I can't access the kernel with frame buffer support.\n"
 "Disabling automatic X11 startup if any."
 msgstr ""
 
-#: ../install_any.pm_.c:385
+#: ../install_any.pm_.c:400
 msgid "Error reading file $f"
 msgstr ""
 
-#: ../install_any.pm_.c:390
+#: ../install_any.pm_.c:405
 #, c-format
 msgid "Bad kickstart file %s (failed %s)"
 msgstr ""
@@ -1258,99 +1272,115 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:257
+#: ../install_steps_graphical.pm_.c:255
+#: ../unused/install_steps_graphical.pm_.c:254
 msgid "You must have a swap partition"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:260
+#: ../install_steps_graphical.pm_.c:258
+#: ../unused/install_steps_graphical.pm_.c:257
 msgid ""
 "You don't have a swap partition\n"
 "\n"
 "Continue anyway?"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:305
+#: ../install_steps_graphical.pm_.c:283
+msgid "Choose the size you want to install"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:329
+#: ../unused/install_steps_graphical.pm_.c:313
 msgid "Total size: "
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:317
+#: ../install_steps_graphical.pm_.c:341
+#: ../unused/install_steps_graphical.pm_.c:283
 #, c-format
 msgid "Version: %s\n"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:318
+#: ../install_steps_graphical.pm_.c:342
+#: ../unused/install_steps_graphical.pm_.c:284
 #, c-format
 msgid "Size: %d KB\n"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:433
+#: ../install_steps_graphical.pm_.c:457
+#: ../unused/install_steps_graphical.pm_.c:420
 msgid "Choose the packages you want to install"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:436
+#: ../install_steps_graphical.pm_.c:460
+#: ../unused/install_steps_graphical.pm_.c:423
 msgid "Info"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:444 ../install_steps_interactive.pm_.c:82
+#: ../install_steps_graphical.pm_.c:468 ../install_steps_interactive.pm_.c:82
+#: ../unused/install_steps_graphical.pm_.c:431
 msgid "Install"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:445
-msgid "Select less"
-msgstr ""
-
-#: ../install_steps_graphical.pm_.c:446
-msgid "Select more"
-msgstr ""
-
-#: ../install_steps_graphical.pm_.c:447
+#: ../install_steps_graphical.pm_.c:469
+#: ../unused/install_steps_graphical.pm_.c:432
 msgid "Show less"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:448
+#: ../install_steps_graphical.pm_.c:470
+#: ../unused/install_steps_graphical.pm_.c:433
 msgid "Show more"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:465
+#: ../install_steps_graphical.pm_.c:487
+#: ../unused/install_steps_graphical.pm_.c:450
 msgid "Installing"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:471
+#: ../install_steps_graphical.pm_.c:493
+#: ../unused/install_steps_graphical.pm_.c:456
 msgid "Please wait, "
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:473
+#: ../install_steps_graphical.pm_.c:495
+#: ../unused/install_steps_graphical.pm_.c:458
 msgid "Time remaining "
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:474
+#: ../install_steps_graphical.pm_.c:496
+#: ../unused/install_steps_graphical.pm_.c:459
 msgid "Total time "
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:479
+#: ../install_steps_graphical.pm_.c:501
+#: ../unused/install_steps_graphical.pm_.c:464
 msgid "Preparing installation"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:500
+#: ../install_steps_graphical.pm_.c:522
+#: ../unused/install_steps_graphical.pm_.c:485
 #, c-format
 msgid "Installing package %s"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:525
+#: ../install_steps_graphical.pm_.c:547
+#: ../unused/install_steps_graphical.pm_.c:510
 msgid "Go on anyway?"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:525
+#: ../install_steps_graphical.pm_.c:547
+#: ../unused/install_steps_graphical.pm_.c:510
 msgid "There was an error ordering packages:"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:549
+#: ../install_steps_graphical.pm_.c:571
+#: ../unused/install_steps_graphical.pm_.c:534
 msgid "Use existing configuration for X11?"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:625 ../install_steps_interactive.pm_.c:532
+#: ../install_steps_graphical.pm_.c:647 ../install_steps_interactive.pm_.c:530
 #: ../interactive.pm_.c:47 ../interactive.pm_.c:57 ../my_gtk.pm_.c:194
 #: ../my_gtk.pm_.c:431 ../my_gtk.pm_.c:527
+#: ../unused/install_steps_graphical.pm_.c:607
 msgid "Ok"
 msgstr ""
 
@@ -1510,7 +1540,7 @@ msgid "(bootp/dhcp)"
 msgstr ""
 
 #: ../install_steps_interactive.pm_.c:285
-#: ../install_steps_interactive.pm_.c:425
+#: ../install_steps_interactive.pm_.c:423
 msgid "IP address should be in format 1.2.3.4"
 msgstr ""
 
@@ -1542,12 +1572,12 @@ msgstr ""
 msgid "Host name:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:319
-msgid "Is your hardware clock set to GMT?"
+#: ../install_steps_interactive.pm_.c:320
+msgid "Which is your timezone?"
 msgstr ""
 
 #: ../install_steps_interactive.pm_.c:321
-msgid "Which is your timezone?"
+msgid "Is your hardware clock set to GMT?"
 msgstr ""
 
 #: ../install_steps_interactive.pm_.c:331
@@ -1558,84 +1588,84 @@ msgstr ""
 msgid "Would you like to configure a printer?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:348
+#: ../install_steps_interactive.pm_.c:346
 msgid "Local Printer Options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:349
+#: ../install_steps_interactive.pm_.c:347
 msgid ""
 "Every print queue (which print jobs are directed to) needs a\n"
 "name (often lp) and a spool directory associated with it. What\n"
 "name and directory should be used for this queue?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:352
+#: ../install_steps_interactive.pm_.c:350
 msgid "Name of queue:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:352
+#: ../install_steps_interactive.pm_.c:350
 msgid "Spool directory:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:363
+#: ../install_steps_interactive.pm_.c:361
 msgid "Select Printer Connection"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:364
+#: ../install_steps_interactive.pm_.c:362
 msgid "How is the printer connected?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:372
+#: ../install_steps_interactive.pm_.c:370
 msgid "Detecting devices..."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:372
+#: ../install_steps_interactive.pm_.c:370
 msgid "Test ports"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:385
+#: ../install_steps_interactive.pm_.c:383
 #, c-format
 msgid "A printer, model \"%s\", has been detected on "
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:392
+#: ../install_steps_interactive.pm_.c:390
 msgid "Local Printer Device"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:393
+#: ../install_steps_interactive.pm_.c:391
 msgid ""
 "What device is your printer connected to  \n"
 "(note that /dev/lp0 is equivalent to LPT1:)?\n"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:394
+#: ../install_steps_interactive.pm_.c:392
 msgid "Printer Device:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:400
+#: ../install_steps_interactive.pm_.c:398
 msgid "Remote lpd Printer Options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:401
+#: ../install_steps_interactive.pm_.c:399
 msgid ""
 "To use a remote lpd print queue, you need to supply\n"
 "the hostname of the printer server and the queue name\n"
 "on that server which jobs should be placed in."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:404
+#: ../install_steps_interactive.pm_.c:402
 msgid "Remote hostname:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:404
+#: ../install_steps_interactive.pm_.c:402
 msgid "Remote queue"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:410
+#: ../install_steps_interactive.pm_.c:408
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:411
+#: ../install_steps_interactive.pm_.c:409
 msgid ""
 "To print to a SMB printer, you need to provide the\n"
 "SMB host name (Note! It may be different from its\n"
@@ -1644,38 +1674,38 @@ msgid ""
 "applicable user name, password, and workgroup information."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:416
+#: ../install_steps_interactive.pm_.c:414
 msgid "SMB server IP:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:416
+#: ../install_steps_interactive.pm_.c:414
 msgid "SMB server host:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:417
-#: ../install_steps_interactive.pm_.c:439
-#: ../install_steps_interactive.pm_.c:534
+#: ../install_steps_interactive.pm_.c:415
+#: ../install_steps_interactive.pm_.c:437
+#: ../install_steps_interactive.pm_.c:532
 msgid "Password:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:417
+#: ../install_steps_interactive.pm_.c:415
 msgid "Share name:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:417
-#: ../install_steps_interactive.pm_.c:439
+#: ../install_steps_interactive.pm_.c:415
+#: ../install_steps_interactive.pm_.c:437
 msgid "User name:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:418
+#: ../install_steps_interactive.pm_.c:416
 msgid "Workgroup:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:433
+#: ../install_steps_interactive.pm_.c:431
 msgid "NetWare Printer Options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:434
+#: ../install_steps_interactive.pm_.c:432
 msgid ""
 "To print to a NetWare printer, you need to provide the\n"
 "NetWare print server name (Note! it may be different from its\n"
@@ -1683,148 +1713,160 @@ msgid ""
 "wish to access and any applicable user name and password."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:438
+#: ../install_steps_interactive.pm_.c:436
 msgid "Print Queue Name:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:438
+#: ../install_steps_interactive.pm_.c:436
 msgid "Printer Server:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:449
+#: ../install_steps_interactive.pm_.c:447
 msgid "Configure Printer"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:450
+#: ../install_steps_interactive.pm_.c:448
 msgid "What type of printer do you have?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:461
-#: ../install_steps_interactive.pm_.c:462
+#: ../install_steps_interactive.pm_.c:459
+#: ../install_steps_interactive.pm_.c:460
 msgid "Paper Size"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:481
+#: ../install_steps_interactive.pm_.c:479
 msgid "CRLF"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:482
+#: ../install_steps_interactive.pm_.c:480
 msgid "Fix stair-stepping text?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:498
+#: ../install_steps_interactive.pm_.c:496
 msgid "Configure Uniprint Driver"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:499
+#: ../install_steps_interactive.pm_.c:497
 msgid "You may now set the Uniprint driver options for this printer."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:507
+#: ../install_steps_interactive.pm_.c:505
 msgid "Configure Color Depth"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:508
+#: ../install_steps_interactive.pm_.c:506
 msgid "You may now configure the color options for this printer."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:532
+#: ../install_steps_interactive.pm_.c:530
 msgid "No password"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:534
+#: ../install_steps_interactive.pm_.c:532
 msgid "Password (again):"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:534
+#: ../install_steps_interactive.pm_.c:532
 msgid "Use MD5 passwords"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:534
+#: ../install_steps_interactive.pm_.c:532
 msgid "Use NIS"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:534
+#: ../install_steps_interactive.pm_.c:532
 msgid "Use shadow file"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:537
+#: ../install_steps_interactive.pm_.c:535
 msgid "shadow"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:538
+#: ../install_steps_interactive.pm_.c:536
 msgid "MD5"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:539
+#: ../install_steps_interactive.pm_.c:537
 msgid "yellow pages"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:542
-#: ../install_steps_interactive.pm_.c:575
+#: ../install_steps_interactive.pm_.c:540
+#: ../install_steps_interactive.pm_.c:582
 msgid "Please try again"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:542
-#: ../install_steps_interactive.pm_.c:575
+#: ../install_steps_interactive.pm_.c:540
+#: ../install_steps_interactive.pm_.c:582
 msgid "The passwords do not match"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:544
+#: ../install_steps_interactive.pm_.c:542
 msgid "This password is too simple"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:562
+#: ../install_steps_interactive.pm_.c:549
+msgid "TODO"
+msgstr ""
+
+#: ../install_steps_interactive.pm_.c:550
+msgid "NIS Domain"
+msgstr ""
+
+#: ../install_steps_interactive.pm_.c:550
+msgid "NIS Server"
+msgstr ""
+
+#: ../install_steps_interactive.pm_.c:569
 msgid "Accept user"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:562
+#: ../install_steps_interactive.pm_.c:569
 msgid "Add user"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:563
+#: ../install_steps_interactive.pm_.c:570
 #, c-format
 msgid "(already added %s)"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:563
+#: ../install_steps_interactive.pm_.c:570
 #, c-format
 msgid ""
 "Enter a user\n"
 "%s"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:564
-#: ../install_steps_interactive.pm_.c:653
+#: ../install_steps_interactive.pm_.c:571
+#: ../install_steps_interactive.pm_.c:660
 msgid "Password"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:564
+#: ../install_steps_interactive.pm_.c:571
 msgid "Password (again)"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:564
+#: ../install_steps_interactive.pm_.c:571
 msgid "Real name"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:564
+#: ../install_steps_interactive.pm_.c:571
 msgid "Shell"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:564
+#: ../install_steps_interactive.pm_.c:571
 msgid "User name"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:577
+#: ../install_steps_interactive.pm_.c:584
 msgid "Please give a user name"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:578
+#: ../install_steps_interactive.pm_.c:585
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:599
+#: ../install_steps_interactive.pm_.c:606
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -1838,212 +1880,225 @@ msgid ""
 "failures. Would you like to create a bootdisk for your system?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:608
+#: ../install_steps_interactive.pm_.c:615
 msgid "Sorry, no floppy drive available"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:611
+#: ../install_steps_interactive.pm_.c:618
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:616
+#: ../install_steps_interactive.pm_.c:619
+msgid "Skip"
+msgstr ""
+
+#: ../install_steps_interactive.pm_.c:623
 #, c-format
 msgid "Insert a floppy in drive %s"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:617
+#: ../install_steps_interactive.pm_.c:624
 msgid "Creating bootdisk"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:624
+#: ../install_steps_interactive.pm_.c:631
 msgid "Preparing bootloader"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:636
+#: ../install_steps_interactive.pm_.c:643
 msgid "First sector of boot partition"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:636
+#: ../install_steps_interactive.pm_.c:643
 msgid "First sector of drive (MBR)"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:640
+#: ../install_steps_interactive.pm_.c:647
 msgid "LILO Installation"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:641
+#: ../install_steps_interactive.pm_.c:648
 msgid "Where do you want to install the bootloader?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:644
+#: ../install_steps_interactive.pm_.c:651
 msgid "Do you want to use LILO?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:647
+#: ../install_steps_interactive.pm_.c:654
 msgid "Boot device"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:648
+#: ../install_steps_interactive.pm_.c:655
 msgid "Linear (needed for some SCSI drives)"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:648
+#: ../install_steps_interactive.pm_.c:655
 msgid "linear"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:649
+#: ../install_steps_interactive.pm_.c:656
 msgid "Compact"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:649
+#: ../install_steps_interactive.pm_.c:656
 msgid "compact"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:650
+#: ../install_steps_interactive.pm_.c:657
 msgid "Delay before booting default image"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:651
+#: ../install_steps_interactive.pm_.c:658
 msgid "Video mode"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:654
+#: ../install_steps_interactive.pm_.c:661
 msgid "Restrict command line options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:654
+#: ../install_steps_interactive.pm_.c:661
 msgid "restrict"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:661
+#: ../install_steps_interactive.pm_.c:668
 msgid "LILO main options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:665
+#: ../install_steps_interactive.pm_.c:672
 msgid ""
 "At this level of security, a password (and a good one) in lilo is requested"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:666
+#: ../install_steps_interactive.pm_.c:673
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:675
+#: ../install_steps_interactive.pm_.c:682
 msgid ""
 "Here are the following entries in LILO.\n"
 "You can add some more or change the existent ones."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:677
+#: ../install_steps_interactive.pm_.c:684
 msgid "Add"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:695
+#: ../install_steps_interactive.pm_.c:702
 msgid "Image"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:696
-#: ../install_steps_interactive.pm_.c:704
+#: ../install_steps_interactive.pm_.c:703
+#: ../install_steps_interactive.pm_.c:711
 msgid "Root"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:697
+#: ../install_steps_interactive.pm_.c:704
 msgid "Append"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:698
+#: ../install_steps_interactive.pm_.c:705
 msgid "Initrd"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:699
+#: ../install_steps_interactive.pm_.c:706
 msgid "Read-write"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:705
+#: ../install_steps_interactive.pm_.c:712
 msgid "Table"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:706
+#: ../install_steps_interactive.pm_.c:713
 msgid "Unsafe"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:711
+#: ../install_steps_interactive.pm_.c:718
 msgid "Label"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:713
+#: ../install_steps_interactive.pm_.c:720
 msgid "Default"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:732
+#: ../install_steps_interactive.pm_.c:739
 msgid "Installation of LILO failed. The following error occured:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:742
+#: ../install_steps_interactive.pm_.c:749
 msgid "Windows(TM)"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:743
+#: ../install_steps_interactive.pm_.c:750
 msgid "Low"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:744
+#: ../install_steps_interactive.pm_.c:751
 msgid "Medium"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:745
+#: ../install_steps_interactive.pm_.c:752
 msgid "High"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:746
+#: ../install_steps_interactive.pm_.c:753
 msgid "Paranoid"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:759
+#: ../install_steps_interactive.pm_.c:766
 msgid "Miscellaneous questions"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:760
+#: ../install_steps_interactive.pm_.c:767
 msgid "Do you have a laptop?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:761
+#: ../install_steps_interactive.pm_.c:768
 msgid "Use hard drive optimizations"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:762
+#: ../install_steps_interactive.pm_.c:769
 msgid "Security level"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:763
+#: ../install_steps_interactive.pm_.c:770
 msgid "HTTP proxy"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:764
+#: ../install_steps_interactive.pm_.c:771
 msgid "FTP proxy"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:767
-msgid "(may cause disk problems)"
+#: ../install_steps_interactive.pm_.c:772
+msgid "Use kudzu"
 msgstr ""
 
 #: ../install_steps_interactive.pm_.c:773
+#, c-format
+msgid "Precise ram size (found %d MB)"
+msgstr ""
+
+#: ../install_steps_interactive.pm_.c:776
+msgid "(may cause disk problems)"
+msgstr ""
+
+#: ../install_steps_interactive.pm_.c:784
 msgid "Proxy should be http://..."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:774
+#: ../install_steps_interactive.pm_.c:785
 msgid "Proxy should be ftp://..."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:787
+#: ../install_steps_interactive.pm_.c:798
 msgid ""
 "Some steps are not completed.\n"
 "\n"
 "Do you really want to quit now?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:794
+#: ../install_steps_interactive.pm_.c:805
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -2056,22 +2111,22 @@ msgid ""
 "install chapter of the Official Linux-Mandrake User's Guide."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:813
+#: ../install_steps_interactive.pm_.c:824
 #, c-format
 msgid "Installing driver for %s card %s"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:814
+#: ../install_steps_interactive.pm_.c:825
 #, c-format
 msgid "(module %s)"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:824
+#: ../install_steps_interactive.pm_.c:835
 #, c-format
 msgid "What %s card do you have?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:831
+#: ../install_steps_interactive.pm_.c:842
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
@@ -2083,20 +2138,20 @@ msgid ""
 "not cause any damage."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:836
+#: ../install_steps_interactive.pm_.c:847
 msgid "Autoprobe"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:836
+#: ../install_steps_interactive.pm_.c:847
 msgid "Specify options"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:840
+#: ../install_steps_interactive.pm_.c:851
 #, c-format
 msgid "You may now provide its options to module %s."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:846
+#: ../install_steps_interactive.pm_.c:857
 #, c-format
 msgid ""
 "You may now provide its options to module %s.\n"
@@ -2104,60 +2159,60 @@ msgid ""
 "For instance, ``io=0x300 irq=7''"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:849
+#: ../install_steps_interactive.pm_.c:860
 msgid "Module options:"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:859
+#: ../install_steps_interactive.pm_.c:870
 #, c-format
 msgid ""
 "Loading module %s failed.\n"
 "Do you want to try again with other parameters?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:872
+#: ../install_steps_interactive.pm_.c:883
 #, c-format
 msgid "Skip %s PCMCIA probing"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:873
+#: ../install_steps_interactive.pm_.c:884
 msgid "Configuring PCMCIA cards..."
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:873
+#: ../install_steps_interactive.pm_.c:884
 msgid "PCMCIA"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:880
+#: ../install_steps_interactive.pm_.c:891
 #, c-format
 msgid "Skip %s PCI probing"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:884
+#: ../install_steps_interactive.pm_.c:895
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:885
+#: ../install_steps_interactive.pm_.c:896
 msgid "Do you have another one?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:886
+#: ../install_steps_interactive.pm_.c:897
 #, c-format
 msgid "Do you have an %s interface?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:888 ../interactive.pm_.c:52
+#: ../install_steps_interactive.pm_.c:899 ../interactive.pm_.c:52
 #: ../my_gtk.pm_.c:430
 msgid "No"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:888 ../interactive.pm_.c:52
+#: ../install_steps_interactive.pm_.c:899 ../interactive.pm_.c:52
 #: ../my_gtk.pm_.c:430
 msgid "Yes"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:889
+#: ../install_steps_interactive.pm_.c:900
 msgid "See hardware info"
 msgstr ""
 
@@ -2302,13 +2357,14 @@ msgstr ""
 msgid "US keyboard"
 msgstr ""
 
-#: ../lilo.pm_.c:138
+#: ../lilo.pm_.c:139
+#, c-format
 msgid ""
 "Welcome to LILO the operating system chooser!\n"
 "\n"
 "To list the possible choices, press <TAB>.\n"
 "\n"
-"To load one of them, write its name and press <ENTER> or wait 5 seconds for "
+"To load one of them, write its name and press <ENTER> or wait %d seconds for "
 "default boot.\n"
 "\n"
 msgstr ""

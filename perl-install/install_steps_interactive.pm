@@ -10,7 +10,7 @@ use vars qw(@ISA);
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :file :functional);
+use common qw(:common :file :functional :system);
 use partition_table qw(:types);
 use install_steps;
 use pci_probing::main;
@@ -267,7 +267,7 @@ sub configureNetwork($) {
 
 sub configureNetworkIntf {
     my ($o, $intf) = @_;
-    my $pump = 0;
+    my $pump = $intf->{BOOTPROTO} =~ /^(dhcp|bootp)$/;
     delete $intf->{NETWORK};
     delete $intf->{BROADCAST};
     my @fields = qw(IPADDR NETMASK);
@@ -314,11 +314,11 @@ You may also enter the IP address of the gateway if you have one"),
 
 #------------------------------------------------------------------------------
 sub timeConfig {
-    my ($o, $f) = @_;
+    my ($o, $f, $clicked) = @_;
 
-    $o->{timezone}{GMT} = $o->ask_yesorno('', _("Is your hardware clock set to GMT?"), $o->{timezone}{GMT});
     $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
     $o->{timezone}{timezone} = $o->ask_from_list('', _("Which is your timezone?"), [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone});
+    $o->{timezone}{GMT} = $o->ask_yesorno('', _("Is your hardware clock set to GMT?"), $o->{timezone}{GMT}) if $::expert || $clicked;
     install_steps::timeConfig($o,$f);
 }
 
@@ -335,9 +335,7 @@ sub printerConfig($) {
 
     unless (($::testing)) {
 	printer::set_prefix($o->{prefix});
-	pkgs::select($o->{packages}, $o->{packages}{'rhs-printfilters'});
-	$o->installPackages($o->{packages});
-
+	install_any::pkg_install($o, 'rhs-printfilters');
     }
     printer::read_printer_db();
 
@@ -522,11 +520,11 @@ wish to access and any applicable user name and password."),
 
 #------------------------------------------------------------------------------
 sub setRootPassword($) {
-    my ($o) = @_;
+    my ($o, $clicked) = @_;
     my $sup = $o->{superuser} ||= {};
     $sup->{password2} ||= $sup->{password} ||= "";
 
-    return if $o->{security} < 2;
+    return if $o->{security} < 2 && !$clicked;
 
     $o->{security} < 2 or 
       $o->ask_from_entries_ref([_("Set root password"), _("Ok"), _("No password")],
@@ -544,7 +542,16 @@ sub setRootPassword($) {
 			       and $o->ask_warn('', _("This password is too simple")), return (1,0);
 			     return 0
 			 }
-    );
+    ) or return;
+
+    if ($o->{authentification}{NIS}) {
+	$o->ask_from_entries_ref('',
+				 _("TODO"),
+				 [ _("NIS Domain"), _("NIS Server") ],
+				 [ \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}),
+				   { val => \$o->{authentification}{NIS_server}, list => ["broadcast"] },
+				 ]);
+    }
     install_steps::setRootPassword($o);
 }
 
@@ -609,8 +616,8 @@ failures. Would you like to create a bootdisk for your system?"),
 
 	$o->{mkbootdisk} = $o->ask_from_list_('',
 					      _("Choose the floppy drive you want to use to make the bootdisk"),
-					      [ @l, 'Cancel' ], $o->{mkbootdisk});
-	return $o->{mkbootdisk} = '' if $o->{mkbootdisk} eq 'Cancel';
+					      [ @l, __("Skip") ], $o->{mkbootdisk});
+	return $o->{mkbootdisk} = '' if $o->{mkbootdisk} eq 'Skip';
     }
 
     $o->ask_warn('', _("Insert a floppy in drive %s", $o->{mkbootdisk}));
@@ -762,21 +769,25 @@ sub miscellaneous {
 	  _("Security level"),
 	  _("HTTP proxy"),
 	  _("FTP proxy"),
+	  _("Use kudzu"),
+	  _("Precise ram size (found %d MB)", availableRam / 1024),
 	],
 	[ { val => \$u->{LAPTOP}, type => 'bool' },
 	  { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause disk problems)") },
 	  { val => \$s, list => [ map { $l{$_} } ikeys %l ] },
 	  \$u->{http_proxy},
 	  \$u->{ftp_proxy},
+	  { val => \$u->{kudzu}, type => 'bool' },
+	  \$u->{memsize},
 	],
         complete => sub {
 	    $u->{http_proxy} =~ m,^($|http://), or $o->ask_warn('', _("Proxy should be http://...")), return 1,3;
 	    $u->{ftp_proxy} =~ m,^($|ftp://), or $o->ask_warn('', _("Proxy should be ftp://...")), return 1,4;
 	    0;
 	}
-    ) or return;
+    ) || return;
     my %m = reverse %l; $o->{security} = $m{$s};
-    $o->SUPER::miscellaneous;
+    install_steps::miscellaneous($o);
 }
 
 #------------------------------------------------------------------------------

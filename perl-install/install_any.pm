@@ -19,6 +19,8 @@ use run_program;
 use partition_table qw(:types);
 use devices;
 use fsedit;
+use network;
+use lilo;
 use detect_devices;
 use pkgs;
 use fs;
@@ -253,9 +255,22 @@ sub write_ldsoconf {
 }
 
 sub setAuthentication() {
-    my ($shadow, $md5) = @{$::o->{authentification} || {}}{qw(shadow md5)};
-    enableMD5Shadow($::o->{prefix}, $shadow, $md5);
+    my ($shadow, $md5, $nis, $nis_server) = @{$::o->{authentification} || {}}{qw(shadow md5 NIS NIS_server)};
+    my $p = $::o->{prefix};
+    enableMD5Shadow($p, $shadow, $md5);
     enableShadow() if $shadow;
+    if ($nis) {
+	pkg_install($::o, "ypbind");
+	my $domain = $::o->{netc}{NISDOMAIN};
+	$domain || $nis_server ne "broadcast" or die _("Can't use broadcast with no NIS domain");
+	my $t = $domain ? "domain $domain" . ($nis_server ne "broadcast" && " server")
+	                : "ypserver";
+	substInFile {
+	    $_ = "#~$_" unless /^#/;
+	    $_ .= "$t $nis_server\n" if eof;
+	} "$p/etc/yp.conf";
+	network::write_conf("$p/etc/sysconfig/network", $::o->{netc});
+    }
 }
 
 sub enableShadow() {
@@ -395,11 +410,11 @@ sub loadO {
 
 sub pkg_install {
     my ($o, $name) = @_;
-    my $p = $o->{packages}{$name} or die "$name rpm not found";
-    pkgs::install($o->{prefix}, [ $p ]);
+    pkgs::select($o->{packages}, $o->{packages}{$name} || die "$name rpm not found");
+    install_steps::installPackages ($o, $o->{packages});
 }
 
 sub fsck_option() {
-    my $y = $::o->{security} < 4 && $::beginner && " -y";
-    substInFile { s/("fsck)( -y)?/$1$y/ } "$::o->{prefix}/etc/rc.d/rc.sysinit";
+    my $y = $::o->{security} < 4 && $::beginner && "-y ";
+    substInFile { s/^(\s*fsckoptions=)(-y )?/$1$y/ } "$::o->{prefix}/etc/rc.d/rc.sysinit";
 }

@@ -11,7 +11,7 @@ BASE        = $(ROOTDEST)/Mandrake/base
 DESTREP4PMS = $(DEST)$(REP4PMS)
 STAGE2TMP   = /tmp/stage2_tmp
 PERL        = perl
-LOCALFILES  = $(PERL) mouseconfig ddcxinfos
+LOCALFILES  = mouseconfig ddcxinfos
 DIRS        = c po pci_probing resize_fat
 EXCLUDE     = $(LOCALFILES) boot.img keymaps consolefonts install
 RPMS        = $(wildcard $(ROOTDEST)/Mandrake/RPMS/*.rpm)
@@ -32,9 +32,6 @@ clean:
 
 tar: clean
 	cd .. ; tar cfy perl-install.tar.bz2 $(EXCLUDE:%=--exclude %) perl-install
-
-floppy:
-	dd if=/dev/zero of=/tmp/initrd bs=1k count=2000 ; $(MKE2FS) /tmp/initrd ; mount /tmp/initrd /mnt/disk/ -o loop ; cp -a ../install1/* /mnt/disk/ ; umount /mnt/disk ; gzip -c /tmp/initrd > /tmp/initrd.img ; mcopy -o /tmp/initrd.img a:
 
 tar-diskdrake: clean pci_probing
 	cd .. ; rm -rf diskdrake ; cp -af perl-install diskdrake
@@ -151,7 +148,7 @@ get_needed_files: $(DIRS)
 #	echo -e "#!/bin/sh\n\nexec '/usr/bin/sh'" > $(DEST)/usr/bin/runinstall2
 #	chmod a+x $(DEST)/usr/bin/runinstall2
 
-	cp -a ../install/install1_pcmcia/etc/pcmcia $(DEST)/etc
+	tar xyC $(DEST) -f ../install/install1_pcmcia.tar.bz2 ./etc/pcmcia
 
 as_root:
 	/bin/dd if=/dev/zero of=/tmp/initrd bs=1k count=4000

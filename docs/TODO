@@ -1,29 +1,22 @@
 i18n
 
-standalone configuration applications
+standalone applications for configuration
 
-ask proxy from http/ftp proxy
-
-X configuration, bootloader in kickstart
+is configureNetworkNet needed with dhcp/bootp?
 
 (pix)kickstart
+X configuration and bootloader in kickstart
 
 (pix)diskdrake
 
-(pix)NIS
-
 text install
-
-(fpons)test after printer config
-
-(pix)warn the user if not enough ram to fulfill install
 
 (pix)options in mkfs
 
+(pix)Tree -> CTree, ``all'' branch with all packages
+
 update the list of modules (in update_kernel)
 merge the install(1) of redhat
-
-initrd in bzip2
 
 suggested partition tables must be better foreach installClass
 
@@ -31,25 +24,31 @@ suggested partition tables must be better foreach installClass
 
 have a better time estimation of the remaining time in install packages
 
-(pix)ask for more than the memory size detected
-
 (fpons)pb with dependencies ``missing'': icewm do not require XFree86 and so you can have icewm but no X server
-
-(?)maybe remove commented lines in /usr/lib/perl5/... files
-
-(pix) try detect_devices::floppies (and how are scsi floppies handled?)
-maybe: do a iotcl FDGETPRM to detect fd1, fd0.
-
-(pix) kudzu or not in miscellaneous
 
 (fpons)modem config
 
-smaller zsh (or ash in initrd)
+(done,pix)kudzu or not in miscellaneous
+
+(done,pix)warn the user if not enough ram to fulfill install
+
+(done,fpons)test after printer config
+
+(done,pix)ask for more than the memory size detected
 
 --------------------------------------------------------------------------------
+smaller zsh (or ash in initrd)
+
+initrd in bzip2
+
 aha152x needs "insmod aha152x.o aha152x=0x140,11,7"
 
+try detect_devices::floppies (and how are scsi floppies handled?)
+maybe: do a iotcl FDGETPRM to detect fd1, fd0.
+
 grub, chos
+
+(?)maybe remove commented lines in /usr/lib/perl5/... files
 
 (?)timezone using a picture (pb: how to delimit zones)
 

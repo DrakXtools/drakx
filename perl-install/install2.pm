@@ -28,7 +28,7 @@ use printer;
 use modules;
 use detect_devices;
 use modparm;
-#-use install_steps_graphical;
+use install_steps_graphical;
 use run_program;
 
 #-######################################################################################
@@ -311,6 +311,8 @@ sub formatPartitions {
 	    fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
 	}
 	eval { $o = $::o = install_any::loadO($o) } if $_[1] == 1;
+
+	die _("Not enough swap to fulfill installation, please add some") if availableMemory < 40 * 1024;
     }
     mkdir "$o->{prefix}/$_", 0755 foreach 
       qw(dev etc etc/profile.d etc/sysconfig etc/sysconfig/console etc/sysconfig/network-scripts
@@ -319,7 +321,6 @@ sub formatPartitions {
 }
 
 #------------------------------------------------------------------------------
-#-PADTODO
 sub choosePackages {
     $o->setPackages if $_[1] == 1;
     $o->selectPackagesToUpgrade($o) if $o->{isUpgrade} && $_[1] == 1;
@@ -341,8 +342,12 @@ sub doInstallStep {
 }
 #------------------------------------------------------------------------------
 sub miscellaneous { 
+    $o->{miscellaneous}{memsize} ||= $1 if first(cat_("/proc/cmdline")) =~ /mem=(\S+)/;
     $o->miscellaneous($_[0]); 
-    addToBeDone { install_any::fsck_option() } 'doInstallStep';
+    addToBeDone { 
+	install_any::fsck_option();
+	run_program::rooted($o->{prefix}, "chkconfig --del kudzu") unless $o->{miscellaneous}{kudzu};
+    } 'doInstallStep';
 }
 
 #------------------------------------------------------------------------------
@@ -372,8 +377,8 @@ sub configureTimezone {
 	#- can't be done in install cuz' timeconfig %post creates funny things
 	add2hash($o->{timezone}, { timezone::read($f) });
     }
-    $o->{timezone}{GMT} = 1 unless exists $o->{timezone}{GMT}; #- take GMT by default if nothing else.
-    $o->timeConfig($f);
+    $o->{timezone}{GMT} = !$::beginner && !grep { isFat($_) } @{$o->{fstab}} unless exists $o->{timezone}{GMT};
+    $o->timeConfig($f, $clicked);
 }
 #------------------------------------------------------------------------------
 sub configureServices {
@@ -387,7 +392,7 @@ sub configurePrinter  { $o->printerConfig   }
 sub setRootPassword {
     return if $o->{isUpgrade};
 
-    $o->setRootPassword;
+    $o->setRootPassword($_[0]);
     addToBeDone { install_any::setAuthentication() } 'doInstallStep';
 }
 #------------------------------------------------------------------------------

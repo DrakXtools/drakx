@@ -219,7 +219,7 @@ sub createScrolledWindow($) {
     } else {
 	my $w = new Gtk::ScrolledWindow(undef, undef);
 	$w->set_policy('automatic', 'automatic');
-	member(ref $W, qw(Gtk::CList)) ?
+	member(ref $W, qw(Gtk::CList Gtk::CTree)) ?
 	  $w->add($W) :
 	    $w->add_with_viewport($W);
 	$W->show;

@@ -290,9 +290,7 @@ sub dd {
     ref $h{if} eq 'GLOB' ? *IF = $h{if} : sysopen(IF, $h{if}, 0   ) || die "error: can't open file $h{if}\n";
     ref $h{of} eq 'GLOB' ? *OF = $h{of} : sysopen(OF, $h{of}, 0x41) || die "error: can't open file $h{of}\n";
 
-    $h{bs} =~ /(\d+)k$/ and $h{bs} = $1 * 1024;
-    $h{bs} =~ /(\d+)M$/ and $h{bs} = $1 * 1024 * 1024;
-    $h{bs} =~ /(\d+)G$/ and $h{bs} = $1 * 1024 * 1024 * 1024;
+    $h{bs} = removeXiBSuffix($h{bs});
 
     for ($nb = 0; !$h{count} || $nb < $h{count}; $nb++) {
 	printf "\r%02.1d%%", 100 * $nb / $h{count} if $h{count} && $percent;

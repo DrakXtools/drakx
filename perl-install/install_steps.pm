@@ -383,6 +383,7 @@ sub readBootloaderConfigBeforeInstall {
 
 sub setupBootloaderBefore {
     my ($o) = @_;
+    $o->{bootloader}{perImageAppend} = "mem=$o->{miscellaneous}{memsize}" if $o->{miscellaneous}{memsize};
     lilo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion());
     $o->{bootloader}{keytable} ||= keyboard::kmap($o->{keyboard});
 }
