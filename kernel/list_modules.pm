@@ -14,13 +14,13 @@ our %l = (
   network => 
   {
     main => [
-      if_(arch() =~ /ppc/, qw(mace bmac gmac airport)),
+      if_(arch() =~ /ppc/, qw(mace bmac gmac)),
       if_(arch() =~ /^sparc/, qw(sunbmac sunhme sunqe)),
       if_(arch() !~ /alpha|sparc/,
         qw(3c501 3c503 3c505 3c507 3c509 3c515 3c90x),
 	qw(82596 abyss ac3200 acenic aironet4500_card at1700 atp com20020-pci),
         qw(cs89x0 de600 de620),
-        qw(acx100_pci defxx orinoco_plx), # most unused
+        qw(defxx orinoco_plx), # most unused
         qw(depca dgrs dmfe e100 e2100 eepro eepro100 eexpress epic100 eth16i),
         qw(ewrk3 hamachi hp hp-plus hp100 ibmtr),
         qw(lance natsemi ne ne2k-pci ni5010 ni52 ni65 nvnet olympic pcnet32 plip rcpci),
@@ -28,7 +28,6 @@ our %l = (
         qw(wd winbond-840 forcedeth),
 	qw(fealnx 3c990 3c990fx bcm4400),
         qw(skfp tc35815 lanstreamer farsync sdladrv orinoco_pci prism2_plx),
-        qw(prism54 airo_mpi vt_ar5k),
 
 	qw(iph5526), #- fibre channel
       ),
@@ -43,12 +42,17 @@ our %l = (
       qw(ppp_generic ppp_async),
     ],
     pcmcia => [ 
-      qw(3c574_cs 3c589_cs airo airo_cs aironet4500_cs axnet_cs fmvj18x_cs),
-      qw(ibmtr_cs orinoco_cs netwave_cs nmclan_cs pcnet_cs ray_cs smc91c92_cs wavelan_cs wvlan_cs),
+      qw(3c574_cs 3c589_cs axnet_cs fmvj18x_cs),
+      qw(ibmtr_cs nmclan_cs pcnet_cs smc91c92_cs),
       qw(xirc2ps_cs xircom_cb xircom_tulip_cb),
     ],
     usb => [ 
-      qw(catc CDCEther kaweth pegasus rtl8150 usbnet usbvnet_rfmd),
+      qw(catc CDCEther kaweth pegasus rtl8150 usbnet),
+    ],
+    wireless => [
+      qw(acx100_pci airo airo_cs airo_mpi aironet4500_cs aironet_cs at76c503 ),
+      qw(hermes netwave_cs orinoco orinoco_cs prism2_usb prism54 ray_cs usbvnet_rfmd vt_ar5k wavelan_cs wvlan_cs),
+      if_(arch() =~ /ppc/, qw(airport)),
     ],
     isdn => [
       qw(b1pci c4 hisax hisax_fcpcipnp hysdn t1pci tpam divas),
