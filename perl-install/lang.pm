@@ -609,14 +609,9 @@ sub get_kde_lang {
     my $valid_lang = sub {
 	my ($lang) = @_;
 	#- fast & dirty solution to ensure bad entries do not happen
-	$lang eq 'en' ? 'C' :
-	$lang eq 'en_US' ? 'C' :
-	$lang eq 'no' ? 'nb' :
-	$lang eq 'sp' ? 'sr' :
-	$lang eq 'zh_CN' ? 'zh_CN.GB2312' :
-	$lang eq 'zh_SG' ? 'zh_CN.GB2312' :
-	$lang eq 'zh_TW' ? 'zh_TW.Big5' :
-	$lang eq 'zh_HK' ? 'zh_TW.Big5' :
+        my %fixlangs = (en => 'C', en_US => 'C', no => 'nb', sp => 'sr',
+                        zh_CN => 'zh_CN.GB2312', zh_SG => 'zh_CN.GB2312', zh_TW => 'zh_TW.Big5', zh_HK => 'zh_TW.Big5');
+        exists $fixlangs{$lang} ? $fixlangs{$lang} :
 	  exists $valid_kde_langs{$lang} ? $lang :
 	  exists $valid_kde_langs{substr($lang, 0, 2)} ? substr($lang, 0, 2) : '';
     };
