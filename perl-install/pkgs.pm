@@ -287,35 +287,33 @@ sub setPackageSelection($$$) {
 
 sub unselectAllPackages($) {
     my ($packages) = @_;
-    my %selected;
+    my (%keep_selected, %unselected);
     foreach (@{$packages->{depslist}}) {
-	unless ($_->flag_base || $_->flag_installed && $_->flag_selected) {
+	if ($_->flag_base || $_->flag_installed && $_->flag_selected) {
+	    #- keep track of package that should be kept selected.
+	    $keep_selected{$_->id} = undef;
+	} else {
 	    #- deselect all packages except base or packages that need to be upgraded.
-	    $_->set_flag_requested(0);
-	    $_->set_flag_required(0);
-	    $selected{$_->id} = undef;
+	    $unselected{$_->id} = undef;
 	}
     }
-    if (%selected && %{$packages->{state} || {}}) {
+    if (%unselected) {
 	my $state = $packages->{state} ||= {};
-	$state->{selected} = \%selected;
-	$packages->resolve_requested($packages->{rpmdb}, $state, {}, keep_state => 1);
-    }
-}
-sub unselectAllPackagesIncludingUpgradable($) {
-    my ($packages, $removeUpgradeFlag) = @_;
-    my %selected;
-    foreach (@{$packages->{depslist}}) {
-	unless ($_->flag_base) {
-	    $_->set_flag_requested(0);
-	    $_->set_flag_required(0);
-	    $selected{$_->id} = undef;
+	$packages->resolve_unrequested($packages->{rpmdb}, $state, \%unselected);
+
+	my @l = keys %keep_selected;
+	foreach (@l) {
+	    my $pkg = $packages->{depslist}[$_] or next;
+	    if ($pkg->flag_available) {
+		delete $keep_selected{$_};
+	    } else {
+		log::l("unselectAllPackage unselected ".$pkg->fullname." which should be selected again");
+	    }
 	}
-    }
-    if (%selected && %{$packages->{state} || {}}) {
-	my $state = $packages->{state} ||= {};
-	$state->{selected} = \%selected;
-	$packages->resolve_requested($packages->{rpmdb}, $state, {}, keep_state => 1);
+	if (%keep_selected) {
+	    $packages->resolve_requested($packages->{rpmdb}, $state, \%keep_selected,
+					 callback_choices => \&packageCallbackChoices);
+	}
     }
 }
 
