@@ -16,6 +16,24 @@
 	ported upon new wizard layer
 	fix crash when modem was not found
 
+2004/02/27  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/disk.c: when in automatic=disk mode but no partition is
+	given, fall back
+	on non automatic mode evidently
+
+2004/02/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10-14mdk
+
+	* standalone/net_monitor (in_ifconfig) better check ifconfig is executable
+	before running it
+	(-e is not enough)
+
+	* network/netconnect.pm: note that isdn configuration has not yet be
+	ported upon new wizard layer
+	fix crash when modem was not found
+
 	* standalone/drakvpn: translate some fields
 
 	* share/po/fr.po: a few new translated strings
@@ -27749,7 +27767,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.892 2004/02/27 14:44:17 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.893 2004/02/27 15:12:53 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
