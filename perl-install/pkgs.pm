@@ -4,7 +4,7 @@ use diagnostics;
 use strict;
 use vars qw(*LOG %preferred $limitMinTrans %compssListDesc);
 
-use common qw(:common :file :functional :system);
+use common;
 use install_any;
 use commands;
 use run_program;

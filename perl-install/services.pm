@@ -6,7 +6,7 @@ use strict;
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :functional :system :file);
+use common;
 use commands;
 use run_program;
 use my_gtk qw(:helpers :wrappers);

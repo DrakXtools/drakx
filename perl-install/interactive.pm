@@ -6,7 +6,8 @@ use strict;
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :functional);
+use MDK::Common::Func;
+use common;
 
 #- ask_from_entries takes:
 #-  val      => reference to the value
@@ -328,7 +329,7 @@ sub wait_message {
     my $b = before_leaving { $o->wait_message_endW($w) };
 
     #- enable access through set
-    common::add_f4before_leaving(sub { $o->wait_message_nextW([ deref($_[1]) ], $w) }, $b, 'set');
+    MDK::Common::Func::add_f4before_leaving(sub { $o->wait_message_nextW([ deref($_[1]) ], $w) }, $b, 'set');
     $b;
 }
 

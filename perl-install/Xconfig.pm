@@ -3,7 +3,7 @@ package Xconfig; # $Id$
 use diagnostics;
 use strict;
 
-use common qw(:common :file :system);
+use common;
 use mouse;
 use devices;
 use Xconfigurator;

@@ -6,7 +6,7 @@ use strict;
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :system :functional :file);
+use common;
 use modules;
 use detect_devices;
 use run_program;
@@ -185,7 +185,7 @@ sub write {
 
     if (arch() =~ /ppc/) {
 	my $s = join('',
-	  "dev.mac_hid.mouse_button_emulation = " . bool($mouse->{button2_key} || $mouse->{button3_key}) . "\n",
+	  "dev.mac_hid.mouse_button_emulation = " . to_bool($mouse->{button2_key} || $mouse->{button3_key}) . "\n",
 	  if_($mouse->{button2_key}, "dev.mac_hid.mouse_button2_keycode = $mouse->{button2_key}\n"),
 	  if_($mouse->{button3_key}, "dev.mac_hid.mouse_button3_keycode = $mouse->{button3_key}\n"),
 	);

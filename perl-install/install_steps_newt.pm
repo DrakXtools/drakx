@@ -14,7 +14,7 @@ use interactive_newt;
 use install_any;
 use devices;
 use lang;
-use common qw(:common);
+use common;
 
 my $banner = __();
 

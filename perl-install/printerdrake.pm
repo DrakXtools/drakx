@@ -3,7 +3,7 @@ package printerdrake; # $Id$
 use diagnostics;
 use strict;
 
-use common qw(:common :file :functional :system);
+use common;
 use detect_devices;
 use commands;
 use modules;

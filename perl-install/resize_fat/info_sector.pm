@@ -3,7 +3,7 @@ package resize_fat::info_sector; # $Id$
 use diagnostics;
 use strict;
 
-use common qw(:system);
+use common;
 use resize_fat::io;
 
 #- Oops, this will be unresizable on big-endian machine. trapped by signature.

@@ -14,7 +14,8 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @needToCopy @needToCopyIfRequiresSatisf
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :system :functional :file);
+use MDK::Common::System;
+use common;
 use run_program;
 use partition_table qw(:types);
 use partition_table_raw;
@@ -283,7 +284,7 @@ sub getAvailableSpace {
 sub getAvailableSpace_mounted {
     my ($prefix) = @_;
     my $dir = -d "$prefix/usr" ? "$prefix/usr" : "$prefix";
-    my (undef, $free) = common::df($dir) or return;
+    my (undef, $free) = MDK::Common::System::df($dir) or return;
     log::l("getAvailableSpace_mounted $free KB");
     $free * 1024 || 1;
 }
@@ -865,7 +866,7 @@ sub getHds {
 
 sub log_sizes {
     my ($o) = @_;
-    my @df = common::df($o->{prefix});
+    my @df = MDK::Common::System::df($o->{prefix});
     log::l(sprintf "Installed: %s(df), %s(rpm)",
 	   formatXiB($df[0] - $df[1], 1024),
 	   formatXiB(sum(`$ENV{LD_LOADER} rpm --root $o->{prefix}/ -qa --queryformat "%{size}\n"`))) if -x "$o->{prefix}/bin/rpm";

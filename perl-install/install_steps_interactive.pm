@@ -10,7 +10,7 @@ use vars qw(@ISA $new_bootstrap);
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :file :functional :system);
+use common;
 use partition_table qw(:types);
 use partition_table_raw;
 use install_steps;
@@ -809,7 +809,7 @@ sub configureTimezone {
     $o->{timezone}{timezone} = $o->ask_from_treelist('', _("Which is your timezone?"), '/', [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone});
     $o->set_help('configureTimezoneGMT');
 
-    my $ntp = bool($o->{timezone}{ntp});
+    my $ntp = to_bool($o->{timezone}{ntp});
     $o->ask_from_entries_refH('', '', [
 	  { text => _("Hardware clock set to GMT"), val => \$o->{timezone}{UTC}, type => 'bool' },
 	  { text => _("Automatic time synchronization (using NTP)"), val => \$ntp, type => 'bool' },

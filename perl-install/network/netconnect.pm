@@ -5,7 +5,7 @@ use diagnostics;
 use strict;
 use vars qw($isdn_init @isdndata);
 
-use common qw(:common :file :functional :system);
+use common;
 use log;
 use detect_devices;
 use run_program;

@@ -25,7 +25,7 @@ use diagnostics;
 use strict;
 
 use log;
-use common qw(:common :system :constant);
+use common;
 use resize_fat::boot_sector;
 use resize_fat::info_sector;
 use resize_fat::directory;

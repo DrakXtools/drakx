@@ -14,7 +14,8 @@ use vars qw($printable_chars);
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :file :system :constant);
+use MDK::Common::System;
+use common;
 
 #-#####################################################################################
 #- Globals
@@ -325,7 +326,7 @@ sub dd {
 
 sub head_tail {
     my ($h, $n) = getopts(\@_, qw(hn));
-    $h || @_ < bool($n) and die "usage: $0 [-h] [-n lines] [<file>]\n";
+    $h || @_ < to_bool($n) and die "usage: $0 [-h] [-n lines] [<file>]\n";
     $n = $n ? shift : 10;
     local *F; @_ ? open(F, $_[0]) || die "error: can't open file $_[0]\n" : (*F = *STDIN);
 
@@ -497,7 +498,7 @@ $dev, $size, $used, $free, $use, $mntpoint
 	$h{$dev} = $mntpoint;
     }
     foreach $dev (sort keys %h) {
-	($size, $free) = common::df($mntpoint = $h{$dev});
+	($size, $free) = MDK::Common::System::df($mntpoint = $h{$dev});
 	$size or next;
 
 	$use = int (100 * ($size - $free) / $size);
@@ -544,7 +545,7 @@ sub du {
     my $f; $f = sub {
 	my ($e) = @_;
 	my $s = (lstat($e))[12];
-	$s += sum map { &$f($_) } glob_("$e/*") if !-l $e && -d $e;
+	$s += sum(map { &$f($_) } glob_("$e/*")) if !-l $e && -d $e;
 	$s;
     };
     print &$f($_) >> 1, "\t$_\n" foreach @_ ? @_ : glob_("*");
@@ -576,9 +577,9 @@ sub bug {
     mount devices::make(detect_devices::floppy()), "/fd0";
 
     require install_any;
-    output "/fd0/report.bug", install_any::report_bug("/mnt"); #- no other way :-(
+    output("/fd0/report.bug", install_any::report_bug("/mnt")); #- no other way :-(
     umount "/fd0";
-    sync;
+    sync();
 }
 
 sub loadkeys {

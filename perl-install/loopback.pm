@@ -6,7 +6,8 @@ use strict;
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :system :file :functional);
+use MDK::Common::System;
+use common;
 use partition_table qw(:types);
 use commands;
 use fs;
@@ -75,7 +76,7 @@ sub create {
 sub getFree {
     my ($dir, $part) = @_;
     my $freespace = $dir ? 
-      2 * (common::df($dir))[1] : #- df in KiB
+      2 * (MDK::Common::System::df($dir))[1] : #- df in KiB
       $part->{size};
 
     $freespace - sum map { $_->{size} } @{$part->{loopback} || []};

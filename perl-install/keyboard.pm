@@ -7,7 +7,7 @@ use strict;
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :system :file);
+use common;
 use detect_devices;
 use run_program;
 use commands;

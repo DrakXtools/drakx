@@ -1,7 +1,7 @@
 package network::isdn;
 
 use network::isdn_consts;
-use common qw(:common :file :system);
+use common;
 use any;
 use modules;
 use log;

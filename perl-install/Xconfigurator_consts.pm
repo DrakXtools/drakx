@@ -1,6 +1,6 @@
 package Xconfigurator; # $Id$
 
-use common qw(:common);
+use common;
 
 %depths = (
       8 => __("256 colors (8 bits)"),

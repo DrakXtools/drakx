@@ -11,7 +11,7 @@ use vars qw(@ISA);
 #-######################################################################################
 use install_steps_interactive;
 use interactive_gtk;
-use common qw(:common :file :functional :system);
+use common;
 use my_gtk qw(:helpers :wrappers);
 use Gtk;
 use devices;
@@ -626,7 +626,7 @@ _("There was an error installing packages:"), $1, _("Go on anyway?") ], 1) and r
 sub set_help {
     my ($o, @l) = @_;
 
-    $o->{current_help} = formatAlaTeX(join "\n", map { _ deref($help::steps{$_}) } @l);
+    $o->{current_help} = formatAlaTeX(join "\n", map { _(deref($help::steps{$_})) } @l);
     gtktext_insert($o->{help_window_text}, $o->{current_help});
     1;
 }

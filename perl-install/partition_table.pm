@@ -11,7 +11,7 @@ package partition_table; # $Id$
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
 
-use common qw(:common :system :functional);
+use common;
 use partition_table_raw;
 use log;
 

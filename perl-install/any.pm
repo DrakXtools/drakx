@@ -6,7 +6,7 @@ use strict;
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :system :file :functional);
+use common;
 use commands;
 use detect_devices;
 use partition_table qw(:types);

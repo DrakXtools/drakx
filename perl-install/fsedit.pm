@@ -7,7 +7,7 @@ use vars qw(%suggestions);
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :constant :functional :file);
+use common;
 use partition_table qw(:types);
 use partition_table_raw;
 use detect_devices;

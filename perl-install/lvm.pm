@@ -6,7 +6,7 @@ use strict;
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :functional :system :file);
+use common;
 use modules;
 use fsedit;
 use devices;

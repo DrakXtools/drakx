@@ -3,7 +3,7 @@ package resize_fat::boot_sector; # $Id$
 use diagnostics;
 use strict;
 
-use common qw(:common :system :constant :functional);
+use common;
 use resize_fat::io;
 use resize_fat::any;
 use resize_fat::directory;

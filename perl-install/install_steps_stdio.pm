@@ -6,7 +6,7 @@ use vars qw(@ISA);
 
 @ISA = qw(install_steps_interactive interactive_stdio);
 
-use common qw(:common);
+use common;
 use interactive_stdio;
 use install_steps_interactive;
 use lang;

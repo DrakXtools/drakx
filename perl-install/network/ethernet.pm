@@ -4,7 +4,7 @@ use network::network;
 use modules;
 use any;
 use detect_devices;
-use common qw(:file :common);
+use common;
 use run_program;
 use vars qw(@ISA @EXPORT);
 use globals "network", qw($in $prefix $install $connect_file $disconnect_file);

@@ -1,6 +1,6 @@
 package help; # $Id$
 
-use common qw(:common);
+use common;
 
 %steps = (
 empty => '',

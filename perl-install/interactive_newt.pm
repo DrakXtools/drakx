@@ -7,7 +7,7 @@ use vars qw(@ISA);
 @ISA = qw(interactive);
 
 use interactive;
-use common qw(:common :functional);
+use common;
 use log;
 use Newt::Newt; #- !! provides Newt and not Newt::Newt
 

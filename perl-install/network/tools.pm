@@ -1,6 +1,6 @@
 package network::tools;
 
-use common qw(:common :file :system);
+use common;
 use run_program;
 use vars qw(@ISA @EXPORT);
 use globals "network", qw($in $prefix $install $disconnect_file $connect_prog);

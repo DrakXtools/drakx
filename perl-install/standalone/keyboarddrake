@@ -7,7 +7,7 @@ use interactive;
 use keyboard;
 use standalone;
 use Xconfigurator_consts;
-use common qw(:system);
+use common;
 use c;
 
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;

@@ -1,6 +1,6 @@
 package network::adsl;
 
-use common qw(:common :file);
+use common;
 use run_program;
 use network::tools;
 use network::ethernet;

@@ -7,7 +7,7 @@ use vars qw(@ISA);
 @ISA = qw(interactive);
 
 use interactive;
-use common qw(:common :functional);
+use common;
 use my_gtk qw(:helpers :wrappers);
 
 my $forgetTime = 1000; #- in milli-seconds

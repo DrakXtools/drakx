@@ -3,7 +3,7 @@ package proxy;
 use diagnostics;
 use strict;
 use run_program;
-use common qw(:common :system :file);
+use common;
 use log;
 use c;
 

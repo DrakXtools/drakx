@@ -1,7 +1,7 @@
 package tinyfirewall;
 use diagnostics;
 use strict;
-use common qw(:common :functional :system :file);
+use common;
 use commands;
 use run_program;
 use netconnect;

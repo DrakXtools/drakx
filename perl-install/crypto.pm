@@ -3,7 +3,7 @@ package crypto; # $Id$
 use diagnostics;
 use strict;
 
-use common qw(:common);
+use common;
 use log;
 use ftp;
 

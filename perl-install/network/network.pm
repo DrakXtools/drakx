@@ -8,7 +8,7 @@ use strict;
 #-######################################################################################
 use Socket;
 
-use common qw(:common :file :system :functional);
+use common;
 use detect_devices;
 use run_program;
 use any;

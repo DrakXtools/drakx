@@ -4,7 +4,7 @@ use diagnostics;
 use strict;
 use vars qw($ntp_servers);
 
-use common qw(:common :system :file);
+use common;
 use commands;
 use log;
 

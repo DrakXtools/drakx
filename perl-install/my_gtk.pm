@@ -20,7 +20,7 @@ use Gtk;
 use Gtk::Gdk::ImlibImage;
 use c;
 use log;
-use common qw(:common :functional :file);
+use common;
 
 my $forgetTime = 1000; #- in milli-seconds
 $border = 5;
@@ -136,7 +136,7 @@ sub destroy($) {
     flush();
 }
 sub DESTROY { goto &destroy }
-sub sync($) {
+sub sync {
     my ($o) = @_;
     show($o);
     flush();

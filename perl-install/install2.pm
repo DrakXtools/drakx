@@ -8,7 +8,7 @@ use vars qw($o $version);
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :file :system :functional);
+use common;
 use install_any qw(:all);
 use install_steps;
 use commands;

@@ -1,6 +1,6 @@
 package network::modem;
 
-use common qw(:common :file);
+use common;
 use any;
 use modules;
 use detect_devices;

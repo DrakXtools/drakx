@@ -3,7 +3,7 @@ package resize_fat::directory; # $Id$
 use diagnostics;
 use strict;
 
-use common qw(:system);
+use common;
 use resize_fat::dir_entry;
 use resize_fat::io;
 

@@ -7,7 +7,7 @@ use vars qw(@ISA);
 @ISA = qw(interactive);
 
 use interactive;
-use common qw(:common);
+use common;
 
 $| = 1;
 

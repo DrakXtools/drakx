@@ -3,7 +3,7 @@ package swap; # $Id$
 use diagnostics;
 use strict;
 
-use common qw(:common :system :constant);
+use common;
 use log;
 use devices;
 use c;
@@ -22,7 +22,7 @@ my $signature_page = "\0" x $pagesize;
 my $V0_MAX_PAGES = 8 * $pagesize - 10;
 my $V1_OLD_MAX_PAGES = int 0x7fffffff / $pagesize - 1;
 my $V1_MAX_PAGES = $V1_OLD_MAX_PAGES; #- (1 << 24) - 1;
-my $MAX_BADPAGES = int ($pagesize - 1024 - 128 * $common::sizeof_int - 10) / $common::sizeof_int;
+my $MAX_BADPAGES = int ($pagesize - 1024 - 128 * $sizeof_int - 10) / $sizeof_int;
 my $signature_format_v1 = "x1024 I I I I125"; #- bootbits, version, last_page, nr_badpages, padding
 
 1;
@@ -49,7 +49,7 @@ sub check_blocks {
 	    }
 	    $badpages++;
 	}
-	vec($signature_page, $i, 1) = bool($last_read_ok) if $version == 0;
+	vec($signature_page, $i, 1) = to_bool($last_read_ok) if $version == 0;
     }
 
     #- TODO: add interface

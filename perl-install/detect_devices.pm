@@ -7,7 +7,7 @@ use strict;
 #- misc imports
 #-######################################################################################
 use log;
-use common qw(:common :file :functional);
+use common;
 use devices;
 use c;
 

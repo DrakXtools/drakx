@@ -3,7 +3,7 @@ package devices; # $Id$
 use diagnostics;
 use strict;
 
-use common qw(:system :file);
+use common;
 use run_program;
 use log;
 use c;

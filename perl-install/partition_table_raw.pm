@@ -3,7 +3,7 @@ package partition_table_raw; # $Id$
 use diagnostics;
 use strict;
 
-use common qw(:common :system :file :constant);
+use common;
 use devices;
 use log;
 use c;

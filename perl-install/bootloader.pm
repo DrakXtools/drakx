@@ -7,7 +7,7 @@ use vars qw(%vga_modes);
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :file :functional :system);
+use common;
 use partition_table qw(:types);
 use log;
 use any;
@@ -377,11 +377,11 @@ wait %d seconds for default boot.
 	}
     }
     my %l = (
-	     yaboot => bool(arch() =~ /ppc/),
-	     silo => bool(arch() =~ /sparc/),
-	     lilo => bool(arch() !~ /sparc|ppc/) && !isLoopback(fsedit::get_root($fstab)),
-	     grub => bool(arch() !~ /sparc|ppc/ && availableRamMB() < 800), #- don't use grub if more than 800MB
-	     loadlin => bool(arch() !~ /sparc|ppc/) && -e "/initrd/loopfs/lnx4win",
+	     yaboot => to_bool(arch() =~ /ppc/),
+	     silo => to_bool(arch() =~ /sparc/),
+	     lilo => to_bool(arch() !~ /sparc|ppc/) && !isLoopback(fsedit::get_root($fstab)),
+	     grub => to_bool(arch() !~ /sparc|ppc/ && availableRamMB() < 800), #- don't use grub if more than 800MB
+	     loadlin => to_bool(arch() !~ /sparc|ppc/) && -e "/initrd/loopfs/lnx4win",
 	    );
     unless ($lilo->{methods}) {
 	$lilo->{methods} ||= { map { $_ => 1 } grep { $l{$_} } keys %l };
@@ -417,7 +417,7 @@ sub keytable($$) {
     $f && -r "$prefix/$f" && $f;
 }
 
-sub has_profiles { bool(get_label("office", $b)) }
+sub has_profiles { to_bool(get_label("office", $b)) }
 sub set_profiles {
     my ($b, $want_profiles) = @_;
 

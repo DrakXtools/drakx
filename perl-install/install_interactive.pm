@@ -5,7 +5,7 @@ use strict;
 
 use vars;
 
-use common qw(:common :functional);
+use common;
 use partition_table qw(:types);
 use partition_table_raw;
 use detect_devices;

@@ -6,7 +6,7 @@ use vars qw(@ISA);
 
 @ISA = qw(partition_table_raw);
 
-use common qw(:common :system :file :functional);
+use common;
 use partition_table_raw;
 use partition_table;
 use c;

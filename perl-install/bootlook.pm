@@ -27,7 +27,7 @@ use POSIX;
 use lib qw(/usr/lib/libDrakX);
 use interactive;
 use standalone;
-use common qw(:common :file :functional :system);
+use common;
 use my_gtk qw(:helpers :wrappers);
 use any;
 use bootloader;

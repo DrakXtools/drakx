@@ -4,7 +4,7 @@ use diagnostics;
 use strict;
 
 use my_gtk qw(:helpers :wrappers);
-use common qw(:common :file :functional);
+use common;
 use lang;
 use devices;
 

@@ -4,7 +4,7 @@ use diagnostics;
 use strict;
 use vars qw($FREE $FILE $DIRECTORY $UNMOVEABLE);
 
-use common qw(:common :constant);
+use common;
 use resize_fat::fat;
 use resize_fat::directory;
 use resize_fat::dir_entry;

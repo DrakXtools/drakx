@@ -3,7 +3,7 @@ package modules; # $Id$
 use strict;
 use vars qw(%drivers);
 
-use common qw(:common :file :system :functional);
+use common;
 use detect_devices;
 use run_program;
 use log;

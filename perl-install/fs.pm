@@ -3,7 +3,8 @@ package fs; # $Id$
 use diagnostics;
 use strict;
 
-use common qw(:common :file :system :functional);
+use MDK::Common::System;
+use common;
 use log;
 use devices;
 use partition_table qw(:types);
@@ -340,7 +341,7 @@ sub df {
 	    return;
 	}
     }
-    my (undef, $free) = common::df($dir);
+    my (undef, $free) = MDK::Common::System::df($dir);
 
     if (!$part->{isMounted}) {
 	umount($dir);
