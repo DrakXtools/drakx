@@ -481,9 +481,9 @@ sub mount {
 
     $fs or log::l("not mounting $dev partition"), return;
 
-    my @fs_modules = qw(vfat hfs romfs ufs reiserfs xfs jfs ext3);
+    my @fs_modules = qw(ext3 hfs jfs ntfs romfs reiserfs ufs xfs vfat);
 
-    if (member($fs, 'smb', 'smbfs', 'nfs', 'davfs', 'ntfs') && $::isStandalone || $::move) {
+    if (member($fs, 'smb', 'smbfs', 'nfs', 'davfs') && $::isStandalone || $::move) {
 	$o_wait_message->(N("Mounting partition %s", $dev)) if $o_wait_message;
 	system('mount', '-t', $fs, $dev, $where, if_($o_options, '-o', $o_options)) == 0 or die N("mounting partition %s in directory %s failed", $dev, $where);
     } else {
