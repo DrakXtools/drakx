@@ -74,16 +74,6 @@ sub enableShadow {
     run_program::rooted($prefix, "pwconv")  or log::l("pwconv failed");
     run_program::rooted($prefix, "grpconv") or log::l("grpconv failed");
 }
-sub enableMD5Shadow { #- NO MORE USED
-    my ($prefix, $shadow, $md5) = @_;
-    substInFile {
-	if (/^password.*pam_pwdb.so/) {
-	    s/\s*shadow//; s/\s*md5//;
-	    s/$/ shadow/ if $shadow;
-	    s/$/ md5/ if $md5;
-	}
-    } grep { -r $_ } map { "$prefix/etc/pam.d/$_" } qw(login rlogin passwd);
-}
 
 sub grub_installed {
     my ($in) = @_;
@@ -868,7 +858,7 @@ when your installation is complete and you restart your system.")),
 sub write_passwd_user {
     my ($prefix, $u, $isMD5) = @_;
 
-    $u->{pw} = &crypt($u->{password}, $isMD5) if $u->{password};
+    $u->{pw} = $u->{password} ? &crypt($u->{password}, $isMD5) : $u->{pw} || '';
     $u->{shell} ||= '/bin/bash';
 
     substInFile {
