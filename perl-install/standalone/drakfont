@@ -233,11 +233,9 @@ sub is_a_font($) {
 sub search_dir_font() {
     foreach my $fn (@install) {
         my @font_list_tmp;
-        my $dir;
         if (!(-e $fn)) { print "$fn :: no such file or directory \n" }
         else {
             if (-d $fn) {
-                $dir = $fn;
                 foreach my $i (all($fn)) {
                     if (is_a_font($i)) {
                         push @font_list_tmp, $i;
