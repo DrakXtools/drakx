@@ -31,6 +31,7 @@ my $prec_txt = $default_perm_level;
 
 #- Widget declaration
 my $w = ugtk2->new('drakperm');
+$w->{rwindow}->set_size_request(550, 400) unless $::isEmbedded;
 my $W = $w->{window};
 $W->signal_connect(delete_event => sub { ugtk2->exit });
 my $treeModel = Gtk2::TreeStore->new((Gtk2::GType->STRING) x 4);
@@ -101,26 +102,10 @@ $permList->signal_connect(button_press_event => sub {
 			  });
 
 
-my $up_down_box = new Gtk2::HBox(0,5);
 my $tips = new Gtk2::Tooltips;
 
-foreach ([ N("Up"), N("Move selected rule up one level"), \&up_callback ], 
-         [ N("Down"), N("Move selected rule down one level"), \&down_callback ], 
-         [ N("add a rule"), N("Add a new rule at the end"), \&add_callback ],
-         [ N("delete"), N("Delete selected rule"), \&del_callback ], 
-         [ N("edit"), N("Edit current rule"), \&edit_callback ]) {
-    $up_down_box->add(gtkset_tip($tips,
-                                 gtksignal_connect(Gtk2::Button->new($_->[0]),
-                                                   clicked => $_->[2]
-						  ),
-                                 $_->[1]));
-}
-
-
-
-
 $W->add(gtkpack_(Gtk2::VBox->new(0,5),
-                 0, Gtk2::Label->new(N("Drakperm is used to see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules.")),
+                 0, gtkset_property(Gtk2::Label->new(N("Drakperm is used to see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules.")), 'wrap', 1),
                  1, gtkadd(Gtk2::Frame->new,
                            gtkpack_(Gtk2::VBox->new(0,5),
                                     0, gtkadd(Gtk2::HBox->new(0,5),
@@ -128,10 +113,19 @@ $W->add(gtkpack_(Gtk2::VBox->new(0,5),
                                               $combo_perm
 					     ),
                                     1, create_scrolled_window($permList),
-                                    0, $up_down_box,
-                                    0, gtkadd(Gtk2::HBox->new(0,5),
-                                              gtksignal_connect(Gtk2::Button->new(N("Save")), clicked => \&save_perm),
-                                              gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => sub { ugtk2->exit })
+                                    0, my $up_down_box = gtkadd(Gtk2::HBox->new(0, 5),
+                                                                map {
+                                                                    gtkset_tip($tips, 
+                                                                               gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[2]),
+                                                                               $_->[1]);
+                                                                } ([ N("Up"), N("Move selected rule up one level"), \&up_callback ], 
+                                                                   [ N("Down"), N("Move selected rule down one level"), \&down_callback ], 
+                                                                   [ N("add a rule"), N("Add a new rule at the end"), \&add_callback ],
+                                                                   [ N("delete"), N("Delete selected rule"), \&del_callback ], 
+                                                                   [ N("edit"), N("Edit current rule"), \&edit_callback ])),
+                                    0, gtkpack(Gtk2::HBox->new(0, 5),
+                                               gtksignal_connect(Gtk2::Button->new(N("Save")), clicked => \&save_perm),
+                                               gtksignal_connect(Gtk2::Button->new(N("Quit")), clicked => sub { ugtk2->exit })
 					     )
 				   )
 			  )
