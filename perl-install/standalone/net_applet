@@ -36,7 +36,16 @@ my %appletstate = (
                             #-PO: keep the "Configure Network" substring synced with the "Configure Network" message below
                             N_("Network is down on interface %s. Click on \"Configure Network\"") 
                            ]
-                             }
+                             },
+             notconfigured => {
+  		          colour => [ 'disconnected' ],
+			  changes => [ 'connected' ],
+			  menu => [ 'confNetwork', 'refresh', 'help' ],
+			  tt => [
+                                 N_("You don't have any configured Internet connection.
+Run the \"Add Connection\" assistant from the Mandrakelinux Control Center")
+                                ]
+			  }
 	    );
 
 my %actions = (
@@ -101,9 +110,7 @@ sub checkNetwork() {
     my $intf = {};
     network::netconnect::read_net_conf($netcnx, $netc, $intf);
     my ($gw_intf, $is_up, $gw_address, $dns_server) = network::tools::get_internet_connection($netc, $intf);
-    if ($gw_address) {
-        go2State('connected', $gw_intf)
-    } else { go2State('disconnected', $gw_intf) }
+    go2State($gw_address ? 'connected' : $gw_intf ? 'disconnected' : 'notconfigured', $gw_intf);
 
     my $new_md5 = md5file($prog_name);
     if ($new_md5 ne $current_md5) { exec($prog_name) };
