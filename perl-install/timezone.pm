@@ -3,6 +3,7 @@ package timezone;
 use diagnostics;
 use strict;
 
+use common;
 
 
 sub getTimeZones {
@@ -43,9 +44,16 @@ my %l2t = (
 'Russian (Russia)' => 'Europe/Moscow',
 'Slovak (Slovakia)' => 'Europe/Bratislava',
 'Spanish (Spain)' => 'Europe/Madrid',
-'Swedish (Finland)' => 'Europe/Helsinki'
+'Swedish (Finland)' => 'Europe/Helsinki',
 'Swedish (Sweden)' => 'Europe/Stockholm',
 'Turkish (Turkey)' => 'Europe/Istanbul',
 'Ukrainian (Ukraine)' => 'Europe/Kiev',
 'Walon (Belgium)' => 'Europe/Brussels',
 );
+
+sub bestTimezone {
+    my ($langtext) = @_;
+    $l2t{common::bestMatchSentence($langtext, keys %l2t)};
+}
+
+1;

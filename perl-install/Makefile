@@ -117,7 +117,7 @@ get_needed_files: $(SO_FILES)
 		  d=`echo $(DEST)/$$i | sed 's/\/usr\/local\//\/usr\//'`; \
 		  install -d `dirname $$d` && \
 		  if (echo $$i | grep -q "\.pm"); then \
-		     perl -pe '$$_ =~ /^__END__/ and exit(0);' $$i > $$d; \
+		     perl -ne '$$_ =~ /^__END__/ and exit(0); print unless /\s*#-/' $$i > $$d; \
 		  else \
 		  	  cp -f $$i $$d; \
 			  strip $$d 2>/dev/null || true; \
@@ -140,7 +140,7 @@ get_needed_files: $(SO_FILES)
 
 	cp -a keymaps $(DEST)/usr/share
 	cp -a consolefonts $(DEST)/usr/share
-	cp MonitorsDB $(DEST)/usr/share
+	cp modparm.lst MonitorsDB $(DEST)/usr/share
 	cp logo-mandrake.xpm $(DEST)/usr/share
 	cp compss compssList $(ROOTDEST)/Mandrake/base
 

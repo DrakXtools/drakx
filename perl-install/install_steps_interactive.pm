@@ -15,6 +15,7 @@ use partition_table qw(:types);
 use install_steps;
 use install_any;
 use detect_devices;
+use timezone;
 use network;
 use modules;
 use lang;
@@ -211,7 +212,7 @@ sub timeConfig {
     my ($o, $f) = @_;
 
     $o->{timezone}{GMT} = $o->ask_yesorno('', _("Is your hardware clock set to GMT?"), $o->{timezone}{GMT});
-    $o->{timezone}{timezone} ||= 
+    $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
     $o->{timezone}{timezone} = $o->ask_from_list('', _("In which timezone are you"), [ timezone::getTimeZones($o->{prefix}) ], $o->{timezone}{timezone});
     install_steps::timeConfig($o,$f);
 }

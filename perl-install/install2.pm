@@ -22,6 +22,7 @@ use printer;
 use modules;
 use detect_devices;
 use smp;
+use modparm;
 use run_program;
 use install_steps_graphical;
 
@@ -279,12 +280,12 @@ $o = $::o = {
 #		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 }, 
 #	     ],
     shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash ksh) ],
-    lang         => 'us',
+    lang         => 'en',
     isUpgrade    => 0,
     installClass => "beginner",
 
     timezone => {
-                   timezone => "Europe/Paris",
+#                   timezone => "Europe/Paris",
                    GMT      => 1,
                 },
     printer => { 
@@ -578,19 +579,20 @@ sub main {
 
     #the main cycle
     my $clicked = 0;
-    for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {
+    MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {
 	$o->enteringStep($o->{step});
 	$o->{steps}{$o->{step}}{entered}++;
 	eval { 
 	    &{$install2::{$o->{step}}}($clicked, $o->{steps}{$o->{step}}{entered});
 	};
 	$clicked = 0;
-	$@ =~ /^setstep (.*)/ and $o->{step} = $1, $clicked = 1, redo;
-	$@ =~ /^theme_changed$/ and redo;
-	if ($@) {
-	    $o->errorInStep($@);
+	while ($@) {
+	    $@ =~ /^setstep (.*)/ and $o->{step} = $1, $clicked = 1, redo MAIN;
+	    $@ =~ /^theme_changed$/ and redo MAIN;
+	    eval { $o->errorInStep($@) };
+	    $@ and next;
 	    $o->{step} = $o->{steps}{$o->{step}}{onError};
-	    redo;
+	    redo MAIN;
 	}
 	$o->leavingStep($o->{step});
 	$o->{steps}{$o->{step}}{done} = 1;
