@@ -6,7 +6,7 @@ use MDK::Common;
 use class_discard;
 
 our (@ISA, @EXPORT_OK) = (qw(Exporter), (qw(version tree)));
-our ($version, $sbindir) = ("1.1.5", "/usr/sbin/");
+our ($version, $sbindir, $bindir) = ("1.1.5", "/usr/sbin", "/usr/bin");
 
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown {
@@ -30,7 +30,7 @@ our @tree =
 	 sub {grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ 'DISPLAY_VGA' } detect_devices::probeall(1) }],
 	["TV","Tvcard", "tv.png", "/usr/bin/XawTV", 
 	 sub {grep { $_->{media_type} =~ 'MULTIMEDIA_VIDEO' } detect_devices::probeall(1)}],
-	["AUDIO","Soundcard", "sound.png", "", 
+	["AUDIO","Soundcard", "sound.png", "$bindir/aumix", 
 	 sub {grep { $_->{media_type} =~ 'MULTIMEDIA_AUDIO' } detect_devices::probeall(1)}],
 #	"MULTIMEDIA_AUDIO" => "/usr/bin/X11/sounddrake";
 	["WEBCAM","Webcam", "webcam.png", "", sub {}],
