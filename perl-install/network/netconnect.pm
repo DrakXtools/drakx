@@ -80,7 +80,7 @@ sub real_main {
       my $mouse = $o_mouse ||= {};
       my $intf  = $o_intf  ||= {};
       my $first_time = $o_first_time || 0;
-      my ($network_configured, $cnx_type, $type, @all_cards, %eth_intf);
+      my ($network_configured, $cnx_type, $type, @all_cards, %eth_intf, %all_eth_intf);
       my (%connections, @connection_list, $is_wireless);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my ($adsl_type, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
@@ -128,8 +128,8 @@ sub real_main {
           require network::ethernet;
           modules::interactive::load_category($in, $modules_conf, network::ethernet::get_eth_categories(), !$::expert, 0);
           @all_cards = network::ethernet::get_eth_cards($modules_conf);
-          %eth_intf = network::ethernet::get_eth_cards_names(@all_cards);
-          require list_modules;
+          %all_eth_intf = network::ethernet::get_eth_cards_names(@all_cards); #- needed not to loose GATEWAYDEV
+          require list_modules; #- FIXME: check if useful
           %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) }
             grep { to_bool($is_wireless) == c::isNetDeviceWirelessAware($_->[0]) } @all_cards;
       };
@@ -1175,8 +1175,8 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                                 help => N("By default search domain will be set from the fully-qualified host name") },
                               { label => N("Gateway (e.g. %s)", $gateway_ex), val => \$netc->{GATEWAY} },
                               if_(@all_cards > 1,
-                                  { label => N("Gateway device"), val => \$netc->{GATEWAYDEV}, list => [ sort keys %eth_intf ], 
-                                    format => sub { $eth_intf{$_[0]} } },
+                                  { label => N("Gateway device"), val => \$netc->{GATEWAYDEV}, list => [ sort keys %all_eth_intf ], 
+                                    format => sub { $all_eth_intf{$_[0]} } },
                                  ),
                              ),
                         ],
