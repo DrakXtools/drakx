@@ -404,7 +404,7 @@ sub configureNetwork {
 	add2hash($o->{netc}, network::read_conf("$o->{prefix}/etc/sysconfig/network")) if -r "$o->{prefix}/etc/sysconfig/network";
 	add2hash($o->{netc}, network::read_resolv_conf("$o->{prefix}/etc/resolv.conf")) if -r "$o->{prefix}/etc/resolv.conf";
 	foreach (all("$o->{prefix}/etc/sysconfig/network-scripts")) {
-	    if (/ifcfg-(\w+)/ && $1 ne 'lo' && $1 !~ /^ppp/) {
+	    if (/ifcfg-(\w+)/ && $1 ne 'lo' && $1 !~ /ppp/) {
 		my $intf = network::findIntf($o->{intf}, $1);
 		add2hash($intf, { getVarsFromSh("$o->{prefix}/etc/sysconfig/network-scripts/$_") });
 	    }
