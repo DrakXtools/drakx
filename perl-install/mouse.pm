@@ -310,11 +310,7 @@ sub detect() {
     }
 
     #- in case only a wacom has been found, assume an inexistant mouse (necessary).
-    @wacom and return { CLASS      => 'MOUSE',
-			nbuttons   => 2,
-			device     => "nothing",
-			MOUSETYPE  => "Microsoft",
-			XMOUSETYPE => "Microsoft", wacom => \@wacom };
+    @wacom and return fullname2mouse('none|No mouse', wacom => \@wacom);
 
     if (detect_devices::is_a_recent_computer() && $::isInstall) {
 	#- special case for non detected usb interface on a box with no mouse.
