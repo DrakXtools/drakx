@@ -1164,7 +1164,7 @@ sub format_part_info {
 	    $pName =~ s/[^A-Za-z0-9_]//g;
 	    $info .= N("Name: ") . $pName . "\n";
 	}
-    } elsif ($part->{pt_type}) {
+    } elsif ($part->{fs_type} || $part->{pt_type}) {
 	$info .= N("Type: ") . (fs::type::part2type_name($part) || $part->{fs_type}) . ($::expert ? sprintf " (0x%x)", $part->{pt_type} : '') . "\n";
     } else {
 	$info .= N("Empty") . "\n";
