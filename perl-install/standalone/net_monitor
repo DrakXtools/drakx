@@ -181,7 +181,6 @@ sub update {
     foreach(@intfs) {
 	my $intf = $_;
 	if(!member($intf,@interfaces)) {
-	    push (@interfaces, $intf);
 	    $default_intf = $intf;
 	    $monitor->{$intf}{initialr} = $monitor->{$intf}{val}->[0];
 	    $monitor->{$intf}{initialt} = $monitor->{$intf}{val}->[8];
@@ -218,9 +217,9 @@ sub update {
 	my $intf = $_;
 	if(!member($intf,@intfs)) {
 	    $notebook->remove_page($monitor->{$intf}{page});
-	    @interfaces = map { $_ if($_ ne $intf)} @interfaces;
 	}
     }
+    @interfaces = @intfs;
     my $netc={};
     if(netconnect::connected('', $netc) == !$isconnected) {
 	$isconnected = $isconnected ? 0 : 1;
@@ -234,6 +233,7 @@ sub update {
 
 sub draw_monitor {
     my ($o) = @_;
+    defined $o->{darea} or return;
     $o->{pixmap_db}->draw_rectangle ($o->{darea}->style->black_gc, 1, 0, 0, 300, 150);
 #    my @c = map { $step+=2; ($step, $_); } @{$o->{stack_r}};
 #    print "\n##\n" . Data::Dumper->Dump([@c],['$c']) . "\n##\n";

@@ -443,7 +443,7 @@ sub configure_lan {
 
     $window->set_modal(1);
     $window->show_all();
-    $intf->{"eth$_"}{BOOTPROTO} eq dhcp or $infos[8]->hide;
+    $intf->{"eth$_"}{BOOTPROTO} eq "dhcp" or $infos[8]->hide;
     $window->set_position('center_always');
     Gtk->main;
 }
