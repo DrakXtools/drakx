@@ -1046,7 +1046,7 @@ sub generateAutoInstFloppy {
         run_program::run("losetup", "-d", "/dev/loop6");
 
 	substInFile { s/timeout.*//; s/^(\s*append\s*=\s*\".*)\"/$1 kickstart=floppy\"/ } "$workdir/silo.conf"; #" for po
-	output "$workdir/ks.cfg", install_any::generate_ks_cfg($o);
+#-TODO	output "$workdir/ks.cfg", install_any::generate_ks_cfg($o);
 	output "$workdir/boot.msg", "\n7m",
 "!! If you press enter, an auto-install is going to start.
     ALL data on this computer is going to be lost,
