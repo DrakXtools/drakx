@@ -26,11 +26,12 @@ sub get_options_name($) {
   my @names;
   $modinfo = $::isStandalone ? '/sbin/modinfo' : '/usr/bin/modinfo';
   -e $modinfo or die _('modinfo is not available');
+  my @line;
   if ($::isStandalone) {
-      my @line = `$modinfo -p $module`;
+      @line = `$modinfo -p $module`;
   } else {
       modules::extract_modules('/tmp', $module);
-      my @line = `$modinfo -p /tmp/$module.o`;
+      @line = `$modinfo -p /tmp/$module.o`;
   }
   foreach (@line) {
       chomp;
