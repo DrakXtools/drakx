@@ -18,9 +18,9 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus 
     helpers => [ qw(add2notebook add_icon_path fill_tiled fill_tiled_coords get_text_coord gtkcolor gtkcreate_img
                     gtkcreate_pixbuf gtkfontinfo gtkset_background n_line_size set_back_pixbuf string_size) ],
 
-    create => [ qw(create_adjustment create_box_with_title create_dialog create_factory_menu create_hbox create_hpaned
-                   create_menu create_notebook create_okcancel create_packtable create_scrolled_window create_vbox
-                   create_vpaned destroy_window ) ],
+    create => [ qw(create_adjustment create_box_with_title create_dialog create_factory_menu create_factory_popup_menu
+                   create_hbox create_hpaned create_menu create_notebook create_okcancel create_packtable
+                   create_scrolled_window create_vbox create_vpaned destroy_window ) ],
 
     ask => [ qw(ask_browse_tree_info ask_browse_tree_info_given_widgets ask_dir ask_from_entry ask_okcancel ask_warn
                 ask_yesorno ) ],
@@ -419,6 +419,7 @@ sub create_factory_menu_ {
     ($widget->get_widget($name), $widget);
 }
 
+sub create_factory_popup_menu { create_factory_menu_(Gtk2::Menu->get_type, '<main>', @_) }
 sub create_factory_menu { create_factory_menu_(Gtk2::MenuBar->get_type, '<main>', @_) }
 
 sub create_menu {
@@ -825,11 +826,11 @@ sub new {
 	$o->{window} = new Gtk2::HBox(0,0);
 	$o->{rwindow} = $o->{window};
 	if (!$::Plug) {
-	    $::Plug = new Gtk2::Plug($::XID);
-	    $::Plug->show;
+	    $::Plug = gtkshow(Gtk2::Plug->new($::XID));
 	    flush();
 	    $::WizardTable = Gtk2::Table->new(2, 2, 0);
 	    $::Plug->add($::WizardTable);
+ 	    $o->{rwindow} = $::Plug;
 	}
 	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0);
 	$::WizardTable->show;
