@@ -38,6 +38,7 @@ my %fields =
 	 "fpu_exception" => [ N("Does FPU have an irq vector"), N("yes means the arithmetic coprocessor has an exception vector attached")],
 	 "f00f_bug" => [N("F00f bug"), N("Early pentium were buggy and freeze when decoding the F00F instruction")],
      "media_type" => [ N("Media class"), N("class of hardware device")],
+     "Mhz" => [ N("Frequency (Mhz)"), N("The cpu frequency in Mhz")],
      "Model" => [N("Model"), N("hard disk model")],
      "nbuttons" => [ N("Number of buttons"), "the number of buttons the mouse have"],
      "name" => [ N("Name"), "the name of the cpu"],
@@ -69,7 +70,7 @@ my ($in, %IDs, $pid, $w);
 my %options;
 my $conffile = "/etc/sysconfig/harddrake2/ui.conf";
 
-my ($modem_check_box, $printer_check_box);
+my ($modem_check_box, $printer_check_box,  $current_device);
 
 my @menu_items = 
     (
@@ -83,10 +84,14 @@ my @menu_items =
      {
          path => N("/_Help").N("/_Help..."), 
          callback => sub {
-             $in->ask_warn(N("Harddrake help"), 
-                           N("Description of the fields:\n\n")
-                           . join("\n\n", map { if_($fields{$_}[0], "$fields{$_}[0]: $fields{$_}[1]")} keys %fields));
-         }
+             if ($current_device) {
+                 $in->ask_warn(N("Harddrake help"), 
+                               N("Description of the fields:\n\n")
+                               . join("\n\n", map { if_($fields{$_}[0], "$fields{$_}[0]: $fields{$_}[1]")} sort keys %$current_device))
+                 } else {
+                     $in->ask_warn(N("Select a device !"), N("Once you've selected a device, you'll be able to see explanations on fields displayed on the right frame (\"Information\")"))
+                 }
+             }
      },
      {   path => N("/_Help").N("/_Report Bug"),
          callback => sub { unless (fork) { exec("drakbug --report harddrake2 &") } } },
@@ -202,25 +207,26 @@ sub new {
         my ($ctree, $row, $column, $event) = @_;
         my $node = $ctree->node_nth($row);
         my ($name, undef) = $tree->node_get_pixtext($node,0);
-        my $data = $tree->{data}{$name};
+        $current_device = $tree->{data}{$name};
 
-        if ($data) {
+        if ($current_device) {
             $text->hide;
             $text->backward_delete($text->get_point);
-            foreach my $i (sort keys %$data) {
-                $text->insert("", $text->style->black, "", ($fields{$i}[0] ? $fields{$i}[0] : $i) . ": ");
-                if ($i eq 'driver' && $data->{$i} eq 'unknown') {
-                    $text->insert("", $wcolor, "", "$data->{$i}\n\n");
-                } else { $text->insert("", $color, "", "$data->{$i}\n\n") }
+            foreach my $i (sort keys %$current_device) {
+                if ($fields{$i}[0]) {
+                    $text->insert("", $text->style->black, "", $fields{$i}[0] . ": ");
+                    $text->insert("", ($i eq 'driver' && $current_device->{$i} eq 'unknown') ? $wcolor : $color,
+                                  "", "$current_device->{$i}\n\n");
+                } else { print "Skip $i field\n\n" }
             }
             disconnect($module_cfg_button, 'module');
 
             # we've valid driver, let's offer to configure it
-            if (exists $data->{driver} &&  $data->{driver} !~ /(unknown|.*\|.*)/ &&  $data->{driver} !~ /^Card:/) {
+            if (exists $current_device->{driver} &&  $current_device->{driver} !~ /(unknown|.*\|.*)/ &&  $current_device->{driver} !~ /^Card:/) {
                 $module_cfg_button->show;
                 $IDs{module} = $module_cfg_button->signal_connect(clicked => sub {
                     require modules::interactive;
-                    modules::interactive::config_window($in, $data);
+                    modules::interactive::config_window($in, $current_device);
                     gtkset_mousecursor_normal();
                 });
             }
