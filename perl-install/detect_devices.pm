@@ -8,7 +8,7 @@ use common qw(:common :file);
 use devices;
 use c;
 
-
+my @netdevices = map { my $l = $_; map { "$l$_" } (0..3) } qw(eth tr plip fddi);
 my $scsiDeviceAvailable;
 my $CSADeviceAvailable;
 
@@ -99,7 +99,6 @@ sub getIDE() {
     @idi;
 }
 
-
 sub getCompaqSmartArray() {
     my @idi;
     my $f;
@@ -117,15 +116,10 @@ sub getCompaqSmartArray() {
 
 sub getDAC960() {
     my @idi;
-    my $file = "/var/log/dmesg";
-    -r $file or $file = "/tmp/syslog";
-
-    local *F;
-    open F, $file or die "Failed to open $file: $!";
 
     # We are looking for lines of this format:DAC960#0:
     # /dev/rd/c0d0: RAID-7, Online, 17928192 blocks, Write Thru0123456790123456789012    
-    foreach (<F>) {
+    foreach (syslog()) {
 	my ($devicename, $info) = m|/dev/rd/(.*?): (.*?),| or next;
 	push @idi, { info => $info, type => 'hd', devicename => $devicename }; 
 	log::l("DAC960: $devicename: $info");
@@ -133,9 +127,23 @@ sub getDAC960() {
     @idi;
 }
 
+sub net2module {
+    my @modules = map { quotemeta first(split) } cat_("/proc/modules");
+    my $modules = join '|', @modules;
+    my $net     = join '|', @netdevices;
+    my ($module, %l);
+    foreach (syslog()) {
+	if (/^($modules)\.c:/) {
+	    $module = $1;
+	} elsif (/^($net):/) {
+	    $l{$1} = $module if $module;
+	}
+    }
+    %l;
+}
 
 sub getNet() { 
-    grep { hasNetDevice($_) } qw(eth0 eth1 eth2 eth3 tr0 plip0 plip1 plip2 fddi0);
+    grep { hasNetDevice($_) } @netdevices;
 }
 sub getPlip() {
     foreach (0..2) {
@@ -153,4 +161,11 @@ sub hasNetDevice($) { c::hasNetDevice($_[0]) }
 sub tryOpen($) {
     local *F;
     sysopen F, devices::make($_[0]), c::O_NONBLOCK();
+}
+
+sub syslog {
+    my $file = "/var/log/dmesg";
+    -r $file or $file = "/tmp/syslog";
+    cat_($file);
+    `dmesg`;
 }

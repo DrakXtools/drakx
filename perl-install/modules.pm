@@ -2,86 +2,91 @@ package modules;
 
 use diagnostics;
 use strict;
-use vars qw(%loaded);
 
 use common qw(:common :file);
 use pci_probing::main;
-use log;
 use detect_devices;
 use run_program;
+use log;
 
-%loaded = ();
 
+my %conf;
 my %deps = ();
 
-
-my @neOptions = (
-  [ "io=", "Base IO port:", "0x300:0x280:0x320:0x340:0x360" ],
-  [ "irq=", "IRQ level:", "" ],
-);
-
-my @de4x5Options = (
-  [ "io=", "Base IO port:", "0x0b" ],
-);
-
-my @cdu31aOptions = (
-  [ "cdu31a_port=", "Base IO port:", "" ],
-  [ "cdu31a_irq=", "IRQ level:", "" ],
-);
-
-my @cm206Options = (
-  [ "cm206=", "IO base, IRQ:", "" ],
-);
-
-my @mcdOptions = (
-  [ "mcd=", "Base IO port:", "" ],
-);
-
-my @optcdOptions = (
-  [ "optcd=", "Base IO port:", "" ],
-);
-
-my @fdomainOptions = (
-  [ "setup_called=", "Use other options", "1" ],
-  [ "port_base=", "Base IO port:", "0xd800" ],
-  [ "interrupt_level=", "Interrupt level (IRQ):", "10" ],
-);
-
-my @sbpcdOptions = (
-  [ "sbpcd=", "IO base, IRQ, label:", "" ],
-);
-
-my @parportPcOptions = (
-  [ "io=", "Base IO port:", "0x378" ],
-  [ "irq=", "IRQ level:", "7" ],
-);
-
-my %modules = (
-  "8390" => [ 1, undef, 0, '' ],
-  "cdu31a" => [ 0, \@cdu31aOptions, 0, '' ],
-  "cm206" => [ 0, \@cm206Options, 0, '' ],
-  "de4x5" => [ 1, \@de4x5Options, 'AUTOPROBE', "io=0" ],
-  "ds" => [ 1, undef, 0, '' ],
-  "fdomain" => [ 1, \@fdomainOptions, 0, '' ],
-  "i82365" => [ 1, undef, 0, '' ],
-  "isofs" => [ 1, undef, 0, '' ],
-  "loop" => [ 1, undef, 0, '' ],
-  "lp" => [ 1, undef, 0, '' ],
-  "parport" => [ 1, undef, 0, '' ],
-  "parport_pc" => [ 1, \@parportPcOptions, 0, "irq=7" ],
-  "mcd" => [ 0, \@mcdOptions, 0, '' ],
-  "ne" => [ 0, \@neOptions, 'FAKEAUTOPROBE', "io=0x300" ],
-  "nfs" => [ 1, undef, 0, '' ],
-  "optcd" => [ 0, \@optcdOptions, 0, '' ],
-  "pcmcia_core" => [ 1, undef, 0, '' ],
-  "sbpcd" => [ 1, \@sbpcdOptions, 0, '' ],
-  "smbfs" => [ 1, undef, 0, '' ],
-  "tcic" => [ 1, undef, 0, '' ],
-  "vfat" => [ 1, undef, 0, '' ],
-);
+#
+#my %knownAliases = (
+#    eth => { type => 'net', minor => 'ethernet' },
+#    scsi_hostadapter => { type => 'scsi' },
+#);
+#
+#my @neOptions = (
+#  [ "io=", __("Base IO port:"), "0x300", "0x280", "0x320", "0x340", "0x360" ],
+#  [ "irq=", __("IRQ level:"), "" ],
+#);
+#
+#my @de4x5Options = (
+#  [ "io=", __("Base IO port:"), "0x0b" ],
+#);
+#
+#my @cdu31aOptions = (
+#  [ "cdu31a_port=", __("Base IO port:"), "" ],
+#  [ "cdu31a_irq=", __("IRQ level:"), "" ],
+#);
+#
+#my @cm206Options = (
+#  [ "cm206=", __("IO base, IRQ:"), "" ],
+#);
+#
+#my @mcdOptions = (
+#  [ "mcd=", __("Base IO port:"), "" ],
+#);
+#
+#my @optcdOptions = (
+#  [ "optcd=", __("Base IO port:"), "" ],
+#);
+#
+#my @fdomainOptions = (
+#  [ "setup_called=", __("Use other options"), "1" ],
+#  [ "port_base=", __("Base IO port:"), "0xd800" ],
+#  [ "interrupt_level=", __("Interrupt level (IRQ):"), "10" ],
+#);
+#
+#my @sbpcdOptions = (
+#  [ "sbpcd=", __("IO base, IRQ, label:"), "" ],
+#);
+#
+#my @parportPcOptions = (
+#  [ "io=", __("Base IO port:"), "0x378" ],
+#  [ "irq=", __("IRQ level:"), "7" ],
+#);
+#
+#my @modules_fields = qw(shouldAutoprobe options flags defaultOptions);
+#my %modules = (
+#  "8390" => [ 1 ],
+#  "cdu31a" => [ 0, \@cdu31aOptions ],
+#  "cm206" => [ 0, \@cm206Options ],
+#  "de4x5" => [ 1, \@de4x5Options, 'AUTOPROBE', "io=0" ],
+#  "ds" => [ 1, undef, 0, '' ],
+#  "fdomain" => [ 1, \@fdomainOptions, 0, '' ],
+#  "i82365" => [ 1, undef, 0, '' ],
+#  "isofs" => [ 1, undef, 0, '' ],
+#  "loop" => [ 1, undef, 0, '' ],
+#  "lp" => [ 1, undef, 0, '' ],
+#  "parport" => [ 1, undef, 0, '' ],
+#  "parport_pc" => [ 1, \@parportPcOptions, 0, "irq=7" ],
+#  "mcd" => [ 0, \@mcdOptions, 0, '' ],
+#  "ne" => [ 0, \@neOptions, 'FAKEAUTOPROBE', "io=0x300" ],
+#  "nfs" => [ 1, undef, 0, '' ],
+#  "optcd" => [ 0, \@optcdOptions, 0, '' ],
+#  "pcmcia_core" => [ 1, undef, 0, '' ],
+#  "sbpcd" => [ 1, \@sbpcdOptions, 0, '' ],
+#  "smbfs" => [ 1, undef, 0, '' ],
+#  "tcic" => [ 1, undef, 0, '' ],
+#  "vfat" => [ 1, undef, 0, '' ],
+#);
 
 my @drivers_by_category = (
-[ 0, \&detect_devices::hasEthernet, 'net', 'ethernet', {
+[ \&detect_devices::hasEthernet, 'net', 'ethernet', {
   "3c509" => "3com 3c509",
   "3c501" => "3com 3c501",
   "3c503" => "3com 3c503",
@@ -129,7 +134,7 @@ my @drivers_by_category = (
   "via-rhine" => "VIA Rhine",
   "wd" => "WD8003, WD8013 and compatible",
 }],
-[ 0, \&detect_devices::hasSCSI, 'scsi', undef, {
+[ \&detect_devices::hasSCSI, 'scsi', undef, {
   "aha152x" => "Adaptec 152x",
   "aha1542" => "Adaptec 1542",
   "aha1740" => "Adaptec 1740",
@@ -161,7 +166,7 @@ my @drivers_by_category = (
   "ultrastor" => "UltraStor 14F/24F/34F",
   "wd7000" => "Western Digital wd7000",
 }],
-[ 0, undef, 'cdrom', 'none', {
+[ undef, 'cdrom', 'none', {
   "sbpcd" => "SoundBlaster/Panasonic",
   "aztcd" => "Aztech CD",
   "bpcd" => "Backpack CDROM",
@@ -176,24 +181,29 @@ my @drivers_by_category = (
 }]
 );
 
+my @drivers_fields = qw(text detect type minor);
 my %drivers = (
-  "plip" => [ "PLIP (parallel port)", 0, \&detect_devices::hasPlip, 'net', 'plip' ],
-  "ibmtr" => [ "Token Ring", 0, \&detect_devices::hasTokenRing, 'net', 'tr' ],
-  "DAC960" => [ "Mylex DAC960", 0, undef, 'scsi', undef ],
-  "pcmcia_core" => [ "PCMCIA core support", 0, undef, 'pcmcia', undef ],
-  "ds" => [ "PCMCIA card support", 0, undef, 'pcmcia', undef ],
-  "i82365" => [ "PCMCIA i82365 controller", 0, undef, 'pcmcia', undef ],
-  "tcic" => [ "PCMCIA tcic controller", 0, undef, 'pcmcia', undef ],
-  "isofs" => [ "iso9660", 0, undef, 'fs', undef ],
-  "nfs" => [ "Network File System (nfs)", 0, undef, 'fs', undef ],
-  "smbfs" => [ "Windows SMB", 0, undef, 'fs', undef ],
-  "loop" => [ "Loopback device", 0, undef, 'other', undef ],
-  "lp" => [ "Parallel Printer", 0, undef, 'other', undef ],
+  "plip" => [ "PLIP (parallel port)", \&detect_devices::hasPlip, 'net', 'plip' ],
+  "ibmtr" => [ "Token Ring", \&detect_devices::hasTokenRing, 'net', 'tr' ],
+  "DAC960" => [ "Mylex DAC960", undef, 'scsi', undef ],
+  "pcmcia_core" => [ "PCMCIA core support", undef, 'pcmcia', undef ],
+  "ds" => [ "PCMCIA card support", undef, 'pcmcia', undef ],
+  "i82365" => [ "PCMCIA i82365 controller", undef, 'pcmcia', undef ],
+  "tcic" => [ "PCMCIA tcic controller", undef, 'pcmcia', undef ],
+  "isofs" => [ "iso9660", undef, 'fs', undef ],
+  "nfs" => [ "Network File System (nfs)", undef, 'fs', undef ],
+  "smbfs" => [ "Windows SMB", undef, 'fs', undef ],
+  "loop" => [ "Loopback device", undef, 'other', undef ],
+  "lp" => [ "Parallel Printer", undef, 'other', undef ],
 );
 foreach (@drivers_by_category) {
     my @l = @$_;
     my $l = pop @l;
     foreach (keys %$l) { $drivers{$_} = [ $l->{$_}, @l ]; }
+}
+foreach (keys %drivers) {
+    my %l; @{$l{@drivers_fields}} = @{$drivers{$_}};
+    $drivers{$_} = \%l;
 }
 
 
@@ -203,35 +213,34 @@ foreach (@drivers_by_category) {
 sub text_of_type($) {
     my ($type) = @_;
 
-    map { $_->[0] } grep { $_->[3] eq $type } values %drivers;
+    map { $_->{text} } grep { $_->{type} eq $type } values %drivers;
 }
 
 sub text2driver($) {
     my ($text) = @_;
     while (my ($k, $v) = each %drivers) {
-	$v->[0] eq $text and return $k;
+	$v->{text} eq $text and return $k;
     }
     die "$text is not a valid module description";
 }
 
 
-sub load($;$$) {
-    my ($name, $type, $minor) = @_;
+sub load($;$) {
+    my ($name, $type, @options) = @_;
 
-    $loaded{$name} and return;
+    $conf{$name}{loaded} and return;
 
-    $type or ($type, $minor) = @{$drivers{$name}}[3,4];
+    $type ||= $drivers{$name}{type};
 
     load($_, 'prereq', $minor) foreach @{$deps{$name}};
-    load_raw($name, $type, $minor);
+    load_raw($name, @options);
 }
 
 sub unload($) { run_program::run("rmmod", $_[0]); }
 
-sub load_raw($$$@) {
-    my ($name, $type, $minor, @options) = @_;
+sub load_raw($@) {
+    my ($name, @options) = @_;
 
-#    @options or @options = guiGetModuleOptions($name);
     run_program::run("insmod", $name, @options) or die("insmod $name failed");
 
     # this is a hack to make plip go
@@ -244,13 +253,13 @@ sub load_raw($$$@) {
 	    print F $1;
 	}
     }
-    $loaded{$name} = { type => $type, minor => $minor, options => \@options };
+    $conf{$name}{loaded} = 1;
 }
 
 sub read_already_loaded() {
     foreach (cat_("/proc/modules", "die")) {
 	my ($name) = split;
-	@{$loaded{$name}}{"type", "minor"} = @{$drivers{$name}}[3,4];
+	$conf{$name}{loaded} = 1;
     }
 }
 
@@ -267,52 +276,54 @@ sub load_deps($) {
 
 sub read_conf {
     my ($file) = @_;
+    my %c;
 
-    local *F;
-    open F, $file or log::l("failed to open $file for module information"), return 0;
-
-    foreach (<F>) {
-	/^alias\s+eth0\s+(\S+)/             and $loaded{$1} = { type => 'net', minor => 'ethernet' };
-	/^alias\s+scsi_hostadapter\s+(\S+)/ and $loaded{$1} = { type => 'scsi' };
-	/^options\s+(\S+)\s+(.*)/           and add2hash($loaded{$1} || {}, { type => 'other', options => [ split ' ', $2 ] });
+    foreach (cat_($file)) {
+	$c{$2}{$1} = $3 if /^\s*(\S+)\s+(\S+)\s+(.*?)\s*$/;
     }
+    # cheating here: not handling aliases of aliases
+    while (my ($k, $v) = each %c) {
+	$c{scsi} ||= $v->{scsi_hostadapter};
+	add2hash($c{$v->{alias}} ||= {}, $v) if $v->{alias};
+    }
+    %c;
 }
 
 sub write_conf {
-    my ($file, $append) = @_;
-    my ($tr, $eth, $scsi) = (0, 0, 0);
-
-    $append or rename($file, "$file.orig"), log::l("backing up old $file");
+    my ($file) = @_;
+    my %written = read_conf($file);
+    my $scsi = $written{scsi};
 
     local *F;
-    open F, ($append ? ">" : "") . "> $file" or die("cannot write module config file $file: $!\n");
+    open F, ">> $file" or die("cannot write module config file $file: $!\n");
 
-    while (my ($k, $v) = each %loaded) {
-	if ($v->{type} eq 'net') {
-	    $v->{minor} eq 'tr' and print F "alias tr", $tr++, " $k\n";
-	    $v->{minor} eq 'ethernet' and print F "alias eth", $eth++, " $k\n";
-	} elsif ($v->{type} eq 'scsi') {
-	    print F "alias scsi_hostadapter", $scsi++, " $k\n";
+    while (my ($mod, $h) = each %conf) {
+	while (my ($type, $v2) = each %$h) {
+	    unless ($written{$mod}{$type}) {
+		if ($mod eq 'scsi_hostadapter') {
+		    print "#" if $scsi;
+		    $scsi ||= 1;
+		}
+		print F "$type $mod $v2\n";
+	    }
 	}
-	print F "options $k ", join(' ', @{$v->{options}}), "\n" unless is_empty_array_ref($v->{options});
     }
-    print F "alias parport_lowlevel parport_pc\n";
-    print F "pre-install pcmcia_core /etc/rc.d/init.d/pcmcia start\n";
 }
 
-
+sub get_stage1_conf { 
+    %conf = read_conf($_[0]);
+    $conf{alias}{parport_lowlevel} ||= "parport_pc";
+    $conf{"pre-install"}{pcmcia_core} ||= "/etc/rc.d/init.d/pcmcia start";    
+    $conf{"pre-install"}{plip} ||= "modprobe parport_pc ; echo 7 > /proc/parport/0/irq";
+}
 
 sub load_thiskind($;&) {
     my ($type, $f) = @_;
-    my @devs;
-    my $found;
 
-    if ($type eq 'scsi' || $type eq 'net') {
-	 @devs = pci_probing::main::probe($type);
-	 log::l("pci probe found " . scalar @devs . " $type devices");
-    }
-    my %devs;
-    foreach (@devs) {
+    my @devs = pci_probing::main::probe($type);
+    log::l("pci probe found " . scalar @devs . " $type devices");
+
+    my %devs; foreach (@devs) {
 	my ($text, $mod) = @$_;
 	$devs{$mod}++ and log::l("multiple $mod devices found"), next;
 	$drivers{$mod} or log::l("module $mod not in install table"), next;

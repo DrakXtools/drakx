@@ -148,7 +148,7 @@ sub all {
     my $d = shift;
 
     local *F;
-    opendir F, $d or die "all: can't opendir $d: $!\n";
+    opendir F, $d or die "all: can't open dir $d: $!\n";
     grep { $_ ne '.' && $_ ne '..' } readdir F;
 }
 

@@ -7,7 +7,6 @@ use Socket;
 
 use common qw(:common :file :system :functional);
 use detect_devices;
-use modules;
 use log;
 
 1;
@@ -131,11 +130,6 @@ sub sethostname {
 sub dnsServers {
     my ($netc) = @_;
     grep { $_ } map { $netc->{$_} } qw(dnsServer dnsServer2 dnsServer3);
-}
-
-sub getNet() {
-    modules::load_thiskind('net');
-    detect_devices::getNet();
 }
 
 sub findIntf {

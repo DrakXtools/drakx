@@ -101,7 +101,7 @@ sub doPartitionDisks($$) {
 sub rebootNeeded($) {
     my ($o) = @_;
     log::l("Rebooting...");
-    exit(0);
+    exit "true";
 }
 
 sub choosePartitionsToFormat($$) {

@@ -11,6 +11,7 @@ use smp;
 use pkgs;
 use fs;
 use lang;
+use c;
 
 1;
 

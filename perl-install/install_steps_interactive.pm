@@ -58,31 +58,7 @@ sub selectInstallClass($@) {
 		       [ @classes ], $o->default("installClass"));
 }
 
-sub setupSCSI {
-    my ($o, $auto) = @_;
-    my $w;
-    my @l = modules::load_thiskind('scsi', sub { 
-        $w = $o->wait_message('', 
-			      [ _("Installing driver for scsi card %s", $_->[0]),
-				$o->{installClass} ne "beginner" ? _("(module %s)", $_->[1]) : () 
-			      ]);
-    });
-    undef $w; # kill wait_message
-
-    return if $auto;
-    while (1) {
-	@l ?
-	  $o->ask_yesorno('', 
-			  [ _("Found ") . join(", ", map { $_->[0] } @l) . _(" scsi interfaces"),
-			    _("Do you have another one?") ], "No") :
-	  $o->ask_yesorno('', _("Do you have an scsi interface?"), "No") or return;
-
-	my $l = $o->ask_from_list('', _("What scsi card have you?"), [ modules::text_of_type('scsi') ]) or return;
-	my $m = modules::text2driver($l);
-	modules::load($m);
-	push @l, [ $l, $m ];
-    }
-}
+sub setupSCSI { setup_thiskind($_[0], 'scsi', $_[1]) }
 
 sub rebootNeeded($) {
     my ($o) = @_;
@@ -137,7 +113,8 @@ sub configureNetwork($) {
     if ($r =~ /^Don't/) {
 	$o->{netc}{NETWORKING} = "false";
     } elsif ($r !~ /^Keep/) {
-	my @l = network::getNet() or return die _("no network card found");
+	$o->setup_thiskind('net', 1, 1);
+	my @l = detect_devices::getNet() or die _("no network card found");
 
 	my $last; foreach ($::expert ? @l : $l[0]) {
 	    my $intf = network::findIntf($o->{intf} ||= [], $_);
@@ -215,4 +192,56 @@ Information on configuring your system is available in the post
 install chapter of the Official Linux Mandrake User's Guide."));
 }
 
-=cut
+sub loadModule {
+    my ($o, $type) = @_;
+    my @options;
+    
+    my $l = $o->ask_from_list('', 
+			      _("What %s card have you?", $type), 
+			      [ modules::text_of_type($type) ]) or return;
+    my $m = modules::text2driver($l);
+    if ($o->ask_from_list('', 
+_("In some cases, the %s driver needs to have extra information to work
+properly, although it normally works fine without. Would you like to specify
+extra options for it or allow the driver to probe your machine for the
+information it needs? Occasionally, probing will hang a computer, but it should
+not cause any damage.", $l),
+			  [ __("Autoprobe"), __("Specify options") ], "Autoprobe") ne "Autoprobe") {
+	@options = split ' ',
+	                 $o->ask_from_entry('',
+_("Here must give the different options for the module %s.
+Options are in format ``name=value name2=value2 ...''.
+For example you can have ``io=0x300 irq=7''", $l),
+					    _("Module options:"),
+					   );
+    }
+    modules::load($m, $type, @options);
+    $l, $m;
+}
+
+sub load_thiskind {
+    my ($o, $type) = @_;
+    my $w;
+    modules::load_thiskind($type, sub { 
+        $w = $o->wait_message('', 
+			      [ _("Installing driver for %s card %s", $type, $_->[0]),
+				$o->{installClass} ne "beginner" ? _("(module %s)", $_->[1]) : () 
+			      ]);
+    });
+}
+
+sub setup_thiskind {
+    my ($o, $type, $auto, $at_least_one) = @_;
+    my @l = $o->load_thiskind($type);
+
+    return if $auto && (@l || !$at_least_one);
+    while (1) {
+	@l ?
+	  $o->ask_yesorno('', 
+			  [ _("Found %s %s interfaces", join(", ", map { $_->[0] } @l), $type),
+			    _("Do you have another one?") ], "No") :
+	  $o->ask_yesorno('', _("Do you have an %s interface?", $type), "No") or return;
+
+	push @l, [ $o->loadModule($type) ];
+    }
+}

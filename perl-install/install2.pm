@@ -361,7 +361,6 @@ sub createBootdisk {
 }
 
 sub setupBootloader {
-    $o->{isUpgrade} or modules::read_conf("$o->{prefix}/etc/conf.modules");
     $o->setupBootloader;
 }
 sub configureX {
@@ -405,7 +404,7 @@ sub main {
     }
 
     modules::load_deps("/modules/modules.dep");
-    modules::read_conf("/tmp/conf.modules");
+    modules::get_stage1_conf("/tmp/conf.modules");
     modules::read_already_loaded();
 
     while (@_) {
