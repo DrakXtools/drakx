@@ -289,12 +289,8 @@ sub write {
 
     $lang or return;
 
-    my $h = { LC_COLLATE => $lang };
-    add2hash $h, { LC_CTYPE => $lang };
-    add2hash $h, { LC_MESSAGES => $lang };
-    add2hash $h, { LC_NUMERIC => $lang };
-    add2hash $h, { LC_MONETARY => $lang };
-    add2hash $h, { LC_TIME => $lang };
+    my $h = { RPM_INSTALL_LANG => $ENV{RPM_INSTALL_LANG} };
+    $h{$_} = $lang foreach qw(LC_COLLATE LC_CTYPE LC_MESSAGES LC_NUMERIC LC_MONETARY LC_TIME);
     if (my $l = $languages{$lang}) {
 	add2hash $h, { LANG => $l->[2], LANGUAGE => $l->[3], KDE_LANG => $l->[3], RPM_INSTALL_LANG => $l->[3] };
 

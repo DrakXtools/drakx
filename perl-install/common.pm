@@ -589,8 +589,12 @@ sub formatTime($) {
     my ($s, $m, $h) = gmtime($_[0]);
     if ($h) {
 	sprintf "%02d:%02d", $h, $m;
+    } elsif ($m > 1) {
+	_("%d minutes", $m);
+    } elsif ($m == 1) {
+	_("1 minute");
     } else {
-	sprintf _("%d minutes"), $m;
+	_("%d seconds", $s);
     }
 }
 
