@@ -1,3 +1,892 @@
+2004/11/18  Pixel  <pixel at mandrakesoft.com>
+
+	* diskdrake/hd_gtk.pm, install_steps_auto_install.pm,
+	partition_table/mac.pm, diskdrake/interactive.pm, standalone/harddrake2,
+	partition_table/raw.pm, partition_table/gpt.pm,
+	install_steps_interactive.pm: add some ";", remove some ";", as told by
+	perl_checker
+
+2004/11/17  Pixel  <pixel at mandrakesoft.com>
+
+	* diskdrake/interactive.pm: really remove the VG from internal list of
+	{lvms}, not on a copy
+
+	* install_steps_interactive.pm: fix indentation
+
+	* partition_table.pm: also remove "require partition_table::lvm_PV"
+	comment for perl_checker
+
+2004/11/17  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* crypto.pm: Update inline mirror list again (the previous one was broken)
+	Update the inline mirror list for mini isos
+	Integrate from trunk (mirror list update)
+	Integrate fixes for mini-ISOs from the trunk.
+
+	* install_any.pm: Integrate fixes for mini-ISOs from the trunk.
+
+2004/11/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/sound.pm: add new sound drivers from
+	kernel-tmb-2.6.7-2.tmb.6mdk
+
+	* modules.pm: on 10.0, b44 failled on newer cards; let's try bcm4400 too
+
+	* drakxtools.spec: bump requires on ldetect-lst b/c of s/3c90x/3c59x/
+	10.2-0.3mdk
+	fill in 10.2-0.2mdk's changelog
+	10-34.8.100mdk
+	10-34.7.100mdk
+
+	* standalone/service_harddrake: backport from 10.1: adapt to new nvidia
+	driver location due to
+	corporate now using DKMS
+
+2004/11/16  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/list.i386, rescue/list.ia64, rescue/list, rescue/list.ppc,
+	rescue/list.x86_64: move libperl.so from list.ARCH back to list, using a
+	wildcard
+
+	* fs/type.pm: for sunos:
+	  - "SunOS swap" and "Whole disk" don't use ufs
+	  - drop isSunOS(): replace it with testing {fs_type} eq 'ufs'
+	create isEmpty() and use it instead of simply testing {pt_type}, since
+	{pt_type} can be undef whereas {fs_type} is set
+	don't use pseudo fs_type "apple" for Apple Bootstrap partitions, better
+	only use {pt_type} for non mountable partitions
+
+	* fs/get.pm, diskdrake/interactive.pm, diskdrake/hd_gtk.pm: create
+	isEmpty() and use it instead of simply testing {pt_type}, since
+	{pt_type} can be undef whereas {fs_type} is set
+
+	* lang.pm: fix typo (thanks to bugzilla #12387)
+
+	* fsedit.pm, partition_table/lvm_PV.pm: handle more nicely raw_lvm_PV
+	(don't simply ignore them)
+
+	* partition_table/empty.pm: empty partition table means sectors #0 and #1
+	are zeroes, not simply sector #0
+	(this gives a chance to raw_lvm_PV which has its magic on sector #1)
+
+	* partition_table.pm: handle more nicely raw_lvm_PV (don't simply ignore
+	them)
+	don't die in will_tell_kernel() when the device is weird, since it is
+	normal when destroying a raw_lvm_PV
+	enhance readability
+	create isEmpty() and use it instead of simply testing {pt_type}, since
+	{pt_type} can be undef whereas {fs_type} is set
+
+	* detect_devices.pm: update ppc kernel modules detection & loading
+	cleanup get_mac_generation()
+
+	* tools/make_mdkinst_stage2, tools/mdkinst_stage2_tool: major switch from
+	ramdisk to clp
+	  - make_mdkinst_stage2 is now mdkinst_stage2_tool
+	(we don't keep the live when building the clp, mdkinst_stage2_tool is
+	able to create the clp from the live, or the live from the clp)
+
+	* partition_table/raw.pm: fix yaboot detection
+
+	* bootloader.pm: rename get_of_dev() -> dev2yaboot()
+	don't write boot OF in /tmp/of_boot_dev, better use dev2yaboot() instead
+	  - create yaboot2file() and use it
+	  - update read_lilo() for yaboot
+	  - update write_yaboot()
+	  - remove {useboot}
+	  - set {boot} to /dev/sda1 in suggest() instead of handling it in
+	write_yaboot()
+
+	* Xconfig/card.pm: enable UseFBDev in X configs on ppc, for rage128 and
+	radeon
+	set raw_LINES on every fglrx devices
+	drop broken code
+	  - setting VideoRam for i810
+	  - unsetting UseFBDev for r128 on ppc
+
+	* modules.pm: update ppc kernel modules detection & loading
+
+	* mdk-stage1/disk.c, mdk-stage1/tools.h, Makefile, mdk-stage1/cdrom.c,
+	mdk-stage1/config-stage1.h, rescue/Makefile, mdk-stage1/directory.c,
+	mdk-stage1/Makefile, docs/README, mdk-stage1/tools.c, rescue/.cvsignore,
+	rescue/make_rescue_img, mdk-stage1/network.c: major switch from ramdisk
+	to clp
+	  - mdkinst_stage2.bz2 is now mdkinst.clp
+	  - rescue_stage2.bz2 is now rescue.clp
+	  - make_mdkinst_stage2 is now mdkinst_stage2_tool
+	(we don't keep the live when building the clp, mdkinst_stage2_tool is
+	able to create the clp from the live, or the live from the clp)
+	  - all stage1 images now need cryptoloop & gzloop
+	  - the clp can be preloaded in memory or not (see
+	MEM_LIMIT_DRAKX_PRELOAD and MEM_LIMIT_RESCUE_PRELOAD)
+	  (for http & ftp, it *must* be preloaded)
+	  - we don't uncompress the ramdisk anymore since the decompression is
+	done on the fly, this makes the rescue boot much faster
+	  - function get_ramdisk_realname() is replaced with macro CLP_FILE_REL
+
+	* pkgs.pm: enhance analyse_kernel_name(), esp. to handle i686-up-64GB
+
+	* any.pm: don't write boot OF in /tmp/of_boot_dev, better use dev2yaboot()
+	instead
+
+	* tools/Makefile: make_mdkinst_stage2 is no more, hail mdkinst_stage2_tool
+
+2004/11/16  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/service_harddrake, harddrake/data.pm: on startup, redo ethX
+	aliases
+	on startup, redo ethX aliases
+
+2004/11/15  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_interactive.pm: 
+	  - special bootstrap partition warning for IBM mac_generation
+	  - no "OldWorld or Unknown machine" for IBM mac_generation
+
+2004/11/15  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* drakxtools.spec: new release for new perl
+
+	* share/list: Adjust perl architecture, now that we don't have threads
+	anymore
+
+2004/11/14  Funda Wang <fundawang at linux.net.cn>
+
+	* lang.pm: switch to gbk in zh_CN
+
+2004/11/13  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/list: add partimage
+
+2004/11/12  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps.pm, install_steps_interactive.pm: no "auto install floppy"
+	on ppc
+
+	* mdk-stage1/Makefile.common: cleanup
+	simplify
+	build init using $(DIET) just like stage2-* (needed for ppc, and nicer),
+	unify LDFLAGS_INIT and LDFLAGS_STAGE1
+	remove GLIBC_LDFLAGS_STAGE1 and DIETLIBC_LDFLAGS_STAGE1 since they were
+	not used everywhere,
+	and so it was not easy to understand
+	drop unused INIT_LIBC, GLIBC_LIBC, DIETLIBC_LIBC (all 3 were empty at
+	the moment)
+
+	* tools/ddcprobe/Makefile: disable ddcprobe again - it doesn't work right,
+	causing the installer to halt
+	with a divide by zero error
+
+	* share/themes-galaxy.rc: the color of the categories of steps is better
+	in the theme
+	(it was the only part not defined in the theme but in the code)
+
+	* mdk-stage1/Makefile: build init using $(DIET) just like stage2-* (needed
+	for ppc, and nicer),
+	unify LDFLAGS_INIT and LDFLAGS_STAGE1
+	remove GLIBC_LDFLAGS_STAGE1 and DIETLIBC_LDFLAGS_STAGE1 since they were
+	not used everywhere,
+	and so it was not easy to understand
+	drop unused INIT_LIBC, GLIBC_LIBC, DIETLIBC_LIBC (all 3 were empty at
+	the moment)
+	don't use minilibc.h on ppc
+	simplify arch dependent config based on dietlibc vs glibc.
+	this patch may be wrong for ppc which now used dietlibc but may prefer
+	init-libc-headers.h over minilibc.h
+	(need testing)
+	some defines are not arch dependent
+
+	* install_gtk.pm: the color of the categories of steps is better in the
+	theme
+	(it was the only part not defined in the theme but in the code)
+	fix converting the background color
+
+2004/11/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/pt.po, share/po/mk.po: updated Macedonian file
+
+2004/11/10  Pixel  <pixel at mandrakesoft.com>
+
+	* drakxtools.spec: drakauth: add SmartCard authentication
+
+	* authentication.pm: 
+	  - correctly restore pam.d/system-auth when setting "local"
+	authentication
+	  - no use_first_pass on "auth sufficient pam_unix.so" line for
+	pam_castella
+	  - correctly restore pam.d/system-auth when setting "local"
+	authentication
+	  - no use_first_pass on "auth sufficient pam_unix.so" line for
+	pam_castella
+
+2004/11/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/adsl_consts.pm: sync ADSL ISPs DB with HEAD
+
+	* drakxtools.spec: 10.2-0.1mdk
+	merge 10.1-27mdk's changelog from MDK10.1 branch
+	merge in lost changelog
+	10.1-27.1.101mdk
+	fix 10.1-27mdk's changelog
+
+	* standalone/service_harddrake: load yenta_socket and the like for PCMCIA
+	controllers
+
+	* standalone/logdrake: fix logdrake speed (should have been commited long
+	time ago)
+	fix logdrake speed (should have been commited long time ago)
+
+	* detect_devices.pm (isLaptop) fix it on non PPC arches
+
+	* network/ethernet.pm (mapIntfToDevice) backport 9box detection fix:
+	do not try to match usb devices since ldetect doesn't return enough data
+
+	* share/rpmsrate: install drivers for ipw2xOO
+	sync relevant "hardware/driver matching" bits from Head
+
+	* network/isdn_consts.pm: backport support for Philips Semiconductors DSL
+	card
+
+2004/11/10  Vincent Guardiola <vguardiola at mandrakesoft.com>
+
+	* authentication.pm: add pm_mkhomedir
+
+2004/11/09  Funda Wang <fundawang at linux.net.cn>
+
+	* pkgs.pm: reverted pkgs, Sorry
+	s/fctix/fcitx. Critical typo
+
+	* lang.pm: s/fctix/fcitx. Critical typo
+
+2004/11/09  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2004/11/09  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/tools.pm: introduce network::tools::get_interface_status
+
+2004/11/09  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/card.pm: fix regexp given to matching_driver (otherwise
+	smartcard:xxx matches)
+	fix regexp given to matching_driver (otherwise smartcard:xxx matches)
+
+2004/11/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* detect_devices.pm (getSagem) do not probe for old adiusbadsl driver
+	(which is deprecated
+	by eagle-usb for more than one year)
+
+	* network/adsl_consts.pm: update/add ADSL ISP entries (Benoit Audouard)
+	reorder finnish entry
+
+	* lang.pm: backport s/fctix/fcitx/ fix from HEAD
+
+	* drakxtools.spec: bump require on ldetect-lst b/c of
+	s/adiusbadsl/eagleusb/
+
+	* share/theme-editor.pl: basic port from Gtk-1.2.x to Gtk+-2.x
+
+2004/11/08  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/tg.po, share/po/pt.po: updated Tajik file
+
+2004/11/08  Pixel  <pixel at mandrakesoft.com>
+
+	* common.pm, install2.pm: cp_af() is missing in perl-MDK-Common
+	1.1.11-2mdk
+
+	* lvm.pm: call pvremove on every PVs when destroying a VG (to clear the
+	LVM2 magic) (bugzilla #11579)
+
+	* Xconfig/card.pm, do_pkgs.pm, bootloader.pm: backport
+	check_kernel_module_packages() from 10.1 to adapt to dkms proprietary
+	packages
+
+2004/11/08  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: do not use slicing when selecting single values
+
+2004/11/07  huftis
+
+	* share/po/nn.po: More translated.
+
+2004/11/07  Pixel  <pixel at mandrakesoft.com>
+
+	* authentication.pm: SmartCard authentication needs pkg castella-pam
+	SmartCard authentication needs pkg castella-pam
+
+2004/11/06  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2004/11/05  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/network.pm: hide ifcfg files for non-root users if they contain
+	a WEP key (#12177)
+	hide ifcfg files for non-root users if they contain a WEP key (#12177)
+
+	* mdk-stage1/pcmcia_/probe.c: merge from pcitable
+
+2004/11/05  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po, share/po/de.po: updated Estonian and German files
+
+2004/11/05  Pixel  <pixel at mandrakesoft.com>
+
+	* mdk-stage1/directory.c: RAMDISK_LOCATION_REL is a better name than
+	RAMDISK_LOCATION
+	create choose_iso_in_directory() out of try_with_directory()
+
+	* mdk-stage1/tools.c: we use pivot_root for rescue, so don't umount
+	STAGE2_LOCATION
+	saving stage1 resolv.conf is done in finish_preparing() with no special
+	code needed for rescue
+	(as was done in save_stuff_for_rescue())
+	RAMDISK_LOCATION_REL is a better name than RAMDISK_LOCATION
+
+	* Makefile: do not gzip pm files anymore (since we will soon use
+	compressed loopback, this is not useful anymore)
+	create install/stage2/mdkinst.kernels which contains the list of kernels
+	known by stage2.
+	this replaces looking at install/stage2/live/modules/modules.cz-xxx
+	(why? cuz install/stage2/live is going to be removed!)
+	simplify
+
+	* mdk-stage1/network.c: use install/stage2/mdkinst.kernels to check stage2
+	kernel version instead of install/stage2/live/lib/modules.cz-xxx
+
+	* mdk-stage1/config-stage1.h: RAMDISK_LOCATION_REL is a better name than
+	RAMDISK_LOCATION
+
+	* share/list: do not gzip pm files anymore (since we will soon use
+	compressed loopback, this is not useful anymore)
+
+	* mdk-stage1/Makefile: 
+	  - no need to build stage1-cdrom nor stage1-network for MOVE
+	  - for stage1-full, no special .c is needed for MOVE
+	cleanup (hoist MOVE_ADDSRC in STAGE1SRC)
+	remove duplicates in STAGE1OBJS-FULL, this removes make warnings
+
+	* authentication.pm: add "Smart Card" authentication (using pam_castella)
+	(as asked by flepied)
+	add "Smart Card" authentication (using pam_castella) (as asked by
+	flepied)
+
+	* rescue/tree/usr/share/symlinks, mdk-stage1/stage1.c: keep the tmpfs and
+	rescue in /tmp/stage2
+	(this allows to mount the rescue read-only)
+
+	* rescue/tree/etc/rc.sysinit: umount /stage1 when /etc/mtab exists to
+	remove a warning
+	free up stage1 memory
+	fix typo
+	keep the tmpfs and rescue in /tmp/stage2
+	(this allows to mount the rescue read-only)
+
+2004/11/04  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/eu.po: updated Basque po file
+
+2004/11/04  Pixel  <pixel at mandrakesoft.com>
+
+	* mdk-stage1/stage1.h: MODE_RAMDISK is now unused
+	drop IS_SPECIAL_STAGE2 in favor of IS_RESCUE
+
+	* mdk-stage1/modules.c: LIVE_LOCATION is better named LIVE_LOCATION_REL
+	without the leading "/"
+	cleanup code using kernel_module_extension()
+
+	* mdk-stage1/stage1.c: 
+	  - create mount_clp_may_preload() out of handle_clp()
+	  - rename handle_clp() to handle_move_clp() and simplify its use
+	IMAGE_LOCATION_REAL is better named STAGE2_LOCATION in MOVE
+	replace RAW_LOCATION_REL with IMAGE_LOCATION_REL
+	(the absolute symlink will now be relative, but that's ok here)
+	simplify since STAGE2_LOCATION is now valid for live installs before
+	pivot_root
+	(due to previous stage1.c commit)
+	STAGE2_LOCATION symlink is now relative instead of absolute
+	(relies on the fact that STAGE2_LOCATION and IMAGE_LOCATION are both in
+	/tmp in non MOVE)
+	rename STAGE2_LOCATION_REL into STAGE2_LOCATION_ROOTED
+	(since STAGE2_LOCATION_REL is not relative, it's simply absolute when
+	chrooted)
+	create STAGE2_LOCATION symlink if it is not a directory (well more
+	precisely when it doesn't exist)
+	LIVE_LOCATION is better named LIVE_LOCATION_REL without the leading "/"
+
+	* mdk-stage1/network.c: LIVE_LOCATION is better named LIVE_LOCATION_REL
+	without the leading "/"
+	create str_ftp_error()
+
+	* mdk-stage1/config-stage1.h: 
+	  - create mount_clp_may_preload() out of handle_clp()
+	  - rename handle_clp() to handle_move_clp() and simplify its use
+	add some comments
+	IMAGE_LOCATION_REAL is better named STAGE2_LOCATION in MOVE
+	  - STAGE2_LOCATION is unused in MOVE
+	  - IMAGE_LOCATION_REAL is unused in non MOVE
+	replace RAW_LOCATION_REL with IMAGE_LOCATION_REL
+	(the absolute symlink will now be relative, but that's ok here)
+	new macro IMAGE_LOCATION_REL
+	rename STAGE2_LOCATION_REL into STAGE2_LOCATION_ROOTED
+	(since STAGE2_LOCATION_REL is not relative, it's simply absolute when
+	chrooted)
+	LIVE_LOCATION is better named LIVE_LOCATION_REL without the leading "/"
+
+	* mdk-stage1/tools.h: 
+	  - create mount_clp_may_preload() out of handle_clp()
+	  - rename handle_clp() to handle_move_clp() and simplify its use
+	test_that_cd() is now image_has_stage2()
+
+	* mdk-stage1/tools.c: 
+	  - create mount_clp_may_preload() out of handle_clp()
+	  - rename handle_clp() to handle_move_clp() and simplify its use
+	fix typo
+	create save_fd() out of copy_file()
+	MODE_RAMDISK is now unused
+	LIVE_LOCATION is better named LIVE_LOCATION_REL without the leading "/"
+	test_that_cd() is now image_has_stage2()
+	drop IS_SPECIAL_STAGE2 in favor of IS_RESCUE
+
+	* mdk-stage1/url.c, mdk-stage1/url.h: create str_ftp_error()
+
+	* mdk-stage1/directory.c: LIVE_LOCATION_REL doesn't exist anymore in MOVE
+	more comment
+	LIVE_LOCATION is better named LIVE_LOCATION_REL without the leading "/"
+	use image_has_stage2() (even if not equivalent for rescue since we now
+	check the stage2 stuff instead, but it should do)
+	drop IS_SPECIAL_STAGE2 in favor of IS_RESCUE
+
+	* mdk-stage1/cdrom.c: more comment
+	test_that_cd() is now image_has_stage2()
+	drop IS_SPECIAL_STAGE2 in favor of IS_RESCUE
+
+2004/11/04  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Create cfg dir if needed. Use xorg.conf.
+	Touch /etc/dhcpd.conf.etherboot.kernel if missing.
+	Ignore vmnet for broadcast address.
+	Start reworking PXE support.
+	Create cfg dir if needed, ignore vmnet for broadcast address.
+	Use xorg.conf. Touch dhcp.conf.etherboot.kernel.
+
+2004/11/02  Pixel  <pixel at mandrakesoft.com>
+
+	* mdk-stage1/tools.c: rename MEM_LIMIT_RAMDISK into MEM_LIMIT_DRAKX
+	compile less things when MANDRAKE_MOVE is defined
+	(needed so that future commits can restrict define's in config-stage1.h)
+
+	* mdk-stage1/directory.c: cleanup (remove warning when compiling with
+	MANDRAKE_MOVE defined)
+
+	* mdk-stage1/config-stage1.h: rename MEM_LIMIT_RAMDISK into
+	MEM_LIMIT_DRAKX
+
+	* mdk-stage1/disk.h, mdk-stage1/tools.h, mdk-stage1/stage1.c,
+	mdk-stage1/network.h: compile less things when MANDRAKE_MOVE is defined
+	(needed so that future commits can restrict define's in config-stage1.h)
+
+	* mdk-stage1/disk.c: use IMAGE_LOCATION_DIR where it should be
+	compile less things when MANDRAKE_MOVE is defined
+	(needed so that future commits can restrict define's in config-stage1.h)
+
+	* mdk-stage1/network.c: normalize code
+	rename MEM_LIMIT_RAMDISK into MEM_LIMIT_DRAKX
+	normalize code
+	use IMAGE_LOCATION_DIR where it should be
+	compile less things when MANDRAKE_MOVE is defined
+	(needed so that future commits can restrict define's in config-stage1.h)
+
+2004/11/02  rstandtke
+
+	* share/po/de.po: some fixes
+
+2004/11/02  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* detect_devices.pm: perl_checker cleanups
+	(dmidecode) provide more fields
+	(computer_info) simplify
+	(dmidecode) handle multiple devices with same name
+	(computer_info) split it out of dmidecode()
+
+	* standalone/harddrake2, harddrake/data.pm: display more information
+
+	* install_steps.pm (setupBootloaderBefore) dmidecode() was renamed as
+	computer_info()
+
+2004/10/29  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Anthill #1134 - advise user about anacron.
+
+2004/10/28  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
+
+	* pkgs.pm: IA-64 and X86-64 are full 64-bit arches thus don't need
+	kernel-enterprise
+	IA-64 and X86-64 are full 64-bit arches and thus don't need
+	kernel-enterprise
+
+2004/10/28  Keld Jørn Simonsen  <keld at dkuug.dk>
+
+	* share/po/da.po: corrections of errors
+	gi/perl-install/share/po/da.po
+
+2004/10/28  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/isdn_consts.pm: support Philips Semiconductors DSL card
+
+2004/10/28  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: bump buildrequires on ldetect and requires on
+	ldetect-lst so that
+	we've working support for freebox with USB link
+	10.1-27mdk
+
+2004/10/28  Vincent Guardiola <vguardiola at mandrakesoft.com>
+
+	* authentication.pm: remove idmap from winbind AD
+	change description for Active directory
+	Remove sasl entry
+	Add check button for tls
+
+2004/10/27  Pixel  <pixel at mandrakesoft.com>
+
+	* raid.pm: since we need mdadm, ensure we have it (bugzilla #12146)
+
+	* diskdrake/interactive.pm: warn about created partition with a given
+	mount point but not formatted
+	since we need mdadm, ensure we have it (bugzilla #12146)
+
+	* any.pm: 
+	  - handle setting memsize mem= kernel parameter in a special function
+	  - rely on pack_append() to remove dups (using $uniq_dict_appends) in
+	set_append_with_key()
+	(drawback: it doesn't keep the order anymore)
+	split {get,set}_append() into {get,set}_append_with_key() and
+	{get,set}_append_simple()
+	remove dead code
+	modifying $e->{append} is useless since we override it with $append
+
+	* bootloader.pm: 
+	  - handle setting memsize mem= kernel parameter in a special function
+	  - rely on pack_append() to remove dups (using $uniq_dict_appends) in
+	set_append_with_key()
+	(drawback: it doesn't keep the order anymore)
+	split {get,set}_append() into {get,set}_append_with_key() and
+	{get,set}_append_simple()
+	many kernel parameters alike "console=tty0 console=ttyS0,57600" can take
+	different values, so we now take the safe side and only remove dups for
+	parameters we know the last parameter is used (bugzilla #12055)
+
+	* install_steps.pm: split {get,set}_append() into
+	{get,set}_append_with_key() and {get,set}_append_simple()
+	nicer
+
+	* diskdrake/hd_gtk.pm: use ToggleButton instead of Button so that selected
+	partition is visually toggled
+
+2004/10/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* detect_devices.pm (getUPS) fix again MGE USB UPSes
+	(getUPS) fix again MGE USB UPSes
+	(getUPS) fix again MGE USB UPSes
+
+	* standalone/drakups: backport working drakups
+
+	* network/ethernet.pm (mapIntfToDevice) do not try to match usb devices
+	since ldetect doesn't return
+	enough data (thus fixing 9box string)
+
+2004/10/27  Warly  <warly at mandrakesoft.com>
+
+	* install_any.pm: add more log into find_root_part
+
+2004/10/26  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
+
+	* share/list.x86_64: add 'synaptics' module so that testing works
+	add 'synaptics' module so that testing works
+
+	* fs/type.pm: older partition types (ntfs) are also available to x86_64
+	older partition types (ntfs) are also available to x86_64
+
+	* bootloader.pm: run grub chrooted
+	run grub chrooted
+
+2004/10/26  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/eu.po: updated Basque file
+
+2004/10/26  Pixel  <pixel at mandrakesoft.com>
+
+	* authentication.pm: configure sshd to use PAM when needed (sshd config
+	file is modified, but i did not test more)
+
+	* install_any.pm: help perl_checker
+	in upgrade, when we need to migrate device names, we must write the
+	fstab
+	in upgrade, when we need to migrate device names, we must write the
+	fstab
+
+	* run_program.pm: do not use die when forked, use log::l + c::_exit
+	instead
+	do not use die when forked, use log::l + c::_exit instead
+
+	* install_steps_interactive.pm: in upgrade, when we need to migrate device
+	names, we must write the fstab
+	in upgrade, when we need to migrate device names, we must write the
+	fstab
+
+	* raid.pm: newly created raids must have a fs_type (this was dropped in
+	rev 1.45, it was an error)
+	newly created raids must have a fs_type (this was dropped in rev 1.45,
+	it was an error)
+
+	* Xconfig/various.pm, standalone/drakboot, bootloader.pm,
+	standalone/bootloader-config: detectloader must handle specially
+	raid-extra-boot=mbr-only (bugzilla #12089)
+
+	* install_steps.pm: detectloader must handle specially
+	raid-extra-boot=mbr-only (bugzilla #12089)
+	in upgrade, when we need to migrate device names, we must write the
+	fstab
+	in upgrade, when we need to migrate device names, we must write the
+	fstab
+
+2004/10/26  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* crypto.pm: Remove spurious "my"
+
+2004/10/26  Vincent Guardiola <vguardiola at mandrakesoft.com>
+
+	* authentication.pm: Fix net join for winbind
+	Changer order dialog in AD
+
+2004/10/26  Warly  <warly at mandrakesoft.com>
+
+	* install_any.pm: include support of the oem configuration file to display
+	the correct product name
+
+2004/10/25  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Some fixed
+
+2004/10/25  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/eu.po, share/po/gl.po: updated Basque and Galician files
+
+2004/10/25  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* share/po/fr.po: Merge French translations from cooker
+
+2004/10/21  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* standalone/harddrake2: 
+	  - backport patches to MDK-10-update branch for oem
+
+	* standalone/printerdrake: 
+	  - backport fixes to MDK-10-update
+
+2004/10/21  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: remove trailing slashes
+
+2004/10/20  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/gl.po: updated Galician file
+
+2004/10/19  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* standalone/printerdrake: 
+	  - perl_checker fixes
+	  - don't hardcore distroname
+	  - don't trigger help system when mandrake-doc-common is not installed
+	  - don't trigger bug report in oem mode
+
+	* standalone/harddrake2: 
+	  - don't trigger help system when mandrake-doc-common is not installed
+	  - don't trigger bug report in oem mode
+	  - don't hardcode distro name (usefull for oem to change the distro
+	name at only one place)
+
+2004/10/19  Pixel  <pixel at mandrakesoft.com>
+
+	* ugtk2.pm: no need to set $::o->{locale} anymore
+	(it was introduced in 1.172, maybe for create_box_with_title(), but
+	doesn't seem useful anymore)
+
+	* standalone/net_monitor: really fix typo (ie revert gtknew() patch)
+	fix typo
+	simplify
+
+2004/10/19  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Repair FTP supplementary media with overriding of
+	rpmsrate and compssUsers.pl
+	Installation with a ftp supplementary media (for mini-isos) :
+	inline the mirror list (since fetching it causes weird network
+	problems).
+	Fix the handling of relative urls in ftp media when fetching hdlists
+	file.
+
+	* pkgs.pm: Installation with a ftp supplementary media (for mini-isos) :
+	inline the mirror list (since fetching it causes weird network
+	problems).
+	Fix the handling of relative urls in ftp media when fetching hdlists
+	file.
+
+	* install_steps_interactive.pm: This deserves an explanation
+	Installation with a ftp supplementary media (for mini-isos) :
+	inline the mirror list (since fetching it causes weird network
+	problems).
+	Fix the handling of relative urls in ftp media when fetching hdlists
+	file.
+
+	* crypto.pm: There are mirrors in many new countries now. (and sort the
+	list)
+	Installation with a ftp supplementary media (for mini-isos) :
+	inline the mirror list (since fetching it causes weird network
+	problems).
+	Fix the handling of relative urls in ftp media when fetching hdlists
+	file.
+
+2004/10/18  Warly  <warly at mandrakesoft.com>
+
+	* crypto.pm: update version checking code of crypto.pm
+
+2004/10/17  Keld Jørn Simonsen  <keld at dkuug.dk>
+
+	* share/po/da.po: updates
+	gi/perl-install/share/po/da.po
+
+2004/10/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po: update
+
+2004/10/16  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_monitor (update) do not re-select the default interface
+	every 5 seconds
+
+2004/10/16  rstandtke
+
+	* share/po/de.po: added some translations
+
+2004/10/15  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/it.po, share/po/eu.po, share/po/es.po, share/po/am.po: updated
+	Basque and Amharic files
+
+2004/10/15  Pixel  <pixel at mandrakesoft.com>
+
+	* network/adsl.pm: cleanup
+
+	* network/tools.pm: cleanup thanks to perl_checker
+
+	* network/netconnect.pm: cleanup thanks to perl_checker
+	make perl_checker happy
+
+2004/10/14  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2004/10/14  Pixel  <pixel at mandrakesoft.com>
+
+	* lvm.pm: no need to run vgscan and vgchange in standalone
+	(nb: /etc/lvmtab is no more used, so i also dropped that check)
+
+	* network/tools.pm: simplify
+	cleanup thanks to perl_checker
+
+	* standalone/fileshareset: cleanup
+	perl_checker compliance
+
+	* rescue/devices.pl: create /dev/md* devices in rescue
+
+	* diskdrake/interactive.pm: document UUID md field
+
+	* standalone/drakups: perl_checker compliance
+
+	* standalone/harddrake2, standalone/service_harddrake: cleanup thanks to
+	perl_checker
+
+	* services.pm: simplify
+	simplify
+
+	* Xconfig/resolution_and_depth.pm: even if bugzilla #9755 says 24 bpp is
+	not valid for vmware, Nora Etukudo says the contrary on cooker.
+	the limitation seems to be "The guest X server must run at the same
+	depth and bpp as the host" which is hard to enforce in XFdrake
+
+	* raid.pm: put UUID instead of devices in mdadm.conf to be more device
+	naming independant
+	(as requested by Luca Berra on cooker)
+
+	* rescue/list: add /sbin/lvm2 to the rescue
+
+	* share/compssUsers.pl: remove unneeded parentheses
+
+2004/10/13  Antoine Ginies  <aginies at mandrakesoft.com> 
+
+	* mdk-stage1/tools.c, mdk-stage1/stage1.h, mdk-stage1/tools.h,
+	mdk-stage1/url.c, mdk-stage1/stage1.c, mdk-stage1/network.c,
+	mdk-stage1/network.h, mdk-stage1/url.h: add new installation method (ka)
+
+	* mdk-stage1/stage1-data/stage1-with-ka.tar.bz2: add stage1 with ka-tools
+
+2004/10/13  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2004/10/13  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/fileshareset: "portmap status" prints "portmap (pid XXXX) is
+	running..." which bothers progs calling fileshareset (eg: gnome)
+
+	* install_steps_interactive.pm: make perl_checker happy
+	don't ask the security level in firewire meta_class
+	don't ask the security level in firewire meta_class
+
+2004/10/13  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakfont: remove TODO entry regarding configurnig programs
+	that uses fontconfig
+
+2004/10/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/ethernet.pm (get_eth_cards) workaround more buggy drivers that
+	returns a bogus driver name for the GDRVINFO command of the ETHTOOL
+	ioctl
+
+	* standalone/drakconnect (del_intf) fix crash introduced by trainee just
+	before the release :-(
+
+	* drakxtools.spec: 10.1-26mdk
+
+	* share/po/br.po: update
+
+2004/10/11  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: in grub menu.lst, keep previous "serial ..." and
+	"terminal ..." lines (bugzilla #12054)
+
+2004/10/11  Reinout van Schouwen  <reinout at cs.vu.nl>
+
+	* share/po/nl.po: Updated Dutch (nl) translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+	* DrakX
+
+2004/10/11  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/ethernet.pm (get_eth_cards) fix another lying module
+
+	* drakxtools.spec: 10.1-25mdk
+
+2004/10/11  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: use k3b-dvd by default
+
 2004/10/11  Thierry Vignaud  <tvignaud at mandrakesoft.com>
 
 	* drakxtools.spec: 10.1-24mdk
@@ -40929,7 +41818,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.985 2004/10/08 05:28:16 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.986 2004/10/11 05:30:08 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
