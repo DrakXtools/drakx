@@ -85,7 +85,6 @@
 #
 # TODO:
 #		4 - change NET::FTP to ftp cmds.  
-#		5 - add icons (win & lin) on adv_what_all.
 #	        6 - calcul disk space.
 #		   use quota.
 #               7 - ssh & rsync -> expect or .identity.pub/authorized_keys 
@@ -143,6 +142,7 @@ if ("@ARGV" =~ /--help|-h/) {
                        in /var/backup directory so write other directory
 	               to change to change it.
 --conf_file      : to read other configuration file. 
+--debug		 : permit to see all debug messages.
 );
     exit(0);
 }
@@ -209,6 +209,8 @@ my $table;
 my @user_list_backuped = ();
 my @files_corrupted = ();
 my $remove_user_before_restore = 1;
+my @file_list_to_send_by_ftp = ();
+
 
 # config. FILES -> Default PATH  & Global variables.
 my @sys_files = ("/etc");
@@ -284,7 +286,9 @@ sub read_passwd {
 sub the_time {
     $the_time = "_";
     $the_time .= localtime->year() + 1900;
+    if (localtime->mon() < 9 ) { $the_time .= "0"; }
     $the_time .= localtime->mon() +1;
+    if (localtime->mday() < 10 ) { $the_time .= "0"; }
     $the_time .= localtime->mday();
     $the_time .= "_";
     if (localtime->hour() < 10 ) { $the_time .= "0"; }
@@ -337,6 +341,7 @@ sub save_conf_file {
     if ($comp_mode) {push @cfg_list, "OPTION_COMP=TAR.BZ2\n"} 
     else { push @cfg_list, "OPTION_COMP=TAR.GZ\n"   }
     output_p($cfg_file, @cfg_list);
+    system("chmod 600 $cfg_file");
     save_cron_files();
 }
 
@@ -442,18 +447,33 @@ sub return_path {
 }
 
 sub ftp_client {
-# liste des fichiers à envoyer  
     use Net::FTP; 
-    my $ftp = Net::FTP->new("$host_name"); 
+    my $ftp;
+
+    $DEBUG and print "file list to send : $_\n "  foreach @file_list_to_send_by_ftp;
+    $DEBUG and $ftp = Net::FTP->new("$host_name", Debug => 1); 
+    $DEBUG or  $ftp = Net::FTP->new("$host_name", Debug => 0); 
     $ftp->login("$login_user","$passwd_user"); 
     $ftp->cwd("$host_path"); 
 #   $ftp->get("/ce/repertoire/ce.fichier"); 
-# put ( LOCAL_FILE [, REMOTE_FILE ] )
-
-    $ftp->send("$save_path/*"); 
+    foreach (@file_list_to_send_by_ftp) {
+	$ftp->put("$_");
+    }
     $ftp->quit; 
 }
 
+sub ssh_client {
+#  $res = Net::SSLeay::write($ssl, $msg);  # Perl knows how long $msg is
+#         die_if_ssl_error("ssl write");
+#         shutdown S, 1;  # Half close --> No more output, sends EOF to server
+#         $got = Net::SSLeay::read($ssl);         # Perl returns undef on failure
+#         die_if_ssl_error("ssl read");
+#         print $got;
+                
+#         Net::SSLeay::free ($ssl);               # Tear down connection
+#         Net::SSLeay::CTX_free ($ctx);
+#         close S;
+}
 
 sub build_backup_files {
     my $path_name;
@@ -501,30 +521,38 @@ sub build_backup_files {
  		if (grep /^backup\_incr\_sys/, @dir_content) { 
 		    my @more_recent = grep /^backup\_incr\_sys/, sort @dir_content; 
 		    $more_recent = pop @more_recent;
+		    $DEBUG and print "more recent file: $more_recent\n ";
  system("find @sys_files -cnewer $save_path/$more_recent \! -type d -print > $save_path/list_incr_sys$the_time.txt");
 		    if (!cat_("$save_path/list_incr_sys$the_time.txt")) {
 			system("rm $save_path/list_incr_sys$the_time.txt");
 		    } else {
  system("$tar_cmd_sys -f $save_path/backup_incr_sys$the_time.$tar_ext -T $save_path/list_incr_sys$the_time.txt");
+ push @file_list_to_send_by_ftp, "$save_path/backup_incr_sys$the_time.$tar_ext";
+ push @file_list_to_send_by_ftp, "$save_path/list_incr_sys$the_time.txt";
 		    }
 		}
   		elsif (grep /^backup\_base\_sys/,  @dir_content) { 
 		    my @more_recent = grep /^backup\_base\_sys/, sort @dir_content; 
 		    $more_recent = pop @more_recent;
+		    $DEBUG and print "more recent file: $more_recent\n ";
   system("find @sys_files -cnewer $save_path/$more_recent \! -type d -print > $save_path/list_incr_sys$the_time.txt");
 		    if (!cat_("$save_path/list_incr_sys$the_time.txt")) {
 			system("rm $save_path/list_incr_sys$the_time.txt");
 		    } else {
   system("$tar_cmd_sys -f $save_path/backup_incr_sys$the_time.$tar_ext -T $save_path/list_incr_sys$the_time.txt");
+  push @file_list_to_send_by_ftp, "$save_path/backup_incr_sys$the_time.$tar_ext";
+  push @file_list_to_send_by_ftp, "$save_path/list_incr_sys$the_time.txt";
 		    }
 		   }
 		else { 
   system("$tar_cmd_sys -f $save_path/backup_base_sys$the_time.$tar_ext @sys_files"); 
+  push @file_list_to_send_by_ftp, "$save_path/backup_base_sys$the_time.$tar_ext";
 		}
 	    }
 	    else {
-  system("cd $save_path && rm -f backup_sys* backup_base_sys* backup_incr_sys*");
+#  system("cd $save_path && rm -f backup_sys* backup_base_sys* backup_incr_sys*");
   system("$tar_cmd_sys -f $save_path/backup_sys$the_time.$tar_ext @sys_files");
+  push @file_list_to_send_by_ftp, "$save_path/backup_sys$the_time.$tar_ext";
 	    }
 	}
 	
@@ -534,6 +562,7 @@ sub build_backup_files {
 	if (@list_other) {
   system("cd $save_path && rm -f backup_other* ");
   system("$tar_cmd_other -f $save_path/backup_other$the_time.$tar_ext @list_other");
+  push @file_list_to_send_by_ftp, "$save_path/backup_other$the_time.$tar_ext";
 	    foreach (@list_other) { push @list_other_, $_ . "\n"; }
 	    output_p( $save_path . '/list_other', @list_other_);    
 	}
@@ -549,29 +578,37 @@ sub build_backup_files {
 		    if (grep(/^backup\_incr\_user\_$user\_/, @dir_content)) { 
 			my @more_recent = grep /^backup\_incr\_user\_$user\_/, sort @dir_content; 
 			$more_recent = pop @more_recent;
+			$DEBUG and print "more recent file: $more_recent\n ";
  system("find $path_name -cnewer $save_path/$more_recent \! -type d -print > $save_path/list_incr_user_$user$the_time.txt");
 			if (!cat_("$save_path/list_incr_user_$user$the_time.txt")) {
 			    system("rm $save_path/list_incr_user_$user$the_time.txt");
 			} else {
  system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext -T $save_path/list_incr_user_$user$the_time.txt");
+ push @file_list_to_send_by_ftp, "$save_path/backup_incr_user_$user$the_time.$tar_ext";
+ push @file_list_to_send_by_ftp, "$save_path/list_incr_user_$user$the_time.txt";
 			}
 		    }
 		    elsif (grep /^backup\_base\_user\_$user\_/, @dir_content) { 
 			my @more_recent = grep /^backup\_base\_user\_$user\_/, sort @dir_content; 
 			$more_recent = pop @more_recent;			
+			$DEBUG and print "more recent file: $more_recent\n ";
  system("find $path_name -cnewer $save_path/$more_recent \! -type d -print > $save_path/list_incr_user_$user$the_time.txt");
 			if (!cat_("$save_path/list_incr_user_$user$the_time.txt")) {
 			    system("rm $save_path/list_incr_user_$user$the_time.txt");
 			} else {
  system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext -T $save_path/list_incr_user_$user$the_time.txt");
+ push @file_list_to_send_by_ftp, "$save_path/backup_incr_user_$user$the_time.$tar_ext";
+ push @file_list_to_send_by_ftp, "$save_path/list_incr_user_$user$the_time.txt";
 			}
 		    }
 		    else {
 			system("$tar_cmd_user -f $save_path/backup_base_user_$user$the_time.$tar_ext $path_name");
+			push @file_list_to_send_by_ftp, "$save_path/backup_base_user_$user$the_time.$tar_ext";
 		    }
 		} else {
 		    system("cd $save_path && rm -f backup_user_$_* backup_base_user_$_* backup_incr_user_$_*");
 		    system("$tar_cmd_user -f $save_path/backup_user_$_$the_time.$tar_ext $path_name");
+		    push @file_list_to_send_by_ftp, "$save_path/backup_user_$_$the_time.$tar_ext";
 		}
 	    }
 	}
@@ -580,18 +617,11 @@ sub build_backup_files {
     }
 
     if ($where_net_ssh) {
-#  $res = Net::SSLeay::write($ssl, $msg);  # Perl knows how long $msg is
-#         die_if_ssl_error("ssl write");
-#         shutdown S, 1;  # Half close --> No more output, sends EOF to server
-#         $got = Net::SSLeay::read($ssl);         # Perl returns undef on failure
-#         die_if_ssl_error("ssl read");
-#         print $got;
-                
-#         Net::SSLeay::free ($ssl);               # Tear down connection
-#         Net::SSLeay::CTX_free ($ctx);
-#         close S;
+	ssh_client();
     }
-    if ($where_net_ftp) { }
+    if ($where_net_ftp) {
+	ftp_client();
+    }
     if ($where_cd)      { }
 }
 
@@ -3220,303 +3250,4 @@ Drakbacup allow to restore the system (etc, var files)
     $up_box->show_all();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-# _____________________________________________________________ DOCS
-
-# [Perl] Comment récupérer des informations sur un fichier ?
-# Cf perldoc -f stat
-
-# Exemple pour récupérer mtime (date de dernière modification du fichier)
-# my(@etat); my($fchier)="/tmp/toto";
-# # Si le fichier existe on récupère des infos dessus
-# if (-e $fchier) {@etat=stat($fchier); }
-# # On convertit avec localtime la valeur de mtime.
-# my($date)= localtime($etat[9]);
-# print $date;
-
-
-#Telnet : En utilisant le package Net::Telnet
-# use strict; 
-# use Net::Telnet; 
-# use CGI qw/:standard :html3 :netscape escape unescape/; 
-# use CGI::Carp qw/fatalsToBrowser/; 
-# my $username="alian"; 
-# my $passwd="password"; 
-# my $HOST="indy.alianet"; 
-# print header; 
-# my $t = new Net::Telnet (Timeout=>undef) or die "Can't connect:$!"; 
-# $t->open($HOST);
-# $t->login($username, $passwd); 
-# my @lines = $t->cmd("/ma/commande/a/executer");
-# print join(' ',@lines); 
-
-# _____________________________________________________________ DOCS2
-
-
-# Linux backups HOWTO1
-
-# Add***jbw
-# Audience: All???
-
-# /Add***jbw
-# Jerry Winegarden
-# Revised 4-04-00
-
-# Revised***jbw
-
-# There are several utilities that can be used for backups under Linux. Which is the best? 
-# There isn't any one utility that is best. It depends on the media to which you are backing up, 
-# whether you are backing up just one machine or several over the network, and what you intend to 
-# do with the backup. There are both free utilities which come standard with a Red Hat Linux 
-# installation and third-party packages (some free, others not).
-
-# /Revised***jbw
-# List of backup utilities
-
-# Add***jbw
-# Standard Red Hat Linux (GNU) backup utilities
-
-# /Add***jbw
-
-#     *
-
-#       tar 2
-#     *
-
-#       dump
-
-#       Add***jbw
-#     * rdump
-
-#       /Add***jbw
-#     *
-
-#       cpio
-#     *
-
-#       (There are others: sharutil,find + dd, cp) 3
-
-# Add***jbw
-
-# Third-party backup packages
-
-#     * BRU
-#     * Networker
-#     * Matt: These two are just placeholders - I need to get a proper list (I've got saved email that 
-# lists some - just had time to look thru them yet)
-
-# /Add***jbw
-
-# There are different types of backups:
-
-#     *
-
-#       full 4
-#     *
-
-#       incremental
-
-#       Add***jbw
-#     * partial
-#     * local
-#     * remote (network)
-
-#       /Add***jbw
-
-# Add***jbw
-# Full backups
-
-# Full backups are intended to be a complete backup of every file. Users should not be logged in during a 
-# full backup so that files are not left open for writing and thus somehow not included in a full backup.
-
-# Partial backups
-
-# Partial backups include only a specified set of files or directories.
-
-# Incremental backups
-
-# Incremental backups are intended to backup only files that have changed since a previous backup. 
-# A common backup scheme is to do a full backup on the weekend when no one is in the office, with 
-# incremental backups being done each night of the things that changed that day. Incremental backups 
-# can even be added to the same tape, without rewinding. To restore a file from backup that was
-#  changed recently, it is often quicker to find the most recent version on an incremental tape backup
-#  than to have to search all the way through all the files on a long full backup tape. Thus, full
-#  backups tend to be done once a week only with incrementals in between.
-
-# /Add***jbw
-
-# Delete***jbw
-
-# /Delete***jbw
-
-# tar
-
-# tar ("tape archive" isn't just for tapes) is the most commonly used
-# backup utility. 5
-
-# To produce a backup of a directory to a file on the disk (e.g. in /tmp):
-
-# tar cvf /tmp/foo.tar .     (output file by default is /dev/tape, so
-#                                 the output file name must be specified
-#                                 with the f option; here, /tmp/foo.tar)
-                                
-#                            c option = Create archive (wrap it up
-#                                         into a "tar archive")
-
-#                            v option = "verbose" - messages to screen
-#                                         when reading/writing each file
-
-#                            f option = specify output file name
-
-#                            /tmp/foo.tar = output file name specified
-
-#                           .  = source directory to create archive of
-#                                 (wraps up everything under the 
-#                                 current directory)
-
-# addition of the "z" option will gzip the output file to compress it into gzip format:
-
-# tar cvzf /tmp/foo.tar.gz
-
-# To move a directory:
-
-# cd fromdir; tar cvf - . | (cd todir; tar xvf -)
-
-# To unpack an archive of a directory:
-
-# cd destdir; tar xvf /tmp/foo.tar 6
-
-# Further tar options:
-
-#     *
-
-#       x option = eXtract archive
-#       it will unpack it into the current default dir (so, first: cd destdir)
-#     *
-
-#       v option = verbose
-#       Can be included with any other options (good to always include this flag)
-#     *
-
-#       f option + file name = specify the INPUT file name
-#       (the name of the archive file being extracted).
-
-# "Incremental" backup with tar:
-
-# tar -cvf tarfilename --after-date="sept 1, 2000" /home
-
-# Add***jbw
-
-# dump
-
-# Dump is used to backup complete file systems, such as /, /home, or whatever file systems you have 
-# defined. (File systems are listed in the file: /etc/fstab). Dump works on one file system at a time.
-
-# Dump has the concept of a dump "level", which is indicated by a non-negative integer, usually 0-6. 
-# Level 0 dumps would be a full backup (of the specified file systems, which might be partial or 
-# complete depending on whether all file systems are specified). Level 1 and higher dumps are used 
-# for "incremental" backups. A level 1 dump will backup files which have changed (been "touched") 
-# since the last level 0 dump. A level 2 dump will backup anything changed since the last level 1 
-# dump. This scheme can be used to produce a full backup on weekend (level 0 dump), followed by 
-# a level n dump, where n is the day of the week (Monday = 1).
-
-# The other important dump parameter is "-f", which refers to the "file" or device to dump to. 
-# Thus, the dump backup of a file system can be written to a disk drive (in another file system) 
-# or to a tape drive or a zip drive. In the case of a tape drive, the file name is the special 
-# character device name: /dev/rmt0 or /dev/nrmt0 ("no-rewind" tape device) or /dev/tape or whatever 
-# the device name of your tape drive.
-
-# A dump is performed as follows:
-
-# dump -0f /dev/rmt0 /filesystemname
-
-# (full backup)
-
-# or,
-
-# dump -2f /dev/nrmt0 /filesystemname
-
-# (incremental, level 2 backup to the no-rewind tape device (don't rewind the tape before or after writing. 
-# Just add the backup to the existing tape. This is often done to have incremental backups added to the same tape).
-
-# To extract files from a dump backup, use the utility: restore
-
-# Restores can be done "interactively":
-
-# restore -i
-
-# Dump/restore to be continued...
-
-# cpio
-# CPIO is another system backup utility. The rpm package installation utility actually uses cpio 
-# format to package software for system installation.
-
-# CPIO - to be continued
-
-# 1This actually reads like, not a "backups HOWTO", but a "backups using tar HOWTO". You mention
-#  other archiving utilities, but don't explain how to use them, and also don't explain why tar
-#  is used in this document instead of the others.
-
-# ***jbw: I haven't gotten around to writing the details on how to for dump, cpio. Sorry. I'll work
-#  on it. This doc is definitely not just a tar howto (heh, I use dump myself, most often, even 
-# though some duluggers call dump "evil" under linux).
-
-# 2What does each utility do? Sure, tar means "tape archiver", which is alluded to later; what about the others?
-
-# 3Is this a list that is incomplete, and the author will add to it later? Why the ellipsis?
-# ***jbw - Right! List is incomplete and to be finished later. I did add to the list, parenthetically,
-#  but I didn't describe those additions. (e.g. find + dd is a two-step method: find ... | dd ...)
-
-# 4It would be helpful to explain the difference between the two. For example:
-# A full backup makes an archive of the entire contents of a user's... hard drive? Filesystem? Home directory?
-# An incremental backup only includes those parts of the... hard drive? Filesystem? Home directory? ...which 
-# have changed since the last time a backup was made.
-
-# ***jbw
-
-# I added the paragraphs describing full, partial, and incremental backups, and I explained the strategy of 
-# how they are used (full once a week, incrementals every night) and why such a strategy is used (easier to 
-# find one file to be restored from an incremental backup tape, which will have many fewer files written).
-
-# 5Any particular reason this section is pre-formatted?
-# YES!!! As with anything that's sort of a "man page" or a real, live, .conf file, it's often done with
-
-# tag.  That is quite intentional to 
-# get things formatted in an easily readable format without too much work! 
-# The 
-
-# tag is intentional here.  It is even desirable here, 
-# WITHOUT quot or footnote or other tags!!!  It's sort of comparable to
-# getting a screen shot to show exactly how something is seen.
-
-
-# 6This is the only part of the HOWTO that actually shows "HOW TO" do something. Even so, the reasons 
-# why you'd want to do this aren't explained.
-
-#__________________
-
-# fixme use incremental backup   
-#tar -cvf tarfilename --after-date="sept 1, 2000" /home
-# tar -cf archive.tar --newer="`date -r file`" /home
-# algo: liste des fichiers du meme nom, on prend le dernier puis on applique le tar ci-dessus.
-# faire fonctions qui retourne le plus recent element.
-
-
-#			tar cvzf ~/toto.tar.gz  `find . -name "*" `
-#			find / -mtime -1 \! -type d -print > /tmp/liste.jour
-# man find:
-#-newer fichier
-#              Fichier modifié plus récemment que le fichier indiqué.  L'option -newer n'est affectée par l'option -follow  que  si
-#              celle-ci la précède sur la ligne de commande.
 
