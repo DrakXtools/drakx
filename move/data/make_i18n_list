@@ -31,7 +31,8 @@ foreach my $i18n (@pkg_langs) {
 
     my @pkgs = uniq("locales-$i18n", chomp_(`$rpm -q --qf "%{name}\n" --whatrequires locales-$i18n`));
     push @pkgs, split(' ', $extra_pkgs{$i18n} || '');
-    my ($dirs, $files) = partition { -d "$prefix$_" } uniq(chomp_(`$rpm -ql @pkgs`));
+    my @l = grep { !m!^/usr/share/locale/en_ZA! } uniq(chomp_(`$rpm -ql @pkgs`));
+    my ($dirs, $files) = partition { -d "$prefix$_" } @l;
 
     my @i18n_dirs = uniq(grep { m!/($i18n_re) (_[^/]*)? (\.[^/]*)? (\@[^/]*)?$!x } @$dirs);
     my $i18n_dirs_re = join('|', map { quotemeta $_ } @i18n_dirs);
