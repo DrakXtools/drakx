@@ -324,7 +324,7 @@ sub loadkeys_files {
 	    $err->("invalid loadkeys keytable $_") if $err;
 	}
     }
-    @l, keys %l, grep { -e $_ } map { "$p/$_.inc.gz" } qw(compose euro windowkeys linux-keys-bare);
+    uniq(@l, keys %l, grep { -e $_ } map { "$p/$_.inc.gz" } qw(compose euro windowkeys linux-keys-bare));
 }
 
 sub unpack_keyboards {
