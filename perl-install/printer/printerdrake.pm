@@ -234,11 +234,11 @@ If some of these measures lead to problems for you, turn this option off, but th
 					   $in->ask_warn('', 
 N("The entered host/network IP is not correct.\n") .
 N("Examples for correct IPs:\n") .
-N("192.168.100.194\n") .
-N("10.0.0.*\n") .
-N("10.1.*\n") .
-N("192.168.100.0/24\n") .
-N("192.168.100.0/255.255.255.0\n")
+  "192.168.100.194\n" .
+  "10.0.0.*\n" .
+  "10.1.*\n" .
+  "192.168.100.0/24\n" .
+  "192.168.100.0/255.255.255.0\n"
 );
 					   return (1,1);
 				       }
@@ -411,8 +411,8 @@ N("192.168.100.0/255.255.255.0\n")
 					   $in->ask_warn('', 
 N("The entered IP is not correct.\n") .
 N("Examples for correct IPs:\n") .
-N("192.168.100.194\n") .
-N("10.0.0.2\n")
+  "192.168.100.194\n" .
+  "10.0.0.2\n"
 );
 					   return (1,0);
 				       } else {
