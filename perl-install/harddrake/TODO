@@ -1,0 +1,162 @@
+-*- outline -*-
+
+* Harddrake TODO:
+** fixes
+*** if no file don't run configurator
+*** don't offer to run configurator if empty hash (aka first boot)
+*** timeout on dialogs in service
+*** mouse.pm: only probe serial if :
+**** serial mouse previously detected
+**** no non-serial mouse found
+
+** wishes
+*** move all drakx tools into just a small one-liner that uses real <tool>.pm
+    so that harddrake and mcc reduces their memory usage pattern and
+    be faster (the next fast step will be to use perl6/parrot)
+*** scanner/sound/printer/ ... non needed by X, posponed to X11
+
+** missing
+*** add updfstab
+*** make all drakx tools a simple one-liner that call right module so that
+    harddrake2 and mcc can load these tools without more ram eater
+*** module options configuration button
+*** enable the user to force a module (isa, isapnp, ...)
+*** detect pcimcia:
+  	
+    foreach (detect_devices::pcmcia_probe()) {
+        printf "m: %-15s t: %-20s d: %-12s  d: %s\n",
+              $_->{driver}, $_->{type}, $_->{device}, $_->{description}
+    }
+
+
+** ensure scannerdrake use is ok (=> yvounet)
+
+
+* Postponed
+** use fbgtk+2 when booting on fbcon for smoother GUI
+*** pixel, convert perl-GTK to gtk+2 :-)
+
+** for to send a message for unknown hardware to install@mandrakesoft.com
+*** use drakbugreport ?
+
+    Subject: [UNKNOW HARDWARE] or a new other ml
+        -> do you konw how to configure it under linux ?
+        -> description
+
+
+
+* / no hope / useless :
+** don't die when one icon is missing ?
+** Once we've swtiched to perl-5.8, consider doing:
+    use Storable;
+    retrieve %oldconfig
+    store %config, $previous_conf;
+
+** move som subs into detect_devices.pm
+** enable a string to be passed as detector; in that case, do ourself the =~
+** alter detect_devices in order to only probe one time
+** detect *ALL* mouses if more than one (mousedrake?)
+
+**  in Mandrake 9.0 :
+
+    "Mass storage" => (Floppy,
+				   Disk,
+				   Cdrom,
+				   Tape)
+
+    "Network" => (Ethernetcard,
+			   Modem,
+			   Isdn)
+    "Multimedia" => (Videocard,
+				 Tvcard,
+				 Soundcard,
+				 Webcam)
+    "System" => (Bridge,
+			  Cpu,
+			  Memory)
+
+
+    "Publishing" => (Printer,
+				 Scanner)
+
+    "Pointing" => (Mouse,
+			    Joystick)
+
+    "Buses" => (Ideinterface,
+			 Scsiinterface,
+			 Usbinterface,
+			 );
+
+    "Unknown/Others",
+
+
+* Suggestion
+Subject: Re: [Cooker] Optional ALSA Support for SB Live!
+From: Fabrice FACORAT <f.faber@netcourrier.com>
+To: cooker@linux-mandrake.com
+In-Reply-To: <m2ofhvtpaq.fsf@vador.mandrakesoft.com>
+References: <20020311051222.47DC087CA5@yavin.mandrax.org> 
+	<m2ofhvtpaq.fsf@vador.mandrakesoft.com>
+Date: 11 Mar 2002 11:12:31 +0100
+Message-Id: <1015841551.3895.31.camel@bastard.localdomain>
+
+Le lun 11/03/2002 à 10:41, Thierry Vignaud a écrit :
+ 
+> >   In Mandrake 8.1 rerunning Harddrake post-setup would switch over
+> > to ALSA (which supports MIDI synth), however in 8.2 the only way to
+> > get ALSA support is to manually edit the modules.conf file. This
+> > would be disasterous for someone who isn't familar with
+> > modules.conf, but had been instructed on the mandrake-expert/newbie
+> > lists (as many had been) to simply rerun Harddrake on the sound card
+> > to get ALSA (and hence MIDI synth support).
+> 
+> give me the result of lspcidrake -f -v so that i switch your card
+> from oss to alsa.
+
+no please.
+just one month ago you switch SBLive from Alsa to OSS ( cause drakX
+set it as OSS and harddrake as Alsa ).
+There were also a discussion concerning the fact that Alsa doesn't
+support emu-tools and so all available options.
+Last but not least, several peoples report pbs with Alsa ( is sound is
+too high you have disturbances ). So someone is going to ask you for
+OSS as it want to use some features os SBLive, etc ...
+
+To my mind the best way for this ( but too late for 8.2 ) will be to
+have a tool called soundrake. Thanks to this tools, you choose at the
+beginning if you want to use OSS or alsa and then try to correctly
+configure your sound card. This tool should be able to work in
+embended mo in harddrake or harddrake2 ( infos concerning this so long
+awaiting harddrake 2 ? ).
+
+In order to make this tool be a perfect tool, it should be able to
+advice user concerning the advantage and the disadvantage of each
+driver ( indeed alsa sometimes is better than OSS as it support full
+duplex and wave mixing on more sound cards ).
+It's also disturbing is harddrake set alsa by default and XrakX set
+OSS by default as sometimes by lanching harddrake ( just to see what
+happen ) you lose ( or seems to lose ) your sound card ( mute mixer )
+
+For example :
++ launch harddrake
++ use autodetection : yes/no
++ if auto detects enable, it detects a SBLive.
++ explanations text concerning the fact that :
+   if I use OSS I will be able to use sounds effects, live drive and
+others things ( AC-3 passthrough ) thanks to the emu10k1-tools packages
+( available on CD sets and installable via Software Manager )
+   if I use Alsa, I won't be able to use emu10k1-tools but at the
+contrary I will be able to use midi software as alsa module support midi
++ ask user which one he wants to use : OSS / Alsa ?
++ set the sound card drivers and modules.conf according to user wishes
++ <mode= dream> if I select OSS, installed emu10k1-tools and provide a
+GUI to configure them </mode = dream>
++ <mode= dream> if I select Alsa unmute at least PCM and Vol or display
+a warning saying that by default Alsa mute everything ( configure alsa
+service so that it save mixer settings )
++ test the sound ( mandrake sound theme )
++ do you hear something ?
++ yes -> your sound card have been properly set.
++ if no -> try the others drivers set or send lspcidrake -v to
+somebody@somewhere.org to check for support for your sound card
++ Do you ahave another sound card ?
