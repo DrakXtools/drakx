@@ -268,8 +268,11 @@ my %charsets = (
 #-######################################################################################
 
 sub list { keys %languages }
-sub lang2text { $languages{$_[0]} && $languages{$_[0]}[0] }
-sub lang2charset { $languages{$_[0]} && $languages{$_[0]}[1] }
+sub lang2text     { $languages{$_[0]} && $languages{$_[0]}[0] }
+sub lang2charset  { $languages{$_[0]} && $languages{$_[0]}[1] }
+sub lang2LANG     { $languages{$_[0]} && $languages{$_[0]}[2] }
+sub lang2LANGUAGE { $languages{$_[0]} && $languages{$_[0]}[3] }
+sub getxim { $xim{$_[0]} }
 
 sub set { 
     my ($lang) = @_;
