@@ -1,3 +1,164 @@
+2001/01/06  Pixel  <pixel@mandrakesoft.com>
+
+	* keyboard.pm (setup): don't xmodmap if DISPLAY is unset
+
+	* standalone/rpmdrake: deprecated (and has been for a long time now)
+
+	* network.pm, install_steps_interactive.pm, netconnect.pm,
+	install_interactive.pm, standalone/adduserdrake, any.pm,
+	Makefile.config, printerdrake.pm, Xconfigurator.pm, diskdrake.pm:
+	ask_from_entries_refH parameter format has changed so change all
+	accesses to it.
+
+2001/01/05  François Pons  <fpons@mandrakesoft.com>
+
+	* lang.pm, keyboard.pm: forget _exit in child process after a fork of
+	DrakX
+	removed need of packdrake binary
+
+	* Xconfigurator.pm: use of SHARE_PATH for MonitorsDB, Cards+, CardsNames
+
+	* live_install2: cleanup to keep libperl.so but the right one
+
+	* live_install: no more copy of files on live system, now use environment
+	variable by DrakX cleanup
+
+	* perl2fcalls: added packdrake call (via new but incomplete) and package
+
+	* install_any.pm, commands.pm, pkgs.pm: removed need of packdrake binary
+
+	* netconnect.pm: fixed syntax error
+
+	* modules.pm: eval insmoding ide-cd (just in case)
+	removed need of packdrake binary
+
+2001/01/05  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ja.po, share/po/ca.po, share/po/az.po: updated Azeri, Catalan
+	and Japanese files
+
+2001/01/05  Pixel  <pixel@mandrakesoft.com>
+
+	* mouse.pm: help cperl-mode
+
+	* interactive_gtk.pm, network.pm, install_steps_interactive.pm, my_gtk.pm,
+	interactive.pm, printerdrake.pm, Xconfigurator.pm, diskdrake.pm: move to
+	new ask_from's:
+	- ask_from_entries_ref is deprecated, use ask_from_entries_refH
+	- ask_from_list now calls ask_from_entries_refH_powered
+	still not done:
+	- ask_from_treelist should use ask_from_entries_refH_powered,
+	and lists with no help should use CList (List is bad)
+	- keyboard and mouse binding is still rough
+	- enhance the look
+
+	* keyboard.pm: add the percentage of each keyboard types (as a comment for
+	now)
+
+2001/01/04  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: cleaned... everything should be buggy.
+
+2001/01/04  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: fixed some old $p->{file} by new $p->[$FILE]
+	code cleanup and fixes for lilo not upgrade
+
+2001/01/04  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* install_any.pm: fixed the functions doing the lists of languages
+
+	* lang.pm: fixed the functions doing the lists of languages
+	The list of languages now has complete locale names insted of just
+	language
+	code (that is needed to differentiate zh_CN and zh_TW among others)
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/az.po, share/po/ru.po, share/po/pt_BR.po, share/po/hr.po,
+	share/po/ko.po, share/po/cy.po, share/po/nl.po, share/po/ja.po,
+	share/po/wa.po, share/po/sv.po, share/po/is.po, share/po/hu.po,
+	share/po/zh_TW.Big5.po, share/po/it.po, share/po/id.po, share/po/pl.po,
+	share/po/fi.po, share/po/no.po, share/po/zh_CN.GB2312.po,
+	share/po/th.po, share/po/el.po, share/po/sk.po, share/po/lt.po,
+	share/po/sl.po, share/po/br.po, share/po/ca.po, share/po/gl.po,
+	share/po/lv.po, share/po/uk.po, share/po/eo.po, share/po/ro.po,
+	share/po/da.po, share/po/cs.po, share/po/af.po: updated Brazilian file
+
+	* share/po/eu.po: updated Basque file
+	updated Brazilian file
+
+2001/01/04  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm: some pixelization using the new if_
+
+	* install_steps_interactive.pm (setRootPassword): fix pixelization
+	keep $o->{langs} unpacked to simplify things
+	if_ pixelization
+
+	* common.pm (%EXPORT_TAGS): add if_ in "common" exported tags
+	(if_): created. Use it to replace things like
+	($::expert ? $val : ()) by if_($::expert, $val)
+
+	* keyboard.pm: nl keyboard is not used, so defaults to us_intl
+
+	* lang.pm, install_steps.pm, pkgs.pm, install_any.pm: keep $o->{langs}
+	unpacked to simplify things
+
+	* netconnect.pm: quite a few clean-up (and buggying)
+
+2001/01/03  dam's  <damien@mandrakesoft.com>
+
+	* install_steps_interactive.pm: admin user removed before beeing added
+
+	* netconnect.pm: corrected typo
+	LAN is configured with default value if firewall
+
+2001/01/03  François Pons  <fpons@mandrakesoft.com>
+
+	* diskdrake.pm: fixed invocation of change_type by clicking on legend
+	unless expert
+
+	* install2.pm: fixed usage with testing
+
+	* install_steps.pm: fixed some other services to start in case something
+	gets wrong,
+	this fixes some deadlock on upgrade from 7.0.
+	fixed usage with testing
+
+	* partition_table.pm: fixed overlapping partitions between one extended
+	and one regular primary.
+	should be accepted (log printed instead of error) as diskdrake allow
+	their
+	creation in expert.
+
+2001/01/03  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* modules.pm: add checks of dependencies on marfiles
+	fix a couple of broken dependencies in modules.pm
+
+2001/01/03  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* lang.pm, share/locales.tar.bz2: locales in glibc 2.2 format
+
+2001/01/03  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm (main): move the setting of PATH and spawnShell *after*
+	setting $prefix
+
+2000/12/31  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/rpmsrate: added a few locales dependences
+
+2000/12/29  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm (addUser): typo fix
+
+	* ChangeLog: New snapshot uploaded
+
+	* ftp.pm (getFile): recall getFile after rewindGetFile
+
 2000/12/29  Pixel  <pixel@mandrakesoft.com>
 
 	* install_steps.pm (addUser): typo fix
