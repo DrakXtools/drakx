@@ -200,30 +200,28 @@ sub selectKeyboard {
     my $from_usb = keyboard::from_usb();
     my $l = keyboard::lang2keyboards(lang::langs($o->{langs}));
 
-    #- good guess, don't ask ($o->{keyboard} already set)
-    return install_steps::selectKeyboard($o) 
-      if !$::expert && !$clicked && ($from_usb || $l->[0][1] >= 90) && listlength(lang::langs($o->{langs})) == 1;
+    if ($::expert || $clicked || !($from_usb || @$l && $l->[0][1] >= 90) || listlength(lang::langs($o->{langs})) > 1) {
+	add2hash($o->{keyboard}, $from_usb);
+	my @best = uniq($from_usb ? $from_usb->{KEYBOARD} : (), (map { $_->[0] } @$l), 'us_intl');
 
-    my @best = uniq(if_($from_usb, $from_usb), (map { $_->[0] } @$l), 'us_intl');
-
-    my $format = sub { translate(keyboard::keyboard2text($_[0])) };
-    my $other;
-    my $ext_keyboard = $o->{keyboard};
-    $o->ask_from_(
-	{ title => _("Keyboard"), 
-	  messages => _("Please choose your keyboard layout."),
-	  advanced_messages => _("Here is the full list of keyboards available"),
-	  advanced_label => _("More"),
-	  callbacks => { changed => sub { $other = $_[0]==1 } },
-	},
-	  [ if_(@best > 1, { val => \$o->{keyboard}, type => 'list', format => $format, sort => 1,
-	      list => [ @best ] }),
-	    { val => \$ext_keyboard, type => 'list', format => $format,
-	      list => [ difference2([ keyboard::keyboards ], \@best) ], advanced => @best > 1 }
-	  ]);
-    delete $o->{keyboard_unsafe};
-
-    $o->{keyboard} = $ext_keyboard if $other;
+	my $format = sub { translate(keyboard::KEYBOARD2text($_[0])) };
+	my $other;
+	my $ext_keyboard = my $KEYBOARD = $o->{keyboard}{KEYBOARD};
+	$o->ask_from_(
+		      { title => _("Keyboard"), 
+			messages => _("Please choose your keyboard layout."),
+			advanced_messages => _("Here is the full list of keyboards available"),
+			advanced_label => _("More"),
+			callbacks => { changed => sub { $other = $_[0]==1 } },
+		      },
+		      [ if_(@best > 1, { val => \$KEYBOARD, type => 'list', format => $format, sort => 1,
+					 list => [ @best ] }),
+			{ val => \$ext_keyboard, type => 'list', format => $format,
+			  list => [ difference2([ keyboard::KEYBOARDs() ], \@best) ], advanced => @best > 1 }
+		      ]);
+	$o->{keyboard}{KEYBOARD} = $other ? $ext_keyboard : $KEYBOARD;
+    }
+    any::keyboard_group_toggle_choose($o, $o->{keyboard}) or goto &selectKeyboard;
     install_steps::selectKeyboard($o);
 }
 #------------------------------------------------------------------------------
@@ -850,7 +848,7 @@ sub configureNetwork {
     my ($o, $first_time, $noauto) = @_;
     require network::netconnect;
     network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{intf},
-			      $first_time, $o->{lang} eq "fr_FR" && $o->{keyboard} eq "fr", $noauto);
+			      $first_time, $o->{lang} eq "fr_FR" && $o->{keyboard}{KEYBOARD} eq "fr", $noauto);
 }
 
 #-configureNetworkIntf moved to network

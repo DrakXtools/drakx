@@ -119,10 +119,11 @@ sub setupSCSI {
 #------------------------------------------------------------------------------
 sub selectKeyboard {
     my ($clicked, $first_time, $auto) = ($_[0], $_[1] == 1, $_[2]);
-
-    if ($o->{isUpgrade} && $first_time && $o->{keyboard_unsafe}) {
-	my $keyboard = keyboard::read($o->{prefix});
-	$keyboard and $o->{keyboard} = $keyboard;
+	    
+    if ($o->{isUpgrade} && $first_time && $o->{keyboard}{unsafe}) {
+	if (my $keyboard = keyboard::read($o->{prefix})) {
+	    $o->{keyboard} = $keyboard;
+	}
     }
     installStepsCall($o, $auto, 'selectKeyboard', $clicked);
 }

@@ -2101,7 +2101,7 @@ sub check_network {
 			     $in->{netc}, $in->{mouse}, $in, 
 			     $in->{intf}, 0,
 			     $in->{lang} eq "fr_FR" && 
-			     $in->{keyboard} eq "fr", 0);
+			     $in->{keyboard}{KEYBOARD} eq "fr", 0);
 		    } else {
 			system("/usr/sbin/drakconnet");
 		    }

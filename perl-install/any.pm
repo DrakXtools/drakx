@@ -13,6 +13,7 @@ use fsedit;
 use fs;
 use lang;
 use run_program;
+use keyboard;
 use devices;
 use modules;
 use log;
@@ -1179,6 +1180,21 @@ sub config_mtools {
 	s|drive a: file="(.*?)"|drive a: file="/dev/$f1"|;
 	s|drive b: file="(.*?)"|drive b: file="/dev/$f2"| if $f2;
     } $file;
+}
+
+sub keyboard_group_toggle_choose {
+    my ($in, $keyboard) = @_;
+
+    my $grp_toggles = keyboard::grp_toggles($keyboard) or return 1;
+
+    my $GRP_TOGGLE = 
+      $in->ask_from_listf('', _("Here you can choose the key or key combination that will 
+allow switching between the different keyboard layouts
+(eg: latin and non latin)"), sub { $grp_toggles->{$_[0]} }, [ sort keys %$grp_toggles ], 'caps_toggle') or return;
+
+    log::l("GRP_TOGGLE: $GRP_TOGGLE");
+    $keyboard->{GRP_TOGGLE} = $GRP_TOGGLE;
+    1;
 }
 
 1;

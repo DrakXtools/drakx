@@ -264,27 +264,40 @@ arch() =~ /^sparc/ ? (
 
 #- list of  possible choices for the key combinations to toggle XKB groups
 #- (eg in X86Config file: XkbOptions "grp:toggle")
-my %kbdgrptoggle =
-(
-  'toggle' => _("Right Alt key"),
-  'shift_toggle' => _("Both Shift keys simultaneously"),
-  'ctrl_shift_toggle' => _("Control and Shift keys simultaneously"),
-  'caps_toggle' => _("CapsLock key"),
-  'ctrl_alt_toggle' => _("Ctrl and Alt keys simultaneously"),
-  'alt_shift_toggle' => _("Alt and Shift keys simultaneously"),
-  'menu_toggle' => _("\"Menu\" key"),
-  'lwin_toggle' => _("Left \"Windows\" key"),
-  'rwin_toggle' => _("Right \"Windows\" key"),
+my %grp_toggles = (
+    toggle => _("Right Alt key"),
+    shift_toggle => _("Both Shift keys simultaneously"),
+    ctrl_shift_toggle => _("Control and Shift keys simultaneously"),
+    caps_toggle => _("CapsLock key"),
+    ctrl_alt_toggle => _("Ctrl and Alt keys simultaneously"),
+    alt_shift_toggle => _("Alt and Shift keys simultaneously"),
+    menu_toggle => _("\"Menu\" key"),
+    lwin_toggle => _("Left \"Windows\" key"),
+    rwin_toggle => _("Right \"Windows\" key"),
 );
 
 
 #-######################################################################################
 #- Functions
 #-######################################################################################
-sub keyboards { keys %keyboards }
-sub keyboard2text { $keyboards{$_[0]} && $keyboards{$_[0]}[0] }
-sub keyboard2kmap { $keyboards{$_[0]} && $keyboards{$_[0]}[1] }
-sub keyboard2xkb  { $keyboards{$_[0]} && $keyboards{$_[0]}[2] }
+sub KEYBOARDs { keys %keyboards }
+sub KEYBOARD2text { $keyboards{$_[0]} && $keyboards{$_[0]}[0] }
+sub keyboards { map { { KEYBOARD => $_ } } keys %keyboards }
+sub keyboard2one {
+    my ($keyboard, $nb) = @_;
+    ref $keyboard or internal_error();
+    my $l = $keyboards{$keyboard->{KEYBOARD}} or return;
+    $l->[$nb];
+}
+sub keyboard2text { keyboard2one($_[0], 0) }
+sub keyboard2kmap { keyboard2one($_[0], 1) }
+sub keyboard2xkb  { keyboard2one($_[0], 2) }
+
+sub grp_toggles {
+    my ($keyboard) = @_;
+    keyboard2one($keyboard, 3) or return;
+    \%grp_toggles;
+}
 
 sub loadkeys_files {
     my ($err) = @_;
@@ -336,7 +349,7 @@ sub lang2keyboards {
 sub lang2keyboard {
     my ($l) = @_;
     my $kb = lang2keyboards($l)->[0][0];
-    $keyboards{$kb} ? $kb : "us"; #- handle incorrect keyboard mapping to us.
+    { KEYBOARD => $keyboards{$kb} ? $kb : 'us' }; #- handle incorrect keyboard mapping to us.
 }
 
 sub from_usb {
@@ -344,7 +357,7 @@ sub from_usb {
     my ($usb_kbd) = detect_devices::usbKeyboards() or return;
     my $country_code = detect_devices::usbKeyboard2country_code($usb_kbd) or return;
     my $keyboard = $usb2keyboard[$country_code];
-    $keyboard !~ /SKIP/ && $keyboard;
+    $keyboard !~ /SKIP/ && { KEYBOARD => $keyboard };
 }
 
 sub load {
@@ -379,19 +392,22 @@ sub load {
 
 sub xmodmap_file {
     my ($keyboard) = @_;
-    my $f = "$ENV{SHARE_PATH}/xmodmap/xmodmap.$keyboard";
+    my $KEYBOARD = $keyboard->{KEYBOARD};
+    my $f = "$ENV{SHARE_PATH}/xmodmap/xmodmap.$KEYBOARD";
     if (! -e $f) {
 	eval {
 	    require packdrake;
 	    my $packer = new packdrake("$ENV{SHARE_PATH}/xmodmap.cz2", quiet => 1);
-	    $packer->extract_archive("/tmp", "xmodmap.$keyboard");
+	    $packer->extract_archive("/tmp", "xmodmap.$KEYBOARD");
 	};
-	$f = "/tmp/xmodmap.$keyboard";
+	$f = "/tmp/xmodmap.$KEYBOARD";
     }
     -e $f && $f;
 }
 
 sub setup {
+    my ($keyboard) = @_;
+
     return if arch() =~ /^sparc/;
 
     #- Xpmac doesn't map keys quite right
@@ -403,11 +419,10 @@ sub setup {
 	return;
     }
 
-    my ($keyboard) = @_;
-    my $o = $keyboards{$keyboard} or return;
+    my $kmap = keyboard2kmap($keyboard) or return;
 
-    log::l("loading keymap $o->[1]");
-    if (-e (my $f = "$ENV{SHARE_PATH}/keymaps/$o->[1].bkmap")) {
+    log::l("loading keymap $kmap");
+    if (-e (my $f = "$ENV{SHARE_PATH}/keymaps/$kmap.bkmap")) {
 	load(scalar cat_($f));
     } else {
 	local *F;
@@ -419,7 +434,7 @@ sub setup {
 	    eval {
 		require packdrake;
 		my $packer = new packdrake("$ENV{SHARE_PATH}/keymaps.cz2", quiet => 1);
-		$packer->extract_archive(undef, "$o->[1].bkmap");
+		$packer->extract_archive(undef, "$kmap.bkmap");
 	    };
 	    c::_exit(0);
 	}
@@ -429,39 +444,29 @@ sub setup {
 }
 
 sub write {
-    my ($prefix, $keyboard, $charset, $isNotDelete) = @_;
+    my ($keyboard) = @_;
 
-    my $config = read_raw($prefix);
-    put_in_hash($config, {
-			  KEYTABLE => keyboard2kmap($keyboard), 
-			  KBCHARSET => $charset,
-			 });
-    add2hash_($config, {
-			DISABLE_WINDOWS_KEY => bool2yesno(detect_devices::isLaptop()),
-			BACKSPACE => $isNotDelete ? "BackSpace" : "Delete",
-		       });
-    setVarsInSh("$prefix/etc/sysconfig/keyboard", $config);
-    run_program::rooted($prefix, "dumpkeys > /etc/sysconfig/console/default.kmap") or log::l("dumpkeys failed");
+    $keyboard->{KEYTABLE} = keyboard2kmap($keyboard);
+
+    setVarsInSh("$::prefix/etc/sysconfig/keyboard", $keyboard);
+    run_program::rooted($::prefix, "dumpkeys > /etc/sysconfig/console/default.kmap") or log::l("dumpkeys failed");
     if (arch() =~ /ppc/) {
 	my $s = "dev.mac_hid.keyboard_sends_linux_keycodes = 1\n";
 	substInFile { 
             $_ = '' if /^\Qdev.mac_hid.keyboard_sends_linux_keycodes/;
             $_ .= $s if eof;
-        } "$prefix/etc/sysctl.conf";
+        } "$::prefix/etc/sysctl.conf";
     }
 }
 
-sub read_raw {
-    my ($prefix) = @_;
-    my %config = getVarsFromSh("$prefix/etc/sysconfig/keyboard");
-    \%config;
-}
-
 sub read {
-    my ($prefix) = @_;
-    my $keytable = read_raw($prefix)->{KEYTABLE};
-    keyboard2kmap($_) eq $keytable and return $_ foreach keys %keyboards;
-    $keyboards{$keytable} && $keytable; #- keep track of unknown keyboard.
+    my %keyboard = getVarsFromSh("$::prefix/etc/sysconfig/keyboard") or return {};
+    if (!$keyboard{KEYBOARD}) {
+	add2hash(\%keyboard, grep { keyboard2kmap($_) eq $keyboard{KEYTABLE} } keyboards());
+    }
+    $keyboard{DISABLE_WINDOWS_KEY} = bool2yesno(detect_devices::isLaptop());
+
+    keyboard2text(\%keyboard) ? \%keyboard : {};
 }
 
 sub check {
@@ -491,8 +496,8 @@ sub check {
     $usb2keyboard[0x21] eq 'us' or $err->("\@usb2keyboard is badly modified, 0x21 is not us keyboard");
 
     my @xkb_groups = map { if_(/grp:(\S+)/, $1) } cat_('/usr/lib/X11/xkb/rules/xfree86.lst');
-    $err->("invalid xkb group toggle '$_' in \%kbdgrptoggle") foreach difference2([ keys %kbdgrptoggle ], \@xkb_groups);
-    $warn->("unused xkb group toggle '$_'") foreach difference2(\@xkb_groups, [ keys %kbdgrptoggle ]);
+    $err->("invalid xkb group toggle '$_' in \%grp_toggles") foreach difference2([ keys %grp_toggles ], \@xkb_groups);
+    $warn->("unused xkb group toggle '$_'") foreach grep { !/switch/ } difference2(\@xkb_groups, [ keys %grp_toggles ]);
 
     my @xkb_layouts = (#- (map { (split)[0] } grep { /^! layout/ .. /^\s*$/ } cat_('/usr/lib/X11/xkb/rules/xfree86.lst')),
 		       all('/usr/lib/X11/xkb/symbols'),

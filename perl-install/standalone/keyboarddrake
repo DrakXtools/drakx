@@ -8,6 +8,7 @@ use interactive;
 use keyboard;
 use Xconfig::xfree;
 use common;
+use any;
 use c;
 
 local $_ = join '', @ARGV;
@@ -16,45 +17,51 @@ local $_ = join '', @ARGV;
 
 $::expert = /-expert/;
 
-print "[$::expert]\n";
-my $keyboard;
-if ($::expert) { ($keyboard) = grep { !/^-/ } @ARGV }
-print "[$keyboard]\n";
-my $in = 'interactive'->vnew('su', 'keyboard');
+my $in;
+my $keyboard = keyboard::read();
+if (my ($kb) = grep { !/^-/ } @ARGV) {
+    keyboard::KEYBOARD2text($kb) or die "bad keyboard $kb\n";
+    $keyboard->{KEYBOARD} = $kb;
+} else {
+    $in = 'interactive'->vnew('su', 'keyboard');
 
-begin:
-$::isEmbedded and kill USR2, $::CCPID;
-$keyboard ||= $in->ask_from_listf_(_("Keyboard"),
-				   _("Please, choose your keyboard layout."),
-				   \&keyboard::keyboard2text,
-				   [ keyboard::keyboards() ],
-				   keyboard::read());
-if ($keyboard) {
-    keyboard::keyboard2text($keyboard) or die "bad keyboard $keyboard\n";
+  begin:
+    $::isEmbedded and kill USR2, $::CCPID;
+  choose:
+    $keyboard->{KEYBOARD} = $in->ask_from_listf(_("Keyboard"),
+						_("Please, choose your keyboard layout."),
+						\&keyboard::KEYBOARD2text,
+						[ keyboard::KEYBOARDs() ],
+						$keyboard->{KEYBOARD}) or goto end;
 
-    my $isNotDelete = $::expert && !$in->ask_yesorno("BackSpace", _("Do you want the BackSpace to return Delete in console?"), 1);
-
-    my $kmap = keyboard::keyboard2kmap($keyboard);
-    system('loadkeys', $kmap);
-
-    my $xkb = keyboard::keyboard2xkb($keyboard);
-    system('setxkbmap', $xkb);
-
-    eval {
-	my $xfree_conf = Xconfig::xfree->read;
-	my $x_kbd_conf = $xfree_conf->get_keyboard;
-	$x_kbd_conf->{XkbLayout} = $xkb;
-	$xfree_conf->set_keyboard($x_kbd_conf);
-	$xfree_conf->write;
-    };
-
-    keyboard::write('', $keyboard, $isNotDelete);
+    any::keyboard_group_toggle_choose($in, $keyboard) or goto choose;
 }
 
+if ($::expert) {
+    my $isNotDelete = !$in->ask_yesorno("BackSpace", _("Do you want the BackSpace to return Delete in console?"), 1);
+    $keyboard->{BACKSPACE} = $isNotDelete ? "BackSpace" : "Delete";
+}
+
+system('loadkeys', keyboard::keyboard2kmap($keyboard));
+
+my $xkb = keyboard::keyboard2xkb($keyboard);
+system('setxkbmap', $xkb);
+
+eval {
+    my $xfree_conf = Xconfig::xfree->read;
+    my $x_kbd_conf = $xfree_conf->get_keyboard;
+    $x_kbd_conf->{XkbLayout} = $xkb;
+    $xfree_conf->set_keyboard($x_kbd_conf);
+    $xfree_conf->write;
+};
+
+keyboard::write($keyboard);
+
+end:
 if ($::isEmbedded) {
     kill(USR1, $::CCPID);
     $keyboard = '';
     goto begin;
 } else {
-    $in->exit(0);
+    $in->exit(0) if $in;
 }

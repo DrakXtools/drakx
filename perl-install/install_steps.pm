@@ -93,9 +93,12 @@ sub selectLanguage {
 
     log::l("selectLanguage: pack_langs ", lang::pack_langs($o->{langs}));
 
-    if ($o->{keyboard_unsafe} || !$o->{keyboard}) {
-	$o->{keyboard_unsafe} = 1;
+    #- for auto_install compatibility with old $o->{keyboard} containing directly $o->{keyboard}{KEYBOARD}
+    $o->{keyboard} = { KEYBOARD => $o->{keyboard} } if $o->{keyboard} && !ref($o->{keyboard});
+
+    if (!$o->{keyboard} || $o->{keyboard}{unsafe}) {
 	$o->{keyboard} = keyboard::from_usb() || keyboard::lang2keyboard($o->{lang});
+	$o->{keyboard}{unsafe} = 1;
 	keyboard::setup($o->{keyboard}) if !$::live;
     }
 
@@ -109,10 +112,11 @@ sub selectLanguage {
 #------------------------------------------------------------------------------
 sub selectKeyboard {
     my ($o) = @_;
+    $o->{keyboard}{KBCHARSET} = lang::lang2charset($o->{lang});
     keyboard::setup($o->{keyboard});
 
     addToBeDone {
-	keyboard::write($o->{prefix}, $o->{keyboard}, lang::lang2charset($o->{lang}));
+	keyboard::write($o->{keyboard});
     } 'installPackages' unless $::g_auto_install;
 }
 #------------------------------------------------------------------------------

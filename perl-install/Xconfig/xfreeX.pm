@@ -51,7 +51,7 @@ sub get_monitor {
     $l[0]
 }
 
-my @keyboard_fields = qw(XkbLayout XkbModel XkbDisable);
+my @keyboard_fields = qw(XkbLayout XkbModel XkbDisable XkbOptions);
 sub get_keyboard {
     my ($raw_X) = @_;
     my $raw_kbd = $raw_X->get_keyboard_section;

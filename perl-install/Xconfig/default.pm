@@ -63,6 +63,7 @@ sub config_keyboard {
     my $xkb = { $XkbLayout ? (
 			      XkbLayout => $XkbLayout, 
 			      XkbModel => $XkbModel,
+			      if_($keyboard->{GRP_TOGGLE}, XkbOptions => "grp:$keyboard->{GRP_TOGGLE}"),
 			     ) : (XkbDisable => undef) };
     $raw_X->set_keyboard($xkb);
 }
