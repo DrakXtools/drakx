@@ -7,9 +7,9 @@ use Config;
 my $lib = arch() =~ /x86_64/ ? 'lib64' : 'lib';
 
 my $libs = '-lldetect -lext2fs';
-$libs .= ' -lrpm -lrpmdb -lrpmio -lpopt -lz' if $ENV{C_RPM};
+$libs .= ' -lrpm -lrpmdb -lrpmio -lpopt -lz';
 
-my $pcmcia_dir = $ENV{C_DRAKX} && $Config{archname} =~ /i.86/ ? '../../mdk-stage1/pcmcia_' : '';
+my $pcmcia_dir = $Config{archname} =~ /i.86/ ? '../../mdk-stage1/pcmcia_' : '';
 
 symlink "$pcmcia_dir/probe.c", "probe.c" if $pcmcia_dir;
 
