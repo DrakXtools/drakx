@@ -76,6 +76,7 @@ my $netcnx = {};
 my $netc = {};
 my $intf = {};
 my $c_time = 0;
+my $ct_tag;
 network::netconnect::load_conf($netcnx, $netc, $intf);
 network::netconnect::read_net_conf('', $netcnx, $netc);
 my $combo1 = new Gtk::Combo;
@@ -164,6 +165,14 @@ sub connection {
     $button_close->set_sensitive(0);
     $statusbar->pop(1);
     $statusbar->push(1, $isconnected2 ? _("Disconnecting from Internet ") : _("Connecting to Internet "));
+    if(!$isconnected2) {
+	$c_time = time();
+	gmtime($_[0]);
+	$ct_tag = Gtk->timeout_add(1000, sub {
+				       my ($sec,$min,$hour) = gmtime(time() - $c_time);
+				       my $e = sprintf ("%02d:%02d:%02d", $hour, $min, $sec);
+				       $label_ct->set($e); 1; });
+    } else { Gtk->timeout_remove($ct_tag) }
     my $nb_point=1;
     my $tag = Gtk->timeout_add(100, sub {
 				   $statusbar->pop(1);
