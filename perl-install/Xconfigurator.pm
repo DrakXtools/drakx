@@ -1020,7 +1020,6 @@ _("I can set up your computer to automatically start X upon booting.
 Would you like X to start when you reboot?"), 1);
 	    rewriteInittab($run ? 5 : 3) unless $::testing;
 
-	    $in->set_help('configureXautologin') unless $::isStandalone;
 	    if ($o->{miscellaneous}{autologin} || $::auto || $in->ask_yesorno(_("Autologin at startup"),
 									      _("I can set up your computer to automatically log on one user.
 Would you like to use this feature?"), 1))
@@ -1048,7 +1047,8 @@ Would you like to use this feature?"), 1))
 		    $o->{miscellaneous}{autologin}=1;
 		  }
 		else { $o->{miscellaneous}{autologin}=0; }
-	   }
+	      }
+	  }
 	run_program::rooted($prefix, "chkconfig", "--del", "gpm") if $o->{mouse}{device} =~ /ttyS/ && !$::isStandalone;
-    }
-}
+      }
+  }
