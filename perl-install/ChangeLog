@@ -1,3 +1,75 @@
+2002/01/20  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakbackup: sorry, _("$_") is not allowed
+
+2002/01/20  Pixel  <pixel@mandrakesoft.com>
+
+	* share/po/fr.po: fix "`msgid' and `msgstr' entries do not both end with
+	'\n'"
+
+	* install2.pm: call msec with run_commands=0 to fix the network reloading
+	(causing various problems, esp. "Net::FTP: Timeout" at X config step)
+
+2002/01/20  yduret
+
+	* timezone.pm: added Italy (time.ien.it) in
+
+2002/01/19  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakbackup: Rework English syntax in drakbackup - hopefully
+	I've got the intent correct ;^)
+
+2002/01/19  Till Kamppeter <till@mandrakesoft.com>
+
+	* detect_devices.pm: Replaced USB printer auto-detection by a more
+	reliable method.
+
+2002/01/18  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm: changed Update -> Upgrade for installation
+	class.
+
+2002/01/18  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/draknet: 
+	  - move 'use standalone' up to comply to 'explanations'
+	  - fix an english typo, s/connexion/connection/
+
+	* standalone/drakgw: 
+	  - move 'use standalone' up to comply to 'explanations'
+	  - write higher-level 'explanations'
+	  - small fix, s/`ls ..`/glob(..)/
+
+	* standalone/scannerdrake: 
+	  - move 'use standalone' up to comply to 'explanations'
+	  - fix a small english problem
+
+	* share/po/fr.po: reduce a lot of fuzzy and untranslations
+	large stuff from printerdrake, drakbackup and drakfont still to do :-)
+
+	* c/stuff.xs.pm, standalone/printerdrake, standalone/net_monitor,
+	standalone/drakautoinst, standalone/keyboarddrake,
+	standalone/localedrake, standalone/livedrake, standalone/drakboot,
+	standalone/draksec, standalone/tinyfirewall, standalone/mousedrake,
+	standalone/drakxservices, standalone.pm, standalone/drakproxy,
+	standalone/XFdrake, standalone/diskdrake, standalone/adduserdrake,
+	standalone/drakxconf, log.pm, standalone/logdrake,
+	standalone/drakbackup, standalone/drakfont: 
+	  - write the 'common' part of the 'explanations' stuff,
+	with nice help from Pixel for the tough Perl part
+	  - move 'use standalone' up in all standalone apps,
+	  to comply to 'explanations'
+
+2002/01/18  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/gen_locales.sh, share/locales-skeleton.tar.bz2,
+	share/fonts.tar.bz2: changes to get in line with new XFree86
+
+2002/01/18  Pixel  <pixel@mandrakesoft.com>
+
+	* share/gen_locales.sh, share/locales-skeleton.tar.bz2: find the X11
+	locale on the box so that XI18N_OBJS's and common are included
+
 2002/01/18  François Pons  <fpons@mandrakesoft.com>
 
 	* install_any.pm: add update flag for urpmi medium.
