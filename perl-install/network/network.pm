@@ -142,8 +142,8 @@ sub write_resolv_conf {
 	    my @old = map { "# nameserver $_\n" } @{$prev{nameserver}};
 	    @new, @old;
 	};
-	output($file, @search, @nameserver, (map { "# $_\n" } @unknown), "\n# ppp temp entry\n");
-	
+	output_with_perm($file, 0644, @search, @nameserver, (map { "# $_\n" } @unknown), "\n# ppp temp entry\n");
+
 	#-res_init();		# reinit the resolver so DNS changes take affect
 	1;
     } else {
