@@ -786,8 +786,8 @@ sub string_height {
 }
 
 sub get_text_coord {
-    my ($text, $widget4style, $max_width, $currentx, $currenty, $o_wrap_char) = @_;
-    my $wrap_char = $o_wrap_char || ' ';
+    my ($text, $widget4style, $max_width, $currentx, $currenty) = @_;
+    my $wrap_char = ' ';
     my @lines;
     my $current_text;
     my @t = split($wrap_char, $text);
