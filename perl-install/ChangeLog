@@ -1,3 +1,54 @@
+2001/04/05  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm (choosePackagesTree): invert the meaning of 'Show
+	automatically selected
+	packages' to go along with the new description
+
+	* Xconfigurator.pm (write_XF86Config): try to have $_ interpreted
+	(otherwise you get things like ``InputDevice "Stylus$_" "AlwaysCore"'')
+
+	* install_any.pm (kernelVersion): fix enormous stupid typo
+	  - move report_bug in install_any
+	  - g_auto_install generates the auto_inst.cfg string without output'ing
+	it
+
+	* install_steps.pm (exitInstall): oups, report_bug is no more in
+	commands::
+	(configureXBefore): fix the xkb verification (was broken for things like
+	``de(nodeadkeys)'')
+	  - move report_bug in install_any
+	  - g_auto_install generates the auto_inst.cfg string without output'ing
+	it
+
+	* any.pm: ask for autologin
+
+	* fs.pm (format_reiserfs): quietly format reiserfs
+
+	* commands.pm: 
+	  - move report_bug in install_any
+	  - g_auto_install generates the auto_inst.cfg string without output'ing
+	it
+
+	* install_steps_interactive.pm: ask for autologin
+	(generateAutoInstFloppy): do not use $o->{pcmcia} to know if pcmcia.img
+	was used. Better have a look at /proc/cmdline
+	  - move report_bug in install_any
+	  - g_auto_install generates the auto_inst.cfg string without output'ing
+	it
+
+	* share/rpmsrate: 
+	  - add ldetect
+	  - the default Aurora chose is the categorizing one
+
+2001/04/05  siegel
+
+	* share/po/de.po: fixed typo
+
+2001/04/05  yduret
+
+	* bootlook.pm: fix pablo mess
+	install autolgin just if we want to autolog :)
+
 2001/04/05  dam's  <damien@mandrakesoft.com>
 
 	* ChangeLog, bootloader.pm: readded passwd. Must verify that it's secure
