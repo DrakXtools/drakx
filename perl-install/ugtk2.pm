@@ -942,11 +942,10 @@ END { &exit() }
 sub _create_window {
     my (%options) = @_;
 
-    add2hash(\%options, {
-	     if_(!$::isInstall && !$::isWizard, border_width => 5),
-	     widget_name => 'Title',
-	 });
-    my $w = gtknew('Window', %options);
+    my $w = gtknew('Window', 
+		   if_(!$::isInstall && !$::isWizard, border_width => 5),
+		   widget_name => 'Title',
+		   %options);
 
     if ($force_focus) {
 	(my $previous_current_window, $ugtk2::current_window) = ($ugtk2::current_window, $w);
