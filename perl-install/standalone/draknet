@@ -29,6 +29,7 @@ use netconnect;
 use common qw(:common :file :functional :system);
 use c;
 
+my $xpm_path="/home/damien/cvs2/gi/perl-install/standalone/pixmaps";
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 $::isWizard = "@ARGV" =~ /--wizard/;
 print "EMBED\n" if $::isEmbedded;
@@ -60,7 +61,7 @@ $::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 
 my $in = vnew interactive('su');
 
-$::isEmbedded or goto dd;
+#$::isEmbedded or goto dd;
 netconnect::read_net_conf('', $netcnx, $netc);
 any::setup_thiskind($in, 'net', !$::expert, 1);
 my @all_cards = netconnect::conf_network_card_backend ('', $netc, $intf, undef, undef, undef, undef);
@@ -248,6 +249,7 @@ sub configure_lan {
     my (undef, $prefix, $netcnx, $netc, $intf) = @_;
     my $window = new Gtk::Window -toplevel;
     my @infos;
+    my @conf_data;
     $window->set_policy (1, 1, 1);
     $window->signal_connect ( delete_event => sub { Gtk->main_quit; });
     $window->set_position(1);
@@ -265,13 +267,14 @@ sub configure_lan {
 	#	Eth${_}Hostname=$netc->{HOSTNAME}
 	#       Eth${_}HostAlias=" . do { $netc->{HOSTNAME} =~ /([^\.]*)\./; $1 } . "
 	#	Eth${_}Driver=$all_cards[$_]->[1]
-        my @conf_data = ([_("IP address"), \$intf->{"eth$_"}->{IPADDR}],
+        @conf_data = ([_("IP address"), \$intf->{"eth$_"}->{IPADDR}],
 			 [_("Netmask"), \$intf->{"eth$_"}{NETMASK}],
 			 [_("Boot Protocol"), \$intf->{"eth$_"}{BOOTPROTO}, ["static", "dhcp", "bootp"]],
-			 [_("Started on boot"), \$intf->{"eth$_"}{ONBOOT} , ["static", "dhcp"]],
+			 [_("Started on boot"), \$intf->{"eth$_"}{ONBOOT} , ["yes", "no"]],
 			 [_("DHCP client"), \$netcnx->{dhcp_client}]
 			);
 	my $i=0;
+	my ($pix_eth_map, $pix_eth_mask) = Gtk::Gdk::Pixmap->create_from_xpm(NULL, Gtk::Widget->get_default_style->bg('normal'),  "$xpm_path/eth_card_mini.xpm");
 	foreach (@conf_data) {
 	    $infos[2*$i]=new Gtk::HBox(0,0);
 	    my $l=new Gtk::Label($_->[0]);
@@ -294,24 +297,25 @@ sub configure_lan {
 	#	$clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
 	#	$clist1->set_selectable($_, 0);
 	print "--eth$_\n";
-	$notebook->append_page($vbox_local, "eth$_");
+	my $hbox_local = new Gtk::HBox(0,0);
+	my $pix = new Gtk::Pixmap ($pix_eth_map, $pix_eth_mask);
+	$hbox_local->pack_start($pix,0,0,0);
+	$hbox_local->pack_start(new Gtk::Label(_("eth$_")),0,0,0);
+	$hbox_local->show_all;
+	$notebook->append_page($vbox_local, $hbox_local);
     }
     my $bbox1 = new Gtk::HButtonBox;
     $vbox1->pack_start($bbox1,0,0,0);
     $bbox1->set_layout(-end);
     my $button_ok = new Gtk::Button "OK";
     $button_ok->signal_connect ( clicked => sub {
-				     $i=0;
-				     foreach (@mask) {
-					 if ($_) {
-					     print $conf_data[$i]->[1] . "\n";
-					     print ${$conf_data[$i]->[1]} . " - " . $infos[2*$i+1]->get_text() . "\n";
-					     ${$conf_data[$i]->[1]}=$infos[2*$i+1]->get_text();
-					     update();
-					 }
-					 else { $infos[2*$i]->hide; }
+				     my $i=0;
+				     foreach (@conf_data) {
+					 print ${$_->[1]} . " - " . $infos[2*$i+1]->get_text() . "\n";
+					 ${$_->[1]}=$infos[2*$i+1]->get_text();
 					 $i++;
 				     }
+				     update();
 				     $window->destroy(); Gtk->main_quit;
 				 });
     $bbox1->add($button_ok);
@@ -362,27 +366,30 @@ sub configure_net {
     $frame1->add($vbox2);
     my $i=0;
     my @conf_data = ([_("Card IRQ"), \$cnx->{irq}],
-		[_("Card mem (DMA)"), \$cnx->{mem}],
-		[_("Card IO"), \$cnx->{io}],
-		[_("Card IO_0"), \$cnx->{io0} ],
-		[_("Card IO_1"), \$cnx->{io1}],
-		[_("Your personal phone number"), \$cnx->{phone_in}],
-		[_("Provider name (ex provider.net)"), \$netc->{DOMAINNAME2}],
-		[_("Provider phone number"), \$cnx->{phone_out}],
-		[_("Provider dns 1 (optional)"), \$netc->{dnsServer2}],
-		[_("Provider dns 2 (optional)"), \$netc->{dnsServer3}],
-		[_("Account Login (user name)"), \$cnx->{login}],
-		[_("Account Password"), \$cnx->{passwd}],
-		[_("Dialing mode"), $cnx->{dialing_mode}, [ "auto", "manual"] ],
-		[_("Gateway"), \$netc->{GATEWAY}],
-		[_("Connection name"), \$modem->{connection} ],
-		[_("Phone number"), \$modem->{phone} ],
-		[_("Login ID"), \$modem->{login} ],
-		[_("Password"), \$modem->{passwd} ],
-		[_("Authentication"), \$modem->{auth}, [ _("PAP"), _("Terminal-based"), _("Script-based") ] ],
-		[_("Domain name"), \$modem->{domain} ],
-		[_("First DNS Server"), \$modem->{dns1} ],
-		[_("Second DNS Server"), \$modem->{dns2} ]);
+		     [_("Card mem (DMA)"), \$cnx->{mem}],
+		     [_("Card IO"), \$cnx->{io}],
+		     [_("Card IO_0"), \$cnx->{io0} ],
+		     [_("Card IO_1"), \$cnx->{io1}],
+		     [_("Your personal phone number"), \$cnx->{phone_in}],
+		     [_("Provider name (ex provider.net)"), \$netc->{DOMAINNAME2}],
+		     [_("Provider phone number"), \$cnx->{phone_out}],
+		     [_("Provider dns 1 (optional)"), \$netc->{dnsServer2}],
+		     [_("Provider dns 2 (optional)"), \$netc->{dnsServer3}],
+		     [_("Account Login (user name)"), \$cnx->{login}],
+		     [_("Account Password"), \$cnx->{passwd}],
+		     [_("Dialing mode"), $cnx->{dialing_mode}, [ "auto", "manual"] ],
+		     [_("Gateway"), \$netc->{GATEWAY}],
+		     [_("Connection name"), \$modem->{connection} ],
+		     [_("Phone number"), \$modem->{phone} ],
+		     [_("Login ID"), \$modem->{login} ],
+		     [_("Password"), \$modem->{passwd} ],
+		     [_("Authentication"), \$modem->{auth}, [ _("PAP"), _("Terminal-based"), _("Script-based") ] ],
+		     [_("Domain name"), \$modem->{domain} ],
+		     [_("First DNS Server"), \$modem->{dns1} ],
+		     [_("Second DNS Server"), \$modem->{dns2} ],
+		     [_("Ethernet Card"), \$netc->{NET_DEVICE}, [ 'eth0', 'eth1', 'eth2', 'eth3', 'eth4', 'eth5','eth6', 'eth7', 'eth8', 'eth9' ]],
+		     [_("DHCP Client"), \$netcnx->{dhcp_client}, ["dhcpcd", "dhcpxd", "dhcp-client"] ]
+);
     foreach (@conf_data) {
 	$infos[2*$i]=new Gtk::HBox(0,0);
 	my $l=new Gtk::Label($_->[0]);
@@ -403,9 +410,12 @@ sub configure_net {
   	$i++;
     }
     my @mask;
-    @mask=(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type} eq 'lan';
-    @mask=(0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type} eq 'isdn_internal' && $cnx->{card_type} ne 'pci';
-    @mask=(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type} eq 'isdn_internal' && $cnx->{card_type} eq 'isa';
+@mask=(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type}eq'lan';
+@mask=(0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type}eq'isdn_internal' && $cnx->{card_type} eq 'pci';
+@mask=(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type}eq'isdn_internal' && $cnx->{card_type} ne 'pci';
+@mask=(0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0) if ($netcnx->{type}eq'modem'||$netcnx->{type} eq 'isdn_external');
+@mask=(0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0) if $netcnx->{type} =~ 'adsl';
+@mask=(0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1) if $netcnx->{type} eq 'cable';
 #    @mask=(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type} eq '' && $cnx->{card_type} eq 'isa';
     $vbox1->pack_start(new Gtk::HSeparator,0,0,5);
 
@@ -421,11 +431,10 @@ sub configure_net {
 					     print $conf_data[$i]->[1] . "\n";
 					     print ${$conf_data[$i]->[1]} . " - " . $infos[2*$i+1]->get_text() . "\n";
 					     ${$conf_data[$i]->[1]}=$infos[2*$i+1]->get_text();
-					     update();
 					 }
-					 else { $infos[2*$i]->hide; }
 					 $i++;
 				     }
+				     update();
 				     $window->destroy(); Gtk->main_quit;
 				 });
     $bbox1->add($button_ok);
