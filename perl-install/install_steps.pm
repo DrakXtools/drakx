@@ -193,7 +193,7 @@ sub doPartitionDisksAfter {
     }
 
     fs::set_removable_mntpoints($o->{all_hds});
-    fs::set_all_default_options($o->{all_hds}, %$o, lang::fs_options($o->{locale}))
+    fs::mount_options::set_all_default($o->{all_hds}, %$o, lang::fs_options($o->{locale}))
 	if !$o->{isUpgrade};
 
     $o->{fstab} = [ fs::get::fstab($o->{all_hds}) ];

@@ -645,7 +645,7 @@ sub change_type {
     $part->{mntpoint} = '' if isRawLVM($type) || isRawRAID($type);
     set_isFormatted($part, 0);
     fs::type::set_type_subpart($part, $type);
-    fs::rationalize_options($part);
+    fs::mount_options::rationalize($part);
     1;
 }
 

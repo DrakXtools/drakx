@@ -15,9 +15,9 @@ sub to_fstab_entry {
     my ($class, $e) = @_;
     my $part = $class->to_fstab_entry_raw($e, 'smbfs');
     if ($e->{server}{username}) {
-	my ($options, $unknown) = fs::mount_options_unpack($part);
+	my ($options, $unknown) = fs::mount_options::unpack($part);
 	$options->{"$_="} = $e->{server}{$_} foreach qw(username password domain);
-	fs::mount_options_pack($part, $options, $unknown);
+	fs::mount_options::pack($part, $options, $unknown);
     }
     $part;
 }
@@ -122,11 +122,11 @@ sub fstab_entry_to_credentials {
 
     my ($server_name) = network::smb->from_dev($part->{device}) or return;
 
-    my ($options, $unknown) = fs::mount_options_unpack($part);
+    my ($options, $unknown) = fs::mount_options::unpack($part);
     $options->{'username='} && $options->{'password='} or return;
     my %h = map { $_ => delete $options->{"$_="} } qw(username domain password);
     $h{file} = $options->{'credentials='} = to_credentials($server_name, $h{username});
-    fs::mount_options_pack_($part, $options, $unknown), \%h;
+    fs::mount_options::pack_($part, $options, $unknown), \%h;
 }
 
 sub remove_bad_credentials {

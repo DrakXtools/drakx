@@ -106,7 +106,7 @@ if ($type eq 'list-hd') {
 	my $useSupermount = 'magicdev';
 	require security::level;
 	require lang;
-	fs::set_default_options($raw_hd, 
+	fs::mount_options::set_default($raw_hd, 
 				useSupermount => $useSupermount, 
 				security => security::level::get(), 
 				lang::fs_options(lang::read()));

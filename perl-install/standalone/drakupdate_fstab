@@ -91,14 +91,14 @@ sub set_options {
     my ($part, $useSupermount) = @_;
 
     $part->{is_removable} = 1; #- force removable flag
-    fs::set_default_options($part, 
+    fs::mount_options::set_default($part, 
 			    useSupermount => $useSupermount, 
 			    security => security::level::get(), 
 			    lang::fs_options(lang::read()));
 
-    my ($options, $unknown) = fs::mount_options_unpack($part);
+    my ($options, $unknown) = fs::mount_options::unpack($part);
     $options->{kudzu} = 1 if !$no_flag;
-    fs::mount_options_pack($part, $options, $unknown);
+    fs::mount_options::pack($part, $options, $unknown);
 }
 
 sub set_mount_point {

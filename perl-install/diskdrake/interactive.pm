@@ -496,7 +496,7 @@ sub Create {
 	    put_in_hash($part, fs::type::type_name2subpart($type_name));
 	    $part->{mntpoint} = '' if isNonMountable($part);
 	    $part->{mntpoint} = 'swap' if isSwap($part);
-	    fs::set_default_options($part);
+	    fs::mount_options::set_default($part);
 
 	    check($in, $hd, $part, $all_hds) or return 1;
 	    $migrate_files = need_migration($in, $part->{mntpoint}) or return 1;
@@ -904,9 +904,9 @@ sub Options {
 
     my @simple_options = qw(user noauto supermount username= password=);
 
-    my (undef, $user_implies) = fs::mount_options();
-    my ($options, $unknown) = fs::mount_options_unpack($part);
-    my %help = fs::mount_options_help();
+    my (undef, $user_implies) = fs::mount_options::list();
+    my ($options, $unknown) = fs::mount_options::unpack($part);
+    my %help = fs::mount_options::help();
 
     my $prev_user = $options->{user};
     $in->ask_from(N("Mount options"),
@@ -926,7 +926,7 @@ sub Options {
 		      if ($options->{encrypted}) {
 			  # modify $part->{options} for the check
 			  local $part->{options};
-			  fs::mount_options_pack($part, $options, $unknown);
+			  fs::mount_options::pack($part, $options, $unknown);
 			  if (!check($in, $hd, $part, $all_hds)) {
 			      $options->{encrypted} = 0;
 			  } elsif (!$part->{encrypt_key} && !isSwap($part)) {
@@ -944,7 +944,7 @@ sub Options {
 		  },
 		 ) or return;
 
-    fs::mount_options_pack($part, $options, $unknown);
+    fs::mount_options::pack($part, $options, $unknown);
     1;
 }
 

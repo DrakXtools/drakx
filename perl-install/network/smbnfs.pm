@@ -37,7 +37,7 @@ sub to_fullstring {
 sub to_fstab_entry_raw {
     my ($class, $e, $fs_type) = @_;
     my $fs_entry = { device => $class->to_dev($e), fs_type => $fs_type };
-    fs::set_default_options($fs_entry);
+    fs::mount_options::set_default($fs_entry);
     $fs_entry;
 }
 

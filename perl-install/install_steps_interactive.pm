@@ -157,7 +157,7 @@ sub selectInstallClass {
 	    log::l("choosing to upgrade partition $part->{device}");
 	    install_any::use_root_part($o->{all_hds}, $part, $o->{prefix});
 	    foreach (grep { $_->{mntpoint} } @{$o->{fstab}}) {
-		my ($options, $_unknown) = fs::mount_options_unpack($_);
+		my ($options, $_unknown) = fs::mount_options::unpack($_);
 		$options->{encrypted} or next;
 		$o->ask_from_({ focus_first => 1 },
 			      [ { label => N("Encryption key for %s", $_->{mntpoint}),
