@@ -234,32 +234,29 @@ $window1->{window}->add(
                                                              }),
                                            ),
                                  0, Gtk2::HSeparator->new,
-                                 0, $bbox0 = new Gtk2::HButtonBox,
+                                 0, $bbox0 = gtkpack(Gtk2::HButtonBox->new,
+                                                     gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub { 
+                                                                           exec("drakhelp Drakxtools-Guide.html/internet-connection.html") unless fork() }),
+                                                     my $button_apply = gtksignal_connect(gtkset_sensitive(Gtk2::Button->new(N("Apply")), 0),
+                                                                                          clicked => \&apply),
+                                                     gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => \&quit_global),
+                                                     gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'), clicked => sub {
+                                                                           my $dialog = _create_dialog(N("Please wait"));
+                                                                           gtkpack($dialog->vbox,
+                                                                                   Gtk2::Label->new(N("Please Wait... Applying the configuration")));
+                                                                           $dialog->show_all;
+                                                                           gtkflush();
+                                                                           apply();
+                                                                           $dialog->destroy;
+                                                                           update();
+                                                                           quit_global();
+                                                                       }),
+                                                    ),
                                  ),
                         );
 
 
 $button_expert->set_active($expert_mode);
-my $button_apply = new Gtk2::Button(N("Apply"));
-$button_apply->signal_connect(clicked => \&apply);
-$button_apply->set_sensitive(0);
-$bbox0->add($button_apply);
-
-my $button_cancel = Gtk2::Button->new_from_stock('gtk-cancel');
-$button_cancel->signal_connect(clicked => \&quit_global);
-$bbox0->add($button_cancel);
-my $button_ok = Gtk2::Button->new_from_stock('gtk-ok');
-$button_ok->signal_connect(clicked => sub {
-				 my $dialog = _create_dialog(N("Please wait"));
-				 $dialog->vbox->pack_start(new Gtk2::Label(N("Please Wait... Applying the configuration")),1,1,20);
-				 $dialog->show_all;
-				 gtkflush();
-				 apply();
-				 $dialog->destroy;
-				 update();
-				 quit_global();
-			     });
-$bbox0->add($button_ok);
 
 $combo1->signal_connect(realize => sub {
                             $combo1->entry->signal_connect(changed => sub {
