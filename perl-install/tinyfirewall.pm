@@ -6,6 +6,7 @@ use commands;
 use run_program;
 use netconnect;
 use network;
+use POSIX qw(tmpnam);
 my @messages = (_("tinyfirewall configurator
 
 This configures a personal firewall for this Linux Mandrake machine.
@@ -105,14 +106,29 @@ sub DoInterface {
 		  if_(and_( map {$settings{$_} !~ /$i/ and $settings{$_} !~ /$f/ } ('TRUSTED_IFACES', 'PUBLIC_IFACES', 'INTERNAL_IFACES')), $i)
 	    } @interfaces ));
     };
-    my $popimap = sub { $_[0] or return; mapn { $settings{$_[0]} = $_[1] }
-[ qw(FORCE_PASV_FTP TCP_BLOCKED_SERVICES UDP_BLOCKED_SERVICES ICMP_ALLOWED_TYPES ENABLE_SRC_ADDR_VERIFY IP_MASQ_NETWORK IP_MASQ_MODULES REJECT_METHOD) ] ,
-[ "N", "6000:6020", "2049", "destination-unreachable echo-reply time-exceeded" , "Y", "", "", "DENY" ]; };
-    my $ntp = sub { $_[0] or return; mapn { $settings{$_[0]} = $_[1] } ['ICMP_OUTBOUND_DISABLED_TYPES}', 'LOG_FAILURES'], [ "", "N"] };
+#    my $popimap = sub {	$_[0] or return; $settings{FORCE_PASV_FTP} = 11;  mapn {$settings{"$_[0]"} = "$_[1]"; }
+#[ qw(FORCE_PASV_FTP TCP_BLOCKED_SERVICES UDP_BLOCKED_SERVICES ICMP_ALLOWED_TYPES ENABLE_SRC_ADDR_VERIFY IP_MASQ_NETWORK IP_MASQ_MODULES REJECT_METHOD) ] ,
+#[ "N", "6000:6020", "2049", "destination-unreachable echo-reply time-exceeded" , "Y", "", "", "DENY" ]; };
+my $popimap = sub {
+    $_[0] or return;
+    $settings{'FORCE_PASV_FTP'} = "N";
+    $settings{TCP_BLOCKED_SERVICES}= "6000:6020";
+    $settings{UDP_BLOCKED_SERVICES}= "2049";
+    $settings{ICMP_ALLOWED_TYPES}= "destination-unreachable echo-reply time-exceeded";
+    $settings{ENABLE_SRC_ADDR_VEIFY}= "Y";
+    $settings{IP_MASQ_NETWORK}= "";
+    $settings{IP_MASQ_MODULES}= "";
+    $settings{REJECT_METHOD}= "DENY";
+};
+    #    my $ntp = sub { $_[0] or return; mapn { $settings{$_[0]} = $_[1] } ['ICMP_OUTBOUND_DISABLED_TYPES}', 'LOG_FAILURES'], [ "", "N"] };
+    my $ntp = sub { $_[0] or return;
+		    $settings{'ICMP_OUTBOUND_DISABLED_TYPES}'} = "";
+		    $settings{'LOG_FAILURES'} = "N";
+		};
     my $dhcp = sub { if ($_[0]) {
 	$settings{DHCP_IFACES} and return;
-	open NETSTAT, "/bin/netstat -in |" or die "Can't pipe from /bin/netstat: $!\n"; <NETSTAT>; <NETSTAT>;
-	$settings{DHCP_IFACES} = join(' ', split(' ', $settings{DHCP_IFACES}), map { (split / /)[0]; } (<NETSTAT>)); close NETSTAT;
+	my (undef, undef, @netstat) = `/bin/netstat -in`;
+	$settings{DHCP_IFACES} = join(' ', split(' ', $settings{DHCP_IFACES}), map { /(\S+)/ } @netstat );
     } else { $settings{DHCP_IFACES} = "" } };
     my $quit = sub {
 	$_[0] or $in->exit(0);
