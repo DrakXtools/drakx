@@ -365,6 +365,7 @@ Take a look at http://www.linmodems.org"),
                         [ { label => N("Modem"), type => "list", val => \$modem_name, list => [ keys %{$netc->{autodetect}{modem}} ], allow_empty_list => 1 } ],
                     },
                     post => sub {
+                        $modem ||= $netcnx->{modem} ||= {};;
                         $ntf_name = $netc->{autodetect}{modem}{$modem_name}{device} || $netc->{autodetect}{modem}{$modem_name}{description};
 
                         return "ppp_provider" if $ntf_name =~ m!^/dev/!;
@@ -394,9 +395,6 @@ Take a look at http://www.linmodems.org"),
                    
                    choose_serial_port =>
                    {
-                    pre => sub {
-                        $modem ||= $netcnx->{modem} ||= {};;
-                    },
                     name => N("Please choose which serial port your modem is connected to."),
                     interactive_help_id => 'selectSerialPort',
                     data => sub {
