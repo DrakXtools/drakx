@@ -22,36 +22,32 @@ my $FOOMATIC_DEFAULT_SPOOLER = "$FOOMATICCONFDIR/defaultspooler";
 #-Did we already read the subroutines of /usr/sbin/ptal-init?
 my $ptalinitread = 0;
 
-my %spoolers = ('ppq' => {
+our %spoolers = ('ppq' => {
                           'help' => "/usr/bin/lphelp %s |",
-					 'print_command' => 'lpr-pdq'
+					 'print_command' => 'lpr-pdq',
+					 'long_name' =>_("PDQ - Print, Don't Queue"),
+					 'short_name' => _("PDQ")
                  },
                 'lpd' => {
                         'help' => "/usr/bin/pdq -h -P %s 2>&1 |"
-                        'print_command' => 'lpr-cups'
+                        'print_command' => 'lpr-cups',
+				    'long_name' => _("LPD - Line Printer Daemon"),
+					   'short_name' => _("LPD")
                  },
 			 'lprng' => {
-				'print_command' => 'lpr-lpd'
+				'print_command' => 'lpr-lpd',
+				'long_name' => _("LPRng - LPR New Generation"),
+				'short_name' => _("LPRng")
 			 },
 			 'cups' => {
-				'print_command' => 'lpr-cups'
+				'print_command' => 'lpr-cups',
+				'long_name' => _("CUPS - Common Unix Printing System"),
+				'short_name' => _("CUPS")
 			 }
             );
-%spooler = (
-    _("CUPS - Common Unix Printing System") => "cups",
-    _("LPRng - LPR New Generation")         => "lprng",
-    _("LPD - Line Printer Daemon")          => "lpd",
-    _("PDQ - Print, Don't Queue")           => "pdq"
-);
-%spooler_inv = reverse %spooler;
+our %spooler_inv = map {$spooler{$_}{long_name} => $_ } keys %spoolers;
 
-%shortspooler = (
-    _("CUPS")   => "cups",
-    _("LPRng")  => "lprng",
-    _("LPD")    => "lpd",
-    _("PDQ")    => "pdq"
-);
-%shortspooler_inv = reverse %shortspooler;
+our %shortspooler_inv = map {$spooler{$_}{short_name} => $_ } keys %spoolers;
 
 %printer_type = (
     _("Local printer")                              => "LOCAL",
@@ -83,9 +79,9 @@ sub spooler {
     # show it only in the spooler menu when it was manually installed.
     if (files_exist((qw(/usr/lib/filters/lpf
 			/usr/sbin/lpd)))) {
-	return @spooler_inv{qw(cups lprng pdq)};
+	return @spooler_inv{qw(cups lprng pdq)}{long_name};
     } else {
-	return @spooler_inv{qw(cups pdq)};
+	return @spooler_inv{qw(cups pdq)}{long_name};
     }
 }
 
@@ -517,12 +513,9 @@ sub whatNetPrinter {
 
     # Which ports should be scanned?
     my @portstoscan;
-    if ($smb) {
-	push @portstoscan, "139";
-    }
-    if ($network) {
-	push @portstoscan, "4010", "4020", "4030", "5503", "9100-9104";
-    }
+    push @portstoscan, "139" if ($smb);
+    push @portstoscan, "4010", "4020", "4030", "5503", "9100-9104" if ($network);
+    
     return () if $#portstoscan < 0;
     my $portlist = join (",", @portstoscan);
     
@@ -820,7 +813,7 @@ sub read_configured_queues($) {
 
 sub make_menuentry {
     my ($printer, $queue) = @_;
-    my $spooler = $shortspooler_inv{$printer->{SPOOLER}};
+    my $spooler = $shortspooler_inv{$printer->{SPOOLER}}{short_name};
     my $connect = $printer->{configured}{$queue}{queuedata}{connect};
     my $localremote;
     if (($connect =~ m!^file:!) || ($connect =~ m!^ptal:/mlc:!)) {
