@@ -339,11 +339,11 @@ sub is_one_big_fat {
 }
 
 sub file2part {
-    my ($prefix, $fstab, $file, $keep_simple_symlinks) = @_;    
+    my ($fstab, $file, $keep_simple_symlinks) = @_;    
     my $part;
 
-    $file = $keep_simple_symlinks ? common::expand_symlinks_but_simple("$prefix$file") : expand_symlinks("$prefix$file");
-    unless ($file =~ s/^$prefix//) {
+    $file = $keep_simple_symlinks ? common::expand_symlinks_but_simple("$::prefix$file") : expand_symlinks("$::prefix$file");
+    unless ($file =~ s/^$::prefix//) {
 	my ($part) = grep { loopback::carryRootLoopback($_) } @$fstab or die;
 	log::l("found $part->{mntpoint}");
 	$file =~ s|/initrd/loopfs|$part->{mntpoint}|;

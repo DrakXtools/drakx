@@ -876,7 +876,7 @@ sub install($$$;$$) {
     return if $::g_auto_install || !scalar(@$toInstall);
 
     #- for root loopback'ed /boot
-    my $loop_boot = loopback::prepare_boot($prefix);
+    my $loop_boot = loopback::prepare_boot();
 
     #- first stage to extract some important informations
     #- about the packages selected. this is used to select

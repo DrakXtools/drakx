@@ -343,7 +343,7 @@ if (arch() !~ /ppc/) {
 	       } } }, \@l)) {
 	    $b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
 	    require bootloader;
-	    bootloader::configure_entry($prefix, $e); #- hack to make sure initrd file are built.
+	    bootloader::configure_entry($e); #- hack to make sure initrd file are built.
 
 	    push @{$b->{entries}}, $e if $c eq "Add";
 	} else {
@@ -884,10 +884,10 @@ sub write_passwd_user {
 }
 
 sub set_login_serial_console {
-    my ($prefix, $port, $speed) = @_;
+    my ($port, $speed) = @_;
 
     my $line = "s$port:12345:respawn:/sbin/getty ttyS$port DT$speed ansi\n";
-    substInFile { s/^s$port:.*//; $_ = $line if eof } "$prefix/etc/inittab";
+    substInFile { s/^s$port:.*//; $_ = $line if eof } "$::prefix/etc/inittab";
 }
 
 

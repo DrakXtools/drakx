@@ -773,7 +773,7 @@ sub readBootloaderConfigBeforeInstall {
     my ($image, $v);
 
     require bootloader;
-    add2hash($o->{bootloader} ||= {}, bootloader::read($o->{prefix}, arch() =~ /sparc/ ? "/etc/silo.conf" : arch() =~ /ppc/ ? "/etc/yaboot.conf" : "/etc/lilo.conf"));
+    add2hash($o->{bootloader} ||= {}, bootloader::read());
 
     #- since kernel or kernel-smp may not be upgraded, it should be checked
     #- if there is a need to update existing lilo.conf entries by following
@@ -838,7 +838,7 @@ sub setupBootloaderBefore {
 	    my $p = pkgs::packageByName($o->{packages}, $_);
 	    $p && $p->flag_installed;
 	} 'Aurora', 'bootsplash';
-        bootloader::suggest($o->{prefix}, $o->{bootloader}, $o->{all_hds}{hds}, $o->{fstab},
+        bootloader::suggest($o->{bootloader}, $o->{all_hds}{hds}, $o->{fstab},
 			    vga_fb => ($force_vga || $vga && $need_fb) && $o->{vga}, 
 			    quiet => $o->{meta_class} ne 'server');
 	bootloader::suggest_floppy($o->{bootloader}) if $o->{security} <= 3 && arch() !~ /ppc/;
