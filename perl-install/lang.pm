@@ -119,6 +119,9 @@ our %langs = (
 'sl' =>    [ 'Slovenian',           'Slovenscina',       'sl_SI', '1    ', 'iso-8859-2' ],
 'sq' =>    [ 'Albanian',            'Shqip',             'sq_AL', '1    ', 'iso-8859-1' ], 
 'sr' =>    [ 'Serbian Cyrillic',    'Srpska',            'sr_CS', '1    ', 'utf_cyr1', 'sp:sr' ],
+#- "sh" comes first, because otherwise, due to the way glibc does language
+#- fallback, if "sr@Latn" is not there but a "sr" (whichs uses cyrillic)
+#- is there, "sh" will never be used.
 'sr@Latn' => [ 'Serbian Latin',     'Srpska',            'sr_CS', '1    ', 'unicode',  'sh:sr@Latn' ], 
 #- ss_ZA not yet done, using en_ZA locale instead
 'ss' =>    [ 'Swati',               'SiSwati',           'en_ZA', '  3  ', 'iso-8859-1', 'ss:en_ZA' ],
