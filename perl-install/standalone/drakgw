@@ -40,7 +40,7 @@ $::isInstall and die "Not supported during install.\n";
 local $_ = join '', @ARGV;
 
 $::Wizard_pix_up = "drakgw.png";
-$::direct = /-direct/;
+my $direct = /-direct/;
 
 my $sysconf_network = "/etc/sysconfig/network";
 my $sysconf_dhcpd = "/etc/sysconfig/dhcpd";
@@ -187,7 +187,7 @@ step_ask_confirm:
 
 undef $::Wizard_no_previous;
     
-$::direct or $in->ask_okcancel(N("Internet Connection Sharing"),
+$direct or $in->ask_okcancel(N("Internet Connection Sharing"),
 N("You are about to configure your computer to share its Internet connection.
 With that feature, other computers on your local network will be able to use this computer's Internet connection.
 

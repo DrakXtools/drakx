@@ -41,7 +41,7 @@ $::isInstall and die "Not supported during install.\n";
 local $_ = join '', @ARGV;
 
 $::Wizard_pix_up = "drakvpn.png";
-$::direct = /-direct/;
+my $direct = /-direct/;
 
 my ($kernel_version) = c::kernel_version() =~ /(...)/;
 log::l("[drakvpn] kernel_version $kernel_version");
@@ -146,7 +146,7 @@ step_ask_confirm:
 
 undef $::Wizard_no_previous;
     
-$::direct or $in->ask_okcancel(N("Simple VPN setup."),
+$direct or $in->ask_okcancel(N("Simple VPN setup."),
 N("You are about to configure your computer to use a VPN connection.
 
 With this feature, computers on your local private network and computers
@@ -172,7 +172,7 @@ if ($kernel_version < 2.5) {
 	$proc_version = "ipsec native";
 }
 
-$::direct or $in->ask_okcancel(N("Simple VPN setup."),
+$direct or $in->ask_okcancel(N("Simple VPN setup."),
 N("VPN connection.
 
 This program is based on the following projects:
@@ -185,7 +185,7 @@ This program is based on the following projects:
 Please read AT LEAST the ipsec-howto docs
 before going any further.",$ipsec_package)) or goto begin;
 
-$::direct or $in->ask_okcancel(N("Kernel module."),
+$direct or $in->ask_okcancel(N("Kernel module."),
 N("The kernel need to have ipsec support.
 
 You're running a %s kernel version.

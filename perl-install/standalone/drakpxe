@@ -32,7 +32,7 @@ use c;
 $::isInstall and die "Not supported during install.\n";
 
 $::Wizard_pix_up = "drakgw.png"; #- to change ? keep existing one, nobody will see (too late) ;-)
-$::direct = grep { /-direct/ } @ARGV;
+my $direct = grep { /-direct/ } @ARGV;
 
 
 #
@@ -108,7 +108,7 @@ begin:
 
 $::Wizard_no_previous = 1;
     
-$::direct or $in->ask_okcancel(N("Installation Server Configuration"),
+$direct or $in->ask_okcancel(N("Installation Server Configuration"),
 N("You are about to configure your computer to install a PXE server as a DHCP server
 and a TFTP server to build an installation server.
 With that feature, other computers on your local network will be installable using this computer as source.
