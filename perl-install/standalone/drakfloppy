@@ -50,7 +50,7 @@ unless ($::isEmbedded) {
 }
 
 
-my ($output, @modules, @temp_modules, %buttons, %options, $tree_model, $tree, $list_model, $list);
+my (@modules, @temp_modules, %buttons, %options, $tree_model, $tree, $list_model, $list);
 
 my $conffile = "/etc/sysconfig/drakfloppy";
 
@@ -286,7 +286,7 @@ sub build_it() {
                            if_($options{raid},   "--omit-raid-modules"),
                            if_(@modules, map { my $i = $_; $i =~ s!.*/!!; "--with=$i" } @modules),
                           );
-    $initrd_args = "--mkinitrdargs \"$initrd_args\"" if $initrd_args;
+    $initrd_args = qq(--mkinitrdargs "$initrd_args") if $initrd_args;
     my $co = join(' ', "/sbin/mkbootdisk --noprompt --verbose --device", $device_combo->entry->get_text, $initrd_args);
     $options{MODULES} = join(' ', @modules);
     setVarsInSh($conffile, \%options);
