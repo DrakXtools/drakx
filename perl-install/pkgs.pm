@@ -1420,6 +1420,7 @@ sub install($$$;$$) {
 	    } else {
 		#- child process will run each transaction.
 		$SIG{SEGV} = sub { log::l("segmentation fault on transactions"); c::_exit(0) };
+		my @prev_pids = grep { /^\d+$/ } all("/proc");
 		my $db;
 		eval {
 		    close INPUT;
@@ -1477,7 +1478,7 @@ sub install($$$;$$) {
 		close OUTPUT;
 
 		#- now search for child process which may be locking the cdrom, making it unable to be ejected.
-		if (my @killpid = grep { $_ > $$ } all("/proc")) {
+		if (my @killpid = difference2([ grep { /^\d+$/ } all("/proc") ], \@prev_pids)) {
 		    log::l("ERROR: DrakX should not have to clean the packages shit. Killing ". join(", ", @killpid));
 		    kill 15, @killpid;
 		    sleep 2;
