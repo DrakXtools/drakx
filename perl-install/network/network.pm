@@ -477,6 +477,72 @@ sub easy_dhcp {
     1;
 }
 
+sub wpa_supplicant_add_network {
+    my ($new_network) = @_;
+    my $wpa_supplicant_conf = "$::prefix/etc/wpa_supplicant.conf";
+    my $s;
+    my %network;
+    foreach (cat_($wpa_supplicant_conf)) {
+        if (%network) {
+            #- in a "network = {}" block
+            if (/^\s*(\w+)\s*=\s*(.*?)(\s*#.*)?$/) {
+                push @{$network{entries}}, { key => $1, value => $2, comment => $3 };
+                $1 eq 'ssid' and $network{ssid} = $2;
+            } elsif (/^·*\}/) {
+                #- end of network block, write it
+                $s .= "network = { $network{comment}\n";
+                my $update = $network{ssid} eq $new_network->{ssid};
+                foreach (@{$network{entries}}) {
+                    my $key = $_->{key};
+                    if ($update) {
+                        #- do not write entry if not provided in the new network
+                        exists $new_network->{$key} or next;
+                        #- update value from the new network
+                        $_->{value} = delete $new_network->{$key};
+                    }
+                    if ($key) {
+                        $s .= "    $key = $_->{value}$_->{comment}\n";
+                    } else {
+                        $s .= " $_->{comment}\n";
+                    }
+                }
+                if ($update) {
+                    while (my ($key, $value) = each(%$new_network)) {
+                        $s .= "    $key = $value\n";
+                    }
+                }
+                $s .= "}\n";
+                undef %network;
+                $update and undef $new_network;
+            } else {
+                #- unrecognized, keep it anyway
+                push @{$network{entries}}, { comment => $_ };
+            }
+        } else {
+            if (/^\s*network\s*=\s*\{(.*)/) {
+                #- beginning of a new network block
+                $network{comment} = $1;
+            } else {
+                #- keep other options, comments
+                $s .= $_;
+            }
+        }
+    }
+    if ($new_network) {
+        #- network wasn't found, write it
+        $s .= "\nnetwork = {\n";
+        #- write ssid first
+        if (my $ssid = delete $new_network->{ssid}) {
+            $s .= "    ssid = $ssid\n";
+        }
+        while (my ($key, $value) = each(%$new_network)) {
+            $s .= "    $key = $value\n";
+        }
+        $s .= "}\n";
+    }
+    output($wpa_supplicant_conf, $s);
+}
+
 #- configureNetwork2 : configure the network interfaces.
 #- input
 #-  $prefix
