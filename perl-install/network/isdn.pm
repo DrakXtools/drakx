@@ -4,7 +4,6 @@ use network::isdn_consts;
 use common;
 use any;
 use modules;
-use pkgs;
 use run_program;
 use log;
 use network::tools;
@@ -55,6 +54,7 @@ We recommand the light configuration.
 			       ) or return;
     my ($rmpackage, $instpackage) = $e =~ /light/ ? ('isdn4net', 'isdn-light') : ('isdn-light', 'isdn4net');
     if (!$::isStandalone) {
+	require pkgs;
 	my $p = pkgs::packageByName($in->{packages}, $rmpackage);
 	$p && pkgs::packageFlagSelected($p) and pkgs::unselectPackage($in->{packages}, $p);
     }
