@@ -888,6 +888,8 @@ sub write_XF86Config {
     my ($o, $file) = @_;
     my $O;
 
+    $::g_auto_install and return;
+
     local (*F, *G);
     open F, ">$file"   or die "can't write XF86Config in $file: $!";
     open G, ">$file-4" or die "can't write XF86Config in $file-4: $!";
