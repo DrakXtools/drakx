@@ -80,3 +80,12 @@ rpmsrate
 
 # perl -alpe '$F[4] =~ /(.*):(.*)/; $r = ($1 * 60 + $2) / $F[2]; s|\S+(\s+\S+)\s*$|sprintf("%.2f", $r) . "$1"|e;'
 # perl -ape '$r = $F[2] / $F[3]; s|\S+\s*$|sprintf "%.2f\n", $r|e;'
+
+
+redhat 7.3:
+- do not halt the box when "halt" is used
+- no sysreq
+- kdm has gnome entry whereas gnome is not installed
+  => choosing gnome gives a flashing black screen and kdm reruns
+
+- repartition of packages on various CDs is crap
