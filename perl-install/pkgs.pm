@@ -540,11 +540,14 @@ sub readCompssUsers {
 
 	if (/^(\S.*)/) {
 	    my $verbatim = $_;
-	    my ($icon, $descr, $path);
+	    my ($icon, $descr, $path, $selected);
 	    /^(.*?)\s*\[path=(.*?)\](.*)/  and $_ = "$1$3", $path  = $2;
 	    /^(.*?)\s*\[icon=(.*?)\](.*)/  and $_ = "$1$3", $icon  = $2;
 	    /^(.*?)\s*\[descr=(.*?)\](.*)/ and $_ = "$1$3", $descr = $2;
-	    $compssUsers{"$path|$_"} = { label => $_, verbatim => $verbatim, path => $path, icons => $icon, descr => $descr, flags => $l = [] };
+	    /^(.*?)\s*\[selected=(.*?)\](.*)/ and $_ = "$1$3", $selected = $2;
+	    $compssUsers{"$path|$_"} = { label => $_, verbatim => $verbatim,
+					 path => $path, icons => $icon, descr => $descr,
+					 if_(defined $selected, selected => [ split /[\s,]+/, $selected ]), flags => $l = [] };
 	    push @sorted, "$path|$_";
 	} elsif (/^\s+(.*?)\s*$/) {
 	    push @$l, $1;
