@@ -790,7 +790,7 @@ sub selectLanguage {
 sub write_passwd_user {
     my ($prefix, $u, $isMD5) = @_;
 
-    local $u->{pw} = $u->{pw} || $u->{password} && &crypt($u->{password}, $isMD5);
+    $u->{pw} = &crypt($u->{password}, $isMD5) if $u->{password};
     $u->{shell} ||= '/bin/bash';
 
     substInFile {
