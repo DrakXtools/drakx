@@ -150,7 +150,7 @@ my %languages = my @languages = (
 #'zh_HK.Big5' => [ 'Chinese|Traditional|Hong Kong|Big5', 'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW:zh_HK:zh' ],
 #'zh_HK.UTF-8' => [ 'Chinese|Traditional|Hong Kong|UTF-8','utf_tw','zh_HK', 'zh_HK:zh_TW.Big5:zh_TW:zh' ],
 'zh_TW.Big5' => [ 'Chinese|Traditional|Big5', 'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW:zh_HK:zh' ],
-'zh_TW.UTF-8' => [ 'Chinese|Traditional|UTF-8','utf_tw','zh_TW.Big5','zh_TW.Big5:zh_TW.big5:zh_TW:zh_HK:zh' ],
+'zh_TW.UTF-8' => [ 'Chinese|Traditional|UTF-8','utf_tw','zh_TW','zh_TW.Big5:zh_TW.big5:zh_TW:zh_HK:zh' ],
 'zh_CN.GB2312' => [ 'Chinese|Simplified|GB2312', 'gb2312', 'zh_CN.GB2312', 'zh_CN.GB2312:zh_CN:zh' ],
 'zh_CN.UTF-8' => [ 'Chinese|Simplified|UTF-8','utf_cn','zh_CN', 'zh_CN.GB2312:zh_CN:zh' ],
 # does this one works? 
