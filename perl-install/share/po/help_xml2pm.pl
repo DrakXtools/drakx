@@ -13,7 +13,7 @@ if ( ! -x "$xsltproc" ){
     print "so type \"urpmi libxslt-proc\" please.\n";
     exit 1;
 }
-my @langs = grep { !/ru|pt/ } grep { /^..$/ && -e "$dir/$_/drakx-chapter.xml" } all($dir) or die "no XML help found in $dir\n";
+my @langs = grep { !/pt/ } grep { /^..$/ && -e "$dir/$_/drakx-chapter.xml" } all($dir) or die "no XML help found in $dir\n";
 
 my %helps = map {
     my $lang = $_;
