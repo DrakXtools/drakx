@@ -26,10 +26,13 @@ sub write_secret_backend {
 }
 
 sub ask_connect_now {
-    my ($cnx, $inter) = @_;
-    if ($in->ask_yesorno(_("Internet configuration"),
-			 _("Do you want to try to connect to the Internet now?")
-			)) {
+#    my ($cnx, $inter) = @_;
+    my $a;
+    eval { $a = $in->ask_yesorno(_("Internet configuration"),
+			  _("Do you want to try to connect to the Internet now?")
+			 ) };
+    return 0 if $@;
+    if ($a) {
 	my $up;
 	{
 	    my $w = $in->wait_message('', _("Testing your connection..."), 1);

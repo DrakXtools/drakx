@@ -79,7 +79,6 @@ sub adsl_conf {
     $adsl->{atboot} = $in->ask_yesorno(_("ADSL configuration"),
 					  _("Do you want to start your connection at boot?")
 				      );
-    $::isStandalone and ask_connect_now($adsl, 'ppp0');
     1;
 }
 

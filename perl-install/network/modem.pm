@@ -27,7 +27,6 @@ q(#!/bin/bash
 ifdown ppp0
 killall pppd
 ));
-    if ($::isStandalone) { ask_connect_now($netcnx->{$netcnx->{type}}, 'ppp0') or goto modem_step_1 }
     1;
 }
 

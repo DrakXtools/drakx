@@ -55,7 +55,6 @@ We recommand the light configuration.
     #system('urpmi --auto --best-output ' . join(' ', $e =~ /light/ ? 'isdn-light' : 'isdn4net', 'isdn4k-utils'));
     $install->($e =~ /light/ ? 'isdn-light' : 'isdn4net', 'isdn4k-utils');
     isdn_write_config_backend($isdn, $e =~ /light/, $netc);
-    $::isStandalone and ask_connect_now($isdn, 'ippp0');
     1;
 }
 
