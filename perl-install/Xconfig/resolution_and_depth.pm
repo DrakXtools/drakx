@@ -226,7 +226,7 @@ sub choose_gtk {
 	%h;
     };
 
-    my ($depth_combo, $x_res_combo);
+    my ($depth_combo, $x_res_combo) = (Gtk2::OptionMenu->new, Gtk2::OptionMenu->new);
 
     my $pix_colors = Gtk2::Image->new;
     my $set_chosen_Depth_image = sub {
@@ -253,6 +253,7 @@ sub choose_gtk {
 	}
 	my $image = $monitor_images_x_res{$chosen_x_res} or internal_error("no image for resolution $chosen_x_res");
 	$pixmap_mo->set_from_file($image);
+	$x_res_combo->entry->set_text($chosen_x_res . "x" . $chosen_y_res);
     };
     $set_chosen_x_res->($chosen_x_res, $chosen_y_res);
 
@@ -266,21 +267,17 @@ sub choose_gtk {
 					   $pixmap_mo,
 					   gtkpack2(new Gtk2::HBox(0,0),
 						    create_packtable({ col_spacings => 5, row_spacings => 5 },
-	     [ $x_res_combo = new Gtk2::Combo, new Gtk2::Label("") ],
-	     [ $depth_combo = new Gtk2::Combo, gtkadd(gtkset_shadow_type(new Gtk2::Frame, 'etched_out'), $pix_colors) ],
+	     [ $x_res_combo, new Gtk2::Label("") ],
+	     [ $depth_combo, gtkadd(gtkset_shadow_type(new Gtk2::Frame, 'etched_out'), $pix_colors) ],
 							     ),
 						   ),
 					  ),
 			       ),
 		    0, gtkadd($W->create_okcancel(N("Ok"), N("Cancel"), '', if_($help_sub, [ N("Help"), $help_sub, 1 ]))),
 		    ));
-    $depth_combo->disable_activate;
-    $depth_combo->set_use_arrows_always(1);
-    $depth_combo->entry->set_editable(0);
     $depth_combo->set_popdown_strings(map { translate($depth2text{$_}) } ikeys %depth2x_res);
     $depth_combo->entry->set_size_request(220, -1);
     $depth_combo->entry->signal_connect(changed => sub {
-	$depth_combo->entry->get_text eq '' and return;  #- FIXME temporarily workaround gtk suckiness (set_text generates two 'change' signals, one when removing the whole, one for inserting the replacement..)
         my %txt2depth = reverse %depth2text;
 	my $s = $depth_combo->entry->get_text;
         $chosen_Depth = $txt2depth{untranslate($s, keys %txt2depth)};
@@ -290,22 +287,18 @@ sub choose_gtk {
 	    $set_chosen_x_res->(max(@{$depth2x_res{$chosen_Depth}}));
 	}
     });
-    $x_res_combo->disable_activate;
-    $x_res_combo->set_use_arrows_always(1);
-    $x_res_combo->entry->set_editable(0);
     $x_res_combo->set_popdown_strings(uniq map { "$_->{X}x$_->{Y}" } sort { $a->{X} <=> $b->{X} } @resolutions);
     $x_res_combo->entry->signal_connect(changed => sub {
-	$x_res_combo->entry->get_text eq '' and return;  #- FIXME temporarily workaround gtk suckiness (set_text generates two 'change' signals, one when removing the whole, one for inserting the replacement..)
 	$set_chosen_x_res->($1, $2) if $x_res_combo->entry->get_text =~ /(\d+)x(\d+)/;
 	
 	if (!member($chosen_Depth, @{$x_res2depth{$chosen_x_res}})) {
 	    $set_chosen_Depth->(max(@{$x_res2depth{$chosen_x_res}}));
 	}
     });
+    $set_chosen_x_res->($chosen_x_res);
     $set_chosen_Depth->($chosen_Depth);
     $W->{ok}->grab_focus;
 
-    $x_res_combo->entry->set_text($chosen_x_res . "x" . $chosen_y_res);
     $W->main or return;
 
     find { $_->{X} == $chosen_x_res && 
