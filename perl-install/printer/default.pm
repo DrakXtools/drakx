@@ -12,10 +12,14 @@ my $FOOMATIC_DEFAULT_SPOOLER = "$FOOMATICCONFDIR/defaultspooler";
 sub set_printer {
     my ($printer) = $_[0];
     my $spooler = $printer->{SPOOLER};
-    $spooler = "cups" if $spooler eq "rcups";
-    run_program::rooted($::prefix, "foomatic-configure",
-			"-D", "-q", "-s", $spooler,
-			"-n", $printer->{DEFAULT}) or return 0;
+    if ($spooler eq "rcups") {
+	run_program::rooted($::prefix, "lpoptions",
+			    "-d", $printer->{DEFAULT}) or return 0;
+    } else {
+	run_program::rooted($::prefix, "foomatic-configure",
+			    "-D", "-q", "-s", $spooler,
+			    "-n", $printer->{DEFAULT}) or return 0;
+    }
     return 1;
 }
 
