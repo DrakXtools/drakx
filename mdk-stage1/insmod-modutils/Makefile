@@ -13,7 +13,9 @@ top_dir = ..
 include $(top_dir)/Makefile.common
 
 
-FLAGS = -c -Wall -Os -fomit-frame-pointer -I./include -D_GNU_SOURCE -DELF_MACHINE_H='"elf_$(ARCH).h"' -DARCH_$(ARCH)
+INCS = -I./include
+
+DEFS = -Wno-error -D_GNU_SOURCE -DELF_MACHINE_H='"elf_$(ARCH).h"' -DARCH_$(ARCH)
 
 
 DIRS = util obj
@@ -51,11 +53,11 @@ libinsmod-DIET.a: insmod-DIET.o ./util/libutil-DIET.a ./obj/libobj-DIET.a
 	ranlib $@
 
 insmod-frontend.o: insmod-frontend.c insmod.c
-	gcc $(FLAGS) $(GLIBC_INCLUDES) insmod-frontend.c
+	gcc $(CFLAGS) $(DEFS) $(INCS) $(GLIBC_INCLUDES) -c insmod-frontend.c
 
 insmod.o: insmod.c
-	gcc $(FLAGS) $(GLIBC_INCLUDES) insmod.c
+	gcc $(CFLAGS) $(DEFS) $(INCS) $(GLIBC_INCLUDES) -c insmod.c
 
 insmod-DIET.o: insmod.c
-	gcc $(FLAGS) $(DIETLIBC_INCLUDES) -o $@ insmod.c
+	gcc $(CFLAGS) $(DEFS) $(INCS) $(DIETLIBC_INCLUDES) -o $@ -c insmod.c
 

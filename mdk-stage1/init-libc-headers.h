@@ -40,5 +40,5 @@
 #define SOCK_STREAM 1
 #endif
 
-_syscall3(int, syslog, int, type, char *, bufp, int, len);
-_syscall3(int, reboot, int, magic, int, magic2, int, flag);
+static inline _syscall3(int, syslog, int, type, char *, bufp, int, len);
+static inline _syscall3(int, reboot, int, magic, int, magic2, int, flag);

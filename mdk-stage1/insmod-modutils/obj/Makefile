@@ -19,7 +19,9 @@ clean:
 	rm -f *.o *.a
 
 
-FLAGS = -c -Wall -Os -fomit-frame-pointer -I./../include -D_GNU_SOURCE -DELF_MACHINE_H='"elf_$(ARCH).h"' -DARCH_$(ARCH) -DCONFIG_ROOT_CHECK_OFF=0
+INCS = -I./../include
+
+DEFS = -D_GNU_SOURCE -DELF_MACHINE_H='"elf_$(ARCH).h"' -DARCH_$(ARCH) -DCONFIG_ROOT_CHECK_OFF=0
 
 OBJS = obj_kallsyms.o obj_common.o obj_load.o obj_reloc.o obj_$(ARCH).o
 
@@ -28,4 +30,4 @@ libobj.a: $(OBJS)
 	ranlib $@
 
 .c.o:
-	gcc $(FLAGS) $(GLIBC_INCLUDES) -c $<
+	gcc $(CFLAGS) $(DEFS) $(INCS) $(GLIBC_INCLUDES) -c $<

@@ -18,6 +18,23 @@
  # Portions from Erik Troan (ewt@redhat.com) Copyright 1996 Red Hat Software 
  #
  #*****************************************************************************
+ #
+ # Currently:
+ #
+ # 	ix86
+ # init with minilibc
+ # stage1 with dietlibc except some targets
+ #
+ # 	ppc
+ # init with dietlibc
+ # stage1 with glibc
+ #
+ # 	ia64
+ # init with glibc
+ # stage1 with glibc
+ #
+ #*****************************************************************************
+
 
 VERSION = cooker
 
@@ -25,8 +42,6 @@ top_dir = .
 
 include $(top_dir)/Makefile.common
 
-
-CFLAGS = -Os -pipe -Wall -Werror -fomit-frame-pointer
 
 DEFS = -DVERSION=\"$(VERSION)\" -DSPAWN_SHELL
 
@@ -39,7 +54,11 @@ INITSRC = minilibc.c init.c
 INIT_DEFS = -DINIT_HEADERS=\"minilibc.h\"
 else
 INITSRC = init.c
+ifeq (ia64, $(ARCH))
+INIT_DEFS = -DINIT_HEADERS=\"init-libc-headers.h\" $(GLIBC_INCLUDES)
+else
 INIT_DEFS = -DINIT_HEADERS=\"init-libc-headers.h\" $(DIETLIBC_INCLUDES)
+endif
 endif
 
 INITOBJS = $(subst .c,.o,$(INITSRC))
@@ -108,8 +127,13 @@ NETWORK_DEFS = -DDISABLE_CDROM -DDISABLE_DISK
 ifeq (i386, $(ARCH))
 LDFLAGS_INIT = -static -nostdlib /usr/lib/crt1.o
 else
+ifeq (ia64, $(ARCH))
+LDFLAGS_INIT = $(GLIBC_LDFLAGS_STAGE1)
+INIT_LIBC = $(GLIBC_LIBC)
+else
 LDFLAGS_INIT = $(DIETLIBC_LDFLAGS_STAGE1)
 INIT_LIBC = $(DIETLIBC_LIBC)
+endif
 endif
 
 
@@ -119,8 +143,10 @@ ifeq (i386, $(ARCH))
 BINS += stage1-cdrom stage1-disk stage1-network
 endif
 
-
-DIRS = dietlibc mar pci-resource bzlib $(INSMOD) slang newt
+ifneq (ia64, $(ARCH))
+DIRS = dietlibc
+endif
+DIRS += mar pci-resource bzlib $(INSMOD) slang newt
 ifeq (i386,$(ARCH))
 DIRS += pcmcia
 endif

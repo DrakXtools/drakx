@@ -18,30 +18,38 @@ top_dir = ..
 include $(top_dir)/Makefile.common
 
 
-all: libbzlib.a libbzlib-DIET.a
+LIBNAME = libbzlib
+
+OBJS = blocksort.o bzlib.o compress.o crctable.o decompress.o huffman.o randtable.o
+
+DEFS =
+
+INCS =
+
+
+TARGETS = $(LIBNAME).a
+
+ifeq (DIETLIBC, $(L))
+TARGETS += $(LIBNAME)-DIET.a
+endif
+
+all: $(TARGETS)
 
 clean:
 	rm -f *.o *.a
 
-FLAGS = -Wall -Werror -Os -fomit-frame-pointer -c
-
-
-OBJS = blocksort.o bzlib.o compress.o crctable.o decompress.o huffman.o randtable.o
 OBJS-DIET = $(subst .o,-DIET.o,$(OBJS))
 
-
-libbzlib.a: $(OBJS)
+$(LIBNAME).a: $(OBJS)
 	ar -cru $@ $^
 	ranlib $@
 
-libbzlib-DIET.a: $(OBJS-DIET)
+$(LIBNAME)-DIET.a: $(OBJS-DIET)
 	ar -cru $@ $^
 	ranlib $@
-
 
 $(OBJS): %.o: %.c
-	gcc $(FLAGS) $(GLIBC_INCLUDES) -c $< -o $@
+	gcc $(CFLAGS) $(DEFS) $(INCS) $(GLIBC_INCLUDES) -c $< -o $@
 
 $(OBJS-DIET): %-DIET.o: %.c
-	gcc $(FLAGS)  $(DIETLIBC_INCLUDES) -c $< -o $@
-
+	gcc $(CFLAGS) $(DEFS) $(INCS) $(DIETLIBC_INCLUDES) -c $< -o $@

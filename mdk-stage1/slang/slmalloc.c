@@ -94,7 +94,7 @@ static int check_memory (unsigned char *p, char *what)
 
    if (n == 0xFFFFFFFFUL)
      {
-	sprintf (buf, "%s: %p: Already FREE! Abort NOW.", what, p - Chunk);
+	sprintf (buf, "%s: %p: Already FREE! Abort NOW.", what, (void*)p - Chunk);
 	SLmalloc_doerror (buf);
 	return -1;
      }
@@ -104,7 +104,7 @@ static int check_memory (unsigned char *p, char *what)
        || (*(p + (int) (n + 2)) != 81)
        || (*(p + (int) (n + 3)) != 86))
      {
-	sprintf (buf, "\007%s: %p: Memory corrupt! Abort NOW.", what, p);
+	sprintf (buf, "\007%s: %p: Memory corrupt! Abort NOW.", what, (void*)p);
 	SLmalloc_doerror (buf);
 	return -1;
      }
@@ -115,7 +115,7 @@ static int check_memory (unsigned char *p, char *what)
    if (Total_Allocated < 0)
      {
 	sprintf (buf, "\007%s: %p\nFreed %ld, Allocated is: %ld!\n",
-		 what, p, (long) n, Total_Allocated);
+		 what, (void*)p, (long) n, Total_Allocated);
 	SLang_doerror (buf);
      }
 #ifdef SLDEBUG_DOUT

@@ -19,11 +19,20 @@ ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
  #- default lib is dietlibc (honoured by main Makefile whenever possible)
 L = DIETLIBC
-# L = GLIBC
+#L = GLIBC
 
  #- default frontend is newt (honoured by main Makefile whenever possible)
 F = NEWT
 # F = STDIO
+
+ #- override in some situations
+ifeq (ia64, $(ARCH))
+L = GLIBC
+endif
+
+
+ #- flags used by all stuff
+CFLAGS = -Os -pipe -Wall -Werror -fomit-frame-pointer
 
 
 DIETLIBC_INCLUDES = -I$(top_dir)/dietlibc/include -I.

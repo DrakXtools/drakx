@@ -22,12 +22,18 @@ top_dir = ..
 include $(top_dir)/Makefile.common
 
 
-all: libmar.a libmar-DIET.a mar
+TARGETS = libmar.a mar
+
+
+ifeq (DIETLIBC, $(L))
+TARGETS += libmar-DIET.a
+endif
+
+
+all: $(TARGETS)
 
 clean:
 	rm -f *.o libmar.a libmar-DIET.a mar
-
-FLAGS = -Wall -Werror -Os -fomit-frame-pointer -c
 
 
 mar: mar-frontend.o mar-extract-only-standalone.o
@@ -43,13 +49,13 @@ libmar-DIET.a: mar-extract-only-DIET.o
 	ranlib $@
 
 mar-extract-only.o: mar-extract-only.c mar-extract-only.h mar.h
-	gcc $(FLAGS) $(GLIBC_INCLUDES) mar-extract-only.c
+	gcc $(CFLAGS) $(GLIBC_INCLUDES) -c mar-extract-only.c
 
 mar-extract-only-DIET.o: mar-extract-only.c mar-extract-only.h mar.h
-	gcc $(FLAGS) $(DIETLIBC_INCLUDES) -o $@ mar-extract-only.c
+	gcc $(CFLAGS) $(DIETLIBC_INCLUDES) -o $@ -c mar-extract-only.c
 
 mar-frontend.o: mar-frontend.c mar.h mar-extract-only.h
-	gcc $(FLAGS) $(GLIBC_INCLUDES) mar-frontend.c
+	gcc $(CFLAGS) $(GLIBC_INCLUDES) -c mar-frontend.c
 
 mar-extract-only-standalone.o: mar-extract-only.c mar-extract-only.h mar.h
-	gcc $(FLAGS) $(GLIBC_INCLUDES) -o $@ -D_STANDALONE_ mar-extract-only.c
+	gcc $(CFLAGS) $(GLIBC_INCLUDES) -o $@ -D_STANDALONE_ -c mar-extract-only.c

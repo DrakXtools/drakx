@@ -34,6 +34,7 @@
 #include <errno.h>
 #include <ctype.h>
 #include <stdarg.h>
+#include <signal.h>
 
 #include "stage1.h"
 

@@ -18,32 +18,39 @@ top_dir = ..
 include $(top_dir)/Makefile.common
 
 
-all: libnewt.a libnewt-DIET.a
+LIBNAME = libnewt
 
-clean:
-	rm -f *.o *.a
+OBJS = newt.o button.o form.o checkbox.o entry.o label.o listbox.o scrollbar.o textbox.o scale.o grid.o windows.o buttonbar.o checkboxtree.o
 
-FLAGS = -Wall -Werror -Os -fomit-frame-pointer -DVERSION=\"0.50.19\" -c
+DEFS = -DVERSION=\"0.50.19\"
 
 INCS = -I../slang
 
 
-OBJS = newt.o button.o form.o checkbox.o entry.o label.o listbox.o scrollbar.o textbox.o scale.o grid.o windows.o buttonbar.o checkboxtree.o
+TARGETS = $(LIBNAME).a
+
+ifeq (DIETLIBC, $(L))
+TARGETS += $(LIBNAME)-DIET.a
+endif
+
+all: $(TARGETS)
+
+clean:
+	rm -f *.o *.a
+
 OBJS-DIET = $(subst .o,-DIET.o,$(OBJS))
 
-
-libnewt.a: $(OBJS)
+$(LIBNAME).a: $(OBJS)
 	ar -cru $@ $^
 	ranlib $@
 
-libnewt-DIET.a: $(OBJS-DIET)
+$(LIBNAME)-DIET.a: $(OBJS-DIET)
 	ar -cru $@ $^
 	ranlib $@
-
 
 $(OBJS): %.o: %.c
-	gcc $(FLAGS) $(GLIBC_INCLUDES) $(INCS) -c $< -o $@
+	gcc $(CFLAGS) $(DEFS) $(INCS) $(GLIBC_INCLUDES) -c $< -o $@
 
 $(OBJS-DIET): %-DIET.o: %.c
-	gcc $(FLAGS)  $(DIETLIBC_INCLUDES) $(INCS) -c $< -o $@
+	gcc $(CFLAGS) $(DEFS) $(INCS) $(DIETLIBC_INCLUDES) -c $< -o $@
 
