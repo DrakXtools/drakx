@@ -106,7 +106,7 @@
 #	        15- backend : --resore_all, --restore_sys, --restore_users
 #			  --build_cd_autoinst 	
 #			  --backup_now --backup_default_now
-#		16- taoe device1
+#		16- tape device support
 #		17- cpio use !!
 #		18- boot floppy disk (with dialog)
 #		19- build autoboot with backup and install cd 
@@ -1452,25 +1452,6 @@ sub find_backup_to_restore {
     }
 }
 
-sub do_restore_backend {
-    my $untar_cmd;
-    if (grep /tar.gz$/, all($path_to_find_restore)) { $untar_cmd = 0; } 
-    else { $untar_cmd = 1; } 
-    if ($restore_user)  { 
-	$untar_cmd or system(" echo 'user: $_' && cd /tmp &&  tar xfz  $path_to_find_restore/backup_user_$_.tar.gz -C $restore_path") foreach @user_list_to_restore;
-# fixme verifier next line.
-	$untar_cmd and system("echo 'user: $_' && cd /tmp &&  /usr/bin/bzip2 -cd $path_to_find_restore/backup_user_$_.tar.bz2 | tar xf -C $restore_path ") foreach @user_list_to_restore;
-    }
-    if ($restore_sys)   { 
-	$untar_cmd or system("echo backup_sys  && cd /tmp && tar xfz $path_to_find_restore/backup_sys.tar.gz  -C $restore_path ");
-	$untar_cmd and system("echo backup_sys cd /tmp && /usr/bin/bzip2 -cd $path_to_find_restore/backup_sys.tar.bz2  | tar xf -C $restore_path ");
-    }
-    if ($restore_other) { 
-	$untar_cmd or system("echo backup_other && cd /tmp && tar xfz $path_to_find_restore/backup_other.tar.gz  -C $restore_path ");
-	$untar_cmd and system("echo backup_other && cd /tmp && /usr/bin/bzip2 -cd $path_to_find_restore/backup_other.tar.bz2  | tar xf -C $restore_path ");
-    }
-    print "End of restore\n";
-}
 
 sub system_state {
     $system_state = ();
@@ -1509,6 +1490,27 @@ sub restore_state {
 	$restore_state .= "- Path to Restore: $restore_path \n";
     }
 }
+
+sub restore_backend {
+    my $untar_cmd;
+    if (grep /tar.gz$/, all($path_to_find_restore)) { $untar_cmd = 0; } 
+    else { $untar_cmd = 1; } 
+    if ($restore_user)  { 
+	$untar_cmd or system(" echo 'user: $_' && cd /tmp &&  tar xfz  $path_to_find_restore/backup_user_$_.tar.gz -C $restore_path") foreach @user_list_to_restore;
+# fixme verifier next line.
+	$untar_cmd and system("echo 'user: $_' && cd /tmp &&  /usr/bin/bzip2 -cd $path_to_find_restore/backup_user_$_.tar.bz2 | tar xf -C $restore_path ") foreach @user_list_to_restore;
+    }
+    if ($restore_sys)   { 
+	$untar_cmd or system("echo backup_sys  && cd /tmp && tar xfz $path_to_find_restore/backup_sys.tar.gz  -C $restore_path ");
+	$untar_cmd and system("echo backup_sys cd /tmp && /usr/bin/bzip2 -cd $path_to_find_restore/backup_sys.tar.bz2  | tar xf -C $restore_path ");
+    }
+    if ($restore_other) { 
+	$untar_cmd or system("echo backup_other && cd /tmp && tar xfz $path_to_find_restore/backup_other.tar.gz  -C $restore_path ");
+	$untar_cmd and system("echo backup_other && cd /tmp && /usr/bin/bzip2 -cd $path_to_find_restore/backup_other.tar.bz2  | tar xf -C $restore_path ");
+    }
+    print "End of restore\n";
+}
+
 
 sub restore_do {
     my $do_restore;
@@ -1984,7 +1986,7 @@ sub button_box_restore_end {
 				       0, gtksignal_connect(new Gtk::Button(_(" Previous ")), clicked => sub { 
 					   ${$central_widget}->destroy(); $previous_widget->(); }),
 				       0, gtksignal_connect(new Gtk::Button(_(" Restore ")), clicked => sub { 
- 					   ${$central_widget}->destroy(); do_restore_backend(); }),
+ 					   ${$central_widget}->destroy(); restore_backend(); }),
 				       ),
 	    );
 }
