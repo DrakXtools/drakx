@@ -352,7 +352,7 @@ sub setDefaultPackages {
     $o->{compssUsersChoice}{USB} = 1 if modules::get_probeall("usb-interface");
     $o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
     $o->{compssUsersChoice}{HIGH_SECURITY} = 1 if $o->{security} > 3;
-    $o->{compssUsersChoice}{BIGMEM} = 1 if !$::oem && availableRamMB() > 800 && arch() !~ /ia64/;
+    $o->{compssUsersChoice}{BIGMEM} = 1 if !$::oem && availableRamMB() > 800 && arch() !~ /ia64|x86_64/;
     $o->{compssUsersChoice}{SMP} = 1 if detect_devices::hasSMP();
     $o->{compssUsersChoice}{CDCOM} = 1 if any { $_->{descr} =~ /commercial/i } values %{$o->{packages}{mediums}};
     $o->{compssUsersChoice}{'3D'} = 1 if 
@@ -683,6 +683,7 @@ sub getAndSaveInstallFloppy {
 	cp_af("$postinstall_rpms/auto_install.img", $where);
     } else {
 	my $image = cat_("/proc/cmdline") =~ /pcmcia/ ? "pcmcia" :
+	  arch() =~ /ia64|ppc/ ? "all"  : #- we only use all.img there
 	  ${{ disk => 'hd', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
 	$image .= arch() =~ /sparc64/ && "64"; #- for sparc64 there are a specific set of image.
 	getAndSaveFile("images/$image.img", $where) or log::l("failed to write Install Floppy ($image.img) to $where"), return;
