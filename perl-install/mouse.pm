@@ -333,7 +333,7 @@ sub load_modules {
 	/serial/ and @l = qw(serial);
 	/USB/    and @l = qw(hid mousedev usbmouse);
     }
-    foreach ($mouse->{wacom}) {
+    for (@{$mouse->{wacom}}) {
 	/ttyS/   and push @l, qw(serial);
 	/event/  and push @l, qw(wacom evdev);
     }
