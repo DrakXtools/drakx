@@ -1978,7 +1978,7 @@ sub system_state {
 		$where_cd and $system_state .= _(" on device : %s", $cd_device);
 		$where_tape and $system_state .= _("\n- Save to Tape on device : %s", $tape_device);
 		$media_erase and $system_state .= _("\t\tErase=%s", $erase_media);
-		($where_cd || $where_tape) and $system_state .= _("\n");
+		($where_cd || $where_tape) and $system_state .= "\n";
 		
 		$where_net and $system_state .= _("\n- Save via %s on host : %s\n", $net_proto, $host_name);
 		$where_net and $system_state .= _("\t\t user name: %s\n\t\t on path: %s \n", $login_user, $host_path);
