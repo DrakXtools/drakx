@@ -4196,7 +4196,7 @@ sub build_backup_ftp_status() {
 		$table =  gtkpack_(Gtk2::VBox->new(0, 15),
 			1, N("Sending files by FTP"),
 			1, Gtk2::VBox->new(0, 15),
-			1, create_packtable ({ col_spacings => 10, row_spacings => 5 },
+			1, create_packtable({ col_spacings => 10, row_spacings => 5 },
 				[N("Sending files...")],
 				[""], 
 				[ $plabel = Gtk2::Label->new(' ') ],
