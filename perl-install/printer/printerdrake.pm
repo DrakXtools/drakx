@@ -361,9 +361,10 @@ sub setup_local_autoscan {
 	# configured, this command has no effect.
 	require services;
 	services::stop("hpoj");
-	@autodetected = $expert_or_modify || $printer->{AUTODETECTLOCAL}    and printer::detect::local_detect(),
-				 (!$expert_or_modify && $printer->{AUTODETECTNETWORK}) and printer::detect::net_detect(),
-				 (!$expert_or_modify && $printer->{AUTODETECTSMB})     and printer::detect::net_smb_detect();
+	@autodetected = (
+	    $expert_or_modify || $printer->{AUTODETECTLOCAL} ? printer::detect::local_detect() : (),
+	    !$expert_or_modify ? printer::detect::whatNetPrinter($printer->{AUTODETECTNETWORK}, $printer->{AUTODETECTSMB}) : (),
+        );
 	# We have more than one printer, so we must ask the user for a queue
 	# name in the fully automatic printer configuration.
 	$printer->{MORETHANONE} = $#autodetected > 0;
