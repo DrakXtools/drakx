@@ -26,6 +26,8 @@ our %l = (
         qw(lance natsemi ne ne2k-pci ni5010 ni52 ni65 olympic pcnet32 plip rcpci), #old_tulip 
         qw(sb1000 sis900 sk98lin smc-ultra smc9194 starfire tlan tmspci tulip via-rhine), #sktr 
         qw(wd winbond-840 yellowfin ns83820),
+
+	qw(iph5526), #- fibre channel
       ),
       qw(3c59x 8139too sundance dl2k), #rtl8139 
     ],
