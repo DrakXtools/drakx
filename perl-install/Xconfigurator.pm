@@ -1335,14 +1335,14 @@ sub main {
 		}, [
 		    { format => sub { $_[0][0] }, val => \$f,
 		      list => [
-	   [ __("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() } ],
-           [ __("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto', $allowFB) } ],
+	   [ _("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() } ],
+           [ _("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto', $allowFB) } ],
                     if_($::expert, 
-           [ __("Change Server options") => sub { optionsConfiguration($o) } ]),
-	   [ __("Change Resolution") => sub { resolutionsConfiguration($o) } ],
-	   [ __("Show information") => sub { show_info($o) } ],
-	   [ __("Test again") => sub { $ok = testFinalConfig($o, 1) } ],
-	   [ __("Quit") => sub { $quit = 1 } ],
+           [ _("Change Server options") => sub { optionsConfiguration($o) } ]),
+	   [ _("Change Resolution") => sub { resolutionsConfiguration($o) } ],
+	   [ _("Show information") => sub { show_info($o) } ],
+	   [ _("Test again") => sub { $ok = testFinalConfig($o, 1) } ],
+	   [ _("Quit") => sub { $quit = 1 } ],
 			       ],
 		    }
 		   ]);
