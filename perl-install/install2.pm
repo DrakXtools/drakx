@@ -433,7 +433,7 @@ sub main {
     log::openLog(($::testing || $o->{localInstall}) && 'debug.log');
     log::l("second stage install running (", any::drakx_version(), ")");
 
-    eval { output('/proc/sys/kernel/modprobe', '') } if !$::testing; #- disable kmod, otherwise we get a different behaviour in kernel vs kernel-BOOT
+    eval { output('/proc/sys/kernel/modprobe', "\n") } if !$::testing; #- disable kmod, otherwise we get a different behaviour in kernel vs kernel-BOOT
     eval { fs::mount('none', '/sys', 'sysfs', 1) };
 
     if ($::move) {
