@@ -996,7 +996,7 @@ sub write_grub_config {
 	    }
 	}
     }
-    my $dev = dev2grub($bootloader->{first_hd_device} || $bootloader->{boot}, \%dev2bios);
+    my $dev = dev2grub($bootloader->{boot}, \%dev2bios);
     my ($s1, $s2, $m) = map { $file2grub->("/boot/grub/$_") } qw(stage1 stage2 menu.lst);
     my $f = "/boot/grub/install.sh";
     output "$::prefix$f",
