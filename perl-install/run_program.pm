@@ -36,8 +36,6 @@ sub rooted {
 	($stdoutm, $stdout, @args) = @args if $args[0] =~ /^>>?$/;
 	($stderrm, $stderr, @args) = @args if $args[0] =~ /^2>>?$/;
 
-	open STDIN, "/dev/null" or die "can't open /dev/null as stdin";
-
 	if ($stderr) {
 	    $stderrm =~ s/2//;
 	    open STDERR, "$stderrm $root$stderr" or die "run_program can't output in $root$stderr (mode `$stderrm')";
