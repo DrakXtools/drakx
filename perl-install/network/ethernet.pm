@@ -135,6 +135,7 @@ sub update_iftab() {
         my $descriptor = ${{ ether => 'mac', ieee1394 => 'mac_ieee1394' }}{$link_type} or next;
         substInFile {
             s/^$intf\s+.*\n//;
+            s/^.*\s+$mac_address\n//;
             $_ .= qq($intf\t$descriptor $mac_address\n) if eof;
         } "$::prefix/etc/iftab";
     }
