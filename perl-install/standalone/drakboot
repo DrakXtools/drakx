@@ -96,7 +96,7 @@ if (member( $cur_res, qw( 785 788 791 794))) {
 }
 
 #- and check that lilo is the correct loader
-$no_bootsplash ||= chomp_(`detectloader -q`) ne 'LILO';
+$no_bootsplash ||= $lilogrub ne 'LILO';
 $no_bootsplash = 0 if $::testing;
 my @thms;
 my @lilo_thms = if_(!$themes{default}, qw(default));
