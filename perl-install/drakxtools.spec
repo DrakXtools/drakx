@@ -290,8 +290,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Wed Feb  5 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.24mdk
-- drakfont updates (poulpy)
+* Thu Feb  6 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.24mdk
+- fix drakfloppy
+- diskdrake: s/fat/windows/ because of ntfs
+- poulpy:
+  o drakfont updates
+  o drakconnect fixes
+- translation updates (pablo & co)
+- add drakedm to choose display manager
+- drakhelp: install help on demand (deush)
+- harddrake2: fix for rtl languages
 
 * Wed Feb  5 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.23mdk
 - draksec cleanups
