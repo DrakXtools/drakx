@@ -212,6 +212,8 @@ sub addUser($) {
 
     $u{password} = crypt_($u{password}) if $u{password};
 
+    return if $::testing;
+
     local *F;
     open F, ">> $p/etc/passwd" or die "can't append to passwd file: $!";
     print F join(':', @u{@etc_pass_fields}), "\n";

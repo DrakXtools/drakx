@@ -139,6 +139,7 @@ my @drivers_by_category = (
   "AM53C974" => "AMD SCSI",
   "megaraid" => "AMI MegaRAID",
   "BusLogic" => "BusLogic Adapters",
+  "cpqarray" => "Compaq Smart Array controller",
   "dtc" => "DTC 3180/3280",
   "eata_dma" => "EATA DMA Adapters",
   "eata_pio" => "EATA PIO Adapters",

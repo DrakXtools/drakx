@@ -249,12 +249,12 @@ sub cp {
 }
 
 sub ps {
+
     @_ and die "usage: ps\n";
     my ($pid, $cpu, $cmd);
-    my $uptime = int first(cat_("/proc/uptime"));
+    my ($uptime) = split ' ', first(cat_("/proc/uptime"));
     my $hertz = 100;
 
-    local (*STDOUT_TOP);
     format STDOUT_TOP =
   PID   CMD
 .
@@ -268,7 +268,7 @@ $pid, $cpu, $cmd
 	 $cpu = sprintf "%2.1f", max(0, min(99, ($l[13] + $l[14]) * 100 / $hertz / ($uptime - $l[21] / $hertz)));
 	 (($cmd) = cat_("/proc/$pid/cmdline")) =~ s/\0/ /g;
 	 $cmd ||= (split ' ', (cat_("/proc/$pid/stat"))[0])[1];
-	 write STDOUT;
+	 write;
     }
 }
 
@@ -396,4 +396,27 @@ sub insmod {
     -r $f or die "can't find module $name";
     run_program::run("insmod_", $f, @_) or die("insmod $name failed");
     unlink $f;
+}
+
+sub route {
+    @ARGV and die "usage: route\nsorry, no modification handled\n";
+    my ($titles, @l) = cat_("/proc/net/route");
+    my @titles = split ' ', $titles;
+    my %l;
+    local *ROUTE = *STDOUT;
+    format ROUTE_TOP =
+Destination    Gateway        Mask           Iface
+.
+    format ROUTE =
+@<<<<<<<<<<<<  @<<<<<<<<<<<<  @<<<<<<<<<<<<  @<<<<<<<
+$l{Destination}, $l{Gateway}, $l{Mask}, $l{Iface}
+.
+    foreach (@l) {
+	/^\s*$/ and next;
+	@l{@titles} = split;
+	$_ = join ".", reverse map { hex } unpack "a2a2a2a2", $_ foreach @l{qw(Destination Gateway Mask)};
+	$l{Destination} = 'default' if $l{Destination} eq "0.0.0.0";
+	$l{Gateway}     = '*'       if $l{Gateway}     eq "0.0.0.0";
+	write ROUTE;
+    }
 }

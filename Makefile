@@ -1,4 +1,4 @@
-BOOT_IMG = mdkinst_hd.img mdkinst_cdrom.img mdkinst_network.img mdkinst_network_ks.img
+BOOT_IMG = gi_hd.img gi_cdrom.img gi_network.img gi_network_ks.img
 BINS = install/install install/local-install install/installinit/init
 
 
@@ -14,7 +14,7 @@ clean:
 
 $(BOOT_IMG): $(BINS)
 	if [ ! -e modules ]; then $(MAKE) update_kernel; fi
-	./make_boot_img $@ $(@:mdkinst_%.img=%)
+	./make_boot_img $@ $(@:gi_%.img=%)
 
 $(BINS):
 	$(MAKE) -C `dirname $@`
@@ -27,4 +27,4 @@ $(BOOT_IMG:%=%f): %f: %
 	dd if=$< of=/dev/fd0
 	xmessage "Floppy done"
 
-# mkisofs -R -b images/mdkinst_cdrom.img -c images/b /tmp/r /mnt/disk/ | cdrecord -v -eject speed=6 dev=1,0 -
+# mkisofs -R -b images/gi_cdrom.img -c images/b /tmp/r /mnt/disk/ | cdrecord -v -eject speed=6 dev=1,0 -
