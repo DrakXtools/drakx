@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 1mdk
+Release: 2mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Feb 20 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-2mdk
+- drakboot/diskdrake updates regarding partition renumbering (pixel)
+- drakconnect:
+  o do not overwrite provider vpi/vci settings (poulpy)
+  o detect more sagem 8xx modems
+  o enable to refuse network restarting
+  o add "Free non degroupe 1024/256" in adsl provider db
+- drakperm: fix "current" checkbox vs "group" and "user" pull-down
+  menus
+- localedrake: better uim support (pablo)
+- modules configuration: fix some agpgart aliases issues regarding
+  2.4.x/2.6.x kernels (pixel)
+
 * Fri Feb 20 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-1mdk
 - drakconnect: fix writing modules aliases (fix broken speedtouch)
 - drakbackup: use Gnome icon order (stew)
