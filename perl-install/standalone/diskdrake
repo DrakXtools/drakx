@@ -75,10 +75,10 @@ $SIG{__DIE__} = sub { my $m = chomp_($_[0]); log::l("ERROR: $m") };
 
 fs::get_raw_hds('', $all_hds);
 
-fs::merge_info_from_fstab([ fsedit::get_really_all_fstab($all_hds) ]);
-fs::merge_info_from_mtab([ fsedit::get_really_all_fstab($all_hds) ]);
+fs::merge_info_from_fstab([ fsedit::get_really_all_fstab($all_hds) ], '');
+fs::merge_info_from_mtab([ fsedit::get_really_all_fstab($all_hds) ], '');
 
-$all_hds->{current_fstab} = fs::fstab_to_string($all_hds);
+$all_hds->{current_fstab} = fs::fstab_to_string($all_hds, '');
 
 if ($type eq 'hd') {
     require diskdrake::interactive;

@@ -352,7 +352,8 @@ sub ask_fromW {
     my $mainw = ugtk2->new($common->{title}, %$o, if__($::main_window, transient => $::main_window));
  
     #-the widgets
-    my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack, $has_horiz_scroll, $has_scroll, $max_width);
+    my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack, $has_horiz_scroll, $has_scroll);
+    my $max_width = 0;
     my $total_size = 0;
     my $tooltips = Gtk2::Tooltips->new;
     my $ok_clicked = sub { 
@@ -393,7 +394,8 @@ sub ask_fromW {
 	};
 	my $changed = sub { $update->(sub { $common->{callbacks}{changed}($ind) }) };
 
-	my ($w, $real_w, $focus_w, $set, $get, $expand, $size, $width);
+	my ($w, $real_w, $focus_w, $set, $get, $expand, $size);
+	my $width = 0;
 	if ($e->{type} eq 'iconlist') {
 	    $w = Gtk2::Button->new;
 	    $set = sub {

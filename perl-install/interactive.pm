@@ -348,7 +348,7 @@ sub ask_from_normalize {
     #- don't display empty lists and one element lists
     @$l = grep { 
 	if ($_->{list} && $_->{not_edit} && !$_->{allow_empty_list}) {
-	    if (@{$_->{list}} == ()) {
+	    if (!@{$_->{list}}) {
 		eval {
 		    require 'log.pm'; #- "require log" causes some pb, perl thinking that "log" is the log() function
 		    log::l("ask_from_normalize: empty list for $_->{label}\n" . backtrace());
@@ -367,7 +367,7 @@ sub ask_from_normalize {
     $common->{interactive_help} ||= $common->{interactive_help_id} && $o->interactive_help_sub_get_id($common->{interactive_help_id});
     $common->{advanced_label} ||= N("Advanced");
     $common->{advanced_label_close} ||= N("Basic");
-    $common->{$_} = [ deref($common->{$_}) ] foreach qw(messages advanced_messages);
+    $common->{$_} = $common->{$_} ? [ deref($common->{$_}) ] : [] foreach qw(messages advanced_messages);
     add2hash_($common->{callbacks} ||= {}, { changed => sub {}, focus_out => sub {}, complete => sub { 0 }, canceled => sub { 0 }, advanced => sub {} });
 }
 
