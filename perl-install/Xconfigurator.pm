@@ -540,6 +540,7 @@ sub testFinalConfig {
     log::l("the graphic card does not like X in framebuffer") if $bad_card;
 
     my $verybad_card = $o->{card}{driver} eq 'i810';
+    $verybad_card ||= $o->{card}{driver} eq 'nvidia' && !$::isStandalone; #- avoid testing during install at any price.
     $verybad_card and return 1;
 
     my $mesg = _("Do you want to test the configuration?");
