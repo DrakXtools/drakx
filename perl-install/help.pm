@@ -21,7 +21,7 @@ selectKeyboard =>
 
 selectPath =>
  __("Choose \"Install\" if there are no previous versions of Linux
-nstalled, or if you wish use to multiple distributions or versions.
+installed, or if you wish to use multiple distributions or versions.
 
 
 Choose \"Upgrade\" if you wish to update a previous version of Mandrake
@@ -291,7 +291,7 @@ selectKeyboard =>
 
 selectPath =>
  __("Choose \"Installation\" if there are no previous versions of Linux
-installed, or if you wish use to multiple distributions or versions.
+installed, or if you wish to use multiple distributions or versions.
 
 
 Choose \"Update\" if you wish to update a previous version of Mandrake
