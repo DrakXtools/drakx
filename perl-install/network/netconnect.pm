@@ -478,8 +478,8 @@ killall pppd
                         #my $secret = network::tools::read_secret_backend();
                         #my @cnx_list = map { $_->{server} } @$secret;
                         $modem->{$_} ||= '' foreach qw(connection phone login passwd auth domain dns1 dns2);
-                        $modem->{auto_gateway} ||= $modem->{Gateway} eq '0.0.0.0' ? N("Automatic") : N("Manual");
-                        $modem->{auto_ip} ||=  $modem->{IPAdddr} eq '0.0.0.0' ? N("Automatic") : N("Manual");
+                        $modem->{auto_gateway} ||= $modem->{Gateway} ne '0.0.0.0' ? N("Manual") : N("Automatic");
+                        $modem->{auto_ip} ||=  $modem->{IPAdddr} ne '0.0.0.0' ? N("Manual") : N("Automatic");
                         $modem->{auto_dns} ||= defined $modem->{dns1} || defined $modem->{dns2} ? N("Manual") : N("Automatic");
                     },
                     name => N("Dialup: account options"), 
