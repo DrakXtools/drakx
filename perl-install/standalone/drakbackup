@@ -208,7 +208,7 @@ my $other_media_hd;
 my $backup_bef_restore = 0;
 my $table;
 my @user_list_backuped = ();
-
+my @files_corrupted = ();
 
 # config. FILES -> Default PATH  & Global variables.
 my @sys_files = ("/etc");
@@ -1597,6 +1597,15 @@ sub select_sys_data_to_restore {
 
 sub valid_backup_test {
     my (@files_list) = @_;
+    @files_corrupted = ();
+    my $is_corrupted = 0;
+    foreach (@files_list) {
+	if (system("gzip -l $_ ") != 0) {
+	    push @files_corrupted, $_;
+	    $is_corrupted = -1;
+	}
+    }
+    return $is_corrupted;
 #(seb@lutin)[~]-% gzip -l old_drakbackup.tar.gz 
 #compressed  uncompr. ratio uncompressed_name
 #   128662    174080  26.1% old_drakbackup.tar
@@ -1616,6 +1625,10 @@ sub valid_backup_test {
 }
 
 
+sub restore_aff_backup_problems {
+
+}
+
 sub restore_backend {
     my $untar_cmd;
     if (grep /tar.gz$/, all($path_to_find_restore)) { $untar_cmd = 0; } 
@@ -1623,9 +1636,13 @@ sub restore_backend {
     
     if ($restore_user)  { 
 	if ($backup_user_versions) {
-	    select_user_data_to_restore(); 
-	    $untar_cmd or system(" echo 'user: $_' && tar xfz  $path_to_find_restore/$_ -C $restore_path") foreach @user_list_to_restore;
-	    $untar_cmd and system("echo 'user: $_' && /usr/bin/bzip2 -cd $path_to_find_restore/$_ | tar xf -C $restore_path ") foreach @user_list_to_restore;
+	    select_user_data_to_restore();
+	    if (valid_backup_test() == -1) {
+		restore_aff_backup_problems();
+	    } else {
+		$untar_cmd or system(" echo 'user: $_' && tar xfz  $path_to_find_restore/$_ -C $restore_path") foreach @user_list_to_restore;
+		$untar_cmd and system("echo 'user: $_' && /usr/bin/bzip2 -cd $path_to_find_restore/$_ | tar xf -C $restore_path ") foreach @user_list_to_restore;
+	    }
 	}
     }
     if ($restore_sys)   { 
