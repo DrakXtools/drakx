@@ -132,7 +132,7 @@ if [ -n "$1" ]; then
     #- allow specifying a kernel file on commandline (./update_kernel /RPMS/kernel-2.4.22.10mdk-1-1mdk.i586.rpm)
     install_kernel $1
 else
-    install_kernel $RPMS/kernel-BOOT-2.4*.rpm 2.4
+#    install_kernel $RPMS/kernel-BOOT-2.4*.rpm 2.4
     install_kernel $RPMS/kernel-BOOT-2.6*.rpm 2.6
 fi
 
