@@ -175,10 +175,14 @@ sub switch {
                                  $device->{description}) .
                                N("\n\nYour card currently use the %s\"%s\" driver (default driver for your card is \"%s\")", ($driver =~ /^snd-/ ? "ALSA " : "OSS "), $driver, $device->{driver}),
                                [
-                                { label => N("Driver:"), val => \$new_driver, list => $alternative, default => $new_driver, sort =>1, format => sub {
-                                    my %des = modules::category2modules_and_description('multimedia/sound');
-                                    "$_[0] (" . $des{$_[0]} . ')'
-                                    }, allow_empty_list => 1 },
+                                { 
+                                    label => N("Driver:"), val => \$new_driver, list => $alternative, default => $new_driver, sort =>1,
+                                    format => sub {
+                                        my %des = modules::category2modules_and_description('multimedia/sound');
+                                        "$_[0] (" . $des{$_[0]} . ')';
+                                    },
+                                    allow_empty_list => 1,
+                                },
                                 {
                                     val => N("Help"), disabled => sub {},
                                     clicked => sub {  
@@ -194,6 +198,10 @@ To use alsa, one can either use:
 - the new ALSA api that provides many enhanced features but requires using the ALSA library.
 "))
                                         }
+                                },
+                                {
+                                    val => N("Trouble shooting"), disabled => sub {},
+                                    clicked => sub { &trouble($in) }
                                 }
                                 ]))
         {
@@ -220,6 +228,32 @@ The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)
 sub config {
     my ($in, $device) = @_;
     switch($in, $device);
+}
+
+
+sub trouble {
+    my ($in) = @_;
+    $in->ask_warn(N("Sound trouble shooting"),
+                  formatAlaTeX(N("The classic bug sound tester is to run the following commands:
+
+
+- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use
+by default
+
+- \"grep snd-slot /etc/modules.conf\" will tell you what driver it
+currently uses
+
+- \"/sbin/lsmod\" will enable you to check if its module (driver) is
+loaded or not
+
+- \"/sbin/chkconfig --list sound\" and \"/sbin/chkconfig --list alsa\" will
+tell you if sound and alsa services're configured to be run on
+initlevel 3
+
+- \"aumix -q\" will tell you if the sound volume is muted or not
+
+- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.
+")));
 }
 
 1;
