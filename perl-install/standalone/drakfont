@@ -66,13 +66,37 @@ if ("@ARGV" =~ /--help|-h/) {
 );
     exit(0);
 }
-my $xlsfonts      = "@ARGV" =~ /--xls_fonts/;
-my $windows       = "@ARGV" =~ /--windows_import|-wi/;
-my $strong        = "@ARGV"  =~ /--strong|-s/;
-my $replace       = "@ARGV"  =~ /--replace|-r/;
-my ($application) = "@ARGV"  =~ /--application (\w+)/;
-my ($install)     = "@ARGV"  =~ /--install (\w)/;
-my ($uninstall)   = "@ARGV"  =~ /--uninstall (\w+)/;
+
+my $xlsfonts;
+my $windows;
+my $strong;
+my $replace;
+my $application;
+my $install;
+my $uninstall;
+
+my $mode = -1;
+my @application;
+my @install;
+my @uninstall;
+
+foreach (@ARGV) {
+    /--xls_fonts/ and $xlsfonts = 1, $mode=-1;
+    /--windows_import|-wi/ and $windows = 1, $mode=-1;
+    /--strong|-s/ and $strong = 1, $mode=-1;
+    /--replace|-r/ and $replace = 1, $mode=-1;
+    /--application/ and $mode = 0, next;
+    $mode == 0 and push @application, $_;
+    /--install/ and $mode = 1, next;
+    $mode == 1 and push @install, $_;
+    /--uninstall/ and $mode = 2, next;
+    $mode == 2 and push @uninstall, $_;
+}
+
+print "app : @application\n";
+print "install : @install\n";
+print "uninstall : @uninstall\n";
+print "xx $xlsfonts\n";
 
 my $xfs_conffile = '/etc/X11/fs/config';
 my $drakfont_dir = '/home/seb/new_drackfont';
