@@ -302,28 +302,11 @@ sub pack_langs {
       join ':', uniq(map { $languages{$_}[3] } @$l);
 }
 
-sub unpack_langs {
-    my ($langs) = @_;
-    [ 
-     $langs eq 'all' ?
-     map { $_->[2] } values %languages :
-     split(':', $langs)
-    ];
-}
-
-sub unpack_lang_codes {
-    my ($langs) = @_;
-    [ 
-     $langs eq 'all' ?
-     map { substr($_->[2], 0, 2) } values %languages :
-     split(':', $langs)
-    ];
-}
-
 sub write_langs {
     my ($prefix, $langs) = @_;
+    my $s = pack_langs($langs);
     symlink "$prefix/etc/rpm", "/etc/rpm" if $prefix;
-    substInFile { s/%_install_langs.*//; $_ .= "%_install_langs $langs\n" if eof } "$prefix/etc/rpm/macros";
+    substInFile { s/%_install_langs.*//; $_ .= "%_install_langs $s\n" if eof } "$prefix/etc/rpm/macros";
 }
 
 sub write { 

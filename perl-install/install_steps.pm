@@ -98,7 +98,7 @@ sub selectLanguage {
 sub selectKeyboard {
     my ($o) = @_;
     keyboard::setup($o->{keyboard});
-    $o->{langs} ||= lang::pack_langs([ $o->{lang} ]);
+    $o->{langs} ||= [ $o->{lang} ];
 }
 #------------------------------------------------------------------------------
 sub selectPath {}

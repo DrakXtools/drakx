@@ -22,7 +22,6 @@ use devices;
 use fsedit;
 use modules;
 use detect_devices;
-use lang;
 use any;
 use log;
 use fs;
@@ -310,7 +309,7 @@ sub setPackages {
 	$o->{compssUsersChoice}{SYSTEM} = 1;
 	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
 
-	foreach (@{lang::unpack_lang_codes(lang::pack_langs($o->{langs}))}) {
+	foreach (map { substr($_, 0, 2) } @{$o->{langs}}) {
 	    push @{$o->{default_packages}}, pkgs::packageByName($o->{packages}, "locales-$_") || next;
 	    $o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
 	}

@@ -13,7 +13,6 @@ use log;
 use pkgs;
 use fs;
 use loopback;
-use lang;
 use c;
 
 

@@ -160,18 +160,18 @@ sub selectKeyboard($) {
 
     if ($::expert && ref($o) !~ /newt/) { #- newt is buggy with big windows :-(
 	$o->set_help('selectLangs');
-	$o->{langs} ||= substr($o->{lang}, 0, 2);
-	my $all = $o->{langs} =~ /all/;
+	$o->{langs} ||= [ $o->{lang} ];
+	my $all = member('all', @{$o->{langs}});
 	my $l = $o->ask_many_from_list('',
 			       _("You can choose other languages that will be available after install"),			       
 			       {
 				list => [ lang::list() ],
 				label => sub { lang::lang2text($_) },
-				values => lang::unpack_langs($o->{langs}),
+				values => $o->{langs},
 				sort => 1,				
 			       },
 			       { list => ['all'], label => sub { _("All") }, ref => sub { \$all }, shadow => 0 }) or goto &selectKeyboard;
-	$o->{langs} = $all ? 'all' : lang::pack_langs($l);
+	$o->{langs} = [ $all ? 'all' : $l ];
     }
     install_steps::selectKeyboard($o);
 }
