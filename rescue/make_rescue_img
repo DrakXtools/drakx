@@ -31,6 +31,13 @@ sub install_ {
 sub install { install_($_[0], "-a") }
 sub install_lib { install_($_[0], "") }
 
+sub installown($$) {
+    my ($own, $dir) = @_;
+    return if -e "$tmp$dir$own";
+    commands::mkdir_("-p", "$tmp$dir") unless -d "$tmp$dir";
+    _ "$sudo cp -a $own $tmp$dir";
+}
+
 _ "$sudo rm -rf $tmp" if -e $tmp;
 _ "mkdir $tmp";
 _ 'find . -name "*~" | xargs rm -f';
@@ -57,6 +64,8 @@ foreach (cat_("aliases")) {
     symlink $dest, "$tmp$f";
 }
 _ "cp ../modules/modules.{cz*,dep} $tmp/modules";
+
+installown("drvinst", "/usr/bin");
 
 _ "install -s kernel_read_part $tmp/sbin" if $arch =~ /i.86/;
 __ "$sudo strip $tmp/{lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";

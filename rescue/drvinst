@@ -1,0 +1,73 @@
+#!/usr/bin/perl
+
+#
+# Guillaume Cottenceau (gc@mandrakesoft.com)
+#
+# Copyright 2000 MandrakeSoft
+#
+# This software may be freely redistributed under the terms of the GNU
+# public license.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+
+local $_ = join '', @ARGV;
+
+"@ARGV" =~ /-h/ and die "usage: drivers_install [drivertype1 drivertype2..]\n";
+
+
+sub pci_probe {
+    my @pci;
+    foreach (`/usr/bin/lspcidrake`) {
+	my %pci_entry;
+	if (/^(\S+)\s*: (.+) \[([^\]]+)/) {
+	    $pci_entry{driver} = $1;
+	    $pci_entry{description} = $2;
+	    $pci_entry{type} = $3;
+	} elsif (/^(\S+)\s*: (.+)/) {
+	    $pci_entry{driver} = $1;
+	    $pci_entry{description} = $2;
+	    $pci_entry{type} = "NOT_DEFINED";
+	} else {
+	    next;
+	}
+	push @pci, \%pci_entry;
+    }
+    \@pci;
+}
+
+sub install_module($$) {
+    my ($driver, $descr) = @_;
+    print "Installing driver $driver (for \"$descr\")\n";
+    system("/sbin/modprobe $driver") and print "\tfailed\n";
+}
+
+
+#- start
+
+my $pci = pci_probe();
+
+foreach $pci_card (@$pci) {
+
+    $pci_card->{type} eq "DISPLAY_VGA" and next;
+    $pci_card->{driver} eq "unknown" and next;
+
+    if ($#ARGV != -1) {
+	$pci_card->{type} =~ /$_/i and install_module($pci_card->{driver}, $pci_card->{description}) foreach (@ARGV);
+    } else {
+	install_module($pci_card->{driver}, $pci_card->{description});
+    }
+}
+
+
+
+#-------------------------------------------------
+#- $Log$
+#- Revision 1.1  2001/02/12 14:31:10  uid535
+#- - add lspci, lspcidrake, vim-minimal
+#- - better /etc/issue
+#- - better PS1
+#- - write embryonic tool (installation of detected drivers according to pci cards)
+#-
