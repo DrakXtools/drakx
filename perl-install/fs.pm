@@ -424,6 +424,8 @@ user,exec,dev,suid )."),
 
 	'usrquota' => '',
 
+        'umask=0' => N("Give write access to ordinary users"),
+
     );
 }
 
