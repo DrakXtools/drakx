@@ -1,6 +1,7 @@
 .PHONY: clean
 
 C_RPM = 1
+C_DRAKX = 1
 
 stuff: %: %.xs
 	test -e Makefile_c || C_RPM=$(C_RPM) perl Makefile.PL
@@ -13,5 +14,5 @@ clean:
 
 stuff.xs: %: %.pm
 	rm -f $@
-	export C_RPM=$(C_RPM) ; perl $< > $@
+	C_RPM=$(C_RPM) C_DRAKX=$(C_DRAKX) perl $< > $@
 	chmod a-w $@
