@@ -282,7 +282,6 @@ sub choosePackages {
 sub beforeInstallPackages {
     my ($o) = @_;
 
-    log::l("before install packages");
     #- save these files in case of upgrade failure.
     if ($o->{isUpgrade}) {
 	foreach (@filesToSaveForUpgrade) {
@@ -293,18 +292,14 @@ sub beforeInstallPackages {
 	}
     }
 
-    log::l("before install packages, after copy");
     #- some packages need such files for proper installation.
     $::live or fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
 
-    log::l("before install packages, after adding localhost in hosts");
     require network;
     network::add2hosts("$o->{prefix}/etc/hosts", "localhost.localdomain", "127.0.0.1");
 
-    log::l("before openning database");
     require pkgs;
     pkgs::init_db($o->{prefix}, $o->{isUpgrade});
-    log::l("initialized database");
 }
 
 sub pkg_install {
