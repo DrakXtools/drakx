@@ -158,7 +158,7 @@ sub add_alias {
     $module =~ /ignore/ and return;
     /\Q$alias/ && $conf{$_}{alias} && $conf{$_}{alias} eq $module and return $_ foreach keys %conf;
     log::l("adding alias $alias to $module");
-    $conf{$alias}{alias} ||= $module;
+    $conf{$alias}{alias} = $module;
     $conf{$module}{above} = 'snd-pcm-oss' if $module =~ /^snd-/;
     $alias;
 }
