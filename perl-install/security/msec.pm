@@ -30,7 +30,7 @@ sub get_functions {
     my @functions = ();
     my @ignore_list = qw(indirect commit_changes closelog error initlog log set_secure_level 
                                        set_security_conf set_server_level print_changes get_translation
-                                       password_aging password_length enable_libsafe);
+                                       password_aging password_length enable_libsafe create_server_link);
     my $file = "$prefix/usr/share/msec/mseclib.py";
     my $function = '';
 
@@ -195,8 +195,9 @@ sub choose_options {
     $in->ask_from(
         ("DrakSec - Advanced Options"),
         ("You can customize the following options. For more information, see the mseclib manual page."),
-        [ @display,
-          { val =>_("Basic Options"), type => 'button', clicked_may_quit => sub { $$signal = 0; print "";} }
+        [
+        { val =>_("Basic Options"), type => 'button', clicked_may_quit => sub { $$signal = 0; print "";} },
+        @display
         ],
     );
 }
