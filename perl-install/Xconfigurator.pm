@@ -455,7 +455,11 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     }
 
     unless ($::g_auto_install) {
-	-x "$prefix$card->{prog}" or $do_pkgs->install($card->{use_xf4} ? 'XFree86-server' : "XFree86-$card->{server}", @l);
+	if (-x "$prefix$card->{prog}") {
+	    @l and $do_pkgs->install(@l);
+	} else {
+	    $do_pkgs->install($card->{use_xf4} ? 'XFree86-server' : "XFree86-$card->{server}", @l);
+	}
 	-x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
     }
 
