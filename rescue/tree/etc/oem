@@ -1,21 +1,47 @@
 #!/usr/bin/perl
 
-if ($ARGV[0] ne '-f') {
+if (shift(@ARGV) ne '-f') {
     print "Call it with option -f, but don't fear loosing all your data, this command is dangerous!";
+    print "
+usage: /etc/oem -f [options]
+where [options] are:
+    server                          : allow server installalation
+    boot_entries=entry1,...,entryN  : set boot entries to use,
+                                      the first one is the default one
+";
     exit 1;
 }
-my ($mode, $yes, $hd, $cd) = ($ARGV[1]);
+my (%options, $yes, $hd, $cd);
+foreach (@ARGV) { /([^=:]*)[=:]?(.*)/ and $options{$1} = $2 }
 
 #- avoid globing as it is not available in rescue ramdisk.
 foreach my $device (split ' ', `/bin/ls -d /proc/ide/hd*`) {
     open F, "$device/media" or next;
     foreach (<F>) {
-	/disk/  and do { $hd = $device; $hd =~ s,/proc/ide/,,; };
-	/cdrom/ and do { $cd = $device; $cd =~ s,/proc/ide/,,; };
+	/disk/  and do { $hd ||= $device; $hd =~ s,/proc/ide/,,; };
+	/cdrom/ and do { $cd ||= $device; $cd =~ s,/proc/ide/,,; };
     }
     close F;
 }
--e "/dev/$hd" && -e "/dev/$cd" or die "unable to access hard disk or local cdrom";
+#- examine available SCSI devices (avoid SCSI floppies like LS-120 or ZIP disk or generic floppies).
+eval {
+    system "/usr/bin/drvinst"; #- load scsi drivers else it wont do anything.
+
+    my ($driveNum, $cdromNum) = (0, 0);
+    open F, "/proc/scsi/scsi" or die "no scsi available";
+    local $_ = <F>; /^Attached devices:/ or die "to attached devices found";
+    while ($_ = <F>) {
+	my ($id) = /^Host:.*?Id: (\d+)/ or die "no host found";
+	$_ = <F>; my ($vendor, $model) = /^\s*Vendor:\s*(.*?)\s+Model:\s*(.*?)\s+Rev:/ or die "no vendor nor model found";
+	$_ = <F>; my ($type) = /^\s*Type:\s*(.*)/;
+	if ($type =~ /Direct-Access/ && $model !~ /ZIP\s+\d+|LS-?120|144MB|[Ff]loppy/) {
+	    $hd ||= "sd" . chr($driveNum++ + ord('a'));
+	} elsif ($type =~ /CD-ROM/) {
+	    $cd ||= "scd" . $cdromNum++;
+	}
+    }
+};
+-e "/dev/$hd" or die "unable to access hard disk";
 print "hd: $hd\ncd: $cd\n";
 
 #- find a cdrom (like) image, normally a true cdrom but if nfs install is running, use it instead.
@@ -26,8 +52,10 @@ while (<F>) {
       and system "mount", "-r", "-t", "nfs", "$1:$2", "/cdrom", "-o", "nolock";
 }
 close F;
--e "/cdrom/VERSION"
-  or system "mount", "-r", "-t", "iso9660", "/dev/$cd", "/cdrom";
+unless (-e "/cdrom/VERSION") {
+    -e "/dev/$cd" or die "unable to access local cdrom";
+    system "mount", "-r", "-t", "iso9660", "/dev/$cd", "/cdrom";
+}
 
 #- detect language used.
 my ($lang, $flang);
@@ -188,6 +216,59 @@ mkdir "/hd/Mandrake/RPMS";
 system "cp", "-a", "/cdrom/VERSION", "/hd";
 system "cp", "-a", "/cdrom/Mandrake/base", "/cdrom/Mandrake/mdkinst", "/hd/Mandrake";
 
+if (open F, ">/hd/Mandrake/oem_patch.pl") {
+    print "Setting OEM specific extension to DrakX\n";
+    print F q{
+	use install_steps;
+	package install_steps;
+	undef *choosePackages;
+	*choosePackages = sub {
+	    my ($o, $packages, $compssUsers, $first_time) = @_;
+
+	    #- make sure we kept some space left for available else the system may
+	    #- not be able to start (xfs at least).
+	    my $available = install_any::getAvailableSpace($o);
+	    my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
+
+	    #- avoid destroying user selection of packages but only
+	    #- for expert, as they may have done individual selection before.
+	    install_any::unselectMostPackages($o);
+
+	    #- use specific OEM packages selection, go to level 4.
+	    #- and select at least GAMES group, everything else has
+	    #- already be selected during master preparation.
+	    $o->{compssListLevel} = 4;
+	    $o->{compssUsersChoice}{GAMES} = 1;
+	    pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $o->{compssListLevel}, $availableCorrected);
+
+	    $availableCorrected;
+	};
+    };
+    if ($options{boot_entries}) {
+	print "Setting OEM specific extension for boot entries\n";
+	print F q{
+	    my $sorted_entries = q(} . $options{boot_entries} . q{); #- insert boot_entries options here as string q(...).
+	    my $old_setupBootloaderBefore = \&setupBootloaderBefore;
+	    undef *setupBootloaderBefore;
+	    *setupBootloaderBefore = sub {
+		$old_setupBootloaderBefore->(@_);
+		my @entries = split ',', $sorted_entries;
+		my @result_entries;
+		foreach my $p (@entries) {
+		    foreach (@{$_[0]{bootloader}{entries}}) {
+			$_->{label} eq $p and push @result_entries, $_;
+		    }
+		}
+		if (@result_entries) {
+		    $_[0]{bootloader}{entries} = \@result_entries;
+		    $_[0]{bootloader}{default} = $result_entries[0]{label}; #- first image is default.
+		}
+	    };
+	};
+    }
+    close F;
+}
+
 print "Setting bootloader\n";
 mkdir "/hd/boot/grub";
 foreach (1..2) {
@@ -202,7 +283,7 @@ if (defined $resize_fat_size) {
     print F "timeout 0\n\n";
     print F "title oem\n";
 }
-print F "kernel (hd0,$instz)/boot/vmlinuz ramdisk_size=32000 automatic=method:disk,disk:$hd,partition:$hd$inst,directory:/ hd vga=788 fbeginner flang=$flang oem\n";
+print F "kernel (hd0,$instz)/boot/vmlinuz ramdisk_size=32000 automatic=method:disk,disk:$hd,partition:$hd$inst,directory:/ hd vga=788 fbeginner flang=$flang oem defcfg=/tmp/hdimage/Mandrake/oem_patch.pl\n";
 print F "initrd (hd0,$instz)/boot/hd.rdz\n";
 #- if a windows partition is available, add an entrie for it.
 if (defined $resize_fat_size) {
@@ -307,6 +388,19 @@ foreach my $medium (@media) {
     scalar(grep { $_->{selected} || $_->{closure} } @{$packages->{depslist}}) == 0 and last;
 }
 
+#- try to figure out if a oem-message-graphic already exists.
+#- if this is the case, rename it to /mnt/boot/message-graphic
+if (-e "/cdrom/Mandrake/base/oem-message-graphic") {
+    print "Using specific oem graphic image\n";
+    if (-e "/mnt/boot/message-graphic") {
+	rename "/mnt/boot/message-graphic", "/mnt/boot/message-graphic.old";
+	system "cp", "-a", "/cdrom/Mandrake/base/oem-message-graphic", "/mnt/boot/message-graphic";
+    } elsif (-e "/mnt/boot/lilo-graphic/message") {
+	rename "/mnt/boot/lilo-graphic/message", "/mnt/boot/lilo-graphic/message.old";
+	system "cp", "-a", "/cdrom/Mandrake/base/oem-message-graphic", "/mnt/boot/lilo-graphic/message";
+    }
+}
+
 system "umount", "/mnt/proc";
 system "umount", "-a", "-f", "-t", "noproc";
 system "eject", "/dev/$cd";
@@ -354,7 +448,7 @@ sub select_packages {
 
     $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
     $o->{compssUsersChoice}{SYSTEM} = 1;
-    $mode =~ /server/i or @{$o->{compssUsersChoice}}{grep { /SERVER/ } keys %{$o->{compssUsersChoice}}} = ();
+    exists $options{server} or @{$o->{compssUsersChoice}}{grep { /SERVER/ } keys %{$o->{compssUsersChoice}}} = ();
 
     my $lang_pkg = $lang && pkgs::packageByName($o->{packages}, "locales-$lang");
     if ($lang_pkg) {
@@ -370,6 +464,7 @@ sub select_packages {
 		Mesa Mesa-demos alsa alsa-utils
 		Aurora xawtv kwintv xscreensaver-gl Mesa-demos xmms-mesa bzflag csmash gltron spacecup chromium tuxracer
                 glibc vim-minimal kernel kernel22
+		sox aumix xawtv gatos kwintv sane-frontends gphoto gnome-toaster gcombust xcdroast apmd cdlabelgen
                )) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	$pkg and pkgs::selectPackage($o->{packages}, $pkg);
@@ -379,6 +474,7 @@ sub select_packages {
     foreach (qw(kernel-smp kernel-linus kernel-secure hackkernel-smp hackkernel-linus hackkernel-secure
 		Aurora xawtv kwintv xscreensaver-gl xmms-mesa bzflag csmash gltron spacecup chromium tuxracer
 		kernel22-smp kernel22-secure alsa imwheel nfs-utils-clients lvm usbd reiserfsprogs
+		sox aumix xawtv gatos kwintv sane-frontends gphoto gnome-toaster gcombust xcdroast apmd cdlabelgen
 		)) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	$pkg and $pkg->{closure} = 1, delete $pkg->{selected};
