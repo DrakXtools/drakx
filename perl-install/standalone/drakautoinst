@@ -86,10 +86,8 @@ eval(cat_($cfgfile));
 my $o_old = $o;
 
 if (!$::isEmbedded && $in->isa('interactive::gtk')) {
-    require Gtk;
-    init Gtk;
-    require my_gtk;
-    import my_gtk qw(:helpers :wrappers);
+    require ugtk2;
+    import ugtk2 qw(:helpers :wrappers);
 
     my %tree;
     $struct_gui{$_} = 'General' foreach qw(lang isUpgrade autoExitInstall timezone default_packages mkbootdisk);
@@ -124,37 +122,37 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 
     member($_, keys %struct_gui) and push @{$tree{$struct_gui{$_}}}, [$_ , $pixmap{$_}, h2widget($o->{$_}, "\$o->\{$_\}") ] foreach (keys %$o);
 
-    my $W = my_gtk->new('$o edition');
+    my $W = ugtk2->new('$o edition');
     my @box_to_hide;
     my $nb_pages=0;
-    my $notebook = new Gtk::Notebook;
+    my $notebook = new Gtk2::Notebook;
     $notebook->set_show_border(0);
     $notebook->set_show_tabs(0);
-    $notebook->append_page(gtkpack_(gtkset_border_width(new Gtk::VBox(0,0), 10),
-				    1, new Gtk::VBox(0,0),
-				    0, gtkpack_(new Gtk::HBox(0,0),
-						1, new Gtk::VBox(0,0),
-						0, gtkadd(gtkset_shadow_type(new Gtk::Frame, 'etched-in'),
-							  new Gtk::Pixmap(gtkcreate_png('mdk_logo'))),
-						1, new Gtk::VBox(0,0),
+    $notebook->append_page(gtkpack_(gtkset_border_width(new Gtk2::VBox(0,0), 10),
+				    1, new Gtk2::VBox(0,0),
+				    0, gtkpack_(new Gtk2::HBox(0,0),
+						1, new Gtk2::VBox(0,0),
+						0, gtkadd(gtkset_shadow_type(new Gtk2::Frame, 'etched-in'),
+							  gtkcreate_img('mdk_logo')),
+						1, new Gtk2::VBox(0,0),
 					       ),
 				    0, N("\nWelcome.\n\nThe parameters of the auto-install are available in the sections on the left"),
-				    1, new Gtk::VBox(0,0),
+				    1, new Gtk2::VBox(0,0),
 				   ), undef);
     $notebook->show_all;
     $notebook->set_page(0);
 
     gtkadd($W->{window},
-	   gtkpack_(new Gtk::VBox(0,5),
-	   1, gtkpack_(new Gtk::HBox(0,0),
-		    0, gtkadd(gtkset_usize(gtkset_shadow_type(new Gtk::Frame, 'in'), 130, 470),
-			    gtkpack_(new Gtk::VBox(0,0),
+	   gtkpack_(new Gtk2::VBox(0,5),
+	   1, gtkpack_(new Gtk2::HBox(0,0),
+		    0, gtkadd(gtkset_size_request(gtkset_shadow_type(new Gtk2::Frame, 'in'), 130, 470),
+			    gtkpack_(new Gtk2::VBox(0,0),
 				     map {
-					 my $box = new Gtk::VBox(0,0);
+					 my $box = new Gtk2::VBox(0,0);
 					 push @box_to_hide, $box;
 					 $box->{vis} = 0;
 					 my @button_to_hide;
-					 0, gtksignal_connect(new Gtk::Button($_), clicked => sub {
+					 0, gtksignal_connect(new Gtk2::Button($_), clicked => sub {
 								if($box->{vis}) { $box->hide(); $box->{vis} = 0; $notebook->set_page(0); }
 								else {
 								    $_->hide, $_->{vis}=0 foreach @box_to_hide;
@@ -163,7 +161,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 								}
 							    }), 1, gtkpack__($box,
 							  map {
-							      my $button = gtkset_relief(new Gtk::ToggleButton(), 'none');
+							      my $button = gtkset_relief(new Gtk2::ToggleButton(), 'none');
 							      push @button_to_hide, $button;
 							      my $gru = $_->[0];
 							      $notebook->append_page(gtkshow($_->[2]), undef);
@@ -174,9 +172,9 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 										    $button->get_active() and $function->()
 										});
 							      my $b;
-							      if ($_->[1] ne "") { $b = new Gtk::Pixmap(gtkcreate_png($_->[1]))} else { $b = ()};
+							      if ($_->[1] ne "") { $b = gtkcreate_img($_->[1])} else { $b = ()};
 							      gtksignal_connect(gtkadd($button,
-										       gtkpack__(new Gtk::VBox(0,3),
+										       gtkpack__(new Gtk2::VBox(0,3),
 												 $b,
 												 translate($_->[0]),
 												)
@@ -194,10 +192,10 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 			   ),
 		    1, $notebook,
 		   ),
-	    0, new Gtk::HSeparator,
-	    0, gtkadd(gtkset_border_width(gtkset_layout(new Gtk::HButtonBox, 'end'), 5),
-		      gtksignal_connect(new Gtk::Button(N("Accept")), clicked => sub { Gtk->main_quit;  }),
-		      gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { $o = $o_old; Gtk->main_quit; quit_global($in, 0) }),
+	    0, new Gtk2::HSeparator,
+	    0, gtkadd(gtkset_border_width(gtkset_layout(new Gtk2::HButtonBox, 'end'), 5),
+		      gtksignal_connect(new Gtk2::Button(N("Accept")), clicked => sub { Gtk2->main_quit;  }),
+		      gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { $o = $o_old; Gtk2->main_quit; quit_global($in, 0) }),
 		     )
 	   )
 	  );
@@ -206,11 +204,11 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 #      gtkadd($W->{window},
 #  	   gtkpack_($W->create_box_with_title(N("Edit variables")),
 #  		    1, my $notebook = create_notebook( map { $_, h2widget($o->{$_}, "\$o->\{$_\}") } keys %$o ),
-#  		    0, gtkpack(gtkset_border_width(new Gtk::HBox(0,0),5), $W->create_okcancel),
+#  		    0, gtkpack(gtkset_border_width(new Gtk2::HBox(0,0),5), $W->create_okcancel),
 #  		   ),
 #  	  );
 #    $notebook->set_tab_pos('left');
-#    $::isEmbedded and Gtk->main_iteration while Gtk->events_pending;
+#    $::isEmbedded and Gtk2->main_iteration while Gtk2->events_pending;
     $::isEmbedded and kill ('USR2', $::CCPID);
     $W->main;
 #    $W->destroy();
@@ -259,8 +257,8 @@ sub h2widget {
 	if (ref(${$k}{$list_keys[0]}) =~ /HASH/) {
 	    $i++;
 	    my ($button_add, $button_remove);
-	    $w = gtkpack_(new Gtk::VBox(0,0),
-			  1, createScrolledWindow(gtkpack__($vb = new Gtk::VBox(0,10),
+	    $w = gtkpack_(new Gtk2::VBox(0,0),
+			  1, create_scrolled_window(gtkpack__($vb = new Gtk2::VBox(0,10),
 							    $widget_list[$i] = create_packtable({ col_spacings => 10, row_spacings => 3 },
 					map {
 					    my $e;
@@ -291,9 +289,9 @@ sub h2widget {
 	my $vb;
 	my @widget_list;
 	my $i = -1;
-	$w = gtkpack_(new Gtk::VBox(0,0),
-		      1, createScrolledWindow(
-					      gtkpack__($vb = new Gtk::VBox(0,5),
+	$w = gtkpack_(new Gtk2::VBox(0,0),
+		      1, create_scrolled_window(
+					      gtkpack__($vb = new Gtk2::VBox(0,5),
 							map { $i++; $widget_list[$i] = h2widget($_, "$label\[$i\]") } @{$k},
 						       )
 					     ),
@@ -322,9 +320,9 @@ sub create_entry_element {
     } elsif (ref ($text) =~ /ARRAY/) {
 	return ([ "$label : ", h2widget($text, $label) ]);
     } else {
-	$e = new Gtk::Entry;
+	$e = new Gtk2::Entry;
 	$e->{value} = $value;
-	my $tag = Gtk->timeout_add(1000, sub { $e->set_text($text); 0 });
+	my $tag = Gtk2->timeout_add(1000, sub { $e->set_text($text); 0 });
 	gtksignal_connect($e, changed => sub {
 			      my $exe = $e->{value} . "='" . $e->get_text() . "'";
 			      print "EXEC : $exe\n ";
@@ -341,15 +339,15 @@ sub control_buttons {
     ref($ref_local_k) =~ /HASH/ or return();
     my (%local_k) = %{$ref_local_k};
     my ($button_add, $button_remove);
-    0, gtkadd(gtkset_border_width(gtkset_layout(new Gtk::HButtonBox, 'spread'), 5),
-	      gtksignal_connect($button_add = new Gtk::Button(N("Add an item")), clicked => sub {
+    0, gtkadd(gtkset_border_width(gtkset_layout(new Gtk2::HButtonBox, 'spread'), 5),
+	      gtksignal_connect($button_add = new Gtk2::Button(N("Add an item")), clicked => sub {
 				    $local_k{$_} = undef foreach keys %local_k;
 				    $i++;
 				    $local_gui->($vb, \@widget_list, \%local_k, $i) or $i--, return;
 				    $i>=0 and $button_remove->set_sensitive(1);
 				}
 			       ),
-	      gtksignal_connect($button_remove = new Gtk::Button(N("Remove the last item")), clicked => sub {
+	      gtksignal_connect($button_remove = new Gtk2::Button(N("Remove the last item")), clicked => sub {
 				    $i>=0 or return;
 				    $widget_list[$i]->destroy();
 				    $i--;
