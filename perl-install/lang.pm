@@ -475,17 +475,17 @@ sub getLANGUAGE {
 my %im_xim_program =
   (
    chinput => {
-               'zh_CN' => '"chinput -gb"',
-               'zh_CN.UTF-8' => '"chinput -gb"',
-               'zh_HK' => '"chinput -big5"',
-               'zh_HK.UTF-8' => '"chinput -big5"',
-               'zh_SG' => '"chinput -gb"',
-               'zh_SG.UTF-8' => '"chinput -gb"',
-               'zh_TW' => '"chinput -big5"',
-               'zh_TW.UTF-8' => '"chinput -big5"',
+               'zh_CN' => 'chinput -gb',
+               'zh_CN.UTF-8' => 'chinput -gb',
+               'zh_HK' => 'chinput -big5',
+               'zh_HK.UTF-8' => 'chinput -big5',
+               'zh_SG' => 'chinput -gb',
+               'zh_SG.UTF-8' => 'chinput -gb',
+               'zh_TW' => 'chinput -big5',
+               'zh_TW.UTF-8' => 'chinput -big5',
               },
    xcin => {
-            'zh_TW' => '"xcin"'
+            'zh_TW' => 'xcin'
            },
   );
 
