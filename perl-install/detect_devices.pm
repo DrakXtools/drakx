@@ -274,6 +274,8 @@ sub getSCSI_26() {
         };
     } all($dev_dir);
 
+    @l = sort { $a->{host} <=> $b->{host} || $a->{channel} <=> $b->{channel} || $a->{id} <=> $b->{id} || $a->{lun} <=> $b->{lun} } @l;
+
     complete_usb_storage_info(@l);
 
     foreach (@l) {
