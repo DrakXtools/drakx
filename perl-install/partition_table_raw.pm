@@ -63,6 +63,7 @@ sub get_geometry($) {
     ioctl(F, c::HDIO_GETGEO(), $g) or return;
 
     my %geom; @geom{qw(heads sectors cylinders start)} = unpack "CCSL", $g;
+    $geom{totalcylinders} = $geom{cylinders};
 
     { geom => \%geom, totalsectors => $geom{heads} * $geom{sectors} * $geom{cylinders} };
 }
@@ -72,8 +73,15 @@ sub openit($$;$) { sysopen $_[1], $_[0]{file}, $_[2] || 0; }
 # cause kernel to re-read partition table
 sub kernel_read($) {
     my ($hd) = @_;
+    sync();
     local *F; openit($hd, *F) or return 0;
+    sync(); sleep(1);
     $hd->{rebootNeeded} = !ioctl(F, c::BLKRRPART(), 0);
+    sync(); sleep(1);
+    $hd->{rebootNeeded} = !ioctl(F, c::BLKRRPART(), 0);
+    sync();
+    close F;
+    sync(); sleep(1);
 }
 
 sub zero_MBR($) {

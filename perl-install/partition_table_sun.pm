@@ -51,9 +51,22 @@ sub adjustStart($$) {
 
     #- since partition must always start on cylinders boundaries on sparc,
     #- note that if start sector is on the first cylinder, it is adjusted
-    #- to 0 and it is valid.
-    $part->{start} = $part->{start} >= $hd->cylinder_size() ? round_up($part->{start}, $hd->cylinder_size()) : 0;
+    #- to 0 and it is valid, maybe not in fact, problem with Sun disk label.
+    #- IT COULD HURT IF STARTING AT 0, MAYBE THERE ARE SOME FLAGS FOR EXT2
+    #- TO AVOID WRITING ANYTHING ON THE FIRST 1024 BYTES OF DISK, ELSE PROM
+    #- MAY ERASE EVERYTHING... TO BE CHECKED LATER.
+    #- so now, starting on cylinder 1 is perfect altough it waste some disk space !
+    $part->{start} = round_down($part->{start}, $hd->cylinder_size());
+    $part->{start} = $hd->cylinder_size() if $part->{start} == 0;
     $part->{size} = $end - $part->{start};
+    $part->{size} = $hd->cylinder_size() if $part->{size} <= 0;
+}
+sub adjustEnd($$) {
+    my ($hd, $part) = @_;
+    my $end = $part->{start} + $part->{size};
+    my $end2 = round_up($end, $hd->cylinder_size());
+    $end2 = $hd->{geom}{cylinders} * $hd->cylinder_size() if $end2 > $hd->{geom}{cylinders} * $hd->cylinder_size();
+    $part->{size} = $end2 - $part->{start};
 }
 
 #- compute crc checksum used for Sun Label partition, expect
@@ -103,6 +116,7 @@ sub read($$) {
 # for each entry, it uses fields: start, size, type, active
 sub write($$$;$) {
     my ($hd, $sector, $pt, $info) = @_;
+#    my ($csize, $wdsize) = (0, 0);
 
     #- handle testing for writing partition table on file only!
     local *F;
@@ -116,10 +130,15 @@ sub write($$$;$) {
 
     ($info->{infos}, $info->{partitions}) = map { join '', @$_ } list2kv map {
 	$_->{start} % $hd->cylinder_size() == 0 or die "partition not at beginning of cylinder";
+#	$csize += $_->{size} if $_->{type} != 5;
+#	$wdsize += $_->{size} if $_->{type} == 5;
+	$_->{flags} |= 0x10 if $_->{mntpoint} eq '/';
+	$_->{flags} |= 0x01 if partition_table::isSwap($_);
 #	local $_->{type} = $typeFromDos{$_->{type}} || $_->{type};
 	local $_->{start_cylinder} = $_->{start} / $hd->cylinder_size() - $sector;
 	pack($format1, @$_{@$fields1}), pack($format2, @$_{@$fields2});
     } @$pt;
+#    $csize == $wdsize or die "partitions are not using whole disk space";
 
     #- compute the checksum by building the buffer to write and call compute_crc.
     #- set csum to 0 so compute_crc will give the right csum value.
@@ -128,6 +147,8 @@ sub write($$$;$) {
 
     syswrite F, pack($main_format, @$info{@$main_fields}), psizeof($main_format) or return 0;
 
+    sync();
+
     1;
 }
 
@@ -135,8 +156,8 @@ sub info {
     my ($hd) = @_;
 
     #- take care of reduction of the number of cylinders, avoid loop of reduction!
-    unless ($hd->{geom}{total_cylinders} > $hd->{geom}{cylinders}) {
-	$hd->{geom}{total_cylinders} = $hd->{geom}{cylinders};
+    unless ($hd->{geom}{totalcylinders} > $hd->{geom}{cylinders}) {
+	$hd->{geom}{totalcylinders} = $hd->{geom}{cylinders};
 	$hd->{geom}{cylinders} -= 2;
 
 	#- rebuild some constants according to number of cylinders.
@@ -149,11 +170,11 @@ sub info {
     my $info = {
 	info => "DiskDrake partition table",
 	rspeed => 5400,
-	pcylcount => $hd->{geom}{total_cylinders},
+	pcylcount => $hd->{geom}{totalcylinders},
 	sparecyl => 0,
 	ilfact => 1,
 	ncyl => $hd->{geom}{cylinders},
-	nacyl => $hd->{geom}{total_cylinders} - $hd->{geom}{cylinders},
+	nacyl => $hd->{geom}{totalcylinders} - $hd->{geom}{cylinders},
 	ntrks => $hd->{geom}{heads},
 	nsect => $hd->{geom}{sectors},
 	magic => $magic,

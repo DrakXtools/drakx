@@ -20,11 +20,16 @@ use log;
 #- Globals
 #-#####################################################################################
 my @suggestions = (
+arch() =~ /^sparc/ ? (
+  { mntpoint => "/",        size =>  50 << 11, type => 0x83, ratio => 1, maxsize => 1000 << 11 },
+  { mntpoint => "swap",     size =>  30 << 11, type => 0x82, ratio => 1, maxsize => 500 << 11 },
+) : (
 arch() =~ /^i386/ ? (
   { mntpoint => "/boot",    size =>  16 << 11, type => 0x83, maxsize =>  30 << 11 },
 ) : (),
   { mntpoint => "/",        size =>  50 << 11, type => 0x83, ratio => 1, maxsize => 300 << 11 },
   { mntpoint => "swap",     size =>  30 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
+),
   { mntpoint => "/usr",     size => 200 << 11, type => 0x83, ratio => 6, maxsize =>1500 << 11 },
   { mntpoint => "/home",    size =>  50 << 11, type => 0x83, ratio => 3 },
   { mntpoint => "/var",     size => 200 << 11, type => 0x83, ratio => 1, maxsize =>1000 << 11 },
@@ -38,7 +43,9 @@ my @partitions_signatures = (
     [ 0x83, 0x438, "\x53\xEF" ],
     [ 0x82, 4086, "SWAP-SPACE" ],
     [ 0xc,  0x1FE, "\x55\xAA", 0x52, "FAT32" ],
+arch() !~ /^sparc/ ? (
     [ 0x6,  0x1FE, "\x55\xAA", 0x36, "FAT" ],
+) : (),
 );
 
 sub typeOfPart($) { typeFromMagic(devices::make($_[0]), @partitions_signatures) }

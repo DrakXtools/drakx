@@ -89,6 +89,27 @@ my @install_classes = (__("beginner"), __("developer"), __("server"), __("expert
 #-#####################################################################################
 #- partition layout
 my %suggestedPartitions = (
+arch() =~ /^sparc/ ? (
+  normal => [
+    { mntpoint => "/",     size => 600 << 11, type => 0x83, ratio => 5, maxsize =>1000 << 11 },
+    { mntpoint => "swap",  size => 128 << 11, type => 0x82, ratio => 1, maxsize => 400 << 11 },
+    { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 4, maxsize =>1500 << 11 },
+    { mntpoint => "/home", size => 300 << 11, type => 0x83, ratio => 2 },
+  ],
+  developer => [
+    { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 1, maxsize =>1000 << 11 },
+    { mntpoint => "swap",  size => 128 << 11, type => 0x82, ratio => 1, maxsize => 400 << 11 },
+    { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 4, maxsize =>1500 << 11 },
+    { mntpoint => "/home", size => 100 << 11, type => 0x83, ratio => 5 },
+  ],
+  server => [
+    { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 1, maxsize =>1000 << 11 },
+    { mntpoint => "swap",  size => 128 << 11, type => 0x82, ratio => 2, maxsize => 800 << 11 },
+    { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 3, maxsize =>1500 << 11 },
+    { mntpoint => "/var",  size => 100 << 11, type => 0x83, ratio => 4 },
+    { mntpoint => "/home", size => 100 << 11, type => 0x83, ratio => 5 },
+  ],
+) : (
   normal => [
     { mntpoint => "/boot", size =>  10 << 11, type => 0x83, maxsize => 30 << 11 },
     { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 5, maxsize => 2500 << 11 },
@@ -110,6 +131,7 @@ my %suggestedPartitions = (
     { mntpoint => "/var",  size => 100 << 11, type => 0x83, ratio => 4 },
     { mntpoint => "/home", size => 100 << 11, type => 0x83, ratio => 5 },
   ],
+),
 );
 
 #-#######################################################################################
@@ -643,7 +665,7 @@ sub main {
     sync(); sync();
 
     log::l("installation complete, leaving");
-    print "\n" x 30;
+    print "\n" x 80;
 }
 
 #-######################################################################################

@@ -410,6 +410,7 @@ sub write($) {
     }
     $hd->write(0, $hd->{primary}{raw}, $hd->{primary}{info}) or die "writing of partition table failed";
 
+    #- should be fixed but a extended exist with no real extended partition, that blanks mbr!
     foreach (@{$hd->{extended}}) {
 	# in case of extended partitions, the start sector must be local to the partition
 	$_->{normal}{local_start} = $_->{normal}{start} - $_->{start};
