@@ -111,8 +111,8 @@ my %langs = (
 #-'tt' =>  [ 'Tatar',               'Tatar',             'tt_RU', ' 2   ', 'utf_cyr2' ],
 'uk' =>    [ 'Ukrainian',           'Ukrayinska',        'uk_UA', '1    ', 'koi8-u' ],
 #-'ur' =>  [ 'Urdu',                'AA Urdu',           'ur_PK', ' 2   ', 'utf_ar' ],  
-'uz' =>    [ 'Uzbek (latin)',       'Ozbekcha',          'uz_UZ', ' 2   ', 'unicode' ],
-'uz@Cyrl' => [ 'Uzbek (cyrillic)',  'Ozbekcha',          'uz_UZ', ' 2   ', 'unicode', 'uz@Cyrl:uz' ],
+'uz' =>    [ 'Uzbek (latin)',       'Ozbekcha',          'uz_UZ', ' 2   ', 'utf_cyr2' ],
+'uz@Cyrl' => [ 'Uzbek (cyrillic)',  'Ozbekcha',          'uz_UZ', ' 2   ', 'utf_cyr2', 'uz@Cyrl:uz' ],
 #- ve_ZA not yet done, using en_ZA locale instead
 've' =>    [ 'Venda',               'Venda',             'en_ZA', '  3  ', 'iso-8859-1', 've:ven:en_ZA' ],
 'vi' =>    [ 'Vietnamese',          'Tieng Viet',        'vi_VN', ' 2   ', 'utf_vi' ],
@@ -620,7 +620,7 @@ sub get_kde_lang {
 
     #- get it using 
     #- echo C $(rpm -qp --qf "%{name}\n" /RPMS/kde-i18n-*  | sed 's/kde-i18n-//')
-    my @valid_kde_langs = qw(C af ar az bg ca cs da de el en_GB eo es et fi fr he hu is it ja ko lt lv mt nb nl nn pl pt pt_BR ro ru sk sl sr sv ta th tr uk xh zh_CN.GB2312 zh_TW.Big5);
+    my @valid_kde_langs = qw(C af ar az bg bs ca cs da de el en_GB eo es et eu fa fi fr he hr hu is it ja ko lt lv mk mt nb nl nn pl pt pt_BR ro ru se sk sl sr sv ta th tr uk vi xh zh_CN.GB2312 zh_TW.Big5 zu);
     my %valid_kde_langs; @valid_kde_langs{@valid_kde_langs} = ();
 
     my $valid_lang = sub {
@@ -629,8 +629,7 @@ sub get_kde_lang {
         my %fixlangs = (en => 'C', en_US => 'C',
                         'sr@Latn' => 'sr',
                         st => 'nso', ve => 'ven',
-                        zh_CN => 'zh_CN.GB2312', zh_SG => 'zh_CN.GB2312', zh_TW => 'zh_TW.Big5', zh_HK => 'zh_TW.Big5',
-                        zh_HK => 'zh_TW', zh_SG => 'zh_CN');
+                        zh_CN => 'zh_CN.GB2312', zh_SG => 'zh_CN.GB2312', zh_TW => 'zh_TW.Big5', zh_HK => 'zh_TW.Big5');
         exists $fixlangs{$lang} ? $fixlangs{$lang} :
 	  exists $valid_kde_langs{$lang} ? $lang :
 	  exists $valid_kde_langs{substr($lang, 0, 2)} ? substr($lang, 0, 2) : '';
@@ -710,7 +709,7 @@ sub charset2kde_font {
 my %charset2pango_font = (
   'tis620' =>      "Norasi 17",
   'utf_ar' =>      "Kacst-Qr 14",
-  'utf_cyr2' =>    "URW Bookman L 14",
+  'utf_cyr2' =>    "Nimbus Sans L 12",
   'utf_he' =>      "Sans 12",
   'utf_hy' =>      "Artsounk 14",
   'utf_ka' =>      "Sans 14",
