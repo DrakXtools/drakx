@@ -316,7 +316,6 @@ TYPE=$kind
         $::isStandalone and $modules_conf->write;
     }
 
-    $netc->{NET_INTERFACE} = 'ppp0';
     write_cnx_script($netc);
 
     unless ($::isStandalone) {
