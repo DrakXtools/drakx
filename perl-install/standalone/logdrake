@@ -42,19 +42,19 @@ use Data::Dumper;
 #         (This version is now UTF8 compliant - Sg 2001-08-18)
 #-------------------------------------------------------------
 
-{
-    no warnings;
-    sub _ {
-	my $s = shift @_; my $t = translate($s);
-	sprintf $t, @_;
-    }
+#{
+#    no warnings;
+#    sub _ {
+#	my $s = shift @_; my $t = translate($s);
+#	sprintf $t, @_;
+#    }
 
-    no warnings;
-    sub translate {
-	my ($s) = @_;
-	$s ? c::dgettext('libDrakX', $s) : '';
-    }
-}
+#    no warnings;
+#    sub translate {
+#	my ($s) = @_;
+#$s ? c::dgettext('libDrakX', $s) : '';
+#    }
+#}
 
 $::isInstall and die "Not supported during install.\n";
 
