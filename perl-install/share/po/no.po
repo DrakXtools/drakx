@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2001-04-17 16:58+0200\n"
+"POT-Creation-Date: 2001-04-20 11:01+0200\n"
 "PO-Revision-Date: 2001-03-13 13:19CET\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: Norsk\n"
@@ -935,7 +935,8 @@ msgstr ""
 # and only one line per string for the GRUB messages
 #
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: ../../bootloader.pm_.c:795
+#. -PO: and keep them smaller than 79 chars long
+#: ../../bootloader.pm_.c:796
 msgid "Welcome to GRUB the operating system chooser!"
 msgstr "Velkommen til GRUB, operativsystem-velgeren!"
 
@@ -947,7 +948,9 @@ msgstr "Velkommen til GRUB, operativsystem-velgeren!"
 # The lines must fit on screen, aka length < 80
 # and only one line per string for the GRUB messages
 #
-#: ../../bootloader.pm_.c:796
+#. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
+#. -PO: and keep them smaller than 79 chars long
+#: ../../bootloader.pm_.c:799
 #, c-format
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Bruk %c og %c tastene for å velge hvilken inngang som er markert."
@@ -960,7 +963,9 @@ msgstr "Bruk %c og %c tastene for å velge hvilken inngang som er markert."
 # The lines must fit on screen, aka length < 80
 # and only one line per string for the GRUB messages
 #
-#: ../../bootloader.pm_.c:797
+#. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
+#. -PO: and keep them smaller than 79 chars long
+#: ../../bootloader.pm_.c:802
 msgid "Press enter to boot the selected OS, 'e' to edit the"
 msgstr "Trykk enter for † starte opp valgt OS, 'e' for † redigere"
 
@@ -972,7 +977,9 @@ msgstr "Trykk enter for † starte opp valgt OS, 'e' for † redigere"
 # The lines must fit on screen, aka length < 80
 # and only one line per string for the GRUB messages
 #
-#: ../../bootloader.pm_.c:798
+#. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
+#. -PO: and keep them smaller than 79 chars long
+#: ../../bootloader.pm_.c:805
 msgid "commands before booting, or 'c' for a command-line."
 msgstr "kommandoer for oppstart, eller 'c' for en kommandolinje."
 
@@ -984,21 +991,25 @@ msgstr "kommandoer for oppstart, eller 'c' for en kommandolinje."
 # The lines must fit on screen, aka length < 80
 # and only one line per string for the GRUB messages
 #
-#: ../../bootloader.pm_.c:799
+#. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
+#. -PO: and keep them smaller than 79 chars long
+#: ../../bootloader.pm_.c:808
 #, c-format
 msgid "The highlighted entry will be booted automatically in %d seconds."
 msgstr "Den markerte inngangen vil bli startet automatisk om %d sekunder."
 
-#: ../../bootloader.pm_.c:803
+#: ../../bootloader.pm_.c:812
 msgid "not enough room in /boot"
 msgstr "ikke nok plass i /boot"
 
 #. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
-#: ../../bootloader.pm_.c:895
+#. -PO: so you may need to put them in English or in a different language if MS-windows doesn't exist in your language
+#: ../../bootloader.pm_.c:905
 msgid "Desktop"
 msgstr "Skrivebord"
 
-#: ../../bootloader.pm_.c:895
+#. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
+#: ../../bootloader.pm_.c:907
 msgid "Start Menu"
 msgstr "Startmeny"
 
@@ -1077,15 +1088,12 @@ msgid "Configure"
 msgstr "Konfigurer"
 
 #: ../../bootlook.pm_.c:114
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You are currently using %s as Boot Manager.\n"
 "Click on Configure to launch the setup wizard."
 msgstr ""
-"Velkommen til verktøyet for deling av Internett tilkobling!\n"
-"\n"
-"%s\n"
-"\n"
+"Du bruker for øyeblikket % som oppstartshåndterer.\n"
 "Klikk på Konfigurer for å starte oppsett-hjelperen."
 
 #: ../../bootlook.pm_.c:121
@@ -2816,7 +2824,7 @@ msgid ""
 "them,\n"
 "then click Ok."
 msgstr ""
-"Hvis du har alle CDene i listen ovenfor, klikk Ok. Hvis du ikke har\n"
+"Hvis du har alle CDene i listen nedenfor, klikk Ok. Hvis du ikke har\n"
 "noen av disse CDene, klikk Avbryt. Hvis bare noen av CDene mangler, fjern "
 "disse,\n"
 "klikk så Ok."
@@ -4012,7 +4020,7 @@ msgstr ""
 
 #: ../../install_any.pm_.c:404
 msgid "Can't use broadcast with no NIS domain"
-msgstr ""
+msgstr "Kan ikke bruke broadcast med intet NIS domene"
 
 #: ../../install_any.pm_.c:647
 #, c-format
@@ -5058,7 +5066,7 @@ msgstr "Skreddersydd"
 
 #: ../../install_steps_interactive.pm_.c:585
 msgid "Selected size is larger than available space"
-msgstr ""
+msgstr "Valgt størrelse er større enn tilgjengelig plass"
 
 #: ../../install_steps_interactive.pm_.c:650
 msgid ""
@@ -5066,7 +5074,7 @@ msgid ""
 "If you have none of those CDs, click Cancel.\n"
 "If only some CDs are missing, unselect them, then click Ok."
 msgstr ""
-"Hvis du har alle CDene i listen ovenfor, klikk Ok.\n"
+"Hvis du har alle CDene i listen nedenfor, klikk Ok.\n"
 "Hvis du ikke har noen av disse CDene, klikk Avbryt.\n"
 "Hvis bare noen av CDene mangler, fjern disse, klikk så Ok."
 
@@ -7676,6 +7684,8 @@ msgid ""
 "You don't have any configured interface.\n"
 "Configure them first by clicking on 'Configure'"
 msgstr ""
+"Du har ingen konfigurerte grensesnitt.\n"
+"Konfigurer disse først ved å klikke på 'Konfigurer'"
 
 #: ../../standalone/draknet_.c:413
 msgid "LAN Configuration"
@@ -7711,6 +7721,8 @@ msgid ""
 "You don't have any internet connection.\n"
 "Create one first by clicking on 'Configure'"
 msgstr ""
+"Du har ingen internett-tilkobling.\n"
+"Opprett en først ved å klikke på 'Konfigurer'"
 
 #: ../../standalone/draknet_.c:526
 msgid "Internet connection configuration"
