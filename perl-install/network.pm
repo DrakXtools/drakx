@@ -42,6 +42,34 @@ sub write_conf {
     setVarsInSh($file, $netc, qw(NETWORKING FORWARD_IPV4 HOSTNAME DOMAINNAME GATEWAY GATEWAYDEV));
 }
 
+sub write_resolv_conf {
+    my ($file, $netc) = @_;
+
+    # We always write these, even if they were autoconfigured. Otherwise, the reverse name lookup in the install doesn't work. 
+    unless ($netc->{DOMAINNAME} || dnsServers($netc)) {
+	unlink($file);
+	log::l("neither domain name nor dns server are configured");
+	return 0;
+    }
+    my @l = cat_($file);
+
+    local *F;
+    open F, "> $file" or die "cannot write $file: $!";
+    print F "search $netc->{DOMAINNAME}\n" if $netc->{DOMAINNAME};
+    print F "nameserver $_\n" foreach dnsServers($netc);
+    print F "#$_" foreach @l;
+
+    #res_init();		# reinit the resolver so DNS changes take affect 
+    1;
+}
+
+sub write_interface_conf {
+    my ($file, $intf) = @_;
+
+    add2hash($intf, { ONBOOT => "yes" });
+    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT));
+}
+
 sub add2hosts {
     my ($file, $ip, $hostname) = @_;
     my %l = ($ip => $hostname);
@@ -65,40 +93,11 @@ sub add2hosts {
     }
 }
 
-sub write_resolv_conf {
-    my ($file, $netc) = @_;
-
-    # We always write these, even if they were autoconfigured. Otherwise, the reverse name lookup in the install doesn't work. 
-    unless ($netc->{DOMAINNAME} || $netc->{dnsServers}) {
-	unlink($file);
-	log::l("neither domain name nor dns server are configured");
-	return 0;
-    }
-    my @l = cat_($file);
-
-    local *F;
-    open F, "> $file" or die "cannot write $file: $!";
-    print F "search $netc->{DOMAINNAME}\n" if $netc->{DOMAINNAME};
-    print F "nameserver $_\n" foreach @{$netc->{dnsServers}};
-    print F "#$_" foreach @l;
-
-    #res_init();		# reinit the resolver so DNS changes take affect 
-    1;
-}
-
-sub write_interface_conf {
-    my ($file, $intf) = @_;
-
-    add2hash($intf, { ONBOOT => "yes" });
-    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT));
-}
-
-
 # The interface/gateway needs to be configured before this will work! 
 sub guessHostname {
     my ($prefix, $netc, $intf) = @_;
 
-    $intf->{isUp} && $netc->{dnsServers} or return 0;
+    $intf->{isUp} && dnsServers($netc) or return 0;
     $netc->{HOSTNAME} && $netc->{DOMAINNAME} and return 1;
 
     write_resolv_conf("$prefix/etc/resolv.conf", $netc);
@@ -127,3 +126,7 @@ sub getAvailableNetDevice {
     $device;
 }
 
+sub dnsServers {
+    my ($netc) = @_;
+    map { $netc->{$_} } qw(dnsServer dnsServer2 dnsServer3);
+}

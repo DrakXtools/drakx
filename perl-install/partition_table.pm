@@ -83,6 +83,7 @@ my %fs2type = reverse %type2fs;
 1;
 
 sub important_types { $_[0] and return sort values %types; @important_types } 
+
 sub type2name($) { $types{$_[0]} || 'unknown' }
 sub type2fs($) { $type2fs{$_[0]} }
 sub name2type($) { $types_rev{$_[0]} }

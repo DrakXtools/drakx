@@ -140,13 +140,15 @@ sub mouseConfig($) {
 sub configureNetwork($) {
     my ($o) = @_;
     my $etc = "$o->{prefix}/etc";
+
+    # all information is in {intf}, but don't let network be aware of this :)
 #
 #    rc = checkNetConfig(&$o->{intf}, &$o->{netc}, &$o->{intfFinal},
 #			 &$o->{netcFinal}, &$o->{driversLoaded}, $o->{direction});
-    network::write_conf("$etc/sysconfig/network", $o->{netc});
+    network::write_conf("$etc/sysconfig/network", $o->{intf});
     network::write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$o->{intf}{DEVICE}", $o->{intf});
-    network::write_resolv_conf("$etc/resolv.conf", $o->{netc});
-    network::add2hosts("$etc/hosts", $o->{intf}{IPADDR}, $o->{netc}{HOSTNAME});
+    network::write_resolv_conf("$etc/resolv.conf", $o->{intf});
+    network::add2hosts("$etc/hosts", $o->{intf}{IPADDR}, $o->{intf}{HOSTNAME});
 #    syscall_('sethostname', $hostname, length $hostname) or warn "sethostname failed: $!";
     #res_init();		# reinit the resolver so DNS changes take affect     
 }
