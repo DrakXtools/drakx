@@ -485,7 +485,7 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 	     { val => \$menuchoice, list => \@menuentrieslist, 
 	       not_edit => !$::expert, format => \&translate,
 	       allow_empty_list => 1, type => 'list' },
-	     (((!$::expert) && ($do_auto_detect)) ? 
+	     (((!$::expert) && ($do_auto_detect) && ($printer->{NEW})) ? 
 	      { text => _("Manual configuration"), type => 'bool',
 		val => \$manualconf } : ()),
 	    ]
@@ -592,7 +592,11 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
     my $descr = "";
     foreach (@parport) {
 	$device eq $_->{port} or next;
-	$descr = $_->{val}{DESCRIPTION};
+	if (($_->{val}{MANUFACTURER}) && ($_->{val}{MODEL})) {
+	    $descr = "$_->{val}{MANUFACTURER} $_->{val}{MODEL}";
+	} else {
+	    $descr = $_->{val}{DESCRIPTION};
+	}
 	# Clean up the description from noise which makes the best match
 	# difficult
 	$descr =~ s/\s+Inc\.//;
@@ -602,10 +606,19 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 	$descr =~ s/\s+Ltd\.//;
 	$descr =~ s/\s+International//;
 	$descr =~ s/\s+Int\.//;
+	$descr =~ s/\s+[Ss]eries//;
 	$descr =~ s/\s+\(?[Pp]rinter\)?$//;
-	
-        $printer->{DBENTRY} =
-            bestMatchSentence ($descr, keys %printer::thedb);
+	$printer->{DBENTRY} = "";
+	for my $entry (keys(%printer::thedb)) {
+	    if ($entry =~ m!$descr!) {
+		$printer->{DBENTRY} = $entry;
+		last;
+	    }
+	}
+	if (!$printer->{DBENTRY}) {
+	    $printer->{DBENTRY} =
+		bestMatchSentence ($descr, keys %printer::thedb);
+	}
         # If the manufacturer was not guessed correctly, discard the
         # guess.
         $printer->{DBENTRY} =~ /^([^\|]+)\|/;
@@ -617,6 +630,7 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
     }
     if ((!$printer->{currentqueue}{'desc'}) && ($descr)) {
 	$printer->{currentqueue}{'desc'} = $descr;
+	$printer->{currentqueue}{'desc'} =~ s/\|/ /g;
     }
     1;
 }
