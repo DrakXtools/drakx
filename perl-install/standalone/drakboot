@@ -123,14 +123,8 @@ my $boot_pic = gtkcreate_img($themes{def_thmb});
 change_image($boot_pic, $themes{default});
 
 my $_thm_button = new Gtk2::Button(N("Install themes"));
-my $logo_thm = new Gtk2::CheckButton(N("Display theme\nunder console"));
-my $B_create = new Gtk2::Button(N("Create new theme"));
+my $_B_create = gtksignal_connect(Gtk2::Button->new(N("Create new theme")), clicked => sub { system('/usr/sbin/draksplash ') });
 my $keep_logo = 1;
-$logo_thm->set_active(1);
-$logo_thm->signal_connect(clicked => sub { invbool(\$keep_logo) });
-$B_create->signal_connect(clicked => sub {
-                              system('/usr/sbin/draksplash ');
-                          });
 			  
 #- ******** action to take on changing combos values
 
@@ -151,7 +145,8 @@ gtkadd($window,
                                        gtkpack__(new Gtk2::VBox(0, 5),
                                                  N("\nTheme"),
                                                  $combo{boot},
-                                                 $logo_thm),
+                                                 gtksignal_connect(Gtk2::CheckButton->new(N("Display theme\nunder console")), clicked => sub { invbool(\$keep_logo) }),
+                                                ),
                                        Gtk2::VSeparator->new,
                                        gtkpack__(new Gtk2::VBox(0, 5),
                                                  $boot_pic))
