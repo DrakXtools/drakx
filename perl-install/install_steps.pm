@@ -759,9 +759,7 @@ sub configurePrinter {
 sub setRootPassword {
     my ($o) = @_;
     $o->{superuser} ||= {};
-    $o->{superuser}{name} = 'root';
-    any::write_passwd_user($o->{superuser}, $o->{authentication}{md5});
-    delete $o->{superuser}{name};
+    any::set_root_passwd($o->{superuser}, $o->{authentication});
     install_any::set_authentication($o);
 }
 

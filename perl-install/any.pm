@@ -831,6 +831,13 @@ sub user_crypted_passwd {
     $u->{password} ? &crypt($u->{password}, $isMD5) : $u->{pw} || '';
 }
 
+sub set_root_passwd {
+    my ($superuser, $authentication) = @_;
+    $superuser->{name} = 'root';
+    write_passwd_user($superuser, $authentication->{md5});    
+    delete $superuser->{name};
+}
+
 sub write_passwd_user {
     my ($u, $isMD5) = @_;
 
