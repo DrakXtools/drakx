@@ -14,14 +14,14 @@ else
     exit 2
 fi
 
-/bin/rm -rf /tmp/rhimage
-/bin/mkdir -m 0700 /tmp/rhimage || exit 1
+/bin/rm -rf /tmp/image
+/bin/mkdir -m 0700 /tmp/image || exit 1
 /bin/rm -rf /tmp/drakx
 /bin/mkdir -m 0700 /tmp/drakx || exit 2
 
 for i in Mandrake RPMS misc boot images VERSION
 do
-    /bin/ln -sf "$dir/../../$i" "/tmp/rhimage/$i" 
+    /bin/ln -sf "$dir/../../$i" "/tmp/image/$i" 
 done
 
 /bin/cp -a "$dir/../../Mandrake/mdkinst" "/tmp/drakx"
