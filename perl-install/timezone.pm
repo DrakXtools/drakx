@@ -50,6 +50,7 @@ my %l2t = (
 'French (Canada)' => 'Canada/Atlantic', # or Newfoundland ? or Eastern ?
 'Gaeilge (Ireland)' => 'Europe/Dublin',
 'German (Germany)' => 'Europe/Berlin',
+'Greek (Greece)' => 'Europe/Athens',
 'Hungarian (Hungary)' => 'Europe/Budapest',
 'Icelandic (Iceland)' => 'Atlantic/Reykjavik',
 'Indonesian (Indonesia)' => 'Asia/Jakarta',

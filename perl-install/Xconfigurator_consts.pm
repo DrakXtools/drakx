@@ -149,8 +149,8 @@ $default_monitor = "High Frequency SVGA, 1024x768 at 70 Hz";
 %lines = (
 #-    'Cirrus Logic|GD 5446' => [ '	Option "no_bitblt"' ],
       'Silicon Integrated Systems [SiS]|86C326' => [ '	Option "noaccel"' ],
-      'Trident Microsystems|Cyber 9525' => [ '	Option "noaccel"' ],
-      'S3 Inc.|86c368 [Trio 3D/2X]' => [ '	ChipID  0x8a10' ],
+#-      'Trident Microsystems|Cyber 9525' => [ '	Option "noaccel"' ],
+#-      'S3 Inc.|86c368 [Trio 3D/2X]' => [ '	ChipID  0x8a10' ],
 );
 
 #- most usefull server options have to be accessible at the beginning, since
