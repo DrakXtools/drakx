@@ -639,6 +639,7 @@ my %IM2packages = (
                              },
                    'scim+uim' => { generic => [ qw(scim-uim) ] },
                    'uim' => { generic => [ qw(uim-applet) ] },
+                   'vi' =>  { generic => [ 'x-unikey' ] },
                   );
 
 sub IM2packages {
