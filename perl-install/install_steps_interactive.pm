@@ -702,7 +702,7 @@ _("Read-write") => { val => \$e->{'read-write'}, type => 'bool' }
 	} else {
 	    @l = ( 
 _("Root") => { val => \$name, list => [ map { "/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
-_("Table") => { val => \$e->{table}, list => [ map { "/dev/$_->{device}" } @{$o->{hds}} ], not_edit => !$::expert },
+_("Table") => { val => \$e->{table}, list => [ '', map { "/dev/$_->{device}" } @{$o->{hds}} ], not_edit => !$::expert },
 _("Unsafe") => { val => \$e->{unsafe}, type => 'bool' }
 	    );
 	    @l = @l[0..1] if $::beginner;
