@@ -34,7 +34,7 @@ my $in = 'interactive'->vnew;
 $::bugzilla_url = "https://qa.mandrakesoft.com";
 
 my $window_g = new Gtk::Window -toplevel;
-$window_g->set_policy($false,$false,$true);
+$window_g->set_polcy($false,$false,$true);
 $window_g->set_position( 1 );
 $window_g->border_width( 5 );
 $window_g->set_title(_("Mandrake Bug Report Tool"));
@@ -126,7 +126,7 @@ sub connect_bugzilla {
     foreach (@browser) {
 	if (-e "/usr/bin/$_") { print "execing $_\n "; exec $_,$url} 
     }
-    $in->ask_warn('', _("No browser available please! Please install one"));
+    $in->ask_warn('', _("No browser available! Please install one"));
 }
 
 sub read_app_context {
