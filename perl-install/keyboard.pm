@@ -320,6 +320,37 @@ sub grp_toggles {
     \%grp_toggles;
 }
 
+sub loadkeys_files {
+    my ($err) = @_;
+    my $archkbd = arch() =~ /^sparc/ ? "sun" : arch() =~ /i.86/ ? "i386" : arch() =~ /ppc/ ? "mac" : arch();
+    my $p = "/usr/lib/kbd/keymaps/$archkbd";
+    my $post = ".kmap.gz";
+    my %trans = ("cz-latin2" => "cz-lat2");
+    my %find_file;
+    foreach my $dir (all($p)) {
+	$find_file{$dir} = '';
+	foreach (all("$p/$dir")) {
+	    $find_file{$_} and $err->("file $_ is both in $find_file{$_} and $dir") if $err;
+	    $find_file{$_} = "$p/$dir/$_";
+	}
+    }
+    my (@l, %l);
+    foreach (values %keyboards) {
+	local $_ = $trans{$_->[1]} || $_->[1];
+	my $l = $find_file{"$_$post"} || $find_file{first(/(..)/) . $post};
+	if ($l) {
+	    push @l, $l;
+	    foreach (`zgrep include $l | grep "^include"`) {
+		/include\s+"(.*)"/ or die "bad line $_";
+		@l{grep { -e $_ } ("$p/$1.inc.gz")} = ();
+	    }
+	} else {
+	    $err->("invalid loadkeys keytable $_") if $err;
+	}
+    }
+    uniq(@l, keys %l, grep { -e $_ } map { "$p/$_.inc.gz" } qw(compose euro windowkeys linux-keys-bare));
+}
+
 sub unpack_keyboards {
     my ($k) = @_; $k or return;
     [ grep { 
@@ -501,6 +532,8 @@ sub check {
     my @kmaps_wanted = map { keyboard2kmap($_) } keyboard::keyboards();
     $err->("missing KEYTABLE $_ (either share/keymaps.tar.bz2 need updating or $_ is bad)") foreach difference2(\@kmaps_wanted, \@kmaps_available);
     $err->("unused KEYTABLE $_ (update share/keymaps.tar.bz2 using share/keymaps_generate)") foreach difference2(\@kmaps_available, \@kmaps_wanted);
+
+    loadkeys_files($err);
 
     exit($ok ? 0 : 1);
 }
