@@ -263,7 +263,7 @@ sub detect() {
     my $fast_mouse_probe = sub {
 	my $auxmouse = detect_devices::hasMousePS2("psaux") && fullname2mouse("PS/2|Standard", unsafe => 1);
 
-	if (modules::get_alias("usb-interface")) {
+	if (modules::get_probeall("usb-interface")) {
 	    if (my (@l) = detect_devices::usbMice()) {
 		log::l("found usb mouse $_->{driver} $_->{description} ($_->{type})") foreach @l;
 		eval { modules::load(qw(hid mousedev usbmouse)) };
@@ -278,7 +278,7 @@ sub detect() {
 	$auxmouse;
     };
 
-    if (modules::get_alias("usb-interface")) {
+    if (modules::get_probeall("usb-interface")) {
 	my $keep_mouse;
 	if (my (@l) = detect_devices::usbWacom()) {
 	    log::l("found usb wacom $_->{driver} $_->{description} ($_->{type})") foreach @l;
@@ -319,7 +319,7 @@ sub detect() {
 			MOUSETYPE  => "Microsoft",
 			XMOUSETYPE => "Microsoft"}, @wacom;
 
-    if (!modules::get_alias("usb-interface") && detect_devices::is_a_recent_computer() && $::isInstall && !$::noauto) {
+    if (!modules::get_probeall("usb-interface") && detect_devices::is_a_recent_computer() && $::isInstall && !$::noauto) {
 	#- special case for non detected usb interface on a box with no mouse.
 	#- we *must* find out if there really is no usb, otherwise the box may
 	#- not be accessible via the keyboard (if the keyboard is USB)

@@ -132,6 +132,10 @@ sub get_alias {
     my ($alias) = @_;
     $conf{$alias}{alias};
 }
+sub get_probeall {
+    my ($alias) = @_;
+    $conf{$alias}{probeall};
+}
 sub get_options {
     my ($name) = @_;
     $conf{$name}{options};

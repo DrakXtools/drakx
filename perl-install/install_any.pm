@@ -363,7 +363,7 @@ sub setDefaultPackages {
     $o->{compssUsersChoice}{DOCS} = !$o->{excludedocs};
     $o->{compssUsersChoice}{BURNER} = 1 if detect_devices::burners();
     $o->{compssUsersChoice}{DVD} = 1 if detect_devices::dvdroms();
-    $o->{compssUsersChoice}{USB} = 1 if modules::get_alias("usb-interface");
+    $o->{compssUsersChoice}{USB} = 1 if modules::get_probeall("usb-interface");
     $o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
     $o->{compssUsersChoice}{HIGH_SECURITY} = 1 if $o->{security} > 3;
     $o->{compssUsersChoice}{BIGMEM} = 1 if !$::oem && (availableRamMB() > 800) && (arch() !~ /ia64/);
