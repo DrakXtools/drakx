@@ -5,12 +5,12 @@ package my_gtk;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border @grabbed);
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
-    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkappend gtkadd gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkxpm gtkcreate_xpm) ],
+    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkappend gtkadd gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkcreate_xpm) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list ask_file) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -39,9 +39,8 @@ sub new {
     while (my $e = shift @tempory::objects) { $e->destroy }
     push @interactive::objects, $o unless $opts{no_interactive_objects};
 
-    top(@grabbed)->grab_remove if @grabbed;
-    push(@grabbed, $o->{rwindow}), $o->{rwindow}->grab_add if $my_gtk::grab || $o->{grab};
-
+    $o->{rwindow}->set_modal(1) if $my_gtk::grab || $o->{grab};
+    print "modal############################################################\n" if $my_gtk::grab || $o->{grab};
     $o;
 }
 sub main($;$) {
@@ -63,8 +62,6 @@ sub show($) {
 }
 sub destroy($) {
     my ($o) = @_;
-    (pop @grabbed)->grab_remove if @grabbed;
-    top(@grabbed)->grab_add if @grabbed;
     $o->{rwindow}->destroy;
     gtkset_mousecursor_wait();
     flush();
@@ -178,13 +175,22 @@ sub gtkset_background {
     $root->draw_rectangle($gc, 1, 0, 0, $w, $h);
 }
 
-sub gtkset_default_fontset($) {
+sub gtkset_default_fontset {
     my ($fontset) = @_;
 
     my $style = Gtk::Widget->get_default_style;
     my $f = Gtk::Gdk::Font->fontset_load($fontset) or die '';
     $style->font($f);
     Gtk::Widget->set_default_style($style);
+}
+
+sub gtkctree_children {
+    my ($node) = @_;
+    my @l;
+    for (my $p = $node->row->children; $p; $p = $p->row->sibling) {
+	push @l, $p;
+    }
+    @l;
 }
 
 sub gtkcreate_xpm { my $w = shift; Gtk::Gdk::Pixmap->create_from_xpm($w->window, $w->style->bg('normal'), @_) }
@@ -300,31 +306,7 @@ sub _create_window($$) {
     my $w = new Gtk::Window;
     my $f = new Gtk::Frame(undef);
     $w->set_name("Title");
-
-    if ($::isStandalone || $o->{no_border} || 1) { # hack
-	gtkadd($w, $f);
-    } else {
-	my $t = new Gtk::Table(0, 0, 0);
-
-	my $new = sub {
-	    my $w = new Gtk::DrawingArea;
-	    $w->set_usize($border, $border);
-	    $w->set_events(['exposure_mask']);
-	    $w->signal_connect_after(expose_event =>
-		sub { $w->window->draw_rectangle($w->style->black_gc, 1, 0, 0, @{$w->allocation}[2,3]); 1 }
-	    );
-	    $w->show;
-	    $w;
-	};
-
-	$t->attach(&$new(), 0, 1, 0, 3, [],              , ["expand","fill"], 0, 0);
-	$t->attach(&$new(), 1, 2, 0, 1, ["expand","fill"], [],                0, 0);
-	$t->attach($f,      1, 2, 1, 2, ["expand","fill"], ["expand","fill"], 0, 0);
-	$t->attach(&$new(), 1, 2, 2, 3, ["expand","fill"], [],                0, 0);
-	$t->attach(&$new(), 2, 3, 0, 3, [],                ["expand","fill"], 0, 0);
-
-	gtkadd($w, $t);
-    }
+    gtkadd($w, $f);
 
     $w->set_title($title);
 

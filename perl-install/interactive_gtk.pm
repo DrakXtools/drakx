@@ -364,6 +364,5 @@ sub kill {
 	my $w = pop @interactive::objects;
 	$w->destroy;
     }
-    @my_gtk::grabbed = ();
     $o->{before_killing} = @interactive::objects;
 }
