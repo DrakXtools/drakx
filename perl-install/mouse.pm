@@ -220,6 +220,19 @@ sub write {
     }
 }
 
+sub probe_wacom_devices() {
+    modules::get_probeall("usb-interface") or return;
+    my (@l) = detect_devices::usbWacom() or return;
+
+    log::l("found usb wacom $_->{driver} $_->{description} ($_->{type})") foreach @l;
+    my @wacom = eval { 
+	modules::load("wacom", "evdev");
+	grep { detect_devices::tryOpen($_) } map_index { "input/event$::i" } @l
+    };
+    @wacom or eval { modules::unload("evdev", "wacom") };
+    @wacom;
+}
+
 sub mouseconfig() {
     my ($t, $mouse, @wacom);
 
@@ -285,19 +298,7 @@ sub detect() {
 	$auxmouse;
     };
 
-    my @wacom;
-    if (modules::get_probeall("usb-interface")) {
-	if (my (@l) = detect_devices::usbWacom()) {
-	    log::l("found usb wacom $_->{driver} $_->{description} ($_->{type})") foreach @l;
-	    eval { modules::load("wacom", "evdev") };
-	    if (!$@) {
-		@wacom = grep { detect_devices::tryOpen($_) } map_index { "input/event$::i" } @l;
-	    }
-	    @wacom or eval { modules::unload("evdev", "wacom") };
-	}
-    } else {
-	log::l("no usb interface found for wacom");
-    }
+    my @wacom = probe_wacom_devices();
 
     if (my $mouse = $fast_mouse_probe->()) {
 	return { wacom => \@wacom, %$mouse };
