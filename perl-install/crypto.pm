@@ -168,6 +168,8 @@ sub getPackages {
 	$update_medium->{selected} = 1;
 	$update_medium->{update} = 1;
 
+	$install_any::global_ftp_prefix = [ $mirror, dir($mirror) ]; #- host, dir (for install_any::getFile)
+
 	#- search for packages to update.
 	$packages->{rpmdb} ||= pkgs::rpmDbOpen();
 	pkgs::selectPackagesToUpgrade($packages, $update_medium);
