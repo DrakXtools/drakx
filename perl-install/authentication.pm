@@ -42,9 +42,9 @@ sub ask_parameters {
     } elsif ($kind eq 'AD') {
 	$val ||= $netc->{DOMAINNAME};
 	$authentication->{AD_server} ||= 'kerberos.' . $val;
-	$authentication->{AD_users_db} ||= 'cn=users,' . domain_to_ldap_domain($authentication->{AD_server});
+	$authentication->{AD_users_db} ||= 'cn=users,' . domain_to_ldap_domain($val);
 
-	my $AD_user = $authentication->{AD_user} =~ /cn=(.*),\Q$authentication->{AD_users_db}\E$/ ? $1 : $authentication->{AD_user};
+	my $AD_user = $authentication->{AD_user} =~ /(.*)\@\Q$val\E$/ ? $1 : $authentication->{AD_user};
 
 	$in->ask_from('',
 		     N("Authentication Active Directory"),
@@ -54,8 +54,7 @@ sub ask_parameters {
 		       { label => N("LDAP user allowed to browse the Active Directory"), val => \$AD_user },
 		       { label => N("Password for user"), val => \$authentication->{AD_password}, disabled => sub { !$AD_user } },
 		     ]) or return;
-	$authentication->{AD_user} = !$AD_user ? '' : $AD_user =~ /cn=/ ? $AD_user : 
-	                                         "cn=$AD_user,$authentication->{AD_users_db}";
+	$authentication->{AD_user} = !$AD_user ? '' : $AD_user =~ /@/ ? $AD_user : "$AD_user\@$val";
     } elsif ($kind eq 'NIS') { 
 	$val ||= 'broadcast';
 	$in->ask_from('',
@@ -181,7 +180,7 @@ sub set {
 
 
 sub pam_modules() {
-    'pam_ldap', 'pam_winbind', 'pam_mkhomedir';
+    'pam_ldap', 'pam_winbind', 'pam_krb5', 'pam_mkhomedir';
 }
 sub pam_module_from_path { 
     $_[0] && $_[0] =~ m|(/lib/security/)?(pam_.*)\.so| && $2;
@@ -205,41 +204,56 @@ sub get_raw_pam_authentication() {
     \%before_deny;
 }
 
-sub set_raw_pam_authentication {
-    my ($before_deny, $before_first) = @_;
+sub set_pam_authentication {
+    my (@authentication_kinds) = @_;
+    
+    my %special = (
+	auth => \@authentication_kinds,
+	account => \@authentication_kinds,
+	password => [ intersection(\@authentication_kinds, [ 'ldap', 'krb5' ]) ],
+    );
+    my %before_first = (
+	session => intersection(\@authentication_kinds, [ 'winbind', 'krb5' ]) ? pam_format_line('session', 'optional', 'pam_mkhomedir', 'skel=/etc/skel/', 'umask=0022') : '',
+    );
+    my %after_deny = (
+	session => member('krb5', @authentication_kinds) ? pam_format_line('session', 'optional', 'pam_krb5') : '',
+    );
+
     substInFile {
 	my ($type, $control, $module, @para) = split;
-	my $added_pre_line = '';
 	if ($module = pam_module_from_path($module)) {
-	    if ($module eq 'pam_unix' && member($type, 'auth', 'account')) {
-		#- remove likeauth, nullok and use_first_pass
-		$_ = pam_format_line($type, 'sufficient', $module, grep { !member($_, qw(likeauth nullok use_first_pass)) } @para);
+	    if (member($module, pam_modules())) {
+		#- first removing previous config
+		$_ = '';
+	    }
+	    if ($module eq 'pam_unix' && $special{$type} && @{$special{$type}}) {
+		my @para_for_last = 
+		  $type eq 'auth' ? qw(likeauth nullok use_first_pass) :
+		  $type eq 'account' ? qw(use_first_pass) : @{[]};
+		@para = difference2(\@para, \@para_for_last);
+
+		my ($before, $after) = partition { $_ eq 'krb5' } @{$special{$type}};
+		my @l = ((map { [ "pam_$_" ] } @$before),
+			 [ 'pam_unix', @para ],
+			 (map { [ "pam_$_" ] } @$after),
+			 );
+		push @{$l[-1]}, @para_for_last;
+		$_ = join('', map { pam_format_line($type, 'sufficient', @$_) } @l);
+
 		if ($control eq 'required') {
 		    #- ensure a pam_deny line is there
 		    ($control, $module, @para) = ('required', 'pam_deny');
-		    ($added_pre_line, $_) = ($_, pam_format_line($type, $control, $module));
+		    $_ .= pam_format_line($type, $control, $module);
 		}
 	    }
-	    if (member($module, pam_modules())) {
-		#- first removing previous config
-		warn "dropping line $_";
-		$_ = '';
-	    } else {
-		if ($before_first->{$type}) {
-		    foreach my $module (keys %{$before_first->{$type}}) {
-			$_ = pam_format_line($type, 'required', $module, @{$before_first->{$type}{$module}}) . $_;
-		    }
-		    delete $before_first->{$type};
-		}		
-		if ($control eq 'required' && $module eq 'pam_deny') {
-		    if ($before_deny->{$type}) {
-			foreach my $module (keys %{$before_deny->{$type}}) {
-			    $_ = pam_format_line($type, 'sufficient', $module, @{$before_deny->{$type}{$module}}) . $_;
-			}
-		    }
+	    if (my $s = delete $before_first{$type}) {
+		$_ = $s . $_;
+	    }
+	    if ($control eq 'required' && member($module, 'pam_deny', 'pam_unix')) {
+		if (my $s = delete $after_deny{$type}) {
+		    $_ .= $s;
 		}
 	    }
-	    $_ = $added_pre_line . $_;
 	}
     } "$::prefix/etc/pam.d/system-auth";
 }
@@ -247,20 +261,6 @@ sub set_raw_pam_authentication {
 sub get_pam_authentication_kinds() {
     my $before_deny = get_raw_pam_authentication();
     map { s/pam_//; $_ } keys %{$before_deny->{auth}};
-}
-
-sub set_pam_authentication {
-    my (@authentication_kinds) = @_;
-    my $before_deny = {};
-    my $before_first = {};
-    foreach (@authentication_kinds) {
-	my $module = 'pam_' . $_;
-	$before_deny->{auth}{$module} = [ 'likeauth', 'nullok', 'use_first_pass' ];
-	$before_deny->{account}{$module} = [ 'use_first_pass' ];
-	$before_deny->{password}{$module} = [] if $_ eq 'ldap';
-	$before_first->{session}{pam_mkhomedir} = [ 'skel=/etc/skel/', 'umask=0022' ] if $_ eq 'winbind';
-    }
-    set_raw_pam_authentication($before_deny, $before_first);
 }
 
 sub set_nsswitch_priority {
