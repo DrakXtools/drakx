@@ -368,14 +368,11 @@ sub beforeInstallPackages {
     #- mainly for upgrading redhat packages, but it can help other
     my @should_not_be_dirs = qw(/usr/X11R6/lib/X11/xkb /usr/share/locale/zh_TW/LC_TIME /usr/include/GL);
     my @should_be_dirs = qw(/etc/X11/xkb);
-    foreach (@should_not_be_dirs) {
-	my $f = "$::prefix$_";
-	rm_rf($f) if !-l $f && -d $f;
-    }
-    foreach (@should_be_dirs) {
-	my $f = "$::prefix$_";
-	rm_rf($f) if -l $f || !-d $f;
-    }
+    my @to_remove = (
+		     (grep { !-l $f && -d $f          } map { "$::prefix$_" } @should_not_be_dirs),
+		     (grep { -l $f || !-d $f && -e $f } map { "$::prefix$_" } @should_be_dirs),
+		    );
+    rm_rf(@to_remove);
 
     if ($o->{isUpgrade} eq 'redhat') {
 	upgrading_redhat();
