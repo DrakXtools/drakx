@@ -1,0 +1,379 @@
+#!/usr/bin/perl
+
+#
+# Guillaume Cottenceau (gc@mandrakesoft.com)
+#
+# Copyright 2000 MandrakeSoft
+#
+# This software may be freely redistributed under the terms of the GNU
+# public license.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+
+$drakgw_version = "0.9.0";
+
+use lib qw(/usr/lib/libDrakX);
+
+use common qw(:system :file);
+use interactive;
+use log;
+use c;
+
+local $_ = join '', @ARGV;
+
+/-h/ and die "usage: drakgw [--expert]\n";
+
+$::expert = /-expert/ || cat_("/etc/sysconfig/system") =~ /^TYPE="?expert/m; #"
+$::isStandalone = 1;
+
+my $in = vnew interactive('su');
+
+
+#- **********************************
+#- * 1st step: detect/setup
+
+$in->ask_okcancel(_("Internet Connection Sharing"),
+		  _("Your computer can be configured so that its Internet connection shall be shared ".
+		    "with other computers.\n".
+		    "Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN).\n\n".
+		    "Would you like to setup the Internet Connection Sharing?"), 1) or $in->exit(0);
+
+#my @pci_ethernet_cards;
+#require pci_probing::main;
+#($_->[0] =~ /NETWORK_ETHERNET/) and (push @pci_ethernet_cards, $_) foreach (pci_probing::main::probe('.'));
+
+#($#pci_ethernet_cards == -1) and $in->ask_warn('', _("No PCI network ethernet devices found!")) and $in->exit(0);
+#
+##  push @pci_ethernet_cards, [ "NETWORK_ETHERNET", "Fake ne2000", "ne2k" ];
+#
+#my @configured_devices = map { /ifcfg-(\S+)/; $1 } `ls /etc/sysconfig/network-scripts/ifcfg*`;
+#
+#my @active_devices = `/sbin/ifconfig | grep ^[a-z] | awk '{print \$1}'`; chop @active_devices;
+
+my %aliased_devices; (/^alias\s+(eth[0-9])\s+(\S+)/) and ($aliased_devices{$1} = $2) foreach (`cat /etc/modules.conf`);
+my @all_cards = map { "Interface $_ (using module $aliased_devices{$_})" } (keys %aliased_devices);
+
+ 
+#  print "pci_detection: "; print ">".$_->[2]."< " foreach (@pci_ethernet_cards);
+#  print "\nconfigured: "; print ">".$_."< " foreach (@configured_devices);
+#  print "\nactive: "; print ">".$_."< " foreach (@active_devices);
+#  print "\naliased: "; print ">".$_." => ".$aliased_devices{$_}."< " foreach (keys %aliased_devices);
+#  print "\n";
+#  print "\nall_cards: "; print ">".$_."< " foreach (@all_cards);
+
+#
+#foreach $pci_card (@pci_ethernet_cards)
+#{
+#    my $this_card = $pci_card->[1];
+#    foreach $aliased_dev (keys %aliased_devices)
+#    {
+#	 if ($pci_card->[2] eq $aliased_devices{$aliased_dev})
+#	 {
+#	     $this_card .= ", hardware-configured";
+#	     grep(/$aliased_dev/, @configured_devices) and $this_card .= ", software-configured";
+#	     grep(/$aliased_dev/, @active_devices) and $this_card .= ", active";
+#	 }
+#    }
+#    push @all_cards, $this_card;
+#}
+
+
+#- setup the network interface we shall use
+
+my $interface;
+if ($#all_cards == -1)
+{
+    $in->ask_warn(_("No NIC on your system!"), 
+		  _("No ethernet network adapter is currently configured on your\n".
+		    "system. Please run the hardware configuration tool."));
+    $in->exit(0);
+}
+elsif ($#all_cards == 0)
+{
+    $interface = $all_cards[0];
+    $in->ask_okcancel(_("Network interface"),
+		      _("There is only one configured network adapter on your system:\n\n$interface\n\n".
+			"Would you like to setup your Local Area Network with that adapter?"), 1) or $in->exit(0);
+}
+else
+{
+    $interface = $in->ask_from_list(_("Choose the network interface"),
+				    _("Here are the configured network adapters on your system; please\n".
+				      "choose which one to use to setup your Local Area Network."),
+				    \@all_cards,
+				    );
+    defined $interface or $in->exit(0);
+}
+$interface =~ /(eth[0-9]+)/ or die("Internal error");
+my $device = $1;
+
+
+#- setup the address for the LAN
+
+my $lan_address = "192.168.0.0";
+$::expert and ($lan_address = $in->ask_from_entry(_("Local Area Network specification"),
+						  _("You may now decide which class C network will be your LAN.\n"),
+						  _("Network:"), $lan_address,
+						 ) or $in->exit(0));
+($lan_address =~ /^([0-9]+\.[0-9]+\.[0-9]+)\.0$/) or die "Invalid network.\n";
+$lan_address = $1;
+
+
+#- test for potential conflict with other networks
+
+my @configured_devices = map { /ifcfg-(\S+)/; $1 } `ls /etc/sysconfig/network-scripts/ifcfg-*`;
+
+foreach (@configured_devices)
+{
+    if ($_ ne $device)
+    {
+	local *IFCFG;
+	my $ifcfg = "/etc/sysconfig/network-scripts/ifcfg-$_";
+	open IFCFG, "$ifcfg" or die "Can't open $ifcfg";
+	my @ifcfg_content = <IFCFG>;
+	grep(/$lan_address/, @ifcfg_content) and $in->ask_warn('', _("Potential LAN address conflict found in current config of $_!\n")) and $in->exit(0);
+	close IFCFG;
+    }
+}
+
+
+#- ask for confirmation
+
+$in->ask_okcancel(_("Internet Connection Sharing - setup of $device"),
+		  _("The following interface is about to be configured:\n\n$interface\n\n".
+		    "It will be setup on a Local Area Network ($lan_address.0); additionnally, IP forwarding ".
+		    "and masquerading will be enabled, together with a DHCP server.\n".
+		    "You will then be able to connect other computers to this network, with automatic ".
+		    "DHCP configuration."), 1) or $in->exit(0);
+
+
+
+#- **********************************
+#- * 2nd step: configure
+
+my $wait_configuring = $in->wait_message('Configuring...', _("Configuring scripts, installing software, starting daemons..."));
+
+#- setup the /etc/sysconfig/network-script/ script
+
+my $network_scripts = "/etc/sysconfig/network-scripts";
+-f "$network_scripts/ifcfg-$device" and rename("$network_scripts/ifcfg-$device", "$network_scripts/old.ifcfg-$device");
+my $ifcfg = "$network_scripts/ifcfg-$device";
+local *IFCFG; open IFCFG, ">$ifcfg" or die "Can't open $ifcfg";
+print IFCFG <<EOF;
+DEVICE=$device
+BOOTPROTO=static
+IPADDR=$lan_address.1
+NETMASK=255.255.255.0
+NETWORK=$lan_address.0
+BROADCAST=$lan_address.255
+ONBOOT=yes
+EOF
+close IFCFG;
+
+
+#- install and setup the FORWARD and MASQ stuff with IPCHAINS
+
+my $f = "/sbin/ipchains";
+-e $f or system("urpmi --auto ipchains");
+-e $f or ($in->ask_warn('', _("Could not install ipchains RPM with urpmi.")) and $in->exit(0));
+
+my $rcfirewall = "/etc/rc.d/rc.firewall";
+-f $rcfirewall and rename($rcfirewall, "$rcfirewall.old");
+local *RCFIREWALL; open RCFIREWALL, ">$rcfirewall" or die "Can't open $rcfirewall";
+print RCFIREWALL <<EOF;
+#!/bin/sh
+#
+# rc.firewall - Initial SIMPLE IP Masquerade test for 2.1.x and 2.2.x kernels using IPCHAINS
+#
+# Load all required IP MASQ modules
+#
+#   NOTE:  Only load the IP MASQ modules you need.  All current IP MASQ modules
+#          are shown below but are commented out from loading.
+
+# Needed to initially load modules
+#
+/sbin/depmod -a
+
+# Supports the proper masquerading of FTP file transfers using the PORT method
+#
+/sbin/modprobe ip_masq_ftp
+
+# Supports the masquerading of RealAudio over UDP.  Without this module,
+#       RealAudio WILL function but in TCP mode.  This can cause a reduction
+#       in sound quality
+#
+#/sbin/modprobe ip_masq_raudio
+
+# Supports the masquerading of IRC DCC file transfers
+#
+#/sbin/modprobe ip_masq_irc
+
+
+# Supports the masquerading of Quake and QuakeWorld by default.  This modules is
+#   for for multiple users behind the Linux MASQ server.  If you are going to play
+#   Quake I, II, and III, use the second example.
+#
+#   NOTE:  If you get ERRORs loading the QUAKE module, you are running an old
+#   -----  kernel that has bugs in it.  Please upgrade to the newest kernel.
+#
+#Quake I / QuakeWorld (ports 26000 and 27000)
+#/sbin/modprobe ip_masq_quake
+#
+#Quake I/II/III / QuakeWorld (ports 26000, 27000, 27910, 27960)
+#/sbin/modprobe ip_masq_quake 26000,27000,27910,27960
+
+
+# Supports the masquerading of the CuSeeme video conferencing software
+#
+#/sbin/modprobe ip_masq_cuseeme
+
+#Supports the masquerading of the VDO-live video conferencing software
+#
+#/sbin/modprobe ip_masq_vdolive
+
+
+#CRITICAL:  Enable IP forwarding since it is disabled by default since
+#
+#           Redhat Users:  you may try changing the options in /etc/sysconfig/network from:
+#
+#                       FORWARD_IPV4=false
+#                             to
+#                       FORWARD_IPV4=true
+#
+echo "1" > /proc/sys/net/ipv4/ip_forward
+
+
+# Dynamic IP users:
+#
+#   If you get your IP address dynamically from SLIP, PPP, or DHCP, enable this following
+#       option.  This enables dynamic-ip address hacking in IP MASQ, making the life 
+#       with Diald and similar programs much easier.
+#
+#echo "1" > /proc/sys/net/ipv4/ip_dynaddr
+
+
+# MASQ timeouts
+#
+#   2 hrs timeout for TCP session timeouts
+#  10 sec timeout for traffic after the TCP/IP "FIN" packet is received
+#  160 sec timeout for UDP traffic (Important for MASQ'ed ICQ users) 
+#
+/sbin/ipchains -M -S 7200 10 160
+
+
+# DHCP:  For people who receive their external IP address from either DHCP or BOOTP
+#        such as ADSL or Cablemodem users, it is necessary to use the following
+#        before the deny command.  The "bootp_client_net_if_name" should be replaced
+#        the name of the link that the DHCP/BOOTP server will put an address on to?
+#        This will be something like "eth0", "eth1", etc.
+#
+#        This example is currently commented out.
+#
+#
+#/sbin/ipchains -A input -j ACCEPT -i bootp_clients_net_if_name -s 0/0 67 -d 0/0 68 -p udp
+
+# Enable simple IP forwarding and Masquerading
+#
+#  NOTE:  The following is an example for an internal LAN address in the 192.168.0.x
+#         network with a 255.255.255.0 or a "24" bit subnet mask.
+#
+#         Please change this network number and subnet mask to match your internal LAN setup
+#
+/sbin/ipchains -P forward DENY
+/sbin/ipchains -A forward -s $lan_address.0/24 -j MASQ
+EOF
+close RCFIREWALL;
+chmod 0700, $rcfirewall;
+
+
+#- be sure that FORWARD_IPV4 is enabled in /etc/sysconfig/network
+
+my $sysconf_network = "/etc/sysconfig/network";
+open SYSCONF_NETWORK, "$sysconf_network" or die "Can't open $sysconf_network";
+my @sysconf_network_content = <SYSCONF_NETWORK>;
+close SYSCONF_NETWORK;
+($_ =~ /^FORWARD_IPV4=/ and $_="FORWARD_IPV4=true\n") foreach (@sysconf_network_content);
+grep(/^FORWARD_IPV4=/, @sysconf_network_content) or push @sysconf_network_content, "FORWARD_IPV4=true\n";
+open SYSCONF_NETWORK, ">$sysconf_network" or die "Can't open $sysconf_network";
+print SYSCONF_NETWORK @sysconf_network_content;
+close SYSCONF_NETWORK;
+
+
+#- install and setup the DHCP server
+
+$f = "/usr/sbin/dhcpd";
+-e $f or system("urpmi --auto dhcp");
+-e $f or ($in->ask_warn('', _("Could not install dhcp RPM with urpmi.")) and $in->exit(0));
+
+my $dhcpdconf = "/etc/dhcpd.conf";
+-f $dhcpdconf and rename($dhcpdconf, "$dhcpdconf.old");
+local *DHCPDCONF; open DHCPDCONF, ">$dhcpdconf" or die "Can't open $dhcpdconf";
+print DHCPDCONF <<EOF;
+subnet $lan_address.0 netmask 255.255.255.0 {
+	# default gateway
+	option routers $lan_address.1;
+	option subnet-mask 255.255.255.0;
+
+	option domain-name "homelan.org";
+	option domain-name-servers $lan_address.1;
+
+	range dynamic-bootp $lan_address.16 $lan_address.255;
+	default-lease-time 21600;
+	max-lease-time 43200;
+}
+EOF
+close DHCPDCONF;
+
+
+#- put the interface for the dhcp server in linuxconf config, for the /etc script of dhcpd
+
+my $conf_linuxconf = "/etc/conf.linuxconf";
+open CONF_LINUXCONF, "$conf_linuxconf" or die "Can't open $conf_linuxconf";
+my @conf_linuxconf_content = <CONF_LINUXCONF>;
+close CONF_LINUXCONF;
+($_ =~ /^DHCP.interface/ and $_="DHCP.interface $device\n") foreach (@conf_linuxconf_content);
+grep(/DHCP.interface/, @conf_linuxconf_content) or push @conf_linuxconf_content, "DHCP.interface $device\n";
+open CONF_LINUXCONF, ">$conf_linuxconf" or die "Can't open $conf_linuxconf";
+print CONF_LINUXCONF @conf_linuxconf_content;
+close CONF_LINUXCONF;
+
+
+#- install the BIND and caching nameserver stuff
+
+$f = "/usr/sbin/named";
+-e $f or system("urpmi --auto bind");
+-e $f or ($in->ask_warn('', _("Could not install bind RPM with urpmi.")) and $in->exit(0));
+
+$f = "/var/named/named.local";
+-e $f or system("urpmi --auto caching-nameserver");
+-e $f or ($in->ask_warn('', _("Could not install caching-nameserver RPM with urpmi.")) and $in->exit(0));
+
+
+#- start the daemons
+
+(system("/etc/rc.d/init.d/network restart") == 0) or die "Could not restart the network";
+(system("/etc/rc.d/rc.firewall") == 0) or die "Could not start the firewall script";
+grep(/is running/, `/etc/rc.d/init.d/dhcpd status`) and ((system("/etc/rc.d/init.d/dhcpd stop") == 0) or die "Could not stop the dhcp server");
+(system("/etc/rc.d/init.d/dhcpd start") == 0) or die "Could not start the dhcp server";
+(system("/sbin/chkconfig --level 345 dhcpd on") == 0) or die "Could not chkconfig dhcpd";
+grep(/Connection refused/, `/etc/rc.d/init.d/named status 2>&1`) or ((system("/etc/rc.d/init.d/named stop") == 0) or die "Could not stop the named server");
+(system("/etc/rc.d/init.d/named start") == 0) or die "Could not start the caching nameserver";
+(system("/sbin/chkconfig --level 345 named on") == 0) or die "Could not chkconfig named";
+
+
+undef $wait_configuring;
+$in->ask_warn(_("Everything configured!"), 
+	      _("Everything has been configured.\n".
+		"You may now connect computers on your Local Area Network,\n".
+		"using automatic DHCP network configuration."));
+
+
+$in->exit(0);
+
+
+ 
+# 0.9.0 Thu Aug 17 15:03:40 2000
+#   - first version
