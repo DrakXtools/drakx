@@ -128,7 +128,7 @@ $a_h_button->signal_connect( "clicked", sub { $pixmap->set($h_pixmap, $h_mask) }
 $a_h_button->set_active(1);
 $a_box->pack_start($a_h_button, 0, 0, 0);
 
-my $a_v_button = new Gtk::RadioButton _("vertical traditionnal aurora"), $a_h_button;
+my $a_v_button = new Gtk::RadioButton _("vertical traditional aurora"), $a_h_button;
 $a_v_button->signal_connect( "clicked", sub { $pixmap->set($v_pixmap, $v_mask) });
 $a_box->pack_start($a_v_button, 0, 0, 0);
 

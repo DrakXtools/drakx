@@ -174,7 +174,7 @@ To partition the selected hard drive, you can use these options:
    * Clear all: this option deletes all partitions available on the selected hard drive.
 
 
-   * Auto allocate:: this option allows you to automatically create Ext2 and swap partitions in free space of your
+   * Auto allocate: this option allows you to automatically create Ext2 and swap partitions in free space of your
      hard drive.
 
 
@@ -218,7 +218,7 @@ When a partition is selected, you can use:
            
 If you are installing on a PPC Machine, you will want to create a small HFS 'bootstrap' partition of at least 1MB for use
 by the yaboot bootloader. If you opt to make the partition a bit larger, say 50MB, you may find it a useful place to store 
-a spare kernel and ramdisk image for emgergency boot situations."),
+a spare kernel and ramdisk image for emergency boot situations."),
 
 ask_mntpoint_s => 
  __("Above are listed the existing Linux partitions detected on
