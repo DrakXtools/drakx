@@ -40,6 +40,7 @@
 
 #include "insmod.h"
 
+int quiet = 0;
 
 void vlog_message(const char * s, va_list args)
 {
@@ -105,7 +106,8 @@ static void insmod_(const char * parm)
 #ifdef DEBUG
 	printf("insmod %s options %s\n", mod_name, options);
 #endif
-	printf("[] Loading module %s\n", mod_name);
+	if (!quiet)
+		printf("[] Loading module %s\n", mod_name);
 
 	if (insmod_call(mod_name, options))
 		perror("insmod failed");
@@ -123,7 +125,8 @@ static void mount_(const char * parm)
 #ifdef DEBUG
 	printf("mounting %s on %s as type %s\n", dev, location, fs);
 #endif
-	printf("[] Mounting device containing loopback root filesystem\n");
+	if (!quiet)
+		printf("[] Mounting device containing loopback root filesystem\n");
 
 	flags = MS_MGC_VAL;
 
@@ -169,7 +172,8 @@ static void set_loop_(const char * parm)
 #ifdef DEBUG
 	printf("set_looping %s with %s\n", device, file);
 #endif
-	printf("[] Setting up loopback file %s\n", file);
+	if (!quiet)
+		printf("[] Setting up loopback file %s\n", file);
 
 	if ((ffd = open(file, O_RDWR)) < 0) {
 		perror("set_loop, opening file in rw");
@@ -218,7 +222,8 @@ static void raidautorun_(const char * parm)
 
 	parse_parms(parm, &device, NULL, NULL);
 
-	printf("[] Calling raid autorun for %s\n", device);
+	if (!quiet)
+		printf("[] Calling raid autorun for %s\n", device);
 	
 	fd = open(device, O_RDWR, 0);
 	if (fd < 0) {
@@ -257,7 +262,29 @@ int main(int argc, char **argv)
 	char buf[5000];
 	char * ptr;
 
-	printf("[] initrd_helper v" VERSION "\n");
+	if (strstr(argv[0], "modprobe"))
+		exit(0);
+
+	if (mount("/proc", "/loopfs", "proc", 0, NULL))
+		printf("[] couldn't mount proc filesystem\n");
+	else {
+		int fd_cmdline = open("/loopfs/cmdline", O_RDONLY);
+		if (fd_cmdline > 0) {
+			i = read(fd_cmdline, buf, sizeof(buf));
+			if (i == -1)
+				warning("could not read cmdline");
+			else {
+				buf[i] = '\0';
+				if (strstr(buf, "quiet"))
+					quiet = 1;
+			}
+			close(fd_cmdline);
+		}
+		umount("/loopfs");
+	}
+
+	if (!quiet)
+		printf("[] initrd_helper v" VERSION "\n");
 
 	if ((fd_conf = open("/mkinitrd_helper.conf", O_RDONLY)) < 0)
 		fatal_error("could not open mkinitrd_helper config file");
