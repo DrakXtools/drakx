@@ -613,9 +613,12 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 #endif
 
 #ifndef DISABLE_DISK
-        if (IS_RECOVERY && streq(get_auto_value("method"), "cdrom") && !process_recovery())
-#endif
+        if (IS_RECOVERY && streq(get_auto_value("method"), "cdrom")) {
+                if (!process_recovery())
                         method_select_and_prepare();
+#endif
+        } else
+                method_select_and_prepare();
 
 	if (!IS_RAMDISK)
 		if (symlink(IMAGE_LOCATION_REAL LIVE_LOCATION, STAGE2_LOCATION) != 0)
