@@ -191,7 +191,7 @@ sub formatPartitions {
 
     any::rotate_logs($o->{prefix});
 
-    if (find { $_->{usb_media_type} && find { $_->{mntpoint} } partition_table::get_normal_parts($_) } @{$o->{all_hds}{hds}}) {
+    if (any { $_->{usb_media_type} && any { $_->{mntpoint} } partition_table::get_normal_parts($_) } @{$o->{all_hds}{hds}}) {
 	log::l("we use a usb-storage based drive, so keep it as a normal scsi_hostadapter");
     } else {
 	log::l("we don't need usb-storage for booting system, rely on hotplug");
