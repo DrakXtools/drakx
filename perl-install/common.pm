@@ -9,7 +9,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
     common     => [ qw(__ may_apply even odd arch better_arch compat_arch min max sqr sum and_ or_ if_ sign product bool invbool listlength bool2text bool2yesno text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines deref next_val_in_array) ],
     functional => [ qw(fold_left compose mapgrep map_index grep_index find_index map_each grep_each list2kv map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie combine) ],
     file       => [ qw(dirname basename touch all glob_ cat_ cat__ output symlinkf chop_ mode typeFromMagic expand_symlinks) ],
-    system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh setVarsInShMode setVarsInCsh substInFile availableMemory availableRamMB removeXiBSuffix template2file template2userfile update_userkderc list_skels formatTime formatTimeRaw unix2dos setVirtual isCdNotEjectable) ],
+    system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh setVarsInShMode setVarsInCsh substInFile availableMemory availableRamMB removeXiBSuffix formatXiB template2file template2userfile update_userkderc list_skels formatTime formatTimeRaw unix2dos setVirtual isCdNotEjectable) ],
     constant   => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE %compat_arch) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
@@ -602,6 +602,18 @@ sub removeXiBSuffix($) {
     /(\d+)M$/i and return $1 * 1024 * 1024;
     /(\d+)G$/i and return $1 * 1024 * 1024 * 1024;
     $_;
+}
+sub formatXiB {
+    my ($newnb, $newbase) = (@_, 1);
+    my ($nb, $base);
+    my $decr = sub { 
+	($nb, $base) = ($newnb, $newbase);
+	$base >= 1024 ? ($newbase = $base / 1024) : ($newnb = $nb / 1024);
+    };
+    foreach ('', _("KB"), _("MB"), _("GB")) {
+	$decr->(); $newnb >= 1 || $newnb * $newbase >= 1 or return int($nb * $base) . $_;
+    }
+    int($newnb * $newbase) . _("TB");
 }
 
 sub truncate_list {
