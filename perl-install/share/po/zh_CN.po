@@ -1,58 +1,64 @@
-# SOME DESCRIPTIVE TITLE.
+# DrakX messages for zh_CN locale
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Copyright (c) 1999 MandrakeSoft
-# Cheng Yuan-Chung <platin@ms31.hinet.net>, 1999
-# c17@acer.17.o3.net
 #
-# NOTE: this file is the result of the conversion of zh_TW.Big5.po trough
-# 'b5togb' filter; however, as I've been told that there are idiomatisms
-# by doing like that, a real mantainer of the zh_CN.po file is still wanted
+# Danny Zeng <zeng@synopsys.com>, 2000
+# Note: this file has been modified and re-written in a way that
+# make it as complete as the English version, 
+# and easier to be understood by most mainland China users. 
+#
+# Earlier translaters:
+# Cheng Yuan-Chung <platin@ms31.hinet.net>, 1999
+# <c17@acer.17.o3.net>, 1999
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-01-09 21:03+0100\n"
-"PO-Revision-Date: 1999-12-15 00:33+0100\n"
-"Last-Translator: Nobody yet\n"
-"Language-Team: Chinese (GB2312)\n"
+"POT-Creation-Date: 2000-05-11 22:37+0200\n"
+"PO-Revision-Date: 2000-05-06 23:00+0800\n"
+"Last-Translator: Danny Zeng <danny@zeng.com.cn>\n"
+"Language-Team: Chinese (GB2312) <zh@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=gb2312\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../Xconfigurator.pm_.c:159
+#: ../../Xconfigurator.pm_.c:116 ../../Xconfigurator.pm_.c:228
+msgid "Generic"
+msgstr "普通"
+
+#: ../../Xconfigurator.pm_.c:165
 msgid "Graphic card"
 msgstr "显示卡"
 
-#: ../Xconfigurator.pm_.c:159
+#: ../../Xconfigurator.pm_.c:165
 msgid "Select a graphic card"
-msgstr "选取您的显示卡"
+msgstr "选择一种显示卡"
 
-#: ../Xconfigurator.pm_.c:160
+#: ../../Xconfigurator.pm_.c:166
 msgid "Choose a X server"
-msgstr "选取合适的 X 伺服程式"
+msgstr "选择一种 X 服务器"
 
-#: ../Xconfigurator.pm_.c:160
-#, fuzzy
+#: ../../Xconfigurator.pm_.c:166
 msgid "X server"
-msgstr "伺服器"
+msgstr "X 服务器"
 
-#: ../Xconfigurator.pm_.c:181
+#: ../../Xconfigurator.pm_.c:190
 msgid "Select the memory size of your graphic card"
-msgstr "设定显示卡上的绘图记忆体大小"
+msgstr "选定显示卡上存储器的大小"
 
-#: ../Xconfigurator.pm_.c:203
+#: ../../Xconfigurator.pm_.c:217
 msgid "Choose options for server"
-msgstr "选取 X 伺服程式的参数"
+msgstr "选择 X 服务器的参数"
 
-#: ../Xconfigurator.pm_.c:221
+#: ../../Xconfigurator.pm_.c:228
 msgid "Choose a monitor"
-msgstr "选取合适的萤幕"
+msgstr "选择一种显示器"
 
-#: ../Xconfigurator.pm_.c:221
+#: ../../Xconfigurator.pm_.c:228
 msgid "Monitor"
-msgstr "萤幕"
+msgstr "显示器"
 
-#: ../Xconfigurator.pm_.c:224
+#: ../../Xconfigurator.pm_.c:231
 msgid ""
 "The two critical parameters are the vertical refresh rate, which is the "
 "rate\n"
@@ -65,925 +71,1305 @@ msgid ""
 "monitor.\n"
 " If in doubt, choose a conservative setting."
 msgstr ""
-"两个重要的参数是垂直更新频率和水平更新频率。\n"
+"有两个关键的参数:\n"
+"垂直更新频率, 设定整个屏幕每秒钟更新的次数;\n"
+"水平更新频率, 这个特别重要, 设定了显示扫描线的速率.\n"
 "\n"
-"如果你选择了超过您的萤幕所能负荷的设定值，\n"
-"可能会伤害到您的萤幕。请小心！"
+"千万小心! 不要把这些同步范围设定得超过你的显示器的能力.\n"
+"如果你搞错, 显示器会坏掉!\n"
+"所以没把握时, 请选择保守的设定."
 
-#: ../Xconfigurator.pm_.c:231
+#: ../../Xconfigurator.pm_.c:238
 msgid "Horizontal refresh rate"
 msgstr "水平更新频率"
 
-#: ../Xconfigurator.pm_.c:231
+#: ../../Xconfigurator.pm_.c:238
 msgid "Vertical refresh rate"
 msgstr "垂直更新频率"
 
-#: ../Xconfigurator.pm_.c:272
+#: ../../Xconfigurator.pm_.c:277
 msgid "Monitor not configured"
-msgstr "没有完成设定萤幕的动作"
+msgstr "尚未完成显示器设定"
 
-#: ../Xconfigurator.pm_.c:275
+#: ../../Xconfigurator.pm_.c:280
 msgid "Graphic card not configured yet"
-msgstr "尚未完成显示卡的设定"
+msgstr "尚未完成显示卡设定"
 
-#: ../Xconfigurator.pm_.c:278
+#: ../../Xconfigurator.pm_.c:283
 msgid "Resolutions not chosen yet"
 msgstr "尚未选取要使用的解析度"
 
-#: ../Xconfigurator.pm_.c:289
+#: ../../Xconfigurator.pm_.c:296
 msgid "Do you want to test the configuration?"
 msgstr "您想要测试您的设定值吗 ?"
 
-#: ../Xconfigurator.pm_.c:293
+#: ../../Xconfigurator.pm_.c:300
 msgid "Warning: testing is dangerous on this graphic card"
-msgstr "小心! 这项测式在此张显示卡会有危险"
+msgstr "小心! 这项测试对此张显示卡会有危险!"
 
-#: ../Xconfigurator.pm_.c:296
-msgid "Test configuration"
+#: ../../Xconfigurator.pm_.c:303
+msgid "Test of the configuration"
 msgstr "测试设定值"
 
-#: ../Xconfigurator.pm_.c:334
-msgid "An error occurred:"
-msgstr "发生错误∶"
-
-#: ../Xconfigurator.pm_.c:336
+#: ../../Xconfigurator.pm_.c:342
 msgid ""
 "\n"
-"try changing some parameters"
+"try to change some parameters"
 msgstr ""
 "\n"
-"试着更改一些参数的设定值"
+"尝试改变一些参数"
 
-#: ../Xconfigurator.pm_.c:358
+#: ../../Xconfigurator.pm_.c:342
+msgid "An error has occurred:"
+msgstr "发生错误∶"
+
+#: ../../Xconfigurator.pm_.c:365
 #, c-format
-msgid "(leaving in %d seconds)"
-msgstr "(在经过 %d 秒后离开)"
+msgid "Leaving in %d seconds"
+msgstr "(在 %d 秒钟后离开)"
 
-#: ../Xconfigurator.pm_.c:362 ../my_gtk.pm_.c:425
-msgid "Is this correct?"
-msgstr "这个设定正确吗 ?"
+#: ../../Xconfigurator.pm_.c:369
+msgid "Is this the correct setting?"
+msgstr "这样设定正确吗?"
 
-#: ../Xconfigurator.pm_.c:370
-msgid "An error occurred, try changing some parameters"
+#: ../../Xconfigurator.pm_.c:377
+msgid "An error has occurred, try to change some parameters"
 msgstr "发生错误，请试着更改一些参数的设定值"
 
-#: ../Xconfigurator.pm_.c:378 ../Xconfigurator.pm_.c:547
+#: ../../Xconfigurator.pm_.c:385 ../../Xconfigurator.pm_.c:558
 msgid "Automatic resolutions"
 msgstr "自动设定解析度"
 
-#: ../Xconfigurator.pm_.c:379
+#: ../../Xconfigurator.pm_.c:386
 msgid ""
 "To find the available resolutions I will try different ones.\n"
 "Your screen will blink...\n"
 "You can switch if off if you want, you'll hear a beep when it's over"
 msgstr ""
-"程式将会尝试几种不同的解析度以找出可用的设定值，\n"
-"您的萤幕将会闪动一阵子... 假如您要保护您的萤幕的话，\n"
-"可以将萤幕电源先关掉一下子；程式执行结束后，会有哔一声提醒您"
+"我将会尝试几种不同的解析度, 以找出可用的设定值，\n"
+"您的显示器将会闪动一阵子...\n"
+"你可以将显示器电源先关掉, 程序执行结束后，会有哔一声提醒您"
 
-#: ../Xconfigurator.pm_.c:434 ../printerdrake.pm_.c:208
+#: ../../Xconfigurator.pm_.c:441 ../../printerdrake.pm_.c:167
 msgid "Resolution"
 msgstr "解析度"
 
-#: ../Xconfigurator.pm_.c:469
-msgid "Choose resolution and color depth"
-msgstr "选取解析度以及颜色数"
+#: ../../Xconfigurator.pm_.c:476
+msgid "Choose the resolution and the color depth"
+msgstr "选取解析度以及颜色深度"
 
-#: ../Xconfigurator.pm_.c:477
+#: ../../Xconfigurator.pm_.c:478
+#, c-format
+msgid "Graphic card: %s"
+msgstr "显示卡: %s"
+
+#: ../../Xconfigurator.pm_.c:479
+#, c-format
+msgid "XFree86 server: %s"
+msgstr "XFree86 服务器: %s"
+
+#: ../../Xconfigurator.pm_.c:488
 msgid "Show all"
 msgstr "显示全部"
 
-#: ../Xconfigurator.pm_.c:501
-#, fuzzy
+#: ../../Xconfigurator.pm_.c:512
 msgid "Resolutions"
 msgstr "解析度"
 
-#: ../Xconfigurator.pm_.c:548
+#: ../../Xconfigurator.pm_.c:559
 msgid ""
 "I can try to find the available resolutions (eg: 800x600).\n"
 "Sometimes, though, it may hang the machine.\n"
 "Do you want to try?"
 msgstr ""
-"这个程式会自动找出可用的解析度 (如: 800x600)。\n"
-"不过，有时候这个动作会让机器当住，\n"
+"我会尝试自动找出可用的解析度 (如: 800x600)。\n"
+"不过，有时候这样会使机器停住不动，\n"
 "您要试试看吗 ?"
 
-#: ../Xconfigurator.pm_.c:553
+#: ../../Xconfigurator.pm_.c:564
 msgid ""
 "No valid modes found\n"
 "Try with another video card or monitor"
 msgstr ""
 "找不到可用的显示模式，\n"
-"请检查您的显示卡或萤幕设定是否正确"
+"请尝试设定成其他的显示卡或显示器"
 
-#: ../Xconfigurator.pm_.c:772
+#: ../../Xconfigurator.pm_.c:904
 #, c-format
 msgid "Keyboard layout: %s\n"
-msgstr "键盘的形式: %s\n"
+msgstr "键盘的布局: %s\n"
 
-#: ../Xconfigurator.pm_.c:773
+#: ../../Xconfigurator.pm_.c:905
 #, c-format
 msgid "Mouse type: %s\n"
-msgstr "滑鼠的种类: %s\n"
+msgstr "鼠标类型: %s\n"
 
-#: ../Xconfigurator.pm_.c:774
+#: ../../Xconfigurator.pm_.c:906
 #, c-format
 msgid "Mouse device: %s\n"
-msgstr "滑鼠连接的位置: %s\n"
+msgstr "鼠标连接设备: %s\n"
 
-#: ../Xconfigurator.pm_.c:775
+#: ../../Xconfigurator.pm_.c:907
 #, c-format
 msgid "Monitor: %s\n"
-msgstr "萤幕: %s\n"
+msgstr "显示器: %s\n"
 
-#: ../Xconfigurator.pm_.c:776
+#: ../../Xconfigurator.pm_.c:908
 #, c-format
 msgid "Monitor HorizSync: %s\n"
-msgstr "萤幕水平更新频率: %s\n"
+msgstr "显示器水平更新频率: %s\n"
 
-#: ../Xconfigurator.pm_.c:777
+#: ../../Xconfigurator.pm_.c:909
 #, c-format
 msgid "Monitor VertRefresh: %s\n"
-msgstr "萤幕垂直更新频率: %s\n"
+msgstr "显示器垂直更新频率: %s\n"
 
-#: ../Xconfigurator.pm_.c:778
+#: ../../Xconfigurator.pm_.c:910
 #, c-format
 msgid "Graphic card: %s\n"
 msgstr "显示卡: %s\n"
 
-#: ../Xconfigurator.pm_.c:779
+#: ../../Xconfigurator.pm_.c:911
 #, c-format
 msgid "Graphic memory: %s kB\n"
-msgstr "绘图记忆体: %s kB\n"
+msgstr "图形存储器: %s kB\n"
 
-#: ../Xconfigurator.pm_.c:780
+#: ../../Xconfigurator.pm_.c:912
 #, c-format
 msgid "XFree86 server: %s\n"
-msgstr "XFree86 伺服程式: %s\n"
+msgstr "XFree86 服务器: %s\n"
 
-#: ../Xconfigurator.pm_.c:794
+#: ../../Xconfigurator.pm_.c:927
 msgid "Preparing X-Window configuration"
 msgstr "正在准备 X-Window 的设定"
 
-#: ../Xconfigurator.pm_.c:808
+#: ../../Xconfigurator.pm_.c:941
 msgid "Change Monitor"
-msgstr "改变萤幕设定"
+msgstr "改变显示器设定"
 
-#: ../Xconfigurator.pm_.c:809
+#: ../../Xconfigurator.pm_.c:942
 msgid "Change Graphic card"
-msgstr "改变显示卡设定"
+msgstr "改变显示卡"
 
-#: ../Xconfigurator.pm_.c:810
+#: ../../Xconfigurator.pm_.c:943
 msgid "Change Server options"
-msgstr "改变伺服程式的参数设定"
+msgstr "改变服务器程序的参数"
 
-#: ../Xconfigurator.pm_.c:811
+#: ../../Xconfigurator.pm_.c:944
 msgid "Change Resolution"
-msgstr "改变解析度设定"
+msgstr "改变解析度"
 
-#: ../Xconfigurator.pm_.c:812
+#: ../../Xconfigurator.pm_.c:945
 msgid "Automatical resolutions search"
 msgstr "自动寻找可用的解析度"
 
-#: ../Xconfigurator.pm_.c:816
+#: ../../Xconfigurator.pm_.c:949
 msgid "Show information"
-msgstr "显示所有资讯"
+msgstr "显示所有信息"
 
-#: ../Xconfigurator.pm_.c:817
+#: ../../Xconfigurator.pm_.c:950
 msgid "Test again"
 msgstr "再次测试设定值"
 
-#: ../Xconfigurator.pm_.c:818 ../standalone/rpmdrake_.c:46
+#: ../../Xconfigurator.pm_.c:951 ../../standalone/rpmdrake_.c:46
 msgid "Quit"
 msgstr "结束"
 
-#: ../Xconfigurator.pm_.c:822
+#: ../../Xconfigurator.pm_.c:955 ../../standalone/drakboot_.c:36
 msgid "What do you want to do?"
 msgstr "您打算怎么作 ?"
 
-#: ../Xconfigurator.pm_.c:829
+#: ../../Xconfigurator.pm_.c:962
 msgid "Forget the changes?"
 msgstr "放弃您所做的改变 ?"
 
-#: ../Xconfigurator.pm_.c:845
+#: ../../Xconfigurator.pm_.c:980
 #, c-format
 msgid "Please relog into %s to activate the changes"
-msgstr "请由 %s 来启动您所做的更改"
+msgstr "请重新登录到 %s 使您所做的更改生效"
 
-#: ../Xconfigurator.pm_.c:861
+#: ../../Xconfigurator.pm_.c:996
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
-msgstr "请离开然后同时按 Ctrl-Alt-BackSpace"
+msgstr "请退出, 然后同时按 Ctrl-Alt-BackSpace"
 
-#: ../Xconfigurator.pm_.c:864
+#: ../../Xconfigurator.pm_.c:999
 msgid "X at startup"
 msgstr "开机时启动 X"
 
-#: ../Xconfigurator.pm_.c:865
+#: ../../Xconfigurator.pm_.c:1000
 msgid ""
 "I can set up your computer to automatically start X upon booting.\n"
 "Would you like X to start when you reboot?"
 msgstr ""
-"程式可以帮您设定在开机时自动进入绘图模式，\n"
-"您希望在重新开机以后就自动进入绘图模式吗 ?"
+"我可以帮您设定在开机时自动启动 X，\n"
+"您希望在重新开机以后就自动进入 X 吗 ?"
 
-#: ../Xconfigurator_consts.pm_.c:4
+#: ../../Xconfigurator_consts.pm_.c:4
 msgid "256 colors (8 bits)"
 msgstr "256 色 (8 位元)"
 
-#: ../Xconfigurator_consts.pm_.c:5
+#: ../../Xconfigurator_consts.pm_.c:5
 msgid "32 thousand colors (15 bits)"
 msgstr "3 万 2 千色 (15 位元)"
 
-#: ../Xconfigurator_consts.pm_.c:6
+#: ../../Xconfigurator_consts.pm_.c:6
 msgid "65 thousand colors (16 bits)"
 msgstr "6 万 5 千色 (16 位元)"
 
-#: ../Xconfigurator_consts.pm_.c:7
+#: ../../Xconfigurator_consts.pm_.c:7
 msgid "16 million colors (24 bits)"
 msgstr "1 千 6 百万色 (24 位元)"
 
-#: ../Xconfigurator_consts.pm_.c:8
+#: ../../Xconfigurator_consts.pm_.c:8
 msgid "4 billion colors (32 bits)"
 msgstr "4 亿色 (32 位元)"
 
-#: ../Xconfigurator_consts.pm_.c:96
+#: ../../Xconfigurator_consts.pm_.c:103
 msgid "256 kB"
 msgstr "256 kB"
 
-#: ../Xconfigurator_consts.pm_.c:97
+#: ../../Xconfigurator_consts.pm_.c:104
 msgid "512 kB"
 msgstr "512 kB"
 
-#: ../Xconfigurator_consts.pm_.c:98
+#: ../../Xconfigurator_consts.pm_.c:105
 msgid "1 MB"
 msgstr "1 MB"
 
-#: ../Xconfigurator_consts.pm_.c:99
+#: ../../Xconfigurator_consts.pm_.c:106
 msgid "2 MB"
 msgstr "2 MB"
 
-#: ../Xconfigurator_consts.pm_.c:100
+#: ../../Xconfigurator_consts.pm_.c:107
 msgid "4 MB"
 msgstr "4 MB"
 
-#: ../Xconfigurator_consts.pm_.c:101
+#: ../../Xconfigurator_consts.pm_.c:108
 msgid "8 MB"
 msgstr "8 MB"
 
-#: ../Xconfigurator_consts.pm_.c:102
+#: ../../Xconfigurator_consts.pm_.c:109
 msgid "16 MB or more"
-msgstr "16 MB or more"
+msgstr "16 MB 或以上"
 
-#: ../Xconfigurator_consts.pm_.c:107 ../Xconfigurator_consts.pm_.c:108
+#: ../../Xconfigurator_consts.pm_.c:114 ../../Xconfigurator_consts.pm_.c:115
 msgid "Standard VGA, 640x480 at 60 Hz"
 msgstr "标准 VGA 模式, 640x480 at 60 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:109
+#: ../../Xconfigurator_consts.pm_.c:116
 msgid "Super VGA, 800x600 at 56 Hz"
 msgstr "Super VGA, 800x600 at 56 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:110
+#: ../../Xconfigurator_consts.pm_.c:117
 msgid "8514 Compatible, 1024x768 at 87 Hz interlaced (no 800x600)"
-msgstr "8514 相容模式, 1024x768 at 87 Hz interlaced (no 800x600)"
+msgstr "8514 相容模式, 1024x768 at 87 Hz 隔行扫描 (no 800x600)"
 
-#: ../Xconfigurator_consts.pm_.c:111
+#: ../../Xconfigurator_consts.pm_.c:118
 msgid "Super VGA, 1024x768 at 87 Hz interlaced, 800x600 at 56 Hz"
-msgstr "Super VGA, 1024x768 at 87 Hz interlaced, 800x600 at 56 Hz"
+msgstr "Super VGA, 1024x768 at 87 Hz 隔行扫描, 800x600 at 56 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:112
+#: ../../Xconfigurator_consts.pm_.c:119
 msgid "Extended Super VGA, 800x600 at 60 Hz, 640x480 at 72 Hz"
-msgstr "Extended Super VGA, 800x600 at 60 Hz, 640x480 at 72 Hz"
+msgstr "扩展 Super VGA, 800x600 at 60 Hz, 640x480 at 72 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:113
+#: ../../Xconfigurator_consts.pm_.c:120
 msgid "Non-Interlaced SVGA, 1024x768 at 60 Hz, 800x600 at 72 Hz"
-msgstr "Non-Interlaced SVGA, 1024x768 at 60 Hz, 800x600 at 72 Hz"
+msgstr "逐行扫描 SVGA, 1024x768 at 60 Hz, 800x600 at 72 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:114
+#: ../../Xconfigurator_consts.pm_.c:121
 msgid "High Frequency SVGA, 1024x768 at 70 Hz"
-msgstr "High Frequency SVGA, 1024x768 at 70 Hz"
+msgstr "高频率 SVGA, 1024x768 at 70 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:115
+#: ../../Xconfigurator_consts.pm_.c:122
 msgid "Multi-frequency that can do 1280x1024 at 60 Hz"
-msgstr "Multi-frequency that can do 1280x1024 at 60 Hz"
+msgstr "多频率, 最高达 1280x1024 at 60 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:116
+#: ../../Xconfigurator_consts.pm_.c:123
 msgid "Multi-frequency that can do 1280x1024 at 74 Hz"
-msgstr "Multi-frequency that can do 1280x1024 at 74 Hz"
+msgstr "多频率, 最高达  1280x1024 at 74 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:117
+#: ../../Xconfigurator_consts.pm_.c:124
 msgid "Multi-frequency that can do 1280x1024 at 76 Hz"
-msgstr "Multi-frequency that can do 1280x1024 at 76 Hz"
+msgstr "多频率, 最高达 1280x1024 at 76 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:118
+#: ../../Xconfigurator_consts.pm_.c:125
 msgid "Monitor that can do 1600x1200 at 70 Hz"
-msgstr "您的萤幕可使用 1600x1200 at 70 Hz"
+msgstr "您的显示器可使用 1600x1200 at 70 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:119
+#: ../../Xconfigurator_consts.pm_.c:126
 msgid "Monitor that can do 1600x1200 at 76 Hz"
-msgstr "您的萤幕可使用 1600x1200 at 76 Hz"
+msgstr "您的显示器可使用 1600x1200 at 76 Hz"
 
-#: ../diskdrake.pm_.c:16 ../diskdrake.pm_.c:370
-msgid "Create"
-msgstr "新建"
+#: ../../any.pm_.c:17
+msgid "curly"
+msgstr "卷毛"
 
-#: ../diskdrake.pm_.c:17
-msgid "Unmount"
-msgstr "卸载"
+#: ../../any.pm_.c:17
+msgid "default"
+msgstr "缺省"
 
-#: ../diskdrake.pm_.c:18 ../diskdrake.pm_.c:372
-msgid "Delete"
-msgstr "删除"
+#. -PO: names (tie, curly...) have corresponding icons for kdm
+#: ../../any.pm_.c:17
+msgid "tie"
+msgstr "领带"
 
-#: ../diskdrake.pm_.c:18
-msgid "Format"
-msgstr "格式化"
+#: ../../any.pm_.c:18
+msgid "brunette"
+msgstr "黑皮肤"
 
-#: ../diskdrake.pm_.c:18 ../diskdrake.pm_.c:527
-msgid "Resize"
-msgstr "改变大小"
+#: ../../any.pm_.c:18
+msgid "girl"
+msgstr "女孩"
 
-#: ../diskdrake.pm_.c:18 ../diskdrake.pm_.c:370 ../diskdrake.pm_.c:414
-msgid "Type"
-msgstr "格式"
+#: ../../any.pm_.c:18
+msgid "woman-blond"
+msgstr "金发美女"
 
-#: ../diskdrake.pm_.c:19 ../diskdrake.pm_.c:430
-msgid "Mount point"
-msgstr "挂载点"
+#: ../../any.pm_.c:19
+msgid "automagic"
+msgstr "自动魔术"
 
-#: ../diskdrake.pm_.c:33
-msgid "Write /etc/fstab"
-msgstr "写入 /etc/fstab"
+#: ../../any.pm_.c:60
+msgid "First sector of boot partition"
+msgstr "开机分区的第一扇区"
 
-#: ../diskdrake.pm_.c:34
-msgid "Toggle to expert mode"
-msgstr "进入专家模式"
+#: ../../any.pm_.c:60
+msgid "First sector of drive (MBR)"
+msgstr "硬盘的主引导区 (MBR)"
 
-#: ../diskdrake.pm_.c:35
-msgid "Toggle to normal mode"
-msgstr "进入模通模式"
+#: ../../any.pm_.c:65
+msgid "LILO/grub Installation"
+msgstr "LILO/grub 安装"
 
-#: ../diskdrake.pm_.c:36
-msgid "Restore from file"
-msgstr "恢复存在档案中的设定值"
+#: ../../any.pm_.c:66
+msgid "Where do you want to install the bootloader?"
+msgstr "在哪里安装开机引导程序 ?"
 
-#: ../diskdrake.pm_.c:37
-msgid "Save in file"
-msgstr "存入档案"
+#: ../../any.pm_.c:73
+msgid "None"
+msgstr "没有"
 
-#: ../diskdrake.pm_.c:38
-msgid "Restore from floppy"
-msgstr "恢复存在软碟中的设定值"
+#: ../../any.pm_.c:73
+msgid "Which bootloader(s) do you want to use?"
+msgstr "你要使用哪个开机引导程序?"
 
-#: ../diskdrake.pm_.c:39
-msgid "Save on floppy"
-msgstr "存入软碟"
+#: ../../any.pm_.c:84
+msgid "Boot device"
+msgstr "开机引导设备"
 
-#: ../diskdrake.pm_.c:40 ../install_steps_interactive.pm_.c:618
-#: ../install_steps_interactive.pm_.c:748 ../standalone/adduserdrake_.c:34
+#: ../../any.pm_.c:85
+msgid "LBA (doesn't work on old BIOSes)"
+msgstr "LBA (在老旧的 BIOS 上不能工作)"
+
+#: ../../any.pm_.c:86
+msgid "Compact"
+msgstr "紧凑"
+
+#: ../../any.pm_.c:86
+msgid "compact"
+msgstr "紧凑"
+
+#: ../../any.pm_.c:87 ../../install_steps_interactive.pm_.c:809
+msgid "Delay before booting default image"
+msgstr "开机等候时间"
+
+#: ../../any.pm_.c:88
+msgid "Video mode"
+msgstr "显示模式"
+
+#: ../../any.pm_.c:90 ../../install_steps_interactive.pm_.c:531
+#: ../../install_steps_interactive.pm_.c:654
+#: ../../install_steps_interactive.pm_.c:705
+#: ../../install_steps_interactive.pm_.c:811 ../../printerdrake.pm_.c:85
+#: ../../printerdrake.pm_.c:110 ../../standalone/adduserdrake_.c:42
+msgid "Password"
+msgstr "口令"
+
+#: ../../any.pm_.c:91 ../../install_steps_interactive.pm_.c:655
+#: ../../install_steps_interactive.pm_.c:706
+#: ../../install_steps_interactive.pm_.c:812
+#: ../../standalone/adduserdrake_.c:43
+msgid "Password (again)"
+msgstr "口令 (再一次)"
+
+#: ../../any.pm_.c:92 ../../install_steps_interactive.pm_.c:813
+msgid "Restrict command line options"
+msgstr "限限制命令行选项"
+
+#: ../../any.pm_.c:92 ../../install_steps_interactive.pm_.c:813
+msgid "restrict"
+msgstr "限制"
+
+#: ../../any.pm_.c:98
+msgid "Bootloader main options"
+msgstr "开机引导程序的主要选项"
+
+#: ../../any.pm_.c:101 ../../install_steps_interactive.pm_.c:820
+msgid ""
+"Option ``Restrict command line options'' is of no use without a password"
+msgstr "没有口令不能使用 ``限定参数选项''"
+
+#: ../../any.pm_.c:102 ../../install_steps_interactive.pm_.c:664
+#: ../../install_steps_interactive.pm_.c:719
+#: ../../install_steps_interactive.pm_.c:821
+#: ../../standalone/adduserdrake_.c:56
+msgid "Please try again"
+msgstr "请再试一次"
+
+#: ../../any.pm_.c:102 ../../install_steps_interactive.pm_.c:664
+#: ../../install_steps_interactive.pm_.c:719
+#: ../../install_steps_interactive.pm_.c:821
+#: ../../standalone/adduserdrake_.c:56
+msgid "The passwords do not match"
+msgstr "两次口令不符"
+
+#: ../../any.pm_.c:112
+msgid ""
+"Here are the different entries.\n"
+"You can add some more or change the existing ones."
+msgstr ""
+"现在有下列条目.\n"
+"您可以增加或是更改已存在的条目"
+
+#: ../../any.pm_.c:114 ../../install_steps_interactive.pm_.c:832
+#: ../../printerdrake.pm_.c:245 ../../standalone/rpmdrake_.c:302
+msgid "Add"
+msgstr "增加"
+
+#: ../../any.pm_.c:114 ../../diskdrake.pm_.c:42
+#: ../../install_steps_interactive.pm_.c:699
+#: ../../install_steps_interactive.pm_.c:832 ../../printerdrake.pm_.c:245
+#: ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "完成"
 
-#: ../diskdrake.pm_.c:43
+#: ../../any.pm_.c:123
+msgid "Linux"
+msgstr "Linux"
+
+#: ../../any.pm_.c:123
+msgid "Other OS (windows...)"
+msgstr "其他操作系统 (windows...)"
+
+#: ../../any.pm_.c:123
+msgid "Which type of entry do you want to add?"
+msgstr "要增加的条目是什么类型?"
+
+#: ../../any.pm_.c:142 ../../install_steps_interactive.pm_.c:857
+msgid "Image"
+msgstr "映象文件"
+
+#: ../../any.pm_.c:143 ../../any.pm_.c:151
+#: ../../install_steps_interactive.pm_.c:859
+msgid "Root"
+msgstr "根分区"
+
+#: ../../any.pm_.c:144 ../../install_steps_interactive.pm_.c:860
+msgid "Append"
+msgstr "Append"
+
+#: ../../any.pm_.c:145 ../../install_steps_interactive.pm_.c:861
+msgid "Initrd"
+msgstr "Initrd"
+
+#: ../../any.pm_.c:146 ../../install_steps_interactive.pm_.c:862
+msgid "Read-write"
+msgstr "可读写"
+
+#: ../../any.pm_.c:152
+msgid "Table"
+msgstr "表格"
+
+#: ../../any.pm_.c:153
+msgid "Unsafe"
+msgstr "不安全"
+
+#: ../../any.pm_.c:158 ../../install_steps_interactive.pm_.c:869
+msgid "Label"
+msgstr "标签"
+
+#: ../../any.pm_.c:160 ../../install_steps_interactive.pm_.c:871
+msgid "Default"
+msgstr "缺省"
+
+#: ../../any.pm_.c:163 ../../install_steps_gtk.pm_.c:674
+#: ../../install_steps_interactive.pm_.c:652
+#: ../../install_steps_interactive.pm_.c:874 ../../interactive.pm_.c:74
+#: ../../interactive.pm_.c:84 ../../interactive.pm_.c:224
+#: ../../interactive_newt.pm_.c:49 ../../interactive_newt.pm_.c:98
+#: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:200
+#: ../../my_gtk.pm_.c:459 ../../my_gtk.pm_.c:634 ../../printerdrake.pm_.c:272
+msgid "Ok"
+msgstr "确定"
+
+#: ../../any.pm_.c:163 ../../install_steps_interactive.pm_.c:874
+msgid "Remove entry"
+msgstr "删除条目"
+
+#: ../../any.pm_.c:166 ../../install_steps_interactive.pm_.c:877
+msgid "Empty label not allowed"
+msgstr "标签不能为空"
+
+#: ../../any.pm_.c:167
+msgid "This label is already used"
+msgstr "这个标记已经被使用"
+
+#: ../../diskdrake.pm_.c:18 ../../diskdrake.pm_.c:413
+msgid "Create"
+msgstr "新建"
+
+#: ../../diskdrake.pm_.c:19
+msgid "Unmount"
+msgstr "卸载"
+
+#: ../../diskdrake.pm_.c:20 ../../diskdrake.pm_.c:415
+msgid "Delete"
+msgstr "删除"
+
+#: ../../diskdrake.pm_.c:20
+msgid "Format"
+msgstr "格式化"
+
+#: ../../diskdrake.pm_.c:20 ../../diskdrake.pm_.c:590
+msgid "Resize"
+msgstr "改变大小"
+
+#: ../../diskdrake.pm_.c:20 ../../diskdrake.pm_.c:413
+#: ../../diskdrake.pm_.c:466
+msgid "Type"
+msgstr "类型"
+
+#: ../../diskdrake.pm_.c:21 ../../diskdrake.pm_.c:485
+msgid "Mount point"
+msgstr "挂载点"
+
+#: ../../diskdrake.pm_.c:35
+msgid "Write /etc/fstab"
+msgstr "写入 /etc/fstab"
+
+#: ../../diskdrake.pm_.c:36
+msgid "Toggle to expert mode"
+msgstr "进入专家模式"
+
+#: ../../diskdrake.pm_.c:37
+msgid "Toggle to normal mode"
+msgstr "进入正常模式"
+
+#: ../../diskdrake.pm_.c:38
+msgid "Restore from file"
+msgstr "从文件恢复设定值"
+
+#: ../../diskdrake.pm_.c:39
+msgid "Save in file"
+msgstr "保存入文件"
+
+#: ../../diskdrake.pm_.c:40
+msgid "Restore from floppy"
+msgstr "从软盘恢复设定值"
+
+#: ../../diskdrake.pm_.c:41
+msgid "Save on floppy"
+msgstr "保存入软盘"
+
+#: ../../diskdrake.pm_.c:45
 msgid "Clear all"
 msgstr "全部清除"
 
-#: ../diskdrake.pm_.c:44
+#: ../../diskdrake.pm_.c:46
 msgid "Format all"
 msgstr "全部格式化"
 
-#: ../diskdrake.pm_.c:45
+#: ../../diskdrake.pm_.c:47
 msgid "Auto allocate"
 msgstr "自动分配"
 
-#: ../diskdrake.pm_.c:48
+#: ../../diskdrake.pm_.c:50
 msgid "All primary partitions are used"
-msgstr "主分割区数目已经满了"
+msgstr "主区数目已经满了"
 
-#: ../diskdrake.pm_.c:48
+#: ../../diskdrake.pm_.c:50
 msgid "I can't add any more partition"
-msgstr "程式无法再新增任何分割区了"
+msgstr "我无法再新增任何分区了"
 
-#: ../diskdrake.pm_.c:48
+#: ../../diskdrake.pm_.c:50
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
 "partition"
-msgstr "需要有更多的分割区的话，请删除一个主分割区以建立延伸分割区"
+msgstr "如果需要更多的分区，请删除一个主分区以创建扩展分区"
 
-#: ../diskdrake.pm_.c:51
-#, fuzzy
+#: ../../diskdrake.pm_.c:53
 msgid "Rescue partition table"
-msgstr "写入硬碟分割表"
+msgstr "挽救硬盘分区表"
 
-#: ../diskdrake.pm_.c:52
+#: ../../diskdrake.pm_.c:54
 msgid "Undo"
-msgstr "取消"
+msgstr "撤销"
 
-#: ../diskdrake.pm_.c:53
+#: ../../diskdrake.pm_.c:55
 msgid "Write partition table"
-msgstr "写入硬碟分割表"
+msgstr "写入硬盘分区表"
 
-#: ../diskdrake.pm_.c:54
+#: ../../diskdrake.pm_.c:56
 msgid "Reload"
 msgstr "重读"
 
-#: ../diskdrake.pm_.c:98
+#: ../../diskdrake.pm_.c:96
+msgid "loopback"
+msgstr "回环 (loopback)"
+
+#: ../../diskdrake.pm_.c:109
 msgid "Empty"
 msgstr "清空"
 
-#: ../diskdrake.pm_.c:98
+#: ../../diskdrake.pm_.c:109
 msgid "Ext2"
 msgstr "Ext2"
 
-#: ../diskdrake.pm_.c:98
+#: ../../diskdrake.pm_.c:109
 msgid "FAT"
 msgstr "FAT"
 
-#: ../diskdrake.pm_.c:98
+#: ../../diskdrake.pm_.c:109
 msgid "Other"
 msgstr "其他"
 
-#: ../diskdrake.pm_.c:98
+#: ../../diskdrake.pm_.c:109
 msgid "Swap"
 msgstr "Swap"
 
-#: ../diskdrake.pm_.c:104
+#: ../../diskdrake.pm_.c:115
 msgid "Filesystem types:"
-msgstr "档案系统格式∶"
+msgstr "文件系统类型:"
 
-#: ../diskdrake.pm_.c:113
+#: ../../diskdrake.pm_.c:124
 msgid "Details"
-msgstr "详细资讯"
+msgstr "详细情况"
 
-#: ../diskdrake.pm_.c:127
-#, fuzzy
+#: ../../diskdrake.pm_.c:138
 msgid ""
-"You have one big fat partition\n"
-"(generally use by MicroSoft Dos/Windows).\n"
+"You have one big FAT partition\n"
+"(generally used by MicroSoft Dos/Windows).\n"
 "I suggest you first resize that partition\n"
 "(click on it, then click on \"Resize\")"
 msgstr ""
-"您有一个很大的 fat 分割区，\n"
-"建议您重设这个分割区的大小\n"
-"(点选这个分割区，然后按 \"改变大小\" )"
+"您有一个很大的 fat 分区，\n"
+"(通常是 Microsoft Dos/Windows 占用的).\n"
+"建议您先重设这个分区的大小\n"
+"(点中它，然后按 \"改变大小\")"
 
-#: ../diskdrake.pm_.c:132
+#: ../../diskdrake.pm_.c:143
 msgid "Please make a backup of your data first"
-msgstr "请先备份您的资料"
+msgstr "请先备份您的数据"
 
-#: ../diskdrake.pm_.c:132 ../diskdrake.pm_.c:146 ../diskdrake.pm_.c:458
-#: ../diskdrake.pm_.c:487
+#: ../../diskdrake.pm_.c:143 ../../diskdrake.pm_.c:160
+#: ../../diskdrake.pm_.c:169 ../../diskdrake.pm_.c:517
+#: ../../diskdrake.pm_.c:546
 msgid "Read carefully!"
-msgstr "看仔细!!"
+msgstr "请仔细阅读!!"
 
-#: ../diskdrake.pm_.c:146
-#, c-format
-msgid "After %s partition %s,"
-msgstr "在 %s 分割区 %s 之后，"
+#: ../../diskdrake.pm_.c:146
+msgid ""
+"If you plan to use aboot, be carefull to leave a free space (2048 sectors is "
+"enough)\n"
+"at the beginning of the disk"
+msgstr ""
+"如果您计划采用 aboot, 请注意在磁盘的开头位置留下一个自由空间\n"
+"( 2048 扇区就足够了)"
 
-#: ../diskdrake.pm_.c:146
-msgid "all data on this partition will be lost"
-msgstr "所有在这个分割区上的资料都会被清除"
+#: ../../diskdrake.pm_.c:160
+msgid "Be careful: this operation is dangerous."
+msgstr "小心: 这个操作有危险."
 
-#: ../diskdrake.pm_.c:165 ../install_any.pm_.c:193 ../install_steps.pm_.c:71
-#: ../install_steps_interactive.pm_.c:37 ../standalone/diskdrake_.c:60
-#: ../standalone/rpmdrake_.c:294 ../standalone/rpmdrake_.c:304
+#: ../../diskdrake.pm_.c:197 ../../install_any.pm_.c:330
+#: ../../install_steps.pm_.c:74 ../../install_steps_interactive.pm_.c:40
+#: ../../standalone/diskdrake_.c:60 ../../standalone/rpmdrake_.c:294
+#: ../../standalone/rpmdrake_.c:304
 msgid "Error"
 msgstr "错误"
 
-#: ../diskdrake.pm_.c:189 ../diskdrake.pm_.c:610
+#: ../../diskdrake.pm_.c:221 ../../diskdrake.pm_.c:680
 msgid "Mount point: "
 msgstr "挂载点:"
 
-#: ../diskdrake.pm_.c:190 ../diskdrake.pm_.c:228
+#: ../../diskdrake.pm_.c:222 ../../diskdrake.pm_.c:263
 msgid "Device: "
-msgstr "装置: "
+msgstr "设备: "
 
-#: ../diskdrake.pm_.c:191
+#: ../../diskdrake.pm_.c:223
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
-msgstr "DOS 底下的磁碟代号: %s (猜测值，仅供参考)\n"
+msgstr "DOS 下的盘符: %s ( 也许不是 )\n"
 
-#: ../diskdrake.pm_.c:192 ../diskdrake.pm_.c:231
+#: ../../diskdrake.pm_.c:224 ../../diskdrake.pm_.c:266
 msgid "Type: "
-msgstr "格式: "
+msgstr "类型: "
 
-#: ../diskdrake.pm_.c:193
+#: ../../diskdrake.pm_.c:225
 #, c-format
 msgid "Start: sector %s\n"
-msgstr "开始: 第 %s 磁轨\n"
+msgstr "开始: 第 %s 扇区\n"
 
-#: ../diskdrake.pm_.c:194
+#: ../../diskdrake.pm_.c:226
 #, c-format
-msgid "Size: %s MB"
-msgstr "大小: %s MB"
+msgid "Size: %d MB"
+msgstr "大小: %d MB"
 
-#: ../diskdrake.pm_.c:196
+#: ../../diskdrake.pm_.c:228
 #, c-format
 msgid ", %s sectors"
-msgstr ", 第 %s 磁轨"
+msgstr ", 第 %s 扇区"
 
-#: ../diskdrake.pm_.c:198
+#: ../../diskdrake.pm_.c:230
 #, c-format
 msgid "Cylinder %d to cylinder %d\n"
-msgstr "第 %d 磁柱到第 %d 磁柱\n"
+msgstr "第 %d 柱面到第 %d 柱面\n"
 
-#: ../diskdrake.pm_.c:199
+#: ../../diskdrake.pm_.c:231
 msgid "Formatted\n"
 msgstr "已格式化\n"
 
-#: ../diskdrake.pm_.c:200
+#: ../../diskdrake.pm_.c:232
 msgid "Not formatted\n"
 msgstr "未格式化\n"
 
-#: ../diskdrake.pm_.c:201
+#: ../../diskdrake.pm_.c:233
 msgid "Mounted\n"
 msgstr "已挂载\n"
 
-#: ../diskdrake.pm_.c:202
+#: ../../diskdrake.pm_.c:234
 #, c-format
 msgid "RAID md%s\n"
-msgstr "磁碟阵列 (RAID) md%s\n"
+msgstr "磁盘阵列 (RAID) md%s\n"
 
-#: ../diskdrake.pm_.c:203
+#: ../../diskdrake.pm_.c:235
+#, c-format
+msgid "Loopback file(s): %s\n"
+msgstr "回环文件:  %s\n"
+
+#: ../../diskdrake.pm_.c:236
 msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
 msgstr ""
-"预设开机的分割区\n"
-"    (给 MS-DOS 开机程式用的, 跟 lilo 无关)\n"
+"预设的开机分区\n"
+"    (给 MS-DOS 开机程序用的, 跟 lilo 无关)\n"
 
-#: ../diskdrake.pm_.c:205
+#: ../../diskdrake.pm_.c:238
 #, c-format
 msgid "Level %s\n"
-msgstr "RAID 阶层 %s\n"
+msgstr "Level %s\n"
 
-#: ../diskdrake.pm_.c:206
+#: ../../diskdrake.pm_.c:239
 #, c-format
 msgid "Chunk size %s\n"
 msgstr "组块大小 %s\n"
 
-#: ../diskdrake.pm_.c:207
+#: ../../diskdrake.pm_.c:240
 #, c-format
 msgid "RAID-disks %s\n"
-msgstr "RAID 磁碟 %s\n"
+msgstr "RAID 磁盘 %s\n"
 
-#: ../diskdrake.pm_.c:224
+#: ../../diskdrake.pm_.c:242
+#, c-format
+msgid "Loopback file name: %s"
+msgstr "回环文件名称: %s"
+
+#: ../../diskdrake.pm_.c:259
 msgid "Please click on a partition"
-msgstr "请选取一个分割区"
+msgstr "请选中一个分区"
 
-#: ../diskdrake.pm_.c:229
+#: ../../diskdrake.pm_.c:264
 #, c-format
 msgid "Size: %d MB\n"
 msgstr "大小: %d MB\n"
 
-#: ../diskdrake.pm_.c:230
+#: ../../diskdrake.pm_.c:265
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
-msgstr "硬碟资讯: %s 磁柱, %s 读写头, %s 磁区\n"
+msgstr "硬盘参数: %s 柱面, %s 磁头, %s 扇区\n"
 
-#: ../diskdrake.pm_.c:232
+# c-format
+#: ../../diskdrake.pm_.c:267
+#, c-format
+msgid "Partition table type: %s\n"
+msgstr "分区表类型: %s\n"
+
+#: ../../diskdrake.pm_.c:268
 #, c-format
 msgid "on bus %d id %d\n"
-msgstr "位在 bus %d id %d\n"
+msgstr "在总线 %d id %d 上\n"
 
-#: ../diskdrake.pm_.c:245
+#: ../../diskdrake.pm_.c:281
 msgid "Mount"
 msgstr "挂载"
 
-#: ../diskdrake.pm_.c:246
+#: ../../diskdrake.pm_.c:282
 msgid "Active"
-msgstr "启动"
+msgstr "可启动"
 
-#: ../diskdrake.pm_.c:247
+#: ../../diskdrake.pm_.c:283
 msgid "Add to RAID"
-msgstr "加入磁碟阵列"
+msgstr "加入磁盘阵列"
 
-#: ../diskdrake.pm_.c:248
+#: ../../diskdrake.pm_.c:284
 msgid "Remove from RAID"
-msgstr "由磁碟阵列中移除"
+msgstr "从磁盘阵列中移出"
 
-#: ../diskdrake.pm_.c:249
+#: ../../diskdrake.pm_.c:285
 msgid "Modify RAID"
-msgstr "变更磁碟阵列设定"
+msgstr "更改磁盘阵列设定"
 
-#: ../diskdrake.pm_.c:256
+#: ../../diskdrake.pm_.c:286
+msgid "Use for loopback"
+msgstr "用于回环"
+
+#: ../../diskdrake.pm_.c:293
 msgid "Choose action"
-msgstr "选择动作"
+msgstr "选择操作"
 
-#: ../diskdrake.pm_.c:349
+#: ../../diskdrake.pm_.c:386
 msgid ""
 "Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
 "1024).\n"
 "Either you use LILO and it won't work, or you don't use LILO and you don't "
 "need /boot"
 msgstr ""
+"对不起, 我不能在硬盘的柱面 1024 之后创建 /boot 分区.\n"
+"如果你使用 LILO, 它没法正常工作; 假如你不使用 LILO, \n"
+"你不需要创建 /boot 分区"
 
-#: ../diskdrake.pm_.c:353
+#: ../../diskdrake.pm_.c:390
 msgid ""
 "The partition you've selected to add as root (/) is physically located "
 "beyond\n"
 "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
 "If you plan to use the LILO boot manager, be careful to add a /boot partition"
 msgstr ""
+"您选择作为根 (/) 加入的分区, 在硬盘上的位置位于第 1024 柱面之后,\n"
+"并且您没有创建 /boot 分区.\n"
+"如果您计划使用 LILO 启动管理程序, 请在适当位置加入 /boot 分区."
 
-#: ../diskdrake.pm_.c:370 ../diskdrake.pm_.c:372
+#: ../../diskdrake.pm_.c:396
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"So be careful to add a /boot partition if you want to use lilo or grub"
+msgstr ""
+"您选择了把有关软件 RAID 分区作为根 (/).\n"
+"如果没有 /boot 分区, 我们的开机引导程序无法解决.\n"
+"所以, 您必须增加一个 /boot 分区才能使用 lilo 或 grub."
+
+#: ../../diskdrake.pm_.c:413 ../../diskdrake.pm_.c:415
 #, c-format
 msgid "Use ``%s'' instead"
-msgstr "用 ``%s 取代''"
+msgstr "用 ``%s'' 代替"
 
-#: ../diskdrake.pm_.c:375
+#: ../../diskdrake.pm_.c:418
 msgid "Use ``Unmount'' first"
-msgstr "请先 Unmount"
+msgstr "请先做 ``Unmount'' "
 
-#: ../diskdrake.pm_.c:376 ../diskdrake.pm_.c:409
-msgid "changing type of"
-msgstr "改变分割区型态"
+#: ../../diskdrake.pm_.c:419 ../../diskdrake.pm_.c:461
+#, c-format
+msgid ""
+"After changing type of partition %s, all data on this partition will be lost"
+msgstr "在改变分区表 %s 的类型之后, 在这个分区上的所有资料将要被清除"
 
-#: ../diskdrake.pm_.c:388
+#: ../../diskdrake.pm_.c:431
 msgid "Continue anyway?"
-msgstr "仍然继续执行"
+msgstr "冒险继续执行?"
 
-#: ../diskdrake.pm_.c:393
+#: ../../diskdrake.pm_.c:436
 msgid "Quit without saving"
-msgstr "不储存改变就离开"
+msgstr "不保存改变就退出"
 
-#: ../diskdrake.pm_.c:393
-#, fuzzy
+#: ../../diskdrake.pm_.c:436
 msgid "Quit without writing the partition table?"
-msgstr "写入硬碟分割表"
+msgstr "不写入分区表而退出?"
 
-#: ../diskdrake.pm_.c:412
-#, fuzzy
+#: ../../diskdrake.pm_.c:464
 msgid "Change partition type"
-msgstr "写入硬碟分割表"
+msgstr "改变分区类型"
 
-#: ../diskdrake.pm_.c:413
-#, fuzzy
+#: ../../diskdrake.pm_.c:465
 msgid "Which partition type do you want?"
-msgstr "您打算怎么作 ?"
+msgstr "您想把这个分区设定成什么类型 ?"
 
-#: ../diskdrake.pm_.c:429
-#, fuzzy, c-format
+#: ../../diskdrake.pm_.c:483
+#, c-format
+msgid "Where do you want to mount loopback file %s?"
+msgstr "您想把回环(loopback)文件 %s 挂载到哪里?"
+
+#: ../../diskdrake.pm_.c:484
+#, c-format
 msgid "Where do you want to mount device %s?"
-msgstr "您打算怎么作 ?"
+msgstr "您想把设备 %s 挂载到哪里?"
 
-#: ../diskdrake.pm_.c:451
-#, fuzzy
-msgid "formatting"
-msgstr "格式化"
+#: ../../diskdrake.pm_.c:489
+msgid ""
+"Can't unset mount point as this partition is used for loop back.\n"
+"Remove the loopback first"
+msgstr ""
+"无法取消挂载点设定, 这个分区正用于回环.\n"
+"需要先取消回环"
 
-#: ../diskdrake.pm_.c:453
-#, fuzzy
+#: ../../diskdrake.pm_.c:508
+#, c-format
+msgid "After formatting partition %s, all data on this partition will be lost"
+msgstr "格式化分区 %s 之后, 在这个分区上的所有资料将要被清除"
+
+#: ../../diskdrake.pm_.c:510
 msgid "Formatting"
-msgstr "格式化"
+msgstr "正在格式化"
 
-#: ../diskdrake.pm_.c:453 ../install_steps_interactive.pm_.c:221
-#, fuzzy, c-format
+#: ../../diskdrake.pm_.c:511
+#, c-format
+msgid "Formatting loopback file %s"
+msgstr "正在格式化回环(loopback)文件 %s"
+
+#: ../../diskdrake.pm_.c:512 ../../install_steps_interactive.pm_.c:253
+#, c-format
 msgid "Formatting partition %s"
-msgstr "格式化硬碟分割区"
+msgstr "正在格式化分区 %s"
 
-#: ../diskdrake.pm_.c:458
-#, fuzzy
+#: ../../diskdrake.pm_.c:517
 msgid "After formatting all partitions,"
-msgstr "在 %s 分割区 %s 之后，"
+msgstr "在格式化所有分区之后，"
 
-#: ../diskdrake.pm_.c:458
-#, fuzzy
+#: ../../diskdrake.pm_.c:517
 msgid "all data on these partitions will be lost"
-msgstr "所有在这个分割区上的资料都会被清除"
+msgstr "这些分区上的所有数据将要被清除"
 
-#: ../diskdrake.pm_.c:468
+#: ../../diskdrake.pm_.c:527
 msgid "Move"
 msgstr "移动"
 
-#: ../diskdrake.pm_.c:469
-#, fuzzy
-msgid "Which disk do you want to move to?"
-msgstr "您打算怎么作 ?"
+#: ../../diskdrake.pm_.c:528
+msgid "Which disk do you want to move it to?"
+msgstr "您想移动到哪个盘 ?"
 
-#: ../diskdrake.pm_.c:473
+#: ../../diskdrake.pm_.c:532
 msgid "Sector"
-msgstr ""
+msgstr "扇区"
 
-#: ../diskdrake.pm_.c:474
-#, fuzzy
-msgid "Which sector do you want to move to?"
-msgstr "您打算怎么作 ?"
+#: ../../diskdrake.pm_.c:533
+msgid "Which sector do you want to move it to?"
+msgstr "您想移动到哪个扇区 ?"
 
-#: ../diskdrake.pm_.c:477
+#: ../../diskdrake.pm_.c:536
 msgid "Moving"
-msgstr "移动"
+msgstr "移动中"
 
-#: ../diskdrake.pm_.c:477
-#, fuzzy
+#: ../../diskdrake.pm_.c:536
 msgid "Moving partition..."
-msgstr "格式化硬碟分割区"
+msgstr "正在移动分区..."
 
-#: ../diskdrake.pm_.c:487
+#: ../../diskdrake.pm_.c:546
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
-msgstr "%s 磁碟的分割区表格将会写入磁碟中 !"
+msgstr "驱动器 %s 的分区表将会写入磁盘中 !"
 
-#: ../diskdrake.pm_.c:489
+#: ../../diskdrake.pm_.c:548
 msgid "You'll need to reboot before the modification can take place"
 msgstr "您必需重新开机使您做的更动生效"
 
-#: ../diskdrake.pm_.c:510 ../install_steps_gtk.pm_.c:255
-msgid "Computing fat filesystem bounds"
-msgstr "计算档案系统的范围"
+#: ../../diskdrake.pm_.c:569 ../../install_steps_gtk.pm_.c:208
+msgid "Computing FAT filesystem bounds"
+msgstr "计算 fat 文件系统的边界"
 
-#: ../diskdrake.pm_.c:510 ../diskdrake.pm_.c:555
-#: ../install_steps_gtk.pm_.c:255
-#, fuzzy
+#: ../../diskdrake.pm_.c:569 ../../diskdrake.pm_.c:618
+#: ../../install_steps_gtk.pm_.c:208
 msgid "Resizing"
-msgstr "改变大小"
+msgstr "正在改变大小"
 
-#: ../diskdrake.pm_.c:524
-msgid "resizing"
-msgstr "改变中"
+#: ../../diskdrake.pm_.c:585
+msgid "All data on this partition should be backed-up"
+msgstr "应该先备份在这个分区上的所有数据"
 
-#: ../diskdrake.pm_.c:534
-#, fuzzy
+#: ../../diskdrake.pm_.c:587
+#, c-format
+msgid "After resizing partition %s, all data on this partition will be lost"
+msgstr "改变分区 %s 的大小之后, 这个分区上现有的所有资料将被清除"
+
+#: ../../diskdrake.pm_.c:597
 msgid "Choose the new size"
-msgstr "选取合适的 X 伺服程式"
+msgstr "选择新的大小"
 
-#: ../diskdrake.pm_.c:534 ../install_steps_graphical.pm_.c:287
-#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:317
-#: ../install_steps_gtk.pm_.c:361
+#: ../../diskdrake.pm_.c:597 ../../install_steps_graphical.pm_.c:287
+#: ../../install_steps_graphical.pm_.c:334
 msgid "MB"
 msgstr "MB"
 
-#: ../diskdrake.pm_.c:587
-#, fuzzy
+#: ../../diskdrake.pm_.c:652
 msgid "Create a new partition"
-msgstr "格式化硬碟分割区"
+msgstr "创建一个新的分区"
 
-#: ../diskdrake.pm_.c:603
-#, fuzzy
+#: ../../diskdrake.pm_.c:672
 msgid "Start sector: "
-msgstr "开始: 第 %s 磁轨\n"
+msgstr "开始扇区: "
 
-#: ../diskdrake.pm_.c:606
-#, fuzzy
+#: ../../diskdrake.pm_.c:676 ../../diskdrake.pm_.c:750
 msgid "Size in MB: "
-msgstr "大小: %s MB"
+msgstr "大小 (MB) "
 
-#: ../diskdrake.pm_.c:609
-#, fuzzy
+#: ../../diskdrake.pm_.c:679 ../../diskdrake.pm_.c:753
 msgid "Filesystem type: "
-msgstr "档案系统格式∶"
+msgstr "文件系统类型: "
 
-#: ../diskdrake.pm_.c:611
+#: ../../diskdrake.pm_.c:682
 msgid "Preference: "
 msgstr "偏好设定"
 
-#: ../diskdrake.pm_.c:655 ../diskdrake.pm_.c:671
-#, fuzzy
-msgid "Select file"
-msgstr "存入档案"
+#: ../../diskdrake.pm_.c:729 ../../install_steps.pm_.c:132
+msgid "This partition can't be used for loopback"
+msgstr "这个分区不能被用于回环"
 
-#: ../diskdrake.pm_.c:664
+#: ../../diskdrake.pm_.c:739
+msgid "Loopback"
+msgstr "回环"
+
+#: ../../diskdrake.pm_.c:749
+msgid "Loopback file name: "
+msgstr "回环文件名: "
+
+#: ../../diskdrake.pm_.c:775
+msgid "File already used by another loopback, choose another one"
+msgstr "文件已经被另一个回环使用, 请选择其他"
+
+#: ../../diskdrake.pm_.c:776
+msgid "File already exists. Use it?"
+msgstr "文件已经存在. 使用现有的文件?"
+
+#: ../../diskdrake.pm_.c:798 ../../diskdrake.pm_.c:814
+msgid "Select file"
+msgstr "选择文件"
+
+#: ../../diskdrake.pm_.c:807
 msgid ""
 "The backup partition table has not the same size\n"
 "Still continue?"
 msgstr ""
-"备份分割区的大小和原来的不同\n"
-"仍然继续 ?"
+"备份分区表的大小和原来的不同\n"
+"还有继续 ?"
 
-#: ../diskdrake.pm_.c:672
+#: ../../diskdrake.pm_.c:815
 msgid "Warning"
 msgstr "警告"
 
-#: ../diskdrake.pm_.c:673
-#, fuzzy
+#: ../../diskdrake.pm_.c:816
 msgid ""
 "Insert a floppy in drive\n"
 "All data on this floppy will be lost"
 msgstr ""
-"请插入一张磁片\n"
-"所有在这个分割区上的资料都会被清除"
+"请在驱动器中插入一张软盘\n"
+"这张软盘上所有的数据将要被清除"
 
-#: ../diskdrake.pm_.c:687
-#, fuzzy
+#: ../../diskdrake.pm_.c:830
 msgid "Trying to rescue partition table"
-msgstr "抢救硬碟分割表"
+msgstr "正在尝试恢复分区表"
 
-#: ../diskdrake.pm_.c:698
+#: ../../diskdrake.pm_.c:841
 msgid "device"
-msgstr "装置"
+msgstr "设备"
 
-#: ../diskdrake.pm_.c:699
+#: ../../diskdrake.pm_.c:842
 msgid "level"
-msgstr "层次"
+msgstr "级别"
 
-#: ../diskdrake.pm_.c:700
-#, fuzzy
+#: ../../diskdrake.pm_.c:843
 msgid "chunk size"
-msgstr "组块大小 %s\n"
+msgstr "组块大小"
 
-#: ../diskdrake.pm_.c:712
+#: ../../diskdrake.pm_.c:855
 msgid "Choose an existing RAID to add to"
 msgstr "选择加入一个已存在的 RAID"
 
-#: ../diskdrake.pm_.c:713
+#: ../../diskdrake.pm_.c:856
 msgid "new"
-msgstr "新增加"
+msgstr "新建"
 
-#: ../fs.pm_.c:67 ../fs.pm_.c:73
+#: ../../fs.pm_.c:85 ../../fs.pm_.c:91 ../../fs.pm_.c:97 ../../fs.pm_.c:103
 #, c-format
 msgid "%s formatting of %s failed"
-msgstr "%s 格式化 在 %s 失败"
+msgstr "%s, 格式化 %s 失败"
 
-#: ../fs.pm_.c:93
+#: ../../fs.pm_.c:129
 #, c-format
-msgid "don't know how to format %s in type %s"
-msgstr "不知道用 %s 格式将 %s 格式化"
+msgid "I don't know how to format %s in type %s"
+msgstr "不知道如何格式化 %s 成 %s 类型"
 
-#: ../fs.pm_.c:106
+#: ../../fs.pm_.c:186
 msgid "nfs mount failed"
-msgstr "nfs 载入失败"
+msgstr "nfs 挂载失败"
 
-#: ../fs.pm_.c:123
+#: ../../fs.pm_.c:209
 msgid "mount failed: "
-msgstr "载入失败"
+msgstr "挂载失败"
 
-#: ../fs.pm_.c:134
+#: ../../fs.pm_.c:220
 #, c-format
 msgid "error unmounting %s: %s"
-msgstr "卸载失败 %s: %s"
+msgstr "卸载 %s 失败: %s"
 
-#: ../fsedit.pm_.c:219
+#: ../../fsedit.pm_.c:250
 msgid "Mount points must begin with a leading /"
 msgstr "载入点必需要以 / 为开头"
 
-#: ../fsedit.pm_.c:222
+#: ../../fsedit.pm_.c:253
 #, c-format
-msgid "There is already a partition with mount point %s"
-msgstr "载入点 %s 已经存在有分割区"
+msgid "There is already a partition with mount point %s\n"
+msgstr "已经有一个分区的挂载点是 %s\n"
 
-#: ../fsedit.pm_.c:306
+#: ../../fsedit.pm_.c:261
+#, c-format
+msgid "Circular mounts %s\n"
+msgstr "循环挂载 %s\n"
+
+#: ../../fsedit.pm_.c:273
+msgid "You need a true filesystem (ext2, reiserfs) for this mount point\n"
+msgstr ""
+
+#: ../../fsedit.pm_.c:355
 #, c-format
 msgid "Error opening %s for writing: %s"
 msgstr "在打开 %s 写入时发生错误: %s"
 
-#: ../fsedit.pm_.c:388
+#: ../../fsedit.pm_.c:437
 msgid ""
 "An error has occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
-msgstr "发生错误 ! 没有可用的装置可以建立新的档案系统。请检查您的碟体 !"
+msgstr ""
+"发生错误! 新建文件系统时找不到可用的设备。\n"
+"请检查您的硬件 !"
 
-#: ../fsedit.pm_.c:403
-#, fuzzy
+#: ../../fsedit.pm_.c:452
 msgid "You don't have any partitions!"
-msgstr "程式无法再新增任何分割区了"
+msgstr "您现在一个分区也没有!"
 
-#: ../help.pm_.c:7
+#: ../../help.pm_.c:7
 msgid "Choose preferred language for install and system usage."
 msgstr "请选择安装及系统使用的语言"
 
-#: ../help.pm_.c:10
+#: ../../help.pm_.c:10
 msgid "Choose the layout corresponding to your keyboard from the list above"
 msgstr "请从上列表单中选出符合您使用的键盘"
 
-#: ../help.pm_.c:13
+#: ../../help.pm_.c:13
 msgid ""
 "Choose \"Install\" if there are no previous versions of Linux\n"
 "installed, or if you wish to use multiple distributions or versions.\n"
 "\n"
+"Choose \"Upgrade\" if you wish to update a previous version of Mandrake "
+"Linux:\n"
+"5.1 (Venice), 5.2 (Leloo), 5.3 (Festen), 6.0 (Venus), 6.1 (Helios), Gold "
+"2000\n"
+"or 7.0 (Air).\n"
 "\n"
-"Choose \"Upgrade\" if you wish to update a previous version of Mandrake\n"
-"Linux: 5.1 (Venice), 5.2 (Leloo), 5.3 (Festen), 6.0 (Venus), 6.1\n"
-"(Helios) or Gold 2000."
+"\n"
+"Select:\n"
+"\n"
+"  - Automated (recommended): If you have never installed Linux before, "
+"choose this. NOTE:\n"
+"    networking will not be configured during installation, use "
+"\"LinuxConf\"\n"
+"    to configure it after the install completes.\n"
+"\n"
+"  - Customized: If you are familiar enough with GNU/Linux, you may then "
+"choose\n"
+"    the primary usage for your machine. See below for details.\n"
+"\n"
+"  - Expert: This supposes that you are fluent with GNU/Linux and want to\n"
+"    perform a highly customized installation. As for a \"Customized\"\n"
+"    installation class, you will be able to select the usage for your "
+"system.\n"
+"    But please, please, DO NOT CHOOSE THIS UNLESS YOU KNOW WHAT YOU ARE "
+"DOING!\n"
 msgstr ""
-"如果没有旧版本的 Linux ，或您想安装多种套件或是不同版本\n"
+"如果没有旧版本的 Linux ，或您想安装多种发行版或是不同版本\n"
 "请选择 \"安装\"\n"
 "\n"
+"如果您想升级原来的 Mandrake Linux 5.1 (Venice), 5.2 (Leloo),\n"
+"5.3 (Festen), 6.0 (Venus), 6.1 (Helios), Gold 2000 或 7.0 (Air)\n"
+"请选择 \"升级\".\n"
 "\n"
-"如果您想从旧版本的 Mandrake Linux 升级 5.1 (Venice), 5.2 (Leloo),\n"
-"5.3 (Festen), 6.0 (Venus), 6.1 (Helios) or Gold 2000 \n"
-"请选择 \"升级\"."
+"\n"
+"选择:\n"
+"\n"
+" - 自动安装: 如果你从来没有安装过 Linux.\n"
+"\n"
+" - 定制: 如果你熟悉 Linux, 你将可以选择这个系统的用途是常规, 开发, \n"
+"还是服务器. 选择 \"常规安装\" 将为你配置一套日常使用的电脑; 如果你计划\n"
+"这台电脑主要用于软件开发, 应选择 \"开发平台\"; 如果, 选择 \"服务器\", \n"
+"你的电脑会被配备成一台全能的网络服务器 (提供邮件, 打印...等各种服务).\n"
+"\n"
+" - 专家: 如果你精通 GNU/Linux, 希望作一个高度定制的安装, \n"
+"这个安装等级是专为你准备的. 有和 \"定制\" 中一样可选择的系统用途. \n"
 
-#: ../help.pm_.c:22
+#: ../../help.pm_.c:37
 msgid ""
 "Select:\n"
 "\n"
-"  - Recommended: If you have never installed Linux before.\n"
+"  - Customized: If you are familiar enough with GNU/Linux, you may then "
+"choose\n"
+"    the primary usage for your machine. See below for details.\n"
 "\n"
-"\n"
-"  - Customized: If you are familiar with Linux, you will be able to \n"
-"select the usage for the installed system between normal, development or\n"
-"server. Choose \"Normal\" for a general purpose installation of your\n"
-"computer. You may choose \"Development\" if you will be using the computer\n"
-"primarily for software development, or choose \"Server\" if you wish to\n"
-"install a general purpose server (for mail, printing...).\n"
-"\n"
-"\n"
-"  - Expert: If you are fluent with GNU/Linux and want to perform\n"
-"a highly customized installation, this Install Class is for you. You will\n"
-"be able to select the usage of your installed system as for \"Customized\"."
+"  - Expert: This supposes that you are fluent with GNU/Linux and want to\n"
+"    perform a highly customized installation. As for a \"Customized\"\n"
+"    installation class, you will be able to select the usage for your "
+"system.\n"
+"    But please, please, DO NOT CHOOSE THIS UNLESS YOU KNOW WHAT YOU ARE "
+"DOING!\n"
 msgstr ""
+"请选择:\n"
+"\n"
+"\n"
+" - 定制: 如果你熟悉 Linux, 你将可以选择这个系统的用途是常规, 开发, \n"
+"还是服务器. 选择 \"常规安装\" 将为你配置一套日常使用的电脑; 如果你计划\n"
+"这台电脑主要用于软件开发, 应选择 \"开发平台\"; 如果, 选择 \"服务器\", \n"
+"你的电脑会被配备成一台全能的网络服务器 (提供邮件, 打印...等各种服务).\n"
+"\n"
+" - 专家: 如果你精通 GNU/Linux, 希望作一个高度定制的安装, \n"
+"这个安装等级是专为你准备的. 有和 \"定制\" 中一样可选择的系统用途. \n"
 
-#: ../help.pm_.c:40
+#: ../../help.pm_.c:49
+msgid ""
+"The different choices for your machine's usage (provided, hence, that you "
+"have\n"
+"chosen either \"Custom\" or \"Expert\" as an installation class) are the\n"
+"following:\n"
+"\n"
+"  - Normal: choose this if you intend to use your machine primarily for\n"
+"    everyday use (office work, graphics manipulation and so on). Do not\n"
+"    expect any compiler, development utility et al. installed.\n"
+"\n"
+"  - Development: as its name says. Choose this if you intend to use your\n"
+"    machine primarily for software development. You will then have a "
+"complete\n"
+"    collection of software installed in order to compile, debug and format\n"
+"    source code, or create software packages.\n"
+"\n"
+"  - Server: choose this if the machine which you're installing "
+"Linux-Mandrake\n"
+"    on is intended to be used as a server. Either a file server (NFS or "
+"SMB),\n"
+"    a print server (Unix' lp (Line Printer) protocol or Windows style SMB\n"
+"    printing), an authentication server (NIS), a database server and so on. "
+"As\n"
+"    such, do not expect any gimmicks (KDE, GNOME...) to be installed.\n"
+msgstr ""
+"既然您没有选择\"定制\" 或 \"专家\" 安装类别, 请在这里选择您的系统的用途:\n"
+"\n"
+"  - 正常: 您的系统将用于日常的工作 (办公, 图象处理之类 ). 不需要安装\n"
+"    什么编译程序, 开发工具.\n"
+"\n"
+"  - 开发: 您将主要在这个系统上做软件开发. 您将拥有全套的工具, 可以进行\n"
+"    编译, 调试程序和源代码排版, 软件包装等工作.\n"
+"\n"
+"  - 服务器: 您正在安装 Linux-Mandrake 的这台机器将作为服务器运行.\n"
+"    可能是文件服务器 (NFS 或 SMB), 打印服务器 ( Unix 的 lp 服务器或 \n"
+"    Windows 风格的 SMB 打印), 认证服务器(NIS), 数据库服务器等等. \n"
+"    所以我们不安装如何花哨的玩艺 (KDE, GNOME...).\n"
+
+#: ../../help.pm_.c:70
 msgid ""
 "DrakX will attempt at first to look for one or more PCI\n"
 "SCSI adapter(s). If it finds it (or them)  and knows which driver(s)\n"
@@ -1008,8 +1394,24 @@ msgid ""
 "on your system), as suggested by the installation guide. These\n"
 "are the options you will need to provide to the driver."
 msgstr ""
+"DrakX 将首先尝试找到一个或更多的 PCI SCSI 卡. 如果能找到并且识别出\n"
+"可用的驱动程序, 它能够自动的插入这些驱动程序.\n"
+"\n"
+"\n"
+"如果你的 SCSI 适配器是 ISA 卡, 或者是一个 DrakX 不知道如何驱动的 PCI 卡, \n"
+"或者你根本没有 SCSI 适配器, 会出现一个提示, 问你有没有 SCSI. 如果你没有, \n"
+"回答 \"No\". 如果你确实有, 回答\"Yes\". 一个驱动程序的列表会弹出来, 你必须\n"
+"其中挑选一个\n"
+"\n"
+"\n"
+"在你选择驱动程序之后, DrakX 会问你是否指定它的选项. 最好先让驱动程序\n"
+"自己检测硬件, 这通常都管用.\n"
+"\n"
+"\n"
+"如果检测不出. 你需要再看一遍安装指南. 可以从你的硬件手册, 或者使用 Windows\n"
+"( 如果你的系统里有 ) 查找有关的信息."
 
-#: ../help.pm_.c:64
+#: ../../help.pm_.c:94
 msgid ""
 "At this point, you may choose what partition(s) to use to install\n"
 "your Linux-Mandrake system if they have been already defined (from a\n"
@@ -1034,11 +1436,51 @@ msgid ""
 "\n"
 "Because the effects of this process are usually irreversible, partitioning\n"
 "can be intimidating and stressful to the unexperienced user. DiskDrake\n"
-"simplifies the process so that it need not be. Consult the documentation\n"
-"and take your time before proceeding."
+"simplifies the process so that it must not be. Consult the documentation\n"
+"and take your time before proceeding.\n"
+"\n"
+"\n"
+"You can reach any option using the keyboard: navigate through the "
+"partitions\n"
+"using Tab and Up/Down arrows. When a partition is selected, you can use:\n"
+"\n"
+"- Ctrl-c  to create a new partition (when an empty partition is selected)\n"
+"\n"
+"- Ctrl-d  to delete a partition\n"
+"\n"
+"- Ctrl-m  to set the mount point\n"
 msgstr ""
+" 如果你以前安装了 Linux 或者用其他分区工具设定了 Linux 硬盘分区.\n"
+"现在你可以选择使用哪些分区进行安装你的 Linux-Mandrake 系统.\n"
+"否则, 必须先设定硬盘分区. 这个操作是把电脑硬盘的容量划分成逻辑上互相\n"
+"独立的部分来使用.\n"
+"\n"
+"\n"
+"如果你需要创建新的分区, 使用 \"自动分配\" 可以自动的创建 Linux 使用的分区.\n"
+"要选择进行分区的硬盘, 请在 \"hda\" 上选中, 这就是第一个 IDE 盘, \"hdb\" 是\n"
+"第二个; 而 \"sda\" 是第一个 SCSI 盘, 依此类推.\n"
+"\n"
+"\n"
+"两个共有的分区: 根分区 (/) 和 /boot\n"
+"/ 是文件系统的目录层次的起点. /boot 包含了所有在电脑开机时用来启动操作系统\n"
+"要用到的文件.\n"
+"\n"
+"\n"
+"由于磁盘分区的后果常常是不可逆转的, 这项任务会给没有经验的用户巨大的压力.\n"
+"DiskDrake 简化了这个过程, 所以不必再担心. "
+"在开始进行之前参阅文档会让你更轻松.\n"
+"\n"
+"利用键盘控制各种选项:\n"
+" 选择各个分区, 使用 Tab 和 上/下 箭头.\n"
+" 当一个分区选中以后, 您可以使用:\n"
+"\n"
+"- Ctrl-c  =Create, 创建一个新的分区 (当选中的是空分区时)\n"
+"\n"
+"- Ctrl-d  =Delete, 删除一个分区\n"
+"\n"
+"- Ctrl-m  =Mount, 设定挂载点\n"
 
-#: ../help.pm_.c:90
+#: ../../help.pm_.c:131
 msgid ""
 "Any partitions that have been newly defined must be formatted for\n"
 "use (formatting meaning creating a filesystem). At this time, you may\n"
@@ -1047,34 +1489,53 @@ msgid ""
 "partitions, particularly if they contain files or data you wish to keep.\n"
 "Typically retained are /home and /usr/local."
 msgstr ""
+"新定义的分区必须格式化 (也就是创建文件系统) 以后才能使用. 在这时候, \n"
+"你或许希望重新格式化以前存在的分区, 清除里面的数据.\n"
+"注意: 如果以前存在的分区里有你希望保留的文件和数据, 就不必重新格式化.\n"
+"一般应该保留 /home 和 /usr/local "
 
-#: ../help.pm_.c:98
+#: ../../help.pm_.c:139
 msgid ""
-"You may now select the packages you wish to install.\n"
+"You may now select the group of packages you wish to\n"
+"install or upgrade.\n"
 "\n"
-"\n"
-"First you can select group of package to install or upgrade. After that\n"
-"you can select more packages according to the total size you wish to\n"
-"select.\n"
-"\n"
-"\n"
-"If you are in expert mode, you can select packages individually.\n"
-"Please note that some packages require the installation of others.\n"
-"These are referred to as package dependencies. The packages you select,\n"
-"and the packages they require will be automatically selected for\n"
-"install. It is impossible to install a package without installing all\n"
-"of its dependencies."
+"DrakX will then check whether you have enough room to install them all. If "
+"not,\n"
+"it will warn you about it. If you want to go on anyway, it will proceed "
+"onto\n"
+"the installation of all selected groups but will drop some packages of "
+"lesser\n"
+"interest. At the bottom of the list you can select the option\n"
+"\"Individual package selection\"; in this case you will have to browse\n"
+"through more than 1000 packages..."
 msgstr ""
+"您现在可以选择想要安装或升级的程序组.\n"
+"然后 DrakX 会检查是否有足够的空间, 如果不够它会发出警告. \n"
+"如果你决定继续, 它会试图安装所有选中的软件, 不够会省略一些不太重要的.\n"
+"在最下面你会发现选项 \"选择单独软件包\"; 这样你将可以浏览全部 1000 "
+"多个软件包."
 
-#: ../help.pm_.c:114
+#: ../../help.pm_.c:150
+msgid ""
+"If you have all the CDs in the list above, click Ok.\n"
+"If you have none of those CDs, click Cancel.\n"
+"If only some CDs are missing, unselect them, then click Ok."
+msgstr ""
+"如果你有上面列出的所有光盘, 请点击 确定.\n"
+"如果你没有任何一个光盘, 请点击 取消.\n"
+"如果你缺少其中几个, 请清除它的选中标记, 然后点击 确定"
+
+#: ../../help.pm_.c:155
 msgid ""
 "The packages selected are now being installed. This operation\n"
 "should take a few minutes unless you have chosen to upgrade an\n"
 "existing system, in that case it can take more time even before\n"
 "upgrade starts."
 msgstr ""
+"正在安装所选择的软件包, 这个操作需要几分钟. 除非你选择的是升级\n"
+"现有的系统, 那样在开始升级之前就会用去更多的时间."
 
-#: ../help.pm_.c:120
+#: ../../help.pm_.c:161
 msgid ""
 "If DrakX failed to find your mouse, or if you want to\n"
 "check what it has done, you will be presented the list of mice\n"
@@ -1090,14 +1551,20 @@ msgid ""
 "In case of a serial mouse, you will also have to tell DrakX\n"
 "which serial port it is connected to."
 msgstr ""
+"如果 DrakX 未能识别你的鼠标, 或者你想检查它识别的结果, 你会\n"
+"看到上面的鼠标列表.\n"
+"\n"
+"\n"
+"如果同意 DrakX 的设定, 直接在左边的菜单点击你要进入的阶段.\n"
+"否则, 从菜单中选择你认为最符合你的鼠标的鼠标类型."
 
-#: ../help.pm_.c:135
+#: ../../help.pm_.c:176
 msgid ""
-"Please select the correct port. For example, the COM1 port in MS Windows\n"
-"is named ttyS0 in Linux."
-msgstr ""
+"Please select the correct port. For example, the COM1 port under MS Windows\n"
+"is named ttyS0 under Linux."
+msgstr "请选择正确的端口.  例如, MS Windows 里的 COM1 在 Linux 里面叫做 ttyS0."
 
-#: ../help.pm_.c:139
+#: ../../help.pm_.c:180
 msgid ""
 "This section is dedicated to configuring a local area\n"
 "network (LAN) or a modem.\n"
@@ -1128,8 +1595,28 @@ msgid ""
 "if it fails you will have to select the right serial port where\n"
 "your modem is connected to."
 msgstr ""
+"这一节是专门配置局域网络和调制解调器\n"
+"\n"
+"选择 \"局域网\", DrakX 会尝试在你的机器上寻找以太网卡. PCI 卡应该\n"
+"都能找到, 并且自动进行初始化.\n"
+"可是, 如果你的卡是 ISA 总线, 自动检测会不起作用. 那时会出现一个列表,\n"
+"您必须从中选择合适的驱动程序.\n"
+"\n"
+"\n"
+"对于 SCSI 总线的卡, 你可以先让驱动程序探测, 如果不成, 你就需要查看\n"
+"随硬件提供的手册, 找出需要为驱动程序指定的选项.\n"
+"\n"
+"\n"
+"如果你正在安装 Linux 系统的机器是一个现成的局域网的成员, 网络管理员\n"
+"应该已经提供给你所需要的信息 ( IP 地址, 子网络掩码, 和主机名称 ),\n"
+"如果你在家里建立自己的网络, 地址就由你决定了.\n"
+"\n"
+"\n"
+"选择 \"用调制解调器拨号接入\" 可以配置通过调制解调器到互联网的连接.\n"
+"DrakX 先尝试自动搜索你的调制解调器, 调制解调器的电源应该开启.\n"
+"如果自动搜索失败, 你要选择调制解调器所连接的端口号."
 
-#: ../help.pm_.c:169
+#: ../../help.pm_.c:210
 msgid ""
 "Enter:\n"
 "\n"
@@ -1145,20 +1632,32 @@ msgid ""
 "this option. If selected, no value is needed in \"IP address\". If you are\n"
 "not sure, ask your network administrator or ISP.\n"
 msgstr ""
+"输入: \n"
+"\n"
+"  - IP 地址: 网络管理员或 ISP 要求你使用的固定地址. 如果你没有固定的 IP，\n"
+" 请选择 \"自动设置 IP\".\n"
+"\n"
+"  - 子网掩码: \"255.255.255.0\" 是最常用的. 如果不行, 问网络管理员或者 ISP.\n"
+"\n"
+"  - 自动设置 IP: 在使用了 bootp 或 dhcp 协议的网络上, 应该选择这个选项.\n"
+"如果选择这个选项, \"IP 地址\" 就不用设置了. 不确定的话, 问你的网络管理员\n"
+"或者 ISP.\n"
 
-#: ../help.pm_.c:184
+#: ../../help.pm_.c:225
 msgid ""
 "You may now enter dialup options. If you're not sure what to enter, the\n"
 "correct information can be obtained from your ISP."
-msgstr ""
+msgstr "现在你可以输入拨号选项. 如果不清楚, 请联系你的 ISP 得到有关信息. "
 
-#: ../help.pm_.c:188
+#: ../../help.pm_.c:229
 msgid ""
 "If you will use proxies, please configure them now. If you don't know if\n"
-"you will use proxies, ask your network administrator or your ISP."
+"you should use proxies, ask your network administrator or your ISP."
 msgstr ""
+"如果你使用代理服务器, 请在这里配置它们. 可以请教网络管理员或者 ISP, 了解\n"
+"你是否需要使用代理服务器."
 
-#: ../help.pm_.c:192
+#: ../../help.pm_.c:233
 msgid ""
 "You can install cryptographic package if your internet connection has been\n"
 "set up correctly. First choose a mirror where you wish to download packages "
@@ -1168,27 +1667,53 @@ msgid ""
 "Note you have to select mirror and cryptographic packages according\n"
 "to your legislation."
 msgstr ""
+"在你的互联网连接正确建立以后, 你可以安装密码软件包. "
+"首先要选择下载软件的镜象\n"
+"网站, 然后选择要选择的软件包.\n"
+"\n"
+"注意! 请遵守法律中有关下载密码软件的规定."
 
-#: ../help.pm_.c:200
+#: ../../help.pm_.c:241
 msgid ""
 "You can now select your timezone according to where you live.\n"
 "\n"
 "\n"
-"Linux manages time in GMT or \"Greenwich Meridian Time\" and translates it\n"
+"Linux manages time in GMT or \"Greenwich Mean Time\" and translates it\n"
 "in local time according to the time zone you have selected."
 msgstr ""
+"现在请选择你所在地方的时区. \n"
+"\n"
+"\n"
+"Linux 内部使用 GMT (格林威治标准时间), 然后根据你选择的时区转换成当地时间. "
 
-#: ../help.pm_.c:207
-msgid "Help"
-msgstr "求助"
+#: ../../help.pm_.c:248
+msgid ""
+"You may now choose which services you want to see started at boot time.\n"
+"When your mouse comes over an item, a small balloon help will popup which\n"
+"describes the role of the service.\n"
+"\n"
+"Be especially careful in this step if you intend to use your machine as a\n"
+"server: you will probably want not to start any services which you don't\n"
+"want."
+msgstr ""
+"现在您可以选择在开机时启动哪些服务.\n"
+"移动您的鼠标到选项上面会弹出帮助提示, 解释这个服务的作用.\n"
+"如果您的机器将作为服务器, 在这一步请格外小心: 最好不要启动你\n"
+"不需要的任何服务."
 
-#: ../help.pm_.c:210
+#: ../../help.pm_.c:257
 msgid ""
 "Linux can deal with many types of printer. Each of these\n"
-"types require a different setup.\n"
+"types require a different setup. Note however that the print\n"
+"spooler uses 'lp' as the default printer name; so you\n"
+"must have one printer with such a name; but you can give\n"
+"several names, separated by '|' characters, to a printer.\n"
+"So, if you prefer to have a more meaningful name you just have\n"
+"to put it first, eg: \"My Printer|lp\".\n"
+"The printer having \"lp\" in its name(s) will be the default printer.\n"
 "\n"
 "\n"
-"If your printer is directly connected to your computer, select\n"
+"If your printer is physically connected to your computer, select\n"
 "\"Local printer\". You will then have to tell which port your\n"
 "printer is connected to, and select the appropriate filter.\n"
 "\n"
@@ -1206,8 +1731,28 @@ msgid ""
 "access the printer, and of course the name of the printer. The same goes\n"
 "for a NetWare printer, except that you need no workgroup information."
 msgstr ""
+"Linux 可以使用多种类型的打印机. 不同的类型需要不同的设置.\n"
+"注意, 打印假脱机程序使用的缺省打印机名字是 'lp'; 所以您\n"
+"必须设定一个打印机叫这个名字; 不过您可以给一个打印机设定几个名字,\n"
+"彼此用 '|' 字符隔开. 如果您喜欢用有意义的名字, 只需要把它写在前面,\n"
+"象这样, \"My Printer|lp \". \n"
+"名字里面含有 \"lp\" 的打印机将成为缺省打印机.\n"
+"\n"
+"如果打印机直接连接在你的电脑上, 选择 \"本地打印机\". 接下来,\n"
+"你需要告诉我你的打印机连接在哪个端口, 并选择相应的过滤器.\n"
+"\n"
+"\n"
+"如果你要使用远程的 Unix 主机上的打印机, 必须选择 \"远程 lpd 打印机\".\n"
+"不需要任何的用户名和口令, 但是你要知道服务器上的打印队列的名字.\n"
+"\n"
+"\n"
+"如果你要使用的是 SMB 打印机 (就是 Windows 9x/NT 网络共享打印机),\n"
+"你需要说明主机的 SMB 名字 (不是它的 TCP/IP 名字, 而是你在 Windows 网络\n"
+"邻居里看到的主机名), 可能还需要它的 IP 地址, 以及访问打印机要求\n"
+"的用户名, 用户组和口令, 当然还有打印机的共享名. NetWare 共享打印机\n"
+"有同样的要求, 只是不需要用户组信息."
 
-#: ../help.pm_.c:233
+#: ../../help.pm_.c:286
 msgid ""
 "You can now enter the root password for your Linux-Mandrake\n"
 "system. The password must be entered twice to verify that both\n"
@@ -1220,24 +1765,35 @@ msgid ""
 "be extremely dangerous to the integrity of the system and its data,\n"
 "and other systems connected to it. The password should be a\n"
 "mixture of alphanumeric characters and a least 8 characters long. It\n"
-"should *never* be written down. Do not make the password too long or\n"
+"should NEVER be written down. Do not make the password too long or\n"
 "complicated, though: you must be able to remember without too much\n"
 "effort."
 msgstr ""
+"现在您需要输入您的 Linux-Mandrake 系统的 root 用户口令.\n"
+" 口令要输入两次, 以便确保两次输入完全一致. \n"
+"\n"
+"\n"
+"超级用户 root 是这个系统的管理员, 是唯一的可以修改系统配置的用户. \n"
+"所以选择 root 口令要非常小心!  root 帐户被盗用是极端危险的, 这个系统\n"
+"和上面的数据, 以及相连接的其他系统的完整性都受到威胁.\n"
+"口令应该混合使用字母和数字, 至少 8 个字符长. 绝对 *不要* 把它写下来.\n"
+"为了你自己能记得住, 也不要把口令设定得过分长而复杂."
 
-#: ../help.pm_.c:249
+#: ../../help.pm_.c:302
 msgid ""
 "To enable a more secure system, you should select \"Use shadow file\" and\n"
 "\"Use MD5 passwords\"."
 msgstr ""
+"要使系统更加安全, 你应该选择 \"使用 shadow 文件\" 以及 \n"
+"\"使用 MD5 口令\"."
 
-#: ../help.pm_.c:253
+#: ../../help.pm_.c:306
 msgid ""
 "If your network uses NIS, select \"Use NIS\". If you don't know, ask your\n"
 "network administrator."
-msgstr ""
+msgstr "如果你的网络使用 NIS, 选择 \"使用 NIS\". 不清楚的话, 请教网络管理员."
 
-#: ../help.pm_.c:257
+#: ../../help.pm_.c:310
 msgid ""
 "You may now create one or more \"regular\" user account(s), as\n"
 "opposed to the \"privileged\" user account, root. You can create\n"
@@ -1260,16 +1816,33 @@ msgid ""
 "you will have created here, and login as root only for administration\n"
 "and maintenance purposes."
 msgstr ""
+"现在你可以创建一个或更多的 \"普通\" 用户帐号, 这些帐号没有 root 的\n"
+"\"特权\". 可以给每个允许使用这台机器的人设置一个或更多的帐号. \n"
+"记住, 每个用户帐号将拥有自己的 \"home 目录\", 里面可以保存自己的参数偏好\n"
+"( 图形环境, 程序设定, 等等 ). \n"
+"\n"
+"\n"
+"首先, 给你自己设定一个帐号! 即使这台机器只有你一个人用, 也不应该在日常\n"
+"使用时以 root 登录:\n"
+"这样做是是拿系统安全性冒险!  也许你只敲错一个字母就会把系统搞死. \n"
+"\n"
+"\n"
+"因此, 你应该在这里创建一个用户, 平常就以这个用户登录. 而只在进行系统\n"
+"管理和维护时登录成 root."
 
-#: ../help.pm_.c:276
+#: ../../help.pm_.c:329
 msgid ""
 "It is strongly recommended that you answer \"Yes\" here. If you install\n"
 "Microsoft Windows at a later date it will overwrite the boot sector.\n"
 "Unless you have made a bootdisk as suggested, you will not be able to\n"
 "boot into Linux any more."
 msgstr ""
+"强烈建议你在这里选择 \"是\".  因为有很多原因使你不能从硬盘启动, 比如 \n"
+"以后某天你安装 MS Windows, 它会覆盖启动扇区. \n"
+" 那时, 你再也不能进入 Linux,\n"
+"除非你有一张启动软盘"
 
-#: ../help.pm_.c:282
+#: ../../help.pm_.c:335
 msgid ""
 "You need to indicate where you wish\n"
 "to place the information required to boot to Linux.\n"
@@ -1278,47 +1851,47 @@ msgid ""
 "Unless you know exactly what you are doing, choose \"First sector of\n"
 "drive (MBR)\"."
 msgstr ""
+"请指定在哪里放置启动 Linux 的信息.\n"
+"\n"
+"\n"
+"选择\"硬盘的第一个扇区 (MBR)\", 除非你确切知道自己在干什么."
 
-#: ../help.pm_.c:290
+#: ../../help.pm_.c:343
 msgid ""
 "Unless you know specifically otherwise, the usual choice is \"/dev/hda\"\n"
-"(the master drive on the primary channel)."
+" (primary master IDE disk) or \"/dev/sda\" (first SCSI disk)."
 msgstr ""
+"如果没有什么特别的原因, 通常选择 \"/dev/hda\"\n"
+" (IDE 主通道的主盘) 或者  \"/dev/sda\" (第一个 SCSI 盘)."
 
-#: ../help.pm_.c:294
+#: ../../help.pm_.c:347
 msgid ""
-"LILO (the LInux LOader) can boot Linux and other operating systems.\n"
-"Normally they are correctly detected during installation. If you don't\n"
-"see yours detected, you can add one or more now.\n"
+"LILO (the LInux LOader) and Grub are bootloaders: they are able to boot\n"
+"either Linux or any other operating system present on your computer.\n"
+"Normally, these other operating systems are correctly detected and\n"
+"installed. If this is not the case, you can add an entry by hand in this\n"
+"screen. Be careful as to choose the correct parameters.\n"
 "\n"
 "\n"
-"If you don't want that everybody could access at one of them, you can "
-"remove\n"
-"it now (a boot disk will be needed to boot it)."
+"You may also want not to give access to these other operating systems to\n"
+"anyone, in which case you can delete the corresponding entries. But\n"
+"in this case, you will need a boot disk in order to boot them!"
 msgstr ""
+"LILO (LInux LOader 的缩写) 和 Grub 是开机启动程序: 开机时, 它们引导\n"
+"您系统里的 Linux 和其他操作系统.  通常它能正确的察觉和安装现有的其他\n"
+"操作系统. 如果不是这样, 您可以在这个界面手工添加新的项目. 请仔细选择\n"
+"正确的参数.\n"
+"\n"
+"\n"
+"您可能不希望让人使用这里列出的其他操作系统, 只要把有关的项目删除就好了.\n"
+"可是你需要先准备开机软盘来引导它们."
 
-#: ../help.pm_.c:303
+#: ../../help.pm_.c:359
 msgid ""
-"LILO main options are:\n"
+"LILO and grub main options are:\n"
 "  - Boot device: Sets the name of the device (e.g. a hard disk\n"
 "partition) that contains the boot sector. Unless you know specifically\n"
 "otherwise, choose \"/dev/hda\".\n"
-"\n"
-"\n"
-"  - Linear: Generate linear sector addresses instead of\n"
-"sector/head/cylinder addresses. Linear addresses are translated at run\n"
-"time and do not depend on disk geometry. Note that boot disks may not be\n"
-"portable if \"linear\" is used, because the BIOS service to determine the\n"
-"disk geometry does not work reliably for floppy  disks. When using\n"
-"\"linear\" with large disks, /sbin/lilo may generate references to\n"
-"inaccessible disk areas, because 3D sector addresses are not known\n"
-"before boot time.\n"
-"\n"
-"\n"
-"  - Compact: Tries to merge read requests for adjacent sectors into a\n"
-"single read request. This drastically reduces load time and keeps the\n"
-"map smaller. Using \"compact\" is especially recommended when booting from\n"
-"a floppy disk.\n"
 "\n"
 "\n"
 "  - Delay before booting default image: Specifies the number in tenths\n"
@@ -1333,8 +1906,21 @@ msgid ""
 "    * normal: select normal 80x25 text mode.\n"
 "    * <number>:  use the corresponding text mode."
 msgstr ""
+"LILO 和 grub 的主要选项:\n"
+"  - 开机启动设备: 设定一个包含开机启动扇区的设备的名字 (比如,\n"
+" 一个硬盘分区). 如果你没有特别的理由, 请选择 \"/dev/hda\". \n"
+"\n"
+"\n"
+"  - 启动缺省映象前的延时:  告诉操作系统加载程序等待几个 10 秒钟之后才\n"
+"启动缺省的映象.  如果不需要选择用于启动的操作系统, 可以不设置 \"延时\"\n"
+"或者设置为零.\n"
+"\n"
+"\n"
+"  - 显示方式:  指定开机启动时使用的 VGA 文本模式. 可以使用下列的值:\n"
+"    * nomal: 使用正常的 80x25 字符模式.\n"
+"    * <数字>: 使用代码指定的图形模式."
 
-#: ../help.pm_.c:338
+#: ../../help.pm_.c:378
 msgid ""
 "Now it's time to configure the X Window System, which is the\n"
 "core of the Linux GUI (Graphical User Interface). For this purpose,\n"
@@ -1348,50 +1934,89 @@ msgid ""
 "settings suit you. If they don't, you can come back and\n"
 "change them, as many times as necessary."
 msgstr ""
+"现在开始配置 X 窗口系统, 这是 Linux GUI ( 图形用户界面 )的核心.\n"
+"你需要配置的是你的显示卡和显示器.  大部分的步骤是自动的, 你要做的\n"
+"只是核实完成的情况, 接受这些设定.\n"
+"\n"
+"\n"
+"等到配置结束, X 将被启动以便检查所有设定是否合适 (除非你要求 DrakX \n"
+"不这样做).  如果有什么不满意, 你可以退回并修改设定, 修改多少次都可以."
 
-#: ../help.pm_.c:351
+#: ../../help.pm_.c:391
 msgid ""
 "If something is wrong in X configuration, use these options to correctly\n"
 "configure the X Window System."
-msgstr ""
+msgstr "如果 X 配置中出错, 这些选项可以用来正确配置 X 窗口系统."
 
-#: ../help.pm_.c:355
+#: ../../help.pm_.c:395
 msgid ""
 "If you prefer to use a graphical login, select \"Yes\". Otherwise, select\n"
 "\"No\"."
-msgstr ""
+msgstr "如果你喜欢图形方式的登录, 选择 \"是\". 喜欢文本方式, 选择 \"否\"."
 
-#: ../help.pm_.c:359
+#: ../../help.pm_.c:399
 msgid ""
-"You can now select some miscellaneous options for you system.\n"
+"You can now select some miscellaneous options for your system.\n"
 "\n"
-"  - Use hard drive optimizations: This option can improve hard disk\n"
-"accesses but is only for advanced users, it can ruin your hard drive if\n"
-"used incorrectly. Use it only if you know how.\n"
+"  - Use hard drive optimizations: this option can improve hard disk "
+"performance\n"
+"    but is only for advanced users: some buggy chipsets can ruin your data, "
+"so\n"
+"    beware. Note that the kernel has a builtin blacklist of drives and\n"
+"    chipsets, but if you want to avoid bad surprises, leave this option "
+"unset.\n"
 "\n"
+"  - Choose security level: you can choose a security level for your\n"
+"    system. Please refer to the manual for complete information. Basically: "
+"if\n"
+"    you don't know, select \"Medium\" ; if you really want to have a secure\n"
+"    machine, choose \"Paranoid\" but beware: IN THIS LEVEL, ROOT LOGIN AT\n"
+"    CONSOLE IS NOT ALLOWED! If you want to be root, you have to login as a "
+"user\n"
+"    and then use \"su\". More generally, do not expect to use your machine\n"
+"    for anything but as a server. You have been warned.\n"
 "\n"
-"  - Choose security level: You can choose a security level for your\n"
-"system.\n"
-"    Please refer to the manual for more information.\n"
+"  - Precise RAM size if needed: unfortunately, in today's PC world, there is "
+"no\n"
+"    standard method to ask the BIOS about the amount of RAM present in your\n"
+"    computer. As a consequence, Linux may fail to detect your amount of RAM\n"
+"    correctly. If this is the case, you can specify the correct amount of "
+"RAM\n"
+"    here. Note that a difference of 2 or 4 MB is normal.\n"
 "\n"
+"  - Removable media automounting: if you would prefer not to manually\n"
+"    mount removable media (CD-ROM, Floppy, Zip) by typing \"mount\" and\n"
+"    \"umount\", select this option. \n"
 "\n"
-"  - Precise RAM size if needed: In some cases, Linux is unable to\n"
-"correctly detect all the installed RAM on  some systems. If this is the\n"
-"case, specify the correct quantity. Note: a difference of 2 or 4 Mb is\n"
-"normal.\n"
-"\n"
-"\n"
-"  - Removable media automounting: If you would prefer not to manually\n"
-"mount removable drives (CD-ROM, Floppy, Zip) by typing \"mount\" and\n"
-"\"umount\", select this option. \n"
-"\n"
-"\n"
-"  - Enable Num Lock at startup: If you want Number Lock enabled after\n"
-"booting, select this option (Note: Num Lock will still not work under\n"
-"X)."
+"  - Enable NumLock at startup: if you want NumLock enabled after booting,\n"
+"    select this option (Note: NumLock may or may not work under X)."
 msgstr ""
+"现在可以为你的系统选择一些零碎的选项.\n"
+"  - 采用硬盘优化:  这个选项能改进磁盘的性能.\n"
+"    不过只建议高级用户试验它: 某些有问题的芯片组可能毁坏你的数据,\n"
+"    所以要小心. 你也许知道内核有内置的驱动器和芯片组黑名单. 只要让这个\n"
+"    选项保持不选中就能避免意外.\n"
+"\n"
+"  - 选择安全级别: 给你的系统设定一种安全级别. 详细内容请查手册.\n"
+"    简单的讲: 如果你不知道, 请选择\"中等\"; 如果你要求绝对安全的系统,\n"
+"    可以选择\"偏执狂\", 不过这样一来, 将禁止 root 在控制台登录, 你只有\n"
+"    先以普通用户登录然后 \"su\".  大致上, 除了作为服务器, 你的机器什么\n"
+"    干不成了.  你自己决定吧.\n"
+"\n"
+"  - 精确的 RAM 大小: 不幸的是, 在当今的 PC 世界, 没有标准的办法可以从 BIOS\n"
+"    获得你系统里安装的内存的准确的数量. 结果, Linux 偶尔会不能正确的\n"
+"    探测内存大小.  如果出了这种情况,  您可以自己设定正确的内存数量. \n"
+"    2 MB 到 4 MB 的误差是正常的.\n"
+"\n"
+"\n"
+"  - 自动挂载可移动介质:  选中这个选项, 在使用可移动介质 ( CD-ROM, 软盘,\n"
+"    Zip )时, 可以不必敲 \"mount\", \"unmount\" 命令.\n"
+"\n"
+"\n"
+"  - 启动时 Num Lock 有效: 启动之后, 键盘的数码锁定生效. \n"
+"    ( 注意: 在 X 里面, Num Lock 还是不起作用 )."
 
-#: ../help.pm_.c:387
+#: ../../help.pm_.c:428
 msgid ""
 "Your system is going to reboot.\n"
 "\n"
@@ -1399,278 +2024,287 @@ msgid ""
 "If you want to boot into another existing operating system, please read\n"
 "the additional instructions."
 msgstr ""
-"在重新开机之后，您新的 Mandrake Linux 系统将会自动载入。\n"
-"如果您想要开机至其他作业系统，请参考更多的指示。"
+"系统将要重新启动.\n"
+"在重新开机之后，您新的 Mandrake Linux 系统将会自动载入.\n"
+"如果您想要开机后进入其他操作系统，请参考更多的说明。"
 
-#: ../install2.pm_.c:43
+#: ../../install2.pm_.c:43
 msgid "Choose your language"
-msgstr "请选择您使用的语系"
+msgstr "选择语言"
 
-#: ../install2.pm_.c:44
+#: ../../install2.pm_.c:44
 msgid "Select installation class"
-msgstr "请选择想要安装的类别"
+msgstr "选择安装类别"
 
-#: ../install2.pm_.c:45
-msgid "Setup SCSI"
-msgstr "设定 SCSI"
+#: ../../install2.pm_.c:45
+msgid "Hard drive detection"
+msgstr "探测硬盘"
 
-#: ../install2.pm_.c:46
-msgid "Choose install or upgrade"
-msgstr "选择安装新系统或升级原有系统"
-
-#: ../install2.pm_.c:47
+#: ../../install2.pm_.c:46
 msgid "Configure mouse"
-msgstr "设定滑鼠"
+msgstr "设定鼠标"
 
-#: ../install2.pm_.c:48
+#: ../../install2.pm_.c:47
 msgid "Choose your keyboard"
-msgstr "选取您使用的键盘形式"
+msgstr "选择键盘类型"
 
-#: ../install2.pm_.c:49
+#: ../../install2.pm_.c:48 ../../install_steps_interactive.pm_.c:318
 msgid "Miscellaneous"
 msgstr "杂项"
 
-#: ../install2.pm_.c:50
+#: ../../install2.pm_.c:49
 msgid "Setup filesystems"
-msgstr "设定档案系统"
+msgstr "设定文件系统"
 
-#: ../install2.pm_.c:51
+#: ../../install2.pm_.c:50
 msgid "Format partitions"
-msgstr "格式化硬碟分割区"
+msgstr "格式化硬盘分区"
 
-#: ../install2.pm_.c:52
+#: ../../install2.pm_.c:51
 msgid "Choose packages to install"
-msgstr "选取要安装的程式套件"
+msgstr "选择软件包"
 
-#: ../install2.pm_.c:53
+#: ../../install2.pm_.c:52
 msgid "Install system"
 msgstr "安装系统"
 
-#: ../install2.pm_.c:54
+#: ../../install2.pm_.c:53
 msgid "Configure networking"
-msgstr "设定网路连线"
+msgstr "网络配置"
 
-#: ../install2.pm_.c:55
+#: ../../install2.pm_.c:54
 msgid "Cryptographic"
-msgstr "密码编码"
+msgstr "密码"
 
-#: ../install2.pm_.c:56
+#: ../../install2.pm_.c:55
 msgid "Configure timezone"
 msgstr "设定时区"
 
-#: ../install2.pm_.c:58
+#: ../../install2.pm_.c:56
+msgid "Configure services"
+msgstr "设定后台服务"
+
+#: ../../install2.pm_.c:57
 msgid "Configure printer"
-msgstr "设定印表机"
+msgstr "设定打印机"
 
-#: ../install2.pm_.c:59 ../install_steps_interactive.pm_.c:576
-#: ../install_steps_interactive.pm_.c:577
+#: ../../install2.pm_.c:58 ../../install_steps_interactive.pm_.c:652
+#: ../../install_steps_interactive.pm_.c:653
 msgid "Set root password"
-msgstr "设定 root 密码"
+msgstr "设定 root 口令"
 
-#: ../install2.pm_.c:60
+#: ../../install2.pm_.c:59
 msgid "Add a user"
-msgstr "增加一个一般使用者"
+msgstr "增加用户"
 
-#: ../install2.pm_.c:61
+#: ../../install2.pm_.c:61
 msgid "Create a bootdisk"
-msgstr "制作一张开机磁片"
+msgstr "制作空间软盘"
 
-#: ../install2.pm_.c:62
+#: ../../install2.pm_.c:63
 msgid "Install bootloader"
-msgstr "安装开机启动程式"
+msgstr "安装引导程序"
 
-#: ../install2.pm_.c:63
+#: ../../install2.pm_.c:64
 msgid "Configure X"
-msgstr "设定 X"
+msgstr "配置 X"
 
-#: ../install2.pm_.c:64
+#: ../../install2.pm_.c:65
+msgid "Auto install floppy"
+msgstr "自动安装软盘"
+
+#: ../../install2.pm_.c:66
 msgid "Exit install"
-msgstr "离开安装程式"
+msgstr "退出安装"
 
-#: ../install2.pm_.c:83
-msgid "beginner"
-msgstr "一般初学者"
-
-#: ../install2.pm_.c:83
-msgid "developer"
-msgstr "程式开发者"
-
-#: ../install2.pm_.c:83
-msgid "expert"
-msgstr "系统专家"
-
-#: ../install2.pm_.c:83
-msgid "server"
-msgstr "伺服器"
-
-#: ../install2.pm_.c:311
+#: ../../install2.pm_.c:308
 msgid ""
 "You must have a root partition.\n"
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
+"必须指定一个根分区.\n"
+"请先创建一个 Linux 分区 (或在图中点击现有的一个).\n"
+"然后在列表里选择 \"挂载点\", 设为 '/'."
 
-#: ../install2.pm_.c:327
-msgid "Not enough swap to fulfill installation, please add some"
-msgstr ""
-
-#: ../install_any.pm_.c:194 ../standalone/diskdrake_.c:61
+#: ../../install_any.pm_.c:331 ../../standalone/diskdrake_.c:61
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
 "I'll try to go on blanking bad partitions"
 msgstr ""
+"我读不出分区表, 这个分区表破坏得太严重了 :(\n"
+"我现在尝试清除坏分区."
 
-#: ../install_any.pm_.c:210
+#: ../../install_any.pm_.c:348
 msgid ""
 "DiskDrake failed to read correctly the partition table.\n"
 "Continue at your own risk!"
 msgstr ""
+"DiskDrake 无法正确读出分区表的内容.\n"
+"继续下去会怎样就看你的运气了!"
 
-#: ../install_any.pm_.c:220
+#: ../../install_any.pm_.c:370
 msgid "Searching root partition."
-msgstr ""
+msgstr "搜索根分区."
 
-#: ../install_any.pm_.c:249
-#, fuzzy
+#: ../../install_any.pm_.c:399
 msgid "Information"
-msgstr "显示所有资讯"
+msgstr "信息"
 
-#: ../install_any.pm_.c:250
+#: ../../install_any.pm_.c:400
 #, c-format
 msgid "%s: This is not a root partition, please select another one."
-msgstr ""
+msgstr "%s: 这个不是根分区, 请另外选择一个."
 
-#: ../install_any.pm_.c:252
-#, fuzzy
+#: ../../install_any.pm_.c:402
 msgid "No root partition found"
-msgstr "格式化硬碟分割区"
+msgstr "找不到根分区."
 
-#: ../install_any.pm_.c:289
+#: ../../install_any.pm_.c:440
 msgid "Can't use broadcast with no NIS domain"
-msgstr ""
+msgstr "不能广播, 不知道 NIS 域"
 
-#: ../install_any.pm_.c:473
+#: ../../install_any.pm_.c:602
 msgid "Error reading file $f"
-msgstr ""
+msgstr "读文件 $f 时出错."
 
-#: ../install_any.pm_.c:479
-#, c-format
-msgid "Bad kickstart file %s (failed %s)"
-msgstr ""
-
-#: ../install_steps.pm_.c:72
+#: ../../install_steps.pm_.c:75
 msgid ""
 "An error occurred, but I don't know how to handle it nicely.\n"
 "Continue at your own risk."
 msgstr ""
+"发生错误, 可是我不知道该怎样处理才好.\n"
+"继续下去会怎样就看你的运气了."
 
-#: ../install_steps.pm_.c:136
+#: ../../install_steps.pm_.c:174
 #, c-format
 msgid "Duplicate mount point %s"
+msgstr "重复的挂载点 %s"
+
+#: ../../install_steps.pm_.c:318
+msgid ""
+"Some important packages didn't get installed properly.\n"
+"Either your cdrom drive or your cdrom is defective.\n"
+"Check the cdrom on an installed computer using \"rpm -qpl "
+"Mandrake/RPMS/*.rpm\"\n"
 msgstr ""
 
-#: ../install_steps.pm_.c:295
-#, fuzzy, c-format
+#: ../../install_steps.pm_.c:385
+#, c-format
 msgid "Welcome to %s"
-msgstr "欢迎来到 Crackers"
+msgstr "欢迎来到 %s"
 
-#: ../install_steps.pm_.c:562
+#: ../../install_steps.pm_.c:737
 msgid "No floppy drive available"
-msgstr ""
+msgstr "没有可用的软盘驱动器."
 
-#: ../install_steps_auto_install.pm_.c:18 ../install_steps_stdio.pm_.c:26
+#: ../../install_steps_auto_install.pm_.c:18 ../../install_steps_gtk.pm_.c:125
+#: ../../install_steps_stdio.pm_.c:26
 #, c-format
 msgid "Entering step `%s'\n"
-msgstr ""
+msgstr "进入步骤 `%s'\n"
 
-#: ../install_steps_graphical.pm_.c:259 ../install_steps_gtk.pm_.c:294
+#: ../../install_steps_graphical.pm_.c:259 ../../install_steps_gtk.pm_.c:249
 msgid "You must have a swap partition"
-msgstr ""
+msgstr "你必须有一个交换分区"
 
-#: ../install_steps_graphical.pm_.c:261 ../install_steps_gtk.pm_.c:296
+#: ../../install_steps_graphical.pm_.c:261 ../../install_steps_gtk.pm_.c:251
 msgid ""
 "You don't have a swap partition\n"
 "\n"
 "Continue anyway?"
 msgstr ""
+"你还没有交换分区\n"
+"\n"
+"要继续吗?"
 
-#: ../install_steps_graphical.pm_.c:287 ../install_steps_gtk.pm_.c:317
-#, fuzzy
+#: ../../install_steps_graphical.pm_.c:287
 msgid "Choose the size you want to install"
-msgstr "选取要安装的程式套件"
+msgstr "要安装软件包的空间"
 
-#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:361
+#: ../../install_steps_graphical.pm_.c:334
 msgid "Total size: "
 msgstr "总共大小:"
 
-#: ../install_steps_graphical.pm_.c:346 ../install_steps_gtk.pm_.c:373
-#: ../standalone/rpmdrake_.c:136
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:447
+#: ../../standalone/rpmdrake_.c:136
 #, c-format
 msgid "Version: %s\n"
 msgstr "版本: %s\n"
 
-#: ../install_steps_graphical.pm_.c:347 ../install_steps_gtk.pm_.c:374
-#: ../standalone/rpmdrake_.c:137
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:448
+#: ../../standalone/rpmdrake_.c:137
 #, c-format
 msgid "Size: %d KB\n"
 msgstr "大小: %d KB\n"
 
-#: ../install_steps_graphical.pm_.c:462 ../install_steps_gtk.pm_.c:489
-#, fuzzy
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:360
 msgid "Choose the packages you want to install"
-msgstr "选取要安装的程式套件"
+msgstr "选择您要安装的软件包"
 
-#: ../install_steps_graphical.pm_.c:465 ../install_steps_gtk.pm_.c:492
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:363
 msgid "Info"
-msgstr "资讯"
+msgstr "信息"
 
-#: ../install_steps_graphical.pm_.c:473 ../install_steps_gtk.pm_.c:500
-#: ../install_steps_interactive.pm_.c:81 ../standalone/rpmdrake_.c:161
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:368
+#: ../../install_steps_interactive.pm_.c:129 ../../standalone/rpmdrake_.c:161
 msgid "Install"
 msgstr "安装"
 
-#: ../install_steps_graphical.pm_.c:492 ../install_steps_gtk.pm_.c:519
-#: ../install_steps_interactive.pm_.c:317
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:533
+#: ../../install_steps_interactive.pm_.c:382
 msgid "Installing"
-msgstr "安装"
+msgstr "正在安装"
 
-#: ../install_steps_graphical.pm_.c:499 ../install_steps_gtk.pm_.c:526
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:539
 msgid "Please wait, "
 msgstr "请稍候"
 
-#: ../install_steps_graphical.pm_.c:501 ../install_steps_gtk.pm_.c:528
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:541
 msgid "Time remaining "
-msgstr "还需时间"
+msgstr "剩余时间"
 
-#: ../install_steps_graphical.pm_.c:502 ../install_steps_gtk.pm_.c:529
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:542
 msgid "Total time "
 msgstr "总共时间"
 
-#: ../install_steps_graphical.pm_.c:507 ../install_steps_gtk.pm_.c:534
-#: ../install_steps_interactive.pm_.c:317
-#, fuzzy
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:551
+#: ../../install_steps_interactive.pm_.c:382
 msgid "Preparing installation"
-msgstr "正在准备 X-Window 的设定"
+msgstr "正在准备安装"
 
-#: ../install_steps_graphical.pm_.c:528 ../install_steps_gtk.pm_.c:549
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:566
 #, c-format
 msgid "Installing package %s"
-msgstr "安装程式"
+msgstr "正在安装程序 %s"
 
-#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:574
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:607
+#: ../../install_steps_gtk.pm_.c:611
 msgid "Go on anyway?"
-msgstr "仍然继续"
+msgstr "真的要继续"
 
-#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:574
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:607
 msgid "There was an error ordering packages:"
-msgstr "安装程式时有错误"
+msgstr "排序软件包时有错误"
 
-#: ../install_steps_graphical.pm_.c:577 ../install_steps_interactive.pm_.c:893
-#, fuzzy
+#: ../../install_steps_graphical.pm_.c:577
+#: ../../install_steps_interactive.pm_.c:997
 msgid "Use existing configuration for X11?"
-msgstr "测试设定值"
+msgstr "对 X11 使用现有的配置?"
 
-#: ../install_steps_gtk.pm_.c:259
+#: ../../install_steps_gtk.pm_.c:154
+msgid "Please, choose one of the following classes of installation:"
+msgstr "请从下列安装类别里选择一个:"
+
+#: ../../install_steps_gtk.pm_.c:195
+msgid "You don't have any windows partitions!"
+msgstr "您没有任何 windows 分区!"
+
+#: ../../install_steps_gtk.pm_.c:197
+msgid "You don't have any enough room for Lnx4win"
+msgstr "您没有足够的磁盘空间安装 Lnx4win!"
+
+#: ../../install_steps_gtk.pm_.c:213
 msgid ""
 "WARNING!\n"
 "\n"
@@ -1681,382 +2315,544 @@ msgid ""
 "restart the installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
+"警告!\n"
+"\n"
+"DrakX 现在要调整你的 Windows 分区的大小. 为了安全, 你应该先在 Windows 下运\n"
+"行 scandisk, 是否运行 defreg 要看情况而定. 现在你可以退出 Linux "
+"安装去做这些\n"
+"准备, 然后重新开始安装.\n"
+"一切就绪后, 请按 \"确定\"."
 
-#: ../install_steps_gtk.pm_.c:278
-#, fuzzy
+#: ../../install_steps_gtk.pm_.c:232
 msgid "Automatic resizing failed"
-msgstr "自动设定解析度"
+msgstr "自动调整大小失败"
 
-#: ../install_steps_gtk.pm_.c:312
+#: ../../install_steps_gtk.pm_.c:261
+msgid "Which partition do you want to use to put Linux4Win?"
+msgstr "请问您要在哪一个分区里放 Linux4Win?"
+
+#: ../../install_steps_gtk.pm_.c:280
+msgid "Choose the sizes"
+msgstr "选择大小"
+
+#: ../../install_steps_gtk.pm_.c:282
+msgid "Root partition size in MB: "
+msgstr "根分区大小(MB): "
+
+#: ../../install_steps_gtk.pm_.c:284
+msgid "Swap partition size in MB: "
+msgstr "对换分区大小 (MB): "
+
+#: ../../install_steps_gtk.pm_.c:316
+#, c-format
 msgid ""
-"Now that you've selected desired groups, please choose \n"
-"how many packages you want, ranging from minimal to full \n"
-"installation of each selected groups."
+"The total size for the groups you have selected is approximately %d MB.\n"
+msgstr "您选择的这些组总共的大小约是 %d MB.\n"
+
+#: ../../install_steps_gtk.pm_.c:318
+msgid ""
+"If you wish to install less than this size,\n"
+"select the percentage of packages that you want to install.\n"
+"\n"
+"A low percentage will install only the most important packages;\n"
+"a percentage of 100%% will install all selected packages."
 msgstr ""
+"如果您想使用更少的空间来安装, \n"
+"请决定安装已经选定的软件包的百分之几?\n"
+"\n"
+"选择较低的百分比就只安装最重要的软件; 选择 100 %% 就安装所选的\n"
+"全部软件."
 
-#: ../install_steps_gtk.pm_.c:315
-msgid "You will be able to choose more precisely in next step"
-msgstr "下一个步骤你将可以更仔细的选择"
+#: ../../install_steps_gtk.pm_.c:323
+msgid ""
+"You have space on your disk for only %d%% of these packages.\n"
+"\n"
+"If you wish to install less than this,\n"
+"select the percentage of packages that you want to install.\n"
+"A low percentage will install only the most important packages;\n"
+"a percentage of %d%% will install as many packages as possible."
+msgstr ""
+"您的磁盘空间只够安装所有这些软件包的 %d%%.\n"
+"如果您想少安装一些, \n"
+"请决定安装已经选定的软件包的百分之几?\n"
+"\n"
+"选择较低的百分比就只安装最重要的软件; 选择 100 %% 就安装所选的\n"
+"全部软件."
 
-#: ../install_steps_gtk.pm_.c:372
+#: ../../install_steps_gtk.pm_.c:329
+msgid "You will be able to choose them more specifically in the next step."
+msgstr "在下一个步骤你将可以更仔细的选择"
+
+#: ../../install_steps_gtk.pm_.c:331
+msgid "Percentage of packages to install"
+msgstr "要安装软件包的百分比"
+
+#: ../../install_steps_gtk.pm_.c:372
+msgid "Automatic dependencies"
+msgstr "自动检查相关性"
+
+#: ../../install_steps_gtk.pm_.c:425 ../../standalone/rpmdrake_.c:101
+msgid "Expand Tree"
+msgstr "展开分类树"
+
+#: ../../install_steps_gtk.pm_.c:426 ../../standalone/rpmdrake_.c:102
+msgid "Collapse Tree"
+msgstr "收缩分类树"
+
+#: ../../install_steps_gtk.pm_.c:427
+msgid "Toggle between flat and group sorted"
+msgstr "切换平铺或分组排列"
+
+#: ../../install_steps_gtk.pm_.c:445
 msgid "Bad package"
-msgstr "无效的程式"
+msgstr "有错的软件包"
 
-#: ../install_steps_gtk.pm_.c:522
+#: ../../install_steps_gtk.pm_.c:446
+#, c-format
+msgid "Name: %s\n"
+msgstr "名称: %s\n"
+
+#: ../../install_steps_gtk.pm_.c:449
+#, c-format
+msgid "Importance: %s\n"
+msgstr "重要性: %s\n"
+
+#: ../../install_steps_gtk.pm_.c:457
+#, c-format
+msgid "Total size: %d / %d MB"
+msgstr "总共大小:  %d / %d MB"
+
+#: ../../install_steps_gtk.pm_.c:467
+msgid "This is a mandatory package, it can't be unselected"
+msgstr "这个软件包是必需的, 不能取消选定"
+
+#: ../../install_steps_gtk.pm_.c:469
+msgid "You can't unselect this package. It is already installed"
+msgstr "您可以不选择这个软件包. 它已经安装过了."
+
+#: ../../install_steps_gtk.pm_.c:473
+msgid ""
+"This package must be upgraded\n"
+"Are you sure you want to deselect it?"
+msgstr ""
+"这个软件包必须进行升级.\n"
+"您真的要删除它吗?"
+
+#: ../../install_steps_gtk.pm_.c:476
+msgid "You can't unselect this package. It must be upgraded"
+msgstr "您不能不选择这个软件包, 它必须升级"
+
+#: ../../install_steps_gtk.pm_.c:489
+#, fuzzy
+msgid ""
+"You can't select this package as there is not enough space left to install it"
+msgstr "您可以不选择这个软件包. 它已经安装过了."
+
+#: ../../install_steps_gtk.pm_.c:492
+msgid "The following packages are going to be installed/removed"
+msgstr "下列软件包将要被 安装/卸载"
+
+#: ../../install_steps_gtk.pm_.c:501
+msgid "You can't select/unselect this package"
+msgstr "您不能选择/不取消这个软件包"
+
+#: ../../install_steps_gtk.pm_.c:536
 msgid "Estimating"
-msgstr "推测"
+msgstr "正在估计"
 
-#: ../install_steps_gtk.pm_.c:544
+#: ../../install_steps_gtk.pm_.c:548 ../../interactive.pm_.c:84
+#: ../../interactive.pm_.c:223 ../../interactive_newt.pm_.c:49
+#: ../../interactive_newt.pm_.c:98 ../../interactive_stdio.pm_.c:27
+#: ../../my_gtk.pm_.c:201 ../../my_gtk.pm_.c:459
+msgid "Cancel"
+msgstr "取消"
+
+#: ../../install_steps_gtk.pm_.c:561
 #, c-format
 msgid "%d packages"
-msgstr "%d 程式"
+msgstr "%d 软件包"
 
-#: ../install_steps_gtk.pm_.c:544
+#: ../../install_steps_gtk.pm_.c:561
 msgid ", %U MB"
 msgstr ", %U MB"
 
-#: ../install_steps_interactive.pm_.c:37
-#, fuzzy
+#: ../../install_steps_gtk.pm_.c:592
+#, c-format
+msgid ""
+"Change your Cd-Rom!\n"
+"\n"
+"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when "
+"done.\n"
+"If you don't have it, press Cancel to avoid installation from this Cd-Rom."
+msgstr ""
+"请换另一片 Cd-Rom!\n"
+"\n"
+"请在驱动器中插入标有 \"%s\" 的光盘, 然后点击 '确定'.\n"
+"如果您没有这张光盘, 请点击 '取消', 放弃安装这个光盘上的软件."
+
+#: ../../install_steps_gtk.pm_.c:611
+msgid "There was an error installing packages:"
+msgstr "安装软件包时有错误"
+
+#: ../../install_steps_interactive.pm_.c:40
 msgid "An error occurred"
-msgstr "发生错误∶"
+msgstr "发生一个错误"
 
-#: ../install_steps_interactive.pm_.c:54
-#, fuzzy
-msgid "Which language do you want?"
-msgstr "您打算怎么作 ?"
+#: ../../install_steps_interactive.pm_.c:57
+msgid "Please, choose a language to use."
+msgstr "请选择一种要使用的语言."
 
-#: ../install_steps_interactive.pm_.c:68 ../standalone/keyboarddrake_.c:22
+#: ../../install_steps_interactive.pm_.c:72
+#: ../../standalone/keyboarddrake_.c:22
 msgid "Keyboard"
 msgstr "键盘"
 
-#: ../install_steps_interactive.pm_.c:69 ../standalone/keyboarddrake_.c:23
-#, fuzzy
-msgid "What is your keyboard layout?"
-msgstr "选取您使用的键盘形式"
+#: ../../install_steps_interactive.pm_.c:73
+msgid "Please, choose your keyboard layout."
+msgstr "请选择您使用的键盘布局."
 
-#: ../install_steps_interactive.pm_.c:79
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:81
+msgid "You can choose other languages that will be available after install"
+msgstr "您可以在安装之后选择其他可用的语言"
+
+#: ../../install_steps_interactive.pm_.c:91
+msgid "Root Partition"
+msgstr "根分区"
+
+#: ../../install_steps_interactive.pm_.c:92
+msgid "What is the root partition (/) of your system?"
+msgstr "您的根分区(/)是哪一个 ?"
+
+#: ../../install_steps_interactive.pm_.c:100
+#: ../../install_steps_interactive.pm_.c:140
+msgid "Install Class"
+msgstr "安装类别"
+
+#: ../../install_steps_interactive.pm_.c:100
+msgid "Which installation class do you want?"
+msgstr "您想要做什么类别的安装?"
+
+#: ../../install_steps_interactive.pm_.c:102
 msgid "Install/Upgrade"
-msgstr "安装开机启动程式"
+msgstr "安装还是升级"
 
-#: ../install_steps_interactive.pm_.c:80
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:102
 msgid "Is this an install or an upgrade?"
-msgstr "选择安装新系统或升级原有系统"
+msgstr "要安装新系统还是升级原有系统?"
 
-#: ../install_steps_interactive.pm_.c:81
+#: ../../install_steps_interactive.pm_.c:110
+msgid "Automated"
+msgstr "自动安装"
+
+#: ../../install_steps_interactive.pm_.c:112
+#: ../../install_steps_interactive.pm_.c:124
+msgid "Customized"
+msgstr "定制"
+
+#: ../../install_steps_interactive.pm_.c:113
+#: ../../install_steps_interactive.pm_.c:124
+msgid "Expert"
+msgstr "专家"
+
+#: ../../install_steps_interactive.pm_.c:122
+msgid ""
+"Are you sure you are an expert? \n"
+"You will be allowed to make powerfull but dangerous things here."
+msgstr ""
+"您确信自己是专家吗?\n"
+"不是开玩笑, 这个选项给你很大的权力, 不过你的错误会有严重后果."
+
+#: ../../install_steps_interactive.pm_.c:129
 msgid "Upgrade"
 msgstr "升级"
 
-#: ../install_steps_interactive.pm_.c:89
-#, fuzzy
-msgid "Root Partition"
-msgstr "根分割区"
-
-#: ../install_steps_interactive.pm_.c:90
-msgid "What is the root partition (/) of your system?"
-msgstr "您的根分割区(/)是那一个 ?"
-
-#: ../install_steps_interactive.pm_.c:100
-msgid "Recommended"
-msgstr "建议"
-
-#: ../install_steps_interactive.pm_.c:101
-msgid "Customized"
-msgstr "自行设定"
-
-#: ../install_steps_interactive.pm_.c:102
-#, fuzzy
-msgid "Expert"
-msgstr "系统专家"
-
-#: ../install_steps_interactive.pm_.c:104
-#: ../install_steps_interactive.pm_.c:118
-#, fuzzy
-msgid "Install Class"
-msgstr "安装系统"
-
-#: ../install_steps_interactive.pm_.c:105
-#, fuzzy
-msgid "What installation class do you want?"
-msgstr "请选择想要安装的类别"
-
-#: ../install_steps_interactive.pm_.c:114
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:135
 msgid "Normal"
-msgstr "格式化"
+msgstr "常规"
 
-#: ../install_steps_interactive.pm_.c:115
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:136
 msgid "Development"
-msgstr "程式开发者"
+msgstr "开发平台"
 
-#: ../install_steps_interactive.pm_.c:116
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:137
 msgid "Server"
-msgstr "伺服器"
+msgstr "服务器"
 
-#: ../install_steps_interactive.pm_.c:119
-#, fuzzy
-msgid "What usage do you want?"
-msgstr "您打算怎么作 ?"
+#: ../../install_steps_interactive.pm_.c:141
+msgid "Which usage is your system used for ?"
+msgstr "请问您这台系统的用途?"
 
-#: ../install_steps_interactive.pm_.c:132 ../standalone/mousedrake_.c:25
-msgid "What is the type of your mouse?"
-msgstr "请问您的滑鼠是那一种型式 ?"
+#: ../../install_steps_interactive.pm_.c:152
+msgid "Please, choose the type of your mouse."
+msgstr "请选择您的鼠标是那一种类型."
 
-#: ../install_steps_interactive.pm_.c:140 ../standalone/mousedrake_.c:38
+#: ../../install_steps_interactive.pm_.c:160 ../../standalone/mousedrake_.c:38
 msgid "Mouse Port"
-msgstr "滑鼠连接埠"
+msgstr "鼠标端口"
 
-#: ../install_steps_interactive.pm_.c:141 ../standalone/mousedrake_.c:39
-msgid "Which serial port is your mouse connected to?"
-msgstr "您的滑鼠是连接到那个序列埠 ?"
+#: ../../install_steps_interactive.pm_.c:161
+msgid "Please choose on which serial port your mouse is connected to."
+msgstr "请选择您的鼠标是连接到那个串行口 ?"
 
-#: ../install_steps_interactive.pm_.c:157
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:172
+msgid "Configuring IDE"
+msgstr "正在配置 IDE"
+
+#: ../../install_steps_interactive.pm_.c:172
+msgid "IDE"
+msgstr "IDE"
+
+#: ../../install_steps_interactive.pm_.c:182
 msgid "no available partitions"
-msgstr "格式化硬碟分割区"
+msgstr "没有可用的硬盘分区"
 
-#: ../install_steps_interactive.pm_.c:159
+#: ../../install_steps_interactive.pm_.c:184
 #, c-format
-msgid "(%dMb)"
+msgid "(%dMB)"
 msgstr "%dMB"
 
-#: ../install_steps_interactive.pm_.c:166
-msgid "Which partition do you want to use as your root partition"
-msgstr "请问您要用那一个分割区做为您的根分割区 ?"
+#: ../../install_steps_interactive.pm_.c:191
+msgid "Please choose a partition to use as your root partition."
+msgstr "请问您要用那一个分区做为您的根分区 ?"
 
-#: ../install_steps_interactive.pm_.c:173
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:198
 msgid "Choose the mount points"
-msgstr "选取合适的萤幕"
+msgstr "选择挂载点"
 
-#: ../install_steps_interactive.pm_.c:185
+#: ../../install_steps_interactive.pm_.c:210
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr "你将需要重新启动使改变生效"
 
-#: ../install_steps_interactive.pm_.c:207
+#: ../../install_steps_interactive.pm_.c:236
 msgid "Choose the partitions you want to format"
-msgstr "请选择您要格式化的分割区"
+msgstr "请选择您要格式化的分区"
 
-#: ../install_steps_interactive.pm_.c:211
+#: ../../install_steps_interactive.pm_.c:240
 msgid "Check bad blocks?"
-msgstr ""
+msgstr "是否检查坏磁块?"
 
-#: ../install_steps_interactive.pm_.c:230
-msgid "Looking for available packages"
-msgstr "寻找可安装的程式"
+#: ../../install_steps_interactive.pm_.c:248
+msgid "Formatting partitions"
+msgstr "正在格式化各个分区"
 
-#: ../install_steps_interactive.pm_.c:236
-msgid "Finding packages to upgrade"
-msgstr "寻程式以升级"
-
-#: ../install_steps_interactive.pm_.c:266
+#: ../../install_steps_interactive.pm_.c:252
 #, c-format
-msgid ""
-"You need %dMB for a full install of the groups you selected.\n"
-"You can go on anyway, but be warned that you won't get all packages"
-msgstr ""
+msgid "Creating and formatting file %s"
+msgstr "正在创建和格式化文件 %s"
 
-#: ../install_steps_interactive.pm_.c:290
+#: ../../install_steps_interactive.pm_.c:255
+msgid "Not enough swap to fulfill installation, please add some"
+msgstr "交换区太少, 无法完成安装, 请增加交换分区."
+
+#: ../../install_steps_interactive.pm_.c:261
+msgid "Looking for available packages"
+msgstr "寻找可安装的程序"
+
+#: ../../install_steps_interactive.pm_.c:267
+msgid "Finding packages to upgrade"
+msgstr "寻找可升级的程序"
+
+#: ../../install_steps_interactive.pm_.c:284
+msgid "Your system has not enough space left for installation or upgrade"
+msgstr "您的系统所剩余的空间不够进行安装或升级"
+
+#: ../../install_steps_interactive.pm_.c:317
 msgid "Package Group Selection"
-msgstr "程式群组选择"
+msgstr "程序组选择"
 
-#: ../install_steps_interactive.pm_.c:326
+#: ../../install_steps_interactive.pm_.c:320
+msgid "Individual package selection"
+msgstr "选择单个软件包"
+
+#: ../../install_steps_interactive.pm_.c:360
+msgid ""
+"If you have all the CDs in the list below, click Ok.\n"
+"If you have none of those CDs, click Cancel.\n"
+"If only some CDs are missing, unselect them, then click Ok."
+msgstr ""
+"如果您拥有下列所有的光盘, 点击 确认.\n"
+"如果您没有任何一张, 点击 取消.\n"
+"如果您只缺其中一部分, 不选中它, 然后点击 确认."
+
+#: ../../install_steps_interactive.pm_.c:363
+#, c-format
+msgid "Cd-Rom labeled \"%s\""
+msgstr "标号 %s 的CD-ROM "
+
+#: ../../install_steps_interactive.pm_.c:391
 msgid ""
 "Installing package %s\n"
 "%d%%"
-msgstr "安装程式"
+msgstr ""
+"正在安装软件包 %s \n"
+"%d%%"
 
-#: ../install_steps_interactive.pm_.c:335
-#, fuzzy
-msgid "Post install configuration"
-msgstr "测试设定值"
+#: ../../install_steps_interactive.pm_.c:400
+msgid "Post-install configuration"
+msgstr "安装后的配置"
 
-#: ../install_steps_interactive.pm_.c:346
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:410
 msgid "Keep the current IP configuration"
-msgstr "测试设定值"
+msgstr "保留现有的 IP 配置"
 
-#: ../install_steps_interactive.pm_.c:347
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:411
 msgid "Reconfigure network now"
-msgstr "设定网路连线"
+msgstr "现在要重新配置网络"
 
-#: ../install_steps_interactive.pm_.c:348
-#: ../install_steps_interactive.pm_.c:360
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:412
 msgid "Do not set up networking"
-msgstr "设定网路连线"
+msgstr "不配置网络"
 
-#: ../install_steps_interactive.pm_.c:350
-#: ../install_steps_interactive.pm_.c:358
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:415
+#: ../../install_steps_interactive.pm_.c:420
 msgid "Network Configuration"
-msgstr "测试设定值"
+msgstr "网络配置"
 
-#: ../install_steps_interactive.pm_.c:351
+#: ../../install_steps_interactive.pm_.c:416
 msgid "Local networking has already been configured. Do you want to:"
-msgstr "区域网路已经设定好。请问您想要 :"
+msgstr "已经配置过局域网络. 您是否要:"
 
-#: ../install_steps_interactive.pm_.c:359
-#, fuzzy
-msgid "Do you want to configure networking for your system?"
-msgstr "您想要测试您的设定值吗 ?"
+#: ../../install_steps_interactive.pm_.c:421
+msgid "Do you want to configure a local network for your system?"
+msgstr "您要为这个系统配置局域网络 (LAN) 吗?"
 
-#: ../install_steps_interactive.pm_.c:360
-msgid "Dialup with modem"
-msgstr "使用数据机播接上网"
-
-#: ../install_steps_interactive.pm_.c:360
-msgid "Local LAN"
-msgstr "区域网路"
-
-#: ../install_steps_interactive.pm_.c:369
+#: ../../install_steps_interactive.pm_.c:427
 msgid "no network card found"
-msgstr "找不到网路卡"
+msgstr "找不到网络卡"
 
-#: ../install_steps_interactive.pm_.c:399
-#: ../install_steps_interactive.pm_.c:400
-#, fuzzy, c-format
+#: ../../install_steps_interactive.pm_.c:449
+msgid "Modem Configuration"
+msgstr "配置调制解调器(猫)"
+
+#: ../../install_steps_interactive.pm_.c:450
+msgid ""
+"Do you want to configure a dialup connection with modem for your system?"
+msgstr "您要为这个系统配置拨号接入网络吗?"
+
+#: ../../install_steps_interactive.pm_.c:462
+#: ../../install_steps_interactive.pm_.c:463
+#, c-format
 msgid "Configuring network device %s"
-msgstr "设定网路连线"
+msgstr "正在配置网络设备 %s"
 
-#: ../install_steps_interactive.pm_.c:401
+#: ../../install_steps_interactive.pm_.c:464
 msgid ""
 "Please enter the IP configuration for this machine.\n"
 "Each item should be entered as an IP address in dotted-decimal\n"
 "notation (for example, 1.2.3.4)."
-msgstr "请输入您电脑的 IP 设定请以 . 分隔，例如 1.2.3.4 "
+msgstr ""
+"请输入这台电脑的 IP 配置. \n"
+"下列项目要求输入以句点分隔十进制格式表示的 IP 地址.\n"
+" (例如 192.168.1.1) "
 
-#: ../install_steps_interactive.pm_.c:404
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:467
 msgid "Automatic IP"
-msgstr "自动设定解析度"
+msgstr "自动设置 IP"
 
-#: ../install_steps_interactive.pm_.c:404
+#: ../../install_steps_interactive.pm_.c:467
 msgid "IP address:"
-msgstr "IP 位置"
+msgstr "IP 地址"
 
-#: ../install_steps_interactive.pm_.c:404
+#: ../../install_steps_interactive.pm_.c:467
 msgid "Netmask:"
-msgstr "Netmask:"
+msgstr "子网掩码:"
 
-#: ../install_steps_interactive.pm_.c:405
+#: ../../install_steps_interactive.pm_.c:468
 msgid "(bootp/dhcp)"
 msgstr "(bootp/dhcp)"
 
-#: ../install_steps_interactive.pm_.c:411 ../printerdrake.pm_.c:149
+#: ../../install_steps_interactive.pm_.c:474 ../../printerdrake.pm_.c:89
 msgid "IP address should be in format 1.2.3.4"
-msgstr "IP 位置的格式应该是 1.2.3.4"
+msgstr "IP 地址的格式应该是 1.2.3.4"
 
-#: ../install_steps_interactive.pm_.c:429
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:492
 msgid "Configuring network"
-msgstr "设定网路连线"
+msgstr "正在配置网络"
 
-#: ../install_steps_interactive.pm_.c:430
+#: ../../install_steps_interactive.pm_.c:493
 msgid ""
 "Please enter your host name.\n"
 "Your host name should be a fully-qualified host name,\n"
 "such as ``mybox.mylab.myco.com''.\n"
 "You may also enter the IP address of the gateway if you have one"
 msgstr ""
-"请输入您机器的名称\n"
-"你的机器名称必需是个合法的名称，例如 ``mybox.mylab.myco.com''\n"
-"如果你有通讯闸的话，也请输入其 IP 位置"
+"请输入您的主机名称\n"
+"你的主机名称必需是个完全限定的名称，例如 ``mybox.mylab.myco.com''\n"
+"如果你有网关的话，也请输入其 IP 地址"
 
-#: ../install_steps_interactive.pm_.c:434
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:497
 msgid "DNS server:"
-msgstr "名称伺服器"
+msgstr "DNS 服务器:"
 
-#: ../install_steps_interactive.pm_.c:434
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:497
 msgid "Gateway device:"
-msgstr "通讯闸装置"
+msgstr "网关设备:"
 
-#: ../install_steps_interactive.pm_.c:434
+#: ../../install_steps_interactive.pm_.c:497
 msgid "Gateway:"
-msgstr "通讯闸"
+msgstr "网关"
 
-#: ../install_steps_interactive.pm_.c:434
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:497
 msgid "Host name:"
-msgstr "机器名称:"
+msgstr "主机名字:"
 
-#: ../install_steps_interactive.pm_.c:447
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:510
 msgid "Try to find a modem?"
-msgstr "尝试寻找数据机"
+msgstr "尝试寻找调制解调器"
 
-#: ../install_steps_interactive.pm_.c:457
-msgid "Which serial port is your modem connected to?"
-msgstr "请问您的数据机是连接到那个序列埠 ?"
+#: ../../install_steps_interactive.pm_.c:521
+msgid "Please choose which serial port your modem is connected to."
+msgstr "请问您的调制解调器是连接到那个串行端口?"
 
-#: ../install_steps_interactive.pm_.c:462
+#: ../../install_steps_interactive.pm_.c:527
 msgid "Dialup options"
-msgstr "播接选项"
+msgstr "拨号接入选项"
 
-#: ../install_steps_interactive.pm_.c:463
+#: ../../install_steps_interactive.pm_.c:528
 msgid "Connection name"
 msgstr "连接名称"
 
-#: ../install_steps_interactive.pm_.c:464
+#: ../../install_steps_interactive.pm_.c:529
 msgid "Phone number"
 msgstr "电话号码"
 
-#: ../install_steps_interactive.pm_.c:465
+#: ../../install_steps_interactive.pm_.c:530
 msgid "Login ID"
 msgstr "登录帐号"
 
-#: ../install_steps_interactive.pm_.c:466
-#: ../install_steps_interactive.pm_.c:578
-#: ../install_steps_interactive.pm_.c:624
-#: ../install_steps_interactive.pm_.c:724 ../standalone/adduserdrake_.c:40
-msgid "Password"
-msgstr "密码"
-
-#: ../install_steps_interactive.pm_.c:467
+#: ../../install_steps_interactive.pm_.c:532
 msgid "Authentication"
 msgstr "授权"
 
-#: ../install_steps_interactive.pm_.c:467
+#: ../../install_steps_interactive.pm_.c:532
 msgid "CHAP"
 msgstr "CHAP"
 
-#: ../install_steps_interactive.pm_.c:467
+#: ../../install_steps_interactive.pm_.c:532
 msgid "PAP"
 msgstr "PAP"
 
-#: ../install_steps_interactive.pm_.c:467
+#: ../../install_steps_interactive.pm_.c:532
 msgid "Script-based"
-msgstr ""
+msgstr "基于脚本登录"
 
-#: ../install_steps_interactive.pm_.c:467
+#: ../../install_steps_interactive.pm_.c:532
 msgid "Terminal-based"
-msgstr ""
+msgstr "终端方式登录"
 
-#: ../install_steps_interactive.pm_.c:468
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:533
 msgid "Domain name"
 msgstr "网域名称"
 
-#: ../install_steps_interactive.pm_.c:469
+#: ../../install_steps_interactive.pm_.c:535
 msgid "First DNS Server"
-msgstr "第一个名称伺服器"
+msgstr "首选 DNS 服务器"
 
-#: ../install_steps_interactive.pm_.c:470
+#: ../../install_steps_interactive.pm_.c:536
 msgid "Second DNS Server"
-msgstr "第二个名称伺服器"
+msgstr "第二个 DNS 服务器"
 
-#: ../install_steps_interactive.pm_.c:483
-#, fuzzy
-msgid "Bringing up the network"
-msgstr "设定网路连线"
-
-#: ../install_steps_interactive.pm_.c:492
+#: ../../install_steps_interactive.pm_.c:549
 msgid ""
 "You have now the possibility to download software aimed for encryption.\n"
 "\n"
@@ -2073,7 +2869,7 @@ msgid ""
 "In addition customer and/or end user shall particularly be aware to not "
 "infringe\n"
 "the laws of his/their jurisdiction. Should customer and/or end user do not\n"
-"respect the provision of these applicable laws, he/they will incur serious\n"
+"respect the provision of these applicable laws, he/they will incure serious\n"
 "sanctions.\n"
 "\n"
 "In no event shall Mandrakesoft nor its manufacturers and/or suppliers be "
@@ -2094,471 +2890,389 @@ msgid ""
 "Altadena California 91001\n"
 "USA"
 msgstr ""
+"现在你要决定是否下载用于加密的软件包.\n"
+"\n"
+"警告!\n"
+"\n"
+"在不同的法律制度中, 适用于这些软件的一般要求和强制禁令有很大不同. \n"
+"客户和/或最终用户必须清楚的了解所在国家的法律是否允许自己下载, 保存, 和/或\n"
+"使用这些软件.\n"
+"\n"
+"另外, 客户和/或最终用户必须清楚, 不得违反所在国家的法律. "
+"违反有关适用法律禁令\n"
+"的后果, 可能是受到严厉的惩罚.\n"
+"\n"
+"客户和/或最终用户在同意签署下列协议之后, 不论何种情况, Mandrakesoft, 以及其\n"
+"制造商和经销商, 不承担任何责任, 即使客户和/或最终用户因下载, 拥有和/或使用\n"
+"这些软件而遭受任何特定的, 间接的或附带的损害 (包括, 但不限于利润的损失, "
+"生意\n"
+"的中断, 关键数据的丢失及其他财物损失, 和可能由法院判决产生的债务和赔偿).\n"
+"\n"
+"\n"
+"对于下列协议的任何疑问, 请联系\n"
+"Mandrakesoft, Inc.\n"
+"2400 N. Lincoln Avenue Suite 243\n"
+"Altadena California 91001\n"
+"USA"
 
-#: ../install_steps_interactive.pm_.c:523
+#: ../../install_steps_interactive.pm_.c:580
 msgid "Choose a mirror from which to get the packages"
-msgstr "选择一个 mirror 站台来取得程式"
+msgstr "选择一个镜象网站来取得程序"
 
-#: ../install_steps_interactive.pm_.c:528
+#: ../../install_steps_interactive.pm_.c:588
 msgid "Contacting the mirror to get the list of available packages"
-msgstr "连接 mirror 站台以取得可供安装程式的列表"
+msgstr "连接镜象网站以取得可供安装程序的列表"
 
-#: ../install_steps_interactive.pm_.c:532
-#, fuzzy
-msgid "Which packages do you want to install"
-msgstr "选取要安装的程式套件"
+#: ../../install_steps_interactive.pm_.c:592
+msgid "Please choose the packages you want to install."
+msgstr "请选择您要安装的软件包"
 
-#: ../install_steps_interactive.pm_.c:534
-msgid "Downloading cryptographic packages"
-msgstr ""
-
-#: ../install_steps_interactive.pm_.c:544
+#: ../../install_steps_interactive.pm_.c:606
 msgid "Which is your timezone?"
-msgstr "请问您的时区是 ?"
+msgstr "请问您的时区是?"
 
-#: ../install_steps_interactive.pm_.c:545
+#: ../../install_steps_interactive.pm_.c:607
 msgid "Is your hardware clock set to GMT?"
-msgstr ""
+msgstr "你的系统时钟是否设定为 GMT?"
 
-#: ../install_steps_interactive.pm_.c:555
-#, fuzzy
-msgid "Printer"
-msgstr "装置:"
-
-#: ../install_steps_interactive.pm_.c:556
-msgid "Would you like to configure a printer?"
-msgstr "您想要设定印表机吗 ?"
-
-#: ../install_steps_interactive.pm_.c:576
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:652
 msgid "No password"
-msgstr "设定 root 密码"
+msgstr "没有口令"
 
-#: ../install_steps_interactive.pm_.c:576
-#: ../install_steps_interactive.pm_.c:798 ../interactive.pm_.c:74
-#: ../interactive.pm_.c:84 ../interactive.pm_.c:164
-#: ../interactive_newt.pm_.c:50 ../interactive_newt.pm_.c:97
-#: ../interactive_stdio.pm_.c:27 ../my_gtk.pm_.c:192 ../my_gtk.pm_.c:425
-#: ../my_gtk.pm_.c:525
-msgid "Ok"
-msgstr "确定"
-
-#: ../install_steps_interactive.pm_.c:579
-#: ../install_steps_interactive.pm_.c:625
-#: ../install_steps_interactive.pm_.c:725 ../standalone/adduserdrake_.c:41
-msgid "Password (again)"
-msgstr "密码"
-
-#: ../install_steps_interactive.pm_.c:581
+#: ../../install_steps_interactive.pm_.c:657
 msgid "Use shadow file"
-msgstr ""
+msgstr "使用 shadow 文件"
 
-#: ../install_steps_interactive.pm_.c:581
+#: ../../install_steps_interactive.pm_.c:657
 msgid "shadow"
-msgstr ""
+msgstr "shadow"
 
-#: ../install_steps_interactive.pm_.c:582
+#: ../../install_steps_interactive.pm_.c:658
 msgid "MD5"
-msgstr ""
+msgstr "MD5"
 
-#: ../install_steps_interactive.pm_.c:582
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:658
 msgid "Use MD5 passwords"
-msgstr "设定 root 密码"
+msgstr "使用 MD5 口令"
 
-#: ../install_steps_interactive.pm_.c:584
+#: ../../install_steps_interactive.pm_.c:660
 msgid "Use NIS"
-msgstr ""
+msgstr "使用 NIS"
 
-#: ../install_steps_interactive.pm_.c:584
+#: ../../install_steps_interactive.pm_.c:660
 msgid "yellow pages"
-msgstr ""
+msgstr "黄页服务"
 
-#: ../install_steps_interactive.pm_.c:588
-#: ../install_steps_interactive.pm_.c:636
-#: ../install_steps_interactive.pm_.c:736 ../standalone/adduserdrake_.c:52
-#, fuzzy
-msgid "Please try again"
-msgstr "再次测试设定值"
-
-#: ../install_steps_interactive.pm_.c:588
-#: ../install_steps_interactive.pm_.c:636
-#: ../install_steps_interactive.pm_.c:736 ../standalone/adduserdrake_.c:52
-msgid "The passwords do not match"
-msgstr "密码不同"
-
-#: ../install_steps_interactive.pm_.c:590
+#: ../../install_steps_interactive.pm_.c:666
 #, c-format
 msgid "This password is too simple (must be at least %d characters long)"
-msgstr ""
+msgstr "这个口令太简单了 (至少要有 %d 个字符)"
 
-#: ../install_steps_interactive.pm_.c:597
+#: ../../install_steps_interactive.pm_.c:673
 msgid "Authentification NIS"
 msgstr "授权的 NIS"
 
-#: ../install_steps_interactive.pm_.c:598
+#: ../../install_steps_interactive.pm_.c:674
 msgid "NIS Domain"
 msgstr "NIS 网域"
 
-#: ../install_steps_interactive.pm_.c:598
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:674
 msgid "NIS Server"
-msgstr "NIS 伺服器"
+msgstr "NIS 服务器"
 
-#: ../install_steps_interactive.pm_.c:618 ../standalone/adduserdrake_.c:34
+#: ../../install_steps_interactive.pm_.c:699
+#: ../../standalone/adduserdrake_.c:36
 msgid "Accept user"
-msgstr "接受使用者"
+msgstr "接受用户"
 
-#: ../install_steps_interactive.pm_.c:618 ../standalone/adduserdrake_.c:34
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:699
+#: ../../standalone/adduserdrake_.c:36
 msgid "Add user"
-msgstr "增加一个一般使用者"
+msgstr "增加用户"
 
-#: ../install_steps_interactive.pm_.c:619 ../standalone/adduserdrake_.c:35
+#: ../../install_steps_interactive.pm_.c:700
+#: ../../standalone/adduserdrake_.c:37
 #, c-format
 msgid "(already added %s)"
 msgstr "(已经增加了 %s)"
 
-#: ../install_steps_interactive.pm_.c:619 ../standalone/adduserdrake_.c:35
+#: ../../install_steps_interactive.pm_.c:700
+#: ../../standalone/adduserdrake_.c:37
 #, c-format
 msgid ""
 "Enter a user\n"
 "%s"
 msgstr ""
-"请输入一个使用者\n"
+"请输入一个用户\n"
 "%s"
 
-#: ../install_steps_interactive.pm_.c:621 ../standalone/adduserdrake_.c:37
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:702
+#: ../../standalone/adduserdrake_.c:39
 msgid "Real name"
-msgstr "更新"
+msgstr "真实姓名"
 
-#: ../install_steps_interactive.pm_.c:622 ../standalone/adduserdrake_.c:38
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:703 ../../printerdrake.pm_.c:84
+#: ../../printerdrake.pm_.c:109 ../../standalone/adduserdrake_.c:40
 msgid "User name"
-msgstr "更新"
+msgstr "用户名"
 
-#: ../install_steps_interactive.pm_.c:627 ../standalone/adduserdrake_.c:43
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:708
+#: ../../standalone/adduserdrake_.c:45
 msgid "Shell"
-msgstr "显示全部"
+msgstr "Shell"
 
-#: ../install_steps_interactive.pm_.c:637 ../standalone/adduserdrake_.c:53
+#: ../../install_steps_interactive.pm_.c:710
+#: ../../standalone/adduserdrake_.c:47
+msgid "Icon"
+msgstr "图标"
+
+#: ../../install_steps_interactive.pm_.c:720
+#: ../../standalone/adduserdrake_.c:57
 msgid "This password is too simple"
-msgstr "密码太简单"
+msgstr "口令太简单"
 
-#: ../install_steps_interactive.pm_.c:638 ../standalone/adduserdrake_.c:54
+#: ../../install_steps_interactive.pm_.c:721
+#: ../../standalone/adduserdrake_.c:58
 msgid "Please give a user name"
-msgstr "请输入使用使用者名称"
+msgstr "请给出有关用户名"
 
-#: ../install_steps_interactive.pm_.c:639 ../standalone/adduserdrake_.c:55
+#: ../../install_steps_interactive.pm_.c:722
+#: ../../standalone/adduserdrake_.c:59
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr "使用者名称只能有小写字母、数字，`-' 和 `_'"
+msgstr "用户名称只能有小写字母、数字，`-' 和 `_'"
 
-#: ../install_steps_interactive.pm_.c:640 ../standalone/adduserdrake_.c:56
+#: ../../install_steps_interactive.pm_.c:723
+#: ../../standalone/adduserdrake_.c:60
 msgid "This user name is already added"
-msgstr "这个使用者名称已经有了"
+msgstr "这个用户名称已经有了"
 
-#: ../install_steps_interactive.pm_.c:659
-#, fuzzy
-msgid "First drive"
-msgstr "第一个名称伺服器"
+#: ../../install_steps_interactive.pm_.c:747
+msgid "First floppy drive"
+msgstr "第一个软盘驱动器"
 
-#: ../install_steps_interactive.pm_.c:660
-#, fuzzy
-msgid "Second drive"
-msgstr "第二个名称伺服器"
+#: ../../install_steps_interactive.pm_.c:748
+msgid "Second floppy drive"
+msgstr "第二个软盘驱动器"
 
-#: ../install_steps_interactive.pm_.c:661
+#: ../../install_steps_interactive.pm_.c:749
 msgid "Skip"
 msgstr "略过"
 
-#: ../install_steps_interactive.pm_.c:666
+#: ../../install_steps_interactive.pm_.c:755
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
 "install\n"
-"LILO on your system, or another operating system removes LILO, or LILO "
-"doesn't\n"
+"LILO (or grub) on your system, or another operating system removes LILO, or "
+"LILO doesn't\n"
 "work with your hardware configuration. A custom bootdisk can also be used "
 "with\n"
 "the Mandrake rescue image, making it much easier to recover from severe "
 "system\n"
 "failures. Would you like to create a bootdisk for your system?"
 msgstr ""
+"定制的开机软盘让你能不依赖常规的开机引导程序而直接启动你的 Linux 系统.\n"
+"如果你不想安装 LILO (或 grub), 或者其他操作系统把 LILO 删除了, 或者\n"
+" LILO 在你的硬件上不能工作, 那么这就很有用处了. \n"
+"开机软盘还可以和 Mandrake 修复盘配合使用, 帮助你更轻松的恢复严重故障的系统.\n"
+"现在就给你的系统做一张开机软盘, 好吗?"
 
-#: ../install_steps_interactive.pm_.c:675
+#: ../../install_steps_interactive.pm_.c:764
 msgid "Sorry, no floppy drive available"
-msgstr "抱歉，您没有软碟机"
+msgstr "抱歉，没有可用的软盘机"
 
-#: ../install_steps_interactive.pm_.c:678
+#: ../../install_steps_interactive.pm_.c:767
 msgid "Choose the floppy drive you want to use to make the bootdisk"
-msgstr "选择您要制作开机磁片的软碟机"
+msgstr "选择您要制作开机软盘的软盘机"
 
-#: ../install_steps_interactive.pm_.c:683
+#: ../../install_steps_interactive.pm_.c:772
 #, c-format
 msgid "Insert a floppy in drive %s"
-msgstr "请插入一张磁片"
+msgstr "请插入一张软盘到驱动器 %s"
 
-#: ../install_steps_interactive.pm_.c:684
-#: ../install_steps_interactive.pm_.c:1042
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:773
 msgid "Creating bootdisk"
-msgstr "制作一张开机磁片"
+msgstr "正在制作开机软盘"
 
-#: ../install_steps_interactive.pm_.c:691
-#, fuzzy
-msgid "Preparing bootloader"
-msgstr "安装开机启动程式"
-
-#: ../install_steps_interactive.pm_.c:703
-msgid "First sector of boot partition"
-msgstr "开机分割区的第一轨"
-
-#: ../install_steps_interactive.pm_.c:703
-msgid "First sector of drive (MBR)"
-msgstr "磁碟机的第一轨 (MBR)"
-
-#: ../install_steps_interactive.pm_.c:708
-msgid "LILO Installation"
-msgstr "LILO 安装"
-
-#: ../install_steps_interactive.pm_.c:709
-#, fuzzy
-msgid "Where do you want to install the bootloader?"
-msgstr "您想要测试您的设定值吗 ?"
-
-#: ../install_steps_interactive.pm_.c:715
-#, fuzzy
-msgid "Do you want to use LILO?"
-msgstr "您打算怎么作 ?"
-
-#: ../install_steps_interactive.pm_.c:718
-#, fuzzy
-msgid "Boot device"
-msgstr "缺少输入装置"
-
-#: ../install_steps_interactive.pm_.c:719
-msgid "Linear (needed for some SCSI drives)"
-msgstr " 线性 (需要一些 SCSI 装置)"
-
-#: ../install_steps_interactive.pm_.c:719
-#, fuzzy
-msgid "linear"
-msgstr "线性"
-
-#: ../install_steps_interactive.pm_.c:720
-#, fuzzy
-msgid "Compact"
-msgstr "格式化"
-
-#: ../install_steps_interactive.pm_.c:720
-#, fuzzy
-msgid "compact"
-msgstr "格式化"
-
-#: ../install_steps_interactive.pm_.c:721
-msgid "Delay before booting default image"
-msgstr "开机等候时间"
-
-#: ../install_steps_interactive.pm_.c:722
-msgid "Video mode"
-msgstr "萤幕模式"
-
-#: ../install_steps_interactive.pm_.c:726
-msgid "Restrict command line options"
-msgstr "限定参数选项"
-
-#: ../install_steps_interactive.pm_.c:726
-msgid "restrict"
-msgstr "限定"
-
-#: ../install_steps_interactive.pm_.c:732
-msgid "LILO main options"
-msgstr "LILO 主选项"
-
-#: ../install_steps_interactive.pm_.c:735
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
-msgstr "没有密码不能使用 ``限定参数选项''"
-
-#: ../install_steps_interactive.pm_.c:746
-msgid ""
-"Here are the following entries in LILO.\n"
-"You can add some more or change the existing ones."
-msgstr "您可以增加或是更改已存在的选项"
-
-#: ../install_steps_interactive.pm_.c:748 ../standalone/rpmdrake_.c:302
-msgid "Add"
-msgstr "增加"
-
-#: ../install_steps_interactive.pm_.c:757
-msgid "Linux"
-msgstr "Linux"
-
-#: ../install_steps_interactive.pm_.c:757
-msgid "Other OS (windows...)"
-msgstr "其他作业系统 (windows...)"
-
-#: ../install_steps_interactive.pm_.c:757
-#, fuzzy
-msgid "Which type of entry do you want to add"
-msgstr "您打算怎么作 ?"
-
-#: ../install_steps_interactive.pm_.c:777
-msgid "Image"
-msgstr ""
-
-#: ../install_steps_interactive.pm_.c:778
-#: ../install_steps_interactive.pm_.c:786
-msgid "Root"
-msgstr ""
-
-#: ../install_steps_interactive.pm_.c:779
-msgid "Append"
-msgstr ""
-
-#: ../install_steps_interactive.pm_.c:780
-msgid "Initrd"
-msgstr ""
-
-#: ../install_steps_interactive.pm_.c:781
-msgid "Read-write"
-msgstr ""
-
-#: ../install_steps_interactive.pm_.c:787
-#, fuzzy
-msgid "Table"
-msgstr "可缩放"
-
-#: ../install_steps_interactive.pm_.c:788
-msgid "Unsafe"
-msgstr ""
-
-#: ../install_steps_interactive.pm_.c:793
-msgid "Label"
-msgstr "名称"
-
-#: ../install_steps_interactive.pm_.c:795
-#, fuzzy
-msgid "Default"
-msgstr "删除"
-
-#: ../install_steps_interactive.pm_.c:798
-msgid "Remove entry"
-msgstr "移除选项"
-
-#: ../install_steps_interactive.pm_.c:801
-msgid "Empty label not allowed"
-msgstr "不能有空的名称"
-
-#: ../install_steps_interactive.pm_.c:802
-msgid "This label is already in use"
-msgstr "这个名称已经有使用了"
-
-#: ../install_steps_interactive.pm_.c:803
-#, c-format
-msgid "A entry %s already exists"
-msgstr "这个项目 %s 已经存在了"
-
-#: ../install_steps_interactive.pm_.c:817
+#: ../../install_steps_interactive.pm_.c:785 ../../standalone/drakboot_.c:55
 msgid "Installation of LILO failed. The following error occured:"
 msgstr "安装 LILO 失败，出现下列错误:"
 
-#: ../install_steps_interactive.pm_.c:831
+#: ../../install_steps_interactive.pm_.c:806
+msgid "Do you want to use SILO?"
+msgstr "您要使用 SILO 吗?"
+
+#: ../../install_steps_interactive.pm_.c:817
+msgid "SILO main options"
+msgstr "SILO 主选项"
+
+#: ../../install_steps_interactive.pm_.c:830
+msgid ""
+"Here are the following entries in SILO.\n"
+"You can add some more or change the existing ones."
+msgstr ""
+"SILO 现在有下列条目.\n"
+"您可以增加或是更改已存在的条目."
+
+#: ../../install_steps_interactive.pm_.c:858
+msgid "Partition"
+msgstr "分区"
+
+#: ../../install_steps_interactive.pm_.c:878
+msgid "This label is already in use"
+msgstr "这个标签已经使用了"
+
+#: ../../install_steps_interactive.pm_.c:891
+msgid "Installation of SILO failed. The following error occured:"
+msgstr "安装 SILO 失败，出现下列错误:"
+
+#: ../../install_steps_interactive.pm_.c:901
+msgid "Preparing bootloader"
+msgstr "准备开机引导程序"
+
+#: ../../install_steps_interactive.pm_.c:909
+msgid "Do you want to use aboot?"
+msgstr "您要使用 aboot 吗?"
+
+#: ../../install_steps_interactive.pm_.c:912
+msgid ""
+"Error installing aboot, \n"
+"try to force installation even if that destroys the first partition?"
+msgstr ""
+"安装 aboot 时出错, \n"
+"强迫安装会毁坏第一个分区, 要继续吗?"
+
+#: ../../install_steps_interactive.pm_.c:929
 msgid "Proxies configuration"
-msgstr "代理伺服器设定"
+msgstr "代理服务器设定"
 
-#: ../install_steps_interactive.pm_.c:832
+#: ../../install_steps_interactive.pm_.c:930
 msgid "HTTP proxy"
-msgstr "HTTP 代理伺服器"
+msgstr "HTTP 代理服务器"
 
-#: ../install_steps_interactive.pm_.c:833
+#: ../../install_steps_interactive.pm_.c:931
 msgid "FTP proxy"
-msgstr "FTP 代理伺服器"
+msgstr "FTP 代理服务器"
 
-#: ../install_steps_interactive.pm_.c:839
+#: ../../install_steps_interactive.pm_.c:937
 msgid "Proxy should be http://..."
-msgstr "代理伺服器应该是象 http://..."
+msgstr "代理服务器应该是象 http://..."
 
-#: ../install_steps_interactive.pm_.c:840
+#: ../../install_steps_interactive.pm_.c:938
 msgid "Proxy should be ftp://..."
-msgstr "代理伺服器应该是象 ftp://..."
+msgstr "代理服务器应该是象 ftp://..."
 
-#: ../install_steps_interactive.pm_.c:850 ../standalone/draksec_.c:20
+#: ../../install_steps_interactive.pm_.c:948 ../../standalone/draksec_.c:20
 msgid "Welcome To Crackers"
 msgstr "欢迎来到 Crackers"
 
-#: ../install_steps_interactive.pm_.c:851 ../standalone/draksec_.c:21
+#: ../../install_steps_interactive.pm_.c:949 ../../standalone/draksec_.c:21
 msgid "Poor"
 msgstr "差"
 
-#: ../install_steps_interactive.pm_.c:852 ../standalone/draksec_.c:22
+#: ../../install_steps_interactive.pm_.c:950 ../../standalone/draksec_.c:22
 msgid "Low"
 msgstr "低"
 
-#: ../install_steps_interactive.pm_.c:853 ../standalone/draksec_.c:23
+#: ../../install_steps_interactive.pm_.c:951 ../../standalone/draksec_.c:23
 msgid "Medium"
 msgstr "中"
 
-#: ../install_steps_interactive.pm_.c:854 ../standalone/draksec_.c:24
+#: ../../install_steps_interactive.pm_.c:952 ../../standalone/draksec_.c:24
 msgid "High"
 msgstr "高"
 
-#: ../install_steps_interactive.pm_.c:855 ../standalone/draksec_.c:25
+#: ../../install_steps_interactive.pm_.c:953 ../../standalone/draksec_.c:25
 msgid "Paranoid"
-msgstr "偏执"
+msgstr "过分"
 
-#: ../install_steps_interactive.pm_.c:868
+#: ../../install_steps_interactive.pm_.c:966
 msgid "Miscellaneous questions"
-msgstr "其他问题"
+msgstr "琐碎问题"
 
-#: ../install_steps_interactive.pm_.c:869
+#: ../../install_steps_interactive.pm_.c:967
 msgid "(may cause data corruption)"
-msgstr "(可能会导致资料损毁)"
+msgstr "(可能会导致数据损毁)"
 
-#: ../install_steps_interactive.pm_.c:869
+#: ../../install_steps_interactive.pm_.c:967
 msgid "Use hard drive optimisations?"
-msgstr "使用硬碟最佳化"
+msgstr "使用硬盘优化"
 
-#: ../install_steps_interactive.pm_.c:870 ../standalone/draksec_.c:46
+#: ../../install_steps_interactive.pm_.c:968 ../../standalone/draksec_.c:46
 msgid "Choose security level"
-msgstr "选择安全层级"
+msgstr "选择安全级别"
 
-#: ../install_steps_interactive.pm_.c:871
+#: ../../install_steps_interactive.pm_.c:969
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
-msgstr "精确的记忆体大小(如果需要的话) (找到 %dMB)"
+msgstr "精确的存储器大小 (找到 %dMB)"
 
-#: ../install_steps_interactive.pm_.c:872
+#: ../../install_steps_interactive.pm_.c:970
 msgid "Removable media automounting"
-msgstr "移除媒体自动安插"
+msgstr "自动挂载可移动介质"
 
-#: ../install_steps_interactive.pm_.c:874
+#: ../../install_steps_interactive.pm_.c:972
+msgid "Clean /tmp at each boot"
+msgstr "每次开机时清除 /tmp"
+
+#: ../../install_steps_interactive.pm_.c:975
+msgid "Enable multi profiles"
+msgstr "运行多种配置"
+
+#: ../../install_steps_interactive.pm_.c:977
 msgid "Enable num lock at startup"
-msgstr "开机时打亭 num lock"
+msgstr "开机时自动按下数字键盘锁"
 
-#: ../install_steps_interactive.pm_.c:877
-msgid "Give the ram size in Mb"
-msgstr "用 Mb 指定记忆体大小"
+#: ../../install_steps_interactive.pm_.c:980
+msgid "Give the ram size in MB"
+msgstr "告诉我有多少 Mb 的内存"
 
-#: ../install_steps_interactive.pm_.c:905
-#: ../install_steps_interactive.pm_.c:1075
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:982
+msgid "Can't use supermount in high security level"
+msgstr "在高度安全级别中不可以使用超级挂载 supermount "
+
+#: ../../install_steps_interactive.pm_.c:1002
+msgid ""
+"DrakX will generate config files for both XFree 3.3 and XFree 4.0.\n"
+"By default, the 3.3 server is used because it works on more graphic cards.\n"
+"\n"
+"Do you want to try XFree 4.0?"
+msgstr ""
+"DrakX 通常将为 XFree 3.3 和 XFree 4.0 配置文件.\n"
+"缺省使用的服务器是 3.3, 因为它支持的显示卡更多. \n"
+"\n"
+"你要尝试 XFree 4.0 吗?"
+
+#: ../../install_steps_interactive.pm_.c:1015
+#: ../../install_steps_interactive.pm_.c:1167
 msgid "Try to find PCI devices?"
-msgstr "尝试寻找 PCI 装置 ?"
+msgstr "尝试寻找 PCI 设备 ?"
 
-#: ../install_steps_interactive.pm_.c:920
+#: ../../install_steps_interactive.pm_.c:1034
+msgid "Do you want to generate an auto install floppy for linux replication?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:1036
+#, c-format
+msgid "Insert a blank floppy in drive %s"
+msgstr "请在驱动器 %s 中插入一张空白软盘"
+
+#: ../../install_steps_interactive.pm_.c:1044
+msgid "Creating auto install floppy"
+msgstr "正在创建自动安装软盘"
+
+#: ../../install_steps_interactive.pm_.c:1068
 msgid ""
 "Some steps are not completed.\n"
 "\n"
 "Do you really want to quit now?"
 msgstr ""
-"有些步骤并不完全\n"
-"您想要现在就离开吗 ?"
+"有些步骤尚未完成.\n"
+"\n"
+"您真要现在就退出吗 ?"
 
-#: ../install_steps_interactive.pm_.c:927
+#: ../../install_steps_interactive.pm_.c:1075
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -2571,30 +3285,33 @@ msgid ""
 "install chapter of the Official Linux-Mandrake User's Guide."
 msgstr ""
 "恭喜 ! 安装完成!\n"
-"请移除开机的光碟或磁片，并按下 return 以重新开机。\n"
-"您可以到 http://www.linux-mandrake.com/ 找到更多讯息\n"
-"如何设定请参考 Official Linux-Mandrake 使用者手册的 post install 这一章"
+"请取出开机的光碟或软盘，并按下 return 以重新开机。\n"
+"有关这一版本的 Linux-Mandrake 的更新消息, \n"
+"您可以到 http://www.linux-mandrake.com/ 查找 'Errata'\n"
+"\n"
+"正式版 Linux-Mandrake 用户手册的 post install 这一章有关于系统配置的\n"
+" 更详细说明."
 
-#: ../install_steps_interactive.pm_.c:936
+#: ../../install_steps_interactive.pm_.c:1084
 msgid "Shutting down"
-msgstr "关机"
+msgstr "正在关机"
 
-#: ../install_steps_interactive.pm_.c:950
+#: ../../install_steps_interactive.pm_.c:1096
 #, c-format
 msgid "Installing driver for %s card %s"
-msgstr "安装 %s 卡的驱动程式"
+msgstr "正在安装 %s 卡 %s 的驱动程序"
 
-#: ../install_steps_interactive.pm_.c:951
+#: ../../install_steps_interactive.pm_.c:1097
 #, c-format
 msgid "(module %s)"
-msgstr "(模组 %s)"
+msgstr "(模块 %s)"
 
-#: ../install_steps_interactive.pm_.c:961
+#: ../../install_steps_interactive.pm_.c:1107
 #, c-format
 msgid "Which %s driver should I try?"
-msgstr "请问要尝试那个驱动程式 ?"
+msgstr "我该试用那个 %s 驱动程序 ?"
 
-#: ../install_steps_interactive.pm_.c:969
+#: ../../install_steps_interactive.pm_.c:1115
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
@@ -2605,340 +3322,349 @@ msgid ""
 "should\n"
 "not cause any damage."
 msgstr ""
+"有时候需要给 %s 驱动程序指定额外的信息才能正常运行, 尽管通常不需要.\n"
+"你可以在这里指定一些额外的选项, 也可以让驱动程序探测你的机器, 自动\n"
+"确定需要的信息. 偶尔会发生机器在探测中停止反应, 不过这不会损坏什么. \n"
+"你决定怎样?"
 
-#: ../install_steps_interactive.pm_.c:974
+#: ../../install_steps_interactive.pm_.c:1120
 msgid "Autoprobe"
-msgstr "自动侦测"
+msgstr "自动探测"
 
-#: ../install_steps_interactive.pm_.c:974
+#: ../../install_steps_interactive.pm_.c:1120
 msgid "Specify options"
 msgstr "指定参数"
 
-#: ../install_steps_interactive.pm_.c:978
+#: ../../install_steps_interactive.pm_.c:1124
 #, c-format
 msgid "You may now provide its options to module %s."
-msgstr "您可以提供此模组的参数"
+msgstr "请指定模块 %s 的参数"
 
-#: ../install_steps_interactive.pm_.c:984
+#: ../../install_steps_interactive.pm_.c:1130
 #, c-format
 msgid ""
 "You may now provide its options to module %s.\n"
 "Options are in format ``name=value name2=value2 ...''.\n"
 "For instance, ``io=0x300 irq=7''"
 msgstr ""
-"你可以提供此模组的参数。格式是 ``name=value name2=value2...'' \n"
+"现在给模块 %s 指定它的选项. \n"
+"选项的格式是 ``name=value name2=value2...'' \n"
 "例如， ``io=0x300 irq=7''"
 
-#: ../install_steps_interactive.pm_.c:987
+#: ../../install_steps_interactive.pm_.c:1133
 msgid "Module options:"
-msgstr "模组参数"
+msgstr "模块参数"
 
-#: ../install_steps_interactive.pm_.c:997
+#: ../../install_steps_interactive.pm_.c:1143
 #, c-format
 msgid ""
 "Loading module %s failed.\n"
 "Do you want to try again with other parameters?"
-msgstr "您要尝试其他的参数吗 ?"
+msgstr ""
+"模块 %s 加载失败.\n"
+"您要尝试其他的参数吗 ?"
 
-#: ../install_steps_interactive.pm_.c:1010
+#: ../../install_steps_interactive.pm_.c:1156
 msgid "Try to find PCMCIA cards?"
-msgstr "尝式寻找 PCMCIA 配接卡"
+msgstr "尝试寻找 PCMCIA 卡"
 
-#: ../install_steps_interactive.pm_.c:1011
+#: ../../install_steps_interactive.pm_.c:1157
 msgid "Configuring PCMCIA cards..."
-msgstr "设定PCMCIA 配接卡"
+msgstr "配置 PCMCIA 卡"
 
-#: ../install_steps_interactive.pm_.c:1011
+#: ../../install_steps_interactive.pm_.c:1157
 msgid "PCMCIA"
 msgstr "PCMCIA"
 
-#: ../install_steps_interactive.pm_.c:1018
-msgid ""
-"Linux does not yet fully support ultra dma 66 HPT.\n"
-"As a work-around i can make a custom floppy giving access the hard drive on "
-"ide2 and ide3"
-msgstr ""
-
-#: ../install_steps_interactive.pm_.c:1039
-#, fuzzy
-msgid ""
-"Enter a floppy to create an HTP enabled boot\n"
-"(all data on floppy will be lost)"
-msgstr ""
-"请插入一张磁片\n"
-"所有在这个分割区上的资料都会被清除"
-
-#: ../install_steps_interactive.pm_.c:1056
-msgid "It is necessary to restart installation booting on the floppy"
-msgstr ""
-
-#: ../install_steps_interactive.pm_.c:1057
-msgid "It is necessary to restart installation with the new parameters"
-msgstr ""
-
-#: ../install_steps_interactive.pm_.c:1061
-#, c-format
-msgid ""
-"Failed to create an HTP boot floppy.\n"
-"You may have to restart installation and give ``%s'' at the prompt"
-msgstr ""
-
-#: ../install_steps_interactive.pm_.c:1081
+#: ../../install_steps_interactive.pm_.c:1176
 #, c-format
 msgid "Found %s %s interfaces"
-msgstr "找到 %s %s 介面"
+msgstr "找到 %s %s 接口"
 
-#: ../install_steps_interactive.pm_.c:1082
+#: ../../install_steps_interactive.pm_.c:1177
 msgid "Do you have another one?"
-msgstr "您有其他的配接卡吗 ?"
+msgstr "您有其他的吗 ?"
 
-#: ../install_steps_interactive.pm_.c:1083
+#: ../../install_steps_interactive.pm_.c:1178
 #, c-format
-msgid "Do you have any %s interface?"
-msgstr "您还有其他 % 介面吗 ?"
+msgid "Do you have any %s interfaces?"
+msgstr "您还有其他 %s 接口吗 ?"
 
-#: ../install_steps_interactive.pm_.c:1085 ../interactive.pm_.c:79
-#: ../my_gtk.pm_.c:424 ../printerdrake.pm_.c:176
+#: ../../install_steps_interactive.pm_.c:1180 ../../interactive.pm_.c:79
+#: ../../my_gtk.pm_.c:458 ../../printerdrake.pm_.c:124
 msgid "No"
-msgstr "没有"
+msgstr "否"
 
-#: ../install_steps_interactive.pm_.c:1085 ../interactive.pm_.c:79
-#: ../my_gtk.pm_.c:424
+#: ../../install_steps_interactive.pm_.c:1180 ../../interactive.pm_.c:79
+#: ../../my_gtk.pm_.c:458
 msgid "Yes"
-msgstr "有"
+msgstr "是"
 
-#: ../install_steps_interactive.pm_.c:1086
+#: ../../install_steps_interactive.pm_.c:1181
 msgid "See hardware info"
-msgstr "参考硬体资讯"
+msgstr "请看硬体信息"
 
-#: ../install_steps_newt.pm_.c:19
+#: ../../install_steps_interactive.pm_.c:1197
+msgid "Bringing up the network"
+msgstr "网络正在启动"
+
+#: ../../install_steps_interactive.pm_.c:1202
+msgid "Bringing down the network"
+msgstr "正在停住网络功能"
+
+#: ../../install_steps_newt.pm_.c:21
 #, c-format
 msgid "Linux-Mandrake Installation %s"
-msgstr "Linux-Mandrake 安装"
+msgstr "Linux-Mandrake 安装 %s"
 
-#: ../install_steps_newt.pm_.c:30
+#: ../../install_steps_newt.pm_.c:32
 msgid ""
 "  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
-msgstr "   <Tab>/<Alt-Tab> 选项与选项间  |  <Space> 选择  |  <F12> 下个画面  "
+msgstr "  <Tab>/<Alt-Tab> 在项目间移动  |  <Space> 选择  |  <F12> 下个画面  "
 
-#: ../interactive.pm_.c:84 ../interactive.pm_.c:163
-#: ../interactive_newt.pm_.c:50 ../interactive_newt.pm_.c:97
-#: ../interactive_stdio.pm_.c:27 ../my_gtk.pm_.c:193 ../my_gtk.pm_.c:425
-msgid "Cancel"
-msgstr "取消"
+#: ../../install_steps_newt.pm_.c:43
+#, c-format
+msgid ""
+"You can now partition your %s hard drive\n"
+"When you are done, don't forget to save using `w'"
+msgstr ""
+"您现在可以在您的 %s 硬盘上做分区\n"
+"做完之后, 不要忘记用 `w' 保存您的修改"
 
-#: ../interactive.pm_.c:181
+#: ../../interactive.pm_.c:244
 msgid "Please wait"
 msgstr "请稍候"
 
-#: ../interactive_stdio.pm_.c:35
+#: ../../interactive_stdio.pm_.c:35
 #, c-format
 msgid "Ambiguity (%s), be more precise\n"
-msgstr "含糊不清 (%s) ，请更精确\n"
+msgstr "我不明白您的意思 (%s) ，请更明确的指定\n"
 
-#: ../interactive_stdio.pm_.c:36 ../interactive_stdio.pm_.c:51
-#: ../interactive_stdio.pm_.c:70
+#: ../../interactive_stdio.pm_.c:36 ../../interactive_stdio.pm_.c:51
+#: ../../interactive_stdio.pm_.c:70
 msgid "Bad choice, try again\n"
-msgstr "确误的选择，请重试\n"
+msgstr "错误的选择，请重试\n"
 
-#: ../interactive_stdio.pm_.c:39
+#: ../../interactive_stdio.pm_.c:39
 #, c-format
 msgid " ? (default %s) "
-msgstr "? (内定 %s) "
+msgstr "? (缺省 %s) "
 
-#: ../interactive_stdio.pm_.c:52
+#: ../../interactive_stdio.pm_.c:52
 #, c-format
 msgid "Your choice? (default %s) "
-msgstr "您的选择 ? (内定 %s) "
+msgstr "您的选择 ? (缺省 %s) "
 
-#: ../interactive_stdio.pm_.c:71
+#: ../../interactive_stdio.pm_.c:71
 #, c-format
 msgid "Your choice? (default %s  enter `none' for none) "
-msgstr "你的选择 ? (内定 %s  输入 `none' 如果没有的话) "
+msgstr "你的选择 ? (缺省 %s  如果没有 输入 `none') "
 
-#: ../keyboard.pm_.c:88
-#, fuzzy
-msgid "Armenian"
-msgstr "罗马体"
-
-#: ../keyboard.pm_.c:89
-msgid "Belgian"
-msgstr ""
-
-#: ../keyboard.pm_.c:90
-msgid "Bulgarian"
-msgstr ""
-
-#: ../keyboard.pm_.c:91
-msgid "Brazilian"
-msgstr ""
-
-#: ../keyboard.pm_.c:92
-msgid "Swiss (French layout)"
-msgstr ""
-
-#: ../keyboard.pm_.c:93
-msgid "Swiss (German layout)"
-msgstr ""
-
-#: ../keyboard.pm_.c:94
+#: ../../keyboard.pm_.c:89 ../../keyboard.pm_.c:116
 msgid "Czech"
-msgstr ""
+msgstr "Czech"
 
-#: ../keyboard.pm_.c:95
-#, fuzzy
+#: ../../keyboard.pm_.c:90 ../../keyboard.pm_.c:103 ../../keyboard.pm_.c:117
 msgid "German"
-msgstr "罗马体"
+msgstr "German"
 
-#: ../keyboard.pm_.c:96
-msgid "Danish"
-msgstr ""
-
-#: ../keyboard.pm_.c:97
+#: ../../keyboard.pm_.c:91 ../../keyboard.pm_.c:120
 msgid "Dvorak"
-msgstr ""
+msgstr "Dvorak"
 
-#: ../keyboard.pm_.c:98
-msgid "Estonian"
-msgstr ""
-
-#: ../keyboard.pm_.c:99
+#: ../../keyboard.pm_.c:92 ../../keyboard.pm_.c:122
 msgid "Spanish"
-msgstr ""
+msgstr "Spanish"
 
-#: ../keyboard.pm_.c:100
+#: ../../keyboard.pm_.c:93 ../../keyboard.pm_.c:123
 msgid "Finnish"
-msgstr ""
+msgstr "Finnish"
 
-#: ../keyboard.pm_.c:101
+#: ../../keyboard.pm_.c:94 ../../keyboard.pm_.c:104 ../../keyboard.pm_.c:124
 msgid "French"
-msgstr ""
+msgstr "French"
 
-#: ../keyboard.pm_.c:102
-msgid "Georgian (\"Russian\" layout)"
-msgstr ""
-
-#: ../keyboard.pm_.c:103
-msgid "Georgian (\"Latin\" layout)"
-msgstr ""
-
-#: ../keyboard.pm_.c:104
-#, fuzzy
-msgid "Greek"
-msgstr "绿:"
-
-#: ../keyboard.pm_.c:105
-msgid "Hungarian"
-msgstr ""
-
-#: ../keyboard.pm_.c:106
-msgid "Israeli"
-msgstr ""
-
-#: ../keyboard.pm_.c:107
-msgid "Israeli (Phonetic)"
-msgstr ""
-
-#: ../keyboard.pm_.c:108
-msgid "Icelandic"
-msgstr ""
-
-#: ../keyboard.pm_.c:109
-#, fuzzy
-msgid "Italian"
-msgstr "斜体"
-
-#: ../keyboard.pm_.c:110
-msgid "Latin American"
-msgstr ""
-
-#: ../keyboard.pm_.c:111
-msgid "Dutch"
-msgstr ""
-
-#: ../keyboard.pm_.c:112
-msgid "Lithuanian AZERTY"
-msgstr ""
-
-#: ../keyboard.pm_.c:113
-msgid "Lithuanian \"number row\" QWERTY"
-msgstr ""
-
-#: ../keyboard.pm_.c:114
-msgid "Lithuanian \"phonetic\" QWERTY"
-msgstr ""
-
-#: ../keyboard.pm_.c:115
+#: ../../keyboard.pm_.c:95 ../../keyboard.pm_.c:143
 msgid "Norwegian"
-msgstr ""
+msgstr "Norwegian"
 
-#: ../keyboard.pm_.c:116
-msgid "Polish (qwerty layout)"
-msgstr ""
+#: ../../keyboard.pm_.c:96
+msgid "Polish"
+msgstr "Polish"
 
-#: ../keyboard.pm_.c:117
-msgid "Polish (qwertz layout)"
-msgstr ""
-
-#: ../keyboard.pm_.c:118
-msgid "Portuguese"
-msgstr ""
-
-#: ../keyboard.pm_.c:119
-msgid "Canadian (Quebec)"
-msgstr ""
-
-#: ../keyboard.pm_.c:120
+#: ../../keyboard.pm_.c:97 ../../keyboard.pm_.c:148
 msgid "Russian"
-msgstr ""
+msgstr "Russian"
 
-#: ../keyboard.pm_.c:121
-msgid "Russian (Yawerty)"
-msgstr ""
-
-#: ../keyboard.pm_.c:122
-msgid "Swedish"
-msgstr ""
-
-#: ../keyboard.pm_.c:123
-msgid "Slovenian"
-msgstr ""
-
-#: ../keyboard.pm_.c:124
-msgid "Slovakian"
-msgstr ""
-
-#: ../keyboard.pm_.c:125
-msgid "Thai keyboard"
-msgstr ""
-
-#: ../keyboard.pm_.c:126
-msgid "Turkish (traditional \"F\" model)"
-msgstr ""
-
-#: ../keyboard.pm_.c:127
-msgid "Turkish (modern \"Q\" model)"
-msgstr ""
-
-#: ../keyboard.pm_.c:128
-msgid "Ukrainian"
-msgstr ""
-
-#: ../keyboard.pm_.c:129
+#: ../../keyboard.pm_.c:98 ../../keyboard.pm_.c:157
 msgid "UK keyboard"
-msgstr ""
+msgstr "UK keyboard"
 
-#: ../keyboard.pm_.c:130
+#: ../../keyboard.pm_.c:99 ../../keyboard.pm_.c:102 ../../keyboard.pm_.c:158
 msgid "US keyboard"
-msgstr ""
+msgstr "US keyboard"
 
-#: ../keyboard.pm_.c:131
+#: ../../keyboard.pm_.c:106
+msgid "Armenian (old)"
+msgstr "Armenian (old)"
+
+#: ../../keyboard.pm_.c:107
+msgid "Armenian (typewriter)"
+msgstr "Armenian (typewriter)"
+
+#: ../../keyboard.pm_.c:108
+msgid "Armenian (phonetic)"
+msgstr "Armenian (phonetic)"
+
+#: ../../keyboard.pm_.c:111
+msgid "Belgian"
+msgstr "Belgian"
+
+#: ../../keyboard.pm_.c:112
+msgid "Bulgarian"
+msgstr "Bulgarian"
+
+#: ../../keyboard.pm_.c:113
+msgid "Brazilian (ABNT-2)"
+msgstr "Brazilian"
+
+#: ../../keyboard.pm_.c:114
+msgid "Swiss (German layout)"
+msgstr "Swiss (German layout)"
+
+#: ../../keyboard.pm_.c:115
+msgid "Swiss (French layout)"
+msgstr "Swiss (French layout)"
+
+#: ../../keyboard.pm_.c:118
+msgid "German (no dead keys)"
+msgstr "German (no dead keys)"
+
+#: ../../keyboard.pm_.c:119
+msgid "Danish"
+msgstr "Danish"
+
+#: ../../keyboard.pm_.c:121
+msgid "Estonian"
+msgstr "Estonian"
+
+#: ../../keyboard.pm_.c:125
+msgid "Georgian (\"Russian\" layout)"
+msgstr "Georgian (\"Russian\" layout)"
+
+#: ../../keyboard.pm_.c:126
+msgid "Georgian (\"Latin\" layout)"
+msgstr "Georgian (\"Latin\" layout)"
+
+#: ../../keyboard.pm_.c:127
+msgid "Greek"
+msgstr "Greek"
+
+#: ../../keyboard.pm_.c:128
+msgid "Hungarian"
+msgstr "Hungarian"
+
+#: ../../keyboard.pm_.c:129
+msgid "Croatian"
+msgstr "Croatian"
+
+#: ../../keyboard.pm_.c:130
+msgid "Israeli"
+msgstr "Israeli"
+
+#: ../../keyboard.pm_.c:131
+msgid "Israeli (Phonetic)"
+msgstr "Israeli (Phonetic)"
+
+#: ../../keyboard.pm_.c:134
+msgid "Icelandic"
+msgstr "Icelandic"
+
+#: ../../keyboard.pm_.c:135
+msgid "Italian"
+msgstr "Italian"
+
+#: ../../keyboard.pm_.c:136
+msgid "Latin American"
+msgstr "Latin American"
+
+#: ../../keyboard.pm_.c:137
+msgid "Dutch"
+msgstr "Dutch"
+
+#: ../../keyboard.pm_.c:138
+#, fuzzy
+msgid "Lithuanian AZERTY (old)"
+msgstr "Lithuanian AZERTY"
+
+#: ../../keyboard.pm_.c:140
+#, fuzzy
+msgid "Lithuanian AZERTY (new)"
+msgstr "Lithuanian AZERTY"
+
+#: ../../keyboard.pm_.c:141
+msgid "Lithuanian \"number row\" QWERTY"
+msgstr "Lithuanian \"number row\" QWERTY"
+
+#: ../../keyboard.pm_.c:142
+msgid "Lithuanian \"phonetic\" QWERTY"
+msgstr "Lithuanian \"phonetic\" QWERTY"
+
+#: ../../keyboard.pm_.c:144
+msgid "Polish (qwerty layout)"
+msgstr "Polish (qwerty layout)"
+
+#: ../../keyboard.pm_.c:145
+msgid "Polish (qwertz layout)"
+msgstr "Polish (qwertz layout)"
+
+#: ../../keyboard.pm_.c:146
+msgid "Portuguese"
+msgstr "Portuguese"
+
+#: ../../keyboard.pm_.c:147
+msgid "Canadian (Quebec)"
+msgstr "Canadian (Quebec)"
+
+#: ../../keyboard.pm_.c:149
+msgid "Russian (Yawerty)"
+msgstr "Russian (Yawerty)"
+
+#: ../../keyboard.pm_.c:150
+msgid "Swedish"
+msgstr "Swedish"
+
+#: ../../keyboard.pm_.c:151
+msgid "Slovenian"
+msgstr "Slovenian"
+
+#: ../../keyboard.pm_.c:152
+msgid "Slovakian"
+msgstr "Slovakian"
+
+#: ../../keyboard.pm_.c:153
+msgid "Thai keyboard"
+msgstr "Thai keyboard"
+
+#: ../../keyboard.pm_.c:154
+msgid "Turkish (traditional \"F\" model)"
+msgstr "Turkish (traditional \"F\" model)"
+
+#: ../../keyboard.pm_.c:155
+msgid "Turkish (modern \"Q\" model)"
+msgstr "Turkish (modern \"Q\" model)"
+
+#: ../../keyboard.pm_.c:156
+msgid "Ukrainian"
+msgstr "Ukrainian"
+
+#: ../../keyboard.pm_.c:159
 msgid "US keyboard (international)"
-msgstr ""
+msgstr "US keyboard (international)"
 
-#: ../keyboard.pm_.c:132
+#: ../../keyboard.pm_.c:160
 msgid "Yugoslavian (latin layout)"
-msgstr ""
+msgstr "Yugoslavian (latin layout)"
 
 # NOTE: this message will be displayed by lilo at boot time; that is
 # using the BIOS font; that means cp437 charset on 99.99% of PC computers
@@ -2946,7 +3672,7 @@ msgstr ""
 # transliteration be used; or maybe the english text be used; as it is best
 # When possible cp437 accentuated letters can be used too.
 #
-#: ../lilo.pm_.c:145
+#: ../../lilo.pm_.c:176
 #, c-format
 msgid ""
 "Welcome to LILO the operating system chooser!\n"
@@ -2957,263 +3683,361 @@ msgid ""
 "default boot.\n"
 "\n"
 msgstr ""
+"Welcome to LILO the operating system chooser!\n"
+"\n"
+"To list the possible choices, press <TAB>.\n"
+"\n"
+"To load one of them, write its name and press <ENTER> or wait %d seconds for "
+"default boot.\n"
+"\n"
 
-#: ../mouse.pm_.c:20
-msgid "No Mouse"
-msgstr "没有滑鼠"
+# NOTE: this message will be displayed by grub at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is the nsuggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+#
+# The lines must fit on screen, aka length < 80
+# and only one line per string for the GRUB messages
+#
+#: ../../lilo.pm_.c:431
+msgid "Welcome to GRUB the operating system chooser!"
+msgstr "Welcome to GRUB the operating system chooser!"
 
-#: ../mouse.pm_.c:21
-msgid "Microsoft Rev 2.1A or higher (serial)"
+#: ../../lilo.pm_.c:432
+#, c-format
+msgid "Use the %c and %c keys for selecting which entry is highlighted."
+msgstr "Use the %c and %c keys for selecting which entry is highlighted."
+
+#: ../../lilo.pm_.c:433
+msgid "Press enter to boot the selected OS, 'e' to edit the"
+msgstr "Press enter to boot the selected OS, 'e' to edit the"
+
+#: ../../lilo.pm_.c:434
+msgid "commands before booting, or 'c' for a command-line."
+msgstr "commands before booting, or 'c' for a command-line."
+
+#: ../../lilo.pm_.c:435
+#, c-format
+msgid "The highlighted entry will be booted automatically in %d seconds."
+msgstr "The highlighted entry will be booted automatically in %d seconds."
+
+#: ../../lilo.pm_.c:439
+msgid "not enough room in /boot"
 msgstr ""
 
-#: ../mouse.pm_.c:22
-msgid "Logitech CC Series (serial)"
-msgstr ""
+#. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
+#: ../../lilo.pm_.c:518
+msgid "Desktop"
+msgstr "桌面"
 
-#: ../mouse.pm_.c:23
-msgid "Logitech MouseMan+/FirstMouse+ (serial)"
-msgstr ""
+#: ../../lilo.pm_.c:518
+msgid "Start Menu"
+msgstr "开始菜单"
 
-#: ../mouse.pm_.c:24
-msgid "ASCII MieMouse (serial)"
-msgstr ""
+#: ../../mouse.pm_.c:21
+msgid "Sun - Mouse"
+msgstr "Sun - Mouse"
 
-#: ../mouse.pm_.c:25
-msgid "Genius NetMouse (serial)"
-msgstr ""
+#: ../../mouse.pm_.c:23
+msgid "Apple ADB Mouse"
+msgstr "Apple ADB Mouse"
 
-#: ../mouse.pm_.c:26
-msgid "Microsoft IntelliMouse (serial)"
-msgstr ""
+#: ../../mouse.pm_.c:24
+msgid "Apple ADB Mouse (2 Buttons)"
+msgstr "Apple ADB Mouse (2 Buttons)"
 
-#: ../mouse.pm_.c:27
-msgid "MM Series (serial)"
-msgstr ""
+#: ../../mouse.pm_.c:25
+msgid "Apple ADB Mouse (3+ Buttons)"
+msgstr "Apple ADB Mouse (3+ Buttons)"
 
-#: ../mouse.pm_.c:28
-msgid "MM HitTablet (serial)"
-msgstr ""
+#: ../../mouse.pm_.c:26
+msgid "Apple USB Mouse"
+msgstr "Apple USB Mouse"
 
-#: ../mouse.pm_.c:29
-msgid "Logitech Mouse (serial, old C7 type)"
-msgstr ""
+#: ../../mouse.pm_.c:27
+msgid "Apple USB Mouse (2 Buttons)"
+msgstr "Apple USB Mouse (2 buttons)"
 
-#: ../mouse.pm_.c:30
-msgid "Logitech MouseMan/FirstMouse (serial)"
-msgstr ""
+#: ../../mouse.pm_.c:28
+msgid "Apple USB Mouse (3+ Buttons)"
+msgstr "Apple USB Mouse (3+ Buttons)"
 
-#: ../mouse.pm_.c:31
-msgid "Generic Mouse (serial)"
-msgstr ""
-
-#: ../mouse.pm_.c:32
-msgid "Microsoft compatible (serial)"
-msgstr ""
-
-#: ../mouse.pm_.c:33
-msgid "Generic 3 Button Mouse (serial)"
-msgstr ""
-
-#: ../mouse.pm_.c:34
-msgid "Mouse Systems (serial)"
-msgstr ""
-
-#: ../mouse.pm_.c:35
+#: ../../mouse.pm_.c:30
 msgid "Generic Mouse (PS/2)"
-msgstr ""
+msgstr "Generic Mouse (PS/2)"
 
-#: ../mouse.pm_.c:36
+#: ../../mouse.pm_.c:31
 msgid "Logitech MouseMan/FirstMouse (ps/2)"
-msgstr ""
+msgstr "Logitech MouseMan/FirstMouse (ps/2)"
 
-#: ../mouse.pm_.c:37
+#: ../../mouse.pm_.c:32
 msgid "Generic 3 Button Mouse (PS/2)"
-msgstr ""
+msgstr "Generic 3 Button Mouse (PS/2)"
 
-#: ../mouse.pm_.c:38
+#: ../../mouse.pm_.c:33
 msgid "ALPS GlidePoint (PS/2)"
-msgstr ""
+msgstr "ALPS GlidePoint (PS/2)"
 
-#: ../mouse.pm_.c:39
+#: ../../mouse.pm_.c:34
 msgid "Logitech MouseMan+/FirstMouse+ (PS/2)"
-msgstr ""
+msgstr "Logitech MouseMan+/FirstMouse+ (PS/2)"
 
-#: ../mouse.pm_.c:40
+#: ../../mouse.pm_.c:35
 msgid "Kensington Thinking Mouse (PS/2)"
-msgstr ""
+msgstr "Kensington Thinking Mouse (PS/2)"
 
-#: ../mouse.pm_.c:41
+#: ../../mouse.pm_.c:36
 msgid "ASCII MieMouse (PS/2)"
-msgstr ""
+msgstr "ASCII MieMouse (PS/2)"
 
-#: ../mouse.pm_.c:42
+#: ../../mouse.pm_.c:37
 msgid "Genius NetMouse (PS/2)"
-msgstr ""
+msgstr "Genius NetMouse (PS/2)"
 
-#: ../mouse.pm_.c:43
+#: ../../mouse.pm_.c:38
 msgid "Genius NetMouse Pro (PS/2)"
-msgstr ""
+msgstr "Genius NetMouse Pro (PS/2)"
 
-#: ../mouse.pm_.c:44
+#: ../../mouse.pm_.c:39
 msgid "Genius NetScroll (PS/2)"
-msgstr ""
+msgstr "Genius NetScroll (PS/2)"
 
-#: ../mouse.pm_.c:45
+#: ../../mouse.pm_.c:40
 msgid "Microsoft IntelliMouse (PS/2)"
-msgstr ""
+msgstr "Microsoft IntelliMouse (PS/2)"
 
-#: ../mouse.pm_.c:46
+#: ../../mouse.pm_.c:41
 msgid "ATI Bus Mouse"
-msgstr ""
+msgstr "ATI Bus Mouse"
 
-#: ../mouse.pm_.c:47
+#: ../../mouse.pm_.c:42
 msgid "Microsoft Bus Mouse"
-msgstr ""
+msgstr "Microsoft Bus Mouse"
 
-#: ../mouse.pm_.c:48
+#: ../../mouse.pm_.c:43
 msgid "Logitech Bus Mouse"
-msgstr ""
+msgstr "Logitech Bus Mouse"
 
-#: ../mouse.pm_.c:49
+#: ../../mouse.pm_.c:44
 msgid "USB Mouse"
-msgstr ""
+msgstr "USB Mouse"
 
-#: ../mouse.pm_.c:50
+#: ../../mouse.pm_.c:45
 msgid "USB Mouse (3 buttons or more)"
-msgstr ""
+msgstr "USB Mouse (3 buttons or more)"
 
-#: ../partition_table.pm_.c:486
+#: ../../mouse.pm_.c:47
+msgid "No Mouse"
+msgstr "没有鼠标"
+
+#: ../../mouse.pm_.c:48
+msgid "Microsoft Rev 2.1A or higher (serial)"
+msgstr "Microsoft Rev 2.1A or higher (serial)"
+
+#: ../../mouse.pm_.c:49
+msgid "Logitech CC Series (serial)"
+msgstr "Logitech CC Series (serial)"
+
+#: ../../mouse.pm_.c:50
+msgid "Logitech MouseMan+/FirstMouse+ (serial)"
+msgstr "Logitech MouseMan+/FirstMouse+ (serial)"
+
+#: ../../mouse.pm_.c:51
+msgid "ASCII MieMouse (serial)"
+msgstr "ASCII MieMouse (serial)"
+
+#: ../../mouse.pm_.c:52
+msgid "Genius NetMouse (serial)"
+msgstr "Genius NetMouse (serial)"
+
+#: ../../mouse.pm_.c:53
+msgid "Microsoft IntelliMouse (serial)"
+msgstr "Microsoft IntelliMouse (serial)"
+
+#: ../../mouse.pm_.c:54
+msgid "MM Series (serial)"
+msgstr "MM Series (serial)"
+
+#: ../../mouse.pm_.c:55
+msgid "MM HitTablet (serial)"
+msgstr "MM HitTablet (serial)"
+
+#: ../../mouse.pm_.c:56
+msgid "Logitech Mouse (serial, old C7 type)"
+msgstr "Logitech Mouse (serial, old C7 type)"
+
+#: ../../mouse.pm_.c:57
+msgid "Logitech MouseMan/FirstMouse (serial)"
+msgstr "Logitech MouseMan/FirstMouse (serial)"
+
+#: ../../mouse.pm_.c:58
+msgid "Generic Mouse (serial)"
+msgstr "Generic Mouse (serial)"
+
+#: ../../mouse.pm_.c:59
+msgid "Microsoft compatible (serial)"
+msgstr "Microsoft compatible (serial)"
+
+#: ../../mouse.pm_.c:60
+msgid "Generic 3 Button Mouse (serial)"
+msgstr "Generic 3 Button Mouse (serial)"
+
+#: ../../mouse.pm_.c:61
+msgid "Mouse Systems (serial)"
+msgstr "Mouse Systems (serial)"
+
+#: ../../my_gtk.pm_.c:459
+msgid "Is this correct?"
+msgstr "这样正确吗?"
+
+#: ../../partition_table.pm_.c:533
 msgid ""
 "You have a hole in your partition table but I can't use it.\n"
 "The only solution is to move your primary partitions to have the hole next "
 "to the extended partitions"
 msgstr ""
+"分区表里有一段是空的, 可是我没法使用它.\n"
+"唯一的办法是移动你的主分区, 把空闲部分换到与扩展分区相邻的位置."
 
-#: ../partition_table.pm_.c:572
+#: ../../partition_table.pm_.c:621
 #, c-format
 msgid "Error reading file %s"
-msgstr "请取 %s 档案错误 "
+msgstr "请取文件 %s 出错 "
 
-#: ../partition_table.pm_.c:579
+#: ../../partition_table.pm_.c:628
 #, c-format
 msgid "Restoring from file %s failed: %s"
-msgstr "从档案 %s 回复失败"
+msgstr "从文件 %s 恢复失败: %s"
 
-#: ../partition_table.pm_.c:581
+#: ../../partition_table.pm_.c:630
 msgid "Bad backup file"
-msgstr "错误的备份档案"
+msgstr "错误的备份文件"
 
-#: ../partition_table.pm_.c:602
+#: ../../partition_table.pm_.c:651
 #, c-format
 msgid "Error writing to file %s"
-msgstr "写入档案失败"
+msgstr "写入文件 %s 失败"
 
-#: ../placeholder.pm_.c:5
-#, fuzzy
+#: ../../pkgs.pm_.c:20
+msgid "mandatory"
+msgstr "强制选择"
+
+#: ../../pkgs.pm_.c:21
+msgid "must have"
+msgstr "必须拥有"
+
+#: ../../pkgs.pm_.c:22
+msgid "important"
+msgstr "重要"
+
+#: ../../pkgs.pm_.c:24
+msgid "very nice"
+msgstr "非常好"
+
+#: ../../pkgs.pm_.c:25
+msgid "nice"
+msgstr "不错"
+
+#: ../../pkgs.pm_.c:26 ../../pkgs.pm_.c:27
+msgid "interesting"
+msgstr "有趣"
+
+#: ../../pkgs.pm_.c:28 ../../pkgs.pm_.c:29 ../../pkgs.pm_.c:30
+#: ../../pkgs.pm_.c:31
+msgid "maybe"
+msgstr "或许有用"
+
+#: ../../pkgs.pm_.c:33
+msgid "i18n (important)"
+msgstr "国际化 (重要)"
+
+#: ../../pkgs.pm_.c:34
+msgid "i18n (very nice)"
+msgstr "国际化 (非常好)"
+
+#: ../../pkgs.pm_.c:35
+msgid "i18n (nice)"
+msgstr "国际化 (不错)"
+
+#: ../../placeholder.pm_.c:5
 msgid "Show less"
-msgstr "显示全部"
+msgstr "少看一些"
 
-#: ../placeholder.pm_.c:6
+#: ../../placeholder.pm_.c:6
 msgid "Show more"
-msgstr ""
+msgstr "多看一些"
 
-#: ../printer.pm_.c:244
+#: ../../printer.pm_.c:244
 msgid "Local printer"
-msgstr "本机印表机"
+msgstr "本机打印机"
 
-#: ../printer.pm_.c:245
+#: ../../printer.pm_.c:245
 msgid "Remote lpd"
-msgstr "远端印表机"
+msgstr "远端 lpd 打印机"
 
-#: ../printer.pm_.c:246
+#: ../../printer.pm_.c:246
 msgid "SMB/Windows 95/98/NT"
-msgstr ""
+msgstr "Windows/SMB 共享"
 
-#: ../printer.pm_.c:247
+#: ../../printer.pm_.c:247
 msgid "NetWare"
-msgstr ""
+msgstr "NetWare"
 
-#: ../printerdrake.pm_.c:75
-msgid "Local Printer Options"
-msgstr "本机印表机选项"
-
-#: ../printerdrake.pm_.c:76
-msgid ""
-"Every print queue (which print jobs are directed to) needs a\n"
-"name (often lp) and a spool directory associated with it. What\n"
-"name and directory should be used for this queue?"
-msgstr ""
-
-#: ../printerdrake.pm_.c:79
-msgid "Name of queue:"
-msgstr ""
-
-#: ../printerdrake.pm_.c:79
-msgid "Spool directory:"
-msgstr ""
-
-#: ../printerdrake.pm_.c:90
-msgid "Select Printer Connection"
-msgstr ""
-
-#: ../printerdrake.pm_.c:91
-msgid "How is the printer connected?"
-msgstr ""
-
-#: ../printerdrake.pm_.c:99
+#: ../../printerdrake.pm_.c:19
 msgid "Detecting devices..."
-msgstr ""
+msgstr "正在探测设备..."
 
-#: ../printerdrake.pm_.c:99
+#: ../../printerdrake.pm_.c:19
 msgid "Test ports"
-msgstr ""
+msgstr "测试端口"
 
-#: ../printerdrake.pm_.c:112
+#: ../../printerdrake.pm_.c:35
 #, c-format
 msgid "A printer, model \"%s\", has been detected on "
-msgstr ""
+msgstr "找到一台打印机, 型号是 \"%s\". "
 
-#: ../printerdrake.pm_.c:119
-#, fuzzy
+#: ../../printerdrake.pm_.c:44
 msgid "Local Printer Device"
-msgstr "缺少输入装置"
+msgstr "本机打印设备"
 
-#: ../printerdrake.pm_.c:120
+#: ../../printerdrake.pm_.c:45
 msgid ""
-"What device is your printer connected to  \n"
+"What device is your printer connected to \n"
 "(note that /dev/lp0 is equivalent to LPT1:)?\n"
 msgstr ""
+"你的打印机连接在哪个设备端口\n"
+"(请注意 /dev/lp0 相当于 LPT1)?\n"
 
-#: ../printerdrake.pm_.c:121
-#, fuzzy
-msgid "Printer Device:"
-msgstr "装置:"
+#: ../../printerdrake.pm_.c:47
+msgid "Printer Device"
+msgstr "打印机设备"
 
-#: ../printerdrake.pm_.c:125
+#: ../../printerdrake.pm_.c:62
 msgid "Remote lpd Printer Options"
-msgstr "远端印表机选项"
+msgstr "远端 lpd 打印机选项"
 
-#: ../printerdrake.pm_.c:126
+#: ../../printerdrake.pm_.c:63
 msgid ""
 "To use a remote lpd print queue, you need to supply\n"
 "the hostname of the printer server and the queue name\n"
 "on that server which jobs should be placed in."
 msgstr ""
+"要使用一个远端的 lpd 打印队列, 你需要指定打印服务器的\n"
+"主机名和打印任务要送往的打印队列的名字."
 
-#: ../printerdrake.pm_.c:129
-#, fuzzy
-msgid "Remote hostname:"
-msgstr "要求的主机名称:"
+#: ../../printerdrake.pm_.c:66
+msgid "Remote hostname"
+msgstr "远端主机名称"
 
-#: ../printerdrake.pm_.c:129
+#: ../../printerdrake.pm_.c:67
 msgid "Remote queue"
-msgstr ""
+msgstr "远端队列"
 
-#: ../printerdrake.pm_.c:134
+#: ../../printerdrake.pm_.c:75
 msgid "SMB (Windows 9x/NT) Printer Options"
-msgstr ""
+msgstr "SMB (Windows 9x/NT) 打印机选项"
 
-#: ../printerdrake.pm_.c:135
+#: ../../printerdrake.pm_.c:76
 msgid ""
 "To print to a SMB printer, you need to provide the\n"
 "SMB host name (Note! It may be different from its\n"
@@ -3221,108 +4045,131 @@ msgid ""
 "well as the share name for the printer you wish to access and any\n"
 "applicable user name, password, and workgroup information."
 msgstr ""
+"如果你要使用的是 SMB 打印机 (就是 Windows 9x/NT 网络共享打印机),\n"
+"你需要说明主机的 SMB 名字 (注意! 是你在 Windows 网络\n"
+"邻居里看到的主机名, 可能与它的 TCP/IP 主机名不同,), 可能还需要它的 IP 地址,\n"
+"以及有权访问打印机的用户名, 工作组和口令, 当然还有打印机的共享名. "
 
-#: ../printerdrake.pm_.c:140
-msgid "SMB server IP:"
-msgstr "SMB 伺服器 IP"
+#: ../../printerdrake.pm_.c:81
+msgid "SMB server host"
+msgstr "SMB 服务器主机"
 
-#: ../printerdrake.pm_.c:140
-msgid "SMB server host:"
-msgstr "SMB 伺服器 名称"
+#: ../../printerdrake.pm_.c:82
+msgid "SMB server IP"
+msgstr "SMB 服务器 IP"
 
-#: ../printerdrake.pm_.c:141 ../printerdrake.pm_.c:163
-msgid "Password:"
-msgstr "密码"
+#: ../../printerdrake.pm_.c:83
+msgid "Share name"
+msgstr "共享名"
 
-#: ../printerdrake.pm_.c:141
-#, fuzzy
-msgid "Share name:"
-msgstr "目录名称:"
+#: ../../printerdrake.pm_.c:86
+msgid "Workgroup"
+msgstr "工作组"
 
-#: ../printerdrake.pm_.c:141 ../printerdrake.pm_.c:163
-#, fuzzy
-msgid "User name:"
-msgstr "目录名称:"
-
-#: ../printerdrake.pm_.c:142
-msgid "Workgroup:"
-msgstr "群组"
-
-#: ../printerdrake.pm_.c:157
+#: ../../printerdrake.pm_.c:102
 msgid "NetWare Printer Options"
-msgstr ""
+msgstr "NetWare 打印机选项"
 
-#: ../printerdrake.pm_.c:158
+#: ../../printerdrake.pm_.c:103
 msgid ""
 "To print to a NetWare printer, you need to provide the\n"
 "NetWare print server name (Note! it may be different from its\n"
 "TCP/IP hostname!) as well as the print queue name for the printer you\n"
 "wish to access and any applicable user name and password."
 msgstr ""
+"如果你要使用的是 NetWare 打印机, 你需要说明主机的 NetWare 名字 (注意! \n"
+"可能与它的 TCP/IP 主机名不同), 以及有权访问打印机的用户名和口令, \n"
+"当然还有打印机的打印队列名. "
 
-#: ../printerdrake.pm_.c:162
-msgid "Print Queue Name:"
-msgstr ""
+#: ../../printerdrake.pm_.c:107
+msgid "Printer Server"
+msgstr "打印服务器"
 
-#: ../printerdrake.pm_.c:162
-#, fuzzy
-msgid "Printer Server:"
-msgstr "点阵大小:"
+#: ../../printerdrake.pm_.c:108
+msgid "Print Queue Name"
+msgstr "打印队列名"
 
-#: ../printerdrake.pm_.c:173
+#: ../../printerdrake.pm_.c:121
 msgid "Yes, print ASCII test page"
-msgstr "是，列印 ASCII 测式页"
+msgstr "是，打印 ASCII 测试页"
 
-#: ../printerdrake.pm_.c:174
+#: ../../printerdrake.pm_.c:122
 msgid "Yes, print PostScript test page"
-msgstr "是，列印 PostScript 测式页"
+msgstr "是，打印 PostScript 测试页"
 
-#: ../printerdrake.pm_.c:175
+#: ../../printerdrake.pm_.c:123
 msgid "Yes, print both test pages"
-msgstr "是，列印两种测式页"
+msgstr "是，打印两种测试页"
 
-#: ../printerdrake.pm_.c:183
+#: ../../printerdrake.pm_.c:130
 msgid "Configure Printer"
-msgstr "设定印表机"
+msgstr "设定打印机"
 
-#: ../printerdrake.pm_.c:184
+#: ../../printerdrake.pm_.c:131
 msgid "What type of printer do you have?"
-msgstr "请问您印表机的型号 ?"
+msgstr "请问您打印机的型号 ?"
 
-#: ../printerdrake.pm_.c:204
+#: ../../printerdrake.pm_.c:163
 msgid "Printer options"
-msgstr "印表机选项"
+msgstr "打印机选项"
 
-#: ../printerdrake.pm_.c:205
-#, fuzzy
+#: ../../printerdrake.pm_.c:164
 msgid "Paper Size"
-msgstr "象素大小:"
+msgstr "打印纸大小:"
 
-#: ../printerdrake.pm_.c:206
+#: ../../printerdrake.pm_.c:165
 msgid "Eject page after job?"
-msgstr ""
+msgstr "打印结束后出纸?"
 
-#: ../printerdrake.pm_.c:209
-msgid "Fix stair-stepping text?"
-msgstr ""
-
-#: ../printerdrake.pm_.c:212
+#: ../../printerdrake.pm_.c:170
 msgid "Uniprint driver options"
-msgstr ""
+msgstr "Uniprint 驱动程序选项"
 
-#: ../printerdrake.pm_.c:213
+#: ../../printerdrake.pm_.c:171
 msgid "Color depth options"
-msgstr ""
+msgstr "彩色深度选项"
 
-#: ../printerdrake.pm_.c:223
+#: ../../printerdrake.pm_.c:173
+msgid "Print text as PostScript?"
+msgstr "把正文作为 PostScript 打印?"
+
+#: ../../printerdrake.pm_.c:174
+msgid "Reverse page order"
+msgstr "反页序打印"
+
+#: ../../printerdrake.pm_.c:176
+msgid "Fix stair-stepping text?"
+msgstr "修正打印文本时的阶梯现象?"
+
+#: ../../printerdrake.pm_.c:179
+msgid "Number of pages per output pages"
+msgstr "每张纸打印几页"
+
+#: ../../printerdrake.pm_.c:180
+msgid "Right/Left margins in points (1/72 of inch)"
+msgstr "左/右页边 (单位是点- 1/72 英寸)"
+
+#: ../../printerdrake.pm_.c:181
+msgid "Top/Bottom margins in points (1/72 of inch)"
+msgstr "顶部/底部的页边 (单位是点- 1/72 英寸) "
+
+#: ../../printerdrake.pm_.c:184
+msgid "Extra GhostScript options"
+msgstr "更多 GhostScript 选项"
+
+#: ../../printerdrake.pm_.c:187
+msgid "Extra Text options"
+msgstr "额外的文本选项"
+
+#: ../../printerdrake.pm_.c:198
 msgid "Do you want to test printing?"
-msgstr ""
+msgstr "需要测试打印吗?"
 
-#: ../printerdrake.pm_.c:234
+#: ../../printerdrake.pm_.c:210
 msgid "Printing test page(s)..."
-msgstr ""
+msgstr "正在打印测试页..."
 
-#: ../printerdrake.pm_.c:252
+#: ../../printerdrake.pm_.c:218
 #, c-format
 msgid ""
 "Test page(s) have been sent to the printer daemon.\n"
@@ -3331,332 +4178,888 @@ msgid ""
 "%s\n"
 "\n"
 "Does it work properly?"
-msgstr "请问印表机列印正常吗 ?"
+msgstr ""
+"测试页已经发送到打印机后台程序. 过一小段时间打印机将开始工作.\n"
+"打印状态:\n"
+"%s\n"
+"\n"
+"打印机是否正常工作?"
 
-#: ../printerdrake.pm_.c:256
+#: ../../printerdrake.pm_.c:222
 msgid ""
 "Test page(s) have been sent to the printer daemon.\n"
 "This may take a little time before printer start.\n"
 "Does it work properly?"
 msgstr ""
-"测式页已经送出，可能需要一点时间列印\n"
-"请问印表机列印正常吗 ?"
+"测试页已经发送到打印机后台程序. "
+"过一少段时间打印机将开始工作.打印机是否正常工作?"
 
-#: ../raid.pm_.c:36
+#: ../../printerdrake.pm_.c:238
+msgid "Printer"
+msgstr "打印机"
+
+#: ../../printerdrake.pm_.c:239
+msgid "Would you like to configure a printer?"
+msgstr "您想要设定打印机吗 ?"
+
+#: ../../printerdrake.pm_.c:243
+#, fuzzy
+msgid ""
+"Here are the following print queues.\n"
+"You can add some more or change the existing ones."
+msgstr ""
+"我们现在有下列打印队列.\n"
+"您可以增加或是更改已存在的条目"
+
+#: ../../printerdrake.pm_.c:266 ../../printerdrake.pm_.c:272
+msgid "Select Printer Connection"
+msgstr "选择打印机连接"
+
+#: ../../printerdrake.pm_.c:267
+msgid "How is the printer connected?"
+msgstr "打印机是如何连接的?"
+
+#: ../../printerdrake.pm_.c:272
+msgid "Remove queue"
+msgstr "删除队列"
+
+#: ../../printerdrake.pm_.c:273
+msgid ""
+"Every print queue (which print jobs are directed to) needs a\n"
+"name (often lp) and a spool directory associated with it. What\n"
+"name and directory should be used for this queue and how is the printer "
+"connected?"
+msgstr ""
+"打印任务将被指向到打印队列. 每个打印队列要有一个名字.\n"
+"(常用的是 lp), 还需要一个相应的缓冲子目录存放有关的数据.\n"
+"这个打印队列的名字和子目录是什么? 打印机是如何连接的"
+
+#: ../../printerdrake.pm_.c:276
+msgid "Name of queue"
+msgstr "队列名称"
+
+#: ../../printerdrake.pm_.c:277
+msgid "Spool directory"
+msgstr "缓冲子目录"
+
+#: ../../printerdrake.pm_.c:278
+msgid "Printer Connection"
+msgstr "打印机连接"
+
+#: ../../raid.pm_.c:36
 #, c-format
 msgid "Can't add a partition to _formatted_ RAID md%d"
-msgstr "无法加入一个分割区到已经格式话的磁碟阵列 md%d"
+msgstr "无法加入一个分区到已经格式化的硬盘阵列 md%d"
 
-#: ../raid.pm_.c:106
+#: ../../raid.pm_.c:106
 msgid "Can't write file $file"
-msgstr "无法写入 $file 档案"
+msgstr "无法写入 $file 文件"
 
-#: ../raid.pm_.c:146
+#: ../../raid.pm_.c:131
+msgid "mkraid failed"
+msgstr "mkraid 失败"
+
+#: ../../raid.pm_.c:131
+msgid "mkraid failed (maybe raidtools are missing?)"
+msgstr "mkraid 失败 (可能缺少 raidtools ?)"
+
+#: ../../raid.pm_.c:147
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
-msgstr "没有足够的分割区给 %d 级的磁碟阵列\n"
+msgstr "没有足够的分区建立 %d 级的硬盘阵列\n"
 
-#: ../standalone/draksec_.c:28
+#: ../../services.pm_.c:14
+msgid "Anacron a periodic command scheduler."
+msgstr "Anacron 一个命令定期调度程序."
+
+#: ../../services.pm_.c:15
+msgid ""
+"apmd is used for monitoring batery status and logging it via syslog.\n"
+"It can also be used for shutting down the machine when the battery is low."
+msgstr ""
+"apmd 监视电池状态, 并通过 syslog 作记录.\n"
+"它还能用来在电池不足时关闭机器."
+
+#: ../../services.pm_.c:17
+msgid ""
+"Runs commands scheduled by the at command at the time specified when\n"
+"at was run, and runs batch commands when the load average is low enough."
+msgstr ""
+"使用 at 命令可以在指定时间运行您的命令. \n"
+"还可以在平均负载足够低的时候运行批处理命令."
+
+#: ../../services.pm_.c:19
+msgid ""
+"cron is a standard UNIX program that runs user-specified programs\n"
+"at periodic scheduled times. vixie cron adds a number of features to the "
+"basic\n"
+"UNIX cron, including better security and more powerful configuration options."
+msgstr ""
+"cron 是一个标准的 UNIX 程序, 它安装用户的要求以固定的时间间隔运行程序.\n"
+"vixie cron 在基本的 UNIX cron 上增加了一些特性, 包括改进的安全性, \n"
+"和更强大的配置选项."
+
+#: ../../services.pm_.c:22
+msgid ""
+"GPM adds mouse support to text-based Linux applications such the\n"
+"Midnight Commander. It also allows mouse-based console cut-and-paste "
+"operations,\n"
+"and includes support for pop-up menus on the console."
+msgstr ""
+"GPM 为基于文本的 Linux 应用程序提供对鼠标的支持, 如 MC 命令解释器.\n"
+"它同时提供了利用鼠标的控制台 '复制-粘贴' 操作, 还支持控制台上的\n"
+"弹出式菜单."
+
+#: ../../services.pm_.c:25
+msgid ""
+"Apache is a World Wide Web server.  It is used to serve HTML files\n"
+"and CGI."
+msgstr "Apache 是一个 WWW 万维网服务器. 它提供 HTML 文件和 CGI 服务."
+
+#: ../../services.pm_.c:27
+msgid ""
+"The internet superserver daemon (commonly called inetd) starts a\n"
+"variety of other internet services as needed. It is responsible for "
+"starting\n"
+"many services, including telnet, ftp, rsh, and rlogin. Disabling inetd "
+"disables\n"
+"all of the services it is responsible for."
+msgstr ""
+"互联网超级后台服务器 (常称作 inetd) 在需要时启动很多其他的互联网服务.\n"
+"它负责响应多种服务, 包括 telnet, ftp, rsh, 和 rlogin.\n"
+"禁止 inetd 就同时禁止了它负责的所有服务."
+
+#: ../../services.pm_.c:31
+msgid ""
+"This package loads the selected keyboard map as set in\n"
+"/etc/sysconfig/keyboard.  This can be selected using the kbdconfig utility.\n"
+"You should leave this enabled for most machines."
+msgstr ""
+"这个程序按照 /etc/sysconfig/keyboard 的设定加载选择的键盘映射.\n"
+"您可以使用 kbdconfig 工具修改这个设定.对大多数机器, 应该开启这个服务."
+
+#: ../../services.pm_.c:34
+msgid ""
+"lpd is the print daemon required for lpr to work properly. It is\n"
+"basically a server that arbitrates print jobs to printer(s)."
+msgstr ""
+"lpd 是保证 lpr 正常工作的后台打印服务. 这个服务器的基本功能是\n"
+"把打印服务指引到相应的打印机."
+
+#: ../../services.pm_.c:36
+msgid ""
+"named (BIND) is a Domain Name Server (DNS) that is used to resolve\n"
+"host names to IP addresses."
+msgstr "named (BIND) 是一个 DNS 域名解析服务器, 用来把主机名字解析成 IP 地址."
+
+#: ../../services.pm_.c:38
+msgid ""
+"Mounts and unmounts all Network File System (NFS), SMB (Lan\n"
+"Manager/Windows), and NCP (NetWare) mount points."
+msgstr ""
+"挂载和卸载所有的 Network File System (NFS), SMB (Lan\n"
+"Manager/Windows), 和 NCP (NetWare) 挂载点."
+
+#: ../../services.pm_.c:40
+msgid ""
+"Activates/Deactivates all network interfaces configured to start\n"
+"at boot time."
+msgstr "在开机时, 激活还是禁止所有已经配置的网络接口卡."
+
+#: ../../services.pm_.c:42
+msgid ""
+"NFS is a popular protocol for file sharing across TCP/IP networks.\n"
+"This service provides NFS server functionality, which is configured via the\n"
+"/etc/exports file."
+msgstr ""
+"NFS 是一个在 TCP/IP 网络上共享文件的常用协议.\n"
+"这个服务提供 NFS 服务器功能, 它的配置是通过\n"
+"/etc/exports 文件进行."
+
+#: ../../services.pm_.c:45
+msgid ""
+"NFS is a popular protocol for file sharing across TCP/IP\n"
+"networks. This service provides NFS file locking functionality."
+msgstr ""
+"NFS 是一个在 TCP/IP 网络上共享文件的常用协议.\n"
+"这个服务提供 NFS 服务器功能"
+
+#: ../../services.pm_.c:47
+msgid ""
+"PCMCIA support is usually to support things like ethernet and\n"
+"modems in laptops.  It won't get started unless configured so it is safe to "
+"have\n"
+"it installed on machines that don't need it."
+msgstr ""
+"PCMCIA 支持通常是在便携机上用来支持网卡和调制解调器之类的外设.\n"
+"除非被配置使用它不会自己起动, 所有在不需要它的机器上安装它也没有危险."
+
+#: ../../services.pm_.c:50
+msgid ""
+"The portmapper manages RPC connections, which are used by\n"
+"protocols such as NFS and NIS. The portmap server must be running on "
+"machines\n"
+"which act as servers for protocols which make use of the RPC mechanism."
+msgstr ""
+"portmapper 用来管理 RPC 连接, 在 NFS 和 NIS 等协议中会用到它.\n"
+"您必须运行这个 portmap 服务器, 如果这台机器要作为服务器支持这些\n"
+"利用 RPC 机制的协议."
+
+#: ../../services.pm_.c:53
+msgid ""
+"Postfix is a Mail Transport Agent, which is the program that\n"
+"moves mail from one machine to another."
+msgstr ""
+"Postfix 是一个邮件传递代理, 这个程序帮助您把电子邮件从\n"
+"一台机器送到另一台."
+
+#: ../../services.pm_.c:55
+msgid ""
+"Saves and restores system entropy pool for higher quality random\n"
+"number generation."
+msgstr "为了产生更高品质的随机数, 保存和恢复系统的 entropy pool"
+
+#: ../../services.pm_.c:57
+msgid ""
+"The routed daemon allows for automatic IP router table updated via\n"
+"the RIP protocol. While RIP is widely used on small networks, more complex\n"
+"routing protocols are needed for complex networks."
+msgstr ""
+"后台服务 routed 允许通过 RIP 协议自动更新的 IP 路由表.\n"
+"在小型网络上广泛的采用 RIP, 然而在更复杂的网络上需要更复杂的路由协议."
+
+#: ../../services.pm_.c:60
+msgid ""
+"The rstat protocol allows users on a network to retrieve\n"
+"performance metrics for any machine on that network."
+msgstr "rstat 协议允许网络上的用户获取网络上任何机器的性能指标."
+
+#: ../../services.pm_.c:62
+msgid ""
+"The rusers protocol allows users on a network to identify who is\n"
+"logged in on other responding machines."
+msgstr "rusers 协议允许网络上的用户识别在其他作出应答的机器上有哪些用户登录."
+
+#: ../../services.pm_.c:64
+msgid ""
+"The rwho protocol lets remote users get a list of all of the users\n"
+"logged into a machine running the rwho daemon (similiar to finger)."
+msgstr ""
+"rwho 协议使远端的用户可以得到运行了 rwho 后台服务的机器上所有\n"
+"登录用户的清单 (类似 finger)."
+
+#: ../../services.pm_.c:66
+msgid ""
+"Syslog is the facility by which many daemons use to log messages\n"
+"to various system log files.  It is a good idea to always run syslog."
+msgstr ""
+"Syslog 这样一个设施, 很多其他的后台服务利用它在各种系统日志文件中\n"
+"记录日志消息. 总是运行 syslog 是个好主意."
+
+#: ../../services.pm_.c:68
+msgid "This startup script try to load your modules for your usb mouse."
+msgstr "这个起动脚本试图加载用于 USB 鼠标的模块."
+
+#: ../../services.pm_.c:69
+msgid "Starts and stops the X Font Server at boot time and shutdown."
+msgstr "在开机或关机时起动和中止 X 字体服务."
+
+#: ../../services.pm_.c:92
+msgid "Choose which services should be automatically started at boot time"
+msgstr "选择哪些服务要在开机时自动启动"
+
+# NOTE: this message will be displayed by lilo at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is then suggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+# When possible cp437 accentuated letters can be used too.
+#
+#: ../../silo.pm_.c:116
+#, c-format
+msgid ""
+"Welcome to SILO the operating system chooser!\n"
+"\n"
+"To list the possible choices, press <TAB>.\n"
+"\n"
+"To load one of them, write its name and press <ENTER> or\n"
+"wait %d seconds for default boot.\n"
+"\n"
+msgstr ""
+"Welcome to SILO the operating system chooser!\n"
+"\n"
+"To list the possible choices, press <TAB>.\n"
+"\n"
+"To load one of them, write its name and press <ENTER> or\n"
+"wait %d seconds for default boot.\n"
+"\n"
+
+#: ../../standalone/drakboot_.c:23
+msgid "Configure LILO/GRUB"
+msgstr "配置 LILO/GRUB"
+
+#: ../../standalone/drakboot_.c:24
+msgid "Create a boot floppy"
+msgstr "制作一张开机软盘"
+
+#: ../../standalone/drakboot_.c:25
+msgid "Format floppy"
+msgstr "格式化软盘"
+
+#: ../../standalone/drakboot_.c:36
+msgid "Choice"
+msgstr "选择"
+
+#: ../../standalone/draksec_.c:28
 msgid ""
 "This level is to be used with care. It makes your system more easy to use,\n"
 "but very sensitive: it must not be used for a machine connected to others\n"
 "or to the Internet. There is no password access."
 msgstr ""
+"不检查口令的访问.\n"
+"这一级别应慎重使用. 它是你的系统使用更简单, 然而也更脆弱:\n"
+"假如这台机器将要和其他机器联网或者接入互联网, 绝对不要采用这个级别."
 
-#: ../standalone/draksec_.c:31
+#: ../../standalone/draksec_.c:31
 msgid ""
 "Password are now enabled, but use as a networked computer is still not "
 "recommended."
-msgstr "密码已经启动，但是仍不建议做为网路电脑"
+msgstr "现在有了口令功能. 但是仍不建议用于联网的电脑."
 
-#: ../standalone/draksec_.c:32
+#: ../../standalone/draksec_.c:32
 msgid ""
 "Few improvements for this security level, the main one is that there are\n"
 "more security warnings and checks."
-msgstr ""
+msgstr "这个安全级别只比前一个安全一点, 主要是有更多的有关安全性的警告和检验."
 
-#: ../standalone/draksec_.c:34
+#: ../../standalone/draksec_.c:34
 msgid ""
 "This is the standard security recommended for a computer that will be used\n"
 "to connect to the Internet as a client. There are now security checks. "
 msgstr ""
+"这是推荐所有作为客户连接互联网的电脑采用的标准的安全级别.\n"
+"应用了必要的安全检查措施."
 
-#: ../standalone/draksec_.c:36
+#: ../../standalone/draksec_.c:36
 msgid ""
 "With this security level, the use of this system as a server becomes "
 "possible.\n"
 "The security is now high enough to use the system as a server which accept\n"
 "connections from many clients. "
 msgstr ""
+"采用这个安全级别, 这个系统可以在互联网上作为服务器运行.\n"
+"有足够的安全性, 系统可以适应作为服务器接受来自众多客户的连接."
 
-#: ../standalone/draksec_.c:39
+#: ../../standalone/draksec_.c:39
 msgid ""
 "We take level 4 features, but now the system is entirely closed.\n"
 "Security features are at their maximum."
 msgstr ""
+"采用第 4 级安全特性, 不过现在系统几乎是完全封闭的.\n"
+"最高程度的安全性."
 
-#: ../standalone/draksec_.c:49
+#: ../../standalone/draksec_.c:49
 msgid "Setting security level"
-msgstr "设定安全层级"
+msgstr "设定安全级别"
 
-#: ../standalone/drakxconf_.c:21
+#: ../../standalone/drakxconf_.c:21
 msgid "Choose the tool you want to use"
 msgstr "选择您想要的工具"
 
-#: ../standalone/drakxservices_.c:21
-msgid "Choose which services should be automatically started at boot time"
-msgstr "选择那些服务要在开机时自动启动"
+#: ../../standalone/keyboarddrake_.c:23
+msgid "What is your keyboard layout?"
+msgstr "您使用什么键盘布局?"
 
-#: ../standalone/mousedrake_.c:30
+#: ../../standalone/mousedrake_.c:25
+msgid "What is the type of your mouse?"
+msgstr "请问您的鼠标是那一种类型 ?"
+
+#: ../../standalone/mousedrake_.c:30
 msgid "no serial_usb found\n"
 msgstr "找不到 serial_usb\n"
 
-#: ../standalone/mousedrake_.c:35
+#: ../../standalone/mousedrake_.c:35
 msgid "Emulate third button?"
 msgstr "模拟三键"
 
-#: ../standalone/rpmdrake_.c:25
-#, fuzzy
+#: ../../standalone/mousedrake_.c:39
+msgid "Which serial port is your mouse connected to?"
+msgstr "您的鼠标是连接到那个串行口 ?"
+
+#: ../../standalone/rpmdrake_.c:25
 msgid "reading configuration"
-msgstr "测试设定值"
+msgstr "读取设定值"
 
-#: ../standalone/rpmdrake_.c:45 ../standalone/rpmdrake_.c:50
-#: ../standalone/rpmdrake_.c:253
+#: ../../standalone/rpmdrake_.c:45 ../../standalone/rpmdrake_.c:50
+#: ../../standalone/rpmdrake_.c:253
 msgid "File"
-msgstr "档案"
+msgstr "文件"
 
-#: ../standalone/rpmdrake_.c:48 ../standalone/rpmdrake_.c:229
-#: ../standalone/rpmdrake_.c:253 ../standalone/rpmdrake_.c:269
+#: ../../standalone/rpmdrake_.c:48 ../../standalone/rpmdrake_.c:229
+#: ../../standalone/rpmdrake_.c:253 ../../standalone/rpmdrake_.c:269
 msgid "Search"
 msgstr "搜寻"
 
-#: ../standalone/rpmdrake_.c:49 ../standalone/rpmdrake_.c:56
+#: ../../standalone/rpmdrake_.c:49 ../../standalone/rpmdrake_.c:56
 msgid "Package"
-msgstr "套件"
+msgstr "软件包"
 
-#: ../standalone/rpmdrake_.c:51
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:51
 msgid "Text"
-msgstr "系统专家"
+msgstr "文本"
 
-#: ../standalone/rpmdrake_.c:53
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:53
 msgid "Tree"
-msgstr "绿:"
+msgstr "分类树"
 
-#: ../standalone/rpmdrake_.c:54
+#: ../../standalone/rpmdrake_.c:54
 msgid "Sort by"
-msgstr ""
+msgstr "排序"
 
-#: ../standalone/rpmdrake_.c:55
+#: ../../standalone/rpmdrake_.c:55
 msgid "Category"
-msgstr ""
+msgstr "类别"
 
-#: ../standalone/rpmdrake_.c:58
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:58
 msgid "See"
-msgstr "伺服器"
+msgstr "见"
 
-#: ../standalone/rpmdrake_.c:59 ../standalone/rpmdrake_.c:163
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:59 ../../standalone/rpmdrake_.c:163
 msgid "Installed packages"
-msgstr "安装套件"
+msgstr "已安装软件包"
 
-#: ../standalone/rpmdrake_.c:60
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:60
 msgid "Available packages"
-msgstr "/全部套件"
+msgstr "可安装软件包"
 
-#: ../standalone/rpmdrake_.c:62
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:62
 msgid "Show only leaves"
-msgstr "显示全部"
+msgstr "只显示单独的软件包"
 
-#: ../standalone/rpmdrake_.c:67
+#: ../../standalone/rpmdrake_.c:67
 msgid "Expand all"
-msgstr ""
+msgstr "全部展开"
 
-#: ../standalone/rpmdrake_.c:68
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:68
 msgid "Collapse all"
-msgstr "全部清除"
+msgstr "全部收缩"
 
-#: ../standalone/rpmdrake_.c:70
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:70
 msgid "Configuration"
-msgstr "测试设定值"
+msgstr "配置"
 
-#: ../standalone/rpmdrake_.c:71
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:71
 msgid "Add location of packages"
-msgstr "可替换套件"
+msgstr "增加软件包的空间"
 
-#: ../standalone/rpmdrake_.c:75
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:75
 msgid "Update location"
-msgstr "升级选项"
+msgstr "更新位置"
 
-#: ../standalone/rpmdrake_.c:79 ../standalone/rpmdrake_.c:328
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:79 ../../standalone/rpmdrake_.c:328
 msgid "Remove"
-msgstr "移除选项"
+msgstr "减少"
 
-#: ../standalone/rpmdrake_.c:100
+#: ../../standalone/rpmdrake_.c:100
 msgid "Configuration: Add Location"
-msgstr ""
+msgstr "配置: 增加空间"
 
-#: ../standalone/rpmdrake_.c:101
-#, fuzzy
-msgid "Expand Tree"
-msgstr ""
-"展开\n"
-"树"
-
-#: ../standalone/rpmdrake_.c:102
-#, fuzzy
-msgid "Collapse Tree"
-msgstr ""
-"收缩\n"
-"树"
-
-#: ../standalone/rpmdrake_.c:103
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:103
 msgid "Find Package"
-msgstr "找到套件"
+msgstr "查找软件包"
 
-#: ../standalone/rpmdrake_.c:104
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:104
 msgid "Find Package containing file"
-msgstr "找到套件,其"
+msgstr "查找哪个软件包中文件"
 
-#: ../standalone/rpmdrake_.c:105
+#: ../../standalone/rpmdrake_.c:105
 msgid "Toggle between Installed and Available"
-msgstr ""
+msgstr "显示已安装/显示未安装"
 
-#: ../standalone/rpmdrake_.c:139
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:139
 msgid "Files:\n"
-msgstr "档案"
+msgstr "文件:\n"
 
-#: ../standalone/rpmdrake_.c:161 ../standalone/rpmdrake_.c:209
+#: ../../standalone/rpmdrake_.c:161 ../../standalone/rpmdrake_.c:209
 msgid "Uninstall"
-msgstr "反安装"
+msgstr "卸载软件"
 
-#: ../standalone/rpmdrake_.c:163
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:163
 msgid "Choose package to install"
-msgstr "选取要安装的程式套件"
+msgstr "选取要安装的软件包"
 
-#: ../standalone/rpmdrake_.c:190
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:190
 msgid "Checking dependencies"
-msgstr "检查签名"
+msgstr "检查依赖关系"
 
-#: ../standalone/rpmdrake_.c:190 ../standalone/rpmdrake_.c:409
+#: ../../standalone/rpmdrake_.c:190 ../../standalone/rpmdrake_.c:409
 msgid "Wait"
-msgstr ""
+msgstr "等候"
 
-#: ../standalone/rpmdrake_.c:209
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:209
 msgid "The following packages are going to be uninstalled"
-msgstr "%d 套件无法移除"
+msgstr "下列软件包将要被卸载"
 
-#: ../standalone/rpmdrake_.c:210
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:210
 msgid "Uninstalling the RPMs"
-msgstr "安装程式"
+msgstr "正在卸载 RPM 包"
 
-#: ../standalone/rpmdrake_.c:229 ../standalone/rpmdrake_.c:269
+#: ../../standalone/rpmdrake_.c:229 ../../standalone/rpmdrake_.c:269
 msgid "Regexp"
-msgstr ""
+msgstr "正规表达式"
 
-#: ../standalone/rpmdrake_.c:229
+#: ../../standalone/rpmdrake_.c:229
 msgid "Which package are looking for"
-msgstr ""
+msgstr "要寻找什么软件包"
 
-#: ../standalone/rpmdrake_.c:238 ../standalone/rpmdrake_.c:262
-#: ../standalone/rpmdrake_.c:278
-#, fuzzy, c-format
+#: ../../standalone/rpmdrake_.c:238 ../../standalone/rpmdrake_.c:262
+#: ../../standalone/rpmdrake_.c:278
+#, c-format
 msgid "%s not found"
-msgstr " %d 有问题!"
+msgstr " %s 找不到"
 
-#: ../standalone/rpmdrake_.c:238 ../standalone/rpmdrake_.c:262
-#: ../standalone/rpmdrake_.c:278
+#: ../../standalone/rpmdrake_.c:238 ../../standalone/rpmdrake_.c:262
+#: ../../standalone/rpmdrake_.c:278
 msgid "No match"
-msgstr ""
+msgstr "没有匹配"
 
-#: ../standalone/rpmdrake_.c:238 ../standalone/rpmdrake_.c:262
-#: ../standalone/rpmdrake_.c:278
+#: ../../standalone/rpmdrake_.c:238 ../../standalone/rpmdrake_.c:262
+#: ../../standalone/rpmdrake_.c:278
 msgid "No more match"
-msgstr ""
+msgstr "没有更多匹配"
 
-#: ../standalone/rpmdrake_.c:246
+#: ../../standalone/rpmdrake_.c:246
 msgid ""
 "rpmdrake is currently in ``low memory'' mode.\n"
 "I'm going to relaunch rpmdrake to allow searching files"
 msgstr ""
+"rpmdrake 现在处于 ``低内存'' 模式.\n"
+"我将会重新运行 rpmdrake, 然后才可以搜索文件"
 
-#: ../standalone/rpmdrake_.c:253
-msgid "Which file are you looking for"
-msgstr ""
+#: ../../standalone/rpmdrake_.c:253
+msgid "Which file are you looking for?"
+msgstr "您要寻找什么文件 ?"
 
-#: ../standalone/rpmdrake_.c:269
-msgid "What are looking for"
-msgstr ""
+#: ../../standalone/rpmdrake_.c:269
+msgid "What are looking for?"
+msgstr "寻找什么内容?"
 
-#: ../standalone/rpmdrake_.c:289
+#: ../../standalone/rpmdrake_.c:289
 msgid "Give a name (eg: `extra', `commercial')"
-msgstr ""
+msgstr "输入一个分类 (例如: `extra', `commercial')"
 
-#: ../standalone/rpmdrake_.c:291
-#, fuzzy
+#: ../../standalone/rpmdrake_.c:291
 msgid "Directory"
-msgstr "RPM 目录"
+msgstr "目录"
 
-#: ../standalone/rpmdrake_.c:294
+#: ../../standalone/rpmdrake_.c:294
 msgid "No cdrom available (nothing in /mnt/cdrom)"
-msgstr ""
+msgstr "没有可用的 CDROM (请挂载 /mnt/cdrom)"
 
-#: ../standalone/rpmdrake_.c:298
+#: ../../standalone/rpmdrake_.c:298
 msgid "URL of the directory containing the RPMs"
-msgstr ""
+msgstr "RPM 目录的 URL"
 
-#: ../standalone/rpmdrake_.c:299
+#: ../../standalone/rpmdrake_.c:299
 msgid ""
 "For FTP and HTTP, you need to give the location for hdlist\n"
 "It must be relative to the URL above"
 msgstr ""
+"使用 FTP 和 HTTP, 你需要给出 hdlist 的位置\n"
+"请输入在以上 URL 的相对路径"
 
-#: ../standalone/rpmdrake_.c:302
+#: ../../standalone/rpmdrake_.c:302
 msgid "Please submit the following information"
-msgstr ""
+msgstr "请确认提交下列信息"
 
-#: ../standalone/rpmdrake_.c:304
-#, fuzzy, c-format
+#: ../../standalone/rpmdrake_.c:304
+#, c-format
 msgid "%s is already in use"
-msgstr "这个名称已经有使用了"
+msgstr "%s 已经在使用中"
 
-#: ../standalone/rpmdrake_.c:315 ../standalone/rpmdrake_.c:321
-#: ../standalone/rpmdrake_.c:329
+#: ../../standalone/rpmdrake_.c:315 ../../standalone/rpmdrake_.c:321
+#: ../../standalone/rpmdrake_.c:329
 msgid "Updating the RPMs base"
-msgstr ""
+msgstr "正在更新 RPM 的数据库"
 
-#: ../standalone/rpmdrake_.c:328
-#, fuzzy, c-format
+#: ../../standalone/rpmdrake_.c:328
+#, c-format
 msgid "Going to remove entry %s"
-msgstr "移除选项"
+msgstr "将要删除 项目 %s"
 
-#: ../standalone/rpmdrake_.c:360
+#: ../../standalone/rpmdrake_.c:360
 msgid "Finding leaves"
-msgstr ""
+msgstr "寻找所有单独的软件包"
 
-#: ../standalone/rpmdrake_.c:360
+#: ../../standalone/rpmdrake_.c:360
 msgid "Finding leaves takes some time"
-msgstr ""
+msgstr "寻找所有单独的软件包需要一些时间"
 
-#, fuzzy
-#~ msgid "Polish"
-#~ msgstr "点阵"
+#~ msgid "useless"
+#~ msgstr "没用"
+
+#~ msgid "garbage"
+#~ msgstr "破烂"
+
+#~ msgid ""
+#~ "Some true type fonts from windows have been found on your computer.\n"
+#~ "Do you want to use them? Be sure you have the right to use them under Linux."
+#~ msgstr ""
+#~ "我发现您的系统上有一些来自 windows 的 TrueType 字体.\n"
+#~ "您要在 Linux 下使用它们吗? 希望你用的是正版."
+
+#~ msgid "Recommended"
+#~ msgstr "简易"
+
+#~ msgid ""
+#~ "Choose \"Install\" if there are no previous versions of Linux\n"
+#~ "installed, or if you wish to use multiple distributions or versions.\n"
+#~ "\n"
+#~ "\n"
+#~ "Choose \"Upgrade\" if you wish to update a previous version of Mandrake "
+#~ "Linux:\n"
+#~ "5.1 (Venice), 5.2 (Leloo), 5.3 (Festen), 6.0 (Venus), 6.1 (Helios), Gold "
+#~ "2000\n"
+#~ "or 7.0 (Air)."
+#~ msgstr ""
+#~ "如果没有旧版本的 Linux ，或您想安装多种发行版或是不同版本\n"
+#~ "请选择 \"安装\"\n"
+#~ "\n"
+#~ "\n"
+#~ "如果您想升级原来的 Mandrake Linux 5.1 (Venice), 5.2 (Leloo),\n"
+#~ "5.3 (Festen), 6.0 (Venus), 6.1 (Helios), Gold 2000 或 7.0 (Air)\n"
+#~ "请选择 \"升级\"."
+
+#~ msgid ""
+#~ "(a user ``mandrake'' with password ``mandrake'' has been automatically added)"
+#~ msgstr "(自动添加了一个用户: 'mandrake', 口令是 'mandrke')"
+
+#~ msgid "Do you want to use LILO?"
+#~ msgstr "您要使用 LILO 吗?"
+
+#~ msgid ""
+#~ "You may now select the packages you wish to install.\n"
+#~ "\n"
+#~ "\n"
+#~ "First you can select group of package to install or upgrade. After that\n"
+#~ "you can select more packages according to the total size you wish to\n"
+#~ "select.\n"
+#~ "\n"
+#~ "\n"
+#~ "If you are in expert mode, you can select packages individually.\n"
+#~ "Please note that some packages require the installation of others.\n"
+#~ "These are referred to as package dependencies. The packages you select,\n"
+#~ "and the packages they require will be automatically selected for\n"
+#~ "install. It is impossible to install a package without installing all\n"
+#~ "of its dependencies."
+#~ msgstr ""
+#~ "现在你可以挑选希望安装的软件包.\n"
+#~ "\n"
+#~ "\n"
+#~ "你可以先选择安装或升级分组的软件包.  然后按照你预定的安装空间选择其他的\n"
+#~ "软件包.\n"
+#~ "\n"
+#~ "\n"
+#~ "在专家模式中, 你可以逐个的选择软件包. 请注意一些软件包会要求安装其他的包.\n"
+#~ "这些称作的软件包的依赖者. 所有你选择的软件包和它们要求的软件包会被自动选中.\n"
+#~ "不可能安装一个软件包而不安装它的依赖者."
+
+#~ msgid ""
+#~ "LILO (the LInux LOader) can boot Linux and other operating systems.\n"
+#~ "Normally they are correctly detected during installation. If you don't\n"
+#~ "see yours detected, you can add one or more now.\n"
+#~ "\n"
+#~ "\n"
+#~ "If you don't want that everybody could access at one of them, you can "
+#~ "remove\n"
+#~ "it now (a boot disk will be needed to boot it)."
+#~ msgstr ""
+#~ "LILO (the LInux LOader) 负责在开机时决定加载 Linux 还是其他操作系统.\n"
+#~ "通常安装时会检测可用的操作系统, 如果这里列出的不是全部, 你可以\n"
+#~ "添加更多."
+
+#~ msgid ""
+#~ "Now that you've selected desired groups, please choose \n"
+#~ "how many packages you want, ranging from minimal to full \n"
+#~ "installation of each selected groups."
+#~ msgstr ""
+#~ "你已经选择了喜欢的程序组, 现在还需要告诉我你想用多少磁盘空间安装这些程序.\n"
+#~ "你可以在从最小安装到完全安装所有软件包之间任意选择."
+
+#~ msgid ""
+#~ "You need %dMB for a full install of the groups you selected.\n"
+#~ "You can go on anyway, but be warned that you won't get all packages"
+#~ msgstr ""
+#~ "硬盘空间不足, 完全安装您选择的程序组需要 %d MB. \n"
+#~ "你可以继续安装, 不过我会少安装一些程序."
+
+#~ msgid "Choose other CD to install"
+#~ msgstr "选取其他要安装的 CD"
+
+#~ msgid ""
+#~ "Select:\n"
+#~ "\n"
+#~ "  - Recommended: If you have never installed Linux before.\n"
+#~ "\n"
+#~ "\n"
+#~ "  - Customized: If you are familiar with Linux, you will be able to \n"
+#~ "select the usage for the installed system between normal, development or\n"
+#~ "server. Choose \"Normal\" for a general purpose installation of your\n"
+#~ "computer. You may choose \"Development\" if you will be using the computer\n"
+#~ "primarily for software development, or choose \"Server\" if you wish to\n"
+#~ "install a general purpose server (for mail, printing...).\n"
+#~ "\n"
+#~ "\n"
+#~ "  - Expert: If you are fluent with GNU/Linux and want to perform\n"
+#~ "a highly customized installation, this Install Class is for you. You will\n"
+#~ "be able to select the usage of your installed system as for \"Customized\"."
+#~ msgstr ""
+#~ "选择:\n"
+#~ "\n"
+#~ " - 简易: 如果你从来没有安装过 Linux.\n"
+#~ "\n"
+#~ "\n"
+#~ " - 定制: 如果你熟悉 Linux, 你将可以选择这个系统的用途是常规, 开发, \n"
+#~ "还是服务器. 选择 \"常规安装\" 将为你配置一套日常使用的电脑; 如果你计划\n"
+#~ "这台电脑主要用于软件开发, 应选择 \"开发平台\"; 如果, 选择 \"服务器\", \n"
+#~ "你的电脑会被配备成一台全能的网络服务器 (提供邮件, 打印...等各种服务).\n"
+#~ "\n"
+#~ "\n"
+#~ " - 专家: 如果你精通 GNU/Linux, 希望作一个高度定制的安装, \n"
+#~ "这个安装等级是专为你准备的. 有和 \"定制\" 中一样可选择的系统用途. "
+
+#~ msgid "Help"
+#~ msgstr "帮助"
+
+#~ msgid "Downloading cryptographic packages"
+#~ msgstr "下载密码软件包"
+
+#~ msgid "Setup SCSI"
+#~ msgstr "设定 SCSI"
+
+#~ msgid "Installation CD Nr %s"
+#~ msgstr "安装光盘标号 %s"
+
+#~ msgid ""
+#~ "Update installation image!\n"
+#~ "\n"
+#~ "Ask your system administrator or reboot to update your installation image to "
+#~ "include\n"
+#~ "the Cd-Rom image labelled \"%s\". Press Ok if image has been updated or "
+#~ "press Cancel\n"
+#~ "to avoid installation from this Cd-Rom image."
+#~ msgstr ""
+#~ "请更新安装镜象!\n"
+#~ "\n"
+#~ "询问您的系统管理员, 或者重新启动, 保证您的安装镜象\n"
+#~ " 包含了标号为 \"%s\" 的光盘镜象 \n"
+#~ "如果镜象已经更新请点击 '确定', 或者 \n"
+#~ "点击 '取消', 放弃安装这个光盘上的软件."
+
+#~ msgid "Which language do you want?"
+#~ msgstr "您要用什么语言?"
+
+#~ msgid "Hurt me plenty"
+#~ msgstr "来虐待我吧"
+
+#~ msgid "Which usage do you want?"
+#~ msgstr "您希望哪种用途?"
+
+#~ msgid "Which packages do you want to install"
+#~ msgstr "选取要安装的软件包"
+
+#~ msgid "What usage do you want?"
+#~ msgstr "请选择系统的用途?"
+
+#~ msgid "Choose install or upgrade"
+#~ msgstr "选择安装新系统或升级原有系统"
+
+#~ msgid "A entry %s already exists"
+#~ msgstr "这个条目 %s 已经存在了"
+
+#~ msgid ""
+#~ "Linux does not yet fully support ultra dma 66.\n"
+#~ "As a work-around i can make a custom floppy giving access the hard drive on "
+#~ "ide2 and ide3"
+#~ msgstr ""
+#~ "Linux 现在还不能完全支持 Ultra DMA 66.\n"
+#~ "目前的办法是制作一个开机软盘, 它可以让你访问 IDE2 和 IDE3 上的硬盘."
+
+#~ msgid ""
+#~ "Enter a floppy to create an HTP enabled boot\n"
+#~ "(all data on floppy will be lost)"
+#~ msgstr ""
+#~ "将要制作 HTP 启动盘, 请插入一张软盘,\n"
+#~ "(软盘上所有数据将被清除)"
+
+#~ msgid "It is necessary to restart installation booting on the floppy"
+#~ msgstr "需要从软盘启动后重新开始安装"
+
+#~ msgid "It is necessary to restart installation with the new parameters"
+#~ msgstr "需要以新设置的参数重新开始安装"
+
+#~ msgid ""
+#~ "Failed to create an HTP boot floppy.\n"
+#~ "You may have to restart installation and give ``%s'' at the prompt"
+#~ msgstr ""
+#~ "创建 HTP 引导软盘失败.\n"
+#~ "请重新开始安装, 在出现提示符后输入 ``%s''"
 
 #~ msgid "Going to install %d MB. You can choose to install more programs"
-#~ msgstr "将要安装 %d MB。你可以选择安装更多程式"
+#~ msgstr "将要安装 %d MB。你还可以再挑选其他软件"
+
+#~ msgid "Bad kickstart file %s (failed %s)"
+#~ msgstr "%s 不是可用的快速安装文件(%s 出错)"
+
+#~ msgid "Size: %s MB"
+#~ msgstr "大小: %s MB"
+
+#~ msgid "US Keyboard"
+#~ msgstr "US keyboard"
+
+#~ msgid "resizing"
+#~ msgstr "改变中"
+
+#~ msgid "formatting"
+#~ msgstr "正在格式化"
+
+#~ msgid "changing type of"
+#~ msgstr "改变类型的分区"
+
+#~ msgid "After %s partition %s,"
+#~ msgstr "在 %s 分区 %s 之后，"
+
+#~ msgid "linear"
+#~ msgstr "线性寻址"
+
+#~ msgid "Linear (needed for some SCSI drives)"
+#~ msgstr " 线性寻址 (一些 SCSI 盘需要)"
+
+#~ msgid "User name:"
+#~ msgstr "用户名:"
+
+#~ msgid "Password:"
+#~ msgstr "口令"
+
+#~ msgid "Local Printer Options"
+#~ msgstr "本机打印机选项"
+
+#~ msgid "server"
+#~ msgstr "服务器"
+
+#~ msgid "expert"
+#~ msgstr "专家"
+
+#~ msgid "developer"
+#~ msgstr "程序开发者"
+
+#~ msgid "beginner"
+#~ msgstr "初学者"
+
+#~ msgid "Installation CD Nr 1"
+#~ msgstr "安装 CD 1"
+
+#~ msgid "Dialup with modem"
+#~ msgstr "用调制解调器拨号接入"
+
+#~ msgid "Local LAN"
+#~ msgstr "局域网"
