@@ -174,6 +174,11 @@ substInFile {
 unlink "$::prefix/usr/lib/menu/kdebase-kdm";
 
 touch("$::prefix/etc/menu/enable_simplified");
+
+substInFile {
+    s/mandrake_doc-(en|fr)/mandrake_doc-move-$1/g;
+} "$::prefix/usr/lib/menu/simplified/mandrake_desk";
+
 $ENV{LC_ALL} = 'en_US'; #- update-menus doesn't work when there is no locale (aka locale "C")
 run_program::rooted($::prefix, 'update-menus', '-n');
 
