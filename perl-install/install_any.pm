@@ -540,7 +540,7 @@ sub install_urpmi {
 	#- output new urpmi.cfg format here.
 	"$qname " . ($dir !~ /^(ftp|http)/ && $qdir) . " {
   hdlist: hdlist.$name.cz
-  with_hdlist: ../base/$_->{hdlist}
+  with_hdlist: ../base/" . ($_->{update} ? "hdlist.cz" : $_->{hdlist}) . "
   list: list.$name" . ($dir =~ /removable:/ && "
   removable: /dev/cdrom") . ($_->{update} && "
   update") . "
