@@ -261,3 +261,7 @@ dont_run_directly_stage2:
 	rm -f $(DEST)/usr/bin/runinstall2
 	echo -e '#!/bin/sh\n\nexec /usr/bin/busybox sh' > $(DEST)/usr/bin/runinstall2
 	chmod a+x $(DEST)/usr/bin/runinstall2
+
+trace_stage2:
+	eval `perl -V:vendorlib`; install -m 644 -D $$vendorlib/Devel/Trace.pm $(DEST)$$vendorlib/Devel/Trace.pm
+	perl -pi -e 's|(#!/usr/bin/perl).*|$$1 -d:Trace|' $(DEST)/usr/bin/runinstall2	
