@@ -997,7 +997,10 @@ sub hasNetwork {
 sub upNetwork {
     my ($o, $pppAvoided) = @_;
 
-    symlinkf("$o->{prefix}/etc/$_", "/etc/$_") foreach (qw(resolv.conf protocols services));
+    #- do not destroy this file if prefix is '' or even '/' (could it happens ?).
+    if (length($o->{prefix}) > 1) {
+	symlinkf("$o->{prefix}/etc/$_", "/etc/$_") foreach (qw(resolv.conf protocols services));
+    }
 
     modules::write_conf($o->{prefix});
     if (hasNetwork($o)) {
