@@ -322,11 +322,13 @@ sub reallyChooseGroups {
 
 sub choosePackagesTree {
     my ($o, $packages) = @_;
+
+    my $available = install_any::getAvailableSpace($o);
+    my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
+
     my $common; $common = { get_status => sub {
 				my $size = pkgs::selectedSize($packages);
-				_("Total size: %d / %d MB",
-				  pkgs::correctSize($size / sqr(1024)),
-				  install_any::getAvailableSpace($o) / sqr(1024));
+				_("Total size: %d / %d MB", pkgs::correctSize($size / sqr(1024)), $available / sqr(1024));
 			    },
 			    node_state => sub {
 				my $p = pkgs::packageByName($packages,$_[0]) or return;
@@ -393,7 +395,7 @@ sub choosePackagesTree {
 					my $p = $packages->{names}{$_};
 					pkgs::packageFlagSelected($p) or $size += pkgs::packageSize($p);
 				    }
-				    if (pkgs::correctSize($size / sqr(1024)) > install_any::getAvailableSpace($o) / sqr(1024)) {
+				    if (pkgs::correctSize($size / sqr(1024)) > $available / sqr(1024)) {
 					return $o->ask_warn('', _("You can't select this package as there is not enough space left to install it"));
 				    }
 
@@ -446,7 +448,17 @@ sub choosePackagesTree {
 					 help         => _("Load/Save on floppy"),
 					 wait_message => _("Updating package selection"),
 					 code         => sub { $o->loadSavePackagesOnFloppy($packages); 1; },
-				       }, ],
+				       }, 
+				       if_(0, 
+				       { icon         => 'feather',
+					 help         => _("Minimal install"),
+					 code         => sub {
+					     
+					     install_any::unselectMostPackages($o);
+					     pkgs::setSelectedFromCompssList($packages, { SYSTEM => 1 }, 4, $availableCorrected);
+					     1;
+					 } }),
+				     ],
 			    state => {
 				      auto_deps => 1,
 				      flat      => 0,
