@@ -34,7 +34,7 @@ sub init {
       foreach qw(encodings.dir app-defaults applnk fs lbxproxy proxymngr rstart wmsession.d xinit.d xinit xkb xserver xsm);
 
     #- to be able to adduser, one need to have /etc/passwd and /etc/group writable
-    cp_af("/image/etc/$_", "/etc") foreach qw(passwd group);
+    system("cp /image/etc/{passwd,group} /etc");
 
     #- free up stage1 memory
     fs::umount($_) foreach qw(/stage1/proc /stage1);
