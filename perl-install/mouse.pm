@@ -283,7 +283,7 @@ sub detect() {
     my @wacom = probe_wacom_devices();
 
     if (c::kernel_version() =~ /^\Q2.6/) {
-	modules::get_probeall("usb-interface") and eval { modules::load('hid') };
+	modules::get_probeall("usb-interface") and eval { modules::load('usbhid') };
 	if (cat_('/proc/bus/input/devices') =~ /^H: Handlers=mouse/m) {
 	    return fullname2mouse('Universal|Any PS/2 & USB mice', wacom => \@wacom);
 	}
