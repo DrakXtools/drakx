@@ -43,7 +43,8 @@ sub find_exports {
     my ($server) = @_;
 
     local *F;
-    my $pid = open F, "showmount -e $server->{ip} |";
+    my $s = $server->{ip} || $server->{name};
+    my $pid = open F, "showmount -e $s |";
     $SIG{ALRM} = sub { kill(15, $pid) };
     alarm 5;
 
