@@ -258,9 +258,9 @@ sub pppConfig {
     $toreplace{$_} = $o->{modem}{$_} foreach qw(connection phone login passwd auth domain);
     $toreplace{phone} =~ s/[^\d]//g;
     $toreplace{dnsserver} = ($o->{modem}{dns1} && "$o->{modem}{dns1},") . ($o->{modem}{dns2} && "$o->{modem}{dns2},");
-    $toreplace{exdnsdisabled} = $o->{modem}{exdnsdisabled} ? 1 : 0;
-    template2file("/usr/share/kppprc.in" ,"$o->{prefix}/root/.kde/share/config/kppprc", %toreplace);
-    template2file("/usr/share/kppprc.in" ,"$o->{prefix}/etc/skel/.kde/share/config/kppprc", %toreplace);
+    foreach ("$o->{prefix}/root", "$o->{prefix}/etc/skel") {
+	template2file("/usr/share/kppprc.in", "$_/.kde/share/config/kppprc", %toreplace) if -d "$_/.kde/share/config";
+    }
 }
 
 #------------------------------------------------------------------------------

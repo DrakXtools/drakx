@@ -241,48 +241,70 @@ sub configureNetwork($) {
     my ($o, $first_time) = @_;
     my $r = '';
     if ($o->{intf}) {
-	if ($first_time) {
+	if (!$::beginner && $first_time) {
 	    my @l = (
 		     __("Keep the current IP configuration"),
 		     __("Reconfigure network now"),
 		     __("Do not set up networking"),
 		    );
-	    $r = $o->ask_from_list_(_("Network Configuration"),
+	    $r = $o->ask_from_list_([ _("Network Configuration") ],
 				    _("Local networking has already been configured. Do you want to:"),
-				    [ @l ]);
-	    $r ||= "Don't";
+				    [ @l ]) || "Do not";
 	}
+	$r = "Keep" if $::beginner;
+    } elsif ($o->{modem}) {
+	$r = "Dialup";
     } else {
-#	$r = $o->ask_from_list(_("Network Configuration"),)
-	$o->ask_yesorno(_("Network Configuration"),
-			_("Do you want to configure LAN (not dialup) networking for your system?")) or $r = "Don't";
+	$r = !$::beginner &&
+	  $o->ask_from_list_([ _("Network Configuration") ],
+			     _("Do you want to configure networking for yout system?"),
+			     [ __("Local LAN"), __("Dialup with modem"), __("Do not set up networking") ]) || "Do not";
     }
 
-    if ($r =~ /^Don't/) { #-' for xgettext
-	$o->{netc}{NETWORKING} = "false";
-    } elsif ($r !~ /^Keep/) {
-	$o->setup_thiskind('net', !$::expert, 1);
-	my @l = detect_devices::getNet() or die _("no network card found");
-
-	my $last; foreach ($::beginner ? $l[0] : @l) {
-	    my $intf = network::findIntf($o->{intf} ||= [], $_);
-	    add2hash($intf, $last);
-	    add2hash($intf, { NETMASK => '255.255.255.0' });
-	    $o->configureNetworkIntf($intf) or return;
-
-	    $o->{netc} ||= {};
-	    delete $o->{netc}{dnsServer};
-	    delete $o->{netc}{GATEWAY};
-	    $last = $intf;
+    if ($r =~ /^Dialup/) {
+	my ($device, $desc) = $o->{modem}{device};
+	unless ($device || $::expert && $o->ask_yesorno('', _("Skip modem autodetection?"), 1)) {
+	    foreach (0..3) {
+		next if readlink("$o->{prefix}/dev/mouse") =~ /ttyS$_/;
+		$desc = detect_devices::hasModem("$o->{prefix}/dev/ttyS$_");
+		$device = "ttyS$_" if $desc;
+		last if $device;
+	    }
 	}
-	#-	  {
-	#-	      my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
-	#-	      network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
-	#-	  }
-	$last->{BOOTPROTO} =~ /^(dhcp|bootp)$/ ||
-	  $o->configureNetworkNet($o->{netc}, $last ||= {}, @l) or return;
+	$device = mouse::serial_ports_names2dev($o->ask_from_list('', _("Which serial port is your modem connected to?"),
+								  [ mouse::serial_ports_names() ])) unless $device;
+	log::l("using modem at /dev/$device");
+	$o->{modem}{device} = $device;
+	install_steps::modemConfig($o);
+
+	$o->pppConfig();
+    } else {
+	if ($r =~ /^Do not/) {
+	    $o->{netc}{NETWORKING} = "false";
+	} elsif ($r !~ /^Keep/) {
+	    $o->setup_thiskind('net', !$::expert, 1);
+	    my @l = detect_devices::getNet() or die _("no network card found");
+
+	    my $last; foreach ($::beginner ? $l[0] : @l) {
+		my $intf = network::findIntf($o->{intf} ||= [], $_);
+		add2hash($intf, $last);
+		add2hash($intf, { NETMASK => '255.255.255.0' });
+		$o->configureNetworkIntf($intf) or return;
+
+		$o->{netc} ||= {};
+		delete $o->{netc}{dnsServer};
+		delete $o->{netc}{GATEWAY};
+		$last = $intf;
+	    }
+	    #-	  {
+	    #-	      my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
+	    #-	      network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
+	    #-	  }
+	    $last->{BOOTPROTO} =~ /^(dhcp|bootp)$/ ||
+	      $o->configureNetworkNet($o->{netc}, $last ||= {}, @l) or return;
+	}
+	install_steps::configureNetwork($o);
     }
-    install_steps::configureNetwork($o);
 }
 
 sub configureNetworkIntf {
@@ -333,33 +355,6 @@ You may also enter the IP address of the gateway if you have one"),
 }
 
 #------------------------------------------------------------------------------
-sub modemConfig {
-    my ($o, $clicked) = @_;
-    return unless $clicked;
-
-    if ($o->ask_yesorno('', _("Do you have a modem?"), 0)) {
-	my ($device, $desc) = '';
-	unless ($::expert && $o->ask_yesorno('', _("Skip modem autodetection?"), 1)) {
-	    foreach (0..3) {
-		next if readlink("$o->{prefix}/dev/mouse") =~ /ttyS$_/;
-		$desc = detect_devices::hasModem("$o->{prefix}/dev/ttyS$_");
-		$device = "ttyS$_" if $desc;
-		last if $device;
-	    }
-	}
-	$device = mouse::serial_ports_names2dev($o->ask_from_list('', _("Which serial port is your modem connected to?"),
-								  [ mouse::serial_ports_names() ])) unless $device;
-	log::l("using modem at /dev/$device");
-	$o->{modem}{device} = $device;
-    } else {
-	$o->{modem} = undef;
-    }
-
-    install_steps::modemConfig($o);
-
-    $o->pppConfig() if $o->{modem};
-}
-
 sub pppConfig {
     my ($o) = @_;
 
@@ -372,11 +367,10 @@ _("Authentication") => { val => \$o->{modem}{auth}, list => [ __("PAP"), __("CHA
 _("Domain name") => \$o->{modem}{domain},
 _("First DNS Server") => \$o->{modem}{dns1},
 _("Second DNS Server") => \$o->{modem}{dns2},
-_("Disable existing DNS servers during connection") => { val => \$o->{modem}{exdnsdisabled}, type => 'bool', },
 	    );
 
     install_steps::pppConfig($o) if $o->ask_from_entries_ref('',
-							     _("Dial-in options"),
+							     _("Dialup options"),
 							     [ grep_index { even($::i) } @l ],
 							     [ grep_index {  odd($::i) } @l ]);
 }

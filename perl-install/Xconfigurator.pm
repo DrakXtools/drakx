@@ -188,7 +188,7 @@ sub monitorConfiguration(;$$) {
 
     if ($useFB) {
 	#- use smallest values for monitor configuration since FB is used,
-	#- BIOS initialize graphics, hopes X server will not refuses that.
+	#- BIOS initialize graphics, current X server will not refuse that.
 	$monitor->{hsyncrange} ||= $hsyncranges[0];
 	$monitor->{vsyncrange} ||= $vsyncranges[0];
 	add2hash($monitor, { type => "Unknown", vendor => "Unknown", model => "Unknown" });
@@ -379,12 +379,10 @@ sub autoDefaultDepth($$) {
     }
 }
 
-sub autoDefaultResolution(;$$) {
+sub autoDefaultResolution(;$) {
     my $size = round(shift || 14); #- assume a small monitor (size is in inch)
-    my $useFB = shift || 0;
-    $useFB ? "800x600" : #- always take this one since 640x480x16 should allow 800x600x16 in all case (?).
-      $monitorSize2resolution[$size] ||
-	$monitorSize2resolution[$#monitorSize2resolution]; #- no corresponding resolution for this size. It means a big monitor, take biggest we have
+    $monitorSize2resolution[$size] ||
+      $monitorSize2resolution[$#monitorSize2resolution]; #- no corresponding resolution for this size. It means a big monitor, take biggest we have
 }
 
 sub chooseResolutionsGtk($$;$) {
@@ -524,7 +522,7 @@ Try with another video card or monitor")), return;
     #- remove unusable resolutions (based on the video memory size and the monitor hsync rate)
     keepOnlyLegalModes($card, $o->{monitor});
 
-    my $res = $o->{resolution_wanted} || autoDefaultResolution($o->{monitor}{size}, $o->{card}{server} eq 'FBdev');
+    my $res = $o->{resolution_wanted} || autoDefaultResolution($o->{monitor}{size});
     my $wres = first(split 'x', $res);
     my $depth = eval { $card->{default_depth} || autoDefaultDepth($card, $wres) };
 
@@ -721,7 +719,7 @@ sub main {
 
     $o->{monitor} = monitorConfiguration($o->{monitor}, $o->{card}{server} eq 'FBDev');
 
-    my $ok = resolutionsConfiguration($o, auto => ($::auto && $o->{card}{server} ne 'FBDev'), noauto => $::noauto);
+    my $ok = resolutionsConfiguration($o, auto => $::auto, noauto => $::noauto);
 
     $ok &&= testFinalConfig($o, $::auto);
 
