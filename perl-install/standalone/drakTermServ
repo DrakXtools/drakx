@@ -1945,8 +1945,8 @@ sub create_client_sysnetwork {
 	my ($hostname, $ip) = @_;
 	log::explanations("Adding /etc/sysconfig/network for $ip");
 	my $network_file = "/etc/sysconfig/network\$\$IP=$ip\$\$";
-	my %net_data = ("HOSTNAME=$hostname\n", "NETWORKING=yes\n", "FORWARD_IPV4=false\n");
-	output_p($network_file, %net_data);
+	my @net_data = ("HOSTNAME=$hostname\n", "NETWORKING=yes\n", "FORWARD_IPV4=false\n");
+	output_p($network_file, @net_data);
 }
 
 sub restart_server() {
