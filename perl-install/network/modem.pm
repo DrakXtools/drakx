@@ -49,7 +49,7 @@ sub ppp_configure {
     my ($in, $modem) = @_;
     $modem or return;
     $in->do_pkgs->install('ppp') if !$::testing;
-    $in->do_pkgs->install('kdenetwork-kppp') if !$::testing &&$in->do_pkgs->is_installed('kdebase');
+    $in->do_pkgs->install('kdenetwork-kppp') if !$::testing && $in->do_pkgs->is_installed('kdebase');
 
     any::devfssymlinkf($modem, 'modem') if $modem->{device} ne "/dev/modem";
 
@@ -70,9 +70,9 @@ sub ppp_configure {
 
     # handle static/dynamic settings:
     if ($modem->{auto_ip} eq N("Automatic")) {
-        $toreplace{$_} = '0.0.0.0' foreach qw(IPAddr SubnetMask) ;
+        $toreplace{$_} = '0.0.0.0' foreach qw(IPAddr SubnetMask);
     } else {
-        $toreplace{$_} = $modem->{$_} foreach qw(IPAddr SubnetMask) ;
+        $toreplace{$_} = $modem->{$_} foreach qw(IPAddr SubnetMask);
     }
     $toreplace{Gateway} = $modem->{auto_gateway} eq N("Automatic") ? '0.0.0.0' : $modem->{Gateway};
 
