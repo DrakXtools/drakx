@@ -1,4 +1,4 @@
-all: start.o dietlibc.a elftrunc
+all: start.o dietlibc.a
 
 ARCH=$(shell uname -m | sed 's/i[4-9]86/i386/')
 
@@ -39,9 +39,6 @@ libdietc.so: dietlibc.a
 
 $(SYSCALLOBJ): syscalls.h
 
-elftrunc: contrib/elftrunc.c start.o dietlibc.a
-	$(CROSS)gcc $(CFLAGS) -nostdlib -o $@ $^
-
 djb: compile load
 
 compile:
@@ -53,7 +50,7 @@ load:
 	chmod 755 $@
 
 clean:
-	rm -f *.o *.a t t1 compile load elftrunc exports mapfile libdietc.so
+	rm -f *.o *.a t t1 compile load exports mapfile libdietc.so
 	$(MAKE) -C examples clean
 
 tar: clean
