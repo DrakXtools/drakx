@@ -1163,6 +1163,11 @@ sub install {
     $do->{o}->pkg_install(@l);
 }
 
+sub what_provides {
+    my ($do, $name) = @;
+    map { $do->{o}{packages}{depslist}[$_]->name } keys %{$do->{o}{packages}{provides}{$name} || {}};
+}
+
 sub is_installed {
     my ($do, @l) = @_;
     foreach (@l) {
