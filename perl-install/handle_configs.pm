@@ -7,6 +7,18 @@ use strict;
 
 use common;
 
+sub searchstr {
+    # Preceed all characters which are special characters in regexps with
+    # a backslash, so that the returned string used in a regexp searches
+    # a literal occurence of the original string. White space is replaced
+    # by "\s+"
+    # "quotemeta()" does not serve for this, as it also quotes some regular
+    # characters, as the space
+    my ($s) = @_;
+    $s =~ s/([\\\/\(\)\[\]\{\}\|\.\$\@\%\*\?\#\+\-])/\\$1/g;
+    return $s;
+}
+
 sub read_directives {
 
     # Read one or more occurences of a directive
@@ -14,8 +26,7 @@ sub read_directives {
     my ($lines_ptr, $directive) = @_;
 
     my @result = ();
-    my $searchdirective = $directive;
-    $searchdirective =~ s/([\\\/\(\)\[\]\|\.\$\@\%\*\?])/\\$1/g;
+    my $searchdirective = searchstr($directive);
     ($_ =~ /^\s*$searchdirective\s+(\S.*)$/ and push(@result, $1)) 
 	foreach @{$lines_ptr};
     (chomp) foreach @result;
@@ -31,7 +42,7 @@ sub read_unique_directive {
     my ($lines_ptr, $directive, $default) = @_;
 
     if ((my @d = read_directives($lines_ptr, $directive)) > 0) {
-	my $value = @d[$#d];
+	my $value = $d[$#d];
 	set_directive($lines_ptr, "$directive $value");
 	return $value;
     } else {
@@ -45,10 +56,9 @@ sub insert_directive {
 
     my ($lines_ptr, $directive) = @_;
 
-    my $searchdirective = $directive;
-    $searchdirective =~ s/([\\\/\(\)\[\]\|\.\$\@\%\*\?])/\\$1/g;
+    my $searchdirective = searchstr($directive);
     ($_ =~ /^\s*$searchdirective$/ and return 0) foreach @{$lines_ptr};
-    splice(@{$lines_ptr}, -1, 0, "$directive\n");
+    push(@{$lines_ptr}, "$directive\n");
     return 1;
 }
 
@@ -59,8 +69,7 @@ sub remove_directive {
     my ($lines_ptr, $directive) = @_;
 
     my $success = 0;
-    my $searchdirective = $directive;
-    $searchdirective =~ s/([\\\/\(\)\[\]\|\.\$\@\%\*\?])/\\$1/g;
+    my $searchdirective = searchstr($directive);
     ($_ =~ /^\s*$searchdirective/ and $_ = "" and $success = 1)
 	foreach @{$lines_ptr};
     return $success;
@@ -70,12 +79,12 @@ sub comment_directive {
 
     # Comment out a directive
 
-    my ($lines_ptr, $directive) = @_;
+    my ($lines_ptr, $directive, $exactmatch) = @_;
 
     my $success = 0;
-    my $searchdirective = $directive;
-    $searchdirective =~ s/([\\\/\(\)\[\]\|\.\$\@\%\*\?])/\\$1/g;
-    ($_ =~ s/^(\s*$searchdirective)/\#$1/ and $success = 1)
+    my $searchdirective = searchstr($directive);
+    $searchdirective .= ".*" if (!$exactmatch);
+    ($_ =~ s/^\s*($searchdirective)$/\#$1/ and $success = 1)
 	foreach @{$lines_ptr};
     return $success;
 }
@@ -89,8 +98,7 @@ sub replace_directive {
 
     my $success = 0;
     $newdirective = "$newdirective\n";
-    my $searcholddirective = $olddirective;
-    $searcholddirective =~ s/([\\\/\(\)\[\]\|\.\$\@\%\*\?])/\\$1/g;
+    my $searcholddirective = searchstr($olddirective);
     ($_ =~ /^\s*$searcholddirective/ and $_ = $newdirective and 
      $success = 1 and $newdirective = "") foreach @{$lines_ptr};
     return $success;
@@ -105,8 +113,7 @@ sub move_directive_to_version_commented_out {
     my ($lines_ptr, $commentedout, $directive, $exactmatch) = @_;
 
     my $success = 0;
-    my $searchcommentedout = $commentedout;
-    $searchcommentedout =~ s/([\\\/\(\)\[\]\|\.\$\@\%\*\?])/\\$1/g;
+    my $searchcommentedout = searchstr($commentedout);
     $searchcommentedout .= ".*" if (!$exactmatch);
     ($_ =~ /^\s*\#$searchcommentedout$/ and 
      $success = 1 and last) foreach @{$lines_ptr};
@@ -120,47 +127,40 @@ sub move_directive_to_version_commented_out {
 
 sub set_directive {
 
-    # Set a directive in the cupsd.conf, replace the old definition or
-    # a commented definition
+    # Set a directive, replace the old definition or a commented definition
 
     my ($lines_ptr, $directive) = @_;
 
-    my $searchdirective = $directive;
-    $searchdirective =~ s/([\\\/\(\)\[\]\|\.\$\@\%\*\?])/\\$1/g;
+    my $searchdirective = searchstr($directive);
     my $olddirective = $searchdirective;
     $olddirective =~ s/^\s*(\S+)\s+.*$/$1/s;
+    $olddirective ||= $directive;
 
     my $success = (replace_directive($lines_ptr, $olddirective,
 				     $directive) or
 		   insert_directive($lines_ptr, $directive));
     if ($success) {
-	move_directive_to_version_commented_out($lines_ptr, 
-						"$directive\$", 
-						$directive) or
-	move_directive_to_version_commented_out($lines_ptr, 
-						$olddirective, $directive);
+	move_directive_to_version_commented_out($lines_ptr, $directive, 
+						$directive, 1);
     }
     return $success;
 }
 
 sub add_directive {
 
-    # Set a directive in the cupsd.conf, replace the old definition or
-    # a commented definition
+    # Add a directive, replace a commented definition
 
     my ($lines_ptr, $directive) = @_;
 
-    my $searchdirective = $directive;
-    $searchdirective =~ s/([\\\/\(\)\[\]\|\.\$\@\%\*\?])/\\$1/g;
+    my $searchdirective = searchstr($directive);
     my $olddirective = $searchdirective;
     $olddirective =~ s/^\s*(\S+)\s+.*$/$1/s;
+    $olddirective ||= $directive;
 
     my $success = insert_directive($lines_ptr, $directive);
     if ($success) {
 	move_directive_to_version_commented_out($lines_ptr, $directive, 
-						$directive, 1) or
-	move_directive_to_version_commented_out($lines_ptr, 
-						$olddirective, $directive);
+						$directive, 1);
     }
     return $success;
 }
