@@ -425,7 +425,10 @@ Consoles 1,3,4,7 may also contain interesting information";
     run_program::rooted($o->{prefix}, "chkconfig", "--add", $_) foreach
 			qw(random netfs network rawdevices sound kheader usb keytable syslog crond portmap);
 
-    run_program::rooted($o->{prefix}, "chkconfig", "--del", "gpm") if $o->{mouse}{device} =~ /ttyS/;
+    if ($o->{mouse}{device} =~ /ttyS/) {
+	log::l("disabling gpm for serial mice (doesn't get along nicely with X)");
+	run_program::rooted($o->{prefix}, "chkconfig", "--del", "gpm") 
+    }
 
     #- call update-menus at the end of package installation
     run_program::rooted($o->{prefix}, "update-menus");
