@@ -237,7 +237,7 @@ sub ask_attack_verdict {
     }
 
     my $w = Gtk2::Window->new;
-    $w->set_title(N("Active Firewall : intrusion detected"));
+    $w->set_title(N("Active Firewall: intrusion detected"));
     $w->set_icon(gtknew('Pixbuf', file => "/usr/lib/libDrakX/icons/drakfirewall.png"));
     my ($yes, $no, $auto);
 
