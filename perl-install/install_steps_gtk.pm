@@ -303,7 +303,7 @@ sub choosePackagesTree {
 			    build_tree => sub {
 				my ($add_node, $flat) = @_;
 				if ($flat) {
-				    foreach (sort map { $_->name } grep { !$limit_to_medium || pkgs::packageMedium($packages, $_) }
+				    foreach (sort map { $_->name } grep { !$limit_to_medium || pkgs::packageMedium($packages, $_) == $limit_to_medium }
 					     @{$packages->{depslist}}) {
 					$add_node->($_, undef);
 				    }
