@@ -161,7 +161,7 @@ static enum return_type third_party_choose_device(char ** device)
 static enum return_type thirdparty_mount_device(char * device)
 {
         log_message("third party: trying to mount device %s", device);
-	if (try_mount(device, THIRDPARTY_MOUNT_LOCATION) == -1) {
+	if (!try_mount(device, THIRDPARTY_MOUNT_LOCATION)) {
 		stg1_error_message("I can't mount the selected device (%s).", device);
 		return RETURN_ERROR;
 	}
