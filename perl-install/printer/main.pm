@@ -2139,7 +2139,10 @@ sub configure_hpoj {
 	while (<PTALINIT>) {
 	    if (m!sub main!) {
 		last;
-	    } elsif (m!^[^\#]!) {
+	    } elsif ((m!^[^\#]!) && !(m!^\s*exec\b!)){
+		# Comment lines and the "exec" line (probably obsolete
+		# Red Hat workaround) are skipped.
+
 		# Make the subroutines also working during installation
 		if ($::isInstall) {
 		    s!\$::prefix!\$hpoj_prefix!g;
