@@ -47,9 +47,9 @@ sub detect_timezone() {
 		       'Europe/Paris' => N("France"),
 		       'Europe/Amsterdam' => N("Netherlands"),
 		       'Europe/Rome' => N("Italy"),
-		       'Europe/Brussels' => N("Belgium"), 
+		       'Europe/Brussels' => N("Belgium"),
 		       'America/New_York' => N("United States"),
-		       'Europe/London' => N("United Kingdom") 
+		       'Europe/London' => N("United Kingdom")
 		      );
     my %tm_parse = MDK::Common::System::getVarsFromSh("$::prefix/etc/sysconfig/clock");
     my @country;
@@ -97,8 +97,8 @@ sub real_main {
       my $config = {};
       eval(cat_("$::prefix/etc/sysconfig/drakconnect"));
 
-      my %wireless_mode = (N("Ad-hoc") => "Ad-hoc", 
-                           N("Managed") => "Managed", 
+      my %wireless_mode = (N("Ad-hoc") => "Ad-hoc",
+                           N("Managed") => "Managed",
                            N("Master") => "Master",
                            N("Repeater") => "Repeater",
                            N("Secondary") => "Secondary",
@@ -187,7 +187,7 @@ sub real_main {
           return "ask_connect_now" if member($netc->{internet_cnx_choice}, qw(modem isdn isdn_external));
           return "end";
       };
-    
+
       my $after_start_on_boot_step = sub {
           if ($netc->{internet_cnx_choice} && exists $netc->{internet_cnx}{$netc->{internet_cnx_choice}}) {
               $netcnx->{type} = $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{type};
@@ -229,7 +229,7 @@ sub real_main {
           }
       };
 
-      
+
       # main wizard:
       my $wiz;
       $wiz =
@@ -237,7 +237,7 @@ sub real_main {
          defaultimage => "drakconnect.png",
          name => N("Network & Internet Configuration"),
          pages => {
-                   welcome => 
+                   welcome =>
                    {
                     pre => sub {
                         # keep b/c of translations in case they can be reused somewhere else:
@@ -252,7 +252,7 @@ sub real_main {
                            [ N("LAN connection"),    "lan"   ],
                            [ N("Wireless connection"), "lan" ],
                           );
-                        
+
                         foreach (@connections) {
                             my ($string, $type) = @$_;
                             $connections{$string} = $type;
@@ -272,20 +272,20 @@ sub real_main {
                     },
                    },
 
-                   prepare_detection => 
+                   prepare_detection =>
                    {
                     name => N("We are now going to configure the %s connection.\n\n\nPress \"%s\" to continue.",
                               translate($type), N("Next")),
                     post => $handle_multiple_cnx,
                    },
 
-                 
+
                    hw_account => 
                    {
                     name => N("Connection Configuration") . "\n\n" .
                     N("Please fill or check the field below"),
                     data => sub {
-                             [ 
+                             [
                              (map {
                                  my ($dstruct, $field, $item) = @$_;
                                  $item->{val} = \$dstruct->{$field};
@@ -361,7 +361,7 @@ sub real_main {
                     },
                     name => N("Select the network interface to configure:"),
                     data =>  sub {
-                        [ { label => N("Net Device"), type => "list", val => \$isdn_name, allow_empty_list => 1, 
+                        [ { label => N("Net Device"), type => "list", val => \$isdn_name, allow_empty_list => 1,
                             list => [ $my_isdn, N("External ISDN modem"), keys %isdn_cards ] } ];
                     },
                     post => sub {
@@ -412,7 +412,7 @@ sub real_main {
                     data => sub { [ { label => N("Net Device"), val => \$isdn_name, type => 'list', separator => '|', list => [ keys %isdn_cards ], allow_empty_list => 1 } ] },
                     pre2 => sub {
                         my ($label) = @_;
-                        
+
                         #- ISDN card already detected
                         goto isdn_ask_step_3;
 
@@ -476,7 +476,7 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
                                list => [ keys %isdn_protocols ], format => sub { $isdn_protocols{$_[0]} } }
                             ],
                     post => sub { 
-                        $isdn->{protocol} = $isdn_type; 
+                        $isdn->{protocol} = $isdn_type;
                         return "isdn_db";
                     }
                    },
@@ -534,13 +534,12 @@ Take a look at http://www.linmodems.org"),
                                          ltmodem => "/etc/devfs/conf.d/ltmodem.conf",
                                          slmodem => "/usr/sbin/slmodemd",
                                         );
-                        
+
                         my %devices = (ltmodem => '/dev/ttyS14',
                                        hsflinmodem => '/dev/ttySHSF0',
                                        slmodem => '/dev/ttySL0'
                                       );
-                        
-                        
+
                         if (my $driver = $netc->{autodetect}{modem}{$modem_name}{driver}) {
                             $driver =~ /^Hcf:/ and $type = "hcfmodem";
                             $driver =~ /^Hsf:/ and $type = "hsfmodem";
@@ -562,7 +561,6 @@ Take a look at http://www.linmodems.org"),
                     },
                    },
 
-                   
                    choose_serial_port =>
                    {
                     name => N("Please choose which serial port your modem is connected to."),
@@ -624,20 +622,20 @@ Take a look at http://www.linmodems.org"),
                         $mouse ||= {};
                         $mouse->{device} ||= readlink "$::prefix/dev/mouse";
                     },
-                    name => N("Dialup: account options"), 
+                    name => N("Dialup: account options"),
                     data => sub {
                             [
                              { label => N("Connection name"), val => \$modem->{connection} },
                              { label => N("Phone number"), val => \$modem->{phone} },
                              { label => N("Login ID"), val => \$modem->{login} },
                              { label => N("Password"), val => \$modem->{passwd}, hidden => 1 },
-                             { label => N("Authentication"), val => \$modem->{Authentication}, 
+                             { label => N("Authentication"), val => \$modem->{Authentication},
                                list => [ sort keys %ppp_auth_methods ], format => sub { $ppp_auth_methods{$_[0]} } },
                             ];
                         },
                     next => "ppp_ip",
                    },
-         
+
 
                    ppp_ip =>
                    {
@@ -654,7 +652,7 @@ Take a look at http://www.linmodems.org"),
                     },
                     next => "ppp_dns",
                    },
-         
+
 
                    ppp_dns =>
                    {
@@ -673,15 +671,15 @@ Take a look at http://www.linmodems.org"),
                     },
                     next => "ppp_gateway",
                    },
-         
+
 
                    ppp_gateway =>
                    {
-                    name => N("Dialup: IP parameters"), 
+                    name => N("Dialup: IP parameters"),
                     data => sub {
                         [
                          { label => N("Gateway"), type => "list", val => \$modem->{auto_gateway}, list => [ N("Automatic"), N("Manual") ] },
-                         { label => N("Gateway IP address"), val => \$modem->{Gateway}, 
+                         { label => N("Gateway IP address"), val => \$modem->{Gateway},
                            disabled => sub { $modem->{auto_gateway} eq N("Automatic") } },
                         ];
                         },
@@ -693,7 +691,7 @@ Take a look at http://www.linmodems.org"),
                    },
 
 
-                   adsl => 
+                   adsl =>
                    {
                     pre => sub {
                         get_subwizard($wiz, 'adsl');
@@ -744,7 +742,7 @@ Take a look at http://www.linmodems.org"),
                     },
                    },
 
-                   
+
                    adsl_provider =>
                    {
                     pre => sub {
@@ -812,7 +810,7 @@ or skip and do it later."),
                     next => 'adsl_provider',
                    },
 
-                   
+
                    "adsl_no_firmawre" =>
                    {
                     name => N("You need the Alcatel microcode.
@@ -821,7 +819,7 @@ Download it at:
 and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.net/speedtouch/speedtouch-20011007.tar.bz2'),
                     next => "adsl_provider",
                    },
-         
+
 
                    adsl_protocol =>
                    {
@@ -867,7 +865,7 @@ If you do not know, choose 'use PPPoE'"),
                         return 'adsl_account';
                     },
                    },
-                    
+
 
                    adsl_account => 
                    {
@@ -912,7 +910,7 @@ If you do not know, choose 'use PPPoE'"),
 You can find a driver on http://eciadsl.flashtux.org/"),
                      end => 1,
                     },
-         
+
 
                    lan => 
                    {
@@ -980,7 +978,7 @@ Do you really want to reconfigure this device?"),
                         return 'lan_intf';
                     },
                    },
-                   
+
 
                    # FIXME: is_install: no return for each card "last step" because of manual popping
                    # better construct an hash of { current_netintf => next_step } which next_step = last_card ? next_eth_step : next_card ?
@@ -1241,8 +1239,9 @@ See iwpriv(8) man page for further information."),
                         return "static_hostname";
                     },
                    },
-                   
-                   static_hostname => 
+
+
+                   static_hostname =>
                    {
                     pre => sub {
                         if ($ethntf->{IPADDR}) {
@@ -1271,7 +1270,7 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                                 help => N("By default search domain will be set from the fully-qualified host name") },
                               { label => N("Gateway (e.g. %s)", $gateway_ex), val => \$netc->{GATEWAY} },
                               if_(@all_cards > 1,
-                                  { label => N("Gateway device"), val => \$netc->{GATEWAYDEV}, list => [ sort keys %all_eth_intf ], 
+                                  { label => N("Gateway device"), val => \$netc->{GATEWAYDEV}, list => [ sort keys %all_eth_intf ],
                                     format => sub { $all_eth_intf{$_[0]} } },
                                  ),
                              ),
@@ -1292,9 +1291,9 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                     #post => $handle_multiple_cnx,
                     next => "zeroconf",
                    },
-                   
-                   
-                   zeroconf => 
+
+
+                   zeroconf =>
                    {
                     name => N("If desired, enter a Zeroconf hostname.
 This is the name your machine will use to advertise any of
@@ -1309,25 +1308,27 @@ It is not necessary on most networks."),
                     },
                     post => $handle_multiple_cnx,
                    },
-                   
-                   
-                   multiple_internet_cnx => 
+
+
+                   multiple_internet_cnx =>
                    {
                     name => N("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n") . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center"),
                     data => sub {
-                        [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice}, 
+                        [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice},
                             list => [ keys %{$netc->{internet_cnx}} ] } ];
                     },
                     post => $save_cnx,
                    },
-                   
-                   apply_settings => 
+
+
+                   apply_settings =>
                    {
                     name => N("Configuration is complete, do you want to apply settings?"),
                     type => "yesorno",
                    },
-                   
-                   network_on_boot => 
+
+
+                   network_on_boot =>
                    {
                     pre => sub {
                         # condition is :
@@ -1346,6 +1347,7 @@ It is not necessary on most networks."),
                         return $after_start_on_boot_step->();
                     },
                    },
+
 
                    isdn_dial_on_boot =>
                    {
@@ -1375,7 +1377,8 @@ It is not necessary on most networks."),
                     },
                    },
 
-                   restart => 
+
+                   restart =>
                    {
                     name => N("The network needs to be restarted. Do you want to restart it?"),
                     type => "yesorno",
@@ -1390,7 +1393,8 @@ It is not necessary on most networks."),
                         return $offer_to_connect->();
                     },
                    },
-                   
+
+
                    ask_connect_now => 
                    {
                     name => N("Do you want to try to connect to the Internet now?"),
@@ -1414,7 +1418,9 @@ It is not necessary on most networks."),
                         return $a ? "disconnect" : "end";
                     }
                    },
-                   disconnect => 
+
+
+                   disconnect =>
                    {
                     name => sub {
                         $up ? N("The system is now connected to the Internet.") .
@@ -1430,13 +1436,14 @@ Try to reconfigure your connection.");
                     },
                    },
 
-                   end => 
+
+                   end =>
                    {
                     name => sub {
                         return $success ? join('', N("Congratulations, the network and Internet configuration is finished.
 
 "), if_($::isStandalone && $in->isa('interactive::gtk'),
-        N("After this is done, we recommend that you restart your X environment to avoid any hostname-related problems."))) : 
+        N("After this is done, we recommend that you restart your X environment to avoid any hostname-related problems."))) :
           N("Problems occurred during configuration.
 Test your connection via net_monitor or mcc. If your connection does not work, you might want to relaunch the configuration.");
                     },
@@ -1444,7 +1451,7 @@ Test your connection via net_monitor or mcc. If your connection does not work, y
                    },
                   },
         };
-      
+
       my $use_wizard = 1;
       if ($::isInstall) {
           if ($first_time && $in->{method} =~ /^(ftp|http|nfs)$/) {
@@ -1452,7 +1459,7 @@ Test your connection via net_monitor or mcc. If your connection does not work, y
               !$::expert && !$o_noauto || $in->ask_okcancel(N("Network Configuration"),
                                                             N("Because you are doing a network installation, your network is already configured.
 Click on Ok to keep your configuration, or cancel to reconfigure your Internet & Network connection.
-"), 1) 
+"), 1)
                 and do {
                     $netcnx->{type} = 'lan';
                     $netc->{$_} = 'eth0' foreach qw(NET_DEVICE NET_INTERFACE);
@@ -1460,7 +1467,7 @@ Click on Ok to keep your configuration, or cancel to reconfigure your Internet &
                 };
         }
       }
-      
+
       if ($use_wizard) {
           require wizards;
           $wiz->{var} = {
