@@ -38,7 +38,7 @@ sub writeconf() {
 }
 
 sub read_nut_config() {
-    $struct = Libconf::Glueconf::NUT::Ups_conf->new($files{devices})
+    $struct = Libconf::Glueconf::NUT::Ups_conf->new({ filename => $files{devices} })
 }
 
 sub readDriversList() {
@@ -273,7 +273,7 @@ my @pages = (
                              remove => sub {},
                             },
                load => sub {
-                   $users = Libconf::Glueconf::NUT::Ups_conf->new($files{users});
+                   $users = Libconf::Glueconf::NUT::Ups_conf->new({ filename => $files{users} });
                    map { [ $_ ] } keys %$users;
                },
                id => "users",
