@@ -29,10 +29,10 @@ sub recreate_ipsec_conf {
 	} else { 
 	#- kernel 2.6 part -------------------------------
 		foreach my $key1 (ikeys %$ipsec) {
-			if (! $ipsec->{$key1}{secure_policy}) {
+			if (! $ipsec->{$key1}{command}) {
 				print "$ipsec->{$key1}\n";
 			} else {	
-				print 	$ipsec->{$key1}{secure_policy} . " " .
+				print 	$ipsec->{$key1}{command} . " " .
 					$ipsec->{$key1}{src_range} . " " .
 					$ipsec->{$key1}{dst_range} . " " .
 					$ipsec->{$key1}{upperspec} . " " .
@@ -552,7 +552,7 @@ sub read_ipsec_conf {
 					next;
 				} elsif ($in_a_conn eq "y") {
 					@mylist = (@mylist, split '\s+|/',$myline);
-					put_in_hash(\%conf, { $nb =>  {	secure_policy => $mylist[0],
+					put_in_hash(\%conf, { $nb =>  {	command => $mylist[0],
 									src_range => $mylist[1],
 									dst_range => $mylist[2],
 									upperspec => $mylist[3],
@@ -596,10 +596,10 @@ sub write_ipsec_conf {
 	#- kernel 2.6 part -------------------------------
 		my $display = "";
 		foreach my $key1 (ikeys %$ipsec) {
-			if (! $ipsec->{$key1}{secure_policy}) {
+			if (! $ipsec->{$key1}{command}) {
 				$display .= "$ipsec->{$key1}\n";
 			} else {
-				$display .=	$ipsec->{$key1}{secure_policy} . " " .
+				$display .=	$ipsec->{$key1}{command} . " " .
 						$ipsec->{$key1}{src_range} . " " .
 						$ipsec->{$key1}{dst_range} . " " .
 						$ipsec->{$key1}{upperspec} . " " .
@@ -618,12 +618,10 @@ sub write_ipsec_conf {
 }
 
 sub display_ipsec_conf {
-	my ($ipsec_conf, $ipsec, $kernel_version) = @_;
+	my ($ipsec, $kernel_version) = @_;
 	my $display = "";
 
-	if (! -e $ipsec_conf) {
-		$display = "There is no $ipsec_conf file\n"; 
-	} elsif ($kernel_version < 2.5) {
+	if ($kernel_version < 2.5) {
 	#- kernel 2.4 part -------------------------------
 		foreach my $key1 (ikeys %$ipsec) {
 			$display .= "$ipsec->{$key1}\n" if ! $ipsec->{$key1}{1};
@@ -641,10 +639,10 @@ sub display_ipsec_conf {
 	} else {
 	#- kernel 2.6 part -------------------------------
 		foreach my $key1 (ikeys %$ipsec) {
-			if (! $ipsec->{$key1}{secure_policy}) {
+			if (! $ipsec->{$key1}{command}) {
 				$display .= "$ipsec->{$key1}\n";
 			} else {
-				$display .=	$ipsec->{$key1}{secure_policy} . " " .
+				$display .=	$ipsec->{$key1}{command} . " " .
 						$ipsec->{$key1}{src_range} . " " .
 						$ipsec->{$key1}{dst_range} . " " .
 						$ipsec->{$key1}{upperspec} . " " .
@@ -655,7 +653,7 @@ sub display_ipsec_conf {
 						$ipsec->{$key1}{mode} . "/" .
 						$ipsec->{$key1}{src_dest} . "/" .
 						$ipsec->{$key1}{level} . ";\n";
-			}; 
+			} 
 		}
 
 	}
@@ -665,32 +663,30 @@ sub display_ipsec_conf {
 }
 
 sub get_section_names_ipsec_conf {
-	my ($ipsec_conf, $ipsec, $kernel_version) = @_;
+	my ($ipsec, $kernel_version) = @_;
 	my @section_names;
 
-	if (-e $ipsec_conf) {
-		if ($kernel_version < 2.5) {
-		#- kernel 2.4 part -------------------------------
-			foreach my $key1 (ikeys %$ipsec) {
-				foreach my $key2 (ikeys %{$ipsec->{$key1}}) {
-					if ($ipsec->{$key1}{$key2}[0] =~ m/(^conn|^config|^version)/) {
-						push(@section_names, "$ipsec->{$key1}{$key2}[0] $ipsec->{$key1}{$key2}[1]");
-					};
-				}
-			}
-
-		} else {
-		#- kernel 2.6 part -------------------------------
-			foreach my $key1 (ikeys %$ipsec) {
-					if ($ipsec->{$key1}{secure_policy} =~ m/(^spdadd)/) {
-						push(@section_names, "$ipsec->{$key1}{src_range} $ipsec->{$key1}{dst_range}");
-					};
+	if ($kernel_version < 2.5) {
+	#- kernel 2.4 part -------------------------------
+		foreach my $key1 (ikeys %$ipsec) {
+			foreach my $key2 (ikeys %{$ipsec->{$key1}}) {
+				if ($ipsec->{$key1}{$key2}[0] =~ m/(^conn|^config|^version)/) {
+					push(@section_names, "$ipsec->{$key1}{$key2}[0] $ipsec->{$key1}{$key2}[1]");
+				};
 			}
 		}
 
+	} else {
+	#- kernel 2.6 part -------------------------------
+		foreach my $key1 (ikeys %$ipsec) {
+				if ($ipsec->{$key1}{command} =~ m/(^spdadd)/) {
+					push(@section_names, "$ipsec->{$key1}{src_range} $ipsec->{$key1}{dst_range}");
+				};
+		}
+	}
+
 	@section_names;
 
-	}
 }
 
 sub remove_section_ipsec_conf {
