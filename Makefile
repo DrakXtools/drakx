@@ -19,9 +19,15 @@ endif
 ifeq (ia64,$(ARCH))
     BOOT_IMG = all.img
 endif
+ifeq (x86_64,$(ARCH))
+    BOOT_IMG = BOOT_IMG = cdrom.img hd.img hdcdrom_usb.img network.img network_gigabit_usb.img blank.img
+endif
 
 FBOOT_IMG = $(BOOT_IMG:%=images/%)
-FBOOT_RDZ = $(FBOOT_IMG:%.img=%.rdz) images/all.rdz
+FBOOT_RDZ = $(FBOOT_IMG:%.img=%.rdz)
+ifneq (all.img,$(findstring all.img,$(BOOT_IMG)))
+FBOOT_RDZ += images/all.rdz
+endif
 
 .PHONY: dirs install
 
@@ -63,6 +69,11 @@ install_only:
 	rm -rf $(ROOTDEST)/isolinux
 	cp -af isolinux $(ROOTDEST)
 	cp -f images/cdrom-changedisk.img $(ROOTDEST)/images
+    endif
+
+    ifeq (x86_64,$(ARCH))
+	rm -rf $(ROOTDEST)/isolinux
+	cp -af isolinux $(ROOTDEST)
     endif
 
 	install live_update $(ROOTDEST)/live_update

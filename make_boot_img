@@ -73,13 +73,17 @@ foreach (@kernels) {
 	rename("$img-$main", "$img");
     }
 }
+if ($arch =~ /x86_64/ && $img =~ /all/) {
+    # isolinux is supposed to work on all those new hardware
+    isolinux($main, @kernels);
+}
 if ($arch =~ /i.86/ && $img =~ /all/) {
     isolinux($main, @kernels);
 
     my ($img, $img_sav) = ("images/cdrom.img-$main", 'images/cdrom.img-sav');
     rename($img, $img_sav);
     $type = 'cdrom';
-    boot_img_i386($mnt, $img, "kernel/all.kernels/$main/boot/vmlinu*", sub { $_[0] =~ s/\bautomatic=\S+\b//; "$_[0] changedisk" });
+    $::{"boot_img_$arch"}->($mnt, $img, "kernel/all.kernels/$main/boot/vmlinu*", sub { $_[0] =~ s/\bautomatic=\S+\b//; "$_[0] changedisk" });
     rename($img, 'images/cdrom-changedisk.img');
     rename($img_sav, $img);
 }
@@ -103,6 +107,7 @@ sub initrd {
     _ "$sudo mount -t ext2 $tmp $mnt -o loop";
 
     _ "$sudo tar xjC $mnt -f $tar";
+    symlinkf "/tmp/stage2/lib64", "$mnt/lib64" if ($arch =~ /x86_64/);
     install_stripped("$instdir/init", "$mnt/sbin");
     install_stripped("$instdir/$install", "$mnt/sbin/stage1");
 
@@ -114,7 +119,7 @@ sub initrd {
 	_ "$sudo mknod $mnt/dev/ttyp0 c 3 0";
     }
 
-    if (member($type, qw(pcmcia all network)) && $arch !~ /ppc/ && $arch !~ /ia64/) {
+    if (member($type, qw(pcmcia all network)) && $arch !~ /ppc|ia64|x86_64/) {
 	 _ "$sudo cp -a /etc/pcmcia $mnt/etc";
 	 _ "cp $mnt/etc/pcmcia/config /tmp/pcmcia_config_tmp";
 	 _ "tools/patch_pcmcia_config.pl /tmp/pcmcia_config_tmp kernel/all.modules/$main/modules.dep";
@@ -214,6 +219,9 @@ F3 boot.msg
     _ "sync";
     _ "df $mnt";
 }
+
+# alias to x86 variant, slightly bigger with images though
+sub boot_img_x86_64 { &boot_img_i386 }
 
 sub boot_img_alpha {
     my ($mnt, $img) = @_;
