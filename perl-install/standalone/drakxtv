@@ -115,9 +115,12 @@ sub scan4channels() {
 
 my @devices = detect_devices::getTVcards();
 push @devices, { driver => 'bttv', description => 'dummy' } if $::testing && !@devices;
-if (@devices) {
+my ($devices, $devices_ok) = partition { detect_devices::isTVcard($_) } @devices;
+
+my $modules_conf;
+
+if (@devices = @$devices) {
     my $not_canceled = 1;
-    my $modules_conf;
     # TODO: That need some work for multiples TV cards
     each_index {
 	   if (($< == 0 || $::testing) && (grep { detect_devices::isTVcard($_) } @devices)) {
@@ -130,7 +133,15 @@ if (@devices) {
 	   }
 	   scan4channels() if $not_canceled;
     } @devices
-} else {
+}
+
+if (@devices = @$devices_ok) {
+    require modules;
+    $modules_conf ||= modules::any_conf->read;
+    $modules_conf->write;
+}
+
+if (!$devices && !$devices_ok) {
     $in->ask_warn(N("No TV Card detected!"), formatAlaTeX(
                                                           #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
                                                           N("No TV Card has been detected on your machine. Please verify that a Linux-supported Video/TV Card is correctly plugged in.
