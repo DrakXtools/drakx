@@ -2676,13 +2676,17 @@ sub get_printer_info {
 		$printer->{SPECIAL_OPTIONS} .= 
 		    " -o PageSize=$pagesize";
 	    }
+	    # Do not embed the following messages in the add-printer
+	    # wizard.
+	    local $::isWizard = 0;
 	    # oki4w driver -> OKI winprinter which needs the
 	    # oki4daemon to work
 	    if ($printer->{currentqueue}{driver} eq 'oki4w') {
 		if ($printer->{currentqueue}{connect} !~ 
 		    m!^(parallel|file):/dev/lp0$!) {
-		    $in->ask_warn(N("OKI winprinter configuration"),
-				  N("You are configuring an OKI laser winprinter. These printers\nuse a very special communication protocol and therefore they work only when connected to the first parallel port. When your printer is connected to another port or to a print server box please connect the printer to the first parallel port before you print a test page. Otherwise the printer will not work. Your connection type setting will be ignored by the driver."));
+		    $::noX || 
+			$in->ask_warn(N("OKI winprinter configuration"),
+				      N("You are configuring an OKI laser winprinter. These printers\nuse a very special communication protocol and therefore they work only when connected to the first parallel port. When your printer is connected to another port or to a print server box please connect the printer to the first parallel port before you print a test page. Otherwise the printer will not work. Your connection type setting will be ignored by the driver."));
 		}
 		$printer->{currentqueue}{connect} = 'file:/dev/null';
 		# Start the oki4daemon
@@ -2706,8 +2710,9 @@ sub get_printer_info {
 		if ($opt) {
 		    $printer->{SPECIAL_OPTIONS} .= $opt;
 		} else {
-		    $in->ask_warn(N("Lexmark inkjet configuration"),
-				  N("The inkjet printer drivers provided by Lexmark only support local printers, no printers on remote machines or print server boxes. Please connect your printer to a local port or configure it on the machine where it is connected to."));
+		    $::noX || 
+			$in->ask_warn(N("Lexmark inkjet configuration"),
+				      N("The inkjet printer drivers provided by Lexmark only support local printers, no printers on remote machines or print server boxes. Please connect your printer to a local port or configure it on the machine where it is connected to."));
 		    return 0;
 		}
 		# Set device permissions
@@ -2735,8 +2740,9 @@ sub get_printer_info {
 		if (!files_exist("/usr/local/lexmark/$drivertype/$drivertype")) {
 		    # Driver installation failed, probably we do not have
 		    # the commercial CDs
-		    $in->ask_warn(N("Lexmark inkjet configuration"),
-				  N("To be able to print with your Lexmark inkjet and this configuration, you need the inkjet printer drivers provided by Lexmark (http://www.lexmark.com/). Click on the \"Drivers\" link. Then choose your model and afterwards \"Linux\" as operating system. The drivers come as RPM packages or shell scripts with interactive graphical installation. You do not need to do this configuration by the graphical frontends. Cancel directly after the license agreement. Then print printhead alignment pages with \"lexmarkmaintain\" and adjust the head alignment settings with this program."));
+		    $::noX || 
+			$in->ask_warn(N("Lexmark inkjet configuration"),
+				      N("To be able to print with your Lexmark inkjet and this configuration, you need the inkjet printer drivers provided by Lexmark (http://www.lexmark.com/). Click on the \"Drivers\" link. Then choose your model and afterwards \"Linux\" as operating system. The drivers come as RPM packages or shell scripts with interactive graphical installation. You do not need to do this configuration by the graphical frontends. Cancel directly after the license agreement. Then print printhead alignment pages with \"lexmarkmaintain\" and adjust the head alignment settings with this program."));
 		}
 	    } elsif ($printer->{currentqueue}{driver} eq 'drv_x125') {
 		# Set "Device" option
@@ -2745,8 +2751,9 @@ sub get_printer_info {
 		if ($opt) {
 		    $printer->{SPECIAL_OPTIONS} .= $opt;
 		} else {
-		    $in->ask_warn(N("Lexmark X125 configuration"),
-				  N("The driver for this printer only supports printers locally connected via USB, no printers on remote machines or print server boxes. Please connect your printer to a local USB port or configure it on the machine where it is connected to."));
+		    $::noX || 
+			$in->ask_warn(N("Lexmark X125 configuration"),
+				      N("The driver for this printer only supports printers locally connected via USB, no printers on remote machines or print server boxes. Please connect your printer to a local USB port or configure it on the machine where it is connected to."));
 		    return 0;
 		}
 		# Set device permissions
@@ -2759,6 +2766,56 @@ sub get_printer_info {
               } else {
                   set_permissions($2, '660', 'lp', 'lp');
               }
+		}
+		# This is needed to have the device not blocked by the
+		# spooler backend.
+		$printer->{currentqueue}{connect} = 'file:/dev/null';
+	    } elsif ($printer->{currentqueue}{driver} eq 'ml85p') {
+		# Check whether printer is on first parallel port
+		if ($printer->{currentqueue}{connect} !~
+		    m!^\s*(parallel|file):/dev/(lp|printers/)0\s*$!) {
+		    $::noX || 
+			$in->ask_warn(N("Samsung ML/QL-85G configuration"),
+				      N("The driver for this printer only supports printers locally connected on the first parallel port, no printers on remote machines or print server boxes or on other parallel ports. Please connect your printer to the first parallel port or configure it on the machine where it is connected to."));
+		    return 0;
+		}
+		# Set driver executable permissions
+		if ($printer->{SPOOLER} eq 'cups') {
+		    set_permissions('/usr/bin/ml85p', 
+				    '4750', 'root', 'sys');
+		} elsif ($printer->{SPOOLER} eq 'pdq') {
+		    set_permissions('/usr/bin/ml85p', 
+				    '4755', 'root', 'sys');
+		} else {
+		    set_permissions('/usr/bin/ml85p', 
+				    '4750', 'root', 'lp');
+		}
+		# This is needed to have the device not blocked by the
+		# spooler backend.
+		$printer->{currentqueue}{connect} = 'file:/dev/null';
+	    } elsif (($printer->{currentqueue}{driver} =~
+		      m!^\s*lbp[46]60\s*$!) || 
+		     ($printer->{currentqueue}{ppd} && 
+		      ($printer->{currentqueue}{ppd} =~ 
+		       m!Canon-LBP-[46]60-lbp[46]60.ppd!))) {
+		# Check whether printer is on first parallel port
+		if ($printer->{currentqueue}{connect} !~
+		    m!^\s*(parallel|file):/dev/(lp|printers/)0\s*$!) {
+		    $::noX || 
+			$in->ask_warn(N("Canon LBP-460/660 configuration"),
+				      N("The driver for this printer only supports printers locally connected on the first parallel port, no printers on remote machines or print server boxes or on other parallel ports. Please connect your printer to the first parallel port or configure it on the machine where it is connected to."));
+		    return 0;
+		}
+		# Set driver executable permissions
+		if ($printer->{SPOOLER} eq 'cups') {
+		    set_permissions('/usr/bin/lbp660', 
+				    '4750', 'root', 'sys');
+		} elsif ($printer->{SPOOLER} eq 'pdq') {
+		    set_permissions('/usr/bin/lbp660', 
+				    '4755', 'root', 'sys');
+		} else {
+		    set_permissions('/usr/bin/lbp660', 
+				    '4750', 'root', 'lp');
 		}
 		# This is needed to have the device not blocked by the
 		# spooler backend.
@@ -3148,6 +3205,9 @@ Note: the photo test page can take a rather long time to get printed and on lase
 		!files_exist('/usr/bin/convert')) {
 		$in->do_pkgs->install('ImageMagick')
 		    or do {
+			# Do not embed this message in the add-printer
+			# wizard.
+			local $::isWizard = 0;
 			$in->ask_warn(N("Warning"),
 				      N("Could not install the %s package!",
 					"ImageMagick") . " " .
@@ -3176,6 +3236,9 @@ Printing status:\n%s\n\n", @lpq_output);
 It may take some time before the printer starts.\n");
 	}
 	if ($printer->{NEW} == 0) {
+	    # Do not embed the following messages in the add-printer
+	    # wizard.
+	    local $::isWizard = 0;
 	    $in->ask_warn(N("Printerdrake"),$dialogtext);
 	    return 1;
 	} else {
@@ -4246,7 +4309,11 @@ sub add_printer {
 		    goto step_2;
 		};
 	    }
-	    get_printer_info($printer, $in) or return 0;
+	    get_printer_info($printer, $in) or do {
+		goto step_4 if $printer->{expert} || $printer->{MANUAL} ||
+		    $printer->{MANUALMODEL};
+		goto step_3_9;
+	    };
 	    $queue = generate_queuename($printer);
 	  step_5:
 	    setup_options($printer, $in) or
@@ -4436,6 +4503,8 @@ What do you want to modify on this printer?",
 	    if ($modify eq N("Printer connection type")) {
 		choose_printer_type($printer, $in, $upNetwork) &&
 		    setup_printer_connection($printer, $in, $upNetwork) &&
+		    #get_db_entry($printer, $in) &&
+		    #get_printer_info($printer, $in) &&
 		    configure_queue($printer, $in);
 	    } elsif ($modify eq N("Printer name, description, location")) {
 		choose_printer_name($printer, $in) and
