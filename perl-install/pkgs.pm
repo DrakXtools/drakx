@@ -66,10 +66,11 @@ my %ignoreBadPkg = (
 #- size and deps are grouped to save memory too and make a much
 #- simpler and faster depslist reader, this gets (sizeDeps).
 sub packageHeaderFile   { $_[0]->[$FILE] }
-sub packageName         { $_[0]->[$FILE] =~ /([^\(]*)(?:\([^\)]*\))?-[^-]+-[^-]+/ ? $1 : die "invalid file `$_[0]->[$FILE]'" }
-sub packageSpecificArch { $_[0]->[$FILE] =~ /[^\(]*(?:\(([^\)]*)\))?-[^-]+-[^-]+/ ? $1 : die "invalid file `$_[0]->[$FILE]'" }
-sub packageVersion      { $_[0]->[$FILE] =~ /.*-([^-]+)-[^-]+/ ? $1 : die "invalid file `$_[0]->[$FILE]'" }
-sub packageRelease      { $_[0]->[$FILE] =~ /.*-[^-]+-([^-]+)/ ? $1 : die "invalid file `$_[0]->[$FILE]'" }
+sub packageName         { $_[0]->[$FILE] =~ /(.*)-[^-]+-[^-]+\..*/ ? $1 : die "invalid file `$_[0]->[$FILE]'" }
+sub packageVersion      { $_[0]->[$FILE] =~ /.*-([^-]+)-[^-]+\..*/ ? $1 : die "invalid file `$_[0]->[$FILE]'" }
+sub packageRelease      { $_[0]->[$FILE] =~ /.*-[^-]+-([^-]+)\..*/ ? $1 : die "invalid file `$_[0]->[$FILE]'" }
+sub packageArch         { $_[0]->[$FILE] =~ /.*-[^-]+-[^-]+\.(.*)/ ? $1 : die "invalid file `$_[0]->[$FILE]'" }
+sub packageFile         { $_[0]->[$FILE] . ".rpm" }
 
 sub packageSize   { to_int($_[0]->[$SIZE_DEPS]) }
 sub packageDepsId { split ' ', ($_[0]->[$SIZE_DEPS] =~ /^\d*\s*(.*)/)[0] }
@@ -95,12 +96,6 @@ sub packageRate { substr($_[0]->[$VALUES], 0, 1) }
 
 sub packageHeader     { $_[0]->[$HEADER] }
 sub packageFreeHeader { c::headerFree(delete $_[0]->[$HEADER]) }
-
-sub packageFile { 
-    $_[0]->[$HEADER] or die "packageFile: missing header";
-    $_[0]->[$FILE] =~ /([^\(]*)(?:\([^\)]*\))?(-[^-]+-[^-]+)/;
-    "$1$2." . c::headerGetEntry($_[0]->[$HEADER], 'arch') . ".rpm";
-}
 
 sub packageSelectedOrInstalled { packageFlagSelected($_[0]) || packageFlagInstalled($_[0]) }
 
@@ -422,11 +417,6 @@ sub psUsingHdlist {
 
     #- extract filename from archive, this take advantage of verifying
     #- the archive too.
-#    local *F; open F, "packdrake $newf |";
-#    local $_;
-#    while (<F>) {
-#	chomp;
-#	/^[dlf]\s+/ or next;
     eval {
 	require packdrake;
 	my $packer = new packdrake($newf);
@@ -435,12 +425,12 @@ sub psUsingHdlist {
 	    #if (/^f\s+\d+\s+(.*)/) {
 	    #my $pkg = [ (undef) x 8 ]; $pkg->[$FILE] = $1; $pkg->[$MEDIUM] = $m;
 	    my $pkg = [ (undef) x 8 ]; $pkg->[$FILE] = $_; $pkg->[$MEDIUM] = $m;
-	    my $specific_arch = packageSpecificArch($pkg);
+	    my $specific_arch = packageArch($pkg);
 	    if (!$specific_arch || compat_arch($specific_arch)) {
 		my $old_pkg = $packages->{names}{packageName($pkg)};
 		if ($old_pkg) {
 		    if (packageVersion($pkg) eq packageVersion($old_pkg) && packageRelease($pkg) eq packageRelease($old_pkg)) {
-			if (better_arch($specific_arch, packageSpecificArch($old_pkg))) {
+			if (better_arch($specific_arch, packageArch($old_pkg))) {
 			    log::l("replacing old package with package $_ with better arch: $specific_arch");
 			    $packages->{names}{packageName($pkg)} = $pkg;
 			} else {
@@ -455,11 +445,8 @@ sub psUsingHdlist {
 	    } else {
 	        log::l("ignoring package $_ with incompatible arch: $specific_arch");
 	    }
-	}# else {
-	#    die "bad hdlist file: $newf";
-	#}
+	}
     };
-    #close F or die "unable to parse $newf";
 
     #- update maximal index.
     $m->{max} = scalar(keys %{$packages->{names}}) - 1;
