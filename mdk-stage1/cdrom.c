@@ -116,7 +116,7 @@ enum return_type cdrom_prepare(void)
 	}
 
 	if (count == 0) {
-		error_message("No CDROM device found.");
+		stg1_error_message("No CDROM device found.");
 		i = ask_insmod(SCSI_ADAPTERS);
 		if (i == RETURN_BACK)
 			return RETURN_BACK;

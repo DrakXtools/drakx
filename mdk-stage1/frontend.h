@@ -19,10 +19,14 @@
 #ifndef _FRONTEND_H_
 #define _FRONTEND_H_
 
+#include <stdarg.h>
+
+
 enum return_type { RETURN_OK, RETURN_BACK, RETURN_ERROR };
 
 void init_frontend(char * welcome_msg);
 void finish_frontend(void);
+
 void error_message(char *msg, ...) __attribute__ ((format (printf, 1, 2))); /* blocking */
 void info_message(char *msg, ...) __attribute__ ((format (printf, 1, 2))); /* blocking */
 void wait_message(char *msg, ...) __attribute__ ((format (printf, 1, 2))); /* non-blocking */
@@ -38,10 +42,9 @@ enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_
 enum return_type ask_from_entries(char *msg, char ** questions, char *** answers, int entry_size, void (*callback_func)(char ** strings));
 
 
-#ifdef __FRONTEND_NEED_BACKEND__
-int error_message_backend(void);
-int info_message_backend(void);
-#endif
+void verror_message(char *msg, va_list ap);
+void vinfo_message(char *msg, va_list ap);
+void vwait_message(char *msg, va_list ap);
 
 
 #endif

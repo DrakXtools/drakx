@@ -319,7 +319,7 @@ static enum return_type insmod_with_options(char * mod, enum driver_type type)
 	strcat(options, answers[0]); // because my_insmod will eventually modify the string
 	
 	if (my_insmod(mod, type, answers[0]) != INSMOD_OK) {
-		error_message("Insmod failed.");
+		stg1_error_message("Insmod failed.");
 		return RETURN_ERROR;
 	}
 	

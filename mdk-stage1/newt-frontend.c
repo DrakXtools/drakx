@@ -52,32 +52,18 @@ void finish_frontend(void)
 }
 
 
-void error_message(char *msg, ...)
+void verror_message(char *msg, va_list ap)
 {
-	va_list args;
-#ifdef __FRONTEND_NEED_BACKEND__
-	if (error_message_backend())
-		return;
-#endif
-	va_start(args, msg);
-	newtWinMessagev("Error", "Ok", msg, args);
-	va_end(args);
+	newtWinMessagev("Error", "Ok", msg, ap);
 }
 
-void info_message(char *msg, ...)
+void vinfo_message(char *msg, va_list ap)
 {
-	va_list args;
-#ifdef __FRONTEND_NEED_BACKEND__
-	if (info_message_backend())
-		return;
-#endif
-	va_start(args, msg);
-	newtWinMessagev("Notice", "Ok", msg, args);
-	va_end(args);
+	newtWinMessagev("Notice", "Ok", msg, ap);
 }
 
 
-void wait_message(char *msg, ...)
+void vwait_message(char *msg, va_list ap)
 {
 	int width, height;
 	char * title = "Please wait...";
@@ -87,20 +73,15 @@ void wait_message(char *msg, ...)
 	char * flowed;
 	int size = 0;
 	int i = 0;
-	va_list args;
-	
-	va_start(args, msg);
 	
 	do {
 		size += 1000;
 		if (buf) free(buf);
 		buf = malloc(size);
-		i = vsnprintf(buf, size, msg, args);
+		i = vsnprintf(buf, size, msg, ap);
 	} while (i >= size || i == -1);
 
 	flowed = newtReflowText(buf, 60, 5, 5, &width, &height);
-	
-	va_end(args);
 	
 	c = newtTextbox(-1, -1, width, height, NEWT_TEXTBOX_WRAP);
 	newtTextboxSetText(c, flowed);

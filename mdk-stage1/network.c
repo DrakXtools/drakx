@@ -47,7 +47,7 @@
 
 static void error_message_net(void)  /* reduce code size */
 {
-	error_message("Could not configure network.");
+	stg1_error_message("Could not configure network.");
 }
 
 
@@ -373,7 +373,7 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 			return setup_network_interface(intf);
 
 		if (!inet_aton(answers[0], &addr)) {
-			error_message("Invalid IP address.");
+			stg1_error_message("Invalid IP address.");
 			return setup_network_interface(intf);
 		}
 		memcpy(&intf->ip, &addr, sizeof(addr));
@@ -541,7 +541,7 @@ static char * interface_select(void)
 	}
 
 	if (count == 0) {
-		error_message("No NET device found.");
+		stg1_error_message("No NET device found.");
 		i = ask_insmod(NETWORK_DEVICES);
 		if (i == RETURN_BACK)
 			return NULL;
@@ -628,13 +628,13 @@ enum return_type nfs_prepare(void)
 		strcat(nfsmount_location, answers[1]);
 		
 		if (my_mount(nfsmount_location, IMAGE_LOCATION, "nfs") == -1) {
-			error_message("I can't mount the directory from the NFS server.");
+			stg1_error_message("I can't mount the directory from the NFS server.");
 			results = RETURN_BACK;
 			continue;
 		}
 
 		if (access(IMAGE_LOCATION LIVE_LOCATION, R_OK)) {
-			error_message("That NFS volume does not seem to contain the " DISTRIB_NAME " Distribution.");
+			stg1_error_message("That NFS volume does not seem to contain the " DISTRIB_NAME " Distribution.");
 			umount(IMAGE_LOCATION);
 			results = RETURN_BACK;
 		}
@@ -645,7 +645,7 @@ enum return_type nfs_prepare(void)
 
 	if (IS_SPECIAL_STAGE2) {
 		if (load_ramdisk() != RETURN_OK) {
-			error_message("Could not load program into memory.");
+			stg1_error_message("Could not load program into memory.");
 			return nfs_prepare();
 		}
 	}
@@ -666,7 +666,7 @@ enum return_type ftp_prepare(void)
 	enum return_type results;
 
 	if (!ramdisk_possible()) {
-		error_message("FTP install needs more than %d Mbytes of memory (detected %d Mbytes).",
+		stg1_error_message("FTP install needs more than %d Mbytes of memory (detected %d Mbytes).",
 			      MEM_LIMIT_RAMDISK, total_memory());
 		return RETURN_ERROR;
 	}
@@ -694,11 +694,11 @@ enum return_type ftp_prepare(void)
 		if (ftp_serv_response < 0) {
 			log_message("FTP: error connect %d", ftp_serv_response);
 			if (ftp_serv_response == FTPERR_BAD_HOSTNAME)
-				error_message("Error: bad hostname.");
+				stg1_error_message("Error: bad hostname.");
 			else if (ftp_serv_response == FTPERR_FAILED_CONNECT)
-				error_message("Error: failed to connect to remote host.");
+				stg1_error_message("Error: failed to connect to remote host.");
 			else
-				error_message("Error: couldn't connect.");
+				stg1_error_message("Error: couldn't connect.");
 			results = RETURN_BACK;
 			continue;
 		}
@@ -712,13 +712,13 @@ enum return_type ftp_prepare(void)
 		if (fd < 0) {
 			log_message("FTP: error get %d", fd);
 			if (fd == FTPERR_PASSIVE_ERROR)
-				error_message("Error: error with passive connection.");
+				stg1_error_message("Error: error with passive connection.");
 			else if (fd == FTPERR_FILE_NOT_FOUND)
-				error_message("Error: file not found (%s).", location_full);
+				stg1_error_message("Error: file not found (%s).", location_full);
 			else if (fd == FTPERR_BAD_SERVER_RESPONSE)
-				error_message("Error: bad server response (server too busy?).");
+				stg1_error_message("Error: bad server response (server too busy?).");
 			else
-				error_message("Error: couldn't retrieve Installation program.");
+				stg1_error_message("Error: couldn't retrieve Installation program.");
 			results = RETURN_BACK;
 			continue;
 		}
@@ -752,7 +752,7 @@ enum return_type http_prepare(void)
 	enum return_type results;
 
 	if (!ramdisk_possible()) {
-		error_message("HTTP install needs more than %d Mbytes of memory (detected %d Mbytes).",
+		stg1_error_message("HTTP install needs more than %d Mbytes of memory (detected %d Mbytes).",
 			      MEM_LIMIT_RAMDISK, total_memory());
 		return RETURN_ERROR;
 	}
@@ -781,9 +781,9 @@ enum return_type http_prepare(void)
 		if (fd < 0) {
 			log_message("HTTP: error %d", fd);
 			if (fd == FTPERR_FAILED_CONNECT)
-				error_message("Error: couldn't connect to server.");
+				stg1_error_message("Error: couldn't connect to server.");
 			else
-				error_message("Error: couldn't get file (%s).", location_full);
+				stg1_error_message("Error: couldn't get file (%s).", location_full);
 			results = RETURN_BACK;
 			continue;
 		}

@@ -22,19 +22,18 @@
  *
  */
 
-#include <sys/mount.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <unistd.h>
-#include <sys/ioctl.h>
-#include <signal.h>
-
-#include <stdlib.h>
 #include <stdio.h>
+#include <sys/ioctl.h>
+#include <sys/mount.h>
 #include <string.h>
 #include <errno.h>
 #include <ctype.h>
+#include <stdarg.h>
 
 #include "stage1.h"
 
@@ -78,18 +77,29 @@ void fatal_error(char *msg)
 
 
 /************************************************************
- * backend functs
- * the principle is to not pollute frontend code with stage1-specific stuff */
+ * special frontend functs
+ * (the principle is to not pollute frontend code with stage1-specific stuff) */
 
-int error_message_backend(void)
+void stg1_error_message(char *msg, ...)
 {
+	va_list args;
+	va_start(args, msg);
+	log_message("unsetting automatic");
 	unset_param(MODE_AUTOMATIC);
-	return 0;
+	verror_message(msg, args);
+	va_end(args);
 }
 
-int info_message_backend(void)
+void stg1_info_message(char *msg, ...)
 {
-	return IS_AUTOMATIC ? 1 : 0;
+	va_list args;
+	va_start(args, msg);
+	if (IS_AUTOMATIC) {
+		vlog_message(msg, args);
+		return;
+	}
+	vinfo_message(msg, args);
+	va_end(args);
 }
 
 
@@ -215,14 +225,14 @@ static void expert_third_party_modules(void)
 	my_insmod("floppy", ANY_DRIVER_TYPE, NULL);
 
 	if (my_mount("/dev/fd0", floppy_mount_location, "ext2") == -1) {
-		error_message("I can't find a Linux ext2 floppy in first floppy drive.");
+		stg1_error_message("I can't find a Linux ext2 floppy in first floppy drive.");
 		return expert_third_party_modules();
 	}
 
 	modules = list_directory(floppy_mount_location);
 
 	if (!modules || !*modules) {
-		error_message("No modules found on floppy disk.");
+		stg1_error_message("No modules found on floppy disk.");
 		umount(floppy_mount_location);
 		return expert_third_party_modules();
 	}
@@ -246,7 +256,7 @@ static void expert_third_party_modules(void)
 
 	if (rc) {
 		log_message("\tfailed");
-		error_message("Insmod failed.");
+		stg1_error_message("Insmod failed.");
 	}
 
 	return expert_third_party_modules();

@@ -63,7 +63,7 @@ static void warning_insmod_failed(enum insmod_return r)
 {
 	if (r != INSMOD_OK
 	    && !(IS_AUTOMATIC && r == INSMOD_FAILED_FILE_NOT_FOUND))
-		error_message("Warning, installation of driver failed. (please include msg from <Alt-F3> for bugreports)");
+		stg1_error_message("Warning, installation of driver failed. (please include msg from <Alt-F3> for bugreports)");
 }
 
 #ifndef DISABLE_NETWORK
@@ -173,7 +173,7 @@ static void probe_that_type(enum driver_type type)
 #ifndef DISABLE_NETWORK
 					if (type == NETWORK_DEVICES) {
 						/* insmod is quick, let's use the info message */
-						info_message("Detected network device:\n \n%s", pcidb[i].name);
+						stg1_info_message("Detected network device:\n \n%s", pcidb[i].name);
 						prepare_intf_descr(pcidb[i].name);
 						warning_insmod_failed(my_insmod(pcidb[i].module, NETWORK_DEVICES, NULL));
 						if (intf_descr_for_discover) /* for modules providing more than one net intf */

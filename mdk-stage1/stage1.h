@@ -47,6 +47,8 @@ extern char * interactive_fifo;
 
 void fatal_error(char *msg) __attribute__ ((noreturn));
 
-#define __FRONTEND_NEED_BACKEND__
+
+void stg1_error_message(char *msg, ...) __attribute__ ((format (printf, 1, 2)));
+void stg1_info_message(char *msg, ...) __attribute__ ((format (printf, 1, 2)));
 
 #endif

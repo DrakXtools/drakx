@@ -79,7 +79,7 @@ STAGE1_NETWORK_LIBS =
 endif
 
  #- stage1 itself
-STAGE1SRC = stage1.c log.c tools.c modules.c probing.c mount.c automatic.c
+STAGE1SRC = stage1.c log.c tools.c modules.c probing.c mount.c automatic.c frontend-common.c
 CDROMSRC = cdrom.c
 DISKSRC = disk.c lomount.c
 NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c
@@ -173,9 +173,6 @@ $(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c .depend
 
 $(INITOBJS): %.o: %.c
 	$(COMPILE) $(INIT_DEFS) -c $<
-
-$(FRONTEND_OBJS): %.o: %.c
-	$(COMPILE) $(INCLUDES) -D__FRONTEND_NEED_BACKEND__ -c $<
 
 .c.o: .depend
 	$(COMPILE) $(INCLUDES) $(PCMCIA_DEFS) -c $<

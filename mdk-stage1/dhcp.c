@@ -471,7 +471,7 @@ static int handle_transaction(int s, struct bootp_request * breq, struct bootp_r
 			timeout = 5;
 	}
 	
-	error_message("No DHCP reply received.");
+	stg1_error_message("No DHCP reply received.");
 	return -1;
 }
 
@@ -511,7 +511,7 @@ enum return_type perform_dhcp(struct interface_info * intf)
 	char requested_options[50];
 
 	if (strncmp(intf->device, "eth", 3)) {
-		error_message("DHCP available only for Ethernet networking.");
+		stg1_error_message("DHCP available only for Ethernet networking.");
 		return RETURN_ERROR;
 	}
 

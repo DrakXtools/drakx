@@ -163,44 +163,27 @@ static char * get_string_response(char * initial_string)
 	return strdup(s);
 }
 
-static void blocking_msg(char *type, char *fmt, va_list args)
+static void blocking_msg(char *type, char *fmt, va_list ap)
 {
 	printf(type);
-	vprintf(fmt, args);
+	vprintf(fmt, ap);
 	get_any_response();
 }
 
-void error_message(char *msg, ...)
+void verror_message(char *msg, va_list ap)
 {
-	va_list args;
-#ifdef __FRONTEND_NEED_BACKEND__
-	if (error_message_backend())
-		return;
-#endif
-	va_start(args, msg);
-	blocking_msg("> Error! ", msg, args);
-	va_end(args);
+	blocking_msg("> Error! ", msg, ap);
 }
 
-void info_message(char *msg, ...)
+void vinfo_message(char *msg, va_list ap)
 {
-	va_list args;
-#ifdef __FRONTEND_NEED_BACKEND__
-	if (info_message_backend())
-		return;
-#endif
-	va_start(args, msg);
-	blocking_msg("> Notice: ", msg, args);
-	va_end(args);
+	blocking_msg("> Notice: ", msg, ap);
 }
 
-void wait_message(char *msg, ...)
+void vwait_message(char *msg, va_list ap)
 {
-	va_list args;
 	printf("Please wait: ");
-	va_start(args, msg);
-	vprintf(msg, args);
-	va_end(args);
+	vprintf(msg, ap);
 	fflush(stdout);
 }
 

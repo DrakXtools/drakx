@@ -256,14 +256,14 @@ enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 
 	if (!st2) {
 		log_message("Opening compressed ramdisk: %s", BZ2_bzerror(st2, &z_errnum));
-		error_message("Could not open compressed ramdisk file.");
+		stg1_error_message("Could not open compressed ramdisk file.");
 		return RETURN_ERROR;
 	}
 
 	ram_fd = open(ramdisk, O_WRONLY);
 	if (ram_fd == -1) {
 		log_perror(ramdisk);
-		error_message("Could not open ramdisk device file.");
+		stg1_error_message("Could not open ramdisk device file.");
 		return RETURN_ERROR;
 	}
 	
@@ -282,7 +282,7 @@ enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 	if (!seems_ok) {
 		log_message("reading compressed ramdisk: %s", BZ2_bzerror(st2, &z_errnum));
 		remove_wait_message();
-		error_message("Could not uncompress second stage ramdisk.");
+		stg1_error_message("Could not uncompress second stage ramdisk.");
 		return RETURN_ERROR;
 	}
 
@@ -345,7 +345,7 @@ enum return_type load_ramdisk(void)
 
 	if (st2_fd == -1) {
 		log_message("open ramdisk file (%s) failed", img_name);
-		error_message("Could not open compressed ramdisk file (%s).", img_name);
+		stg1_error_message("Could not open compressed ramdisk file (%s).", img_name);
 		return RETURN_ERROR;
 	}
 
