@@ -12,21 +12,28 @@ msec - Perl functions to handle msec configuration files
 
 =head1 SYNOPSYS
 
+    #!/usr/bin/perl
+    
+    use strict;
+    use lib qw(/usr/lib/libDrakX);
     require security::msec;
-
-    my $msec = new msec;
-
-    $secure_level = get_secure_level;
-
-    @functions = $msec->get_functions;
-    foreach @functions { %options{$_} = $msec->get_function_value($_) }
-    foreach @functions { %defaults{$_} = $msec->get_function_default($_) }
-    foreach @functions { $msec->config_function($_, %options{$_}) }
-
-    @checks = $msec->get_default_checks;
-    foreach @checks { %options{$_} = $msec->get_check_value($_) }
-    foreach @checks { %defaults{$_} = $msec->get_check_default($_) }
-    foreach @checks { $msec->config_check($_, %options{$_}) }
+    
+    my $msec = new security::msec;
+    
+    my $secure_level = $msec->get_secure_level;
+    
+    my (%options, %defaults);
+    
+    my @functions = $msec->get_functions();
+    
+    foreach (@functions) { $options{$_} = $msec->get_function_value($_) }
+    foreach (@functions) { $defaults{$_} = $msec->get_function_default($_) }
+    foreach (@functions) { $msec->config_function($_, $options{$_}) }
+    
+    my @checks = $msec->get_default_checks;
+    foreach (@checks) { $options{$_} = $msec->get_check_value($_) }
+    foreach (@checks) { $defaults{$_} = $msec->get_check_default($_) }
+    foreach (@checks) { $msec->config_check($_, $options{$_}) }
 
 =head1 DESCRIPTION
 
