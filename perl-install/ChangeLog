@@ -1,3 +1,300 @@
+2004/01/26  keld
+
+	* share/po/da.po: Updates
+	soft/control-center/po/da.po soft/GtkMdkWidgets/po/da.po
+	soft/mdkhtmlbrowser/po/da.po soft/menudrake/po/da.po
+	soft/rfbdrake/po/da.po gi/perl-install/share/po/da.po
+
+2004/01/26  Pixel  <pixel at mandrakesoft.com>
+
+	* keyboard.pm: don't use ioctl KDSKBENT with kernel 2.6, until fixed...
+
+2004/01/26  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakclock (Repaint) help perl_checker in checking
+	time_to_rad() arguments
+	(spinned) do not pass extra arguments to time_to_rad()
+	reindent gtkpack calls
+	rename adj_* variables as adj* in order to help cperl-mode parsing
+	this file
+
+	* c/stuff.xs.pl (getNetDriver) introduce getHwIDs() alias that return
+	pci/usb/... hw
+	addr (or "N/A" for some isapnp cards due to lack of support from
+	drivers)
+
+2004/01/25  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: kill unused dhcp_hostname step
+	fix again adsl type setting :-(
+	modem connection: install kppp
+	set adsl protocol to use according to provider database when using a
+	sagem 800
+	modem
+	modem connection: default to pap/chap authentification method (should
+	work for
+	most people)
+	typo fix
+
+	* drakxtools.spec: typo fix
+
+	* share/po/fr.po: update
+
+	* share/po/br.po: minor update
+
+2004/01/25  yrahal
+
+	* share/po/ar.po: Committing Arabeyes.org translation.
+
+2004/01/24  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: updated
+
+2004/01/24  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: s/ppptp/pptp/
+	factorize lan module search for adsl through ethernet
+	make adsl device choose somewhat readable (detabable though
+	fix adsl device setting :-(
+	kill unreachable code
+	kill unused variable
+	cleanup
+
+2004/01/23  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/advertising/dis-01.png, share/advertising/dwd-06.png,
+	share/advertising/dis-05.png, share/advertising/dis-08.png,
+	share/advertising/pwp-01.png, share/advertising/ppp-08.png,
+	share/advertising/dis-10.png, share/advertising/dwd-07.png,
+	share/advertising/dwd-02.png, share/advertising/ppp-06.png,
+	share/advertising/dis-07.png, share/advertising/pwp-05.png,
+	share/advertising/ppp-03.png, share/advertising/ppp-01.png,
+	share/advertising/dwd-04.png, share/advertising/dis-02.png,
+	share/advertising/pwp-03.png, share/advertising/ppp-05.png,
+	share/advertising/pwp-08.png, share/advertising/dwd-03.png,
+	share/advertising/dis-09.png, share/advertising/dis-03.png,
+	share/advertising/ppp-04.png, share/advertising/ppp-11.png,
+	share/advertising/dwd-08.png, share/advertising/pwp-06.png,
+	share/advertising/dis-06.png, share/advertising/ppp-09.png,
+	share/advertising/dis-11.png, share/advertising/ppp-10.png,
+	share/advertising/pwp-02.png, share/advertising/dis-04.png,
+	share/advertising/pwp-10.png, share/advertising/ppp-07.png,
+	share/advertising/pwp-09.png, share/advertising/dwd-01.png,
+	share/advertising/dwd-09.png, share/advertising/dwd-05.png,
+	share/advertising/ppp-02.png, share/advertising/pwp-07.png,
+	share/advertising/pwp-04.png: Update
+
+2004/01/23  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* rescue/tree/bin/insmod: autoprobe? what's that?
+
+	* docs/HACKING: wrong, "make" in kernel by hand is not even needed
+	update
+
+	* rescue/tree/sbin/modprobe: support 2.4 and 2.6
+
+	* standalone/printerdrake: "use USER" is unecessary and probably comes
+	from copy-pasting userdrake's GUI
+
+	* modules.pm: don't miss the hook with 2.6 usb kernels (might explain
+	fredl problem with usb keyboard)
+
+	* mdk-stage1/nfsmount.c: since dietlibc always reports null strings for
+	RPC errors, at least provide something useful instead
+
+	* rescue/list: lsmod.old and rmmod.old also needed
+
+2004/01/23  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/uz@Cyrl.po, share/po/ja.po,
+	share/po/hr.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/be.po, share/po/uk.po, share/po/mn.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/lt.po, share/po/he.po, share/po/cy.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/tg.po,
+	share/po/nb.po, share/po/bs.po, share/po/uz.po, share/po/ro.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/hi.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/nl.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/de.po, share/po/eo.po,
+	share/po/lv.po, share/po/el.po, share/po/cs.po, share/po/bg.po,
+	share/po/hu.po: upfdated pot file
+
+	* share/po/et.po: updated Estonian po file
+	upfdated pot file
+
+2004/01/23  Pixel  <pixel at mandrakesoft.com>
+
+	* fs.pm: checking {notFormatted} must never be done alone, one must check
+	{isFormatted} first!
+
+2004/01/23  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: perl_checker: assigned, but not read
+	More perl_checker fixes. Remove another unused sub.
+	Fix broken sys, other restore.
+	Rework timestamp for backup files to please perl_checker.
+
+2004/01/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakfont (search_dir_font) kill unused variable
+
+	* network/adsl_consts.pm: provider database needed in oder to not
+	arbitrary set obfuscated vpi
+	and vci parameters
+
+	* network/adsl.pm (adsl_probe_info) make it aware of the fact we now see
+	the adsl modem
+	and protocol separatly
+
+	* share/po/fr.po: update
+	minor update
+	update
+
+	* network/netconnect.pm: fix adsl connection type retrieving
+	fix interface name when doing adsl over an ethernet card
+	sort ADSL connection types
+	offer to configure sagem800 (needed because of unfriendly vpi/vci
+	parameters)
+
+	* interactive/gtk.pm: remove debug message
+	(ask_fromW) enable TreeView to take all availlable space
+
+2004/01/22  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: 
+	  - remove _radio suffix
+	  - prevent undefined value to be get_texted
+	  - further s/cnx/intf/
+	  - remove old code
+
+2004/01/22  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/probing.c: moving forward our story with nice kernel guys,
+	now they decided to remove the trailing space at the end of "Attached
+	devices:" of /proc/scsi/scsi, probably that they had nothing more
+	interesting to do this day
+	until we haven't loaded the usb interface and the keyboard usb driver,
+	we can't allow asking for additional drivers floppy, so need another
+	parameter to my_insmod to indicate in which situation we are
+
+	* mdk-stage1/cdrom.c, mdk-stage1/pcmcia_/cardmgr.c, mdk-stage1/mount.c,
+	mdk-stage1/lomount.c, mdk-stage1/disk.c, mdk-stage1/modules.h,
+	mdk-stage1/stage1.c, mdk-stage1/adsl.c, mdk-stage1/network.c: until we
+	haven't loaded the usb interface and the keyboard usb driver, we can't
+	allow asking for additional drivers floppy, so need another parameter to
+	my_insmod to indicate in which situation we are
+
+	* tools/cvslog2changelog.pl: clean up users
+	add planou
+
+	* mdk-stage1/modules.c: better do 2.4->2.6 compat module alias as soon as
+	possible to display correct stuff in logs and simplify code
+	until we haven't loaded the usb interface and the keyboard usb driver,
+	we can't allow asking for additional drivers floppy, so need another
+	parameter to my_insmod to indicate in which situation we are
+	when checking for modules already loaded, be sure to check for the real
+	name
+	ensure insmod will try to access correct filename according to 2.4->2.6
+	compat mapping
+	really display filename when "error reading" a file to insmod in 2.6
+
+	* mdk-stage1/Makefile: stage1-network-usb is deprecated
+
+2004/01/22  Pixel  <pixel at mandrakesoft.com>
+
+	* interactive/stdio.pm: $def_n is unused
+
+	* interactive/gtk.pm: remove unused variable
+
+	* modules/interactive.pm, install_steps_interactive.pm: help perl_checker
+
+2004/01/22  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakconnect: update copyright notices
+	  - fix untraslated strings
+	  - upcase tcp/ip
+
+	* network/tools.pm (copy_firmware) kill it (was merged into add intf
+	wizard
+
+	* network/netconnect.pm: fix doble "IP address" entries
+	typo fix
+	config some stuff about adsl protocol
+	kill debug statement
+	factorize out adsl protocols' translations
+	get rid of uselesss net_device variabl
+	code simplification due to previous assertion
+	ensure struct XXX and o_XXX parameters always reference the same hashes
+	when configuring an ethernet card, skip the protocol choice step for any
+	cnx
+	type different than lan (eg: for cable and adsl connections)
+	rollback debug stuff :-(
+	handle speedtouch firmware if needed
+	detect ECI like modems and warn we cannot support them (hence less
+	pressure on
+	our support services)
+	fix typo fix
+	typo fix :-(
+	tag speedtouch and eci connections as to be restarted as in old wizard
+
+	* detect_devices.pm: perl_checker cleanups
+	do not mix before and after firmware upload usb ids
+	(getECI) introduce it in order to detect eci like usb modems
+
+	* standalone/drakfont: update copyright notices
+	remove never implemented --strong option
+	perl_checker cleanups
+	fix button label
+
+	* network/adsl.pm (adsl_conf_backend) kill interactive code (was merged
+	into adsl wizard)
+	(adsl_detect) detect ECI modems
+	rename old end adsl step
+
+	* share/po/ms.po, share/po/sk.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/th.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/be.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/da.po, share/po/ca.po, share/po/ar.po, share/po/nb.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/uz@Cyrl.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/advertising/dwd-03.pl, share/po/mn.po, share/po/uk.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/fr.po, share/po/ta.po, share/po/nl.po, share/po/de.po,
+	share/po/eo.po, share/po/el.po, share/po/bg.po, share/po/cs.po:
+	s/(Mandrake Linux is one) (the most widely used)/\1 of \2/
+
+	* ugtk2.pm: perl_checker cleanups
+	minor cleanups
+	(gtkadd_widget) introduce it for size groups
+
+	* standalone/drakfirewall, standalone/logdrake, standalone/drakpxe,
+	standalone/drakboot, standalone/drakTermServ, standalone/net_monitor,
+	standalone/drakbackup, standalone/printerdrake, standalone/fileshareset,
+	standalone/drakedm, standalone/drakhelp, standalone/XFdrake,
+	standalone/drakbug, standalone/drakupdate_fstab, standalone/draksound,
+	standalone/drakxtv, standalone/draksec, standalone/drakautoinst,
+	standalone/drakproxy, standalone/diskdrake, standalone/drakfloppy,
+	standalone/drakgw, standalone/scannerdrake: update copyright notices
+
+	* interactive/gtk.pm (ask_fromW) gc prefers ->isa()
+	(ask_fromW) enable properly setted checkbuttons (aka those who
+	correctly use text instead of label) to take all the place they need,
+	thus preventing spurious horizontal scrolling bar to show up
+
+	* harddrake/sound.pm: draksound doesn't write the sound alias b/c of wrong
+	comparison with the
+	default driver, thus not configuring not yet configured cards (#6988)
+
 2004/01/22  Alice Lafox  <alice at lafox.com.ua>
 
 	* share/po/ru.po: updated
@@ -23899,7 +24196,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.855 2004/01/21 16:22:31 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.856 2004/01/22 14:52:40 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
