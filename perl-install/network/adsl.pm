@@ -94,7 +94,7 @@ sub adsl_detect() {
 }
 
 sub adsl_conf_backend {
-    my ($in, $modules_conf, $adsl, $netc, $adsl_device, $adsl_type, $o_netcnx) = @_;
+    my ($in, $modules_conf, $adsl, $netc, $intf, $adsl_device, $adsl_type, $o_netcnx) = @_;
     # FIXME: should not be needed:
     defined $o_netcnx and $netc->{adsltype} = $o_netcnx->{type};
     $netc->{adsltype} ||= "adsl_$adsl_type";
@@ -268,7 +268,19 @@ user "$adsl->{login}"
 ));
 
         write_secret_backend($adsl->{login}, $adsl->{passwd});
-        
+
+        if ($netc->{NET_DEVICE} =~ /^eth/) {
+            my $net_device = $netc->{NET_DEVICE};
+            $intf->{$net_device} = {
+                                   DEVICE => $net_device,
+                                   BOOTPROTO => 'none',
+                                   NETMASK => '255.255.255.0',
+                                   NETWORK => '10.0.0.0',
+                                   BROADCAST => '10.0.0.255',
+                                   ONBOOT => 'yes',
+                                  };
+        }
+
         if ($adsl_type eq 'pppoe') {
             my $net_device = $modems{$adsl_device}{get_intf} ? "`$modems{$adsl_device}{get_intf}`" : $netc->{NET_DEVICE};
             substInFile {
