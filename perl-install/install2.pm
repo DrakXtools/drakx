@@ -523,7 +523,9 @@ sub main {
 	    install_any::remove_unused(0);
 	    mkdir '/tmp/stage2/etc/brltty';
 	    mkdir '/lib/brltty';
-	    install_any::getAndSaveFile("/etc/brltty/$o->{brltty}{table}", "/tmp/stage2/etc/brltty/$o->{brltty}{table}") if $o->{brltty}{table};
+	    foreach ($o->{brltty}{table}, "$brltty-$o->{brltty}{driver}.hlp") {
+		install_any::getAndSaveFile($_ , "/tmp/stage2/$_") if $_;
+	    }
 	    install_any::getAndSaveFile("/lib/brltty/libbrlttyb$o->{brltty}{driver}.so") or do {
 		warn("Braille driver $o->{brltty}{driver} for BRLTTY was not found.\n",
 		     "Press ENTER to continue.\n");
