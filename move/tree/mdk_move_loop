@@ -8,8 +8,8 @@ sub name2file {
 sub get_file2loop {
     my %file2loop;
     foreach (0 .. 9) {
-	my ($file) = `sudo losetup /dev/chloop$_ 2>/dev/null` =~ m!\([^)]*/([^)]*)\)! or last;
-	$file2loop{$file} = "chloop$_";
+	my ($file) = `sudo losetup /dev/loop$_ 2>/dev/null` =~ m!\([^)]*/([^)]*)\)! or last;
+	$file2loop{$file} = "loop$_";
     }
     %file2loop;
 }
