@@ -235,8 +235,8 @@ sub set_default_background {
     my $ratio = $resolution->{X} / $resolution->{Y};
     my $dir = "$::prefix/usr/share/mdk/backgrounds";
     my @l = 
-      sort { 
-	  $a->[1] <=> $b->[1] || $b->[2] <=> $a->[2] || $a->[1] <=> $b->[1]
+      sort {
+	  $a->[1] <=> $b->[1] || $b->[2] <=> $a->[2] || $a->[1] <=> $b->[1];
       } map {
 	  if (my ($X, $Y) = /^Mandrakelinux-(\d+)x(\d+).png$/) {
 	      [
