@@ -1,0 +1,25 @@
+#!/usr/bin/perl
+
+use lib "../..";
+use pkgs;
+
+my $meta_class;
+
+local *install_any::getFile = sub {
+    open GETFILE, "../compssUsers$meta_class" and *GETFILE;
+};
+
+foreach $meta_class ('', '.desktop') {
+    my (undef, undef, undef, $descr) = pkgs::readCompssUsers([{}], [], $meta_class);
+
+    while (my ($k, $v) = each %$descr) {
+	foreach ($k, $v) {
+	    s/"/\"/g;
+	    print qq(
+#: ../../share/compssUsers$meta_class
+msgid "$_"
+msgstr ""
+);
+	}
+    }
+}
