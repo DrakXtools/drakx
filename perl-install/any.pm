@@ -790,7 +790,7 @@ UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $of
     output_p("$::prefix/etc/devfs/conf.d/$if.conf", 
 "REGISTER	^$devfs_if\$	CFUNCTION GLOBAL mksymlink $devfs_if $if
 UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $if
-") if $devfs_if ne $if && $if !~ /^hd[a-z]/ && $if !~ /^scd/ && $if !~ /^sd[a-z]/;
+") if $devfs_if ne $if && $if !~ /^hd[a-z]/ && $if !~ /^sr/ && $if !~ /^sd[a-z]/;
 
     #- when creating a symlink on the system, use devfs name if devfs is mounted
     symlinkf($devfs_if, "$::prefix/dev/$if") if $devfs_if ne $if && detect_devices::dev_is_devfs();

@@ -119,7 +119,7 @@ sub entry {
 		   "loop"        => [ c::S_IFBLK(), 7,  0  ],
 		   "md"          => [ c::S_IFBLK(), 9,  0  ],
 		   "nst"         => [ c::S_IFCHR(), 9, 128 ],
-		   "scd"         => [ c::S_IFBLK(), 11, 0  ],
+		   "sr"          => [ c::S_IFBLK(), 11, 0  ],
 		   "ttyS"        => [ c::S_IFCHR(), 4, 64  ],
 		   "ubd/"        => [ c::S_IFBLK(), 98, 0  ],
 	       }}{$1} };

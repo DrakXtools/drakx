@@ -82,7 +82,6 @@ sub get_sys_cdrom_info {
 	@l = split(' ', $l) if $l;
 	if ($t eq 'drive name') {
 	    @drives_order = map {
-		s/^sr/scd/;
 		my $dev = $_;
 		find { $_->{device} eq $dev } @drives;
 	    } @l;
@@ -102,25 +101,6 @@ sub get_sys_cdrom_info {
     }
 }
 
-sub get_usb_storage_info_26 {
-    my (@l) = @_;
-
-    my @entries = glob_("/sys/bus/usb/devices/*:*") or return;
-
-    my @informed;
-    foreach my $scsi (@l) {
-	my $usb_dir = find { -d "$_/host$scsi->{host}" } @entries or next;
-	$usb_dir =~ s/:[^:]*$//;
-	if (-e "$usb_dir/idVendor") {
-	    add2hash($scsi, { usb_vendor => hex(chomp_(cat_("$usb_dir/idVendor"))), usb_id => hex(chomp_(cat_("$usb_dir/idProduct"))) });
-	    push @informed, $scsi;
-	} else {
-	    log::l("weird in get_usb_storage_info_26 for host $scsi->{host}, usb_dir $usb_dir");
-	}
-    }
-    @informed;
-}
-
 sub get_usb_storage_info_24 {
     my (@l) = @_;
 
@@ -136,7 +116,6 @@ sub get_usb_storage_info_24 {
     @l = grep { $_->{channel} == 0 && $_->{id} == 0 && $_->{lun} == 0 } @l;
     my %l; push @{$l{$_->{host}}}, $_ foreach @l;
 
-    my @informed;
     foreach my $host (keys %usbs) {
 	my @choices = @{$l{$host} || []} or log::l("weird, host$host from /proc/scsi/usb-storage-*/* is not in /proc/scsi/scsi"), next;
 	if (@choices > 1) {
@@ -145,18 +124,19 @@ sub get_usb_storage_info_24 {
 	    @choices == 1 or log::l("argh, can't determine the good entry host$host from /proc/scsi/usb-storage-*/* in /proc/scsi/scsi"), next
 	}
 	add2hash($choices[0], $usbs{$host});
-	push @informed, $choices[0];
     }
-    @informed;
+    complete_usb_storage_info(grep { exists $_->{usb_vendor} } @l);
+
+    @l;
 }
 
-sub get_usb_storage_info {
+sub complete_usb_storage_info {
     my (@l) = @_;
 
-    my @informed = c::kernel_version() =~ /^\Q2.6/ ? get_usb_storage_info_26(@l) : get_usb_storage_info_24(@l) or return;
+    my @usb = grep { exists $_->{usb_vendor} } @l;
 
     foreach my $usb (usb_probe()) {
-	if (my $e = find { $_->{usb_vendor} == $usb->{vendor} && $_->{usb_id} == $usb->{id} } @informed) {
+	if (my $e = find { $_->{usb_vendor} == $usb->{vendor} && $_->{usb_id} == $usb->{id} } @usb) {
 	    $e->{"usb_$_"} = $usb->{$_} foreach keys %$usb;
 	}
     }
@@ -168,6 +148,9 @@ sub get_devfs_devices {
     my %h = (cdrom => 'cd', hd => 'disc');
 
     foreach (@l) {
+	$_->{devfs_prefix} = sprintf('scsi/host%d/bus%d/target%d/lun%d', $_->{host}, $_->{channel}, $_->{id}, $_->{lun})
+	  if $_->{bus} eq 'SCSI';
+
 	my $t = $h{$_->{media_type}} or next;
 	$_->{devfs_device} = $_->{devfs_prefix} . '/' . $t;
     }
@@ -200,7 +183,7 @@ sub isRemovableDrive {
     isZipDrive($e) || isLS120Drive($e) || $e->{media_type} && $e->{media_type} eq 'fd' || isRemovableUsb($e) || $e->{usb_media_type} && index($e->{usb_media_type}, 'Mass Storage|Floppy (UFI)') == 0;
 }
 
-sub getSCSI() {
+sub getSCSI_24() {
     my $err = sub { log::l("ERROR: unexpected line in /proc/scsi/scsi: $_[0]") };
 
     my ($first, @l) = common::join_lines(cat_("/proc/scsi/scsi")) or return;
@@ -211,11 +194,10 @@ sub getSCSI() {
 	my ($vendor, $model) = /^\s*Vendor:\s*(.*?)\s+Model:\s*(.*?)\s+Rev:/m or $err->($_);
 	my ($type) = /^\s*Type:\s*(.*)/m or $err->($_);
 	{ info => "$vendor $model", host => $host, channel => $channel, id => $id, lun => $lun, 
-	  device => "sg$::i", devfs_prefix => sprintf('scsi/host%d/bus%d/target%d/lun%d', $host, $channel, $id, $lun),
-          raw_type => $type, bus => 'SCSI' };
+	  device => "sg$::i", raw_type => $type, bus => 'SCSI' };
     } @l;
 
-    get_usb_storage_info(@l);
+    get_usb_storage_info_24(@l);
 
     each_index {
 	my $dev = "sd" . chr($::i + ord('a'));
@@ -227,7 +209,7 @@ sub getSCSI() {
     } grep { $_->{raw_type} =~ /Sequential-Access/ } @l;
 
     each_index {
-	put_in_hash $_, { device => "scd$::i", media_type => 'cdrom' };
+	put_in_hash $_, { device => "sr$::i", media_type => 'cdrom' };
     } grep { $_->{raw_type} =~ /CD-ROM|WORM/ } @l;
 
     # Old hp scanners report themselves as "Processor"s
@@ -236,10 +218,70 @@ sub getSCSI() {
 	put_in_hash $_, { media_type => 'scanner' };
     } grep { $_->{raw_type} =~ /Scanner/ || $_->{raw_type} =~ /Processor / } @l;
 
+    delete $_->{raw_type} foreach @l;
+
     get_devfs_devices(@l);
     get_sys_cdrom_info(@l);
     @l;
 }
+
+sub getSCSI_26() {
+    my $dev_dir = '/sys/bus/scsi/devices';
+
+    my @scsi_types = (
+	"Direct-Access",
+	"Sequential-Access",
+	"Printer",
+	"Processor",
+	"WORM",
+	"CD-ROM",
+	"Scanner",
+	"Optical Device",
+	"Medium Changer",
+	"Communications",
+    );
+
+    my @l = map {
+	my ($host, $channel, $id, $lun) = split ':' or log::l("bad entry in $dev_dir: $_"), next;
+
+	my $dir = "$dev_dir/$_";
+	my $get = sub {
+	    my $s = cat_("$dir/$_[0]");
+	    $s =~ s/\s+$//;
+	    $s;
+	};
+
+	my $usb_dir = readlink("$dir/block/device") =~ m!/usb! && "$dir/block/device/../../..";
+	my $get_usb = sub { chomp_(cat_("$usb_dir/$_[0]")) };
+
+	my ($device) = readlink("$dir/block") =~ m!/block/(.*)!;
+
+	my $media_type = ${{ st => 'tape', sr => 'cdrom', sd => 'hd' }}{substr($device, 0, 2)};
+	# Old hp scanners report themselves as "Processor"s
+	# (see linux/include/scsi/scsi.h and sans-find-scanner.1)
+	my $raw_type = $scsi_types[$get->('type')];
+	$media_type ||= 'scanner' if $raw_type =~ /Scanner|Processor/;
+
+	{ info =>  $get->('vendor') . ' ' . $get->('model'), host => $host, channel => $channel, id => $id, lun => $lun, 
+	  bus => 'SCSI', media_type => $media_type, device => $device,
+	    $usb_dir ? (
+	  usb_vendor => hex($get_usb->('idVendor')), usb_id => hex($get_usb->('idProduct')),
+	    ) : (),
+        };
+    } all($dev_dir);
+
+    complete_usb_storage_info(@l);
+
+    foreach (@l) {
+	$_->{media_type} = 'fd' if $_->{media_type} eq 'hd' && isFloppyUsb($_);
+    }
+
+    get_devfs_devices(@l);
+    get_sys_cdrom_info(@l);
+    @l;
+}
+sub getSCSI() { c::kernel_version() =~ /^\Q2.6/ ? getSCSI_26() : getSCSI_24() }
+
 
 my %eide_hds = (
     "ASUS" => "Asus",
