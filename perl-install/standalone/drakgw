@@ -58,7 +58,7 @@ my $in = interactive::vnew('su');
 
 pur_gtk_mode() if $::isEmbedded && ref($in) =~ /gtk/;
 
-sub sys { system(@_) == 0 or die "sys: $_[0]" }
+sub sys { system(@_) == 0 or log::l("[drakgw] Warning, sys failed for $_[0]") }
 
 sub outpend { my $f = shift; local *F; open F, ">>$f" or die "outpend in file $f failed: $!\n"; print F foreach @_; }
 
@@ -656,6 +656,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.37  2001/04/09 16:29:20  gc
+#- do not die when an initscript returns non-0 (initscripts too buggy)
+#-
 #- Revision 1.36  2001/04/09 11:39:40  gc
 #- fix for when there is an already existing rc.firewall
 #- complies with old format of drakgw so that upgrades will work
