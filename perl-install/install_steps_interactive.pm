@@ -162,7 +162,7 @@ sub selectInstallClass {
 sub selectMouse {
     my ($o, $force) = @_;
 
-    $force ||= $o->{mouse}{unsafe};
+    $force ||= $o->{mouse}{unsafe} || 1;
 
     if ($force) {
 	my $prev = $o->{mouse}{type} . '|' . $o->{mouse}{name};
@@ -170,7 +170,7 @@ sub selectMouse {
 	$o->ask_from_({ messages => N("Please choose your type of mouse."),
 			interactive_help_id => 'selectMouse',
 		      },
-		     [ { list => [ mouse::fullnames() ], separator => '|', val => \$prev } ]);
+		     [ { list => [ mouse::fullnames() ], separator => '|', val => \$prev, format => sub { join('|', map { translate($_) } split('\|', $_[0])) } } ]);
 	$o->{mouse} = mouse::fullname2mouse($prev);
     }
 
