@@ -36,8 +36,8 @@ sub getFile($$) {
     my ($file, $host) = @_;
     log::l("getting crypto file $file on directory $host:$mirrors{$host}[1]/$::VERSION with login $mirrors{$host}[2]");
     my ($ftp, $retr) = ftp::new($_[1], "$mirrors{$host}[1]/$::VERSION",
-				($mirrors{$host}[2] ? ($mirrors{$host}[2]) : ()),
-				($mirrors{$host}[3] ? ($mirrors{$host}[3]) : ())
+				$mirrors{$host}[2] ? $mirrors{$host}[2] : (),
+				$mirrors{$host}[3] ? $mirrors{$host}[3] : ()
 			       );
     $$retr->close if $$retr;
     $$retr   = $ftp->retr($file) or ftp::rewindGetFile();

@@ -126,8 +126,10 @@ sub enable($;$) {
 }
 
 sub swapon($) {
+    log::l("swapon called with $_[0]");
     syscall_('swapon', devices::make($_[0]), 0) or die "swapon($_[0]) failed: $!";
 }
+
 sub swapoff($) {
     syscall_('swapoff', devices::make($_[0])) or die "swapoff($_[0]) failed: $!";
 }

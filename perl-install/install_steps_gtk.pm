@@ -579,8 +579,8 @@ sub load_rc($) {
 	Gtk::Rc->parse($f);
 	foreach (cat_($f)) {
 	    if (/style\s+"background"/ .. /^\s*$/) {
-		@background1 = map { $_ * 256 * 256 } split ',', $1 if /NORMAL.*\{(.*)\}/;
-		@background2 = map { $_ * 256 * 256 } split ',', $1 if /PRELIGHT.*\{(.*)\}/;
+		@background1 = map { $_ * 256 * 257 } split ',', $1 if /NORMAL.*\{(.*)\}/;
+		@background2 = map { $_ * 256 * 257 } split ',', $1 if /PRELIGHT.*\{(.*)\}/;
 	    }
 	}
     }

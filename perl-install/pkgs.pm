@@ -911,21 +911,25 @@ sub install($$$;$$) {
 	    } while (scalar(@transToInstall) == 0); #- avoid null transaction, it a nop that cost a bit.
 	}
 
+	#- reset ftp handlers before forking, otherwise well ;-(
+	require ftp;
+	ftp::rewindGetFile();
+
 	#- extract headers for parent as they are used by callback.
 	extractHeaders($prefix, \@transToInstall, $media->{$medium});
 
-	my $pid;
 	local (*INPUT, *OUTPUT); pipe INPUT, OUTPUT;
-	if ($pid = fork()) {
+	if (my $pid = fork()) {
 	    close OUTPUT;
 	    my $error_msg = '';
-	    foreach (<INPUT>) {
+	    local $_;
+	    while (<INPUT>) {
 		if (/^die:(.*)/) {
 		    $error_msg = $1;
 		    last;
 		} else {
 		    chomp;
-		    my @params = split ":", $_;
+		    my @params = split ":";
 		    if ($params[0] eq 'close') {
 			&$callbackClose($params[1]);
 		    } else {
@@ -933,8 +937,8 @@ sub install($$$;$$) {
 		    }
 		}
 	    }
-	    $error_msg and $error_msg .= <INPUT>;
-	    waitpid($pid, 0);
+	    $error_msg and $error_msg .= join('', <INPUT>);
+	    waitpid $pid, 0;
 	    close INPUT;
 	    $error_msg and die $error_msg;
 	} else {
@@ -949,32 +953,20 @@ sub install($$$;$$) {
 		c::rpmtransAddPackage($trans, $_->{header}, packageName($_), $isUpgrade && packageName($_) !~ /kernel/) #- TODO: replace `named kernel' by `provides kernel'
 		    foreach @transToInstall;
 
-		my $close = sub {
-		    c::rpmtransFree($trans);
-		};
-
 		c::rpmdepOrder($trans) or
-		    cdie "error ordering package list: " . c::rpmErrorString(), sub {
-			&$close();
-			c::rpmdbClose($db);
-		    };
+		    die "error ordering package list: " . c::rpmErrorString(), 
+		      sub { c::rpmdbClose($db) };
 		c::rpmtransSetScriptFd($trans, fileno LOG);
 
 		log::l("rpmRunTransactions start");
-
 		my @probs = c::rpmRunTransactions($trans, $callbackOpen,
 						  sub { #- callbackClose
-						      print OUTPUT "close:$_[0]\n";
-						  },
+						      print OUTPUT "close:$_[0]\n"; },
 						  sub { #- installCallback
-						      print OUTPUT join(":", @_), "\n";
-						  },
+						      print OUTPUT join(":", @_), "\n"; },
 						  0);
 		log::l("rpmRunTransactions done");
-		log::l("ERROR: rpmRunTransactions pb $_") foreach @probs;
 
-		&$close();
-		log::l("after close");
 		if (@probs) {
 		    my %parts;
 		    @probs = reverse grep {

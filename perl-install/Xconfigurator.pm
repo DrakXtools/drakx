@@ -357,7 +357,7 @@ sub testFinalConfig($;$$) {
 	$ENV{DISPLAY} = ":9";
 
         gtkset_mousecursor(68);
-        gtkset_background(200 * 256, 210 * 256, 210 * 256);
+        gtkset_background(200 * 257, 210 * 257, 210 * 257);
         my ($h, $w) = Gtk::Gdk::Window->new_foreign(Gtk::Gdk->ROOT_WINDOW)->get_size;
         $my_gtk::force_position = [ $w / 3, $h / 2.4 ];
 	$my_gtk::force_focus = 1;

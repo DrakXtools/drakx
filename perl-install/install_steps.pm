@@ -130,9 +130,9 @@ sub doPartitionDisks {
 	my $handle = loopback::inspect($real_part, '', 'rw') or die _("This partition can't be used for loopback");
 	my $size = loopback::getFree($handle->{dir}, $real_part); 
 
-	my $max_linux = 250 << 11; $max_linux *= 10 if $::expert;
-	my $min_linux =  200 << 11; $max_linux /=  3 if $::expert;
-	my $min_freewin = 100 << 11;
+	my $max_linux = 1000 << 11; $max_linux *= 10 if $::expert;
+	my $min_linux =  300 << 11; $max_linux /=  3 if $::expert;
+	my $min_freewin = 100 << 11; $min_freewin = 0 if $::expert;
 
 	my $swap = { type => 0x82, loopback_file => '/lnx4win/swapfile',     mntpoint => 'swap', size => 64 << 11, device => $real_part, notFormatted => 1 };	
 	my $root = { type => 0x83, loopback_file => '/lnx4win/linuxsys.img', mntpoint => '/',    size => 0, device => $real_part, notFormatted => 1 };
@@ -189,8 +189,9 @@ sub choosePartitionsToFormat($$) {
     foreach (@$fstab) {
 	$_->{mntpoint} = "swap" if isSwap($_);
 	$_->{mntpoint} or next;
-
-	unless ($_->{toFormat} = $_->{notFormatted} || $o->{partitioning}{autoformat}) {
+	
+	add2hash_($_, { toFormat => $_->{notFormatted} || $o->{partitioning}{autoformat} });
+	if (!$_->{toFormat}) {
 	    my $t = isLoopback($_) ? 
 	      eval { fsedit::typeOfPart($o->{prefix} . loopback::file($_)) } :
 	      fsedit::typeOfPart($_->{device});

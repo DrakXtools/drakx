@@ -147,8 +147,8 @@ sub setup_gsdriver($$) {
 	$printer->{NUP} = 1 unless member($printer->{NUP}, qw(1 2 4 8));
 	$printer->{RTLFTMAR} = 18 unless $printer->{RTLFTMAR} =~ /^\d+$/;
 	$printer->{TOPBOTMAR} = 18 unless $printer->{TOPBOTMAR} =~ /^\d+$/;
-	$printer->{EXTRA_GS_OPTIONS} =~ s/^\"(.*)\"/$1/;
-	$printer->{TEXTONLYOPTIONS} =~ s/^\"(.*)\"/$1/;
+	$printer->{EXTRA_GS_OPTIONS} =~ s/^"(.*)"/$1/;
+	$printer->{TEXTONLYOPTIONS} =~ s/^"(.*)"/$1/;
 
 	return if !$in->ask_from_entries_refH('', _("Printer options"), [
 _("Paper Size") => { val => \$printer->{PAPERSIZE}, type => 'list', not_edit => !$::expert, list => \@printer::papersize_type },

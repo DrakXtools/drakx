@@ -222,7 +222,7 @@ sub set {
 
 	    eval { commands::rm("-r", "$ENV{SHARE_PATH}/locale") };
 	    require 'run_program.pm';
-	    run_program::run("extract_archive", "$ENV{SHARE_PATH}/locale.cz2", '$ENV{SHARE_PATH}/locale', $languages{$lang}[2]);
+	    run_program::run("extract_archive", "$ENV{SHARE_PATH}/locale.cz2", "$ENV{SHARE_PATH}/locale", $languages{$lang}[2]);
 	}
 
 	$ENV{LC_ALL}    = $lang;
