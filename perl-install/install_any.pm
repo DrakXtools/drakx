@@ -1005,7 +1005,7 @@ sub getHds {
     $o->{fstab} = [ fsedit::get_all_fstab($all_hds) ];
     fs::merge_info_from_mtab($o->{fstab});
 
-    my @win = grep { isFat_or_NTFS($_) && isFAT_or_NTFS({ type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
+    my @win = grep { isFat_or_NTFS($_) && isFat_or_NTFS({ type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
     log::l("win parts: ", join ",", map { $_->{device} } @win) if @win;
     if (@win == 1) {
 	#- Suggest /boot/efi on ia64.
