@@ -426,7 +426,8 @@ my @skip_modules_on_stage1 = (
   "parport",
   "parport_pc",
   "plip",
-  qw(3w-xxxx pci2220i qla1280 qla2x00 i2o_block),
+  if_(arch() !~ /ia64/, qw(qla1280)),
+  qw(3w-xxxx pci2220i qla2x00 i2o_block),
   qw(gdth eata eata_pio eata_dma ips),
   qw(ac3200 at1700 atp ni5010 ni52 ni65),  #- unused from Jeff
   "u14-34f", #- duplicate from ultrastor.o

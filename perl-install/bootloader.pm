@@ -613,8 +613,9 @@ sub install_lilo ($$) {
 	my ($file) = @_;
 	if (arch() =~ /ia64/) {
 	    (my $part, $file) = fsedit::file2part($prefix, $fstab, $file);
-	    my %hds = map_index { $_ => "hd$::i" } sort map { $_->{device} } @$hds;
-	    $hds->{$part->{device}} . ":" . $file;
+#	    my %hds = map_index { $_ => "hd$::i" } sort map { $_->{device} } @$hds;
+	    my %hds = map_index { $_ => "hd$::i" } sort map { $_->{device} } map { @{$_->{primary}{normal}}, map {$_->{normal} } @{$_->{extended} || []} } @$hds;
+	    %hds->{$part->{device}} . ":" . $file;
 	} else {
 	    $file
 	}
@@ -668,17 +669,17 @@ wait %d seconds for default boot.
 	    print F "disk=/dev/$dev bios=0x80";
 	}
 
-	print F "message=/boot/message";
-	print F "menu-scheme=wb:bw:wb:bw";
+	print F "message=/boot/message" if (arch() !~ /ia64/);
+	print F "menu-scheme=wb:bw:wb:bw" if (arch() !~ /ia64/);
 
 	foreach (@{$lilo->{entries}}) {
-	    print F "$_->{type}=$_->{kernel_or_dev}";
+	    print F "$_->{type}=", $file2fullname->($_->{kernel_or_dev});
 	    my $label = substr($_->{label}, 0, 15); #- lilo doesn't handle more than 15 char long labels
 	    $label =~ s/\s/_/g; #- lilo doesn't like spaces
 	    print F "\tlabel=$label"; 
 
 	    if ($_->{type} eq "image") {		
-		print F "\troot=", $file2fullname->($_->{root});
+		print F "\troot=$_->{root}";
 		print F "\tinitrd=", $file2fullname->($_->{initrd}) if $_->{initrd};
 		print F "\tappend=\"$_->{append}\"" if $_->{append};
 		print F "\tvga=$_->{vga}" if $_->{vga};
@@ -705,7 +706,7 @@ wait %d seconds for default boot.
 
     log::l("Installing boot loader...");
     $::testing and return;
-    run_program::rooted_or_die($prefix, "lilo", "2>", "/tmp/.error");
+    run_program::rooted_or_die($prefix, "lilo", "2>", "/tmp/.error") if (arch() !~ /ia64/);
     unlink "$prefix/tmp/.error";
 }
 
