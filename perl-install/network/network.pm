@@ -144,6 +144,8 @@ sub write_interface_conf {
 		     ONBOOT => bool2yesno(!member($intf->{DEVICE}, map { $_->{device} } detect_devices::probeall())),
 		    });
     
+    $intf->{BOOTPROTO} =~ s/dhcp.*/dhcp/; #- TODO: avoid obfuscating BOOTPROTO, waiting for zeroconf conf details 
+
     setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR), if_($intf->{wireless_eth}, qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)), if_($dhcp_hostname, DHCP_HOSTNAME), if_(!$dhcp_hostname, NEEDHOSTNAME));
 }
 
@@ -295,10 +297,10 @@ Modifying the fields below will override this configuration.");
 Each item should be entered as an IP address in dotted-decimal
 notation (for example, 1.2.3.4).");
     }
-    my $pump = $intf->{BOOTPROTO} =~ /^(dhcp|bootp)$/;
+    my $pump = $intf->{BOOTPROTO} =~ /dhcp|bootp|zeroconf/;
+    my ($dhcp, $zeroconf, $onboot) = (1, 1, 1);
     delete $intf->{NETWORK};
     delete $intf->{BROADCAST};
-    my $onboot = 1;
     my @fields = qw(IPADDR NETMASK);
     $::isStandalone or $in->set_help('configureNetworkIP');
     $in->ask_from(N("Configuring network device %s", $intf->{DEVICE}),
@@ -306,8 +308,11 @@ notation (for example, 1.2.3.4).");
 	          $text,
 	         [ { label => N("IP address"), val => \$intf->{IPADDR}, disabled => sub { $pump } },
 	           { label => N("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $pump } },
-	           { label => N("Automatic IP"), val => \$pump, type => "bool", text => N("(bootp/dhcp)") },
-	           if_($::expert, { label => N("Start at boot"), val => \$onboot, type => "bool" }),
+	           if_(!$::expert, { label => N("Automatic IP"), val => \$pump, type => "bool", text => N("(bootp/dhcp/zeroconf)") }),
+	           if_($::expert, { label => N("Automatic IP"), val => \$pump, type => "bool" },
+		       { label => N(""), val => \$dhcp, type => "bool", text => N("bootp/dhcp"), disabled => sub { !$pump } },
+		       { label => N(""), val => \$zeroconf, type => "bool", text => N("zeroconf"), disabled => sub { !$pump } },
+		       { label => N("Start at boot"), val => \$onboot, type => "bool" }),
 		   if_($intf->{wireless_eth},
 	           { label => "WIRELESS_MODE", val => \$intf->{WIRELESS_MODE}, list => [ "Ad-hoc", "Managed", "Master", "Repeater", "Secondary", "Auto" ] },
 	           { label => "WIRELESS_ESSID", val => \$intf->{WIRELESS_ESSID} },
@@ -324,8 +329,12 @@ notation (for example, 1.2.3.4).");
 	           ),
 	         ],
 	         complete => sub {
-	         	 $intf->{BOOTPROTO} = $pump ? "dhcp" : "static";
-	         	 return 0 if $pump;
+			 $intf->{BOOTPROTO} = $pump ? if_($dhcp, "dhcp") . if_($zeroconf, "zeroconf") : "static";
+			 if ($pump and !$dhcp and !$zeroconf ) { 
+			     $in->ask_warn('', N("For an Automatic IP you have to select at least one protocol : dhcp or zeroconf"));
+			     return (1,$i);
+			 }
+			 return 0 if $pump;
 	         	 for (my $i = 0; $i < @fields; $i++) {
 	         	     unless (is_ip($intf->{$fields[$i]})) {
 	         		 $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
@@ -476,16 +485,19 @@ sub easy_dhcp {
 sub configureNetwork2 {
     my ($in, $prefix, $netc, $intf) = @_;
     my $etc = "$prefix/etc";
-
+    
     $netc->{wireless_eth} and $in->do_pkgs->install(qw(wireless-tools));
     write_conf("$etc/sysconfig/network", $netc);
     write_resolv_conf("$etc/resolv.conf", $netc);
     write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $intf->{DHCP_HOSTNAME}, $prefix) foreach grep { $_->{DEVICE} } values %$intf;
     add2hosts("$etc/hosts", "localhost", "127.0.0.1");
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf);
-
-    if (any { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf) {
+    
+    if (any { $_->{BOOTPROTO} =~ /dhcp/ } values %$intf) {
 	$in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
+    }
+    if (any { $_->{BOOTPROTO} =~ /zeroconf/ } values %$intf) {
+ 	$in->do_pkgs->install(qw(tmdns zcip));
     }
     if (any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf) {
 	$in->do_pkgs->install('pump');

@@ -17,13 +17,7 @@ sub configure_cable {
     my ($netcnx, $netc, $intf, $first_time) = @_;
     $::isInstall and $in->set_help('configureNetworkCable');
     $netcnx->{type} = 'cable';
-    #  		     $netcnx->{cable}={};
-    #  		     $in->ask_from_entries_ref(N("Cable connection"),
-    #  N("Please enter your host name if you know it.
-    #  Some DHCP servers require the hostname to work.
-    #  Your host name should be a fully-qualified host name,
-    #  such as ``mybox.mylab.myco.com''."),
-    #  					       [N("Host name:")], [ \$netcnx->{cable}{hostname} ]);
+
     if ($::expert) {
 	my @m = (
 	       { description => "dhcp-client",
@@ -62,7 +56,7 @@ sub configure_lan {
     configureNetwork($netc, $intf, $first_time) or return;
     configureNetwork2($in, $prefix, $netc, $intf);
     $netc->{NETWORKING} = "yes";
-    if ($netc->{GATEWAY} || any { $_->{BOOTPROTO} eq 'dhcp' } values %$intf) {
+    if ($netc->{GATEWAY} || any { $_->{BOOTPROTO} =~ /dhcp/ } values %$intf) {
 	$netcnx->{type} = 'lan';
 	$netcnx->{NET_DEVICE} = $netc->{NET_DEVICE} = '';
 	$netcnx->{NET_INTERFACE} = 'lan'; #$netc->{NET_INTERFACE};
@@ -150,8 +144,7 @@ sub conf_network_card_backend {
     my ($device) = $interface =~ /(ADIModem|eth[0-9]+)/ or die("the interface is not an ethx or other (like ADIModem)");
     $netc->{NET_DEVICE} = $device; #- one consider that there is only ONE Internet connection device..
 
-    @{$intf->{$device}}{qw(DEVICE BOOTPROTO   NETMASK     NETWORK ONBOOT)} = 
-                         ($device, $type, '255.255.255.0', $netadr, 'yes');
+    @{$intf->{$device}}{qw(DEVICE BOOTPROTO   NETMASK     NETWORK ONBOOT)} = ($device, $type, '255.255.255.0', $netadr, 'yes');
 
     $intf->{$device}{IPADDR} = $ipadr if $ipadr;
     $device;
@@ -188,12 +181,9 @@ sub configureNetwork {
 	$last = $intf2;
 	$n_card++;
     }
-    #-	  {
-    #-	      my $wait = $o->wait_message(N("Hostname"), N("Determining host name and domain..."));
-    #-	      network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
-    #-	  }
     $last or return;
-    if ($last->{BOOTPROTO} =~ /^(dhcp|bootp)$/) {
+    
+    if ($last->{BOOTPROTO} =~ /dhcp|bootp|zeroconf/) {
 	$netc->{minus_one} = 1;
 	$netc->{DHCP} = 1;
 	my $dhcp_hostname = $netc->{HOSTNAME};
