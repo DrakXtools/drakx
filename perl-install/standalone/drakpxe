@@ -140,11 +140,11 @@ if (@intf < 1) {
     quit_global($in, 0);
 } elsif (@intf > 1) {
     #- there are more than one interface, we need to choose one of them.
-    @intf = ($in->ask_from_listf(N("Choose the network interface"),
+    @intf = $in->ask_from_listf(N("Choose the network interface"),
 				 N("Please choose which network interface will be used for the dhcp server."),	
 				 sub { N("Interface %s (on network %s)", $_[0]{DEVICE}, $_[0]{NETWORK}) },
 				 \@intf,
-				) or goto begin);
+				) or goto begin;
 }
 
 
