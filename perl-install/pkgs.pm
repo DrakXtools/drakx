@@ -63,11 +63,11 @@ sub unselect($$) {
     my $changed = 1;
     while ($changed) {
 	$changed = 0;
-      NEXT: foreach my $p (grep { $_->{selected} > 0 } values %$packages) {
+      NEXT: foreach my $p (grep { $_->{selected} > 0 && !$_->{base} } values %$packages) {
 	    my $set = set_new(@{$p->{provides}});
 	    foreach (@{$set->{list}}) {
 		my $q = Package($packages, $_);
-		$q->{selected} == -1 and next NEXT;
+		$q->{selected} == -1 || $q->{base} and next NEXT;
 		set_add($set, @{$q->{provides}}) if $q->{selected};
 	    }
 	    $p->{selected} = 0;

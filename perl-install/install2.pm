@@ -390,7 +390,7 @@ sub formatPartitions {
 	fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
     }
     mkdir "$o->{prefix}/$_", 0755 foreach qw(dev etc etc/sysconfig etc/sysconfig/network-scripts 
-                                             home mnt tmp var var/tmp var/lib var/lib/rpm); #)
+                                             home mnt tmp var var/tmp var/lib var/lib/rpm);
 }
 
 sub choosePackages {
