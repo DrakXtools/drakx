@@ -486,20 +486,13 @@ sub miscellaneousNetwork {
     setVarsInCsh("$prefix/etc/profile.d/proxy.csh", $::o->{miscellaneous}, qw(http_proxy ftp_proxy));
 }
 
-sub load_thiskind {
-    my ($in, $type) = @_;
-    my $w;
-    modules::load_thiskind($type, sub { $w = wait_load_module($in, $type, @_) });
-}
-
 sub setup_thiskind {
     my ($in, $type, $auto, $at_least_one) = @_;
 
     return if arch() eq "ppc";
+    my @l=setup_thiskind_backend ($type, $auto, $at_least_one, sub { my $w = wait_load_module($in, $type, @_) } );
 
-    my @l;
     if (!$::noauto) {
-	@l = load_thiskind($in, $type);
 	if (my @err = grep { $_ } map { $_->{error} } @l) {
 	    $in->ask_warn('', join("\n", @err));
 	}
@@ -523,6 +516,24 @@ sub setup_thiskind {
 	} else {
 	    $in->ask_warn('', [ detect_devices::stringlist() ]);
 	}
+    }
+}
+
+# setup_thiskind_backend : setup the kind of hardware
+# input :
+#  $type : typeof hardware to setup
+#  $auto : automatic behaviour
+#  $at_least_one : 
+# output:
+#  @l : list of loaded
+sub setup_thiskind_backend {
+    my ($type, $auto, $at_least_one, $wait_function) = @_;
+    #- for example $wait_function=sub { $w = wait_load_module($in, $type, @_) }
+
+    my @l;
+    if (!$::noauto) {
+	@l = modules::load_thiskind($type, $wait_function );
+    return @l if $auto && (@l || !$at_least_one);
     }
 }
 
