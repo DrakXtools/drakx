@@ -1198,7 +1198,12 @@ depending on the normal bootloader. This is useful if you don't want to install
 LILO (or grub) on your system, or another operating system removes LILO, or LILO doesn't
 work with your hardware configuration. A custom bootdisk can also be used with
 the Mandrake rescue image, making it much easier to recover from severe system
-failures. Would you like to create a bootdisk for your system?")), 
+failures. Would you like to create a bootdisk for your system?
+%s", isThisFs('xfs', fsedit::get_root($o->{fstab})) ? _("
+
+(WARNING! You're using XFS for your root partition,
+creating a bootdisk on a 1.44 Mb floppy will probably fail,
+because XFS needs a very large driver).") : '')), 
 			    $o->{mkbootdisk}) or return $o->{mkbootdisk} = '';
 	    $o->{mkbootdisk} = $l[0] if !$o->{mkbootdisk} || $o->{mkbootdisk} eq "1";
 	} else {
