@@ -26,6 +26,7 @@
 #include <netinet/ip.h>
 #include <arpa/inet.h>
 
+enum return_type intf_select_and_up();
 
 enum return_type nfs_prepare(void);
 #ifndef MANDRAKE_MOVE

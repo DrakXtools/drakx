@@ -595,6 +595,18 @@ void finish_preparing(void)
 
 int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused)), char **env)
 {
+#ifdef ENABLE_NETWORK_STANDALONE
+	open_log();
+	init_frontend("");
+
+	unlink("/etc/resolv.conf"); /* otherwise it is read-only */
+	set_param(MODE_AUTOMATIC);
+	grab_automatic_params("network:dhcp");
+
+	intf_select_and_up();
+	finish_frontend();
+	return 0;
+#else
 	if (getenv("DEBUGSTAGE1"))
 		set_param(MODE_TESTING);
 
@@ -670,4 +682,5 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		return 0;
 	else
 		return 66;
+#endif
 }

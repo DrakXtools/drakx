@@ -817,7 +817,7 @@ static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port,
 /* -=-=-- */
 
 
-static enum return_type intf_select_and_up()
+enum return_type intf_select_and_up()
 {
 	static struct interface_info intf[20];
 	static int num_interfaces = 0;

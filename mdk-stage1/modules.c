@@ -444,7 +444,16 @@ enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attr
 	if (IS_TESTING)
 		return INSMOD_OK;
 
+#ifdef ENABLE_NETWORK_STANDALONE
+	{
+		char *cmd = options ? asprintf_("/sbin/modprobe %s %s", mod_name, options) : 
+			              asprintf_("/sbin/modprobe %s", mod_name);
+		log_message("running %s", cmd);
+		i = system(cmd);
+	}
+#else
 	i = insmod_with_deps(real_mod_name, options, allow_modules_floppy);
+#endif
 	if (i == 0) {
 		log_message("\tsucceeded %s", real_mod_name);
 #ifndef DISABLE_NETWORK
