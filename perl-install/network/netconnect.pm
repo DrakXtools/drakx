@@ -320,7 +320,7 @@ sub real_main {
                         detect($netc->{autodetect}, 'isdn');
                         %isdn_cards = map { $_->{description} => $_ } @{$netc->{autodetect}{isdn}};
                     },
-                    name => N("Select the network interface to configure:"),
+                    name => N("Select the network interface to configure:") . "\n\n" . N("Sorry, we support only 2.4 and above kernels."),
                     data =>  sub {
                         [ { label => N("Net Device"), type => "list", val => \$isdn_name, allow_empty_list => 1, 
                             list => [ $my_isdn, N("External ISDN modem"), keys %isdn_cards ] } ]
@@ -627,6 +627,10 @@ killall pppd
                     name => N("ADSL configuration") . "\n\n" . N("Select the network interface to configure:"),
                     data =>  [ { label => N("Net Device"), type => "list", val => \$ntf_name, allow_empty_list => 1,
                                list => \@adsl_devices, format => sub { $eth_intf{$_[0]} || $adsl_devices{$_[0]} } } ],
+                    complete => sub {
+                        $in->ask_warn(N("Warning"), N("Sorry, we support only 2.4 and above kernels."));
+                        return 0;
+                    },
                     post => sub {
                         my %packages = (
                                         'eci'        => [ 'eciadsl', 'missing' ],
