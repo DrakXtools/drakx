@@ -1359,12 +1359,18 @@ sub install($$$;$$) {
 	if ($media->{$medium}{method} eq 'cdrom') {
 	    #- extract packages to make sure the getFile below to force
 	    #- accessing medium will not be redirected to updates.
-	    my @origin = grep { $_->[$MEDIUM] == $media->{$medium} } @transToInstall;
+	    my @origin = grep { $_->[$MEDIUM] == $medium } @transToInstall;
 
-	    #- reset file descriptor open for main process but
-	    #- make sure error trying to change from hdlist are
-	    #- trown from main process too.
-	    @origin and install_any::getFile(packageFile($origin[0]), $media->{$origin[0][$MEDIUM]}{descr});
+	    if (@origin) {
+		#- reset file descriptor open for main process but
+		#- make sure error trying to change from hdlist are
+		#- trown from main process too.
+		install_any::getFile(packageFile($origin[0]), $media->{$origin[0][$MEDIUM]}{descr});
+
+		#- allow some log here to check selected status.
+		log::l("status for medium $origin[0][$MEDIUM] ($media->{$origin[0][$MEDIUM]}{descr}) is " .
+		       ($media->{$origin[0][$MEDIUM]}{selected} ? "selected" : "refused"));
+	    }
 	}
 	#- and make sure there are no staling open file descriptor too (before forking)!
 	install_any::getFile('XXX');
