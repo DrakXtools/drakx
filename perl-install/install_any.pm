@@ -361,21 +361,26 @@ sub preConfigureTimezone {
     add2hash_($o->{timezone}, { UTC => $utc, ntp => $ntp });
 }
 
-sub selectSupplMedia {
-    my ($o, $suppl_method) = @_;
-    #- ask whether there are supplementary media
-    my $prev_asked_medium = $asked_medium;
-    if ($suppl_method && !$o->{isUpgrade}
-	&& (my $suppl = $o->ask_from_list_(
-	    '', formatAlaTeX(
+sub ask_if_suppl_media {
+    my ($o) = @_;
+    my $suppl = $o->ask_from_list_(
+	'', formatAlaTeX(
 #-PO: keep the double empty lines between sections, this is formated a la LaTeX
 		N("The following media have been found and will be used during install: %s.
 
 
 Do you have a supplementary installation media to configure?",
-		    join ", ", uniq(map { $_->{descr} } values %{$o->{packages}{mediums}}))
-	    ), [ N_("None"), N_("CD-ROM"), N_("Network (http)"), N_("Network (ftp)") ], 'None')
-	) ne 'None')
+	    join ", ", uniq(map { $_->{descr} } values %{$o->{packages}{mediums}}))
+    ), [ N_("None"), N_("CD-ROM"), N_("Network (http)"), N_("Network (ftp)") ], 'None');
+    return $suppl;
+}
+
+sub selectSupplMedia {
+    my ($o, $suppl_method) = @_;
+    #- ask whether there are supplementary media
+    my $prev_asked_medium = $asked_medium;
+    if ($suppl_method && !$o->{isUpgrade}
+	&& (my $suppl = ask_if_suppl_media($o)) ne 'None')
     {
 	#- translate to method name
 	$suppl_method = {
