@@ -106,6 +106,9 @@ struct hd {
   bool needKernelReread # must we tell the kernel to reread the partition table
   bool hasBeenDirty     # for undo
   bool rebootNeeded     # happens when a kernel reread failed
+  bool partitionsRenumbered # happens when you
+                            # - remove an extended partition which is not the last one
+                            # - add an extended partition which is the first extended partition
   int bus, id
   
   partition_table_elem primary
@@ -451,6 +454,8 @@ sub Create {
 	},
     ) or return;
 
+    warn_if_renumbered($in, $hd);
+
     if ($migrate_files eq 'migrate') {
 	format_($in, $hd, $part, $all_hds) or return;
 	migrate_files($in, $hd, $part);
@@ -478,6 +483,7 @@ sub Delete {
 	    undef $partition_table_mac::bootstrap_part if (isAppleBootstrap($part) && ($part->{device} = $partition_table_mac::bootstrap_part));
 	}
 	partition_table::remove($hd, $part);
+	warn_if_renumbered($in, $hd);
     }
 }
 
@@ -985,6 +991,14 @@ sub migrate_files {
     }
 }
 
+sub warn_if_renumbered {
+    my ($in, $hd) = @_;
+    my $l = delete $hd->{partitionsRenumbered};
+    return if is_empty_array_ref($l);
+
+    my @l = map { _("partition %s is now known as %s", @$_) } @$l;
+    $in->ask_warn('', join("\n", 'Partitions have been renumbered: ', @l));
+}
 
 #- unit of $mb is mega bytes, min and max are in sectors, this
 #- function is used to convert back to sectors count the size of

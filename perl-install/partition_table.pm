@@ -347,9 +347,16 @@ sub assign_device_numbers {
 	    $_->{device} = $hd->{prefix} . $i++;
 	    $start = $_->{start} + $_->{size};
 	}
-    } else {	    
-	$_->{device} = $hd->{prefix} . $i++ foreach @{$hd->{primary}{raw}},
-                                                map { $_->{normal} } @{$hd->{extended} || []};
+    } else {
+	foreach (@{$hd->{primary}{raw}}) {
+	    my $dev = $hd->{prefix} . $i++;
+	    $_->{device} = $dev;
+	}
+	foreach (map { $_->{normal} } @{$hd->{extended} || []}) {
+	    my $dev = $hd->{prefix} . $i++;
+	    push @{$hd->{partitionsRenumbered}}, [ $_->{device}, $dev ] if $_->{device} && $dev ne $_->{device};
+	    $_->{device} = $dev;
+	}
     }
 
     #- try to figure what the windobe drive letter could be!
@@ -633,6 +640,7 @@ sub remove {
 
 	delete $_->{normal}; #- remove it
 	remove_empty_extended($hd);
+	assign_device_numbers($hd);
 
 	return $hd->{isDirty} = $hd->{needKernelReread} = 1;
     }
