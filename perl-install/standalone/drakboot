@@ -332,8 +332,6 @@ sub lilo_choice() {
     my $fstab = [ fsedit::get_all_fstab($all_hds) ];
     fs::merge_info_from_fstab($fstab, '', 0, undef);
 
-    $::expert=1;
-    
   ask:
     local $::isEmbedded = 0;
     eval { any::setupBootloader($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) };
