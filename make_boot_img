@@ -509,7 +509,7 @@ F1 help.msg" : "display help.msg") . "
   append changedisk initrd=alt$::i/all.rdz $default_append $default_vga
 " } @kernels);
 
-    output "isolinux/help.msg", 
+    output "isolinux/help.msg", (-e "isolinux/boot.msg" && pack "C*", 0x0E, 0x03, 0x00) .
 "This is a special bootable CDROM giving you a choice between various kernels.
 
 The default is kernel $main.
