@@ -639,7 +639,10 @@ _("There was an error installing packages:"), $1, _("Go on anyway?") ], 1) and r
 sub set_help {
     my ($o, @l) = @_;
 
-    $o->{current_help} = formatAlaTeX(join "\n", map { _(deref($help::steps{$_})) } @l);
+    my @l2 = map { 
+	join("\n\n", map { s/\n/ /mg; $_ } split("\n\n", translate($help::steps{$_})))
+    } @l;
+    $o->{current_help} = join("\n\n\n", @l2);
     gtktext_insert($o->{help_window_text}, $o->{current_help});
     1;
 }
