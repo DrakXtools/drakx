@@ -1,0 +1,62 @@
+#
+# quick script to make bootable HFS CD for linux
+#
+#
+#!/bin/sh
+#
+#mkCD1 <CD tree> <output image name>
+#Parameters:
+
+if ! rpm -q hfsutils ; then
+	echo 'You need hfsutils installed!!'
+	exit 1
+fi
+
+if [ -e $2 ] ; then
+	echo 'Output image $2 exists, please delete'
+	echo 'usage: mkCD1 <CD tree> <output image name>'
+	exit 1
+fi
+
+if [ ! -d $1 ] ; then
+	echo 'CD tree $1 is not a directory!'
+	echo 'usage: mkCD1 <CD tree> <output image name>'
+	exit 1
+fi
+
+#Change these when you build the CD..
+ApplicationID="Linux-Mandrake"
+PublisherID="MandrakeSoft"
+PreparerID="sbenedict@mandrakesoft.com"
+SystemID=PPC
+volid=ppc
+hfsVolid=Linux-Mandrake
+curPwd=`pwd`
+
+$curPwd/mkhybrid-1.12b5.4 -part -hfs -r -l -J \
+-A $ApplicationID \
+-P $PublisherID \
+-p $PreparerID \
+-abstract "README" \
+-sysid $SystemID \
+-V $volid \
+-volset "Update" \
+-volset-size 2 \
+-volset-seqno 1 \
+-hfs-volid $hfsVolid \
+-map $curPwd/mapping \
+-magic $curPwd/magic \
+-m "*.orig" \
+-hide '*.MacOS' -hide '*.DOS' \
+-hide-joliet '*.Unix' -hide-joliet '*.MacOS' \
+-hide-hfs '*.Unix' -hide-hfs '*.DOS' \
+-pad \
+-o $2 \
+$1 
+
+#Bless boot folder so yaboot can boot
+hmount $2
+hattrib -b boot
+hcd boot
+hattrib -t tbxi yaboot
+humount
