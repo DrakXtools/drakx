@@ -420,6 +420,9 @@ sub psUsingHdlist {
 	} elsif (-s $newf) {
 	    ($m->{start}, $m->{end}) = $packages->parse_hdlist($newf, 1);
 	} else {
+	    delete $packages->{mediums}{$medium};
+	    unlink $newf;
+	    $fhdlist or unlink $newsf;
 	    die "fatal: no hdlist nor synthesis to read for $fakemedium";
 	}
 	$m->{start} > $m->{end} and do { delete $packages->{mediums}{$medium};
