@@ -11,11 +11,17 @@ use list_modules;
 
 %conf = ();
 
-sub category2modules_and_description {
-    my ($categories) = @_;
+sub modules_descriptions {
     my $f = '/lib/modules/' . c::kernel_version() . '/modules.description';
     -e $f or $f = '/lib/modules.description';
-    my %modules_descriptions = map { /(\S+)\s+(.*)/ } cat_($f);
+    map { /(\S+)\s+(.*)/ } cat_($f);
+}
+
+sub module2description { +{ modules_descriptions() }->{$_[0]} }
+
+sub category2modules_and_description {
+    my ($categories) = @_;
+    my %modules_descriptions = modules_descriptions();
     map { $_ => $modules_descriptions{$_} } category2modules($categories);
 }
 
