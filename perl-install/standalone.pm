@@ -119,11 +119,11 @@ foreach (@ARGV) {
 	version();
 	exit(0);
     } elsif (/^--embedded$/) {
-	(undef, $::XID, $::CCPID) = splice @ARGV, ($i-1), 3;
+	($::XID, $::CCPID) = splice @ARGV, $i, 2;
 	$::isEmbedded = 1;
     } elsif (/^--expert$/) {
 	$::expert = 1;
-    } elsif (/--noauto$/) {
+    } elsif (/^--noauto$/) {
 	$::noauto = /-noauto/;
     } elsif (/^--auto$/) {
 	$::auto = 1;
