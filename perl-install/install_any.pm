@@ -85,12 +85,12 @@ sub errorOpeningFile($) {
 
     my $max = 32; #- always refuse after $max tries.
     if ($::o->{method} eq "cdrom") {
-	cat_("/proc/mounts") =~ m|(/tmp/\S+)\s+/tmp/rhimage| and $cdrom = $1;
+	cat_("/proc/mounts") =~ m|(/tmp/\S+)\s+/tmp/image| and $cdrom = $1;
 	return unless $cdrom;
 	ejectCdrom($cdrom);
 	while ($max > 0 && askChangeMedium($::o->{method}, $asked_medium)) {
 	    $current_medium = $asked_medium;
-	    eval { fs::mount($cdrom, "/tmp/rhimage", "iso9660", 'readonly') };
+	    eval { fs::mount($cdrom, "/tmp/image", "iso9660", 'readonly') };
 	    my $getFile = getFile($file); $getFile and return $getFile;
 	    $current_medium = 'unknown'; #- don't know what CD is inserted now.
 	    ejectCdrom($cdrom);
@@ -133,7 +133,7 @@ sub getFile {
 	    #- handling changing a media when some of the file on the first CD has been copied
 	    #- to other to avoid media change...
 	    my $f2 = "$postinstall_rpms/$f";
-	    $f2 = "/tmp/rhimage/$rel" unless $postinstall_rpms && -e $f2;
+	    $f2 = "/tmp/image/$rel" unless $postinstall_rpms && -e $f2;
 	    open GETFILE, $f2 and *GETFILE;
 	}
     } || errorOpeningFile($f);
@@ -182,7 +182,7 @@ sub setup_postinstall_rpms($$) {
     #- copy the package files in the postinstall RPMS directory.
     #- last arg is default medium '' known as the CD#1.
     pkgs::extractHeaders($prefix, \@toCopy, $packages->{mediums}{1});
-    commands::cp((map { "/tmp/rhimage/" . relGetFile(pkgs::packageFile($_)) } @toCopy), $postinstall_rpms);
+    commands::cp((map { "/tmp/image/" . relGetFile(pkgs::packageFile($_)) } @toCopy), $postinstall_rpms);
 }
 sub clean_postinstall_rpms() {
     require commands;
@@ -381,22 +381,22 @@ sub hdInstallPath() {
     my ($part) = grep { $_->{device} eq $1 } @{$::o->{fstab}};    
     $part->{mntpoint} or grep { $_->{mntpoint} eq "/mnt/hd" } @{$::o->{fstab}} and return;
     $part->{mntpoint} ||= "/mnt/hd";
-    $part->{mntpoint} . first(readlink("/tmp/rhimage") =~ m|^/tmp/hdimage/(.*)|);
+    $part->{mntpoint} . first(readlink("/tmp/image") =~ m|^/tmp/hdimage/(.*)|);
 }
 
 sub unlockCdrom(;$) {
     my ($cdrom) = @_;
-    $cdrom or cat_("/proc/mounts") =~ m|(/tmp/\S+)\s+/tmp/rhimage| and $cdrom = $1;
+    $cdrom or cat_("/proc/mounts") =~ m|(/tmp/\S+)\s+/tmp/image| and $cdrom = $1;
     $cdrom or cat_("/proc/mounts") =~ m|(/dev/\S+)\s+/mnt/cdrom | and $cdrom = $1;
     eval { $cdrom and ioctl detect_devices::tryOpen($1), c::CDROM_LOCKDOOR(), 0 };
 }
 sub ejectCdrom(;$) {
     my ($cdrom) = @_;
-    $cdrom or cat_("/proc/mounts") =~ m|(/tmp/\S+)\s+/tmp/rhimage| and $cdrom = $1;
+    $cdrom or cat_("/proc/mounts") =~ m|(/tmp/\S+)\s+/tmp/image| and $cdrom = $1;
     $cdrom or cat_("/proc/mounts") =~ m|(/dev/\S+)\s+/mnt/cdrom | and $cdrom = $1;
     my $f = eval { $cdrom && detect_devices::tryOpen($cdrom) } or return;
     getFile("XXX"); #- close still opened filehandle
-    eval { fs::umount("/tmp/rhimage") };
+    eval { fs::umount("/tmp/image") };
     ioctl $f, c::CDROMEJECT(), 1;
 }
 
@@ -592,7 +592,7 @@ sub generate_ks_cfg {
     if ($o->{method} =~ /ftp|http/) {
 	$ks .= "url --url $ENV{URLPREFIX}\n";
     } elsif ($o->{method} =~ /nfs/) {
-	cat_("/proc/mounts") =~ m|(\S+):(\S+)\s+/tmp/rhimage nfs| or die;
+	cat_("/proc/mounts") =~ m|(\S+):(\S+)\s+/tmp/image nfs| or die;
 	$ks .= "nfs --server $1 --dir $2\n";
     }
     my ($intf) = values %{$o->{intf}};
