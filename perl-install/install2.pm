@@ -48,8 +48,8 @@ customized installation, this Install Class is for you."),
 
 setupSCSI => 
  __("The system did not detect a SCSI card. If you have one (or several)
-click on \"Yes\" and choose the module(s)
-to be tested. Otherwise, select \"Not\".
+click on \"Yes\" and choose the module(s) to be tested. Otherwise, 
+select \"No\".
 
 If you don't know if your computer has SCSI interfaces, consult the
 original documentation delivered with the computer, or if you use
@@ -74,7 +74,7 @@ formatPartitions =>
 use. At this time, you may wish to re-format some pre-existing
 partitions to erase the data they contain. Note: it is not necessary to
 re-format pre-existing partitions, particularly if they contain files or
-data you wish to keep. Typical examples: /home and /usr/local."),
+data you wish to keep. Typically retained are: /home and /usr/local."),
 
 choosePackages => 
  __("You may now select the packages you wish to install.
@@ -86,7 +86,7 @@ installation configuration. It is impossible to install a package
 without installing all of its dependencies.
 
 Information on each category and specific package is available in the
-area titled \"Info\". This is located above buttons: [confirmation]
+area titled \"Info\". This is located above the buttons: [confirmation]
 [selection] [deselection]."),
 
 doInstallStep => 
@@ -129,8 +129,8 @@ addUser =>
  __("You can now authorize one or more people to be use your Linux
 system. Each user account will have their own customizable environment.
 
-It is very important that you create at least one user, even if there
-will only be one principle user of the system. The administrative
+It is very important that you create a regular user account, even if 
+there will only be one principle user of the system. The administrative
 \"root\" account should not be used for day to day operation of the
 computer.  It is a security risk.  The use of a regular user account
 protects you and the system from yourself. The root account should only
@@ -150,7 +150,8 @@ drive\"."),
 configureX => 
  __("It is now time to configure the video card and monitor
 configuration for the X windows Graphic User Interface (GUI). First
-select you monitor. Next, you may test the configuration and change your
+select your monitor. Next, you may test the configuration and change
+your
 selections if necessary."),
 
 exitInstall =>
