@@ -882,23 +882,9 @@ sub setupBootloader($) {
 #------------------------------------------------------------------------------
 sub configureXBefore {
     my ($o) = @_;
-    my $xkb = $o->{X}{keyboard}{XkbLayout} || keyboard::keyboard2xkb($o->{keyboard});
-    $xkb = '' if !($xkb && $xkb =~ /([^(]*)/ && -e "$o->{prefix}/usr/X11R6/lib/X11/xkb/symbols/$1");
-    if (!$xkb && (my $f = keyboard::xmodmap_file($o->{keyboard}))) {
-	cp_af($f, "$o->{prefix}/etc/X11/xinit/Xmodmap");	
-	$xkb = '';
-    }
-    {
-	my $f = "$o->{prefix}/etc/sysconfig/i18n";
-	setVarsInSh($f, add2hash_({ XKB_IN_USE => $xkb ? '': 'no' }, { getVarsFromSh($f) }));
-    }
-    $o->{X}{keyboard}{XkbLayout} = $xkb;
-    $o->{X}{mouse} = $o->{mouse};
-    $o->{X}{wacom} = $o->{wacom};
 
-    require Xconfig;
-    Xconfig::getinfoFromDDC($o->{X});
-    Xconfig::getinfoFromXF86Config($o->{X}, $o->{prefix}); #- take default from here at least.
+    require Xconfig::default;
+    $o->{raw_X} = Xconfig::default::configure($o->{keyboard}, $o->{mouse});
 
     #- keep this here if the package has to be updated.
     $o->pkg_install("XFree86");
@@ -907,27 +893,22 @@ sub configureX {
     my ($o) = @_;
     $o->configureXBefore;
 
-    require Xconfigurator;
-    require class_discard;
-    { local $::testing = 0; #- unset testing
-      local $::auto = 1;
-      $o->{X}{skiptest} = 1;
-      Xconfigurator::main($o->{X}, class_discard->new, $o->do_pkgs,
+    require Xconfig::main;
+    Xconfig::main::configure_everything_auto_install($o->{raw_X}, $o->do_pkgs, $o->{X},
 			  { allowFB          => $o->{allowFB},
 			    allowNVIDIA_rpms => install_any::allowNVIDIA_rpms($o->{packages}),
 			  });
-    }
     $o->configureXAfter;
 }
 sub configureXAfter {
     my ($o) = @_;
-    if ($o->{X}{card}{server} eq 'FBDev') {
-	install_any::setupFB($o, $o->{X}{card}{bios_vga_mode}) or do {
+    if ($o->{X}{bios_vga_mode}) {
+	install_any::setupFB($o, $o->{X}{bios_vga_mode}) or do {
 	    log::l("disabling automatic start-up of X11 if any as setup framebuffer failed");
 	    any::runlevel($o->{prefix}, 3); #- disable automatic start-up of X11 on error.
 	};
     }
-    if ($o->{X}{default_depth} >= 16 && $o->{X}{card}{default_x_res} >= 1024) {
+    if ($o->{X}{default_depth} >= 16 && $o->{X}{resolution_wanted} >= 1024) {
 	log::l("setting large icon style for kde");
 	install_any::kderc_largedisplay($o->{prefix});
     }
