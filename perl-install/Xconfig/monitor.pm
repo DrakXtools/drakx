@@ -71,6 +71,9 @@ sub choose {
 
     configure_automatic($monitor, $monitors) and $auto and return 1;
 
+    my %h_monitors = map { ; "$_->{VendorName}|$_->{ModelName}" => $_ } @$monitors;
+
+  ask_monitor:
     my $merged_name = do {
 	if ($monitor->{VendorName} eq "Plug'n Play") {
 	    $monitor->{VendorName};
@@ -87,7 +90,7 @@ sub choose {
 
     $in->ask_from(_("Monitor"), _("Choose a monitor"), 
 		  [ { val => \$merged_name, separator => '|', 
-		      list => ['Custom', "Plug'n Play", sort keys %$monitors],
+		      list => ['Custom', "Plug'n Play", sort keys %h_monitors],
 		      format => sub { $_[0] eq 'Custom' ? _("Custom") : 
 				      $_[0] eq "Plug'n Play" ? _("Plug'n Play") . " ($monitor->{ModelName})" :
 				      $_[0] =~ /^Generic\|(.*)/ ? _("Generic") . "|$1" :  
@@ -97,8 +100,13 @@ sub choose {
     if ($merged_name eq "Plug'n Play") {
 	local $::noauto = 0; #- hey, you asked for plug'n play, so i do probe!
 	put_in_hash($monitor, getinfoFromDDC());
-	configure_automatic($monitor, $monitors);
-	$monitor->{VendorName} = "Plug'n Play";
+	if (configure_automatic($monitor, $monitors)) {
+	    $monitor->{VendorName} = "Plug'n Play";
+	} else {
+	    delete $monitor->{VendorName};
+	    $in->ask_warn('', _("Plug'n Play probing failed. Please choose a precise monitor"));
+	    goto ask_monitor;
+	}
     } elsif ($merged_name eq 'Custom') {
 	$in->ask_from('',
 _("The two critical parameters are the vertical refresh rate, which is the rate
@@ -112,7 +120,7 @@ that is beyond the capabilities of your monitor: you may damage your monitor.
 			{ val => \$monitor->{VertRefresh}, list => \@VertRefresh_ranges, label => _("Vertical refresh rate"), not_edit => 0 } ]) or goto &choose;
 	delete @$monitor{'VendorName', 'ModelName', 'EISA_ID'};
     } else {
-	put_in_hash($monitor, $monitors->{$merged_name});
+	put_in_hash($monitor, $h_monitors{$merged_name});
     }
     $monitor->{manually_chosen} = 1;
     1;
@@ -123,14 +131,18 @@ sub configure_automatic {
 
     if ($monitor->{EISA_ID}) {
 	log::l("EISA_ID: $monitor->{EISA_ID}");
-	if (my ($mon) = grep { lc($_->{EISA_ID}) eq $monitor->{EISA_ID} } values %$monitors) {
+	if (my ($mon) = grep { lc($_->{EISA_ID}) eq $monitor->{EISA_ID} } @$monitors) {
 	    add2hash($monitor, $mon);
 	    log::l("EISA_ID corresponds to: $monitor->{ModelName}");
+	} elsif (!$monitor->{HorizSync} || !$monitor->{VertRefresh}) {
+	    log::l("unknown EISA_ID and partial DDC probe, so unknown monitor");
+	    delete @$monitor{'VendorName', 'ModelName', 'EISA_ID'};	    
+	}
+    } else {
+	if (my ($mon) = grep { $_->{VendorName} eq $monitor->{VendorName} && $_->{ModelName} eq $monitor->{ModelName} } @$monitors) {
+	    put_in_hash($monitor, $mon);
 	}
     }
-    my $merged_name = $monitor->{VendorName} . '|' . $monitor->{ModelName};
-
-    put_in_hash($monitor, $monitors->{$merged_name});
 
     return $monitor->{HorizSync} && $monitor->{VertRefresh};
 }
@@ -165,8 +177,7 @@ sub monitors {
 sub readMonitorsDB {
     my ($file) = @_;
 
-    my (%monitors, %standard_monitors);
-
+    my @monitors;
     my $F = common::openFileMaybeCompressed($file);
     local $_;
     my $lineno = 0; while (<$F>) {
@@ -176,16 +187,10 @@ sub readMonitorsDB {
 	/^$/ and next;
 
 	my @fields = qw(VendorName ModelName EISA_ID HorizSync VertRefresh dpms);
-	my @l = split /\s*;\s*/;
-
-	my %l; @l{@fields} = @l;
-	if ($monitors{$l{ModelName}}) {
-	    my $i; for ($i = 0; $monitors{"$l{ModelName} ($i)"}; $i++) {}
-	    $l{ModelName} = "$l{ModelName} ($i)";
-	}
-	$monitors{"$l{VendorName}|$l{ModelName}"} = \%l;
+	my %l; @l{@fields} = split /\s*;\s*/;
+	push @monitors, \%l;
     }
-    \%monitors;
+    \@monitors;
 }
 
 
