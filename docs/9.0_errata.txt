@@ -6,6 +6,15 @@
 
  o Drakxtools:
    ==========  
+
+   widget libraries:
+
+    In both XFdrake and printerdrake pop up small, empty, gray windows when 
+    clicking in the main menu. STATUS: Not fixed.
+
+    Scroll bars and widget sizes often not correct (visible primarily in the
+    printer options step of the "Add printer" wizard of printerdrake. STATUS:
+    Not fixed.
    
    harddrake:
 
@@ -24,4 +33,29 @@
 
  o Install: 
    ========
+ 
+ o urpmi
+   =====
+
+   "urpmi mplayer" shows a list of libraries it needs and asks whether
+   to install all this, after saying "y", it says that all these
+   packages are missing and fails (I have shown it to François and he
+   says that is a bug with the "contribs". He had to regenerate the
+   hdlists somehow. STATUS: Not fixed.
+
+ o XFree 4.2.x
+   ===========
+
+   Touchpad mouse on my Asus S8600 notebook. Worked out-of-the-box
+   with Mandrake 8.2, but in 9.0 I cannot do any dragging operation
+   with the PS/2-"Standard" mouse setting. I switched to "Glidepoint"
+   with mousedrake and then dragging works, but the emulation of the
+   third button by pressing both buttons not. Adding the lines
+
+      Option "Emulate3Buttons"
+      Option "Emulate3Timeout" "50"
+
+   to the mouse section of /etc/X11/XF86Config-4 manually fixes the
+   middle-button problem. STATUS: Not fixed.
+
  
