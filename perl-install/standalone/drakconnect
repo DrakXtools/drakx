@@ -260,14 +260,20 @@ sub build_tree {
           };
     }
     elsif ($interface eq 'modem') {
-	$intf->{pages} = { N("TCP/IP") => 1, N("Account") => 1, N("Options") => 1 };
+	$intf->{pages} = { N("TCP/IP") => 1, N("Account") => 1, N("Modem") => 1, N("Options") => 1 };
 	# FIXME: code duplication, should be in network::modem::read_config
 	$intf->{device} = $netc->{autodetect}{modem};
 	my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
-	($intf->{dns1}, $intf->{dns2}) = split(',', $l{DNS});
-	$intf->{$_->[0]} = $l{$_->[1]} foreach [ 'connection' , 'Name' ], [ 'domain', 'Domain' ], [ 'login', 'Username' ], 
-	  [ 'Timeout', 'Timeout' ], [ 'UseLockFile', 'UseLockFile' ], [ 'BusyWait', 'BusyWait' ], 
-	    [ 'FlowControl', 'FlowControl' ], [ 'Speed', 'Speed' ], [ 'Authentication', 'Authentication' ];
+
+	$intf->{kppprc} = "/root/.kde/share/config/kppprc";
+	my %m = getVarsFromSh($intf->{kppprc});
+	$l{$_} = $m{$_} foreach keys %m;
+        
+        ($intf->{dns1}, $intf->{dns2}) = split(',', $l{DNS});
+	$intf->{$_->[0]} = $l{$_->[1]} foreach  [ 'connection' , 'Name' ], [ 'domain', 'Domain' ], [ 'login', 'Username' ], 
+						[ 'Timeout', 'Timeout' ], [ 'UseLockFile', 'UseLockFile' ], [ 'Enter', 'Enter' ],
+						[ 'BusyWait', 'BusyWait' ], [ 'FlowControl', 'FlowControl' ], [ 'Speed', 'Speed' ],
+						[ 'DialTone', 'DialTone' ], [ 'Volume', 'Volume' ];
 	/.*ATDT(\d*)/ and $intf->{phone} = $1 foreach cat_("/etc/sysconfig/network-scripts/chat-ppp0");
 	/NAME=(['"]?)(.*)\1/ and $intf->{login} ||= $2 foreach cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0");
 	$_->{login} eq $intf->{login} and $intf->{passwd} = $_->{passwd} foreach @{network::tools::read_secret_backend()};
@@ -460,17 +466,17 @@ sub build_notebook {
 			      (map { (gtkpack_(Gtk2::VBox->new(0,0),
 					       1, Gtk2::Label->new($_->[0]),
 					       0, $gui->{intf}{$_->[1]} = gtksignal_connect(Gtk2::OptionMenu->new,
-											    key_press_event => $apply),
+											    changed => $apply),
 					      ),
 				     ),
 				 } ([ N("Flow control"), 'FlowControl' ],
-				    [ N("Line termination"), 'LineTerm' ],
+				    [ N("Line termination"), 'Enter' ],
 				    [ N("Connection speed"), 'Speed' ],
 				   )),
-			      gtkpack(Gtk2::VBox->new(0,0),
-				      Gtk2::Label->new(N("Dialing mode")),
-				      gtkradio('', N("Tone dialing"), N("Pulse dialing")),
-				     ),
+			      # gtkpack(Gtk2::VBox->new(0,0), # no relative kppp option found :-(
+			      #          Gtk2::Label->new(N("Dialing mode")),
+			      # 	 gtkradio('', N("Tone dialing"), N("Pulse dialing")),
+			      #        ),
 			     ),
 		    Gtk2::VSeparator->new,
 		    gtkpack__(new Gtk2::VBox(0,0),
@@ -481,7 +487,7 @@ sub build_notebook {
 				     $gui->{intf}{Timeout} = gtksignal_connect(Gtk2::SpinButton->new(Gtk2::Adjustment->new($intf->{Timeout}, 0, 120, 1, 5, 0), 0, 0),
 									       value_changed => $apply),
 				    ),
-			     gtksignal_connect($gui->{intf_bool}{WaitForDialup} = Gtk2::CheckButton->new(N("Wait for dialup tone before dialing")),
+			     gtksignal_connect($gui->{intf_bool}{WaitForDialTone} = Gtk2::CheckButton->new(N("Wait for dialup tone before dialing")),
 					       toggled => $apply),
 			     gtkpack(Gtk2::HBox->new(0,0),
 				     Gtk2::Label->new(N("Busy wait")),
@@ -489,7 +495,7 @@ sub build_notebook {
 										value_changed => $apply),
 				    ),
 			     Gtk2::Label->new(N("Modem sound")),
-			     gtkradio('', N("Enable"), N("Disable")),
+			     my @volume_radio = gtkradio('', N("Enable"), N("Disable")),
 			    ),
 		   ),
 		if_($interface eq 'isdn',
@@ -516,6 +522,11 @@ sub build_notebook {
 	       );
 	$protocol_radio[0]->signal_connect(toggled => sub { $gui->{intf_radio}{protocol} = 2; $apply->() });
 	$protocol_radio[1]->signal_connect(toggled => sub { $gui->{intf_radio}{protocol} = 3; $apply->() });
+	$volume_radio[0]->signal_connect(toggled => sub { $gui->{intf_radio}{Volume} = 1; $apply->() });
+	$volume_radio[1]->signal_connect(toggled => sub { $gui->{intf_radio}{Volume} = 0; $apply->() });
+	$gui->{intf}{FlowControl}->set_popdown_strings('Hardware [CRTSCTS]', 'Software [XON/XOFF]', 'None');
+	$gui->{intf}{Enter}->set_popdown_strings('CR', 'CF', 'CR/LF');
+	$gui->{intf}{Speed}->set_popdown_strings('2400', '9600', '19200', '38400', '57600', '115200');
     }
     
     if ($intf->{pages}{N("Information")}) {
