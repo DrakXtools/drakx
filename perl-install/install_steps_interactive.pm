@@ -321,7 +321,7 @@ sub setupSCSI {
 	my $w = $o->wait_message(_("IDE"), _("Configuring IDE"));
 	modules::load(modules::category2modules('disk/cdrom'));
     }
-    any::load_category($o, 'bus/firewire');
+    any::load_category($o, 'bus/firewire', 1);
 
     any::load_category($o, 'disk/scsi|hardware_raid', !$::expert && !$clicked, 0, $o->{pcmcia});
 
