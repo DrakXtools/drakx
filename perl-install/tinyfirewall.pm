@@ -67,15 +67,12 @@ sub DoInterface {
     my $GetNetworkInfo = sub {
 	$settings{DNS_SERVERS} = join(' ', uniq(split(' ', $settings{DNS_SERVERS}),
             @{network::read_resolv_conf("/etc/resolv.conf")}{'dnsServer', 'dnsServer2', 'dnsServer3'}));
-	open NETSTAT, "/bin/netstat -in |" or die "Can't pipe from /bin/netstat: $!\n"; <NETSTAT>; <NETSTAT>;
-	my @interfaces = map { (split / /)[0]; } (<NETSTAT>); close NETSTAT;
-	open ROUTE, "/sbin/route -n |" or die "Can't pipe from /sbin/route: $!\n"; <ROUTE>; <ROUTE>;
+	my (undef, undef, @netstat) = `/bin/netstat -in`;
+	my @interfaces =  map { /(\S+)/ } @netstat;
+	my (@route, undef, undef) = `/sbin/route -n`;
 	my $defaultgw;
 	my $iface;
-	while (<ROUTE>) {
-	    my @parts = split /\s+/;
-	    ($parts[0] eq "0.0.0.0") and $defaultgw = $parts[1], $iface = $parts[7];
-	} close ROUTE;
+	foreach (@route) { my @parts = split /\s+/; $parts[0] eq "0.0.0.0" and $defaultgw = $parts[1], $iface = $parts[7] }
 	my $fulliface = $iface;
 	$fulliface =~ s/[0-9]+/\\\+/;
 	$settings{PUBLIC_INTERFACES} = join(' ', uniq(split(' ', $settings{PUBLIC_INTERFACES}), $iface));
@@ -83,7 +80,7 @@ sub DoInterface {
 	$settings{INTERNAL_IFACES} = join(' ', uniq(split(' ', $settings{INTERNAL_IFACES}),
             map { my $i=$_; my $f=$i; $f=~s/[0-9]+/\\\+/;
 		  if_(and_( map {$settings{$_} !~ /$i/ and $settings{$_} !~ /$f/ } ('TRUSTED_IFACES', 'PUBLIC_IFACES', 'INTERNAL_IFACES')), $i)
-	    } (@interfaces) ));
+	    } @interfaces ));
     };
     my $popimap = sub { $_[0] or return; mapn { $settings{$_[0]} = $_[1] }
 [ qw(FORCE_PASV_FTP TCP_BLOCKED_SERVICES UDP_BLOCKED_SERVICES ICMP_ALLOWED_TYPES ENABLE_SRC_ADDR_VERIFY IP_MASQ_NETWORK IP_MASQ_MODULES REJECT_METHOD) ] ,
@@ -136,7 +133,7 @@ sub DoInterface {
 	my $yes = $l->[2] ? $l->[2] : _("Yes (allow this through the firewall)");
 	if (my $e = $in->ask_from_list(_("Firewall Configuration Wizard"),
 				       $messages[$i],
-				       [ $yes, $no ], or_( map { $_ and CheckService($_->[0], $_->[1]) } (@$l[4..6])) ? $yes : $no
+				       [ $yes, $no ], or_( map { $_ && CheckService($_->[0], $_->[1]) } (@$l[4..6])) ? $yes : $no
 				      )) {
 	    map { $_ and Service ($e=~/Yes/, $_->[0], $_->[1]) } (@{@struct[$i]}[4..6]);
 	    $struct[$i][3] and $struct[$i][3]->($e=~/Yes/);
@@ -146,20 +143,16 @@ sub DoInterface {
 	}
     }
 }
+sub unbox_service {
+    split ' ', $settings{uc($_[0]) . "_PUBLIC_SERVICES"}
+}
 sub Service {
     my ($add, $protocol, $port) = @_;
-    if ($add) {
-	map { $_ eq $port and return } (split (' ', $settings{uc($protocol) . "_PUBLIC_SERVICES"}));
-	$settings{uc($protocol) . "_PUBLIC_SERVICES"} = join(' ',split(' ',$settings{uc($protocol) . "_PUBLIC_SERVICES"}, $port));
-    } else {
-	$settings{uc($protocol) . "_PUBLIC_SERVICES"} =
-	  join( ' ', map { if_($_ ne $port, $_)} (split (' ', $settings{uc($protocol) . "_PUBLIC_SERVICES"})) );
-    }
+    my @l = unbox_service($protocol);
+    @l = uniq($add ? (@l, $port) : grep { $_ ne $port } @l);
+    $settings{uc($protocol) . "_PUBLIC_SERVICES"} = join(' ', @l);
 }
-sub CheckService {
-    my ($protocol, $port) = @_;
-    map { $_ eq $port and return 1 } split / /, $settings{uc($protocol) . "_PUBLIC_SERVICES"};
-}
+sub CheckService { member($_[1], unbox_service($_[0])); }
 sub Kernel22 {
     my ($major, $minor, $patchlevel) = (cat_("/proc/version"))[0] =~ m/^Linux version ([0-9]+)\.([0-9]+)\.([0-9]+)/;
     $major eq "2" && $minor eq "2";
