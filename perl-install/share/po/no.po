@@ -130,9 +130,8 @@ msgid "Choose resolution and color depth"
 msgstr "Velg oppløsning og fargedybde"
 
 #: ../Xconfigurator.pm_.c:422
-#, fuzzy
 msgid "Show all"
-msgstr "Vis færre"
+msgstr "Vis alle"
 
 #: ../Xconfigurator.pm_.c:482
 msgid ""
@@ -223,7 +222,7 @@ msgstr "Test igjen"
 
 #: ../Xconfigurator.pm_.c:714
 msgid "Quit"
-msgstr "Slutt"
+msgstr "Avslutt"
 
 #: ../Xconfigurator.pm_.c:717
 msgid "What do you want to do?"
@@ -469,27 +468,27 @@ msgstr "Detaljer"
 
 #: ../diskdrake.pm_.c:98
 msgid "Legend"
-msgstr ""
+msgstr "Legende"
 
 #: ../diskdrake.pm_.c:100
 msgid "Empty"
-msgstr ""
+msgstr "Tom"
 
 #: ../diskdrake.pm_.c:100
 msgid "Ext2"
-msgstr ""
+msgstr "Ext2"
 
 #: ../diskdrake.pm_.c:100
 msgid "FAT"
-msgstr ""
+msgstr "FAT"
 
 #: ../diskdrake.pm_.c:100
 msgid "Other"
-msgstr ""
+msgstr "Andre"
 
 #: ../diskdrake.pm_.c:100
 msgid "Swap"
-msgstr ""
+msgstr "Veksle"
 
 #: ../diskdrake.pm_.c:120
 #, c-format
@@ -504,6 +503,7 @@ msgstr "Les nøye!"
 msgid "all data on this partition will be lost"
 msgstr "alle data på denne partisjonen vil gå tapt"
 
+# #: ../install_steps_interactive.pm_.c:37
 #: ../diskdrake.pm_.c:138 ../install_any.pm_.c:178 ../install_steps.pm_.c:68
 #: ../install_steps_interactive.pm_.c:37
 msgid "Error"
@@ -797,9 +797,8 @@ msgstr ""
 "filsystemer. Vennligst sjekk maskinvaren din for årsaken til dette problemet"
 
 #: ../fsedit.pm_.c:378
-#, fuzzy
 msgid "You don't have any partitions!"
-msgstr "Du må ha en swap-partisjon"
+msgstr "Du har ingen partisjoner!"
 
 #: ../help.pm_.c:7 ../help.pm_.c:238
 msgid "Choose preferred language for install and system usage."
@@ -1064,6 +1063,7 @@ msgstr ""
 "opp et privat nettverk hjemme, burde du velge\n"
 "adresser "
 
+# #: ../help.pm_.c:376 ../help.pm_.c:463 ../install2.pm_.c:65
 #: ../help.pm_.c:142 ../help.pm_.c:145 ../help.pm_.c:232 ../help.pm_.c:373
 #: ../help.pm_.c:376 ../help.pm_.c:463 ../install2.pm_.c:65
 msgid "Help"
@@ -1113,8 +1113,7 @@ msgstr ""
 "SMB-navn (som ikke er dens TCP/IP-navn), og muligens dens IP-adresse,\n"
 "pluss brukernavn, arbeidsgruppe og passord som behøves for å få\n"
 "tilgang til skriveren, og selvfølgelig navnet på skriveren. Det samme "
-"gjelder\n"
-"for en NetWare-skriver, med unntak av at du ikke trenger "
+"gjelder for en NetWare-skriver, med unntak av at du ikke trenger\n"
 "arbeidsgruppe-informasjon."
 
 #: ../help.pm_.c:171 ../help.pm_.c:402
@@ -1149,7 +1148,6 @@ msgstr ""
 "du må kunne klare å huske det."
 
 #: ../help.pm_.c:187 ../help.pm_.c:418
-#, fuzzy
 msgid ""
 "You may now create one or more \"regular\" user account(s), as\n"
 "opposed to the \"priviledged\" user account, root. You can create\n"
@@ -1177,14 +1175,15 @@ msgstr ""
 "en eller flere kontoer for hver person du vil skal ha tilgang\n"
 "til maskinen. Merk at hver brukerkonto vil ha sine egne\n"
 "valg (grafisk miljø, program-innstillinger, etc.)\n"
-"og sin egen \"hjemmekatalog\", hvor disse valgene er lagret\n"
+"og sin egen \"hjemmekatalog\", hvor disse valgene er lagret.\n"
 "\n"
 "\n"
-"Først av alt, opprett en konto for deg selv! Selv om du vil være\n"
-"den eneste brukeren av maskinen, burde du IKKE logge inn som root for "
-"daglig\n"
-"bruk av systemet: det er en veldig stor sikkerhetsrisiko. Å gjøre systemet\n"
-"ubrukelig er veldig ofte bare en skrivefeil unna.\n"
+"Først av alt, opprett en konto for deg selv! Selv om du vil være den eneste "
+"brukeren\n"
+"av maskinen, burde du IKKE logge inn som root for daglig bruk av systemet: "
+"det er en\n"
+"veldig stor sikkerhetsrisiko. Å gjøre systemet ubrukelig er veldig ofte bare "
+"en skrivefeil unna.\n"
 "\n"
 "\n"
 "Derfor burde du bare logge deg inn på systemet med brukerkontoen\n"
@@ -1199,10 +1198,9 @@ msgid ""
 "any more!"
 msgstr ""
 "Vær så snill, bare svar \"Ja\" her! Bare som et eksempel, når du\n"
-"re-installerer Windows, vil denne overskrive oppstartsektoren. Hvis du ikke "
-"har\n"
-"opprettet oppstartsdisketten som foreslått, vil du ikke kunne starte Linux\n"
-"mer!"
+"re-installerer Windows, vil denne overskrive oppstartsektoren. Hvis du\n"
+"ikke har opprettet oppstartsdisketten som foreslått, vil du ikke kunne\n"
+"starte Linux mer!"
 
 #: ../help.pm_.c:212 ../help.pm_.c:443
 msgid ""
@@ -1234,7 +1232,7 @@ msgid ""
 "change them, as many times as necessary."
 msgstr ""
 "Det er nå tid for å konfigurere X-vindusystemet, som er kjernen\n"
-"til Linux GUI (Graphical User Interface). For dette formålet,\n"
+"til det grafiske brukergrensesnittet i Linux. For dette formålet,\n"
 "må du konfigurere skjermkortet og monitoren din. De fleste av disse\n"
 "stegene skjer automatisk, så det du muligens trenger å gjøre\n"
 "er å verifisere hva som har blitt gjort og godkjenne innstillingene :)\n"
@@ -1287,9 +1285,8 @@ msgstr ""
 "på en fjern Windows 9x/NT maskin), må du spesifisere dens\n"
 "SMB-navn (som ikke er dens TCP/IP-navn), og muligens dens IP-adresse,\n"
 "pluss brukernavn, arbeidsgruppe og passord som behøves for å få\n"
-"tilgang til skriveren, og selvfølgelig navnet på skriveren. Det samme "
-"gjelder\n"
-"for en NetWare-skriver, med unntak av at du ikke trenger "
+"tilgang til skriveren, og selvfølgelig navnet på skriveren. Det samme\n"
+"gjelder for en NetWare-skriver, med unntak av at du ikke trenger\n"
 "arbeidsgruppe-informasjon."
 
 #: ../install2.pm_.c:39
@@ -1355,7 +1352,7 @@ msgstr "Legg til en bruker"
 
 #: ../install2.pm_.c:55
 msgid "Create a bootdisk"
-msgstr "Opprett en oppstartdisk"
+msgstr "Opprett en oppstartdiskett"
 
 #: ../install2.pm_.c:56
 msgid "Install bootloader"
@@ -1411,15 +1408,17 @@ msgid ""
 "DiskDrake failed to read correctly the partition table.\n"
 "Continue at your own risk!"
 msgstr ""
+"DiskDrake klarte ikke å lese partisjonstabellen riktig.\n"
+"Fortsett på egen risiko!"
 
 #: ../install_any.pm_.c:233
 msgid "Information"
 msgstr "Informasjon"
 
 #: ../install_any.pm_.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "%s: This is not a root partition, please select another one."
-msgstr " : Dette er ikke en root-partisjon, vennligst velg en annen."
+msgstr "%s: Dette er ikke en root-partisjon, vennligst velg en annen."
 
 #: ../install_any.pm_.c:236
 msgid "No root partition found"
@@ -1430,14 +1429,14 @@ msgid ""
 "An error occurred, but I don't know how to handle it nicely,\n"
 "so continue at your own risk :("
 msgstr ""
-"En feil oppsto, jeg vet ikke hvordan jeg skal håndtere dette på en pen "
-"måte,\n"
+"En feil oppsto, men jeg vet ikke hvordan jeg skal håndtere dette på en\n"
+"pen måte,\n"
 "så fortsett på eget ansvar :("
 
 #: ../install_steps.pm_.c:122
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr ""
+msgstr "Dupliser monteringspunkt %s"
 
 #: ../install_steps.pm_.c:309
 msgid "No floppy drive available"
@@ -1445,14 +1444,14 @@ msgstr "Ingen diskettstasjon tilgjengelig"
 
 #: ../install_steps_graphical.pm_.c:256
 msgid "You must have a swap partition"
-msgstr "Du må ha en swap-partisjon"
+msgstr "Du må ha en vekslingspartisjon"
 
 #: ../install_steps_graphical.pm_.c:259
 msgid ""
 "You don't have a swap partition\n"
 "Continue anyway?"
 msgstr ""
-"Du har ingen swap-partisjon\n"
+"Du har ingen vekslingspartisjon\n"
 "Fortsette uansett?"
 
 #: ../install_steps_graphical.pm_.c:285
@@ -1514,16 +1513,15 @@ msgstr "Installerer pakke %s"
 
 #: ../install_steps_graphical.pm_.c:483
 msgid "Go on anyway?"
-msgstr "Fortsette likevel?"
+msgstr "Fortsette uansett?"
 
 #: ../install_steps_graphical.pm_.c:483
 msgid "There was an error ordering packages:"
 msgstr "Det var en feil ved bestilling av pakkene:"
 
 #: ../install_steps_graphical.pm_.c:507
-#, fuzzy
 msgid "Use existing configuration for X11?"
-msgstr "Test konfigurasjon"
+msgstr "Bruke eksisterende konfigurasjon for X11?"
 
 #: ../install_steps_graphical.pm_.c:580 ../interactive.pm_.c:47
 #: ../interactive.pm_.c:57 ../my_gtk.pm_.c:193 ../my_gtk.pm_.c:347
@@ -1592,29 +1590,26 @@ msgid "Which serial port is your mouse connected to?"
 msgstr "Hvilken serieport er musen din koblet til?"
 
 #: ../install_steps_interactive.pm_.c:128
-#, fuzzy
 msgid "no available partitions"
-msgstr "Formater partisjoner"
+msgstr "ingen tilgjengelige partisjoner"
 
 #: ../install_steps_interactive.pm_.c:130
 #, c-format
 msgid "(%dMb)"
-msgstr ""
+msgstr "(%dMb)"
 
 #: ../install_steps_interactive.pm_.c:137
-#, fuzzy
 msgid "Which partition do you want to use as your root partition"
-msgstr "Hvilken sektor vil du flytte til?"
+msgstr "Hvilken partisjon vil du bruke som din root-partisjon"
 
 #: ../install_steps_interactive.pm_.c:144
-#, fuzzy
 msgid "Choose the mount points"
-msgstr "Velg en monitor"
+msgstr "Velg monteringspunkter"
 
 #: ../install_steps_interactive.pm_.c:156
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
-"Du må starte maskinen på nytt for at modifiseringene av partisjons- tabellen "
+"Du må starte maskinen på nytt for at modifiseringene av partisjonstabellen "
 "skal tre i kraft"
 
 #: ../install_steps_interactive.pm_.c:172
@@ -1661,7 +1656,7 @@ msgstr "Vil du konfigurere LAN (ikke oppringt) nettverk for systemet ditt?"
 
 #: ../install_steps_interactive.pm_.c:224
 msgid "no network card found"
-msgstr "nettverkskort ikke funnet"
+msgstr "ingen nettverkskort funnet"
 
 #: ../install_steps_interactive.pm_.c:251
 #, c-format
@@ -2611,61 +2606,290 @@ msgid "Error writing to file %s"
 msgstr "Feil ved skriving til fil %s"
 
 #: ../printer.pm_.c:244
-#, fuzzy
 msgid "Local printer"
-msgstr "Lokal skriverenhet"
+msgstr "Lokal skriver"
 
 #: ../printer.pm_.c:245
-#, fuzzy
 msgid "Remote lpd"
-msgstr "Fjern-kø:"
+msgstr "Fjern-lpd"
 
 #: ../printer.pm_.c:246
 msgid "SMB/Windows 95/NT"
-msgstr ""
+msgstr "SMB/Windows 95/NT"
 
 #: ../printer.pm_.c:247
 msgid "NetWare"
-msgstr ""
+msgstr "NetWare"
 
-#~ msgid " Mb"
-#~ msgstr " Mb"
+#~ msgid "Found root partition : "
+#~ msgstr "Fant root-partisjon : "
 
-#~ msgid "Package ordering failed"
-#~ msgstr "Pakkelevering mislykket"
+#~ msgid "An error occurred while getting the geometry of block device %s: %s"
+#~ msgstr "En feil oppsto ved henting av geometrien til blokkenhet %s: %s"
 
-#~ msgid "Found "
-#~ msgstr "Funnet "
+#~ msgid "Is it ok?"
+#~ msgstr "Er det ok?"
 
-#~ msgid "Give your graphic card memory size"
-#~ msgstr "Oppgi hvor mye minne grafikk-kortet ditt har"
+#~ msgid "Here must give the different options for the module %s."
+#~ msgstr "Her må forskjellige opsjoner oppgis for modulen %s."
 
-#~ msgid "Configure services"
-#~ msgstr "Konfigurer tjenester"
+#~ msgid "You must enter the same password"
+#~ msgstr "Du må skrive inn det samme passordet"
+
+#~ msgid "I have detected a %s on "
+#~ msgstr "Jeg har oppdaget en %s på "
+
+#~ msgid "Standard Printer Options"
+#~ msgstr "Standard skriveropsjoner"
+
+#~ msgid "Which mouse do you have"
+#~ msgstr "Hvilken mus har du?"
+
+#~ msgid "What type of user will you have?"
+#~ msgstr "Hva slags type bruker vil du ha?"
+
+#~ msgid "Which keyboard do you have?"
+#~ msgstr "Hvilket tastatur har du?"
+
+#~ msgid "no floppy available"
+#~ msgstr "ingen diskett tilgjengelig"
 
 #~ msgid ""
-#~ "Choose the language which you approved. This one govern the language's "
-#~ "system."
-#~ msgstr "Velg språket som du godkjente. Dette bestemmer språket på systemet."
-
-#~ msgid ""
-#~ "In this stage, you will must partion your hard disk. It consists in cutting "
-#~ "your disk in several zones\n"
-#~ "(which are not equal). This operation, for spectacular and intimidating that "
-#~ "it is,\n"
-#~ " is not hardly if you be carrefull so that you do. \n"
-#~ "Also, take your time, are sure you before click on \"Finishing\" and READ "
-#~ "the handbook of DiskDrake\n"
-#~ "before use them."
+#~ "It is now time to configure the video card and monitor\n"
+#~ "configuration for the X Window Graphic User Interface (GUI). First\n"
+#~ "select your monitor. Next, you may test the configuration and change\n"
+#~ "your selections if necessary."
 #~ msgstr ""
-#~ "På dette punktet må du partisjonere hard-disken din. Det består av å dele "
-#~ "opp disken din i flere soner\n"
-#~ "(som ikke er like). Denne operasjonen, uansett hvor spektakulært og "
-#~ "skremmende den måtte være,\n"
-#~ "ikke så vanskelig hvis du er forsiktig med det du gjør. \n"
-#~ "Ta deg god tid, og vær sikker før du klikker på \"Ferdig\" og LES "
-#~ "DiskDrake-håndboken\n"
-#~ "før du begynner."
+#~ "Det er nå tid for å konfigurere skjermkort- og monitor-konfigurasjonen\n"
+#~ "for X Window Graphic User Interface (GUI). Velg først monitoren din.\n"
+#~ "Deretter kan du teste konfigurasjonen og endre dine valg hvis det er\n"
+#~ "nødvendig."
+
+#~ msgid ""
+#~ "You can now authorize one or more people to use your Linux\n"
+#~ "system. Each user account will have their own customizable environment.\n"
+#~ "\n"
+#~ "\n"
+#~ "It is very important that you create a regular user account, even if\n"
+#~ "there will only be one principle user of the system. The administrative\n"
+#~ "\"root\" account should not be used for day to day operation of the\n"
+#~ "computer.  It is a security risk.  The use of a regular user account\n"
+#~ "protects you and the system from yourself. The root account should only\n"
+#~ "be used for administrative and maintenance tasks that can not be\n"
+#~ "accomplished from a regular user account."
+#~ msgstr ""
+#~ "Du kan nå autorisere en eller flere personer som kan bruke Linux-\n"
+#~ "systemet ditt. Hver brukerkonto vil ha sitt eget definerbare miljø.\n"
+#~ "\n"
+#~ "\n"
+#~ "Det er veldig viktig at du oppretter en vanlig brukerkonto, selv om det\n"
+#~ "bare vil være en bruker av systemet. Den administrative kontoen \"root\"\n"
+#~ "bør ikke brukes til vanlig bruk av maskinen. Dette er en sikkerhets-\n"
+#~ "risiko. Bruken av en vanlig brukerkonto vil beskytte både deg og systemet\n"
+#~ "mot deg selv. Root-kontoen bør kun brukes til administrering og vedlikehold\n"
+#~ "som ikke kan utføres fra en vanlig brukerkonto."
+
+#~ msgid ""
+#~ "The system did not detect a SCSI card. If you have one (or several)\n"
+#~ "click on \"Yes\" and choose the module(s) to be tested. Otherwise,\n"
+#~ "select \"No\".\n"
+#~ "\n"
+#~ "\n"
+#~ "If you don't know if your computer has SCSI interfaces, consult the\n"
+#~ "original documentation delivered with the computer, or if you use\n"
+#~ "Microsoft Windows 95/98, inspect the information available via the "
+#~ "\"Control\n"
+#~ "panel\", \"System's icon, \"Device Manager\" tab."
+#~ msgstr ""
+#~ "Systemet fant ikke noen SCSI-kort. Hvis du har ett (eller flere) klikk på\n"
+#~ "\"Ja\" og velg modul(er) som skal testes. Hvis ikke, velg \"Nei\".\n"
+#~ "\n"
+#~ "\n"
+#~ "Hvis du ikke vet om maskinen din har SCSI-grensesnitt, se i dokumentasjonen\n"
+#~ "levert med datamaskinen din, eller hvis du bruker Windows 95/98, sjekk\n"
+#~ "informasjonen tilgjengelig under \"Kontrollpanel\", \"System\", \"Enhets-\n"
+#~ "behandling\"."
+
+#~ msgid "Choose on the list of keyboards, the one corresponding to yours"
+#~ msgstr "Velg på listen over tastatur det som stemmer overens med ditt"
+
+#~ msgid "Searching for your lost partition table"
+#~ msgstr "Søker etter den tapte partisjonstabellen din"
+
+#~ msgid "8 mb"
+#~ msgstr "8 mb"
+
+#~ msgid "4 mb"
+#~ msgstr "4 mb"
+
+#~ msgid "2 mb"
+#~ msgstr "2 mb"
+
+#~ msgid "1 mb"
+#~ msgstr "1 mb"
+
+#~ msgid "No RAMDAC Setting (recommended)"
+#~ msgstr "Ingen RAMDAC-innstilling (anbefalt)"
+
+#~ msgid "AT&T 20C490 (S3 and AGX servers, ARK driver)"
+#~ msgstr "AT&T 20C490 (S3 og AGX-tjenere, ARK-driver)"
+
+#~ msgid "AT&T 20C498/21C498/22C498 (S3, autodetected)"
+#~ msgstr "AT&T 20C498/21C498/22C498 (S3, oppdaget automatisk)"
+
+#~ msgid "AT&T 20C409/20C499 (S3, autodetected)"
+#~ msgstr "AT&T 20C409/20C499 (S3, oppdaget automatisk)"
+
+#~ msgid "AT&T 20C505 (S3)"
+#~ msgstr "AT&T 20C505 (S3)"
+
+#~ msgid "BrookTree BT481 (AGX)"
+#~ msgstr "BrookTree BT481 (AGX)"
+
+#~ msgid "BrookTree BT482 (AGX)"
+#~ msgstr "BrookTree BT482 (AGX)"
+
+#~ msgid "BrookTree BT485/9485 (S3)"
+#~ msgstr "BrookTree BT485/9485 (S3)"
+
+#~ msgid "Sierra SC15025 (S3, AGX)"
+#~ msgstr "Sierra SC15025 (S3, AGX)"
+
+#~ msgid "S3 GenDAC (86C708) (autodetected)"
+#~ msgstr "S3 GenDAC (86C708) (oppdaget automatisk)"
+
+#~ msgid "S3 SDAC (86C716) (autodetected)"
+#~ msgstr "S3 SDAC (86C716) (oppdaget automatisk)"
+
+#~ msgid "STG-1700 (S3, autodetected)"
+#~ msgstr "STG-1700 (S3, oppdaget automatisk)"
+
+#~ msgid "STG-1703 (S3, autodetected)"
+#~ msgstr "STG-1703 (S3, oppdaget automatisk)"
+
+#~ msgid "TI 3020 (S3)"
+#~ msgstr "TI 3020 (S3)"
+
+#~ msgid "TI 3025 (S3, autodetected)"
+#~ msgstr "TI 3025 (S3, oppdaget automatisk)"
+
+#~ msgid "TI 3026 (S3, autodetected)"
+#~ msgstr "TI 3026 (S3, oppdaget automatisk)"
+
+#~ msgid "IBM RGB 514 (S3, autodetected)"
+#~ msgstr "IBM RGB 514 (S3, oppdaget automatisk)"
+
+#~ msgid "IBM RGB 524 (S3, autodetected)"
+#~ msgstr "IBM RGB 524 (S3, oppdaget automatisk)"
+
+#~ msgid "IBM RGB 525 (S3, autodetected)"
+#~ msgstr "IBM RGB 525 (S3, oppdaget automatisk)"
+
+#~ msgid "IBM RGB 526 (S3)"
+#~ msgstr "IBM RGB 526 (S3)"
+
+#~ msgid "IBM RGB 528 (S3, autodetected)"
+#~ msgstr "IBM RGB 528 (S3, oppdaget automatisk)"
+
+#~ msgid "ICS5342 (S3, ARK)"
+#~ msgstr "ICS5342 (S3, ARK)"
+
+#~ msgid "ICS5341 (W32)"
+#~ msgstr "ICS5341 (W32)"
+
+#~ msgid "IC Works w30C516 ZoomDac (ARK)"
+#~ msgstr "IC Works w30C516 ZoomDac (ARK)"
+
+#~ msgid "Normal DAC"
+#~ msgstr "Normal DAC"
+
+#~ msgid "No Clockchip Setting (recommended)"
+#~ msgstr "Ingen Clockchip-innstilling (anbefalt)"
+
+#~ msgid "Chrontel 8391"
+#~ msgstr "Chrontel 8391"
+
+#~ msgid "ICD2061A and compatibles (ICS9161A => DCS2824)"
+#~ msgstr "ICD2061A og kompatible (ICS9161A => DCS2824)"
+
+#~ msgid "ICS2595"
+#~ msgstr "ICS2595"
+
+#~ msgid "ICS5342 (similar to SDAC, but not completely compatible)"
+#~ msgstr "ICS5342 (lik SDAC, men ikke helt kompatibel)"
+
+#~ msgid "ICS5341"
+#~ msgstr "ICS5341"
+
+#~ msgid "S3 GenDAC (86C708) and ICS5300 (autodetected)"
+#~ msgstr "S3 GenDAC (86C708) og ICS5300 (oppdaget automatisk)"
+
+#~ msgid "S3 SDAC (86C716)"
+#~ msgstr "S3 SDAC (86C716)"
+
+#~ msgid "STG 1703 (autodetected)"
+#~ msgstr "STG 1703 (oppdaget automatisk)"
+
+#~ msgid "Sierra SC11412"
+#~ msgstr "Sierra SC11412"
+
+#~ msgid "TI 3025 (autodetected)"
+#~ msgstr "TI 3025 (oppdaget automatisk)"
+
+#~ msgid "TI 3026 (autodetected)"
+#~ msgstr "TI 3026 (oppdaget automatisk)"
+
+#~ msgid "IBM RGB 51x/52x (autodetected)"
+#~ msgstr "IBM RGB 51x/52x (oppdaget automatisk)"
+
+#~ msgid "Hide"
+#~ msgstr "Gjem"
+
+#~ msgid "Select All"
+#~ msgstr "Velg alle"
+
+#~ msgid "Unselect All"
+#~ msgstr "Fjern alle valg"
+
+#~ msgid ""
+#~ "It is now time to configure the graphic server. First of all, choose your "
+#~ "monitor. You have then\n"
+#~ "the possibility of testing your configuration and of reconsidering your "
+#~ "choices if the latter are not\n"
+#~ "appropriate to you."
+#~ msgstr ""
+#~ "Det er nå tid for å konfigurere grafikk-tjeneren. Først, velg monitor. Du "
+#~ "har så muligheten\n"
+#~ "til å teste konfigurasjonen din og endre dine valg hvis disse valgene ikke "
+#~ "passet for deg."
+
+#~ msgid ""
+#~ "You can now authorize one or more people to be connected on your Linux "
+#~ "system. Each one of\n"
+#~ "them will profit from his own environment will be able to configure.\n"
+#~ "\n"
+#~ "It is very important that you create at least one user even if you are the "
+#~ "only person who will connect\n"
+#~ "herself on this machine. Indeed, if runnig the system as \"root\" is "
+#~ "attractive, that \n"
+#~ "is a very bad idea. This last having all the rights it is certain that at "
+#~ "one time you will broke all.\n"
+#~ "This is highly preferable you connect as simple user and that you use the "
+#~ "account \"root\" only when\n"
+#~ "that is essential."
+#~ msgstr ""
+#~ "Du kan nå gi autorisasjon til å la en eller brukere logge seg på Linux- "
+#~ "systemet ditt. Være av dem\n"
+#~ "vil være i stand til å konfigurere sitt eget miljø.\n"
+#~ "\n"
+#~ "Det er veldig viktig at du oppretter minst en bruker selv om du er den "
+#~ "eneste personen som vil\n"
+#~ "bruke denne maskinen. Selv om det å kjøre systemet som \"root\" er "
+#~ "fristende, så er det en \n"
+#~ "veldig dårlig ide. Da denne har alle rettigheter er det sikkert at før eller "
+#~ "senere vil du ødelegge alt.\n"
+#~ "Det her høyt anbefalt at du logger deg på som vanlig bruker og kun bruker "
+#~ "kontoen \"root\" når det er nødvendig."
 
 #~ msgid ""
 #~ "The system now requires an administrator password for your Linux system.\n"
@@ -2702,271 +2926,40 @@ msgstr ""
 #~ "\"root\" og \"passord\", som du nå vil indikere."
 
 #~ msgid ""
-#~ "You can now authorize one or more people to be connected on your Linux "
-#~ "system. Each one of\n"
-#~ "them will profit from his own environment will be able to configure.\n"
-#~ "\n"
-#~ "It is very important that you create at least one user even if you are the "
-#~ "only person who will connect\n"
-#~ "herself on this machine. Indeed, if runnig the system as \"root\" is "
-#~ "attractive, that \n"
-#~ "is a very bad idea. This last having all the rights it is certain that at "
-#~ "one time you will broke all.\n"
-#~ "This is highly preferable you connect as simple user and that you use the "
-#~ "account \"root\" only when\n"
-#~ "that is essential."
+#~ "In this stage, you will must partion your hard disk. It consists in cutting "
+#~ "your disk in several zones\n"
+#~ "(which are not equal). This operation, for spectacular and intimidating that "
+#~ "it is,\n"
+#~ " is not hardly if you be carrefull so that you do. \n"
+#~ "Also, take your time, are sure you before click on \"Finishing\" and READ "
+#~ "the handbook of DiskDrake\n"
+#~ "before use them."
 #~ msgstr ""
-#~ "Du kan nå gi autorisasjon til å la en eller brukere logge seg på Linux- "
-#~ "systemet ditt. Være av dem\n"
-#~ "vil være i stand til å konfigurere sitt eget miljø.\n"
-#~ "\n"
-#~ "Det er veldig viktig at du oppretter minst en bruker selv om du er den "
-#~ "eneste personen som vil\n"
-#~ "bruke denne maskinen. Selv om det å kjøre systemet som \"root\" er "
-#~ "fristende, så er det en \n"
-#~ "veldig dårlig ide. Da denne har alle rettigheter er det sikkert at før eller "
-#~ "senere vil du ødelegge alt.\n"
-#~ "Det her høyt anbefalt at du logger deg på som vanlig bruker og kun bruker "
-#~ "kontoen \"root\" når det er nødvendig."
+#~ "På dette punktet må du partisjonere hard-disken din. Det består av å dele "
+#~ "opp disken din i flere soner\n"
+#~ "(som ikke er like). Denne operasjonen, uansett hvor spektakulært og "
+#~ "skremmende den måtte være,\n"
+#~ "ikke så vanskelig hvis du er forsiktig med det du gjør. \n"
+#~ "Ta deg god tid, og vær sikker før du klikker på \"Ferdig\" og LES "
+#~ "DiskDrake-håndboken\n"
+#~ "før du begynner."
 
 #~ msgid ""
-#~ "It is now time to configure the graphic server. First of all, choose your "
-#~ "monitor. You have then\n"
-#~ "the possibility of testing your configuration and of reconsidering your "
-#~ "choices if the latter are not\n"
-#~ "appropriate to you."
-#~ msgstr ""
-#~ "Det er nå tid for å konfigurere grafikk-tjeneren. Først, velg monitor. Du "
-#~ "har så muligheten\n"
-#~ "til å teste konfigurasjonen din og endre dine valg hvis disse valgene ikke "
-#~ "passet for deg."
+#~ "Choose the language which you approved. This one govern the language's "
+#~ "system."
+#~ msgstr "Velg språket som du godkjente. Dette bestemmer språket på systemet."
 
-#~ msgid "Unselect All"
-#~ msgstr "Fjern alle valg"
+#~ msgid "Configure services"
+#~ msgstr "Konfigurer tjenester"
 
-#~ msgid "Select All"
-#~ msgstr "Velg alle"
+#~ msgid "Give your graphic card memory size"
+#~ msgstr "Oppgi hvor mye minne grafikk-kortet ditt har"
 
-#~ msgid "Hide"
-#~ msgstr "Gjem"
+#~ msgid "Found "
+#~ msgstr "Funnet "
 
-#~ msgid "IBM RGB 51x/52x (autodetected)"
-#~ msgstr "IBM RGB 51x/52x (oppdaget automatisk)"
+#~ msgid "Package ordering failed"
+#~ msgstr "Pakkelevering mislykket"
 
-#~ msgid "TI 3026 (autodetected)"
-#~ msgstr "TI 3026 (oppdaget automatisk)"
-
-#~ msgid "TI 3025 (autodetected)"
-#~ msgstr "TI 3025 (oppdaget automatisk)"
-
-#~ msgid "Sierra SC11412"
-#~ msgstr "Sierra SC11412"
-
-#~ msgid "STG 1703 (autodetected)"
-#~ msgstr "STG 1703 (oppdaget automatisk)"
-
-#~ msgid "S3 SDAC (86C716)"
-#~ msgstr "S3 SDAC (86C716)"
-
-#~ msgid "S3 GenDAC (86C708) and ICS5300 (autodetected)"
-#~ msgstr "S3 GenDAC (86C708) og ICS5300 (oppdaget automatisk)"
-
-#~ msgid "ICS5341"
-#~ msgstr "ICS5341"
-
-#~ msgid "ICS5342 (similar to SDAC, but not completely compatible)"
-#~ msgstr "ICS5342 (lik SDAC, men ikke helt kompatibel)"
-
-#~ msgid "ICS2595"
-#~ msgstr "ICS2595"
-
-#~ msgid "ICD2061A and compatibles (ICS9161A => DCS2824)"
-#~ msgstr "ICD2061A og kompatible (ICS9161A => DCS2824)"
-
-#~ msgid "Chrontel 8391"
-#~ msgstr "Chrontel 8391"
-
-#~ msgid "No Clockchip Setting (recommended)"
-#~ msgstr "Ingen Clockchip-innstilling (anbefalt)"
-
-#~ msgid "Normal DAC"
-#~ msgstr "Normal DAC"
-
-#~ msgid "IC Works w30C516 ZoomDac (ARK)"
-#~ msgstr "IC Works w30C516 ZoomDac (ARK)"
-
-#~ msgid "ICS5341 (W32)"
-#~ msgstr "ICS5341 (W32)"
-
-#~ msgid "ICS5342 (S3, ARK)"
-#~ msgstr "ICS5342 (S3, ARK)"
-
-#~ msgid "IBM RGB 528 (S3, autodetected)"
-#~ msgstr "IBM RGB 528 (S3, oppdaget automatisk)"
-
-#~ msgid "IBM RGB 526 (S3)"
-#~ msgstr "IBM RGB 526 (S3)"
-
-#~ msgid "IBM RGB 525 (S3, autodetected)"
-#~ msgstr "IBM RGB 525 (S3, oppdaget automatisk)"
-
-#~ msgid "IBM RGB 524 (S3, autodetected)"
-#~ msgstr "IBM RGB 524 (S3, oppdaget automatisk)"
-
-#~ msgid "IBM RGB 514 (S3, autodetected)"
-#~ msgstr "IBM RGB 514 (S3, oppdaget automatisk)"
-
-#~ msgid "TI 3026 (S3, autodetected)"
-#~ msgstr "TI 3026 (S3, oppdaget automatisk)"
-
-#~ msgid "TI 3025 (S3, autodetected)"
-#~ msgstr "TI 3025 (S3, oppdaget automatisk)"
-
-#~ msgid "TI 3020 (S3)"
-#~ msgstr "TI 3020 (S3)"
-
-#~ msgid "STG-1703 (S3, autodetected)"
-#~ msgstr "STG-1703 (S3, oppdaget automatisk)"
-
-#~ msgid "STG-1700 (S3, autodetected)"
-#~ msgstr "STG-1700 (S3, oppdaget automatisk)"
-
-#~ msgid "S3 SDAC (86C716) (autodetected)"
-#~ msgstr "S3 SDAC (86C716) (oppdaget automatisk)"
-
-#~ msgid "S3 GenDAC (86C708) (autodetected)"
-#~ msgstr "S3 GenDAC (86C708) (oppdaget automatisk)"
-
-#~ msgid "Sierra SC15025 (S3, AGX)"
-#~ msgstr "Sierra SC15025 (S3, AGX)"
-
-#~ msgid "BrookTree BT485/9485 (S3)"
-#~ msgstr "BrookTree BT485/9485 (S3)"
-
-#~ msgid "BrookTree BT482 (AGX)"
-#~ msgstr "BrookTree BT482 (AGX)"
-
-#~ msgid "BrookTree BT481 (AGX)"
-#~ msgstr "BrookTree BT481 (AGX)"
-
-#~ msgid "AT&T 20C505 (S3)"
-#~ msgstr "AT&T 20C505 (S3)"
-
-#~ msgid "AT&T 20C409/20C499 (S3, autodetected)"
-#~ msgstr "AT&T 20C409/20C499 (S3, oppdaget automatisk)"
-
-#~ msgid "AT&T 20C498/21C498/22C498 (S3, autodetected)"
-#~ msgstr "AT&T 20C498/21C498/22C498 (S3, oppdaget automatisk)"
-
-#~ msgid "AT&T 20C490 (S3 and AGX servers, ARK driver)"
-#~ msgstr "AT&T 20C490 (S3 og AGX-tjenere, ARK-driver)"
-
-#~ msgid "No RAMDAC Setting (recommended)"
-#~ msgstr "Ingen RAMDAC-innstilling (anbefalt)"
-
-#~ msgid "1 mb"
-#~ msgstr "1 mb"
-
-#~ msgid "2 mb"
-#~ msgstr "2 mb"
-
-#~ msgid "4 mb"
-#~ msgstr "4 mb"
-
-#~ msgid "8 mb"
-#~ msgstr "8 mb"
-
-#~ msgid "Searching for your lost partition table"
-#~ msgstr "Søker etter den tapte partisjonstabellen din"
-
-#~ msgid "Choose on the list of keyboards, the one corresponding to yours"
-#~ msgstr "Velg på listen over tastatur det som stemmer overens med ditt"
-
-#~ msgid ""
-#~ "The system did not detect a SCSI card. If you have one (or several)\n"
-#~ "click on \"Yes\" and choose the module(s) to be tested. Otherwise,\n"
-#~ "select \"No\".\n"
-#~ "\n"
-#~ "\n"
-#~ "If you don't know if your computer has SCSI interfaces, consult the\n"
-#~ "original documentation delivered with the computer, or if you use\n"
-#~ "Microsoft Windows 95/98, inspect the information available via the "
-#~ "\"Control\n"
-#~ "panel\", \"System's icon, \"Device Manager\" tab."
-#~ msgstr ""
-#~ "Systemet fant ikke noen SCSI-kort. Hvis du har ett (eller flere) klikk på\n"
-#~ "\"Ja\" og velg modul(er) som skal testes. Hvis ikke, velg \"Nei\".\n"
-#~ "\n"
-#~ "\n"
-#~ "Hvis du ikke vet om maskinen din har SCSI-grensesnitt, se i dokumentasjonen\n"
-#~ "levert med datamaskinen din, eller hvis du bruker Windows 95/98, sjekk\n"
-#~ "informasjonen tilgjengelig under \"Kontrollpanel\", \"System\", \"Enhets-\n"
-#~ "behandling\"."
-
-#~ msgid ""
-#~ "You can now authorize one or more people to use your Linux\n"
-#~ "system. Each user account will have their own customizable environment.\n"
-#~ "\n"
-#~ "\n"
-#~ "It is very important that you create a regular user account, even if\n"
-#~ "there will only be one principle user of the system. The administrative\n"
-#~ "\"root\" account should not be used for day to day operation of the\n"
-#~ "computer.  It is a security risk.  The use of a regular user account\n"
-#~ "protects you and the system from yourself. The root account should only\n"
-#~ "be used for administrative and maintenance tasks that can not be\n"
-#~ "accomplished from a regular user account."
-#~ msgstr ""
-#~ "Du kan nå autorisere en eller flere personer som kan bruke Linux-\n"
-#~ "systemet ditt. Hver brukerkonto vil ha sitt eget definerbare miljø.\n"
-#~ "\n"
-#~ "\n"
-#~ "Det er veldig viktig at du oppretter en vanlig brukerkonto, selv om det\n"
-#~ "bare vil være en bruker av systemet. Den administrative kontoen \"root\"\n"
-#~ "bør ikke brukes til vanlig bruk av maskinen. Dette er en sikkerhets-\n"
-#~ "risiko. Bruken av en vanlig brukerkonto vil beskytte både deg og systemet\n"
-#~ "mot deg selv. Root-kontoen bør kun brukes til administrering og vedlikehold\n"
-#~ "som ikke kan utføres fra en vanlig brukerkonto."
-
-#~ msgid ""
-#~ "It is now time to configure the video card and monitor\n"
-#~ "configuration for the X Window Graphic User Interface (GUI). First\n"
-#~ "select your monitor. Next, you may test the configuration and change\n"
-#~ "your selections if necessary."
-#~ msgstr ""
-#~ "Det er nå tid for å konfigurere skjermkort- og monitor-konfigurasjonen\n"
-#~ "for X Window Graphic User Interface (GUI). Velg først monitoren din.\n"
-#~ "Deretter kan du teste konfigurasjonen og endre dine valg hvis det er\n"
-#~ "nødvendig."
-
-#~ msgid "no floppy available"
-#~ msgstr "ingen diskett tilgjengelig"
-
-#~ msgid "Which keyboard do you have?"
-#~ msgstr "Hvilket tastatur har du?"
-
-#~ msgid "What type of user will you have?"
-#~ msgstr "Hva slags type bruker vil du ha?"
-
-#~ msgid "Which mouse do you have"
-#~ msgstr "Hvilken mus har du?"
-
-#~ msgid "Standard Printer Options"
-#~ msgstr "Standard skriveropsjoner"
-
-#~ msgid "I have detected a %s on "
-#~ msgstr "Jeg har oppdaget en %s på "
-
-#~ msgid "You must enter the same password"
-#~ msgstr "Du må skrive inn det samme passordet"
-
-#~ msgid "Here must give the different options for the module %s."
-#~ msgstr "Her må forskjellige opsjoner oppgis for modulen %s."
-
-#~ msgid "Is it ok?"
-#~ msgstr "Er det ok?"
-
-#~ msgid "An error occurred while getting the geometry of block device %s: %s"
-#~ msgstr "En feil oppsto ved henting av geometrien til blokkenhet %s: %s"
-
-#~ msgid "Found root partition : "
-#~ msgstr "Fant root-partisjon : "
+#~ msgid " Mb"
+#~ msgstr " Mb"
