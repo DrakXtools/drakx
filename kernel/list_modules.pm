@@ -68,7 +68,7 @@ our %l = (
         qw(eata eata_pio eata_dma mptscsih nsp32),
       ),
       '53c7,8xx',
-      qw(aic7xxx pci2000 qlogicisp sym53c8xx), # ncr53c8xx
+      qw(aic7xxx aic7xxx_old pci2000 qlogicisp sym53c8xx), # ncr53c8xx
     ],
     hardware_raid => [
       if_(arch() =~ /^sparc/, qw(pluto)),
