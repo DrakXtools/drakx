@@ -259,7 +259,7 @@ sub updateAutologin() {
     if ($auto_buttons[1]->get_active) {
         any::set_autologin($usern, $deskt);
     } else {
-        any::set_autologin();
+        any::set_autologin(undef, undef);
     }
 }
 
@@ -294,7 +294,6 @@ sub change_image {
     $boot_pixbuf = $boot_pixbuf->scale_simple(300, 200, 'nearest');
     $boot_pic->set_from_pixbuf($boot_pixbuf);
 }
-
 sub enable_framebuffer() {
     my $vga = Xconfig::resolution_and_depth::from_bios($bootloader->{default_vga});
     my ($current_entry) = cat_('/proc/cmdline') =~ /^BOOT_IMAGE=(\S+)/;
