@@ -874,7 +874,7 @@ sub set {
 	#- there are 3 main charsets containing everything for all locales, except LC_CTYPE
 	#- by default, there is UTF-8.
 	#- when asked for GB2312 or BIG5, removing the other main charsets
-	my $main_charset = member($charset, 'GB2312', 'BIG5') ? $charset : 'UTF-8';
+	my $main_charset = member($charset, 'GB2312', 'BIG5') ? $charset : 'en_US.UTF-8';
 	
 	#- removing everything
 	#- except in main charset: only removing LC_CTYPE if it is there
