@@ -37,7 +37,7 @@ our %l = (
     ],
     pcmcia => [ 
       qw(3c574_cs 3c589_cs airo airo_cs aironet4500_cs axnet_cs fmvj18x_cs),
-      qw(ibmtr_cs netwave_cs nmclan_cs pcnet_cs ray_cs smc91c92_cs wavelan_cs wvlan_cs),
+      qw(ibmtr_cs orinoco_cs netwave_cs nmclan_cs pcnet_cs ray_cs smc91c92_cs wavelan_cs wvlan_cs),
       qw(xirc2ps_cs xircom_cb xircom_tulip_cb),
     ],
     usb => [ 
