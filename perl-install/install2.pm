@@ -228,16 +228,7 @@ sub miscellaneous {
 
     installStepsCall($o, $auto, 'miscellaneousBefore', $clicked);
     installStepsCall($o, $auto, 'miscellaneous', $clicked);
-
-    addToBeDone {
-	setVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
-            CLASS => $::expert && 'expert' || 'beginner',
-            SECURITY => $o->{security},
-	    META_CLASS => $o->{meta_class} || 'PowerPack',
-        });
-	substInFile { s/KEYBOARD_AT_BOOT=.*/KEYBOARD_AT_BOOT=yes/ } "$o->{prefix}/etc/sysconfig/usb" if detect_devices::usbKeyboards();
-
-    } 'installPackages';
+    installStepsCall($o, $auto, 'miscellaneousAfter', $clicked);
 }
 
 #------------------------------------------------------------------------------

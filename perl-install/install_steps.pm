@@ -928,21 +928,33 @@ sub miscellaneousBefore {
     $o->{miscellaneous}{HDPARM} ||= $s{HDPARM} if exists $s{HDPARM};
     $o->{security} ||= $s{SECURITY} if exists $s{SECURITY};
 
-    $ENV{SECURE_LEVEL} = $o->{security};
-
-    addToBeDone {
-	mkdir_p("$o->{prefix}/etc/security/msec");
-	symlink "server.$o->{security}", "$o->{prefix}/etc/security/msec/server" if $o->{security} > 3;
-    } 'formatPartitions';
-    
-    add2hash_ $o, { useSupermount => 1 && $o->{security} < 4 && arch() !~ /sparc/ && !$::corporate };
-
     add2hash_($o->{miscellaneous} ||= {}, { numlock => !detect_devices::isLaptop() });
 }
 sub miscellaneous {
     my ($o) = @_;
     #- keep some given parameters
     #-TODO
+}
+sub miscellaneousAfter {
+    my ($o) = @_;
+    add2hash_ $o, { useSupermount => 1 && $o->{security} < 4 && arch() !~ /sparc/ && !$::corporate };
+
+    $ENV{SECURE_LEVEL} = $o->{security};
+
+    addToBeDone {
+	mkdir_p("$o->{prefix}/etc/security/msec");
+	symlink "server.$o->{security}", "$o->{prefix}/etc/security/msec/server" if $o->{security} > 3;
+    } 'formatPartitions';
+
+    addToBeDone {
+	setVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
+            CLASS => $::expert && 'expert' || 'beginner',
+            SECURITY => $o->{security},
+	    META_CLASS => $o->{meta_class} || 'PowerPack',
+        });
+	substInFile { s/KEYBOARD_AT_BOOT=.*/KEYBOARD_AT_BOOT=yes/ } "$o->{prefix}/etc/sysconfig/usb" if detect_devices::usbKeyboards();
+
+    } 'installPackages';
 }
 
 #------------------------------------------------------------------------------
