@@ -112,8 +112,13 @@ my @menu_items =
      );
 my ($sig_id, $wait);
 $in = 'interactive'->vnew('su', 'default');
-$wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
-gtkflush();
+
+{
+    local $::isEmbedded = 0; # to prevent sub window embedding
+    $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
+    gtkflush();
+}
+
 %options = getVarsFromSh($conffile);
 
 # Build the gui
