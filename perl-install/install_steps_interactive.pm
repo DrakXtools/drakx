@@ -69,14 +69,15 @@ translated etc. that varies from language to language).") if $o->{lang} !~ /^en/
 	$o->set_help('license');
 	$o->{useless_thing_accepted} = $o->ask_from_list_('', formatAlaTeX(
 _(" Introduction
-------------
+
 The operating system and the different components available in the Linux-Mandrake distribution 
 shall be called the \"Software Products\" hereafter. The Software Products include, but are not 
 restricted to, the set of programs, methods, rules and documentation related to the operating 
 system and the different components of the Linux-Mandrake distribution.
 
+
 1. License Agreement
---------------------
+
 Please read carefully this document. This document is a license agreement between you and  
 MandrakeSoft S.A., 42, rue d'Aboukir, 75002 Paris - France, which applies to the Software Products.
 By installing, duplicating or using the Software Products in any manner, you explicitly 
@@ -88,8 +89,9 @@ with the terms and conditions of this License is void and will terminate your ri
 License. Upon termination of the License,  you must immediately destroy all copies of the 
 Software Products.
 
+
 2. The GPL License and Related Licenses
----------------------------------------
+
 The Software Products consist of components created by different persons or entities.  Most 
 of these components are governed under the terms and conditions of the GNU General Public 
 Licence, hereafter called \"GPL\", or of similar licenses. Most of these licenses allow you to use, 
@@ -112,8 +114,9 @@ network.
 In doubt, please contact directly the distributor or editor of the component. Transfer to third 
 parties or copying of such components including the documentation is usually forbidden.
 
+
 3. Intellectual Property Rights
--------------------------------
+
 All rights to the components of the Software Products belong to their respective authors and are 
 protected by intellectual property and copyright laws applicable to software programs.
 MandrakeSoft S.A. reserves its rights to modify or adapt the Software Products, as a whole or in 
@@ -123,8 +126,9 @@ by all means and for all purposes.
 are 
 reserved. The duplication is forbidden without prior written consent by MandrakeSoft S.A.
 
+
 4. Limited Warranty
--------------------
+
 The Software Products and attached documentation are provided \"as is\", with no warranty, to the 
 extent permitted by law. Should the Software Products be defective, MandrakeSoft S.A. will at its 
 own will either replace the Software Products, or reimburse the paid fee.
@@ -154,8 +158,9 @@ sites  which are prohibited or restricted in some countries by local laws. This 
 applies to, but is not restricted to, the strong cryptography components included in the Software 
 Products.
 
+
 5. Governing Laws 
------------------
+
 If any portion of this agreement is held void, illegal or inapplicable by a court judgement, this 
 portion is excluded from this contract. You remain bound by the other applicable sections of the 
 agreement.
