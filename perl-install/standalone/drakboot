@@ -151,9 +151,14 @@ gtkadd($window,
                                                clicked => sub {
                                                    $splash_mode = !$splash_mode;
         					   if ($boot_warn && $no_bootsplash && $splash_mode) { 
-						       $in->ask_warn(N("Warning"), 
-						   [ N("Your system bootloader is not in framebuffer mode. To activate graphical boot, select a graphic video mode from the bootloader configuration tool.") ]);
-						   	$boot_warn = 0
+						       if ($in->ask_yesorno(N("Warning"), 
+						   [ N("Your system bootloader is not in framebuffer mode. To activate graphical boot, select a graphic video mode from the bootloader configuration tool.") . "\n" .
+                                                     N("Do you want to configure it now ?") ])) {
+                                                           lilo_choice();
+                                                           #- it would be nice to get available themes for new cur_res here
+                                                           $splash_mode = 1
+                                                       };
+                                                       $boot_warn = 0
 						    }
                                                    $splash_box->set_sensitive($splash_mode);
                                                }),
