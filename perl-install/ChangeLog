@@ -1,3 +1,343 @@
+2004/06/15  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/disk.c: redesign of the ISO image selection dialog, add an
+	entry in the list to allow to use the directory as a mirror tree
+	do not try to mount the partition in testing mode, assume it is already
+	mounted
+	del loop device after unmount
+
+	* mdk-stage1/Makefile: upgrade distrib version
+
+	* mdk-stage1/network.c: allow to go back in proxy selection window
+	fix return code handling in mirror list selection
+	fix typo spotted by John Keller
+	redesign to add "Specify the mirror manually" entries in mirror list
+	selection
+
+2004/06/15  Pixel  <pixel at mandrakesoft.com>
+
+	* fsedit.pm: rename is_same_part to are_same_partitions (not that much
+	clear, but at least a little)
+	use "find { ... }"
+
+	* Makefile: allow easy tracing of stage2
+	remove PERL_INSTALL_DEBUG code modifying install2 (unused and not
+	working anyway)
+
+	* diskdrake/hd_gtk.pm, diskdrake/interactive.pm: rename is_same_part to
+	are_same_partitions (not that much clear, but at least a little)
+
+	* keyboard.pm: the presence of loadkeys doesn't mean it is the regular
+	one. (fixes loadkeys calling itself)
+
+	* mdk-stage1/lomount.c, devices.pm: increase the number of loopbacks
+	(needed for mandrakemove where the default (8) is much too low :)
+	increase the number of loopbacks (needed for mandrakemove where the
+	default (8) is much too low :)
+
+	* install_any.pm: remove some broken sparc code
+
+	* fs.pm: 
+	  - new function subpart_from_wild_device_name()
+	  - use it
+
+2004/06/15  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: .backupignore issues (email reports), typo in
+	"other" routine
+	.backupignore issue (email reports), typo in "other" routine
+
+2004/06/15  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/data.pm (set_removable_configurator) switch from diskdrake to
+	drakupdate_fstab
+	(like hotplug we just automatically guess what's better)
+	update comment
+	rename usbnet as net_modules
+
+	* drakxtools.spec: fix 10-44mdk's changelog
+
+2004/06/14  jjorge
+
+	* share/po/pt.po: saraiva
+
+2004/06/14  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/disk.c: rephrase question again
+	rephrase again the disk install questions (thanks to Pierre Jarillon,
+	Rapsys|Phoenix and John Kelller)
+	rephrase the partition selection message
+
+	* mdk-stage1/network.c: move mirror list functions upper
+	rename variables for extra cohesion
+	fix brown paper bug combo
+	always fill proxy fields of interfaces
+
+	* mdk-stage1/stage1.c: do not mount sysroot in testing mode
+
+2004/06/14  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ms.po, share/po/sk.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/th.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/be.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/ltg.po,
+	share/po/ky.po, share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/lv.po, share/po/hu.po,
+	share/po/fa.po, share/po/id.po, share/po/ru.po, share/po/br.po,
+	share/po/sl.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/am.po, share/po/lt.po,
+	share/po/tg.po, share/po/bs.po, share/po/mk.po, share/po/wa.po,
+	share/po/is.po, share/po/hi.po, share/po/af.po, share/po/az.po,
+	share/po/pt.po, share/po/fr.po, share/po/ta.po, share/po/vi.po,
+	share/po/nl.po, share/po/de.po, share/po/tl.po, share/po/eo.po,
+	share/po/bg.po, share/po/cs.po, share/po/el.po, share/po/uz@Latn.po:
+	updated pot file
+
+	* pixmaps/langs/lang-ber.png: Added image for Berber language, so it is
+	available when it would be needed
+
+	* share/po/nb.po: updated Norwegian file
+	updated pot file
+
+	* share/po/nn.po: updated Nynorsk file
+	updated pot file
+
+	* share/po/cy.po: updated Welsh file
+	updated pot file
+
+2004/06/14  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/harddrake2: enforce introduction of translators hints into
+	translation catalogs
+	(perl_checker should have been loudly complain on those!!!! :-():
+	  - add missing coma caracter
+	  - move them near translations
+	note that i didn't bother check po comments that already have the proper
+	comma. instead this should be done by perl_checker which should warn
+	about po
+	comments out of translation calls and tags contexts
+	display more data about hard disks (geometry, number of primary/extended
+	partitions)
+
+	* network/netconnect.pm, standalone/drakTermServ, standalone/drakbackup,
+	ugtk2.pm: merge fixes from HEAD
+
+	* standalone/service_harddrake: do not automatically switch from nv to
+	nvidia (in order to handle
+	cases where nvidia module crashes the system)
+	merge fix from HEAD
+
+	* interactive/newt.pm (ask_fromW_real) make previous button be labeled
+	"cancel" when needed
+
+	* drakxtools.spec: 10-44mdk
+
+	* standalone/printerdrake, standalone/draksec, standalone/drakconnect:
+	enforce introduction of translators hints into translation catalogs
+	(perl_checker should have been loudly complain on those!!!! :-():
+	  - add missing coma caracter
+	  - move them near translations
+	note that i didn't bother check po comments that already have the proper
+	comma. instead this should be done by perl_checker which should warn
+	about po
+	comments out of translation calls and tags contexts
+
+	* standalone/drakperm: enable drag on drop when looking only at customized
+	settings
+
+	* harddrake/data.pm: since some hard disks are USB models, we've to
+	filtering them out once we've
+	detected them in order to prevent tem to appear in the "unknown/other"
+	category
+	ethernet card detection: only rely on driver for matching ethernet
+	cards, thus
+	preventing mislisting of other/unwanted devices (eg: bluetooth, wlan,
+	AX25).
+	last but not least, it enables us to catch
+	ldetect/ldetect-lst/detect_devices
+	bugs where some devices are *not* seen by drakx and drakconnect.
+	remove useless filtering in bridges detection code since proper
+	filtering (for
+	dobles) is already done at the upper level.
+	fix misdetection of nvidia nforce ethernet cards (broken since forcedeth
+	replaced nvnet on 2004-01-21 in MDK10's ldetect-lst)
+	merge fixes from HEAD
+
+	* standalone/draksplash: enforce introduction of translators hints into
+	translation catalogs
+	(perl_checker should have been loudly complain on those!!!! :-():
+	  - add missing coma caracter
+	  - move them near translations
+	note that i didn't bother check po comments that already have the proper
+	comma. instead this should be done by perl_checker which should warn
+	about po
+	comments out of translation calls and tags contexts
+	merge fixes from HEAD
+
+2004/06/11  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/stage1.c: enable MODE_TESTING if the DEBUGSTAGE1 environment
+	variable is set
+
+	* mdk-stage1/tools.c: in testing mode, try to open cmdline file in current
+	directory before trying in /proc
+
+	* mdk-stage1/disk.c: let the user choose between ISO images containing a
+	stage2 installer if a directory containing ISO images has been specified
+
+	* mdk-stage1/network.c: do not ask proxy settings if interface wasn't
+	brought up (stupid me)
+	add http proxy settings in interface_info struct, and ask them right
+	after the interface is up, so that they can be used to fetch the mirror
+	list
+
+	* mdk-stage1/network.h: add http proxy settings in interface_info struct,
+	and ask them right after the interface is up, so that they can be used
+	to fetch the mirror list
+
+2004/06/11  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/draksplash: merge lost hunk
+	s/_([xy])\b/_\1\1/ so that cperl-mode is happier
+	make draksplash work again...
+
+2004/06/10  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakboot: fix trainee suckiness
+
+	* mdk-stage1/config-stage1.h: use new product name (Mandrakelinux)
+
+	* mdk-stage1/mount.c, mdk-stage1/disk.c: ntfs support in install from disk
+	(on nplanel request, but to actually work, it would need the BOOT
+	kernels to include the ntfs module)
+
+2004/06/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/tg.po: updated Tajik file
+
+2004/06/10  Pixel  <pixel at mandrakesoft.com>
+
+	* detect_devices.pm: perl_checker compliance
+	  - hde is ide/host1/bus0/target0/lun0, and not
+	ide/host0/bus2/target0/lun0
+	  - add host in hd struct for bus ide
+
+2004/06/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: first lan step: replace the "manual choice"
+	string by the more
+	meaningfull "manually load a driver"
+	first lan step: do not compare translated strings, use format callback
+
+	* security/level.pm (get) default to standard level; else security::msec
+	won't be able to
+	load any values when level is not set (thus resulting in an empty
+	draksec GUI)
+
+	* tools/cvslog2changelog.pl: add olivier blin
+
+2004/06/09  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/stage1.c: in move, use stg1_info_message() instead of
+	stg1_error_message() not to disable MODE_AUTOMATIC
+	in move, use stg1_info_message() instead of stg1_error_message() not to
+	disable MODE_AUTOMATIC if not enough memory
+
+2004/06/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: update
+
+	* drakxtools.spec: 10-43mdk
+
+2004/06/08  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/config-stage1.h: in ftp install, display a mirror list
+	(fetched from http://www.linux-mandrake.com/mirrorsfull.list) to allow
+	the user to choose the medium, the host, and automatically find the path
+	on mirror (next try, I suck Pixel said)
+
+	* mdk-stage1/network.c: in ftp install, display a mirror list (fetched
+	from http://www.linux-mandrake.com/mirrorsfull.list) to allow the user
+	to choose the medium, the host, and automatically find the path on
+	mirror
+	include missing header for uname
+	in ftp install, check that modules for the boot kernel are available in
+	mdkinst live location (they won't be used by the installer, but if they
+	aren't here, they probably won't be in the mdkinst tarball)
+
+	* mdk-stage1/url.h, mdk-stage1/url.c: list only the requested file in
+	ftp_get_filesize() instead of the whole directory (the buffer happens to
+	be too small sometimes), make this function available for other modules
+
+2004/06/08  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/monitor.pm: fix typo causing "Out of memory"
+
+	* Xconfig/card.pm, install_steps_gtk.pm, share/list.i386, pkgs.pm,
+	standalone/drakedm, install2.pm, install_steps.pm, Xconfig/main.pm,
+	Xconfig/test.pm, standalone/XFdrake, install_steps_interactive.pm:
+	switch to xorg
+
+	* authentication.pm: add "Active Directory" authentication (alpha code)
+
+	* share/rpmsrate: 
+	  - obsolete: gnome-vfs-extras xanim nist mtv gatos mokmod
+	ghostscript-utils tetex-latex-arab-doc sgml-tools
+	  ghostscript-module-SVGALIB kdenetwork-kit ApacheJServ
+	  cameleo unarj unstuff postgresql-python mercury NVIDIA_nforce*
+	  fonts-type1-baltic gnorpm
+	  - obsolete games: xtrojka bunnies xgammon xpuzzles 7colors xrally
+	gtulpas gtkgo
+	  - obsolete and the new one is auto required: MAKEDEV
+	  - xine-oss xine-xv are in xine-plugins which is required by xine-ui
+	  - gatos is no more, replacing with ati.2 (??)
+	  - replace php with php-cgi (??)
+	  - replace scanner-gui with xsane and "KDE kdegraphics-kooka"
+	  - replace clispp2c with clisp (??)
+	  - replace autoconf with autoconf2.1
+	  - replace automake with automake1.4
+	  - switch to gimp2_0
+	  - everybuddy is now ayttm
+	  - gimp-plugin is no more, but adding gimp-help
+	  - Epplets is now epplets (since a lot of time)
+	  - mandrake-galaxy is now mandrakegalaxy
+	  - prelude is now prelude-manager
+	  - kdenetwork-kmail is now kdepim-kmail (same for kdepim-korn and
+	kdepim-knode)
+	  - many XFree86-* are now xorg-x11-*, others are removed (the old
+	XFree3 servers)
+	  - libxfree86-devel is now libxorg-x11-devel
+	  - libxfree86-static-devel is now libxorg-x11-static-devel
+	  - tight-vnc-doc is now tightvnc-doc
+	  - php-manual is now php-manual-{en,fr,...}
+	  - sketch is now skencil
+	  - libgr-progs is now netpbm
+	  - MySQL-devel is now libmysqlXX-devel
+	  - replace xkobo with skobo
+	  - fix typo for xtraceroute (bad layout for flag 3D)
+	
+	  - libiw27 instead of libiw26
+	  - libhpojip0 instead of libhpojip
+
+2004/06/08  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* share/list: A chunk of the previous patch wasn't suitable for 10.0
+	Report revisions 1.124, 1.125 and 1.126 from HEAD
+
+2004/06/08  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Bugzilla #9877 - deal with kernel ring buffer
+	that is flooded with msgs
+	for tape device detection.
+
+2004/06/08  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakedm: kill dead code
+
+	* tools/cvslog2changelog.pl: add rafael
+
 2004/06/08  Pixel  <pixel at mandrakesoft.com>
 
 	* install_steps_gtk.pm, share/list.i386, install2.pm, standalone/XFdrake,
@@ -31194,7 +31534,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.925 2004/03/29 08:15:49 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.926 2004/06/08 15:02:09 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
