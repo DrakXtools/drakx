@@ -2769,9 +2769,9 @@ sub install_spooler {
         # Avoid unnecessary restarting of CUPS, this blocks the
         # startup of printerdrake for several seconds.
         printer::services::start_not_running_service("cups");
-     } elsif ($spoolers{$spooler}{service}) {
-          printer::services::restart($spoolers{$spooler}{service});
-        }
+    } elsif ($spoolers{$spooler}{service}) {
+        printer::services::restart($spoolers{$spooler}{service});
+    }
     
     # Set the choosen spooler tools as defaults for "lpr", "lpq", "lprm", ...
     foreach (@{$spoolers{$spooler}{alternatives}}) {
@@ -2800,9 +2800,9 @@ sub setup_default_spooler {
 	$in->ask_from_list_(N("Select Printer Spooler"),
 			    N("Which printing system (spooler) do you want to use?"),
 			    [ printer::main::spooler() ],
-			    $spoolers{$printer->{SPOOLER}},
+			    $spoolers{$printer->{SPOOLER}}{long_name},
 			    ) or return;
-    $printer->{SPOOLER} = $spoolers{$str_spooler};
+    $printer->{SPOOLER} = $spooler_inv{$str_spooler};
     # Install the spooler if not done yet
     if (!install_spooler($printer, $in, $upNetwork)) {
 	$printer->{SPOOLER} = $oldspooler;
@@ -2893,7 +2893,7 @@ sub main {
 	}
 
 	# only experts should be asked for the spooler
-	$printer->{SPOOLER} ||= 'cups' if $::expert;
+	$printer->{SPOOLER} ||= 'cups' if !$::expert;
 
     }
 
