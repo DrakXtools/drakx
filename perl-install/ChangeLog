@@ -1,3 +1,31 @@
+2001/02/24  Pixel  <pixel@mandrakesoft.com>
+
+	* c/Makefile (stuff): fix the fix's fix :'-(
+
+	* detect_devices.pm (pci_probe): fix to clean the log
+
+	* install_steps_interactive.pm (setRootPassword): NIS server must be
+	editable
+
+2001/02/23  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (g_auto_install): handle $replay flag. It means a 'not
+	fully automated install'.
+
+	* install_steps_auto_install.pm (@graphical_steps): specify which step
+	should be interactive
+
+	* c/Makefile (stuff.xs): exporting C_RPM and C_DRAKX is needed
+
+	* install_steps.pm (afterInstallPackages): no kdm UserView in NIS
+	(configurePrinter): if_'ization
+
+	* install_steps_interactive.pm (exitInstall): ask wether Replay or
+	Automated
+	(generateAutoInstFloppy): handle $replay flag. It means a 'not fully
+	automated install'.
+	(summary): nicer mouse name
+
 2001/02/23  Pixel  <pixel@mandrakesoft.com>
 
 	* install_any.pm (g_auto_install): handle $replay flag. It means a 'not
