@@ -21,7 +21,7 @@ my $KMAP_MAGIC = 0x8B39C07F;
 
 #- a best guess of the keyboard layout, based on the choosen locale
 #- beware only the first 5 characters of the locale are used
-my %lang2keyboard =
+our %lang2keyboard =
 (
   'af'  => 'us_intl',
   'am'  => 'us:90',
