@@ -38,7 +38,7 @@ sub last_used($) {
 
     #- count in negative so absolute value count back to 2.
     foreach (-($fs->{nb_clusters}+1)..-2) { return -$_ if resize_fat::c_rewritten::flag(-$_) }
-    die "any: empty FAT table";
+    die "any: empty FAT table of $fs->{nb_clusters} clusters";
 }
 #- patch to get the function last_unmoveable that return the last unmoveable cluster of a fs.
 sub last_unmoveable($) {
@@ -46,7 +46,9 @@ sub last_unmoveable($) {
 
     #- count in negative so absolute value count back to 2.
     foreach (-($fs->{nb_clusters}+1)..-2) { return -$_ if 0x8 & resize_fat::c_rewritten::flag(-$_) }
-    die "any: empty FAT table";
+
+    #- Oh at this point there are no unmoveable blocks!
+    2;
 }
 
 #- calculates the minimum size of a partition, in physical sectors
@@ -108,7 +110,7 @@ sub flag_clusters {
 	} else { return }
 
 	my $nb = resize_fat::c_rewritten::checkFat($cluster, $type, "$curr_dir_name/$entry->{name}");
-	print "resize_fat:flag_clusters: check fat returned $nb for $curr_dir_name/$entry->{name}\n";
+	print "resize_fat:flag_clusters: check fat returned $nb of type $type for $curr_dir_name/$entry->{name}\n";
 	$nb_dirs += $nb if $type == $DIRECTORY;
 	0;
     };
