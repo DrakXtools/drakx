@@ -1,3 +1,53 @@
+2001/01/31  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* keyboard.pm: more kbd corrections
+	fixed soem keybopard values
+
+2001/01/31  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (choosePackagesTree): created, simple
+	ask_many_from_list to choose
+	individual packages
+	(choosePackages): log for debug
+	(choosePackages): don't ask to install in beginner. Max is chosen
+	(setRootPassword): help not based on installClass being server or not
+	(selectInstallClass): remove installClass choice (was
+	normal/devel/server)
+	(chooseGroups): fix for individual package selection flag
+
+	* install_steps.pm (selectLanguage): warning for debug
+	(miscellaneousBefore): don't use installClass to decide to use
+	supermount
+	or not. Choice is done on $::corporate. Can't say "no supermount in
+	server
+	installs" anymore
+	(selectInstallClass): emptied
+	(setupSCSI): don't configure PCMCIA if there is no PCMCIA
+
+	* install_any.pm (g_auto_install): installClass removed
+	(setPackages): do not preselect compssUsers entries
+
+	* install2.pm (main): don't set installClass=normal meta_class desktop
+	(deprecated)
+	(miscellaneous): TYPE= removed (was installClass)
+	(selectInstallClass): don't set $o->{partitions}. diskdrake will have to
+	ask in a set of possibilities
+	($o): replace fclass by fbeginner and fexpert
+	($o): default security level to 2 since it can't be based on
+	installClass (deprecated)
+
+	* install_steps_gtk.pm: restore window size for time being
+
+	* pkgs.pm (psUpdateHdlistsDeps): also copy rpmsrate
+
+	* Xconfigurator.pm (main): better error message for auto_install failing
+
+	* interactive.pm (ask_many_from_list): fix sorting
+
+	* any.pm (set_autologin): log to ensure AUTOLOGIN is not badly set by
+	drakx. Still
+	need finding the guilty
+
 2001/01/30  dam's  <damien@mandrakesoft.com>
 
 	* standalone/draknet: new draknet. unstable
