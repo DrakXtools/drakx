@@ -799,7 +799,7 @@ If you don't know, choose 'use pppoe'"),
                     N("Please fill or check the field below"),
                     data => sub {
                         [ 
-                         { label => N("Provider name (ex provider.net)"), val => \$netc->{DOMAINNAME2} },
+                         if_(0, { label => N("Provider name (ex provider.net)"), val => \$netc->{DOMAINNAME2} }),
                          { label => N("First DNS Server (optional)"), val => \$netc->{dnsServer2} },
                          { label => N("Second DNS Server (optional)"), val => \$netc->{dnsServer3} },
                          { label => N("Account Login (user name)"), val => \$netcnx->{login} },
