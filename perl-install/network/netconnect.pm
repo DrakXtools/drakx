@@ -411,7 +411,7 @@ killall pppd
                         $modem->{device} ||= $first_modem->()->{device};
                         my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
                         $modem->{auth} ||= { 0 => N("Script-based"), 1 => N("PAP"), 2 => N("Terminal-based"), 3 => N("CHAP"), 4 => N("PAP/CHAP") }->{$l{Authentication}};
-                        $modem->{$_} ||= $l{$_} foreach qw (Gateway IPAddr SubnetMask);
+                        $modem->{$_} ||= $l{$_} foreach qw(Gateway IPAddr SubnetMask);
                         $modem->{connection} ||= $l{Name};
                         $modem->{domain} ||= $l{Domain};
                         ($modem->{dns1}, $modem->{dns2}) = split(',', $l{DNS});
@@ -517,7 +517,7 @@ killall pppd
                         N("Bewan USB modem");
                         N("Bewan PCI modem");
                     },
-                    name => N("ADSL configuration" . "\n\n" . "Select the network interface to configure:"),
+                    name => N("ADSL configuration") . "\n\n" . N("Select the network interface to configure:"),
                     data =>  [ { label => N("Net Device"), type => "list", val => \$ntf_name, allow_empty_list => 1,
                                list => \@adsl_devices, } ],
                     next => "adsl_protocol",
