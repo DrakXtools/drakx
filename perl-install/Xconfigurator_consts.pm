@@ -11,8 +11,8 @@ use common;
 );
 @depths = ikeys(%depths);
 
-@resolutions        = qw(640x480 800x600 1024x768 1152x864 1280x1024           1600x1200);
-@resolutions_laptop = qw(640x480 800x600 1024x768 1152x864 1280x1024 1400x1050 1600x1200);
+@resolutions        = qw(640x480 800x600 1024x768 1152x864 1280x1024           1600x1200 1920x1440 2048x1536);
+@resolutions_laptop = qw(640x480 800x600 1024x768 1152x864 1280x1024 1400x1050 1600x1200 1920x1440 2048x1536);
 
 @window_managers = ('kdeinit: kwin', qw(gnome-session icewm wmaker kwm afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish));
 
