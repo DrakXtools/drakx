@@ -106,7 +106,7 @@ $comb_app->entry->signal_connect('changed', sub { update_app($comb_app->entry->g
 my $kernel = $kernel_rel->get_chars(0, -1);
 my $hbx = new Gtk2::HBox(0,0);
 my $Close_Button = new Gtk2::Button(N("Close"));
-$Close_Button->signal_connect(clicked => sub { Gtk->exit(0) });
+$Close_Button->signal_connect(clicked => sub { ugtk2->exit(0) });
 $hbx->pack_start($Close_Button,0,0,0);
 
 my $Report_Button = new Gtk2::Button(N("Report"));
@@ -124,7 +124,7 @@ $window->{window}->add($vbx);
 
 $window->{window}->show_all();
 $window->main();
-ugtk->exit(0);
+ugtk2->exit(0);
 
 sub update_app {
     my ($text) = @_;
@@ -185,5 +185,5 @@ sub read_app_context {
 }
 
 sub quit_global {
-    Gtk->exit(0);
+    ugtk2->exit(0);
 }
