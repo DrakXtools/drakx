@@ -835,21 +835,7 @@ sub selectPackagesToUpgrade($$$;$$) {
     my $db = c::rpmdbOpenForTraversal($prefix) or die "unable to open $prefix/var/lib/rpm/packages.rpm";
     log::l("opened rpm database for examining existing packages");
 
-    #- get filelist of package to avoid getting all header into memory.
-    my %filelist;
-    my $current;
-    my $f = install_any::getFile('Mandrake/base/filelist') or log::l("unable to get filelist of packages");
-    foreach (<$f>) {
-	chomp;
-	if (/^#(.*)/) {
-	    $current = $filelist{$1} = [];
-	} else {
-	    push @$current, $_;
-	}
-    }
-
     local $_; #- else perl complains on the map { ... } grep { ... } @...;
-    my %installedFilesForUpgrade; #- help searching package to upgrade in regard to already installed files.
 
     #- used for package that are not correctly updated.
     #- should only be used when nothing else can be done correctly.
@@ -873,128 +859,221 @@ sub selectPackagesToUpgrade($$$;$$) {
     #- help removing package which may have different release numbering
     my %toRemove; map { $toRemove{$_} = 1 } @{$toRemove || []};
 
-    #- mark all files which are not in /etc/rc.d/ for packages which are already installed but which
-    #- are not in the packages list to upgrade.
-    #- the 'installed' property will make a package unable to be selected, look at select.
-    c::rpmdbTraverse($db, sub {
-			 my ($header) = @_;
-			 my $otherPackage = (c::headerGetEntry($header, 'release') !~ /mdk\w*$/ &&
-					     (c::headerGetEntry($header, 'name'). '-' .
-					      c::headerGetEntry($header, 'version'). '-' .
-					      c::headerGetEntry($header, 'release')));
-			 my $renaming = $otherPackage && $otherPackageToRename{c::headerGetEntry($header, 'name')};
-			 my $name = $renaming &&
-			   (!$renaming->[1] || versionCompare(c::headerGetEntry($header, 'version'), $renaming->[1]) >= 0) &&
-			     $renaming->[0];
-			 $name and $packageNeedUpgrade{$name} = 1; #- keep in mind to force upgrading this package.
-			 my $p = $packages->[0]{$name || c::headerGetEntry($header, 'name')};
+    #- help searching package to upgrade in regard to already installed files.
+    my %installedFilesForUpgrade;
 
-			 if ($p) {
-			     my $version_cmp = versionCompare(c::headerGetEntry($header, 'version'), packageVersion($p));
-			     my $version_rel_test = $version_cmp > 0 || $version_cmp == 0 &&
-			       versionCompare(c::headerGetEntry($header, 'release'), packageRelease($p)) >= 0;
-			     if ($version_rel_test) { #- by default, package selecting are upgrade whatever version is !
-				 if ($otherPackage && $version_cmp <= 0) {
-				     log::l("force upgrading $otherPackage since it will not be updated otherwise");
-				 } else {
-				     packageSetFlagInstalled($p, 1);
+    #- make a subprocess here for reading filelist, this is important
+    #- not to waste a lot of memory for the main program which will fork
+    #- latter for each transaction.
+    local (*INPUT, *OUTPUT_CHILD); pipe INPUT, OUTPUT_CHILD;
+    local (*INPUT_CHILD, *OUTPUT); pipe INPUT_CHILD, OUTPUT;
+    if (my $pid = fork()) {
+	close INPUT_CHILD;
+	close OUTPUT_CHILD;
+	select((select(OUTPUT), $| = 1)[0]);
+
+	#- internal reading from the child.
+	my $ask_child = sub {
+	    my @list;
+	    print OUTPUT $_[0], "\n";
+
+	    local $_;
+	    while (<INPUT>) {
+		chomp;
+		/^\s*$/ and last;
+		push @list, $_;
+	    }
+
+	    \@list;
+	};
+
+	#- mark all files which are not in /etc/rc.d/ for packages which are already installed but which
+	#- are not in the packages list to upgrade.
+	#- the 'installed' property will make a package unable to be selected, look at select.
+	c::rpmdbTraverse($db, sub {
+			     my ($header) = @_;
+			     my $otherPackage = (c::headerGetEntry($header, 'release') !~ /mdk\w*$/ &&
+						 (c::headerGetEntry($header, 'name'). '-' .
+						  c::headerGetEntry($header, 'version'). '-' .
+						  c::headerGetEntry($header, 'release')));
+			     my $renaming = $otherPackage && $otherPackageToRename{c::headerGetEntry($header, 'name')};
+			     my $name = $renaming &&
+			       (!$renaming->[1] || versionCompare(c::headerGetEntry($header, 'version'), $renaming->[1]) >= 0) &&
+				 $renaming->[0];
+			     $name and $packageNeedUpgrade{$name} = 1; #- keep in mind to force upgrading this package.
+			     my $p = $packages->[0]{$name || c::headerGetEntry($header, 'name')};
+
+			     if ($p) {
+				 my $version_cmp = versionCompare(c::headerGetEntry($header, 'version'), packageVersion($p));
+				 my $version_rel_test = $version_cmp > 0 || $version_cmp == 0 &&
+				   versionCompare(c::headerGetEntry($header, 'release'), packageRelease($p)) >= 0;
+				 if ($version_rel_test) { #- by default, package selecting are upgrade whatever version is !
+				     if ($otherPackage && $version_cmp <= 0) {
+					 log::l("force upgrading $otherPackage since it will not be updated otherwise");
+				     } else {
+					 packageSetFlagInstalled($p, 1);
+				     }
+				 } elsif ($upgradeNeedRemove{packageName($p)}) {
+				     my $otherPackage = (c::headerGetEntry($header, 'name'). '-' .
+							 c::headerGetEntry($header, 'version'). '-' .
+							 c::headerGetEntry($header, 'release'));
+				     log::l("removing $otherPackage since it will not upgrade correctly!");
+				     $toRemove{$otherPackage} = 1; #- force removing for theses other packages, select our.
 				 }
-			     } elsif ($upgradeNeedRemove{packageName($p)}) {
-				 my $otherPackage = (c::headerGetEntry($header, 'name'). '-' .
-						     c::headerGetEntry($header, 'version'). '-' .
-						     c::headerGetEntry($header, 'release'));
-				 log::l("removing $otherPackage since it will not upgrade correctly!");
-				 $toRemove{$otherPackage} = 1; #- force removing for theses other packages, select our.
+			     } else {
+				 my @files = c::headerGetEntry($header, 'filenames');
+				 @installedFilesForUpgrade{grep { ($_ !~ m|^/etc/rc.d/| &&
+								   ! -d "$prefix/$_" && ! -l "$prefix/$_") } @files} = ();
 			     }
-			 } else {
-			     my @files = c::headerGetEntry($header, 'filenames');
-			     @installedFilesForUpgrade{grep { ($_ !~ m|^/etc/rc.d/| &&
-							       ! -d "$prefix/$_" && ! -l "$prefix/$_") } @files} = ();
-			 }
-		     });
+			 });
 
-    #- find new packages to upgrade.
-    foreach (values %{$packages->[0]}) {
-	my $p = $_;
-	my $skipThis = 0;
-	my $count = c::rpmdbNameTraverse($db, packageName($p), sub {
-					     my ($header) = @_;
-					     $skipThis ||= packageFlagInstalled($p);
-					 });
+	#- find new packages to upgrade.
+	foreach (values %{$packages->[0]}) {
+	    my $p = $_;
+	    my $skipThis = 0;
+	    my $count = c::rpmdbNameTraverse($db, packageName($p), sub {
+						 my ($header) = @_;
+						 $skipThis ||= packageFlagInstalled($p);
+					     });
 
-	#- skip if not installed (package not found in current install).
-	$skipThis ||= ($count == 0);
+	    #- skip if not installed (package not found in current install).
+	    $skipThis ||= ($count == 0);
 
-	#- make sure to upgrade package that have to be upgraded.
-	$packageNeedUpgrade{packageName($p)} and $skipThis = 0;
+	    #- make sure to upgrade package that have to be upgraded.
+	    $packageNeedUpgrade{packageName($p)} and $skipThis = 0;
 
-	#- select the package if it is already installed with a lower version or simply not installed.
-	unless ($skipThis) {
-	    my $cumulSize;
+	    #- select the package if it is already installed with a lower version or simply not installed.
+	    unless ($skipThis) {
+		my $cumulSize;
 
-	    selectPackage($packages, $p);
+		selectPackage($packages, $p);
 
-	    #- keep in mind installed files which are not being updated. doing this costs in
-	    #- execution time but use less memory, else hash all installed files and unhash
-	    #- all file for package marked for upgrade.
-	    c::rpmdbNameTraverse($db, packageName($p), sub {
-				     my ($header) = @_;
-				     $cumulSize += c::headerGetEntry($header, 'size'); #- all these will be deleted on upgrade.
-				     my @files = c::headerGetEntry($header, 'filenames');
-				     @installedFilesForUpgrade{grep { ($_ !~ m|^/etc/rc.d/| &&
-								       ! -d "$prefix/$_" && ! -l "$prefix/$_") } @files} = ();
-				 });
-	    if (my $list = $filelist{packageName($p)}) {
+		#- keep in mind installed files which are not being updated. doing this costs in
+		#- execution time but use less memory, else hash all installed files and unhash
+		#- all file for package marked for upgrade.
+		c::rpmdbNameTraverse($db, packageName($p), sub {
+					 my ($header) = @_;
+					 $cumulSize += c::headerGetEntry($header, 'size'); #- all these will be deleted on upgrade.
+					 my @files = c::headerGetEntry($header, 'filenames');
+					 @installedFilesForUpgrade{grep { ($_ !~ m|^/etc/rc.d/| &&
+									   ! -d "$prefix/$_" && ! -l "$prefix/$_") } @files} = ();
+				     });
+
+		my $list = $ask_child->(packageName($p));
 		my @commonparts = map { /^=(.*)/ ? ($1) : () } @$list;
 		map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m|^/etc/rc.d/| }
 		  map { /^(\d)(.*)/ ? ($commonparts[$1] . $2) : /^ (.*)/ ? ($1) : () } @$list;
+
+		#- keep in mind the cumul size of installed package since they will be deleted
+		#- on upgrade.
+		$p->{installedCumulSize} = $cumulSize;
 	    }
-
-	    #- keep in mind the cumul size of installed package since they will be deleted
-	    #- on upgrade.
-	    $p->{installedCumulSize} = $cumulSize;
 	}
-    }
 
-    #- unmark all files for all packages marked for upgrade. it may not have been done above
-    #- since some packages may have been selected by depsList.
-    foreach (values %{$packages->[0]}) {
-	my $p = $_;
+	#- unmark all files for all packages marked for upgrade. it may not have been done above
+	#- since some packages may have been selected by depsList.
+	foreach (values %{$packages->[0]}) {
+	    my $p = $_;
 
-	if (packageFlagSelected($p)) {
-	    if (my $list = $filelist{packageName($p)}) {
+	    if (packageFlagSelected($p)) {
+		my $list = $ask_child->(packageName($p));
 		my @commonparts = map { /^=(.*)/ ? ($1) : () } @$list;
 		map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m|^/etc/rc.d/| }
 		  map { /^(\d)(.*)/ ? ($commonparts[$1] . $2) : /^ (.*)/ ? ($1) : () } @$list;
 	    }
 	}
-    }
 
-    #- select packages which contains marked files, then unmark on selection.
-    foreach (values %{$packages->[0]}) {
-	my $p = $_;
+	#- select packages which contains marked files, then unmark on selection.
+	#- a special case can be made here, the selection is done only for packages
+	#- requiring locales if the locales are selected.
+	#- another special case are for devel packages where fixes over the time has
+	#- made some files moving between the normal package and its devel couterpart.
+	#- if only one file is affected, no devel package is selected.
+	foreach (values %{$packages->[0]}) {
+	    my $p = $_;
 
-	unless (packageFlagSelected($p)) {
-	    my $toSelect = 0;
-	    if (my $list = $filelist{packageName($p)}) {
+	    unless (packageFlagSelected($p)) {
+		my $toSelect = 0;
+		my $list = $ask_child->(packageName($p));
 		my @commonparts = map { /^=(.*)/ ? ($1) : () } @$list;
 		map { if (exists $installedFilesForUpgrade{$_}) {
-		    $toSelect ||= ! -d "$prefix/$_" && ! -l "$prefix/$_"; delete $installedFilesForUpgrade{$_} }
+		    ++$toSelect if ! -d "$prefix/$_" && ! -l "$prefix/$_"; delete $installedFilesForUpgrade{$_} }
 		  } grep { $_ !~ m|^/etc/rc.d/| } map { /^(\d)(.*)/ ? ($commonparts[$1] . $2) : /^ (.*)/ ? ($1) : () } @$list;
+		if ($toSelect) {
+		    if ($toSelect <= 1 && packageName($p) =~ /-devel/) {
+			log::l("avoid selecting " . packageName($p) . " as not enough files will be updated");
+		    } else {
+			#- default case is assumed to allow upgrade.
+			my @deps = map { my $p = $packages->[1][$_];
+					 $p && packageName($p) =~ /locales-/ ? ($p) : () } packageDepsId($p);
+			if (@deps == 0 || @deps > 0 && (grep { !packageFlagSelected($_) } @deps) == 0) {
+			    log::l("selecting " . packageName($p) . " by selection on files");
+			    selectPackage($packages, $p);
+			} else {
+			    log::l("avoid selecting " . packageName($p) . " as its locales language is not already selected");
+			}
+		    }
+		}
 	    }
-	    selectPackage($packages, $p) if ($toSelect);
 	}
-    }
 
-    #- select packages which obseletes other package, obselete package are not removed,
-    #- should we remove them ? this could be dangerous !
-    foreach (values %{$packages->[0]}) {
-	my $p = $_;
+	#- clean memory...
+	%installedFilesForUpgrade = ();
 
-	if (my $list = $filelist{packageName($p)}) {
-	    my @obsoletes = map { /^\*(.*)/ ? ($1) : () } @$list;
-	    map { selectPackage($packages, $p) if c::rpmdbNameTraverse($db, $_) > 0 } @obsoletes;
+	#- select packages which obseletes other package, obselete package are not removed,
+	#- should we remove them ? this could be dangerous !
+	foreach (values %{$packages->[0]}) {
+	    my $p = $_;
+
+	    my $list = $ask_child->(packageName($p));
+	    my @obsoletes = map { /^\*(\S*)/ ? ($1) : () } @$list;
+	    foreach (@obsoletes) {
+		if (c::rpmdbNameTraverse($db, $_) > 0) {
+		    log::l("selecting " . packageName($p) . " by selection on obsoletes");
+		    selectPackage($packages, $p);
+		}
+	    }
 	}
+
+	#- no need to still use the child as this point, we can let him to terminate.
+	close OUTPUT;
+	close INPUT;
+	waitpid $pid, 0;
+    } else {
+	local $_;
+
+	#- child process will hashes filelist and answer its parent
+	#- for each specific informations.
+	close INPUT;
+	close OUTPUT;
+	select((select(OUTPUT_CHILD),  $| = 1)[0]);
+
+	#- get filelist of package to avoid getting all header into memory.
+	my %filelist;
+	my $current;
+	my $f = install_any::getFile('Mandrake/base/filelist') or log::l("unable to get filelist of packages");
+	while (<$f>) {
+	    if (/^#(\S*)/) {
+		$current = $filelist{$1} = [];
+	    } else {
+		push @$current, $_;
+	    }
+	}
+
+	#- now respond to its parent wanting some data from filelist ...
+	while (<INPUT_CHILD>) {
+	    chomp;
+	    foreach (@{$filelist{$_}}) {
+		print OUTPUT_CHILD $_;
+	    }
+	    print OUTPUT_CHILD "\n";
+	}
+
+	#- the parent has broken the pipe associated with INPUT_CHILD,
+	#- exit now and free all that memory...
+	close OUTPUT_CHILD;
+	close INPUT_CHILD;
+	c::_exit(0);
     }
 
     #- keep a track of packages that are been selected for being upgraded,
@@ -1184,9 +1263,9 @@ sub install($$$;$$) {
 		c::rpmtransAddPackage($trans, $_->{header}, packageName($_), $isUpgrade && allowedToUpgrade(packageName($_)))
 		    foreach @transToInstall;
 
-		c::rpmdepOrder($trans) or
-		    die "error ordering package list: " . c::rpmErrorString(), 
-		      sub { c::rpmdbClose($db) };
+		#c::rpmdepOrder($trans) or
+		 #   die "error ordering package list: " . c::rpmErrorString(), 
+		  #    sub { c::rpmdbClose($db) };
 		c::rpmtransSetScriptFd($trans, fileno LOG);
 
 		log::l("rpmRunTransactions start");
@@ -1195,7 +1274,7 @@ sub install($$$;$$) {
 						      print OUTPUT "close:$_[0]\n"; },
 						  sub { #- installCallback
 						      print OUTPUT join(":", @_), "\n"; },
-						  0);
+						  1);
 		log::l("rpmRunTransactions done");
 
 		if (@probs) {
@@ -1266,7 +1345,7 @@ sub remove($$) {
     #- place (install_steps_gtk.pm,...).
     installCallback("Starting removing other packages", scalar @$toRemove);
 
-    if (my @probs = c::rpmRunTransactions($trans, $callbackOpen, $callbackClose, \&installCallback, 0)) {
+    if (my @probs = c::rpmRunTransactions($trans, $callbackOpen, $callbackClose, \&installCallback, 1)) {
 	die "removing of old rpms failed:\n  ", join("\n  ", @probs);
     }
     c::rpmtransFree($trans);
