@@ -36,6 +36,7 @@ sub scan4channels {
 #   this table must be checked on each xawtv release :
     my %freqtables = 
 	   (_("USA (bcast)") => "us-bcast", _("USA (cable)") => "us-cable", _("USA (cable-hrc)") => "us-cable-hrc", _("Canada (cable)") => "canada-cable",
+# HRC is Harmonically Related Carrier
 	_("Japan (bcast)") => "japan-bcast", _("Japan (cable)") => "japan-cable", _("China (bcast)") => "china-bcast",
 	_("West Europe") => "europe-west", _("East Europe") => "europe-east", _("Italy") => "italy", _("Ireland") => "ireland", _("France") => "france",
 	_("Newzealand") => "newzealand", _("Australia") => "australia",
@@ -77,6 +78,7 @@ sub is_tv {
 scan4channels('interactive'->vnew()) if (is_tv);
 
 # TODO :
+# - offer to sort channels after
 # - try to figure out country from locale ?
 # - try to figure out tv norm from country ?
 # - use Video-Capture-V4l-0.221 ?
