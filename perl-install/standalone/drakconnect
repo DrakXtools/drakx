@@ -244,7 +244,7 @@ sub manage {
     each_index {
 	my ($name, $interface, $protocol) = ($_, $p->{$_}{kind}, $p->{$_}{protocol});
 	$p->{$name}{gui}{index} = $::i;
-	build_tree($netc, $p->{$name}{intf} = $intf->{$name =~ /eth|ath|wlan/ ? $interface : $name} || {}, $name, $interface, $protocol);
+	build_tree($netc, $p->{$name}{intf} = $intf->{$name =~ /eth|ath|wlan/ || !$name{$name} ? $interface : $name} || {}, $name, $interface, $protocol);
 	build_notebook($netc, $p->{$name}{intf}, $p->{$name}{gui}, $apply_button, $name, $interface);
 	$notebook->append_page(gtkpack(Gtk2::VBox->new(0,0), $p->{$name}{gui}{notebook}));
     } (sort keys %$p);
