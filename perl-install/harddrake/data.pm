@@ -12,7 +12,7 @@ my @devices = detect_devices::probeall(1);
 
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown {
-    grep { $_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|Printer|Hub|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|STORAGE_(IDE|SCSI|OTHER)|BRIDGE|NETWORK/ && $_->{driver} ne '^(scanner|usbvision)$' && $_->{type} ne 'network' && $_->{driver} !~ /Mouse:USB|class\|Mouse/  && $_->{media_type} !~ /class\|Mouse/ } @devices;
+    grep { $_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|Printer|Hub|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|STORAGE_(IDE|SCSI|OTHER)|BRIDGE|NETWORK/ && $_->{driver} ne '^(scanner|usbvision)$' && $_->{type} ne 'network' && $_->{driver} !~ /Mouse:USB|class\|Mouse/  && $_->{media_type} !~ /class\|Mouse/ && $_->{driver} !~ /www.linmodems.org/ } @devices;
 }
 
 
