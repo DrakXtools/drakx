@@ -232,12 +232,17 @@ $ENV{DURING_INSTALL} = 1;
 $ENV{RPM_INSTALL_LANG} = "$flang:$lang";
 $ENV{LD_LIBRARY_PATH} = "/usr/X11R6/lib";
 $ENV{SECURE_LEVEL} = 2;
-foreach (qw(/etc /var /var/lib /var/lib/rpm /proc)) {
+foreach (qw(/etc /etc/sysconfig /var /var/lib /var/lib/rpm /proc)) {
     mkdir "/mnt/$_";
 }
 system "mount", "-t", "proc", "proc", "/mnt/proc";
 open F, ">/mnt/etc/fstab";
 print F "/dev/$hd$root / ext2 defaults 1 1\n";
+close F;
+open F, ">/mnt/etc/sysconfig/i18n";
+print F "LANG=$lang\n";
+print F "LANGUAGE=$flang:$lang\n";
+print F "LC_MESSAGES=$flang";
 close F;
 system "rpm", "--root", "/mnt", "--initdb";
 
