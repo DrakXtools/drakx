@@ -167,10 +167,9 @@ our @tree =
       icon => "webcam.png",
       configurator => "",
       detector => sub { 
-          f(grep {
-              $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} ne 'PCI'
-                || member($_->{driver}, qw(cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp pwc ultracam usbvideo));
-            } @devices);
+          require list_modules;
+          my @modules = list_modules::category2modules('multimedia/webcam');
+          f(grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} ne 'PCI' || member($_->{driver}, @modules) } @devices);
       },
       # managed by hotplug:
       checked_on_boot => 0,
