@@ -288,7 +288,7 @@ sub addUser {
 sub createBootdisk {
     my ($clicked, $ent_number, $auto) = @_;
     modules::write_conf($o->{prefix});
-    installStepsCall($o, $auto, 'createBootdisk', $ent_number == 1);
+    installStepsCall($o, $auto, 'createBootdisk', $ent_number == 1, $clicked);
 }
 
 #------------------------------------------------------------------------------
@@ -299,7 +299,7 @@ sub setupBootloader {
     modules::write_conf($o->{prefix});
 
     installStepsCall($o, $auto, 'setupBootloaderBefore') if $ent_number == 1;
-    installStepsCall($o, $auto, 'setupBootloader', $ent_number - 1);
+    installStepsCall($o, $auto, 'setupBootloader', $ent_number-1 + $clicked*2); #- gore :-(
 
     local $ENV{DRAKX_PASSWORD} = $o->{bootloader}{password};
     local $ENV{DURING_INSTALL} = 1;

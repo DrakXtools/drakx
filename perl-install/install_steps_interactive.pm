@@ -995,9 +995,9 @@ sub addUser {
 
 #------------------------------------------------------------------------------
 sub createBootdisk {
-    my ($o, $first_time) = @_;
+    my ($o, $first_time, $noauto) = @_;
 
-    return if $first_time && !$::expert;
+    return if !$noauto && $first_time && !$::expert;
 
     if (arch() =~ /sparc/) {
 	#- as probing floppies is a bit more different on sparc, assume always /dev/fd0.
@@ -1067,8 +1067,7 @@ sub setupBootloader {
 	    log::l("OldWorld or Unknown Machine - no yaboot setup");
 	    return;
 	}
-    }
-    if (arch() =~ /^alpha/) {
+    } elsif (arch() =~ /^alpha/) {
 	$o->ask_yesorno('', _("Do you want to use aboot?"), 1) or return;
 	catch_cdie { $o->SUPER::setupBootloader } sub {
 	    $o->ask_yesorno('', 
