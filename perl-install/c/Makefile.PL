@@ -7,7 +7,7 @@ use Config;
 my $lib = arch() =~ /x86_64/ ? 'lib64' : 'lib';
 
 my $libs = '-lldetect -lext2fs';
-$libs .= " -L/usr/X11R6/$lib -lX11 -lgdk -lXxf86misc" if $ENV{C_DRAKX};
+$libs .= " -L/usr/X11R6/$lib -lX11 -lXext -lgdk -lXxf86misc" if $ENV{C_DRAKX};
 $libs .= ' -lrpm -lrpmdb -lrpmio -lpopt -lz' if $ENV{C_RPM};
 
 my $pcmcia_dir = $ENV{C_DRAKX} && $Config{archname} =~ /i.86/ ? '../../mdk-stage1/pcmcia_' : '';
