@@ -604,8 +604,7 @@ sub bug {
     require detect_devices;
     mount devices::make(detect_devices::floppy()), "/fd0";
 
-    output "/fd0/report.bug", report_bug("/mnt") #- no other way :-(
-);
+    output "/fd0/report.bug", report_bug("/mnt"); #- no other way :-(
     umount "/fd0";
     sync;
 }
