@@ -674,6 +674,23 @@ sub get_usermode {
     return $::expert;
 }
 
+sub set_jap_textmode {
+    my $textmode = ($_[0] ? 'cjk' : '');
+    my $file = "$::prefix/etc/cups/mime.convs";
+    my @mimeconvs = cat_($file) or die "Cannot open $file for reading!";
+    (s!^(\s*text/plain\s+\S+\s+\d+\s+)\S+(\s*$)!$1${textmode}texttops$2!)
+	foreach @mimeconvs;
+    output($file, @mimeconvs) or die "Cannot open $file for writing!";
+    return 1;
+}
+
+sub get_jap_textmode {
+    my @mimeconvs = cat_("$::prefix/etc/cups/mime.convs");
+    (m!^\s*text/plain\s+\S+\s+\d+\s+(\S+)\s*$!m and
+     ($1 eq 'cjktexttops') and return 1) foreach @mimeconvs;
+    return 0;
+}
+
 #----------------------------------------------------------------------
 # Handling of /etc/cups/cupsd.conf
 

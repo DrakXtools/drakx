@@ -65,6 +65,8 @@ sub config_cups {
     @{$printer->{cupsconfig}{cupsd_conf}} =
 	printer::main::read_cupsd_conf();
     printer::main::read_cups_config($printer);
+    # Read state of japanese text printing mode
+    my $jap_textmode = printer::main::get_jap_textmode();
     # Read state for auto-correction of cupsd.conf
     $printer->{cupsconfig}{autocorrection} =
 	printer::main::get_cups_autoconf();
@@ -80,7 +82,7 @@ sub config_cups {
 	if ($in->ask_from_
 	    (
 	     { 
-		 title => N("CUPS printer sharing configuration"),
+		 title => N("CUPS printer configuration"),
 		 messages => N("Here you can choose whether the printers connected to this machine should be accessable by remote machines and by which remote machines.") .
 		     N("You can also decide here whether printers on remote machines should be automatically made available on this machine."),
 	     },
@@ -118,6 +120,10 @@ sub config_cups {
 		    $buttonclicked = "browsepoll";
 		    1;
 		} },
+	      { text => N("Japanese text printing mode"),
+		help => N("Turning on this allows to print plain text files in japanese language. Only use this function if you really want to print text in japanese, if it is activated you cannot print accentuated characters in latin fonts any more and you will not be able to adjust the margins, the character size, etc. This setting only affects printers defined on this machine. If you want to print japanese text on a printer set up on a remote machine, you have to activate this function on that remote machine."),
+		type => 'bool',
+		val => \$jap_textmode },
 	      if_($::expert,
 		  { text => N("Automatic correction of CUPS configuration"),
 		    type => 'bool',
@@ -487,6 +493,8 @@ N("Examples for correct IPs:\n") .
 		    printer::main::set_cups_autoconf
 			($printer->{cupsconfig}{autocorrection});
 		}
+		# Write state of japanese text printing mode
+		printer::main::set_jap_textmode($jap_textmode);
 		# Write cupsd.conf
 		printer::main::write_cups_config($printer);
 		my $w = 
@@ -3699,8 +3707,7 @@ sub main {
 				  $menuchoice = "\@cupsconfig";
 				  1;
 			      },
-			  val => ($::expert ? N("CUPS configuration") :
-				  N("Printer sharing")) }) : ()),
+			  val => N("CUPS configuration") }) : ()),
 		      ($::expert && 
 		       (files_exist(qw(/usr/bin/pdq)) ||
 			files_exist(qw(/usr/lib/filters/lpf 
