@@ -670,7 +670,6 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                     post => sub {
                         delete $ethntf->{$_} foreach keys %$ethntf;
                         add2hash($ethntf, $intf->{$ntf_name});
-                        return "lan_intf" if $type ne 'lan';
                         $::isInstall && $netc->{NET_DEVICE} eq $ethntf->{DEVICE} ? 'lan_alrd_cfg' : 'lan_protocol';
                     },
                    },
