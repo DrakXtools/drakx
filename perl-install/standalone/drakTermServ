@@ -72,7 +72,7 @@ if ($ts == 256) {
 	} else {
 		system("urpmi terminal-server > /dev/null");
 	}
-	$ts = system("rpm -qa | grep terminal-server > /dev/null");
+	$ts = system("rpm -q terminal-server > /dev/null");
 	if ($ts == 256) {
 		warn(N("Useless without Terminal Server"));
 		exit(1);
@@ -172,9 +172,15 @@ sub write_conf_file() {
 
 sub write_thin_inittab {
 	my ($client_ip) = @_;
+	my $suffix;
+	if ($client_ip eq "CLIENT") {
+		$suffix = '$$CLIENT$$';
+	} else {
+		$suffix = "\$\$IP=$client_ip$$";
+	}
 	
 	my $inittab = "
-# /etc/inittab\$\$IP=$client_ip\$\$
+# /etc/inittab$suffix
 # created by drakTermServ
 
 id:5:initdefault:
@@ -202,7 +208,7 @@ ca::ctrlaltdel:/sbin/reboot -f
 # Connect to X server
 x:5:respawn:/usr/X11R6/bin/X -ac -query $server_ip\n";
 
-	my $inittab_file = "/etc/inittab\$\$IP=$client_ip\$\$";
+	my $inittab_file = "/etc/inittab$suffix";
 	local *INITTAB;
 	open(INITTAB, "> $inittab_file") or warn("Can't open $inittab_file!");
 	print INITTAB $inittab;
@@ -239,32 +245,16 @@ sub display_error {
 }
 
 sub interactive_mode() {
-	my $darea;
-	
-    $window1 = ugtk2->new('drakTermServ');
+    $in = 'interactive'->vnew;
+	$::Wizard_title = N("Terminal Server Configuration");
+	$::Wizard_pix_up = "ic82-network-40.png";
+	$in->isa('interactive::gtk') and $::isWizard = 1;
+    $window1 = ugtk2->new(N("Termial Server Configuration"));
     $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
-    unless ($::isEmbedded) {
-        $window1->{rwindow}->set_position('center');
-        $window1->{rwindow}->set_title(N("Terminal Server Configuration"));
-		my $pixbuf_icon = gtkcreate_pixbuf("ic82-network-40");
-		$darea = Gtk2::DrawingArea->new;
-		$darea->set_size_request(540, 45);
-		$darea->modify_font(Gtk2::Pango::FontDescription->from_string('Sans Italic 24'));
-		my $layout = $darea->create_pango_layout(N("DrakTermServ"));
-		$darea->modify_bg("normal", gtkcolor(0.13 * 65535, 0.27 * 65535, 0.61 * 65535));
-    	$darea->signal_connect(expose_event => sub {
-			my (undef, undef, $dx, $dy) = $darea->allocation->values;
-			$darea->window->draw_pixbuf($darea->style->white_gc, $pixbuf_icon, 0, 0, $dx - $pixbuf_icon->get_width, $dy - $pixbuf_icon->get_height, -1, -1, 'none', 0, 0);
-			my ($lx, $ly) = $layout->get_pixel_size;
-			$darea->window->draw_layout($darea->style->white_gc, ($dx-$lx)/2, ($dy-$ly)/2, $layout);
-			0;
-		});
-    }
     $window1->{rwindow}->set_border_width(5);
 
     gtkadd($window1->{window},
 	   gtkpack_(gtkset_size_request(new Gtk2::VBox(0,2), 620, 400),
-		    if_(!$::isEmbedded, 0, $darea),
 		    1, gtkpack_(new Gtk2::HBox(0,2),
 				1, gtkpack_(new Gtk2::VBox(0,2),
 					1, gtkpack($status_box = new Gtk2::VBox(0,5),
@@ -346,9 +336,22 @@ sub interactive_mode() {
     $window1->{rwindow}->show_all;
     $window1->{rwindow}->realize;
     $window1->{rwindow}->show_all;    
-
     $window1->main;
     ugtk2->exit(0);
+}
+
+sub check_gdm {
+	my ($cmd_line) = @_;
+	#- gdm now needs gdm user in /etc/passwd$$CLIENT$$
+	my %desktop = getVarsFromSh("/etc/sysconfig/desktop");
+	my $dm = $desktop{DISPLAYMANAGER}; 
+	$dm =~ tr/a-z/A-Z/;
+	my $gdm = `grep gdm '/etc/passwd\$\$CLIENT\$\$'`;
+	if ($dm =~ /GNOME|GDM/ && !$gdm) {
+		$in->ask_warn(N("Warning"), N("%s defined as dm, adding gdm user to /etc/passwd\$\$CLIENT\$\$", $dm)) if !$cmd_line;
+		warn(N("%s defined as dm, adding gdm user to /etc/passwd\$\$CLIENT\$\$", $dm)) if $cmd_line;
+		adduser($cmd_line, "gdm");
+	}
 }
 
 sub start_wizard() {
@@ -437,17 +440,24 @@ sub clear_buttons() {
 }
 
 sub client_type() {
-    text_view(N("Please select client type.
+	my $check_allow_thin = new Gtk2::CheckButton(N("Use thin clients."));
+	$check_allow_thin->set_active($thin_clients);
+    text_view(N("Please select default client type.
     'Thin' clients run everything off the server's CPU/RAM, using the client display.
     'Fat' clients use their own CPU/RAM but the server's filesystem."), "wizard");
     gtkpack_($$central_widget,
 		1, gtkpack_(new Gtk2::HBox(1,0), 
 	    	0, new Gtk2::VBox(0,10),
-			1, gtksignal_connect(new Gtk2::CheckButton(N("Allow thin clients.")), 
-				clicked => sub { invbool \$thin_clients; client_set() }),	
+			1, gtksignal_connect($check_allow_thin, clicked => sub { 
+				invbool \$thin_clients;
+				client_set("all"); 
+			}),	
 			0, new Gtk2::VBox(0,10)
-		)
-	)
+		),
+		0, gtksignal_connect(new Gtk2::Button(N("Sync client X keyboard settings with server.")), 
+			clicked => sub { client_X_keyboard() }),
+		1, new Gtk2::HBox(0,0),
+	);
 }
 
 sub make_nbis() {
@@ -517,7 +527,7 @@ sub help() {
 	my $shadow_str = '/etc/shadow$$CLIENT$$';
 	my $xfconfig_str = '/etc/X11/XF86Config-4$$IP=client_ip$$';
 	
-    text_view(N("drakTermServ Overview") . "\n\n" .
+    text_view(N("Terminal Server Overview") . "\n\n" .
 N("        - Create Etherboot Enabled Boot Images:
         	To boot a kernel via etherboot, a special kernel/initrd image must be created.
         	mkinitrd-net does much of this work and drakTermServ is just a graphical 
@@ -719,7 +729,23 @@ sub make_nbi() {
 	my $nbi_iter;
 		
  	update_list($list_model);
-	
+
+	my $combo_default_kernel = new Gtk2::OptionMenu();
+	$combo_default_kernel->set_popdown_strings(N("Default kernel version"), @kernels);
+	$combo_default_kernel->entry->signal_connect('changed', sub {
+		my $default_kernel = $combo_default_kernel->entry->get_text;
+		my $config;
+		if ($default_kernel eq translate("Default kernel version")) {
+			$config = "";
+		} else {
+			$default_kernel =~ s/vmlinuz-//gi;
+			$config = 'option bootfile-name = pick-first-value ( concat ( "boot-",' . "\n";
+			$config .= '    config-option etherboot.kmod, ".' . $default_kernel . '", ".nbi" ), concat' . "\n"; 
+            $config .= '    ( "boot-", config-option etherboot.kmod, ".nbi") ,"boot.nbi" );' . "\n";
+		}
+		output_p("/etc/dhcpd.conf.etherboot.kernel", $config);
+	});
+
 	$list_nbis->get_selection->signal_connect(changed => sub {
     	my ($model, $iter) = $_[0]->get_selected;
     	$model && $iter or return;
@@ -755,6 +781,7 @@ sub make_nbi() {
 						build_n_update($list_model, "-k /boot/$_") foreach @kernels;
 						cursor_norm(); 
 					}),
+					$combo_default_kernel,
 					new Gtk2::HBox(1,1),
 					gtksignal_connect(new Gtk2::Button(N("<-- Delete")), clicked => sub { 
 						my $nbi = $tftpboot . "/" . $nbi;
@@ -1031,16 +1058,19 @@ sub maintain_clients() {
 						sub { my $result = delclient(0, $client);
 							if ($result == 0) {
 								$model->remove($citer);
-									$button_edit->set_sensitive(0);
-									$button_config->set_sensitive(0);
-									$button_delete->set_sensitive(0);
+								$button_edit->set_sensitive(0);
+								$button_config->set_sensitive(0);
+								$button_delete->set_sensitive(0);
 							}
 						}),
 					gtksignal_connect(new Gtk2::Button(N("dhcpd Config...")), clicked => 
 						sub { $client_box->destroy; dhcpd_config() }),
 				),
 				create_scrolled_window($tree_clients),
-			),),
+			),
+			0, gtksignal_connect(new Gtk2::Button(N("Sync client X keyboard settings with server.")), 
+				clicked => sub { client_X_keyboard() }),
+		),
 	);
 
 	$check_allow_thin->set_active($thin_clients);
@@ -1048,7 +1078,7 @@ sub maintain_clients() {
 	gtksignal_connect($check_allow_thin, clicked => 
 		sub { invbool \$thin_clients;
 			$check_thin->set_sensitive($thin_clients);
-			client_set();
+			client_set("single");
 			$in->ask_warn(N("Warning"), N("Need to restart the Display Manager for full changes to take effect. \n(service dm restart - at the console)"));
 		}
 	);
@@ -1059,11 +1089,42 @@ sub maintain_clients() {
 	$client_box->show_all;
 }
 
-sub client_set() {
+sub client_X_keyboard() {
+	my $server_conf = "/etc/X11/XF86Config-4";
+	my $client_conf = '/etc/X11/XF86Config-4$$CLIENT$$';
+	my @server_X_config = cat_($server_conf);
+	foreach (@server_X_config) {
+		chomp;
+		if (/XkbModel/) {
+			my $oldmodel = `grep XkbModel '/etc/X11/XF86Config-4\$\$CLIENT\$\$'`;
+			chomp $oldmodel;
+			my $newmodel = $_;
+			substInFile { s/$oldmodel/$newmodel/ } $client_conf;
+			log::explanations("Sync XkbModel in $client_conf from $server_conf"); 
+		}
+		if (/XkbLayout/) {
+			my $oldlayout = `grep XkbLayout '/etc/X11/XF86Config-4\$\$CLIENT\$\$'`;
+			chomp $oldlayout;
+			my $newlayout = $_;
+			substInFile { s/$oldlayout/$newlayout/ } $client_conf;
+			log::explanations("Sync XkbLayout in $client_conf from $server_conf"); 
+		}
+	}
+}
+
+sub client_set {
+	my ($default) = @_;
 	# we need to change some system files to allow the thin clients
 	# to access the server - enabling xdmcp and modify hosts.deny/hosts.allow for some security
 	# we also need to set runlevel to 5 and restart the display manager
 	if ($thin_clients == 1) {
+		if (-f "/etc/sysconfig/autologin") {
+			my $answer = $in->ask_yesorno('', N("Thin clients won't work with autologin. Disable autologin?"));
+			if ($answer == 1) {
+				log::explanations("Renaming /etc/sysconfig/autologin to /etc/sysconfig/autologin.bak");
+				`mv /etc/sysconfig/autologin /etc/sysconfig/autologin.bak`;
+			}
+		}
 		substInFile { s/id:3:initdefault:/id:5:initdefault:/ } "/etc/inittab";
 		substInFile { s/! DisplayManager.requestPort:/DisplayManager.requestPort:/ } "/etc/X11/xdm/xdm-config";
 		substInFile { s/Enable=false/Enable=true/ } "/usr/share/config/kdm/kdmrc";
@@ -1072,13 +1133,23 @@ sub client_set() {
 		log::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
 		# just xdmcp in hosts.allow is enough for xdm & kdm, but gdm doesn't work - x11 doesn't help either
 		update_hosts_allow("enable");
+		if ($default eq "all") {
+			my $inittab = '/etc/initab$$CLIENT$$';
+			$in->ask_warn(N("Warning"), N("All clients will use %s", $inittab));
+			write_thin_inittab("CLIENT");
+		}
 	} else {
+		if (-f "/etc/sysconfig/autologin.bak") {
+			log::explanations("Renaming /etc/sysconfig/autologin.bak to /etc/sysconfig/autologin");
+			`mv /etc/sysconfig/autologin.bak /etc/sysconfig/autologin`;
+		}
 		substInFile { s/id:5:initdefault:/id:3:initdefault:/ } '/etc/inittab';
 		substInFile { s/DisplayManager.requestPort:/! DisplayManager.requestPort:/ } "/etc/X11/xdm/xdm-config";
 		substInFile { s/Enable=true/Enable=false/ } "/usr/share/config/kdm/kdmrc";
 		change_gdm_xdmcp("false");
 		log::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
 		update_hosts_allow("disable");
+		rm_rf('/etc/inittab$$CLIENT$$') if $default eq "all";
 	}
 	$clients_set = 1;
 }
@@ -1304,7 +1375,8 @@ sub write_dhcpd_config {
 	print FHANDLE "#dhcpd.conf - generated by drakTermServ\n\n";
 	print FHANDLE "ddns-update-style none;\n\n";
 	print FHANDLE "# Long leases (48 hours)\ndefault-lease-time 172800;\nmax-lease-time 172800;\n\n";
-	print FHANDLE qq(# Include Etherboot definitions and defaults\ninclude "/etc/dhcpd.conf.etherboot.include";\n\n);
+	print FHANDLE qq(# Include Etherboot definitions and defaults\ninclude "/etc/dhcpd.conf.etherboot.include";\n);
+	print FHANDLE qq(# Include Etherboot default kernel version\ninclude "/etc/dhcpd.conf.etherboot.kernel";\n\n);
 	print FHANDLE "# Network-specific section\n\n";
 	
 	print FHANDLE "subnet $subnet netmask $netmask {\n";
@@ -1371,6 +1443,7 @@ sub enable_ts {
 	#- setup default config files for terminal server
 
 	my $cmd_line = @_;
+	check_gdm($cmd_line);
 
 	@buff = ();
 	$buff[0] = "Enabling Terminal Server...\n\n";
