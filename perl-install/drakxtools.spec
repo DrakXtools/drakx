@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 1.1.10
-Release: 4mdk
+Version: 1.1.11
+Release: 1mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -286,6 +286,22 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Thu Nov  7 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.11-1mdk
+- harddrake:
+  o only display "selected" fields, skip other (aka only display
+    fields we described)
+  o print name and value of skipped fields on console
+  o only display help topics related to currently displayed fields in
+    right "information" frame
+  o if no device selected, display a message explaining the help dialog
+  o don't display modem when there're none
+  o describe most cpu fields
+  o simplify the coloring logic
+
+- detect_devices :
+  o getModem() : simplify
+  o getCPUs() : fix cpu fields parsing
+
 * Wed Nov  6 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.10-4mdk
 - s/_(/N(/
 
