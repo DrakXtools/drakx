@@ -19,11 +19,14 @@
 # - make 'key' column wider by default
 
 use lib qw(/usr/lib/libDrakX);
+
+use standalone;
+use common;
+use run_program;
+
 require ugtk2;
 ugtk2->import(qw(:wrappers :create));
 use Gtk2::SimpleList;
-use common;
-use run_program;
 
 require_root_capability();
 
