@@ -32,7 +32,10 @@ sub partition_with_diskdrake {
     do {
 	$ok = 1;
 	require diskdrake_interactive;
-	diskdrake_interactive::main($o, $all_hds, $nowizard);
+	{
+	    local $::expert = $::expert;
+	    diskdrake_interactive::main($o, $all_hds, $nowizard);
+	}
 	delete $o->{wizard} and return partitionWizard($o, 'nodiskdrake');
 	my @fstab = fsedit::get_all_fstab($all_hds);
 	
