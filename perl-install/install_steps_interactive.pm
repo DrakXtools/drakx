@@ -602,7 +602,7 @@ sub afterInstallPackages($) {
 sub configureNetwork {
     my ($o, $first_time) = @_;
     require netconnect;
-    netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{pcmcia}, $o->{intf},
+    netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{intf},
 		     sub { $o->pkg_install(@_) }, $first_time, $o->{lang} eq "fr_FR" && $o->{keyboard} eq "fr");
 }
 
@@ -882,10 +882,10 @@ try to force installation even if that destroys the first partition?"));
     }
 }
 
-#------------------------------------------------------------------------------
-#- miscellaneousNetwork moved to network.pm
-#------------------------------------------------------------------------------
+#- deprecated
 sub miscellaneous {
+    return; 
+
     my ($o, $clicked) = @_;
     my %l = (
 	0 => _("Welcome To Crackers"),
@@ -898,7 +898,6 @@ sub miscellaneous {
     delete @l{0,1,5} unless $::expert;
 
     my $u = $o->{miscellaneous} ||= {};
-    exists $u->{LAPTOP} or $u->{LAPTOP} = 1;
     my $s = $o->{security};
 
     install_interactive::tellAboutProprietaryModules($o) unless $clicked;
@@ -908,20 +907,8 @@ sub miscellaneous {
 
     $::expert || $clicked and $o->ask_from_entries_refH('',
 	_("Miscellaneous questions"), [
-{ label => _("Use hard drive optimisations?"), val => \$u->{HDPARM}, type => 'bool', text => _("(may cause data corruption)") },
 { label => _("Choose security level"), val => \$s, list => [ map { $l{$_} } ikeys %l ] },
-{ label => _("Precise RAM size if needed (found %d MB)", availableRamMB()), val => \$u->{memsize} },
-   if_(arch() !~ /^sparc/,
-{ label => _("Removable media automounting"), val => \$o->{useSupermount}, type => 'bool', text => 'supermount' },
-   ), if_($::expert,
-{ label => _("Clean /tmp at each boot"), val => \$u->{CLEAN_TMP}, type => 'bool' },
-   ), $o->{pcmcia} && $::expert ? (
-{ label => _("Enable multi profiles"), val => \$u->{profiles}, type => 'bool' },
-   ) : (
-{ label => _("Enable num lock at startup"), val => \$u->{numlock}, type => 'bool' },
-   ),
      ], complete => sub {
-	    !$u->{memsize} || $u->{memsize} =~ /K$/ || $u->{memsize} =~ s/^(\d+)M?$/$1M/i or $o->ask_warn('', _("Give the ram size in MB")), return 1;
 	    my %m = reverse %l; $ENV{SECURE_LEVEL} = $o->{security} = $m{$s};
 	    $o->{useSupermount} && $o->{security} > 3 and $o->ask_warn('', _("Can't use supermount in high security level")), return 1;
 	    $o->{security} == 5 and $o->ask_okcancel('',
@@ -929,9 +916,10 @@ _("beware: IN THIS SECURITY LEVEL, ROOT LOGIN AT CONSOLE IS NOT ALLOWED!
 If you want to be root, you have to login as a user and then use \"su\".
 More generally, do not expect to use your machine for anything but as a server.
 You have been warned.")) || return;
-	    $u->{numlock} && $o->{pcmcia} and $o->ask_okcancel('',
+
+	    #- message below kept in case it is of any use again. (otherwise removed from po and pablo is not happy ;p)
 _("Be carefull, having numlock enabled causes a lot of keystrokes to
-give digits instead of normal letters (eg: pressing `p' gives `6')")) || return;
+give digits instead of normal letters (eg: pressing `p' gives `6')");
 	    0; }
     ) || return;
 
@@ -953,7 +941,7 @@ sub configureX {
     { local $::testing = 0; #- unset testing
       local $::auto = !$::expert && !$clicked;
 
-      Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, bool($o->{pcmcia}), sub {
+      Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, sub {
 	  $o->pkg_install(@_);
       });
     }
