@@ -30,18 +30,25 @@ sub exit {
 
 sub ask_from_listW {
     my ($o, $title, $messages, $l, $def) = @_;
+    ask_from_list_with_helpW($o, $title, $messages, $l, undef, $def);
+}
+
+sub ask_from_list_with_helpW {
+    my ($o, $title, $messages, $l, $help, $def) = @_;
     my $r;
 
     my $w = my_gtk->new(first(deref($title)), %$o);
     $w->{retval} = $def || $l->[0]; #- nearly especially for the X test case (see timeout in Xconfigurator.pm)
     if (@$l < 5) {
 	my $defW;
+	my $tips = new Gtk::Tooltips;
 	my $f = sub { $w->{retval} = $_[1]; Gtk->main_quit };
 	gtkadd($w->{window},
 	       gtkpack(create_box_with_title($w, @$messages),
 		       gtkadd(@$l < 3 && sum(map { length $_ } @$l) < 60 ? create_hbox() : create_vbox(),
 			      map {
 				  my $b = new Gtk::Button($_);
+				  $tips->set_tip($b, $help->{$_}) if $help && $help->{$_};
 				  $b->signal_connect(clicked => [ $f, $_ ]);
 				  $_ eq $def and $defW = $b;
 				  $b;
@@ -52,7 +59,10 @@ sub ask_from_listW {
 	$w->{rwindow}->set_position('center') if $::isStandalone;
 	$r = $w->main;
     } else {
-	$w->_ask_from_list($title, $messages, $l, $def);
+	#- use ask_from_list_with_help only when needed, as key bindings are
+	#- dropped by List (CList does not seems to accepts Tooltips).
+	$help ? $w->_ask_from_list_with_help($title, $messages, $l, $help, $def) :
+	  $w->_ask_from_list($title, $messages, $l, $def);
 	$r = $w->main;
     }
     $r or die "ask_from_list cancel";
@@ -139,11 +149,11 @@ sub ask_from_treelistW {
 
 sub ask_many_from_list_refW {
     my ($o, $title, $messages, $list, $val) = @_;
-    ask_many_from_list_with_help_refW($o, $title, $messages, $list, undef, $val)
+    ask_many_from_list_with_help_refW($o, $title, $messages, undef, $list, $val)
 }
 
 sub ask_many_from_list_with_help_refW {
-    my ($o, $title, $messages, $list, $help, $val) = @_;
+    my ($o, $title, $messages, $help, $list, $val) = @_;
     my $w = my_gtk->new('', %$o);
     my $tips = new Gtk::Tooltips;
     my $box = gtkpack(new Gtk::VBox(0,0),

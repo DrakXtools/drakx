@@ -531,6 +531,81 @@ sub _ask_from_list {
 
     $list->grab_focus;
 }
+sub _ask_from_list_with_help {
+    my ($o, $title, $messages, $l, $help, $def) = @_;
+    my (undef, @okcancel) = ref $title ? @$title : $title;
+    my $list = new Gtk::List();
+    my ($first_time, $starting_word, $start_reg) = (1, '', "^");
+    my (@widgets, $timeout, $curr);
+
+    my $leave = sub { $o->{retval} = $l->[$curr]; Gtk->main_quit };
+    my $select = sub {
+	$list->select_item($_[1]);
+    };
+
+    ref $title && !@okcancel ?
+      $list->signal_connect(button_release_event => $leave) :
+      $list->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
+
+    $list->signal_connect(select_child => sub {
+	my ($w, $row) = @_;
+	$curr = $list->child_position($row);
+    });
+    $list->signal_connect(key_press_event => sub {
+        my ($w, $e) = @_;
+	my $c = chr $e->{keyval};
+
+	Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
+
+	if ($e->{keyval} >= 0x100) {
+	    &$leave if $c eq "\r" || $c eq "\x8d";
+	    $starting_word = '' if $e->{keyval} != 0xffe4; # control
+	} else {
+	    if ($e->{state} & 4) {
+		#- control pressed
+		$c eq "s" or return 1;
+		$start_reg and $start_reg = '', return 1;
+		$curr++;
+	    } else {
+		&$leave if $c eq ' ';
+
+		$curr++ if $starting_word eq '' || $starting_word eq $c;
+		$starting_word .= $c unless $starting_word eq $c;
+	    }
+	    my $word = quotemeta $starting_word;
+	    my $j; for ($j = 0; $j < @$l; $j++) {
+		 $l->[($j + $curr) % @$l] =~ /$start_reg$word/i and last;
+	    }
+	    $j == @$l ?
+	      $starting_word = '' :
+	      &$select(($j + $curr) % @$l);
+
+	    $w->{timeout} = $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 } );
+	}
+	1;
+    });
+
+    $o->{ok_clicked} = $leave;
+    $o->{cancel_clicked} = sub { $o->destroy; die "ask_from_list cancel" }; #- make sure windows doesn't live any more.
+    gtkadd($o->{window},
+	   gtkpack($o->create_box_with_title(@$messages),
+		   gtkpack_(new Gtk::VBox(0,7),
+			    1, @$l > 15 ? gtkset_usize(createScrolledWindow($list), 200, min(350, $::windowheight - 60)) : $list,
+			    @okcancel || !ref $title ? (0, create_okcancel($o, @okcancel)) : ())
+		  ));
+    $o->show; #- otherwise the moveto is not done
+    my $tips = new Gtk::Tooltips;
+    my $toselect; map_index {
+	my $item = new Gtk::ListItem($_);
+	$list->append_items($item);
+	$tips->set_tip($item, $help->{$_}) if $help->{$_};
+	$item->show;
+	$toselect = $::i if $def && $_ eq $def;
+    } @$l;
+    &$select($toselect);
+
+    $list->grab_focus;
+}
 
 sub _ask_warn($@) {
     my ($o, @msgs) = @_;

@@ -28,7 +28,7 @@ use strict;
 =cut
 
 #-#####################################################################################
-use vars qw(%thedb %thedb_gsdriver %printer_type %printer_type_inv $printer_type_default @papersize_type %fields $spooldir @entries_db_short @entry_db_description %descr_to_db %db_to_descr);
+use vars qw(%thedb %thedb_gsdriver %printer_type %printer_type_inv $printer_type_default @papersize_type %fields $spooldir @entries_db_short @entry_db_description %descr_to_help %descr_to_db %db_to_descr);
 #-#####################################################################################
 
 =head2 Imports
@@ -355,16 +355,16 @@ sub read_printer_db(;$) {
 		SWITCH: {
 		      /GSDriver:\s*(\w*)/      and do { $entry->{GSDRIVER} = $1; last SWITCH };
 		      /Description:\s*{(.*)}/  and do { $entry->{DESCR}    = $1; last SWITCH };
-		      /About:\s*{(.*)}/        and do { $entry->{ABOUT}    = $1; last SWITCH };
-		      /About:\s*{(.*)/
-			and do
-			  {
-			      my $string = "$1\n";
-			      while (<DBPATH>) {
-				  /(.*)}/ and do { $entry->{ABOUT} = $string; last SWITCH };
-				  $string .= $_;
-			      }
-			  };
+		      /About:\s*{\s*(.*?)\s*}/ and do { $entry->{ABOUT}    = $1; last SWITCH };
+		      /About:\s*{\s*(.*?)\s*\\\s*$/
+			and do {
+			    my $string = $1;
+			    while (<DBPATH>) {
+				$string =~ /\S$/ and $string .= ' ';
+				/^\s*(.*?)\s*\\\s*$/ and $string .= $1;
+				/^\s*(.*?)\s*}\s*$/  and do { $entry->{ABOUT} = $string . $1; last SWITCH };
+			    }
+			};
 		      /Resolution:\s*{(.*)}\s*{(.*)}\s*{(.*)}/
 			and do { push @{$entry->{RESOLUTION} ||= []}, { XDPI => $1, YDPI => $2, DESCR => $3 }; last SWITCH };
 		      /BitsPerPixel:\s*{(.*)}\s*{(.*)}/
@@ -382,6 +382,7 @@ sub read_printer_db(;$) {
 
     @entries_db_short     = sort keys %printer::thedb;
     %descr_to_db          = map { $printer::thedb{$_}{DESCR}, $_ } @entries_db_short;
+    %descr_to_help        = map { $printer::thedb{$_}{DESCR}, $printer::thedb{$_}{ABOUT} } @entries_db_short;
     @entry_db_description = keys %descr_to_db;
     %db_to_descr          = reverse %descr_to_db;
 }

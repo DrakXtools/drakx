@@ -113,6 +113,35 @@ sub ask_from_list2($$$$;$) {
     $o->ask_from_listW($title, [ deref($message) ], $l, $def || $l->[0]);
 }
 
+sub ask_from_list_with_help_ {
+    my ($o, $title, $message, $l, $help, $def) = @_;
+    @$l == 0 and die '';
+    @$l == 1 and return $l->[0];
+    goto &ask_from_list2_with_help_;
+}
+
+sub ask_from_list_with_help {
+    my ($o, $title, $message, $l, $help, $def) = @_;
+    @$l == 0 and die '';
+    @$l == 1 and return $l->[0];
+    goto &ask_from_list2_with_help;
+}
+
+sub ask_from_list2_with_help_($$$$$;$) {
+    my ($o, $title, $message, $l, $help, $def) = @_;
+    untranslate(
+       ask_from_list_with_help($o, $title, $message, [ map { translate($_) } @$l ], $help, translate($def)),
+       @$l);
+}
+
+sub ask_from_list2_with_help($$$$$;$) {
+    my ($o, $title, $message, $l, $help, $def) = @_;
+
+    @$l > 10 and $l = [ sort @$l ];
+
+    $o->ask_from_list_with_helpW($title, [ deref($message) ], $l, $help, $def || $l->[0]);
+}
+
 sub ask_from_treelist {
     my ($o, $title, $message, $separator, $l, $def) = @_;
     $o->ask_from_treelistW($title, [ deref($message) ], $separator, [ sort @$l ], $def || $l->[0]);
