@@ -909,10 +909,8 @@ enum return_type ftp_prepare(void)
 
 			results = choose_mirror_from_list(http_proxy_host, http_proxy_port, "ftp", &answers[0], &answers[1]);
 
-			if (results != RETURN_OK) {
-				unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
+			if (results != RETURN_OK)
 				return ftp_prepare();
-			}
 		}
 
 		results = ask_from_entries_auto("Please enter the name or IP address of the FTP server, "
