@@ -1,3 +1,60 @@
+2001/03/24  dam's  <damien@mandrakesoft.com>
+
+	* tinyfirewall.pm: corrected bad exited. reincorporated some ugly code,
+	need fixing
+
+2001/03/24  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (copy_advertising): handle i18n'ed advertising
+
+	* modules.pm (read_stage1_conf): cleanup parport stuff obsolote in kernel
+	2.4
+
+2001/03/23  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: fixed screen id for Device to be present whenever the
+	same BusID is used.
+	added multiple tablet support (wacom), moved usb probe for mouse and
+	tablet
+	at the beginning.
+
+	* printerdrake.pm: Do not ask to configure a printer if standalone,
+	previously only for embended.
+
+	* Xconfig.pm: fixed typo for wacom.
+	added multiple tablet support (wacom), moved usb probe for mouse and
+	tablet
+	at the beginning.
+
+	* mouse.pm, detect_devices.pm, install_steps_gtk.pm, install2.pm: added
+	multiple tablet support (wacom), moved usb probe for mouse and tablet
+	at the beginning.
+
+2001/03/23  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive.pm (ask_from_listf_no_check): fix the fix fix fix
+	(ask_from_listf_no_check): fix the fix fix
+
+	* common.pm (formatError): created
+
+	* network.pm (configureNetworkIntf): gray "IP address" and "Netmask" in
+	DHCP/BOOTP
+
+	* diskdrake.pm (try): format the error (no more "at line ...")
+	(Add2LVM): "new" was not i18n'ed
+
+	* install_steps_interactive.pm (exitInstall): no "cancel" button
+
+	* partition_table.pm: add Empty to bad_types
+
+	* fsedit.pm (change_type): When changing a partition type from ext2fs to
+	Linux RAID
+	(or LVM), the mount point should be removed.
+
+2001/03/23  siegel
+
+	* share/po/de.po: new german version
+
 2001/03/23  dam's  <damien@mandrakesoft.com>
 
 	* tinyfirewall.pm: corrected bad translation
