@@ -664,7 +664,7 @@ sub build_backup_files {
 	#ssh_client();
     }
     if (($where_net_ftp && !$daemon) || ($daemon && $ftp_daemon)) {
-	$results .= _("file list send by FTP : $_\n ")  foreach @file_list_to_send_by_ftp;
+	$results .= _("file list send by FTP : %s\n ", $_)  foreach @file_list_to_send_by_ftp;
 	build_backup_ftp_status();
 	ftp_client();
     }
@@ -1643,12 +1643,12 @@ sub system_state {
         @list_other and $system_state .= "\t\t$_\n" foreach @list_other;
         $where_hd and $system_state .= _("\n- Save on Hard drive on path : %s\n", $save_path);
 	$where_net_ftp and $system_state .= _("\n- Save on FTP on host : %s\n", $host_name);
-	$where_net_ftp and $system_state .= _("\t\t user name: $login_user\n\t\t on path: $host_path \n");
+	$where_net_ftp and $system_state .= _("\t\t user name: %s\n\t\t on path: %s \n", $login_user, $host_path);
 	$system_state .= _("\n- Options:\n");
 	$backup_sys or $system_state .= _("\tDo not include System Files\n");
 	if ($comp_mode) { $system_state .= _("\tBackups use tar and bzip2\n"); }
 	else { $system_state .= _("\tBackups use tar and gzip\n"); }   
-	$system_state .= _("\n- Daemon ($when_space) include :\n");
+	$system_state .= _("\n- Daemon (%s) include :\n", $when_space);
 	$hd_daemon and $system_state .= _("\t-Hard drive.\n");    
 	$cd_daemon and $system_state .= _("\t-CDROM.\n");    
 	$ftp_daemon and $system_state .= _("\t-Network by FTP.\n");    
