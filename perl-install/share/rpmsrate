@@ -166,7 +166,8 @@ NETWORKING_REMOTE_ACCESS
     2 rsh telnet vnc-doc vnc-java
     1 sftp
   SERVER
-    5 telnet-server
+    5 openssh-server
+    1 telnet-server
 
 NETWORKING_WWW
   5 lynx
@@ -299,8 +300,8 @@ SERVER
   3 intimed mcserv nscd tftp tftp-server anonftp dhcp gated imap pidentd
     postfix rdate routed samba wu-ftpd bind bootparamd caching-nameserver
     cleanfeed timed ucd-snmp xntp3 leafnode rsh-server squid sympa vnc-server
-    am-utils cvsweb finger-server heartbeat jabber mars-nwe openssh-server
-    telnet-server inews portsentry XFree86-Xvfb XFree86-Xnest webmin
+    am-utils cvsweb finger-server heartbeat jabber mars-nwe 
+    inews portsentry XFree86-Xvfb XFree86-Xnest webmin
   5 NIS ypbind
 
 CONFIG
