@@ -98,13 +98,13 @@ Do you have this feature?")) or return;
 
     $norm = $in->ask_from_list('', N("What norm is your TV using?"), [ 'NTSC', 'PAL' ], $norm) or return;
 
-    configure_FB_TVOUT({ norm => $norm });
+    configure_FB_TVOUT($in->do_pkgs, { norm => $norm });
 }
 
 sub configure_FB_TVOUT {
-    my ($use_FB_TVOUT) = @_;
+    my ($do_pkgs, $use_FB_TVOUT) = @_;
 
-    my $raw_X = Xconfig::default::configure();
+    my $raw_X = Xconfig::default::configure($do_pkgs);
     return if is_empty_array_ref($raw_X);
 
     $raw_X->set_monitors({ HorizSync => '30-50', VertRefresh => ($use_FB_TVOUT->{norm} eq 'NTSC' ? 60 : 50) });

@@ -169,7 +169,7 @@ sub configure_everything_or_configure_chooser {
     }
 
     if (is_empty_array_ref($raw_X)) {
-	$raw_X = Xconfig::default::configure($o_keyboard, $o_mouse);
+	$raw_X = Xconfig::default::configure($in->do_pkgs, $o_keyboard, $o_mouse);
 	Xconfig::main::configure_everything($in, $raw_X, $in->do_pkgs, $auto, $options) or return;
     } else {
 	Xconfig::main::configure_chooser($in, $raw_X, $in->do_pkgs, $options) or return if !$auto;

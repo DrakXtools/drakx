@@ -9,7 +9,7 @@ sub xconf {
     log::l('automatic XFree configuration');
     
     require Xconfig::default;
-    $o->{raw_X} = Xconfig::default::configure();
+    $o->{raw_X} = Xconfig::default::configure(do_pkgs_standalone->new);
     
     require Xconfig::main;
     require do_pkgs;

@@ -784,7 +784,7 @@ sub automatic_xconf {
 	local $o->{mouse}{device} = 'mouse';
 
 	require Xconfig::default;
-	$o->{raw_X} = Xconfig::default::configure({ KEYBOARD => 'uk' }, $o->{mouse}); #- using uk instead of us for now to have less warnings
+	$o->{raw_X} = Xconfig::default::configure(class_discard->new, { KEYBOARD => 'uk' }, $o->{mouse}); #- using uk instead of us for now to have less warnings
     
 	require Xconfig::main;
 	require class_discard;

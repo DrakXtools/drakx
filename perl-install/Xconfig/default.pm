@@ -10,7 +10,7 @@ use mouse;
 
 
 sub configure {
-    my ($o_keyboard, $o_mouse) = @_;
+    my ($do_pkgs, $o_keyboard, $o_mouse) = @_;
 
     my $keyboard = $o_keyboard || keyboard::read();
     my $mouse = $o_mouse || do {
@@ -24,14 +24,15 @@ sub configure {
     $raw_X->add_load_module($_) foreach qw(dbe v4l extmod type1 freetype);
 
     config_keyboard($raw_X, $keyboard);
-    config_mouse($raw_X, $mouse);
+    config_mouse($raw_X, $do_pkgs, $mouse);
 
     $raw_X;
 }
 
 sub config_mouse {
-    my ($raw_X, $mouse) = @_;
+    my ($raw_X, $do_pkgs, $mouse) = @_;
     mouse::set_xfree_conf($mouse, $raw_X);
+    mouse::various_xfree_conf($do_pkgs, $mouse);
 }
 
 sub config_keyboard {
