@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 23mdk
+Release: 24mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -303,6 +303,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Mar 14 2003 Pixel <pixel@mandrakesoft.com> 9.1-24mdk
+- fix XFdrake handling NVidia proprietary drivers
+
 * Thu Mar 13 2003 Till Kamppeter <till@mandrakesoft.com> 9.1-23mdk
 - printerdrake: Fixed bug #417: '$' character in printer URI was not
   correctly handled.
