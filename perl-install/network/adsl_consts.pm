@@ -21,6 +21,8 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 30,
+                   Encapsulation => 6,
+                   method => 'pppoa',
                   },
 
                   N("Belgium") . "|Tiscali BE" =>
@@ -28,6 +30,7 @@ our %adsl_data = (
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
+                   method => 'pppoa',
                    dnsServer2 => '212.35.2.1',
                    dnsServer3 => '212.35.2.2',
                    DOMAINNAME2 => 'tiscali.be',
@@ -128,7 +131,8 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 64,
-                   Encapsulation => 1,
+                   Encapsulation => 3,
+                   method => 'pppoe',
                   },
 
                   N("Germany") . "|Deutsche Telekom (DT)" =>
@@ -197,6 +201,7 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 23,
+                   Encapsulation => 1,
                   },
                   
                   N("Spain") . "|Retevision " =>
