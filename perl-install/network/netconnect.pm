@@ -43,28 +43,10 @@ sub detect {
 
 sub pre_func {
     my ($text) = @_;
-    $in->isa('interactive_gtk') or return;
+    $in->isa('interactive::gtk') or return;
     $::Wizard_no_previous = 1;
-    if ($::isStandalone) {
-	$::Wizard_splash = 1;
-	require ugtk2;
-	ugtk2->import(qw(:wrappers :helpers));
-	my $W = ugtk2->new(N("Network Configuration Wizard"));
-	gtkadd($W->{window},
-	       gtkpack_(new Gtk2::VBox(0, 0),
-			1, write_on_pixmap(gtkcreate_img("drakconnect_step"), #BUG: write_on_pixmap is in my_gtk only, not in ugtk2 !!!
-					   20,200,
-					   N("We are now going to configure the %s connection.", translate($text)),
-					  ),
-			0, $W->create_okcancel(N("OK"))
-		       )
-	      );
-	$W->main;
-	$::Wizard_splash = 0;
-    } else {
-	#- for i18n : %s is the type of connection of the list: (modem, isdn, adsl, cable, local network);
-	$in->ask_okcancel(N("Network Configuration Wizard"), N("\n\n\nWe are now going to configure the %s connection.\n\n\nPress OK to continue.", translate($text)), 1);
-    }
+    #- for i18n : %s is the type of connection of the list: (modem, isdn, adsl, cable, local network);
+    $in->ask_okcancel(N("Network Configuration Wizard"), N("\n\n\nWe are now going to configure the %s connection.\n\n\nPress OK to continue.", translate($text)), 1);
     undef $::Wizard_no_previous;
 }
 
