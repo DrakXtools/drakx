@@ -129,6 +129,8 @@ sub zero_MBR_and_dirty {
 #- ugly stuff needed mainly for Western Digital IDE drives
 #- try writing what we've just read, yells if it fails
 #- testing on last sector of head #0 (unused in 99% cases)
+#-
+#- return false if the device can't be written to (especially for Smartmedia)
 sub test_for_bad_drives {
     my ($hd) = @_;
 
@@ -136,7 +138,7 @@ sub test_for_bad_drives {
     my $sector = $hd->{geom}{sectors} - 1;
     
 
-    local *F; openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
+    local *F; openit($hd, *F, 2) or return;
 
     my $seek = sub {
 	c::lseek_sector(fileno(F), $sector, 0) or die "seeking to sector $sector failed";
@@ -152,6 +154,7 @@ sub test_for_bad_drives {
 _("Something bad is happening on your drive. 
 A test to check the integrity of data has failed. 
 It means writing anything on the disk will end up with random trash");
+    1;
 }
 
 1;

@@ -948,7 +948,9 @@ sub getHds {
 	$o->setupSCSI; #- ask for an unautodetected scsi card
 	goto getHds;
     }
-    $::testing or partition_table_raw::test_for_bad_drives($_) foreach @$hds;
+    if (!$::testing) {
+	@$hds = grep { partition_table_raw::test_for_bad_drives($_) } @$hds;
+    }
 
     $ok = fsedit::verifyHds($hds, $flags->{readonly}, $ok)
         if !($flags->{clearall} || $flags->{clear});
