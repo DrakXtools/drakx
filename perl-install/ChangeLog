@@ -1,19 +1,1040 @@
-2000-11-06  Pablo Saratxaga <pablo@mandrakesoft.com>
+2000/12/19  dam's  <damien@mandrakesoft.com>
 
-	* keyboard.pm: added QWERTY and "programmers" layouts for Czech and
-	Slovak keyboards
+	* standalone/pixmaps/logo1.xpm, standalone/pixmaps/px3.xpm,
+	standalone/pixmaps/draknet4.xpm, standalone/pixmaps/draknet1.xpm,
+	standalone/pixmaps/modem.xpm, standalone/pixmaps/logo2.xpm,
+	standalone/pixmaps/util6.gif, standalone/pixmaps/unknown.xpm,
+	standalone/pixmaps/drakgw.xpm, standalone/pixmaps/px4.xpm,
+	standalone/pixmaps/draknet5.xpm, standalone/pixmaps/px1.xpm,
+	standalone/pixmaps/draknet2.xpm, standalone/pixmaps/logo3.xpm,
+	standalone/pixmaps/util7.gif, standalone/pixmaps/port.xpm,
+	standalone/pixmaps/draknet.xpm, standalone/pixmaps/ethernet.xpm,
+	standalone/pixmaps/isdn.xpm, standalone/pixmaps/px2.xpm,
+	standalone/pixmaps/draknet3.xpm: added control-center.
 
-2000-10-19  DrakX <install@linux-mandrake.com>
+2000/12/19  Pixel  <pixel@mandrakesoft.com>
 
-	* snapshot uploaded
+	* modules.pm: when loading /snd-card-/ module, load snd-pcm-oss
 
-2000-10-17  DrakX <install@linux-mandrake.com>
+	* unused/christmas-karaoke.patch: Happy Christmas :)
 
-	* snapshot uploaded
+	* install_any.pm: spawnShell: set DISPLAY, just in case :)
 
-2000-10-16  Pablo Saratxaga <pablo@mandrakesoft.com>
+	* install2.pm: set PATH before doing spawnShell
 
-	* standalone/keyboarddrake,keyboard.pm: corrected BackSpace setting 
+	* Makefile: /usr/lib/X11 now exists on non-sparc (was only for sparc)
+
+2000/12/18  dam's  <damien@mandrakesoft.com>
+
+	* interactive_gtk.pm: added embedded support for control-center
+	corrected embedded support.
+	new control center and related
+
+	* netconnect.pm: corrected typo
+	corrected typo
+
+	* standalone/drakxservices, standalone/control-center, ChangeLog,
+	standalone/XFdrake, standalone/draknet2, standalone/adduserdrake,
+	standalone/drakboot: new control center and related
+
+	* install_gtk.pm: added firewall support
+
+	* install2.pm: included firewall handling
+	changed firewall comportement
+
+	* install_steps_interactive.pm: changed firewall comportement
+
+	* modules.pm: corrected bad mergeinconf
+
+2000/12/18  Pixel  <pixel@mandrakesoft.com>
+
+	* Makefile, share/keymaps_generate: tar and bzip2 is cfj/xfj and no more
+	cfI/xfI
+	remove isdndb.net
+
+2000/12/16  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/mousedrake, standalone/drakgw: use ldetect-lst
+
+	* Makefile.drakxtools: fix daminetsex
+	use ldetect-lst
+	pci_probing now done by libldetect
+	config files moved in package ldetect-lst
+
+	* share/list: use ldetect-lst
+	pci_probing now done by libldetect
+	config files moved in package ldetect-lst
+
+	* any.pm: fix daminetsex
+
+	* modules.pm, live_install, install2.pm, standalone/lspcidrake, pkgs.pm,
+	mouse.pm: use ldetect-lst for usb => now auto detects mice types :)
+
+	* c/stuff.xs.pm, detect_devices.pm: use ldetect-lst for usb => now auto
+	detects mice types :)
+	use ldetect-lst
+	pci_probing now done by libldetect
+	config files moved in package ldetect-lst
+
+	* Makefile.config: fix daminetsex
+	use ldetect-lst
+
+	* Makefile: use ldetect-lst for usb => now auto detects mice types :)
+	use ldetect-lst
+
+	* netconnect.pm, share/CardsNames, c/Makefile.PL, Xconfigurator_new.pm,
+	Xconfigurator.pm, share/Cards+, share/MonitorsDB, share/isdndb.net,
+	share/Cards2CardsNames: pci_probing now done by libldetect
+	config files moved in package ldetect-lst
+
+2000/12/15  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm: Cards+ and CardsNames are moved to ldetect-lst
+
+	* install_steps.pm: clean all unneeded stuff
+
+2000/12/14  dam's  <damien@mandrakesoft.com>
+
+	* any_new.pm, netconnect_new.pm: preparing for big jump.
+
+	* netconnect.pm: Big jump. The *_new.pm are replaced by *.pm
+	Everything should work, but you better test :)
+
+	* standalone/control-center: big improvement and cosmetic changes
+	a lot of improvement. Is able to launch multiples soft passing in
+	arguments.
+	new file. Its location should change soon.
+
+	* any.pm: Big jump. The *_new.pm are replaced by *.pm
+	Everything should work, but you better test :)
+	corrected typo.
+
+2000/12/14  Pixel  <pixel@mandrakesoft.com>
+
+	* share/compssList: obsoleted by rpmsrate
+
+	* share/rpmsrate: obsoletes compssList
+
+	* share/compssUsers, install_steps.pm, install_steps_interactive.pm,
+	Makefile, install_steps_gtk.pm, install2.pm, pkgs.pm, install_any.pm:
+	move from compssList to rpmsrate
+
+	* Newt/Newt.xs: cleanup (use of alloca to pass parameters)
+
+2000/12/13  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/it.po: updated Italian file
+
+2000/12/12  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: typo + if firewall, don't display 'disable network'
+
+	* standalone/draknet2: new version... still working on it
+
+	* ChangeLog: commit
+
+	* share/themes-mdk-Firewall.rc: added firewall theme
+
+	* modules.pm: my fault, corrected renaud's patch incorporation
+
+	* share/logo-mandrake-Firewall.xpm: new logo
+
+2000/12/12  François Pons  <fpons@mandrakesoft.com>
+
+	* share/list: added packdrake.pm as packdrake has been splited.
+
+	* pkgs.pm: fixed versionCompare to always return number. added checking of
+	version to
+	select obsoletes on upgrade.
+
+2000/12/11  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: Radeon uses 3D now.
+
+	* lang.pm: fixed write_langs for upgrade.
+	i18n sucking fixes.
+
+	* Xconfigurator.pm: Radeon uses 3D hw accel theoritically now.
+
+2000/12/09  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* lang.pm: Added configuration of Vietnamese input server
+
+2000/12/09  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/adduserdrake: remove debugging code
+
+	* install2.pm (selectInstallClass): give $clicked to selectInstallClass
+
+	* interactive_newt.pm (ask_from_entries_refW): reset all hidden entries to
+	null in case of error
+	on hidden entry cuz newt doesn't display null entries, disturbing
+
+	* install_steps_interactive.pm (formatMountPartitions): the format
+	partition dialog created at first use,
+	so that it doesn't appear if no partitions are formatted.
+	(selectInstallClass): ensure expert choice is kept if it was prechosen
+	(selectInstallClass): if expert pre-chosen, ensure expert is kept
+
+	* interactive_gtk.pm, install_steps.pm: small renicing
+
+2000/12/08  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: fixed bug in list of packages provided by another one.
+
+2000/12/08  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/pt_BR.po, share/po/no.po, share/po/DrakX.pot, share/po/es.po,
+	share/po/fr.po, share/po/wa.po, share/po/da.po, share/po/de.po,
+	share/po/az.po, share/po/tr.po: updated Brazilian file
+
+2000/12/08  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm (main): warn if VERSION file doesn't exist
+	(formatPartitions): call rotate_logs after mounting the partitions
+
+	* mouse.pm (write_conf): fix to make make test_pms happy
+
+	* install_steps.pm (exitInstall): save the report.bug in /root/report.bug
+
+	* any.pm (rotate_logs): created, rotates ddebug.log and install.log in
+	/root
+
+	* ftp.pm (new): retry in case of ftp connection/login
+
+	* commands.pm: report_bug: created, returns a string
+
+2000/12/07  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: corrected ADSL connection choice.
+	corrected typo
+
+2000/12/06  dam's  <damien@mandrakesoft.com>
+
+	* install2.pm: erare humanum es
+	firewall begins to infect the install :).
+	new meta_class.
+
+	* share/logo-mandrake-Firewall.xpm: aded logo for firewall
+
+	* install_gtk.pm: corrected errors
+	left pixmap centered if firewall
+	improved the firewall theme.
+	errare humanum es
+	firewall infects the install.
+	The logo is changed if firewall.
+
+2000/12/06  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/keyboarddrake: add possibility to use keyboarddrake
+	non-interactive (aka give the keyboard as
+	first parameter)
+
+	* lang.pm, install_steps.pm, install_steps_interactive.pm, install2.pm,
+	install_any.pm: adapt to the fact that RPM_INSTALL_LANG is obsoloted.
+	Now rpm uses %_install_langs in /etc/rpm/macros
+
+2000/12/05  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: final fixes to versionCompare to make sure no deadlock can
+	occurs.
+
+	* Xconfigurator.pm: restored Matrox G200/G400 hw 3d accel configuration.
+
+2000/12/05  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/pt_BR.po, share/po/pl.po, share/po/da.po, share/po/fi.po,
+	share/po/es.po: updated several pofiles
+
+2000/12/04  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm: use isCdNotEjectable.
+
+	* common.pm: added function isCdNotEjectable.
+
+	* share/Cards+: SiS620 card are said to be unsupported by XF4.
+
+	* pkgs.pm: load only one hdlist in memory if CD is not ejectable (low
+	memory).
+	fixed compareVersion for deadlock. removed silly CODE print on deporder
+	problems.
+
+	* Xconfigurator.pm: add Options sw_cursor for SiS 6326 in XF3 mode.
+
+2000/12/03  dam's  <damien@mandrakesoft.com>
+
+	* mouse.pm: incorporated cmodifications in the firewall branch
+
+	* netconnect.pm: netconnect_new > netconnect.pm
+
+	* netconnect_consts.pm: incorporated in the firewall branch.
+
+	* standalone/draknet2: incoporated in the firewall branch
+
+	* any_new.pm: any_new > any, so we remove it now.
+
+	* netconnect_new.pm: netconnect_new > netconnect, so we remove it now.
+	incorporated in the firewall branch
+
+	* modules.pm: incorporated modifications to the firewall branch. Hope they
+	won't break anything...
+
+2000/12/02  dam's  <damien@mandrakesoft.com>
+
+	* share/po/az.po: correction in firewall incorporated
+
+	* ChangeLog: first attempt ro build the firewall install
+
+	* standalone/mousedrake: incorporated in the firewall branch
+
+	* share/po/ru.po, share/po/no.po, share/po/sk.po: correction incorporated
+	in the firewall branch
+
+2000/11/28  dam's  <damien@mandrakesoft.com>
+
+	* modules.pm: included reno's patches. Now should work without kudzu.
+	branch to build the firewall install.
+
+	* standalone/pixmaps/port.xpm, standalone/pixmaps/.xvpics/px4.xpm,
+	standalone/pixmaps/ethernet.xpm, standalone/pixmaps/.xvpics/px1.xpm,
+	standalone/pixmaps/px2.xpm, standalone/pixmaps/unknown.xpm,
+	standalone/pixmaps/.xvpics/px3.xpm, standalone/pixmaps/px4.xpm,
+	standalone/pixmaps/px1.xpm, standalone/pixmaps/.xvpics/px2.xpm,
+	standalone/pixmaps/px3.xpm, standalone/pixmaps/modem.xpm,
+	standalone/pixmaps/isdn.xpm: Initial revision
+	branch to build the firewall install.
+
+	* partition_table_dos.pm, share/po/bg.po, share/po/sr.po,
+	share/template.in/cdrom.kdelnk.in,
+	share/template.in/cdrom.fsdev.kdelnk.in, share/po/hr.po, c/silo.c,
+	Makefile, share/consolefonts/lat0-sun16,
+	share/themes/DarkMarble-check_off.png,
+	share/themes/marble3d-button_def.png, share/locales.tar.bz2.sparc,
+	do_resize_fat, share/po/wa.po, share/po/is.po,
+	share/themes/DarkMarble-button3_out_prelight.png, resize_fat/main.pm,
+	class_discard.pm, .cvsignore, share/step-orange.xpm, share/reload.xpm,
+	install_interactive.pm, c/README, Xconfig.pm, share/themes.rc,
+	share/themes/marble3d-bg1.png, perl2fcalls, share/themes-blackwhite.rc,
+	share/themes-blueHeart.rc, pkgs.pm, keyboard.pm,
+	share/rpm-installed.xpm, share/po/gl.po, share/po/lv.po,
+	standalone/icons/ftout.xpm, Makefile.drakxtools, http.pm,
+	share/step-green-click.xpm, partition_table_sun.pm,
+	share/themes/focus.png, share/keymaps_generate, lang.pm, verify_c,
+	share/po/.cvsignore, share/ftin.xpm, standalone/draksec,
+	resize_fat/info_sector.pm, share/compssUsers, share/step-orange-on.xpm,
+	Makefile.config, share/list.sparc, share/po/hu.po, run_program.pm,
+	share/themes/marble3d-button4.png, share/rpm-unselected.xpm,
+	share/list.i386, netconnect.pm, share/themes/DarkMarble-button3_out.png,
+	c/md5_crypt.c, share/themes/mdk-toggle_on.png, partition_table.pm,
+	standalone/livedrake, share/diskdrake.rc,
+	share/themes/DarkMarble-check_on.png, standalone/draknet,
+	share/po/br.po, Newt/typemap, share/themes/blueHeart-button2.png,
+	share/po/ro.po, share/list, share/po/cs.po, share/po/be.po,
+	share/po/sp.po, share/step-orange-click.xpm, modparm.pm,
+	share/step-green.xpm, share/rpm-base.xpm,
+	share/themes/marble3d-check1.png, crypto.pm, share/po/eu.po,
+	share/themes/marble3d-button1.png, c/stuff.pm, install_steps.pm,
+	share/Cards2CardsNames, Newt/Makefile.PL,
+	share/themes/mdk-Desktop-bg.png, netconnect_consts.pm, share/po/id.po,
+	share/themes/mdk-check_on.png, share/po/fi.po, share/po/sk.po,
+	standalone/icons/findf.xpm, share/po/lt.po,
+	share/themes/mdk-check_off.png, fs.pm, c/.cvsignore,
+	share/themes/mdk-toggle_off.png, share/po/ca.po, timezone.pm,
+	detect_devices.pm, share/consolefonts/ruscii_8x16, diskdrake.pm,
+	standalone/icons/reload.xpm, share/rpm-selected.xpm, resize_fat/io.pm,
+	Newt/Newt.xs, Newt/.cvsignore, install2, share/po/pt_BR.po,
+	share/themes-marble3d.rc, resize_fat/fat.pm, sbus_probing/main.pm,
+	share/template.in/floppy.fsdev.kdelnk.in, printer.pm, share/po/it.po,
+	resize_fat/.cvsignore, install_steps_interactive.pm,
+	share/themes/mdk-button4.png, live_install, standalone/draknet2,
+	any_new.pm, share/list.alpha, share/rpm-semiselected.xpm, c.pm,
+	share/logo-mandrake-Desktop.xpm, printerdrake.pm, network.pm,
+	share/step-red-on.xpm, share/themes-mdk.rc, share/po/validate.pl,
+	swap.pm, share/themes/blueHeart-button4.png, standalone/keyboarddrake,
+	g_auto_install, share/po/es.po, standalone/lspcidrake, share/po/de.po,
+	partition_table_mac.pm, standalone/mousedrake, devices.pm,
+	share/po/ru.po, resize_fat/c_rewritten.xs, share/po/cy.po,
+	share/themes/mdk-button1.png, netconnect_new.pm, install_any.pm,
+	share/po/nl.po, share/aliases, share/keyboards.tar.bz2, share/po/sv.po,
+	Newt/Av_CharPtrPtr.c, c/stuff.xs.pm, share/themes-DarkMarble.rc,
+	share/step-red.xpm, Newt/Av_CharPtrPtr.h, c/smp.c,
+	share/po/zh_CN.GB2312.po, commands.pm, standalone/icons/find.xpm,
+	perl2etags, share/po/Changelog, standalone/drakboot,
+	resize_fat/dir_entry.pm, share/fonts.tar.bz2, share/install.rc,
+	share/themes/blueHeart-button1.png, share/Cards+, share/po/uk.po,
+	share/MonitorsDB, share/template.in/Dos_.kdelnk.in,
+	standalone/printerdrake, services.pm, share/kmap2bkmap,
+	share/themes/blueHeart-button_def.png, share/po/az.po, share/po/tr.po,
+	common.pm, getpkgs_deps, standalone/drakxconf, share/ftout.xpm,
+	install_gtk.pm, Xconfigurator_consts.pm, share/consolefonts/lat2-sun16,
+	share/po/no.po, resize_fat/boot_sector.pm, share/CardsNames,
+	c/Makefile.PL, share/themes-mdk-Desktop.rc,
+	share/themes/blueHeart-brown_bg1.png, share/logo-mandrake.xpm,
+	share/consolefonts/Cyr_a8x16, standalone/netdrake, standalone/drakgw,
+	share/po/sl.po, standalone/rpmdrake, share/makedev.sh,
+	share/themes/DarkMarble-button3_in_prelight.png, share/themes-blue.rc,
+	install_steps_newt.pm, resize_fat/Makefile.PL, partition_table_empty.pm,
+	my_gtk.pm, share/po/i18n_compssUsers, install2.pm, share/compssList,
+	share/po/fr.po, share/themes/DarkMarble-button3_in.png,
+	standalone/icons/ftin.xpm, share/modparm.lst, raid.pm,
+	standalone/diskdrake, share/po/ko.po,
+	share/template.in/zip.fsdev.kdelnk.in, share/compssUsers.desktop,
+	share/po/ja.po, any.pm, share/isdndb.net,
+	share/template.in/floppy.kdelnk.in, share/step-green-on.xpm,
+	share/step-red-click.xpm, share/po/Makefile, help.pm,
+	share/po/zh_TW.Big5.po, c/sbus.c, genmodparm, share/po/pl.po,
+	share/themes-savane.rc, install_steps_stdio.pm, share/po/th.po,
+	loopback.pm, resize_fat/any.pm, share/po/el.po, install_steps_gtk.pm,
+	Newt/Newt.pm, Xconfigurator.pm, interactive_gtk.pm,
+	standalone/drakxservices, resize_fat/Makefile, fsedit.pm,
+	interactive_stdio.pm, live_install2, resize_fat/directory.pm,
+	share/po/pt.po, install_steps_auto_install.pm, share/po/DrakX.pot,
+	share/themes/mdk-bg.png, share/list.ppc, share/po/ga.po, share/po/et.po,
+	share/keymaps.tar.bz2, partition_table_bsd.pm, c/md5.c, share/help.xpm,
+	share/themes/marble3d-check2.png, ftp.pm, c/md5.h,
+	standalone/adduserdrake, share/themes/marble3d-button2.png,
+	partition_table_raw.pm, share/template.in/zip.kdelnk.in,
+	share/locales.tar.bz2, standalone/icons/fileopen.xpm,
+	share/template.in/kppprc.in, ChangeLog, resize_fat/README, mouse.pm,
+	commands, standalone/XFdrake, share/gconv.tar.bz2, share/po/eo.po,
+	interactive.pm, log.pm, share/themes/DarkMarble-gloom2.png,
+	interactive_newt.pm, share/po/da.po, resize_fat/c_rewritten.pm,
+	bootloader.pm, share/po/af.po: branch to build the firewall install.
+
+2000/11/28  François Pons  <fpons@mandrakesoft.com>
+
+	* install2.pm: change upgrade section for keyboard.
+
+	* install_steps_gtk.pm: extended chooseSizeToInstall.
+
+	* install_steps.pm: updated comment.
+
+	* pkgs.pm: fixed misuse of map with values returing list which are indexed
+	afterward.
+
+	* install_any.pm: removed some more logs.
+
+	* keyboard.pm: keep track of unknown keyboard (for upgrade)
+
+	* install_steps_interactive.pm: modified def_mark to 59 (gl hw
+	acceleration level) and upgrade use this level
+	for newbies so.
+	make sure a recommended upgrade get the minimum and a little more (80).
+	choose default size according to a default mark (currently 49).
+
+2000/11/27  dam's  <damien@mandrakesoft.com>
+
+	* netconnect_consts.pm: added isdn Gazel card 10b5 1151
+
+2000/11/27  Pixel  <pixel@mandrakesoft.com>
+
+	* partition_table.pm (@bad_types): list of the different type of extended
+	partitions
+	(important_types): remove @bad_types from important_types
+
+2000/11/25  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ru.po: updated Russian file
+
+2000/11/24  dam's  <damien@mandrakesoft.com>
+
+	* mouse.pm: doc + split
+
+	* netconnect_new.pm: added depmod after having writed modules.conf
+
+	* standalone/mousedrake: splited
+
+2000/11/24  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: avoid .la files for selection.
+
+	* install_steps.pm: added missing portmap.
+
+2000/11/23  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draknet2: progressbar.
+
+2000/11/23  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm, install_steps_gtk.pm: updated with
+	structural change of pkgs.
+
+	* install_any.pm: removed some ugly logs.
+	updated with structural change of pkgs.
+
+	* install_steps.pm: added tempory fix for initscripts %post.
+	updated with structural change of pkgs.
+
+	* pkgs.pm: synced versionCompare() with rpmtools-2.1-4mdk.
+	removed ugly log on transaction.
+	added special case to avoid counting kernels space when upgrading
+	as these package are not upgraded (just installed).
+	Memory usage optimization, change structure of storing
+	package informations. lot of fork to make sure of
+	freeing memory by perl (no free on used hashes or arrays
+	usable by other than perl), now upgrade takes as much as
+	install which takes at least 0.5Mb less than before.
+
+2000/11/23  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/compssList: put all tina stuff to weight 0
+
+2000/11/21  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfig.pm: added more subtil upgrade from /etc/X11/XF86Config* files,
+	keep
+	wacom entries.
+
+	* Xconfigurator.pm: upgrade for XF86Config, take care of resolution and
+	depth wanted.
+
+	* install_steps.pm: always try to get default from /etc/X11/XF86Config
+	removing logs.
+
+	* pkgs.pm: cosmetic changes for upgrade, removing some logs.
+
+	* install_steps_interactive.pm: removed code to ask if take care of
+	/etc/X11/XF86Config* files.
+	added wait message during rebuild of rpm database as it takes some time.
+
+	* Xconfigurator_new.pm: WARNING
+
+2000/11/21  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/az.po: updated Azeri file
+
+2000/11/20  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: clean up as today filelist is no more.
+	use parsehdlist from rpmtools-2.1-3mdk or above instead of
+	perl code from DrakX forking to simulate a filelist server.
+	this increase performance by 100 to 150% on selection of
+	packages to upgrade.
+
+	* share/list: added parsehdlist.
+
+	* c/stuff.xs.pm: removed logs.
+
+2000/11/20  Pixel  <pixel@mandrakesoft.com>
+
+	* share/Cards+: add radeon
+
+	* install_steps_auto_install.pm (exitInstall): fix message
+
+	* install_steps.pm (afterInstallPackages): moved the
+	writeandclean_ldsoconf here
+
+	* fsedit.pm: add /var/ftp and /var/www in the list of propose mount-points
+
+2000/11/17  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_any.pm: add openuniverse to the list of gl apps
+
+2000/11/16  dam's  <damien@mandrakesoft.com>
+
+	* netconnect_new.pm: corrected isdn_get_{list, info}
+
+2000/11/16  François Pons  <fpons@mandrakesoft.com>
+
+	* share/list: include /usr/lib/rpm/macros else rpmlib gets crazy :-)
+
+	* modules.pm: tempory version for current glibc, a lot of module have been
+	removed due to
+	problem of stage1 increase in size when compiled with glibc-2.2 and
+	current
+	modutils.
+
+	* c/Makefile.PL: updated with rpmlib 4.
+
+	* c/stuff.xs.pm: completed something that seems to work almost correctly
+	at the first look
+	with rpmlib 4.
+
+2000/11/16  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/compssList: add netscape-german, thx to florin
+	isdn4k-utils gets same weight as isdn4net, thx to Florin
+
+2000/11/16  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/no.po: updated Norwegian file
+
+	* share/po/sk.po: updated Slovak file
+
+2000/11/15  dam's  <damien@mandrakesoft.com>
+
+	* netconnect_new.pm: added isdn_get_list and isdn_get_info
+	calls modules::write_conf to fill the modules.conf.
+
+	* Xconfigurator_new.pm: added to fork frontends backends. Not operationnal
+	at all for now.
+
+	* modules.pm: when loading a new module, add an alias for it, even in
+	standalone mode.
+
+2000/11/15  François Pons  <fpons@mandrakesoft.com>
+
+	* c/stuff.xs.pm: updated for rpm 4.
+
+	* pkgs.pm: rpmdepOrder again (for new TAGp)
+
+2000/11/15  Pixel  <pixel@mandrakesoft.com>
+
+	* c/Makefile.PL: add librpmio
+
+	* c/stuff.xs.pm: workaround for kernel-headers not in sync with glibc
+	(dev_t)
+
+2000/11/14  dam's  <damien@mandrakesoft.com>
+
+	* netconnect_new.pm: better structure for the ethx-driver.
+	added call to add_alias and write_conf
+
+	* standalone/draknet2: updated
+
+2000/11/14  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: removed foreach (<... which are eating memory
+	fork install on upgrade for searching trhough filelist, this saves
+	about 20Mb of memory before rpmlib transaction are started so its is
+	more than 2 times faster for upgrading a system, sorry it was
+	effectively
+	a machine two overloaded that makes the upgrade slower.
+	make rpmlib not to check size as DrakX should do it.
+	added special cases for selection of packages according to files, avoid
+	all kde-i18n packages if their locales-$lang is not selected, avoid
+	a -devel package if only one files is updated (typical for fixes on
+	package by moving files around).
+	
+	deactivated rpmdepOrder as it should be done directly in
+	depslist.ordered
+	file.
+	
+	fixed obsoletes which never run correctly, even if almost no package are
+	selected explicitely this way.
+	
+	added log during selection of packages to upgrade to keep a track of
+	what DrakX is doing.
+
+	* modules.pm, network.pm, netconnect.pm, common.pm, modparm.pm,
+	Xconfig.pm, commands.pm, lang.pm, fsedit.pm, detect_devices.pm,
+	printer.pm, Xconfigurator.pm: removed foreach (<... which are eating
+	memory
+
+2000/11/14  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/da.po: updated Danish file
+
+2000/11/13  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakgw: Integrate Till's patches for better work with Cups.
+
+2000/11/12  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/mousedrake: fix for bug #1350
+	(mousedrake dies with: Undefined subroutine &mouse::serial_ports_names)
+
+	* pkgs.pm (psUpdateHdlistsDeps): fixed an ugly typo (uses .cz2 for .cz and
+	.cz22 for
+	.cz2) that makes for than one CD install breaks :-(
+
+2000/11/11  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/cy.po, share/po/nl.po,
+	share/po/ja.po, share/po/wa.po, share/po/sv.po, share/po/is.po,
+	share/po/hu.po, share/po/zh_TW.Big5.po, share/po/it.po, share/po/id.po,
+	share/po/pl.po, share/po/fi.po, share/po/no.po,
+	share/po/zh_CN.GB2312.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/sl.po, share/po/br.po,
+	share/po/ca.po, share/po/gl.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/da.po, share/po/cs.po,
+	share/po/af.po: updated pot file
+
+2000/11/10  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draknet2: draknet2 : new version of draknet, post-install
+	only, uses only libDrakX backend, beautyfull
+
+	* netconnect_new.pm: completed adsl_conf_backend
+	corrected conf_network_card_backend : return interface and module
+	separately
+	splitted pppconfig.
+
+2000/11/10  François Pons  <fpons@mandrakesoft.com>
+
+	* share/po/fr.po: typo fixing
+
+	* printerdrake.pm: fixed wrong case for managing IP for remove CUPS server
+	updated typo for remote CUPS server configuration dialog
+
+2000/11/10  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/sk.po, share/po/lv.po: updated Latvian and Slovak files
+
+	* share/po/wa.po, share/po/da.po: updated Danish and Walloon files
+
+2000/11/10  Pixel  <pixel@mandrakesoft.com>
+
+	* c/stuff.xs.pm: initIMPS2 move where it should be (in non-C_RPM dependent
+	section)
+
+2000/11/09  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: added handling for 2 ethernet cards with the same module
+
+2000/11/09  François Pons  <fpons@mandrakesoft.com>
+
+	* share/po/fr.po: add some missing translation (mainly printer for CUPS
+	remote config)
+
+	* printer.pm: make sure to restart cups when cupsd.conf is modified.
+
+	* printerdrake.pm: fixed modification of BrowsePoll on a existing file.
+
+2000/11/08  dam's  <damien@mandrakesoft.com>
+
+	* netconnect_new.pm: updated
+
+2000/11/08  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: make sure class discarding do not destroy result
+
+	* pkgs.pm: added new function for selected or installed accessor on pkg
+	make sure package already installed for oem are marked as selected, as
+	some
+	code refer to this state to perform some actions (install_urpmi)
+
+	* install_steps.pm: fixed for urpmi again;
+
+	* printerdrake.pm: add management of BrowsePoll <ip>:<port> in
+	/etc/cups/cupsd.conf
+
+	* printer.pm: add minimal management of /etc/cups/cupsd.conf
+
+2000/11/08  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/MonitorsDB: Fixed Samsung SyncMaster 3Ne (bug #1136)
+
+2000/11/08  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/es.po: updated Spanish file
+
+2000/11/07  dam's  <damien@mandrakesoft.com>
+
+	* mouse.pm: now there are 8 ttyS* available for configuration. Used for
+	internal modem configuration that uses ttyS* > 3
+
+	* netconnect_new.pm: ttyS0 -> ttyS7 available for configuration
+	some doc
+
+2000/11/07  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: fixed text for card prefered in XFree 3.3 (RIVA128).
+
+	* install_steps_interactive.pm: use of install_any::boot_medium to avoid
+	listing medium used for boot
+
+	* install_any.pm: use of $boot_medium where the boot medium is used
+	(default 1)
+
+2000/11/07  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/Cards+: fix tseng server for ET4000 W32i, W32p thanks to
+	<sileryti@mail.com>
+
+2000/11/07  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm (main): in oem, configureX automatic
+	(main): $::oem is now global :-(  (needed in install_steps.pm)
+
+	* install_steps.pm (afterInstallPackages): give medium 'cdrom' to
+	install_urpmi in case of $::oem
+
+2000/11/06  dam's  <damien@mandrakesoft.com>
+
+	* netconnect_new.pm: backend/frontend fork complete
+
+	* any_new.pm: load_thiskind changed to load_thiskind_backend, the wait
+	function is passed by argument
+
+	* network.pm: configureNetwork2 commented.
+
+2000/11/06  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: created function for examining already installed package on
+	install (oem).
+
+	* install2.pm: add a flag to allow by default formating /
+
+	* install_steps.pm: conditionnal format of / and use already installed
+	packages if any on install.
+
+2000/11/06  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/MonitorsDB: added Hitachi CM753 contributed by Adam Julius
+	<ajulius@yahoo.com>
+
+2000/11/06  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/DrakX.pot, share/po/ru.po, share/po/uk.po: updated pot file
+	GRUB/LILO/SILO messages *must* be in ascii only. Changed cyrillic to
+	ascii transliteration for them
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/es.po,
+	share/po/fr.po, share/po/bg.po, share/po/ga.po, share/po/sr.po,
+	share/po/de.po, share/po/et.po, share/po/tr.po, share/po/eu.po,
+	share/po/az.po, share/po/pt_BR.po, share/po/hr.po, share/po/ko.po,
+	share/po/cy.po, share/po/nl.po, share/po/ja.po, share/po/wa.po,
+	share/po/sv.po, share/po/is.po, share/po/hu.po, share/po/zh_TW.Big5.po,
+	share/po/it.po, share/po/id.po, share/po/pl.po, share/po/fi.po,
+	share/po/no.po, share/po/zh_CN.GB2312.po, share/po/th.po,
+	share/po/el.po, share/po/sk.po, share/po/lt.po, share/po/sl.po,
+	share/po/br.po, share/po/ca.po, share/po/gl.po, share/po/lv.po,
+	share/po/eo.po, share/po/ro.po, share/po/da.po, share/po/cs.po,
+	share/po/af.po: updated pot file
+
+	* keyboard.pm, ChangeLog: added the 3 kbd layouts for CZ and SK kbds
+
+2000/11/06  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm (formatPartitions): formatMountPartitions done even in
+	upgrade
+	(main): set $o->{partitioning}{use_existing_root} in oem
+
+	* install_steps.pm (doPartitionDisksAfter): remove the mount_all which is
+	plain dumb
+	(doPartitionDisksAfter): fs::mount_all moved here
+	(doPartitionDisks): use $o->{partitioning}{use_existing_root}
+
+	* install_any.pm (use_root_part): fs::mount_all really removed
+	(use_root_part): fs::mount_all removed
+
+	* install_steps_interactive.pm (choosePartitionsToFormat): don't propose
+	already mounted partitions
+	(installCrypto): nicer layout
+
+2000/11/05  dam's  <damien@mandrakesoft.com>
+
+	* mouse.pm: changed 'IntelliMouse label' to 'Generic PS2 Wheel Mouse'
+
+2000/11/05  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/MonitorsDB: added LG StudioWorks520Si contributed by Yves Maniette
+	<yves@maniette.com>
+
+2000/11/01  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/eo.po: updated Esperanto file
+
+2000/10/31  dam's  <damien@mandrakesoft.com>
+
+	* netconnect_new.pm: continuing forking frontend - backend. adsl ist
+	nearly finished
+
+	* any_new.pm: added this file to fork frontends and backends in any.pm
+
+2000/10/30  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/compssList: heartbeat pixel wonderful un chien vaut mieux que deux
+	tu damsera
+
+2000/10/30  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/wa.po: updated Walloon file
+
+	* share/keyboards.tar.bz2: updated keyboards
+
+2000/10/30  Pixel  <pixel@mandrakesoft.com>
+
+	* lang.pm (load_po): backslash @ in po strings, otherwise the eval fails
+
+2000/10/28  dam's  <damien@mandrakesoft.com>
+
+	* netconnect_new.pm: new version of draknet. Splited frontends - backends
+
+2000/10/28  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/tr.po: updated Turkish file
+
+2000/10/27  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: remove the noising rpm output command line when loging
+	installed rpm
+	size (only usefull for live_update and just for conveniance).
+
+	* pkgs.pm: Make sure $meta_class is defined in readCompsUsers (for HTTP
+	hack)
+	before reading a compssUsers file.
+
+	* live_install: add VERSION in list of file that have to be symlinked.
+
+	* common.pm: list_skels returns list of existing directory and writeable.
+
+	* live_install2: Make sure to remove font path in /tmp/drakx before
+	exiting.
+
+2000/10/26  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/DrakX.pot, share/po/tr.po, share/po/it.po: updated Italian and
+	Turkish files
+
+2000/10/24  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/compssList: fortune-mod gets 10/0/10 on request from egil
+
+2000/10/24  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/pl.po: updated Polish file
+
+2000/10/23  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ca.po: updated Catalan file
+
+2000/10/23  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm, ChangeLog, diskdrake.pm: added some carriage returns
+	to please jl :)
+
+	* detect_devices.pm (floppies, probeall): add require "modules" as it
+	should be
+
+	* install_interactive.pm (partitionWizardSolutions): add "require
+	resize_fat::main" as it should be
+
+2000/10/22  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/compssList: linuxconf-gui got -1/-1/-1 while gnome-linuxconf has
+	74/0/74
+
+2000/10/21  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/uk.po, share/po/tr.po, share/po/az.po: updated Azeri, Turkish
+	and Ukrainian files
+
+2000/10/20  fabman
+
+	* share/po/es.po: updated
+
+2000/10/20  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/compssList: ntp to -1/-1/-1
+
+2000/10/19  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/compssList: put all packages requiring kde1-compat to 0 except
+	kisdn-free
+	aumix now gets a high weight (79) because it's required to save the
+	mixer
+	settings at shutdown
+
+2000/10/19  Pixel  <pixel@mandrakesoft.com>
+
+	* share/locales.tar.bz2: fix symlink zh_CN.GB2312 (was zh_CN.G23212)
+
+2000/10/19  tlb
+
+	* share/po/da.po: 100%, Troels Liebe Bentsen.
+
+2000/10/18  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/az.po: Added AZeri file
+
+	* share/po/no.po: updated Norwegian file
+
+2000/10/17  dam's  <damien@mandrakesoft.com>
+
+	* interactive_gtk.pm, netconnect.pm, netconnect_consts.pm: removed unused
+	code in ineractive_gtk
+	added some isdn card in pcitable
+	corrected typos, and made ISA isdn work
+
+2000/10/17  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/lv.po: updated Latvian file
+
+2000/10/16  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/ru.po, share/po/pt_BR.po, share/po/hr.po,
+	share/po/ko.po, share/po/cy.po, share/po/nl.po, share/po/ja.po,
+	share/po/wa.po, share/po/sv.po, share/po/is.po, share/po/hu.po,
+	share/po/zh_TW.Big5.po, share/po/it.po, share/po/id.po, share/po/pl.po,
+	share/po/fi.po, share/po/no.po, share/po/zh_CN.GB2312.po,
+	share/po/th.po, share/po/el.po, share/po/sk.po, share/po/lt.po,
+	share/po/sl.po, share/po/br.po, share/po/ca.po, share/po/gl.po,
+	share/po/lv.po, share/po/uk.po, share/po/eo.po, share/po/ro.po,
+	share/po/da.po, share/po/cs.po, share/po/af.po: updated pot file
+
+	* standalone/keyboarddrake, keyboard.pm, ChangeLog: corrected BackSpace
+	setting
+
+2000/10/16  Pixel  <pixel@mandrakesoft.com>
+
+	* detect_devices.pm (cdroms): fix the setting of scdX for ide burners
+
+	* share/compssList: sympa is -1 except for server
+
+	* keyboard.pm (write): small pixelization (neater now)
+
+	* install_steps.pm (installPackages): don't run ldconfig in g_auto_install
+
+2000/10/15  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/nl.po: updated Dutch file
+
+2000/10/14  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* lang.pm, keyboard.pm: small fix for Swedish locale
+
+	* share/po/DrakX.pot, share/po/es.po, share/po/bg.po, share/po/fr.po,
+	share/po/wa.po, share/po/de.po: updated Bulgarian file
+
+2000/10/13  François Pons  <fpons@mandrakesoft.com>
+
+	* partition_table_empty.pm: empty partition table as assumed only if the
+	MBR is really composed of only null chars.
+
+2000/10/13  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/compssList: added viavoicemenu
+
+2000/10/12  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm (ask_mntpoint_s): dqs
+
+2000/10/11  Pixel  <pixel@mandrakesoft.com>
+
+	* .cvsignore: ignore flog files
+
+	* install2.pm (main): test
+
+	* ChangeLog: qsdqsd
+
+	* install_steps_interactive.pm: * (selectKeyboard): set default
+	$o->{langs} to $o->{lang}
+
+2000/10/10  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakgw, ChangeLog: make only one call to urpmi in order to
+	install all the needed rpm's
+
+2000/10/10  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/no.po, share/po/es.po: updated Norwegian file
+
+	* share/po/pl.po: updated Polish file
+
+	* share/po/zh_CN.GB2312.po, share/po/zh_TW.Big5.po: updated Chinese file
+
+2000/10/10  tlb
+
+	* share/po/da.po: 99%.
 
 2000-10-10  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
