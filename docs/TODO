@@ -47,6 +47,8 @@ add fdisk using the zvt widget (taken in gnome-libs)
 
 ability to add nfs/weird_fs entries in fstab
 
+size of packages in crypto
+
 -to test--------------------------------------------------------------------------------
 what's lseek64?
 
@@ -159,6 +161,7 @@ XFdrake chooseResolutions with ask_from_list do not permit ``Show all''
 
 -hardware-------------------------------------------------------------------------------
 - with no floppy drive, mkbootdisk step fails badly
+- with bad floppy or write protected, mkbootdisk doesn't say anything
 - try detect_devices::floppies (and how are scsi floppies handled?)
 maybe: do a iotcl FDGETPRM to detect fd1, fd0.
 

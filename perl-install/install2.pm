@@ -46,7 +46,7 @@ my (%installSteps, @orderedInstallSteps);
   selectMouse        => [ __("Configure mouse"), 1, 1, '$::beginner', "selectInstallClass" ],
   selectKeyboard     => [ __("Choose your keyboard"), 1, 1, '', "selectInstallClass" ],
   miscellaneous      => [ __("Miscellaneous"), 1, 1, '$::beginner' ],
-  partitionDisks     => [ __("Setup filesystems"), 1, 0, '', "selectInstallClass" ],
+  partitionDisks     => [ __("Setup filesystems"), 1, 0, '$o->{lnx4win}', "selectInstallClass" ],
   formatPartitions   => [ __("Format partitions"), 1, -1, '', "partitionDisks" ],
   choosePackages     => [ __("Choose packages to install"), 1, -2, '$::beginner', "formatPartitions" ],
   doInstallStep      => [ __("Install system"), 1, -1, '', ["formatPartitions", "selectInstallClass"] ],
@@ -58,11 +58,11 @@ my (%installSteps, @orderedInstallSteps);
   setRootPassword    => [ __("Set root password"), 1, 1, '', "formatPartitions" ],
   addUser            => [ __("Add a user"), 1, 1, '' ],
 arch() !~ /alpha/ ? (
-  createBootdisk     => [ __("Create a bootdisk"), 1, 0, '', "doInstallStep" ],
+  createBootdisk     => [ __("Create a bootdisk"), 1, 0, '$::o->{lnx4win} && !$::expert', "doInstallStep" ],
 ) : (),
-  setupBootloader    => [ __("Install bootloader"), 1, 1, '', "doInstallStep" ],
+  setupBootloader    => [ __("Install bootloader"), 1, 1, '$::o->{lnx4win} && !$::expert', "doInstallStep" ],
   configureX         => [ __("Configure X"), 1, 1, '', ["formatPartitions", "setupBootloader"] ],
-  generateAutoInstFloppy => [ __("Auto install floppy"), 1, 1, '!$::corporate || !$::expert', "doInstallStep" ],
+  generateAutoInstFloppy => [ __("Auto install floppy"), 1, 1, '!$::expert || $o->{lnx4win}', "doInstallStep" ],
   exitInstall        => [ __("Exit install"), 0, 0, '$::beginner' ],
 );
     for (my $i = 0; $i < @installSteps; $i += 2) {

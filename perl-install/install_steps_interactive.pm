@@ -1026,7 +1026,7 @@ Do you want to try XFree 4.0?")) if $::expert;
 sub generateAutoInstFloppy($) {
     my ($o) = @_;
 
-    $::expert && $::corporate || $::g_auto_install or return;
+    $::expert || $::g_auto_install or return;
 
     my ($floppy) = detect_devices::floppies();
 
@@ -1047,6 +1047,7 @@ sub generateAutoInstFloppy($) {
     fs::mount($dev, "/floppy", "vfat", 0);
     substInFile { s/timeout.*//; s/^(\s*append)/$1 kickstart=floppy/ } "/floppy/syslinux.cfg";
 
+    unlink "/floppy/help.msg";
     output "/floppy/ks.cfg", install_any::generate_ks_cfg($o);
     output "/floppy/boot.msg", "\n0c",
 "!! If you press enter, an auto-install is going to start.

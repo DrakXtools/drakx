@@ -160,14 +160,14 @@ arch() =~ /^sparc/ ? (
 [ 'cdrom', {
 arch() !~ /^sparc/ ? (
   "sbpcd" => "SoundBlaster/Panasonic",
-  "aztcd" => "Aztech CD",
-  "gscd" => "Goldstar R420",
-#-  "isp16" => "ISP16/MAD16/Mozart", #- removed for space
+#-  "aztcd" => "Aztech CD",
+#-  "gscd" => "Goldstar R420",
+#-  "isp16" => "ISP16/MAD16/Mozart",
 #-  "mcd" => "Mitsumi", #- removed for space
-#-  "mcdx" => "Mitsumi (alternate)", #- removed for space
-  "optcd" => "Optics Storage 8000",
-  "cm206" => "Phillips CM206/CM260",
-  "sjcd" => "Sanyo",
+#-  "mcdx" => "Mitsumi (alternate)",
+#-  "optcd" => "Optics Storage 8000",
+#-  "cm206" => "Phillips CM206/CM260",
+#-  "sjcd" => "Sanyo",
   "cdu31a" => "Sony CDU-31A",
   "sonycd535" => "Sony CDU-5xx",
 ) : (),

@@ -196,7 +196,7 @@ sub doPartitionDisks {
 	} elsif ($@ =~ /not enough room/) {
 	    $o->ask_warn('', _("You don't have any enough room for Lnx4win"));
 	} else { return }
-	delete $o->{lnx4win};
+#-	delete $o->{lnx4win};
     }
     if ($::beginner && fsedit::is_one_big_fat($hds)) {
 	#- wizard
@@ -558,7 +558,7 @@ sub installPackages {
 	    $nb = $_[0];
 	    $total_size = $_[1]; $current_total_size = 0;
 	    $start_time = time();
-	    $msg->set(_("%d packages", $nb) . _(", %U MB", pkgs::correctSize($total_size / sqr(1024))));
+	    $msg->set(_("%d packages", $nb) . _(", %U MB", $total_size / sqr(1024)));
 	    $w->flush;
 	} elsif ($m =~ /^Starting installing package/) {
 	    $progress->update(0);

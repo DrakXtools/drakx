@@ -82,7 +82,7 @@ autoirpm autoirpm-icons numlock
   'zh_TW.Big5' => [ 'rxvt-CLE', 'fonts-ttf-big5' ],
 );
 
-@preferred = qw(perl-GTK postfix ghostscript-X vim-minimal kernel);
+@preferred = qw(perl-GTK postfix ghostscript-X vim-minimal kernel ispell-en);
 
 #- constant for small transaction.
 $limitMinTrans = 8;
