@@ -641,7 +641,7 @@ sub deselectFoundMedia {
     my $i = 0;
     my $totalsize = 0;
     foreach (@$hdlists) {
-	(my $cd) = $_->[3] =~ /\bCD ?(\d+)\b/;
+	(my $cd) = $_->[3] =~ /\bCD ?(\d+)\b/i;
 	if (!$cd || !@{$cdlist{$cd} || []}) {
 	    push @hdlist2, $_;
 	    $corresp[$i] = [ $i ];
@@ -659,7 +659,7 @@ sub deselectFoundMedia {
     }
     my @selection = (1) x @hdlist2;
     my $copy_rpms_on_disk = 0;
-    my $ask_copy_rpms_on_disk = $o->{method} !~ /-iso$/;
+    my $ask_copy_rpms_on_disk = $o->{method} !~ /iso/i;
     #- check available size for copying rpms from infos in hdlists file
     if ($ask_copy_rpms_on_disk && $totalsize >= 0) {
 	my (undef, $availvar) = install_any::getAvailableSpace_mounted('/var');
