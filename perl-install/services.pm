@@ -119,20 +119,20 @@ sub ask_install_simple {
 sub ask_install {
     my ($in, $prefix) = @_;
     my %root_services = (
-			 _("Printing") => [ qw(cups cupslpd lpr lpd oki4daemon hpoj cups-lpd ) ],
+			 _("Printing") => [ qw(cups cupslpd lpr lpd oki4daemon hpoj cups-lpd) ],
 			 _("Internet") => [ qw(httpd boa tux roxen ftp pftp tftp proftpd wu-ftpd pure-ftpdipsec proftpd-xinetd
                                                ipchains iptables ipvsadm isdn4linux ibod jabber jabber-icq adsl squid
-                                               portsentry prelude nessusd junkbuster radvd cddbp ippl iptoip jail.init ) ],
+                                               portsentry prelude nessusd junkbuster radvd cddbp ippl iptoip jail.init) ],
 			 _("File sharing") => [ qw(nfs nfslock smb nettalk netfs mcserv autofs amd
-                                                   venus.init auth2.init codasrv.init update.init swat ) ],
+                                                   venus.init auth2.init codasrv.init update.init swat) ],
 			 _("System") => [ qw(usb usbd pcmcia irda xinetd inetd kudzu harddrake apmd sound network xfs
                                              alsa functions halt kheader killall mandrake_everytime mandrake_firstime
                                              random rawdevices single keytable syslog crond medusa-init portmap acon
                                              anacron atd gpm psacct wine acpid numlock jserver sensors mosix bpowerd bpowerfail
                                              fcron powertweak.init ups syslog-ng cvs apcupsd) ],
 			 _("Remote Administration") => [ qw(sshd telnetd telnet rsh rlogin rexec webmin cfd heartbeat ldirectord
-                                                            iplog mon vncserver netsaint olympusd drakxtools_http ) ],
-#			 _("Network Client") => [ qw(ypbind nscd arpwatch fetchmail dnrd_rc diald rsync ) ],
+                                                            iplog mon vncserver netsaint olympusd drakxtools_http) ],
+#			 _("Network Client") => [ qw(ypbind nscd arpwatch fetchmail dnrd_rc diald rsync) ],
 #			 _("Network Server") => [ qw(named bootparamd ntpd xntpd chronyd postfix sendmail
 #                                                     imap imaps ipop2 ipop3 pop3s routed yppasswdd ypserv ldap dhcpd dhcrelay
 #                                                     hylafax innd identd rstatd rusersd rwalld rwhod gated
@@ -226,7 +226,7 @@ sub ask_standalone_gtk {
                                                "@$on_services" =~ /$service/ or push(@$on_services,$service)
                                            } else {
                                                @$on_services = grep(!/$service/, @$on_services)
-                                        }}), "@$on_services" =~ /$service/ )),
+                                        }}), "@$on_services" =~ /$service/)),
 		  map { my $a = $_;
                       gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button(_($a)),
                           clicked => sub { my $c = "service $service " . (lc($a) eq "start" ? "restart" : lc($a)) . " 2>&1"; local $_=`$c`; s/\033\[[^mG]*[mG]//g;
@@ -240,10 +240,10 @@ sub ask_standalone_gtk {
             0, gtkpack(gtkset_border_width(new Gtk::HBox(0,0),5), $W->create_okcancel)
             ))
 	  );
-    $b->signal_connect( motion_notify_event => sub { my ($w, $e) = @_;
+    $b->signal_connect(motion_notify_event => sub { my ($w, $e) = @_;
                                                                my ($ox, $oy) = $w->window->get_deskrelative_origin;
-                                                               $x = $e->{'x'}+$ox; $y = $e->{'y'}+$oy; });
-    $b->signal_connect( button_press_event => sub { $nopop->()});
+                                                               $x = $e->{'x'}+$ox; $y = $e->{'y'}+$oy });
+    $b->signal_connect(button_press_event => sub { $nopop->() });
     $::isEmbedded and Gtk->main_iteration while Gtk->events_pending;
     $::isEmbedded and kill (12, $::CCPID);
     $W->main or return;

@@ -392,7 +392,7 @@ sub ask_fromW {
 		$set->(${$e->{val}} = next_val_in_array(${$e->{val}}, $e->{list}));
 		$changed->();
 	    });
-	    $real_w = gtkpack_(new Gtk::HBox(0,10), 1, new Gtk::HBox(0,0), 0, $w, 1, new Gtk::HBox(0,0), );
+	    $real_w = gtkpack_(new Gtk::HBox(0,10), 1, new Gtk::HBox(0,0), 0, $w, 1, new Gtk::HBox(0,0));
 	} elsif ($e->{type} eq 'bool') {
 	    $w = Gtk::CheckButton->new($e->{text});
 	    $w->signal_connect(clicked => $changed);
@@ -495,7 +495,7 @@ sub ask_fromW {
 	  get => $get || sub { ${$e->{val}} }, set => $set || sub {},
 	  icon_w => -e $e->{icon} ? gtkpng($e->{icon}) : '' };
     };
-    @widgets_always   = map_index { $create_widget->($_, $::i      ) } @$l;
+    @widgets_always   = map_index { $create_widget->($_, $::i)       } @$l;
     my $always_total_size = $total_size;
     @widgets_advanced = map_index { $create_widget->($_, $::i + @$l) } @$l2;
     my $advanced_total_size = $total_size - $always_total_size;
@@ -560,7 +560,7 @@ sub ask_fromW {
     $advanced_pack = 
       gtkpack_(new Gtk::VBox(0,0),
 	       0, '',
-	       (map {; 0, new Gtk::Label($_) } @adv),
+	       (map { (0, new Gtk::Label($_)) } @adv),
 	       0, new Gtk::HSeparator,
 	       1, $create_widgets->($advanced_total_size, @widgets_advanced));
 

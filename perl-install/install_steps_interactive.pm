@@ -694,7 +694,7 @@ sub reallyChooseGroups {
     my ($path, $all);
     $o->ask_from('', _("Package Group Selection"), [
         { val => \$size_text, type => 'label' }, {},
-	 (map {; 
+	 (map { 
 	       my $old = $path;
 	       $path = $o->{compssUsers}{$_}{path};
 	       if_($old ne $path, { val => translate($path) }),
@@ -807,7 +807,7 @@ If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $na
 	};
     };
     my $install_result;
-    catch_cdie { $install_result = $o->install_steps::installPackages($packages); }
+    catch_cdie { $install_result = $o->install_steps::installPackages($packages) }
       sub {
 	  if ($@ =~ /^error ordering package list: (.*)/) {
 	      $o->ask_yesorno('', [

@@ -78,14 +78,14 @@ sub make($;$) {
     $nbpages >= 10 or die "swap area needs to be at least " . (10 * $pagesize / 1024) . "kB";
 
     -b $devicename or $checkBlocks = 0;
-    my $rdev = (stat $devicename)[6];# or log::l("stat of $devicename failed: $!");
+    my $rdev = (stat $devicename)[6];
     $rdev == 0x300 || $rdev == 0x340 and die "$devicename is not a good device for swap";
 
     sysopen F, $devicename, 2 or die "opening $devicename for writing failed: $!";
 
-    if ($version == 0) { $maxpages = $V0_MAX_PAGES; }
-    elsif (kernel_greater_or_equal(2,2,1)) { $maxpages = $V1_MAX_PAGES; }
-    else { $maxpages = min($V1_OLD_MAX_PAGES, $V1_MAX_PAGES); }
+    if ($version == 0) { $maxpages = $V0_MAX_PAGES }
+    elsif (kernel_greater_or_equal(2,2,1)) { $maxpages = $V1_MAX_PAGES }
+    else { $maxpages = min($V1_OLD_MAX_PAGES, $V1_MAX_PAGES) }
 
     if ($nbpages > $maxpages) {
 	$nbpages = $maxpages;
@@ -95,7 +95,7 @@ sub make($;$) {
     if ($checkBlocks) {
 	$badpages = check_blocks(*F, $version, $nbpages);
     } elsif ($version == 0) {
-	for (my $i = 0; $i < $nbpages; $i++) { vec($signature_page, $i, 1) = 1; }
+	for (my $i = 0; $i < $nbpages; $i++) { vec($signature_page, $i, 1) = 1 }
     }
 
     $version == 0 and !vec($signature_page, 0, 1) and die "bad block on first page";

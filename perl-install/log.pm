@@ -36,11 +36,11 @@ sub w { &l }
 sub openLog(;$) {
     if ($::isInstall) {
 	if ($_[0]) { #- useLocal
-	    open LOG, "> $_[0]";# or die "no log possible :(";
+	    open LOG, "> $_[0]";
 	} else {
-	    open LOG, "> /dev/tty3";# or die "no log possible :(";
+	    open LOG, "> /dev/tty3";
 	}
-	open LOG2, ">> /tmp/ddebug.log";# or die "no log possible :(";
+	open LOG2, ">> /tmp/ddebug.log";
 	select((select(LOG),  $| = 1)[0]);
 	select((select(LOG2), $| = 1)[0]);
     }
@@ -51,7 +51,7 @@ sub openLog(;$) {
 sub closeLog() { 
     if ($::isStandalone) {
 	c::closelog();
-    } else { close LOG; close LOG2; }
+    } else { close LOG; close LOG2 }
 }
 
 #-######################################################################################

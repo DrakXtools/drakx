@@ -61,7 +61,7 @@ my $ptalinitread = 0;
 
 #------------------------------------------------------------------------------
 
-sub set_prefix($) { $prefix = $_[0]; }
+sub set_prefix($) { $prefix = $_[0] }
 
 sub default_printer_type($) { "LOCAL" }
 
@@ -116,7 +116,7 @@ sub set_permissions {
     # We only need to set the permissions during installation to be able to
     # print test pages. After installation the devfsd daemon does the business
     # automatically.
-    if (!$::isInstall) {return 1;}
+    if (!$::isInstall) { return 1 }
     if ($owner && $group) {
         run_program::rooted($prefix, "/bin/chown", "$owner.$group", $file)
 	    || die "Could not start chown!";
@@ -184,7 +184,7 @@ sub stop_service ($) {
     # Exit silently if the service is not installed
     return 1 if (!(-x "$prefix/etc/rc.d/init.d/$service"));
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "stop");
-    if (($? >> 8) != 0) {return 0;} else {return 1;}
+    if (($? >> 8) != 0) { return 0 } else { return 1 }
 }
 
 sub service_starts_on_boot ($) {
@@ -213,9 +213,9 @@ sub start_service_on_boot ($) {
 
 sub SIGHUP_daemon {
     my ($service) = @_;
-    if ($service eq "cupsd") {$service = "cups"};
+    if ($service eq "cupsd") { $service = "cups" };
     # PDQ has no daemon, exit.
-    if ($service eq "pdq") {return 1};
+    if ($service eq "pdq") { return 1 };
     # CUPS needs auto-correction for its configuration
     run_program::rooted($prefix, "/usr/sbin/correctcupsconfig") if ($service eq "cups");
     # Name of the daemon
@@ -1078,7 +1078,7 @@ sub poll_ppd_base {
 	while (<PPDS>) {
 	    chomp;
 	    my ($ppd, $mf, $descr, $lang) = split /\|/;
-	    if ($ppd eq "raw") {next;}
+	    if ($ppd eq "raw") { next }
 	    my ($model, $driver);
 	    if ($descr) {
 		if ($descr =~ /^([^,]+), (.*)$/) {
@@ -1507,7 +1507,7 @@ sub configure_hpoj {
 	$bus = "par";
 	$address_arg = parport_addr($device);
 	$address_arg =~ /^\s*-base\s+(\S+)/;
-	eval ("$base_address = $1;");
+	eval ("$base_address = $1");
     }
     my $devdata;
 
@@ -1775,7 +1775,7 @@ mtools_skip_check=1
 	close F;
 	$mtoolsfmconf =~ m/^\s*DRIVES\s*=\s*\"([A-Za-z ]*)\"/m;
 	my $alloweddrives = lc($1);
-	foreach my $letter ( "p", "q", "r", "s" ) {
+	foreach my $letter ("p", "q", "r", "s") {
 	    if ($alloweddrives !~ /$letter/) {
 		$alloweddrives .= $letter;
 	    }
@@ -2383,7 +2383,7 @@ sub addentry {
 		$sectionfound = 1;
 	    }
 	} else {
-	    if (!/^\s*$/ && !/^\s*;/) {
+	    if (!/^\s*$/ && !/^\s*;/) { #-#
 		$_ = "$entry\n$_";
 		$entryinserted = 1;
 		last;

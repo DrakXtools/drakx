@@ -46,7 +46,7 @@ sub new($$) {
 	    my $launchX = sub {
 		my $ok = 1;
 		my $xpmac_opts = cat_("/proc/cmdline");
-		unless (-d "/var/log" ) { mkdir("/var/log"); }
+		unless (-d "/var/log") { mkdir("/var/log") }
 		local $SIG{CHLD} = sub { $ok = 0 if waitpid(-1, c::WNOHANG()) > 0 };
 		unless (fork) {
 		    exec $_[0], (arch() =~ /^sparc/ || arch() eq "ppc" ? () : ("-kb")), "-dpms","-s" ,"240",
@@ -325,7 +325,7 @@ sub choosePackagesTree {
 						push(@others,    $p->name);
 					}
 					my $root2 = join('|', map { translate($_) } split('\|', $root));
-					$add_node->($_, $root2                   ) foreach sort @firstchoice;
+					$add_node->($_, $root2)                    foreach sort @firstchoice;
 					$add_node->($_, $root2 . '|' . _("Other")) foreach sort @others;
 				    }
 				}
@@ -402,7 +402,7 @@ sub choosePackagesTree {
 				    } else {
 					$o->ask_warn('', _("You can't unselect this package. It must be upgraded"));
 				    }
-				} else { return 1; }
+				} else { return 1 }
 				return;
 			    },
 			    auto_deps => _("Show automatically selected packages"),
@@ -411,7 +411,7 @@ sub choosePackagesTree {
 			    icons => [ { icon         => 'floppy',
 					 help         => _("Load/Save on floppy"),
 					 wait_message => _("Updating package selection"),
-					 code         => sub { $o->loadSavePackagesOnFloppy($packages); 1; },
+					 code         => sub { $o->loadSavePackagesOnFloppy($packages); 1 },
 				       }, 
 				       if_(0, 
 				       { icon         => 'feather',
@@ -524,9 +524,9 @@ sub installPackages {
 				       $yicon > $y + ${$heights}[0] and $decy = $yicon - ($y + ${$heights}[$i]);
 				       foreach (@{$lines}) {
 					   $dbl_area->draw_string($darea->style->font, $gc_text,
-								  ($dx-$width)/2 + $x + ${$widths}[$i], ( $first ? 0 : $decy ) + $y + ${$heights}[$i], $_);
+								  ($dx-$width)/2 + $x + ${$widths}[$i], ($first ? 0 : $decy) + $y + ${$heights}[$i], $_);
  					   $bold and $dbl_area->draw_string($darea->style->font, $gc_text,
-									    ($dx-$width)/2 + $x + ${$widths}[$i] + 1, ( $first ? 0 : $decy ) + $y + ${$heights}[$i], $_);
+									    ($dx-$width)/2 + $x + ${$widths}[$i] + 1, ($first ? 0 : $decy) + $y + ${$heights}[$i], $_);
 					   $i++;
 				       }
 				       $first = 0;
@@ -608,7 +608,7 @@ If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $na
 	}
     };
     my $install_result;
-    catch_cdie { $install_result = $o->install_steps::installPackages($packages); }
+    catch_cdie { $install_result = $o->install_steps::installPackages($packages) }
       sub {
 	  if ($@ =~ /^error ordering package list: (.*)/) {
 	      $o->ask_yesorno('', [

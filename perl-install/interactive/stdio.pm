@@ -59,7 +59,7 @@ ask_fromW_begin:
     };
 
     my @labels = ();
-    my $format_label = sub { my ($e) = @_; return "`${$e->{val}}' $e->{label} $e->{text}\n"; };
+    my $format_label = sub { my ($e) = @_; return "`${$e->{val}}' $e->{label} $e->{text}\n" };
     my $do_widget = sub {
 	my ($e, $ind) = @_;
 
@@ -134,7 +134,7 @@ Your choice? ");
     }
 
     my $lab;
-    map_index { $labels[$::i] && (($lab = $format_label->($_)) ne $labels[$::i]) and print _("=> Notice, a label changed:\n%s", $lab); }
+    map_index { $labels[$::i] && (($lab = $format_label->($_)) ne $labels[$::i]) and print _("=> Notice, a label changed:\n%s", $lab) }
       grep { $_->{type} eq 'label' } @$l;
 
     my $i;

@@ -50,7 +50,7 @@ sub intro {
 	my $e = $in->ask_from_listf(_("Internet connection & configuration"),
 				    _($text),
 				    sub { $_[0]{description} },
-				    \@l );
+				    \@l);
 	run_program::rooted($prefix, $connect_prog) if ($e->{c}==1);
 	run_program::rooted($prefix, $disconnect_file) if ($e->{c}==2);
 	main($prefix, $netcnx, $netc, $mouse, $in, $intf, 0, 0) if ($e->{c}==3);
@@ -76,11 +76,11 @@ sub detect {
     require network::adsl;
     network::adsl->import;
     map {
-	( !$net_install and adsl_detect($_->[0]) ) ? $auto_detect->{adsl}=$_->[0] : $auto_detect->{lan}{$_->[0]}=$_->[1]; } @all_cards;
+	(!$net_install and adsl_detect($_->[0])) ? $auto_detect->{adsl}=$_->[0] : $auto_detect->{lan}{$_->[0]}=$_->[1] } @all_cards;
     my $modem={};
     require network::modem;
     network::modem->import;
-    modem_detect_backend($modem);#, $mouse);
+    modem_detect_backend($modem);
     $modem->{device} and $auto_detect->{modem}=$modem->{device};
 }
 
@@ -118,7 +118,7 @@ sub init_globals {
 			       prefix => $prefix,
 			       connect_file => "/etc/sysconfig/network-scripts/net_cnx_up",
 			       disconnect_file => "/etc/sysconfig/network-scripts/net_cnx_down",
-			       connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg" );
+			       connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg");
 }
 
 sub main {
@@ -194,7 +194,7 @@ If you don't want to use the auto detection, deselect the checkbox.
 	     [_("LAN connection"), $netc->{autodetect}{lan}, __("ethernet card(s) detected"), \$conf{lan}]
 	);
     my $i=0;
-    map { defined $set_default or do { $_->[1] and $set_default=$i; }; $i++; } @l;
+    map { defined $set_default or do { $_->[1] and $set_default=$i }; $i++ } @l;
     @l = (
 [_("Normal modem connection") . if_($netc->{autodetect}{modem}, " - " . _("detected on port %s", $netc->{autodetect}{modem})), \$conf{modem}],
 [_("ISDN connection") . if_($netc->{autodetect}{isdn}{description}, " - " . _("detected %s", $netc->{autodetect}{isdn}{description})), \$conf{isdn}],
@@ -218,9 +218,9 @@ If you don't want to use the auto detection, deselect the checkbox.
 #    load_conf ($netcnx, $netc, $intf);
     $conf{modem} and do { pre_func("modem"); require network::modem; network::modem::configure($netcnx, $mouse, $netc) or goto step_2 };
     $conf{isdn} and do { pre_func("isdn"); require network::isdn; network::isdn::configure($netcnx, $netc) or goto step_2 };
-    $conf{adsl} and do { pre_func("adsl"); require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2};
-    $conf{cable} and do { pre_func("cable"); require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1; };
-    $conf{lan} and do { pre_func("local network"); require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1; };
+    $conf{adsl} and do { pre_func("adsl"); require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2 };
+    $conf{cable} and do { pre_func("cable"); require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1 };
+    $conf{lan} and do { pre_func("local network"); require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1 };
 
   step_2_1:
     my $nb = keys %{$netc->{internet_cnx}};
@@ -276,7 +276,7 @@ Test your connection via net_monitor or mcc. If your connection doesn't work, yo
 	$in->ask_okcancel(_("Network Configuration"), $m, 1);
 	undef $::Wizard_no_previous;
 	undef $::Wizard_finished;
-    } else {  $::isStandalone and $in->ask_warn('', $m ); }
+    } else { $::isStandalone and $in->ask_warn('', $m) }
 
   step_5:
 
@@ -365,7 +365,7 @@ sub save_conf {
     output("$prefix/etc/sysconfig/network-scripts/drakconnect_conf",
       "SystemName=" . do { $netc->{HOSTNAME} =~ /([^\.]*)\./; $1 } . "
 DomainName=" . do { $netc->{HOSTNAME} =~ /\.(.*)/; $1 } . "
-InternetAccessType=" . do { if ($netcnx->{type}) { $netcnx->{type}; } else { $netc->{GATEWAY} ? "lan" : ""; } } . "
+InternetAccessType=" . do { if ($netcnx->{type}) { $netcnx->{type} } else { $netc->{GATEWAY} ? "lan" : "" } } . "
 InternetInterface=" . ($netc->{GATEWAY} && (!$netcnx->{type} || $netcnx->{type} eq 'lan') ? $netc->{NET_DEVICE} : $netcnx->{NET_INTERFACE}) . "
 InternetGateway=$netc->{GATEWAY}
 DNSPrimaryIP=$netc->{dnsServer}
@@ -426,7 +426,7 @@ PPPLogin=$modem->{login}
 PPPPassword=$modem->{passwd}
 PPPConfirmPassword=$modem->{passwd}
 PPPAuthentication=$modem->{auth}
-PPPSpecialCommand=" . ($netcnx->{type} eq 'isdn_external' ? $netcnx->{isdn_external}{special_command} : '' ) . "
+PPPSpecialCommand=" . ($netcnx->{type} eq 'isdn_external' ? $netcnx->{isdn_external}{special_command} : '') . "
 
 ADSLInterfacesList=
 ADSLModem=" .  q( # Obsolete information. Please don't use it.) . "
@@ -606,7 +606,7 @@ sub read_net_conf {
 
 sub set_net_conf {
     my ($netcnx, $netc)=@_;
-    setVarsInShMode("$prefix/etc/sysconfig/drakconnect", 0600, $netcnx, "NET_DEVICE", "NET_INTERFACE", "type", "PROFILE" );
+    setVarsInShMode("$prefix/etc/sysconfig/drakconnect", 0600, $netcnx, "NET_DEVICE", "NET_INTERFACE", "type", "PROFILE");
     setVarsInShMode("$prefix/etc/sysconfig/drakconnect." . $netcnx->{type}, 0600, $netcnx->{$netcnx->{type}}); #- doesn't work, don't know why
     setVarsInShMode("$prefix/etc/sysconfig/drakconnect.netc", 0600, $netc); #- doesn't work, don't know why
 }

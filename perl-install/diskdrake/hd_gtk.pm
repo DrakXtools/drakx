@@ -120,7 +120,7 @@ sub try_ {
     $update_all->();
 
     if ($v && member($name, 'Done', 'Wizard')) {
-	$::isEmbedded ? kill( 'USR1', $::CCPID) : Gtk->main_quit; 
+	$::isEmbedded ? kill('USR1', $::CCPID) : Gtk->main_quit; 
     }
 }
 
@@ -212,7 +212,7 @@ sub current_kind_changed {
 
     my $v = $kind->{val};
     my @parts = 
-      $kind->{type} eq 'raid' ? grep {$_} @$v :
+      $kind->{type} eq 'raid' ? grep { $_ } @$v :
       $kind->{type} eq 'loopback' ? @$v : fsedit::get_fstab_and_holes($v);
     my $totalsectors = 
       $kind->{type} =~ /raid|loopback/ ? sum(map { $_->{size} } @parts) : $v->{totalsectors};
@@ -242,7 +242,7 @@ sub create_automatic_notebooks {
     };
     $may_add->(hd2kind($_)) foreach @{$all_hds->{hds}};
     $may_add->(lvm2kind($_)) foreach @{$all_hds->{lvms}};
-    $may_add->(raid2kind()) if grep {$_} @{$all_hds->{raids}};
+    $may_add->(raid2kind()) if grep { $_ } @{$all_hds->{raids}};
     $may_add->(loopback2kind()) if @{$all_hds->{loopbacks}};
 
     @notebook = grep_index {

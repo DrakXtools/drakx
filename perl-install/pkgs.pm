@@ -314,7 +314,7 @@ sub psUpdateHdlistsDeps {
 	#- for getting header of package during installation or after by urpmi.
 	my $fakemedium = "$descr ($method$medium)";
 	my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
-	-e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
+	-e $newf and do { unlink $newf or die "cannot remove $newf: $!" };
 	install_any::getAndSaveFile("Mandrake/base/$hdlist", $newf) or die "no $hdlist found";
 	symlinkf $newf, "/tmp/$hdlist";
 	install_any::getAndSaveFile("Mandrake/base/synthesis.$hdlist",
@@ -378,7 +378,7 @@ sub psUsingHdlist {
     #- copy hdlist file directly to $prefix/var/lib/urpmi, this will be used
     #- for getting header of package during installation or after by urpmi.
     my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
-    -e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
+    -e $newf and do { unlink $newf or die "cannot remove $newf: $!" };
     install_any::getAndSaveFile($fhdlist || "Mandrake/base/$hdlist", $newf) or die "no $hdlist found";
     $m->{hdlist_size} = -s $newf; #- keep track of size for post-check.
     symlinkf $newf, "/tmp/$hdlist";
@@ -614,7 +614,7 @@ sub computeGroupSize {
 	return if @$l1 > @$l2;
 	foreach (@$l1) {
 	    my $c;
-	    while ($c = $l2->[$i++] cmp $_ ) {
+	    while ($c = $l2->[$i++] cmp $_) {
 		return if $c == 1 || $i > @$l2;
 	    }
 	}
@@ -1077,8 +1077,8 @@ sub remove($$) {
 
     eval { fs::mount("/proc", "$prefix/proc", "proc", 0) } unless -e "$prefix/proc/cpuinfo";
 
-    my $callbackOpen = sub { log::l("trying to open file from $_[0] which should not happen"); };
-    my $callbackClose = sub { log::l("trying to close file from $_[0] which should not happen"); };
+    my $callbackOpen = sub { log::l("trying to open file from $_[0] which should not happen") };
+    my $callbackClose = sub { log::l("trying to close file from $_[0] which should not happen") };
 
     #- we are not checking depends since it should come when
     #- upgrading a system. although we may remove some functionalities ?

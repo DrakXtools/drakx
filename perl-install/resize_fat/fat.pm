@@ -84,7 +84,7 @@ sub update {
 }
 
 
-sub endianness16($) { (($_[0] & 0xff) << 8) + ($_[0] >> 8); }
+sub endianness16($) { (($_[0] & 0xff) << 8) + ($_[0] >> 8) }
 sub endianness($$) {
     my ($val, $nb_bits) = @_;
     my $r = 0;

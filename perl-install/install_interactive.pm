@@ -18,7 +18,7 @@ use fs;
 
 sub tellAboutProprietaryModules {
     my ($o) = @_;
-    my @l = grep {$_} map { $_->{driver} =~ /^Bad:(.*)/ && $1 } detect_devices::probeall();
+    my @l = grep { $_ } map { $_->{driver} =~ /^Bad:(.*)/ && $1 } detect_devices::probeall();
     $o->ask_warn('', 
 _("Some hardware on your computer needs ``proprietary'' drivers to work.
 You can find some information about them at: %s", join(", ", @l))) if @l;
@@ -235,8 +235,8 @@ sub partitionWizard {
     my $level = $::expert ? -9999 : 0;
     my @sol = grep { $_->[0] >= $level } @solutions;
 
-    log::l(      "solutions found: " . join('', map {$_->[1]} @sol) . 
-	   " (all solutions found: " . join('', map {$_->[1]} @solutions) . ")");
+    log::l(''  . "solutions found: " . join('', map { $_->[1] } @sol) . 
+	   " (all solutions found: " . join('', map { $_->[1] } @solutions) . ")");
 
     @solutions = @sol if @sol > 1;
     log::l("solutions: ", int @solutions);

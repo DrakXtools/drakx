@@ -128,7 +128,7 @@ sub write_interface_conf {
     my @mask = split '\.', $intf->{NETMASK};
     my $hwaddr;
     $::o->{miscellaneous}{track_network_id} and $hwaddr = -e "$prefix/sbin/ip" && `LC_ALL= LANG= $prefix/sbin/ip -o link show $intf->{DEVICE} 2>/dev/null`;
-    if ($hwaddr) { chomp $hwaddr; $hwaddr =~ s/.*link\/ether\s([0-9a-z:]+)\s.*/$1/; }
+    if ($hwaddr) { chomp $hwaddr; $hwaddr =~ s/.*link\/ether\s([0-9a-z:]+)\s.*/$1/ }
     $hwaddr and $intf->{HWADDR} = undef;
     add2hash($intf, {
 		     BROADCAST => join('.', mapn { int $_[0] | ~int $_[1] & 255 } \@ip, \@mask),
@@ -228,7 +228,7 @@ sub netmask {
     $ip =~ $ip_regexp;
     if ($1 >= 1 && $1 < 127) {
 	return "255.0.0.0";    #-1.0.0.0 to 127.0.0.0
-    } elsif ($1  >= 128 && $1 <= 191 ){
+    } elsif ($1  >= 128 && $1 <= 191){
 	return "255.255.0.0";  #-128.0.0.0 to 191.255.0.0
     } elsif ($1 >= 192 && $1 <= 223) {
 	return "255.255.255.0";
@@ -306,7 +306,7 @@ notation (for example, 1.2.3.4).");
     my @fields = qw(IPADDR NETMASK);
     $::isStandalone or $in->set_help('configureNetworkIP');
     $in->ask_from(_("Configuring network device %s", $intf->{DEVICE}),
-  	          (_("Configuring network device %s", $intf->{DEVICE}) . ( $module ? _(" (driver %s)", $module) : '' ) ."\n\n") .
+  	          (_("Configuring network device %s", $intf->{DEVICE}) . ($module ? _(" (driver %s)", $module) : '') ."\n\n") .
 	          $text,
 	         [ { label => _("IP address"), val => \$intf->{IPADDR}, disabled => sub { $pump } },
 	           { label => _("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $pump } },

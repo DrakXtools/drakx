@@ -37,7 +37,7 @@ sub configure_cable {
 					_("Which dhcp client do you want to use?
 Default is dhcpcd"),
 					sub { $_[0]{description} },
-					\@m )) {
+					\@m)) {
 	    $f->{c}==1 and $netcnx->{dhcp_client}="dhcpcd" and $in->do_pkgs->install(qw(dhcpcd));
 	    $f->{c}==3 and $netcnx->{dhcp_client}="dhcpxd" and $in->do_pkgs->install(qw(dhcpxd));
 	    $f->{c}==4 and $netcnx->{dhcp_client}="dhcp-client" and $in->do_pkgs->install(qw(dhcp-client));
@@ -91,7 +91,7 @@ I cannot set up this connection type.")) and return;
     again :
 	$interface = $in->ask_from_list(_("Choose the network interface"),
 					_("Please choose which network adapter you want to use to connect to Internet"),
-					[ map { $_->[0] . ($_->[1] ? " ( using module $_->[1] )" : "") } @all_cards ]
+					[ map { $_->[0] . ($_->[1] ? " (using module $_->[1])" : "") } @all_cards ]
 				       ) or return;
     defined $interface or goto again;
   l1:

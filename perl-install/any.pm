@@ -319,8 +319,7 @@ if (arch() !~ /ppc/) {
 { label => _("Default"), val => \$default, type => 'bool' },
 	);
 } else {
-	@l = ({ label => _("Label"), val => \$e->{label}, list=> ['macos', 'macosx', 'darwin'] },
-	@l );
+        unshift @l, { label => _("Label"), val => \$e->{label}, list => ['macos', 'macosx', 'darwin'] };
 	if ($e->{type} eq "image") {
 		@l = ({ label => _("Label"), val => \$e->{label} },
 		$::expert ? @l[1..4] : (@l[1..2], { label => _("Append"), val => \$e->{append} }) ,
@@ -541,7 +540,7 @@ END
 	my @l = cat_($secrets);
 	my $replaced = 0;
 	do { $replaced ||= 1
-	       if s/^\s*"?$toreplace{login}"?\s+ppp0\s+(\S+)/"$toreplace{login}"  ppp0  "$toreplace{passwd}"/; } foreach @l;
+	       if s/^\s*"?$toreplace{login}"?\s+ppp0\s+(\S+)/"$toreplace{login}"  ppp0  "$toreplace{passwd}"/ } foreach @l;
 	if ($replaced) {
 	    local *F;
 	    open F, ">$secrets" or die "Can't open $secrets: $!";
@@ -700,7 +699,7 @@ sub load_module__ask_options {
     if (@$parameters) {
 	$in->ask_from('', 
 		      _("You may now provide its options to module %s.\nNote that any address should be entered with the prefix 0x like '0x123'", $module_descr), 
-		      [ map {; { label => $_->[0], help => $_->[1], val => \$_->[2] } } @$parameters ],
+		      [ map { { label => $_->[0], help => $_->[1], val => \$_->[2] } } @$parameters ],
 		     ) or return;
 	map { if_($_->[2], "$_->[0]=$_->[2]") } @$parameters;
     } else {
@@ -792,7 +791,7 @@ sub ask_users {
 		      }
 		  },
 	          complete => $verif,
-                  canceled => sub { $u->{name} ? &$verif : 0; },
+                  canceled => sub { $u->{name} ? &$verif : 0 },
 	    } }, [ 
 	    { label => _("Real name"), val => \$u->{realname} },
 	    { label => _("User name"), val => \$u->{name} },
@@ -803,7 +802,7 @@ sub ask_users {
 	    { label => _("Icon"), val => \ ($u->{icon} ||= 'man'), list => \@icons, icon2f => sub { face2png($_[0], $prefix) }, format => \&translate },
 	      ),
 	      if_($security > 3,
-		  map {; 
+		  map {
             { label => $_, val => \$groups{$_}, text => $high_security_groups{$_}, type => 'bool' }
 		  } keys %high_security_groups,
 	      ),
@@ -859,7 +858,7 @@ when your installation is complete and you restart your system.")),
 	},
 	[ { val => \$lang, separator => '|', 
 	    format => \&lang::lang2text, list => \@langs },
-	    if_($langs_, (map {;
+	    if_($langs_, (map {
 	       { val => \$langs->{$_->[0]}, type => 'bool', disabled => sub { $langs->{all} },
 		 text => $_->[1], advanced => 1,
 	       } 

@@ -41,7 +41,7 @@ sub smbclient {
     my $ip    = $server->{ip} ? "-I $server->{ip}" : '';
     my $group = $server->{group} ? " -W $server->{group}" : '';
 
-    my $U = $server->{username} ? "$server->{domain}/$server->{username}%$server->{password}" : '%';
+    my $U = $server->{username} ? sprintf("%s/%s%%%s", @$server{'domain', 'username', 'password'}) : '%';
     `smbclient -U $U -L $name $ip$group`;
 }
 

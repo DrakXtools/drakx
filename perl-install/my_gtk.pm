@@ -48,7 +48,7 @@ sub new {
 	if (!defined($::WizardWindow)) {
 	    $::WizardWindow = new Gtk::Window;
 	    $::WizardWindow->set_position('center_always');
-	    $::WizardWindow->signal_connect(delete_event => sub { die 'wizcancel'});
+	    $::WizardWindow->signal_connect(delete_event => sub { die 'wizcancel' });
 	    $::WizardTable = new Gtk::Table(2, 2, 0);
 	    $::WizardWindow->add($::WizardTable);
 	    my $draw1 = new Gtk::DrawingArea;
@@ -63,11 +63,10 @@ sub new {
 	    $style->font(Gtk::Gdk::Font->fontset_load("-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*"));
 	    my $w = $style->font->string_width($::Wizard_title);
 	    $draw1->signal_connect(expose_event => sub {
-				       my $i;
-				       for ($i=0;$i<(540/$y1);$i++) {
+				       for (my $i=0; $i < (540/$y1); $i++) {
 					   $draw1->window->draw_pixmap ($draw1->style->bg_gc('normal'),
 									$im_up, 0, 0, 0, $y1*$i,
-									$x1 , $y1 );
+									$x1 , $y1);
 					   $draw1->window->draw_string(
 								       $style->font,
 								       $draw1->style->white_gc,
@@ -76,11 +75,10 @@ sub new {
 				       }
 				   });
 	    $draw2->signal_connect(expose_event => sub {
-				       my $i;
-				       for ($i=0;$i<(300/$y2);$i++) {
+				       for (my $i=0; $i < (300/$y2); $i++) {
 					   $draw2->window->draw_pixmap ($draw2->style->bg_gc('normal'),
 									$im_left, 0, 0, 0, $y2*$i,
-									$x2 , $y2 );
+									$x2 , $y2);
 				       }
 				   });
 	    $::WizardTable->attach($draw1, 0, 2, 0, 1, 'fill', 'fill', 0, 0);
@@ -266,7 +264,7 @@ sub gtkset_tip {
 
 sub gtkappenditems {
     my $w = shift;
-    map {gtkshow($_) } @_;
+    map { gtkshow($_) } @_;
     $w->append_items(@_);
     $w
 }
@@ -390,7 +388,7 @@ sub gtkcreate_xpm {
     my ($f) = @_;
     my $rw = gtkroot();
     $f =~ m|.xpm$| or $f="$f.xpm";
-    if ( $f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach icon_paths() }
+    if ($f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach icon_paths() }
     my @l = Gtk::Gdk::Pixmap->create_from_xpm($rw, new Gtk::Style->bg('normal'), $f) or die "gtkcreate_xpm: missing pixmap file $f";
     @l;
 }
@@ -398,7 +396,7 @@ sub gtkcreate_xpm {
 sub gtkcreate_png {
     my ($f) = shift;
     $f =~ m|.png$| or $f="$f.png";
-    if ( $f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach icon_paths() }
+    if ($f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach icon_paths() }
     my $im = Gtk::Gdk::ImlibImage->load_image($f) or die "gtkcreate_png: missing png file $f";
     $im->render($im->rgb_width, $im->rgb_height);
     ($im->move_image(), $im->move_mask);
@@ -485,7 +483,7 @@ sub get_text_coord {
 	    while (1) {
 		$i >= @c and last;
 		$el .= $c[$i];
-		if (ord($c[$i]) >= 128) { $el .= $c[$i+1]; $i++; push @t2, $el; $el = ''}
+		if (ord($c[$i]) >= 128) { $el .= $c[$i+1]; $i++; push @t2, $el; $el = '' }
 		$i++;
 	    }
 	    $el ne '' and push @t2, $el;
@@ -582,26 +580,26 @@ sub gtkicons_labels_widget {
                   ($darea->{dx}, $darea->{dy}) = ($dx, $dy);
               });
 	$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
-	$darea->signal_connect( enter_notify_event => sub {
+	$darea->signal_connect(enter_notify_event => sub {
 				    if ($darea->{state} == 0) {
 					$darea->{state} = 1;
 					$darea->draw(undef);
 				    }
 				});
-	$darea->signal_connect( leave_notify_event => sub {
+	$darea->signal_connect(leave_notify_event => sub {
 				    if ($darea->{state} == 1) {
 					$darea->{state} = 0;
 					$darea->draw(undef);
 				    }
 				});
 	my $label_exec = $_->[0];
-	$darea->signal_connect( button_release_event => sub {
+	$darea->signal_connect(button_release_event => sub {
 				    $darea->{state} = 0;
 				    $darea->draw(undef);
 				    $exec_func->($exec_hash->{$label_exec});
 #				    $exec_hash->{$label_exec}{function}->($exec_hash->{$label_exec}{arg});
 				});
-	$darea->signal_connect( realize => sub { $darea->window->set_cursor($cursor_hand) });
+	$darea->signal_connect(realize => sub { $darea->window->set_cursor($cursor_hand) });
 	$tab[$i] = $darea;
 	$i++;
     }
@@ -610,7 +608,7 @@ sub gtkicons_labels_widget {
     my $redraw_function = sub { 
 	$fixed->move(@$_) foreach compute_icons($fixed->allocation->[2], $fixed->allocation->[3], 40, 15, 20, @tab);
     };
-    $fixed->signal_connect(expose_event => $redraw_function );
+    $fixed->signal_connect(expose_event => $redraw_function);
     $fixed->signal_connect(realize => sub {
 			       $fixed->window->set_back_pixmap($background, 0);
 			       $redraw_function->();
@@ -620,7 +618,7 @@ sub gtkicons_labels_widget {
     my $w_ret = createScrolledWindow($fixed, ['automatic', 'automatic']);
 
     #- Ugly hacks, don't touch! ########
-    my $timeout2 = Gtk->timeout_add(100, sub { $fixed->set_usize($w_ret->allocation->[2] - 22, 0); 0; });
+    my $timeout2 = Gtk->timeout_add(100, sub { $fixed->set_usize($w_ret->allocation->[2] - 22, 0); 0 });
     $w_ret->vscrollbar->set_usize(19, undef);
     gtkset_border_width($w_ret, -2); #- ok, this is very very ugly...
 }
@@ -879,18 +877,18 @@ sub _create_window($$) {
     if ($::isStandalone || $::live || $::g_auto_install || $::noShadow) { gtkadd($w, $inner) } else {
 	my $sqw = $my_gtk::shape_width;
 	gtkadd($w, $table = new Gtk::Table(2, 2, 0));
-	$table->attach( $inner, 0, 1, 0, 1, 1|4, 1|4, 0, 0);
-	$table->attach( gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, $sqw, 1), expose_event => sub {
+	$table->attach($inner, 0, 1, 0, 1, 1|4, 1|4, 0, 0);
+	$table->attach(gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, $sqw, 1), expose_event => sub {
 					      $_[0]->window->draw_rectangle($_[0]->style->bg_gc('normal'), 1, 0, 0, $sqw, $sqw);
 					      $_[0]->window->draw_rectangle($gc, 1, 0, $sqw, $sqw, $_[0]->allocation->[3]);
 					  }),
 			1, 2, 0, 1, 'fill', 'fill', 0, 0);
-	$table->attach( gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, 1, $sqw), expose_event => sub {
+	$table->attach(gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, 1, $sqw), expose_event => sub {
 					      $_[0]->window->draw_rectangle($_[0]->style->bg_gc('normal'), 1, 0, 0, $sqw, $sqw);
 					      $_[0]->window->draw_rectangle($gc, 1, $sqw, 0, $_[0]->allocation->[2], $sqw);
 					  }),
 			0, 1, 1, 2, 'fill', 'fill', 0, 0);
-	$table->attach( gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, $sqw, $sqw), expose_event => sub {
+	$table->attach(gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, $sqw, $sqw), expose_event => sub {
 					      $_[0]->window->draw_rectangle($gc, 1, 0, 0, $sqw, $sqw);
 					  }),
 			1, 2, 1, 2, 'fill', 'fill', 0, 0);
@@ -943,7 +941,7 @@ sub _create_window($$) {
 	    do { $s = $::o->{steps}{$s}{$d} } until !$s || $::o->{steps}{$s}{reachable};
 	    $::setstep && $s and die "setstep $s\n";
 	}
-    });# if $::isInstall;
+    }); #- if $::isInstall;
 
     $w->signal_connect(size_allocate => sub {
 	my ($wi, $he) = @{$_[1]}[2,3];
@@ -982,7 +980,7 @@ my ($next_child, $left, $right, $up, $down);
 	$i += $dir;
 	0 <= $i && $i < @childs ? $childs[$i] : undef;
     };
-    $left = sub { &$next_child($_[0]->parent, 0); };
+    $left = sub { &$next_child($_[0]->parent, 0) };
     $right = sub {
 	my ($c) = @_;
 	if ($c->subtree) {
@@ -1053,10 +1051,10 @@ sub create_treeitem($) {
 #- just give a title and some args, and it will return the value given by the user
 #-###############################################################################
 
-sub ask_warn       { my $w = my_gtk->new(shift @_); $w->_ask_warn(@_); main($w); }
-sub ask_yesorno    { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Yes"), _("No")); main($w); }
-sub ask_okcancel   { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Is this correct?"), _("Ok"), _("Cancel")); main($w); }
-sub ask_from_entry { my $w = my_gtk->new(shift @_); $w->_ask_from_entry(@_); main($w); }
+sub ask_warn       { my $w = my_gtk->new(shift @_); $w->_ask_warn(@_); main($w) }
+sub ask_yesorno    { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Yes"), _("No")); main($w) }
+sub ask_okcancel   { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Is this correct?"), _("Ok"), _("Cancel")); main($w) }
+sub ask_from_entry { my $w = my_gtk->new(shift @_); $w->_ask_from_entry(@_); main($w) }
 
 sub _ask_from_entry($$@) {
     my ($o, @msgs) = @_;
@@ -1144,7 +1142,7 @@ sub ask_browse_tree_info {
 		   ftin   =>  [ _("Collapse Tree") , sub { $tree->collapse_recursive(undef) } ],
 		   reload =>  [ _("Toggle between flat and group sorted"), sub { invbool(\$common->{state}{flat}); $common->{rebuild_tree}->() } ]);
     foreach my $ic (@{$common->{icons} || []}) {
-	push @toolbar, ( $ic->{icon} => [ $ic->{help}, sub {
+	push @toolbar, ($ic->{icon} => [ $ic->{help}, sub {
 					     if ($ic->{code}) {
 						 my $w = $ic->{wait_message} && $common->{wait_message}->('', $ic->{wait_message});
 						 $ic->{code}();
@@ -1160,7 +1158,7 @@ sub ask_browse_tree_info {
     }
     $toolbar->set_style("icons");
 
-    my $widgets = { w => $w, tree => $tree, info => $info, status => $status};
+    my $widgets = { w => $w, tree => $tree, info => $info, status => $status };
     ask_browse_tree_info_given_widgets($common, $widgets);
 }
 

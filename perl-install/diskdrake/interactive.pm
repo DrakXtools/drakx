@@ -42,7 +42,7 @@ struct part {
     # !isFormatted && !notFormatted means we don't know which state we're in
 
   int raid          # for partitions of type isRawRAID and which isPartOfRAID, the raid device number
-  string lvm        # partition used as a PV for the VG with {lvm} as LVMname
+  string lvm        # partition used as a PV for the VG with {lvm} as LVMname  #-#
   loopback loopback[]   # loopback living on this partition
 
   # internal
@@ -725,7 +725,7 @@ sub Add2RAID {
 
     local $_ = @$raids == () ? "new" :
       $in->ask_from_list_('', _("Choose an existing RAID to add to"),
-			  [ (grep {$_} map_index { $_ && "md$::i" } @$raids), __("new") ]) or return;
+			  [ (grep { $_ } map_index { $_ && "md$::i" } @$raids), __("new") ]) or return;
 
     if (/new/) {
 	my $nb1 = raid::new($raids, $part);
@@ -834,7 +834,7 @@ sub Options {
     $in->ask_from(_("Mount options"),
 		  '',
 		  [ 
-		   (map {; 
+		   (map { 
 			 { label => $_, text => scalar warp_text(formatAlaTeX($help{$_})), val => \$options->{$_}, 
 			   advanced => !$part->{rootDevice} && !member($_, @simple_options), if_(!/=$/, type => 'bool'), }
 		     } keys %$options),
@@ -1138,7 +1138,7 @@ sub format_hd_info {
     $info .= _("Size: %s\n", formatXiB($hd->{totalsectors}, 512)) if $hd->{totalsectors};
     $info .= _("Geometry: %s cylinders, %s heads, %s sectors\n", @{$hd->{geom}}{qw(cylinders heads sectors)}) if $::expert && $hd->{geom};
     $info .= _("Info: ") . ($hd->{info} || $hd->{media_type}) . "\n" if $::expert && ($hd->{info} || $hd->{media_type});
-    $info .= _("LVM-disks %s\n", join ", ", map {$_->{device}} @{$hd->{disks}}) if isLVM($hd) && $hd->{disks};
+    $info .= _("LVM-disks %s\n", join ", ", map { $_->{device} } @{$hd->{disks}}) if isLVM($hd) && $hd->{disks};
     $info .= _("Partition table type: %s\n", $1) if $::expert && ref($hd) =~ /_([^_]+)$/;
     $info .= _("on channel %d id %d\n", $hd->{channel}, $hd->{id}) if $::expert && exists $hd->{channel};
     $info;

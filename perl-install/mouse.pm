@@ -154,7 +154,7 @@ sub update_type_name {
 sub fullnames { 
     map_each { 
 	my $type = $::a;
-	grep {$_} map {
+	grep { $_ } map {
 	    if ($_) {
 		my $l = raw2mouse($type, $_);
 		"$type|$l->{name}";
@@ -282,13 +282,13 @@ sub detect() {
 	my $keep_mouse;
 	if (my (@l) = detect_devices::usbWacom()) {
 	    log::l("found usb wacom $_->{driver} $_->{description} ($_->{type})") foreach @l;
-	    eval { modules::load("wacom", "evdev"); };
+	    eval { modules::load("wacom", "evdev") };
 	    unless ($@) {
 		foreach (0..$#l) {
 		    detect_devices::tryOpen("input/event$_") and $keep_mouse = 1, push @wacom, "input/event$_";
 		}
 	    }
-	    $keep_mouse or eval { modules::unload("evdev", "wacom"); };
+	    $keep_mouse or eval { modules::unload("evdev", "wacom") };
 	}
     }
 
@@ -393,7 +393,7 @@ sub test_mouse_install {
 		  ),
 	  );
     $okcancel->set_uposition(7, $height-43);
-    Gtk->timeout_add(2000, sub { gtkset_sensitive($okcancel, 1); $okcancel->draw(undef); });
+    Gtk->timeout_add(2000, sub { gtkset_sensitive($okcancel, 1); $okcancel->draw(undef) });
     test_mouse($mouse, $w, $darea, $width, $height);
     $w->{window}->set_usize(undef, $height+10);
     $w->sync; # HACK
@@ -472,9 +472,9 @@ sub test_mouse {
 					     ($darea->allocation->[2]-$width)/2+98, ($darea->allocation->[3]-$height)/2 + 67,
 					     13, 62);
 	    } else {
-  		$darea->window->draw_arc ( $darea->style->black_gc,
-  					   1, ($darea->allocation->[2]-$width)/2 + $x, ($darea->allocation->[3]-$height)/2 + 90, 20, 25,
-  					   0, 360*64);
+  		$darea->window->draw_arc ($darea->style->black_gc,
+  					  1, ($darea->allocation->[2]-$width)/2 + $x, ($darea->allocation->[3]-$height)/2 + 90, 20, 25,
+  					  0, 360*64);
 	    }
 	} elsif ($nb == 3) {
 	    $wait=1;

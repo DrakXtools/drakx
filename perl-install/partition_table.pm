@@ -277,7 +277,7 @@ sub description {
 
 sub isPrimary {
     my ($part, $hd) = @_;
-    foreach (@{$hd->{primary}{raw}}) { $part eq $_ and return 1; }
+    foreach (@{$hd->{primary}{raw}}) { $part eq $_ and return 1 }
     0;
 }
 
@@ -703,7 +703,7 @@ The only solution is to move your primary partitions to have the hole next to th
 	my ($ext, $ext_size) = is_empty_array_ref($hd->{extended}) ?
 	  ($hd->{primary}, -1) : #- -1 size will be computed by adjust_main_extended
 	  (top(@{$hd->{extended}}), $part->{size});
-	my %ext = ( type => $extended_type || 5, start => $part->{start}, size => $ext_size );
+	my %ext = (type => $extended_type || 5, start => $part->{start}, size => $ext_size);
 
 	$hd->raw_add($ext->{raw}, \%ext);
 	$ext->{extended} = \%ext;

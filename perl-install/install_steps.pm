@@ -703,7 +703,7 @@ sub addUser {
     my $users = $o->{users} ||= [];
 
     my (%uids, %gids); 
-    foreach (glob_("$p/home")) { my ($u, $g) = (stat($_))[4,5]; $uids{$u} = 1; $gids{$g} = 1; }
+    foreach (glob_("$p/home")) { my ($u, $g) = (stat($_))[4,5]; $uids{$u} = 1; $gids{$g} = 1 }
 
     foreach (@$users) {
 	$_->{home} ||= "/home/$_->{name}";
@@ -712,7 +712,7 @@ sub addUser {
 	my $g = $_->{gid} || ($_->{oldg} = (stat("$p$_->{home}"))[5]);
 	#- search for available uid above 501 else initscripts may fail to change language for KDE.
 	if (!$u || getpwuid($u)) { for ($u = 501; getpwuid($u) || $uids{$u}; $u++) {} }
-	if (!$g                ) { for ($g = 501; getgrgid($g) || $gids{$g}; $g++) {} }
+	if (!$g)                 { for ($g = 501; getgrgid($g) || $gids{$g}; $g++) {} }
 	
 	$_->{uid} = $u; $uids{$u} = 1;
 	$_->{gid} = $g; $gids{$g} = 1;
@@ -866,8 +866,7 @@ sub setupBootloader($) {
 	map_index { -e "$o->{prefix}/boot/initrd-$_->[1]" ? 
 			    "$::i:$b->{part_nb}$_->[0] root=$b->{root} initrd=/boot/initrd-$_->[1] $b->{perImageAppend}\n" :
 			    "$::i:$b->{part_nb}$_->[0] root=$b->{root} $b->{perImageAppend}\n" }
-	map { run_program::rooted($o->{prefix}, "mkinitrd", "-f", "/boot/initrd-$_->[1]", "--ifneeded", $_->[1]) ;#or
-	  #unlink "$o->{prefix}/boot/initrd-$_->[1]";$_ } grep { $_->[0] && $_->[1] }
+	map { run_program::rooted($o->{prefix}, "mkinitrd", "-f", "/boot/initrd-$_->[1]", "--ifneeded", $_->[1]);
 	  $_ } grep { $_->[0] && $_->[1] }
 	map { [ m|$o->{prefix}(/boot/vmlinux-(.*))| ] } glob_("$o->{prefix}/boot/vmlinux-*");
 #	output "$o->{prefix}/etc/aboot.conf", 
@@ -962,7 +961,7 @@ sub exitInstall {
 	output "$o->{prefix}$report", install_any::report_bug($o->{prefix});
 	run_program::rooted($o->{prefix}, 'gzip', $report);
     };
-    install_any::getAndSaveAutoInstallFloppy($o, 1, "$o->{prefix}/root/drakx/replay_install.img" );
+    install_any::getAndSaveAutoInstallFloppy($o, 1, "$o->{prefix}/root/drakx/replay_install.img");
     eval { output "$o->{prefix}/root/drakx/README", "This directory contains several installation-related files,
 mostly log files (very useful if you ever report a bug!).
 

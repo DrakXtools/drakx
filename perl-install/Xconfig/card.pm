@@ -339,7 +339,7 @@ sub xfree_and_glx_choose {
     my $tc = 
       $auto ? $choices[0] :
 	$in->ask_from_listf(_("XFree configuration"), 
-			    formatAlaTeX(join("\n\n\n", (grep {$_} map { $_->{more_messages} } @choices),
+			    formatAlaTeX(join("\n\n\n", (grep { $_ } map { $_->{more_messages} } @choices),
 					      _("Which configuration of XFree do you want to have?"))), 
 			    sub { $_[0]{text} }, \@choices) or return;
     log::l("Using $tc->{text}");

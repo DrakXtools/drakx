@@ -303,18 +303,18 @@ sub get_holes {
 sub get_all_fstab {
     my ($all_hds) = @_;
     my @parts = map { partition_table::get_normal_parts($_) } all_hds($all_hds);
-    my @raids = grep {$_} @{$all_hds->{raids}};
+    my @raids = grep { $_ } @{$all_hds->{raids}};
     @parts, @raids, @{$all_hds->{loopbacks}};
 }
 sub get_really_all_fstab {
     my ($all_hds) = @_;
     my @parts = map { partition_table::get_normal_parts($_) } all_hds($all_hds);
-    my @raids = grep {$_} @{$all_hds->{raids}};
+    my @raids = grep { $_ } @{$all_hds->{raids}};
     @parts, @raids, @{$all_hds->{loopbacks}}, @{$all_hds->{raw_hds}}, @{$all_hds->{nfss}}, @{$all_hds->{smbs}};
 }
 sub get_all_fstab_and_holes {
     my ($all_hds) = @_;
-    my @raids = grep {$_} @{$all_hds->{raids}};
+    my @raids = grep { $_ } @{$all_hds->{raids}};
     get_fstab_and_holes(all_hds($all_hds)), @raids, @{$all_hds->{loopbacks}};
 }
 sub get_all_holes {

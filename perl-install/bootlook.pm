@@ -59,7 +59,7 @@ my $lilogrub = chomp_(`detectloader -q`);
 
 my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window ("toplevel");
 $window->signal_connect(delete_event => sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0) });
-$window->set_title(_("Boot Style Configuration") );
+$window->set_title(_("Boot Style Configuration"));
 $window->border_width(2);
 #$window->realize;
 
@@ -79,7 +79,7 @@ my $pixmap = new Gtk::Pixmap($h_pixmap, $h_mask);
 my @menu_items = ( { path => _("/_File"), type => '<Branch>' },
 		   { path => _("/File/_Quit"), accelerator => _("<control>Q"), callback    => sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0) } },
 		 );
-my $menubar = get_main_menu( $window );
+my $menubar = get_main_menu($window);
 ######### menus end
 
 my $user_combo = new Gtk::Combo;
@@ -127,7 +127,7 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 # 									   }
 # 										   }
 # 								   }),
-# 						gtkpack__ ( gtkset_sensitive ($a_box, $a_mode),
+# 						gtkpack__ (gtkset_sensitive ($a_box, $a_mode),
 # 							    gtksignal_connect ($a_c_button,clicked => sub{$pixmap->set($c_pixmap, $c_mask)}),
 # 							    gtksignal_connect ($a_h_button,clicked => sub{$pixmap->set($h_pixmap, $h_mask)}),
 # 							    gtksignal_connect ($a_v_button,clicked => sub{$pixmap->set($v_pixmap, $v_mask)}),
@@ -140,7 +140,7 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 		  # X
 		  gtkadd (new Gtk::Frame (_("System mode")),
 			  gtkpack__ (new Gtk::VBox(0, 5),
-				     gtksignal_connect(gtkset_active(new Gtk::CheckButton (_("Launch the graphical environment when your system starts")), $x_mode ), clicked => sub {
+				     gtksignal_connect(gtkset_active(new Gtk::CheckButton (_("Launch the graphical environment when your system starts")), $x_mode), clicked => sub {
 							   $x_box->set_sensitive(!$x_mode);
 							   $x_mode = !$x_mode;
 						       }),
@@ -157,8 +157,8 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 				    )
 			 ),
 		 gtkadd (gtkset_layout(new Gtk::HButtonBox,-end),
-			 gtksignal_connect(new Gtk::Button (_("OK")), clicked=>sub{updateInit();updateAutologin();updateAurora();$::isEmbedded ? kill(USR1,$::CCPID) : Gtk->exit(0)}),
-			 gtksignal_connect(new Gtk::Button (_("Cancel")), clicked => sub {$::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0)})
+			 gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub{ updateInit(); updateAutologin(); updateAurora(); $::isEmbedded ? kill(USR1,$::CCPID) : Gtk->exit(0) }),
+			 gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0) })
 			)
 	       )
       );
@@ -167,10 +167,10 @@ $a_button->set_active($a_mode); # up == false == "0"
 if ($a_mode) {
     my $a = readlink "/etc/aurora/Monitor";
     $a =~ s#/lib/aurora/Monitors/##;
-    if ($a eq "NewStyle-Categorizing-WsLib") {$a_c_button->set_active(1);  $pixmap->set($c_pixmap, $c_mask);}
-    if ($a eq "NewStyle-WsLib") {$a_h_button->set_active(1);  $pixmap->set($h_pixmap, $h_mask);}
-    if ($a eq "Traditional-WsLib") {$a_v_button->set_active(1); $pixmap->set($v_pixmap, $v_mask);}  
-    if ($a eq "Traditional-Gtk+") {$a_g_button->set_active(1); $pixmap->set($g_pixmap, $g_mask);}
+    if ($a eq "NewStyle-Categorizing-WsLib") { $a_c_button->set_active(1); $pixmap->set($c_pixmap, $c_mask) }
+    if ($a eq "NewStyle-WsLib") { $a_h_button->set_active(1);  $pixmap->set($h_pixmap, $h_mask) }
+    if ($a eq "Traditional-WsLib") { $a_v_button->set_active(1); $pixmap->set($v_pixmap, $v_mask) }  
+    if ($a eq "Traditional-Gtk+") { $a_g_button->set_active(1); $pixmap->set($g_pixmap, $g_mask) }
 } else {
     $pixmap->set($t_pixmap, $t_mask);
 }
@@ -207,17 +207,17 @@ sub get_wm
 #-------------------------------------------------------------
 
 sub print_hello {
-  print( "mcdtg !\n" );
+  print("mcdtg !\n");
 }
 
 sub get_main_menu {
-  my ( $window ) = @_;
+  my ($window) = @_;
 
   my $accel_group = new Gtk::AccelGroup();
-  my $item_factory = new Gtk::ItemFactory( 'Gtk::MenuBar', '<main>', $accel_group );
-  $item_factory->create_items( @menu_items );
-  $window->add_accel_group( $accel_group );
-  return ( $item_factory->get_widget( '<main>' ) );
+  my $item_factory = new Gtk::ItemFactory('Gtk::MenuBar', '<main>', $accel_group);
+  $item_factory->create_items(@menu_items);
+  $window->add_accel_group($accel_group);
+  return $item_factory->get_widget('<main>');
 }
 
 #-------------------------------------------------------------
@@ -228,7 +228,7 @@ sub isXlaunched {
     my $line;
     open INITTAB, "/etc/inittab" or die _("can not open /etc/inittab for reading: %s", $!);
     while (<INITTAB>) {
-	if (/id:([1-6]):initdefault:/) { $line = $_; last; }
+	if (/id:([1-6]):initdefault:/) { $line = $_; last }
     }
     close INITTAB;
     $line =~ s/id:([1-6]):initdefault:/$1/;
@@ -278,7 +278,7 @@ sub isAutologin {
     my $line;
     open AUTOLOGIN, "/etc/sysconfig/autologin";
     while (<AUTOLOGIN>) {
-	if (/AUTOLOGIN=(yes|no)/) { $line = $_; last; }
+	if (/AUTOLOGIN=(yes|no)/) { $line = $_; last }
     }
     close AUTOLOGIN;
     $line =~ s/AUTOLOGIN=(yes|no)/$1/;

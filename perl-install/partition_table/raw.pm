@@ -106,7 +106,7 @@ sub get_geometry($) {
     { geom => \%geom, totalsectors => $total };
 }
 
-sub openit($$;$) { sysopen $_[1], $_[0]{file}, $_[2] || 0; }
+sub openit($$;$) { sysopen $_[1], $_[0]{file}, $_[2] || 0 }
 
 # cause kernel to re-read partition table
 sub kernel_read($) {

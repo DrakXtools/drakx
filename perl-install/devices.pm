@@ -24,7 +24,7 @@ sub size($) {
     my ($high, $mid);
 
     #- first find n where 2^n < size <= 2^n+1
-    for ($high = 1; $high > 0 && &$valid_offset($high); $high *= 2) { $low = $high; }
+    for ($high = 1; $high > 0 && &$valid_offset($high); $high *= 2) { $low = $high }
 
     while ($low < $high - 1) {
 	$mid = int ($low + $high) / 2;

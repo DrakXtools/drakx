@@ -95,7 +95,7 @@ sub load_category {
 
 	!($@ && $_->{try});
     } probe_category($category, $probe_type),
-      map {; { driver => $_, description => $_, try => 1 } } @try_modules;
+      map { { driver => $_, description => $_, try => 1 } } @try_modules;
 }
 
 sub probe_category {
@@ -121,7 +121,7 @@ sub probe_category {
 }
 
 sub load_ide {
-    eval { load("ide-cd"); }
+    eval { load("ide-cd") }
 }
 
 

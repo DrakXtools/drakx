@@ -63,7 +63,7 @@ Try to reconfigure your connection.");
 	    $in->ask_okcancel(_("Network Configuration"), $m, 1);
 	    undef $::Wizard_no_previous;
 	    undef $::Wizard_finished;
-	} else {  $in->ask_warn('', $m ); }
+	} else {  $in->ask_warn('', $m) }
 	$::isInstall and disconnect_backend();
     }
     undef $::Wizard_no_previous;
@@ -153,7 +153,7 @@ sub connected_bg {
 	    undef $kid_pipe;
 	    $$ref = $a;
   	}
-    } else { $kid_pipe = connected2(); }
+    } else { $kid_pipe = connected2() }
     1;
 }
 

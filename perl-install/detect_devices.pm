@@ -166,7 +166,7 @@ sub isFloppyOrHD {
 }
 
 sub getSCSI() {
-    my $err = sub { log::l("ERROR: unexpected line in /proc/scsi/scsi: $_[0]"); };
+    my $err = sub { log::l("ERROR: unexpected line in /proc/scsi/scsi: $_[0]") };
 
     my ($first, @l) = common::join_lines(cat_("/proc/scsi/scsi")) or return;
     $first =~ /^Attached devices:/ or $err->($first);
@@ -472,14 +472,14 @@ sub whatParport() {
 	{
 	    local $_;
 	    while (<F>) { 
-		if (/(.*):(.*);/) {
+		if (/(.*):(.*);/) { #-#
 		    $elem->{$1} = $2;
 		    $elem->{$1} =~ s/Hewlett[-\s_]Packard/HP/;
 		    $elem->{$1} =~ s/HEWLETT[-\s_]PACKARD/HP/;
 		}
 	    }
 	}
-	push @res, { port => "/dev/lp$_", val => $elem};
+	push @res, { port => "/dev/lp$_", val => $elem };
     }
     @res;
 }
@@ -528,12 +528,14 @@ sub whatUsbport() {
 	#     _IOC(_IOC_READ, 'P', IOCNR_GET_DEVICE_ID, len)
 	# _IOC(), _IOC_READ as defined in /usr/include/asm/ioctl.h
 	# Use "eval" so that program does not stop when IOCTL fails
-	eval{ my $output = "\0" x 1024; 
-	      ioctl(PORT, 0x84005001, $output);
-	      $idstr = $output; } or do {
-		  close PORT;
-		  next;
-	      };
+	eval { 
+	    my $output = "\0" x 1024; 
+	    ioctl(PORT, 0x84005001, $output);
+	    $idstr = $output;
+        } or do {
+	    close PORT;
+	    next;
+	};
 	close PORT;
 	# Remove non-printable characters
 	$idstr =~ tr/[\x00-\x1f]/\./;
@@ -590,7 +592,7 @@ sub whatPrinter() {
 }
 
 sub whatPrinterPort() {
-    grep { tryWrite($_)} qw(/dev/lp0 /dev/lp1 /dev/lp2 /dev/usb/lp0 /dev/usb/lp1 /dev/usb/lp2 /dev/usb/lp3 /dev/usb/lp4 /dev/usb/lp5 /dev/usb/lp6 /dev/usb/lp7 /dev/usb/lp8 /dev/usb/lp9);
+    grep { tryWrite($_) } qw(/dev/lp0 /dev/lp1 /dev/lp2 /dev/usb/lp0 /dev/usb/lp1 /dev/usb/lp2 /dev/usb/lp3 /dev/usb/lp4 /dev/usb/lp5 /dev/usb/lp6 /dev/usb/lp7 /dev/usb/lp8 /dev/usb/lp9);
 }
 
 sub probeSerialDevices {
@@ -656,7 +658,7 @@ sub raidAutoStart {
 
     log::l("raidAutoStart");
     eval { modules::load('md') };
-    my %personalities = ( '1' => 'linear', '2' => 'raid0', '3' => 'raid1', '4' => 'raid5' );
+    my %personalities = ('1' => 'linear', '2' => 'raid0', '3' => 'raid1', '4' => 'raid5');
     raidAutoStartIoctl() or raidAutoStartRaidtab(@parts);
     if (my @needed_perso = map { 
 	if_(/^kmod: failed.*md-personality-(.)/ ||

@@ -31,7 +31,7 @@ sub getopts {
     while (1) {
 	local $_ = $o->[0];
 	$_ && /^-/ or return @r;
-	for (my $i = 0; $i < @_; $i++) { /$_[$i]/ and $r[$i] = $_[$i]; }
+	for (my $i = 0; $i < @_; $i++) { /$_[$i]/ and $r[$i] = $_[$i] }
 	shift @$o;
     }
     @r;
@@ -40,11 +40,11 @@ sub getopts {
 sub true { exit 0 }
 sub false { exit 1 }
 sub cat { @ARGV = @_; print while <> }
-sub which { ARG: foreach (@_) { foreach my $c (split /:/, $ENV{PATH}) { -x "$c/$_" and print("$c/$_\n"), next ARG; }}}
+sub which { ARG: foreach (@_) { foreach my $c (split /:/, $ENV{PATH}) { -x "$c/$_" and print("$c/$_\n"), next ARG }}}
 sub dirname_ { print dirname(@_), "\n" }
 sub basename_ { print basename(@_), "\n" }
 sub rmdir_ { foreach (@_) { rmdir $_ or die "rmdir: can't remove $_\n" } }
-sub lsmod { print "Module                  Size  Used by\n"; cat("/proc/modules"); }
+sub lsmod { print "Module                  Size  Used by\n"; cat("/proc/modules") }
 
 sub grep_ {
     my ($h, $v, $i) = getopts(\@_, qw(hvi));
@@ -103,7 +103,7 @@ sub mknod {
 	require c;
 	my $mode = $ {{"b" => c::S_IFBLK(), "c" => c::S_IFCHR()}}{$_[1]} or die "unknown node type $_[1]\n";
 	syscall_('mknod', my $a = $_[0], $mode | 0600, makedev($_[2], $_[3])) or die "mknod failed: $!\n";
-    } else { die "usage: mknod <path> [b|c] <major> <minor> or mknod <path>\n"; }
+    } else { die "usage: mknod <path> [b|c] <major> <minor> or mknod <path>\n" }
 }
 
 sub ln {
@@ -217,7 +217,7 @@ sub ls {
 		     displaySize($s[2]) ? $s[7] : join(", ", unmakedev($s[6])),
 		     scalar localtime $s[9], -l $_ ? "$_ -> " . readlink $_ : $_);
 	    print $^A; $^A = '';
-	} else { print "$_\n"; }
+	} else { print "$_\n" }
     }
 }
 sub cp {
@@ -276,7 +276,7 @@ sub ps {
 @>>>> @>>>> @>>> @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 $pid, $rss, $cpu, $cmd
 .
-    foreach $pid (sort {$a <=> $b} grep { /\d+/ } all('/proc')) {
+    foreach $pid (sort { $a <=> $b } grep { /\d+/ } all('/proc')) {
 	 my @l = split(' ', cat_("/proc/$pid/stat"));
 	 $cpu = sprintf "%2.1f", max(0, min(99, ($l[13] + $l[14]) * 100 / $hertz / ($uptime - $l[21] / $hertz)));
 	 $rss = (split ' ', cat_("/proc/$pid/stat"))[23] * $page;
@@ -297,7 +297,7 @@ sub dd {
 	$h{$1} = $2;
     }
     local (*IF, *OF); my ($tmp, $nb, $read);
-    ref $h{if} eq 'GLOB' ? *IF = $h{if} : sysopen(IF, $h{if}, 0   ) || die "error: can't open file $h{if}\n";
+    ref $h{if} eq 'GLOB' ? *IF = $h{if} : sysopen(IF, $h{if}, 0)    || die "error: can't open file $h{if}\n";
     ref $h{of} eq 'GLOB' ? *OF = $h{of} : sysopen(OF, $h{of}, 0x41) || die "error: can't open file $h{of}\n";
 
     $h{bs} = removeXiBSuffix($h{bs});
@@ -322,7 +322,7 @@ sub head_tail {
     if ($0 eq 'head') {
 	while (<F>) { $n-- or return; print }
     } else {
-	@_ = (); while (<F>) { push @_, $_; @_ > $n and shift; }
+	@_ = (); while (<F>) { push @_, $_; @_ > $n and shift }
 	print @_;
     }
 }
@@ -376,7 +376,7 @@ sub pack_ {
 
 	    local *F;
 	    open F, $_ or die "can't read file $_: $!\n";
-	    while (read F, $t, $BUFFER_SIZE) { print $t; }
+	    while (read F, $t, $BUFFER_SIZE) { print $t }
 	}
     }
 }
@@ -513,7 +513,7 @@ sub lspci {
 }
 *lssbus = *lspci;
 
-sub dmesg { print cat_("/tmp/syslog"); }
+sub dmesg { print cat_("/tmp/syslog") }
 
 sub sort {
     my ($n, $h) = getopts(\@_, qw(nh));

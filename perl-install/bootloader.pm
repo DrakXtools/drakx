@@ -644,7 +644,7 @@ sub install_silo($$$) {
 	print F "timeout=", round(10 * $silo->{timeout}) if $silo->{timeout};
 	print F "message=$silo->{boot}/message" if $silo->{message};
 
-	foreach (@{$silo->{entries}}) {#my ($v, $e) = each %{$silo->{entries}}) {
+	foreach (@{$silo->{entries}}) { #-my ($v, $e) = each %{$silo->{entries}}) {
 	    my $type = "$_->{type}=$_->{kernel_or_dev}"; $type =~ s|/boot|$silo->{boot}|;
 	    print F $type;
 	    print F "\tlabel=$_->{label}";

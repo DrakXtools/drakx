@@ -398,9 +398,9 @@ sub setup {
     #- Xpmac doesn't map keys quite right
     if (arch() =~ /ppc/ && !$::testing && $ENV{DISPLAY}) {
 	log::l("Fixing Mac keyboard");
-	run_program::run('xmodmap', "-e",  "keycode 59 = BackSpace" );
-	run_program::run('xmodmap', "-e",  "keycode 131 = Shift_R" );
-	run_program::run('xmodmap', "-e",  "add shift = Shift_R" );
+	run_program::run('xmodmap', "-e",  "keycode 59 = BackSpace");
+	run_program::run('xmodmap', "-e",  "keycode 131 = Shift_R");
+	run_program::run('xmodmap', "-e",  "add shift = Shift_R");
 	return;
     }
 

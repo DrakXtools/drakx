@@ -248,7 +248,7 @@ sub spawnShell {
     ioctl(STDIN, c::TIOCSCTTY(), 0) or warn "could not set new controlling tty: $!";
 
     my $busybox = "/usr/bin/busybox";
-    exec {-e $busybox ? $busybox : "/bin/sh"} "/bin/sh" or log::l("exec of /bin/sh failed: $!");
+    exec { -e $busybox ? $busybox : "/bin/sh" } "/bin/sh" or log::l("exec of /bin/sh failed: $!");
 }
 
 sub getAvailableSpace {
@@ -347,7 +347,7 @@ sub setDefaultPackages {
     push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
     push @{$o->{default_packages}}, "lvm" if !is_empty_array_ref($o->{all_hds}{lvms});
     push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("sound-slot-0") =~ /^snd-card-/;
-    push @{$o->{default_packages}}, uniq(grep {$_} map { fsedit::package_needed_for_partition_type($_) } @{$o->{fstab}});
+    push @{$o->{default_packages}}, uniq(grep { $_ } map { fsedit::package_needed_for_partition_type($_) } @{$o->{fstab}});
 
     #- if no cleaning needed, populate by default, clean is used for second or more call to this function.
     unless ($clean) {
@@ -814,7 +814,7 @@ sub getAndSaveAutoInstallFloppy {
 ", "07\n" if !$replay;
 
 	local $o->{partitioning}{clearall} = !$replay;
-	eval { output("$mountdir/auto_inst.cfg", g_auto_install($replay)); };
+	eval { output("$mountdir/auto_inst.cfg", g_auto_install($replay)) };
 	$@ and log::l("Warning: <$@>");
 
 	fs::umount($mountdir);

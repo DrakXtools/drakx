@@ -82,7 +82,7 @@ sub updateSize {
 
     $part->{size} = do {
 	if (/0|linear/) { sum @l        }
-	elsif (/1/  )   { min @l        }
+	elsif (/1/)     { min @l        }
 	elsif (/4|5/)   { min(@l) * $#l }
     };
 }
@@ -107,7 +107,7 @@ sub write {
     local $\ = "\n";
     open F, ">$file" or die _("Can't write file %s", $file);
 
-    foreach (grep {$_} @$raids) {
+    foreach (grep { $_ } @$raids) {
 	print F <<"EOF";
 raiddev       /dev/$_->{device}
 raid-level    $_->{level}
@@ -149,7 +149,7 @@ sub format_part {
 sub verify {
     my ($raids) = @_;
     $raids or return;
-    foreach (grep {$_} @$raids) {
+    foreach (grep { $_ } @$raids) {
 	@{$_->{disks}} >= ($_->{level} =~ /4|5/ ? 3 : 2) or die _("Not enough partitions for RAID level %d\n", $_->{level});
     }
 }
@@ -159,7 +159,7 @@ sub prepare_prefixed {
     $raids or return;
 
     eval { cp_af("/etc/raidtab", "$prefix/etc/raidtab") };
-    foreach (grep {$_} @$raids) {
+    foreach (grep { $_ } @$raids) {
 	devices::make("$prefix/dev/$_->{device}") foreach @{$_->{disks}};
     }
 }

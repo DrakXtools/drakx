@@ -555,7 +555,7 @@ sub main {
 
     #-the main cycle
     my $clicked = 0;
-    MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {
+    MAIN: for ($o->{step} = $o->{steps}{first}; ; $o->{step} = getNextStep()) {
 	$o->{steps}{$o->{step}}{entered}++;
 	$o->enteringStep($o->{step});
 	if ($o->{steps}{$o->{step}}{icon}) { $o->{icon} = $o->{steps}{$o->{step}}{icon} } else { undef $o->{icon} }

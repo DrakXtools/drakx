@@ -37,7 +37,7 @@ sub config_cups {
     local $::isWizard = 0;
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in, $upNetwork)) {return 0};
+    if (!check_network($printer, $in, $upNetwork)) { return 0 };
 
     $in->set_help('configureRemoteCUPSServer') if $::isInstall;
     my $queue = $printer->{OLD_QUEUE};
@@ -144,7 +144,7 @@ sub auto_detect {
     {
 	modules::get_probeall("usb-interface") and eval { modules::load("printer") };
 	eval { modules::unload(qw(lp parport_pc parport_probe parport)) }; #- on kernel 2.4 parport has to be unloaded to probe again
-	eval { modules::load(qw(parport_pc lp parport_probe)); }; #- take care as not available on 2.4 kernel (silent error).
+	eval { modules::load(qw(parport_pc lp parport_probe)) }; #- take care as not available on 2.4 kernel (silent error).
     }
     my $b = before_leaving { eval { modules::unload("parport_probe") } };
     detect_devices::whatPrinter();
@@ -396,7 +396,7 @@ Do you really want to get your printers auto-detected?"),
 	    my $manualconf = 0;
 	    $manualconf = 1 if (($printer->{MANUAL}) || (!$do_auto_detect));
 	    if (!$in->ask_from_(
-	    {title => _("Local Printer"),
+	    { title => _("Local Printer"),
 	     messages => (($do_auto_detect ?
 			  ($::expert ?
 			   (($#menuentrieslist == 0) ?
@@ -607,7 +607,7 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
         if (($descr !~ /$guessedmake/i) &&
             (($guessedmake ne "hp") ||
              ($descr !~ /Hewlett[\s-]+Packard/i)))
-            {$printer->{DBENTRY} = ""};
+            { $printer->{DBENTRY} = "" };
     }
 
     #- Pre-fill the "Description" field with the printer's model name
@@ -629,7 +629,7 @@ sub setup_lpd {
 
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in, $upNetwork)) {return 0};
+    if (!check_network($printer, $in, $upNetwork)) { return 0 };
 
     $in->set_help('setupLPD') if $::isInstall;
     my ($uri, $remotehost, $remotequeue);
@@ -680,7 +680,7 @@ sub setup_smb {
 
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in, $upNetwork)) {return 0};
+    if (!check_network($printer, $in, $upNetwork)) { return 0 };
 
     $in->set_help('setupSMB') if $::isInstall;
     my ($uri, $smbuser, $smbpassword, $workgroup, $smbserver, $smbserverip, $smbshare);
@@ -789,7 +789,7 @@ sub setup_ncp {
 
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in, $upNetwork)) {return 0};
+    if (!check_network($printer, $in, $upNetwork)) { return 0 };
 
     $in->set_help('setupNCP') if $::isInstall;
     my ($uri, $ncpuser, $ncppassword, $ncpserver, $ncpqueue);
@@ -859,7 +859,7 @@ sub setup_socket {
 
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in, $upNetwork)) {return 0};
+    if (!check_network($printer, $in, $upNetwork)) { return 0 };
 
     $in->set_help('setupSocket') if $::isInstall;
     my ($hostname, $port, $uri, $remotehost,$remoteport);
@@ -933,7 +933,7 @@ complete => sub {
 
     # Non-local printer, check network and abort if no network available
     if (($printer->{currentqueue}{connect} !~ m!^file:/!) &&
-        (!check_network($printer, $in, $upNetwork))) {return 0};
+        (!check_network($printer, $in, $upNetwork))) { return 0 };
 
     # If the chosen protocol needs additional software, install it.
 
@@ -1109,7 +1109,7 @@ sub get_db_entry {
 		if (($matchstr !~ /$guessedmake/i) &&
 		    (($guessedmake ne "hp") ||
 		     ($matchstr !~ /Hewlett[\s-]+Packard/i)))
-		{$printer->{DBENTRY} = ""};
+		{ $printer->{DBENTRY} = "" };
 	    }
 	    # Set the OLD_CHOICE to a non-existing value
 	    $printer->{OLD_CHOICE} = "XXX";
@@ -1303,8 +1303,8 @@ sub get_printer_info {
 		    $printer->{currentqueue}{connect} = 'file:/dev/null';
 		    #install packages
 		    my $drivertype = $printer->{currentqueue}{model};
-		    if ($drivertype eq 'Z22') {$drivertype = 'Z32';}
-		    if ($drivertype eq 'Z23') {$drivertype = 'Z33';}
+		    if ($drivertype eq 'Z22') { $drivertype = 'Z32' }
+		    if ($drivertype eq 'Z23') { $drivertype = 'Z33' }
 		    $drivertype = lc($drivertype);
 		    if (!printer::files_exist("/usr/local/lexmark/$drivertype/$drivertype")) {
 			eval { $in->do_pkgs->install("lexmark-drivers-$drivertype") };
@@ -2007,7 +2007,7 @@ sub check_network {
 
     # Second check: Is the network running?
 
-    if (printer::network_running()) {return 1;}
+    if (printer::network_running()) { return 1 }
 
     # The network is configured now, start it.
     if (!start_network($in, $upNetwork)) {
@@ -2050,14 +2050,14 @@ sub security_check {
     }
 
     # Exit silently if the spooler is PDQ
-    if ($spooler eq "pdq") {return 1;}
+    if ($spooler eq "pdq") { return 1 }
 
     # Exit silently in medium or lower security levels
-    if ((!$security) || ($security < 4)) {return 1;}
+    if ((!$security) || ($security < 4)) { return 1 }
     
     # Exit silently if the current spooler is already activated for the current
     # security level
-    if (printer::spooler_in_security_level($spooler, $security)) {return 1;}
+    if (printer::spooler_in_security_level($spooler, $security)) { return 1 }
 
     # Tell user in which security mode he is and ask him whether he really
     # wants to activate the spooler in the given security mode. Stop the
@@ -2370,7 +2370,7 @@ sub main {
 
     # If we have chosen a spooler, install it and mark it as default spooler
     if (($printer->{SPOOLER}) && ($printer->{SPOOLER} ne '')) {
-	if (!install_spooler($printer, $in, $upNetwork)) {return;}
+	if (!install_spooler($printer, $in, $upNetwork)) { return }
         printer::set_default_spooler($printer);
     }
 
@@ -2468,7 +2468,7 @@ sub main {
 		    }
 		    # Generate the list of available printers
 		    my @printerlist = 
-			( (sort((map {$printer->{configured}{$_}{queuedata}{menuentry} 
+			((sort((map { $printer->{configured}{$_}{queuedata}{menuentry} 
 				      . ($_ eq $printer->{DEFAULT} ?
 					 _(" (Default)") : (""))}
 				 keys(%{$printer->{configured}
@@ -2483,7 +2483,7 @@ sub main {
 		    $menuchoice = $cursorpos;
 		    # Show the main dialog
 		    $in->ask_from_(
-			{title => _("Printerdrake"),
+			{ title => _("Printerdrake"),
 			 messages =>
 			     ($noprinters ? "" :
 			      (($printer->{SPOOLER} eq "cups") ?
@@ -2506,7 +2506,7 @@ sub main {
 				1; 
 			    },
 			    val => _("Add a new printer") },
-			  ( $printer->{SPOOLER} eq "cups" ?
+			  ($printer->{SPOOLER} eq "cups" ?
 			    ({ clicked_may_quit =>
 				   sub { 
 				       # Save the cursor position
@@ -2524,7 +2524,7 @@ sub main {
 				   },
 			       val => ($::expert ? _("CUPS configuration") :
 				       _("Specify CUPS server")) }) : ()),
-			  ( $::expert ?
+			  ($::expert ?
 			    { clicked_may_quit =>
 				  sub {
 				      # Save the cursor position
@@ -2534,13 +2534,13 @@ sub main {
 				  },
 				  val => _("Change the printing system") } :
 			    ()),
-			  ( !$::isInstall ?
+			  (!$::isInstall ?
 			    { clicked_may_quit =>
-				  sub { $menuchoice = "\@usermode"; 1; },
+				  sub { $menuchoice = "\@usermode"; 1 },
 				  val => ($::expert ? _("Normal Mode") :
 					  _("Expert Mode")) } : ()),
 			  { clicked_may_quit =>
-			    sub { $menuchoice = "\@quit"; 1; },
+			    sub { $menuchoice = "\@quit"; 1 },
 			    val => _("Quit") },
 			  ]
 		    );
@@ -2577,7 +2577,7 @@ sub main {
 		    $newqueue = 1;
 		    my %queues; 
 		    @queues{map { split '\|', $_ } keys %{$printer->{configured}}} = ();
-		    my $i = ''; while ($i < 150) { last unless exists $queues{"$defaultprname$i"}; ++$i; }
+		    my $i = ''; while ($i < 150) { last unless exists $queues{"$defaultprname$i"}; ++$i }
 		    $queue = "$defaultprname$i";
 		}
 		# Function to switch to another spooler

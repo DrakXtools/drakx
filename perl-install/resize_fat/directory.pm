@@ -35,7 +35,7 @@ sub entry_size { $psizeof_format }
 sub traverse($$$) {
     my ($directory, $curr_dir_name, $f) = @_;
 
-    for (my $i = 0;; $i++) {
+    for (my $i = 0; ; $i++) {
 	my $raw = \substr($directory, $i * $psizeof_format, $psizeof_format);
 
 	#- empty entry means end of directory
