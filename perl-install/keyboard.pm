@@ -123,8 +123,8 @@ arch() eq "ppc" ? (
  "am_phonetic" => [ __("Armenian (phonetic)"), "am_phonetic", "am(phonetic)" ],
 #- only xmodmap is currently available
 #-"ar" => [ __("Arabic"),        "ar-8859_6",   "ar" ],
- "az" => [ __("Armenian (latin)"), "az",	"az" ],
- "a3" => [ __("Armenian (cyrillic)"), "az-koi8c","az(cyrillic)" ],
+ "az" => [ __("Azerbaidjani (latin)"), "az",	"az" ],
+ "a3" => [ __("Azerbaidjani (cyrillic)"), "az-koi8c","az(cyrillic)" ],
  "be" => [ __("Belgian"),        "be-latin1",   "be" ],
  "bg" => [ __("Bulgarian"),      "bg",          "bg" ],
  "br" => [ __("Brazilian (ABNT-2)"),      "br-abnt2",    "br" ],
