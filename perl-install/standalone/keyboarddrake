@@ -36,10 +36,10 @@ if ($keyboard) {
     my $isNotDelete = $::expert && !$in->ask_yesorno("BackSpace", _("Do you want the BackSpace to return Delete in console?"), 1);
 
     my $kmap = keyboard::keyboard2kmap($keyboard);
-    `loadkeys $kmap`;
+    system('loadkeys', $kmap);
 
     my $xkb = keyboard::keyboard2xkb($keyboard);
-    `setxkbmap $xkb`;
+    system('setxkbmap', $xkb);
 
     my $f = "/etc/X11/XF86Config";
     my $g = "/etc/X11/XF86Config-4";
@@ -47,16 +47,16 @@ if ($keyboard) {
     substInFile {
 	if (/^Section\s+"Keyboard"/ .. /^EndSection/) {
 	    s|^(\s*XkbLayout\s+).*|$1"$xkb"| 
-	      and $_ .= join '', map { "    $_\n" } @{$xkb_options{$xkb} || []};
-	    s,^(\s*(XkbVariant|XkbOptions)\s+).*,,; # remove existing one
+	      and $_ .= join '', map { "    $_\n" } @{$Xconfigurator::xkb_options{$xkb} || []};
+	    $_ = '' if m,^(\s*(XkbVariant|XkbOptions)\s+),; # remove existing one
 	}
     } $f if -e $f && !$::testing;
 
     substInFile {
 	if (/Identifier\s+"Keyboard1"/ .. /^EndSection/) {
 	    s|^(\s*Option\s+"XkbLayout"\s+).*|$1"$xkb"| 
-	      and $_ .= join '', map { /(\S+)(.*)/; qq(    Option "$1" $2\n) } @{$xkb_options{$xkb} || []};
-	    s,^(\s*Option\s+"(XkbVariant|XkbOptions)"\s+).*,,; # remove existing one
+	      and $_ .= join '', map { /(\S+)(.*)/; qq(    Option "$1" $2\n) } @{$Xconfigurator::xkb_options{$xkb} || []};
+	    $_ = '' if m,^(\s*Option\s+"(XkbVariant|XkbOptions)"\s+),; # remove existing one
 	}
     } $g if -e $g && !$::testing;
 

@@ -22,7 +22,7 @@
 # DiskDrake is also based upon the libfdisk and the install from Red Hat Software
 
 
-use lib qw(/usr/lib/libDrakX);
+use lib qw(. /usr/lib/libDrakX);
 use common;
 use diskdrake;
 use standalone;
@@ -51,14 +51,8 @@ if ($>) {
 }
 
 
-#if ($ARGV[0] eq '-l') {
-#    $@ and print "Error\n";
-#    $::expert = 1;
-#    print diskdrake::get_info($_, $hds->[0]) foreach fsedit::get_fstab($hds->[0]);
-#    exit !$@;
-#}
-my $in = interactive_gtk->new;
-my ($hds, $lvms) =
+my $in = 'interactive'->vnew; #TODO('su');
+my ($all_hds) =
     catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) }
     sub {
 	my ($err) = $@ =~ /(.*) at /;
@@ -69,10 +63,10 @@ I'll try to go on blanking bad partitions"), $err]);
     };
 
 $SIG{__DIE__} = sub { my $m = chomp_($_[0]); log::l("ERROR: $m") };
-my $fstab = [ fsedit::get_fstab(@$hds, @$lvms) ];
+my $fstab = [ fsedit::get_all_fstab($all_hds) ];
  
 fs::get_mntpoints_from_fstab($fstab);
 fs::check_mounted($fstab);
-diskdrake::main($hds, $lvms, {}, $in);
+$in->diskdrake::main($all_hds);
 
 $in->exit(0);
