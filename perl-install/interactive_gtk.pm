@@ -526,7 +526,7 @@ sub ask_browse_tree_info_refW {
 		    0, my $l = new Gtk::HBox(0,15),
 		    0, gtkpack(new Gtk::HBox(0,10),
 			       $go = gtksignal_connect(new Gtk::Button($common->{ok}), "clicked" => sub { $w->{retval} = 1; Gtk->main_quit }),
-			       $common->{cancel} ? (gtksignal_connect(new Gtk::Button($common->{cancel}), "clicked" => sub { $w->{retval} = 1; Gtk->main_quit })) : (),
+			       $common->{cancel} ? (gtksignal_connect(new Gtk::Button($common->{cancel}), "clicked" => sub { $w->{retval} = 0; Gtk->main_quit })) : (),
 			      )
     ));
     gtkpack__($l, my $toolbar = new Gtk::Toolbar('horizontal', 'icons'));
