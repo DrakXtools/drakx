@@ -21,6 +21,7 @@ use lang;
 use pkgs;
 use keyboard;
 use fs;
+use modparm;
 use log;
 use printer;
 
@@ -541,13 +542,30 @@ information it needs? Occasionally, probing will hang a computer, but it should
 not cause any damage.", $l),
 			  [ __("Autoprobe"), __("Specify options") ], "Autoprobe") ne "Autoprobe") {
       ASK:
-	@options = split ' ',
-	  $o->ask_from_entry('',
-_("Here must give the different options for the module %s.
-Options are in format ``name=value name2=value2 ...''.
-For example you can have ``io=0x300 irq=7''", $l),
-			     _("Module options:"),
-			    );
+      my $rnames = modparm::get_options_name($m);
+      my $rvalues = modparm::get_options_value($m);
+
+      $o->ask_from_entries_ref('',
+_("Here must give the different options for the module %s.", $l),
+			       $rnames, $rvalues);
+
+      @options = split ' ', modparm::get_options_result($m, $rvalues);
+#	@options = split ' ',
+#	                 $o->ask_from_entry('',
+#_("Here must give the different options for the module %s.
+#Options are in format ``name=value name2=value2 ...''.
+#For example you can have ``io=0x300 irq=7''", $l),
+#					    _("Module options:"),
+#					   );
+#=======
+#      ASK:
+#	@options = split ' ',
+#	  $o->ask_from_entry('',
+#_("Here must give the different options for the module %s.
+#Options are in format ``name=value name2=value2 ...''.
+#For example you can have ``io=0x300 irq=7''", $l),
+#			     _("Module options:"),
+#			    );
     }
     eval { modules::load($m, $type, @options) };
     if ($@) {
