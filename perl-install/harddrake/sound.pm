@@ -155,9 +155,9 @@ sub do_switch {
     modules::add_alias("sound-slot-$index", $new_driver);
     modules::write_conf();
     if ($new_driver =~ /^snd-/) {   # new driver is an alsa one
-        rooted("service alsa start") if $::isStandalone && ! $blacklisted;
+        rooted("service alsa start") if $::isStandalone && !$blacklisted;
         rooted("/sbin/chkconfig --add alsa")  if $::isStandalone;
-        load($new_driver);   # service alsa is buggy
+        load($new_driver) if $::isStandalone;   # service alsa is buggy
     } else { rooted("/sbin/chkconfig --del alsa") }
     log::explanations("loading new $new_driver\n");
     rooted("/sbin/chkconfig --add sound"); # just in case ...
