@@ -91,7 +91,7 @@ sub get_subwizard {
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my ($adsl_type, $adsl_device, @adsl_devices, $adsl_failed, $adsl_answer);
       my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $need_restart_network);
-      my ($module, $text, $auto_ip, $net_device, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
+      my ($module, $text, $auto_ip, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
       my $ethntf = {};
 
@@ -610,7 +610,7 @@ and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.n
 Some connections use pptp, a few use dhcp.
 If you don't know, choose 'use pppoe'"),
                     data =>  [
-                              { label => N("ADSL connection type :"), val => \$adsl_type, type => "list",
+                              { text => N("ADSL connection type :"), val => \$adsl_type, type => "list",
                                 list => [
                                          N("Dynamic Host Configuration Protocol (DHCP)"),
                                          N("Manual TCP/IP configuration"),
@@ -639,9 +639,8 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                     post => sub {
                         delete $ethntf->{$_} foreach keys %$ethntf;
                         add2hash($ethntf, $intf->{$ntf_name});
-                        $net_device = $netc->{NET_DEVICE};
                         return "lan_intf" if $type ne 'lan';
-                        $::isInstall && $net_device eq $ethntf->{DEVICE} ? 'lan_alrd_cfg' : 'lan_protocol';
+                        $::isInstall && $netc->{NET_DEVICE} eq $ethntf->{DEVICE} ? 'lan_alrd_cfg' : 'lan_protocol';
                     },
                    },
 
@@ -684,7 +683,6 @@ Modifying the fields below will override this configuration."),
                    lan_intf => 
                    {
                     pre => sub  {
-                        $net_device = $netc->{NET_DEVICE};
                         $onboot = $ethntf->{ONBOOT} ? $ethntf->{ONBOOT} =~ /yes/ : bool2yesno(!member($ethntf->{DEVICE}, 
                                                                                                       map { $_->{device} } detect_devices::pcmcia_probe()));
                         $needhostname = $ethntf->{NEEDHOSTNAME} !~ /no/; 
