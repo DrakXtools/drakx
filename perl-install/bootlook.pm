@@ -31,7 +31,7 @@ use standalone;
 use common qw(:common :file :functional :system);
 use my_gtk qw(:helpers :wrappers);
 use any;
-#use Data::dumper;
+use Data::Dumper;
 
 setlocale (LC_ALL, "");
 Locale::GetText::textdomain ("Bootlookdrake");
@@ -341,14 +341,6 @@ sub updateAurora
     
 }
 
-#sub AuroraChoose
-#{
-#    opendir YREP, "/lib/aurora/Monitors" or die "bootlook: $!";
-#    @files = grep !/^\.\.?$/, readdir YREP;
-#    print @files;
-#    closedir YREP;
-#}
-
 #-------------------------------------------------------------
 # launch autologin functions
 #-------------------------------------------------------------
@@ -402,24 +394,25 @@ sub set_autologin {
 }
 
 
-############################
+#-------------------------------------------------------------
+# lilo/grub functions
+#-------------------------------------------------------------
 sub lilo_choice
 {
     my $bootloader = bootloader::read('', '/etc/lilo.conf');
     local ($_) = `detectloader`;
     $bootloader->{methods} = { lilo => 1, grub => !!/grub/i };
-       
+    
     my ($hds) = catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) } sub { 1 };
     my $fstab = [ fsedit::get_fstab(@$hds) ];
     fs::get_mntpoints_from_fstab($fstab);
  
     $::expert=1;
- # ask:
+# ask:
+    print Data::Dumper->Dump([$in],['$in']), "\n", Data::Dumper->Dump([$hds],['$hds']), "\n";
     
     any::setupBootloader($in, $bootloader, $hds, $fstab, $ENV{SECURE_LEVEL}) or $in->exit(0);
-    #  #eval { bootloader::install('', $bootloader, $fstab, $hds) };
-    print "ici\n";
-    
+#  eval { bootloader::install('', $bootloader, $fstab, $hds) };  
 #    if ($@) {
 #	$in->ask_warn('', 
 #		      [ _("Installation of LILO failed. The following error occured:"),
