@@ -1,3 +1,97 @@
+2005/03/24  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_applet: force refresh if asked by user from the menu
+	reload configuration on SIGHUP
+	ask for root password if needed when setting a new profile
+
+	* network/network.pm: write ATM_ADDR field
+
+	* network/netconnect.pm: ATMARP support, useful for modems using pppoatm
+	(e.g. SpeedTouch) and
+	ISP using RFC 1483 Routed VC MUX (e.g. Free Degroupe)
+
+	* network/adsl.pm: use new --nocall option of speedtouch-start
+
+2005/03/24  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/drakvpn, network/shorewall.pm, standalone/drakgw: 
+	  - network::shorewall::default_interfaces_silent() does not need any
+	parameter
+	  - network::shorewall::read() is simpler with a $o_in
+	  - network::drakfirewall::default_from_pkgs() is non interactive,
+	better give it a do_pkgs
+	  - cleanup as little as possible
+
+	* security/level.pm: really default security level 3
+
+	* raid.pm: calling inactivate_and_dirty() on a new structure is bad, we
+	loose the {isFormatted} flag
+	(no big deal though, it happened because raid::new() was creating a new
+	raid with an already active md name)
+	ensure we use/propose a free md when creating a new one
+	after "mdadm --assemble" there can be some mds in inactivate state
+	busying devices, stopping them
+
+	* network/drakfirewall.pm: log what we are doing
+	return the user choices
+	  - there is no reason to have string ref for ports
+	  - replace main_auto_install() with default_ports()
+	network::drakfirewall::set_ports() doesn't *need* a $in anymore, and it
+	doesn't die when no network card
+	  - network::shorewall::default_interfaces_silent() does not need any
+	parameter
+	  - network::shorewall::read() is simpler with a $o_in
+	  - network::drakfirewall::default_from_pkgs() is non interactive,
+	better give it a do_pkgs
+	  - cleanup as little as possible
+
+	* install_steps_interactive.pm: 
+	  - configure a firewall by default in secure level >= 3
+	  - allow auto_install parameter {firewall_ports}
+	  - network::shorewall::default_interfaces_silent() does not need any
+	parameter
+	  - network::shorewall::read() is simpler with a $o_in
+	  - network::drakfirewall::default_from_pkgs() is non interactive,
+	better give it a do_pkgs
+	  - cleanup as little as possible
+
+	* install_steps.pm: really default security level 3
+	  - configure a firewall by default in secure level >= 3
+	  - allow auto_install parameter {firewall_ports}
+
+	* diskdrake/interactive.pm: calling inactivate_and_dirty() on a new
+	structure is bad, we loose the {isFormatted} flag
+	(no big deal though, it happened because raid::new() was creating a new
+	raid with an already active md name)
+	use raid::free_mds() and don't sort (we provide a better numerically
+	sorted list)
+
+2005/03/24  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* tools/Makefile: Install modules required by packdrake and gendistrib in
+	MISC_DEST
+
+2005/03/24  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm (Gtk2::Banner::new) make banner be RTL aware (aka follow
+	language direction
+	and display itself mirrored for RTL languages) (#11910)
+	(Gtk2::Banner::new) ensure icon is centered vertically
+
+	* drakxtools.spec: 10.2-13mdk
+
+2005/03/24  willysr
+
+	* share/po/id.po: Updated
+
+2005/03/23  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/disk.c: warn that the mount can fail if the partition hasn't
+	been cleanly unmounted
+
+	* install_any.pm: temporarily fallback on /mnt/hd if the hard disk mount
+	point can't be found
+
 2005/03/23  Olivier Blin <oblin at mandrakesoft.com>
 
 	* mdk-stage1/disk.c: warn that the mount can fail if the partition hasn't
@@ -47433,7 +47527,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1023 2005/03/23 19:25:03 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1024 2005/03/23 19:36:02 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
