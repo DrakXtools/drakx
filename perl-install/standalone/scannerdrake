@@ -46,6 +46,13 @@ if (!files_exist('/usr/bin/scanimage',
 		 '/usr/bin/xsane',
 		 if_(files_exist("/usr/bin/gimp"),
 		     "/usr/lib/gimp/1.2/plug-ins/xsane"))) {
+    if (!$in->ask_yesorno(N("Warning"), N("SANE packages need to be installed to use scanners.
+
+Do you want to install the SANE packages?"))) {
+	$in->ask_warn("Scannerdrake", 
+		      N("Aborting Scannerdrake."));
+	exit 0;
+    }
     if (!$in->do_pkgs->install('sane-backends', 'xsane',
 			       if_($in->do_pkgs->is_installed('gimp'),
 				   'xsane-gimp'))) {
@@ -898,7 +905,12 @@ sub sharewindow {
 			# running
 			if (!files_exist('/usr/sbin/xinetd',
 					 '/usr/sbin/saned')) {
-			    if (!$in->do_pkgs->install('xinetd', 'saned')) {
+			    if (!$in->ask_yesorno(N("Warning"), N("saned needs to be installed to share the local scanner(s).
+
+Do you want to install the saned package?"))) {
+				$in->ask_warn("Scannerdrake", 
+					      N("Your scanner(s) will not be available on the network."));
+			    } elsif (!$in->do_pkgs->install('xinetd', 'saned')) {
 				$in->ask_warn(N("Error"),
 					      N("Could not install the packages needed to share your scanner(s).") . " " .
 					      N("Your scanner(s) will not be available on the network."));
