@@ -530,7 +530,7 @@ sub versionCompare($$) {
     my ($a, $b) = @_;
     local $_;
 
-    while ($a && $b) {
+    while ($a || $b) {
 	my ($sb, $sa) =  map { $1 if $a =~ /^\W*\d/ ? s/^\W*0*(\d+)// : s/^\W*(\D+)// } ($b, $a);
 	$_ = length($sa) cmp length($sb) || $sa cmp $sb and return $_;
     }
@@ -563,9 +563,10 @@ sub selectPackagesToUpgrade($$$;$$) { #- TODO
     my %installedFilesForUpgrade; #- help searching package to upgrade in regard to already installed files.
 
     #- used for package that are not correctly updated.
+    #- should only be used when nothing else can be done correctly.
     my %upgradeNeedRemove = (
-			     'compat-glibc' => 1,
-			     'compat-libs' => 1,
+#			     'compat-glibc' => 1,
+#			     'compat-libs' => 1,
 			    );
 
     #- help removing package which may have different release numbering
@@ -585,10 +586,9 @@ sub selectPackagesToUpgrade($$$;$$) { #- TODO
 			     my $version_cmp = versionCompare(c::headerGetEntry($header, 'version'), packageVersion($p));
 			     my $version_rel_test = $version_cmp > 0 || $version_cmp == 0 &&
 			       versionCompare(c::headerGetEntry($header, 'release'), packageRelease($p)) >= 0;
-			     if ($version_rel_test) { #- use FORCE TODO ?
+			     if ($version_rel_test) { #- by default, package selecting are upgrade whatever version is !
 				 if ($otherPackage && $version_cmp <= 0) {
-				     log::l("removing $otherPackage since it will not be updated otherwise");
-				     $toRemove{$otherPackage} = 1; #- force removing for theses other packages, select our.
+				     log::l("force upgrading $otherPackage since it will not be updated otherwise");
 				 } else {
 				     packageSetFlagInstalled($p, 1);
 				 }

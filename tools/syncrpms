@@ -28,7 +28,7 @@ sub version_compare {
     my ($a, $b) = @_;
     local $_;
 
-    while ($a && $b) {
+    while ($a || $b) {
 	my ($sb, $sa) =  map { $1 if $a =~ /^\W*\d/ ? s/^\W*0*(\d+)// : s/^\W*(\D+)// } ($b, $a);
 	$_ = length($sa) cmp length($sb) || $sa cmp $sb and return $_;
     }
