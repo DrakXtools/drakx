@@ -356,6 +356,8 @@ sub save_conf {
     $netcnx->{type} eq 'isdn_external' || $netcnx->{type} eq 'modem' and $modem=$netcnx->{$netcnx->{type}};
     $netcnx->{type} eq 'isdn_internal' and $isdn=$netcnx->{$netcnx->{type}};
     any::setup_thiskind_backend('net', undef);
+    require network::ethernet;
+    network::ethernet->import;
     my @all_cards = conf_network_card_backend ($prefix, $netc, $intf, undef, undef, undef, undef);
 
     $intf = { %$intf };
