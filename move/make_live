@@ -113,18 +113,14 @@ print "Making live in $::prefix directory.\n";
 	cp_af("$::prefix/tmp/kde-root/ksycoca", "$::prefix/usr/share/services/ksycoca-$_");
     }
 
-    eval { rm_rf("$::prefix/lib/i686") }; # de-complexify, use the default on any arch
-
-    symlinkf("/etc/X11/ksycoca", "$::prefix/usr/share/services/ksycoca");
-
-    eval { config_X_proprietary_drivers() };
-
-    unlink "$::prefix/usr/share/autostart/$_.desktop" foreach 'klipper', 'korgac', 'kalarmd.autostart';
 }
 
-update_gnomekderc("$::prefix/usr/share/config/kdesktoprc", ScreenSaver => (Lock => 'true'));
 
-symlinkf('/var/lib/xkb', "$::prefix/etc/X11/xkb/compiled"); # don't want the relative path, prefering the absolute path
+    #- system
+
+eval { rm_rf("$::prefix/lib/i686") }; # de-complexify, use the default on any arch
+
+eval { config_X_proprietary_drivers() };
 
 substInFile {
     #- /lib is ro, for the moment we don't save, we'll see later if we may want to save (using /var/dev-state for example)
@@ -135,14 +131,6 @@ substInFile {
     #- don't use shadow passwords since pwconv overwrites /etc/shadow hence contents will be lost for usb key
     s|\s*shadow||;
 } "$::prefix/etc/pam.d/system-auth";
-
-substInFile {
-    s|Mandrake Linux release (\S+) \(.*\)|Mandrake Move release $1 (Moyoto)|;
-} "$::prefix/etc/mandrake-release";
-
-#- remove uncessary wizards, especially from appearing in MCC
-unlink "$::prefix/usr/sbin/$_" foreach qw(drakautoinst drakboot drakfloppy drakgw drakedm drakfont rpmdrake MandrakeUpdate rpmdrake-remove edit-urpm-sources.pl);
-unlink "$::prefix/usr/bin/$_" foreach qw(userdrake);
 
 #- remove services we start ourselves from chkconfig system
 substInFile {
@@ -157,12 +145,11 @@ if (!-e "$::prefix/usr/share/speedtouch/mgmt.o") {
     symlink '/etc/mgmt.o', "$::prefix/usr/share/speedtouch/mgmt.o";
 }
 
-#- CD-based applications
-substInFile {
-    foreach my $app (qw(kaudiocreator kscd k3b)) {
-        s|.*command="$app".*||;
-    }
-} "$::prefix/usr/lib/menu/simplified/mandrake_desk";
+
+    #- XFree
+
+#- don't want the relative path, prefering the absolute path
+symlinkf('/var/lib/xkb', "$::prefix/etc/X11/xkb/compiled"); 
 
 #- Xsession wants to start first-time
 unlink "$::prefix/usr/X11R6/bin/drakfw";
@@ -170,6 +157,34 @@ unlink "$::prefix/usr/X11R6/bin/drakfw";
 substInFile {
     s|startkde\b|startkde_move|;
 } "$::prefix/etc/X11/wmsession.d/01KDE";
+
+
+    #- KDE
+
+symlinkf('/etc/X11/ksycoca', "$::prefix/usr/share/services/ksycoca");
+
+unlink "$::prefix/usr/share/autostart/$_.desktop" foreach 'klipper', 'korgac', 'kalarmd.autostart';
+
+update_gnomekderc("$::prefix/usr/share/config/kdesktoprc", ScreenSaver => (Lock => 'true'));
+
+#- remove CD-based applications from simplified menu
+substInFile {
+    foreach my $app (qw(kaudiocreator kscd k3b)) {
+        s|.*command="$app".*||;
+    }
+} "$::prefix/usr/lib/menu/simplified/mandrake_desk";
+
+
+
+    #- Mandrake
+
+substInFile {
+    s|Mandrake Linux release (\S+) \(.*\)|Mandrake Move release $1 (Moyoto)|;
+} "$::prefix/etc/mandrake-release";
+
+#- remove uncessary wizards, especially from appearing in MCC
+unlink "$::prefix/usr/sbin/$_" foreach qw(drakautoinst drakboot drakfloppy drakgw drakedm drakfont rpmdrake MandrakeUpdate rpmdrake-remove edit-urpm-sources.pl);
+unlink "$::prefix/usr/bin/$_" foreach qw(userdrake);
 
 #- drakxtools contains a broken unneeded file
 unlink "$::prefix/usr/lib/libDrakX/modem.pm";
