@@ -260,7 +260,6 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
     $card->{Utah_glx} = ($card->{identifier} =~ /Matrox.* G[24][05]0/ || #- 8bpp does not work.
 			 $card->{identifier} =~ /Riva.*128/ ||
 			 $card->{identifier} =~ /Rage X[CL]/ ||
-			 $card->{identifier} =~ /Rage Mobility (?:P\/M|L) / ||
 			 $card->{identifier} =~ /3D Rage (?:LT|Pro)/);
                          #- NOT WORKING $card->{type} =~ /Intel 810/);
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX but EXPERIMENTAL that may freeze the machine (FOR INFO NOT USED).
@@ -269,6 +268,7 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 				      $card->{type} =~ /GeForce 256/ ||
 				      $card->{type} =~ /S3 Savage3D/ || #- only this one is evoluting (expect a stable release ?)
 				      #- $card->{type} =~ /S3 ViRGE/ || #- 15bits only
+				      $card->{identifier} =~ /Rage Mobility (?:P\/M|L) / ||
 				      $card->{type} =~ /SiS/);
     #- 3D acceleration configuration for XFree 4.0 using DRI.
     $card->{DRI_glx} = ($card->{identifier} =~ /Voodoo [35]/ || $card->{identifier} =~ /Voodoo Banshee/ || #- 16bit only
