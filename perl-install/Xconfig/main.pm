@@ -114,7 +114,7 @@ sub configure_chooser_raw {
 		    { val => _("Options"), icon => "ic82-tape-40", clicked => sub {
 			  Xconfig::various::various($in, $X->{card}, $options);
 		      } },
-		    { val => _("Quit"), icon => "exit", clicked_may_quit => sub { 1 } },
+		    { val => $::isInstall ? _("Ok") : _("Quit"), icon => "exit", clicked_may_quit => sub { 1 } },
 		   ]);
     $ok, $modified;
 }
