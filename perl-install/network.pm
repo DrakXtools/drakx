@@ -298,7 +298,22 @@ sub configureNetworkIntf {
     my ($netc, $in, $intf, $net_device, $skip, $module) = @_;
     my $text;
     my @wireless_modules = ("airo_cs", "netwave_cs", "ray_cs", "wavelan_cs", "wvlan_cs");
-    member($module, @wireless_modules) and $intf->{wireless_eth}=1 and $netc->{wireless_eth}=1;
+    if (member($module, @wireless_modules)) {
+	$intf->{wireless_eth} = 1;
+	$netc->{wireless_eth} = 1;
+	$intf->{WIRELESS_MODE} = "Managed";
+	$intf->{WIRELESS_ESSID} = "any";
+#-	$intf->{WIRELESS_NWID} = "";
+#-	$intf->{WIRELESS_FREQ} = "";
+#-	$intf->{WIRELESS_SENS} = "";
+#-	$intf->{WIRELESS_RATE} = "";
+#-	$intf->{WIRELESS_ENC_KEY} = "";
+#-	$intf->{WIRELESS_RTS} = "";
+#-	$intf->{WIRELESS_FRAG} = "";
+#-	$intf->{WIRELESS_IWCONFIG} = "";
+#-	$intf->{WIRELESS_IWSPY} = "";
+#-	$intf->{WIRELESS_IWPRIV} = "";
+    }
     if ($net_device eq $intf->{DEVICE}) {
 	$skip and return 1;
 	$text = _("WARNING: This device has been previously configured to connect to the Internet.
