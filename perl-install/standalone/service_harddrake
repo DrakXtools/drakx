@@ -23,7 +23,7 @@ modules::mergein_conf('/etc/modules.conf');
 my $previous_config = -f $last_boot_config && -s $last_boot_config ? Storable::retrieve($last_boot_config) : {};
 $previous_config = $$previous_config if ref($previous_config) !~ /HASH/;
 my (%config, $wait);
-my $in = interactive->vnew;
+my $in;
 
 # For each hw, class, detect device, compare and offer to reconfigure if needed
 foreach (@harddrake::data::tree) {
@@ -65,6 +65,7 @@ foreach (@harddrake::data::tree) {
     if ($no) {
 	require interactive;
 	undef $wait;
+     $in ||= interactive->vnew;
 	$wait = $in->wait_message(N("Please wait"), N("Hardware probing in progress"));
     } elsif ($res) {
 	if (fork()) {
@@ -81,4 +82,4 @@ Storable::store(\%config, $last_boot_config);
 harddrake::sound::configure_sound_slots();
 modules::write_conf();
 
-$in->exit(0);
+$in->exit(0) if $in;
