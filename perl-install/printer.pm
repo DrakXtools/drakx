@@ -107,7 +107,7 @@ sub remove_package ($) {
 
 sub installed ($) {
     my ($package) = @_;
-    open RPMCHECK, "rpm -qa | grep $package |" ||
+    open RPMCHECK, "rpm -qa --root $prefix/ | grep $package |" ||
 	die "Could not run rpm!";
     my $found = 0;
     while (<RPMCHECK>) {
@@ -151,6 +151,8 @@ sub resetinfo($) {
     # -check which printing system was used previously and load the information
     # -about its queues
     read_configured_queues($printer);
+    #my $entry = $printer->{configured}{$printer->{QUEUE}} || (values %{$printer->{configured}})[0];
+    #print "##### $entry->{make} $entry->{model} $entry->{queuedata}{queue}\n";
 }
 
 sub read_configured_queues($) {
@@ -189,6 +191,18 @@ sub read_configured_queues($) {
     for ($i = 0;  $i < $N; $i++) {
 	$printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}} = 
 	    $QUEUES[$i];
+	if ((!$QUEUES[$i]->{'make'}) || (!$QUEUES[$i]->{'model'})) {
+	    if ($printer->{SPOOLER} eq "cups") {
+		$printer->{OLD_QUEUE} = $QUEUES[$i]->{'queuedata'}{'queue'};
+		my $descr = get_descr_from_ppd($printer);
+		$descr =~ m/^([^\|]*)\|([^\|]*)\|.*$/;
+		$printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{make} ||= $1;
+		$printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{model} ||= $2;
+		$printer->{OLD_QUEUE} = "";
+	    }
+	    $printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{make} ||= "";
+	    $printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{model} ||= __("Unknown model");
+	}
     }
 }
 

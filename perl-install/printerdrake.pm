@@ -133,6 +133,7 @@ complete => sub {
     #- It needs an additional program as "rlpr"
     if ($printer->{SPOOLER} eq 'lpd') {&$install('rlpr');}
 
+    1;
 }
 
 sub setup_smb($$$) {
@@ -333,12 +334,12 @@ complete => sub {
     #- make the Foomatic URI
     $printer->{currentqueue}{'connect'} = 
     join '', ("socket://$remotehost", $remoteport ? (":$remoteport") : ());
-    1;
 
     #- LPD and LPRng need netcat ('nc') to access to socket printers
     if (($printer->{SPOOLER} eq 'lpd') ||
         ($printer->{SPOOLER} eq 'lprng')) {&$install('nc');}
 
+    1;
 }
 
 sub setup_uri($$$) {
@@ -681,49 +682,6 @@ Does it work properly?"), 1) and last;
     $printer->{complete} = 1;
 }
 
-sub setup_gsdriver_cups($$$;$) {
-    my ($printer, $in, $install, $upNetwork) = @_;
-    my $testpage = "/usr/share/cups/data/testprint.ps";
-    $in->set_help('configurePrinterType') if $::isInstall;
-    while (1) {
-	$printer->{cupsDescr} ||= printer::get_descr_from_ppd($printer);
-	$printer->{cupsDescr} = $in->ask_from_treelist('', _("What type of printer do you have?"), '|',
-						       [ keys %printer::descr_to_ppd ], $printer->{cupsDescr}) or return;
-	$printer->{cupsPPD} = $printer::descr_to_ppd{$printer->{cupsDescr}};
-
-	#- install additional tools according to PPD files.
-        $printer->{cupsPPD} =~ /lexmark/i and &$install('ghostscript-utils');
-
-	$printer->{complete} = 1;
-	printer::copy_printer_params($printer, $printer->{configured}{$printer->{QUEUE}} ||= {});
-	printer::configure_queue($printer);
-	$printer->{complete} = 0;
-	
-	if ($in->ask_yesorno('', _("Do you want to test printing?"), 1)) {
-	    my @lpq_output;
-	    {
-		my $w = $in->wait_message('', _("Printing test page(s)..."));
-
-		$upNetwork and do { &$upNetwork(); undef $upNetwork; sleep(1) };
-		@lpq_output = printer::print_pages($printer, $testpage);
-	    }
-
-	    if (@lpq_output) {
-		$in->ask_yesorno('', _("Test page(s) have been sent to the printer daemon.
-This may take a little time before printer start.
-Printing status:\n%s\n\nDoes it work properly?", "@lpq_output"), 1) and last;
-	    } else {
-		$in->ask_yesorno('', _("Test page(s) have been sent to the printer daemon.
-This may take a little time before printer start.
-Does it work properly?"), 1) and last;
-	    }
-	} else {
-	    last;
-	}
-    }
-    $printer->{complete} = 1;
-}
-
 sub setup_default_spooler ($$$) {
     my ($printer, $in, $install) = @_;
     $printer->{SPOOLER} ||= 'cups';
@@ -753,22 +711,22 @@ sub install_spooler ($$) {
 	    &$install(('cups', 'xpp', 'qtcups', 'kups',
 		       ($::expert ? 'cups-drivers' : ())));
 	    if ($::expert) {&$install('cups-drivers');}
-	    # Restart daemon
+	    # Start daemon
 	    printer::start_service("cups");
 	    sleep 1;
 	} elsif ($printer->{SPOOLER} eq "lpd") {
 	    # "lpr" conflicts with "LPRng", remove "LPRng"
 	    printer::remove_package("LPRng");
 	    &$install('lpr');
-	    # Restart daemon
-	    printer::restart_service("lpd");
+	    # Start daemon
+	    printer::start_service("lpd");
 	    sleep 1;
 	} elsif ($printer->{SPOOLER} eq "lprng") {
 	    # "LPRng" conflicts with "lpr", remove "lpr"
 	    printer::remove_package("lpr");
 	    &$install('LPRng');
-	    # Restart daemon
-	    printer::restart_service("lpd");
+	    # Start daemon
+	    printer::start_service("lpd");
 	    sleep 1;
 	} elsif ($printer->{SPOOLER} eq "pdq") {
 	    &$install('pdq');
@@ -788,21 +746,28 @@ sub main($$$$;$) {
 		   (printer::installed("gimp") ? 'gimpprint' : ())));
     }
 
-    !$::expert && ($printer->{SPOOLER} ||= 'cups'); # only experts should be asked
-                                                 # for the spooler
+    # only experts should be asked for the spooler
+    !$::expert && ($printer->{SPOOLER} ||= 'cups');
+
+    # If we have chosen a spooler, install it.
+    if (($printer->{SPOOLER}) && ($printer->{SPOOLER} ne '')) {
+	install_spooler($printer, $install);
+    }
+
     my ($queue, $continue) = ('', 1);
     while ($continue) {
 	if (!$ask_multiple_printer && %{$printer->{configured} || {}} == ()) {
 	    $queue = $printer->{want} || 
 		$in->ask_yesorno(_("Printer"),
 				 __("Would you like to configure printing?"),
-				 0) ? 'lp' : 'Done';
-	    $printer->{SPOOLER} ||= 
-		setup_default_spooler ($printer, $in, $install) ||
-		    return;
-	    
+				 0) ? 'lp' : __("Done");
+	    if ($queue ne __("Done")) {
+		$printer->{SPOOLER} ||= 
+		    setup_default_spooler ($printer, $in, $install) ||
+			return;
+	    }
 	} else {
-	    # Ask for a spooler when noone is defined
+	    # Ask for a spooler when none is defined
 	    $printer->{SPOOLER} ||= 
 		setup_default_spooler ($printer, $in, $install) ||
 		    return;
@@ -845,10 +810,8 @@ sub main($$$$;$) {
 	}
 	# Save the default spooler
 	printer::set_default_spooler($printer);
-	# install the spooler if not done yet
-	install_spooler($printer, $install);
 	#- Close printerdrake
-	$queue eq 'Done' and last;
+	$queue eq __("Done") and last;
 
 	#- Copy the queue data and work on the copy
 	$printer->{currentqueue} = {};
@@ -995,13 +958,14 @@ to be filled in. They are comments for the users.") },
 		$continue = 1; last;
 	    }
 	}
-	#- configure specific part according to lpr/cups.
+	#- configure the printer driver
 	if (!$continue && setup_gsdriver($printer, $in, $install, $printer->{TYPE} !~ /LOCAL/ && $upNetwork)) {
 	    if (lc($printer->{QUEUE}) ne lc($printer->{OLD_QUEUE})) {
 		printer::remove_queue($printer, $printer->{OLD_QUEUE});
 	    }
 	    delete $printer->{OLD_QUEUE}
-	    if $printer->{QUEUE} ne $printer->{OLD_QUEUE} && $printer->{configured}{$printer->{QUEUE}};
+	        if (($printer->{QUEUE} ne $printer->{OLD_QUEUE}) && 
+		    ($printer->{configured}{$printer->{QUEUE}}));
 	    $continue = $::expert;
 	} else {
 	    $continue = 1;
