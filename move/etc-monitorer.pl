@@ -8,7 +8,7 @@ sub logit { outpend "/var/log/etc-monitorer.log", sprintf("[%s] @_\n", chomp_(`d
 my $machine_ident = cat_('/var/lib/machine_ident');
 my $sysconf = "/home/.sysconf/$machine_ident";
 
-foreach (glob("$ARGV[0]/*")) {
+foreach (chomp_(`find $ARGV[0] -type f -maxdepth 1`)) {
     next if $_ eq '/etc/sudoers';  #- /etc/sudoers can't be a link
     if (-f && !-l) {
         my $dest = "/home/.sysconf/$machine_ident$_";
