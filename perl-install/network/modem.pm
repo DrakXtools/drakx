@@ -10,6 +10,7 @@ use network::tools;
 
 sub first_modem {
     my ($netc) = @_;
+    return "/mnt/root" if $::isInstall;
     first(grep { $_->{device} =~ m!^/dev! } values %{$netc->{autodetect}{modem}});
 }
 
