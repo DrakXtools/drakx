@@ -67,7 +67,7 @@ sub readCardsDB {
 	s/\s+$//;
 	/^#/ and next;
 	/^$/ and next;
-	/^END/ and last;
+	/^END/ and do { $cards{$card->{type}} = $card if $card; last };
 
 	($cmd, $val) = /(\S+)\s*(.*)/ or next; #log::l("bad line $lineno ($_)"), next;
 
