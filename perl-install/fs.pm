@@ -460,7 +460,7 @@ sub set_default_options {
 			      });
     }
     if (isThisFs('ntfs', $part) || $is_auto) {
-	put_in_hash($options, { 'iocharset=' => $iocharset });
+	put_in_hash($options, { 'umask=0' => $security < 3, 'iocharset=' => $iocharset });
     }
     if (isThisFs('iso9660', $part) || $is_auto) {
 	put_in_hash($options, { user => 1, noexec => 0, 'iocharset=' => $iocharset });
