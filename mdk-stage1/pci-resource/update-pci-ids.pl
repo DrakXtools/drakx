@@ -2,8 +2,6 @@
 
 use MDK::Common;
 
--x "../mar/mar" or die "\t*FAILED* Sorry, need ../mar/mar binary\n";
-
 require '/usr/bin/merge2pcitable.pl';
 my $drivers = read_pcitable("/usr/share/ldetect-lst/pcitable");
 
@@ -19,38 +17,13 @@ struct pci_module_map {
 
 ';
 
-my %t = ( network => [ 'network' ],
-	  medias => [ 'hd', 'cdrom', 'other' ]
-	);
-my %sanity_check = 
-  arch() =~ /ia64/ ?
-  ( network => [ '3c59x', 'eepro100', 'e100', 'tulip', 'via-rhine', 'ne2k-pci', '8139too' ],
-    medias => [ 'aic7xxx', 'advansys', 'sym53c8xx', 'initio' ],
-  ) :
-  arch() =~ /ppc/ ?
-  ( network => [ '3c59x', 'eepro100', 'tulip', 'via-rhine', 'ne2k-pci', '8139too' ],
-    medias => [ 'aic7xxx', 'sym53c8xx', 'initio' ],
-  ) :
-  ( network => [ '3c59x', 'eepro100', 'e100', 'tulip', 'via-rhine', 'ne2k-pci', '8139too', 'tlan' ],
-    medias => [ 'aic7xxx', 'advansys', 'sym53c8xx', 'initio' ],
-  );
+my %t = ( 
+    network => 'network/main',
+    medias  => 'disk/scsi|hardware_raid',
+);
 
 foreach $type (keys %t) {
-    my @modulez;
-    print STDERR "$type (checks: ", join('/', @{$sanity_check{$type}}), ") ";
-    foreach $floppy (@{$t{$type}}) {
-	foreach $marfile (glob("../../kernel/all.modules/*/${floppy}_modules.mar")) {
-	    -f $marfile or die "\t*FAILED* Sorry, need $marfile mar file\n";
-	    my @modz = map { /(\S+)\.o/ } `../mar/mar -l $marfile`;
-	    if ($marfile !~ /(2\.2\.14)|(other)/) {
-		foreach $mandatory (@{$sanity_check{$type}}) {
-		    member($mandatory, @modz) or die "\t*FAILED* Sanity check should prove that $mandatory.o be part of $marfile\n"
-		}
-	    }
-	    push @modulez, @modz;
-	    print STDERR ".";
-	}
-    }
+    my @modules = chomp_(`perl ../../kernel/modules.pl pci_modules4stage1:"$t{$type}"`);
 
     print "#ifndef DISABLE_".uc($type)."
 struct pci_module_map ${type}_pci_ids[] = {
@@ -58,7 +31,7 @@ struct pci_module_map ${type}_pci_ids[] = {
 
     foreach my $k (sort keys %$drivers) {
 	$v = $drivers->{$k};
-	member($v->[0], @modulez) or next;
+	member($v->[0], @modules) or next;
 	$k =~ /^(....)(....)/;
 	printf qq|\t{ 0x%s, 0x%s, "%s", "%s" },\n|,
 	  $1, $2, $v->[1], $v->[0];
