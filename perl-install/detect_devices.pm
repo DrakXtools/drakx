@@ -569,9 +569,9 @@ sub getNet() {
            (map { if_(/^\s*([A-Za-z0-9:\.]*):/, $1) } cat_("/proc/net/dev")),
            c::get_netdevices(),
           );
-    #- enable all interfaces
+    #- enable interfaces if get_wireless_stats() is available
     #- needed for some drivers (Ralink) to be able to detect it is wireless aware
-    c::enable_net_device($_) foreach @net_devices;
+    c::enable_net_device($_) foreach grep { -d "/sys/class/net/$_/wireless" } @net_devices;
     @net_devices;
  }
 
