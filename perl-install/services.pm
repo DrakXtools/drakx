@@ -95,9 +95,8 @@ xfs => N_("Starts the X Font Server (this is mandatory for Xorg to run)."),
     if ($s) {
 	$s = translate($s);
     } else {
-	$s = -e "$::prefix/etc/rc.d/init.d/$name" && cat_("$::prefix/etc/rc.d/init.d/$name");
-	$s ||= -e "$::prefix/etc/init.d/$name" && cat_("$::prefix/etc/init.d/$name");
-	$s ||= -e "$::prefix/etc/xinetd.d/$name" && cat_("$::prefix/etc/xinetd.d/$name");
+	my $file = find { -e $_ } map { "$::prefix$_/$name" } '/etc/rc.d/init.d', '/etc/init.d', '/etc/xinetd.d';
+	$s = cat_($file);
 	$s =~ s/\\\s*\n#\s*//mg;
 	$s = 
 	  $s =~ /^# description:\s+(.*?)^(?:[^#]|# {0,2}\S)/sm ? $1 :
