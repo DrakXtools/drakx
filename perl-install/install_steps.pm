@@ -601,28 +601,21 @@ sub configureServices {
 #------------------------------------------------------------------------------
 sub configurePrinter {
     my($o) = @_;
-    my ($use_cups, $use_lpr) = (0, 0);
-    foreach (values %{$o->{printer}{configured} || {}}) {
-	for ($_->{mode}) {
-	    /CUPS/ and $use_cups++;
-	    /lpr/  and $use_lpr++;
-	}
-    }
-    #- if at least one queue is configured, configure it.
-    if ($use_cups || $use_lpr) {
-	$o->pkg_install(if_($use_cups, 'cups-drivers'), if_($use_lpr, 'rhs-printfilters'));
+    $o->do_pkgs->install('foomatic', 'printer-utils','printer-testpages',
+			 if_($o->do_pkgs->is_installed('gimp'), 'gimpprint'));
+    
+    require printer;
+    eval { add2hash($o->{printer} ||= {}, printer::getinfo($o->{prefix})) }; #- get existing configuration.
 
-	require printer;
-	eval { add2hash($o->{printer}, printer::getinfo($o->{prefix})) }; #- get existing configuration.
-	$use_cups and printer::poll_ppd_base();
-	$use_lpr and printer::read_printer_db();
-	foreach (values %{$o->{printer}{configured} || {}}) {
-	    log::l("configuring printer queue $_->{QUEUE} for $_->{mode}");
-	    printer::copy_printer_params($_, $o->{printer});
-	    #- setup all configured queues, which is not the case interactively where
-	    #- only the working queue is setup on configuration.
-	    printer::configure_queue($o->{printer});
-	}
+    require printerdrake;
+    printerdrake::install_spooler($o->{printer}, $o); #- not interactive...
+
+    foreach (values %{$o->{printer}{configured} || {}}) {
+	log::l("configuring printer queue $_->{QUEUE} for $_->{mode}");
+	printer::copy_printer_params($_, $o->{printer});
+	#- setup all configured queues, which is not the case interactively where
+	#- only the working queue is setup on configuration.
+	printer::configure_queue($o->{printer});
     }
 }
 
