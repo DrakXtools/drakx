@@ -275,8 +275,7 @@ sub addentry {
 
 sub addprinter {
     my ($section, $filecontent) = @_;
-    my @lines = pop_spaces(split("\n", $filecontent));
-    foreach (@lines) {
+    foreach (pop_spaces(split("\n", $filecontent))) {
      # section already there, nothing to be done
      return $filecontent if /^\s*Printer\s*:\s*($section)\s*$/;
     }
@@ -331,8 +330,7 @@ sub isprinterconfigured {
     my $drivernotps2 = 0;
     my $ppdfileset = 0;
     my $nonrawprinting = 0;
-    my @lines = split("\n", $filecontent);
-    foreach (@lines) {
+    foreach (split("\n", $filecontent)) {
 	if (!$sectionfound) {
 	    if (/^\s*Printer\s*:\s*($queue)\s*$/) {
 		$sectionfound = 1;
