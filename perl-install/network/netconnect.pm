@@ -187,7 +187,10 @@ If you don't want to use the auto detection, deselect the checkbox.
     } elsif ($nb == 1) {
 	$netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0];
     }
-
+    
+    eval { $in->ask_yesorno(N("Network configuration"),
+			    N("Configuration is complete, do you want to apply settings ?"), 1) or goto step_2 }; $in->exit(0) if $@ =~ /wizcancel/;
+    
     member($netc->{internet_cnx_choice}, ('adsl', 'isdn')) and $netc->{at_boot} = $in->ask_yesorno(N("Network Configuration Wizard"), N("Do you want to start the connection at boot?"));
 
     if ($netc->{internet_cnx_choice}) {
@@ -219,7 +222,6 @@ If you don't want to use the auto detection, deselect the checkbox.
 
   step_3:
     my $m = $success ? N("Congratulations, the network and Internet configuration is finished.
-The configuration will now be applied to your system.
 
 ") . if_($::isStandalone && $in->isa('interactive_gtk'),
 N("After this is done, we recommend that you restart your X environment to avoid any hostname-related problems.")) : 
