@@ -46,8 +46,8 @@ If you don't know, choose 'use pppoe'"), $l) or return;
 	$type = 'sagem';
 	$in->do_pkgs->install(qw(adiusbadsl));
 	$netcnx->{type} = "adsl_$type";
-	$netcnx->{adsl_$type} = {};
-	adsl_conf($netcnx->{adsl_$type}, $netc, $intf, $type) or goto conf_adsl_step1;
+	$netcnx->{"adsl_$type"} = {};
+	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
     }
     if ($type =~ /speedtouch/) {
 	$type = 'speedtouch';
