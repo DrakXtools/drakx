@@ -14,7 +14,7 @@ our %l = (
   network => 
   {
     main => [
-      if_(arch() =~ /ppc/, qw(mace bmac gmac)),
+      if_(arch() =~ /ppc/, qw(mace bmac gmac airport)),
       if_(arch() =~ /^sparc/, qw(sunbmac sunhme sunqe)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
         qw(3c501 3c503 3c505 3c507 3c509 3c515),
@@ -117,7 +117,7 @@ our %l = (
   multimedia => 
   {
     sound => [
-      if_(arch() =~ /ppc/, qw(dmasound_awacs)),
+      if_(arch() =~ /ppc/, qw(dmasound_pmac)),
       if_(arch() !~ /^sparc/,
         qw(ad1816 ad1848 ad1889 ali5455 awe_wave audigy cmpci cs46xx cs4232 cs4281 emu10k1 es1370 es1371 esssolo1 forte),
 	   qw(gus i810_audio ice1712 mad16 maestro maestro3 mpu401 msnd_pinnacle nvaudio opl3 opl3sa opl3sa2 nm256_audio),
@@ -158,7 +158,7 @@ our %l = (
       qw(btaudio),
 
       #- these need checking
-      qw(pcilynx sktr rrunner gmac meye 3c559 buz paep),
+      qw(pcilynx sktr rrunner meye 3c559 buz paep),
     ],
   },
 );
