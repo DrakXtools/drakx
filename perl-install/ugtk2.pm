@@ -671,6 +671,18 @@ sub set_back_pixbuf {
     $window->set_back_pixmap($pixmap, 0);
 }
 
+sub set_back_pixmap {
+    my ($w) = @_;
+    return if !$w->realized;
+    my $window = $w->window;
+    my $pixmap = $w->{back_pixmap} ||= Gtk2::Gdk::Pixmap->new($window, 1, 2, $window->get_depth);
+
+    my $style = $w->get_style;
+    $pixmap->draw_points($style->bg_gc('normal'), 0, 0);
+    $pixmap->draw_points($style->base_gc('normal'), 0, 1);
+    $window->set_back_pixmap($pixmap);
+}
+
 sub fill_tiled_coords {
     my ($widget, $pixbuf, $x_back, $y_back, $width, $height) = @_;
     my ($x2, $y2) = (0, 0);
@@ -1604,14 +1616,7 @@ use ugtk2 qw(:helpers :wrappers);
 sub set_pixmap {
     my ($darea) = @_;
     return if !$darea->realized;
-    my $window = $darea->window;
-    my $pixmap = $darea->{back_pixmap} ||= Gtk2::Gdk::Pixmap->new($window, 1, 2, $window->get_depth);
-
-    my $style = $darea->get_style;
-    $pixmap->draw_points($style->bg_gc('normal'), 0, 0);
-    $pixmap->draw_points($style->base_gc('normal'), 0, 1);
-    $darea->window->set_back_pixmap($pixmap);
-
+    ugtk2::set_back_pixmap($darea);
     $darea->{layout} = $darea->create_pango_layout($darea->{text});
 }
 
