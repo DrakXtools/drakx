@@ -1,0 +1,59 @@
+#!/usr/bin/perl
+# DrakxDM -- Display Manager chooser
+# Copyright (C) 2002 MandrakeSoft (tvignaud@mandrakesoft.com)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use strict;
+use lib qw(/usr/lib/libDrakX);
+
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+use common;
+use interactive;
+
+my $in = 'interactive'->vnew('su');
+
+my $cfg_file = '/etc/sysconfig/desktop';
+
+my %dm = ('GNOME' => 'GDM (GNOME Display Manager)',
+          'KDM'   => 'KDM (KDE Display Manager)',
+          'KDE'   => 'MdkKDM (Mandrake Display Manager)',
+          'XDM'   => 'XDM (X Display Manager)',
+          );
+
+my $dm = 'KDE';
+
+foreach (cat_($cfg_file)) {
+    $dm = $1 if /^DISPLAYMANAGER=(.*)$/; 
+}
+
+if (my $new_dm = $in->ask_from_list_(N("Choosing an display manager"),
+                                     formatAlaTeX(N("X11 Display Manager allows you to graphically log
+into your system with the X Window System running and supports running
+several different X sessions on your local machine at the same time.")),
+                                     [ sort values %dm ],
+                                     $dm{$dm}
+                                    )
+   ) {
+    my $done = 0;
+    $new_dm = { reverse %dm}->{$new_dm};
+    substInFile {
+        $done ||= s/^(DISPLAYMANAGER)=.*/\1=$new_dm/;
+        print "\nDISPLAYMANAGER=$dm{$dm}" if eof && !$done;
+    } $cfg_file;
+}
+
+
+$in->exit(0);
