@@ -10,8 +10,7 @@ use common;
 sub acceptLicense() {
     N("Before continuing, you should carefully read the terms of the license. It
 covers the entire Mandrake Linux distribution. If you do agree with all the
-terms in it, check the \"%s\" box. If not, clicking on the \"%s\" button
-will reboot your computer.", N("Accept"), N("Quit"));
+terms in it, check the \"%s\" box. If not, simply turn off your computer.", N("Accept"));
 }
 sub addUser() {
     N("GNU/Linux is a multi-user system, meaning each user may have their own
@@ -32,7 +31,7 @@ The first field asks you for a real name. Of course, this is not mandatory
 -- you can actually enter whatever you like. DrakX will use the first word
 you typed in this field and copy it to the \"%s\" field, which is the name
 this user will enter to log onto the system. If you like, you may override
-the default and change the user name. The next step is to enter a password.
+the default and change the username. The next step is to enter a password.
 From a security point of view, a non-privileged (regular) user password is
 not as crucial as the \"root\" password, but that is no reason to neglect
 it by making it blank or too simple: after all, your files could be the
@@ -45,7 +44,7 @@ you have finished adding users.
 Clicking the \"%s\" button allows you to change the default \"shell\" for
 that user (bash by default).
 
-When you have finished adding users, you will be proposed to choose a user
+When you have finished adding users, you will be asked to choose a user
 that can automatically log into the system when the computer boots up. If
 you are interested in that feature (and do not care much about local
 security), choose the desired user and window manager, then click \"%s\".
@@ -83,9 +82,9 @@ With SCSI hard drives, an \"a\" means \"lowest SCSI ID\", a \"b\" means
 \"second lowest SCSI ID\", etc.");
 }
 sub chooseCd() {
-    N("The Mandrake Linux installation is distributed on several CD-ROMs. If a
-selected package is located on another CD-ROM, DrakX will eject the current
-CD and ask you to insert the correct CD as required.");
+    N("The Mandrake Linux installation is distributed on several CD-ROMs. DrakX
+knows if a selected package is located on another CD-ROM so it will eject
+the current CD and ask you to insert the correct CD as required.");
 }
 sub choosePackages() {
     N("It is now time to specify which programs you wish to install on your
@@ -94,16 +93,17 @@ to make it simpler to manage the packages have been placed into groups of
 similar applications.
 
 Packages are sorted into groups corresponding to a particular use of your
-machine. Mandrake Linux sorts packages groups in four categories. You can
-mix and match applications from the various categories, so a
+machine. Mandrake Linux has four predefined installations available. You
+can think of these installation classes as containers for various packages.
+You can mix and match applications from the various groups, so a
 ``Workstation'' installation can still have applications from the
-``Development'' category installed.
+``Development'' group installed.
 
  * \"%s\": if you plan to use your machine as a workstation, select one or
-more of the groups that are in the workstation category.
+more of the applications that are in the workstation group.
 
- * \"%s\": if plan on using your machine for programming, select the
-appropriate groups from that category.
+ * \"%s\": if plan on using your machine for programming, choose the
+appropriate packages from that group.
 
  * \"%s\": if your machine is intended to be a server, select which of the
 more common services you wish to install on your machine.
@@ -161,7 +161,7 @@ The \"%s\" option is used to disable the warning dialog which appears
 whenever the installer automatically selects a package to resolve a
 dependency issue. Some packages have relationships between each other such
 that installation of a package requires that some other program is also
-required to be installed. The installer can determine which packages are
+rerquired to be installed. The installer can determine which packages are
 required to satisfy a dependency to successfully complete the installation.
 
 The tiny floppy disk icon at the bottom of the list allows you to load a
@@ -174,23 +174,18 @@ create such a floppy.", N("No"), N("Yes"), N("Automatic dependencies"));
 sub configureNetwork() {
     N("You will now set up your Internet/network connection. If you wish to
 connect your computer to the Internet or to a local network, click \"%s\".
-Mandrake Linux will attempt to auto-detect network devices and modems. If
+Mandrake Linux will attempt to autodetect network devices and modems. If
 this detection fails, uncheck the \"%s\" box. You may also choose not to
 configure the network, or to do it later, in which case clicking the \"%s\"
 button will take you to the next step.
 
 When configuring your network, the available connections options are:
-Normal modem connection, Winmodem connection, ISDN modem, ADSL connection,
-cable modem, and finally a simple LAN connection (Ethernet).
+traditional modem, ISDN modem, ADSL connection, cable modem, and finally a
+simple LAN connection (Ethernet).
 
 We will not detail each configuration option - just make sure that you have
 all the parameters, such as IP address, default gateway, DNS servers, etc.
 from your Internet Service Provider or system administrator.
-
-Winmodems are special integrated low-end modems that require an additional
-software to work compared to Normal modems. Some of those modems actually
-work under Mandrake Linux, some others not. You can consult the list of
-supported modems at LinModems.
 
 You can consult the ``Starter Guide'' chapter about Internet connections
 for details about the configuration, or simply wait until your system is
@@ -225,13 +220,13 @@ sub configureTimezoneGMT() {
 local time according to the time zone you selected. If the clock on your
 motherboard is set to local time, you may deactivate this by unselecting
 \"%s\", which will let GNU/Linux know that the system clock and the
-hardware clock are in the same time zone. This is useful when the machine
+hardware clock are in the same timezone. This is useful when the machine
 also hosts another operating system like Windows.
 
 The \"%s\" option will automatically regulate the clock by connecting to a
 remote time server on the Internet. For this feature to work, you must have
 a working Internet connection. It is best to choose a time server located
-near you. This option actually installs a time server that can be used by
+near you. This option actually installs a time server that can used by
 other machines on your local network as well.", N("Hardware clock set to GMT"), N("Automatic time synchronization"));
 }
 sub configureX_card_list() {
@@ -276,18 +271,16 @@ Resolution
    Here you can choose the resolutions and color depths available for your
 hardware. Choose the one that best suits your needs (you will be able to
 change that after installation though). A sample of the chosen
-configuration is shown in the monitor picture.
+configuration is shown in the monitor.
 
 
 
 Test
 
-   Depending on your hardware, this entry might not appear.
-
    the system will try to open a graphical screen at the desired
 resolution. If you can see the message during the test and answer \"%s\",
 then DrakX will proceed to the next step. If you cannot see the message, it
-means that some part of the auto-detected configuration was incorrect and
+means that some part of the autodetected configuration was incorrect and
 the test will automatically end after 12 seconds, bringing you back to the
 menu. Change settings until you get a correct graphical display.
 
@@ -313,7 +306,7 @@ sub configureX_resolution() {
    Here you can choose the resolutions and color depths available for your
 hardware. Choose the one that best suits your needs (you will be able to
 change that after installation though). A sample of the chosen
-configuration is shown in the monitor picture.");
+configuration is shown in the monitor.");
 }
 sub configureX_xfree_and_glx() {
     N("In the case that different servers are available for your card, with or
@@ -356,13 +349,13 @@ a good idea to keep them.
 
  * \"%s\": if Microsoft Windows is installed on your hard drive and takes
 all the space available on it, you will have to create free space for
-GNU/Linux. To do so, you can delete your Microsoft Windows partition and
-data (see ``Erase entire disk'' solution) or resize your Microsoft Windows
-FAT or NTFS partition. Resizing can be performed without the loss of any
-data, provided you have previously defragmented the Windows partition.
-Backing up your data is strongly recommended.. Using this option is
-recommended if you want to use both Mandrake Linux and Microsoft Windows on
-the same computer.
+Linux. To do so, you can delete your Microsoft Windows partition and data
+(see ``Erase entire disk'' solution) or resize your Microsoft Windows FAT
+partition. Resizing can be performed without the loss of any data, provided
+you have previously defragmented the Windows partition and that it uses the
+FAT format. Backing up your data is strongly recommended.. Using this
+option is recommended if you want to use both Mandrake Linux and Microsoft
+Windows on the same computer.
 
    Before choosing this option, please understand that after this
 procedure, the size of your Microsoft Windows partition will be smaller
@@ -386,12 +379,12 @@ drive. Be careful -- it is a powerful but dangerous choice and you can very
 easily lose all your data. That's why this option is really only
 recommended if you have done something like this before and have some
 experience. For more instructions on how to use the DiskDrake utility,
-refer to the ``Managing Your Partitions'' section in the ``Starter Guide''.", N("Use free space"), N("Use existing partition"), N("Use the free space on the Windows partition"), N("Erase entire disk"), N("Remove Windows"), N("Custom disk partitioning"));
+refer to the ``Managing Your Partitions '' section in the ``Starter
+Guide''.", N("Use free space"), N("Use existing partition"), N("Use the free space on the Windows partition"), N("Erase entire disk"), N("Remove Windows"), N("Custom disk partitioning"));
 }
 sub exitInstall() {
     N("There you are. Installation is now complete and your GNU/Linux system is
-ready to use. Just click \"%s\" to reboot the system. Don't forget to
-remove the installation media (CD-ROM or floppy). The first thing you
+ready to use. Just click \"%s\" to reboot the system. The first thing you
 should see after your computer has finished doing its hardware tests is the
 bootloader menu, giving you the choice of which operating system to start.
 
@@ -418,7 +411,7 @@ start the installation. At the prompt, press the [F1] key and type >>linux
 defcfg=\"floppy\" <<.
 
 (*) You need a FAT-formatted floppy (to create one under GNU/Linux, type
-\"mformat a:\")", N("Reboot"), N("Advanced"), N("Generate auto-install floppy"), N("Replay"), N("Automated"), N("Save packages selection"));
+\"mformat a:\")", N("Reboot"), N("Advanced"), N("generate auto-install floppy"), N("Replay"), N("Automated"), N("Save packages selection"));
 }
 sub formatPartitions() {
     N("Any partitions that have been newly defined must be formatted for use
@@ -455,9 +448,9 @@ if you have a working Internet connection, or \"%s\" if you prefer to
 install updated packages later.
 
 Choosing \"%s\" will display a list of places from which updates can be
-retrieved. You should choose one near to you. A package-selection tree will
-appear: review the selection, and press \"%s\" to retrieve and install the
-selected package(s), or \"%s\" to abort.", N("Yes"), N("No"), N("Yes"), N("Install"), N("Cancel"));
+retrieved. You should choose one nearer to you. A package-selection tree
+will appear: review the selection, and press \"%s\" to retrieve and install
+the selected package(s), or \"%s\" to abort.", N("Yes"), N("No"), N("Yes"), N("Install"), N("Cancel"));
 }
 sub miscellaneous() {
     N("At this point, DrakX will allow you to choose the security level desired
@@ -466,13 +459,7 @@ higher if the machine will contain crucial data, or if it will be a machine
 directly exposed to the Internet. The trade-off of a higher security level
 is generally obtained at the expense of ease of use.
 
-If you do not know what to choose, stay with the default option. You will
-be able to change that security level later with tool draksec from the
-Mandrake Control Center.
-
-The \"%s\" field can inform the system of the user on this computer that
-will be responsible for security. Security messages will be sent to that
-address.", N("Security Administrator"));
+If you do not know what to choose, stay with the default option.");
 }
 sub partition_with_diskdrake() {
     N("At this point, you need to choose which partition(s) will be used for the
@@ -508,7 +495,7 @@ work.
  * \"%s\": discards all changes and reloads the partition table that was
 originally on the hard drive.
 
- * \"%s\": un-checking this option will force users to manually mount and
+ * \"%s\": unchecking this option will force users to manually mount and
 unmount removable media such as floppies and CD-ROMs.
 
  * \"%s\": use this option if you wish to use a wizard to partition your
@@ -544,7 +531,7 @@ If you are installing on a PPC machine, you will want to create a small HFS
 ``bootstrap'' partition of at least 1MB which will be used by the yaboot
 bootloader. If you opt to make the partition a bit larger, say 50MB, you
 may find it a useful place to store a spare kernel and ramdisk images for
-emergency boot situations.", N("Clear all"), N("Auto allocate"), N("More"), N("Save partition table"), N("Restore partition table"), N("Rescue partition table"), N("Reload partition table"), N("Removable media auto-mounting"), N("Wizard"), N("Undo"), N("Toggle between normal/expert mode"), N("Done"));
+emergency boot situations.", N("Clear all"), N("Auto allocate"), N("More"), N("Save partition table"), N("Restore partition table"), N("Rescue partition table"), N("Reload partition table"), N("Removable media automounting"), N("Wizard"), N("Undo"), N("Toggle between normal/expert mode"), N("Done"));
 }
 sub resizeFATChoose() {
     N("More than one Microsoft partition has been detected on your hard drive.
@@ -605,16 +592,14 @@ running version \"8.1\" or later. Performing an Upgrade on versions prior
 to Mandrake Linux version \"8.1\" is not recommended.", N("Install"), N("Upgrade"));
 }
 sub selectKeyboard() {
-    N("Depending on the language you chose in section , DrakX will automatically
-select a particular type of keyboard configuration. Check the selection
-suits you or choose another keyboard layout.
-
-Also, you may not have a keyboard that corresponds exactly to your
-language: for example, if you are an English-speaking Swiss native, you may
-have a Swiss keyboard. Or if you speak English and are located in Quebec,
-you may find yourself in the same situation where your native language and
-country-set keyboard do not match. In either case, this installation step
-will allow you to select an appropriate keyboard from a list.
+    N("Depending on the default language you chose in Section , DrakX will
+automatically select a particular type of keyboard configuration. However,
+you may not have a keyboard that corresponds exactly to your language: for
+example, if you are an English speaking Swiss person, you may have a Swiss
+keyboard. Or if you speak English but are located in Quebec, you may find
+yourself in the same situation where your native language and keyboard do
+not match. In either case, this installation step will allow you to select
+an appropriate keyboard from a list.
 
 Click on the \"%s\" button to be presented with the complete list of
 supported keyboards.
@@ -634,33 +619,19 @@ files for system documentation and applications. For example, if you will
 host users from Spain on your machine, select English as the default
 language in the tree view and \"%s\" in the Advanced section.
 
-About UTF-8 (unicode) support: Unicode is a new character encoding meant to
-cover all existing languages. Though full support for it in GNU/Linux is
-still under development. For that reason, Mandrake Linux will be using it
-or not depending on the user choices:
-
- * If you choose a languages with a strong legacy encoding (latin1
-languages, Russian, Japanese, Chinese, Korean, Thai, Greek, Turkish, most
-iso-8859-2 languages), the legacy encoding will be used by default;
-
- * Other languages will use unicode by default;
-
- * If two or more languages are required, and those languages are not using
-the same encoding, then unicode will be used for the whole system;
-
- * Finally, unicode can also be forced for the system at user request by
-selecting option \"%s\" independently of which language(s) have been
-chosen.
-
 Note that you're not limited to choosing a single additional language. You
 may choose several ones, or even install them all by selecting the \"%s\"
 box. Selecting support for a language means translations, fonts, spell
-checkers, etc. for that language will be installed.
+checkers, etc. for that language will be installed. Additionally, the
+\"%s\" checkbox allows you to force the system to use unicode (UTF-8). Note
+however that this is an experimental feature. If you select different
+languages requiring different encoding the unicode support will be
+installed anyway.
 
 To switch between the various languages installed on the system, you can
 launch the \"/usr/sbin/localedrake\" command as \"root\" to change the
 language used by the entire system. Running the command as a regular user
-will only change the language settings for that particular user.", N("Advanced"), N("Espanol"), N("Use Unicode by default"), N("All languages"));
+will only change the language settings for that particular user.", N("Advanced"), N("Espanol"), N("All languages"), N("Use Unicode by default"));
 }
 sub selectMouse() {
     N("Usually, DrakX has no problems detecting the number of buttons on your
@@ -669,11 +640,6 @@ configure it for third-button emulation. The third-button mouse button of a
 two-button mouse can be ``pressed'' by simultaneously clicking the left and
 right mouse buttons. DrakX will automatically know whether your mouse uses
 a PS/2, serial or USB interface.
-
-In case you have a 3 buttons mouse without wheel, you can choose the mouse
-that says \"%s\". DrakX will then configure your mouse so that you can
-simulate the wheel with it: to do so, press the middle button and move your
-mouse up and down.
 
 If for some reason you wish to specify a different type of mouse, select it
 from the list provided.
@@ -691,7 +657,7 @@ pressing the \"%s\" button, a mouse image is displayed on-screen. Scroll
 the mouse wheel to ensure that it is activated correctly. Once you see the
 on-screen scroll wheel moving as you scroll your mouse wheel, test the
 buttons and check that the mouse pointer moves on-screen as you move your
-mouse.", N("with Wheel emulation"), N("Next ->"));
+mouse.", N("Next ->"));
 }
 sub selectSerialPort() {
     N("Please select the correct port. For example, the \"COM1\" port under
@@ -703,7 +669,7 @@ system: you have to enter the \"root\" password. \"Root\" is the system
 administrator and is the only user authorized to make updates, add users,
 change the overall system configuration, and so on. In short, \"root\" can
 do everything! That is why you must choose a password that is difficult to
-guess - DrakX will tell you if the password you chose is too easy. As you
+guess - DrakX will tell you if the password that you chose too easy. As you
 can see, you are not forced to enter a password, but we strongly advise you
 against this. GNU/Linux is just as prone to operator error as any other
 operating system. Since \"root\" can overcome all limitations and
@@ -732,8 +698,8 @@ services, select the appropriate one for \"%s\". If you do not know which
 one to use, you should ask your network administrator.
 
 If you happen to have problems with remembering passwords, if your computer
-will never be connected to the Internet and you absolutely trust everybody
-who uses your computer, you can choose to have \"%s\".", N("Advanced"), N("authentication"), N("No password"));
+will never be connected to the internet or that you absolutely trust
+everybody who uses your computer, you can choose to have \"%s\".", N("Advanced"), N("authentication"), N("No password"));
 }
 sub setupBootloader() {
     N("This dialog allows you to fine tune your bootloader:
@@ -754,21 +720,13 @@ you prefer, the bootloader can be installed on the second hard drive
 given to the user at the console to select a boot entry other than the
 default.
 
- * \"%s\": ACPI is a new standard (appeared during year 2002) for power
-management, notably for laptops. If you know your hardware supports it and
-you need it, check this box.
-
- * \"%s\": If you noticed hardware problems on your machine (IRQ conflicts,
-instabilities, machine freeze, ...) you should try disabling APIC by
-checking this box.
-
 !! Beware that if you choose not to install a bootloader (by selecting
 \"%s\"), you must ensure that you have a way to boot your Mandrake Linux
 system! Be sure you know what you are doing before changing any of the
 options. !!
 
 Clicking the \"%s\" button in this dialog will offer advanced options which
-are normally reserved for the expert user.", N("Bootloader to use"), N("GRUB"), N("LILO with text menu"), N("LILO with graphical menu"), N("Boot device"), N("/dev/hda"), N("/dev/hdb"), N("/dev/fd0"), N("Delay before booting the default image"), N("Enable ACPI"), N("Force no APIC"), N("Skip"), N("Advanced"));
+are normally reserved for the expert user.", N("Bootloader to use"), N("GRUB"), N("LILO with text menu"), N("LILO with graphical menu"), N("Boot device"), N("/dev/hda"), N("/dev/hdb"), N("/dev/fd0"), N("Delay before booting the default image"), N("Skip"), N("Advanced"));
 }
 sub setupBootloaderAddEntry() {
     N("After you have configured the general bootloader parameters, the list of
@@ -784,7 +742,7 @@ You may also not want to give access to these other operating systems to
 anyone who goes to the console and reboots the machine. You can delete the
 corresponding entries for the operating systems to remove them from the
 bootloader menu, but you will need a boot disk in order to boot those other
-operating systems!", N("Add"), N("Modify"), N("Remove"), N("Next->"));
+operating systems!", N("Add"), N("Modify"), N("Remove"), N("OK"));
 }
 sub setupBootloaderBeginner() {
     N("LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally
@@ -792,15 +750,14 @@ automated. DrakX will analyze the disk boot sector and act according to
 what it finds there:
 
  * if a Windows boot sector is found, it will replace it with a grub/LILO
-boot sector. This way you will be able to load either GNU/Linux or any
-other OS installed on your machine.
+boot sector. This way you will be able to load either GNU/Linux or another
+OS.
 
  * if a grub or LILO boot sector is found, it will replace it with a new
 one.
 
 If it cannot make a determination, DrakX will ask you where to place the
-bootloader. Generally, the \"%s\" is the safest place. Choosing \"%s\"
-won't install any bootloader. Use it only if you know what you are doing.", N("First sector of drive (MBR)"), N("Skip"));
+bootloader.");
 }
 sub setupDefaultSpooler() {
     N("Now, it's time to select a printing system for your computer. Other OSs may
@@ -868,10 +825,10 @@ assist in initializing video hardware, or to enable keyboard mouse button
 emulation for the missing 2nd and 3rd mouse buttons on a stock Apple mouse.
 The following are some examples:
 
-   	      video=aty128fb:vmode:17,cmode:32,mclk:71 adb_buttons=103,111
+         video=aty128fb:vmode:17,cmode:32,mclk:71 adb_buttons=103,111
 hda=autotune
 
-   	      video=atyfb:vmode:12,cmode:24 adb_buttons=103,111
+         video=atyfb:vmode:12,cmode:24 adb_buttons=103,111
 
  * Initrd: this option can be used either to load initial modules before
 the boot device is available, or to load a ramdisk image for an emergency
@@ -975,7 +932,7 @@ configure it manually.
 here. You can click on \"%s\" to change the parameters associated with the
 card.
 
- * \"%s\": If you wish to configure your Internet or local network access
+ * \"%s\": If you want to configure your Internet or local network access
 now.
 
  * \"%s\": this entry allows you to redefine the security level as set in a
