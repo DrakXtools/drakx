@@ -346,7 +346,7 @@ sub psUpdateHdlistsDeps {
 
 	#- copy hdlist file directly to $prefix/var/lib/urpmi, this will be used
 	#- for getting header of package during installation or after by urpmi.
-	my $fakemedium = $method . $medium;
+	my $fakemedium = "$descr ($method$medium)";
 	my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
 	-e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
 	install_any::getAndSaveFile("Mandrake/base/$hdlist", $newf) or die "no $hdlist found";
@@ -387,7 +387,7 @@ sub psUsingHdlists {
 
 sub psUsingHdlist {
     my ($prefix, $method, $packages, $hdlist, $medium, $rpmsdir, $descr, $selected, $fhdlist) = @_;
-    my $fakemedium = $method . $medium;
+    my $fakemedium = "$descr ($method$medium)";
     log::l("trying to read $hdlist for medium $medium");
 
     #- if the medium already exist, use it.
