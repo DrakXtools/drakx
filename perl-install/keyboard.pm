@@ -283,8 +283,8 @@ my %kbdgrptoggle =
   'ctrl_alt_toggle' => _("Ctrl and Alt keys simultaneously"),
   'alt_shift_toggle' => _("Alt and Shift keys simultaneously"),
   'menu_toggle' => _("\"Menu\" key"),
-  'lwin_toggle') => _("Left \"Windows\" key"),
-  'rwin_toggle') => _("Right \"Windows\" key"),
+  'lwin_toggle' => _("Left \"Windows\" key"),
+  'rwin_toggle' => _("Right \"Windows\" key"),
 );
 
 
