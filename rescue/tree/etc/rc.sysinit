@@ -29,6 +29,8 @@ load isofs
 load vfat
 load reiserfs
 load loop
+load sd_mod
+load sr_mod
 
 grep -q oem /proc/cmdline && exec /etc/oem -f
 
