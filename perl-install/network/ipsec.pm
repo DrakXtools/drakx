@@ -373,7 +373,7 @@ sub write_racoon_conf {
 		}
 	}
 
-open(my $ADD, "> $racoon_conf") or die "Can't open the $racoon_conf file for writing";
+open(my $ADD, "> $racoon_conf") or die "Can not open the $racoon_conf file for writing";
 	print $ADD "$display\n";
 
 }
@@ -509,7 +509,7 @@ sub read_ipsec_conf {
 	local $_;
 	if ($kernel_version < 2.5) {
 	#- kernel 2.4 part -------------------------------
-		open(my $LIST, "< $ipsec_conf"); #or die "Can't open the $ipsec_conf file for reading";
+		open(my $LIST, "< $ipsec_conf"); #or die "Can not open the $ipsec_conf file for reading";
 		while (<$LIST>) {
         		chomp($_);
 				$line = $_;
@@ -551,7 +551,7 @@ sub read_ipsec_conf {
 	#- kernel 2.6 part -------------------------------
 		my @mylist;
 		my $myline = "";
-		open(my $LIST, "< $ipsec_conf"); #or die "Can't open the $ipsec_conf file for reading";
+		open(my $LIST, "< $ipsec_conf"); #or die "Can not open the $ipsec_conf file for reading";
 			while (<$LIST>) {
 		        	chomp($_);
 				$myline = $_;
@@ -591,7 +591,7 @@ sub write_ipsec_conf {
     my ($ipsec_conf, $ipsec, $kernel_version) = @_;
 	if ($kernel_version < 2.5) {
 	#- kernel 2.4 part -------------------------------
-		open(my $ADD, "> $ipsec_conf") or die "Can't open the $ipsec_conf file for writing";
+		open(my $ADD, "> $ipsec_conf") or die "Can not open the $ipsec_conf file for writing";
 			foreach my $key1 (ikeys %$ipsec) {
 				print $ADD "$ipsec->{$key1}\n" if ! $ipsec->{$key1}{1};
 				foreach my $key2 (ikeys %{$ipsec->{$key1}}) {
@@ -624,7 +624,7 @@ sub write_ipsec_conf {
 						$ipsec->{$key1}{level} . ";\n"
 			}; 
 		}
-		open(my $ADD, "> $ipsec_conf") or die "Can't open the $ipsec_conf file for writing";
+		open(my $ADD, "> $ipsec_conf") or die "Can not open the $ipsec_conf file for writing";
 			print $ADD $display;
 		}
 }

@@ -16,7 +16,7 @@ my @wait_messages;
 
 sub new {
     if ($::isInstall) {
-	system('unicode_start'); #- don't use run_program, we must do it on current console
+	system('unicode_start'); #- do not use run_program, we must do it on current console
 	{ 
 	    local $ENV{LC_CTYPE} = "en_US.UTF-8";
 	    Newt::Init(1);
@@ -135,7 +135,7 @@ sub ask_fromW_real {
 
 	$e->{type} = 'list' if $e->{type} =~ /iconlist/;
 
-	#- combo doesn't exist, fallback to a sensible default
+	#- combo does not exist, fallback to a sensible default
 	$e->{type} = $e->{not_edit} ? 'list' : 'entry' if $e->{type} eq 'combo';
 
 	my $changed = sub {

@@ -133,7 +133,7 @@ sub new($$) {
 		$o->{vga16} = 1 if /VGA16/;
 		&$launchX($prog, $Driver) and goto OK;
 	    }
-            $::move and print("can't launch graphical mode :(\n"), c::_exit(1);
+            $::move and print("can not launch graphical mode :(\n"), c::_exit(1);
 	}
 	return undef;
     }
@@ -159,7 +159,7 @@ sub enteringStep {
     printf "Entering step `%s'\n", $o->{steps}{$step}{text};
     $o->SUPER::enteringStep($step);
     install_gtk::update_steps_position($o);
-#    install_gtk::create_help_window($o); #- HACK: without this it doesn't work (reaches step doPartitionDisks then fail)
+#    install_gtk::create_help_window($o); #- HACK: without this it does not work (reaches step doPartitionDisks then fail)
 }
 sub leavingStep {
     my ($o, $step) = @_;
@@ -344,7 +344,7 @@ sub choosePackagesTree {
 					    }
 					}
 				    }
-				    $error = [ N("You can't select/unselect this package"),
+				    $error = [ N("You can not select/unselect this package"),
 					       formatList(20, map { my $rb = $state->{rejected}{$_}{backtrack};
 									    my @froms = keys %{$rb->{closure} || {}};
 									    my @unsatisfied = @{$rb->{unsatisfied} || []};
@@ -356,7 +356,7 @@ sub choosePackagesTree {
 									    $_ . ($s ? " ($s)" : '');
 									} sort @ask_unselect) ];
 				} elsif (pkgs::correctSize($size / sqr(1024)) > $available / sqr(1024)) {
-				    $error = N("You can't select this package as there is not enough space left to install it");
+				    $error = N("You can not select this package as there is not enough space left to install it");
 				} elsif (@l > @_ && $common->{state}{auto_deps}) {
 				    $o->ask_okcancel('', [ $isSelection ? 
 							   N("The following packages are going to be installed") :
@@ -384,15 +384,15 @@ sub choosePackagesTree {
 			    check_interactive_to_toggle => sub {
 				my $p = pkgs::packageByName($packages, $_[0]) or return;
 				if ($p->flag_base) {
-				    $o->ask_warn('', N("This is a mandatory package, it can't be unselected"));
+				    $o->ask_warn('', N("This is a mandatory package, it can not be unselected"));
 				} elsif ($p->flag_installed && !$p->flag_upgrade) {
-				    $o->ask_warn('', N("You can't unselect this package. It is already installed"));
+				    $o->ask_warn('', N("You can not unselect this package. It is already installed"));
 				} elsif ($p->flag_selected && $p->flag_installed) {
 				    if ($::expert) {
 					$o->ask_yesorno('', N("This package must be upgraded.\nAre you sure you want to deselect it?")) or return;
 					return 1;
 				    } else {
-					$o->ask_warn('', N("You can't unselect this package. It must be upgraded"));
+					$o->ask_warn('', N("You can not unselect this package. It must be upgraded"));
 				    }
 				} else { return 1 }
 				return;
@@ -571,7 +571,7 @@ sub installPackages {
 	} else {
 	    $r &&= $o->ask_okcancel('', N("Change your Cd-Rom!
 Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
-If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $name), 1);
+If you do not have it, press Cancel to avoid installation from this Cd-Rom.", $name), 1);
 	}
 	#- add the elapsed time (otherwise the predicted time will be rubbish)
 	$start_time += time() - $time;

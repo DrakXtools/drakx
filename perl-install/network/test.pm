@@ -19,7 +19,7 @@ sub test_synchronous {
     $o->{done} = 1;
 }
 
-#- launch asynchronous test, won't hang
+#- launch asynchronous test, will not hang
 sub start {
     my ($o) = @_;
     $o->{done} = 0;
@@ -95,7 +95,7 @@ sub update_status {
     my ($o) = @_;
     if ($o->{kid}) {
         my $fd = $o->{kid}{fd};
-        fcntl($fd, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
+        fcntl($fd, c::F_SETFL(), c::O_NONBLOCK()) or die "can not fcntl F_SETFL: $!";
         local $| = 1;
         if (defined(my $output = <$fd>)) {
             ($o->{address}, $o->{ping}) = $output =~ /^([\d\.]+)\|([\d\.,]+)*$/;

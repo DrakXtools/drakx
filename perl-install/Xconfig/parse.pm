@@ -44,7 +44,7 @@ sub raw_from_file { #- internal
     my ($comment, $obj, @objs);
 
     my $attach_comment = sub {
-	$obj || @objs or warn "$file:$line: can't attach comment\n";
+	$obj || @objs or warn "$file:$line: can not attach comment\n";
 	if ($comment) {
 	    $comment =~ s/\n+$/\n/;
 	    ($obj || $objs[0])->{$_[0] . '_comment'} = $comment;

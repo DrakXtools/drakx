@@ -160,7 +160,7 @@ sub import_tree {
 	return @l if !$@;
 
 	if ($server->{username}) {
-	    $in->ask_warn('', N("Can't login using username %s (bad password?)", $server->{username}));
+	    $in->ask_warn('', N("Can not login using username %s (bad password?)", $server->{username}));
 	    network::smb::remove_bad_credentials($server);
 	} else {
 	    if (my @l = network::smb::authentications_available($server)) {
@@ -193,7 +193,7 @@ sub import_tree {
 	my $path = $tree_model->get_path($node);
 	$tree->expand_row($path, 0);
 
-	foreach ($find_exports->($wservers{$tree_model->get_path_str($node)} || return)) { #- can't die here since insert_node provoque a tree_select_row before the %wservers is filled
+	foreach ($find_exports->($wservers{$tree_model->get_path_str($node)} || return)) { #- can not die here since insert_node provoque a tree_select_row before the %wservers is filled
 	    my $s = $kind->to_string($_);
 	    my $w = $tree_model->append_set($node, [ 0 => export_icon(find_fstab_entry($kind, $_)), 
 						     1 => $s ]);

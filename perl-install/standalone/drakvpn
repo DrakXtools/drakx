@@ -99,7 +99,7 @@ It's currently enabled.
 
 What would you like to do?"),
 				   [ N_("disable"), N_("reconfigure"), N_("dismiss") ]) or quit_global($in, 0);
-     # FIXME: reconfigure isn't handled
+     # FIXME: reconfigure is not handled
 	if ($r eq "disable") {
 	    if (!$::testing) {
 		my $_wait_disabl = $in->wait_message('', N("Disabling VPN..."));
@@ -125,7 +125,7 @@ It's currently disabled.
 
 What would you like to do?"),
 				   [ N_("enable"), N_("reconfigure"), N_("dismiss") ]);
-     # FIXME: reconfigure isn't handled
+     # FIXME: reconfigure is not handled
 	if ($r eq "enable") {
 	    foreach ($ipsec_conf, $tunnels_file) {
 		rename($_, "$_.old") if -f $_;
@@ -445,7 +445,7 @@ N("This is the first section after the config
 setup one.\n
 Here you define the default settings. 
 All the other sections will follow this one.
-The left settings are optional. If don't define
+The left settings are optional. If do not define
 them here, globally, you can define them in each
 section.\n",),
 		  [     { label => N("PFS"), val => \$conn_default->{2}[1], type => 'entry' },
@@ -587,7 +587,7 @@ my $number = network::ipsec::matched_section_key_number_ipsec_conf($choice,$ipse
 if ($kernel_version < 2.5) { 
 if ($choice =~ /^version|block|private|clear|packet/) {
 
-$in->ask_okcancel(N("Can't edit!"), 
+$in->ask_okcancel(N("Can not edit!"), 
 N("You cannot edit this section.\n
 This section is mandatory for Freeswan 2.X.
 One has to specify version 2.0 on the top

@@ -71,7 +71,7 @@ sub construct_dir_tree {
 
     if ($resize_fat::isFAT32) {
 	#- fat32's root must remain in the first 64k clusters
-	#- so don't set it as DIRECTORY, it will be specially handled
+	#- so do not set it as DIRECTORY, it will be specially handled
 	resize_fat::c_rewritten::set_flag($fs->{fat32_root_dir_cluster}, $resize_fat::any::FREE);
     }
 
@@ -158,7 +158,7 @@ sub resize {
 
     resize_fat::boot_sector::write($fs);
 
-    $resize_fat::isFAT32 and eval { resize_fat::info_sector::write($fs) }; #- doesn't matter if this fails - its pretty useless!
+    $resize_fat::isFAT32 and eval { resize_fat::info_sector::write($fs) }; #- does not matter if this fails - its pretty useless!
 
     MDK::Common::System::sync();
     close $fs->{fd};

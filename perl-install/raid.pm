@@ -39,7 +39,7 @@ sub new {
 
 sub add {
     my ($md_part, $part) = @_;
-    $md_part->{isMounted} and die N("Can't add a partition to _formatted_ RAID %s", $md_part->{device});
+    $md_part->{isMounted} and die N("Can not add a partition to _formatted_ RAID %s", $md_part->{device});
     inactivate_and_dirty($md_part);
     set_isFormatted($part, 0);
     $part->{raid} = $md_part->{device};

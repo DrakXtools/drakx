@@ -45,7 +45,7 @@ sub vmlinuz2basename {
 }
 sub basename2initrd_basename {
     my ($basename) = @_;
-    $basename =~ s!vmlinuz-?!!; #- here we don't use $vmlinuz_regexp since we explictly want to keep all that is not "vmlinuz"
+    $basename =~ s!vmlinuz-?!!; #- here we do not use $vmlinuz_regexp since we explictly want to keep all that is not "vmlinuz"
     'initrd' . ($basename ? "-$basename" : '');    
 }
 sub kernel_str2vmlinuz_long {
@@ -366,7 +366,7 @@ sub same_entries {
 	    next if $inode_a && $inode_b && $inode_a == $inode_b;
 	}
 
-	log::l("entries $a->{label} don't have same $_: $a->{$_} ne $b->{$_}");
+	log::l("entries $a->{label} do not have same $_: $a->{$_} ne $b->{$_}");
 	return;
     }
     1;
@@ -434,7 +434,7 @@ sub _do_the_symlink {
     if (-e "$::prefix$old_long_name") {
 	$bootloader->{old_long_names}{$link} = $old_long_name;
     } else {
-	log::l("ERROR: $link points to $old_long_name which doesn't exist");
+	log::l("ERROR: $link points to $old_long_name which does not exist");
     }
 
     #- changing the symlink
@@ -461,7 +461,7 @@ sub add_kernel {
 	$v->{append} = pack_append($simple, $dict);
     }
 
-    #- new versions of yaboot don't handle symlinks
+    #- new versions of yaboot do not handle symlinks
     $b_nolink ||= arch() =~ /ppc/;
 
     $b_nolink ||= $kernel_str->{use_long_name};
@@ -761,7 +761,7 @@ wait for default boot.
 	}
     }
 
-    #- remove existing libsafe, don't care if the previous one was modified by the user?
+    #- remove existing libsafe, do not care if the previous one was modified by the user?
     @{$bootloader->{entries}} = grep { $_->{label} ne 'failsafe' } @{$bootloader->{entries}};
 
     add_kernel($bootloader, $kernels[0],
@@ -777,7 +777,7 @@ wait for default boot.
 		      });
 	}
     } elsif (arch() !~ /ia64/) {
-	#- search for dos (or windows) boot partition. Don't look in extended partitions!
+	#- search for dos (or windows) boot partition. Do not look in extended partitions!
 	my @windows_boot_parts =
 	  grep { isFat_or_NTFS($_) && member(fs::type::fs_type_from_magic($_), 'vfat', 'ntfs') }
 	    map { @{$_->{primary}{normal}} } @{$all_hds->{hds}};
@@ -973,7 +973,7 @@ sub when_config_changed_yaboot {
 
 sub make_label_lilo_compatible {
     my ($label) = @_; 
-    $label = substr($label, 0, 31); #- lilo doesn't handle more than 31 char long labels
+    $label = substr($label, 0, 31); #- lilo does not handle more than 31 char long labels
     $label =~ s/ /_/g; #- lilo does not support blank character in image names, labels or aliases
     qq("$label");
 }
@@ -1276,7 +1276,7 @@ sub install_grub {
 }
 sub when_config_changed_grub {
     my ($_bootloader) = @_;
-    #- don't do anything
+    #- do not do anything
 }
 
 sub action {
@@ -1291,7 +1291,7 @@ sub install {
     my ($bootloader, $all_hds) = @_;
 
     if (my $part = fs::get::device2part($bootloader->{boot}, [ fs::get::fstab($all_hds) ])) {
-	die N("You can't install the bootloader on a %s partition\n", $part->{fs_type})
+	die N("You can not install the bootloader on a %s partition\n", $part->{fs_type})
 	  if $part->{fs_type} eq 'xfs';
     }
     $bootloader->{keytable} = keytable($bootloader->{keytable});
@@ -1351,7 +1351,7 @@ sub update_for_renumbered_partitions {
 	my $config = $_ eq 'grub' ? 'grub_install' : $_;
 	$configs{$config} && $configs{$config}{orig} ne $configs{$config}{new};
     } @needed) {
-	$in->ask_warn('', N("The bootloader can't be installed correctly. You have to boot rescue and choose \"%s\"", 
+	$in->ask_warn('', N("The bootloader can not be installed correctly. You have to boot rescue and choose \"%s\"", 
 			    N("Re-install Boot Loader")));
     }
     1;

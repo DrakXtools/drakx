@@ -93,7 +93,7 @@ sub getFree {
 }
 
 #- returns the size of the loopback file if it already exists
-#- returns -1 is the loopback file can't be used
+#- returns -1 is the loopback file can not be used
 sub verifFile {
     my ($dir, $file, $part) = @_;
     -e "$dir$file" and return -s "$dir$file";

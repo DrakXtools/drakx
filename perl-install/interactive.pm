@@ -348,7 +348,7 @@ sub ask_from_normalize {
 	$e->{disabled} ||= sub { 0 };
     }
 
-    #- don't display empty lists and one element lists
+    #- do not display empty lists and one element lists
     @$l = grep { 
 	if ($_->{list} && $_->{not_edit} && !$_->{allow_empty_list}) {
 	    if (!@{$_->{list}}) {

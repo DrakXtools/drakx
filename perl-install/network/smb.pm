@@ -157,7 +157,7 @@ sub write_smb_conf {
     my ($domain) = @_;
 
     #- was going to just have a canned config in samba-winbind
-    #- and replace the domain, but sylvestre/buchan didn't bless it yet
+    #- and replace the domain, but sylvestre/buchan did not bless it yet
 
     my $f = "$::prefix/etc/samba/smb.conf";
     rename $f, "$f.orig";
@@ -188,7 +188,7 @@ sub write_smb_ads_conf {
     my ($domain, $realm) = @_;
 
     #- was going to just have a canned config in samba-winbind
-    #- and replace the domain, but sylvestre/buchan didn't bless it yet
+    #- and replace the domain, but sylvestre/buchan did not bless it yet
 
     my $f = "$::prefix/etc/samba/smb.conf";
     rename $f, "$f.orig";

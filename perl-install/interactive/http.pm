@@ -41,7 +41,7 @@ sub new {
 }
 
 sub end { 
-    -e $pipe_r or return; # don't run this twice
+    -e $pipe_r or return; # do not run this twice
     my $q = CGI->new;
     cont_stdout("Exit");
     print "It's done, thanks for playing", $q->end_html;
@@ -74,7 +74,7 @@ sub ask_fromW {
 
 	$e->{type} = 'list' if $e->{type} =~ /(icon|tree)list/;
 
-	#- combo doesn't exist, fallback to a sensible default
+	#- combo does not exist, fallback to a sensible default
 	$e->{type} = $e->{not_edit} ? 'list' : 'entry' if $e->{type} eq 'combo';
 
 	if ($e->{type} eq 'bool') {
@@ -115,7 +115,7 @@ sub ask_fromW {
 
 	open_stdout(); # re-open for writing
 	cont_stdout(N("Error"));
-	print $q->h1(N("Error")), $q->p("Sorry, you can't go back");
+	print $q->h1(N("Error")), $q->p("Sorry, you can not go back");
 	goto redisplay;
     }
     each_index {

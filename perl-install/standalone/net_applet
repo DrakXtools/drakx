@@ -43,7 +43,7 @@ my %appletstate = (
 			  changes => [ 'connected' ],
 			  menu => [ 'confNetwork', 'refresh', 'help' ],
 			  tt => [
-                                 N_("You don't have any configured Internet connection.
+                                 N_("You do not have any configured Internet connection.
 Run the \"Add Connection\" assistant from the Mandrakelinux Control Center")
                                 ]
 			  }
@@ -98,7 +98,7 @@ sub shouldStart() {
 sub md5file {
     my @md5;
     foreach my $file (@_) {
-	open(my $FILE, $file) or do { print STDERR "Can't open '$file': $!"; push @md5, "" };
+	open(my $FILE, $file) or do { print STDERR "Can not open '$file': $!"; push @md5, "" };
 	binmode($FILE);
 	push @md5, Digest::MD5->new->addfile($FILE)->hexdigest;
 	close($FILE);

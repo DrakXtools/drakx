@@ -35,7 +35,7 @@ sub parameters {
 	  ($is_a_number, $min, $max) = ($1 ne 'string', $2, $3) if $1 ne 'char'; 
       } elsif (/^($c_types),?\s*(.*)/s) {
 	  $_ = $2;
-	  #- here "char" really are size-limited strings, modinfo doesn't display the size limit (but since we don't care about it, it doesn't matter :)
+	  #- here "char" really are size-limited strings, modinfo does not display the size limit (but since we do not care about it, it does not matter :)
 	  $is_a_number = $1 ne 'string' if $1 ne 'char';
       } else {
 	  #- for things like "no format character" or "unknown format character"

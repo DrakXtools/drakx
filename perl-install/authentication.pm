@@ -118,7 +118,7 @@ sub ask_parameters {
 		     ]) or return;
     } elsif ($kind eq 'winbind' || $kind eq 'SMBKRB') {
 	#- maybe we should browse the network like diskdrake --smb and get the 'doze server names in a list 
-	#- but networking isn't setup yet necessarily
+	#- but networking is not setup yet necessarily
 	$in->ask_warn('', N("For this to work for a W2K PDC, you will probably need to have the admin run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add and reboot the server.
 You will also need the username/password of a Domain Admin to join the machine to the Windows(TM) domain.
 If networking is not yet enabled, Drakx will attempt to join the domain after the network setup step.
@@ -192,7 +192,7 @@ sub set {
 
     log::l("authentication::set $kind");
 
-    my $pam_modules = $kind2pam_kind{$kind} or log::l("kind2pam_kind doesn't know $kind");
+    my $pam_modules = $kind2pam_kind{$kind} or log::l("kind2pam_kind does not know $kind");
     $pam_modules ||= [];
     sshd_config_UsePAM(@$pam_modules > 0);
     set_pam_authentication(@$pam_modules);
@@ -282,7 +282,7 @@ sub set {
     } elsif ($kind eq 'NIS') {
 	$in->do_pkgs->install(qw(ypbind autofs));
 	my $domain = $netc->{NISDOMAIN};
-	$domain || $authentication->{NIS_server} ne "broadcast" or die N("Can't use broadcast with no NIS domain");
+	$domain || $authentication->{NIS_server} ne "broadcast" or die N("Can not use broadcast with no NIS domain");
 	my $t = $domain ? "domain $domain" . ($authentication->{NIS_server} ne "broadcast" && " server") : "ypserver";
 	substInFile {
 	    $_ = "#~$_" unless /^#/;

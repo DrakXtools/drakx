@@ -604,7 +604,7 @@ sub make_boot() {
 	#- make a boot image on floppy or iso from etherboot images
 	my $boot_box;
 	my $rom_path = "/usr/share/etherboot";
-	#- doesn't return list sorted
+	#- does not return list sorted
 	my @nics = sort(all("/usr/share/etherboot/zimg"));
 	my $list_nics = Gtk2::List->new;
 	my $nic;
@@ -787,7 +787,7 @@ sub make_nbi() {
 sub clear_nbi {
 	my ($nbi) = @_;
 	$nbi = $tftpboot . "/" . $nbi;
-	my $result = unlink($nbi) or warn("Can't delete $nbi...");
+	my $result = unlink($nbi) or warn("Can not delete $nbi...");
 	$nbi =~ s|boot-|initrd-|;
 	$nbi =~ s|nbi|img|;
 	unlink($nbi);
@@ -823,7 +823,7 @@ sub link_pxe {
 	my $pxedir = get_platform_pxe();
 	$kernel =~ s|vmlinuz-||;
 	if ($nic) {
-		#- symlinkf doesn't work?
+		#- symlinkf does not work?
 		`ln -sf ../../initrd-$nic.$kernel.img $pxedir`;
 	} else {
 		`ln -sf ../../initrd-*.$kernel.img $pxedir`;
@@ -1134,7 +1134,7 @@ sub client_set {
 	# we also need to set runlevel to 5 and restart the display manager
 	if ($conf{ALLOW_THIN} == 1) {
 		if (-f "/etc/sysconfig/autologin") {
-			my $answer = $in->ask_yesorno('', N("Thin clients won't work with autologin. Disable autologin?"));
+			my $answer = $in->ask_yesorno('', N("Thin clients will not work with autologin. Disable autologin?"));
 			if ($answer == 1) {
 				log::explanations("Renaming /etc/sysconfig/autologin to /etc/sysconfig/autologin.bak");
 				`mv /etc/sysconfig/autologin /etc/sysconfig/autologin.bak`;
@@ -1146,7 +1146,7 @@ sub client_set {
 		# This file had 2 "Enable=" entries, one for XDMCP and one for debug
 		change_gdm_xdmcp("true");
 		log::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
-		# just XDMCP in hosts.allow is enough for xdm & kdm, but gdm doesn't work - x11 doesn't help either
+		# just XDMCP in hosts.allow is enough for xdm & kdm, but gdm does not work - x11 does not help either
 		update_hosts_allow("enable");
 		if ($default eq "all") {
 			my $inittab = '/etc/initab$$CLIENT$$';
@@ -1456,7 +1456,7 @@ sub write_eb_image {
 			return if !($result);
 			$result = system("cat $rom_path/floppyload.bin $rom_path/start16.bin $rom_path/zimg/$nic > /dev/fd0") if $result;
 			if ($result) {
-				$in->ask_warn(N("Error"), N("Couldn't access the floppy!"))
+				$in->ask_warn(N("Error"), N("Could not access the floppy!"))
 			} else {
 				$in->ask_warn(N("Information"), N("Floppy can be removed now"))
 			}
@@ -1806,7 +1806,7 @@ sub change_gdm_xdmcp {
 	for (my $i = 0; $i < @conf_data; $i++) {
 		$conf_data[$i] =~ s/^Enable=false/Enable=true/ if $enable eq "true";
 		$conf_data[$i] =~ s/^Enable=true/Enable=false/ if $enable eq "false";
-		# bail here so we don't alter the debug setting
+		# bail here so we do not alter the debug setting
 		if ($conf_data[$i] eq "[debug]\n") {
 			output("/etc/X11/gdm/gdm.conf", @conf_data);
 			last;
@@ -1966,7 +1966,7 @@ sub client_hdw_config {
 }
 
 sub create_client_sysnetwork {
-	#- this lets gnome operate properly since udhcpc doesn't get the hostname from the dhcpd server
+	#- this lets gnome operate properly since udhcpc does not get the hostname from the dhcpd server
 	my ($hostname, $ip) = @_;
 	log::explanations("Adding /etc/sysconfig/network for $ip");
 	my $network_file = "/etc/sysconfig/network\$\$IP=$ip\$\$";

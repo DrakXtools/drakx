@@ -192,7 +192,7 @@ sub take_screenshot() {
     my $dir = screenshot_dir__and_move() . '/DrakX-screenshots';
     my $warn;
     if (!-e $dir) {
-	mkdir $dir or $::o->ask_warn('', N("Can't make screenshots before partitioning")), return;
+	mkdir $dir or $::o->ask_warn('', N("Can not make screenshots before partitioning")), return;
 	$warn = 1;
     }
     my $nb = 1;
@@ -224,7 +224,7 @@ sub set_alternative {
     #- (is this needed???)
     run_program::rooted_get_stdout($::prefix, 'update-alternatives', '--display', $command) =~ /^\Q$executable /m or return;
 
-    #- this doesn't handle relative symlink, but neither does update-alternatives ;p
+    #- this does not handle relative symlink, but neither does update-alternatives ;p
     symlinkf $executable, "$::prefix/etc/alternatives/$command";
 }
 
@@ -232,7 +232,7 @@ sub files_exist { and_(map { -f "$::prefix$_" } @_) }
 
 sub secured_file {
     my ($f) = @_;
-    c::is_secure_file($f) or die "can't ensure a safe $f";
+    c::is_secure_file($f) or die "can not ensure a safe $f";
     $f;
 }
 

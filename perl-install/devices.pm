@@ -19,7 +19,7 @@ sub size {
 	return $size * $common::SECTORSIZE;
     }
 
-    #- sad it didn't work, well searching the size using the dichotomy algorithm!
+    #- sad it did not work, well searching the size using the dichotomy algorithm!
     my $low = 0;
     my ($high, $mid);
 
@@ -172,7 +172,7 @@ sub make($) {
 
     if ($file =~ m|/dev/| && -e '/dev/.devfsd') {
 	#- argh, creating devices is no good with devfs...
-	#- return the file even if the device file doesn't exist
+	#- return the file even if the device file does not exist
 	#- the caller will fail or not, better compatibility than raising an exception here
 	return $file;
     }

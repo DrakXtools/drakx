@@ -65,7 +65,7 @@ fonts, spell checkers, various programs translated etc. that
 varies from language to language).")) if $o->{locale}{lang} !~ /^en/ && !lang::load_mo();
     } else {
 	#- no need to have this in po since it is never translated
-	$o->ask_warn('', "The characters of your language can't be displayed in console,
+	$o->ask_warn('', "The characters of your language can not be displayed in console,
 so the messages will be displayed in english during installation") if $ENV{LANGUAGE} eq 'C';
     }
 }
@@ -287,7 +287,7 @@ sub doPartitionDisks {
 	if ($generation =~ /NewWorld/) {
 	    #- mac partition table
 	    if (defined $partition_table::mac::bootstrap_part) {
-    		#- don't do anything if we've got the bootstrap setup
+    		#- do not do anything if we've got the bootstrap setup
     		#- otherwise, go ahead and create one somewhere in the drive free space
 	    } else {
 		my $freepart = $partition_table::mac::freepart;
@@ -605,7 +605,7 @@ sub chooseGroups {
 	my $minimal = !any { $_ } values %{$o->{rpmsrate_flags_chosen}};
 
 	$o->ask_from(N("Type of install"), 
-		     N("You haven't selected any group of packages.
+		     N("You have not selected any group of packages.
 Please choose the minimal installation you want:"),
 		     [
 		      { val => \$o->{rpmsrate_flags_chosen}{X}, type => 'bool', text => N("With X"), disabled => sub { $minimal } },
@@ -621,7 +621,7 @@ Please choose the minimal installation you want:"),
 	if ($minimal) {
 	    $o->{rpmsrate_flags_chosen}{$_} = 0 foreach keys %{$o->{rpmsrate_flags_chosen}};
 	} else {
-	    my $X = $o->{rpmsrate_flags_chosen}{X}; #- don't let setDefaultPackages modify this one
+	    my $X = $o->{rpmsrate_flags_chosen}{X}; #- do not let setDefaultPackages modify this one
 	    install_any::setDefaultPackages($o, 'clean');
 	    $o->{rpmsrate_flags_chosen}{X} = $X;
 	}
@@ -749,7 +749,7 @@ sub installPackages {
 	} else {
             $r &&= $o->ask_okcancel('', N("Change your Cd-Rom!
 Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
-If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $name), 1);
+If you do not have it, press Cancel to avoid installation from this Cd-Rom.", $name), 1);
 	}
 	return $r;
     };

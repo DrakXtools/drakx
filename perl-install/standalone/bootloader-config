@@ -42,7 +42,7 @@ $action && member($action, @known_actions) or die "<action> must be one of " . j
 if ($image) {
     if (my $ver = bootloader::vmlinuz2version($image)) {
 	if ($kernel_version) {
-	    $kernel_version eq $ver or die "$kernel_version and $ver don't match (hint: don't pass both --image and --kernel-version)\n";
+	    $kernel_version eq $ver or die "$kernel_version and $ver do not match (hint: do not pass both --image and --kernel-version)\n";
 	} else {
 	    $kernel_version = $ver;
 	}
@@ -117,7 +117,7 @@ sub add_kernel() {
 
     my $kernel_str = bootloader::vmlinuz2kernel_str($image) or die "bad kernel name $image\n";
 
-    my $root_part = fs::get::root([ fs::get::fstab($all_hds) ]) or die "can't find root partition\n";
+    my $root_part = fs::get::root([ fs::get::fstab($all_hds) ]) or die "can not find root partition\n";
     my %opts = (
 		root => "/dev/$root_part->{device}", 
 		initrd_options => $initrd_options,

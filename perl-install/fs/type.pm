@@ -361,6 +361,6 @@ sub set_isFormatted {
 #- do this before modifying $part->{fs_type}
 sub check {
     my ($fs_type, $_hd, $part) = @_;
-    $fs_type eq "jfs" && $part->{size} < 16 << 11 and die N("You can't use JFS for partitions smaller than 16MB");
-    $fs_type eq "reiserfs" && $part->{size} < 32 << 11 and die N("You can't use ReiserFS for partitions smaller than 32MB");
+    $fs_type eq "jfs" && $part->{size} < 16 << 11 and die N("You can not use JFS for partitions smaller than 16MB");
+    $fs_type eq "reiserfs" && $part->{size} < 32 << 11 and die N("You can not use ReiserFS for partitions smaller than 32MB");
 }

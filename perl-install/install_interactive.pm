@@ -64,7 +64,7 @@ For this, create a partition (or click on an existing one).
 Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 	}
 	if (!any { isSwap($_) } @fstab) {
-	    $ok &&= $o->ask_okcancel('', N("You don't have a swap partition.\n\nContinue anyway?"));
+	    $ok &&= $o->ask_okcancel('', N("You do not have a swap partition.\n\nContinue anyway?"));
 	}
 	if (arch() =~ /ia64/ && !fs::get::has_mntpoint("/boot/efi", $all_hds)) {
 	    $o->ask_warn('', N("You must have a FAT partition mounted in /boot/efi"));
@@ -233,7 +233,7 @@ filesystem checks will be run on your next boot into Windows(TM)")) if $part->{f
 	    $o->enter_console;
 	    foreach (@$hds) {
 		print "\n" x 10, N("You can now partition %s.
-When you are done, don't forget to save using `w'", partition_table::description($_));
+When you are done, do not forget to save using `w'", partition_table::description($_));
 		print "\n\n";
 		my $pid = 0;
 		if (arch() =~ /ppc/) {
@@ -268,7 +268,7 @@ sub partitionWizard {
 
     @solutions = @sol if @sol > 1;
     log::l("solutions: ", int @solutions);
-    @solutions or $o->ask_warn('', N("I can't find any room for installing")), die 'already displayed';
+    @solutions or $o->ask_warn('', N("I can not find any room for installing")), die 'already displayed';
 
     log::l('HERE: ', join(',', map { $_->[1] } @solutions));
     my $sol;

@@ -30,7 +30,7 @@ sub write($) {
 #- allocates where all the clusters will be moved to. Clusters before cut_point
 #- remain in the same position, however cluster that are part of a directory are
 #- moved regardless (this is a mechanism to prevent data loss) (cut_point is the
-#- first cluster that won't occur in the new fs)
+#- first cluster that will not occur in the new fs)
 sub allocate_remap {
     my ($fs, $cut_point) = @_;
     my ($cluster, $new_cluster);

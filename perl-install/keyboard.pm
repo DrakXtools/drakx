@@ -142,7 +142,7 @@ my %lang2keyboard =
 
 # USB kbd table
 # The numeric values are the bCountryCode field (5th byte)  of HID descriptor
-# NOTE: we don't trust when the layout is declared as us layout (0x21)
+# NOTE: we do not trust when the layout is declared as us layout (0x21)
 # as most manufacturers just use that value when selling physical devices
 # with different layouts printed on the keys.
 my @usb2keyboard =
@@ -225,7 +225,7 @@ arch() =~ /^sparc/ ? (
 # old XKB layout
 # Japanese keyboard is dual latin/kana; but telling it here shows a
 # message to choose the switching key that is misleading, as input methods
-# aren't automatically enabled when typing in kana
+# are not automatically enabled when typing in kana
  "jp" => [ N_("_: keyboard\nJapanese 106 keys"), "jp106",        "jp",    0 ],
  "kan" => [ N_("_: keyboard\nKannada"),        "us",              "kan",  1 ],
 # There is no XKB korean file yet; but using xmodmap one disables
@@ -499,7 +499,7 @@ sub setup {
 
     return if arch() =~ /^sparc/;
 
-    #- Xpmac doesn't map keys quite right
+    #- Xpmac does not map keys quite right
     if (arch() =~ /ppc/ && !$::testing && $ENV{DISPLAY}) {
 	log::l("Fixing Mac keyboard");
 	run_program::run('xmodmap', "-e",  "keycode 59 = BackSpace");
@@ -526,7 +526,7 @@ sub setup {
     } elsif (-x '/bin/loadkeys') {
 	run_program::run('loadkeys', $kmap);
     } else {
-	log::l("ERROR: can't load keymap");
+	log::l("ERROR: can not load keymap");
     }
 
     if (-x "/usr/X11R6/bin/setxkbmap") {

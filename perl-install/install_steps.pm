@@ -80,7 +80,7 @@ sub leavingStep {
     while (my $f = shift @{$o->{steps}{$step}{toBeDone} || []}) {
 	eval { &$f() };
 	$o->ask_warn(N("Error"), [
-N("An error occurred, but I don't know how to handle it nicely.
+N("An error occurred, but I do not know how to handle it nicely.
 Continue at your own risk."), formatError($@) ]) if $@;
     }
 }
@@ -266,7 +266,7 @@ sub choosePartitionsToFormat($$) {
 	$_->{mntpoint} = "swap" if isSwap($_);
 	$_->{mntpoint} or next;
 	
-	add2hash_($_, { toFormat => $_->{notFormatted} }) if $_->{fs_type}; #- eg: don't set toFormat for isRawRAID (0xfd)
+	add2hash_($_, { toFormat => $_->{notFormatted} }) if $_->{fs_type}; #- eg: do not set toFormat for isRawRAID (0xfd)
         $_->{toFormatUnsure} ||= member($_->{mntpoint}, '/', '/usr');
 
 	if (!$_->{toFormat}) {
@@ -474,14 +474,14 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 sub afterInstallPackages($) {
     my ($o) = @_;
 
-    die N("Some important packages didn't get installed properly.
+    die N("Some important packages did not get installed properly.
 Either your cdrom drive or your cdrom is defective.
 Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm\"
 ") if any { m|read failed: Input/output error| } cat_("$o->{prefix}/root/drakx/install.log");
 
     if (arch() !~ /^sparc/) { #- TODO restore it as may be needed for sparc
 	-x "$o->{prefix}/usr/bin/dumpkeys" or $::testing or die 
-"Some important packages didn't get installed properly.
+"Some important packages did not get installed properly.
 
 Please switch to console 2 (using ctrl-alt-f2)
 and look at the log file /tmp/ddebug.log
@@ -522,7 +522,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 			qw(random netfs network rawdevices sound kheader keytable syslog crond portmap);
 
     if ($o->{mouse}{device} =~ /ttyS/) {
-	log::l("disabling gpm for serial mice (doesn't get along nicely with X)");
+	log::l("disabling gpm for serial mice (does not get along nicely with X)");
 	run_program::rooted($o->{prefix}, "chkconfig", "--del", "gpm"); 
     }
 
@@ -796,7 +796,7 @@ sub readBootloaderConfigBeforeInstall {
     require bootloader;
     add2hash($o->{bootloader} ||= {}, bootloader::read($o->{all_hds}));
 
-    $o->{bootloader}{bootUnsafe} = 0 if $o->{bootloader}{boot}; #- when upgrading, don't ask where to install the bootloader (mbr vs boot partition)
+    $o->{bootloader}{bootUnsafe} = 0 if $o->{bootloader}{boot}; #- when upgrading, do not ask where to install the bootloader (mbr vs boot partition)
 }
 
 sub setupBootloaderBefore {

@@ -119,11 +119,11 @@ sub read_partitionEntries {
     my ($info, $F) = @_;
     my $tmp;
 
-    c::lseek_sector(fileno($F), $info->{partitionEntriesLBA}, 0) or die "can't seek to sector partitionEntriesLBA";
+    c::lseek_sector(fileno($F), $info->{partitionEntriesLBA}, 0) or die "can not seek to sector partitionEntriesLBA";
     sysread $F, $tmp, psizeof($partitionEntry_format) * $info->{nbPartitions} or die "error while reading partition table in sector $info->{partitionEntriesLBA}";
     $info->{partitionEntriesCRC32} == crc32($tmp) or die "bad partition entries checksum";
 
-    c::lseek_sector(fileno($F), $info->{partitionEntriesLBA}, 0) or die "can't seek to sector partitionEntriesLBA";
+    c::lseek_sector(fileno($F), $info->{partitionEntriesLBA}, 0) or die "can not seek to sector partitionEntriesLBA";
     my %gpt_types_rev = reverse %gpt_types;
     my @pt = 
       map {

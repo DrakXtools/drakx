@@ -37,7 +37,7 @@ our %spoolers = ('pdq' => {
                           'help' => "/usr/bin/pdq -h -P %s 2>&1 |",
 			  'print_command' => 'lpr-pdq',
 			  'print_gui' => 'xpdq',
-			  'long_name' => N("PDQ - Print, Don't Queue"),
+			  'long_name' => N("PDQ - Print, Do not Queue"),
 			  'short_name' => N("PDQ"),
 			  'local_queues' => 1,
                           'packages2add' => [ [ 'pdq' ], [qw(/usr/bin/pdq /usr/X11R6/bin/xpdq)] ],

@@ -141,7 +141,7 @@ sub main {
     my $part = device_name_to_entry($device_name);
     my $fstab_file = '/etc/fstab';
     if (!$part) {
-	print STDERR "Can't find device $device_name\n" if $::testing;
+	print STDERR "Can not find device $device_name\n" if $::testing;
 	return;
     } elsif ($::testing) {
 	cp_af('/etc/fstab', $fstab_file = '/tmp/fstab');

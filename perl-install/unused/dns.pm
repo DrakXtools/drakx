@@ -1,7 +1,7 @@
 use diagnostics;
 use strict;
 
-# This is dumb, but glibc doesn't like to do hostname lookups w/o libc.so
+# This is dumb, but glibc does not like to do hostname lookups w/o libc.so
 
 
 #TODO TODO

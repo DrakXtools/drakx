@@ -43,7 +43,7 @@ qq(You are not authorised to use fileshare'ing
 To grant you the rights:
 - put "RESTRICT=no" in $authorisation_file
 - or put user "$username" in group "$authorisation_group");
-my $no_export_method = "can't export anything: no nfs, no smb";
+my $no_export_method = "can not export anything: no nfs, no smb";
 
 my %exit_codes = reverse(
   1 => $non_authorised,
@@ -126,8 +126,8 @@ package authorisation;
 my $F_lock;
 sub read_conf {
     my ($exclusive_lock) = @_;
-    open $F_lock, $authorisation_file; # don't care if it's missing
-    flock($F_lock, $exclusive_lock ? 2 : 1) or die "can't lock";
+    open $F_lock, $authorisation_file; # do not care if it's missing
+    flock($F_lock, $exclusive_lock ? 2 : 1) or die "can not lock";
     my %conf;
     foreach (<$F_lock>) {
 	s/#.*//; # remove comments
@@ -231,7 +231,7 @@ sub read() {
 	$mntpoint =~ s/\\(\d{3})/chr(oct $1)/ge;
 
 	# not accepting weird characters that would break the output
-	$mntpoint =~ m/[\0\n\r]/ and die "i won't handle this";
+	$mntpoint =~ m/[\0\n\r]/ and die "i will not handle this";
 	push @l, { mntpoint => $mntpoint, option => $options, raw => $raw_line };
     }
     bless \@l, 'nfs_exports';
@@ -248,7 +248,7 @@ sub write {
 	    $_->{raw} = sprintf("%s %s\n", $mntpoint, $_->{options});
 	}
     }
-    open(my $F, ">$conf_file") or die "can't write $conf_file";
+    open(my $F, ">$conf_file") or die "can not write $conf_file";
     print $F $_->{raw} foreach @$nfs_exports;
 }
 
@@ -304,7 +304,7 @@ sub write {
 EOF
 	}
     }
-    open(my $F, ">$conf_file") or die "can't write $conf_file";
+    open(my $F, ">$conf_file") or die "can not write $conf_file";
     print $F $_->{raw} foreach @$smb_exports;
 }
 
@@ -361,8 +361,8 @@ sub name_mangle {
 		    last A;
 		}
 	    }
-	    $_ or die "can't find a unique name";
-	    # can't find a unique name, dropping the last letter
+	    $_ or die "can not find a unique name";
+	    # can not find a unique name, dropping the last letter
 	    s|(.*).|$1|;
 	}
     }

@@ -9,7 +9,7 @@ use log;
 #-      extra distinctions)
 #- [0]: lang name in english
 #- [1]: transliterated locale name in the locale name (used for sorting)
-#- [2]: default locale name to use for that language if there isn't
+#- [2]: default locale name to use for that language if there is not
 #-      an existing locale for the combination language+country choosen
 #- [3]: geographic groups that this language belongs to (for displaying
 #-      in the menu grouped in smaller lists), 1=Europe, 2=Asia, 3=Africa,
@@ -100,7 +100,7 @@ our %langs = (
 'oc' =>    [ 'Occitan',             'Occitan',           'oc_FR', '1    ', 'iso-8859-1',  'oc:fr_FR:fr' ],
 'pa' =>    [ 'Punjabi',             'ZZ Punjabi',        'pa_IN', ' 2   ', 'unicode' ],
 # 'tl' in priority position for now, as 'ph' is not yet official and 'tl'
-# is used instead. Monolingual window managers won't see the menus otherwise
+# is used instead. Monolingual window managers will not see the menus otherwise
 'ph' =>    [ 'Filipino',            'Filipino',          'ph_PH', ' 2   ', 'iso-8859-1',  'tl:ph' ],
 'pl' =>    [ 'Polish',              'Polski',            'pl_PL', '1    ', 'iso-8859-2' ],
 'pt' =>    [ 'Portuguese',          'Portugues',         'pt_PT', '1 3  ', 'iso-8859-15', 'pt_PT:pt:pt_BR' ],
@@ -174,7 +174,7 @@ sub text_direction_rtl() {
 #-      4=Oceania&Pacific, 5=America (if you wonder, it's the order
 #-      used in the olympic flag)
 #-
-#- Note: for countries for which a glibc locale don't exist (yet) I tried to
+#- Note: for countries for which a glibc locale do not exist (yet) I tried to
 #- put a locale that makes sense; and a '#' at the end of the line to show
 #- the locale is not the "correct" one. 'en_US' is used when no good choice
 #- is available.
@@ -520,7 +520,7 @@ my %IM_config =
    ami => {
            XIM => 'Ami',
            #- NOTE: there are several possible versions of ami, for the different
-           #- desktops (kde, gnome, etc). So XIM_PROGRAM isn't defined; it will
+           #- desktops (kde, gnome, etc). So XIM_PROGRAM is not defined; it will
            #- be the xinitrc script, XIM section, that will choose the right one 
            #- XIM_PROGRAM => 'ami',
            XMODIFIERS => '@im=Ami',
@@ -841,7 +841,7 @@ my %charset2pango_font = (
   'iso-8859-7' =>  "Kerkis 14",
   'jisx0208' =>    "Sans 14",
   #- Nimbus Sans L is missing some chars used by some cyrillic languages,
-  #- but tose haven't yet DrakX translations; it also misses vietnamese
+  #- but tose have not yet DrakX translations; it also misses vietnamese
   #- latin chars; all other latin and cyrillic are covered.
   'default' =>     "Nimbus Sans L 12"
 );
@@ -872,7 +872,7 @@ sub set {
     }
 
     my $lang = $locale->{lang};
-    exists $langs{$lang} or log::l("lang::set: trying to set to $lang but I don't know it!"), return;
+    exists $langs{$lang} or log::l("lang::set: trying to set to $lang but I do not know it!"), return;
 
     #- set all LC_* variables to a unique locale ("C"), and only redefine
     #- LC_COLLATE (for sorting) and LANGUAGE (for the po files)
@@ -1086,7 +1086,7 @@ sub write {
 		s/^(GreetString)=.*/$1=$welcome/;
 		s/^(Language)=.*/$1=$locale->{lang}/;
 		if (!member($kde_charset, 'iso8859-1', 'iso8859-15')) { 
-		    #- don't keep the default for those
+		    #- do not keep the default for those
     		    my $font_list = $charset2kde_font{l2charset($locale->{lang})} || $charset2kde_font{default};
 		    my $font_small = $font_list->[0];
 		    my $font_huge = $font_small;
@@ -1254,13 +1254,13 @@ sub check() {
     $err->("invalid charset $_ ($_ does not exist in \%charsets)") foreach difference2(\@wanted_charsets, [ keys %charsets ]);
     $err->("invalid charset $_ in \%charset2kde_font ($_ does not exist in \%charsets)") foreach difference2([ keys %charset2kde_font ], [ 'default', keys %charsets ]);
 
-    $err->("default locale $_->[1] of lang $_->[0] isn't listed in \@locales")
+    $err->("default locale $_->[1] of lang $_->[0] is not listed in \@locales")
       foreach grep { !member($_->[1], @locales) } map { [ $_, l2locale($_) ] } list_langs();
 
     $err->("lang image for lang $_->[0] is missing (file $_->[1])")
       foreach grep { !(-e $_->[1]) } map { [ $_, "pixmaps/langs/lang-$_.png" ] } list_langs();
 
-    $err->("default locale $_->[1] of country $_->[0] isn't listed in \@locales")
+    $err->("default locale $_->[1] of country $_->[0] is not listed in \@locales")
       foreach grep { !member($_->[1], @locales) } map { [ $_, c2locale($_) ] } list_countries();
 
 

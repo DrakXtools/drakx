@@ -114,7 +114,7 @@ sub setupSCSI {
 
     if (!$::testing && !$::uml_install) {
 	-d '/lib/modules/' . c::kernel_version() ||
-	  -s modules::cz_file() or die N("Can't access kernel modules corresponding to your kernel (file %s is missing), this generally means your boot floppy in not in sync with the Installation medium (please create a newer boot floppy)", modules::cz_file());
+	  -s modules::cz_file() or die N("Can not access kernel modules corresponding to your kernel (file %s is missing), this generally means your boot floppy in not in sync with the Installation medium (please create a newer boot floppy)", modules::cz_file());
     }
 
     installStepsCall($o, $auto, 'setupSCSI', $clicked);
@@ -196,7 +196,7 @@ sub formatPartitions {
     if (any { $_->{usb_media_type} && any { $_->{mntpoint} } partition_table::get_normal_parts($_) } @{$o->{all_hds}{hds}}) {
 	log::l("we use a usb-storage based drive, so keep it as a normal scsi_hostadapter");
     } else {
-	log::l("we don't need usb-storage for booting system, rely on hotplug");
+	log::l("we do not need usb-storage for booting system, rely on hotplug");
 	#- when usb-storage is in scsi_hostadapter, 
 	#- hotplug + scsimon do not load sd_mod/sr_mod when needed
 	#- (eg: when plugging a usb key)
@@ -328,7 +328,7 @@ sub start_i810fb() {
     log::l("trying to load i810fb module with xres <$xres> (vga was <$vga>)");
     eval { modules::load('intel-agp') };
     eval {
-	any::ddcxinfos(); # keep the result otherwise ddcxinfos doesn't return good results afterwards
+	any::ddcxinfos(); # keep the result otherwise ddcxinfos does not return good results afterwards
 	my $opt = "xres=$xres hsync1=32 hsync2=48 vsync1=50 vsync2=70 vram=2 bpp=16 accel=1 mtrr=1"; #- this sucking i810fb does not accept floating point numbers in hsync!
 	modules::load_with_options([ 'i810fb' ], { i810fb => $opt }); 
     };
@@ -450,7 +450,7 @@ sub main {
     mkdir $o->{prefix}, 0755;
     devices::make("/dev/zero"); #- needed by ddcxinfos
 
-    #-  make sure we don't pick up any gunk from the outside world
+    #-  make sure we do not pick up any gunk from the outside world
     my $remote_path = "$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";
     $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$remote_path";
 
@@ -638,13 +638,13 @@ sub main {
     detect_devices::install_addons($o->{prefix});
 
     #- mainly for auto_install's
-    #- do not use run_program::xxx because it doesn't leave stdin/stdout unchanged
+    #- do not use run_program::xxx because it does not leave stdin/stdout unchanged
     system("bash", "-c", $o->{postInstallNonRooted}) if $o->{postInstallNonRooted};
     system("chroot", $o->{prefix}, "bash", "-c", $o->{postInstall}) if $o->{postInstall};
 
     install_any::ejectCdrom();
 
-    #- to ensure linuxconf doesn't cry against those files being in the future
+    #- to ensure linuxconf does not cry against those files being in the future
     foreach ('/etc/modules.conf', '/etc/crontab', '/etc/sysconfig/mouse', '/etc/sysconfig/network', '/etc/X11/fs/config') {
 	my $now = time() - 24 * 60 * 60;
 	utime $now, $now, "$o->{prefix}/$_";

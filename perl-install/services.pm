@@ -65,8 +65,8 @@ numlock => N_("Automatically switch on numlock key locker under console
 and Xorg at boot."),
 oki4daemon => N_("Support the OKI 4w and compatible winprinters."),
 pcmcia => N_("PCMCIA support is usually to support things like ethernet and
-modems in laptops.  It won't get started unless configured so it is safe to have
-it installed on machines that don't need it."),
+modems in laptops.  It will not get started unless configured so it is safe to have
+it installed on machines that do not need it."),
 portmap => N_("The portmapper manages RPC connections, which are used by
 protocols such as NFS and NIS. The portmap server must be running on machines
 which act as servers for protocols which make use of the RPC mechanism."),

@@ -110,7 +110,7 @@ sub connected_bg__raw {
     local $| = 1;
     if (ref($kid_pipe) && ref($$kid_pipe)) {
 	my $fd = $$kid_pipe->{fd};
-	fcntl($fd, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
+	fcntl($fd, c::F_SETFL(), c::O_NONBLOCK()) or die "can not fcntl F_SETFL: $!";
 	my $a  = <$fd>;
      $$status = $a if defined $a;
     } else { $$kid_pipe = check_link_beat() }

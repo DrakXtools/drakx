@@ -108,7 +108,7 @@ my $cur_res;
 if (my $x_res = Xconfig::resolution_and_depth::from_bios($bootloader->{default_vga})) {
     $cur_res = $x_res->{X} . 'x' . $x_res->{Y};
 } else {
-    $no_bootsplash = 1; #- we can't select any theme we're not in Framebuffer mode :-/
+    $no_bootsplash = 1; #- we can not select any theme we're not in Framebuffer mode :-/
     $cur_res = '800x600'
 }
 
@@ -194,7 +194,7 @@ gtkadd($window,
                                                  }),
                                gtkpack__(gtkset_sensitive($x_box = Gtk2::VBox->new(0, 0), $x_mode),
                                          gtkpack__(Gtk2::VBox->new(0, 0),
-                                                   my @auto_buttons = gtkradio((N("No, I don't want autologin")) x 2,
+                                                   my @auto_buttons = gtkradio((N("No, I do not want autologin")) x 2,
                                                                                N("Yes, I want autologin with this (user, desktop)")),
                                                   ),
                                          my $auto_box = create_packtable({ col_spacings => 5, row_spacings => 5, homogenous => 1 },

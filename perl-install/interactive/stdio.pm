@@ -45,7 +45,7 @@ ask_fromW_begin:
 	my ($e) = @_;
 
 	$e->{type} = 'list' if $e->{type} =~ /(icon|tree)list/;
-	#- combo doesn't exist, fallback to a sensible default
+	#- combo does not exist, fallback to a sensible default
 	$e->{type} = $e->{not_edit} ? 'list' : 'entry' if $e->{type} eq 'combo';
 
 	if ($e->{type} eq 'entry') {

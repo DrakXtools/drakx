@@ -214,7 +214,7 @@ sub zero_MBR_and_dirty {
 #- try writing what we've just read, yells if it fails
 #- testing on last sector of head #0 (unused in 99% cases)
 #-
-#- return false if the device can't be written to (especially for Smartmedia)
+#- return false if the device can not be written to (especially for Smartmedia)
 sub test_for_bad_drives {
     my ($hd) = @_;
 
@@ -223,19 +223,19 @@ sub test_for_bad_drives {
     
     sub error { die "$_[0] error: $_[1]" }
 
-    my $F = openit($hd, $::testing ? 0 : 2) or error(openit($hd) ? 'write' : 'read', "can't open device");
+    my $F = openit($hd, $::testing ? 0 : 2) or error(openit($hd) ? 'write' : 'read', "can not open device");
 
     my $seek = sub {
 	c::lseek_sector(fileno($F), $sector, 0) or error('read', "seeking to sector $sector failed");
     };
     my $tmp;
 
-    &$seek; sysread $F, $tmp, $SECTORSIZE or error('read', "can't even read ($!)");
+    &$seek; sysread $F, $tmp, $SECTORSIZE or error('read', "can not even read ($!)");
     return if $hd->{readonly} || $::testing;
-    &$seek; syswrite $F, $tmp or error('write', "can't even write ($!)");
+    &$seek; syswrite $F, $tmp or error('write', "can not even write ($!)");
 
     my $tmp2;
-    &$seek; sysread $F, $tmp2, $SECTORSIZE or die "test_for_bad_drives: can't even read again ($!)";
+    &$seek; sysread $F, $tmp2, $SECTORSIZE or die "test_for_bad_drives: can not even read again ($!)";
     $tmp eq $tmp2 or die
 N("Something bad is happening on your drive. 
 A test to check the integrity of data has failed. 

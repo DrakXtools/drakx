@@ -163,7 +163,7 @@ sub init {
     run_program::run('chown', 'clamav.clamav', '/var/log/clamav/freshclam.log');
 
     #- create remaining /etc and /var subdirectories if not already copied or symlinked,
-    #- because programs most often won't try to create the missing subdir before trying
+    #- because programs most often will not try to create the missing subdir before trying
     #- to write a file, leading to obscure unexpected failures
     foreach (cat_('/image/move/directories-to-create')) {
 	my ($mode, $uid, $gid, $name) = split;
@@ -240,7 +240,7 @@ drakx_stuff:
                          : qw(initGraphical selectLanguage acceptLicense verifyKey selectMouse selectKeyboard configMove startMove) ];
     $o->{steps}{first} = $o->{orderedSteps}[0];
 
-    #- don't use shadow passwords since pwconv overwrites /etc/shadow hence contents will be lost for usb key
+    #- do not use shadow passwords since pwconv overwrites /etc/shadow hence contents will be lost for usb key
     delete $o->{authentication}{shadow};
 
     foreach my $lang (keys %lang::langs) {
@@ -325,7 +325,7 @@ sub key_mount {
         install_any::getHds($o, $o);
     }
     if ($virtual_key_part) {
-        #- :/ merge_from_mtab didn't got my virtual key, need to add it manually
+        #- :/ merge_from_mtab did not got my virtual key, need to add it manually
         push @{$o->{fstab}}, $virtual_key_part;
 	$key_part = $virtual_key_part;
 	return;
@@ -376,7 +376,7 @@ sub key_installfiles {
         my (@files) = @_;
         my @etcpasswords = glob("$key_sysconf/*/etc/passwd");
         if (@etcpasswords > 1) {
-            print "inconsistency: more than one /etc/passwd on key! can't proceed, please clean the key\n";
+            print "inconsistency: more than one /etc/passwd on key! can not proceed, please clean the key\n";
             exit 1;
         }
         return if !@etcpasswords;
@@ -419,13 +419,13 @@ sub key_installfiles {
         $::o->{steps}{configMove}{done} = 1;
     }
 
-    #- /etc/sudoers can't be a link
+    #- /etc/sudoers can not be a link
     unlink($_), cp_f("/image$_", $_) foreach qw(/etc/sudoers);
 }
 
 sub reboot() {
     output('/var/run/rebootctl', "reboot");  #- tell X_move to not respawn
-    run_program::run('killall', 'X');  #- kill it ourselves to be sure that it won't lock console when killed by our init
+    run_program::run('killall', 'X');  #- kill it ourselves to be sure that it will not lock console when killed by our init
     exit 0;
 }
 
@@ -443,9 +443,9 @@ sub check_key {
 	#- argh, key is read-only
 	#- try umounting
 	if (eval { fs::umount_part($key_part); undef $key_part; 1 }) {
-	    modules::unload('usb-storage');  #- it won't notice change on write protection otherwise :/
+	    modules::unload('usb-storage');  #- it will not notice change on write protection otherwise :/
 
-	    $o->ask_okcancel_({ title => N("Key isn't writable"), 
+	    $o->ask_okcancel_({ title => N("Key is not writable"), 
 				messages => formatAlaTeX(
 N("The USB key seems to have write protection enabled. Please
 unplug it, remove write protection, and then plug it again.")),
@@ -457,9 +457,9 @@ unplug it, remove write protection, and then plug it again.")),
 	} else {
 	    #- this case happens when the user boots with a write-protected key containing
 	    #- all user and host data, /etc/X11/X which is on key busyfies it
-	    $o->ask_okcancel_({ title => N("Key isn't writable"), 
+	    $o->ask_okcancel_({ title => N("Key is not writable"), 
 				messages => formatAlaTeX(
-N("The USB key seems to have write protection enabled, but we can't safely
+N("The USB key seems to have write protection enabled, but we can not safely
 unplug it now.
 
 
@@ -470,7 +470,7 @@ plug the key again, and launch Mandrake Move again.")),
 	}
     } else {
 	my $message = key_parts($o) ? 
-N("Your USB key doesn't have any valid Windows (FAT) partitions.
+N("Your USB key does not have any valid Windows (FAT) partitions.
 We need one to continue (beside, it's more standard so that you
 will be able to move and access your files from machines
 running Windows). Please plug in an USB key containing a
@@ -480,7 +480,7 @@ Windows partition instead.
 You may also proceed without an USB key - you'll still be
 able to use Mandrake Move as a normal live Mandrake
 Operating System.") :
-N("We didn't detect any USB key on your system. If you
+N("We did not detect any USB key on your system. If you
 plug in an USB key now, Mandrake Move will have the ability
 to transparently save the data in your home directory and
 system wide configuration, for next boot on this computer
@@ -602,7 +602,7 @@ after_autoconf:
             log::l("doing remaining toBeDone for undone step $step");
             eval { &$f() };
             $o->ask_warn(N("Error"), [
-N("An error occurred, but I don't know how to handle it nicely.
+N("An error occurred, but I do not know how to handle it nicely.
 Continue at your own risk."), formatError($@) ]) if $@;
         }
     }
@@ -702,7 +702,7 @@ sub install2::startMove {
     require ugtk2;
     ugtk2::flush();
 
-    #- get info from existing fstab. This won't do anything if we already wrote fstab in configMove
+    #- get info from existing fstab. This will not do anything if we already wrote fstab in configMove
     fs::get_info_from_fstab($o->{all_hds}, '');
     foreach (fsedit::get_really_all_fstab($o->{all_hds})) {
 	if (isSwap($_)) {
@@ -744,7 +744,7 @@ sub install2::startMove {
         run_program::raw({ detach => 1 }, '/usr/bin/dnotify', '-MCRD', '/etc', '-r', '-e', '/usr/bin/etc-monitorer.pl', '{}') or die "dnotify not found!";
     }
 
-    #- password in screensaver doesn't make sense if we keep the shell
+    #- password in screensaver does not make sense if we keep the shell
     if (cat_('/proc/cmdline') !~ /\bshell\b/) {
         kill 9, cat_('/var/run/drakx_shell.pid');
         output('/dev/tty2', "Killed\n");
@@ -754,7 +754,7 @@ sub install2::startMove {
 	sleep 1;
         log::l("DrakX waves bye-bye");
 
-        open STDOUT, ">>/tmp/.kde-errors";  #- don't display startkde shit on first console
+        open STDOUT, ">>/tmp/.kde-errors";  #- do not display startkde shit on first console
         open STDERR, ">>/tmp/.kde-errors";
         
 	my (undef, undef, $uid, $gid, undef, undef, undef, $home, $shell) = getpwnam($username);

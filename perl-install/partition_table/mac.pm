@@ -236,7 +236,7 @@ sub write($$$;$) {
      	};
     }
 
-    # Since we didn't create any new drivers, let's try and match up our driver records with out partitons and see if any are missing.
+    # Since we did not create any new drivers, let's try and match up our driver records with out partitons and see if any are missing.
     $info->{bzDrvrCnt} = 0;
     my @ddstowrite;
     foreach my $dd (@{$info->{ddMap}}) {

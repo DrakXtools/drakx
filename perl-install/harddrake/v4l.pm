@@ -273,7 +273,7 @@ my $cards_lst = {
 my %pll_lst = 
     (
      -1 => N("Default"),
-     0 => "don't use pll",
+     0 => "do not use pll",
      1 => "28 Mhz Crystal (X)",
      2 => "35 Mhz Crystal"
      );

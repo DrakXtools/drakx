@@ -11,7 +11,7 @@ package harddrake::sound;
 #    o pcmcia cards: snd-vxp440 snd-vxpocket
 
 # TODO: 
-#    o ensure sound isn't user (either dsp/midi/sequencer/mixer)
+#    o ensure sound is not user (either dsp/midi/sequencer/mixer)
 #    o fix sound/alsa services
 
 use strict;

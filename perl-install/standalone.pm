@@ -103,11 +103,11 @@ Network & Internet connection and monitoring application
 --disconnect : disconnect to internet if already connected
 --force : used with (dis)connect : force (dis)connection.
 --status : returns 1 if connected 0 otherwise, then exit.
---quiet : don't be interactive. To be used with (dis)connect."),
+--quiet : do not be interactive. To be used with (dis)connect."),
 	      'printerdrake' => N_(" [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"),
 	      'rpmdrake' => N_("[OPTION]...
-  --no-confirmation      don't ask first confirmation question in MandrakeUpdate mode
-  --no-verify-rpm        don't verify packages signatures
+  --no-confirmation      do not ask first confirmation question in MandrakeUpdate mode
+  --no-verify-rpm        do not verify packages signatures
   --changelog-first      display changelog before filelist in the description window
   --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"),
            'scannerdrake' => N_("[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-usbtable] [--dynamic=dev]"),

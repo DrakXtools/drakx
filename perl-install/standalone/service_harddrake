@@ -94,7 +94,7 @@ foreach my $hw_class (@harddrake::data::tree) {
         $id => $i;
     } eval { &$detector };
     $config{$Ident} = \%ID;
-    next if !$is_globetrotter && !$force && is_empty_hash_ref($previous_config); # don't fsck on first run but if --force
+    next if !$is_globetrotter && !$force && is_empty_hash_ref($previous_config); # do not fsck on first run but if --force
 
     my $oldconfig = $previous_config->{$Ident};
 
@@ -159,7 +159,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     next if $is_globetrotter && !$hw_class->{automatic};
     next unless $configurator_pool[0];
     if (ref($configurator) ne 'CODE' && !-x first(split /\s+/, $configurator_pool[0])) {
-        log::explanations(qw(skip $Ident configuration since "$configurator" isn't executable));
+        log::explanations(qw(skip $Ident configuration since "$configurator" is not executable));
         next;
     }
     my ($pid, $no, $res);

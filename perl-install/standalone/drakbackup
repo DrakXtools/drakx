@@ -125,7 +125,7 @@ my $untar_prefix = "tar -C $restore_path -x";
 # allow not-root user with own config
 if ($ENV{USER} ne 'root' && $ENV{HOME} ne '/root') {
 	standalone::explanations("Running as $ENV{USER}...");
-	#- doesn't get defined when run from cron
+	#- does not get defined when run from cron
 	$user_home = "/home/$ENV{USER}" if $user_home eq '';
 	$cfg_dir = "$user_home/.drakbackup/";
 	$conf{PATH_TO_SAVE} = $cfg_dir . "backups";
@@ -185,11 +185,11 @@ sub daemon_mode() {
 
 if (check_for_xserver()) {
 	eval { require ugtk2 };
-	die "Can't load ugtk2...\n" if $@;
+	die "Can not load ugtk2...\n" if $@;
 	ugtk2->import(qw(:create :dialogs :helpers :wrappers));
 	interactive_mode();
 } else {
-	die "Can't run in console mode...";
+	die "Can not run in console mode...";
 }
 
 sub set_help_tip {
@@ -258,7 +258,7 @@ sub get_cd_info() {
 	my @drive_names;
 	my $i;
 	require_rpm("cdrecord") if $nonroot_user;
-    # just trying load ide-cd, since it doesn't seem to be loaded by default
+    # just trying load ide-cd, since it does not seem to be loaded by default
 	$nonroot_user ? `cdrecord -scanbus -dev=ATA > /dev/null 2>&1` : `modprobe ide-cd` unless -f "/proc/sys/dev/cdrom";
 	my @cd_info = cat_("/proc/sys/dev/cdrom/info");
 	my %data = (
@@ -318,7 +318,7 @@ sub save_conf_file() {
     write_sitecopyrc() if $conf{NET_PROTO} eq 'webdav';
     write_password_file() if $conf{NET_PROTO} eq 'rsync' && $conf{PASSWD};
 	return 1 if $conf{SEND_MAIL} && verify_mail_setup();
-	#- don't save this, but retain it for this session
+	#- do not save this, but retain it for this session
 	if ($conf{REMEMBER_PASS} != 1) {
 		$host_passwd = $conf{PASSWD};
 		$conf{PASSWD} = undef;
@@ -643,7 +643,7 @@ sub do_expect {
 					if (!$spawn_ok) { show_warning("f", N("No password prompt on %s at port %s", $conf{HOST_NAME}, $scp_port)) }					
 					if ($bad_passwd) { show_warning("f", N("Bad password on %s", $conf{HOST_NAME})) }
 					if ($no_perm) { show_warning("f", N("Permission denied transferring %s to %s", $_, $conf{HOST_NAME})) }
-					if ($bad_dir) { show_warning("f", N("Can't find %s on %s", $conf{HOST_PATH}, $conf{HOST_NAME})) }
+					if ($bad_dir) { show_warning("f", N("Can not find %s on %s", $conf{HOST_PATH}, $conf{HOST_NAME})) }
 					$had_err = !$spawn_ok || $bad_passwd || $no_perm || $bad_dir;
 				} 
 			],
@@ -737,7 +737,7 @@ sub check_for_cd() {
 	if ($conf{MULTI_SESSION}) {
 		$command = "cdrecord -s dev=$conf{CD_DEVICE} -msinfo";
 		spawn_progress($command, "Check for previous session status");
-		#- if we don't find a previous session, start fresh
+		#- if we do not find a previous session, start fresh
 		if ($log_buff =~ /Cannot read session offset/) {
 			$conf{MEDIA_ERASE} = 1;
 			return 0;
@@ -945,7 +945,7 @@ sub build_backup_files() {
 	local $_;
     $results = "";
 	$log_buff = "";
-	#- flush these so if the user does 2 runs in a row we don't try to send the same files
+	#- flush these so if the user does 2 runs in a row we do not try to send the same files
 	@file_list_to_send_by_ftp = ();
 	@files_for_direct_tape = ();
 		
@@ -1189,10 +1189,10 @@ sub build_backup_files() {
 		$catalog .= ":F" if !$conf{OTHER_INCREMENTAL_BACKUPS} && $conf{OTHER_FILES};
 		$catalog .= "\n";
 			
-		append_to_file("$cfg_dir/drakbackup_catalog", $catalog) or show_warning("w", N("Can't create catalog!"));
+		append_to_file("$cfg_dir/drakbackup_catalog", $catalog) or show_warning("w", N("Can not create catalog!"));
 	}
 	
-	#- clean up HD files if del_hd_files and media isn't hd
+	#- clean up HD files if del_hd_files and media is not hd
 	if ($conf{DEL_HD_FILES} && ($conf{USE_CD} || $conf{USE_TAPE} || $conf{USE_NET}) && $conf{DAEMON_MEDIA} ne 'hd')  {
 		foreach (@file_list_to_send_by_ftp) {
 			unlink($_) if /$conf{OPTION_COMP}$/;
@@ -1875,7 +1875,7 @@ sub advanced_where_tape {
 			),
 			0, Gtk2::VBox->new(0, 5),
 	 		0, gtkpack_(Gtk2::HBox->new(0,10),
-	    		0, gtkset_sensitive(Gtk2::Label->new(N("Don't rewind tape after backup")), $conf{USE_TAPE}),
+	    		0, gtkset_sensitive(Gtk2::Label->new(N("Do not rewind tape after backup")), $conf{USE_TAPE}),
 	    		1, Gtk2::VBox->new(0, 5),
 	    		0, gtkset_sensitive(my $check_tape_rewind = Gtk2::CheckButton->new, $conf{USE_TAPE}),
 			),
@@ -2148,7 +2148,7 @@ sub advanced_when() {
 				),
 			),
 			0, gtkset_sensitive(Gtk2::Label->new(N("Please be sure that the cron daemon is included in your services.")), $backup_daemon),
-			0, gtkset_sensitive(Gtk2::Label->new(N("If your machine isn't on all the time, you might want to install anacron.")), $backup_daemon), 
+			0, gtkset_sensitive(Gtk2::Label->new(N("If your machine is not on all the time, you might want to install anacron.")), $backup_daemon), 
 			0, gtkset_sensitive(Gtk2::Label->new(N("Note that currently all 'net' media also use the hard drive.")),  $backup_daemon),
 		),
 	);
@@ -3417,7 +3417,7 @@ sub restore_catalog_entry {
 	my @line_data = split(':', $cat_entry);
 	my $backup_time = $line_data[0];
 	
-	#- use our own variables here so we don't trash a saved config accidentally
+	#- use our own variables here so we do not trash a saved config accidentally
 	my $media = $line_data[1];
 	
 	#- can be a volume name or a host name
@@ -3432,7 +3432,7 @@ sub restore_catalog_entry {
 		$username = $conf{LOGIN};
 	}
 	
-	#- create a restore work directory if we don't have one
+	#- create a restore work directory if we do not have one
 	-d "$cfg_dir/restores" or mkdir_p "$cfg_dir/restores";
 
 	#- can be a device name or a path

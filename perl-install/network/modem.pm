@@ -73,7 +73,7 @@ sub ppp_configure {
         $dev =~ s!^/dev/!!;
         any::devfssymlinkf({ device => $dev }, 'modem');
         #- add a specific udev script in addition to the udev rules file
-        #- (ttySL0 is a symlink, udev won't be called when it's created)
+        #- (ttySL0 is a symlink, udev will not be called when it's created)
         my $udev_conf = "$::prefix/etc/udev/conf.d/modem.conf";
         output_p($udev_conf, "ln -sf $dev /dev/modem\n");
         chmod 0755, $udev_conf;

@@ -138,7 +138,7 @@ sub load_category {
 	eval { load_and_configure($conf, $_->{driver}, $_->{options}) };
 	$_->{error} = $@;
 
-	$_->{try} = 1 if member($_->{driver}, 'hptraid', 'ohci1394'); #- don't warn when this fails
+	$_->{try} = 1 if member($_->{driver}, 'hptraid', 'ohci1394'); #- do not warn when this fails
 
 	!($_->{error} && $_->{try});
     } probe_category($category),

@@ -176,7 +176,7 @@ sub set_default {
     }
 
     if ($part->{media_type} eq 'fd') {
-	# slow device so don't loose time, write now!
+	# slow device so do not loose time, write now!
 	$options->{sync} = 1;
     }
 

@@ -166,7 +166,7 @@ sub card_config__not_listed {
 
     log::l("Xconfig::card: $r manually chosen");
 
-    $r eq "Vendor|$card->{BoardName}" and return 1; #- it is unchanged, don't modify $card
+    $r eq "Vendor|$card->{BoardName}" and return 1; #- it is unchanged, do not modify $card
 
     my ($kind, $s) = $r =~ /(.*?)\|(.*)/;
 
@@ -205,7 +205,7 @@ sub configure_auto_install {
 	if ($card->{card_name}) {
 	    #- try to get info from given card_name
 	    add_to_card__using_Cards($card, $card->{card_name});
-	    undef $card->{card_name} if !$card->{Driver}; #- bad card_name as we can't find the driver
+	    undef $card->{card_name} if !$card->{Driver}; #- bad card_name as we can not find the driver
 	}
 	return if $card->{Driver};
     }
@@ -256,7 +256,7 @@ sub configure {
 
     eval { install_server($card, $options, $do_pkgs) };
     if ($@) {
-	$in->ask_warn('', N("Can't install Xorg package: %s", $@));
+	$in->ask_warn('', N("Can not install Xorg package: %s", $@));
 	goto card_config__not_listed;
     }
     
@@ -424,7 +424,7 @@ sub set_glx_restrictions {
     my ($card) = @_;
 
     #- 3D acceleration configuration for XFree 4 using DRI, this is enabled by default
-    #- but for some there is a need to specify VideoRam (else it won't run).
+    #- but for some there is a need to specify VideoRam (else it will not run).
     if ($card->{use_DRI_GLX}) {
 	$card->{needVideoRam} = 1 if $card->{description} =~ /Matrox.* G[245][05]0/;
 	($card->{needVideoRam}, $card->{VideoRam}) = (1, 16384)

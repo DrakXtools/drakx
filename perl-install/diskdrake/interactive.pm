@@ -34,7 +34,7 @@ struct part {
   string prefer_devfs_name # should the {devfs_device} or the {device} be used in fstab
   string device_LABEL   # volume label. LABEL=xxx can be used in fstab instead of
   string prefer_device_LABEL # should the {device_LABEL} or the {device} be used in fstab
-  bool faked_device     # false if {device} is a real device, true for nfs/smb/dav/none devices. If the field doesn't exist, we don't know
+  bool faked_device     # false if {device} is a real device, true for nfs/smb/dav/none devices. If the field does not exist, we do not know
 
   string rootDevice     # 'sda', 'hdc' ... (can also be a VG_name)
   string real_mntpoint  # directly on real /, '/tmp/hdimage' ...
@@ -52,7 +52,7 @@ struct part {
   bool notFormatted 
     #  isFormatted                  means the device is formatted
     # !isFormatted &&  notFormatted means the device is not formatted
-    # !isFormatted && !notFormatted means we don't know which state we're in
+    # !isFormatted && !notFormatted means we do not know which state we're in
 
   string raid       # for partitions of type isRawRAID and which isPartOfRAID, the raid device
   string lvm        # partition used as a PV for the VG with {lvm} as VG_name  #-#
@@ -344,7 +344,7 @@ sub Auto_allocate {
 
 	$in->ask_warn("", [ 
 			   N("All primary partitions are used"),
-			   N("I can't add any more partitions"), 
+			   N("I can not add any more partitions"), 
 			   N("To have more partitions, please delete one to be able to create an extended partition"),
 			  ]);
     }
@@ -520,7 +520,7 @@ sub Create {
 	    };
 	    if (my $err = $@) {
 		if ($err =~ /raw_add/ && $hd->hasExtended && !$hd->{primary}{extended}) {
-		    $in->ask_warn(N("Error"), N("You can't create a new partition
+		    $in->ask_warn(N("Error"), N("You can not create a new partition
 (since you reached the maximal number of primary partitions).
 First remove a primary partition and create an extended partition."));
 		    return 0;
@@ -595,7 +595,7 @@ sub Type {
 	    put_in_hash($part, $type);
 	    set_isFormatted($part, 1); #- assume that if tune2fs works, partition is formatted
 
-	    #- disable the fsck (don't do it together with -j in case -j fails?)
+	    #- disable the fsck (do not do it together with -j in case -j fails?)
 	    fs::format::disable_forced_fsck($part->{device});	    
 	    return;
 	}
@@ -625,7 +625,7 @@ sub Mount_point {
 		     callbacks => {
 		         complete => sub {
 	    !isPartOfLoopback($part) || $mntpoint or $in->ask_warn('', 
-N("Can't unset mount point as this partition is used for loop back.
+N("Can not unset mount point as this partition is used for loop back.
 Remove the loopback first")), return 1;
 	    $part->{mntpoint} eq $mntpoint || check_mntpoint($in, $mntpoint, $hd, $part, $all_hds) or return 1;
     	    $migrate_files = need_migration($in, $mntpoint) or return 1;
@@ -781,7 +781,7 @@ filesystem checks will be run on your next boot into Windows(TM)"));
     } else {
 	set_isFormatted($part, 0);
 	partition_table::verifyParts($hd);
-	$part->{mntpoint} = '' if isNonMountable($part); #- mainly for ntfs, which we can't format
+	$part->{mntpoint} = '' if isNonMountable($part); #- mainly for ntfs, which we can not format
     }
 
     $adjust->(0) if $size < $oldsize;
@@ -863,16 +863,16 @@ sub Loopback {
 
     write_partitions($in, $hd) or return;
 
-    my $handle = any::inspect($real_part) or $in->ask_warn('', N("This partition can't be used for loopback")), return;
+    my $handle = any::inspect($real_part) or $in->ask_warn('', N("This partition can not be used for loopback")), return;
 
     my ($min, $max) = (1, loopback::getFree($handle->{dir}, $real_part));
-    $max = min($max, 1 << (31 - 9)) if $real_part->{fs_type} eq 'vfat'; #- FAT doesn't handle file size bigger than 2GB
+    $max = min($max, 1 << (31 - 9)) if $real_part->{fs_type} eq 'vfat'; #- FAT does not handle file size bigger than 2GB
     my $part = { maxsize => $max, size => 0, loopback_device => $real_part, notFormatted => 1 };
     if (!fsedit::suggest_part($part, $all_hds)) {
 	$part->{size} = $part->{maxsize};
 	fs::type::suggest_fs_type($part, 'ext3');
     }
-    delete $part->{mntpoint}; # we don't want the suggested mntpoint
+    delete $part->{mntpoint}; # we do not want the suggested mntpoint
 
     my $type_name = fs::type::part2type_name($part);
     my $mb_size = $part->{size} >> 11;

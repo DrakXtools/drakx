@@ -21,7 +21,7 @@ sub getFile {
     $sock = IO::Socket::INET->new(PeerAddr => $use_http_proxy ? $ENV{PROXY} : $host,
 				  PeerPort => $use_http_proxy ? $ENV{PROXYPORT} : $port || 80,
 				  Proto    => 'tcp',
-				  Timeout  => 60) or die "can't connect $@";
+				  Timeout  => 60) or die "can not connect $@";
     $sock->autoflush;
     print $sock join("\015\012" =>
 		     "GET " . ($use_http_proxy ? $url : $path) . " HTTP/1.0",

@@ -374,7 +374,7 @@ sub _create_dialog {
     $options->{transient_for} = delete $options->{transient} if $options->{transient};
 
     my $dialog = gtknew('Dialog', title => $title, 
-			position_policy => 'center-on-parent', # center-on-parent doesn't work
+			position_policy => 'center-on-parent', # center-on-parent does not work
 			modal => 1,
 			%$options,
 			);
@@ -756,7 +756,7 @@ sub get_text_coord {
             $width += $w;
         }
     }
-    #- if wrap_char was at the end, don't forget it, for cases when bold/nonbold text follows
+    #- if wrap_char was at the end, do not forget it, for cases when bold/nonbold text follows
     $text =~ /$wrap_char$/ and $current_text .= $wrap_char;
     $add_line->();
 
@@ -790,7 +790,7 @@ sub wrap_paragraph {
             my $currentx;
             foreach (@elements) {
                 my ($text, %options) = @$_;
-                #- hack :( if ' ' is at the beginning, don't forget it, substitute
+                #- hack :( if ' ' is at the beginning, do not forget it, substitute
                 #- with an unbreakable space because gtk allocates too much space otherwise
                 $text =~ /^ (.*)/ and $text = " $1";
                 my @newlines = get_text_coord($text, $widget4style, $max_width, $currentx, $ydec);
@@ -854,7 +854,7 @@ sub new {
     $o->{wm_icon} ||= $wm_icon || $::Wizard_pix_up || "wiz_default_up.png";
 
     $o->{pop_it} ||= $pop_it || !$o->{isWizard} && !$o->{isEmbedded} || $::WizardTable && do {
-	#- don't take into account the DrawingArea
+	#- do not take into account the DrawingArea
 	any { !$_->isa('Gtk2::DrawingArea') && $_->visible } $::WizardTable->get_children;
     };
 
@@ -991,7 +991,7 @@ sub _create_window {
 
     if ($::isInstall && $::o->{mouse}{unsafe}) {
 	$w->add_events('pointer-motion-mask');
-	my $signal;  #- don't make this line part of next one, signal_disconnect won't be able to access $signal value
+	my $signal;  #- do not make this line part of next one, signal_disconnect will not be able to access $signal value
 	$signal = $w->signal_connect(motion_notify_event => sub {
 	    delete $::o->{mouse}{unsafe};
 	    log::l("unsetting unsafe mouse");
@@ -1377,7 +1377,7 @@ sub ask_browse_tree_info_given_widgets {
 	}
 	0;
     });
-    $w->{tree}->signal_connect(button_press_event => sub {  #- not too good, but CellRendererPixbuf doesn't have the needed signals :(
+    $w->{tree}->signal_connect(button_press_event => sub {  #- not too good, but CellRendererPixbuf does not have the needed signals :(
 	my ($path, $column) = $w->{tree}->get_path_at_pos($_[1]->x, $_[1]->y);
 	if ($path && $column) {
 	    $column->{is_pix} and $mouse_toggle_pending = $w->{tree_model}->get($w->{tree_model}->get_iter($path), 0);
@@ -1404,7 +1404,7 @@ sub gtk_TextView_get_log {
     my ($log_w, $log_scroll, $command, $filter_output, $when_command_is_over) = @_;
 
     my $pid = open(my $F, "$command |") or return;
-    fcntl($F, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
+    fcntl($F, c::F_SETFL(), c::O_NONBLOCK()) or die "can not fcntl F_SETFL: $!";
 
     my $gtk_buffer = $log_w->get_buffer;
     $log_w->signal_connect(destroy => sub { 
@@ -1425,7 +1425,7 @@ sub gtk_TextView_get_log {
 	    $log_w->scroll_to_iter($end, 0, 0, 0, 0) if $want_scroll_down;
 	}
 	if (waitpid($pid, c::WNOHANG()) > 0) {
-	    #- we do not call $when_command_is_over if $gtk_buffer doesn't exist anymore
+	    #- we do not call $when_command_is_over if $gtk_buffer does not exist anymore
 	    #- since it is not a normal case
 	    $when_command_is_over->($gtk_buffer) if $when_command_is_over && $gtk_buffer;
 	    $pid = '';

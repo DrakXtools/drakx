@@ -10,7 +10,7 @@ sub AUTOLOAD() {
     my @l = eval { &{$c::stuff::{$1}} };
     if (my $err = $@) {
 	$err =~ /Undefined subroutine &main::/ ?
-	  die("can't find function $AUTOLOAD\n" . backtrace()) :
+	  die("can not find function $AUTOLOAD\n" . backtrace()) :
 	  die($err);	
     }
     wantarray() ? @l : $l[0];

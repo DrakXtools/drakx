@@ -165,7 +165,7 @@ sub get_cards_by_type {
 
 sub get_cards() {
     my %buses = (
-                 isa => N("ISA / PCMCIA") . "/" . N("I don't know"),
+                 isa => N("ISA / PCMCIA") . "/" . N("I do not know"),
                  pci => N("PCI"),
                  usb => N("USB"),
                 );
@@ -191,7 +191,7 @@ sub get_capi_card {
 
     #- check if the capi driver is available
     unless (is_module_installed($capi_card->{driver}) || ($capi_card->{packages} = $in->do_pkgs->check_kernel_module_packages("$capi_card->{driver}-kernel"))) {
-        log::explanations("a capi driver ($capi_card->{driver}) exists to replace $isdn->{driver}, but it isn't installed and no packages provide it");
+        log::explanations("a capi driver ($capi_card->{driver}) exists to replace $isdn->{driver}, but it is not installed and no packages provide it");
         return;
     }
 

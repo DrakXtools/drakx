@@ -77,7 +77,7 @@ sub lvms {
 
     log::l("looking for vgs in " . join(' ', map { $_->{device} } @pvs));
 
-    #- otherwise vgscan won't find them
+    #- otherwise vgscan will not find them
     devices::make($_->{device}) foreach @pvs; 
     require lvm;
 
@@ -166,7 +166,7 @@ sub get_hds {
 		    my $err = $@;
 		    if ($handle_die_and_cdie->()) {
 			$handled = 1;
-			0; #- don't continue, transform cdie into die
+			0; #- do not continue, transform cdie into die
 		    } else {
 			!$o_in || $o_in->ask_okcancel('', formatError($err));
 		    }
@@ -177,7 +177,7 @@ sub get_hds {
 		    #- already handled in cdie handler above
 		} elsif ($handle_die_and_cdie->()) {
 		} elsif ($o_in && $o_in->ask_yesorno(N("Error"), 
-N("I can't read the partition table of device %s, it's too corrupted for me :(
+N("I can not read the partition table of device %s, it's too corrupted for me :(
 I can try to go on, erasing over bad partitions (ALL DATA will be lost!).
 The other solution is to not allow DrakX to modify the partition table.
 (the error is %s)
@@ -199,7 +199,7 @@ Do you agree to lose all the partitions?
 
 	my @parts = partition_table::get_normal_parts($hd);
 
-	# checking the magic of the filesystem, don't rely on pt_type
+	# checking the magic of the filesystem, do not rely on pt_type
 	foreach (grep { member($_->{fs_type}, 'vfat', 'ntfs', 'ext2') || $_->{pt_type} == 0x100 } @parts) {
 	    if (my $type = fs::type::type_subpart_from_magic($_)) {
                 if ($type->{fs_type}) {
@@ -401,12 +401,12 @@ sub check_mntpoint {
     cdie N("You've selected a software RAID partition as root (/).
 No bootloader is able to handle this without a /boot partition.
 Please be sure to add a /boot partition") if $mntpoint eq "/" && isRAID($part) && !fs::get::has_mntpoint("/boot", $all_hds);
-    die N("You can't use a LVM Logical Volume for mount point %s", $mntpoint)
+    die N("You can not use a LVM Logical Volume for mount point %s", $mntpoint)
       if $mntpoint eq '/boot' && isLVM($hd);
     cdie N("You've selected a LVM Logical Volume as root (/).
 The bootloader is not able to handle this without a /boot partition.
 Please be sure to add a /boot partition") if $mntpoint eq "/" && isLVM($part) && !fs::get::has_mntpoint("/boot", $all_hds);
-    cdie N("You may not be able to install lilo (since lilo doesn't handle a LV on multiple PVs)")
+    cdie N("You may not be able to install lilo (since lilo does not handle a LV on multiple PVs)")
       if 0; # arch() =~ /i.86/ && $mntpoint eq '/' && isLVM($hd) && @{$hd->{disks} || []} > 1;
 
     cdie N("This directory should remain within the root filesystem")
@@ -417,7 +417,7 @@ Please be sure to add a /boot partition") if $mntpoint eq "/" && isLVM($part) &&
       if !isTrueLocalFS($part) && $mntpoint eq '/';
     die N("You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n")
       if !isTrueFS($part) && member($mntpoint, qw(/home /tmp /usr /var));
-    die N("You can't use an encrypted file system for mount point %s", $mntpoint)
+    die N("You can not use an encrypted file system for mount point %s", $mntpoint)
       if $part->{options} =~ /encrypted/ && member($mntpoint, qw(/ /usr /var /boot));
 
     local $part->{mntpoint} = $mntpoint;
@@ -554,7 +554,7 @@ sub undo {
 	@$_{@partition_table::fields2save} = @$h;
 
 	if ($_->{hasBeenDirty}) {
-	    partition_table::will_tell_kernel($_, 'force_reboot'); #- next action needing write_partitions will force it. We can't do it now since more undo may occur, and we must not needReboot now
+	    partition_table::will_tell_kernel($_, 'force_reboot'); #- next action needing write_partitions will force it. We can not do it now since more undo may occur, and we must not needReboot now
 	}
     }
     
@@ -617,7 +617,7 @@ sub compare_with_proc_partitions {
 
     if ($len1 != $len2 && arch() ne 'ppc') {
 	die sprintf(
-		    "/proc/partitions doesn't agree with drakx %d != %d:\n%s\n", $len1, $len2,
+		    "/proc/partitions does not agree with drakx %d != %d:\n%s\n", $len1, $len2,
 		    "/proc/partitions: " . join(", ", map { "$_->{device} ($_->{rootDevice})" } @l2));
     }
     $len2;

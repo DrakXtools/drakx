@@ -18,7 +18,7 @@ SUBSYS=/var/lock/subsys/harddrake
 
 case "$1" in
  start)
-# We (mdk) don't support updfstab (yet)
+# We (mdk) do not support updfstab (yet)
 #	action "Updating /etc/fstab" /usr/sbin/updfstab
 
 	gprintf "Checking for new hardware"
@@ -29,7 +29,7 @@ case "$1" in
 	else
 	   action "" /bin/false
 	fi
-	# We don't want to run this on random runlevel changes.
+	# We do not want to run this on random runlevel changes.
 	touch $SUBSYS
 #	[ /etc/modules.conf -nt /lib/modules/$(uname -r)/modules.dep ] && touch /lib/modules/$(uname -r)/modules.dep 2>/dev/null >/dev/null || : &
 	exit $RETVAL

@@ -346,7 +346,7 @@ sub will_tell_kernel {
 	my $part_number;
 	if ($o_part) {
 	    ($part_number) = $o_part->{device} =~ /(\d+)$/ or
-	      #- don't die, it occurs when we zero_MBR_and_dirty a raw_lvm_PV
+	      #- do not die, it occurs when we zero_MBR_and_dirty a raw_lvm_PV
 	      log::l("ERROR: will_tell_kernel bad device " . description($o_part)), return;
 	}
 
@@ -468,7 +468,7 @@ sub remove {
 
     my ($first, $second, $third) = map { $_->{normal} } @{$hd->{extended} || []};
     if ($third && $first eq $part) {
-	die "Can't handle removing hda5 when hda6 is not the second partition" if $second->{start} > $third->{start};
+	die "Can not handle removing hda5 when hda6 is not the second partition" if $second->{start} > $third->{start};
     }      
 
     #- otherwise search it in extended partitions
@@ -507,7 +507,7 @@ sub add_extended {
     my $e = $hd->{primary}{extended};
 
     if ($e && !verifyInside($part, $e)) {
-	#-die "sorry, can't add outside the main extended partition" unless $::unsafe;
+	#-die "sorry, can not add outside the main extended partition" unless $::unsafe;
 	my $end = $e->{start} + $e->{size};
 	my $start = min($e->{start}, $part->{start});
 	$end = max($end, $part->{start} + $part->{size}) - $start;
@@ -517,7 +517,7 @@ sub add_extended {
 	    local $e->{size} = $end - $start;
 	    eval { verifyPrimary($hd->{primary}) };
 	    $@ and die
-N("You have a hole in your partition table but I can't use it.
+N("You have a hole in your partition table but I can not use it.
 The only solution is to move your primary partitions to have the hole next to the extended partitions.");
 	}
     }
@@ -611,7 +611,7 @@ sub load {
 
     $h{totalsectors} == $hd->{totalsectors} or $b_force or cdie "bad totalsectors";
 
-    #- unsure we don't modify totalsectors
+    #- unsure we do not modify totalsectors
     local $hd->{totalsectors};
 
     @$hd{@fields2save} = @$h;

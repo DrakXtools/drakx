@@ -461,7 +461,7 @@ sub configureNetwork2 {
         } else {
             #- disable zeroconf
             require services;
-            #- write blank hostname so that drakconnect doesn't assume zeroconf is enabled
+            #- write blank hostname so that drakconnect does not assume zeroconf is enabled
             -f "$etc/tmdns.conf" and write_zeroconf("$etc/tmdns.conf", '');
             if (-f "$etc/rc.d/init.d/tmdns") {
                 services::stop("tmdns");

@@ -169,7 +169,7 @@ Assign a new Volume ID?", $dev)))) {
     } elsif (arch() =~ /ppc/) {
 	if (detect_devices::get_mac_model() !~ /IBM/) {
             my $of_boot = bootloader::dev2yaboot($b->{boot});
-	    $in->ask_warn('', N("You may need to change your Open Firmware boot-device to\n enable the bootloader.  If you don't see the bootloader prompt at\n reboot, hold down Command-Option-O-F at reboot and enter:\n setenv boot-device %s,\\\\:tbxi\n Then type: shut-down\nAt your next boot you should see the bootloader prompt.", $of_boot));
+	    $in->ask_warn('', N("You may need to change your Open Firmware boot-device to\n enable the bootloader.  If you do not see the bootloader prompt at\n reboot, hold down Command-Option-O-F at reboot and enter:\n setenv boot-device %s,\\\\:tbxi\n Then type: shut-down\nAt your next boot you should see the bootloader prompt.", $of_boot));
 	}
     }
     1;
@@ -1015,11 +1015,11 @@ sub ask_window_manager_to_logout {
     );
     my $cmd = $h{$wm} or return;
     if ($wm eq 'gnome-session') {
-	#- NB: consolehelper doesn't destroy $HOME whereas kdesu does
+	#- NB: consolehelper does not destroy $HOME whereas kdesu does
 	#- for gnome, we use consolehelper, so below works
 	$ENV{ICEAUTHORITY} ||= "$ENV{HOME}/.ICEauthority";
     } elsif ($wm eq 'kwin' && $> == 0) {
-	#- we can't use dcop when we are root
+	#- we can not use dcop when we are root
 	$cmd = "su $ENV{USER} -c '$cmd'";
     }
     system($cmd);
@@ -1043,7 +1043,7 @@ sub alloc_raw_device {
 sub config_dvd {
     my ($prefix, $have_devfsd) = @_;
 
-    #- can't have both a devfs and a non-devfs config
+    #- can not have both a devfs and a non-devfs config
     #- the /etc/sysconfig/rawdevices solution gives errors with devfs
 
     my @dvds = grep { detect_devices::isDvdDrive($_) } detect_devices::cdroms() or return;

@@ -294,7 +294,7 @@ sub row_setting_dialog {
                        );
 
     my $usr_check = gtksignal_connect(gtkset_tip($tips, Gtk2::CheckButton->new(N("Current user")),
-                                                 N("When checked, owner and group won't be changed")),
+                                                 N("When checked, owner and group will not be changed")),
                                       clicked => sub { $id_box->set_sensitive(!$_[0]->get_active) });
      
     if ($iter && $model->get($iter, 2) eq 'current') {

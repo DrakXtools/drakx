@@ -131,7 +131,7 @@ sub configure_eth_aliases {
     my @pcmcia = detect_devices::pcmcia_probe();
     foreach my $card (get_eth_cards($modules_conf)) {
         if (any { $_->{device} eq $card->[0] } @pcmcia) {
-            #- don't write aliases for pcmcia cards, or cardmgr won't be loaded
+            #- do not write aliases for pcmcia cards, or cardmgr will not be loaded
             $modules_conf->remove_alias($card->[0]);
         } else {
             $modules_conf->set_alias($card->[0], $card->[1]);

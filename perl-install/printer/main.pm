@@ -462,7 +462,7 @@ sub read_printer_db {
     # No local queues available in daemon-less CUPS mode
     return 1 if $spooler eq "rcups";
 
-    my $DBPATH; #- don't have to do close ... and don't modify globals at least
+    my $DBPATH; #- do not have to do close ... and do not modify globals at least
     # Generate the Foomatic printer/driver overview, read it from the
     # appropriate file when it is already generated
     open($DBPATH, ($::testing ? $::prefix : "chroot $::prefix/ ") . #-#
@@ -1688,7 +1688,7 @@ sub poll_ppd_base {
     #- to make sure the file /etc/cups/ppds.dat is no more modified.
     #- If cups continue to modify it (because it reads the ppd files 
     #- available), the poll_ppd_base program simply cores :-)
-    # else cups will not be happy! and ifup lo don't run ?
+    # else cups will not be happy! and ifup lo do not run ?
     run_program::rooted($::prefix, 'ifconfig', 'lo', '127.0.0.1');
     printer::services::start_not_running_service("cups");
     my $driversthere = scalar(keys %thedb);
@@ -2520,7 +2520,7 @@ init.version=2
 	    "#   to delete and re-configure this device.\n";
 	if ($bus eq "par") {
 	    print $CONFIG
-		"#   Comment out if you don't care what model is really connected to this\n" .
+		"#   Comment out if you do not care what model is really connected to this\n" .
 		"#   parallel port.\n";
 	}
     }
@@ -2551,7 +2551,7 @@ init.version=2
 	    "# Standard options passed to ptal-mlcd:\n" .
 	    "init.mlcd.append+=";
 	if ($bus eq "usb") {
-	    # Important: don't put more quotes around /dev/usb/lp[0-9]*,
+	    # Important: do not put more quotes around /dev/usb/lp[0-9]*,
 	    # because ptal-mlcd currently does no globbing:
 	    print $CONFIG "-device /dev/usb/lp0 /dev/usb/lp1 /dev/usb/lp2 /dev/usb/lp3 /dev/usb/lp4 /dev/usb/lp5 /dev/usb/lp6 /dev/usb/lp7 /dev/usb/lp8 /dev/usb/lp9 /dev/usb/lp10 /dev/usb/lp11 /dev/usb/lp12 /dev/usb/lp13 /dev/usb/lp14 /dev/usb/lp15";
 	} elsif ($bus eq "par") {
@@ -2577,7 +2577,7 @@ init.version=2
     } else {
 	print $CONFIG
 	    "\n" .
-	    "# By default ptal-printd isn't started for hpjd: devices.\n" .
+	    "# By default ptal-printd is not started for hpjd: devices.\n" .
 	    "# If for some reason you want to start it for this device, then\n" .
 	    "# uncomment the following line:\n" .
 	    "init.printd.start=1\n";
@@ -2665,7 +2665,7 @@ sub config_sane() {
     return if (! -f "$::prefix/etc/sane.d/dll.conf");
     return if member("hpoj", chomp_(cat_("$::prefix/etc/sane.d/dll.conf")));
     eval { append_to_file("$::prefix/etc/sane.d/dll.conf", "hpoj\n") } or
-	   die "can't write SANE config in /etc/sane.d/dll.conf: $!";
+	   die "can not write SANE config in /etc/sane.d/dll.conf: $!";
 }
 
 sub config_photocard() {
@@ -2689,7 +2689,7 @@ EOF
     # modify the existing one
     my $mtoolsfmconf;
     if (-f "$::prefix/etc/mtoolsfm.conf") {
-	$mtoolsfmconf = cat_("$::prefix/etc/mtoolsfm.conf") or die "can't read MToolsFM config in $::prefix/etc/mtoolsfm.conf: $!";
+	$mtoolsfmconf = cat_("$::prefix/etc/mtoolsfm.conf") or die "can not read MToolsFM config in $::prefix/etc/mtoolsfm.conf: $!";
 	my $alloweddrives = lc($1) if $mtoolsfmconf =~ m/^\s*DRIVES\s*=\s*"([A-Za-z ]*)"/m;
 	foreach my $letter ("p", "q", "r", "s") {
          $alloweddrives .= $letter if $alloweddrives !~ /$letter/;

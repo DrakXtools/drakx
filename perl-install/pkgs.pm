@@ -94,7 +94,7 @@ sub isSupplCDMedium($) {
 #- TODO BEFORE TODO
 #- size and correction size functions for packages.
 my $B = 1.20873;
-my $C = 4.98663; #- doesn't take hdlist's into account as getAvailableSpace will do it.
+my $C = 4.98663; #- does not take hdlist's into account as getAvailableSpace will do it.
 sub correctSize { $B * $_[0] + $C }
 sub invCorrectSize { ($_[0] - $C) / $B }
 
@@ -592,7 +592,7 @@ sub read_rpmsrate {
 		    my @m3 = ((grep { !/^\d$/ } @m), @m2);
 		    if (member('INSTALL', @m3)) {
 			member('NOCOPY', @m3) or push @{$packages->{needToCopy} ||= []}, $_;
-			next; #- don't need to put INSTALL flag for a package.
+			next; #- do not need to put INSTALL flag for a package.
 		    }
 		    if (member('PRINTER', @m3)) {
 			push @{$packages->{needToCopy} ||= []}, $_;
@@ -600,7 +600,7 @@ sub read_rpmsrate {
 		    if ($p->rate) {
 			my @m4 = $p->rflags;
 			if ((@m3 > 1 || @m4 > 1) && "@m3[1..$#m3]" ne "@m4[1..$#m4]") {
-			    log::l("can't handle complicate flags for packages appearing twice ($_)");
+			    log::l("can not handle complicate flags for packages appearing twice ($_)");
 			    $fatal_error++;
 			}
 			log::l("package $_ appearing twice with different rates ($rate != " . $p->rate . ")") if $rate != $p->rate;
@@ -626,7 +626,7 @@ sub readCompssUsers {
     my ($file) = @_;
 
     my $f = install_any::getFile($file)
-	or do { log::l("can't find $file: $!"); return (undef, undef) };
+	or do { log::l("can not find $file: $!"); return (undef, undef) };
     my ($compssUsers, $gtk_display_compssUsers) = eval join('', <$f>);
     if ($@) {
 	log::l("ERROR: bad $file: $@");
@@ -1138,7 +1138,7 @@ sub install($$$;$$) {
 		    $trans->set_script_fd(fileno $LOG);
 
 		    log::l("rpm transactions start");
-		    my $fd; #- since we return the "fileno", perl doesn't know we're still using it, and so closes it, and :-(
+		    my $fd; #- since we return the "fileno", perl does not know we're still using it, and so closes it, and :-(
 		    my @probs = $trans->run($packages, force => 1, nosize => 1, callback_open => sub {
 						my ($data, $_type, $id) = @_;
 						my $pkg = defined $id && $data->{depslist}[$id];

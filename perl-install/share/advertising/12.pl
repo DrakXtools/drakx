@@ -14,6 +14,6 @@ $border = 10;  #- for leftish text
 	' ',
 	N("With your Discovery, you will be introduced to <b>KDE</b>, the most advanced and user-friendly <b>graphical desktop environment</b> available."),
 	' ',
-	N("KDE will make your <b>first steps</b> with Linux so <b>easy</b> that you won't ever think of running another operating system!"),
+	N("KDE will make your <b>first steps</b> with Linux so <b>easy</b> that you will not ever think of running another operating system!"),
 	' ',
 	N("KDE also includes a lot of <b>well integrated applications</b> such as Konqueror, the web browser and Kontact, the personal information manager."));

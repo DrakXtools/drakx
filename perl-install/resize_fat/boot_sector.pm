@@ -87,7 +87,7 @@ sub read($) {
 
     $fs->{nb_fat_entries} = divide($fs->{fat_size}, $fs->{fs_type_size} / 8);
 
-    #- - 2 because clusters 0 & 1 doesn't exist
+    #- - 2 because clusters 0 & 1 does not exist
     $fs->{nb_clusters} = divide($fs->{nb_sectors} * $fs->{sector_size} - $fs->{cluster_offset}, $fs->{cluster_size}) - 2;
 
     $fs->{dir_entries_per_cluster} = divide($fs->{cluster_size}, psizeof($format));

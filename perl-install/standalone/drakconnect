@@ -845,7 +845,7 @@ sub configure_lan() {
     my @card_tab;
 
     if (@all_cards < 1) {
-	$window->vbox->add(Gtk2::Label->new(N("You don't have any configured interface.
+	$window->vbox->add(Gtk2::Label->new(N("You do not have any configured interface.
 Configure them first by clicking on 'Configure'")));
 	gtkpack(gtkset_layout($window->action_area, 'end'),
              gtksignal_connect(Gtk2::Button->new(N("Ok")),
@@ -972,7 +972,7 @@ sub configure_net {
         $in->ask_warn(
                     N("Warning"),
                     #-PO: here "Add Connection" should be translated the same was as in control-center
-                    N("You don't have any configured Internet connection.
+                    N("You do not have any configured Internet connection.
 Run the \"Add Connection\" assistant from the Mandrakelinux Control Center"));
         $in->exit;
     }

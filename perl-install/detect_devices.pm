@@ -127,8 +127,8 @@ sub get_usb_storage_info_24 {
 	my @choices = @{$l{$host} || []} or log::l("weird, host$host from /proc/scsi/usb-storage-*/* is not in /proc/scsi/scsi"), next;
 	if (@choices > 1) {
 	    @choices = grep { $_->{info} =~ /^\Q$usbs{$host}{vendor_name}/ } @choices;
-	    @choices or log::l("weird, can't find the good entry host$host from /proc/scsi/usb-storage-*/* in /proc/scsi/scsi"), next;
-	    @choices == 1 or log::l("argh, can't determine the good entry host$host from /proc/scsi/usb-storage-*/* in /proc/scsi/scsi"), next;
+	    @choices or log::l("weird, can not find the good entry host$host from /proc/scsi/usb-storage-*/* in /proc/scsi/scsi"), next;
+	    @choices == 1 or log::l("argh, can not determine the good entry host$host from /proc/scsi/usb-storage-*/* in /proc/scsi/scsi"), next;
 	}
 	add2hash($choices[0], $usbs{$host});
     }
@@ -776,7 +776,7 @@ sub syslog() {
 }
 
 sub get_mac_model() {
-    my $mac_model = cat_("/proc/device-tree/model") || die "Can't open /proc/device-tree/model";
+    my $mac_model = cat_("/proc/device-tree/model") || die "Can not open /proc/device-tree/model";
     log::l("Mac model: $mac_model");
     $mac_model;	
 }
@@ -944,7 +944,7 @@ sub suggest_mount_point {
 	} elsif ($e->{media_type} eq 'fd') {
 	    $name = 'floppy';
 	} else {
-	    log::l("suggest_mount_point: don't know what to with hd $e->{device}");
+	    log::l("suggest_mount_point: do not know what to with hd $e->{device}");
 	}
     }
     $name;

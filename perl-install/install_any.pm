@@ -161,7 +161,7 @@ sub errorOpeningFile($) {
 	    my $getFile = getFile($file); 
 	    $getFile && @advertising_images and copy_advertising($::o);
 	    $getFile and return $getFile;
-	    $current_medium = 'unknown'; #- don't know what CD is inserted now.
+	    $current_medium = 'unknown'; #- do not know what CD is inserted now.
 	    ejectCdrom($cdrom, $mountpoint);
 	    --$max;
 	}
@@ -169,12 +169,12 @@ sub errorOpeningFile($) {
 	while ($max > 0 && askChangeMedium($current_method, $asked_medium)) {
 	    $current_medium = $asked_medium;
 	    my $getFile = getFile($file); $getFile and return $getFile;
-	    $current_medium = 'unknown'; #- don't know what CD image has been copied.
+	    $current_medium = 'unknown'; #- do not know what CD image has been copied.
 	    --$max;
 	}
     }
 
-    #- Don't unselect supplementary CDs.
+    #- Do not unselect supplementary CDs.
     return if $asked_medium =~ /^\d+s$/;
 
     #- keep in mind the asked medium has been refused on this way.
@@ -213,7 +213,7 @@ sub getFile {
 	    $o_altroot ||= '/tmp/image';
 	    $f2 = "$o_altroot/$rel" if $rel !~ m,^/, && (!$postinstall_rpms || !-e $f2);
 	    #- $f2 = "/$rel" if !$::o->{packages}{mediums}{$asked_medium}{rpmsdir} && !-e $f2; #- not a relative path, should not be necessary with new media layout
-	    my $F; open($F, $f2) ? $F : do { $f2 !~ /XXX/ and log::l("Can't open $f2: $!"); undef };
+	    my $F; open($F, $f2) ? $F : do { $f2 !~ /XXX/ and log::l("Can not open $f2: $!"); undef };
 	}
     } || errorOpeningFile($f);
 }
@@ -259,7 +259,7 @@ sub setup_postinstall_rpms($$) {
     #- the complete filename of each package.
     #- copy the package files in the postinstall RPMS directory.
     #- last arg is default medium '' known as the CD#1.
-    #- cp_af doesn't handle correctly a missing file.
+    #- cp_af does not handle correctly a missing file.
     eval { cp_af((grep { -r $_ } map { "/tmp/image/" . relGetFile($_->filename) } @toCopy), $postinstall_rpms) };
 
     log::l("copying Auto Install Floppy");
@@ -354,7 +354,7 @@ sub preConfigureTimezone {
     my ($o) = @_;
     require timezone;
    
-    #- can't be done in install cuz' timeconfig %post creates funny things
+    #- can not be done in install cuz' timeconfig %post creates funny things
     add2hash($o->{timezone}, timezone::read()) if $o->{isUpgrade};
 
     $o->{timezone}{timezone} ||= timezone::bestTimezone($o->{locale}{country});
@@ -540,7 +540,7 @@ sub selectSupplMedia {
 	    };
 	    if (!defined $f) {
 		log::l($@) if $@;
-		$o->ask_warn('', N("Can't find hdlist file on this mirror"));
+		$o->ask_warn('', N("Can not find hdlist file on this mirror"));
 		useMedium($prev_asked_medium);
 		return 'error';
 	    }
@@ -732,7 +732,7 @@ formatAlaTeX(
              N("You have selected the following server(s): %s
 
 
-These servers are activated by default. They don't have any known security
+These servers are activated by default. They do not have any known security
 issues, but some new ones could be found. In that case, you must make sure
 to upgrade as soon as possible.
 
@@ -1165,7 +1165,7 @@ sub loadO {
             foreach my $fs (arch() =~ /sparc/ ? 'romfs' : ('ext2', 'vfat')) {
                 eval { fs::mount($dev, '/mnt', $fs, 'readonly'); 1 } and goto mount_ok;
             }
-            die "Couldn't mount floppy [$dev]";
+            die "Could not mount floppy [$dev]";
           mount_ok:
 	    $f = "/mnt/$f";
 	}
@@ -1222,7 +1222,7 @@ sub generate_automatic_stage1_params {
     } elsif ($o->{method} eq 'ftp') {
 	@ks = (server => $ENV{HOST}, directory => $ENV{PREFIX}, user => $ENV{LOGIN}, pass => $ENV{PASSWORD});
     } elsif ($o->{method} eq 'nfs') {
-	cat_("/proc/mounts") =~ m|(\S+):(\S+)\s+/tmp/nfsimage| or internal_error("can't find nfsimage");
+	cat_("/proc/mounts") =~ m|(\S+):(\S+)\s+/tmp/nfsimage| or internal_error("can not find nfsimage");
 	@ks = (server => $1, directory => $2);
     }
     @ks = (method => $method, @ks);
@@ -1326,7 +1326,7 @@ sub migrate_device_names {
 	    my $device_prefix = devices::part_prefix($_);
 	    push @{$h{$device_prefix}}, $_;
 	} else {
-	    #- hopefully this doesn't need anything special
+	    #- hopefully this does not need anything special
 	}
     }
     my @from_fstab_per_hds = values %h or return;
@@ -1359,9 +1359,9 @@ sub migrate_device_names {
 	goto found_one;
     }
 	
-    #- we can't find one and only one matching hd
+    #- we can not find one and only one matching hd
     my @from_fstab_not_handled = map { @$_ } @from_fstab_per_hds;
-    log::l("we still don't know what to do with: " . join(' ', map { $_->{device} } @from_fstab_not_handled));
+    log::l("we still do not know what to do with: " . join(' ', map { $_->{device} } @from_fstab_not_handled));
 
 
     if (!$o_in) {

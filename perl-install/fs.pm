@@ -338,7 +338,7 @@ sub prepare_write_fstab {
 		($device, $fs_type) = ('none', 'supermount');
 	    } else {
 		#- if we were using supermount, the type could be something like ext2:vfat
-		#- but this can't be done without supermount, so switching to "auto"
+		#- but this can not be done without supermount, so switching to "auto"
 		$fs_type = 'auto' if $fs_type =~ /:/;
 	    }
 
@@ -554,13 +554,13 @@ sub umount {
 	syscall_('umount2', $mntpoint, 0) or die N("error unmounting %s: %s", $mntpoint, $!);
     };
 
-    substInFile { $_ = '' if /(^|\s)$mntpoint\s/ } '/etc/mtab'; #- don't care about error, if we can't read, we won't manage to write... (and mess mtab)
+    substInFile { $_ = '' if /(^|\s)$mntpoint\s/ } '/etc/mtab'; #- do not care about error, if we can not read, we will not manage to write... (and mess mtab)
 }
 
 sub mount_part {
     my ($part, $o_prefix, $b_rdonly, $o_wait_message) = @_;
 
-    #- root carrier's link can't be mounted
+    #- root carrier's link can not be mounted
     loopback::carryRootCreateSymlink($part, $o_prefix);
 
     log::l("isMounted=$part->{isMounted}, real_mntpoint=$part->{real_mntpoint}, mntpoint=$part->{mntpoint}");
@@ -592,7 +592,7 @@ sub mount_part {
 	    if (isLoopback($part) || $part->{encrypt_key}) {
 		set_loop($part);
 	    } elsif ($part->{options} =~ /encrypted/) {
-		log::l("skip mounting $part->{device} since we don't have the encrypt_key");
+		log::l("skip mounting $part->{device} since we do not have the encrypt_key");
 		return;
 	    } elsif (loopback::carryRootLoopback($part)) {
 		$mntpoint = "/initrd/loopfs";
@@ -646,7 +646,7 @@ sub df {
     if ($part->{isMounted}) {
 	$dir = ($o_prefix || '') . $part->{mntpoint};
     } elsif ($part->{notFormatted} && !$part->{isFormatted}) {
-	return; #- won't even try!
+	return; #- will not even try!
     } else {
 	mkdir_p($dir);
 	eval { mount($part->{device}, $dir, $part->{fs_type}, 'readonly') };

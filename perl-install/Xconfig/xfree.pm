@@ -35,7 +35,7 @@ sub write {
 	    if (-l $_) {
 		unlink $_;
 	    } else {
-		rename $_, "$_.old"; #- there won't be any XF86Config-4 anymore, we want this!
+		rename $_, "$_.old"; #- there will not be any XF86Config-4 anymore, we want this!
 	    }
 	}
 	symlinkf 'XF86Config', $xorg;
@@ -508,7 +508,7 @@ EndSection
 Section "ServerFlags"
     #DontZap # disable <Crtl><Alt><BS> (server abort)
     #DontZoom # disable <Crtl><Alt><KP_+>/<KP_-> (resolution switching)
-    AllowMouseOpenFail # allows the server to start up even if the mouse doesn't work
+    AllowMouseOpenFail # allows the server to start up even if the mouse does not work
 EndSection
 END
 

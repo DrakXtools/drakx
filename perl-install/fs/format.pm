@@ -80,7 +80,7 @@ sub part_raw {
 	push @options, '-l', 'bootstrap';
     }
 
-    my ($_pkg, $cmd, @first_options) = @{$cmds{$fs_type} || die N("I don't know how to format %s in type %s", $part->{device}, $part->{fs_type})};
+    my ($_pkg, $cmd, @first_options) = @{$cmds{$fs_type} || die N("I do not know how to format %s in type %s", $part->{device}, $part->{fs_type})};
 
     run_program::raw({ timeout => 60 * 60 }, $cmd, @first_options, @options, devices::make($dev)) or die N("%s formatting of %s failed", $fs_type, $dev);
 

@@ -35,7 +35,7 @@ sub get_wizard {
                        name => N("Connect to the Internet") . "\n\n" .
                        N("The most common way to connect with adsl is pppoe.
 Some connections use PPTP, a few use DHCP.
-If you don't know, choose 'use PPPoE'"),
+If you do not know, choose 'use PPPoE'"),
                        data =>  [
                                  {
                                   label => N("ADSL connection type:"), val => \$wiz->{var}{adsl}{type}, list => [ sort values %l ] },
@@ -151,7 +151,7 @@ sync
                   speedtouch =>
                   {
                    modules => [ qw(speedtch) ],
-                   #- won't call pppd since we've just written ONBOOT=no, only runs modem_run
+                   #- will not call pppd since we've just written ONBOOT=no, only runs modem_run
                    start => '/usr/bin/speedtouch-start --boot',
                    overide_script => 1,
                    server => {
@@ -331,7 +331,7 @@ user "$adsl->{login}"
                     s/DNS2=.*\n/DNS2=$netc->{dnsServer3}\n/;
                 } "$::prefix/etc/ppp/pppoe.conf";
             } else {
-                log::l("can't find pppoe.conf, make sure the rp-pppoe package is installed");
+                log::l("can not find pppoe.conf, make sure the rp-pppoe package is installed");
             }
         }
 

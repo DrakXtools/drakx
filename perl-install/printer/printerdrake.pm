@@ -686,7 +686,7 @@ sub first_time_dialog {
 
     # Do we have a local network?
 
-    # If networking is configured, start it, but don't ask the user to
+    # If networking is configured, start it, but do not ask the user to
     # configure networking.
     my $havelocalnetworks = 
 	 check_network($printer, $in, $upNetwork, 1) && 
@@ -906,7 +906,7 @@ sub wizard_welcome {
     my $autodetectlocal = 0;
     my $autodetectnetwork = 0;
     my $autodetectsmb = 0;
-    # If networking is configured, start it, but don't ask the user to
+    # If networking is configured, start it, but do not ask the user to
     # configure networking.
     my $havelocalnetworks;
     if ($printer->{expert}) {
@@ -950,7 +950,7 @@ This wizard will help you to install your printer(s) connected to this computer,
 
 Please plug in and turn on all printers connected to this machine so that it/they can be auto-detected. Also your network printer(s) and your Windows machines must be connected and turned on.
 
-Note that auto-detecting printers on the network takes longer than the auto-detection of only the printers connected to this machine. So turn off the auto-detection of network and/or Windows-hosted printers when you don't need it.
+Note that auto-detecting printers on the network takes longer than the auto-detection of only the printers connected to this machine. So turn off the auto-detection of network and/or Windows-hosted printers when you do not need it.
 
  Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want to set up your printer(s) now.") : N("
 Welcome to the Printer Setup Wizard
@@ -967,7 +967,7 @@ This wizard will help you to install your printer(s) connected to this computer 
 
 If you have printer(s) connected to this machine, Please plug it/them in on this computer and turn it/them on so that it/they can be auto-detected. Also your network printer(s) must be connected and turned on.
 
-Note that auto-detecting printers on the network takes longer than the auto-detection of only the printers connected to this machine. So turn off the auto-detection of network printers when you don't need it.
+Note that auto-detecting printers on the network takes longer than the auto-detection of only the printers connected to this machine. So turn off the auto-detection of network printers when you do not need it.
 
  Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want to set up your printer(s) now.") : N("
 Welcome to the Printer Setup Wizard
@@ -1976,7 +1976,7 @@ sub setup_common {
     my $isHPOJ = 0;
     my $w;
     if ($device =~ m!^/dev/! || $device =~ m!^socket://!) {
-	# Ask user whether he has a multi-function device when he didn't
+	# Ask user whether he has a multi-function device when he did not
 	# do auto-detection or when auto-detection failed
 	my $searchunknown = N("Unknown model");
 	if (!$do_auto_detect ||
@@ -2032,7 +2032,7 @@ sub setup_common {
 
 	    if ($ptaldevice) {
 		# HPOJ has determined the device name, make use of it if we
-		# didn't know it before
+		# did not know it before
 		if (!$do_auto_detect ||
 		    !$makemodel ||
 		    $makemodel eq $searchunknown ||
@@ -2316,7 +2316,7 @@ sub setup_common {
 	    } else {
 		$dbmakemodel = $entry;
 	    }
-	    # Don't try to match if the database entry does not provide
+	    # Do not try to match if the database entry does not provide
 	    # make and model
 	    next unless $dbmakemodel;
 	    # If make and model match exactly, we have found the correct
@@ -2758,7 +2758,7 @@ sub get_printer_info {
 	    ($printer->{configured}{$queue}{queuedata}{foomatic} ||
 	     $printer->{configured}{$queue}{queuedata}{ppd})) {
 	    if (!$newdriver) {
-		# The user didn't change the printer/driver
+		# The user did not change the printer/driver
 		$printer->{ARGS} = $printer->{configured}{$queue}{args};
 	    } elsif ($printer->{currentqueue}{foomatic}) {
 		# The queue was already configured with Foomatic ...
@@ -4271,7 +4271,7 @@ sub mainwindow_interactive {
 
     while (1) {
 	my ($queue, $newcursorpos) = ('', 0);
-	# If networking is configured, start it, but don't ask the
+	# If networking is configured, start it, but do not ask the
 	# user to configure networking. We want to know whether we
 	# have a local network to suppress some buttons when there is
 	# no network

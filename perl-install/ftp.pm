@@ -76,7 +76,7 @@ sub rewindGetFile() {
     #- close any existing connection.
     foreach (values %hosts) {
 	my ($ftp, $retr) = @{$_ || []};
-	#- don't let Timeout kill us!
+	#- do not let Timeout kill us!
 	eval { $$retr->close } if $$retr;
 	eval { $ftp->close } if $ftp;
     }

@@ -342,7 +342,7 @@ sub real_main {
                             $netcnx->{isdn_external}{device} = network::modem::first_modem($netc);
                             network::isdn::read_config($netcnx->{isdn_external});
                             #- FIXME: seems to be specific to ZyXEL Adapter Omni.net/TA 128/Elite 2846i
-                            #- it doesn't even work with TA 128 modems
+                            #- it does not even work with TA 128 modems
                             #- http://bugs.mandrakelinux.com/query.php?bug=1033
                             $netcnx->{isdn_external}{special_command} = 'AT&F&O2B40';
                             require network::modem;
@@ -385,7 +385,7 @@ sub real_main {
                       isdn_ask_step_1:
                         my $e = $in->ask_from_list_(N("ISDN Configuration"),
                                                     $label . "\n" . N("What kind of card do you have?"),
-                                                    [ N_("ISA / PCMCIA"), N_("PCI"), N_("USB"), N_("I don't know") ]
+                                                    [ N_("ISA / PCMCIA"), N_("PCI"), N_("USB"), N_("I do not know") ]
                                                    ) or return;
                       isdn_ask_step_1b:
                         if ($e =~ /PCI/) {
@@ -450,7 +450,7 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
 
                    isdn_db =>
                    {
-                    name => N("ISDN Configuration") . "\n\n" . N("Select your provider.\nIf it isn't listed, choose Unlisted."),
+                    name => N("ISDN Configuration") . "\n\n" . N("Select your provider.\nIf it is not listed, choose Unlisted."),
                     data => sub {
                         [ { label => N("Provider:"), type => "list", val => \$provider, separator => '|',
                             list => [ N("Unlisted - edit manually"), network::isdn::read_providers_backend() ] } ];
@@ -467,7 +467,7 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
 
                    no_supported_winmodem =>
                    {
-                    name => N("Warning") . "\n\n" . N("Your modem isn't supported by the system.
+                    name => N("Warning") . "\n\n" . N("Your modem is not supported by the system.
 Take a look at http://www.linmodems.org"),
                     end => 1,
                    },
@@ -803,7 +803,7 @@ and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.n
                     name => N("Connect to the Internet") . "\n\n" .
                     N("The most common way to connect with adsl is pppoe.
 Some connections use PPTP, a few use DHCP.
-If you don't know, choose 'use PPPoE'"),
+If you do not know, choose 'use PPPoE'"),
                     data =>  [
                               { text => N("ADSL connection type:"), val => \$adsl_type, type => "list",
                                 list => [ sort { $adsl_types{$a} cmp $adsl_types{$b} } keys %adsl_types ],
@@ -1129,7 +1129,7 @@ See iwpriv(8) man page for further information."),
                                                         "ENABLE_$ethntf->{DEVICE}" => "y"
                                                        });
                                 my $wlan_ssid_file = "$::prefix/etc/wlan/wlancfg-$ethntf->{WIRELESS_ESSID}";
-                                #- copy default settings for this ESSID if config file doesn't exist
+                                #- copy default settings for this ESSID if config file does not exist
                                 -f $wlan_ssid_file or cp_f("$::prefix/etc/wlan/wlancfg-DEFAULT", $wlan_ssid_file);
                                 #- enable/disable encryption
                                 $update_vars_in_wlan->($wlan_ssid_file,
@@ -1327,7 +1327,7 @@ It is not necessary on most networks."),
                     name => sub {
                         $up ? N("The system is now connected to the Internet.") .
                           if_($::isInstall, N("For security reasons, it will be disconnected now.")) :
-                            N("The system doesn't seem to be connected to the Internet.
+                            N("The system does not seem to be connected to the Internet.
 Try to reconfigure your connection.");
                     },
                     no_back => 1,
@@ -1346,7 +1346,7 @@ Try to reconfigure your connection.");
 "), if_($::isStandalone && $in->isa('interactive::gtk'),
         N("After this is done, we recommend that you restart your X environment to avoid any hostname-related problems."))) : 
           N("Problems occurred during configuration.
-Test your connection via net_monitor or mcc. If your connection doesn't work, you might want to relaunch the configuration.");
+Test your connection via net_monitor or mcc. If your connection does not work, you might want to relaunch the configuration.");
                     },
                            end => 1,
                    },

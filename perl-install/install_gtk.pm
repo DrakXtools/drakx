@@ -70,7 +70,7 @@ sub load_rc {
    }
 
     if ($::move) {
-        #- override selection color since we won't do inverse-video on the text when it's images
+        #- override selection color since we will not do inverse-video on the text when it's images
 	Gtk2::Rc->parse_string(q(
 style "galaxy-default"
 {
