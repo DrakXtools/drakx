@@ -7,7 +7,7 @@ MOFILES = $(POFILES:%.po=%.mo)
 
 all: TAGS $(DIRS)
 
-TAGS: $(PMS)
+TAGS: $(ALLPMS)
 	etags -o - $^ /usr/lib/perl5/site_perl/*/MDK/Common/*.pm | ./perl2etags > $@
 
 clean:
@@ -38,7 +38,7 @@ test_pms: verify_c
 	for i in install2 install_steps_*.pm; do perl -cw -I. $$i; done
 
 verify_c:
-	./verify_c $(PMS)
+	./verify_c $(ALLPMS)
 
 %.mo: %.po
 	msgfmt -o $@ $<
@@ -59,10 +59,11 @@ install_pms: $(DIRS)
 		perl -pe 's|#!/usr/bin/perl.*\n|#!/usr/bin/perl -d \n|' install2 > $(DESTREP4PMS)/install2; \
 	fi \
 
+	rm -f $(DESTREP4PMS)/{bootlook,tinyfirewall}.pm
+
 	cp share/*.rc $(DESTREP4PMS)
 	chmod a+x $(DESTREP4PMS)/install2
 	chmod a+x $(DESTREP4PMS)/commands
-	chmod a+x $(DESTREP4PMS)/standalone/*
 	chmod a+x $(DESTREP4PMS)/g_auto_install
 	chmod a+x $(DESTREP4PMS)/live_install*
 

@@ -1,6 +1,6 @@
 include ../../Makefile.config
 
-PMSFILES = $(wildcard $(PMS:%=../../%))
+PMSFILES = $(wildcard $(ALLPMS:%=../../%))
 PMSCFILES = $(PMSFILES:%=%_.c)
 
 # temporarly don't include ar.po,br.po,cy.po,ga.po,is.po,ro.po,sl.po
