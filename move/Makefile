@@ -2,7 +2,7 @@
 DEST_LIVETREE = /tmp/live_tree
 DEST_STAGE2 = $(DEST_LIVETREE)/usr/bin/stage2
 
-DATA_FILES = devices symlinks
+DATA_FILES = devices symlinks directories-to-create
 LANG_FILES = $(shell perl -ne 'print $$1 if /ALLOWED_LANGS = qw\((.*)\)/' move.pm)
 
 STAGE1 = ../mdk-stage1
@@ -22,6 +22,7 @@ all: install
 
 build: xwait
 	cd $(STAGE1) && ADDITIONAL_DEFS="-DMANDRAKE_MOVE" MOVE=1 make init stage1-network stage1-cdrom init-move
+	sudo ./collect-directories-to-create.pl $(DEST_LIVETREE) > data/directories-to-create
 
 install: build
 	while [ -e $(DEST_LIVETREE)/lock ]; do echo -e "\t*** sleeping because of lock... ***\n"; sleep 1; done
@@ -42,6 +43,7 @@ install: build
 
 	 #- overwrite /usr/lib/libDrakX files of the live tree with those in CVS
 	sudo cp -f $(addprefix $(INSTALL)/, $(shell cd $(DEST_LIVETREE)/usr/lib/libDrakX ; ls *.pm)) $(DEST_LIVETREE)/usr/lib/libDrakX || :
+	sudo cp -f $(addprefix $(INSTALL)/printer/, $(shell cd $(DEST_LIVETREE)/usr/lib/libDrakX/printer ; ls *.pm)) $(DEST_LIVETREE)/usr/lib/libDrakX/printer || :
 
 	 #- overwrite stuff.so of drakxtools because it doesn't contain C_DRAKX stuff
 	sudo cp -f ../perl-install/c/blib/arch/auto/stuff/stuff.so $(DEST_LIVETREE)/usr/lib/libDrakX/auto/c/stuff

@@ -22,11 +22,15 @@ sub init {
 
     #- rw things
     mkdir "/$_" foreach qw(home mnt root etc var);
-    mkdir_p "/var/$_" foreach qw(log run/console spool lib/xkb lock/subsys);
-    mkdir_p "/etc/$_" foreach qw(X11);
+    mkdir "/etc/$_" foreach qw(X11 cups);
     touch '/etc/modules.conf';
     symlinkf "/proc/mounts", "/etc/mtab";
-    mkdir_p $_ foreach qw(/etc/devfs/conf.d /etc/rpm /etc/sysconfig /etc/sysconfig/console/consoletrans /etc/sysconfig/console/consolefonts);
+
+    #- to be able to adduser, one need to have /etc/passwd and /etc/group writable
+    #- sudoers must a file, not a symlink
+    system("cp /image/etc/{passwd,group,sudoers} /etc");
+
+    system("cp -R /image/etc/cups/* /etc/cups");
  
     #- ro things
     symlinkf "/image/etc/$_", "/etc/$_" 
@@ -37,9 +41,11 @@ sub init {
     symlinkf "/image/etc/X11/$_", "/etc/X11/$_"
       foreach qw(encodings.dir app-defaults applnk fs lbxproxy proxymngr rstart wmsession.d xinit.d xinit xkb xserver xsm);
 
-    #- to be able to adduser, one need to have /etc/passwd and /etc/group writable
-    #- sudoers must a file, not a symlink
-    system("cp /image/etc/{passwd,group,sudoers} /etc");
+    #- create remaining /etc and /var subdirectories if not already copied or symlinked,
+    #- because programs most often won't try to create the missing subdir before trying
+    #- to write a file, leading to obscure unexpected failures
+    -d $_ or mkdir_p $_ foreach chomp_(cat_('/image/move/directories-to-create'));
+
 
     #- free up stage1 memory
     fs::umount($_) foreach qw(/stage1/proc /stage1);
@@ -81,6 +87,12 @@ sub install2::startMove {
     require install_steps;
     install_steps::addUser($o);
 
+    lomount_clp('totem') if ! -x '/usr/bin/totem';
+
+    #- automatic printer, timezone, network configs
+    require install_steps_interactive;
+    install_steps_interactive::summaryBefore($o);
+
     require install_any;
     install_any::write_fstab($o);
     modules::write_conf('');
@@ -112,8 +124,6 @@ Continue at your own risk."), formatError($@) ]) if $@;
     output('/var/run/console.lock', $username);
     output("/var/run/console/$username", 1);
     run_program::run('pam_console_apply');
-
-    lomount_clp('totem') if ! -x '/usr/bin/totem';
 
     if (fork()) {
 	sleep 1;
