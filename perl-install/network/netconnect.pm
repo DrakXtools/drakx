@@ -769,7 +769,7 @@ If you don't know, choose 'use PPPoE'"),
                         if ($ntf_name eq "sagem") {
                             #- FIXME: duplicated with %modems from adsl.pm
                             $ethntf = $intf->{$ntf_name} = { DEVICE => "`/usr/sbin/eaglectrl -i`", MII_NOT_SUPPORTED => "yes" };
-                            sagem_set_parameters($netc); #- FIXME: should be delayed
+                            network::adsl::sagem_set_parameters($netc); #- FIXME: should be delayed
                         }
                         # process static/dhcp ethernet devices:
                         if (exists($intf->{$ntf_name}) && member($adsl_type, qw(manual dhcp))) {
