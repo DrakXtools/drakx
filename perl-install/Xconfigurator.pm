@@ -851,8 +851,9 @@ sub chooseResolutionsGtk($$;$) {
 
     my %monitor;
     $monitor{$_} = [ gtkcreate_png("monitor-" . $_ . ".png") ] foreach (640, 800, 1024, 1280);
-    $monitor{1152} = [ gtkcreate_png("monitor-" . 1024 . ".png") ];
-    $monitor{1600} = [ gtkcreate_png("monitor-" . 1280 . ".png") ];
+    $monitor{$_} = [ gtkcreate_png("monitor-" . 1024 . ".png") ] foreach (1152);
+    #- add default icons for resolutions not taken into account (assume largest image available).
+    $monitor{$_} ||= [ gtkcreate_png("monitor-" . 1280 . ".png") ] foreach map { (split 'x', $_)[0] } @resolutions;
 
     my $pixmap_mo = new Gtk::Pixmap( $monitor{$chosen_w}[0]  , $monitor{$chosen_w}[1] );
 
