@@ -450,7 +450,7 @@ sub choosePackagesTree {
 				} elsif (pkgs::packageFlagUpgrade($p)) {
 				    if ($::expert) {
 					if (pkgs::packageFlagSelected($p)) {
-					    $o->ask_yesorno('', _("This package must be upgraded\nAre you sure you want to deselect it?")) or return;
+					    $o->ask_yesorno('', _("This package must be upgraded.\nAre you sure you want to deselect it?")) or return;
 					}
 					return 1;
 				    } else {
@@ -525,7 +525,7 @@ sub installPackages {
 			  )), 0, 1, 0);
     $details->hide if !@install_any::advertising_images;
     $w->sync;
-    $msg->set(_("Please wait, preparing installation"));
+    $msg->set(_("Please wait, preparing installation..."));
     gtkset_mousecursor_normal($cancel->window);
     gtkset_mousecursor_normal($details->window);
     my $advertize = sub {

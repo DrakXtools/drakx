@@ -258,8 +258,8 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
     $card->{server} = 'FBDev' unless !$cardOptions->{allowFB} || $card->{server} || $card->{driver} || $card->{type} || $noauto;
 
     my $currentRealName = realName2CardName($card->{type} || $cards[0]{type}) || 'Other|Unlisted';
-    $card->{type} = cardName2RealName($in->ask_from_treelist(_("Graphic card"),
-							     _("Select a graphic card"), '|', ['Other|Unlisted', readCardsNames()],
+    $card->{type} = cardName2RealName($in->ask_from_treelist(_("Graphics card"),
+							     _("Select a graphics card"), '|', ['Other|Unlisted', readCardsNames()],
 							     $currentRealName))
       or return unless $card->{type} || $card->{server} || $card->{driver};
 
@@ -493,7 +493,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     $card->{options_xf4}{DPMS} = 'on';
 
     $card->{flags}{needVideoRam} and
-      $card->{memory} ||= $videomemory{$in->ask_from_list_('', _("Select the memory size of your graphic card"),
+      $card->{memory} ||= $videomemory{$in->ask_from_list_('', _("Select the memory size of your graphics card"),
 							   [ sort { $videomemory{$a} <=> $videomemory{$b} }
 							     keys %videomemory]) || return};
 
@@ -622,7 +622,7 @@ sub testFinalConfig {
       $in->ask_warn('', _("Monitor not configured")), return;
 
     $o->{card}{server} || $o->{card}{driver} or
-      $in->ask_warn('', _("Graphic card not configured yet")), return;
+      $in->ask_warn('', _("Graphics card not configured yet")), return;
 
     $o->{card}{depth} or
       $in->ask_warn('', _("Resolutions not chosen yet")), return;
@@ -637,7 +637,7 @@ sub testFinalConfig {
 		    $o->{card}{identifier} =~ /Matrox|Rage Mobility [PL]|SiS.*SG86C2.5|SiS.*559[78]|SiS.*300|SiS.*540|SiS.*6C?326|SiS.*6C?236|Tseng.*ET6\d00|Riva.*128/ :
 		    $o->{card}{identifier} =~ /i740|Rage Mobility [PL]|3D Rage LT|Rage 128/);
     $::live and $bad_card ||= $o->{card}{identifier} =~ /S3.*ViRGE/;
-    log::l("the graphic card does not like X in framebuffer") if $bad_card;
+    log::l("the graphics card does not like X in framebuffer") if $bad_card;
 
     my $verybad_card = $o->{card}{driver} eq 'i810' || $o->{card}{driver} eq 'fbdev';
     $verybad_card ||= $o->{card}{driver} eq 'nvidia' && !$::isStandalone; #- avoid testing during install at any price.
@@ -647,7 +647,7 @@ sub testFinalConfig {
     my $def = 1;
     if ($bad_card && !$::isStandalone) {
 	$skip_badcard and return 1;
-	$mesg = $mesg . "\n" . _("Warning: testing this graphic card may freeze your computer");
+	$mesg = $mesg . "\n" . _("Warning: testing this graphics card may freeze your computer");
 	$def = 0;
     }
     $auto && $def or $in->ask_yesorno(_("Test of the configuration"), $mesg, $def) or return 1;
@@ -689,7 +689,7 @@ sub testFinalConfig {
 		    while (<F>) {
 			/reporting a problem/ and last;
 			push @msg, $_;
-			$in->ask_warn('', [ _("An error has occurred:"), " ", @msg, _("\ntry to change some parameters") ]);
+			$in->ask_warn('', [ _("An error occurred:"), " ", @msg, _("\ntry to change some parameters") ]);
 			return 0;
 		    }
 		}
@@ -701,7 +701,7 @@ sub testFinalConfig {
 			/^$/ and last;
 			push @msg, $_;
 		    }
-		    $in->ask_warn('', [ _("An error has occurred:"), " ", @msg, _("\ntry to change some parameters") ]);
+		    $in->ask_warn('', [ _("An error occurred:"), " ", @msg, _("\ntry to change some parameters") ]);
 		    return 0;
 		}
 	    }
@@ -748,7 +748,7 @@ sub testFinalConfig {
     kill 2, $pid;
     $::noShadow = 0;
 
-    $rc || $err == 222 << 8 or $in->ask_warn('', _("An error has occurred, try to change some parameters"));
+    $rc || $err == 222 << 8 or $in->ask_warn('', _("An error occurred, try to change some parameters"));
     $rc;
 }
 
@@ -873,7 +873,7 @@ sub chooseResolutionsGtk($$;$) {
     gtkadd($W->{window},
 	   gtkpack_($W->create_box_with_title(_("Choose the resolution and the color depth"),
 					      "(" . ($card->{type} ? 
-						     _("Graphic card: %s", $card->{type}) :
+						     _("Graphics card: %s", $card->{type}) :
 						     _("XFree86 server: %s", $card->{server})) . ")"
 					     ),
 		    1, gtkpack2(new Gtk::VBox(0,0),
@@ -1512,9 +1512,9 @@ sub info {
     $info .= _("Monitor: %s\n", $o->{monitor}{type});
     $info .= _("Monitor HorizSync: %s\n", $o->{monitor}{hsyncrange}) if $::expert;
     $info .= _("Monitor VertRefresh: %s\n", $o->{monitor}{vsyncrange}) if $::expert;
-    $info .= _("Graphic card: %s\n", $o->{card}{type});
-    $info .= _("Graphic card identification: %s\n", $o->{card}{identifier}) if $::expert;
-    $info .= _("Graphic memory: %s kB\n", $o->{card}{memory}) if $o->{card}{memory};
+    $info .= _("Graphics card: %s\n", $o->{card}{type});
+    $info .= _("Graphics card identification: %s\n", $o->{card}{identifier}) if $::expert;
+    $info .= _("Graphics memory: %s kB\n", $o->{card}{memory}) if $o->{card}{memory};
     if ($o->{default_depth} and my $depth = $o->{card}{depth}{$o->{default_depth}}) {
 	$info .= _("Color depth: %s\n", translate($depths{$o->{default_depth}}));
 	$info .= _("Resolution: %s\n", join "x", @{$depth->[0]}) if $depth && !is_empty_array_ref($depth->[0]);
@@ -1564,7 +1564,7 @@ sub main {
 		    { format => sub { $_[0][0] }, val => \$f,
 		      list => [
 	   [ _("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() } ],
-           [ _("Change Graphic card") => sub { my $card = cardConfiguration('', 'noauto', $cardOptions);
+           [ _("Change Graphics card") => sub { my $card = cardConfiguration('', 'noauto', $cardOptions);
 					       $card and $o->{card} = $card } ],
                     if_($::expert, 
            [ _("Change Server options") => sub { optionsConfiguration($o) } ]),
@@ -1580,7 +1580,7 @@ sub main {
     }
     if (!$ok) {
 	$ok = $in->ask_yesorno('', _("Keep the changes?
-Current configuration is:
+The current configuration is:
 
 %s", info($o)));
     }
@@ -1600,9 +1600,9 @@ Current configuration is:
 
 	if (!$::isStandalone || $0 !~ /Xdrakres/) {
 	    $in->set_help('configureXxdm') unless $::isStandalone;
-	    my $run = exists $o->{xdm} ? $o->{xdm} : $::auto || $in->ask_yesorno(_("X at startup"),
-_("I can set up your computer to automatically start X upon booting.
-Would you like X to start when you reboot?"), 1);
+	    my $run = exists $o->{xdm} ? $o->{xdm} : $::auto || $in->ask_yesorno(_("Graphical interface at startup"),
+_("I can setup your computer to automatically start the graphical interface (XFree) upon booting.
+Would you like XFree to start when you reboot?"), 1);
 	    any::runlevel($prefix, $run ? 5 : 3) unless $::testing;
 	}
 	if ($::isStandalone && $in->isa('interactive_gtk')) {

@@ -680,7 +680,7 @@ sub add_extended {
 	    eval { verifyPrimary($hd->{primary}) };
 	    $@ and die
 _("You have a hole in your partition table but I can't use it.
-The only solution is to move your primary partitions to have the hole next to the extended partitions");
+The only solution is to move your primary partitions to have the hole next to the extended partitions.");
 	}
     }
 

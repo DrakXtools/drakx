@@ -162,7 +162,11 @@ ifdown eth0
     $::Wizard_no_previous=1;
     my @profiles=get_profiles();
     $in->ask_from(_("Network Configuration Wizard"),
-		  _("Welcome to The Network Configuration Wizard\n\nWe are about to configure your internet/network connection.\nIf you don't want to use the auto detection, deselect the checkbox.\n"),
+		  _("Welcome to The Network Configuration Wizard.
+
+We are about to configure your internet/network connection.
+If you don't want to use the auto detection, deselect the checkbox.
+"),
 		  [
 		   if_(@profiles > 1, { label => _("Choose the profile to configure"), val => \$netcnx->{PROFILE}, list => \@profiles }),
 		   { label => _("Use auto detection"), val => \$netc->{autodetection}, type => 'bool' },
@@ -265,7 +269,7 @@ The configuration will now be applied to your system.
 ") . if_($::isStandalone && $in->isa('interactive_gtk'),
 _("After this is done, we recommend that you restart your X environment to avoid any hostname-related problems."))
       : _("Problems occured during configuration.
-Test your connection via net_monitor or mcc. If your connection doesn't work, you might want to relaunch the configuration");
+Test your connection via net_monitor or mcc. If your connection doesn't work, you might want to relaunch the configuration.");
     if ($::isWizard) {
 	$::Wizard_no_previous=1;
 	$::Wizard_finished=1;

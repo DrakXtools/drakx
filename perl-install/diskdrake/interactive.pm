@@ -990,7 +990,7 @@ sub need_migration {
     if (@l && $::isStandalone) {
 	my $choice;
 	my @choices = (__("Move files to the new partition"), __("Hide files"));
-	$in->ask_from('', _("Directory %s already contain some data\n(%s)", $mntpoint, formatList(5, @l)), 
+	$in->ask_from('', _("Directory %s already contains data\n(%s)", $mntpoint, formatList(5, @l)), 
 		      [ { val => \$choice, list => \@choices, type => 'list' } ]) or return;
 	$choice eq $choices[0] ? 'migrate' : 'hide';
     } else {

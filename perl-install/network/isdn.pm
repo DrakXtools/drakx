@@ -167,7 +167,7 @@ sub isdn_ask_info {
     my ($isdn, $netc) = @_;
     my $f = "$ENV{SHARE_PATH}/ldetect-lst/isdn.db";
     $f = "$prefix$f" if !-e $f;
-    my $str= $in->ask_from_treelist( _("ISDN Configuration"), _("Select your provider.\n If it's not in the list, choose Unlisted"),
+    my $str= $in->ask_from_treelist( _("ISDN Configuration"), _("Select your provider.\nIf it isn't listed, choose Unlisted."),
 				     '|', ['Unlisted - edit manually',
 					   read_providers_backend($f)], 'Unlisted - edit manually')
       or return;
@@ -182,11 +182,11 @@ sub isdn_ask_protocol {
     my @toto=(
 	      { description => $::expert ? _("Europe protocol (EDSS1)") : _("Europe protocol"),
 		protokol => 2},
-	      { description => $::expert ? _("Protocol for the rest of the world \n no D-Channel (leased lines)") : _("Protocol for the rest of the world"),
+	      { description => $::expert ? _("Protocol for the rest of the world\nNo D-Channel (leased lines)") : _("Protocol for the rest of the world"),
 		protokol => 3}
 	     );
     my $e = $in->ask_from_listf(_("ISDN Configuration"),
-				_("Which protocol do you want to use ?"),
+				_("Which protocol do you want to use?"),
 				sub { $_[0]{description} },
 				\@toto ) or return 0;
     $e->{protokol};
@@ -205,7 +205,7 @@ sub isdn_ask {
 	$in->ask_from_list_(_("ISDN Configuration"),
 			    _("
 If you have an ISA card, the values on the next screen should be right.\n
-If you have a PCMCIA card, you have to know the irq and io of your card.
+If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
 "),
 			    [ __("Continue"), __("Abort") ]) eq 'Continue' or goto isdn_ask_step_1;
 	$isdn->{card_type} = 'isa';
@@ -213,7 +213,7 @@ If you have a PCMCIA card, you have to know the irq and io of your card.
 
   isdn_ask_step_2:
     $e = $in->ask_from_listf(_("ISDN Configuration"),
-			     _("Which is your ISDN card ?"),
+			     _("Which is your ISDN card?"),
 			     sub { $_[0]{description} },
 			     [ grep {$_->{card} eq $isdn->{card_type}; } @isdndata ] ) or goto isdn_ask_step_1;
     $e->{$_} and $isdn->{$_} = $e->{$_} foreach qw(driver type mem io io0 io1 irq firmware);
@@ -232,7 +232,7 @@ sub isdn_detect {
   	log::l("found isdn card : $isdn->{description}; vendor : $isdn->{vendor};id : $isdn->{id}; driver : $isdn->{driver}\n");
 	$isdn->{description} =~ s/\|/ -- /;
 	if ($isdn->{type} eq '') {
-	    isdn_ask($isdn, $netc, _("I have detected an ISDN PCI Card, but I don't know the type. Please select one PCI card on the next screen.")) or return;
+	    isdn_ask($isdn, $netc, _("I have detected an ISDN PCI card, but I don't know its type. Please select a PCI card on the next screen.")) or return;
 	} else {
 	  isdn_detect_step_1:
 	    $isdn->{protocol}=isdn_ask_protocol() or return;

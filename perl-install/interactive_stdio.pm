@@ -91,7 +91,7 @@ ask_fromW_begin:
 	    $i and ${$e->{val}} = ${$e->{list}}[$i-1], $common->{callbacks}{changed}->($ind);
 	} elsif ($e->{type} eq 'button') {
 	    print _("Button `%s': %s", $e->{label}, may_apply($e->{format}, ${$e->{val}})), " $e->{text}\n";
-	    print _("Do you want to click on this button? ");
+	    print _("Do you want to click on this button?");
 	    my $i = readln();
 	    ($i && $i !~ /^n/i) and $e->{clicked_may_quit}(), $common->{callbacks}{changed}->($ind);
 	} elsif ($e->{type} eq 'label') {
@@ -100,7 +100,7 @@ ask_fromW_begin:
 	    print $t;
 	} elsif ($e->{type} eq 'entry') {
 	    print "$e->{label} $e->{text}\n";
-	    print _("Your choice? (default `%s'%s) ", ${$e->{val}}, ${$e->{val}} ne '' ? " enter `void' for void entry" : '');
+	    print _("Your choice? (default `%s'%s) ", ${$e->{val}}, ${$e->{val}} ne '' ? _(" enter `void' for void entry") : '');
 	    my $i = readln();
 	    ${$e->{val}} = $i || ${$e->{val}};
 	    ${$e->{val}} = '' if ${$e->{val}} eq 'void';

@@ -324,7 +324,7 @@ sub ask_mntpoint_s {
     my @fstab = grep { isTrueFS($_) } @$fstab;
     @fstab = grep { isSwap($_) } @$fstab if @fstab == 0;
     @fstab = @$fstab if @fstab == 0;
-    die _("no available partitions") if @fstab == 0;
+    die _("No partition available") if @fstab == 0;
 
     {
 	my $w = $o->wait_message('', _("Scanning partitions to find mount points"));
@@ -470,13 +470,13 @@ sub formatMountPartitions {
 #------------------------------------------------------------------------------
 sub setPackages {
     my ($o) = @_;
-    my $w = $o->wait_message('', _("Looking for available packages"));
+    my $w = $o->wait_message('', _("Looking for available packages..."));
     $o->SUPER::setPackages;
 }
 #------------------------------------------------------------------------------
 sub selectPackagesToUpgrade {
     my ($o) = @_;
-    my $w = $o->wait_message('', _("Finding packages to upgrade"));
+    my $w = $o->wait_message('', _("Finding packages to upgrade..."));
     $o->SUPER::selectPackagesToUpgrade();
 }
 #------------------------------------------------------------------------------
@@ -893,7 +893,7 @@ Do you want to install the updates ?"))) || return;
     require crypto;
     eval {
 	my @mirrors = do { my $w = $o->wait_message('',
-						    _("Contacting Mandrake Linux web site to get the list of available mirrors"));
+						    _("Contacting Mandrake Linux web site to get the list of available mirrors..."));
 			   crypto::mirrors() };
 	#- if no mirror have been found, use current time zone and propose among available.
 	$u->{mirror} ||= crypto::bestMirror($o->{timezone}{timezone});
@@ -907,7 +907,7 @@ Do you want to install the updates ?"))) || return;
     return if $@ || !$u->{mirror};
 
     my $update_medium = do {
-	my $w = $o->wait_message('', _("Contacting the mirror to get the list of available packages"));
+	my $w = $o->wait_message('', _("Contacting the mirror to get the list of available packages..."));
 	crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
     };
 
@@ -1079,7 +1079,7 @@ sub setRootPassword {
 	     complete => sub {
 		 $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,0);
 		 length $sup->{password} < 2 * $o->{security}
-		   and $o->ask_warn('', _("This password is too simple (must be at least %d characters long)", 2 * $o->{security})), return (1,0);
+		   and $o->ask_warn('', _("This password is too short (it must be at least %d characters long)", 2 * $o->{security})), return (1,0);
 		 return 0
         } } }, [
 { label => _("Password"), val => \$sup->{password},  hidden => 1 },
@@ -1186,14 +1186,14 @@ because XFS needs a very large driver).") : '')),
         $o->ask_warn('', _("Insert a floppy in %s", $l{$o->{mkbootdisk}} || $o->{mkbootdisk}));
     }
 
-    my $w = $o->wait_message('', _("Creating bootdisk"));
+    my $w = $o->wait_message('', _("Creating bootdisk..."));
     install_steps::createBootdisk($o);
 }
 
 #------------------------------------------------------------------------------
 sub setupBootloaderBefore {
     my ($o) = @_;
-    my $w = $o->wait_message('', _("Preparing bootloader"));
+    my $w = $o->wait_message('', _("Preparing bootloader..."));
     $o->set_help('empty');
     $o->SUPER::setupBootloaderBefore($o);
 }
@@ -1282,7 +1282,7 @@ sub generateAutoInstFloppy {
 
     my $dev = devices::make($floppy);
     {
-	my $w = $o->wait_message('', _("Creating auto install floppy"));
+	my $w = $o->wait_message('', _("Creating auto install floppy..."));
 	install_any::getAndSaveAutoInstallFloppy($o, $replay, $dev) or return;
     }
     common::sync();         #- if you shall remove the floppy right after the LED switches off

@@ -61,7 +61,7 @@ Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 	}
 	if (!grep { isSwap($_) } @fstab) {
 	    $o->ask_warn('', _("You must have a swap partition")), $ok=0 if !$::expert;
-	    $ok &&= $::expert || $o->ask_okcancel('', _("You don't have a swap partition\n\nContinue anyway?"));
+	    $ok &&= $::expert || $o->ask_okcancel('', _("You don't have a swap partition.\n\nContinue anyway?"));
 	}
 	if (arch() =~ /ia64/ && !fsedit::has_mntpoint("/boot/efi", $all_hds)) {
 	    $o->ask_warn('', _("You must have a FAT partition mounted in /boot/efi"));
@@ -97,7 +97,7 @@ sub partitionWizardSolutions {
 
     if (my @truefs = grep { isTrueFS($_) } @$fstab) {
 	#- value twice the ext2 partitions
-	$solutions{existing_part} = [ 6 + @truefs + @$fstab, _("Use existing partition"), sub { $o->ask_mntpoint_s($fstab) } ]
+	$solutions{existing_part} = [ 6 + @truefs + @$fstab, _("Use existing partitions"), sub { $o->ask_mntpoint_s($fstab) } ]
     } else {
 	push @wizlog, _("There is no existing partition to use");
     }
@@ -127,13 +127,13 @@ sub partitionWizardSolutions {
 		$o->set_help('resizeFATChoose');
 		my $part = $o->ask_from_listf('', _("Which partition do you want to resize?"), \&partition_table::description, \@ok_forloopback) or return;
 		$o->set_help('resizeFATWait');
-		my $w = $o->wait_message(_("Resizing"), _("Computing Windows filesystem bounds"));
+		my $w = $o->wait_message(_("Resizing"), _("Resizing Windows partition"));
 		require resize_fat::main;
 		my $resize_fat = eval { resize_fat::main->new($part->{device}, devices::make($part->{device})) };
 		$@ and die _("The FAT resizer is unable to handle your partition, 
 the following error occured: %s", $@);
 		my $min_win = $resize_fat->min_size;
-		$part->{size} > $min_linux + $min_swap + $min_freewin + $min_win or die _("Your Windows partition is too fragmented, please run ``defrag'' first");
+		$part->{size} > $min_linux + $min_swap + $min_freewin + $min_win or die _("Your Windows partition is too fragmented. Please reboot your computer under Windows, run the ``defrag'' utility, then restart the Mandrake Linux installation.");
 		$o->ask_okcancel('', _("WARNING!
 
 DrakX will now resize your Windows partition. Be careful:
@@ -144,7 +144,7 @@ installation. You should also backup your data.
 When sure, press Ok.")) or return;
 
 		my $mb_size = $part->{size} >> 11;
-		$o->ask_from('', _("Which size do you want to keep for windows on"), [
+		$o->ask_from('', _("Which size do you want to keep for Windows on"), [
                    { label => _("partition %s", partition_table::description($part)), val => \$mb_size, min => $min_win >> 11, max => ($part->{size} - $min_linux - $min_swap) >> 11, type => 'range' },
                 ]) or return;
 
@@ -167,7 +167,7 @@ When sure, press Ok.")) or return;
 		1;
 	    } ] if !$readonly;
     } else {
-	push @wizlog, _("There is no FAT partitions to resize or to use as loopback (or not enough space left)") .
+	push @wizlog, _("There is no FAT partition to resize or to use as loopback (or not enough space left)") .
 	  @fats ? "\nFAT partitions:" . join('', map { "\n  $_->{device} $_->{free} (" . ($min_linux + $min_swap + $min_freewin) . ")" } @fats) : '';
     }
 

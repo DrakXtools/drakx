@@ -483,7 +483,7 @@ sub check_mntpoint {
       if ($mntpoint eq '/' || $mntpoint eq '/boot') && isLVM($hd);
     die _("This directory should remain within the root filesystem")
       if member($mntpoint, qw(/bin /dev /etc /lib /sbin));
-    die _("You need a true filesystem (ext2, reiserfs) for this mount point\n")
+    die _("You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n")
       if !isTrueFS($part) && member($mntpoint, qw(/ /home /tmp /usr /var));
     die _("You can't use an encrypted file system for mount point %s", $mntpoint)
       if $part->{options} =~ /encrypted/ && member($mntpoint, qw(/ /usr /var));
@@ -694,7 +694,7 @@ sub verifyHds {
     my ($hds, $readonly, $ok) = @_;
 
     if (is_empty_array_ref($hds)) { #- no way
-	die _("An error has occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
+	die _("An error occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
     }
 
     my @parts = readProcPartitions($hds);

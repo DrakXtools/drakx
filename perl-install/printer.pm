@@ -596,7 +596,7 @@ sub read_printer_db(;$) {
 	    "foomatic-configure -O -q |" ||
 		die "Could not run foomatic-configure";
     } else {
-	open DBPATH, $dbpath or die "An error has occurred on $dbpath : $!";
+	open DBPATH, $dbpath or die "An error occurred on $dbpath : $!";
     }
 
     my $entry = {};

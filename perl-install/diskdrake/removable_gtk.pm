@@ -25,7 +25,7 @@ sub per_entry_action_box {
 			    createScrolledWindow(gtkpack__(new Gtk::VBox(0,0), @buttons)))) if @buttons;
 	    
     } else {
-	my $txt = _("Please click on a media");
+	my $txt = _("Please click on a medium");
 	gtkpack($box, gtktext_insert(new Gtk::Text, $txt));
     }
 }

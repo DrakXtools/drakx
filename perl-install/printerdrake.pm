@@ -142,7 +142,7 @@ sub setup_printer_connection {
 sub auto_detect {
     my ($in) = @_;
     {
-	my $w = $in->wait_message(_("Test ports"), _("Detecting devices ..."));
+	my $w = $in->wait_message(_("Test ports"), _("Detecting devices..."));
 	modules::get_alias("usb-interface") and eval { modules::load("printer"); sleep(2); };
 	foreach (qw(lp parport_pc parport_probe parport)) {
 	    eval { modules::unload($_); }; #- on kernel 2.4 parport has to be unloaded to probe again
@@ -486,7 +486,7 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 	}
 	# Configure and start HPOJ
 	my $w = $in->wait_message
-	    ('', _("Checking device and configuring HPOJ ..."));
+	    ('', _("Checking device and configuring HPOJ..."));
 	$ptaldevice = printer::configure_hpoj($device, @parport);
 
 	if ($ptaldevice) {
@@ -533,7 +533,7 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
     #- if CUPS is the spooler, make sure that CUPS knows the device
     if ($printer->{SPOOLER} eq "cups") {
 	my $w = $in->wait_message
-	    ('', _("Making printer port available for CUPS ..."));
+	    ('', _("Making printer port available for CUPS..."));
 	if ($ptaldevice eq "") {
 	    printer::assure_device_is_available_for_cups($device);
 	} else {
@@ -543,7 +543,7 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 
     #- Read the printer driver database if necessary
     if ((keys %printer::thedb) == 0) {
-	my $w = $in->wait_message('', _("Reading printer database ..."));
+	my $w = $in->wait_message('', _("Reading printer database..."));
         printer::read_printer_db($printer->{SPOOLER});
     }
 
@@ -1017,10 +1017,10 @@ sub get_db_entry {
     my ($printer, $in) = @_;
     #- Read the printer driver database if necessary
     if ((keys %printer::thedb) == 0) {
-	my $w = $in->wait_message('', _("Reading printer database ..."));
+	my $w = $in->wait_message('', _("Reading printer database..."));
         printer::read_printer_db($printer->{SPOOLER});
     }
-    my $w = $in->wait_message('', _("Preparing printer database ..."));
+    my $w = $in->wait_message('', _("Preparing printer database..."));
     my $queue = $printer->{OLD_QUEUE};
     if ($printer->{configured}{$queue}) {
 	# The queue was already configured
@@ -1131,7 +1131,7 @@ sub choose_model {
     $in->set_help('chooseModel') if $::isInstall;
     #- Read the printer driver database if necessary
     if ((keys %printer::thedb) == 0) {
-	my $w = $in->wait_message('', _("Reading printer database ..."));
+	my $w = $in->wait_message('', _("Reading printer database..."));
         printer::read_printer_db($printer->{SPOOLER});
     }
     if (!$printer::thedb{$printer->{DBENTRY}}) {
@@ -1152,7 +1152,7 @@ sub get_printer_info {
     my ($printer, $in) = @_;
     #- Read the printer driver database if necessary
     #if ((keys %printer::thedb) == 0) {
-    #    my $w = $in->wait_message('', _("Reading printer database ..."));
+    #    my $w = $in->wait_message('', _("Reading printer database..."));
     #    printer::read_printer_db($printer->{SPOOLER});
     #}
     my $queue = $printer->{OLD_QUEUE};
@@ -1461,7 +1461,7 @@ sub setup_options {
 		push(@userinputs, $optshortdefault);
 		push(@widgets,
 		     { label => $printer->{ARGS}[$i]{'comment'} . 
-			   " ($printer->{ARGS}[$i]{'min'} ... " .
+			   " ($printer->{ARGS}[$i]{'min'}... " .
 			       "$printer->{ARGS}[$i]{'max'})",
 			   #type => 'range',
 			   #min => $printer->{ARGS}[$i]{'min'},
@@ -1794,7 +1794,7 @@ sub copy_queues_from {
     my $oldspoolerstr;
     my $noninteractive = 0;
     {
-	my $w = $in->wait_message('', _("Reading printer data ..."));
+	my $w = $in->wait_message('', _("Reading printer data..."));
 	@oldqueues = printer::get_copiable_queues($oldspooler, $newspooler);
 	@oldqueues = sort(@oldqueues);
 	$newspoolerstr = $printer::shortspooler_inv{$newspooler};
@@ -1867,7 +1867,7 @@ You can also type a new name or skip this printer.",
 		      [{label => _("New printer name"),val => \$newqueue}]))) {
 		    {
 			my $w = $in->wait_message('', 
-			   _("Transferring %s ...", $oldqueue));
+			   _("Transferring %s...", $oldqueue));
 		        printer::copy_foomatic_queue($printer, $oldqueue,
 						   $oldspooler, $newqueue) and
 							 $queuecopied = 1;
@@ -1887,7 +1887,7 @@ You can also type a new name or skip this printer.",
             }
 	}
         if ($queuecopied) {
-	    my $w = $in->wait_message('', _("Refreshing printer data ..."));
+	    my $w = $in->wait_message('', _("Refreshing printer data..."));
 	    printer::read_configured_queues($printer);
         }
     }
@@ -1896,7 +1896,7 @@ You can also type a new name or skip this printer.",
 sub start_network {
     my ($in, $upNetwork) = @_;
     my $w = $in->wait_message(_("Configuration of a remote printer"), 
-			      _("Starting network ..."));
+			      _("Starting network..."));
     if ($::isInstall) {
 	return ($upNetwork and 
 		do { my $ret = &$upNetwork(); 
@@ -1979,7 +1979,7 @@ _("The network access was not running and could not be started. Please check you
     # interrupt print jobs.
 
     my $w = $in->wait_message(_("Configuration of a remote printer"), 
-			      _("Restarting printing system ..."));
+			      _("Restarting printing system..."));
 
     return printer::SIGHUP_daemon($printer->{SPOOLER});
 
@@ -2221,7 +2221,7 @@ sub setup_default_spooler {
 	printer::removelocalprintersfromapplications($printer);
 	# Get the queues of this spooler
 	{
-	    my $w = $in->wait_message('', _("Reading printer data ..."));
+	    my $w = $in->wait_message('', _("Reading printer data..."));
 	    printer::read_configured_queues($printer);
 	}
 	# Copy queues from former spooler
@@ -2229,7 +2229,7 @@ sub setup_default_spooler {
 	# Re-read the printer database (CUPS has additional drivers, PDQ
 	# has no raw queue)
 	%printer::thedb = ();
-	#my $w = $in->wait_message('', _("Reading printer database ..."));
+	#my $w = $in->wait_message('', _("Reading printer database..."));
 	#printer::read_printer_db($printer->{SPOOLER});
     }
     # Save spooler choice
@@ -2239,7 +2239,7 @@ sub setup_default_spooler {
 
 sub configure_queue {
     my ($printer, $in) = @_;
-    my $w = $in->wait_message('', _("Configuring printer \"%s\" ...",
+    my $w = $in->wait_message('', _("Configuring printer \"%s\"...",
 				    $printer->{currentqueue}{queue}));
     $printer->{complete} = 1;
     printer::configure_queue($printer);
@@ -2252,7 +2252,7 @@ sub install_foomatic {
 	(!printer::files_exist((qw(/usr/bin/foomatic-configure
 				       /usr/lib/perl5/site_perl/5.6.1/Foomatic/DB.pm)
 				    )))) {
-	my $w = $in->wait_message('', _("Installing Foomatic ..."));
+	my $w = $in->wait_message('', _("Installing Foomatic..."));
 	$in->do_pkgs->install('foomatic');
     }
 }
@@ -2318,7 +2318,7 @@ sub main {
 	# Get the default printer
 	if (defined($printer->{SPOOLER}) && ($printer->{SPOOLER} ne '') &&
 	    ((!defined($printer->{DEFAULT})) || ($printer->{DEFAULT} eq ''))) {
-	    my $w = $in->wait_message('', _("Preparing PrinterDrake ..."));
+	    my $w = $in->wait_message('', _("Preparing PrinterDrake..."));
 	    $printer->{DEFAULT} = printer::get_default_printer($printer);
 	    if ($printer->{DEFAULT}) {
 		# If a CUPS system has only remote printers and no default
@@ -2481,11 +2481,11 @@ sub main {
 			$::expert = !$::expert;
 			# Read printer database for the new user mode
 			%printer::thedb = ();
-			#my $w = $in->wait_message('', _("Reading printer database ..."));
+			#my $w = $in->wait_message('', _("Reading printer database..."));
 		        #printer::read_printer_db($printer->{SPOOLER});
 			# Re-read printer queues to switch the tree
 			# structure between expert/normal mode.
-			my $w = $in->wait_message('', _("Reading printer data ..."));
+			my $w = $in->wait_message('', _("Reading printer data..."));
 			printer::read_configured_queues($printer);
 			$cursorpos = "::";
 			next;
@@ -2786,7 +2786,7 @@ What do you want to modify on this printer?",
 			configure_queue($printer, $in);
 		    # Delete old queue when it was renamed
 		    if (lc($printer->{QUEUE}) ne lc($printer->{OLD_QUEUE})) {
-			my $w = $in->wait_message('', _("Removing old printer \"%s\" ...", $printer->{OLD_QUEUE}));
+			my $w = $in->wait_message('', _("Removing old printer \"%s\"...", $printer->{OLD_QUEUE}));
 		        printer::remove_queue($printer, $printer->{OLD_QUEUE});
 			# If the default printer was renamed, correct the
 			# the default printer setting of the spooler
@@ -2838,7 +2838,7 @@ What do you want to modify on this printer?",
 		    if ($in->ask_yesorno('',
            _("Do you really want to remove the printer \"%s\"?", $queue), 1)) {
 			{
-			    my $w = $in->wait_message('', _("Removing printer \"%s\" ...", $queue));
+			    my $w = $in->wait_message('', _("Removing printer \"%s\"...", $queue));
 			    if (printer::remove_queue($printer, $queue)) { 
 				$editqueue = 0;
 				# Define a new default printer if we have

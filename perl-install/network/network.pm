@@ -290,7 +290,7 @@ sub configureNetworkIntf {
     }
     if ($net_device eq $intf->{DEVICE}) {
 	$skip and return 1;
-	$text = _("WARNING: This device has been previously configured to connect to the Internet.
+	$text = _("WARNING: this device has been previously configured to connect to the Internet.
 Simply accept to keep this device configured.
 Modifying the fields below will override this configuration.");
     }
@@ -385,7 +385,7 @@ sub miscellaneousNetwork {
        _("Proxies configuration"),
        [ { label => _("HTTP proxy"), val => \$u->{http_proxy} },
          { label => _("FTP proxy"),  val => \$u->{ftp_proxy} },
-	 if_(!$no_track_net, { label => _("Track network card id (usefull for laptops)"), val => \$u->{track_network_id}, type => "bool" }),
+	 if_(!$no_track_net, { label => _("Track network card id (useful for laptops)"), val => \$u->{track_network_id}, type => "bool" }),
        ],
        complete => sub {
 	   $u->{http_proxy} =~ m,^($|http://), or $in->ask_warn('', _("Proxy should be http://...")), return 1,0;
