@@ -816,7 +816,7 @@ sub configureTimezone {
 sub configureServices { 
     my ($o, $clicked) = @_;
     require services;
-    $o->{services} = services::ask($o, $o->{prefix}) if $::expert || $clicked;
+    $o->{services} = services::ask($o) if $::expert || $clicked;
     install_steps::configureServices($o);
 }
 

@@ -698,7 +698,7 @@ sub configureServices {
     my ($o) = @_;
     if ($o->{services}) {
 	require services;
-	services::doit($o, $o->{services}, $o->{prefix});
+	services::doit($o, $o->{services});
     }
 }
 #------------------------------------------------------------------------------

@@ -88,14 +88,14 @@ to various system log files.  It is a good idea to always run syslog."),
 usb => N_("Load the drivers for your usb devices."),
 xfs => N_("Starts the X Font Server (this is mandatory for XFree to run)."),
     );
-    my ($name, $prefix) = @_;
+    my ($name) = @_;
     my $s = $services{$name};
     if ($s) {
 	$s = translate($s);
     } else {
-	$s = -e "$prefix/etc/rc.d/init.d/$name" && cat_("$prefix/etc/rc.d/init.d/$name");
-	$s ||= -e "$prefix/etc/init.d/$name" && cat_("$prefix/etc/init.d/$name");
-	$s ||= -e "$prefix/etc/xinetd.d/$name" && cat_("$prefix/etc/xinetd.d/$name");
+	$s = -e "$::prefix/etc/rc.d/init.d/$name" && cat_("$::prefix/etc/rc.d/init.d/$name");
+	$s ||= -e "$::prefix/etc/init.d/$name" && cat_("$::prefix/etc/init.d/$name");
+	$s ||= -e "$::prefix/etc/xinetd.d/$name" && cat_("$::prefix/etc/xinetd.d/$name");
 	$s =~ s/\\\s*\n#\s*//mg;
 	if ($s =~ /^# description:\s+\S/sm) {
 	    ($s) = $s =~ /^# description:\s+(.*?)^(?:[^#]|# {0,2}\S)/sm;
@@ -109,20 +109,20 @@ xfs => N_("Starts the X Font Server (this is mandatory for XFree to run)."),
 }
 
 sub ask_install_simple {
-    my ($in, $prefix) = @_;
-    my ($l, $on_services) = services($prefix);
+    my ($in) = @_;
+    my ($l, $on_services) = services();
     $in->ask_many_from_list("drakxservices",
 			    N("Choose which services should be automatically started at boot time"),
 			    {
 			     list => $l,
-			     help => sub { description($_[0], $prefix) },
+			     help => sub { description($_[0]) },
 			     values => $on_services,
 			     sort => 1,
 			    });
 }
 
 sub ask_install {
-    my ($in, $prefix) = @_;
+    my ($in) = @_;
     my %root_services = (
 			 N("Printing") => [ qw(cups cupslpd lpr lpd oki4daemon hpoj cups-lpd) ],
 			 N("Internet") => [ qw(httpd boa tux roxen ftp pftp tftp proftpd wu-ftpd pure-ftpdipsec proftpd-xinetd
@@ -149,7 +149,7 @@ sub ask_install {
     foreach my $root (keys %root_services) {
 	$services_root{$_} = $root foreach @{$root_services{$root}};
     }
-    my ($l, $on_services) = services($prefix);
+    my ($l, $on_services) = services();
     my %services;
     $services{$_} = 0 foreach @{$l || []};
     $services{$_} = 1 foreach @{$on_services || []};
@@ -176,15 +176,15 @@ sub ask_install {
 				     scalar(grep { $_ } values %services),
 				     scalar(values %services));
 			       },
-			       get_info => sub { formatLines(description($_[0], $prefix)) },
+			       get_info => sub { formatLines(description($_[0])) },
 			       interactive_help_id => 'configureServices',
 			      }) or return ($l, $on_services); #- no change on cancel.
     [ grep { $services{$_} } @$l ];
 }
 
 sub ask_standalone_gtk {
-    my ($_in, $prefix) = @_;
-    my ($l, $on_services) = services($prefix);
+    my ($_in) = @_;
+    my ($l, $on_services) = services();
 
     require ugtk2;
     ugtk2->import(qw(:wrappers :create));
@@ -210,7 +210,7 @@ sub ask_standalone_gtk {
 	1, gtkset_size_request(create_scrolled_window(create_packtable({ col_spacings => 10, row_spacings => 3 },
 	    map {
                 my $service = $_;
-        	my $infos = warp_text(description($_, $prefix), 40);
+        	my $infos = warp_text(description($_), 40);
                 $infos ||= N("No additional information\nabout this service, sorry.");
 		my $l = Gtk2::Label->new;
                 my ($started, $action) = $update_service->($service, gtkset_justify($l, 'left'));
@@ -247,25 +247,25 @@ sub ask_standalone_gtk {
 }
 
 sub ask {    
-    my ($in, $_prefix) = @_;
+    my ($in) = @_;
     !$::isInstall && $in->isa('interactive::gtk') ? &ask_standalone_gtk : &ask_install;
 }
 
 sub doit {
-    my ($_in, $on_services, $prefix) = @_;
-    my ($l, $was_on_services) = services($prefix);
+    my ($_in, $on_services) = @_;
+    my ($l, $was_on_services) = services();
 
     foreach (@$l) {
 	my $before = member($_, @$was_on_services);
 	my $after = member($_, @$on_services);
 	if ($before != $after) {
 	    my $script = "/etc/rc.d/init.d/$_";
-	    run_program::rooted($prefix, "chkconfig", $after ? "--add" : "--del", $_);
-	    if ($after && cat_("$prefix$script") =~ /^#\s+chkconfig:\s+-/m) {
-		run_program::rooted($prefix, "chkconfig", "--level", "35", $_, "on");
+	    run_program::rooted($::prefix, "chkconfig", $after ? "--add" : "--del", $_);
+	    if ($after && cat_("$::prefix$script") =~ /^#\s+chkconfig:\s+-/m) {
+		run_program::rooted($::prefix, "chkconfig", "--level", "35", $_, "on");
 	    }
 	    if (!$after && $::isStandalone) {
-		run_program::rooted($prefix, $script, "stop");
+		run_program::rooted($::prefix, $script, "stop");
 	    }
 	}
     }
@@ -275,9 +275,8 @@ sub doit {
 #--- the listref of installed services
 #--- the listref of "on" services
 sub services {
-    my ($prefix) = @_;
     local $ENV{LANGUAGE} = 'C';
-    my @raw_l = run_program::rooted_get_stdout($prefix, '/sbin/chkconfig', '--list');
+    my @raw_l = run_program::rooted_get_stdout($::prefix, '/sbin/chkconfig', '--list');
     my @l = sort { $a->[0] cmp $b->[0] } map { [ /([^\s:]+)/, /\bon\b/ ] } grep { !/:$/ } @raw_l;
     [ map { $_->[0] } @l ], [ map { $_->[0] } grep { $_->[1] } @l ];
 }
