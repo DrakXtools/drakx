@@ -54,7 +54,7 @@ $::isEmbedded and kill USR2, $::CCPID;
 #	      { label => _($st->{$f}{text}), val => \$def_choice, list => [ 'replay', 'manual' ] }
 #	     )
 
-my $libsafe);
+my $libsafe;
 my $secure_level;
 if (-e "$prefix/etc/profile.d/msec.sh") {
     local $_ = cat_("$prefix/etc/profile.d/msec.sh");
