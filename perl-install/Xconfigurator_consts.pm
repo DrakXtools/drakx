@@ -11,7 +11,8 @@ use common qw(:common);
 );
 @depths = ikeys(%depths);
 
-@resolutions = qw(640x480 800x600 1024x768 1152x864 1280x1024 1600x1200);
+@resolutions        = qw(640x480 800x600 1024x768 1152x864 1280x1024           1600x1200);
+@resolutions_laptop = qw(640x480 800x600 1024x768 1152x864 1280x1024 1400x1050 1600x1200);
 
 @window_managers = ('kdeinit: kwin', qw(gnome-session icewm wmaker kwm afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish));
 
@@ -656,6 +657,26 @@ Modeline "800x600"     50     800  856  976 1040   600  637  643  666 +hsync +vs
 #Modeline "1024x768"    65    1024 1032 1176 1344   768  771  777  806 -hsync -vsync
 # 1024x768 @ 70 Hz, 56.5 kHz hsync
 Modeline "1024x768"    75    1024 1048 1184 1328   768  771  777  806 -hsync -vsync
+';
+$modelines_text_ext = '
+# This is a set of extended mode timings typically used for laptop,
+# TV fullscreen mode or DVD fullscreen output.
+# These are available along with standard mode timings.
+
+# 768x576 @ 79 Hz, 50 kHz hsync
+ModeLine "768x576"     50.00  768  832  846 1000   576  590  595  630
+# 768x576 @ 100 Hz, 61.6 kHz hsync
+ModeLine "768x576"     63.07  768  800  960 1024   576  578  590  616
+
+# 1400x1050 @ 30 Hz, 33 kHz hsync
+ModeLine "1400x1050"   59.93 1400 1416 1704 1816  1050 1050 1055 1097
+# 1400x1050 @ 51 Hz, 56 kHz hsync
+ModeLine "1400x1050"  107.00 1400 1464 1784 1912  1050 1052 1064 1090
+# 1400x1050 @ 59 Hz, 63.8 kHz hsync
+ModeLine "1400x1050"  122.00 1400 1464 1784 1912  1050 1052 1064 1090 -HSync -VSync
+# 1400x1050 @ 60 Hz, 65.4 kHz hsync
+ModeLine "1400x1050"  125.04 1400 1464 1784 1912  1050 1052 1064 1090
+
 ';
 $modelines_text_apple = '
 Section "Modes"
