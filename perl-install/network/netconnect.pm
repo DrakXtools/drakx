@@ -649,6 +649,7 @@ killall pppd
                             $in->do_pkgs->ensure_is_installed_if_available('speedtouch_mgmt', "$::prefix/usr/share/speedtouch/mgmt.o");
                             return 'adsl_speedtouch_firmware' if ! -e "$::prefix/usr/share/speedtouch/mgmt.o";
                         }
+                        $netcnx->{bus} = $netc->{autodetect}{adsl}{bewan}{bus} if $ntf_name eq 'bewan';
                         if ($ntf_name eq 'bewan' && !$::testing) {
                             $in->do_pkgs->ensure_is_installed_if_available('unicorn', "$::prefix/usr/bin/bewan_adsl_status");
                         }
@@ -797,7 +798,7 @@ If you don't know, choose 'use pppoe'"),
                     },
                     post => sub {
                         $netc->{internet_cnx_choice} = 'adsl';
-                        network::adsl::adsl_conf_backend($in, $netcnx, $netc, $ntf_name, $adsl_type); #FIXME
+                        network::adsl::adsl_conf_backend($in, $netcnx, $netc, $ntf_name, $adsl_type, $netcnx); #FIXME
                         $config->{adsl} = { kind => $ntf_name, protocol => $adsl_type };
                         $handle_multiple_cnx->();
                     },

@@ -98,9 +98,38 @@ sub adsl_conf_backend {
     # FIXME: should not be needed:
     defined $o_netcnx and $netc->{adsltype} = $o_netcnx->{type};
     $netc->{adsltype} ||= "adsl_$adsl_type";
+    my $bewan_module;
+    $bewan_module = $o_netcnx->{bus} eq 'PCI' ? 'unicorn_pci_atm' : 'unicorn_usb_atm' if $adsl_device eq "bewan";  
 
     # all supported modems came with their own pppoa module, so no need for "plugin pppoatm.so"
     my %modems = (
+                  bewan => {
+                  start => qq(
+modprobe pppoatm
+#  ActivationMode=1
+modprobe $bewan_module
+# wait for the modem to be set up:
+sleep 10
+),
+                  stop => qq(modprobe -r $bewan_module),
+                  pppd_options => "plugin pppoatm.so $netc->{vpi}." . hex($netc->{vci}),
+                  ppp_options => qq(
+lock 
+ipparam ppp0 
+default-asyncmap 
+hide-password 
+noaccomp 
+nobsdcomp 
+nodeflate 
+novj novjccomp 
+lcp-echo-interval 20 
+lcp-echo-failure 3 
+mtu 1200 
+mru 1200 
+sync 
+),
+                  },
+
                   speedtouch =>
                   {
                    start => '/usr/sbin/modem_run -v 0 -f /usr/share/speedtouch/mgmt.o',
@@ -228,7 +257,7 @@ user "$adsl->{login}"
                                              $modems{$adsl_device}{start},
                                              # /usr/sbin/pppd call adsl
                                              #$modems{$adsl_device}{server}{$adsl_type} ||
-					     "/usr/sbin/pppd file /etc/ppp/peers/adsl",
+					     "/usr/sbin/pppd file /etc/ppp/peers/adsl $modems{$adsl_device}{pppd_options}",
                                              $ppp_options{$adsl_type}{connect}
                                             ),
                          $ppp_options{$adsl_type}{disconnect},
