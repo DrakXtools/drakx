@@ -114,10 +114,10 @@ sub get_formatted_remote_queues {
     map {
 	join('!', if_($printer->{expert}, N("CUPS")), N("Configured on other machines"), $_);
     } map {
-	my $comment = N("On CUPS server \"%s\"", $_->{ipp}) . ($_->{queuename} eq $printer->{DEFAULT} ? N(" (Default)") : "");
+	my $comment = N("On CUPS server \"%s\"", ($_->{ipp} ? $_->{ipp} : $printer->{remote_cups_server})) . ($_->{queuename} eq $printer->{DEFAULT} ? N(" (Default)") : "");
 	"$_->{queuename}: $comment";
     } grep { 
-	$_->{ipp} && !$printer->{configured}{$_->{queuename}};
+	!$printer->{configured}{$_->{queuename}};
     } lpstat_v();
 }
 

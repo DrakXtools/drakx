@@ -42,6 +42,9 @@ sub config_cups {
     @{$printer->{cupsconfig}{cupsd_conf}} =
 	printer::main::read_cupsd_conf();
     printer::main::read_cups_config($printer);
+    # Read client.conf file
+    my ($daemonless_cups, $remote_cups_server) =
+	printer::main::read_client_conf();
     # Read state of japanese text printing mode
     my $jap_textmode = printer::main::get_jap_textmode();
     # Read state for auto-correction of cupsd.conf
@@ -64,9 +67,15 @@ sub config_cups {
 	     },
 	     [
 	      { text => N("The printers on this machine are available to other computers"), type => 'bool',
-		val => \$printer->{cupsconfig}{localprintersshared} },
+		val => \$printer->{cupsconfig}{localprintersshared},
+		disabled => sub {
+		    $daemonless_cups;
+		} },
 	      { text => N("Automatically find available printers on remote machines"), type => 'bool',
-		val => \$printer->{cupsconfig}{remotebroadcastsaccepted} },
+		val => \$printer->{cupsconfig}{remotebroadcastsaccepted},
+		disabled => sub {
+		    $daemonless_cups;
+		} },
 	      { val => N("Printer sharing on hosts/networks: ") .
 		    ($printer->{cupsconfig}{customsharingsetup} ?
 		     N("Custom configuration") :
@@ -81,6 +90,7 @@ sub config_cups {
 		    1;
 		},
 		disabled => sub {
+		    $daemonless_cups ||
 		    (!$printer->{cupsconfig}{localprintersshared} &&
 		     !$printer->{cupsconfig}{remotebroadcastsaccepted});
 		} },
@@ -95,11 +105,17 @@ sub config_cups {
 		clicked_may_quit => sub {
 		    $buttonclicked = "browsepoll";
 		    1;
+		},
+		disabled => sub {
+		    $daemonless_cups;
 		} },
 	      { text => N("Japanese text printing mode"),
 		help => N("Turning on this allows to print plain text files in Japanese language. Only use this function if you really want to print text in Japanese, if it is activated you cannot print accentuated characters in latin fonts any more and you will not be able to adjust the margins, the character size, etc. This setting only affects printers defined on this machine. If you want to print Japanese text on a printer set up on a remote machine, you have to activate this function on that remote machine."),
 		type => 'bool',
-		val => \$jap_textmode },
+		val => \$jap_textmode, 
+		disabled => sub {
+		    $daemonless_cups;
+		} },
 	      if_($printer->{expert},
 		  { text => N("Automatic correction of CUPS configuration"),
 		    type => 'bool',
@@ -112,7 +128,20 @@ sub config_cups {
 - when printer information is broadcasted, it does not contain \"localhost\" as the server name.
 
 If some of these measures lead to problems for you, turn this option off, but then you have to take care of these points."),
-		    val => \$printer->{cupsconfig}{autocorrection} }),
+		    val => \$printer->{cupsconfig}{autocorrection},
+                    disabled => sub {
+			$daemonless_cups;
+		    } }),
+	      { val => N("Remote CUPS server and no local CUPS daemon: ") .
+		    ($daemonless_cups ? 
+		     N("On; Server:") . $remote_cups_server :
+		     N("Off")),
+		help => N("In this mode the local CUPS daemon will be stopped and all printing requests go directly to the server specified below. Note that it is not possible to define local print queues then and if the specified server is down it cannot be printed at all from this machine."),
+		type => 'button',
+		clicked_may_quit => sub {
+		    $buttonclicked = "daemonlesscups";
+		    1;
+		} },
 	      ]
 	     )
 	    ) {
@@ -455,6 +484,53 @@ N("Examples for correct IPs:\n") .
 			    printer::main::makebrowsepolllist($printer);
 		    }
 		}
+	    } elsif ($buttonclicked eq "daemonlesscups") {
+		my ($modechoice, $rserver);
+		if ($daemonless_cups) {
+		    $modechoice = N("On, Name or IP of remote server:");
+		    $rserver = $remote_cups_server;
+		} else {
+		    $modechoice = N("Off");
+		}
+		# Show the dialog
+		#my $address;
+		#my $oldaddress = 
+		#    ($buttonclicked eq "edit" ?
+		#     $sharehosts->{invhash}{$choice} : "");
+		if ($in->ask_from_
+		    ({ title => N("Remote CUPS server and no local CUPS daemon"),
+		       messages => N("In this mode the local CUPS daemon will be stopped and all printing requests go directly to the server specified below. Note that it is not possible to define local print queues then and if the specified server is down it cannot be printed at all from this machine."),
+		       callbacks => {
+			   complete => sub {
+			       if ($modechoice eq 
+				   N("On, Name or IP of remote server:") &&
+				   $rserver =~ /^\s*$/) {
+				   
+				   $in->ask_warn(N("Error"), N("CUPS server name or IP address missing."));
+				   return 1, 1;
+			       }
+			       return 0;
+			   },
+		       },
+		   },
+		     # Show the widgets
+		     [ { val => \$modechoice, format => \&translate,
+			 type => 'list',
+			 sort => 0,
+			 list => [ N("Off"),
+				   N("On, Name or IP of remote server:") ]},
+		       { val => \$rserver, 
+			 disabled => sub {
+			     $modechoice ne 
+				 N("On, Name or IP of remote server:");
+			 } },
+		       ],
+		     )) {
+		    # OK was clicked, update the data
+		    $daemonless_cups = 
+			($modechoice eq N("On, Name or IP of remote server:"));
+		    $remote_cups_server = $rserver;
+		}
 	    } else {
 		# We have clicked "OK"
 		$retvalue = 1;
@@ -467,6 +543,39 @@ N("Examples for correct IPs:\n") .
 		}
 		# Write state of japanese text printing mode
 		printer::main::set_jap_textmode($jap_textmode);
+		# Switch state of daemon-less CUPS mode and write
+		# client.conf
+		if (($daemonless_cups && $printer->{SPOOLER} ne "rcups") ||
+		    (!$daemonless_cups && $printer->{SPOOLER} eq "rcups")) {
+		    my $oldspooler = $printer->{SPOOLER};
+		    $printer->{SPOOLER} = ($daemonless_cups ? 
+					  "rcups" : "cups");
+		    if (install_spooler($printer, $in, $upNetwork, 1)) {
+			printer::default::set_spooler($printer);
+			printer::main::write_client_conf
+			    ($daemonless_cups, $remote_cups_server);
+			$printer->{remote_cups_server} =
+			    $remote_cups_server;
+			if ($printer->{SPOOLER} ne "rcups") {
+			    # Get the queues of this spooler
+			    my $_w = $in->wait_message
+				(N("Printerdrake"),
+				 N("Reading printer data..."));
+			    printer::main::read_configured_queues($printer);
+			    # Re-read the printer database next time
+			    %printer::main::thedb = ();
+			    assure_default_printer_is_set($printer, $in);
+			}
+		    } else {
+			$printer->{SPOOLER} = $oldspooler;
+		    }
+		} elsif ($daemonless_cups) {
+		    printer::main::write_client_conf($daemonless_cups,
+						     $remote_cups_server);
+		    $printer->{remote_cups_server} = $remote_cups_server;
+		} else {
+		    undef $printer->{remote_cups_server};
+		}
 		# Write cupsd.conf
 		printer::main::write_cups_config($printer);
 		my $w = 
@@ -474,6 +583,8 @@ N("Examples for correct IPs:\n") .
 				      N("Restarting CUPS..."));
 		printer::main::write_cupsd_conf(
 		    @{$printer->{cupsconfig}{cupsd_conf}});
+		#- restart cups after updating configuration.
+		printer::main::SIGHUP_daemon($printer->{SPOOLER});
 		undef $w;
 	    }
 	} else {
@@ -3254,6 +3365,7 @@ It may take some time before the printer starts.\n");
 sub printer_help {
     my ($printer, $in) = @_;
     my $spooler = $printer->{SPOOLER};
+    $spooler = "cups" if $spooler eq "rcups";
     my $queue = $printer->{QUEUE};
     my $default = $printer->{DEFAULT};
     my $raw = 0;
@@ -3688,7 +3800,7 @@ Do you really want to configure printing on this machine?",
 sub start_spooler_on_boot {
     # Checks whether the spooler will be started at boot time and if not,
     # ask the user whether he wants to start the spooler at boot time.
-    my ($printer, $in, $service) = @_;
+    my ($printer, $in, $service, $silentspooleronboot) = @_;
     # PDQ has no daemon, so nothing needs to be started :
     return unless $service;
 
@@ -3698,7 +3810,8 @@ sub start_spooler_on_boot {
 
 #    $in->set_help('startSpoolerOnBoot') if $::isInstall;
     if (!services::starts_on_boot($service)) {
-	if ($in->ask_yesorno(N("Starting the printing system at boot time"),
+	if ($silentspooleronboot ||
+	    $in->ask_yesorno(N("Starting the printing system at boot time"),
 			     N("The printing system (%s) will not be started automatically when the machine is booted.
 
 It is possible that the automatic starting was turned off by changing to a higher security level, because the printing system is a potential point for attacks.
@@ -3713,14 +3826,14 @@ Do you want to have the automatic starting of the printing system turned on agai
 
 sub install_spooler {
     # installs the default spooler and start its daemon
-    my ($printer, $in, $upNetwork) = @_;
+    my ($printer, $in, $upNetwork, $silentspooleronboot) = @_;
     return 1 if $::testing;
     my $spooler = $printer->{SPOOLER};
     # If the user refuses to install the spooler in high or paranoid
     # security level, exit.
     return 0 unless security_check($printer, $in, $spooler);
     # should not happen
-    return 1 if $spooler !~ /^(rcups|cups|lpd|lprng|pqd)$/;
+    return 0 if $spooler !~ /^(rcups|cups|lpd|lprng|pqd)$/;
     my $w = $in->wait_message(N("Printerdrake"), N("Checking installed software..."));
 
     # "lpr" conflicts with "LPRng", remove either "LPRng" or remove "lpr"
@@ -3745,8 +3858,6 @@ sub install_spooler {
     push (@{$packages->[1]}, @{$commonpackages->[1]});
     push (@{$packages->[1]}, @{$localqueuepackages->[1]}) if
 	$spoolers{$spooler}{local_queues};
-    #use Data::Dumper;
-    #print Dumper($packages);
     if (@{$packages->[0]} && !files_exist(@{$packages->[1]})) {
 	undef $w;
         $w = $in->wait_message(N("Printerdrake"), N("Installing %s..."), $spoolers{$spooler}{short_name});
@@ -3776,11 +3887,17 @@ sub install_spooler {
         # Avoid unnecessary restarting of CUPS, this blocks the
         # startup of printerdrake for several seconds.
         printer::services::start_not_running_service("cups");
+    } elsif ($spooler eq "rcups") {
+	# Stop CUPS daemon, we want to run daemon-less
+	services::stop("cups") if services::is_service_running("cups");
+	# Do not start CUPS daemon during boot
+	services::do_not_start_service_on_boot("cups");
     } elsif ($spoolers{$spooler}{service}) {
         printer::services::restart($spoolers{$spooler}{service});
     }
     
-    # Set the choosen spooler tools as defaults for "lpr", "lpq", "lprm", ...
+    # Set the choosen spooler tools as defaults for "lpr", "lpq",
+    # "lprm", ...
     foreach (@{$spoolers{$spooler}{alternatives}}) {
         set_alternative($_->[0], $_->[1]);
     }
@@ -3789,11 +3906,12 @@ sub install_spooler {
     printer::main::pdq_panic_button($spooler eq 'pdq' ? "add" : "remove");
 
     # Should it be started at boot time?
-    start_spooler_on_boot($printer, $in, $spoolers{$spooler}{boot_spooler});
+    start_spooler_on_boot($printer, $in, $spoolers{$spooler}{boot_spooler},
+			  $silentspooleronboot);
 
     # Give a SIGHUP to the devfsd daemon to correct the permissions
     # for the /dev/... files according to the spooler
-    printer::main::SIGHUP_daemon("devfs");
+    #printer::main::SIGHUP_daemon("devfs");
     1;
 }
 
@@ -3995,7 +4113,8 @@ sub init {
     # Non-interactive setup of newly detected printers (This is done
     # only when not in expert mode, so we always have a spooler defined
     # here)
-    configure_new_printers($printer, $in, $upNetwork);
+    configure_new_printers($printer, $in, $upNetwork)
+	if $printer->{SPOOLER} ne "rcups";
     
     # Make sure that default printer is registered
     if ($nodefault && $printer->{DEFAULT}) {
@@ -4042,7 +4161,8 @@ sub mainwindow_interactive {
 	    if (defined($printer->{configured}{$printer->{DEFAULT}})) {
 		$cursorpos = 
 		    $printer->{configured}{$printer->{DEFAULT}}{queuedata}{menuentry} . N(" (Default)");
-	    } elsif ($printer->{SPOOLER} eq "cups") {
+	    } elsif (($printer->{SPOOLER} eq "cups") ||
+		     ($printer->{SPOOLER} eq "rcups")){
 		$cursorpos = find { /!$printer->{DEFAULT}:[^!]*$/ } printer::cups::get_formatted_remote_queues($printer);
 	    }
 	}
@@ -4053,7 +4173,8 @@ sub mainwindow_interactive {
 			   N(" (Default)") : "") }
 		  keys(%{$printer->{configured}
 			 || {}})),
-	     ($printer->{SPOOLER} eq "cups" ?
+	     (($printer->{SPOOLER} eq "cups") ||
+	      ($printer->{SPOOLER} eq "rcups") ?
 	      sort(printer::cups::get_formatted_remote_queues($printer)) :
 	      ()));
 	my $noprinters = $#printerlist < 0;
@@ -4073,27 +4194,30 @@ sub mainwindow_interactive {
 		    sort => 0, separator => "!", tree_expanded => 1,
 		    quit_if_double_click => 1, allow_empty_list => 1,
 		    list => \@printerlist }),
-	      { clicked_may_quit =>
-		    sub { 
-			# Save the cursor position
-			$cursorpos = $menuchoice;
-			$menuchoice = '@addprinter';
-			1; 
-		    },
-		val => N("Add a new printer") },
-	      ($printer->{SPOOLER} eq "cups" &&
+	      ($printer->{SPOOLER} ne "rcups" ?
+	       { clicked_may_quit =>
+		     sub { 
+			 # Save the cursor position
+			 $cursorpos = $menuchoice;
+			 $menuchoice = '@addprinter';
+			 1; 
+		     },
+		 val => N("Add a new printer") } : ()),
+	      ((($printer->{SPOOLER} eq "cups") ||
+		($printer->{SPOOLER} eq "rcups")) &&
 	       $havelocalnetworks ?
 	       { clicked_may_quit =>
-		      sub { 
-			  # Save the cursor position
-			  $cursorpos = $menuchoice;
-			  $menuchoice = '@refresh';
-			  1;
-		      },
-		  val => ($noprinters ?
-			  N("Display all available remote CUPS printers") :
-			  N("Refresh printer list (to display all available remote CUPS printers)")) } : ()),
-	      ($printer->{SPOOLER} eq "cups" &&
+		     sub { 
+			 # Save the cursor position
+			 $cursorpos = $menuchoice;
+			 $menuchoice = '@refresh';
+			 1;
+		     },
+		 val => ($noprinters ?
+			 N("Display all available remote CUPS printers") :
+			 N("Refresh printer list (to display all available remote CUPS printers)")) } : ()),
+	      ((($printer->{SPOOLER} eq "cups") ||
+		($printer->{SPOOLER} eq "rcups")) &&
 	       $havelocalnetworks_or_expert ?
 	       { clicked_may_quit =>
 		      sub { 

@@ -55,7 +55,7 @@ sub spooler() {
     # PDQ is not officially supported any more since version 9.1, so
     # show it only in the spooler menu when it was manually installed.
 
-    return map { $spoolers{$_}{long_name} } qw(cups), 
+    return map { $spoolers{$_}{long_name} } qw(cups, rcups), 
     if_(files_exist(qw(/usr/bin/pdq)), 'pdq'),
     if_(files_exist(qw(/usr/lib/filters/lpf /usr/sbin/lpd)), 'lprng');
 }
@@ -67,14 +67,15 @@ sub printer_type($) {
 	/lpd/   and return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP), if_($printer->{expert}, qw(POSTPIPE URI))};
 	/lprng/ and return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP), if_($printer->{expert}, qw(POSTPIPE URI))};
 	/pdq/   and return @printer_type_inv{qw(LOCAL LPD SOCKET), if_($printer->{expert}, qw(URI))};
+	/rcups/ and return ();
     }
 }
 
 sub SIGHUP_daemon {
     my ($service) = @_;
     if ($service eq "cupsd") { $service = "cups" };
-    # PDQ has no daemon, exit.
-    if ($service eq "pdq") { return 1 };
+    # PDQ and remote CUPS have no daemons, exit.
+    if (($service eq "pdq") || ($service eq "rcups")) { return 1 };
     # CUPS needs auto-correction for its configuration
     run_program::rooted($::prefix, "/usr/sbin/correctcupsconfig") if $service eq "cups";
     # Name of the daemon
@@ -219,28 +220,42 @@ sub read_configured_queues($) {
     $printer->{SPOOLER} ||= printer::default::get_spooler();
     if (!$printer->{SPOOLER}) {
 	#- Find the first spooler where there are queues
-	foreach my $spooler (qw(cups pdq lprng lpd)) {
+	foreach my $spooler (qw(rcups cups pdq lprng lpd)) {
 	    #- Is the spooler's daemon running?
 	    my $service = $spooler;
 	    if ($service eq "lprng") {
 		$service = "lpd";
 	    }
-	    if ($service ne "pdq") {
+	    if (($service ne "pdq") && ($service ne "rcups")) {
 		next unless services::is_service_running($service);
 		# daemon is running, spooler found
 		$printer->{SPOOLER} = $spooler;
 	    }
-	    #- poll queue info 
-	    open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") .
-		"foomatic-configure -P -q -s $spooler |") or
-		    die "Could not run foomatic-configure";
-	    eval join('', <$F>);
-	    close $F;
+	    #- poll queue info
+	    if ($service ne "rcups") {
+		open(my $F, ($::testing ? 
+			     $::prefix : "chroot $::prefix/ ") .
+		     "foomatic-configure -P -q -s $spooler |") or
+		     die "Could not run foomatic-configure";
+		eval join('', <$F>);
+		close $F;
+	    }
 	    if ($service eq "pdq") {
 		#- Have we found queues? PDQ has no damon, so we consider
 		#- it in use when there are defined printer queues
 		if ($#QUEUES != -1) {
 		    $printer->{SPOOLER} = $spooler;
+		    last;
+		}
+	    } elsif ($service eq "rcups") {
+		#- In daemon-less CUPS mode there are no local queues,
+		#- we can only recognize it by a server entry in
+		#- /etc/cups/client.conf
+		my ($daemonless_cups, $remote_cups_server) =
+		    printer::main::read_client_conf();
+		if ($daemonless_cups) {
+		    $printer->{SPOOLER} = $spooler;
+		    $printer->{remote_cups_server} = $remote_cups_server;
 		    last;
 		}
 	    } else {
@@ -250,12 +265,18 @@ sub read_configured_queues($) {
 	    }
 	}
     } else {
-	#- Poll the queues of the current default spooler
-	open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") .
-	    "foomatic-configure -P -q -s $printer->{SPOOLER} -r |") or
-		die "Could not run foomatic-configure";
-	eval join('', <$F>);
-	close $F;
+	if ($printer->{SPOOLER} ne "rcups") {
+	    #- Poll the queues of the current default spooler
+	    open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") .
+		 "foomatic-configure -P -q -s $printer->{SPOOLER} -r |") or
+		 die "Could not run foomatic-configure";
+	    eval join('', <$F>);
+	    close $F;
+	} else {
+	    my ($daemonless_cups, $remote_cups_server) =
+		printer::main::read_client_conf();
+	    $printer->{remote_cups_server} = $remote_cups_server;
+	}
     }
     $printer->{configured} = {};
     my $i;
@@ -437,6 +458,9 @@ sub connectionstr {
 sub read_printer_db {
 
     my ($printer, $spooler) = @_;
+
+    # No local queues available in daemon-less CUPS mode
+    return 1 if $spooler eq "rcups";
 
     my $DBPATH; #- don't have to do close ... and don't modify globals at least
     # Generate the Foomatic printer/driver overview, read it from the
@@ -697,13 +721,10 @@ sub get_jap_textmode() {
 sub read_cupsd_conf() {
     cat_("$::prefix/etc/cups/cupsd.conf");
 }
+
 sub write_cupsd_conf {
     my (@cupsd_conf) = @_;
-
     output("$::prefix/etc/cups/cupsd.conf", @cupsd_conf);
-
-    #- restart cups after updating configuration.
-    printer::services::restart("cups");
 }
 
 sub read_location {
@@ -1362,6 +1383,32 @@ sub clean_cups_config {
 }
 
 #----------------------------------------------------------------------
+# Handling of /etc/cups/client.conf
+
+sub read_client_conf() {
+    my @client_conf = cat_("$::prefix/etc/cups/client.conf");
+    my @servers = handle_configs::read_directives(\@client_conf, 
+						  "ServerName");
+    return (@servers > 0, 
+	    $servers[0]); # If there is more than one entry in client.conf,
+                          # the first one counts.
+}
+
+sub write_client_conf {
+    my ($daemonless_cups, $remote_cups_server) = @_;
+    my (@client_conf) = cat_("$::prefix/etc/cups/client.conf");
+    if ($daemonless_cups) {
+	handle_configs::set_directive(\@client_conf, 
+				      "ServerName $remote_cups_server");
+    } else {
+	handle_configs::comment_directive(\@client_conf, "ServerName");
+    }
+    output("$::prefix/etc/cups/client.conf", @client_conf);
+}
+
+
+
+#----------------------------------------------------------------------
 sub read_printers_conf {
     my ($printer) = @_;
     my $current;
@@ -1912,34 +1959,36 @@ sub print_pages($@) {
     my $queue = $printer->{QUEUE};
     my $lpr = "/usr/bin/foomatic-printjob";
     my $lpq = "$lpr -Q";
+    my $spooler = $printer->{SPOOLER};
+    $spooler = "cups" if $spooler eq "rcups";
 
     # Print the pages
     foreach (@pages) {
 	my $page = $_;
-	# Only text and PostScript can be printed directly with all spoolers,
-	# images must be treated seperately
+	# Only text and PostScript can be printed directly with all
+	# spoolers, images must be treated seperately
 	if ($page =~ /\.jpg$/) {
-	    if ($printer->{SPOOLER} ne "cups") {
+	    if ($spooler ne "cups") {
 		# Use "convert" from ImageMagick for non-CUPS spoolers
 		system(($::testing ? $::prefix : "chroot $::prefix/ ") .
 		       "/usr/bin/convert $page -page 427x654+100+65 PS:- | " .
 		       ($::testing ? $::prefix : "chroot $::prefix/ ") .
-		       "$lpr -s $printer->{SPOOLER} -P $queue");
+		       "$lpr -s $spooler -P $queue");
 	    } else {
 		# Use CUPS's internal image converter with CUPS, tell it
 		# to let the image occupy 90% of the page size (so nothing
 		# gets cut off by unprintable borders)
-		run_program::rooted($::prefix, $lpr, "-s", $printer->{SPOOLER},
+		run_program::rooted($::prefix, $lpr, "-s", $spooler,
 				    "-P", $queue, "-o", "scaling=90", $page);
 	    }		
 	} else {
-	    run_program::rooted($::prefix, $lpr, "-s", $printer->{SPOOLER},
+	    run_program::rooted($::prefix, $lpr, "-s", $spooler,
 				"-P", $queue, $page);
 	}
     }
     sleep 5; #- allow lpr to send pages.
     # Check whether the job is queued
-    open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "$lpq -s $printer->{SPOOLER} -P $queue |");
+    open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "$lpq -s $spooler -P $queue |");
     my @lpq_output =
 	grep { !/^no entries/ && !(/^Rank\s+Owner/ .. /^\s*$/) } <$F>;
     close $F;
@@ -1983,6 +2032,9 @@ sub print_optionlist {
 
 sub get_copiable_queues {
     my ($oldspooler, $newspooler) = @_;
+
+    # No local queues available in daemon-less CUPS mode
+    return () if ($oldspooler eq "rcups") or ($newspooler eq "rcups");
 
     my @queuelist;      #- here we will list all Foomatic-generated queues
     # Get queue list with foomatic-configure

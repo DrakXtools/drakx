@@ -11,17 +11,21 @@ my $FOOMATIC_DEFAULT_SPOOLER = "$FOOMATICCONFDIR/defaultspooler";
 
 sub set_printer {
     my ($printer) = $_[0];
+    my $spooler = $printer->{SPOOLER};
+    $spooler = "cups" if $spooler eq "rcups";
     run_program::rooted($::prefix, "foomatic-configure",
-			"-D", "-q", "-s", $printer->{SPOOLER},
+			"-D", "-q", "-s", $spooler,
 			"-n", $printer->{DEFAULT}) or return 0;
     return 1;
 }
 
 sub get_printer {
     my $printer = $_[0];
+    my $spooler = $printer->{SPOOLER};
+    $spooler = "cups" if $spooler eq "rcups";
     local *F;
     open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
-	"foomatic-configure -Q -q -s $printer->{SPOOLER} |" or return undef;
+	"foomatic-configure -Q -q -s $spooler |" or return undef;
     my $line;
     while ($line = <F>) {
 	if ($line =~ m!^\s*<defaultqueue>(.*)</defaultqueue>\s*$!) {
