@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 
 # Drak Bug Report 
 # Copyright (C) 2002 MandrakeSoft (daouda@mandrakesoft.com)
@@ -25,10 +25,13 @@ use MDK::Common;
 require Gtk;
 require Gtk::Gdk::ImlibImage;
 use my_gtk qw(:helpers :wrappers :ask);
+use Config;
 
 Gtk::Gdk::ImlibImage->init;
 
+$::isStandalone=1;
 my $in = 'interactive'->vnew;
+
 $::bugzilla_url = "https://qa.mandrakesoft.com";
 
 my $window_g = new Gtk::Window -toplevel;
@@ -88,7 +91,6 @@ my $app_choice;
 
 $comb_app->entry->signal_connect('changed', sub {
 				     if ((my $text = $comb_app->entry->get_text()) ne '') {
- #					 wantarray ? 
 					 exists $mdk_app->{$text}[1] ? chomp($which_app =`which '$mdk_app->{$text}[1]'`) : chomp($which_app = `which '$mdk_app->{$text}'`);
 					 chomp($app_choice = `rpm -qf '$which_app'`); 
 					 $app_choice ne '' ? $version->set_text("$app_choice") : $version->set_text(_("Not installed"));
@@ -101,7 +103,7 @@ my $Close_Button = new Gtk::Button(_("Close"));
 $Close_Button->signal_connect(clicked => sub { Gtk->exit(0)});
 $hbx->pack_start($Close_Button,0,0,0);
 my $Report_Button = new Gtk::Button(_("Report"));
-$Report_Button->signal_connect(clicked => sub { connect_bugzilla("https://qa.mandrakesoft.com/wizard.php/");});
+$Report_Button->signal_connect(clicked => sub { connect_bugzilla("http://192.168.100.126/~daouda/bugs/html/wizard/");});
 $hbx->pack_end($Report_Button,0,0,0);
 $vbx->pack_start($hbx,0,0,0);
 $window_g->add($vbx);
@@ -110,7 +112,6 @@ $window_g->show_all();
 Gtk->main();
 Gtk->exit(0);
 in->exit(0);
-
 
 sub connect_bugzilla {
     my($url) = @_;
@@ -121,7 +122,6 @@ sub connect_bugzilla {
 
 sub read_app_context {
     my ($name) = @_;
-    $na
 }
 
 sub quit_global {
