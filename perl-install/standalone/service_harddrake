@@ -128,7 +128,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     }
     if ($Ident eq "AUDIO") {
         # automatic sound slots configuration
-        rm_rf("/etc/asound.state");
+        rm_rf("/etc/asound.state") if -e "/etc/asound.state";
         harddrake::sound::configure_sound_slots($modules_conf);
         next;
     } elsif ($Ident eq "ETHERNET") {
