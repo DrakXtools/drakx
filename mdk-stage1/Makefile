@@ -43,6 +43,7 @@
 top_dir = .
 
 include $(top_dir)/Makefile.common
+include $(top_dir)/../Makefile.config
 
 
 DEFS = -DDISTRIB_NAME=\"$(DISTRIB_NAME)\" -DDISTRIB_VERSION=\"$(DISTRIB_VERSION)\" -DDISTRIB_DESCR=\"$(DISTRIB_DESCR)\" -DSPAWN_SHELL $(ADDITIONAL_DEFS) -D_FILE_OFFSET_BITS=64
