@@ -73,7 +73,7 @@ sub new($$) {
 	    log::l("Timeout!!");
 	    0;
 	};
-	my @servers = qw(FBDev VGA16); #-)
+	my @servers = qw(Driver:fbdev); #-)
 	if ($::testing) {
 	    @servers = 'Xnest';
 	} elsif (arch() eq "alpha") {

@@ -245,7 +245,7 @@ sub createXconf {
     symlink("/tmp/stage2/etc/im_palette.pal", "etc/im_palette.pal");
 
 if ($Driver) {
-     output($file, sprintf(<<'END', $mouse_type, $Driver));
+     output($file, sprintf(<<'END', $mouse_type, $Driver, $Driver eq 'fbdev' ? '"default"' : '"800x600" "640x480"'));
 
 Section "Files"
    FontPath   "/usr/X11R6/lib/X11/fonts:unscaled"
@@ -264,6 +264,7 @@ Section "InputDevice"
     Driver "mouse"
     Option "Protocol" "%s"
     Option "Device" "/dev/mouse"
+    Option "ZAxisMapping" "4 5"
 EndSection
 
 Section "Monitor"
@@ -284,7 +285,7 @@ Section "Screen"
     DefaultColorDepth 16
     Subsection "Display"
         Depth 16
-        Modes "800x600" "640x480"
+        Modes %s
     EndSubsection
 EndSection
 
@@ -296,122 +297,7 @@ Section "ServerLayout"
 EndSection
 
 END
-
-
-} else {
-
-    my $wacom;
-    if ($wacom_dev) {
-	my $dev = devices::make($wacom_dev);
-	$wacom = <<END;
-Section "Module"
-   Load "xf86Wacom.so"
-EndSection
-
-Section "XInput"
-    SubSection "WacomStylus"
-        Port "$dev"
-        AlwaysCore
-    EndSubSection
-    SubSection "WacomCursor"
-        Port "$dev"
-        AlwaysCore
-    EndSubSection
-    SubSection "WacomEraser"
-        Port "$dev"
-        AlwaysCore
-    EndSubSection
-EndSection
-END
-    }
-
-    output($file, <<END);
-Section "Files"
-   FontPath   "/usr/X11R6/lib/X11/fonts:unscaled"
-EndSection
-
-Section "Keyboard"
-   Protocol    "Standard"
-   AutoRepeat  0 0
-
-   LeftAlt         Meta
-   RightAlt        Meta
-   ScrollLock      Compose
-   RightCtl        Control
-   XkbDisable
-EndSection
-
-Section "Pointer"
-   Protocol    "$mouse_type"
-   Device      "/dev/mouse"
-   ZAxisMapping 4 5
-EndSection
-
-$wacom
-
-Section "Monitor"
-   Identifier  "monitor"
-   HorizSync   31.5-35.5
-   VertRefresh 50-70
-   ModeLine "640x480"     25.175 640  664  760  800   480  491  493  525
-   ModeLine "640x480"     28.3   640  664  760  800   480  491  493  525
-   ModeLine "800x600"     36     800  824  896 1024   600  601  603  625
-EndSection
-
-
-Section "Device"
-   Identifier "Generic VGA"
-   Chipset "generic"
-EndSection
-
-Section "Device"
-   Identifier "svga"
-EndSection
-
-Section "Screen"
-    Driver      "vga16"
-    Device      "Generic VGA"
-    Monitor     "monitor"
-    Subsection "Display"
-        Modes      "640x480"
-        ViewPort   0 0
-    EndSubsection
-EndSection
-
-Section "Screen"
-    Driver      "fbdev"
-    Device      "Generic VGA"
-    Monitor     "monitor"
-    Subsection "Display"
-        Depth      16
-        Modes      "default"
-        ViewPort   0 0
-    EndSubsection
-EndSection
-
-Section "Screen"
-    Driver      "svga"
-    Device      "svga"
-    Monitor     "monitor"
-    Subsection "Display"
-        Depth      16
-        Modes      "800x600" "640x480"
-        ViewPort   0 0
-    EndSubsection
-EndSection
-
-Section "Screen"
-    Driver      "accel"
-    Device      "svga"
-    Monitor     "monitor"
-    Subsection "Display"
-        Depth      16
-        Modes      "800x600" "640x480"
-        ViewPort   0 0
-    EndSubsection
-EndSection
-END
-}
+ }
 }
 
 1;
