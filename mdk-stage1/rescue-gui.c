@@ -136,7 +136,11 @@ void unmount_filesystems(void)
 /* ------ UUURGH -- end */
 
 
-int main(int argc, char **argv)
+/* ------ UUURGH -- this is dirrrrrttttyyyyyy */
+void probe_that_type(void) {}
+
+
+int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused)))
 {
 	enum return_type results;
 
