@@ -55,10 +55,10 @@ sub spooler {
 sub printer_type($) {
     my ($printer) = @_;
     for ($printer->{SPOOLER}) {
-	/cups/ && return @printer_type_inv{qw(LOCAL), qw(LPD SOCKET SMB), if_($::expert, qw(URI))};
-	/lpd/  && return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP), if_($::expert, qw(POSTPIPE URI))};
-	/lprng/  && return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP), if_($::expert, qw(POSTPIPE URI))};
-	/pdq/  && return @printer_type_inv{qw(LOCAL LPD SOCKET), if_($::expert, qw(URI))};
+	/cups/  && return @printer_type_inv{qw(LOCAL LPD SOCKET SMB), if_($::expert, qw(URI))};
+	/lpd/   && return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP), if_($::expert, qw(POSTPIPE URI))};
+	/lprng/ && return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP), if_($::expert, qw(POSTPIPE URI))};
+	/pdq/   && return @printer_type_inv{qw(LOCAL LPD SOCKET), if_($::expert, qw(URI))};
     }
 }
 
