@@ -130,6 +130,7 @@ sub conf_network_card_backend {
     #-type =static or dhcp
     if (!$interface) {
 	my @all_cards = detect_devices::getNet();
+	my @unconfigured_interfaces = qw(ADIModem);
 
 	my @devs = detect_devices::pcmcia_probe();
 	modules::mergein_conf("$prefix/etc/modules.conf");
@@ -143,8 +144,8 @@ sub conf_network_card_backend {
 	    }
 	    $a ||= $b;
 	    $a and $saved_driver = $a;
-	    [$interface, $saved_driver];
-	} @all_cards;
+	    if_(!member($interface, @unconfigured_interfaces) || $a, [$interface, $saved_driver]);
+	} @all_cards, @unconfigured_interfaces;
     }
     my ($device) = $interface =~ /(ADIModem|eth[0-9]+)/ or die("the interface is not an ethx or other (like ADIModem)");
     $netc->{NET_DEVICE} = $device; #- one consider that there is only ONE Internet connection device..
