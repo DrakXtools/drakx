@@ -139,6 +139,7 @@ sub set_ports {
     
 	$shorewall->{disabled} = $disabled;
 	$shorewall->{ports} = $ports;
+	log::l($disabled ? "disabling shorewall" : "configuring shorewall to allow ports: $ports");
 	network::shorewall::write($shorewall);
     }
 }
