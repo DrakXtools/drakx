@@ -785,7 +785,7 @@ sub do_expect {
 
 #- temporarily disabled
 #	use Expect;
-show_warning("w", __("Sorry, perl-Expect is not installed/enabled. To use\nthis feature, install perl-Expect and comment lines 702-704,\n as well as 718,719. Then uncomment line 717.")); 
+show_warning("w", __("Sorry, perl-Expect is not installed/enabled. To use\nthis feature, install perl-Expect and comment lines 772-774,\n as well as 788,789. Then uncomment line 787.")); 
 return(1);
 
 	#- for debugging set to 1
@@ -847,13 +847,13 @@ return(1);
 			[ '-re', 'No such file or directory', sub { $bad_dir = 1; exp_continue } ],
 #			[ '-re', '%', sub { update_scp_progress(); exp_continue; } ],
 			[ eof => sub {
-					if (!$spawn_ok) { show_warning("f","No password prompt on $host_name at port $scp_port") }					
-					if ($bad_passwd) { show_warning("f", "Bad password on $host_name") }
-					if ($no_perm) { show_warning("f", "Permission denied transferring $_ to $host_name") }
-					if ($bad_dir) { show_warning("f", "Can't find $host_path on $host_name") }
+					if (!$spawn_ok) { show_warning("f", _("No password prompt on $host_name at port $scp_port")) }					
+					if ($bad_passwd) { show_warning("f", _("Bad password on $host_name")) }
+					if ($no_perm) { show_warning("f", _("Permission denied transferring $_ to $host_name")) }
+					if ($bad_dir) { show_warning("f", _("Can't find $host_path on $host_name")) }
 				} 
 			],
-			[ timeout => sub { show_warning("f", "$host_name not responding") } ],
+			[ timeout => sub { show_warning("f", _("$host_name not responding")) } ],
 		); 
 
 		my $exit_stat = $exp->exitstatus;
@@ -1084,7 +1084,7 @@ sub build_tape {
 	$command = "mt -f $tape_device status"; 
 	spawn_progress($command, "Checking for tape");
 	if ($log_buff =~ /DR_OPEN/) {
-		show_warning("f", "No tape in $tape_device!");
+		show_warning("f", _("No tape in $tape_device!"));
 		return(1);
 	}	
 	
@@ -3437,6 +3437,8 @@ sub restore_catalog_entry {
 	# if it's remote storage, display what we know of the connection
 	# parameters and get the user's verification, then connect
 	
+	restore_status();
+	
 	my ($cat_entry, @restore_files) = @_;
 	my $username;
 	my $userpass = $passwd_user;
@@ -3528,21 +3530,21 @@ sub restore_catalog_entry {
 		
 		if (($media eq 'ftp') || ($media eq 'rsync')) {
 			if ($userpass eq '') {
-				show_warning("f", _("Password required")); 
+				show_warning("f", __("Password required")); 
 				return(0);
 			}
 		} 
 		if (($media eq 'ftp') || ($media eq 'rsync') || ($media eq 'ssh')) {
 			if ($username eq '') {
-				show_warning("f", _("Username required"));
+				show_warning("f", __("Username required"));
 				return(0); 
 			} elsif ($vol_host eq '') {
-				show_warning("f", _("Hostname required")); 
+				show_warning("f", __("Hostname required")); 
 				return(0);
 			}
 		}
 		if ($dev_path eq '') {
-			show_warning("f", _("Path or Module required")); 
+			show_warning("f", __("Path or Module required")); 
 			return(0);
 		}
 			
@@ -3567,20 +3569,23 @@ sub restore_catalog_entry {
 sub restore_hd_or_cd {
 	my ($cat_entry, $tarfile_dir, @restore_files) = @_;
 	my $indv_files = @restore_files;
+	my $command;
 		
 	my $wild_card = catalog_to_wildcard($cat_entry);
 		
 	if ($indv_files eq 0) {
 		#- full catalog specified
 		foreach (wildcard_to_tarfile($wild_card)) {
-			system("tar -C $restore_path -xzf $tarfile_dir/$_");
+			$command = "tar -C $restore_path -xzf $tarfile_dir/$_";
+			spawn_progress($command, "Untarring from \n$_ \nto $restore_path.");
 		}
 	} else {
 		#- individual files - pull from appropriate catalog
 		foreach (@restore_files) {
 			my $tarfile = file_to_tarfile($_, $wild_card);
 			$_ = substr($_, 1);
-			system("tar -C $restore_path -xzf $tarfile_dir/$tarfile $_");
+			$command = "tar -C $restore_path -xzf $tarfile_dir/$tarfile $_";
+			spawn_progress($command, "Untarring \n$_ from \n$tarfile \nto $restore_path.");
 		}
 	}
     return(0);
@@ -3589,6 +3594,7 @@ sub restore_hd_or_cd {
 sub restore_tape {
 	my ($cat_entry, $dev_path, @restore_files) = @_;
 	my $indv_files = @restore_files;
+	my $command;
 		
 	my $wild_card = catalog_to_wildcard($cat_entry);
 	$dev_path =~ s/\/st/\/nst/;
@@ -3597,11 +3603,15 @@ sub restore_tape {
 		#- full catalog specified
 		foreach (wildcard_to_tarfile($wild_card)) {
 			my $offset = find_tape_offset($cat_entry);
-			system("mt -f $dev_path rewind");
-			system("mt -f $dev_path fsf $offset");
-			system("tar -C cfg_dir/restores -xf $dev_path");
+			$command = "mt -f $dev_path rewind";
+			spawn_progress($command, "Rewinding tape on $dev_path.");
+			$command = "mt -f $dev_path fsf $offset";
+			spawn_progress($command, "Moving forward $offset file records.");
+			$command = "tar -C cfg_dir/restores -xf $dev_path";
+			spawn_progress($command, "Untarring from $dev_path to work directory.");
 			if (-e "$cfg_dir/restores/$_") {
-				system("tar -C $restore_path -xzf $cfg_dir/restores/$_");
+				$command = "tar -C $restore_path -xzf $cfg_dir/restores/$_";
+				spawn_progress($command, "Untarring \n$_ \nto $restore_path.");
 			} else {
 				return(1);
 			}
@@ -3613,12 +3623,16 @@ sub restore_tape {
 			$_ = substr($_, 1);
 			if (!-e "$cfg_dir/restores/$tarfile") {
 				my $offset = find_tape_offset($cat_entry);
-				system("mt -f $dev_path rewind");
-				system("mt -f $dev_path fsf $offset");
-				system("tar -C cfg_dir/restores -xf $dev_path");
+				$command = "mt -f $dev_path rewind";
+				spawn_progress($command, "Rewinding tape on $dev_path.");
+				$command = "mt -f $dev_path fsf $offset";
+				spawn_progress($command, "Moving forward $offset file records.");
+				$command = "tar -C cfg_dir/restores -xf $dev_path";
+				spawn_progress($command, "Untarring from $dev_path to work directory.");
 			}
 			if (-e "$cfg_dir/restores/$tarfile") {
-				system("tar -C $restore_path -xzf $cfg_dir/restores/$tarfile $_");
+				$command = "tar -C $restore_path -xzf $cfg_dir/restores/$tarfile $_";
+				spawn_progress($command, "Untarring \n$_ from \n$tarfile \nto $restore_path.");
 			} else {
 				return(1);
 			}
@@ -3632,6 +3646,7 @@ sub restore_ftp {
     my $ftp;
 	my ($cat_entry, $hostname, $hostpath, $username, $userpass, @restore_files) = @_;
 	my $indv_files = @restore_files;
+	my $command;
 		
     $DEBUG and print "file list to retrieve: $cat_entry\n ";
     if ($DEBUG && $interactive) { $ftp = Net::FTP->new($hostname, Debug => 1) or return(1) }
@@ -3646,7 +3661,8 @@ sub restore_ftp {
 		#- full catalog specified
 		foreach (wildard_to_tarfile($wild_card)) {
 			$ftp->get($_, "$cfg_dir/restores/$_");
-			system("tar -C $restore_path -xzf $cfg_dir/restores/$_");
+			$command = "tar -C $restore_path -xzf $cfg_dir/restores/$_";
+			spawn_progress($command, "Untarring \n$_ \nto $restore_path.");
 		}
 	} else {
 		#- individual files - pull from appropriate catalog
@@ -3656,7 +3672,8 @@ sub restore_ftp {
 			if (!-e "$cfg_dir/restores/$tarfile") {
 				$ftp->get($tarfile, "$cfg_dir/restores/$tarfile");
 			}
-			system("tar -C $restore_path -xzf $cfg_dir/restores/$tarfile $_");
+			$command = "tar -C $restore_path -xzf $cfg_dir/restores/$tarfile $_";
+			spawn_progress($command, "Untarring \n$_ from \n$tarfile \nto $restore_path.");
 		}
 	}
     $ftp->quit; 
@@ -3666,6 +3683,7 @@ sub restore_ftp {
 sub restore_rsync_ssh_webdav {
 	my ($cat_entry, $hostname, $hostpath, $username, $userpass, $mode, @restore_files) = @_;
 	my $indv_files = @restore_files;
+	my $command;
 		
 	my $wild_card = catalog_to_wildcard($cat_entry);
 		
@@ -3673,14 +3691,16 @@ sub restore_rsync_ssh_webdav {
 		#- full catalog specified
 		foreach (wildcard_to_tarfile($wild_card)) {
 			if ($mode eq 'ssh') {
-				system("scp $username\@$hostname:$hostpath/$_ $cfg_dir/restores/");
+				$command = "scp $username\@$hostname:$hostpath/$_ $cfg_dir/restores/";
 			} elsif ($mode eq 'rsync') {
-				system("rsync --password-file=$cfg_dir/rsync.user $username\@$hostname\:\:$hostpath/$_ $cfg_dir/restores/");
+				$command = "rsync --password-file=$cfg_dir/rsync.user $username\@$hostname\:\:$hostpath/$_ $cfg_dir/restores/";
 			} else {
-				system("wget http://$hostname/$hostpath/$_ -P $cfg_dir/restores/");
+				$command = "wget http://$hostname/$hostpath/$_ -P $cfg_dir/restores/";
 			}
+			spawn_progress($command, "Retrieving backup file \n$_ \nvia $mode.");
 			if (-e "$cfg_dir/restores/$_") {
-				system("tar -C $restore_path -xzf $cfg_dir/restores/$_");
+				$command = "tar -C $restore_path -xzf $cfg_dir/restores/$_";
+				spawn_progress($command, "Untarring \n$_ \nto $restore_path.");
 			} else {
 				return(1);
 			}
@@ -3692,15 +3712,17 @@ sub restore_rsync_ssh_webdav {
 			$_ = substr($_, 1);
 			if (!-e "$cfg_dir/restores/$tarfile") {
 				if ($mode eq 'ssh') {
-					system("scp $username\@$hostname:$hostpath/$tarfile $cfg_dir/restores/");
+					$command = "scp $username\@$hostname:$hostpath/$tarfile $cfg_dir/restores/";
 				} elsif ($mode eq 'rsync') {
-					system("rsync --password-file=$cfg_dir/rsync.user $username\@$hostname\:\:$hostpath/$tarfile $cfg_dir/restores/");
+					$command = "rsync --password-file=$cfg_dir/rsync.user $username\@$hostname\:\:$hostpath/$tarfile $cfg_dir/restores/";
 				} else {
-					system("wget http://$hostname/$hostpath/$tarfile -P $cfg_dir/restores/");
+					$command = "wget http://$hostname/$hostpath/$tarfile -P $cfg_dir/restores/";
 				}
+				spawn_progress($command, "Retrieving backup file \n$tarfile \nvia $mode.");
 			}
 			if (-e "$cfg_dir/restores/$tarfile") {
-				system("tar -C $restore_path -xzf $cfg_dir/restores/$tarfile $_");
+				$command = "tar -C $restore_path -xzf $cfg_dir/restores/$tarfile $_";
+				spawn_progress($command, "Untarring \n$_ from \n$tarfile \nto $restore_path.");
 			} else {
 				return(1);
 			}
@@ -3744,6 +3766,8 @@ sub find_tape_offset {
 	foreach (@catalog) {
 		if (instr($_, $label)) {
 			if (!instr($_, $cat_entry)) {
+				# tar seems to need 2 of these to get located
+				$offset++;
 				$offset++;
 			} else {
 				return($offset);
@@ -3852,6 +3876,36 @@ sub restore_find_media_box {
 
 	button_box_find_media($mount_media);  
     $up_box->show_all();
+}
+
+sub restore_status {
+	${$central_widget}->destroy();
+    $pbar3 =  new Gtk::ProgressBar;
+    $stext = new Gtk::Label("");
+    gtkpack($advanced_box,
+		$table = gtkpack(new Gtk::VBox(0, 5),
+			new Gtk::HBox(0,5),
+	    	create_packtable({ col_spacings => 10, row_spacings => 5 },
+				[""],
+				[""],
+				[""],
+				[""], 
+				[_("Restore Progress")],
+				[""],
+				[""],
+				[$pbar3],
+				[""],
+				[""],
+				[$pbar3->{label} = new Gtk::Label(' ') ],
+				[""],
+			),
+			$stext,
+		),
+	);
+    $custom_help = "options";
+    $central_widget = \$table;
+    $up_box->show_all();
+    Gtk->main_iteration while Gtk->events_pending;
 }
 
 ################################################  BUTTON_BOX  ################################################  
