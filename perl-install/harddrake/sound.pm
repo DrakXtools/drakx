@@ -159,8 +159,7 @@ sub switch {
     my ($in, $device) = @_;
     my $driver = $device->{driver};
     $driver = modules::get_alias($driver) if $driver =~ /sound-card/; # alsaconf ...
-    foreach (@blacklist) { print " $blacklisted\n$driver, $_,"; $blacklisted = 1 if $driver eq $_ }
-    print "the current $driver is ", $blacklisted ? '' : 'not ', "blacklisted ($blacklisted)\n\n";
+    foreach (@blacklist) { $blacklisted = 1 if $driver eq $_ }
     my $alternative = get_alternative($driver);
     if ($alternative) {
 	   my $new_driver = $alternative->[0];
