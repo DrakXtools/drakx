@@ -1,5 +1,11 @@
 #!/usr/bin/perl
 
+BEGIN { 
+    # fake module ``c'' so that no need to build DrakX
+    $INC{'c.pm'} = 1;
+    package c; sub AUTOLOAD { } sub getpagesize { 1024 } # getpagesize is needed by swap.pm, otherwise sigsegv
+}
+
 use lib "../..";
 use pkgs;
 use common ":common";
