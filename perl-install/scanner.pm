@@ -65,7 +65,7 @@ sub detect {
 							  }};
 	++$i;
     }
-    foreach (grep {$_->{media_type} =~ /scanner/  } detect_devices::getSCSI()) {
+    foreach (grep { $_->{media_type} =~ /scanner/ } detect_devices::getSCSI()) {
 	   push @res, { port => "/dev/usb/scanner$i", 
 				 val => { DESCRIPTION => $_->{info} },
 	   };
