@@ -356,7 +356,7 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 
     if (%{$packages->{state}{ask_remove} || {}}) {
 	log::l("removing : ", join ', ', keys %{$packages->{state}{ask_remove}});
-	pkgs::remove($o->{prefix}, keys %{$packages->{state}{ask_remove}});
+	pkgs::remove($o->{prefix}, [ keys %{$packages->{state}{ask_remove}} ]);
     }
 
     #- small transaction will be built based on this selection and depslist.
