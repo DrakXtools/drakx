@@ -276,36 +276,39 @@ sub set {
 	delete $ENV{LC_ALL};
 	delete $ENV{LINGUAGE};
 	delete $ENV{LINGUAS};
-	delete $ENV{RPM_INSTALL_LANG};
     }
 }
 
-sub set_langs { 
+sub pack_langs { 
     my ($l) = @_; 
-    $l or return;
-    $ENV{RPM_INSTALL_LANG} = member('all', @$l) ? 'all' :
+    member('all', @$l) ? 'all' :
       join ':', uniq(map { substr($languages{$_}[2], 0, 2) } @$l);
-    log::l("RPM_INSTALL_LANG: $ENV{RPM_INSTALL_LANG}");
 }
 
-sub get_langs {
+sub unpack_langs {
+    my ($langs) = @_;
     [ 
-     $ENV{RPM_INSTALL_LANG} eq 'all' ?
+     $langs eq 'all' ?
      map { substr($_->[2], 0, 2) } values %languages :
-     split(':', $ENV{RPM_INSTALL_LANG})
+     split(':', $langs)
     ];
 }
 
+sub write_langs {
+    my ($prefix, $langs) = @_;
+    symlink "$prefix/etc/rpm", "/etc/rpm" if $prefix;
+    substInFile { s/%_install_langs//; $_ .= "%_install_langs $langs\n" if eof } "$prefix/etc/rpm/macros";
+}
+
 sub write { 
-    my ($prefix) = @_;
-    my $lang = $ENV{LC_ALL};
+    my ($prefix, $lang) = @_;
 
     $lang or return;
 
-    my $h = { RPM_INSTALL_LANG => $ENV{RPM_INSTALL_LANG} };
+    my $h = {};
     $h->{$_} = $lang foreach qw(LC_COLLATE LC_CTYPE LC_MESSAGES LC_NUMERIC LC_MONETARY LC_TIME);
     if (my $l = $languages{$lang}) {
-	add2hash $h, { LANG => $l->[2], LANGUAGE => $l->[3], RPM_INSTALL_LANG => $l->[3] };
+	add2hash $h, { LANG => $l->[2], LANGUAGE => $l->[3] };
 
 	my $c = $charsets{$l->[1] || ''};
 	if ($c) {

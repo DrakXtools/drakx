@@ -202,7 +202,10 @@ sub selectLanguage {
     $o->selectLanguage($_[1] == 1);
 
     addToBeDone {
-	lang::write($o->{prefix});
+	lang::write_langs($o->{prefix}, $o->{langs});
+    } 'formatPartitions' unless $::g_auto_install;
+    addToBeDone {
+	lang::write($o->{prefix}, $o->{lang});
 	keyboard::write($o->{prefix}, $o->{keyboard}, lang::lang2charset($o->{lang}));
     } 'installPackages' unless $::g_auto_install;
 }
@@ -240,7 +243,10 @@ sub selectKeyboard {
 
     #- if we go back to the selectKeyboard, you must rewrite
     addToBeDone {
-	lang::write($o->{prefix});
+	lang::write_langs($o->{prefix}, $o->{langs});
+    } 'formatPartitions' unless $::g_auto_install;
+    addToBeDone {
+	lang::write($o->{prefix}, $o->{lang});
 	keyboard::write($o->{prefix}, $o->{keyboard}, lang::lang2charset($o->{lang}));
     } 'installPackages' unless $::g_auto_install;
 }
@@ -279,7 +285,7 @@ sub formatPartitions {
     $o->formatMountPartitions($o->{fstab}) unless $::testing;
 
     mkdir "$o->{prefix}/$_", 0755 foreach 
-      qw(dev etc etc/profile.d etc/sysconfig etc/sysconfig/console etc/sysconfig/network-scripts
+      qw(dev etc etc/profile.d etc/rpm etc/sysconfig etc/sysconfig/console etc/sysconfig/network-scripts
 	home mnt tmp var var/tmp var/lib var/lib/rpm var/lib/urpmi);
     mkdir "$o->{prefix}/$_", 0700 foreach qw(root root/tmp);
 
