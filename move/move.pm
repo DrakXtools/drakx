@@ -57,7 +57,7 @@ sub handle_etcfiles {
             $mode eq 'READ' && !-e $_ and symlinkf_short("/image$_", $_);
             if ($mode eq 'OVERWRITE') {
                 mkdir_p(dirname($_));
-                system("cp /image$_ $_");  #- need copy contents
+                run_program::run('cp', "/image$_", $_);  #- need copy contents
             }
             $mode eq 'DIR' and mkdir_p $_;
         }
@@ -108,10 +108,10 @@ sub init {
     symlinkf "/proc/mounts", "/etc/mtab";
 
     #- these files need be writable but we need a sensible first contents
-    system("cp /image/etc/$_ /etc") foreach qw(passwd passwd- group sudoers fstab);
+    run_program::run('cp', "/image/etc/$_", '/etc') foreach qw(passwd passwd- group sudoers fstab);
 
     #- these files are typically opened in read-write mode, we need them copied
-    mkdir_p("/etc/$_"), system("cp -R /image/etc/$_/* /etc/$_")
+    mkdir_p("/etc/$_"), run_program::run('cp', '-R', glob_("/image/etc/$_/*"), "/etc/$_")
       foreach qw(cups profile.d sysconfig devfs/conf.d);
 
     #- directories we badly need as non-links because files will be written in
@@ -165,12 +165,12 @@ sub init {
     $key_disabled = !-e '/cdrom/live_tree_nvidia.clp' && cat_('/proc/mounts') !~ /nfs/;
 
     run_program::run('/sbin/service', 'syslog', 'start');
-    system('sysctl -w kernel.hotplug="/bin/true"');
+    run_program::run('sysctl', '-w', 'kernel.hotplug="/bin/true"');
     modules::load_category('bus/usb'); 
     eval { modules::load('usb-storage', 'sd_mod') };
     handle_virtual_key();
     install_steps::setupSCSI($o);
-    system('sysctl -w kernel.hotplug="/sbin/hotplug"');
+    run_program::run('sysctl', '-w', 'kernel.hotplug="/sbin/hotplug"');
 
     key_mount($o);
     cat_('/proc/cmdline') =~ /\bcleankey\b/ and eval { rm_rf $key_sysconf, glob_('/home/.mdkmove*') };
@@ -301,17 +301,17 @@ sub key_installfiles {
             log::l("key_installfiles: installing config files in $sysconf");
             mkdir $sysconf;
             foreach (chomp_(cat_('/image/move/keyfiles'))) {
-                my $target_dir = "$sysconf/" . dirname($_);
+                my $target_dir = $sysconf . dirname($_);
                 mkdir_p($target_dir);
                 if (/\*$/) {
-                    system("cp $_ $target_dir");
+                    run_program::run('cp', glob_($_), $target_dir);
                     symlinkf("$sysconf$_", $_) foreach glob($_);
                 } else {
-                    system("cp $_ $sysconf$_");
+                    run_program::run('cp', $_, "$sysconf$_");
                     symlinkf("$sysconf$_", $_);
                 }
             }
-            system("cp /image/move/README.adding.more.files $key_sysconf");
+            run_program::run('cp', '/image/move/README.adding.more.files', $key_sysconf);
             $done = 1;
         } else {
             #- not in full mode and no host directory, grab user config from first existing host directory if possible
@@ -334,12 +334,12 @@ sub key_installfiles {
     }
 
     #- /etc/sudoers can't be a link
-    unlink($_), system("cp /image/$_ $_") foreach qw(/etc/sudoers);
+    unlink($_), run_program::run('cp', "/image$_", $_) foreach qw(/etc/sudoers);
 }
 
 sub reboot {
     output('/var/run/rebootctl', "reboot");  #- tell X_move to not respawn
-    system("killall X");  #- kill it ourselves to be sure that it won't lock console when killed by our init
+    run_program::run('killall', 'X');  #- kill it ourselves to be sure that it won't lock console when killed by our init
     exit 0;
 }
 
@@ -568,7 +568,7 @@ sub install2::initGraphical {
     my $xdim = $::rootwidth;
     $xdim < 800 and $xdim = 800;
     $xdim > 1600 and $xdim = 1600;
-    system("qiv --root /image/move/BOOT-$xdim-MOVE.jpg");
+    run_program::run('qiv', '--root', "/image/move/BOOT-$xdim-MOVE.jpg");
     
     *install_steps_interactive::errorInStep = \&errorInStep;
 }
