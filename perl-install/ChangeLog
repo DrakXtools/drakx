@@ -1,3 +1,111 @@
+2005/03/18  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/mn.po,
+	share/po/uk.po, share/po/am.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, install_messages.pm, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/fr.po,
+	share/po/ta.po, share/po/vi.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/bg.po, share/po/cs.po,
+	share/po/el.po, share/po/uz@Latn.po: s/101errata/102errata for the next
+	release. We often forget this.
+
+2005/03/18  Olivier Blin <oblin at mandrakesoft.com>
+
+	* harddrake/data.pm: adapt to new adsl_detect prototype
+
+	* standalone/drakroam: perl_checker/include fixes
+	don't be verbose
+
+	* standalone/drakconnect: really detect wireless devices in manage
+	interface
+
+	* rescue/tree/etc/issue: tell how to go back to the rescue menu
+
+	* share/po/fr.po: fix drakbackup message
+	fix bad translations
+
+	* standalone/logdrake: perl_checker fixes
+	fix save dialog
+
+	* network/ethernet.pm: remove other mac address occurrences in iftab
+
+2005/03/18  Pixel  <pixel at mandrakesoft.com>
+
+	* lvm.pm: rootDevice must be properly set, esp. for newt diskdrake
+	(bugzilla #14254)
+
+	* standalone/localedrake: always warn the user to logout, even if we can't
+	help (bugzilla #14403)
+
+	* diskdrake/interactive.pm: remove the lvm if lvm::vg_destroy() succeeds
+	(bugzilla #14249)
+
+	* install2.pm: do "doPartitionDisks" and "formatPartitions" ASAP in
+	upgrade so that miscellaneous is runned when /mnt is mounted (bugzilla
+	#8678)
+
+	* bootloader.pm: handle grub file names that do not correspond to a
+	mounted filesystem (bugzilla #14410)
+	use renamef instead of rename to create .old conf files
+
+	* Xconfig/xfree.pm: simplify
+	ensure the .old X conf is the last one
+	instead of having xorg.conf symlinked to XF86Config, do the contrary
+
+2005/03/18  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* crypto.pm: Fix downloading update rpms with ftp method.
+	Remove noisy log
+
+	* ftp.pm: Meaningful error messages
+
+2005/03/18  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Better way to list NIC modules (thx Thierry).
+	Lose the "system" calls. Use pxe.include now. Clean up some redundant
+	code.
+
+2005/03/18  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* detect_devices.pm (getUPS) move comment about serial UPS where
+	appropriate
+
+	* standalone/drakups (add_device_wizard) fix device path when manually
+	adding an UPS (#12290)
+
+	* standalone/logdrake: fix explanation mode only displaying last line
+	(#14368)
+	(parse_file) do not horribly die
+
+	* standalone/drakperm (row_setting_dialog) better looking GUI: span groups
+	& users on
+	several columns (up to 3)
+	(we might have choosed to set number of columns depending of number
+	and max length of group/users rather than hardcoding 3 columns)
+	(get_user_or_group) do not ignore groups with empty password field
+	(#14777)
+
+	* drakxtools.spec: 10.2-9mdk
+	10.2-8mdk
+	10.2-7mdk
+
+2005/03/18  willysr
+
+	* share/po/id.po: Updated
+	Updated
+	Updated
+
 2005/03/17  Alice Lafox  <alice at lafox.com.ua>
 
 	* share/po/ru.po: updated
@@ -46985,7 +47093,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1016 2005/03/15 19:40:21 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1017 2005/03/17 22:33:27 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
