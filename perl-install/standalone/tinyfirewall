@@ -1,8 +1,6 @@
 #!/usr/bin/perl
 
-# DrakNet
-
-# Copyright (C) 1999 MandrakeSoft (damien@mandrakesoft.com)
+# Copyright (C) 1999-2002 MandrakeSoft (pixel@mandrakesoft.com)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,68 +23,8 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use interactive;
 use tinyfirewall;
 
-$::isWizard = "@ARGV" =~ /--wizard/;
-$::Wizard_pix_up = "wiz_firewall.png";
-$::Wizard_title = _("Firewalling Configuration");
-
-local $_ = join '', @ARGV;
-
 my $in = 'interactive'->vnew('su', 'default');
 
-$::isEmbedded && $in->isa('interactive::gtk') or goto dd;
-require Gtk;
-init Gtk;
-
-my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
-$window1->signal_connect (delete_event => sub { Gtk->exit(0) });
-$window1->set_position(1);
-$window1->set_title(_("Firewalling configuration"));
-$window1->border_width(10);
-$::isEmbedded or $window1->set_usize(500, 400);
-my $vbox1 = new Gtk::VBox(0,0);
-$window1->add($vbox1);
-my $hbox1 = new Gtk::HBox(0,0);
-$vbox1->pack_start($hbox1,1,1,0);
-my $label1 = new Gtk::Label("");
-$hbox1->pack_start($label1,1,1,0);
-my $hbox2 = new Gtk::HBox(0,0);
-$vbox1->pack_start($hbox2,1,1,0);
-
-my $bbox1 = new Gtk::HButtonBox;
-$vbox1->pack_start($bbox1,0,0,0);
-$bbox1->set_layout(-end);
-my $button_conf = new Gtk::Button _("Configure");
-$button_conf->signal_connect (clicked => sub {
-				 system("/usr/sbin/tinyfirewall --wizard");
-				 update();
-			     });
-$bbox1->add($button_conf);
-my $button_ok = new Gtk::Button _("Cancel");
-$button_ok->signal_connect (clicked => sub {
-				 quit_global();
-			     });
-$bbox1->add($button_ok);
-$window1->show_all();
-update();
-Gtk->main_iteration while Gtk->events_pending;
-$::isEmbedded and kill 'USR2', $::CCPID;
-Gtk->main;
-Gtk->exit(0);
-
-sub update {
-$label1->set(-e "/etc/rc.d/rc3.d/S05bastille-firewall" ?
-				  _("Firewalling
-
-You already have set up a firewall.
-Click on Configure to change or remove the firewall"):
-				  _("Firewalling
-
-Click on Configure to set up a standard firewall"));
-}
-
-sub quit_global {
-    $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0);
-}
-
-dd:
 tinyfirewall::main($in);
+
+$in->exit;
