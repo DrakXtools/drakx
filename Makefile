@@ -45,4 +45,9 @@ upload: tar install
 	rm -f $(ROOTDEST)/Mandrake/mdkinst.tgz
 	rm -f /tmp/mdkinst_done
 
-# mkisofs -R -b images/cdrom.img -c images/.catalog /tmp/r /mnt/disk/ | cdrecord -v -eject speed=6 dev=1,0 -
+# mkisofs -r -J -b images/cdrom.img -c images/.catalog /tmp/r /mnt/disk/ | cdrecord -v -eject speed=6 dev=1,0 -
+# as distrib: mv ~/oxygen/oxygen/images ~/tmp/r
+# as mandrake: mkisofs -r -b images/cdrom.img -c images/boot.cat -o /home/ftp/linux-mandrake/pub/mirror/oxyiso/oxygen-3.iso ~distrib/tmp/r ~distrib/oxygen/oxygen
+# as mandrake: remove old iso in /home/ftp/linux-mandrake/pub/mirror/oxyiso
+# as mandrake: cd /home/ftp/linux-mandrake/pub/mirror/oxyiso ; md5sum *.iso > md5sum
+# as distrib: mv ~/tmp/r/images ~/oxygen/oxygen
