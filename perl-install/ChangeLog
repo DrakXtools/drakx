@@ -1,3 +1,14 @@
+2000-09-19  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm (get_pcmcia_devices): fix (especially, now ethernet
+	should be detected)
+
+	* lang.pm (get_langs): created, gives rpm install langs
+	* install_any.pm (setPackages): give langs::get_langs() to
+	readCompssList	
+	* pkgs.pm (readCompssList): don't use RPM_INSTALL_LANG, use given
+	$langs instead. This fixes the RPM_INSTALL_LANG=all install.
+
 2000-09-19  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* netconnect.pm: make dhcp-client, pump and such not translatable.
@@ -8,6 +19,10 @@
 
 	* Xconfigurator.pm (autologin): corrected @users definition and
 	passwd cat.
+
+2000-09-19  DrakX <install@linux-mandrake.com>
+
+	* snapshot uploaded
 
 2000-09-19  Pixel  <pixel@mandrakesoft.com>
 
@@ -31,8 +46,8 @@
 
 2000-09-19  Pixel  <pixel@mandrakesoft.com>
 
-	* install2.pm (miscellaneous): renamed LITTLE_FRIED_OIGNONS by
-	META_CLASS	
+	* install2.pm (miscellaneous): replaced LITTLE_FRIED_OIGNONS by
+	META_CLASS
 
 	* Xconfigurator.pm (cardConfiguration): when ddcxinfos gives false
 	result (not enough VideoRam), also remove the found resolutions

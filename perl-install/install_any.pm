@@ -303,7 +303,7 @@ sub setPackages($) {
 
 	$o->{compss} = pkgs::readCompss($o->{prefix}, $o->{packages});
 	#- must be done after getProvides
-	$o->{compssListLevels} = pkgs::readCompssList($o->{packages});
+	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, lang::get_langs());
 	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{packages}, $o->{compss});
 
 	my @l = ();

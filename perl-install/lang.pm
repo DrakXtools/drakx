@@ -283,6 +283,14 @@ sub set_langs {
     log::l("RPM_INSTALL_LANG: $ENV{RPM_INSTALL_LANG}");
 }
 
+sub get_langs {
+    [ 
+     $ENV{RPM_INSTALL_LANG} eq 'all' ?
+     map { substr($_->[2], 0, 2) } values %languages :
+     split(':', $ENV{RPM_INSTALL_LANG})
+    ];
+}
+
 sub write { 
     my ($prefix) = @_;
     my $lang = $ENV{LC_ALL};

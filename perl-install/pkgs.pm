@@ -639,7 +639,7 @@ sub readCompss {
 }
 
 sub readCompssList {
-    my ($packages) = @_;
+    my ($packages, $langs) = @_;
     my $f = install_any::getFile("compssList") or die "can't find compssList";
     my @levels = split ' ', <$f>;
 
@@ -651,7 +651,8 @@ sub readCompssList {
     }
 
     my %done;
-    foreach (split ':', $ENV{RPM_INSTALL_LANG}) {
+    foreach (@$langs) {
+	log::l("readCompssList lang: $_");
 	my $p = packageByName($packages, "locales-$_") or next;
 	foreach ($p, @{$p->{provides} || []}, map { packageByName($packages, $_) } @{$by_lang{$_} || []}) {
 	    next if !$_ || $done{$_}; $done{$_} = 1;
