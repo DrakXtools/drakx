@@ -100,10 +100,6 @@ sub add_users {
     }
 }
 
-sub crypt {
-    my ($password, $md5) = @_;
-    crypt($password, $md5 ? '$1$' . salt(8) : salt(2));
-}
 sub enableShadow() {
     run_program::rooted($::prefix, "pwconv")  or log::l("pwconv failed");
     run_program::rooted($::prefix, "grpconv") or log::l("grpconv failed");

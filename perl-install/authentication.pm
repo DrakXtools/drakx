@@ -611,6 +611,11 @@ sub query_srv_names {
     map { $_->target } $query->answer;
 }
 
+sub crypt {
+    my ($password, $md5) = @_;
+    crypt($password, $md5 ? '$1$' . salt(8) : salt(2));
+}
+
 sub user_crypted_passwd {
     my ($u, $isMD5) = @_;
     $u->{password} ? &crypt($u->{password}, $isMD5) : $u->{pw} || '';
