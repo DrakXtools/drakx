@@ -55,7 +55,8 @@ use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_fil
 
 
 if ("@ARGV" =~ /--help|-h/) {
-    print q(Font Importation and monitoring application
+    print q(Font Importation and monitoring appli    $check11->signal_connect( 'toggled',  sub { $gs == 0 and $gs = 1 or $gs = 0; print "gs =  $gs\n" });
+cation
 --windows_import : import from all available windows partitions.
 --xls_fonts      : show all fonts that already exist from xls
 --strong         : strong verification of font.
@@ -72,7 +73,7 @@ if ("@ARGV" =~ /--help|-h/) {
 
 #   global variables needed by each functions
 my $xlsfonts = 0;
-my $windows;
+my $windows = 0;
 my $strong;
 my $replace;
 my $application;
@@ -80,11 +81,26 @@ my $install;
 my $uninstall;
 my $so = 1;
 my $gs = 1;
+my $abi = 1;
+my $printer = 1;
 my $mode = -1;
 my @application;
 my @install;
 my @uninstall;
 my $interactive;
+my $text;
+my $vscrollbar;
+my $check4;
+my $check1;
+my $check2;
+my $check3;
+my $pbar;
+my $pbar1;
+my $pbar2;
+my $pbar3;
+my $font_box;
+my $central_widget;
+
 
 foreach (@ARGV) {
     /--xls_fonts/ and $xlsfonts = 1, $mode=-1;
@@ -144,12 +160,6 @@ my @fontsdir_to_install;
 my @fontsdir_to_uninstall;
 my @installed_fonts_full_path;
 
-my $pbar;
-my $pbar1;
-my $pbar2;
-my $pbar3;
-my $font_box;
-my $central_widget;
 
 sub list_fontpath {
     foreach (grep { /\d+:\s/ } `$chkfontpath -l`) {
@@ -400,14 +410,7 @@ sub backend_mod {
     }
 }
 
-#######################################  INTERACTIVE ######################################################################
 
-
-
-my $check4;
-my $check1;
-my $check2;
-my $check3;
 
 sub create_fontsel {
     my $font_sel;
@@ -439,7 +442,6 @@ sub interactive_mode {
 
     init Gtk;
 
-
     my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
     $window1->signal_connect (delete_event => sub { Gtk->exit(0) });
     $window1->set_position(1);
@@ -452,43 +454,36 @@ sub interactive_mode {
 				1, new Gtk::VBox(0,0),
 				1, gtkpack($font_box = new Gtk::VBox(0,5),
 					   $font_sel = new Gtk::FontSelection,
-					  ),
+					   ),
 				1, new Gtk::VBox(0,0)
-			       ),
+				),
 		    0, gtkpack_(new Gtk::VBox(0,5),
 				0, _("DrakFont"),
 				0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
 					  gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=>
 							    sub { ${$central_widget}->destroy(); $windows = 1; license() }),
 					  gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked =>
-							    sub {  }),
+							    sub {  ${$central_widget}->destroy(); $windows = 0; license() }),
 					  gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked => sub { Gtk->main_quit() }),
 					 ),
 				1, new Gtk::VBox(0,0),
-				0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-					  gtksignal_connect(new Gtk::Button(_("Help")), clicked => sub { print _("Help\n") }),
+				1, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+					  gtksignal_connect(new Gtk::Button(_("             Help           ")), clicked => sub { 
+					       ${$central_widget}->destroy(); help(); print _("Help\n") }),
 					  gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub { Gtk->main_quit() }),
 					 ),
-			       )
-		   ),
-	  );
+				)
+		    ),
+	   );
     $central_widget = \$font_sel;
     $window1->show_all;
     $window1->realize;
     $window1->show_all();
-    #}
-    # import_status();
-    #main_gi;
+
     Gtk->main;
     Gtk->exit(0);
 }
 
-
-my $text;
-my $vscrollbar;
-
-
-#	    $vscrollbar = new Gtk::VScrollbar( $text->vadj ),
 
 sub license {
     my $text = new Gtk::Text(undef, undef);
@@ -497,36 +492,160 @@ sub license {
 	    $license_box = gtkpack_(new Gtk::VBox(0,10),
 	       1, gtkpack_(new Gtk::HBox(0,0),
 			   1, gtktext_insert(gtkset_editable($text, 1), "Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server.\n-You can install the fonts with strong verification. In this case, bogus fonts won't be installed, but some useable fonts won't be too.\n\nIf you have many fonts, or exotic fonts, I recommend strong verification mode."),
-			   0, new Gtk::VScrollbar($text->vadj),
-			  ),
-	       0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
-			 gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { ${$central_widget}->destroy(); import_status() }),
-			 gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { ${$central_widget}->destroy(); create_fontsel() }),
-			),
-				      )
-	   );
+		  0, new Gtk::VScrollbar($text->vadj),
+		  ),
+		    0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+			      gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { 
+				  ${$central_widget}->destroy(); 
+				  !$windows and advanced_install() or appli_choice();
+			      }),
+			      gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { ${$central_widget}->destroy(); create_fontsel() }),
+			      ),
+				    )
+	    );
     $central_widget = \$license_box;
     $font_box->show_all();
 }
-	    
-
-#	    my $text = new Gtk::Text;
 
 
-#	    $text->set_editable( 0 ),
-#	    my $vscrollbar = new Gtk::VScrollbar( $text->$vadj );
-#	    my $hbox->pack_start( $vscrollbar, 0, 0, 0 );
-#	    $vscrollbar->show();
+sub help {
+    my $text = new Gtk::Text(undef, undef);
+    my $help_box;
+    gtkpack($font_box,
+	    $help_box = gtkpack_(new Gtk::VBox(0,10),
+	       1, gtkpack_(new Gtk::HBox(0,0),
+			   1, gtktext_insert(gtkset_editable($text, 1), "drakfont Future Overview
+        - Fonts import :
+                pfb ( Adobe Type 1 binary )
+                pfa ( Adobe Type 1 ASCII )
+                ttf ( True-Type  )
+                pcf.gz
+                Speedo
+                and Bitmap (PCF, BDF, and SNF)
+        - Features
+                - Install fonts from any directory
+                - Get windows fonts on any vfat partitions
+                - UN-installation of any fonts (even if not installed through drakfont)
+        - Support
+              - Xfs
+              - ghostscript & printer
+              - Staroffice & printer
+              - abiword
+              - Koffice, Gnumeric, ... studying
+              - all fonts supported by printer
+                         ( aliases by RENDER in Xfree86 .... -> later )
+Visual Interface:
+        Window interface:
+          - Fontselectiondialog widget
+          - Command buttons under Fontselectiondialog (like the actual frontend).
+        Commands buttons:
+          - import from windows partition.
+                import from all fat32 partitions and look for winnt/windows/font
+                and import all (delete doublon) but don't import if already exist.
+          - import from directory
+                look for if it exist before for each font and not delete the original.
+                (replace all, no, none)
+                expert options:
+                        ask the directory, and look for if it exist before
+                        if it exist ask: (replace all, no, none)
+          - uninstall with list per font type
+        Expert additional switch
+          - option support:   ghostscript, Staroffice, etc...
+                check-button. (by default all check)
+          - Printer Application Fonts Support..."),
+			   0, new Gtk::VScrollbar($text->vadj),
+			   ),
+			     0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+				gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { ${$central_widget}->destroy(); create_fontsel() }),
+				       ),
+				 )
+	    );
+    $central_widget = \$help_box;
+    $font_box->show_all();
+}
 
-#    $wtext->can_focus($has_scroll);
-#    chomp(my $text = join("\n", @_));
-#    my $scroll = createScrolledWindow(gtktext_insert($wtext, $text));
-#    $scroll->set_usize(400, $height);
-#    gtkpack__($o->{box}, $scroll);
+
+sub appli_choice {
+    my $choice_box;
+    gtkpack($font_box,
+	    $choice_box = gtkpack_(new Gtk::VBox(0,10),
+				   1, gtkpack_(new Gtk::HBox(0,4),
+					       1, my $table2 = create_packtable({ col_spacings => 2, row_spacings => 15},
+	 [_("You can choose the applications which support this fonts :"), ],
+	 [ "" , "" ],		    
+	 [_("Ghostscript Supported"), gtksignal_connect(my $check11 = new Gtk::CheckButton(), clicked =>  sub { print "appli = " ; })],
+	 [_("StarOffice Supported"),  my $check22 = new Gtk::CheckButton()],
+	 [_("Abiword Supported"),  my $check33 = new Gtk::CheckButton()],
+	 [_("Printer Supported"), my $check44 = new Gtk::CheckButton()],
+										),
+					       ),
+				   0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+					     gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { 
+						 ${$central_widget}->destroy(); font_choice() }),
+					     gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { 
+						 ${$central_widget}->destroy(); create_fontsel() }),
+					     ),
+				   )
+	    );
+    $check11->set_active($gs);
+    $check22->set_active($so);
+    $check33->set_active($abi);
+    $check44->set_active($printer);
+    $check11->signal_connect( 'toggled',  sub { $gs == 0 and $gs = 1 or $gs = 0; print "gs =  $gs\n" });
+    $check22->signal_connect( 'toggled',  sub { $so == 0 and $so = 1 or $so = 0; print "so =  $so\n" });
+    $check33->signal_connect( 'toggled',  sub { $abi == 0 and $abi = 1 or $abi = 0; print "abi =  $abi\n" });
+    $check44->signal_connect( 'toggled',  sub { $printer == 0 and $printer = 1 or $printer = 0; print "printer =  $printer\n" });
+    $central_widget = \$choice_box;
+    $font_box->show_all();
+}
 
 
-#	_("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server.\n-You can install the fonts with strong verification. In this case, bogus fonts won't be installed, but some useable fonts won't be too.\n\nIf you have many fonts, or exotic fonts, I recommend strong verification mode."),
-	    
+sub font_choice {
+    my $file_box;
+    gtkpack($font_box,
+	    $file_box = gtkpack_(new Gtk::VBox(0,10),
+				 1, gtkpack_(new Gtk::HBox(0,4),
+#					       1, new Gtk::FileSelection( "choix fontes" ),
+					       0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+							 gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { 
+#						 ${$central_widget}->destroy(); import_status() }),
+						 ${$central_widget}->destroy(); import_status() }),
+					     gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { 
+						 ${$central_widget}->destroy(); create_fontsel() }),
+							 ),
+					     ),
+				 )
+	    );
+    $central_widget = \$file_box;
+    $font_box->show_all();
+}
+
+
+sub advanced_install {
+    my $gtklist = new Gtk::List();
+    my $scrolled_window;
+    my $adv_box;
+    my @items = ("toto", "ddddd");
+    my $list = new Gtk::List();
+    gtkpack($font_box,
+	    $adv_box = gtkpack_(new Gtk::VBox(0,10),
+				1, gtkpack_(new Gtk::HBox(0,4),
+					    1, $scrolled_window =new Gtk::ScrolledWindow( undef, undef ),
+					    $scrolled_window->set_usize( 450, 200 ),
+					    $scrolled_window->add_with_viewport( $list ),
+					    ),
+				0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+					  gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { 
+#						 ${$central_widget}->destroy(); import_status() }),
+					      ${$central_widget}->destroy(); import_status() }),
+					  gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { 
+					      ${$central_widget}->destroy(); create_fontsel() }),
+					  ),
+				)
+	    );
+    $central_widget = \$adv_box;
+    $adv_box->show_all();
+}
 
 
 sub import_status {
