@@ -418,10 +418,13 @@ our @locales = qw(ad_ET af_ZA am_ET an_ES ar_AE ar_BH ar_DZ ar_EG ar_IN ar_IQ ar
 	
 sub standard_locale {
     my ($lang, $country, $prefer_lang) = @_;
-  retry:
     member("${lang}_${country}", @locales) and return "${lang}_${country}";
     $prefer_lang && member($lang, @locales) and return $lang;
-    length($lang) > 2 and $lang =~ s/^(..).*/$1/, goto retry;
+    my $main_locale = locale_to_main_locale($lang);
+    if ($main_locale ne $lang) {
+	standard_locale($main_locale, $country, $prefer_lang);
+    }
+    '';
 }
 
 sub fix_variant {
@@ -429,6 +432,17 @@ sub fix_variant {
     #- uz@Cyrl_UZ -> uz_UZ@Cyrl
     $locale =~ s/(.*)(\@\w+)(_.*)/$1$3$2/;
     $locale;
+}
+
+sub analyse_locale_name {
+    my ($locale) = @_;
+    $locale =~ /^(.*?) (?:_(.*?))? (?:\.(.*?))? (?:\@(.*?))? $/x &&
+      { main => $1, country => $2, charset => $3, variant => $4 };
+}
+
+sub locale_to_main_locale {
+    my ($locale) = @_;
+    lc(analyse_locale_name($locale)->{main});
 }
 
 sub getlocale_for_lang {
@@ -443,7 +457,9 @@ sub getlocale_for_country {
 
 sub getLANGUAGE {
     my ($lang, $o_country, $o_utf8) = @_;
-    l2language($lang) || join(':', uniq(getlocale_for_lang($lang, $o_country, $o_utf8), $lang, if_($lang =~ /^(..)_/, $1)));
+    l2language($lang) || join(':', uniq(getlocale_for_lang($lang, $o_country, $o_utf8), 
+					$lang, 
+					locale_to_main_locale($lang)));
 }
 
 my %xim = (
@@ -664,7 +680,7 @@ sub get_kde_lang {
                         zh_CN => 'zh_CN', zh_SG => 'zh_CN', zh_TW => 'zh_TW', zh_HK => 'zh_TW');
         exists $fixlangs{$lang} ? $fixlangs{$lang} :
 	  exists $valid_kde_langs{$lang} ? $lang :
-	  exists $valid_kde_langs{substr($lang, 0, 2)} ? substr($lang, 0, 2) : '';
+	  exists $valid_kde_langs{locale_to_main_locale($lang)} ? locale_to_main_locale($lang) : '';
     };
 
     my $r;
@@ -880,17 +896,14 @@ sub pack_langs {
 sub system_locales_to_ourlocale {
     my ($locale_lang, $locale_country) = @_;
     my $locale = {};
-    my $variant = $locale_lang =~ s/(\@\w+)// && $1;
-    my $locale_lang_no_encoding = $locale_lang =~ /(.*)\./ ? $1 : $locale_lang;
-    if (member($locale_lang_no_encoding, list_langs())) {
-	#- special lang's such as en_US pt_BR
-	$locale->{lang} = $locale_lang_no_encoding;
-    } else {
-	($locale->{lang}) = $locale_lang =~ /^(..)/;
-    }
-    $locale->{lang} .= $variant;
-    ($locale->{country}) = $locale_country =~ /^.._(..)/;
-    $locale->{utf8} = $locale_lang =~ /UTF-8/;
+    my $h = analysed_locale($locale_lang);
+    my $locale_lang_no_encoding = join('_', $h->{main}, if_($h->{country}, $h->{country}));
+    $locale->{lang} = member($locale_lang_no_encoding, list_langs()) ?
+	$locale_lang_no_encoding : #- special lang's such as en_US pt_BR
+	$h->{main};
+    $locale->{lang} .= '@' . $h->{variant} if $h->{variant};
+    $locale->{country} = $h->{country};
+    $locale->{utf8} = $h->{encoding} eq 'UTF-8';
     #- safe fallbacks
     $locale->{lang} ||= 'en_US';
     $locale->{country} ||= 'US';
@@ -981,7 +994,7 @@ sub write {
 	configure_kdeglobals($locale, $confdir);
 
 	my %qt_xim = (zh => 'Over The Spot', ko => 'On The Spot', ja => 'On The Spot');
-	if ($b_user_only && (my $qt_xim = $qt_xim{substr($locale->{lang}, 0, 2)})) {
+	if ($b_user_only && (my $qt_xim = $qt_xim{locale_to_main_locale($locale->{lang})})) {
 	    update_gnomekderc("$ENV{HOME}/.qt/qtrc", General => (XIMInputStyle => $qt_xim));
 	}
 
@@ -1166,7 +1179,7 @@ sub check() {
     }
 
     $warn->("no country corresponding to default locale $_->[1] of lang $_->[0]")
-      foreach grep { $_->[1] =~ /^.._(..)/ && !exists $countries{$1} } map { [ $_, l2locale($_) ] } list_langs();
+      foreach grep { $_->[1] =~ /.._(..)/ && !exists $countries{$1} } map { [ $_, l2locale($_) ] } list_langs();
 
     print "\tErrors:\n";
 
