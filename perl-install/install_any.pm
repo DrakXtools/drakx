@@ -665,7 +665,6 @@ sub use_root_part {
 	fs::get_mntpoints_from_fstab($fstab, $handle->{dir}, 'uniq');
     }
     map { $_->{mntpoint} = 'swap' } grep { isSwap($_) } @$fstab; #- use all available swap.
-    fs::mount_all($fstab, $prefix);
 }
 
 sub getHds {
