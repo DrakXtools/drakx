@@ -21,18 +21,7 @@ fi
 # select the appropriate mkhybrid binary depending on if
 # we are on x86 or ppc
 
-ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
-
-if [ "$ARCH" == "ppc" ]; then
-    MKHYBRID=mkhybrid-1.12b5.4
-else
-    if [ "$ARCH" == "i386" ]; then
-	MKHYBRID=mkhybrid-1.12b5.4-x86
-    else 
-	echo "Sorry, no mkhybrid binary for $ARCH..."
-	exit
-    fi
-fi
+MKHYBRID=mkisofs
 
 #Change these when you build the CD..
 ApplicationID="Linux-Mandrake"
@@ -43,7 +32,7 @@ volid=ppc
 hfsVolid=Linux-Mandrake
 curPwd=`pwd`
 
-$curPwd/$MKHYBRID -part -hfs -r -l -J \
+$MKHYBRID -part -hfs -r -l -J \
 -A $ApplicationID \
 -P $PublisherID \
 -p $PreparerID \
@@ -60,6 +49,8 @@ $curPwd/$MKHYBRID -part -hfs -r -l -J \
 -hide '*.MacOS' -hide '*.DOS' \
 -hide-joliet '*.Unix' -hide-joliet '*.MacOS' \
 -hide-hfs '*.Unix' -hide-hfs '*.DOS' \
+-hfs-bless $1/boot \
+-hfs-unlock \
 -pad \
 -o $2 \
 $1 
@@ -71,7 +62,7 @@ hcd boot
 hattrib -t tbxi -c UNIX ofboot.b
 hattrib -t boot -c UNIX yaboot
 hattrib -t boot -c UNIX vmlinux
-hattrib -t boot -c UNIX vmlinux-2.2
+hattrib -t boot -c UNIX vmlinux-2.4
 hattrib -t conf -c UNIX yaboot.conf
 hcd
 hcd BootX
