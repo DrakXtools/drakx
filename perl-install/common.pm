@@ -205,7 +205,10 @@ sub all {
 
     local *F;
     opendir F, $d or die "all: can't open dir $d: $!\n";
-    grep { $_ ne '.' && $_ ne '..' } readdir F;
+    my @l = grep { $_ ne '.' && $_ ne '..' } readdir F;
+    closedir F;
+
+    @l;
 }
 
 sub glob_ {

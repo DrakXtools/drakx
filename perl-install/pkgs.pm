@@ -313,6 +313,11 @@ sub init_db {
     $isUpgrade ? c::rpmdbRebuild($prefix) : c::rpmdbInit($prefix, 0644) or die "creation/rebuilding of rpm database failed: ", c::rpmErrorString();
 }
 
+sub done_db {
+    log::l("closing install.log file");
+    close LOG;
+}
+
 sub getHeader($) {
     my ($p) = @_;
 

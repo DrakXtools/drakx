@@ -218,6 +218,8 @@ sub installPackages($$) {
 sub afterInstallPackages($) {
     my ($o) = @_;
 
+    pkgs::done_db();
+
     #-  why not? cuz weather is nice today :-) [pixel]
     sync(); sync();
 
