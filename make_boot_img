@@ -141,7 +141,7 @@ sub entries_append {
     );
     my @entries = (
         (map { $_->[0] => "$automatic $_->[1]" } group_by2(@simple_entries)),
-	if_(member($type, "cdrom", "all"), oem => "automatic=method:cdrom rescue oem rw"),
+	if_(member($type, "cdrom", "all"), oem => "automatic=method:cdrom $default_vga rescue oem rw"),
         if_($type eq "all", all => "pcmcia $default_vga"),
     );
 
