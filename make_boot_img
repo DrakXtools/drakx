@@ -60,7 +60,7 @@ sub initrd {
     _ "$mke2fs $tmp";
     _ "$sudo mount -t ext2 $tmp $mnt -o loop";
 
-    _ "$sudo tar xyC $mnt -f $tar";
+    _ "$sudo tar xjC $mnt -f $tar";
     install_s("$instdir/init", "$mnt/sbin");
     install_s("$instdir/$install", "$mnt/sbin/stage1");
 
