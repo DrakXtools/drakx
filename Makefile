@@ -13,7 +13,7 @@ BOOT_IMG += $(RELEASE_BOOT_IMG)
 
 BOOT_RDZ = $(BOOT_IMG:%.img=%.rdz)
 BINS = mdk-stage1/init mdk-stage1/stage1-full mdk-stage1/stage1-cdrom mdk-stage1/stage1-network
-DIRS = tools mdk-stage1
+DIRS = tools mdk-stage1 perl-install
 
 ROOTDEST = /export
 UPLOAD_DEST_ = ~/cooker
