@@ -34,9 +34,10 @@ install:
 	install -s rpcinfo-flushed ddcprobe/ddcxinfos serial_probe/serial_probe $(SBINDEST)
 	ln -s ../../$(patsubst $(PREFIX)/usr%,%,$(SBINDEST))/XFdrake $(BINX11DEST)/Xdrakres
 	ln -s fileshareset $(SBINDEST)/filesharelist
-	mv -f $(SBINDEST)/lsnetdrake $(BINDEST)/lsnetdrake
-	mv -f $(SBINDEST)/drakbug $(BINDEST)/drakbug
-	mv -f $(SBINDEST)/drakhelp $(BINDEST)/drakhelp
+	mv -f $(SBINDEST)/lsnetdrake $(BINDEST)
+	mv -f $(SBINDEST)/drakbug $(BINDEST)
+	mv -f $(SBINDEST)/drakhelp $(BINDEST)
+	mv -f $(SBINDEST)/localedrake $(BINDEST)
 
 	install -m 644 *.pm $(LIBDEST)
 	for i in $(PMS_DIRS); do install -d $(LIBDEST)/$$i ; install -m 644 $$i/*.pm $(LIBDEST)/$$i/;done
