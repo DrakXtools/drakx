@@ -79,12 +79,13 @@ static int ensure_dev_exists(char *dev)
 			minor += 10 + (name[4] - '0');
 		else if (name[3])
 			minor += (name[3] - '0');
-	} else if (name[0] == 's' && name[1] == 'c' && name[2] == 'd') {
+	} else if (name[0] == 's' && name[1] == 'r') {
 		/* SCSI cd's */
 		major = 11;
-		minor = name[3] - '0';
+		minor = name[2] - '0';
 	} else if (ptr_begins_static_str(name, "ida/") ||
 		   ptr_begins_static_str(name, "cciss/")) {
+		/* Compaq Smart Array */
 		char * ptr = strchr(name, '/');
 		mkdir("/dev/ida", 0755);
 		mkdir("/dev/cciss", 0755);
