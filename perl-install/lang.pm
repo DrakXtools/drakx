@@ -143,9 +143,9 @@ my %xim = (
   },
   'zh_CN.GB2312' => {
 	ENC => 'gb',
-	XIM => 'xcin-zh_CN.GB2312',
-	XIM_PROGRAM => 'xcin',
-	XMODIFIERS => '"@im=xcin-zh_CN.GB2312"',
+	XIM => 'Chinput',
+	XIM_PROGRAM => 'chinput',
+	XMODIFIERS => '"@im=Chinput"',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'ko' => {
