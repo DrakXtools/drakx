@@ -327,6 +327,7 @@ sub getHds {
   getHds: 
     $o->{hds} = catch_cdie { fsedit::hds(\@drives, $o->{partitioning}) }
       sub {
+        log::l("error reading partition table: $@");
 	my ($err) = $@ =~ /(.*) at /;
 	$@ =~ /overlapping/ and $o->ask_warn('', $@), return 1;
 	$o->ask_okcancel(_("Error"),

@@ -11,12 +11,6 @@ use partition_table_raw;
 use partition_table;
 use c;
 
-#- very bad and rough handling :(
-my %typeToDos = (
-  5 => 0,
-);
-my %typeFromDos = reverse %typeToDos;
-
 my ($main_format, $main_fields) = list2kv(
   a128  => 'info',
   a14   => 'spare0',
@@ -39,7 +33,7 @@ my ($main_format, $main_fields) = list2kv(
 $main_format = join '', @$main_format;
 
 my ($fields1, $fields2) = ([ qw(type flags) ], [ qw(start_cylinder size) ]);
-my ($format1, $format2) = ("x C x C", "N N");
+my ($format1, $format2) = ("xCxC", "N2");
 my ($size1, $size2) = map { psizeof($_) } ($format1, $format2);
 my $magic = 0xDABE;
 my $nb_primary = 8;
@@ -97,17 +91,28 @@ sub read($$) {
     #- check crc, csum contains the crc so result should be 0.
     compute_crc($tmp) == 0 or die "bad checksum";
 
-    @{$hd->{geom}}{qw(cylinders heads sectors)} = @info{qw(ncyl nsect ntrks)};
+    @{$hd->{geom}}{qw(cylinders heads sectors)} = @info{qw(ncyl ntrks nsect)};
 
-    my @pt = mapn {
-	my %h; 
-	@h{@$fields1} = unpack $format1, $_[0];
-	@h{@$fields2} = unpack $format2, $_[1];
-	$h{start} = $sector + $h{start_cylinder} * $hd->cylinder_size();
-#	$h{type} = $typeToDos{$h{type}} || $h{type}; #- for rewrite it ?
-	$h{size} or $h{$_} = 0 foreach keys %h;
-	\%h;
-    } [ $info{infos} =~ /(.{$size1})/g ], [ $info{partitions} =~ /(.{$size2})/g ];
+    my @pt;
+    my @infos_up = unpack $format1 x $nb_primary, $info{infos};
+    my @partitions_up = unpack $format2 x $nb_primary, $info{partitions};
+    for (0..$nb_primary-1) {
+	my $h = { type => $infos_up[2 * $_], flag => $infos_up[1 + 2 * $_],
+		  start_cylinder => $partitions_up[2 * $_], size => $partitions_up[1 + 2 * $_] };
+	$h->{start} = $sector + $h->{start_cylinder} * $hd->cylinder_size();
+	$h->{type} && $h->{size} or $h->{$_} = 0 foreach keys %$h;
+	push @pt, $h;
+    }
+
+#- this code is completely broken by null char inside strings, it gets completely crazy :-)
+#    my @pt = mapn {
+#	my %h; 
+#	@h{@$fields1} = unpack $format1, $_[0];
+#	@h{@$fields2} = unpack $format2, $_[1];
+#	$h{start} = $sector + $h{start_cylinder} * $hd->cylinder_size();
+#	$h{type} && $h{size} or $h{$_} = 0 foreach keys %h;
+#	\%h;
+#    } [ grep { $_ } split /(.{$size1})/o, $info{infos} ], [ grep { $_ } split /(.{$size2})/o, $info{partitions} ];
 
     [ @pt ], \%info;
 }
@@ -134,7 +139,6 @@ sub write($$$;$) {
 #	$wdsize += $_->{size} if $_->{type} == 5;
 	$_->{flags} |= 0x10 if $_->{mntpoint} eq '/';
 	$_->{flags} |= 0x01 if partition_table::isSwap($_);
-#	local $_->{type} = $typeFromDos{$_->{type}} || $_->{type};
 	local $_->{start_cylinder} = $_->{start} / $hd->cylinder_size() - $sector;
 	pack($format1, @$_{@$fields1}), pack($format2, @$_{@$fields2});
     } @$pt;

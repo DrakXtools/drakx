@@ -204,16 +204,16 @@ sub name2type($) {
 }
 
 sub isWholedisk($) { arch() =~ /^sparc/ && $_[0]{type} == 5 }
-sub isExtended($) { (arch() !~ /^sparc/ && $_[0]{type} == 5) || $_[0]{type} == 0xf || $_[0]{type} == 0x85 }
+sub isExtended($) { arch() !~ /^sparc/ && ($_[0]{type} == 5 || $_[0]{type} == 0xf || $_[0]{type} == 0x85) }
 sub isRAID($) { $_[0]{type} == 0xfd }
 sub isSwap($) { $type2fs{$_[0]{type}} eq 'swap' }
 sub isExt2($) { $type2fs{$_[0]{type}} eq 'ext2' }
 sub isReiserfs($) { $type2fs{$_[0]{type}} eq 'reiserfs' }
-sub isDos($) { $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]{type}} }
+sub isDos($) { arch() !~ /^sparc/ && $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]{type}} }
 sub isWin($) { $ {{ 0xb=>1, 0xc=>1, 0xe=>1, 0x1b=>1, 0x1c=>1, 0x1e=>1 }}{$_[0]{type}} }
 sub isFat($) { isDos($_[0]) || isWin($_[0]) }
 sub isNfs($) { $_[0]{type} eq 'nfs' } #- small hack
-sub isNT($) { $_[0]{type} == 0x7 }
+sub isNT($) { arch() !~ /^sparc/ && $_[0]{type} == 0x7 }
 sub isSupermount($) { $_[0]{type} eq 'supermount' }
 sub isHFS($) { $type2fs{$_[0]{type}} eq 'hfs' }
 sub isApplePartMap { defined $_[0]{isMap} }
@@ -359,16 +359,22 @@ sub read_one($$) {
 
     my ($pt, $info);
     #- SUN bioses may blank disk or refuse to load it if the partition is unknown.
-    my @parttype = arch() =~ /^sparc/ ? ('sun', 'unknown') : ('dos', 'bsd', 'sun', 'mac', 'unknown');
+    my @parttype = arch() =~ /^sparc/ ? ('sun', 'bsd', 'unknown') : ('dos', 'bsd', 'sun', 'mac', 'unknown');
     foreach (@parttype) {
 	/unknown/ and die "unknown partition table format";
 	eval {
 	    bless $hd, "partition_table_$_";
 	    ($pt, $info) = $hd->read($sector);
+	    log::l("found a $_ partition table on $hd->{file}");
+	    {
+		foreach my $e (@$pt) {
+		    my $logtext = join(" ", map { "$_=$e->{$_}" } keys %$e);
+		    log::l("$logtext");
+		}
+	    }
 	};
 	$@ or last;
     }
-
 
     my @extended = $hd->hasExtended ? grep { isExtended($_) } @$pt : ();
     my @normal = grep { $_->{size} && $_->{type} && !isExtended($_) } @$pt;
