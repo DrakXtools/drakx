@@ -1,3 +1,33 @@
+2005/04/06  Olivier Blin <oblin at mandrakesoft.com>
+
+	* do_pkgs.pm: now that I know how to short-circuit it, make it work as
+	well
+	(have I already said I sux ?)
+	use short-circuit operator (/me sux, thanks Pixel)
+
+	* share/list, share/aliases: ship rmmod binary since insmod from
+	module-init-tools isn't combined with rmmod
+
+2005/04/06  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: monitor-edid needs /dev/zero when fallbacking on lrmi
+
+	* install2.pm: leave bootsplash when X is up (and also in newt and
+	auto_install)
+	when re-ordering the steps to have doPartitionDisks just after
+	selectInstallClass in case of upgrade, do it properly so that the
+	"Partitioning lamp" behaves properly (bugzilla #15040)
+
+	* install_any.pm: make the auto_inst.cfg more valid in report.bug.gz, and
+	add a warning
+
+	* install_gtk.pm: fix position of steps window in direction rtl (bugzilla
+	#15261)
+
+2005/04/06  Warly  <warly at mandrakesoft.com>
+
+	* share/logo-mandrake.png: LE-2005 logo
+
 2005/04/06  Pixel  <pixel at mandrakesoft.com>
 
 	* install_any.pm: make the auto_inst.cfg more valid in report.bug.gz, and
@@ -48337,7 +48367,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1030 2005/04/05 10:15:16 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1031 2005/04/06 09:58:05 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
