@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.5mdk
+Release: 0.6mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -366,7 +366,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-- new package drakx-finish-install
+* Wed Dec 15 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.6mdk
+- handle more PCMCIA/CardBus cards
+- do not try to load floppy module if there's no floppy drive (#8211)
+- drakTermServ: misc GUI enhancements (pixel, stew)
+- harddrake service: configure PCMCIA host controller if needed
+- new package drakx-finish-install (pixel)
+- new mygtk2 layer
 
 * Fri Nov 26 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.5mdk
 - diskdrake: handle common geometry XXX/240/63 is quite common thus
