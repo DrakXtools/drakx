@@ -901,7 +901,9 @@ sub write {
 	my $p = "$prefix/usr/lib/kbd";
 	if ($name) {
 	    eval {
-		cp_af("$p/consolefonts/$name.psf.gz", "$prefix/etc/sysconfig/console/consolefonts");
+		my $font = "$p/consolefonts/$name.psf";
+		$font .= ".gz" if ! -e $font;
+		cp_af($font, "$prefix/etc/sysconfig/console/consolefonts");
 		add2hash $h, { SYSFONT => $name };
 	    };
 	    $@ and log::l("missing console font $name");
