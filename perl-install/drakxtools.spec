@@ -262,12 +262,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Thu Aug 29 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-25mdk
+* Thu Aug 29 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-26mdk
 - harddrake: 
 	o quit button really work in embedded mode
 	o move so called eide raid controllers from unknown to ata
 	  controllers
 - logdrake: add a scrollbar when embedded in mcc
+
+* Thu Aug 29 2002 Guillaume Cottenceau <gc@mandrakesoft.com> 1.1.9-25mdk
+- snapshot (drakupdate_fstab --auto feature (pixel), logdrake don't
+  display too much information in explanations to save space for what's
+  useful)
 
 * Thu Aug 29 2002 Guillaume Cottenceau <gc@mandrakesoft.com> 1.1.9-24mdk
 - snapshot for display_info availability in ask_browse for rpmdrake
