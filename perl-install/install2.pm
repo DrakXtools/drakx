@@ -431,6 +431,9 @@ sub main {
     log::openLog(($::testing || $o->{localInstall}) && 'debug.log');
     log::l("second stage install running (", any::drakx_version(), ")");
 
+    mkdir '/sys';
+    syscall_('mount', (my $_dev = 'none'), (my $_where = '/sys'), (my $_type = 'sysfs'), 0);
+
     if ($::move) {
         require move;
         move::init($o);
@@ -524,7 +527,6 @@ sub main {
     eval { $o = $::o = install_any::loadO($o, "patch"); log::l("successfully read patch") } if $patch;
 
     eval { modules::load("af_packet") };
-    eval { fs::mount('none', '/sys', 'sysfs', 0) };
 
     require harddrake::sound;
     harddrake::sound::configure_sound_slots();
