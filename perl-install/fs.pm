@@ -27,7 +27,7 @@ sub read_fstab {
 	$type = fs2type($type);
 	if ($type eq 'supermount') {
 	    # normalize this bloody supermount
-	    $options = join(",", grep {
+	    $options = join(",", 'supermount', grep {
 		if (/fs=(.*)/) {
 		    $type = $1;
 		    0;
@@ -67,7 +67,7 @@ sub merge_fstabs {
 	my ($p2) = grep { fsedit::is_same_hd($_, $p) } @l or next;
 	@l       = grep { !fsedit::is_same_hd($_, $p) } @l;
 
-	$p2->{type} && $p->{type} ne $p2->{type} && type2fs($p) ne type2fs($p2) && $p->{type} ne 'auto' && $p2->{type} ne 'auto' and
+	$p->{type} && $p2->{type} && $p->{type} ne $p2->{type} && type2fs($p) ne type2fs($p2) && $p->{type} ne 'auto' && $p2->{type} ne 'auto' and
 	  log::l("err, fstab and partition table do not agree for $p->{device} type: " . (type2fs($p) || type2name($p->{type})) . " vs ", (type2fs($p2) || type2name($p2->{type}))), next;
 	
 	$p->{mntpoint} = $p2->{mntpoint} if delete $p->{unsafeMntpoint};
@@ -75,7 +75,7 @@ sub merge_fstabs {
 	$p->{type} ||= $p2->{type};
 	$p->{options} = $p2->{options} if $p->{type} eq 'defaults';
 	add2hash($p, $p2);
-	$p->{device_alias} ||= $p2->{device_alias} || $p2->{device} if $p->{device} ne $p2->{device};
+	$p->{device_alias} ||= $p2->{device_alias} || $p2->{device} if $p->{device} ne $p2->{device} && $p2->{device} !~ m|/|;
     }
     @l;
 }
