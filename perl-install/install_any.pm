@@ -1030,9 +1030,6 @@ sub install_urpmi {
 		close $F;
 	    }
 
-	    #- touch a MD5SUM file
-	    eval { output("$::prefix/var/lib/urpmi/MD5SUM", '') };
-
 	    #- build synthesis file if there are still not existing (ie not copied from mirror).
 	    if (-s "$::prefix/var/lib/urpmi/synthesis.hdlist.$name.cz" <= 32) {
 		unlink "$::prefix/var/lib/urpmi/synthesis.hdlist.$name.cz";
@@ -1075,6 +1072,8 @@ sub install_urpmi {
 	    unlink "$::prefix/var/lib/urpmi/synthesis.hdlist.$name.cz";
 	}
     }
+    #- touch a MD5SUM file and write config file
+    eval { output("$::prefix/var/lib/urpmi/MD5SUM", '') };
     eval { output "$::prefix/etc/urpmi/urpmi.cfg", @cfg };
 }
 
