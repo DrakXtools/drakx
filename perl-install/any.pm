@@ -160,7 +160,7 @@ sub setupBootloader {
 	$b->{vga} ||= 'normal';
 	if (arch !~ /ppc/) {
 	$in->ask_from('', _("Bootloader main options"), [
-{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate, type => 'list' },
+{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },
     arch() =~ /sparc/ ? (
 { label => _("Bootloader installation"), val => \$silo_install_lang, list => \@silo_install_lang },
 ) : if_(arch() !~ /ia64/,
@@ -192,7 +192,7 @@ sub setupBootloader {
 	} else {
 	$b->{boot} = $partition_table_mac::bootstrap_part;	
 	$in->ask_from('', _("Bootloader main options"), [
-	{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate, type => 'list' },	
+	{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },	
 	{ label => _("Init Message"), val => \$b->{initmsg} },
 	{ label => _("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab))], not_edit => !$::expert },
 	{ label => _("Open Firmware Delay"), val => \$b->{delay} },
@@ -1023,7 +1023,7 @@ Security features are at their maximum.")),
     $in->ask_from('', _("Choose security level") . "\n\n" .
 		  join('', map { "$l{$_}: $help{$_}\n\n" } keys %l),
 		  [
-		   { label => _("Security level"), val => $security, list => [ sort keys %l ], format => sub { $l{$_} }, type => 'list' },
+		   { label => _("Security level"), val => $security, list => [ sort keys %l ], format => sub { $l{$_} } },
 		   if_($in->do_pkgs->is_installed('libsafe') && arch() =~ /^i.86/,
 		       { label => _("Use libsafe for servers"), val => $libsafe, type => 'bool', text =>
 			 _("A library which defends against buffer overflow and format string attacks.") }
