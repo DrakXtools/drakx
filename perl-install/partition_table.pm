@@ -6,7 +6,7 @@ package partition_table; # $Id$
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isReiserfs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isNfs isSupermount isRAID isMDRAID isHFS isNT isMountableRW isApplePartMap isLoopback) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isReiserfs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isNfs isSupermount isRAID isMDRAID isHFS isNT isMountableRW isNonMountable isApplePartMap isLoopback) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -208,6 +208,7 @@ sub name2type($) {
 
 sub isWholedisk($) { arch() =~ /^sparc/ && $_[0]{type} == 5 }
 sub isExtended($) { arch() !~ /^sparc/ && ($_[0]{type} == 5 || $_[0]{type} == 0xf || $_[0]{type} == 0x85) }
+sub isLVM($) { $_[0]{type} == 0x8e }
 sub isRAID($) { $_[0]{type} == 0xfd }
 sub isMDRAID { $_[0]{device} =~ /^md/ }
 sub isSwap($) { $type2fs{$_[0]{type}} eq 'swap' }
@@ -227,6 +228,7 @@ sub isHiddenMacPart { defined $_[0]{isMap} }
 sub isLoopback { defined $_[0]{loopback_file} }
 sub isTrueFS { isExt2($_[0]) || isReiserfs($_[0]) }
 sub isMountableRW { isTrueFS($_[0]) || isOtherAvailableFS($_[0]) }
+sub isNonMountable { isRAID($_[0]) || isLVM($_[0]) }
 
 sub isPrimary($$) {
     my ($part, $hd) = @_;
