@@ -2,22 +2,38 @@
 # chkconfig: 235 99 00
 # description: Start or stop the miniserv administration server
 
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+subsys=/var/lock/subsys/drakxtools_http
 name=drakxtools_http
 server=/usr/share/libDrakX/$name/miniserv.pl
 
+start ()
+{
+	action "Starting $name: " perl $server /etc/$name/conf
+	touch $subsys
+	echo $name
+}
+
+stop ()
+{
+	action "Shutting down $name: " kill `cat /var/run/$name.pid`
+	rm -f $subsys
+	echo $name
+}
+
+restart ()
+{
+	stop
+	start
+}
+
 case "$1" in
 'start')
-	echo -n "Starting $name: "
-	perl $server /etc/$name/conf
-	touch /var/lock/subsys/drakxtools_http
-	echo $name
-	;;
+	start;;
 'stop')
-	echo -n "Shutting down $name: "
-	kill `cat /var/run/$name.pid`
-	rm -f /var/lock/subsys/drakxtools_http
-	echo $name
-	;;
+	stop;;
 'status')
 	if [ -s /var/run/$name.pid ]; then
 	    pid=`cat /var/run/$name.pid`
@@ -32,18 +48,11 @@ case "$1" in
 	fi
 	;;
 'restart')
-	$0 stop
-	$0 start
-	;;
+	restart;;
 'reload')
-        $0 stop
-        $0 start
-        ;;
+        restart;;
 'condrestart')
-	if [ -f /var/lock/subsys/drakxtools_http ]; then
-            $0 restart
-        fi
-        ;;
+	[[ -f $subsys ]] && restart;;
 *)
 	echo "Usage: $0 {start|stop|restart|status|reload|condrestart}"
 	;;
