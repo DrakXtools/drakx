@@ -19,6 +19,10 @@ my %typeToDos = (
   "Apple_Patches"	=> 0x401,
   "Apple_HFS"		=> 0x402,
   "Apple_UNIX_SVR2"	=> 0x83,
+  "Apple_UNIX_SVR2"     => 0x183,
+  "Apple_UNIX_SVR2"     => 0x283,
+  "Apple_UNIX_SVR2"     => 0x383,
+  "Apple_UNIX_SVR2"     => 0x483,
   "Apple_Free"		=> 0x0,
 );
 my %typeFromDos = reverse %typeToDos;
@@ -306,6 +310,22 @@ sub write($$$;$) {
             } elsif ($_->{type} == 0x83) {
                 $_->{pType} = "Apple_UNIX_SVR2";
                 $_->{pName} = "Linux Native";
+                $_->{pFlags} = 0x33;
+            } elsif ($_->{type} == 0x183) {
+                $_->{pType} = "Apple_UNIX_SVR2";
+                $_->{pName} = "Linux ReiserFS";
+                $_->{pFlags} = 0x33;
+            } elsif ($_->{type} == 0x283) {
+                $_->{pType} = "Apple_UNIX_SVR2";
+                $_->{pName} = "Linux XFS";
+                $_->{pFlags} = 0x33;
+            } elsif ($_->{type} == 0x383) {
+                $_->{pType} = "Apple_UNIX_SVR2";
+                $_->{pName} = "Linux JFS";
+                $_->{pFlags} = 0x33;
+            } elsif ($_->{type} == 0x483) {
+                $_->{pType} = "Apple_UNIX_SVR2";
+                $_->{pName} = "Linux ext3";
                 $_->{pFlags} = 0x33;
             } elsif ($_->{type} == 0x0) {
                 $_->{pType} = "Apple_Free";

@@ -656,8 +656,12 @@ Section "Modes"
     Modeline "1024x768"   65     1024 1032 1176 1344   768  771  777  806 -hsync -vsync
     # iBook2
     Modeline "1024x768"   65     1024 1048 1184 1344   768  771  777  806 -hsync -vsync
+    # 17" Apple Studio Display
+    Modeline "1024x768"   112.62 1024 1076 1248 1420 768 768 780 808 +hsync +vsync
     # HiRes Apple Studio Display
     Modeline "1280x1024"  135    1280 1288 1392 1664  1024 1027 1030 1064
+    # Another variation
+    Modeline "1280x1024"  134.989 1280 1317 1429 1688  1024 1025 1028 1066 +hsync +vsync
 EndSection
 ';
 $modelines_text = '
