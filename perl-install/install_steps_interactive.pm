@@ -1083,9 +1083,7 @@ sub setRootPassword {
         } } }, [
 { label => N("Password"), val => \$sup->{password},  hidden => 1 },
 { label => N("Password (again)"), val => \$sup->{password2}, hidden => 1 },
-  if_($::expert,
-{ label => N("Authentication"), val => \$auth, list => [ N_("Local files"), N_("LDAP"), N_("NIS"), N_("Windows Domain") ], format => \&translate },
-  ),
+{ label => N("Authentication"), val => \$auth, list => [ N_("Local files"), N_("LDAP"), N_("NIS"), N_("Windows Domain") ], format => \&translate, advanced => 1 },
 			 ]) or return;
 
     if ($auth eq N_("LDAP")) {
