@@ -254,49 +254,59 @@ sub reallyChooseGroups {
 
     my $w = my_gtk->new('');
     my $tips = new Gtk::Tooltips;
-
-    my ($path);
     my $w_size = new Gtk::Label(&$size_to_display);
+
+    my $entry = sub {
+	my ($e) = @_;
+	my $text = translate($o->{compssUsers}{$e}{label});
+	my $help = translate($o->{compssUsers}{$e}{descr});
+
+	my $file = do {
+	    my $f = "$ENV{SHARE_PATH}/icons/" . ($o->{compssUsers}{$e}{icons} || 'default');
+	    -e "$f.png" or $f .= "_section";
+	    -e "$f.png" or $f = '$ENV{SHARE_PATH}/icons/default_section';
+	    "$f.png";
+	};
+	my $check = Gtk::CheckButton->new($text);
+	$check->set_active($val->{$e});
+	$check->signal_connect(clicked => sub { 
+	    $val->{$e} = $check->get_active;
+	    $w_size->set(&$size_to_display);
+	});
+	gtkset_tip($tips, $check, $help);
+	#gtkpack_(new Gtk::HBox(0,0), 0, gtkpng($file), 1, $check);
+	$check;
+    };
+    my $entries_in_path = sub {
+	my ($path) = @_;
+	$path, map { $entry->($_) } grep { $o->{compssUsers}{$_}{path} eq $path } @{$o->{compssUsersSorted}};
+    };
     gtkadd($w->{window},
-	   gtkpack_($w->create_box_with_title(_("Package Group Selection")),
-		   1, createScrolledWindow(gtkpack(new Gtk::VBox(0,0),
-		     map {
-			 my $e = $_;
-			 my $text = translate($o->{compssUsers}{$e}{label});
-			 my $help = translate($o->{compssUsers}{$e}{descr});
+	   gtkpack($w->create_box_with_title(_("Package Group Selection")),
+		   gtkpack_(new Gtk::HBox(0,0),
+			   1, gtkpack(new Gtk::VBox(0,0),
+				   $entries_in_path->('Workstation'),
+				   $entries_in_path->('Server'),
+				  ),
+			   0, gtkpack__(new Gtk::VBox(0,0),
+				     $entries_in_path->('Graphical Environment'),
+				     '',
+				     $entry->('Development|Standard tools'),
+				     $entry->('Development|Documentation'),
+				  ),
+			  ),
 
-			 my $file = do {
-			     my $f = "$ENV{SHARE_PATH}/icons/" . ($o->{compssUsers}{$e}{icons} || 'default');
-			     -e "$f.png" or $f .= "_section";
-			     -e "$f.png" or $f = '$ENV{SHARE_PATH}/icons/default_section';
-			     "$f.png";
-			 };
-			 my $check = Gtk::CheckButton->new($text);
-			 $check->set_active($val->{$e});
-			 $check->signal_connect(clicked => sub { 
-			     $val->{$e} = $check->get_active;
-			     $w_size->set(&$size_to_display);
-			 });
-			 gtkset_tip($tips, $check, $help);
-
-			 my $old = $path;
-			 $path = $o->{compssUsers}{$e}{path};
-			 (
-			  if_($old ne $path, new Gtk::Label(translate($path))),
-			  gtkpack_(new Gtk::HBox(0,0), 0, gtkpng($file), 1, $check),
-			 )
-		     } @{$o->{compssUsersSorted}})),
-		    0, gtkadd(new Gtk::HBox(0,0),
-			      $w_size,
-			      if_($individual, do {
-				  my $check = Gtk::CheckButton->new(_("Individual package selection"));
-				  $check->set_active($$individual);
-				  $check->signal_connect(clicked => sub { $$individual = $check->get_active });
-				  $check;
-			      }),
-			      gtksignal_connect(new Gtk::Button(_("Ok")), clicked => sub { Gtk->main_quit }),
-		    ),
-		   ),
+		   gtkadd(new Gtk::HBox(0,0),
+			  $w_size,
+			  if_($individual, do {
+			      my $check = Gtk::CheckButton->new(_("Individual package selection"));
+			      $check->set_active($$individual);
+			      $check->signal_connect(clicked => sub { $$individual = $check->get_active });
+			      $check;
+			  }),
+			  gtksignal_connect(new Gtk::Button(_("Ok")), clicked => sub { Gtk->main_quit }),
+			 ),
+		  ),
 	  );
     $w->{rwindow}->set_default_size($::windowwidth * 0.8, $::windowheight * 0.8);
     $w->main;
