@@ -5,6 +5,7 @@ use strict;
 use standalone;
 use common;
 use my_gtk qw(:helpers :wrappers :ask);
+use run_program;
 
 use security::msec;
 
@@ -24,8 +25,6 @@ sub wait_msg {
 }
 
 sub remove_wait_msg { $_[0]->destroy }
-
-#sub show_msec_help { my $command = $_[0] }
 
 sub basic_seclevel_explanations {
 	my $text = new Gtk::Text(undef, undef);
@@ -62,6 +61,17 @@ sub basic_seclevel_option {
 	$$seclevel_entry->entry->set_text($current_level);
 
 	new Gtk::Label(N("Security Level:")), $$seclevel_entry;
+}
+
+sub new_editable_combo {
+	my $w = new Gtk::Combo();
+	$w->entry->set_editable(0);
+	$w;
+}
+
+sub set_default_tip {
+	my ($entry, $default) = @_;
+	gtkset_tip(new Gtk::Tooltips, $entry, N(" (default value: %s)", $default));
 }
 
 sub draksec_main {
@@ -119,22 +129,24 @@ sub draksec_main {
 		   create_packtable({ col_spacings => 10, row_spacings => 5 },
 						   map {
 		   my $i = $_;
+
+		   my $entry;
 		   my $default = $msec->get_function_default($i);
 		   if (member($default, @all_choices)) {
-			  $values{$i} = new Gtk::Combo();
-			  $values{$i}->entry->set_editable(0);
+			  $values{$i} = new_editable_combo();
+			  $entry = $values{$i}->entry;
 			  if (member($default, @yesno_choices)) {
 				 $values{$i}->set_popdown_strings(@yesno_choices);
 			  } elsif (member($default, @alllocal_choices)) {
 				 $values{$i}->set_popdown_strings(@alllocal_choices);
 			  }
-			  $values{$i}->entry->set_text($msec->get_function_value($i));
 		   } else {
 			  $values{$i} = new Gtk::Entry();
-			  $values{$i}->set_text($msec->get_function_value($i));
+			  $entry = $values{$i};
 		   }
-		   [ new Gtk::Label($i . N(" (default: %s)", $default)), $values{$i} ];
-		   # , gtksignal_connect(new Gtk::Button(N("Help")), 'clicked' => sub { show_msec_help($_) } ) ]
+		   $entry->set_text($msec->get_function_value($i));
+		   set_default_tip($entry, $default);
+		   [ new Gtk::Label($i), $values{$i} ];
 	 } $msec->get_functions($domain))))),
 						  new Gtk::Label($label));
 	 $options_values{$domain} = \%values;
@@ -149,12 +161,12 @@ sub draksec_main {
 						map {
 						    my $i = $_;
 						    if (!member(qw(MAIL_WARN MAIL_USER), $i)) {
-							   $security_checks_value{$i} = new Gtk::Combo();
-							   $security_checks_value{$i}->entry->set_editable(0);
+							   $security_checks_value{$i} = new_editable_combo();
+							   my $entry = $security_checks_value{$i}->entry;
+							   set_default_tip($entry, $msec->get_check_default);
 							   $security_checks_value{$i}->set_popdown_strings(qw(yes no default));
-							   $security_checks_value{$i}->entry->set_text($msec->get_check_value($i));
+							   $entry->set_text($msec->get_check_value($i));
 							   [ gtkshow(new Gtk::Label(translate($i))), $security_checks_value{$i} ];
-							   # , gtksignal_connect(new Gtk::Button(N("Help")), 'clicked' => sub { show_msec_help($i) } ) ]
 							   }
 						} ($msec->get_default_checks))))),
 					   new Gtk::Label(N("Periodic Checks")));
@@ -181,8 +193,8 @@ sub draksec_main {
 		  standalone::explanations("Setting security administrator option");
 		  $msec->config_check('MAIL_WARN', $secadmin_check_value == 1 ? 'yes' : 'no');
 
-		  standalone::explanations("Setting security administrator contact");
 		  if ($secadmin_value ne $msec->get_check_value('MAIL_USER') && $secadmin_check_value) {
+		      standalone::explanations("Setting security administrator contact");
 		      $msec->config_check('MAIL_USER', $secadmin_value);
 		  }
 
@@ -201,9 +213,7 @@ sub draksec_main {
 			   }
 		  }
 		  standalone::explanations("Applying msec changes");
-		  system "/usr/sbin/msec";
-
-			   
+		  run_program::run($::prefix, "/usr/sbin/msec");
 
 		  remove_wait_msg($w);
 
