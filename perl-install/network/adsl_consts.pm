@@ -30,7 +30,7 @@ our %adsl_data = (
                    vpi => 8, 
                    vci => 23,
                    dnsServer2 => '213.228.0.68',
-                   dnsServer3 => ' 212.27.32.176',
+                   dnsServer3 => '212.27.32.176',
                    method => 'pppoa',
                   },
 
