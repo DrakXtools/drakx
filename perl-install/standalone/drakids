@@ -145,12 +145,16 @@ sub unblacklist {
 }
 
 sub init_whitelist {
-    @{$whitelist->{data}} = map { [ $_ ] } $activefw->get_whitelist;
+    handle_whitelist($_) foreach $activefw->get_whitelist;
 }
 
 sub handle_whitelist {
     my ($addr) = @_;
-    push @{$whitelist->{data}}, [ $addr ];
+    push @{$whitelist->{data}}, [ $addr, activefw::resolve_address(activefw::get_ip_address($addr)) ];
+}
+
+sub get_selected_whitelist {
+    uniq(map { $whitelist->{data}[$_][0] } $whitelist->get_selected_indices);
 }
 
 sub whitelist {
@@ -160,5 +164,8 @@ sub whitelist {
 }
 
 sub unwhitelist {
-    $activefw->unwhitelist($_) foreach @_;
+    my @addr = @_;
+    $activefw->unwhitelist($_) foreach @addr;
+    #- delete from the list even if the above calls were unsuccessful
+    @{$whitelist->{data}} = grep { !member($_->[0], @addr) } @{$whitelist->{data}};
 }
