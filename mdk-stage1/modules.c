@@ -164,6 +164,11 @@ int insmod_local_file(char * path, char * options)
         }
 }
 
+static char *kernel_module_extension(void)
+{
+  return kernel_version() <= 4 ? ".o" : ".ko";
+}
+
 /* unarchive and insmod given module
  * WARNING: module must not contain the trailing ".o"
  */
@@ -174,10 +179,7 @@ static enum insmod_return insmod_archived_file(const char * mod_name, char * opt
 	int i, rc;
 
 	strncpy(module_name, mod_name, sizeof(module_name));
-        if (kernel_version() <= 4)
-                strcat(module_name, ".o");
-        else
-                strcat(module_name, ".ko");
+	strcat(module_name, kernel_module_extension());
 	i = mar_extract_file(archive_name, module_name, "/tmp/");
 	if (i == 1) {
                 static int recurse = 0;
@@ -526,10 +528,7 @@ enum return_type ask_insmod(enum driver_type type)
 	}
 
 	if (results == RETURN_OK) {
-                if (kernel_version() <= 4)
-                        choice[strlen(choice)-2] = '\0'; /* remove trailing .o */
-                else
-                        choice[strlen(choice)-3] = '\0'; /* remove trailing .ko */
+		choice[strlen(choice)-strlen(kernel_module_extension())] = '\0'; /* remove trailing .ko or .o */
 		return insmod_with_options(choice, type);
 	} else
 		return results;
