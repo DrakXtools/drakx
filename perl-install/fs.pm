@@ -82,7 +82,7 @@ sub get_mntpoints_from_fstab {
 sub format_ext2($@) {
     my ($dev, @options) = @_;
 
-    $dev =~ m,(rd|ida)/, and push @options, qw(-b 4096 -R stride=16); #- For RAID only.
+    $dev =~ m,(rd|ida|cciss)/, and push @options, qw(-b 4096 -R stride=16); #- For RAID only.
     push @options, qw(-b 1024 -O none) if arch() =~ /alpha/;
 
     run_program::run("mke2fs", @options, devices::make($dev)) or die _("%s formatting of %s failed", "ext2", $dev);

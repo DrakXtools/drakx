@@ -74,11 +74,11 @@ sub entry {
         $type = c::S_IFBLK();
 	$major = 48 + $1;
 	$minor = 8 * $2 + $4;
-    } elsif (m|ida/c(\d+)d(\d+)(p(\d+))?|) {
+    } elsif (m,(ida|cciss)/c(\d+)d(\d+)(?:p(\d+))?,) {
 	# Compaq Smart Array "ida/c0d0{p1}"
 	$type = c::S_IFBLK();
-	$major = 72 + $1;
-	$minor = 16 * $2 + ($4 || 0);
+	$major = ($1 eq 'ida' ? 72 : 104) + $2;
+	$minor = 16 * $3 + ($4 || 0);
     } elsif (/(.*)(\d+)$/) {
 	    ($type, $major, $minor) =
 	     @{ ${{"fd"     => [ c::S_IFBLK(), 2,  0 ],
