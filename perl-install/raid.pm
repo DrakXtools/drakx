@@ -110,11 +110,17 @@ sub make {
 
     whereis_binary('mdadm') or die 'mdadm not installed';
 
-    run_program::run_or_die('mdadm', '--create', '--run', devices::make($part->{device}), 
+    my $dev = devices::make($part->{device});
+
+    run_program::run_or_die('mdadm', '--create', '--run', $dev, 
 			    '--chunk=' . $part->{'chunk-size'}, 
 			    "--level=$part->{level}", 
 			    '--raid-devices=' . int(@{$part->{disks}}),
 			    map { devices::make($_->{device}) } @{$part->{disks}});
+
+    if (my $raw_part = get_md_info($dev)) {
+	$part->{UUID} = $raw_part->{UUID};
+    }
 }
 
 sub format_part {
@@ -167,11 +173,7 @@ sub get_existing {
     my @parts = @_;
     my $raids = [];
     foreach my $md (active_mds()) {
-	my $conf = parse_mdadm_conf(scalar run_program::get_stdout('mdadm', '--detail', '--brief', devices::make($md)));
-
-	@{$conf->{ARRAY}} or next;
-	@{$conf->{ARRAY}} == 1 or internal_error("too many answers");
-	my $raw_part = $conf->{ARRAY}[0];
+	my $raw_part = get_md_info(devices::make($md)) or next;
 
 	$raw_part->{level} =~ s/raid//; #- { linear | raid0 | raid1 | raid5 } -> { linear | 0 | 1 | 5 }
 
@@ -185,7 +187,7 @@ sub get_existing {
 	      }
 	  } split(',', $raw_part->{devices});
 
-	my $md_part = new($raids, device => $md, level => $raw_part->{level}, disks => \@mdparts);
+	my $md_part = new($raids, device => $md, UUID => $raw_part->{UUID}, level => $raw_part->{level}, disks => \@mdparts);
 
 	my $type = fs::type::type_subpart_from_magic($md_part);
 	if ($type) {
@@ -212,14 +214,21 @@ sub inactivate_all() {
 
 sub prepare_prefixed {
     my ($raids) = @_;
-    my %raids = map {
-	devices::make($_->{device}) =>
-	    [ map { devices::make($_->{device}) } @{$_->{disks}} ]
-    } @$raids;
+
+    my @devices = uniq(map { devices::make($_->{device}) } map { @{$_->{disks}} } @$raids);
 
     output("$::prefix/etc/mdadm.conf",
-	   join(' ', 'DEVICE', uniq(map { @$_ } values %raids)) . "\n",
-	   map_each { "ARRAY $::a devices=" . join(',', @$::b) . "\n" } %raids);
+	   join(' ', 'DEVICE', @devices) . "\n",
+	   map { "ARRAY " . devices::make($_->{device}) . " UUID=" . $_->{UUID} . "\n" } @$raids);
+}
+
+sub get_md_info {
+    my ($dev) = @_;
+    my $conf = parse_mdadm_conf(scalar run_program::get_stdout('mdadm', '--detail', '--brief', $dev));
+
+    @{$conf->{ARRAY}} or return;
+    @{$conf->{ARRAY}} == 1 or internal_error("too many answers");
+    $conf->{ARRAY}[0];
 }
 
 sub parse_mdadm_conf {
