@@ -251,16 +251,6 @@ enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 	int bytes_read = 0;
 	int actually;
 	int seems_ok = 0;
-	struct pollfd polls;
-
-	/* first of all, we wait for data to be available on fd; because
-	   when it's a socket, data can be unavailable at the beginning */
-	polls.fd = ramdisk_fd;
-	polls.events = POLLIN;
-	if (poll(&polls, 1, 10000) != 1) {
-		log_message("poll'ing ramdisk fd: timeout or error");
-		return RETURN_ERROR;
-	}
 
 	st2 = BZ2_bzdopen(ramdisk_fd, "r");
 
