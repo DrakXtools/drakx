@@ -397,7 +397,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 	    if (!$hasttf) {
 		$hasttf = $o->ask_okcancel('', 
 _("Some true type fonts from windows have been found on your computer.
-Do you want to use them? Be sure you have the right to use them under Linux.")) or goto nottf;
+Do you want to use them? Be sure you have the right to use them under Linux."), 1) or goto nottf;
 		mkdir "$o->{prefix}$dest", 0755;
 	    }
 	    /(.*)\.ttf/i and symlink "$D/$_", "$o->{prefix}$dest/$1.ttf" foreach grep { /\.ttf/i } all("$o->{prefix}$D");
@@ -420,7 +420,7 @@ GridHeight=70
 	} "$o->{prefix}$_/.kde/share/config/kfmrc" 
     }
 
-    #- to unsure linuxconf doesn't cry against those files being in the future
+    #- to ensure linuxconf doesn't cry against those files being in the future
     -e $_ and touch($_) foreach map { "$o->{prefix}/$_" } '/etc/conf.modules', '/etc/crontab', '/etc/sysconfig/mouse', '/etc/X11/fs/config';
 
     #- move some file after an upgrade that may be seriously annoying.

@@ -221,20 +221,13 @@ sub monitorConfiguration(;$$) {
     my $monitor = shift || {};
     my $useFB = shift || 0;
 
-    if ($useFB) {
-	#- use smallest values for monitor configuration since FB is used,
-	#- BIOS initialize graphics, current X server will not refuse that.
-	$monitor->{hsyncrange} ||= $hsyncranges[1];
-	$monitor->{vsyncrange} ||= $vsyncranges[0];
-	add2hash($monitor, { type => "Unknown", vendor => "Unknown", model => "Unknown" });
-    } else {
-	$monitor->{hsyncrange} && $monitor->{vsyncrange} and return $monitor;
+    $monitor->{hsyncrange} && $monitor->{vsyncrange} and return $monitor;
 
-	readMonitorsDB("/usr/X11R6/lib/X11/MonitorsDB");
+    readMonitorsDB("/usr/X11R6/lib/X11/MonitorsDB");
 
-	add2hash($monitor, { type => $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Unlisted', keys %monitors], _("Generic") . '|' . translate($default_monitor)) }) unless $monitor->{type};
-	if ($monitor->{type} eq 'Unlisted') {
-	    $in->ask_from_entries_ref('',
+    add2hash($monitor, { type => $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Unlisted', keys %monitors], _("Generic") . '|' . translate($default_monitor)) }) unless $monitor->{type};
+    if ($monitor->{type} eq 'Unlisted') {
+	$in->ask_from_entries_ref('',
 _("The two critical parameters are the vertical refresh rate, which is the rate
 at which the whole screen is refreshed, and most importantly the horizontal
 sync rate, which is the rate at which scanlines are displayed.
@@ -242,16 +235,13 @@ sync rate, which is the rate at which scanlines are displayed.
 It is VERY IMPORTANT that you do not specify a monitor type with a sync range
 that is beyond the capabilities of your monitor: you may damage your monitor.
  If in doubt, choose a conservative setting."),
-				      [ _("Horizontal refresh rate"), _("Vertical refresh rate") ],
-				      [ { val => \$monitor->{hsyncrange}, list => \@hsyncranges },
-					{ val => \$monitor->{vsyncrange}, list => \@vsyncranges }, ]);
-	} else {
-	    add2hash($monitor, $monitors{$monitor->{type}});
-	}
-	add2hash($monitor, { type => "Unknown", vendor => "Unknown", model => "Unknown" });
+				  [ _("Horizontal refresh rate"), _("Vertical refresh rate") ],
+				  [ { val => \$monitor->{hsyncrange}, list => \@hsyncranges },
+				    { val => \$monitor->{vsyncrange}, list => \@vsyncranges }, ]);
+    } else {
+	add2hash($monitor, $monitors{$monitor->{type}});
     }
-
-    $monitor;
+    add2hash($monitor, { type => "Unknown", vendor => "Unknown", model => "Unknown" });
 }
 
 sub testConfig($) {
