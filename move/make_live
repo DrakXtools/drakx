@@ -69,6 +69,12 @@ sub installPackages {
     $compssUsersChoice{$_} = 1 foreach 'SYSTEM', 'DVD', 'USB', 'SOUND', 'BURNER', 'UTF8', 'DOCS', 'TV', '3D', 'INSTALL';
     $compssUsersChoice{qq(LOCALES"$_")} = 1 foreach @langs;
 
+    #- we don't want those
+    foreach (qw(magicdev mdkonline)) {
+	my $pkg = pkgs::packageByName($o->{packages}, $_) or die "$_ not there anymore";
+	$pkg->set_rate(0);
+    }
+
     pkgs::setSelectedFromCompssList($o->{packages}, \%compssUsersChoice, 4, 0);
 
     my @toInstall = pkgs::packagesToInstall($o->{packages});
@@ -115,7 +121,14 @@ run_program::rooted($::prefix, 'fc-cache');  #- generate cache in all directorie
 
     #- system
 
-eval { rm_rf("$::prefix/lib/i686") }; # de-complexify, use the default on any arch
+# de-complexify, use the default on any arch
+eval { 
+    rm_rf("$::prefix/lib/i686");
+    rm_rf("$::prefix/lib/tls");
+    rm_rf("$::prefix/usr/lib/tls");
+    rm_rf("$::prefix/usr/X11R6/lib/tls");
+    rm_rf("$::prefix/usr/X11R6/lib/modules/extensions/tls");
+};
 
 eval { config_X_proprietary_drivers() };
 
@@ -163,8 +176,6 @@ unlink "$::prefix/usr/X11R6/bin/drakfw";
 
     #- KDE
 
-symlinkf('/etc/X11/ksycoca', "$::prefix/usr/share/services/ksycoca");
-
 unlink "$::prefix/usr/share/autostart/$_.desktop" foreach 'klipper', 'korgac', 'kalarmd.autostart';
 
 update_gnomekderc("$::prefix/usr/share/config/kdesktoprc", ScreenSaver => (Lock => 'true'));
@@ -199,9 +210,11 @@ $ENV{BROWSER} = "kfmclient openProfile webbrowsing";
 $ENV{DESKTOP} = "kde";
 foreach (@ALLOWED_LANGS) {
     $ENV{LC_ALL} = $_;
-    run_program::rooted($::prefix, 'kbuildsycoca');
-    cp_af("$::prefix/tmp/kde-root/ksycoca", "$::prefix/usr/share/services/ksycoca-$_");
+    unlink "$::prefix/usr/share/services/ksycoca";
+    run_program::rooted($::prefix, 'kbuildsycoca', '--global');
+    rename("$::prefix/usr/share/services/ksycoca", "$::prefix/usr/share/services/ksycoca-$_");
 }
+symlinkf('/etc/X11/ksycoca', "$::prefix/usr/share/services/ksycoca");
 
 
     #- Mandrake
