@@ -1161,28 +1161,17 @@ sub getAndSaveAutoInstallFloppies {
 
 
 sub g_default_packages {
-    my ($o, $b_quiet) = @_;
+    my ($o) = @_;
 
-    my $floppy = detect_devices::floppy();
-
-    while (1) {
-	$o->ask_okcancel('', N("Insert a FAT formatted floppy in drive %s", $floppy), 1) or return;
-
-	eval { fs::mount(devices::make($floppy), "/floppy", "vfat", 0) };
-	last if !$@;
-	$o->ask_warn('', N("This floppy is not FAT formatted"));
-    }
+    my ($_h, $file) = media_browser($o, 'save', 'package_list.pl') or return;
 
     require Data::Dumper;
     my $str = Data::Dumper->Dump([ { default_packages => pkgs::selected_leaves($o->{packages}) } ], ['$o']);
     $str =~ s/ {8}/\t/g;
-    output('/floppy/auto_inst.cfg', 
+    output($file, 
 	   "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl'\n",
 	   "# before testing.  To use it, boot with ``linux defcfg=floppy''\n",
 	   $str, "\0");
-    fs::umount("/floppy");
-
-    $b_quiet or $o->ask_warn('', N("To use this saved packages selection, boot installation with ``linux defcfg=floppy''"));
 }
 
 sub loadO {
@@ -1493,6 +1482,78 @@ sub getHds {
     #- a good job is to mount SunOS root partition, and to use mount point described here in /etc/vfstab.
 
     1;
+}
+
+my %media_browser;
+sub media_browser {
+    my ($in, $save, $o_suggested_name) = @_;
+
+    my %media_type2text = (
+	fd => N("Floppy"),
+	hd => N("Hard Disk"),
+	cdrom => N("CDROM"),
+    );
+    my @network_protocols = (N_("HTTP"), N_("FTP"), N_("NFS"));
+
+    my $to_text = sub {
+	my ($hd) = @_;
+	($media_type2text{$hd->{media_type}} || $hd->{media_type}) . ': ' . partition_table::description($hd);
+    };
+
+  ask_media:
+    my $all_hds = fsedit::get_hds({}, $in);
+    fs::get_raw_hds('', $all_hds);
+
+    my @raw_hds = grep { !$save || $_->{media_type} ne 'cdrom' } @{$all_hds->{raw_hds}};
+    my @dev_and_text = group_by2(
+	(map { $_ => $to_text->($_) } @raw_hds),
+	(map { 
+	    my $hd = $to_text->($_);
+	    map { $_ => join('\1', $hd, partition_table::description($_)) } grep { isTrueFS($_) || isOtherAvailableFS($_) } fs::get::hds_fstab($_);
+	} fs::get::hds($all_hds)),
+	if_(member($::o->{method}, qw(ftp http nfs)) || install_steps::hasNetwork($::o),
+	    map { $_ => join('\1', N("Network"), translate($_)) } @network_protocols),
+    );
+
+    $in->ask_from_({
+	messages => N("Please choose a media"),
+    }, [ 
+	{ val => \$media_browser{dev}, separator => '\1', list => [ map { $_->[1] } @dev_and_text ] },
+    ]) or return;
+
+    my $dev = (find { $_->[1] eq $media_browser{dev} } @dev_and_text)->[0];
+
+    if (member($dev, @network_protocols)) {
+	install_interactive::upNetwork($::o);
+	$in->ask_warn('', 'todo');
+    } else {
+	if (!$dev->{fs_type} || $dev->{fs_type} eq 'auto' || $dev->{fs_type} =~ /:/) {
+	    if (my $p = fs::type::type_subpart_from_magic($dev)) {
+		add2hash($p, $dev);
+		$dev = $p;
+	    } else {
+		$in->ask_warn(N("Error"), N("Bad media %s", partition_table::description($dev)));
+		goto ask_media;
+	    }
+	}
+	my $file;
+	if (my $h = any::inspect($dev, $::prefix, $save)) {
+	    while (1) {
+		$file = $in->ask_filename({ save => $save, 
+					    directory => $h->{dir}, 
+					    if_($o_suggested_name, file => "$h->{dir}/$o_suggested_name"),
+					}) or last;
+		if (-e $file && $save) {
+		    $in->ask_yesorno('', N("File already exists. Overwrite it?")) or next;
+		}
+		return $h, $file if $save || -e $file;
+	    }
+	    undef $h; #- help perl
+	} else {
+	    $in->ask_warn(N("Error"), formatError($@));
+	}
+	goto ask_media;
+    }
 }
 
 sub log_sizes {

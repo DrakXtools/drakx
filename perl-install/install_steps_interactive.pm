@@ -492,19 +492,17 @@ sub choosePackagesTree {
 sub loadSavePackagesOnFloppy {
     my ($o, $packages) = @_;
     $o->ask_from('', 
-N("Please choose load or save package selection on floppy.
-The format is the same as auto_install generated floppies."),
-		 [ { val => \ (my $choice), list => [ N_("Load from floppy"), N_("Save on floppy") ], format => \&translate, type => 'list' } ]) or return;
+N("Please choose load or save package selection.
+The format is the same as auto_install generated files."),
+		 [ { val => \ (my $choice), list => [ N_("Load"), N_("Save") ], format => \&translate, type => 'list' } ]) or return;
 
-    if ($choice eq 'Load from floppy') {
+    if ($choice eq 'Load') {
 	while (1) {
-	    my $w = $o->wait_message(N("Package selection"), N("Loading from floppy"));
-	    log::l("load package selection from floppy");
-	    my $O = eval { install_any::loadO(undef, 'floppy') };
+	    log::l("load package selection");
+	    my ($_h, $file) = install_any::media_browser($o, '', 'package_list.pl') or return;
+	    my $O = eval { install_any::loadO(undef, $file) };
 	    if ($@) {
-		undef $w;	#- close wait message.
-		$o->ask_okcancel('', N("Insert a floppy containing package selection"))
-		  or return;
+		$o->ask_okcancel('', N("Bad file")) or return;
 	    } else {
 		install_any::unselectMostPackages($o);
 		foreach (@{$O->{default_packages} || []}) {
@@ -515,8 +513,8 @@ The format is the same as auto_install generated floppies."),
 	    }
 	}
     } else {
-	log::l("save package selection to floppy");
-	install_any::g_default_packages($o, 'quiet');
+	log::l("save package selection");
+	install_any::g_default_packages($o);
     }
 }
 sub chooseGroups {

@@ -371,7 +371,14 @@ sub More {
 sub ReadFromFile {
     my ($in, $hd) = @_;
 
-    my $file = $::isStandalone ? $in->ask_file(N("Select file")) : devices::make("fd0") or return;
+    my ($h, $file) = ('', '');
+    if ($::isStandalone) {
+	$file = $in->ask_file(N("Select file")) or return;
+    } else {
+	undef $h; #- help perl_checker
+	my $name = $hd->{device}; $name =~ s!/!_!g;
+	($h, $file) = install_any::media_browser($in, '', "part_$name") or return;
+    }
 
     eval {
     catch_cdie { partition_table::load($hd, $file) }
@@ -390,11 +397,14 @@ Still continue?"), 0);
 sub SaveInFile {
     my ($in, $hd) = @_;
 
-    my $file = $::isStandalone ?
-		 $in->ask_file(N("Select file")) :
-                 $in->ask_okcancel(N("Warning"),
-N("Insert a floppy in drive
-All data on this floppy will be lost"), 1) && devices::make(detect_devices::floppy()) or return;
+    my ($h, $file) = ('', '');
+    if ($::isStandalone) {
+	$file = $in->ask_file(N("Select file")) or return;
+    } else {
+	undef $h; #- help perl_checker
+	my $name = $hd->{device}; $name =~ s!/!_!g;
+	($h, $file) = install_any::media_browser($in, 'save', "part_$name") or return;
+    }
 
     eval { partition_table::save($hd, $file) };
     if (my $err = $@) {

@@ -387,7 +387,7 @@ sub choosePackagesTree {
 			    ok => N("Install"),
 			    cancel => N("Previous"),
 			    icons => [ { icon         => 'floppy',
-					 help         => N("Load/Save on floppy"),
+					 help         => N("Load/Save selection"),
 					 wait_message => N("Updating package selection"),
 					 code         => sub { $o->loadSavePackagesOnFloppy($packages); 1 },
 				       }, 
