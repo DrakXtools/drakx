@@ -137,11 +137,12 @@ sub create_treeview_list {
 	my ($v) = @_;
 	eval {
 	    my $nb = find_index { $_ eq $v } @{$e->{list}};
-	    my ($path) = $list_tv->get_cursor;
-	    if ($path) {
-		$select->($path) if $nb != $path->to_string;
+	    my ($old_path) = $list_tv->get_cursor;
+	    if (!$old_path || $nb != $old_path) {
+		$select->(my $path = Gtk2::TreePath->new_from_string($nb));
 		$path->free;
 	    }
+	    $old_path->free if $old_path;
 	};
     };
 }
