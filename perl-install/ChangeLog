@@ -1,3 +1,101 @@
+2004/01/20  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Updated partially
+
+2004/01/20  Florin Grad  <florin at mandrakesoft.com>
+
+	* standalone/drakgw: install the squid package, if necessary
+
+2004/01/20  fwang
+
+	* share/po/zh_CN.po: update
+
+2004/01/20  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/uz@Cyrl.po, share/po/et.po,
+	share/po/ja.po, share/po/hr.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/be.po, share/po/uk.po, share/po/mn.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/he.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/tg.po, share/po/nb.po, share/po/bs.po, share/po/uz.po,
+	share/po/ro.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/hi.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/fr.po, share/po/sr@Latn.po, share/po/sq.po, share/po/nl.po,
+	share/po/it.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/lv.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/hu.po: updated pot file
+
+2004/01/20  Pixel  <pixel at mandrakesoft.com>
+
+	* modules.pm: 
+	  - ugly hack to temporary handle reading ide_cd in /proc/modules
+	whereas we
+	insmoded ide-cd
+	  - removing load_ide() (unused)
+
+	* any.pm: in setupBootloader__entries():
+	  - move vga and initrd from $::expert to advanced
+	  - drop setting read-write, table, unsafe
+
+	* rescue/list, share/list: replace PERL_VERSION with current version of
+	some perl modules
+
+	* install_steps.pm: modules::load_ide() is removed, now we use the same as
+	install_step_interactive
+
+	* interactive/gtk.pm: do not try anymore to have small pop_it dialog
+	boxes. Make them all the same
+	size and so drop all the (big) code trying to use scrolled windows only
+	when
+	needed and to size them appropriately
+
+	* lang.pm: disable wen and dns until fixed
+
+	* docs/HACKING: update (thanks to Sunny Dubey)
+
+2004/01/20  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 9.3-22mdk
+
+	* network/network.pm: fix #6944: ensure proper perms on
+	/etc/profile.d/proxy.{,c}sh
+	(pieleric@etu.utc.fr)
+
+	* network/modem.pm: remove useless LOGIN field
+	do not gratuitously reinvent write_secret_backend()
+	s/N('...')/N("...")/
+	save login in ifcfg-ppp0
+	save ip if needed
+	fix dyn/static stuff
+	fix static/dyn settings
+	  - handle PAP/CHAP auth method too
+	  - translate again strings
+	handle more kppp options from new steps
+	make sections more visible in generated kppprc conf file
+
+	* network/netconnect.pm: share same path in both standalone and in install
+	mode (2/2)
+	do not offer to enter domain name twice
+	share same path in both standalone and in install mode
+	read back auth method
+	read back new fields
+	fix gateway reading and writing
+	  - handle PAP/CHAP auth method too
+	  - translate again strings
+	use checkbow's label
+	dyn hostname is a boolean
+	  - split ppp steps into account, ip, dns and gateway parameters step
+	  - offer to configure more ip, dns and gateway parameters
+	rename ppp_choose as ppp_account
+
+2004/01/20  Warly  <warly at mandrakesoft.com>
+
+	* share/logo-mandrake.png: cooker logo
+
 2004/01/20  hilbert
 
 	* share/po/zh_TW.po: This is a test commit
@@ -23630,7 +23728,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.851 2004/01/20 12:04:50 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.852 2004/01/20 15:04:42 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
