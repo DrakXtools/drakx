@@ -374,6 +374,7 @@ sub choosePackages {
     #- selection of CD by user if using a cdrom.
     $o->chooseCD($packages) if $o->{method} eq 'cdrom' && !$::oem;
 
+    my $w = $o->wait_message('', N("Looking for available packages..."));
     my $availableC = install_steps::choosePackages(@_);
     my $individual;
 
@@ -381,6 +382,7 @@ sub choosePackages {
 
     my $min_size = pkgs::selectedSize($packages);
     unless ($min_size < $availableC) {
+	$w = undef;
 	$o->ask_warn('', N("Your system does not have enough space left for installation or upgrade (%d > %d)",
 			   $min_size, $availableC));
 	install_steps::rebootNeeded($o);
@@ -393,6 +395,7 @@ sub choosePackages {
     my $max_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
     log::l("max size (level $min_mark) is : " . formatXiB($max_size));
     pkgs::restoreSelected($b);
+    $w = undef;
 
   chooseGroups:
     $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) if !$o->{isUpgrade} && !$::corporate;
