@@ -1560,7 +1560,7 @@ sub naughtyServers {
     my @naughtyServers = qw(FreeWnn MySQL am-utils boa cfengine cups
 finger-server freeswan imap jabber leafnode lpr mon ntp apache
 openssh-server pidentd postfix postgresql-server proftpd rwall rwho
-telnet-server webmin wu-ftpd ypbind); # portmap nfs-utils-clients
+telnet-server webmin wu-ftpd ypbind drakxtools-http); # portmap nfs-utils-clients
 
     grep {
 	my $p = packageByName($packages, $_);
