@@ -386,7 +386,6 @@ sub ask_fromW {
 	my $changed = sub { $update->(sub { $common->{callbacks}{changed}($ind) }) };
 
 	my ($w, $real_w, $focus_w, $set, $get);
-	my $width = 0;
 	if ($e->{type} eq 'iconlist') {
 	    $w = Gtk2::Button->new;
 	    $set = sub {
@@ -412,11 +411,9 @@ sub ask_fromW {
 	    $w->signal_connect(clicked => $changed);
 	    $set = sub { $w->set_active($_[0]) };
 	    $get = sub { $w->get_active };
-	    $width = length $e->{text};
 	} elsif ($e->{type} eq 'label') {
 	    $w = Gtk2::Label->new(${$e->{val}});
 	    $set = sub { $w->set($_[0]) };
-	    $width = length ${$e->{val}};
 	} elsif ($e->{type} eq 'button') {
 	    $w = Gtk2::Button->new_with_label('');
 	    $w->signal_connect(clicked => sub {
@@ -430,7 +427,6 @@ sub ask_fromW {
 		$set_all->();
 	    });
 	    $set = sub { $w->child->set_label(may_apply($e->{format}, $_[0])) };
-	    $width = length may_apply($e->{format}, ${$e->{val}});
 	} elsif ($e->{type} eq 'range') {
 	    my $want_scale = !$::expert;
 	    my $adj = Gtk2::Adjustment->new(${$e->{val}}, $e->{min}, $e->{max} + ($want_scale ? 1 : 0), 1, ($e->{max} - $e->{min}) / 10, 1);
@@ -444,7 +440,6 @@ sub ask_fromW {
 	} elsif ($e->{type} =~ /list/) {
 
 	    $e->{formatted_list} = [ map { may_apply($e->{format}, $_) } @{$e->{list}} ];
-	    $width = max(map { length } @{$e->{list}});
 
 	    if (my $actions = $e->{add_modify_remove}) {
 		my %buttons;
