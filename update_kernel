@@ -20,7 +20,7 @@ f "pcmcia net cdrom scsi disk keepbig" ; ALL_DRIVERS=$v
 NETWORK_MODULES="  $FSMODULES $NETWORK_DRIVERS"
 CDROM_MODULES="    $FSMODULES $CD_DRIVERS"
 HD_MODULES="       $FSMODULES $SCSI_DRIVERS $DISK_DRIVERS loop.o isofs.o"
-HD_REISER_MODULES="$FSMODULES $SCSI_DRIVERS reiserfs.o loop.o isofs.o"
+HDREISER_MODULES=" $FSMODULES $SCSI_DRIVERS reiserfs.o loop.o isofs.o"
 PCMCIA_MODULES="   $FSMODULES $PCMCIA_DRIVERS"
 BIG_MODULES="      $FSMODULES $BIG_DRIVERS"
 ALL_MODULES="      $FSMODULES $ALL_DRIVERS reiserfs.o"
@@ -49,7 +49,7 @@ rm -rf modules ; install -d modules
     ls $NETWORK_MODULES  | cpio --quiet -H crc -o | gzip -9 > network_modules.cgz
     ls $CDROM_MODULES    | cpio --quiet -H crc -o | gzip -9 > cdrom_modules.cgz	
     ls $HD_MODULES       | cpio --quiet -H crc -o | gzip -9 > hd_modules.cgz     
-    ls $HD_REISER_MODULES| cpio --quiet -H crc -o | gzip -9 > hd_reiser_modules.cgz
+    ls $HDREISER_MODULES| cpio --quiet -H crc -o | gzip -9 > hdreiser_modules.cgz
     ls $PCMCIA_MODULES   | cpio --quiet -H crc -o | gzip -9 > pcmcia_modules.cgz
     ls $BIG_MODULES      | cpio --quiet -H crc -o | gzip -9 > other_modules.cgz
     ls $ALL_MODULES      | cpio --quiet -H crc -o | gzip -9 > all_modules.cgz

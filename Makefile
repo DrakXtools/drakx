@@ -1,7 +1,7 @@
 ARCH := $(patsubst i%86,i386,$(shell uname -m))
 ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
-RELEASE_BOOT_IMG = hd.img hd_reiser.img cdrom.img network.img
+RELEASE_BOOT_IMG = hd.img hdreiser.img cdrom.img network.img
 ifeq (i386,$(ARCH))
 RELEASE_BOOT_IMG += pcmcia.img blank.img all.img other.img
 endif

@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-@ARGV >= 2 or die "usage: $0 <image> all|other|cdrom|hd|hd_reiser|network|blank|pcmcia|live|tftp|tftprd\n";
+@ARGV >= 2 or die "usage: $0 <image> all|other|cdrom|hd|hdreiser|network|blank|pcmcia|live|tftp|tftprd\n";
 
 use Config;
 Config->import;
@@ -35,7 +35,7 @@ $install = $ {{
     network => "install",
     cdrom => "local-install",
     hd => "local-install",
-    hd_reiser => "local-install",
+    hdreiser => "local-install",
     live64 => "full-install",
     tftp64 => "full-install",
     tftprd64 => "full-install",
