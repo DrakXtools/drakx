@@ -73,7 +73,6 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 
 	   # default to pal since most people use that
 	   $norm = "PAL";
-	   if ("@ARGV" !~ /--help|-h/) {
 		  my %countries =
 			 (
 			  "ar" => [ "argentina" ],
@@ -99,7 +98,6 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 			 }
 		  }
 		  log::l("[drakxtv] guess lang=>$_, norm=>$norm, area=>$ftable_id");
-	   }
 
 	   if ($in->ask_from("TVdrake", N("Please,\ntype in your tv norm and country"),
 					 [

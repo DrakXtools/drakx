@@ -10,10 +10,6 @@ use interactive;
 my $in = 'interactive'->vnew('su', 'default');
 local $_ = join '', @ARGV;
 
-/-h/ and die N("no help implemented yet.\n");
-/-version/ and die 'version: $Id$'."\n";
-
-
 #- vars declaration
 my ($default_perm_level) = "level ".chomp_(`cat /etc/sysconfig/msec | grep SECURE_LEVEL= |cut -d= -f2`);
 my %CURENT;

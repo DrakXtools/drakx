@@ -36,23 +36,7 @@ my $version = "0.9.0";
 my $prog;
 my $incident=0;
 
-sub usage {
-    print STDERR N("drakbug version %s
-Copyright (C) 2002 MandrakeSoft.
-This is free software and may be redistributed under the terms of the GNU GPL.
-
-usage: drakbug [OPTIONS] [PROGRAM_NAME]
-
-OPTIONS:
-", $version) . N("  --help            - print this help message.
-") . "\n" . N("  --report          - program should be one of mandrake tools
-") . "\n" . N("  --incident        - program should be one of mandrake tools
-");
-    exit(0);
-}
-
 while (defined($_ = shift @ARGV)) {
-    /^--help$/ and do { usage; next };
     /^--report$/ and do { $prog = shift @ARGV };
     /^--incident$/ and do {$incident = 1 ; $prog = shift @ARGV };
 }

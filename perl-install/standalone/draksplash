@@ -21,10 +21,6 @@ if ($::isEmbedded) {
 }
 
 my $in = 'interactive'->vnew('su', 'default');
-local $_ = join '', @ARGV;
-
-/-h/ and die N("no help implemented yet.\n");
-/-version/ and die 'version: $Id$'."\n";
 
 my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window ("toplevel");
 $window->signal_connect(delete_event => sub { $::isEmbedded ? kill(USR1, $::CCPID) : &CloseAppWindow });

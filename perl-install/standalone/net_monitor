@@ -21,29 +21,15 @@
 use Gtk;
 use lib qw(/usr/lib/libDrakX);
 
+use strict;
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
 use interactive;
 use my_gtk qw(:helpers :wrappers);
-#-use Data::Dumper;
 use common;
-use strict;
 use network::netconnect;
 use network::tools;
 use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
-
-if ("@ARGV" =~ /--help|-h/) {
-    print q(Network & Internet connection and monitoring application
-
---defaultintf interface : show this interface by default
---connect : connect to internet if not already connected
---disconnect : disconnect to internet if already connected
---force : used with (dis)connect : force (dis)connection.
---status : returns 1 if connected 0 otherwise, then exit.
---quiet : don't be interactive. To be used with (dis)connect.
-);
-    exit(0);
-}
 
 if ("@ARGV" =~ /--status/) { print connected(); exit(0) }
 my $force = "@ARGV" =~ /--force/;

@@ -5,10 +5,4 @@ use standalone;
 use common;
 use harddrake::ui;
 
-if ("@ARGV" =~ /--help|-h/) {
-    print "Harddrake 2\n", $harddrake::ui::license, N("\nUsage: harddrake [-h|--help] [--test]\n");
-    exit;
-}
-$::isStandalone=1;
-
 harddrake::ui->new;

@@ -49,6 +49,23 @@ Backup and Restore application
 --help                : show this message.
 --version             : show version name.
 "),
+           'drakbug' => N("[OPTIONS] [PROGRAM_NAME]
+
+OPTIONS:
+  --help            - print this help message.
+  --report          - program should be one of mandrake tools
+  --incident        - program should be one of mandrake tools"),
+           'drakfont' => N("Font Importation and monitoring application                                     
+--windows_import : import from all available windows partitions.
+--xls_fonts      : show all fonts that already exist from xls
+--strong         : strong verification of font.
+--install        : accept any font file and any directry.
+--uninstall      : uninstall any font or any directory of font.
+--replace        : replace all font if already exist
+--application    : 0 none application.
+                 : 1 all application available supported.
+                 : name_of_application like  so for staroffice 
+                 : and gs for ghostscript for only this one."),
 	      'draksec' => N("[OPTIONS]...
 	      --debug         print debugging information"),
            'drakTermServ' => N("[OPTIONS]...
@@ -65,6 +82,15 @@ Mandrake Terminal Server Configurator
 	      'drakupdate_fstab' => " [--add | --del] <device>\n",
 	      'keyboardrake' => N("[keyboard]"),
            'logdrake' => N("[--file=myfyle] [--word=myword] [--explain=regexp] [--alert]"),
+           'net_monitor' => N("[OPTIONS]
+Network & Internet connection and monitoring application
+
+--defaultintf interface : show this interface by default
+--connect : connect to internet if not already connected
+--disconnect : disconnect to internet if already connected
+--force : used with (dis)connect : force (dis)connection.
+--status : returns 1 if connected 0 otherwise, then exit.
+--quiet : don't be interactive. To be used with (dis)connect."),
 	      'printerdrake' => N(" [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"),
 	      'rpmdrake' => N("[OPTION]...
   --no-confirmation      don't ask first confirmation question in MandrakeUpdate mode
