@@ -787,6 +787,8 @@ sub readBootloaderConfigBeforeInstall {
     require bootloader;
     add2hash($o->{bootloader} ||= {}, bootloader::read());
 
+    $o->{bootloader}{bootUnsafe} = 0 if $o->{bootloader}{boot}; #- when upgrading, don't ask where to install the bootloader (mbr vs boot partition)
+
     #- since kernel or kernel-smp may not be upgraded, it should be checked
     #- if there is a need to update existing lilo.conf entries by following
     #- symlinks before kernel or other packages get installed.
