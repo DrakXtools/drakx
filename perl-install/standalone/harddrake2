@@ -119,6 +119,7 @@ gtkflush();
 # Build the gui
 add_icon_path('/usr/share/pixmaps/harddrake2/');
 $w = ugtk2->new(N("Harddrake2 version ") . $harddrake::data::version);
+$::main_window = $w->{rwindow} unless $::isEmbedded;
 my ($menubar, $factory);
 unless ($::isEmbedded) {
     $w->{window}->set_size_request(805, 550);
