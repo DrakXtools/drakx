@@ -292,13 +292,13 @@ sub setPackages {
 	#- open rpm db according to right mode needed.
 	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{prefix}, $rebuild_needed);
 
-	pkgs::selectPackage($o->{packages},
-			    pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
-
 	#- always try to select basic kernel (else on upgrade, kernel will never be updated provided a kernel is already
 	#- installed and provides what is necessary).
 	pkgs::selectPackage($o->{packages},
 			    pkgs::bestKernelPackage($o->{packages}) || die("missing kernel package"), 1);
+
+	pkgs::selectPackage($o->{packages},
+			    pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
 
 	#- must be done after getProvides
 	pkgs::read_rpmsrate($o->{packages}, getFile("Mandrake/base/rpmsrate"));
