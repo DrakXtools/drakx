@@ -38,7 +38,7 @@ if (!$mouse || !$::auto) {
 				       sub { join '|', map { translate($_) } split '\|', $_[0] },
 				       [ mouse::fullnames ], 
 				       $mouse->{type} . '|' . $mouse->{name});
-    $in->exit(0);
+    $name or $in->exit(0);
     my $mouse_chosen = mouse::fullname2mouse($name);
     $mouse = $mouse_chosen if !($mouse->{type} eq $mouse_chosen->{type} && $mouse->{name} eq $mouse_chosen->{name});
 
