@@ -12,14 +12,20 @@ foreach my $dir (@ARGV) {
     my $destdir = "/home/.sysconf/$machine_ident";
     my @etcfiles = glob_("$dir/*");
     foreach (@etcfiles) {
-        next if $_ eq '/etc/sudoers';  #- /etc/sudoers can't be a link
-        if (-f && !-l) {
-            my $dest = "$destdir$_";
-            mkdir_p(dirname($dest));  #- case of newly created directories
-            logit("restoring broken symlink $_ -> $dest");
-            system("mv $_ $dest 2>/dev/null");
-            symlink($dest, $_);
+        if ($_ eq '/etc/sudoers'           #- /etc/sudoers can't be a link
+            || !-f                                 
+            || -l && readlink =~ m|^/|) {  #- we want to trap relative symlinks only
+            next;
         }
+        my $dest = "$destdir$_";
+        mkdir_p(dirname($dest));  #- case of newly created directories
+        logit("restoring broken symlink $_ -> $dest");
+        if (-l) {
+            system("cp $_ $dest 2>/dev/null");
+        } else {
+            system("mv $_ $dest 2>/dev/null");
+        }
+        symlinkf($dest, $_);
     }
     foreach (difference2([ grep { -f && s/^\Q$destdir\E// } glob_("$destdir$dir/*") ], [ @etcfiles ])) {
         logit("removing $destdir$_ because of deleted $_");
