@@ -51,6 +51,8 @@ sub from_bios {
     find { $_->{bios} == $bios } @bios_vga_modes;
 }
 
+sub bios_vga_modes { @bios_vga_modes }
+
 sub size2default_resolution {
     my ($size) = @_; #- size in inch
 
@@ -76,7 +78,7 @@ sub size2default_resolution {
 
 sub to_string {
     my ($resolution) = @_;
-    $resolution or return;
+    $resolution or return '';
 
     $resolution->{X} ? sprintf("%sx%s %dbpp", @$resolution{'X', 'Y', 'Depth'}) : 'frame-buffer';
 }
