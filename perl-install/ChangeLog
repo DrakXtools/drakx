@@ -1,3 +1,174 @@
+2003/03/06  David Baudens  <baudens@mandrakesoft.com>
+
+	* share/advertising/03-software.pl: Fix typo
+	Update
+	Sync names with text files
+
+	* share/advertising/07-server.pl, share/advertising/06-development.pl,
+	share/advertising/05-desktop.pl, share/advertising/08-store.pl,
+	share/advertising/11-mnf.pl,
+	share/advertising/13-mdkexpert_corporate.pl: Update
+	Sync names with text files
+
+	* share/advertising/07-desktop.png, share/advertising/14-mdkexpert.png,
+	share/advertising/14-mdkexpert.pl, share/advertising/17-mdkclub.pl,
+	share/advertising/13-mdkcampus.png, share/advertising/06-mcc.png,
+	share/advertising/11-mdkstore.pl, share/advertising/17-mdkclub.png,
+	share/advertising/11-mdkstore.png, share/advertising/12-mdkstore.png,
+	share/advertising/04-multimedia.png, share/advertising/10-mnf.png,
+	share/advertising/03-internet.pl, share/advertising/05-games.pl,
+	share/advertising/16-thanks.png, share/advertising/12-mdkstore.pl,
+	share/advertising/15-mdkexpert-corporate.png,
+	share/advertising/09-server.pl, share/advertising/05-games.png,
+	share/advertising/04-multimedia.pl, share/advertising/13-mdkcampus.pl,
+	share/advertising/03-internet.png, share/advertising/07-desktop.pl,
+	share/advertising/09-server.png, share/advertising/08-development.png,
+	share/advertising/10-mnf.pl,
+	share/advertising/15-mdkexpert-corporate.pl,
+	share/advertising/08-development.pl, share/advertising/06-mcc.pl: Remove
+	old files
+
+	* share/advertising/02-community.pl, share/advertising/01-thanks.pl,
+	share/advertising/list: Use texts from specifications
+
+	* share/advertising/10-security.png, share/advertising/07-server.png,
+	share/advertising/11-mnf.png, share/advertising/03-software.png,
+	share/advertising/10-security.pl, share/advertising/08-store.png,
+	share/advertising/12-mdkexpert.png,
+	share/advertising/06-development.png,
+	share/advertising/09-mdksecure.png, share/advertising/09-mdksecure.pl,
+	share/advertising/12-mdkexpert.pl,
+	share/advertising/04-configuration.png,
+	share/advertising/13-mdkexpert_corporate.png,
+	share/advertising/05-desktop.png, share/advertising/04-configuration.pl:
+	Sync names with text files
+
+2003/03/06  François Pons  <fpons@mandrakesoft.com>
+
+	* network/ethernet.pm: avoid virtual ethX to be reconfigured by
+	drakconnect
+	fixed ifconfig invocation and state analysis in install mode.
+
+	* drakxtools.spec: avoid virtual ethX to be reconfigured by drakconnect
+	NVIDIA drop.
+
+	* install_any.pm: dropped allowNVIDIA_rpms method.
+	added check_kernel_module_packages for checking prioprietary base kernel
+	package.
+
+	* install2.pm: added summaryAfter steps for summary.
+
+	* any.pm: make sure acpi is installed.
+
+	* standalone/XFdrake: moved prioprietary NVIDIA code support to generic
+	prioprietary support in standalone.pm.
+
+	* standalone.pm: fixed error message.
+	added check_kernel_module_packages with same behaviour expected as for
+	install_any module.
+
+	* install_steps.pm: dropped allowNVIDIA_rpms
+	fixed stupid again typo.
+	modified logic for summaryAfter.
+	fixed again the same typo.
+	fixed stupid typo.
+	summaryAfter created to install acpi and acpid if needed.
+
+	* install_steps_interactive.pm: dropped allowNVIDIA_rpms
+
+	* install_steps_gtk.pm: added desktop groups organization.
+
+	* network/modem.pm: added support for kernel base name of ltmodem.
+
+	* network/adsl.pm: fixed adsl login not probed in install mode.
+
+2003/03/06  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/url.c: provide Host: in http requests so that install works
+	from sites with virtual hosting (#2561)
+
+	* share/po/es.po: this translation can't get much big or else it will
+	enlarge too
+	much diskdrake
+
+2003/03/06  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* lang.pm: Enabled Laotian (was missing a definition in %charsets),
+	Bengali (there starts to be gnome translations available),
+	and Kannada (there starts to be gnome translations available).
+	Code for Xhosa added (there is an official kde-i18n-xh package
+	available),
+	wating for lang-xh.png to enable it
+
+	* share/po/cs.po, share/po/vi.po, share/po/ta.po, share/po/fi.po,
+	share/po/ar.po: updated Czech, Arabic, Finnish, Tamil and Vietnamese
+	files
+
+2003/03/06  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm: don't create xxx.conf for standard devfs compatibility names
+
+	* install_steps_interactive.pm: basic encrypt_key handling in upgrade
+	(don't mistype!)
+
+	* share/po/help-ru.pot: add it since drakx-chapter.xml is ok (dixit Alice
+	Lafox)
+
+	* share/po/help_xml2pm.pl: do not exclude "ru" drakx-help.xml anymore
+
+	* detect_devices.pm: merge cdroms__faking_ide_scsi() and
+	zips__faking_ide_scsi() in
+	cdroms_and_zips__faking_ide_scsi() to be able to have a good devfs
+	device name
+	this fixes *__faking_ide_scsi() not faking devfs_device causing bad
+	/etc/devfs/conf.d/dvd.conf for dvd burners
+
+	* install_any.pm: cleanup
+
+2003/03/06  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/draksec: perl_checker fix
+
+	* harddrake/data.pm: move usb webcams which have mod_quickcam as a driver
+	from unknown to
+	webcam clategory since they do not have any valid usb class
+
+	* standalone/service_harddrake: s/perl -w/use diagnostics/ so stat it get
+	removed from package at
+	build time
+
+	* drakxtools.spec: typo fix
+	9.1-17mdk
+	update
+	9.1-16mdk, first bit
+	more fixes
+
+	* harddrake/sound.pm: perl_checker fix
+	fix #1929
+	let fix #2244, #2245, #2730
+
+	* standalone/draksplash: do not crash on color selection
+	prevent one to pop up hundred of windows: make browse dialog be modal
+	  - fix #1766
+	  - do not crash when browsing
+
+	* services.pm: we do use $in !!!!
+
+	* docs/mdk-9.2: first bits of mdk9.2 specs (aka postponed bugs...) stuff
+
+	* scanner.pm: perl_checker fixes
+	do not detect some usb webcams as scanners ...
+
+	* harddrake/TODO: update
+
+	* standalone/draksound, install_steps_interactive.pm: let fix #2244,
+	#2245, #2730
+
+2003/03/06  Warly  <warly@mandrakesoft.com>
+
+	* network/network.pm: detect if the device is pcmcia when initializing the
+	ONBOOT parameter
+
 2003/03/06  Frederic Lepied  <flepied@mandrakesoft.com>
 
 	* share/po/fr.po: corrected remaining mise-à-jour
@@ -14144,7 +14315,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.801 2003/03/04 13:54:59 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.802 2003/03/06 14:08:57 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
