@@ -654,8 +654,8 @@ sub deselectFoundMedia {
 	    push @{$corresp[$cdlist{$cd}[0]]}, $i;
 	}
 	if ($cd) {
-	    $cdlist{$1} ||= [];
-	    push @{$cdlist{$1}}, $i;
+	    $cdlist{$cd} ||= [];
+	    push @{$cdlist{$cd}}, $i;
 	}
 	$totalsize >= 0 and $totalsize += $mediumsize->{$_->[0]};
 	++$i;
