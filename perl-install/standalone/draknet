@@ -20,8 +20,6 @@
 
 #use Data::Dumper;
 
-use Gtk;
-init Gtk;
 use lib qw(/usr/lib/libDrakX);
 
 use interactive;
@@ -62,7 +60,9 @@ $::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 
 my $in = vnew interactive('su');
 
-$::isEmbedded or goto dd;
+$::isEmbedded && ref($in) =~ /gtk/ or goto dd;
+require Gtk;
+init Gtk;
 netconnect::read_net_conf('', $netcnx, $netc);
 any::setup_thiskind_backend('net', undef);
 my @all_cards = netconnect::conf_network_card_backend ('', $netc, $intf, undef, undef, undef, undef);
