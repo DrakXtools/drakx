@@ -1082,7 +1082,7 @@ sub generate_automatic_stage1_params {
     my @ks;
 
     if ($o->{method} eq 'http') {
-	$ENV{URLPREFIX} =~ m!(http|ftp)://([^/:]+)(/.*)! or die;
+	$ENV{URLPREFIX} =~ m!(http|ftp)://([^/:]+)(.*)! or die;
 	$method = $1; #- in stage1, FTP via HTTP proxy is available through FTP config, not HTTP
 	@ks = (server => $2, directory => $3);
     } elsif ($o->{method} eq 'ftp') {
