@@ -1,3 +1,126 @@
+2004/08/02  Frederic Lepied  <flepied at mandrakesoft.com>
+
+	* share/rpmsrate: updated installed packages for 10.1
+
+2004/08/02  jjorge
+
+	* share/po/pt.po: install lover
+
+2004/08/02  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/adsl.pm: in sagem start section, modprobe eagle-usb and do not
+	wait for sync
+	here, fctStartAdsl will handle that when pppd is called
+	in speedtouch start section, modprobe speedtch module and use
+	speedtouch-start instead of directly using modem_run
+	in install, run modem start scripts once config is written
+
+2004/08/02  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/uk.po, share/po/wa.po: updated Farsi file
+
+	* share/po/ar.po: updated Arabic file
+
+	* share/po/zh_TW.po: updated Chinese file
+
+2004/08/02  Pixel  <pixel at mandrakesoft.com>
+
+	* share/rpmsrate: flag rosegarden4 KDE
+
+	* diskdrake/interactive.pm: use fs::format::check_package_is_installed()
+	before formatting (bugzilla #10435)
+	  - move package_needed_for_partition_type() from fsedit to fs::format
+	  - create check_package_is_installed() in fs::format and use it
+	don't call will_tell_kernel() when we have lvm (anthill #994)
+
+	* any.pm, network/network.pm, harddrake/sound.pm, diskdrake/dav.pm,
+	network/netconnect.pm, do_pkgs.pm, network/smb.pm, lvm.pm,
+	network/drakfirewall.pm, network/nfs.pm, standalone/drakups,
+	standalone/drakxtv: introduce ->ensure_binary_is_installed and use it
+
+	* fsedit.pm, fs/format.pm, install_any.pm: 
+	  - move package_needed_for_partition_type() from fsedit to fs::format
+	  - create check_package_is_installed() in fs::format and use it
+
+	* standalone/service_harddrake: check the XF86Config and/or XF86Config-4
+	exist before modifying it
+	(otherwise it creates an empty file) (bugzilla #10487)
+
+2004/08/02  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* c/Makefile.PL: fix build
+
+	* ugtk2.pm: fix inverted comments
+	(gtktext_insert) merge with text_append() from logdrake:
+	  - name parameters
+	  - provide fast text insertion by using named tags instead of anonymous
+	tags.
+	this is especially usefull in order to speed up programs that use quite
+	a
+	  lot of identical tags such as logdrake (#8412) and rpmdrake
+
+	* standalone/logdrake: perl_checker cleanup
+	(log_output__real) rename it as insert_text_n_scroll() in order to
+	better
+	reflect what it does
+	reuse new ugtk2 infrastructure
+	(log_output) fix tag name (was harmfull but it's just saner anyway)
+
+	* harddrake/autoconf.pm (network_conf) rename o as obj so that pixel isn't
+	confused
+
+	* standalone/drakups (add_device_wizard) fix string
+
+2004/08/01  Frederic Lepied  <flepied at mandrakesoft.com>
+
+	* share/rpmsrate: added s2u
+
+2004/08/01  fwang
+
+	* standalone/drakbackup, standalone/harddrake2, standalone/drakups:
+	several typos fix
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2004/08/01  hilbert
+
+	* share/po/zh_TW.po: DrakX-zh_TW: 75
+	Choose the...
+
+2004/08/01  reinouts
+
+	* share/po/nl.po: Updated Dutch (nl) translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+
+2004/07/30  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/draksplash2: draksplash2 is here until merged in draksplash
+
+2004/07/30  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* lang.pm: support nabi input method too
+	support im-ja input method too
+
+	* drakxtools.spec: log more stuff into 10.1-0.2mdk
+	10.1-0.2mdk
+
+	* standalone/net_applet: keep strings synced and warn both coders and
+	translators about it
+	fix timeout usage
+	like in all other tools, revert ugly code printing "This program
+	cannot be run in console mode", which is easier done in ugtk2.pm
+	do not enforce parameter position in translatable strings
+
+	* share/po/br.po, share/po/fr.po: update
+
+	* ugtk2.pm (shrink_topwindow) drop Gtk+-2.[02]x support
+
+	* any.pm (selectCountry) let's have a better looking GUI by preventing
+	uneeded
+	scrollbar on pull down menu
+	(selectCountry) use a combo box rather than a list for listing input
+	methods
+
 2004/07/30  Olivier Blin <oblin at mandrakesoft.com>
 
 	* network/netconnect.pm: offer to connect for pppoe connexions too
@@ -33552,7 +33675,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.937 2004/07/28 03:14:20 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.938 2004/07/30 11:07:19 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
