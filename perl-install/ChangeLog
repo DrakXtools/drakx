@@ -1,3 +1,15 @@
+2000-05-08  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm (main): move the touch of some files here to please linuxconf
+	
+	* install2.pm (miscellaneous): s/KBD/KEYBOARD/
+
+	* lilo.pm (install_grub): don't keep symlinks for reiserfs
+	* lilo.pm (suggest): allow grub everytime now (not only if !reiserfs)
+
+	* install_any.pm (getHds): default mount point for windobe in
+	lowercased for StartOffice(!)
+
 2000-05-08  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* share/keyboards.tar.bz2: Fixed Brazilian keyboard (.br); added

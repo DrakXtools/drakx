@@ -168,7 +168,7 @@ sub computeSize($$$$) {
 	    } 
 	} @l;
     }
-    my $size = min($max, $best->{size} + $free_space * ($tot_ratios && $best->{ratio} / $tot_ratios));
+    my $size = int min($max, $best->{size} + $free_space * ($tot_ratios && $best->{ratio} / $tot_ratios));
 
     #- verify other entry can fill the hole
     if (grep { $_->{size} < $max - $size } @L) { $size } else { $max }

@@ -388,7 +388,7 @@ sub miscellaneous {
 	my $f = "$o->{prefix}/etc/sysconfig/usb";
 	my %usb = getVarsFromSh($f);
 	$usb{MOUSE} = bool2yesno($o->{mouse}{device} eq "usbmouse");
-	$usb{KBD} = bool2yesno(int grep { /^keybdev\.c: Adding keyboard/ } detect_devices::syslog());
+	$usb{KEYBOARD} = bool2yesno(int grep { /^keybdev\.c: Adding keyboard/ } detect_devices::syslog());
 	$usb{ZIP} = bool2yesno(-d "/proc/scsi/usb");
 	setVarsInSh($f, \%usb);
 
@@ -696,6 +696,11 @@ sub main {
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
     modules::write_conf("$o->{prefix}/etc/conf.modules");
 
+    #- to ensure linuxconf doesn't cry against those files being in the future
+    foreach ('/etc/conf.modules', '/etc/crontab', '/etc/sysconfig/mouse', '/etc/X11/fs/config') {
+	my $now = time - 24 * 60 * 60;
+	utime $now, $now, "$o->{prefix}/$_";
+    }
     install_any::killCardServices();
 
     #- make sure failed upgrade will not hurt too much.

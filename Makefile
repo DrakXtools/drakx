@@ -50,7 +50,8 @@ autoboot:
 ifeq (i386,$(ARCH))
 	install -d $(ROOTDEST)/lnx4win
 	cp -f vmlinuz $(ROOTDEST)/lnx4win
-	cp -f cdrom.rdz $(ROOTDEST)/lnx4win/initrd.img
+	cp -f cdrom.rdz $(ROOTDEST)/lnx4win/initrd.gz
+	/usr/sbin/rdev -v $(ROOTDEST)/lnx4win/vmlinuz 788
 
 	install -d $(AUTOBOOT)
 	cp -f vmlinuz $(AUTOBOOT)
@@ -58,6 +59,7 @@ ifeq (i386,$(ARCH))
 	cp -f cdrom.rdz $(AUTOBOOT)/initrd.cd
 	cp -f pcmcia.rdz $(AUTOBOOT)/initrd.pc
 	cp -f network.rdz $(AUTOBOOT)/initrd.nt
+	/usr/sbin/rdev -v $(AUTOBOOT)/vmlinuz 788
 endif
 
 dirs:

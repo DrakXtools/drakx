@@ -423,9 +423,6 @@ GridHeight=70
 	} "$o->{prefix}$_/.kde/share/config/kfmrc" 
     }
 
-    #- to ensure linuxconf doesn't cry against those files being in the future
-    -e $_ and touch($_) foreach map { "$o->{prefix}/$_" } '/etc/conf.modules', '/etc/crontab', '/etc/sysconfig/mouse', '/etc/X11/fs/config';
-
     #- move some file after an upgrade that may be seriously annoying.
     #- and rename saved files to .mdkgiorig.
     if ($o->{isUpgrade}) {

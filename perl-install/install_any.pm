@@ -357,7 +357,7 @@ Continue at your own risk!")) if !$ok2 && $ok && !$o->{partitioning}{readonly};
     } else {
 	my %w; foreach (@win) {
 	    my $v = $w{$_->{device_windobe}}++;
-	    $_->{mntpoint} = "/mnt/win_$_->{device_windobe}" . ($v ? $v+1 : '');
+	    $_->{mntpoint} = "/mnt/win_" . lc($_->{device_windobe}) . ($v ? $v+1 : ''); #- lc cuz of StartOffice(!) cf dadou
 	}
     }
     $ok2;
