@@ -704,15 +704,16 @@ sub Resize {
 	my ($write_partitions) = @_;
 
 	if (isLVM($hd)) {
-	    lvm::lv_resize($part, $oldsize) 
-	  } else {
-	      partition_table::adjust_local_extended($hd, $part);
-	      partition_table::adjust_main_extended($hd);
-	      write_partitions($in, $hd) if $write_partitions;
-	  }
+	    lvm::lv_resize($part, $oldsize) ;
+	} else {
+	    partition_table::adjust_local_extended($hd, $part);
+	    partition_table::adjust_main_extended($hd);
+	    write_partitions($in, $hd) or return if $write_partitions && %nice_resize;
+	}
+	1;
     };
 
-    $adjust->(1) if $size > $oldsize;
+    $adjust->(1) or return if $size > $oldsize;
 
     if ($nice_resize{fat}) {
 	local *log::l = sub { $w->set(join(' ', @_)) };
