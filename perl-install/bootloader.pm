@@ -98,7 +98,7 @@ sub read($$) {
 	    } elsif ($_ eq 'init-message') {
 		$v =~ s/\\n//g; 
 		$v =~ s/"//g;
-		$b{init-message} = $v;
+		$b{'init-message'} = $v;
 	    } else {
 		$b{$_} = $v || 1;
 	    }
@@ -114,7 +114,7 @@ sub read($$) {
 	    }
 	}
     }
-    if (arch() != /ppc/) {
+    if (arch() !~ /ppc/) {
 	delete $b{timeout} unless $b{prompt};
 	$_->{append} =~ s/^\s*"?(.*?)"?\s*$/$1/ foreach \%b, @{$b{entries}};
 	$b{timeout} = $b{timeout} / 10 if $b{timeout};
@@ -326,7 +326,7 @@ sub suggest {
 	{
 	 defaultos => "linux",
 	 entries => [],
-	 init-message => "Welcome to Mandrake Linux!",
+	 'init-message' => "Welcome to Mandrake Linux!",
 	 delay => 30,	#- OpenFirmware delay
 	 timeout => 50,
 	 enableofboot => 1,

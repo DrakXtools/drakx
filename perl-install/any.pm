@@ -197,7 +197,7 @@ sub setupBootloader {
 	$b->{boot} = $partition_table_mac::bootstrap_part;	
 	$in->ask_from('', _("Bootloader main options"), [
 	{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },	
-	{ label => _("Init Message"), val => \$b->{init-message} },
+	{ label => _("Init Message"), val => \$b->{'init-message'} },
 	{ label => _("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab))], not_edit => !$::expert },
 	{ label => _("Open Firmware Delay"), val => \$b->{delay} },
 	{ label => _("Kernel Boot Timeout"), val => \$b->{timeout} },
@@ -235,8 +235,8 @@ sub setupBootloader {
     if ($mixed_kind_of_disks && 
 #	$b->{boot} !~ /$hds->[0]{device}/ && #- not the first disk
 	$b->{boot} =~ /\d$/ && #- on a partition
-	is_empty_hash_ref($b->{bios}) #- some bios mapping already there
-       ) && (arch() !~ /ppc/)){
+	is_empty_hash_ref($b->{bios}) && #- some bios mapping already there
+	arch() !~ /ppc/) {
 	my $hd = $in->ask_from_listf('', _("You decided to install the bootloader on a partition.
 This implies you already have a bootloader on the hard drive you boot (eg: System Commander).
 
