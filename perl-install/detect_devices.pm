@@ -39,6 +39,7 @@ sub zips() { grep { $_->{type} =~ /.d/ && isZipDrive($_) } get(); }
 sub ide_zips() { grep { $_->{type} =~ /.d/ && isZipDrive($_) } getIDE(); }
 #-sub jazzs() { grep { $_->{type} =~ /.d/ && isJazDrive($_) } get(); }
 sub ls120s() { grep { $_->{type} =~ /.d/ && isLS120Drive($_) } get(); }
+sub usbfdus() { grep { $_->{type} =~ /.d/ && isUSBFDUDrive($_) } get(); }
 sub cdroms() { 
     my @l = grep { $_->{type} eq 'cdrom' } get(); 
     if (my @l2 = getIDEBurners()) {
@@ -54,14 +55,16 @@ sub cdroms() {
 }
 sub floppies() {
     my @ide = map { $_->{device} } ls120s() and modules::load("ide-floppy");
-    (@ide, grep { tryOpen($_) } qw(fd0 fd1));
+    my @scsi, map { $_->{device} } usbfdus();
+    (@ide, @scsi, grep { tryOpen($_) } qw(fd0 fd1));
 }
 #- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
 
 sub isZipDrive() { $_[0]->{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
 #-sub isJazzDrive() { $_[0]->{info} =~ /JAZZ?\s+/ } #- untested.
-sub isLS120Drive() { $_[0]->{info} =~ /LS-?120/ } #- accept ZIP 100, untested for bigger ZIP drive.
-sub isRemovableDrive() { &isZipDrive || &isLS120Drive } #-or &isJazzDrive }
+sub isLS120Drive() { $_[0]->{info} =~ /LS-?120/ }
+sub isUSBFDUDrive() { $_[0]->{info} =~ /USB-?FDU/ }
+sub isRemovableDrive() { &isZipDrive || &isLS120Drive || &isUSBFDUDrive } #-or &isJazzDrive }
 
 sub hasSCSI() {
     local *F;
