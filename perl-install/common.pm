@@ -248,13 +248,9 @@ sub require_root_capability {
     if ($ENV{DISPLAY} && system('/usr/X11R6/bin/xtest') == 0) {
 	if (fuzzy_pidofs(qr/\bkwin\b/) > 0) {
 	    exec("kdesu", "-c", "$0 @ARGV") or die N("kdesu missing");
-	} else {
-	    exec { 'consolehelper' } $0, @ARGV or die N("consolehelper missing");
-
 	}
-    } else {
-	exec { 'consolehelper' } $0, @ARGV or die N("consolehelper missing");
     }
+    exec { 'consolehelper' } $0, @ARGV or die N("consolehelper missing");
 
     # still not root ?
     die "you must be root to run this program" if $>;
