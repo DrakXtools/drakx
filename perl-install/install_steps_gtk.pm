@@ -633,7 +633,7 @@ sub installPackages {
 		$last_dtime = $dtime;
 	    }
 	    $w->flush;
-	} else { unshift @_, $m; goto $oldInstallCallback }
+	} else { goto $oldInstallCallback }
     };
     #- the modification is not local as the box should be living for other package installation.
     undef *install_any::changeMedium;

@@ -772,7 +772,7 @@ sub installPackages {
 	    my $p = $data->{depslist}[$id];
 	    $w->set(_("Installing package %s\n%d%%", $p->name, $total && 100 * $current / $total));
 	    $current += $p->size;
-	} else { unshift @_, $m; goto $old }
+	} else { goto $old }
     };
 
     #- the modification is not local as the box should be living for other package installation.
