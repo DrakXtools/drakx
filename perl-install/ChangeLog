@@ -1,5 +1,38 @@
 2001/02/13  dam's  <damien@mandrakesoft.com>
 
+	* netconnect.pm: network con initiated in draknet.
+	netconnect improvement.
+	typo
+
+	* network.pm: typo
+	corrected domainname setting
+
+	* standalone/draknet: network con initiated in draknet.
+	netconnect improvement.
+
+2001/02/13  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/frontend.h, mdk-stage1/network.h,
+	mdk-stage1/stdio-frontend.c, mdk-stage1/dhcp.c, mdk-stage1/automatic.c,
+	mdk-stage1/newt-frontend.c, mdk-stage1/automatic.h, mdk-stage1/disk.c,
+	mdk-stage1/network.c: write down Magic Callback (tm) for static ip stuff
+
+	* mdk-stage1/modules.c: ask for modules parameters everytime in expert
+	mode, to avoid wrong autodetections in certain cases
+	  - better log of nfs mount errors
+	  - don't insmod modules already present (important for bzip2 slowness)
+
+	* mdk-stage1/cdrom.c: better error msg thx to mcdtg
+
+	* mdk-stage1/mount.c, mdk-stage1/nfsmount.c: 
+	  - better log of nfs mount errors
+	  - don't insmod modules already present (important for bzip2 slowness)
+
+	* mdk-stage1/stage1.c, mdk-stage1/init.c: use exit code 66 for rescue
+	better console messages at startup
+
+2001/02/13  dam's  <damien@mandrakesoft.com>
+
 	* standalone/draknet: profile handling updated
 
 	* network.pm: typo
