@@ -409,11 +409,14 @@ printer (accessible via a Unix, Netware or Microsoft Windows network)."),
 configurePrinterSystem => __("
 If you wish to be able to print, please choose one printing system between CUPS and LPR.
 
+
 CUPS is a new, powerful and flexible printing system for Unix systems (CUPS
 means \"Common Unix Printing System\"). It is the default printing system in
 Linux-Mandrake.
 
+
 LPR is the old printing system used in previous Linux-Mandrake distributions.
+
 
 If you don't have printer, click on \"None\"."),
 
@@ -421,11 +424,14 @@ configurePrinterConnected =>
 __("GNU/Linux can deal with many types of printer. Each of these types requires
 a different setup.
 
+
 If your printer is physically connected to your computer, select \"Local
 printer\".
 
+
 If you want to access a printer located on a remote Unix machine, select
 \"Remote printer\".
+
 
 If you want to access a printer located on a remote Microsoft Windows machine
 (or on Unix machine using SMB protocol), select \"SMB/Windows 95/98/NT\"."),
@@ -435,13 +441,16 @@ __("Please turn on your printer before continuing to let DrakX detect it.
 
 You have to enter some informations here.
 
+
    * Name of printer: the print spooler uses \"lp\" as default printer name. So, you must have a printer named \"lp\".
      If you have only one printer, you can use several names for it. You just need to separate them by a pipe
      character (a \"|\"). So, if you prefer a more meaningful name, you have to put it first, eg: \"My printer|lp\".
      The printer having \"lp\" in its name(s) will be the default printer.
 
+
    * Description: this optional but can be useful if several printers are connected to your computer or if you allow
      other computers to access to this printer.
+
 
    * Location: if you want to put some information on your
      printer location, put it here (you are free to write what
@@ -451,13 +460,16 @@ You have to enter some informations here.
 configurePrinterLPR => 
 __("You need to enter some informations here.
 
+
    * Name of queue: the print spooler uses "lp" as default printer name. So, you need have a printer named \"lp\".
     If you have only one printer, you can use several names for it. You just need to separate them by a pipe
     character (a \"|\"). So, if you prefer to have a more meaningful name, you have to put it first, eg: \"My printer|lp\".
     The printer having \"lp\" in its name(s) will be the default printer.
+
   
    * Spool directory: it is in this directory that printing jobs are stored. Keep the default choice
      if you don't know what to use
+
 
    * Printer Connection: If your printer is physically connected to your computer, select \"Local printer\".
      If you want to access a printer located on a remote Unix machine, select \"Remote lpd printer\".
