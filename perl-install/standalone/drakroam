@@ -110,7 +110,7 @@ my %available_roaming_daemons = (
 					  my ($config) = @_;
 					  foreach my $net (all($config)) {
 					      $net eq "default" or next;
-					      print "Adding net $net\n";
+					      print "Adding net $net\n" if $::testing;
 					      push @{$KnownList->{data}}, [$net];
 					  }
 				      },
@@ -263,7 +263,7 @@ sub UpdateStatus() {
 	my $CurrentMode = "";
 	my $CurrentWEP = "";
 	my $CurrentSignal = "-";
-	print("Updating\n");
+	print "Updating\n" if $::testing;
 	foreach (run_program::get_stdout($IWConfig, $device)) {
 		/ESSID:"(\S*)"/ and $CurrentNet = $1;
 		/Mode:(\S*)\s/ and $CurrentMode = $1;
@@ -287,9 +287,9 @@ sub UpdateStatus() {
 
 sub UpdateAvailable() {
 	my ($essid, $mode, $wep, $signal);
-	print("Running iwlist\n");
+	print "Running iwlist\n" if $::testing;
 	@{$AvailableList->{data}} = ();
-	foreach (run_program::get_stdout($IWList, "scan")) {
+	foreach (`$IWList scan 2>/dev/null`) {
 		/([^ ]+)([ \t]+)Scan completed :/ and $device = $1;
 		/([^ ]+)([ \t]+)No scan results/ and  $device = $1;
 		/ESSID:"(\S*)"/ and $essid = $1;
@@ -297,7 +297,7 @@ sub UpdateAvailable() {
 		m!Quality:(\S*)/! and $signal = $1;
 		if (/key:(\S*)\s/) {
 			$wep = $1;
-			print("ESSID: $essid, Mode: $mode, WEP: $wep, Signal: $signal\n");
+			print "ESSID: $essid, Mode: $mode, WEP: $wep, Signal: $signal\n" if $::testing;
 			push @{$AvailableList->{data}}, [$essid, $mode, $wep, $signal];
 		}
 	}
@@ -305,7 +305,7 @@ sub UpdateAvailable() {
 
 sub AddNet {
 	my ($essid, $mode, $channel, $dhcp, $key) = @_;
-	print "Adding net $essid\n";
+	print "Adding net $essid\n" if $::testing;
 	push @{$KnownList->{data}}, [ $essid, $mode, $channel, $dhcp, $key ];
 	$_->{add_net}($_->{config_location}, $essid) foreach values %available_roaming_daemons;
 }
@@ -313,7 +313,7 @@ sub AddNet {
 sub RemoveNet {
 	my ($selected) = @_;
 	my $essid = $KnownList->{data}[$selected][0];
-	print "Removing net $essid\n";
+	print "Removing net $essid\n" if $::testing;
 	splice @{$KnownList->{data}}, $selected, 1;
 	$_->{remove_net}($_->{config_location}, $essid) foreach values %available_roaming_daemons;
 }
@@ -368,13 +368,13 @@ sub ConnectNow {
 		push @command, "$IFUp $device"
 	}
 	my $ToBash = join("", @command);
-	print("Sending $ToBash\n");
+	print "Sending $ToBash\n" if $::testing;
 	system($ToBash);
 	&UpdateStatus;
 }
 
 sub Disconnect {
-	print("Dropping $device\n");
+	print "Dropping $device\n" if $::testing;
 	system("$IFDown $device");
 	&UpdateStatus;
 }
@@ -390,8 +390,5 @@ sub Dialog {
     $AboutWindow->signal_connect(response => sub { $_[0]->destroy });
     $AboutWindow->show_all;
 }
-
-# start GUI
-print "Starting GUI\n";
 
 $w->main;
