@@ -89,6 +89,16 @@ sub load {
     if ($network_module) {
 	set_alias($_, $network_module) foreach difference2([ detect_devices::getNet() ], \@network_devices);
     }
+
+    @l = grep {
+	if (c::kernel_version() =~ /^\Q2.6/ && member($_, 'imm', 'ppa') 
+	    && ! -d "/proc/sys/dev/parport/parport0/devices/$_") {
+	    log::l("$_ loaded but is not useful, removing");
+	    unload($_);
+	    0;
+	} else { 1 }
+    } @l;
+
     when_load($_, @{$options{$_}}) foreach @l;
 }
 
@@ -379,41 +389,38 @@ sub when_load {
 
     $name = mapping_26_24($name); #- need to stay with 2.4 names, modutils will allow booting 2.4 and 2.6
 
-    if ($name =~ /[uo]hci/) {
+    $conf{$name}{options} = join " ", @options if @options;
+
+    if (my $category = module2category($name)) {
+	when_load_category($name, $category);
+    }
+
+    if (my $above = $conf{$name}{above}) {
+	load($above); #- eg: for snd-pcm-oss set by set_sound_slot()
+    }
+}
+
+sub when_load_category {
+    my ($name, $category) = @_;
+
+    if ($category =~ m,disk/(scsi|hardware_raid|usb|firewire),) {
+	add_probeall('scsi_hostadapter', $name);
+	eval { load('sd_mod') };
+    } elsif ($category eq 'bus/usb') {
+	add_probeall('usb-interface', $name);
         -f '/proc/bus/usb/devices' or eval {
             require fs; fs::mount('/proc/bus/usb', '/proc/bus/usb', 'usbdevfs');
             #- ensure keyboard is working, the kernel must do the job the BIOS was doing
             sleep 4;
             load("usbkbd", "keybdev") if detect_devices::usbKeyboards();
         }
+    } elsif ($category eq 'bus/firewire') {
+	set_alias('ieee1394-controller', $name);
+    } elsif ($category =~ /sound/) {
+	my $sound_alias = find { /^sound-slot-[0-9]+$/ && $conf{$_}{alias} eq $name } keys %conf;
+	$sound_alias ||= 'sound-slot-0';
+	set_sound_slot($sound_alias, $name);
     }
-
-    $conf{$name}{options} = join " ", @options if @options;
-
-    if (my $category = module2category($name)) {
-	if (c::kernel_version() =~ /^\Q2.6/ && member($name, 'imm', 'ppa') 
-	    && ! -d "/proc/sys/dev/parport/parport0/devices/$name") {
-	    unload($name);
-	    undef $category;
-	}
-	if ($category =~ m,disk/(scsi|hardware_raid|usb|firewire),) {
-	    add_probeall('scsi_hostadapter', $name);
-	    eval { load('sd_mod') };
-	} elsif ($category eq 'bus/usb') {
-	    add_probeall('usb-interface', $name);
-	} elsif ($category eq 'bus/firewire') {
-	    set_alias('ieee1394-controller', $name);
-	} elsif ($category =~ /sound/) {
-            my $sound_alias = find { /^sound-slot-[0-9]+$/ && $conf{$_}{alias} eq $name } keys %conf;
-            $sound_alias ||= 'sound-slot-0';
-            set_sound_slot($sound_alias, $name);
-        }
-    }
-
-    if (my $above = $conf{$name}{above}) {
-	load($above); #- eg: for snd-pcm-oss set by set_sound_slot()
-    }
-
 }
 
 sub cz_file() { 
