@@ -392,6 +392,13 @@ sub write_on_pixmap {
     $darea;
 }
 
+sub n_line_size {
+    my ($nbline, $type, $widget) = @_;
+    my $font = $widget->style->font;
+    my $spacing = ${{ text => 0, various => 15 }}{$type};
+    $nbline * ($font->ascent + $font->descent + $spacing) + 8;
+}
+
 #-###############################################################################
 #- createXXX functions
 
@@ -421,8 +428,7 @@ sub create_box_with_title($@) {
     $o->{box} = new Gtk::VBox(0,0);
     $o->{icon} and eval { gtkpack__($o->{box}, gtkset_border_width(gtkpack_(new Gtk::HBox(0,0), 1, gtkpng($o->{icon})),5)); };
     if (@_ <= 2 && $o->{box_size} > 4) {
-	my $font = $o->{box}->style->font;
-	my $wanted = $o->{box_size} * ($font->ascent + $font->descent) + 8;
+	my $wanted = n_line_size($o->{box_size}, 'text', $o->{box});
 	my $height = min(250, $wanted);
 	my $has_scroll = $height < $wanted;
 

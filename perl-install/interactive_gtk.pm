@@ -13,7 +13,7 @@ use my_gtk qw(:helpers :wrappers);
 my $forgetTime = 1000; #- in milli-seconds
 
 sub new {
-    ($::windowheight, $::windowwidth) = my_gtk::gtkroot()->get_size if $::isStandalone;
+    ($::windowheight, $::windowwidth) = my_gtk::gtkroot()->get_size if !$::isInstall;
     goto &interactive::new;
 }
 sub enter_console { my ($o) = @_; $o->{suspended} = common::setVirtual(1) }
@@ -32,8 +32,10 @@ sub ask_warn {
 
 sub ask_fileW {
     my ($o, $title, $dir) = @_;
-    $o->_ask_file($title, $dir); 
-    $o->main;
+    my $w = my_gtk->new($title);
+    $dir .= '/' if $dir !~ m|/$|;
+    my_gtk::_ask_file($w, $title, $dir); 
+    $w->main;
 }
 
 sub create_boxradio {
@@ -319,7 +321,7 @@ sub ask_from_entries_refW {
     $mainw->sync; # for XPM's creation
 
     #-the widgets
-    my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack, $has_scroll, $total_size);
+    my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack, $has_scroll, $total_size, $max_width);
     my $tooltips = new Gtk::Tooltips;
 
     my $set_all = sub {
@@ -354,7 +356,7 @@ sub ask_from_entries_refW {
 	};
 	my $changed = sub { $update->(sub { $common->{callbacks}{changed}($ind) }) };
 
-	my ($w, $real_w, $set, $get, $expand, $size);
+	my ($w, $real_w, $set, $get, $expand, $size, $width);
 	if ($e->{type} eq 'iconlist') {
 	    $w = new Gtk::Button;
 	    $set = sub {
@@ -376,9 +378,11 @@ sub ask_from_entries_refW {
 	    $w->signal_connect(clicked => $changed);
 	    $set = sub { $w->set_active($_[0]) };
 	    $get = sub { $w->get_active };
+	    $width = length $e->{text};
 	} elsif ($e->{type} eq 'label') {
 	    $w = Gtk::Label->new(${$e->{val}});
 	    $set = sub { $w->set($_[0]) };
+	    $width = length ${$e->{val}};
 	} elsif ($e->{type} eq 'button') {
 	    $w = Gtk::Button->new('');
 	    $w->signal_connect(clicked => sub {
@@ -389,6 +393,7 @@ sub ask_from_entries_refW {
 		$set_all->();
 	    });
 	    $set = sub { $w->child->set(may_apply($e->{format}, $_[0])) };
+	    $width = length may_apply($e->{format}, ${$e->{val}});
 	} elsif ($e->{type} eq 'range') {
 	    my $adj = create_adjustment(${$e->{val}}, $e->{min}, $e->{max});
 	    $adj->signal_connect(value_changed => $changed);
@@ -421,6 +426,7 @@ sub ask_from_entries_refW {
 		$real_w = createScrolledWindow($w);
 		$size ||= @{$e->{list}};
 	    }
+	    $width = max(map { length } @{$e->{list}});
 	} else {
 	    if ($e->{type} eq "combo") {
 		$w = new Gtk::Combo;
@@ -429,6 +435,7 @@ sub ask_from_entries_refW {
 		$w->set_popdown_strings(@{$e->{list}});
 		$w->disable_activate;
 		($real_w, $w) = ($w, $w->entry);
+		$width = max(map { length } @{$e->{list}});
 	    } else {
                 $w = new Gtk::Entry;
 	    }
@@ -443,6 +450,7 @@ sub ask_from_entries_refW {
 	});
 	$tooltips->set_tip($w, $e->{help}) if $e->{help} && !ref($e->{help});
 
+	$max_width = max($max_width, $width);
 	$total_size += $size || 1;
     
 	{ e => $e, w => $w, real_w => $real_w || $w, expand => $expand,
@@ -464,11 +472,14 @@ sub ask_from_entries_refW {
 
     my $create_widgets = sub {
 	my $w = create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @_);
-	#- use a scrolled window if there is a lot of checkboxes (aka
-	#- ask_many_from_list) or if there are many widgets in general (eg
-	#- options of native PostScript printer in printerdrake)
-	my $has = ((grep { $_->{e}{type} eq 'bool' } @_) > 4) ||
-		   @_ > 10;      
+
+	my $width = max(250, $max_width * 5);
+	$mainw->{box_width} = min($::windowheight * 0.7, $width);
+
+	my $height = max(200, my_gtk::n_line_size($mainw->{box_size}, 'various', $mainw->{rwindow}));
+	$mainw->{box_height} = min($::windowheight * 0.7, $height);
+
+	my $has = $width > $mainw->{box_width} || $height > $mainw->{box_height};
 	$has_scroll ||= $has;
 	$has ? createScrolledWindow($w) : $w;
     };
@@ -488,7 +499,9 @@ sub ask_from_entries_refW {
 
     $pack->pack_start($advanced_pack, 1, 1, 0);
     gtkadd($mainw->{window}, $pack);
-    $mainw->{rwindow}->set_default_size(250, min(max(200, $always_total_size * 20), $::windowheight * 0.7)) if $has_scroll && !$::isEmbedded &&!$::isWizard;
+    if ($has_scroll && !$::isEmbedded &&!$::isWizard) {
+	$mainw->{rwindow}->set_default_size($mainw->{box_width}, $mainw->{box_height});
+    } 
     $set_advanced->(0);
     (@widgets ? $widgets[0]{w} : $common->{focus_cancel} ? $mainw->{cancel} : $mainw->{ok})->grab_focus();
 
@@ -715,7 +728,7 @@ sub wait_messageW($$$) {
     my $w = my_gtk->new($title, %$o, grab => 1);
     gtkadd($w->{window}, my $hbox = new Gtk::HBox(0,0));
     $hbox->pack_start(my $box = new Gtk::VBox(0,0), 1, 1, 10);  
-    $box->pack_start($_, 1, 1, 4) foreach my @l = map { new Gtk::Label($_) } @$messages;
+    $box->pack_start($_, 1, 1, 4) foreach my @l = map { new Gtk::Label(join("\n", warp_text($_))) } @$messages;
 
     ($w->{wait_messageW} = $l[$#l])->signal_connect(expose_event => sub { $w->{displayed} = 1 });
     $w->{rwindow}->set_position('center') if ($::isStandalone && !$::isEmbedded && !$::isWizard);
@@ -728,7 +741,7 @@ sub wait_message_nextW {
     my $msg = join "\n", @$messages;
     return if $msg eq $w->{wait_messageW}->get; #- needed otherwise no expose_event :(
     $w->{displayed} = 0;
-    $w->{wait_messageW}->set($msg);
+    $w->{wait_messageW}->set(join("\n", warp_text($msg)));
     $w->flush until $w->{displayed};
 }
 sub wait_message_endW {
