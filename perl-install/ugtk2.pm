@@ -600,12 +600,12 @@ sub _find_imgfile {
 
 # use it if you want to display an icon/image in your app
 sub gtkcreate_img {
-    return Gtk2::Image->new_from_file(_find_imgfile(@_));
+    return Gtk2::Image->new_from_file(_find_imgfile(@_) || internal_error("can't find $_[0]"));
 }
 
 # use it if you want to draw an image onto a drawingarea
 sub gtkcreate_pixbuf {
-    return Gtk2::Gdk::Pixbuf->new_from_file(_find_imgfile(@_));
+    return Gtk2::Gdk::Pixbuf->new_from_file(_find_imgfile(@_) || internal_error("can't find $_[0]"));
 }
 
 sub gtktext_append { gtktext_insert(@_, append => 1) }
