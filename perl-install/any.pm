@@ -659,14 +659,14 @@ sub autologin {
 }
 
 sub selectLanguage {
-    my ($in, $lang, $langs_) = @_;
+    my ($in, $lang, $o_langs_) = @_;
 
     my $common = { messages => N("Please choose a language to use."),
 		   title => 'language choice',
 		   interactive_help_id => 'selectLanguage' };
 
     if ($::isInstall) {
-	my $langs = $langs_ || {};
+	my $langs = $o_langs_ || {};
 	my $using_images = $in->isa('interactive::gtk') && listlength(cat_('/proc/fb'));
 
 	#- to create the default value, use the first location for that value :/
@@ -691,7 +691,7 @@ when your installation is complete and you restart your system.")),
 	    if_($using_images, image2f => sub { $name2l{$_[0]} =~ /^[a-z]/ ? ('', "langs/lang-$name2l{$_[0]}") : $_[0] }),
 	    format => sub { $1.lang::l2name($2) if $_[0] =~ /(.*\|)(.*)/ },
 	    list => \@langs, sort => 0 },
-	    if_($langs_, if_($::isInstall,
+	    if_($o_langs_, if_($::isInstall,
 			     { val => \$in->{locale}{utf8}, type => 'bool', text => N("Use Unicode by default"), advanced => 1 }),
 		{ val => \$langs->{all}, type => 'bool', text => N("All languages"), advanced => 1 },
 	        map {

@@ -109,7 +109,7 @@ my @menu_items =
                create_dialog(N("Harddrake help"), 
                              N("Description of the fields:\n\n")
 #-PO Do not alter the <span ..> and </span> tags
-                             . join("\n\n", map { if_($fields{$_}[0], formatAlaTeX("<span foreground=\"royalblue3\">$fields{$_}[0]:</span> $fields{$_}[1]")) } sort keys %$current_device), { use_markup => 1, if_(!$::isEmbedded, transient => $w->{window}), height => 400, scroll => 1 })
+                             . join("\n\n", map { if_($fields{$_}[0], formatAlaTeX(qq(<span foreground="royalblue3">$fields{$_}[0]:</span> $fields{$_}[1]))) } sort keys %$current_device), { use_markup => 1, if_(!$::isEmbedded, transient => $w->{window}), height => 400, scroll => 1 })
 
            } else {
                create_dialog(N("Select a device !"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"), { if_(!$::isEmbedded, transient => $w->{window}) })
@@ -219,7 +219,7 @@ $tree->get_selection->signal_connect('changed' => sub {
                 } sort keys %$current_device ]);
 
             foreach (keys %$current_device) {
-                print "Warning: skip \"$_\" field => \"$current_device->{$_}\"\n\n" unless $fields{$_}[0];
+                print qq(Warning: skip "$_" field => "$current_device->{$_}"\n\n) unless $fields{$_}[0];
             };
             
             # if we've valid driver, let's offer to configure it, else hide buttons 

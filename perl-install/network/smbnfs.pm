@@ -7,8 +7,8 @@ use fs;
 
 
 sub new { 
-    my ($class, $v) = @_;
-    bless($v || {}, $class);
+    my ($class, $o_v) = @_;
+    bless($o_v || {}, $class);
 }
 
 sub server_to_string {

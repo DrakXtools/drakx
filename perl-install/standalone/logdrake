@@ -196,7 +196,7 @@ gtkadd($my_win->{window},
                                                           $::Wizard_no_cancel = 1;
                                                           $::WizardWindow->destroy if defined $::WizardWindow;
                                                           undef $::WizardWindow;
-                                                      } elsif ($err) { print "CRITICAL: \"$err\" =>\n" }
+                                                      } elsif ($err) { print qq(CRITICAL: "$err" =>\n) }
                                                   })),
 					      gtksignal_connect(Gtk2::Button->new(N("Save")), clicked => \&save),
 					      gtksignal_connect(Gtk2::Button->new($::isEmbedded ? N("Cancel") : N("Quit")), clicked => \&quit)
@@ -409,7 +409,7 @@ my $initdir = "/etc/init.d";
 		  webmin => N("Webmin Service"),
 		  xinetd => N("Xinetd Service")
 		 };
-    my @installed_d = ();
+    my @installed_d;
     foreach my $serv (keys %$service) {
 	-e "$initdir/$serv" && push @installed_d, $serv;
     }
@@ -422,7 +422,7 @@ my $initdir = "/etc/init.d";
     $cron .= "#- check services\n";
     foreach (keys %services_to_check) {
      next unless $services_to_check{$_};
-	$cron .= "\$r .= \"Service $_ ($service->{$_} is not running)\\n\" unless -e \"/var/lock/subsys/$_\";\n";
+	$cron .= qq(\$r .= "Service $_ ($service->{$_} is not running)\\n" unless -e "/var/lock/subsys/$_";\n);
     }
 
   step_load:
@@ -451,7 +451,7 @@ EOF
 		   { label => "" },
 		   { label => "Email", val => \$email },
 		  ]) or goto step_load;
-    if ($email !~ /[\w.-]*@[\w.-]/) {
+    if ($email !~ /[\w.-]*\@[\w.-]/) {
         err_dialog(N("Wrong email"), N("\"%s\" is not a valid email!"));
         goto step_output;
     }
