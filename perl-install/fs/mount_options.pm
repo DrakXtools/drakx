@@ -158,7 +158,12 @@ sub rationalize {
 	delete $options->{'codepage='};
     }
     if (member($part->{mntpoint}, fs::type::directories_needed_to_boot())) {
-	$options->{$_} = 0 foreach qw(users user noauto supermount);
+	foreach (qw(users user noauto supermount)) {
+	    if ($options->{$_}) {
+		$options->{$_} = 0;
+		$options->{$_} = 0 foreach qw(nodev noexec nosuid);
+	    }
+	}
     }
 
     &pack($part, $options, $unknown);
