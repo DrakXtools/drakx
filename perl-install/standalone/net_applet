@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 use strict;
-use lib qw(/home/blino/cvs/gi/perl-install /usr/lib/libDrakX);
+use lib qw(/usr/lib/libDrakX);
 use c;
 use common;
 use Digest::MD5;
@@ -28,7 +28,7 @@ my %appletstate = (
   		          colour => [ 'connected' ],
 			  changes => [ 'disconnected', 'error', 'busy' ],
 			  menu => [ 'confNetwork', 'monitorNetwork', 'refresh', 'help' ],
-			  tt => [ N_("Network is up on interface %d") ]
+			  tt => [ N_("Network is up on interface %s") ]
 			  },
              disconnected => {
 			      colour => [ 'disconnected' ],
@@ -36,7 +36,7 @@ my %appletstate = (
 			      menu => [ 'confNetwork', 'refresh', 'help' ],
 			      tt => [ 
                             #-PO: keep the "Configure Network" substring synced with the "Configure Network" message below
-                            N_("Network is down on interface %d. Click on \"Configure Network\"") 
+                            N_("Network is down on interface %s. Click on \"Configure Network\"") 
                            ]
                              }
 	    );
