@@ -14,7 +14,6 @@ use any;
 use mouse;
 use network;
 use commands;
-#require Data::Dumper;
 
 use network::tools;
 use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
@@ -31,7 +30,7 @@ sub intro {
     my $connect_prog = "/etc/sysconfig/network-scripts/net_cnx_pg";
     read_net_conf($prefix, $netcnx, $netc);
     if (!$::isWizard) {
-	if (connected($netc)) {
+	if (connected()) {
 	    $text=_("You are currently connected to internet.") . (-e $disconnect_file ? _("\nYou can disconnect or reconfigure your connection.") : _("\nYou can reconfigure your connection."));
 	    $connected=1;
 	} else {
@@ -361,6 +360,8 @@ ISDNProviderDomain=" . do { $netc->{DOMAINNAME2} =~ /\.(.*)/; $1} . "
 ISDNProviderDNS1=$netc->{dnsServer2}
 ISDNProviderDNS2=$netc->{dnsServer3}
 ISDNDialing=$isdn->{dialing_mode}
+ISDNSpeed=$isdn->{speed}
+ISDNTimeout=$isdn->{huptimeout}
 ISDNHomePhone=$isdn->{phone_in}
 ISDNLogin=$isdn->{login}
 ISDNPassword=$isdn->{passwd}
@@ -500,6 +501,8 @@ sub load_conf {
 	    /^ISDNId=(.*)$/ and $isdn->{id} = $1;
 	    /^ISDNProviderPhone=(.*)$/ and $isdn->{phone_out} = $1;
 	    /^ISDNDialing=(.*)$/ and $isdn->{dialing_mode} = $1;
+	    /^ISDNISDNSpeed=(.*)$/ and $isdn->{speed} = $1;
+	    /^ISDNTimeout=(.*)$/ and $isdn->{huptimeout} = $1;
 	    /^ISDNHomePhone=(.*)$/ and $isdn->{phone_in} = $1;
 	    /^ISDNLogin=(.*)$/ and $isdn->{login} = $1;
 	    /^ISDNPassword=(.*)$/ and $isdn->{passwd} = $1;
