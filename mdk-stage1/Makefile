@@ -226,10 +226,12 @@ $(STAGE1OBJS-FULL): %-FULL.o: %.c
 	$(DIET) $(COMPILE) $(INCLUDES) -DENABLE_BOOTSPLASH -c $<
 
 
-clean: 
+clean: localclean
 	@for n in $(DIRS); do \
 		(cd $$n; make clean) \
 	done
+
+localclean:
 	rm -f *.o .depend *.rdz *.img rescue-gui init-move $(BINS)
 
 
