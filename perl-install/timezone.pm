@@ -43,6 +43,7 @@ my %l2t = (
 'Dutch (Netherlands)' => 'Europe/Amsterdam',
 'English (USA)' => 'America/New_York',
 'English (UK)' => 'Europe/London',
+'Esperanto' => 'Europe/Warsaw',
 'Estonian (Estonia)' => 'Europe/Tallinn',
 'Finnish (Finland)' => 'Europe/Helsinki',
 'French (France)' => 'Europe/Paris',

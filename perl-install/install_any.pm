@@ -109,7 +109,7 @@ sub getAvailableSpace {
     do { $_->{mntpoint} eq '/'    and return int($_->{size} * 512 / 1.07) } foreach @{$o->{fstab}};
 
     if ($::testing) {
-	my $nb = 350;
+	my $nb = 1350;
 	log::l("taking ${nb}MB for testing");
 	return $nb << 20;
     }
@@ -661,8 +661,10 @@ sub kdeicons_postinstall($) {
     my @l = map { "$prefix$_/Desktop/Doc.kdelnk" } list_skels();
     if (my ($lang) = eval { all("$prefix/usr/doc/mandrake") }) {
 	substInFile { s|^(URL=.*?)/?$|$1/$lang| } @l;
+	substInFile { s|^(url=/usr/doc/mandrake/)$|$1$lang| } "$prefix/usr/lib/desktop-links/mandrake.links";
     } else {
 	unlink @l;
+	substInFile { $_ = '' if /^\[MDKsupport\]$/ .. /^\s*$/ } "$prefix/usr/lib/desktop-links/mandrake.links";
     }
 
     my $lang = quotemeta $ENV{LANG};

@@ -4,7 +4,8 @@ Graphics Manipulation
 KDE
 	kde
 	+XFree86
-	+XFree86-75dpi-fonts	
+	+XFree86-75dpi-fonts
+	+fonts-ttf-west_european
 
 Gnome
 	gnome
@@ -12,11 +13,12 @@ Gnome
 	+gmc
 	+XFree86
 	+XFree86-75dpi-fonts
+	+fonts-ttf-west_european
 
 Other window managers
 	window-managers:window-managers
 	+XFree86
-	+XFree86-75dpi-fonts	
+	+XFree86-75dpi-fonts
 
 Mail/WWW/News Tools
 	network:web
@@ -36,7 +38,8 @@ Office
 
 Multimedia Support
 	configuration:sound
-	multimedia
+	multimedia:sound
+	multimedia:video
 	daemons:sound
 
 Games
@@ -57,15 +60,13 @@ Network Management Workstation
 	daemons:network:ftp
 	daemons:network:nfs
 	daemons:network:telnet
-	+BeroList
+#	+BeroList
 	+comsat
 	+postfix
 	+imap
 
 Documentation
-	documentation:languages:en
-	documentation:misc
-	documentation:tools
+	documentation
 
 Databases
 	database

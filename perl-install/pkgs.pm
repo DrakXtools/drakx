@@ -330,6 +330,7 @@ sub setSelectedFromCompssList {
 	if ($max_size && $nb > $max_size) {
 	    unselect($packages, $p);
 	    $min_level = $p->{values}[$ind];
+	    log::l("setSelectedFromCompssList: up to indice $min_level (reached size $max_size)");
 	    last;
 	}
     }

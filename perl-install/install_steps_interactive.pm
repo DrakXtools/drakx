@@ -267,7 +267,7 @@ _("You need %dMB for a full install of the groups you selected.
 You can go on anyway, but be warned that you won't get all packages", $max_size / sqr(1024)), 1) or goto &choosePackages
 	}
 
-	my $size2install = $::beginner ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, min($max_size, $available)) or goto &choosePackages;
+	my $size2install = $::beginner ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, min($max_size, $available * 0.9)) or goto &choosePackages;
 
 	($o->{packages_}{ind}) = 
 	  pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, $size2install, $o->{installClass});
