@@ -1,3 +1,116 @@
+2002/09/09  Pixel  <pixel@mandrakesoft.com>
+
+	* ugtk.pm, Xconfig/test.pm, install2.pm: 
+	  - use variable $::no_ugtk_init in ugtk.pm instead of using
+	$::isInstall
+	  - that way, the X test can be made to work both at install and
+	standalone
+
+	* standalone/drakupdate_fstab: force non-supermount, supermount is too
+	buggy
+
+	* any.pm: fix detection of mixed_kind_of_disks (eg: hde with hda)
+
+2002/09/09  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/ui.pm: enforce unique ids
+	add drakbug report entry in help menu
+
+	* standalone/service_harddrake: don't detect same removed/added when
+	upgrading from previous releases
+	  - harddrake:
+	o don't pollute sbin namespace with one shot scripts
+	  o add run wrapper script for harddrake service
+	  o disable ?dm part
+	  o timeout configurator offer to 5 seconds
+
+	* ugtk.pm, bootlook.pm, standalone/logdrake, standalone/drakfloppy: 
+	  - drakfloppy / logdrake: destroy_window and create_dialog were
+	gratuitously duplicated;   move them in ugtk
+	  - drakfloppy / logdrake / bootlook.pm: get_main_menu was
+	  gratuitously duplicated;
+	  common code which was moved from harddrake::ui to
+	  ugtk::create_factory_menu just do the job
+
+	* drakxtools.spec: 
+	  - harddrake:
+	o don't pollute sbin namespace with one shot scripts
+	  o add run wrapper script for harddrake service
+	  o disable ?dm part
+	  o timeout configurator offer to 5 seconds
+
+2002/09/09  Warly  <warly@mandrakesoft.com>
+
+	* share/rpmsrate: remove harddrake
+
+2002/09/08  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/sl.po, share/po/no.po,
+	share/po/et.po, share/po/ja.po, share/po/hr.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/sp.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/bs.po, share/po/ro.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/it.po, share/po/nl.po, share/po/eu.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/lv.po, share/po/hu.po: 
+	  - s/occurance/occurence.
+
+	* install_steps_interactive.pm: 
+	  - s/occurance/occurence in license.txt (thx qqun)
+
+2002/09/08  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/various.pm, Xconfig/proprietary.pm: replace a few more 4.2.0
+	with 4.2.1
+
+	* install_interactive.pm: warn "You don't have a swap
+	partition.\n\nContinue anyway?" in expert mode
+
+	* Xconfig/card.pm: replace 4.2.0 with 4.2.1
+
+2002/09/07  dam's  <dams@idm.fr>
+
+	* standalone/drakbackup: don't display the banner id in embedded mode
+
+2002/09/07  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* standalone/draksplash: 
+	  - use standalone for explanations and center dialog
+
+	* drakxtools.spec: 
+	  - cvs up before packaging (fix messy drakboot conf).
+
+2002/09/07  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: fix log
+
+	* share/rpmsrate: don't install kernel-secure on HIGH_SECURITY since
+	kernel-secure is broken
+
+2002/09/06  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/isdn.pm: 
+	  - fix typo
+	  - add new screen for ISND detected device. Still have to get back in
+	Expert mode to choose by hand.
+
+	* modules.pm: 
+	  - Fix isdn card detection
+
+2002/09/06  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/service_harddrake, drakxtools.spec, harddrake/ui.pm,
+	harddrake/data.pm: 
+	  - harddrake::data : consolidate common code in custom_id()
+	  - do some detection in dm stage
+	  - fix bad test
+	  - display better name
+
 2002/09/06  David Baudens  <baudens@mandrakesoft.com>
 
 	* standalone/icons/hori.png: Re-add old obsolete Aurora image requires by
@@ -2582,7 +2695,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.740 2002/09/06 13:51:51 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.741 2002/09/06 22:51:50 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
