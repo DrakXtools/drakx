@@ -119,6 +119,7 @@ my ($devices, $devices_ok) = partition { detect_devices::isTVcard($_) } @devices
 
 my $modules_conf;
 
+# handle TV cards which driver needs to be configured b/c it cannot autodetect the card & tuner types:
 if (@devices = @$devices) {
     my $not_canceled = 1;
     # TODO: That need some work for multiples TV cards
@@ -135,6 +136,7 @@ if (@devices = @$devices) {
     } @devices
 }
 
+# handle TV cards that do not require any driver configuration:
 if (@devices = @$devices_ok) {
     require modules;
     $modules_conf ||= modules::any_conf->read;
@@ -142,6 +144,7 @@ if (@devices = @$devices_ok) {
     scan4channels();
 }
 
+# we failed to detect any TV card:
 if (!$devices && !$devices_ok) {
     $in->ask_warn(N("No TV Card detected!"), formatAlaTeX(
                                                           #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
