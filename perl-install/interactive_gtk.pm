@@ -28,18 +28,6 @@ sub exit {
     c::_exit($_[0]) #- workaround 
 }
 
-sub test_embedded {
-    my ($w) = @_;
-    $::isEmbedded or return;
-    $w->{window} = new Gtk::VBox(0,0);
-    $w->{rwindow} = $w->{window};
-    defined($::Plug) ? $::Plug->child->destroy() : ($::Plug = new Gtk::Plug ($::XID));
-    $::Plug->show;
-    my_gtk::flush();
-    $::Plug->add($w->{window});
-    $w->{window}->add($w->{rwindow});
-}
-
 sub create_clist {
     my ($e, $may_go_to_next, $changed) = @_;
     my ($first_time, $starting_word, $start_reg) = (1, '', "^");
@@ -231,7 +219,6 @@ sub ask_from_entries_refW {
     my $ignore = 0; #-to handle recursivity
 
     my $mainw = my_gtk->new($common->{title}, %$o);
-    test_embedded($mainw);
     $mainw->sync; # for XPM's creation
 
     #-the widgets
@@ -401,7 +388,6 @@ sub wait_messageW($$$) {
     my ($o, $title, $messages) = @_;
 
     my $w = my_gtk->new($title, %$o, grab => 1);
-    test_embedded($w);
     gtkadd($w->{window}, my $hbox = new Gtk::HBox(0,0));
     $hbox->pack_start(my $box = new Gtk::VBox(0,0), 1, 1, 10);  
     $box->pack_start($_, 1, 1, 4) foreach my @l = map { new Gtk::Label($_) } @$messages;

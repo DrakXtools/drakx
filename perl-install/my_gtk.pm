@@ -40,6 +40,14 @@ sub new {
     push @interactive::objects, $o unless $opts{no_interactive_objects};
     $o->{rwindow}->set_position('center_always') if $::isStandalone;
     $o->{rwindow}->set_modal(1) if $my_gtk::grab || $o->{grab};
+
+    $::isEmbedded or return $o;
+    $o->{window} = new Gtk::VBox(0,0);
+    $o->{rwindow} = $o->{window};
+    defined($::Plug) or $::Plug = new Gtk::Plug ($::XID);
+    $::Plug->show;
+    my_gtk::flush();
+    $::Plug->add($o->{window});
     $o;
 }
 sub main {
