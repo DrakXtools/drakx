@@ -436,7 +436,7 @@ sub addToBeDone(&$) {
 
 sub setAuthentication {
     my ($o) = @_;
-    my ($shadow, $md5, $ldap, $nis) = @{$o->{authentication} || {}}{qw(shadow md5 LDAP NIS)};
+    my ($shadow, $md5, $ldap, $nis, $winbind) = @{$o->{authentication} || {}}{qw(shadow md5 LDAP NIS winbind)};
     my $p = $o->{prefix};
     #- obsoleted always enabled (in /etc/pam.d/system-auth furthermore) #any::enableMD5Shadow($p, $shadow, $md5);
     any::enableShadow($p) if $shadow;
@@ -457,7 +457,52 @@ sub setAuthentication {
 	} "$p/etc/yp.conf";
 	require network;
 	network::write_conf("$p/etc/sysconfig/network", $o->{netc});
+    } elsif ($winbind) {
+	my $domain = $o->{netc}{WINDOMAIN};
+	$o->pkg_install(qw(samba-winbind samba-common));
+	{   #- setup pam
+	    my $f = "$o->{prefix}/etc/pam.d/system-auth";
+	    cp_af($f, "$f.orig");
+	    cp_af("$f-winbind", $f);
+	}
+	write_smb_conf($o, $domain);
+	run_program::rooted($o->{prefix}, "chkconfig", "--level", "35", "winbind", "on");
+	mkdir "$o->{prefix}/home/$domain", 0755;
+
+	#- finally join the machine to the Windoze domain
+	run_program::rooted($o->{prefix}, "/usr/bin/smbpasswd", "-j", $domain, "-r", $winbind);
     }
+}
+
+sub write_smb_conf {
+    my ($domain) = @_;
+
+    #- was going to just have a canned config in samba-winbind
+    #- and replace the domain, but sylvestre/buchan didn't bless it yet
+
+    my $f = "$::prefix/etc/samba/smb.conf";
+    rename $f, "$f.orig";
+    output($f, "
+[global]
+	workgroup = $domain  
+	server string = Samba Server %v
+	security = domain  
+	encrypt passwords = Yes
+	password server = *
+	log file = /var/log/samba/log.%m
+	max log size = 50
+	socket options = TCP_NODELAY SO_RCVBUF=8192 SO_SNDBUF=8192
+	character set = ISO8859-15
+	os level = 18
+	local master = No
+	dns proxy = No
+	winbind uid = 10000-20000
+	winbind gid = 10000-20000
+	winbind separator = +
+	template homedir = /home/%D/%U
+	template shell = /bin/bash
+	winbind use default domain = yes
+");
 }
 
 sub killCardServices {

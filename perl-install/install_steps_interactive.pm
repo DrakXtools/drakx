@@ -1079,6 +1079,7 @@ sub setRootPassword {
     my $sup = $o->{superuser} ||= {};
     my $auth = ($o->{authentication}{LDAP} && __("LDAP") ||
 		$o->{authentication}{NIS} && __("NIS") ||
+		$o->{authentication}{winbind} && __("Windows PDC") ||
 		__("Local files"));
     $sup->{password2} ||= $sup->{password} ||= "";
 
@@ -1101,7 +1102,7 @@ sub setRootPassword {
 { label => _("Password"), val => \$sup->{password},  hidden => 1 },
 { label => _("Password (again)"), val => \$sup->{password2}, hidden => 1 },
   if_($::expert,
-{ label => _("Authentication"), val => \$auth, list => [ __("Local files"), __("LDAP"), __("NIS") ], format => \&translate },
+{ label => _("Authentication"), val => \$auth, list => [ __("Local files"), __("LDAP"), __("NIS"), __("Windows PDC") ], format => \&translate },
   ),
 			 ]) or return;
 
@@ -1122,6 +1123,16 @@ sub setRootPassword {
 		       { label => _("NIS Server"), val => \$o->{authentication}{NIS}, list => ["broadcast"], not_edit => 0 },
 		     ]) or goto &setRootPassword;
     } else { $o->{authentication}{NIS} = '' }
+    if ($auth eq __("Windows PDC")) {
+	#- maybe we should browse the network like diskdrake --smb and get the 'doze server names in a list 
+	#- but networking isn't setup yet necessarily
+	$o->ask_from('',
+		     _("Authentication Windows PDC"),
+		     [ { label => _("Windows Domain"), val => \ ($o->{netc}{WINDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
+		       { label => _("PDC Server Name"), val => \$o->{authentication}{winbind} },
+		     ]) or goto &setRootPassword;
+	$o->ask_warn('', _("For this to work for a W2K PDC, you will probably need to have the admin run: C:\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add and reboot the server"));
+    } else { $o->{authentication}{winbind} = '' }
     install_steps::setRootPassword($o);
 }
 
