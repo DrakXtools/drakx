@@ -471,7 +471,7 @@ killall pppd
                             /.*ATDT(\d*)/ and $modem->{phone} ||= $1;
                         }
                         foreach (cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0")) {
-                            /NAME=(['"]?)(.*)\1/ and $modem->{login} ||= $2;
+                            /NAME=([\'\"]?)(.*)\1/ and $modem->{login} ||= $2;
                         }
                         $modem->{login} ||= $l{Username};
                         my $secret = network::tools::read_secret_backend();
