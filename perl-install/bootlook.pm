@@ -27,12 +27,13 @@ use POSIX;
 use Locale::GetText;
 use lib qw(/usr/lib/libDrakX);
 use interactive;
+use standalone;
 use common qw(:common :file :functional :system);
 use my_gtk qw(:helpers :wrappers);
 use any;
 
-my $path_to_pixmaps = "/usr/share/libDrakX/pixmaps";
-#my $path_to_pixmaps = ".";
+#my $path_to_pixmaps = "/usr/share/libDrakX/pixmaps";
+my $path_to_pixmaps = "";
 setlocale (LC_ALL, "");
 Locale::GetText::textdomain ("Bootlookdrake");
 
@@ -69,10 +70,10 @@ $window->border_width(10);
 $window->realize;
 
 # drakX mode
-my ($t_pixmap, $t_mask) = gtkcreate_xpm($window, "$path_to_pixmaps/tradi.xpm");
-my ($h_pixmap, $h_mask) = gtkcreate_xpm($window, "$path_to_pixmaps/hori.xpm");
-my ($v_pixmap, $v_mask) = gtkcreate_xpm($window, "$path_to_pixmaps/verti.xpm");
-my ($g_pixmap, $g_mask) = gtkcreate_xpm($window, "$path_to_pixmaps/gmon.xpm");
+my ($t_pixmap, $t_mask) = gtkcreate_png("tradi.png");
+my ($h_pixmap, $h_mask) = gtkcreate_png("hori.png");
+my ($v_pixmap, $v_mask) = gtkcreate_png("verti.png");
+my ($g_pixmap, $g_mask) = gtkcreate_png("gmon.png");
 
 # a pixmap widget to contain the pixmap
 my $pixmap = new Gtk::Pixmap( $h_pixmap, $h_mask );
@@ -221,9 +222,9 @@ if ($a_mode) {
     $pixmap->set($t_pixmap, $t_mask);
 }
 
-$a_h_button->hide() if !(-e "/lib/aurora/Monitors/NewStyle-WsLib");
-$a_v_button->hide() if !(-e "/lib/aurora/Monitors/Traditional-WsLib");
-$a_g_button->hide() if !(-e "/lib/aurora/Monitors/Traditional-Gtk+");
+#$a_h_button->hide() if !(-e "/lib/aurora/Monitors/NewStyle-WsLib");
+#$a_v_button->hide() if !(-e "/lib/aurora/Monitors/Traditional-WsLib");
+#$a_g_button->hide() if !(-e "/lib/aurora/Monitors/Traditional-Gtk+");
 
 $inmain=1;
 main Gtk;
