@@ -115,7 +115,8 @@ sub unix2dos { local $_ = $_[0]; s/\015$//mg; s/$/\015/mg; $_ }
 sub openFileMaybeCompressed { 
     my ($f) = @_;
     -e $f || -e "$f.gz" or die "file $f not found";
-    open F, -e $f ? $f : "gzip -dc $f.gz|";
+    local *F;
+    open F, -e $f ? $f : "gzip -dc $f.gz|" or die "file $f is not readable";
     *F;
 }
 sub catMaybeCompressed { cat__(openFileMaybeCompressed($_[0])) }
