@@ -39,12 +39,10 @@ sub del_loop {
 sub find_free_loop {
     foreach (0..7) {
 	my $dev = make("loop$_");
-	{
-	    local *F;
-	    sysopen F, $dev, 2 or next;
-	    !ioctl(F, c::LOOP_GET_STATUS(), my $tmp) && $! == 6 or next; #- 6 == ENXIO
-	    close F;
-	}
+	local *F;
+	sysopen F, $dev, 2 or next;
+	!ioctl(F, c::LOOP_GET_STATUS(), my $tmp) && $! == 6 or next; #- 6 == ENXIO
+	close F;
 	return $dev;
     }
     die "no free loop found";
