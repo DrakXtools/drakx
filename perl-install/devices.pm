@@ -91,7 +91,7 @@ sub entry {
                    'o' => [89,0], 'p' => [89,64],
                    'q' => [90,0], 'r' => [90,64],
                    's' => [91,0], 't' => [91,64],
-	       }}{$1} or die "unknown device $_" };
+	       }}{$1} or internal_error("unknown device $_") };
 	$minor += $2 || 0;
     } elsif (/^ram(.*)/) {
 	$type = c::S_IFBLK();
@@ -156,7 +156,7 @@ sub entry {
 		   "vcsa"     => [ c::S_IFCHR(), 7,  128 ],
 		   "zero"     => [ c::S_IFCHR(), 1,  5  ],		     
 		   "null"     => [ c::S_IFCHR(), 1,  3  ],		     
-	       }}{$_} or die "unknown device $_ (caller is " . join(":", caller()) . ")" };
+	       }}{$_} or internal_error("unknown device $_") };
     }
     ($type, $major, $minor);
 }
@@ -173,8 +173,7 @@ sub make($) {
     }
     -e $file and return $file; #- assume nobody takes fun at creating files named as device
 
-    my ($type, $major, $minor) = eval { entry($_) };
-    $@ and die "unknown device $_ (caller is " . join(":", caller()) . ")";
+    my ($type, $major, $minor) = entry($_);
 
     if ($file =~ m|/dev/| && -e '/dev/.devfsd') {
 	#- argh, creating devices is no good with devfs...
