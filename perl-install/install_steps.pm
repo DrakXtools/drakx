@@ -436,31 +436,30 @@ sub pppConfig {
 #------------------------------------------------------------------------------
 sub installCrypto {
     my ($o) = @_;
-    return; #TODO broken for now
     my $u = $o->{crypto} or return; $u->{mirror} or return;
     my ($packages, %done);
     my $dir = "$o->{prefix}/tmp";
     modules::write_conf("$o->{prefix}/etc/conf.modules");
     network::up_it($o->{prefix}, $o->{intf}) if $o->{intf};
 
-    local *install_any::getFile = sub {
-	local *F;
-	open F, "$dir/$_[0]" or return;
-	*F;
-    };
-    require crypto;
     require pkgs;
-    while (crypto::get($u->{mirror}, $dir, 
-		       grep { !$done{$_} && ($done{$_} = $u->{packages}{$_}) } %{$u->{packages}})) {
-#	 $packages = pkgs::psUsingDirectory($dir);
-#	 foreach (values %$packages) {
-#	     foreach (c::headerGetEntry(pkgs::getHeader($_), 'requires')) {
-#		 my $r = quotemeta crypto::require2package($_);
-#		 /^$r-\d/ and $u->{packages}{$_} = 1 foreach keys %{$u->{packages}};
-#	     }
-#	 }
+    foreach (values %{$u->{packages}}) {
+	pkgs::selectPackage($o->{packages}, $_->{pkg}) if $_->{selected};
     }
-    pkgs::install($o->{prefix}, $o->{isUpgrade}, [ values %$packages ]); #- TODO
+
+    require crypto;
+    my $oldGetFile = \&install_any::getFile;
+    local *install_any::getFile = sub {
+	my ($rpmfile) = @_;
+	if ($rpmfile =~ /^(.*)-[^-]*-[^-]*$/) {
+	    return crypto::getFile($rpmfile, $u->{mirror}) if $u->{packages}{$1};
+	}
+	#- use previous getFile typically if non cryptographic packages
+	#- have been selected by dependancies.
+	&$oldGetFile($rpmfile);
+    };
+
+    $o->installPackages($o->{packages});
 }
 
 #------------------------------------------------------------------------------

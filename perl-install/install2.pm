@@ -410,8 +410,7 @@ sub configureNetwork {
     $o->configureNetwork($_[1] == 1);
 }
 #------------------------------------------------------------------------------
-sub installCrypto { return; #TODO broken
-		    $o->installCrypto }
+sub installCrypto { $o->installCrypto }
 
 #------------------------------------------------------------------------------
 sub configureTimezone {

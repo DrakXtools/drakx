@@ -519,7 +519,7 @@ sub installCrypto {
     } elsif ($o->{modem}) {
 	run_program::rooted($o->{prefix}, "ifup", "ppp0");
     } else {
-	return;
+	$::testing or return;
     }
     
     is_empty_hash_ref($u) and $o->ask_yesorno('', 
@@ -558,12 +558,16 @@ USA")) || return;
     };
     return if $@;
     
-    my @packages = do {
+    my @packages = sort { pkgs::packageHeaderFile($a) cmp pkgs::packageHeaderFile($b) } do {
       my $w = $o->wait_message('', _("Contacting the mirror to get the list of available packages"));
-      crypto::packages($u->{mirror});
+      crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror}); #- make sure $o->{packages} is defined when testing
     };
 
-    $o->ask_many_from_list_ref('', _("Which packages do you want to install"), \@packages, [ map { \$u->{packages}{$_} } @packages ]) or return;
+    map { $u->{packages}{pkgs::packageName($_)} = { pkg => $_, selected => 0 } } @packages;
+
+    $o->ask_many_from_list_ref('', _("Which packages do you want to install"),
+			       [ map { pkgs::packageHeaderFile($_) } @packages ],
+			       [ map { \$u->{packages}{pkgs::packageName($_)}{selected} } @packages ]) or return;
 
     my $w = $o->wait_message('', _("Downloading cryptographic packages"));
     install_steps::installCrypto($o);

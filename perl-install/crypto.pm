@@ -17,6 +17,7 @@ my %mirrors = (
  "ftp.leo.org" => [ "Germany", "/pub/comp/os/unix/linux/Mandrake/Mandrake-crypto" ],
  "sunsite.uio.no" => [ "Norway", "/pub/unix/Linux/Mandrake-crypto" ],
  "ftp.sunet.se" => [ "Sweden", "/pub/Linux/distributions/mandrake-crypto" ],
+ "ackbar" => [ "Ackbar", "/crypto", "a", "a" ],
 );
 
 my %deps = (
@@ -31,7 +32,33 @@ sub mirrorstext() { map { mirror2text($_) } keys %mirrors }
 sub text2mirror($) { first($_[0] =~ /\((.*)\)$/) }
 sub ftp($) { ftp::new($_[0], "$mirrors{$_[0]}[1]/$::VERSION") }
 
-sub packages($) { ftp($_[0])->ls }
+sub getFile($$) {
+    my ($file, $host) = @_;
+    log::l("getting crypto file $file on directory $host:$mirrors{$host}[1]/$::VERSION with login $mirrors{$host}[2]");
+    my ($ftp, $retr) = ftp::new($_[1], "$mirrors{$host}[1]/$::VERSION",
+				($mirrors{$host}[2] ? ($mirrors{$host}[2]) : ()),
+				($mirrors{$host}[3] ? ($mirrors{$host}[3]) : ())
+			       );
+    $$retr->close if $$retr;
+    $$retr   = $ftp->retr($file) or ftp::rewindGetFile();
+    $$retr ||= $ftp->retr($file);
+}
+
+sub getDepslist($) { getFile("depslist-crypto", $_[0]) or die "unable to get depslist-crypto" }
+sub getHdlist($) { getFile("hdlist-crypto.cz2", $_[0]) or die "unable to get hdlist-crypto.cz2" }
+
+#sub packages($) { ftp($_[0])->ls }
+sub getPackages($) {
+    my ($prefix, $packages, $mirror) = @_;
+
+    #- extract hdlist of crypto, then depslist.
+    require pkgs;
+    pkgs::psUsingHdlist($prefix, '', $packages, getHdlist($mirror), "hdlistCrypto.cz2", "Crypto", "Crytographic site", 1) and
+	pkgs::getOtherDeps($packages, getDepslist($mirror));
+
+    #- produce an output suitable for visualization.
+    pkgs::packagesOfMedium($packages, "Crypto");
+}
 
 sub get {
     my ($mirror, $dir, @files) = @_;

@@ -1,3 +1,13 @@
+2000-04-05  François Pons  <fpons@mandrakesoft.com>
+
+	* crypto.pm, install_steps_interactive.pm, install2.pm,
+	install_steps.pm: added crypto stuff to support hdlist-crypto.cz2
+	and depslist-crypto. dependancies are not supported but with a
+	simpler format of depslist file where closure are not done and
+	only package name are used for dependancies.
+	* pkgs.pm: added better support for multi CD manipulation,
+	including selection and refus.
+
 2000-04-04  François Pons  <fpons@mandrakesoft.com>
 
 	* pkgs.pm: modified selection packages from compssList by
