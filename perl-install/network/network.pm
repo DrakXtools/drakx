@@ -103,7 +103,9 @@ sub write_resolv_conf {
     }
 #-    $options ||= "options timeout:1";
 
-    close F; open F, ">$file" or die "cannot write $file: $!";
+    close F;
+    unlink $file;  #- workaround situation when /etc/resolv.conf is an absolute link to /etc/ppp/resolv.conf or whatever
+    open F, ">$file" or die "cannot write $file: $!";
     print F "# search $_\n" foreach grep { $_ ne "$netc->{DOMAINNAME} $netc->{DOMAINNAME2}" } sort { $search{$a} <=> $search{$b} } keys %search;
     print F "search $netc->{DOMAINNAME} $netc->{DOMAINNAME2}\n" if ($netc->{DOMAINNAME} || $netc->{DOMAINNAME2});
 #-    print F "$options\n\n";
