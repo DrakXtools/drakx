@@ -1,3 +1,111 @@
+2002/02/19  dam's  <damien@mandrakesoft.com>
+
+	* network/netconnect.pm: setting help
+
+	* share/advertising/10-MDKexpert.png, share/advertising/07-server.png,
+	share/advertising/05-contcenter.png, share/advertising/03-graphic.png,
+	share/advertising/12-MDKstore_icon.png,
+	share/advertising/06-user_icon.png,
+	share/advertising/04-develop_icon.png,
+	share/advertising/12-MDKstore.png, share/advertising/00-thanks.png,
+	share/advertising/06-user.png, share/advertising/02-internet_icon.png,
+	share/advertising/04-develop.png,
+	share/advertising/05-contcenter_icon.png,
+	share/advertising/10-MDKexpert_icon.png, share/advertising/13-Nvert.png,
+	share/advertising/11-consul.png, share/advertising/03-graphic_icon.png,
+	share/advertising/02-internet.png, share/advertising/07-server_icon.png,
+	share/advertising/01-gnu.png, share/advertising/08-games.png,
+	share/advertising/09-MDKcampus.png,
+	share/advertising/09-MDKcampus_icon.png,
+	share/advertising/08-games_icon.png: re-adding with -kb
+	removing for re-adding with -kb
+	added advertising for translation
+
+	* share/advertising/essi.p: blah
+	added advertising for translation
+
+	* my_gtk.pm: new icon handler
+
+	* Makefile.config: addde share/advertising/*.pl for translation
+
+	* share/advertising/Makefile: new Makefile to install ads
+
+	* share/advertising/00-thanks.pl, share/advertising/06-user.pl,
+	share/advertising/08-games.pl, share/advertising/list,
+	share/advertising/09-MDKcampus.pl, share/advertising/01-gnu.pl,
+	share/advertising/11-consul.pl, share/advertising/13-Nvert.pl,
+	share/advertising/02-internet.pl, share/advertising/07-server.pl,
+	share/advertising/10-MDKexpert.pl, share/advertising/04-develop.pl,
+	share/advertising/05-contcenter.pl, share/advertising/12-MDKstore.pl,
+	share/advertising/03-graphic.pl: added advertising for translation
+
+2002/02/19  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* any.pm: report_bug: find syslog in /var/log if it's not in /tmp, add
+	$prefix in front of /var/* when missing
+	since we give "lilo.conf" in drakbug_report, let's also
+	give "menu.lst"
+
+2002/02/19  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/vi.po, share/po/hu.po: updated Vietnamese and Hungarian files
+
+2002/02/19  Pixel  <pixel@mandrakesoft.com>
+
+	* share/advertising/Makefile: advertising installation cleanup
+
+	* install2.pm: anchor the -IP match at the end of the string
+	move loading /tmp/network from stage1 before doing the auto_install
+	stuff to
+	allow the -IP feature on auto_install file name
+
+	* share/rpmsrate: add grub in 4 SYSTEM
+
+2002/02/19  Till Kamppeter <till@mandrakesoft.com>
+
+	* standalone/printerdrake, printer.pm: Assured that the default page size
+	is "Letter" for US/Canada and "A4" for the rest of the world.
+	The "Description" field of a printer queue is filled in with printer
+	manufacturer and model by default.
+	Removed unused varaiables in /usr/sbin/printerdrake.
+
+	* printerdrake.pm: Changed button texts of "Do you want to auto-detect?"
+	dialog.
+	Assured that the default page size is "Letter" for US/Canada and "A4"
+	for the rest of the world.
+	The "Description" field of a printer queue is filled in with printer
+	manufacturer and model by default.
+	Removed unused varaiables in /usr/sbin/printerdrake.
+
+	* install_steps_interactive.pm: Replaced "a4" and "letter" by "A4" and
+	"Letter" so that Foomatic recognizes
+	the paper sizes.
+	Also use "Letter" paper for "en_CA" and "fr_CA" locales.
+
+2002/02/18  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/network.c: when no net device found, print a msg to tell
+	that now most pcmcia network adapters are supported
+	with network.img
+
+2002/02/18  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* help.pm: updated help file
+
+	* share/po/sp.po, share/po/zh_CN.po, share/po/DrakX.pot, share/po/th.po,
+	share/po/es.po, share/po/fr.po, share/po/sr.po, share/po/de.po,
+	share/po/sk.po, share/po/tr.po, share/po/eu.po, share/po/sl.po,
+	share/po/vi.po, share/po/uk.po, share/po/wa.po, share/po/sv.po,
+	share/po/zh_TW.po, share/po/it.po: updated pot file
+
+2002/02/18  Pixel  <pixel@mandrakesoft.com>
+
+	* lang.pm, standalone/localedrake: 
+	  - handle --kde_lang with optionally --kde_country
+	  - handle --apply
+
+	* install_steps_gtk.pm: s/hbox/vbox for "Select Install Class"
+
 2002/02/18  dam's  <damien@mandrakesoft.com>
 
 	* share/logo-mandrake.png: new gfx
