@@ -949,13 +949,17 @@ sub setup_local_autoscan {
 	    if ($p->{val}{DESCRIPTION}) {
 		my $menustr = $p->{val}{DESCRIPTION};
 		if ($p->{port} =~ m!^/dev/lp(\d+)$!) {
-		    $menustr .= N(" on parallel port #%s", $1);
+                    my $port = $1
+		    $menustr .= N(" on parallel port #%s", $port);
 		} elsif ($p->{port} =~ m!^/dev/usb/lp(\d+)$!) {
-		    $menustr .= N(", USB printer #%s", $1);
+                    my $printer = $1;
+		    $menustr .= N(", USB printer #%s", $printer);
 		} elsif ($p->{port} =~ m!^socket://([^:]+):(\d+)$!) {
-		    $menustr .= N(", network printer \"%s\", port %s", $1, $2);
+                    my ($printer, $port) = ($1, $2);
+		    $menustr .= N(", network printer \"%s\", port %s", $printer, $port);
 		} elsif ($p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!) {
-		    $menustr .= N(", printer \"%s\" on SMB/Windows server \"%s\"", $2, $1);
+                    my ($server, $printer) = ($1, $2);
+		    $menustr .= N(", printer \"%s\" on SMB/Windows server \"%s\"", $printer, $server);
 		}
 		$menustr .= " ($p->{port})" if $printer->{expert};
 		$menuentries->{$menustr} = $p->{port};
@@ -963,13 +967,17 @@ sub setup_local_autoscan {
 	    } else {
 		my $menustr;
 		if ($p->{port} =~ m!^/dev/lp(\d+)$!) {
-		    $menustr = N("Printer on parallel port #%s", $1);
+                    my $port = $1;
+		    $menustr = N("Printer on parallel port #%s", $port);
 		} elsif ($p->{port} =~ m!^/dev/usb/lp(\d+)$!) {
-		    $menustr = N("USB printer #%s", $1);
+                    my $printer = $1;
+		    $menustr = N("USB printer #%s", $printer);
 		} elsif ($p->{port} =~ m!^socket://([^:]+):(\d+)$!) {
-		    $menustr .= N("Network printer \"%s\", port %s", $1, $2);
+                    my ($printer, $port);
+		    $menustr .= N("Network printer \"%s\", port %s", $printer, $port);
 		} elsif ($p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!) {
-		    $menustr .= N("Printer \"%s\" on SMB/Windows server \"%s\"", $2, $1);
+                    my ($server, $printer) = ($1, $2);
+		    $menustr .= N("Printer \"%s\" on SMB/Windows server \"%s\"", $printer, $server);
 		}
 		$menustr .= " ($p->{port})" if $printer->{expert};
 		$menuentries->{$menustr} = $p->{port};
@@ -986,9 +994,11 @@ sub setup_local_autoscan {
 		}
 		my $menustr;
 		if ($q =~ m!^/dev/lp(\d+)$!) {
-		    $menustr = N("Printer on parallel port #%s", $1);
+                    my $port = $1;
+		    $menustr = N("Printer on parallel port #%s", $port);
 		} elsif ($q =~ m!^/dev/usb/lp(\d+)$!) {
-		    $menustr = N("USB printer #%s", $1);
+                    my $printer;
+		    $menustr = N("USB printer #%s", $printer);
 		}
 		$menustr .= " ($q)" if $printer->{expert};
 		$menuentries->{$menustr} = $q;
