@@ -62,6 +62,16 @@ sub get_eth_cards() {
     } @all_cards;
 }
 
+sub get_eth_cards_names {
+    my (@all_cards) = @_;
+    
+    foreach my $card (@all_cards) {
+	modules::remove_alias($card->[1]);
+	modules::add_alias($card->[0], $card->[1]);
+    }
+
+    { map { $_->[0] => join(': ', $_->[0], $_->[2]) } @all_cards };
+}
 
 #- conf_network_card_backend : configure the network cards and return the list of them, or configure one specified interface : WARNING, you have to setup the ethernet cards, by calling load_category($in, 'network/main|gigabit|usb', !$::expert, 1) or load_category_backend before calling this function. Basically, you call this function in 2 times.
 #- input

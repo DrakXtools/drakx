@@ -196,13 +196,8 @@ sub manage {
     my $config = {};
     eval(cat_('/etc/sysconfig/drakconnect'));
 
-    #- duplicated from network::ethernet, to be factorized
     @all_cards = network::ethernet::get_eth_cards();
-    foreach my $card (@all_cards) {
-	modules::remove_alias($card->[1]);
-	modules::add_alias($card->[0], $card->[1]);
-    }
-    my %name = map { $_->[0] => join(': ', $_->[0], $_->[2]) } @all_cards;
+    my %name = network::ethernet::get_eth_cards_names(@all_cards);
     
     $window->{rwindow}->add(gtkpack_(Gtk2::VBox->new,
 				     0, $interface_menu = gtksignal_connect(Gtk2::OptionMenu->new,

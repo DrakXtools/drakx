@@ -134,11 +134,7 @@ sub get_subwizard {
           detect($netc->{autodetect}, 'lan');
           modules::interactive::load_category($in, 'network/main|gigabit|pcmcia|usb|wireless', !$::expert, 1);
           @all_cards = network::ethernet::get_eth_cards();
-          foreach my $card (@all_cards) {
-              modules::remove_alias($card->[1]);
-              modules::add_alias($card->[0], $card->[1]);
-          }
-          %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) } @all_cards;
+	  %eth_intf = network::ethernet::get_eth_cards_names(@all_cards);
           if ($is_wireless) {
               require list_modules;
               my @wmodules = list_modules::category2modules('network/wireless');
