@@ -45,7 +45,7 @@ while (my $e = shift @l) {
     }
 }
 
-my @types = qw(hd nfs smb dav removable fileshare);
+my @types = qw(hd nfs smb dav removable fileshare list-hd);
 my ($type, $para) = ('hd', '');
 foreach (@types) {
     if (exists $options{$_}) {
@@ -80,7 +80,9 @@ fs::merge_info_from_mtab([ fsedit::get_really_all_fstab($all_hds) ]);
 
 $all_hds->{current_fstab} = fs::fstab_to_string($all_hds, '');
 
-if ($type eq 'hd') {
+if ($type eq 'list-hd') {
+    print partition_table::description($_), "\n" foreach fsedit::get_all_fstab($all_hds);    
+} elsif ($type eq 'hd') {
     require diskdrake::interactive;
     diskdrake::interactive::main($in, $all_hds, 0, '', '');
 } elsif ($type eq 'removable') {
