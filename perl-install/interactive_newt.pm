@@ -149,9 +149,13 @@ sub ask_from_entries_refW {
 
     my $listg = do {
 	my $height = 18;
-	#- use a scrolled window if there is a lot of checkboxes (aka ask_many_from_list)
-	#- !! works badly together with list's :-(
-	if ((grep { $_->{type} eq 'bool' } @$l) > 6 && $total_size > $height) {
+	#- use a scrolled window if there is a lot of checkboxes (aka 
+	#- ask_many_from_list) or a lot of widgets in general (aka
+	#- options of a native PostScript printer in printerdrake)
+	#- !! works badly together with list's (lists are one widget, so a
+	#- big list window will not switch to scrollbar mode) :-(
+	if ((((grep { $_->{type} eq 'bool' } @$l) > 6) ||
+             ((@$l) > 3)) && $total_size > $height) {
 	    $grid->GridPlace(1, 1); #- Uh?? otherwise the size allocated is bad
 
 	    my $scroll = Newt::Component::VerticalScrollbar(-1, -1, $height, 9, 10);
