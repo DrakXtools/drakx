@@ -592,7 +592,7 @@ sub n_line_size {
 
 sub write_on_pixmap {
     my ($pixmap, $x_pos, $y_pos, @text)=@_;
-    my ($gdkpixmap, $gdkmask) = $pixmap->get();
+    my ($gdkpixmap, undef) = $pixmap->get();
     my ($width, $height) = (440, 250);
     my $gc = Gtk::Gdk::GC->new(gtkroot());
     $gc->set_foreground(gtkcolor(8448, 17664, 40191)); #- in hex : 33, 69, 157
