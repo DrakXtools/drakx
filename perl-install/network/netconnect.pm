@@ -178,8 +178,8 @@ If you don't want to use the auto detection, deselect the checkbox.
   
   step_2_1:
     my $nb = keys %{$netc->{internet_cnx}};
-    if ($nb < 1) {
-    } elsif ($nb > 1) {
+
+    if ($nb > 1) {
 	eval { $in->ask_from(N("Network Configuration Wizard"),
 			     N("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n") . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center"),
 			     [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice}, list => [ keys %{$netc->{internet_cnx}} ] } ]
@@ -187,8 +187,9 @@ If you don't want to use the auto detection, deselect the checkbox.
     } elsif ($nb == 1) {
 	$netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0];
     }
-    member($netc->{internet_cnx_choice}, ('adsl', 'isdn')) and
-      $netc->{at_boot} = $in->ask_yesorno(N("Network Configuration Wizard"), N("Do you want to start the connection at boot?"));
+
+    member($netc->{internet_cnx_choice}, ('adsl', 'isdn')) and $netc->{at_boot} = $in->ask_yesorno(N("Network Configuration Wizard"), N("Do you want to start the connection at boot?"));
+
     if ($netc->{internet_cnx_choice}) {
 	write_cnx_script($netc);
 	$netcnx->{type} = $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{type};
@@ -275,10 +276,8 @@ fi
     }
     output_with_perm("$prefix$connect_prog", 0755, $connect_cmd) if $connect_cmd;
     $netcnx->{$_} = $netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
-
-    $netcnx->{NET_INTERFACE} and set_net_conf($netcnx, $netc);
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
-    save_conf($netcnx, $netc, $intf);
+    save_conf($netcnx);
 
     if ($::isInstall && $::o->{security} >= 3) {
 	require network::drakfirewall;
@@ -287,57 +286,11 @@ fi
 }
 
 sub save_conf {
-    my ($netcnx, $netc, $intf) = @_;
-    my $adsl;
-    my $modem;
-    my $isdn;
-    $netcnx->{type} =~ /adsl/ and $adsl = $netcnx->{$netcnx->{type}};
-    $netcnx->{type} eq 'isdn_external' || $netcnx->{type} eq 'modem' and $modem = $netcnx->{$netcnx->{type}};
-    $netcnx->{type} eq 'isdn_internal' and $isdn = $netcnx->{$netcnx->{type}};
-    modules::load_category('network/main|gigabit|usb');
-    require network::ethernet;
-    network::ethernet->import;
-    my @_all_cards = conf_network_card_backend($netc, $intf);
-
-    $intf = { %$intf };
-    my $str;
-    $str .= "
-PPPDevice=$modem->{device}
-PPPDeviceSpeed=
-PPPConnectionName=$modem->{connection}
-PPPProviderDomain=$modem->{domain}
-PPPLogin=$modem->{login}
-PPPAuthentication=$modem->{auth}
-PPPSpecialCommand=" . ($netcnx->{type} eq 'isdn_external' ? $netcnx->{isdn_external}{special_command} : '') if $conf{modem};
-
-    $str .= "
-ADSLInterfacesList=
-ADSLModem=" .  q( # Obsolete information. Please don't use it.) . "
-ADSLType=" . ($netcnx->{type} =~ /adsl/ ? $netcnx->{type} : '') . "
-ADSLProviderDomain=$netc->{DOMAINNAME2}
-ADSLLogin=$adsl->{login}
-" . #ADSLPassword=$adsl->{passwd}
-"DOMAINNAME2=$netc->{DOMAINNAME2}" if $conf{adsl};
-
-    output_with_perm("$prefix/etc/sysconfig/network-scripts/drakconnect_conf", 0600, $str);
-    my $a = $netcnx->{PROFILE} || "default";
-    cp_af("$prefix/etc/sysconfig/network-scripts/drakconnect_conf", "$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . $a);
-    chmod 0600, "$prefix/etc/sysconfig/network-scripts/drakconnect_conf";
-    chmod 0600, "$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . $a;
-    foreach (["$prefix$connect_file", "up"],
-	      ["$prefix$disconnect_file", "down"],
-	      ["$prefix$connect_prog", "prog"],
-	      ["$prefix/etc/ppp/ioptions1B", "iop1B"],
-	      ["$prefix/etc/ppp/ioptions2B", "iop2B"],
-	      ["$prefix/etc/isdn/isdn1B.conf", "isdn1B"],
-	      ["$prefix/etc/isdn/isdn2B.conf", "isdn2B"],
-	      ["$prefix/etc/resolv.conf", "resolv"],
-	      ["$prefix/etc/ppp/peers/adsl", "speedtouch"],
-	      ["$prefix/etc/ppp/peers/adsl", "eci"],
-	    ) {
-	my $file = "$prefix/etc/sysconfig/network-scripts/net_" . $_->[1] . "." . $a;
-	-e ($_->[0]) and cp_af($_->[0], $file) and chmod 0755, $file;
-    }
+    my ($netcnx) = @_;
+    my $string = "# Connection type reminder
+type=$netcnx->{type}
+";
+    output_with_perm("$prefix/etc/sysconfig/drakconnect", 0600, $string);
 }
 
 sub set_profile {
@@ -386,76 +339,29 @@ sub get_profiles() {
 }
 
 sub load_conf {
-    my ($netcnx, $netc, $intf) = @_;
-    my $adsl_pptp = {};
-    my $adsl_pppoe = {};
-    my $modem = {};
-    my $isdn_external = {};
-    my $isdn = {};
-
-    if (-e "$prefix/etc/sysconfig/network-scripts/drakconnect_conf") {
-	foreach (cat_("$prefix/etc/sysconfig/network-scripts/drakconnect_conf")) {
-
-	    /^PPPConnectionName=(.*)$/ and $modem->{connection} = $1; # Keep this for futur multiple cnx support
-	    /^PPPProviderDomain=(.*)$/ and $modem->{domain} = $1; # used only for kppp
-	    /^PPPLogin=(.*)$/ and $modem->{login} = $1;
-	    /^PPPAuthentication=(.*)$/ and $modem->{auth} = $1; # We keep this because system is configured the same for both PAP and CHAP.
-	    
-	    if (/^PPPSpecialCommand=(.*)$/) {
-		$netcnx->{type} eq 'isdn_external' and $netcnx->{$netcnx->{type}}{special_command} = $1;
-	    }
-
-	    /^DOMAINNAME2=(.*)$/ and $netc->{DOMAINNAME2} = $1;
-	}
-    }
-
-    $adsl_pptp->{$_} = $adsl_pppoe->{$_} foreach 'login', 'passwd', 'passwd2';
-    $isdn_external->{$_} = $modem->{$_} foreach 'device', 'connection', 'phone', 'domain', 'dns1', 'dns2', 'login', 'passwd', 'auth';
-    $netcnx->{adsl_pptp} = $adsl_pptp;
-    $netcnx->{adsl_pppoe} = $adsl_pppoe;
-    $netcnx->{modem} = $modem;
-    $netcnx->{modem} = $isdn_external;
-    $netcnx->{isdn_internal} = $isdn;
-
+    my ($netcnx, $netc, $intf) = @_; 
+    my $type = { getVarsFromSh("$prefix/etc/sysconfig/drakconnect") };
+    
+    $type->{type} and $netcnx->{type} = $type->{type};
     network::read_all_conf($prefix, $netc, $intf);
 }
 
-#- ensures the migration from old config files
-sub read_raw_net_conf {
-    my ($suffix) = @_;
-    my $dir = "$::prefix/etc/sysconfig/network-scripts";
-#    $suffix = $suffix ? ".$suffix" : '';
-my $file = "$dir/draknet$suffix";
-    rename $file, "$dir/drakconnect$suffix" if -e $file;
-    getVarsFromSh("$dir/drakconnect_conf");
-}
-
 sub get_net_device() {
-	#${{ read_raw_net_conf() }}{InternetInterface};
-	my $connect_file = "/etc/sysconfig/network-scripts/net_cnx_up";
-	my $network_file = "/etc/sysconfig/network";
-	if (cat_("$prefix$connect_file") =~ /network/) {
-		${{ getVarsFromSh("$prefix$network_file") }}{GATEWAYDEV};
-	} elsif (cat_("$prefix$connect_file") =~ /isdn/) {
-		"ippp+"; 
-	} else {
-		"ppp+";
-	};
+    my $connect_file = "/etc/sysconfig/network-scripts/net_cnx_up";
+    my $network_file = "/etc/sysconfig/network";
+    if (cat_("$prefix$connect_file") =~ /network/) {
+	${{ getVarsFromSh("$prefix$network_file") }}{GATEWAYDEV};
+    } elsif (cat_("$prefix$connect_file") =~ /isdn/) {
+	"ippp+"; 
+    } else {
+	"ppp+";
+    };
 }
 
 sub read_net_conf {
     my ($_prefix, $netcnx, $netc) = @_;
-    add2hash($netcnx, { read_raw_net_conf('_conf') });
     $netc->{$_} = $netcnx->{$_} foreach 'NET_DEVICE', 'NET_INTERFACE';
     $netcnx->{$netcnx->{type}} ||= {};
-    add2hash($netcnx->{$netcnx->{type}}, { read_raw_net_conf($netcnx->{type}) });
-}
-
-sub set_net_conf {
-    my ($netcnx, $netc) = @_;
-    setVarsInShMode("$prefix/etc/sysconfig/drakconnect", 0600, $netcnx, "NET_DEVICE", "NET_INTERFACE", "type", "PROFILE");
-    setVarsInShMode("$prefix/etc/sysconfig/drakconnect." . $netcnx->{type}, 0600, $netcnx->{$netcnx->{type}}); #- doesn't work, don't know why
-    setVarsInShMode("$prefix/etc/sysconfig/drakconnect.netc", 0600, $netc); #- doesn't work, don't know why
 }
 
 sub start_internet {
