@@ -30,7 +30,4 @@ system("pwconv") if $isShadow;
 
 any::addUsers('', $users);
 
-#$in->do_pkgs->install("autologin") if $o->{autologin};
-#any::set_autologin('', $o->{autologin}, $o->{desktop});
-
 $in->exit(0) if $in;
