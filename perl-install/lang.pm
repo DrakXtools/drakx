@@ -540,11 +540,13 @@ my %gtkqt_im =
 
    scim => {
             GTK_IM_MODULE => 'scim',
+            QT_IM_MODULE => 'scim',
             XIM_PROGRAM => 'scim -d',
             XMODIFIERS => '@im=SCIM',
            },
    uim => {
            GTK_IM_MODULE => 'uim-anthy',
+           QT_IM_MODULE => 'uim-anthy',
            XIM => 'uim-anthy',
            XIM_PROGRAM => 'uim-xim',
            XMODIFIERS => '@im=uim-anthy',
