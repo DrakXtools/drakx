@@ -74,7 +74,10 @@ sub create_treeview_list {
     my $textcolumn = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new(), 'text' => 0);
     $list_tv->append_column($textcolumn);
     
-    my $select = sub { $list_tv->set_cursor($_[0], $textcolumn, 0) };
+    my $select = sub {
+	$list_tv->set_cursor($_[0], undef, 0);
+    	$list_tv->scroll_to_cell($_[0], undef, 1, 0.5, 0);
+    };
 
     my ($starting_word, $start_reg) = ('', '^');
     my $timeout;
@@ -134,7 +137,7 @@ sub create_treeview_list {
 	eval {
 	    my $nb = find_index { $_ eq $v } @{$e->{list}};
 	    my ($old_path) = $list_tv->get_cursor;
-	    if (!$old_path || $nb != $old_path) {
+	    if (!$old_path || $nb != $old_path->to_string) {
 		$select->(my $path = Gtk2::TreePath->new_from_string($nb));
 		$path->free;
 	    }
@@ -482,6 +485,7 @@ sub ask_fromW {
 		$size = 6;
 		($w, $set, $focus_w) = create_treeview_list($e, $may_go_to_next, $changed, 
 							    sub { $do_action->('Modify') if $_[1]->type =~ /^2/ });
+		$e->{saved_default_val} = ${$e->{val}};
 
 		%buttons = map {
 		    my $action = $_;
@@ -509,7 +513,12 @@ sub ask_fromW {
 		    ($w, $set, $size) = create_treeview_tree(@para, $e->{tree_expanded});
 		    $e->{saved_default_val} = ${$e->{val}}; #- during realization, signals will mess up the default val :(
 		} else {
-		    ($w, $set, $focus_w) = $use_boxradio ? create_boxradio(@para) : create_treeview_list(@para);
+		    if ($use_boxradio) {
+			($w, $set, $focus_w) = create_boxradio(@para);
+		    } else {
+			($w, $set, $focus_w) = create_treeview_list(@para);
+			$e->{saved_default_val} = ${$e->{val}};
+		    }
 		}
 		if (@{$e->{list}} > (@$l == 1 ? 10 : 4) || $e->{add_modify_remove}) {
 		    $has_scroll = $expand = 1;
