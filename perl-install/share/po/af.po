@@ -792,6 +792,13 @@ msgstr ""
 msgid "What norm is your TV using?"
 msgstr "Watter norm gebruik u TV?"
 
+#: Xconfig/xfree.pm:571
+#, c-format
+msgid ""
+"_:weird aspect ratio\n"
+"other"
+msgstr ""
+
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:231
@@ -9519,6 +9526,11 @@ msgstr "Universele"
 msgid "Any PS/2 & USB mice"
 msgstr "Enige PS/2 & USB muis"
 
+#: mouse.pm:89
+#, fuzzy, c-format
+msgid "Microsoft Xbox Controller S"
+msgstr "Microsoft Explorer"
+
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
 msgid "Synaptics Touchpad"
@@ -10524,11 +10536,36 @@ msgstr "Begin tydens herlaaityd"
 msgid "DHCP client"
 msgstr "DHCP-kliënt"
 
+#: network/netconnect.pm:1041 standalone/drakconnect:389
+#, fuzzy, c-format
+msgid "DHCP timeout (in seconds)"
+msgstr "Konneksie tydlimiet (in sekondes)"
+
+#: network/netconnect.pm:1042 standalone/drakconnect:392
+#, fuzzy, c-format
+msgid "Get DNS servers from DHCP"
+msgstr "Die DNS-bediener se IP"
+
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP server from DHCP"
+msgstr ""
+
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD server from DHCP"
+msgstr ""
+
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP-adres moet in 1.2.3.4. formaat wees"
+
+#: network/netconnect.pm:1057 standalone/drakconnect:686
+#, fuzzy, c-format
+msgid "Netmask address should be in format 255.255.224.0"
+msgstr "Deurgang IP-adres moet in 1.2.3.4. formaat wees"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -10602,6 +10639,11 @@ msgid "Bitrate (in b/s)"
 msgstr "Bitrate (in b/s)"
 
 #: network/netconnect.pm:1141
+#, c-format
+msgid "Use Wi-Fi Protected Access (WPA)"
+msgstr ""
+
+#: network/netconnect.pm:1168
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -10846,6 +10888,11 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "Konfigurasie is voltooi, wil u hierdie verstellings toepas?"
 
 #: network/netconnect.pm:1336
+#, fuzzy, c-format
+msgid "Do you want to allow users to start the connection?"
+msgstr "Wil u die konneksie met herlaaityd aanskakel?"
+
+#: network/netconnect.pm:1345
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "Wil u die konneksie met herlaaityd aanskakel?"
@@ -11110,6 +11157,11 @@ msgstr "oulik"
 #, c-format
 msgid "maybe"
 msgstr "moontlik"
+
+#: pkgs.pm:474
+#, fuzzy, c-format
+msgid "Downloading file %s..."
+msgstr "Stuur lêers..."
 
 #: printer/cups.pm:103
 #, c-format
@@ -12265,6 +12317,11 @@ msgid "Auto-detect printers connected to machines running Microsoft Windows"
 msgstr "Outospeur drukkers wat aan Microsoft Windows rekenaars gekoppel is"
 
 #: printer/printerdrake.pm:1108
+#, fuzzy, c-format
+msgid "No auto-detection"
+msgstr "Gebruik outospeuring"
+
+#: printer/printerdrake.pm:1173
 #, c-format
 msgid ""
 "\n"
@@ -16737,6 +16794,11 @@ msgstr "<b>Mandrakestore</b>"
 msgid "Wizards to configure server"
 msgstr "Probleme met die konfigurasie van drukker \" %s\"!"
 
+#: share/compssUsers.pl.~1.8.~:196
+#, fuzzy, c-format
+msgid "MandrakeSoft Wizards"
+msgstr "<b>Mandrakestore</b>"
+
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -20041,6 +20103,16 @@ msgid "DHCP"
 msgstr ""
 
 #: standalone/drakconnect:438
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:394
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:470
 #, fuzzy, c-format
 msgid "Metric"
 msgstr "beperk"
@@ -24456,6 +24528,11 @@ msgstr "/Outospeur _modems"
 msgid "/Autodetect _jaz drives"
 msgstr "/Outospeur _jaz-aandrywers"
 
+#: standalone/harddrake2:188
+#, c-format
+msgid "/_Upload the hardware list"
+msgstr ""
+
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
 msgid "/_Quit"
@@ -24573,6 +24650,31 @@ msgstr "skrywer"
 #, c-format
 msgid "DVD"
 msgstr "DVD"
+
+#: standalone/harddrake2:525
+#, c-format
+msgid "Upload the hardware list"
+msgstr ""
+
+#: standalone/harddrake2:528
+#, fuzzy, c-format
+msgid "Upload the system configuration"
+msgstr "Stelsel-konfigurasie"
+
+#: standalone/harddrake2:530
+#, fuzzy, c-format
+msgid "Account:"
+msgstr "Rekening"
+
+#: standalone/harddrake2:531
+#, fuzzy, c-format
+msgid "Password:"
+msgstr "Wagwoord"
+
+#: standalone/harddrake2:532
+#, fuzzy, c-format
+msgid "Hostname:"
+msgstr "Rekenaarnaam: "
 
 #: standalone/keyboarddrake:29
 #, c-format
@@ -24923,6 +25025,16 @@ msgstr "Herstel Deur Netwerk"
 #, c-format
 msgid "Configure Network"
 msgstr "Konfigureer die Netwerk"
+
+#: standalone/net_applet:69
+#, fuzzy, c-format
+msgid "Watched interface"
+msgstr "Koppelvlakke"
+
+#: standalone/net_applet:78
+#, fuzzy, c-format
+msgid "Profiles"
+msgstr "Instaan bedieners"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238
@@ -29262,9 +29374,6 @@ msgstr "Installasie het gefaal!"
 
 #~ msgid "TCP/IP"
 #~ msgstr "TCP/IP"
-
-#~ msgid "Account"
-#~ msgstr "Rekening"
 
 #~ msgid "Wireless"
 #~ msgstr "Draadloos"

@@ -727,6 +727,13 @@ msgstr ""
 msgid "What norm is your TV using?"
 msgstr "TV 카드가 어떤 놈을 사용합니까?"
 
+#: Xconfig/xfree.pm:571
+#, c-format
+msgid ""
+"_:weird aspect ratio\n"
+"other"
+msgstr ""
+
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:231
@@ -8905,6 +8912,11 @@ msgstr "세계 공용"
 msgid "Any PS/2 & USB mice"
 msgstr ""
 
+#: mouse.pm:89
+#, fuzzy, c-format
+msgid "Microsoft Xbox Controller S"
+msgstr "마이크로소프트 익스플로러"
+
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
 msgid "Synaptics Touchpad"
@@ -9877,10 +9889,35 @@ msgstr "부팅시 시작"
 msgid "DHCP client"
 msgstr "DHCP 클라이언트"
 
+#: network/netconnect.pm:1041 standalone/drakconnect:389
+#, fuzzy, c-format
+msgid "DHCP timeout (in seconds)"
+msgstr "연결 시간초과 (초)"
+
+#: network/netconnect.pm:1042 standalone/drakconnect:392
+#, fuzzy, c-format
+msgid "Get DNS servers from DHCP"
+msgstr "DHCP 서버 IP"
+
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP server from DHCP"
+msgstr ""
+
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD server from DHCP"
+msgstr ""
+
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
+msgstr "IP 주소는 1.2.3.4과 같은 형식이어야 합니다."
+
+#: network/netconnect.pm:1057 standalone/drakconnect:686
+#, fuzzy, c-format
+msgid "Netmask address should be in format 255.255.224.0"
 msgstr "IP 주소는 1.2.3.4과 같은 형식이어야 합니다."
 
 #: network/netconnect.pm:1041
@@ -9955,6 +9992,11 @@ msgid "Bitrate (in b/s)"
 msgstr ""
 
 #: network/netconnect.pm:1141
+#, c-format
+msgid "Use Wi-Fi Protected Access (WPA)"
+msgstr ""
+
+#: network/netconnect.pm:1168
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -10162,6 +10204,11 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "어느 Xorg 설정을 선택하시겠습니까?"
 
 #: network/netconnect.pm:1336
+#, fuzzy, c-format
+msgid "Do you want to allow users to start the connection?"
+msgstr "부팅시에 연결하도록 하겠습니까?"
+
+#: network/netconnect.pm:1345
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "부팅시에 연결하도록 하겠습니까?"
@@ -10412,6 +10459,11 @@ msgstr "좋은 팩키지"
 #, c-format
 msgid "maybe"
 msgstr "괜찮은 팩키지"
+
+#: pkgs.pm:474
+#, fuzzy, c-format
+msgid "Downloading file %s..."
+msgstr "파일 전송 중 ..."
 
 #: printer/cups.pm:103
 #, c-format
@@ -11419,6 +11471,11 @@ msgid "Auto-detect printers connected to machines running Microsoft Windows"
 msgstr ""
 
 #: printer/printerdrake.pm:1108
+#, fuzzy, c-format
+msgid "No auto-detection"
+msgstr "자동 검색"
+
+#: printer/printerdrake.pm:1173
 #, c-format
 msgid ""
 "\n"
@@ -15600,6 +15657,11 @@ msgstr "맨드레이크 제어 센터"
 msgid "Wizards to configure server"
 msgstr "프린터 「%s」 설정 중 ..."
 
+#: share/compssUsers.pl.~1.8.~:196
+#, fuzzy, c-format
+msgid "MandrakeSoft Wizards"
+msgstr "맨드레이크 제어 센터"
+
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -18502,6 +18564,16 @@ msgid "DHCP"
 msgstr "DHCP"
 
 #: standalone/drakconnect:438
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:394
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:470
 #, fuzzy, c-format
 msgid "Metric"
 msgstr "제한"
@@ -22300,6 +22372,11 @@ msgstr "자동 검색됨"
 msgid "/Autodetect _jaz drives"
 msgstr "자동 검색됨"
 
+#: standalone/harddrake2:188
+#, c-format
+msgid "/_Upload the hardware list"
+msgstr ""
+
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
 msgid "/_Quit"
@@ -22410,6 +22487,31 @@ msgstr "프린터"
 #, c-format
 msgid "DVD"
 msgstr "DVD"
+
+#: standalone/harddrake2:525
+#, c-format
+msgid "Upload the hardware list"
+msgstr ""
+
+#: standalone/harddrake2:528
+#, fuzzy, c-format
+msgid "Upload the system configuration"
+msgstr "경고 설정"
+
+#: standalone/harddrake2:530
+#, fuzzy, c-format
+msgid "Account:"
+msgstr "마운트"
+
+#: standalone/harddrake2:531
+#, fuzzy, c-format
+msgid "Password:"
+msgstr "암호"
+
+#: standalone/harddrake2:532
+#, fuzzy, c-format
+msgid "Hostname:"
+msgstr "호스트명:"
 
 #: standalone/keyboarddrake:29
 #, c-format
@@ -22754,6 +22856,16 @@ msgstr "네트웍을 통한 복구"
 #, c-format
 msgid "Configure Network"
 msgstr "네트웍 설정"
+
+#: standalone/net_applet:69
+#, fuzzy, c-format
+msgid "Watched interface"
+msgstr "인터페이스"
+
+#: standalone/net_applet:78
+#, fuzzy, c-format
+msgid "Profiles"
+msgstr "프로파일: "
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238

@@ -795,6 +795,13 @@ msgstr ""
 msgid "What norm is your TV using?"
 msgstr "Zein arau erabiltzen du zure telebistak?"
 
+#: Xconfig/xfree.pm:571
+#, c-format
+msgid ""
+"_:weird aspect ratio\n"
+"other"
+msgstr ""
+
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:231
@@ -9860,6 +9867,11 @@ msgstr "Unibertsala"
 msgid "Any PS/2 & USB mice"
 msgstr "Edozein PS/2 eta USB sagu"
 
+#: mouse.pm:89
+#, fuzzy, c-format
+msgid "Microsoft Xbox Controller S"
+msgstr "Microsoft Explorer"
+
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
 msgid "Synaptics Touchpad"
@@ -10860,11 +10872,36 @@ msgstr "Abiarazi abioan"
 msgid "DHCP client"
 msgstr "DHCP bezeroa"
 
+#: network/netconnect.pm:1041 standalone/drakconnect:389
+#, fuzzy, c-format
+msgid "DHCP timeout (in seconds)"
+msgstr "Konexioaren denbora-muga (segundotan)"
+
+#: network/netconnect.pm:1042 standalone/drakconnect:392
+#, fuzzy, c-format
+msgid "Get DNS servers from DHCP"
+msgstr "DNS zerbitzariaren IPa"
+
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP server from DHCP"
+msgstr ""
+
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD server from DHCP"
+msgstr ""
+
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP helbideak 1.2.3.4 formatua izan behar du"
+
+#: network/netconnect.pm:1057 standalone/drakconnect:686
+#, fuzzy, c-format
+msgid "Netmask address should be in format 255.255.224.0"
+msgstr "Atebidearen helbideak 1.2.3.4 formatua izan behar du"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -10938,6 +10975,11 @@ msgid "Bitrate (in b/s)"
 msgstr "Bit-abiadura (b/s)"
 
 #: network/netconnect.pm:1141
+#, c-format
+msgid "Use Wi-Fi Protected Access (WPA)"
+msgstr ""
+
+#: network/netconnect.pm:1168
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -11189,6 +11231,11 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "Konfigurazioa osatu da. Ezarpenak aplikatu nahi dituzu?"
 
 #: network/netconnect.pm:1336
+#, fuzzy, c-format
+msgid "Do you want to allow users to start the connection?"
+msgstr "Abioan hasi nahi duzu konexioa?"
+
+#: network/netconnect.pm:1345
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "Abioan hasi nahi duzu konexioa?"
@@ -11452,6 +11499,11 @@ msgstr "baliagarria"
 #, c-format
 msgid "maybe"
 msgstr "beharbada"
+
+#: pkgs.pm:474
+#, fuzzy, c-format
+msgid "Downloading file %s..."
+msgstr "Fitxategiak bidaltzen..."
 
 #: printer/cups.pm:103
 #, c-format
@@ -12612,6 +12664,11 @@ msgstr ""
 "inprimagailuak"
 
 #: printer/printerdrake.pm:1108
+#, fuzzy, c-format
+msgid "No auto-detection"
+msgstr "Autodetektatu"
+
+#: printer/printerdrake.pm:1173
 #, c-format
 msgid ""
 "\n"
@@ -17286,6 +17343,11 @@ msgstr "Mandrakesoft Morroiak"
 msgid "Wizards to configure server"
 msgstr "Zerbitzaria konfiguratzeko morroiak"
 
+#: share/compssUsers.pl.~1.8.~:196
+#, fuzzy, c-format
+msgid "MandrakeSoft Wizards"
+msgstr "Mandrakesoft Morroiak"
+
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -20613,6 +20675,16 @@ msgid "DHCP"
 msgstr "DHCP"
 
 #: standalone/drakconnect:438
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:394
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:470
 #, c-format
 msgid "Metric"
 msgstr "Metrika"
@@ -25044,6 +25116,11 @@ msgstr "/Autodetektatu _modemak"
 msgid "/Autodetect _jaz drives"
 msgstr "/Autodetektatu _jaz unitateak"
 
+#: standalone/harddrake2:188
+#, c-format
+msgid "/_Upload the hardware list"
+msgstr ""
+
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
 msgid "/_Quit"
@@ -25163,6 +25240,31 @@ msgstr "grabagailua"
 #, c-format
 msgid "DVD"
 msgstr "DVD"
+
+#: standalone/harddrake2:525
+#, c-format
+msgid "Upload the hardware list"
+msgstr ""
+
+#: standalone/harddrake2:528
+#, fuzzy, c-format
+msgid "Upload the system configuration"
+msgstr "Sistemaren konfigurazioa"
+
+#: standalone/harddrake2:530
+#, fuzzy, c-format
+msgid "Account:"
+msgstr "Muntatu"
+
+#: standalone/harddrake2:531
+#, fuzzy, c-format
+msgid "Password:"
+msgstr "Pasahitza"
+
+#: standalone/harddrake2:532
+#, fuzzy, c-format
+msgid "Hostname:"
+msgstr "Ostalari-izena: "
 
 #: standalone/keyboarddrake:29
 #, c-format
@@ -25516,6 +25618,16 @@ msgstr "Sarea Monitoretu"
 #, c-format
 msgid "Configure Network"
 msgstr "Sarea Konfiguratu"
+
+#: standalone/net_applet:69
+#, fuzzy, c-format
+msgid "Watched interface"
+msgstr "interfazeak"
+
+#: standalone/net_applet:78
+#, fuzzy, c-format
+msgid "Profiles"
+msgstr "Proxy-ak"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238

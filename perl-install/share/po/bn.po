@@ -799,6 +799,13 @@ msgstr ""
 msgid "What norm is your TV using?"
 msgstr "আপনি কি ধরণের টিভি ব্যবহার করছেন?"
 
+#: Xconfig/xfree.pm:571
+#, c-format
+msgid ""
+"_:weird aspect ratio\n"
+"other"
+msgstr ""
+
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:231
@@ -9059,6 +9066,11 @@ msgstr "সর্বজনীন"
 msgid "Any PS/2 & USB mice"
 msgstr "যে কোন PS/2 এবং ইউএসবি মাউস"
 
+#: mouse.pm:89
+#, fuzzy, c-format
+msgid "Microsoft Xbox Controller S"
+msgstr "মাইক্রসফ্ট এক্সপ্লোরার"
+
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
 msgid "Synaptics Touchpad"
@@ -10062,11 +10074,36 @@ msgstr "বুটের সময় চালু হবে"
 msgid "DHCP client"
 msgstr "DHCP ক্লায়েন্ট"
 
+#: network/netconnect.pm:1041 standalone/drakconnect:389
+#, fuzzy, c-format
+msgid "DHCP timeout (in seconds)"
+msgstr "সংযোগের টাইমআউট (সেকেন্ডে)"
+
+#: network/netconnect.pm:1042 standalone/drakconnect:392
+#, fuzzy, c-format
+msgid "Get DNS servers from DHCP"
+msgstr "DNS সার্ভার আই-পি(IP)"
+
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP server from DHCP"
+msgstr ""
+
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD server from DHCP"
+msgstr ""
+
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP ঠিকানা 1.2.3.4-এর মত হতে হবে"
+
+#: network/netconnect.pm:1057 standalone/drakconnect:686
+#, fuzzy, c-format
+msgid "Netmask address should be in format 255.255.224.0"
+msgstr "গেটওয়ে ঠিকানা 1.2.3.4-এর মত হতে হবে"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -10144,6 +10181,11 @@ msgid "Bitrate (in b/s)"
 msgstr "বিটরেট (b/s-এ)"
 
 #: network/netconnect.pm:1141
+#, c-format
+msgid "Use Wi-Fi Protected Access (WPA)"
+msgstr ""
+
+#: network/netconnect.pm:1168
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -10382,6 +10424,11 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "কনফিগারেশন সম্পূর্ন হয়েছে, আপনি কি সেটিংগুলি প্রয়োগ করতে চান?"
 
 #: network/netconnect.pm:1336
+#, fuzzy, c-format
+msgid "Do you want to allow users to start the connection?"
+msgstr "আপনি কি বুট হবার সাথে সাথে সংযোগ স্থাপন করতে চান?"
+
+#: network/netconnect.pm:1345
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "আপনি কি বুট হবার সাথে সাথে সংযোগ স্থাপন করতে চান?"
@@ -10647,6 +10694,11 @@ msgstr "সুন্দর"
 #, c-format
 msgid "maybe"
 msgstr "হয়তোবা"
+
+#: pkgs.pm:474
+#, fuzzy, c-format
+msgid "Downloading file %s..."
+msgstr "ফাইল প্রেরণ করা হচ্ছে..."
 
 #: printer/cups.pm:103
 #, c-format
@@ -11753,8 +11805,13 @@ msgstr "লোকাল নেটওয়ার্কের সাথে সরা
 msgid "Auto-detect printers connected to machines running Microsoft Windows"
 msgstr "উইন্ডোজ চালিত মেশিনের সাথে সংযুক্ত প্রিন্টারসমূহ সয়ংক্রিয়ভাবে সনাক্ত করো"
 
-# সাম
 #: printer/printerdrake.pm:1108
+#, fuzzy, c-format
+msgid "No auto-detection"
+msgstr "সয়ংক্রিয় সনাক্ত"
+
+# সাম
+#: printer/printerdrake.pm:1173
 #, c-format
 msgid ""
 "\n"
@@ -16565,6 +16622,12 @@ msgstr "Mandrakesoft উইজার্ডসমূহ"
 msgid "Wizards to configure server"
 msgstr "সার্ভার কনফিগার করার জন্য উইজার্ডসমূহ"
 
+# সাম
+#: share/compssUsers.pl.~1.8.~:196
+#, fuzzy, c-format
+msgid "MandrakeSoft Wizards"
+msgstr "Mandrakesoft উইজার্ডসমূহ"
+
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -19704,8 +19767,18 @@ msgstr "স্থির"
 msgid "DHCP"
 msgstr "ডি.এইচ.সি.পি."
 
-# সাম: পরিমাপক বা মেট্রিক (as in metric system)
 #: standalone/drakconnect:438
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:394
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
+
+# সাম: পরিমাপক বা মেট্রিক (as in metric system)
+#: standalone/drakconnect:470
 #, c-format
 msgid "Metric"
 msgstr "মেট্রিক"
@@ -24101,6 +24174,11 @@ msgstr "/স্বয়ংক্রিয় মডেম (_ম)"
 msgid "/Autodetect _jaz drives"
 msgstr "/স্বয়ংক্রিয় জায (jaz) ড্রাইভ (_J)"
 
+#: standalone/harddrake2:188
+#, c-format
+msgid "/_Upload the hardware list"
+msgstr ""
+
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
 msgid "/_Quit"
@@ -24220,6 +24298,31 @@ msgstr "বার্ণার"
 #, c-format
 msgid "DVD"
 msgstr "DVD"
+
+#: standalone/harddrake2:525
+#, c-format
+msgid "Upload the hardware list"
+msgstr ""
+
+#: standalone/harddrake2:528
+#, fuzzy, c-format
+msgid "Upload the system configuration"
+msgstr "সিস্টেম কনফিগারেশন"
+
+#: standalone/harddrake2:530
+#, fuzzy, c-format
+msgid "Account:"
+msgstr "মাউন্ট"
+
+#: standalone/harddrake2:531
+#, fuzzy, c-format
+msgid "Password:"
+msgstr "পাসওয়ার্ড"
+
+#: standalone/harddrake2:532
+#, fuzzy, c-format
+msgid "Hostname:"
+msgstr "হোস্টনাম: "
 
 #: standalone/keyboarddrake:29
 #, c-format
@@ -24586,6 +24689,16 @@ msgstr "নেটওয়ার্ক মনিটর"
 #, c-format
 msgid "Configure Network"
 msgstr "নেটওয়ার্ক কনফিগার"
+
+#: standalone/net_applet:69
+#, fuzzy, c-format
+msgid "Watched interface"
+msgstr "ইন্টারফেস"
+
+#: standalone/net_applet:78
+#, fuzzy, c-format
+msgid "Profiles"
+msgstr "প্রক্সিসমূহ"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238

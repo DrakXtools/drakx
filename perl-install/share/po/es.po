@@ -805,6 +805,13 @@ msgstr ""
 msgid "What norm is your TV using?"
 msgstr "¿Qué norma está utilizando su TV?"
 
+#: Xconfig/xfree.pm:571
+#, c-format
+msgid ""
+"_:weird aspect ratio\n"
+"other"
+msgstr ""
+
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:231
@@ -9936,6 +9943,11 @@ msgstr "Universal"
 msgid "Any PS/2 & USB mice"
 msgstr "Cualquier ratón PS/2 y USB"
 
+#: mouse.pm:89
+#, fuzzy, c-format
+msgid "Microsoft Xbox Controller S"
+msgstr "Microsoft Explorer"
+
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
 msgid "Synaptics Touchpad"
@@ -10937,11 +10949,36 @@ msgstr "Iniciar al arrancar"
 msgid "DHCP client"
 msgstr "cliente DHCP"
 
+#: network/netconnect.pm:1041 standalone/drakconnect:389
+#, fuzzy, c-format
+msgid "DHCP timeout (in seconds)"
+msgstr "Demora de la conexión (en seg)"
+
+#: network/netconnect.pm:1042 standalone/drakconnect:392
+#, fuzzy, c-format
+msgid "Get DNS servers from DHCP"
+msgstr "La IP del servidor DNS"
+
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP server from DHCP"
+msgstr ""
+
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD server from DHCP"
+msgstr ""
+
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "Las direcciones IP deben estar en el formato 1.2.3.4"
+
+#: network/netconnect.pm:1057 standalone/drakconnect:686
+#, fuzzy, c-format
+msgid "Netmask address should be in format 255.255.224.0"
+msgstr "Las direcciones de la pasarela deberían estar en el formato 1.2.3.4"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -11015,6 +11052,11 @@ msgid "Bitrate (in b/s)"
 msgstr "Tasa de bits (en b/s)"
 
 #: network/netconnect.pm:1141
+#, c-format
+msgid "Use Wi-Fi Protected Access (WPA)"
+msgstr ""
+
+#: network/netconnect.pm:1168
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -11269,6 +11311,11 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "La configuración está completa, ¿desea aplicar los ajustes?"
 
 #: network/netconnect.pm:1336
+#, fuzzy, c-format
+msgid "Do you want to allow users to start the connection?"
+msgstr "¿Desea iniciar su conexión al arrancar?"
+
+#: network/netconnect.pm:1345
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "¿Desea iniciar su conexión al arrancar?"
@@ -11534,6 +11581,11 @@ msgstr "bueno"
 #, c-format
 msgid "maybe"
 msgstr "quizás"
+
+#: pkgs.pm:474
+#, fuzzy, c-format
+msgid "Downloading file %s..."
+msgstr "Enviando archivos..."
 
 #: printer/cups.pm:103
 #, c-format
@@ -12703,6 +12755,11 @@ msgstr ""
 "Microsoft Windows"
 
 #: printer/printerdrake.pm:1108
+#, fuzzy, c-format
+msgid "No auto-detection"
+msgstr "Detección automática"
+
+#: printer/printerdrake.pm:1173
 #, c-format
 msgid ""
 "\n"
@@ -17427,6 +17484,11 @@ msgstr "Asistentes de Mandrakesoft"
 msgid "Wizards to configure server"
 msgstr "Asistentes para configurar servidor"
 
+#: share/compssUsers.pl.~1.8.~:196
+#, fuzzy, c-format
+msgid "MandrakeSoft Wizards"
+msgstr "Asistentes de Mandrakesoft"
+
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -20749,6 +20811,16 @@ msgid "DHCP"
 msgstr "DHCP"
 
 #: standalone/drakconnect:438
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:394
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:470
 #, c-format
 msgid "Metric"
 msgstr "Métrica"
@@ -25205,6 +25277,11 @@ msgstr "/Autodetectar _módems"
 msgid "/Autodetect _jaz drives"
 msgstr "/Autodetectar unidades _jaz"
 
+#: standalone/harddrake2:188
+#, c-format
+msgid "/_Upload the hardware list"
+msgstr ""
+
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
 msgid "/_Quit"
@@ -25324,6 +25401,31 @@ msgstr "grabadora"
 #, c-format
 msgid "DVD"
 msgstr "DVD"
+
+#: standalone/harddrake2:525
+#, c-format
+msgid "Upload the hardware list"
+msgstr ""
+
+#: standalone/harddrake2:528
+#, fuzzy, c-format
+msgid "Upload the system configuration"
+msgstr "Configuración del sistema"
+
+#: standalone/harddrake2:530
+#, fuzzy, c-format
+msgid "Account:"
+msgstr "Montar"
+
+#: standalone/harddrake2:531
+#, fuzzy, c-format
+msgid "Password:"
+msgstr "Contraseña"
+
+#: standalone/harddrake2:532
+#, fuzzy, c-format
+msgid "Hostname:"
+msgstr "Nombre de la máquina: "
 
 #: standalone/keyboarddrake:29
 #, c-format
@@ -25679,6 +25781,16 @@ msgstr "Monitorear la red"
 #, c-format
 msgid "Configure Network"
 msgstr "Configurar la red"
+
+#: standalone/net_applet:69
+#, fuzzy, c-format
+msgid "Watched interface"
+msgstr "interfaces"
+
+#: standalone/net_applet:78
+#, fuzzy, c-format
+msgid "Profiles"
+msgstr "Proxis"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238

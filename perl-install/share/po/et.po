@@ -790,6 +790,13 @@ msgstr ""
 msgid "What norm is your TV using?"
 msgstr "Millist TV-standardit Te kasutate?"
 
+#: Xconfig/xfree.pm:571
+#, c-format
+msgid ""
+"_:weird aspect ratio\n"
+"other"
+msgstr ""
+
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:231
@@ -9767,6 +9774,11 @@ msgstr "Universaalne"
 msgid "Any PS/2 & USB mice"
 msgstr "Suvaline PS/2 ja USB hiir"
 
+#: mouse.pm:89
+#, fuzzy, c-format
+msgid "Microsoft Xbox Controller S"
+msgstr "Microsoft Explorer"
+
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
 msgid "Synaptics Touchpad"
@@ -10766,11 +10778,36 @@ msgstr "Käivitub alglaadimisel"
 msgid "DHCP client"
 msgstr "DHCP klient"
 
+#: network/netconnect.pm:1041 standalone/drakconnect:389
+#, fuzzy, c-format
+msgid "DHCP timeout (in seconds)"
+msgstr "Ühenduse aegumine (sekundites)"
+
+#: network/netconnect.pm:1042 standalone/drakconnect:392
+#, fuzzy, c-format
+msgid "Get DNS servers from DHCP"
+msgstr "Nimeserveri IP"
+
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP server from DHCP"
+msgstr ""
+
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD server from DHCP"
+msgstr ""
+
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP-aadress peab olema kujul 1.2.3.4"
+
+#: network/netconnect.pm:1057 standalone/drakconnect:686
+#, fuzzy, c-format
+msgid "Netmask address should be in format 255.255.224.0"
+msgstr "Lüüsi aadress peab olema kujul 1.2.3.4"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -10844,6 +10881,11 @@ msgid "Bitrate (in b/s)"
 msgstr "Bitikiirus (b/s)"
 
 #: network/netconnect.pm:1141
+#, c-format
+msgid "Use Wi-Fi Protected Access (WPA)"
+msgstr ""
+
+#: network/netconnect.pm:1168
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -11089,6 +11131,11 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "Seadistamine on lõpetatud. Kas soovite seda nüüd rakendada?"
 
 #: network/netconnect.pm:1336
+#, fuzzy, c-format
+msgid "Do you want to allow users to start the connection?"
+msgstr "Kas soovite luua ühenduse juba alglaadimisel?"
+
+#: network/netconnect.pm:1345
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "Kas soovite luua ühenduse juba alglaadimisel?"
@@ -11352,6 +11399,11 @@ msgstr "kena"
 #, c-format
 msgid "maybe"
 msgstr "võib olla"
+
+#: pkgs.pm:474
+#, fuzzy, c-format
+msgid "Downloading file %s..."
+msgstr "Failide saatmine..."
 
 #: printer/cups.pm:103
 #, c-format
@@ -12507,6 +12559,11 @@ msgid "Auto-detect printers connected to machines running Microsoft Windows"
 msgstr "Microsoft Windowsi masinatega ühendatud printerite automaattuvastus"
 
 #: printer/printerdrake.pm:1108
+#, fuzzy, c-format
+msgid "No auto-detection"
+msgstr "Automaattuvastus"
+
+#: printer/printerdrake.pm:1173
 #, c-format
 msgid ""
 "\n"
@@ -16063,8 +16120,8 @@ msgid ""
 "\t* <b>Mandrakelinux 10.1 for x86-64</b>, The Mandrakelinux solution for "
 "making the most of your 64-bit processor."
 msgstr ""
-"\t* <b>Mandrakelinux 10.1 for x86-64</b> - Mandrakelinuxi lahendus, mis sobib "
-"kõige paremini Teie 64-bitisele protsessorile."
+"\t* <b>Mandrakelinux 10.1 for x86-64</b> - Mandrakelinuxi lahendus, mis "
+"sobib kõige paremini Teie 64-bitisele protsessorile."
 
 #: share/advertising/10.pl:13
 #, c-format
@@ -17110,6 +17167,11 @@ msgstr "Mandrakesofti nõustajad"
 #, c-format
 msgid "Wizards to configure server"
 msgstr "Serverite seadistamise nõustajad"
+
+#: share/compssUsers.pl.~1.8.~:196
+#, fuzzy, c-format
+msgid "MandrakeSoft Wizards"
+msgstr "Mandrakesofti nõustajad"
 
 #: standalone.pm:21
 #, c-format
@@ -20409,6 +20471,16 @@ msgid "DHCP"
 msgstr "DHCP"
 
 #: standalone/drakconnect:438
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:394
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:470
 #, c-format
 msgid "Metric"
 msgstr "Meetrika"
@@ -24811,6 +24883,11 @@ msgstr "/_Modemite automaattuvastus"
 msgid "/Autodetect _jaz drives"
 msgstr "/_JAZ ketaste automaattuvastus"
 
+#: standalone/harddrake2:188
+#, c-format
+msgid "/_Upload the hardware list"
+msgstr ""
+
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
 msgid "/_Quit"
@@ -24929,6 +25006,31 @@ msgstr "CD-kirjutaja"
 #, c-format
 msgid "DVD"
 msgstr "DVD"
+
+#: standalone/harddrake2:525
+#, c-format
+msgid "Upload the hardware list"
+msgstr ""
+
+#: standalone/harddrake2:528
+#, fuzzy, c-format
+msgid "Upload the system configuration"
+msgstr "Süsteemi seadistamine"
+
+#: standalone/harddrake2:530
+#, fuzzy, c-format
+msgid "Account:"
+msgstr "Haagi"
+
+#: standalone/harddrake2:531
+#, fuzzy, c-format
+msgid "Password:"
+msgstr "Parool"
+
+#: standalone/harddrake2:532
+#, fuzzy, c-format
+msgid "Hostname:"
+msgstr "Masinanimi: "
 
 #: standalone/keyboarddrake:29
 #, c-format
@@ -25273,6 +25375,16 @@ msgstr "Võrgu jälgimine"
 #, c-format
 msgid "Configure Network"
 msgstr "Võrgu seadistamine"
+
+#: standalone/net_applet:69
+#, fuzzy, c-format
+msgid "Watched interface"
+msgstr "interfaces"
+
+#: standalone/net_applet:78
+#, fuzzy, c-format
+msgid "Profiles"
+msgstr "Puhverserverid"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238

@@ -741,6 +741,13 @@ msgstr ""
 msgid "What norm is your TV using?"
 msgstr "Televiziyanız hansı normu işlədir?"
 
+#: Xconfig/xfree.pm:571
+#, c-format
+msgid ""
+"_:weird aspect ratio\n"
+"other"
+msgstr ""
+
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:231
@@ -9667,6 +9674,11 @@ msgstr "Universal"
 msgid "Any PS/2 & USB mice"
 msgstr "Hər hansı bir PS/2 və USB siçan"
 
+#: mouse.pm:89
+#, fuzzy, c-format
+msgid "Microsoft Xbox Controller S"
+msgstr "Microsoft Explorer"
+
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
 msgid "Synaptics Touchpad"
@@ -10655,11 +10667,36 @@ msgstr "Açılışda başlat"
 msgid "DHCP client"
 msgstr "DHCP alıcısı"
 
+#: network/netconnect.pm:1041 standalone/drakconnect:389
+#, fuzzy, c-format
+msgid "DHCP timeout (in seconds)"
+msgstr "Bağlantı vaxt dolması (saniyə sonra)"
+
+#: network/netconnect.pm:1042 standalone/drakconnect:392
+#, fuzzy, c-format
+msgid "Get DNS servers from DHCP"
+msgstr "DNS Verici IP'si"
+
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP server from DHCP"
+msgstr ""
+
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD server from DHCP"
+msgstr ""
+
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP ünvanı 1.2.3.4 şəklində olmalıdır"
+
+#: network/netconnect.pm:1057 standalone/drakconnect:686
+#, fuzzy, c-format
+msgid "Netmask address should be in format 255.255.224.0"
+msgstr "Şəbəkə keçişi ünvanı 1.2.3.4 şəklində olmalıdır"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -10733,6 +10770,11 @@ msgid "Bitrate (in b/s)"
 msgstr "Vuruş sıxlığı (v/s olaraq)"
 
 #: network/netconnect.pm:1141
+#, c-format
+msgid "Use Wi-Fi Protected Access (WPA)"
+msgstr ""
+
+#: network/netconnect.pm:1168
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -10943,6 +10985,11 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "Quraşdırma qurtardı, dəyişiklikləri tətbiq etmək istəyirsiniz ?"
 
 #: network/netconnect.pm:1336
+#, fuzzy, c-format
+msgid "Do you want to allow users to start the connection?"
+msgstr "Bağlantınızı açılışda başlatmaq istəyirsiniz?"
+
+#: network/netconnect.pm:1345
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "Bağlantınızı açılışda başlatmaq istəyirsiniz?"
@@ -11205,6 +11252,11 @@ msgstr "ə'la"
 #, c-format
 msgid "maybe"
 msgstr "bəlkə"
+
+#: pkgs.pm:474
+#, fuzzy, c-format
+msgid "Downloading file %s..."
+msgstr "Fayllar göndərilir..."
 
 #: printer/cups.pm:103
 #, c-format
@@ -12345,6 +12397,11 @@ msgstr ""
 "Microsoft Windows işlədən kompüterlərə bağlı olan çapçıları avtomati aşkar et"
 
 #: printer/printerdrake.pm:1108
+#, fuzzy, c-format
+msgid "No auto-detection"
+msgstr "Avtomatik təsbit et"
+
+#: printer/printerdrake.pm:1173
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -16760,6 +16817,11 @@ msgstr "<b>Mandrakestore</b>"
 msgid "Wizards to configure server"
 msgstr "\"%s\" çapçısı quraşdırıla bilmədi!"
 
+#: share/compssUsers.pl.~1.8.~:196
+#, fuzzy, c-format
+msgid "MandrakeSoft Wizards"
+msgstr "<b>Mandrakestore</b>"
+
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -20006,6 +20068,16 @@ msgid "DHCP"
 msgstr "DHCP"
 
 #: standalone/drakconnect:438
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:394
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:470
 #, fuzzy, c-format
 msgid "Metric"
 msgstr "məhdudlaşdır"
@@ -24000,6 +24072,11 @@ msgstr "/_Modemləri avtomatik təsbit et"
 msgid "/Autodetect _jaz drives"
 msgstr "/_jaz sürücülərini avtomatik təsbit et"
 
+#: standalone/harddrake2:188
+#, c-format
+msgid "/_Upload the hardware list"
+msgstr ""
+
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
 msgid "/_Quit"
@@ -24117,6 +24194,31 @@ msgstr "yazıcı"
 #, c-format
 msgid "DVD"
 msgstr "DVD"
+
+#: standalone/harddrake2:525
+#, c-format
+msgid "Upload the hardware list"
+msgstr ""
+
+#: standalone/harddrake2:528
+#, fuzzy, c-format
+msgid "Upload the system configuration"
+msgstr "Sistem quraşdırılması"
+
+#: standalone/harddrake2:530
+#, fuzzy, c-format
+msgid "Account:"
+msgstr "Bağla"
+
+#: standalone/harddrake2:531
+#, fuzzy, c-format
+msgid "Password:"
+msgstr "Şifrə"
+
+#: standalone/harddrake2:532
+#, fuzzy, c-format
+msgid "Hostname:"
+msgstr "Ev sahibi adı:"
 
 #: standalone/keyboarddrake:29
 #, c-format
@@ -24462,6 +24564,16 @@ msgstr "Şəbəkə Üstündən Geri Yüklə"
 #, c-format
 msgid "Configure Network"
 msgstr "Şəbəkəni Quraşdır"
+
+#: standalone/net_applet:69
+#, fuzzy, c-format
+msgid "Watched interface"
+msgstr "ara üzlər"
+
+#: standalone/net_applet:78
+#, fuzzy, c-format
+msgid "Profiles"
+msgstr "Vəkil vericiləri"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238

@@ -713,6 +713,13 @@ msgstr ""
 msgid "What norm is your TV using?"
 msgstr "Cén caighdeán a úsáideann do theilifís?"
 
+#: Xconfig/xfree.pm:571
+#, c-format
+msgid ""
+"_:weird aspect ratio\n"
+"other"
+msgstr ""
+
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:231
@@ -8412,6 +8419,11 @@ msgstr "Uilíoch"
 msgid "Any PS/2 & USB mice"
 msgstr ""
 
+#: mouse.pm:89
+#, fuzzy, c-format
+msgid "Microsoft Xbox Controller S"
+msgstr "Microsoft Explorer"
+
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
 msgid "Synaptics Touchpad"
@@ -9352,10 +9364,35 @@ msgstr "Cruthaigh an diosca "
 msgid "DHCP client"
 msgstr ""
 
+#: network/netconnect.pm:1041 standalone/drakconnect:389
+#, fuzzy, c-format
+msgid "DHCP timeout (in seconds)"
+msgstr "Ainm Nasc"
+
+#: network/netconnect.pm:1042 standalone/drakconnect:392
+#, fuzzy, c-format
+msgid "Get DNS servers from DHCP"
+msgstr "IP freastalaí SMP"
+
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP server from DHCP"
+msgstr ""
+
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD server from DHCP"
+msgstr ""
+
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
+msgstr ""
+
+#: network/netconnect.pm:1057 standalone/drakconnect:686
+#, c-format
+msgid "Netmask address should be in format 255.255.224.0"
 msgstr ""
 
 #: network/netconnect.pm:1041
@@ -9430,6 +9467,11 @@ msgid "Bitrate (in b/s)"
 msgstr ""
 
 #: network/netconnect.pm:1141
+#, c-format
+msgid "Use Wi-Fi Protected Access (WPA)"
+msgstr ""
+
+#: network/netconnect.pm:1168
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -9630,6 +9672,11 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr ""
 
 #: network/netconnect.pm:1336
+#, fuzzy, c-format
+msgid "Do you want to allow users to start the connection?"
+msgstr "An bhfuil tú ag iarraidh an cumraíocht a thrial?"
+
+#: network/netconnect.pm:1345
 #, fuzzy, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "An bhfuil tú ag iarraidh an cumraíocht a thrial?"
@@ -9861,6 +9908,11 @@ msgstr "deas"
 #, c-format
 msgid "maybe"
 msgstr "b'fhéidir"
+
+#: pkgs.pm:474
+#, fuzzy, c-format
+msgid "Downloading file %s..."
+msgstr "Sabháil i gcomhad"
 
 #: printer/cups.pm:103
 #, fuzzy, c-format
@@ -10862,6 +10914,11 @@ msgid "Auto-detect printers connected to machines running Microsoft Windows"
 msgstr ""
 
 #: printer/printerdrake.pm:1108
+#, fuzzy, c-format
+msgid "No auto-detection"
+msgstr "Scríos Printéir"
+
+#: printer/printerdrake.pm:1173
 #, c-format
 msgid ""
 "\n"
@@ -14846,6 +14903,11 @@ msgstr "Bainteach le hIdirlíon"
 msgid "Wizards to configure server"
 msgstr "Cumraigh printéir"
 
+#: share/compssUsers.pl.~1.8.~:196
+#, fuzzy, c-format
+msgid "MandrakeSoft Wizards"
+msgstr "Bainteach le hIdirlíon"
+
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -17722,6 +17784,16 @@ msgid "DHCP"
 msgstr "DHCP"
 
 #: standalone/drakconnect:438
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:394
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:470
 #, fuzzy, c-format
 msgid "Metric"
 msgstr "teorannaigh"
@@ -21470,6 +21542,11 @@ msgstr "Scríos Printéir"
 msgid "/Autodetect _jaz drives"
 msgstr "Scríos Printéir"
 
+#: standalone/harddrake2:188
+#, c-format
+msgid "/_Upload the hardware list"
+msgstr ""
+
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
 msgid "/_Quit"
@@ -21580,6 +21657,31 @@ msgstr "Printéir"
 #, c-format
 msgid "DVD"
 msgstr "DVD"
+
+#: standalone/harddrake2:525
+#, c-format
+msgid "Upload the hardware list"
+msgstr ""
+
+#: standalone/harddrake2:528
+#, fuzzy, c-format
+msgid "Upload the system configuration"
+msgstr "Cumraíocht an chórais"
+
+#: standalone/harddrake2:530
+#, fuzzy, c-format
+msgid "Account:"
+msgstr "Feistigh"
+
+#: standalone/harddrake2:531
+#, fuzzy, c-format
+msgid "Password:"
+msgstr "Pasfhocal"
+
+#: standalone/harddrake2:532
+#, fuzzy, c-format
+msgid "Hostname:"
+msgstr "Ainm úsáideora"
 
 #: standalone/keyboarddrake:29
 #, c-format
@@ -21921,6 +22023,16 @@ msgstr "Aisig ó comhad"
 #, fuzzy, c-format
 msgid "Configure Network"
 msgstr "Cumraigh gréasánú"
+
+#: standalone/net_applet:69
+#, fuzzy, c-format
+msgid "Watched interface"
+msgstr "Cláréadan Gréasán"
+
+#: standalone/net_applet:78
+#, fuzzy, c-format
+msgid "Profiles"
+msgstr "Ionadaithe"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238

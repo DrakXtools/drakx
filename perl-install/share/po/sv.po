@@ -801,6 +801,13 @@ msgstr ""
 msgid "What norm is your TV using?"
 msgstr "Vad för slags standard använder din tv?"
 
+#: Xconfig/xfree.pm:571
+#, c-format
+msgid ""
+"_:weird aspect ratio\n"
+"other"
+msgstr ""
+
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:231
@@ -9786,6 +9793,11 @@ msgstr "Universell"
 msgid "Any PS/2 & USB mice"
 msgstr "Valfri PS/2- eller USB-mus"
 
+#: mouse.pm:89
+#, fuzzy, c-format
+msgid "Microsoft Xbox Controller S"
+msgstr "Microsoft Explorer"
+
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
 msgid "Synaptics Touchpad"
@@ -10785,11 +10797,36 @@ msgstr "Starta vid uppstart"
 msgid "DHCP client"
 msgstr "DHCP-klient"
 
+#: network/netconnect.pm:1041 standalone/drakconnect:389
+#, fuzzy, c-format
+msgid "DHCP timeout (in seconds)"
+msgstr "Anslutningens tidsgräns (i sek)"
+
+#: network/netconnect.pm:1042 standalone/drakconnect:392
+#, fuzzy, c-format
+msgid "Get DNS servers from DHCP"
+msgstr "DNS-serverns IP"
+
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP server from DHCP"
+msgstr ""
+
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD server from DHCP"
+msgstr ""
+
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP-adressen ska vara i formatet 1.2.3.4"
+
+#: network/netconnect.pm:1057 standalone/drakconnect:686
+#, fuzzy, c-format
+msgid "Netmask address should be in format 255.255.224.0"
+msgstr "Gateway-adressen ska vara i formatet 1.2.3.4"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -10863,6 +10900,11 @@ msgid "Bitrate (in b/s)"
 msgstr "Hastighet (i bitar/s)"
 
 #: network/netconnect.pm:1141
+#, c-format
+msgid "Use Wi-Fi Protected Access (WPA)"
+msgstr ""
+
+#: network/netconnect.pm:1168
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -11113,6 +11155,11 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "Konfigureringen är slutförd, vill du använda inställningarna?"
 
 #: network/netconnect.pm:1336
+#, fuzzy, c-format
+msgid "Do you want to allow users to start the connection?"
+msgstr "Vill du starta anslutningen vid start?"
+
+#: network/netconnect.pm:1345
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "Vill du starta anslutningen vid start?"
@@ -11375,6 +11422,11 @@ msgstr "trevligt"
 #, c-format
 msgid "maybe"
 msgstr "tveksamt"
+
+#: pkgs.pm:474
+#, fuzzy, c-format
+msgid "Downloading file %s..."
+msgstr "Skickar filer..."
 
 #: printer/cups.pm:103
 #, c-format
@@ -12530,6 +12582,11 @@ msgid "Auto-detect printers connected to machines running Microsoft Windows"
 msgstr "Identifiera skrivare anslutna till datorer som kör Microsoft Windows"
 
 #: printer/printerdrake.pm:1108
+#, fuzzy, c-format
+msgid "No auto-detection"
+msgstr "Automatisk identifiering"
+
+#: printer/printerdrake.pm:1173
 #, c-format
 msgid ""
 "\n"
@@ -17170,6 +17227,11 @@ msgstr "Mandrakesoft Guider"
 msgid "Wizards to configure server"
 msgstr "Guider för att konfigurera servern"
 
+#: share/compssUsers.pl.~1.8.~:196
+#, fuzzy, c-format
+msgid "MandrakeSoft Wizards"
+msgstr "Mandrakesoft Guider"
+
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -20480,6 +20542,16 @@ msgid "DHCP"
 msgstr "DHCP"
 
 #: standalone/drakconnect:438
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:394
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:470
 #, c-format
 msgid "Metric"
 msgstr "Meter"
@@ -24907,6 +24979,11 @@ msgstr "/Identifiera modem auto_matiskt"
 msgid "/Autodetect _jaz drives"
 msgstr "/Identifiera _Jaz-enheter automatiskt"
 
+#: standalone/harddrake2:188
+#, c-format
+msgid "/_Upload the hardware list"
+msgstr ""
+
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
 msgid "/_Quit"
@@ -25024,6 +25101,31 @@ msgstr "brännare"
 #, c-format
 msgid "DVD"
 msgstr "Dvd"
+
+#: standalone/harddrake2:525
+#, c-format
+msgid "Upload the hardware list"
+msgstr ""
+
+#: standalone/harddrake2:528
+#, fuzzy, c-format
+msgid "Upload the system configuration"
+msgstr "Systeminställningar"
+
+#: standalone/harddrake2:530
+#, fuzzy, c-format
+msgid "Account:"
+msgstr "Montera"
+
+#: standalone/harddrake2:531
+#, fuzzy, c-format
+msgid "Password:"
+msgstr "Lösenord"
+
+#: standalone/harddrake2:532
+#, fuzzy, c-format
+msgid "Hostname:"
+msgstr "Värddatornamn: "
 
 #: standalone/keyboarddrake:29
 #, c-format
@@ -25372,6 +25474,16 @@ msgstr "Övervaka Nätverk"
 #, c-format
 msgid "Configure Network"
 msgstr "Konfigurera Nätverk"
+
+#: standalone/net_applet:69
+#, fuzzy, c-format
+msgid "Watched interface"
+msgstr "gränssnitt"
+
+#: standalone/net_applet:78
+#, fuzzy, c-format
+msgid "Profiles"
+msgstr "Proxyservrar"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238

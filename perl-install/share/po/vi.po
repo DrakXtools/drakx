@@ -785,6 +785,13 @@ msgstr ""
 msgid "What norm is your TV using?"
 msgstr "TV của bạn dùng loại thông thường nào?"
 
+#: Xconfig/xfree.pm:571
+#, c-format
+msgid ""
+"_:weird aspect ratio\n"
+"other"
+msgstr ""
+
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:231
@@ -9676,6 +9683,11 @@ msgstr "Phổ thông"
 msgid "Any PS/2 & USB mice"
 msgstr "Bất kỳ chuột PS/2 và USB nào"
 
+#: mouse.pm:89
+#, fuzzy, c-format
+msgid "Microsoft Xbox Controller S"
+msgstr "Microsoft Explorer"
+
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
 msgid "Synaptics Touchpad"
@@ -10672,11 +10684,36 @@ msgstr "Chạy lúc khởi động "
 msgid "DHCP client"
 msgstr "Máy khách DHCP"
 
+#: network/netconnect.pm:1041 standalone/drakconnect:389
+#, fuzzy, c-format
+msgid "DHCP timeout (in seconds)"
+msgstr "Hết thời gian kết nối (theo giây):"
+
+#: network/netconnect.pm:1042 standalone/drakconnect:392
+#, fuzzy, c-format
+msgid "Get DNS servers from DHCP"
+msgstr "IP của máy chủ DHCP"
+
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP server from DHCP"
+msgstr ""
+
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD server from DHCP"
+msgstr ""
+
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "Địa chỉ IP phải có dạng 1.2.3.4"
+
+#: network/netconnect.pm:1057 standalone/drakconnect:686
+#, fuzzy, c-format
+msgid "Netmask address should be in format 255.255.224.0"
+msgstr "Địa chỉ Gateway nên có dạng 1.2.3.4"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -10750,6 +10787,11 @@ msgid "Bitrate (in b/s)"
 msgstr "Bitrate (in b/s)"
 
 #: network/netconnect.pm:1141
+#, c-format
+msgid "Use Wi-Fi Protected Access (WPA)"
+msgstr ""
+
+#: network/netconnect.pm:1168
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -10997,6 +11039,11 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "Hoàn thành việc cấu hình, bạn muốn áp dụng các thiết lập không?"
 
 #: network/netconnect.pm:1336
+#, fuzzy, c-format
+msgid "Do you want to allow users to start the connection?"
+msgstr "Bạn có muốn bật kết nối khi khởi động máy tính?"
+
+#: network/netconnect.pm:1345
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "Bạn có muốn bật kết nối khi khởi động máy tính?"
@@ -11258,6 +11305,11 @@ msgstr "tuyệt"
 #, c-format
 msgid "maybe"
 msgstr "có thể là"
+
+#: pkgs.pm:474
+#, fuzzy, c-format
+msgid "Downloading file %s..."
+msgstr "Đang gửi các file..."
 
 #: printer/cups.pm:103
 #, c-format
@@ -12398,6 +12450,11 @@ msgstr ""
 "Tự động phát hiện máy ih kết nối với các máy tính chạy Microsoft Windows"
 
 #: printer/printerdrake.pm:1108
+#, fuzzy, c-format
+msgid "No auto-detection"
+msgstr "Tự động phát hiện"
+
+#: printer/printerdrake.pm:1173
 #, c-format
 msgid ""
 "\n"
@@ -17006,6 +17063,11 @@ msgstr "Đồ thuật Mandrakesoft"
 msgid "Wizards to configure server"
 msgstr "Đồ thuật cấu hình máy chủ"
 
+#: share/compssUsers.pl.~1.8.~:196
+#, fuzzy, c-format
+msgid "MandrakeSoft Wizards"
+msgstr "Đồ thuật Mandrakesoft"
+
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -20283,6 +20345,16 @@ msgid "DHCP"
 msgstr "DHCP"
 
 #: standalone/drakconnect:438
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:394
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:470
 #, c-format
 msgid "Metric"
 msgstr "Hệ mét"
@@ -24709,6 +24781,11 @@ msgstr "/Tự động dò mo_dem"
 msgid "/Autodetect _jaz drives"
 msgstr "/Tự động phát hiện _jaz drive"
 
+#: standalone/harddrake2:188
+#, c-format
+msgid "/_Upload the hardware list"
+msgstr ""
+
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
 msgid "/_Quit"
@@ -24827,6 +24904,31 @@ msgstr "ổ ghi"
 #, c-format
 msgid "DVD"
 msgstr "DVD"
+
+#: standalone/harddrake2:525
+#, c-format
+msgid "Upload the hardware list"
+msgstr ""
+
+#: standalone/harddrake2:528
+#, fuzzy, c-format
+msgid "Upload the system configuration"
+msgstr "Cấu hình hệ thống"
+
+#: standalone/harddrake2:530
+#, fuzzy, c-format
+msgid "Account:"
+msgstr "Gắn kết"
+
+#: standalone/harddrake2:531
+#, fuzzy, c-format
+msgid "Password:"
+msgstr "Mật khẩu"
+
+#: standalone/harddrake2:532
+#, fuzzy, c-format
+msgid "Hostname:"
+msgstr "Tên máy chủ:"
 
 #: standalone/keyboarddrake:29
 #, c-format
@@ -25182,6 +25284,16 @@ msgstr "Theo dõi mạng"
 #, c-format
 msgid "Configure Network"
 msgstr "Cấu hình mạng"
+
+#: standalone/net_applet:69
+#, fuzzy, c-format
+msgid "Watched interface"
+msgstr "giao diện"
+
+#: standalone/net_applet:78
+#, fuzzy, c-format
+msgid "Profiles"
+msgstr "Proxies"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238

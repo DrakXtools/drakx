@@ -789,6 +789,13 @@ msgstr ""
 msgid "What norm is your TV using?"
 msgstr "أي نظام يستخدمه جهاز التلفاز لديك؟"
 
+#: Xconfig/xfree.pm:571
+#, c-format
+msgid ""
+"_:weird aspect ratio\n"
+"other"
+msgstr ""
+
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:231
@@ -9683,6 +9690,11 @@ msgstr "عالمي"
 msgid "Any PS/2 & USB mice"
 msgstr "أيّ ماوس PS/2 و USB"
 
+#: mouse.pm:89
+#, fuzzy, c-format
+msgid "Microsoft Xbox Controller S"
+msgstr "ميكروسوفت Explorer"
+
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
 msgid "Synaptics Touchpad"
@@ -10681,11 +10693,36 @@ msgstr "البدء عند الإقلاع"
 msgid "DHCP client"
 msgstr "عميل DHCP"
 
+#: network/netconnect.pm:1041 standalone/drakconnect:389
+#, fuzzy, c-format
+msgid "DHCP timeout (in seconds)"
+msgstr "الوقت الأقصى للاتصال (بالثواني)"
+
+#: network/netconnect.pm:1042 standalone/drakconnect:392
+#, fuzzy, c-format
+msgid "Get DNS servers from DHCP"
+msgstr "عنوان IP لخادم DNS"
+
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP server from DHCP"
+msgstr ""
+
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD server from DHCP"
+msgstr ""
+
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "عنوان IP يجب أن يكون بنسق 1.2.3.4"
+
+#: network/netconnect.pm:1057 standalone/drakconnect:686
+#, fuzzy, c-format
+msgid "Netmask address should be in format 255.255.224.0"
+msgstr "عنوان البوابات يجب أن تكون على النسق 1.2.3.4"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -10759,6 +10796,11 @@ msgid "Bitrate (in b/s)"
 msgstr "معدّل البث (بِتْ/ث)"
 
 #: network/netconnect.pm:1141
+#, c-format
+msgid "Use Wi-Fi Protected Access (WPA)"
+msgstr ""
+
+#: network/netconnect.pm:1168
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -11002,6 +11044,11 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "تم الانتهاء من التهيئة، هل تريد تطبيق الإعدادات ؟"
 
 #: network/netconnect.pm:1336
+#, fuzzy, c-format
+msgid "Do you want to allow users to start the connection?"
+msgstr "هل تريد بدء الاتصال عند الإقلاع؟"
+
+#: network/netconnect.pm:1345
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "هل تريد بدء الاتصال عند الإقلاع؟"
@@ -11263,6 +11310,11 @@ msgstr "ظريف"
 #, c-format
 msgid "maybe"
 msgstr "ربما"
+
+#: pkgs.pm:474
+#, fuzzy, c-format
+msgid "Downloading file %s..."
+msgstr "جاري ارسال الملفات..."
 
 #: printer/cups.pm:103
 #, c-format
@@ -12397,6 +12449,11 @@ msgid "Auto-detect printers connected to machines running Microsoft Windows"
 msgstr "تحقّق آلياً من الطابعات الموصولة بماكينات تعمل على ميكروسوفت ويندوز"
 
 #: printer/printerdrake.pm:1108
+#, fuzzy, c-format
+msgid "No auto-detection"
+msgstr "كشف آلي"
+
+#: printer/printerdrake.pm:1173
 #, c-format
 msgid ""
 "\n"
@@ -16922,6 +16979,11 @@ msgstr "مرشدو ماندريكسوفت"
 msgid "Wizards to configure server"
 msgstr "مرشدو تهيئة الخادم"
 
+#: share/compssUsers.pl.~1.8.~:196
+#, fuzzy, c-format
+msgid "MandrakeSoft Wizards"
+msgstr "مرشدو ماندريكسوفت"
+
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -20191,6 +20253,16 @@ msgid "DHCP"
 msgstr "DHCP"
 
 #: standalone/drakconnect:438
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:394
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:470
 #, c-format
 msgid "Metric"
 msgstr "متري"
@@ -24604,6 +24676,11 @@ msgstr "/تحقق آلي من أ_جهزة المودم"
 msgid "/Autodetect _jaz drives"
 msgstr "/تحقق آلي من _سواقات Jaz"
 
+#: standalone/harddrake2:188
+#, c-format
+msgid "/_Upload the hardware list"
+msgstr ""
+
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
 msgid "/_Quit"
@@ -24722,6 +24799,31 @@ msgstr "ناسخ أقراص"
 #, c-format
 msgid "DVD"
 msgstr "DVD"
+
+#: standalone/harddrake2:525
+#, c-format
+msgid "Upload the hardware list"
+msgstr ""
+
+#: standalone/harddrake2:528
+#, fuzzy, c-format
+msgid "Upload the system configuration"
+msgstr "تهيئة النظام"
+
+#: standalone/harddrake2:530
+#, fuzzy, c-format
+msgid "Account:"
+msgstr "تركيب"
+
+#: standalone/harddrake2:531
+#, fuzzy, c-format
+msgid "Password:"
+msgstr "كلمة المرور"
+
+#: standalone/harddrake2:532
+#, fuzzy, c-format
+msgid "Hostname:"
+msgstr "اسم المضيف:"
 
 #: standalone/keyboarddrake:29
 #, c-format
@@ -25066,6 +25168,16 @@ msgstr "مراقبة الشّبكة"
 #, c-format
 msgid "Configure Network"
 msgstr "تهيئة الشبكة"
+
+#: standalone/net_applet:69
+#, fuzzy, c-format
+msgid "Watched interface"
+msgstr "interfaces"
+
+#: standalone/net_applet:78
+#, fuzzy, c-format
+msgid "Profiles"
+msgstr "البروكسيات"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238

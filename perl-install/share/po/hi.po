@@ -785,6 +785,13 @@ msgstr ""
 msgid "What norm is your TV using?"
 msgstr "आपका टीवी किस मानक का उपयोग कर रहा है?"
 
+#: Xconfig/xfree.pm:571
+#, c-format
+msgid ""
+"_:weird aspect ratio\n"
+"other"
+msgstr ""
+
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:231
@@ -9234,6 +9241,11 @@ msgstr "विश्वव्यापी"
 msgid "Any PS/2 & USB mice"
 msgstr "कोई भी पीएस/२ व यूएसबी माउस"
 
+#: mouse.pm:89
+#, fuzzy, c-format
+msgid "Microsoft Xbox Controller S"
+msgstr "माइक्रोसॉफ़्ट एक्सप्लोरर"
+
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
 msgid "Synaptics Touchpad"
@@ -10231,11 +10243,36 @@ msgstr "बूट के समय आरम्भ"
 msgid "DHCP client"
 msgstr "डी०एच०सी०पी० ग्राहक"
 
+#: network/netconnect.pm:1041 standalone/drakconnect:389
+#, fuzzy, c-format
+msgid "DHCP timeout (in seconds)"
+msgstr "संबंध समय- सीमा समाप्ति (पलों में)"
+
+#: network/netconnect.pm:1042 standalone/drakconnect:392
+#, fuzzy, c-format
+msgid "Get DNS servers from DHCP"
+msgstr "डीएनएस सर्वर आईपी"
+
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP server from DHCP"
+msgstr ""
+
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD server from DHCP"
+msgstr ""
+
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "आई०पी० पते का प्रारूप १.२.३.४ जैसा होना चाहिए"
+
+#: network/netconnect.pm:1057 standalone/drakconnect:686
+#, fuzzy, c-format
+msgid "Netmask address should be in format 255.255.224.0"
+msgstr "गेटवे पता का प्रारूप १.२.३.४ की भांति होना चाहिए"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -10309,6 +10346,11 @@ msgid "Bitrate (in b/s)"
 msgstr "बिट दर (बी/एस में)"
 
 #: network/netconnect.pm:1141
+#, c-format
+msgid "Use Wi-Fi Protected Access (WPA)"
+msgstr ""
+
+#: network/netconnect.pm:1168
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -10554,6 +10596,11 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "संरचना सम्पूर्ण हो गयी है, क्या आप समायोजनाओं को लगाने चाहते है ?"
 
 #: network/netconnect.pm:1336
+#, fuzzy, c-format
+msgid "Do you want to allow users to start the connection?"
+msgstr "क्या आप बूट के समय संबंध को आरम्भ करना चाहते है?"
+
+#: network/netconnect.pm:1345
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "क्या आप बूट के समय संबंध को आरम्भ करना चाहते है?"
@@ -10817,6 +10864,11 @@ msgstr "बहुत अच्छा"
 #, c-format
 msgid "maybe"
 msgstr "हो सकता है"
+
+#: pkgs.pm:474
+#, fuzzy, c-format
+msgid "Downloading file %s..."
+msgstr "संचिकायें प्रेषित की जा रही..."
 
 #: printer/cups.pm:103
 #, c-format
@@ -11956,6 +12008,11 @@ msgstr ""
 "रहा है"
 
 #: printer/printerdrake.pm:1108
+#, fuzzy, c-format
+msgid "No auto-detection"
+msgstr "स्वतःखोज"
+
+#: printer/printerdrake.pm:1173
 #, c-format
 msgid ""
 "\n"
@@ -16250,6 +16307,11 @@ msgstr "<b>मैनड्रैकस्टोर</b>"
 msgid "Wizards to configure server"
 msgstr "\"%s\" प्रिंटर की संरचना में असफ़ल !"
 
+#: share/compssUsers.pl.~1.8.~:196
+#, fuzzy, c-format
+msgid "MandrakeSoft Wizards"
+msgstr "<b>मैनड्रैकस्टोर</b>"
+
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -19296,6 +19358,16 @@ msgid "DHCP"
 msgstr ""
 
 #: standalone/drakconnect:438
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:394
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:470
 #, fuzzy, c-format
 msgid "Metric"
 msgstr "सीमित"
@@ -23300,6 +23372,11 @@ msgstr "/स्वतःखोजी मॉडम (_m)"
 msgid "/Autodetect _jaz drives"
 msgstr "/जैज़ ड्राइवों की स्वतः खोज (_j)"
 
+#: standalone/harddrake2:188
+#, c-format
+msgid "/_Upload the hardware list"
+msgstr ""
+
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
 msgid "/_Quit"
@@ -23417,6 +23494,31 @@ msgstr "बर्नर"
 #, c-format
 msgid "DVD"
 msgstr "डीवीडी"
+
+#: standalone/harddrake2:525
+#, c-format
+msgid "Upload the hardware list"
+msgstr ""
+
+#: standalone/harddrake2:528
+#, fuzzy, c-format
+msgid "Upload the system configuration"
+msgstr "तंत्र संरचना"
+
+#: standalone/harddrake2:530
+#, fuzzy, c-format
+msgid "Account:"
+msgstr "खाता"
+
+#: standalone/harddrake2:531
+#, fuzzy, c-format
+msgid "Password:"
+msgstr "कूट-शब्द"
+
+#: standalone/harddrake2:532
+#, fuzzy, c-format
+msgid "Hostname:"
+msgstr "होस्ट का नाम:"
 
 #: standalone/keyboarddrake:29
 #, c-format
@@ -23763,6 +23865,16 @@ msgstr "नेटवर्क के द्वारा पुनः स्थ�
 #, c-format
 msgid "Configure Network"
 msgstr "नेटवर्क की संरचना"
+
+#: standalone/net_applet:69
+#, fuzzy, c-format
+msgid "Watched interface"
+msgstr "इन्टरफ़ेसेस"
+
+#: standalone/net_applet:78
+#, fuzzy, c-format
+msgid "Profiles"
+msgstr "प्रोक्सियां"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238
@@ -26378,9 +26490,6 @@ msgstr "संसाधन असफ़ल"
 
 #~ msgid "TCP/IP"
 #~ msgstr "टीसीपी / आईपी"
-
-#~ msgid "Account"
-#~ msgstr "खाता"
 
 #~ msgid "Wireless"
 #~ msgstr "बेतार"

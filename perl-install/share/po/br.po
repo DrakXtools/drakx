@@ -729,6 +729,13 @@ msgstr ""
 msgid "What norm is your TV using?"
 msgstr "Peseurt skinwel oc'h implij ?"
 
+#: Xconfig/xfree.pm:571
+#, c-format
+msgid ""
+"_:weird aspect ratio\n"
+"other"
+msgstr ""
+
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:231
@@ -3143,7 +3150,11 @@ msgid ""
 "\n"
 "Your card currently use the %s\"%s\" driver (default driver for your card is "
 "\"%s\")"
-msgstr "\n\nBremañ implij a ra ar sturier %s « %s » ho gartenn son (ar sturier a-ziouer a zo « %s » evit)"
+msgstr ""
+"\n"
+"\n"
+"Bremañ implij a ra ar sturier %s « %s » ho gartenn son (ar sturier a-ziouer "
+"a zo « %s » evit)"
 
 #: harddrake/sound.pm:243
 #, c-format
@@ -4702,7 +4713,9 @@ msgstr "URL ar melezour"
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
-msgstr "Ne m'eus ket kavout ur roll pakadoù e-barzh ar melezour-mañ.  Kit da wiriaÃ± al lec'hiadur-mañ zo mad."
+msgstr ""
+"Ne m'eus ket kavout ur roll pakadoù e-barzh ar melezour-mañ.  Kit da wiriaÃ± "
+"al lec'hiadur-mañ zo mad."
 
 #: install_any.pm:633
 #, c-format
@@ -8484,6 +8497,11 @@ msgstr "Hollvedel"
 msgid "Any PS/2 & USB mice"
 msgstr "Logodenn bennak (PS/2 pe USB)"
 
+#: mouse.pm:89
+#, fuzzy, c-format
+msgid "Microsoft Xbox Controller S"
+msgstr "Microsoft Explorer"
+
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
 msgid "Synaptics Touchpad"
@@ -9383,7 +9401,8 @@ msgid ""
 "The following protocols can be used to configure an ethernet connection. "
 "Please choose the one you want to use"
 msgstr ""
-"Ar c'homennadoù-mañ a c'hell bezañ implijet da gefluniañ ur gevreadenn rouedad.\n"
+"Ar c'homennadoù-mañ a c'hell bezañ implijet da gefluniañ ur gevreadenn "
+"rouedad.\n"
 "Dibabit unan e fell deoc'h implij mar plij"
 
 #: network/netconnect.pm:1006
@@ -9433,11 +9452,36 @@ msgstr "Loc'hañ pa loc'hañ an urzhiataer"
 msgid "DHCP client"
 msgstr "Arval DHCP"
 
+#: network/netconnect.pm:1041 standalone/drakconnect:389
+#, fuzzy, c-format
+msgid "DHCP timeout (in seconds)"
+msgstr "Amzer-hont a ar gevreadenn (eil)"
+
+#: network/netconnect.pm:1042 standalone/drakconnect:392
+#, fuzzy, c-format
+msgid "Get DNS servers from DHCP"
+msgstr "IP ar servijer DNS"
+
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP server from DHCP"
+msgstr ""
+
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD server from DHCP"
+msgstr ""
+
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "Er furmad 1.2.3.4 e tlefe bezañ ar chomlec'h IP"
+
+#: network/netconnect.pm:1057 standalone/drakconnect:686
+#, fuzzy, c-format
+msgid "Netmask address should be in format 255.255.224.0"
+msgstr "Er furmad 1.2.3.4 e tlefe bezañ chomlec'h ar dreuzell"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -9511,6 +9555,11 @@ msgid "Bitrate (in b/s)"
 msgstr ""
 
 #: network/netconnect.pm:1141
+#, c-format
+msgid "Use Wi-Fi Protected Access (WPA)"
+msgstr ""
+
+#: network/netconnect.pm:1168
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -9715,6 +9764,11 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "Pe seurt enmont a vennit ouzhpennañ"
 
 #: network/netconnect.pm:1336
+#, fuzzy, c-format
+msgid "Do you want to allow users to start the connection?"
+msgstr "Mennout a rit lañsañ ar gevradenn pa loc'hañ ?"
+
+#: network/netconnect.pm:1345
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "Mennout a rit lañsañ ar gevradenn pa loc'hañ ?"
@@ -9953,6 +10007,11 @@ msgstr "brav"
 #, c-format
 msgid "maybe"
 msgstr "marteze"
+
+#: pkgs.pm:474
+#, fuzzy, c-format
+msgid "Downloading file %s..."
+msgstr "O kas restroù ..."
 
 #: printer/cups.pm:103
 #, c-format
@@ -10954,6 +11013,11 @@ msgid "Auto-detect printers connected to machines running Microsoft Windows"
 msgstr ""
 
 #: printer/printerdrake.pm:1108
+#, fuzzy, c-format
+msgid "No auto-detection"
+msgstr "Dinoiñ dre ardivink"
+
+#: printer/printerdrake.pm:1173
 #, c-format
 msgid ""
 "\n"
@@ -15040,6 +15104,11 @@ msgstr "<b>Mandrakestore</b>"
 msgid "Wizards to configure server"
 msgstr "Kefluniañ ar servijer web"
 
+#: share/compssUsers.pl.~1.8.~:196
+#, fuzzy, c-format
+msgid "MandrakeSoft Wizards"
+msgstr "<b>Mandrakestore</b>"
+
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -17108,7 +17177,8 @@ msgstr "\t-Rouedad gant webdav.\n"
 #: standalone/drakbackup:2540
 #, c-format
 msgid "No configuration, please click Wizard or Advanced.\n"
-msgstr "N'eus kefluniadur ebet, klikit ouzh « Skoazeller » pe  « Barek » mar plij.\n"
+msgstr ""
+"N'eus kefluniadur ebet, klikit ouzh « Skoazeller » pe  « Barek » mar plij.\n"
 
 #: standalone/drakbackup:2545
 #, c-format
@@ -17939,6 +18009,16 @@ msgid "DHCP"
 msgstr "DHCP"
 
 #: standalone/drakconnect:438
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:394
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:470
 #, fuzzy, c-format
 msgid "Metric"
 msgstr "strishaat"
@@ -21688,6 +21768,11 @@ msgstr "/Kavout m_odemioù"
 msgid "/Autodetect _jaz drives"
 msgstr "Dilesadur"
 
+#: standalone/harddrake2:188
+#, c-format
+msgid "/_Upload the hardware list"
+msgstr ""
+
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
 msgid "/_Quit"
@@ -21777,7 +21862,9 @@ msgstr "A bep seurt"
 #, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
-msgstr "Klikit ouzh un drobarzhell e-barzh ar wezenn a-gleiz a-benn ma ziskouez titouroù anezhañ amañ."
+msgstr ""
+"Klikit ouzh un drobarzhell e-barzh ar wezenn a-gleiz a-benn ma ziskouez "
+"titouroù anezhañ amañ."
 
 #: standalone/harddrake2:391
 #, c-format
@@ -21798,6 +21885,31 @@ msgstr "engraver"
 #, c-format
 msgid "DVD"
 msgstr "DVD"
+
+#: standalone/harddrake2:525
+#, c-format
+msgid "Upload the hardware list"
+msgstr ""
+
+#: standalone/harddrake2:528
+#, fuzzy, c-format
+msgid "Upload the system configuration"
+msgstr "Kefluniañ ar reizhiad"
+
+#: standalone/harddrake2:530
+#, fuzzy, c-format
+msgid "Account:"
+msgstr "Marc'hañ"
+
+#: standalone/harddrake2:531
+#, fuzzy, c-format
+msgid "Password:"
+msgstr "Tremenger"
+
+#: standalone/harddrake2:532
+#, fuzzy, c-format
+msgid "Hostname:"
+msgstr "Anv an ostiz :"
 
 #: standalone/keyboarddrake:29
 #, c-format
@@ -22118,7 +22230,8 @@ msgstr "Bev eo ar rouedad war an etrefas %s"
 #: standalone/net_applet:42
 #, c-format
 msgid "Network is down on interface %s. Click on \"Configure Network\""
-msgstr "Marv eo ar rouedad war an etrefas %s. Klikit ouzh « Kefluniañ ar Rouedad »"
+msgstr ""
+"Marv eo ar rouedad war an etrefas %s. Klikit ouzh « Kefluniañ ar Rouedad »"
 
 #: standalone/net_applet:57 standalone/net_monitor:473
 #, c-format
@@ -22139,6 +22252,16 @@ msgstr "Adaozañ adalek ar restr"
 #, c-format
 msgid "Configure Network"
 msgstr "Kefluniañ ar Rouedad"
+
+#: standalone/net_applet:69
+#, fuzzy, c-format
+msgid "Watched interface"
+msgstr "etrefasoù"
+
+#: standalone/net_applet:78
+#, fuzzy, c-format
+msgid "Profiles"
+msgstr "Proksioù"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238

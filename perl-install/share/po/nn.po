@@ -783,6 +783,13 @@ msgstr ""
 msgid "What norm is your TV using?"
 msgstr "Kva fjernsynsstandard brukar fjernsynet ditt?"
 
+#: Xconfig/xfree.pm:571
+#, c-format
+msgid ""
+"_:weird aspect ratio\n"
+"other"
+msgstr ""
+
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:231
@@ -896,7 +903,8 @@ msgstr "Minnestorleik i MiB"
 
 #: any.pm:272
 #, c-format
-msgid "Option ``Restrict command line options'' is of no use without a password"
+msgid ""
+"Option ``Restrict command line options'' is of no use without a password"
 msgstr "Valet «Avgrens kommandolinjeval» er ubrukeleg utan passord"
 
 #: any.pm:273 any.pm:606 authentication.pm:176
@@ -1154,8 +1162,10 @@ msgstr "Skriv inn brukarnamn"
 
 #: any.pm:609
 #, c-format
-msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr "Brukarnamnet kan berre innehelda små bokstavar, tala og teikna «-» og «_»"
+msgid ""
+"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgstr ""
+"Brukarnamnet kan berre innehelda små bokstavar, tala og teikna «-» og «_»"
 
 #: any.pm:610
 #, c-format
@@ -1348,7 +1358,8 @@ msgstr ""
 
 #: any.pm:941
 #, c-format
-msgid "You can export using NFS or SMB. Please select which you would like to use."
+msgid ""
+"You can export using NFS or SMB. Please select which you would like to use."
 msgstr "Du kan eksportera med NFS og SMB. Vel kven av dei du vil bruka."
 
 #: any.pm:966
@@ -1418,8 +1429,10 @@ msgstr "Lokal fil:"
 
 #: authentication.pm:51
 #, c-format
-msgid "Use local for all authentication and information user tell in local file"
-msgstr "Bruk lokal for all autentisering og informasjon brukarar oppgjev i lokal fil"
+msgid ""
+"Use local for all authentication and information user tell in local file"
+msgstr ""
+"Bruk lokal for all autentisering og informasjon brukarar oppgjev i lokal fil"
 
 #: authentication.pm:52
 #, c-format
@@ -1470,7 +1483,8 @@ msgstr "Active Directory med SFU:"
 
 #: authentication.pm:55 authentication.pm:56
 #, c-format
-msgid "Kerberos is a secure system for providing network authentication services."
+msgid ""
+"Kerberos is a secure system for providing network authentication services."
 msgstr "Kerberos er eit trygt system for nettverksautentiseringstenester."
 
 #: authentication.pm:56
@@ -1714,7 +1728,8 @@ msgstr "Du kan ikkje installera oppstartslastaren på ein «%s»-partisjon\n"
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
-msgstr "Oppstartslastaren må oppdaterast, då partisjonane har fått ny rekkjefølgje"
+msgstr ""
+"Oppstartslastaren må oppdaterast, då partisjonane har fått ny rekkjefølgje"
 
 #: bootloader.pm:1355
 #, c-format
@@ -2132,7 +2147,8 @@ msgstr "Vil du lagra endringar i «/etc/fstab»"
 #: diskdrake/interactive.pm:294 install_steps_interactive.pm:329
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr "Du må starta på nytt for at endringane i partisjontabellen skal trå i kraft"
+msgstr ""
+"Du må starta på nytt for at endringane i partisjontabellen skal trå i kraft"
 
 #: diskdrake/interactive.pm:307 help.pm:530
 #, c-format
@@ -2311,7 +2327,8 @@ msgstr "Vil du fjerna filmonteringsfila?"
 
 #: diskdrake/interactive.pm:590
 #, c-format
-msgid "After changing type of partition %s, all data on this partition will be lost"
+msgid ""
+"After changing type of partition %s, all data on this partition will be lost"
 msgstr ""
 "Når du har endra partisjonstypen til «%s» vil alle data på denne partisjonen "
 "vera tapt"
@@ -2779,7 +2796,8 @@ msgstr "Endå ein"
 
 #: diskdrake/smbnfs_gtk.pm:177
 #, c-format
-msgid "Please enter your username, password and domain name to access this host."
+msgid ""
+"Please enter your username, password and domain name to access this host."
 msgstr "Skriv inn brukarnamn, passord og domenenamn for verten."
 
 #: diskdrake/smbnfs_gtk.pm:179 standalone/drakbackup:3494
@@ -3008,7 +3026,8 @@ msgstr ""
 #: fsedit.pm:408
 #, c-format
 msgid "You can not use a LVM Logical Volume for mount point %s"
-msgstr "Du kan ikkje bruka eit LVM logisk dataområde for monteringspunktet «%s»."
+msgstr ""
+"Du kan ikkje bruka eit LVM logisk dataområde for monteringspunktet «%s»."
 
 #: fsedit.pm:410
 #, c-format
@@ -3271,9 +3290,10 @@ msgstr "Lydoppsett"
 msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
 "sound card (%s)."
-msgstr "Her kan du velja ein annan OSS- eller ALSA-drivar for lydkortet ditt («%s»)."
+msgstr ""
+"Her kan du velja ein annan OSS- eller ALSA-drivar for lydkortet ditt («%s»)."
 
-#. -PO: here the first %s is either "OSS" or "ALSA",
+#. -PO: here the first %s is either "OSS" or "ALSA", 
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:241
@@ -3702,8 +3722,7 @@ msgstr ""
 "bruka vala gjort her, då dei er gode for dei fleste maskinoppsett. Men viss\n"
 "du gjer endringar, må du hugsa å definera ein rotpartisjon («/»). Ikkje lag "
 "han\n"
-"så liten at du ikkje kan installera all programvara du treng. Om du "
-"ønskjer\n"
+"så liten at du ikkje kan installera all programvara du treng. Om du ønskjer\n"
 "å lagra filene dine på ein annan partisjon, må du òg laga ein «/home»-"
 "partisjon\n"
 "(berre mogleg om du har meir enn éin Linux-partisjon tilgjengeleg).\n"
@@ -6564,7 +6583,8 @@ msgstr ""
 
 #: install_steps_interactive.pm:820
 #, c-format
-msgid "Contacting Mandrakelinux web site to get the list of available mirrors..."
+msgid ""
+"Contacting Mandrakelinux web site to get the list of available mirrors..."
 msgstr "Kontaktar Mandrakelinux-nettstaden for oversikt over speglar ..."
 
 #: install_steps_interactive.pm:839
@@ -6637,7 +6657,8 @@ msgstr "Har du eit ISA-lydkort?"
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
 "card"
-msgstr "Køyr «sndconfig» etter installasjonen er ferdig for å setja opp lydkortet."
+msgstr ""
+"Køyr «sndconfig» etter installasjonen er ferdig for å setja opp lydkortet."
 
 #: install_steps_interactive.pm:1029
 #, c-format
@@ -6794,7 +6815,8 @@ msgstr "Mandrakelinux-installering %s"
 #. -PO: This string must fit in a 80-char wide text screen
 #: install_steps_newt.pm:34
 #, c-format
-msgid "  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
+msgid ""
+"  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
 msgstr ""
 "  <Tab>/<Alt-Tab>: flytt mellom element  | <Mellomrom>: vel | <F12> neste "
 "skjermbilete "
@@ -9291,6 +9313,11 @@ msgstr "Universell"
 msgid "Any PS/2 & USB mice"
 msgstr "Alle PS/2- eller USB-mus"
 
+#: mouse.pm:89
+#, fuzzy, c-format
+msgid "Microsoft Xbox Controller S"
+msgstr "Microsoft Explorer"
+
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
 msgid "Synaptics Touchpad"
@@ -10238,7 +10265,8 @@ msgstr "Set opp nettverkseininga %s (drivar: «%s»)"
 msgid ""
 "The following protocols can be used to configure an ethernet connection. "
 "Please choose the one you want to use"
-msgstr "Du kan bruka desse nettverksprotokollane. Vel kven av dei du vil bruka."
+msgstr ""
+"Du kan bruka desse nettverksprotokollane. Vel kven av dei du vil bruka."
 
 #: network/netconnect.pm:1006
 #, c-format
@@ -10286,11 +10314,36 @@ msgstr "Start ved oppstart"
 msgid "DHCP client"
 msgstr "DHCP-klient"
 
+#: network/netconnect.pm:1041 standalone/drakconnect:389
+#, fuzzy, c-format
+msgid "DHCP timeout (in seconds)"
+msgstr "Avbrotstid (i sekund)"
+
+#: network/netconnect.pm:1042 standalone/drakconnect:392
+#, fuzzy, c-format
+msgid "Get DNS servers from DHCP"
+msgstr "IP for DNS-tenar"
+
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP server from DHCP"
+msgstr ""
+
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD server from DHCP"
+msgstr ""
+
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP-adresser må vera på formatet «1.2.3.4»."
+
+#: network/netconnect.pm:1057 standalone/drakconnect:686
+#, fuzzy, c-format
+msgid "Netmask address should be in format 255.255.224.0"
+msgstr "Portnaradressa skal vera på formatet «1.2.3.4»."
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -10365,10 +10418,16 @@ msgstr "Bitrate (i b/s)"
 
 #: network/netconnect.pm:1141
 #, c-format
+msgid "Use Wi-Fi Protected Access (WPA)"
+msgstr ""
+
+#: network/netconnect.pm:1168
+#, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
 "frequency), or add enough '0' (zeroes)."
-msgstr "Frekvensen må ha eitt av suffiksa k, M eller G (eks.: 2.46G), eller nok 0-ar."
+msgstr ""
+"Frekvensen må ha eitt av suffiksa k, M eller G (eks.: 2.46G), eller nok 0-ar."
 
 #: network/netconnect.pm:1145
 #, c-format
@@ -10610,6 +10669,11 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "Oppsett er ferdig. Vil du bruka innstillingane no?"
 
 #: network/netconnect.pm:1336
+#, fuzzy, c-format
+msgid "Do you want to allow users to start the connection?"
+msgstr "Ønskjer du å starta sambandet automatisk ved oppstart?"
+
+#: network/netconnect.pm:1345
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "Ønskjer du å starta sambandet automatisk ved oppstart?"
@@ -10874,6 +10938,11 @@ msgstr "kjekt å ha"
 #, c-format
 msgid "maybe"
 msgstr "kanskje"
+
+#: pkgs.pm:474
+#, fuzzy, c-format
+msgid "Downloading file %s..."
+msgstr "Sender filer ..."
 
 #: printer/cups.pm:103
 #, c-format
@@ -11630,7 +11699,8 @@ msgstr ""
 
 #: printer/printerdrake.pm:621
 #, c-format
-msgid "Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"
+msgid ""
+"Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"
 msgstr ""
 "Automatisk skrivaroppdaging (lokal, TCP/Socket, SMB-skrivarar og einings-URI-"
 "ar)"
@@ -11643,7 +11713,9 @@ msgstr "Endra tidsgrense for automatisk oppdaging av nettverksskrivarar"
 #: printer/printerdrake.pm:629
 #, c-format
 msgid "Enter the timeout for network printer auto-detection (in msec) here. "
-msgstr "Skriv inn tidsgrense (i millisekund) for automatisk oppdaging av nettverksskrivarar."
+msgstr ""
+"Skriv inn tidsgrense (i millisekund) for automatisk oppdaging av "
+"nettverksskrivarar."
 
 #: printer/printerdrake.pm:631
 #, c-format
@@ -11651,7 +11723,10 @@ msgid ""
 "The longer you choose the timeout, the more reliable the detections of "
 "network printers will be, but the scan can take longer then, especially if "
 "there are many machines with local firewalls in the network. "
-msgstr "Ei lang tidsgrense fører til meir påliteleg søk etter nettverksskrivarar, men søket kan ta lenger tid, spesielt viss det er mange maskiner med lokale brannmurar i nettverket."
+msgstr ""
+"Ei lang tidsgrense fører til meir påliteleg søk etter nettverksskrivarar, "
+"men søket kan ta lenger tid, spesielt viss det er mange maskiner med lokale "
+"brannmurar i nettverket."
 
 #: printer/printerdrake.pm:635
 #, c-format
@@ -11732,7 +11807,8 @@ msgstr ""
 
 #: printer/printerdrake.pm:707
 #, c-format
-msgid "There are no printers found which are directly connected to your machine"
+msgid ""
+"There are no printers found which are directly connected to your machine"
 msgstr "Fann ingen skrivarar kopla direkte til maskina"
 
 #: printer/printerdrake.pm:710
@@ -11762,7 +11838,8 @@ msgstr "Ønskjer du å bruka utskrift på skrivarane ovanfor?\n"
 #: printer/printerdrake.pm:727
 #, c-format
 msgid "Are you sure that you want to set up printing on this machine?\n"
-msgstr "Er du sikker på at du vil setja opp utskriftssystemet på denne maskina?\n"
+msgstr ""
+"Er du sikker på at du vil setja opp utskriftssystemet på denne maskina?\n"
 
 #: printer/printerdrake.pm:728
 #, c-format
@@ -11893,13 +11970,20 @@ msgstr ""
 "\n"
 "Velkommen til vegvisaren for skrivaroppsett\n"
 "\n"
-"Denne vegvisaren vil hjelpa deg å installera skrivarane kopla til denne maskina, kopla direkte til nettverket eller kopla til ei Windows-maskin på nettverket.\n"
+"Denne vegvisaren vil hjelpa deg å installera skrivarane kopla til denne "
+"maskina, kopla direkte til nettverket eller kopla til ei Windows-maskin på "
+"nettverket.\n"
 "\n"
-"Kopla til og slå på alle skrivarane kopla til maskina. Eventuelle nettverksskrivarar og Windows-maskiner må òg vera slått på og kopla til.\n"
+"Kopla til og slå på alle skrivarane kopla til maskina. Eventuelle "
+"nettverksskrivarar og Windows-maskiner må òg vera slått på og kopla til.\n"
 "\n"
-"Merk at automatisk oppdaging av skrivarar på nettverket tek lenger tid enn oppdaging av skrivarar kopla til maskina. Du bør derfor slå av automatisk oppdaging av nettverksskrivarar og skrivarar kopla til Windows-maskiner om du ikkje treng dette.\n"
+"Merk at automatisk oppdaging av skrivarar på nettverket tek lenger tid enn "
+"oppdaging av skrivarar kopla til maskina. Du bør derfor slå av automatisk "
+"oppdaging av nettverksskrivarar og skrivarar kopla til Windows-maskiner om "
+"du ikkje treng dette.\n"
 "\n"
-"Trykk «Neste» når du er klar, eller trykk «Avbryt» om du ikkje vil setja opp skrivarar no."
+"Trykk «Neste» når du er klar, eller trykk «Avbryt» om du ikkje vil setja opp "
+"skrivarar no."
 
 #: printer/printerdrake.pm:1059
 #, c-format
@@ -11919,11 +12003,13 @@ msgstr ""
 "\n"
 "Velkommen til vegvisaren for skrivaroppsett\n"
 "\n"
-"Denne vegvisaren vil hjelpa deg å installera skrivarane kopla til denne maskina.\n"
+"Denne vegvisaren vil hjelpa deg å installera skrivarane kopla til denne "
+"maskina.\n"
 "\n"
 "Kopla til og slå på alle skrivarane kopla til maskina.\n"
 "\n"
-"Trykk «Neste» når du er klar, eller trykk «Avbryt» om du ikkje vil setja opp skrivarar no."
+"Trykk «Neste» når du er klar, eller trykk «Avbryt» om du ikkje vil setja opp "
+"skrivarar no."
 
 #: printer/printerdrake.pm:1067
 #, c-format
@@ -11948,13 +12034,18 @@ msgstr ""
 "\n"
 "Velkommen til vegvisaren for skrivaroppsett\n"
 "\n"
-"Denne vegvisaren vil hjelpa deg å installera skrivarane kopla til denne maskina eller kopla direkte til nettverket.\n"
+"Denne vegvisaren vil hjelpa deg å installera skrivarane kopla til denne "
+"maskina eller kopla direkte til nettverket.\n"
 "\n"
-"Kopla til og slå på alle skrivarane kopla til maskina og eventuelle nettverksskrivarar.\n"
+"Kopla til og slå på alle skrivarane kopla til maskina og eventuelle "
+"nettverksskrivarar.\n"
 "\n"
-"Merk at automatisk oppdaging av skrivarar på nettverket tek lenger tid enn oppdaging av skrivarar kopla til maskina. Du bør derfor slå av automatisk oppdaging av nettverksskrivarar om du ikkje treng dette.\n"
+"Merk at automatisk oppdaging av skrivarar på nettverket tek lenger tid enn "
+"oppdaging av skrivarar kopla til maskina. Du bør derfor slå av automatisk "
+"oppdaging av nettverksskrivarar om du ikkje treng dette.\n"
 "\n"
-"Trykk «Neste» når du er klar, eller trykk «Avbryt» om du ikkje vil setja opp skrivarar no."
+"Trykk «Neste» når du er klar, eller trykk «Avbryt» om du ikkje vil setja opp "
+"skrivarar no."
 
 #: printer/printerdrake.pm:1076
 #, c-format
@@ -11974,11 +12065,13 @@ msgstr ""
 "\n"
 "Velkommen til vegvisaren for skrivaroppsett\n"
 "\n"
-"Denne vegvisaren vil hjelpa deg å installera skrivarane kopla til denne maskina.\n"
+"Denne vegvisaren vil hjelpa deg å installera skrivarane kopla til denne "
+"maskina.\n"
 "\n"
 "Kopla til og slå på alle skrivarane kopla til maskina.\n"
 "\n"
-"Trykk «Neste» når du er klar, eller trykk «Avbryt» om du ikkje vil setja opp skrivarar no."
+"Trykk «Neste» når du er klar, eller trykk «Avbryt» om du ikkje vil setja opp "
+"skrivarar no."
 
 #: printer/printerdrake.pm:1085
 #, c-format
@@ -11996,6 +12089,11 @@ msgid "Auto-detect printers connected to machines running Microsoft Windows"
 msgstr "Finn automatisk skrivarar kopla til Windows-maskiner"
 
 #: printer/printerdrake.pm:1108
+#, fuzzy, c-format
+msgid "No auto-detection"
+msgstr "Oppdag automatisk"
+
+#: printer/printerdrake.pm:1173
 #, c-format
 msgid ""
 "\n"
@@ -12132,7 +12230,8 @@ msgstr ""
 
 #: printer/printerdrake.pm:1313
 #, c-format
-msgid "Alternatively, you can specify a device name/file name in the input line"
+msgid ""
+"Alternatively, you can specify a device name/file name in the input line"
 msgstr "Du kan òg velja einings- eller filnamnet på linje"
 
 #: printer/printerdrake.pm:1314 printer/printerdrake.pm:1323
@@ -12552,14 +12651,20 @@ msgid ""
 "level checking, nozzle cleaning. head alignment, ...) on all not too old "
 "inkjets, scanning on multi-function devices, and memory card access on "
 "printers with card readers. "
-msgstr "På mange HP-skrivarar finst det eigne funksjonar for vedlikehald (kontroll av blekknivå, blekkdyserensing, skrivarhovudjusering og anna), for skanning med fleirfunksjonseiningar, og for bruk av minnekort på skrivarar med innebygde kortlesarar."
+msgstr ""
+"På mange HP-skrivarar finst det eigne funksjonar for vedlikehald (kontroll "
+"av blekknivå, blekkdyserensing, skrivarhovudjusering og anna), for skanning "
+"med fleirfunksjonseiningar, og for bruk av minnekort på skrivarar med "
+"innebygde kortlesarar."
 
 #: printer/printerdrake.pm:2106
 #, c-format
 msgid ""
 "To access these extra functions on your HP printer, it must be set up with "
 "the appropriate software: "
-msgstr "For at du kan bruka desse funksjonane på HP-skrivaren må du først installera den nødvendige programvara: "
+msgstr ""
+"For at du kan bruka desse funksjonane på HP-skrivaren må du først installera "
+"den nødvendige programvara: "
 
 #: printer/printerdrake.pm:2107
 #, c-format
@@ -12567,14 +12672,19 @@ msgid ""
 "Either with the newer HPLIP which allows printer maintenance through the "
 "easy-to-use graphical application \"Toolbox\" and four-edge full-bleed on "
 "newer PhotoSmart models "
-msgstr "Du kan anten bruka det nye programmet HPLIP, som har eit grafisk brukargrensesnitt for vedlikehald og bruk av kantlaus utskrift (på nyare PhotoSmart-skrivarar), "
+msgstr ""
+"Du kan anten bruka det nye programmet HPLIP, som har eit grafisk "
+"brukargrensesnitt for vedlikehald og bruk av kantlaus utskrift (på nyare "
+"PhotoSmart-skrivarar), "
 
 #: printer/printerdrake.pm:2108
 #, c-format
 msgid ""
 "or with the older HPOJ which allows only scanner and memory card access, but "
 "could help you in case of failure of HPLIP. "
-msgstr "eller du kan bruka det gamle programmet HPOJ som berre gjev tilgang til skannar og minnekort, men kan vera nyttig viss HPLIP ikkje fungerer."
+msgstr ""
+"eller du kan bruka det gamle programmet HPOJ som berre gjev tilgang til "
+"skannar og minnekort, men kan vera nyttig viss HPLIP ikkje fungerer."
 
 #: printer/printerdrake.pm:2110
 #, c-format
@@ -13304,7 +13414,8 @@ msgid ""
 "features of your printer are supported.\n"
 "\n"
 msgstr ""
-"%s er sett opp med HPLIP-drivarprogramvara til HP. Mange spesialfunksjonar i skrivaren er no støtta.\n"
+"%s er sett opp med HPLIP-drivarprogramvara til HP. Mange spesialfunksjonar i "
+"skrivaren er no støtta.\n"
 "\n"
 
 #: printer/printerdrake.pm:3830
@@ -13312,7 +13423,9 @@ msgstr ""
 msgid ""
 "The scanner in your printer can be used with the usual SANE software, for "
 "example Kooka or XSane (Both in the Multimedia/Graphics menu). "
-msgstr "Skannaren i skrivaren kan brukast med vanleg SANE-basert programvare, som Kooka og XSane (du finn begge under «Multimedia | Bilete»-menyen)."
+msgstr ""
+"Skannaren i skrivaren kan brukast med vanleg SANE-basert programvare, som "
+"Kooka og XSane (du finn begge under «Multimedia | Bilete»-menyen)."
 
 #: printer/printerdrake.pm:3831
 #, c-format
@@ -13321,7 +13434,8 @@ msgid ""
 "your scanner on the network.\n"
 "\n"
 msgstr ""
-"Køyr skannaroppsettet («Maskinvare | Skannarar» i Mandrakelinux-kontrollsenteret) for å setja opp deling av skannaren over nettverket.\n"
+"Køyr skannaroppsettet («Maskinvare | Skannarar» i Mandrakelinux-"
+"kontrollsenteret) for å setja opp deling av skannaren over nettverket.\n"
 "\n"
 
 #: printer/printerdrake.pm:3835
@@ -13329,7 +13443,9 @@ msgstr ""
 msgid ""
 "The memory card readers in your printer can be accessed like a usual USB "
 "mass storage device. "
-msgstr "Du kan bruka minnekortlesaren i skrivaren som ei vanleg USB-basert lagringseining."
+msgstr ""
+"Du kan bruka minnekortlesaren i skrivaren som ei vanleg USB-basert "
+"lagringseining."
 
 #: printer/printerdrake.pm:3836
 #, c-format
@@ -13337,7 +13453,10 @@ msgid ""
 "After inserting a card a hard disk icon to access the card should appear on "
 "your desktop.\n"
 "\n"
-msgstr "Når du set inn eit kort skal det dukka opp eit harddiskikon for kortet på skrivebordet.\n\n"
+msgstr ""
+"Når du set inn eit kort skal det dukka opp eit harddiskikon for kortet på "
+"skrivebordet.\n"
+"\n"
 
 #: printer/printerdrake.pm:3838
 #, c-format
@@ -13345,7 +13464,10 @@ msgid ""
 "The memory card readers in your printer can be accessed using HP's Printer "
 "Toolbox (Menu: System/Monitoring/HP Printer Toolbox) clicking the \"Access "
 "Photo Cards...\" button on the \"Functions\" tab. "
-msgstr "Du får tilgang til minnekortlesaren i skrivaren gjennom programvara «HP Printer Toolbox» («System | Overvaking | HP Printer Toolbox» i menyen). Trykk på «Access Photo Cards»-knappen under fana «Functions»."
+msgstr ""
+"Du får tilgang til minnekortlesaren i skrivaren gjennom programvara «HP "
+"Printer Toolbox» («System | Overvaking | HP Printer Toolbox» i menyen). "
+"Trykk på «Access Photo Cards»-knappen under fana «Functions»."
 
 #: printer/printerdrake.pm:3839
 #, c-format
@@ -13353,7 +13475,10 @@ msgid ""
 "Note that this is very slow, reading the pictures from the camera or a USB "
 "card reader is usually faster.\n"
 "\n"
-msgstr "Merk at dette tar lang tid. Det går vanlegvis raskare å lesa bileta frå kameraet eller frå ein vanleg USB-basert kortlesar.\n\n"
+msgstr ""
+"Merk at dette tar lang tid. Det går vanlegvis raskare å lesa bileta frå "
+"kameraet eller frå ein vanleg USB-basert kortlesar.\n"
+"\n"
 
 #: printer/printerdrake.pm:3842
 #, c-format
@@ -13361,7 +13486,11 @@ msgid ""
 "HP's Printer Toolbox (Menu: System/Monitoring/HP Printer Toolbox) offers a "
 "lot of status monitoring and maintenance functions for your %s:\n"
 "\n"
-msgstr "Programvara «HP Printer Toolbox» («System | Overvaking | HP Printer Toolbox» i menyen) inneheld statusinformasjon og mange vedlikehaldsfunksjonar for «%s»:\n\n"
+msgstr ""
+"Programvara «HP Printer Toolbox» («System | Overvaking | HP Printer Toolbox» "
+"i menyen) inneheld statusinformasjon og mange vedlikehaldsfunksjonar for «%"
+"s»:\n"
+"\n"
 
 #: printer/printerdrake.pm:3843
 #, c-format
@@ -13478,7 +13607,8 @@ msgstr "LPD og LPRng støttar ikkje IPP-skrivarar.\n"
 msgid ""
 "In addition, queues not created with this program or \"foomatic-configure\" "
 "cannot be transferred."
-msgstr "I tillegg kan ikkje køar laga i programmet «foomatic-configure» overførast."
+msgstr ""
+"I tillegg kan ikkje køar laga i programmet «foomatic-configure» overførast."
 
 #: printer/printerdrake.pm:3940
 #, c-format
@@ -13772,7 +13902,8 @@ msgstr ""
 #: printer/printerdrake.pm:4355
 #, c-format
 msgid "2. All printing requests are immediately sent to a remote CUPS server. "
-msgstr "2  Alle utskrifter vert sendt direkte til ein CUPS-tenar på nettverket."
+msgstr ""
+"2  Alle utskrifter vert sendt direkte til ein CUPS-tenar på nettverket."
 
 #: printer/printerdrake.pm:4356
 #, c-format
@@ -14041,7 +14172,8 @@ msgstr "Klarte ikkje installera pakkane for deling av skannar(ar)."
 #: scanner.pm:202
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
-msgstr "Skannaren/-ane vil ikkje vera tilgjengeleg for andre brukarar enn «root»."
+msgstr ""
+"Skannaren/-ane vil ikkje vera tilgjengeleg for andre brukarar enn «root»."
 
 #: security/help.pm:11
 #, c-format
@@ -14138,7 +14270,9 @@ msgstr ""
 msgid ""
 "The argument specifies if clients are authorized to connect\n"
 "to the X server from the network on the tcp port 6000 or not."
-msgstr "Argumentet seier om klientar får kopla til X-tenaren frå nettverket på TCP-port 6000."
+msgstr ""
+"Argumentet seier om klientar får kopla til X-tenaren frå nettverket på TCP-"
+"port 6000."
 
 #. -PO: here "ALL", "LOCAL" and "NONE" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
@@ -14218,7 +14352,8 @@ msgstr ""
 
 #: security/help.pm:90
 #, c-format
-msgid " Enabling su only from members of the wheel group or allow su from any user."
+msgid ""
+" Enabling su only from members of the wheel group or allow su from any user."
 msgstr ""
 
 #: security/help.pm:92
@@ -14337,7 +14472,8 @@ msgstr ""
 
 #: security/help.pm:127
 #, c-format
-msgid "if set, send the mail report to this email address else send it to root."
+msgid ""
+"if set, send the mail report to this email address else send it to root."
 msgstr ""
 
 #: security/help.pm:128
@@ -14734,7 +14870,8 @@ msgstr "Bruk libsafe for tenarar"
 
 #: security/level.pm:63
 #, c-format
-msgid "A library which defends against buffer overflow and format string attacks."
+msgid ""
+"A library which defends against buffer overflow and format string attacks."
 msgstr ""
 
 #: security/level.pm:64
@@ -14801,7 +14938,8 @@ msgstr ""
 
 #: services.pm:35
 #, c-format
-msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid ""
+"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr "Apache er ein vevtenar."
 
 #: services.pm:36
@@ -15097,14 +15235,20 @@ msgid ""
 "system, called the <b>operating system</b> (based on the Linux kernel) "
 "together with <b>a lot of applications</b> meeting every need you could even "
 "think of."
-msgstr "Mandrakelinux er ein <b>Linux-distribusjon</b> som inneheld kjerna i systemet, sjølve <b>operativsystemet</b> (basert på Linux-kjerna), samt <b>mange program</b> som vil dekka alle behov du måtte ha."
+msgstr ""
+"Mandrakelinux er ein <b>Linux-distribusjon</b> som inneheld kjerna i "
+"systemet, sjølve <b>operativsystemet</b> (basert på Linux-kjerna), samt "
+"<b>mange program</b> som vil dekka alle behov du måtte ha."
 
 #: share/advertising/01.pl:19
 #, c-format
 msgid ""
 "Mandrakelinux is the most <b>user-friendly</b> Linux distribution today. It "
 "is also one of the <b>most widely used</b> Linux distributions worldwide!"
-msgstr "Mandrakelinux er den mest <b>brukarvenlege</b> Linux-distribusjonen tilgjengeleg. Det er òg ein av dei <b>mest brukte</b> Linux-distribusjonane i verda!"
+msgstr ""
+"Mandrakelinux er den mest <b>brukarvenlege</b> Linux-distribusjonen "
+"tilgjengeleg. Det er òg ein av dei <b>mest brukte</b> Linux-distribusjonane "
+"i verda!"
 
 #: share/advertising/02.pl:13
 #, c-format
@@ -15130,7 +15274,8 @@ msgstr ""
 msgid ""
 "We would like to <b>thank</b> everyone who participated in the development "
 "of this latest release."
-msgstr "Me ønskjer å <b>takka</b> alle som har delteke i utviklinga av denne utgåva."
+msgstr ""
+"Me ønskjer å <b>takka</b> alle som har delteke i utviklinga av denne utgåva."
 
 #: share/advertising/03.pl:13
 #, c-format
@@ -15142,7 +15287,9 @@ msgstr "<b>GPL-lisensen</b>"
 msgid ""
 "Most of the software included in the distribution and all of the "
 "Mandrakelinux tools are licensed under the <b>General Public License</b>."
-msgstr "Dei fleste programma i distribusjonen, samt alle Mandrakelinux-verktøya er lisensiert under <b>GNU General Public License</b>."
+msgstr ""
+"Dei fleste programma i distribusjonen, samt alle Mandrakelinux-verktøya er "
+"lisensiert under <b>GNU General Public License</b>."
 
 #: share/advertising/03.pl:17
 #, c-format
@@ -15202,7 +15349,8 @@ msgstr ""
 
 #: share/advertising/05.pl:18
 #, c-format
-msgid "\t* <b>Proprietary drivers</b> (such as drivers for NVIDIA®, ATI™, etc.)."
+msgid ""
+"\t* <b>Proprietary drivers</b> (such as drivers for NVIDIA®, ATI™, etc.)."
 msgstr "\t– <b>Godseigde drivarar</b> (som drivarar for NVIDIA® og ATI™)."
 
 #: share/advertising/05.pl:19
@@ -15459,7 +15607,8 @@ msgstr "<b>Kontact</b>"
 
 #: share/advertising/15.pl:15
 #, c-format
-msgid "Discovery includes <b>Kontact</b>, the new KDE <b>groupware solution</b>."
+msgid ""
+"Discovery includes <b>Kontact</b>, the new KDE <b>groupware solution</b>."
 msgstr ""
 
 #: share/advertising/15.pl:17
@@ -15475,7 +15624,9 @@ msgstr ""
 msgid ""
 "It is the easiest way to communicate with your contacts and to organize your "
 "time."
-msgstr "Det er den enklaste måten du kan kommunisera med vennar og kjende på, og å organisera tida."
+msgstr ""
+"Det er den enklaste måten du kan kommunisera med vennar og kjende på, og å "
+"organisera tida."
 
 #: share/advertising/16.pl:13
 #, c-format
@@ -15586,7 +15737,8 @@ msgstr "<b>Utviklingsmiljø</b>"
 
 #: share/advertising/19.pl:15 share/advertising/22.pl:15
 #, c-format
-msgid "PowerPack gives you the best tools to <b>develop</b> your own applications."
+msgid ""
+"PowerPack gives you the best tools to <b>develop</b> your own applications."
 msgstr ""
 
 #: share/advertising/19.pl:17
@@ -15627,7 +15779,8 @@ msgstr ""
 
 #: share/advertising/20.pl:18
 #, c-format
-msgid "\t* <b>Vim</b>: an advanced text editor with more features than standard Vi."
+msgid ""
+"\t* <b>Vim</b>: an advanced text editor with more features than standard Vi."
 msgstr ""
 
 #: share/advertising/21.pl:13
@@ -15730,13 +15883,16 @@ msgstr "<b>Tenarar</b>"
 
 #: share/advertising/24.pl:15
 #, c-format
-msgid "Empower your business network with <b>premier server solutions</b> including:"
+msgid ""
+"Empower your business network with <b>premier server solutions</b> including:"
 msgstr ""
 
 #: share/advertising/24.pl:16
 #, c-format
-msgid "\t* <b>Samba</b>: File and print services for Microsoft® Windows® clients."
-msgstr "\t– <b>Samba</b>: Fil- og utskriftstenester for Microsoft® Windows®-klientar."
+msgid ""
+"\t* <b>Samba</b>: File and print services for Microsoft® Windows® clients."
+msgstr ""
+"\t– <b>Samba</b>: Fil- og utskriftstenester for Microsoft® Windows®-klientar."
 
 #: share/advertising/24.pl:17
 #, c-format
@@ -15748,7 +15904,9 @@ msgstr "\t– <b>Apache</b>: Den mest brukte vevtenaren."
 msgid ""
 "\t* <b>MySQL</b> and <b>PostgreSQL</b>: The world's most popular open source "
 "databases."
-msgstr "\t– <b>MySQL</b> og <b>PostgreSQL</b>: Verdas mest populære databasar basert på open kjeldekode."
+msgstr ""
+"\t– <b>MySQL</b> og <b>PostgreSQL</b>: Verdas mest populære databasar basert "
+"på open kjeldekode."
 
 #: share/advertising/24.pl:19
 #, c-format
@@ -15759,7 +15917,8 @@ msgstr ""
 
 #: share/advertising/24.pl:20
 #, c-format
-msgid "\t* <b>ProFTPD</b>: The highly configurable GPL-licensed FTP server software."
+msgid ""
+"\t* <b>ProFTPD</b>: The highly configurable GPL-licensed FTP server software."
 msgstr ""
 
 #: share/advertising/24.pl:21
@@ -15851,7 +16010,8 @@ msgstr ""
 
 #: share/advertising/28.pl:17
 #, c-format
-msgid "Take advantage of <b>valuable benefits</b> by joining Mandrakeclub, such as:"
+msgid ""
+"Take advantage of <b>valuable benefits</b> by joining Mandrakeclub, such as:"
 msgstr ""
 
 #: share/advertising/28.pl:18
@@ -15909,17 +16069,19 @@ msgstr ""
 msgid ""
 "\t* <b>Notification</b> of updates (by e-mail or by an applet on the "
 "desktop)."
-msgstr "\t– <b>Varsel</b> om oppdateringar (gjennom e-post eller gjennom eit miniprogram på skrivebordet)."
+msgstr ""
+"\t– <b>Varsel</b> om oppdateringar (gjennom e-post eller gjennom eit "
+"miniprogram på skrivebordet)."
 
 #: share/advertising/29.pl:20
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "\t* Flexible <b>scheduled</b> updates."
 msgstr "\t– Fleksible <b>oppdateringsplanar</b> updates."
 
 #: share/advertising/29.pl:21
 #, c-format
-msgid "\t* Management of <b>all your Mandrakelinux systems</b> with one account."
+msgid ""
+"\t* Management of <b>all your Mandrakelinux systems</b> with one account."
 msgstr ""
 
 #: share/advertising/30.pl:13
@@ -15997,7 +16159,9 @@ msgstr "Internett-maskin"
 msgid ""
 "Set of tools to read and send mail and news (mutt, tin..) and to browse the "
 "Web"
-msgstr "Program for lesing og sending av e-post, deltaking i diskusjonsgrupper og surfing på Internett"
+msgstr ""
+"Program for lesing og sending av e-post, deltaking i diskusjonsgrupper og "
+"surfing på Internett"
 
 #: share/compssUsers.pl:49
 #, c-format
@@ -16242,6 +16406,11 @@ msgstr "Mandrakesoft-vegvisarar"
 #, c-format
 msgid "Wizards to configure server"
 msgstr "Vegvisarar for tenaroppsett"
+
+#: share/compssUsers.pl.~1.8.~:196
+#, fuzzy, c-format
+msgid "MandrakeSoft Wizards"
+msgstr "Mandrakesoft-vegvisarar"
 
 #: standalone.pm:21
 #, c-format
@@ -17592,7 +17761,8 @@ msgstr ""
 
 #: standalone/drakbackup:1127
 #, c-format
-msgid "Error during sending file via FTP. Please correct your FTP configuration."
+msgid ""
+"Error during sending file via FTP. Please correct your FTP configuration."
 msgstr ""
 
 #: standalone/drakbackup:1129
@@ -17648,7 +17818,8 @@ msgstr ""
 
 #: standalone/drakbackup:1421
 #, c-format
-msgid "These options can backup and restore all files in your /etc directory.\n"
+msgid ""
+"These options can backup and restore all files in your /etc directory.\n"
 msgstr "Her kan du ta kopi av og gjenoppretta alle filer i «/etc»-mappa.\n"
 
 #: standalone/drakbackup:1422
@@ -18054,7 +18225,8 @@ msgstr "Hugs å sjekka at at cron-nissen vert starta automatisk."
 
 #: standalone/drakbackup:2157
 #, c-format
-msgid "If your machine is not on all the time, you might want to install anacron."
+msgid ""
+"If your machine is not on all the time, you might want to install anacron."
 msgstr ""
 
 #: standalone/drakbackup:2158
@@ -18085,7 +18257,8 @@ msgstr "SMTP-tenar for e-post:"
 #: standalone/drakbackup:2222
 #, c-format
 msgid "Delete Hard Drive tar files after backup to other media."
-msgstr "Slett reservekopifilene frå harddisken etter kopiering til andre medium"
+msgstr ""
+"Slett reservekopifilene frå harddisken etter kopiering til andre medium"
 
 #: standalone/drakbackup:2262
 #, c-format
@@ -19211,6 +19384,16 @@ msgstr "DHCP"
 
 #: standalone/drakconnect:438
 #, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:394
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:470
+#, c-format
 msgid "Metric"
 msgstr "Matrisk"
 
@@ -19290,7 +19473,8 @@ msgstr "Plassering på bussen"
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
 "hardware configuration tool."
-msgstr "Fann ikkje noko nettverkskort. Prøv å køyra maskinvareoppsettverktøyet."
+msgstr ""
+"Fann ikkje noko nettverkskort. Prøv å køyra maskinvareoppsettverktøyet."
 
 #: standalone/drakconnect:679
 #, c-format
@@ -19315,7 +19499,8 @@ msgstr ""
 
 #: standalone/drakconnect:716
 #, c-format
-msgid "Congratulations, the \"%s\" network interface has been successfully deleted"
+msgid ""
+"Congratulations, the \"%s\" network interface has been successfully deleted"
 msgstr "Nettverksgrensesnittet «%s» er no fjerna."
 
 #: standalone/drakconnect:732
@@ -19363,7 +19548,8 @@ msgstr "Koplar til ..."
 msgid ""
 "Warning, another Internet connection has been detected, maybe using your "
 "network"
-msgstr "Åtvaring: Fann eit anna Internett-samband som kanskje brukar nettverket ditt."
+msgstr ""
+"Åtvaring: Fann eit anna Internett-samband som kanskje brukar nettverket ditt."
 
 #: standalone/drakconnect:838
 #, c-format
@@ -20225,7 +20411,8 @@ msgstr ""
 
 #: standalone/drakhelp:23
 #, c-format
-msgid " --id <id_label>       - load the html help page which refers to id_label\n"
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 
 #: standalone/drakhelp:24
@@ -20552,7 +20739,8 @@ msgstr ""
 
 #: standalone/drakpxe:197
 #, c-format
-msgid "No CD or DVD image found, please copy the installation program and rpm files."
+msgid ""
+"No CD or DVD image found, please copy the installation program and rpm files."
 msgstr ""
 
 #: standalone/drakpxe:210
@@ -22342,7 +22530,8 @@ msgstr "oversikta over alternative drivarar for lydkortet"
 
 #: standalone/harddrake2:27
 #, c-format
-msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid ""
+"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
 
 #: standalone/harddrake2:29 standalone/harddrake2:144
@@ -22848,7 +23037,8 @@ msgstr "Einingsfil"
 
 #: standalone/harddrake2:113
 #, c-format
-msgid "the device file used to communicate with the kernel driver for the mouse"
+msgid ""
+"the device file used to communicate with the kernel driver for the mouse"
 msgstr "einingsfila for musa brukt til å kommunisera med kjernedrivaren"
 
 #: standalone/harddrake2:114
@@ -22964,6 +23154,11 @@ msgstr "/Finn automatisk _modem"
 msgid "/Autodetect _jaz drives"
 msgstr "/Finn automatisk _Jaz-stasjonar"
 
+#: standalone/harddrake2:188
+#, c-format
+msgid "/_Upload the hardware list"
+msgstr ""
+
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
 msgid "/_Quit"
@@ -23058,7 +23253,8 @@ msgstr "Ymse"
 
 #: standalone/harddrake2:339
 #, c-format
-msgid "Click on a device in the left tree in order to display its information here."
+msgid ""
+"Click on a device in the left tree in order to display its information here."
 msgstr "Trykk på ei eining til venstre for å sjå informasjon om eininga her."
 
 #: standalone/harddrake2:391
@@ -23080,6 +23276,31 @@ msgstr "brennar"
 #, c-format
 msgid "DVD"
 msgstr "DVD"
+
+#: standalone/harddrake2:525
+#, c-format
+msgid "Upload the hardware list"
+msgstr ""
+
+#: standalone/harddrake2:528
+#, fuzzy, c-format
+msgid "Upload the system configuration"
+msgstr "Systemoppsett"
+
+#: standalone/harddrake2:530
+#, fuzzy, c-format
+msgid "Account:"
+msgstr "Monter"
+
+#: standalone/harddrake2:531
+#, fuzzy, c-format
+msgid "Password:"
+msgstr "Passord"
+
+#: standalone/harddrake2:532
+#, fuzzy, c-format
+msgid "Hostname:"
+msgstr "Vertsnamn: "
 
 #: standalone/keyboarddrake:29
 #, c-format
@@ -23327,7 +23548,8 @@ msgstr "Tenesteoppsett"
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
-msgstr "Du vil motta ei varsling om ei av avmerkte tenestene ikkje lenger køyrer"
+msgstr ""
+"Du vil motta ei varsling om ei av avmerkte tenestene ikkje lenger køyrer"
 
 #: standalone/logdrake:421
 #, c-format
@@ -23407,7 +23629,8 @@ msgstr "Nettverket køyrer på grensesnittet %s"
 #: standalone/net_applet:42
 #, c-format
 msgid "Network is down on interface %s. Click on \"Configure Network\""
-msgstr "Nettverket køyrer ikkje på grensesnittet %s. Trykk på «Set opp nettverk»."
+msgstr ""
+"Nettverket køyrer ikkje på grensesnittet %s. Trykk på «Set opp nettverk»."
 
 #: standalone/net_applet:57 standalone/net_monitor:473
 #, c-format
@@ -23428,6 +23651,16 @@ msgstr "Overvak nettverk"
 #, c-format
 msgid "Configure Network"
 msgstr "Set opp nettverk"
+
+#: standalone/net_applet:69
+#, fuzzy, c-format
+msgid "Watched interface"
+msgstr "grensesnitt"
+
+#: standalone/net_applet:78
+#, fuzzy, c-format
+msgid "Profiles"
+msgstr "Mellomtenarar"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238
@@ -23830,7 +24063,8 @@ msgstr "Avbryt skannaroppsett."
 
 #: standalone/scannerdrake:60
 #, c-format
-msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
+msgid ""
+"Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr "Klarte ikkje installera pakkar nødvendige for å setja opp skannarar."
 
 #: standalone/scannerdrake:61
@@ -24425,4 +24659,3 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Feil ved installering."
-

@@ -710,6 +710,13 @@ msgstr "dalam?"
 msgid "What norm is your TV using?"
 msgstr ""
 
+#: Xconfig/xfree.pm:571
+#, c-format
+msgid ""
+"_:weird aspect ratio\n"
+"other"
+msgstr ""
+
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:231
@@ -8469,6 +8476,11 @@ msgstr "Universal"
 msgid "Any PS/2 & USB mice"
 msgstr ""
 
+#: mouse.pm:89
+#, fuzzy, c-format
+msgid "Microsoft Xbox Controller S"
+msgstr "Microsoft Explorer"
+
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
 msgid "Synaptics Touchpad"
@@ -9413,11 +9425,36 @@ msgstr "Mula pada baris nombor LINE"
 msgid "DHCP client"
 msgstr "(%ld)PELANGGAN >>> %s"
 
+#: network/netconnect.pm:1041 standalone/drakconnect:389
+#, fuzzy, c-format
+msgid "DHCP timeout (in seconds)"
+msgstr "Tentukan jenis sambungan (dalam dec)"
+
+#: network/netconnect.pm:1042 standalone/drakconnect:392
+#, fuzzy, c-format
+msgid "Get DNS servers from DHCP"
+msgstr "Alamat IP DCC:"
+
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP server from DHCP"
+msgstr ""
+
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD server from DHCP"
+msgstr ""
+
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
 #, fuzzy, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP dalam"
+
+#: network/netconnect.pm:1057 standalone/drakconnect:686
+#, fuzzy, c-format
+msgid "Netmask address should be in format 255.255.224.0"
+msgstr "Gateway dalam"
 
 #: network/netconnect.pm:1041
 #, fuzzy, c-format
@@ -9491,6 +9528,11 @@ msgid "Bitrate (in b/s)"
 msgstr "Hanya dalam %s: %s\n"
 
 #: network/netconnect.pm:1141
+#, c-format
+msgid "Use Wi-Fi Protected Access (WPA)"
+msgstr ""
+
+#: network/netconnect.pm:1168
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -9691,6 +9733,11 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "Konfigurasikan?"
 
 #: network/netconnect.pm:1336
+#, fuzzy, c-format
+msgid "Do you want to allow users to start the connection?"
+msgstr "mula?"
+
+#: network/netconnect.pm:1345
 #, fuzzy, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "mula?"
@@ -9922,6 +9969,11 @@ msgstr ""
 #, c-format
 msgid "maybe"
 msgstr ""
+
+#: pkgs.pm:474
+#, fuzzy, c-format
+msgid "Downloading file %s..."
+msgstr "Ke Fail"
 
 #: printer/cups.pm:103
 #, fuzzy, c-format
@@ -10932,6 +10984,11 @@ msgid "Auto-detect printers connected to machines running Microsoft Windows"
 msgstr ""
 
 #: printer/printerdrake.pm:1108
+#, fuzzy, c-format
+msgid "No auto-detection"
+msgstr "Auto indent"
+
+#: printer/printerdrake.pm:1173
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -14921,6 +14978,11 @@ msgstr "Pusat Kawalan Mandrake"
 msgid "Wizards to configure server"
 msgstr "dihantar kepada pencetak default"
 
+#: share/compssUsers.pl.~1.8.~:196
+#, fuzzy, c-format
+msgid "MandrakeSoft Wizards"
+msgstr "Pusat Kawalan Mandrake"
+
 #: standalone.pm:21
 #, fuzzy, c-format
 msgid ""
@@ -17835,6 +17897,16 @@ msgid "DHCP"
 msgstr ""
 
 #: standalone/drakconnect:438
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:394
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:470
 #, fuzzy, c-format
 msgid "Metric"
 msgstr "Metrik"
@@ -21598,6 +21670,11 @@ msgstr ""
 msgid "/Autodetect _jaz drives"
 msgstr ""
 
+#: standalone/harddrake2:188
+#, c-format
+msgid "/_Upload the hardware list"
+msgstr ""
+
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
 msgid "/_Quit"
@@ -21708,6 +21785,31 @@ msgstr ""
 #, c-format
 msgid "DVD"
 msgstr "DVD"
+
+#: standalone/harddrake2:525
+#, c-format
+msgid "Upload the hardware list"
+msgstr ""
+
+#: standalone/harddrake2:528
+#, fuzzy, c-format
+msgid "Upload the system configuration"
+msgstr "Pen&yelarasan Sistem"
+
+#: standalone/harddrake2:530
+#, fuzzy, c-format
+msgid "Account:"
+msgstr "Lekap"
+
+#: standalone/harddrake2:531
+#, fuzzy, c-format
+msgid "Password:"
+msgstr "Katalaluan"
+
+#: standalone/harddrake2:532
+#, fuzzy, c-format
+msgid "Hostname:"
+msgstr "Namahos"
 
 #: standalone/keyboarddrake:29
 #, c-format
@@ -22049,6 +22151,16 @@ msgstr "Rangkaian tidak dapat dicapai."
 #, fuzzy, c-format
 msgid "Configure Network"
 msgstr "Selaraskan Pilihan Rangkaian"
+
+#: standalone/net_applet:69
+#, fuzzy, c-format
+msgid "Watched interface"
+msgstr "Antaramuka"
+
+#: standalone/net_applet:78
+#, c-format
+msgid "Profiles"
+msgstr ""
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238

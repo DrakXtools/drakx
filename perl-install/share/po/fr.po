@@ -872,6 +872,13 @@ msgstr ""
 msgid "What norm is your TV using?"
 msgstr "Quelle norme utilise votre téléviseur ?"
 
+#: Xconfig/xfree.pm:571
+#, c-format
+msgid ""
+"_:weird aspect ratio\n"
+"other"
+msgstr ""
+
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
 #: standalone/drakups:101 standalone/drakxtv:92 standalone/harddrake2:231
@@ -5936,8 +5943,9 @@ msgstr "URL du miroir ?"
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
-msgstr "Ne peut trouver le fichier de liste de paquets sur ce miroir. Vérifiez "
-"que l'emplacement est correct."
+msgstr ""
+"Ne peut trouver le fichier de liste de paquets sur ce miroir. Vérifiez que "
+"l'emplacement est correct."
 
 #: install_any.pm:633
 #, c-format
@@ -9974,6 +9982,11 @@ msgstr "Universelle"
 msgid "Any PS/2 & USB mice"
 msgstr "N'importe quelle souris PS/2 ou USB"
 
+#: mouse.pm:89
+#, fuzzy, c-format
+msgid "Microsoft Xbox Controller S"
+msgstr "Microsoft Explorer"
+
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
 msgid "Synaptics Touchpad"
@@ -10981,11 +10994,38 @@ msgstr "Lancer au démarrage"
 msgid "DHCP client"
 msgstr "Client DHCP"
 
+#: network/netconnect.pm:1041 standalone/drakconnect:389
+#, fuzzy, c-format
+msgid "DHCP timeout (in seconds)"
+msgstr "Temps maxi pour établir la connexion (en sec.)"
+
+#: network/netconnect.pm:1042 standalone/drakconnect:392
+#, fuzzy, c-format
+msgid "Get DNS servers from DHCP"
+msgstr "L'adresse IP du serveur DNS"
+
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP server from DHCP"
+msgstr ""
+
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD server from DHCP"
+msgstr ""
+
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "L'adresse IP doit ressembler à quelque chose comme « 192.168.1.20 »"
+
+#: network/netconnect.pm:1057 standalone/drakconnect:686
+#, fuzzy, c-format
+msgid "Netmask address should be in format 255.255.224.0"
+msgstr ""
+"L'adresse de la passerelle doit ressembler à quelque chose comme "
+"« 192.168.1.20 »"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -11059,6 +11099,11 @@ msgid "Bitrate (in b/s)"
 msgstr "Taux de transfert (bits par seconde)"
 
 #: network/netconnect.pm:1141
+#, c-format
+msgid "Use Wi-Fi Protected Access (WPA)"
+msgstr ""
+
+#: network/netconnect.pm:1168
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -11321,6 +11366,11 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "La configuration est achevée, voulez-vous appliquer les changements ?"
 
 #: network/netconnect.pm:1336
+#, fuzzy, c-format
+msgid "Do you want to allow users to start the connection?"
+msgstr "Désirez-vous activer la connexion lors du démarrage ?"
+
+#: network/netconnect.pm:1345
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr "Désirez-vous activer la connexion lors du démarrage ?"
@@ -11589,6 +11639,11 @@ msgstr "utile"
 #, c-format
 msgid "maybe"
 msgstr "éventuellement"
+
+#: pkgs.pm:474
+#, fuzzy, c-format
+msgid "Downloading file %s..."
+msgstr "Envoi des fichiers..."
 
 #: printer/cups.pm:103
 #, c-format
@@ -12757,6 +12812,11 @@ msgstr ""
 "Détecter automatiquement les imprimantes reliées à des machines sous windows"
 
 #: printer/printerdrake.pm:1108
+#, fuzzy, c-format
+msgid "No auto-detection"
+msgstr "Autodétection"
+
+#: printer/printerdrake.pm:1173
 #, c-format
 msgid ""
 "\n"
@@ -14602,7 +14662,8 @@ msgid ""
 "use this mode, click \"Quit\" otherwise."
 msgstr ""
 "Donnez le nom d'hôte ou l'adresse IP de votre serveur CUPS\n"
-"et cliquez sur OK si vous voulez utiliser ce mode. Sinon, cliquez sur Quitter."
+"et cliquez sur OK si vous voulez utiliser ce mode. Sinon, cliquez sur "
+"Quitter."
 
 #: printer/printerdrake.pm:4309
 #, c-format
@@ -14679,8 +14740,8 @@ msgid ""
 "the specified server is down it cannot be printed at all from this machine. "
 msgstr ""
 "L'inconvénient est qu'il n'est pas possible de définir d'imprimantes locales "
-"ensuite, et que si le serveur d'impression spécifié est arrêté, il n'est plus "
-"possible d'imprimer de cet ordinateur."
+"ensuite, et que si le serveur d'impression spécifié est arrêté, il n'est "
+"plus possible d'imprimer de cet ordinateur."
 
 #: printer/printerdrake.pm:4359
 #, c-format
@@ -14995,8 +15056,8 @@ msgid ""
 "Allow/Forbid the list of users on the system on display managers (kdm and "
 "gdm)."
 msgstr ""
-"Permettre/interdire la liste des utilisateurs du système sur les gestionnaires "
-"de connexion (kdm et gdm)."
+"Permettre/interdire la liste des utilisateurs du système sur les "
+"gestionnaires de connexion (kdm et gdm)."
 
 #: security/help.pm:35
 #, c-format
@@ -15189,8 +15250,8 @@ msgstr ""
 #, c-format
 msgid "Set the password history length to prevent password reuse."
 msgstr ""
-"Régler la profondeur de l'historique des mots de passe pour éviter la "
-"leur réutilisation."
+"Régler la profondeur de l'historique des mots de passe pour éviter la leur "
+"réutilisation."
 
 #: security/help.pm:106
 #, c-format
@@ -15986,9 +16047,10 @@ msgid ""
 "it installed on machines that do not need it."
 msgstr ""
 "PCMCIA permet d'utiliser des périphériques PCCARD comme des cartes Ethernet "
-"ou des modems avec des ordinateurs portables. Ce service ne sera pas démarré, "
-"à moins qu'il ne soit correctement configuré. Il peut donc être activé sans "
-"danger sur des machines ne possédant pas ce type de périphériques."
+"ou des modems avec des ordinateurs portables. Ce service ne sera pas "
+"démarré, à moins qu'il ne soit correctement configuré. Il peut donc être "
+"activé sans danger sur des machines ne possédant pas ce type de "
+"périphériques."
 
 #: services.pm:70
 #, c-format
@@ -17532,6 +17594,11 @@ msgstr "Assistants Mandrakesoft"
 msgid "Wizards to configure server"
 msgstr "Assistants pour configurer le serveur"
 
+#: share/compssUsers.pl.~1.8.~:196
+#, fuzzy, c-format
+msgid "MandrakeSoft Wizards"
+msgstr "Assistants Mandrakesoft"
+
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -18124,8 +18191,8 @@ msgstr ""
 "ClusterNFS.\n"
 "\t\t\t\t\t\tRemarque : L'entrée « #type » est utilisée seulement par "
 "drakTermServ. Les clients peuvent être soit\n"
-"\t\t\t« légers », soit « lourds ». Les clients légers font tourner la plupart "
-"des logiciels sur le serveur via XDMCP, \n"
+"\t\t\t« légers », soit « lourds ». Les clients légers font tourner la "
+"plupart des logiciels sur le serveur via XDMCP, \n"
 "\t\t\ttandis que les clients lourds font tourner eux-mêmes leurs logiciels. "
 "Un fichier inittab spécial, %s est\n"
 "\t\t\técrit pour les clients légers. Les fichiers de configuration système "
@@ -18853,8 +18920,8 @@ msgid ""
 "This option will save files that have changed.  Exact behavior depends on "
 "whether incremental or differential mode is used."
 msgstr ""
-"Cette option permet de sauvegarder les fichiers qui ont changé. Le comportement "
-"exact dépend du mode (différentiel ou incrémental)."
+"Cette option permet de sauvegarder les fichiers qui ont changé. Le "
+"comportement exact dépend du mode (différentiel ou incrémental)."
 
 #: standalone/drakbackup:156
 #, c-format
@@ -20850,6 +20917,16 @@ msgstr "DHCP"
 
 #: standalone/drakconnect:438
 #, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:394
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
+
+#: standalone/drakconnect:470
+#, c-format
 msgid "Metric"
 msgstr "Métrique"
 
@@ -22005,7 +22082,8 @@ msgstr "--help                - afficher ce message\n"
 msgid ""
 " --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
-" --id <label_id>       - charger la page d'aide html identifiée par label_id\n"
+" --id <label_id>       - charger la page d'aide html identifiée par "
+"label_id\n"
 
 #: standalone/drakhelp:24
 #, c-format
@@ -25343,6 +25421,11 @@ msgstr "/Auto-détecter les _modems"
 msgid "/Autodetect _jaz drives"
 msgstr "/Auto-détecter les périphériques _Jaz"
 
+#: standalone/harddrake2:188
+#, c-format
+msgid "/_Upload the hardware list"
+msgstr ""
+
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
 msgid "/_Quit"
@@ -25461,6 +25544,31 @@ msgstr "graveur"
 #, c-format
 msgid "DVD"
 msgstr "DVD"
+
+#: standalone/harddrake2:525
+#, c-format
+msgid "Upload the hardware list"
+msgstr ""
+
+#: standalone/harddrake2:528
+#, fuzzy, c-format
+msgid "Upload the system configuration"
+msgstr "Configuration du système"
+
+#: standalone/harddrake2:530
+#, fuzzy, c-format
+msgid "Account:"
+msgstr "Monter"
+
+#: standalone/harddrake2:531
+#, fuzzy, c-format
+msgid "Password:"
+msgstr "Mot de passe"
+
+#: standalone/harddrake2:532
+#, fuzzy, c-format
+msgid "Hostname:"
+msgstr "Nom de machine : "
 
 #: standalone/keyboarddrake:29
 #, c-format
@@ -25815,6 +25923,16 @@ msgstr "Surveillance Réseau"
 #, c-format
 msgid "Configure Network"
 msgstr "Configuration du Réseau"
+
+#: standalone/net_applet:69
+#, fuzzy, c-format
+msgid "Watched interface"
+msgstr "interfaces"
+
+#: standalone/net_applet:78
+#, fuzzy, c-format
+msgid "Profiles"
+msgstr "Proxys"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238
@@ -26352,8 +26470,8 @@ msgid ""
 "It is possible that your scanners need their firmware to be uploaded "
 "everytime when they are turned on."
 msgstr ""
-"Il est possible que vos scanners nécessitent que leur firmware soit chargé "
-"à chaque fois qu'ils sont branchés."
+"Il est possible que vos scanners nécessitent que leur firmware soit chargé à "
+"chaque fois qu'ils sont branchés."
 
 #: standalone/scannerdrake:230
 #, c-format
