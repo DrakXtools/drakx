@@ -112,7 +112,7 @@ sub test {
         $my_gtk::force_position = [ $w / 3, $h / 2.4 ];
 	$my_gtk::force_focus = 1;
         my $text = Gtk::Label->new;
-        my $time = 8;
+        my $time = 12;
         Gtk->timeout_add(1000, sub {
 	    $text->set(_("Leaving in %d seconds", $time));
 	    $time-- or Gtk->main_quit;
