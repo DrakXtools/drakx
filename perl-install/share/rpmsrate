@@ -76,9 +76,9 @@ PUBLISHING
   1 BOOKS docbook-style-dsssl-doc
 
   5 CUPS 
-      cups-drivers xpp
+      foomatic cups-drivers xpp
       KDE kups
-  5 LPR rhs-printfilters
+  5 LPR foomatic
 
 SHELLS
   3 zsh
@@ -495,6 +495,7 @@ INSTALL
     XFree86 XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa
     XFree86-3DLabs XFree86-FBDev
     kernel kernel-smp kernel-enterprise kernel22 kernel22-smp kernel22-secure 
-    autologin foomatic ntp cups-drivers lpr samba ncpfs ghostscript-utils
-    reiserfsprogs ipchains printer-utils rlpr samba-client ncpfs nc ImageMagick
-    xpp LPRng pdq kups
+    autologin ntp reiserfsprogs ipchains
+    cups LPRng lpr pdq foomatic printer-utils printer-testpages gimpprint xpp 
+    qtcups kups cups-drivers rlpr samba samba-common samba-client ncpfs nc 
+    ImageMagick ghostscript printer-filters mpage libgimpprint4
