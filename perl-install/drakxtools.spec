@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 0.34mdk
+Release: 1mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -291,6 +291,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Tue Feb 18 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-1mdk
+- fix "nothing to edit" in drakperm (#1769)
+- fix draksec help
+- drakedm: fix badly generated config file by 3rd party progs
+- i18n fixes (pablo, gc)
+- scannerdrake updates (till)
+- diskdrake fixes (pixel)
+- printerdrake fixes (till)
+
 * Mon Feb 17 2003 Till Kamppeter <till@mandrakesoft.com> 9.1-0.34mdk
 - Fixed automatic print queue generation for HP DeskJet 990C.
 
