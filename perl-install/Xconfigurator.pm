@@ -73,16 +73,18 @@ sub readCardsDB {
     \%cards;
 }
 sub readCardsNames {
-    my $file = "/usr/X11R6/lib/X11/CardsNames";
+    my $file = "/usr/share/ldetect-lst/CardsNames";
     local *F; open F, $file or die "can't find $file\n";
-    map { (split '=>')[0] } <F>;
+    map { (split '=>')[0] } grep { !/^#/ } <F>;
 }
 sub cardName2RealName {
-    my $file = "/usr/X11R6/lib/X11/CardsNames";
+    my $file = "/usr/share/ldetect-lst/CardsNames";
     my ($name) = @_;
     local *F; open F, $file or die "can't find $file\n";
     local $_;
-    while (<F>) { chop;
+    while (<F>) { 
+	chop;
+	next if /^#/;	  
 	my ($name_, $real) = split '=>';
 	return $real if $name eq $name_;
     }
@@ -90,7 +92,7 @@ sub cardName2RealName {
 }
 sub updateCardAccordingName {
     my ($card, $name) = @_;
-    my $cards = readCardsDB("/usr/X11R6/lib/X11/Cards+");
+    my $cards = readCardsDB("/usr/share/ldetect-lst/Cards+");
 
     add2hash($card->{flags}, $cards->{$name}{flags});
     add2hash($card, $cards->{$name});
