@@ -387,7 +387,7 @@ sub test_mouse_install {
     gtkadd($w->{window},
   	   gtkpack(my $vbox_grab = new Gtk::VBox(0,0),
 		   gtksize(gtkset_usize($darea, $width+1, $height+1), $width+1, $height+1),
-		   my $okcancel = gtkset_sensitive(create_okcancel($w, '', '', "edge"), 1)
+		   my $okcancel = gtkset_sensitive(create_okcancel($w, undef, undef, "edge"), 1)
 		  ),
 	  );
     $okcancel->set_uposition(7, $height-43);
