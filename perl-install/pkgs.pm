@@ -275,12 +275,16 @@ sub unselectPackage($$;$) {
     $pkg->flag_selected or return;
 
     my $state = $packages->{state} ||= {};
+    log::l("removing selection on package ".$pkg->fullname);
     my @l = $packages->disable_selected($packages->{rpmdb}, $state, $pkg);
+    log::l("   removed selection on package ".$pkg->fullname. "gives ".join(',', map { scalar $_->fullname } @l));
     if ($o_otherOnly) {
 	foreach (@l) {
 	    $o_otherOnly->{$_->id} = undef;
 	}
+	log::l("   reselecting removed selection...");
 	$packages->resolve_requested($packages->{rpmdb}, $state, $o_otherOnly, callback_choices => \&packageCallbackChoices);
+	log::l("   done");
     }
     1;
 }
@@ -762,6 +766,25 @@ sub rpmDbOpen {
     $db;
 }
 
+sub rpmDbOpenForInstall {
+    my ($prefix) = @_;
+
+    #- there is a bug in rpm 4.2 where all operations for accessing rpmdb files are not
+    #- always done using prefix, we need to setup a symlink in /var/lib/rpm for that ...
+    unless (-e "/var/lib/rpm") {
+	#- check if at some time a /var/lib directory has been made.
+	if (-d "/var/lib") {
+	    symlinkf "$prefix/var/lib/rpm", "/var/lib/rpm";
+	} else {
+	    symlinkf "$prefix/var/lib", "/var/lib";
+	}
+    }
+
+    my $db = URPM::DB::open($prefix, 1);
+    $db and log::l("opened rpmdb for writing in $prefix");
+    $db;
+}
+
 sub cleanOldRpmDb {
     my ($prefix) = @_;
     my $failed;
@@ -986,7 +1009,7 @@ sub install($$$;$$) {
 			print OUTPUT "inst:$id:start:0:$size_typical\ninst:$id:progress:0:$size_typical\nclose:$id\n";
 		    }
 		} else { eval {
-		    my $db = URPM::DB::open($prefix, 1) or die "error opening RPM database: ", c::rpmErrorString();
+		    my $db = rpmDbOpenForInstall($prefix) or die "error opening RPM database: ", c::rpmErrorString();
 		    my $trans = $db->create_transaction($prefix);
 		    if ($retry_pkg) {
 			log::l("opened rpm database for retry transaction of 1 package only");
@@ -1116,7 +1139,7 @@ sub remove {
     return if $::g_auto_install || !@{$toRemove || []};
 
     delete $packages->{rpmdb}; #- make sure rpmdb is closed before.
-    my $db = URPM::DB::open($prefix, 1) or die "error opening RPM database: ", c::rpmErrorString();
+    my $db = rpmDbOpenForInstall($prefix) or die "error opening RPM database: ", c::rpmErrorString();
     my $trans = $db->create_transaction($prefix);
 
     foreach my $p (@$toRemove) {
