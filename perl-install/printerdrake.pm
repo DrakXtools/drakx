@@ -18,8 +18,12 @@ sub auto_detect {
     {
 	my $w = $in->wait_message(_("Test ports"), _("Detecting devices..."));
 	modules::get_alias("usb-interface") and eval { modules::load("printer"); sleep(2); };
-	eval { modules::load_multi("parport_pc", "lp"); };
-	eval { modules::load("parport_probe"); }; #- take care as not available on 2.4 kernel (silent error).
+	foreach (qw(parport_pc lp parport_probe parport)) {
+	    eval { modules::unload($_); }; #- on kernel 2.4 parport has to be unloaded to probe again
+	}
+	foreach (qw(parport_pc lp parport_probe)) {
+	    eval { modules::load($_); }; #- take care as not available on 2.4 kernel (silent error).
+	}
     }
     my $b = before_leaving { eval { modules::unload("parport_probe") } };
     detect_devices::whatPrinter();
