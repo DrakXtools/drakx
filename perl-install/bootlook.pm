@@ -40,10 +40,11 @@ if ($::isEmbedded) {
   print "CCPID :  $::CCPID\n";
 }
 
-my $in = interactive::vnew('su');
+my $in = 'interactive'->vnew('su', 'default');
 local $_ = join '', @ARGV;
 
-/-h/ and die _("$Id$\nno help implemented yet.\n");
+/-h/ and die _("no help implemented yet.\n");
+/-version/ and die 'version: $Id$'."\n";
 
 my @winm;
 my @usernames;
