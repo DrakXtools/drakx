@@ -139,7 +139,7 @@ sub getAndSaveFile {
     my ($file, $local) = @_ == 1 ? ("Mandrake/mdkinst$_[0]", $_[0]) : @_;
     local $/ = \ (16 * 1024);
     my $f = ref($file) ? $file : getFile($file) or return;
-    open(my $F, ">$local") or return;
+    open(my $F, ">$local") or log::l("getAndSaveFile(opening $local): $!"), return;
     local $_;
     while (<$f>) { syswrite($F, $_) or die("getAndSaveFile($local): $!") }
     1;
