@@ -237,13 +237,58 @@ else
 				    ) or goto step_ask_confirm;
     defined $device or quit_global($in, 0);
 }
-log::l("[drakgw] Choosing network card: $device\n");
-
-grep(/$device/, @configured_devices) and
-    ($in->ask_okcancel('', _("Warning, the network adapter is already configured. I will reconfigure it.")) or goto step_detectsetup);
+log::l("[drakgw] Choosing network card: $device");
 
 
-my $lan_address = "192.168.0";
+my $lan_address = "192.168.0.0";
+my $server_ip = "192.168.0.1";
+
+my $reconf_dhcp_server_intf = 1;
+
+if (grep(/$device/, @configured_devices)) {
+  step_warning_already_conf:
+    my $auto = _('Yes');
+    my $conf = network::read_interface_conf("/etc/sysconfig/network-scripts/ifcfg-$device");
+    $in->ask_from(_("Network interface already configured"),
+		  _("Warning, the network adapter (%s) is already configured.
+
+Do you want an automatic re-configuration?
+
+You can do it manually but you need to know what you're doing.", $device),
+		  [ { label => _("Automatic reconfiguration"), val => \$auto, list => [ _('Yes'), _('No (experts only)') ] },
+		    { val => _("Show current interface configuration"), clicked =>
+		      sub { $in->ask_warn(_('Current interface configuration'),
+					  _("Current configuration of `%s':
+
+Network: %s
+IP address: %s
+IP attribution: %s
+Driver: %s", $device, $conf->{NETWORK}, $conf->{IPADDR}, $conf->{BOOTPROTO}, $aliased_devices{$device} || '(unknown)')) } } ]) or goto step_detectsetup;
+    
+    if ($auto ne _('Yes')) {
+	$reconf_dhcp_server_intf = 0;
+	$server_ip = $conf->{IPADDR};
+	$lan_address = $conf->{NETWORK};
+	$in->ask_from('',
+		      _("I can keep your current configuration and assume you already set up a DHCP server; in that case please verify I correctly read the C-Class Network that you use for your local network; I will not reconfigure it and I will not touch your DHCP server configuration.
+
+Else, I can reconfigure your interface and (re)configure a DHCP server for you.
+
+", $device),
+		      [ { label => _("C-Class Local Network"), val => \$lan_address, type => 'entry' },
+			{ label => _("(This) DHCP Server IP"), val => \$server_ip, type => 'entry' },
+			{ label => _("Re-configure interface and DHCP server"), val => \$reconf_dhcp_server_intf, type => 'bool' } ])
+	  or goto step_warning_already_conf;
+    }
+}
+    
+if (!($lan_address =~ s/\.0$//)) {
+    $in->ask_warn('', 
+		  _("The Local Network did not finish with `.0', bailing out."));
+    quit_global($in, 0);
+}
+
+log::l("[drakgw] Lan address <$lan_address> ; will reconf (bool) <$reconf_dhcp_server_intf>");
 
 
 #- test for potential conflict with other networks
@@ -280,17 +325,19 @@ $wait_configuring = $in->wait_message(_("Configuring..."),
 
 #- setup the /etc/sysconfig/network-script/ script
 
-my $network_scripts = "/etc/sysconfig/network-scripts";
-my $ifcfg = "$network_scripts/ifcfg-$device";
-renamef($ifcfg, "$network_scripts/old.ifcfg-$device");
-output($ifcfg, qq(DEVICE=$device
+if ($reconf_dhcp_server_intf) {
+    my $network_scripts = "/etc/sysconfig/network-scripts";
+    my $ifcfg = "$network_scripts/ifcfg-$device";
+    renamef($ifcfg, "$network_scripts/old.ifcfg-$device");
+    output($ifcfg, qq(DEVICE=$device
 BOOTPROTO=static
-IPADDR=$lan_address.1
+IPADDR=$server_ip
 NETMASK=255.255.255.0
 NETWORK=$lan_address.0
 BROADCAST=$lan_address.255
 ONBOOT=yes
 ));
+}
 
 
 #- install and setup the RPM packages
@@ -489,20 +536,23 @@ substInFile { s/^FORWARD_IPV4.*\n//; $_ .= "FORWARD_IPV4=true\n" if eof } $sysco
 
 #- setup the DHCP server
 
-renamef($dhcpd_conf, "$dhcpd_conf.old");
-output($dhcpd_conf, qq(subnet $lan_address.0 netmask 255.255.255.0 {
+if ($reconf_dhcp_server_intf) {
+    renamef($dhcpd_conf, "$dhcpd_conf.old");
+    output($dhcpd_conf, qq(subnet $lan_address.0 netmask 255.255.255.0 {
 	# default gateway
-	option routers $lan_address.1;
+	option routers $server_ip;
 	option subnet-mask 255.255.255.0;
 
 	option domain-name "homelan.org";
-	option domain-name-servers $lan_address.1;
+	option domain-name-servers $server_ip;
 
 	range dynamic-bootp $lan_address.16 $lan_address.253;
 	default-lease-time 21600;
 	max-lease-time 43200;
 }
 ));
+}
+
 my $update_dhcp = '/usr/sbin/update_dhcp.pl';
 -e $update_dhcp and system($update_dhcp);
 
@@ -535,7 +585,7 @@ substInFile { s/^INTERFACES\n//; $_ .= "INTERFACES=\"$device\"\n" if eof } $sysc
 #- These steps are only done when the CUPS package is installed.
 
 substInFile {
-    s/^ServerName[^:].*\n//; $_ .= "ServerName $lan_address.1\n" if eof;
+    s/^ServerName[^:].*\n//; $_ .= "ServerName $server_ip\n" if eof;
     s/^BrowseAddress.*\n//; $_ .= "BrowseAddress $lan_address.255\n" if eof;
     s/^BrowseOrder.*\n//; $_ .= "BrowseOrder Deny,Allow\n" if eof;
     s/^BrowseDeny.*\n//; $_ .= "BrowseDeny All\n" if eof;
@@ -602,7 +652,7 @@ _("Everything has been configured.
 You may now share Internet connection with other computers on your Local Area Network, using automatic network configuration (DHCP)."));
 
 
-log::l("[drakgw] Installation complete, exiting\n");
+log::l("[drakgw] Installation complete, exiting");
 quit_global($in, 0);
 
 sub quit_global {
@@ -666,6 +716,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.57  2001/12/17 17:58:20  gc
+#- drakgw for gold
+#-
 #- Revision 1.56  2001/10/30 19:10:41  gc
 #- use isa rather than ref to test if we're gtk
 #-

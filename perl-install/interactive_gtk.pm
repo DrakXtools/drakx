@@ -404,12 +404,20 @@ sub ask_fromW {
 	    $w = Gtk::Button->new('');
 	    $w->signal_connect(clicked => sub {
 		$get_all->();
-		$mainw->{rwindow}->hide;
+		if ($::isWizard) {
+		    $mainw->{rwindow}->set_sensitive(0);
+		} else {
+		    $mainw->{rwindow}->hide;
+		}
 		if (my $v = $e->{clicked_may_quit}()) {
 		    $mainw->{retval} = $v;
 		    Gtk->main_quit;
 		}
-		$mainw->{rwindow}->show;
+		if ($::isWizard) {
+		    $mainw->{rwindow}->set_sensitive(1);
+		} else {
+		    $mainw->{rwindow}->show;
+		}
 		$set_all->();
 	    });
 	    $set = sub { $w->child->set(may_apply($e->{format}, $_[0])) };
