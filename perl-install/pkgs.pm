@@ -28,7 +28,7 @@ our %compssListDesc = (
 );
 
 #- constant for small transaction.
-our $limitMinTrans = 8;
+our $limitMinTrans = 13;
 
 
 #- package to ignore, typically in Application CD. OBSOLETED ?
@@ -895,6 +895,8 @@ sub install($$$;$$) {
 
     return if $::g_auto_install || !scalar(@$toInstall);
 
+    delete $packages->{rpmdb}; #- make sure rpmdb is closed before.
+
     #- for root loopback'ed /boot
     my $loop_boot = loopback::prepare_boot();
 
@@ -996,7 +998,7 @@ sub install($$$;$$) {
 			  foreach @transToInstall;
 		    }
 
-		    $trans->order or die "error ordering package list: " . c::rpmErrorString();
+		    #$trans->order or die "error ordering package list: " . c::rpmErrorString();
 		    $trans->set_script_fd(fileno $LOG);
 
 		    log::l("rpm transactions start");
@@ -1112,6 +1114,7 @@ sub remove {
 
     return if $::g_auto_install || !@{$toRemove || []};
 
+    delete $packages->{rpmdb}; #- make sure rpmdb is closed before.
     my $db = URPM::DB::open($prefix, 1) or die "error opening RPM database: ", c::rpmErrorString();
     my $trans = $db->create_transaction($prefix);
 
