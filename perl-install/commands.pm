@@ -335,33 +335,20 @@ sub more {
 sub insmod {
     my ($h) = getopts(\@_, qw(h));
     $h || @_ == 0 and die "usage: insmod <module> [options]\n";
-    my $f = local $_ = shift;
+    my $f = shift;
 
     require run_program;
+    require modules;
 
-    #- try to install the module if it exist else extract it from archive.
-    #- needed for cardmgr.
-    unless (-r $f) {
-	$_ = $1 if m!.*/([^/]*)\.o!;
-	unless (-r ($f = "/lib/modules/$_.o")) {
-	    $f = "/tmp/$_.o";
-	    my $cz = "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz";
-	    -e $cz or $cz .= '-'.c::kernel_version();
-	    if (-e $cz) {
-		eval {
-		    require packdrake;
-		    my $packer = new packdrake($cz, quiet => 1);
-		    $packer->extract_archive("/tmp", "$_.o");
-		};
-	    } elsif (-e "/lib/modules.cpio.bz2") {
-		run_program::run("cd /tmp ; $ENV{LD_LOADER} bzip2 -cd /lib/modules.cpio.bz2 | $ENV{LD_LOADER} cpio -i $_.o");
-	    } else {
-		die "unable to find an archive for modules";
-	    }
-	}
+    if (! -r $f) {
+	my $name = basename($f);
+	$name =~ s/\.k?o$//;
+	($f) = modules::extract_modules('/tmp', $name);
     }
-    -r $f or die "can't find module $_";
-    run_program::run(["/usr/bin/insmod_", "insmod"], "-f", $f, @_) or die("insmod $_ failed");
+    if (! -r $f) {
+	die "can't find module $f\n";
+    }
+    run_program::run(["/usr/bin/insmod_", "insmod"], "-f", $f, @_) or die("insmod $f failed");
     unlink $f;
 }
 
