@@ -895,7 +895,7 @@ sub miscellaneousBefore {
     $o->{miscellaneous}{HDPARM} = $s{HDPARM} if exists $s{HDPARM};
     require security::level;
     require security::various;
-    $o->{security} ||= security::level::get() || ($o->{meta_class} =~ /server|firewall/ ? 3 : 2);
+    $o->{security} ||= security::level::get() || 3;
     $o->{security_user} ||= security::various::config_security_user($o->{prefix});
     $o->{libsafe} ||= security::various::config_libsafe($o->{prefix});
 
