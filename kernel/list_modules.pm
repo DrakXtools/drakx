@@ -210,7 +210,7 @@ sub category2modules {
 	map { 
 	    my $l = $l{$t1}{$_} or die "bad category $t1/$_\n" . backtrace();
 	    @$l;
-	} split('\|', $t2s);
+	} $t2s eq '*' ? keys %{$l{$t1}} : split('\|', $t2s);
     } split(' ', $_[0]);
 }
 
