@@ -211,7 +211,7 @@ sub isdn_detect_backend() {
 	    modules::set_options($c->{driver}, $c->{options} . " protocol=" . $isdn->{protocol});
 	}
 	$c->{options} =~ /protocol=(\d)/ and $isdn->{protocol} = $1;
-    } modules::probe_category('network/isdn'), grep { $_->{driver} =~ /^ISDN:/ } detect_devices::probeall();
+    } modules::probe_category('network/isdn');
     $isdn;
 }
 
