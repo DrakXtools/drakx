@@ -64,7 +64,7 @@ get_needed_files: $(DIRS)
 	find auto -follow -name "*.so" >> /tmp/list
 
 	for i in $(LOCALFILES) `cat /tmp/list` ; do \
-		ldd $$i 2>/dev/null | grep -v "not a dynamic" | sed -e 's/.*=> //' -e 's/ .*//' | uniq | sort >> /tmp/list; \
+		ldd $$i 2>/dev/null | grep "=>" | sed -e 's/.*=> //' -e 's/ .*//' | uniq | sort >> /tmp/list; \
 	done
 
 	install -d $(DEST)/etc

@@ -36,6 +36,9 @@ _ "$sudo rm -rf $tmp" if -e $tmp;
 _ "mkdir $tmp";
 _ 'find . -name "*~" | xargs rm -f';
 _ "cp -a tree/* $tmp";
+_ "mkdir -p lib tmp modules proc";
+
+
 foreach (keyboard::loadkeys_files) {
     install($_);
     symlink "$2.kmap.gz", "$tmp$1/$3.kmap.gz" if m|(.*)/((..).+)\.kmap\.gz|;

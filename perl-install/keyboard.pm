@@ -176,15 +176,19 @@ sub loadkeys_files {
     my $p = "/usr/lib/kbd/keymaps/i386/*";
     my $post = ".kmap.gz";
     my %trans = ("cz-latin2" => "cz-lat2");
-    my @l;
+    my (@l, %l);
     foreach (values %keyboards) {
 	local $_ = $trans{$_->[1]} || $_->[1];
 	my ($l) = glob("$p/$_$post");
 	$l or /(..)/ and ($l) = glob("$p/$1$post");
-	push @l, $l if $l;
-	print STDERR "unknown $_\n" if $_[0] && !$l;
-    }
-    @l;
+	print STDERR "unknown $_\n" if $_[0] && !$l; $l or next;
+	push @l, $l;
+	foreach (`zgrep include $l | grep "^include"`) {
+	    /include\s+"(.*)"/ or die "bad line $_";
+	    @l{glob("$p/$1.inc.gz")} = ();
+	}
+    }        
+    @l, keys %l, map { glob("$p/$_.inc.gz") } qw(compose euro windowkeys linux-keys-bare);
 }
 
 sub lang2keyboard($) {
