@@ -544,18 +544,18 @@ killall pppd
                         return 'adsl_unsupported_eci' if $adsl_device eq 'eci';
                         $netconnect::need_restart_network = member($adsl_device, qw(speedtouch eci));
                         $in->do_pkgs->ensure_is_installed(@{$packages{$adsl_device}}) if $packages{$adsl_device};
-                        return 'adsl_sagem800' if $adsl_device eq 'sagem';
                         if ($adsl_device eq 'speedtouch' && !$::testing) {
                             $in->do_pkgs->what_provides("speedtouch_mgmt") and 
                               $in->do_pkgs->ensure_is_installed('speedtouch_mgmt', '/usr/share/speedtouch/mgmt.o', 'auto');
                             return 'adsl_speedtouch_firmware' if ! -e "$prefix/usr/share/speedtouch/mgmt.o";
                         }
+                        return 'adsl_provider' if $adsl_devices{$adsl_device};
                         return 'adsl_protocol';
                     },
                    },
 
                    
-                   adsl_sagem800 =>
+                   adsl_provider =>
                    {
                     pre => sub {
                         require network::adsl_consts;
@@ -609,7 +609,7 @@ or skip and do it later."),
 
                         # kept translations b/c we may want to reuse it later:
                         N("Firmware copy succeeded");
-                        return $adsl_failed ? 'adsl_copy_firmware_failled' : 'adsl_protocol';
+                        return $adsl_failed ? 'adsl_copy_firmware_failled' : 'adsl_provider';
                     },
                    },
 
@@ -617,7 +617,7 @@ or skip and do it later."),
                    adsl_copy_firmware_failled =>
                    {
                     name => sub { $adsl_failed },
-                    next => 'adsl_protocol',
+                    next => 'adsl_provider',
                    },
 
                    
