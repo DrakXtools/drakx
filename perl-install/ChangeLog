@@ -1,3 +1,74 @@
+2004/07/27  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* standalone/drakbug: 
+	  - scroll down text while typing
+	  - many cleanups
+	  - Stable releases are 'Official' and 'Community'
+
+2004/07/27  jjorge
+
+	* share/po/pt.po: bunch of work
+
+2004/07/27  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/adsl.pm: '-e 1' option is unneeded with speedtouch >= 1.3
+
+2004/07/27  Pixel  <pixel at mandrakesoft.com>
+
+	* lvm.pm: 
+	  - add field {fs_type} partially replacing {pt_type}
+	{pt_type} is always a number, {fs_type} is always a string
+	  - introduce set_isFormatted()
+	  (to ensure {notFormatted} but also {fs_type_from_magic} and
+	{bad_fs_type_magic} are updated)
+	  - don't use 0x483 for ext3 anymore (same for reiserfs...),
+	  the type_name gives both a pt_type and a fs_type
+	  - many accessors from partition_table removed (type2fs(),
+	fs2pt_type())
+	  - remove isThisFs() (not useful anymore since we can use directly
+	{fs_type})
+	  - remove isFat() (inline the function)
+	  - other isXXX() from partition_table are moved to fs::type
+	  - part2name() is now fs::type::part2type_name
+	  - name2pt_type() is now fs::type::type_name2subpart()
+	  - partition_table::important_types() is now fs::type::type_names()
+	  - fsedit::typeOfPart() is now fs::type::fs_type_from_magic()
+	
+	  - no need to truncate type_name since they are shorter
+	a {type} didn't get moved to {pt_type}, fixing
+
+	* loopback.pm, any.pm, partition_table/mac.pm, partition_table/bsd.pm,
+	diskdrake/interactive.pm, partition_table/dos.pm, fs.pm,
+	install_steps.pm, diskdrake/removable.pm, bootloader.pm,
+	partition_table/sun.pm, partition_table/gpt.pm,
+	install_steps_interactive.pm, network/smbnfs.pm, diskdrake/dav.pm,
+	diskdrake/hd_gtk.pm, fs/type.pm, fsedit.pm, install2.pm, raid.pm,
+	fs/format.pm, install_interactive.pm, install_any.pm,
+	partition_table.pm: 
+	  - add field {fs_type} partially replacing {pt_type}
+	{pt_type} is always a number, {fs_type} is always a string
+	  - introduce set_isFormatted()
+	  (to ensure {notFormatted} but also {fs_type_from_magic} and
+	{bad_fs_type_magic} are updated)
+	  - don't use 0x483 for ext3 anymore (same for reiserfs...),
+	  the type_name gives both a pt_type and a fs_type
+	  - many accessors from partition_table removed (type2fs(),
+	fs2pt_type())
+	  - remove isThisFs() (not useful anymore since we can use directly
+	{fs_type})
+	  - remove isFat() (inline the function)
+	  - other isXXX() from partition_table are moved to fs::type
+	  - part2name() is now fs::type::part2type_name
+	  - name2pt_type() is now fs::type::type_name2subpart()
+	  - partition_table::important_types() is now fs::type::type_names()
+	  - fsedit::typeOfPart() is now fs::type::fs_type_from_magic()
+	
+	  - no need to truncate type_name since they are shorter
+
+2004/07/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/net_monitor: save/restore options
+
 2004/07/26  Fabian Mandelbaum  <fabman at 2vias.com.ar>
 
 	* share/po/es.po: Updated Spanish translations
@@ -33305,7 +33376,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.934 2004/07/26 02:53:48 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.935 2004/07/27 00:59:17 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
