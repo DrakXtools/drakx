@@ -366,6 +366,8 @@ sub stop_internet {
     run_program::rooted($prefix, $disconnect_file);
 }
 
+my @connection_types = (N_("modem"), N_(" isdn"), N_(" adsl"), N_(" cable"), N_(" local network")) ;
+
 #---------------------------------------------
 #                WONDERFULL pad
 #---------------------------------------------
