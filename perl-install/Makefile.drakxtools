@@ -40,7 +40,7 @@ install:
 
 	install -m 644 *.pm $(LIBDEST)
 	for i in $(PMS_DIRS); do install -d $(LIBDEST)/$$i ; install -m 644 $$i/*.pm $(LIBDEST)/$$i/;done
-	install -m 644 pixmaps/* $(PIXDIR)
+	install -m 644 pixmaps/*.* $(PIXDIR)
 	install -m 644 share/diskdrake.rc $(DATADIR)/$(NAME)
 
 	install -d $(PREFIX)/etc/security
