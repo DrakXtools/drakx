@@ -77,7 +77,7 @@ my %languages = (
 'no@nynorsk' => [ 'Norwegian (Nynorsk)','iso-8859-1', 'no', 'no@nynorsk:ny:no_NY:no' ],
 #-'oc'  => [ 'Occitan',			'iso-8859-1', 'oc', 'oc:fr_FR' ],
 #-'pd'	=> [ 'Plauttdietsch',		'iso-8859-1', 'pd', 'pd' ],
-#-'ph'  => [ 'Pilipino',		'iso-8859-1', 'ph', 'ph' ],
+#-'ph'  => [ 'Pilipino',		'iso-8859-1', 'ph', 'ph:tl' ],
   'pl'  => [ 'Polish',			'iso-8859-2', 'pl', 'pl' ],
 #-'pp'	=> [ 'Papiamento',		'iso-8859-1', 'pp', 'pp' ],
 'pt_BR' => [ 'Portuguese (Brazil)',	'iso-8859-1', 'pt_BR', 'pt_BR:pt_PT:pt' ],
@@ -88,10 +88,12 @@ my %languages = (
   'sl'  => [ 'Slovenian',		'iso-8859-2', 'sl', 'sl' ],
   'sp'  => [ 'Serbian (Cyrillic)',	'iso-8859-5', 'sp', 'sp:sr' ],
   'sr'  => [ 'Serbian (Latin)',		'iso-8859-2', 'sr', 'sr' ],
-  'sv'  => [ 'Swedish',			'iso-8859-1', 'sv', 'sv' ],
-  'ta'	=> [ 'Tamil',			'tscii-0',    'ta', 'ta' ],
+'sv@traditionell' => [ 'Swedish (traditional sorting)','iso-8859-1', 'sv', 'sv' ],
+'sv@ny' => [ 'Swedish (new sorting (v diff of w)','iso-8859-1', 'sv', 'sv' ],
+#-'ta'	=> [ 'Tamil',			'tscii-0',    'ta', 'ta' ],
   'th'  => [ 'Thai',                    'tis620',     'th', 'th' ],
   'tr'  => [ 'Turkish',	 		'iso-8859-9', 'tr', 'tr' ],
+#-'ur'	=> [ 'Urdu',			'????',	      'ur', 'ur' ],  
 'uk_UA' => [ 'Ukrainian', 		'koi8-u',     'uk', 'uk_UA:uk' ],
   'vi'  => [ 'Vietnamese (TCVN)',       'tcvn',       'vi',
 					'vi_VN.tcvn:vi_VN.tcvn-5712:vi' ],
@@ -240,8 +242,6 @@ sub set {
 	$ENV{LC_ALL}    = $lang;
 	$ENV{LANG}      = $languages{$lang}[2];
 	$ENV{LANGUAGE}  = $languages{$lang}[3];
-#- apparently autoconf/automake doesn't like LINGUAS having a list of values
-#-	$ENV{LINGUAS}   = $languages{$lang}[3];
     } else {
 	# stick with the default (English) */
 	delete $ENV{LANG};
@@ -266,8 +266,8 @@ sub write {
 
     $lang or return;
 
-    my $h = { LC_CTYPE => $lang };
-    add2hash $h, { LC_COLLATE => $lang };
+    my $h = { LC_COLLATE => $lang };
+    add2hash $h, { LC_CTYPE => $lang };
     add2hash $h, { LC_MESSAGES => $lang };
     add2hash $h, { LC_NUMERIC => $lang };
     add2hash $h, { LC_MONETARY => $lang };
