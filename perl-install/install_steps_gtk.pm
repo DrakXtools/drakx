@@ -41,6 +41,8 @@ sub new($$) {
 	}
 	my $launchX = sub {
 	    my ($server, $Driver) = @_;
+            $::move and goto launch_X;
+
 	    my $xpmac_opts = cat_('/proc/cmdline');
 	    install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{mouse}{wacom}[0], $Driver);
 
@@ -56,6 +58,7 @@ sub new($$) {
 	    push @options, '-fp', '/usr/X11R6/lib/X11/fonts:unscaled' if $server =~ /Xsun|Xpmac/;
 	    push @options, '-ac', '-geometry', $o->{vga16} ? '640x480' : '800x600' if $server eq 'Xnest';
 
+          launch_X:
 	    if (!fork()) {
 		c::setsid();
 		exec $server, @options or exit 1;
@@ -98,12 +101,20 @@ sub new($$) {
 	    @servers = map { if_($_, "Driver:$_") } $card && $card->{Driver}, 'fbdev';
 	} elsif (arch() eq "ppc") {
 	    @servers = qw(Xpmac);
+        }
+
+        if ($::move) {
+            require move;
+            require run_program;
+            move::automatic_xconf($o);
+            run_program::rooted('', '/sbin/service', 'xfs', 'start');
+            @servers = qw(X);
 	}
 
 	foreach (@servers) {
 	    log::l("Trying with server $_");
 	    my $dir = "/usr/X11R6/bin";
-	    my ($prog, $Driver) = /Driver:(.*)/ ? ('XFree86', $1) : /Xsun|Xpmac|Xnest/ ? $_ : "XF86_$_";
+	    my ($prog, $Driver) = /Driver:(.*)/ ? ('XFree86', $1) : /Xsun|Xpmac|Xnest|^X$/ ? $_ : "XF86_$_";
 	    unless (-x "$dir/$prog") {
 		unlink $_ foreach glob_("$dir/X*");
 		install_any::getAndSaveFile("Mandrake/mdkinst$dir/$prog", "$dir/$prog") or die "failed to get server $prog: $!";
@@ -118,6 +129,7 @@ sub new($$) {
 		$o->{vga16} = 1 if /VGA16/;
 		&$launchX($prog, $Driver) and goto OK;
 	    }
+            $::move and die "can't launch graphical mode :(\n";
 	}
 	return undef;
     }

@@ -429,12 +429,9 @@ sub main {
     if ($::move) {
         require move;
         move::init();
-        $::mdkinst = '';
-    } else {
-        $::mdkinst = 'Mandrake/mdkinst';
     }
 
-    $o->{prefix} = $::prefix = $::testing ? "/tmp/test-perl-install" : $::live ? "" : "/mnt";
+    $o->{prefix} = $::prefix = $::testing ? "/tmp/test-perl-install" : $::live || $::move ? "" : "/mnt";
     $o->{isUpgrade} = 1 if $::live;
     mkdir $o->{prefix}, 0755;
     devices::make("/dev/zero"); #- needed by ddcxinfos
