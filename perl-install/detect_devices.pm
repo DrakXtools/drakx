@@ -783,6 +783,11 @@ sub isLaptop() {
 	|| cat_('/proc/cpuinfo') =~ /\bmobile\b/i;
 }
 
+sub matching_type {
+    my ($type) = @_;
+    $type =~ /laptop/i && isLaptop();
+}
+
 sub usbMice()      { grep { $_->{media_type} =~ /\|Mouse/ && $_->{driver} !~ /Tablet:wacom/ ||
 			  $_->{driver} =~ /Mouse:USB/ } usb_probe() }
 sub usbWacom()     { grep { $_->{driver} =~ /Tablet:wacom/ } usb_probe() }
