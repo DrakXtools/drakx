@@ -68,14 +68,6 @@ sub mkinitrd {
     -e "$::prefix/$initrdImage";
 }
 
-sub mkbootdisk {
-    my ($kernelVersion, $dev, $append) = @_;
-
-    modules::load(if_(arch() =~ /sparc/, 'romfs'), 'loop', 'vfat');
-    my @l = if_($append, '--appendargs', $append);
-    run_program::rooted_or_die($::prefix, 'mkbootdisk', '--noprompt', @l, '--device', "/dev/$dev", $kernelVersion);
-}
-
 sub read() {
     my $file = sprintf("/etc/%s.conf", arch() =~ /sparc/ ? 'silo' : arch() =~ /ppc/ ? 'yaboot' : 'lilo');
     my $bootloader = $file =~ /lilo/ && detect_bootloader() =~ /GRUB/ ? read_grub() : read_lilo($file);

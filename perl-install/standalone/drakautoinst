@@ -92,7 +92,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
     ugtk2->import(qw(:helpers :wrappers :create));
 
     my %tree;
-    $struct_gui{$_} = 'General' foreach qw(lang isUpgrade autoExitInstall timezone default_packages mkbootdisk);
+    $struct_gui{$_} = 'General' foreach qw(lang isUpgrade autoExitInstall timezone default_packages);
     $struct_gui{$_} = 'Security' foreach qw(crypto security);
     $struct_gui{$_} = 'Harddrive' foreach qw(partitions manualFstab useSupermount partitioning);
     $struct_gui{$_} = 'Network' foreach qw(intf netc netcnx);

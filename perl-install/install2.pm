@@ -35,7 +35,6 @@ use fs;
 #-#######################################################################################
 $o = $::o = {
 #    bootloader => { linear => 0, message => 1, timeout => 5, restricted => 0 },
-    mkbootdisk => 0, #- no mkbootdisk if 0 or undef, find a floppy with 1, or fd1
 #-    packages   => [ qw() ],
     partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0 }, #-, readonly => 0 },
     authentication => { md5 => 1, shadow => 1 },
@@ -414,7 +413,6 @@ sub main {
 	(my $root = `/bin/pwd`) =~ s|(/[^/]*){5}$||;
 	symlinkf $root, "/tmp/image" or die "unable to create link /tmp/image";
 	$o->{method} ||= "cdrom";
-	$o->{mkbootdisk} = 0;
     }
     if (!$::testing && !$::live) {
 	symlink "rhimage", "/tmp/image"; #- for compatibility with old stage1
