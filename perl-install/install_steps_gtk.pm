@@ -181,7 +181,7 @@ sub selectInstallClass1 {
 sub selectMouse {
     my ($o, $force) = @_;
     my %old = %{$o->{mouse}};
-    $o->SUPER::selectMouse($force);
+    $o->SUPER::selectMouse($force) or return;
     my $mouse = $o->{mouse};
     $mouse->{type} eq 'none' ||
       $old{type}   eq $mouse->{type}   && 

@@ -250,6 +250,7 @@ sub selectMouse {
     } if $o->{mouse}{device} eq "usbmouse";
 
     $o->SUPER::selectMouse;
+    1;
 }
 #------------------------------------------------------------------------------
 sub setupSCSI {
