@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 2mdk
+Release: 3mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -367,6 +367,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Mar  9 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-3mdk
+- drakconnect:
+  o workaround buggy sk98lin kernel driver (#14163)
+  o write selected dhcp client in ifcfg files (blino)
+- draksec: fix setting null values (#14364)
+
 * Tue Mar  8 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-2mdk
 - drakconnect (oblin):
   o scan hidden ssid
