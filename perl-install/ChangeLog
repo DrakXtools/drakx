@@ -1,3 +1,61 @@
+2001/01/07  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/sr.po, share/po/sp.po, share/po/no.po, share/po/cs.po: updated
+	Czech, Norwegian and Serbian files
+
+2001/01/07  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: update code for new ask_from_entries_refH
+	which doesn't handle optional ok/cancel names in arg 1.
+	must be handled via ask_from_entries_refH_powered
+	(selectLanguage, selectKeyboard): use ask_from_entries_refH instead of
+	ask_from_listf_, it enables the use of advanced
+
+	* any.pm, printerdrake.pm: update code for new ask_from_entries_refH which
+	doesn't handle optional ok/cancel names in arg 1.
+	must be handled via ask_from_entries_refH_powered
+
+	* interactive.pm: update code for new ask_from_entries_refH which doesn't
+	handle optional ok/cancel names in arg 1.
+	must be handled via ask_from_entries_refH_powered
+	(ask_from_listf_no_check): replaces ask_from_list_no_check
+	(ask_from_entries_refH_powered): sorts the list if needed or wanted
+
+	* partition_table_raw.pm (test_for_bad_drives): created
+	- ugly stuff needed mainly for Western Digital IDE drives
+	- try writing what we've just read, yells if it fails
+	- testing on last sector of head #0 (unused in 99% cases)
+
+	* ftp.pm (getFile): make it work (it used to dead-loop when getFile'ing an
+	non-existent
+	file, stressing the ftp server :-/ )
+	for the moment, just release cdrom.img, hd.img and hdreiser.img
+	others should should come...
+
+	* install_steps.pm: for the moment, just release cdrom.img, hd.img and
+	hdreiser.img
+	others should should come...
+
+	* interactive_gtk.pm (ask_from_listW): removed
+	(create_list): calls "format" on list elems before prompting them
+	(create_clist): created
+	(ask_from_entries_refW): calls create_clist in case of list with no help
+
+	* install_steps_gtk.pm (installPackages): autoflush stdout before beeping
+	(installPackages): don't take into account the time when prompting the
+	user
+
+	* common.pm (may_apply): added
+
+	* install_any.pm (getHds): test_for_bad_drives called on hard drives
+	(getHds): ensure $o->{hds} is not set until the hard drives are checked
+
+2001/01/06  Pixel  <pixel@mandrakesoft.com>
+
+	* ChangeLog: New snapshot uploaded
+	New snapshot uploaded
+	New snapshot uploaded
+
 2001/01/06  Pixel  <pixel@mandrakesoft.com>
 
 	* ChangeLog: New snapshot uploaded
