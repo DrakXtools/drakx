@@ -15,7 +15,7 @@ sub install_matrox_hal {
     my $dest_dir = "$prefix/usr/X11R6/lib/modules/drivers";
 
     #- already installed
-    return if -e "$dest_dir/mga_hal_drv.o";
+    return if -e "$dest_dir/mga_hal_drv.o" || $::testing;
 
     system("wget -O $tmpdir/$tar ftp://ftp.matrox.com/pub/mga/archive/linux/2002/$tar") if !-e "$tmpdir/$tar";
     system("tar xzC $tmpdir -f $tmpdir/$tar");
@@ -30,3 +30,6 @@ sub install_matrox_hal {
     rm_rf("$tmpdir/$tar");
     rm_rf("$tmpdir/$dir_in_tar");
 }
+
+1;
+
