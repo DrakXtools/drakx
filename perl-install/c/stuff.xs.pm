@@ -26,6 +26,7 @@ print '
 #include <linux/kd.h>
 #include <linux/hdreg.h>
 #include <linux/vt.h>
+#include <linux/fd.h>
 #include <linux/cdrom.h>
 #include <linux/loop.h>
 #include <net/if.h>
@@ -233,6 +234,20 @@ isDvdDrive(fd)
   int fd
   CODE:
   RETVAL = ioctl(fd, CDROM_GET_CAPABILITY) & CDC_DVD;
+  OUTPUT:
+  RETVAL
+
+char *
+floppy_info(name)
+  char * name
+  CODE:
+  int fd = open(name, O_RDONLY | O_NONBLOCK);
+  RETVAL = NULL;
+  if (fd != -1) {
+     char drivtyp[17];
+     ioctl(fd, FDGETDRVTYP, (void *)drivtyp);
+     RETVAL = drivtyp;
+  }
   OUTPUT:
   RETVAL
 

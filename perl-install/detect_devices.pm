@@ -73,10 +73,15 @@ sub get_mac_generation() {
     return "Unknown Generation";	
 }
 
+sub dev_is_devfs { 0 && -e "/dev/.devfsd" }
+
 sub floppies() {
     require modules;
     eval { modules::load("floppy") };
-    my @fds = map {; { device => $_, media_type => 'fd' } } grep { tryOpen($_) } qw(fd0 fd1);
+    my @fds = map {
+	my $info = (!dev_is_devfs() || -e "/dev/$_") && c::floppy_info(devices::make($_));
+	if_($info && $info ne '(null)', { device => $_, media_type => 'fd', info => $info })
+    } qw(fd0 fd1);
     my @ide = ls120s() and modules::load("ide-floppy");
     my @scsi = grep { $_->{media_type} eq 'fd' } getSCSI();
     @ide, @scsi, @fds;
