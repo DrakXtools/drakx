@@ -323,6 +323,11 @@ sub convert_ttf_fonts {
 }
 
 
+sub move_fonts {
+    my ($src_dir, $dest_dir, @extensions) = @_;
+    my @fonts = map { s@.*/@@; $_ } map { glob("$src_dir/*.$_") } @extensions;
+    system("cd $src_dir && mv @fonts $dest_dir") if @fonts;
+}
 
 sub put_font_dir() {
     -e "/usr/share/ghostscript" or do { $gs = 0; print "ghostscript is not installed on your system...\n" };
@@ -346,17 +351,16 @@ sub put_font_dir() {
 
         if ($gs) {
             convert_ttf_fonts([ glob("$drakfont_dir/tmp/tmp/*.ttf") ], 1);
-            my @fonts = map { s@.*/@@; $_ } map { glob("$drakfont_dir/tmp/tmp/*.$_") } qw(gsf pfb pfm afm); 
-            system("cd $drakfont_dir/tmp/tmp && mv @fonts ../Type1") if @fonts;
+            move_fonts("$drakfont_dir/tmp/tmp", "../Type1", qw(afm gsf pfb pfm));
             system("cd $drakfont_dir/tmp/Type1 && $type1inst");
             interactive_progress($pbar2, 0.1, N("type1inst building"));
             if ($so) {
                 -e "$drakfont_dir/tmp/Type1/Fontmap" 
                   and system("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` ");
-                system("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.gsf *.afm *.pfb ../../Type1 ");
+                move_fonts("$drakfont_dir/tmp/Type1", "../../Type1", qw(afm gsf pfb pfm));
             } else {
                 system("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` ");
-                system("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.afm *.gsf *.pfb ../../Type1 ");
+                move_fonts("$drakfont_dir/tmp/Type1", "../../Type1", qw(afm gsf pfb pfm));
             }
             my $type1dir = $drakfont_dir . "/Type1";
             system("cd $type1dir && $fccache && $type1inst");
@@ -365,8 +369,8 @@ sub put_font_dir() {
         } elsif ($so) {
             convert_ttf_fonts([ glob("$drakfont_dir/tmp/tmp/*.ttf") ]);
             convert_fonts([ glob("$drakfont_dir/tmp/tmp/*.pfm") ], $pfm2afm, "PFM");
-            system("cd $drakfont_dir/tmp/tmp && mv  *.afm ../Type1");
-            system("cd $drakfont_dir/tmp/Type1 && mv *.afm ../../Type1 ");
+            move_fonts("$drakfont_dir/tmp/tmp", "../Type1", qw(afm));
+            move_fonts("$drakfont_dir/tmp/Type1", "../../Type1", qw(afm));
             my $type1dir = $drakfont_dir . "/Type1";
             system("cd $type1dir && $fccache && $type1inst");
             interactive_progress($pbar2, 0.14, N("type1inst building"));
