@@ -949,11 +949,12 @@ sub miscellaneousAfter {
     my ($o) = @_;
     add2hash_ $o, { useSupermount => 1 && $o->{security} < 4 && arch() !~ /sparc/ && !$::corporate };
 
-    $ENV{SECURE_LEVEL} = $o->{security};
+    $ENV{SECURE_LEVEL} = $o->{security}; #- deprecated with chkconfig 1.3.4-2mdk, uses /etc/sysconfig/msec
 
     addToBeDone {
 	mkdir_p("$o->{prefix}/etc/security/msec");
 	symlink "server.$o->{security}", "$o->{prefix}/etc/security/msec/server" if $o->{security} > 3;
+	setVarsInSh("$o->{prefix}/etc/sysconfig/msec", { SECURE_LEVEL => $o->{security} });
     } 'formatPartitions';
 
     addToBeDone {
