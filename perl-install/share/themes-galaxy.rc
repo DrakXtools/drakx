@@ -43,7 +43,6 @@ style "galaxy-default"
     }
 }
 
-
 style "galaxy-button" = "galaxy-default"
 {
   xthickness = 4
@@ -56,10 +55,15 @@ style "galaxy-thin" = "galaxy-default"
   ythickness = 1
 }
 
-
 style "galaxy-menu" = "galaxy-default"
 {
   fg[PRELIGHT]  = "#ffffff"
+}
+
+style "galaxy-progressbar"
+{
+    fg[PRELIGHT]   = "#ffffff"
+    base[SELECTED] = "#2145AC"
 }
 
 style "galaxy-tasklist" = "galaxy-default"
@@ -76,7 +80,7 @@ class "EComboButton" style "galaxy-thin"
 widget_class "*.EShortcutsView.GtkButton" style "galaxy-thin"
 widget_class "*Tree*GtkButton" style "galaxy-thin"
 widget_class "*List*GtkButton" style "galaxy-thin"
-class "GtkProgressBar" style "galaxy-menu"
+class "GtkProgressBar" style "galaxy-progressbar"
 class "GtkMenuItem" style "galaxy-menu"
 widget_class "*.GtkMenuItem.*" style "galaxy-menu"
 widget_class "*.GtkAccelMenuItem.*" style "galaxy-menu"
