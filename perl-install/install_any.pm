@@ -228,7 +228,7 @@ sub spawnShell {
 
     -x "/bin/sh" or die "cannot open shell - /bin/sh doesn't exist";
 
-    fork and return;
+    fork() and return;
 
     $ENV{DISPLAY} ||= ":0"; #- why not :pp
 
@@ -749,7 +749,7 @@ sub g_auto_install {
 
     local $o->{partitioning}{auto_allocate} = !$replay;
     $o->{autoExitInstall} = !$replay;
-    $o->{interactiveSteps} = [ 'doPartitionDisks', 'formatPartitions'] if $replay;
+    $o->{interactiveSteps} = [ 'doPartitionDisks', 'formatPartitions' ] if $replay;
 
     #- deep copy because we're modifying it below
     $o->{users} = [ @{$o->{users} || []} ];
@@ -897,7 +897,7 @@ sub g_default_packages {
 }
 
 sub loadO {
-    my ($O, $f) = @_; $f ||= auto_inst_file;
+    my ($O, $f) = @_; $f ||= auto_inst_file();
     my $o;
     if ($f =~ /^(floppy|patch)$/) {
 	my $f = $f eq "floppy" ? 'auto_inst.cfg' : "patch";

@@ -32,7 +32,7 @@ use log;
 
 my $_sanedir = "$prefix/etc/sane.d";
 my $_scannerDBdir = "$prefix$ENV{SHARE_PATH}/ldetect-lst";
-$scannerDB = readScannerDB("$_scannerDBdir/ScannerDB");
+my $scannerDB = readScannerDB("$_scannerDBdir/ScannerDB");
 
 sub confScanner {
     my ($model, $port) = @_;
@@ -167,15 +167,12 @@ sub updateScannerDBfromSane {
 		   "UMAX" => "Umax",
 		   "Vobis/Highscreen" => "Vobis",
 		  };
-    
-    opendir YREP, $_sanesrcdir or die "can't open $_sanesrcdir: $!";
-    @files = grep /.*desc$/, readdir YREP;
-    closedir YREP;
-    foreach my $i (@files) {
-	my $F = common::openFileMaybeCompressed("$_sanesrcdir/$i");
-	print Y "\n# from $i";
+
+    foreach my $f (glob_("$_sanesrcdir/*.desc")) {
+	my $F = common::openFileMaybeCompressed($f);
+	print Y "\n# from $f";
 	my ($lineno, $cmd, $val) = 0;
-	my ($name, $intf, $comment,$mfg);
+	my ($name, $intf, $comment, $mfg, $backend);
 	my $fs = {
 		  backend => sub { $backend = $val },
 		  mfg => sub { $mfg = $val; $name = undef },#bug when a new mfg comes. should called $fs->{ $name }(); but ??

@@ -140,7 +140,7 @@ sub setup_printer_connection {
     my ($printer, $in, $upNetwork) = @_;
     # Choose the appropriate connection config dialog
     my $done = 1;
-    foreach ($printer->{TYPE}) {
+    for ($printer->{TYPE}) {
 	/LOCAL/    and setup_local_autoscan ($printer, $in, $upNetwork) and last;
 	/LPD/      and setup_lpd      ($printer, $in, $upNetwork) and last;
 	/SOCKET/   and setup_socket   ($printer, $in, $upNetwork) and last;
@@ -155,7 +155,7 @@ sub setup_printer_connection {
 
 sub first_time_dialog {
     my ($printer, $in, $upNetwork) = @_;
-    return 1 if printer::default::get_spooler () or $::isInstall;
+    return 1 if printer::default::get_spooler() or $::isInstall;
 
     # Wait message
     my $w = $in->wait_message(N("Printerdrake"), N("Checking your system..."));
@@ -339,7 +339,6 @@ If you want to add, remove, or rename a printer, or if you want to change the de
 
 sub setup_local_autoscan {
     my ($printer, $in, $upNetwork) = @_;
-    my $device;
     my $queue = $printer->{OLD_QUEUE};
     my $expert_or_modify = $::expert || !$printer->{NEW};
     my $do_auto_detect = 
@@ -866,7 +865,7 @@ Do you really want to continue setting up this printer as you are doing now?"), 
     #- build a suitable URI.
     $printer->{currentqueue}{connect} =
     join '', ("smb://", ($smbuser && ($smbuser . 
-    ($smbpassword && ":$smbpassword") . "@")), ($workgroup && "$workgroup/"),
+    ($smbpassword && ":$smbpassword") . '@')), ($workgroup && "$workgroup/"),
     ($smbserver || $smbserverip), "/$smbshare");
 
     if (!$::testing && !files_exist('/usr/bin/smbclient')) {
@@ -935,7 +934,7 @@ complete => sub {
     # Generate the Foomatic URI
     $printer->{currentqueue}{connect} =
     join '', ("ncp://", ($ncpuser && ($ncpuser . 
-    ($ncppassword && ":$ncppassword") . "@")),
+    ($ncppassword && ":$ncppassword") . '@')),
     "$ncpserver/$ncpqueue");
 
 	$in->do_pkgs->install('ncpfs') if !$::testing && !files_exist('/usr/bin/nprint');
@@ -952,7 +951,7 @@ sub setup_socket {
 
     $in->set_help('setupSocket') if $::isInstall;
 
-    my ($hostname, $port, $uri, $remotehost,$remoteport);
+    my ($hostname, $port, $uri, $remotehost, $remoteport);
     my $queue = $printer->{OLD_QUEUE};
     if ($printer->{configured}{$queue} &&
 	$printer->{currentqueue}{connect} =~  m!^(socket:|ptal:/hpjd:)!) {
@@ -1231,8 +1230,7 @@ complete => sub {
 
 sub setup_common {
 
-    my ($printer, $in, $makemodel, $device, $do_auto_detect,
-	@autodetected) = @_;
+    my ($printer, $in, $makemodel, $device, $do_auto_detect, @autodetected) = @_;
 
     #- Check whether the printer is an HP multi-function device and 
     #- configure HPOJ if it is one
@@ -2200,16 +2198,16 @@ sub printer_help {
 	    $raw = 1;
 	}
 	# Information about scanning with HP's multi-function devices
-	$scanning = scanner_help
-	    ($printer->{configured}{$queue}{queuedata}{make} . " " .
+	$scanning = scanner_help(
+	     $printer->{configured}{$queue}{queuedata}{make} . " " .
 	     $printer->{configured}{$queue}{queuedata}{model}, 
 	     $printer->{configured}{$queue}{queuedata}{connect});
 	if ($scanning) {
 	    $scanning = "\n\n$scanning\n\n";
 	}
 	# Information about photo card access with HP's multi-function devices
-	$photocard = photocard_help
-	    ($printer->{configured}{$queue}{queuedata}{make} . " " .
+	$photocard = photocard_help(
+	     $printer->{configured}{$queue}{queuedata}{make} . " " .
 	     $printer->{configured}{$queue}{queuedata}{model}, 
 	     $printer->{configured}{$queue}{queuedata}{connect});
 	if ($photocard) {
@@ -2494,8 +2492,8 @@ sub check_network {
 		if ($choice eq N("Configure the network now")) {
 		    if ($::isInstall) {
 			require network::netconnect;
-		        network::netconnect::main
-			    ($in->{prefix}, $in->{netcnx} ||= {}, 
+		        network::netconnect::main(
+			     $in->{prefix}, $in->{netcnx} ||= {}, 
 			     $in->{netc}, $in->{mouse}, $in, 
 			     $in->{intf}, 0,
 			     $in->{lang} eq "fr_FR" && 

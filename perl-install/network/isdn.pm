@@ -19,7 +19,7 @@ sub configure {
     defined $netc->{autodetect}{isdn}{id} and goto intern_pci;
     $::isInstall and $in->set_help('configureNetworkISDN');
     my $e = $in->ask_from_list_(N("Network Configuration Wizard"),
-				N("What kind is your ISDN connection?"), [ N_("Internal ISDN card"), N_("External ISDN modem")]
+				N("What kind is your ISDN connection?"), [ N_("Internal ISDN card"), N_("External ISDN modem") ]
 			       ) or return;
     if ($e =~ /card/) {
       intern_pci:
@@ -51,7 +51,7 @@ sub isdn_write_config {
   standard, but with less tools.
 
 We recommand the light configuration.
-"), [ N_("New configuration (isdn-light)"), N_("Old configuration (isdn4net)")]
+"), [ N_("New configuration (isdn-light)"), N_("Old configuration (isdn4net)") ]
 			       ) or return;
     my ($rmpackage, $instpackage) = $e =~ /light/ ? ('isdn4net', 'isdn-light') : ('isdn-light', 'isdn4net');
     if (!$::isStandalone) {

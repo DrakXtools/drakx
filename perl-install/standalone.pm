@@ -7,7 +7,7 @@ use Config;
 
 #- for sanity (if a use standalone is made during install, MANY problems will happen)
 if ($::isInstall) {
-    require 'log.pm';
+    require log;
     log::l('ERROR: use standalone made during install :-(');
     require common;
     log::l('backtrace: ' . backtrace());
@@ -246,7 +246,7 @@ $SIG{SEGV} = sub { my $progname = $0; $progname =~ s|.*/||; exec("drakbug --inci
 
 sub import {
     ($standalone_name = $0) =~ s|.*/||;
-    c::openlog("$standalone_name"."[$$]");
+    c::openlog($standalone_name."[$$]");
     explanations('### Program is starting ###');
 
     eval "*MDK::Common::$_ = *$_" foreach @common_functs;

@@ -137,7 +137,7 @@ sub probe() {
 	else { internal_error() }
 
 	$_->{VideoRam} = 4096 if $_->{Driver} eq 'i810';
-	$_->{Options_xfree4}{UseFBDev} = undef if arch =~ /ppc/ && $_->{Driver} eq 'r128';
+	$_->{Options_xfree4}{UseFBDev} = undef if arch() =~ /ppc/ && $_->{Driver} eq 'r128';
 
 	$card;
     } @c;
@@ -532,7 +532,7 @@ sub readCardsDB {
     my ($file) = @_;
     my ($card, %cards);
 
-    my $F = common::openFileMaybeCompressed($file);
+    my $F = openFileMaybeCompressed($file);
 
     my ($lineno, $cmd, $val) = 0;
     my $fs = {

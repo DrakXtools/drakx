@@ -101,7 +101,7 @@ sub get_device_section_fields {
 
 sub default_ModeLine {
     my ($raw_X) = @_;
-    $raw_X->SUPER::default_ModeLine . our $default_ModeLine;
+    $raw_X->SUPER::default_ModeLine . (our $default_ModeLine);
 }
 
 sub new_device_sections {

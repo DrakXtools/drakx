@@ -104,7 +104,7 @@ sub vnew {
     if ($su && $>) {
 	die "you must be root to run this program";
     }
-    require 'log.pm';
+    require log;
     undef *log::l;
     *log::l = sub {}; # otherwise, it will bother us :(
     require interactive::newt;
@@ -276,7 +276,7 @@ sub ask_from_normalize {
 	    $e->{type} ||= 'combo';
 
 	    if (!$e->{not_edit}) {
-		die q(when using "not_edit" you must use strings, not a data structure) if ref ${$e->{val}} || grep { ref } @$li;
+		die q(when using "not_edit" you must use strings, not a data structure) if ref ${$e->{val}} || grep { ref $_ } @$li;
 	    }
 	    if ($e->{type} ne 'combo' || $e->{not_edit}) {
 		${$e->{val}} = $li->[0] if !member(may_apply($e->{format}, ${$e->{val}}), map { may_apply($e->{format}, $_) } @$li);
@@ -302,7 +302,7 @@ sub ask_from_normalize {
 	if ($_->{list} && $_->{not_edit} && !$_->{allow_empty_list}) {
 	    if (@{$_->{list}} == ()) {
 		eval {
-		    require 'log.pm';
+		    require log;
 		    log::l("ask_from_normalize: empty list for $_->{label}\n" . backtrace());
 		};
 	    }

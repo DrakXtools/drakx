@@ -244,7 +244,7 @@ sub Done {
     eval { raid::verify($all_hds->{raids}) };
     if (my $err = $@) {
 	$::expert or die;
-	$in->ask_okcancel('', [ formatError($err), N("Continue anyway?")]) or return;
+	$in->ask_okcancel('', [ formatError($err), N("Continue anyway?") ]) or return;
     }
     foreach (@{$all_hds->{hds}}) {
 	if (!write_partitions($in, $_)) {

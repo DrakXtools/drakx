@@ -27,7 +27,7 @@ sub open_stdout {
 # cont_stdout must be called after open_stdout and before the first print
 sub cont_stdout {
     my ($title) = @_;
-    print CGI::start_html(-title => $title) if $no_header;
+    print CGI::start_html('-title' => $title) if $no_header;
     $no_header = 0;
 }
 
@@ -49,7 +49,7 @@ sub end() {
     close STDOUT;
     unlink $pipe_r, $pipe_w;
 }
-sub exit() { end; exit($_[1]) }
+sub exit() { end(); exit($_[1]) }
 END { end() }
 
 sub ask_fromW {
@@ -64,7 +64,7 @@ sub ask_fromW {
 
 #    print $q->img({ -src => "/icons/$o->{icon}" }) if $o->{icon};
     print @{$common->{messages}};
-    print $q->start_form(-name => 'form', -action => $script_name, -method => 'post');
+    print $q->start_form('-name' => 'form', '-action' => $script_name, '-method' => 'post');
 
     print "<table>\n";
 
@@ -79,21 +79,21 @@ sub ask_fromW {
 	$e->{type} = $e->{not_edit} ? 'list' : 'entry' if $e->{type} eq 'combo';
 
 	if ($e->{type} eq 'bool') {
-	    print $q->checkbox(-name => "w$::i", -checked => ${$e->{val}} && 'on', -label => $e->{text} || " ");
+	    print $q->checkbox('-name' => "w$::i", '-checked' => ${$e->{val}} && 'on', '-label' => $e->{text} || " ");
 	} elsif ($e->{type} eq 'button') {
 	    print "nobuttonyet";
 	} elsif ($e->{type} =~ /list/) {
 	    my %t; 
 	    $t{$_} = may_apply($e->{format}, $_) foreach @{$e->{list}};
 
-	    print $q->scrolling_list(-name => "w$::i",
-				     -values => $e->{list},
-				     -default => [ ${$e->{val}} ],
-				     -size => 5, -multiple => '', -labels => \%t);
+	    print $q->scrolling_list('-name' => "w$::i",
+				     '-values' => $e->{list},
+				     '-default' => [ ${$e->{val}} ],
+				     '-size' => 5, '-multiple' => '', '-labels' => \%t);
 	} else {
 	    print $e->{hidden} ?
-	      $q->password_field(-name => "w$::i", -default => ${$e->{val}}) :
-	      $q->textfield(     -name => "w$::i", -default => ${$e->{val}});
+	      $q->password_field('-name' => "w$::i", '-default' => ${$e->{val}}) :
+	      $q->textfield(     '-name' => "w$::i", '-default' => ${$e->{val}});
 	}
 
 	print "</td></tr>\n";
@@ -101,8 +101,8 @@ sub ask_fromW {
 
     print "</table>\n";
     print $q->p();
-    print $q->submit(-name => 'ok_submit', -value => $common->{ok} || N("Ok"));
-    print $q->submit(-name => 'cancel_submit', -value => $common->{cancel} || N("Cancel")) if $common->{cancel} || !exists $common->{ok};
+    print $q->submit('-name' => 'ok_submit', '-value' => $common->{ok} || N("Ok"));
+    print $q->submit('-name' => 'cancel_submit', '-value' => $common->{cancel} || N("Cancel")) if $common->{cancel} || !exists $common->{ok};
     print $q->hidden('state'), $q->hidden('uid');
     print $q->end_form, $q->end_html;
 

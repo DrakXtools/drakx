@@ -6,7 +6,7 @@ use common;
 #            Write a mail to <documentation@mandrakesoft.com> if
 #            you want it changed.
 
-%steps = (
+our %steps = (
 empty => '',
 
 addUser => 

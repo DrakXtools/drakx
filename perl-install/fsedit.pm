@@ -561,8 +561,8 @@ sub add {
 sub allocatePartitions {
     my ($all_hds, $to_add) = @_;
 
-    foreach my $part (get_all_holes($all_hds)) {
-	my ($start, $size, $dev) = @$part{"start", "size", "rootDevice"};
+    foreach my $part_ (get_all_holes($all_hds)) {
+	my ($start, $size, $dev) = @$part_{"start", "size", "rootDevice"};
 	my $part;
 	while (suggest_part($part = { start => $start, size => 0, maxsize => $size, rootDevice => $dev }, 
 			    $all_hds, $to_add)) {
@@ -691,7 +691,7 @@ sub move {
 
     local (*F, *G);
     sysopen F, $hd->{file}, 0 or die '';
-    sysopen G, $hd2->{file}, 2 or die N("Error opening %s for writing: %s", $hd2->{file}, "$!");
+    sysopen G, $hd2->{file}, 2 or die N("Error opening %s for writing: %s", $hd2->{file}, $!);
 
     my $base = $part1->{start};
     my $base2 = $part2->{start};

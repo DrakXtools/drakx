@@ -5,9 +5,7 @@ use strict;
 
 use resize_fat::any;
 use resize_fat::io;
-use resize_fat::c_rewritten;
-
-1;
+use resize_fat::c_rewritten qw(next set_next);
 
 sub read($) {
     my ($fs) = @_;
@@ -97,9 +95,6 @@ sub endianness($$) {
     $r;
 }
 
-*next = \&resize_fat::c_rewritten::next;
-*set_next = \&resize_fat::c_rewritten::set_next;
-
 
 
 sub get_free($) {
@@ -136,3 +131,5 @@ sub set_available($$) {
     my ($fs, $cluster) = @_;
     set_next ($fs, $cluster, 0);
 }
+
+1;

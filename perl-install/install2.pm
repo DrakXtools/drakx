@@ -342,7 +342,7 @@ sub main {
 	$o->ask_warn('', $msg);
 	setVirtual(1);
 	require install_steps_auto_install;
-	install_steps_auto_install_non_interactive::errorInStep ();
+	install_steps_auto_install_non_interactive::errorInStep();
     };
     $ENV{PERL_BADLANG} = 1;
     umask 022;
@@ -486,7 +486,7 @@ sub main {
 		undef $::auto_install;
 	    } else {
 		print "Error using auto_install\n$@\n";
-		install_steps_auto_install_non_interactive::errorInStep ();
+		install_steps_auto_install_non_interactive::errorInStep();
 	    }
 	} else {
 	    log::l("auto install config file loaded successfully");

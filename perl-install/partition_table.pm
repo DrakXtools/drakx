@@ -337,7 +337,7 @@ sub assign_device_numbers {
     #- not if it's an IBM machine using a DOS partition table though
     if (arch() =~ /ppc/ && detect_devices::get_mac_model() !~ /^IBM/) {
 	#- first sort the normal parts
-	$hd->{primary}{normal} = [sort { $a->{start} <=> $b->{start} } @{$hd->{primary}{normal}} ];
+	$hd->{primary}{normal} = [ sort { $a->{start} <=> $b->{start} } @{$hd->{primary}{normal}} ];
     
 	#- now loop through them, assigning partition numbers - reserve one for the holes
 	foreach (@{$hd->{primary}{normal}}) {
@@ -596,7 +596,7 @@ sub write {
 
 	my @magic_parts = grep { $_->{isMounted} && $_->{real_mntpoint} } get_normal_parts($hd);
 	foreach (@magic_parts) {
-	    syscall_('umount', $_->{real_mntpoint}) or log::l(N("error unmounting %s: %s", $_->{real_mntpoint}, "$!"));
+	    syscall_('umount', $_->{real_mntpoint}) or log::l(N("error unmounting %s: %s", $_->{real_mntpoint}, $!));
 	}
 	$hd->kernel_read;
 	foreach (@magic_parts) {

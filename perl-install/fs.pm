@@ -202,7 +202,7 @@ sub prepare_write_fstab {
     my @l = map { 
 	my $device = 
 	  isLoopback($_) ? 
-	      ($_->{mntpoint} eq '/' ? "/initrd/loopfs" : "$_->{loopback_device}{mntpoint}") . $_->{loopback_file} :
+	      ($_->{mntpoint} eq '/' ? "/initrd/loopfs" : $_->{loopback_device}{mntpoint}) . $_->{loopback_file} :
 	  part2device($prefix, $_->{device}, $_->{type});
 
 	my $real_mntpoint = $_->{mntpoint} || ${{ '/tmp/hdimage' => '/mnt/hd' }}{$_->{real_mntpoint}};
@@ -740,7 +740,7 @@ sub umount {
     my ($mntpoint) = @_;
     $mntpoint =~ s|/$||;
     log::l("calling umount($mntpoint)");
-    syscall_('umount', $mntpoint) or die N("error unmounting %s: %s", $mntpoint, "$!");
+    syscall_('umount', $mntpoint) or die N("error unmounting %s: %s", $mntpoint, $!);
 
     substInFile { $_ = '' if /(^|\s)$mntpoint\s/ } '/etc/mtab'; #- don't care about error, if we can't read, we won't manage to write... (and mess mtab)
 }

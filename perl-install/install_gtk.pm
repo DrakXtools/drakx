@@ -140,7 +140,7 @@ sub create_steps_window {
 			    "$ENV{SHARE_PATH}/step-$color$type.xpm";
 			};
 			$darea->set_usize($PIX_W+3,$PIX_H);
-			$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
+			$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask']);
 			$darea->signal_connect(expose_event => sub { $draw_pix->($f->('')) });
 			if ($step->{reachable}) {
 			    $darea->signal_connect(enter_notify_event => sub { $in_button = 1; $draw_pix->($f->('-on')) });
@@ -177,7 +177,7 @@ sub create_logo_window {
 
 #------------------------------------------------------------------------------
 sub init_sizes() {
-    ($::rootheight,  $::rootwidth)    = my_gtk::gtkroot()->get_size;
+    ($::rootheight,  $::rootwidth)    = gtkroot()->get_size;
     $::live and $::rootheight -= 80;
     #- ($::rootheight,  $::rootwidth)    = (min(768, $::rootheight), min(1024, $::rootwidth));
     ($::stepswidth,  $::stepsheight)  = (145, $::rootheight);

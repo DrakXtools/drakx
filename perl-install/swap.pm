@@ -81,6 +81,7 @@ sub make($;$) {
     my $rdev = (stat $devicename)[6];
     $rdev == 0x300 || $rdev == 0x340 and die "$devicename is not a good device for swap";
 
+    local *F;
     sysopen F, $devicename, 2 or die "opening $devicename for writing failed: $!";
 
     if ($version == 0) { $maxpages = $V0_MAX_PAGES }

@@ -799,7 +799,7 @@ sub get_x_fontset {
 	my $dir = "/usr/X11R6/lib/X11/fonts";
 	if (! -e "$dir/$f" && $::isInstall && common::usingRamdisk()) {
 	    unlink "$dir/$_" foreach values %bigfonts;
-	    install_any::remove_bigseldom_used ();
+	    install_any::remove_bigseldom_used();
 	    install_any::getAndSaveFile("$dir/$f");
 	}
     }

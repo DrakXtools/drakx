@@ -129,12 +129,12 @@ sub detect_timezone {
 
 sub type2interface {
     my ($i) = @_;
-    $i =~ /$_->[0]/ and return $_->[1] foreach [ modem => 'ppp'],
-					     [ isdn_internal => 'ippp'],
-					     [ isdn_external => 'ppp'],
-					     [ adsl => 'ppp'],
-					     [ cable => 'eth'],
-					     [ lan => 'eth'];
+    $i =~ /$_->[0]/ and return $_->[1] foreach [ modem => 'ppp' ],
+					     [ isdn_internal => 'ippp' ],
+					     [ isdn_external => 'ppp' ],
+					     [ adsl => 'ppp' ],
+					     [ cable => 'eth' ],
+					     [ lan => 'eth' ];
 }
 
 sub connected { gethostbyname("mandrakesoft.com") ? 1 : 0 }

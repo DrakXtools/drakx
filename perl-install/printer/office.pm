@@ -55,13 +55,13 @@ sub configureoffice {
 	    my $queue = $1;
 	    my $server = $2;
 	    if (-x "$::prefix/usr/bin/wget") {
-		eval(run_program::rooted
-		     ($::prefix, "/usr/bin/wget", "-O",
+		eval(run_program::rooted(
+		      $::prefix, "/usr/bin/wget", "-O",
 		      "/etc/foomatic/$queue.ppd",
 		      "http://$server:631/printers/$queue.ppd"));
 	    } else {
-		eval(run_program::rooted
-		     ($::prefix, "/usr/bin/curl", "-o",
+		eval(run_program::rooted(
+		      $::prefix, "/usr/bin/curl", "-o",
 		      "/etc/foomatic/$queue.ppd",
 		      "http://$server:631/printers/$queue.ppd"));
 	    }
@@ -124,13 +124,13 @@ sub add_cups_remote_to_office {
 	    # Remove server name from queue name
 	    $q =~ s/^([^@]*)@.*$/$1/;
 	    if (-x "$::prefix/usr/bin/wget") {
-		eval(run_program::rooted
-		     ($::prefix, "/usr/bin/wget", "-O",
+		eval(run_program::rooted(
+		      $::prefix, "/usr/bin/wget", "-O",
 		      "/etc/foomatic/$queue.ppd",
 		      "http://$server:631/printers/$q.ppd"));
 	    } else {
-		eval(run_program::rooted
-		     ($::prefix, "/usr/bin/curl", "-o",
+		eval(run_program::rooted(
+		      $::prefix, "/usr/bin/curl", "-o",
 		      "/etc/foomatic/$queue.ppd",
 		      "http://$server:631/printers/$q.ppd"));
 	    }
@@ -207,7 +207,7 @@ sub makestarofficeprinterentry {
     # symbol correctly.
     $configfile = removeentry("ports", "$queue=", $configfile);
     $configfile = addentry("ports", 
-			   "$queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/$spoolers{$printer->{SPOOLER}{print_command}} -P $queue",
+			   "$queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/" . $spoolers{$printer->{SPOOLER}{print_command}} . " -P $queue",
 			   $configfile);
     # Make printer's section
     $configfile = addsection("$queue,PostScript,$queue", $configfile);
@@ -261,14 +261,14 @@ sub makeopenofficeprinterentry {
     # symbol correctly.
     $configfile = removeentry($queue, "Command=", $configfile);
     $configfile = addentry($queue, 
-			   "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/$spoolers{$printer->{SPOOLER}{print_command}} -P $queue",
+			   "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/" . $spoolers{$printer->{SPOOLER}{print_command}} . " -P $queue",
 			   $configfile);
     # "Comment" line 
     $configfile = removeentry($queue, "Comment=", $configfile);
     if ($printer->{configured}{$queue} &&
 	$printer->{configured}{$queue}{queuedata}{desc}) {
-	$configfile = addentry
-	    ($queue, 
+	$configfile = addentry(
+	     $queue, 
 	     "Comment=$printer->{configured}{$queue}{queuedata}{desc}",
 	     $configfile);
     } else {
@@ -280,8 +280,8 @@ sub makeopenofficeprinterentry {
     $configfile = removeentry($queue, "Location=", $configfile);
     if ($printer->{configured}{$queue} &&
 	$printer->{configured}{$queue}{queuedata}{loc}) {
-	$configfile = addentry
-	    ($queue, 
+	$configfile = addentry(
+	     $queue, 
 	     "Location=$printer->{configured}{$queue}{queuedata}{loc}",
 	     $configfile);
     } else {

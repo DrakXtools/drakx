@@ -89,14 +89,14 @@ sub new {
 	    $::WizardWindow->show_all;
 	    flush();
 	}
-	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, [-fill, -expand], [-fill, -expand], 0, 0);
+	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0);
     }
 
     if ($::isEmbedded && !$my_gtk::pop_it && !eval { $::Plug && $::Plug->child }) {
 	$o->{isEmbedded} = 1;
 	$o->{window} = new Gtk::HBox(0,0);
 	$o->{rwindow} = $o->{window};
-	$::Plug ||= new Gtk::Plug ($::XID);
+	$::Plug ||= new Gtk::Plug($::XID);
 	$::Plug->show;
 	flush();
 	$::Plug->add($o->{window});
@@ -329,7 +329,7 @@ sub _ask_okcancel($@) {
 
 sub _ask_file {
     my ($o, $title, $path) = @_;
-    my $f = $o->{rwindow} = new Gtk::FileSelection $title;
+    my $f = $o->{rwindow} = new Gtk::FileSelection($title);
     $f->set_filename($path);
     $f->ok_button->signal_connect(clicked => sub { $o->{retval} = $f->get_filename; Gtk->main_quit });
     $f->cancel_button->signal_connect(clicked => sub { Gtk->main_quit });

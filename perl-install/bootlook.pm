@@ -24,7 +24,7 @@ use common;
 use Gtk;
 use Gtk::Gdk::Pixbuf;
 use Config;
-init Gtk;
+Gtk->int;
 use POSIX;
 use lib qw(/usr/lib/libDrakX);
 use interactive;
@@ -46,6 +46,7 @@ my @winm;
 my @usernames;
 parse_etc_passwd();
 
+my $no_bootsplash;
 my $x_mode = isXlaunched();
 my $a_mode = -e "/etc/aurora/Monitor" ? 1 : 0;
 my $l_mode = isAutologin();
@@ -53,7 +54,7 @@ my %auto_mode = get_autologin("");
 my $inmain = 0;
 my $lilogrub = chomp_(`detectloader -q`);
 
-my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window ("toplevel");
+my $window = $::isEmbedded ? new Gtk::Plug($::XID) : new Gtk::Window("toplevel");
 $window->signal_connect(delete_event => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) });
 $window->set_title(N("Boot Style Configuration"));
 $window->border_width(2);
@@ -84,10 +85,10 @@ $user_combo->entry->set_text($auto_mode{autologin}) if $auto_mode{autologin};
 my $desktop_combo = new Gtk::Combo;
 $desktop_combo->set_popdown_strings(get_wm());
 $desktop_combo->entry->set_text($auto_mode{desktop}) if $auto_mode{desktop};
-my $a_c_button = new Gtk::RadioButton (N("NewStyle Categorizing Monitor"));
-my $a_h_button = new Gtk::RadioButton N("NewStyle Monitor"), $a_c_button;
-my $a_v_button = new Gtk::RadioButton N("Traditional Monitor"), $a_c_button;
-my $a_g_button = new Gtk::RadioButton N("Traditional Gtk+ Monitor"),$a_c_button;
+my $a_c_button = new Gtk::RadioButton(N("NewStyle Categorizing Monitor"));
+my $a_h_button = new Gtk::RadioButton(N("NewStyle Monitor"), $a_c_button);
+my $a_v_button = new Gtk::RadioButton(N("Traditional Monitor"), $a_c_button);
+my $a_g_button = new Gtk::RadioButton(N("Traditional Gtk+ Monitor"),$a_c_button);
 my $a_button = new Gtk::CheckButton(N("Launch Aurora at boot time"));
 my $a_box = new Gtk::VBox(0, 0);
 my $x_box = new Gtk::VBox(0, 0);
@@ -133,7 +134,7 @@ foreach (keys(%combo)) {
 $combo{'thms'}->set_popdown_strings(@thms);
 $combo{'lilo'}->set_popdown_strings(@lilo_thms);
 $combo{'boot'}->set_popdown_strings(@boot_thms) if !$no_bootsplash;
-my $lilo_pixbuf;
+my ($lilo_pixbuf, $boot_pixmap);
 my $lilo_pic = gtkpng($themes{'def_thmb'});
 
 my $boot_pixbuf;
@@ -167,7 +168,7 @@ $combo{'lilo'}->entry->signal_connect(changed => sub {
 
 $no_bootsplash == 0 
 	and $combo{'boot'}->entry->signal_connect( changed => sub {
-    local $img_file = $themes{'path'}.$combo{'boot'}->entry->get_text().$themes{'boot'}{'path'}."bootsplash-$cur_res.jpg";
+    my $img_file = $themes{'path'}.$combo{'boot'}->entry->get_text().$themes{'boot'}{'path'}."bootsplash-$cur_res.jpg";
     undef($boot_pixmap);
     $boot_pixmap = gtkcreate_png_pixbuf( $img_file);
     $boot_pixmap = $boot_pixmap->scale_simple(155,116,0);
@@ -197,7 +198,7 @@ sub {
         }
         #bootsplash install
         if (-f $themes{'path'} . $combo{'boot'}->entry->get_text() . $themes{'boot'}{'path'} . "bootsplash-$cur_res.jpg") {
-                $bootsplash_cont = "# -*- Mode: shell-script -*-
+                my $bootsplash_cont = "# -*- Mode: shell-script -*-
 # Specify here if you want add the splash logo to initrd when
 # generating an initrd. You can specify :
 #
@@ -257,12 +258,12 @@ Launch \"lilo\" as root in command line to complete LiLo theme installation."));
 
 gtkadd($window,
        gtkpack__(my $global_vbox = new Gtk::VBox(0,0),
-		  gtkadd(new Gtk::Frame ("$disp_mode"),
+		  gtkadd(new Gtk::Frame("$disp_mode"),
 #			  gtkpack__(new Gtk::VBox(0,0),
 				    (gtkpack_(gtkset_border_width(new Gtk::HBox(0, 0),5),
 					      1, N("You are currently using %s as your boot manager.
 Click on Configure to launch the setup wizard.", $lilogrub),
-					      0, gtksignal_connect(new Gtk::Button (N("Configure")), clicked => $::lilo_choice),
+					      0, gtksignal_connect(new Gtk::Button(N("Configure")), clicked => $::lilo_choice),
 					     )),
 #				    "" #we need some place under the button -- replaced by gtkset_border_width( for the moment
 #				   )
@@ -317,16 +318,16 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 # 				    )
 # 			 ),
 		  # X
-		  gtkadd(new Gtk::Frame (N("System mode")),
+		  gtkadd(new Gtk::Frame(N("System mode")),
 			  gtkpack__(new Gtk::VBox(0, 5),
-				     gtksignal_connect(gtkset_active(new Gtk::CheckButton (N("Launch the graphical environment when your system starts")), $x_mode), clicked => sub {
+				     gtksignal_connect(gtkset_active(new Gtk::CheckButton(N("Launch the graphical environment when your system starts")), $x_mode), clicked => sub {
 							   $x_box->set_sensitive(!$x_mode);
 							   $x_mode = !$x_mode;
 						       }),
 				     gtkpack__(gtkset_sensitive ($x_box, $x_mode),
-						gtkset_active($x_no_button  = new Gtk::RadioButton (N("No, I don't want autologin")), !$l_mode),
+						gtkset_active(my $x_no_button  = new Gtk::RadioButton(N("No, I don't want autologin")), !$l_mode),
 						gtkpack__(new Gtk::HBox(0, 10),
-							   gtkset_active($x_yes_button = new Gtk::RadioButton((N("Yes, I want autologin with this (user, desktop)")), $x_no_button), $l_mode),
+							   gtkset_active(my $x_yes_button = new Gtk::RadioButton((N("Yes, I want autologin with this (user, desktop)")), $x_no_button), $l_mode),
 							   gtkpack__(new Gtk::VBox(0, 10),
 								     $user_combo,
 								     $desktop_combo
@@ -335,7 +336,7 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 					       )
 				    )
 			 ),
-		 gtkadd (gtkset_layout(new Gtk::HButtonBox, -end),
+		 gtkadd (gtkset_layout(new Gtk::HButtonBox, 'end'),
 			 gtksignal_connect(new Gtk::Button(N("OK")), clicked => sub { updateInit(); updateAutologin(); updateAurora(); $::isEmbedded ? kill('USR1',$::CCPID) : Gtk->exit(0) }),
 			 gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) })
 			)
@@ -367,7 +368,7 @@ Gtk->exit(0);
 #-------------------------------------------------------------
 
 sub parse_etc_passwd {
-    my ($uname, $uid);
+    my ($uname, $uid, @user_info);
     setpwent();
     do {
 	@user_info = getpwent();
@@ -394,11 +395,11 @@ sub print_hello {
 
 sub isXlaunched {
     my $line;
+    local *INITTAB;
     open INITTAB, "/etc/inittab" or die N("can not open /etc/inittab for reading: %s", $!);
     while (<INITTAB>) {
 	if (/id:([1-6]):initdefault:/) { $line = $_; last }
     }
-    close INITTAB;
     $line =~ s/id:([1-6]):initdefault:/$1/;
     return $line-3;
 }
@@ -444,11 +445,11 @@ sub updateAurora {
 
 sub isAutologin {
     my $line;
+    local *AUTOLOGIN;
     open AUTOLOGIN, "/etc/sysconfig/autologin";
     while (<AUTOLOGIN>) {
 	if (/AUTOLOGIN=(yes|no)/) { $line = $_; last }
     }
-    close AUTOLOGIN;
     $line =~ s/AUTOLOGIN=(yes|no)/$1/;
     chomp($line);
     $line = $line eq "yes";
@@ -468,7 +469,7 @@ sub get_autologin {
 }
 
 sub updateAutologin {
-    my ($usern,$deskt) = ($user_combo->entry->get_text(), $desktop_combo->entry->get_text());
+    my ($usern, $deskt) = ($user_combo->entry->get_text(), $desktop_combo->entry->get_text());
     if ($x_yes_button->get_active()) {
 	$in->do_pkgs->install('autologin') if $x_mode;
 	set_autologin('',$usern,$deskt);

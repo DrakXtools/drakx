@@ -32,8 +32,8 @@ sub configure {
 					"/etc/foomatic/$queue.ppd");
 		} elsif (-r "$::prefix/usr/share/postscript/ppd/$queue.ppd") {
 		    # Check PPD directory of GPR, too
-		    run_program::rooted
-			($::prefix, 
+		    run_program::rooted(
+			 $::prefix, 
 			 "ln", "-sf",
 			 "/usr/share/postscript/ppd/$queue.ppd",
 			 "/etc/foomatic/$queue.ppd");
@@ -89,13 +89,13 @@ sub addcupsremoteto {
 	    # Remove server name from queue name
 	    $q =~ s/^([^@]*)@.*$/$1/;
 	    if (-x "$::prefix/usr/bin/wget") {
-		eval(run_program::rooted
-		     ($::prefix, "/usr/bin/wget", "-O",
+		eval(run_program::rooted(
+		      $::prefix, "/usr/bin/wget", "-O",
 		      "/etc/foomatic/$queue.ppd",
 		      "http://$server:631/printers/$q.ppd"));
 	    } else {
-		eval(run_program::rooted
-		     ($::prefix, "/usr/bin/curl", "-o",
+		eval(run_program::rooted(
+		      $::prefix, "/usr/bin/curl", "-o",
 		      "/etc/foomatic/$queue.ppd",
 		      "http://$server:631/printers/$q.ppd"));
 	    }
@@ -198,7 +198,7 @@ sub makeprinterentry {
 	$configfile = addentry($queue, "Driver: $gimpprintdriver", $configfile);
 	$configfile = removeentry($queue, "Destination:", $configfile);
 	$configfile = addentry($queue, 
-				   "Destination: /usr/bin/$spoolers{$printer->{SPOOLER}{print_command}} -P $queue -o raw", $configfile);
+				   sprintf("Destination: /usr/bin/%s -P %s -o raw", $spoolers{$printer->{SPOOLER}{print_command}}, $queue), $configfile);
     } else {
 	$configfile = removeentry($queue, "PPD-File:", $configfile);
 	$configfile = addentry($queue, "PPD-File: /etc/foomatic/$queue.ppd", $configfile);
@@ -206,7 +206,7 @@ sub makeprinterentry {
 	$configfile = addentry($queue, "Driver: ps2", $configfile);
 	$configfile = removeentry($queue, "Destination:", $configfile);
 	$configfile = addentry($queue, 
-				   "Destination: /usr/bin/$spoolers{$printer->{SPOOLER}{print_command}} -P $queue", $configfile);
+				   sprintf("Destination: /usr/bin/%s -P %s", $spoolers{$printer->{SPOOLER}{print_command}}, $queue), $configfile);
     }
     return $configfile;
 }

@@ -167,7 +167,7 @@ sub write {
 
     foreach (@$pt) {
 	$_->{ending} = $_->{start} + $_->{size} - 1;
-	$_->{guid} ||= generate_guid;
+	$_->{guid} ||= generate_guid();
 	$_->{gpt_type} = $gpt_types{$_->{type}} || $_->{gpt_type} || $gpt_types{0x83};
     }
     my $partitionEntries = join('', map {
@@ -251,7 +251,7 @@ sub info {
 	alternateLBA => $hd->{totalsectors} - 1,
 	firstUsableLBA => $nb_sect + 2,
 	lastUsableLBA => $hd->{totalsectors} - $nb_sect - 2,
-	guid => generate_guid,
+	guid => generate_guid(),
 	partitionEntriesLBA => 2,
 	nbPartitions => $nb_sect * 512 / psizeof($partitionEntry_format),
 	partitionEntrySize => psizeof($partitionEntry_format),

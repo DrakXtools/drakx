@@ -52,7 +52,7 @@ sub getFile {
     my ($f, @para) = @_;
     $f eq 'XXX' and rewindGetFile(), return; #- special case to force closing connection.
     foreach (1..3) {
-	my ($ftp, $retr) = new(@para ? @para : fromEnv);
+	my ($ftp, $retr) = new(@para ? @para : fromEnv());
 	eval { $$retr->close if $$retr };
 	$@ and rewindGetFile(); #- in case Timeout got us on "->close"
 	$$retr = $ftp->retr($f) and return $$retr;

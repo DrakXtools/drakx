@@ -48,7 +48,6 @@ sub gtkpack__                 { gtkpowerpack(0, 1, @_) }
 sub gtkpack2                  { gtkpowerpack(1, 0, @_) }
 sub gtkpack2_                 { gtkpowerpack('arg', 0, @_) }
 sub gtkpack2__                { gtkpowerpack(0, 0, @_) }
-sub gtkpack3                  { gtkpowerpack($a ? 1 : 0, 0, @_) }
 sub gtkput                    { $_[0]->put(gtkshow($_[1]), $_[2], $_[3]); $_[0] }
 sub gtkpixmap                 { new Gtk::Pixmap(gdkpixmap(@_)) }
 sub gtkresize                 { $_[0]->window->resize($_[1], $_[2]); $_[0] }
@@ -286,14 +285,14 @@ sub create_dialog {
     $dialog->border_width(10);
     $dialog->vbox->pack_start(new Gtk::Label($label),1,1,0);
 
-    my $button = new Gtk::Button N("OK");
+    my $button = new Gtk::Button(N("OK"));
     $button->can_default(1);
     $button->signal_connect(clicked => sub { $ret = 1; $dialog->destroy(); Gtk->main_quit() });
     $dialog->action_area->pack_start($button, 1, 1, 0);
     $button->grab_default;
 
     if ($c) {
-	my $button2 = new Gtk::Button N("Cancel");
+	my $button2 = new Gtk::Button(N("Cancel"));
 	$button2->signal_connect(clicked => sub { $ret = 0; $dialog->destroy(); Gtk->main_quit() });
 	$button2->can_default(1);
 	$dialog->action_area->pack_start($button2, 1, 1, 0);
@@ -306,7 +305,7 @@ sub create_dialog {
 
 # drakfloppy / logdrake
 sub destroy_window {
-	my($widget, $windowref, $w2) = @_;
+	my ($widget, $windowref, $w2) = @_;
 	$$windowref = undef;
 	$w2 = undef if defined $w2;
 	0;
@@ -363,7 +362,7 @@ sub create_packtable {
 sub createScrolledWindow {
     my ($W, $policy, $viewport_shadow) = @_;
     my $w = new Gtk::ScrolledWindow(undef, undef);
-    $policy ||= [ 'automatic', 'automatic'];
+    $policy ||= [ 'automatic', 'automatic' ];
     $w->set_policy(@{$policy});
     if (member(ref $W, qw(Gtk::CList Gtk::CTree Gtk::Text))) {
        $w->add($W)
@@ -541,8 +540,8 @@ sub gtkicons_labels_widget {
 	$y_round, $x_back2, $y_back2, $icon_width, $icon_height, $exec_func, $exec_hash) = @_;
 
     my @tab;
-    my $cursor_hand = new Gtk::Gdk::Cursor 60;
-    my $cursor_normal = new Gtk::Gdk::Cursor 68;
+    my $cursor_hand = new Gtk::Gdk::Cursor(60);
+    my $cursor_normal = new Gtk::Gdk::Cursor(68);
 	my @args = @$args;
     foreach (@args) {
 	my ($label, $tag) = ($_->[0], $_->[1]);
@@ -579,7 +578,7 @@ sub gtkicons_labels_widget {
 	};
 	$darea->{state} = 0;
 	$darea->signal_connect(expose_event => $draw);
-	$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
+	$darea->set_events([ 'exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
 	$darea->signal_connect(enter_notify_event => sub {
 				    if ($darea->{state} == 0) {
 					$darea->{state} = 1;

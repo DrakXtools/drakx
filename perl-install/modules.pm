@@ -48,7 +48,7 @@ sub load {
     my @network_devices = $network_module ? detect_devices::getNet() : ();
 
     if ($::testing || $::blank) {
-	log::l("i would load module $_ (@{$options{$_}})") foreach @l;
+	log::l("i would load module $_ (" . join(" ", @{$options{$_}}) . ")") foreach @l;
     } elsif ($::isStandalone || $::live) {
 	run_program::run('/sbin/modprobe', $_, @{$options{$_}}) 
 	  or !run_program::run('/sbin/modprobe', '-n', $_) #- ignore missing modules

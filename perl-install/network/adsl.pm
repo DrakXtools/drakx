@@ -20,7 +20,7 @@ sub configure {
     # 				   N("The most common way to connect with adsl is pppoe.
     # Some connections use pptp, a few ones use dhcp.
     # If you don't know, choose 'use pppoe'"), [N_("use pppoe"), N_("use pptp"), N_("use dhcp"), N_("Alcatel speedtouch usb"), N_("ECI Hi-Focus")]) or return;
-    my $l =  [N_("use pppoe"),
+    my $l = [ N_("use pppoe"),
 	      N_("use pptp"), 
 	      N_("use dhcp"), 
 	      N_("Alcatel speedtouch usb") . if_($netc->{autodetect}{adsl}{speedtouch}, " - detected"),

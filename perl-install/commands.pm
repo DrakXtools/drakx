@@ -10,7 +10,7 @@ package commands; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw($printable_chars);
+use vars qw($printable_chars *ROUTE);
 
 #-######################################################################################
 #- misc imports
@@ -287,15 +287,15 @@ sub head_tail {
     my ($h, $n) = getopts(\@_, qw(hn));
     $h || @_ < to_bool($n) and die "usage: $0 [-h] [-n lines] [<file>]\n";
     $n = $n ? shift : 10;
-    local *F; @_ ? open(F, $_[0]) || die "error: can't open file $_[0]\n" : (*F = *STDIN);
+    my $fh; @_ ? open($fh, $_[0]) || die "error: can't open file $_[0]\n" : ($fh = *STDIN);
 
     if ($0 eq 'head') {
 	local $_;
-	while (<F>) { $n-- or return; print }
+	while (<$fh>) { $n-- or return; print }
     } else {
 	@_ = (); 
 	local $_;
-	while (<F>) { push @_, $_; @_ > $n and shift }
+	while (<$fh>) { push @_, $_; @_ > $n and shift }
 	print @_;
     }
 }
@@ -430,7 +430,7 @@ sub route {
     my ($titles, @l) = cat_("/proc/net/route");
     my @titles = split ' ', $titles;
     my %l;
-    open ROUTE, ">&STDOUT"; #-# ROUTE must be not be localised otherwise the "format ROUTE" fails
+    open ROUTE, ">&STDOUT"; #- ROUTE must be not be localised otherwise the "format ROUTE" fails
     format ROUTE_TOP =
 Destination    Gateway        Mask           Iface
 .
@@ -441,7 +441,7 @@ $l{Destination}, $l{Gateway}, $l{Mask}, $l{Iface}
     foreach (@l) {
 	/^\s*$/ and next;
 	@l{@titles} = split;
-	$_ = join ".", reverse map { hex } unpack "a2a2a2a2", $_ foreach @l{qw(Destination Gateway Mask)};
+	$_ = join ".", reverse map { hex $_ } unpack "a2a2a2a2", $_ foreach @l{qw(Destination Gateway Mask)};
 	$l{Destination} = 'default' if $l{Destination} eq "0.0.0.0";
 	$l{Gateway}     = '*'       if $l{Gateway}     eq "0.0.0.0";
 	write ROUTE;
@@ -492,18 +492,18 @@ sub lspci {
     require detect_devices;
     print join "\n", detect_devices::stringlist(1), '';
 }
-*lssbus = *lspci;
+*lssbus = \&lspci;
 
 sub dmesg { print cat_("/tmp/syslog") }
 
 sub sort {
     my ($n, $h) = getopts(\@_, qw(nh));
     $h and die "usage: sort [-n] [<file>]\n";
-    local *F; @_ ? open(F, $_[0]) || die "error: can't open file $_[0]\n" : (*F = *STDIN);
+    my $fh; @_ ? open($fh, $_[0]) || die "error: can't open file $_[0]\n" : ($fh = *STDIN);
     if ($n) {
-	print(sort { $a <=> $b } <F>);
+	print(sort { $a <=> $b } <$fh>);
     } else {
-	print(sort <F>);
+	print(sort <$fh>);
     }
 }
 

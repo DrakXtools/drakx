@@ -58,7 +58,7 @@ sub spooler {
 
 sub printer_type($) {
     my ($printer) = @_;
-    foreach ($printer->{SPOOLER}) {
+    for ($printer->{SPOOLER}) {
 	/cups/ && return @printer_type_inv{qw(LOCAL), 
 					   qw(LPD SOCKET SMB), 
 					   $::expert ? qw(URI) : ()};
@@ -1045,7 +1045,7 @@ sub restart_queue($) {
     my $queue = $printer->{QUEUE};
 
     # Restart the daemon(s)
-    foreach ($printer->{SPOOLER}) {
+    for ($printer->{SPOOLER}) {
 	/cups/ && do {
 	    #- restart cups.
 	    printer::services::restart("cups");

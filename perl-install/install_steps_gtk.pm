@@ -47,7 +47,7 @@ sub new($$) {
 		my $xpmac_opts = cat_("/proc/cmdline");
 		unless (-d "/var/log") { mkdir("/var/log") }
 		local $SIG{CHLD} = sub { $ok = 0 if waitpid(-1, c::WNOHANG()) > 0 };
-		unless (fork) {
+		unless (fork()) {
 		    exec $_[0], (arch() =~ /^sparc/ || arch() eq "ppc" ? () : "-kb"), "-dpms", "-s", "240",
 		      ($_[0] =~ /Xpmac/ ? $xpmac_opts !~ /ofonly/ ? ("-mode", "17", "-depth", "32") : "-mach64" : ()),
 		      ($_[0] =~ /Xsun/ || $_[0] =~ /Xpmac/ ? ("-fp", "/usr/X11R6/lib/X11/fonts:unscaled") :
@@ -57,7 +57,7 @@ sub new($$) {
 		    sleep 1;
 		    log::l("Server died"), return 0 if !$ok;
 		    if (c::Xtest($ENV{DISPLAY})) {
-			fork || exec("aewm-drakx") || exec("true");
+			fork() || exec("aewm-drakx") || exec("true");
 			return 1;
 		    }
 		}

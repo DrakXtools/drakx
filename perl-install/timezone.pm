@@ -2,7 +2,6 @@ package timezone; # $Id$
 
 use diagnostics;
 use strict;
-use vars;
 
 use common;
 use log;
@@ -132,7 +131,7 @@ my %l2t = (
 );
 
 sub fuzzyChoice { 
-    my ($b, $count) = common::bestMatchSentence($_[0], keys %l2t);
+    my ($b, $count) = bestMatchSentence($_[0], keys %l2t);
     $count ? $b : '';
 }
 sub bestTimezone { $l2t{fuzzyChoice($_[0])} || 'GMT' }

@@ -1,6 +1,6 @@
 package network::isdn; # $Id$
 
-@isdndata =
+our @isdndata =
   (
    { description => "Teles 16.0 (ISA)",               #1 irq, mem, io
     driver => 'hisax',

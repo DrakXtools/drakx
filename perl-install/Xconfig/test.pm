@@ -53,7 +53,7 @@ sub test {
     $ENV{HOME} || $::isInstall or die q($HOME is unset, so I don't know where to put my temporary files);
     my $f_err = "$::prefix$ENV{HOME}/tmp/.drakx.Xoutput";
     my $pid;
-    unless ($pid = fork) {
+    unless ($pid = fork()) {
 	system("xauth add :9 . `mcookie`");
 	open STDERR, ">$f_err";
 	chroot $::prefix if $::prefix;

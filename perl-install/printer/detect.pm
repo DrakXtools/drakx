@@ -79,7 +79,7 @@ sub whatNetPrinter {
 				 val => { CLASS => 'PRINTER',
 					  MODEL => N("Unknown Model"),
 					  MANUFACTURER => "",
-					  DESCRIPTION => "$share->{description}",
+					  DESCRIPTION => $share->{description},
 					  SERIALNUMBER => ""
 				      }
 			     };

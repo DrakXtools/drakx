@@ -23,7 +23,7 @@ my %mice =
  'sunmouse' =>
  [ [ 'sunmouse' ],
    [ [ 3, 'sun', 'sun', N_("Sun - Mouse") ]
-   ]]
+   ] ]
 ) :
 (
  'PS/2' => 
@@ -37,7 +37,7 @@ my %mice =
      [ 5, 'netmouse', 'NetMousePS/2', N_("Genius NetMouse") ],
      [ 5, 'netmouse', 'NetScrollPS/2', N_("Genius NetScroll") ],
      [ 7, 'ps/2', 'ExplorerPS/2', N_("Microsoft Explorer") ],
-   ]],
+   ] ],
      
  'USB' =>
  [ [ 'usbmouse' ],
@@ -46,7 +46,7 @@ my %mice =
      [ 3, 'ps/2', 'PS/2', N_("Generic") ],
      [ 5, 'ps/2', 'IMPS/2', N_("Wheel") ],
      [ 7, 'ps/2', 'ExplorerPS/2', N_("Microsoft Explorer") ],
-   ]],
+   ] ],
 
  N_("serial") =>
  [ [ map { "ttyS$_" } 0..3 ],
@@ -63,19 +63,19 @@ my %mice =
      [ 2, 'MMHitTab', 'MMHittab', N_("MM HitTablet") ],
      [ 3, 'Logitech', 'Logitech', N_("Logitech Mouse (serial, old C7 type)") ],
      [ 3, 'Microsoft', 'ThinkingMouse', N_("Kensington Thinking Mouse") ],
-   ]],
+   ] ],
 
  N_("busmouse") =>
  [ [ arch() eq 'ppc' ? 'adbmouse' : ('atibm', 'inportbm', 'logibm') ],
    [ if_(arch() eq 'ppc', [ 1, 'Busmouse', 'BusMouse', N_("1 button") ]),
      [ 2, 'Busmouse', 'BusMouse', N_("2 buttons") ],
      [ 3, 'Busmouse', 'BusMouse', N_("3 buttons") ],
-   ]],
+   ] ],
 
  N_("none") =>
  [ [ 'none' ],
    [ [ 0, 'none', 'Microsoft', N_("No mouse") ],
-   ]],
+   ] ],
 );
 
 
@@ -442,7 +442,7 @@ sub test_mouse_install {
     $w->{window}->set_usize(undef, $height+10);
     $w->sync; # HACK
     Gtk::Gdk->pointer_grab($darea->window, 1,
-			   [ 'pointer_motion_mask'],
+			   [ 'pointer_motion_mask' ],
 			   $darea->window, undef, 0);
     $w->main;
 }
@@ -465,6 +465,8 @@ sub test_mouse_standalone {
 sub test_mouse {
     my ($mouse, $w, $darea, $width, $height) = @_;
 
+    require my_gtk;
+    my_gtk->import(qw(:wrappers));
     $darea->realize();
     my $wait = 0;
     my ($m3_image, $m3_mask) = gtkcreate_xpm('mouse_3b.xpm');

@@ -61,11 +61,11 @@ sub check_mounted($) {
     }
 }
 
-sub open($) {
+sub open {
     my ($fs) = @_;
 
     check_mounted($fs->{device});
 
-    sysopen F, $fs->{fs_name}, 2 or sysopen F, $fs->{fs_name}, 0 or die "error opening device $fs->{fs_name} for writing\n";
-    $fs->{fd} = *F;
+    sysopen $fs->{fd}, $fs->{fs_name}, 2 or
+      sysopen $fs->{fd}, $fs->{fs_name}, 0 or die "error opening device $fs->{fs_name} for writing\n";
 }

@@ -61,7 +61,7 @@ ask_fromW_begin:
     };
 
     my @labels;
-    my $format_label = sub { my ($e) = @_; return "`${$e->{val}}' $e->{label} $e->{text}\n" };
+    my $format_label = sub { my ($e) = @_; return sprintf("`%s' %s %s\n", ${$e->{val}}, $e->{label}, $e->{text}) };
     my $do_widget = sub {
 	my ($e, $ind) = @_;
 
@@ -106,10 +106,10 @@ ask_fromW_begin:
 	    my $i = readln();
 	    ${$e->{val}} = $i || ${$e->{val}};
 	    ${$e->{val}} = '' if ${$e->{val}} eq 'void';
-	    print "Setting to <${$e->{val}}>\n";
+	    print "Setting to <", ${$e->{val}}, ">\n";
 	    $i and $common->{callbacks}{changed}->($ind);
 	} else {
-	    print "UNSUPPORTED WIDGET TYPE (type <$e->{type}> label <$e->{label}> text <$e->{text}> val <${$e->{val}}>\n";
+	    printf "UNSUPPORTED WIDGET TYPE (type <%s> label <%s> text <%s> val <%s>\n", $e->{type}, $e->{label}, $e->{text}, ${$e->{val}};
 	}
     };
 

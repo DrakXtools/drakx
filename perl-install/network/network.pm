@@ -176,7 +176,7 @@ sub guessHostname {
 
     write_resolv_conf("$prefix/etc/resolv.conf", $netc);
 
-    my $name = gethostbyaddr(Socket::inet_aton($intf->{IPADDR}), AF_INET) or log::l("reverse name lookup failed"), return 0;
+    my $name = gethostbyaddr(Socket::inet_aton($intf->{IPADDR}), Socket::AF_INET()) or log::l("reverse name lookup failed"), return 0;
 
     log::l("reverse name lookup worked");
 
@@ -317,7 +317,7 @@ notation (for example, 1.2.3.4).");
 	           { label => N("Automatic IP"), val => \$pump, type => "bool", text => N("(bootp/dhcp)") },
 	           if_($::expert, { label => N("Start at boot"), val => \$onboot, type => "bool" }),
 		   if_($intf->{wireless_eth},
-	           { label => "WIRELESS_MODE", val => \$intf->{WIRELESS_MODE}, list => [ "Ad-hoc", "Managed", "Master", "Repeater", "Secondary", "Auto"] },
+	           { label => "WIRELESS_MODE", val => \$intf->{WIRELESS_MODE}, list => [ "Ad-hoc", "Managed", "Master", "Repeater", "Secondary", "Auto" ] },
 	           { label => "WIRELESS_ESSID", val => \$intf->{WIRELESS_ESSID} },
 	           { label => "WIRELESS_NWID", val => \$intf->{WIRELESS_NWID} },
 	           { label => "WIRELESS_FREQ", val => \$intf->{WIRELESS_FREQ} },

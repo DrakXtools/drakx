@@ -565,7 +565,7 @@ sub keytable {
     -r "$::prefix/$f" && $f;
 }
 
-sub has_profiles { to_bool(get_label("office", $b)) }
+sub has_profiles { my ($b) = @_; to_bool(get_label("office", $b)) }
 sub set_profiles {
     my ($b, $want_profiles) = @_;
 

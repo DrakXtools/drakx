@@ -260,7 +260,7 @@ sub choose_gtk {
 					   $pixmap_mo,
 					   gtkpack2(new Gtk::HBox(0,0),
 						    create_packtable({ col_spacings => 5, row_spacings => 5 },
-	     [ $x_res_combo = new Gtk::Combo, new Gtk::Label("")],
+	     [ $x_res_combo = new Gtk::Combo, new Gtk::Label("") ],
 	     [ $depth_combo = new Gtk::Combo, gtkadd(gtkset_shadow_type(new Gtk::Frame, 'etched_out'), $pix_colors) ],
 							     ),
 						   ),

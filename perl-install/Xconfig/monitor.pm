@@ -180,7 +180,7 @@ sub readMonitorsDB {
     my ($file) = @_;
 
     my @monitors;
-    my $F = common::openFileMaybeCompressed($file);
+    my $F = openFileMaybeCompressed($file);
     local $_;
     my $lineno = 0; while (<$F>) {
 	$lineno++;

@@ -148,13 +148,6 @@ my @want_string = qw(Identifier DeviceName VendorName ModelName BoardName Driver
 @want_string = map { lc } @want_string;
 
 sub from_raw {
-    foreach my $e (@_) {
-	($e->{l}, my $l) = ({}, $e->{l});
-	from_raw__rec($e, $_) foreach @$l;
-
-	delete $e->{kind};
-    }
-
     sub from_raw__rec {
 	my ($current, $e) = @_;
 	if ($e->{l}) {
@@ -176,6 +169,13 @@ sub from_raw {
 	    }
 	}
 	delete $e->{name};
+    }
+
+    foreach my $e (@_) {
+	($e->{l}, my $l) = ({}, $e->{l});
+	from_raw__rec($e, $_) foreach @$l;
+
+	delete $e->{kind};
     }
 }
 

@@ -3,8 +3,6 @@ package install_interactive; # $Id$
 use diagnostics;
 use strict;
 
-use vars;
-
 use common;
 use partition_table qw(:types);
 use partition_table::raw;
@@ -202,9 +200,9 @@ When you are done, don't forget to save using `w'", partition_table::description
 		print "\n\n";
 		my $pid = 0;
 		if (arch() =~ /ppc/) {
-			$pid = fork or exec "pdisk", devices::make($_->{device});
+			$pid = fork() or exec "pdisk", devices::make($_->{device});
 		} else {
-			$pid = fork or exec "fdisk", devices::make($_->{device});
+			$pid = fork() or exec "fdisk", devices::make($_->{device});
 		}			
 		waitpid($pid, 0);
 	    }

@@ -1,14 +1,14 @@
 package resize_fat::c_rewritten; # $Id$
 
 use strict;
-use vars qw($VERSION @ISA);
 
 require DynaLoader;
 
-@ISA = qw(DynaLoader);
-$VERSION = '0.01';
+our @ISA = qw(DynaLoader);
+our $VERSION = '0.01';
+our @EXPORT_OK = qw(next set_next);
 
-bootstrap resize_fat::c_rewritten $VERSION;
+resize_fat::c_rewritten->bootstrap($VERSION);
 
 1;
 

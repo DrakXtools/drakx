@@ -501,7 +501,8 @@ GridHeight=70
 
     #- fix bad update-alternatives that may occurs after upgrade (but let them for install too).
     if (-d "$o->{prefix}/etc/alternatives") {
-	local (*ALTERNATE_DIR, $_); opendir ALTERNATE_DIR, "$o->{prefix}/etc/alternatives";
+	local *ALTERNATE_DIR; opendir ALTERNATE_DIR, "$o->{prefix}/etc/alternatives";
+	local $_;
 	while (defined($_ = readdir ALTERNATE_DIR)) {
 	    -e "$o->{prefix}/etc/alternatives/$_" and next;
 	    log::l("fixing broken alternative $_");
@@ -691,7 +692,7 @@ sub configureServices {
 }
 #------------------------------------------------------------------------------
 sub configurePrinter {
-    my($o) = @_;
+    my ($o) = @_;
     $o->do_pkgs->install('foomatic', 'printer-utils', 'printer-testpages',
 			 if_($o->do_pkgs->is_installed('gimp'), 'gimpprint'));
     

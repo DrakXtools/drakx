@@ -287,7 +287,7 @@ You can add some more or change the existing ones."),
 { label => N("Image"), val => \$e->{kernel_or_dev}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/vmlinuz*") ], not_edit => 0 },
 { label => N("Root"), val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
 { label => N("Append"), val => \$e->{append} },
-  if_(arch !~ /ppc|ia64/,
+  if_(arch() !~ /ppc|ia64/,
 { label => N("Video mode"), val => \$e->{vga}, list => [ keys %bootloader::vga_modes ], format => sub { $bootloader::vga_modes{$_[0]} }, not_edit => !$::expert },
 ),
 { label => N("Initrd"), val => \$e->{initrd}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/initrd*") ], not_edit => 0 },
@@ -1022,7 +1022,7 @@ Allowing this will permit users to simply click on \"Share\" in konqueror and na
 N("The per-user sharing uses the group \"fileshare\". 
 You can use userdrake to add a user in this group.")
 	}, [])) {
-	    if (!fork) { exec "userdrake" or c::_exit(0) }
+	    if (!fork()) { exec "userdrake" or c::_exit(0) }
 	}
     }
 }
