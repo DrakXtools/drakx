@@ -904,7 +904,7 @@ configure it on the machine where it is connected to."));
 		    if ($drivertype eq 'Z23') {$drivertype = 'Z33';}
 		    $drivertype = lc($drivertype);
 		    if (!printer::files_exist("/usr/local/lexmark/$drivertype/$drivertype")) {
-			$in->do_pkgs->install("lexmark-drivers-$drivertype");
+			eval { $in->do_pkgs->install("lexmark-drivers-$drivertype") };
 		    }
 		    if (!printer::files_exist("/usr/local/lexmark/$drivertype/$drivertype")) {
 			# Driver installation failed, probably we do not have
