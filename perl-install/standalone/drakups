@@ -157,7 +157,8 @@ Please fill in its name, its driver and its port.", $model, $vendor);
 
     $config->{$name}{driver} = $driver;
     $config->{$name}{port} = $port;
-    $models{ups}->append_set(1 => $name, 2 => $driver, 3 => $port);
+    # refresh the GUI when needed:
+    $models{ups}->append_set(1 => $name, 2 => $driver, 3 => $port) if $models{ups};
 
     log::explanations(qq(Configuring "$name" UPS));
 }
@@ -302,6 +303,12 @@ my @pages = (
 $in = 'interactive'->vnew;
 
 $ugtk2::wm_icon = "drakups";
+
+if (any { $_ eq '--wizard' } @ARGV) {
+    add_device_wizard($in, $struct);
+    $in->exit($@ ? 1 : 0);
+}
+
 $w = ugtk2->new(N("DrakUPS"));
 if (!$::isEmbedded) {
     $::main_window = $w->{rwindow};
