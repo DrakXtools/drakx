@@ -21,8 +21,7 @@ use log;
 use c;
 use network::netconnect;
 use detect_devices;
-
-use MDK::Common;
+use common;
 
 $::isInstall and die "Not supported during install.\n";
 
@@ -166,8 +165,8 @@ What would you like to do?"),
 	}
     }
     else {
-	$in->ask_warn(_("Unrecognized config file"), _("Config file content could not be interpreted."));
-	quit_global($in, -1);
+	log::l("[drakgw] Warning, unrecognized config file, ignoring");
+	renamef($drakgw_setup, "$drakgw_setup.unrecognized");
     }
 }
 
@@ -277,7 +276,6 @@ if ($kernel_version eq '2.2') {
 $wait_configuring = $in->wait_message(_("Configuring..."), 
 				      _("Configuring scripts, installing software, starting servers..."));
 
-substInFile { s/^INTERFACE.*\n//; $_ .= "INTERFACE=$device\n" if eof } $drakgw_setup;
 
 #- setup the /etc/sysconfig/network-script/ script
 
@@ -297,15 +295,22 @@ ONBOOT=yes
 #- install and setup the RPM packages
 
 my $rpms_to_install;
-my %rpm2file = ( ipchains => "/sbin/ipchains",
-		 iptables => "/sbin/iptables",
-		 dhcp => "/usr/sbin/dhcpd",
+my %rpm2file = ( ipchains => '/sbin/ipchains',
+		 iptables => '/sbin/iptables',
+		 'dhcp-server' => '/usr/sbin/dhcpd',
 		 linuxconf => $conf_linuxconf,
-		 bind => "/usr/sbin/named",
-		 "caching-nameserver" => "/var/named/named.local");
+		 bind => '/usr/sbin/named',
+		 'caching-nameserver' => '/var/named/named.local');
 
+#- first: try to install all in one step
 $in->do_pkgs->install(grep { !-e $rpm2file{$_} } keys %rpm2file);
--e $rpm2file{$_} or fatal_quit(_("Problems installing package $_")) foreach keys %rpm2file;
+#- second: try one by one if failure detected
+if (grep { !-e $rpm2file{$_} } keys %rpm2file) {
+    foreach (keys %rpm2file) {
+	-e $rpm2file{$_} or $in->do_pkgs->install($_);
+	-e $rpm2file{$_} or fatal_quit(_("Problems installing package $_"));
+    }
+}
 
 
 #- setup the masquerading configuration
@@ -497,6 +502,8 @@ output($dhcpd_conf, qq(subnet $lan_address.0 netmask 255.255.255.0 {
 	max-lease-time 43200;
 }
 ));
+my $update_dhcp = '/usr/sbin/update_dhcp.pl';
+-e $update_dhcp and system($update_dhcp);
 
 
 #- put the interface for the dhcp server in linuxconf config, for the /etc script of dhcpd
@@ -578,6 +585,7 @@ if (-f $cups_conf) {
 
 #- start the daemons
 
+substInFile { s/^INTERFACE.*\n//; $_ .= "INTERFACE=$device\n" if eof } $drakgw_setup;
 start_daemons();
 
 
@@ -657,6 +665,12 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.48  2001/08/09 09:15:38  gc
+#- - if package installs fail, redo one by one to know which one failed
+#- - try to not end up with a failing configuration file, if program is brutally stopped
+#- - if unrecognized config file, don't fail, rather ignore it and proceed
+#- - run dhcpd_update feature (if present) after setup of dhcp server
+#-
 #- Revision 1.47  2001/08/08 18:26:31  prigaux
 #- add interactive_pkgs stuff
 #-
