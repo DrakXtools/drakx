@@ -2,6 +2,8 @@
 DEST_LIVETREE = /tmp/live_tree
 DEST_STAGE2 = $(DEST_LIVETREE)/usr/bin/stage2
 
+ISO = /BIG/mdkmove.iso
+
 DATA_FILES = devices symlinks directories-to-create etcfiles all-etcfiles keyfiles README.adding.more.files
 LANG_FILES = $(shell perl -ne 'print $$1 if /ALLOWED_LANGS = qw\((.*)\)/' move.pm)
 
@@ -17,6 +19,7 @@ else
 LIB_NAME = lib
 endif
 
+.PHONY: iso 
 
 all: install
 
@@ -61,7 +64,6 @@ install: build
 	grep ChangeLog $(INSTALL)/CVS/Entries > /tmp/version
 	sudo cp -f /tmp/version $(DEST_LIVETREE)/usr/share/VERSION
 
-
 live_tree_boot:
 	./make_live_tree_boot
 	$(MAKE) /tmp/live_tree_always.clp
@@ -71,6 +73,20 @@ live_tree_boot:
 
 un_live_tree_boot:
 	./make_live_tree_boot -u
+
+iso: un_live_tree_boot install live_tree_boot
+	rm -rf /tmp/iso /tmp/live_tree.clp
+	mkdir /tmp/iso
+	cp -a isolinux /tmp/iso
+	$(MAKE) /tmp/live_tree.clp
+	mv /tmp/*.clp /tmp/iso
+
+	touch /tmp/iso/isolinux/boot.cat
+	find /tmp/iso/isolinux -type f -printf '%p 100\n' > r.sort ; echo '/tmp/iso/live_tree_boot.clp 5' >> r.sort
+	mkisofs -r -J -hide-rr-moved -nobak -cache-inodes -V 'Mandrake Move' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $(ISO) /tmp/iso
+	mv /tmp/iso/*.clp /tmp
+#	cdrecord -v -eject dev=0,0,0 blank=fast gracetime=2 speed=99 $(ISO)
+#	ftp://a:a@leia//BIG/mdkmove.iso
 
 xwait: %: %.c
 	$(CC) $(CFLAGS) $< -L/usr/X11R6/$(LIB_NAME) -lX11 -o $@
@@ -89,6 +105,3 @@ check_dirs:
 	for i in `cat data/*.dirs`; do grep /tmp/live_tree$$i/ data/*.list; done ||:
 
 # perl tools/busy-files-accesses --no-link --no-dir --full-dirs 'data/always.dirs data/boot.dirs data/totem.dirs' --already-have data/always.list
-
-# touch r/isolinux/boot.cat ; find r/isolinux -type f -printf '%p 100\n' > r.sort ; echo 'r/isolinux/live_tree_boot.clp 5' >> r.sort
-# mkisofs -r -J -hide-rr-moved -nobak -cache-inodes -V 'Mandrake Move' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table r | cdrecord -v -eject dev=0,0,0 blank=fast gracetime=2 speed=99 -
