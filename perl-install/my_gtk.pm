@@ -264,7 +264,8 @@ sub gtkctree_children {
 
 sub gtkcreate_xpm { 
     my ($w, $f) = @_; 
-    Gtk::Gdk::Pixmap->create_from_xpm($w->window, $w->style->bg('normal'), $f) or die "gtkcreate_xpm: missing pixmap file $f";
+    my @l = Gtk::Gdk::Pixmap->create_from_xpm($w->window, $w->style->bg('normal'), $f) or die "gtkcreate_xpm: missing pixmap file $f";
+    @l;
 }
 sub xpm_d { my $w = shift; Gtk::Gdk::Pixmap->create_from_xpm_d($w->window, undef, @_) }
 sub gtkxpm { new Gtk::Pixmap(gtkcreate_xpm(@_)) }
