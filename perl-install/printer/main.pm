@@ -666,7 +666,7 @@ sub get_cups_autoconf() { $sysconfig{CUPS_CONFIG} ne 'manual' ? 1 : 0 }
 sub set_usermode {
     my ($usermode) = @_;
     $sysconfig{USER_MODE} = $usermode ? "expert" : "recommended";
-    setVarsInSh("$::prefix/etc/sysconfig/printing", \%sysconfig);
+    setVarsInSh("$::prefix/etc/sysconfig/printing", \%sysconfig) if !$::testing;
     return $usermode;
 }
 
