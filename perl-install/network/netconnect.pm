@@ -154,7 +154,7 @@ If you don't want to use the auto detection, deselect the checkbox.
             $conf{$type} and do {
                 $in->isa('interactive::gtk') and do {
                     #-PO here, "forward" is the standard gtk+ button for "next"; check what is displayed in your language
-                    $in->ask_okcancel(N("Network Configuration Wizard"), N("We are now going to configure the %s connection.\n\n\nPress \"Forward\" to continue.", translate($type)), 1) or goto step_2;
+                    $in->ask_okcancel(N("Network Configuration Wizard"), N("We are now going to configure the %s connection.\n\n\nPress \"%s\" to continue.", translate($type), N("Next")), 1) or goto step_2;
                     &{$net_conf_callbacks{$type}} or goto step_2;
                     $netconnect::need_restart_network = 1 if $type =~/lan|cable/;
                 }
