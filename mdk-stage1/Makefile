@@ -125,7 +125,7 @@ endif
  #- stage1 itself
 STAGE1SRC = stage1.c log.c tools.c modules.c probing.c mount.c automatic.c frontend-common.c
 CDROMSRC = cdrom.c $(MOVE_ADDSRC)
-DISKSRC = disk.c lomount.c
+DISKSRC = disk.c directory.c lomount.c
 NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c adsl.c $(MOVE_ADDSRC)
 
 ALLSRC = $(INITSRC) $(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC)

@@ -37,6 +37,7 @@
 #include "automatic.h"
 
 #include "disk.h"
+#include "directory.h"
 
 struct partition_detection_anchor {
 	off_t offset;
@@ -134,21 +135,6 @@ static const char * detect_partition_type(char * dev)
 	return part_type;
 }
 
-static char * disk_extract_list_directory(char * direct)
-{
-	char ** full = list_directory(direct);
-	char tmp[2000] = "";
-	int i;
-	for (i=0; i<5 ; i++) {
-		if (!full || !*full)
-			break;
-		strcat(tmp, *full);
-		strcat(tmp, "\n");
-		full++;
-	}
-	return strdup(tmp);
-}
-
 static int list_partitions(char * dev_name, char ** parts, char ** comments)
 {
 	int major, minor, blocks;
@@ -207,11 +193,9 @@ static enum return_type try_with_device(char *dev_name)
 	char location_full[500];
 
 	char * disk_own_mount = SLASH_LOCATION "/tmp/hdimage";
-        char * loopdev = NULL;
 
 	char * parts[50];
 	char * parts_comments[50];
-	struct stat statbuf;
 	enum return_type results;
 	char * choice;
         
@@ -254,152 +238,19 @@ static enum return_type try_with_device(char *dev_name)
 	if (access(location_full, R_OK)) {
 		stg1_error_message("Directory or ISO image file could not be found on partition.\n"
 			      "Here's a short extract of the files in the root of the partition:\n"
-			      "%s", disk_extract_list_directory(disk_own_mount));
+			      "%s", extract_list_directory(disk_own_mount));
 		umount(disk_own_mount);
 		return try_with_device(dev_name);
 	}
 
-	unlink(IMAGE_LOCATION);
-
-#ifndef MANDRAKE_MOVE
-	if (!stat(location_full, &statbuf) && S_ISDIR(statbuf.st_mode)) {
-		char **file;
-		char *stage2_isos[100] = { "Use directory as a mirror tree", "-----" };
-		int stage2_iso_number = 2;
-
-		log_message("\"%s\" exists and is a directory, looking for iso files", location_full);
-
-		for (file = list_directory(location_full); *file; file++) {
-			char isofile[500], install_location[600];
-
-			if (strstr(*file, ".iso") != *file + strlen(*file) - 4)
-				/* file doesn't end in .iso, skipping */
-				continue;
-			
-			strcpy(isofile, location_full);
-			strcat(isofile, "/");
-			strcat(isofile, *file);
-
-			if (lomount(isofile, IMAGE_LOCATION, &loopdev, 0)) {
-				log_message("unable to mount iso file \"%s\", skipping", isofile);
-				continue;
-			}
-
-			strcpy(install_location, IMAGE_LOCATION);
-
-			if (IS_SPECIAL_STAGE2 || ramdisk_possible())
-				strcat(install_location, get_ramdisk_realname()); /* RAMDISK install */
-			else
-				strcat(install_location, LIVE_LOCATION); /* LIVE install */
-
-			if (access(install_location, R_OK)) {
-				log_message("ISO image \"%s\" doesn't contain stage2 installer", isofile);
-			} else {
-				log_message("stage2 installer found in ISO image is \"%s\"", isofile);
-				stage2_isos[stage2_iso_number++] = strdup(*file);
-			}
-
- 			umount(IMAGE_LOCATION);
-			del_loop(loopdev);
-		}
-
-		stage2_isos[stage2_iso_number] = NULL;
-
-		if (stage2_iso_number > 2) {
-			do {
-				results = ask_from_list("Please choose the ISO image to be used to install the "
-							DISTRIB_NAME " Distribution.",
-							stage2_isos, file);
-				if (results == RETURN_BACK) {
-					umount(disk_own_mount);
-					return try_with_device(dev_name);
-				} else if (results == RETURN_OK) {
-					if (!strcmp(*file, stage2_isos[0])) {
-						/* use directory as a mirror tree */
-						continue;
-					} else if (!strcmp(*file, stage2_isos[1])) {
-						/* the separator has been selected */
-						results = RETURN_ERROR;
-						continue;
-					} else {
-						/* use selected ISO image */
-						strcat(location_full, "/");
-						strcat(location_full, *file);
-						log_message("installer will use ISO image \"%s\"", location_full);
-					}
-				}
-			} while (results == RETURN_ERROR);
-		} else {
-			log_message("no ISO image found in \"%s\" directory", location_full);
-		}
-	}
-#endif
-
-	if (!stat(location_full, &statbuf) && !S_ISDIR(statbuf.st_mode)) {
-		log_message("%s exists and is not a directory, assuming this is an ISO image", location_full);
-		if (lomount(location_full, IMAGE_LOCATION, &loopdev, 0)) {
-			stg1_error_message("Could not mount file %s as an ISO image of the " DISTRIB_NAME " Distribution.", answers_location[0]);
-			umount(disk_own_mount);
-			return try_with_device(dev_name);
-		}
-		add_to_env("ISOPATH", location_full);
-		add_to_env("METHOD", "disk-iso");
-	} else {
-		symlink(location_full, IMAGE_LOCATION);
-		add_to_env("METHOD", "disk");
-	}
-#ifndef MANDRAKE_MOVE
-	if (IS_SPECIAL_STAGE2 || ramdisk_possible()) {
-		/* RAMDISK install */
-		if (access(IMAGE_LOCATION RAMDISK_LOCATION, R_OK)) {
-			stg1_error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
-				      "(I need the subdirectory " RAMDISK_LOCATION ")\n"
-				      "Here's a short extract of the files in the directory:\n"
-				      "%s", disk_extract_list_directory(IMAGE_LOCATION));
-			umount(disk_own_mount);
-			del_loop(loopdev);
-			return try_with_device(dev_name);
-		}
-		if (load_ramdisk() != RETURN_OK) {
-			stg1_error_message("Could not load program into memory.");
-			umount(disk_own_mount);
-			del_loop(loopdev);
-			return try_with_device(dev_name);
-		}
-	} else {
-#endif
-		/* LIVE install */
-#ifdef MANDRAKE_MOVE
-		if (access(IMAGE_LOCATION "/live_tree.clp", R_OK)) {
-#else
-		if (access(IMAGE_LOCATION LIVE_LOCATION, R_OK)) {
-#endif
-			stg1_error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
-				      "(I need the subdirectory " LIVE_LOCATION ")\n"
-				      "Here's a short extract of the files in the directory:\n"
-				      "%s", disk_extract_list_directory(IMAGE_LOCATION));
-			umount(disk_own_mount);
-			del_loop(loopdev);
-			return try_with_device(dev_name);
-		}
-#ifndef MANDRAKE_MOVE
-		char p;
-		if (readlink(IMAGE_LOCATION LIVE_LOCATION "/usr/bin/runinstall2", &p, 1) != 1) {
-			stg1_error_message("The " DISTRIB_NAME " Distribution seems to be copied on a Windows partition. "
-				      "You need more memory to perform an installation from a Windows partition. "
-				      "Another solution if to copy the " DISTRIB_NAME " Distribution on a Linux partition.");
-			umount(disk_own_mount);
-			del_loop(loopdev);
-			return try_with_device(dev_name);
-		}
-		log_message("found the " DISTRIB_NAME " Installation, good news!");
-	}
-#endif
-
-	if (IS_RESCUE) {
+	results = try_with_directory(location_full, "disk", "disk-iso");
+	if (results != RETURN_OK) {
 		umount(disk_own_mount);
-                del_loop(loopdev);
+		return try_with_device(dev_name);
 	}
+
+	if (IS_RESCUE)
+		umount(disk_own_mount);
 
 	return RETURN_OK;
 }
