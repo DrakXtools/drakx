@@ -56,7 +56,7 @@ if ($image) {
 my $all_hds = fsedit::get_hds();
 fs::get_info_from_fstab($all_hds);
 
-my $bootloader = bootloader::read([ fs::get::fstab($all_hds) ]) or die "Cannot find a boot loader installed\n";
+my $bootloader = bootloader::read($all_hds) or die "Cannot find a boot loader installed\n";
 
 
 $action =~ s/-/_/g;

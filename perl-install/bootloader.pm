@@ -145,13 +145,28 @@ sub add_boot_splash {
 }
 
 sub read {
-    my ($fstab) = @_;
+    my ($all_hds) = @_;
+    my $fstab = [ fs::get::fstab($all_hds) ];
     my @methods = method_choices_raw();
     foreach my $main_method (uniq(map { main_method($_) } @methods)) {
 	my $f = $bootloader::{"read_$main_method"} or die "unknown bootloader method $main_method (read)";
 	my $bootloader = $f->($fstab);
-	my $type = partition_table::raw::typeOfMBR($bootloader->{boot});
-	warn "typeOfMBR $type on $bootloader->{boot} for method $main_method\n" if $ENV{DEBUG};
+
+	my @devs = $bootloader->{boot};
+	if ($bootloader->{'raid-extra-boot'} =~ /mbr/ && 
+	    (my $md = fs::get::device2part($bootloader->{boot}, $all_hds->{raids}))) {
+	    @devs = map { $_->{rootDevice} } @{$md->{disks}};
+	} elsif ($bootloader->{'raid-extra-boot'} =~ m!/dev/!) {
+	    @devs = split(',', $bootloader->{'raid-extra-boot'});
+	}
+
+	my ($type) = map {
+	    if (my $type = partition_table::raw::typeOfMBR($_)) {
+		warn "typeOfMBR $type on $_ for method $main_method\n" if $ENV{DEBUG};
+		$type;
+	    } else { () }
+	} @devs;
+
 	if ($type eq $main_method) {
 	    my @prefered_entries = map { get_label($_, $bootloader) } $bootloader->{default}, 'linux';
 
@@ -780,8 +795,8 @@ wait for default boot.
 }
 
 sub detect_main_method {
-    my ($fstab) = @_;
-    my $bootloader = &read($fstab);
+    my ($all_hds) = @_;
+    my $bootloader = &read($all_hds);
     $bootloader && main_method($bootloader->{method});
 }
 
@@ -1328,7 +1343,7 @@ sub update_for_renumbered_partitions {
 	}
     }
 
-    my $main_method = detect_main_method([ fs::get::fstab($all_hds) ]);
+    my $main_method = detect_main_method($all_hds);
     my @needed = $main_method ? $main_method : ('lilo', 'grub');
     if (find {
 	my $config = $_ eq 'grub' ? 'grub_install' : $_;

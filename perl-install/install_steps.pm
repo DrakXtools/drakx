@@ -831,7 +831,7 @@ sub readBootloaderConfigBeforeInstall {
     my ($o) = @_;
 
     require bootloader;
-    add2hash($o->{bootloader} ||= {}, bootloader::read($o->{fstab}));
+    add2hash($o->{bootloader} ||= {}, bootloader::read($o->{all_hds}));
 
     $o->{bootloader}{bootUnsafe} = 0 if $o->{bootloader}{boot}; #- when upgrading, don't ask where to install the bootloader (mbr vs boot partition)
 }
