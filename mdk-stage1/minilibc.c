@@ -47,6 +47,15 @@ void __libc_init_first (int __status __attribute__ ((unused)))
 {
 }
 
+void __libc_csu_fini(int __status __attribute__ ((unused)))
+{
+}
+
+void __libc_csu_init(int __status __attribute__ ((unused)))
+{
+}
+
+
 int __libc_start_main (int (*main) (int, char **, char **), int argc,
 		       char **argv, void (*init) (void) __attribute__ ((unused)), void (*fini) (void) __attribute__ ((unused)),
 		       void (*rtld_fini) (void) __attribute__ ((unused)), void *stack_end __attribute__ ((unused)))
