@@ -399,10 +399,10 @@ sub load {
 	my $table_index = $::i;
 	if (!$_) {
 	    #- deallocate table
-	    ioctl($F, c::KDSKBENT(), pack("CCS", $table_index, 0, c::K_NOSUCHMAP())) or die "removing table $table_index failed: $!";
+	    ioctl($F, c::KDSKBENT(), pack("CCS", $table_index, 0, c::K_NOSUCHMAP())) or log::l("removing table $table_index failed: $!");
 	} else {
 	    each_index {
-		ioctl($F, c::KDSKBENT(), pack("CCS", $table_index, $::i, $_)) or die "keymap ioctl failed ($table_index $::i $_): $!";
+		ioctl($F, c::KDSKBENT(), pack("CCS", $table_index, $::i, $_)) or log::l("keymap ioctl failed ($table_index $::i $_): $!");
 	    } @{$tables[$i_tables++]};
 	}
     } @$tables_given;
