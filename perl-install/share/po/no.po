@@ -3396,7 +3396,6 @@ msgid ""
 msgstr ""
 
 #: ../../help.pm_.c:780
-#, fuzzy
 msgid ""
 "You can add additional entries for yaboot, either for other operating\n"
 "systems, alternate kernels, or for an emergency boot image.\n"
@@ -3447,74 +3446,53 @@ msgstr ""
 "Du kan legge til flere valg for yaboot, enten for andre operativsystemer\n"
 "andre kjerner, eller for ett nødbootspeil.\n"
 "\n"
+"For andre OS består inngangen bare av et navn og rotpartisjonen\n"
 "\n"
-"For andre OS - skriv inn navn og rotpartisjon\n"
+"For Linux er det et par mulige valg:\n"
 "\n"
+" * Label: Dette er navnet du vil skrive ved yaboot klartegnet for å velge\n"
+"dette oppstartsvalget.\n"
 "\n"
-"Det er for Linux noen mulige valg:\n"
+" * Image: Dette er navnet på kjernen for oppstart. Typisk vmlinux\n"
+"eller en variasjon av vmlinux med en utvidelse.\n"
 "\n"
+" * Root: \"root\" enheten eller \"/\" for Linux installasjonen din.\n"
 "\n"
-"  - Label: This is simply the name will type at the yaboot prompt to select "
-"this \n"
-"boot option.\n"
+" * Append: På Apple maskinvare er kjerneopsjonen append ofte brukt til\n"
+"å assistere i initialisering av video maskinvare, eller til å slå på "
+"tastatur\n"
+"museknapp emulering for de ofte manglende andre og tredje museknappene på "
+"en\n"
+"Apple mus. Her er noen eksempler:\n"
 "\n"
-"\n"
-"  - Image: This would be the name of the kernel to boot.  Typically vmlinux "
-"or\n"
-"a variation of vmlinux with an extension.\n"
-"\n"
-"\n"
-"  - Root: The root device or '/' for your Linux installation.\n"
-"\n"
-"\n"
-"  \n"
-"  - Append: On Apple hardware, the kernel append option is used quite often "
-"to\n"
-"assist in initializing video hardware, or to enable keyboard mouse button "
-"emulation\n"
-"for the often lacking 2nd and 3rd mouse buttons on a stock Apple mouse.  The "
-"following \n"
-"are some examples:\n"
-"\n"
-"\n"
-"\t video=aty128fb:vmode:17,cmode:32,mclk:71 adb_buttons=103,111 "
+"         video=aty128fb:vmode:17,cmode:32,mclk:71 adb_buttons=103,111 "
 "hda=autotune\n"
 "\n"
-"\t video=atyfb:vmode:12,cmode:24 adb_buttons=103,111 \n"
+"         video=atyfb:vmode:12,cmode:24 adb_buttons=103,111\n"
 "\n"
+" * Initrd: Dette valget kan brukes enten til å laste initiale moduler, før\n"
+"oppstartsenheten er tilgengelig, eller til å laste et ramdisk-bilde for en\n"
+"nødoppstart situasjon.\n"
 "\n"
-" \n"
-"  - Initrd: This option can be used either to load initial modules, before "
-"the boot \n"
-"device is available, or to load a ramdisk image for an emergency boot "
-"situation.\n"
+" * Initrd-size: Standard ramdisk størrelse er vanligvis 4,096 bytes. Hvis "
+"du\n"
+"trenger å allokere en stor ramdisk, kan dette valget brukes.\n"
 "\n"
+" * Read-write: Normalt kommer \"root\" partisjonen opp som read-only for å\n"
+"la et filsystem sjekke for systemet system blir \"live\".\n"
+"Her kan du overstyre dette valget.\n"
 "\n"
-"  - Initrd-size: The default ramdisk size is generally 4096 bytes.  If you "
-"should need\n"
-"to allocate a large ramdisk, this option can be used.\n"
+" * NoVideo: Skulle Apple video maskinvaren vise seg å være veldig\n"
+"problematisk, kan du velge dette valget for å starte i \"novideo\" modus, "
+"med\n"
+"egen framebuffer støtte.\n"
 "\n"
-"\n"
-"  - Read-write: Normally the 'root' partition is initially brought up read-"
-"only, to allow\n"
-"a filesystem check before the system becomes 'live'.  You can override this "
-"option here.\n"
-"\n"
-"\n"
-"  - NoVideo: Should the Apple video hardware prove to be exceptionally "
-"problematic, you can\n"
-"select this option to boot in 'novideo' mode, with native framebuffer "
-"support.\n"
-"\n"
-"\n"
-"  - Default: Selects this entry as being the default Linux selection, "
-"selectable by just\n"
-"pressing ENTER at the yaboot prompt.  This entry will also be highlighted "
-"with a '*', if you\n"
-"press TAB to see the boot selections."
+" * Default: Velger denne inngangen som standard Linux valg, og kan velges\n"
+"ved å trykke ENTER ved yaboot klartegnet. Denne inngangen vil også bli\n"
+"fremhevet med en \"*\", hvis du trykker [Tab] for å se oppstarts-\n"
+"valgene."
 
 #: ../../help.pm_.c:825
-#, fuzzy
 msgid ""
 "Yaboot is a boot loader for NewWorld MacIntosh hardware. It is able to boot\n"
 "either GNU/Linux, MacOS or MacOSX if present on your computer. Normally,\n"
@@ -3550,49 +3528,44 @@ msgid ""
 " * Default OS: you can select which OS will boot by default when the Open\n"
 "Firmware Delay expires."
 msgstr ""
-"Yaboot er en oppstartslaster for NewWorld MacIntosh hardware. Den kan\n"
+"Yaboot er en oppstartslaster for NewWorld MacIntosh maskinvare. Den kan\n"
 "starte enten GNU/Linux, MacOS eller MacOSX, hvis de er til stede på din\n"
-"datamaskin. Vanligvis vil disse andre operativsystemer bli korrekt oppdaget "
-"og\n"
-"installert. Hvis dette ikke skulle være tilfelle kan du legge til endringer "
-"her.\n"
-"Vær forsiktig når du velger de korrekte parametre.\n"
+"datamaskin. Vanligvis vil disse andre operativsystemer bli korrekt oppdaget\n"
+"og installert. Hvis dette ikke skulle være tilfelle kan du legge til "
+"endringer\n"
+"her. Vær forsiktig når du velger de korrekte parametre.\n"
+"\n"
+"Yaboots hovedvalg er:\n"
 "\n"
 "\n"
-"Yaboots hovdvalg er:\n"
+" * Init beskjed: En enkel melding som vises før oppstartsprosessen starter.\n"
 "\n"
+" * Oppstartsenhet: Indikerer hvor du ønsker å plassere informasjonen som "
+"trengs\n"
+"for å starte GNU/Linux. Du vil generelt ha satt opp en bootstrap-partisjon\n"
+"tidligere for å ta vare på denne informasjonen.\n"
 "\n"
-"  - Init beskjed: En enkel melding som vises før \n"
-"oppstartsprosessen starter.\n"
-"\n"
-"\n"
-"  - Oppstartsenhet: Indiker hvor du ønsker å plassere informasjonen\n"
-"som trengs for å starte GNU/Linux. Du vil generelt ha satt opp en\n"
-"bootstrap-partisjon for å ha denne informasjonen.\n"
-"\n"
-"\n"
-"  - Åpne firmwareforsinkelse: Ulikt LILO så er det to forsinkelser\n"
+" * Åpne firmwareforsinkelse: Ulikt LILO så er det to forsinkelser\n"
 "som er tilgjengelig med yaboot. Den første forsinkelsen blir målt i\n"
 "sekunder og du kan ved det punktet velge mellom CD, OF-boot, \n"
 "MacOS eller Linux.\n"
 "\n"
-"  - KjernebBoot Timeout: Denne er lik LILI oppstartsforsinkelse.\n"
-"Etter å ha valgt Linux, vil du ha 0,1 sekunder før standard kjerne \n"
+" * Kjerneboot Timeout: Denne er lik LILO oppstartsforsinkelse.\n"
+"Etter å ha valgt Linux, vil du ha 0,1 sekunder før standard kjerne\n"
 "blir valgt.\n"
 "\n"
+" * Aktiver CD Boot?: Hvis du velger dette valget vil du kunne\n"
+"trykke \"C\" for CD ved det første oppstartsvalget.\n"
 "\n"
-"  - Aktiver CD Boot?: Hvis du velger dette valget vil \n"
-"du kunne trykke 'C' for CD ved det første oppstartsvalget.\n"
+" * Aktiver OF Boot?: Hvis du velger dette valget vil du kunne\n"
+"trykke\n"
+"\"N\" for Open Firmware ved det første oppstartsvalget.\n"
 "\n"
-"\n"
-"  - Aktiver OF Boot?: Hvis du velger dette valget vil du kunne\n"
-"trykke 'N' for Open Formware ved det første oppstartsvalget.\n"
-"\n"
-"\n"
-"  - Standard OS: Du kan velge hvilket OS som skal lastes når\n"
+" * Standard OS: Du kan velge hvilket OS som skal lastes når\n"
 "Open Firmwareforsinkelsen er utløpt."
 
 #: ../../help.pm_.c:858
+#, fuzzy
 msgid ""
 "Here are presented various parameters concerning your machine. Depending on\n"
 "your installed hardware, you may - or not, see the following entries:\n"
@@ -3623,6 +3596,34 @@ msgid ""
 "displayed here. You can click on the button to change the parameters\n"
 "associated to it."
 msgstr ""
+"Here are presented various parameters concerning your machine. Depending on\n"
+"your installed hardware, you may - or not, see the following entries:\n"
+"\n"
+" * \"Mouse\": check the current mouse configuration and click on the button\n"
+"to change it if necessary.\n"
+"\n"
+" * \"Keyboard\": check the current keyboard map configuration and click on\n"
+"the button to change that if necessary.\n"
+"\n"
+" * \"Timezone\": DrakX gjetter tidssonen din ut i fra språket du\n"
+"har valgt. Men her, også for valget av tastatur, er du kanskje ikke\n"
+"i det landet som valgt språk skulle tilsi.\n"
+"Derfor må du kanskje klikke på \"Timezone\" knappen for å konfigurere\n"
+"klokken til tidssonen der du er.\n"
+"\n"
+" * \"Printer\": Klikke på \"No Printer\" knappen vil åpne skriver\n"
+"konfigureringshjelperen.\n"
+"\n"
+" * \"Sound card\": Hvis et lydkort blir oppdaget på systemet ditt, blir det\n"
+"vist her. Ingen modifisering mulig under installering.\n"
+"\n"
+" * \"TV card\": Hvis et TV-kort blir oppdaget på systemet ditt, blir det\n"
+"vist her. Ingen modifisering mulig under installering.\n"
+"\n"
+" * \"ISDN card\": Hvis et ISDN-kort blir oppdaget på systemet ditt, blir "
+"det\n"
+"vist her. Du kan klikke på knappen for å endre parameterene assosiert\n"
+"til dette."
 
 #: ../../help.pm_.c:887
 msgid ""
@@ -3660,6 +3661,9 @@ msgid ""
 "missing), this generally means your boot floppy in not in sync with the "
 "Installation medium (please create a newer boot floppy)"
 msgstr ""
+"Kan ikke få tilgang til kjernemoduler ihht. kjernen din (fil %s mangler), "
+"dette betyr vanligvis at oppstartsdisketten din ikke er i synk med "
+"installasjonsmediet (vennligst opprett en nyere diskett)"
 
 #: ../../install2.pm_.c:170
 #, c-format
@@ -5165,6 +5169,12 @@ msgid ""
 " Then type: shut-down\n"
 "At your next boot you should see the bootloader prompt."
 msgstr ""
+"Du må muligens endre din Open Firmware oppstartsenhet for å\n"
+" slå på oppstartslasteren. Hvis du ikke ser oppstartslasteren ved\n"
+" omstart, hold nede Command-Option-O-F ved omstart og skriv:\n"
+" setenv boot-device %s,\\\\:tbxi\n"
+" Skriv så: shut-down\n"
+"Ved din neste oppstart burde du se oppstartslasteren."
 
 #: ../../install_steps_interactive.pm_.c:1313
 #: ../../standalone/drakautoinst_.c:81
@@ -5188,7 +5198,6 @@ msgstr ""
 "Ønsker du virkelig å avslutte nå?"
 
 #: ../../install_steps_interactive.pm_.c:1339
-#, fuzzy
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -5208,9 +5217,14 @@ msgstr ""
 "Gratulerer, installasjonen er fullført.\n"
 "Fjern oppstartsmediet og trykk return for å starte på nytt.\n"
 "\n"
+"\n"
 "For informasjon om endringer som er tilgjengelige for denne utgaven av "
 "Mandrake Linux,\n"
-"sjekk errataen tilgjengelig fra http://www.mandrakelinux.com/.\n"
+"sjekk errataen tilgjengelig fra:\n"
+"\n"
+"\n"
+"http://www.mandrakelinux.com/en/82errata.php3\n"
+"\n"
 "\n"
 "Informasjon om konfigurering av systemet ditt finnes i post\n"
 "install-kapittelet i Official Mandrake Linux User's Guide."
@@ -5262,7 +5276,7 @@ msgstr "kdesu mangler"
 
 #: ../../interactive.pm_.c:89 ../../interactive.pm_.c:100
 msgid "consolehelper missing"
-msgstr ""
+msgstr "Konsollhjelper mangler"
 
 #: ../../interactive.pm_.c:152
 msgid "Choose a file"
@@ -5274,7 +5288,7 @@ msgstr "Avansert"
 
 #: ../../interactive.pm_.c:315
 msgid "Basic"
-msgstr ""
+msgstr "Grunnleggende"
 
 #: ../../interactive.pm_.c:386
 msgid "Please wait"
@@ -5344,6 +5358,9 @@ msgid ""
 "or just hit Enter to proceed.\n"
 "Your choice? "
 msgstr ""
+"Vennlig velg det første nummeret av 10-range du ønsker å redigere,\n"
+"eller bare trykk Enter for å fortsette.\n"
+"Ditt valg? "
 
 #: ../../interactive_stdio.pm_.c:137
 #, c-format
@@ -5351,10 +5368,12 @@ msgid ""
 "=> Notice, a label changed:\n"
 "%s"
 msgstr ""
+"=> Merk, et merke endret:\n"
+"%s"
 
 #: ../../interactive_stdio.pm_.c:144
 msgid "Re-submit"
-msgstr ""
+msgstr "Re-submit"
 
 #: ../../keyboard.pm_.c:175 ../../keyboard.pm_.c:206
 msgid "Czech (QWERTZ)"
@@ -5642,39 +5661,39 @@ msgstr "Jugoslavisk (latin)"
 
 #: ../../keyboard.pm_.c:279
 msgid "Right Alt key"
-msgstr ""
+msgstr "Høyre Alt tast"
 
 #: ../../keyboard.pm_.c:280
 msgid "Both Shift keys simultaneously"
-msgstr ""
+msgstr "Begge Shift taster samtidig"
 
 #: ../../keyboard.pm_.c:281
 msgid "Control and Shift keys simultaneously"
-msgstr ""
+msgstr "Control og Shift taster samtidig"
 
 #: ../../keyboard.pm_.c:282
 msgid "CapsLock key"
-msgstr ""
+msgstr "CapsLock tast"
 
 #: ../../keyboard.pm_.c:283
 msgid "Ctrl and Alt keys simultaneously"
-msgstr ""
+msgstr "Ctrl og Alt taster samtidig"
 
 #: ../../keyboard.pm_.c:284
 msgid "Alt and Shift keys simultaneously"
-msgstr ""
+msgstr "Alt og Shift taster samtidig"
 
 #: ../../keyboard.pm_.c:285
 msgid "\"Menu\" key"
-msgstr ""
+msgstr "\" Menu\" tast"
 
 #: ../../keyboard.pm_.c:286
 msgid "Left \"Windows\" key"
-msgstr ""
+msgstr "Venstre \"Windows\" tast"
 
 #: ../../keyboard.pm_.c:287
 msgid "Right \"Windows\" key"
-msgstr ""
+msgstr "Høyre \"Windows\" tast"
 
 #: ../../loopback.pm_.c:32
 #, c-format
@@ -5689,10 +5708,12 @@ msgstr "Fjern de logiske partisjoner først\n"
 msgid ""
 "PCMCIA support no longer exist for 2.2 kernels. Please use a 2.4 kernel."
 msgstr ""
+"PCMCIA støtte eksisterer ikke lengre for 2.2 kjerner. Vennligst bruk en 2.4 "
+"kernel."
 
 #: ../../mouse.pm_.c:25
 msgid "Sun - Mouse"
-msgstr "Sun-mus"
+msgstr "Sun - mus"
 
 #: ../../mouse.pm_.c:32
 msgid "Logitech MouseMan+"
@@ -6071,7 +6092,7 @@ msgstr "Login ID"
 
 #: ../../network/modem.pm_.c:49 ../../standalone/draknet_.c:625
 msgid "CHAP"
-msgstr ""
+msgstr "CHAP"
 
 #: ../../network/modem.pm_.c:49 ../../standalone/draknet_.c:625
 msgid "PAP"
@@ -6282,7 +6303,7 @@ msgstr "Nettverkskonfigurasjon"
 
 #: ../../network/netconnect.pm_.c:248
 msgid "The network needs to be restarted"
-msgstr ""
+msgstr "Nettverket må startes på nytt"
 
 #: ../../network/netconnect.pm_.c:252
 #, c-format
@@ -6319,6 +6340,9 @@ msgid ""
 "Test your connection via net_monitor or mcc. If your connection doesn't "
 "work, you might want to relaunch the configuration"
 msgstr ""
+"Det oppsto problemer under konfigurasjon.\n"
+"Test tilkoblingen din via net_monitor eller mcc. Hvis tilkoblingen din ikke "
+"virker, ønsker du kanskje å kjøre konfigureringen på nytt"
 
 #: ../../network/network.pm_.c:292
 msgid ""
@@ -6392,7 +6416,7 @@ msgstr "DNS-tjener"
 #: ../../network/network.pm_.c:367
 #, c-format
 msgid "Gateway (e.g. %s)"
-msgstr ""
+msgstr "Gateway (f.eks. %s)"
 
 #: ../../network/network.pm_.c:369
 msgid "Gateway device"
@@ -6412,7 +6436,7 @@ msgstr "FTP-proxy"
 
 #: ../../network/network.pm_.c:384
 msgid "Track network card id (usefull for laptops)"
-msgstr ""
+msgstr "Spor id nettverkskort (nyttig for bærbare)"
 
 #: ../../network/network.pm_.c:387
 msgid "Proxy should be http://..."
@@ -6663,7 +6687,7 @@ msgstr "Lokale skrivere"
 
 #: ../../printer.pm_.c:527 ../../printer.pm_.c:865
 msgid "Remote Printers"
-msgstr "Fjern-skrivers"
+msgstr "Fjern-skrivere"
 
 #: ../../printer.pm_.c:534 ../../printerdrake.pm_.c:248
 #, c-format
@@ -6774,7 +6798,6 @@ msgid "Specify CUPS server"
 msgstr "Spesifiser CUPS tjener"
 
 #: ../../printerdrake.pm_.c:71
-#, fuzzy
 msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "do not have to configure anything; the CUPS servers inform your machine "
@@ -6784,16 +6807,13 @@ msgid ""
 "to enter the CUPS server IP address and optionally the port number to get "
 "the printer information from the server, otherwise leave these fields blank."
 msgstr ""
-"Med en fjern-CUPs tjener trenger du ikke å konfigurere noen\n"
-"skrivere her; CUPS-tjenere gir din maskin informasjon om \n"
-"skriverne automatisk. Alle skrivere som for øyeblikket er kjent\n"
-"for din maskin vil være under \"Standardskriver\". Velg standard-\n"
-"skriveren du ønsker, og klikk på \"Bruk/Les skriverlisten\" knappen. \n"
-"Trykk på den samme listen for å oppfriske listen. (det kan ta opptil 30\n"
-"sekunder fra CUPS starter til alle skrivere er tilgjengelige).\n"
-"Når din CUPS-tjener er på et annen nettverk må du oppgi\n"
-"CUPS-tjenerens IPa ddresse og eventuelle portnummer for å få\n"
-"skriverinformasjon fra tjeneren, ellers kan du la de feltene være blanke."
+"For å få tilgang til fjern CUPS-tjenere i ditt lokale nettverk trenger du "
+"ikke å konfigurere noen ting; CUPS-tjenerene informerer maskinen din "
+"automatisk om skriverene. Alle skriverene som før øyeblikket er kjent for "
+"maskinen din er listet i \"Remote printers\" seksjonen i hovedvinduet til "
+"Printerdrake. Når CUPS-tjeneren din ikke er i ditt lokale nettverk, må du "
+"entre CUPS-tjenerens IP-adresse og evnt. portnummeret for å få skriver- "
+"informasjon fra tjeneren, ellers la disse feltene være tomme."
 
 #: ../../printerdrake.pm_.c:72
 msgid ""
@@ -6804,6 +6824,12 @@ msgid ""
 "configuration\" and edit your file /etc/cups/cupsd.conf manually. Do not "
 "forget to restart CUPS afterwards (command: \"service cups restart\")."
 msgstr ""
+"\n"
+"Normalt er CUPS konfigurert automatisk ihht. til nettverksmiljøet ditt, så "
+"du kan ha tilgang til skrivere på CUPS-tjenerene i ditt lokale nettverk. "
+"Hvis dette ikke virker ordentlig, skru av \"Automatic CUPS configuration\" "
+"og rediger filen /etc/cups/cupsd.conf manuelt. Ikke glem å starte CUPS på "
+"nytt etterpå (kommando: \"service cups restart\")."
 
 #: ../../printerdrake.pm_.c:76
 msgid "The IP address should look like 192.168.1.20"
@@ -6940,6 +6966,10 @@ msgid ""
 "equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB "
 "printer: /dev/usb/lp1, ...)."
 msgstr ""
+"Ingen lokal skriver funnet! For manuelt å installere en skriver entre et "
+"enhets-navn/filnavn i input-linjen (Parallelporter: /dev/lp0, /dev/lp1, ..., "
+"lik LPT1:, LPT2:, ..., 1st USB skriver: /dev/usb/lp0, 2nd USB skriver: /dev/"
+"usb/lp1, ...)."
 
 #: ../../printerdrake.pm_.c:383
 msgid "You must enter a device or file name!"
@@ -6956,6 +6986,8 @@ msgid ""
 "Network printers can only be installed after the installation. Choose "
 "\"Hardware\" and then \"Printer\" in the Mandrake Control Center."
 msgstr ""
+"Nettverksskrivere kan bare installeres etter installasjonen. Velg \"Hardware"
+"\" og så \"Printer\" i Mandrake Control Center."
 
 #: ../../printerdrake.pm_.c:396
 msgid ""
@@ -6996,62 +7028,61 @@ msgid ""
 "Please choose the port where your printer is connected to or enter a device "
 "name/file name in the input line"
 msgstr ""
+"Vennligst velg en port hvor skriveren din er tilkoblet eller entre en enhet "
+"navn/filnavn i input-linjen"
 
 #: ../../printerdrake.pm_.c:414
-#, fuzzy
 msgid "Please choose the port where your printer is connected to."
-msgstr "Vennligst velg hvilken serieport modemet ditt koblet til."
+msgstr "Vennligst velg porten hvor skriveren din er koblet til."
 
 #: ../../printerdrake.pm_.c:416
 msgid ""
 " (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., "
 "1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."
 msgstr ""
+" (Parallelporter: /dev/lp0, /dev/lp1, ..., lik LPT1:, LPT2:, ..., 1st USB "
+"skriver: /dev/usb/lp0, 2nd USB skriver: /dev/usb/lp1, ...)."
 
 #: ../../printerdrake.pm_.c:421
-#, fuzzy
 msgid "You must choose/enter a printer/device!"
-msgstr "Skriverenhetens URI"
+msgstr "Du må velge/entre en skriver/enhet!"
 
 #: ../../printerdrake.pm_.c:441
-#, fuzzy
 msgid "Manual configuration"
-msgstr "Internett-konfigurasjon"
+msgstr "Manuell konfigurasjon"
 
 #: ../../printerdrake.pm_.c:467
 msgid ""
 "Is your printer a multi-function device from HP (OfficeJet, PSC, PhotoSmart, "
 "LaserJet 1100/1200/1220/3200/3300 with scanner)?"
 msgstr ""
+"Er skriveren din en multifunksjonsenhet fra HP (OfficeJet, PSC, PhotoSmart, "
+"LaserJet 1100/1200/1220/3200/3300 med skanner)?"
 
 #: ../../printerdrake.pm_.c:482
-#, fuzzy
 msgid "Installing HPOJ package..."
-msgstr "Installerer pakke %s"
+msgstr "Installerer HPOJ pakke..."
 
 #: ../../printerdrake.pm_.c:487
 msgid "Checking device and configuring HPOJ ..."
-msgstr ""
+msgstr "Sjekker enhet og konfigurer HPOJ ..."
 
 #: ../../printerdrake.pm_.c:505
-#, fuzzy
 msgid "Installing SANE package..."
-msgstr "Installerer pakke %s"
+msgstr "Installerer SANE pakke..."
 
 #: ../../printerdrake.pm_.c:517
 msgid "Scanning on your HP multi-function device"
-msgstr ""
+msgstr "Skanner på din HP multifunksjonsenhet"
 
 #: ../../printerdrake.pm_.c:534
-#, fuzzy
 msgid "Making printer port available for CUPS ..."
-msgstr "Leser skriverdata: ..."
+msgstr "Gjør skriverport tilgjengelig for CUPS ..."
 
 #: ../../printerdrake.pm_.c:544 ../../printerdrake.pm_.c:996
 #: ../../printerdrake.pm_.c:1110
-#, fuzzy
 msgid "Reading printer database ..."
-msgstr "Leser skriverdata: ..."
+msgstr "Leser skriverdatabase  ..."
 
 #: ../../printerdrake.pm_.c:624
 msgid "Remote lpd Printer Options"
@@ -7088,18 +7119,16 @@ msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr "Opsjoner for SMB (Windows 9x/NT) skriver"
 
 #: ../../printerdrake.pm_.c:703
-#, fuzzy
 msgid ""
 "To print to a SMB printer, you need to provide the SMB host name (Note! It "
 "may be different from its TCP/IP hostname!) and possibly the IP address of "
 "the print server, as well as the share name for the printer you wish to "
 "access and any applicable user name, password, and workgroup information."
 msgstr ""
-"For å skrive til en SMB-skriver, må du oppgi SMB-vertsnavnet\n"
-"(Merk! Dette kan være forskjellig fra dens TCP/IP-vertsnavn!)\n"
-"og muligens IP-adressen til skrivertjeneren, så vel som det delte\n"
-"navnet til skriveren du ønsker tilgang til og anvendelige brukernavn,\n"
-"passord og arbeidsgruppeinformasjon."
+"For å skrive til en SMB-skriver, må du oppgi SMB-vertsnavnet (Merk! Dette "
+"kan være forskjellig fra dens TCP/IP-vertsnavn!) og muligens IP-adressen til "
+"skrivertjeneren, så vel som det delte navnet til skriveren du ønsker tilgang "
+"til og anvendelige brukernavn, passord og arbeidsgruppeinformasjon."
 
 #: ../../printerdrake.pm_.c:704
 msgid "SMB server host"
@@ -7130,17 +7159,16 @@ msgid "NetWare Printer Options"
 msgstr "NetWare skriveropsjoner"
 
 #: ../../printerdrake.pm_.c:780
-#, fuzzy
 msgid ""
 "To print on a NetWare printer, you need to provide the NetWare print server "
 "name (Note! it may be different from its TCP/IP hostname!) as well as the "
 "print queue name for the printer you wish to access and any applicable user "
 "name and password."
 msgstr ""
-"For å skrive til en NetWare-skriver, må du oppgi navnet til NetWare-\n"
-"skrivertjeneren (Mer! Dette kan være forskjellig fra dens TCP/IP-\n"
-"vertsnavn!) så vel som navnet på skriverkøen til skriveren du ønsker\n"
-"adgang til og anvendelige brukernavn og passord."
+"For å skrive til en NetWare-skriver, må du oppgi navnet til NetWare-"
+"skrivertjeneren (Mer! Dette kan være forskjellig fra dens TCP/IP-vertsnavn!) "
+"så vel som navnet på skriverkøen til skriveren du ønsker adgang til og "
+"anvendelige brukernavn og passord."
 
 #: ../../printerdrake.pm_.c:781
 msgid "Printer Server"
@@ -7204,14 +7232,12 @@ msgid "A valid URI must be entered!"
 msgstr "En korrekt URI må oppgis!"
 
 #: ../../printerdrake.pm_.c:982
-#, fuzzy
 msgid ""
 "Every printer needs a name (for example \"printer\"). The Description and "
 "Location fields do not need to be filled in. They are comments for the users."
 msgstr ""
-"Alle skrivere trenger ett navn (f.eks. lp).\n"
-"Beskrivelsen og lokalisasjonsfeltene trenger ikke \n"
-"å fylles inn. De er brukerkommentarer."
+"Alle skrivere trenger ett navn (f.eks. \"skriver\"). Beskrivelsen og "
+"lokalisasjonsfeltene trenger ikke å fylles inn. De er brukerkommentarer."
 
 #: ../../printerdrake.pm_.c:983
 msgid "Name of printer"
@@ -7251,15 +7277,13 @@ msgid ""
 msgstr ""
 
 #: ../../printerdrake.pm_.c:1096 ../../printerdrake.pm_.c:1099
-#, fuzzy
 msgid "The model is correct"
-msgstr "Er dette riktig?"
+msgstr "Modellen er riktig"
 
 #: ../../printerdrake.pm_.c:1097 ../../printerdrake.pm_.c:1098
 #: ../../printerdrake.pm_.c:1101
-#, fuzzy
 msgid "Select model manually"
-msgstr "Sett opp skriver manuellt"
+msgstr "velg modell manuellt"
 
 #: ../../printerdrake.pm_.c:1117
 msgid "Printer model selection"
@@ -7608,46 +7632,42 @@ msgstr ""
 "Ikke alle køer kan overføres grunnet:\n"
 
 #: ../../printerdrake.pm_.c:1796
-#, fuzzy
 msgid ""
 "CUPS does not support printers on Novell servers or printers sending the "
 "data into a free-formed command.\n"
 msgstr ""
-"CUPS støtter ikke skrivere på Novelltjenere eller skrivere som\n"
-"sender dataene inn i en fritt formet kommando.\n"
+"CUPS støtter ikke skrivere på Novelltjenere eller skrivere som sender "
+"dataene inn i en fritt formet kommando.\n"
 
 #: ../../printerdrake.pm_.c:1798
-#, fuzzy
 msgid ""
 "PDQ only supports local printers, remote LPD printers, and Socket/TCP "
 "printers.\n"
 msgstr ""
-"PDQ støtter bare lokale skrivere, fjern-LPD skrivere, og\n"
-"Socket/TCP skrivere.\n"
+"PDQ støtter bare lokale skrivere, fjern-LPD skrivere, og Socket/TCP "
+"skrivere.\n"
 
 #: ../../printerdrake.pm_.c:1800
 msgid "LPD and LPRng do not support IPP printers.\n"
 msgstr "LPD og LPRng støtter ikke IPP skrivere.\n"
 
 #: ../../printerdrake.pm_.c:1802
-#, fuzzy
 msgid ""
 "In addition, queues not created with this program or \"foomatic-configure\" "
 "cannot be transferred."
 msgstr ""
-"I tillegg, køer laget med dette programmet\n"
-"eller \"foomatic -configure\" kan ikke overflyttes."
+"I tillegg, køer laget med dette programmet eller \"foomatic -configure\" kan "
+"ikke overflyttes."
 
 #: ../../printerdrake.pm_.c:1803
-#, fuzzy
 msgid ""
 "\n"
 "Also printers configured with the PPD files provided by their manufacturers "
 "or with native CUPS drivers cannot be transferred."
 msgstr ""
 "\n"
-"Skrivere konfigurert med PPD filene som produsenten har\n"
-"laget eller med CUPS drivere ikke ikke overflyttes."
+"Skrivere konfigurert med PPD filene som produsenten har laget eller med CUPS "
+"drivere ikke ikke overflyttes."
 
 #: ../../printerdrake.pm_.c:1804
 msgid ""
@@ -8254,12 +8274,11 @@ msgstr ""
 "tilgjengelighet."
 
 #: ../../services.pm_.c:47 ../../standalone/logdrake_.c:413
-#, fuzzy
 msgid ""
 "named (BIND) is a Domain Name Server (DNS) that is used to resolve host "
 "names to IP addresses."
 msgstr ""
-"named (BIND) er en Domain Name Server (DNS) som brukes til å bestemme\n"
+"named (BIND) er en Domain Name Server (DNS) som brukes til å bestemme "
 "vertsnavn til IP-adresser."
 
 #: ../../services.pm_.c:48
@@ -8332,13 +8351,12 @@ msgstr ""
 "tjenere for protokoller som bruker RPC-mekanismen."
 
 #: ../../services.pm_.c:66 ../../standalone/logdrake_.c:415
-#, fuzzy
 msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
 "one machine to another."
 msgstr ""
-"Postfix er en posttransporteringsagent, som er et program som\n"
-"flytter post fra en maskin til en annen."
+"Postfix er en posttransporteringsagent, som er et program som flytter post "
+"fra en maskin til en annen."
 
 #: ../../services.pm_.c:67
 msgid ""
@@ -8755,6 +8773,8 @@ msgid ""
 "***********************************************************************\n"
 "\n"
 msgstr ""
+"***********************************************************************\n"
+"\n"
 
 #: ../../standalone/drakbackup_.c:449
 msgid ""
@@ -8778,6 +8798,10 @@ msgid ""
 "***********************************************************************\n"
 "\n"
 msgstr ""
+"\n"
+"\n"
+"***********************************************************************\n"
+"\n"
 
 #: ../../standalone/drakbackup_.c:454
 msgid ""
@@ -9328,15 +9352,14 @@ msgstr "Skreddersydd"
 #: ../../standalone/drakbackup_.c:2399 ../../standalone/drakbackup_.c:2419
 #: ../../standalone/drakbackup_.c:2438 ../../standalone/drakbackup_.c:2460
 msgid "Help"
-msgstr ""
+msgstr "Hjelp"
 
 #: ../../standalone/drakbackup_.c:2269 ../../standalone/drakbackup_.c:2296
 #: ../../standalone/drakbackup_.c:2315 ../../standalone/drakbackup_.c:2336
 #: ../../standalone/drakbackup_.c:2354 ../../standalone/drakbackup_.c:2402
 #: ../../standalone/drakbackup_.c:2422 ../../standalone/drakbackup_.c:2441
-#, fuzzy
 msgid "Previous"
-msgstr "<- Forrige"
+msgstr "Forrige"
 
 #: ../../standalone/drakbackup_.c:2271 ../../standalone/drakbackup_.c:2338
 #: ../../standalone/logdrake_.c:224
@@ -9356,9 +9379,8 @@ msgstr "Skreddersydd"
 
 #: ../../standalone/drakbackup_.c:2404 ../../standalone/drakbackup_.c:2424
 #: ../../standalone/drakbackup_.c:2445
-#, fuzzy
 msgid "Next"
-msgstr "Neste ->"
+msgstr "Neste"
 
 #: ../../standalone/drakbackup_.c:2478
 msgid ""
@@ -11203,9 +11225,8 @@ msgid "Multimedia station"
 msgstr "Multimediastasjon"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Configuration"
-msgstr "LAN-konfigurasjon"
+msgstr "Konfigurasjon"
 
 #: ../../share/compssUsers:999
 msgid "More Graphical Desktops (Gnome, IceWM)"
@@ -11403,22 +11424,6 @@ msgstr "Vitenskaplig arbeidsstasjon"
 
 #~ msgid "Configure network connection (LAN or Internet)"
 #~ msgstr "Konfigurer nettverk-tilkobling (LAN eller Internett)"
-
-#, fuzzy
-#~ msgid "Detected %s, do you want to set it up?"
-#~ msgstr "Hvilken disk vil du flytte til?"
-
-#, fuzzy
-#~ msgid "Please choose the printer you want to set up."
-#~ msgstr "Vennligst velg pakkene du ønsker å installere."
-
-#, fuzzy
-#~ msgid "Infos"
-#~ msgstr "Info"
-
-#, fuzzy
-#~ msgid "Windows Importation"
-#~ msgstr "Gnome arbeidstasjon"
 
 #~ msgid "authentification"
 #~ msgstr "autentisering"
