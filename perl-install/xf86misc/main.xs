@@ -25,7 +25,7 @@ void initIMPS2() {
 
 MODULE = xf86misc::main		PACKAGE = xf86misc::main
 
-PROTOTYPES: ENABLE
+PROTOTYPES: DISABLE
 
 
 int

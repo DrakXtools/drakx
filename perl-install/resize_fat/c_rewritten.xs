@@ -45,7 +45,7 @@ void set_next(unsigned int cluster, unsigned int val) {
 
 MODULE = resize_fat::c_rewritten PACKAGE = resize_fat::c_rewritten
 
-PROTOTYPES: ENABLE
+PROTOTYPES: DISABLE
 
 
 void 

@@ -23,7 +23,7 @@ typedef newtGrid Newt__Grid;
 
 MODULE = Newt		PACKAGE = Newt 	PREFIX = newt
 
-PROTOTYPES: ENABLE
+PROTOTYPES: DISABLE
 
 
 void
