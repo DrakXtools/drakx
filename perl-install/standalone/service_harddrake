@@ -56,11 +56,11 @@ foreach (@harddrake::data::tree) {
     my @was_removed = difference2([ keys %$oldconfig ], [ keys %ID ]);
     if (@was_removed) {
      $msg .= N("Some devices in the \"%s\" hardware class were removed:\n", $item) .
-         "- " . join('', map { harddrake::data::custom_id($oldconfig->{$_}, $item) . " was removed\n" } @was_removed) . "\n";
+       join('', map { N("- %s was removed\n", harddrake::data::custom_id($oldconfig->{$_}, $item)) } @was_removed) . "\n";
     }
     my @added = difference2([ keys %ID ], [ keys %$oldconfig ]);
     $msg .= N("Some devices were added: %s\n", $item) if @added;
-    $msg .= "- " . harddrake::data::custom_id($ID{$_}, $item) . " was added\n" foreach @added;
+    $msg .= N("- %s was added\n", harddrake::data::custom_id($ID{$_}, $item)) foreach @added;
     modules::load('ohci1394') if $Ident eq 'FIREWIRE_CONTROLLER' && any { $_->{driver} eq 'ohci1394' } @added;
     @added || @was_removed or next;
     $splash and !system('echo verbose > /proc/splash') and $splash = 0;
