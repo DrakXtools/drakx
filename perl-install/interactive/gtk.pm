@@ -508,8 +508,9 @@ sub ask_fromW {
     my $set_advanced = sub {
 	($advanced) = @_;
 	$set_default_size->() if $advanced;
+	$update->($common->{callbacks}{advanced}) if $advanced;
 	$advanced ? $advanced_pack->show : $advanced_pack->hide;
-	@widgets = (@widgets_always, $advanced ? @widgets_advanced : ());
+	@widgets = (@widgets_always, if_($advanced, @widgets_advanced));
 	$mainw->sync; #- for $set_all below (mainly for the set of clist)
 	$set_all->(); #- must be done when showing advanced lists (to center selected value)
     };
