@@ -150,7 +150,10 @@ sub read_configured_queues($) {
 }
 
 sub read_printer_db(;$) {
-    my $dbpath = $prefix . ($_[0] || $PRINTER_DB_FILE);
+
+    my $spooler = $_[0];
+
+    my $dbpath = $prefix . $PRINTER_DB_FILE;
 
     local $_; #- use of while (<...
 
@@ -213,7 +216,7 @@ sub read_printer_db(;$) {
 		    $entry->{id} = $1;
 		} elsif (m!^\s*<make>(.+)</make>\s*$!) {
 		    # Printer manufacturer
-		    $entry->{make} = $1;
+		    $entry->{make} = uc($1);
 		} elsif (m!^\s*<model>(.+)</model>\s*$!) {
 		    # Printer model
 		    $entry->{model} = $1;
@@ -233,6 +236,18 @@ sub read_printer_db(;$) {
 	    }
 	}
     }
+
+    #- Load CUPS driver database if CUPS is used as spooler
+    if (($spooler) && ($spooler eq "cups")) {
+	#&$install('cups-drivers') unless $::testing;
+	#my $w;
+	#if ($in) {
+	#    $w = $in->wait_message(_("CUPS starting"),
+	#			   _("Reading CUPS drivers database..."));
+	#}
+        poll_ppd_base();
+    }
+
     @entries_db_short     = sort keys %printer::thedb;
     #%descr_to_db          = map { $printer::thedb{$_}{DESCR}, $_ } @entries_db_short;
     #%descr_to_help        = map { $printer::thedb{$_}{DESCR}, $printer::thedb{$_}{ABOUT} } @entries_db_short;
@@ -256,6 +271,93 @@ sub read_foomatic_options ($) {
     close F;
     # Return the arguments field
     return $COMBODATA->{'args'};
+}
+
+sub read_cups_options ($) {
+    my ($queue_or_file) = @_;
+    # Generate the option data from a CUPS PPD file/a CUPS queue
+    # Use the same Perl data structure as Foomatic uses to be able to
+    # reuse the dialog
+    local *F;
+    if ($queue_or_file =~ /.ppd.gz$/) { # compressed PPD file
+	open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+	    "gunzip -cd $queue_or_file | lphelp - |" ||
+		die "Could not run lphelp";
+    } else { # PPD file not compressed or queue
+	open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+	    "lphelp $queue_or_file |" ||
+		die "Could not run lphelp";
+    }
+    my $i;
+    my $j;
+    my @args = ();
+    my $line;
+    my $inoption = 0;
+    my $inchoices = 0;
+#    my $innumerical = 0;
+    while ($line = <F>) {
+	chomp $line;
+	if ($inoption) {
+	    if ($inchoices) {
+		if ($line =~ /^\s*(\S+)\s+(\S.*)$/) {
+		    push(@{$args[$i]{vals}}, {});
+		    $j = $#{$args[$i]{vals}};
+		    $args[$i]{vals}[$j]{value} = $1;
+		    my $comment = $2;
+		    # Did we find the default setting?
+		    if ($comment =~ /default\)\s*$/) {
+			$args[$i]{default} = $args[$i]{vals}[$j]{value};
+			$comment =~ s/,\s*default\)\s*$//;
+		    } else {
+			$comment =~ s/\)\s*$//;
+		    }
+		    # Remove opening paranthese
+		    $comment =~ s/^\(//;
+		    # Remove page size info
+		    $comment =~ s/,\s*size:\s*[0-9\.]+x[0-9\.]+in$//;
+		    $args[$i]{vals}[$j]{comment} = $comment;
+		} elsif (($line =~ /^\s*$/) && ($#{$args[$i]{vals}} > -1)) {
+		    $inchoices = 0;
+		    $inoption = 0;
+		}
+#	    } elsif ($innumerical == 1) {
+#		if ($line =~ /^\s*The default value is ([0-9\.]+)\s*$/) {
+#		    $args[$i]{default} = $1;
+#		    $innumerical = 0;
+#		    $inoption = 0;
+#		}
+	    } else {
+		if ($line =~ /^\s*<choice>/) {
+		    $inchoices = 1;
+#		} elsif ($line =~ /^\s*<value> must be a(.*) number in the range ([0-9\.]+)\.\.([0-9\.]+)\s*$/) {
+#		    delete($args[$i]{vals});
+#		    $args[$i]{min} = $2;
+#		    $args[$i]{max} = $3;
+#		    my $type = $1;
+#		    if ($type =~ /integer/) {
+#			$args[$i]{type} = 'int';
+#		    } else {
+#			$args[$i]{type} = 'float';
+#		    }
+#		    $innumerical = 1;
+		}
+	    }
+	} else {
+	    if ($line =~ /^\s*([^\s:][^:]*):\s+-o\s+([^\s=]+)=<choice>\s*$/) {
+#	    if ($line =~ /^\s*([^\s:][^:]*):\s+-o\s+([^\s=]+)=<.*>\s*$/) {
+		$inoption = 1;
+		push(@args, {});
+		$i = $#args;
+		$args[$i]{comment} = $1;
+		$args[$i]{name} = $2;
+		$args[$i]{type} = 'enum';
+		@{$args[$i]{vals}} = ();
+	    }
+	}
+    }
+    close F;
+    # Return the arguments field
+    return \@args;
 }
 
 #------------------------------------------------------------------------------
@@ -297,7 +399,7 @@ sub read_printers_conf {
     while (<PRINTERS>) {
 	chomp;
 	/^\s*#/ and next;
-	if (/^\s*<(?:DefaultPrinter|Printer)\s+([^>]*)>/) { $current = { mode => 'CUPS', QUEUE => $1, } }
+	if (/^\s*<(?:DefaultPrinter|Printer)\s+([^>]*)>/) { $current = { mode => 'cups', QUEUE => $1, } }
 	elsif (/\s*<\/Printer>/) { $current->{QUEUE} && $current->{DeviceURI} or next; #- minimal check of synthax.
 				   add2hash($printer->{configured}{$current->{QUEUE}} ||= {}, $current); $current = undef }
 	elsif (/\s*(\S*)\s+(.*)/) { $current->{$1} = $2 }
@@ -305,7 +407,7 @@ sub read_printers_conf {
     close PRINTERS;
 
     #- assume this printing system.
-    $printer->{SPOOLER} ||= 'CUPS';
+    $printer->{SPOOLER} ||= 'cups';
 }
 
 sub get_direct_uri {
@@ -325,7 +427,7 @@ sub get_descr_from_ppd {
     my %ppd;
 
     #- if there is no ppd, this means this is the PostScript generic filter.
-    local *F; open F, "$prefix/etc/cups/ppd/$printer->{QUEUE}.ppd" or return "POSTSCRIPT|Generic PostScript printer (en)";
+    local *F; open F, "$prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd" or return "OTHERS|Generic PostScript printer|PostScript (en)";
     local $_;
     while (<F>) {
 	/^\*([^\s:]*)\s*:\s*\"([^\"]*)\"/ and do { $ppd{$1} = $2; next };
@@ -333,35 +435,91 @@ sub get_descr_from_ppd {
     }
     close F;
 
-    $ppd{Manufacturer} . '|' . ($ppd{NickName} || $ppd{ShortNickName} || $ppd{ModelName}) .
-      ($ppd{LanguageVersion} && (" (" . lc(substr($ppd{LanguageVersion}, 0, 2)) . ")"));
+    my $descr = ($ppd{NickName} || $ppd{ShortNickName} || $ppd{ModelName});
+    # Apply the beautifying rules of poll_ppd_base
+    if ($descr =~ /Foomatic \+ Postscript/) {
+	$descr =~ s/Foomatic \+ Postscript/PostScript/;
+    } elsif ($descr =~ /Foomatic/) {
+	$descr =~ s/Foomatic/GhostScript/;
+    } elsif ($descr =~ /CUPS\+GIMP-print/) {
+	$descr =~ s/CUPS\+GIMP-print/CUPS \+ GIMP-Print/;
+    } elsif ($descr =~ /Series CUPS/) {
+	$descr =~ s/Series CUPS/Series, CUPS/;
+    } elsif (!(uc($descr) =~ /POSTSCRIPT/)) {
+	$descr .= ", PostScript";
+    }
+
+    # Split the $descr into model and driver
+    my $model;
+    my $driver;
+    if ($descr =~ /^([^,]+), (.*)$/) {
+	$model = $1;
+	$driver = $2;
+    } else {
+	# Some PPDs do not have the ", <driver>" part.
+	$model = $descr;
+	$driver = "PostScript";
+    }
+    my $make = $ppd{Manufacturer};
+    my $lang = $ppd{LanguageVersion};
+
+    # Remove manufacturer's name from the beginning of the model name
+    if (($make) && ($model =~ /^$make[\s\-]+([^\s\-].*)$/)) {
+	$model = $1;
+    }
+
+    # Put out the resulting description string
+    uc($make) . '|' . $model . '|' . $driver .
+      ($lang && (" (" . lc(substr($lang, 0, 2)) . ")"));
 }
 
 sub poll_ppd_base {
+    
     #- before trying to poll the ppd database available to cups, we have to make sure
     #- the file /etc/cups/ppds.dat is no more modified.
     #- if cups continue to modify it (because it reads the ppd files available), the
     #- poll_ppd_base program simply cores :-)
     run_program::rooted($prefix, "ifup lo"); #- else cups will not be happy!
     run_program::rooted($prefix, "/etc/rc.d/init.d/cups start");
-
+    my $driversthere = scalar(keys %thedb);
     foreach (1..60) {
 	local *PPDS; open PPDS, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/poll_ppd_base -a |";
 	local $_;
 	while (<PPDS>) {
 	    chomp;
 	    my ($ppd, $mf, $descr, $lang) = split /\|/;
-	    $ppd && $mf && $descr and $descr_to_ppd{"$mf|$descr" . ($lang && " ($lang)")} = $ppd;
+	    my ($model, $driver);
+	    if ($descr) {
+		if ($descr =~ /^([^,]+), (.*)$/) {
+		    $model = $1;
+		    $driver = $2;
+		} else {
+		    # Some PPDs do not have the ", <driver>" part.
+		    $model = $descr;
+		    $driver = "PostScript";
+		}
+	    }
+	    # Rename Canon "BJC XXXX" models into "BJC-XXXX" so that the models
+	    # do not appear twice
+	    if ($mf eq "CANON") {
+		$model =~ s/BJC\s+/BJC-/;
+	    }
+	    $ppd && $mf && $descr and do {
+		my $key = "$mf|$model|$driver" . ($lang && " ($lang)");
+	        $thedb{$key}{ppd} = $ppd;
+		$thedb{$key}{driver} = $driver;
+		$thedb{$key}{make} = $mf;
+		$thedb{$key}{model} = $model;
+	    }
 	}
 	close PPDS;
-	scalar(keys %descr_to_ppd) > 5 and last;
-	sleep 1; #- we have to try again running the program, wait here a little before.
+	scalar(keys %thedb) - $driversthere > 5 and last;
+	#- we have to try again running the program, wait here a little before.
+	sleep 1; 
     }
 
-    scalar(keys %descr_to_ppd) > 5 or die "unable to connect to cups server";
+    #scalar(keys %descr_to_ppd) > 5 or die "unable to connect to cups server";
 
-    #- assume a default printer not using any ppd at all.
-    $descr_to_ppd{"No driver (raw queue)"} = '';
 }
 
 
@@ -385,18 +543,21 @@ sub configure_queue($) {
 			    "-L", $printer->{currentqueue}{'loc'},
 			    @{$printer->{OPTIONS}}
 			    ) or die "foomatic-configure failed";
-    } elsif (0) {
-	#- #### For later CUPS+PPD support
-	#- at this level, we are using lpadmin to create a local printer (only local
-	#- printer are supported with printerdrake).
+    } elsif ($printer->{currentqueue}{ppd}) {
+	#- If the chosen driver is a PPD file from /usr/share/cups/model,
+	#- we use lpadmin to set up the queue
         run_program::rooted($prefix, "lpadmin",
-			    "-p", $printer->{QUEUE},
-			    $printer->{State} eq 'Idle' && $printer->{Accepting} eq 'Yes' ? ("-E") : (),
-			    "-v", $printer->{DeviceURI},
-			    $printer->{cupsPPD} ? ("-m", $printer->{cupsPPD}) : (),
-			    $printer->{Info} ? ("-D", $printer->{Info}) : (),
-			    $printer->{Location} ? ("-L", $printer->{Location}) : (),
-			    if_($printer->{CUPSOPTIONS}, $printer->{CUPSOPTIONS}), #- use it if available, only for auto_install
+			    "-p", $printer->{currentqueue}{'queue'},
+#			    $printer->{State} eq 'Idle' && 
+#			        $printer->{Accepting} eq 'Yes' ? ("-E") : (),
+			    "-E",
+			    "-v", $printer->{currentqueue}{'connect'},
+			    "-m", $printer->{currentqueue}{'ppd'},
+			    $printer->{currentqueue}{'desc'} ?
+			        ("-D", $printer->{currentqueue}{'desc'}) : (),
+			    $printer->{currentqueue}{'loc'} ? 
+			        ("-L", $printer->{currentqueue}{'loc'}) : (),
+			    @{$printer->{OPTIONS}}
 			    ) or die "lpadmin failed";
     }
 
@@ -428,7 +589,7 @@ sub restart_queue($) {
 
     # Restart the daemon(s)
     for ($printer->{SPOOLER}) {
-	/CUPS/ && do {
+	/cups/ && do {
 	    #- restart cups.
 	    run_program::rooted($prefix, "/etc/rc.d/init.d/cups start"); sleep 1;
 	    last };

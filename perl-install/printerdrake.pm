@@ -76,7 +76,9 @@ complete => sub {
     $printer->{currentqueue}{'connect'} = "file:" . $device;
 
     #- Read the printer driver database if necessary
-    if ((keys %printer::thedb) == 0) {printer::read_printer_db();}
+    if ((keys %printer::thedb) == 0) {
+        printer::read_printer_db($printer->{SPOOLER});
+    }
 
     #- Search the database entry which matches the detected printer best
     foreach (@parport) {
@@ -403,7 +405,9 @@ complete => sub {
 sub setup_gsdriver($$$;$) {
     my ($printer, $in, $install, $upNetwork) = @_;
     #- Read the printer driver database if necessary
-    if ((keys %printer::thedb) == 0) {printer::read_printer_db();}
+    if ((keys %printer::thedb) == 0) {
+        printer::read_printer_db($printer->{SPOOLER});
+    }
     my $testpage = "/usr/share/cups/data/testprint.ps";
     my $queue = $printer->{OLD_QUEUE};
     $in->set_help('configurePrinterType') if $::isInstall;
@@ -437,28 +441,57 @@ sub setup_gsdriver($$$;$) {
 	     [ keys %printer::thedb ], $printer->{DBENTRY}) or return;
 	$printer->{currentqueue}{'id'} =
 	    $printer::thedb{$printer->{DBENTRY}}{id};
+	$printer->{currentqueue}{'ppd'} =
+	    $printer::thedb{$printer->{DBENTRY}}{ppd};
 	$printer->{currentqueue}{'driver'} =
 	    $printer::thedb{$printer->{DBENTRY}}{driver};
 	$printer->{currentqueue}{'make'} =
 	    $printer::thedb{$printer->{DBENTRY}}{make};
 	$printer->{currentqueue}{'model'} =
 	    $printer::thedb{$printer->{DBENTRY}}{model};
-	if ($printer->{currentqueue}{'id'}) {
-	    # We have a Foomatic queue
-	    $printer->{currentqueue}{'foomatic'} = 1;
-	    # Now get the options for this printer/driver combo
-	    if (($printer->{configured}{$queue}) &&
-		($printer->{configured}{$queue}{'queuedata'}{'foomatic'})) {
-		# The queue was already configured with Foomatic ...
-		if ($printer->{DBENTRY} eq $oldchoice) {
-		    # ... and the user didn't change the printer/driver
-		    $printer->{ARGS} = $printer->{configured}{$queue}{'args'};
+	if (($printer->{currentqueue}{'id'}) || # We have a Foomatic queue
+	    ($printer->{currentqueue}{'ppd'})) { # We have a CUPS+PPD queue
+	    if ($printer->{currentqueue}{'id'}) { # Foomatic queue?
+		$printer->{currentqueue}{'foomatic'} = 1;
+		# Now get the options for this printer/driver combo
+		if (($printer->{configured}{$queue}) &&
+		    ($printer->{configured}{$queue}{'queuedata'}{'foomatic'})) {
+		    # The queue was already configured with Foomatic ...
+		    if ($printer->{DBENTRY} eq $oldchoice) {
+			# ... and the user didn't change the printer/driver
+			$printer->{ARGS} =
+			    $printer->{configured}{$queue}{'args'};
+		    } else {
+			# ... and the user has chosen another printer/driver
+			$printer->{ARGS} =
+			    printer::read_foomatic_options($printer);
+		    }
 		} else {
-		    # ... and the user has chosen another printer/driver
-		    $printer->{ARGS}=printer::read_foomatic_options($printer);
+		    # The queue was not configured with Foomatic before
+		    $printer->{ARGS} = printer::read_foomatic_options($printer);
 		}
-	    } else {
-		$printer->{ARGS} = printer::read_foomatic_options($printer);
+	    } elsif ($printer->{currentqueue}{'ppd'}) { # CUPS+PPD queue?
+		# Now get the options from this PPD file
+		if ($printer->{configured}{$queue}) {
+		    # The queue was already configured
+		    if ($printer->{DBENTRY} eq $oldchoice) {
+			# ... and the user didn't change the printer/driver
+			$printer->{ARGS} =
+			    printer::read_cups_options($queue);
+		    } else {
+			# ... and the user has chosen another printer/driver
+			$printer->{ARGS} =
+			    printer::read_cups_options
+				("/usr/share/cups/model/" . 
+				 $printer->{currentqueue}{ppd});
+		    }
+		} else {
+		    # The queue was not configured before
+		    $printer->{ARGS} =
+		      printer::read_cups_options
+			  ("/usr/share/cups/model/" . 
+			   $printer->{currentqueue}{ppd});
+		}
 	    }
 	    # Set up the widgets for the option dialog
 	    my @widgets;
@@ -585,8 +618,6 @@ sub setup_gsdriver($$$;$) {
 		}
 	    }
 	}
-	# print "$printer->{OPTIONS}\n";
-		
 	$printer->{complete} = 1;
 	printer::configure_queue($printer);
 	$printer->{complete} = 0;
@@ -737,13 +768,6 @@ sub main($$$$;$) {
 	printer::set_default_spooler($printer);
 	#- Close printerdrake
 	$queue eq 'Done' and last;
-
-	#- Install the printer driver database
-	#for ($printer->{SPOOLER}) {
-	#    /CUPS/ && do { &$install('cups-drivers') unless $::testing;
-	#		   my $w = $in->wait_message(_("CUPS starting"), _("Reading CUPS drivers database..."));
-	#		   printer::poll_ppd_base(); last };
-	#}
 
 	#- Copy the queue data and work on the copy
 	$printer->{currentqueue} = {};
