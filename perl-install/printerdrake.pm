@@ -1234,62 +1234,54 @@ sub printer_help {
     my $dialogtext;
     if ($spooler eq "cups") {
 	$dialogtext =
-_("To print a file from the command line (terminal window) you can either use the command \"lpr") .
-($queue ne $default ? " -P $queue" : "") .
-_(" <file>\" or a graphical printing tool: \"xpp <file>\" or \"qtcups <file>\". The graphical tools allow you to choose the printer and to modify the option settings easily.
-These commands you can also use in the \"Printing command\" field of the printing dialogs of many applications, but here do not supply the file name because the file to print is provided by the application.
+_("To print a file from the command line (terminal window) you can either use the command \"%s <file>\" or a graphical printing tool: \"xpp <file>\" or \"qtcups <file>\". The graphical tools allow you to choose the printer and to modify the option settings easily.
+", ($queue ne $default ? "lpr -P $queue" : "lpr")) .
+_("These commands you can also use in the \"Printing command\" field of the printing dialogs of many applications, but here do not supply the file name because the file to print is provided by the application.
 ") .
 (!$raw ?
 _("
-The \"lpr\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"lpr") .
-($queue ne $default ? " -P $queue" : "") .
-_(" -o option=setting -o switch <file>\". To get a list of the options available for the current printer read either the list shown below or click on the \"Print option list\" button.
+The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\".", "lpr", ($queue ne $default ? "lpr -P $queue -o option=setting -o switch" : "lpr -o option=setting -o switch")) .
+_("To get a list of the options available for the current printer read either the list shown below or click on the \"Print option list\" button.
 
 ") . printer::lphelp_output($printer) : "");
     } elsif ($spooler eq "lprng") {
 	$dialogtext =
-_("To print a file from the command line (terminal window) use the command \"lpr") .
-($queue ne $default ? " -P $queue" : "") . 
-_(" <file>\".
-This command you can also use in the \"Printing command\" field of the printing dialogs of many applications. But here do not supply the file name because the file to print is provided by the application.
+_("To print a file from the command line (terminal window) use the command \"%s <file>\".
+", ($queue ne $default ? "lpr -P $queue" : "lpr")) . 
+_("This command you can also use in the \"Printing command\" field of the printing dialogs of many applications. But here do not supply the file name because the file to print is provided by the application.
 ") .
 (!$raw ?
 _("
-The \"lpr\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"lpr") .
-($queue ne $default ? " -P $queue" : "") .
-_(" -Z option=setting -Z switch <file>\". To get a list of the options available for the current printer click on the \"Print option list\" button.
+The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\".", "lpr", ($queue ne $default ? "lpr -P $queue -Z option=setting -Z switch" : "lpr -Z option=setting -Z switch")) .
+_("To get a list of the options available for the current printer click on the \"Print option list\" button.
 
 ") : "");
     } elsif ($spooler eq "lpd") {
 	$dialogtext =
-_("To print a file from the command line (terminal window) use the command \"lpr") .
-($queue ne $default ? " -P $queue" : "") .
-_(" <file>\".
-This command you can also use in the \"Printing command\" field of the printing dialogs of many applications. But here do not supply the file name because the file to print is provided by the application.
+_("To print a file from the command line (terminal window) use the command \"%s <file>\".
+", ($queue ne $default ? "lpr -P $queue" : "lpr")) .
+_("This command you can also use in the \"Printing command\" field of the printing dialogs of many applications. But here do not supply the file name because the file to print is provided by the application.
 ") .
 (!$raw ?
 _("
-The \"lpr\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"lpr") .
-($queue ne $default ? " -P $queue" : "") .
-_(" -o option=setting -o switch <file>\". To get a list of the options available for the current printer click on the \"Print option list\" button.
+The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\".", "lpr", ($queue ne $default ? "lpr -P $queue -o option=setting -o switch" : "lpr -o option=setting -o switch")) .
+_("To get a list of the options available for the current printer click on the \"Print option list\" button.
 
 ") : "");
     } elsif ($spooler eq "pdq") {
 	$dialogtext =
-_("To print a file from the command line (terminal window) use the command \"pdq") .
-($queue ne $default ? " -P $queue" : "") .
-_(" <file>\" or \"lpr") .
-($queue ne $default ? " -P $queue" : "") .
-_(" <file>\".
-This command you can also use in the \"Printing command\" field of the printing dialogs of many applications. But here do not supply the file name because the file to print is provided by the application.
-You can also use the graphical interface \"xpdq\" for setting options and handling printing jobs.
+_("To print a file from the command line (terminal window) use the command \"%s <file>\" or \"%s <file>\".
+", ($queue ne $default ? "pdq -P $queue" : "pdq"), ($queue ne $default ? "lpr -P $queue" : "lpr")) .
+_("This command you can also use in the \"Printing command\" field of the printing dialogs of many applications. But here do not supply the file name because the file to print is provided by the application.
+") .
+_("You can also use the graphical interface \"xpdq\" for setting options and handling printing jobs.
 If you are using KDE as desktop environment you have a \"panic button\", an icon on the desktop, labeled with \"STOP Printer!\", which stops all print jobs immediately when you click it. This is for example useful for paper jams.
 ") .
 (!$raw ?
 _("
-The \"pdq\" and \"lpr\" commands also allow to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"pdq") . 
-($queue ne $default ? " -P $queue" : "") .
-_(" -aoption=setting -oswitch <file>\".  To get a list of the options available for the current printer read either the list shown below or click on the \"Print option list\" button.
+The \"%s\" and \"%s\" commands also allow to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\".
+", "pdq", "lpr", ($queue ne $default ? "pdq -P $queue -aoption=setting -oswitch" : "pdq -aoption=setting -oswitch")) .
+_("To get a list of the options available for the current printer read either the list shown below or click on the \"Print option list\" button.
 
 ") . printer::pdqhelp_output($printer) : "");
     }
