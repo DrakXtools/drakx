@@ -337,7 +337,7 @@ sub choosePackagesTree {
 				   _("Version: %s\n", $p->version . '-' . $p->release) .
 				   _("Size: %d KB\n", $p->size / 1024) .
 				   ($imp && _("Importance: %s\n", $imp)) . "\n" .
-				   formatLines($p->description));
+				   formatLines(c::from_utf8($p->description)));
 				return $info;
 			    },
 			    toggle_nodes => sub {
@@ -559,7 +559,7 @@ sub installPackages {
 	    $msg->set(_("Installing package %s", $p->name));
 	    $current_total_size += $last_size;
 	    $last_size = $p->size;
-	    $text->set((split /\n/, $p->summary)[0] || '');
+	    $text->set((split /\n/, c::from_utf8($p->summary))[0] || '');
 	    $advertize->(1) if $show_advertising && $total_size > 20_000_000 && time() - $change_time > 20;
 	    $w->flush;
 	} elsif ($type eq 'inst' && $subtype eq 'progress') {
