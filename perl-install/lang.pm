@@ -49,10 +49,8 @@ our %langs = (
 'fi' =>    [ 'Finnish (Suomi)',     'Suomi',             'fi_FI', '1    ', 'iso-8859-15' ],
 'fo' =>    [ 'Faroese',             'Foroyskt',          'fo_FO', '1    ', 'iso-8859-1' ],
 'fr' =>    [ 'French',              'Francais',          'fr_FR', '1 345', 'iso-8859-15' ],
-# lang-fur.png not done yet
-#'fur' =>   [ 'Furlan',              'Furlan',            'fur_IT', '1    ', 'iso-8859-15', 'fur:it_IT:it' ],
-# lang-fy.png not done yet
-#'fy' =>    [ 'Frisian',             'Frysk',             'fy_NL',  '1    ', 'iso-8859-1' ],
+'fur' =>   [ 'Furlan',              'Furlan',            'fur_IT', '1    ', 'iso-8859-15', 'fur:it_IT:it' ],
+'fy' =>    [ 'Frisian',             'Frysk',             'fy_NL',  '1    ', 'iso-8859-1' ],
 'ga' =>    [ 'Gaelic (Irish)',      'Gaeilge',           'ga_IE', '1    ', 'iso-8859-15', 'ga:en_IE:en_GB:en' ],
 #'gd' =>   [ 'Gaelic (Scottish)',   'Gaidhlig',          'gd_GB', '1    ', 'utf_lat8',    'gd:en_GB:en' ],
 'gl' =>    [ 'Galician',            'Galego',            'gl_ES', '1    ', 'iso-8859-15', 'gl:es_ES:es:pt:pt_BR' ],
@@ -69,25 +67,23 @@ our %langs = (
 'id' =>    [ 'Indonesian',          'Bahasa Indonesia',  'id_ID', ' 2   ', 'iso-8859-1' ],
 'is' =>    [ 'Icelandic',           'Islenska',          'is_IS', '1    ', 'iso-8859-1' ],
 'it' =>    [ 'Italian',             'Italiano',          'it_IT', '1    ', 'iso-8859-15' ],
-#-'iu' =>  [ 'Inuktitut',           'ZZ Inuktitut',      'iu_CA', '    5', 'utf_iu' ],
+'iu' =>    [ 'Inuktitut',           'ZZ Inuktitut',      'iu_CA', '    5', 'utf8iu' ],
 'ja' =>    [ 'Japanese',            'ZZ Nihongo',        'ja_JP', ' 2   ', 'jisx0208' ],
 'ka' =>    [ 'Georgian',            'ZZ Georgian',       'ka_GE', ' 2   ', 'utf_ka' ],
-#-'kl' =>  [ 'Greenlandic (inuit)', 'ZZ Inuit',          'kl_GL', '    5', 'iso-8859-1' ],
-# lang-km.png not done yet
-#'km' =>    [ 'Khmer',               'ZZ Khmer',          'km_KH', ' 2   ', 'utf_km' ],
+'kl' =>    [ 'Greenlandic (inuit)', 'Kalaallisut',       'kl_GL', '    5', 'iso-8859-1' ],
+'km' =>    [ 'Khmer',               'ZZ Khmer',          'km_KH', ' 2   ', 'utf_km' ],
 'kn' =>    [ 'Kannada',             'ZZ Kannada',        'kn_IN', ' 2   ', 'utf_kn' ],
 'ko' =>    [ 'Korean',              'ZZ Korea',          'ko_KR', ' 2   ', 'ksc5601' ],
 'ku' =>    [ 'Kurdish',             'Kurdi',             'ku_TR', ' 2   ', 'iso-8859-9' ],
 #-'kw' =>  [ 'Cornish',             'Kernewek',          'kw_GB', '1    ', 'utf_lat8',    'kw:en_GB:en' ],
 'ky' =>    [ 'Kyrgyz',              'Kyrgyz',            'ky_KG', ' 2   ', 'utf_cyr2' ],
-# lang-lb.png not done yet
 #- lb_LU not yet done, using de_LU locale instead
-#'lb' =>    [ 'Luxembourgish',       'Letzebuergesch',    'de_LU', '1    ', 'iso-8859-15' ],
+'lb' =>    [ 'Luxembourgish',       'Letzebuergesch',    'de_LU', '1    ', 'iso-8859-15', 'lb:de_LU' ],
 'li' =>    [ 'Limbourgish',         'Limburgs',          'li_NL', '1    ', 'iso-8859-15' ],
 'lo' =>    [ 'Laotian',             'Laotian',           'lo_LA', ' 2   ', 'utf_lo' ],
 'lt' =>    [ 'Lithuanian',          'Lietuviskai',       'lt_LT', '1    ', 'iso-8859-13' ],
 #- ltg_LV locale not done yet, using lv_LV for now
-'ltg' =>   [ 'Latgalian',           'Latgalisu',         'lv_LV', '1    ', 'iso-8859-13', 'ltg,lv' ],
+'ltg' =>   [ 'Latgalian',           'Latgalisu',         'lv_LV', '1    ', 'iso-8859-13', 'ltg:lv' ],
 'lv' =>    [ 'Latvian',             'Latviesu',          'lv_LV', '1    ', 'iso-8859-13' ],
 'mi' =>    [ 'Maori',               'Maori',             'mi_NZ', '   4 ', 'unicode' ],
 'mk' =>    [ 'Macedonian',          'Makedonski',        'mk_MK', '1    ', 'utf_cyr1' ],
@@ -102,8 +98,7 @@ our %langs = (
 'nl' =>    [ 'Dutch',               'Nederlands',        'nl_NL', '1    ', 'iso-8859-15' ],
 'nn' =>    [ 'Norwegian Nynorsk',   'Norsk, Nynorsk',    'nn_NO', '1    ', 'iso-8859-1',  'nn:no@nynorsk:no_NY:no:nb' ],
 'oc' =>    [ 'Occitan',             'Occitan',           'oc_FR', '1    ', 'iso-8859-1',  'oc:fr_FR:fr' ],
-# lang-pa.png not done yet
-#'ta' =>    [ 'Punjabi',             'ZZ Punjabi',        'pa_IN', ' 2   ', 'unicode' ],
+'pa' =>    [ 'Punjabi',             'ZZ Punjabi',        'pa_IN', ' 2   ', 'unicode' ],
 # 'tl' in priority position for now, as 'ph' is not yet official and 'tl'
 # is used instead. Monolingual window managers won't see the menus otherwise
 'ph' =>    [ 'Filipino',            'Filipino',          'ph_PH', ' 2   ', 'iso-8859-1',  'tl:ph' ],
@@ -112,8 +107,7 @@ our %langs = (
 'pt_BR' => [ 'Portuguese Brazil', 'Portugues do Brasil', 'pt_BR', '    5', 'iso-8859-1',  'pt_BR:pt_PT:pt' ],
 'ro' =>    [ 'Romanian',            'Romana',            'ro_RO', '1    ', 'iso-8859-2' ],
 'ru' =>    [ 'Russian',             'Russkij',           'ru_RU', '12   ', 'koi8-u' ],
-# lang-sc.png not done yet
-#'sc' =>    [ 'Sardian',             'Sardu',             'sc_IT', '1    ', 'iso-8859-15', 'sc:it_IT:it' ],
+'sc' =>    [ 'Sardinian',           'Sardu',             'sc_IT', '1    ', 'iso-8859-15', 'sc:it_IT:it' ],
 'se' =>    [ 'Saami',               'Samegiella',        'se_NO', '1    ', 'unicode' ], 
 'sk' =>    [ 'Slovak',              'Slovencina',        'sk_SK', '1    ', 'iso-8859-2' ],
 'sl' =>    [ 'Slovenian',           'Slovenscina',       'sl_SI', '1    ', 'iso-8859-2' ],
@@ -131,7 +125,8 @@ our %langs = (
 'tk' =>    [ 'Turkmen',             'Turkmence',         'tk_TM', ' 2   ', 'utf8' ],
 'tr' =>    [ 'Turkish',             'Turkce',            'tr_TR', ' 2   ', 'iso-8859-9' ],
 'tt' =>    [ 'Tatar',               'Tatarca',           'tt_RU', ' 2   ', 'utf8' ],
-#-'ug' =>  [ 'Uyghur',              'AA Uyghur',         'ug_CN', ' 2   ', 'utf_ar' ],  
+#- ug_CN locale not done yet, using ar_EG locale instead
+'ug' =>    [ 'Uyghur',              'AA Uyghur',         'ar_EG', ' 2   ', 'utf_ar', 'ug' ],  
 'uk' =>    [ 'Ukrainian',           'Ukrayinska',        'uk_UA', '1    ', 'koi8-u' ],
 'ur' =>    [ 'Urdu',                'AA Urdu',           'ur_PK', ' 2   ', 'utf_ar' ],  
 'uz@Latn' => [ 'Uzbek (latin)',     'Ozbekcha',          'uz_UZ', ' 2   ', 'utf_cyr2', 'uz@Latn:uz' ],
@@ -289,7 +284,7 @@ my %countries = (
 'JO' => [ N_("Jordan"),         'ar_JO', '2' ],
 'JP' => [ N_("Japan"),          'ja_JP', '2' ],
 'KE' => [ N_("Kenya"),          'en_ZW', '3' ], #
-'KG' => [ N_("Kyrgyzstan"),     'ky_KG', '2' ], #
+'KG' => [ N_("Kyrgyzstan"),     'ky_KG', '2' ],
 'KH' => [ N_("Cambodia"),       'km_KH', '2' ],
 'KI' => [ N_("Kiribati"),       'en_US', '3' ], #
 'KM' => [ N_("Comoros"),        'en_US', '2' ], #
@@ -428,7 +423,7 @@ sub list_countries {
 
 #- this list is built with the following command on the compile cluster:
 #- rpm -qpl /cooker/RPMS/locales-* | grep LC_CTYPE | cut -d'/' -f5 | grep '_' | grep -v '\.' | sort | tr '\n' ' ' ; echo
-our @locales = qw(ad_ET af_ZA am_ET an_ES ar_AE ar_BH ar_DZ ar_EG ar_IN ar_IQ ar_JO ar_KW ar_LB ar_LY ar_MA ar_OM ar_QA ar_SA ar_SD ar_SY ar_TN ar_YE as_IN az_AZ be_BY bg_BG bn_BD bn_IN br_FR bs_BA ca_ES cs_CZ cy_GB da_DK de_AT de_BE de_CH de_DE de_LU el_GR en_AU en_BE en_BW en_CA en_DK en_GB en_HK en_IE en_IN en_NZ en_PH en_SG en_US en_ZA en_ZW eo_XX es_AR es_BO es_CL es_CO es_CR es_DO es_EC es_ES es_GT es_HN es_MX es_NI es_PA es_PE es_PR es_PY es_SV es_US es_UY es_VE et_EE eu_ES fa_IR fi_FI fo_FO fr_BE fr_CA fr_CH fr_FR fr_LU ga_IE gd_GB gez_ER gez_ER@abegede gez_ET gez_ET@abegede gl_ES gu_IN gv_GB he_IL hi_IN hr_HR hu_HU hy_AM id_ID is_IS it_CH it_IT iu_CA ja_JP ka_GE kl_GL kn_IN ko_KR ku_TR kw_GB li_BE li_NL lo_LA lt_LT lv_LV mi_NZ mk_MK ml_IN mn_MN mr_IN ms_MY mt_MT nb_NO nds_DE nds_DE@traditional nds_NL ne_NP nl_BE nl_NL nn_NO oc_FR om_ET om_KE pa_IN ph_PH pl_PL pt_BR pt_PT qo_ET ro_RO ru_RU ru_UA se_NO sh_YU sid_ET sk_SK sl_SI sq_AL sr_CS sr_CS@Latn sr_YU sr_YU@Latn st_ZA sv_FI sv_SE sx_ET sz_ET ta_IN te_IN tg_TJ th_TH ti_ER ti_ET tig_ER tl_PH tr_TR tt_RU uk_UA ur_PK uz_UZ uz_UZ@Cyrl uz_UZ@Latn vi_VN wa_BE xh_ZA yi_US zh_CN zh_HK zh_SG zh_TW zu_ZA);
+our @locales = qw(af_ZA am_ET an_ES ar_AE ar_BH ar_DZ ar_EG ar_IN ar_IQ ar_JO ar_KW ar_LB ar_LY ar_MA ar_OM ar_QA ar_SA ar_SD ar_SY ar_TN ar_YE as_IN az_AZ be_BY bg_BG bn_BD bn_IN br_FR bs_BA ca_ES cs_CZ cy_GB da_DK de_AT de_BE de_CH de_DE de_LU el_GR en_AU en_BE en_BW en_CA en_DK en_GB en_HK en_IE en_IN en_NZ en_PH en_SG en_US en_ZA en_ZW eo_XX es_AR es_BO es_CL es_CO es_CR es_DO es_EC es_ES es_GT es_HN es_MX es_NI es_PA es_PE es_PR es_PY es_SV es_US es_UY es_VE et_EE eu_ES fa_IR fi_FI fo_FO fr_BE fr_CA fr_CH fr_FR fr_LU fur_IT fy_DE fy_NL ga_IE gd_GB gez_ER gez_ER@abegede gez_ET gez_ET@abegede gl_ES gu_IN gv_GB he_IL hi_IN hr_HR hu_HU hy_AM id_ID ik_CA is_IS it_CH it_IT iu_CA ja_JP ka_GE kl_GL km_KH kn_IN ko_KR ku_TR kw_GB ky_KG li_BE li_NL lo_LA lt_LT lv_LV mi_NZ mk_MK ml_IN mn_MN mr_IN ms_MY mt_MT nb_NO nds_DE nds_DE@traditional nds_NL ne_NP nl_BE nl_NL nn_NO no_NO oc_FR om_ET om_KE pa_IN ph_PH pl_PL pt_BR pt_PT ro_RO ru_RU ru_UA sc_IT se_NO sid_ET sk_SK sl_SI sq_AL sr_CS sr_CS@Latn sr_YU sr_YU@Latn st_ZA sv_FI sv_SE sw_XX ta_IN te_IN tg_TJ th_TH ti_ER ti_ET tig_ER tk_TM tl_PH tr_TR tt_RU uk_UA ur_PK uz_UZ uz_UZ@Cyrl uz_UZ@Latn vi_VN wa_BE xh_ZA yi_US zh_CN zh_HK zh_SG zh_TW zu_ZA);
 	
 sub standard_locale {
     my ($lang, $country, $prefer_lang) = @_;
@@ -691,6 +686,7 @@ my %charsets = (
 "utf_he"      => [ "iso08.f16",      undef,   undef,      "utf8",    undef ],
 "utf_hi"      => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_hy"      => [ "arm8",           undef,   undef,      "utf8",    undef ],
+"utf_iu"      => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_ka"      => [ "t_geors",        undef,   undef,      "utf8",    undef ],
 "utf_km"      => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_kn"      => [ undef,            undef,   undef,      "utf8",    undef ],
@@ -798,6 +794,7 @@ my %charset2kde_font = (
   'utf_he' => [ "Nachlieli,13", "Miriam Mono,10", "Nachlieli,11" ],
   'utf_hi' => [ "Raghindi,14", ],
   'utf_hy' => [ "Artsounk,12", "Monospace,10", "Artsounk,11" ],
+#-'utf_iu' => [ "????,14", ],
 #-'utf_km' => [ "????,14", ],
   'utf_kn' => [ "Sampige,14", ],
   'utf_ml' => [ "malayalam,14", ],
