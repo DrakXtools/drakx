@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 39mdk
+Release: 40mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -273,14 +273,31 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Fri Sep  6 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-40mdk
+- harddrake:
+  o fix usb mouse detection
+  o list --test in -h|--help
+  o enhanced draksound :
+    * blacklist cs46xx and cs4281 drivers : we won't unload these
+ 	 drivers since they're know to oopses the kernel but just warn
+ 	 the user
+    * chroot aware - can be used in drakx
+    * workaround alsaconf's aliases
+    * add an help button that describe ALSA and OSS
+    * display current driver, its type (OSS or ALSA), and the default
+  	 driver for the card
+    * if there's no (usb|pci) sound card, print a note about sndconfig
+      for isa pnp cards
+
 * Fri Sep 06 2002 David BAUDENS <baudens@mandrakesoft.com> 1.1.9-39mdk
 - Re-add old obsolete Aurora's images needed by drakboot (this is stupid)
 
 * Fri Sep 06 2002 David BAUDENS <baudens@mandrakesoft.com> 1.1.9-38mdk
 - Update mdk_logo.png
-
-* Fri Sep 06 2002 David BAUDENS <baudens@mandrakesoft.com> 1.1.9-37mdk
 - Update drakbackup icons
+
+* Fri Sep  6 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-37mdk
+- drakperm, drakbackup: fix embedded mode
 
 * Fri Sep  6 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-36mdk
 - gtkicons_labels_widget() :
