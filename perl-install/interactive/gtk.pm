@@ -291,7 +291,7 @@ sub create_treeview_tree {
 	my ($model, $iter) = $tree->get_selection->get_selected;
 	$select->($wleaves{$v} || return) if !$model || $wleaves{$v} ne $model->get_path_str($iter);
 	undef $iter if ref $iter;
-    }, $size;
+    };
 }
 
 sub create_list {
@@ -345,9 +345,7 @@ sub ask_fromW {
     my $mainw = ugtk2->new($common->{title}, %$o, if__($::main_window, transient => $::main_window));
  
     #-the widgets
-    my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack, $has_horiz_scroll, $has_scroll);
-    my $max_width = 0;
-    my $total_size = 0;
+    my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack);
     my $tooltips = Gtk2::Tooltips->new;
     my $ok_clicked = sub { 
 	!$mainw->{ok} || $mainw->{ok}->get_property('sensitive') or return;
@@ -387,7 +385,7 @@ sub ask_fromW {
 	};
 	my $changed = sub { $update->(sub { $common->{callbacks}{changed}($ind) }) };
 
-	my ($w, $real_w, $focus_w, $set, $get, $expand, $size);
+	my ($w, $real_w, $focus_w, $set, $get);
 	my $width = 0;
 	if ($e->{type} eq 'iconlist') {
 	    $w = Gtk2::Button->new;
@@ -443,7 +441,6 @@ sub ask_fromW {
 	    $w->signal_connect(key_press_event => $may_go_to_next);
 	    $set = sub { $adj->set_value($_[0]) };
 	    $get = sub { $adj->get_value };
-	    $size = 2;
 	} elsif ($e->{type} =~ /list/) {
 
 	    $e->{formatted_list} = [ map { may_apply($e->{format}, $_) } @{$e->{list}} ];
@@ -470,9 +467,6 @@ sub ask_fromW {
 		};
 		my @actions = (N_("Add"), N_("Modify"), N_("Remove"));
 
-		$width += max(map { length(translate($_)) } @actions);
-		$has_scroll = $expand = 1;
-		$size = 6;
 		($w, $set, $focus_w) = create_treeview_list($e, $may_go_to_next, $changed, 
 							    sub { $do_action->('Modify') if $_[1]->type =~ /^2/ });
 		$e->{saved_default_val} = ${$e->{val}};
@@ -501,7 +495,7 @@ sub ask_fromW {
 		    #- used only when needed, as key bindings are dropped by List (ListStore does not seems to accepts Tooltips).
 		    ($w, $set, $focus_w) = $use_boxradio ? create_boxradio(@para) : create_list(@para);
 		} elsif ($e->{type} eq 'treelist') {
-		    ($w, $set, $size) = create_treeview_tree(@para, $e->{tree_expanded});
+		    ($w, $set) = create_treeview_tree(@para, $e->{tree_expanded});
 		    $e->{saved_default_val} = ${$e->{val}}; #- during realization, signals will mess up the default val :(
 		} else {
 		    if ($use_boxradio) {
@@ -511,12 +505,8 @@ sub ask_fromW {
 			$e->{saved_default_val} = ${$e->{val}};
 		    }
 		}
-		if (@{$e->{list}} > (@$l == 1 ? 10 : 4) || $e->{add_modify_remove}) {
-		    $has_scroll = $expand = 1;
+		if (@{$e->{list}} > 10) {
 		    $real_w = create_scrolled_window($w);
-		    $size = (@$l == 1 ? 10 : 4);
-		} else {
-		    $size ||= @{$e->{list}};
 		}
 	    }
 	} else {
@@ -525,7 +515,7 @@ sub ask_fromW {
 		my @formatted_list = map { may_apply($e->{format}, $_) } @{$e->{list}};
 
 		my @l = sort { $b <=> $a } map { length } @formatted_list;
-		$width = $l[@l / 16]; # take the third octile (think quartile)
+		my $width = $l[@l / 16]; # take the third octile (think quartile)
 
 		if ($e->{not_edit} && $width < 60) { #- OptionMenus do not have an horizontal scroll-bar. This can cause havoc for long strings (eg: diskdrake Create dialog box in expert mode)
 		    $w = Gtk2::OptionMenu->new;
@@ -534,7 +524,6 @@ sub ask_fromW {
 		    $w->set_use_arrows_always(1);
 		    $w->entry->set_editable(!$e->{not_edit});
 		    $w->disable_activate;
-		    $has_horiz_scroll = 1;
 		}
 
 		$w->set_popdown_strings(@formatted_list);
@@ -571,32 +560,19 @@ sub ask_fromW {
 	});
 	$tooltips->set_tip($w, $e->{help}) if $e->{help} && !ref($e->{help});
 
-	$max_width = max($max_width, $width);
-	$total_size += $size || 1;
-    
-	{ e => $e, w => $w, real_w => $real_w || $w, focus_w => $focus_w || $w, expand => $expand,
+	{ e => $e, w => $w, real_w => $real_w || $w, focus_w => $focus_w || $w,
 	  get => $get || sub { ${$e->{val}} }, set => $set || sub {},
 	  icon_w => $e->{icon} && eval { gtkcreate_img($e->{icon}) } };
     };
     @widgets_always   = map_index { $create_widget->($_, $::i)       } @$l;
-    my $always_total_size = $total_size;
     @widgets_advanced = map_index { $create_widget->($_, $::i + @$l) } @$l2;
-    my $advanced_total_size = $total_size - $always_total_size;
-
 
     my $pack = create_box_with_title($mainw, @{$common->{messages}});
-    my ($totalwidth, $totalheight) = (0, $mainw->{box_size});
-
-    my $set_default_size = sub {
-	if (($has_scroll || $has_horiz_scroll) && !$mainw->{isEmbedded} && !$mainw->{isWizard}) {
-	    $mainw->{rwindow}->set_default_size($totalwidth+6+$ugtk2::shape_width, $has_scroll ? $totalheight+6+3+$ugtk2::shape_width : -1);
-	}
-    };
+    $mainw->{rwindow}->set_size_request(720, 420) if $mainw->{pop_it} && @$l;
 
     my $first_time = 1;
     my $set_advanced = sub {
 	($advanced) = @_;
-	$set_default_size->() if $advanced;
 	$update->($common->{callbacks}{advanced}) if $advanced && !$first_time;
 	$advanced ? $advanced_pack->show : $advanced_pack->hide;
 	@widgets = (@widgets_always, if_($advanced, @widgets_advanced));
@@ -612,40 +588,18 @@ sub ask_fromW {
 			    } ];
 
     my $create_widgets = sub {
-	my ($size, @widgets) = @_;
-	my $w = create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})] } @widgets);
-
-	$size && $total_size or return $w; #- do not bother computing stupid/bad things
-	my $ratio = max($size / $total_size, 0.2);
-
-	my ($possibleheight, $possiblewidth) = $mainw->{isEmbedded} ? (450, 380) : ($::windowheight * 0.8, $::windowwidth * 0.8);
-	$possibleheight -= $mainw->{box_size};
-
-	my $wantedwidth = max(250, $max_width * 5);
-	my $width = min($possiblewidth, $wantedwidth);
-
-	my $wantedheight = ugtk2::n_line_size($size, 'various', $mainw->{rwindow});
-	my $height = min($possibleheight * $ratio, max(200, $wantedheight));
-
-	$totalheight += $height;
-	$totalwidth = max($width, $totalwidth);
-
-	my $has = $wantedwidth > $width || $wantedheight > $height;
-	$has_scroll ||= $has;
-	$has && !$::no_scroll ? create_scrolled_window($w) : $w;
+	my (@widgets) = @_;
+	create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})] } @widgets);
     };
 
-    my $always_pack = $create_widgets->($always_total_size, @widgets_always);
-    my $has_scroll_always = $has_scroll;
+    my $always_pack = $create_widgets->(@widgets_always);
 
     my @adv = map { warp_text($_) } @{$common->{advanced_messages}};
-    { local $::no_scroll = 1;
     $advanced_pack = 
       gtkpack_(Gtk2::VBox->new(0,0),
 	       (map { (0, Gtk2::Label->new($_)) } @adv),
 	       0, Gtk2::HSeparator->new,
-	       1, $create_widgets->($advanced_total_size, @widgets_advanced));
-  }
+	       1, $create_widgets->(@widgets_advanced));
 
     my @help = if_($common->{interactive_help}, 
 		   [ N("Help"), sub { 
@@ -658,18 +612,21 @@ sub ask_fromW {
     }
     my $buttons_pack = ($common->{ok} || !exists $common->{ok}) && $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @help, if_(@$l2, $advanced_button));
 
-    $pack->pack_start(gtkshow($always_pack), 1, 1, 0);
-    $advanced_pack = create_scrolled_window($advanced_pack, [ 'never', 'automatic' ], 'none') if !$mainw->{isEmbedded};
-    $pack->pack_start($advanced_pack, 1, 1, 0) if @widgets_advanced;
+    gtkpack($pack,
+	    create_scrolled_window(gtkpack(Gtk2::VBox->new(0,0),
+					   $always_pack,
+					   if_(@widgets_advanced, $advanced_pack)), 
+				   [ 'automatic', 'automatic' ], 'none')) if @$l;
+	    
     if ($buttons_pack) {
 	if ($::isWizard && !$mainw->{pop_it} && $::isInstall) {
+	    #- is this still needed?
 	    $buttons_pack->set_size_request($::windowwidth * 0.9 - 20, -1);
 	    $buttons_pack = gtkpack__(Gtk2::HBox->new(0,0), $buttons_pack);
 	}
 	$pack->pack_start(gtkshow($buttons_pack), 0, 0, 0);
     }
-    gtkadd($mainw->{window}, $mainw->{isEmbedded} ? create_scrolled_window($pack, [ 'automatic', 'automatic' ], 'none') : $pack);
-    $set_default_size->() if $has_scroll_always;
+    gtkadd($mainw->{window}, $pack);
     $set_advanced->($common->{advanced_state});
     
     my $widget_to_focus =
