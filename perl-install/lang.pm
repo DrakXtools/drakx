@@ -656,9 +656,11 @@ my %IM2packages = (
                   );
 
 sub IM2packages {
-    my ($im, $locale) = @_;
+    my ($locale) = @_;
+    my $im = $locale->{IM};
     return if $im eq "None";
-    my $packages = $IM2packages{$im}{$locale} || $IM2packages{$im}{generic};
+    my $lang = analyse_locale_name($locale->{lang})->{main};
+    my $packages = $IM2packages{$im}{$lang} || $IM2packages{$im}{generic};
     return $packages ? @$packages : $im;
 }
 
@@ -1031,7 +1033,7 @@ sub write {
     if ($locale->{IM}) {
         delete @$h{qw(GTK_IM_MODULE XIM XIM_PROGRAM XMODIFIERS)};
         add2hash($h, $gtkqt_im{$locale->{IM}});
-        my @packages = IM2packages($locale->{IM});
+        my @packages = IM2packages($locale);
         if (@packages && $b_user_only) {
             require interactive;
             interactive->vnew->ask_warn(N("Warning"),
@@ -1044,7 +1046,7 @@ sub write {
                                         )
                                       );
         } elsif(@packages) {
-            do_pkgs_standalone->new->install((IM2packages($locale->{IM}), )) ;
+            do_pkgs_standalone->new->install(IM2packages($locale));
         }
     }
 
