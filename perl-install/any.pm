@@ -78,11 +78,6 @@ sub hdInstallPath() {
     defined $tail && ($head ? "$head/$tail" : "/mnt/hd/$tail");
 }
 
-sub kernelVersion() {
-    my $kernel = readlink("$::prefix/boot/vmlinuz") || first(all("$::prefix/boot"));
-    first($kernel =~ /vmlinuz-(.*)/);
-}
-
 sub setupBootloader {
     my ($in, $b, $all_hds, $fstab, $security) = @_;
     my $hds = $all_hds->{hds};
