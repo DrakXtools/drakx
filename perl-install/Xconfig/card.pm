@@ -148,8 +148,8 @@ sub probe() {
     #- take a default on sparc if nothing has been found.
     if (arch() =~ /^sparc/ && !@cards) {
         log::l("Using probe with /proc/fb as nothing has been found!");
-	local $_ = cat_("/proc/fb");
-	@cards = { server => /Mach64/ ? "Mach64" : /Permedia2/ ? "3DLabs" : "Sun24" };
+	my $s = cat_("/proc/fb");
+	@cards = { server => $s =~ /Mach64/ ? "Mach64" : $s =~ /Permedia2/ ? "3DLabs" : "Sun24" };
     }
 
     #- disabling MULTI_HEAD when not available
