@@ -102,7 +102,6 @@ unless ($root_size) {
 my $minor = defined $resize_fat_size && $fat_pos > 0 ? 6 : 5;
 my $point = 0.0;
 
-open F, "| parted -s /dev/$hd";
 if (defined $resize_fat_size) {
     do {
 	print "
@@ -116,6 +115,7 @@ Type \`\`yes'' and [enter] to go on\n"
     #- if the size is not 0.
     #- KEEP IN MIND there is only one partition defined.
     $point = $hd_parts[$fat_pos]{start} + $resize_fat_size;
+    open F, "| parted -s /dev/$hd";
     printf F "resize %d %s %s\n", $hd_parts[$fat_pos]{minor}, $hd_parts[$fat_pos]{start}, $point;
 } else {
     unless (defined $yes) {
@@ -129,6 +129,7 @@ Type \`\`yes'' and [enter] to go on\n"
         } while (($yes = <STDIN>) !~ /^\s*yes\s*$/i);
     }
     #- build a new disk label here.
+    open F, "| parted -s /dev/$hd";
     print F "mklabel msdos\n";
 }
 #- all linux partition are stored inside an extended partition, this is easier to manipulate after.
