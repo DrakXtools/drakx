@@ -491,6 +491,13 @@ sub set_autologin {
 	setVarsInSh("$::prefix/etc/sysconfig/desktop", \%l);
 	log::l("cat $::prefix/etc/sysconfig/desktop ($desktop):\n", cat_("$::prefix/etc/sysconfig/desktop"));
     }
+    my $xdm_autologin_cfg = "$::prefix/etc/sysconfig/autologin";
+    if (member($desktop, 'KDE', 'Gnome')) {
+	unlink $xdm_autologin_cfg;
+    } else {
+	setVarsInShMode($xdm_autologin_cfg, 0644,
+			{ USER => $user, AUTOLOGIN => bool2yesno($user), EXEC => '/usr/X11R6/bin/startx.autologin' });
+    }
 }
 
 sub rotate_log {
@@ -614,10 +621,14 @@ sub ask_users {
     }
 }
 
+sub sessions {
+    split(' ', run_program::rooted_get_stdout($::prefix, '/usr/sbin/chksession', '-l'));
+}
+
 sub autologin {
     my ($o, $in) = @_;
 
-    my @wm = split(' ', run_program::rooted_get_stdout($::prefix, '/usr/sbin/chksession', '-l'));
+    my @wm = sessions();
     my @users = map { $_->{name} } @{$o->{users} || []};
 
     if (member('KDE', @wm) && @users == 1 && $o->{meta_class} eq 'discovery') {
