@@ -422,7 +422,7 @@ sub ask_fromW {
 		my $f = $e->{icon2f}->($_[0]);
 		$e->{icon} = -e $f ?
 		    gtkcreate_img($f) :
-		    Gtk2::Label->new(may_apply($e->{format}, $_[0]));
+		    Gtk2::WrappedLabel->new(may_apply($e->{format}, $_[0]));
 		$w->add(gtkshow($e->{icon}));
 	    };
 	    $w->signal_connect(clicked => sub {
@@ -441,7 +441,7 @@ sub ask_fromW {
 	    $set = sub { $w->set_active($_[0]) };
 	    $get = sub { $w->get_active };
 	} elsif ($e->{type} eq 'label') {
-	    $w = Gtk2::Label->new(${$e->{val}});
+	    $w = Gtk2::WrappedLabel->new(${$e->{val}});
 	    $set = sub { $w->set($_[0]) };
 	} elsif ($e->{type} eq 'button') {
 	    $w = Gtk2::Button->new_with_label('');
@@ -622,7 +622,7 @@ sub ask_fromW {
     my @adv = map { warp_text($_) } @{$common->{advanced_messages}};
     $advanced_pack = 
       gtkpack_(Gtk2::VBox->new(0,0),
-	       (map { (0, Gtk2::Label->new($_)) } @adv),
+	       (map { (0, Gtk2::WrappedLabel->new($_)) } @adv),
 	       0, Gtk2::HSeparator->new,
 	       1, $create_widgets->(@widgets_advanced));
 

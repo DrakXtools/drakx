@@ -100,7 +100,7 @@ sub gtkset_line_wrap          { $_[0]->set_line_wrap($_[1]); $_[0] }
 sub gtkadd {
     my $w = shift;
     foreach my $l (@_) {
-	ref $l or $l = Gtk2::Label->new($l);
+	ref $l or $l = Gtk2::WrappedLabel->new($l);
 	$w->add(gtkshow($l));
     }
     $w
@@ -110,7 +110,7 @@ sub gtkadd_widget {
     my $sg = shift;
     map {
         my $l = $_;
-        ref $l or $l = Gtk2::Label->new($l);
+        ref $l or $l = Gtk2::WrappedLabel->new($l);
         $sg->add_widget($l);
         $l;
     } @_;
@@ -119,7 +119,7 @@ sub gtkadd_widget {
 sub gtkappend {
     my $w = shift;
     foreach my $l (@_) {
-	ref $l or $l = Gtk2::Label->new($l);
+	ref $l or $l = Gtk2::WrappedLabel->new($l);
 	$w->append(gtkshow($l));
     }
     $w
@@ -235,7 +235,7 @@ sub gtkpowerpack {
 	    }
 	}
 	#- Get and pack the widget (create it if necessary to  a label...)
-	my $widget = ref($_[0]) ? shift : Gtk2::Label->new(shift);
+	my $widget = ref($_[0]) ? shift : Gtk2::WrappedLabel->new(shift);
 	my $pack_call = 'pack_'.($attr{pack_end} ? 'end' : 'start');
 	$box->$pack_call($widget, $attr{expand}, $attr{fill}, $attr{padding});
 	$widget->show;
