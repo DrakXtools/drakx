@@ -280,6 +280,7 @@ such as ``mybox.mylab.myco.com''."),
 	if ( $netc->{GATEWAY} ) {
 	    unlink "$prefix/etc/sysconfig/network-scripts/net_cnx_up";
 	    unlink "$prefix/etc/sysconfig/network-scripts/net_cnx_down";
+	    undef $netc->{NET_DEVICE};
 	}
     }
     miscellaneousNetwork($in);
