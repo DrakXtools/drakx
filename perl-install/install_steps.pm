@@ -663,7 +663,7 @@ sub summaryBefore {}
 sub summary {
     my ($o) = @_;
     configureTimezone($o);
-    configurePrinter($o) if $o->{printer};
+    configurePrinter($o) if $o->{printer} && $o->{printer}{SPOOLER};
 }
 
 sub summaryAfter {
