@@ -682,6 +682,13 @@ sub chooseResolutionsGtk($$;$) {
     my $no_human; # is the w2_combo->entry changed by a human?
     my $set = sub { $ignore = 1; $_[0]->set_active(1); $ignore = 0; };
 
+    my %monitor;
+    $monitor{$_} = [ gtkcreate_png("monitor-" . $_ . ".png") ] foreach (640, 800, 1024, 1280);
+    $monitor{1152} = [ gtkcreate_png("monitor-" . 1024 . ".png") ];
+    $monitor{1600} = [ gtkcreate_png("monitor-" . 1280 . ".png") ];
+
+    my $pixmap_m = new Gtk::Pixmap( $monitor{$chosen_w}[0]  , $monitor{$chosen_w}[1] );
+
     while (my ($w, $h) = each %w2h) {
 	my $V = $w . "x" . $h;
 	$w2widget{$w} = $r = new Gtk::RadioButton($r ? ($V, $r) : $V);
@@ -707,7 +714,7 @@ sub chooseResolutionsGtk($$;$) {
 					     ),
 		    1, gtkpack2(new Gtk::VBox(0,0),
 				gtkpack2__(new Gtk::VBox(0, $::isEmbedded ? 15 : 0),
-					   if_($::isEmbedded, $pix_monitor = gtkpng ("monitor")),
+					   if_($::isEmbedded, $pixmap_m),
 					   if_(!$::isEmbedded, map {$w2widget{$_} } ikeys(%w2widget)),
 					   gtkpack2(new Gtk::HBox(0,0),
 						    create_packtable({ col_spacings => 5, row_spacings => 5},
@@ -743,6 +750,7 @@ sub chooseResolutionsGtk($$;$) {
 	$w2_combo->entry->signal_connect(changed => sub {
 	    ($chosen_w) = $w2_combo->entry->get_text =~ /([^x]*)x.*/;
 	    $no_human ? $no_human=0 : $w2widget{$chosen_w}->set_active(1);
+	    $pixmap_m->set($monitor{$chosen_w}[0], $monitor{$chosen_w}[1]);
 	});
     }
     &$set_depth();
