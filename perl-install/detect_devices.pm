@@ -14,7 +14,7 @@ use c;
 #-#####################################################################################
 #- Globals
 #-#####################################################################################
-my @netdevices = map { my $l = $_; map { "$l$_" } (0..3) } (qw(eth tr fddi), $::isStandalone ? () : 'plip');
+my @netdevices = map { my $l = $_; map { "$l$_" } (0..3) } qw(eth tr fddi plip);
 my %serialprobe = ();
 my $usb_interface = undef;
 
@@ -167,7 +167,8 @@ sub getDAC960() {
 }
 
 sub getNet() {
-    grep { hasNetDevice($_) } @netdevices;
+    my @nets = grep { hasNetDevice($_) } @netdevices;
+    $::isStandalone ? grep { !/plip/ } @nets : @nets;
 }
 
 sub hasNet() { goto &getNet }
