@@ -336,21 +336,16 @@ sub get_val() {
 sub change_color {
     my ($color) = @_;
     my $dialog = _create_dialog(N("Color configuration"));
-    my $doit;
     $dialog->vbox->add(my $colorsel = Gtk2::ColorSelection->new);
-    gtkpack($dialog->action_area,
-            gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub {
-                                  $doit = 1;
-                                  $dialog->destroy;
-                              }),
-            gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub { 
-                                  $dialog->destroy;
-                              }),
-           );
     $colorsel->set_current_color($color);
+    $dialog->add_button(N("Cancel"), 'cancel');
+    $dialog->add_button(N("Ok"), 'ok');
     $dialog->show_all;
-    $dialog->run;
-    $doit ? $colorsel->get_current_color : $color;
+    if ($dialog->run eq 'ok') {
+        $color = $colorsel->get_current_color;
+    }
+    $dialog->destroy;
+    $color;
 }
 
 my ($scale_r, $scale_t);
