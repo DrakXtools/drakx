@@ -44,6 +44,12 @@ sub ask_parameters {
 	$authentication->{AD_server} ||= 'kerberos.' . $val;
 	$authentication->{AD_users_db} ||= 'cn=users,' . domain_to_ldap_domain($val);
 
+	my %sub_kinds = my @sub_kinds = (
+	    anonymous => N("anonymous"), 
+	    simple => N("simple"), 
+	    tls => N("over SSL/TLS"), 
+	    kerberos => N("security layout (SASL/Kerberos)"),
+	);
 	my $AD_user = $authentication->{AD_user} =~ /(.*)\@\Q$val\E$/ ? $1 : $authentication->{AD_user};
 
 	$in->ask_from('',
@@ -51,10 +57,13 @@ sub ask_parameters {
 		     [ { label => N("Domain"), val => \$val },
 		       { label => N("Server"), val => \$authentication->{AD_server} },
 		       { label => N("LDAP users database"), val => \$authentication->{AD_users_db} },
-		       { label => N("LDAP user allowed to browse the Active Directory"), val => \$AD_user },
-		       { label => N("Password for user"), val => \$authentication->{AD_password}, disabled => sub { !$AD_user } },
+		       { label => N("LDAP Authentication"), val => \$authentication->{sub_kind}, list => [ map { $_->[0] } group_by2(@sub_kinds) ], format => sub { $sub_kinds{$_[0]} } },
+		       { label => N("LDAP user allowed to browse the Active Directory"), val => \$AD_user, disabled => sub { $authentication->{sub_kind} eq 'anonymous' } },
+		       { label => N("Password for user"), val => \$authentication->{AD_password}, disabled => sub { !$AD_user || $authentication->{sub_kind} eq 'anonymous' } },
 		     ]) or return;
-	$authentication->{AD_user} = !$AD_user ? '' : $AD_user =~ /@/ ? $AD_user : "$AD_user\@$val";
+	$authentication->{AD_user} = !$AD_user || $authentication->{sub_kind} eq 'anonymous' ? '' : 
+	                             $AD_user =~ /@/ ? $AD_user : "$AD_user\@$val";
+	$authentication->{AD_password} = '' if !$authentication->{AD_user};
     } elsif ($kind eq 'NIS') { 
 	$val ||= 'broadcast';
 	$in->ask_from('',
@@ -113,12 +122,22 @@ sub set {
 	set_nsswitch_priority('ldap');
 	set_pam_authentication('krb5');
 
+	my $ssl = { 
+		   anonymous => 'off', 
+		   simple => 'off', 
+		   ssl => 'start_tls' . "\n" . 'ssl on',
+		   kerberos => 'on',
+		  }->{$authentication->{sub_kind}};
+
 	update_ldap_conf(
 			 host => $authentication->{AD_server},
 			 base => domain_to_ldap_domain($val),
 			 nss_base_shadow => "$authentication->{AD_users_db}?one",
 			 nss_base_passwd => "$authentication->{AD_users_db}?one",
 			 nss_base_group => "$authentication->{AD_users_db}?one",
+
+			 ssl => $ssl,
+			 sasl_mech => $authentication->{sub_kind} eq 'kerberos' ? 'GSSAPI' : '',
 
 			 binddn => $authentication->{AD_user},
 			 bindpw => $authentication->{AD_password},
