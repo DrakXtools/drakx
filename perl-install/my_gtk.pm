@@ -7,7 +7,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
-    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkpowerpack gtkset_editable gtksetstyle gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_modal gtkset_border_width gtkmove gtkresize gtkshow gtkhide gtkdestroy gtkcolor gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng create_pix_text get_text_coord fill_tiled gtkicons_labels_widget write_on_pixmap gtkcreate_xpm gtkcreate_png gtkbuttonset gtkroot gtkentry) ],
+    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkpowerpack gtkset_editable gtksetstyle gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_modal gtkset_border_width gtkmove gtkresize gtkshow gtkhide gtkdestroy gtkcolor gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng create_pix_text get_text_coord fill_tiled gtkicons_labels_widget write_on_pixmap gtkcreate_xpm gtkcreate_png gtkbuttonset create_pixbutton gtkroot gtkentry) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_browse_tree_info ask_browse_tree_info_given_widgets ask_dir) ],
     various => [ qw (add_icon_path) ],
 );
@@ -155,19 +155,25 @@ END { &exit() }
 
 sub create_okcancel {
     my ($w, $ok, $cancel, $spread, @other) = @_;
+    print "[ $w, $ok, $cancel, $spread  ]\n";
     $spread ||= $::isWizard ? "end" : "spread";
-    $cancel = $::isWizard ? _("<- Previous") : _("Cancel") if !defined $cancel && !defined $ok;
-    $ok = $::isWizard ? ($::Wizard_finished ? _("Finish") : _("Next ->")) : _("Ok") if !defined $ok;
-    my $b1 = gtksignal_connect($w->{ok} = new Gtk::Button($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk->main_quit });
-    my $b2 = $cancel && gtksignal_connect($w->{cancel} = new Gtk::Button($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk->main_quit });
-    $::isWizard and gtksignal_connect($w->{wizcancel} = new Gtk::Button(_("Cancel")), clicked => sub { die 'wizcancel' });
+    my $cancel_xpm= gtkxpm($::isWizard ? 'stock_left.xpm' : 'stock_cancel.xpm') if !defined $cancel && !defined $ok;
+    print "cancel_xpm $cancel_xpm\n";
+    $cancel = $::isWizard ? _("Previous") : _("Cancel") if !defined $cancel && !defined $ok;
+    my $ok_xpm= gtkxpm($::isWizard ? ($::Wizard_finished ? 'stock_exit.xpm' : 'stock_right.xpm') : 'stock_ok.xpm') if !defined $ok;
+    print "ok_xpm $ok_xpm\n";
+    $ok = $::isWizard ? ($::Wizard_finished ? _("Finish") : _("Next")) : _("Ok") if !defined $ok;
+    my $b1 = gtksignal_connect($w->{ok} = create_pixbutton($ok, $ok_xpm, $::isWizard), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk->main_quit });
+    my $b2 = $cancel && gtksignal_connect($w->{cancel} = create_pixbutton($cancel, $cancel_xpm),
+					  clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk->main_quit });
+    $::isWizard and gtksignal_connect($w->{wizcancel} = create_pixbutton(_("Cancel"), gtkxpm('stock_cancel.xpm')), clicked =>sub{die'wizcancel'});
     my @l = grep { $_ } $::isWizard ? ($w->{wizcancel}, $::Wizard_no_previous ? () : $b2, $b1): ($b1, $b2);
     push @l, map { gtksignal_connect(new Gtk::Button($_->[0]), clicked => $_->[1]) } @other;
 
     $_->can_default($::isWizard) foreach @l;
+
     gtkadd(create_hbox($spread), @l);
 }
-
 
 sub _create_window($$) {
     my ($o, $title) = @_;
