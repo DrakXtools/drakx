@@ -1,3 +1,152 @@
+2004/08/19  Erwan Velu  <erwan at mandrakesoft.com>
+
+	* share/rpmsrate: removing OpenIPMI as default
+
+2004/08/19  Olivier Blin <oblin at mandrakesoft.com>
+
+	* printer/printerdrake.pm: always close the wizard_window, die when an
+	exception has been raised
+	perl_checker fixes
+	perl_checker fixes
+	workaround not to call c::upgrade_utf8 on read-only variables
+
+	* standalone/printerdrake: perl_checker fixes
+
+	* printer/main.pm: workaround not to call c::upgrade_utf8 on read-only
+	variables
+	perl_checker fixes
+
+2004/08/19  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/xfree.pm: fix keyboarddrake not modifying xkb
+
+2004/08/19  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Move code in another function
+
+	* install2: Wrong comment
+
+2004/08/19  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/detect.pm: Fix problem of the "usblp" kernel module not loaded
+	before local printer auto-detection.
+
+	* printer/main.pm, printer/printerdrake.pm, printer/office.pm,
+	printer/gimp.pm: 
+	  - Removed installation of "gimpprint" package, it is part of GIMP
+	2.0.x now.
+	  - Removed configuration of applications, GIMP and OpenOffice.org are
+	patched now so that they do not need configuration of print queues any
+	more.
+	  - Text fix for scanners in HP's multi-function devices.
+
+2004/08/19  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* printer/main.pm (connectionstr) workaround perl bug
+
+	* standalone/draksplash, share/po/bn.po, share/po/ms.po, share/po/sk.po,
+	share/po/gl.po, share/po/pt_BR.po, share/po/th.po, share/po/et.po,
+	share/po/ja.po, share/po/hr.po, network/netconnect.pm, share/po/be.po,
+	standalone/drakvpn, standalone/drakboot, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/da.po, share/po/ca.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, standalone/drakedm, share/po/ro.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po,
+	standalone/drakbug, share/po/it.po, share/po/eu.po, share/po/es.po,
+	network/adsl.pm, share/po/lv.po, share/po/hu.po,
+	printer/printerdrake.pm, standalone/drakxtv, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po,
+	standalone/service_harddrake_confirm, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/uk.po,
+	share/po/mn.po, share/po/am.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, security/help.pm, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/hi.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/fr.po, standalone/drakperm, share/po/nl.po,
+	share/po/tl.po, share/po/de.po, share/po/eo.po, share/po/el.po,
+	share/po/cs.po, share/po/bg.po, standalone/scannerdrake,
+	share/po/uz@Latn.po: typo fixes
+
+	* Makefile.drakxtools: fix drakxtools build (do not include
+	../Makefile.config)
+
+	* drakxtools.spec: 10.1-0.11mdk
+
+	* share/rpmsrate: reduce non default (aka old default ones) IM priority
+
+2004/08/19  Youcef Rabah Rahal <rahal at arabeyes.org>
+
+	* share/po/ar.po: Sync with Arabeyes CVS
+
+2004/08/18  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/network.pm (write_interface_conf) use mac_ieee1394 descriptor in
+	iftab for firewire links
+
+	* standalone/service_harddrake, harddrake/data.pm: check usb controllers
+	on boot
+
+2004/08/18  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: restrict the wait message (so that it's dead when an error
+	message is displayed)
+	fix typo
+	fix typos
+	  - any::setupBootloader() used to call bootloader::install() whereas
+	install_steps_interactive::setupBootloader() could call it once again
+	(but this code seems dead though)
+	  - create any::installBootloader() out of what was done in the end of
+	any::setupBootloader() but also in  install_steps_interactive and
+	drakboot (which handled the error that could occur in
+	bootloader::install())
+
+	* standalone/drakboot, install_steps_interactive.pm: 
+	  - any::setupBootloader() used to call bootloader::install() whereas
+	install_steps_interactive::setupBootloader() could call it once again
+	(but this code seems dead though)
+	  - create any::installBootloader() out of what was done in the end of
+	any::setupBootloader() but also in  install_steps_interactive and
+	drakboot (which handled the error that could occur in
+	bootloader::install())
+
+	* install_steps_gtk.pm: hide $release_notes_scroll by default, it's
+	visually cleaner
+
+	* ugtk2.pm: fix blino sucks
+
+	* detect_devices.pm: perl_checker compliance
+
+2004/08/18  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* ugtk2.pm: Make the status field optional in treeviews
+
+2004/08/18  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* lang.pm, any.pm: fix default IM setting when switching language
+
+	* drakxtools.spec: add bug reference
+	10.1-0.10mdk
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/ltg.po,
+	share/po/nb.po, share/po/ky.po, share/po/uz.po, share/po/ro.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/br.po, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/mn.po,
+	share/po/uk.po, share/po/am.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/az.po, share/po/pt.po, share/po/vi.po, share/po/fr.po,
+	share/po/ta.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/el.po, share/po/bg.po, share/po/cs.po,
+	share/po/uz@Latn.po: merge in s/%d/%s/ fix in net_applet's message
+
 2004/08/18  Pixel  <pixel at mandrakesoft.com>
 
 	* any.pm: restrict the wait message (so that it's dead when an error
@@ -35640,7 +35789,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.949 2004/08/18 09:58:12 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.950 2004/08/18 10:52:59 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
