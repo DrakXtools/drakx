@@ -599,7 +599,9 @@ sub setupBootloader {
     my ($o, $more) = @_;
     my $b = $o->{bootloader};
 
-    if ($::beginner && $more == ($b->{bootUnsafe} ? 0 : 1)) {
+    $more++ if $b->{bootUnsafe};
+
+    if ($::beginner && $more == 1) {
 	my @l = (__("First sector of drive (MBR)"), __("First sector of boot partition"));
 
 	my $boot = $o->{hds}[0]{device};
@@ -634,7 +636,7 @@ _("Restrict command line options") => { val => \$b->{restricted}, type => "bool"
 	$b->{vga} = $lilo::vga_modes{$b->{vga}} || $b->{vga};
     }
 
-    until ($::beginner && !$more) {
+    until ($::beginner && $more <= 1) {
 	my $c = $o->ask_from_list_('', 
 _("Here are the following entries in LILO.
 You can add some more or change the existent ones."),
