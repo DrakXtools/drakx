@@ -83,7 +83,7 @@ Linux-Mandrake distribution.
 
 
 Please read carefully this document. This document is a license agreement
-between you and MandrakeSoft S.A., 42, rue d'Aboukir 75002 Paris - France,
+between you and MandrakeSoft S.A., 43, rue d'Aboukir 75002 Paris - France,
 which applies to the Software Product.
 
 You must agree with the terms and conditions of the present License before
@@ -104,7 +104,7 @@ Software Product.
 2. The GPL license and related licenses
 
 
-The Software product constists of components created by different persons
+The Software product consists of components created by different persons
 or entities.
 
 Most of these components are governed under the terms and conditions of the
