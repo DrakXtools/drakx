@@ -1121,7 +1121,7 @@ sub disable_user_view {
 
 sub write_fstab {
     my ($o) = @_;
-    fs::write_fstab($o->{all_hds}, $o->{prefix}) if !$::live;
+    fs::write_fstab($o->{all_hds}, $o->{prefix}) if !$::live && !$o->{isUpgrade};
 }
 
 my @bigseldom_used_groups = (
