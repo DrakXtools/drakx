@@ -295,7 +295,11 @@ our @tree =
       string => N("SATA controllers"),
       icon => "ide_hd.png",
       configurator => "",
-      detector => sub { f(grep { $_->{driver} =~ /^sata/ } @devices) },
+      detector => sub { 
+          require list_modules;
+          my @modules = list_modules::category2modules('disk/sata');
+          f(grep { member($_->{driver}, @modules) } @devices);
+      },
       checked_on_boot => 1,
      },
 
