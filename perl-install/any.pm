@@ -1039,7 +1039,7 @@ sub ask_window_manager_to_logout_then_do {
 	my $nb;
 	for ($nb = 30; $nb && -e "/proc/$pid"; $nb--) { sleep 1 }
 	system($action) if $nb;
-    ), $wm, $pid;
+    ), $wm, $pid, $action;
 }
 
 sub alloc_raw_device {
