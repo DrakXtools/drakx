@@ -317,7 +317,7 @@ sub same_entries {
 	if ($_ eq 'label') {
 	    next;
 	} elsif ($_ eq 'append') {
-	    next if join(' ', sort split(' ', $a->{$_})) eq join(' ', sort split(' ', $b->{$_}))
+	    next;
 	} else {
 	    next if $a->{$_} eq $b->{$_};
 
@@ -356,7 +356,10 @@ sub add_entry {
 	$to_add = $conflicting;
 
 	my $new_label = $v->{label} eq 'linux' && kernel_str2label(vmlinuz2kernel_str($to_add->{kernel_or_dev}), 'use_long_name');
-	$label = $new_label && $label ne $new_label ? $new_label : 'alt' . ($i++ ? $i : '') . "_$label";
+	$label = $new_label && $label ne $new_label ? $new_label : do {
+	    $label =~ s/^alt\d*_//;
+	    'alt' . ($i++ ? $i : '') . "_$label";
+	};
     }
     die 'add_entry';
 }
@@ -675,14 +678,14 @@ wait for default boot.
     my @kernels = get_kernels_and_labels() or die "no kernel installed";
 
     foreach my $kernel (@kernels) {
-	add_kernel($bootloader, $kernel,
+	my $e = add_kernel($bootloader, $kernel,
 	       {
 		root => $root,
 		if_($options{vga_fb} && $kernel->{ext} eq '', vga => $options{vga_fb}), #- using framebuffer
 		if_($options{vga_fb} && $options{quiet}, append => "splash=silent"),
 	       });
 
-	if ($options{vga_fb} && $kernel->{ext} eq '') {
+	if ($options{vga_fb} && $e->{label} eq 'linux') {
 	    add_kernel($bootloader, $kernel, { root => $root, label => 'linux-nonfb' });
 	}
     }
