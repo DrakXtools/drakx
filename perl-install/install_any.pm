@@ -84,8 +84,10 @@ sub shells($) {
 sub setPackages {
     my ($o) = @_;
 
-    eval { $o->{packages} = pkgs::psUsingHdlist() }  if $o->{method} ne "nfs";
-           $o->{packages} = pkgs::psUsingDirectory() if $o->{method} eq "nfs" || $@;
+    my $useHdlist = $o->{method} !~ /nfs|hd/;
+    eval { $o->{packages} = pkgs::psUsingHdlist() }  if $useHdlist;
+           $o->{packages} = pkgs::psUsingDirectory() if !$useHdlist || $@;
+
     pkgs::getDeps($o->{packages});
 
     $o->{compss} = pkgs::readCompss($o->{packages});
@@ -106,7 +108,7 @@ sub addToBeDone(&$) {
 
 sub getTimeZones {
     local *F;
-    open F, "cd /usr/share/zoneinfo && find [A-Z]* -type f |";
+    open F, "cd $::o->{prefix}/usr/share/zoneinfo && find [A-Z]* -type f |";
     my @l = sort map { chop; $_ } <F>;
     close F or die "cannot list the available zoneinfos";
     @l;

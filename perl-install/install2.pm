@@ -165,7 +165,8 @@ my @installSteps = (
   selectLanguage => [ __("Choose your language"), 1, 1 ],
   selectPath => [ __("Choose install or upgrade"), 0, 0 ],
   selectInstallClass => [ __("Select installation class"), 1, 1, "selectPath" ],
-  setupModules => [ __("Setup SCSI"), 1, 0 ],	
+  selectKeyboard => [ __("Choose your keyboard"), 1, 1 ],
+  setupSCSI => [ __("Setup SCSI"), 1, 0 ],	
   partitionDisks => [ __("Setup filesystems"), 1, 0 ],
   formatPartitions => [ __("Format partitions"), 1, -1, "partitionDisks" ],
   choosePackages => [ __("Choose packages to install"), 1, 1, "selectInstallClass" ],
@@ -251,12 +252,16 @@ sub selectLanguage {
             keyboard::write($o->{prefix}, $o->{keyboard});
 	}
     } 'doInstallStep';
-
-    goto &selectKeyboard if $_[0];
 }
 
 sub selectKeyboard {
+    return if $o->{installClass} eq "beginner" && !$_[0];
+
     $o->{keyboard} = keyboard::setup($o->chooseKeyboard);
+
+    addToBeDone {
+	keyboard::write($o->{prefix}, $o->{keyboard}) unless $o->{isUpgrade};
+    } 'doInstallStep';
 }
 
 sub selectPath {

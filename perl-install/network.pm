@@ -16,6 +16,7 @@ use log;
 sub read_conf {
     my ($file) = @_;
     my %netc = getVarsFromSh($file);
+    $netc->{dnsServer} = $netc->{NS0};
     \%netc;
 }
 
@@ -129,7 +130,7 @@ sub sethostname {
 
 sub dnsServers {
     my ($netc) = @_;
-    map { $netc->{$_} } qw(dnsServer dnsServer2 dnsServer3);
+    grep { $_ } map { $netc->{$_} } qw(dnsServer dnsServer2 dnsServer3);
 }
 
 sub getNet() {

@@ -10,6 +10,7 @@ use vars qw(@ISA);
 use common qw(:common);
 use partition_table qw(:types);
 use install_steps;
+use install_any;
 use detect_devices;
 use network;
 use modules;
@@ -137,19 +138,19 @@ sub configureNetwork($) {
 	$o->{netc}{NETWORKING} = "false";
     } elsif ($r !~ /^Keep/) {
 	my @l = network::getNet() or return die _("no network card found");
-	@l = ($l[0]) unless $::expert; # keep only one
 
-	my $last; foreach (@l) {
+	my $last; foreach ($::expert ? @l : $l[0]) {
 	    my $intf = network::findIntf($o->{intf}, $_);
 	    add2hash($intf, $last);
+	    add2hash($intf, { NETMASK => '255.255.255.0' });
 	    $o->configureNetworkIntf($intf);
 	    $last = $intf;
 	}
-	{ 
-	    my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
-	    network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
-	}
-	$o->configureNetworkNet($o->{netc} ||= {});
+#	 { 
+#	     my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
+#	     network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
+#	 }
+	$o->configureNetworkNet($o->{netc} ||= {}, @l);
     }
     $o->SUPER::configureNetwork;
 }
