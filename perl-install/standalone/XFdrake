@@ -132,7 +132,7 @@ sub ask_for_X_restart {
 
     $in->ask_okcancel('', _("Please relog into %s to activate the changes", ucfirst (lc $wm)), 1) or return;
 
-    fork and $in->exit;
+    fork and return;
     any::ask_window_manager_to_logout($wm);
     
     open STDIN, "</dev/zero";
@@ -140,8 +140,9 @@ sub ask_for_X_restart {
     open STDERR, ">&STDERR";
     c::setsid();
     exec qw(perl -e), q{
-	my ($wm, $pid) = @_;
-	for (my $nb = 30; $nb && -e "/proc/$pid"; $nb--) { sleep 1 }
+	my ($wm, $pid) = @ARGV;
+	my $nb;
+	for ($nb = 30; $nb && -e "/proc/$pid"; $nb--) { sleep 1 }
 	system("killall X ; killall -15 xdm gdm kdm prefdm") if $nb;
     }, $wm, $pid;
 }
