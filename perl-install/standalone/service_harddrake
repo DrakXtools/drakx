@@ -12,6 +12,12 @@ use lib qw(/usr/lib/libDrakX);
 
 use strict;
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+
+if ($ARGV[0] !~ /^start$/) {
+	print "service harddrake [start|stop]\n";
+	exit 0;
+}
+
 use MDK::Common;
 use POSIX;
 
@@ -35,6 +41,7 @@ my $str = '#!/usr/bin/perl -w
 ';
 
 my $in = 'interactive'->vnew('su');
+my $w = $in->wait_message(_("Please wait"), _("Hardware probing in progress"));
 
 # first run ? if not read old hw config
 my $previous_config = -f $last_boot_config ? do $last_boot_config : {};
@@ -66,8 +73,8 @@ foreach (@harddrake::data::tree) {
     } &$detector;
     $config{$Ident} = \%ID;
 
+    next if is_empty_hash_ref $previous_config;
     my $oldconfig = $previous_config->{$Ident};
-    next if is_empty_hash_ref %$previous_config;
 
     my $msg;
     my @was_removed = difference2([ keys %$oldconfig ], [ keys %ID ]);
@@ -80,6 +87,7 @@ foreach (@harddrake::data::tree) {
     @added || @was_removed or next;
    
     next unless (-x $configurator);
+    undef $w;
 
     if ($in->ask_okcancel("Hardware changes in $Ident class",
 					 $msg . "\nDo you want to run the appropriate config tool ?", 1)) {
