@@ -434,6 +434,19 @@ Do you really want to install these servers?
     }
 }
 
+sub warnAboutRemovedPackages {
+    my ($o, $packages) = @_;
+    my @removedPackages = keys %{$packages->{state}{ask_remove} || {}} or return;
+    if (!$o->ask_yesorno('', 
+formatAlaTeX(_("The following packages will be removed to allow upgrading your system: %s
+
+
+Do you really want to remove these packages?
+", join(", ", @removedPackages))), 1)) {
+	$packages->{state}{ask_remove} = {};
+    }
+}
+
 sub addToBeDone(&$) {
     my ($f, $step) = @_;
 
