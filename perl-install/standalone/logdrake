@@ -33,16 +33,18 @@ $::isInstall and die "Not supported during install.\n";
 
 my $in = 'interactive'->vnew('su');
 
+my ($isExplain, $Explain, $isFile, $File, $isWord, $Word);
+
 #- parse arguments list.
 foreach (@ARGV) {
-    /^--explain=(.*)$/ and do { $::isExplain = ($::Explain) = $1; $::isFile = 1; $::File = "/var/log/explanations"; next };
-    /^--file=(.*)$/ and do { $::isFile = ($::File) = $1; next };
-    /^--word=(.*)$/ and do { $::isWord = ($::Word) = $1; next };
+    /^--explain=(.*)$/ and do { $isExplain = ($Explain) = $1; $isFile = 1; $File = "/var/log/explanations"; next };
+    /^--file=(.*)$/ and do { $isFile = ($File) = $1; next };
+    /^--word=(.*)$/ and do { $isWord = ($Word) = $1; next };
     /^--alert$/ and do { alert_config(); quit() };
 }
 
-$::isTail = 1 if $::isFile;
-$| = 1 if $::isTail;
+my $isTail = 1 if $isFile;
+$| = 1 if $isTail;
 my $h = chomp_(`hostname -s`);
 
 my $my_win = ugtk2->new('logdrake');
@@ -124,8 +126,8 @@ my %toggle;
 
 gtkadd($my_win->{window},
        gtkpack_(new Gtk2::VBox(0,0),
-		if_(!$::isExplain && !$::isEmbedded, 0, N("A tool to monitor your logs")),
-		if_(!$::isFile, 0, gtkadd(new Gtk2::Frame(N("Settings")),
+		if_(!$isExplain && !$::isEmbedded, 0, N("A tool to monitor your logs")),
+		if_(!$isFile, 0, gtkadd(new Gtk2::Frame(N("Settings")),
 					  gtkpack__(new Gtk2::VBox(0,2),
 						    gtkpack__(new Gtk2::VBox(0,2),
 							      # N("Show lines"),
@@ -154,11 +156,11 @@ gtkadd($my_win->{window},
 						    )
 					  )
 		    ),
-		!$::isExplain ? (1, gtkadd(new Gtk2::Frame(N("Content of the file")),
+		!$isExplain ? (1, gtkadd(new Gtk2::Frame(N("Content of the file")),
 					   create_scrolled_window($log_text)
 					   )) : (1, create_scrolled_window($log_text)),
-		if_(!$::isExplain, 0, gtkadd(gtkset_border_width(gtkset_layout(Gtk2::HButtonBox->new, 'end'), 5),
-					      if_(!$::isFile, gtksignal_connect(new Gtk2::Button(N("Mail alert")), 
+		if_(!$isExplain, 0, gtkadd(gtkset_border_width(gtkset_layout(Gtk2::HButtonBox->new, 'end'), 5),
+					      if_(!$isFile, gtksignal_connect(new Gtk2::Button(N("Mail alert")), 
 										clicked => sub { 
                                                       eval { alert_config() };
                                                       my $err = $@;
@@ -176,10 +178,10 @@ gtkadd($my_win->{window},
 		)
        );
 
-$::isFile && !$::isEmbedded and gtkset_size_request($log_text, 400, 500);
+$isFile && !$::isEmbedded and gtkset_size_request($log_text, 400, 500);
 
 $my_win->{window}->show_all;
-search() if $::isFile;
+search() if $isFile;
 $my_win->main;
 
 sub quit() { ugtk2->exit(0) }
@@ -191,8 +193,8 @@ sub search() {
     return if !$log_text->window;
     $log_text->window->freeze_updates;
     $log_buf->set_text('');
-    if ($::isFile) {
-	parse_file($::File, $::File);
+    if ($isFile) {
+	parse_file($File, $File);
     } else {
 	foreach (keys %files) {
 	    parse_file($files{$_}{file}, $files{$_}{desc}) if $toggle{$_}->get_active;
@@ -210,7 +212,7 @@ sub parse_file {
 
   $file =~ s/\.gz$//;
   my ($pbar, $win_pb);
-  unless ($::isEmbedded && $::isExplain) {
+  unless ($::isEmbedded && $isExplain) {
       gtkadd($win_pb = gtkset_modal(new Gtk2::Window('toplevel'), 1),
              gtkpack(new Gtk2::VBox(2,0),
                      new Gtk2::Label(" " . N("please wait, parsing file: %s", $descr) . " "),
@@ -228,7 +230,7 @@ sub parse_file {
   $ey =~ s/ OR /|/;
   $ey =~ s/^\*$//;
   $en =~ s/^\*$/.*/;
-  $ey = $ey . $::Word if $::isWord;
+  $ey = $ey . $Word if $isWord;
 
   if ($cal_mode) {
       my (undef, $month, $day) = $cal->get_date;
@@ -237,12 +239,12 @@ sub parse_file {
 
   my @all = catMaybeCompressed($file);
 
-  if ($::isExplain) {
+  if ($isExplain) {
       my (@t, $t);
       while (@all) {
 	  $t = pop @all;
 	  next if $t =~ /logdrake/;
-	  last if $t !~ /$::Explain/;
+	  last if $t !~ /$Explain/;
 	  push @t, $t;
       }
       @all = reverse @t;
@@ -261,9 +263,9 @@ sub parse_file {
       if (!  /$en/i && /$ey/i)     { logcolorize($_); next }
       if (!  /$en/i && $ey eq "")  { logcolorize($_); next }
   }
-  $win_pb->destroy if !$::isEmbedded || !$::isExplain;
+  $win_pb->destroy if !$::isEmbedded || !$isExplain;
 
-  if ($::isTail) {
+  if ($isTail) {
       close F;
       open F, $file or die "E: $!";
       local $_;
@@ -284,12 +286,12 @@ sub logcolorize {
 
     # we get date & time if it is date & time (dmesg)
     s/(\D{3} .. (\d\d:\d\d:\d\d ))//;
-    my $timestamp = $::isExplain ? $2 : $1;
+    my $timestamp = $isExplain ? $2 : $1;
     my @rec = split;
 
     log_output($timestamp,  { %b, 'foreground' => 'darkcyan' }); # date & time if any...
     # BUG: $col hasn't yet be reseted
-    $::isExplain or log_output("$rec[0] ",  { %b, 'foreground' => $rec[0] eq $h ? 'blue' : $col });  # hostname
+    $isExplain or log_output("$rec[0] ",  { %b, 'foreground' => $rec[0] eq $h ? 'blue' : $col });  # hostname
     
     if ($rec[1] eq "last") {
 	log_output(" last message repeated ",  { %n, 'foreground' => 'green' });
