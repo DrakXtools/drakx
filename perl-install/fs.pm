@@ -148,10 +148,10 @@ sub write_fstab {
 	      "$dir$_->{device}";
 	  };
 
-	mkdir("$prefix/" . ($_->{mntpoint} || $_->{real_mntpoint}), 0755);
-	my $mntpoint = loopback::carryRootLoopback($_) ? '/initrd/loopfs' : $_->{mntpoint};
-	$mntpoint ||= ${{ '/tmp/hdimage' => '/mnt/hd' }}{$_->{real_mntpoint}}; #- convert for inaccessible partition at install.
-	
+	my $real_mntpoint = $_->{mntpoint} || ${{ '/tmp/hdimage' => '/mnt/hd' }}{$_->{real_mntpoint}};
+	mkdir("$prefix/$real_mntpoint", 0755);
+	my $mntpoint = loopback::carryRootLoopback($_) ? '/initrd/loopfs' : $real_mntpoint;
+
 	my ($freq, $passno) =
 	  exists $_->{freq} ?
 	    ($_->{freq}, $_->{passno}) :
