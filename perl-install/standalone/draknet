@@ -328,7 +328,7 @@ $window1->show_all();
 $_->hide foreach ($button1, $button3);
 Gtk->main_iteration while Gtk->events_pending;
 $::isEmbedded and kill USR2, $::CCPID;
-my $tag = Gtk->timeout_add(5000, sub { update(); 1 });
+my $tag = Gtk->timeout_add(5000, \&update);
 Gtk->main;
 Gtk->exit(0);
 
@@ -369,6 +369,8 @@ sub update {
     }
     $clist1->thaw();
     $button_del->set_sensitive(netconnect::get_profiles() > 1);
+    $tag = Gtk->timeout_add(5000, \&update);
+    0;
 }
 
 sub quit_global {
