@@ -603,21 +603,9 @@ sub gtkicons_labels_widget {
     }
     my $fixed = new Gtk::Fixed;
     foreach (@tab) { $fixed->put($_, 75, 65) }
-	my $is_resized = 0;
     my $w_ret = createScrolledWindow($fixed, undef, 'none');
     my $redraw_function;
     $redraw_function = sub { 
-	if ($is_resized == 0) {
-		if (3 < $#args) {
-			#- Ugly hacks, don't touch! ########
-			my $timeout1 = Gtk->timeout_add(100, sub {
-					$fixed->set_usize($w_ret->allocation->[2] - 22, 0);
-					&$redraw_function;
-					0
-			});
-		}
-		$is_resized = 1;
-	}
 	$fixed->move(@$_) foreach compute_icons($fixed->allocation->[2]-22, $fixed->allocation->[3], 40, 15, 20, @tab);
     };
     $fixed->signal_connect(expose_event => $redraw_function);
