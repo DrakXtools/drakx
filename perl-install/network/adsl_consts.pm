@@ -19,7 +19,7 @@ our %adsl_data = (
                   # country|provider => { VPI, VCI_hexa, ... } all parameters
                   # country is automagically translated into LANG with N function
                   # provider is kept "as-is", not translated
-                  # id is used by eagleconfig to identify an ISP (I use ISO_3166-1)
+                  # provider_id is used by eagleconfig to identify an ISP (I use ISO_3166-1)
                   #      see http://en.wikipedia.org/wiki/ISO_3166-1
                   # url_tech : technical URL providing info about ISP
                   # vpi : virtual path identifier
@@ -43,7 +43,7 @@ our %adsl_data = (
 
                   N("Algeria") . "|Wanadoo" =>
                   {
-                   id => 'DZ01',
+                   provider_id => 'DZ01',
                    vpi => 0,
                    vci => 23,
                    Encapsulation => 1,
@@ -54,7 +54,7 @@ our %adsl_data = (
 
                   N("Argentina") . "|Speedy" =>
                   {
-                   id => 'AR01',
+                   provider_id => 'AR01',
                    vpi => 1,
                    vci => 23,
                    Encapsulation => 1,
@@ -65,7 +65,7 @@ our %adsl_data = (
 
                   N("Austria") . "|Any" =>
                   {
-                   id => 'AT00',
+                   provider_id => 'AT00',
                    vpi => 8,
                    vci => 30,
                    Encapsulation => 6,
@@ -74,7 +74,7 @@ our %adsl_data = (
 
                   N("Austria") . "|AON" =>
                   {
-                   id => 'AT01',
+                   provider_id => 'AT01',
                    vpi => 1,
                    vci => 20,
                    Encapsulation => 6,
@@ -83,7 +83,7 @@ our %adsl_data = (
 
                   N("Austria") . "|Telstra" =>
                   {
-                   id => 'AT02',
+                   provider_id => 'AT02',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 1,
@@ -92,7 +92,7 @@ our %adsl_data = (
 
                   N("Belgium") . "|ADSL Office" =>
                   {
-                   id => 'BE04',
+                   provider_id => 'BE04',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 3,
@@ -101,7 +101,7 @@ our %adsl_data = (
 
                   N("Belgium") . "|Tiscali BE" =>
                   {
-                   id => 'BE01',
+                   provider_id => 'BE01',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
@@ -113,7 +113,7 @@ our %adsl_data = (
 
                   N("Belgium") . "|Belgacom" =>
                   {
-                   id => 'BE03',
+                   provider_id => 'BE03',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
@@ -122,7 +122,7 @@ our %adsl_data = (
 
                   N("Belgium") . "|Turboline" =>
                   {
-                   id => 'BE02',
+                   provider_id => 'BE02',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 5,
@@ -131,7 +131,7 @@ our %adsl_data = (
 
                   N("Brazil") . "|Speedy/Telefonica" =>
                   {
-                   id => 'BR01',
+                   provider_id => 'BR01',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 1,
@@ -142,7 +142,7 @@ our %adsl_data = (
 
                   N("Brazil") . "|Velox/Telemar" =>
                   {
-                   id => 'BR02',
+                   provider_id => 'BR02',
                    vpi => 0,
                    vci => 21,
                    Encapsulation => 1,
@@ -151,7 +151,7 @@ our %adsl_data = (
 
                   N("Brazil") . "|Turbo/Brasil Telecom" =>
                   {
-                   id => 'BR03',
+                   provider_id => 'BR03',
                    vpi => 0,
                    vci => 23,
                    Encapsulation => 1,
@@ -160,7 +160,7 @@ our %adsl_data = (
 
                   N("Brazil") . "|Rio Grande do Sul (RS)" =>
                   {
-                   id => 'BR04',
+                   provider_id => 'BR04',
                    vpi => 1,
                    vci => 20,
                    Encapsulation => 1,
@@ -169,7 +169,7 @@ our %adsl_data = (
 
                   N("Bulgaria") . "|BTK ISDN" =>
                   {
-                   id => 'BG02',
+                   provider_id => 'BG02',
                    vpi => 1,
                    vci => 20,
                    Encapsulation => 1,
@@ -178,7 +178,7 @@ our %adsl_data = (
 
                   N("Bulgaria") . "|BTK POTS" =>
                   {
-                   id => 'BG01',
+                   provider_id => 'BG01',
                    vpi => 0,
                    vci => 23,
                    Encapsulation => 1,
@@ -187,7 +187,7 @@ our %adsl_data = (
 
                   N("China") . "|China Netcom|Beijing" =>
                   {
-                   id => 'CN01',
+                   provider_id => 'CN01',
                    vpi => 0,
                    vci => 23,
                    Encapsulation => 3,
@@ -196,7 +196,7 @@ our %adsl_data = (
 
                   N("China") . "|China Netcom|Changchun" =>
                   {
-                   id => 'CN02',
+                   provider_id => 'CN02',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 3,
@@ -205,7 +205,7 @@ our %adsl_data = (
 
                   N("China") . "|China Netcom|Harbin" =>
                   {
-                   id => 'CN03',
+                   provider_id => 'CN03',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 3,
@@ -214,7 +214,7 @@ our %adsl_data = (
 
                   N("China") . "|China Netcom|Jilin" =>
                   {
-                   id => 'CN04',
+                   provider_id => 'CN04',
                    vpi => 0,
                    vci => 27,
                    Encapsulation => 3,
@@ -223,7 +223,7 @@ our %adsl_data = (
 
                   N("China") . "|China Netcom|Lanzhou" =>
                   {
-                   id => 'CN05',
+                   provider_id => 'CN05',
                    vpi => 0,
                    vci => 20,
                    Encapsulation => 3,
@@ -232,7 +232,7 @@ our %adsl_data = (
 
                   N("China") . "|China Netcom|Tianjin" =>
                   {
-                   id => 'CN06',
+                   provider_id => 'CN06',
                    vpi => 0,
                    vci => 23,
                    Encapsulation => 3,
@@ -241,7 +241,7 @@ our %adsl_data = (
 
                   N("China") . "|China Netcom|Xi'an" =>
                   {
-                   id => 'CN07',
+                   provider_id => 'CN07',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 3,
@@ -250,7 +250,7 @@ our %adsl_data = (
 
                   N("China") . "|China Telecom|Chongqing" =>
                   {
-                   id => 'CN08',
+                   provider_id => 'CN08',
                    vpi => 0,
                    vci => 23,
                    Encapsulation => 3,
@@ -259,7 +259,7 @@ our %adsl_data = (
 
                   N("China") . "|China Telecom|Fujian" =>
                   {
-                   id => 'CN09',
+                   provider_id => 'CN09',
                    vpi => 0,
                    vci => 0xc8,
                    Encapsulation => 3,
@@ -268,7 +268,7 @@ our %adsl_data = (
 
                   N("China") . "|China Telecom|Guangxi" =>
                   {
-                   id => 'CN10',
+                   provider_id => 'CN10',
                    vpi => 0,
                    vci => 23,
                    Encapsulation => 3,
@@ -277,7 +277,7 @@ our %adsl_data = (
 
                   N("China") . "|China Telecom|Guangzhou" =>
                   {
-                   id => 'CN11',
+                   provider_id => 'CN11',
                    vpi => 8,
                    vci => 20,
                    Encapsulation => 3,
@@ -286,7 +286,7 @@ our %adsl_data = (
 
                   N("China") . "|China Telecom|Hangzhou" =>
                   {
-                   id => 'CN12',
+                   provider_id => 'CN12',
                    vpi => 0,
                    vci => 20,
                    Encapsulation => 3,
@@ -295,7 +295,7 @@ our %adsl_data = (
 
                   N("China") . "|China Netcom|Hunan" =>
                   {
-                   id => 'CN13',
+                   provider_id => 'CN13',
                    vpi => 0,
                    vci => 23,
                    Encapsulation => 3,
@@ -304,7 +304,7 @@ our %adsl_data = (
 
                   N("China") . "|China Telecom|Nanjing" =>
                   {
-                   id => 'CN14',
+                   provider_id => 'CN14',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 3,
@@ -313,7 +313,7 @@ our %adsl_data = (
 
                   N("China") . "|China Telecom|Shanghai" =>
                   {
-                   id => 'CN15',
+                   provider_id => 'CN15',
                    vpi => 8,
                    vci => 51,
                    Encapsulation => 3,
@@ -322,7 +322,7 @@ our %adsl_data = (
 
                   N("China") . "|China Telecom|Shenzhen" =>
                   {
-                   id => 'CN16',
+                   provider_id => 'CN16',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 3,
@@ -331,7 +331,7 @@ our %adsl_data = (
 
                   N("China") . "|China Telecom|Urumqi" =>
                   {
-                   id => 'CN17',
+                   provider_id => 'CN17',
                    vpi => 0,
                    vci => 20,
                    Encapsulation => 3,
@@ -340,7 +340,7 @@ our %adsl_data = (
 
                   N("China") . "|China Telecom|Wuhan" =>
                   {
-                   id => 'CN18',
+                   provider_id => 'CN18',
                    vpi => 0,
                    vci => 20,
                    Encapsulation => 3,
@@ -349,7 +349,7 @@ our %adsl_data = (
 
                   N("China") . "|China Telecom|Yunnan" =>
                   {
-                   id => 'CN19',
+                   provider_id => 'CN19',
                    vpi => 0,
                    vci => 23,
                    Encapsulation => 3,
@@ -358,7 +358,7 @@ our %adsl_data = (
 
                   N("China") . "|China Telecom|Zhuhai" =>
                   {
-                   id => 'CN20',
+                   provider_id => 'CN20',
                    vpi => 0,
                    vci => 23,
                    Encapsulation => 3,
@@ -367,7 +367,7 @@ our %adsl_data = (
 
                   N("Czech Republic") . "|Cesky Telecom" =>
                   {
-                   id => 'CZ01',
+                   provider_id => 'CZ01',
                    url_tech => 'http://www.telecom.cz/domacnosti/internet/pristupove_sluzby/broadband/vse_o_kz_a_moznostech_instalace.php',
                    vpi => 8,
                    vci => 48,
@@ -377,7 +377,7 @@ our %adsl_data = (
 
                   N("Denmark") . "|Any" =>
                   {
-                   id => 'DK01',
+                   provider_id => 'DK01',
                    vpi => 0,
                    vci => 65,
                    method => 'pppoe',
@@ -386,7 +386,7 @@ our %adsl_data = (
 
                   N("Finland") . "|Sonera" =>
                   {
-                   id => 'FI01',
+                   provider_id => 'FI01',
                    vpi => 0,
                    vci => 64,
                    Encapsulation => 3,
@@ -395,7 +395,7 @@ our %adsl_data = (
 
                   N("France") . "|Free non dégroupé 512/128 & 1024/128" =>
                   {
-                   id => 'FR01',
+                   provider_id => 'FR01',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
@@ -407,7 +407,7 @@ our %adsl_data = (
 
                   N("France") . "|Free dégroupé 1024/256 (mini)" =>
                   {
-                   id => 'FR04',
+                   provider_id => 'FR04',
                    vpi => 8,
                    vci => 24,
                    Encapsulation => 4,
@@ -419,7 +419,7 @@ our %adsl_data = (
 
                   N("France") . "|n9uf tel9com 512 & dégroupé 1024" =>
                   {
-                   id => 'FR05',
+                   provider_id => 'FR05',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
@@ -430,7 +430,7 @@ our %adsl_data = (
 
                   N("France") . "|Cegetel non dégroupé 512 IP/ADSL et dégroupé" =>
                   {
-                   id => 'FR08',
+                   provider_id => 'FR08',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
@@ -441,7 +441,7 @@ our %adsl_data = (
 
                   N("France") . "|Club-Internet" =>
                   {
-                   id => 'FR06',
+                   provider_id => 'FR06',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
@@ -453,7 +453,7 @@ our %adsl_data = (
 
                   N("France") . "|Wanadoo" =>
                   {
-                   id => 'FR09',
+                   provider_id => 'FR09',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
@@ -465,7 +465,7 @@ our %adsl_data = (
 
                   N("France") . "|Télé2" =>
                   {
-                   id => 'FR02',
+                   provider_id => 'FR02',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
@@ -476,7 +476,7 @@ our %adsl_data = (
 
                   N("France") . "|Tiscali.fr 128k" =>
                   {
-                   id => 'FR03',
+                   provider_id => 'FR03',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 5,
@@ -487,7 +487,7 @@ our %adsl_data = (
 
                   N("France") . "|Tiscali.fr 512k" =>
                   {
-                   id => 'FR07',
+                   provider_id => 'FR07',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
@@ -498,7 +498,7 @@ our %adsl_data = (
 
                   N("Germany") . "|Deutsche Telekom (DT)" =>
                   {
-                   id => 'DE01',
+                   provider_id => 'DE01',
                    vpi => 1,
                    vci => 20,
                    Encapsulation => 1,
@@ -507,7 +507,7 @@ our %adsl_data = (
 
                   N("Germany") . "|1&1" =>
                   {
-                   id => 'DE02',
+                   provider_id => 'DE02',
                    vpi => 1,
                    vci => 20,
                    Encapsulation => 1,
@@ -518,7 +518,7 @@ our %adsl_data = (
 
                   N("Greece") . "|Any" =>
                   {
-                   id => 'GR01',
+                   provider_id => 'GR01',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
@@ -527,7 +527,7 @@ our %adsl_data = (
 
                   N("Hungary") . "|Matav" =>
                   {
-                   id => 'HU01',
+                   provider_id => 'HU01',
                    vpi => 1,
                    vci => 20,
                    Encapsulation => 1,
@@ -536,7 +536,7 @@ our %adsl_data = (
 
                   N("Ireland") . "|Any" =>
                   {
-                   id => 'IE01',
+                   provider_id => 'IE01',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 1,
@@ -545,7 +545,7 @@ our %adsl_data = (
 
                   N("Israel") . "|Bezeq" =>
                   {
-                   id => 'IL01',
+                   provider_id => 'IL01',
                    vpi => 8,
                    vci => 30,
                    Encapsulation => 6,
@@ -556,7 +556,7 @@ our %adsl_data = (
 
                   N("Italy") . "|Libero.it" =>
                   {
-                   id => 'IT04',
+                   provider_id => 'IT04',
                    url_tech => 'http://internet.libero.it/assistenza/adsl/installazione_ass.phtml',
                    vpi => 8,
                    vci => 23,
@@ -568,7 +568,7 @@ our %adsl_data = (
 
                   N("Italy") . "|Telecom Italia" =>
                   {
-                   id => 'IT01',
+                   provider_id => 'IT01',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
@@ -579,7 +579,7 @@ our %adsl_data = (
 
                   N("Italy") . "|Telecom Italia/Office Users (ADSL Smart X)" =>
                   {
-                   id => 'IT02',
+                   provider_id => 'IT02',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 3,
@@ -588,7 +588,7 @@ our %adsl_data = (
 
                   N("Italy") . "|Tiscali.it, Alice" =>
                   {
-                   id => 'IT03',
+                   provider_id => 'IT03',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
@@ -599,7 +599,7 @@ our %adsl_data = (
 
                   N("Lithuania") . "|Lietuvos Telekomas" =>
                   {
-                   id => 'LT01',
+                   provider_id => 'LT01',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 1,
@@ -608,7 +608,7 @@ our %adsl_data = (
 
                   N("Morocco") . "|Maroc Telecom" =>
                   {
-                   id => 'MA01',
+                   provider_id => 'MA01',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
@@ -619,7 +619,7 @@ our %adsl_data = (
 
                   N("Netherlands") . "|KPN" =>
                   {
-                   id => 'NL01',
+                   provider_id => 'NL01',
                    vpi => 8,
                    vci => 30,
                    Encapsulation => 6,
@@ -628,7 +628,7 @@ our %adsl_data = (
 
                   N("Netherlands") . "|Eager Telecom" =>
                   {
-                   id => 'NL02',
+                   provider_id => 'NL02',
                    vpi => 0,
                    vci => 21,
                    Encapsulation => 3,
@@ -637,7 +637,7 @@ our %adsl_data = (
 
                   N("Netherlands") . "|Tiscali" =>
                   {
-                   id => 'NL03',
+                   provider_id => 'NL03',
                    vpi => 0,
                    vci => 22,
                    Encapsulation => 3,
@@ -646,7 +646,7 @@ our %adsl_data = (
 
                   N("Netherlands") . "|Versatel" =>
                   {
-                   id => 'NL04',
+                   provider_id => 'NL04',
                    vpi => 0,
                    vci => 20,
                    Encapsulation => 3,
@@ -692,7 +692,7 @@ our %adsl_data = (
 
                   N("Poland") . "|Telekomunikacja Polska (TPSA/neostrada)" =>
                   {
-                   id => 'PL01',
+                   provider_id => 'PL01',
                    vpi => 0,
                    vci => 23,
                    Encapsulation => 6,
@@ -703,7 +703,7 @@ our %adsl_data = (
 
                   N("Poland") . "|Netia neostrada" =>
                   {
-                   id => 'PL02',
+                   provider_id => 'PL02',
                    url_tech => 'http://www.netia.pl/?o=d&s=210',
                    vpi => 8,
                    vci => 23,
@@ -715,7 +715,7 @@ our %adsl_data = (
 
                   N("Portugal") . "|PT" =>
                   {
-                   id => 'PT01',
+                   provider_id => 'PT01',
                    vpi => 0,
                    vci => 23,
                    Encapsulation => 1,
@@ -724,7 +724,7 @@ our %adsl_data = (
 
                   N("Russia") . "|MTU-Intel" =>
                   {
-                   id => 'RU01',
+                   provider_id => 'RU01',
                    url_tech => 'http://stream.ru/s-requirements',
                    vpi => 1,
                    vci => 50,
@@ -736,7 +736,7 @@ our %adsl_data = (
 
                   N("Slovenia") . "|SiOL" =>
                   {
-                   id => 'SL01',
+                   provider_id => 'SL01',
                    vpi => 1,
                    vci => 20,
                    method => 'pppoe',
@@ -748,7 +748,7 @@ our %adsl_data = (
 
                   N("Spain") . "|Telefónica IP dinámica" =>
                   {
-                   id => 'ES01',
+                   provider_id => 'ES01',
                    vpi => 8,
                    vci => 20,
                    Encapsulation => 1,
@@ -759,7 +759,7 @@ our %adsl_data = (
 
                   N("Spain") . "|Telefónica ip fija" =>
                   {
-                   id => 'ES02',
+                   provider_id => 'ES02',
                    vpi => 8,
                    vci => 20,
                    Encapsulation => 3,
@@ -770,7 +770,7 @@ our %adsl_data = (
 
                   N("Spain") . "|Wanadoo/Eresmas Retevision" =>
                   {
-                   id => 'ES03',
+                   provider_id => 'ES03',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 6,
@@ -781,7 +781,7 @@ our %adsl_data = (
 
                   N("Spain") . "|Wanadoo PPPoE" =>
                   {
-                   id => 'ES04',
+                   provider_id => 'ES04',
                    vpi => 8,
                    vci => 20,
                    Encapsulation => 1,
@@ -790,7 +790,7 @@ our %adsl_data = (
 
                   N("Spain") . "|Wanadoo ip fija" =>
                   {
-                   id => 'ES05',
+                   provider_id => 'ES05',
                    vpi => 8,
                    vci => 20,
                    Encapsulation => 3,
@@ -799,7 +799,7 @@ our %adsl_data = (
 
                   N("Spain") . "|Tiscali" =>
                   {
-                   id => 'ES06',
+                   provider_id => 'ES06',
                    vpi => 1,
                    vci => 20,
                    Encapsulation => 6,
@@ -808,7 +808,7 @@ our %adsl_data = (
 
                   N("Spain") . "|Arrakis" =>
                   {
-                   id => 'ES07',
+                   provider_id => 'ES07',
                    vpi => 0,
                    vci => 23,
                    Encapsulation => 6,
@@ -817,7 +817,7 @@ our %adsl_data = (
 
                   N("Spain") . "|Auna" =>
                   {
-                   id => 'ES08',
+                   provider_id => 'ES08',
                    vpi => 0,
                    vci => 23,
                    Encapsulation => 6,
@@ -826,7 +826,7 @@ our %adsl_data = (
 
                   N("Spain") . "|Communitel" =>
                   {
-                   id => 'ES09',
+                   provider_id => 'ES09',
                    vpi => 0,
                    vci => 21,
                    Encapsulation => 6,
@@ -835,7 +835,7 @@ our %adsl_data = (
 
                   N("Spain") . "|Euskatel" =>
                   {
-                   id => 'ES10',
+                   provider_id => 'ES10',
                    vpi => 8,
                    vci => 20,
                    Encapsulation => 1,
@@ -844,7 +844,7 @@ our %adsl_data = (
 
                   N("Spain") . "|Uni2" =>
                   {
-                   id => 'ES11',
+                   provider_id => 'ES11',
                    vpi => 1,
                    vci => 21,
                    Encapsulation => 6,
@@ -853,7 +853,7 @@ our %adsl_data = (
 
                   N("Spain") . "|Ya.com PPPoE" =>
                   {
-                   id => 'ES12',
+                   provider_id => 'ES12',
                    vpi => 8,
                    vci => 20,
                    Encapsulation => 1,
@@ -862,7 +862,7 @@ our %adsl_data = (
 
                   N("Spain") . "|Ya.com static" =>
                   {
-                   id => 'ES13',
+                   provider_id => 'ES13',
                    vpi => 8,
                    vci => 20,
                    Encapsulation => 3,
@@ -871,7 +871,7 @@ our %adsl_data = (
 
                   N("Sweden") . "|Telia" =>
                   {
-                   id => 'SE01',
+                   provider_id => 'SE01',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 3,
@@ -880,7 +880,7 @@ our %adsl_data = (
 
                   N("Switzerland") . "|Any" =>
                   {
-                   id => 'CH01',
+                   provider_id => 'CH01',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 3,
@@ -889,7 +889,7 @@ our %adsl_data = (
 
                   N("Switzerland") . "|BlueWin / Swisscom" =>
                   {
-                   id => 'CH02',
+                   provider_id => 'CH02',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 5,
@@ -900,7 +900,7 @@ our %adsl_data = (
 
                   N("Switzerland") . "|Tiscali.ch" =>
                   {
-                   id => 'CH03',
+                   provider_id => 'CH03',
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 1,
@@ -909,7 +909,7 @@ our %adsl_data = (
 
                   N("Thailand") . "|Asianet" =>
                   {
-                   id => 'TH01',
+                   provider_id => 'TH01',
                    vpi => 0,
                    vci => 64,
                    Encapsulation => 1,
@@ -920,7 +920,7 @@ our %adsl_data = (
 
                   N("Tunisia") . "|Planet.tn" =>
                   {
-                   id => 'TH01',
+                   provider_id => 'TH01',
                    url_tech => 'http://www.planet.tn/',
                    vpi => 0,
                    vci => 23,
@@ -932,7 +932,7 @@ our %adsl_data = (
 
                   N("United Arab Emirates") . "|Etisalat" =>
                   {
-                   id => 'AE01',
+                   provider_id => 'AE01',
                    vpi => 0,
                    vci => 32,
                    Encapsulation => 5,
@@ -943,7 +943,7 @@ our %adsl_data = (
 
                   N("United Kingdom") . "|Tiscali UK " =>
                   {
-                   id => 'UK01',
+                   provider_id => 'UK01',
                    vpi => 0,
                    vci => 26,
                    Encapsulation => 6,
@@ -954,7 +954,7 @@ our %adsl_data = (
 
                   N("United Kingdom") . "|British Telecom " =>
                   {
-                   id => 'UK02',
+                   provider_id => 'UK02',
                    vpi => 0,
                    vci => 26,
                    Encapsulation => 6,
