@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #
-#  Copyright (C) 2001 by Sebastien DUPONT <sdupont@mandrakesoft.com>
+#  Copyright (C) 2001 MandrakeSoft by Sebastien DUPONT <dupont_s@epita.fr>
 #  Redistribution of this file is permitted under the terms of the GNU
 #  Public License (GPL)
 #
@@ -84,6 +84,7 @@
 #
 #
 # TODO:
+#		1 - do not remove all backup when user unselect bz2 or gzip !
 #		1 - replace tar --after-date by find / -mtime -1 \! -type d -print > /tmp/liste.jour
 #		during restore step catch the most recent date
 #		and put in list all backup between the fisrt date 
@@ -179,6 +180,7 @@ my @sys_backuped = ();
 my $sys_backuped = 0;
 my $other_backuped = 0;
 my @user_list_to_restore= ();
+my @sys_list_to_restore = ();
 my $retore_box2;
 my $cd_devive_entry;
 my $custom_help;
@@ -286,12 +288,12 @@ sub the_time {
     $the_time .= localtime->mon() +1;
     $the_time .= localtime->mday();
     $the_time .= "_";
-    if (localtime->hour() <= 10 ) { $the_time .= "0"; }
+    if (localtime->hour() < 10 ) { $the_time .= "0"; }
     $the_time .= localtime->hour();
-    if (localtime->min() <= 10 ) { $the_time .= "0"; }
+    if (localtime->min() < 10 ) { $the_time .= "0"; }
     $the_time .= localtime->min();
-
-    
+    if (localtime->sec() < 10 ) { $the_time .= "0"; }
+    $the_time .= localtime->sec();    
 }
 
 sub save_conf_file {
@@ -458,35 +460,35 @@ sub build_backup_files {
     the_time();    
     -d  $save_path or mkdir_p($save_path);
     if ($comp_mode) { $tar_cmd = "tar cv --use-compress-program /usr/bin/bzip2 "; $tar_ext = "tar.bz2" }
-    else { $tar_cmd = "tar cvzp "; $tar_ext = "tar.gz"}
+    else { $tar_cmd = "tar cvpz "; $tar_ext = "tar.gz"}
     $tar_cmd_sys = $tar_cmd;
     $tar_cmd_user = $tar_cmd;
     $tar_cmd_other = $tar_cmd;
     $no_critical_sys and $tar_cmd_sys .= "--exclude passwd --exclude fstab --exclude group";
     $what_no_browser and $tar_cmd_user .= "--exclude NewCache --exclude Cache --exclude cache";
 
-    @dir_content = all($save_path);
-    grep (/backup_base_sys/, @dir_content) and $base_sys_exist = 1;
-    grep (/backup_base_other/, @dir_content) and $base_other_exist = 1;
-
+    -d $save_path and @dir_content = all($save_path);
+    grep (/^backup\_base\_sys/, @dir_content) and $base_sys_exist = 1;
 
     if ($where_hd) {
 	$interactive and progress($pbar, 0.5, _("Backup system files..."));
 	if ($backup_sys) { 
 	    if ($backup_sys_versions) {
- 		if (grep(/backup_incr_sys/, @dir_content)) { 
-		    my @more_recent = grep /backup_incr_sys/, sort @dir_content; 
+ 		if (grep /^backup\_incr\_sys/, @dir_content) { 
+		    my @more_recent = grep /^backup\_incr\_sys/, sort @dir_content; 
 		    $more_recent = pop @more_recent;
- 		}
-  		else { 
-		    my @more_recent = grep /backup_base_sys/, sort @dir_content; 
+		system("$tar_cmd_sys -f $save_path/backup_incr_sys$the_time.$tar_ext `find @sys_files -newer $save_path/$more_recent`");
+		}
+  		elsif (grep /^backup\_base\_sys/,  @dir_content) { 
+		    my @more_recent = grep /^backup\_base\_sys/, sort @dir_content; 
 		    $more_recent = pop @more_recent;
- 		}
-		if (!$base_sys_exist) { 
-		    system("$tar_cmd_sys -f $save_path/backup_base_sys$the_time.$tar_ext @sys_files"); }
+		system("$tar_cmd_sys -f $save_path/backup_incr_sys$the_time.$tar_ext `find @sys_files -newer $save_path/$more_recent`");
+		   }
 		else { 
-		    system("$tar_cmd_sys -f $save_path/backup_incr_sys$the_time.$tar_ext `find @sys_files -newer $save_path/$more_recent`");}
-	    } else {
+		    system("$tar_cmd_sys -f $save_path/backup_base_sys$the_time.$tar_ext @sys_files"); 
+		}
+	    }
+	    else {
 		system("cd $save_path && rm -f backup_sys* backup_base_sys* backup_incr_sys*");
 		system("$tar_cmd_sys -f $save_path/backup_sys$the_time.$tar_ext @sys_files");
 	    }
@@ -508,23 +510,29 @@ sub build_backup_files {
 	if ($backup_user) {
 	    foreach (@user_list) {
 		my $user = $_;
-		if (grep (/backup_base_user_$user/, @dir_content)) {  $base_user_exist = 1; }
-		else { $base_user_exist = 0; }
+# 		if (grep (/^backup\_base\_user\_$user\_/, @dir_content)) {  $base_user_exist = 1; }
+# 		else { $base_user_exist = 0; }
 		$path_name = return_path($user);
 		if ($backup_user_versions) {
-		    if (grep(/backup_incr_user/, @dir_content)) { 
-			my @more_recent = grep /backup_incr_user_$user\_/, sort @dir_content; 
+		    if (grep(/^backup\_incr\_user\_$user\_/, @dir_content)) { 
+			my @more_recent = grep /^backup\_incr\_user\_$user\_/, sort @dir_content; 
 			$more_recent = pop @more_recent;
+#			my @system("find $path_name -cnewer $save_path/$more_recent");
+			system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext `find $path_name -cnewer $save_path/$more_recent`");
 		    }
-		    else { 
-			my @more_recent = grep /backup_base_user_$user\_/, sort @dir_content; 
+		    elsif (grep /^backup\_base\_user\_$user\_/, @dir_content) { 
+			my @more_recent = grep /^backup\_base\_user\_$user\_/, sort @dir_content; 
 			$more_recent = pop @more_recent;			
+			print "backup_base_user  and more_recent :  $more_recent\n";
+      print "$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext `find $path_name -newer $save_path/$more_recent`\n";
+system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext `find $path_name -cnewer $save_path/$more_recent`");
 		    }
-		    if (!$base_user_exist) { 
-			system("$tar_cmd_user -f $save_path/backup_base_user_$user$the_time.$tar_ext $path_name");}
-		    else { 
-			system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext `find @sys_files -newer $save_path/$more_recent`");}
+		    else {
+			print "else\n";
+			system("$tar_cmd_user -f $save_path/backup_base_user_$user$the_time.$tar_ext $path_name");
+		    }
 		} else {
+			print "else else\n";
 		    system("cd $save_path && rm -f backup_user_$_* backup_base_user_$_* backup_incr_user_$_*");
 		    system("$tar_cmd_user -f $save_path/backup_user_$_$the_time.$tar_ext $path_name");
 		}
@@ -1222,7 +1230,7 @@ sub advanced_options{
 					     ),
 				 0, new Gtk::HSeparator,
 				 0, gtkpack_(new Gtk::VBox(0,10),
-					     0, my $check_tar_bz2  = new Gtk::CheckButton( _(" Use Tar and bzip2  ( very slow) [please be careful if you\n (un)select this option all your old backups will be deleted ]") ),
+					     0, gtkset_sensitive(my $check_tar_bz2  = new Gtk::CheckButton( _(" Use Tar and bzip2  ( very slow) [please be careful if you\n (un)select this option all your old backups will be deleted ]") ), 0),
 					     0, gtkset_sensitive(my $check_backupignore = new Gtk::CheckButton( _(" Use .backupignore files")), 0),
 					     ),
 				 ),
@@ -1528,7 +1536,7 @@ sub select_most_recent_selected_of {
     my ($user_name) = @_;
     my @list_tmp2;
     my @tmp = sort @user_list_to_restore2;
-    foreach (grep /$user_name/, sort @tmp) { push @list_tmp2 , $_; }
+    foreach (grep /$user_name\_/, sort @tmp) { push @list_tmp2 , $_; }
     return pop @list_tmp2;
 }
 
@@ -1549,7 +1557,7 @@ sub select_user_data_to_restore {
     foreach my $var_tmp (@user_list_backuped) {
 	$var_eq = 1;
 	my $more_recent = (split( ' ', select_most_recent_selected_of($var_tmp)))[0]; 
-	foreach (grep /^backup_user_$var_tmp/, sort @list_backup) {
+	foreach (grep /^backup\_user\_$var_tmp\_/, sort @list_backup) {
 	    s/.tar.gz//gi;
 	    s/.tar.bz2//gi;	    
 	    if ($more_recent) {
@@ -1563,7 +1571,7 @@ sub select_user_data_to_restore {
     }
      foreach my $var_to_restore (@list_tmp) {
 	$var_to_restore =~ s/backup_//gi;
-	foreach my $var_exist (@list_tmp2) {
+	foreach my $var_exist ( sort @list_tmp2) {
 	    if ($var_exist =~ /$var_to_restore/ ) {
 		push @user_list_to_restore, $var_exist;
 	    }
@@ -1573,21 +1581,21 @@ sub select_user_data_to_restore {
 }
 
 sub select_sys_data_to_restore {
-#     my @list_tmp = ();
-#     my @list_tmp2 = ();
-#     my @list_backup = ();
+    my $var_eq = 1;
+    my @list_tmp = ();
+    @sys_list_to_restore = ();
 
-#     -d $path_to_find_restore and my @list_backup_tmp2 = all($path_to_find_restore);
-#     @list_tmp2 = @list_backup_tmp2;
-#     foreach (@list_backup_tmp2) {
-# 	s/\_base//gi;
-# 	s/\_incr//gi;
-# 	push @list_backup , $_;
-#     }
-
-#     -d $path_to_find_restore and my @list_backup_tmp2 = all($path_to_find_restore);
-
-#     $DEBUG and print "(incremental restore) real sys list to restore :  $_ \n" foreach (@user_list_to_restore);
+    -d $path_to_find_restore and my @list_tmp = all($path_to_find_restore);
+    my @more_recent = split( ' ', $restore_step_sys_date); 
+    my $more_recent = pop @more_recent;
+    print "list_tmp content: $_\n" foreach (@list_tmp);
+    foreach my $var_exist (grep /\_sys\_/, sort @list_tmp) {
+	if ($var_exist =~ /$more_recent/ ) {
+	    push @sys_list_to_restore, $var_exist;
+	    $var_eq = 0; }
+	 else {  $var_eq and push @sys_list_to_restore, $var_exist; }
+    }
+    $DEBUG and print "sys list to restore: $_\n " foreach (@sys_list_to_restore);
 }
 
 
@@ -1597,28 +1605,30 @@ sub restore_backend {
     else { $untar_cmd = 1; }
     
     if ($restore_user)  { 
-	select_user_data_to_restore(); 
- 	$untar_cmd or system(" echo 'user: $_'  &&  tar xfz  $path_to_find_restore/$_ -C $restore_path") foreach @user_list_to_restore;
- 	$untar_cmd and system("echo 'user: $_'  &&  /usr/bin/bzip2 -cd $path_to_find_restore/$_ | tar xf -C $restore_path ") foreach @user_list_to_restore;
-     }
-    if ($restore_sys)   { 
-	select_sys_data_to_restore();
-#	$untar_cmd or system("echo backup_sys  && cd /tmp && tar xfz $path_to_find_restore/backup_sys.tar.gz  -C $restore_path ");
-#	$untar_cmd and system("echo backup_sys cd /tmp && /usr/bin/bzip2 -cd $path_to_find_restore/backup_sys.tar.bz2  | tar xf -C $restore_path ");
-#	print " restore sys\n";
+	if ($backup_user_versions) {
+	    select_user_data_to_restore(); 
+	    $untar_cmd or system(" echo 'user: $_' && tar xfz  $path_to_find_restore/$_ -C $restore_path") foreach @user_list_to_restore;
+	    $untar_cmd and system("echo 'user: $_' && /usr/bin/bzip2 -cd $path_to_find_restore/$_ | tar xf -C $restore_path ") foreach @user_list_to_restore;
+	}
     }
-
-## fixme
+    if ($restore_sys)   { 
+	if ($backup_sys_versions) {
+	    select_sys_data_to_restore();
+	    $untar_cmd or system("echo 'sys: $_'  && cd /tmp && tar xfz $path_to_find_restore/$_  -C $restore_path ") foreach @sys_list_to_restore;
+	    $untar_cmd and system("echo 'sys: $_' cd /tmp && /usr/bin/bzip2 -cd $path_to_find_restore/$_  | tar xf -C $restore_path ") foreach @sys_list_to_restore;
+	} else {
+	    $untar_cmd or system("echo restore_sys  && cd /tmp && tar xfz $path_to_find_restore/backup_sys.tar.gz  -C $restore_path ");
+	    $untar_cmd and system("echo restore_sys cd /tmp && /usr/bin/bzip2 -cd $path_to_find_restore/backup_sys.tar.bz2  | tar xf -C $restore_path ");
+	}	    
+    }
     if ($restore_other) { 
-#	$untar_cmd or system("echo backup_other && cd /tmp && tar xfz $path_to_find_restore/backup_other.tar.gz  -C $restore_path ");
-#	$untar_cmd and system("echo backup_other && cd /tmp && /usr/bin/bzip2 -cd $path_to_find_restore/backup_other.tar.bz2  | tar xf -C $restore_path ");
-#	print "restore other \n";
+	$untar_cmd or system("echo backup_other && cd /tmp && tar xfz $path_to_find_restore/backup_other.tar.gz  -C $restore_path ");
+	$untar_cmd and system("echo backup_other && cd /tmp && /usr/bin/bzip2 -cd $path_to_find_restore/backup_other.tar.bz2  | tar xf -C $restore_path ");
     }
     print "End of restore\n";
 }
 
 sub restore_do {
-
     if ($backup_bef_restore) {
 	if ($restore_sys) { $backup_sys = 1;}
 	else { $backup_sys = 0;}
@@ -1641,7 +1651,7 @@ sub restore_do2 {
     restore_state();
     gtktext_insert($text, $restore_state);
     button_box_restore_main();
-
+    
     gtkpack($advanced_box,
 	    $do_restore = gtkpack_(new Gtk::VBox(0,10),
 				   0, _("         Restore Configuration       "),
@@ -1754,7 +1764,6 @@ sub restore_step_sys {
 	    );
     $combo_restore_step_sys->entry->signal_connect( 'changed', sub {
 	$restore_step_sys_date = $combo_restore_step_sys->entry->get_text();
-	print $restore_step_sys_date. "\n";
 	});
     $combo_restore_step_sys->entry->set_text($restore_step_sys_date);
     if ($restore_user) { $next_widget = \&restore_step_user;}
@@ -1914,6 +1923,10 @@ sub restore_other_media {
 
 sub restore_step2 {
     my $retore_step2;
+    my $other_exist;
+
+    if (-f "$save_path/backup_other*") { $other_exist = 1; } 
+    else { my $other_exist = 0; $restore_other = 0; }
 
     gtkpack($advanced_box,
 	    $retore_step2 = gtkpack_(new Gtk::VBox(0,10),
@@ -1930,7 +1943,7 @@ sub restore_step2 {
 						 ),
 				     0, my $check_restore_sys = new Gtk::CheckButton(_("Restore system")),
 				     0, my $check_restore_user = new Gtk::CheckButton(_("Restore Users")),
-				     0, my $check_restore_other = new Gtk::CheckButton(_("Restore Other")),
+				     0, gtkset_sensitive( my $check_restore_other = new Gtk::CheckButton(_("Restore Other")), $other_exist),
 				     0, gtkpack_(new Gtk::HBox(0,10),
 					0, my $check_restore_other_path = new Gtk::CheckButton(_("select path to restore (instead of / ) ")),
 					1, new Gtk::HBox(0,10),
@@ -2859,7 +2872,7 @@ Otherwise, you are able to select only one of this
 
 ")); }
     elsif ($custom_help eq "main") { gtktext_insert($text, 
-_(" Copyright (C) 2001 by MandrakeSoft (sdupont\@mandrakesoft.com)
+_(" Copyright (C) 2001 MandrakeSoft by DUPONT Sebastien <dupont_s\@epita.fr>
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -2917,7 +2930,7 @@ before to send it.
 ")); } 
  
     else { gtktext_insert($text,
-_(" Copyright (C) 2001 by MandrakeSoft (sdupont\@mandrakesoft.com)
+_(" Copyright (C) 2001 MandrakeSoft by DUPONT Sebastien <dupont_s\@epita.fr>
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
