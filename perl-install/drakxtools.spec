@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 41mdk
+Release: 42mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Jun  1 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-42mdk
+- handle the nfs/smb service disabled (Olivier Blin)
+- drakconnect:
+  o handle interface w/o ip addresses
+  o make LAN wizard more user friendly: move "manual choice" after 
+    detected interfaces
+  o detect again ethernet interfaces that are down (got broken in 10-38mdk)
+- drakboot:
+  o do not write partial GRUB config file (thus garbaging previous config) if an
+    error occured
+  o fix "two windows appears on canceling after an exception" bug
+
 * Fri May 28 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-41mdk
 - drakconnect:
   o fix protocol switching from manual to DHCP when stepping back in
