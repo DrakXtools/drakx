@@ -21,10 +21,14 @@ it off.  You can change this configuration anytime you like by
 re-running this application!"),
 _("Are you running a web server on this machine that you need the whole
 Internet to see? If you are running a webserver that only needs to be
-accessed by this machine, you can safely answer NO here."),
+accessed by this machine, you can safely answer NO here.
+
+"),
 _("Are you running a name server on this machine? If you didn't set one
 up to give away IP and zone information to the whole Internet, please
-answer no."),
+answer no.
+
+"),
 _("Do you want to allow incoming Secure Shell (ssh) connections? This
 is a telnet-replacement that you might use to login. If you're using
 telnet now, you should definitely switch to ssh. telnet is not
@@ -33,27 +37,38 @@ it. ssh is encrypted and doesn't allow for this eavesdropping."),
 _("Do you want to allow incoming telnet connections?
 This is horribly unsafe, as we explained in the previous screen. We
 strongly recommend answering No here and using ssh in place of
-telnet."),
+telnet.
+"),
 _("Are you running an FTP server here that you need accessible to the
 Internet? If you are, we strongly recommend that you only use it for
 Anonymous transfers. Any passwords sent by FTP can be stolen by some
-attackers, since FTP also uses no encryption for transferring passwords."),
+attackers, since FTP also uses no encryption for transferring passwords.
+"),
 _("Are you running a mail server here? If you're sending you 
 messages through pine, mutt or any other text-based mail client,
-you probably are.  Otherwise, you should firewall this off."),
+you probably are.  Otherwise, you should firewall this off.
+
+"),
 _("Are you running a POP or IMAP server here? This would
 be used to host non-web-based mail accounts for people via 
-this machine."),
+this machine.
+
+"),
 _("You appear to be running a 2.2 kernel.  If your network IP
 is automatically set by a computer in your home or office 
 (dynamically assigned), we need to allow for this.  Is
-this the case?"),
+this the case?
+"),
 _("Is your computer getting time syncronized to another computer?
 Mostly, this is used by medium-large Unix/Linux organizations
 to synchronize time for logging and such.  If you're not part
 of a larger office and haven't heard of this, you probably 
 aren't."),
-_("Configuration complete.  May we write these changes to disk?")
+_("Configuration complete.  May we write these changes to disk?
+
+
+
+")
 );
 my %settings;
 my $config_file = "/etc/Bastille/bastille-firewall.cfg";
@@ -133,7 +148,6 @@ my $popimap = sub {
     my $quit = sub {
 	$_[0] or $in->exit(0);
 	SaveConfig();
-	$in->standalone::pkgs_install(Kernel22() ? "ipchains" : "iptables", "Bastille");
 	system($_) foreach ("/bin/cp /usr/share/Bastille/bastille-ipchains /usr/share/Bastille/bastille-netfilter /sbin",
 			    "/bin/cp /usr/share/Bastille/bastille-firewall /etc/rc.d/init.d/",
 			    "/bin/chmod 0700 /etc/rc.d/init.d/bastille-firewall", "/bin/chmod 0700 /sbin/bastille-ipchains",
@@ -172,6 +186,11 @@ my $popimap = sub {
 	pop @struct; pop @struct; pop @struct;
 	@struct = ( @struct, [undef , "Don't Save", "Save & Quit", $quit ] );
 	$messages[9]=$messages[11];
+    }
+    if ( ! $in->standalone::pkgs_install(Kernel22() ? "ipchains" : "iptables", "Bastille")) {
+	$in->ask_warn('', _("Failure installing the needed packages : %s and Bastille.
+ Try to install them manually.", Kernel22() ? "ipchains" : "iptables") );
+	$in->exit(0);
     }
     for (my $i=0;$i<@struct;$i++) {
 	$::Wizard_no_previous = $i == 0;
