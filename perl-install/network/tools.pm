@@ -193,12 +193,6 @@ sub is_dynamic_host {
   any { defined $_->{DHCP_HOSTNAME} } values %$intf;
 }
 
-sub reread_net_conf {
-    my ($modules_conf, $netcnx, $netc, $intf) = @_;
-    network::netconnect::read_net_conf($netcnx, $netc, $intf);
-    modules::load_category($modules_conf, 'net');
-}
-
 sub convert_wep_key_for_iwconfig {
     #- 5 or 13 characters, consider the key as ASCII and prepend "s:"
     #- else consider the key as hexadecimal, do not strip dashes 
