@@ -4,7 +4,7 @@ use diagnostics;
 use strict;
 use vars qw(*LOG %compssListDesc @skip_list %by_lang @preferred $limitMinTrans);
 
-use common qw(:common :file :functional);
+use common qw(:common :file :functional :system);
 use install_any;
 use commands;
 use run_program;
@@ -486,6 +486,10 @@ sub psUsingHdlist {
     install_any::getAndSaveFile($fhdlist || "Mandrake/base/$hdlist", $newf) or die "no $hdlist found";
     symlinkf $newf, "/tmp/$hdlist";
 
+    #- avoid using more than one medium if Cd is not ejectable.
+    #- but keep all medium here so that urpmi has the whole set.
+    $method eq 'cdrom' && $medium > 1 && isCdNotEjectable() and return;
+
     #- extract filename from archive, this take advantage of verifying
     #- the archive too.
     local *F; open F, "packdrake $newf |";
@@ -585,10 +589,15 @@ sub getDeps($) {
 	my ($name, $version, $release, $sizeDeps) = /^(\S*)-([^-\s]+)-([^-\s]+)\s+(.*)/;
 	my $pkg = $packages->{names}{$name};
 
+	#- these verification are necessary in case of error, but are no more fatal as
+	#- in case of only one medium taken into account during install, there should be
+	#- silent warning for package which are unknown at this point.
 	$pkg or
-	  log::l("ignoring $name-$version-$release in depslist is not in hdlist"), $mismatch = 1, next;
-	$version eq packageVersion($pkg) and $release eq packageRelease($pkg) or
-	  log::l("ignoring $name-$version-$release in depslist mismatch version or release in hdlist ($version ne ", packageVersion($pkg), " or $release ne ", packageRelease($pkg), ")"), $mismatch = 1, next;
+	  log::l("ignoring $name-$version-$release in depslist is not in hdlist"), next;
+	$version eq packageVersion($pkg) or
+	  log::l("ignoring $name-$version-$release in depslist mismatch version in hdlist"), next;
+	$release eq packageRelease($pkg) or
+	  log::l("ignoring $name-$version-$release in depslist mismatch release in hdlist"), next;
 
 	$pkg->[$SIZE_DEPS] = $sizeDeps;
 
@@ -597,13 +606,14 @@ sub getDeps($) {
 	#- above warning have chance to raise an exception here, but may help
 	#- for debugging.
 	my $i = scalar @{$packages->{depslist}};
-	$i >= $pkg->[$MEDIUM]{min} && $i <= $pkg->[$MEDIUM]{max} or $mismatch = 1;
+	$i >= $pkg->[$MEDIUM]{min} && $i <= $pkg->[$MEDIUM]{max} or
+	  log::l("inconsistency in position for $name-$version-$release in depslist and hdlist"), $mismatch = 1;
 
 	#- package are already sorted in depslist to enable small transaction and multiple medium.
 	push @{$packages->{depslist}}, $pkg;
     }
 
-    #- check for mismatching package, it should breaj with above die unless depslist has too many errors!
+    #- check for mismatching package, it should break with above die unless depslist has too many errors!
     $mismatch and die "depslist.ordered mismatch against hdlist files";
 
     #- check for same number of package in depslist and hdlists.
