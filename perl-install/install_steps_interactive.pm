@@ -854,8 +854,8 @@ sub summary {
 	    pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'cups')) and return _("Remote CUPS server");
 	    return _("No printer");
 	}
-	my $entry = $printer->{configured}{$printer->{QUEUE}} || (values %{$printer->{configured}})[0];
-	return "$entry->{'make'} $entry->{'model'}";
+	my $entry = $printer->{configured}{currentqueue} || (values %{$printer->{configured}{queuedata}})[0];
+	return "$entry->{make} $entry->{model}";
     };
 
     $o->ask_from_({
