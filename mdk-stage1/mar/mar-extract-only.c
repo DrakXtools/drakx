@@ -188,11 +188,15 @@ mar_extract_file(char *mar_filename, char *filename_to_extract, char *dest_dir)
 			if (BZ2_bzread(s.mar_zfile, buf, elem->file_length) != elem->file_length)
 			{
 				zerr(s.mar_zfile);
+                                close(fd);
+                                unlink(dest_file);
 				return -1;
 			}
 			if (write(fd, buf, elem->file_length) != elem->file_length)
 			{
 				log_perror(dest_file);
+                                close(fd);
+                                unlink(dest_file);
 				return -1;
 			}
 			close(fd); /* do not check return value for code size */
