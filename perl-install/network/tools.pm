@@ -300,4 +300,49 @@ EOF
     };
 }
 
+sub copy_firmware {
+    my ($device, $destination, $file) = @_;
+    my ($source, $failed, $mounted);
+
+    $device eq 'floppy'  and do { $mounted = 1; ($source, $failed) = use_floppy($file) };
+    $device eq 'windows' and ($source, $failed) = use_windows();
+    
+    $source eq $failed and return;
+    $mounted and my $_b = before_leaving { fs::umount('/mnt') };
+    if ($failed) {
+	eval { $in->ask_warn('', $failed) }; $in->exit if $@ =~ /wizcancel/;
+	return;
+    }
+
+    if (-e "$source/$file") { cp_af("$source/$file", $destination) }
+    else { $failed = N("Firmware copy failed, file %s not found", $file) }
+    eval { $in->ask_warn('', $failed || N("Firmware copy succeeded")) }; $in->exit if $@ =~ /wizcancel/;
+    log::explanations($failed || "Firmware copy $file in $destination succeeded");
+
+    $failed ? 0 : 1;  
+}
+
+sub use_windows() {
+    my $all_hds = fsedit::get_hds({}, undef); 
+    fs::get_info_from_fstab($all_hds, '');
+    my $part = find { $_->{device_windobe} eq 'C' } fsedit::get_fstab(@{$all_hds->{hds}});
+    $part or my $failed = N("No partition available");
+    my $source = -d "$part->{mntpoint}/windows/" ? "$part->{mntpoint}/windows/system" : "$part->{mntpoint}/winnt/system";
+    log::explanations($failed || "Seek in $source to find firmware");
+
+    return $source, $failed;
+}
+
+sub use_floppy {
+    my ($file) = @_;
+    my $floppy = detect_devices::floppy();
+    $in->ask_okcancel(N("Insert floppy"),
+		      N("Insert a FAT formatted floppy in drive %s with %s in root directory and press %s", $floppy, $file, N("Next"))) or return;
+    eval { fs::mount(devices::make($floppy), '/mnt', 'vfat', 'readonly'); 1 } or my $failed = N("Floppy access error, unable to mount device %s", $floppy);
+    log::explanations($failed || "Mounting floppy device $floppy in /mnt");
+
+    return '/mnt', $failed;
+}
+
+
 1;
