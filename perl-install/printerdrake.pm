@@ -1565,7 +1565,7 @@ and so it is a possible point for attacks. Therefore only
 a few selected daemons are started by default in this
 security level.
 
-Do you reeally want to configure printing on this
+Do you really want to configure printing on this
 machine?",
 			   $printer::shortspooler_inv{$spooler},
 			   $securitystr))) {
