@@ -47,7 +47,7 @@ if (!$dm) {
 }
 
 my @raw_list = sort keys %dm;
-my @list = $::expert ? @raw_list : (grep { -e $dm{$_}->[1] } @raw_list) or @raw_list;
+my @list = $::expert ? @raw_list : (grep { -e $dm{$_}->[1] } @raw_list);
 
 start:
 if ($in->ask_from(N("Choosing a display manager"),
