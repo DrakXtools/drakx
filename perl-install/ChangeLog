@@ -1,5 +1,23 @@
 2004/03/26  Thierry Vignaud  <tvignaud at mandrakesoft.com>
 
+	* network/netconnect.pm: s/bcm4400/b44/
+
+	* network/adsl.pm (adsl_probe_info) fix vpi, vci rereading (speedtouch
+	conf write hexa...)
+
+	* drakxtools.spec: fix changelog
+
+	* pkgs.pm (installTransactionClosure) fix list refreshing (warly)
+
+2004/03/26  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: 
+	  - add SMP and BIGMEM for kernel-2.4
+	  - aggregate all the kernel-2.4 in one occurence not to raised
+	the "complicated tags" error in install rpmsrate parsing code
+
+2004/03/26  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
 	* network/adsl.pm (adsl_probe_info) fix vpi, vci rereading (speedtouch
 	conf write hexa...)
 	misc space cleanups (thx perl_checko)
@@ -29925,7 +29943,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.922 2004/03/26 11:20:56 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.923 2004/03/26 13:20:47 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
