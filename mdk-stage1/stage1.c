@@ -132,13 +132,15 @@ static void expert_third_party_modules(void)
 			     "a Linux (ext2fs) formatted floppy containing the modules and confirm. Otherwise, select \"no\".");;
 	if (results != RETURN_OK)
 		return;
-	
+
+	my_insmod("floppy", ANY_DRIVER_TYPE, NULL);
+
 	if (my_mount("/dev/fd0", floppy_mount_location, "ext2") == -1) {
 		error_message("I can't find a Linux ext2 floppy in first floppy drive.");
 		return expert_third_party_modules();
 	}
 
-	modules = list_directory("/tmp/floppy");
+	modules = list_directory(floppy_mount_location);
 
 	if (!modules || !*modules) {
 		error_message("No modules found on floppy disk.");

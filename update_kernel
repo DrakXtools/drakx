@@ -16,7 +16,7 @@ function create_marfile() {
         for k in $needed
 	do
 	    [ -z "`echo $* | grep $k`" ] \
-              && [ -z "`echo $PCMCIA_INSTALLMODULES | grep $k`" ] \
+              && [ -z "`echo $PCMCIA_COREMODULES | grep $k`" ] \
               && echo "WARNING! in $marfile, $k is missing (required by $i)"
         done
     done
@@ -33,18 +33,21 @@ f "scsi cdrom" ; CD_DRIVERS=$v
 f "pcmcia net_raw cdrom_raw scsi_raw disk_raw" ; PCMCIA_DRIVERS=$v
 f "big net_raw cdrom_raw scsi_raw disk_raw" ; BIG_DRIVERS=$v
 f "pcmcia net cdrom scsi disk keepbig" ; ALL_DRIVERS=$v
-[ $ARCH == "i386" ] && FSMODULES="vfat.o fat.o"
+[ $ARCH == "i386" ] && DOSMODULES="vfat.o fat.o"
 
-NETWORK_MODULES="  $FSMODULES $NETWORK_DRIVERS isa-pnp.o"
-CDROM_MODULES="    $FSMODULES $CD_DRIVERS isa-pnp.o"
-HD_MODULES="       $FSMODULES $SCSI_DRIVERS $DISK_DRIVERS loop.o isofs.o isa-pnp.o"
-HDREISER_MODULES=" $FSMODULES $SCSI_DRIVERS loop.o isofs.o isa-pnp.o reiserfs.o"
-PCMCIA_MODULES="   $FSMODULES $PCMCIA_DRIVERS"
-BIG_MODULES="      $FSMODULES $BIG_DRIVERS isa-pnp.o"
-ALL_MODULES="      $FSMODULES $ALL_DRIVERS isa-pnp.o reiserfs.o"
+NETWORK_MODULES="  $NETWORK_DRIVERS"
+CDROM_MODULES="    $CD_DRIVERS"
+HD_MODULES="       $DOSMODULES $SCSI_DRIVERS $DISK_DRIVERS loop.o isofs.o"
+HDREISER_MODULES=" $DOSMODULES $SCSI_DRIVERS loop.o isofs.o reiserfs.o"
+PCMCIA_MODULES="   $DOSMODULES $PCMCIA_DRIVERS"
+BIG_MODULES="      $BIG_DRIVERS"
+ALL_MODULES="      $DOSMODULES $ALL_DRIVERS isa-pnp.o reiserfs.o"
 NOT_USEFULL_IN_STAGE1="nls_*.o parport_probe.o raid*.o serial.o smbfs.o usb-*.o"
 
-PCMCIA_INSTALLMODULES="pcmcia_core.o tcic.o ds.o i82365.o"
+GENERIC_MODULES="isa-pnp.o floppy.o"
+
+PCMCIA_COREMODULES="pcmcia_core.o tcic.o ds.o i82365.o"
+
 
 if [ "$ARCH" == "i386" ]; then
     #disable any existing resolution!!!
@@ -63,17 +66,14 @@ rm -rf modules ; install -d modules
     /sbin/depmod -F ../System.map -e *.o | perl -pe 's/\\\n//' | perl -ne 's/\.o//g; s/[ \t]+/ /g; print if /: /' > modules.dep
     perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
     ls *.o               | packdrake -b9s modules.cz 400000
-    create_marfile network_modules.mar  $NETWORK_MODULES
-    create_marfile cdrom_modules.mar    $CDROM_MODULES
-    create_marfile hd_modules.mar       $HD_MODULES
-    create_marfile hdreiser_modules.mar $HDREISER_MODULES
-    create_marfile pcmcia_modules.mar   $PCMCIA_MODULES $PCMCIA_INSTALLMODULES
-    create_marfile other_modules.mar    $BIG_MODULES
-    create_marfile all_modules.mar      $ALL_MODULES
-[ "$ARCH" == "i386" ] && {
-    cp $PCMCIA_INSTALLMODULES ../install_pcmcia_modules/
-}
-    rm -f $ALL_MODULES $PCMCIA_INSTALLMODULES $NOT_USEFULL_IN_STAGE1 # leave in the directory non-install1 used modules
+    create_marfile network_modules.mar  $NETWORK_MODULES $GENERIC_MODULES
+    create_marfile cdrom_modules.mar    $CDROM_MODULES $GENERIC_MODULES
+    create_marfile hd_modules.mar       $HD_MODULES $GENERIC_MODULES
+    create_marfile hdreiser_modules.mar $HDREISER_MODULES $GENERIC_MODULES
+    create_marfile pcmcia_modules.mar   $PCMCIA_MODULES $PCMCIA_COREMODULES $GENERIC_MODULES
+    create_marfile other_modules.mar    $BIG_MODULES $GENERIC_MODULES
+    create_marfile all_modules.mar      $ALL_MODULES $GENERIC_MODULES
+    rm -f $ALL_MODULES $PCMCIA_COREMODULES $NOT_USEFULL_IN_STAGE1 # leave in the directory non-install1 used modules
 )
 
 # v=kernel-2.2.17-BOOT3.tar.bz2
