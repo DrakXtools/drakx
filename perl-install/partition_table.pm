@@ -16,7 +16,7 @@ use partition_table_raw;
 use log;
 
 @important_types = ('Linux native', 'Linux swap', 
-		    if_(arch() =~ /i.86/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: JFS', 'DOS FAT16', 'Win98 FAT32'),
+		    if_(arch() =~ /i.86/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: JFS', 'Journalised FS: XFS', 'DOS FAT16', 'Win98 FAT32'),
 		    if_(arch() =~ /ppc/, 'Apple HFS Partition', 'Apple Bootstrap'));
 @important_types2 = ('Linux RAID', 'Linux Logical Volume Manager partition');
 
@@ -32,7 +32,7 @@ if_(arch() =~ /^ppc/,
   0x402	=> 'Apple HFS Partition',
 ), if_(arch() =~ /^i.86/,
   0x183 => 'Journalised FS: ReiserFS',
-#  0x283 => 'Journalised FS: XFS',
+  0x283 => 'Journalised FS: XFS',
   0x383 => 'Journalised FS: JFS',
   0x483 => 'Journalised FS: ext3',
 ), if_(arch() =~ /^sparc/,
