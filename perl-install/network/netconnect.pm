@@ -91,7 +91,7 @@ sub get_subwizard {
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my ($adsl_type, $adsl_protocol, $adsl_device, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider);
       my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $need_restart_network);
-      my ($module, $text, $auto_ip, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
+      my ($module, $auto_ip, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
       my $ethntf = {};
 
