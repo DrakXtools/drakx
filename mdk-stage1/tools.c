@@ -431,7 +431,7 @@ char * get_ramdisk_realname(void)
 {
 	char img_name[500];
 	
-	strcpy(img_name, RAMDISK_LOCATION);
+	strcpy(img_name, "/" RAMDISK_LOCATION_REL);
 	strcat(img_name, IS_RESCUE ? "rescue" : "mdkinst");
 	strcat(img_name, "_stage2.bz2");
 

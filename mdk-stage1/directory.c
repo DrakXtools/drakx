@@ -145,9 +145,9 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 #ifndef MANDRAKE_MOVE
 	if (IS_RESCUE || ((loopdev || streq(method_live, "disk")) && ramdisk_possible())) {
 		/* RAMDISK install */
-		if (access(IMAGE_LOCATION RAMDISK_LOCATION, R_OK)) {
+		if (access(IMAGE_LOCATION "/" RAMDISK_LOCATION_REL, R_OK)) {
 			stg1_error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
-				      "(I need the subdirectory " RAMDISK_LOCATION ")\n"
+				      "(I need the subdirectory " RAMDISK_LOCATION_REL ")\n"
 				      "Here's a short extract of the files in the directory:\n"
 				      "%s", extract_list_directory(IMAGE_LOCATION));
 			umount(IMAGE_LOCATION);

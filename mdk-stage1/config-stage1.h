@@ -27,7 +27,7 @@
 
 #define RAMDISK_COMPRESSION_RATIO 1.95
 
-#define RAMDISK_LOCATION "/install/stage2/"
+#define RAMDISK_LOCATION_REL "install/stage2/"
 #define SLASH_LOCATION   "/sysroot"
 
 #ifdef MANDRAKE_MOVE
