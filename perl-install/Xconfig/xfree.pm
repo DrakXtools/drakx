@@ -520,7 +520,7 @@ sub ModeLine_from_string {
 # http://www.vesa.org/Public/EEDIDguideV1.pdf 
 
 #- http://www.vesa.org/Public/CVT
-our @CVT_ratios = qw(5/4 4/3 3/2 16/10 15/9 16/9);
+our @CVT_ratios = qw(4/3 16/9 16/10 5/4 15/9 3/2);
 our @CVT_vfreqs = qw(50 60 75 85); # and also 60Hz "reduced blanking" in CVT
 
 our @vfreqs = (@CVT_vfreqs, qw(100 120));
