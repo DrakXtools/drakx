@@ -289,7 +289,15 @@ sub choosePackagesTree {
     my $available = install_any::getAvailableSpace($o);
     my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
 
-    my $common; $common = { get_status => sub {
+    my $common;
+    my $slow = sub {
+        my ($func) = @_;
+	gtkset_mousecursor_wait($common->{widgets}{tree}->window);
+	ugtk2::flush();
+	$func->();
+	gtkset_mousecursor_normal($common->{widgets}{tree}->window);
+    };
+    $common = {             get_status => sub {
 				my $size = pkgs::selectedSize($packages);
 				N("Total size: %d / %d MB", pkgs::correctSize($size / sqr(1024)), $available / sqr(1024));
 			    },
@@ -329,28 +337,30 @@ sub choosePackagesTree {
 			    },
 			    get_info => sub {
 				my $p = pkgs::packageByName($packages, $_[0]) or return '';
-				pkgs::extractHeaders($o->{prefix}, [$p], $packages->{mediums});
+				$slow->(sub { pkgs::extractHeaders($o->{prefix}, [$p], $packages->{mediums}) });
 
 				my $imp = translate($pkgs::compssListDesc{$p->flag_base ? 5 : $p->rate});
 
-				my $info = $@ ? N("Bad package") :
-				  (N("Name: %s\n", $p->name) .
-				   N("Version: %s\n", $p->version . '-' . $p->release) .
-				   N("Size: %d KB\n", $p->size / 1024) .
-				   ($imp && N("Importance: %s\n", $imp)) . "\n" .
-				   formatLines(c::from_utf8($p->description)));
-				return $info;
+                                my $tag = { 'foreground' => 'royalblue3' };
+				$@ ? N("Bad package") :
+				  [ [ N("Name: "), $tag ], [ $p->name . "\n" ],
+                                    [ N("Version: "), $tag ], [ $p->version . '-' . $p->release . "\n" ],
+                                    [ N("Size: "), $tag ], [ N("%d KB\n", $p->size / 1024) ],
+                                    if_($imp, [ N("Importance: "), $tag ], [ "$imp\n" ]),
+                                    [ "\n" ], [ formatLines(c::from_utf8($p->description)) ] ];
 			    },
 			    toggle_nodes => sub {
 				my $set_state = shift @_;
 				my @n = map { pkgs::packageByName($packages, $_) } @_;
 				my %l;
 				my $isSelection = !$n[0]->flag_selected;
-				foreach (@n) {
-				    #pkgs::togglePackageSelection($packages, $_, my $l = {});
-				    #@l{grep {$l->{$_}} keys %$l} = ();
-				    pkgs::togglePackageSelection($packages, $_, \%l);
-				}
+                                $slow->(sub {
+                                    foreach (@n) {
+                                        #pkgs::togglePackageSelection($packages, $_, my $l = {});
+                                        #@l{grep {$l->{$_}} keys %$l} = ();
+                                        pkgs::togglePackageSelection($packages, $_, \%l);
+                                    }
+                                });
 				if (my @l = map { $packages->{depslist}[$_]->name } keys %l) {
 				    #- check for size before trying to select.
 				    my $size = pkgs::selectedSize($packages);
