@@ -19,6 +19,17 @@ $::isStandalone = 1;
 
 my $in = vnew interactive('su');
 
+my %l = (
+	 _("Configure LILO/GRUB") => '',
+	 _("Create a boot floppy") => '/usr/X11R6/bin/drakfloppy',
+	 _("Format floppy") => '/usr/bin/gfloppy',
+);
+-x $l{$_} or delete $l{$_} foreach grep { $l{$_} } keys %l;
+
+my $cmd = $l{$in->ask_from_list(_("Choice"), _("What do you want to do?"), [ keys %l ])};
+exec $cmd if $cmd;
+
+
 my $bootloader = lilo::read('', '/etc/lilo.conf');
 local ($_) = `detectloader`;
 $bootloader->{methods} = { lilo => 1, grub => !!/grub/i };
