@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.8mdk
+Release: 0.9mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -326,6 +326,31 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Aug 17 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.9mdk
+- drakboot:
+  o install acpi and acpid if needed (pixel, #10760)
+  o allow to choose net profile in advanced mode (oblin)
+  o enable to allow to choose a video mode if boot is not graphical
+    while configuring bootsplash (oblin)
+- drakbug: better wrapping
+- drakconnect (oblin):
+  o do not use noipdefault pppd option for pptp connections
+  o fix pppoe with sagem ADSL modem
+  o write MAC addresses into /etc/iftab
+  o pppoe/pptp fixes
+- drakroam: support multiple roaming daemons support (oblin)
+- drakupdate_fstab: fix adding usb medias (oblin, #10399)
+- drakvpn: do not assume drakvpn is already configured if the tunnel
+  file is made of comments only (oblin)
+- localedrake: handle turkmen and tatar (pablo)
+- net_monitor:
+  o let's be more l10n-friendly
+  o fix default connection time (Fabrice FACORAT)
+- XFdrake (pixel):
+  o do not use XF86Config-4 anymore
+  o handle /etc/X11/xorg.conf
+- typo fixes (#10713, ...)
+
 * Wed Aug 11 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.8mdk
 - bootloader-config: log command on mkinitrd faillure
 - drakbug (olivier):
