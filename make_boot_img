@@ -498,7 +498,8 @@ prompt 1
 timeout 150
 " . (-e "isolinux/boot.msg" ? "display boot.msg" : "display help.msg") . "
 F1 help.msg
-F2 advanced.msg" . (-e "isolinux/boot.msg" && "F3 boot.msg") . "
+F2 advanced.msg
+" . (-e "isolinux/boot.msg" && "F3 boot.msg") . "
 " . join('', map {
 "label $_->[0]
   kernel alt0/vmlinuz
