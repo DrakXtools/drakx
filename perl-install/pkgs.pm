@@ -359,7 +359,7 @@ sub psUpdateHdlistsDeps {
 
     #- this is necessary for urpmi.
     install_any::getAndSaveFile("Mandrake/base/$_", "$prefix/var/lib/urpmi/$_")
-      foreach qw(depslist.ordered provides compss rpmsrate);
+      foreach qw(depslist.ordered provides rpmsrate);
 }
 
 sub psUsingHdlists {
@@ -570,30 +570,6 @@ sub getProvides($) {
 	}
 	++$i;
     }
-}
-
-sub readCompss {
-    my ($prefix, $packages) = @_;
-    my ($p, @compss);
-
-    #- this is necessary for urpmi.
-    install_any::getAndSaveFile('Mandrake/base/compss', "$prefix/var/lib/urpmi/compss");
-
-    local *F; open F, "$prefix/var/lib/urpmi/compss" or die "can't find compss";
-    local $_;
-    while (<F>) {
-	/^\s*$/ || /^#/ and next;
-	s/#.*//;
-
-	if (/^(\S.*)/) {
-	    $p = $1;
-	} else {
-	    /(\S+)/;
-	    $packages->{names}{$1} or log::l("unknown package $1 in compss"), next;
-	    push @compss, "$p/$1";
-	}
-    }
-    \@compss;
 }
 
 sub read_rpmsrate {

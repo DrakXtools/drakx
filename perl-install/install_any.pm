@@ -313,7 +313,6 @@ sub setPackages {
 	#- must be done after selecting base packages (to save memory)
 	pkgs::getProvides($o->{packages});
 
-	$o->{compss} = pkgs::readCompss($o->{prefix}, $o->{packages});
 	#- must be done after getProvides
 	pkgs::read_rpmsrate($o->{packages}, getFile("Mandrake/base/rpmsrate"));
 	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{meta_class});

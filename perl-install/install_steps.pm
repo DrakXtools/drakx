@@ -253,7 +253,7 @@ sub selectPackagesToUpgrade {
 }
 
 sub choosePackages {
-    my ($o, $packages, $compss, $compssUsers, $first_time) = @_;
+    my ($o, $packages, $compssUsers, $first_time) = @_;
 
     #- now for upgrade, package that must be upgraded are
     #- selected first, after is used the same scheme as install.

@@ -429,7 +429,7 @@ sub selectPackagesToUpgrade {
 }
 #------------------------------------------------------------------------------
 sub choosePackages {
-    my ($o, $packages, $compss, $compssUsers, $first_time) = @_;
+    my ($o, $packages, $compssUsers, $first_time) = @_;
 
     #- this is done at the very beginning to take into account
     #- selection of CD by user if using a cdrom.
@@ -492,7 +492,7 @@ sub choosePackages {
     ($o->{packages_}{ind}) =
       pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $min_mark, $size2install);
 
-    $o->choosePackagesTree($packages, $compss) if $individual;
+    $o->choosePackagesTree($packages) if $individual;
 }
 
 sub chooseSizeToInstall {
@@ -500,7 +500,7 @@ sub chooseSizeToInstall {
     min($def, $availableC * 0.7);
 }
 sub choosePackagesTree {
-    my ($o, $packages, $compss) = @_;
+    my ($o, $packages) = @_;
 
     $o->ask_many_from_list('', _("Choose the packages you want to install"),
 			   {

@@ -249,7 +249,7 @@ a percentage of %d%% will install as many packages as possible.", $percentage, $
     $w->main and $val + 1; #- add a single byte (hack?) to make selection of 0 bytes ok.
 }
 sub choosePackagesTree {
-    my ($o, $packages, $compss) = @_;
+    my ($o, $packages) = @_;
 
     $o->set_help('choosePackagesTree');
     my ($curr, $parent, $info_widget, $w_size, $go, $idle, $flat, $auto_deps);
@@ -292,8 +292,8 @@ sub choosePackagesTree {
     my $add_parent; $add_parent = sub {
 	$_[0] or return undef;
 	if (my $w = $wtree{$_[0]}) { return $w }
-	my $s; foreach (split '/', $_[0]) {
-	    my $s2 = $s ? "$s/$_" : $_;
+	my $s; foreach (split '\|', $_[0]) {
+	    my $s2 = $s ? "$s|$_" : $_;
 	    $wtree{$s2} ||= do {
 		my $n = $tree->insert_node($s ? $add_parent->($s) : undef, undef, [$_, '', ''], 5, (undef) x 4, 0, 0);
 		$n;
@@ -319,26 +319,23 @@ sub choosePackagesTree {
 	$tree->freeze;
 	while (1) { $tree->remove_node($tree->node_nth(0) || last) }
 
-	my ($root, $leaf);
 	if ($flat = $_[0]) {
 	    $add_node->($_, undef) foreach sort grep { my $pkg = pkgs::packageByName($packages, $_);
 						       pkgs::packageMedium($pkg)->{selected} } keys %{$packages->{names}};
 	} else {
-	    my (@others, $old_root);
-	    foreach (sort @$compss) {
-		($root, $leaf) = m|(.*)/(.+)|o or ($root, $leaf) = ('', $_);
-		if ($root ne $old_root) {
-		    $add_node->($_, $old_root . '/' . _("Other")) foreach @others;
-		    @others = ();
-		    $old_root = $root
+	    foreach (@{$o->{compssUsersSorted}}) {
+		my $root = $o->{compssUsers}{$_}{path} . '|' . $_;
+		my (%fl, @firstchoice, @others);
+		$fl{$_} = 1 foreach @{$o->{compssUsers}{$_}{flags}};
+		foreach my $p (values %{$packages->{names}}) {
+		    my ($rate, @flags) = pkgs::packageRateRFlags($p);
+		    next if !($rate && !grep { !grep { /^!(.*)/ ? !$fl{$1} : $fl{$_} } split('\|\|') } @flags);
+		    $rate >= 3 ?
+		      push(@firstchoice, pkgs::packageName($p)) :
+		      push(@others,      pkgs::packageName($p));
 		}
-		my $pkg = pkgs::packageByName($packages, $leaf);
-		pkgs::packageMedium($pkg)->{selected} or next;
-		if (pkgs::packageRate($pkg) < 4) {
-		    push @others, $leaf;
-		} else {
-		    $add_node->($leaf, $root);
-		}
+		$add_node->($_, $root                   ) foreach sort @firstchoice;
+		$add_node->($_, $root . '|' . _("Other")) foreach sort @others;
 	    }
 	}
 	$tree->thaw;

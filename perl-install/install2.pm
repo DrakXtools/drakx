@@ -237,7 +237,7 @@ sub choosePackages {
     #- always setPackages as it may have to copy hdlist files and depslist file.
     $o->setPackages;
 
-    $o->choosePackages($o->{packages}, $o->{compss}, $o->{compssUsers}, $_[1] == 1);
+    $o->choosePackages($o->{packages}, $o->{compssUsers}, $_[1] == 1);
     log::l("compssUsersChoice's: ", join(" ", grep { $o->{compssUsersChoice}{$_} } keys %{$o->{compssUsersChoice}}));
 
     #- check pre-condition where base backage has to be selected.
