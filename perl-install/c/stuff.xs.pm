@@ -164,6 +164,14 @@ isBurner(fd)
   OUTPUT:
   RETVAL
 
+int
+isDvdDrive(fd)
+  int fd
+  CODE:
+  RETVAL = ioctl(fd, CDROM_GET_CAPABILITY) & CDC_DVD;
+  OUTPUT:
+  RETVAL
+
 unsigned int
 total_sectors(fd)
   int fd

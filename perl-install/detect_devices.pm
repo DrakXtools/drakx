@@ -79,7 +79,16 @@ sub isBurner {
 	$f && c::isBurner(fileno($f));
     }
 }
-sub isDvdDrive { $_[0]->{info} =~ /DVD/ }
+sub isDvdDrive { 
+    my ($dev) = @_;
+    if (my ($nb) = $dev =~ /scd (.*)/x) {	
+	# can't detect SCSI DVD
+	undef;
+    } else {
+	my $f = tryOpen($dev); 
+	$f && c::isDvdDrive(fileno($f));
+    }
+}
 sub isZipDrive { $_[0]->{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
 #-sub isJazzDrive { $_[0]->{info} =~ /JAZZ?\s+/ } #- untested.
 sub isLS120Drive { $_[0]->{info} =~ /LS-?120|144MB/ }
