@@ -58,24 +58,16 @@ my %available_roaming_daemons = (
 				      read_config => sub {
 					  my ($config) = @_;
 					  each_index {
-					      if (/^#/) {} #ignore comments
-					      elsif (/^\n/) {} #ignore blank lines
-					      elsif (/([^ \t]+)([ \t]+)(.*)/) {
-						  my $essid = $1;
+					      /^#/ || /^\n/ and next; #ignore comments and blank lines
+					      if (/([^ \t]+)([ \t]+)(.*)/) {
+						  my ($essid, $mode, $channel, $key, $dhcp);
 						  my $command = $3;
 						  # setup new network entry
-						  my $mode;
-						  my $channel;
-						  my $key;
-						  my $dhcp;
-						  if ($command =~ /mode\s(\S*);/) { $mode = $1 }
-						  elsif ($command =~ /mode\s(\S*)\s/) { $mode = $1 }
-						  if ($command =~ /channel\s(\S*);/) { $channel = $1 }
-						  elsif ($command =~ /channel\s(\S*)\s/) { $channel = $1 }
-						  if ($command =~ /key\s(\S*);/) { $key = $1 }
-						  elsif ($command =~ /key\s(\S*)\s/) { $key = $1 }
-						  if ($command =~ /dhclient/) { $dhcp = 1 }
-						  else { $dhcp = 0 }
+						  $essid = $1;
+						  ($mode) = $command =~ /mode\s([^\s;]+)/;
+						  ($channel) = $command =~ /channel\s([^\s;]+)/;
+						  ($key) = $command =~ /key\s([^\s;]+)/;
+						  $dhcp = $command =~ /dhclient/;
 						  &AddNet($essid, $mode, $channel, $key, $dhcp);
 					      }
 					      else { die "Line $::i of configuration file is not parseable.\n" }
