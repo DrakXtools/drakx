@@ -32,6 +32,10 @@
 #include "frontend.h"
 #include "tools.h"
 
+#if defined(__i386__) || defined(__x86_64__)
+#define ENABLE_RESCUE_MS_BOOT 1
+#endif
+
 char * env[] = {
 	"PATH=/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/usr/sbin:/mnt/bin:/mnt/usr/bin",
 	"LD_LIBRARY_PATH=/lib:/usr/lib:/mnt/lib:/mnt/usr/lib:/usr/X11R6/lib:/mnt/usr/X11R6/lib"
@@ -155,7 +159,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	enum return_type results;
 
 	char install_bootloader[] = "Re-install Boot Loader";
-#ifdef __i386__
+#if ENABLE_RESCUE_MS_BOOT
 	char restore_ms_boot[] = "Restore Windows Boot Loader";
 #endif
 	char mount_parts[] = "Mount your partitions under /mnt";
@@ -164,7 +168,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	char doc[] = "Doc: what's addressed by this Rescue?";
 
 	char * actions[] = { install_bootloader,
-#ifdef __i386__
+#if ENABLE_RESCUE_MS_BOOT
 			     restore_ms_boot,
 #endif
 			     mount_parts, go_to_console, reboot_, doc, NULL };
@@ -182,7 +186,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		if (ptr_begins_static_str(choice, install_bootloader)) {
 			binary = "/usr/bin/install_bootloader";
 		}
-#ifdef __i386__
+#if ENABLE_RESCUE_MS_BOOT
 		if (ptr_begins_static_str(choice, restore_ms_boot)) {
 			binary = "/usr/bin/restore_ms_boot";
 		}
