@@ -456,7 +456,7 @@ killall pppd
                              { label => N("Second DNS Server (optional)"), val => \$modem->{dns2} },
                             ],
                     post => sub {
-                        network::modem::ppp_configure($in, $netc, $modem);
+                        network::modem::ppp_configure($in, $modem);
                         $netc->{$_} = 'ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
                         $handle_multiple_cnx->();
                     },
