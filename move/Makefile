@@ -13,7 +13,7 @@ LANG_FILES = $(shell perl -ne 'print $$1 if /ALLOWED_LANGS = qw\((.*)\)/' move.p
 STAGE1 = ../mdk-stage1
 INSTALL = ../perl-install
 
-INSTALL_FILES = install2.pm install_steps.pm install_any.pm install_interactive.pm install_steps_gtk.pm install_steps_interactive.pm install_messages.pm install_gtk.pm help.pm
+INSTALL_FILES = install2.pm install_steps.pm install_any.pm install_interactive.pm install_steps_gtk.pm install_steps_interactive.pm install_messages.pm install_gtk.pm
 
 ARCH := $(shell arch | egrep "(x86_64|sparc64|s390x)")
 ifneq ("x$(ARCH)", "x")
@@ -46,6 +46,7 @@ install: build
 	sudo cp -f runstage2 $(DEST_LIVETREE)/usr/bin/runstage2.pl
 	sudo rm -rf $(DEST_STAGE2)
 	sudo mkdir -p $(DEST_STAGE2)
+	sudo sh -c 'echo 1 > $(DEST_STAGE2)/help.pm'
 	sudo cp -f *.pm $(DEST_STAGE2)
 	sudo cp -f $(addprefix $(INSTALL)/, $(INSTALL_FILES)) $(DEST_STAGE2)
 	sudo cp -f $(PROGRAM_FILES) $(DEST_LIVETREE)/usr/bin
