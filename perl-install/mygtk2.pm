@@ -539,11 +539,13 @@ sub _gtknew_handle_children {
                 exists $opts->{children_loose} ? map { [ 1, $_ ] } @{delete $opts->{children_loose}} :
 	        exists $opts->{children} ? group_by2(@{delete $opts->{children}}) : ();
 
+    my $padding = delete $opts->{padding};
+
     foreach (@child) {
 	my ($fill, $child) = @$_;
 	$fill eq '0' || $fill eq '1' or internal_error("odd {children} parameter must be 0 or 1 (got $fill)");
 	ref $child or $child = Gtk2::WrappedLabel->new($child);
-	$w->pack_start($child, $fill, $fill, 0);
+	$w->pack_start($child, $fill, $fill, $padding || 0);
 	$child->show;
     }
 }
