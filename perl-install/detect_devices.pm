@@ -493,7 +493,7 @@ sub getECI() {
     grep { member(sprintf("%04x%04x%04x%04x", $_->{vendor}, $_->{id}, $_->{subvendor}, $_->{subid}), @ids) } usb_probe();
 }
 
-sub getNet() { c::get_netdevices() }
+sub getNet() { grep { $_ ne 'lo' } c::get_netdevices() }
 
 #sub getISDN() {
 #    mapgrep(sub {member (($_[0] =~ /\s*(\w*):/), @netdevices), $1 }, split(/\n/, cat_("/proc/net/dev")));
