@@ -86,8 +86,9 @@ Continue at your own risk."), formatError($@) ]) if $@;
 }
 
 sub errorInStep { 
-    my ($_o, $_err) = @_;
+    my ($_o, $err) = @_;
     print "error :(\n"; 
+    print "$err\n\n";
     c::_exit(1);
 }
 sub kill_action {}

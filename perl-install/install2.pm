@@ -337,11 +337,11 @@ sub start_i810fb() {
 #-######################################################################################
 sub main {
     $SIG{SEGV} = sub { 
-	my $msg = "segmentation fault: seems like memory is missing as the install crashes"; print "$msg\n"; log::l($msg);
+	my $msg = "segmentation fault: seems like memory is missing as the install crashes"; log::l($msg);
 	$o->ask_warn('', $msg);
 	setVirtual(1);
 	require install_steps_auto_install;
-	install_steps_auto_install_non_interactive::errorInStep();
+	install_steps_auto_install_non_interactive::errorInStep($o, $msg);
     };
     $ENV{PERL_BADLANG} = 1;
     $ENV{LD_ASSUME_KERNEL} = '2.4.1';
@@ -493,8 +493,7 @@ sub main {
 		log::l("error using auto_install, continuing");
 		undef $::auto_install;
 	    } else {
-		print "Error using auto_install\n", formatError($@), "\n";
-		install_steps_auto_install_non_interactive::errorInStep();
+		install_steps_auto_install_non_interactive::errorInStep($o, "Error using auto_install\n" . formatError($@));
 	    }
 	} else {
 	    log::l("auto install config file loaded successfully");

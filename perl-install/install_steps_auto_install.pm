@@ -80,10 +80,11 @@ sub enteringStep {
 }
 
 sub rebootNeeded {
-    my ($_o) = @_;
-    print "\nWhile partitioning, the partition table re-read failed, needing a reboot\n";
-    print "This is plain wrong for an auto_install\n";
-    errorInStep();
+    my ($o) = @_;
+    errorInStep($o, <<EOF);
+While partitioning, the partition table re-read failed, needing a reboot
+This is plain wrong for an auto_install
+EOF
 }
 
 sub ask_warn {
