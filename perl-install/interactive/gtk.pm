@@ -620,16 +620,19 @@ sub ask_fromW {
 				$w->child->set_label($advanced ? $common->{advanced_label_close} : $common->{advanced_label});
 			    } ];
 
-    my @help = if_($common->{interactive_help}, 
-		   [ N("Help"), sub { 
-			 my $message = $common->{interactive_help}->() or return;
-			 $o->ask_warn(N("Help"), $message);
-		     }, 1 ]);
+    my @more_buttons = (
+			if_($common->{interactive_help}, 
+			    [ N("Help"), sub { 
+				  my $message = $common->{interactive_help}->() or return;
+				  $o->ask_warn(N("Help"), $message);
+			      }, 1 ]),
+			if_($common->{more_buttons}, @{$common->{more_buttons}}),
+		       );
     if ($::expert && @$l2) {
         $common->{advanced_state} = 1;
         $advanced_button->[0] = $common->{advanced_label_close};
     }
-    my $buttons_pack = ($common->{ok} || !exists $common->{ok}) && $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @help, if_(@$l2, $advanced_button));
+    my $buttons_pack = ($common->{ok} || !exists $common->{ok}) && $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @more_buttons, if_(@$l2, $advanced_button));
     
     my @widgets_to_pack;
     foreach my $l (\@widgets_always, if_(@widgets_advanced, [ @before_widgets_advanced, @widgets_advanced ])) {
