@@ -904,10 +904,10 @@ sub read {
 }
 
 sub write_langs {
-    my ($prefix, $langs) = @_;
+    my ($langs) = @_;
     my $s = pack_langs($langs);
-    symlink "$prefix/etc/rpm", "/etc/rpm" if $prefix;
-    substInFile { s/%_install_langs.*//; $_ .= "%_install_langs $s\n" if eof && $s } "$prefix/etc/rpm/macros";
+    symlink "$::prefix/etc/rpm", "/etc/rpm" if $::prefix;
+    substInFile { s/%_install_langs.*//; $_ .= "%_install_langs $s\n" if eof && $s } "$::prefix/etc/rpm/macros";
 }
 
 sub i18n_env {

@@ -124,7 +124,7 @@ sub selectLanguage {
     $o->charsetChanged;
 
     addToBeDone {
-	lang::write_langs($o->{prefix}, $o->{locale}{langs});
+	lang::write_langs($o->{locale}{langs});
     } 'formatPartitions';
     addToBeDone {
 	lang::write($o->{prefix}, $o->{locale});
