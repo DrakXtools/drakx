@@ -345,14 +345,14 @@ sub will_tell_kernel {
 	will_tell_kernel($hd, add => $o_part);
     } else {
 	my $part_number = sub { $o_part->{device} =~ /(\d+)$/ ? $1 : internal_error("bad device " . description($o_part)) };
-	push @{$hd->{'will_tell_kernel' . ($o_delay || '')} ||= []}, 
-	  [
-	   $action,
-	   $action eq 'force_reboot' ? () :
-	   $action eq 'add' ? ($part_number->(), $o_part->{start}, $o_part->{size}) :
-	   $action eq 'del' ? $part_number->() :
-	   internal_error("unknown action $action")
-	  ];
+
+	my @para =
+	  $action eq 'force_reboot' ? () :
+	  $action eq 'add' ? ($part_number->(), $o_part->{start}, $o_part->{size}) :
+	  $action eq 'del' ? $part_number->() :
+	  internal_error("unknown action $action");
+
+	push @{$hd->{'will_tell_kernel' . ($o_delay || '')} ||= []}, [ $action, @para ];
     }
     if (!$o_delay) {
 	foreach my $delay ('delay_del', 'delay_add') {
