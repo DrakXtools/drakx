@@ -25,8 +25,8 @@ sub read($$) {
     c::lseek_sector(fileno(F), $sector, 0) or die "reading of partition in sector $sector failed";
 
     #- check magic number
-    sysread F, $tmp, 512 or die "error reading magic number";
-    $tmp eq substr($tmp, 0, 1) x 512 or die "bad magic number";
+    sysread F, $tmp, 512 or die "error reading magic number on disk $hd->{device}";
+    $tmp eq substr($tmp, 0, 1) x 512 or die "bad magic number on disk $hd->{device}";
 
     partition_table_raw::zero_MBR($hd);
 

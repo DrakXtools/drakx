@@ -82,7 +82,7 @@ sub read($$) {
     my %info; @info{@$main_fields} = unpack $main_format, $tmp;
 
     #- check magic number
-    $info{magic}  == $magic or die "bad magic number";
+    $info{magic}  == $magic or die "bad magic number on disk $hd->{device}";
 
     #- check crc, csum contains the crc so result should be 0.
     compute_crc($tmp) == 0 or die "bad checksum";

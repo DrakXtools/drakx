@@ -114,7 +114,7 @@ sub read($$) {
     }
 
     #- check magic number
-    $info{bzSig}  == $magic or die "bad magic number";
+    $info{bzSig}  == $magic or die "bad magic number on disk $hd->{device}";
 
     my $numparts;
     c::lseek_sector(fileno(F), $sector, 516) or die "reading of partition in sector $sector failed";

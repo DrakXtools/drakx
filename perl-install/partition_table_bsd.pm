@@ -78,8 +78,8 @@ sub read($$) {
     } $info{partitions} =~ /(.{$size})/g;
 
     #- check magic number
-    $info{magic}  == $magic or die "bad magic number";
-    $info{magic2} == $magic or die "bad magic number";
+    $info{magic}  == $magic or die "bad magic number on disk $hd->{device}";
+    $info{magic2} == $magic or die "bad magic number on disk $hd->{device}";
 
     [ @pt ], \%info;
 }

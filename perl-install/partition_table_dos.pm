@@ -62,8 +62,8 @@ sub read {
     } (1..$nb_primary);
 
     #- check magic number
-    sysread F, $tmp, length $magic or die "error reading magic number";
-    $tmp eq $magic or die "bad magic number";
+    sysread F, $tmp, length $magic or die "error reading magic number on disk $hd->{device}";
+    $tmp eq $magic or die "bad magic number on disk $hd->{device}";
 
     [ @pt ];
 }
