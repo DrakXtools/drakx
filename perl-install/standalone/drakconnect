@@ -203,7 +203,8 @@ sub manage {
   
     eval(cat_('/etc/sysconfig/drakconnect'));
 
-    my %name = network::ethernet::get_eth_cards_names(network::ethernet::get_eth_cards);
+    @all_cards = network::ethernet::get_eth_cards();
+    my %name = network::ethernet::get_eth_cards_names(@all_cards);
     foreach (keys %name) {
 	$p->{/eth|ath|wlan/ ? $name{$_} : $_} = { kind => $_ };
     }
@@ -541,6 +542,12 @@ sub build_notebook {
     if ($intf->{pages}{N("Information")}) {
 	my ($info) = $gui->{description} ? 
 	  find { $_->{description} eq $gui->{description} } detect_devices::probeall : network::ethernet::mapIntfToDevice($interface_kind);
+	if (is_empty_hash_ref($info) and my @intfs = grep { $interface_kind eq $_->[0] } @all_cards) {
+         my $driver;
+         if ($#intfs == 0 and $driver = $intfs[0][1] and my @cards = grep { $_->{driver} eq $driver } detect_devices::probeall()) {
+             $info = $cards[0] if $#cards == 0;
+         }
+	}
 	
 	gtkpack($gui->{sheet}{N("Information")} = Gtk2::VBox->new(0,0),
 		gtktext_insert(Gtk2::TextView->new,
@@ -577,6 +584,7 @@ sub save {
 
     foreach (keys %$p) {
 	save_notebook($netc, $p->{$_}{intf}, $p->{$_}{gui}) or return;
+     print "will run apply()? ", $p->{$_}{intf}{save}, "\n";
 	$p->{$_}{intf}{save} ? $p->{$_}{intf}{save}->() : apply($netc, $p->{$_}{intf});
     }
 
@@ -696,6 +704,7 @@ sub update_list() {
 
 sub apply {
     my ($netc, $intf) = @_;
+    print "GOTCHA\n";
     my $dyn = $intf->{BOOTPROTO} ne 'static';
     my $lintf = $intf;
     $dyn and $lintf->{$_} = undef foreach qw(NETMASK NETWORK IPADDR);
