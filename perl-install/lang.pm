@@ -189,7 +189,7 @@ sub load_po($) {
     $s .= "package po::I18N;\n";
     $s .= "\%$lang = (";
 
-    $lang = substr($lang, 0, 2);
+#-  $lang = substr($lang, 0, 2);
     my $f; -e ($f = "$_/po/$lang.po") and last foreach @INC;
     unless (-e $f) {
 	-e ($f = "$_") and last foreach @INC;
