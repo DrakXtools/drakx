@@ -301,10 +301,14 @@ sub set {
     }
 }
 
+sub langs {
+    my ($l) = @_;
+    grep { $l->{$_} } keys %$l;
+}
+
 sub pack_langs { 
     my ($l) = @_; 
-    member('all', @$l) ? 'all' :
-      join ':', uniq(map { $languages{$_}[3] } @$l);
+    $l->{all} ? 'all' : join ':', uniq(map { $languages{$_}[3] } langs($l));
 }
 
 sub write_langs {
