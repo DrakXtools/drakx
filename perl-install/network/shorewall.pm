@@ -6,6 +6,7 @@ package network::shorewall; # $Id$
 use detect_devices;
 use network::netconnect;
 use network::ethernet;
+use network::network;
 use run_program;
 use common;
 use log;
@@ -82,7 +83,6 @@ Examples:
       [ { label => N("Net Device"), val => \$card_netconnect, list => [ sort keys %net_devices ], format => sub { $net_devices{$_[0]} || $_[0] }, not_edit => 0 } ]);
 
 	$conf{net_interface} = $card_netconnect;
-	#$conf{net_interface} = network::netconnect::get_net_device() || $l[0];
 	$conf{loc_interface} = [  grep { $_ ne $conf{net_interface} } @l ];
      \%conf;
 }
@@ -110,6 +110,7 @@ sub read {
 sub write {
     my ($conf) = @_;
     my $connect_file = "/etc/sysconfig/network-scripts/net_cnx_up";
+	my $squid_port = network::network::read_squid_conf()->{http_port}[0];
 
     my %ports_by_proto;
     foreach (split ' ', $conf->{ports}) {
@@ -138,13 +139,14 @@ sub write {
 			map_each { [ 'ACCEPT', $_, 'fw', $::a, join(',', @$::b), '-' ] } %ports_by_proto 
 		    } ('net', if_($conf->{loc_interface}[0], 'loc'))),
 		   );
+		   if (cat_("/etc/shorewall/rules") !~ /^\s*REDIRECT\s*loc\s*$squid_port\s+(\S+)/mg && $squid_port && -f "/var/run/squid.pid") {
+	substInFile {
+		s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tloc\t$squid_port\ttcp\twww\t-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
+	} "/etc/shorewall/rules"
+};
     set_config_file('masq', 
 		    $conf->{masquerade} ? [ $conf->{net_interface}, $conf->{masquerade}{subnet} ] : (),
 		   );
-#		   system('uniq /etc/shorewall/masq > /etc/shorewall/masq.uniq');
-#		   system('uniq /etc/shorewall/interfaces > /etc/shorewall/interfaces.uniq');
-#		   rename("/etc/shorewall/masq.uniq", "/etc/shorewall/masq");
-#		   rename("/etc/shorewall/interfaces.uniq", "/etc/shorewall/interfaces");
 		   
     if ($conf->{disabled}) {
 	run_program::rooted($::prefix, 'chkconfig', '--del', 'shorewall');
