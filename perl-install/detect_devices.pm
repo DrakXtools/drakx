@@ -83,10 +83,11 @@ sub zips__faking_ide_scsi {
 sub floppies() {
     require modules;
     eval { modules::load("floppy") };
-    my @fds = map {
+    my @fds = $@ ? () : map {
 	my $info = (!dev_is_devfs() || -e "/dev/fd$_") && c::floppy_info(devices::make("fd$_"));
 	if_($info && $info ne '(null)', { device => "fd$_", devfs_device => "floppy/$_", media_type => 'fd', info => $info })
     } qw(0 1);
+
     my @ide = ls120s() and eval { modules::load("ide-floppy") };
 
     eval { modules::load("usb-storage") } if usbStorage();
