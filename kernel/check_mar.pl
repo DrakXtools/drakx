@@ -26,5 +26,5 @@ foreach (keys %sanity_check) {
     my @l = map { /(\S+)\.o/ } `$mar -l $marfile`;
     my @pbs = difference2($sanity_check{$_}, \@l);
 
-    @pbs and die "ERROR: sanity check should prove that " . join(" ", @pbs) . "be part of $marfile\n";
+    @pbs and die "ERROR: sanity check should prove that " . join(" ", @pbs) . " be part of $marfile\n";
 }
