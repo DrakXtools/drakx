@@ -316,6 +316,7 @@ sub select_packages {
     pkgs::read_rpmsrate($o->{packages}, install_any::getFile("Mandrake/base/rpmsrate") || die "unable to read rpmsrate");
     ($o->{compssUsers}, $o->{compssUsersSorted}, $o->{compssUsersIcons}, $o->{compssUsersDescr}) = 
       pkgs::readCompssUsers($o->{packages}, $o->{meta_class});
+    eval { install_any::getFile("XXX") }; #- close out any still opened filehandle..
 
     $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
     $o->{compssUsersChoice}{SYSTEM} = 1;
