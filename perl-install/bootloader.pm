@@ -1044,6 +1044,9 @@ sub write_lilo {
 
     #- normalize: RESTRICTED is only valid if PASSWORD is set
     delete $bootloader->{restricted} if !$bootloader->{password};
+    foreach my $entry (@{$bootloader->{entries}}) {
+	delete $entry->{restricted} if !$entry->{password} && !$bootloader->{password};
+    }
 
     if (!get_label($bootloader->{default}, $bootloader)) {
 	log::l("default bootloader entry $bootloader->{default} is invalid, choose another one");
@@ -1097,6 +1100,9 @@ sub write_lilo {
 		push @entry_conf, map_each { "map-drive=$::a", "   to=$::b" } %{$entry->{mapdrive}};
 	    }
 	}
+	push @entry_conf, "password=$entry->{password}" if $entry->{password};
+	push @entry_conf, "restricted" if $entry->{restricted};
+
 	push @conf, map { "\t$_" } @entry_conf;
     }
     my $f = arch() =~ /ia64/ ? "$::prefix/boot/efi/elilo.conf" : "$::prefix/etc/lilo.conf";
