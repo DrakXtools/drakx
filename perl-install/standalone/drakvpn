@@ -504,7 +504,7 @@ Choose continue when you are done to write the data.\n", $ipsec_conf),
 		  ]
 ) or goto step_configure_ipsec_conf;
 	
-	$existing_section = network::ipsec::already_existing_section_ipsec_conf($normal_conn->{1}[0]." ".$normal_conn->{1}[1], $ipsec, $kernel_version);
+	$existing_section = network::ipsec::already_existing_section_ipsec_conf($normal_conn->{1}[0] . " " . $normal_conn->{1}[1], $ipsec, $kernel_version);
 
 	if ($existing_section eq "already existing") {
 $in->ask_okcancel(N("Exists !"), 
