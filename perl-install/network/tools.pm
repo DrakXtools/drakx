@@ -194,7 +194,6 @@ sub reread_net_conf {
     network::netconnect::read_net_conf('', $netcnx, $netc);
     modules::load_category('net');
     network::netconnect::load_conf($netcnx, $netc, $intf);
-    network::network::probe_netcnx_type('', $netc, $intf, $netcnx);
 }
 
 sub convert_wep_key_for_iwconfig {
