@@ -321,6 +321,7 @@ sub setPackages {
 
 	#- preselect default_packages and compssUsersChoices.
 	setDefaultPackages($o);
+	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
     } else {
 	#- this has to be done to make sure necessary files for urpmi are
 	#- present.
