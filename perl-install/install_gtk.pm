@@ -145,23 +145,28 @@ sub create_steps_window {
     $o->{steps_window} and $o->{steps_window}->destroy;
 
     $steps{$_} ||= gtknew('Pixbuf', file => "steps_$_") foreach qw(on off);
-    my $category = sub { gtknew('Label', text => $_[0], widget_name => 'Step-categories') };
+    my $category = sub { 
+	gtknew('HBox', children_tight => [ 
+	    gtknew('Label', text => $_[0], widget_name => 'Step-categories')
+	]);
+    };
 
-    my @l = ($category->(N("System installation")), '');
+    my @l = $category->(N("System installation"));
     foreach (grep { !eval $o->{steps}{$_}{hidden} } @{$o->{orderedSteps}}) {
 	if ($_ eq 'setRootPassword') {
-	    push @l, '', '', $category->(N("System configuration")), '';
+	    push @l, '', $category->(N("System configuration"));
 	}
 	my $img = gtknew('Image', file => 'steps_off.png');
 	$steps{steps}{$_}{img} = $img;
-	push @l, gtknew('HBox', spacing => 7, children_tight => [ $img, translate($o->{steps}{$_}{text}) ]);					      
+	push @l, gtknew('HBox', spacing => 7, children_tight => [ '', '', $img, translate($o->{steps}{$_}{text}) ]);					      
     }
 
     my $w = bless {}, 'ugtk2';
+    my $offset = 20;
     $w->{rwindow} = $w->{window} = 
       gtknew('Window', width => $::stepswidth, widget_name => 'Steps', title => 'skip',
-	     position => [ lang::text_direction_rtl() ? ($::rootwidth - $::stepswidth - 8) : 8, 150 ],
-	     child => gtknew('VBox', spacing => 3, children_tight => \@l));
+	     position => [ lang::text_direction_rtl() ? ($::rootwidth - $::stepswidth - $offset) : $offset, 150 ],
+	     child => gtknew('VBox', spacing => 6, children_tight => \@l));
     $w->show;
     $o->{steps_window} = $w;
 }
