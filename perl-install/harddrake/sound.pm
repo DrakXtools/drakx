@@ -44,6 +44,7 @@ our %alsa2oss =
      "snd-audigyls" => [ "unknown" ],
      "snd-azt2320" => [ "unknown" ], # isa
      "snd-azt3328" => [ "unknown" ], # isa
+     "snd-azx"     => [ "unknown" ],
      "snd-bt87x"   => [ "btaudio" ],
      "snd-cmi8330" => [ "sb" ], # isa
      "snd-cmipci"  => [ "cmpci" ],
