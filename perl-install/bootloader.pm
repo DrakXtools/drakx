@@ -704,7 +704,7 @@ sub write_lilo_conf {
     }
 
 
-    my %bios2dev = map_index { $::i => $_ } dev2bios($hds, $lilo->{boot});
+    my %bios2dev = map_index { $::i => $_ } dev2bios($hds, $lilo->{first_hd_device} || $lilo->{boot});
     my %dev2bios = reverse %bios2dev;
 
     if (is_empty_hash_ref($lilo->{bios} ||= {})) {
@@ -753,7 +753,7 @@ sub write_lilo_conf {
 	print F "ignore-table" if grep { $_->{unsafe} && $_->{table} } @{$lilo->{entries}};
 
 	while (my ($dev, $bios) = each %{$lilo->{bios}}) {
-	    print F "\tdisk=$dev bios=$bios";
+	    print F "disk=$dev bios=$bios";
 	}
 
 	foreach (@{$lilo->{entries}}) {
@@ -833,7 +833,7 @@ sub write_grub_config {
     my ($prefix, $lilo, $fstab, $hds) = @_;
     my %dev2bios = (
       (map_index { $_ => "fd$::i" } detect_devices::floppies_dev()),
-      (map_index { $_ => "hd$::i" } dev2bios($hds, $lilo->{boot})),
+      (map_index { $_ => "hd$::i" } dev2bios($hds, $lilo->{first_hd_device} || $lilo->{boot})),
     );
 
     {
@@ -887,7 +887,7 @@ sub write_grub_config {
 		if ($_->{kernel_or_dev} !~ /fd/) {
 		    #- boot off the second drive, so reverse the BIOS maps
 		    $_->{mapdrive} ||= { '0x80' => '0x81', '0x81' => '0x80' } 
-		      if $_->{table} && $lilo->{boot} !~ /$_->{table}/;
+		      if $_->{table} && ($lilo->{first_hd_device} || $lilo->{boot}) !~ /$_->{table}/;
 	    
 		    map_each { print F "map ($::b) ($::a)" } %{$_->{mapdrive} || {}};
 
@@ -899,7 +899,7 @@ sub write_grub_config {
     }
     my $hd = fsedit::get_root($fstab, 'boot')->{rootDevice};
 
-    my $dev = dev2grub($lilo->{boot}, \%dev2bios);
+    my $dev = dev2grub($lilo->{first_hd_device} || $lilo->{boot}, \%dev2bios);
     my ($s1, $s2, $m) = map { $file2grub->("/boot/grub/$_") } qw(stage1 stage2 menu.lst);
     my $f = "/boot/grub/install.sh";
     output "$prefix$f",
