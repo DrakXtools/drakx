@@ -704,6 +704,12 @@ sub addUser {
     my ($o) = @_;
     my $users = $o->{users} ||= [];
 
+    if ($::prefix) {
+	#- getpwnam, getgrnam, getgrid works
+	symlinkf("$::prefix/etc/passwd", '/etc/passwd');
+	symlinkf("$::prefix/etc/group", '/etc/group');
+    }
+
     my (%uids, %gids); 
     foreach (glob_("$::prefix/home")) { my ($u, $g) = (stat($_))[4,5]; $uids{$u} = 1; $gids{$g} = 1 }
 
