@@ -77,9 +77,6 @@
 #
 # PBS :
 #		selection des sources a inclure dans le backup cd. 
-#
-#
-# WARNING:      do not overwrite /etc/passwd fstab group
 #               
 # TODO:
 #		1 - print ftp problem for user. 
@@ -125,13 +122,13 @@ use Time::localtime;
 my $in = 'interactive'->vnew('', 'default');
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 
-
 if ("@ARGV" =~ /--help|-h/) {
     print q(Backup and Restore application
 
 --default             : save default directories.
 --debug		      : permit to see all debug messages.
 --show-conf           : list of files or directories to backup.
+--daemon              : use daemon configuration. 
 --help                : show this message.
 --version             : show version name.
 );
@@ -142,7 +139,6 @@ if ("@ARGV" =~ /--version/) {
     print "DrakBakckup Beta Version 0.1.\n";
     exit(0);
 }
-
 
 # Backend Options.      
 my $central_widget;
@@ -195,7 +191,7 @@ my @user_list_backuped = ();
 my @files_corrupted = ();
 my $remove_user_before_restore = 1;
 my @file_list_to_send_by_ftp = ();
-
+my $results;
 
 # config. FILES -> Default PATH  & Global variables.
 my @sys_files = ("/etc");
@@ -215,7 +211,9 @@ my $cdrw = 0;
 my $net_proto= '';
 my $host_path = '';
 my $login_user = '';
-my $net_daemon = 0;
+my $daemon = 0;
+my $ssh_daemon = 0;
+my $ftp_daemon = 0;
 my $hd_daemon = 0;
 my $cd_daemon = 0;
 my $hd_quota = 0;
@@ -242,6 +240,7 @@ my $user_mail;
 
 foreach (@ARGV) {
     /--default/ and backend_mode();
+    /--daemon/ and daemon_mode();
     /--show-conf/ and show_conf();
     /--debug/ and $DEBUG = 1, next;
 }
@@ -253,6 +252,12 @@ sub show_conf {
 }
 
 sub backend_mode {
+    build_backup_files();
+    exit(0);
+}
+
+sub daemon_mode {
+    $daemon = 1;
     build_backup_files();
     exit(0);
 }
@@ -281,8 +286,6 @@ sub all_user_list {
 	print "\n";
     }
 }
-
-
 
 sub the_time {
     $the_time = "_";
@@ -331,7 +334,8 @@ sub save_conf_file {
     if ($auth_choice == 1) { push @cfg_list, "AUTH_CHOICE=1\n" ;}
     if ($auth_choice == 2) { push @cfg_list, "AUTH_CHOICE=2\n" ;}
     $cd_with_install_boot and push @cfg_list, "CD_WITH_INSTALL_BOOT\n" ;
-    $net_daemon and push @cfg_list, "NET_DAEMON\n" ;
+    $ssh_daemon and push @cfg_list, "SSH_DAEMON\n" ;
+    $ftp_daemon and push @cfg_list, "FTP_DAEMON\n" ;
     $hd_daemon and push @cfg_list, "HD_DAEMON\n" ;
     $cd_daemon and push @cfg_list, "CD_DAEMON\n" ;
     $hd_quota and  push @cfg_list, "HD_QUOTA\n" ;
@@ -357,7 +361,7 @@ sub read_cron_files {
 }
 
 sub save_cron_files {
-    my @cron_file = ("#!/bin/sh\n", "\n", "/usr/sbin/drakbackup --default" );
+    my @cron_file = ("#!/bin/sh\n", "\n", "/usr/sbin/drakbackup --daemon" );
 
     if ($backup_daemon) {
 	foreach ('hourly', 'daily', 'weekly', 'monthly'){
@@ -404,7 +408,8 @@ sub read_conf_file {
 	    if (/^CDRW/)           { $cdrw = 1; }
 	    if (/^NET_PROTO/)      { s/^NET_PROTO=//gi; $net_proto = $_; }
 	    if (/^HOST_PATH/)      { s/^HOST_PATH=//gi; $host_path = $_; } 
-	    if (/^NET_DAEMON/)	   { $net_daemon = 1; }
+	    if (/^SSH_DAEMON/)	   { $ssh_daemon = 1; }
+	    if (/^FTP_DAEMON/)	   { $ftp_daemon = 1; }
 	    if (/^HD_DAEMON/)	   { $hd_daemon = 1; }
 	    if (/^CD_DAEMON/)	   { $cd_daemon = 1; }
 	    if (/^HD_QUOTA/)       { $hd_quota = 1;  }
@@ -439,6 +444,15 @@ sub read_conf_file {
     else { $cfg_file_exist = 0; }
     close CONF_FILE;    
 }
+
+sub complete_results {
+    system_state();
+    $daemon or $results .= _("\n********************* DrakBackup Report *********************\n\n");
+    $daemon and $results .= _("\n**************** DrakBackup Daemon Report ********************\n\n");
+    $results .= $system_state;
+    $results .= _("\n\n****************** DrakBackup Report Details ****************\n\n");
+}
+
 
 sub ftp_client {
     use Net::FTP; 
@@ -481,10 +495,11 @@ sub build_backup_files {
     my @list_other_;
     my @dir_content = ();
     my $file_date;
-    my $results;
+    $results = "";
 
     read_conf_file();
     the_time();    
+    $send_mail and complete_results();
     -d  $save_path or mkdir_p($save_path);
     if ($comp_mode) { 
 	$DEBUG and $tar_cmd = "tar cv --use-compress-program /usr/bin/bzip2 ";
@@ -505,14 +520,14 @@ sub build_backup_files {
     -d $save_path and @dir_content = all($save_path);
     grep (/^backup\_base\_sys/, @dir_content) and $base_sys_exist = 1;
 
-    if ($where_hd) {
+    if (($where_hd && !$daemon) || ($daemon && $hd_daemon)) {
 	$interactive and progress($pbar, 0.5, _("Backup system files..."));
 	if ($backup_sys) { 
 	    if ($backup_sys_versions) {
  		if (grep /^backup\_incr\_sys/, @dir_content) { 
 		    my @more_recent = grep /^backup\_incr\_sys/, sort @dir_content; 
 		    $more_recent = pop @more_recent;
-		    $DEBUG and print "more recent file: $more_recent\n ";
+		    $DEBUG and print "more recent file: $more_recent\n";
  system("find @sys_files -cnewer $save_path/$more_recent \! -type d -print > $save_path/list_incr_sys$the_time.txt");
 		    if (!cat_("$save_path/list_incr_sys$the_time.txt")) {
 			system("rm $save_path/list_incr_sys$the_time.txt");
@@ -527,7 +542,7 @@ sub build_backup_files {
   		elsif (grep /^backup\_base\_sys/,  @dir_content) { 
 		    my @more_recent = grep /^backup\_base\_sys/, sort @dir_content; 
 		    $more_recent = pop @more_recent;
-		    $DEBUG and print "more recent file: $more_recent\n ";
+		    $DEBUG and print "more recent file: $more_recent\n";
   system("find @sys_files -cnewer $save_path/$more_recent \! -type d -print > $save_path/list_incr_sys$the_time.txt");
 		    if (!cat_("$save_path/list_incr_sys$the_time.txt")) {
 			system("rm $save_path/list_incr_sys$the_time.txt");
@@ -576,7 +591,7 @@ sub build_backup_files {
 		    if (grep(/^backup\_incr\_user\_$user\_/, @dir_content)) { 
 			my @more_recent = grep /^backup\_incr\_user\_$user\_/, sort @dir_content; 
 			$more_recent = pop @more_recent;
-			$DEBUG and print "more recent file: $more_recent\n ";
+			$DEBUG and print "more recent file: $more_recent\n";
  system("find $path_name -cnewer $save_path/$more_recent \! -type d -print > $save_path/list_incr_user_$user$the_time.txt");
 			if (!cat_("$save_path/list_incr_user_$user$the_time.txt")) {
 			    system("rm $save_path/list_incr_user_$user$the_time.txt");
@@ -591,7 +606,7 @@ sub build_backup_files {
 		    elsif (grep /^backup\_base\_user\_$user\_/, @dir_content) { 
 			my @more_recent = grep /^backup\_base\_user\_$user\_/, sort @dir_content; 
 			$more_recent = pop @more_recent;			
-			$DEBUG and print "more recent file: $more_recent\n ";
+			$DEBUG and print "more recent file: $more_recent\n";
  system("find $path_name -cnewer $save_path/$more_recent \! -type d -print > $save_path/list_incr_user_$user$the_time.txt");
 			if (!cat_("$save_path/list_incr_user_$user$the_time.txt")) {
 			    system("rm $save_path/list_incr_user_$user$the_time.txt");
@@ -620,13 +635,14 @@ sub build_backup_files {
 	$interactive and progress($pbar3, 0.4, _("Hard Disk Backup files..."));
     }
 
-    if ($where_net_ssh) {
-	ssh_client();
+    if (($where_net_ssh && !$daemon) || ($daemon && $ssh_daemon)) {
+	#ssh_client();
     }
-    if ($where_net_ftp) {
+    if (($where_net_ftp && !$daemon) || ($daemon && $ftp_daemon)) {
+#	$results .= _("file list send by FTP : $_\n ")  foreach @file_list_to_send_by_ftp;
 	ftp_client();
     }
-    if ($where_cd) { 
+    if (($where_cd && !$daemon) || ($daemon && $cd_daemon)) {
     }
     output_p( $save_path . "/results/results$the_time", $results);    
     $send_mail and send_mail("/results/results$the_time");
@@ -1238,7 +1254,8 @@ sub advanced_when{
     my $box_when;
     my $check_where_cd_daemon;
     my $check_where_hd_daemon;
-    my $check_where_net_daemon;
+    my $check_where_ssh_daemon;
+    my $check_where_ftp_daemon;
     my ($pix_time_map, $pix_time_mask) = gtkcreate_png("ic82-when-40");
     my $combo_when_space = new Gtk::Combo();
     $combo_when_space->set_popdown_strings (_("hourly"),_("daily"),_("weekly"),_("monthly"));    
@@ -1264,14 +1281,18 @@ sub advanced_when{
 		   0, gtkpack_(new Gtk::VBox(0,10),
 	   0, gtkset_sensitive($check_where_cd_daemon = new Gtk::CheckButton(_(" Use CD/DVDROM with daemon")), $backup_daemon),
 	   0, gtkset_sensitive($check_where_hd_daemon = new Gtk::CheckButton( _(" Use Hard Drive with daemon")), $backup_daemon),
-	   0, gtkset_sensitive($check_where_net_daemon = new Gtk::CheckButton( _(" Use Network with daemon")), $backup_daemon),
+	   0, gtkset_sensitive($check_where_ssh_daemon = new Gtk::CheckButton( _(" Use SSH with daemon")), $backup_daemon),
+	   0, gtkset_sensitive($check_where_ftp_daemon = new Gtk::CheckButton( _(" Use FTP with daemon")), $backup_daemon),
 			       ),
 		      ),
 	  0, new Gtk::HSeparator,
 	  1, gtkset_sensitive(new Gtk::Label(_("Please be careful that cron deamon is include on your services. ")),  $backup_daemon),
 	  ),
 	    );
-    foreach ([$check_where_cd_daemon, \$cd_daemon], [$check_where_hd_daemon, \$hd_daemon], [$check_where_net_daemon, \$net_daemon]) {
+    foreach ([$check_where_cd_daemon, \$cd_daemon], 
+	     [$check_where_hd_daemon, \$hd_daemon], 
+	     [$check_where_ssh_daemon, \$ssh_daemon], 
+	     [$check_where_ftp_daemon, \$ftp_daemon]) {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
 	}
@@ -1588,11 +1609,17 @@ sub system_state {
         $backup_user and $system_state .= "\t\t$_\n" foreach @user_list;
         @list_other and $system_state .= _("\n- Other Files:\n"); 
         @list_other and $system_state .= "\t\t$_\n" foreach @list_other;
-        $system_state .= _("\n- Path to save backups: %s\n", $save_path);
+        $where_hd and $system_state .= _("\n- Save on Hard drive on path : %s\n", $save_path);
+	$where_net_ftp and $system_state .= _("\n- Save on FTP on host : %s\n", $host_name);
 	$system_state .= _("\n- Options:\n");
 	$backup_sys or $system_state .= _("\tDo not include System Files\n");
 	if ($comp_mode) { $system_state .= _("\tBackups use tar and bzip2\n "); }
 	else { $system_state .= _("\tBackups use tar and gzip\n"); }   
+	$system_state .= _("\n- Daemon include :\n");
+	$hd_daemon and $system_state .= _("\t-Hard drive.\n");    
+	$cd_daemon and $system_state .= _("\t-CDROM.\n");    
+	$ftp_daemon and $system_state .= _("\t-Network by FTP.\n");    
+	$ssh_daemon and $system_state .= _("\t-Network by SSH.\n");    
     }
     else {$system_state = _("No configuration please click Wizard or Advanced.\n")}
 }
@@ -1760,7 +1787,6 @@ sub return_path {
     close (PASSWD);
     return $home_dir;
 }
-
 
 sub restore_backend {
     my $untar_cmd;
@@ -2330,7 +2356,6 @@ sub button_box_restore_end {
 	    );
 }
 
-
 sub button_box_build_backup_end {
     $button_box_tmp->destroy();
 
@@ -2360,7 +2385,6 @@ sub button_box_restore_pbs_end {
 				       ),
 	    );
 }
-
 
 sub button_box_build_backup {
     $button_box_tmp->destroy();
@@ -3157,8 +3181,6 @@ your original directory, and you will loose all your
 data. so please be carreful and do not modify the backup
 data files by hand.
 
-
-
 ")); }  
     else { gtktext_insert($text,
 _(" Copyright (C) 2001 MandrakeSoft by DUPONT Sebastien <dupont_s\@epita.fr>
@@ -3213,7 +3235,6 @@ Restore Step:
   backup files are not corrupted. But it is recommended 
   to build a last backup before to do it.
  
-
 "));}
 
     gtkpack($advanced_box,
