@@ -131,7 +131,7 @@ sub analyze_wild_device_name {
 
     if ($dev =~ m!^/u?dev/(.*)!) {
 	'dev', $dev;
-    } elsif ($dev !~ m!^/! && -e "$::prefix/dev/$dev") {
+    } elsif ($dev !~ m!^/! && (-e "/dev/$dev" || -e "$::prefix/dev/$dev")) {
 	'dev', "/dev/$dev";
     } elsif ($dev =~ /^LABEL=(.*)/) {
 	'label', $1;
@@ -206,6 +206,9 @@ sub part2wild_device_name {
 		$kind ? $kind ne 'dev' : $part->{device} =~ m!^/!;
 	    };
 	if ($faked_device) {
+	    $part->{device};
+	} elsif ($part->{device} =~ m!^/dev/!) {
+	    log::l("ERROR: i have a full device $part->{device}, this should not happen. use subpart_from_wild_device_name() instead of creating bad part data-structures!");
 	    $part->{device};
 	} else {
 	    my $dev = "/dev/$part->{device}";
@@ -478,8 +481,6 @@ sub mount {
 
     -d $where or mkdir_p($where);
 
-    $dev = part2wild_device_name('', { device => $dev });
-
     $fs or log::l("not mounting $dev partition"), return;
 
     my @fs_modules = qw(vfat hfs romfs ufs reiserfs xfs jfs ext3);
@@ -597,7 +598,7 @@ sub mount_part {
 	    } elsif (loopback::carryRootLoopback($part)) {
 		$mntpoint = "/initrd/loopfs";
 	    }
-	    my $dev = $part->{real_device} || $part->{device};
+	    my $dev = devices::make($part->{real_device} || $part->{device});
 	    mount($dev, $mntpoint, $part->{fs_type}, $b_rdonly, $part->{options}, $o_wait_message);
 	    rmdir "$mntpoint/lost+found";
 	}
@@ -649,7 +650,7 @@ sub df {
 	return; #- will not even try!
     } else {
 	mkdir_p($dir);
-	eval { mount($part->{device}, $dir, $part->{fs_type}, 'readonly') };
+	eval { mount(devices::make($part->{device}), $dir, $part->{fs_type}, 'readonly') };
 	if ($@) {
 	    set_isFormatted($part, 0);
 	    unlink $dir;

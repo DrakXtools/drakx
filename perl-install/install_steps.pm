@@ -622,7 +622,7 @@ sub updateModulesFromFloppy {
     my ($o) = @_;
     return if $::testing;
 
-    fs::mount($o->{updatemodules}, "/floppy", "ext2", 0);
+    fs::mount(devices::make($o->{updatemodules}), "/floppy", "ext2", 0);
     foreach my $kernel_version (all("$::prefix/lib/modules")) {
 	log::l("examining updated modules for kernel $kernel_version");
 	-d "/floppy/$kernel_version" or next;
