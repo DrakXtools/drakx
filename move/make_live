@@ -154,7 +154,5 @@ if (!-e "$::prefix/usr/share/speedtouch/mgmt.o") {
 
 #- CD-based applications
 substInFile {
-    foreach qw(kaudiocreator kscd) {
-        s|.*command="$_".*||;
-    }
+    s|.*command="$_".*|| foreach qw(kaudiocreator kscd);
 } "$::prefix/usr/lib/menu/simplified/mandrake_desk";
