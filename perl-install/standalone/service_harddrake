@@ -39,6 +39,8 @@ if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
     }
 }
 
+my $is_globetrotter = -f '/usr/sbin/mdkmove';
+
 # first run ? if not read old hw config
 my $previous_config = -f $last_boot_config && -s $last_boot_config ? Storable::retrieve($last_boot_config) : {};
 $previous_config = $$previous_config if ref($previous_config) !~ /HASH/;
@@ -60,7 +62,7 @@ foreach my $hw_class (@harddrake::data::tree) {
         $id => $i;
     } eval { &$detector };
     $config{$Ident} = \%ID;
-    next if is_empty_hash_ref $previous_config; # don't fsck on first run
+    next if !$is_globetrotter && is_empty_hash_ref $previous_config; # don't fsck on first run
 
     my $oldconfig = $previous_config->{$Ident};
 
@@ -110,6 +112,7 @@ foreach my $hw_class (@harddrake::data::tree) {
         undef @configurator_pool;
     }
 
+    next if $is_globetrotter && $configurator_pool[0] !~ /drakupdate_fstab/;
     next unless -x first(split /\s+/, $configurator_pool[0]);
     my ($pid, $no, $res);
     if (!$hw_class->{automatic}) {
