@@ -233,7 +233,7 @@ mru 1492
 mtu 1492),
                    plugin => {
                               capi => qq(capiplugin.so
-protocol adslpppoe)
+avmadsl)
                              },
                   },
                  );
