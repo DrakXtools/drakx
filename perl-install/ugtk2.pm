@@ -304,22 +304,6 @@ sub create_box_with_title {
 	return $box;
     }
     $o->{box_size} = n_line_size($nbline, 'text', $box);
-    #- hugly hack because GtkLabel doesn't wrap when using languages that don't contain spaces
-    if (@_ <= 2 && ($nbline > 4 || ($nbline > 1 && ref($::o) && member($::o->{locale}{lang}, qw(ja zh_CN zh_TW))))) {
-	$o->{icon} && !$::isWizard and 
-	  eval { gtkpack__($box, gtkset_border_width(gtkpack_(Gtk2::HBox->new(0,0), 1, gtkcreate_img($o->{icon})),5)) };
-	my $wanted = $o->{box_size};
-	$o->{box_size} = min(200, $o->{box_size});
-	my $has_scroll = $o->{box_size} < $wanted;
-
-	my $wtext = Gtk2::TextView->new;
-	$wtext->set_left_margin(3);
-	$wtext->can_focus($has_scroll);
-	chomp(my $text = join("\n", @_));
-	my $scroll = create_scrolled_window(gtktext_insert($wtext, $text));
-	$scroll->set_size_request(400, $o->{box_size});
-	gtkpack($box, $scroll);
-    } else {
 	my $a = !$::no_separator;
 	undef $::no_separator;
 	if ($o->{icon} && (!$::isWizard || $::isInstall)) {
@@ -353,7 +337,6 @@ sub create_box_with_title {
 		      if_($a, Gtk2::HSeparator->new)
 		     )
 	}
-    }
 }
 
 sub _create_dialog {
@@ -798,7 +781,7 @@ sub new {
     $o->_create_window($title);
     while (my $e = shift @tempory::objects) { $e->destroy }
     push @interactive::objects, $o if !$opts{no_interactive_objects};
-    $o->{rwindow}->set_position('center-always') if $::isStandalone;
+#    $o->{rwindow}->set_position('center-always') if $::isStandalone;
     $o->{rwindow}->set_modal(1) if ($grab || $o->{grab} || $o->{modal}) && !$::isInstall;
     $o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient};
 
