@@ -59,15 +59,15 @@ Xconfig::getinfo($i);
 Xconfig::getinfoFromXF86Config($i); #- take default from here at least.
 
 my $allowNVIDIA_rpms;
-eval {
-    my (%list, %select);
-    local *F;
-    open F, "grep NVIDIA /var/lib/urpmi/depslist.ordered |";
-    while (<F>) {
-	/(.*)-([^-]*)-([^-]*)\s+/ and $list{$1} = 1;
-    }
-    close F;
-    if ($list{NVIDIA_GLX}) {
+my (%list, %select);
+local *F;
+open F, "/var/lib/urpmi/depslist.ordered";
+while (<F>) {
+    /(.*NVIDIA.*)-([^-]*)-([^-]*)\s+/ and $list{$1} = 1;
+}
+close F;
+if ($list{NVIDIA_GLX}) {
+    eval {
 	my ($version, $release, $ext) = `uname -r` =~ /([^-]*)-([^-]*mdk)(\S*)/;
 	$ext and $ext = "-$ext";
 	$list{"NVIDIA_kernel-$version-$release$ext"} or die "no NVIDIA kernel for current kernel";
@@ -78,8 +78,17 @@ eval {
 	}
 	$allowNVIDIA_rpms = [ keys(%select), "NVIDIA_GLX" ];
     }
-};
+}
+if (!$allowNVIDIA_rpms) {
+    my ($uname_r) = `uname -r` =~ /(\S+)/;
+    $allowNVIDIA_rpms = ((-e "/lib/modules/$uname_r/kernel/drivers/char/NVdriver.o.gz" ||
+			  -e "/lib/modules/$uname_r/kernel/drivers/char/NVdriver.o") &&
+			 -e "/usr/X11R6/lib/modules/drivers/nvidia_drv.o" &&
+			 -e "/usr/X11R6/lib/modules/extensions/libglx.so") && []; #- empty list but true.
+}
 
+$allowNVIDIA_rpms and print STDERR "using NVIDIA\n";
+$allowNVIDIA_rpms or print STDERR "NOT using NVIDIA\n";
 $::isEmbedded and kill USR2, $::CCPID;
 Xconfigurator::main('', $i, $in, $in->do_pkgs, 
 		    { allowFB          => $::expert,
