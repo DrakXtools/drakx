@@ -10,6 +10,9 @@ my $corporate = $ENV{CORPORATE} && " corporate"; #- use this for building a corp
 
 ($img, $type) = @ARGV;
 
+$default_append = "ramdisk_size=32000 root=/dev/ram3";
+$default_vga = "vga=788";
+
 $instdir = "mdk-stage1";
 $mnt = "/tmp/drakx_mnt";
 $mke2fs = "/sbin/mke2fs -q -m 0 -F -s 1";
@@ -118,12 +121,37 @@ sub initrd {
 #    _ "rm -f $tmp";
 }
 
+sub entries_append {
+    my ($type) = @_;
+
+    my $automatic = "";
+    $automatic = "automatic=method:cdrom" if ($type eq "cdrom");
+    $automatic = "automatic=method:disk" if ($type eq "hd");
+
+    my @simple_entries = (
+	linux => "$default_vga",
+	vgalo => "vga=785",
+	vgahi => "vga=791",
+	vga16 => "vga16",
+	text => "text",
+	patch => "patch $default_vga",
+	expert => "expert $default_vga",
+	rescue => "rescue rw",
+    );
+    my @entries = (
+        (map { $_->[0] => "$automatic $_->[1]" } group_by2(@simple_entries)),
+	if_(member($type, "cdrom", "all"), oem => "automatic=method:cdrom rescue oem rw"),
+        if_($type eq "all", all => "pcmcia $default_vga"),
+    );
+
+    map { [ $_->[0], "$default_append $_->[1]" ] }
+      group_by2(@entries);
+}
 
 sub boot_img_i386 {
     my ($mnt, $img, $kernel) = @_;
 
     __ "$sudo umount $mnt 2>/dev/null";
-    my $automatic = "";
 
     if ($type eq "hd") {
 	_ "bunzip2 -c $instdir/init-data/msgboot.img.bz2 > $img";
@@ -135,8 +163,6 @@ sub boot_img_i386 {
 	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo.img.bz2 > $img";
     }
 
-    $automatic = "automatic=method:cdrom" if ($type eq "cdrom");
-    $automatic = "automatic=method:disk" if ($type eq "hd");
 
     _ "$sudo mount -t vfat -o umask=0 $img $mnt -o loop";
     _ "cat $kernel > $mnt/vmlinuz" if $type !~ /blank/;
@@ -151,9 +177,8 @@ sub boot_img_i386 {
 	die sprintf("not enough room for $rdz: need %dKB (available %dKB < needed %dKB)\n", $s - $avail, $avail, $s);
     }
 
-#    my $ftype = $type =~ /^(other|all)$/ ? "cdrom" : $type;
     my $timeout = 72;
-    output("$mnt/syslinux.cfg",
+    output "$mnt/syslinux.cfg",
 "default linux
 prompt 1
 timeout $timeout
@@ -161,49 +186,12 @@ display boot.msg
 F1 help.msg
 F2 advanced.msg
 F3 boot.msg
-label linux
+" . join('', map {
+"label $_->[0]
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 vga=788
-label vgalo
-  kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 vga=785
-label vgahi
-  kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 vga=791
-label vga16
-  kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 vga16
-label text
-  kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 text
-label patch
-  kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 patch vga=788
-label expert
-  kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 expert vga=788
-label rescue
-  kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 rescue rw
-label lnx4win
-  kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 lnx4win vga=788
-label preinst
-  kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz automatic=method:cdrom root=/dev/ram3 rescue oem rw
-label oem
-  kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz automatic=method:cdrom root=/dev/ram3 rescue oem rw
-label auto
-  kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic auto_install=Mandrake/base/auto_inst.cfg.pl
-label all
-  kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz pcmcia root=/dev/ram3 vga=788
-label ackbar
-  kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz automatic=method:nfs,network:static,ip:192.168.1.205,dns:192.168.1.11,domain:mandrakesoft.com,server:ackbar,directory:/export vga=788
-");
+  append initrd=$type.rdz $_->[1]
+" } entries_append($type));
+
     _ "sync";
     _ "df $mnt";
 }
@@ -221,8 +209,8 @@ sub boot_img_alpha {
 
     mkdir "$mnt/etc", 0777;
     output("$mnt/etc/aboot.conf", 
-"0:vmlinux.gz initrd=$type.rdz rw ramdisk_size=32000 root=/dev/ram3 $type
-1:vmlinux.gz initrd=$type.rdz rw ramdisk_size=32000 root=/dev/ram3 text $type
+"0:vmlinux.gz initrd=$type.rdz rw $default_append $type
+1:vmlinux.gz initrd=$type.rdz rw $default_append text $type
 ");
     _ "sync";
     _ "df $mnt";
@@ -500,25 +488,15 @@ default linux
 prompt 1
 timeout 150
 display help.msg
-label linux
+" . join('', map { 
+"label $_->[0]
   kernel alt0/vmlinuz
-  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 vga=788 changedisk
-label vgalo
-  kernel alt0/vmlinuz
-  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 vga=785 changedisk
-label vgahi
-  kernel alt0/vmlinuz
-  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 vga=791 changedisk
-label vga16
-  kernel alt0/vmlinuz
-  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 vga16 changedisk
-label text
-  kernel alt0/vmlinuz
-  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 text changedisk
-" . join('', map_index { 
+  append changedisk initrd=alt0/all.rdz $_->[1]
+" } entries_append('all'))
+  . join('', map_index { 
 "label alt$::i
   kernel alt$::i/vmlinuz
-  append ramdisk_size=32000 initrd=alt$::i/all.rdz root=/dev/ram3 vga=788 changedisk
+  append changedisk initrd=alt$::i/all.rdz $default_append $default_vga
 " } @kernels);
 
     output "isolinux/help.msg", 
