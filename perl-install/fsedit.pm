@@ -185,6 +185,27 @@ sub is_one_big_fat {
     @l == 1 && isFat($l[0]) && free_space(@$hds) < 10 << 11;
 }
 
+sub file2part {
+    my ($prefix, $fstab, $file) = @_;    
+    my $part;
+
+    $file = expand_symlinks "$prefix$file";
+    unless ($file =~ s/^$prefix//) {
+	my ($part) = grep { loopback::carryRootLoopback($_) } @$fstab or die;
+	log::l("found $part->{mntpoint}");
+	$file =~ s|/initrd/loopfs|$part->{mntpoint}|;
+    }
+    foreach (@$fstab) {
+	my $m = $_->{mntpoint};
+	$part = $_ if 
+	  $file =~ /^$m/ && 
+	    (!$part || length $part->{mntpoint} < length $m);
+    }
+    $part or die "file2part: not found $file";
+    $file =~ s|$part->{mntpoint}/?|/|;
+    ($part, $file);
+}
+
 
 sub computeSize {
     my ($part, $best, $hds, $suggestions) = @_;
