@@ -84,9 +84,11 @@ sub isdn_write_config_backend {
 	    chmod 0600, $f;
 	}
 	foreach my $f ('isdn1B.conf', 'isdn2B.conf') {
+	    my $a;
 	    substInFile {
 		s/EAZ =.*/EAZ = $isdn->{phone_in}/;
 		s/PHONE_OUT =.*/PHONE_OUT = $isdn->{phone_out}/;
+		$a or s/HUPTIMEOUT =.*/HUPTIMEOUT = $isdn->{huptimeout}/, $a=1;;
 	    } "$prefix/etc/isdn/$f";
 	    chmod 0600, $f;
 	}
@@ -168,6 +170,7 @@ sub isdn_ask_info {
 					   read_providers_backend($f)], 'Unlisted - edit manually')
       or return;
     get_info_providers_backend($isdn, $netc, $str || 'Unlisted - edit manually', $f);
+    $isdn->{huptimeout} = 180;
     $isdn->{$_} ||= '' foreach qw(phone_in phone_out dialing_mode login passwd passwd2 idl speed);
     add2hash($netc, { dnsServer2 => '', dnsServer3 => '', DOMAINNAME2 => '' });
     ask_info2($isdn, $netc);
