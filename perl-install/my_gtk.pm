@@ -71,7 +71,7 @@ sub new {
 					   $draw1->window->draw_string(
 								       $style->font,
 								       $draw1->style->white_gc,
-								       60+(380-$w)/2, 62,
+								       40, 62,
 								       ($::Wizard_title) );
 				       }
 				   });
