@@ -15,12 +15,15 @@ BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
 Obsoletes: draksec
 
+
 %package newt
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
 Requires: perl-base >= 1:5.8.0-10mdk, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.7-3mdk, usermode-consoleonly >= 1.44-4mdk, msec >= 0.38
 Obsoletes: diskdrake kbdconfig mouseconfig printtool setuptool drakfloppy
 Provides: diskdrake, kbdconfig mouseconfig printtool setuptool, drakfloppy = %version-%release
+Provides: perl(Newt::Newt)
+Provides: perl(network::isdn_consts)
 
 %package http
 Summary: The drakxtools via http
