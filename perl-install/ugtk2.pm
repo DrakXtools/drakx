@@ -617,27 +617,61 @@ sub may_set_icon {
     }
 }
 
-# choose one of the two styles:
-# - gtktext_insert($textview, "My text..");
-# - gtktext_insert($textview, [ [ 'first text',  { 'foreground' => 'blue', 'background' => 'green', ... } ],
+# gtktext_insert() can be used with any of choose one of theses styles:
+# - no tags:
+#   gtktext_insert($textview, "My text..");
+# - anonymous tags:
+#   gtktext_insert($textview, [ [ 'first text',  { 'foreground' => 'blue', 'background' => 'green', ... } ],
 #			        [ 'second text' ],
 #		                [ 'third', { 'font' => 'Serif 15', ... } ],
+#                               ... ]);
+# - named tags:
+#   $textview->{tags} = {
+#                        'blue_green' => { 'foreground' => 'blue', 'background' => 'green', ... },
+#                        'big_font' => { 'font' => 'Serif 35', ... },
+#                       }
+#   gtktext_insert($textview, [ [ 'first text',  'blue_green' ],
+#		                [ 'second', 'big_font' ],
+#                               ... ]);
+# - mixed anonymous and named tags:
+#   $textview->{tags} = {
+#                        'blue_green' => { 'foreground' => 'blue', 'background' => 'green', ... },
+#                        'big_font' => { 'font' => 'Serif 35', ... },
+#                       }
+#   gtktext_insert($textview, [ [ 'first text',  'blue_green' ],
+#			        [ 'second text' ],
+#		                [ 'third', 'big_font' ],
+#		                [ 'fourth', { 'font' => 'Serif 15', ... } ],
 #                               ... ]);
 sub gtktext_insert {
     my ($textview, $t, %opts) = @_;
     my $buffer = $textview->get_buffer;
+    $buffer->{tags} ||= {};
+    $buffer->{gtk_tags} ||= {};
+    my $gtk_tags = $buffer->{gtk_tags};
+    my $tags = $buffer->{tags};
     if (ref($t) eq 'ARRAY') {
         $opts{append} or $buffer->set_text('');
         foreach my $token (@$t) {
+            my ($item, $tag) = @$token;
             my $iter1 = $buffer->get_end_iter;
-            if ($token->[0] =~ /^Gtk2::Gdk::Pixbuf/) {
-                $buffer->insert_pixbuf($iter1, $token->[0]);
+            if ($item =~ /^Gtk2::Gdk::Pixbuf/) {
+                $buffer->insert_pixbuf($iter1, $item);
                 next;
             }
-            if ($token->[1]) {
-                $buffer->insert_with_tags($iter1, $token->[0], $buffer->create_tag(undef, %{$token->[1]}));
+            if ($tag) {
+                if (ref($tag)) {
+                    # fast text insertion:
+                    # since in some contexts (eg: localedrake, rpmdrake), we use quite a lot of identical tags,
+                    # it's much more efficient and less memory pressure to use named tags
+                    $buffer->insert_with_tags($iter1, $item, $buffer->create_tag(undef, %$tag));
+                } else {
+                    # use anonymous tags
+                    $gtk_tags->{$tag} ||= $buffer->create_tag($tag, %{$tags->{$token->[1]}});
+                    $buffer->insert_with_tags($iter1, $item, $gtk_tags->{$tag});
+                }
             } else {
-                $buffer->insert($iter1, $token->[0]);
+                $buffer->insert($iter1, $item);
             }
         }
     } else {
