@@ -338,14 +338,6 @@ my %charsets = (
 "unicode"     => [ undef,         undef,   undef,           "utf8",       undef ],
 );
 
-my %bigfonts = (
-    Big5     => '18x18mdk.pcf',
-    gb2312   => '18x18mdk.pcf',
-    jisx0208 => '12x13mdk.pcf',
-    ksc5601  => '18x18mdk.pcf',
-    unicode  => 'cu12.pcf.gz',
-);
-
 #- for special cases not handled magically
 my %charset2kde_charset = (
     gb2312 => 'gb2312.1980-0',
