@@ -1,3 +1,62 @@
+2005/01/03  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/am.po, share/po/lt.po,
+	share/po/tg.po, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/az.po, share/po/pt.po, share/po/vi.po, share/po/fr.po,
+	share/po/ta.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/po/uz@Latn.po: updated pot file
+
+	* keyboard.pm: 
+	  - enabled choice of various new keyboard layouts.
+	  - don't prepend "us," if there is already a list of layouts
+
+	* share/po/cy.po: updated Welsh file
+	updated pot file
+
+2005/01/03  Pixel  <pixel at mandrakesoft.com>
+
+	* mdk-stage1/tools.c: it's cleaner to have the clp_tmpfs in /tmp
+	(i think it was already that way for move and that i broke it, but who
+	knows?)
+
+	* install_any.pm: no clp is not an error
+	move mdkinst.clp on hard drive ASAP
+	=> allows multi-cd installs even if the mdkinst.clp was not preloaded
+	=> allows to better memory handling during pkgs install (hopefully at
+	least)
+
+	* fs/mount_options.pm: remove codepage= option for fs types which don't
+	handle it (eg: ntfs)
+
+	* fs/type.pm: create can_be_one_of_those_fs_types()
+
+	* devices.pm, install2.pm: move mdkinst.clp on hard drive ASAP
+	=> allows multi-cd installs even if the mdkinst.clp was not preloaded
+	=> allows to better memory handling during pkgs install (hopefully at
+	least)
+
+	* mdk-stage1/stage1.c, mdk-stage1/init.c: ensure /tmp/syslog in stage2
+	contains the full log
+	(currently stage2 init was writing in a file shadowed by stage2 copying
+	the /stage1/tmp/syslog over its file)
+
+2005/01/03  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/sound.pm: add another sparc sound driver
+
 2005/01/03  Funda Wang <fundawang at linux.net.cn>
 
 	* lang.pm: s/jp/ja. Corrected spelling of locale ja
@@ -42999,7 +43058,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.995 2004/12/31 09:34:02 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.996 2005/01/03 10:21:11 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
