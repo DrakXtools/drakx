@@ -19,7 +19,7 @@
 
 
 /* If we have more than that amount of memory (in Mbytes), we assume we can load the second stage as a ramdisk */
-#define MEM_LIMIT_RAMDISK 52
+#define MEM_LIMIT_RAMDISK 68
 
 /* If we have more than that amount of memory (in Mbytes), we assume we can load the rescue as a ramdisk */
 #define MEM_LIMIT_RESCUE 40
