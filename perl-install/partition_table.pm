@@ -3,7 +3,6 @@ package partition_table; # $Id$
 #use diagnostics;
 #use strict;
 #use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @important_types2 @fields2save);
-use Data::Dumper;
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -688,6 +687,7 @@ sub save($$) {
     my ($hd, $file) = @_;
     my @h = @{$hd}{@fields2save};
     local *F;
+    require Data::Dumper;
     open F, ">$file"
       and print F Data::Dumper->Dump([\@h], ['$h']), "\0"
       or die _("Error writing to file %s", $file);

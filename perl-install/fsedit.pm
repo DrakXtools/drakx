@@ -11,7 +11,6 @@ use common qw(:common :constant :functional :file);
 use partition_table qw(:types);
 use partition_table_raw;
 use detect_devices;
-use Data::Dumper;
 use fsedit;
 use devices;
 use loopback;
@@ -308,6 +307,7 @@ sub auto_allocate {
 
 sub undo_prepare($) {
     my ($hds) = @_;
+    require Data::Dumper;
     $Data::Dumper::Purity = 1;
     foreach (@$hds) {
 	my @h = @{$_}{@partition_table::fields2save};
