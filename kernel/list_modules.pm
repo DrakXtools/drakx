@@ -191,7 +191,7 @@ our %l = (
       arch() =~ /i.86/ ? 'aes-i586' : 'aes',
       if_(arch() =~ /sparc/, 'openprom'),
       
-      qw(wacom evdev), qw(usblp printer),
+      qw(wacom evdev), qw(usblp printer), 'floppy',
 
       #- these need checking
       qw(tmspci rrunner meye),
