@@ -66,6 +66,11 @@ foreach (@harddrake::data::tree) {
     } else {
         @configurator_pool = $configurator;
     }
+    if ($Ident eq "AUDIO") {
+        # automatic sound slots configuration
+        harddrake::sound::configure_sound_slots();
+    }
+
     next unless -x first(split /\s+/, $configurator_pool[0]);
     foreach my $configurator (@configurator_pool) {
         my ($pid, $no);
@@ -94,7 +99,5 @@ foreach (@harddrake::data::tree) {
 log::explanations("created file $last_boot_config");
 Storable::store(\%config, $last_boot_config);
 
-# automatic sound slots configuration
-harddrake::sound::configure_sound_slots();
 
 $in->exit(0) if $in;
