@@ -4674,14 +4674,17 @@ sub edit_printer {
 	if ($in->ask_from_(
 	    { title => N("Modify printer configuration"),
 	      messages => 
-		  N("Printer %s
+		  N("Printer %s%s
 What do you want to modify on this printer?",
-		    $infoline),
+		    $infoline,
+		    if_(($printer->{SPOOLER} =~ /cups/) &&
+			!printer::cups::queue_enabled($queue),
+			"\n" . N("This printer is disabled"))),
 		  cancel => N("Close"),
 		  ok => N("Do it!")
 	      },
 	    [ { val => \$modify, format => \&translate, 
-		type => 'list',
+		type => 'list', separator => '|',
 		list => [ ($printer->{configured}{$queue} ?
 			   (N("Printer connection type"),
 			    N("Printer name, description, location"),
@@ -4694,6 +4697,14 @@ What do you want to modify on this printer?",
 				N("Printer options"))) : ()),
 			  if_($queue ne $printer->{DEFAULT},
 			      N("Set this printer as the default")),
+			  if_(($printer->{SPOOLER} ne "pdq") &&
+			      $printer->{configured}{$queue},
+			      if_(($printer->{SPOOLER} !~ /cups/) ||
+				  !printer::cups::queue_enabled($queue),
+				  N("Enable Printer")),
+			      if_(($printer->{SPOOLER} !~ /cups/) ||
+				  printer::cups::queue_enabled($queue),
+				  N("Disable Printer"))),
 			  N("Print test pages"),
 			  N("Learn how to use this printer"),
 			  if_($printer->{configured}{$queue}, N("Remove printer")) ] } ])) {
@@ -4779,6 +4790,16 @@ What do you want to modify on this printer?",
 		# disappear if the printer is the default, so go back to the
 		# default entry
 		$modify = N("Printer options");
+	    } elsif ($modify eq N("Enable Printer")) {
+		printer::main::enable_disable_queue($printer, $queue, 1) &&
+		    $in->ask_warn(N("Enable Printer"),
+				  N("Printer \"%s\" is now enabled.", 
+				    $queue));
+	    } elsif ($modify eq N("Disable Printer")) {
+		printer::main::enable_disable_queue($printer, $queue, 0) &&
+		    $in->ask_warn(N("Disable Printer"),
+				  N("Printer \"%s\" is now disabled.", 
+				    $queue));
 	    } elsif ($modify eq N("Print test pages")) {
 		print_testpages($printer, $in, $upNetwork);
 	    } elsif ($modify eq N("Learn how to use this printer")) {

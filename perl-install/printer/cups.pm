@@ -133,4 +133,13 @@ sub get_remote_queues {
     } lpstat_v();
 }
 
+sub queue_enabled {
+    my ($queue) = @_;
+    0 != grep {
+	/\b$queue\b.*\benabled\b/i
+    } run_program::rooted_get_stdout($::prefix, 'lpstat', '-p', $queue);
+}
+
+
+
 1;

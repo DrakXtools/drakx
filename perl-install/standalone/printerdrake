@@ -95,7 +95,7 @@ exit 0 unless printer::printerdrake::first_time_dialog($printer, $in);
 $printer->{expert} = printer::main::get_usermode();
 
 # Choose the spooler by command line options
-$commandline =~ /-expert/ and $printer->{expert} = 1;
+$::expert and $printer->{expert} = 1;
 $commandline =~ /-cups/ and
     $printer->{SPOOLER} = 'cups' and printer::main::read_configured_queues($printer);
 $commandline =~ /-rcups/ and
@@ -135,8 +135,8 @@ if (!$::isEmbedded) {
     $us->{wnd}{rwindow}->set_position('center');
 }
 $us->{wnd}{window}->signal_connect(delete_event => \&QuitGlobal);
-my $ltree_model = Gtk2::ListStore->new("Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String");
-my $rtree_model = Gtk2::ListStore->new("Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String");
+my $ltree_model = Gtk2::ListStore->new("Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String");
+my $rtree_model = Gtk2::ListStore->new("Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String");
 my ($localtree, $remotetree);
 $localtree = CreateTree($ltree_model);
 $remotetree = CreateTree($rtree_model);
@@ -205,21 +205,21 @@ $us->{wnd}{window}->add(gtkpack_(Gtk2::VBox->new(0, 0),
 				  0, $searchBox,
 				  0, Gtk2::HSeparator->new,
 				  1, $nb));
-my @lcolsize = (1, 1, 1, 1, 1, 1, -1);
-my @rcolsize = (1, 1, 1, 1, 1, -1);
+my @lcolsize = (1, 1, 1, 1, 1, 1, 1, -1);
+my @rcolsize = (1, 1, 1, 1, 1, 1, -1);
 each_index {
     my $col = Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i);
     $col->set_sort_column_id($::i);
     $col->set_min_width($lcolsize[$::i]);
     $localtree->append_column($col);
-} (N("Def."), N("Printer Name"), N("Model"), N("Connection Type"), N("Description"), N("Location"));
+} (N("Def."), N("Printer Name"), N("State"), N("Model"), N("Connection Type"), N("Description"), N("Location"));
 
 each_index {
     my $col = Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i);
     $col->set_sort_column_id($::i);
     $col->set_min_width($rcolsize[$::i]);
     $remotetree->append_column($col);
-} (N("Def."), N("Printer Name"), N("Server Name"), N("Description"), N("Location"));
+} (N("Def."), N("Printer Name"), N("State"), N("Server Name"), N("Description"), N("Location"));
 my @toolbwg = map {
     $toolb->append_item($_->[0], $_->[1], $_->[2],  
                         Gtk2::Image->new_from_file($pixdir . $_->[2] . '.png'), $_->[3], $toolb);
@@ -302,15 +302,19 @@ sub RefreshLocalPrintersFull {
 	push(@LocalReal, $p) if $searchstr =~ /\Q$strfilt/i;
     };
     foreach my $p (sort { lc($a) cmp lc($b) } @LocalReal) {
+	my $state = ($printer->{SPOOLER} !~ /cups/ ? N('Unknown') :
+		     (printer::cups::queue_enabled($p) ? N('Enabled') :
+		      N('Disabled')));
 	my $connect = printer::main::connectionstr($printer->{configured}{$p}{queuedata}{connect});
 	my $description = $printer->{configured}{$p}{queuedata}{desc};
 	my $location = $printer->{configured}{$p}{queuedata}{loc};
 	my $model = $printer->{configured}{$p}{queuedata}{make} . ' ' .
 	    $printer->{configured}{$p}{queuedata}{model};
 	my $default = ($p eq $printer->{DEFAULT} ? "X" : "");
-	$ltree_model->append_set([ 0 => $default, 1 => $p, 2 => $model, 
-				   3 => $connect, 4 => $description,
-				   5 => $location ]);
+	$ltree_model->append_set([ 0 => $default, 1 => $p, 2 => $state, 
+				   3 => $model, 
+				   4 => $connect, 5 => $description,
+				   6 => $location ]);
     }
 }
 
@@ -336,14 +340,18 @@ sub RefreshRemotePrintersFull {
     foreach my $p (sort { lc($a->{queuename}) cmp lc($b->{queuename}) } 
 		   @RemoteReal) {
 	my $queue = $p->{queuename};
+	my $state = ($printer->{SPOOLER} !~ /cups/ ? N('Unknown') :
+		     (printer::cups::queue_enabled($queue) ? N('Enabled') :
+		      N('Disabled')));
 	my $server = ($p->{ipp} ?
 		      $p->{ipp} : $printer->{remote_cups_server});
 	my $description = $p->{description};
 	my $location = $p->{location};
 	my $default = ($queue eq $printer->{DEFAULT} ? "X" : "");
 	$rtree_model->append_set([ 0 => $default, 1 => $queue, 
-				   2 => $server, 3 => $description,
-				   4 => $location ]);
+				   2 => $state, 3 => $server,
+				   4 => $description,
+				   5 => $location ]);
     }
 }
 

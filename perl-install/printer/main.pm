@@ -1854,7 +1854,7 @@ sub configure_queue($) {
     }	  
 
     # Make sure that queue is active
-    if ($printer->{SPOOLER} ne "pdq") {
+    if ($printer->{NEW} && ($printer->{SPOOLER} ne "pdq")) {
         run_program::rooted($::prefix, "foomatic-printjob",
 			    "-s", $printer->{currentqueue}{spooler},
 			    "-C", "up", $printer->{currentqueue}{queue});
@@ -1910,6 +1910,17 @@ sub configure_queue($) {
     $printer->{currentqueue} = {};
 
     return 1;
+}
+
+sub enable_disable_queue {
+    my ($printer, $queue, $state) = @_;
+    
+    if (($printer->{SPOOLER} ne "pdq") &&
+	($printer->{SPOOLER} ne "rcups")) {
+        run_program::rooted($::prefix, "foomatic-printjob",
+			    "-s", $printer->{SPOOLER},
+			    "-C", ($state ? "start" : "stop"), $queue);
+    }
 }
 
 sub remove_queue($$) {
