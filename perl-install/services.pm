@@ -304,7 +304,7 @@ sub services() {
     my ($services, $xinetd_services) = services_raw();
     my @l = @$xinetd_services;
     if ($::isInstall) {
-        push @l, map { [ $_->[0], @{$_->[1]} > 1 ] } @$services;
+        push @l, map { [ $_->[0], @{$_->[1]} > 0 ] } @$services;
     } else {
         my $runlevel = (split " ", `/sbin/runlevel`)[1];
         push @l, map { [ $_->[0], member($runlevel, @{$_->[1]}) ] } @$services;
