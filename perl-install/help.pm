@@ -32,8 +32,10 @@ selectInstallClass =>
     perform a highly customized installation. As for a \"Customized\"
     installation class, you will be able to select the usage for your system.
     But please, please, DO NOT CHOOSE THIS UNLESS YOU KNOW WHAT YOU ARE DOING!
+"),
 
-The different choices for your machine's usage (provided, hence, that you have
+selectInstallClass2 =>
+__("The different choices for your machine's usage (provided, hence, that you have
 chosen either \"Custom\" or \"Expert\" as an installation class) are the
 following:
 

@@ -131,6 +131,7 @@ You will be allowed to make powerfull but dangerous things here."),
 		 developer => _("Development"),
 		 server    => _("Server"),
 		);
+	$o->set_help('selectInstallClass2');
 	$o->{installClass} = ${{reverse %c}}{$o->ask_from_list(_("Install Class"),
 							       _("Which usage is your system used for ?"),
 							       [ values %c ], $c{$o->{installClass}})};
@@ -408,7 +409,7 @@ sub configureNetwork($) {
 	    my $intf = network::findIntf($o->{intf} ||= [], $_);
 	    add2hash($intf, $last);
 	    add2hash($intf, { NETMASK => '255.255.255.0' });
-	    $o->configureNetworkIntf($intf) or return;
+	    $o->configureNetworkIntf($intf) or last;
 
 	    $o->{netc} ||= {};
 	    delete $o->{netc}{dnsServer};
