@@ -24,11 +24,17 @@ sub leave_console { my ($o) = @_; common::setVirtual(delete $o->{suspended}) }
 sub exit { ugtk2::exit(@_) }
 
 sub ask_fileW {
-    my ($_o, $title, $dir) = @_;
-    my $w = ugtk2->new($title);
-    $dir .= '/' if $dir !~ m|/$|;
-    ugtk2::_ask_file($w, $title, $dir); 
-    $w->main;
+    my ($in, $common) = @_;
+
+    my $w = ugtk2::create_file_selector(%$common);
+
+    my $file;
+    $w->main(sub { 
+	$file = $w->{chooser}->get_filename;
+	my $err = ugtk2::file_selected_check($common->{save}, $common->{want_a_dir}, $file);
+	$err and $in->ask_warn('', $err);
+	!$err;
+    }) && $file;
 }
 
 sub create_boxradio {

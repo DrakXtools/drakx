@@ -161,13 +161,27 @@ sub ask_okcancel_ {
     }
 }
 
+sub ask_filename {
+    my ($o, $common) = @_;
+    $common->{want_a_dir} = 0;
+    $o->ask_fileW($common);
+}
+
+sub ask_directory {
+    my ($o, $common) = @_;
+    $common->{want_a_dir} = 1;
+    $o->ask_fileW($common);
+}
+
+#- predecated
 sub ask_file {
     my ($o, $title, $o_dir) = @_;
-    $o->ask_fileW($title, $o_dir);
+    $o->ask_fileW({ title => $title, want_a_dir => 0, directory => $o_dir });
 }
+
 sub ask_fileW {
-    my ($o, $title, $_dir) = @_;
-    $o->ask_from_entry($title, N("Choose a file"));
+    my ($o, $common) = @_;
+    $o->ask_from_entry($common->{title}, $common->{message} || N("Choose a file"));
 }
 
 sub ask_from_list {
