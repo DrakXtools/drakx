@@ -2,11 +2,11 @@ package common;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int $error $cancel $SECTORSIZE);
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int $cancel $SECTORSIZE);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common => [ qw(min max bool member divide error cancel is_empty_array_ref round_up round_down first top) ],
+    common => [ qw(min max bool member divide is_empty_array_ref round_up round_down first top) ],
     file => [ qw(dirname basename all glob_ cat_ chop_ mode) ],
     system => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_) ],
     constant => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
@@ -16,8 +16,6 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 $printable_chars = "\x20-\x7E";
 $sizeof_int = psizeof("i");
 $bitof_int = $sizeof_int * 8;
-$error = 0;
-$cancel = 0;
 $SECTORSIZE = 512;
 
 1;
@@ -29,8 +27,6 @@ sub top { $_[$#_] }
 sub member { my $e = shift; foreach (@_) { $e eq $_ and return 1 } 0 }
 sub dirname { @_ == 1 or die "usage: dirname <name>\n"; local $_ = shift; s|[^/]*/*\s*$||; s|(.)/*$|$1|; $_ || '.' }
 sub basename { @_ == 1 or die "usage: basename <name>\n"; local $_ = shift; s|/*\s*$||; s|.*/||; $_ }
-sub error { $error = 1; 0 }
-sub cancel { $cancel = 1; 0 }
 sub bool { $_[0] ? 1 : 0 }
 sub strcpy { substr($_[0], $_[2] || 0, length $_[1]) = $_[1] }
 sub cat_ { local *F; open F, $_[0] or $_[1] ? die "cat of file $_[0] failed: $!\n" : return; my @l = <F>; @l }

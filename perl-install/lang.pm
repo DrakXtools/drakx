@@ -24,6 +24,8 @@ my %languages = (
 
 1;
 
+sub list { keys %languages }
+
 sub set {
     my $lang = shift;
 

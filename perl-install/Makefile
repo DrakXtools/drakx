@@ -1,5 +1,5 @@
 SO_FILES = c/blib/arch/auto/c/c.so
-PMS = *.pm resize_fat/*.pm commands diskdrake
+PMS = *.pm c/*.pm resize_fat/*.pm commands diskdrake
 DEST = /tmp/t
 DESTREP4PMS = $(DEST)/usr/bin/perl-install
 PERL = ./perl
@@ -21,7 +21,7 @@ tar: clean
 	cd .. ; tar cfy perl-install.tar.bz2 --exclude perl-install/perl perl-install
 
 c/c.xs: c/c.xs.pm
-	chmod u+w $@
+	rm -f $@
 	perl $< > $@
 	chmod a-w $@
 

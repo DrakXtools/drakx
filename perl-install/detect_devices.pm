@@ -53,12 +53,12 @@ sub hasCompaqSmartArray() {
 sub getSCSI() {
     my @drives;
     my ($driveNum, $cdromNum, $tapeNum) = qw(0 0 0);
-    my $err = sub { chop; log::l("unexpected line in /proc/scsi/scsi: $_"); error() };
+    my $err = sub { chop; die "unexpected line in /proc/scsi/scsi: $_"; };
     local $_;
 
     local *F;
-    open F, "/proc/scsi/scsi" or return &$err();
-    $_ = <F>; /^Attached devices:/ or return &$err();
+    open F, "/proc/scsi/scsi" or die "failed to open /proc/scsi/scsi";
+    local $_ = <F>; /^Attached devices:/ or return &$err();
     while ($_ = <F>) {
 	my ($id) = /^Host:.*?Id: (\d+)/ or return &$err();
 	$_ = <F>; my ($vendor, $model) = /^\s*Vendor:\s*(.*?)\s+Model:\s*(.*?)\s+Rev:/ or return &$err();

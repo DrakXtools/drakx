@@ -2,6 +2,7 @@ package pkgs;
 
 use diagnostics;
 use strict;
+use vars qw($fd);
 
 use common qw(:common :file);
 use log;
@@ -15,12 +16,12 @@ my @skipThesesPackages = qw(XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach
 
 1;
 
-sub skipThisPackage { member($_[0], @skipList) }
+sub skipThisPackage { member($_[0], @skipThesesPackages) }
 
 sub addInfosFromHeader($$) {
     my ($packages, $header) = @_;
 
-    $packages{c::headerGetEntry($header, 'name')} = {
+    $packages->{c::headerGetEntry($header, 'name')} = {
 	header => $header, size => c::headerGetEntry($header, 'size'),
 	group => c::headerGetEntry($header, 'group') || "(unknown group)",
     };
@@ -37,7 +38,7 @@ sub psUsingDirectory {
 	open F, $_ or log::l("failed to open package $_: $!");
 	my $header = c::rpmReadPackageHeader($_) or log::l("failed to rpmReadPackageHeader $basename: $!");
 	my $name = c::headerGetEntry($header, 'name');
-	addInfosFromHeader($package, $header);
+	addInfosFromHeader(\%packages, $header);
     }
     \%packages;
 }
@@ -128,7 +129,7 @@ sub psFromHeaderListDesc {
 	    $noSeek and last;
 	    die "error reading header at offset ", sysseek($fd, 0, 1);
 	}
-	addInfosFromHeader($packages, $header);
+	addInfosFromHeader(\%packages, $header);
 	$noSeek or $end <= sysseek($fd, 0, 1) and last; 
     }
 
@@ -149,7 +150,7 @@ sub init_db {
 
     my $f = "$prefix/tmp/" . ($isUpgrade ? "upgrade" : "install") . ".log";
     open(F, "> $f") ? log::l("opened $f") : log::l("Failed to open $f. No install log will be kept.");
-    my $fd = fileno(F) || log::fd() || 2;
+    $fd = fileno(F) || log::fd() || 2;
     c::rpmErrorSetCallback($fd);
 #    c::rpmSetVeryVerbose();
     

@@ -4,38 +4,27 @@
 
 use diagnostics;
 use strict;
-use vars qw($testing $error $cancel $INSTALL_VERSION);
+use vars qw($testing $INSTALL_VERSION $o);
 
-use lib qw(/usr/bin/perl-install . c/blib/arch);
-use install2more;
-use c;
+use lib qw(/usr/bin/perl-install . c c/blib/arch);
 use common qw(:common :file :system);
-use devices;
+use install_any qw(:all);
 use log;
 use net;
 use keyboard;
-use pkgs;
-use smp;
 use fs;
-use setup;
 use fsedit;
+use install_steps;
 use install_methods;
-use lilo;
-use swap;
-use install_steps_graphical;
 use modules;
 use partition_table qw(:types);
 use detect_devices;
-use commands;
 
-$error = 0;
-$cancel = 0;
-$testing = $ENV{PERL_INSTALL_TEST};
+$testing = 1;#$ENV{PERL_INSTALL_TEST};
 $INSTALL_VERSION = 0;
 
 my @installStepsFields = qw(text skipOnCancel skipOnLocal prev next);
 my @installSteps = (
-  selectPath => [ "Select installation path", 0, 0, 'none' ],
   selectInstallClass => [ "Select installation class", 0, 0 ],
   setupSCSI => [ "Setup SCSI", 0, 1 ],	
   partitionDisks => [ "Setup filesystems", 0, 1 ],
@@ -49,7 +38,6 @@ my @installSteps = (
 #  configurePrinter => [ "Configure printer", 0, 0 ],
   setRootPassword => [ "Set root password", 0, 0 ],
   addUser => [ "Add a user", 0, 0 ],
-  configureAuth => [ "Configure authentication", 0, 0 ],
   createBootdisk => [ "Create bootdisk", 0, 1 ],
   setupBootloader => [ "Install bootloader", 0, 1 ],
 #  configureX => [ "Configure X", 0, 0 ],
@@ -58,7 +46,6 @@ my @installSteps = (
 
 # this table is translated at run time
 my @upgradeSteps = (
-  selectPath => [ "Select installation path", 0, 0 , 'none' ],
   setupSCSI => [ "Setup SCSI", 0, 0 ],
   upgrFindInstall => [ "Find current installation", 0, 0 ],
   findInstallFiles => [ "Find installation files", 1, 0 ],
@@ -99,15 +86,14 @@ my $default = {
     display => "129.104.42.9:0",
     user => { name => 'foo', password => 'foo', shell => '/bin/bash', realname => 'really, it is foo' },
     rootPassword => 'toto',
-    keyboard => 'us',
+    lang => 'us',
     isUpgrade => 0,
     installClass => 'Server',
-    bootloader => { onmbr => 1,
-		    linear => 1,
-		},
+    bootloader => { onmbr => 0, linear => 0 },
     mkbootdisk => 0,
     comps => [ qw() ],
     packages => [ qw() ],
+    partitionning => { clearall => 1, eraseBadPartitions => 1 },
     partitions => [
 		   { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
 		   { mntpoint => "/",     size => 300 << 11, type => 0x83 }, 
@@ -115,7 +101,7 @@ my $default = {
 		   { mntpoint => "swap",  size =>  64 << 11, type => 0x82 }
 	     ],
 };
-my $o = { default => $default };
+$o = { default => $default };
 
 
 sub selectPath {
@@ -125,10 +111,14 @@ sub selectPath {
 
 sub selectInstallClass {
     $o->{installClass} = $o->selectInstallClass;
+
+    if ($o->{installClass} eq 'Server') {
+	#TODO
+    }
 }
 
 sub setupSCSI {
-    $o->{direction} < 0 && detect_devices::hasSCSI() and return cancel();
+    $o->{direction} < 0 && detect_devices::hasSCSI() and return;
 
     # If we have any scsi adapters configured from earlier, then don't bother asking again
     while (my ($k, $v) = each %modules::loaded) {
@@ -139,14 +129,16 @@ sub setupSCSI {
 
 sub partitionDisks {
     $o->{drives} = [ detect_devices::hds() ];
-    $o->{hds} = fsedit::hds($o->{drives}, $o->{hints}->{partitioning}->{flags});
+    $o->{hds} = fsedit::hds($o->{drives}, $o->{default}->{partitionning});
     @{$o->{hds}} > 0 or die "An error has occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem";
 
     unless ($o->{isUpgrade}) {
-	$o->doPartitionDisks($o->{hds}, $o->{fstab_wanted});
+	$o->doPartitionDisks($o->{hds});
 
-	# Write partitions to disk 
-	foreach (@{$o->{hds}}) { partition_table::write($_); }
+	unless ($testing) {
+	    # Write partitions to disk 
+	    foreach (@{$o->{hds}}) { partition_table::write($_); }
+	}
     }
 
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}) ];
@@ -154,6 +146,7 @@ sub partitionDisks {
     my $root_fs; map { $_->{mntpoint} eq '/' and $root_fs = $_ } @{$o->{fstab}};                  
     $root_fs or die "partitionning failed: no root filesystem";
 
+    $testing and return;
     if ($o->{hints}->{flags}->{autoformat}) {
 	log::l("formatting all filesystems");
 
@@ -169,77 +162,41 @@ sub findInstallFiles {
     $o->{comps} = $o->{method}->getComponentSet($o->{packages});
 }
  
-sub choosePackages {
-    $o->choosePackages($o->{packages}, $o->{comps}, $o->{isUpgrade});
-}
+sub choosePackages { $o->choosePackages($o->{packages}, $o->{comps}); }
 
 sub doInstallStep {
     $testing and return 0;
 
-    $o->beforeInstallPackages($o->{fstab});
+    $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
-    $o->afterInstallPackages($o->{keyboard});
+    $o->afterInstallPackages;
 }
 
-sub configureMouse { setup::mouseConfig($o->{rootPath}); }
-
-sub finishNetworking {
-#
-#    rc = checkNetConfig(&$o->{intf}, &$o->{netc}, &$o->{intfFinal},
-#			 &$o->{netcFinal}, &$o->{driversLoaded}, $o->{direction});
-#
-#    if (rc) return rc;
-#
-#    sprintf(path, "%s/etc/sysconfig", $o->{rootPath});
-#    writeNetConfig(path, &$o->{netcFinal}, 
-#		    &$o->{intfFinal}, 0);
-#    strcat(path, "/network-scripts");
-#    writeNetInterfaceConfig(path, &$o->{intfFinal});
-#    sprintf(path, "%s/etc", $o->{rootPath});
-#    writeResolvConf(path, &$o->{netcFinal});
-#
-#    #  this is a bit of a hack 
-#    writeHosts(path, &$o->{netcFinal}, 
-#		&$o->{intfFinal}, !$o->{isUpgrade});
-#
-#    return 0;
-}
-
-sub configureTimezone { setup::timeConfig($o->{rootPath}) }
-sub configureServices { setup::servicesConfig($o->{rootPath}) }
-
-sub setRootPassword {
-    $testing and return 0;
-
-    $o->setRootPassword($o->{rootPath});
-}
-
-sub addUser {
-    $o->addUser($o->{rootPath});
-}
+sub configureMouse { $o->mouseConfig }
+sub finishNetworking { $o->finishNetworking }
+sub configureTimezone { $o->timeConfig }
+sub configureServices { $o->servicesConfig }
+sub setRootPassword { $o->setRootPassword }
+sub addUser { $o->addUser }
 
 sub createBootdisk {
+    $testing and return;
     $o->{isUpgrade} or fs::write('mnt', $o->{fstab});
     modules::write_conf("/mnt/etc/conf.modules", 'append');
-
-    $o->{mkbootdisk} and lilo::mkbootdisk("/mnt", versionString());
+    $o->createBootdisk;
 }
 
 sub setupBootloader {
-    my $versionString = versionString();
-    log::l("installed kernel version $versionString");
-    
     $o->{isUpgrade} or modules::read_conf("/mnt/etc/conf.modules");
-   
-    lilo::install("/mnt", $o->{hds}, $o->{fstab}, $versionString, $o->{bootloader});
+    $o->setupBootloader;
 }
 
-sub configureX { $o->setupXfree($o->{method}, $o->{rootPath}, $o->{packages}); }
+sub configureX { $o->setupXfree; }
 
 sub exitInstall { $o->exitInstall }
 
 sub main {
-    SIG{__DIE__} = sub { log::l("ERROR: $_[0]") };
+    $SIG{__DIE__} = sub { chomp $_[0]; log::l("ERROR: $_[0]") };
 
     #  if this fails, it's okay -- it might help with free space though 
     unlink "/sbin/install";
@@ -254,7 +211,7 @@ sub main {
 
     $o->{rootPath} = "/mnt";
     $o->{method} = install_methods->new('cdrom');
-    $o = install_steps_graphical->new($o);
+    $o = install_steps->new($o);
 
     $o->{lang} = $o->chooseLanguage;
 
@@ -276,6 +233,8 @@ sub main {
     $ENV{LD_LIBRARY_PATH} = "";
 
     $o->{keyboard} = eval { keyboard::read("/tmp/keyboard") } || $default->{keyboard};
+
+    selectPath();
 
     for (my $step = $o->{steps}->{first}; $step ne 'done'; $step = getNextStep($step)) {
 	log::l("entering step $step");

@@ -4,6 +4,8 @@ use diagnostics;
 use strict;
 
 use common qw(:file :system);
+use install_any qw(:all);
+use lilo;
 use lang;
 use keyboard;
 use pkgs;
@@ -14,48 +16,50 @@ use commands;
 use smp;
 
 
+my $o;
+
 1;
 
 
 sub new($$) {
-    my ($type, $o) = @_;
+    my ($type, $o_) = @_;
 
-    bless $o, ref $type || $type;
+    $o = bless $o_, ref $type || $type;
+}
+
+sub chooseLanguage($) {
+    $o->{default}->{lang}
 }
 
 sub selectInstallOrUpgrade($) {
-    my ($o) = @_;
-    $o->{isUpgrade} || $o->{default}->{isUpgrade} || 0;
+    $o->{default}->{isUpgrade} || 0;
 }
 sub selectInstallClass($) {
-    my ($o) = @_;
-    $o->{installClass} || $o->{default}->{installClass} || 'Custom';
+    $o->{default}->{installClass} || 'Custom';
 }
 sub setupSCSIInterfaces {
     die "TODO";
 }
 
-sub doPartitionDisks($$$) {
+sub doPartitionDisks($$) {
     my ($o, $hds) = @_;
-    fsedit::auto_allocate($hds, $o->{partitions});
+    fsedit::auto_allocate($hds, $o->{default}->{partitions});
 }
 
 sub choosePackages($$$) {
     my ($o, $packages, $comps) = @_;
 
-    foreach ('base', @{$o->{comps}}) {
+    foreach ('base', @{$o->{default}->{comps}}) {
 	$comps->{$_}->{selected} = 1;
-	foreach (@{$_->{packages}}) { $_->{selected} = 1; }
+	foreach (@{$comps->{$_}->{packages}}) { $_->{selected} = 1; }
     }
-    foreach (@{$o->{packages}}) { $_->{selected} = 1; }
+    foreach (@{$o->{default}->{packages}}) { $packages->{$_}->{selected} = 1; }
 
     smp::detect() and $packages->{"kernel-smp"}->{selected} = 1;
 }
 
-sub beforeInstallPackages($$) {
-    my ($o, $fstab) = @_;
-
-    $o->{method}->prepareMedia($fstab);
+sub beforeInstallPackages($) {
+    $o->{method}->prepareMedia($o->{fstab});
 
     foreach (qw(dev etc home mnt tmp var var/tmp var/lib var/lib/rpm)) {
 	mkdir "$o->{prefix}/$_", 0755;
@@ -75,11 +79,11 @@ sub installPackages($$) {
     pkgs::install($o->{prefix}, $o->{method}, $toInstall, $o->{isUpgrade}, 0);
 }
 
-sub afterInstallPackages($$) {
-    my ($o, $keymap) = @_;
+sub afterInstallPackages($) {
+    my ($o) = @_;
 
     unless ($o->{isUpgrade}) {
-        keyboard::write($o->{prefix}, $keymap);
+        keyboard::write($o->{prefix}, $o->{keymap});
         lang::write($o->{prefix});
     }
     #  why not? 
@@ -87,6 +91,36 @@ sub afterInstallPackages($$) {
 
 #    configPCMCIA($o->{rootPath}, $o->{pcmcia});
 }
+
+sub mouseConfig($) { 
+    #TODO
+}
+
+sub finishNetworking($) {
+    my ($o) = @_;
+#
+#    rc = checkNetConfig(&$o->{intf}, &$o->{netc}, &$o->{intfFinal},
+#			 &$o->{netcFinal}, &$o->{driversLoaded}, $o->{direction});
+#
+#    if (rc) return rc;
+#
+#    sprintf(path, "%s/etc/sysconfig", $o->{rootPath});
+#    writeNetConfig(path, &$o->{netcFinal}, 
+#		    &$o->{intfFinal}, 0);
+#    strcat(path, "/network-scripts");
+#    writeNetInterfaceConfig(path, &$o->{intfFinal});
+#    sprintf(path, "%s/etc", $o->{rootPath});
+#    writeResolvConf(path, &$o->{netcFinal});
+#
+#    #  this is a bit of a hack 
+#    writeHosts(path, &$o->{netcFinal}, 
+#		&$o->{intfFinal}, !$o->{isUpgrade});
+#
+#    return 0;
+}
+
+sub timeConfig {}
+sub servicesConfig {}
 
 sub addUser($) {
     my ($o) = @_;
@@ -106,6 +140,7 @@ sub addUser($) {
 
     my $pw = crypt_($o->{user}->{password});
 
+    $::testing and return;
     local *F;
     open F, ">> $p/etc/passwd" or die "can't append to passwd file: $!";
     print F "$o->{user}->{name}:$pw:$new_uid:$new_gid:$o->{user}->{realname}:/home/$o->{user}->{name}:$o->{user}->{shell}\n";
@@ -117,13 +152,25 @@ sub addUser($) {
     commands::chown_("-r", "$new_uid.$new_gid", $homedir);
 }
 
-sub setRootPassword($$) {
+sub createBootdisk($) {
+    lilo::mkbootdisk("/mnt", versionString()) if $o->{mkbootdisk} || $o->{default}->{mkbootdisk};
+}
+
+sub setupBootloader($) {
+    my ($o) = @_;
+    my $versionString = versionString();
+    log::l("installed kernel version $versionString");    
+    lilo::install($o->{prefix}, $o->{hds}, $o->{fstab}, $versionString, $o->{bootloader} || $o->{default}->{bootloader});
+}
+
+sub setRootPassword($) {
     my ($o) = @_;
     my $p = $o->{prefix};
     my $pw = $o->{rootPassword};
     $pw = crypt_($pw);
 
     my @lines = cat_("$p/etc/passwd", 'die');
+    $::testing and return;
     local *F;
     open F, "> $p/etc/passwd" or die "can't write in passwd: $!\n";
     foreach (@lines) {
@@ -134,68 +181,14 @@ sub setRootPassword($$) {
 
 
 sub setupXfree {
+    my ($o) = @_;
+    my $x = $o->{default}->{Xserver} or return;
+    $o->{packages}->{$x} or die "can't find X server $x";
 
-    if (rpmdbOpen(prefix, &db, O_RDWR | O_CREAT, 0644)) {
-	 errorWindow(_("Fatal error reopening RPM database"));
-	 return INST_ERROR;
-    }
-    log::l("reopened rpm database");
-    
-    sprintf(path, "%s/tmp/SERVER", prefix);
-    if ((fd = open(path, O_RDONLY)) < 0) {
-	 log::l("failed to open %s: %s", path, strerror(errno));
-	 return INST_ERROR;
-    }
- 
-    buf[0] = '\0';
-    read(fd, buf, sizeof(buf));
-    close(fd);
-    chptr = buf;
-    while (chptr < (buf + sizeof(buf) - 1) && *chptr && *chptr != ' ')
-	 chptr++;
+    log::l("I will install the $x package");
+    pkgs::install($o->{prefix}, $o->{method}, $o->{packages}->{$x}, $o->{isUpgrade}, 0);
 
-    if (chptr >= (buf + sizeof(buf) - 1) || *chptr != ' ') {
-	 log::l("couldn't find ' ' in %s", path);
-	 return INST_ERROR;
-    }
-
-    *chptr = '\0';
-    strcpy(server, "XFree86-");
-    strcat(server, buf);
-
-    log::l("I will install the %s package", server);
-
-    for (i = 0; i < psp->numPackages; i++) {
-	 if (!strcmp(psp->packages[i]->name, server)) {
-	     log::l("\tfound package: %s", psp->packages[i]->name);
-	     swOpen(1, psp->packages[i]->size);
-	     trans = rpmtransCreateSet(db, prefix);
-	     rpmtransAddPackage(trans, psp->packages[i]->h, NULL,
-				psp->packages[i], 0, NULL);
-	     
-	     cbi.method = method;
-	     cbi.upgrade = 0;
-	     
-	     rpmRunTransactions(trans, swCallback, &cbi, NULL, &probs, 0, 
-				 0xffffffff);
-	     
-	     swClose();
-	     break;
-	 }
-    }
-
-    # this handles kickstart and normal/expert modes 
-    if ((rc=xfree86Config(prefix, "--continue")))
-	 return INST_ERROR;
-
-    # done with proc now 
-    umount(procPath);
-
-    rpmdbClose(db);
-
-    log::l("rpm database closed");
-
-    return INST_OKAY;
+    #TODO
 }
 
 sub exitInstall {}

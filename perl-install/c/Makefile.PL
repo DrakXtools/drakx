@@ -4,7 +4,7 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     'NAME'	=> 'c',
     'VERSION_FROM' => 'c.pm', # finds $VERSION
-    'LIBS'	=> ['-ldb1 -lz'],   # e.g., '-lm' 
+    'LIBS'	=> ['-lrpm -ldb1 -lz'],   # e.g., '-lm' 
 #    'OBJECT'    => 'c.o librpm.a',
     'DEFINE'	=> '',     # e.g., '-DHAVE_SOMETHING' 
     'INC'	=> '-Wall',     # e.g., '-I/usr/include/other' 
