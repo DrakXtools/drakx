@@ -30,6 +30,7 @@ int __v_printf(struct arg_printf* fn, const unsigned char *format, va_list arg_p
 {
   int len=0;
 
+  if (format)
   while (*format) {
     unsigned int sz = skip_to(format);
     if (sz) {
