@@ -1,6 +1,6 @@
 
 DEST_LIVETREE = /tmp/live_tree
-DEST_STAGE2 = $(DEST_LIVETREE)/usr/bin/stage2
+DEST_STAGE2 = $(DEST_LIVETREE)/usr/lib/stage2
 
 ISO = /BIG/mdkmove.iso
 
@@ -26,16 +26,16 @@ endif
 
 all: install
 
-build: xwait runlevel_set isolinux/boot.msg
-	cd $(STAGE1) && ADDITIONAL_DEFS="-DMANDRAKE_MOVE" MOVE=1 make init stage1-full init-move
+build: stage1 xwait runlevel_set
 	sudo ./collect-directories-to-create.pl $(DEST_LIVETREE) > data/directories-to-create
 	sudo find $(DEST_LIVETREE)/etc -type f | perl -pe 's|$(DEST_LIVETREE)||' > data/all-etcfiles
 	$(MAKE) -C ../perl-install mo_files
 
-isolinux/boot.msg: data/isolinux-graphic.bmp
-	lilo-bmp2mdk mode:0x103 progress:371,144,4,4,64+11 clear:600,800,64+127 pos:0,0 < $< > $@
+stage1:
+	cd $(STAGE1) && ADDITIONAL_DEFS="-DMANDRAKE_MOVE" MOVE=1 make init stage1-full init-move
+	cd .. ; ./make_boot_img move
 
-install: build
+install:
 	 #- todo: make_boot_img alike to create boot volume from ../mdk-stage1/stage1-cdrom (isolinux mandatory since stock kernel is so big)
 	sudo cp -f $(STAGE1)/init-move $(DEST_LIVETREE)/sbin/init
 
