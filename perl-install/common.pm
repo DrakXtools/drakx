@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common     => [ qw(__ min max sqr sum sign product bool listlength bool2text to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX) ],
+    common     => [ qw(__ min max sqr sum sign product bool listlength bool2text to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX) ],
     functional => [ qw(fold_left map_index map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
     file       => [ qw(dirname basename touch all glob_ cat_ chop_ mode) ],
     system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_ getVarsFromSh setVarsInSh) ],
@@ -50,7 +50,8 @@ sub uniq { my %l; @l{@_} = (); keys %l }
 sub to_int { $_[0] =~ /(\d*)/; $1 }
 sub to_float { $_[0] =~ /(\d*(\.\d*)?)/; $1 }
 sub ikeys { my %l = @_; sort { $a <=> $b } keys %l }
-sub add2hash { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { $a->{$k} ||= $v } }
+sub add2hash  { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { $a->{$k} ||= $v } }
+sub add2hash_ { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { exists $a->{$k} or $a->{$k} = $v } }
 sub member { my $e = shift; foreach (@_) { $e eq $_ and return 1 } 0 }
 sub dirname { @_ == 1 or die "usage: dirname <name>\n"; local $_ = shift; s|[^/]*/*\s*$||; s|(.)/*$|$1|; $_ || '.' }
 sub basename { @_ == 1 or die "usage: basename <name>\n"; local $_ = shift; s|/*\s*$||; s|.*/||; $_ }

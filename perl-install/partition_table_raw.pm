@@ -15,8 +15,9 @@ my $nb_primary = 4;
 my $offset = $common::SECTORSIZE - length($magic) - $nb_primary * common::psizeof($format);
 
 my @MBR_signatures = (
-    [ 'LILO', 0x6,  "LILO" ],
-    [ 'DOS',  0xa0, "\x25\x03\x4E\x02\xCD\x13" ],
+    [ 'empty', 0, "\0\0\0\0" ],
+    [ 'lilo', 0x6,  "LILO" ],
+    [ 'dos',  0xa0, "\x25\x03\x4E\x02\xCD\x13" ],
 );
 
 sub compute_CHS($$) {

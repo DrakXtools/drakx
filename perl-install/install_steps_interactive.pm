@@ -534,12 +534,14 @@ sub setupBootloader($) {
     my ($o) = @_;
     my @l = (__("First sector of drive"), __("First sector of boot partition"));
 
+    add2hash_($o->{bootloader}, { onmbr => lilo::suggest_onmbr($o->{hds}) });
+
     $o->{bootloader}{onmbr} =
       $o->ask_from_list_(_("Lilo Installation"),
 			 _("Where do you want to install the bootloader?"),
 			 \@l,
 			 $l[!$o->{bootloader}{onmbr}]
-			) eq $l[0];
+			) eq $l[0] unless $::beginner && $o->{bootloader}{onmbr};
 
     lilo::proposition($o->{hds}, $o->{fstab}, $o->{bootloader});
 
