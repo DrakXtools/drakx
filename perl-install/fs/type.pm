@@ -32,7 +32,7 @@ if_(arch() =~ /i.86|ia64|x86_64/,
   0x0b => 'vfat',     'FAT32',
 ),
 if_(arch() =~ /ppc/,
-  0x401	=> 'apple',    'Apple Bootstrap',
+  0x401	=> '',         'Apple Bootstrap',
   0x402	=> 'hfs',      'Apple HFS Partition',
   0x41  => '',         'PPC PReP Boot',
 ),
@@ -316,8 +316,8 @@ sub isSwap { $_[0]{fs_type} eq 'swap' }
 sub isDos { arch() !~ /^sparc/ && ${{ 1 => 1, 4 => 1, 6 => 1 }}{$_[0]{pt_type}} }
 sub isFat_or_NTFS { member($_[0]{fs_type}, 'vfat', 'ntfs') }
 sub isSunOS { arch() =~ /sparc/ && ${{ 0x1 => 1, 0x2 => 1, 0x4 => 1, 0x6 => 1, 0x7 => 1, 0x8 => 1 }}{$_[0]{pt_type}} }
-sub isApple { $_[0]{fs_type} eq 'apple' && defined $_[0]{isDriver} }
-sub isAppleBootstrap { $_[0]{fs_type} eq 'apple' && defined $_[0]{isBoot} }
+sub isApple { $_[0]{pt_type} == 0x401 && defined $_[0]{isDriver} }
+sub isAppleBootstrap { $_[0]{pt_type} == 0x401 && defined $_[0]{isBoot} }
 sub isHiddenMacPart { defined $_[0]{isMap} }
 
 sub isTrueFS { isTrueLocalFS($_[0]) || member($_[0]{fs_type}, qw(nfs)) }
