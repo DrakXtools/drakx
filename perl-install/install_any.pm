@@ -381,8 +381,14 @@ sub ask_if_suppl_media {
 
 Do you have a supplementary installation media to configure?",
 	    join ", ", uniq(map { $_->{descr} } values %{$o->{packages}{mediums}})));
-    my $suppl = $o->ask_from_list_(
-	'', $msg, [ N_("None"), N_("CD-ROM"), N_("Network (http)"), N_("Network (ftp)") ], 'None'
+    $o->ask_from(
+	'', $msg,
+	[ {
+	    val => \my $suppl,
+	    list => [ N_("None"), N_("CD-ROM"), N_("Network (http)"), N_("Network (ftp)") ],
+	    type => 'list',
+	    format => \&translate,
+	} ],
     );
     $suppl_already_asked = 1;
     return $suppl;
