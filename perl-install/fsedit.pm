@@ -44,6 +44,7 @@ foreach (values %suggestions) {
 my @suggestions_mntpoints = (
     "/var/ftp", "/var/www", "/boot", '/tmp',
     arch() =~ /sparc/ ? "/mnt/sunos" : arch() =~ /ppc/ ? "/mnt/macos" : "/mnt/windows",
+    #- RedHat also has /usr/local and /opt
 );
 
 my @partitions_signatures = (
@@ -492,7 +493,7 @@ sub check_mntpoint {
     die _("You can't use a LVM Logical Volume for mount point %s", $mntpoint)
       if ($mntpoint eq '/' || $mntpoint eq '/boot') && isLVM($hd);
     die _("This directory should remain within the root filesystem")
-      if member($mntpoint, qw(/bin /dev /etc /lib /sbin));
+      if member($mntpoint, qw(/bin /dev /etc /lib /sbin /root /mnt));
     die _("You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n")
       if !isTrueFS($part) && member($mntpoint, qw(/ /home /tmp /usr /var));
     die _("You can't use an encrypted file system for mount point %s", $mntpoint)
