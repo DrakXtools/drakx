@@ -250,7 +250,7 @@ sub createXconf {
 
     #- needed for imlib to start on 8-bit depth visual.
     symlink("/tmp/stage2/etc/imrc", "/etc/imrc");
-    symlink("/tmp/stage2/etc/im_palette.pal", "etc/im_palette.pal");
+    symlink("/tmp/stage2/etc/im_palette.pal", "/etc/im_palette.pal");
 
     #- remove "error opening security policy file" warning
     symlink("/tmp/stage2/etc/X11", "/etc/X11");
