@@ -1,3 +1,99 @@
+2002/07/21  Pixel  <pixel@mandrakesoft.com>
+
+	* share/locales-skeleton.tar.bz2: usr/share/locale skeleton is now build
+	in gen_locales.pl
+
+	* share/gen_locales.pl, share/gen_locales.sh: build per languages symlinks
+	using the new::during_install__lang2charset
+	  -> this enables doing the same during install when using ramdisk
+	=> no need to have a locale.cz2 anymore
+	  (this is now possible since the number of special cases is lower than
+	before)
+
+	* lang.pm: 
+	  - remove utf_xxx charsets, adding a flag UTF-8 instead
+	  - add during_install__lang2charset
+	  - when using ramdisk, no locale.cz2 anymore:
+	there are 3 main charsets containing everything for all locales, except
+	LC_CTYPE
+	    by default, there is UTF-8.
+	    when asked for GB2312 or BIG5, removing the other main charsets
+	  - cleanup comments (use #- instead of #)
+	  - various cleanup
+
+	* tools/make_mdkinst_stage2: no more locale.cz2, just keeping the main
+	charset /usr/share/locale/UTF-8
+
+2002/07/20  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* standalone/drakbug: 
+	  - complete app list
+
+2002/07/20  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator_consts.pm: shorter and nicer XF86Config's
+
+	* mouse.pm: devfssymlinkf doesn't have any return value, so don't check it
+
+	* Xconfig.pm (getinfoFromXF86Config): move here setting prefer_xf3 based
+	on current choice on system
+	shorter and nicer XF86Config's
+
+	* install_gtk.pm: 
+	  - rename updateCardAccordingName into add_to_card__using_Cards
+	  - rename cardConfigurationAuto into probe_cards
+	  - cleanup the simple XF86Config used during install
+
+	* install_steps.pm: call config_dvd with $have_devfsd
+
+	* install_steps_gtk.pm: 
+	  - rename updateCardAccordingName into add_to_card__using_Cards
+	  - rename cardConfigurationAuto into probe_cards
+
+	* any.pm: try very hard to make rdvd work:
+	  - if not using devfs, it worked so keeping things unchanged
+	  - if using devfs, using the new dynamic rawdevice.script script to
+	bind a
+	rawdevice on demand
+	pb: can't have both a devfs and a non-devfs config,
+	    the /etc/sysconfig/rawdevices solution gives errors with devfs
+	    (since the dvd is not REGISTERed yet)
+	please perl_checker
+	fix typo
+	(devfssymlinkf): use devfs names for devfs/conf.d/xxx.conf, but not for
+	the
+	symlink in /dev (which is used when devfs is not)
+	devfssymlinkf doesn't have any return value, so don't check it
+
+	* Xconfigurator.pm: 
+	  - $in and $do_pkgs are no more global
+	=> it's now easier to keep track of interactive vs non-interactive
+	functions
+	  - rename updateCardAccordingName into add_to_card__using_Cards
+	  - rename cardConfigurationAuto into probe_cards
+	  - and a few other function renamings
+	shorter and nicer XF86Config's
+
+2002/07/19  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm: 
+	  - reorganize monitor tree
+	  - merge XF3 & XF4 server/module choosing
+	  - replace {eide} by {EISA_ID} (=> {monitor} cleanup)
+	  - ensure a few "Cancel" are more better handled
+	  - ensure the default monitor in the monitor tree is the last chosen
+	one
+
+	* Xconfigurator_consts.pm: 
+	  - fix good_default_monitor (must not be 1600x1200!)
+	  - add r128 & radeon in XF4 drivers list
+
+	* interactive_gtk.pm: reduce "Use of uninitialized value" in a heavy used
+	place
+	(useful when debugging)
+
+	* Xconfig.pm: read monitor's VendorName & ModelName
+
 2002/07/19  Damien Chaumette  <dchaumette@mandrakesoft.com>
 
 	* network/adsl.pm: 
