@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-@ARGV >= 2 or die "usage: $0 <image> all|other|cdrom|hd|network|usb|blank|pcmcia|live|tftp|tftprd\n";
+@ARGV >= 2 or die "usage: $0 <image> all|cdrom|hd|hd_usb|network|network_gigabit_usb|blank|pcmcia|live|tftp|tftprd\n";
 
 use Config;
 use MDK::Common;
@@ -34,16 +34,16 @@ _ "$sudo mkdir ${mnt}2" unless -e "${mnt}2";
 
 $install = $ {{
     all => "stage1-full",
-    other => "stage1-full",
     blank => "stage1-full",
     live => "stage1-full",
     tftp => "stage1-full",
     tftprd => "stage1-full",
     pcmcia => "stage1-full",
     network => "stage1-network",
-    usb => "stage1-usb",
+    network_gigabit_usb => "stage1-network-usb",
     cdrom => "stage1-cdrom",
     hd => "stage1-disk",
+    hd_usb => "stage1-disk-usb",
     live64 => "stage1-full",
     tftp64 => "stage1-full",
     tftprd64 => "stage1-full",
@@ -56,7 +56,7 @@ $install = $ {{
 mkdir "images";
 chomp($main = `cat kernel/all.kernels/.main`);
 
-if ($img =~ /blank|other|pcmcia/) {
+if ($img =~ /blank|pcmcia/) {
     @kernels = $main;
 } else {
     @kernels = map { m|kernel/all.kernels/(.*)| } glob('kernel/all.kernels/*');
@@ -105,7 +105,7 @@ sub initrd {
     install_stripped("$instdir/init", "$mnt/sbin");
     install_stripped("$instdir/$install", "$mnt/sbin/stage1");
 
-    if (member($type, qw(network usb all other blank))) {
+    if (member($type, qw(network network_gigabit_usb all blank))) {
 	install_stripped("$instdir/ppp/pppd-bin", "$mnt/sbin/pppd");
 	install_stripped("$instdir/rp-pppoe/pppoe-bin", "$mnt/sbin/pppoe");
 	_ "$sudo mknod $mnt/dev/ppp c 108 0";
