@@ -488,6 +488,9 @@ sub read_rpmsrate {
 		if (my ($inv, $p) = /^(!)?HW"(.*)"/) {
 		    ($inv xor detect_devices::matching_desc($p)) and $ok = 1;
 		    0;
+                } elsif (my ($inv, $p) = /^(!)?DRIVER"(.*)"/) {
+		    ($inv xor detect_devices::matching_driver($p)) and $ok = 1;
+		    0;
 		} else {
 		    1;
 		}
