@@ -504,8 +504,9 @@ sub ask_fromW {
 
     my $set_default_size = sub {
 	if (!$::isEmbedded && !$::isWizard || $my_gtk::pop_it) {
-	    $mainw->{rwindow}->set_default_size($totalwidth+6+$my_gtk::shape_width, $totalheight+6+3+$my_gtk::shape_width) if $has_scroll;
-	    $mainw->{rwindow}->set_default_size($totalwidth+6+$my_gtk::shape_width, 0) if $has_horiz_scroll;
+	    if ($has_scroll || $has_horiz_scroll) {
+		$mainw->{rwindow}->set_default_size($totalwidth+6+$my_gtk::shape_width, $has_scroll ? $totalheight+6+3+$my_gtk::shape_width : 0);
+	    }
 	}
     };
 
