@@ -93,10 +93,10 @@ my $mdk_cc = 0;
 my $DEBUG = 0;
 
 
-# config. FILES ->  PATH  & Global variables.
+# config. FILES -> Default PATH  & Global variables.
 my @sys_files = ("/etc");
-my @home_files;
-my @other_files = ("/var/www") ;
+my @user_list;
+my @list_other = () ;
 my $cfg_file = "/etc/drakxtools/drakbackup/drakbackup.conf";
 my $save_path = "/var/drakbackup";
 my $option_replace = 0;
@@ -108,6 +108,10 @@ my $what_no_browser = 1;
 my $remember_pass = 0;
 my $cdrw = 0;
 my $net_proto;
+my $host_path;
+my $login_user;
+my $passwd_user;
+
 
 foreach (@ARGV) {
     /--default/ and $default = 1, $mode=-1;
@@ -123,8 +127,8 @@ foreach (@ARGV) {
 
 sub debug {
     print "SYS_FILES: $_ \n" foreach (@sys_files);
-    print "HOME_FILES: $_ \n" foreach (@home_files);
-    print "OTHER_FILES: $_ \n" foreach (@other_files);
+    print "HOME_FILES: $_ \n" foreach (@user_list);
+    print "OTHER_FILES: $_ \n" foreach (@list_other);
     print "PATH_TO_SAVE: $save_path \n";
     print "OPTION_REPLACE: $option_replace \n";
     print "OPTION_COMP: $comp_mode \n";
@@ -133,32 +137,31 @@ sub debug {
 sub read_passwd {
     @user_and_path_list = map { (split(':', $_))[0] . ":" . (split(':', $_))[5] } grep {( split(':', $_))[2] > 500} split ('\n', cat_('/etc/passwd'));  
     $DEBUG and print "user_and_path_list: ".$_."\n" foreach (@user_and_path_list);
-    @home_files = ();
+    @user_list = ();
     @all_user_list = ();
     push @user_and_path_list, 'root:/root';
-    push @home_files, (split(':', $_))[0] foreach (@user_and_path_list);
+    push @user_list, (split(':', $_))[0] foreach (@user_and_path_list);
     push @all_user_list, (split(':', $_))[0] foreach (@user_and_path_list);
-    $DEBUG and print "home_files: ".$_."\n" foreach (@home_files);
+    $DEBUG and print "home_files: ".$_."\n" foreach (@user_list);
 }
 
 sub save_conf_file {
     my @cfg_list = ( "SYS_FILES=@sys_files\n",
-		     "HOME_FILES=@home_files\n", 
-		     "OTHER_FILES=@other_files\n",
+		     "HOME_FILES=@user_list\n", 
+		     "OTHER_FILES=@list_other\n",
 		     "PATH_TO_SAVE=$save_path\n",
+		     "HOST_PATH=$host_path\n",
 		     "NET_PROTO=$net_proto\n"
 		     );
-    $cdrw and push @cfg_list, "CDRW\n" ;
+    $remember_pass and push @cfg_list, "LOGIN=$login_user\n" ;
+    $cdrw and push @cfg_list, "PASSWD=$passwd_user\n" ;
     $remember_pass and push @cfg_list, "REMEMBER_PASS\n" ;
     $what_no_browser or push @cfg_list, "BROWSER_CACHE\n" ;
     $backup_sys_cvs or push @cfg_list, "NO_SYS_CVS\n" ;
     $option_replace and push @cfg_list, "OPTION_REPLACE\n" ;
     $backup_sys or push @cfg_list,  "NO_SYS_FILES\n";
-    if ($comp_mode) {
-	push @cfg_list, "OPTION_COMP=TAR.BZ2\n";
-    } else {
-	push @cfg_list, "OPTION_COMP=TAR.GZ\n";
-    }
+    if ($comp_mode) {	push @cfg_list, "OPTION_COMP=TAR.BZ2\n"; } 
+    else { push @cfg_list, "OPTION_COMP=TAR.GZ\n"; }
     output_p( $cfg_file, @cfg_list);
 }
 
@@ -171,8 +174,8 @@ sub read_conf_file {
 	    next if /^#/;
 	    chomp;
 	    if (/^SYS_FILES/)      { s/^SYS_FILES=//gi;    @sys_files = split(' ', $_ );	}
-	    if (/^HOME_FILES/)     { s/^HOME_FILES=//gi;   @home_files = split(' ', $_ );	}
-	    if (/^OTHER_FILES/)    { s/^OTHER_FILES=//gi;  @other_files = split(' ', $_ );	}
+	    if (/^HOME_FILES/)     { s/^HOME_FILES=//gi;   @user_list = split(' ', $_ );	}
+	    if (/^OTHER_FILES/)    { s/^OTHER_FILES=//gi;  @list_other = split(' ', $_ );	}
 	    if (/^PATH_TO_SAVE/)   { s/^PATH_TO_SAVE=//gi; $save_path = $_;	}
 	    if (/^OPTION_REPLACE/) { $option_replace = 1; }
 	    if (/^NO_SYS_FILES/)   { $backup_sys = 0;}
@@ -182,11 +185,13 @@ sub read_conf_file {
 	    if (/^CDRW/)           { $cdrw = 1; }
 	    if (/^REMEMBER_PASS/)  { $remember_pass = 1; }
 	    if (/^NET_PROTO/)      { s/^NET_PROTO=//gi; $net_proto = $_; }
+	    if (/^HOST_PATH/)      { s/^HOST_PATH=//gi; $host_path = $_; } 
+	    if (/^LOGIN/)          { s/^LOGIN=//gi;  $login_user  = $_; $remember_pass = 1; }
+	    if (/^PASSWD/)         { s/^PASSWD=//gi; $passwd_user = $_; $remember_pass = 1; }
 	}
 	$cfg_file_exist = 1;
-    } else {
-	$cfg_file_exist = 0;
-    }
+    } 
+    else { $cfg_file_exist = 0; }
     close CONF_FILE;    
     $DEBUG and debug; 
 }
@@ -203,7 +208,6 @@ sub build_cd_fct {
 }
 
 sub build_floppy_fct {
-
 }
 
 sub build_backup_files {
@@ -233,7 +237,7 @@ sub interactive_mode {
     } else { $box_cgf_state_comp = _("Backups use tar and gunzip"),   }
 	
     if ($cfg_file_exist) { 
-	my $label_cfg_file = new Gtk::Label _("Backup Sources: \n-System Files: @sys_files \n-Users Files: @home_files\n-Other Files to backup: @other_files\nPath to save backups: $save_path\nOptions:\n$box_cgf_state_replace\n$box_cgf_state_comp\n\n");
+	my $label_cfg_file = new Gtk::Label _("Backup Sources: \n-System Files: @sys_files \n-Users Files: @user_list\n-Other Files to backup: @list_other\nPath to save backups: $save_path\nOptions:\n$box_cgf_state_replace\n$box_cgf_state_comp\n\n");
 	$box_cfg_state =  gtkpack(new Gtk::VBox( 0, 0),
 				  gtkset_justify( $label_cfg_file , 'left'),
 				  ),
@@ -368,12 +372,9 @@ sub advanced {
     my $book_closed_mask;
     my $box_tmp;    
     my $choice_what_sys;
-    $list_other = new Gtk::List();
-    $list_other->set_selection_mode(-extended);
     my $adj = new Gtk::Adjustment 1.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
     read_conf_file();
-
-
+    
     my ($pix_net_map, $pix_net_mask) = gtkcreate_png("../pixmaps/backup_net.png");
     my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("../pixmaps/backup_hd.png");
     my ($pix_time_map, $pix_time_mask) = gtkcreate_png("../pixmaps/backup_time.png");
@@ -443,19 +444,37 @@ sub advanced {
 				  0, _("Please check all user that you want to include inb your backup."),
 				  0, new Gtk::HSeparator,
 				  1, createScrolledWindow( gtkpack(new Gtk::VBox(0,0),
-								   map { my $name = $_;
-									 my $b = new Gtk::CheckButton($name); 
-									 $check_what_user{$_} = [ $b, 0 ];
-#									 $b->signal_connect(toggled => sub { invbool \$check_what_user{$name}[1] });
-									 $b->signal_connect(toggled => sub { #print "__".$name . "\n" 
-});
-									 $b } (@all_user_list) 
+				      map { my $name = $_;
+					    my @user_list_tmp;
+					    my $b = new Gtk::CheckButton($name); 
+
+					    if (grep /^$name$/, @user_list) {
+						$check_what_user{$_}[1] = 1;
+						gtkset_active($b, 1);
+					    } else {
+						$check_what_user{$_}[1] = 0;
+						gtkset_active($b, 0);
+					    }
+					    $b->signal_connect(toggled => sub { 
+						if ($check_what_user{$name}[1] ) {
+						    $check_what_user{$name}[1] = 0;
+						    @user_list_tmp = grep(!/^$name$/, @user_list);
+						    @user_list = @user_list_tmp;
+						} else { 
+						    $check_what_user{$name}[1] = 1;
+						    if (!member($name, @user_list) ) {push @user_list, $name;}
+						}
+					    });
+					    $b } (@all_user_list) 
 								   ),
 							   ),
 				  0, new Gtk::HSeparator,
 				  0, my $check_what_browser = new Gtk::CheckButton( _(" do not include the browser cache") ),
 				  );
     
+    $list_other = new Gtk::List();
+    $list_other->set_selection_mode(-extended);
+    $list_other->add(gtkshow(new Gtk::ListItem($_))) foreach (@list_other);
     my $box_what_other =  gtkpack_(new Gtk::VBox(0,10),
 				   1, gtkpack_(new Gtk::HBox(0,4),
 					       1, createScrolledWindow($list_other),
@@ -466,9 +485,9 @@ sub advanced {
 					     ),
 				   );
     
-
     my $combo_where_net_proto = new Gtk::Combo();
     $combo_where_net_proto->set_popdown_strings ("scp","ftp", "sftp", "rsync");
+
     my $box_where_net =  gtkpack_(new Gtk::VBox(0,1),
 				  0, new Gtk::HSeparator,
 				  0, my $check_where_net = new Gtk::CheckButton( _(" Use Network to backup") ),
@@ -481,24 +500,33 @@ sub advanced {
 					      ),
 				  0, _(""),
 				  0, gtkpack_(new Gtk::HBox(0,10),
-					      1, _("please entrer the directory\n to put the backup on thid host. "),
-					      1, my $host_directory= new Gtk::Entry(),
+					      1, _("please entrer the directory\n to put the backup on this host. "),
+					      1, my $host_path_entry = new Gtk::Entry(),
 					      0, _(""),
 					      ),
 				  0, _(""),
 				  0, gtkpack_(new Gtk::HBox(0,10),
 					      1, _("please entrer your login"),
-					      0, my $login_user= new Gtk::Entry(),
+					      0, my $login_user_entry = new Gtk::Entry(),
 					      0, _(""),
 					      ),
 				  0, gtkpack_(new Gtk::HBox(0,10),
 					      1, _("please entrer your passord"),
-					      0, my $passwd_user= new Gtk::Entry(),
+					      0, my $passwd_user_entry = new Gtk::Entry(),
 					      0, _(""),
 					      ),
 				  0, my $check_remember_pass = new Gtk::CheckButton( _(" remember this password") ),
 				  );
-    
+
+    $combo_where_net_proto->entry->signal_connect( 'changed', sub { $net_proto = $combo_where_net_proto->entry->get_text()});
+    $passwd_user_entry->set_visibility(0);
+    $host_path_entry->set_text( $host_path );
+    $login_user_entry->set_text( $login_user );
+    $passwd_user_entry->set_text( $passwd_user );
+    $host_path_entry->signal_connect( 'changed', sub { $host_path = $host_path_entry->get_text()});
+    $login_user_entry->signal_connect( 'changed', sub { $login_user = $login_user_entry->get_text()});
+    $passwd_user_entry->signal_connect( 'changed', sub { $passwd_user = $passwd_user_entry->get_text()});
+
     my $box_where_hd =  gtkpack_(new Gtk::VBox(0,1),
 				 0, new Gtk::HSeparator,
 				 0, my $check_where_hd = new Gtk::CheckButton( _(" Use Hard Disk to backup") ),
@@ -507,7 +535,7 @@ sub advanced {
 				 0, gtkpack_(new Gtk::HBox(0,10),
 					     0, _(" "),
 					     0, _("Please entrer the directory to save: "),
-					     1, my $save_path = new Gtk::Entry(),
+					     1, my $save_path_entry = new Gtk::Entry(),
 					     0, _(""),
 					     ),
 				 0, _(""),
@@ -517,7 +545,15 @@ sub advanced {
 					     1, my $spinner = new Gtk::SpinButton( $adj, 0, 0),
 					     0, _(""),
 					     ),
+				 0, gtkpack_(new Gtk::HBox(0,10),
+					     1, _(""),
+					     0, my $check_where_hd_quota = new Gtk::CheckButton( _(" Use quota for backup files.") ),
+					     0, _(""),
+					     ),
 				 );
+
+
+    $save_path_entry->signal_connect( 'changed', sub { $save_path = $save_path_entry->get_text()});
 
     my $combo_where_cd_time = new Gtk::Combo();
     $combo_where_cd_time->set_popdown_strings ("650","700", "750", "800");    
@@ -535,6 +571,11 @@ sub advanced {
 				 0, gtkpack_(new Gtk::HBox(0,10),
 					     1, _(" Please check if you are using CDRW media"),
 					     0, my $check_cdrw = new Gtk::CheckButton(),
+					     0, _(""),
+					     ),
+				 0, gtkpack_(new Gtk::HBox(0,10),
+					     1, _("please enter your CDRW device name"),
+					     0, $combo_where_cd_time,
 					     0, _(""),
 					     ),
 				 );
@@ -614,19 +655,7 @@ sub advanced {
 		  left => "top"
 		  );
 
-#    print $check_what_user{'seb'}->active."\n";
-    @user_list = ("toto", "titi");
-    print $_."\n" foreach @user_list;
 
-    foreach (@all_user_list) {
-	if (member($_, @user_list)) {
-	    $check_what_user{$_}[1] = 1;
-	    $check_what_user{$_}[0]->set_active(1);
-	}
-    }
-
-
-    $combo_where_net_proto->entry->signal_connect( 'changed', sub { $net_proto = $combo_where_net_proto->entry->get_text()});
 
 
     foreach ([$check_what_sys, \$backup_sys], [$check_what_cvs, \$backup_sys_cvs], [$check_what_browser, \$what_no_browser], [$check_remember_pass, \$remember_pass], [$check_cdrw, \$cdrw]) {
@@ -668,7 +697,7 @@ sub interactive_mode_my {
     } else { $box_cgf_state_replace = _("Update backups (do not replace)"),  }
     if ($comp_mode) { $box_cgf_state_comp = _("Backups use tar and gunzip "),
     } else { $box_cgf_state_comp = _("Backups use tar and gunzip"),   }
-    if ($cfg_file_exist) { my $label_cfg_file = new Gtk::Label _("Backup Sources: \n-System Files: @sys_files \n-Users Files: @home_files\n-Other Files to backup: @other_files\nPath to save backups: $save_path\nOptions:\n$box_cgf_state_replace\n$box_cgf_state_comp\n$box_cgf_state_sys\n");
+    if ($cfg_file_exist) { my $label_cfg_file = new Gtk::Label _("Backup Sources: \n-System Files: @sys_files \n-Users Files: @user_list\n-Other Files to backup: @list_other\nPath to save backups: $save_path\nOptions:\n$box_cgf_state_replace\n$box_cgf_state_comp\n$box_cgf_state_sys\n");
 			   $box_cfg_state =  gtkpack(new Gtk::VBox( 0, 0),
 						     gtkset_justify( $label_cfg_file , 'left'),
 						     ),
@@ -772,7 +801,7 @@ sub after_adv {
     } else { $box_cgf_state_comp = _("Backups use tar and gunzip"),   }
     
     if ($cfg_file_exist) { 
-	my $label_cfg_file = new Gtk::Label _("Backup Sources: \n-System Files: @sys_files \n-Users Files: @home_files\n-Other Files to backup: @other_files\nPath to save backups: $save_path\nOptions:\n$box_cgf_state_replace\n$box_cgf_state_comp\n$box_cgf_state_sys\n");
+	my $label_cfg_file = new Gtk::Label _("Backup Sources: \n-System Files: @sys_files \n-Users Files: @user_list\n-Other Files to backup: @list_other\nPath to save backups: $save_path\nOptions:\n$box_cgf_state_replace\n$box_cgf_state_comp\n$box_cgf_state_sys\n");
 	$box_cfg_state =  gtkpack(new Gtk::VBox( 0, 0),
 				  gtkset_justify( $label_cfg_file , 'left'),
 				  ),
@@ -904,5 +933,4 @@ configuration file:
     $central_widget = \$about_box;
     $up_box->show_all();
 }
-
 
