@@ -52,7 +52,12 @@ sub init {
 }
 
 sub install2::startMove {
-    my ($_o) = @_;
+    my ($o) = @_;
+
+    require install_any;
+    install_any::write_fstab($o);
+    modules::write_conf('');
+    detect_devices::install_addons('');
 
     $::WizardWindow->destroy;
     require ugtk2;
