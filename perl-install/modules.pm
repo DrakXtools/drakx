@@ -175,6 +175,7 @@ sub write_preload_conf {
     push @l, 'scsi_hostadapter' if $conf->get_probeall('scsi_hostadapter');
     push @l, intersection([ qw(bttv cx8800 saa7134) ],
 			  [ map { $_->{driver} } detect_devices::probeall() ]);
+    push @, 'nvram' if any { m!^N: Name="SynPS/2 Synaptics TouchPad"$! } cat_('/proc/bus/input/devices');
     my @l_26 = @l;
     if (my ($agp) = probe_category('various/agpgart')) {
 	push @l_26, $agp->{driver};
