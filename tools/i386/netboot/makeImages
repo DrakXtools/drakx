@@ -7,7 +7,7 @@ DRIVERTOCOMPILE=`grep NETBOOT_DRIVERS= ${PATHGRUB}/configure.in | cut -d " " -f 
 echo "Cleaning old drivers"
 for i in `ls`
 do
-	if [ -d $i ]; then
+	if [ -d $i ] && [ $i != CVS ]; then
 	rm -rf $i
 	fi
 	
