@@ -114,10 +114,13 @@ sub new {
     my $wcolor = { 'red' => 0xFFFF, 'green' => 0x6400, 'blue' => 0x6400 };
     $cmap->color_alloc($wcolor);
     $tree->set_column_auto_resize(0, 1);
+    my $curr = $tree->node_nth(0); #- default value
     $tree->signal_connect( 'select_row', sub {
 	   my ( $ctree, $row, $column, $event ) = @_;
 	   my $node = $ctree->node_nth( $row );
-	   my $data = $tree->{data}{$row};
+	   my ($name, undef) = $tree->node_get_pixtext($node,0);
+	   my $data = $tree->{data}{$name};
+
 	   if ($data) {
 		  $text->hide;
 		  $text->backward_delete($text->get_point);
@@ -152,7 +155,7 @@ sub new {
 		  }
 		  disconnect($config_button, 'tool');
 		  $text->show;
-		  my $configurator = $tree->{configurator}{$row};
+		  my $configurator = $tree->{configurator}{$name};
 
 		  return unless -x $configurator;
 		  $IDs{tool} = $config_button->signal_connect(clicked => sub {
@@ -169,7 +172,6 @@ sub new {
 	   }
     });
 
-    my $row = 0;
     foreach (@harddrake::data::tree) {
 	   my ($Ident, $title, $icon, $configurator, $detector) = @$_;
 	   next if (ref($detector) ne "CODE"); #skip class witouth detector
@@ -178,8 +180,7 @@ sub new {
 	   my @devices = &$detector;
 	   next if (!listlength(@devices)); # Skip empty class (no devices)
 	   my $hw_class_tree = $tree->insert_node(undef, undef, [$title], 5, (gtkcreate_png($icon)) x 2, 0, ($title =~ /Unknown/ ? 0 : 1));
-	   $row++;
-
+	   my $prev_item;
 	   foreach (@devices) {
 		  if (exists $_->{bus} && $_->{bus} eq "PCI") {
 			 my $i = $_;
@@ -208,12 +209,14 @@ sub new {
 		  }
 		  foreach my $i (qw(vendor id subvendor subid pci_bus pci_device pci_function MOUSETYPE XMOUSETYPE unsafe val devfs_prefix wacom auxmouse)) { delete $_->{$i} }
 		  $_->{device} = '/dev/'.$_->{device} if exists $_->{device};
-		  my $hw_item = $tree->insert_node($hw_class_tree, undef, [defined($_->{device}) ? $_->{device} : (defined($_->{description}) ? $_->{description} : $title) ], 5, (undef) x 4, 1, 0);
-		  $tree->{data}{$row} = $_;
-		  $tree->{configurator}{$row++} = $configurator;
+		  my $custom_id = defined($_->{device}) ? $_->{device} : (defined($_->{description}) ? $_->{description} : $title);
+		  my $hw_item = $tree->insert_node($hw_class_tree, $prev_item, [$custom_id ], 5, (undef) x 4, 1, 0);
+		  $tree->set_row_data($hw_item, [data => $_, configurator => $configurator ]);
+		  $tree->{data}{$custom_id} = $_;
+		  $tree->{configurator}{$custom_id} = $configurator;
+		  $prev_item = $hw_item;
 	   }
     }
-    
     $SIG{CHLD} = sub { undef $pid; $statusbar->pop($sig_id) };
     $w->{rwindow}->signal_connect (delete_event => \&quit_global);
     undef $wait;
