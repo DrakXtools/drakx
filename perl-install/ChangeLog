@@ -1,3 +1,50 @@
+2005/01/21  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* standalone/printerdrake: 
+	  - main loop fix
+	  - remove dead code
+	  - cleanups
+
+2005/01/21  Pixel  <pixel at mandrakesoft.com>
+
+	* raid.pm: 
+	  - don't write /etc/mdadm.conf when no raid
+	  - use option "auto=yes" in mdadm.conf to ensure mdadm will create
+	/dev/mdX devices when needed
+	(those are not there when using udev and neither kernel raid autostart
+	nor initrd created the raid)
+
+	* Xconfig/main.pm: fix check_valid()
+	  - rename Xconfig::main::is_valid() to Xconfig::main::check_valid() and
+	return the cause of the error
+	  - ensure an empty config file doesn't make it display "Your Xorg
+	configuration file is broken..."
+
+	* mygtk2.pm: do show_all on the real window (this is used by drakloop)
+
+	* keyboard.pm, standalone/keyboarddrake: minimal XkbModel support
+
+2005/01/21  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/data.pm: tag devices as bridges later so that pcmcia
+	controllers got a chance
+	to be detected
+
+	* share/po/br.po: typo fixes
+	typo fixes
+
+	* standalone/printerdrake: fix subdialogs when embedded in mcc
+	fix banner's title by initializing mcc domain before ugtk2
+
+	* drakxtools.spec: 10.2-0.14mdk
+	10.2-0.13mdk
+
+	* network/adsl_consts.pm: updates from baud:
+	  - add "Czech Republic|Cesky Telecom"
+	  - add "Switzerland|Tiscali.ch"
+	  - add "Tunisia|Planet.tn"
+	  - add dns servers to "Israel|Bezeq"
+
 2005/01/21  Pixel  <pixel at mandrakesoft.com>
 
 	* raid.pm: 
@@ -43751,7 +43798,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1000 2005/01/18 13:32:45 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1001 2005/01/21 09:44:14 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
