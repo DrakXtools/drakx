@@ -156,6 +156,10 @@ sub tryConfScanner {
 					removeverticalbar($model)));
 	return 0;
     }
+    if ($scanner::scannerDB->{$model}{server} =~ /(printerdrake|hpoj)/i) {
+     	$in->ask_warn('Scannerdrake', N("The %s must be configured by printerdrake.\nYou can launch printerdrake from the Mandrake Control Center in Hardware section.", removeverticalbar($model)));
+     	return 0;
+    }
     if ($scanner::scannerDB->{$model}{ask} =~ /DEVICE/ || !$port) {
 	$port ||= N("Auto-detect available ports");
 	$in->ask_from('Scannerdrake',
@@ -223,10 +227,6 @@ sub tryConfScanner {
 	}
     }
     ($vendor, $product) = scanner::get_usb_ids_for_port($port);
-    if ($scanner::scannerDB->{$model}{server} =~ /(printerdrake|hpoj)/i) {
-     	$in->ask_warn('Scannerdrake', N("The %s must be configured by printerdrake.\nYou can launch printerdrake from the Mandrake Control Center in Hardware section.", removeverticalbar($model)));
-     	return 0;
-    }
     scanner::confScanner($model, $port, $vendor, $product);
     $in->ask_warn(N("Congratulations!"),
 		  N("Your %s has been configured.\nYou may now scan documents using \"XSane\" from Multimedia/Graphics in the applications menu.", removeverticalbar($model)));
