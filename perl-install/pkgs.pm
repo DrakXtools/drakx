@@ -898,6 +898,7 @@ sub install($$$;$$) {
     log::l("pkgs::install the following: ", join(" ", map { $_->name } values %packages));
     eval { fs::mount("/proc", "$prefix/proc", "proc", 0) } unless -e "$prefix/proc/cpuinfo";
 
+    URPM::read_config_files;
     openInstallLog($prefix);
 
     #- do not modify/translate the message used with installCallback since
