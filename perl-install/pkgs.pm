@@ -440,11 +440,17 @@ sub psUsingHdlist {
     $m->{hdlist_size} = -s $newf; #- keep track of size for post-check.
     symlinkf $newf, "/tmp/$hdlist";
 
-    #- if $o_fhdlist is defined, this is preferable not to try to find the associated synthesis.
+    #- if $o_fhdlist is a filehandle, this is preferable not to try to find the associated synthesis.
     my $newsf = "$urpmidir/synthesis.hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
-    unless ($o_fhdlist) {
+    unless (ref $o_fhdlist) {
 	#- copy existing synthesis file too.
-	install_any::getAndSaveFile("media/media_info/synthesis.$hdlist", $newsf);
+	my $synth;
+	if ($o_fhdlist) {
+	    $synth = $o_fhdlist;
+	    $synth =~ s/hdlist/synthesis.hdlist/ or $synth = undef;
+	}
+	$synth = "media/media_info/synthesis.$hdlist" unless $synth;
+	install_any::getAndSaveFile($synth, $newsf);
 	$m->{synthesis_hdlist_size} = -s $newsf; #- keep track of size for post-check.
 	-s $newsf > 0 or unlink $newsf;
     }
