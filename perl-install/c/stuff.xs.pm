@@ -1046,6 +1046,8 @@ headerGetEntry_filenames(h)
       free(dirNames);
     }
   }
+
+int rpmvercmp(char *a, char *b);
 ';
 
 @macros = (
