@@ -903,7 +903,8 @@ sub find_root_parts {
     } @$fstab;
 }
 sub use_root_part {
-    my ($fstab, $part, $prefix) = @_;
+    my ($all_hds, $part, $prefix) = @_;
+    my $fstab = [ fsedit::get_really_all_fstab($all_hds) ];
     {
 	my $handle = any::inspect($part, $prefix) or die;
 	fs::merge_info_from_fstab($fstab, $handle->{dir}, 'uniq');

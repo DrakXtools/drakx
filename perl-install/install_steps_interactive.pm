@@ -397,7 +397,7 @@ Continue at your own risk!"));
 			            _("What is the root partition (/) of your system?"),
 			            \&partition_table::description, \@l) or die "setstep exitInstall\n";
         }
-	install_any::use_root_part($o->{fstab}, $p, $o->{prefix});
+	install_any::use_root_part($o->{all_hds}, $p, $o->{prefix});
     } elsif ($::expert && $o->isa('interactive_gtk')) {
         install_interactive::partition_with_diskdrake($o, $o->{all_hds});
     } else {
