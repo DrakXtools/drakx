@@ -83,7 +83,9 @@ sub real_main {
       my (%connections, @connection_list, $is_wireless);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my ($adsl_type, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
-      my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $need_restart_network);
+      my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $need_restart_network);
+      my ($isdn, $isdn_name, $isdn_type, %isdn_cards);
+      my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
       my ($module, $auto_ip, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
       my $ethntf = {};
@@ -106,6 +108,11 @@ sub real_main {
                                dhcp_zeroconf   => N("Automatic IP (BOOTP/DHCP/Zeroconf)"),
                                   )
                               );
+      my $_w = N("Protocol for the rest of the world");
+      my %isdn_protocols = (
+                            2 => N("European protocol (EDSS1)"),
+                            3 => N("Protocol for the rest of the world\nNo D-Channel (leased lines)"),
+                           );
 
 
       init_globals($in);
@@ -271,6 +278,9 @@ sub real_main {
                              )
                             ],
                     post => sub {
+                        isdn_write_config($isdn, $netc); # or return 'isdn_protocol';
+                        $netc->{$_} = 'ippp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
+                        # return "static_hostname";
                         $handle_multiple_cnx->();
                     },
                    },
@@ -285,33 +295,26 @@ sub real_main {
                     },
                    },
 
+                   
                    isdn =>
                    {
-                    name => N("ISDN configuration has not yet be ported to new wizard layer"),
-                    end => 1,
-                   },
-
-                   
-                   isdn_real =>
-                   {
                     pre=> sub {
+                        network::isdn->import;
                         detect($netc->{autodetect}, 'isdn');
-                        # FIXME: offer to pick any card from values %{$netc->{autodetect}{isdn}}
-                        $isdn = top(values %{$netc->{autodetect}{isdn}});
-                      isdn_step_1:
-                        defined $isdn->{id} and goto intern_pci;
+                        %isdn_cards = map { $_->{description} => $_ } @{$netc->{autodetect}{isdn}};
                     },
-                    # !intern_pci:
-                        name => N("What kind is your ISDN connection?"),
-                    data => [ { val => \$isdn_type, type => "list", list => [ N_("Internal ISDN card"), N_("External ISDN modem") ], } ],
+                    name => N("Select the network interface to configure:"),
+                    data =>  sub {
+                        [ { label => N("Net Device"), type => "list", val => \$isdn_name, allow_empty_list => 1, 
+                            list => [ $my_isdn, N("External ISDN modem"), keys %isdn_cards ] } ]
+                    },
                     post => sub {
-                        if ($isdn_type =~ /card/) {
-                          intern_pci:
-                            $netc->{isdntype} = 'isdn_internal';
-                            $netcnx->{isdn_internal} = $isdn;
-                            $netcnx->{isdn_internal} = isdn_read_config($netcnx->{isdn_internal});
-                            isdn_detect($netcnx->{isdn_internal}, $netc) or goto isdn_step_1;
-                        } else {
+                        # !intern_pci:
+                        # data => [ { val => \$isdn_type, type => "list", list => [ ,  ], } ],
+                        # post => sub {
+                        if ($isdn_name eq $my_isdn) {
+                            return "isdn_ask";
+                        } elsif ($isdn_name eq N("External ISDN modem")) {
                             detect($netc->{autodetect}, 'modem');
                             $netc->{isdntype} = 'isdn_external';
                             $netcnx->{isdn_external}{device} = network::modem::first_modem($netc);
@@ -319,39 +322,99 @@ sub real_main {
                             $netcnx->{isdn_external}{special_command} = 'AT&F&O2B40';
                             require network::modem;
                             $modem = $netcnx->{isdn_external};
-                            return "ppp_account";
-                        };
+                            return "modem";
+                        }
 
-                    },
-                   },
-                   
-                   isdn_detect => 
-                   {
-                    pre => sub  {
-                        my ($isdn, $netc) = @_;
+                        $netc->{isdntype} = 'isdn_internal';
+                        # FIXME: some of these should be taken from isdn db
+                        $netcnx->{isdn_internal} = $isdn = { map { $_ => $isdn_cards{$my_isdn}{$_} } qw(description vendor id card_type driver type mem io io0 io1 irq firmware) };
+
                         if ($isdn->{id}) {
                             log::explanations("found isdn card : $isdn->{description}; vendor : $isdn->{vendor}; id : $isdn->{id}; driver : $isdn->{driver}\n");
                             $isdn->{description} =~ s/\|/ -- /;
                             
-                          isdn_detect_step_0:
-                            defined $isdn->{type} and my $new = $in->ask_yesorno(N("ISDN Configuration"), N("Do you want to start a new configuration ?"), 1);
-                            
-                            if ($isdn->{type} eq '' || $new) {
-                                isdn_ask($isdn, $netc, N("I have detected an ISDN PCI card, but I don't know its type. Please select a PCI card on the next screen.")) or goto isdn_detect_step_0;
-                            } else {
-                              isdn_detect_step_1:
-                                $isdn->{protocol} = isdn_ask_protocol() or goto isdn_detect_step_0;
-                              isdn_detect_step_2:
-                                isdn_ask_info($isdn, $netc) or goto isdn_detect_step_1;
-                                isdn_write_config($isdn, $netc) or goto isdn_detect_step_2;
-                            }
-                        } else {
-                            isdn_ask($isdn, $netc, N("No ISDN PCI card found. Please select one on the next screen.")) or return;
                         }
-                        $netc->{$_} = 'ippp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
-                        1;
+                        $netcnx->{isdn_internal} = isdn_read_config($netcnx->{isdn_internal});
+                        return "isdn_protocol";
+                    },
+                   },
+                   
+
+                   isdn_ask =>
+                   {
+                    pre => sub {
+                        %isdn_cards = isdn_get_cards();
+                    },
+                    name => N("Select a device !"),
+                    data => sub { [ { label => N("Net Device"), val => \$isdn_name, type => 'list', separator => '|', list => [ keys %isdn_cards ], allow_empty_list => 1 } ] },
+                    pre2 => sub {
+                        my ($label) = @_;
+                        
+                        #- ISDN card already detected
+                        goto isdn_ask_step_3;
+
+                      isdn_ask_step_1:
+                        my $e = $in->ask_from_list_(N("ISDN Configuration"),
+                                                    $label . "\n" . N("What kind of card do you have?"),
+                                                    [ N_("ISA / PCMCIA"), N_("PCI"), N_("USB"), N_("I don't know") ]
+                                                   ) or return;
+                      isdn_ask_step_1b:
+                        if ($e =~ /PCI/) {
+                            $isdn->{card_type} = 'pci';
+                        } elsif ($e =~ /USB/) {
+                            $isdn->{card_type} = 'usb';
+                        } else {
+                            $in->ask_from_list_(N("ISDN Configuration"),
+                                                N("
+If you have an ISA card, the values on the next screen should be right.\n
+If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
+"),
+                                                [ N_("Continue"), N_("Abort") ]) eq 'Continue' or goto isdn_ask_step_1;
+                            $isdn->{card_type} = 'isa';
+                        }
+
+                      isdn_ask_step_2:
+                        $e = $in->ask_from_listf(N("ISDN Configuration"),
+                                                 N("Which of the following is your ISDN card?"),
+                                                 sub { $_[0]{description} },
+                                                 [ isdn_get_cards_by_type($isdn->{card_type}) ]) or goto($isdn->{card_type} =~ /usb|pci/ ? 'isdn_ask_step_1' : 'isdn_ask_step_1b');
+                        $e->{$_} and $isdn->{$_} = $e->{$_} foreach qw(driver type mem io io0 io1 irq firmware);
+
+                        },
+                    post => sub {
+                        $netcnx->{isdn_internal} = $isdn = $isdn_cards{$isdn_name};
+                        return "isdn_protocol";
                     }
                    },
+
+                   
+                   isdn_protocol =>
+                   {
+                    name => N("ISDN Configuration") . "\n\n" . N("Which protocol do you want to use?"),
+                    data => [
+                             { label => N("Protocol"), type => "list", val => \$isdn_type,
+                               list => [ keys %isdn_protocols ], format => sub { $isdn_protocols{$_[0]} } }
+                            ],
+                    next => "isdn_db",
+                   },
+
+
+                   isdn_db =>
+                   {
+                    name => N("ISDN Configuration") . "\n\n" . N("Select your provider.\nIf it isn't listed, choose Unlisted."),
+                    data => sub {
+                        [ { label => N("Provider:"), type => "list", val => \$provider, separator => '|',
+                            list => [ N("Unlisted - edit manually"), read_providers_backend() ] } ];
+                    },
+                    post => sub {
+                        get_info_providers_backend($isdn, $netc, $provider);
+                        $isdn->{huptimeout} = 180;
+                        $isdn->{$_} ||= '' foreach qw(phone_in phone_out dialing_mode login passwd passwd2 idl speed);
+                        add2hash($netc, { dnsServer2 => '', dnsServer3 => '', DOMAINNAME2 => '' });
+                        return "hw_account";
+                    },
+                   },
+
 
                    no_supported_winmodem =>
                    {
