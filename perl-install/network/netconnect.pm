@@ -703,16 +703,6 @@ If you don't know, choose 'use pppoe'"),
                         ],
                     },
                     post => sub {
-                        if ($netc->{country}) {
-                            my %h = (N("Belgium") => [ 8, 35 ],
-                                     N("France")  => [ 8, 35 ],
-                                     N("Italy")   => [ 8, 35 ],
-                                     N("Netherlands")    => [ 8, 48 ],
-                                     N("United Kingdom") => [ 0, 38 ],
-                                     N("United States")  => [ 8, 35 ],
-                                    );
-                            ($netc->{vpi}, $netc->{vci}) = @{$h{$netcnx->{country}}};
-                        }
                         network::adsl::adsl_conf_backend($netcnx, $netc, $ntf_name, $adsl_type); #FIXME
                         $handle_multiple_cnx->();
                     },
