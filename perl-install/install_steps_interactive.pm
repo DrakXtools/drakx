@@ -339,22 +339,38 @@ sub chooseGroups {
 sub chooseCD {
     my ($o, $packages) = @_;
     my @mediums = grep { $_ > 1 } pkgs::allMediums($packages);
+    my @mediumsDescr = ();
+    my %mediumsDescr = ();
 
     #- if no other medium available or a poor beginner, we are choosing for him!
     #- note first CD is always selected and should not be unselected!
     return if scalar(@mediums) == 0 || $::beginner;
+
+    #- build mediumDescr according to mediums, this avoid asking multiple times
+    #- all the medium grouped together on only one CD.
+    foreach (@mediums) {
+	my $descr = pkgs::mediumDescr($packages, $_);
+	exists $mediumsDescr{$descr} or push @mediumsDescr, $descr;
+	$mediumsDescr{$descr} ||= $packages->[2]{$_}{selected};
+    }
 
     $o->set_help('chooseCD');
     $o->ask_many_from_list_ref('',
 			       _("If you have all the CDs in the list below, click Ok.
 If you have none of those CDs, click Cancel.
 If only some CDs are missing, unselect them, then click Ok."),
-			       [ map { _("Cd-Rom labeled \"%s\"", pkgs::mediumDescr($packages, $_)) } @mediums ],
-			       [ map { \$packages->[2]{$_}{selected} } @mediums ]
+			       [ map { _("Cd-Rom labeled \"%s\"", $_) } @mediumsDescr ],
+			       [ map { \$mediumsDescr{$_} } @mediumsDescr ]
 			      ) or do {
-				  map { $packages->[2]{$_}{selected} = 0 } @mediums; #- force unselection of other CDs.
+				  map { $mediumsDescr{$_} = 0 } @mediumsDescr; #- force unselection of other CDs.
 			      };
     $o->set_help('choosePackages');
+
+    #- restore true selection of medium (which may have been grouped together)
+    foreach (@mediums) {
+	my $descr = pkgs::mediumDescr($packages, $_);
+	$packages->[2]{$_}{selected} = $mediumsDescr{$descr};
+    }
 }
 
 #------------------------------------------------------------------------------
