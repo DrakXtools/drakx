@@ -44,7 +44,7 @@ sub new($$) {
 
 	    my @options = $wanted_DISPLAY;
 	    if ($server eq 'Xnest') {
-		push @options, '-ac', '-geometry', $o->{vga16} ? '640x480' : '800x600';
+		push @options, '-ac', '-geometry', $o->{vga} || ($o->{vga16} ? '640x480' : '800x600');
 	    } elsif (!$::move) {
 		install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{mouse}{wacom}[0], $Driver);
 
