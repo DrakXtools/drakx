@@ -12,9 +12,9 @@ use common;
     #entered reachable toBeDone next done;
     my @installSteps = (
   selectLanguage     => [ N_("Choose your language"), 1, 1, '', '', 'language' ],
-  selectInstallClass => [ N_("Select installation class"), 1, 1, '', '', '' ],
+  selectMouse        => [ N_("Configure mouse"), 1, 1, '', '', 'mouse' ],
   setupSCSI          => [ N_("Hard drive detection"), 1, 0, '', '', 'harddrive' ],
-  selectMouse        => [ N_("Configure mouse"), 1, 1, '', "selectInstallClass", 'mouse' ],
+  selectInstallClass => [ N_("Select installation class"), 1, 1, '', '', '' ],
   selectKeyboard     => [ N_("Choose your keyboard"), 1, 1, '', "selectInstallClass", 'keyboard' ],
   miscellaneous      => [ N_("Security"), 1, 1, '!$::expert', '', 'security' ],
   doPartitionDisks   => [ N_("Setup filesystems"), 1, 0, '', "selectInstallClass", 'partition' ],
