@@ -923,7 +923,7 @@ sub resolutionsConfiguration {
     my $wres = first(split 'x', $res);
 
     #- take the first available resolution <= the wanted resolution
-    $wres = max map { first(grep { $_->[0] <= $wres } @$_)->[0] } values %{$card->{depth}};
+    eval { $wres = max map { first(grep { $_->[0] <= $wres } @$_)->[0] } values %{$card->{depth}} };
     my $depth = eval { $o->{default_depth} || autoDefaultDepth($card, $wres) };
 
     $auto or ($depth, $wres) = chooseResolutions($card, $depth, $wres) or return;
