@@ -773,7 +773,8 @@ If you don't know, choose 'use pppoe'"),
                             return 'lan_intf';
                         }
                         network::adsl::adsl_probe_info($netcnx, $netc, $adsl_type, $ntf_name);
-                        $netc->{$_} = $adsl_type eq 'pppoe' ? $ntf_name : 'ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
+                        $netc->{NET_DEVICE} = $adsl_type eq 'pppoe' ? $ntf_name : 'ppp0';
+                        $netc->{NET_INTERFACE} = 'ppp0';
                         return 'adsl_account';
                     },
                    },
