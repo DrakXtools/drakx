@@ -274,16 +274,7 @@ static void expert_third_party_modules(void)
 #ifdef ENABLE_PCMCIA
 static void handle_pcmcia(char ** pcmcia_adapter)
 {
-	char buf[50];
-	int fd = open("/proc/version", O_RDONLY);
-	int size;
-	if (fd == -1) 
-		fatal_error("could not open /proc/version");
-	size = read(fd, buf, sizeof(buf));
-	buf[size-1] = '\0';   // -1 to eat the \n
-	close(fd);
-	buf[17] = '\0';       // enough to extract `2.2'
-	if (ptr_begins_static_str(buf+14, "2.2")) {
+	if (kernel_version() == 2) {
 		stg1_error_message("We now use kernel pcmcia support and this won't work with a 2.2 kernel.");
 		return;
 	}

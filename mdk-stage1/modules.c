@@ -26,6 +26,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
+#include <errno.h>
 #include "insmod.h"
 #include "stage1.h"
 #include "log.h"
@@ -41,6 +42,48 @@ static struct module_deps_elem * modules_deps = NULL;
 static char * archive_name = "/modules/modules.mar";
 int disable_modules = 0;
 
+extern long init_module(void *, unsigned long, const char *);
+
+
+static const char *moderror(int err)
+{
+	switch (err) {
+	case ENOEXEC:
+		return "Invalid module format";
+	case ENOENT:
+		return "Unknown symbol in module";
+	case ESRCH:
+		return "Module has wrong symbol version";
+	case EINVAL:
+		return "Invalid parameters";
+	default:
+		return strerror(err);
+	}
+}
+
+static void *grab_file(const char *filename, unsigned long *size)
+{
+	unsigned int max = 16384;
+	int ret, fd;
+	void *buffer = malloc(max);
+
+        fd = open(filename, O_RDONLY, 0);
+	if (fd < 0)
+		return NULL;
+
+	*size = 0;
+	while ((ret = read(fd, buffer + *size, max - *size)) > 0) {
+		*size += ret;
+		if (*size == max)
+			buffer = realloc(buffer, max *= 2);
+	}
+	if (ret < 0) {
+		free(buffer);
+		buffer = NULL;
+	}
+	close(fd);
+	return buffer;
+}
 
 /* unarchive and insmod given module
  * WARNING: module must not contain the trailing ".o"
@@ -52,7 +95,10 @@ static enum insmod_return insmod_archived_file(const char * mod_name, char * opt
 	int i, rc;
 
 	strncpy(module_name, mod_name, sizeof(module_name));
-	strcat(module_name, ".o");
+        if (kernel_version() <= 4)
+                strcat(module_name, ".o");
+        else
+                strcat(module_name, ".ko");
 	i = mar_extract_file(archive_name, module_name, "/tmp/");
 	if (i == 1) {
 		log_message("file-not-found-in-archive %s (maybe you can try another boot floppy such as 'hdcdrom_usb.img' or 'network_gigabit_usb.img')", module_name);
@@ -62,9 +108,26 @@ static enum insmod_return insmod_archived_file(const char * mod_name, char * opt
 		return INSMOD_FAILED;
 
 	strcat(final_name, mod_name);
-	strcat(final_name, ".o");
+        if (kernel_version() <= 4) {
+                strcat(final_name, ".o");
+                rc = insmod_call(final_name, options);
+        } else {
+                void *file;
+                unsigned long len;
 
-	rc = insmod_call(final_name, options);
+                strcat(final_name, ".ko");
+                file = grab_file(final_name, &len);
+
+                if (!file) {
+                        log_perror("\terror reading %s");
+                        return INSMOD_FAILED;
+                }
+
+                rc = init_module(file, len, options ? options : "");
+                if (rc)
+                        log_message("\terror %s", moderror(errno));
+        }
+
 	unlink(final_name); /* sucking no space left on device */
 	if (rc) {
 		log_message("\tfailed");
@@ -366,7 +429,10 @@ enum return_type ask_insmod(enum driver_type type)
 	}
 
 	if (results == RETURN_OK) {
-		choice[strlen(choice)-2] = '\0'; /* remove trailing .o */
+                if (kernel_version() <= 4)
+                        choice[strlen(choice)-2] = '\0'; /* remove trailing .o */
+                else
+                        choice[strlen(choice)-3] = '\0'; /* remove trailing .ko */
 		return insmod_with_options(choice, type);
 	} else
 		return results;

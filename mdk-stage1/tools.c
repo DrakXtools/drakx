@@ -34,6 +34,7 @@
 #include <sys/mount.h>
 #include <sys/poll.h>
 #include <errno.h>
+#include <sys/utsname.h>
 #include "stage1.h"
 #include "log.h"
 #include "mount.h"
@@ -463,6 +464,16 @@ int string_array_length(char ** a)
 		i++;
 	}
 	return i;
+}
+
+int kernel_version(void)
+{
+        struct utsname val;
+        if (uname(&val)) {
+                log_perror("uname failed");
+                return -1;
+        }
+        return charstar_to_int(val.release + 2);
 }
 
 int scall_(int retval, char * msg, char * file, int line)

@@ -23,32 +23,54 @@ function create_marfile() {
     $GIBASEDIR/mdk-stage1/mar/mar -c $marfile $*
 }
 
+function kern_version() {
+    if echo $1 | grep -q ^2.4; then
+        version=24
+        objects="*.o"
+    else
+        version=25
+        objects="*.ko"
+    fi
+}
+    
 function create_modules() {
     kernel_path=$1
     kern=$2
     echo "Updating modules in '`pwd`' for kernel '$kern'"
-    find $kernel_path/lib/modules/ -name "*.o" -exec cp -f {} . \;
-    /sbin/depmod -F $kernel_path/boot/System.map* -e *.o | perl -pe 's/\\\n//' \
-	| perl -ne 's/\.o//g; s/[ \t]+/ /g; print if /: /' > modules.dep
+    kern_version $kern
+    find $kernel_path/lib/modules/ -name "$objects" -exec cp -f {} . \;
+    if [ $version -eq 24 ]; then
+        /sbin/depmod-24 -F $kernel_path/boot/System.map* -e *.o | perl -pe 's/\\\n//' \
+            | perl -ne 's/\.o//g; s/[ \t]+/ /g; print if /: /' > modules.dep
+    else
+        cp $kernel_path/lib/modules/*/modules.dep .
+        perl -ni -e 's|/\S+/([^/]+)\.k?o|$1|g; print if /: /' modules.dep
+    fi
     perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
 
-    /sbin/modinfo -f '%{filename} %{description}\n' *.o | perl -lne 'print "$1\t$2" if /(.*?)\.o "(.*)"/' > modules.description
+    /sbin/modinfo-$version -f '%{filename} %{description}\n' $objects | perl -lne 'print "$1\t$2" if /(.*?)\.k?o "(.*)"/' > modules.description
 }
 
 function create_modules_mar() {
-    echo -n "stripping $kern: "
-    $GIBASEDIR/kernel/strip_modules *.o 2>/dev/null
-    echo "done"
+    kern_version $kern
+
+    if [ $version -eq 24 ]; then
+        echo -n "stripping $kern: "
+        $GIBASEDIR/kernel/strip_modules *.o 2>/dev/null
+        echo "done"
+    else
+        echo "don't strip on 2.6 since it breaks modules"
+    fi
 
     if [ -z "$MOVE" ]; then
         echo -n "packdrake $kern: "
-        ls *.o | packdrake -b9s "modules.cz" 400000
+        ls $objects | packdrake -b9s "modules.cz" 400000
         echo "done"
         mv modules.cz ../modules.cz-$kern
     fi
     for i in network network_gigabit_usb network_gigabit network_usb cdrom hd hdcdrom_usb pcmcia all; do
         eval "modules=\$${i}_modules_raw"
-        modules_with_deps=`perl -I $GIBASEDIR/kernel $GIBASEDIR/kernel/dependencies.pl modules.dep $modules`
+        modules_with_deps=`perl -I $GIBASEDIR/kernel $GIBASEDIR/kernel/dependencies.pl $version modules.dep $modules`
         if [ -n "$MOVE" ]; then modules_with_deps="change_loop.o gzloop.o isofs.o zlib_inflate.o supermount.o $modules_with_deps"; fi
 	eval "create_marfile ${i}_modules.mar $modules_with_deps"
     done
@@ -80,7 +102,7 @@ if [ -n "$rpm" -a ! -e $ALL_KERNELS/$rpm ]; then
     else
       rpm2cpio $file | cpio -id
     fi
-    find -type f -name "*.o.gz" | xargs gunzip
+    find -type f -name "*.o.gz" -o -name "*.ko.gz" | xargs gunzip
     cd ../..
 
     for dir in /tftpboot /var/lib/tftpboot; do
