@@ -1047,14 +1047,7 @@ sub g_auto_install {
     
     exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(locale authentication mouse netc timezone superuser intf keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security security_user libsafe netcnx useSupermount autoExitInstall X services); #- TODO modules bootloader 
 
-    if ($::o->{printer}) {
-	$o->{printer}{$_} = $::o->{printer}{$_} foreach qw(SPOOLER DEFAULT BROWSEPOLLADDR BROWSEPOLLPORT MANUALCUPSCONFIG);
-	$o->{printer}{configured} = {};
-	foreach my $queue (keys %{$::o->{printer}{configured}}) {
-	    my $val = $::o->{printer}{configured}{$queue}{queuedata};
-	    exists $val->{$_} and $o->{printer}{configured}{$queue}{queuedata}{$_} = $val->{$_} foreach keys %{$val || {}};
-	}
-    }
+    $o->{printer} = $::o->{printer} if $::o->{printer};
 
     local $o->{partitioning}{auto_allocate} = !$b_replay;
     $o->{autoExitInstall} = !$b_replay;
