@@ -53,6 +53,11 @@ fix any // in path to ftp server otherwise windobe server bug :(
 missing feature in lilo configuration: can't give hda2 with /boot/vmlinuz if
 already hda1 with /boot/vmlinuz
 
+I have Mandrake 6.1  installed and working on a ThinkPad 770.
+To enable the PCMCIA Token ring I have to append the following line to
+/etc/pcmcia/config.opts
+module "ibmtr_cs" opts "mmiobase=0xd2000 srambase=0xd4000"
+
 configure DHCP for newbies if ethernet & DHCP card available
 
 > Here I go into the printer configuration select 'HP Deskjet 722C Colour',

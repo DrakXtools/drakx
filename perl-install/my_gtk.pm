@@ -132,7 +132,7 @@ sub gtktext_insert($$) {
     $w->backward_delete($w->get_length);
     $w->insert(undef, undef, undef, "$t\n"); #- needs \n otherwise in case of one line text the beginning is not shown (even with the vadj->set_value)
     $w->set_word_wrap(1);
-    $w->vadj->set_value(0);
+#-    $w->vadj->set_value(0);
     $w->thaw;
     $w;
 }

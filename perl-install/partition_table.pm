@@ -3,6 +3,7 @@ package partition_table;
 use diagnostics;
 use strict;
 use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @fields2save);
+use Data::Dumper;
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -16,7 +17,7 @@ use partition_table_raw;
 use partition_table_dos;
 use partition_table_bsd;
 use partition_table_sun;
-use Data::Dumper;
+use log;
 
 
 @important_types = ('Linux native', 'Linux swap', 'DOS FAT16', 'Win98 FAT32', 'Linux RAID');
@@ -352,18 +353,18 @@ sub read_one($$) {
 
 sub read($;$) {
     my ($hd, $clearall) = @_;
-    my $pt = $clearall ?
-      $hd->clear_raw :
-      read_one($hd, 0) || return 0;
-
+    if ($clearall) {
+	partition_table_raw::zero_MBR($hd);
+	return 1;
+    }
+    my $pt = read_one($hd, 0) or return 0;
     $hd->{primary} = $pt;
     undef $hd->{extended};
-    $clearall and return $hd->{isDirty} = $hd->{needKernelReread} = 1;
     verifyPrimary($pt);
-
     eval {
 	$pt->{extended} and read_extended($hd, $pt->{extended}) || return 0;
     }; die "extended partition: $@" if $@;
+
     assign_device_numbers($hd);
     remove_empty_extended($hd);
     1;

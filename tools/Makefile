@@ -38,4 +38,4 @@ $(BASE)/hdlist: $(RPMS)
 
 clean: 
 	for i in $(DIRS); do $(MAKE) -C $$i clean; done
-	rm -rf *~ gendepslist rpm2header ddcprobe/ddcxinfos */*.o
+	rm -rf *~ gendepslist xhost+ rpm2header ddcprobe/ddcxinfos */*.o

@@ -15,7 +15,7 @@ clean:
 tar-drakxtools: clean
 	$(MAKE) -C ../tools clean
 	cd .. ; rm -rf drakxtools ; cp -af perl-install drakxtools ; cp -af tools/ddcprobe tools/pnp_serial drakxtools	
-	cd ../drakxtools ; rm -rf install* ForMakefile.pm pkgs.pm ftp.pm t.pm standalone/CVS ; mv Makefile.drakxtools Makefile ; mv -f standalone/* .
+	cd ../drakxtools ; rm -rf install* pkgs.pm ftp.pm t.pm */CVS ; mv Makefile.drakxtools Makefile ; mv -f standalone/* share/* .
 	cd .. ; tar cfy drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile Makefile.config MonitorsDB Newt c ddcprobe pnp_serial po pci_probing resize_fat diskdrake.rc $(STANDALONEPMS) icons *.pm)
 	cd .. ; rm -rf drakxtools
 
@@ -45,9 +45,9 @@ install_pms: $(DIRS)
 	done
 #		perl -pe 's/#-.*//; $$_ = "\n" if (/^=head/ .. /^=cut/) || /use (diagnostics)/' $$i > $(DESTREP4PMS)/$$i; \
 
-	cp *.rc $(DESTREP4PMS)
+	cp share/*.rc $(DESTREP4PMS)
 	install -d $(DESTREP4PMS)/po
-	cp -f po/*.po* $(DESTREP4PMS)/po ||:
+	cp -f share/po/*.po* $(DESTREP4PMS)/po ||:
 	chmod a+x $(DESTREP4PMS)/install2
 	chmod a+x $(DESTREP4PMS)/commands
 	chmod a+x $(DESTREP4PMS)/standalone/*
@@ -55,8 +55,8 @@ install_pms: $(DIRS)
 
 get_needed_files: $(DIRS)
 #	export PERL_INSTALL_TEST=1 ; strace -f -e trace=file -o '| grep -v "(No such file or directory)" | sed -e "s/[^\"]*\"//" -e "s/\".*//" | grep "^/" | grep -v -e "^/tmp" -e "^/home" -e "^/proc" -e "^/var" -e "^/dev" -e "^/etc" -e "^/usr/lib/rpm" > /tmp/list ' $(PERL) -d install2 < /dev/null
-	cp -f `../tools/specific_arch list` /tmp/list
-#	cp -f list /tmp/list
+	cp -f `../tools/specific_arch share/list` /tmp/list
+#	cp -f share/list /tmp/list
 #	perl -pi -e "s/ARCH/$(ARCH)/" /tmp/list
 	find auto -follow -name "*.so" >> /tmp/list
 
@@ -109,17 +109,16 @@ endif
 
 	perl -ane 'symlink "$$F[1]", "$(DEST)/usr/bin/$$F[0]"' aliases
 
-	tar xfy `../tools/specific_arch locales.tar.bz2` -C $(DEST)
-#	DEST=$(DEST) perl -I. -MForMakefile -e 'locale()'
-#	DEST=$(DEST) perl -I. -MForMakefile -e 'xmodmap()'
+	tar xfy `../tools/specific_arch share/locales.tar.bz2` -C $(DEST)
 
-	cp -a keymaps $(DEST)/usr/share
-	cp -a consolefonts $(DEST)/usr/share
-	cp template.in/*.in modparm.lst $(DEST)/usr/share
-	cp MonitorsDB $(DEST)/usr/X11R6/lib/X11
-	cp logo-mandrake.xpm $(DEST)/usr/share
-	cp -a themes $(DEST)/usr/share/gtk
-	cp compss compssUsers compssList $(ROOTDEST)/Mandrake/base
+	cp -a modparm.lst $(DEST)/usr/share
+	cd share ; cp -a keymaps $(DEST)/usr/share
+	cd share ; cp -a consolefonts $(DEST)/usr/share
+	cd share ; cp template.in/*.in $(DEST)/usr/share
+	cd share ; cp MonitorsDB $(DEST)/usr/X11R6/lib/X11
+	cd share ; cp logo-mandrake.xpm $(DEST)/usr/share
+	cd share ; cp -a themes $(DEST)/usr/share/gtk
+	cd share ; cp compss compssUsers compssList $(ROOTDEST)/Mandrake/base
 
 	if [ -f "../modules/modules.cz2" ]; then \
 		cp -f ../modules/modules.cz2 $(DEST)/lib/; \
@@ -130,7 +129,7 @@ endif
 		cp -f ../modules/pristine/* $(DEST)/lib/modules ||: ; \
 	fi
 
-#	echo -e "#!/bin/sh\n\nexec '/usr/bin/sh'" > $(DEST)/usr/bin/runinstall2
+#	echo -e '#!/bin/sh\n\nexec "/usr/bin/sh"' > $(DEST)/usr/bin/runinstall2
 #	chmod a+x $(DEST)/usr/bin/runinstall2
 
 	tar xyC $(DEST) -f ../install/install1_pcmcia.tar.bz2 ./etc/pcmcia

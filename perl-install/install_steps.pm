@@ -567,12 +567,11 @@ sub createBootdisk($) {
     if (arch() =~ /^sparc/) {
 	require silo;
         silo::mkbootdisk($o->{prefix}, install_any::kernelVersion(), $dev, $o->{bootloader}{perImageAppend});
-	$o->{mkbootdisk} = $dev;
     } else {
 	require lilo;
         lilo::mkbootdisk($o->{prefix}, install_any::kernelVersion(), $dev, $o->{bootloader}{perImageAppend});
-	$o->{mkbootdisk} = $dev;
     }
+    $o->{mkbootdisk} = $dev;
 }
 
 #------------------------------------------------------------------------------

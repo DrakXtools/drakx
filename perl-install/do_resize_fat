@@ -9,7 +9,7 @@ use resize_fat::main;
 
 local *log::l = sub { print join(' ', @_), "\n" };
 
-@ARGV = qw(/tmp/eee +0);
+@ARGV = qw(/tmp/dd +0);
 
 @ARGV == 2 or die "usage: fatresize <device> <size>\n  <size> = 100 means `resize to 100Mb'\n  <size> = +10 means `keep 10Mb of free space'\n";
 

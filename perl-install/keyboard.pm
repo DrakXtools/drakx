@@ -171,7 +171,6 @@ sub lang2keyboard($) {
 }
 
 sub load($) {
-    return if arch() =~ /^sparc/;
     my ($keymap) = @_;
 
     my ($magic, @keymaps) = unpack "I i" . c::MAX_NR_KEYMAPS() . "a*", $keymap;
@@ -224,7 +223,7 @@ sub setup($) {
 	eval { load(<F>) };
     }
     my $f = xmodmap_file($keyboard);
-    #eval { run_program::run('xmodmap', $f) } unless $::testing || !$f;
+    eval { run_program::run('xmodmap', $f) } unless $::testing || !$f;
 }
 
 sub write($$;$) {

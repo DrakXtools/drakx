@@ -181,7 +181,7 @@ sub new($$) {
 		my $ok = 1;
 		local $SIG{CHLD} = sub { $ok = 0 };
 		unless (fork) {
-		    exec $_[0], (arch() =~ /^sparc/ ? () : ("-kb")), "-dpms","-s" ,"240", "-allowMouseOpenFail", "-xf86config", $f or exit 1;
+		    exec $_[0], "-dpms","-s" ,"240", "-allowMouseOpenFail", "-xf86config", $f or exit 1;
 		}
 		foreach (1..15) {
 		    sleep 1;
@@ -190,7 +190,7 @@ sub new($$) {
 		}
 		0;
 	    };
-	    my @servers = qw(FBDev VGA16);
+	    my @servers = qw(FBDev VGA16); #-)
 	    @servers = qw(FBDev 3DLabs TGA) if arch() eq "alpha";
 	    @servers = qw(Mach64) if arch() =~ /^sparc/;
 
@@ -221,8 +221,6 @@ sub new($$) {
 
     install_theme($o);
     create_logo_window($o);
-
-#    eval { sleep 10; run_command::run('xhost+') }; #- for testing
 
     $my_gtk::force_center = [ $width - $windowwidth, $logoheight, $windowwidth, $windowheight ];
 
@@ -373,7 +371,7 @@ sub choosePackagesTree {
 	    $size += $_->{size} - ($_->{installedCumulSize} || 0) if $_->{selected}; #- on upgrade, installed packages will be removed.
 	}
 
-	$w_size->set(_("Total size: ") . int (pkgs::correctSize($size / sqr(1024))) . " / $availableSpace " . _("MB") );
+	$w_size->set(_("Total size: ") . int (pkgs::correctSize($size / sqr(1024))) . " / $availableSpace " . _("KB") );
     };
     my $new_item = sub {
 	my ($p, $name, $parent) = @_;
@@ -807,7 +805,7 @@ END
 
     local *F;
     open F, ">$file" or die "can't create X configuration file $file";
-    print F <<END_KEYB;
+    print F <<END;
 Section "Files"
    FontPath   "/usr/X11R6/lib/X11/fonts:unscaled,/usr/X11R6/lib/X11/fonts"
 EndSection
@@ -820,19 +818,21 @@ Section "Keyboard"
    RightAlt        Meta
    ScrollLock      Compose
    RightCtl        Control
-END_KEYB
+END
 
     if (arch() =~ /^sparc/) {
-	print F <<END_KEYB_SPARC;
-    XkbRules    "sun"
-    XkbModel    "sun"
-    XkbLayout   "us"
-    XkbCompat   "compat/complete"
-    XkbTypes    "types/complete"
-    XkbKeycodes "sun(type5)"
-    XkbGeometry "sun(type5)"
-    XkbSymbols  "sun/us(sun5)"
-END_KEYB_SPARC
+	print F <<END;
+   XkbRules    "sun"
+   XkbModel    "sun"
+   XkbLayout   "us"
+   XkbCompat   "compat/complete"
+   XkbTypes    "types/complete"
+   XkbKeycodes "sun(type5)"
+   XkbGeometry "sun(type5)"
+   XkbSymbols  "sun/us(sun5)"
+END
+    } else {
+	print F "    XkbDisable\n";
     }
 
     print F <<END;

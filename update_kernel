@@ -11,13 +11,12 @@ f "net" ; NETWORK_DRIVERS=$v
 f "scsi|cdrom" ; CD_DRIVERS=$v
 f "pcmcia" ; PCMCIA_DRIVERS=$v
 
-MISCMODULES="lp.o parport_pc.o parport.o loop.o"
 FSMODULES="vfat.o fat.o"
 
-NETWORK_MODULES="$MISCMODULES $FSMODULES $NETWORK_DRIVERS"
+NETWORK_MODULES="$FSMODULES $NETWORK_DRIVERS"
 CDROM_MODULES="  $FSMODULES $CD_DRIVERS"
-HD_MODULES="     $MISCMODULES $FSMODULES $SCSI_DRIVERS"
-PCMCIA_MODULES=" $MISCMODULES $FSMODULES $PCMCIA_DRIVERS 8390.o lockd.o nfs.o sunrpc.o isofs.o"
+HD_MODULES="     $FSMODULES $SCSI_DRIVERS"
+PCMCIA_MODULES=" $FSMODULES $PCMCIA_DRIVERS 8390.o lockd.o nfs.o sunrpc.o isofs.o"
 LNX4WIN_MODULES="$FSMODULES loop.o isofs.o"
 NOT_USEFULL_IN_STAGE1="nls_*.o parport_probe.o raid*.o serial.o smbfs.o usb-*.o"
 
@@ -25,8 +24,8 @@ echo $NETWORK_DRIVERS
 
 PCMCIA_INSTALLMODULES="pcmcia_core.o tcic.o ds.o i82365.o"
 
-cp -f "$KERNEL_BOOT_PATH"/boot/vmlinuz* vmlinuz
-cp -f "$KERNEL_BOOT_PATH"/boot/System.map* System.map
+cp -f $KERNEL_BOOT_PATH/boot/vmlinuz* vmlinuz
+cp -f $KERNEL_BOOT_PATH/boot/System.map* System.map
 
 #set 640x480x16 resolution on boot.
 /usr/sbin/rdev -v vmlinuz 785

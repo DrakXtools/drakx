@@ -1129,18 +1129,21 @@ sub load_thiskind {
     $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards...")) if modules::pcmcia_need_config($pcmcia);
 
     if ($type =~ /scsi/i && cat_("/proc/cmdline") !~ /ide2=/) {
-	log::l("HPT: looking for HPT");
 	require pci_probing::main;
-	my @l = grep { $_->[1] =~ /HPT/ } pci_probing::main::probe('STORAGE_OTHER', 'more');
-	if (@l == 2 && $o->ask_yesorno('', 
-_("Linux does not yet fully support ultra dma 66 HPT.
+	my @l = map { $_->[0] } grep { $_->[1] =~ /(HPT|Ultra66)/ } pci_probing::main::probe('STORAGE_OTHER', 'more');
+	if ($o->ask_yesorno('', 
+_("Linux does not yet fully support ultra dma 66.
 As a work-around i can make a custom floppy giving access the hard drive on ide2 and ide3"), 1)) {
-	    log::l("HPT: found");
-	    my $ide = sprintf "ide2=0x%x,0x%x ide3=0x%x,0x%x", map { 
-		my ($a, $b) = (split ' ', $_->[0])[3,4];
-		hex($a) - 1, hex($b) + 1;
-	    } @l;
-	    log::l("HPT: gonna add ($ide)");
+	    log::l("HPT|Ultra66: found");
+	    my $ide = sprintf "ide2=0x%x,0x%x ide3=0x%x,0x%x", 
+	      map_index { hex($_) + (odd($::i) ? 1 : -1) } do {
+		if (@l == 2) {
+		    map { (split ' ')[3..4] } @l
+		} else {
+		    map { (split ' ')[3..6] } @l
+		}
+	    };
+	    log::l("HPT|Ultra66: gonna add ($ide)");
 
 	    my $dev = devices::make("fd0");
 	    my $image = $o->{pcmcia} ? "pcmcia" :
@@ -1168,7 +1171,7 @@ _("Enter a floppy to create an HTP enabled boot
 		log::l("HTP: modifying syslinux.cfg");
 		substInFile { s/(?=$)/ $ide/ if /^\s*append\s/ } "/floppy/syslinux.cfg";	
 		fs::umount("/floppy");
-		log::l("HPT: all done");
+		log::l("HPT|Ultra66: all done");
 
 		$o->ask_warn('', $nb_try ? 
 			     _("It is necessary to restart installation booting on the floppy") :
