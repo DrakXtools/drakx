@@ -521,6 +521,7 @@ sub Type {
 sub Mount_point {
     my ($in, $hd, $part, $all_hds) = @_;
 
+    my $migrate_files;
     my $mntpoint = $part->{mntpoint} || do {
 	my $part_ = { %$part };
 	if (fsedit::suggest_part($part_, $all_hds)) {
@@ -539,10 +540,17 @@ sub Mount_point {
 _("Can't unset mount point as this partition is used for loop back.
 Remove the loopback first")), return 1;
 	    $part->{mntpoint} eq $mntpoint || check_mntpoint($in, $mntpoint, $hd, $part, $all_hds) or return 1;
+    	    $migrate_files = need_migration($in, $mntpoint) or return 1;
 	    0;
 	}
     ) or return;
     $part->{mntpoint} = $mntpoint;
+
+    if ($migrate_files eq 'migrate') {
+	format_($in, $hd, $part, $all_hds) or return;
+	migrate_files($in, $hd, $part);
+	fs::mount_part($part);
+    }
 }
 sub Mount_point_raw_hd {
     my ($in, $part, $all_hds, $propositions) = @_;
