@@ -477,17 +477,14 @@ Configure them first by clicking on 'Configure'")));
 sub configure_net {
     my ($netcnx, $netc, $_intf) = @_;
     my $dialog = ugtk2->new('drakconnect');
-    my $exit_dialogsub = sub { Gtk2->main_quit };
+    my $exit_dialogsub = sub {  };
     if (!$netcnx->{type}) {
-	$dialog = _create_dialog(N("LAN configuration"));
-	$dialog->vbox->add(Gtk2::Label->new(N("You don't have an Internet connection.
-Create one first by clicking on 'Configure'")));
-	gtkpack($dialog->action_area,
-             gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => $exit_dialogsub),
-            );
-	$dialog->show_all;
-	$dialog->run;
-	return;
+        $in->ask_warn(
+                    N("Warning"), 
+                    #-PO here "Internet access" should be translated the same was as in control-center
+                    N("You don't have any configured Internet connection.
+Please run \"Internet access\" in control center."));
+        $in->exit;
     }
     my $cnx = {};
     $cnx = $netcnx->{$netcnx->{type}};
