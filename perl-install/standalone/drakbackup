@@ -124,7 +124,6 @@ my $pbar1;
 my $pbar2;
 my $pbar3;
 
-
 # config. FILES -> Default PATH  & Global variables.
 my @sys_files = ("/etc");
 my @user_list;
@@ -164,6 +163,7 @@ my $remember_pass = 0;
 my $passwd_user= '';
 my $save_device_tape = ();
 my $backup_incremental = 0;
+my $cdrw_erase = 0;
 
 foreach (@ARGV) {
     /--default/ and $default = 1, $mode=-1;
@@ -204,6 +204,7 @@ sub save_conf_file {
 		     "TAPE_DEVICE=$save_device_tape\n",
 		     "HOST_NAME=$host_name\n"
 		     );
+    $cdrw_erase and push @cfg_list, "CDRW_ERASE\n" ; 
     $backup_incremental and push @cfg_list, "INCREMENTAL_BACKUPS\n" ; 
     $where_net_ftp and push @cfg_list, "USE_NET_FTP\n" ; 
     $where_net_ssh and push @cfg_list, "USE_NET_SSH\n" ; 
@@ -300,6 +301,7 @@ sub read_conf_file {
 	    if (/^USE_NET_SSH/)    { $where_net_ssh = 1;  }
 	    if (/^TAPE_DEVICE/)    { s/TAPE_DEVICE=//gi; $save_device_tape = $_;}
 	    if (/^INCREMENTAL_BACKUPS/) { $backup_incremental = 1;}
+	    if (/^CDRW_ERASE/)     { $cdrw_erase = 1;}
 	}
 	read_cron_files();
 	$cfg_file_exist = 1;
@@ -727,6 +729,12 @@ sub advanced_where_cd {
 		     ),
 	 0, new Gtk::VBox(0, 5),
 	 0, gtkpack_(new Gtk::HBox(0,10),
+		     0, gtkset_sensitive(new Gtk::Label(_("Please check if you want to erase your CDRW before")), $cdrw && $where_cd),
+		     1, new Gtk::VBox(0, 5),
+		     0, gtkset_sensitive(my $check_cdrw_erase = new Gtk::CheckButton(), $cdrw && $where_cd),
+		     ),
+	 0, new Gtk::VBox(0, 5),
+	 0, gtkpack_(new Gtk::HBox(0,10),
 		     0, gtkset_sensitive(new Gtk::Label(_(" Please check if you want to include\n install boot on your CD.")),  $where_cd),
 		     1, new Gtk::VBox(0, 5),
 		     0, gtkset_sensitive(my $check_cd_with_install_boot = new Gtk::CheckButton(), $where_cd),
@@ -739,12 +747,17 @@ sub advanced_where_cd {
 		     ),
 	 ),
 	    );
-    foreach ([$check_cdrw, \$cdrw], [$check_cd_with_install_boot, \$cd_with_install_boot ]) {
+    foreach ([$check_cdrw_erase, \$cdrw_erase], [$check_cd_with_install_boot, \$cd_with_install_boot ]) {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
 	}
     gtksignal_connect(gtkset_active($check_where_cd, $where_cd), toggled => sub { 
 	$where_cd = $where_cd ? 0 : 1;
+	${$central_widget}->destroy();
+	$current_widget->();
+    });
+    gtksignal_connect(gtkset_active($check_cdrw, $cdrw), toggled => sub { 
+	$cdrw = $cdrw ? 0 : 1;
 	${$central_widget}->destroy();
 	$current_widget->();
     });
@@ -1228,7 +1241,7 @@ sub system_state {
     $system_state = ();
 
     if ($cfg_file_exist) { 
-	$system_state .= _("\n\t\t\t\t\t\t\t\t ___ Backup Sources ___ \n");
+	$system_state .= _("\nBackup Sources: \n");
         $backup_sys and $system_state .= _("\n- System Files:\n"); 
         $backup_sys and $system_state .= _("\t\t$_\n") foreach @sys_files; 
         $backup_user and $system_state .= _("\n- Users Files:\n");
@@ -1493,6 +1506,29 @@ sub button_box_restore_main {
 				       ),
 	    );
 }
+
+
+sub button_box_backup_end {
+    $button_box_tmp->destroy();
+
+    gtkpack($button_box,
+	    $button_box_tmp = gtkpack_(new Gtk::HButtonBox,
+				       0, gtksignal_connect(new Gtk::Button(_(" Cancel ")), clicked => sub { 
+					   ${$central_widget}->destroy(); interactive_mode_box();  }),
+				       0, gtksignal_connect(new Gtk::Button(_(" Help ")), clicked => sub { 
+					   ${$central_widget}->destroy(); adv_help(\&$current_widget,$custom_help );  }),
+				       1, new Gtk::HBox(0, 1),	
+				       0, gtksignal_connect(new Gtk::Button(_(" Previous ")), clicked => sub { 
+					   ${$central_widget}->destroy(); $previous_widget->(); }),
+				       0, gtksignal_connect(new Gtk::Button(_(" Build Backup ")), clicked => sub { 
+					   ${$central_widget}->destroy();
+					   build_backup_status();
+					   build_backup_files(); 
+				       }),
+				       ),
+	    );
+}
+
 
 sub button_box_wizard_end {
     $button_box_tmp->destroy();
@@ -1782,7 +1818,7 @@ sub build_backup_box_see_conf {
 					  ),
 			      ),
 	    );
-    button_box_wizard_end();
+    button_box_backup_end();
     $custom_help = "";
     $central_widget = \$box2;
     $current_widget = \&build_backup_box_see_conf;
@@ -1827,8 +1863,9 @@ sub build_backup_cd_select_data {
 					      ),
 					 ),
 	    );
-    if ($restore_other) { $next_widget = \&restore_step_other;}
-    else{ $next_widget = \&restore_do;}
+#    if ($restore_other) { $next_widget = \&restore_step_other;}
+#    else{ $next_widget = \&restore_do;}
+    $next_widget = \&build_backup_box_see_conf;
     $custom_help = "restore";
     $previous_widget = \&build_backup_cd_box;
     $current_widget = \&restore_step_user;
@@ -1867,7 +1904,13 @@ sub build_backup_cd_box {
 		     ),
 	 0, new Gtk::VBox(0, 5),
 	 0, gtkpack_(new Gtk::HBox(0,10),
-		     0, gtkset_sensitive(new Gtk::Label(_("Please check if you want to include install boot on your CD.")),  $where_cd),
+		     0, gtkset_sensitive(new Gtk::Label(_("Please check if you want to erase your CDRW before")), $cdrw && $where_cd),
+		     1, new Gtk::VBox(0, 5),
+		     0, gtkset_sensitive(my $check_cdrw_erase = new Gtk::CheckButton(), $cdrw && $where_cd),
+		     ),
+	 0, new Gtk::VBox(0, 5),
+	 0, gtkpack_(new Gtk::HBox(0,10),
+		     0, gtkset_sensitive(new Gtk::Label(_("Please check if you want to include install boot on your CD.")),  0),
 		     1, new Gtk::VBox(0, 5),
 		     0, gtkset_sensitive(my $check_cd_with_install_boot = new Gtk::CheckButton(), $where_cd),
 		     ),
@@ -1879,12 +1922,17 @@ sub build_backup_cd_box {
 		     ),
 	 ),
 	    );
-    foreach ([$check_cdrw, \$cdrw], [$check_cd_with_install_boot, \$cd_with_install_boot ]) {
+    foreach ([$check_cdrw_erase, \$cdrw_erase], [$check_cd_with_install_boot, \$cd_with_install_boot ]) {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
 	}
     gtksignal_connect(gtkset_active($check_where_cd, $where_cd), toggled => sub { 
 	$where_cd = $where_cd ? 0 : 1;
+	${$central_widget}->destroy();
+	$current_widget->();
+    });
+    gtksignal_connect(gtkset_active($check_cdrw, $cdrw), toggled => sub { 
+	$cdrw = $cdrw ? 0 : 1;
 	${$central_widget}->destroy();
 	$current_widget->();
     });
@@ -1909,8 +1957,7 @@ sub build_backup_box {
 					1, new Gtk::VBox(0, 5),	
 					1, gtksignal_connect(new Gtk::Button(_(" Backup Now from configuration file ")),
 							     clicked => sub { ${$central_widget}->destroy();
-									      build_backup_status();
-									      build_backup_files(); 
+									      build_backup_box_see_conf();
 									  }),
 					0, new Gtk::VBox(0, 5),	
 					1, gtksignal_connect(new Gtk::Button(_(" Backup Now on CDROM ")), 
