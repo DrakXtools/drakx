@@ -175,7 +175,7 @@ sub ask_mntpoint_s {
 #    @fstab = @$fstab if @fstab == 0;
     die _("no available partitions") if @fstab == 0;
 
-    my $msg = sub { "$_->{device} " . _("(%dMb)", $_->{size} / 1024 / 2) };
+    my $msg = sub { "$_->{device} " . _("(%dMB)", $_->{size} / 1024 / 2) };
     
     if (@fstab == 1) {
 	$fstab[0]->{mntpoint} = '/';
@@ -944,7 +944,7 @@ _("Enable multi profiles") => { val => \$u->{profiles}, type => 'bool' },
 _("Enable num lock at startup") => { val => \$u->{numlock}, type => 'bool' },
      ),
      ], complete => sub {
-	    !$u->{memsize} || $u->{memsize} =~ s/^(\d+)M?$/$1M/i or $o->ask_warn('', _("Give the ram size in Mb")), return 1;
+	    !$u->{memsize} || $u->{memsize} =~ s/^(\d+)M?$/$1M/i or $o->ask_warn('', _("Give the ram size in MB")), return 1;
 	    my %m = reverse %l; $ENV{SECURE_LEVEL} = $o->{security} = $m{$s};
 	    $o->{useSupermount} && $o->{security} > 3 and $o->ask_warn('', _("Can't use supermount in high security level")), return 1;
 	    0;
