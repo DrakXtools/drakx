@@ -40,6 +40,7 @@ sub confScanner {
     my ($model, $port) = @_;
     $port = detect_devices::dev_is_devfs() ? "$prefix/dev/usb/scanner0" : "$prefix/dev/scanner" if (!$port);
     my $a = $scannerDB->{$model}{server};
+    #print "file:[$a]\t[$model]\t[$port]\n| ", (join "\n| ", @{$scannerDB->{$model}{lines}}),"\n";
     output("$_sanedir/$a.conf", (join "\n",@{$scannerDB->{$model}{lines}}));
     substInFile {s/\$DEVICE/$port/} "$_sanedir/$a.conf";
     add2dll($a);
@@ -209,6 +210,9 @@ sub updateScannerDBfromSane {
 
 #-----------------------------------------------
 # $Log$
+# Revision 1.5  2002/02/18 17:34:31  yduret
+# update
+#
 # Revision 1.4  2002/02/18 16:16:13  yduret
 # scsi parport preliminary support
 # no more show unsupported scanner
