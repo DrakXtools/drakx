@@ -173,7 +173,7 @@ my %charsets = (
   "koi8-u"     => [ "koi8u_8x16",	"koi8-r",	"trivial.trans",
 	std("koi8-u") ],
   "cp1251"     => [ "iso05.f16",	"iso05",	"iso05_to_cp1251.trans",
-	std_("microsoft-cp1251") ],
+	std("microsoft-cp1251") ],
 #- Yiddish needs special console driver for text mode (none yet)
 #- (and gtk support isn't done yet)
   "cp1255"     => [ "iso08.f16",        "iso08",        "trivial.trans",
