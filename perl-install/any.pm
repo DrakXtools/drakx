@@ -107,7 +107,7 @@ sub setupBootloader {
 	if (arch() =~ /sparc/) {
 	    $b->{use_partition} = $in->ask_from_list_(_("SILO Installation"),
 						      _("Where do you want to install the bootloader?"),
-						      \@l, $l[$b->{use_partition}]) or return;
+						      \@l, $l[$b->{use_partition}]) or return 0;
 	} elsif (arch() =~ /ppc/) {
 		if (defined $partition_table_mac::bootstrap_part) {
 			$b->{boot} = $partition_table_mac::bootstrap_part;
@@ -197,7 +197,7 @@ sub setupBootloader {
 	$b->{methods}{$_} = 0 foreach keys %{$b->{methods}};
 	$bootloaders{$bootloader} and $bootloaders{$bootloader}->();
 	#- at least one method
-	grep_each { $::b } %{$b->{methods}} or return;
+	grep_each { $::b } %{$b->{methods}} or return 0;
 
 	$b->{use_partition} = $silo_install_lang eq _("First sector of drive (MBR)") ? 0 : 1;
 	$b->{vga} = $bootloader::vga_modes{$b->{vga}} || $b->{vga};
@@ -206,7 +206,7 @@ sub setupBootloader {
 	bootloader::add_append($b, "mem", $memsize);
     }
 
-    $ask_per_entries or return;
+    $ask_per_entries or return 1;
 
     while (1) {
 	$in->set_help(arch() =~ /sparc/ ? 'setupSILOAddEntry' : arch() =~ /ppc/ ? 'setupYabootAddEntry' : 'setupBootloaderAddEntry') unless $::isStandalone;
