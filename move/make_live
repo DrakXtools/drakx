@@ -108,6 +108,10 @@ sub config_X_proprietary_drivers {
 	my ($full_name) = run_program::rooted_get_stdout($::prefix, 'rpm', '-ql', $_) =~ m!/usr/lib/(\Q$lib\E\..*)! or die '';
 	symlinkf($full_name, "$::prefix/usr/lib/$lib.$name_to_Driver{$_}");
     }
+
+    #- nvidia's libglx.so is hardwired to the tls version, change this
+    system("cd $::prefix/usr/X11R6/lib/modules/extensions ; ln -sf libglx.so.* libglx.so");
+
     #- remove the dirty hack done by NVIDIA_kernel-xxx proprietary package
     #- we do it by hand when needed
     substInFile { $_ = '' if /^nvidia$/ } "$::prefix/etc/modules";
@@ -130,13 +134,7 @@ run_program::rooted($::prefix, 'fc-cache');  #- generate cache in all directorie
     #- system
 
 # de-complexify, use the default on any arch
-eval { 
-    rm_rf("$::prefix/lib/i686");
-    rm_rf("$::prefix/lib/tls");
-    rm_rf("$::prefix/usr/lib/tls");
-    rm_rf("$::prefix/usr/X11R6/lib/tls");
-    rm_rf("$::prefix/usr/X11R6/lib/modules/extensions/tls");
-};
+eval { rm_rf("$::prefix$_") } foreach '/lib/i686', '/lib/tls', '/usr/lib/tls', '/usr/X11R6/lib/tls', '/usr/X11R6/lib/modules/extensions/tls';
 
 eval { config_X_proprietary_drivers() };
 
