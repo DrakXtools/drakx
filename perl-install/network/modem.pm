@@ -153,6 +153,7 @@ END
     }
     push @chat, <<END;
 'OK' 'ATDT$toreplace{phone}'
+'TIMEOUT' '120'
 'CONNECT' ''
 END
     if (member($modem->{Authentication}, 0, 2)) {
