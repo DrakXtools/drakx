@@ -64,13 +64,3 @@
 	* fs.pm (write_fstab): 
 	purpose: sort the fstab per mount point (cuz /usr must be before /usr/local)
 	also: rewrite of the part writing the fstab. 
-
-1999-12-19  Pixel  <pixel@mandrakesoft.com>
-
-	* install2.pm (configureX): write current fstab and conf.modules
-	before X configuration
-	* install2.pm (main): moved updating things for kde in
-	install_steps::afterInstallPackages
-	* install2.pm (main): moved msec in in addToBeDone after
-	doInstallStep in install2::miscellaneous
-
