@@ -2,7 +2,7 @@ package pkgs;
 
 use diagnostics;
 use strict;
-use vars qw(*LOG %compssListDesc @skip_list %by_lang @preferred $limitMinTrans $limitMaxTrans $PKGS_SELECTED $PKGS_FORCE $PKGS_INSTALLED $PKGS_BASE $PKGS_SKIP $PKGS_UNSKIP);
+use vars qw(*LOG %compssListDesc @skip_list %by_lang @preferred $limitMinTrans $PKGS_SELECTED $PKGS_FORCE $PKGS_INSTALLED $PKGS_BASE $PKGS_SKIP $PKGS_UNSKIP);
 
 use common qw(:common :file :functional);
 use install_any;
@@ -69,7 +69,6 @@ autoirpm autoirpm-icons numlock
 
 #- constant for small transaction.
 $limitMinTrans = 8;
-$limitMaxTrans = 24;
 
 #- constant for packing flags, see below.
 $PKGS_SELECTED  = 0x00ffffff;
@@ -118,14 +117,14 @@ sub packageFile {
 }
 
 
-#- get all headers from hdlist.cz
-sub extractHeaders {
-    my ($prefix, $pkgs) = @_;
+#- get all headers from an hdlist file.
+sub extractHeaders($$$) {
+    my ($prefix, $pkgs, $medium) = @_;
 
     commands::rm("-rf", "$prefix/tmp/headers") if -e "$prefix/tmp/headers";
 
-    run_program::run("extract_archive", 
-		     "$prefix/var/lib/urpmi/hdlist.cz2",
+    run_program::run("extract_archive",
+		     "$prefix/var/lib/urpmi/$medium->{hdlist}",
 		     "$prefix/tmp/headers",
 		     map { packageHeaderFile($_) } @$pkgs);
 
@@ -266,40 +265,64 @@ sub skipSetWithProvides {
     packageSetFlagSkip($_, 1) foreach grep { $_ } map { $_, packageProvides($_) } map { packageByName($packages, $_) } @l;
 }
 
-sub psUsingHdlist($) {
+sub psUsingHdlists($) {
     my ($prefix) = @_;
-    my $f = install_any::getFile('hdlist.cz2') or die "no hdlist.cz2 found";
-    my @packages;
+    my $listf = install_any::getFile('hdlists') or die "no hdlists found";
+    my @packages = ({}, [], {});
+    my @hdlists;
 
-    #- copy hdlist file directly to $prefix/var/lib/urpmi, this will be used
-    #- for getting header of package during installation or after by urpmi.
-    my $newf = "$prefix/var/lib/urpmi/hdlist.cz2";
-    -e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
-    local *F;
-    open F, ">$newf" or die "cannot create $newf: $!";
-    my ($buf, $sz); while (($sz = sysread($f, $buf, 16384))) { syswrite(F, $buf) }
-    close F;
-
-    #- extract filename from archive, this take advantage of verifying
-    #- the archive too.
-    open F, "extract_archive $newf |" or die "unable to parse $newf";
-    foreach (<F>) {
+    #- parse hdlist.list file.
+    foreach (<$listf>) {
 	chomp;
-	next unless /^[dlf]\s+/;
-	if (/^f\s+\d+\s+(.*)/) {
-	    my $pkg = { file  => $1, #- rebuild filename according to header one
-			flags => 0,        #- flags
-		      };
-	    $packages[0]{packageName($pkg)} = $pkg;
-	} else {
-	    die "cannot determine how to handle such file in $newf: $_";
-	}
+	s/\s*#.*$//;
+	/^\s*$/ and next;
+	m/^hdlist(.*)\.cz.*$/ or die "invalid hdlist filename $_";
+	push @hdlists, [ $_, $1 ];
     }
-    close F;
 
-    $packages[1] = [];
+    foreach (@hdlists) {
+	my ($hdlist, $medium) = @$_;
+	my $f = install_any::getFile($hdlist) or die "no $hdlist found";
 
-    log::l("psUsingHdlist read " . scalar keys(%{$packages[0]}) . " headers");
+	$packages[2]{$medium} = { hdlist => $hdlist,
+				  medium => $medium, #- default medium is ''.
+				  min    => scalar keys %{$packages[0]},
+				  max    => -1, #- will be updated after reading current hdlist.
+				};
+
+	#- copy hdlist file directly to $prefix/var/lib/urpmi, this will be used
+	#- for getting header of package during installation or after by urpmi.
+	my $newf = "$prefix/var/lib/urpmi/$hdlist";
+	-e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
+	local *F;
+	open F, ">$newf" or die "cannot create $newf: $!";
+	my ($buf, $sz); while (($sz = sysread($f, $buf, 16384))) { syswrite(F, $buf) }
+	close F;
+
+	#- extract filename from archive, this take advantage of verifying
+	#- the archive too.
+	open F, "extract_archive $newf |" or die "unable to parse $newf";
+	foreach (<F>) {
+	    chomp;
+	    /^[dlf]\s+/ or next;
+	    if (/^f\s+\d+\s+(.*)/) {
+		my $pkg = { file   => $1, #- rebuild filename according to header one
+			    flags  => 0,  #- flags
+			    medium => $packages[2]{$medium},
+			  };
+		$packages[0]{packageName($pkg)} = $pkg;
+	    } else {
+		die "cannot determine how to handle such file in $newf: $_";
+	    }
+	}
+	close F;
+
+	#- update maximal index.
+	$packages[2]{$medium}{max} = scalar(keys %{$packages[0]}) - 1;
+	$packages[2]{$medium}{max} >= $packages[2]{$medium}{min} or die "nothing found while parsing $newf";
+    }
+
+    log::l("psUsingHdlists read " . scalar keys(%{$packages[0]}) . " headers on " . scalar keys(%{$packages[2]}) . " hdlists");
 
     \@packages;
 }
@@ -322,15 +345,24 @@ sub getDeps($) {
 	  or log::l("ignoring package $name-$version-$release in depslist mismatch version or release in hdlist"), next;
 	$pkg->{sizeDeps} = $sizeDeps;
 
-	#- package are already sorted in depslist to enable small transaction.
+	#- check position of package in depslist according to precomputed
+	#- limit by hdlist, very strict :-)
+	#- above warning have chance to raise an exception here, but may help
+	#- for debugging.
+	my $i = scalar @{$packages->[1]};
+	$i >= $pkg->{medium}{min} && $i <= $pkg->{medium}{max} or die "depslist.ordered mismatch against hdlist files";
+
+	#- package are already sorted in depslist to enable small transaction and multiple medium.
 	push @{$packages->[1]}, $pkg;
     }
-#	map { push @{$packages->{$_}{provides}}, $name if $packages->{$_} } @deps;
+
+    #- check for same number of package in depslist and hdlists.
+    scalar(keys %{$packages->[0]}) == scalar(@{$packages->[1]}) or die "depslist.ordered has not same package as hdlist files";
 }
 
 sub getProvides($) {
     my ($packages) = @_;
-    
+
     #- update provides according to dependencies, here are stored
     #- reference to package directly and choice are included, this
     #- assume only 1 of the choice is selected, else on unselection
@@ -682,8 +714,8 @@ sub installCallback {
     log::l($msg .": ". join(',', @_));
 }
 
-sub install($$$;$) {
-    my ($prefix, $isUpgrade, $toInstall, $depOrder) = @_;
+sub install($$$;$$) {
+    my ($prefix, $isUpgrade, $toInstall, $depOrder, $media) = @_;
     my %packages;
 
     return if $::g_auto_install;
@@ -720,13 +752,24 @@ sub install($$$;$) {
     #- place (install_steps_gtk.pm,...).
     installCallback("Starting installation", $nb, $total);
 
-    my ($i, $min) = (0, 0);
+    my ($i, $min, $medium) = (0, 0, install_any::medium());
     do {
 	my @transToInstall;
-	if ($nb <= $limitMaxTrans || !$depOrder) {
+
+	if (!$depOrder || !$media) {
 	    @transToInstall = values %packages;
 	} else {
-	    while ($i < @$depOrder && ($i < $min || scalar @transToInstall < $limitMinTrans)) {
+	    #- change current media if needed.
+	    if ($i > $media->{$medium}{max}) {
+		#- search for media that contains the desired package to install.
+		foreach (keys %$media) {
+		    $i >= $media->{$_}{min} && $i <= $media->{$_}{max} and $medium = $_, last;
+		}
+	    }
+	    $i >= $media->{$medium}{min} && $i <= $media->{$medium}{max} or die "unable to find right medium";
+	    install_any::useMedium($medium);
+
+	    while ($i <= $media->{$medium}{max} && ($i < $min || scalar @transToInstall < $limitMinTrans)) {
 		my $dep = $packages{packageName($depOrder->[$i++])} or next;
 		push @transToInstall, $dep;
 		foreach (map { split '\|' } packageDepsId($dep)) {
@@ -739,7 +782,7 @@ sub install($$$;$) {
 	log::l("starting new transaction of ". scalar @transToInstall ." packages, still $nb after that to do");
 	my $trans = c::rpmtransCreateSet($db, $prefix);
 
-	extractHeaders($prefix, \@transToInstall);
+	extractHeaders($prefix, \@transToInstall, $media->{$medium});
 
 	c::rpmtransAddPackage($trans, $_->{header}, packageName($_), $isUpgrade && packageName($_) !~ /kernel/) #- TODO: replace `named kernel' by `provides kernel'
 	    foreach @transToInstall;

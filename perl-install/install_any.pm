@@ -4,7 +4,7 @@ use diagnostics;
 use strict;
 use Config;
 
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $current_medium $asked_medium %refused_media);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -30,28 +30,70 @@ use log;
 
 
 #-######################################################################################
-#- Functions
+#- Media change variables&functions
 #-######################################################################################
+$current_medium = '';
+$asked_medium = '';
+%refused_media = ();
+sub medium() { $current_medium }
+sub useMedium($) { $asked_medium eq $_[0] or log::l("selecting new medium $_[0]"); $asked_medium = $_[0] }
+sub changeMedium($$) {
+    my ($method, $medium) = @_;
+    log::l("change to medium $medium for method $method (refused by default)");
+    0;
+}
 sub relGetFile($) {
     local $_ = $_[0];
     /\.img$/ and return "images/$_";
-    my $dir = m|/| ? "mdkinst" :
-      member($_, qw(compss compssList compssUsers depslist depslist.ordered hdlist hdlist.cz hdlist.cz2)) ? "base/" : "/RPMS/";
+    my $dir = m|/| ? "mdkinst" : /^(?:compss|compssList|compssUsers|depslist.*|hdlist.*)$/ ? "base/": "RPMS$asked_medium/";
     $_ = "Mandrake/$dir$_";
     s/i386/i586/;
     $_;
+}
+sub errorOpeningFile($) {
+    my ($file) = @_;
+    $file eq 'XXX' and return; #- special case to force closing file after rpmlib transaction.
+    $current_medium eq $asked_medium and return; #- nothing to do in such case.
+    $refused_media{$asked_medium} and return; #- refused forever...
+
+    my $max = 32; #- always refuse after $max tries.
+    if ($::o->{method} eq "cdrom") {
+	cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/rhimage| or return;
+	my $cdrom = $1;
+	ejectCdrom();
+	while ($max > 0 && changeMedium($::o->{method}, $asked_medium)) {
+	    $current_medium = $asked_medium;
+	    eval { fs::mount($cdrom, "/tmp/rhimage", "iso9660", 'readonly') };
+	    my $getFile = getFile($file); $getFile and return $getFile;
+	    $current_medium = 'unknown'; #- don't know what CD is inserted now.
+	    ejectCdrom();
+	    --$max;
+	}
+    } else {
+	while ($max > 0 && changeMedium($::o->{method}, $asked_medium)) {
+	    $current_medium = $asked_medium;
+	    my $getFile = getFile($file); $getFile and return $getFile;
+	    $current_medium = 'unknown'; #- don't know what CD image has been copied.
+	    --$max;
+	}
+    }
+
+    #- keep in mind the asked medium has been refused on this way.
+    $refused_media{$asked_medium} = 'refused';
+
+    return;
 }
 sub getFile($) {
     local $^W = 0;
     if ($::o->{method} && $::o->{method} eq "ftp") {
 	require ftp;
-	*install_any::getFile = \&ftp::getFile;
+	*install_any::getFile = sub { ftp::getFile($_[0]) or errorOpeningFile($_[0]) };
     } elsif ($::o->{method} && $::o->{method} eq "http") {
 	require http;
-	*install_any::getFile = \&http::getFile;
+	*install_any::getFile = sub { http::getFile($_[0]) or errorOpeningFile($_[0]) };
     } else {
 	*install_any::getFile = sub($) {
-	    open getFile, "/tmp/rhimage/" . relGetFile($_[0]) or return;
+	    open getFile, "/tmp/rhimage/" . relGetFile($_[0]) or return errorOpeningFile($_[0]);
 	    *getFile;
 	};
     }
@@ -64,6 +106,9 @@ sub rewindGetFile() {
     }
 }
 
+#-######################################################################################
+#- Functions
+#-######################################################################################
 sub kernelVersion {
     local $_ = readlink("$::o->{prefix}/boot/vmlinuz") || $::testing && "vmlinuz-2.2.testversion" or die "I couldn't find the kernel package!";
     first(/vmlinuz-(.*)/);
@@ -123,7 +168,7 @@ sub setPackages($) {
 
     require pkgs;
     if (!$o->{packages} || is_empty_hash_ref($o->{packages}[0])) {
-	$o->{packages} = pkgs::psUsingHdlist($o->{prefix});
+	$o->{packages} = pkgs::psUsingHdlists($o->{prefix});
 
 	push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
 	push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};

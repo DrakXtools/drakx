@@ -137,7 +137,7 @@ sub mount($$$;$) {
     } else {
 	$dev = devices::make($dev) if $fs ne 'proc';
 
-	my $flag = 0;#c::MS_MGC_VAL();
+	my $flag = c::MS_MGC_VAL();
 	$flag |= c::MS_RDONLY() if $rdonly;
 	my $mount_opt = "";
 

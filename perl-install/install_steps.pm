@@ -236,7 +236,7 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 
     #- small transaction will be built based on this selection and depslist.
     my @toInstall = grep { pkgs::packageFlagSelected($_) && !pkgs::packageFlagInstalled($_) } values %{$packages->[0]};
-    pkgs::install($o->{prefix}, $o->{isUpgrade}, \@toInstall, $o->{packages}[1]);
+    pkgs::install($o->{prefix}, $o->{isUpgrade}, \@toInstall, $o->{packages}[1], $o->{packages}[2]);
 }
 
 sub afterInstallPackages($) {

@@ -40,7 +40,7 @@ sub set_loop {
 
     foreach (0..9) {
 	local *F;
-	my $dev = devices::make("loop$_");
+	my $dev = make("loop$_");
 	sysopen F, $dev, 0 or next;
 	!ioctl(F, c::LOOP_GET_STATUS(), my $tmp) && $! == 6 or next; #- 6 == ENXIO
 	return c::set_loop(fileno F, $file) && $dev;

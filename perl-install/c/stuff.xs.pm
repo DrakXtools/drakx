@@ -527,7 +527,16 @@ rpmtransSetScriptFd(trans, fd)
   void *trans
   int fd
   CODE:
-  rpmtransSetScriptFd(trans, fdDup(fd));
+  /* this code core dumps on install...
+  static FD_t scriptFd = NULL;
+  if (scriptFd == NULL) scriptFd = fdNew("");
+  fdSetFdno(scriptFd, fd);
+  rpmtransSetScriptFd(trans, scriptFd);
+  */
+  static FD_t scriptFd = NULL;
+  if (scriptFd != NULL) fdClose(scriptFd);
+  scriptFd = fdDup(fd);
+  rpmtransSetScriptFd(trans, scriptFd);
 
 void
 rpmRunTransactions(trans, callbackOpen, callbackClose, callbackMessage, force)

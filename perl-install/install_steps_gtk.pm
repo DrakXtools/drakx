@@ -408,7 +408,7 @@ sub choosePackagesTree {
 
     my $display_info = sub {
 	my $p = $packages->[0]{$curr} or return gtktext_insert($info_widget, '');
-	pkgs::extractHeaders($o->{prefix}, [$p]);
+	pkgs::extractHeaders($o->{prefix}, [$p], $p->{medium});
 	$p->{header} or die;
 
 	my $ind = $o->{compssListLevels}{$o->{install_class}};
@@ -498,7 +498,7 @@ sub installPackages {
     $msg->set(_("Preparing installation"));
     $w->sync;
 
-    my $old = \&pkgs::installCallback;
+    my $oldInstallCallback = \&pkgs::installCallback;
     local *pkgs::installCallback = sub {
 	my $m = shift;
 	if ($m =~ /^Starting installation/) {
@@ -529,7 +529,30 @@ sub installPackages {
 		$last_dtime = $dtime;
 	    }
 	    $w->flush;
-	} else { unshift @_, $m; goto $old }
+	} else { unshift @_, $m; goto $oldInstallCallback }
+    };
+    my $oldChangeMedium = \&install_any::changeMedium;
+    local *install_any::changeMedium = sub {
+	my ($method, $medium) = @_;
+	my %medium_msg = (
+			  '' => _("Installation CD #1"),
+			 );
+	$medium_msg{$medium} or $medium_msg{$medium} = _("Installation CD #%s", $medium);
+	my %method_msg = (
+			  cdrom =>
+_("Change your Cd-Rom!
+
+Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
+If you don't have it press Cancel to avoid installation from this Cd-Rom.", $medium_msg{$medium}),
+			 );
+	$method_msg{$method} or $method_msg{$method} =
+_("Update installation image!
+
+Ask your system administrator or reboot to update your installation image to include
+the Cd-Rom image labelled \"%s\". Press Ok if image has been updated or press Cancel
+to avoid installation from this Cd-Rom image.", $medium_msg{$medium});
+
+	$o->ask_okcancel('', $method_msg{$method});
     };
     catch_cdie { $o->install_steps::installPackages($packages); }
       sub {
