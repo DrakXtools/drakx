@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 27mdk
+Release: 28mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -321,6 +321,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Mar 29 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-28mdk
+- harddrake service: fix disabling nvidia driver (#9300)
+
 * Fri Mar 26 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-27mdk
 - drakconnect:
   o fix some bugs in ISDN configuration
