@@ -526,19 +526,30 @@ static enum return_type configure_network(struct interface_info * intf)
 		char * questions_auto[] = { "hostname", "domain" };
 		static char ** answers = NULL;
 		char * boulet;
-		
-		results = ask_from_entries_auto("I could not guess hostname and domain name; please fill in this information. "
-						"Valid answers are for example: `mybox' for hostname and `mynetwork.com' for "
-						"domain name, for a machine called `mybox.mynetwork.com' on the Internet.",
-						questions, &answers, 32, questions_auto, NULL);
-		if (results != RETURN_OK)
+
+		if (dhcp_hostname || dhcp_domain) {
+		    answers = (char **) malloc(sizeof(questions));
+		    answers[0] = strdup(dhcp_hostname);
+		    answers[1] = strdup(dhcp_domain);
+		}
+
+		if (!dhcp_hostname || !dhcp_hostname) {
+		    results = ask_from_entries_auto("I could not guess hostname and domain name; please fill in this information. "
+						    "Valid answers are for example: `mybox' for hostname and `mynetwork.com' for "
+						    "domain name, for a machine called `mybox.mynetwork.com' on the Internet.",
+						    questions, &answers, 32, questions_auto, NULL);
+		    if (results != RETURN_OK)
 			return results;
+		}
 		
 		hostname = answers[0];
 		if ((boulet = strchr(hostname, '.')) != NULL)
 			boulet[0] = '\0';
 		domain = answers[1];
 	}
+
+	log_message("using hostname %s", hostname);
+	log_message("using daomin %s", domain);
 
 	return RETURN_OK;
 }
