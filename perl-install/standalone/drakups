@@ -64,7 +64,7 @@ sub add_device_wizard {
     my ($ups_models, $model_list) = readDriversList();
 
     use wizards;
-    my ($ups, $vendor, $model, $extra, $name, $driver, $port, @new_devices);
+    my ($ups, $vendor, $model, $extra, $name, $driver, $port, @new_devices, $opts);
     my $w = wizards->new;
     my $wiz;
     my %methods = (
@@ -131,7 +131,7 @@ Do you want to autodetect UPS devices connected to this machine or to manually s
                                 post => sub {
                                     ($vendor, $model, $extra) = ($1, $2, $3) if $ups =~ /(.*)\|(.*) \((.*)\)$/;
                                     ($name, $driver, $port) = ("myups", $ups_models->{$vendor}{$model . $extra}{driver}, "");
-                                    ($driver) = split(/\s+/, $driver);
+                                    ($driver, $opts) = split(/\s+/, $driver);
                                     "driver";
                                 },
                                },
@@ -169,6 +169,7 @@ Please fill in its name, its driver and its port.", $model, $vendor);
 
     $config->{$name}{driver} = $driver;
     $config->{$name}{port} = $port;
+    $config->{$name}{$1} = $2 if $opts =~ /\b(.*)=(.*)\b/;
     # refresh the GUI when needed:
     $models{ups}->append_set(1 => $name, 2 => $driver, 3 => $port) if $models{ups};
 
