@@ -129,9 +129,14 @@ install or upgrade.
 DrakX will then check whether you have enough room to install them all. If not,
 it will warn you about it. If you want to go on anyway, it will proceed onto
 the installation of all selected groups but will drop some packages of lesser
-interest. If you scroll down the bottom of the list and check the option
-\"Select packages individually\", you will be able to do so, indeed, but you'll
-have to browse through more than 1000 packages..."),
+interest. At the bottom of the list you can select the option
+\"Individual package selection\"; in this case you will have to browse
+through more than 1000 packages..."),
+
+chooseCD =>
+ __("If you have all the CDs in the list above, click Ok.
+If you have none of those CDs, click Cancel.
+If only some CDs are missing, unselect them, then click Ok."),
 
 doInstallStep =>
  __("The packages selected are now being installed. This operation

@@ -335,15 +335,22 @@ sub chooseCD {
     my ($o, $packages) = @_;
     my @mediums = grep { $_ > 1 } pkgs::allMediums($packages);
 
-    #- if no other medium available or a poor beginner.
+    #- if no other medium available or a poor beginner, we are choosing for him!
     #- note first CD is always selected and should not be unselected!
     return if scalar(@mediums) == 0 || $::beginner;
 
+    $o->set_help('chooseCD');
     $o->ask_many_from_list_ref('',
-			       _("Choose other CD to install"),
+			       _(
+"If you have all the CDs in the list below, click Ok.
+If you have none of those CDs, click Cancel.
+If only some CDs are missing, unselect them, then click Ok."),
 			       [ map { _("Cd-Rom labeled \"%s\"", pkgs::mediumDescr($packages, $_)) } @mediums ],
-			       [ map { \$packages->[2]{$_}{selected} } @mediums ] #- check for change!
-			      ) or goto &chooseCD unless $::beginner;
+			       [ map { \$packages->[2]{$_}{selected} } @mediums ]
+			      ) or do {
+				  map { $packages->[2]{$_}{selected} = 0 } @mediums; #- force unselection of other CDs.
+			      };
+    $o->set_help('choosePackages');
 }
 
 #------------------------------------------------------------------------------

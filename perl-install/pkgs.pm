@@ -338,8 +338,9 @@ sub psUsingHdlists {
 	my ($hdlist, $medium, $rpmsdir, $descr) = @$_;
 	my $f = install_any::getFile($hdlist) or die "no $hdlist found";
 
-	#- make sure the first medium is always selected! so select any less than 2.
-	psUsingHdlist($prefix, $method, \@packages, $f, $hdlist, $medium, $rpmsdir, $descr, ($medium < 2 || $method ne 'cdrom'));
+	#- make sure the first medium is always selected!
+	#- by default select all image.
+	psUsingHdlist($prefix, $method, \@packages, $f, $hdlist, $medium, $rpmsdir, $descr, 1);
     }
 
     log::l("psUsingHdlists read " . scalar keys(%{$packages[0]}) . " headers on " . scalar keys(%{$packages[2]}) . " hdlists");
@@ -911,6 +912,8 @@ sub install($$$;$$) {
 	    } while (scalar(@transToInstall) == 0); #- avoid null transaction, it a nop that cost a bit.
 	}
 
+	#- reset file descriptor open too.
+	install_any::getFile('XXX');
 	#- reset ftp handlers before forking, otherwise well ;-(
 	require ftp;
 	ftp::rewindGetFile();
