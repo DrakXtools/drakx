@@ -118,7 +118,7 @@ done
 
 
 install_kernel() {
- v=2.4.13-9mdk
+ v=2.4.16.1mdk-1-1mdk
  vv=${v}BOOT
  rm -rf all.kernels/$(cat all.kernels/.main)
  scp kenobi:~chmou/public_html/kernel/BOOT/kernel-BOOT-$v.i586.rpm /tmp
