@@ -544,9 +544,9 @@ killall pppd
                         return 'adsl_unsupported_eci' if $adsl_device eq 'eci';
                         $netconnect::need_restart_network = member($adsl_device, qw(speedtouch eci));
                         $in->do_pkgs->ensure_is_installed(@{$packages{$adsl_device}}) if $packages{$adsl_device};
-                        if ($adsl_device eq 'speedtouch' && !$::testing) {
+                        if ($adsl_device eq 'speedtouch' && ! -r '/usr/share/speedtouch/mgmt.o' && !$::testing) {
                             $in->do_pkgs->what_provides("speedtouch_mgmt") and 
-                              $in->do_pkgs->ensure_is_installed('speedtouch_mgmt', '/usr/share/speedtouch/mgmt.o', 'auto');
+                              $in->do_pkgs->install('speedtouch_mgmt', 'auto');
                             return 'adsl_speedtouch_firmware' if ! -e "$prefix/usr/share/speedtouch/mgmt.o";
                         }
                         return 'adsl_provider' if $adsl_devices{$adsl_device};
