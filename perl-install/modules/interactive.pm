@@ -60,7 +60,7 @@ sub load_category__prompt_for_more {
 
     while (1) {
 	my $msg = @l ?
-	  [ N("Found %s %s interfaces", join(", ", @l), $msg_type),
+	  [ N("Found %s %s interfaces", join(", ", map { qq("$_") } @l), $msg_type),
 	    N("Do you have another one?") ] :
 	  N("Do you have any %s interfaces?", $msg_type);
 
