@@ -73,7 +73,7 @@ sub detect {
     require network::adsl;
     network::adsl->import;
     map {
-	( !$net_install and adsl_detect("", $_->[0]) ) ? $auto_detect->{adsl}=$_->[0] : $auto_detect->{lan}{$_->[0]}=$_->[1]; } @all_cards;
+	( !$net_install and adsl_detect($_->[0]) ) ? $auto_detect->{adsl}=$_->[0] : $auto_detect->{lan}{$_->[0]}=$_->[1]; } @all_cards;
     my $modem={};
     require network::modem;
     network::modem->import;
