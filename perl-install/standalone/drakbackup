@@ -162,6 +162,7 @@ my %conf;
 my $time_string = "* * * * *";
 my $exec_string = "export USER=$ENV{USER}; /usr/sbin/drakbackup --daemon > /dev/null 2>&1";
 my $ignore_files_list;
+my @list_of_rpm_to_install;
 
 # allow not-root user with own config
 if ($ENV{USER} ne 'root' && $ENV{HOME} ne '/root') {
@@ -1204,7 +1205,7 @@ sub build_backup_files() {
     my $tar_cmd_other;
     my @dir_content;
 	my $incr;
-	my $find_args = "! -type d";
+	my $find_args = "! -type d -print";
 	
 	local $_;
     $results = "";
@@ -1253,7 +1254,6 @@ sub build_backup_files() {
 	  	my $find_args_sys = $find_args;
 		$ignore_files_list = '';
 	  	$find_args_sys = handle_ignores2("/etc", $find_args_sys) if $backupignore;
-		$find_args_sys .= " -print";	
 	    if ($backup_sys_versions) {
 			$incr = "incr_sys";
 			$incr =~ s/incr/diff/ if $sys_diff_mode;
@@ -1302,7 +1302,6 @@ sub build_backup_files() {
 			push_list("backup_sys");
 			files_to_results("sys");
 	  	}
-		$results .= "\nignored: $ignore_files_list" if $ignore_files_list;
 	  }
 	  $interactive and progress($pbar, $plabel, 0.5, N("Backup system files..."));
 	  $interactive and progress($pbar3, $plabel3, 0.3, N("Hard Disk Backup files..."));
@@ -1316,7 +1315,6 @@ sub build_backup_files() {
 		  my $find_args_user = $find_args;
 		  $ignore_files_list = '';
 	  	  $find_args_user = handle_ignores2($path_name, $find_args_user) if $backupignore;
-		  $find_args_user .= " -print";	
 		  if ($backup_user_versions) {
 			$incr = "incr_user_";
 			$incr =~ s/incr/diff/ if $user_diff_mode;
@@ -1366,7 +1364,6 @@ sub build_backup_files() {
 			files_to_results("user_$user");
 		  }
 	    }
-		$results .= "\nignored: $ignore_files_list" if $ignore_files_list;	  
 	  }
 	  $interactive and progress($pbar2, $plabel1, 1, N("Backup User files..."));
 	  $interactive and progress($pbar3, $plabel3, 0.4, N("Hard Disk Backup files..."));
@@ -1375,7 +1372,6 @@ sub build_backup_files() {
 		my $find_args_other = $find_args;
 		$ignore_files_list = '';
 		($tar_cmd_other, $find_args_other) = handle_ignores($tar_cmd_other, $find_args_other, @list_other) if $backupignore;
-		$find_args_other .= " -print";	
 		if ($backup_other_versions) {
 			$incr = "incr_other";
 			$incr =~ s/incr/diff/ if $other_diff_mode;
@@ -1422,7 +1418,6 @@ sub build_backup_files() {
 			push_list("backup_other");
 			files_to_results("other"); 
 	  	}
-		$results .= "\nignored: $ignore_files_list" if $ignore_files_list;	  
 	  }
 	  $interactive and progress($pbar1, $plabel2, 1, N("Backup Other files..."));
 	  $interactive and progress($pbar3, $plabel3, 0.3, N("Hard Disk Backup Progress..."));
@@ -1554,6 +1549,7 @@ sub files_to_results {
 	my ($basename) = @_;
 	$results .= "\nfile: " . $save_path . "/backup_" . $basename . $the_time . "." . $tar_ext . "\n\n";
 	$results .= cat_("$save_path/list_" . $basename . $the_time . ".txt");
+	$results .= "\nignored:\n" . $ignore_files_list . "\n" if $ignore_files_list;
 }
 
 sub handle_ignores {
@@ -1572,13 +1568,11 @@ sub handle_ignores2 {
 	my @ignore_files = cat_("$dir/.backupignore");
 	foreach (@ignore_files) {
 		$ignore_files_list .= $_;
-		chop;
-		$find_args .= " ! -name '" . $_ . "'";
 	}
+	$find_args .= " | grep -v -f $dir/.backupignore" if -f "$dir/.backupignore";
 	return $find_args;
 }
 
-my @list_of_rpm_to_install;
 sub require_rpm {
     my $all_rpms_found = 1;
     my $res;
