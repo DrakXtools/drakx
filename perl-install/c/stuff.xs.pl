@@ -349,7 +349,11 @@ setsid()
 void
 _exit(status)
   int status
-  
+
+void
+usleep(microseconds)
+  unsigned long microseconds
+
 int
 detectSMP()
 
