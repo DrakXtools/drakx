@@ -75,6 +75,9 @@ sub setupBootloader {
 	#- at least one method
 	grep_each { $::b } %{$b->{methods}} or return;
 
+	#- put lilo if grub is chosen, so that /etc/lilo.conf is generated
+	exists $b->{methods}{lilo} and $b->{methods}{lilo} = 1 if $b->{methods}{grub};
+
 	my @l = (
 _("Boot device") => { val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } @$hds, @$fstab), detect_devices::floppies() ], not_edit => !$::expert },
 _("LBA (doesn't work on old BIOSes)") => { val => \$b->{lba32}, type => "bool", text => "lba" },

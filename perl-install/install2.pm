@@ -477,7 +477,7 @@ sub configureX {
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
     modules::write_conf("$o->{prefix}/etc/conf.modules");
 
-    $o->setupXfree if pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'XFree86')) || $clicked;
+    $o->setupXfree;# if pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'XFree86')) || $clicked;
 }
 #------------------------------------------------------------------------------
 sub generateAutoInstFloppy { 

@@ -161,7 +161,7 @@ sub formatMount_part {
 sub formatMount_all {
     my ($raid, $fstab, $prefix, $callback) = @_;
     formatMount_part($_, $raid, $fstab, $prefix, $callback) 
-      foreach sort { isLoopback($a) ? 1 : -1 } grep { $_->{mntpoint} } @$fstab;
+      foreach sort { isLoopback($a) ? 1 : isSwap($a) ? -1 : 0 } grep { $_->{mntpoint} } @$fstab;
 
     #- ensure the link is there
     loopback::carryRootCreateSymlink($_, $prefix) foreach @$fstab;

@@ -9,17 +9,16 @@ __("Choose preferred language for install and system usage."),
 selectKeyboard =>
  __("Choose the layout corresponding to your keyboard from the list above"),
 
-selectPath =>
+selectInstallClass =>
  __("Choose \"Install\" if there are no previous versions of Linux
 installed, or if you wish to use multiple distributions or versions.
 
-
 Choose \"Upgrade\" if you wish to update a previous version of Mandrake Linux:
 5.1 (Venice), 5.2 (Leloo), 5.3 (Festen), 6.0 (Venus), 6.1 (Helios), Gold 2000
-or 7.0 (Air)."),
+or 7.0 (Air).
 
-selectInstallClass =>
- __("Select:
+
+Select:
 
   - Recommended: If you have never installed Linux before, choose this. NOTE:
     networking will not be configured during installation, use \"LinuxConf\"

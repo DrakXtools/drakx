@@ -87,7 +87,7 @@ sub ask_from_treelistW {
     };
     my ($root, $leaf, $wdef, $ndef);
     foreach (@$l) {
-	($root, $leaf) = /(.*)$sep(.+)/o or ($root, $leaf) = ('', $_);
+	($root, $leaf) = /(.*)$sep(.+)/ or ($root, $leaf) = ('', $_);
 	my $node = $tree->insert_node($parent->($root), undef, [$leaf], 5, (undef) x 4, 1, 0);
 
 	if ($def eq $_) {

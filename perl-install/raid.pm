@@ -133,6 +133,8 @@ sub make {
 
 sub format_part($$) {
     my ($raid, $part) = @_;
+    $part->{isFormatted} and return;
+
     make($raid->{raid}, $part);
     fs::real_format_part($part);
     $_->{isFormatted} = 1 foreach @{$part->{disks}};
