@@ -1,16 +1,12 @@
-%define name drakxtools
-%define version 1.1.8
-%define release 2mdk
-
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
-Name: %{name}
-Version: %{version}
-Release: %{release}
+Name:    drakxtools
+Version: 1.1.8
+Release: 2mdk
 Url: http://www.linux-mandrake.com/drakx/
-Source0: drakxtools-%{version}.tar.bz2
+Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
-Requires: %{name}-newt = %{version}-%{release}, perl-GTK >= 0.6123, perl-GTK-GdkImlib, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, detect-lst >= 0.9.72, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.2-13mdk, groff
+Requires: %{name}-newt = %version-%release, perl-GTK >= 0.6123, perl-GTK-GdkImlib, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, detect-lst >= 0.9.72, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.2-13mdk, groff
 Conflicts: drakconf < 0.96-10mdk
 BuildRequires:        e2fsprogs-devel
 BuildRequires:        gcc
@@ -20,7 +16,7 @@ BuildRequires:        ldetect-devel
 BuildRequires:        ncurses-devel
 BuildRequires:        newt-devel
 BuildRequires:        perl-devel
-BuildRoot: %{_tmppath}/%{name}-buildroot
+BuildRoot: %_tmppath/%name-buildroot
 
 %package newt
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
@@ -33,19 +29,19 @@ Provides: diskdrake setuptool Xconfigurator mouseconfig kbdconfig printtool
 %package http
 Summary: The drakxtools via http
 Group: System/Configuration/Other
-Requires: %{name}-newt = %{version}-%{release}, perl-Net_SSLeay, perl-Authen-PAM, perl-CGI
+Requires: %{name}-newt = %version-%release, perl-Net_SSLeay, perl-Authen-PAM, perl-CGI
 
 %package -n harddrake
 Summary: Main Hardware Configuration/Information Tool
 Group: System/Configuration/Hardware
-Requires: %{name}-newt = %{version}-%{release}
+Requires: %{name}-newt = %version-%release
 Obsoletes: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
 Provides: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
 
 %package -n harddrake-ui
 Summary: Main Hardware Configuration/Information Tool
 Group: System/Configuration/Hardware
-Requires: %{name} = %{version}-%{release}
+Requires: %name = %version-%release
 Obsoletes: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
 Provides: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
 
@@ -88,14 +84,25 @@ drakautoinst: help you configure an automatic installation replay
 drakxtv: auto configure tv card for xawtv grabber
 
 %description newt
+This add the capability to be runned behind a web server to the drakx tools.
 See package %{name}
 
 %description http
 See package %{name}
 
 %description -n harddrake
+The harddrake service is a hardware probing tool run at system boot
+time to determine what hardware has been added or removed from the
+system.
+It then offer to run needed config tool to update the OS
+configuration.
+
+
+%description -n harddrake-ui
 This is the main configuration tool for hardware that calls all the
 other configuration tools.
+It offers a nice GUI that show the hardware configuration splitted by
+hardware classes.
 
 
 %prep
@@ -150,8 +157,8 @@ rm -rf $RPM_BUILD_ROOT
 :
 
 %postun
-for i in /usr/X11R6/bin/Xconfigurator %{_sbindir}/kbdconfig %{_sbindir}/mouseconfig %{_bindir}/printtool;do
-    if [ -L $i ]; then %{__rm} -f $i; fi
+for i in /usr/X11R6/bin/Xconfigurator %_sbindir/kbdconfig %_sbindir/mouseconfig %_bindir/printtool;do
+    [[ -L $i ]] && %__rm -f $i
 done
 
 %post http
@@ -174,12 +181,12 @@ done
 %defattr(-,root,root)
 %config(noreplace) /etc/security/fileshare.conf
 %doc diskdrake/diskdrake.html
-%attr(4755,root,root) %{_sbindir}/fileshareset
+%attr(4755,root,root) %_sbindir/fileshareset
 
 %files -f %{name}-gtk.list
 %defattr(-,root,root)
-%config(noreplace) %{_sysconfdir}/pam.d/net_monitor
-%config(noreplace) %{_sysconfdir}/security/console.apps/net_monitor
+%config(noreplace) %_sysconfdir/pam.d/net_monitor
+%config(noreplace) %_sysconfdir/security/console.apps/net_monitor
 /usr/X11R6/bin/*
 
 %files -n harddrake
@@ -195,11 +202,11 @@ done
 %files http -f %{name}-http.list
 %defattr(-,root,root)
 %dir %{_sysconfdir}/drakxtools_http
-%config(noreplace) %{_sysconfdir}/pam.d/miniserv
-%config(noreplace) %{_sysconfdir}/init.d/drakxtools_http
-%config(noreplace) %{_sysconfdir}/drakxtools_http/conf
-%config(noreplace) %{_sysconfdir}/drakxtools_http/authorised_progs
-%config(noreplace) %{_sysconfdir}/logrotate.d/drakxtools-http
+%config(noreplace) %_sysconfdir/pam.d/miniserv
+%config(noreplace) %_sysconfdir/init.d/drakxtools_http
+%config(noreplace) %_sysconfdir/drakxtools_http/conf
+%config(noreplace) %_sysconfdir/drakxtools_http/authorised_progs
+%config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
 * Mon Jul  8 2002 tve <tv@vador.mandrakesoft.com> 1.1.8-2mdk
