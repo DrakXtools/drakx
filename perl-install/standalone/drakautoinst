@@ -63,7 +63,7 @@ my $st = \%steps::installSteps;
 for (my $f = $st->{first}; $f; $f = $st->{$f}{next}) {
     next if member($f, @manual_steps);
     my $def_choice = 'replay';
-    push @choices, { label => _($st->{$f}{text}), val => \$def_choice, list => [ 'replay', 'manual' ] };
+    push @choices, { label => _($st->{$f}{text}), val => \$def_choice, list => [ _('replay'), _('manual') ] };
     push @all_steps, [ $f, \$def_choice ];
 }
 
@@ -72,7 +72,7 @@ $in->ask_from(_("Automatic Steps Configuration"),
 	      \@choices
 	     ) or quit_global($in, 0);
 
-${$_->[1]} eq 'manual' and push @manual_steps, $_->[0] foreach @all_steps;
+${$_->[1]} eq _('manual') and push @manual_steps, $_->[0] foreach @all_steps;
 
 my $mountdir = "/root/tmp/drakautoinst-mountdir"; -d $mountdir or mkdir $mountdir, 0755;
 my $floppy = detect_devices::floppy();
@@ -125,6 +125,9 @@ sub quit_global {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.7  2001/09/18 17:35:50  gc
+#- have "manual" and "replay" translated
+#-
 #- Revision 1.6  2001/09/14 17:30:23  siegel
 #- Check exisence of "/root/replay_install.img" before anything else ...
 #-
