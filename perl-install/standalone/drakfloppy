@@ -44,6 +44,7 @@ my $list_model = Gtk2::ListStore->new((Gtk2::GType->STRING) x 2);
 my $list  = Gtk2::TreeView->new_with_model($list_model);
 each_index {
     $list->append_column(my $col = Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i));
+    $col->set_sort_column_id($::i);
     $col->set_min_width((200, 50)[$::i]);
     #    $col->set_alignment(1.0) if $::i == 1;
 } (N("Module name"), N("Size"));

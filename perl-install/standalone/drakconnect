@@ -167,7 +167,10 @@ my $button_internet = gtksignal_connect(Gtk2::Button->new(N("Configure Internet 
 my $tree_model = Gtk2::TreeStore->new(Gtk2::GType->OBJECT, map { Gtk2::GType->STRING } 2..6);
 my $list = Gtk2::TreeView->new_with_model($tree_model);
 $list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 0));
-each_index { $list->append_column(Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i + 1)) } (N("Interface"), N("IP address"), N("Protocol"), N("Driver"), N("State"));
+each_index {
+    $list->append_column(my $col = Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i + 1));
+    $col->set_sort_column_id($::i);
+} (N("Interface"), N("IP address"), N("Protocol"), N("Driver"), N("State"));
 
 build_list();
 
