@@ -1,3 +1,10 @@
+#-########################################################################
+#- This file implement many common shell commands:
+#- true, false, cat, which, dirname, basename, rmdir, lsmod, grep, tr,
+#- mount, umount, mkdir, mknod, ln, rm, chmod, chown, mkswap, swapon,
+#- swapoff, ls, cp, ps, dd, head, tail, strings, hexdump, more, insmod,
+#- modprobe, route, df, kill, lspci, dmesg, sort, du, 
+#-########################################################################
 package commands;
 
 use diagnostics;
