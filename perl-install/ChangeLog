@@ -1,3 +1,91 @@
+2001/08/29  dam's  <damien@mandrakesoft.com>
+
+	* network/adsl.pm, network/tools.pm, share/rpmsrate: speedtouch
+	configuration
+
+2001/08/29  François Pons  <fpons@mandrakesoft.com>
+
+	* mouse.pm: improved write_conf to enable multi-mice if only once mice is
+	already defined.
+
+	* install_steps.pm: add support for mandatory frame buffer support (SiS
+	630) need them for XF3 to
+	work properly, XF4 does work with it nicely.
+
+	* Xconfigurator.pm: make sure Port entry for wacom is placed first.
+
+	* standalone/mousedrake: try to merge already existing mouse configuration
+	with what has been probed,
+	change if mouse is really changed as probe is incomplete.
+
+	* Xconfig.pm: improve getinfoFromXF86Config for mouse parameters.
+
+2001/08/29  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/rpmsrate: games
+
+2001/08/29  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/da.po, share/po/DrakX.pot, share/po/es.po: updated Danish file
+
+2001/08/29  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm, install_any.pm, fsedit.pm, diskdrake.pm: try to better handle
+	symlinks device and devfs devices
+
+	* install_steps_interactive.pm, standalone/localedrake, lang.pm, any.pm,
+	Makefile.config: add localedrake (not tested)
+
+	* install_steps.pm: no need to have devfs=nomount anymore in root raid
+	do not modify fstab options in upgrade
+
+	* keyboard.pm (loadkeys_files): fixed
+	fix DISABLE_WINDOWS_KEY state handling (for upgrade), cleanup
+
+	* diskdrake_interactive.pm: try to better handle symlinks device and devfs
+	devices
+	(main): fix
+	(Create): fix typo causing primaryOrExtended to be ignored
+
+	* rescue/devices.pl, rescue/make_rescue_img, rescue/list: cleanup,
+	speedup, use mknod for devices
+
+	* c/stuff.xs.pm, detect_devices.pm: better floppy detection/info
+
+2001/08/28  dam's  <damien@mandrakesoft.com>
+
+	* interactive.pm, install2.pm: corrected icon handling
+
+	* services.pm: added cupslpd in printing section
+
+2001/08/28  François Pons  <fpons@mandrakesoft.com>
+
+	* Makefile.config: really fix typo...
+	fixed typo.
+
+2001/08/28  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/cs.po: updated Czech file
+
+2001/08/28  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm: remove the temporary file /tmp/autoinst.img
+
+	* install_steps.pm, install_steps_interactive.pm: propose to format / and
+	/usr even if isFormatted. More generally do not trust isFormatted to
+	show which partitions to format
+
+2001/08/28  siegel
+
+	* ChangeLog, keyboard.pm: 
+	  - keyboard.pm: write DISABLE_WINDOWS_KEY=no in /etc/sysconfig/keyboard
+	if no laptop is detected (= give users the chance to know about the
+	existence of this variable).
+
+2001/08/28  yduret
+
+	* standalone/diskdrake: embedded mode nicer
+
 2001/08/28  dam's  <damien@mandrakesoft.com>
 
 	* interactive.pm, install2.pm: corrected icon handling
