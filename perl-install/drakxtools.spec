@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.10
-Release: 1mdk
+Release: 2mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -286,6 +286,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Mon Nov  4 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.10-2mdk
+- snapshot
+
 * Wed Oct 16 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.10-1mdk
 - harddrake :
   o try to discriminate webcams from video cards
@@ -301,7 +304,6 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - smb updates (stew)
 - fix broken danish translations (wrong unicode encoding) (pablo)
 - update other translations by the way (pablo)
-
 
 * Fri Sep 20 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-53mdk
 - remove useless warnings from harddrake
