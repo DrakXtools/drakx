@@ -51,8 +51,8 @@ autoirpm autoirpm-icons numlock
 
 %by_lang = (
   'ar'	=> [ 'acon' ],
-# 'be'	=> [ 'fonts-ttf-cyrillic' ],
-# 'bg'	=> [ 'fonts-ttf-cyrillic' ],
+# 'be_BE.CP1251' => [ 'fonts-ttf-cyrillic' ],
+#'bg_BG' => [ 'fonts-ttf-cyrillic' ],
   'cs'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
 # 'cy'  => iso8859-14 fonts
 # 'el'	=> greek fonts
@@ -70,7 +70,7 @@ autoirpm autoirpm-icons numlock
 # 'mk'	=> [ 'fonts-ttf-cyrillic' ],
   'pl'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
   'ro'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-# 'ru'	=> [ 'XFree86-cyrillic-fonts', 'fonts-ttf-cyrillic' ],
+# 'ru_RU.KOI8-R' => [ 'XFree86-cyrillic-fonts', 'fonts-ttf-cyrillic' ],
   'ru'	=> [ 'XFree86-cyrillic-fonts' ],
   'sk'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
   'sl'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
@@ -78,10 +78,10 @@ autoirpm autoirpm-icons numlock
   'sr'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
 # 'th'	=> thai fonts
   'tr'	=> [ 'XFree86-ISO8859-9', 'XFree86-ISO8859-9-75dpi-fonts' ],
-# 'uk'	=> [ 'fonts-ttf-cyrillic' ],
+#'uk_UA' => [ 'fonts-ttf-cyrillic' ],
 # 'vi'	=> vietnamese fonts
   'yi'  => [ 'acon' ],
-  'zh_CN' => [ 'rxvt-CLE', 'fonts-ttf-gb2312' ],
+  'zh_CN.GB2312' => [ 'rxvt-CLE', 'fonts-ttf-gb2312' ],
   'zh_TW.Big5' => [ 'rxvt-CLE', 'fonts-ttf-big5' ],
 );
 

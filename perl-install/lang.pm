@@ -17,11 +17,11 @@ use log;
 #- [2] = value for $LANG, [3] = value for LANGUAGE (a list of possible
 #- languages, carefully choosen)
 my %languages = (
-'en_US'  => [ 'English (US)',		'iso-8859-1', 'en', 'en_US:en' ],
+'en_US' => [ 'English (US)',		'iso-8859-1', 'en', 'en_US:en' ],
 'en_GB' => [ 'English (UK)',		'iso-8859-1', 'en', 'en_GB:en' ],
   'af'  => [ 'Afrikaans',		'iso-8859-1', 'af', 'af:en_ZA' ],
   'ar'  => [ 'Arabic',			'iso-8859-6', 'ar', 'ar' ],
-'be_BY.CP1251' => [ 'Belarussian',	'cp1251',     'be', 'be:be_BY.CP1251' ],
+'be_BY.CP1251' => [ 'Belarussian',	'cp1251',     'be', 'be:be_BY.CP1251:ru_RU.CP1251' ],
 #- provide aliases for some not very standard names used in po files...
 'bg_BG' => [ 'Bulgarian',		'cp1251',     'bg', 'bg:bg.CP1251:bg_BG.CP1251' ],
   'br'  => [ 'Brezhoneg',		'iso-8859-1', 'br', 'br:fr_FR:fr' ],
@@ -95,7 +95,7 @@ my %languages = (
   'wa'  => [ 'Walon',     		'iso-8859-1', 'wa', 'wa:fr_BE:fr' ],
 #-'yi'	=> [ 'Yiddish',			'cp1255',     'yi', 'yi' ],
 'zh_TW.Big5' => [ 'Chinese (Big5)',     'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh' ],
-'zh_CN' => [ 'Chinese (GuoBiao)',	'gb2312', 'zh_CN', 'zh_CN:zh_CN.GB2312:zh_CN.gb2312:zh' ],
+'zh_CN' => [ 'Chinese (GuoBiao)',	'gb2312', 'zh_CN.GB2312', 'zh_CN.GB2312:zh_CN.gb2312:zh_CN:zh' ],
 );
 
 my %xim = (
@@ -104,10 +104,10 @@ my %xim = (
 	XIM => 'xcin',
 	XMODIFIERS => '"@im=xcin"',
   },
-  'zh_CN' => {
+  'zh_CN.GB2312' => {
 	ENC => 'gb',
-	XIM => 'xcin-zh_CN',
-	XMODIFIERS => '"@im=xcin-zh_CN"',
+	XIM => 'xcin-zh_CN.GB2312',
+	XMODIFIERS => '"@im=xcin-zh_CN.GB2312"',
   },
   'ko' => {
 	ENC => 'kr',
@@ -271,7 +271,6 @@ sub write {
 	my $c = $charsets{$l->[1] || ''};
 	if ($c) {
 	    my $p = "$prefix/usr/lib/kbd";
-	    add2hash $h, { CHARSET => $c };
 	    if ($c->[0]) {
 		add2hash $h, { SYSFONT => $c->[0] };
 		eval {
