@@ -66,6 +66,14 @@ sub load_rc {
 #------------------------------------------------------------------------------
 sub load_font {
     my ($o) = @_;
+
+    if (lang::text_direction_rtl()) {
+	Gtk2::Widget->set_default_direction('rtl'); 
+	my ($x, $y) = $::WizardWindow->get_position;
+	my ($width) = $::WizardWindow->get_size;
+	$::WizardWindow->move($::rootwidth - $width - $x, $y);
+    }
+
     Gtk2::Rc->parse_string(q(
 style "default-font" 
 {
@@ -121,12 +129,12 @@ sub create_steps_window {
     $o->{steps_window} and $o->{steps_window}->destroy;
     my $w = bless {}, 'ugtk2';
     $w->{rwindow} = $w->{window} = Gtk2::Window->new('toplevel');
-    $w->{rwindow}->set_uposition(8, 160);
+    $w->{rwindow}->set_uposition(lang::text_direction_rtl() ? ($::rootwidth - $::stepswidth - 8) : 8, 160);
     $w->{rwindow}->set_size_request($::stepswidth, -1);
     $w->{rwindow}->set_name('Steps');
     $w->{rwindow}->set_title('skip');
 
-    $steps{$_} = gtkcreate_pixbuf("steps_$_") foreach qw(on off);
+    $steps{$_} ||= gtkcreate_pixbuf("steps_$_") foreach qw(on off);
 
     gtkpack__(my $vb = Gtk2::VBox->new(0, 3), $steps{inst} = Gtk2::Label->new(N("System installation")), '');
     foreach (grep { !eval $o->{steps}{$_}{hidden} } @{$o->{orderedSteps}}) {
