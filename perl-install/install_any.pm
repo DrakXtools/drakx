@@ -310,7 +310,7 @@ sub setPackages {
 	  pkgs::readCompssUsers($o->{packages}, $o->{meta_class});
 
 	$o->{compssUsersChoice}{SYSTEM} = 1;
-	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
+#	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
 
 	foreach (map { substr($_, 0, 2) } lang::langs($o->{langs})) {
 	    push @{$o->{default_packages}}, pkgs::packageByName($o->{packages}, "locales-$_") || next;
@@ -527,7 +527,7 @@ sub g_auto_install(;$) {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse wacom netc timezone superuser intf keyboard mkbootdisk users installClass partitioning isUpgrade manualFstab nomouseprobe crypto security netcnx useSupermount autoExitInstall); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse wacom netc timezone superuser intf keyboard mkbootdisk users partitioning isUpgrade manualFstab nomouseprobe crypto security netcnx useSupermount autoExitInstall); #- TODO modules bootloader 
 
     if (my $card = $::o->{X}{card}) {
 	$o->{X}{$_} = $::o->{X}{$_} foreach qw(default_depth resolution_wanted);
