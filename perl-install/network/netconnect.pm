@@ -84,12 +84,12 @@ sub pre_func {
     $::Wizard_no_previous = 1;
     if ($::isStandalone) {
 	$::Wizard_splash = 1;
-	require my_gtk;
-	my_gtk->import(qw(:wrappers));
-	my $W = my_gtk->new(N("Network Configuration Wizard"));
+	require ugtk2;
+	ugtk2->import(qw(:wrappers));
+	my $W = ugtk2->new(N("Network Configuration Wizard"));
 	gtkadd($W->{window},
-	       gtkpack_(new Gtk::VBox(0, 0),
-			1, write_on_pixmap(gtkpng("drakconnect_step"),
+	       gtkpack_(new Gtk2::VBox(0, 0),
+			1, write_on_pixmap(gtkcreate_img("drakconnect_step"),
 					   20,200,
 					   N("We are now going to configure the %s connection.", translate($text)),
 					  ),
