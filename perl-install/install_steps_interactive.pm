@@ -786,16 +786,18 @@ sub setRootPassword {
 sub addUser {
     my ($o, $clicked) = @_;
     $o->{users} ||= [];
+
     if ($o->{security} < 1) {
 	push @{$o->{users}}, { password => 'mandrake', realname => 'default', icon => 'automagic' } 
 	  if !member('mandrake', map { $_->{name} } @{$o->{users}});
     }
     if (($o->{security} >= 1 || $clicked)) {
-	any::ask_users($o->{prefix}, $o, $o->{users}, $o->{security});
+	any::ask_users($o->{prefix}, $o->{users}, $o->{security});
     }
     install_steps::addUser($o);
 }
 
+#    any::get_autologin($o->{prefix}, $o);
 
 
 
