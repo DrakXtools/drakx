@@ -811,6 +811,12 @@ UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $of
 UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $if
 ") if $devfs_if ne $if && $if !~ /^hd[a-z]/ && $if !~ /^sr/ && $if !~ /^sd[a-z]/;
 
+    {
+	my $f = "$::prefix/etc/udev/conf.d/$of.conf";
+	output_p($f, "ln -sf $if /dev/$of\n");
+	chmod 0755, $f;
+    }
+
     #- when creating a symlink on the system, use devfs name if devfs is mounted
     symlinkf($devfs_if, "$::prefix/dev/$if") if $devfs_if ne $if && detect_devices::dev_is_devfs();
     symlinkf($if, "$::prefix/dev/$of");
