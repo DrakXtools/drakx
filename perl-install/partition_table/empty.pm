@@ -21,11 +21,11 @@ sub read($$) {
     my ($hd, $sector) = @_;
     my $tmp;
 
-    local *F; partition_table::raw::openit($hd, *F) or die "failed to open device";
-    c::lseek_sector(fileno(F), $sector, 0) or die "reading of partition in sector $sector failed";
+    my $F = partition_table::raw::openit($hd) or die "failed to open device";
+    c::lseek_sector(fileno($F), $sector, 0) or die "reading of partition in sector $sector failed";
 
     #- check magic number
-    sysread F, $tmp, 512 or die "error reading magic number on disk $hd->{device}";
+    sysread $F, $tmp, 512 or die "error reading magic number on disk $hd->{device}";
     $tmp eq substr($tmp, 0, 1) x 512 or die "bad magic number on disk $hd->{device}";
 
     partition_table::raw::zero_MBR($hd);

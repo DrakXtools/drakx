@@ -246,12 +246,11 @@ sub write_conf {
 
     my $written = read_conf($file);
 
-    local *F;
-    open F, ">> $file" or die("cannot write module config file $file: $!\n");
+    open(my $F, ">> $file") or die("cannot write module config file $file: $!\n");
     while (my ($mod, $h) = each %conf) {
 	while (my ($type, $v) = each %$h) {
 	    my $v2 = join(' ', uniq(deref($v)));
-	    print F "$type $mod $v2\n" 
+	    print $F "$type $mod $v2\n" 
 	      if $v2 && !$written->{$mod}{$type};
 	}
     }

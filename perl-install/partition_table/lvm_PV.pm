@@ -23,10 +23,10 @@ my $offset = 0;
 sub read {
     my ($hd, $sector) = @_;
 
-    local *F; partition_table::raw::openit($hd, *F) or die "failed to open device";
-    c::lseek_sector(fileno(F), $sector, $offset) or die "reading of partition in sector $sector failed";
+    my $F = partition_table::raw::openit($hd) or die "failed to open device";
+    c::lseek_sector(fileno($F), $sector, $offset) or die "reading of partition in sector $sector failed";
 
-    sysread F, my $tmp, length $magic or die "error reading magic number on disk $hd->{file}";
+    sysread $F, my $tmp, length $magic or die "error reading magic number on disk $hd->{file}";
     $tmp eq $magic or die "bad magic number on disk $hd->{file}";
 
     [];

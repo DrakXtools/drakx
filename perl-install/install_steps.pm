@@ -745,9 +745,8 @@ sub addUser {
 
     any::write_passwd_user($p, $_, $o->{authentication}{md5}) foreach @$users;
 
-    local *F;
-    open F, ">> $p/etc/group" or die "can't append to group file: $!";
-    print F "$_->{name}:x:$_->{gid}:\n" foreach grep { ! getgrgid($_->{gid}) } @$users;
+    append_to_file("$p/etc/group",
+		   map { "$_->{name}:x:$_->{gid}:\n" } grep { ! getgrgid($_->{gid}) } @$users);
 
     foreach my $u (@$users) {
 	if (! -d "$p$u->{home}") {

@@ -371,8 +371,7 @@ sub load {
 
     $magic != $KMAP_MAGIC and die "failed to read kmap magic";
 
-    local *F;
-    sysopen F, "/dev/console", 2 or die "failed to open /dev/console: $!";
+    sysopen(my $F, "/dev/console", 2) or die "failed to open /dev/console: $!";
 
     my $count = 0;
     foreach (0 .. c::MAX_NR_KEYMAPS() - 1) {
@@ -385,7 +384,7 @@ sub load {
 	foreach my $value (@keymap) {
 	    $key++;
 	    c::KTYP($value) != c::KT_SPEC() or next;
-	    ioctl(F, c::KDSKBENT(), pack("CCS", $_, $key, $value)) or die "keymap ioctl failed ($_ $key $value): $!";
+	    ioctl($F, c::KDSKBENT(), pack("CCS", $_, $key, $value)) or die "keymap ioctl failed ($_ $key $value): $!";
 	 }
 	$count++;
     }
@@ -445,10 +444,10 @@ sub setup {
     if (-e (my $f = "$ENV{SHARE_PATH}/keymaps/$kmap.bkmap")) {
 	load(scalar cat_($f));
     } else {
-	local *F;
-	if (my $pid = open F, "-|") {
+	my $F;
+	if (my $pid = open $F, "-|") {
 	    local $/ = undef;
-	    eval { load(join('', <F>)) };
+	    eval { load(join('', <$F>)) };
 	    waitpid $pid, 0;
 	} else {
 	    eval {

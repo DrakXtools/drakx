@@ -62,10 +62,10 @@ sub read($$) {
     my ($hd, $sector) = @_;
     my $tmp;
 
-    local *F; partition_table::raw::openit($hd, *F) or die "failed to open device";
-    c::lseek_sector(fileno(F), $sector, $offset) or die "reading of partition in sector $sector failed";
+    my $F = partition_table::raw::openit($hd) or die "failed to open device";
+    c::lseek_sector(fileno($F), $sector, $offset) or die "reading of partition in sector $sector failed";
 
-    sysread F, $tmp, psizeof($main_format) or die "error while reading partition table in sector $sector";
+    sysread $F, $tmp, psizeof($main_format) or die "error while reading partition table in sector $sector";
     my %info; @info{@$main_fields} = unpack $main_format, $tmp;
 
     #- TODO verify checksum
@@ -90,13 +90,13 @@ sub write($$$;$) {
     my ($hd, $sector, $pt, $info) = @_;
 
     #- handle testing for writing partition table on file only!
-    local *F;
+    my $F;
     if ($::testing) {
 	my $file = "/tmp/partition_table_$hd->{device}";
-	open F, ">$file" or die "error opening test file $file";
+	open $F, ">$file" or die "error opening test file $file";
     } else {
-	partition_table::raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
-        c::lseek_sector(fileno(F), $sector, $offset) or return 0;
+	$F = partition_table::raw::openit($hd, 2) or die "error opening device $hd->{device} for writing";
+        c::lseek_sector(fileno($F), $sector, $offset) or return 0;
     }
 
     #- TODO compute checksum
@@ -109,7 +109,7 @@ sub write($$$;$) {
 	pack $format, @$_{@fields};
     } @$pt;
 
-    syswrite F, pack($main_format, @$info{@$main_fields}), psizeof($main_format) or return 0;
+    syswrite $F, pack($main_format, @$info{@$main_fields}), psizeof($main_format) or return 0;
     1;
 }
 

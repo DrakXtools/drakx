@@ -91,14 +91,14 @@ sub get_geometry($) {
     my ($dev) = @_;
     my $g = "";
 
-    local *F; sysopen F, $dev, 0 or return;
-    ioctl(F, c::HDIO_GETGEO(), $g) or return;
+    sysopen(my $F, $dev, 0) or return;
+    ioctl($F, c::HDIO_GETGEO(), $g) or return;
     my %geom; @geom{qw(heads sectors cylinders start)} = unpack "CCSL", $g;
     $geom{totalcylinders} = $geom{cylinders};
 
     my $total;
     #- $geom{cylinders} is no good (only a ushort, that means less than 2^16 => at best 512MB)
-    if ($total = c::total_sectors(fileno F)) {
+    if ($total = c::total_sectors(fileno $F)) {
 	$geom{cylinders} = int $total / $geom{heads} / $geom{sectors};
     } else {
 	$total = $geom{heads} * $geom{sectors} * $geom{cylinders}
@@ -107,17 +107,20 @@ sub get_geometry($) {
     { geom => \%geom, totalsectors => $total };
 }
 
-sub openit($$;$) { sysopen $_[1], $_[0]{file}, $_[2] || 0 }
+sub openit { 
+    my ($hd, $mode) = @_;
+    my $F; sysopen($F, $hd->{file}, $mode || 0) and $F;
+}
 
 # cause kernel to re-read partition table
 sub kernel_read($) {
     my ($hd) = @_;
     common::sync();
-    local *F; openit($hd, *F) or return 0;
+    my $F = openit($hd) or return 0;
     common::sync(); sleep(1);
-    $hd->{rebootNeeded} = !ioctl(F, c::BLKRRPART(), 0);
+    $hd->{rebootNeeded} = !ioctl($F, c::BLKRRPART(), 0);
     common::sync();
-    close F;
+    close $F;
     common::sync(); sleep(1);
 }
 
@@ -172,19 +175,19 @@ sub test_for_bad_drives {
     
     sub error { die "$_[0] error: $_[1]" }
 
-    local *F; openit($hd, *F, 2) or error(openit($hd, *F, 0) ? 'write' : 'read', "can't open device");
+    my $F = openit($hd, 2) or error(openit($hd) ? 'write' : 'read', "can't open device");
 
     my $seek = sub {
-	c::lseek_sector(fileno(F), $sector, 0) or error('read', "seeking to sector $sector failed");
+	c::lseek_sector(fileno($F), $sector, 0) or error('read', "seeking to sector $sector failed");
     };
     my $tmp;
 
-    &$seek; sysread F, $tmp, $SECTORSIZE or error('read', "can't even read ($!)");
+    &$seek; sysread $F, $tmp, $SECTORSIZE or error('read', "can't even read ($!)");
     return if $hd->{readonly} || $::testing;
-    &$seek; syswrite F, $tmp or error('write', "can't even write ($!)");
+    &$seek; syswrite $F, $tmp or error('write', "can't even write ($!)");
 
     my $tmp2;
-    &$seek; sysread F, $tmp2, $SECTORSIZE or die "test_for_bad_drives: can't even read again ($!)";
+    &$seek; sysread $F, $tmp2, $SECTORSIZE or die "test_for_bad_drives: can't even read again ($!)";
     $tmp eq $tmp2 or die
 N("Something bad is happening on your drive. 
 A test to check the integrity of data has failed. 

@@ -65,9 +65,8 @@ my $magic = "EFI PART";
 
 sub generate_guid {
     my $tmp;
-    local *F;
-    open F, devices::make("random") or die "Could not open /dev/random for GUID generation";
-    read F, $tmp, psizeof($guid_format);
+    open(my $F, devices::make("random")) or die "Could not open /dev/random for GUID generation";
+    read $F, $tmp, psizeof($guid_format);
 	
     my %guid; @guid{@$guid_fields} = unpack $guid_format, $tmp;
     $guid{clock_seq} = ($guid{clock_seq} & 0x3fff) | 0x8000;
@@ -148,13 +147,13 @@ sub read {
     $l[0]{type} == 0xee or die "bad PMBR";
     my $myLBA = $l[0]{start};
 
-    local *F; partition_table::raw::openit($hd, *F) or die "failed to open device";
-    my $info1 = eval { read_header($myLBA, *F) };
-    my $info2 = eval { read_header($info1->{alternateLBA} || $l[0]{start} + $l[0]{size} - 1, *F) }; #- what about using $hd->{totalsectors} ???
+    my $F = partition_table::raw::openit($hd) or die "failed to open device";
+    my $info1 = eval { read_header($myLBA, $F) };
+    my $info2 = eval { read_header($info1->{alternateLBA} || $l[0]{start} + $l[0]{size} - 1, $F) }; #- what about using $hd->{totalsectors} ???
     my $info = $info1 || { %$info2, myLBA => $info2->{alternateLBA}, alternateLBA => $info2->{myLBA}, partitionEntriesLBA => $info2->{alternateLBA} + 1 } or die;
     my $pt = $info1 && $info2 ? 
-	eval { $info1 && read_partitionEntries($info1, *F) } || read_partitionEntries($info2, *F) :
-	read_partitionEntries($info, *F);
+	eval { $info1 && read_partitionEntries($info1, $F) } || read_partitionEntries($info2, $F) :
+	read_partitionEntries($info, $F);
     $hd->raw_removed($pt);
 
     $pt, $info;
@@ -190,22 +189,21 @@ sub write {
 	partition_table::dos::write($hd, $sector, $pmbr->{raw});
     }
 
-    local *F;
-    partition_table::raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
+    my $F = partition_table::raw::openit($hd, 2) or die "error opening device $hd->{device} for writing";
     
-    c::lseek_sector(fileno(F), $info->{myLBA}, 0) or return 0;
+    c::lseek_sector(fileno($F), $info->{myLBA}, 0) or return 0;
     #- pad with 0's
-    syswrite F, pack($main_format, @$info{@$main_fields}) . "\0" x 512, 512 or return 0;
+    syswrite $F, pack($main_format, @$info{@$main_fields}) . "\0" x 512, 512 or return 0;
 
-    c::lseek_sector(fileno(F), $info->{alternateLBA}, 0) or return 0;
+    c::lseek_sector(fileno($F), $info->{alternateLBA}, 0) or return 0;
     #- pad with 0's
-    syswrite F, pack($main_format, @$info2{@$main_fields}) . "\0" x 512, 512 or return 0;
+    syswrite $F, pack($main_format, @$info2{@$main_fields}) . "\0" x 512, 512 or return 0;
 
-    c::lseek_sector(fileno(F), $info->{partitionEntriesLBA}, 0) or return 0;
-    syswrite F, $partitionEntries or return 0;
+    c::lseek_sector(fileno($F), $info->{partitionEntriesLBA}, 0) or return 0;
+    syswrite $F, $partitionEntries or return 0;
     
-    c::lseek_sector(fileno(F), $info2->{partitionEntriesLBA}, 0) or return 0;
-    syswrite F, $partitionEntries or return 0;
+    c::lseek_sector(fileno($F), $info2->{partitionEntriesLBA}, 0) or return 0;
+    syswrite $F, $partitionEntries or return 0;
 
     common::sync();
     1;

@@ -100,14 +100,14 @@ sub read($$) {
     my ($hd, $sector) = @_;
     my $tmp;
 
-    local *F; partition_table::raw::openit($hd, *F) or die "failed to open device";
-    c::lseek_sector(fileno(F), $sector, 0) or die "reading of partition in sector $sector failed";
+    my $F = partition_table::raw::openit($hd) or die "failed to open device";
+    c::lseek_sector(fileno($F), $sector, 0) or die "reading of partition in sector $sector failed";
 
-    sysread F, $tmp, psizeof($bz_format) or die "error while reading bz \(Block Zero\) in sector $sector";
+    sysread $F, $tmp, psizeof($bz_format) or die "error while reading bz \(Block Zero\) in sector $sector";
     my %info; @info{@$bz_fields} = unpack $bz_format, $tmp;
 
     foreach my $i (0 .. $info{bzDrvrCnt}-1) {
-        sysread F, $tmp, psizeof($dd_format) or die "error while reading driver data in sector $sector";
+        sysread $F, $tmp, psizeof($dd_format) or die "error while reading driver data in sector $sector";
         my %dd; @dd{@$dd_fields} = unpack $dd_format, $tmp;
         push @{$info{ddMap}}, \%dd;
     }
@@ -116,21 +116,21 @@ sub read($$) {
     $info{bzSig}  == $magic or die "bad magic number on disk $hd->{device}";
 
     my $numparts;
-    c::lseek_sector(fileno(F), $sector, 516) or die "reading of partition in sector $sector failed";
-    sysread F, $tmp, 4 or die "error while reading partition info in sector $sector";
+    c::lseek_sector(fileno($F), $sector, 516) or die "reading of partition in sector $sector failed";
+    sysread $F, $tmp, 4 or die "error while reading partition info in sector $sector";
     $numparts = unpack "N", $tmp;
 
     my $partmapsize;
-    c::lseek_sector(fileno(F), $sector, 524) or die "reading of partition in sector $sector failed";
-    sysread F, $tmp, 4 or die "error while reading partition info in sector $sector";
+    c::lseek_sector(fileno($F), $sector, 524) or die "reading of partition in sector $sector failed";
+    sysread $F, $tmp, 4 or die "error while reading partition info in sector $sector";
     $partmapsize = ((unpack "N", $tmp) * $info{bzBlkSize}) / psizeof($p_format);
 
-    c::lseek_sector(fileno(F), $sector, 512) or die "reading of partition in sector $sector failed";
+    c::lseek_sector(fileno($F), $sector, 512) or die "reading of partition in sector $sector failed";
 
     my @pt;
     for (my $i = 0; $i < $partmapsize; $i++) {
     	my $part;
-        sysread F, $part, psizeof($p_format) or die "error while reading partition info in sector $sector";
+        sysread $F, $part, psizeof($p_format) or die "error while reading partition info in sector $sector";
 
         push @pt, map {
             my %h; @h{@$p_fields} = unpack $p_format, $part;
@@ -194,13 +194,13 @@ sub write($$$;$) {
     my ($hd, $sector, $pt, $info) = @_;
 
     #- handle testing for writing partition table on file only!
-    local *F;
+    my $F;
     if ($::testing) {
 	my $file = "/tmp/partition_table_$hd->{device}";
-	open F, ">$file" or die "error opening test file $file";
+	open $F, ">$file" or die "error opening test file $file";
     } else {
-	partition_table::raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
-        c::lseek_sector(fileno(F), $sector, 0) or return 0;
+	$F = partition_table::raw::openit($hd, 2) or die "error opening device $hd->{device} for writing";
+        c::lseek_sector(fileno($F), $sector, 0) or return 0;
     }
 
     # Find the partition map.
@@ -250,17 +250,17 @@ sub write($$$;$) {
     }
 
     # Now let's write our first block.
-    syswrite F, pack($bz_format, @$info{@$bz_fields}), psizeof($bz_format) or return 0;
+    syswrite $F, pack($bz_format, @$info{@$bz_fields}), psizeof($bz_format) or return 0;
 
     # ...and now the driver information.
     foreach (@ddstowrite) {
-        syswrite F, pack($dd_format, @$_{@$dd_fields}), psizeof($dd_format) or return 0;
+        syswrite $F, pack($dd_format, @$_{@$dd_fields}), psizeof($dd_format) or return 0;
     }
     # zero the rest of the data in the first block.
     foreach (1 .. (494 - ((@ddstowrite) * 8))) {
-     	syswrite F, "\0", 1 or return 0;
+     	syswrite $F, "\0", 1 or return 0;
     }
-    #c::lseek_sector(fileno(F), $sector, 512) or return 0;
+    #c::lseek_sector(fileno($F), $sector, 512) or return 0;
     # Now, we iterate thru the partstowrite and write them.
     foreach (@partstowrite) {
         if (!defined $_->{pSig}) {
@@ -329,7 +329,7 @@ sub write($$$;$) {
             }
         };
         $_->{pMapEntry} = @partstowrite;
-        syswrite F, pack($p_format, @$_{@$p_fields}), psizeof($p_format) or return 0;
+        syswrite $F, pack($p_format, @$_{@$p_fields}), psizeof($p_format) or return 0;
     }
 
     common::sync();
