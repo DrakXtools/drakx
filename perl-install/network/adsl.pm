@@ -323,7 +323,7 @@ TYPE=$kind
         $::isInstall && eval {
             require fs;
             fs::mount("/proc", "$::prefix/proc", 'proc') if !-f "$::prefix/proc/mounts";
-            fs::mount("/proc/bus/usb", "$::prefix/proc/bus/usb", 'usbdevfs');
+            fs::mount('none', "$::prefix/proc/bus/usb", 'usbdevfs');
         } or log::l("failed to mount usbdevfs");
         my @modules = (@{$modems{$adsl_device}{modules}}, map { $_->[1] } @{$modems{$adsl_device}{aliases}});
         @modules && eval { modules::load(@modules) }
