@@ -51,7 +51,7 @@ my $activefw = activefw->new(sub {
       $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
       $msg->get_member eq "Whitelist";
 
-    clear_blacklist() if
+    clear_lists() if
       $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
       $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
       $msg->get_member eq "Clear";
@@ -61,8 +61,7 @@ my $activefw = activefw->new(sub {
       $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
       $msg->get_member eq "Init";
 });
-init_blacklist();
-init_whitelist();
+init_lists();
 
 $ugtk2::wm_icon = "/usr/lib/libDrakX/icons/drakfirewall.png";
 my $w = ugtk2->new(N("Active Firewall"));
@@ -101,8 +100,7 @@ sub sort_by_column {
 
 sub handle_init {
     $activefw->find_daemon;
-    init_blacklist();
-    init_whitelist();
+    init_lists();
 }
 
 sub init_blacklist {
@@ -148,6 +146,10 @@ sub init_whitelist {
     handle_whitelist($_) foreach $activefw->get_whitelist;
 }
 
+sub clear_whitelist {
+    @{$whitelist->{data}} = ();
+}
+
 sub handle_whitelist {
     my ($addr) = @_;
     push @{$whitelist->{data}}, [ $addr, activefw::resolve_address(activefw::get_ip_address($addr)) ];
@@ -168,4 +170,14 @@ sub unwhitelist {
     $activefw->unwhitelist($_) foreach @addr;
     #- delete from the list even if the above calls were unsuccessful
     @{$whitelist->{data}} = grep { !member($_->[0], @addr) } @{$whitelist->{data}};
+}
+
+sub init_lists {
+    init_blacklist();
+    init_whitelist();
+}
+
+sub clear_lists {
+    clear_blacklist();
+    clear_whitelist();
 }
