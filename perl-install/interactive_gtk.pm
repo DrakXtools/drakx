@@ -63,7 +63,7 @@ sub ask_many_from_list_refW($$$$$) {
 			       my $nn = $n++;
 			       my $o = Gtk::CheckButton->new($_);
 			       $o->set_active(${$val->[$nn]});
-			       $o->signal_connect(clicked => sub { ${$val->[$nn]} = !${$val->[$nn]} });
+			       $o->signal_connect(clicked => sub { invbool \${$val->[$nn]} });
 			       $o;
 			   } @$list),
 		   $w->create_okcancel,
@@ -94,7 +94,7 @@ sub ask_from_entries_refW {
 	} elsif ($_->{type} eq "bool") {
 	    my $w = Gtk::CheckButton->new($_->{text});
 	    $w->set_active(${$_->{val}});
-	    my $i = $_; $w->signal_connect(clicked => sub { $ignore or ${$i->{val}} = !${$i->{val}} });
+	    my $i = $_; $w->signal_connect(clicked => sub { $ignore or invbool \${$i->{val}} });
 	    $w;
 	} else {
 	    new Gtk::Entry;

@@ -170,7 +170,7 @@ sub getDeps($) {
 
 sub readCompss($) {
     my ($packages) = @_;
-    my (@compss, $ps);
+    my ($compss, $compss_, $ps) = { childs => {} };
 
     my $f = install_any::getFile("compss") or die "can't find compss";
     foreach (<$f>) {
@@ -178,19 +178,25 @@ sub readCompss($) {
 	s/#.*//;
 
 	if (/^(\S+)/) {
-	    $ps = [];
-	    push @compss, { name => $1, packages => $ps };
+	    my $p = $compss;
+	    my @l = split ':', $1;
+	    pop @l if $l[-1] =~ /^(x11|console)$/;
+	    foreach (@l) {
+		$p->{childs}{$_} ||= { childs => {} };
+		$p = $p->{childs}{$_};
+	    }
+	    $ps = $p->{packages} ||= [];
+	    $compss_->{$1} = $p;
 	} else {
 	    /(\S+)/ or log::l("bad line in compss: $_"), next;
 	    push @$ps, $packages->{$1} || do { log::l("unknown package $1 (in compss)"); next };
 	}
     }
-    \@compss;
+    ($compss, $compss_);
 }
 
 sub readCompssList($$) {
-    my ($packages, $compss) = @_;
-    my %compss; map { $compss{$_->{name}} = $_ } @$compss;
+    my ($packages, $compss_) = @_;
 
     my $f = install_any::getFile("compssList") or die "can't find compssList";
     local $_ = <$f>;
@@ -201,7 +207,7 @@ sub readCompssList($$) {
 	/^\s*$/ || /^#/ and next;
 
 	/^packages\s*$/ and do { $e = $packages; next };
-	/^categories\s*$/ and do { $e = \%compss; next };
+	/^categories\s*$/ and do { $e = $compss_; next };
 
 	my ($name, @values) = split;
 
@@ -219,20 +225,6 @@ sub verif_lang($$) {
     $p->{options} =~ /l/ or return 1;
     $p->{name} =~ /-([^-]*)$/ or return 1;
     !($1 eq $lang || eval { lang::text2lang($1) eq $lang } && !$@);
-}
-
-sub setShowFromCompss($$$) {
-    my ($compss, $install_class, $lang) = @_;
-
-    my $l = substr($install_class, 0, 1);
-
-    foreach my $c (@$compss) {
-	$c->{show} = bool($c->{options} =~ /($l|\*)/);
-	foreach my $p (@{$c->{packages}}) {
-	    local $_ = $p->{options};
-	    $p->{show} = /$l|\*/ && verif_lang($p, $lang);
-	}
-    }
 }
 
 sub setSelectedFromCompssList($$$$$$) {

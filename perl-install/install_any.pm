@@ -98,8 +98,8 @@ sub shells($) {
 sub getAvailableSpace {
     my ($o) = @_;
 
-    do { $_->{mntpoint} eq '/usr' and return $_->{size} * 512 } foreach @{$o->{fstab}};
-    do { $_->{mntpoint} eq '/'    and return $_->{size} * 512 } foreach @{$o->{fstab}};
+    do { $_->{mntpoint} eq '/usr' and return int($_->{size} * 512 / 1.03) } foreach @{$o->{fstab}};
+    do { $_->{mntpoint} eq '/'    and return int($_->{size} * 512 / 1.03) } foreach @{$o->{fstab}};
 
     if ($::testing) {
 	log::l("taking 200MB for testing");
@@ -120,8 +120,8 @@ sub setPackages($$) {
 
 	pkgs::getDeps($o->{packages});
 
-	$o->{compss} = pkgs::readCompss($o->{packages});
-	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, $o->{compss});
+	my $c; ($o->{compss}, $c) = pkgs::readCompss($o->{packages});
+	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, $c);
 	$o->{compssListLevels} ||= $install_classes;
 	push @{$o->{base}}, "kernel-smp" if detect_devices::hasSMP();
 	push @{$o->{base}}, "kernel-pcmcia-cs" if $o->{pcmcia};
@@ -136,7 +136,6 @@ sub setPackages($$) {
 	} foreach @{$o->{base}};
     }
 
-    pkgs::setShowFromCompss($o->{compss}, $o->{installClass}, $o->{lang});
     ($o->{packages_}{ind}, $o->{packages_}{select_level}) = pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang}, $o->{isUpgrade});
 }
 

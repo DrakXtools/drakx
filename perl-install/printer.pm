@@ -222,7 +222,7 @@ Example of data-struct:
 
 #-#####################################################################################
 
-#-if we are in an panoramix config
+#-if we are in an DrakX config
 my $prefix = "";
 
 #-location of the printer database in an installed system

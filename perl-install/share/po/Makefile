@@ -9,16 +9,16 @@ clean:
 
 verif:
 	perl -ne '/^\s*#/ or $$i += my @l = /\b__?\(/g; END { print "$$i\n" }' $(PMSFILES)
-	perl -ne '$$i += my @l = /\.c:/g; END { print "$$i\n" }' panoramix.pot
+	perl -ne '$$i += my @l = /\.c:/g; END { print "$$i\n" }' DrakX.pot
 
-$(POFILES): panoramix.pot
+$(POFILES): DrakX.pot
 	cp -f $@ $@t
 	msgmerge $@t $< > $@
 	rm $@t
 
-panoramix.pot: $(PMSFILES)
+DrakX.pot: $(PMSFILES)
 	$(MAKE) $(PMSCFILES);
-	xgettext -F -n --keyword=_ --keyword=__ -o panoramix.pot $(PMSCFILES)
+	xgettext -F -n --keyword=_ --keyword=__ -o DrakX.pot $(PMSCFILES)
 	rm $(PMSCFILES)
 
 $(PMSCFILES): %_.c: %

@@ -36,18 +36,18 @@ this.
 a highly customized installation, this Install Class is for you."),
 
 setupSCSI =>
- __("Panoramix will attempt at first to look for one or more PCI
+ __("DrakX will attempt at first to look for one or more PCI
 SCSI adapter(s). If it finds it (or them)  and knows which driver(s)
 to use, it will insert it (them)  automatically.
 
-If your SCSI adapter is ISA, or is PCI but Panoramix doesn't know
+If your SCSI adapter is ISA, or is PCI but DrakX doesn't know
 which driver to use for this card, or if you have no SCSI adapters
 at all, you will then be prompted on whether you have one or not.
 If you have none, answer \"No\". If you have one or more, answer
 \"Yes\". A list of drivers will then pop up, from which you will
 have to select one.
 
-After you have selected the driver, Panoramix will ask if you
+After you have selected the driver, DrakX will ask if you
 want to specify options for it. First, try and let the driver
 probe for the hardware: it usually works fine.
 
@@ -103,22 +103,22 @@ doInstallStep =>
 should only take a few minutes."),
 
 configureMouse =>
- __("If Panoramix failed to find your mouse, or if you want to
+ __("If DrakX failed to find your mouse, or if you want to
 check what it has done, you will be presented the list of mice
 above.
 
 
-If you agree with Panoramix' settings, just jump to the section
+If you agree with DrakX' settings, just jump to the section
 you want by clicking on it in the menu on the left. Otherwise,
 choose a mouse type in the menu which you think is the closest
 match for your mouse.
 
-In case of a serial mouse, you will also have to tell Panoramix
+In case of a serial mouse, you will also have to tell DrakX
 which serial port it is connected to."),
 
 configureNetwork =>
  __("This section is dedicated to configuring a local area network,
-or LAN. If you answer \"Yes\" here, Panoramix will try to find an
+or LAN. If you answer \"Yes\" here, DrakX will try to find an
 Ethernet adapter on your machine. PCI adapters should be found and
 initialized automatically. However, if your peripheral is ISA,
 autodetection will not work, and you will have to choose a driver
@@ -224,7 +224,7 @@ steps are automated, though, therefore your work may only consist
 of verifying what has been done and accept the settings :)
 
 When the configuration is over, X will be started (unless you
-ask Panoramix not to) so that you can check and see if the
+ask DrakX not to) so that you can check and see if the
 settings suit you. If they don't, you can come back and
 change them, as many times as necessary."),
 
@@ -267,18 +267,18 @@ this.
 a highly customized installation, this Install Class is for you."),
 
 setupSCSI =>
- __("Panoramix will attempt at first to look for one or more PCI
+ __("DrakX will attempt at first to look for one or more PCI
 SCSI adapter(s). If it finds it (or them)  and knows which driver(s)
 to use, it will insert it (them)  automatically.
 
-If your SCSI adapter is ISA, or is PCI but Panoramix doesn't know
+If your SCSI adapter is ISA, or is PCI but DrakX doesn't know
 which driver to use for this card, or if you have no SCSI adapters
 at all, you will then be prompted on whether you have one or not.
 If you have none, answer \"No\". If you have one or more, answer
 \"Yes\". A list of drivers will then pop up, from which you will
 have to select one.
 
-After you have selected the driver, Panoramix will ask if you
+After you have selected the driver, DrakX will ask if you
 want to specify options for it. First, try and let the driver
 probe for the hardware: it usually works fine.
 
@@ -334,22 +334,22 @@ doInstallStep =>
 should only take a few minutes."),
 
 configureMouse =>
- __("If Panoramix failed to find your mouse, or if you want to
+ __("If DrakX failed to find your mouse, or if you want to
 check what it has done, you will be presented the list of mice
 above.
 
 
-If you agree with Panoramix' settings, just jump to the section
+If you agree with DrakX' settings, just jump to the section
 you want by clicking on it in the menu on the left. Otherwise,
 choose a mouse type in the menu which you think is the closest
 match for your mouse.
 
-In case of a serial mouse, you will also have to tell Panoramix
+In case of a serial mouse, you will also have to tell DrakX
 which serial port it is connected to."),
 
 configureNetwork =>
  __("This section is dedicated to configuring a local area network,
-or LAN. If you answer \"Yes\" here, Panoramix will try to find an
+or LAN. If you answer \"Yes\" here, DrakX will try to find an
 Ethernet adapter on your machine. PCI adapters should be found and
 initialized automatically. However, if your peripheral is ISA,
 autodetection will not work, and you will have to choose a driver
@@ -455,7 +455,7 @@ steps are automated, though, therefore your work may only consist
 of verifying what has been done and accept the settings :)
 
 When the configuration is over, X will be started (unless you
-ask Panoramix not to) so that you can check and see if the
+ask DrakX not to) so that you can check and see if the
 settings suit you. If they don't, you can come back and
 change them, as many times as necessary."),
 
