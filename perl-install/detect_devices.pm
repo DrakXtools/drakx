@@ -564,11 +564,15 @@ sub is_lan_interface {
 }
 
 sub getNet() {
-    grep { is_lan_interface($_) }
+    my @net_devices = grep { is_lan_interface($_) }
       uniq(
            (map { if_(/^\s*([A-Za-z0-9:\.]*):/, $1) } cat_("/proc/net/dev")),
            c::get_netdevices(),
           );
+    #- enable all interfaces
+    #- needed for some drivers (Ralink) to be able to detect it is wireless aware
+    c::enable_net_device($_) foreach @net_devices;
+    @net_devices;
  }
 
 #sub getISDN() {
