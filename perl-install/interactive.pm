@@ -99,7 +99,7 @@ sub ask_from_entry {
 sub ask_from_entries($$$$;$%) {
     my ($o, $title, $message, $l, $def, %callback) = @_;
 
-    my $val = [ map { my $i = $_; \$i } @$def ];
+    my $val = [ map { my $i = $_; \$i } @{$def || [('') x @$l]} ];
 
     $o->ask_from_entries_ref($title, $message, $l, $val, %callback) ?
       map { $$_ } @$val : 

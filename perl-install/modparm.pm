@@ -3,7 +3,7 @@ package modparm;
 use diagnostics;
 use strict;
 
-use common qw(:common);
+use common qw(:common :functional);
 use log;
 
 
