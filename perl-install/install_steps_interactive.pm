@@ -1026,7 +1026,7 @@ sub summary {
 	clicked => sub { 
 	    require network::network;
          network::network::miscellaneous_choose($o, $::o->{miscellaneous});
-         network::network::proxy_configure($::o->{miscellaneous}) if $::testing;
+         network::network::proxy_configure($::o->{miscellaneous}) if !$::testing;
 	},
     };
 
