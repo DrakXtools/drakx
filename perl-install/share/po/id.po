@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-03-20 10:58+0700\n"
+"PO-Revision-Date: 2005-03-21 14:01+0700\n"
 "Last-Translator: bayu artanto <bayuart@yahoo.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -14462,9 +14462,9 @@ msgid ""
 msgstr ""
 "Konfigurasi jaringan yang dilakukan saat instalasi kini tidak berjalan. "
 "Silahkan periksa apakah jaringan dapat diakses setelah sistem diboot "
-"dan perbaiki konfigurasi dengan Pusat Kontrol Mandrake, bagian "
+"dan perbaiki konfigurasi dengan Pusat Kontrol %s, bagian "
 "\"Network & Internet\"/\"Koneksi\", lalu set printer juga dengan "
-"Pusat Kontrol Mandrake, bagian \"Hardware\"/\"Printer\""
+"Pusat Kontrol %s, bagian \"Hardware\"/\"Printer\""
 
 #: printer/printerdrake.pm:4095
 #, c-format
@@ -14511,19 +14511,19 @@ msgid ""
 "\n"
 "Do you really want to configure printing on this machine?"
 msgstr ""
-"Anda akan menginstal sistem cetak %s di sistem dg level keamanan %s.\n"
+"Anda akan menginstal sistem cetak %s pada sistem dengan level keamanan %s.\n"
 "\n"
 "Sistem cetak ini menjalankan daemon (proses background) yang menunggu dan "
 "memproses job cetak. Daemon ini juga dapat diakses oleh komputer remote via "
-"network jadi ia juga bisa jadi sasaran serangan. Karenanya hanya sedikit "
-"daemon terpilih yg dijalankan dlm level sekuriti ini.\n"
+"jaringan sehingga juga bisa menjadi sasaran serangan. Karenanya hanya sedikit "
+"daemon terpilih yang dijalankan pada level keamanan ini.\n"
 "\n"
-"Benarkah Anda ingin mengkonfigurasikan printer di komputer ini?"
+"Benarkah Anda ingin mengkonfigurasikan printer pada komputer ini?"
 
 #: printer/printerdrake.pm:4173
 #, c-format
 msgid "Starting the printing system at boot time"
-msgstr "Inisiasi sistem cetak pada saat boot"
+msgstr "Menjalankan sistem cetak pada saat boot"
 
 #: printer/printerdrake.pm:4174
 #, c-format
@@ -14538,37 +14538,37 @@ msgid ""
 "Do you want to have the automatic starting of the printing system turned on "
 "again?"
 msgstr ""
-"Sistem cetak (%s) takkan otomatis jalan saat komputer diboot.\n"
+"Sistem cetak (%s) tidak akan dijalankan secara otomatis saat komputer diboot.\n"
 "\n"
-"Sebabnya mungkin auto-start dimatikan sbg implikasi level sekuriti tinggi, "
-"karena sistem cetak potensial diserang.\n"
+"Ada kemungkinan dimatikan dengan merubah tingkat keamanan yang lebih tinggi, "
+"karena sistem cetak potensial untuk diserang.\n"
 "\n"
-"Anda ingin auto-start sistem cetak dinyalakan lagi?"
+"Anda ingin menjalankan secara otomatis sistem cetak kembali?"
 
 #: printer/printerdrake.pm:4196
 #, c-format
 msgid "Checking installed software..."
-msgstr "Pemeriksaan perangkat lunak terinstal"
+msgstr "Memeriksa perangkat lunak yang terinstal..."
 
 #: printer/printerdrake.pm:4202
 #, c-format
 msgid "Removing %s..."
-msgstr "Hapus %s ..."
+msgstr "Menghapus %s ..."
 
 #: printer/printerdrake.pm:4206
-#, fuzzy, c-format
+#, c-format
 msgid "Could not remove the %s printing system!"
-msgstr "Ubah sistem cetak"
+msgstr "Tidak bisa menghapus sistem cetak %s!"
 
 #: printer/printerdrake.pm:4222
 #, c-format
 msgid "Installing %s..."
-msgstr "Instalasi %s ..."
+msgstr "Menginstall %s ..."
 
 #: printer/printerdrake.pm:4226
-#, fuzzy, c-format
+#, c-format
 msgid "Could not install the %s printing system!"
-msgstr "Ubah sistem cetak"
+msgstr "Tidak bisa menginstall sistem pencetakan %s"
 
 #: printer/printerdrake.pm:4293
 #, c-format
@@ -14578,6 +14578,11 @@ msgid ""
 "define local print queues then and if the specified server is down it cannot "
 "be printed at all from this machine."
 msgstr ""
+"Pada mode ini, tidak terdapatt sistem pencetakan lokal, semua permintaan "
+"pencetakan akan langsung pada server yang ditentukan dibawah. Perhatikan "
+"bahwa tidak dimungkinkan untuk mendefinisikan antrian pencetakan lokal "
+"dan jika server tidak berfungsi, tidak akan bisa dilakukan proses "
+"pencetakan sama sekali dari komputer ini."
 
 #: printer/printerdrake.pm:4295
 #, c-format
@@ -14585,31 +14590,33 @@ msgid ""
 "Enter the host name or IP of your CUPS server and click OK if you want to "
 "use this mode, click \"Quit\" otherwise."
 msgstr ""
+"Masukkan nama host atau IP dari server CUPS Anda dan klik OK jika Anda "
+"ingin menggunakan mode ini, klik \"Keluar\" jika tidak."
 
 #: printer/printerdrake.pm:4309
-#, fuzzy, c-format
+#, c-format
 msgid "Name or IP of remote server:"
-msgstr "Printer di server lpd remote"
+msgstr "Nama atau IP server remote:"
 
 #: printer/printerdrake.pm:4329
 #, c-format
 msgid "Setting Default Printer..."
-msgstr "Setting printer standar..."
+msgstr "Setting Printer Standar..."
 
 #: printer/printerdrake.pm:4348
-#, fuzzy, c-format
+#, c-format
 msgid "Local CUPS printing system or remote CUPS server?"
-msgstr "Printer di server CUPS remote"
+msgstr "Sistem pencetakan CUPS lokal atau server CUPS remote?"
 
 #: printer/printerdrake.pm:4349
 #, c-format
 msgid "The CUPS printing system can be used in two ways: "
-msgstr ""
+msgstr "Sistem pencetakan CUPS bisa digunakan dalam dua cara: "
 
 #: printer/printerdrake.pm:4351
 #, c-format
 msgid "1. The CUPS printing system can run locally. "
-msgstr ""
+msgstr "1. Sistem pencetakan CUPS bisa berjalan secara lokal. "
 
 #: printer/printerdrake.pm:4352
 #, c-format
@@ -14617,6 +14624,9 @@ msgid ""
 "Then locally connected printers can be used and remote printers on other "
 "CUPS servers in the same network are automatically discovered. "
 msgstr ""
+"Maka printer yang terhubung secara lokal dapat digunakan dan "
+"printer remote pada server CUPS lain dalam jaringan yang sama "
+"akan ditemukan secara otomatis."
 
 #: printer/printerdrake.pm:4353
 #, c-format
@@ -14626,11 +14636,15 @@ msgid ""
 "daemon has to run in the background and needs some memory, and the IPP port "
 "(port 631) is opened. "
 msgstr ""
+"Kerugian dari pendekatan ini adalah semakin banyak sumber daya sistem "
+"yang diperlukan: paket perangkat lunak tambahan diperlukan, daemon "
+"CUPS harus berjalan pada latar belakang dan memerlukan memori, dan "
+"port IPP (port 631) terbuka. "
 
 #: printer/printerdrake.pm:4355
 #, c-format
 msgid "2. All printing requests are immediately sent to a remote CUPS server. "
-msgstr ""
+msgstr "2. Semua permintaan pencetakan dikirimkan pada server CUPS remote. "
 
 #: printer/printerdrake.pm:4356
 #, c-format
@@ -14639,6 +14653,10 @@ msgid ""
 "started or port opened, no software infrastructure for setting up local "
 "print queues is installed, so less memory and disk space is used. "
 msgstr ""
+"Disini penggunaan sumber daya lokal dikurangi seminimal mungkin. Tidak "
+"ada daemon CUPS yang dijalankan atau port yang terbuka, tidak ada "
+"infrastruktur perangkat lunak yang terinstall untuk setting antrian "
+"pencetakan lokal, sehingga memori dan ruang juga semakin sedikit. "
 
 #: printer/printerdrake.pm:4357
 #, c-format
@@ -14646,47 +14664,50 @@ msgid ""
 "Disadvantage is that it is not possible to define local printers then and if "
 "the specified server is down it cannot be printed at all from this machine. "
 msgstr ""
+"Kerugiannya adalah tidak mungkin untuk mendefinisikan printer lokal dan "
+"jika server tidak berfungsi, maka tidak bisa dilakukan pencetakan dari "
+"komputer ini. "
 
 #: printer/printerdrake.pm:4359
 #, c-format
 msgid "How should CUPS be set up on your machine?"
-msgstr ""
+msgstr "Bagaimana seharusnya CUPS diset-up pada komputer Anda?"
 
 #: printer/printerdrake.pm:4363 printer/printerdrake.pm:4378
 #: printer/printerdrake.pm:4382 printer/printerdrake.pm:4388
 #, c-format
 msgid "Remote server, specify Name or IP here:"
-msgstr ""
+msgstr "Server remote, tentukan nama atau IP:"
 
 #: printer/printerdrake.pm:4377
-#, fuzzy, c-format
+#, c-format
 msgid "Local CUPS printing system"
-msgstr "Ubah sistem cetak"
+msgstr "Sistem pencetakan CUPS lokal"
 
 #: printer/printerdrake.pm:4415
 #, c-format
 msgid "Select Printer Spooler"
-msgstr "Pilih spooler printer"
+msgstr "Pilih Spooler Printer"
 
 #: printer/printerdrake.pm:4416
 #, c-format
 msgid "Which printing system (spooler) do you want to use?"
-msgstr "Sistem (spooler) printer mana yang ingin digunakan?"
+msgstr "Sistem pencetakan (spooler) mana yang ingin digunakan?"
 
 #: printer/printerdrake.pm:4464
 #, c-format
 msgid "Failed to configure printer \"%s\"!"
-msgstr "Konfigurasi printer \"%s\" gagal!"
+msgstr "Gagal mengkonfigurasi printer \"%s\"!"
 
 #: printer/printerdrake.pm:4478
 #, c-format
 msgid "Installing Foomatic..."
-msgstr "Instalasi Foomatic ..."
+msgstr "Menginstall Foomatic ..."
 
 #: printer/printerdrake.pm:4484
 #, c-format
 msgid "Could not install %s packages, %s cannot be started!"
-msgstr ""
+msgstr "Tidak bisa menginstall paket %s, %s tidak bisa dijalankan!"
 
 #: printer/printerdrake.pm:4674
 #, fuzzy, c-format
@@ -14695,9 +14716,8 @@ msgid ""
 "its settings; to make it the default printer; or to view information about "
 "it. "
 msgstr ""
-"Printer berikut telah dikonfigurasikan. Klik-dobel printer untuk "
-"memodifikasi setting; membuatnya printer default; atau melihat info "
-"tentangnya."
+"Printer berikut telah dikonfigurasikan. Klik ganda pada printer untuk "
+"mengubah setting; membuatnya printer default; atau melihat informasi. "
 
 #: printer/printerdrake.pm:4704
 #, c-format
@@ -14707,8 +14727,7 @@ msgstr "Tampilkan semua printer CUPS remote"
 #: printer/printerdrake.pm:4705
 #, c-format
 msgid "Refresh printer list (to display all available remote CUPS printers)"
-msgstr ""
-"Penyegaran daftar printer (untuk menampilkan semua printer CUPS remote)"
+msgstr "Pembaruan daftar printer (untuk menampilkan semua printer CUPS remote)"
 
 #: printer/printerdrake.pm:4716
 #, c-format
@@ -14718,12 +14737,12 @@ msgstr "konfigurasi CUPS"
 #: printer/printerdrake.pm:4728
 #, c-format
 msgid "Change the printing system"
-msgstr "Ubah sistem cetak"
+msgstr "Ubah sistem pencetakan"
 
 #: printer/printerdrake.pm:4737
 #, c-format
 msgid "Normal Mode"
-msgstr "Modus Normal"
+msgstr "Mode Normal"
 
 #: printer/printerdrake.pm:4738
 #, c-format
@@ -14748,12 +14767,12 @@ msgid ""
 "What do you want to modify on this printer?"
 msgstr ""
 "Printer %s%s\n"
-"Apa yg Anda inginkan untuk modifikasi printer ini?"
+"Apa yang akan Anda modifikasi pada printer ini?"
 
 #: printer/printerdrake.pm:5035
-#, fuzzy, c-format
+#, c-format
 msgid "This printer is disabled"
-msgstr "Ukuran partisi ini tidak dapat diubah"
+msgstr "Printer ini tidak aktif"
 
 #: printer/printerdrake.pm:5037
 #, c-format
@@ -14783,19 +14802,19 @@ msgstr "Pembuat, model printer"
 #: printer/printerdrake.pm:5052 printer/printerdrake.pm:5132
 #, c-format
 msgid "Set this printer as the default"
-msgstr "Set printer ini sebagai standar"
+msgstr "Tentukan printer ini sebagai default"
 
 #: printer/printerdrake.pm:5057 printer/printerdrake.pm:5138
 #: printer/printerdrake.pm:5140
-#, fuzzy, c-format
+#, c-format
 msgid "Enable Printer"
-msgstr "Aktifkan Server"
+msgstr "Aktifkan Printer"
 
 #: printer/printerdrake.pm:5060 printer/printerdrake.pm:5143
 #: printer/printerdrake.pm:5145
-#, fuzzy, c-format
+#, c-format
 msgid "Disable Printer"
-msgstr "Pasifkan Server"
+msgstr "Pasifkan Printer"
 
 #: printer/printerdrake.pm:5061 printer/printerdrake.pm:5148
 #, c-format
@@ -14805,7 +14824,7 @@ msgstr "Cetak halaman tes"
 #: printer/printerdrake.pm:5062 printer/printerdrake.pm:5150
 #, c-format
 msgid "Learn how to use this printer"
-msgstr "Belajar cara pakai printer ini"
+msgstr "Belajar bagaimana menggunakan printer ini"
 
 #: printer/printerdrake.pm:5063 printer/printerdrake.pm:5152
 #, c-format
@@ -14818,19 +14837,19 @@ msgid "Removing old printer \"%s\"..."
 msgstr "Menghapus printer lama \"%s\"..."
 
 #: printer/printerdrake.pm:5141
-#, fuzzy, c-format
+#, c-format
 msgid "Printer \"%s\" is now enabled."
-msgstr "Printer \"%s\" di server \"%s\""
+msgstr "Printer \"%s\" sekarang aktif."
 
 #: printer/printerdrake.pm:5146
-#, fuzzy, c-format
+#, c-format
 msgid "Printer \"%s\" is now disabled."
-msgstr "Internet Connection Sharing telah dimatikan"
+msgstr "Printer \"%s\" sekarang tidak aktif."
 
 #: printer/printerdrake.pm:5183
 #, c-format
 msgid "Do you really want to remove the printer \"%s\"?"
-msgstr "Anda ingin menghapus printer \"%s\"?"
+msgstr "Apakah Anda ingin menghapus printer \"%s\"?"
 
 #: printer/printerdrake.pm:5187
 #, c-format
@@ -14840,42 +14859,42 @@ msgstr "Menghapus printer \"%s\"..."
 #: printer/printerdrake.pm:5211
 #, c-format
 msgid "Default printer"
-msgstr "Printer standar"
+msgstr "Printer default"
 
 #: printer/printerdrake.pm:5212
 #, c-format
 msgid "The printer \"%s\" is set as the default printer now."
-msgstr "Printer \"%s\" kini diset sbg printer standar."
+msgstr "Printer \"%s\" kini ditentukan sebagai printer default."
 
 #: raid.pm:42
-#, fuzzy, c-format
+#, c-format
 msgid "Can not add a partition to _formatted_ RAID %s"
-msgstr "Tidak dapat menambah partisi ke RAID md%d yang terformat"
+msgstr "Tidak dapat menambah partisi pada RAID %s yang _terformat_"
 
 #: raid.pm:144
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
-msgstr "Partisi tidak cukup untuk level RAID %d\n"
+msgstr "Tidak cukup partisi untuk RAID level %d\n"
 
 #: scanner.pm:96
 #, c-format
 msgid "Could not create directory /usr/share/sane/firmware!"
-msgstr ""
+msgstr "Tidak bisa membuat direktori /usr/share/sane/firmware!"
 
 #: scanner.pm:107
 #, c-format
 msgid "Could not create link /usr/share/sane/%s!"
-msgstr ""
+msgstr "Tidak bisa membuat link /usr/share/sane/%s!"
 
 #: scanner.pm:114
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
-msgstr ""
+msgstr "Tidak bisa menyalin file firmware %s ke /usr/share/sane/firmware!"
 
 #: scanner.pm:121
 #, c-format
 msgid "Could not set permissions of firmware file %s!"
-msgstr ""
+msgstr "Tidak bisa menentukan hak akses file firmware %s!"
 
 #: scanner.pm:200 standalone/scannerdrake:66 standalone/scannerdrake:70
 #: standalone/scannerdrake:78 standalone/scannerdrake:346
@@ -14889,27 +14908,27 @@ msgstr "Scannerdrake"
 #: scanner.pm:201 standalone/scannerdrake:947
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
-msgstr ""
+msgstr "Tidak bisa menginstall paket yang diperlukan untuk berbagi scanner."
 
 #: scanner.pm:202
 #, c-format
 msgid "Your scanner(s) will not be available for non-root users."
-msgstr ""
+msgstr "Scanner Anda tidak akan tersedia untuk pengguna selain root."
 
 #: security/help.pm:11
 #, c-format
 msgid "Accept/Refuse bogus IPv4 error messages."
-msgstr "Terima/Tolak pesan error IPv4 yg tak benar."
+msgstr "Terima/Tolak pesan kesalahan IPv4."
 
 #: security/help.pm:13
 #, c-format
 msgid " Accept/Refuse broadcasted icmp echo."
-msgstr "Terima/Tolak echo icmp tersiar."
+msgstr " Terima/Tolak echo icmp tersiar."
 
 #: security/help.pm:15
 #, c-format
 msgid " Accept/Refuse icmp echo."
-msgstr "Terima/Tolak echo icmp."
+msgstr " Terima/Tolak echo icmp."
 
 #: security/help.pm:17
 #, c-format
@@ -14918,7 +14937,7 @@ msgstr "Izinkan/Larang autologin."
 
 #. -PO: here "ALL" is a value in a pull-down menu; translate it the same as "ALL" is
 #: security/help.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
 "\n"
@@ -14926,11 +14945,11 @@ msgid ""
 "\n"
 "Else only /etc/issue is allowed."
 msgstr ""
-"Argumen: (arg)\n"
+"Jika diset ke \"SEMUA\", /etc/issue dan /etc/issue.net diijinkan untuk ada.\n"
 "\n"
-"\\fIarg\\fP = ALL mengizinkan adanya /etc/issue dan /etc/issue.net. \\fIarg"
-"\\fP = NONE tak ada issues\n"
-"diizinkan selebihnya hanya /etc/issue diizinkan."
+"Jika diset ke TIDAK ADA, tidak ada issue yang diijinkan.\n"
+"\n"
+"Selain itu hanya /etc/issue yang diijinkan."
 
 #: security/help.pm:27
 #, c-format
@@ -14938,12 +14957,9 @@ msgid "Allow/Forbid reboot by the console user."
 msgstr "Izinkan/Larang reboot oleh pengguna konsol."
 
 #: security/help.pm:29
-#, fuzzy, c-format
+#, c-format
 msgid "Allow/Forbid remote root login."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Izinkan/Larang login root remote."
+msgstr "Izinkan/Larang login root remote."
 
 #: security/help.pm:31
 #, c-format
@@ -14956,7 +14972,7 @@ msgid ""
 "Allow/Forbid the list of users on the system on display managers (kdm and "
 "gdm)."
 msgstr ""
-"Izinkan/Larang daftar pengguna sistem di manajer display (kdm dan gdm)."
+"Izinkan/Larang daftar pengguna sistem pada manajer display (kdm dan gdm)."
 
 #: security/help.pm:35
 #, c-format
@@ -14966,9 +14982,13 @@ msgid ""
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
+"Ijinkan/larang mengeksport tampilan\n"
+"ketika berganti dari account root pada pengguna lain.\n"
+"\n"
+"Lihat pam_xauth(8) untuk detail lebih lanjut.'"
 
 #: security/help.pm:40
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow/Forbid X connections:\n"
 "\n"
@@ -14978,11 +14998,13 @@ msgid ""
 "\n"
 "- NONE (no connection)."
 msgstr ""
-"Argumen: (arg, listen_tcp=None)\n"
+"Izinkan/Larang koneksi X:\n"
 "\n"
-"Izinkan/Larang koneksi X. Arg pertama menunjukkan apa yg dilakukan\n"
-"di sisi klien: ALL (semua koneksi diizinkan), LOCAL (hanya\n"
-"koneksi lokal) and NONE (tanpa koneksi)."
+"- SEMUA (semua koneksi diijinkan), \n"
+"\n"
+"- LOKAL (hanya koneksi dari komputer lokal), \n"
+"\n"
+"- TIDAK ADA (tidak ada koneksi)."
 
 #: security/help.pm:48
 #, c-format
@@ -14990,8 +15012,8 @@ msgid ""
 "The argument specifies if clients are authorized to connect\n"
 "to the X server from the network on the tcp port 6000 or not."
 msgstr ""
-"Argumen menentukan apakah klien diizinkan berhubungan dg\n"
-"server X di port tcp 6000 atau tidak."
+"Argumen menentukan apakah klien diizinkan berhubungan \n"
+"dengan server X pada port tcp 6000 atau tidak."
 
 #. -PO: here "ALL", "LOCAL" and "NONE" are values in a pull-down menu; translate them the same as they're
 #: security/help.pm:53
@@ -15009,17 +15031,17 @@ msgid ""
 "To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
 "(5))."
 msgstr ""
-"Sahkan:\n"
+"Otorisasi:\n"
 "\n"
-"- semua servis yg dikontrol oleh tcp_wrappers (lihat manual hosts.deny(5)) "
-"jika diset \"SEMUA\",\n"
+"- semua servis dikontrol oleh tcp_wrappers (lihat manual hosts.deny(5)) "
+"jika diset ke \"SEMUA\",\n"
 "\n"
-"- hanya yg lokal jika diset ke \"LOKAL\"\n"
+"- hanya lokal jika diset ke \"LOKAL\"\n"
 "\n"
 "- tak satu-pun jika diset ke \"TIADA\".\n"
 "\n"
-"Utk mensahkan servis yg dibutuhkan, gunakan /etc/hosts.allow (lihat hosts."
-"allow(5))."
+"Untuk meng-otorisasi layanan yang Anda perlukan, gunakan "
+"/etc/hosts.allow (lihat hosts.allow(5))."
 
 #: security/help.pm:63
 #, c-format
@@ -15033,25 +15055,25 @@ msgid ""
 "add a service if it is present in the file during the installation of\n"
 "packages."
 msgstr ""
-"Jika SERVER_LEVEL (atau SECURE_LEVEL jika tidak ada) lebih besar daripada 3\n"
-"di /etc/security/msec/security.conf, buat symlink /etc/security/msec/server\n"
-"merujuk /etc/security/msec/server.<SERVER_LEVEL>. \n"
+"Jika SERVER_LEVEL (atau SECURE_LEVEL jika tidak ada) lebih \n"
+"besar daripada 3 pada /etc/security/msec/security.conf, buat "
+"symlink /etc/security/msec/server untuk menunjuk pada "
+"/etc/security/msec/server.<SERVER_LEVEL>.\n"
 "\n"
-"/etc/security/msec/server dipakai oleh chkconfig --add untuk menambahkan\n"
-"servis jika terdapat di file selama instalasi paket."
+"/etc/security/msec/server dipakai oleh chkconfig --add untuk \n"
+"menambahkan layanan jika terdapat pada file selama instalasi paket."
 
 #: security/help.pm:72
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enable/Disable crontab and at for users.\n"
 "\n"
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
-"Argumen: (arg)\n"
+"Aktifkan/Matikan crontab dan at untuk pengguna.\n"
 "\n"
-"Aktifkan/Matikan crontab dan at untuk pengguna. Taruh pengguna berizin di\n"
-"/etc/cron.allow dan /etc/at.allow\n"
+"Taruh pengguna yang diijinkan pada /etc/cron.allow dan /etc/at.allow \n"
 "(lihat man at(1) dan crontab(1))."
 
 #: security/help.pm:77
@@ -15066,7 +15088,7 @@ msgid ""
 "\"%s\" is true, also reports to syslog."
 msgstr ""
 "Aktifkan/Matikan proteksi pemalsuan resolusi nama.\n"
-"Jika \"%s\" = true, juga lapor ke syslog."
+"Jika \"%s\" bernilai true, juga laporkan ke syslog."
 
 #: security/help.pm:80 standalone/draksec:213
 #, c-format
@@ -15081,7 +15103,7 @@ msgstr "Aktifkan/Matikan proteksi pemalsuan IP."
 #: security/help.pm:84
 #, c-format
 msgid "Enable/Disable libsafe if libsafe is found on the system."
-msgstr "Aktifkan/Matikan libsafe jika libsafe ditemukan di sistem"
+msgstr "Aktifkan/Matikan libsafe jika libsafe ditemukan pada sistem."
 
 #: security/help.pm:86
 #, c-format
@@ -15091,69 +15113,67 @@ msgstr "Aktifkan/Matikan pencatatan paket aneh IPv4."
 #: security/help.pm:88
 #, c-format
 msgid "Enable/Disable msec hourly security check."
-msgstr "Aktifkan/Matikan cek keamanan tiap jam oleh msec."
+msgstr "Aktifkan/Matikan pengujian keamanan tiap jam oleh msec."
 
 #: security/help.pm:90
 #, c-format
 msgid ""
 " Enabling su only from members of the wheel group or allow su from any user."
-msgstr "Izinkan su hanya bagi anggota grup wheel atau izinkan semua pengguna."
+msgstr ""
+" Mengijinkan su hanya bagi anggota grup wheel atau izinkan semua pengguna."
 
 #: security/help.pm:92
 #, c-format
 msgid "Use password to authenticate users."
-msgstr "Pakai katasandi untuk membuktikan keaslian pengguna."
+msgstr "Gunakan katasandi untuk meng-otentikasi pengguna."
 
 #: security/help.pm:94
-#, fuzzy, c-format
+#, c-format
 msgid "Activate/Disable ethernet cards promiscuity check."
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Aktifkan/Matikan pengecekan kekacauan kartu ethernet."
+msgstr "Aktifkan/Matikan pengujian mode promiscuous kartu ethernet."
 
 #: security/help.pm:96
 #, c-format
 msgid " Activate/Disable daily security check."
-msgstr "Aktifkan/Matikan cek keamanan harian."
+msgstr "Aktifkan/Matikan pengujian keamanan harian."
 
 #: security/help.pm:98
 #, c-format
 msgid " Enable/Disable sulogin(8) in single user level."
-msgstr "Izinkan/Tolak sulogin(8) dalam level pengguna single."
+msgstr "Izinkan/Tolak sulogin(8) pada level pengguna tunggal."
 
 #: security/help.pm:100
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
-msgstr "Tambahkan nama sbg eksepsi penanganan umur katasandi dg msec."
+msgstr "Tambahkan nama sebagai pengecualian penanganan umur katasandi oleh msec."
 
 #: security/help.pm:102
 #, c-format
 msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
-msgstr "Set umur katasandi \"max\" hari dan delay \"inactice\"."
+msgstr "Tentukan umur katasandi menjadi \"maks\" hari dan delay menjadi \"tidak aktif\"."
 
 #: security/help.pm:104
 #, c-format
 msgid "Set the password history length to prevent password reuse."
-msgstr ""
-"Set panjang riwayat katasandi untuk mencegah penggunaan ulang katasandi."
+msgstr "Tentukan panjang sejarah katasandi untuk mencegah penggunaan ulang katasandi."
 
 #: security/help.pm:106
 #, c-format
 msgid ""
 "Set the password minimum length and minimum number of digit and minimum "
 "number of capitalized letters."
-msgstr "Set panjang minimum, jumlah minimum digit dan huruf besar katasandi."
+msgstr ""
+"Tentukan panjang minimum, jumlah minimum digit dan huruf besar katasandi."
 
 #: security/help.pm:108
 #, c-format
 msgid "Set the root umask."
-msgstr "Set umask root."
+msgstr "Tentukan umask root."
 
 #: security/help.pm:109
 #, c-format
 msgid "if set to yes, check open ports."
-msgstr "Jika diset ke ya, cek port yg terbuka."
+msgstr "Jika ya, periksa port yang terbuka."
 
 #: security/help.pm:110
 #, c-format
@@ -15166,63 +15186,63 @@ msgid ""
 "\n"
 "- for users with the 0 id other than root."
 msgstr ""
-"jika ya, cek :\n"
+"jika ya, periksa:\n"
 "\n"
 "- katasandi kosong,\n"
 "\n"
-"- katasandi kosong di /etc/shadow\n"
+"- katasandi kosong pada /etc/shadow\n"
 "\n"
-"- pengguna dg id 0 yg bukan root."
+"- pengguna dengan id 0 selain root."
 
 #: security/help.pm:117
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
-msgstr "jika diset ya, cek izin file-file di home pengguna."
+msgstr "jika ya, periksa hak akses file-file pada home pengguna."
 
 #: security/help.pm:118
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
-msgstr "jika ya, cek apakah divais jaringan berada dalam modus promiscuous."
+msgstr "jika ya, periksa apakah divais jaringan berada dalam modus promiscuous."
 
 #: security/help.pm:119
 #, c-format
 msgid "if set to yes, run the daily security checks."
-msgstr "jika ya, jalankan cek keamanan harian."
+msgstr "jika ya, jalankan pengujian keamanan harian."
 
 #: security/help.pm:120
 #, c-format
 msgid "if set to yes, check additions/removals of sgid files."
-msgstr "Jika diset ke ya, cek penambahan/penghapusan file sgid."
+msgstr "Jika ya, periksa penambahan/penghapusan file sgid."
 
 #: security/help.pm:121
 #, c-format
 msgid "if set to yes, check empty password in /etc/shadow."
-msgstr "jika diset ya, cek katasandi kosong di /etc/shadow."
+msgstr "jika ya, periksa katasandi kosong pada /etc/shadow."
 
 #: security/help.pm:122
 #, c-format
 msgid "if set to yes, verify checksum of the suid/sgid files."
-msgstr "jika ya, lakukan checksum file suid/sgid."
+msgstr "jika ya, lakukan pengujian checksum file suid/sgid."
 
 #: security/help.pm:123
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
-msgstr "jika diset ya, cek tambahan/hapusan file root suid."
+msgstr "jika ya, periksa penambahan/penghapusan file root suid."
 
 #: security/help.pm:124
 #, c-format
 msgid "if set to yes, report unowned files."
-msgstr "jika diset ya, laporkan file tak bertuan."
+msgstr "jika ya, laporkan file yang tidak dimiliki siapapun."
 
 #: security/help.pm:125
 #, c-format
 msgid "if set to yes, check files/directories writable by everybody."
-msgstr "jika ya, cek file/direktori agar dapat ditulisi oleh semua orang."
+msgstr "jika ya, periksa file/direktori yang dapat ditulisi semua orang."
 
 #: security/help.pm:126
 #, c-format
 msgid "if set to yes, run chkrootkit checks."
-msgstr "Jika diset ya, jalankan cek chkrootkit."
+msgstr "Jika ya, jalankan pengujian chkrootkit."
 
 #: security/help.pm:127
 #, c-format
@@ -15234,55 +15254,52 @@ msgstr ""
 #: security/help.pm:128
 #, c-format
 msgid "if set to yes, report check result by mail."
-msgstr "jika diset ke ya, laporkan hasil cek dg mail."
+msgstr "jika ya, laporkan hasil pengujian melalui mail."
 
 #: security/help.pm:129
 #, c-format
 msgid "Do not send mails if there's nothing to warn about"
-msgstr ""
+msgstr "Jangan kirim email jika tidak ada peringatan"
 
 #: security/help.pm:130
 #, c-format
 msgid "if set to yes, run some checks against the rpm database."
-msgstr "jika diset ya, cek database rpm"
+msgstr "jika ya, jalankan pengujian terhadap database rpm."
 
 #: security/help.pm:131
 #, c-format
 msgid "if set to yes, report check result to syslog."
-msgstr "jika ya, laporkan hasil cek ke syslog."
+msgstr "jika ya, laporkan hasil pengujian ke syslog."
 
 #: security/help.pm:132
 #, c-format
 msgid "if set to yes, reports check result to tty."
-msgstr "jika diset ya, laporkan hasil cek ke tty."
+msgstr "jika diset ya, laporkan hasil pengujian ke tty."
 
 #: security/help.pm:134
-#, fuzzy, c-format
+#, c-format
 msgid "Set shell commands history size. A value of -1 means unlimited."
-msgstr ""
-"Argumen: (ukuran)\n"
-"\n"
-"Set ukuran riwayat perintah cangkang. -1 berarti tak terbatas."
+msgstr "Menentukan sejarah perintah shell. -1 berarti tidak terbatas."
 
 #: security/help.pm:136
 #, c-format
 msgid "Set the shell timeout. A value of zero means no timeout."
-msgstr "Set timeout cangkang (shell). Nol = tidak ada timeout."
+msgstr "Menentukan timeout shell. Nol berarti tidak ada timeout."
 
 #: security/help.pm:136
 #, c-format
 msgid "Timeout unit is second"
-msgstr ""
+msgstr "Unit timeout adalah detik"
 
 #: security/help.pm:138
 #, c-format
 msgid "Set the user umask."
-msgstr "Set umask pengguna."
+msgstr "Tentukan umask pengguna."
 
 #: security/l10n.pm:11
 #, c-format
 msgid "Accept bogus IPv4 error messages"
-msgstr "Terima pesan error IPv4 yg tak benar"
+msgstr "Terima pesan error IPv4 yang tidak benar"
 
 #: security/l10n.pm:12
 #, c-format
@@ -15305,12 +15322,9 @@ msgid "Reboot by the console user"
 msgstr "Reboot oleh pengguna konsol"
 
 #: security/l10n.pm:17
-#, fuzzy, c-format
+#, c-format
 msgid "Allow remote root login"
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Izinkan/Larang login root remote."
+msgstr "Izinkan/Larang login root remote."
 
 #: security/l10n.pm:18
 #, c-format
@@ -15318,32 +15332,29 @@ msgid "Direct root login"
 msgstr "Login root langsung"
 
 #: security/l10n.pm:19
-#, fuzzy, c-format
+#, c-format
 msgid "List users on display managers (kdm and gdm)"
-msgstr ""
-"Argumen: (arg)\n"
-"\n"
-"Izinkan/Larang daftar pengguna sistem di manajer display (kdm dan gdm)."
+msgstr "Daftar pengguna pada manajer display (kdm dan gdm)"
 
 #: security/l10n.pm:20
 #, c-format
 msgid "Export display when passing from root to the other users"
-msgstr ""
+msgstr "Eksport tampilan ketika berpindah dari root pada pengguna lain"
 
 #: security/l10n.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid "Allow X Window connections"
-msgstr "Koneksi winmodem"
+msgstr "Ijinkan koneksi X Window"
 
 #: security/l10n.pm:22
 #, c-format
 msgid "Authorize TCP connections to X Window"
-msgstr "Sahkan koneksi TCP X Window"
+msgstr "Sahkan koneksi TCP ke X Window"
 
 #: security/l10n.pm:23
 #, c-format
 msgid "Authorize all services controlled by tcp_wrappers"
-msgstr "Sahkan semua servis yg dikontrol oleh tcp_wrappers"
+msgstr "Sahkan semua layanan yang dikontrol oleh tcp_wrappers"
 
 #: security/l10n.pm:24
 #, c-format
@@ -15366,17 +15377,14 @@ msgid "Name resolution spoofing protection"
 msgstr "Proteksi penipuan nama"
 
 #: security/l10n.pm:28
-#, fuzzy, c-format
+#, c-format
 msgid "Enable IP spoofing protection"
-msgstr ""
-"Argumen: (arg, alert=1)\n"
-"\n"
-"Aktifkan/Matikan proteksi pemalsuan IP."
+msgstr "Aktifkan proteksi pemalsuan IP."
 
 #: security/l10n.pm:29
 #, c-format
 msgid "Enable libsafe if libsafe is found on the system"
-msgstr "Aktifkan/Matikan libsafe jika libsafe ditemukan di sistem"
+msgstr "Aktifkan/Matikan libsafe jika libsafe ditemukan pada sistem"
 
 #: security/l10n.pm:30
 #, c-format
@@ -15386,7 +15394,7 @@ msgstr "Aktifkan pencatatan paket aneh IPv4"
 #: security/l10n.pm:31
 #, c-format
 msgid "Enable msec hourly security check"
-msgstr "Aktifkan cek keamanan perjam oleh msec"
+msgstr "Aktifkan pengujian keamanan perjam oleh msec"
 
 #: security/l10n.pm:32
 #, c-format
@@ -15396,32 +15404,32 @@ msgstr "Izinkan su hanya bagi anggota grup wheel atau izinkan semua pengguna"
 #: security/l10n.pm:33
 #, c-format
 msgid "Use password to authenticate users"
-msgstr "Pakai katasandi untuk pembuktian pengguna"
+msgstr "Pakai katasandi untuk meng-otentikasi pengguna"
 
 #: security/l10n.pm:34
 #, c-format
 msgid "Ethernet cards promiscuity check"
-msgstr "Cek kekacauan kartu ethernet"
+msgstr "Pengujian mode promiscuous kartu ethernet"
 
 #: security/l10n.pm:35
 #, c-format
 msgid "Daily security check"
-msgstr "Cek keamanan harian"
+msgstr "Pengujian keamanan harian"
 
 #: security/l10n.pm:36
 #, c-format
 msgid "Sulogin(8) in single user level"
-msgstr "Sulogin(8) dalam level pengguna single"
+msgstr "Sulogin(8) pada level pengguna tunggal"
 
 #: security/l10n.pm:37
 #, c-format
 msgid "No password aging for"
-msgstr "Tidak ada penuaan katasandi untuk"
+msgstr "Tidak ada umur katasandi untuk"
 
 #: security/l10n.pm:38
 #, c-format
 msgid "Set password expiration and account inactivation delays"
-msgstr "Set kadaluarsa katasandi dan delay penonaktifan account"
+msgstr "Tentukan kadaluarsa katasandi dan jeda penonaktifan account"
 
 #: security/l10n.pm:39
 #, c-format
@@ -15441,12 +15449,12 @@ msgstr "Umask root"
 #: security/l10n.pm:42
 #, c-format
 msgid "Shell history size"
-msgstr "Ukuran sejarah cangkang"
+msgstr "Ukuran sejarah shell"
 
 #: security/l10n.pm:43
 #, c-format
 msgid "Shell timeout"
-msgstr "Timeout cangkang (shell)"
+msgstr "Timeout shell"
 
 #: security/l10n.pm:44
 #, c-format
@@ -15454,39 +15462,39 @@ msgid "User umask"
 msgstr "Umask pengguna"
 
 #: security/l10n.pm:45
-#, fuzzy, c-format
+#, c-format
 msgid "Check open ports"
-msgstr "dideteksi pada port %s"
+msgstr "Periksa port yang terbuka"
 
 #: security/l10n.pm:46
 #, c-format
 msgid "Check for unsecured accounts"
-msgstr "Cek account tak terjaga"
+msgstr "Periksa account yang tidak aman"
 
 #: security/l10n.pm:47
-#, fuzzy, c-format
+#, c-format
 msgid "Check permissions of files in the users' home"
-msgstr "jika diset ya, cek izin file-file di home pengguna."
+msgstr "Periksa hak akses file pada home pengguna."
 
 #: security/l10n.pm:48
-#, fuzzy, c-format
+#, c-format
 msgid "Check if the network devices are in promiscuous mode"
-msgstr "jika ya, cek apakah divais jaringan berada dalam modus promiscuous."
+msgstr "Periksa apakah divais jaringan berada dalam modus promiscuous"
 
 #: security/l10n.pm:49
 #, c-format
 msgid "Run the daily security checks"
-msgstr "Jalankan cek keamanan harian"
+msgstr "Jalankan pengujian keamanan harian"
 
 #: security/l10n.pm:50
 #, c-format
 msgid "Check additions/removals of sgid files"
-msgstr "Cek penambahan/penghapusan file sgid"
+msgstr "Periksa penambahan/penghapusan file sgid"
 
 #: security/l10n.pm:51
 #, c-format
 msgid "Check empty password in /etc/shadow"
-msgstr "Cek katasandi kosong di /etc/shadow"
+msgstr "Periksa katasandi kosong pada /etc/shadow"
 
 #: security/l10n.pm:52
 #, c-format
@@ -15494,55 +15502,54 @@ msgid "Verify checksum of the suid/sgid files"
 msgstr "Verifikasi checksum file suid/sgid"
 
 #: security/l10n.pm:53
-#, fuzzy, c-format
+#, c-format
 msgid "Check additions/removals of suid root files"
-msgstr "jika diset ya, cek tambahan/hapusan file root suid."
+msgstr "Pengujian penambahan/penghapusan file root suid."
 
 #: security/l10n.pm:54
 #, c-format
 msgid "Report unowned files"
-msgstr "Laporkan file tak bertuan"
+msgstr "Laporkan file yang tidak memiliki pemilik"
 
 #: security/l10n.pm:55
 #, c-format
 msgid "Check files/directories writable by everybody"
-msgstr "Cek file/direktori yg dapat ditulisi oleh semua orang"
+msgstr "Periksa file/direktori yang dapat ditulisi semua orang"
 
 #: security/l10n.pm:56
 #, c-format
 msgid "Run chkrootkit checks"
-msgstr "Jalankan cek chkrootkit"
+msgstr "Jalankan pengujian chkrootkit"
 
 #: security/l10n.pm:57
 #, c-format
 msgid "Do not send mails when unneeded"
-msgstr "Jangan kirim mail jika tak perlu"
+msgstr "Jangan kirim mail jika tidak diperlukan"
 
 #: security/l10n.pm:58
 #, c-format
 msgid "If set, send the mail report to this email address else send it to root"
-msgstr ""
-"Jika diset, kirim laporan ke alamat email ini, jika tidak, kirim ke root."
+msgstr "Jika diset, kirim laporan ke alamat email ini, jika tidak, kirim ke root."
 
 #: security/l10n.pm:59
 #, c-format
 msgid "Report check result by mail"
-msgstr "Laporkan hasil cek via mail"
+msgstr "Laporkan hasil pengujian via mail"
 
 #: security/l10n.pm:60
 #, c-format
 msgid "Run some checks against the rpm database"
-msgstr "Cek database rpm"
+msgstr "Jalankan beberapa pengujian terhadap database rpm"
 
 #: security/l10n.pm:61
 #, c-format
 msgid "Report check result to syslog"
-msgstr "Laporkan hasil cek ke syslog"
+msgstr "Laporkan hasil pengujian ke syslog"
 
 #: security/l10n.pm:62
 #, c-format
 msgid "Reports check result to tty"
-msgstr "Laporkan hasil cek ke tty"
+msgstr "Laporkan hasil pengujian ke tty"
 
 #: security/level.pm:10
 #, c-format
@@ -15567,7 +15574,7 @@ msgstr "Lebih Kuat"
 #: security/level.pm:15
 #, c-format
 msgid "Paranoid"
-msgstr "Penakut"
+msgstr "Paranoid"
 
 #: security/level.pm:41
 #, c-format
@@ -15577,16 +15584,17 @@ msgid ""
 "or to the Internet. There is no password access."
 msgstr ""
 "Level ini harus digunakan hati-hati. Ia akan membuat sistem Anda akan mudah\n"
-"digunakan, tapi sangat sensitif: komputer ini tidak boleh digunakan untuk\n"
-"komputer yang terhubung ke komputer lain atau ke Internet. Tidak akan ada\n"
-"akses katasandi."
+"digunakan, tapi sangat sensitif. Tidak boleh digunakan untuk komputer yang\n"
+"terhubung ke komputer lain atau ke Internet. Tidak ada akses katasandi."
 
 #: security/level.pm:44
 #, c-format
 msgid ""
 "Passwords are now enabled, but use as a networked computer is still not "
 "recommended."
-msgstr "Katasandi akan diaktifkan, tapi mohon jangan disambungkan ke jaringan."
+msgstr ""
+"Katasandi diaktifkan, tapi penggunaan sebagai komputer jaringan tidak "
+"direkomendasikan."
 
 #: security/level.pm:45
 #, c-format
@@ -15594,7 +15602,7 @@ msgid ""
 "This is the standard security recommended for a computer that will be used "
 "to connect to the Internet as a client."
 msgstr ""
-"Ini adalah sekuriti standar, dianjurkan untuk komputer yang akan\n"
+"Ini adalah keamanan standar, dianjurkan untuk komputer yang akan\n"
 "terkoneksi ke Internet sebagai klien."
 
 #: security/level.pm:46
@@ -15603,7 +15611,7 @@ msgid ""
 "There are already some restrictions, and more automatic checks are run every "
 "night."
 msgstr ""
-"Sudah ada beberapa batasan, dan beberapa pengecekan otomatis berjalan tiap "
+"Terdapat beberapa batasan, dan beberapa pengujian otomatis berjalan setiap "
 "malam."
 
 #: security/level.pm:47
@@ -15616,10 +15624,11 @@ msgid ""
 "connections from many clients. Note: if your machine is only a client on the "
 "Internet, you should choose a lower level."
 msgstr ""
-"Dengan level sekuriti ini, sistem akan dapat digunakan sebagai server.\n"
-"Sekuriti kini cukup tinggi untuk dapat melayani koneksi banyak klien.\n"
-"Jika komputer Anda hanya berfungsi sebagai klien, pilihlah level lebih "
-"rendah."
+"Dengan level keamanan ini, penggunaan sistem sebagai server dimungkinkan.\n"
+"Keamanan kini cukup tinggi untuk menggunakan sistem sebagai server yang "
+"dapat \n"
+"menerima koneksi dari banyak klien. Catatan: Jika komputer Anda satu-satunya "
+"klien pada Internet, Anda harus memilih level yang lebih rendah."
 
 #: security/level.pm:50
 #, c-format
@@ -15627,8 +15636,8 @@ msgid ""
 "This is similar to the previous level, but the system is entirely closed and "
 "security features are at their maximum."
 msgstr ""
-"Sama dengan level sebelumnya, tapi sistem sepenuhnya ditutup.\n"
-"Fitur sekuriti maksimum."
+"Hal ini sama dengan level sebelumnya, tapi sistem sepenuhnya ditutup.\n"
+"Fitur keamanan maksimal."
 
 #: security/level.pm:55
 #, c-format
@@ -15638,7 +15647,7 @@ msgstr "Opsi Dasar DrakSec"
 #: security/level.pm:56
 #, c-format
 msgid "Please choose the desired security level"
-msgstr "Pilih tingkat keamanan yg Anda inginkan"
+msgstr "Pilih tingkat keamanan yang diinginkan"
 
 #: security/level.pm:60
 #, c-format
@@ -15654,22 +15663,23 @@ msgstr "Gunakan libsafe untuk server"
 #, c-format
 msgid ""
 "A library which defends against buffer overflow and format string attacks."
-msgstr "Library penahan serangan string format dan overflow buffer"
+msgstr ""
+"Sebuah pustaka yang menjaga terhadap serangan buffer overflow dan format string."
 
 #: security/level.pm:64
 #, c-format
 msgid "Security Administrator (login or email)"
-msgstr "Admin Keamanan (login / email)"
+msgstr "Administrator Keamanan (login / email)"
 
 #: services.pm:19
 #, c-format
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
-msgstr "Luncurkan sistem suara ALSA (Advanced Linux Sound Architecture)"
+msgstr "Jalankan sistem suara ALSA (Advanced Linux Sound Architecture)"
 
 #: services.pm:20
 #, c-format
 msgid "Anacron is a periodic command scheduler."
-msgstr "Skeduler command periodik, Anacron"
+msgstr "Anacron adalah penjadwal periodik untuk perintah."
 
 #: services.pm:21
 #, c-format
@@ -15677,8 +15687,8 @@ msgid ""
 "apmd is used for monitoring battery status and logging it via syslog.\n"
 "It can also be used for shutting down the machine when the battery is low."
 msgstr ""
-"apmd digunakan untuk monitoring status batere dan mencatatnya di syslog.\n"
-"apmd juga bisa untuk mematikan komputer waktu baterenya habis."
+"apmd digunakan untuk mengawasi status baterai dan mencatatnya pada syslog.\n"
+"Ia juga bisa untuk mematikan komputer ketika baterai hampir habis."
 
 #: services.pm:23
 #, c-format
@@ -15686,9 +15696,9 @@ msgid ""
 "Runs commands scheduled by the at command at the time specified when\n"
 "at was run, and runs batch commands when the load average is low enough."
 msgstr ""
-"Menjalankan perintah terjadwal dengan perintah at pada waktu tertentu\n"
-"saat at dijalankan, dan memulai perintah secara batch waktu rata-rata load\n"
-"sedang rendah."
+"Menjalankan perintah terjadwal dengan perintah at pada waktu yang \n"
+"ditentukan ketika at dijalankan dan menjalankan perintah secara batch "
+"ketika beban rendah."
 
 #: services.pm:25
 #, c-format
@@ -15699,9 +15709,8 @@ msgid ""
 "UNIX cron, including better security and more powerful configuration options."
 msgstr ""
 "Cron adalah program UNIX standar yang menjalankan program pengguna\n"
-"pada waktu yang terjadwal. vixie cron memiliki fitur yang lebih lengkap\n"
-"dari cron UNIX biasa, termasuk pembenahan sekuriti yang lebih baik dan\n"
-"lebih mantapnya option pada konfigurasinya."
+"pada waktu terjadwal. vixie cron menambah sejumlah fitur pada cron\n"
+"UNIX biasa, termasuk keamanan dan opsi konfigurasi yang lebih canggih."
 
 #: services.pm:28
 #, c-format
@@ -15710,6 +15719,9 @@ msgid ""
 "change.\n"
 "It is used by GNOME and KDE"
 msgstr ""
+"FAM adalah daemon pengawasan file. Digunakan untuk mendapatkan laporan "
+"ketika file berubah.\n"
+"Digunakan oleh GNOME dan KDE"
 
 #: services.pm:30
 #, c-format
@@ -15719,10 +15731,10 @@ msgid ""
 "operations,\n"
 "and includes support for pop-up menus on the console."
 msgstr ""
-"GPM memberikan akses ke mouse pada aplikasi Linux yang text based semacam\n"
-"Midnight Commander. Dia juga bisa bikin cut-and-paste dengan mouse pada "
-"konsol\n"
-"dan juga bikin menu pop-up di konsol."
+"GPM menambahkan dukungan mouse pada aplikasi Linux berbasis teks\n"
+"seperti Midnight Commander. Dia juga mengujinkan operasi cut-and-paste "
+"dengan mouse \n"
+"pada konsol dan menyertakan dukungan untuk menu pop-up pada konsol."
 
 #: services.pm:33
 #, c-format
@@ -15730,15 +15742,15 @@ msgid ""
 "HardDrake runs a hardware probe, and optionally configures\n"
 "new/changed hardware."
 msgstr ""
-"HardDrake mendeteksi hardware, dan mengkonfigurasi yg baru/berubah bila "
-"perlu."
+"HardDrake menjalankan pendeteksian perangkat keras hardware\n"
+"dan mengkonfigurasi perangkat keras yang baru/berubah."
 
 #: services.pm:35
 #, c-format
 msgid ""
 "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
-"Apache adalah server World Wide Web. Dia dipakai untuk menyediakan file\n"
+"Apache adalah server World Wide Web. Dia digunakan untuk menyediakan file\n"
 "HTML dan CGI."
 
 #: services.pm:36
@@ -15751,10 +15763,10 @@ msgid ""
 "disables\n"
 "all of the services it is responsible for."
 msgstr ""
-"daemon superserver internet (biasa dipanggil inetd) bertugas untuk\n"
-"menjalankan servis-servis internet yang dibutuhkan. Dia bertanggung jawab\n"
+"Daemon superserver internet (biasa dipanggil inetd) bertugas untuk\n"
+"menjalankan layanan internet yang dibutuhkan. Dia bertanggung jawab\n"
 "atas banyak server, misalnya telnet, ftp, rsh, dan rlogin. Menonaktifkan\n"
-"inetd berarti menonaktifkan semua servis-servis tadi."
+"inetd berarti menonaktifkan semua layanan tadi."
 
 #: services.pm:40
 #, c-format
@@ -15762,8 +15774,8 @@ msgid ""
 "Launch packet filtering for Linux kernel 2.2 series, to set\n"
 "up a firewall to protect your machine from network attacks."
 msgstr ""
-"Luncurkan filter paket Linux kernel seri 2.2, untuk set-up\n"
-"firewall yang melindungi komputer Anda dari serangan network."
+"Jalankan filter paket untuk Linux kernel seri 2.2, untuk set-up\n"
+"firewall yang melindungi komputer Anda dari serangan jaringan."
 
 #: services.pm:42
 #, c-format
@@ -15772,9 +15784,9 @@ msgid ""
 "/etc/sysconfig/keyboard.  This can be selected using the kbdconfig utility.\n"
 "You should leave this enabled for most machines."
 msgstr ""
-"Paket ini akan memuat map papanketik yang dipilih di file\n"
-"/etc/sysconfig/keyboard. Mapnya dapat dipilih dari utility kbdconfig.\n"
-"Biarkan aktif!"
+"Paket ini memuat peta keyboard yang dipilih pada file\n"
+"/etc/sysconfig/keyboard. Hal ini dapat dipilih dari utility kbdconfig.\n"
+"Anda harus mengaktifkan ini pada sebagian besar komputer."
 
 #: services.pm:45
 #, c-format
@@ -15782,13 +15794,13 @@ msgid ""
 "Automatic regeneration of kernel header in /boot for\n"
 "/usr/include/linux/{autoconf,version}.h"
 msgstr ""
-"Regenerasi otomatis header kernel di /boot untuk\n"
+"Regenerasi otomatis header kernel pada /boot untuk\n"
 "/usr/include/linux/{autoconf,version}.h"
 
 #: services.pm:47
 #, c-format
 msgid "Automatic detection and configuration of hardware at boot."
-msgstr "Deteksi dan konfigurasi otomatis hardware saat boot."
+msgstr "Pendeteksian dan konfigurasi otomatis perangkat keras saat boot."
 
 #: services.pm:48
 #, c-format
@@ -15796,7 +15808,8 @@ msgid ""
 "Linuxconf will sometimes arrange to perform various tasks\n"
 "at boot-time to maintain the system configuration."
 msgstr ""
-"Linuxconf kadang bekerja keras saat boot untuk perawatan konfigurasi sistem."
+"Linuxconf seringkali mencoba melakukan berbagai macam tugas\n"
+"saat boot untuk mengelola konfigurasi sistem."
 
 #: services.pm:50
 #, c-format
@@ -15804,8 +15817,8 @@ msgid ""
 "lpd is the print daemon required for lpr to work properly. It is\n"
 "basically a server that arbitrates print jobs to printer(s)."
 msgstr ""
-"lpd adalah daemon printer yang jadi tulang punggung lpr. Dia\n"
-"bertugas sebagai server yang memberi perintah kepada printer untuk mencetak."
+"lpd adalah daemon printer yang diperlukan lpr. Ia merupakan \n"
+"server yang memberi perintah kepada printer untuk mencetak."
 
 #: services.pm:52
 #, c-format
@@ -15813,8 +15826,8 @@ msgid ""
 "Linux Virtual Server, used to build a high-performance and highly\n"
 "available server."
 msgstr ""
-"Linux Virtual Server, digunakan untuk membangun server dg performans dan\n"
-"kapasitas tinggi."
+"Linux Virtual Server, digunakan untuk membangun server dengan \n"
+"performa dan kapasitas tinggi."
 
 #: services.pm:54
 #, c-format
@@ -15840,8 +15853,8 @@ msgid ""
 "Activates/Deactivates all network interfaces configured to start\n"
 "at boot time."
 msgstr ""
-"Aktif/nonaktifkan semua interface network yang terkonfigurasi nyala\n"
-"pada saat boot."
+"Aktifkan/Nonaktifkan semua interface jaringan yang terkonfigurasi\n"
+"aktif pada saat boot."
 
 #: services.pm:59
 #, c-format
@@ -15850,10 +15863,9 @@ msgid ""
 "This service provides NFS server functionality, which is configured via the\n"
 "/etc/exports file."
 msgstr ""
-"NFS adalah protokol populer untuk file sharing lewat network TCP/IP.\n"
-"Servis ini dinyalakan untuk membuat NFS server bisa jalan dengan "
-"menggunakan\n"
-"konfigurasi pada file /etc/exports."
+"NFS adalah protokol untuk berbagi file lewat jaringan TCP/IP.\n"
+"Layanan ini menyediakan fungsi server NFS, yang dikonfigurasikan\n"
+"via file /etc/exports."
 
 #: services.pm:62
 #, c-format
@@ -15861,20 +15873,21 @@ msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP\n"
 "networks. This service provides NFS file locking functionality."
 msgstr ""
-"NFS adalah protokol populer untuk file sharing di TCP/IP\n"
-"Servis ini memberikan fungsi file lock pada NFS."
+"NFS adalah protokol populer untuk file sharing pada jaringan TCP/IP\n"
+"Layanan ini menyediakan fungsi penguncian file NFS."
 
 #: services.pm:64
 #, c-format
 msgid ""
 "Automatically switch on numlock key locker under console\n"
 "and Xorg at boot."
-msgstr "Secara otomatis nyalakan numlock saat boot pada console/Xorg."
+msgstr ""
+"Secara otomatis nyalakan numlock saat boot pada console dan Xorg."
 
 #: services.pm:66
 #, c-format
 msgid "Support the OKI 4w and compatible winprinters."
-msgstr "Support OKI 4w and winprinter kompatibel."
+msgstr "Dukung OKI 4w and winprinter yang kompatibel."
 
 #: services.pm:67
 #, c-format
@@ -15884,9 +15897,9 @@ msgid ""
 "to have\n"
 "it installed on machines that do not need it."
 msgstr ""
-"PCMCIA digunakan untuk menjalankan perangkat semacam ethernet atau modem\n"
-"pada laptop. Dia tak bisa jalan kecuali dikonfigurasikan di sini, jadi tak\n"
-"apa-apa kalau tak diinstal di komputer yang tak perlu PCMCIA."
+"Dukungan PCMCIA biasanya untuk mendukung perangkat semacam ethernet\n"
+"dan modem pada laptop. Ia tidak dijalankan kecuali terkonfigurasi sehingga\n"
+"aman untuk diinstall pada komputer yang memerlukannya."
 
 #: services.pm:70
 #, c-format
@@ -15897,7 +15910,7 @@ msgid ""
 "which act as servers for protocols which make use of the RPC mechanism."
 msgstr ""
 "Portmapper mengelola koneksi RPC, yang digunakan oleh protokol seperti\n"
-"NFS dan NIS. Server portmap harus jalan di komputer yang bertindak sebagai\n"
+"NFS dan NIS. Server portmap harus berjalan pada komputer yang bertindak sebagai\n"
 "server untuk protokol yang menggunakan mekanisme RPC."
 
 #: services.pm:73
@@ -15924,8 +15937,8 @@ msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
 "partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
-"Tunjuk raw device ke block devices (misalnya partisi hard drive),\n"
-"untuk digunakan oleh aplikasi semacam Oracle atau player DVD"
+"Menunjuk divais raw ke divais block (misalnya partisi hard drive),\n"
+"untuk digunakan oleh aplikasi semacam Oracle atau pemutar DVD"
 
 #: services.pm:78
 #, c-format
@@ -15934,8 +15947,8 @@ msgid ""
 "the RIP protocol. While RIP is widely used on small networks, more complex\n"
 "routing protocols are needed for complex networks."
 msgstr ""
-"Daemon routed digunakan untuk update tabel routing IP otomatis liwat\n"
-"protokol RIP. RIP dipakai di jaringan kecil, dan semakin besar jaringannya\n"
+"Daemon routed digunakan untuk update tabel routing IP otomatis via\n"
+"protokol RIP. RIP dipakai pada jaringan kecil, dan semakin besar jaringannya\n"
 "maka protokol routing yang canggih pun semakin dibutuhkan."
 
 #: services.pm:81
@@ -15944,8 +15957,8 @@ msgid ""
 "The rstat protocol allows users on a network to retrieve\n"
 "performance metrics for any machine on that network."
 msgstr ""
-"Protokol rstat digunakan pada jaringan untuk mengambil\n"
-"ukuran kinerja sistem di network."
+"Protokol rstat mengujinkan pengguna untuk menerima \n"
+"metrik performa untuk sembarang komputer pada jaringan."
 
 #: services.pm:83
 #, c-format
@@ -15953,8 +15966,8 @@ msgid ""
 "The rusers protocol allows users on a network to identify who is\n"
 "logged in on other responding machines."
 msgstr ""
-"Protokol ruser digunakan di jaringan untuk mengidentifikasi siapa\n"
-"yang lagi login di jaringan."
+"Protokol ruser digunakan pada jaringan untuk mengidentifikasi siapa\n"
+"yang login pada komputer lain."
 
 #: services.pm:85
 #, c-format
@@ -15962,13 +15975,14 @@ msgid ""
 "The rwho protocol lets remote users get a list of all of the users\n"
 "logged into a machine running the rwho daemon (similar to finger)."
 msgstr ""
-"Protokol rwho digunakan untuk melihat daftar pengguna yang sedang login\n"
-"di suatu sistem yang juga menjalankan daemon rwho (mirip dengan finger)."
+"Protokol rwho mengijinkan pengguna remote mendapatkan daftar pengguna\n"
+"yang login pada komputer yang menjalankan daemon rwho (serupa dengan "
+"finger)."
 
 #: services.pm:87
 #, c-format
 msgid "Launch the sound system on your machine"
-msgstr "Aktifkan sistem suara"
+msgstr "Jalankan sistem suara pada komputer Anda"
 
 #: services.pm:88
 #, c-format
@@ -15977,12 +15991,12 @@ msgid ""
 "to various system log files.  It is a good idea to always run syslog."
 msgstr ""
 "Syslog adalah fasilitas yang digunakan para daemon untuk mencatat\n"
-"pesan log sistem di file. Sebaiknya syslog selalu hidup."
+"pesan log sistem pada file. Sebaiknya syslog selalu hidup."
 
 #: services.pm:90
 #, c-format
 msgid "Load the drivers for your usb devices."
-msgstr "Muat driver divais USB"
+msgstr "Muat driver untuk divais USB Anda"
 
 #: services.pm:91
 #, c-format
@@ -17455,7 +17469,7 @@ msgid ""
 msgstr ""
 
 #: standalone.pm:69
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Font Importation and monitoring application\n"
@@ -17471,7 +17485,10 @@ msgid ""
 "                 : name_of_application like  so for staroffice \n"
 "                 : and gs for ghostscript for only this one."
 msgstr ""
+"\n"
 "Impor Font dan aplikasi pemantauan\n"
+"\n"
+"OPSI:\n"
 "--windows_import : impor dari seluruh partisi mindows yg ada.\n"
 "--xls_fonts      : tampilkan semua font yg telah ada dari xls\n"
 "--strong         : font akan dicek secara ketat.\n"
@@ -17484,7 +17501,7 @@ msgstr ""
 "                 : dan gs untuk ghostscript."
 
 #: standalone.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[OPTIONS]...\n"
 "Mandrakelinux Terminal Server Configurator\n"
@@ -17785,9 +17802,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakTermServ:509
-#, fuzzy, c-format
+#, c-format
 msgid "Terminal Server Overview"
-msgstr "Overview drakTermServ"
+msgstr "Gambaran Umum Server Terminal"
 
 #: standalone/drakTermServ:510
 #, fuzzy, c-format
@@ -18405,7 +18422,7 @@ msgstr "Tak berguna tanpa Server Terminal"
 #: standalone/drakTermServ:1718
 #, fuzzy, c-format
 msgid "Deleted %s...\n"
-msgstr "Terdeteksi %s"
+msgstr "Terdeteksi %s...\n"
 
 #: standalone/drakTermServ:1720 standalone/drakTermServ:1793
 #, c-format
