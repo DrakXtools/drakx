@@ -491,7 +491,7 @@ sub install_yaboot($$$) {
 			print F "$_->{type}=$of_dev,$_->{kernel_or_dev}";
 	    	print F "\tlabel=", substr($_->{label}, 0, 15); #- lilo doesn't handle more than 15 char long labels
 			print F "\troot=$_->{root}";
-			print F "\tinitrd=$_->{initrd}" if $_->{initrd};
+			print F "\tinitrd=$of_dev,$_->{initrd}" if $_->{initrd};
 			print F "\tappend=\"$_->{append}\"" if $_->{append};
 			print F "\tread-write" if $_->{'read-write'};
 			print F "\tread-only" if !$_->{'read-write'};

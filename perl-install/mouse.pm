@@ -63,7 +63,8 @@ my %mice =
 
  __("busmouse") =>
  [ [ arch() eq 'ppc' ? 'adbmouse' : ('atibm', 'inportbm', 'logibm') ],
-   [ [ 2, 'Busmouse', 'BusMouse', __("2 buttons") ],
+   [ if_(arch() eq 'ppc', [ 1, 'Busmouse', 'BusMouse', __("1 button") ]),
+     [ 2, 'Busmouse', 'BusMouse', __("2 buttons") ],
      [ 3, 'Busmouse', 'BusMouse', __("3 buttons") ],
    ]],
 
@@ -199,7 +200,7 @@ sub detect() {
 			      "USB|Generic" :
 			      # No need to search for an ADB mouse.  If I did, the PPC kernel would
 			      # find one whether or not I had one installed!  So..  default to it.
-			      "busmouse|2 buttons");
+			      "busmouse|1 button");
     }
     
     if ($::isStandalone) {

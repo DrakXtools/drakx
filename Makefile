@@ -9,10 +9,17 @@ ifeq (sparc,$(ARCH))
 BOOT_IMG = live.img tftp.img tftprd.img live64.img tftp64.img tftprd64.img
 RELEASE_BOOT_IMG += hd64.img cdrom64.img network64.img
 endif
+ifeq (ppc,$(ARCH))
+BOOT_IMG = 
+RELEASE_BOOT_IMG = all.img
+endif
 BOOT_IMG += $(RELEASE_BOOT_IMG)
 
 BOOT_RDZ = $(BOOT_IMG:%.img=%.rdz)
 BINS = mdk-stage1/init mdk-stage1/stage1-full mdk-stage1/stage1-cdrom mdk-stage1/stage1-network
+ifeq (ppc,$(ARCH))
+BINS = mdk-stage1/init mdk-stage1/stage1-full 
+endif
 DIRS = tools mdk-stage1 perl-install
 
 ROOTDEST = /export
@@ -25,7 +32,9 @@ UPLOAD_SPARC_DEST = /mnt/BIG/distrib/sparc
 
 install: build autoboot rescue
 	for i in images misc Mandrake Mandrake/base; do install -d $(ROOTDEST)/$$i ; done
+ifneq (ppc,$(ARCH))
 	cp -f $(RELEASE_BOOT_IMG) $(ROOTDEST)/images
+endif
 ifeq (alpha,$(ARCH))
 	cp -f $(BOOT_RDZ) $(ROOTDEST)/boot
 	cp -f vmlinux.gz $(ROOTDEST)/boot/instboot.gz

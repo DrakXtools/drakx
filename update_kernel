@@ -60,7 +60,11 @@ if [ "$ARCH" == "i386" ]; then
 
     rm -rf install_pcmcia_modules ; install -d install_pcmcia_modules
 else
-    cp -f "$KERNEL_BOOT_PATH"/boot/vmlinux.gz .
+    if [ "$ARCH" == "ppc" ]; then
+        cp -f "$KERNEL_BOOT_PATH"/boot/vmlinux .
+    else
+        cp -f "$KERNEL_BOOT_PATH"/boot/vmlinux.gz .
+    fi
 fi
 cp -f $KERNEL_BOOT_PATH/boot/System.map* System.map
 
