@@ -84,9 +84,6 @@ mo_files : $(MOFILES)
 get_needed_files: $(DIRS) mo_files
 	$(MAKE) -C share
 
-	@if rpm -q XFree86-VGA16 | grep -q 29mdk; then echo "XFree86-VGA16 29mdk is bad, downgrade to 28mdk" ; exit 1 ; fi
-
-#	export PERL_INSTALL_TEST=1 ; strace -f -e trace=file -o '| grep -v "(No such file or directory)" | sed -e "s/[^\"]*\"//" -e "s/\".*//" | grep "^/" | grep -v -e "^/tmp" -e "^/home" -e "^/proc" -e "^/var" -e "^/dev" -e "^/etc" -e "^/usr/lib/rpm" > /tmp/list ' $(PERL) -d install2 < /dev/null
 	eval `perl -V:version`; \
 	cat share/list `../tools/specific_arch share/list` | \
 	perl -pe "s/ARCH/$(ARCH)/g ; s/PERL_VERSION/$$version/g ; s|/LIB/|/$(LIB)/|g " | \
