@@ -410,7 +410,7 @@ sub get_user_or_group {
     my @users;
      
     local $_;
-    while (cat_($what eq 'users' ? '/etc/passwd' : '/etc/group')) {
+    foreach (cat_($what eq 'users' ? '/etc/passwd' : '/etc/group')) {
      m/^([^#:]+):[^:]+:[^:]+:/ or next;
      push @users, $1;
     }
