@@ -79,7 +79,7 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 
 			strcpy(install_location, IMAGE_LOCATION);
 
-			if (IS_SPECIAL_STAGE2 || ramdisk_possible())
+			if (IS_RESCUE || ramdisk_possible())
 				strcat(install_location, get_ramdisk_realname()); /* RAMDISK install */
 			else
 				strcat(install_location, LIVE_LOCATION); /* LIVE install */
@@ -143,7 +143,7 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 		add_to_env("METHOD", method_live);
 	}
 #ifndef MANDRAKE_MOVE
-	if (IS_SPECIAL_STAGE2 || ((loopdev || streq(method_live, "disk")) && ramdisk_possible())) {
+	if (IS_RESCUE || ((loopdev || streq(method_live, "disk")) && ramdisk_possible())) {
 		/* RAMDISK install */
 		if (access(IMAGE_LOCATION RAMDISK_LOCATION, R_OK)) {
 			stg1_error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "

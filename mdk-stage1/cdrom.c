@@ -75,7 +75,7 @@ static enum return_type do_with_device(char * dev_name, char * dev_model)
 	log_message("found a " DISTRIB_NAME " CDROM, good news!");
 
 #ifndef MANDRAKE_MOVE
-	if (IS_SPECIAL_STAGE2 || ramdisk_possible())
+	if (IS_RESCUE || ramdisk_possible())
 		load_ramdisk(); /* we don't care about return code, we'll do it live if we failed */
 #endif
 

@@ -108,7 +108,6 @@ void process_cmdline(void)
 		if (!strcmp(name, "noauto")) set_param(MODE_NOAUTO);
 		if (!strcmp(name, "netauto")) set_param(MODE_NETAUTO);
 		if (!strcmp(name, "recovery")) set_param(MODE_RECOVERY);
-		if (!strcmp(name, "special_stage2")) set_param(MODE_SPECIAL_STAGE2);
 		if (!strcmp(name, "debugstage1")) set_param(MODE_DEBUGSTAGE1);
 		if (!strcmp(name, "automatic")) {
 			set_param(MODE_AUTOMATIC);
@@ -182,10 +181,6 @@ void set_param_valued(char *param_name, char *param_value)
 void set_param(int i)
 {
 	stage1_mode |= i;
-	if (i == MODE_RESCUE) {
-		set_param_valued("special_stage2", "rescue");
-		set_param(MODE_SPECIAL_STAGE2);
-	}
 }
 
 void unset_param(int i)
@@ -368,19 +363,10 @@ enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 char * get_ramdisk_realname(void)
 {
 	char img_name[500];
-	char * stg2_name = get_param_valued("special_stage2");
-	char * begin_img = RAMDISK_LOCATION;
-	char * end_img = "_stage2.bz2";
-
-	if (!stg2_name)
-		stg2_name = "mdkinst";
-
-	if (IS_RESCUE)
-		stg2_name = "rescue";
 	
-	strcpy(img_name, begin_img);
-	strcat(img_name, stg2_name);
-	strcat(img_name, end_img);
+	strcpy(img_name, RAMDISK_LOCATION);
+	strcat(img_name, IS_RESCUE ? "rescue" : "mdkinst");
+	strcat(img_name, "_stage2.bz2");
 
 	return strdup(img_name);
 }
