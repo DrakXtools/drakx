@@ -95,6 +95,10 @@ sub vnew {
 	    if ($icon && $icon ne 'default' && !$::isWizard) { $o->{icon} = $icon } else { undef $o->{icon} }
 	    return $o;
 	}
+    } else {
+	if ($su && $>) {
+	    exec {'consolehelper'} $0, @ARGV or die _("consolehelper missing");
+	}
     }
 
     if ($su && $>) {
