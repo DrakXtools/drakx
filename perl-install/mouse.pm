@@ -438,7 +438,7 @@ sub test_mouse_standalone {
     ugtk2->import(qw(:wrappers));
     my $darea = Gtk2::DrawingArea->new;
     $darea->set_events([ 'button_press_mask', 'button_release_mask' ]);  #$darea must be unrealized.
-    gtkpack($hbox, gtkpack(gtkset_border_width(Gtk2::VBox->new(0,10), 10), $darea));
+    gtkpack($hbox, gtkpack(gtkset_border_width(Gtk2::VBox->new(0, 10), 10), $darea));
     test_mouse($mouse, $darea);
 }
 
