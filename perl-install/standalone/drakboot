@@ -54,7 +54,6 @@ fs::get_mntpoints_from_fstab($fstab);
 
 ask:
 any::setupBootloader($in, $bootloader, $hds, $fstab, $ENV{SECURE_LEVEL}) or $in->exit(0);
-
 eval { bootloader::install('', $bootloader, $fstab, $hds) };
 
 if ($@) {
@@ -65,4 +64,6 @@ if ($@) {
     goto ask;
 }
 
-$in->exit(0);
+!$::isEmbedded and $in->exit(0);
+kill(USR1, $::CCPID);
+goto ask;
