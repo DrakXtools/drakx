@@ -152,7 +152,7 @@ sub get_usb_storage_info {
 	if (@choices > 1) {
 	    @choices = grep { $_->{info} =~ /^\Q$usbs{$host}{vendor_name}/ } @choices;
 	    @choices or log::l("weird, can't find the good entry host$host from /proc/scsi/usb-storage-*/* in /proc/scsi/scsi"), next;
-	    @choices == 1 or log::l("argh, can't determine the good entry host$host from /proc/scsi/usb-storage-*/* in /proc/scsi/scsi"), next;
+	    @choices == 1 or log::l("argh, can't determine the good entry host$host from /proc/scsi/usb-storage-*/* in /proc/scsi/scsi"), next
 	}
 	add2hash($choices[0], $usbs{$host});
 	push @informed, $choices[0];
@@ -494,7 +494,7 @@ sub stringlist {
 		$_->{description} eq '(null)' ? sprintf("Vendor=0x%04x Device=0x%04x", $_->{vendor}, $_->{id}) : $_->{description},
 		$_->{media_type} ? sprintf(" [%s]", $_->{media_type}) : '',
 		$_->{subid} && $_->{subid} != 0xffff ? sprintf(" SubVendor=0x%04x SubDevice=0x%04x", $_->{subvendor}, $_->{subid}) : '',
-	       );
+	       )
     } probeall(@_); 
 }
 

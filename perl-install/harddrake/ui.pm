@@ -157,7 +157,7 @@ sub new {
     unless ($::isEmbedded) {
         $in = 'interactive'->vnew('su', 'default');
         $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
-        my_gtk::flush;
+        my_gtk::flush();
     }
     %options = getVarsFromSh($conffile);
     my @class_tree = &detect;
@@ -198,9 +198,9 @@ sub new {
     $cmap->color_alloc($wcolor);
     $tree->set_column_auto_resize(0, 1);
 
-    $tree->signal_connect( 'select_row', sub {
-        my ( $ctree, $row, $column, $event ) = @_;
-        my $node = $ctree->node_nth( $row );
+    $tree->signal_connect('select_row', sub {
+        my ($ctree, $row, $column, $event) = @_;
+        my $node = $ctree->node_nth($row);
         my ($name, undef) = $tree->node_get_pixtext($node,0);
         my $data = $tree->{data}{$name};
 
@@ -247,7 +247,7 @@ sub new {
 
     # Fill the graphic tree with a "tree branch" widget per device category
     foreach (@class_tree) {
-        my ($devices_list, $arg, $icon, $arg2, $title, $configurator ) = @$_;
+        my ($devices_list, $arg, $icon, $arg2, $title, $configurator) = @$_;
         my $hw_class_tree = $tree->insert_node(undef, undef, @$arg, (gtkcreate_png($icon)) x 2, @$arg2);
         # Fill the graphic tree with a "tree leaf" widget per device
         foreach (@$devices_list) {
@@ -273,7 +273,7 @@ sub new {
 
 
 sub quit_global {
-    kill(15, $pid) if ($pid);
+    kill(15, $pid) if $pid;
     setVarsInSh($conffile, \%options);
     $w->{rwindow}->destroy;
     $in->exit;
