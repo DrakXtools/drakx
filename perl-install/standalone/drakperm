@@ -244,11 +244,7 @@ sub row_setting_dialog {
     my $browse = new Gtk2::Button(N("browse"));
     my $file        = new Gtk2::Entry;
     my ($id_box, $usr_check);
-    my $rght = $model->get($iter, 4) if $iter;
-    my $s = length($rght) == 4 ? substr($rght,0,1) : 0;
-    my $user  = $s ? substr($rght,1,1) : substr($rght,0,1);
-    my $group = $s ? substr($rght,2,1) : substr($rght,1,1);
-    my $other = $s ? substr($rght,3,1) : substr($rght,2,1);
+    my ($other, $group, $user, $s) = reverse(split(//, $model->get($iter, 4))) if $iter;
     my @bits = qw(sticky gid suid);
     my @rights = qw(read write execute);
     my @owners = qw(user group other);
@@ -317,11 +313,9 @@ sub row_setting_dialog {
                                 $model->set($iter, 2 => $users->entry->get_text);
                                 $model->set($iter, 3 => $groups->entry->get_text);
                             }
-                            $user = ($perms{user}{read}->get_active ? 4 : 0)+($perms{user}{write}->get_active ? 2 : 0)+($perms{user}{execute}->get_active ? 1 : 0);
-                            $group = ($perms{group}{read}->get_active ? 4 : 0)+($perms{group}{write}->get_active ? 2 : 0)+($perms{group}{execute}->get_active ? 1 : 0);
-                            $other = ($perms{other}{read}->get_active ? 4 : 0)+($perms{other}{write}->get_active ? 2 : 0)+($perms{other}{execute}->get_active ? 1 : 0);
-                            my $s = ($sticky->get_active ? 1 : 0) + ($suid->get_active ? 4 : 0) + ($gid->get_active ? 2 : 0);
-                            $model->set($iter, 4 => ($s || '') . $user . $group . $other);
+                            $model->set($iter, 4 => sprintf("%o", eval(join('', "0b",
+                                                                            (map { $perms{$_}->get_active || 0 } reverse @bits),
+                                                                            (map { my $owner = $_;map_index { $perms{$owner}{$_}->get_active || 0 } @rights } @owners)))));
                             $dlg->destroy;
                             $modified++;
                         });
