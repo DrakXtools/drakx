@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 13mdk
+Release: 14mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -315,6 +315,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Sep 17 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-14mdk
+- printerdrake: fix cups configuration regarding commented out rules
+
 * Wed Sep 17 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-13mdk
 - diskdrake: (pixel)
   o fix writting wrong types in fstab
