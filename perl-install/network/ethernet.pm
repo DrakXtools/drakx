@@ -14,7 +14,7 @@ use vars qw(@ISA @EXPORT);
 @EXPORT = qw(conf_network_card_backend);
 
 # FIXME: unused code to merge in into wizard
-sub ether_conf {
+sub write_ether_conf {
     my ($in, $netcnx, $netc, $intf) = @_;
     configureNetwork2($in, $::prefix, $netc, $intf);
     $netc->{NETWORKING} = "yes";
