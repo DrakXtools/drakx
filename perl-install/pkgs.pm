@@ -775,6 +775,7 @@ sub init_db {
     log::l("\tdone");
 
     if ($isUpgrade) {
+	log::l("rebuilding rpm database");
 	c::rpmdbRebuild($prefix) or die "rebuilding of rpm database failed: ", c::rpmErrorString();
     }
     #- seems no more necessary to rpmdbInit ?
@@ -824,11 +825,9 @@ sub selectPackagesAlreadyInstalled {
 			 }
 		     });
 
-    log::l("before closing db");
     #- close db, job finished !
     c::rpmdbClose($db);
     log::l("done selecting packages to upgrade");
-
 }
 
 sub selectPackagesToUpgrade($$$;$$) {
@@ -1083,7 +1082,6 @@ sub selectPackagesToUpgrade($$$;$$) {
 			 });
     }
 
-    log::l("before closing db");
     #- close db, job finished !
     c::rpmdbClose($db);
     log::l("done selecting packages to upgrade");
