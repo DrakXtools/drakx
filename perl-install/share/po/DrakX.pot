@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2000-09-28 14:46+0200\n"
+"POT-Creation-Date: 2000-09-29 18:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -486,7 +486,7 @@ msgid "Delay before booting default image"
 msgstr ""
 
 #: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:772
-#: ../../install_steps_interactive.pm_.c:823 ../../netconnect.pm_.c:507
+#: ../../install_steps_interactive.pm_.c:823 ../../netconnect.pm_.c:519
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
 #: ../../standalone/adduserdrake_.c:42
 msgid "Password"
@@ -539,7 +539,7 @@ msgid "Add"
 msgstr ""
 
 #: ../../any.pm_.c:165 ../../diskdrake.pm_.c:45
-#: ../../install_steps_interactive.pm_.c:817 ../../netconnect.pm_.c:746
+#: ../../install_steps_interactive.pm_.c:817 ../../netconnect.pm_.c:798
 #: ../../printerdrake.pm_.c:353 ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr ""
@@ -618,54 +618,54 @@ msgstr ""
 msgid "This label is already used"
 msgstr ""
 
-#: ../../any.pm_.c:498
+#: ../../any.pm_.c:499
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr ""
 
-#: ../../any.pm_.c:499
+#: ../../any.pm_.c:500
 msgid "Do you have another one?"
 msgstr ""
 
-#: ../../any.pm_.c:500
+#: ../../any.pm_.c:501
 #, c-format
 msgid "Do you have any %s interfaces?"
 msgstr ""
 
-#: ../../any.pm_.c:502 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
-#: ../../netconnect.pm_.c:78 ../../netconnect.pm_.c:428
+#: ../../any.pm_.c:503 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
+#: ../../netconnect.pm_.c:80 ../../netconnect.pm_.c:439
 #: ../../printerdrake.pm_.c:234
 msgid "No"
 msgstr ""
 
-#: ../../any.pm_.c:502 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
-#: ../../netconnect.pm_.c:76 ../../netconnect.pm_.c:426
+#: ../../any.pm_.c:503 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
+#: ../../netconnect.pm_.c:78 ../../netconnect.pm_.c:437
 msgid "Yes"
 msgstr ""
 
-#: ../../any.pm_.c:503
+#: ../../any.pm_.c:504
 msgid "See hardware info"
 msgstr ""
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
-#: ../../any.pm_.c:520
+#: ../../any.pm_.c:521
 #, c-format
 msgid "Installing driver for %s card %s"
 msgstr ""
 
-#: ../../any.pm_.c:521
+#: ../../any.pm_.c:522
 #, c-format
 msgid "(module %s)"
 msgstr ""
 
 #. -PO: the %s is the driver type (scsi, network, sound,...)
-#: ../../any.pm_.c:532
+#: ../../any.pm_.c:533
 #, c-format
 msgid "Which %s driver should I try?"
 msgstr ""
 
-#: ../../any.pm_.c:540
+#: ../../any.pm_.c:541
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
@@ -677,20 +677,20 @@ msgid ""
 "not cause any damage."
 msgstr ""
 
-#: ../../any.pm_.c:545
+#: ../../any.pm_.c:546
 msgid "Autoprobe"
 msgstr ""
 
-#: ../../any.pm_.c:545
+#: ../../any.pm_.c:546
 msgid "Specify options"
 msgstr ""
 
-#: ../../any.pm_.c:549
+#: ../../any.pm_.c:550
 #, c-format
 msgid "You may now provide its options to module %s."
 msgstr ""
 
-#: ../../any.pm_.c:555
+#: ../../any.pm_.c:556
 #, c-format
 msgid ""
 "You may now provide its options to module %s.\n"
@@ -698,11 +698,11 @@ msgid ""
 "For instance, ``io=0x300 irq=7''"
 msgstr ""
 
-#: ../../any.pm_.c:558
+#: ../../any.pm_.c:559
 msgid "Module options:"
 msgstr ""
 
-#: ../../any.pm_.c:568
+#: ../../any.pm_.c:569
 #, c-format
 msgid ""
 "Loading module %s failed.\n"
@@ -756,16 +756,16 @@ msgstr ""
 msgid "Start Menu"
 msgstr ""
 
-#: ../../common.pm_.c:599
+#: ../../common.pm_.c:610
 #, c-format
 msgid "%d minutes"
 msgstr ""
 
-#: ../../common.pm_.c:601
+#: ../../common.pm_.c:612
 msgid "1 minute"
 msgstr ""
 
-#: ../../common.pm_.c:603
+#: ../../common.pm_.c:614
 #, c-format
 msgid "%d seconds"
 msgstr ""
@@ -1444,10 +1444,10 @@ msgid ""
 "\n"
 "\n"
 "\t* Customized: if you are familiar enough with GNU/Linux, you may choose "
-"the primary usge (workstation, server,\n"
+"the primary usage (workstation, server,\n"
 "\t  development) of your sytem. You will need to answer to more questions "
 "than in \"Recommanded\" installation\n"
-"\t  class, so you need to know how works GNU/Linux to choose this "
+"\t  class, so you need to know how GNU/Linux works to choose this "
 "installation class.\n"
 "\n"
 "\n"
@@ -1548,7 +1548,7 @@ msgid ""
 "Because the effects of the partitioning process are usually irreversible,\n"
 "partitioning can be intimidating and stressful if you are an inexperienced "
 "user.\n"
-"This wizard simplifies this process. Before begining, please consult the "
+"This wizard simplifies this process. Before beginning, please consult the "
 "manual\n"
 "and take your time.\n"
 "\n"
@@ -2658,24 +2658,24 @@ msgid ""
 "When you are done, don't forget to save using `w'"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:202
+#: ../../install_interactive.pm_.c:203
 msgid "I can't find any room for installing"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:205
+#: ../../install_interactive.pm_.c:206
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:210
+#: ../../install_interactive.pm_.c:211
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:225
+#: ../../install_interactive.pm_.c:226
 msgid "Bringing up the network"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:230
+#: ../../install_interactive.pm_.c:231
 msgid "Bringing down the network"
 msgstr ""
 
@@ -2690,7 +2690,7 @@ msgstr ""
 msgid "Duplicate mount point %s"
 msgstr ""
 
-#: ../../install_steps.pm_.c:379
+#: ../../install_steps.pm_.c:376
 msgid ""
 "Some important packages didn't get installed properly.\n"
 "Either your cdrom drive or your cdrom is defective.\n"
@@ -2698,12 +2698,12 @@ msgid ""
 "Mandrake/RPMS/*.rpm\"\n"
 msgstr ""
 
-#: ../../install_steps.pm_.c:452
+#: ../../install_steps.pm_.c:448
 #, c-format
 msgid "Welcome to %s"
 msgstr ""
 
-#: ../../install_steps.pm_.c:664
+#: ../../install_steps.pm_.c:660
 msgid "No floppy drive available"
 msgstr ""
 
@@ -2940,6 +2940,10 @@ msgstr ""
 msgid "Please, choose a language to use."
 msgstr ""
 
+#: ../../install_steps_interactive.pm_.c:70
+msgid "License agreement"
+msgstr ""
+
 #: ../../install_steps_interactive.pm_.c:71
 msgid ""
 " Introduction\n"
@@ -2957,7 +2961,7 @@ msgid ""
 "\n"
 "Please read carefully this document. This document is a license agreement "
 "between you and  \n"
-"MandrakeSoft S.A., 42, rue d'Aboukir, 75002 Paris - France, which applies to "
+"MandrakeSoft S.A., 43, rue d'Aboukir, 75002 Paris - France, which applies to "
 "the Software Products.\n"
 "By installing, duplicating or using the Software Products in any manner, you "
 "explicitly \n"
@@ -3099,7 +3103,7 @@ msgid ""
 "the dispute will be referred to the appropriate Courts of Law of Paris - "
 "France.\n"
 "For any question on this document, please contact MandrakeSoft S.A.,  \n"
-"42, rue d'Aboukir, 75002 Paris - France\n"
+"43, rue d'Aboukir, 75002 Paris - France\n"
 msgstr ""
 
 #: ../../install_steps_interactive.pm_.c:173
@@ -4072,102 +4076,94 @@ msgstr ""
 msgid "Is this correct?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:81
+#: ../../netconnect.pm_.c:83
 msgid "Internet configuration"
 msgstr ""
 
-#: ../../netconnect.pm_.c:82
-msgid "Do you want to try to connect to the internet now?"
+#: ../../netconnect.pm_.c:84
+msgid "Do you want to try to connect to the Internet now?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:117 ../../netconnect.pm_.c:191
+#: ../../netconnect.pm_.c:119 ../../netconnect.pm_.c:191
 #: ../../netconnect.pm_.c:210 ../../netconnect.pm_.c:222
 #: ../../netconnect.pm_.c:234
 msgid "ISDN Configuration"
 msgstr ""
 
-#: ../../netconnect.pm_.c:117
+#: ../../netconnect.pm_.c:119
 msgid ""
 "Select your provider.\n"
 " If it's not in the list, choose Unlisted"
 msgstr ""
 
-#: ../../netconnect.pm_.c:134
+#: ../../netconnect.pm_.c:136
 msgid "Connection Configuration"
 msgstr ""
 
-#: ../../netconnect.pm_.c:135
+#: ../../netconnect.pm_.c:137
 msgid "Please fill or check the field below"
 msgstr ""
 
-#: ../../netconnect.pm_.c:137
+#: ../../netconnect.pm_.c:139
 msgid "Card IRQ"
 msgstr ""
 
-#: ../../netconnect.pm_.c:138
+#: ../../netconnect.pm_.c:140
 msgid "Card mem (DMA)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:139
+#: ../../netconnect.pm_.c:141
 msgid "Card IO"
 msgstr ""
 
-#: ../../netconnect.pm_.c:140
+#: ../../netconnect.pm_.c:142
 msgid "Card IO_0"
 msgstr ""
 
-#: ../../netconnect.pm_.c:141
+#: ../../netconnect.pm_.c:143
 msgid "Card IO_1"
 msgstr ""
 
-#: ../../netconnect.pm_.c:142
+#: ../../netconnect.pm_.c:144
 msgid "Your personnal phone number"
 msgstr ""
 
-#: ../../netconnect.pm_.c:144
+#: ../../netconnect.pm_.c:146
 msgid "Provider name (ex provider.net)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:145
+#: ../../netconnect.pm_.c:147
 msgid "Provider phone number"
 msgstr ""
 
-#: ../../netconnect.pm_.c:146
+#: ../../netconnect.pm_.c:148
 msgid "Provider dns 1"
 msgstr ""
 
-#: ../../netconnect.pm_.c:147
+#: ../../netconnect.pm_.c:149
 msgid "Provider dns 2"
 msgstr ""
 
-#: ../../netconnect.pm_.c:148
+#: ../../netconnect.pm_.c:150
 msgid "Dialing mode"
 msgstr ""
 
-#: ../../netconnect.pm_.c:149
+#: ../../netconnect.pm_.c:151
 msgid ""
 "Time (secs) of inactivity after which\n"
 "it hangs up. (leave blank to disable it)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:150
+#: ../../netconnect.pm_.c:152
 msgid "Account Login (user name)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:151
+#: ../../netconnect.pm_.c:153
 msgid "Account Password"
 msgstr ""
 
-#: ../../netconnect.pm_.c:152
+#: ../../netconnect.pm_.c:154
 msgid "Confirm Password"
-msgstr ""
-
-#: ../../netconnect.pm_.c:184
-msgid "Germany"
-msgstr ""
-
-#: ../../netconnect.pm_.c:184
-msgid "Germany (1TR6)"
 msgstr ""
 
 #: ../../netconnect.pm_.c:186
@@ -4236,229 +4232,262 @@ msgid ""
 "one PCI card on the next screen."
 msgstr ""
 
-#: ../../netconnect.pm_.c:275
+#: ../../netconnect.pm_.c:277
 msgid "No ISDN PCI card found. Please select one on the next screen."
 msgstr ""
 
-#: ../../netconnect.pm_.c:306
+#: ../../netconnect.pm_.c:309
 msgid ""
 "No ethernet network adapter has been detected on your system.\n"
 "I cannot set up this connection type."
 msgstr ""
 
-#: ../../netconnect.pm_.c:310 ../../standalone/drakgw_.c:222
+#: ../../netconnect.pm_.c:313 ../../standalone/drakgw_.c:222
 msgid "Choose the network interface"
 msgstr ""
 
-#: ../../netconnect.pm_.c:311
+#: ../../netconnect.pm_.c:314
 msgid ""
-"Please choose which network adapter you want to use to connect to internet"
+"Please choose which network adapter you want to use to connect to Internet"
 msgstr ""
 
-#: ../../netconnect.pm_.c:327 ../../netconnect.pm_.c:560
-#: ../../netconnect.pm_.c:685 ../../standalone/drakgw_.c:217
+#: ../../netconnect.pm_.c:329 ../../netconnect.pm_.c:599
+#: ../../netconnect.pm_.c:725 ../../standalone/drakgw_.c:217
 msgid "Network interface"
 msgstr ""
 
-#: ../../netconnect.pm_.c:328
+#: ../../netconnect.pm_.c:330
 msgid "I'm about to restart the network device $device. Do you agree?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:431
+#: ../../netconnect.pm_.c:442
 msgid "ADSL configuration"
 msgstr ""
 
-#: ../../netconnect.pm_.c:432
+#: ../../netconnect.pm_.c:443
 msgid "Do you want to start your connection at boot?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:488
+#: ../../netconnect.pm_.c:500
 msgid "Try to find a modem?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:498
+#: ../../netconnect.pm_.c:510
 msgid "Please choose which serial port your modem is connected to."
 msgstr ""
 
-#: ../../netconnect.pm_.c:503
+#: ../../netconnect.pm_.c:515
 msgid "Dialup options"
 msgstr ""
 
-#: ../../netconnect.pm_.c:504
+#: ../../netconnect.pm_.c:516
 msgid "Connection name"
 msgstr ""
 
-#: ../../netconnect.pm_.c:505
+#: ../../netconnect.pm_.c:517
 msgid "Phone number"
 msgstr ""
 
-#: ../../netconnect.pm_.c:506
+#: ../../netconnect.pm_.c:518
 msgid "Login ID"
 msgstr ""
 
-#: ../../netconnect.pm_.c:508
+#: ../../netconnect.pm_.c:520
 msgid "Authentication"
 msgstr ""
 
-#: ../../netconnect.pm_.c:508
+#: ../../netconnect.pm_.c:520
 msgid "PAP"
 msgstr ""
 
-#: ../../netconnect.pm_.c:508
+#: ../../netconnect.pm_.c:520
 msgid "Script-based"
 msgstr ""
 
-#: ../../netconnect.pm_.c:508
+#: ../../netconnect.pm_.c:520
 msgid "Terminal-based"
 msgstr ""
 
-#: ../../netconnect.pm_.c:509
+#: ../../netconnect.pm_.c:521
 msgid "Domain name"
 msgstr ""
 
-#: ../../netconnect.pm_.c:511
+#: ../../netconnect.pm_.c:523
 msgid "First DNS Server"
 msgstr ""
 
-#: ../../netconnect.pm_.c:512
+#: ../../netconnect.pm_.c:524
 msgid "Second DNS Server"
 msgstr ""
 
-#: ../../netconnect.pm_.c:536
-msgid "Connect to internet"
+#: ../../netconnect.pm_.c:553
+msgid ""
+"\n"
+"You can disconnect or reconfigure your connection."
 msgstr ""
 
-#: ../../netconnect.pm_.c:538
-msgid "Disconnect from internet"
+#: ../../netconnect.pm_.c:553 ../../netconnect.pm_.c:557
+msgid ""
+"\n"
+"You can reconfigure your connection."
 msgstr ""
 
-#: ../../netconnect.pm_.c:540
-msgid "Configure internet connection"
+#: ../../netconnect.pm_.c:553
+msgid "You are currently connected to Internet and everything seems to work."
 msgstr ""
 
-#: ../../netconnect.pm_.c:543
+#: ../../netconnect.pm_.c:557
+msgid ""
+"\n"
+"You can connect to Internet or reconfigure your connection."
+msgstr ""
+
+#: ../../netconnect.pm_.c:557
+msgid "You are not currently connected to Internet."
+msgstr ""
+
+#: ../../netconnect.pm_.c:560
+msgid ""
+"The interface $netcnx->{NET_INTERFACE} is configured and loaded, but you "
+"cannot access to Internet.\n"
+"I suggest you to disconnect, and reconfigure the Internet connection."
+msgstr ""
+
+#: ../../netconnect.pm_.c:566
+msgid "Connect to Internet"
+msgstr ""
+
+#: ../../netconnect.pm_.c:568
+msgid "Disconnect from Internet"
+msgstr ""
+
+#: ../../netconnect.pm_.c:570
+msgid "Configure Internet connection"
+msgstr ""
+
+#: ../../netconnect.pm_.c:573
 msgid "Internet connection & configuration"
 msgstr ""
 
-#: ../../netconnect.pm_.c:544
-msgid "What do you wish to do?"
-msgstr ""
-
-#: ../../netconnect.pm_.c:561 ../../netconnect.pm_.c:686
+#: ../../netconnect.pm_.c:600 ../../netconnect.pm_.c:726
 msgid ""
 "I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:575
-msgid "Connect to internet with a normal modem"
-msgstr ""
-
-#: ../../netconnect.pm_.c:593
-msgid "Connect to internet using ISDN"
-msgstr ""
-
-#: ../../netconnect.pm_.c:598
-msgid "Internal ISDN card"
-msgstr ""
-
-#: ../../netconnect.pm_.c:600
-msgid "External ISDN modem"
-msgstr ""
-
-#: ../../netconnect.pm_.c:603 ../../netconnect.pm_.c:636
-#: ../../netconnect.pm_.c:648 ../../netconnect.pm_.c:672
-#: ../../netconnect.pm_.c:719
-msgid "Connect to the Internet"
-msgstr ""
-
-#: ../../netconnect.pm_.c:604
-msgid "What kind is your ISDN connection?"
-msgstr ""
-
-#: ../../netconnect.pm_.c:622
-msgid "Connect to internet using DSL (or ADSL)"
-msgstr ""
-
-#: ../../netconnect.pm_.c:631
-msgid "France"
+#: ../../netconnect.pm_.c:615
+msgid "Connect to Internet with a normal modem"
 msgstr ""
 
 #: ../../netconnect.pm_.c:633
-msgid "Other countries"
+msgid "Connect to Internet using ISDN"
 msgstr ""
 
-#: ../../netconnect.pm_.c:637
-msgid "In which country are you located ?"
+#: ../../netconnect.pm_.c:638
+msgid "Internal ISDN card"
 msgstr ""
 
-#: ../../netconnect.pm_.c:643
-msgid "Alcatel modem"
+#: ../../netconnect.pm_.c:640
+msgid "External ISDN modem"
 msgstr ""
 
-#: ../../netconnect.pm_.c:645
-msgid "ECI modem"
+#: ../../netconnect.pm_.c:643 ../../netconnect.pm_.c:676
+#: ../../netconnect.pm_.c:688 ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:759
+msgid "Connect to the Internet"
 msgstr ""
 
-#: ../../netconnect.pm_.c:649
-msgid "If your adsl modem is an Alcatel one, choose Alcatel. Otherwise, ECI."
+#: ../../netconnect.pm_.c:644
+msgid "What kind is your ISDN connection?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:667
-msgid "use pppoe"
+#: ../../netconnect.pm_.c:662
+msgid "Connect to Internet using DSL (or ADSL)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:669
-msgid "don't use pppoe"
+#: ../../netconnect.pm_.c:671
+msgid "France"
 msgstr ""
 
 #: ../../netconnect.pm_.c:673
+msgid "Other countries"
+msgstr ""
+
+#: ../../netconnect.pm_.c:677
+msgid "In which country are you located ?"
+msgstr ""
+
+#: ../../netconnect.pm_.c:683
+msgid "Alcatel modem"
+msgstr ""
+
+#: ../../netconnect.pm_.c:685
+msgid "ECI modem"
+msgstr ""
+
+#: ../../netconnect.pm_.c:689
+msgid "If your adsl modem is an Alcatel one, choose Alcatel. Otherwise, ECI."
+msgstr ""
+
+#: ../../netconnect.pm_.c:707
+msgid "use pppoe"
+msgstr ""
+
+#: ../../netconnect.pm_.c:709
+msgid "don't use pppoe"
+msgstr ""
+
+#: ../../netconnect.pm_.c:713
 msgid ""
 "The most common way to connect with adsl is dhcp + pppoe.\n"
 "However, it exists some connection that only use dhcp.\n"
 "If you don't know, choose 'use pppoe'"
 msgstr ""
 
-#: ../../netconnect.pm_.c:696
-msgid "Connect to internet using Cable"
+#: ../../netconnect.pm_.c:736
+msgid "Connect to Internet using Cable"
 msgstr ""
 
-#: ../../netconnect.pm_.c:720
+#: ../../netconnect.pm_.c:760
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
 msgstr ""
 
-#: ../../netconnect.pm_.c:733
+#: ../../netconnect.pm_.c:774
+msgid "Disable Internet Connection"
+msgstr ""
+
+#: ../../netconnect.pm_.c:785
 msgid "Configure local network"
 msgstr ""
 
-#: ../../netconnect.pm_.c:733
+#: ../../netconnect.pm_.c:785
 msgid "Reconfigure local network"
 msgstr ""
 
-#: ../../netconnect.pm_.c:740
+#: ../../netconnect.pm_.c:792
 msgid "Disable networking"
 msgstr ""
 
-#: ../../netconnect.pm_.c:750
+#: ../../netconnect.pm_.c:802
 msgid "Connect to the Internet / Configure local Network"
 msgstr ""
 
-#: ../../netconnect.pm_.c:751
+#: ../../netconnect.pm_.c:803
 msgid ""
 "Local networking has already been configured.\n"
 "Do you want to:"
 msgstr ""
 
-#: ../../netconnect.pm_.c:752
+#: ../../netconnect.pm_.c:804
 msgid "How do you want to connect to the Internet?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:769
+#: ../../netconnect.pm_.c:825
 msgid "Network Configuration"
 msgstr ""
 
-#: ../../netconnect.pm_.c:770
+#: ../../netconnect.pm_.c:826
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"
@@ -4472,7 +4501,7 @@ msgstr ""
 msgid "no network card found"
 msgstr ""
 
-#: ../../network.pm_.c:271 ../../network.pm_.c:333
+#: ../../network.pm_.c:271 ../../network.pm_.c:337
 msgid "Configuring network"
 msgstr ""
 
@@ -4484,11 +4513,11 @@ msgid ""
 "such as ``mybox.mylab.myco.com''."
 msgstr ""
 
-#: ../../network.pm_.c:276 ../../network.pm_.c:338
+#: ../../network.pm_.c:276 ../../network.pm_.c:342
 msgid "Host name"
 msgstr ""
 
-#: ../../network.pm_.c:290
+#: ../../network.pm_.c:294
 msgid ""
 "WARNING: This device has been previously configured to connect to the "
 "Internet.\n"
@@ -4496,39 +4525,39 @@ msgid ""
 "Modifying the fields below will override this configuration."
 msgstr ""
 
-#: ../../network.pm_.c:295
+#: ../../network.pm_.c:299
 msgid ""
 "Please enter the IP configuration for this machine.\n"
 "Each item should be entered as an IP address in dotted-decimal\n"
 "notation (for example, 1.2.3.4)."
 msgstr ""
 
-#: ../../network.pm_.c:304 ../../network.pm_.c:305
+#: ../../network.pm_.c:308 ../../network.pm_.c:309
 #, c-format
 msgid "Configuring network device %s"
 msgstr ""
 
-#: ../../network.pm_.c:307
+#: ../../network.pm_.c:311
 msgid "Automatic IP"
 msgstr ""
 
-#: ../../network.pm_.c:307
+#: ../../network.pm_.c:311
 msgid "IP address"
 msgstr ""
 
-#: ../../network.pm_.c:307
+#: ../../network.pm_.c:311
 msgid "Netmask"
 msgstr ""
 
-#: ../../network.pm_.c:308
+#: ../../network.pm_.c:312
 msgid "(bootp/dhcp)"
 msgstr ""
 
-#: ../../network.pm_.c:314 ../../printerdrake.pm_.c:98
+#: ../../network.pm_.c:318 ../../printerdrake.pm_.c:98
 msgid "IP address should be in format 1.2.3.4"
 msgstr ""
 
-#: ../../network.pm_.c:334
+#: ../../network.pm_.c:338
 msgid ""
 "Please enter your host name.\n"
 "Your host name should be a fully-qualified host name,\n"
@@ -4536,35 +4565,35 @@ msgid ""
 "You may also enter the IP address of the gateway if you have one"
 msgstr ""
 
-#: ../../network.pm_.c:339
+#: ../../network.pm_.c:343
 msgid "DNS server"
 msgstr ""
 
-#: ../../network.pm_.c:340
+#: ../../network.pm_.c:344
 msgid "Gateway"
 msgstr ""
 
-#: ../../network.pm_.c:341
+#: ../../network.pm_.c:345
 msgid "Gateway device"
 msgstr ""
 
-#: ../../network.pm_.c:351
+#: ../../network.pm_.c:355
 msgid "Proxies configuration"
 msgstr ""
 
-#: ../../network.pm_.c:352
+#: ../../network.pm_.c:356
 msgid "HTTP proxy"
 msgstr ""
 
-#: ../../network.pm_.c:353
+#: ../../network.pm_.c:357
 msgid "FTP proxy"
 msgstr ""
 
-#: ../../network.pm_.c:359
+#: ../../network.pm_.c:363
 msgid "Proxy should be http://..."
 msgstr ""
 
-#: ../../network.pm_.c:360
+#: ../../network.pm_.c:364
 msgid "Proxy should be ftp://..."
 msgstr ""
 
@@ -5332,6 +5361,20 @@ msgstr ""
 
 #: ../../standalone/drakxconf_.c:21
 msgid "Choose the tool you want to use"
+msgstr ""
+
+#: ../../standalone/livedrake_.c:23
+msgid "Change Cd-Rom"
+msgstr ""
+
+#: ../../standalone/livedrake_.c:24
+msgid ""
+"Please insert the Installation Cd-Rom in your drive and press Ok when done.\n"
+"If you don't have it, press Cancel to avoid live upgrade."
+msgstr ""
+
+#: ../../standalone/livedrake_.c:34
+msgid "Unable to start live upgrade !!!\n"
 msgstr ""
 
 #: ../../standalone/mousedrake_.c:32
