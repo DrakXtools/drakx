@@ -49,7 +49,7 @@ if ("@ARGV" =~ /--help|-h/) {
 --build_cd       : build restore iso with the currents backups files
                        & rescue options.
 --build_floppy   : build restore floppy.
---replace        : delete backup files before build new do not upadte.
+--replace        : delete backup files before build new do not update.
 --save_dir       : by default the backup files are saved in 
                        in /var/backup directory so write other directory
 	               to change to change it.
@@ -111,7 +111,7 @@ sub debug {
 
 sub save_conf_file {
 # perl -ne 'split(":");print "$_[0]:*:$_[2]:$_[3]:::\n";' /etc/passwd > passwd 
-
+# gawk -F":" '{ if ($3 >= 500 ) print "login " $1 " uid = " $3 " rép perso : " $6}' /etc/passwd
     my @cfg_list = ( "SYS_FILES=@sys_files\n",
 		      "HOME_FILES=@home_files\n", 
 		      "OTHER_FILES=@other_files\n",
