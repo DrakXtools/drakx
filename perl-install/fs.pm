@@ -35,7 +35,7 @@ sub get_raw_hds {
       ];
     my @fstab = read_fstab("$prefix/etc/fstab");
     $all_hds->{nfss} = [ grep { isNfs($_) } @fstab ];
-    $all_hds->{smbs} = [ grep { isThisFs('smb', $_) } @fstab ];
+    $all_hds->{smbs} = [ grep { isThisFs('smbfs', $_) } @fstab ];
 }
 
 sub read_fstab {
@@ -98,6 +98,7 @@ sub mount_options_unpack {
 		  iso9660 => [ qw(unhide) ],
 		  vfat => [ qw(umask=0) ],
 		  nfs => [ qw(rsize=8192 wsize=8192) ],
+		  smbfs => [ qw(username= password=) ],
 		 );
     while (my ($fs, $l) = each %per_fs) {
 	isThisFs($fs, $part) || $part->{type} eq 'auto' && member($fs, @auto_fs) or next;
@@ -108,7 +109,7 @@ sub mount_options_unpack {
     $non_defaults->{supermount} = 1 if member(type2fs($part), 'auto', @auto_fs);
 
     my $defaults = { reverse %$non_defaults };
-    my %options = map { $_ => 0 } keys %$non_defaults;
+    my %options = map { $_ => '' } keys %$non_defaults;
     my @unknown;
     foreach (split(",", $packed_options)) {
 	if ($_ eq 'user') {
@@ -119,6 +120,8 @@ sub mount_options_unpack {
 	    $options{$_} = 1;
 	} elsif ($defaults->{$_}) {
 	    $options{$defaults->{$_}} = 0;
+	} elsif (/(.*?=)(.*)/) {
+	    $options{$1} = $2;
 	} else {
 	    push @unknown, $_;
 	}
@@ -155,7 +158,7 @@ sub mount_options_pack {
 	    }
 	}
     }
-    push @l, grep { $options->{$_} } keys %$options;
+    push @l, map_each { if_($::b, $::a =~ /=$/ ? "$::a$::b" : $::a) } %$options;
     push @l, $unknown;
 
     $part->{options} = join(",", grep { $_ } @l);
@@ -163,7 +166,7 @@ sub mount_options_pack {
 
 sub mount_options_help {
     my %help = map { $_ => '' } @_;
-    my %short = map { /(.*?)=/ ? ("$1=" => $_) : () } keys %help;
+    my %short = map { if_(/(.*?)=/, "$1=" => $_) } keys %help;
 
     foreach (split(':', $ENV{LANGUAGE}), '') {
 	my $manpage = "/usr/share/man/$_/man8/mount.8.bz2";
