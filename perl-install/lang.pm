@@ -543,6 +543,45 @@ sub charset2kde_font {
     "$r,5,$kdecharset,0,0";
 }
 
+# this define pango name fonts (like "NimbusSans L") depending
+# on the "charset" defined by language array. This allows to selecting
+# an appropriate font for each language.
+# the [0] field tells the font filename,
+# if field [1] is empty, that means the X11 fontset mechanism has ot be used.
+my %charset2pango_font = (
+  'jisx0208' => ["k14.pcf"], [ "" ],
+  'ksc5601' => ["baekmuk_gulim_h_14.pcf"], [ "" ],
+  'gb2312' => ["gb16fs.pcf"], [ "" ],
+  'Big5' => ["taipei16.pcf"], [ "" ],
+  'tis620' => ["norasi_n.ttf"], [ "Norasi" ],
+  'tscii' => ["tscava.ttf"], [ "TSC_Avarangal" ],
+  'utf_vi' => ["cu12.pcf"], [ "ClearlyU", ],
+  'utf_hy' => ["artsnk_m.ttf"], [ "Artsounk" ],
+  'utf_ka' => ["cu12.pcf"], [ "ClearlyU" ],
+  'iso-8859-7' => ["k.pfb"], [ "Kerkis" ],
+  'iso-8859-8' => ["cu12.pcf"], [ "ClearlyU" ],
+  'iso-8859-6' => ["cu12.pcf"], [ "ClearlyU" ],
+  #- Nimbus Sans L is missing some chars used by some cyrillic languages,
+  #- but tose haven't yet DrakX translations; it also misses vietnamese
+  #- latin chars; all other latin and cyrillic are covered.
+  'default' => ["NimbusSansL-Regu.pfb"], [ "Nimbus Sans L" ],
+);
+
+sub charset2pango_font {
+    my ($charset, $type) = @_;
+    
+    my $font = $charset2pango_font{$charset}->[1] || $charset2pango_font{default}->[1];
+    "$font";
+}
+
+sub lang2pango_font {
+    my ($lang) = @_;
+
+    my $charset = lang2charset($lang) or return;
+    my $font = $charset2pango_font($charset);
+    "$font";
+}
+
 sub set { 
     my ($lang, $translate_for_console) = @_;
 

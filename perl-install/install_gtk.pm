@@ -45,18 +45,23 @@ sub install_theme {
 
     load_rc($_) foreach "themes-$o->{theme}", "install", "themes";
 
+    my $pango_font_name = "";
+    if (my $pango_font = lang::lang2pango_font($o->{lang})) {
+	$pango_font_name_10 = "font_name = \"$pango_font 10\""
+	$pango_font_name_12 = "font_name = \"$pango_font 12\""
+    }
     if (my ($font, $font2) = lang::get_x_fontset($o->{lang}, $::rootwidth < 800 ? 10 : 12)) {
 	$font2 ||= $font;
 	Gtk2::Rc->parse_string(qq(
 style "default-font" 
 {
    fontset = "$font,*"
-   font_name = "Nimbus Sans L 12"
+   $pango_font_name_12
 }
 style "small-font"
 {
    fontset = "$font2,*"
-   font_name = "Nimbus Sans L 10"
+   $pango_font_name_10
 }
 widget "*" style "default-font"
 widget "*Steps*" style "small-font"
