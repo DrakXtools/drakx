@@ -504,9 +504,8 @@ sub main {
 
     eval { modules::load("af_packet") };
 
-    each_index {
-	modules::add_alias("sound-slot-$::i", $_->{driver});
-    } modules::probe_category('multimedia/sound');
+    require harddrake::sound;
+    harddrake::sound::configure_sound_slots();
 
     #- needed very early for install_steps_gtk
     eval { $o->{mouse} = mouse::detect() } if !$o->{nomouseprobe} && !$o->{mouse} && !$::testing;

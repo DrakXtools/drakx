@@ -21,6 +21,7 @@ use run_program;
 use modules;
 use standalone;
 use list_modules;
+use detect_devices;
 
 my $has_nvaudio = -x '/lib/modules/' . c::kernel_version() . '/';
 
@@ -258,5 +259,13 @@ initlevel 3
 - \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.
 ")));
 }
+
+
+sub configure_sound_slots {
+    each_index {
+        modules::add_alias("sound-slot-$::i", $_->{driver});
+      } getSoundDevices();
+}
+
 
 1;
