@@ -120,7 +120,7 @@ sub look_for_ISO_images() {
 sub find_ISO_image_labelled($) {
     %iso_images or look_for_ISO_images() or return;
     my ($iso_label) = @_;
-    return find { $_->{app_id} eq $iso_label && $_->{cd_set} eq $iso_images{cd_set} } @{$iso_images{media}};
+    find { $_->{app_id} eq $iso_label && $_->{cd_set} eq $iso_images{cd_set} } @{$iso_images{media}};
 }
 
 sub changeIso($) {
