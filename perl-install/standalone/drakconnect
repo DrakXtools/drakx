@@ -167,11 +167,17 @@ each_index {
     $list->append_column(my $col = Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i + 1));
     $col->set_sort_column_id($::i);
 } (N("Interface"), N("IP address"), N("Protocol"), N("Driver"), N("State"));
+$list->signal_connect(button_press_event => sub { 
+                          my (undef, $event) = @_;
+                          my (undef, $iter) = $list->get_selection->get_selected;
+                          return unless $iter;
+                          configure_lan() if $event->type eq '2button-press';
+                      });
+
 
 build_list();
 
-my $button_lan = gtksignal_connect(Gtk2::Button->new(N("Configure Local Area Network...")),
-                                clicked => sub { configure_lan('', $netcnx, $netc, $intf) });
+my $button_lan = gtksignal_connect(Gtk2::Button->new(N("Configure Local Area Network...")), clicked => \&configure_lan);
 
 my ($bbox0, $label_host, $int_state, $button_expert);
 
@@ -377,8 +383,7 @@ sub quit_global() {
     ugtk2->exit(0);
 }
 
-sub configure_lan {
-    my ($prefix, $netcnx, undef, $intf) = @_;
+sub configure_lan() {
     my $window = _create_dialog(N("LAN configuration"), { small => 1 });
     my @card_tab;
 
@@ -448,7 +453,7 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	}
 	my $c = $_;
 	my $widget_temp;
-	if (-e "$prefix/etc/sysconfig/network-scripts/ifcfg-eth$c") {
+	if (-e "$::prefix/etc/sysconfig/network-scripts/ifcfg-eth$c") {
 	    $widget_temp = gtksignal_connect(new Gtk2::Button(ethisup($c) ? N("deactivate now") : N("activate now")),
 					     clicked => sub {
 						 system("/sbin/if" . (ethisup($c) ? "down" : "up") . " eth$c");
