@@ -203,11 +203,13 @@ sub hds {
 	    };
 	    if (my $err = $@) {
 		if ($hd->{readonly}) {
+		    log::l("using /proc/partitions since diskdrake failed :(");
 		    use_proc_partitions($hd);
 		} elsif ($o_ask_before_blanking && $o_ask_before_blanking->($hd->{device}, $err)) {
 		    partition_table::raw::zero_MBR($hd);
 		} else {
 		    #- using it readonly
+		    log::l("using /proc/partitions since diskdrake failed :(");
 		    use_proc_partitions($hd);
 		}
 	    }
@@ -285,6 +287,8 @@ sub read_proc_partitions {
 		$part->{rootDevice} = $hd->{device} if $part->{dev} =~ /^$hd->{device}./;
 	    }
 	}
+	undef $prev_part if $prev_part && ($prev_part->{rootDevice} || '') ne ($part->{rootDevice} || '');
+
 	$part->{device} = $dev;
 	$part->{size} *= 2;	# from KB to sectors
 	$part->{type} = typeOfPart($dev); 
@@ -799,7 +803,6 @@ sub compare_with_proc_partitions {
 sub use_proc_partitions {
     my ($hd) = @_;
 
-    log::l("using /proc/partitions since diskdrake failed :(");
     partition_table::raw::zero_MBR($hd);
     $hd->{readonly} = 1;
     $hd->{getting_rid_of_readonly_allowed} = 1;
