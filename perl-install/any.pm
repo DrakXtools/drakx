@@ -1027,6 +1027,8 @@ You can use userdrake to add a user in this group.")
 }
 
 sub ddcxinfos {
+    return if $::noauto;
+
     my @l = `$ENV{LD_LOADER} ddcxinfos`;
     if ($::isInstall && -e "/tmp/ddcxinfos") {
 	my @l_old = cat_("/tmp/ddcxinfos");
@@ -1106,9 +1108,10 @@ sub running_window_manager {
     my @window_managers = qw(kwin gnome-session icewm wmaker afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish olvwm);
 
     foreach (@window_managers) {
-	return $_ if fuzzy_pidofs(qr/\b$_\b/);
+	my @pids = fuzzy_pidofs(qr/\b$_\b/) or next;
+	return wantarray ? ($_, @pids) : $_;
     }
-    '';
+    undef;
 }
 
 sub ask_window_manager_to_logout {
