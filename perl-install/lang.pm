@@ -122,10 +122,10 @@ my %languages = my @languages = (
   'sk'  => [ 'Slovak',    		'iso-8859-2', 'sk', 'sk' ],
   'sl'  => [ 'Slovenian',		'iso-8859-2', 'sl', 'sl' ],
   'sp'  => [ 'Serbian|Cyrillic (ISO-8859-5)','iso-8859-5', 'sp', 'sp:sr' ],
-  'sp'  => [ 'Serbian|Cyrillic (CP1251)','cp1251',    'sp', 'sp:sr' ],
-  'sp'  => [ 'Serbian|Cyrillic (UTF-8)','utf_1251',   'sp', 'sp:sr' ],
+'sp_YU.CP1251'=> [ 'Serbian|Cyrillic (CP1251)','cp1251',    'sp', 'sp:sr' ],
+'sp_YU.UTF-8'=> [ 'Serbian|Cyrillic (UTF-8)','utf_1251',   'sp', 'sp:sr' ],
   'sr'  => [ 'Serbian|Latin (ISO-8859-2)','iso-8859-2','sr', 'sr' ],
-  'sr'  => [ 'Serbian|Latin (UTF-8)',	'utf_2',      'sr', 'sr' ],
+'sr_YU.UTF-8'=> [ 'Serbian|Latin (UTF-8)',	'utf_2',      'sr', 'sr' ],
   'sv'  => [ 'Swedish',			'iso-8859-1', 'sv', 'sv' ],
 # there is no tamil font curently; so set DrakX encoding to utf_1
 'ta_IN.UTF-8'=> [ 'Tamil',		'utf_1',      'ta', 'ta' ],
@@ -133,7 +133,7 @@ my %languages = my @languages = (
   'th'  => [ 'Thai|TIS-620',            'tis620',     'th', 'th' ],
 'th_TH.UTF-8'=> [ 'Thai (UTF-8)',         'utf_th',     'th', 'th' ],
   'tr'  => [ 'Turkish',	 		'iso-8859-9', 'tr', 'tr' ],
-#-'tt_RU.UTF-8'=> [ 'Tatar',		'koi8-k',  'tg', 'tg' ],
+#-'tt_RU.UTF-8'=> [ 'Tatar',		'koi8-k',  'tt', 'tt' ],
 #-'ur'	=> [ 'Urdu',			'cp1256',     'ur', 'ur' ],  
 'uk_UA' => [ 'Ukrainian|KOI8-U', 	'koi8-u',     'uk', 'uk_UA:uk' ],
 'uk_UA.CP1251'=> [ 'Ukrainian|CP1251',	'cp1251',     'uk', 'uk_UA:uk' ],
@@ -409,13 +409,20 @@ my %charset2kde_charset = (
 
 #- for special cases not handled magically
 my %lang2country = (
+  ar => 'eg',
+  bs => 'bh',
   cs => 'cz',
   da => 'dk',
   el => 'gr',
   et => 'ee',
   ko => 'kr',
   mi => 'nz',
+  ms => 'my',
+  nn => 'no',
   sl => 'si',
+  sp => 'yu',
+  sr => 'yu',
+  sv => 'se',
 );
 
 #-######################################################################################
