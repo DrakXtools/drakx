@@ -1,3 +1,30 @@
+2001/02/20  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/url.h, mdk-stage1/url.c, mdk-stage1/network.c: for HTTP
+	installs, make use of Content-Length when available, to display
+	progressbar
+
+2001/02/20  Pixel  <pixel@mandrakesoft.com>
+
+	* Makefile: various
+	  - pcmcia_config.patch now in tools (no more in install which is
+	removed)
+	  - copy xpm's (until step icons work with png's)
+	  - transform group icons in pngs
+
+	* modules.pm, class_discard.pm, my_gtk.pm, Xconfigurator.pm: various
+
+	* tools/pcmcia_config.patch: pcmcia_config.patch now here
+
+	* printerdrake.pm: fix typo
+
+	* install_any.pm, install_steps.pm, install_steps_gtk.pm: better
+	advertising support
+
+2001/02/20  warly
+
+	* share/compssUsers, share/rpmsrate, share/compssList: update rpmsrate
+
 2001/02/20  François Pons  <fpons@mandrakesoft.com>
 
 	* c/stuff.xs.pm, live_install, pkgs.pm, live_install2: added RPMRC_FILE
