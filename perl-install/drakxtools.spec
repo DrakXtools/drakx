@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 9mdk
+Release: 10mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -315,6 +315,22 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Nov 25 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-10mdk
+- detect serial MGE ups
+- drakconnect:
+  o fix #5664: list ppp0 for modem and adsl connections too and ippp0
+    too for isdn ones
+  o fix #6184: read back "Connection Name" and "Domain Name" fields
+    when configuring modem
+  o fix adsl configuration steps that were hidden
+  o configure all isdn cards, not only the first one
+  o fix "kid exited -1" warnings
+  o handle zaurus connected through USB cables resulting in usbnet
+    driver creating usbX interfaces
+- mousedrake: default to "PS/2|Automatic" for ps/2 mice (automagically
+  use IMPS/2 when needed)
+- XFdrake: misc fixes
+
 * Wed Nov 19 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-9mdk
 - resync serial_probe with kudzu
 - fix some untranslated strings
