@@ -79,7 +79,7 @@ sub selectKeyboard($) {
     if ($::expert) {
 	my $langs = $o->ask_many_from_list('', 
 		_("You can choose other languages that will be available after install"),
-		[ sort lang::list() ]) or goto &selectLanguage if $::expert;
+		[ sort { $a cmp $b } lang::list() ]) or goto &selectLanguage;
 	$o->{langs} = [ $o->{lang}, grep_index { $langs->[$::i] } lang::list() ];
     }
 }
@@ -243,7 +243,7 @@ sub formatMountPartitions {
     fs::formatMount_all($o->{raid}, $o->{fstab}, $o->{prefix}, sub {
 	my ($part) = @_;
 	$w->set(isLoopback($part) ?
-		_("Creating and formatting loopback file %s", loopback::file($part)) :
+		_("Creating and formatting file %s", loopback::file($part)) :
 		_("Formatting partition %s", $part->{device}));
     });
     die _("Not enough swap to fulfill installation, please add some") if availableMemory < 40 * 1024;
