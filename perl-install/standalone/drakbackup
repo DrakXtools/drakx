@@ -4349,7 +4349,7 @@ sub interactive_mode() {
     $in = 'interactive'->vnew;
 	$::Wizard_title = N("Drakbackup");
 	$::Wizard_pix_up = "ic82-back-up-48.png";
-	$in->isa('interactive::gtk') and $::isWizard = 1;
+	$in->isa('interactive::gtk') and $::isWizard = 0;
     $my_win = ugtk2->new(N("Drakbackup"));
     $window1 = $my_win->{window};
 

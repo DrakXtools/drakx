@@ -210,7 +210,7 @@ sub interactive_mode() {
     $in = 'interactive'->vnew;
 	$::Wizard_title = N("Terminal Server Configuration");
 	$::Wizard_pix_up = "ic82-network-40.png";
-	$in->isa('interactive::gtk') and $::isWizard = 1;
+	$in->isa('interactive::gtk') and $::isWizard = 0;
     $window1 = ugtk2->new(N("Terminal Server Configuration"));
     $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     $window1->{rwindow}->set_border_width(5);
@@ -306,7 +306,7 @@ sub interactive_mode() {
     $window1->{rwindow}->realize;
     $window1->{rwindow}->show_all;
 	#- strange behavior with tabs, pressing a button actually ends up
-	#- activating a hiden button below it
+	#- activating a hidden button below it
   	$main_buttons->set_current_page(2);
 	$main_buttons->set_current_page(1);
 	$main_buttons->set_current_page(0);
@@ -786,7 +786,7 @@ sub make_nbi() {
 						}
 						$list_model->clear;
 						gtkset_mousecursor_normal();
-					}),	
+					}),
 					Gtk2::HBox->new(1,1),
 				),
 				create_scrolled_window($list_nbis),
@@ -1856,13 +1856,13 @@ sub update_hosts_allow {
 sub format_client_entry {
 	#- create a client entry, in proper format
 	my ($client, %ts_clients) = @_;
-	my $entry = "host $client {\n";
-	$entry .= "\thardware ethernet\t$ts_clients{$client}{hardware};\n";
-	$entry .= "\tfixed-address\t\t$ts_clients{$client}{address};\n";
-	$entry .= "\t#type\t\t\t$ts_clients{$client}{type};\n" if $ts_clients{$client}{type};
-	$entry .= "\tfilename\t\t\"$ts_clients{$client}{filename}\";\n" if $ts_clients{$client}{filename}; 
-	$entry .= "\t#hdw_config\t\t$ts_clients{$client}{hdw_config};\n" if $ts_clients{$client}{hdw_config};
-	$entry .= "}\n";
+	my $entry = qq(host $client {\n);
+	$entry .= qq(\thardware ethernet\t$ts_clients{$client}{hardware};\n);
+	$entry .= qq(\tfixed-address\t\t$ts_clients{$client}{address};\n);
+	$entry .= qq(\t#type\t\t\t$ts_clients{$client}{type};\n) if $ts_clients{$client}{type};
+	$entry .= qq(\tfilename\t\t"$ts_clients{$client}{filename}";\n) if $ts_clients{$client}{filename}; 
+	$entry .= qq(\t#hdw_config\t\t$ts_clients{$client}{hdw_config};\n) if $ts_clients{$client}{hdw_config};
+	$entry .= qq(}\n);
 	if ($ts_clients{$client}{type} eq "thin") {
 		write_thin_inittab($ts_clients{$client}{address}); 
 	} else {
