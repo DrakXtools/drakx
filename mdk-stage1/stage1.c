@@ -432,7 +432,7 @@ int mandrake_move_post(void)
         int always__real_is_symlink_to_raw = 0;
         int main__real_is_symlink_to_raw = 0;
 
-        if (handle_clp(IMAGE_LOCATION "/live_tree_boot.clp", IMAGE_LOCATION "/live_tree_boot/usr/bin/runstage2",
+        if (handle_clp(IMAGE_LOCATION "/live_tree_boot.clp", IMAGE_LOCATION "/live_tree_boot/usr/bin/runstage2.pl",
                        IMAGE_LOCATION "/live_tree_boot", BOOT_LOCATION,
                        &boot__real_is_symlink_to_raw, SLASH_LOCATION "/live_tree_boot.clp") != RETURN_OK)
                 return RETURN_ERROR;
