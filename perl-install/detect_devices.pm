@@ -74,6 +74,11 @@ sub cdroms_and_zips__faking_ide_scsi() {
 		$faked = "sd" . chr(ord('a') + $nb_zip++);
 		log::l("IDE Zip: $e->{device} => $faked and $e->{devfs_prefix}");
 	    }
+	    if ($::move) {
+		#- make it use ide-scsi *now*, not after reboot
+		output("/proc/ide/$e->{device}/settings", 'ide_scsi:1');
+		output("/proc/ide/$e->{device}/driver", 'ide-scsi');
+	    }
 	    $e->{device} = $faked;
 	}
 	get_devfs_devices(@l_need_fake);
