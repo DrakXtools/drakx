@@ -54,7 +54,6 @@ my @other_list_to_restore;
 my $button_box;
 my $button_box_tmp;
 my $next_widget;
-my $sav_next_widget;
 my $system_state;
 my $restore_state;
 my $save_path_entry;
@@ -2068,8 +2067,9 @@ sub advanced_where_net_types {
 	set_help_tip($check_use_expect, 'use_expect');
 	set_help_tip($check_remember_pass, 'remember_pass');
 	set_help_tip($host_path_entry, 'dir_or_module');
-    if ($previous_function) { 
-		fonction_env(\$box_where_net, \&advanced_where_net_types, \&$previous_function);
+    if ($previous_function) {
+		fonction_env(\$box_where_net, \&advanced_where_net_types, \&$previous_function, \&wizard_step3);
+		button_box_wizard();
     } else { 
 		fonction_env(\$box_where_net, \&advanced_where_net_types, \&advanced_where);
 	}
@@ -2197,7 +2197,8 @@ sub advanced_where_cd {
 	set_help_tip($combo_where_cdrecord_device, 'cdrecord_device');
 	
     if ($previous_function) { 
-		fonction_env(\$box_where_cd, \&advanced_where_cd, \&$previous_function); 
+		fonction_env(\$box_where_cd, \&advanced_where_cd, \&$previous_function, \&wizard_step3); 
+		button_box_wizard();
 	} else { 
 		fonction_env(\$box_where_cd, \&advanced_where_cd, \&advanced_where); 
 	}
@@ -2291,7 +2292,8 @@ sub advanced_where_tape {
 		$tape_device = $combo_where_tape_device->entry->get_text;
 	}); 
     if ($previous_function) { 
-		fonction_env(\$box_where_tape, \&advanced_where_tape, \&$previous_function); 
+		fonction_env(\$box_where_tape, \&advanced_where_tape, \&$previous_function, \&wizard_step3); 
+		button_box_wizard();
 	} else { 
 		fonction_env(\$box_where_tape, \&advanced_where_tape, \&advanced_where); 
 	}
@@ -2345,7 +2347,8 @@ sub advanced_where_hd {
 		}
 	});
     if ($previous_function) { 
-		fonction_env(\$box_where_hd, \&advanced_where_hd, \&$previous_function); 
+		fonction_env(\$box_where_hd, \&advanced_where_hd, \&$previous_function, \&wizard_step3); 
+		button_box_wizard();
 	} else { 
 		fonction_env(\$box_where_hd, \&advanced_where_hd, \&advanced_where); 
 	}
@@ -2643,7 +2646,14 @@ sub advanced_box() {
 ################################################  WIZARD  ################################################  
 
 sub wizard_step3() {
-    my $box2;    
+	my $no_device = 1 if $where_cd && $cd_device eq '' || $where_tape && $tape_device eq '' || $where_net && $net_proto eq '';
+	if ($no_device) {
+		show_warning("f", N("Backup destination not configured..."));
+		destroy_widget();
+    	wizard_step2();
+		return;
+	}
+	my $box2;    
     my $text = new Gtk2::TextView;
 	save_conf_file();
     read_conf_file();
@@ -2677,9 +2687,7 @@ sub wizard_step2() {
 					1, new Gtk2::VBox(0, 5),
 					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
 						destroy_widget();
-						to_ok();
 						advanced_where_hd(\&wizard_step2);
-						to_normal();
 					}), $where_hd),
 				),
 				0, gtkpack_(new Gtk2::HBox(0, 15),
@@ -2687,9 +2695,7 @@ sub wizard_step2() {
 					1, new Gtk2::VBox(0, 5),
 					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
 						destroy_widget();
-						to_ok();
 						advanced_where_net_types(\&wizard_step2);
-						to_normal();
 					}), $where_net),
 				),
  				0, gtkpack_(new Gtk2::HBox(0, 15),	      
@@ -2697,9 +2703,7 @@ sub wizard_step2() {
  					1, new Gtk2::VBox(0, 5),	
  					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
  						destroy_widget();
-						to_ok();
  						advanced_where_cd(\&wizard_step2);
-						to_normal();
  					}), $where_cd),
  				),
  				0, gtkpack_(new Gtk2::HBox(0, 15),	      
@@ -2707,9 +2711,7 @@ sub wizard_step2() {
  					1, new Gtk2::VBox(0, 5),
  					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
  						destroy_widget();
-						to_ok();
  						advanced_where_tape(\&wizard_step2);
-						to_normal();
  					}), $where_tape),
  				),
 				1, new Gtk2::VBox(0, 5),
@@ -2736,7 +2738,7 @@ sub wizard_step2() {
 	    $in->ask_warn(N("Error"), N("Please select media for backup..."));
 		fonction_env(\$box2, \&wizard_step2, \&wizard, \&wizard_step2); 
 	} else { 
-		fonction_env(\$box2, \&wizard_step2, \&wizard, \&wizard_step3); 
+		fonction_env(\$box2, \&wizard_step2, \&wizard, undef); 
 	}
     button_box_wizard();
     $up_box->show_all;
@@ -4558,7 +4560,7 @@ sub button_box_wizard() {
 				interactive_mode_box() 
 			}),
 			1, new Gtk2::HBox(0, 0),
-			0, gtksignal_connect(Gtk2::Button->new($next_widget ? N("Previous") : N("Ok")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new($previous_widget ? N("Previous") : N("Ok")), clicked => sub { 
 				destroy_widget();
 				$previous_widget ? $previous_widget->() : $next_widget->();
 			}),
@@ -4908,16 +4910,6 @@ sub interactive_mode() {
 
 sub adv_help() {
 	exec("drakhelp --id drakbackup") unless fork();
-}
-
-sub to_ok() {
-    $sav_next_widget = $next_widget;
-    $next_widget = undef;
-    button_box_wizard();
-}
-
-sub to_normal() {
-    $next_widget = $sav_next_widget;
 }
 
 sub destroy_widget() {
