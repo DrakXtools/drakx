@@ -458,7 +458,8 @@ sub readCardsDB {
 
     my $F = openFileMaybeCompressed($file);
 
-    my ($lineno, $cmd, $val) = 0;
+    my $lineno = 0;
+    my ($cmd, $val);
     my $fs = {
 	NAME => sub {
 	    $cards{$card->{card_name}} = $card if $card;
