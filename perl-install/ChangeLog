@@ -1,3 +1,268 @@
+2002/09/02  baudens
+
+	* share/advertising/list, share/advertising/07-desktop.pl,
+	share/advertising/05-games.pl, share/advertising/06-mcc.pl: Update
+
+	* share/advertising/09-server.pl, share/advertising/04-multimedia.pl,
+	share/advertising/14-mdkexpert.pl, share/advertising/13-mdkcampus.pl,
+	share/advertising/11-mdkstore.pl, share/advertising/02-community.pl,
+	share/advertising/01-thanks.pl, share/advertising/03-internet.pl,
+	share/advertising/10-mnf.pl,
+	share/advertising/15-mdkexpert-corporate.pl,
+	share/advertising/08-development.pl, share/advertising/12-mdkstore.pl:
+	Update
+	Update
+
+2002/09/02  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* Makefile.config, drakxtools.spec, standalone.pm, docs/README.devel: 
+	  - s/tinyfirewall/drakfirewall/
+
+	* standalone/drakbug: s/tinyfirewall/drakfirewall/
+	  - drakbug point to https://drakbug.mandrakesoft.com
+
+	* network/netconnect.pm, standalone/tinyfirewall, standalone/drakfirewall,
+	network/drakfirewall.pm, network/tinyfirewall.pm: 
+	  - replace tinyfirewall by drakfirewall
+
+2002/09/02  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* share/rpmsrate: sympa => mailman
+	removed PHP-nuke
+
+	* share/po/fr.po: corrected a gramatical error
+
+2002/09/02  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm: make sure upgrade is done instead.
+	reverted previous modification moved to crypto module.
+	make sure rpmdb is open before displaying packages tree.
+
+	* install2.pm: now allow meta_class option on command line to be taken
+	into account instead of
+	previous options desktop and firewall.
+
+	* install_steps.pm: add $o->{packages} to install_any::install_urpmi call.
+
+	* install_any.pm: restore auto build of synthesis file (for updates).
+	fixed typo.
+	fix list building not to use parsehdlist.
+	install_urpmi only install selected media.
+
+	* crypto.pm: fix typo.
+	allow selecting packages to upgrade.
+
+	* install_steps_gtk.pm: strange typo where no filtering on medium was
+	issued ?
+
+	* pkgs.pm: fixed to call to getFile by giving medium description,
+	necessary for updates.
+	allow selectPackagesToUpgrade to use a specific medium instead of all of
+	them.
+
+	* ugtk.pm: fixed titi suckings.
+
+2002/09/02  Jonathan Gotti  <jgotti@mandrakesoft.com>
+
+	* drakperm: solving bugs on add and save functions
+
+2002/09/02  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/cs.po: updated Czech and Polish files
+
+	* share/po/sv.po, share/po/sk.po, share/po/de.po, share/po/zh_TW.po,
+	share/po/tr.po, share/po/hu.po: updated Hungarian, Turkish, Swedish,
+	Slovak and Chinese files
+
+	* share/po/pl.po: updated Czech and Polish files
+	updated Hungarian, Turkish, Swedish, Slovak and Chinese files
+
+	* share/po/es.po, share/po/ru.po: updated Spanish and Russian files
+
+2002/09/02  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* ugtk.pm: gtkicons_labels_widget(): check binary exists
+	kill glib warnings
+
+	* harddrake/sound.pm, harddrake/ui.pm: display alternative drivers (oss,
+	alsa) for sound cards
+
+	* harddrake/data.pm: use new ln icons
+
+	* drakxtools.spec, Makefile.drakxtools: 29mdk: add harddrake icons
+
+	* standalone/icons/harddrake2/floppy.png,
+	standalone/icons/harddrake2/scsi_hd.png,
+	standalone/icons/harddrake2/modem.png,
+	standalone/icons/harddrake2/keyboard.png,
+	standalone/icons/harddrake2/harddisk.png,
+	standalone/icons/harddrake2/ide_hd.png,
+	standalone/icons/harddrake2/scanner.png,
+	standalone/icons/harddrake2/isdn.png,
+	standalone/icons/harddrake2/webcam.png,
+	standalone/icons/harddrake2/sound.png,
+	standalone/icons/harddrake2/scsi.png,
+	standalone/icons/harddrake2/harddrake.png,
+	standalone/icons/harddrake2/joystick.png,
+	standalone/icons/harddrake2/tv.png, standalone/icons/harddrake2/usb.png,
+	standalone/icons/harddrake2/unknown.png,
+	standalone/icons/harddrake2/cd.png, standalone/icons/harddrake2/cpu.png,
+	standalone/icons/harddrake2/hw_mouse.png,
+	standalone/icons/harddrake2/hw_printer.png,
+	standalone/icons/harddrake2/memory.png,
+	standalone/icons/harddrake2/video.png,
+	standalone/icons/harddrake2/tape.png,
+	standalone/icons/harddrake2/hw_network.png: add new icons
+	remove old icons
+	add new ln icons
+
+	* share/po/fr.po: update french translation
+
+	* standalone/icons/harddrake2/menu/harddrake-menu48.png,
+	standalone/icons/harddrake2/multimedia.png,
+	standalone/icons/harddrake2/cable.png,
+	standalone/icons/harddrake2/menu/harddrake-menu16.png,
+	standalone/icons/harddrake2/menu/harddrake-menu32.png,
+	standalone/icons/harddrake2/K7.png: add new ln icons
+
+2002/09/01  alus
+
+	* share/po/pl.po: and more...
+	some translations
+
+2002/09/01  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/vi.po: updated Vientamese file
+
+2002/09/01  siegel
+
+	* share/po/de.po: updates
+	new german version
+
+2002/09/01  Till Kamppeter  <till@mandrakesoft.com>
+
+	* scanner.pm: s/Seiko Epson/Epson/ in subroutine to update ScannerDB from
+	Sane.
+
+	* printerdrake.pm: 
+	  - Tell users of the HP LaserJet 1000 that they have to upload firmware
+	to the printer.
+	  - Updated instructions to get Lexmark's inkjet drivers.
+	  - Suppressed the display of the "Refresh printer list" and "Specify
+	CUPS server" buttons in recommended mode when there is no local network.
+
+2002/08/31  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/hu.po: updated po file
+	updated pot file
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/sp.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/bs.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/fr.po, share/po/nl.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/de.po, share/po/eo.po, share/po/lv.po,
+	share/po/cs.po, share/po/bg.po, share/po/el.po: updated pot file
+
+	* share/advertising/14-mdkexpert.pl, share/advertising/12-mdkstore.pl,
+	share/advertising/15-mdkexpert-corporate.pl: no need to translate web
+	adresses
+
+	* standalone/drakbackup: fixed use of variables in translatable strings
+
+2002/08/31  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakbackup: Fix prompt text saved as filename - Advanced What
+	- Other
+
+2002/08/31  siegel
+
+	* share/po/de.po: some upadtes
+
+2002/08/31  Warly  <warly@mandrakesoft.com>
+
+	* share/rpmsrate: add shorewall and iptables in INSTALL section
+
+2002/08/30  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: fixed possible problem with is_installed and
+	are_installed.
+
+	* install_steps.pm: fixed call to pkgs::remove.
+
+2002/08/30  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/sv.po: updated Swedish file
+
+2002/08/30  siegel
+
+	* share/po/de.po: update german version
+
+2002/08/30  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer.pm: 
+	  - Fixed bugs in automatic GIMP printer configuration during
+	installation.
+	  - Worked around a bug of "ls -r xxx*" returning "xxx*" instead of
+	nothing when "xxx*" does not exist ("ls" of "busybox" during
+	installation).
+
+2002/08/30  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* ugtk.pm, drakxtools.spec: 
+	  - mcc :
+	o kill gtkpng_() and gtk_createpng_() wrappers: if icon is missing,
+	    better die while testing rather than make perl display "uncaught
+	    code ..."
+	  o kill unused timer
+	  o use new ln's icons
+	  o disable stupid icon highlighting (was made with duplicating
+	    manually all icons in gimp and blue-y them there); restore this
+	    effect'll need little play with gamma
+	  o use ugtk
+	  o kill dead code
+	  o cleanups
+	  o icons:
+	    * switch to new icons set
+	    * replace pixmap table by a pixbuf one
+	    * use pixbufs for backgrouns and icons,
+	    * composite background and icons with transparency trough
+	      ugtk::compose_pixbufs()
+	    * render icons with full alpha blender in left column
+	    * comment the different states
+	    * simplify callbacks
+	  - ugtk :
+	  o readd gdkpixbuf support
+	  o ensure imlib is used by default to load files, not gdk-pixbuf
+	  o compose_with_back(): load a png icon into a pixbuf and call
+	    compose_pixbufs with background pixbuf
+	  o compose_pixbufs(): render transparent icon onto background into a
+	    new pixbuf
+	  o merge gtkcreate_png_pixbuf() from gdk-pixbuf-0-branch : load an
+	    icon into a pixbuf
+	    gdk-pixbuf-0-branch also uses it to simplify a lot of code
+	  o gtkicons_labels_widget() :
+	    * add a new background pixbuf parameter that'll be composited with
+	icons
+	    * render icons with alpha blender in right area
+	    * kill imlib_counter
+	    * kill imlib usage for
+	    * kill dead code (was dead since i fixed mcc memory leaks)
+	
+	  - TODO: icon flashing on application launch
+	
+	  - POSTPONED: merge big cleanup, global replacement of imlib usage by
+	gdk-pixbuf
+	             from gdk-pixbuf-0-branch since it would impacted drakx
+	which is not
+	             so good
+
 2002/08/30  François Pons  <fpons@mandrakesoft.com>
 
 	* install_any.pm: fixed possible problem with is_installed and
@@ -1356,7 +1621,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.732 2002/08/30 17:28:56 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.733 2002/08/30 18:08:03 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
