@@ -39,7 +39,7 @@ my $postinstall_rpms = '';
 my $cdrom;
 my %iso_images;
 
-sub mountCdrom($;$) {
+sub mountCdrom {
     my ($mountpoint, $cdrom_) = @_;
     $cdrom_ = $cdrom if !defined $cdrom_;
     eval { fs::mount($cdrom_, $mountpoint, "iso9660", 'readonly') };
@@ -196,7 +196,7 @@ sub getFile {
 	    #- this allows handling changing a media when some of the files on the
 	    #- first CD have been copied to other to avoid media change...
 	    my $f2 = "$postinstall_rpms/$f";
-	    $altroot = '/tmp/image' unless $altroot;
+	    $altroot ||= '/tmp/image';
 	    $f2 = "$altroot/$rel" if !$postinstall_rpms || !-e $f2;
 	    $f2 = $rel if $rel =~ m!^/! && !-e $f2; #- not a relative path
 	    my $F; open($F, $f2) && $F;
@@ -370,7 +370,7 @@ sub setPackages {
 		(my $cdromdev) = detect_devices::cdroms();
 		last SUPPL if !$cdromdev;
 		$cdrom = $cdromdev->{device};
-		my $dev = devices::make($cdrom);
+		devices::make($cdrom);
 		ejectCdrom($cdrom);
 		if ($o->ask_okcancel('', N("Insert the CD"), 1)) {
 		    mountCdrom("/mnt/cdrom", $cdrom);

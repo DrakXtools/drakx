@@ -573,7 +573,7 @@ sub read_rpmsrate {
 sub readCompssUsers {
     my ($meta_class, $file) = @_;
 
-    $file = 'Mandrake/base/compssUsers' if !$file;
+    $file ||= 'Mandrake/base/compssUsers';
     my $f = $meta_class && install_any::getFile("$file.$meta_class") || install_any::getFile($file) or die "can't find $file";
     readCompssUsers_raw($f);
 }
@@ -940,7 +940,7 @@ sub installTransactionClosure {
 	    (my $cdromdev) = detect_devices::cdroms();
 	    $cdrom = $cdromdev->{device};
 	    log::l("cdrom redetected at $cdrom");
-	    my $dev = devices::make($cdrom);
+	    devices::make($cdrom);
 	    install_any::ejectCdrom($cdrom) if $::o->{method} eq 'cdrom'; # will umount /tmp/image
 	    install_any::mountCdrom("/mnt/cdrom", $cdrom);
 	} else { log::l("cdrom already found at $cdrom") }
