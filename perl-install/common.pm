@@ -100,6 +100,10 @@ sub setVirtual {
     unpack "S", $vt;
 }
 
+sub nonblock {
+    my ($F) = @_;
+    fcntl($F, c::F_SETFL(), fcntl($F, c::F_GETFL(), 0) | c::O_NONBLOCK());
+}
 
 sub removeXiBSuffix {
     local $_ = shift;
