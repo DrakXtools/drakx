@@ -194,8 +194,8 @@ our %l = (
       if_(arch() =~ /ia64/, qw(hp-agp i460-agp)),
       if_(arch() =~ /ppc/, qw(uninorth-agp)),
 
-      qw(ali-agp amd64-agp amd-k7-agp ati-agp intel-agp),
-	 qw(nvidia-agp sworks-agp sis-agp via-agp),
+      qw(ali-agp amd64-agp amd-k7-agp ati-agp efficeon-agp intel-agp),
+	 qw(k7-agp mch-agp nvidia-agp sis-agp sworks-agp via-agp),
     ],
   },
 );
