@@ -1060,9 +1060,8 @@ sub configureX {
     { local $::testing = 0; #- unset testing
       local $::auto = !$::expert && !$clicked;
 
-      Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, sub {
-	  $o->pkg_install(@_);
-      });
+      symlink "$o->{prefix}/etc/gtkrc", "/etc/gtkrc";
+      Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, sub { $o->pkg_install(@_) });
     }
     $o->configureXAfter;
 }
