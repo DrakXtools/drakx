@@ -213,7 +213,7 @@ sub doPartitionDisksAfter {
 						 grep { $_->{mntpoint} && maybeFormatted($_) } @{$o->{fstab}};
     }
 
-    cat_("/proc/mounts") =~ m|(\S+)\s+/tmp/image nfs| &&
+    cat_("/proc/mounts") =~ m|(\S+)\s+/tmp/nfsimage| &&
       !any { $_->{mntpoint} eq "/mnt/nfs" } @{$o->{all_hds}{nfss}} and
 	push @{$o->{all_hds}{nfss}}, { type => 'nfs', mntpoint => "/mnt/nfs", device => $1, options => "noauto,ro,nosuid,soft,rsize=8192,wsize=8192" };
 }

@@ -993,7 +993,7 @@ sub generate_automatic_stage1_params {
     } elsif ($o->{method} eq 'ftp') {
 	@ks = (server => $ENV{HOST}, directory => $ENV{PREFIX}, user => $ENV{LOGIN}, pass => $ENV{PASSWORD});
     } elsif ($o->{method} eq 'nfs') {
-	cat_("/proc/mounts") =~ m|(\S+):(\S+)\s+/tmp/image nfs| or die;
+	cat_("/proc/mounts") =~ m|(\S+):(\S+)\s+/tmp/nfsimage| or die;
 	@ks = (server => $1, directory => $2);
     }
     @ks = (method => $method, @ks);
