@@ -142,8 +142,8 @@ sub lvms {
     @lvms;
 }
 
-sub hds {
-    my ($flags, $o_ask_before_blanking) = @_;
+sub get_hds {
+    my ($flags, $o_in) = @_;
     $flags ||= {};
     $flags->{readonly} && ($flags->{clearall} || $flags->{clear}) and die "conflicting flags readonly and clear/clearall";
 
@@ -162,8 +162,10 @@ sub hds {
 	if (my $err = $@) {
 	    if ($err =~ /write error:/) { 
 		$hd->{readonly} = 1;
+	    } elsif ($err =~ /read error:/) {
+		next;
 	    } else {
-		cdie $err if $err !~ /read error:/;
+		$o_in and $o_in->ask_warn('', $err);
 		next;
 	    }
 	}
@@ -171,20 +173,48 @@ sub hds {
 	if ($flags->{clearall} || member($hd->{device}, @{$flags->{clear} || []})) {
 	    partition_table::raw::zero_MBR_and_dirty($hd);
 	} else {
-	    eval { 
-		partition_table::read($hd); 
-		compare_with_proc_partitions($hd) if $::isInstall;
-	    };
-	    if (my $err = $@) {
+	    my $handle_die_and_cdie = sub {
 		if ($hd->{readonly}) {
 		    log::l("using /proc/partitions since diskdrake failed :(");
 		    use_proc_partitions($hd);
+		    1;
 		} elsif (exists $hd->{usb_description} && fs::type::fs_type_from_magic($hd)) {
 		    #- non partitioned drive
 		    $hd->{fs_type} = fs::type::fs_type_from_magic($hd);
 		    push @raw_hds, $hd;
-		    next;
-		} elsif ($o_ask_before_blanking && $o_ask_before_blanking->($hd->{device}, $err)) {
+		    $hd = '';
+		    1;
+		} else {
+		    0;
+		}
+	    };
+	    my $handled;
+	    eval {
+		catch_cdie {
+		    partition_table::read($hd); 
+		    compare_with_proc_partitions($hd) if $::isInstall;
+		} sub {
+		    my $err = $@;
+		    if ($handle_die_and_cdie->()) {
+			$handled = 1;
+			0; #- don't continue, transform cdie into die
+		    } else {
+			!$o_in || $o_in->ask_okcancel('', formatError($err));
+		    }
+		}
+	    };
+	    if (my $err = $@) {
+		if ($handled) {
+		    #- already handled in cdie handler above
+		} elsif ($handle_die_and_cdie->()) {
+		} elsif ($o_in && $o_in->ask_yesorno(N("Error"), 
+N("I can't read the partition table of device %s, it's too corrupted for me :(
+I can try to go on, erasing over bad partitions (ALL DATA will be lost!).
+The other solution is to not allow DrakX to modify the partition table.
+(the error is %s)
+
+Do you agree to lose all the partitions?
+  ", $hd->{device}, formatError($err)))) {
 		    partition_table::raw::zero_MBR($hd);
 		} else {
 		    #- using it readonly
@@ -192,6 +222,8 @@ sub hds {
 		    use_proc_partitions($hd);
 		}
 	    }
+	    $hd or next;
+
 	    member($_->{device}, @{$flags->{clear} || []}) and partition_table::remove($hd, $_)
 	      foreach partition_table::get_normal_parts($hd);
 	}
@@ -231,27 +263,6 @@ sub hds {
     fs::get_major_minor(get_all_fstab($all_hds));
 
     $all_hds;
-}
-
-sub get_hds {
-    #- $in is optional
-    my ($flags, $o_in) = @_;
-
-    if ($o_in) {
-	catch_cdie { hds($flags, sub {
-	    my ($dev, $err) = @_;
-            $o_in->ask_yesorno(N("Error"), 
-N("I can't read the partition table of device %s, it's too corrupted for me :(
-I can try to go on, erasing over bad partitions (ALL DATA will be lost!).
-The other solution is to not allow DrakX to modify the partition table.
-(the error is %s)
-
-Do you agree to lose all the partitions?
-", $dev, formatError($err)));
-        }) } sub { $o_in->ask_okcancel('', formatError($@)) };
-    } else {
-	catch_cdie { hds($flags) } sub { 1 }
-    }
 }
 
 sub read_proc_partitions {
