@@ -143,14 +143,12 @@ sub create_steps_window {
 	push @l, gtknew('HBox', spacing => 7, children_tight => [ '', '', $img, translate($o->{steps}{$_}{text}) ]);					      
     }
 
-    my $w = bless {}, 'ugtk2';
     my $offset = 20;
-    $w->{rwindow} = $w->{window} = 
+    $o->{steps_window} =
       gtknew('Window', width => ($::stepswidth - $offset), widget_name => 'Steps',
 	     position => [ lang::text_direction_rtl() ? ($::rootwidth - $::stepswidth - $offset) : $offset, 150 ],
 	     child => gtknew('VBox', spacing => 6, children_tight => \@l));
-    $w->show;
-    $o->{steps_window} = $w;
+    $o->{steps_window}->show;
 }
 
 sub update_steps_position {
