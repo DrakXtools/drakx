@@ -190,8 +190,7 @@ sub create_logo_window {
     $w->{rwindow}->set_name("logo");
     $w->{rwindow}->set_title('skip');
     $w->show;
-    my $file = $o->{meta_class} eq 'desktop' ? "logo-mandrake-Desktop.png" : "logo-mandrake.png";
-    $o->{meta_class} eq 'firewall' and $file = "logo-mandrake-Firewall.png";
+    my $file = $o->{meta_class} eq 'firewall' ? "logo-mandrake-Firewall.png" : "logo-mandrake.png";
     -r $file or $file = "$ENV{SHARE_PATH}/$file";
     -r $file and gtkadd($w->{window}, gtkcreate_img($file));
     $o->{logo_window} = $w;
