@@ -127,19 +127,35 @@ sub partitionWizardSolutions {
 		fsedit::recompute_loopbacks($all_hds);
 		1;
 	    } ];
-	my @ok_for_resize_fat = grep { !fsedit::part2hd($_, $all_hds)->{readonly} } @ok_forloopback;
+    } else {
+	push @wizlog, N("There is no FAT partition to use as loopback (or not enough space left)") .
+	  @fats ? "\nFAT partitions:" . join('', map { "\n  $_->{device} $_->{free} (" . ($min_linux + $min_swap + $min_freewin) . ")" } @fats) : '';
+    }
+
+    
+    if (my @ok_for_resize_fat = grep { isFat_or_NTFS($_) && !fsedit::part2hd($_, $all_hds)->{readonly} } @$fstab) {
 	$solutions{resize_fat} = 
-	  [ 6 - @fats, N("Use the free space on the Windows partition"),
+	  [ 6 - @ok_for_resize_fat, N("Use the free space on the Windows partition"),
 	    sub {
 		$o->set_help('resizeFATChoose');
 		my $part = $o->ask_from_listf('', N("Which partition do you want to resize?"), \&partition_table::description, \@ok_for_resize_fat) or return;
 		$o->set_help('resizeFATWait');
-		my $w = $o->wait_message(N("Resizing"), N("Resizing Windows partition"));
-		require resize_fat::main;
-		my $resize_fat = eval { resize_fat::main->new($part->{device}, devices::make($part->{device})) };
+		my $resize_fat = eval {
+		    my $pkg = isFat($part) ? do { 
+			require resize_fat::main;
+			'resize_fat::main';
+		    } : do {
+			require diskdrake::resize_ntfs;
+			'diskdrake::resize_ntfs';
+		    };
+		    $pkg->new($part->{device}, devices::make($part->{device}));
+		};
 		$@ and die N("The FAT resizer is unable to handle your partition, 
 the following error occured: %s", $@);
-		my $min_win = $resize_fat->min_size;
+		my $min_win = do {
+		    my $w = $o->wait_message(N("Resizing"), N("Computing the size of the Windows partition"));
+		    $resize_fat->min_size;
+		};
 		$part->{size} > $min_linux + $min_swap + $min_freewin + $min_win or die N("Your Windows partition is too fragmented. Please reboot your computer under Windows, run the ``defrag'' utility, then restart the Mandrake Linux installation.");
 		$o->ask_okcancel('', N("WARNING!
 
@@ -155,27 +171,32 @@ When sure, press Ok.")) or return;
                    { label => N("partition %s", partition_table::description($part)), val => \$mb_size, min => $min_win >> 11, max => ($part->{size} - $min_linux - $min_swap) >> 11, type => 'range' },
                 ]) or return;
 
-		my $size = from_Mb($mb_size, $min_win, $part->{size});
+		my $oldsize = $part->{size};
+		$part->{size} = from_Mb($mb_size, $min_win, $part->{size});
 
-		local *log::l = sub { $w->set(join(' ', @_)) };
-		eval { $resize_fat->resize($size) };
-		$@ and die N("FAT resizing failed: %s", $@);
-
-		$part->{size} = $size;
-		$part->{isFormatted} = 1;
-		
 		my $hd = fsedit::part2hd($part, $all_hds);
-		$hd->{isDirty} = $hd->{needKernelReread} = 1;
 		$hd->adjustEnd($part);
+
+		eval { 
+		    my $w = $o->wait_message(N("Resizing"), N("Resizing Windows partition"));
+		    $resize_fat->resize($part->{size});
+		};
+		if (my $err = $@) {
+		    $part->{size} = $oldsize;
+		    die N("FAT resizing failed: %s", $err);
+		}
+
+		$part->{isFormatted} = 1;
+		$hd->{isDirty} = $hd->{needKernelReread} = 1;
 		partition_table::adjust_local_extended($hd, $part);
 		partition_table::adjust_main_extended($hd);
 
 		fsedit::auto_allocate($all_hds);
 		1;
-	    } ] if @ok_for_resize_fat;
+	    } ];
     } else {
-	push @wizlog, N("There is no FAT partition to resize or to use as loopback (or not enough space left)") .
-	  @fats ? "\nFAT partitions:" . join('', map { "\n  $_->{device} $_->{free} (" . ($min_linux + $min_swap + $min_freewin) . ")" } @fats) : '';
+	push @wizlog, N("There is no FAT partition to resize (or not enough space left)") .
+	  @ok_for_resize_fat ? "\nFAT partitions:" . join('', map { "\n  $_->{device} $_->{free} (" . ($min_linux + $min_swap + $min_freewin) . ")" } @ok_for_resize_fat) : '';
     }
 
     if (@$fstab && @hds_rw) {
