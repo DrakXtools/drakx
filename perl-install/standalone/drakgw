@@ -457,20 +457,20 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 
 # In the NAT table (-t nat), Append a rule (-A) after routing (POSTROUTING)
 # which says to MASQUERADE the connection (-j MASQUERADE).
-iptables -t nat -A POSTROUTING -s $lan_address.0/24 -j MASQUERADE
+/sbin/iptables -t nat -A POSTROUTING -s $lan_address.0/24 -j MASQUERADE
 
 # Allows forwarding specifically to our LAN
-iptables -A FORWARD -s $lan_address.0/24 -j ACCEPT
+/sbin/iptables -A FORWARD -s $lan_address.0/24 -j ACCEPT
 
 # Allow dhcp requests
-iptables -A INPUT -i $device -p udp --sport bootpc --dport bootps -j ACCEPT
-iptables -A INPUT -i $device -p tcp --sport bootpc --dport bootps -j ACCEPT
-iptables -A INPUT -i $device -p udp --sport bootps --dport bootpc -j ACCEPT
-iptables -A INPUT -i $device -p tcp --sport bootps --dport bootpc -j ACCEPT
+/sbin/iptables -A INPUT -i $device -p udp --sport bootpc --dport bootps -j ACCEPT
+/sbin/iptables -A INPUT -i $device -p tcp --sport bootpc --dport bootps -j ACCEPT
+/sbin/iptables -A INPUT -i $device -p udp --sport bootps --dport bootpc -j ACCEPT
+/sbin/iptables -A INPUT -i $device -p tcp --sport bootps --dport bootpc -j ACCEPT
 
 # Allow dns requests
-iptables -A INPUT -i $device -p udp --dport domain -j ACCEPT
-iptables -A INPUT -i $device -p tcp --dport domain -j ACCEPT
+/sbin/iptables -A INPUT -i $device -p udp --dport domain -j ACCEPT
+/sbin/iptables -A INPUT -i $device -p tcp --dport domain -j ACCEPT
 ));
 chmod 0700, $rc_firewall_24;
 
@@ -656,6 +656,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.43  2001/05/15 14:36:31  gc
+#- full path for iptables
+#-
 #- Revision 1.42  2001/04/12 13:50:24  gc
 #- add some rule so later on tinyfirewall will not prevent everything from working
 #-
