@@ -125,7 +125,7 @@ sub selectKeyboard {
 
 #------------------------------------------------------------------------------
 sub selectInstallClass {
-    my ($o, $clicked) = @_;
+    my ($o) = @_;
 
     my $installMode = $o->{isUpgrade} ? $o->{keepConfiguration} ? N_("Upgrade packages only") : N_("Upgrade") : N_("Install");
 
