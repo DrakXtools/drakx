@@ -855,6 +855,7 @@ sub report_bug {
       header("ddebug.log"), cat_("/tmp/ddebug.log"),
       header("install.log"), cat_("$prefix/root/install.log"),
       header("fstab"), cat_("$prefix/etc/fstab"),
+      header("modules.conf"), cat_("$prefix/etc/modules.conf"),
       map_index { even($::i) ? header($_) : $_ } @other;
 }
 
