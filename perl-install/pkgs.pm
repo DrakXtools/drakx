@@ -812,7 +812,7 @@ sub init_db {
     my ($prefix) = @_;
 
     my $f = "$prefix/root/install.log";
-    open(LOG, "> $f") ? log::l("opened $f") : log::l("Failed to open $f. No install log will be kept.");
+    open(LOG, ">> $f") ? log::l("opened $f") : log::l("Failed to open $f. No install log will be kept.");
     *LOG or *LOG = log::F() or *LOG = *STDERR;
     CORE::select((CORE::select(LOG), $| = 1)[0]);
     c::rpmErrorSetCallback(fileno LOG);
@@ -1241,9 +1241,7 @@ sub install($$$;$$) {
     log::l("pkgs::install the following: ", join(" ", keys %packages));
     eval { fs::mount("/proc", "$prefix/proc", "proc", 0) } unless -e "$prefix/proc/cpuinfo";
 
-    log::l("reading /usr/lib/rpm/rpmrc");
-    c::rpmReadConfigFiles() or die "can't read rpm config files";
-    log::l("\tdone");
+    init_db($prefix);
 
     my $callbackOpen = sub {
 	my $p = $packages{$_[0]};
@@ -1458,6 +1456,8 @@ sub install($$$;$$) {
 	}
 	cleanHeaders($prefix);
     } while ($nb > 0 && !$pkgs::cancel_install);
+
+    done_db();
 
     cleanHeaders($prefix);
 

@@ -295,9 +295,6 @@ sub beforeInstallPackages {
 
     require network;
     network::add2hosts("$o->{prefix}/etc/hosts", "localhost.localdomain", "127.0.0.1");
-
-    require pkgs;
-    pkgs::init_db($o->{prefix});
 }
 
 sub pkg_install {
@@ -394,8 +391,6 @@ and look at the log file /tmp/ddebug.log
 
 Consoles 1,3,4,7 may also contain interesting information";
     }
-
-    pkgs::done_db();
 
     #-  why not? cuz weather is nice today :-) [pixel]
     common::sync(); common::sync();

@@ -74,7 +74,6 @@ int rpmError_callback_data;
 void rpmError_callback(void) {
   if (rpmErrorCode() != RPMERR_UNLINK && rpmErrorCode() != RPMERR_RMDIR) {
     write(rpmError_callback_data, rpmErrorString(), strlen(rpmErrorString()));
-    write(rpmError_callback_data, "\n", 1);
   }
 }
 
