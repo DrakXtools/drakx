@@ -447,7 +447,9 @@ sub advanced {
 								   map { my $name = $_;
 									 my $b = new Gtk::CheckButton($name); 
 									 $check_what_user{$_} = [ $b, 0 ];
-									 $b->signal_connect(toggled => sub { invbool \$check_what_user{$name}[1] });
+#									 $b->signal_connect(toggled => sub { invbool \$check_what_user{$name}[1] });
+									 $b->signal_connect(toggled => sub { #print "__".$name . "\n" 
+});
 									 $b } (@all_user_list) 
 								   ),
 							   ),
@@ -614,11 +616,15 @@ sub advanced {
 		  );
 
 #    print $check_what_user{'seb'}->active."\n";
+    @user_list = ("toto", "titi");
+    print $_."\n" foreach @user_list;
 
-   foreach (@all_user_list) {
-       $check_what_user{$_}[1] = 1;
-       $check_what_user{$_}[0]->set_active(1);
-   }
+    foreach (@all_user_list) {
+	if (member($_, @user_list)) {
+	    $check_what_user{$_}[1] = 1;
+	    $check_what_user{$_}[0]->set_active(1);
+	}
+    }
 
 
     $combo_where_net_proto->entry->signal_connect( 'changed', sub { $net_proto = $combo_where_net_proto->entry->get_text()});
