@@ -120,6 +120,7 @@ sub wait_message {
     my ($in) = @_;
 
     my ($w, $progress, $last_msg, $displayed);
+    my $on_expose = sub { $displayed = 1; 0 }; #- declared here to workaround perl limitation
     $w, sub {
 	my ($msg, $current, $total) = @_;
 	if ($msg) {
@@ -130,7 +131,7 @@ sub wait_message {
 		if ($progress) {
 		    #- don't show by default, only if we are given progress information
 		    $progress->hide;
-		    $progress->signal_connect(expose_event => sub { $displayed = 1; 0 });
+		    $progress->signal_connect(expose_event => $on_expose);
 		}
 	    }
 	    $w->set($msg);
