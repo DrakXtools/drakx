@@ -43,6 +43,7 @@ umount_cd() {
     ln -sf /image_always/lib /
     umount /image
     /image_always/sbin/losetup -d /dev/$main_loop
+    /image_always/usr/bin/eject
 }
 
 mount_cd() {
