@@ -1209,6 +1209,7 @@ Test your connection via net_monitor or mcc. If your connection doesn't work, yo
       my $use_wizard = 1;
       if ($::isInstall) {
           if ($first_time && $in->{method} =~ /^(ftp|http|nfs)$/) {
+              local $::isWizard;
               !$::expert && !$o_noauto || $in->ask_okcancel(N("Network Configuration"),
                                                             N("Because you are doing a network installation, your network is already configured.
 Click on Ok to keep your configuration, or cancel to reconfigure your Internet & Network connection.
