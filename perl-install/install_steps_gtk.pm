@@ -577,9 +577,9 @@ sub installPackages {
 				       $yicon > $y + ${$heights}[0] and $decy = $yicon - ($y + ${$heights}[$i]);
 				       foreach (@{$lines}) {
 					   $dbl_area->draw_string($darea->style->font, $gc_text,
-								  ($dx-$width)/2 + $x + ${$widths}[$i], $decy + $y + ${$heights}[$i], $_);
+								  ($dx-$width)/2 + $x + ${$widths}[$i], ( $first ? 0 : $decy ) + $y + ${$heights}[$i], $_);
  					   $bold and $dbl_area->draw_string($darea->style->font, $gc_text,
- 								  ($dx-$width)/2 + $x + ${$widths}[$i] + 1, $decy + $y + ${$heights}[$i], $_);
+ 								  ($dx-$width)/2 + $x + ${$widths}[$i] + 1, ( $first ? 0 : $decy ) + $y + ${$heights}[$i], $_);
 					   $i++;
 				       }
 				       $first = 0;
