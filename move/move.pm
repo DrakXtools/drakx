@@ -352,7 +352,12 @@ sub install2::verifyKey {
     while (cat_('/proc/mounts') !~ m|\s/home\s|) {
 
 	my $message = key_parts($o) ? 
-N("Your USB key doesn't have any valid Windows (FAT) partitions
+N("Your USB key doesn't have any valid Windows (FAT) partitions.
+We need one to continue (beside, it's more standard so that you
+will be able to move and access your files from machines
+running Windows). Please plug in an USB key containing a
+Windows partition instead.
+
 
 You may also proceed without an USB key - you'll still be
 able to use Mandrake Move as a normal live Mandrake
