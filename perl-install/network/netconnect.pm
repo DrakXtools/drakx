@@ -229,14 +229,15 @@ If you don't want to use the auto detection, deselect the checkbox.
                             @l = ($type);
                         }
                         my $first = shift @l;
-                        my @steps = (@l,
-                                     "multiple_internet_cnx",
-                                     ($::isInstall ? "miscellaneous_choose" : "apply_settings"));
+                        my @steps = (@l, "multiple_internet_cnx", "apply_settings");
                         foreach my $cnx ($first, @l) {
                             $connection_steps{$cnx} = shift @steps;
                         }
-                        # FIXME: s/$type/"${type}_standalone"/ (because of newer steps for standalone mode just break all but lan paths:
-                        return $::isInstall ? "prepare_detection" : "${type}_standalone";
+                        #
+                        # FIXME: get rid of all bugs by just sharing the same paths between standalone and install mode (anyway
+                        #        old "all cnx in one pass" was not very wizard-friendly....
+                        #
+                        return $type;
                     },
                    },
 
