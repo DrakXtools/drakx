@@ -162,27 +162,36 @@ $button_connect->add(gtkpack__(new Gtk::VBox(0,3),
 $statusbar->push(1, _("Wait please, testing your connection..."));
 $window1->show_all();
 #$window1->set_policy (1, 1, 1);
+
 my $time_tag = Gtk->timeout_add(1000, \&rescan);
-my $time_tag2 = Gtk->timeout_add(20000, \&update);
+$time_tag2 = Gtk->timeout_add(1000, \&update);
 
 update();
 rescan();
-while ($isconnected == -1) {
+
+while (($isconnected == -2) || ($isconnected == -1)) {
     Gtk->main_iteration while Gtk->events_pending;
 }
+
+Gtk->timeout_remove($time_tag2);
+$time_tag2 = Gtk->timeout_add(20000, \&update);
+
 connection() if ($connect && !$isconnected || $disconnect && $isconnected);
 Gtk->main;
 Gtk->exit(0);
 
 my $during_connection;
+my $first;
+
 sub connection {
     $during_connection = 1;
-    my $isconnected2 = $isconnected;
+    my $wasconnected = $isconnected;
+
     $button_connect->set_sensitive(0);
     $button_close->set_sensitive(0);
     $statusbar->pop(1);
-    $statusbar->push(1, $isconnected2 ? _("Disconnecting from Internet ") : _("Connecting to Internet "));
-    if(!$isconnected2) {
+    $statusbar->push(1, $wasconnected ? _("Disconnecting from Internet ") : _("Connecting to Internet "));
+    if($wasconnected == 1) {
 	$c_time = time();
 	$ct_tag = Gtk->timeout_add(1000, sub {
 				       my ($sec,$min,$hour) = gmtime(time() - $c_time);
@@ -190,36 +199,69 @@ sub connection {
 				       $label_ct->set($e); 1; });
     } else { Gtk->timeout_remove($ct_tag) }
     my $nb_point=1;
-    my $tag = Gtk->timeout_add(100, sub {
+    $first = 1;
+
+    my $tag = Gtk->timeout_add(1000, sub {
 				   $statusbar->pop(1);
-				   $statusbar->push(1, ($isconnected2 ? _("Disconnecting from Internet ") : _("Connecting to Internet "))
+				   $statusbar->push(1, ($wasconnected  == 1 ? _("Disconnecting from Internet ") : _("Connecting to Internet "))
 						    . join('', map { "." } (1..$nb_point)));
 				   $nb_point++;
-				   1;
-			       });
-    my $netc = {};
-    my $tag2 = Gtk->timeout_add(10000, sub {
-				    Gtk->timeout_remove($tag);
-				    $statusbar->pop(1);
-				    $statusbar->push(1, $isconnected2 ? ( $isconnected ?
+				   if ($nb_point  < 4) { return 1; }
+				   my $ret = 1;
+
+				   my $isconnect = test_connected(0);
+
+				   if ($nb_point < 20) {
+                                       if ($first == 1)  { # first time
+				           if ($isconnect == -2) { # wait for last test to finish
+    				               test_connected(2); # not yet terminated, try to cancel it
+				               return 1;
+					   }
+				           test_connected(1);  # initiates new connection test
+				           $first = 0;
+				           return 1;
+				       }
+				       if ($isconnect == -2) { return 1;} # no result yet, wait.
+				       if ($isconnect == $wasconnected) {
+				           # we got a test result; but the connection state did not change; retry.
+                                           test_connected(1);
+				           return 1;
+				       }
+				   }
+                                   # either we got a result, or we timed out.
+				   if (($isconnect != -2) or ($nb_point > 20)) {
+				            $isconnected = $isconnect;
+					    $ret = 0;
+					    $statusbar->pop(1);
+					    $statusbar->push(1, $wasconnected ? ( $isconnected ?
 									  _("Disconnection from Internet failed.") :
 									  _("Disconnection from Internet complete.")) :
 						     ( $isconnected ?
 						       _("Connection complete.") :
 						       _("Connection failed.\nVerify your configuration in the Mandrake Control Center."))
 						    );
-				    my $tag3 = Gtk->timeout_add(10000, sub {
-					    $statusbar->pop(1);
-					    $statusbar->push(1, $isconnected ? _("Connected") : _("Not connected"));
-					    0;
-					});
-				    $button_connect->set_sensitive(1);
-				    $button_close->set_sensitive(1);
-				    undef $during_connection;
-				    0;
-				});
+				            my $delay = 1000;
+					    # keep the message displayed longer if there is a problem.
+				    	    if ($isconnected == $wasconnected) { $delay = 5000; }
+				            my $tag3 = Gtk->timeout_add($delay, sub {
+
+						  $button_connect->set_sensitive(1);
+				    		  $button_close->set_sensitive(1);
+				    		  undef $during_connection;
+						  update();
+						  return 0;
+						  } );
+				            } # END IF
+	                            return $ret; } );
+
+    my $netc = {};
     Gtk->main_iteration while Gtk->events_pending;
-    $tag2 = Gtk->timeout_add(1000, sub { system( $isconnected2 ? "/etc/sysconfig/network-scripts/net_cnx_down &" : "/etc/sysconfig/network-scripts/net_cnx_up &"); 0; });
+
+    if ($wasconnected == 1) {
+        system("/etc/sysconfig/network-scripts/net_cnx_down &");
+    }  else  {
+        system("/etc/sysconfig/network-scripts/net_cnx_up &");
+    }
 }
 
 sub rescan {
@@ -322,8 +364,15 @@ sub change_color {
 
 my $scale;
 sub update {
-    connected_bg(\$isconnected);
-    my @intfs = get_val();
+     if (!$during_connection) {
+        my $isconnect = test_connected(0);
+        if ($isconnect != -2) {
+	    $isconnected = $isconnect; # save current state
+	    $isconnect = test_connected(1); # start new test
+       }
+    };
+
+    my @intfs = get_val(); # get values from /proc file system
     if($combo1->entry->get_text ne ($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default")) {
 	$combo1->entry->set_text($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
     }
@@ -414,25 +463,20 @@ sub update {
     }
     @interfaces = @intfs;
     my $netc={};
-    my $tmp;
-    connected_bg(\$tmp);
-    if(defined $tmp) {
-	$isconnected = $tmp;
-	if ($isconnected != -1 && !$during_connection) {
-	    if($isconnected && !in_ifconfig($netcnx->{NET_INTERFACE})) {
+	if ($isconnected != -2 && $isconnected != -1 && !$during_connection) {
+	    if(($isconnected == 1) && !in_ifconfig($netcnx->{NET_INTERFACE})) {
 		$isconnected=0;
 		$statusbar->pop(1);
 		$statusbar->push(1, _("Warning, another internet connexion has been detected, maybe using your network"));
 	    } else {
 		#- translators : $netcnx->{type} is the type of network connection (modem, adsl...)
 		$statusbar->pop(1);
-		$statusbar->push(1, $isconnected ? _("Connected") : _("Not connected"));
+		$statusbar->push(1, $isconnected == 1 ? _("Connected") : _("Not connected"));
 	    }
-	    $label_c->set($isconnected ? _("Disconnect %s", $netcnx->{type}) : _("Connect %s", $netcnx->{type}));
-	    $isconnected ? $pix_c->set($pix_c_map, $pix_c_mask) : $pix_c->set($pix_d_map, $pix_d_mask);
+	    $label_c->set($isconnected == 1 ? _("Disconnect %s", $netcnx->{type}) : _("Connect %s", $netcnx->{type}));
+	    $isconnected == 1 ? $pix_c->set($pix_c_map, $pix_c_mask) : $pix_c->set($pix_d_map, $pix_d_mask);
 	    $button_connect->set_sensitive(1);
 	}
-    }
     if (!(-e $connect_file && -e $disconnect_file)) {
 	$button_connect->set_sensitive(0);
 	$label_c->set("No internet connection configured");

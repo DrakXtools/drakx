@@ -8,7 +8,7 @@ use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_pro
 use MDK::Common::System qw(getVarsFromSh);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(write_cnx_script write_secret_backend write_initscript ask_connect_now connect_backend disconnect_backend read_providers_backend ask_info2 type2interface connected connected_bg connected2 disconnected);
+@EXPORT = qw(write_cnx_script write_secret_backend write_initscript ask_connect_now connect_backend disconnect_backend read_providers_backend ask_info2 type2interface connected connected_bg test_connected connected2 disconnected);
 @EXPORT_OK = qw($in);
 
 sub write_cnx_script {
@@ -157,9 +157,59 @@ sub connected_bg {
     1;
 }
 
+# test if connected;
+# cmd = 0 : ask current status
+#     return : 0 : not connected; 1 : connected; -1 : no test ever done; -2 : test in progress
+# cmd = 1 : start new connection test
+#     return : -2
+# cmd = 2 : cancel current test
+#    return : nothing
+# cmd = 3 : return current status even if a test is in progress
+my $kid_pipe_connect;
+my $kid_pid;
+my $current_connection_status;
+
+sub test_connected {
+    local $|=1;
+    my ($cmd) = @_;
+
+    if (!defined $current_connection_status) { $current_connection_status = -1; }
+
+    if ($cmd == 0) {
+        if (defined $kid_pipe_connect) {
+	        local *F;
+                *F = *$kid_pipe_connect;
+		fcntl(F, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
+                my $a;
+                if (defined($a = <F>)) {
+                    close($kid_pipe_connect) || warn "kid exited $?";
+                    undef $kid_pipe_connect;
+		    undef $kid_pid;
+		    $current_connection_status = $a;
+                }
+        }
+	return $current_connection_status;
+    }
+
+    if ($cmd == 1) {
+        if ($current_connection_status != -2) {
+             $current_connection_status = -2;
+             $kid_pipe_connect = connected2();
+        }
+    }
+    if ($cmd == 2) {
+        if (defined($kid_pid)) {
+	    kill -9, $kid_pid;
+	    undef $kid_pid;
+        }
+    }
+    return $current_connection_status;
+}
+
 sub connected2 {
     my $pid = open(KID_TO_READ, "-|");
     if ($pid) {   # parent
+	$kid_pid = $pid;
 	return \*KID_TO_READ;
     } else {      # child
 	my $a = gethostbyname("mandrakesoft.com") ? 1 : 0;
