@@ -520,15 +520,15 @@ my %xim = (
   },
   'ja_JP' => {
 	ENC => 'eucj',
-	XIM => 'kinput2',
-	XIM_PROGRAM => 'kinput2',
-	XMODIFIERS => '"@im=kinput2"',
+	XIM => 'uim-xim',
+	XIM_PROGRAM => 'uim-xim',
+	XMODIFIERS => '"@im=uim-anthy"',
   },
   'ja_JP.UTF-8' => {
 	ENC => 'utf8',
-	XIM => 'kinput2',
-	XIM_PROGRAM => 'kinput2',
-	XMODIFIERS => '"@im=kinput2"',
+	XIM => 'uim-xim',
+	XIM_PROGRAM => 'uim-xim',
+	XMODIFIERS => '"@im=uim-anthy"',
   },
   #- XFree86 has an internal XIM for Thai that enables syntax checking etc.
   #- 'Passthroug' is no check at all, 'BasicCheck' accepts bad sequences
