@@ -138,7 +138,7 @@ consult the Errata available from:
 
 Information on configuring your system is available in the post
 install chapter of the Official Mandrake Linux User's Guide.",
-N("http://www.mandrakelinux.com/en/90errata.php3"));
+N("http://www.mandrakelinux.com/en/91errata.php3"));
 }
 
 1;
