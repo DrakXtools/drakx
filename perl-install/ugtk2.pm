@@ -1029,7 +1029,7 @@ sub _ask_okcancel($@) {
 sub _ask_file {
     my ($o, $title, $path) = @_;
     my ($modality, $position) = ($o->{rwindow}->get_modal, $o->{rwindow}->get('window-position'));
-    my $f = $o->{rwindow} = Gtk2::FileSelection->new($title);
+    my $f = $o->{rwindow} = $o->{window} = Gtk2::FileSelection->new($title);
     $f->set_modal($modality);
     $f->set_position($position);
     $path and $f->set_filename($path);
