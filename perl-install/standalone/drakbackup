@@ -128,7 +128,6 @@ use common;
 use strict;
 use Time::localtime;
 use detect_devices;
-use Data::Dumper;
 
 my $in = 'interactive'->vnew('', 'default');
 
@@ -768,9 +767,9 @@ sub ftp_client {
 }
 
 #- this is just here to get around Expect for the moment
-sub exp_continue {
-	return(0);
-}
+#sub exp_continue {
+#	return(0);
+#}
 
 sub do_expect {
 
@@ -782,10 +781,10 @@ sub do_expect {
 		
 	#- move this to the top? - problem is need for perl-Expect (in contribs)
 
-#- temporarily disabled
-#	use Expect;
-show_warning("w", __("Sorry, perl-Expect is not installed/enabled. To use\nthis feature, install perl-Expect and comment lines 772-774,\n as well as 788,789. Then uncomment line 787.")); 
-return(1);
+#- temporarily disabled - back on Sep 4 2002 - perl-Expect moved to main
+	use Expect;
+#show_warning("w", __("Sorry, perl-Expect is not installed/enabled. To use\nthis feature, install perl-Expect and comment lines 772-774,\n as well as 788,789. Then uncomment line 787.")); 
+#return(1);
 
 	#- for debugging set to 1
 	$Expect::Exp_Internal = 0;
