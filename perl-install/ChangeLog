@@ -1,3 +1,17 @@
+2001/02/07  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: fixed unknown package ARRAY... and locales selection
+	according to langs.
+
+2001/02/07  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (choosePackages): better fix for getting
+	max install size.
+	(choosePackages): call setSelectedFromCompssList with empty
+	compssUsersChoice meaning max
+
+	* common.pm (formatXiB): more precise for cases like 1_234_000 -> 1.2GB
+
 2001/02/07  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* mdk-stage1/Makefile: tag VERSION as 8.0 since stage2 graphics now show
