@@ -546,6 +546,19 @@ sub selectPackagesToUpgrade($$$;$$) { #- TODO
     my $db = c::rpmdbOpenForTraversal($prefix) or die "unable to open $prefix/var/lib/rpm/packages.rpm";
     log::l("opened rpm database for examining existing packages");
 
+    #- get filelist of package to avoid getting all header into memory.
+    my %filelist;
+    my $current;
+    my $f = install_any::getFile("filelist") or log::l("unable to get filelist of packages");
+    foreach (<$f>) {
+	chomp;
+	if (/^#(.*)/) {
+	    $current = $filelist{$1} = [];
+	} else {
+	    push @$current, $_;
+	}
+    }
+
     local $_; #- else perl complains on the map { ... } grep { ... } @...;
     my %installedFilesForUpgrade; #- help searching package to upgrade in regard to already installed files.
 
@@ -587,9 +600,9 @@ sub selectPackagesToUpgrade($$$;$$) { #- TODO
 				 $toRemove{$otherPackage} = 1; #- force removing for theses other packages, select our.
 			     }
 			 } else {
-#			     my @files = c::headerGetEntry($header, 'filenames');
-#			     @installedFilesForUpgrade{grep { ($_ !~ m|^/etc/rc.d/| &&
-#							       ! -d "$prefix/$_" && ! -l "$prefix/$_") } @files} = ();
+			     my @files = c::headerGetEntry($header, 'filenames');
+			     @installedFilesForUpgrade{grep { ($_ !~ m|^/etc/rc.d/| &&
+							       ! -d "$prefix/$_" && ! -l "$prefix/$_") } @files} = ();
 			 }
 		     });
 
@@ -617,13 +630,15 @@ sub selectPackagesToUpgrade($$$;$$) { #- TODO
 	    c::rpmdbNameTraverse($db, packageName($p), sub {
 				     my ($header) = @_;
 				     $cumulSize += c::headerGetEntry($header, 'size'); #- all these will be deleted on upgrade.
-#				     my @files = c::headerGetEntry($header, 'filenames');
-#				     @installedFilesForUpgrade{grep { ($_ !~ m|^/etc/rc.d/| &&
-#								       ! -d "$prefix/$_" && ! -l "$prefix/$_") } @files} = ();
+				     my @files = c::headerGetEntry($header, 'filenames');
+				     @installedFilesForUpgrade{grep { ($_ !~ m|^/etc/rc.d/| &&
+								       ! -d "$prefix/$_" && ! -l "$prefix/$_") } @files} = ();
 				 });
-#	    eval { getHeader ($p) };
-#	    my @availFiles = $p->{header} ? c::headerGetEntry($p->{header}, 'filenames') : ();
-#	    map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m|^/etc/rc.d/| } @availFiles;
+	    if (my $list = $filelist{packageName($p)}) {
+		my @commonparts = map { /^=(.*)/ ? ($1) : () } @$list;
+		map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m|^/etc/rc.d/| }
+		  map { /^(\d)(.*)/ ? ($commonparts[$1] . $2) : /^ (.*)/ ? ($1) : () } @$list;
+	    }
 
 	    #- keep in mind the cumul size of installed package since they will be deleted
 	    #- on upgrade.
@@ -633,47 +648,44 @@ sub selectPackagesToUpgrade($$$;$$) { #- TODO
 
     #- unmark all files for all packages marked for upgrade. it may not have been done above
     #- since some packages may have been selected by depsList.
-#    foreach (values %{$packages->[0]}) {
-#	my $p = $_;
-#
-#	if (packageFlagSelected($p)) {
-#	    eval { getHeader ($p) };
-#	    my @availFiles = $p->{header} ? c::headerGetEntry($p->{header}, 'filenames') : ();
-#	    map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m|^/etc/rc.d/| } @availFiles;
-#	}
-#    }
+    foreach (values %{$packages->[0]}) {
+	my $p = $_;
+
+	if (packageFlagSelected($p)) {
+	    if (my $list = $filelist{packageName($p)}) {
+		my @commonparts = map { /^=(.*)/ ? ($1) : () } @$list;
+		map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m|^/etc/rc.d/| }
+		  map { /^(\d)(.*)/ ? ($commonparts[$1] . $2) : /^ (.*)/ ? ($1) : () } @$list;
+	    }
+	}
+    }
 
     #- select packages which contains marked files, then unmark on selection.
-#    foreach (values %$packages) {
-#	my $p = $_;
-#
-#	unless ($p->{selected}) {
-#	    eval { getHeader ($p) };
-#	    my @availFiles = $p->{header} ? c::headerGetEntry($p->{header}, 'filenames') : ();
-#	    my $toSelect = 0;
-#	    map { if (exists $installedFilesForUpgrade{$_}) {
-#		$toSelect ||= ! -d "$prefix/$_" && ! -l "$prefix/$_"; delete $installedFilesForUpgrade{$_} }
-#	      } grep { $_ !~ m@^/etc/rc.d/@ } @availFiles;
-#	    selectPackage($packages, $p) if ($toSelect);
-#	}
-#    }
+    foreach (values %{$packages->[0]}) {
+	my $p = $_;
+
+	unless ($p->{selected}) {
+	    my $toSelect = 0;
+	    if (my $list = $filelist{packageName($p)}) {
+		my @commonparts = map { /^=(.*)/ ? ($1) : () } @$list;
+		map { if (exists $installedFilesForUpgrade{$_}) {
+		    $toSelect ||= ! -d "$prefix/$_" && ! -l "$prefix/$_"; delete $installedFilesForUpgrade{$_} }
+		  } grep { $_ !~ m|^/etc/rc.d/| } map { /^(\d)(.*)/ ? ($commonparts[$1] . $2) : /^ (.*)/ ? ($1) : () } @$list;
+	    }
+	    selectPackage($packages, $p) if ($toSelect);
+	}
+    }
 
     #- select packages which obseletes other package, obselete package are not removed,
     #- should we remove them ? this could be dangerous !
-#    foreach (values %$packages) {
-#	my $p = $_;
+    foreach (values %{$packages->[0]}) {
+	my $p = $_;
 
-#	eval { getHeader ($p) };
-#	my @obsoletes = $p->{header} ? c::headerGetEntry(getHeader ($p), 'obsoletes'): ();
-#	map { selectPackage($packages, $p) if c::rpmdbNameTraverse($db, $_) > 0 } @obsoletes;
-#    }
-
-    #- select all base packages which are not installed and not selected.
-#    foreach (@$base) {
-#	my $p = $packages->[0]{$_} or log::l("missing base package $_"), next;
-#	log::l("base package $_ is not installed") unless $p->{installed} || $p->{selected}; #- installed not set on upgrade.
-#	selectPackage($packages, $p, 1) unless $p->{selected}; #- if installed it cannot be selected.
-#    }
+	if (my $list = $filelist{packageName($p)}) {
+	    my @obsoletes = map { /^\*(.*)/ ? ($1) : () } @$list;
+	    map { selectPackage($packages, $p) if c::rpmdbNameTraverse($db, $_) > 0 } @obsoletes;
+	}
+    }
 
     #- clean false value on toRemove.
     delete $toRemove{''};

@@ -558,13 +558,12 @@ sub installPackages {
 	    $w->flush;
 	} else { unshift @_, $m; goto $oldInstallCallback }
     };
-    my $oldChangeMedium = \&install_any::changeMedium;
-    local *install_any::changeMedium = sub {
+    #- the modification is not local as the box should be living for other package installation.
+    undef *install_any::changeMedium;
+    *install_any::changeMedium = sub {
 	my ($method, $medium) = @_;
-	my %medium_msg = (
-			  '' => _("Installation CD #1"),
-			 );
-	$medium_msg{$medium} or $medium_msg{$medium} = _("Installation CD #%s", $medium);
+	my %medium_msg = ();
+	$medium_msg{$medium} or $medium_msg{$medium} = _("Installation CD #%s", ($medium || 1));
 	my %method_msg = (
 			  cdrom =>
 _("Change your Cd-Rom!

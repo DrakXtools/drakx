@@ -46,7 +46,7 @@ sub useMedium($) {
     #- does nothing if the function has already been called.
     $_[0] and $::o->{method} eq 'cdrom' and setup_postinstall_rpms($::o->{prefix}, $::o->{packages});
 
-    $asked_medium eq $_[0] or log::l("selecting new medium $_[0]");
+    $asked_medium eq $_[0] or log::l("selecting new medium \"$_[0]\"");
     $asked_medium = $_[0];
 }
 sub changeMedium($$) {
@@ -58,7 +58,8 @@ sub relGetFile($) {
     local $_ = $_[0];
     m|^Mandrake/| and return $_;
     /\.img$/ and return "images/$_";
-    my $dir = m|/| ? "mdkinst" : /^(?:compss|compssList|compssUsers|depslist.*|hdlist.*)$/ ? "base/": "RPMS$asked_medium/";
+    my $dir = m|/| ? "mdkinst" : /^(?:compss|compssList|compssUsers|filelist|depslist.*|hdlist.*)$/ ?
+      "base/": "RPMS$asked_medium/";
     "Mandrake/$dir$_";
 }
 sub errorOpeningFile($) {

@@ -405,7 +405,7 @@ sub configureNetwork($) {
     install_steps::configureNetwork($o);
 
     #- added ppp configuration after ethernet one.
-    if ($o->ask_yesorno([ _("Modem Configuration") ],
+    if (!$::beginner && $o->ask_yesorno([ _("Modem Configuration") ],
 			_("Do you want to configure Dialup with modem networking for your system?"), 0)) {
 	$o->pppConfig;
     }
@@ -491,8 +491,6 @@ _("Domain name") => \$m->{domain},
 _("First DNS Server") => \$m->{dns1},
 _("Second DNS Server") => \$m->{dns2},
     ]);
-
-    $o->miscellaneousNetwork();
 }
 
 #------------------------------------------------------------------------------
