@@ -56,7 +56,7 @@ sub find_exports {
 	my ($name, $type, $comment) = unpack "A15 A10 A*", $_;
 	if ($name eq '---------' && $type eq '----' && $comment eq '-------' .. /^$/) {
 	    push @l, { name => $name, type => $type, comment => $comment }
-	      if $type eq 'Disk' && $name ne 'ADMIN$';
+	      if $type eq 'Disk' && $name !~ /\$$/;
 	}
     }
     @l;
