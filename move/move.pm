@@ -460,20 +460,16 @@ sub install_TrueFS_in_home {
 }
 
 sub install2::displayBackground {
-    require ugtk2;
-    my $rootwindow = ugtk2::gtkroot();
-    my $pixbuf = eval { Gtk2::Gdk::Pixbuf->new_from_file("/image/move/BOOT-$::rootwidth-MOVE.jpg") };
-    $pixbuf ||= Gtk2::Gdk::Pixbuf->new_from_file('/usr/share/mdk/screensaver/3.png');
-    my ($w, $h) = ($pixbuf->get_width, $pixbuf->get_height);
-    $rootwindow->draw_pixbuf(Gtk2::Gdk::GC->new($rootwindow), $pixbuf, 0, 0, ($::rootwidth - $w) / 2, ($::rootheight - $h)/2, $w, $h, 'none', 0, 0);
-    ugtk2::gtkflush();
+    my $xdim = $::rootwidth;
+    $xdim < 800 and $xdim = 800;
+    $xdim > 1600 and $xdim = 1600;
+    system("qiv --root /image/move/BOOT-$xdim-MOVE.jpg");
 }
 
 sub install2::startMove {
     my $o = $::o;
 
     $::WizardWindow->destroy if $::WizardWindow;
-    install2::displayBackground();
 
     #- get info from existing fstab. This won't do anything if we already wrote fstab in configMove
     fs::get_info_from_fstab($o->{all_hds}, '');
