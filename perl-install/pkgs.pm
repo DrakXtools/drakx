@@ -1304,7 +1304,7 @@ sub install($$$;$$) {
     foreach my $pkg (@$toInstall) {
 	$packages{packageName($pkg)} = $pkg;
 	$nb++;
-	$total += packageSize($pkg);
+	$total += to_int($pkg->[$SIZE_DEPS]); #- do not correct for upgrade!
     }
 
     log::l("pkgs::install $prefix");
