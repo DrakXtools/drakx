@@ -558,20 +558,20 @@ sub interactive_mode {
 						    $font_sel = new Gtk::FontSelection,
 						    ),
 					 1, gtkpack_(new Gtk::HBox(0,2),
-						     0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -spread),
+						     0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
 							       gtksignal_connect(new Gtk::Button(_("Get Windows Fonts")), clicked 	=>
 									 sub { ${$central_widget}->destroy(); $windows = 1; appli_choice();}),
 							       gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked => 
 									 sub { ${$central_widget}->destroy(); uninstall() }),
 							      ),
-						     0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -spread),
+						     0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
 							       gtksignal_connect(new Gtk::Button(_("Advanced Options")), clicked =>
 								 sub {  ${$central_widget}->destroy(); $windows = 0; advanced_install();}),
 							       gtksignal_connect(new Gtk::Button(_("Font List")), clicked 	=>
 								 sub { ${$central_widget}->destroy(); create_fontsel()}),
 							      ),
 						     1, new Gtk::HBox(0,2),
-						     0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -spread),
+						     0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
 							       gtksignal_connect(new Gtk::Button(_("Help")),clicked =>
 										 sub { ${$central_widget}->destroy(); help() }),
 							       gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub {

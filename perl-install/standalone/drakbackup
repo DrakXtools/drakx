@@ -445,14 +445,14 @@ sub read_conf_file {
 
 sub complete_results {
     system_state();
-    $results .=  _("***********************************************************************\n\n");
+    $results .=  "***********************************************************************\n\n";
     $daemon or $results .=  _("\n                      DrakBackup Report \n\n");
     $daemon and $results .= _("\n                      DrakBackup Daemon Report\n\n\n");
-    $results .=  _("***********************************************************************\n\n");
+    $results .=  "***********************************************************************\n\n";
     $results .= $system_state;
-    $results .=  _("\n\n***********************************************************************\n\n");
+    $results .=  "\n\n***********************************************************************\n\n";
     $results .=             _("\n                    DrakBackup Report Details\n\n\n");
-    $results .=  _("***********************************************************************\n\n");
+    $results .=  "***********************************************************************\n\n";
 }
 
 
@@ -674,7 +674,7 @@ sub build_backup_files {
 	$results .= _("file list send by FTP : %s\n ", $_)  foreach @file_list_to_send_by_ftp;
 	$interactive and build_backup_ftp_status();
 	if (ftp_client()) { 
-	    $results .= _("\n(!) FTP connexion problem: It was not possible to send your backup files by FTP.\n");
+	    $results .= _("\n FTP connexion problem: It was not possible to send your backup files by FTP.\n");
 	    $interactive and client_ftp_pb();
 	} 
     }
@@ -684,7 +684,7 @@ sub build_backup_files {
     if ($send_mail) { 
 	if (send_mail("$results")) { 
 	    $interactive and send_mail_pb();
-	    $interactive or print _("(!) Error during mail sending. \n");
+	    $interactive or print _(" Error during mail sending. \n");
 	} 
     }
 }
