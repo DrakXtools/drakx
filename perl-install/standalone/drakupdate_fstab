@@ -20,6 +20,7 @@
 use lib qw(/usr/lib/libDrakX);
 
 use detect_devices;
+use security::level;
 use common;
 use fsedit;
 use lang;
@@ -77,7 +78,7 @@ sub device_name_to_entry {
 
 sub set_options {
     my ($part, $use_supermount) = @_;
-    my $security = any::get_secure_level();
+    my $security = security::level::get();
     my ($iocharset, $codepage) = lang::fs_options(lang::read());
 
     fs::set_default_options($part, 1, $use_supermount, $security, $iocharset, $codepage);
