@@ -43,7 +43,7 @@ foreach (values %suggestions) {
 }
 
 my @suggestions_mntpoints = (
-    "/var/ftp", "/var/www", "/boot", '/tmp',
+    "/var/ftp", "/var/www", "/boot",
     arch() =~ /sparc/ ? "/mnt/sunos" : arch() =~ /ppc/ ? "/mnt/macos" : "/mnt/windows",
     #- RedHat also has /usr/local and /opt
 );
