@@ -287,7 +287,7 @@ notation (for example, 1.2.3.4).");
     my @fields = qw(IPADDR NETMASK);
     $::isStandalone or $in->set_help('configureNetworkIP');
     $in->ask_from_entries_refH(_("Configuring network device %s", $intf->{DEVICE}),
-			      (_("Configuring network device %s", $intf->{DEVICE}) . ( $module ? _(" (driver $module)") : '' ) ."\n\n") .
+			      (_("Configuring network device %s", $intf->{DEVICE}) . ( $module ? _(" (driver %s)", $module) : '' ) ."\n\n") .
 			      $text,
 			     [ { label => _("IP address"), val => \$intf->{IPADDR}, disabled => sub { $pump } },
 			       { label => _("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $pump } },

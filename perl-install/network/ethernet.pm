@@ -176,7 +176,7 @@ sub go_ethernet {
     configureNetwork($netc, $intf, $first_time) or return;
     if ( $::isStandalone and $netc->{NET_DEVICE}) {
 	$in->ask_yesorno(_("Network interface"),
-			 _("I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"), 1) and system("$prefix/sbin/ifdown $netc->{NET_DEVICE}; $prefix/sbin/ifup $netc->{NET_DEVICE}");
+			 _("I'm about to restart the network device %s. Do you agree?", $netc->{NET_DEVICE}), 1) and system("$prefix/sbin/ifdown $netc->{NET_DEVICE}; $prefix/sbin/ifup $netc->{NET_DEVICE}");
     }
     1;
 }

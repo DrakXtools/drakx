@@ -786,7 +786,7 @@ sub loadO {
     } else {
 	-e "$f.pl" and $f .= ".pl" unless -e $f;
 
-	my $fh = -e $f ? do { local *F; open F, $f; *F } : getFile($f) or die _("Error reading file $f");
+	my $fh = -e $f ? do { local *F; open F, $f; *F } : getFile($f) or die _("Error reading file %s", $f);
 	{
 	    local $/ = "\0";
 	    no strict;

@@ -107,7 +107,7 @@ sub write {
     my ($raids, $file) = @_;
     local *F;
     local $\ = "\n";
-    open F, ">$file" or die _("Can't write file $file");
+    open F, ">$file" or die _("Can't write file %s", $file);
 
     foreach (grep {$_} @$raids) {
 	print F <<"EOF";

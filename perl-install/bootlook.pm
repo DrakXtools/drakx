@@ -222,7 +222,7 @@ sub get_main_menu {
 sub isXlaunched
 {
     my $line;
-    open INITTAB, "/etc/inittab" or die _("can not open /etc/inittab for reading: $!");
+    open INITTAB, "/etc/inittab" or die _("can not open /etc/inittab for reading: %s", $!);
     while (<INITTAB>) {
 	if (/id:([1-6]):initdefault:/) { $line = $_; last; }
     }
@@ -276,7 +276,7 @@ sub isAutologin
 {
     my $line;
     
-    open AUTOLOGIN, "/etc/sysconfig/autologin" or die _("can not open /etc/sysconfig/autologin for reading: $!");
+    open AUTOLOGIN, "/etc/sysconfig/autologin" or die _("can not open /etc/sysconfig/autologin for reading: %s", $!);
     while (<AUTOLOGIN>) {
 	if (/AUTOLOGIN=(yes|no)/) { $line = $_; last; }
     }

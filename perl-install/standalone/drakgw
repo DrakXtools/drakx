@@ -250,7 +250,7 @@ my $lan_address = "192.168.0";
 foreach (grep { $_ ne $device } @configured_devices)
 {
     grep(/$lan_address/, cat_("/etc/sysconfig/network-scripts/ifcfg-$_")) and
-      ($in->ask_warn('', _("Potential LAN address conflict found in current config of $_!\n")) or goto step_detectsetup);
+      ($in->ask_warn('', _("Potential LAN address conflict found in current config of %s!\n", $_)) or goto step_detectsetup);
 }
 
 
@@ -308,7 +308,7 @@ $in->do_pkgs->install(grep { !-e $rpm2file{$_} } keys %rpm2file);
 if (grep { !-e $rpm2file{$_} } keys %rpm2file) {
     foreach (keys %rpm2file) {
 	-e $rpm2file{$_} or $in->do_pkgs->install($_);
-	-e $rpm2file{$_} or fatal_quit(_("Problems installing package $_"));
+	-e $rpm2file{$_} or fatal_quit(_("Problems installing package %s", $_));
     }
 }
 
@@ -665,6 +665,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.50  2001/08/18 00:06:32  siegel
+#- fixed i18n
+#-
 #- Revision 1.49  2001/08/09 09:35:37  gc
 #- use vnew the right way everywhere
 #-
