@@ -80,7 +80,7 @@ sub empty_all_hds {
 sub recompute_loopbacks {
     my ($all_hds) = @_;
     my @fstab = get_all_fstab($all_hds);
-    $all_hds->{loopbacks} = [ map { isPartOfLoopback($_) ? @{$_->{loopback}} : () } @fstab ];
+    @{$all_hds->{loopbacks}} = map { isPartOfLoopback($_) ? @{$_->{loopback}} : () } @fstab;
 }
 
 sub hds {

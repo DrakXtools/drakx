@@ -141,7 +141,7 @@ sub write_fstab {
 	  $_->{device} eq 'none' || member($_->{type}, qw(nfs smbfs)) ? 
 	      $_->{device} : 
 	  isLoopback($_) ? 
-	      ($_->{mntpoint} eq '/' ? "/initrd/loopfs$_->{loopback_file}" : $_->{device}) :
+	      ($_->{mntpoint} eq '/' ? "/initrd/loopfs" : "$_->{loopback_device}{mntpoint}") . $_->{loopback_file} :
 	  do {
 	      my $dir = $_->{device} =~ m|^/| ? '' : '/dev/';
 	      eval { devices::make("$prefix$dir$_->{device}") };
@@ -354,7 +354,7 @@ sub set_default_options {
     if (isThisFs('reiserfs', $part)) {
 	$options->{notail} = 1;
     }
-    if (isLoopback($_) && !isSwap($_)) { #- no need for loop option for swap files
+    if (isLoopback($part) && !isSwap($part)) { #- no need for loop option for swap files
 	$options->{loop} = 1;
     }
 
@@ -640,7 +640,7 @@ sub mount_part {
 	if (isSwap($part)) {
 	    swap::swapon($part->{device});
 	} else {
-	    $part->{mntpoint} or die "missing mount point";
+	    $part->{mntpoint} or die "missing mount point for partition $part->{device}";
 
 	    my $dev = $part->{device};
 	    my $mntpoint = ($prefix || '') . $part->{mntpoint};

@@ -859,9 +859,6 @@ sub miscellaneous {
 
     local $_ = $o->{bootloader}{perImageAppend};
 
-    if ($o->{lnx4win} and !/mem=/) {
-	$_ .= ' mem=' . availableRamMB() . 'M';
-    }
     if (my @l = detect_devices::IDEburners() and !/ide-scsi/) {
 	$_ .= " " . join(" ", (map { "$_->{device}=ide-scsi" } @l), 
 			 #- in that case, also add ide-floppy otherwise ide-scsi will be used!

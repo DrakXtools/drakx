@@ -415,7 +415,7 @@ sub formatMountPartitions {
 	my ($part) = @_;
 	$w ||= $o->wait_message('', _("Formatting partitions"));
 	$w->set(isLoopback($part) ?
-		_("Creating and formatting file %s", $part->{device}) :
+		_("Creating and formatting file %s", $part->{loopback_file}) :
 		_("Formatting partition %s", $part->{device}));
     });
     die _("Not enough swap to fulfill installation, please add some") if availableMemory < 40 * 1024;
