@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.8
-Release: 7mdk
+Release: 8mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -245,6 +245,9 @@ done
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Sun Jul 21 2002 Pixel <pixel@mandrakesoft.com> 1.1.8-8mdk
+- new snapshot (beware of XFdrake)
+
 * Thu Jul 18 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-7mdk
 - remove last draknet reference in harddrake::ui
 - disable diagnostics and strict mode
