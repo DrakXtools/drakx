@@ -84,17 +84,13 @@ sub get_default {
     }
     elsif ($category eq "checks") { $default_file = "$::prefix/var/lib/msec/security.conf" }
 
-    local *F;
-    open F, $default_file;
-    local $_;
-    while (<F>) {
+    foreach (cat_($default_file)) {
 	   if ($category eq 'functions') {
 		  (undef, $default_value) = split(/ /, $_) if /^$option/;
 	   } elsif ($category eq 'checks') {
 		  (undef, $default_value) = split(/=/, $_) if /^$option/;
 	   }
     }
-    close F;
     chop $default_value;
     $default_value;
 }
@@ -102,36 +98,26 @@ sub get_default {
 sub get_value {
     my ($item, $category) = @_;
     my $value = '';
-    my $found = 0;
-    my $item_file;
-    $item_file = "$::prefix/etc/security/msec/level.local" if $category eq 'functions';
-    $item_file = $check_file if $category eq 'checks';
+    my $item_file =
+      $category eq 'functions' ? "$::prefix/etc/security/msec/level.local" :
+      $category eq 'checks' ? $check_file : '';
 
-    if (-e $item_file) {
-        local *F;
-        open F, $item_file;
-        local $_;
-        while (<F>) {
-            if (/^$item/) {
-			 if ($category eq 'functions') {
-				my $i = $_;
-				(undef, $_) = split /\(/;
-				tr/()//d;
-				$value = $_;
-				$_ = $i;
-			 } elsif ($category eq 'checks') {
-                (undef, $value) = split(/=/, $_);
-			 }
-                chop $value;
-                $found = 1;
-			 close F;
-            }
-        }
-        close F;
-	   $value = "default" if $found == 0;
+    foreach (cat_($item_file)) {
+	/^$item/ or next;
+
+	if ($category eq 'functions') {
+	    my $i = $_;
+	    (undef, $_) = split /\(/;
+	    s/[()]//g;
+	    $value = $_;
+	    $_ = $i;
+	} elsif ($category eq 'checks') {
+	    (undef, $value) = split(/=/, $_);
+	}
+	chop $value;
+	return $value;
     }
-    else { $value = "default" }
-    $value;
+    "default";
 }
 
 # ***********************************************
