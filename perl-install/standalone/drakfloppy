@@ -62,14 +62,12 @@ my ($output, @modules, @temp_modules, %buttons, %options, $tree_model, $tree, $l
 ######## up part
 
 # device part
-my $device_combo = new Gtk2::Combo();
-$device_combo->entry->set_editable(0);
+my $device_combo = new Gtk2::OptionMenu();
 $device_combo->set_popdown_strings(map { "/dev/" . $_->{device} } detect_devices::floppies());
 
 
 # kernel part
-my $kernel_combo = new Gtk2::Combo();
-$kernel_combo->disable_activate;
+my $kernel_combo = new Gtk2::OptionMenu();
 $kernel_combo->set_popdown_strings(sort grep { !/^\.\.?$/ } all("/lib/modules"));
 $kernel_combo->entry->set_text(chomp_(`uname -r`));
 
@@ -140,6 +138,8 @@ sub toggle_expert_button() {
 }
 
 
+my $remove_but;
+
 sub pref_dialog() {
     my $dialog = gtkset_modal(gtkset_size_request(_create_dialog(N("Advanced preferences")), 600, -1), 1);
     $dialog->set_transient_for($window->{rwindow}) unless $::isEmbedded;
@@ -161,7 +161,6 @@ sub pref_dialog() {
         $col->set_sort_column_id($::i);
         $col->set_min_width((200, 50)[$::i]);
     } (N("Module name"), N("Size"));
-
     
     gtkpack_($dialog->vbox,
              0, gtkadd(Gtk2::Frame->new(N("mkinitrd optional arguments")),
@@ -181,13 +180,14 @@ sub pref_dialog() {
                                               1, gtkadd(Gtk2::ScrolledWindow->new,
                                                         $list
                                                        ),
-                                              0, gtksignal_connect(Gtk2::Button->new(N("Remove a module")),
+                                              0, gtksignal_connect($remove_but = Gtk2::Button->new(N("Remove a module")),
                                                                    clicked => sub {
                                                                        my $iter = ($list->get_selection->get_selected)[1];
                                                                        return unless $iter;
                                                                        my $removed = $list_model->get($iter, 2);
                                                                        $list_model->remove($iter);
                                                                        @temp_modules = grep { $_ ne $removed } @temp_modules;
+                                                                       $remove_but->set_sensitive(scalar @temp_modules);
                                                                    }),
                                              ),
                                     ),
@@ -198,6 +198,7 @@ sub pref_dialog() {
     $buttons{$_}->set_active($options{$_}) foreach keys %buttons;
     fill_tree($kernel_combo->entry->get_text);
     $list_model->append_set([ map_index { $::i => $_ } @$_ ]) foreach @modules;
+    $remove_but->set_sensitive(scalar @modules);
     @temp_modules = ();
 
     gtkpack($dialog->action_area,
@@ -239,6 +240,8 @@ sub fill_tree {
 sub selected_tree {
     my ($select) = @_;
     my ($model, $iter) = $select->get_selected;
+    $remove_but->set_sensitive($model && $iter);
+
     return unless $model;       # no real selection
     my $file = $model->get($iter, 1);
     
@@ -263,7 +266,7 @@ sub expand_tree {
         if ($tree_model->iter_has_child($parent_iter)) {
             my $child = $tree_model->iter_children($parent_iter);
             # BUG: ->iter_children return invalid iterators !!! thus the dummy empty line
-            $tree_model->remove($child) if $tree_model->iter_is_valid($child) && $tree_model->get($child, 0) eq '';
+            $tree_model->remove($child);
         }
         # do not refill the parent anymore
         $tree_model->set($parent_iter, 2 => 0);
