@@ -575,7 +575,7 @@ configurePrinterType =>
  __("You must now select your printer in the above list."),
 
 configurePrinterOptions => 
-__("Please select rights options according to your printer.
+__("Please select the right options according to your printer.
 Please see its documentation if you don't know what choose here.
 
 
@@ -628,7 +628,8 @@ and maintenance purposes."),
 
 createBootdisk => 
  __("Creating a boot disk is strongly recommended. If you can't
-boot your computer, it's the only way to rescue it without reinstalling it."),
+boot your computer, it's the only way to rescue your system without
+reinstalling it."),
 
 setupBootloaderBeginner =>
  __("You need to indicate where you wish
