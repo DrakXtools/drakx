@@ -99,4 +99,4 @@ our %spoolers = ('pdq' => {
 		 );
 our %spooler_inv = map { $spoolers{$_}{long_name} => $_ } keys %spoolers;
 
-our %shortspooler_inv = map { $spoolers{$_}{short_name} => $spoolers{$_} } keys %spoolers;
+our %shortspooler_inv = map { $spoolers{$_}{short_name} => $_ } keys %spoolers;
