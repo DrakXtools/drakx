@@ -89,7 +89,7 @@ If you don't know, choose 'use pppoe'"),
 };
 
 sub adsl_probe_info {
-    my ($adsl, $netc, $adsl_type) = @_;
+    my ($adsl, $netc, $adsl_type, $adsl_modem) = @_;
     my $pppoe_file = "$prefix/etc/ppp/pppoe.conf";
     my $pptp_file = "$prefix/etc/sysconfig/network-scripts/net_cnx_up";
     my %pppoe_conf; %pppoe_conf = getVarsFromSh($pppoe_file) if (! defined $adsl_type || $adsl_type =~ /pppoe/) && -f $pppoe_file;
@@ -99,7 +99,8 @@ sub adsl_probe_info {
     }
     ($login) = map { if_(/\sname\s+([^ \n]+)/, $1) } cat_($pptp_file) if (! defined $adsl_type || $adsl_type =~ /pptp/) && -r $pptp_file;
     my $passwd = passwd_by_login($login);
-    $adsl_type eq 'speedtouch' and ($netc->{vpivci}) = map { if_(/^.*-vpi\s+(\d+)\s+-vci\s+(\d+)/, "$1_$2")  } cat_("$prefix/etc/ppp/peers/adsl");
+    ($netc->{vpivci}) = 
+      map { if_(/^.*-vpi\s+(\d+)\s+-vci\s+(\d+)/, "$1_$2") } cat_("$prefix/etc/ppp/peers/adsl") if $adsl_modem eq 'speedtouch';
     $pppoe_conf{DNS1} ||= '';
     $pppoe_conf{DNS2} ||= '';
     add2hash($netc, { dnsServer2 => $pppoe_conf{DNS1}, dnsServer3 => $pppoe_conf{DNS2}, DOMAINNAME2 => '' });
