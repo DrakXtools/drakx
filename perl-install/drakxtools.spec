@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 4mdk
+Release: 5mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Feb 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-5mdk
+- drakconnect: write vci and vpi parameters in decimal base when
+  configuring speedtouch
+
 * Mon Feb 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-4mdk
 - drakbackup (stew):
   o verify user has selected a cron interval and media (#8138)
