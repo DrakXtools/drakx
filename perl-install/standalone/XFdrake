@@ -39,8 +39,6 @@ $configure_this ||= 'everything';
 { 
     my $in = 'interactive'->vnew('su');
 
-    modules::mergein_conf();
-
     my $rc = do {
 	my $options = { allowFB => listlength(cat_("/proc/fb")) };
 
