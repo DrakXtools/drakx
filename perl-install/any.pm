@@ -621,7 +621,7 @@ sub ask_users {
     }
 }
 
-sub sessions {
+sub sessions() {
     split(' ', run_program::rooted_get_stdout($::prefix, '/usr/sbin/chksession', '-l'));
 }
 
