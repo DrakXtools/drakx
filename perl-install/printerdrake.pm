@@ -128,6 +128,11 @@ complete => sub {
     #- make the DeviceURI from user input.
     $printer->{currentqueue}{'connect'} = 
         "lpd://$remotehost/$remotequeue";
+
+    #- LPD does not support filtered queues to a remote LPD server by itself
+    #- It needs an additional program as "rlpr"
+    if ($printer->{SPOOLER} eq 'lpd') {&$install('rlpr');}
+
 }
 
 sub setup_smb($$$) {
@@ -329,6 +334,11 @@ complete => sub {
     $printer->{currentqueue}{'connect'} = 
     join '', ("socket://$remotehost", $remoteport ? (":$remoteport") : ());
     1;
+
+    #- LPD and LPRng need netcat ('nc') to access to socket printers
+    if (($printer->{SPOOLER} eq 'lpd') ||
+        ($printer->{SPOOLER} eq 'lprng')) {&$install('nc');}
+
 }
 
 sub setup_uri($$$) {
@@ -407,7 +417,7 @@ sub setup_gsdriver($$$;$) {
     if ((keys %printer::thedb) == 0) {
         printer::read_printer_db($printer->{SPOOLER});
     }
-    my $testpage = "/usr/share/cups/data/testprint.ps";
+    my $testpage = "/usr/share/printer-testpages/testprint.ps";
     my $queue = $printer->{OLD_QUEUE};
     $in->set_help('configurePrinterType') if $::isInstall;
     while (1) {
@@ -571,14 +581,14 @@ sub setup_gsdriver($$$;$) {
 	    # Show the options dialog. The call-back function does a
 	    # range check of the numerical options.
 	    my $windowtitle;
-#	    if ($::expert) {
+	    if ($::expert) {
 		$windowtitle = $printer->{DBENTRY};
 		$windowtitle =~ s/\|/ /;
 		$windowtitle =~ s/\|/, /;
-#	    } else {
-#		$windowtitle = "$printer->{currentqueue}{'make'} " .
-#		    "$printer->{currentqueue}{'model'}"
-#	    }
+	    } else {
+		$windowtitle = "$printer->{currentqueue}{'make'} " .
+		    "$printer->{currentqueue}{'model'}"
+	    }
 	    return if !$in->ask_from_entries_refH
 		($windowtitle,
 		 _("Printer options"), \@widgets,
@@ -740,10 +750,12 @@ sub install_spooler ($$) {
     my ($printer, $install) = @_;
     if (!$::testing) {
 	if ($printer->{SPOOLER} eq "cups") {
-	    &$install('cups');
+	    &$install(('cups', 'xpp', 'qtcups', 'kups',
+		       ($::expert ? 'cups-drivers' : ())));
+	    if ($::expert) {&$install('cups-drivers');}
 	    # Restart daemon
 	    printer::start_service("cups");
-	    sleep 5;
+	    sleep 1;
 	} elsif ($printer->{SPOOLER} eq "lpd") {
 	    # "lpr" conflicts with "LPRng", remove "LPRng"
 	    printer::remove_package("LPRng");
@@ -769,8 +781,12 @@ sub install_spooler ($$) {
 sub main($$$$;$) {
     my ($printer, $in, $ask_multiple_printer, $install, $upNetwork) = @_;
 
-    # printerdrake does not work without foomatic
-    &$install('foomatic') unless $::testing;
+    # printerdrake does not work without foomatic, and for more convenience
+    # we install some more stuff
+    if (!$::testing) {
+	&$install(('foomatic', 'printer-utils', 'printer-testpages',
+		   (printer::installed("gimp") ? 'gimpprint' : ())));
+    }
 
     !$::expert && ($printer->{SPOOLER} ||= 'cups'); # only experts should be asked
                                                  # for the spooler

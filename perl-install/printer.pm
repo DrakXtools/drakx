@@ -105,6 +105,21 @@ sub remove_package ($) {
     run_program::rooted($prefix, "rpm -e --nodeps $package") || do {};
 }
 
+sub installed ($) {
+    my ($package) = @_;
+    open RPMCHECK, "rpm -qa | grep $package |" ||
+	die "Could not run rpm!";
+    my $found = 0;
+    while (<RPMCHECK>) {
+	if ($_ =~ m/^$package\-.+\-.+mdk/) {
+	    $found = 1;
+	    last;
+	}
+    }
+    close RPMCHECK;
+    return $found;
+}
+
 sub copy_printer_params($$) {
     my ($from, $to) = @_;
     map { $to->{$_} = $from->{$_} } grep { $_ ne 'configured' } keys %$from; 
