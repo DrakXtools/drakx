@@ -829,7 +829,7 @@ sub chooseResolutionsGtk($$;$) {
     #- the set function is usefull to toggle the CheckButton with the callback being ignored
     my $ignore;
     my $no_human; # is the w2_combo->entry changed by a human?
-    my $set = sub { $ignore = 1; $_[0]->set_active(1); $ignore = 0; };
+    my $set = sub { $ignore = 1; $_[0] and $_[0]->set_active(1); $ignore = 0; };
 
     my %monitor;
     $monitor{$_} = [ gtkcreate_png("monitor-" . $_ . ".png") ] foreach (640, 800, 1024, 1280);
