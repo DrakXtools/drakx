@@ -370,6 +370,9 @@ mkdir "/hd/boot";
 if (-e "/cdrom/oem/vmlinuz" && -e "/cdrom/oem/all.rdz") {
     system "cp", "-a", "/cdrom/oem/vmlinuz", "/hd/boot/vmlinuz";
     system "cp", "-a", "/cdrom/oem/all.rdz", "/hd/boot/all.rdz";
+} elsif (-e "/cdrom/isolinux/alt0/vmlinuz" && -e "/cdrom/isolinux/alt0/all.rdz") {
+    system "cp", "-a", "/cdrom/isolinux/alt0/vmlinuz", "/hd/boot/vmlinuz";
+    system "cp", "-a", "/cdrom/isolinux/alt0/all.rdz", "/hd/boot/all.rdz";
 } elsif (-e "/cdrom/boot/vmlinuz" && -e "/cdrom/boot/hd.rdz") {
     system "cp", "-a", "/cdrom/boot/vmlinuz", "/hd/boot/vmlinuz";
     system "cp", "-a", "/cdrom/boot/hd.rdz", "/hd/boot/all.rdz";
