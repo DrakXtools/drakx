@@ -13,16 +13,19 @@ sub getFile {
     $sock->close if $sock;
     $url =~ m|/XXX$| and return; #- force closing connection.
 
-    my ($host, $port, $path) = $url =~ m,^http://([^/:]+)(?::(\d+))?(/\S*)?$,;
+    # can be used for ftp urls (with http proxy)
+    my ($host, $port, $path) = $url =~ m,^(?:http|ftp)://([^/:]+)(?::(\d+))?(/\S*)?$,;
     $host = resolv($host);
 
-    $sock = IO::Socket::INET->new(PeerAddr => $host,
-				  PeerPort => $port || 80,
+    my $use_http_proxy = $ENV{PROXY} && $ENV{PROXYPORT};
+
+    $sock = IO::Socket::INET->new(PeerAddr => $use_http_proxy ? $ENV{PROXY} : $host,
+				  PeerPort => $use_http_proxy ? $ENV{PROXYPORT} : $port || 80,
 				  Proto    => 'tcp',
 				  Timeout  => 60) or die "can't connect $@";
     $sock->autoflush;
     print $sock join("\015\012" =>
-		     "GET $path HTTP/1.0",
+		     "GET " . ($use_http_proxy ? $url : $path) . " HTTP/1.0",
 		     "Host: $host" . ($port && ":$port"),
 		     "User-Agent: DrakX/vivelinuxabaszindozs",
 		     "", "");
