@@ -283,7 +283,7 @@ INTERFACE=`$modems{$adsl_device}{get_intf}`
     }
 
     $netc->{NET_INTERFACE} = 'ppp0';
-    write_cnx_script($netc);
+    exists $netc->{internet_cnx} and write_cnx_script($netc);
 }
 
 1;
