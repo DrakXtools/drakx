@@ -78,6 +78,50 @@ sub mkbootdisk {
 
 sub read() {
     my $file = sprintf("/etc/%s.conf", arch() =~ /sparc/ ? 'silo' : arch() =~ /ppc/ ? 'yaboot' : 'lilo');
+    $file =~ /lilo/ && detect_bootloader() =~ /GRUB/ ? read_grub("/boot/grub/menu.lst") : read_lilo($file);
+}
+
+sub read_grub {
+    my ($file) = @_;
+    my $global = 1;
+    my ($e, %b);
+    foreach (cat_("$::prefix$file")) {
+        next if /^\s*#/ || /^\s*$/;
+        chomp;
+        #	($_, $v) = /^\s*([^=\s]+)\s*(?:=\s*(.*?))?\s*$/ or log::l("unknown line in $file: $_"), next;
+        if (! /^\s*([^\s]*)\s*(.*?)\s*$/) {
+            print STDERR "unknown line in $file: \"",  chomp_($_), "\"\n";
+            next;
+        }
+        my ($keyword, $v) = ($1, $2);
+        if ($keyword eq 'title') {
+            push @{$b{entries}}, $e = { label => $v };
+            $global = 0;
+        } elsif ($global) {
+            $b{$keyword} = ungrubify($v) || 1;
+        } else {
+            $e->{root} = $1 if $v =~ s/root=([^\s]*)\s*//;
+            if ($keyword eq 'kernel') {
+                ($e->{kernel_or_dev}, $e->{append}) = split /\s+/, ungrubify($v), 2;
+                $e->{type} = 'image';
+            } elsif ($keyword eq 'root') {
+                $e->{type} = 'other';
+                $e->{table} = grub2dev($v, 1) if $v =~ /,/; # floppy does not need table in lilo.conf
+                $e->{kernel_or_dev} = grub2dev($v);
+                $e->{append} = "";
+            } elsif ($keyword eq 'initrd') {
+                $e->{$keyword} = ungrubify($v);
+            } else {
+            }
+        }
+    }
+    $b{default} = $b{entries}[$b{default}]->{label};
+
+    \%b;
+}
+
+sub read_lilo {
+    my ($file) = @_;
     my $global = 1;
     my ($e, $v);
     my %b;
@@ -980,6 +1024,27 @@ sub dev2grub {
     $dev =~ m|^(/dev/)?(...)(.*)$| or die "dev2grub (bad device $dev), caller is " . join(":", caller());
     my $grub = $dev2bios->{$2} or die "dev2grub ($2)";
     "($grub" . ($3 && "," . ($3 - 1)) . ")";
+}
+
+sub grub2dev {
+    my ($device, $o_block_device) = @_;
+    my ($dev, $part) = ($1 . ")", $2) if $device =~ s/(\([^,]*?)(?:,(.*))?\)//;
+    undef $part if $o_block_device;
+    $part++ if defined $part;   # grub wants "(hdX,Y)" where lilo just want "hdX"
+    $dev =~ s/,[^)]*//;
+    my %h = map { chomp; s/()//g; split(/\s+/, $_, 2) } cat_("$::prefix/boot/grub/device.map");
+    my $new_dev = +{ map { chomp; s/()//g; split(/\s+/, $_, 2) } cat_("$::prefix/boot/grub/device.map") }->{$dev} . $part;
+    wantarray() ? ($device, $new_dev) : $new_dev;
+}
+
+# replace dummy "(hdX,Y)" in "(hdX,Y)/boot/vmlinuz..." by appropriate path if needed
+sub ungrubify {
+    my ($device) = @_;
+    my $dev;
+    ($device, $dev) = grub2dev($device);
+    my %mnt_pts =  ("/dev/" . devices::from_devfs(readlink('/dev/root')) => "/", map { (split)[0..1] } cat_("/proc/mounts"));
+    (my $v = join($mnt_pts{$dev} || $dev, $device)) =~ s!//!/!g;
+    $v;
 }
 
 sub write_grub_config {
