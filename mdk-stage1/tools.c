@@ -275,7 +275,7 @@ enum return_type copy_file(char * from, char * to, void (*callback_func)(int ove
 
 static void save_stuff_for_rescue(void)
 {
-        copy_file("/etc/resolv.conf", STAGE2_LOCATION "/resolv.conf", NULL);
+        copy_file("/etc/resolv.conf", STAGE2_LOCATION "/etc/resolv.conf", NULL);
 }
 
 enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
