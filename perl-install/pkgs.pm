@@ -205,7 +205,7 @@ sub packagesToInstall {
 
 sub allMediums {
     my ($packages) = @_;
-    keys %{$packages->{mediums}};
+    sort { $a <=> $b } keys %{$packages->{mediums}};
 }
 sub mediumDescr {
     my ($packages, $medium) = @_;
