@@ -246,6 +246,8 @@ Do you really want to get your printers auto-detected?"),
 		    $menustr .= _(", USB printer \#%s", $1);
 		} elsif ($p->{port} =~ m!^socket://([^:]+):(\d+)$!) {
 		    $menustr .= _(", network printer \"%s\", port %s", $1, $2);
+		} elsif ($p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!) {
+		    $menustr .= _(", printer \"%s\" on SMB/Windows server \"%s\"", $2, $1);
 		}
 		if ($::expert) {
 		    $menustr .= " ($p->{port})";
@@ -260,6 +262,8 @@ Do you really want to get your printers auto-detected?"),
 		    $menustr = _("USB printer \#%s", $1);
 		} elsif ($p->{port} =~ m!^socket://([^:]+):(\d+)$!) {
 		    $menustr .= _("Network printer \"%s\", port %s", $1, $2);
+		} elsif ($p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!) {
+		    $menustr .= _("Printer \"%s\" on SMB/Windows server \"%s\"", $2, $1);
 		}
 		if ($::expert) {
 		    $menustr .= " ($p->{port})";
@@ -315,8 +319,18 @@ Do you really want to get your printers auto-detected?"),
 	    $menuentries->{$menustr} = "/dev/usb/lp$m";
 	}
     }
-    my @menuentrieslist = sort { $menuentries->{$a} cmp $menuentries->{$b} }
-    keys(%{$menuentries});
+    my @menuentrieslist = sort { 
+	my @prefixes = ("/dev/lp", "/dev/usb/lp", "/dev/", "socket:", "smb:");
+	my $first = $menuentries->{$a};
+	my $second = $menuentries->{$b};
+	for (my $i = 0; $i <= $#prefixes; $i++) {
+	    my $firstinlist = ($first =~ m!^$prefixes[$i]!);
+	    my $secondinlist = ($second =~ m!^$prefixes[$i]!);
+	    if (($firstinlist) && (!$secondinlist)) {return -1};
+	    if (($secondinlist) && (!$firstinlist)) {return 1};
+	}
+	return $first cmp $second;
+    } keys(%{$menuentries});
     my $menuchoice = "";
     my $oldmenuchoice = "";
     if (($printer->{configured}{$queue}) &&
@@ -358,8 +372,8 @@ Do you really want to get your printers auto-detected?"),
 	    }
 	}
     } elsif (($printer->{configured}{$queue}) &&
-	($printer->{currentqueue}{connect} =~ m!^socket:/!)) {
-	# Ethernet-(TCP/Socket)-connected printer
+	($printer->{currentqueue}{connect} =~ m!^(socket|smb):/!)) {
+	# Ethernet-(TCP/Socket)-connected printer or printer on Windows server
 	$device = $printer->{currentqueue}{connect};
 	for my $p (keys %{$menuentries}) {
 	    if ($device eq $menuentries->{$p}) {
