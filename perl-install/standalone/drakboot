@@ -125,7 +125,7 @@ $combo{boot}->entry->signal_connect(changed => sub { change_image($boot_pic, $co
 
 my ($x_box, $splash_box);
 my $boot_warn = 1;
-my $splash_mode &= !$no_bootsplash;
+my $splash_mode = !$no_bootsplash;
 gtkadd($window,
        gtkpack_(Gtk2::VBox->new(0,0),
                 ($splash_working ?
@@ -144,7 +144,8 @@ gtkadd($window,
                                        gtkpack__(Gtk2::VBox->new(0, 5),
                                                  N("Theme"),
                                                  $combo{boot},
-                                                 gtksignal_connect(Gtk2::CheckButton->new(N("Display theme\nunder console")), clicked => sub { invbool(\$keep_logo) }),
+						 #gtksignal_connect(Gtk2::CheckButton->new(N("Display theme\nunder console")), clicked => sub { invbool(\$keep_logo) }),
+						 gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Display theme\nunder console")), $keep_logo), clicked => sub { invbool(\$keep_logo) })
                                                 ),
                                        Gtk2::VSeparator->new,
                                        gtkpack__(Gtk2::VBox->new(0, 5),
