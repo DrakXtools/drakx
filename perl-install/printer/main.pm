@@ -1398,10 +1398,9 @@ sub configure_hpoj {
 	die "Could not open /etc/ptal/$ptaldevice for writing!\n";
 
     # Write file header.
-    $_ = `date`;
-    chomp;
+    my $date = chomp_(`date`);
     print CONFIG
-	"# Added $_ by \"printerdrake\".\n" .
+	"# Added $date by \"printerdrake\".\n" .
 	"\n" .
 	"# The basic format for this file is \"key[+]=value\".\n" .
 	"# If you say \"+=\" instead of \"=\", then the value is appended to any\n" .
