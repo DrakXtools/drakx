@@ -53,6 +53,7 @@ my $no_bootsplash;
 my $x_mode = Xconfig::various::runlevel() == 5;
 my $auto_mode = any::get_autologin();
 my $switch_theme = '/usr/share/bootsplash/scripts/switch-themes';
+my $remove_theme = '/usr/share/bootsplash/scripts/remove-theme';
 
 my $w = ugtk2->new($splash_working ? N("Graphical boot theme selection") : N("System mode"));
 my $window = $w->{window};
@@ -79,6 +80,7 @@ $desktop_combo->set_popdown_strings(split(' ', `/usr/sbin/chksession -l`));
 $desktop_combo->entry->set_text($auto_mode->{desktop}) if $auto_mode->{desktop};
 
 my %themes = 	('path' => '/usr/share/bootsplash/themes/',
+   	        'sysconfig' => '/etc/sysconfig/bootsplash',
                 'default' => 'Mandrake',
                 'def_thmb' => '/usr/share/libDrakX/pixmaps/nosplash_thumb.png',
                 'lilo' => {'file' => '/lilo/message',
@@ -87,7 +89,10 @@ my %themes = 	('path' => '/usr/share/bootsplash/themes/',
                                 #'thumb'=>'/images/thumb.png',
                           },
                );
-my $cur_res = `/usr/share/bootsplash/scripts/detect-resolution`;
+my $kernel_release = `uname -r`;
+chomp $kernel_release;
+my $initrd = "/boot/initrd-$kernel_release.img" if -f "/boot/initrd-$kernel_release.img";
+my $cur_res = `/usr/share/bootsplash/scripts/detect-resolution $initrd`;
 $cur_res =~ m/(\d+x\d+)x\d+/ and $cur_res = $1;
 #- verify that current resolution is ok
 if (!$cur_res) {
@@ -96,6 +101,21 @@ if (!$cur_res) {
 }
 
 $no_bootsplash = 0 if $::testing;
+
+my $splash_mode = !$no_bootsplash;
+my $keep_logo = 1;
+
+if (-r $themes{sysconfig}) {
+    my $SYSF;
+    open $SYSF, $themes{sysconfig} or die "Can't open $themes{sysconfig}\n";                                                                             
+    while (<$SYSF>) {                                                                                                                                    
+	/^SPLASH=no/ and $splash_mode = 0;
+	/^THEME=(.*)/ and  -f "$themes{path}$1$themes{boot}{path}bootsplash-$cur_res.jpg" and $themes{default} = $1;
+	/^LOGO_CONSOLE=(.*)/ and $keep_logo = !($1 eq 'no');
+    }
+    close($SYSF);
+}
+
 my @thms;
 my @boot_thms = if_(!$themes{default}, qw(default));
 chdir($themes{path}); #- we must change directory for correct @thms assignement
@@ -118,7 +138,6 @@ change_image($boot_pic, $themes{default});
 
 my $_thm_button = Gtk2::Button->new(N("Install themes"));
 my $_B_create = gtksignal_connect(Gtk2::Button->new(N("Create new theme")), clicked => sub { system('/usr/sbin/draksplash ') });
-my $keep_logo = 1;
 			  
 #- ******** action to take on changing combos values
 
@@ -126,7 +145,6 @@ $combo{boot}->entry->signal_connect(changed => sub { change_image($boot_pic, $co
 
 my ($x_box, $splash_box);
 my $boot_warn = 1;
-my $splash_mode = !$no_bootsplash;
 gtkadd($window,
        gtkpack_(Gtk2::VBox->new(0,0),
                 ($splash_working ?
@@ -187,7 +205,7 @@ gtkadd($window,
                                      ok_clicked => sub {
                                          Xconfig::various::runlevel($x_mode ? 5 : 3);
                                          $splash_working or updateAutologin();
-                                         $no_bootsplash or update_bootsplash($combo{boot}->entry->get_text, $keep_logo);
+                                         $no_bootsplash or update_bootsplash($combo{boot}->entry->get_text, ,$splash_mode,  $keep_logo);
                                          ugtk2->exit(0);
                                      }
                                     },
@@ -257,16 +275,25 @@ sub updateAutologin() {
 }
 
 sub update_bootsplash {
-    my ($theme, $keep_logo) = @_;
+    my ($theme, $splash_mode, $keep_logo) = @_;
+    #- theme scripts will update SPLASH value in sysconfig file
     if (-x $switch_theme) {
-	my $val = $keep_logo ? 'theme' : 'no';
+	my $logo_console = $keep_logo ? 'theme' : 'no';
 	if ($::testing) {
-	    print "substInFile { s/^LOGO_CONSOLE=.*/LOGO_CONSOLE=$val/ } /etc/sysconfig/bootsplash\n";
-	    print "system($switch_theme, $theme)\n"
-	} else {
-	    substInFile { s/^LOGO_CONSOLE=.*/LOGO_CONSOLE=$val/ } "/etc/sysconfig/bootsplash";
-	    system($switch_theme, $theme)
-	}
+	    if ($splash_mode) {
+		print "substInFile { s/^LOGO_CONSOLE=.*/LOGO_CONSOLE=$logo_console/ } $themes{sysconfig}\n";
+		print "system($switch_theme, $theme)\n";
+	    } else {
+		print "system($remove_theme, $theme)\n";
+	    }
+ 	} else {
+	    if ($splash_mode) {
+		substInFile { s/^LOGO_CONSOLE=.*/LOGO_CONSOLE=$logo_console/ } $themes{sysconfig};
+		system($switch_theme, $theme);
+	    } else {
+		system($remove_theme, $theme);
+	    }
+ 	}
     }
 }
 
