@@ -600,9 +600,9 @@ sub setVirtual($) {
 sub removeXiBSuffix($) {
     local $_ = shift;
 
-    /(\d+)k$/i and return $1 * 1024;
-    /(\d+)M$/i and return $1 * 1024 * 1024;
-    /(\d+)G$/i and return $1 * 1024 * 1024 * 1024;
+    /(\d+)\s*kB?$/i and return $1 * 1024;
+    /(\d+)\s*MB?$/i and return $1 * 1024 * 1024;
+    /(\d+)\s*GB?$/i and return $1 * 1024 * 1024 * 1024;
     $_;
 }
 sub formatXiB {
