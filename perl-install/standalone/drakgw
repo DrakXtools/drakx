@@ -49,6 +49,7 @@ my $sysconf_dhcpd = "/etc/sysconfig/dhcpd";
 my $rc_firewall_generic = "/etc/rc.d/rc.firewall";
 my $rc_firewall_drakgw = "/etc/rc.d/rc.firewall.inet_sharing";
 my $rc_firewall_24 = "/etc/rc.d/rc.firewall.inet_sharing-2.4";
+my $masq_file = "/etc/shorewall/masq";
 my $dhcpd_conf = "/etc/dhcpd.conf";
 my $cups_conf = "/etc/cups/cupsd.conf";
 
@@ -134,9 +135,10 @@ What would you like to do?"),
 		my $wait_disabl = $in->wait_message('', _("Disabling servers..."));
 		stop_daemons();
 	    }
-	    foreach ($dhcpd_conf, $rc_firewall_24) {
+	    foreach ($dhcpd_conf, $masq_file) {
 		renamef($_, "$_.drakgwdisable") or die "Could not rename $_ to $_.drakgwdisable" 
 	    }
+	    sys("/etc/init.d/shorewall restart >/dev/null");
 	    log::l("[drakgw] Disabled");
 	    $::Wizard_finished = 1;
 	    $in->ask_okcancel('', _("Internet connection sharing is now disabled."));
@@ -155,7 +157,7 @@ It's currently disabled.
 What would you like to do?"),
 				   [ __("enable"), __("reconfigure"), __("dismiss") ]);
 	if ($r eq "enable") {
-	    foreach ($dhcpd_conf, $rc_firewall_24) {
+	    foreach ($dhcpd_conf, $masq_file) {
 		rename($_, "$_.old") if -f $_;
 		rename("$_.drakgwdisable", $_) or die "Could not find configuration. Please reconfigure.";
 	    }
@@ -287,7 +289,7 @@ Driver: %s", $device, $conf->{NETWORK}, $conf->{IPADDR}, $conf->{BOOTPROTO}, $al
 		      _("I can keep your current configuration and assume you already set up a DHCP server; in that case please verify I correctly read the Network that you use for your local network; I will not reconfigure it and I will not touch your DHCP server configuration.
 
 The default DNS entry is the Caching Nameserver configured on the firewall. You can replace that with your ISP DNS IP, for example.
-
+		      
 Else, I can reconfigure your interface and (re)configure a DHCP server for you.
 
 ", $device),
