@@ -1777,7 +1777,7 @@ sub setup_common {
 					   N("Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300 with scanner, DeskJet 450, Sony IJP-V100), an HP PhotoSmart or an HP LaserJet 2200?"), 0);
 	    }
 	}
-	if ($makemodel =~ /HP\s+(OfficeJet|PSC|PhotoSmart|LaserJet\s+(1200|1220|2200|3200|33.0)|DeskJet\s+450)/i ||
+	if ($makemodel =~ /HP\s+(OfficeJet|PSC|PhotoSmart|LaserJet\s+(1200|1220|2200|3200|33.0)|(DeskJet|dj)\s*450)/i ||
 	    $makemodel =~ /Sony\s+IJP[\s\-]+V[\s\-]+100/i ||
 	    $isHPOJ) {
 	    # Install HPOJ package
@@ -1803,7 +1803,7 @@ sub setup_common {
 		# Configure scanning with SANE on the MF device
 		if ($makemodel !~ /HP\s+PhotoSmart/i &&
 		    $makemodel !~ /HP\s+LaserJet\s+2200/i &&
-		    $makemodel !~ /HP\s+DeskJet\s+450/i) {
+		    $makemodel !~ /HP\s+(DeskJet|dj)\s*450/i) {
 		    # Install SANE
 		    if (!$::testing &&
 			!files_exist(qw(/usr/bin/scanimage
@@ -1832,7 +1832,7 @@ sub setup_common {
 		     $makemodel =~ /HP\s+PSC\s*22\d\d/i ||
 		     $makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i ||
 		     $makemodel =~ /HP\s+OfficeJet\s+71[34]0/i ||
-		     $makemodel =~ /HP\s+DeskJet\s+450/i) &&
+		     $makemodel =~ /HP\s+(DeskJet|dj)\s*450/i) &&
 		    $makemodel !~ /HP\s+PhotoSmart\s+7150/i) {
 		    # Install mtools and MToolsFM
 		    if (!$::testing &&
@@ -2056,15 +2056,16 @@ sub setup_common {
 		next;
 	    }
 	    # Matching a part of the human-readable makes and models
-	    # should only be done id the search term is not the name of
+	    # should only be done if the search term is not the name of
 	    # an old model, otherwise the newest, not yet listed models
-	    # match with the oldest model of the manufavturer (as the
+	    # match with the oldest model of the manufacturer (as the
 	    # Epson Stylus Photo 900 with the original Epson Stylus Photo)
 	    my @badsearchterms = 
 		("HP|DeskJet",
 		 "HP|LaserJet",
 		 "HP|DesignJet",
 		 "HP|OfficeJet",
+		 "HP|PhotoSmart",
 		 "EPSON|Stylus",
 		 "EPSON|Stylus Color",
 		 "EPSON|Stylus Photo",
@@ -3012,7 +3013,7 @@ sub scanner_help {
 	my $ptaldevice = $1;
 	if ($makemodel !~ /HP\s+PhotoSmart/i &&
 	    $makemodel !~ /HP\s+LaserJet\s+2200/i &&
-	    $makemodel !~ /HP\s+DeskJet\s+450/i) {
+	    $makemodel !~ /HP\s+(DeskJet|dj)\s*450/i) {
 	    # Models with built-in scanner
 	    return N("Your multi-function device was configured automatically to be able to scan. Now you can scan with \"scanimage\" (\"scanimage -d hp:%s\" to specify the scanner when you have more than one) from the command line or with the graphical interfaces \"xscanimage\" or \"xsane\". If you are using the GIMP, you can also scan by choosing the appropriate point in the \"File\"/\"Acquire\" menu. Call also \"man scanimage\" on the command line to get more information.
 
@@ -3034,7 +3035,7 @@ sub photocard_help {
 	     $makemodel =~ /HP\s+PSC\s*22\d\d/i ||
 	     $makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i ||
 	     $makemodel =~ /HP\s+OfficeJet\s+71[34]0/i ||
-	     $makemodel =~ /HP\s+DeskJet\s+450/i) &&
+	     $makemodel =~ /HP\s+(DeskJet|dj)\s*450/i) &&
 	    $makemodel !~ /HP\s+PhotoSmart\s+7150/i) {
 	    # Models with built-in photo card drives
 	    return N("Your printer was configured automatically to give you access to the photo card drives from your PC. Now you can access your photo cards using the graphical program \"MtoolsFM\" (Menu: \"Applications\" -> \"File tools\" -> \"MTools File Manager\") or the command line utilities \"mtools\" (enter \"man mtools\" on the command line for more info). You find the card's file system under the drive letter \"p:\", or subsequent drive letters when you have more than one HP printer with photo card drives. In \"MtoolsFM\" you can switch between drive letters with the field at the upper-right corners of the file lists.",
