@@ -1041,7 +1041,7 @@ sub build_backup_files() {
 			do_find(undef, $find_args_user, $list_file, $path_name);
 			do_tar($tar_cmd_user, "backup_$incr$user", undef, $path_name);
 		  }
-		  push_list("$incr$user") if $incr =~ /_user/;
+		  push_list("list_$incr$user") if $incr =~ /_user/;
 		  files_to_results("$incr$user");
 	    }
 	  }
@@ -1251,7 +1251,7 @@ sub push_list {
 	my $filename = $conf{PATH_TO_SAVE} . "/" . $prefix . $the_time . ".";
 	$filename .= $conf{OPTION_COMP} if $prefix =~ /^backup/;
 	$filename .= "txt" if $prefix =~ /^list/;
-	push @file_list_to_send_by_ftp, $filename;
+	push @file_list_to_send_by_ftp, $filename if -e $filename;
 }
 
 sub files_to_results {
