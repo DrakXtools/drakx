@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX HEAD\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-03-05 23:18+0600\n"
-"Last-Translator: Jamil Ahmed <jamil@bengalinux.org>\n"
+"PO-Revision-Date: 2005-03-19 23:18+0600\n"
+"Last-Translator: Samia <mailsamia2001@yahoo.com>\n"
 "Language-Team: Bangla <mdk-translation@bengalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -706,7 +706,7 @@ msgstr "এটাই কি সঠিক সেটিং?"
 #: Xconfig/various.pm:29
 #, c-format
 msgid "Keyboard layout: %s\n"
-msgstr "কি বোর্ড লে-আউট: %s\n"
+msgstr "কীবোর্ড লে-আউট: %s\n"
 
 #: Xconfig/various.pm:30
 #, c-format
@@ -799,12 +799,13 @@ msgstr ""
 msgid "What norm is your TV using?"
 msgstr "আপনি কি ধরণের টিভি ব্যবহার করছেন?"
 
+# সাম: 
 #: Xconfig/xfree.pm:571
 #, c-format
 msgid ""
 "_:weird aspect ratio\n"
 "other"
-msgstr ""
+msgstr "অনান্য"
 
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
@@ -3956,8 +3957,6 @@ msgstr "সাধারণ ডকুমেন্টেশন"
 msgid "Truly minimal install"
 msgstr "এক্কেবারেই সল্প ইনস্টলেশন"
 
-# স্বয়ংক্রিয়ভাবে
-# ইনস্টলেশন
 #: help.pm:149
 #, c-format
 msgid ""
@@ -4040,7 +4039,7 @@ msgstr ""
 msgid "Configure"
 msgstr "কনফিগার"
 
-# ইনস্টলেশন
+# সাম
 #: help.pm:189
 #, c-format
 msgid ""
@@ -4061,8 +4060,22 @@ msgid ""
 "Please remember that some services can be dangerous if they're enabled on a\n"
 "server. In general, select only those services you really need. !!"
 msgstr ""
+"এই ডায়ালগটি আপনি বুট করার সময় কি কি সার্ভিস শুরু করতে চান তা নির্বাচন করার জন্য।\n"
+"\n"
+"DrakX বর্তমান ইনস্টলেশনে বিদ্যমান সব সার্ভিস দেখাবে। প্রতিটি সার্ভিস ভালভাবে দেখুন "
+"এবং\n"
+"বুটের সময় যেগুলো প্রয়োজন না হয়, সেগুলো আনচেক করুন।\n"
+"\n"
+"একটি সার্ভিস নির্বাচন করলে, সার্ভিসটি সম্পর্কে সংক্ষিপ্ত তথ্য প্রদর্শিত হবে। আপনি যদি "
+"কোন সার্ভিসের\n"
+"আবশ্যকতা সম্পর্কে নিশ্চিত না হন তবে ডিফল্ট মানে রেখে দেয়াই নিরাপদ।\n"
+"\n"
+"!! আপনি আপনার মেশিন সার্ভার হিসেবে ব্যবহার করতে চাইলে খুব সাবধান থাকবেন: আপনি "
+"অবশ্যই\n"
+"কোন অবাঞ্ছনীয় সার্ভিস চালু করতে চান না কারন কিছু সার্ভিস সার্ভারে সক্রিয় করাটা "
+"বিপদজনক।\n"
+"এক কথায়, শুধু সেসব সার্ভিসই চালু করুন যেসব আপনার প্রয়োজন। !!"
 
-# সয়ংক্রিয়ভাবে
 #: help.pm:206
 #, c-format
 msgid ""
@@ -4113,8 +4126,6 @@ msgstr ""
 "acceleration সহ অথবা ছাড়া, আপনার প্রয়োজন অনুযায়ী সেরা সার্ভার বেছে নিতে\n"
 "আপনাকে জিজ্ঞেস করা হবে।"
 
-# সয়ংক্রিয়ভাবে
-# ইনস্টলেশন
 #: help.pm:231
 #, c-format
 msgid ""
@@ -4320,19 +4331,18 @@ msgstr "উইন্ডোজ পার্টিশনের খালি জা
 #: help.pm:374 install_interactive.pm:213
 #, c-format
 msgid "Erase entire disk"
-msgstr "সম্পূর্ণ ডিস্ক মুছে ফেলা হোক"
+msgstr "সম্পূর্ণ ডিস্ক মুছে ফেলো"
 
 #: help.pm:374
 #, c-format
 msgid "Remove Windows"
-msgstr "উইন্ডোজ রিমুভ করো"
+msgstr "উইন্ডোজ সরাও"
 
 #: help.pm:374 install_interactive.pm:228
 #, c-format
 msgid "Custom disk partitioning"
 msgstr "হাতে হাতে ডিস্ক পার্টিশন"
 
-# ইনস্টলেশন
 #: help.pm:377
 #, c-format
 msgid ""
@@ -4374,7 +4384,7 @@ msgstr ""
 #: help.pm:409
 #, c-format
 msgid "Generate auto-install floppy"
-msgstr "সয়ং-ইনস্টল ফ্লপি তৈরী করো"
+msgstr "সয়ংক্রিয়-ইনস্টল ফ্লপি তৈরী করো"
 
 #: help.pm:409 install_steps_interactive.pm:1328
 #, c-format
@@ -4391,7 +4401,7 @@ msgstr "সয়ংক্রিয়ভাবে"
 msgid "Save packages selection"
 msgstr "প্যাকেজের নির্বাচন সংরক্ষণ করে রাখো"
 
-# ইনস্টলেশন
+# সাম
 #: help.pm:412
 #, c-format
 msgid ""
@@ -4417,6 +4427,25 @@ msgid ""
 "Click on \"%s\" if you wish to select partitions which will be checked for\n"
 "bad blocks on the disk."
 msgstr ""
+"আপনি যদি পুরানো GNU/Linux পার্টিশন আবার ব্যবহার করতে চান, আপনি হয়ত কোন পার্টিশন "
+"নতুন করে ফরম্যাট করে পুরানো তথ্য মুছে ফেলতে চাইবেন। এটি করতে হলে, ঐ পার্টিশনগুলোও "
+"নির্বাচন করুন।\n"
+"\n"
+"মনে রাখবেন, সব পার্টিশন ফরম্যাট করা জরুরী নয়। যে পার্টিশনে অপারেটিং সিস্টেম থাকবে "
+"(যেমন \"/\", \"/usr\" বা \"/var\") সেটি অবশ্যই ফরম্যাট করতে হবে কিন্তু যেসব "
+"পার্টিশনের তথ্য আপনি সংরক্ষন করতে চান (সাধারনত \"/home\") সেগুলো ফরম্যাট করা "
+"অত্যাবশ্যকীয় নয়।\n"
+"\n"
+"পার্টিশন নির্বাচন করতে সাবধানতা অবলম্বন করবেন। ফরম্যাট করলে নির্বাচিত পার্টিশনের "
+"সব তথ্য মুছে যাবে এবং তা আর ফিরে পাওয়া যাবে না।\n"
+"\n"
+"পার্টিশন ফরম্যাট শুরু করতে \"%s\" চাপুন।\n"
+"\n"
+"আপনার নতুন Mandrakelinux অপারেটিং সিস্টেম ইনস্টেশনের জন্য আপনি যদি অন্য একটি "
+"পার্টিশন নির্বাচন করতে, তবে \"%s\" ক্লিক করুন।\n"
+"\n"
+"যদি আপনি পার্টিশনের জন্য ডিস্কের খারাপ ব্লক সনাক্ত করাতে চান তাহলে \"%s\" ক্লিক "
+"করুন।"
 
 # আগে
 #: help.pm:431 install_steps_gtk.pm:388 interactive.pm:425
@@ -4428,6 +4457,7 @@ msgstr ""
 msgid "Previous"
 msgstr "পূর্ববর্তী"
 
+# সাম
 #: help.pm:434
 #, c-format
 msgid ""
@@ -4443,6 +4473,16 @@ msgid ""
 "will appear: review the selection, and press \"%s\" to retrieve and install\n"
 "the selected package(s), or \"%s\" to abort."
 msgstr ""
+"আপনি যখন Mandrakelinux ইনস্টল করবেন, সম্ভবত প্রথম রিলিজ থেকে কিছু\n"
+"প্যাকেজ আপডেট হয়ে গেছে। কোন সাধারন বা নিরাপত্তা ত্রুটি সমাধান করা হয়েছে।\n"
+"আপনাকে এই সুবিধাগুলি দেয়ার লক্ষ্যে এই আপডেটগুলো ইন্টারনেট থেকে ডাউনলোড\n"
+"করার সুযোগ দেয়া হয়েছে। যদি আপনার সক্রিয় ইন্টারনেট সংযোগ থাকে, \"%s\" চেক\n"
+"করুন, আর \"%s\" চেক করুন যদি আপাতত ইনস্টল করতে না চান।\n"
+"\n"
+"\"%s\" বাছাই করলে আপাকে কিছু ওয়েব লোকেশনের তালিকা দেয়া হবে যেখান থেকে\n"
+"আপডেট পাওয়া যাবে। আপনি আপনার কাছের একটি লোকেশন পছন্দ করুন। এরপর\n"
+"একটি প্যাকেজ নির্বাচন করার জন্য একটি  ট্রী দেখানো হবে। প্যাকেজগুলো দেখুন এবং\n"
+"ডাউনলোড করে ইনস্টল করতে \"%s\" বাটন চাপুন। অথবা \"%s\" ক্লিক করে বের হয়ে আসুন।"
 
 # ইনস্টল
 #: help.pm:444 help.pm:588 install_steps_gtk.pm:387
@@ -4451,6 +4491,7 @@ msgstr ""
 msgid "Install"
 msgstr "ইনস্টল"
 
+# সাম
 # নিরাপত্তা স্তর
 #: help.pm:447
 #, c-format
@@ -4468,13 +4509,24 @@ msgid ""
 "Fill the \"%s\" field with the e-mail address of the person responsible for\n"
 "security. Security messages will be sent to that address."
 msgstr ""
+"এই সময়ে DrakX আপনার মেশিনের জন্য আপনার ইচ্ছানুযায়ী নিরাপত্তা স্তর\n"
+"বেছে নেয়ার সুযোগ দেবে। সাধারন নিয়ম অনুযায়ী, যদি একটি মেশিনে জরুরী\n"
+"তথ্য থাকে বা মেশিনটি ইন্টারনেটে সংযুক্ত থাকে তবে নিরাপত্তা বাড়িয়ে দেয়া\n"
+"হয়। নিরাপত্তা যত বেশী, ব্যবহারের স্বাচ্ছন্দ্য তত কমে যায়।\n"
+"\n"
+"আপনি যদি নিশ্চিত না হন কোন অপশনটি রাখবেন তবে ডিফল্ট অপশনটিই রাখুন।\n"
+"পরবর্তীতে আপনি এটি draksec টুল (যেটি Mandrakelinux নিয়ন্ত্রন কেন্দ্রের একটি অংশ)\n"
+"দিয়ে পরিবর্তন করতে পারবেন।\n"
+"\n"
+"\"%s\" ক্ষেত্রটিতে যিনি নিরাপত্তার দায়িত্বে নিয়োজিত তার ই-মেইল অ্যাড্রেস দিন।\n"
+"নিরাপত্তা বিষয়ক বার্তাগুলো এই অ্যাড্রেসে পাঠানো হবে। "
 
 #: help.pm:458
 #, c-format
 msgid "Security Administrator"
-msgstr "সিকিউরিটি এ্যডমিনিষ্ট্রেটর"
+msgstr "সিকিউরিটি এ্যডমিনিস্ট্রেটর"
 
-# সয়ংক্রিয়ভাবে
+# সাম
 #: help.pm:461
 #, c-format
 msgid ""
@@ -4549,6 +4601,73 @@ msgid ""
 "may find it a useful place to store a spare kernel and ramdisk images for\n"
 "emergency boot situations."
 msgstr ""
+"এই সময়ে আপনাকে Mandrakelinux যে পার্টিশনে ইনস্টল হবে তা নির্বাচন\n"
+"করতে হবে। যদি আগে থেকেই পার্টিশন তৈরী থাকে, (GNU/Linux এর পুর্বের\n"
+"কোন ইনস্টলেশনের কারনে বা অন্য কোন পার্টিশন টুল দিয়ে তৈরী করা) আপনি\n"
+"সেগুলো ব্যবহার করতে পারেন। অন্যথায় হার্ডড্রাইভ পার্টিশন তৈরী করতে হবে।\n"
+"\n"
+"পার্টিশন তৈরী করতে প্রথমে একটি হার্ডড্রাইভ নির্বাচন করুন। প্রথম পার্টিশন\n"
+"নির্বাচনের জন্য \"hda\", দ্বিতীয় পার্টিশনের জন্য \"hdb\", প্রথম SCSI ড্রাইভের\n"
+"জন্য \"sda\" ইত্যাদি ক্লিক করুন।\n"
+"\n"
+"নির্বাচিত ড্রাইভটি পার্টিশন করতে নিম্নলিখিত অপশনসমূহ ব্যবহার করুন:\n"
+"\n"
+" * \"%s\": এই অপশনটি  নির্বাচিত ড্রাইভের সব পার্টিশন মুছে দিবে\n"
+"\n"
+" * \"%s\": এই অপশনটি  আপনার হার্ডড্রাইভের খালি অংশে স্বয়ংক্রিয়ভাবে ext3 এবং\n"
+"swap পার্টিশন তৈরী করতে দিবে।\n"
+"\n"
+"\"%s\": আরও ফিচার ব্যবহার করার সুযোগ দেয়:\n"
+"\n"
+" * \"%s\": পার্টিশন টেবিলটি ফ্লপিতে সংরক্ষন করে যা কিনা পরবর্তীতে পার্টিশন\n"
+"টেবিল উদ্ধার করতে কাজে লাগে। এটি খুবই গুরুত্বপুর্ণ একটি ধাপ যেটি আপনার\n"
+"করা উচিত।\n"
+"\n"
+" * \"%s\": ফ্লপি ডিস্কে সংরক্ষিত পার্টিশন টেবিল এনে তা পুর্বাবস্থায় ফিরিয়ে নেয়।\n"
+"\n"
+" * \"%s\": আপনার পার্টিশন টেবিল নষ্ট হলে আপনি এই অপশনটি দিয়ে তা মেরামত\n"
+"করার চেষ্টা করতে পারেন। অনুগ্রহ করে সাবধানতা অবলম্বন করবেন এবং মনে রাখবেন\n"
+"এই প্রক্রিয়া সবসময় সফল নাও হতে পারে।\n"
+"\n"
+" * \"%s\": সব পরিবর্তন বাতিল করে দিয়ে হার্ডড্রাইভের পুর্বের মূল পার্টিশন টেবিল লোড "
+"করে।\n"
+"\n"
+" * \"%s\": এই অপশনটি অনির্বাচিত করলে, ব্যবহারকারীদের রিমুভেবল মাধ্যম যেমন\n"
+"ফ্লপি এবং CD-ROM নিজে নিজে মাউন্ট/আনমাউন্ট করার প্রায়োজন পরবে।\n"
+"\n"
+" * \"%s\": এই অপশনটি ব্যবহার করুন যদি হার্ডড্রাইভ পার্টিশন আপনি উইজার্ডের\n"
+"মাধ্যমে করতে চান। পার্টিশন সম্বন্ধে ভাল ধারনা না থাকলে এই অপশনটি পরামর্শনীয়।\n"
+"\n"
+" * \"%s\": এই অপশনটি ব্যবহার করে পরিবর্তনগুলো বাতিল করুন।\n"
+"\n"
+" * \"%s\": আপনার পার্টিশনে আরও কিছু কাজ (ধরন, অপশন ফরম্যাট) করার অপশন\n"
+"দেয় ও হার্ডড্রাইভ সম্পর্কে আরও তথ্য দেয়।\n"
+"\n"
+" * \"%s\": পার্টিশন করা শেষ হলে এই অপশন আপনার সেটিংগুলো ডিস্কে সংরক্ষণ করবে।\n"
+"\n"
+"পার্টিশনের সাইজ ঠিক করতে আপনি কীবোর্ডের তীর চিহ্নিত কীগুলো ব্যবহার করতে পারেন।\n"
+"\n"
+"দ্রষ্টব্য: আপনি যেকোন অপশন কীবোর্ড দিয়ে নির্বাচন করতে পারেন। পার্টিশন নির্বাচন\n"
+"করতে [Tab] এবং [Up/Down] তীর চিহ্নগুলো ব্যবহার করুন।\n"
+"\n"
+"যখন একটি পার্টিশন নির্বাচন অবস্থায় আছে, আপনি নিম্নলিখিত কীগুলো ব্যবহার করতে "
+"পারেন:\n"
+"\n"
+" * Ctrl-c নতুন পার্টিশন তৈরী করার জন্য (যখন একটি খালি পার্টিশন নির্বাচন করা "
+"হয়েছে)\n"
+"\n"
+" * Ctrl-d একটি পার্টিশন মুছে দিতে\n"
+"\n"
+" * Ctrl-m মাউন্ট পয়েন্ট সেট করতে\n"
+"\n"
+"বিদ্যমান ফাইল সিস্টেমের ধরন সম্পর্কে জানতে হলে \"Reference Manual\" এর\n"
+"ext2FS অধ্যায়টি পড়ুন।\n"
+"\n"
+"আপনি যদি PPC মেশিনে ইনস্টল করেন, তাহলে আপনাকে yaboot বুটলোডারের\n"
+"ব্যবহারের জন্য একটি  ছোট অন্তত ১ এমবি এর HFS \"বুটস্ট্র্যাপ\" পার্টিশন তৈরী করতে "
+"হবে।\n"
+"আপনি যদি পার্টিশনটি আরও বড় করতে চান, যেমন ৫০ MB, আপনি কোন জরুরী বুট সমস্যার\n"
+"জন্য একটি আলাদা কার্নেল এবং ramdisk তৈরী করে এই পার্টিশনে রাখতে পারেন।"
 
 #: help.pm:530
 #, c-format
@@ -4607,7 +4726,6 @@ msgstr ""
 "উল্লেখিত তালিকায় না থাকে, তাহলে \"%s\" বাটনে ক্লিক করে সম্পূর্ণ দেশের তালিকায় "
 "পেয়ে যান।"
 
-# ইনস্টলেশন
 #: help.pm:569
 #, c-format
 msgid ""
@@ -4633,7 +4751,7 @@ msgid ""
 "to Mandrakelinux version \"8.1\" is not recommended."
 msgstr ""
 
-# সয়ংক্রিয়ভাবে
+# সাম
 # ইনস্টলেশন
 #: help.pm:591
 #, c-format
@@ -4655,6 +4773,22 @@ msgid ""
 "dialog will allow you to choose the key binding which will switch the\n"
 "keyboard between the Latin and non-Latin layouts."
 msgstr ""
+"আপনার ভাষা নির্বাচনের উপর ভিত্তি করে, DrakX স্বয়ংক্রিয়ভাবে একটি কীবোর্ড\n"
+"কনফিগারেশন বেছে নেবে। এই নির্চনটি বাঞ্ছনীয় কিনা দেখে নিন বা অন্য একটি\n"
+"লেআউট পছন্দ করুন।\n"
+"\n"
+"আপনার ভাষার সাথে সম্পূর্ন মিলিয়ে কীবোর্ড আপনি নাও পেতে পারেন:\n"
+"যেমন যদি আপনি ইংরেজী ভাষাভাষী একজন সুইস নাগরিক হন, আপনি সুইস কীবোর্ড\n"
+"ব্যবহার করতে পারেন। কিন্তু আপনি যদি ইংরেজী ভাষী হয়ে Quebec এ বসবাস\n"
+"করেন আপনার পরিস্থিতি এমন হতে পারে যেখানে country-set কীবোর্ড এবং\n"
+"নিজস্ব ভাষা একই নয়। যেকোন ক্ষেত্রেই আপনি আপনি একটি তালিকা থেকে সঠিক\n"
+"কীবোর্ডটি বেছে নিতে পারেন।\n"
+"\n"
+"সমর্থিত কীবোর্ডের তালিকা দেখতে \"%s\" বাটনে ক্লিক করুন।\n"
+"\n"
+"যদি আপনি নন‌-ল্যাটিন বর্ণমালার কীবোর্ডে লেআউট বাছাই করেন, পরবর্তী ডায়ালগটি\n"
+"আপনাকে ল্যাটিন ও নন‌-ল্যাটিন কীবোর্ডের মধ্যে সুইচ করার জন্য একটি কী বাইন্ডিং\n"
+"বাছাই করতে হবে।"
 
 #: help.pm:609
 #, c-format
@@ -4705,7 +4839,6 @@ msgstr ""
 msgid "Espanol"
 msgstr "স্পেনীয়"
 
-# সয়ংক্রিয়ভাবে
 #: help.pm:650
 #, c-format
 msgid ""
@@ -4808,7 +4941,6 @@ msgstr ""
 msgid "authentication"
 msgstr "অনুমোদন"
 
-# ইনস্টলেশন
 #: help.pm:725
 #, c-format
 msgid ""
@@ -4830,7 +4962,8 @@ msgid ""
 "know what you're doing."
 msgstr ""
 
-# প্রিন্টিং সিস্টেম
+# সাম 
+# emulate = এমুলেট?
 #: help.pm:742
 #, c-format
 msgid ""
@@ -4859,6 +4992,37 @@ msgid ""
 "system you may change it by running PrinterDrake from the Mandrakelinux\n"
 "Control Center and clicking on the \"%s\" button."
 msgstr ""
+"এখন সময় আপনার কম্পিউটারের জন্য একটি প্রিন্টিং সিস্টেম নির্বাচন করার। অনান্য\n"
+"অপারেটিং সিস্টেম আপনাকে একটি অপশন দিতে পারে কিন্তু Mandrakelinux দেবে দুটি।\n"
+"প্রিন্টিং সিস্টেমগুলো বিভিন্ন কনফিগারেশনের জন্য প্রযোজ্য।\n"
+"\n"
+" * \"%s\" -- অর্থ হচ্ছে \"প্রিন্ট করো, সারিতে রাখবেনা\". এটি নির্বাচন করুন যদি "
+"আপনার কোন\n"
+"প্রিন্টারের সাথে সরাসরি সংযোগ থাকে, আপনি প্রিন্টার জ্যাম থেকে জরুরীভাবে বের হয়ে "
+"যেতে\n"
+"চান এবং যদি আপনার নেটওয়ার্ক প্রিন্টার না থাকে।(\"%s\" শুধুমাত্র খুবই সাধারন "
+"নেটওয়ার্ক\n"
+"সামলাতে পারে এবং কিছুটা ধীর হয়)। এটি আপনার GNU/Linux এর প্রথম অভিজ্ঞতা হলে\n"
+"আপনার \"pdq\" ব্যবহার করাটাই শ্রেয়।\n"
+"\n"
+" * \"%s\" অর্থ \"সাধারন Unix প্রিন্টিং সিস্টেম\" এবং এটি আপনার স্থানীয় প্রিন্টার "
+"হোক\n"
+"বা পৃথিবীর অন্য প্রান্তে অবস্থিত কোন প্রিন্টারই হোক যেকোন ক্ষেত্রেই একটি উত্‍কৃষ্ট "
+"সিস্টেম।\n"
+"এটি কনফিগার করতে সহজ এবং পুরোনো \"lpd\" প্রিন্টিং সিস্টেমের জন্য সার্ভার বা "
+"ক্লায়েন্ট\n"
+"হিসেবে কাজ করতে পারে। অতএব এটি পুরানো অপারেটিং সিস্টেম যেগুলোর সার্ভিস প্রয়োজন\n"
+"তাদের সাথেও সামঞ্জস্যপূর্ণ। যদিও খুব শক্তিশালী, মূল সেটআপটি প্রায় \"pdq\" এর মত "
+"সহজ।\n"
+"আপনি যদি \"lpd\" সার্ভার এমুলেট করতে চান, তবে \"cups-lpd\" daemon টি চালু করতে\n"
+"ভুলবেন না। \"%s\" এর প্রিন্টার অপশন বাছাই করা ও প্রিন্টার ব্যবস্থাপনার জন্য একটি "
+"গ্রাফিক্যাল\n"
+"ইন্টারফেস রয়েছে।\n"
+"\n"
+"আপনার বাছাইকৃত প্রিন্টিং সিস্টেমটি যদি আপনার পরে পছন্দ না হয়,\n"
+"তবে আপনি Mandrakelinux নিয়ন্ত্রন কেন্দ্র থেকে PrinterDrake চালিয়ে ও \"%s\" বাটন "
+"ক্লিক\n"
+"করে তা বদল করতে পারেন।"
 
 #: help.pm:765
 #, c-format
@@ -4875,7 +5039,8 @@ msgstr "CUPS"
 msgid "Expert"
 msgstr "দক্ষ"
 
-# সয়ংক্রিয়ভাবে
+# সাম
+# check উচিত spelling, zwj didn't work for me... 
 #: help.pm:768
 #, c-format
 msgid ""
@@ -4896,6 +5061,22 @@ msgid ""
 "which parameters need to be passed to the hardware, you'll need to manually\n"
 "configure the driver."
 msgstr ""
+"DrakX প্রথমে আপনার কম্পিউটারে বিদ্যমান IDE ডিভাইস সনাক্ত করবে। এটি আপনার\n"
+"সিস্টেমে এক বা একাধিক PCI SCSI কার্ডের জন্যেও স্ক্যান করবে। যদি SCSI কার্ড পাওয়া\n"
+"যায়, DrakX নিজে নিজেই সঠিক ড্রাইভারটি ইনস্টল করবে।\n"
+"\n"
+"যেহেতু হার্ডওয়্যার সনাক্তকরন কোন অব্যার্থ পক্রিয়া নয়, DrakX আপনার হার্ডড্রাইভ সনাক্ত\n"
+"নাও করতে পারে। এ ক্ষেত্রে আপনাকে হার্ডওয়্যারটি নিজ হাতে নির্দিষ্ট করে দিতে হবে।\n"
+"\n"
+"PCI SCSI adapter নিজ হাতে নির্দিষ্ট করে দিতে হলে, DrakX আপনাকে জিজ্ঞাসা করবে\n"
+"আপনি অপশন কনফিগার করতে চান কিনা। আপনার DrakX কে হার্ডওয়্যারটির নির্দিষ্ট কার্ডের\n"
+"অপশনের জন্য প্রোব করতে দেয়া উচিত্‍ যা কিনা adapter ইনিশিয়ালাইজ করতে প্রয়োজন।\n"
+"বেশীরভাগ ক্ষেত্রে DrakX এই কাজটি কোন ঝামেলা ছাড়াই সম্পন্ন করবে।\n"
+"\n"
+"DrakX যদি প্রোব করে হার্ডওয়্যারে পাঠানোর জন্য প্যারামিটারগুলো নির্ধারন করতে না "
+"পারে\n"
+"তাহলে আপনাকে তা নিজে হাতে কনফিগারেশন করতে হবে।\n"
+" "
 
 #: help.pm:786
 #, c-format
@@ -4914,9 +5095,6 @@ msgstr ""
 msgid "Sound card"
 msgstr "সাউন্ডকার্ড"
 
-# নিরাপত্তা স্তর
-# ইনস্টলেশন
-# নিয়ন্ত্রণ কেন্দ্র
 #: help.pm:791
 #, c-format
 msgid ""
@@ -5653,7 +5831,6 @@ msgstr ""
 "http://www.mp3licensing.com । আপনি যদি অনিশ্চিত হোন যদি এর যেকোন\n"
 "একটি আপনার জন্যও প্রযোজ্য হতে পারে, আপনার স্থানীয় আইন পরীক্ষা করুন।"
 
-# ইনস্টলেশন
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_messages.pm:98
 #, c-format
@@ -5776,7 +5953,7 @@ msgstr "প্যাকেজ গ্রুপ নির্বাচন"
 #: install_steps_gtk.pm:250 install_steps_interactive.pm:567
 #, c-format
 msgid "Total size: %d / %d MB"
-msgstr "মোট সাইজ: %d / %d MB"
+msgstr "মোট সাইজ: %d / %d এমবি"
 
 #: install_steps_gtk.pm:295
 #, c-format
@@ -9066,10 +9243,11 @@ msgstr "সর্বজনীন"
 msgid "Any PS/2 & USB mice"
 msgstr "যে কোন PS/2 এবং ইউএসবি মাউস"
 
+# sam
 #: mouse.pm:89
-#, fuzzy, c-format
+#, c-format
 msgid "Microsoft Xbox Controller S"
-msgstr "মাইক্রসফ্ট এক্সপ্লোরার"
+msgstr "মাইক্রোসফ্ট Xbox Controller S"
 
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
@@ -10074,25 +10252,28 @@ msgstr "বুটের সময় চালু হবে"
 msgid "DHCP client"
 msgstr "DHCP ক্লায়েন্ট"
 
+# sam
 #: network/netconnect.pm:1041 standalone/drakconnect:389
-#, fuzzy, c-format
+#, c-format
 msgid "DHCP timeout (in seconds)"
-msgstr "সংযোগের টাইমআউট (সেকেন্ডে)"
+msgstr "DHCP টাইমআউট (সেকেন্ডে)"
 
 #: network/netconnect.pm:1042 standalone/drakconnect:392
-#, fuzzy, c-format
+#, c-format
 msgid "Get DNS servers from DHCP"
-msgstr "DNS সার্ভার আই-পি(IP)"
+msgstr "DHCP থেকে DNS সার্ভারগুলো দেখাও  "
 
+# সাম
 #: network/netconnect.pm:1043
 #, c-format
 msgid "Get YP servers from DHCP"
-msgstr ""
+msgstr "DHCP থেকে YP সার্ভারগুলো দেখাও  "
 
+# সাম
 #: network/netconnect.pm:1044
 #, c-format
 msgid "Get NTPD servers from DHCP"
-msgstr ""
+msgstr "DHCP থেকে NTPD সার্ভারগুলো দেখাও  "
 
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
@@ -10100,10 +10281,11 @@ msgstr ""
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP ঠিকানা 1.2.3.4-এর মত হতে হবে"
 
+# সাম
 #: network/netconnect.pm:1057 standalone/drakconnect:686
-#, fuzzy, c-format
+#, c-format
 msgid "Netmask should be in format 255.255.224.0"
-msgstr "গেটওয়ে ঠিকানা 1.2.3.4-এর মত হতে হবে"
+msgstr "নেটমাস্ক 255.255.224.0 এই ফরম্যাটে হতে হবে"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -10180,10 +10362,11 @@ msgstr "প্রতিক্রিয়াশীল থ্রেশল্ড"
 msgid "Bitrate (in b/s)"
 msgstr "বিটরেট (b/s-এ)"
 
+# সাম
 #: network/netconnect.pm:1141
 #, c-format
 msgid "Use Wi-Fi Protected Access (WPA)"
-msgstr ""
+msgstr "Wi-Fi সংরক্ষিত প্রবেশাধিকার (WPA) ব্যবহার করুন "
 
 #: network/netconnect.pm:1168
 #, c-format
@@ -10423,10 +10606,12 @@ msgstr "ইন্টারনেট সংযোগ"
 msgid "Configuration is complete, do you want to apply settings?"
 msgstr "কনফিগারেশন সম্পূর্ন হয়েছে, আপনি কি সেটিংগুলি প্রয়োগ করতে চান?"
 
+# সাম
+# বুট হবার সাথে সাথে
 #: network/netconnect.pm:1336
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to allow users to start the connection?"
-msgstr "আপনি কি বুট হবার সাথে সাথে সংযোগ স্থাপন করতে চান?"
+msgstr "আপনি কি ব্যবহারকারীদের সংযোগ স্থাপন শুরু করতে দিতে চান?"
 
 #: network/netconnect.pm:1345
 #, c-format
@@ -10695,10 +10880,11 @@ msgstr "সুন্দর"
 msgid "maybe"
 msgstr "হয়তোবা"
 
+# সাম
 #: pkgs.pm:474
-#, fuzzy, c-format
+#, c-format
 msgid "Downloading file %s..."
-msgstr "ফাইল প্রেরণ করা হচ্ছে..."
+msgstr "%s ফাইল ডাউনলোড করা হচ্ছে..."
 
 #: printer/cups.pm:103
 #, c-format
@@ -11195,7 +11381,6 @@ msgstr ""
 msgid "Automatic correction of CUPS configuration"
 msgstr "CUPS কন্‌ফিগারেশনে স্বয়ংক্রিয় শুদ্ধতা"
 
-# সয়ংক্রিয়ভাবে
 #: printer/printerdrake.pm:119
 #, c-format
 msgid ""
@@ -11715,6 +11900,7 @@ msgstr ""
 "প্রিন্টার ড্রাইভার, ড্রাইভার অপশনসমূহ এবং প্রিন্টার সংযোগের ধরন, এসব অপশন বেছে "
 "নেয়ার সুযোগ দেবে।"
 
+# সাম
 #: printer/printerdrake.pm:1050
 #, c-format
 msgid ""
@@ -11736,7 +11922,24 @@ msgid ""
 " Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
 "to set up your printer(s) now."
 msgstr ""
+"\n"
+"প্রিন্টার সেটআপ উইজার্ডে আপনাকে স্বাগতম!\n"
+"\n"
+"এ উইজার্ডটি আপনার কম্পিউটারে বা সরাসরি নেটওয়ার্কে বা কোন দুরবর্তী উইন্ডোজ মেশিনে "
+"সংযুক্ত প্রিন্টার(সমূহ) ইনস্টল করতে সাহায্য করবে।\n"
+"\n"
+"এই মেশিনে যদি কোন প্রিন্টার থেকে থাকে অনুগ্রহ করে তা প্লাগ ইন করুন এবং চালু করুন "
+"যাতে স্বয়ংক্রিয়ভাবে সনাক্তকৃত হতে পারে। আপনার নেটওয়ার্ক প্রিন্টার ও উইন্ডোজ "
+"মেশিনেগুলোও সংযুক্ত ও চালু থাকতে হবে।\n"
+"\n"
+"মনে রাখবেন, নেটওয়ার্ক প্রিন্টারগলো সনাক্ত করতে সরাসরি সংযুক্ত প্রিন্টারগলোর চাইতে "
+"তুলনামূলকভাবে বেশী সময় লাগে। অতএব, যখন প্রয়োজন না হলে নেটওয়ার্ক এবং/অথবা উইন্ডোজ "
+"হোষ্টকৃত প্রিন্টারগলোর স্বয়ংক্রিয় সনাক্তকরন বন্ধ রাখুন।\n"
+"\n"
+" আপনি প্রস্তুত হলে \"পরবর্তী\" ক্লিক করুন, এবং \"বাতিল\" চাপুন যদি আপনি এখন কোন "
+"প্রিন্টার সেটআপ করতে না চান।"
 
+# সাম
 #: printer/printerdrake.pm:1059
 #, c-format
 msgid ""
@@ -11752,7 +11955,18 @@ msgid ""
 " Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
 "to set up your printer(s) now."
 msgstr ""
+"\n"
+"প্রিন্টার সেটআপ উইজার্ডে আপনাকে স্বাগতম!\n"
+"\n"
+"এ উইজার্ডটি আপনার কম্পিউটারে সংযুক্ত প্রিন্টার(সমূহ) ইনস্টল করতে সাহায্য করবে।\n"
+"\n"
+"এই মেশিনে সংযুক্ত সব প্রিন্টার প্লাগ ইন করুন এবং চালু করুন যাতে স্বয়ংক্রিয়ভাবে সনাক্তকৃত "
+"হতে পারে।\n"
+"\n"
+" আপনি প্রস্তুত হলে \"পরবর্তী\" ক্লিক করুন, এবং \"বাতিল\" চাপুন যদি আপনি এখন কোন "
+"প্রিন্টার সেটআপ করতে না চান।"
 
+# সাম
 #: printer/printerdrake.pm:1067
 #, c-format
 msgid ""
@@ -11773,7 +11987,24 @@ msgid ""
 " Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
 "to set up your printer(s) now."
 msgstr ""
+"\n"
+"প্রিন্টার সেটআপ উইজার্ডে আপনাকে স্বাগতম!\n"
+"\n"
+"এ উইজার্ডটি আপনার কম্পিউটারে বা সরাসরি নেটওয়ার্কে সংযুক্ত প্রিন্টার(সমূহ) ইনস্টল করতে "
+"সাহায্য করবে।\n"
+"\n"
+"এই মেশিনে যদি কোন প্রিন্টার থেকে থাকে অনুগ্রহ করে তা প্লাগ ইন করুন এবং চালু করুন "
+"যাতে স্বয়ংক্রিয়ভাবে সনাক্তকৃত হতে পারে। আপনার নেটওয়ার্ক প্রিন্টারগলোও সংযুক্ত ও চালু "
+"থাকতে হবে।\n"
+"\n"
+"মনে রাখবেন, নেটওয়ার্ক প্রিন্টারগলো সনাক্ত করতে সরাসরি সংযুক্ত প্রিন্টারগলোর চাইতে "
+"তুলনামূলকভাবে বেশী সময় লাগে। অতএব, যখন প্রয়োজন না হলে নেটওয়ার্ক প্রিন্টারগলোর "
+"স্বয়ংক্রিয় সনাক্তকরন বন্ধ রাখুন।\n"
+"\n"
+" আপনি প্রস্তুত হলে \"পরবর্তী\" ক্লিক করুন, এবং \"বাতিল\" চাপুন যদি আপনি এখন কোন "
+"প্রিন্টার সেটআপ করতে না চান।"
 
+# সাম
 #: printer/printerdrake.pm:1076
 #, c-format
 msgid ""
@@ -11789,6 +12020,16 @@ msgid ""
 " Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
 "to set up your printer(s) now."
 msgstr ""
+"\n"
+"প্রিন্টার সেটআপ উইজার্ডে আপনাকে স্বাগতম!\n"
+"\n"
+"এ উইজার্ডটি আপনার কম্পিউটারে সংযুক্ত প্রিন্টার(সমূহ) ইনস্টল করতে সাহায্য করবে।\n"
+"\n"
+"এই মেশিনে যদি কোন প্রিন্টার থেকে থাকে অনুগ্রহ করে তা প্লাগ ইন করুন এবং চালু করুন "
+"যাতে স্বয়ংক্রিয়ভাবে সনাক্তকৃত হতে পারে।\n"
+"\n"
+" আপনি প্রস্তুত হলে \"পরবর্তী\" ক্লিক করুন, এবং \"বাতিল\" চাপুন যদি আপনি এখন কোন "
+"প্রিন্টার সেটআপ করতে না চান।"
 
 #: printer/printerdrake.pm:1085
 #, c-format
@@ -11805,10 +12046,11 @@ msgstr "লোকাল নেটওয়ার্কের সাথে সরা
 msgid "Auto-detect printers connected to machines running Microsoft Windows"
 msgstr "উইন্ডোজ চালিত মেশিনের সাথে সংযুক্ত প্রিন্টারসমূহ সয়ংক্রিয়ভাবে সনাক্ত করো"
 
+# সাম
 #: printer/printerdrake.pm:1108
-#, fuzzy, c-format
+#, c-format
 msgid "No auto-detection"
-msgstr "সয়ংক্রিয় সনাক্ত"
+msgstr "কোন স্বয়ংক্রিয় সনাক্তকরণ নয়"
 
 # সাম
 #: printer/printerdrake.pm:1173
@@ -13320,7 +13562,10 @@ msgstr " - প্রিন্ট হেড একরেখীকরন\n"
 msgid " - Color calibration\n"
 msgstr " - কালার ক্যালিব্রেশন\n"
 
-# সয়ংক্রিয়ভাবে
+# সাম
+# pls check the translation of 
+# \"Acquire\" 
+# 'Call' as in call a function.
 #: printer/printerdrake.pm:3861
 #, c-format
 msgid ""
@@ -13336,8 +13581,16 @@ msgid ""
 "device, you only need to use \"scannerdrake\" if you want to share the "
 "scanner on the network."
 msgstr ""
+"আপনার বহুমাত্রিক ডিভাইসটি স্ক্যানার হেসেবে ব্যবহার করার জন্য স্বয়ংক্রিয়ভাবে কনফিগার "
+"করা হয়েছিল। আপনি এখন কমান্ড লাইনে \"scanimage\" (যদি একাধিক স্ক্যানার থাকে তবে "
+"\"scanimage -d hp:%s\" দিয়ে নির্ধারন করুন) অথবা গ্রাফিক্যাল ইন্টারফেস \"xscanimage"
+"\" বা \"xsane\" ব্যবহার করে স্ক্যান করতে পারেন। আপনি যদি GIMP ব্যবহার করেন, "
+"তাহলে \"File\"/\"Acquire\" মেনুর সঠিক পয়েন্ট বেছে নিয়েও স্ক্যান করতে পারেন। এ "
+"বিষয়ে আরো সাহায্য পেতে কমান্ড লাইনে \"man scanimage\" ব্যবহার করুন।\n"
+"\n"
+"এই ডিভাইসে স্ক্যানিং সেটআপ করার জন্য \"scannerdrake\" চালানোর প্রয়োজন নেই, এটি "
+"তখনই দরকার হবে যদি আপনি স্ক্যানারটি নেটওয়ার্কে শেয়ার করতে চান। "
 
-# সয়ংক্রিয়ভাবে
 #: printer/printerdrake.pm:3887
 #, c-format
 msgid ""
@@ -13559,6 +13812,7 @@ msgstr "মতিভ্রম"
 msgid "Installing a printing system in the %s security level"
 msgstr "%s নিরাপত্তা মাত্রা অনুসারে একটি প্রিন্টিং ব্যবস্থা ইনস্টল করা হচ্ছে"
 
+# সাম
 # প্রিন্টিং সিস্টেম
 # নিরাপত্তা স্তর
 #: printer/printerdrake.pm:4138
@@ -13575,6 +13829,15 @@ msgid ""
 "\n"
 "Do you really want to configure printing on this machine?"
 msgstr ""
+"আপনি 2$%s নিরাপত্তা চালুকৃত একটি সিস্টেমে 1$%s প্রিন্টিং সিস্টেম ইনস্টল করতে "
+"যাচ্ছেন।\n"
+"\n"
+"এই প্রিন্টিং সিস্টেমটি একটি daemon (নেপথ্যে চলা প্রসেস) চালিয়ে রাখে যেটি প্রিন্ট "
+"জবের জন্য অপেক্ষা করে ও তা নিয়ন্ত্রন করে। এই daemon টি নেটওয়ার্কের দুরবর্তী মেশিন "
+"থেকেও ব্যবহারযোগ্য, এবং একটি আক্রমনের লক্ষ্যবস্তুও বটে। অতএব এই নিরাপত্তা স্তরে "
+"সাধারনত অল্পকিছু daemon চালু করা হয়।\n"
+"\n"
+"আপনি কি আসলেই এই মেশিনে প্রিন্টার কনফিগার করতে চান?"
 
 #: printer/printerdrake.pm:4173
 #, c-format
@@ -16127,6 +16390,7 @@ msgstr ""
 msgid "<b>The Open Source Model</b>"
 msgstr "<b>উন্মুক্ত সোর্সের মডেল</b>"
 
+# সাম
 #: share/advertising/26.pl:15
 #, c-format
 msgid ""
@@ -16137,6 +16401,11 @@ msgid ""
 "and the development of Mandrakelinux, <b>please</b> consider buying one of "
 "our products or services!"
 msgstr ""
+"সব কম্পিউটার প্রোগ্রামিং এর মতই, উন্মুক্ত সোর্স সফ্টওয়্যার ডেভেলপমেন্টেও প্রয়োজন <b>সময় "
+"এবং লোকবল</b>। উন্মুক্ত সোর্স ধারনাটির সমর্থনে এবং <b>Mandrakelinux উন্নততর করার "
+"উদ্দেশ্যে</b> Mandrakesoft মূল্য সংযোজিত পণ্য ও সেবা বিক্রয় করে থাকে। আপনি যদি এই "
+"প্রচেষ্টায় সাহায্য করতে চান তবে <b>অনুগ্রহ করে</b> আমাদের যেকোন পণ্য বা সেবা ক্রয় "
+"করুন!"
 
 # সাম: নাকি স্টোর?
 #: share/advertising/27.pl:13
@@ -16732,6 +17001,9 @@ msgstr ""
 "  --internet        - ইন্টারনেট কন্‌ফিগার করো\n"
 "  --wizard          - --add এর মতো"
 
+# সাম:
+# and gs for ghostscript for only this one... 
+# did not translate "for only this one"...
 #: standalone.pm:69
 #, c-format
 msgid ""
@@ -16749,6 +17021,19 @@ msgid ""
 "                 : name_of_application like  so for staroffice \n"
 "                 : and gs for ghostscript for only this one."
 msgstr ""
+"\n"
+"ফন্ট ইমপোর্ট ও মনিটরিং অ্যাপ্লিকেশন\n"
+"\n"
+"অপশন:\n"
+"--windows_import : সব বিদ্যমান উইন্ডোজ পার্টিশন থেকে ইমপোর্ট করো।\n"
+"--xls_fonts      : xls থেকে যেসব ফন্ট আছে সেগুলো দেখাও\n"
+"--install        : যেকোন ফন্ট ফাইল বা ডিরেক্টরি গ্রহন করো।\n"
+"--uninstall      : যেকোন ফন্ট ফাইল বা ডিরেক্টরি আনইনস্টল করো।\n"
+"--replace        : যদি আগেই থেকে থাকে তবে সেই ফন্টগুলো প্রতিস্থাপন করো\n"
+"--application    : ০ কোন অ্যাপ্লিকেশন নয়।\n"
+"                 : ১ সব অ্যাপ্লিকেশন সমর্থন করো।\n"
+"                 : name_of_application staroffice এর জন্য so \n"
+"                 : এবং ghostscript এর জন্য gs।"
 
 # সাম
 # Mandrakelinux Terminal
@@ -16794,6 +17079,7 @@ msgstr "[কি-বোর্ড]"
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 msgstr "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 
+# সাম
 #: standalone.pm:98
 #, c-format
 msgid ""
@@ -16807,12 +17093,24 @@ msgid ""
 "--status : returns 1 if connected 0 otherwise, then exit.\n"
 "--quiet : do not be interactive. To be used with (dis)connect."
 msgstr ""
+"[OPTIONS]\n"
+"নেটওয়ার্ক ও ইন্টারনেট সংযোগ ও মনিটরিং অ্যাপ্লিকেশন\n"
+"\n"
+"--defaultintf interface : এই ইন্টারফেসটি ডিফল্ট ইন্টারফেস হিসেবে দেখাও\n"
+"--connect : ইন্টারনেট সংযুক্তি না থাকলে সংযুক্ত করো\n"
+"--disconnect : সংযুক্ত হয়ে থাকলে সংযোগ বিচ্ছিন্ন করো\n"
+"--force : (dis)connect এর সাথে ব্যবহৃত হয় : সংযুক্ত/বিচ্ছিন্ন হতে বাধ্য করো।\n"
+"--status : সংযুক্ত হলে ১ ও বিচ্ছিন্ন হলে ০ পাঠায়, তারপর বের হয়ে যায়।\n"
+"--quiet : ব্যবহারকারীর সাথে তথ্য আদান-প্রদান করো না। (dis)connect এর সাথে "
+"ব্যবহার করার জন্য।"
 
 #: standalone.pm:107
 #, c-format
 msgid " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
 msgstr " [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"
 
+# সাম
+# verify 
 #: standalone.pm:108
 #, c-format
 msgid ""
@@ -16824,6 +17122,13 @@ msgid ""
 "description window\n"
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
+"[OPTION]...\n"
+"  --no-confirmation      MandrakeUpdate মোডে প্রথম নিশ্চিতকরন প্রশ্ন জিজ্ঞাসা করো "
+"না\n"
+"  --no-verify-rpm        প্যাকেজ স্বাক্ষর নিরীক্ষা করো না\n"
+"  --changelog-first      বর্ণনা উইন্ডোতে filelist এর আগে changelog দোখাও\n"
+"  --merge-all-rpmnew     প্রাপ্ত সকল .rpmnew/.rpmsave ফাইলগুলো একীভূতকরণের "
+"পরামর্শ দাও"
 
 #: standalone.pm:113
 #, c-format
@@ -16966,6 +17271,7 @@ msgstr ""
 "ডিসপ্লে ব্যবস্থাপক (dm) হিসেবে %s-কে নির্দিষ্ট করা হয়েছে, /etc/passwd$$CLIENT$$ "
 "ফাইলে জি.ডি.এম. নামক ব্যবহারকারী যোগ করা হচ্ছে"
 
+# সাম
 #: standalone/drakTermServ:332
 #, c-format
 msgid ""
@@ -16988,6 +17294,24 @@ msgid ""
 "    e) Ask you to make a boot floppy.\n"
 "    f) If it's thin clients, ask if you want to restart KDM.\n"
 msgstr ""
+"\n"
+" এই উইজার্ড রুটিন:\n"
+" \t১) আপনাকে 'থিন' বা 'ফ্যাট' ক্লায়েন্ট বাছাই করতে বলবে।\n"
+"\t২) DHCP সেটআপ করবে।n\t\n"
+"\t\n"
+"এরপর, উইজার্ডটি:\n"
+"\t\n"
+"    ক) সব nbis তৈরী "
+"করবে।                                                           \n"
+"    খ) সার্ভার সক্রিয় "
+"করবে।                                                              \n"
+"    গ) সার্ভার চালু "
+"করবে।                                                       \n"
+"    ঘ) শ্যাডো ফাইলগুলো যৌগপদিক করবে যাতে root সহ সব ব্যবহারকারী, \n"
+"       shadow$$CLIENT$$ ফাইলে যুক্ত "
+"হয়।                                                       \n"
+"    ঙ) আপনাকে একটি বুট ফ্লপি তৈরী করতে পরামর্শ দেবে।\n"
+"    চ) যদি থিন ক্লায়েন্ট হয়ে থাকে তবে পুনরায় KDM চালু করতে বলবে।\n"
 
 #: standalone/drakTermServ:377
 #, c-format
@@ -17003,7 +17327,7 @@ msgstr "অনুগ্রহপূর্বক dhcpd কনফিগ সংর�
 #: standalone/drakTermServ:420
 #, c-format
 msgid "Use thin clients."
-msgstr "থিম ক্লায়েন্ট ব্যবহার করো"
+msgstr "থিন ক্লায়েন্ট ব্যবহার করো"
 
 #: standalone/drakTermServ:422
 #, c-format
@@ -17062,6 +17386,8 @@ msgstr ""
 msgid "Terminal Server Overview"
 msgstr "টার্মিনাল সার্ভারের সামগ্রিক চিত্র"
 
+# সাম
+# customize
 #: standalone/drakTermServ:510
 #, c-format
 msgid ""
@@ -17077,6 +17403,16 @@ msgid ""
 "        \tdhcpd.conf, you should create the etherboot images for at least "
 "one full kernel."
 msgstr ""
+"        - ইথারবুট সক্রিয় বুট ইমেজ তৈরী করুন:\n"
+"        \tএকটি কার্নেল ইথারবুট দিয়ে বুট করার জন্য একটি বিশেষ kernel/initrd ইমেজ "
+"তৈরী করতে হবে।\n"
+"        \tmkinitrd-net এই কাজটির অধিকাংশ করে দেয় এবং drakTermServ হচ্ছে একটি "
+"গ্রাফিক্যাল \n"
+"        \tইন্টারফেস যা এই ইমেজগুলোর ব্যবস্থাপনা/কাস্টোমাইজ করতে সাহায্য করে। \n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include ফাইলটি include \n"
+"        \tহিসেবে dhcpd.conf এ অন্তর্ভুক্ত করা হয়, যেটি তৈরী করতে আপনাকে অন্তত "
+"একটি সম্পূর্ন \n"
+"        \tকার্নেলের জন্য ইথারবুট ইমেজ তৈরী করতে হবে।"
 
 #: standalone/drakTermServ:516
 #, c-format
@@ -17098,6 +17434,7 @@ msgid ""
 "like:"
 msgstr ""
 
+# সাম
 #: standalone/drakTermServ:534
 #, c-format
 msgid ""
@@ -17136,6 +17473,38 @@ msgid ""
 "        Note: You must stop/start the server after adding or changing "
 "clients."
 msgstr ""
+"        যদিও আপনি ক্লায়েন্ট মেশিনের জন্য একটি নির্দিষ্ট এন্ট্রির বদলে, অনেকগুলো IP "
+"addresses\n"
+"        ব্যবহার করতে পারেন, তথাপি নির্দিষ্ট IP addresses ব্যবহার করলে আপনি "
+"ClusterNFS\n"
+"        সরবরাহকৃত ক্লায়েন্ট প্রতি কনফিগারেশন ফাইল ব্যবস্থার সুবিধা পেতে পারেন।\n"
+"\t\t\t\n"
+"        দ্রষ্টব্য: '#type' ক্ষেত্রটি শুধুমাত্র drakTermServ দ্বারা  ব্যবহৃত হয়। ক্লায়েন্ট "
+"শুধুমাত্র 'থিন''\n"
+"        বা 'ফ্যাট' হতে পারে। থিন ক্লায়েন্টগুলো XDMCP এর মাধ্যমে বেশীরভাগ সফ্টওয়্যার "
+"সার্ভারে চালায়, \n"
+"        আর 'ফ্যাট' ক্লায়েন্টগুলো বেশীরভাগ সফ্টওয়্যার ক্লায়েন্টেই চালায়।\n"
+"        থিন ক্লায়েন্টের জন্য একটি বিশেষ inittab, %s লেখা হয়। থিন ক্লায়েন্টে "
+"ব্যবহার করা হলে,\n"
+"        XDMCP সক্রিয় করার জন্য সিস্টেম কনফিগারেশন ফাইল xdm-config, kdmrc, and "
+"gdm.conf\n"
+"        পরিবর্ধন করা হয়। যেহেতু XDMCP তে নিরাপত্তার প্রশ্ন বিদ্যমান, hosts.deny "
+"এবং hosts.allow\n"
+"        ব্যবহার করে স্থানীয় সাবনেটে প্রবেশ সীমাবদ্ধ করা হয়।\n"
+"\t\t\t\n"
+"        দ্রষ্টব্য: '#hdw_config' এন্ট্রিটি শুধুমাত্র drakTermServ ব্যবহার করে। "
+"ক্লায়েন্টের মান শুধুমাত্র সত্য \n"
+"        বা মিথ্যা হতে পারে। সত্য হলে ক্লায়েন্ট মেশিনে রুট লগইন সম্ভব এবং "
+"স্থানীয়ভাবে 'drak' টুলসমূহ \n"
+"        ব্যবহার করে শব্দ, মাউস, X হার্ডওয়্যার কনফিগারেশন করা যেতে পারে। "
+"ক্লায়েন্টের IP addresses \n"
+"        এর সাথে সম্পৃক্ত আলাদা কনফিগারেশন ফাইল তৈরী করে এবং পড়া/লেখা মাউন্ট "
+"পয়েন্ট তৈরী \n"
+"        করে ক্লায়েন্টকে তা পরিবর্ধনের সুযোগ দিয়ে এটি সক্রিয় করা হয়। এই "
+"কনফিগারেশনে সন্তূষ্ট হলে \n"
+"        আপনি ক্লায়েন্ট থেকে রুট লগইন সুবিধা সরিয়ে ফেলতে পারেন।\n"
+"\t\t\t\n"
+"        দ্রষ্টব্য: ক্লায়েন্ট অন্তর্ভুক্ত বা বদল করার পর বন্ধ করে পুনরায় চালু করতে হবে।"
 
 #: standalone/drakTermServ:554
 #, c-format
@@ -17155,6 +17524,7 @@ msgid ""
 "        \tWith SUBNET/MASK being defined for your network."
 msgstr ""
 
+# সাম
 #: standalone/drakTermServ:566
 #, c-format
 msgid ""
@@ -17165,7 +17535,12 @@ msgid ""
 "        \thelps in this respect by adding or removing system users from this "
 "file."
 msgstr ""
+"        - 1$%s রক্ষনাবেক্ষণ করো:\n"
+"        \tব্যবহারকারীদের ডিস্কবিহীন ক্লায়েন্ট থেকে সিস্টেমে লগইন করতে হলে,\n"
+"        \t/etc/shadow তে তাদের এন্ট্রি, 2$%s এ কপি করতে হবে। এই ক্ষেত্রে\n"
+"        \tdrakTermServ ফাইলে সিস্টেম ব্যবহারকারী যোগ করে বা সরিয়ে সাহায্য করে।"
 
+# সাম
 #: standalone/drakTermServ:570
 #, c-format
 msgid ""
@@ -17176,7 +17551,15 @@ msgid ""
 "hardware configuration, \n"
 "        \tdrakTermServ will help create these files."
 msgstr ""
+"        - ক্লায়েন্ট প্রতি %s:\n"
+"        \tclusternfs দিয়ে, সার্ভারের রুট ফাইল সিস্টেমে, প্রতিটি ডিস্কবিহীন "
+"ক্লায়েন্টের জন্য স্বকীয় কনফিগারেশন\n"
+"        \t ফাইল তৈরী করা যায়। স্থানীয় ক্লায়েন্ট হার্ডওয়্যার কনফিগারেশন অনুমোদন "
+"করলে,\n"
+"        \tdrakTermServ এই ফাইলগুলো তৈরী করতে সাহায্য করবে।"
 
+# সাম
+# customize  = ?
 #: standalone/drakTermServ:575
 #, c-format
 msgid ""
@@ -17196,9 +17579,20 @@ msgid ""
 "        turned back off, retaining the configuration files, once the client "
 "machine is configured."
 msgstr ""
+"        - ক্লায়েন্ট প্রতি সিস্টেম কনফিগারেশন ফাইল:\n"
+"        \tclusternfs দিয়ে, সার্ভারের রুট ফাইল সিস্টেমে, প্রতিটি ডিস্কবিহীন "
+"ক্লায়েন্টের জন্য স্বকীয় কনফিগারেশন\n"
+"        \t ফাইল তৈরী করা যায়। স্থানীয় ক্লায়েন্ট হার্ডওয়্যার কনফিগারেশন অনুমোদন "
+"করলে,\n"
+"        \t প্রতি ক্লায়েন্টের জন্য /etc/modules.conf, /etc/sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard ফাইলসমূহ কাস্টোমাইজ করা যেতে পারে।\n"
+"\n"
+"        দ্রষ্টব্য: স্থানীয় ক্লায়েন্ট হার্ডওয়্যার কনফিগারেশন সক্রিয় করলে, এই ফিচার "
+"সক্রিয় করা প্রতিটি মেশিনের \n"
+"        জন্য টার্মিনাল সার্ভারের রুট লগইন সক্রিয় হয়। একবার ক্লায়েন্ট মেশিন কনফিগার "
+"করা হয়ে গেলে, স্থানীয় \n"
+"        কনফিগারেশন বন্ধ করে দেয়া যায়, এতে কনফিগারেশন ফাইলগুলো সংরক্ষিত থাকে।"
 
-# ইনস্টলেশন
-# প্রোটকল 
 #: standalone/drakTermServ:584
 #, c-format
 msgid ""
@@ -17229,6 +17623,7 @@ msgid ""
 "        \tputs its images."
 msgstr ""
 
+# সাম
 #: standalone/drakTermServ:605
 #, c-format
 msgid ""
@@ -17246,6 +17641,19 @@ msgid ""
 "        \t\t/usr/share/etherboot/start16.bin \\\t\t\t\n"
 "        \t\t/usr/lib/etherboot/zimg/3c509.zimg > /dev/fd0"
 msgstr ""
+"       - ইথারবুট ফ্লপি/CD তৈরী করুন:\n"
+"       \tডিস্কবিহীন ক্লায়েন্ট মেশিনগুলোতে বুট সিকোয়েন্স চালু করার জন্য NIC এর ROM "
+"ইমেজ\n"
+"       \tবা বুট ফ্লপি প্রয়োজন। ক্লায়েন্ট মেশিনের NIC এর উপর ভিত্তি করে  "
+"drakTermServ\n"
+"       \tএই ইমেজ গুলো তৈরী করতে সাহায্য করবে।\n"
+"       \t\t\n"
+"       \tএকটি 3Com 3c509 এর জন্য নিজ হাতে বুট ফ্লপি তৈরী করার একটি সাধারন "
+"উদাহরন:\n"
+"       \t\t\n"
+"       \tcat /usr/lib/etherboot/floppyload.bin \\\n"
+"       \t\t/usr/share/etherboot/start16.bin \\\t\t\t\n"
+"       \t\t/usr/lib/etherboot/zimg/3c509.zimg > /dev/fd0  "
 
 #: standalone/drakTermServ:640
 #, c-format
@@ -17626,8 +18034,6 @@ msgstr "দরকারি ইমেজ ফাইল `%s' কে খুঁজে
 msgid "Auto Install Configurator"
 msgstr "সয়ংক্রিয় ইনস্টল কনফিগারকারী"
 
-# সয়ংক্রিয়ভাবে
-# ইনস্টলেশন
 #: standalone/drakautoinst:42
 #, c-format
 msgid ""
@@ -22067,9 +22473,7 @@ msgstr ""
 msgid ""
 "_:display here is a verb\n"
 "Display"
-msgstr ""
-"_:প্রদর্শন করো যে এখানে একটি ক্রিয়াপদ আছে\n"
-"প্রদর্শন করো"
+msgstr "প্রদর্শন করো"
 
 #: standalone/drakvpn:333 standalone/drakvpn:694
 #, c-format
@@ -22082,9 +22486,7 @@ msgstr "নিবদ্ধ করো"
 msgid ""
 "_:display here is a verb\n"
 "Display configuration"
-msgstr ""
-"_:প্রদর্শন করো যে এখানে একটি ক্রিয়াপদ আছে\n"
-"কন্‌ফিগারেশন প্রদর্শন করো"
+msgstr "কন্‌ফিগারেশন প্রদর্শন করো"
 
 #: standalone/drakvpn:352
 #, c-format
@@ -23043,6 +23445,7 @@ msgstr "স্ফীতি হ্রাস"
 msgid "Remote"
 msgstr "দূরবর্তী"
 
+# সাম
 #: standalone/drakvpn:1044
 #, c-format
 msgid ""
@@ -23057,12 +23460,24 @@ msgid ""
 "remote anonymous\n"
 "remote ::1 [8000]"
 msgstr ""
+"remote (address | anonymous) [[port]] { statements }\n"
+"প্রতিটি দূরবর্তী নোডের IKE ১ম পর্যায়ের প্যারামিটার নির্ধারন করে।\n"
+"ডিফল্ট পোর্ট হল ৫০০। যদি Anonymous বলা হয়ে থাকে\n"
+"statement গুলো সব peer এর ক্ষেত্রে প্রযোজ্য যেগুলো আর কোন\n"
+"দূরবর্তী ডিরেক্টিভের সাথে মিলে না।\n"
+"\n"
+"উদাহরন: \n"
+"\n"
+"remote anonymous\n"
+"remote ::1 [8000]"
 
 #: standalone/drakvpn:1052
 #, c-format
 msgid "Exchange mode"
 msgstr "বিনিময় মোড"
 
+# negotiation = নিস্পত্তি প্রক্রিয়ায় 
+# initiator ‌= ইনিশিয়েটর 
 #: standalone/drakvpn:1054
 #, c-format
 msgid ""
@@ -23073,6 +23488,12 @@ msgid ""
 "modes are acceptable. The first exchange mode is what\n"
 "racoon uses when it is the initiator.\n"
 msgstr ""
+"racoon যখন ইনিশিয়েটর তখন ১ম পর্যায়ের আদান‌-প্রদান মোড\n"
+"ঠিক করে। যখন racoon রেসপন্ডার তখন এটি গ্রহনযোগ্য\n"
+"আদান‌-প্রদান মোডও বটে। একের অধিক মোড কমা দিয়ে\n"
+"আলাদা করে দেয়া যেতে পারে। সবগুলো মোডই গ্রহনযোগ্য।\n"
+"ইনিশিয়েটর হিসেবে racoon ১ম আদান‌-প্রদান মোডটি ব্যবহার\n"
+"করে।\n"
 
 #: standalone/drakvpn:1060
 #, c-format
@@ -23089,6 +23510,8 @@ msgstr "বন্ধ"
 msgid "on"
 msgstr "চালু"
 
+# negotiation = নিস্পত্তি প্রক্রিয়ায় 
+# initiator ‌= ইনিশিয়েটর 
 #: standalone/drakvpn:1062
 #, c-format
 msgid ""
@@ -23107,6 +23530,16 @@ msgid ""
 "tiator and the responder.  This directive is ignored in\n"
 "the initiator case.  The default value is off."
 msgstr ""
+"এই ডিরেক্টিভটি রেসপন্ডারের জন্য। অতএব আপনাকে passive সেটিংটি\n"
+"চালু করতে হবে যাতে racoon(8) শুধু রেসপন্ডার হিসেবে কাজ করে। যদি\n"
+"রেসপন্ডারটির ২য় নিস্পত্তি প্রক্রিয়ায় কোন SPD নীতি না থাকে, এবং\n"
+"ডিরেক্টিভটি চালু থাকে, তবে racoon ইনিশিয়েটর থেকে SA পেলোডের\n"
+"প্রস্তাবটি বেছে নেবে এবং এটি থেকেই নীতিমালা তৈরী করবে। যে ক্লায়েন্টের\n"
+"IP address ডাইনামিক ভাবে দেয়া হয়, তার সাথে নিস্পত্তি করাই শ্রেয়।\n"
+"মনে রাখবেন, ইনিশিয়েটরটি রেসপন্ডারের SPD তে সঠিক নীতি ইনস্টল\n"
+"নাও করতে পারে। এই ইনিশিয়েটর ও রেসপন্ডারের মাঝে নীতির অমিলের\n"
+"কারনে অনান্য যোগাযোগ বিঘ্ন হতে পারে। ইনিশিয়েটরের ক্ষেত্রে এই\n"
+"ডিরেক্টিভটি অগ্রায্য করা হয় যার ডিফল্ট মান বন্ধ। "
 
 #: standalone/drakvpn:1076
 #, c-format
@@ -23181,7 +23614,6 @@ msgstr ""
 msgid "My identifier"
 msgstr "আমার সনাক্রকারক"
 
-# #নির্দেশক
 #: standalone/drakvpn:1094
 #, c-format
 msgid ""
@@ -24144,10 +24576,12 @@ msgstr "/স্বয়ংক্রিয় মডেম (_ম)"
 msgid "/Autodetect _jaz drives"
 msgstr "/স্বয়ংক্রিয় জায (jaz) ড্রাইভ (_J)"
 
+# সাম:
+# not sure about /_Upload 
 #: standalone/harddrake2:188
 #, c-format
 msgid "/_Upload the hardware list"
-msgstr ""
+msgstr "/হার্ডওয়্যার তালিকা _আপলোড করো"
 
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
@@ -24272,7 +24706,7 @@ msgstr "DVD"
 #: standalone/harddrake2:525
 #, c-format
 msgid "Upload the hardware list"
-msgstr ""
+msgstr "হার্ডওয়্যার তালিকা আপলোড করো"
 
 #: standalone/harddrake2:530
 #, c-format
@@ -24389,36 +24823,28 @@ msgstr "/সাহায্য/_সম্বন্ধে..."
 msgid ""
 "_:this is the auth.log log file\n"
 "Authentication"
-msgstr ""
-"_:এটি একটি auth.log লগ ফাইল\n"
-"বিশুদ্ধতা"
+msgstr "বিশুদ্ধতা"
 
 #: standalone/logdrake:110
 #, c-format
 msgid ""
 "_:this is the user.log log file\n"
 "User"
-msgstr ""
-"_:এটি একটি user.log লগ ফাইল\n"
-"ব্যবহারকারী"
+msgstr "ব্যবহারকারী"
 
 #: standalone/logdrake:111
 #, c-format
 msgid ""
 "_:this is the /var/log/messages log file\n"
 "Messages"
-msgstr ""
-"_:এটি হচ্ছে /var/log/messages লগ ফাইল\n"
-"বার্তাসমূহ"
+msgstr "বার্তাসমূহ"
 
 #: standalone/logdrake:112
 #, c-format
 msgid ""
 "_:this is the /var/log/syslog log file\n"
 "Syslog"
-msgstr ""
-"_:এটি হচ্ছে /var/log/syslog লগ ফাইল\n"
-"Syslog"
+msgstr "Syslog"
 
 #: standalone/logdrake:116
 #, c-format
@@ -24568,9 +24994,7 @@ msgstr "এই মানের চাইতের বেশী লোড হল�
 msgid ""
 "_: load here is a noun, the load of the system\n"
 "Load"
-msgstr ""
-"_: এখানে লোড একটি বিশেষ্য (noun), সিস্টেমের লোড\n"
-"লোড"
+msgstr "লোড"
 
 #: standalone/logdrake:428
 #, c-format
@@ -24656,14 +25080,15 @@ msgid "Configure Network"
 msgstr "নেটওয়ার্ক কনফিগার"
 
 #: standalone/net_applet:69
-#, fuzzy, c-format
+#, c-format
 msgid "Watched interface"
-msgstr "ইন্টারফেস"
+msgstr "যে সব ইন্টারফেসের উপর নজর রাখা হয়েছে"
 
+# সাম
 #: standalone/net_applet:78
-#, fuzzy, c-format
+#, c-format
 msgid "Profiles"
-msgstr "প্রক্সিসমূহ"
+msgstr "প্রোফাইলসমূহ"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238
@@ -25741,63 +26166,5 @@ msgstr ""
 msgid "Installation failed"
 msgstr "ইনস্টলেশন ব্যর্থ হয়েছে"
 
-#~ msgid "No browser available! Please install one"
-#~ msgstr "কোন ব্রাউজার নেই! অনুগ্রহপূর্বক একটি ইনস্টল করুন"
-
-#~ msgid ""
-#~ "No browser is installed on your system, Please install one if you want to "
-#~ "browse the help system"
-#~ msgstr ""
-#~ "আপনার সিস্টেমে কোন ব্রাউজার নেই, অনুগ্রহ করে একটি ইনস্টল করুন যা দিয়ে আপনি "
-#~ "সাহায্য সিস্টেম ব্রাউজ করতে চান"
-
-#~ msgid ""
-#~ "Insert a floppy in drive\n"
-#~ "All data on this floppy will be lost"
-#~ msgstr ""
-#~ "ড্রাইভে একটি ফ্লপি প্রবেশ করান\n"
-#~ "এই ফ্লপির সমস্থ ডাটা নষ্ট হয়ে যাবে"
-
-#~ msgid "Insert a FAT formatted floppy in drive %s"
-#~ msgstr "FAT ফরম্যাটকৃত একটি ফ্লপি %s ড্রাইভে ঢোকান"
-
-#~ msgid "This floppy is not FAT formatted"
-#~ msgstr "এই ফ্লপিটি FAT ফরম্যাটকৃত না"
-
-#~ msgid ""
-#~ "To use this saved packages selection, boot installation with ``linux "
-#~ "defcfg=floppy''"
-#~ msgstr ""
-#~ "এই সংরক্ষিত প্যাকেজ বাছাই ব্যবহার করার জন্য, ``linux defcfg=floppy'' মাধ্যমে "
-#~ "ইনস্টলেশন বুট করুন"
-
-#~ msgid "Load/Save on floppy"
-#~ msgstr "ফ্লপিতে লোড/সেভ করো"
-
-#~ msgid ""
-#~ "Please choose load or save package selection on floppy.\n"
-#~ "The format is the same as auto_install generated floppies."
-#~ msgstr ""
-#~ "অনুগ্রহ করে লোড বেছে নিন অথবা ফ্লপিতে প্যাকেজ বাছাই সংরক্ষণ করুন।\n"
-#~ "এই ফরম্যাটটি auto_install করা ফ্লপির মত।"
-
-#~ msgid "Load from floppy"
-#~ msgstr "ফ্লপি থেকে লোড করো"
-
-#~ msgid "Save on floppy"
-#~ msgstr "ফ্লপিতে সংরক্ষণ করো"
-
-#~ msgid "Package selection"
-#~ msgstr "প্যাকেজ নির্বাচন"
-
-#~ msgid "Loading from floppy"
-#~ msgstr "ফ্লপি থেকে লোড করা হচ্ছে"
-
-#~ msgid "Insert a floppy containing package selection"
-#~ msgstr "প্যাকেজ নির্বাচন সম্বলিত একটি ফ্লপি প্রবেশ করুন"
-
-#~ msgid "Installing HPOJ package..."
-#~ msgstr "HPOJ প্যাকেজ ইনস্টল করা হচ্ছে..."
-
-#~ msgid "Checking device and configuring HPOJ..."
-#~ msgstr "ডিভাইস পরীক্ষা করা হচ্ছে ও HPOJ কনফিগার করা হচ্ছে..."
+#~ msgid "http://www.mandrakelinux.com/en/101errata.php3"
+#~ msgstr "http://www.mandrakelinux.com/en/101errata.php3"
