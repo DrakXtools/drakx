@@ -614,7 +614,9 @@ sub get_kde_lang {
 	$lang eq 'no' ? 'nb' :
 	$lang eq 'sp' ? 'sr' :
 	$lang eq 'zh_CN' ? 'zh_CN.GB2312' :
+	$lang eq 'zh_SG' ? 'zh_CN.GB2312' :
 	$lang eq 'zh_TW' ? 'zh_TW.Big5' :
+	$lang eq 'zh_HK' ? 'zh_TW.Big5' :
 	  exists $valid_kde_langs{$lang} ? $lang :
 	  exists $valid_kde_langs{substr($lang, 0, 2)} ? substr($lang, 0, 2) : '';
     };
