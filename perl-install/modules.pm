@@ -634,7 +634,7 @@ sub get_that_type {
 
 sub load_ide {
     if (1) { #- add it back to support Ultra66 on ide modules.
-	load("ide-cd");
+	eval { load("ide-cd"); }
     } else {
 	eval {
 	    load("ide-mod", 'prereq', 'options="' . detect_devices::hasUltra66() . '"');
