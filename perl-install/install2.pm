@@ -23,6 +23,7 @@ use partition_table qw(:types);
 use modules;
 use detect_devices;
 use run_program;
+use any;
 use log;
 use fs;
 
@@ -288,6 +289,8 @@ sub formatPartitions {
       qw(dev etc etc/profile.d etc/rpm etc/sysconfig etc/sysconfig/console etc/sysconfig/network-scripts
 	home mnt tmp var var/tmp var/lib var/lib/rpm var/lib/urpmi);
     mkdir "$o->{prefix}/$_", 0700 foreach qw(root root/tmp);
+
+    any::rotate_logs($o->{prefix});
 
     require raid;
     raid::prepare_prefixed($o->{raid}, $o->{prefix});
@@ -606,7 +609,7 @@ sub main {
 
     $o->{allowFB} = listlength(cat_("/proc/fb"));
 
-    my $VERSION = cat__(install_any::getFile("VERSION"));
+    my $VERSION = cat__(install_any::getFile("VERSION")) or do { print "VERSION file missing\n"; sleep 5 };
     $o->{lnx4win} = 1 if $VERSION =~ /lnx4win/i;
     $o->{meta_class} = 'desktop' if $VERSION =~ /desktop/i;
     if ($o->{meta_class} eq 'desktop') {
