@@ -13,6 +13,7 @@ use vars qw(@ISA);
 use common qw(:common);
 use partition_table qw(:types);
 use install_steps;
+use pci_probing::main;
 use install_any;
 use detect_devices;
 use timezone;
@@ -591,15 +592,22 @@ sub setup_thiskind {
     my @l = $o->load_thiskind($type);
     return if $auto && (@l || !$at_least_one);
     while (1) {
-	@l ?
-	  $o->ask_yesorno('', 
-			  [ _("Found %s %s interfaces", join(", ", map { $_->[0] } @l), $type),
-			    _("Do you have another one?") ], "No") :
-			      $o->ask_yesorno('', _("Do you have an %s interface?", $type), "No") or return;
+	my $msg = @l ?
+	  [ _("Found %s %s interfaces", join(", ", map { $_->[0] } @l), $type), 
+	    _("Do you have another one?") ] :
+	  _("Do you have an %s interface?", $type);
 	    
-	my @r = $o->loadModule($type) or return;
-	push @l, \@r;
-	}
+	my $opt = [ __("Yes"), __("No") ];
+	push @$opt, __("See hardware info") if $::expert;
+	my $r = $o->ask_from_list_('', $msg, $opt);
+	$r eq "No" and return;
+	if ($r eq "Yes") {
+	    my @r = $o->loadModule($type) or return;
+	    push @l, \@r;
+	} else {
+	     $o->ask_warn('', [ pci_probing::main::list() ]);
+	 }
+    }
 }
 
 

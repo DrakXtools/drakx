@@ -11,6 +11,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
 use common qw(:common :system);
+use run_program;
 use pkgs;
 use smp;
 use log;
@@ -94,8 +95,8 @@ sub getAvailableSpace {
     die "missing root partition";
 }
 
-sub setPackages {
-    my ($o) = @_;
+sub setPackages($$) {
+    my ($o, $install_classes) = @_;
 
     unless ($o->{package}) {
 	my $useHdlist = $o->{method} !~ /nfs|hd/;
@@ -105,17 +106,18 @@ sub setPackages {
 	pkgs::getDeps($o->{packages});
 	
 	$o->{compss}     = pkgs::readCompss    ($o->{packages});
-	$o->{compssList} = pkgs::readCompssList($o->{packages});
+	$o->{compssListLevels} = pkgs::readCompssList($o->{packages});
+	$o->{compssListLevels} ||= $install_classes;
 	push @{$o->{base}}, "kernel-smp" if smp::detect();
 
 	do {
 	    my $p = $o->{packages}{$_} or log::l(), next;
 	    pkgs::select($o->{packages}, $p, 1);
 	} foreach @{$o->{base}};
-    }	
+    }
     
     pkgs::setShowFromCompss($o->{compss}, $o->{installClass}, $o->{lang});
-    pkgs::setSelectedFromCompssList($o->{compssList}, $o->{packages}, getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang});
+    pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang});
 }
 
 sub addToBeDone(&$) {
@@ -124,4 +126,18 @@ sub addToBeDone(&$) {
     return &$f() if $::o->{steps}{$step}{done};
 
     push @{$::o->{steps}{$step}{toBeDone}}, $f;
+}
+
+sub install_cpio {
+    my ($dir, $name) = @_;
+
+    return if -e "$dir/$name";
+
+    my $cpio = "$dir.cpio.bz2";
+    -e $cpio or return;
+
+    commands::rm "-r", $dir;
+    mkdir $dir, 0755;
+    run_program::run("cd $dir ; bzip2 -cd $cpio | cpio -i $name");
+    "$dir/$name";
 }

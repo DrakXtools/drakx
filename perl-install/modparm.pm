@@ -50,6 +50,4 @@ sub get_options_name($) {
   @names;
 }
 
-read_modparm_file("/tmp/modparm.txt");
-
 1;

@@ -7,6 +7,7 @@ DEST        = $(ROOTDEST)/Mandrake/mdkinst
 STAGE2      = $(ROOTDEST)/Mandrake/base/mdkinst_stage2
 BASE        = $(ROOTDEST)/Mandrake/base
 DESTREP4PMS = $(DEST)/usr/bin/perl-install
+STAGE2TMP   = /tmp/stage2_tmp
 PERL        = perl
 LOCALFILES  = $(PERL) mouseconfig
 DIRS        = po pci_probing
@@ -78,9 +79,10 @@ install_pms: all
 	for i in $(PMS); do \
 		dest=$(DESTREP4PMS)/`dirname $$i`; \
 		install -d $$dest; \
-		perl -ne 's/\s*#-.*//; print unless (/^=head/ .. /^=cut/)' $$i > $(DESTREP4PMS)/$$i; \
+		perl -ne 'print' $$i > $(DESTREP4PMS)/$$i; \
 	done
-# || /use (diagnostics|vars|strict)/
+#		perl -ne 's/\s*#-.*//; print unless (/^=head/ .. /^=cut/) || /use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
+# /
 
 	rm $(DESTREP4PMS)/c/c.xs.pm
 	mv -f $(DESTREP4PMS)/c/c.pm $(DESTREP4PMS)
@@ -132,14 +134,8 @@ get_needed_files: $(SO_FILES)
 
 	ln -sf ash $(DEST)/usr/bin/sh
 
-	install -d $(DEST)/usr/X11R6/lib/X11/fonts/75dpi
-	install -d $(DEST)/usr/X11R6/lib/X11/fonts/misc
-	cd /usr/X11R6/lib/X11/fonts/75dpi ; cp -a fonts.* helvR* $(DEST)/usr/X11R6/lib/X11/fonts/75dpi
-	cd /usr/X11R6/lib/X11/fonts/misc ; cp -a fonts.* k14.pcf.gz cursor.pcf.gz 6x13.pcf.gz $(DEST)/usr/X11R6/lib/X11/fonts/misc
-
-	for i in ru ja; do install -d $(DEST)/usr/share/locale/$$i ; cp -f `find /usr/share/locale/$$i/* -prune -type f` $(DEST)/usr/share/locale/$$i ; done
-
-	perl -I. -Ic -Ic/blib/arch -Mkeyboard -e 'foreach (keyboard::xmodmaps()) { `cp /usr/share/xmodmap/xmodmap.$$_ $(DEST)/usr/share/xmodmap` }'
+	DEST=$(DEST) perl -I. -MForMakefile -e 'locale()'
+	DEST=$(DEST) perl -I. -MForMakefile -e 'xmodmap()'
 
 	cp -a keymaps $(DEST)/usr/share
 	cp -a consolefonts $(DEST)/usr/share
@@ -169,14 +165,23 @@ full_stage2: $(BASE)/depslist
 stage2:
 	$(MAKE) install_pms
 
-	dd if=/dev/zero of=$(STAGE2) bs=1M count=12
+	$(SUDO) rm -rf $(STAGE2TMP)
+	install -d $(STAGE2TMP)
+	$(SUDO) cp -a $(DEST)/* $(STAGE2TMP)
+
+	$(SUDO) umount /mnt/stage2 ; true
+	dd if=/dev/zero of=$(STAGE2) bs=1M count=13
 	echo y | /sbin/mke2fs $(STAGE2)
 	$(SUDO) mount $(STAGE2) /mnt/stage2 -o loop
 
 #	hack to reduce the STAGE2 image
-	mv $(DEST)/usr/X11R6/bin/XF86_SVGA /tmp
-	$(SUDO) cp -a $(DEST)/* /mnt/stage2
-	mv /tmp/XF86_SVGA $(DEST)/usr/X11R6/bin/
+	rm $(STAGE2TMP)/usr/X11R6/bin/XF86_SVGA
+	for i in /usr/share/locale /usr/share/keymaps /usr/share/xmodmap; do \
+		name=`basename $$i` ; \
+		(cd $(STAGE2TMP)/`dirname $$i` ; find $$name | cpio --quiet -o 2>/dev/null | bzip2 > $$name.cpio.bz2 ; rm -rf $$name) \
+	done
+	$(SUDO) cp -a $(STAGE2TMP)/* /mnt/stage2
+	$(SUDO) rm -rf $(STAGE2TMP)
 
 	$(SUDO) umount $(STAGE2)
 	gzip -f -9 $(STAGE2)

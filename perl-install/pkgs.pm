@@ -4,7 +4,7 @@ use diagnostics;
 use strict;
 use vars qw($fd);
 
-use common qw(:common :file);
+use common qw(:common :file :functional);
 use install_any;
 use log;
 use smp;
@@ -36,8 +36,8 @@ sub select($$;$) {
 	$i->{selected}++ unless $i->{selected} == -1;
     }
 }
-sub unselect($$) {
-    my ($packages, $p) = @_;
+sub unselect($$;$) {
+    my ($packages, $p, $size) = @_;
     $p->{base} and return;
     my $set = set_new($p->{name});
     my $l = $set->{list};
@@ -56,9 +56,10 @@ sub unselect($$) {
 
 	$i->{selected} <= 0 || $i->{base} and next;
 	if (--$i->{selected} == 0) {
-	    push @$l, @{$i->{deps} || []};
+	    push @$l, @{$i->{deps} || []} if !$size || ($size -= $i->{size}) > 0;
 	}
     }
+    return if $size <= 0;
 
     #- garbage collect for circular dependencies
     my $changed = 1;
@@ -167,21 +168,22 @@ sub readCompss($) {
 
 sub readCompssList($) {
     my ($packages) = @_;
-    my ($list, %compssList);
+    my $level;
 
     my $f = install_any::getFile("compssList") or die "can't find compssList";
     foreach (<$f>) {
 	/^\s*$/ || /^#/ and next;
 
-	if (/(.*):$/) {
-	    $compssList{$1} = $list = [];
+	my ($name, @values) = split;
+
+	if ($name eq "package") {
+	    $level = \@values;
 	} else {
-	    chomp;
-	    my $p = $packages->{$_} or log::l("unknown package $_ (in compssList)"), next;	    
-	    push @$list, $p;
+	    my $p = $packages->{$name} or log::l("unknown packages $name (in compssList)"), next;
+	    $p->{values} = \@values;
 	}
     }
-    \%compssList;
+    $level;
 }
 
 sub verif_lang($$) {
@@ -207,18 +209,35 @@ sub setShowFromCompss($$$) {
 }
 
 sub setSelectedFromCompssList($$$$$) {
-    my ($compssList, $packages, $size, $install_class, $lang) = @_;
-    
-    my $l = $compssList->{$install_class} or log::l("no $_ entry in compssList"), return;
-    foreach (@$l) {
-	verif_lang($_, $lang) or next;
-	&select($packages, $_);
+    my ($compssListLevels, $packages, $size, $install_class, $lang) = @_;
 
-	my $nb = 0; foreach (values %$packages) {
+    my @packages = values %$packages;
+    my @places = do {
+	my $ind;
+	map_index { $ind = $::i if $_ eq $install_class } @{$compssListLevels};
+	defined $ind or log::l("unknown install class $install_class in compssList"), return;
+
+	my @values = map { $_->{values}[$ind] } @packages;
+	sort { $values[$a] <=> $values[$b] } 0 .. $#packages;
+    };
+    foreach (@places) {
+	my $p = $packages[$_];
+	verif_lang($p, $lang) or next;
+	print "selecting $p->{name}\n";
+	&select($packages, $p);
+
+	my $nb = 0; foreach (@packages) {
 	    $nb += $_->{size} if $_->{selected};
 	}
 	if ($nb > $size) {
-	    unselect($packages, $_);
+	    unselect($packages, $p, $nb - $size);
+	    print "leaving auto selection (zsize was $nb > $size)\n";
+
+	    my $nb = 0; foreach (@packages) {
+		$nb += $_->{size} if $_->{selected};
+	    }
+	    print "leaving auto selection (zsize was $nb > $size)\n";
+
 	    last;
 	}
     }

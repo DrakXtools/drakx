@@ -8,6 +8,7 @@ use strict;
 #-######################################################################################
 use common qw(:file);
 use commands;
+use install_any;
 use log;
 
 #-######################################################################################
@@ -108,7 +109,7 @@ sub text2lang {
 }
 
 sub set {
-    my ($lang) = @_;
+    my ($lang, $prefix) = @_;
 
     if ($lang) {
 	$ENV{LC_ALL}    = $lang;
@@ -120,6 +121,7 @@ sub set {
 	delete $ENV{LC_ALL};
 	delete $ENV{LINGUAS};
     }
+    install_any::install_cpio($prefix, "/usr/share/locale", $lang);
 }
 
 sub write {

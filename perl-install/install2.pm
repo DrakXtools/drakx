@@ -385,7 +385,7 @@ sub selectInstallClass {
     $::beginner = $o->{installClass} eq "beginner";
     $o->{partitions} = $suggestedPartitions{$o->{installClass}};
 
-    install_any::setPackages($o) if $o->{steps}{choosePackages}{entered} > 1;
+    install_any::setPackages($o, \@install_classes) if $o->{steps}{choosePackages}{entered} > 1;
 }
 
 #------------------------------------------------------------------------------
@@ -446,7 +446,7 @@ sub formatPartitions {
 #------------------------------------------------------------------------------
 #-PADTODO
 sub choosePackages {
-    install_any::setPackages($o);
+    install_any::setPackages($o, \@install_classes);
     $o->choosePackages($o->{packages}, $o->{compss}); 
     $o->{packages}{$_}{selected} = 1 foreach @{$o->{base}};
 }
