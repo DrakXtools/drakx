@@ -1,3 +1,62 @@
+2001/09/09  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_any.pm: getAndSaveInstallFloppy: fix multiple cdrom issue
+
+2001/09/09  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/tr.po: updated Turkish file
+
+	* share/po/sv.po: updated Swedish file
+
+2001/09/09  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (ejectCdrom): fix D state on exit
+
+	* diskdrake_interactive.pm, install_interactive.pm, diskdrake.pm: 
+	  - "Wizard" and "More" are back
+	  - allow "Use for loopback" when there is already a loopback
+	  - set the options on newly created partitions
+	  - recompute_loopbacks called after modification of loopbacks, no more
+	before reading
+	  - restrict the lenght of the lines in partition description
+	  - make loopback work
+
+	* interactive_gtk.pm, interactive.pm, any.pm, interactive_newt.pm:
+	clicked_may_quit used in place of clicked+exception to work-around
+	perl-GTK bug (?)
+
+	* share/po/i18n_compssUsers: ensure we're not adding a string already
+	there (otherwise msgmerge yells)
+
+	* share/po/help_xml2pm.pl, share/po/.cvsignore: xml help
+	handling/enhancing for multi-langs
+
+	* modules.pm: probeall handling
+	(write_conf): switch to "probeall scsi_hostadapter ..."
+
+	* share/po/Makefile: xml help handling/enhancing for multi-langs
+	xml help handling/enhancing for multi-langs
+
+	* partition_table.pm (get_normal_parts_and_holes): remove only small
+	holes, not small partitions
+
+	* fs.pm (set_default_options): remove iocharset=... for nfs (why was it
+	there?)
+
+2001/09/08  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: fix some ortograf
+
+	* share/rpmsrate: lvm not installed for everyone ?!
+
+2001/09/08  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_auto_install.pm: force exitInstall to be non automatic
+
+	* install_steps.pm, fs.pm, install_steps_interactive.pm, fsedit.pm,
+	diskdrake_interactive.pm, install2.pm, diskdrake.pm: make loopback
+	installs work again
+
 2001/09/09  Pixel  <pixel@mandrakesoft.com>
 
 	* modules.pm (write_conf): switch to "probeall scsi_hostadapter ..."
