@@ -124,23 +124,38 @@ sub exit { exit($_[0]) }
 #-######################################################################################
 sub ask_warn {
     my ($o, $title, $message) = @_;
-    local $::isWizard = 0;
-    ask_from_listf_no_check($o, $title, $message, undef, [ N("Ok") ]);
+    ask_warn_($o, { title => $title, messages => $message });
 }
-
 sub ask_yesorno {
-    my ($o, $title, $message, $def, $help) = @_;
-    ask_from_list_($o, $title, $message, [ N_("Yes"), N_("No") ], $def ? "Yes" : "No", $help, 'nocancel') eq "Yes";
+    my ($o, $title, $message, $def) = @_;
+    ask_yesorno_($o, { title => $title, messages => $message }, $def);
+}
+sub ask_okcancel {
+    my ($o, $title, $message, $def) = @_;
+    ask_okcancel_($o, { title => $title, messages => $message }, $def);
 }
 
-sub ask_okcancel {
-    my ($o, $title, $message, $def, $help) = @_;
+sub ask_warn_ {
+    my ($o, $common) = @_;
+    local $::isWizard = 0;
+    ask_from_listf_raw_no_check($o, $common, undef, [ N("Ok") ]);
+}
+
+sub ask_yesorno_ {
+    my ($o, $common, $def) = @_;
+    $common->{cancel} = '';
+    ask_from_listf_raw($o, $common, sub { translate($_[0]) }, [ N_("Yes"), N_("No") ], $def ? "Yes" : "No") eq "Yes";
+}
+
+sub ask_okcancel_ {
+    my ($o, $common, $def) = @_;
 
     if ($::isWizard) {
 	$::no_separator = 1;
-    	$o->ask_from_no_check({ title => $title, messages => $message, focus_cancel => !$def }, []);
+	$common->{focus_cancel} = !$def;
+    	ask_from_no_check($o, $common, []);
     } else {
-	ask_from_list_($o, $title, $message, [ N_("Ok"), N_("Cancel") ], $def ? "Ok" : "Cancel", $help, 'nocancel') eq "Ok";
+	ask_from_listf_raw($o, $common, sub { translate($_[0]) }, [ N_("Ok"), N_("Cancel") ], $def ? "Ok" : "Cancel") eq "Ok";
     }
 }
 
@@ -154,47 +169,46 @@ sub ask_fileW {
 }
 
 sub ask_from_list {
-    my ($o, $title, $message, $l, $def, $help, $nocancel) = @_;
-    ask_from_listf($o, $title, $message, undef, $l, $def, $help, $nocancel);
+    my ($o, $title, $message, $l, $def) = @_;
+    ask_from_listf($o, $title, $message, undef, $l, $def);
 }
 
 sub ask_from_list_ {
-    my ($o, $title, $message, $l, $def, $help, $nocancel) = @_;
-    ask_from_listf($o, $title, $message, sub { translate($_[0]) }, $l, $def, $help, $nocancel);
+    my ($o, $title, $message, $l, $def) = @_;
+    ask_from_listf($o, $title, $message, sub { translate($_[0]) }, $l, $def);
 }
 
 sub ask_from_listf_ {
-    my ($o, $title, $message, $f, $l, $def, $help, $nocancel) = @_;
-    ask_from_listf($o, $title, $message, sub { translate($f->(@_)) }, $l, $def, $help, $nocancel);
+    my ($o, $title, $message, $f, $l, $def) = @_;
+    ask_from_listf($o, $title, $message, sub { translate($f->(@_)) }, $l, $def);
 }
 sub ask_from_listf {
-    my ($_o, $_title, $_message, $_f, $l, $_def, $_help, $_nocancel) = @_;
+    my ($o, $title, $message, $f, $l, $def) = @_;
+    ask_from_listf_raw($o, { title => $title, messages => $message }, $f, $l, $def);
+}
+sub ask_from_listf_raw {
+    my ($_o, $_common, $_f, $l, $_def) = @_;
     @$l == 0 and die "ask_from_list: empty list\n" . backtrace();
     @$l == 1 and return $l->[0];
-    goto &ask_from_listf_no_check;
+    goto &ask_from_listf_raw_no_check;
 }
 
-sub ask_from_listf_no_check {
-    my ($o, $title, $message, $f, $l, $def, $help, $nocancel) = @_;
+sub ask_from_listf_raw_no_check {
+    my ($o, $common, $f, $l, $def) = @_;
 
     if (@$l <= 2 && !$::isWizard) {
 	my ($ok, $cancel) = map { $_ && may_apply($f, $_) } @$l;
 	if (length "$ok$cancel" < 70) {
 	    my $ret = eval {
-		ask_from_no_check($o, 
-				  { title => $title, messages => $message, ok => $ok, 
-				    if_($cancel, cancel => $cancel, focus_cancel => $def eq $l->[1]) }, []
-				 ) ? $l->[0] : $l->[1];
+		put_in_hash($common, { ok => $ok, 
+				       if_($cancel, cancel => $cancel, focus_cancel => $def eq $l->[1]) });
+		ask_from_no_check($o, $common, []) ? $l->[0] : $l->[1];
 	    };
 	    die if $@ && $@ !~ /^wizcancel/;
 	    return $@ ? undef : $ret;
 	}
     }
-    ask_from_($o, 
-	      { title => $title, 
-		messages => $message,
-		if_($nocancel, cancel => ''),
-	      }, [ { val => \$def, type => 'list', list => $l, help => $help, format => $f } ]) && $def;
+    ask_from_($o, $common, [ { val => \$def, type => 'list', list => $l, format => $f } ]) && $def;
 }
 
 sub ask_from_treelist {
