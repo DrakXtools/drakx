@@ -3,7 +3,7 @@
 KERNEL_BOOT_PATH="kernel"
 
 function f() { 
-    v=`perl -Iperl-install -e "use modules; print qq(\\$_.o\n) foreach modules::module_of_type(\"$1\")"` 
+    v=`perl -Iperl-install -Mmodules -e "print qq(\\$_.o\n) foreach modules::module_of_type(\"$1\")"` 
 }
 
 ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
