@@ -228,6 +228,7 @@ arch() eq "ppc" ? (
 )),
 );
 
+my $disable_windows_key = (detect_devices::isLaptop() ? "yes" : "no");
 
 #-######################################################################################
 #- Functions
@@ -360,7 +361,7 @@ sub write {
     setVarsInSh("$prefix/etc/sysconfig/keyboard", { KEYTABLE => keyboard2kmap($keyboard), 
 						    KBCHARSET => $charset,
 						    REMOVE_MOD_META_L => "",
-						    DISABLE_WINDOWS_KEY => detect_devices::isLaptop() ? "yes" : "",
+						    DISABLE_WINDOWS_KEY => $disable_windows_key,
 						    BACKSPACE => $isNotDelete ? "BackSpace" : "Delete" });
     run_program::rooted($prefix, "dumpkeys > /etc/sysconfig/console/default.kmap") or log::l("dumpkeys failed");
 }
@@ -369,6 +370,8 @@ sub read {
     my ($prefix) = @_;
     my %keyf = getVarsFromSh("$prefix/etc/sysconfig/keyboard");
     my $keytable = $keyf{KEYTABLE};
+    # If not yet defined in the file, check if we are a laptop:
+    $disable_windows_key = ($keyf{DISABLE_WINDOWS_KEY}) || (detect_devices::isLaptop() ? "yes" : "no");
     keyboard2kmap($_) eq $keytable and return $_ foreach keys %keyboards;
     $keyboards{$keytable} && $keytable; #- keep track of unknown keyboard.
 }
