@@ -563,6 +563,7 @@ Try with another video card or monitor")), return;
     #- otherwise there'll be a virtual screen :(
     $card->{depth}{$depth} = [ grep { $_->[0] <= $wres } @{$card->{depth}{$depth}} ];
     $card->{default_depth} = $depth;
+    $card->{default_wres} = $wres;
     $card->{vga_mode} = $vgamodes{"${wres}xx$depth"} || $vgamodes{"${res}x$depth"}; #- for use with frame buffer.
     1;
 }

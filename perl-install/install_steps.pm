@@ -543,8 +543,13 @@ sub setupXfreeAfter {
     my ($o) = @_;
     if ($o->{X}{card}{server} eq 'FBDev') {
 	unless (install_any::setupFB($o, Xconfigurator::getVGAMode($o->{X}))) {
+	    log::l("disabling automatic start-up of X11 if any as setup framebuffer failed");
 	    Xconfigurator::rewriteInittab(3) unless $::testing; #- disable automatic start-up of X11 on error.
 	}
+    }
+    if ($o->{X}{card}{default_depth} >= 16 || $o->{X}{card}{default_wres} >= 1024) {
+	log::l("setting large icon style for kde");
+	install_any::kderc_largedisplay($o->{prefix});
     }
 }
 

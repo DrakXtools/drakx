@@ -513,7 +513,39 @@ sub template2userfile($$$$%) {
     }
 }
 
-sub kdeicons_postinstall {
+sub kderc_largedisplay($) {
+    my ($prefix) = @_;
+
+    foreach ("/etc/skel", "/root", list_home($prefix)) {
+	my ($inputfile, $outputfile) = ("$prefix$_/.kderc", "$prefix$_/.kderc.new");
+	my %subst = ( contrast => "Contrast=7\n",
+		      kfmiconstyle => "kfmIconStyle=Large\n",
+		      kpaneliconstyle => "kpanelIconStyle=Large\n",
+		      kdeiconstyle => "KDEIconStyle=Large\n",
+		    );
+
+	local *INFILE; local *OUTFILE;
+	open INFILE, $inputfile or return;
+	open OUTFILE, ">$outputfile" or return;
+
+	print OUTFILE map {
+	    if (my $i = /^\s*\[KDE\]/ ... /^\s*\[/) {
+		if (/^\s*(\w*)=/ && $subst{lc($1)}) {
+		    delete $subst{lc($1)};
+		} else {
+		    ($i > 1 && /^\s*\[/ && join '', values %subst). $_;
+		}
+	    } else {
+		$_;
+	    }
+	} <INFILE>;
+
+	unlink $inputfile;
+	rename $outputfile, $inputfile;
+    }
+}
+
+sub kdeicons_postinstall($) {
     my ($prefix) = @_;
 
     #- parse etc/fstab file to search for dos/win, zip, cdroms icons.
