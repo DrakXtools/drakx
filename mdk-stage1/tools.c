@@ -46,6 +46,7 @@
 #include "tools.h"
 #include "probing.h"
 #include "modules.h"
+#include "lomount.h"
 
 static struct param_elem params[50];
 static int param_number = 0;
@@ -296,6 +297,58 @@ enum return_type copy_file(char * from, char * to, void (*callback_func)(int ove
                 return RETURN_ERROR;
         }
 }
+
+#ifdef MANDRAKE_MOVE
+enum return_type mount_clp(char *clp,  char *location_mount)
+{
+	if (lomount(clp, location_mount, NULL, 1)) {
+                stg1_error_message("Could not mount compressed loopback :(.");
+                return RETURN_ERROR;
+        }
+	return RETURN_OK;
+}
+
+enum return_type preload_mount_clp(int clp_fd, int clp_size, char *clp_name, char *location_mount)
+{
+	int ret;
+	char *clp_tmpfs = asprintf_("%s/%s", SLASH_LOCATION, clp_name);
+#ifdef MANDRAKE_MOVE
+	static int count = 0;
+	char buf[5000];
+	sprintf(buf, "Loading program into memory (part %d)...", ++count);
+#else
+	char *buf = "Loading program into memory...";
+#endif
+	init_progression(buf, clp_size);
+	ret = save_fd(clp_fd, clp_tmpfs, update_progression);
+	end_progression();
+	if (ret != RETURN_OK)
+		return ret;
+	
+	return mount_clp(clp_tmpfs, location_mount);
+}
+
+enum return_type mount_clp_may_preload(char *clp_name, char *location_mount, int preload)
+{
+	char *clp = asprintf_("%s/%s", CLP_LOCATION, clp_name);
+
+	log_message("mount_clp_may_preload: %s into %s (preload = %d)", clp, location_mount, preload);
+
+        if (access(clp, R_OK) != 0) return RETURN_ERROR;
+
+        if (preload) {
+		int clp_fd = open(clp, O_RDONLY);
+		if (clp_fd != -1) {
+			return preload_mount_clp(clp_fd, file_size(clp), clp_name, location_mount);
+		} else {
+			log_perror(clp);
+			return RETURN_ERROR;
+		}
+	} else {
+                return mount_clp(clp, location_mount);
+	}
+}
+#endif
 
 #ifndef MANDRAKE_MOVE
 static void save_stuff_for_rescue(void)

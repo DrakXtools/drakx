@@ -45,7 +45,6 @@ _syscall2(int,pivot_root,const char *,new_root,const char *,put_old)
 #include "tools.h"
 #include "automatic.h"
 #include "mount.h"
-#include "lomount.h"
 #include "insmod.h"
 
 #ifdef ENABLE_PCMCIA
@@ -418,40 +417,23 @@ enum return_type create_initial_fs(char* symlinks, char* devices)
 }
 
 #ifdef MANDRAKE_MOVE
-static enum return_type handle_clp(char* clp, char* live, char* location_live, char* location_mount, int* is_symlink, char* clp_tmpfs)
+static enum return_type handle_move_clp(char* clp_name, char* live, char* location_live, char* location_mount, int* is_symlink, int preload)
 {
-        static int count = 0;
-        if (access(clp, R_OK)) {
-                log_message("no %s found (or disabled), trying to fallback on plain tree", clp);
-                if (!access(live, R_OK)) {
+	if (mount_clp_may_preload(clp_name, location_mount, preload) == RETURN_OK) {
+		return RETURN_OK;
+	} else {	
+		char *full_live = asprintf_("%s%s", location_live, live);
+                log_message("no %s found (or disabled), trying to fallback on plain tree", clp_name);
+                if (!access(full_live, R_OK)) {
                         if (scall(symlink(location_live, location_mount), "symlink"))
                                 return RETURN_ERROR;
                         *is_symlink = 1;
                         return RETURN_OK;
                 } else {
-                        log_message("move: can't find %s nor %s, proceeding hoping files will be there", clp, live);
+                        log_message("move: can't find %s nor %s, proceeding hoping files will be there", clp_name, full_live);
                         return RETURN_OK;
                 }
         }
-
-        if (clp_tmpfs) {
-                int ret;
-                char buf[5000];
-                sprintf(buf, "Loading (part %d)...", ++count);
-                init_progression(buf, file_size(clp));
-                ret = copy_file(clp, clp_tmpfs, update_progression);
-                end_progression();
-                if (ret != RETURN_OK)
-                        return ret;
-                clp = clp_tmpfs;
-        }
-
-        if (lomount(clp, location_mount, NULL, 1)) {
-                stg1_error_message("Could not mount compressed loopback :(.");
-                return RETURN_ERROR;
-        }
-
-        return RETURN_OK;
 }
 
 int mandrake_move_post(void)
@@ -461,24 +443,24 @@ int mandrake_move_post(void)
         int totem__real_is_symlink_to_raw = 0;
         int main__real_is_symlink_to_raw = 0;
 
-        if (handle_clp(IMAGE_LOCATION "/live_tree_boot.clp", IMAGE_LOCATION "/live_tree_boot/usr/bin/runstage2.pl",
+        if (handle_move_clp("live_tree_boot.clp", "/usr/bin/runstage2.pl",
                        IMAGE_LOCATION "/live_tree_boot", BOOT_LOCATION,
-                       &boot__real_is_symlink_to_raw, SLASH_LOCATION "/live_tree_boot.clp") != RETURN_OK)
+                       &boot__real_is_symlink_to_raw, 1) != RETURN_OK)
                 return RETURN_ERROR;
 
-        if (handle_clp(IMAGE_LOCATION "/live_tree_always.clp", IMAGE_LOCATION "/live_tree_always/bin/bash",
+        if (handle_move_clp("live_tree_always.clp", "/bin/bash",
                        IMAGE_LOCATION "/live_tree_always", ALWAYS_LOCATION,
-                       &always__real_is_symlink_to_raw, SLASH_LOCATION "/live_tree_always.clp") != RETURN_OK)
+                       &always__real_is_symlink_to_raw, 1) != RETURN_OK)
                 return RETURN_ERROR;
 
-        if (handle_clp(IMAGE_LOCATION "/live_tree_totem.clp", IMAGE_LOCATION "/live_tree_totem/usr/bin/totem",
+        if (handle_move_clp("live_tree_totem.clp", "/usr/bin/totem",
                        IMAGE_LOCATION "/live_tree_totem", TOTEM_LOCATION,
-                       &totem__real_is_symlink_to_raw, SLASH_LOCATION "/live_tree_totem.clp") != RETURN_OK)
+                       &totem__real_is_symlink_to_raw, 1) != RETURN_OK)
                 return RETURN_ERROR;
 
-        if (handle_clp(IMAGE_LOCATION "/live_tree.clp", IMAGE_LOCATION "/live_tree/etc/fstab",
+        if (handle_move_clp("live_tree.clp", "/etc/fstab",
                        IMAGE_LOCATION "/live_tree", STAGE2_LOCATION,
-                       &main__real_is_symlink_to_raw, NULL) != RETURN_OK)
+                       &main__real_is_symlink_to_raw, 0) != RETURN_OK)
                 return RETURN_ERROR;
        
         // in case we didn't mount any clp, because gzloop.o is not available later in /lib/modules

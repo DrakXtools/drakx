@@ -34,6 +34,9 @@ int total_memory(void);
 int image_has_stage2();
 int ramdisk_possible(void);
 enum return_type copy_file(char * from, char * to, void (*callback_func)(int overall));
+#ifdef MANDRAKE_MOVE
+enum return_type mount_clp_may_preload(char *clp_name, char *location_mount, int preload);
+#endif
 #ifndef MANDRAKE_MOVE
 char * get_ramdisk_realname(void);
 enum return_type load_ramdisk(void);
