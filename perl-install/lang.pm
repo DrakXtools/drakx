@@ -949,44 +949,19 @@ sub write {
     setVarsInSh($prefix . ($b_user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n'), $h);
 
     eval {
-	my $charset = l2charset($locale->{lang});
-	my $kde_charset = charset2kde_charset($charset);
 	my $confdir = $prefix . ($b_user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config';
-	my ($prev_kde_charset) = cat_("$confdir/kdeglobals") =~ /^Charset=(.*)/mi;
 
 	-d $confdir or die 'not configuring kde config files since it is not installed/used';
 
-	update_gnomekderc("$confdir/kdeglobals", Locale => (
-			      Charset => $kde_charset,
-			      Country => lc($locale->{country}),
-			      Language => get_kde_lang($locale),
-			  ));
+	configure_kdeglobals($locale, $confdir);
 
 	my %qt_xim = (zh => 'Over The Spot', ko => 'On The Spot', ja => 'Over The Spot');
 	if ($b_user_only && (my $qt_xim = $qt_xim{substr($locale->{lang}, 0, 2)})) {
 	    update_gnomekderc("$ENV{HOME}/.qt/qtrc", General => (XIMInputStyle => $qt_xim));
 	}
 
-        if ($prev_kde_charset ne $kde_charset) {
-	    update_gnomekderc("$confdir/kdeglobals", WM => (
-	    		      activeFont => charset2kde_font($charset,0),
-	    		  ));
-	    update_gnomekderc("$confdir/kdeglobals", General => (
-	    		      fixed => charset2kde_font($charset, 1),
-	    		      font => charset2kde_font($charset, 0),
-	    		      menuFont => charset2kde_font($charset, 3),
-	    		      taskbarFont => charset2kde_font($charset, 4),
-	    		      toolBarFont => charset2kde_font($charset, 2),
-	    	          ));
-	    update_gnomekderc("$confdir/konquerorrc", FMSettings => (
-	    		      StandardFont => charset2kde_font($charset, 0),
-	    		  ));
-	    update_gnomekderc("$confdir/kdesktoprc", FMSettings => (
-	    		      StandardFont => charset2kde_font($charset, 0),
-	    		  ));
-	}
-
 	if (!$b_user_only && $locale->{lang} !~ /^(zh_TW|th|vi|be|bg)/) { #- skip since we don't have the right font (it badly fails at least for zh_TW)
+	    my $kde_charset = charset2kde_charset(l2charset($locale->{lang}));
 	    my $welcome = c::to_utf8(N("Welcome to %s", '%n'));
 	    substInFile { 
 		s/^(GreetString)=.*/$1=$welcome/;
@@ -1001,6 +976,42 @@ sub write {
 	}
 
     } if !$b_dont_touch_kde_files;
+}
+
+sub configure_kdeglobals {
+    my ($locale, $confdir) = @_;
+    my $kdeglobals = "$confdir/kdeglobals";
+
+    my $charset = l2charset($locale->{lang});
+    my $kde_charset = charset2kde_charset($charset);
+    my ($prev_kde_charset) = cat_($kdeglobals) =~ /^Charset=(.*)/mi;
+
+    mkdir_p($confdir);
+
+    update_gnomekderc($kdeglobals, Locale => (
+    	      Charset => $kde_charset,
+    	      Country => lc($locale->{country}),
+    	      Language => get_kde_lang($locale),
+    	  ));
+
+    if ($prev_kde_charset ne $kde_charset) {
+        update_gnomekderc($kdeglobals, WM => (
+       		      activeFont => charset2kde_font($charset,0),
+       		  ));
+        update_gnomekderc($kdeglobals, General => (
+       		      fixed => charset2kde_font($charset, 1),
+       		      font => charset2kde_font($charset, 0),
+       		      menuFont => charset2kde_font($charset, 3),
+       		      taskbarFont => charset2kde_font($charset, 4),
+       		      toolBarFont => charset2kde_font($charset, 2),
+       	          ));
+        update_gnomekderc("$confdir/konquerorrc", FMSettings => (
+       		      StandardFont => charset2kde_font($charset, 0),
+       		  ));
+        update_gnomekderc("$confdir/kdesktoprc", FMSettings => (
+       		      StandardFont => charset2kde_font($charset, 0),
+       		  ));
+    }
 }
 
 sub bindtextdomain() {
