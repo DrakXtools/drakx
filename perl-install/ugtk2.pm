@@ -831,10 +831,9 @@ sub new {
     my $o = bless { %opts }, $type;
     while (my $e = shift @tempory::objects) { $e->destroy }
 
-    $o->{isWizard} ||= $::isWizard;
     $o->{isEmbedded} ||= $::isEmbedded;
 
-    $o->{pop_it} ||= $pop_it || !$o->{isWizard} && !$o->{isEmbedded} || $::WizardTable && do {
+    $o->{pop_it} ||= $pop_it || !$::isWizard && !$o->{isEmbedded} || $::WizardTable && do {
 	#- do not take into account the DrawingArea
 	any { !$_->isa('Gtk2::DrawingArea') && $_->visible } $::WizardTable->get_children;
     };
@@ -895,7 +894,7 @@ sub new {
 }
 sub set_main_window_size {
     my ($o) = @_;
-    my ($width, $height) = $::isInstall ? ($::real_windowwidth, $::real_windowheight) : $o->{isWizard} ? (540, 360) : (600, 400);
+    my ($width, $height) = $::isInstall ? ($::real_windowwidth, $::real_windowheight) : $::isWizard ? (540, 360) : (600, 400);
     $o->{window}->set_size_request($width, $height);
 }
 
