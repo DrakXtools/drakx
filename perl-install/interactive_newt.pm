@@ -20,7 +20,7 @@ sub new() {
     Newt::changeColors;
     Newt::Cls;
     Newt::SetSuspendCallback;
-    open STDERR,">/dev/null";
+    open STDERR,">/dev/null" if $::isStandalone;
     bless {}, $_[0];
 }
 
@@ -50,13 +50,16 @@ sub ask_from_listW {
     my ($title, @okcancel) = ref $title_ ? @$title_ : ($title_, _("Ok"), _("Cancel"));
 
     my $mesg = join("\n", @$messages);
+    my $len = 0; $len += length($_) foreach @$l;
 
     if (@$l == 1) {
 	Newt::WinMessage($title, @$l, $mesg);
 	$l->[0];
-    } elsif (@$l == 2) {
+#- because newt will not try to remove window if bigger than screen !
+    } elsif (@$l == 2 && $len < 64) {
 	$l->[Newt::WinChoice($title, @$l, $mesg) - 1];
-    } elsif (@$l == 3) {
+#- because newt will not try to remove window if bigger than screen !
+    } elsif (@$l == 3 && $len < 64) {
 	$l->[Newt::WinTernary($title, @$l, $mesg) - 1];
     } else {
 	my $special = !@okcancel;
@@ -177,7 +180,7 @@ sub ask_from_entries_refW {
     map { &{$updates[$_]} } 0..$#widgets;
     $form->FormDestroy;
     Newt::PopWindow;
-    $$r != $$cancel;    
+    $$r != $$cancel;
 }
 
 

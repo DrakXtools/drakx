@@ -320,7 +320,7 @@ sub installPackages {
     local *pkgs::installCallback = sub {
 	my $m = shift;
 	if ($m =~ /^Starting installation/) {
-	    $total = $_[2];
+	    $total = $_[1];
 	} elsif ($m =~ /^Starting installing package/) {
 	    my $name = $_[0];
 	    $w->set(_("Installing package %s\n%d%%", $name, $total && 100 * $current / $total));
@@ -854,7 +854,7 @@ sub miscellaneous {
 	4 => _("High"),
 	5 => _("Paranoid"),
     );
-    delete @l{1,5} unless $::expert;
+    delete @l{0,1,5} unless $::expert;
 
     install_steps::miscellaneous($o);
     my $u = $o->{miscellaneous} ||= {};

@@ -299,7 +299,12 @@ sub testFinalConfig($;$$) {
 
     #- create a link from the non-prefixed /tmp/.X11-unix/X9 to the prefixed one
     #- that way, you can talk to :9 without doing a chroot
-    symlinkf "$prefix/tmp/.X11-unix/X9", "/tmp/.X11-unix/X9" if $prefix;
+    #- but take care of non X11 install :-)
+    if (-d "/tmp/.X11-unix") {
+	symlinkf "$prefix/tmp/.X11-unix/X9", "/tmp/.X11-unix/X9" if $prefix;
+    } else {
+	symlinkf "$prefix/tmp/.X11-unix", "/tmp/.X11-unix" if $prefix;
+    }
     #- restart_xfs;
 
     my $f_err = "$prefix/tmp/Xoutput";
