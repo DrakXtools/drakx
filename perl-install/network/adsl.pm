@@ -220,8 +220,7 @@ user "$adsl->{login}"
                     },
 
            pppoa => {
-                     disconnect => qq(/usr/sbin/adsl-stop
-/usr/bin/killall pppoe pppd\n),
+                     disconnect => qq(/usr/bin/killall pppoa pppd\n),
                     },
           );
         set_cnx_script($netc, "adsl", join("\n",
