@@ -22,7 +22,7 @@ $::expert = /-expert/;
 
 my $in = interactive->vnew('su');
 
-require bootlook if ref($in) =~ /gtk/;
+require 'bootlook.pm' if ref($in) =~ /gtk/;
 
 if (!$::isEmbedded) {
     my %l = (
