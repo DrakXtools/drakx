@@ -143,7 +143,7 @@ sub ask_from_listf_no_check {
             ) ? $l->[0] : $l->[1];
 	};
 	$@ && $@ =~ /^wizcancel/ or die;
-	$@ ? undef : $ref;
+	$@ ? undef : $ret;
     } else {
 	ask_from_entries_refH($o, $title, $message, [ { val => \$def, type => 'list', list => $l, help => $help, format => $f } ]) && $def;
     }
