@@ -133,7 +133,6 @@ sub isdn_detect_backend() {
         $isdn->{intf_id} = $::i;
 	$isdn->{$_} = sprintf("%0x", $isdn->{$_}) foreach 'vendor', 'id';
 	$isdn->{card_type} = $c->{bus} eq 'USB' ? 'usb' : 'pci';
-	($isdn->{type}) = $isdn->{options} =~ /type=(\d+)/;
         $isdn->{description} =~ s/.*\|//;
 #	$c->{options} !~ /id=HiSax/ && $isdn->{driver} eq "hisax" and $c->{options} .= " id=HiSax";
 	if ($c->{options} !~ /protocol=/ && $isdn->{protocol} =~ /\d/) {
