@@ -249,8 +249,10 @@ sub ask_from_entries_refH_powered_normalize {
     @$l = grep { 
 	if ($_->{list} && $_->{not_edit}) {
 	    if (@{$_->{list}} == ()) {
-		require log;
-		log::l("ask_from_entries_refH_powered_normalize: empty list\n" . common::backtrace());
+		eval {
+		    require log;
+		    log::l("ask_from_entries_refH_powered_normalize: empty list for $_->{label}\n" . common::backtrace());
+		};
 	    }
 	    @{$_->{list}} > 1;
 	} else {
