@@ -309,7 +309,7 @@ static int init_pnp_com_seq1( int fd ) {
     /* Wait for response, 1st phase */
     modem_lines |= TIOCM_RTS;
     set_serial_lines(fd, modem_lines);
-    usleep(200000);
+    /* usleep(200000); => AQ: not valid as we should look to receive data during this time!! */
 
     return rc;
 }
@@ -336,7 +336,7 @@ static int init_pnp_com_seq2( int fd ) {
     /* turn on DTR and RTS */
     modem_lines |= (TIOCM_DTR | TIOCM_RTS);
     set_serial_lines(fd, modem_lines);
-    usleep(200000);
+    /* usleep(200000); => AQ: not valid as we should look to receive data during this time!! */
     
     return rc;
 }
@@ -646,8 +646,11 @@ static int read_pnp_string( int fd, unsigned char *pnp_string, int *pnp_len, int
 	    done = 1;
     }
     pnp_string[pnp_index] = 0;
-   *pnp_len=pnp_index;
-    return PNP_COM_OK;
+    *pnp_len=pnp_index;
+    if(*pnp_len > 0)
+        return PNP_COM_OK;
+    else /* allows to call seq2 to be conformant */
+	return PNP_COM_FAIL;
 }
 
 /* parse the PnP ID string into components */
