@@ -3,7 +3,6 @@
 use MDK::Common;
 use lib "../perl-install";
 use keyboard;
-use commands;
 
 use Config;
 Config->import;
@@ -47,7 +46,7 @@ sub install_l {
 sub installown($$) {
     my ($own, $dir) = @_;
     return if -e "$tmp$dir$own";
-    commands::mkdir_("-p", "$tmp$dir") unless -d "$tmp$dir";
+    mkdir_p("$tmp$dir");
     _ "cp -a $own $tmp$dir";
 }
 
@@ -56,7 +55,7 @@ _ "mkdir $tmp";
 _ 'find . -name "*~" | xargs rm -f';
 foreach (cat_("dirs")) {
     chomp;
-    commands::mkdir_("-p", "$tmp$_");
+    mkdir_p("$tmp$_");
 }
 _ "cp -a tree/* $tmp";
 _ "find $tmp -name 'CVS*' | xargs rm -rf";
@@ -94,7 +93,7 @@ exit 0 if $ARGV[0];
 
 $size = `du -s $tmp | cut -f1` + 2048; #- add 2MB of free space
 
-commands::mkdir_("-p", $mnt) if !-e $mnt;
+mkdir_p($mnt);
 __ "$sudo umount $rescue 2>/dev/null";
 
 _ "dd if=/dev/zero of=$rescue bs=1k count=$size";
