@@ -24,7 +24,7 @@ $::o = { locale => lang::read() } if !$::isInstall;
 
     create => [ qw(create_adjustment create_box_with_title create_dialog create_factory_menu create_factory_popup_menu
                    create_hbox create_hpaned create_menu create_notebook create_okcancel create_packtable
-                   create_scrolled_window create_vbox create_vpaned _create_dialog ) ],
+                   create_scrolled_window create_vbox create_vpaned _create_dialog gtkcreate_frame) ],
 
     ask => [ qw(ask_browse_tree_info ask_browse_tree_info_given_widgets ask_dir ask_from_entry ask_okcancel ask_warn
                 ask_yesorno ) ],
@@ -569,6 +569,11 @@ sub create_vpaned {
 
 sub create_hpaned {
     _setup_paned(Gtk2::HPaned->new, @_);
+}
+
+sub gtkcreate_frame {
+    my ($label) = @_;
+    gtkset_border_width(Gtk2::Frame->new($label), 5);
 }
 
 
