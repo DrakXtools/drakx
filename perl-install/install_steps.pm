@@ -699,7 +699,7 @@ sub summaryAfter {
 
     require bootloader;
     bootloader::get_append($o->{bootloader}, 'acpi') ne 'off' && (-x "$::prefix/usr/bin/acpi" && -x "$::prefix/usr/sbin/acpid") and
-	$in->do_pkgs->install(qw(acpi acpid));
+	$o->pkg_install(qw(acpi acpid));
 }
 
 #------------------------------------------------------------------------------
