@@ -35,7 +35,8 @@
 #ifdef MANDRAKE_MOVE
 #define MEM_LIMIT_MOVE 120
 #define DISTRIB_NAME "Mandrakemove"
-#define IMAGE_LOCATION SLASH_LOCATION "/cdrom"
+#define IMAGE_LOCATION_DIR SLASH_LOCATION
+#define IMAGE_LOCATION IMAGE_LOCATION_DIR "cdrom"
 #define IMAGE_LOCATION_REAL SLASH_LOCATION "/image"
 #define RAW_LOCATION_REL "/cdrom"
 #define STAGE2_LOCATION_REL "/image"
@@ -46,7 +47,8 @@
 #else
 
 #define DISTRIB_NAME "Mandrakelinux"
-#define IMAGE_LOCATION SLASH_LOCATION "/tmp/image"
+#define IMAGE_LOCATION_DIR SLASH_LOCATION "/tmp/"
+#define IMAGE_LOCATION IMAGE_LOCATION_DIR "image"
 #define IMAGE_LOCATION_REAL "/tmp/image"
 #define STAGE2_LOCATION_REL "/tmp/stage2"
 #endif
