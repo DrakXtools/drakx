@@ -168,7 +168,7 @@ sub write_interface_conf {
 
     $intf->{BOOTPROTO} =~ s/dhcp.*/dhcp/;
 
-    local $intf->{WIRELESS_ENC_KEY} = network::tools::convert_wep_key_for_iwconfig($intf->{WIRELESS_ENC_KEY});
+    local $intf->{WIRELESS_ENC_KEY} = $intf->{WIRELESS_ENC_KEY} && network::tools::convert_wep_key_for_iwconfig($intf->{WIRELESS_ENC_KEY});
     setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR MII_NOT_SUPPORTED), 
                 qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV),
                 if_($intf->{BOOTPROTO} eq "dhcp", qw(DHCP_HOSTNAME NEEDHOSTNAME))
