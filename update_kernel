@@ -37,11 +37,10 @@ f "pcmcia net cdrom scsi disk keepbig" ; ALL_DRIVERS=$v
 
 NETWORK_MODULES="  $NETWORK_DRIVERS"
 CDROM_MODULES="    $CD_DRIVERS"
-HD_MODULES="       $DOSMODULES $SCSI_DRIVERS $DISK_DRIVERS loop.o isofs.o"
-HDREISER_MODULES=" $DOSMODULES $SCSI_DRIVERS loop.o isofs.o reiserfs.o"
+HD_MODULES="       $DOSMODULES $SCSI_DRIVERS $DISK_DRIVERS loop.o isofs.o reiserfs.o"
 PCMCIA_MODULES="   $DOSMODULES $PCMCIA_DRIVERS"
 BIG_MODULES="      $BIG_DRIVERS"
-ALL_MODULES="      $DOSMODULES $ALL_DRIVERS isa-pnp.o reiserfs.o"
+ALL_MODULES="      $DOSMODULES $ALL_DRIVERS loop.o isofs.o reiserfs.o"
 NOT_USEFULL_IN_STAGE1="nls_*.o parport_probe.o raid*.o serial.o smbfs.o usb-*.o"
 
 GENERIC_MODULES="isa-pnp.o floppy.o"
@@ -69,7 +68,6 @@ rm -rf modules ; install -d modules
     create_marfile network_modules.mar  $NETWORK_MODULES $GENERIC_MODULES
     create_marfile cdrom_modules.mar    $CDROM_MODULES $GENERIC_MODULES
     create_marfile hd_modules.mar       $HD_MODULES $GENERIC_MODULES
-    create_marfile hdreiser_modules.mar $HDREISER_MODULES $GENERIC_MODULES
     create_marfile pcmcia_modules.mar   $PCMCIA_MODULES $PCMCIA_COREMODULES $GENERIC_MODULES
     create_marfile other_modules.mar    $BIG_MODULES $GENERIC_MODULES
     create_marfile all_modules.mar      $ALL_MODULES $GENERIC_MODULES

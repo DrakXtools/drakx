@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-@ARGV >= 2 or die "usage: $0 <image> all|other|cdrom|hd|hdreiser|network|blank|pcmcia|live|tftp|tftprd\n";
+@ARGV >= 2 or die "usage: $0 <image> all|other|cdrom|hd|network|blank|pcmcia|live|tftp|tftprd\n";
 
 use Config;
 Config->import;
@@ -35,7 +35,6 @@ $install = $ {{
     network => "stage1-network",
     cdrom => "stage1-cdrom",
     hd => "stage1-disk",
-    hdreiser => "stage1-disk",
     live64 => "stage1-full",
     tftp64 => "stage1-full",
     tftprd64 => "stage1-full",
@@ -87,7 +86,7 @@ sub boot_img_i386 {
     __ "$sudo umount $mnt 2>/dev/null";
     my $automatic = "";
 
-    if ($type eq "hd" || $type eq "hdreiser") {
+    if ($type eq "hd") {
 	_ "bunzip2 -c $instdir/init-data/msgboot.img.bz2 > $img";
 	$automatic = "automatic=method:disk";
     } elsif ($type eq "all") {
