@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 0.26mdk
+Release: 0.27mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -290,6 +290,23 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Wed Feb 12 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.27mdk
+- fix embedded drakconnect: 
+  o no crash on expert "configure" buttons
+  o better behaviour when buttons are hidden/showx
+- harddrake/draksound: card list update
+- pixel:
+  o diskdrake: 
+    * discrimate hpfs and ntfs
+    * more precise message when formatting / fsck'ing / mounting
+	 partitions
+    * hide passwords for smb mount points
+  o XFdrake: fix #707
+- drakperm: first gtk+2 port fixes, still more to come (pouly & me)
+- fix drakbug help (daouda)
+- drakconnect fixes (frederic lepied)
+- updated translations (pablo)
+
 * Fri Feb  7 2003 Damien Chaumette <dchaumette@mandrakesoft.com> 9.1-0.26mdk
 - drakconnect : dhcp & zeroconf fixes
 - drakfont : full Gtk2
