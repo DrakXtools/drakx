@@ -105,6 +105,7 @@ if_(arch() !~ /alpha/ && arch() !~ /sparc/,
   "de4x5" => "Digital 425,434,435,450,500",
   "rtl8139" => "RealTek RTL8129/8139",
   "sundance" => "sundance",
+  "dl2k" => "dl2k",
 }],
 [ 'net_raw', {
   "8390" => "8390",
