@@ -258,16 +258,16 @@ sub verifyParts_ {
 	    next if !$i || !$_ || $i == $_ || isWholedisk($i) || isExtended($i); #- avoid testing twice for simplicity :-)
 	    if (isWholedisk($_)) {
 		verifyInside($i, $_) or
-		  cdie sprintf("partition sector #$i->{start} (%dMB) is not inside whole disk (%dMB)!",
-			       $i->{size} >> 11, $_->{size} >> 11);
+		  cdie sprintf("partition sector #$i->{start} (%s) is not inside whole disk (%s)!",
+			       formatXiB($i->{size}, 512), formatXiB($_->{size}, 512));
 	    } elsif (isExtended($_)) {
 		verifyNotOverlap($i, $_) or
-		  log::l(sprintf("warning partition sector #$i->{start} (%dMB) is overlapping with extended partition!",
-				 $i->{size} >> 11)); #- only warning for this one is acceptable
+		  log::l(sprintf("warning partition sector #$i->{start} (%s) is overlapping with extended partition!",
+				 formatXiB($i->{size}, 512))); #- only warning for this one is acceptable
 	    } else {
 		verifyNotOverlap($i, $_) or
-		  cdie sprintf("partitions sector #$i->{start} (%dMB) and sector #$_->{start} (%dMB) are overlapping!",
-			       $i->{size} >> 11, $_->{size} >> 11);
+		  cdie sprintf("partitions sector #$i->{start} (%s) and sector #$_->{start} (%s) are overlapping!",
+			       formatXiB($i->{size}, 512), formatXiB($_->{size}, 512));
 	    }
 	}
     }

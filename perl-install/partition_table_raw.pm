@@ -96,10 +96,10 @@ sub description {
     my ($hd) = @_;
     my $win = $hd->{device_windobe};
 
-    sprintf "%s%s (%d%s%s)", 
+    sprintf "%s%s (%s%s)", 
       $hd->{device}, 
       $win && " [$win:]", 
-      ($hd->{totalsectors} || $hd->{size}) >> 11, _("MB"), 
+      formatXiB($hd->{totalsectors} || $hd->{size}, 512),
       $hd->{info} && ", $hd->{info}";
 }
 
