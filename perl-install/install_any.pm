@@ -3,7 +3,7 @@ package install_any; # $Id$
 use diagnostics;
 use strict;
 
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @needToCopy @needToCopyIfRequiresSatisfied $boot_medium @advertising_images);
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $boot_medium @advertising_images);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -27,28 +27,6 @@ use lang;
 use any;
 use log;
 use fs;
-
-#- package that have to be copied for proper installation (just to avoid changing cdrom)
-#- here XFree86 is copied entirey if not already installed, maybe better to copy only server.
-#- considered obsoletes :
-#- XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach8 XFree86-Mono XFree86-P9000 
-#- XFree86-W32 XFree86-I128 XFree86-VGA16 XFree86-3DLabs 
-@needToCopy = qw(
-XFree86-Mach64 XFree86-S3 XFree86-S3V XFree86-SVGA 
-XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-FBDev XFree86-server
-XFree86 XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa
-
-dhcpcd pump dhcpxd dhcp-client isdn-light isdn4net isdn4k-utils dev pptp-adsl rp-pppoe ppp ypbind
-autologin ntp speedtouch speedtouch_mgmt nfs-utils-clients samba-client
-wireless-tools wlan_cs wavelan_cs aironet_cs aironet4500_cs hermes airo orinico_cs orinico
-
-foomatic printer-utils printer-testpages gimpprint rlpr samba-client ncpfs nc
-cups xpp qtcups kups cups-drivers lpr LPRng pdq ImageMagick
-);
-#- package that have to be copied only if all their requires are satisfied.
-@needToCopyIfRequiresSatisfied = qw(
-Mesa-common
-);
 
 #- boot medium (the first medium to take into account).
 $boot_medium = 1;
@@ -179,17 +157,12 @@ sub setup_postinstall_rpms($$) {
     clean_postinstall_rpms(); #- make sure in case of previous upgrade problem.
     mkdir_p($postinstall_rpms);
 
-    #- compute closure of unselected package that may be copied,
-    #- don't complain if package does not exists as it may happen
-    #- for the various architecture taken into account (X servers).
     my %toCopy;
-    foreach (@needToCopy) {
-	my $pkg = pkgs::packageByName($packages, $_);
-	pkgs::selectPackage($packages, $pkg, 0, \%toCopy) if $pkg;
-    }
-    @toCopy{@needToCopyIfRequiresSatisfied} = ();
+    #- compute closure of package that may be copied, use INSTALL category
+    #- in rpmsrate.
+    pkgs::setSelectedFromCompssList($packages, { INSTALL => 1 }, 0, 0, %toCopy);
 
-    my @toCopy = grep { $_ } map { pkgs::packageByName($packages, $_) } keys %toCopy;
+    my @toCopy = grep { $_ && pkgs::packageFlagSelected($_) == 0 } map { pkgs::packageByName($packages, $_) } keys %toCopy;
 
     #- extract headers of package, this is necessary for getting
     #- the complete filename of each package.
