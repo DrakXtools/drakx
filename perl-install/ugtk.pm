@@ -1,5 +1,10 @@
 package ugtk;
 
+# DO NOT USE THIS MODULE ANYMORE; IT'S DEPRECATED
+# BETTER USE ugtk2 (gtk+2, fontconfig, ... and the like support)
+#
+# ONLY standalone/net_monitor STILL USES IT
+
 use diagnostics;
 use strict;
 use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border $use_pixbuf $use_imlib);
@@ -30,7 +35,7 @@ use common;
 
 my @icon_paths;
 sub add_icon_path { push @icon_paths, @_ }
-sub icon_paths {
+sub icon_paths() {
    (@icon_paths, $ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "$ENV{SHARE_PATH}/libDrakX/pixmaps", "/usr/lib/libDrakX/icons", "pixmaps", 'standalone/icons');
 }  
 
@@ -39,7 +44,7 @@ sub icon_paths {
 #-#######################
 
 sub gtkdestroy                { $_[0] and $_[0]->destroy }
-sub gtkflush                  { Gtk->main_iteration while Gtk->events_pending }
+sub gtkflush()                  { Gtk->main_iteration while Gtk->events_pending }
 sub gtkhide                   { $_[0]->hide; $_[0] }
 sub gtkmove                   { $_[0]->window->move($_[1], $_[2]); $_[0] }
 sub gtkpack                   { gtkpowerpack(1, 1, @_) }
@@ -363,7 +368,7 @@ sub createScrolledWindow {
     my ($W, $policy, $viewport_shadow) = @_;
     my $w = new Gtk::ScrolledWindow(undef, undef);
     $policy ||= [ 'automatic', 'automatic' ];
-    $w->set_policy(@{$policy});
+    $w->set_policy(@$policy);
     if (member(ref $W, qw(Gtk::CList Gtk::CTree Gtk::Text))) {
        $w->add($W)
     } else {
@@ -679,11 +684,11 @@ sub create_pix_text {
     my $gc_text = new Gtk::Gdk::GC($w->window);
     $gc_text->set_foreground($color_text);
     my $i = 0;
-    foreach (@{$lines}) {
+    foreach (@$lines) {
 	$j = 0;
 	foreach my $pix (@$pix) { 
-	  $pix->draw_string($style->font, $gc_text, ${$widths}[$i], ${$heights}[$i], $_);
-	  $pix->draw_string($style->font, $gc_text, ${$widths}[$i] + 1, ${$heights}[$i], $_) if $j;
+	  $pix->draw_string($style->font, $gc_text, $widths->[$i], $heights->[$i], $_);
+	  $pix->draw_string($style->font, $gc_text, $widths->[$i] + 1, $heights->[$i], $_) if $j;
 	  $j++;
 	}
 	$i++;
@@ -764,7 +769,7 @@ sub gtkset_default_fontset {
 sub gtkcreate_imlib {
     my ($f) = shift;
     $f =~ m|.png$| or $f = "$f.png";
-    if ($f !~ /\//) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
+    if ($f !~ m!/!) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
     Gtk::Gdk::ImlibImage->load_image($f);
 }
 
@@ -774,7 +779,7 @@ sub gtkcreate_xpm {
     my ($f) = @_;
     my $rw = gtkroot();
     $f =~ m|.xpm$| or $f = "$f.xpm";
-    if ($f !~ /\//) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
+    if ($f !~ m!/!) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
     my @l = Gtk::Gdk::Pixmap->create_from_xpm($rw, new Gtk::Style->bg('normal'), $f) or die "gtkcreate_xpm: missing pixmap file $f";
     @l;
 }
@@ -783,14 +788,14 @@ sub gtkcreate_png_pixbuf {
     my ($f) = shift;
     die 'gdk-pixbuf library is not available' unless $use_pixbuf;
     $f =~ /\.(png|jpg)$/ or $f .= '.png';
-    if ($f !~ /^\//) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
+    if ($f !~ m!^/!) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
     Gtk::Gdk::Pixbuf->new_from_file($f) or die "gtkcreate_png: missing png file $f";
 }
 
 sub gtkcreate_png {
     my ($f) = shift;
     $f =~ /\.png$/ or $f .= '.png';
-    if ($f !~ /^\//) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
+    if ($f !~ m!^/!) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
     if ($use_imlib) {
 	my $im = Gtk::Gdk::ImlibImage->load_image($f) or die "gtkcreate_png: missing png file $f";
 	$im->render($im->rgb_width, $im->rgb_height);
