@@ -47,7 +47,10 @@ sub raw {
     return 1 if $root && $<;
 
     $root ? ($root .= '/') : ($root = '');
-    install_any::check_prog(ref($name) ? $name->[0] : $name) if !$root && !$::isStandalone;
+    if (!$root && !$::isStandalone) {
+	require install_any;
+	install_any::check_prog(ref($name) ? $name->[0] : $name);
+    }
 
 
     my ($stdout_raw, $stdout_mode, $stderr_raw, $stderr_mode);
