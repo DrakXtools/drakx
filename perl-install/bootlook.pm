@@ -112,8 +112,7 @@ my $global_vbox = new Gtk::VBox();
 #$global_vbox->pack_start (new Gtk::Label(_("Boot style configuration")), 0, 0, 0);
 
 # lilo/grub
-my $lilo_dedans = new Gtk::HBox(0, 10);
-$lilo_dedans->border_width (5);
+my $lilo_dedans = new Gtk::HBox(0, 0);
 my $lilo_button = new Gtk::Button _("Lilo/Grub configuration");
 $lilo_dedans->pack_end($lilo_button,0,0,0);
 $lilo_button->signal_connect(clicked => sub { lilo_choice(); });
@@ -125,7 +124,7 @@ $global_vbox->pack_start ($lilo_frame, 0, 0, 0);
 
 ######## aurora part
 my $a_dedans = new Gtk::VBox(0, 5);
-$a_dedans->border_width(5);
+$a_dedans->border_width(0);
 my $a_box = new Gtk::VBox(0, 0);
 
 my $a_c_button = new Gtk::RadioButton _("NewStyle Categorizing Monitor");
@@ -162,7 +161,7 @@ $a_dedans->pack_start ($a_box, 0, 0, 0);
 my $a_main_hbox = new Gtk::HBox;
 $a_main_hbox->pack_start ($a_dedans, 0, 0, 0);
 my $a_pix_hbox = new Gtk::HBox;
-$a_pix_hbox->border_width(10);
+$a_pix_hbox->border_width(0);
 $a_pix_hbox->pack_start ($pixmap, 0, 0, 0);
 $a_main_hbox->pack_end ($a_pix_hbox, 0, 0, 0);
 
@@ -171,10 +170,10 @@ $aurora_frame->add($a_main_hbox);
 $global_vbox->pack_start ($aurora_frame, 0, 0, 0);
 
 ### X mode
-my $x_dedans = new Gtk::VBox(0, 10);
-$x_dedans->border_width (5);
+my $x_dedans = new Gtk::VBox(0, 0);
+$x_dedans->border_width (0);
 my $x_box = new Gtk::VBox(0, 0);
-$x_box->border_width (10);
+$x_box->border_width (0);
 
 my $x_button = new Gtk::CheckButton _("Launch the X-Window system at start");
 $x_button->set_active($x_mode);
