@@ -108,7 +108,7 @@ Gtk->main;
 Gtk->exit(0);
 
 sub doit {
-    system("rm $file2");
+    system("rm -f /tmp/plop");
     foreach (cat_($file)) {
 	my $output;
 	chomp;
@@ -126,8 +126,12 @@ sub doit {
 	/\{/ and $ref++;
 	if (/\}/) { $ref--; $ref == 0 and undef $style }
 	$output ||= $_;
-	system("echo '$output' >> $file2");
+	$output =~ s/ 1 / 1.0 /;
+	$output =~ s/ 1, / 1.0, /;
+	$output =~ s/ 1, / 1.0, /;
+	system("echo '$output' >> /tmp/plop");
     }
+    system("mv -f /tmp/plop $file2");
 }
 
 sub change_color {
