@@ -9,6 +9,12 @@ use Xconfig::resolution_and_depth;
 use common;
 
 
+sub to_string {
+    my ($raw_X) = @_;
+
+    $raw_X->is_fbdev ? 'frame-buffer' : Xconfig::resolution_and_depth::to_string($raw_X->get_resolution);
+}
+
 sub info {
     my ($raw_X, $card) = @_;
     my $info;
@@ -97,6 +103,7 @@ sub configure_FB_TVOUT {
 
     my $raw_X = Xconfig::default::configure();
     my $xfree4 = $raw_X->{xfree4};
+    return if is_empty_array_ref($xfree4);
 
     $xfree4->set_monitors({ HorizSync => '30-50', VertRefresh => ($use_FB_TVOUT->{norm} eq 'NTSC' ? 60 : 50) });
     first($xfree4->get_monitor_sections)->{ModeLine} = [ 
