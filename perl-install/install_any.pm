@@ -298,8 +298,8 @@ sub setPackages {
 
 	push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
 	push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
-	push @{$o->{default_packages}}, "kernel-secure" if $o->{security} > 3;
-	push @{$o->{default_packages}}, "kernel-smp" if $o->{security} <= 3 && detect_devices::hasSMP(); #- no need for kernel-smp if we have kernel-secure which is smp
+	push @{$o->{default_packages}}, "kernel22-secure" if $o->{security} > 3;
+	push @{$o->{default_packages}}, "kernel-smp" if detect_devices::hasSMP();
 	push @{$o->{default_packages}}, "kernel-pcmcia-cs" if $o->{pcmcia};
 	push @{$o->{default_packages}}, "raidtools" if $o->{raid} && !is_empty_array_ref($o->{raid}{raid});
 	push @{$o->{default_packages}}, "lvm" if -e '/etc/lvmtab';
