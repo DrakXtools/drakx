@@ -7666,17 +7666,17 @@ msgstr ""
 
 #: network/adsl.pm:19
 #, c-format
-msgid "use pppoe"
+msgid "use PPPoE"
 msgstr ""
 
 #: network/adsl.pm:20
 #, c-format
-msgid "use pptp"
+msgid "use PPTP"
 msgstr ""
 
 #: network/adsl.pm:21
 #, c-format
-msgid "use dhcp"
+msgid "use DHCP"
 msgstr ""
 
 #: network/adsl.pm:22
@@ -7708,8 +7708,8 @@ msgstr ""
 #, c-format
 msgid ""
 "The most common way to connect with adsl is pppoe.\n"
-"Some connections use pptp, a few use dhcp.\n"
-"If you don't know, choose 'use pppoe'"
+"Some connections use PPTP, a few use DHCP.\n"
+"If you don't know, choose 'use PPPoE'"
 msgstr ""
 
 #: network/adsl.pm:41 network/netconnect.pm:761
@@ -13221,7 +13221,7 @@ msgid ""
 "\n"
 " This wizard routine will:\n"
 " \t1) Ask you to select either 'thin' or 'fat' clients.\n"
-"\t2) Setup dhcp.\n"
+"\t2) Setup DHCP.\n"
 "\t\n"
 "After doing these steps, the wizard will:\n"
 "\t\n"
@@ -13327,11 +13327,11 @@ msgid ""
 "        of client-specific configuration files that ClusterNFS provides.\n"
 "\t\t\t\n"
 "        Note: The '#type' entry is only used by drakTermServ.  Clients can either be 'thin'\n"
-"        or 'fat'.  Thin clients run most software on the server via xdmcp, while fat clients run \n"
+"        or 'fat'.  Thin clients run most software on the server via XDMCP, while fat clients run \n"
 "        most software on the client machine. A special inittab, %s is\n"
 "        written for thin clients. System config files xdm-config, kdmrc, and gdm.conf are \n"
-"        modified if thin clients are used, to enable xdmcp. Since there are security issues in \n"
-"        using xdmcp, hosts.deny and hosts.allow are modified to limit access to the local\n"
+"        modified if thin clients are used, to enable XDMCP. Since there are security issues in \n"
+"        using XDMCP, hosts.deny and hosts.allow are modified to limit access to the local\n"
 "        subnet.\n"
 "\t\t\t\n"
 "        Note: The '#hdw_config' entry is also only used by drakTermServ.  Clients can either \n"
@@ -13400,7 +13400,7 @@ msgid ""
 "        \tby mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up the boot image to \n"
 "        \teach diskless client.\n"
 "\n"
-"        \tA typical tftp configuration file looks like:\n"
+"        \tA typical TFTP configuration file looks like:\n"
 "        \t\t\n"
 "        \tservice tftp\n"
 "\t\t\t{\n"
@@ -13899,7 +13899,7 @@ msgstr ""
 
 #: standalone/drakbackup:153
 #, c-format
-msgid "Expect is an extension to the Tcl scripting language that allows interactive sessions without user intervention."
+msgid "Expect is an extension to the TCL scripting language that allows interactive sessions without user intervention."
 msgstr ""
 
 #: standalone/drakbackup:154
@@ -15971,7 +15971,7 @@ msgstr ""
 
 #: standalone/drakconnect:695
 #, c-format
-msgid "No Ip"
+msgid "No IP"
 msgstr ""
 
 #: standalone/drakconnect:696
@@ -18666,7 +18666,7 @@ msgstr ""
 #, c-format
 msgid ""
 "specifies the identifier sent to the remote host and the\n"
-"type to use in the phase 1 negotiation.  address, fqdn,\n"
+"type to use in the phase 1 negotiation.  address, FQDN,\n"
 "user_fqdn, keyid and asn1dn can be used as an idtype.\n"
 "they are used like:\n"
 "\tmy_identifier address [address];\n"
@@ -18675,7 +18675,7 @@ msgid ""
 "\tmy_identifier user_fqdn string;\n"
 "\t\tthe type is a USER_FQDN (user fully-qualified\n"
 "\t\tdomain name).\n"
-"\tmy_identifier fqdn string;\n"
+"\tmy_identifier FQDN string;\n"
 "\t\tthe type is a FQDN (fully-qualified domain name).\n"
 "\tmy_identifier keyid file;\n"
 "\t\tthe type is a KEY_ID.\n"
@@ -18706,7 +18706,7 @@ msgid ""
 "phase 1 negotiation. This directive must be defined. \n"
 "algorithm is one of following: \n"
 "\n"
-"des, 3des, blowfish, cast128 for oakley.\n"
+"DES, 3DES, blowfish, cast128 for oakley.\n"
 "\n"
 "For other transforms, this statement should not be used."
 msgstr ""

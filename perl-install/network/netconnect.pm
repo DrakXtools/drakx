@@ -754,8 +754,8 @@ and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.n
                     },
                     name => N("Connect to the Internet") . "\n\n" .
                     N("The most common way to connect with adsl is pppoe.
-Some connections use pptp, a few use dhcp.
-If you don't know, choose 'use pppoe'"),
+Some connections use PPTP, a few use DHCP.
+If you don't know, choose 'use PPPoE'"),
                     data =>  [
                               { text => N("ADSL connection type:"), val => \$adsl_type, type => "list",
                                 list => [ sort { $adsl_types{$a} cmp $adsl_types{$b} } keys %adsl_types ],

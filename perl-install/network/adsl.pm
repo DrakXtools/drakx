@@ -16,9 +16,9 @@ sub get_wizard {
     my $netc = $wiz->{var}{netc};
 
     my %l = (
-	     'pppoe' =>  N("use pppoe"),
-	     'pptp'  =>  N("use pptp"),
-	     'dhcp'  =>  N("use dhcp"),
+	     'pppoe' =>  N("use PPPoE"),
+	     'pptp'  =>  N("use PPTP"),
+	     'dhcp'  =>  N("use DHCP"),
 	     'speedtouch' => N("Alcatel Speedtouch USB") . if_($netc->{autodetect}{adsl}{speedtouch}, N(" - detected")),
 	     'sagem' =>  N("Sagem (using PPPOA) USB") . if_($netc->{autodetect}{adsl}{sagem}, N(" - detected")),
 	     'sagem_dhcp' =>  N("Sagem (using DHCP) USB") . if_($netc->{autodetect}{adsl}{sagem}, N(" - detected")),
@@ -34,8 +34,8 @@ sub get_wizard {
               adsl_old => {
                        name => N("Connect to the Internet") . "\n\n" .
                        N("The most common way to connect with adsl is pppoe.
-Some connections use pptp, a few use dhcp.
-If you don't know, choose 'use pppoe'"),
+Some connections use PPTP, a few use DHCP.
+If you don't know, choose 'use PPPoE'"),
                        data =>  [
                                  {
                                   label => N("ADSL connection type:"), val => \$wiz->{var}{adsl}{type}, list => [ sort values %l ] },

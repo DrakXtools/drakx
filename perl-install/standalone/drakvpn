@@ -1092,7 +1092,7 @@ server.") },
 some reason, set this to off.  The default is on.") },
                      { label => N("My identifier"), val => \$main_remote_section->{8}[1], type => 'entry',
 	help => N("specifies the identifier sent to the remote host and the
-type to use in the phase 1 negotiation.  address, fqdn,
+type to use in the phase 1 negotiation.  address, FQDN,
 user_fqdn, keyid and asn1dn can be used as an idtype.
 they are used like:
 	my_identifier address [address];
@@ -1101,7 +1101,7 @@ they are used like:
 	my_identifier user_fqdn string;
 		the type is a USER_FQDN (user fully-qualified
 		domain name).
-	my_identifier fqdn string;
+	my_identifier FQDN string;
 		the type is a FQDN (fully-qualified domain name).
 	my_identifier keyid file;
 		the type is a KEY_ID.
@@ -1118,7 +1118,7 @@ my_identifier user_fqdn \"myemail\@mydomain.com\"") },
 phase 1 negotiation. This directive must be defined. 
 algorithm is one of following: 
 
-des, 3des, blowfish, cast128 for oakley.
+DES, 3DES, blowfish, cast128 for oakley.
 
 For other transforms, this statement should not be used.") },
                      { label => N("Hash algorithm"), val => \$proposal_remote_section->{3}[1], type => 'entry' },

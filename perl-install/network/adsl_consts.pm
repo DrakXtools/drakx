@@ -22,7 +22,7 @@ our %adsl_data = (
                   #     5 RFC2364 PPPoA LLC,
                   #     6 RFC2364 PPPoA VCmux
                   # dns are provided for when !usepeerdns in peers config file
-                  # method : pppoa, pppoe or static
+                  # method : PPPoA, pppoe or static
                   # please forward updates to http://forum.eagle-usb.org
                   # order alphabetically by country (in English) / ISP (local language)
                   N("Austria") . "|Any" =>

@@ -322,7 +322,7 @@ sub start_wizard() {
     text_view(N("
  This wizard routine will:
  	1) Ask you to select either 'thin' or 'fat' clients.
-	2) Setup dhcp.
+	2) Setup DHCP.
 	
 After doing these steps, the wizard will:
 	
@@ -520,11 +520,11 @@ N("        While you can use a pool of IP addresses, rather than setup a specifi
         of client-specific configuration files that ClusterNFS provides.
 			
         Note: The '#type' entry is only used by drakTermServ.  Clients can either be 'thin'
-        or 'fat'.  Thin clients run most software on the server via xdmcp, while fat clients run 
+        or 'fat'.  Thin clients run most software on the server via XDMCP, while fat clients run 
         most software on the client machine. A special inittab, %s is
         written for thin clients. System config files xdm-config, kdmrc, and gdm.conf are 
-        modified if thin clients are used, to enable xdmcp. Since there are security issues in 
-        using xdmcp, hosts.deny and hosts.allow are modified to limit access to the local
+        modified if thin clients are used, to enable XDMCP. Since there are security issues in 
+        using XDMCP, hosts.deny and hosts.allow are modified to limit access to the local
         subnet.
 			
         Note: The '#hdw_config' entry is also only used by drakTermServ.  Clients can either 
@@ -570,7 +570,7 @@ N("        - /etc/xinetd.d/tftp:
         	by mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up the boot image to 
         	each diskless client.
 
-        	A typical tftp configuration file looks like:
+        	A typical TFTP configuration file looks like:
         		
         	service tftp
 			{
@@ -1078,7 +1078,7 @@ sub client_X_keyboard() {
 sub client_set {
 	my ($default) = @_;
 	# we need to change some system files to allow the thin clients
-	# to access the server - enabling xdmcp and modify hosts.deny/hosts.allow for some security
+	# to access the server - enabling XDMCP and modify hosts.deny/hosts.allow for some security
 	# we also need to set runlevel to 5 and restart the display manager
 	if ($conf{ALLOW_THIN} == 1) {
 		if (-f "/etc/sysconfig/autologin") {
@@ -1091,10 +1091,10 @@ sub client_set {
 		substInFile { s/id:3:initdefault:/id:5:initdefault:/ } "/etc/inittab";
 		substInFile { s/! DisplayManager.requestPort:/DisplayManager.requestPort:/ } "/etc/X11/xdm/xdm-config";
 		substInFile { s/Enable=false/Enable=true/ } "/usr/share/config/kdm/kdmrc";
-		# This file had 2 "Enable=" entries, one for xdmcp and one for debug
+		# This file had 2 "Enable=" entries, one for XDMCP and one for debug
 		change_gdm_xdmcp("true");
 		log::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
-		# just xdmcp in hosts.allow is enough for xdm & kdm, but gdm doesn't work - x11 doesn't help either
+		# just XDMCP in hosts.allow is enough for xdm & kdm, but gdm doesn't work - x11 doesn't help either
 		update_hosts_allow("enable");
 		if ($default eq "all") {
 			my $inittab = '/etc/initab$$CLIENT$$';

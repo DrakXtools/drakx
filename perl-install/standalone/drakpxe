@@ -364,7 +364,7 @@ class "Etherboot" {
 match if substring (option vendor-class-identifier, 0, 9) = "Etherboot";
 
 # filename define the file retrieve by the client, there nbgrub
-# our tftp is chrooted so is just the path to the file
+# our TFTP is chrooted so is just the path to the file
 filename "/etherboot/nbgrub";
 
 #Used by etherboot to detect a valid pxe dhcp server
@@ -388,7 +388,7 @@ class "PXE" {
 match if substring(option vendor-class-identifier, 0, 9) = "PXEClient";
   
 # filename define the file retrieve by the client, there pxelinux.0
-# our tftp is chrooted so is just the path to the file
+# our TFTP is chrooted so is just the path to the file
 # If you prefer use grub, use pxegrub compiled for your ethernet card.
 #filename "/PXEClient/pxegrub";
 filename "/PXEClient/pxelinux.0";
