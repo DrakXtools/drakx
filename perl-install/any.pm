@@ -119,12 +119,12 @@ sub installBootloader {
 	$err =~ s/^\w+ failed// or die;
 	$err = formatError($err);
 	while ($err =~ s/^Warning:.*//m) {}
-	$o->ask_warn('', [ N("Installation of bootloader failed. The following error occured:"), $err ]);
+	$in->ask_warn('', [ N("Installation of bootloader failed. The following error occured:"), $err ]);
 	return;
     } elsif (arch() =~ /ppc/) {
-	my $of_boot = cat_("$o->{prefix}/tmp/of_boot_dev") || die "Can't open $o->{prefix}/tmp/of_boot_dev";
+	my $of_boot = cat_("$::prefix/tmp/of_boot_dev") || die "Can't open $::prefix/tmp/of_boot_dev";
 	chop($of_boot);
-	$o->ask_warn('', N("You may need to change your Open Firmware boot-device to\n enable the bootloader.  If you don't see the bootloader prompt at\n reboot, hold down Command-Option-O-F at reboot and enter:\n setenv boot-device %s,\\\\:tbxi\n Then type: shut-down\nAt your next boot you should see the bootloader prompt.", $of_boot));
+	$in->ask_warn('', N("You may need to change your Open Firmware boot-device to\n enable the bootloader.  If you don't see the bootloader prompt at\n reboot, hold down Command-Option-O-F at reboot and enter:\n setenv boot-device %s,\\\\:tbxi\n Then type: shut-down\nAt your next boot you should see the bootloader prompt.", $of_boot));
     }
     1;
 }
