@@ -298,7 +298,6 @@ $combo1->entry->signal_connect('changed', sub {
 $window1->{rwindow}->show_all();
 $_->hide foreach $button_internet, $button_lan;
 gtkflush();
-$::isEmbedded and kill 'USR2', $::CCPID;
 my $tag = Gtk2->timeout_add(4000, \&update2);
 $window1->main;
 ugtk2->exit(0);

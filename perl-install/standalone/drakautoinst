@@ -33,9 +33,6 @@ $::direct = /-direct/;
 
 my $in = 'interactive'->vnew('su', 'default');
 
-begin:
-$::isEmbedded and kill 'USR2', $::CCPID;
-
 my $imagefile = "/root/drakx/replay_install.img";
 -f $imagefile or $in->ask_warn(N("Error!"), 
 			       N("I can't find needed image file `%s'.", $imagefile), 1), quit_global($in, 0);
@@ -210,7 +207,6 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 #  	  );
 #    $notebook->set_tab_pos('left');
 #    $::isEmbedded and gtkflush();
-    $::isEmbedded and kill('USR2', $::CCPID);
     $W->main;
 #    $W->destroy();
 }

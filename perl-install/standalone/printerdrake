@@ -38,7 +38,6 @@ my $in = 'interactive'->vnew('su', if_(!$::isEmbedded, 'printer-mdk'));
 
 my $commandline = $_;
 
-$::CCPID and kill 'USR2', $::CCPID;
 exit 0 unless printer::printerdrake::first_time_dialog($printer, $in, 1);
 
 {

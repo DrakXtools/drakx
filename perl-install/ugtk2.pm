@@ -841,7 +841,6 @@ sub new {
 sub main {
     my ($o, $completed, $canceled) = @_;
     gtkset_mousecursor_normal();
-    $::CCPID and $0 !~ /logdrake/ and kill 'USR2', $::CCPID;
     my $timeout = Gtk2->timeout_add(1000, sub { gtkset_mousecursor_normal(); 1 });
     my $_b = MDK::Common::Func::before_leaving { Gtk2->timeout_remove($timeout) };
     $o->show;
