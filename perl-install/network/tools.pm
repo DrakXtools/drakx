@@ -134,7 +134,7 @@ sub write_initscript {
 		touch /var/lock/subsys/internet
 		;;
 	stop)
-		action "Stopping internet connection if needed: " "} . "$disconnect_file" . q{"
+		action "Stopping internet connection if needed: " "} . "$disconnect_file --boot_time" . q{"
 		rm -f /var/lock/subsys/internet
 		;;
 	restart)
