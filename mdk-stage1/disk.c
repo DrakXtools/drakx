@@ -59,7 +59,7 @@ static char * list_directory(char * direct)
 
 static enum return_type try_with_device(char *dev_name)
 {
-	char * questions_location[] = { "Directory", NULL };
+	char * questions_location[] = { "Directory or ISO image", NULL };
 	char ** answers_location;
 	char device_fullname[50];
 	char location_full[500];
@@ -139,7 +139,7 @@ static enum return_type try_with_device(char *dev_name)
 	if (!stat(location_full, &statbuf) && !S_ISDIR(statbuf.st_mode)) {
 		log_message("%s exists and is not a directory, assuming this is an ISO image", location_full);
 		if (lomount(location_full, IMAGE_LOCATION)) {
-			error_message("Could not mount ISO image.");
+			error_message("Could not mount file %s as an ISO image of the " DISTRIB_NAME " Distribution.", answers_location[0]);
 			umount(disk_own_mount);
 			return try_with_device(dev_name);
 		}
@@ -150,7 +150,7 @@ static enum return_type try_with_device(char *dev_name)
 		/* RAMDISK install */
 		if (access(IMAGE_LOCATION RAMDISK_LOCATION, R_OK)) {
 			error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
-				      "(I need the directory " RAMDISK_LOCATION ")\n"
+				      "(I need the subdirectory " RAMDISK_LOCATION ")\n"
 				      "Here's a short extract of the files in the directory:\n"
 				      "%s", list_directory(IMAGE_LOCATION));
 			umount(disk_own_mount);
@@ -166,7 +166,7 @@ static enum return_type try_with_device(char *dev_name)
 		char p;
 		if (access(IMAGE_LOCATION LIVE_LOCATION, R_OK)) {
 			error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
-				      "(I need the directory " LIVE_LOCATION ")\n"
+				      "(I need the subdirectory " LIVE_LOCATION ")\n"
 				      "Here's a short extract of the files in the directory:\n"
 				      "%s", list_directory(IMAGE_LOCATION));
 			umount(disk_own_mount);

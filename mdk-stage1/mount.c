@@ -172,8 +172,10 @@ int my_mount(char *dev, char *location, char *fs)
 
 	rc = mount(dev, location, fs, flags, opts);
 
-	if (rc != 0)
-		log_perror(dev);
+	if (rc != 0) {
+		log_perror("mount failed");
+		rmdir(location);
+	}
 
 	return rc;
 }

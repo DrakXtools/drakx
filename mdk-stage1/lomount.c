@@ -145,7 +145,6 @@ lomount(char *loopfile, char *where)
 	}
   
 	if (my_mount(loopdev, where, "iso9660")) {
-		log_message("mount failed: %s", strerror(errno));
 		del_loop(loopdev);
 		return 1;
 	}
