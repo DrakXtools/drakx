@@ -142,7 +142,7 @@ $o = $::o = {
     authentification => { md5 => 1, shadow => 1 },
     lang         => 'en',
     isUpgrade    => 0,
-#-    installClass => "beginner",
+#-    installClass => "normal",
 
     timezone => {
 #-                   timezone => "Europe/Paris",
@@ -458,7 +458,7 @@ sub main {
 	    pcmcia    => sub { $o->{pcmcia} = $v },
 	    step      => sub { $o->{steps}{first} = $v },
 	    expert    => sub { $o->{installClass} = 'expert'; $::expert = 1 },
-	    beginner  => sub { $o->{installClass} = 'beginner'; $::beginner = 1 },
+	    beginner  => sub { $o->{installClass} = 'normal'; $::beginner = 1 },
 	    lnx4win   => sub { $o->{lnx4win} = 1 },
 	    readonly  => sub { $o->{partitioning}{readonly} = 1 },
 	    display   => sub { $o->{display} = $v },

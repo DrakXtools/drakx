@@ -100,6 +100,7 @@ sub make($) {
 		   "optcd"   => [ c::S_IFBLK(), 17, 0 ],
 		   "sbpcd"   => [ c::S_IFBLK(), 25, 0 ],
 		   "sjcd"    => [ c::S_IFBLK(), 18, 0 ],
+		   "psaux"   => [ c::S_IFCHR(), 10, 1 ],
 		   "usbmouse"=> [ c::S_IFCHR(), 10, 32], #- aka hidbp-mse-0
 		   "zero"    => [ c::S_IFCHR(), 1,  5 ],		     
 	       }}{$_} or die "unknown device $_" };

@@ -97,17 +97,17 @@ sub selectRootPartition($@) {
 #------------------------------------------------------------------------------
 sub selectInstallClass($@) {
     my ($o, @classes) = @_;
-    my @c = qw(beginner specific expert);
+    my @c = qw(normal specific expert);
     my %c = (
-	     beginner  => _("Recommended"),
+	     normal    => _("Recommended"),
 	     specific  => _("Personalized"),
 	     expert    => _("Expert"),
 	    );
     my $installClass = ${{reverse %c}}{$o->ask_from_list(_("Install Class"),
 							 _("What installation class do you want?"),
-							 [ map { $c{$_} } @c ], $c{$o->{installClass}} || $c{beginner})};
+							 [ map { $c{$_} } @c ], $c{$o->{installClass}} || $c{normal})};
     $::expert   = $installClass eq "expert";
-    $::beginner = $installClass eq "beginner";
+    $::beginner = $installClass eq "normal";
 
     if ($::beginner) {
 	$o->{installClass} = $installClass;
@@ -184,6 +184,8 @@ sub rebootNeeded($) {
 
     install_steps::rebootNeeded($o);
 }
+
+#------------------------------------------------------------------------------
 sub choosePartitionsToFormat($$) {
     my ($o, $fstab) = @_;
 
@@ -211,6 +213,7 @@ sub formatPartitions {
 	}
     }
 }
+
 #------------------------------------------------------------------------------
 sub setPackages {
     my ($o) = @_;
