@@ -116,34 +116,32 @@ sub connected { gethostbyname("mandrakesoft.com") ? 1 : 0 }
 
 my $kid_pipe;
 sub connected_bg {
+    local $|=1;
     my ($ref) = @_;
     if (defined $kid_pipe) {
 	local *F;
 	*F = *$kid_pipe;
-	fcntl(F, F_SETFL, O_NONBLOCK) or die "can't fcntl F_SETFL: $!";
+	fcntl(F, c::F_SETFL, c::O_NONBLOCK) or die "can't fcntl F_SETFL: $!";
 	my $a;
   	if ($a = <F> ) {
-  	    chomp $a;
 	    close($kid_pipe) || warn "kid exited $?";
 	    undef $kid_pipe;
 	    $a eq '1' and $$ref = 1;
 	    $a eq '0' and $$ref = 0;
   	}
-    } else {
-  	$kid_pipe = connected2();
-    }
+    } else { $kid_pipe = connected2() }
     1;
 }
 
 sub connected2 {
-           my $pid = open(KID_TO_READ, "-|");
-           if ($pid) {   # parent
-	       return \*KID_TO_READ;
-           } else {      # child
-               ($EUID, $EGID) = ($UID, $GID); # suid only
-	       my $a = gethostbyname("mandrakesoft.com") ? 1 : 0;
-	       c::_exit(0);
-           }
+    my $pid = open(KID_TO_READ, "-|");
+    if ($pid) {   # parent
+	return \*KID_TO_READ;
+    } else {      # child
+	my $a = gethostbyname("mandrakesoft.com") ? 1 : 0;
+	print "$a";
+	c::_exit(0);
+    }
 }
 
 sub disconnected { }
