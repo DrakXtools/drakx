@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 14mdk
+Release: 15mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -368,6 +368,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Mar 29 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-15mdk
+- drakconnect (blino):
+  o fix eaglectrl path (#15033)
+  o detect more Bewan devices
+  o fix support for sagem modems not using pppoa
+- harddrake: add an option in harddrake to probe imm/ppa (pixel,
+  #12560)
+- localedrake:
+  o fix russian size (pixel, #14988)
+  o "unicode" checkbox is visible only in expert mode
+
 * Fri Mar 25 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-14mdk
 - drakroam:
   o do not crash (blino)
