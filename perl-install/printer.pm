@@ -145,7 +145,7 @@ sub service_starts_on_boot ($) {
     my ($service) = @_;
     local *F; 
     open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
-	"/sbin/chkconfig --list $service 2>&1 |" ||
+	"/bin/sh -c \"export LC_ALL=C; /sbin/chkconfig --list $service 2>&1\" |" ||
 	    die "Could not run chkconfig!";
     while (<F>) {
 	chomp;
@@ -169,7 +169,7 @@ sub network_status {
     # return 0, otherwise 1.
     local *F; 
     open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
-	"/etc/rc.d/init.d/network status |" ||
+	"/bin/sh -c \"export LC_ALL=C; /etc/rc.d/init.d/network status\" |" ||
 	    die "Could not run \"/etc/rc.d/init.d/network status\"!";
     while(<F>) {
 	if (($_ =~ /Devices.*down/) || # Are there configured devices which
