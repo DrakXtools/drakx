@@ -38,8 +38,6 @@ $ENV{LANGUAGE} = "C" if $ENV{LANGUAGE} =~ /\b(ar|he|hi|ta)/;
 
 require_root_capability();
 
-my $expert_mode = $::expert;
-
 my $window = ugtk2->new('drakfloppy');
 unless ($::isEmbedded) {
     $window->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
@@ -99,17 +97,6 @@ $window->{window}->add(
                                                    ),
                                          ),
                                 
-                                0, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Expert Mode")), $expert_mode),
-                                                     clicked => \&toggle_expert_button),
-                                1, gtkadd(my $expert_mod_frame = Gtk2::Frame->new(N("Output")),
-                                          gtkpack_(gtkset_size_request(
-                                                                       gtkset_border_width(
-                                                                                           Gtk2::HBox->new(0, 0),
-                                                                                           5),
-                                                                       30, 75),
-                                                   1, $output = gtkset_editable(Gtk2::TextView->new, 0),
-                                                  ),
-                                         ),
                                 0, gtkpack__(new Gtk2::HButtonBox(),
                                              gtksignal_connect(Gtk2::Button->new(N("Cancel")),
                                                                clicked => sub { ugtk2->exit(0) }
@@ -125,17 +112,9 @@ $window->{window}->add(
                       );
 
 $window->{rwindow}->show_all;
-$expert_mod_frame->set_sensitive($expert_mode);
 
 $window->main;
 ugtk2->exit(0);
-
-
-sub toggle_expert_button() {
-    my ($expert_button) = @_;
-    $expert_mode = $expert_button->get_active;
-    $expert_mod_frame->set_sensitive($expert_mode);
-}
 
 
 my $remove_but;
@@ -312,11 +291,13 @@ sub build_it() {
   
     local *STATUS;
     open STATUS, $co or do { err_dialog(N("Error"), N("Unable to fork: %s", $!)); return };
-    local $_;
-    while (<STATUS>) {
-        gtktext_append($output, [ [ $_ ] ]);
+    my $log = join('', <STATUS>);
+    if (close STATUS) {
+        info_dialog(N("Floppy creation completed"), N("The creation of the boot floppy has been successfully completed \n"));
+        ugtk2->exit;
+    } else {
+        err_dialog(N("Error"), N("Unable to properly close mkbootdisk:\n\n<span foreground=\"Red\"><tt>%s</tt></span>", $log), { use_markup => 1, small => 1 });
     }
-    close STATUS or err_dialog(N("Error"), N("Unable to properly close mkbootdisk: \n %s \n %s", $!, $?));
   
     return (0);
 }
