@@ -1,3 +1,58 @@
+2004/09/28  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps.pm, printer/main.pm, standalone/printerdrake,
+	printer/printerdrake.pm, install_steps_interactive.pm: 
+	  - make printer::printerdrake::install_spooler() work with an optional
+	$in
+	  - many functions now take $security (which used to be taken from $in
+	during install)
+	  - fix some functions with empty prototype but still using a parameter
+	  - remove some unused variable
+	  - rename some $_foo vars to $foo since those vars are used
+	  - add some undef to some function calls to be minimally perl_checker
+	compliant
+	  - perl_checker compliant optional parameters in
+	start_spooler_on_boot(), install_spooler()
+
+2004/09/27  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/tools.pm: I sux, fix priority
+	(bg_command_as_root) use kdesu in kde
+	(get_default_gateway_interface) try to detect default connection in
+	this order : adsl > isdn > modem > ethernet
+
+	* mouse.pm: use input/mice instead of psaux for synaptics touchpads
+	(#11771)
+	(input/mice won't work with 2.4 kernels, but it doesn't matter since
+	the config file is rewritten at boot on major kernel change, and
+	synaptics devices are not configured for 2.4 kernels)
+
+	* network/netconnect.pm: ask to connect for isdn_external too
+	don't scramble $netcnx->{type}
+	ask to connect for modem/isdn connections too (crappy fix, this needs
+	to be redesigned once 10.1 is out)
+	we really support all linmodems (including Hsf and Hcf ones) with 2.6
+	kernels
+
+2004/09/27  Pixel  <pixel at mandrakesoft.com>
+
+	* partition_table/lvm_PV.pm: fix typos
+	simplify and handle LVM2, *but* since creating a LVM2 PV on a non
+	partitioned
+	drive doesn't modify the MBR, it won't help if the MBR is empty or a
+	valid dos
+	partition table, since those are checked first... but i won't change
+	this so
+	late in the release cycle
+
+2004/09/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* lang.pm: fix last commit
+
+	* standalone/drakperm (get_user_or_group) list users rather than groups
+	when requested for
+	(anthill #1161)
+
 2004/09/27  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
 
 	* share/rpmsrate.corpo-server: mandrakegalaxy
@@ -40060,7 +40115,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.972 2004/09/20 10:09:44 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.973 2004/09/27 10:56:21 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
