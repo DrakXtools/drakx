@@ -499,7 +499,7 @@ sub gtktext_insert {
     my ($textview, $t, $opts) = @_;
     if (ref($t) eq 'ARRAY') {
 	my $buffer = $textview->get_buffer;
-	$buffer->set_text('', -1) unless $opts->{append};
+	$opts->{append} or $buffer->set_text('', -1);
 	foreach my $token (@$t) {
 	    my $c = $buffer->get_char_count;
 	    $buffer->insert($buffer->get_end_iter, $token->[0], -1);
