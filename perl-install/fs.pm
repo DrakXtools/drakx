@@ -703,7 +703,10 @@ sub mount {
 	    $mount_opt = 'notail'; #- notail in any case
 	} elsif ($fs eq 'jfs' && !$rdonly) {
 	    #- needed if the system is dirty otherwise mounting read-write simply fails
-	    run_program::run("fsck.jfs", $dev) or die "fsck.jfs failed";
+	    run_program::run("fsck.jfs", $dev) or do {
+		my $err = $?;
+		die "fsck.jfs failed" if $err & 0xfc00;
+	    };
 	} elsif ($fs eq 'ext2' || $fs eq 'ext3' && $::isInstall) {
 	    foreach ('-a', '-y') {
 		run_program::run("fsck.ext2", $_, $dev);
