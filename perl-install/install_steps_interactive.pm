@@ -1272,7 +1272,8 @@ sub configureX {
     symlink "$o->{prefix}/etc/gtk", "/etc/gtk";
 
     require Xconfig::main;
-    if (my ($raw_X) = Xconfig::main::configure_everything_or_configure_chooser($o, install_any::X_options_from_o($o), !$expert, $o->{keyboard}, $o->{mouse})) {
+    my ($raw_X) = Xconfig::main::configure_everything_or_configure_chooser($o, install_any::X_options_from_o($o), !$expert, $o->{keyboard}, $o->{mouse});
+    if ($raw_X) {
 	$o->{raw_X} = $raw_X;
 	install_steps::configureXAfter($o);
     }
