@@ -80,16 +80,12 @@ sub start_daemons ()
     system("/etc/rc.d/init.d/dhcpd status >/dev/null") == 0 and sys("/etc/rc.d/init.d/dhcpd stop");
     system("/etc/rc.d/init.d/named status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/named stop");
 
-    my $netmon = '/usr/sbin/net_monitor';
-    my $netmon_need_start;
-    if (-x $netmon && `$netmon --status` eq 1) {
-	$netmon_need_start = 1;
-	system("$netmon --disconnect --force --quiet >/dev/null");
-    }
+    my $netscripts = '/etc/sysconfig/network-scripts';
+    sys("$netscripts/net_cnx_down >/dev/null");
     sys("/etc/rc.d/init.d/network restart");
-    $netmon_need_start and system("$netmon --connect --force --quiet >/dev/null");
+    sys("$netscripts/net_cnx_up >/dev/null");
 
-    sys("/etc/init.d/shorewall restart");
+    sys("/etc/init.d/shorewall restart >/dev/null");
 
     sys("/etc/rc.d/init.d/$_ start"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'named', 'dhcpd', 'shorewall';
     sys("/etc/rc.d/init.d/cups start") if $cups_used;
