@@ -363,21 +363,27 @@ sub gtkctree_children {
     @l;
 }
 
+my @icon_paths = ($ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/libDrakX/pixmaps", "pixmaps");
+
+sub add_icon_path { @icon_paths = uniq(@icon_paths, @_) }
+
 sub gtkcreate_xpm {
     my ($w, $f) = @_;
     $f =~ m|.xpm$| or $f="$f.xpm";
-    if ( $f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach $ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/libDrakX/pixmaps", "pixmaps" }
+    if ( $f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach @icon_paths }
     my @l = Gtk::Gdk::Pixmap->create_from_xpm($w->window, $w->style->bg('normal'), $f) or die "gtkcreate_xpm: missing pixmap file $f";
     @l;
 }
+
 sub gtkcreate_png {
-    my ($f) = @_;
+    my ($f) = shift;
     $f =~ m|.png$| or $f="$f.png";
-    if ( $f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach $ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "$ENV{SHARE_PATH}/libDrakX/pixmaps", "pixmaps" }
+    if ( $f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach @icon_paths }
     my $im = Gtk::Gdk::ImlibImage->load_image($f) or die "gtkcreate_png: missing png file $f";
     $im->render($im->rgb_width, $im->rgb_height);
     ($im->move_image(), $im->move_mask);
 }
+
 sub gtkbuttonset {
     my ($button, $str) = @_;
     $button->child->destroy;
