@@ -154,6 +154,8 @@ endif
 	cd share ; cp -a themes $(DEST)/usr/share/gtk
 	cd share ; cp compssUsers compssUsers.desktop rpmsrate $(ROOTDEST)/Mandrake/base
 
+	clean-rpmsrate $(ROOTDEST)/Mandrake/base/rpmsrate $(ROOTDEST)/Mandrake/RPMS
+
 	for i in ../all.modules/modules.cz*; do cp -f $$i $(DEST)/lib/; done
 
 	$(MAKE) -C share/po install NAME=libDrakX LOCALEDIR=$(DEST)/usr/share/locale_special
