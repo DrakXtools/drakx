@@ -58,6 +58,10 @@ sub new($) {
 sub vnew {
     my ($type, $su, $icon) = @_;
     $su = $su eq "su";
+    if ($ENV{INTERACTIVE_HTTP}) {
+	require interactive_http;
+	return interactive_http->new;
+    }
     require c;
     if ($ENV{DISPLAY} && system('/usr/X11R6/bin/xtest') == 0) {
 	if ($su) {
