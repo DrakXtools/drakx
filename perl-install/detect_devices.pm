@@ -206,8 +206,8 @@ sub hasSMP { c::detectSMP() }
 sub hasUltra66 {
     cat_("/proc/cmdline") =~ /(ide2=(\S+)(\s+ide3=(\S+))?)/ and return $1;
 
-    #- disable hasUltra66 (now included in kernel)
-    return;
+#    #- disable hasUltra66 (now included in kernel)
+#    return;
 
     require pci_probing::main;
     my @l = map { $_->[0] } pci_probing::main::matching_desc('(HPT|Ultra66)') or return;
