@@ -47,7 +47,6 @@ use ugtk2 qw(:helpers :wrappers :create);
 use common;
 use run_program;
 
-
 use Config;
 use POSIX;
 
@@ -203,13 +202,13 @@ x:5:respawn:/usr/X11R6/bin/X -ac -query $server_ip\n";
 
 sub cursor_wait {
 	# turn the cursor to a watch
-	$window1->{rwindow}->window->set_cursor(new Gtk2::Gdk::Cursor(150));	
+	$window1->{rwindow}->window->set_cursor(new Gtk2::Gdk::Cursor("GDK_WATCH"));	
 	gtkflush();
 }
 
 sub cursor_norm {
 	# restore normal cursor
-	$window1->{rwindow}->window->set_cursor(new Gtk2::Gdk::Cursor(68));
+	$window1->{rwindow}->window->set_cursor(new Gtk2::Gdk::Cursor("GDK_LEFT_PTR"));
 	gtkflush();
 }
 
@@ -223,7 +222,6 @@ sub display_error {
 				  0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
 					    gtksignal_connect(new Gtk2::Button(N("OK")), clicked => sub {
 						${$central_widget}->destroy(); 
-						create_fontsel();
 					    }),
 					    ),
 				  )
@@ -307,7 +305,7 @@ sub interactive_mode {
 								  gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub {
 								      write_conf_file();
 								      $::isEmbedded and kill 'USR1', $::CCPID;
-								      Gtk->main_quit();
+								      Gtk2->main_quit();
 								  }),
 								  ),
 							),
@@ -517,40 +515,61 @@ sub make_nbi {
 		"via-rhine", "winbond-840", "xircom_cb", "xircom_tulip_cb", "yellowfin");
 	
 	#- kernel/module info in tree view
-	my $tree_kernels = new Gtk2::Tree();
-	
+	my $model = Gtk2::TreeStore->new(Gtk2::GType->STRING);
+    my $tree_kernels = Gtk2::TreeView->new_with_model($model);
+    $tree_kernels->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    $tree_kernels->set_headers_visible(0);
+    $tree_kernels->get_selection->set_mode('single');
+
 	foreach (@kernels) {
-		my $t = $_;
-		my $t_kernel = Gtk2::TreeItem->new_with_label($t);
-		gtksignal_connect($t_kernel, select => sub { $kernel = $t;
-								$nic = '' });
-		$tree_kernels->append($t_kernel);
+		my $t_kernel = Gtk2::TreeIter->new;
+    	$model->append($t_kernel, undef);
+    	$model->set($t_kernel, [ 0 => $_ ]);
+
+# FIXME - SIGNAL		
+		#gtksignal_connect($t_kernel, select => sub { $kernel = $t;
+		#						$nic = '' });
 		
-		my $k_detail = new Gtk2::Tree();
-		$t_kernel->set_subtree($k_detail);
-		
+		my $k_detail = Gtk2::TreeIter->new;
 		foreach (@nics) {
-			my $m = $_;
-			my $k_det_nic = Gtk2::TreeItem->new_with_label($m);
-			gtksignal_connect($k_det_nic, select => sub { $nic = $m;
-								$kernel = $t });
-			$k_detail->append($k_det_nic);
-			$k_det_nic->show();
-		}		
+    		$model->append($k_detail, $t_kernel);
+    		$model->set($k_detail, [ 0 => $_ ]);
+# FIXME - SIGNAL
+		#	gtksignal_connect($k_det_nic, select => sub { $nic = $m;
+		#						$kernel = $t });
+		}
+		$k_detail->free;
 	}	
 
+	$tree_kernels->get_selection->signal_connect(changed => sub {
+   		my ($model, $iter) = $_[0]->get_selected;
+   		$model && $iter or return;
+    	my $kernel = $model->get($iter, 0);
+print "$model, $kernel\n";
+	});
+	
 	# existing nbi images in list
-	my $list_nbis = new Gtk2::List();
+	my $list_model = Gtk2::ListStore->new(Gtk2::GType->STRING);
+	my $list_nbis = Gtk2::TreeView->new_with_model($list_model);
+	$list_nbis->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+	$list_nbis->set_headers_visible(0);	
 	my @nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
 	my $nbi;
-	
+	my $iter = Gtk2::TreeIter->new;
+	my $nbi_iter;
+		
 	foreach (@nbis) {
-		my $t = $_;
-		$list_nbis->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($t), 
-				select => sub { $nbi = $t })));
+    	$list_model->append($iter);
+    	$list_model->set($iter, [ 0 => $_ ]);		
 	}
-	$list_nbis->set_selection_mode('single');		
-				
+	
+	$list_nbis->get_selection->signal_connect(changed => sub {
+    	my ($model, $iter) = $_[0]->get_selected;
+    	$model && $iter or return;
+    	$nbi = $model->get($iter, 0);
+		$nbi_iter = $iter;
+	});
+					
 	gtkpack($status_box,
 		$nbi_box = gtkpack_(new Gtk2::VBox(1,10),
 			0, gtkadd(new Gtk2::HBox(0,10),
@@ -561,12 +580,11 @@ sub make_nbi {
 								$in->ask_warn('', N("This will take a few minutes."));
 								cursor_wait();
 								system("/usr/bin/mknbi-set -k /boot/$kernel");
-								$list_nbis->clear_items();
+								$list_model->clear;
 								@nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
 								foreach (@nbis) {
-									my $t = $_;
-									$list_nbis->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($t), 
-									select => sub { $nbi = $t })));
+								   	$list_model->append($iter);
+    								$list_model->set($iter, [ 0 => $_ ]);		
 								}
 								cursor_norm(); 
 							} else {
@@ -576,12 +594,11 @@ sub make_nbi {
 					gtksignal_connect(new Gtk2::Button(N("Build Single NIC -->")), clicked => 
 						sub { if ($nic) {
 								system("/usr/bin/mknbi-set -k /boot/$kernel -r $nic");
-								$list_nbis->clear_items();
+								$list_model->clear;
 								@nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
 								foreach (@nbis) {
-									my $t = $_;
-									$list_nbis->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($t), 
-									select => sub { $nbi = $t })));
+								   	$list_model->append($iter);
+    								$list_model->set($iter, [ 0 => $_ ]);	
 								} 
 							} else {
 								$in->ask_warn('', N("No NIC selected!"));
@@ -591,12 +608,11 @@ sub make_nbi {
 					                $in->ask_warn('', N("This will take a few minutes."));
 							cursor_wait();
 							system("/usr/bin/mknbi-set");
-							$list_nbis->clear_items();
+							$list_model->clear;
 							@nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
 							foreach (@nbis) {
-								my $t = $_;
-								$list_nbis->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($t), 
-								select => sub { $nbi = $t })));
+								$list_model->append($iter);
+    							$list_model->set($iter, [ 0 => $_ ]);	
 							}
 							cursor_norm(); 
 						}),
@@ -605,7 +621,7 @@ sub make_nbi {
 						sub { my $nbi = "/var/lib/tftpboot/" . $nbi;
 							my $result = unlink($nbi) || warn("Can't delete $nbi...");
 							if ($result eq 1) {
-								$list_nbis->remove_items($list_nbis->selection);
+								$list_model->remove($nbi_iter);
 							}
 						}),
 					gtksignal_connect(new Gtk2::Button(N("Delete All NBIs")), clicked => 
@@ -613,11 +629,8 @@ sub make_nbi {
 							foreach (grep { /\.nbi/ } all("/var/lib/tftpboot")) {
 								my $nbi = "/var/lib/tftpboot/" . $_;
 								unlink($nbi) || warn("Can't delete $nbi...");
-								#- wanted to walk through these and delete
-								#- but can't figure out how to get the item from
-								#- the label :(
 							}
-							$list_nbis->clear_items();
+							$list_model->clear;
 							cursor_norm();
 						}),	
 					new Gtk2::HBox(1,1),
@@ -639,30 +652,51 @@ sub maintain_users {
 	#- use /homes to filter system daemons
 	my @homes = all("/home");
 	
-	my $list_sys_users = new Gtk2::List();
+	my $list_model = Gtk2::ListStore->new(Gtk2::GType->STRING);
+	my $list_sys_users = Gtk2::TreeView->new_with_model($list_model);
+	$list_sys_users->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+	$list_sys_users->set_headers_visible(0);
+	
+	my $iter = Gtk2::TreeIter->new;
 	my $sys_user;
 	
-	foreach (@sys_users) {		
+	foreach (@sys_users) {
 		my ($s_label) = split(/:/, $_, 2);
 		if (grep(/$s_label/, @homes)) {
-			$list_sys_users->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($s_label), 
-				select => sub { $sys_user = $s_label })));
+    		$list_model->append($iter);
+    		$list_model->set($iter, [ 0 => $s_label ]);
 		}
 	}
-	$list_sys_users->set_selection_mode('single');
-  
-	my $list_ts_users =  new Gtk2::List();
+	$iter->free;
+
+	$list_sys_users->get_selection->signal_connect(changed => sub {
+    	my ($model, $iter) = $_[0]->get_selected;
+    	$model && $iter or return;
+    	$sys_user = $model->get($iter, 0);
+	});
+
+	$list_model = Gtk2::ListStore->new(Gtk2::GType->STRING);
+	my $list_ts_users = Gtk2::TreeView->new_with_model($list_model);
+	$list_ts_users->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+	$list_ts_users->set_headers_visible(0);
+	
+	$iter = Gtk2::TreeIter->new;
 	my $ts_user;
 	
 	foreach (@ts_users) {
 		my ($t_label) = split(/:/, $_, 2);
 		my @system_entry = grep(/$t_label/, @sys_users); 
 		$t_label = $t_label . " !!!" if $_ ne $system_entry[0];
-		$list_ts_users->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($t_label), 
-		select => sub { $ts_user = $t_label })));
+		$list_model->append($iter);
+    	$list_model->set($iter, [ 0 => $t_label ]);
 	}
-	$list_ts_users->set_selection_mode('single');
 	
+	$list_ts_users->get_selection->signal_connect(changed => sub {
+    	my ($model, $iter) = $_[0]->get_selected;
+    	$model && $iter or return;
+    	$ts_user = $model->get($iter, 0);
+	});
+		
 	gtkpack($status_box,
 		$user_box = gtkpack_(new Gtk2::VBox(0,10),
 			0, gtkadd(new Gtk2::Label(N("!!! Indicates the password in the system database is different than\n the one in the Terminal Server database.\nDelete/re-add the user to the Terminal Server to enable login."))),
@@ -672,15 +706,14 @@ sub maintain_users {
 					new Gtk2::HBox(0,10),
 					gtksignal_connect(new Gtk2::Button(N("Add User -->")), clicked => 
 						sub { my $result = adduser(0, $sys_user);
-							if ($result eq 0) { 
-								$list_ts_users->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($sys_user), 
-								select => sub { $ts_user = $sys_user;
-								$list_ts_users->show() })));
+							if ($result eq 0) {
+							 	$list_model->append($iter);
+    							$list_model->set($iter, [ 0 => $sys_user ]);
 							}
 						}),
 					gtksignal_connect(new Gtk2::Button(N("<-- Del User")), clicked => 
 						sub { deluser(0, $ts_user);
-							$list_ts_users->remove_items($list_ts_users->selection);
+							$list_model->remove($iter);
 						}),
 					new Gtk2::HBox(0,10),
 				),
@@ -699,46 +732,50 @@ sub maintain_clients {
 	my $client;
 	
 	#- client info in tree view
-	my $tree_clients = new Gtk2::Tree();
-	foreach my $key (keys(%clients)) {
-		my $t = $key;
-		my $t_client = Gtk2::TreeItem->new_with_label($t);
-		gtksignal_connect($t_client, select => sub { $client = $t });
-		$tree_clients->append($t_client);
+	my $model = Gtk2::TreeStore->new(Gtk2::GType->STRING);
+    my $tree_clients = Gtk2::TreeView->new_with_model($model);
+    $tree_clients->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    $tree_clients->set_headers_visible(0);
+    $tree_clients->get_selection->set_mode('single');
+	
+	foreach my $key (keys(%clients)) {		
+		my $t_client = Gtk2::TreeIter->new;
+    	$model->append($t_client, undef);
+    	$model->set($t_client, [ 0 => $key ]);
 		
-		my $c_detail = new Gtk2::Tree();
-		$t_client->set_subtree($c_detail);
-		
-		my $c_det_hw = Gtk2::TreeItem->new_with_label($clients{$key}{hardware});
-		$c_detail->append($c_det_hw);
-		$c_det_hw->show();
+		my $c_detail = Gtk2::TreeIter->new;
 
-		my $c_det_ip = Gtk2::TreeItem->new_with_label($clients{$key}{address});
-		$c_detail->append($c_det_ip);
-		$c_det_ip->show();
-		
-		my $c_det_type = Gtk2::TreeItem->new_with_label(N("type: %s", $clients{$key}{type}));
-		$c_detail->append($c_det_type);
-		$c_det_type->show();
-		
+		$model->append($c_detail, $t_client);
+    	$model->set($c_detail, [ 0 => $clients{$key}{hardware} ]);
+
+		$model->append($c_detail, $t_client);
+    	$model->set($c_detail, [ 0 => $clients{$key}{address} ]);
+				
+		$model->append($c_detail, $t_client);
+    	$model->set($c_detail, [ 0 => N("type: %s", $clients{$key}{type}) ]);
+				
 		if ($clients{$key}{filename}) {
-			my $c_det_nbi = Gtk2::TreeItem->new_with_label($clients{$key}{filename});
-			$c_detail->append($c_det_nbi);
-			$c_det_nbi->show();
+			$model->append($c_detail, $t_client);
+    		$model->set($c_detail, [ 0 => $clients{$key}{filename} ]);
 		}		
 	}
-	$tree_clients->set_selection_mode('single');
+	
+	$tree_clients->get_selection->signal_connect(changed => sub {
+    	my ($model, $iter) = $_[0]->get_selected;
+    	$model && $iter or return;
+    	$client = $model->get($iter, 0);
+	});
 
 	#- entry boxes for client data entry
 	my $label_host = new Gtk2::Label("Client Name:");
 	$label_host->set_justify('left');
-	my $entry_host = new Gtk2::Entry(20);
+	my $entry_host = new Gtk2::Entry();
 	my $label_mac = new Gtk2::Label("MAC Address:");
 	$label_mac->set_justify('left');
-	my $entry_mac = new Gtk2::Entry(20);
+	my $entry_mac = new Gtk2::Entry();
 	my $label_ip = new Gtk2::Label("IP Address:");
 	$label_ip->set_justify('left');
-	my $entry_ip = new Gtk2::Entry(20);
+	my $entry_ip = new Gtk2::Entry();
 	my $label_nbi = new Gtk2::Label("Kernel Netboot Image:");
 	$label_nbi->set_justify('left');
 	my $entry_nbi = new Gtk2::Combo();
@@ -748,7 +785,6 @@ sub maintain_clients {
 	if ($have_nbis) {
 		unshift(@images, "");
 		$entry_nbi->set_popdown_strings(@images);
-		$entry_nbi->set_value_in_list(1, 0);
 	} else {
 		$in->ask_warn('', N("No net boot images created!"));		
 		make_nbi();
@@ -785,36 +821,32 @@ sub maintain_clients {
 								my $result = addclient(0, $hostname, $mac, $ip, $nbi, $is_thin);
 								
 								if ($result eq 0) {
-									my $t_client = Gtk2::TreeItem->new_with_label($hostname);
-									gtksignal_connect($t_client, select => sub { $client = $hostname });
-									$tree_clients->append($t_client);
+									my $t_client = Gtk2::TreeIter->new;
+
+		    						$model->append($t_client, undef);
+    								$model->set($t_client, [ 0 => $hostname ]);
 		
-									my $c_detail = new Gtk2::Tree();
-									$t_client->set_subtree($c_detail);
+									my $c_det_hw = Gtk2::TreeIter->new;
+									$model->append($c_det_hw, $t_client);
+    								$model->set($c_det_hw, [ 0 => $mac ]);
 		
-									my $c_det_hw = Gtk2::TreeItem->new_with_label($mac);
-									$c_detail->append($c_det_hw);
-									$c_det_hw->show();
-								
-									my $c_det_ip = Gtk2::TreeItem->new_with_label($ip);
-									$c_detail->append($c_det_ip);
-									$c_det_ip->show();
-									
+									my $c_det_ip = Gtk2::TreeIter->new;
+									$model->append($c_det_ip, $t_client);
+    								$model->set($c_det_ip, [ 0 => $ip ]);
+																		
 									my $client_type = "type: fat";
 									$client_type = "type: thin" if $is_thin eq 1;
-									my $c_det_type = Gtk2::TreeItem->new_with_label($client_type);
-									$c_detail->append($c_det_type);
-									$c_det_type->show();
+									my $c_det_type = Gtk2::TreeIter->new;
+									$model->append($c_det_type, $t_client);
+    								$model->set($c_det_type, [ 0 => $client_type ]);
 									
-									if ($nbi) {
-										my $c_det_nbi = Gtk2::TreeItem->new_with_label($nbi);
-										$c_detail->append($c_det_nbi);
-										$c_det_nbi->show();
-									}
-									
+									if ($nbi) {											
+										my $c_det_nbi = Gtk2::TreeIter->new;
+										$model->append($c_det_nbi, $t_client);
+    									$model->set($c_det_nbi, [ 0 => $nbi ]);
+									}									
 									$check_thin->set_active(0);
 									$is_thin = 0;
-									$t_client->show();
 								}		
 							}
 						}),
@@ -831,13 +863,16 @@ sub maintain_clients {
 								$entry_nbi->entry->set_text($clients{$client}{filename});
 								my $result = delclient(0, $client);
 								if ($result eq 0) {
-									$tree_clients->remove_items($tree_clients->selection);
+
+# FIXME
+#									$model->remove($iter);
 								}
 						}),
 					gtksignal_connect(new Gtk2::Button(N("Delete Client")), clicked => 
 						sub { my $result = delclient(0, $client);
 							if ($result eq 0) {
-								$tree_clients->remove_items($tree_clients->selection);
+# FIXME
+#								$tree_clients->remove_items($tree_clients->selection);
 							}
 						}),
 					gtksignal_connect(new Gtk2::Button(N("dhcpd Config...")), clicked => 
@@ -1448,6 +1483,7 @@ sub update_hosts_allow {
 	my $ip = get_ip_from_sys();
 	my @values = split(/\./, $ip);
 	my $subnet = $values[0] . "." . $values[1] . "." . $values[2] . ".";
+	my $i;
 	if ($mode eq "enable") {
 		my $has_all = `grep ALL /etc/hosts.allow`;
 		if ($has_all) {
@@ -1466,7 +1502,7 @@ sub update_hosts_allow {
 	}
 	if ($mode eq "disable") {
 		my @allow = cat_("/etc/hosts.allow");
-		for (my $i = 0; $i < @allow; $i++) {
+		for ($i = 0; $i < @allow; $i++) {
 			if ($allow[$i] =~ /^ALL:\t$subnet/) {
 				splice(@allow, $i, 1);
 				log::explanations("Modified file /etc/hosts.allow");
@@ -1475,7 +1511,7 @@ sub update_hosts_allow {
 			}
 		}
 		my @deny = cat_("/etc/hosts.deny");
-		for (my $i = 0; $i < @deny; $i++) {
+		for ($i = 0; $i < @deny; $i++) {
 			if ($deny[$i] =~ /^ALL:\tALL/) {
 				splice(@deny, $i, 1);
 				log::explanations("Modified file /etc/hosts.deny");
