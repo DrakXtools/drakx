@@ -1,0 +1,115 @@
+#!/usr/bin/perl
+
+#- Mandrake cryptographic package hdlist and depslist generation tools.
+#- Copyright (C) 1999 MandrakeSoft (fpons@mandrakesoft.com)
+#-
+#- This program is free software; you can redistribute it and/or modify
+#- it under the terms of the GNU General Public License as published by
+#- the Free Software Foundation; either version 2, or (at your option)
+#- any later version.
+#-
+#- This program is distributed in the hope that it will be useful,
+#- but WITHOUT ANY WARRANTY; without even the implied warranty of
+#- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#- GNU General Public License for more details.
+#-
+#- You should have received a copy of the GNU General Public License
+#- along with this program; if not, write to the Free Software
+#- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+#- usage: gencryptofiles <crypto_dir>
+#- build an hdlist and depslist file for crypto, need rpmtools also.
+
+my %resolver = (
+		'/bin/sh'           => 'bash',
+		'/bin/bash'         => 'bash',
+		'/usr/bin/perl'     => 'perl',
+		'/usr/bin/perl5'    => 'perl',
+
+		'libBrokenLocale.so' => 'glibc',
+		'libICE.so'         => 'XFree86-libs',
+		'libSM.so'          => 'XFree86-libs',
+		'libX11.so'         => 'XFree86-libs',
+		'libXext.so'        => 'XFree86-libs',
+		'libXmu.so'         => 'XFree86-libs',
+		'libXpm.so'         => 'xpm',
+		'libXt.so'          => 'XFree86-libs',
+		'libc.so.6'         => 'glibc',
+		'libgdbm.so'        => 'gdbm',
+		'libgpm.so'         => 'gpm',
+		'libm.so'           => 'glibc',
+		'libncurses.so'     => 'ncurses',
+		'libnsl.so'         => 'glibc',
+		'libpam.so'         => 'pam',
+		'libpthread.so'     => 'glibc',
+		'libreadline.so'    => 'readline',
+		'libstdc++-libc6.1-2.so' => 'libstdc++',
+		'libstdc++.so'      => 'libstdc++-compat',
+		'libutil.so'        => 'glibc',
+		'libz.so'           => 'zlib',
+		'smtpdaemon'        => 'postfix',
+	       );
+
+sub gendepslist_crypto {
+    my ($dir) = @_;
+    my %depslist;
+
+    #- get information about each rpm.
+    local *DIR;
+    opendir DIR, $dir or die "cannot open directory: $!\n";
+    while ($_ = readdir DIR) {
+	my ($key) = /(.*)\..*\.rpm$/ or next;
+	my ($name) = /(.*)-[^-]*-[^-]*-/;
+
+	my $size = `rpm -qp --queryformat="%{SIZE}" $dir/$_`;
+	my @filelist = split "\n", `rpm -qpl $dir/$_`;
+	my @requires = split "\n", `rpm -qpR $dir/$_`;
+
+	$depslist{$key} = {
+			   key      => $key,
+			   size     => $size,
+			   filelist => \@filelist,
+			   requires => \@requires,
+			   deps     => [],
+			  };
+
+	foreach (@filelist) {
+	    $resolver{$_} = $name;
+	    m|.*/([^/]*)$| and $resolver{$1} = $name;
+	}
+    }
+    close DIR;
+
+    #- resolve the dependancies.
+    foreach my $pkg (values %depslist) {
+	foreach (@{$pkg->{requires}}) {
+	    $resolver{$_} and push(@{$pkg->{deps}}, $resolver{$_}), next;
+	    m|^([^\s\(]*)| and $resolver{$1} and push(@{$pkg->{deps}}, $resolver{$1}), next;
+	    m|^.*/([^/\s\(]*)| and $resolver{$1} and push(@{$pkg->{deps}}, $resolver{$1}), next;
+	    m|^([^\s\(]*\.so)| and $resolver{$1} and push(@{$pkg->{deps}}, $resolver{$1}), next;
+	    m|^.*/([^\s\(]*\.so)| and $resolver{$1} and push(@{$pkg->{deps}}, $resolver{$1}), next;
+	    m|^([\w-]*)(?:\s+.*)$| and push(@{$pkg->{deps}}, $1); #- last and default to package name.
+	}
+    }
+
+    #- build depslist-crypto file.
+    local *F;
+    open F, ">$dir/depslist-crypto" or die "cannot open depslist-crypto file for writing: $!\n";
+    foreach (values %depslist) {
+	my %deps;
+	@deps{@{$_->{deps}}} = ();
+	print F "$_->{key} $_->{size} ", join(" ", keys %deps), "\n";
+    }
+    close F;
+}
+
+sub main {
+    my ($dir) = @_;
+    -d $dir or die "usage: gencryptofiles <crypto_dir>\n";
+    -x "/usr/bin/genhdlist_cz2" or die "I need rpmtools to work (ie /usr/bin/genhdlist_cz2)\n";
+
+    print `genhdlist_cz2 -o $dir/hdlist-crypto.cz2 $dir`;
+    gendepslist_crypto($dir);
+}
+
+main(@ARGV);
