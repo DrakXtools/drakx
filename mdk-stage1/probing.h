@@ -34,5 +34,6 @@ void net_discovered_interface(char * intf_name);
 char * get_net_intf_description(char * intf_name);
 void prepare_intf_descr(const char * intf_descr);
 void probe_that_type(enum driver_type type, enum media_bus bus);
+int exists_orphan_device(char *driver);
 
 #endif
