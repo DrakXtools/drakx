@@ -290,7 +290,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/drakxtools_http/authorised_progs
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
-%changelog 
+%changelog
+
+- drakconnect is no more supporting profiles. (francois)
+- drakconnect support for sagem Fast 800 used by free.fr (francois)
+ 
 * Thu Feb 27 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-10mdk
 - harddrake service: 
   o offer to configure cdrom/dvd/burners/floppies/
