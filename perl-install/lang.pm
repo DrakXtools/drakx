@@ -46,7 +46,7 @@ my %languages = (
 'fr_FR' => [ 'French (France)',		'iso-8859-1', 'fr', 'fr_FR:fr' ],
   'ga'  => [ 'Gaeilge (Irish)',		'iso-8859-14','ga', 'ga:en_IE:en' ],
 #-'gd'  => [ 'Scottish gaelic',		'iso-8859-14','gd', 'gd:en_GB:en' ],
-  'gl'  => [ 'Galician',		'iso-8859-1', 'gl', 'gl:es_ES:pt_PT:pt_BR:es:pt' ],
+  'gl'  => [ 'Galego (Galician)',	'iso-8859-1', 'gl', 'gl:es_ES:pt_PT:pt_BR:es:pt' ],
 #-'gv'	=> [ 'Manx gaelic',		'iso-8859-14','gv', 'gv:en_GB:en' ],
 #- 'iw' was the old code for hebrew language
   'he'  => [ 'Hebrew',			'iso-8859-8', 'he', 'he:iw_IL' ],
@@ -155,7 +155,7 @@ my %charsets = (
 	std_("iso8859-6") ],
   "iso-8859-7" => [ "iso07.f16",	"iso07",	"trivial.trans",
 	std_("iso8859-7") ],
-#- hebrew needs special console driver for text mode (none yet)
+#- hebrew needs special console driver for text mode [acon]
 #- (and gtk support isn't done yet)
   "iso-8859-8" => [ "iso08.f16",	"iso08",	"trivial.trans",
 	std_("iso8859-8") ],
@@ -176,7 +176,7 @@ my %charsets = (
 	std("koi8-u") ],
   "cp1251"     => [ "iso05.f16",	"iso05",	"iso05_to_cp1251.trans",
 	std("microsoft-cp1251") ],
-#- Yiddish needs special console driver for text mode (none yet)
+#- Yiddish needs special console driver for text mode [acon]
 #- (and gtk support isn't done yet)
   "cp1255"     => [ "iso08.f16",        "iso08",        "trivial.trans",
 	std_("microsoft-cp1255") ],
@@ -190,7 +190,7 @@ my %charsets = (
 	std2("tcvn-5712", 13), std2("tcvn-5712", 10) ],
   "viscii"     => [ "viscii10-8x16",	"viscii.uni",	"viscii1.0_to_viscii1.1.trans",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-viscii1.1-1" ],
-#- Farsi (iranian) needs special console driver for text mode [patching acon ?]
+#- Farsi (iranian) needs special console driver for text mode [acon]
 #- (and gtk support isn't done yet)
   "isiri-3342" => [ undef,		undef,		"trivial.trans",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-isiri-3342" ],

@@ -51,13 +51,14 @@ autoirpm autoirpm-icons numlock
 
 %by_lang = (
   'ar'	=> [ 'acon' ],
-# 'bg'	=> cp1251 fonts
+# 'be'	=> [ 'fonts-ttf-cyrillic' ],
+# 'bg'	=> [ 'fonts-ttf-cyrillic' ],
   'cs'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
 # 'cy'  => iso8859-14 fonts
 # 'el'	=> greek fonts
 # 'eo'	=> iso8859-3 fonts
-# 'fa'	=> farsi fonts
-# 'he'	=> hebrew fonts
+  'fa'  => [ 'acon' ],
+  'he'  => [ 'acon' ],
   'hr'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
   'hu'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
   'hy'	=> [ 'fonts-ttf-armenian' ],
@@ -66,18 +67,20 @@ autoirpm autoirpm-icons numlock
   'ko'	=> [ 'rxvt-CLE', 'fonts-ttf-korean' ],
 # 'lt'	=> iso8859-13 fonts
 # 'lv'	=> iso8859-13 fonts
-# 'mk'	=> iso8859-5 fonts
+# 'mk'	=> [ 'fonts-ttf-cyrillic' ],
   'pl'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
   'ro'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
+# 'ru'	=> [ 'XFree86-cyrillic-fonts', 'fonts-ttf-cyrillic' ],
   'ru'	=> [ 'XFree86-cyrillic-fonts' ],
   'sk'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
   'sl'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-# 'sp'  => iso8859-5 fonts
+# 'sp'	=> [ 'fonts-ttf-cyrillic' ],
   'sr'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
 # 'th'	=> thai fonts
   'tr'	=> [ 'XFree86-ISO8859-9', 'XFree86-ISO8859-9-75dpi-fonts' ],
-# 'uk'	=> koi8-u fonts
+# 'uk'	=> [ 'fonts-ttf-cyrillic' ],
 # 'vi'	=> vietnamese fonts
+  'yi'  => [ 'acon' ],
   'zh_CN' => [ 'rxvt-CLE', 'fonts-ttf-gb2312' ],
   'zh_TW.Big5' => [ 'rxvt-CLE', 'fonts-ttf-big5' ],
 );
