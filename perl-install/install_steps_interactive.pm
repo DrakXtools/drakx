@@ -989,6 +989,7 @@ sub summary {
 	label => N("Network"),
 	val => sub { $o->{netcnx}{type} },
 	clicked => sub { 
+	    local $::expert = $::expert;
 	    require network::netconnect;
 	    network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{intf}, 0, 0, 1);
 	},
