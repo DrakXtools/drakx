@@ -56,7 +56,7 @@ sub carryRootCreateSymlink {
 	symlink "/initrd/loopfs/lnx4win/boot", "$prefix/boot";
     }
     #- indicate kernel to keep initrd
-    mkdir "$prefix/initrd", 0755;
+    mkdir_p("$prefix/initrd");
 }
 
 
@@ -108,7 +108,7 @@ sub verifFile {
 sub prepare_boot {
     my $r = readlink "$::prefix/boot"; 
     unlink "$::prefix/boot"; 
-    mkdir "$::prefix/boot", 0755;
+    mkdir_p("$::prefix/boot");
     [$r, $::prefix];
 }
 

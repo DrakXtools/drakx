@@ -208,7 +208,7 @@ sub prepare_write_fstab {
 	  part2device($prefix, $_->{device}, $_->{type});
 
 	my $real_mntpoint = $_->{mntpoint} || ${{ '/tmp/hdimage' => '/mnt/hd' }}{$_->{real_mntpoint}};
-	mkdir_p("$prefix$real_mntpoint", 0755) if $real_mntpoint =~ m|^/|;
+	mkdir_p("$prefix$real_mntpoint") if $real_mntpoint =~ m|^/|;
 	my $mntpoint = loopback::carryRootLoopback($_) ? '/initrd/loopfs' : $real_mntpoint;
 
 	my ($freq, $passno) =
@@ -854,7 +854,7 @@ sub df {
     } elsif ($part->{notFormatted} && !$part->{isFormatted}) {
 	return; #- won't even try!
     } else {
-	mkdir $dir;
+	mkdir_p($dir);
 	eval { mount($part->{device}, $dir, type2fs($part), 'readonly') };
 	if ($@) {
 	    $part->{notFormatted} = 1;

@@ -175,7 +175,7 @@ sub make($) {
     }
 
     #- make a directory for this inode if needed.
-    mkdir dirname($file), 0755;
+    mkdir_p(dirname($file));
 
     syscall_('mknod', $file, $type | 0600, makedev($major, $minor)) or die "mknod failed (dev $_): $!";
 

@@ -610,7 +610,7 @@ sub probeSerialDevices {
     #- for device already probed, we can safely (assuming device are
     #- not moved during install :-)
     #- include /dev/mouse device if using an X server.
-    -d "/var/lock" or mkdir "/var/lock", 0755;
+    mkdir_p("/var/lock");
     -l "/dev/mouse" and $serialprobe{"/dev/" . readlink "/dev/mouse"} = undef;
     foreach (keys %serialprobe) { m|^/dev/(.*)| and touch "/var/lock/LCK..$1" }
 

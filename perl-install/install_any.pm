@@ -487,7 +487,7 @@ sub setAuthentication {
 	}
 	write_smb_conf($domain);
 	run_program::rooted($o->{prefix}, "chkconfig", "--level", "35", "winbind", "on");
-	mkdir "$o->{prefix}/home/$domain", 0755;
+	mkdir_p("$o->{prefix}/home/$domain");
 	
 	#- defer running smbpassword - no network yet
 	$winbind = $winbind . "%" . $winpass;
@@ -779,7 +779,7 @@ sub getAndSaveAutoInstallFloppy {
 
     if (arch() =~ /sparc/) {
 	my $imagefile = "$o->{prefix}/tmp/autoinst.img";
-	my $mountdir = "$o->{prefix}/tmp/mount"; -d $mountdir or mkdir $mountdir, 0755;
+	my $mountdir = "$o->{prefix}/tmp/mount"; mkdir_p($mountdir);
 	my $workdir = "$o->{prefix}/tmp/work"; -d $workdir or rmdir $workdir;
 
 	getAndSaveInstallFloppy($o, $imagefile) or return;
