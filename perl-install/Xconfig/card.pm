@@ -326,7 +326,7 @@ sub configure {
 }
 
 sub install_server {
-    my ($card, $options, $do_pkgs) = @_;
+    my ($card, $_options, $do_pkgs) = @_;
 
     my $prog = server_binary($card);
 
@@ -343,11 +343,14 @@ sub install_server {
     if ($card->{use_UTAH_GLX}) {
 	push @packages, 'Mesa';
     }
-    #- 3D acceleration configuration for XFree 4 
-    #- using NVIDIA driver (TNT, TN2 and GeForce cards only).
-    push @packages, @{$options->{allowNVIDIA_rpms}} if $card->{Driver2} eq 'nvidia' && $options->{allowNVIDIA_rpms}->();
-    #- using ATI fglrx driver (Radeon, Fire GL cards only).
-    push @packages, @{$options->{allowATI_rpms}} if $card->{Driver2} eq 'fglrx' && $options->{allowATI_rpms}->();
+
+    my %proprietary_Driver2 = (
+	nvidia => [ 'NVIDIA_kernel', 'NVIDIA_GLX' ], #- using NVIDIA driver (TNT, TN2 and GeForce cards only).
+	fglrx => [ 'ATI_kernel', 'ATI_GLX' ], #- using ATI fglrx driver (Radeon, Fire GL cards only).
+    );
+    if (my $rpms_needed = $proprietary_Driver2{$card->{Driver2}}) {
+	push @packages, $do_pkgs->check_kernel_module_packages($rpms_needed->[0], $rpms_needed->[1]);
+    }
 
     $do_pkgs->install(@packages) if @packages;
     -x "$::prefix$prog" or die "server $card->{server} is not available (should be in $::prefix$prog)";

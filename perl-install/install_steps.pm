@@ -890,10 +890,7 @@ sub configureX {
     $o->{raw_X} = Xconfig::default::configure($o->{keyboard}, $o->{mouse});
 
     require Xconfig::main;
-    Xconfig::main::configure_everything_auto_install($o->{raw_X}, $o->do_pkgs, $o->{X},
-			  { allowFB          => $o->{allowFB},
-			    allowNVIDIA_rpms => $o->do_pkgs->check_kernel_module_packages('NVIDIA_kernel', 'NVIDIA_GLX'),
-			  });
+    Xconfig::main::configure_everything_auto_install($o->{raw_X}, $o->do_pkgs, $o->{X}, { allowFB => $o->{allowFB} });
     configureXAfter($o);
 }
 sub configureXAfter {
