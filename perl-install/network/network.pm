@@ -367,12 +367,14 @@ sub easy_dhcp {
     modules::load_category($modules_conf, 'network/main|gigabit|pcmcia|usb');
     my @all_cards = network::ethernet::get_eth_cards($modules_conf);
 
-    #- only for a single network card
-    (any { $_->[0] eq 'eth0' } @all_cards) && (every { $_->[0] ne 'eth1' } @all_cards) or return;
+    #- only for a single ethernet network card
+    my @ether_cards = grep { `LC_ALL= LANG= $::prefix/sbin/ip -o link show $_->[0] 2>/dev/null` =~ m|\slink/ether\s| } @all_cards;
+    @ether_cards == 1 or return;
 
-    log::explanations("easy_dhcp: found eth0");
+    my $dhcp_intf = $ether_cards[0][0];
+    log::explanations("easy_dhcp: found $dhcp_intf");
 
-    network::ethernet::conf_network_card_backend($netc, $intf, 'dhcp', 'eth0');
+    network::ethernet::conf_network_card_backend($netc, $intf, 'dhcp', $dhcp_intf);
 
     put_in_hash($netc, { 
 			NETWORKING => "yes",
