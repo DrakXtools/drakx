@@ -3,7 +3,12 @@
 open F, "links -dump http://www.eecis.udel.edu/~mills/ntp/clock1.htm|";
 open G, "links -dump http://www.eecis.udel.edu/~mills/ntp/clock2.htm|";
 
-parse() while <F>;
+# Chris Kloiber <ckloiber@redhat.com> writes:
+# > It's not considered polite to use the Stratum 1 servers for purposes that 
+# > are not absolutely critical. I would use Stratum 2 servers and live with 
+# > the few nanoseconds difference. 
+#parse() while <F>;
+
 parse() while <G>;
 
 sub parse {
@@ -42,7 +47,7 @@ foreach (grep { $_->{policy} eq 'open access' } @all) {
     ($country, $state) = split ' ', $_->{indic};
     $country = ucfirst(lc $country_codes{$country});
     $country .= " $state" if $state;
-    print lc($_->{name}), " $country\n";
+    print "$country (", lc($_->{name}), ")\n";
 }
 
 BEGIN {
