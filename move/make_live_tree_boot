@@ -5,13 +5,13 @@ use common;
 use lang;
 use Getopt::Long;
 
-GetOptions(u => \$un_build) or die '';
+GetOptions(u => \ (my $un_build)) or die '';
 
 my $prefix = $ARGV[0] || `make get_dest_livetree`;
-my @ALLOWED_LANGS = split(' ', first(cat_('move.pm') =~ /ALLOWED_LANGS = qw\((.*)\)/));
+
 
 sub create_light_tree {
-    my ($live_name, $list) = @_;
+    my ($livetree_prefix, $live_name, $list) = @_;
     my $light_prefix = $prefix . '_' . $live_name;
 
     -e $light_prefix and die "you can't make_live_tree_boot since one already exists
@@ -19,7 +19,7 @@ Maybe you should remove it first with 'make_live_tree_boot -u'\n";
 
     foreach my $f (@$list) {
 	my $dest = "$light_prefix$f";
-	my $orig = "$prefix$f";
+	my $orig = "$livetree_prefix$f";
 
 	mkdir_p(dirname($dest));
 
@@ -27,7 +27,7 @@ Maybe you should remove it first with 'make_live_tree_boot -u'\n";
 	    symlink readlink($orig), $dest;
 	} else {
 	    my $link = $orig;
-	    $link =~ s|^$prefix|/image_$live_name|;
+	    $link =~ s|^$livetree_prefix|/image_$live_name|;
 
 	    rename $orig, $dest or die "moving $orig to $dest failed: $!\n";
 	    symlink $link, $orig or die "symlinking from $dest to $orig failed: $!\n";
@@ -119,48 +119,46 @@ sub remove_light_tree {
 	system('find', $light_prefix);
     }
 }
+my @i18n = map { if_(/i18n_(.*)\.list$/, $1) } all('data');
+my @clps = ('always', 'boot', 'totem', 'nvidia', map { "i18n_$_" } @i18n);
 
-my @always_list = chomp_(cat_('data/always.list'));
-my @boot_list_orig = chomp_(cat_('data/boot.list'));
-my @totem_list_orig = chomp_(cat_('data/totem.list'));
-my @nvidia_list = chomp_(cat_('data/nvidia.list'));
-my @always_i18n_list = chomp_(cat_('data/always_i18n.list'));
+my %lists = map {
+    $_ => [ chomp_(cat_("data/$_.list")) ];
+} @clps, 'always_i18n';
 
-@always_list = uniq(@always_list, intersection(\@boot_list_orig, \@totem_list_orig));
+$lists{always_simpl} = [ uniq(@{$lists{always}}, intersection($lists{boot}, $lists{totem})) ];
+$lists{boot_simpl} = [ difference2($lists{boot}, $lists{always_simpl}) ];
+$lists{totem_simpl} = [ difference2($lists{totem}, $lists{always_simpl}) ];
 
-my @boot_list = difference2(\@boot_list_orig, \@always_list);
-my @totem_list = difference2(\@totem_list_orig, \@always_list);
-
-remove_light_tree('always', \@always_list);
-remove_light_tree('boot', \@boot_list);
-remove_light_tree('totem', \@totem_list);
-remove_light_tree('nvidia', \@nvidia_list);
-foreach my $lang (@ALLOWED_LANGS) {
-    remove_light_tree("always_i18n_$lang", []);
+foreach (@clps, map { "always_i18n_$_" } @i18n) {
+    remove_light_tree($_, $lists{$_ . '_simpl'} || $lists{$_} || []);
 }
 
 if (!$un_build) {
-    create_light_tree('always', \@always_list);    
-    create_light_tree('boot', \@boot_list);    
-    create_light_tree('totem', \@totem_list);    
-    create_light_tree('nvidia', \@nvidia_list) if -e $nvidia_list[0];
-    foreach my $lang (@ALLOWED_LANGS) {
-	my $full_lang = lang::l2locale($lang);
-	my ($short_lang) = $full_lang =~ /(..)/;
-	my @list = map { 
+    foreach my $i18n (@i18n) {
+	$lists{"always_i18n_$i18n"} = [ map {
 	    my $s = $_;
-	    $s =~ s/__LANG__/$full_lang/;
-	    if (! -e $s) {
-		$s = $_;
-		$s =~ s/__LANG__/$short_lang/;
+	    $s =~ s/__LANG__/$i18n*/;
+	    if (my ($f) = glob("$prefix$s")) {
+		if (readlink($f) =~ m!^[^/]!) {
+		    system('cp', $f, "$f-");
+		    rename "$f-", $f;
+		}
+		$f =~ s/\Q$prefix// or die "<$f> should contain $prefix\n";
+		$f;
+	    } else {
+		();
 	    }
-	    if (readlink($s) =~ m!^[^/]!) {
-		system('cp', $s, "$s-");
-		rename "$s-", $s;
-	    }
-	    if_(-e $s, $s);
-	} @always_i18n_list;
-	create_light_tree("always_i18n_$lang", \@list);
+	} @{$lists{always_i18n}} ];
     }
-    create_totem_links('totem', \@totem_list_orig);
+
+    foreach my $i18n (@i18n) {
+	create_light_tree($prefix, "always_i18n_$i18n", $lists{"always_i18n_$i18n"});
+    }
+    foreach (@clps) {
+	my $list = $lists{$_ . '_simpl'} || $lists{$_};
+	next if $_ eq 'nvidia' && ! -e $list->[0];
+	create_light_tree($prefix, $_, $list);
+    }
+    create_totem_links('totem', $lists{totem});
 }

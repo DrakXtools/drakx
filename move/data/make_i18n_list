@@ -1,0 +1,34 @@
+#!/usr/bin/perl
+
+use MDK::Common;
+
+my $prefix = $ARGV[0];
+my $rpm = "rpm --root $prefix";
+
+unlink glob("i18n_*.list");
+
+my %have;
+foreach my $list (glob("*.list")) {
+    $have{$_} = $list foreach chomp_(cat_($list));
+}
+
+my @pkg_langs = map { /locales-(.*)/ } `$rpm -qa --qf "%{name}\n" locales-*`;
+
+foreach my $i18n (@pkg_langs) {
+    #- $i18n_re is different from $i18n because of things like locales-no giving nb|nn|no
+    my $i18n_re = join('|', uniq($i18n, map { if_(/locales-(\S+)/, $1) } `$rpm -q --provides locales-$i18n`));
+
+    my @pkgs = uniq("locales-$i18n", chomp_(`$rpm -q --qf "%{name}\n" --whatrequires locales-$i18n`));
+    my ($dirs, $files) = partition { -d "$prefix$_" } uniq(chomp_(`$rpm -ql @pkgs`));
+
+    my @i18n_dirs = uniq(grep { m!/($i18n_re) (_[^/]*)? (\.[^/]*)? (\@[^/]*)?$!x } @$dirs);
+    my $i18n_dirs_re = join('|', map { quotemeta $_ } @i18n_dirs);
+    my @files = grep { !m!^($i18n_dirs_re)/! } @$files;
+
+    my $list = "i18n_$i18n.list";
+    foreach (@i18n_dirs, @files) {
+	$have{$_} and die "$_ would be twice: in $have{$_} and $list\n";
+	$have{$_} = $list;
+    }
+    output($list, map { "$_\n" } @i18n_dirs, @files);
+}
