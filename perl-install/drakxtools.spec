@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.25mdk
+Release: 0.26mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -357,6 +357,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Feb 14 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.26mdk
+- draksound, service_harddrake: handle more sound cards
+- localedrake: alter font settings for zh_CN and zh_TW (funda wang)
+- printerdrake (till):
+  o allow HPLIP setup also when setting up the print queue manually
+  o fix undetection of network printers without DNS hostname entry
+  o longer timeouts for "ping", as some network printers were missed
+- service_harddrake: handle removal of cards (#7049)
+
 * Fri Feb 11 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.25mdk
 - harddrake service: fix removing PCMCIA controller
 - hardware support: detect & load modules for RNG (crypto hw)
