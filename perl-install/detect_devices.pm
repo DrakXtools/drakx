@@ -354,12 +354,12 @@ sub check {
 
 sub tryOpen($) {
     local *F;
-    eval { sysopen F, devices::make($_[0]), c::O_NONBLOCK() and *F };
+    sysopen F, devices::make($_[0]), c::O_NONBLOCK() and *F;
 }
 
 sub tryWrite($) {
     local *F;
-    eval { sysopen F, devices::make($_[0]), 1 | c::O_NONBLOCK() and *F };
+    sysopen F, devices::make($_[0]), 1 | c::O_NONBLOCK() and *F;
 }
 
 sub syslog {
