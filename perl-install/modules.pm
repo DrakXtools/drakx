@@ -27,7 +27,7 @@ arch() =~ /^sparc/ ? (
   "3c505" => "3com 3c505",
   "3c507" => "3com 3c507",
   "3c515" => "3com 3c515",
-  "3c90x" => "3Com 3c90x (Cyclone/Hurricane/Tornado)",
+#******(missing-2.4)    "3c90x" => "3Com 3c90x (Cyclone/Hurricane/Tornado)",
   "at1700" => "Allied Telesis AT1700",
   "ac3200" => "Ansel Communication AC3200",
   "acenic" => "AceNIC Gigabit Ethernet",
@@ -41,8 +41,8 @@ arch() =~ /^sparc/ ? (
   "de620" => "D-Link DE-620 pocket adapter",
   "dgrs" => "Digi International RightSwitch",
   "depca" => "Digital DEPCA and EtherWORKS",
-  "ewrk3" => "Digital EtherWORKS 3",
-  "old_tulip" => "Digital 21040/21041/21140 (old Tulip driver)",
+#******(missing-2.4)    "ewrk3" => "Digital EtherWORKS 3",
+#******(missing-2.4)    "old_tulip" => "Digital 21040/21041/21140 (old Tulip driver)",
   "tulip" => "Digital 21040/21041/21140 (Tulip)",
   "eth16i" => "ICL EtherTeam 16i",
   "epic100" => "EPIC 100",
@@ -53,40 +53,40 @@ arch() =~ /^sparc/ ? (
   "hp" => "HP LAN/AnyLan",
   "hp-plus" => "HP PCLAN/plus",
   "lance" => "Lance",
-  "lne390" => "Mylex LNE390",
+#******(missing-2.4)    "lne390" => "Mylex LNE390",
   "ne" => "NE2000 and compatible",
   "ne2k-pci" => "NE2000 PCI",
-  "ne3210" => "NE3210",
+#******(missing-2.4)  "ne3210" => "NE3210",
   "ni5010" => "NI 5010",
   "ni52" => "NI 5210",
   "ni65" => "NI 6510",
-  "es3210" => "Racal-Interlan ES3210",
+#******(missing-2.4)   "es3210" => "Racal-Interlan ES3210",
   "rcpci" => "Red Creek Hardware VPN",
   "epic100" => "SMC 83c170 EPIC/100",
-  "sktr" => "Syskonnect Token ring adaptor",
+#******(missing-2.4)  "sktr" => "Syskonnect Token ring adaptor",
   "smc9194" => "SMC 9000 series",
   "smc-ultra" => "SMC Ultra",
-  "smc-ultra32" => "SMC Ultra 32",
+#******(missing-2.4)    "smc-ultra32" => "SMC Ultra 32",
   "yellowfin" => "Symbios Yellowfin G-NIC",
   "via-rhine" => "VIA Rhine",
 #  "wavelan" => "AT&T WaveLAN & DEC RoamAbout DS", # TODO is a "AT&T GIS WaveLAN ISA" ?
   "wd" => "WD8003, WD8013 and compatible",
-  "z85230" => "Z85x30",
+#******(missing-2.4)  "z85230" => "Z85x30",
 
   "dmfe" => "dmfe",
-  "fmv18x" => "fmv18x",
-  "ibmtr" => "Token Ring Tropic",
-  "olympic" => "olympic",
-  "plip" => "PLIP (parallel port)",
-  "rl100a" => "rl100a",
+#******(missing-2.4)  "fmv18x" => "fmv18x",
+#******(missing-2.4)    "ibmtr" => "Token Ring Tropic",
+#******(missing-2.4)    "olympic" => "olympic",
+#obsolete  "plip" => "PLIP (parallel port)",
+#******(missing-2.4)  "rl100a" => "rl100a",
   "sb1000" => "sb1000",
-  "sbni" => "sbni",
+#******(missing-2.4)  "sbni" => "sbni",
   "sis900" => "sis900",
   "sk98lin" => "Syskonnect (Schneider & Koch)|Gigabit Ethernet",
 ),
   "3c59x" => "3com 3c59x (Vortex)",
   "de4x5" => "Digital 425,434,435,450,500",
-  "rtl8139" => "RealTek RTL8129/8139",
+#******(missing-2.4)    "rtl8139" => "RealTek RTL8129/8139",
   "8139too" => "Realtek RTL-8139",
 }],
 [ 'net_raw', {
@@ -129,7 +129,7 @@ arch() =~ /^sparc/ ? (
 
   "a100u2w" => "a100u2w",
   "atp870u" => "atp870u (Acard/Artop)",
-  "dc395x_trm" => "dc395x_trm",
+#******(missing-2.4)  "dc395x_trm" => "dc395x_trm",
   "psi240i" => "psi240i",
   "qlogicfc" => "qlogicfc",
   "sim710" => "sim710",
@@ -154,9 +154,9 @@ arch() =~ /^sparc/ ? (
   "pluto" => "Sun SparcSTORAGE Array SCSI", #- name it "fc4:soc:pluto" ?
 ) : arch() =~ /alpha/ ? () : (
   "DAC960" => "Mylex DAC960",
-  "dpt_i2o" => "Distributed Tech SmartCache/Raid I-V Controller",
+#******(missing-2.4)  "dpt_i2o" => "Distributed Tech SmartCache/Raid I-V Controller",
   "megaraid" => "AMI MegaRAID",
-  "aacraid" => "AACxxx Raid Controller",
+#******(missing-2.4)  "aacraid" => "AACxxx Raid Controller",
   "cpqarray" => "Compaq Smart-2/P RAID Controller",
   "gdth" => "ICP Disk Array Controller",
   "ips" => "IBM ServeRAID controller",
@@ -172,17 +172,17 @@ arch() =~ /^sparc/ ? (
 }],
 [ 'cdrom', {
 arch() !~ /^sparc|alpha/ ? (
-  "sbpcd" => "SoundBlaster/Panasonic",
-  "aztcd" => "Aztech CD",
-  "gscd" => "Goldstar R420",
-  "isp16" => "ISP16/MAD16/Mozart",
-  "mcd" => "Mitsumi", #- removed for space
-  "mcdx" => "Mitsumi (alternate)",
-  "optcd" => "Optics Storage 8000",
-  "cm206" => "Phillips CM206/CM260",
-  "sjcd" => "Sanyo",
-  "cdu31a" => "Sony CDU-31A",
-  "sonycd535" => "Sony CDU-5xx",
+#******(missing-2.4)  "sbpcd" => "SoundBlaster/Panasonic",
+#******(missing-2.4)  "aztcd" => "Aztech CD",
+#******(missing-2.4)  "gscd" => "Goldstar R420",
+#******(missing-2.4)  "isp16" => "ISP16/MAD16/Mozart",
+#******(missing-2.4)  "mcd" => "Mitsumi", #- removed for space
+#******(missing-2.4)  "mcdx" => "Mitsumi (alternate)",
+#******(missing-2.4)  "optcd" => "Optics Storage 8000",
+#******(missing-2.4)  "cm206" => "Phillips CM206/CM260",
+#******(missing-2.4)  "sjcd" => "Sanyo",
+#******(missing-2.4)  "cdu31a" => "Sony CDU-31A",
+#******(missing-2.4) "sonycd535" => "Sony CDU-5xx",
 ) : (),
 }],
 [ 'cdrom_raw', {
@@ -231,13 +231,13 @@ arch() !~ /^sparc/ ? (
   "3c574_cs" => "3c574_cs",
   "qlogic_cs" => "qlogic_cs",
   "nmclan_cs" => "nmclan_cs",
-  "ibmtr_cs" => "ibmtr_cs",
+#******(missing-2.4)   "ibmtr_cs" => "ibmtr_cs",
 #  "dummy_cs" => "dummy_cs",
 #  "memory_cs" => "memory_cs",
   "ftl_cs" => "ftl_cs",
   "smc91c92_cs" => "smc91c92_cs",
   "3c589_cs" => "3c589_cs",
-  "parport_cs" => "parport_cs", 
+#******(missing-2.4)   "parport_cs" => "parport_cs", 
   "3c575_cb" => "3c575_cb",
   "apa1480_cb" => "apa1480_cb",
   "cb_enabler" => "cb_enabler",
@@ -333,9 +333,9 @@ my @skip_big_modules_on_stage1 =
 qw(
 acenic sk98lin
 BusLogic seagate fdomain g_NCR5380 tmscsim
-dpt_i2o gdth eata eata_pio eata_dma
-aztcd gscd isp16 mcd mcdx optcd cm206 sjcd cdu31a
-);
+gdth eata eata_pio eata_dma
+); #******(missing-2.4)  dpt_i2o aztcd gscd isp16 mcd mcdx optcd cm206 sjcd cdu31a
+
 
 my @skip_modules_on_stage1 = (
   arch() =~ /alpha/ ? qw(sb1000) : (),

@@ -20,10 +20,10 @@ f "pcmcia net cdrom scsi disk keepbig" ; ALL_DRIVERS=$v
 NETWORK_MODULES="  $FSMODULES $NETWORK_DRIVERS"
 CDROM_MODULES="    $FSMODULES $CD_DRIVERS"
 HD_MODULES="       $FSMODULES $SCSI_DRIVERS $DISK_DRIVERS loop.o isofs.o"
-HDREISER_MODULES=" $FSMODULES $SCSI_DRIVERS reiserfs.o loop.o isofs.o"
+HDREISER_MODULES=" $FSMODULES $SCSI_DRIVERS loop.o isofs.o" # reiserfs.o   <-- currently unsupported in kernel-boot-2.4
 PCMCIA_MODULES="   $FSMODULES $PCMCIA_DRIVERS"
 BIG_MODULES="      $FSMODULES $BIG_DRIVERS"
-ALL_MODULES="      $FSMODULES $ALL_DRIVERS reiserfs.o"
+ALL_MODULES="      $FSMODULES $ALL_DRIVERS " # reiserfs.o   <-- currently unsupported in kernel-boot-2.4
 NOT_USEFULL_IN_STAGE1="nls_*.o parport_probe.o raid*.o serial.o smbfs.o usb-*.o"
 
 PCMCIA_INSTALLMODULES="pcmcia_core.o tcic.o ds.o i82365.o"
