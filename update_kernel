@@ -2,45 +2,25 @@
 
 KERNEL_BOOT_PATH="kernel"
 
-SCSI_DRIVERS=`perl -Iperl-install -e 'use modules; while (($m,$v)=each %modules::drivers) { print "$m.o\n" if $v->{type} eq "scsi" }'`
+function f() { 
+    v=`perl -Iperl-install -e "use modules; print qq(\\$_.o\n) foreach modules::module_of_type(\"$1\")"` 
+}
 
-NETWORK_DRIVERS=`perl -Iperl-install -e 'use modules; while (($m,$v)=each %modules::drivers) { print "$m.o\n" if $v->{type} eq "net" }'`
-NETWORK_DRIVERS="$NETWORK_DRIVERS 82596.o 8390.o cs89x0.o dgrs.o lockd.o nfs.o sunrpc.o wavelan.o"
-
-
-#     3c589_cs.o ibmtr_cs.o nmclan_cs.o pcnet_cs.o smc91c92_cs.o wavelan_cs.o
-#     fmvj18x_cs.o netwave_cs.o xirc2ps_cs.o 3c574_cs.o"
-
-PCMCIA_DRIVERS="
-     3c574_cs.o 3c575_cb.o 3c589_cs.o aha152x_cs.o apa1480_cb.o cb_enabler.o
-     dummy_cs.o epic_cb.o fdomain_cs.o fmvj18x_cs.o 
-     ibmtr_cs.o ide_cs.o iflash2+_mtd.o iflash2_mtd.o
-     netwave_cs.o nmclan_cs.o
-     parport_cs.o pcnet_cs.o qlogic_cs.o
-     smc91c92_cs.o sram_mtd.o tulip_cb.o xirc2ps_cs.o
-     ftl_cs.o memory_cb.o memory_cs.o serial_cb.o serial_cs.o
-
-     8390.o 
-     nfs.o lockd.o sunrpc.o"
-
-#     3c589_cs.o ibmtr_cs.o nmclan_cs.o pcnet_cs.o smc91c92_cs.o wavelan_cs.o
-#     fmvj18x_cs.o netwave_cs.o xirc2ps_cs.o 3c574_cs.o"
-
-
-CD_DRIVERS="aztcd.o cm206.o isp16.o mcdx.o sbpcd.o sonycd535.o cdu31a.o gscd.o mcd.o optcd.o sjcd.o"
-
-BLOCK_DRIVERS="DAC960.o cpqarray.o"
+f "scsi" ; SCSI_DRIVERS=$v
+f "net" ; NETWORK_DRIVERS=$v
+f "scsi&cdrom" ; CD_DRIVERS=$v
+f "pcmcia" ; PCMCIA_DRIVERS=$v
 
 MISCMODULES="lp.o parport_pc.o parport.o loop.o"
-
 FSMODULES="vfat.o fat.o"
 
 NETWORK_MODULES="$MISCMODULES $FSMODULES $NETWORK_DRIVERS"
-LOCAL_MODULES="$MISCMODULES $FSMODULES $SCSI_DRIVERS $CD_DRIVERS $BLOCK_DRIVERS isofs.o"
-CDROM_MODULES="$MISCMODULES $FSMODULES $SCSI_DRIVERS $CD_DRIVERS isofs.o"
-HD_MODULES="$MISCMODULES $FSMODULES $SCSI_DRIVERS $BLOCK_DRIVERS"
-PCMCIA_MODULES="$PCMCIA_DRIVERS $MISCMODULES $FSMODULES"
-LNX4WIN_MODULES="$FSMODULES loop.o isofs.o $SCSI_DRIVERS"
+CDROM_MODULES="  $FSMODULES $CD_DRIVERS"
+HD_MODULES="     $MISCMODULES $FSMODULES $SCSI_DRIVERS"
+PCMCIA_MODULES=" $MISCMODULES $FSMODULES $PCMCIA_DRIVERS 8390.o lockd.o nfs.o sunrpc.o"
+LNX4WIN_MODULES="$FSMODULES loop.o isofs.o"
+
+echo $NETWORK_DRIVERS
 
 PCMCIA_INSTALLMODULES="pcmcia_core.o tcic.o ds.o i82365.o"
 
@@ -56,10 +36,10 @@ install -d lnx4win/initrd/modules
 (cd modules ; 
     cp -f `find ../"$KERNEL_BOOT_PATH"/lib/modules/ -name "*.o"` .
     /sbin/depmod -m ../System.map -i -e *.o | grep ': ' | sed 's/\.o//g' > modules.dep
+    perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
     ls *.o              | ../build_archive modules 400000
     ls *.o              | cpio --quiet -H crc -o | bzip2 -9> modules.cpio.bz2
     ls $NETWORK_MODULES | cpio --quiet -H crc -o | gzip -9 > network_modules.cgz
-    ls $LOCAL_MODULES   | cpio --quiet -H crc -o | gzip -9 > local_modules.cgz	
     ls $CDROM_MODULES   | cpio --quiet -H crc -o | gzip -9 > cdrom_modules.cgz	
     ls $HD_MODULES      | cpio --quiet -H crc -o | gzip -9 > hd_modules.cgz     
     ls $PCMCIA_MODULES  | cpio --quiet -H crc -o | gzip -9 > pcmcia_modules.cgz

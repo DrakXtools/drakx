@@ -44,12 +44,12 @@ sub rooted {
 	if (ref $name) {
 	    unless (exec { $name->[0] } $name->[1], @args) {
 		log::l("exec of $name->[0] failed: $!");
-		exec('false') or exit(1);
+		c::_exit(1);
 	    }
 	} else {
 	    unless (exec $name, @args) {
 		log::l("exec of $name failed: $!");
-		exec('false') or exit(1);
+		c::_exit(1);
 	    }
 
 	}

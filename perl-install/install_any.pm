@@ -45,6 +45,9 @@ sub getFile($) {
     if ($::o->{method} && $::o->{method} eq "ftp") {
 	require 'ftp.pm';
 	*install_any::getFile = \&ftp::getFile;
+    } elsif ($::o->{method} && $::o->{method} eq "http") {
+	require 'http.pm';
+	*install_any::getFile = \&http::getFile;
     } else {
 	*install_any::getFile = sub($) {
 	    open getFile, "/tmp/rhimage/" . relGetFile($_[0]) or return;

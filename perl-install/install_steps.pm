@@ -147,7 +147,7 @@ sub ask_mntpoint_s {
 sub rebootNeeded($) {
     my ($o) = @_;
     log::l("Rebooting...");
-    exec "true";
+    c::_exit(0);
 }
 
 sub choosePartitionsToFormat($$) {

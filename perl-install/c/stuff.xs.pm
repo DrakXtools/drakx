@@ -106,6 +106,10 @@ lseek_sector(fd, sector, offset)
 void
 setsid()
 
+void
+_exit(status)
+  int status
+  
 int
 detectSMP()
 

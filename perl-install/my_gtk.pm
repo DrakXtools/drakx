@@ -469,9 +469,11 @@ sub _ask_from_list {
 	$list->moveto($_[0], 0, 0.5, 0);
     };
 
-    $list->signal_connect(button_press_event => 
-			  ref $title && !@okcancel ? $leave : sub { &$leave if $_[1]{type} =~ /^2/ }
-			 );
+
+    ref $title && !@okcancel ?
+      $list->signal_connect(button_release_event => $leave) :
+      $list->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
+
     $list->signal_connect(select_row => sub {
 	my ($w, $row, undef, $e) = @_;
 	$curr = $row;

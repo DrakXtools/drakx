@@ -30,4 +30,4 @@ $(BASE)/hdlist: $(RPMS)
 	./genhdlist $(ROOTDEST)
 
 clean: 
-	rm -rf *~ gendepslist rpm2header
+	rm -rf *~ gendepslist rpm2header ddcprobe/ddcxinfos */*.o

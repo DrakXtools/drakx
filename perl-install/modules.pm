@@ -1,7 +1,5 @@
 package modules;
 
-use diagnostics;
-use strict;
 use vars qw(%loaded %drivers);
 
 use common qw(:common :file);
@@ -31,16 +29,17 @@ my @drivers_by_category = (
   "ac3200" => "Ansel Communication AC3200",
   "acenic" => "AceNIC Gigabit Ethernet",
   "pcnet32" => "AMD PC/Net 32",
-  "apricot" => "Apricot 82596",
-  "atp" => "ATP",
-  "e2100" => "Cabletron E2100",
-  "tlan" => "Compaq Netelligent",
+#  "apricot" => "Apricot 82596",  # now builtin the kernel
+#  "atp" => "ATP", # builtin the kernel
+  "cs89x0" => "CS89x0",
   "de4x5" => "Digital 425,434,435,450,500",
   "depca" => "Digital DEPCA and EtherWORKS",
+  "e2100" => "Cabletron E2100",
   "ewrk3" => "Digital EtherWORKS 3",
   "tulip" => "Digital 21040 (Tulip)",
   "de600" => "D-Link DE-600 pocket adapter",
   "de620" => "D-Link DE-620 pocket adapter",
+  "dgrs" => "Digi International RightSwitch",
   "epic100" => "EPIC 100",
   "hp100" => "HP10/100VG any LAN ",
   "hp" => "HP LAN/AnyLan",
@@ -59,25 +58,43 @@ my @drivers_by_category = (
   "ni65" => "NI 6510",
   "rtl8139" => "RealTek RTL8129/8139",
   "es3210" => "Racal-Interlan ES3210",
-  "rcpci45" => "RedCreek PCI45 LAN",
+#  "rcpci" => "RedCreek Virtual Private Network", # TODO
   "epic100" => "SMC 83c170 EPIC/100",
   "sktr" => "Syskonnect Token ring adaptor",
   "smc9194" => "SMC 9000 series",
   "smc-ultra" => "SMC Ultra",
   "smc-ultra32" => "SMC Ultra 32",
-  "sunhme" => "Sun Happy Meal",
-  "tr" => "IBM TR Auto LANstreamer",
+#  "sunhme" => "Sun Happy Meal", # not there anymore?
+  "tlan" => "Compaq Netelligent",
   "via-rhine" => "VIA Rhine",
+#  "wavelan" => "AT&T WaveLAN & DEC RoamAbout DS", # TODO
   "wd" => "WD8003, WD8013 and compatible",
   "yellowfin" => "Symbios Yellowfin G-NIC",
+
+  "82596" => "82596",
+  "8390" => "8390",
+  "dmfe" => "dmfe",
+  "dummy" => "dummy",
+  "fmv18x" => "fmv18x",
+  "ibmtr" => "Token Ring Tropic",
+  "olympic" => "olympic",
+  "plip" => "PLIP (parallel port)",
+  "rl100a" => "rl100a",
+  "sb1000" => "sb1000",
+  "sbni" => "sbni",
+  "sis900" => "sis900",
+  "nfs" => "Network File System (nfs)",
+  "lockd" => "lockd",
+  "sunrpc" => "sunrpc",
 }],
 [ 'scsi', {
+  "DAC960" => "Mylex DAC960",
   "aha152x" => "Adaptec 152x",
   "aha1542" => "Adaptec 1542",
   "aha1740" => "Adaptec 1740",
   "aic7xxx" => "Adaptec 2740, 2840, 2940",
   "advansys" => "AdvanSys Adapters",
-  "dpt" => "Distributed Tech SmartCache/Raid I-IV Controller",
+#  "dpt" => "Distributed Tech SmartCache/Raid I-IV Controller", # not there anymore?
   "in2000" => "Always IN2000",
   "AM53C974" => "AMD SCSI",
   "megaraid" => "AMI MegaRAID",
@@ -97,8 +114,7 @@ my @drivers_by_category = (
   "NCR53c406a" => "NCR 53c406a",
   "53c7,8xx" => "NCR 53c7xx",
   "ncr53c8xx" => "NCR 53C8xx PCI",
-  "pci2000" => "Perceptive Solutions PCI-2000",
-  "pas16" => "Pro Audio Spectrum/Studio 16",
+#  "pci2000" => "Perceptive Solutions PCI-2000", # TODO
   "qlogicfas" => "Qlogic FAS",
   "qlogicisp" => "Qlogic ISP",
   "seagate" => "Seagate ST01/02",
@@ -107,12 +123,25 @@ my @drivers_by_category = (
   "u14-34f" => "UltraStor 14F/34F",
   "ultrastor" => "UltraStor 14F/24F/34F",
   "wd7000" => "Western Digital wd7000",
+
+  "a100u2w" => "a100u2w",
+  "atp870u" => "atp870u",
+  "dc395x_trm" => "dc395x_trm",
+  "ide-scsi" => "ide-scsi",
+  "imm" => "Iomega Zip (new driver)",
+  "psi240i" => "psi240i",
+  "qlogicfc" => "qlogicfc",
+  "sim710" => "sim710",
+  "st" => "st",
+  "sym53c416" => "sym53c416",
+  "tmscsim" => "tmscsim",
 }],
 [ 'cdrom', {
   "sbpcd" => "SoundBlaster/Panasonic",
   "aztcd" => "Aztech CD",
-  "bpcd" => "Backpack CDROM",
+#  "bpcd" => "Backpack CDROM", # not there anymore?
   "gscd" => "Goldstar R420",
+  "isp16" => "ISP16/MAD16/Mozart",
   "mcd" => "Mitsumi",
   "mcdx" => "Mitsumi (alternate)",
   "optcd" => "Optics Storage 8000",
@@ -120,6 +149,7 @@ my @drivers_by_category = (
   "sjcd" => "Sanyo",
   "cdu31a" => "Sony CDU-31A",
   "sonycd535" => "Sony CDU-5xx",
+  "isofs" => "iso9660",
 }],
 [ 'sound', {
   "alsa" => "ALSA sound module, many sound cards",
@@ -129,29 +159,90 @@ my @drivers_by_category = (
   "esssolo1" => "ESS Technology ES1969 Solo-1 Audiodrive",
   "maestro" => "Maestro",
   "nm256" => "Neomagic MagicMedia 256AV",
+  "pas16" => "Pro Audio Spectrum/Studio 16",
   "via82cxxx" => "VIA VT82C686_5",
   "sonicvibes" => "S3 SonicVibes",
 }],
+[ 'pcmcia', {
+  "ide_cs" => "ide_cs",
+  "fmvj18x_cs" => "fmvj18x_cs",
+  "fdomain_cs" => "fdomain_cs",
+  "netwave_cs" => "netwave_cs",
+  "serial_cs" => "serial_cs",
+  "wavelan_cs" => "wavelan_cs",
+  "pcnet_cs" => "pcnet_cs",
+  "aha152x_cs" => "aha152x_cs",
+  "xirc2ps_cs" => "xirc2ps_cs",
+  "3c574_cs" => "3c574_cs",
+  "qlogic_cs" => "qlogic_cs",
+  "nmclan_cs" => "nmclan_cs",
+  "ibmtr_cs" => "ibmtr_cs",
+  "dummy_cs" => "dummy_cs",
+  "memory_cs" => "memory_cs",
+  "ftl_cs" => "ftl_cs",
+  "smc91c92_cs" => "smc91c92_cs",
+  "3c589_cs" => "3c589_cs",
+  "parport_cs" => "parport_cs", 
+  "3c575_cb" => "3c575_cb",
+  "apa1480_cb" => "apa1480_cb",
+  "cb_enabler" => "cb_enabler",
+  "epic_cb" => "epic_cb",
+  "iflash2+_mtd" => "iflash2+_mtd",
+  "iflash2_mtd" => "iflash2_mtd",
+  "memory_cb" => "memory_cb",
+  "serial_cb" => "serial_cb",
+  "sram_mtd" => "sram_mtd",
+  "tulip_cb" => "tulip_cb",
+
+}],
+[ 'pcmcia_everywhere', {
+  "pcmcia_core" => "PCMCIA core support",
+  "tcic" => "PCMCIA tcic controller",
+  "ds" => "PCMCIA card support",
+  "i82365" => "PCMCIA i82365 controller",
+}],
+[ 'raid', {
+  "linear" => "linear",
+  "raid0" => "raid0",
+  "raid1" => "raid1",
+  "raid5" => "raid5",
+}],
+[ 'mouse', {
+  "busmouse" => "busmouse",
+  "msbusmouse" => "msbusmouse",
+  "serial" => "serial",
+  "qpmouse" => "qpmouse",
+  "atixlmouse" => "atixlmouse",
+
+  "usb-uhci", "USB (uhci)",
+  "usb-ohci", "USB (ohci)",
+  "usb-ohci-hcd", "USB (ohci-hcd)",
+}],
+[ 'fs', {
+  "smbfs" => "Windows SMB",
+  "fat" => "fat",
+  "msdos" => "msdos",
+  "romfs" => "romfs",
+  "sysv" => "sysv",
+  "ufs" => "ufs",
+  "umsdos" => "umsdos",
+  "vfat" => "vfat",
+}],
+[ 'other', {
+  "sg" => "sg",
+  "loop" => "Loopback device",
+  "lp" => "Parallel Printer",
+  "ide-floppy" => "ide-floppy",
+  "ide-tape" => "ide-tape",
+  "nbd" => "nbd",
+}],
 );
 
+my %scsi_raid; @scsi_raid{qw(DAC960 dpt megaraid cpqarray gdth ips ppa eata eata_pio eata_dma st imm)} = ();
+
 my @drivers_fields = qw(text type);
-%drivers = (
-  "plip" => [ "PLIP (parallel port)", 'net' ],
-  "ibmtr" => [ "Token Ring", 'net' ],
-  "DAC960" => [ "Mylex DAC960", 'scsi' ],
-  "pcmcia_core" => [ "PCMCIA core support", 'pcmcia' ],
-  "ds" => [ "PCMCIA card support", 'pcmcia' ],
-  "i82365" => [ "PCMCIA i82365 controller", 'pcmcia' ],
-  "tcic" => [ "PCMCIA tcic controller", 'pcmcia' ],
-  "isofs" => [ "iso9660", 'fs' ],
-  "nfs" => [ "Network File System (nfs)", 'fs' ],
-  "smbfs" => [ "Windows SMB", 'fs' ],
-  "loop" => [ "Loopback device", 'other' ],
-  "lp" => [ "Parallel Printer", 'other' ],
-  "usb-uhci", [ "USB (uhci)", 'serial_usb' ],
-  "usb-ohci", [ "USB (ohci)", 'serial_usb' ],
-  "usb-ohci-hcd", [ "USB (ohci-hcd)", 'serial_usb' ],
-);
+%drivers = ();
+
 foreach (@drivers_by_category) {
     my @l = @$_;
     my $l = pop @l;
@@ -164,6 +255,15 @@ while (my ($k, $v) = each %drivers) {
 
 
 1;
+
+sub module_of_type($) {
+    my ($type) = @_;
+    if ($type eq 'scsi&cdrom') {
+	grep { $drivers{$_}{type} =~ /^(scsi|cdrom)$/ && !exists $scsi_raid{$_} } keys %drivers;
+    } else {
+	grep { $drivers{$_}{type} eq $type } keys %drivers;
+    }
+}
 
 sub text_of_type($) {
     my ($type) = @_;

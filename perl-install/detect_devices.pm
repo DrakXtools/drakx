@@ -33,7 +33,7 @@ sub get {
     [ \&hasDAC960, \&getDAC960 ],
     [ \&hasCompaqSmartArray, \&getCompaqSmartArray ];
 }
-sub hds() { grep { $_->{type} eq 'hd' && !isRemovableDrive($_) } get(); }
+sub hds() { grep { $_->{type} eq 'hd' && ($::isStandalone || !isRemovableDrive($_)) } get(); }
 sub zips() { grep { $_->{type} eq 'hd' && isZipDrive($_) } get(); }
 #-sub jazzs() { grep { $_->{type} eq 'hd' && isJazDrive($_) } get(); }
 sub cdroms() { grep { $_->{type} eq 'cdrom' } get(); }

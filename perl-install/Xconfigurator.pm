@@ -299,7 +299,7 @@ sub testFinalConfig($;$) {
 	my @l = "X";
 	@l = ($o->{card}{prog}, "-xf86config", $tmpconfig) if $::testing;
 	chroot $prefix if $prefix;
-	exec @l, ":9" or exit 'true';
+	exec @l, ":9" or c::_exit(0);
     }
 
     do { sleep 1 } until c::Xtest(":9") || waitpid($pid, c::WNOHANG());

@@ -28,7 +28,7 @@ sub errorInStep {
     print "switch to console f2 for a shell\n";
     print "press to return to reboot\n";
     <STDIN>;
-    exec "true";
+    c::_exit(0);
 }
 
 1;

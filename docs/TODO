@@ -10,7 +10,15 @@ update devices.c from modules.pm
 
 diskdrake in text mode
 
+ability to add nfs/weird_fs entries in fstab
+
+language support: only choose the right locales and upmark the packages requiring it
+
 standalone applications for configuration
+
+in lilo.conf, put 
+disk=/dev/hdb
+  bios=0x80
 
 is configureNetworkNet needed with dhcp/bootp?
 
@@ -55,6 +63,7 @@ grub, chos
 (?)maybe remove commented lines in /usr/lib/perl5/... files
 
 (?)timezone using a picture (pb: how to delimit zones)
+the list is too big for USA
 
 (fpons)handle dat drives
 
@@ -81,15 +90,18 @@ diskdrake should warn if nb_ide_parts > 63, nb_scsi_parts > 15
 
 (?)remove the gray line surrounding the logo
 
-(?)rewrite mouseconfig in perl?
-
 (?)cleanup /etc/services & /etc/protocols
 
 # in 2.3.15 "Silicon Integrated Systems [SiS]|SiS900 10/100 Ethernet" is handled
 
 (?)strange: no scsi of type 'fd', only 'tape'
 
+XFree: handle by card options
+eg: SIS6326 needs "no_bitblt" "no_bltimage" and 24bpp instead of 32bpp
+
 compress hdlist?
+
+(done,fpons)rewrite mouseconfig in perl?
 
 (done,pix)kudzu or not in miscellaneous
 
