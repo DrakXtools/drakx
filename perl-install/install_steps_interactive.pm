@@ -764,7 +764,7 @@ Do you want to install the updates ?")),
 						  \@mirrors,
 						  $u->{mirror});
 	};
-	return if $@;
+	return if $@ || !$u->{mirror};
 
 	eval {
 	    if ($u->{mirror}) {
@@ -772,7 +772,7 @@ Do you want to install the updates ?")),
 		$update_medium = crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
 	    }
 	};
-    } while $@;
+    } while $@ || !$update_medium;
 
     if ($update_medium) {
 	if ($o->choosePackagesTree($o->{packages}, $update_medium)) {
