@@ -337,10 +337,10 @@ ONBOOT=yes
 #- install and setup the RPM packages
 
 my $rpms_to_install;
-my %rpm2file = (iptables => '/sbin/iptables',
-		 'dhcp-server' => '/usr/sbin/dhcpd',
-		 bind => '/usr/sbin/named',
-		 'caching-nameserver' => '/var/named/named.local');
+my %rpm2file = ('dhcp-server' => '/usr/sbin/dhcpd',
+		bind => '/usr/sbin/named',
+		shorewall => '/sbin/shorewall',
+		'caching-nameserver' => '/var/named/named.local');
 
 #- first: try to install all in one step
 my @needed_to_install = grep { !-e $rpm2file{$_} } keys %rpm2file;
