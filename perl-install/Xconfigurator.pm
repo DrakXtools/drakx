@@ -168,7 +168,7 @@ sub cardConfigurationAuto() {
 	else { push @cards, { server => "Sun24" } }
     }
     #- special case for dual head card using only one busid.
-    @cards = map { my $dup = $_->{identifier} =~ /MGA G450/ ? 2 : 1;
+    @cards = map { my $dup = $_->{identifier} =~ /MGA G[45]50/ ? 2 : 1;
 		   if ($dup > 1) {
 		       my @result;
 		       my $orig = $_;
