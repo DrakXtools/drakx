@@ -1,3 +1,96 @@
+2001/04/14  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: fixed to gzip synthesis file.
+	safe guard generation of synthesis file.
+	fixed umask on urpmi list file and generate synthesis file for each
+	hdlist.
+
+2001/04/14  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (configureX): fix link /etc/gtk (to
+	/mnt/etc/gtk) instead of /etc/gtkrc
+
+	* any.pm (autologin): spurious messages of chksession  -> dave nul
+
+	* interactive_newt.pm (exit): fix the exit code
+	(wait_message_endW): don't log "none stacked wait-messages" (as a lot of
+	them exist...)
+	(waitbox): remove spurious '0' in wait_messages
+
+	* lang.pm (load_po): s/!isStandalone/isInstall/ (mainly for XFdrake's
+	test)
+
+	* Xconfigurator.pm (use vars): fix stew sux
+	(testFinalConfig): nicer stderr handling
+
+	* interactive_gtk.pm (exit): fix the exit code
+
+2001/04/14  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* Xconfigurator_consts.pm, mouse.pm, Xconfigurator.pm: updates to X, mouse
+	setup for PPC
+
+2001/04/14  warly
+
+	* share/compssUsers, share/list, share/rpmsrate: add icons in compssUser
+	and list
+
+2001/04/13  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: net_cnx_up/down xritten in neuneu
+
+	* Xconfigurator.pm: corrected
+	updated
+	updated message
+
+	* standalone/draknet: message corrected
+
+2001/04/13  fabman
+
+	* share/po/es.po: synchro with EN
+
+2001/04/13  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem: avoid locking cdrom for oem (compssUsers file still
+	opened).
+
+2001/04/13  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/no.po: Updated Norwegian file
+	Updated po files
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/sr.po,
+	share/po/de.po, share/po/et.po, share/po/tr.po, share/po/eu.po,
+	share/po/az.po, share/po/ru.po, share/po/pt_BR.po, share/po/hr.po,
+	share/po/ko.po, share/po/nl.po, share/po/ja.po, share/po/wa.po,
+	share/po/sv.po, share/po/hu.po, share/po/zh_TW.Big5.po, share/po/it.po,
+	share/po/id.po, share/po/pl.po, share/po/fi.po,
+	share/po/zh_CN.GB2312.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/vi.po, share/po/br.po,
+	share/po/gl.po, share/po/ca.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/da.po, share/po/cs.po,
+	share/po/af.po: Updated po files
+
+2001/04/13  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm (main): reverse message
+
+	* install_steps_gtk.pm (installPackages): hide Details button sooner
+	(installPackages): do not show button "Details" when no advertising
+
+	* Xconfigurator_consts.pm: do not set XkbVariant "winkeys" for
+	ru(winkeys), it is redondant
+
+	* interactive_gtk.pm (ask_from_entries_refW): set_default_size width 250
+
+	* any.pm (ask_users): do not have an empty icon. better not ask for icon
+	if no icon
+
+2001/04/13  siegel
+
+	* share/po/de.po: updates
+
 2001/04/13  dam's  <damien@mandrakesoft.com>
 
 	* netconnect.pm: net_cnx_up/down xritten in neuneu
