@@ -953,7 +953,7 @@ sub new {
 	    }
 	    $::WizardWindow->show;
 	}
-	$::WizardWindow->set_title($title);
+	$::WizardWindow->set_title($title || '');
 	gtkpack($::WizardTable, $o->{window});
     }
     $o->{rwindow}->signal_connect(destroy => sub { $o->{destroyed} = 1 });
@@ -1019,7 +1019,7 @@ sub _create_window {
     my $w = Gtk2::Window->new('toplevel');
 
     $w->set_name("Title");
-    $w->set_title($title);
+    $w->set_title($title || '');
 
     if ($force_focus) {
 	(my $previous_current_window, $ugtk2::current_window) = ($ugtk2::current_window, $w);
