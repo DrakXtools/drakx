@@ -304,7 +304,7 @@ sub ask_fromW_real {
     };
 
     my ($ok, $cancel) = ($common->{ok}, $common->{cancel});
-    $cancel = $::isWizard ? N("Previous") : N("Cancel") if !defined $cancel && !defined $ok;
+    $cancel = $::isWizard && !$::Wizard_no_previous ? N("Previous") : N("Cancel") if !defined $cancel && !defined $ok;
     $ok ||= $::isWizard ? ($::Wizard_finished ? N("Finish") : N("Next")) : N("Ok");
 
     my @okcancel = grep { $_ } $ok, $cancel;
