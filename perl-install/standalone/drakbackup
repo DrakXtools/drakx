@@ -776,8 +776,16 @@ sub do_expect {
 		
 	eval { require Expect };
 	
-	$@ and $log_buff .= "perl-Expect not installed!", return(1); 	
-
+	if ($@ ne '') {
+		if ($mode eq 'sendkey') {
+			${$central_widget}->destroy();
+			check_pkg_needs();
+		} else { 
+			$log_buff .= "perl-Expect not installed!", 
+		}
+		return(1);
+	}
+	
 	#- for debugging set to 1
 	$Expect::Exp_Internal = 0;
 	#- for debugging set to 1
@@ -792,6 +800,9 @@ sub do_expect {
 	
 	my $exp_command;
 	my @send_files = ("$backup_key.pub");
+	
+	#- just bypass progress for sendkey for now
+	$interactive = 0 if ($mode eq "sendkey");
 	
 	@send_files = @file_list_to_send_by_ftp if ($mode eq "backup");
 	
@@ -852,6 +863,7 @@ sub do_expect {
 		$exp->hard_close();
 	}
 	$interactive and progress($pbar, 0.5, "Done...");
+	$interactive = 1 if ($mode eq "sendkey");
 }
 
 sub ssh_client {
@@ -1181,7 +1193,7 @@ sub build_backup_files {
     $no_critical_sys and $tar_cmd_sys .= "--exclude passwd --exclude fstab --exclude group --exclude mtab";
     $what_no_browser and $tar_cmd_user .= "--exclude NewCache --exclude Cache --exclude cache";
 	$nonroot_user and $tar_cmd_user .= " --exclude .drakbackup";
-	
+
     -d $save_path and @dir_content = all($save_path);
     grep (/^backup\_base\_sys/, @dir_content) and $base_sys_exist = 1;
 
@@ -1310,8 +1322,8 @@ sub build_backup_files {
 	if (!$filecount) {
 		show_warning("w", __("No changes to backup!"));
 		$interactive and cursor_norm();
-		$interactive and show_status();
-		return(1); 
+		$interactive and interactive_mode();
+		return(1);		
 	}
 		
 	#- should hit this block if running daemon mode only
@@ -1437,7 +1449,7 @@ sub check_pkg_needs {
 	if ($where_net) {
 		$extra_pkg = 'rsync' if ($net_proto eq 'rsync');
 		$extra_pkg = 'sitecopy wget' if ($net_proto eq 'webdav');
-		$extra_pkg = 'perl-Expect' if (($net_proto eq 'ssh') && ($use_expect));
+		$extra_pkg = 'perl-Expect' if (($net_proto eq 'ssh') && (($use_expect) || ($xfer_keys)));
 	}
 	$extra_pkg = 'mt-st' if ($where_tape);
 	if ($extra_pkg ne '') {
@@ -1771,7 +1783,7 @@ sub advanced_where_net_types {
 	   			0, gtkset_sensitive(my $check_use_expect = new Gtk::CheckButton(_("Use Expect for SSH")), ($where_net && ($net_proto eq 'ssh'))),
 	   			0, gtkset_sensitive(my $check_xfer_keys = new Gtk::CheckButton(_("Create/Transfer\nbackup keys for SSH")), ($where_net && ($net_proto eq 'ssh'))),
 				0, gtkset_sensitive(my $button_xfer_keys = new Gtk::Button(_("  Transfer  \nNow")), $xfer_keys),
-	   			0, gtkset_sensitive(my $check_user_keys = new Gtk::CheckButton(_("Keys in place already")), ($where_net && ($net_proto eq 'ssh'))),
+	   			0, gtkset_sensitive(my $check_user_keys = new Gtk::CheckButton(_("Other (not drakbackup)\nkeys in place already")), ($where_net && ($net_proto eq 'ssh'))),
 			),
 	 		0, new Gtk::HSeparator,
 	 		0, gtkpack_(new Gtk::HBox(0,10),
@@ -1888,7 +1900,7 @@ sub advanced_where_cd {
     $combo_where_cd_device->set_popdown_strings (sort keys %cd_devices) if (keys %cd_devices);  
 	
     my $combo_where_cd_time = new Gtk::Combo();
-    $combo_where_cd_time->set_popdown_strings ("650","700", "750", "800");    
+    $combo_where_cd_time->set_popdown_strings ("650 Mb","700 Mb", "750 Mb", "800 Mb");    
  
 	my $combo_where_cdrecord_device = new Gtk::Combo();
 	my @dev_codes;
@@ -1910,7 +1922,7 @@ sub advanced_where_cd {
 				0, gtkset_sensitive(gtkset_usize ($combo_where_cd_device, 200, 20), $where_cd),
 			),
 			0, gtkpack_(new Gtk::HBox(0,10),
-			0, gtkset_sensitive(new Gtk::Label(_("Please choose your CD/DVD media size")), $where_cd),
+			0, gtkset_sensitive(new Gtk::Label(_("Please choose your CD/DVD media size (Mb)")), $where_cd),
 				1, new Gtk::VBox(0, 5),
 				0, gtkset_sensitive(gtkset_usize ($combo_where_cd_time, 200, 20), $where_cd),
 			),
@@ -1994,7 +2006,7 @@ sub advanced_where_cd {
     $combo_where_cdrecord_device->entry->signal_connect('changed', sub { $cd_device = $combo_where_cdrecord_device->entry->get_text() });
     
 	$combo_where_cd_time->entry->set_text($cd_time);
-    $combo_where_cd_time->entry->signal_connect('changed', sub { $cd_time = $combo_where_cd_time->entry->get_text() });	       
+    $combo_where_cd_time->entry->signal_connect('changed', sub { $cd_time = $combo_where_cd_time->entry->get_text() });
 
 	#- this one drives changes in the other entries
 	#- still not getting quite the desired behavior, but combo box signals seem to be limited
