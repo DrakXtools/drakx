@@ -447,7 +447,7 @@ sub getVarsFromSh($) {
            )
            \s*$			# end of line
           /x or next;
-	$l{$v} = $val2 || $val;
+	$l{$v} = defined $val2 ? $val2 : $val;
     }
     %l;
 }
