@@ -669,8 +669,8 @@ sub del_intf() {
                                      }
                                  };
                                  $faillure = $@;
+                                 return "end";
                              },
-                             next => "end",
                             },
                  end => {
                          name => sub {
