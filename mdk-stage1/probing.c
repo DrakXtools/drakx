@@ -569,7 +569,7 @@ static void find_media(enum media_bus bus)
                                                 int major, minor, blocks;
                                                 memset(name, 0, sizeof(name));
                                                 sscanf(buf, " %d %d %d %s", &major, &minor, &blocks, name);
-                                                if (streq(name, tmp_name) && ((blocks == 1048575) || (blocks == 1440)))
+                                                if (streq(name, tmp_name) && tmp[count].type == DISK && ((blocks == 1048575) || (blocks == 1440)))
                                                         tmp[count].type = FLOPPY;
                                         }
                                         fclose(f);
