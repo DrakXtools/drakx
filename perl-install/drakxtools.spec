@@ -196,7 +196,11 @@ done
   o obsoletes/provides libdetect-lst, libdetect-lst-devel, detect, detect-lst
   o cache detect_devices::probeall(1) so that hw probe is run once
   o enhanced help
-  o 
+  o mice:
+	* s/nbuttons/Number of buttons/ 
+	* delete qw(MOUSETYPE XMOUSETYPE unsafe)
+  o eide devices: split up info field into vendor and model fields
+  o complete help
 
 * Mon Jul 08 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-1mdk
 - snapshot
