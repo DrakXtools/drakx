@@ -2,7 +2,7 @@
 #
 # harddrake		This scripts runs the harddrake hardware probe.
 #
-# chkconfig: 345 01 95
+# chkconfig: 345 05 95
 # description: 	This runs the hardware probe, and optionally configures \
 #		changed hardware.
 
