@@ -145,7 +145,7 @@ sub real_main {
       };
 
       my $is_hotplug_blacklisted = sub {
-          bool2yesno(member($module, qw(b44 forcedeth madwifi_pci)) ||
+          bool2yesno(member($module, qw(b44 forcedeth madwifi_pci via-velocity)) ||
                      find { $_->{device} eq $ntf_name } detect_devices::pcmcia_probe());
       };
 
