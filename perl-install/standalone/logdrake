@@ -413,6 +413,7 @@ sub alert_config() {
     my @installed_d = grep { -e "/etc/init.d/$_" } sort keys %$service;
     my %services_to_check = map { $_ => 1 } split(':', $options{SERVICES});
 
+    $::isWizard = 1;
     use wizards;
     my $w = wizards->new;
     my $mode;
