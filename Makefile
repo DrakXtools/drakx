@@ -38,7 +38,7 @@ UPLOAD_SPARC_DEST = /mnt/BIG/distrib/sparc
 .PHONY: dirs perl-install $(FLOPPY_IMG) install
 
 install: all.modules build rescue
-	for i in images misc Mandrake Mandrake/base Mandrake/share/advertising; do install -d $(ROOTDEST)/$$i ; done
+	for i in images misc Mandrake Mandrake/base Mandrake/share; do install -d $(ROOTDEST)/$$i ; done
 ifneq (ppc,$(ARCH))
 	for i in $(FRELEASE_BOOT_IMG); do cp -f $${i}* $(ROOTDEST)/images; done
 endif
