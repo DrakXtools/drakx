@@ -479,31 +479,28 @@ rpmdbTraverse(db, ...)
   void *db
   PREINIT:
   SV *callback = &PL_sv_undef;
-  int num, count;
+  int count;
   Header h;
+  rpmdbMatchIterator mi;
   CODE:
   if (items > 1) {
     callback = ST(1);
   }
   count = 0;
-  num = rpmdbFirstRecNum(db);
-  while (num>0) {
+  mi = rpmdbInitIterator(db, RPMDBI_PACKAGES, NULL, 0);
+  while (h = rpmdbNextIterator(mi)) {
     if (callback != &PL_sv_undef && SvROK(callback)) {
-      h = rpmdbGetRecord(db, num);
-      {
-        dSP;
-        ENTER;
-        SAVETMPS;
-        PUSHMARK(sp);
-        XPUSHs(sv_2mortal(newSViv((IV)(void *)h)));
-        PUTBACK;
-        perl_call_sv(callback, G_DISCARD | G_SCALAR);
-        FREETMPS;
-        LEAVE;
-      }
-      headerFree(h);
+      dSP;
+      ENTER;
+      SAVETMPS;
+      PUSHMARK(sp);
+      XPUSHs(sv_2mortal(newSViv((IV)(void *)h)));
+      PUTBACK;
+      perl_call_sv(callback, G_DISCARD | G_SCALAR);
+      FREETMPS;
+      LEAVE;
     }
-    num = rpmdbNextRecNum(db, num);
+    headerFree(h);
     ++count;
   }
   RETVAL = count;
@@ -516,41 +513,35 @@ rpmdbNameTraverse(db, name, ...)
   char *name
   PREINIT:
   SV *callback = &PL_sv_undef;
-  int i, rc;
+  int count;
   Header h;
+  rpmdbMatchIterator mi;
   rpmErrorCallBackType oldcb;
   dbiIndexSet matches;
   CODE:
   if (items > 2) {
     callback = ST(2);
   }
-  rc = rpmdbFindPackage(db, name, &matches);
-  if (rc == 0) {
-    RETVAL = matches.count;
-    if (callback != &PL_sv_undef && SvROK(callback) && matches.count > 0) {
-      oldcb = rpmErrorSetCallback(rpmError_callback_empty);
-      for (i = 0; i < matches.count; ++i) {
-        h = rpmdbGetRecord(db, matches.recs[i].recOffset);
-
-        {
-          dSP;
-          ENTER;
-          SAVETMPS;
-          PUSHMARK(sp);
-          XPUSHs(sv_2mortal(newSViv((IV)(void *)h)));
-          PUTBACK;
-          perl_call_sv(callback, G_DISCARD | G_SCALAR);
-          FREETMPS;
-          LEAVE;
-        }
-
-        headerFree(h);
-      }
-      rpmErrorSetCallback(oldcb);
+  count = 0;
+  mi = rpmdbInitIterator(db, RPMTAG_NAME, name, 0);
+  oldcb = rpmErrorSetCallback(rpmError_callback_empty);
+  while (h = rpmdbNextIterator(mi)) {
+    if (callback != &PL_sv_undef && SvROK(callback)) {
+      dSP;
+      ENTER;
+      SAVETMPS;
+      PUSHMARK(sp);
+      XPUSHs(sv_2mortal(newSViv((IV)(void *)h)));
+      PUTBACK;
+      perl_call_sv(callback, G_DISCARD | G_SCALAR);
+      FREETMPS;
+      LEAVE;
     }
-    dbiFreeIndexRecord(matches);
-  } else
-    RETVAL = 0;
+    headerFree(h);
+    ++count;
+  }
+  rpmErrorSetCallback(oldcb);
+  RETVAL = count;
   OUTPUT:
   RETVAL
 
