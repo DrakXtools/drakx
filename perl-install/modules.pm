@@ -258,7 +258,7 @@ sub write_conf {
          # Convert alsa driver from old naming system to new one (snd-card-XXX => snd-XXX)
          # Ensure correct upgrade for snd-via683 and snd-via8233 drivers
          s/snd-card/snd/g;
-         s/^snd-via686|snd-via8233/snd-via82xx/g;
+         s/snd-via686|snd-via8233/snd-via82xx/g;
 	} elsif ($conf{$alias}{$type} && $conf{$alias}{$type} ne $module) {
 	    my $v = join(' ', uniq(deref($conf{$alias}{$type})));
 	    $_ = "$type $alias $v\n";
