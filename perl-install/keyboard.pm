@@ -106,6 +106,7 @@ arch() =~ /^sparc/ ? (
  "ch_fr" => [ __("Swiss (German layout)"), "sg-latin1", "de_CH" ],
  "cz" => [ __("Czech"),          "cz-latin2",   "cs" ],
  "de" => [ __("German"),         "de-latin1",   "de" ],
+ "de_nodeadkeys" => [ __("German (no dead keys)"), "de-latin1-nodeadkeys", "de" ],
  "dk" => [ __("Danish"),         "dk-latin1",   "dk" ],
  "dvorak" => [ __("Dvorak"),     "pc-dvorak-latin1", "dvorak" ],
  "ee" => [ __("Estonian"),       "ee-latin9",   "ee" ],
