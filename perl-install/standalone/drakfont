@@ -610,7 +610,7 @@ sub file_ok_sel {
             $model->append_set(undef, [ 0 => $file_name ]);
         }
     }
-    $file_selection->response('ok')
+    $file_selection->response('ok');
 }
 
 sub list_remove() { #- TODO : multi-selection
@@ -622,7 +622,7 @@ sub list_remove() { #- TODO : multi-selection
     $treeStore->remove($iter);
 }
 
-sub exitdialog() { Gtk2->main_quit };
+sub exitdialog() { Gtk2->main_quit }
 
 sub dialog {
     my ($title, $widgets, $buttons, $o_main_loop) = @_;
@@ -720,7 +720,7 @@ sub uninstall() { #- TODO : add item to right list with gtksignal_connect
     $left_model->append_set(undef, [ 0 => $_ ]) foreach @installed_fonts_path;
 
     #- right part
-    $right_model = Gtk2::TreeStore->new("Glib::String");;
+    $right_model = Gtk2::TreeStore->new("Glib::String");
     $right_list = Gtk2::TreeView->new_with_model($right_model);
     $right_list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
     $right_list->set_headers_visible(0);
