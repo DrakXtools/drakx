@@ -40,6 +40,10 @@ my $in = 'interactive'->vnew('su', 'default');
 begin:
 $::isEmbedded and kill USR2, $::CCPID;
 
+my $imagefile = "/root/replay_install.img";
+-f $imagefile or $in->ask_okcancel(_("Error!"), 
+				   _("I can't find needed image file `%s'.", $imagefile), 1), quit_global($in, 0);
+
 $::direct or $in->ask_okcancel(_("Auto Install Configurator"),
 _("You are about to configure an Auto Install floppy. This feature is somewhat dangerous and must be used circumspectly.
 
@@ -70,10 +74,6 @@ $in->ask_from(_("Automatic Steps Configuration"),
 
 ${$_->[1]} eq 'manual' and push @manual_steps, $_->[0] foreach @all_steps;
 
-
-my $imagefile = "/root/replay_install.img";
--f $imagefile or $in->ask_okcancel(_("Error!"), 
-				   _("I can't find needed image file `%s'.", $imagefile), 1), quit_global($in, 0);
 my $mountdir = "/root/tmp/drakautoinst-mountdir"; -d $mountdir or mkdir $mountdir, 0755;
 my $floppy = detect_devices::floppy();
 my $dev = devices::make($floppy);
@@ -125,6 +125,9 @@ sub quit_global {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.6  2001/09/14 17:30:23  siegel
+#- Check exisence of "/root/replay_install.img" before anything else ...
+#-
 #- Revision 1.5  2001/08/29 21:58:24  gc
 #- quit_global
 #-
