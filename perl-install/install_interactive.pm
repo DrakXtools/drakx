@@ -122,10 +122,11 @@ the following error occured: %s", $@);
 		$part->{size} > $min_linux + $min_swap + $min_freewin + $min_win or die _("Your Windows partition is too fragmented, please run ``defrag'' first");
 		$o->ask_okcancel('', _("WARNING!
 
-DrakX will now resize your Windows partition. Be careful: this operation is
-dangerous. If you have not already done so, you should first exit the
-installation, run scandisk under Windows (and optionally run defrag), then
-restart the installation. You should also backup your data.
+DrakX will now resize your Windows partition. Be careful:
+this operation is dangerous. If you have not already done
+so, you should first exit the installation, run scandisk
+under Windows (and optionally run defrag), then restart the
+installation. You should also backup your data.
 When sure, press Ok.")) or return;
 
 		my $size = $part->{size};
