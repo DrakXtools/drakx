@@ -930,14 +930,14 @@ sub configurePrinter {
 sub setRootPassword {
     my ($o, $clicked) = @_;
     my $sup = $o->{superuser} ||= {};
-    my $nis = $o->{authentication}{NIS};
+    my $auth = ($o->{authentication}{LDAP} && __("LDAP") ||
+		$o->{authentication}{NIS} && __("NIS") ||
+		__("Local files"));
     $sup->{password2} ||= $sup->{password} ||= "";
 
     return if $o->{security} < 1 && !$clicked;
 
-    $::isInstall and $o->set_help("setRootPassword", 
-				  if_($::expert, "setRootPasswordMd5"),
-				  if_($::expert, "setRootPasswordNIS"));
+    $::isInstall and $o->set_help("setRootPassword", if_($::expert, "setRootPasswordAuth"));
 
     $o->ask_from_entries_refH_powered(
         {
@@ -954,14 +954,23 @@ sub setRootPassword {
 { label => _("Password"), val => \$sup->{password},  hidden => 1 },
 { label => _("Password (again)"), val => \$sup->{password2}, hidden => 1 },
   if_($::expert,
-{ label => _("Use NIS"), val => \$nis, type => 'bool', text => _("yellow pages") },
+{ label => _("Authentication"), val => \$auth, list => [ __("Local files"), __("LDAP"), __("NIS") ], format => \&translate },
   ),
 			 ]) or return;
 
-    if ($nis) { 
+    if ($auth eq __("LDAP")) {
+	$o->{authentication}{LDAP} ||= "localhost"; #- any better solution ?
+	$o->{netc}{LDAPDOMAIN} ||= join (',', map { "dc=$_" } split /\./, $o->{netc}{DOMAINNAME});
+	$o->ask_from_entries_refH('',
+				  _("Authentication LDAP"),
+				  [ { label => _("LDAP Base dn"), val => \$o->{netc}{LDAPDOMAIN} },
+				    { label => _("LDAP Server"), val => \$o->{authentication}{LDAP} },
+				  ]);
+    } else { $o->{authentication}{LDAP} = '' }
+    if ($auth eq __("NIS")) { 
 	$o->{authentication}{NIS} ||= 'broadcast';
 	$o->ask_from_entries_refH('',
-				  _("Authentification NIS"),
+				  _("Authentication NIS"),
 				  [ { label => _("NIS Domain"), val => \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
 				    { label => _("NIS Server"), val => \$o->{authentication}{NIS}, list => ["broadcast"], not_edit => 0 },
 				  ]); 
