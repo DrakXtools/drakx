@@ -334,7 +334,7 @@ sub set_autologin {
 
   if ($user) {
       my %l = getVarsFromSh("$prefix/etc/sysconfig/desktop");
-      $l{DESKTOP} = uc($desktop);
+      $l{DESKTOP} = $desktop;
       setVarsInSh("$prefix/etc/sysconfig/desktop", \%l);
       log::l("cat $prefix/etc/sysconfig/desktop ($desktop):\n", cat_("$prefix/etc/sysconfig/desktop"));
   }
