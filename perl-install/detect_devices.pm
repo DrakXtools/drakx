@@ -249,7 +249,16 @@ sub syslog {
 }
 
 sub hasSMP { c::detectSMP() }
-sub hasPCMCIA { -e "/proc/pcmcia" }
+sub hasPCMCIA { $::o->{pcmcia} } #- because /proc/pcmcia seems not to be present on 2.4 at least (or use /var/run/stab)
+
+#- try to detect a laptop, we assume pcmcia service is an indication of a laptop or
+#- the following regexp to match graphics card apparently only used for such systems.
+sub isLaptop {
+    hasPCMCIA() || (matching_desc('C&T.*655[45]\d') || matching_desc('C&T.*68554') ||
+		    matching_desc('Neomagic.*Magic(Media|Graph)') ||
+		    matching_desc('ViRGE.MX') || matching_desc('S3.*Savage.*[IM]X') ||
+		    matching_desc('ATI.*(Mobility|LT)'));
+}
 
 sub hasUltra66 {
     die "hasUltra66 deprecated";
