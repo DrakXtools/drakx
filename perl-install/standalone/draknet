@@ -355,13 +355,14 @@ sub apply {
     $netcnx->{type} eq 'modem' and any::pppConfig($in, $netcnx->{$netcnx->{type}}, '');
     $netcnx->{type} eq 'isdn_internal' and network::isdn::isdn_write_config_backend($netcnx->{$netcnx->{type}}, 1, $netc, $netcnx); #$light
     $netcnx->{type} eq 'isdn_external' and any::pppConfig($in, $netcnx->{$netcnx->{type}}, '');
-    $netcnx->{type} eq 'adsl_ppoe' and network::adsl::adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, 'pppoe', $netcnx);
-    $netcnx->{type} eq 'adsl_pptp' and network::adsl::adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, 'pptp', $netcnx);
+    my $a = $netcnx->{type};
+    $a =~ s/adsl_//;
+    $netcnx->{type} =~ 'adsl' and network::adsl::adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, $a, $netcnx);
 
     $netcnx->{dhcp_client} and $netc->{dhcp_client} = $netcnx->{dhcp_client};
     network::configureNetwork2($in, $prefix, $netc, $intf);
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
-    system("$prefix/etc/rc.d/init.d/network restart");
+    $netcnx->{type} !~ /adsl_p/ and system("$prefix/etc/rc.d/init.d/network restart");
     $button_apply->set_sensitive(0);
 }
 
