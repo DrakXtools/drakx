@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 9.2\n"
-"POT-Creation-Date: 2003-09-09 17:07+0200\n"
-"PO-Revision-Date: 2003-09-010 14:03+0800\n"
-"Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
+"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"PO-Revision-Date: 2003-09-21 12:52+0800\n"
+"Last-Translator: Shiyu Tang <shiyutang@netscape.net>\n"
 "Language-Team: Mandrake i18n Team <cooker-i18n@linux-mandrake.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,7 +65,7 @@ msgstr "请插入软盘："
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "DrakTermServ"
-msgstr "DrakTermServ"
+msgstr "Drak 终端服务"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -190,7 +190,7 @@ msgstr "以太网卡"
 msgid "If set, send the mail report to this email address else send it to root"
 msgstr "如果设置，就将邮件报告发送到这个邮箱地址，或者发给 root"
 
-#: ../../standalone/drakconnect:1
+#: ../../modules/interactive.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Parameters"
 msgstr "参数"
@@ -508,6 +508,11 @@ msgstr "总线"
 msgid "Iraq"
 msgstr "伊拉克"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "connecting to %s ..."
+msgstr "正在连接到 %s ..."
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
@@ -549,6 +554,19 @@ msgstr "搜索已安装的字体"
 #, c-format
 msgid "Default desktop"
 msgstr "默认桌面"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click on the button report.\n"
+"This will open  a web browser window on %s\n"
+" where you'll find a form to fill in.  The information displayed above will "
+"be \n"
+"transferred to that server."
+msgstr ""
+"要提交故障报告，单击报告按钮。\n"
+"它会打开一个浏览器窗口，进入 %s\n"
+"那里有一个表格需要您填写。上面显示的信息将被传送到服务器。"
 
 #: ../../lang.pm:1
 #, c-format
@@ -969,7 +987,7 @@ msgstr "强制无 APIC"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
-msgstr "这个密码太简单了(至少要有 %d 个字符)"
+msgstr "这个密码太简单了 (至少要有 %d 个字符)"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -1095,6 +1113,58 @@ msgstr ""
 "世界其它地区的协议\n"
 "没有 D-信道(专线)"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \tdrakTermServ will configure this file to work in conjunction with "
+"the images created\n"
+"        \tby mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to \n"
+"        \teach diskless client.\n"
+"\n"
+"        \tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \tputs its images."
+msgstr ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\t“Drak 终端服务”将配置此文件以便能与由 mkinitrd-net 创建的映像一起"
+"工作,\n"
+"        \t\t同时还有 /etc/dhcpd.conf, 这样可以为每个无盘工作站提供启动映"
+"像。\n"
+"\n"
+"        \t\t典型的 tftp 配置文件看起来与下面类似:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"        \t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \t\t与默认安装相比，这里的更改在于将 disable 标志置为“no”，并且将目录"
+"更改\n"
+"        \t\t为 /var/lib/tftpboot，这里正是 mkinitrd-net 存放映像的地点。"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Option %s must be a number!"
@@ -1197,7 +1267,7 @@ msgstr "文莱达鲁萨兰国"
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "Do you have any %s interfaces?"
-msgstr "您还有其它 %s 网卡吗?"
+msgstr "您还有其它 %s 网卡吗？"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -1735,15 +1805,15 @@ msgstr ""
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Use the %c and %c keys for selecting which entry is highlighted."
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Enable \"%s\" to execute the file"
-msgstr "允许“%s”执行此文件"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 2 Button Mouse"
 msgstr "普通两键鼠标"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr "允许“%s”执行此文件"
 
 #: ../../lvm.pm:1
 #, c-format
@@ -2116,7 +2186,7 @@ msgstr "删除 Windows(TM)"
 #: ../../services.pm:1
 #, c-format
 msgid "Starts the X Font Server (this is mandatory for XFree to run)."
-msgstr "启动 X 字体服务(X 窗口系统必须)。"
+msgstr "启动 X 字体服务 (X 窗口系统必须)。"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -2903,6 +2973,32 @@ msgstr "这个软件包是必需的，不能取消选定"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \tThe diskless client machines need either ROM images on the NIC, or "
+"a boot floppy\n"
+"        \tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these\n"
+"        \timages, based on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgstr ""
+"        - 创建 etherboot 启动软盘/光盘：\n"
+"        \t\t无法工作站需要在网卡上有 ROM 镜像，或者启动软盘或光盘来初始化启动"
+"过程。\n"
+"        \t\t“Drak 终端服务”能够帮助您根据客户端计算机的网卡生成这些镜像。\n"
+"        \t\t\n"
+"        \t\t为 3Com 3c509 手工创建一张启动软盘的例子：\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
 msgid "Etherboot ISO image is %s"
 msgstr "Etherboot ISO 镜像是 %s"
 
@@ -2911,7 +3007,7 @@ msgstr "Etherboot ISO 镜像是 %s"
 msgid ""
 "named (BIND) is a Domain Name Server (DNS) that is used to resolve host "
 "names to IP addresses."
-msgstr "named(BIND)是一个域名服务器(DNS)，用来把主机名解析成 IP 地址。"
+msgstr "named(BIND) 是一个域名服务器(DNS)，用来把主机名解析成 IP 地址。"
 
 #: ../../lang.pm:1
 #, c-format
@@ -3302,32 +3398,6 @@ msgstr "隐藏文件"
 msgid "Auto-detect printers connected to this machine"
 msgstr "自动探测这台机器连接的打印机"
 
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid ""
-"XawTV isn't installed!\n"
-"\n"
-"\n"
-"If you do have a TV card but DrakX has neither detected it (no bttv nor "
-"saa7134\n"
-"module in \"/etc/modules\") nor installed xawtv, please send the\n"
-"results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
-"with subject \"undetected TV card\".\n"
-"\n"
-"\n"
-"You can install it by typing \"urpmi xawtv\" as root, in a console."
-msgstr ""
-"XawTV 没有安装！\n"
-"\n"
-"\n"
-"如果您有电视卡但是 DrakX 即没有检测到它(bttv 或 saa7134 \n"
-"模块都不在“/etc/modules”中)也没有安装 xawtv，请运行\n"
-"“lspcidrake -v -f”并把结果发送给“install\\@mandrakesoft.com”\n"
-"标题写“undetected TV card”，\n"
-"\n"
-"\n"
-"您可以作为 root 从控制台运行“urpmi xawtv”来安装它。"
-
 #: ../../any.pm:1
 #, c-format
 msgid "Sorry, no floppy drive available"
@@ -3582,9 +3652,9 @@ msgid "Re-generating list of configured scanners ..."
 msgstr "正在重新生成已配置的扫描仪清单..."
 
 #: ../../modules/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Module configuration"
-msgstr "手工配置"
+msgstr "模块配置"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -3885,6 +3955,18 @@ msgstr "/etc/hosts.allow 和 /etc/hosts.deny 已经配置 - 无更改"
 msgid "Restore From Tape"
 msgstr "从磁带恢复"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click the report button, which will open your "
+"default browser\n"
+"to Anthill where you will be able to upload the above information as a bug "
+"report."
+msgstr ""
+"要提交故障报告，单击报告按钮。\n"
+"它会打开一个浏览器窗口，进入 Anthill，\n"
+"那里有一个表格需要您填写。上面显示的信息将被传送到服务器。"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Choose the profile to configure"
@@ -4039,7 +4121,7 @@ msgstr ""
 msgid "Need hostname, username and password!"
 msgstr "需要主机名、用户名和密码！"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Insert floppy"
 msgstr "插入软盘"
@@ -4178,10 +4260,21 @@ msgstr "已完成网络配置"
 msgid "Couldn't access the floppy!"
 msgstr "无法访问软盘！"
 
-#: ../../standalone/drakbug:1
+#: ../../install_messages.pm:1
 #, c-format
-msgid "connecting to Bugzilla wizard ..."
-msgstr "正在连接 Bugzilla 故障报告向导 ..."
+msgid ""
+"Warning: Free Software may not necessarily be patent free, and some Free\n"
+"Software included may be covered by patents in your country. For example, "
+"the\n"
+"MP3 decoders included may require a licence for further usage (see\n"
+"http://www.mp3licensing.com for more details). If you are unsure if a "
+"patent\n"
+"may be applicable to you, check your local laws."
+msgstr ""
+"警告：自由软件并不一定是没有专利的，一些自由软件可能包含一些在你的国家有专\n"
+"的成分。比方说，MP3 解码器在用作更多用途时可能需要许可证（请看 \n"
+"http://www.mp3licensing.com 以获得更多信息）。如果你对专利是否适用于你感到\n"
+"疑惑，请查看当地的法律。"
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -4364,6 +4457,11 @@ msgstr "接受"
 #, c-format
 msgid "Description"
 msgstr "描述"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter summary text."
+msgstr "请输入概括性的文字。"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -5290,7 +5388,7 @@ msgstr ""
 msgid "Right Control key"
 msgstr "右侧 Ctrl 键"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
@@ -6378,10 +6476,33 @@ msgstr "警告：IP 地址 %s 通常是被保留的！"
 msgid "busmouse"
 msgstr "busmouse"
 
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \tTo boot a kernel via etherboot, a special kernel/initrd image must "
+"be created.\n"
+"        \tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical \n"
+"        \tinterface to help manage/customize these images. To create the "
+"file \n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
+"        - 创建 Etherboot 的以太网启动映像：\n"
+"        \t\t要通过 etherboot 启动核心，必须创建特殊的 kernel/initrd 映像。\n"
+"        \t\tmkinitrd-net 能够在这一过程中发挥很大作用，而“Drak 终端服务”仅仅"
+"是\n"
+"        \t\t帮助管理/定制这些映像的图形化界面。要创建文件        \t\t/etc/"
+"dhcpd.conf.etherboot-pcimap.include，与 dhcpd.conf 相关联，\n"
+"        \t\t你需要至少为一个完整的内核创建以太网启动镜像。"
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Login (user name)"
-msgstr "帐户登录(用户名)"
+msgstr "帐户登录 (用户名)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -6757,34 +6878,6 @@ msgstr "要创建的配置文件名(新配置文件将会根据当前配置创�
 #, c-format
 msgid "Floppy"
 msgstr "软盘"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network."
-msgstr ""
-"        - 维护 /etc/exports：\n"
-"        \t\tClusternfs 允许将 root 文件系统导出到无盘工作站。drakTermServ\n"
-"        \t\t会设置正确的选项以便允许从无盘客户端匿名访问 root 文件系统。\n"
-"\n"
-"        \t\tClusternfs 的典型导出项为：\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              子网/掩码(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\t这里的子网/掩码应该与您的网络相同。"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7410,6 +7503,11 @@ msgstr "共享互联网连接"
 msgid "Choose file"
 msgstr "选择文件"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Summary: "
+msgstr "概要："
+
 #: ../../network/shorewall.pm:1
 #, c-format
 msgid ""
@@ -7483,6 +7581,22 @@ msgstr "法属南部大城市"
 #, c-format
 msgid "the vendor name of the processor"
 msgstr "处理器供应商"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain %s:\n"
+"        \tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t/etc/shadow needs to be duplicated in %s. drakTermServ\n"
+"        \thelps in this respect by adding or removing system users from this "
+"file."
+msgstr ""
+"        - 维护 %s:\n"
+"        \t\t对于那些想要从无盘工作站登录到系统的用户来说，他们所对应的登录"
+"项\n"
+"        \t\t除了要在 /etc/shadow 中之外，还应在 %s$\n"
+"        \t\t中存有副本。drakTermServ 能够帮助您完成这一过程。"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7792,6 +7906,11 @@ msgstr "恢复用户文件"
 #, c-format
 msgid "Encryption key for %s"
 msgstr "%s 的加密密钥"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Do you want to recover your system?"
+msgstr "您要恢复您的系统吗？"
 
 #: ../../services.pm:1
 #, c-format
@@ -8228,6 +8347,11 @@ msgstr "/配置 CUPS(_C)"
 msgid ", "
 msgstr ", "
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit lspci"
+msgstr "递交 lspci"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove selected host/network"
@@ -8459,6 +8583,11 @@ msgstr ""
 "\n"
 "对这块网卡配置您的局域网。"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit cpuinfo"
+msgstr "提交 CPU 信息"
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Minimal install"
@@ -8468,6 +8597,11 @@ msgstr "最小安装"
 #, c-format
 msgid "Ethiopia"
 msgstr "埃塞俄比亚"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "YES"
+msgstr "是"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -8793,15 +8927,6 @@ msgstr "安装类型"
 msgid "Printer \"%s\" on SMB/Windows server \"%s\""
 msgstr "打印机“%s”在 SMB/Windows 服务器打印机“%s”上"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"- Daemon (%s) include:\n"
-msgstr ""
-"\n"
-"- 守护进程(%s)包括：\n"
-
 #: ../../modules/parameters.pm:1
 #, c-format
 msgid "%d comma separated numbers"
@@ -9116,6 +9241,11 @@ msgstr "显示器水平刷新率：%s\n"
 #, c-format
 msgid "Path"
 msgstr "路径"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "NOT FOUND"
+msgstr "没有找到"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9693,24 +9823,6 @@ msgstr "重要"
 msgid "Total Progress"
 msgstr "总进展"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file."
-msgstr ""
-"        - 维护 /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\t对于那些想要从无盘工作站登录到系统的用户来说，他们所对应的登录"
-"项\n"
-"        \t\t除了要在 /etc/shadow 中之外，还应在 /etc/shadow\\$\\$CLIENTS\\$\\"
-"$\n"
-"        \t\t中存有副本。drakTermServ 能够帮助您完成这一过程。"
-
 #: ../../help.pm:1
 #, c-format
 msgid ""
@@ -9836,6 +9948,38 @@ msgstr "配置完成，您想要应用设置吗?"
 msgid "Use Incremental/Differential Backups  (do not replace old backups)"
 msgstr "使用增量/差异备份(不破坏老备份)"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP \n"
+"        \taddress and net boot images to the machine. drakTermServ helps "
+"create/remove \n"
+"        \tthese entries.\n"
+"\t\t\t\n"
+"        \t(PCI cards may omit the image - etherboot will request the correct "
+"image. \n"
+"\t\t\tYou should also consider that when etherboot looks for the images, it "
+"expects \n"
+"\t\t\tnames like boot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
+msgstr ""
+"        - 维护 /etc/dhcpd.conf:\n"
+"        \t\t要通过网络启动客户端，每个客户端都需要一个 dhcpd.conf 项，指派"
+"一\n"
+"        \t\t个 IP 地址和机器的网络启动映像。drakTermServ 能够帮助创建/删除"
+"这\n"
+"        \t\t些项。\n"
+"\t\t\t\n"
+"        \t\t(PCI 卡可以省略映像 - etherboot 会请求正确的映像。您应该还考"
+"虑        \t\tetherboot 何时查找映像，因此需要被命名为\n"
+"        \t\tboot-3c59x.nbi，而不是 boot-3c59x.2.4.19-16mdk.nbi)。\n"
+"\t\t\t \n"
+"        \t\t一个可以支持无盘工作站典型的 dhcpd.conf 应该是这样："
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
@@ -9951,6 +10095,13 @@ msgid ""
 "in number of characters"
 msgstr "文本框的 X 坐标，按字符数计算"
 
+#: ../../fsedit.pm:1
+#, c-format
+msgid ""
+"You may not be able to install lilo (since lilo doesn't handle a LV on "
+"multiple PVs)"
+msgstr "你可能不能安装 lilo（因为 lilo 不能处理多轨道的启动光盘）"
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Updating package selection"
@@ -9959,7 +10110,7 @@ msgstr "更新软件包选择"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
-msgstr "您想把回环(loopback)文件 %s 装载到哪里?"
+msgstr "您想把回环 (loopback) 文件 %s 装载到哪里？"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -10244,6 +10395,16 @@ msgstr "需要主机名"
 msgid "Unselect fonts installed"
 msgstr "不选已安装的文件"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Wheel"
+msgstr "滚轮"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit kernel version"
+msgstr "提交内核版本"
+
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
@@ -10264,11 +10425,6 @@ msgstr "取消"
 #, c-format
 msgid "Searching for configured scanners ..."
 msgstr "正在搜索已配置的扫描仪..."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Wheel"
-msgstr "滚轮"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -10337,6 +10493,11 @@ msgstr "默认"
 #, c-format
 msgid "Button 2 Emulation"
 msgstr "两键模拟"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter a package name."
+msgstr "请输入软件包名称。"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -10420,6 +10581,11 @@ msgstr ""
 "版权所有 (C) 2002 by MandrakeSoft \n"
 "\tStew Benedict sbenedict\\@mandrakesoft.com\n"
 "\n"
+
+#: ../../install_messages.pm:1
+#, c-format
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
+msgstr "http://www.mandrakelinux.com/en/92errata.php3"
 
 #: ../../lang.pm:1
 #, c-format
@@ -10579,6 +10745,59 @@ msgstr "文件系统加密密钥"
 #, c-format
 msgid "Gujarati"
 msgstr "Gujarati"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        While you can use a pool of IP addresses, rather than setup a "
+"specific entry for\n"
+"        a client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"        of client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"        Note: The '#type' entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"        or 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"        most software on the client machine. A special inittab, %s is\n"
+"        written for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"        modified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"        using xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"        subnet.\n"
+"\t\t\t\n"
+"        Note: The '#hdw_config' entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"        be 'true' or 'false'.  'true' enables root login at the client "
+"machine and allows local \n"
+"        hardware configuration of sound, mouse, and X, using the 'drak' "
+"tools. This is enabled \n"
+"        by creating separate config files associated with the client's IP "
+"address and creating \n"
+"        read/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"        with the configuration, you can remove root login privileges from "
+"the client.\n"
+"\t\t\t\n"
+"        Note: You must stop/start the server after adding or changing "
+"clients."
+msgstr ""
+"\t\t\t尽管您可以使用 IP 地址池，而不是为某个客户机设置特定的地址，但使用固"
+"定\n"
+"\t\t\t地址方案将会促进 ClusterNFS 所提供的指定客户端配置文件的功能。\n"
+"\t\t\t\n"
+"\t\t\t注意：“#type”项仅由 drakTermServ 使用。客户端可以是“thin”或\n"
+"\t\t\t“fat”。瘦客户端可以通过 xdmcp 运行服务器上的大多数软件，而胖客户端则\n"
+"\t\t\t在本机上运行大多数软件。有一个特殊的 inittab，\n"
+"\t\t\t%s 是专为瘦客户端写的。如果使用的是瘦\n"
+"\t\t\t客户端，为了启用 xdmcp，则需要修改系统配置文件 xdm-config，kdmrc 和 \n"
+"\t\t\tgdm.conf。考虑到使用 xdmcp 时可能出现的安全问题，需要修改 host.deny "
+"和 \n"
+"\t\t\thosts.allow 来限制仅可由本地子网访问。\n"
+"\t\t\t\n"
+"\t\t\t注意：在添加或更改客户端后您必须停止/启动服务器。"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -10889,60 +11108,6 @@ msgstr ""
 "\n"
 "\n"
 "http://www.linux-mandrake.com/zh_CN/hardware.php3"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating separate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login privileges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing clients."
-msgstr ""
-"\t\t\t尽管您可以使用 IP 地址池，而不是为某个客户机设置特定的地址，但使用固"
-"定\n"
-"\t\t\t地址方案将会促进 ClusterNFS 所提供的指定客户端配置文件的功能。\n"
-"\t\t\t\n"
-"\t\t\t注意：“#type”项仅由 drakTermServ 使用。客户端可以是“thin”或\n"
-"\t\t\t“fat”。瘦客户端可以通过 xdmcp 运行服务器上的大多数软件，而胖客户端则\n"
-"\t\t\t在本机上运行大多数软件。有一个特殊的 inittab，\n"
-"\t\t\t/etc/inittab\\$\\$IP=client_ip\\$\\$ 是专为瘦客户端写的。如果使用的是"
-"瘦\n"
-"\t\t\t客户端，为了启用 xdmcp，则需要修改系统配置文件 xdm-config，kdmrc 和 \n"
-"\t\t\tgdm.conf。考虑到使用 xdmcp 时可能出现的安全问题，需要修改 host.deny "
-"和 \n"
-"\t\t\thosts.allow 来限制仅可由本地子网访问。\n"
-"\t\t\t\n"
-"\t\t\t注意：在添加或更改客户端后您必须停止/启动服务器。"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -11352,36 +11517,14 @@ msgstr "/dev/hda"
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
 
-#: ../../standalone/drakTermServ:1
+#: ../../standalone/drakbug:1
 #, c-format
 msgid ""
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:"
+"Application Name\n"
+"or Full Path:"
 msgstr ""
-"        - 维护 /etc/dhcpd.conf:\n"
-"        \t\t要通过网络启动客户端，每个客户端都需要一个 dhcpd.conf 项，指派"
-"一\n"
-"        \t\t个 IP 地址和机器的网络启动映像。drakTermServ 能够帮助创建/删除"
-"这\n"
-"        \t\t些项。\n"
-"\t\t\t\n"
-"        \t\t(PCI 卡可以省略映像 - etherboot 会请求正确的映像。您应该还考"
-"虑        \t\tetherboot 何时查找映像，因此需要被命名为\n"
-"        \t\tboot-3c59x.nbi，而不是 boot-3c59x.2.4.19-16mdk.nbi)。\n"
-"\t\t\t \n"
-"        \t\t一个可以支持无盘工作站典型的 dhcpd.conf 应该是这样："
+"应用程序名\n"
+"或者完整路径："
 
 #: ../../services.pm:1
 #, c-format
@@ -11758,25 +11901,6 @@ msgstr "安装 %s 软件包出现问题"
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "当负载超过这个值时您会收到一个警报"
 
-#: ../../standalone/drakbug:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"To submit a bug report, click on the button report.\n"
-"This will open  a web browser window  on https://drakbug.mandrakesoft.com\n"
-" where you'll find a form to fill in.The information displayed above will "
-"be \n"
-"transferred to that server\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-"要提交故障报告，单击报告按钮。\n"
-"它会打开一个浏览器窗口，进入 https://drakbug.mandrakesoft.com\n"
-"那里有一个表格需要您填写。上面显示的信息将被传送到服务器。\n"
-"\n"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Add a scanner manually"
@@ -11902,7 +12026,7 @@ msgstr "安全管理员："
 msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr "设置 shell 超时。若设为 0，则为没有超时。"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr "固件复制成功"
@@ -12259,11 +12383,6 @@ msgstr ""
 "打印机“%s”已经存在，\n"
 "真的覆盖配置?"
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "No partition available"
-msgstr "没有可用的硬盘分区"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
@@ -12273,6 +12392,11 @@ msgstr "在下列主机上使用扫描仪："
 #, c-format
 msgid "Unselected All"
 msgstr "全不不选"
+
+#: ../../install_steps_interactive.pm:1 ../../network/tools.pm:1
+#, c-format
+msgid "No partition available"
+msgstr "没有可用的硬盘分区"
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -12314,7 +12438,7 @@ msgstr "建造整个内核 -->"
 msgid "modem"
 msgstr "调制解调器"
 
-#: ../../install_steps.pm:1
+#: ../../lang.pm:1
 #, c-format
 msgid "Welcome to %s"
 msgstr "欢迎来到 %s"
@@ -12395,6 +12519,15 @@ msgstr ""
 #, c-format
 msgid "Not the correct CD label. Disk is labelled %s."
 msgstr "光盘卷标不对。这张盘的卷标是 %s。"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"\n"
+"- Daemon, %s via:\n"
+msgstr ""
+"\n"
+"- 守护进程，%s 通过：\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -12532,38 +12665,6 @@ msgid ""
 msgstr ""
 "\n"
 "- 系统文件：\n"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured."
-msgstr ""
-"        - 每客户系统配置文件：\n"
-"        \t\t通过 clusternfs，每一个无盘工作站都能拥有一个属于自己的唯一的配置"
-"文件，\n"
-"        \t\t保存在服务器的 root 文件系统中。通过允许本地客户端的硬件配置的存"
-"在，\n"
-"\t\t\t\t客户端能够定制诸如 /etc/modules.conf，/etc/sysconfig/mouse，/etc/"
-"sysconfig/keyboard\n"
-"        \t\t在每客户端的基础之上。\n"
-"\n"
-"        注意：启用本地硬件配置就意味着启用了 root 登录到每一个客户端机器的\n"
-"        终端服务器这一特性。本地配置能够被关闭，但\n"
-"        保留配置文件，只要客户端机器被配置了的话。"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -13396,7 +13497,7 @@ msgstr "创造 Linux 的未来！"
 msgid "Local Printer"
 msgstr "本机打印机"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Floppy access error, unable to mount device %s"
 msgstr "软驱访问错误，无法装载 %s"
@@ -13499,58 +13600,6 @@ msgstr "鼠标设备：%s\n"
 #, c-format
 msgid "Reselect correct fonts"
 msgstr "重新选择正确字体"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs its images."
-msgstr ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ 将配置此文件以便能与由 mkinitrd-net 创建的映像一起工"
-"作,\n"
-"        \t\t同时还有 /etc/dhcpd.conf, 这样可以为每个无盘工作站提供启动映"
-"像。\n"
-"\n"
-"        \t\t典型的 tftp 配置文件看起来与下面类似:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"        \t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\t与默认安装相比，这里的更改在于将 disable 标志置为“no”，并且将目录"
-"更改\n"
-"        \t\t为 /var/lib/tftpboot，这里正是 mkinitrd-net 存放映像的地点。"
 
 #: ../../help.pm:1
 #, c-format
@@ -13860,6 +13909,11 @@ msgstr "五月"
 msgid "Yaboot mode"
 msgstr "Yaboot 模式"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic 3 Button Mouse"
+msgstr "普通 3 键鼠标"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "USA (cable)"
@@ -13873,11 +13927,6 @@ msgid ""
 msgstr ""
 "无法重新启动 LiLo！\n"
 "请在命令行以 root 身分运行“lilo”命令，以完成 LiLo 主题安装。"
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic 3 Button Mouse"
-msgstr "普通 3 键鼠标"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14216,32 +14265,6 @@ msgstr "同时按两个 Shift 键"
 msgid ""
 " --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr " --id <id_label>       - 装入引用 id_label 的 HTML 帮助页面\n"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
-msgstr ""
-"        - 创建 etherboot 软盘/光盘：\n"
-"        \t\t无法工作站需要在网卡上有 ROM 镜像，或者启动软盘或光盘来初始化启动"
-"过程。\n"
-"        \t\tdrakTermServ 能够帮助您根据客户端计算机的网卡生成这些镜像。\n"
-"        \t\t\n"
-"        \t\t为 3Com 3c509 手工创建一张启动软盘的例子：\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -14624,11 +14647,6 @@ msgstr "网域名称"
 msgid "Sharing of local printers"
 msgstr "共享本地打印机"
 
-#: ../../install_messages.pm:1
-#, c-format
-msgid "http://www.mandrakelinux.com/en/92errata.php3"
-msgstr "http://www.mandrakelinux.com/en/92errata.php3"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable libsafe if libsafe is found on the system."
@@ -14638,6 +14656,11 @@ msgstr "启用/禁用 libsafe，若在系统中发现 libsafe。"
 #, c-format
 msgid "Available printers"
 msgstr "可用打印机"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "NO"
+msgstr "否"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -14671,28 +14694,6 @@ msgstr ""
 "\n"
 "\n"
 "按“%s”继续。"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel."
-msgstr ""
-"        - 创建 Etherboot 的以太网启动映像：\n"
-"        \t\t要通过 etherboot 启动核心，必须创建特殊的 kernel/initrd 映像。\n"
-"        \t\tmkinitrd-net 能够在这一过程中发挥很大作用，而 drakTermServ 仅仅"
-"是\n"
-"        \t\t帮助管理/定制这些映像的图形化界面。要创建文件        \t\t/etc/"
-"dhcpd.conf.etherboot-pcimap.include，与 dhcpd.conf 相关联，\n"
-"        \t\t你需要至少为一个完整的内核创建以太网启动镜像。"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -15503,6 +15504,23 @@ msgstr "严重错误"
 msgid "Refresh the list"
 msgstr "刷新列表"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client %s:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tdrakTermServ will help create these files."
+msgstr ""
+"        - 每客户 %s:\n"
+"        \t\t通过 clusternfs，每个无盘工作站都可以在服务器的 root 文件系统中"
+"有\n"
+"        \t\t其自己唯一的配置文件。通过允许客户端硬件配置，drakTermServ 将会帮"
+"助您创建\n"
+"        \t\t这些文件。"
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -16074,12 +16092,17 @@ msgstr "通用"
 msgid "Cylinder %d to %d\n"
 msgstr "柱面 %d 到 %d\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "YOUR TEXT HERE"
+msgstr "在这儿输入你要写的文字"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "New profile..."
 msgstr "新建配置文件..."
 
-#: ../../standalone/draksec:1
+#: ../../modules/interactive.pm:1 ../../standalone/draksec:1
 #, c-format
 msgid "NONE"
 msgstr "无"
@@ -16650,6 +16673,11 @@ msgstr "其它多媒体设备"
 msgid "burner"
 msgstr "刻录机"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Bug Description/System Information"
+msgstr "错误描述系统信息"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid " (Default is all users)"
@@ -16780,6 +16808,38 @@ msgstr "拨号选项"
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
 msgstr "如果没有给出端口，默认将会使用 631。"
+
+#: ../../standalone/drakTermServ:1
+#, fuzzy, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be\n"
+"        turned back off, retaining the configuration files, once the client "
+"machine is configured."
+msgstr ""
+"        - 每客户系统配置文件：\n"
+"        \t通过 clusternfs，每一个无盘工作站都能拥有一个属于自己的唯一的配置文"
+"件，\n"
+"        \t保存在服务器的 root 文件系统中。通过允许本地客户端的硬件配置的存"
+"在，\n"
+"        \t客户端能够定制诸如 /etc/modules.conf，/etc/sysconfig/mouse，/etc/"
+"sysconfig/keyboard\n"
+"        \t在每客户端的基础之上。\n"
+"\n"
+"        注意：启用本地硬件配置就意味着启用了 root 登录到每一个客户端机器的\n"
+"        终端服务器这一特性。本地配置能够被关闭，但\n"
+"        保留配置文件，只要客户端机器被配置了的话。"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -16997,7 +17057,7 @@ msgstr ""
 "(并行口：/dev/lp0，/dev/lp1，...，相当于 LPT1:，LPT2:，...，第一个 USB 设备"
 "口：/dev/usb/lp0，第二个 USB 设备口：/dev/usb/lp1, ...)。"
 
-#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
+#: ../../network/netconnect.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Next"
 msgstr "下一步"
@@ -18286,7 +18346,7 @@ msgstr " adsl"
 msgid "format of floppies supported by the drive"
 msgstr "驱动器接受的软盘格式"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr "固件复制失败, 文件 %s 未找到"
@@ -18945,16 +19005,21 @@ msgid ""
 "Do you agree to lose all the partitions?\n"
 msgstr ""
 "我无法读取设备 %s 的分区表，这个分区表破坏得太严重了 :(\n"
-"我可以尝试清除坏分区(所有的数据将被清除！)，然后继续。\n"
+"我可以尝试清除坏分区 (所有的数据将被清除！)，然后继续。\n"
 "另外一个解决办法是禁止 DrakX 修改分区表。\n"
 "(错误是 %s)\n"
 "\n"
-"您同意清除所有分区吗?\n"
+"您同意清除所有分区吗？\n"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Find Package"
+msgstr "找到软件包"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Are you sure that you want to set up printing on this machine?\n"
-msgstr "您确定要在这台机器上设置打印吗?\n"
+msgstr "您确定要在这台机器上设置打印吗？\n"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -19065,6 +19130,34 @@ msgstr "局域网配置"
 #, c-format
 msgid "hard disk model"
 msgstr "硬盘型号"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \tdiskless clients.\n"
+"\n"
+"        \tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t/home\t\t\t\tSUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"        \tWith SUBNET/MASK being defined for your network."
+msgstr ""
+"        - 维护 /etc/exports：\n"
+"        \t\tClusternfs 允许将 root 文件系统导出到无盘工作站。drakTermServ\n"
+"        \t\t会设置正确的选项以便允许从无盘客户端匿名访问 root 文件系统。\n"
+"\n"
+"        \t\tClusternfs 的典型导出项为：\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t\t/home              子网/掩码(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\t这里的子网/掩码应该与您的网络相同。"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -19247,15 +19340,15 @@ msgstr "英国"
 msgid "Unmount"
 msgstr "卸载"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid "Uninstall Fonts"
-msgstr "卸载字体"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Microsoft Explorer"
 msgstr "Microsoft Explorer"
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid "Uninstall Fonts"
+msgstr "卸载字体"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -19630,23 +19723,6 @@ msgstr "正在运行“%s”..."
 #, c-format
 msgid "enable radio support"
 msgstr "启用无线电支持"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files."
-msgstr ""
-"        - 每客户 /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\t通过 clusternfs，每个无盘工作站都可以在服务器的 root 文件系统中"
-"有\n"
-"        \t\t其自己唯一的配置文件。通过允许客户端硬件配置，drakTermServ 将会帮"
-"助您创建\n"
-"        \t\t这些文件。"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -20063,6 +20139,30 @@ msgstr "NFS 服务器，SMB 服务器，代理服务器，SSH 服务器"
 #: ../../share/compssUsers:999
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "一组上网工具，用于收发邮件和新闻，或者浏览网站"
+
+#~ msgid ""
+#~ "XawTV isn't installed!\n"
+#~ "\n"
+#~ "\n"
+#~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
+#~ "saa7134\n"
+#~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
+#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
+#~ "with subject \"undetected TV card\".\n"
+#~ "\n"
+#~ "\n"
+#~ "You can install it by typing \"urpmi xawtv\" as root, in a console."
+#~ msgstr ""
+#~ "XawTV 没有安装！\n"
+#~ "\n"
+#~ "\n"
+#~ "如果您有电视卡但是 DrakX 即没有检测到它(bttv 或 saa7134 \n"
+#~ "模块都不在“/etc/modules”中)也没有安装 xawtv，请运行\n"
+#~ "“lspcidrake -v -f”并把结果发送给“install\\@mandrakesoft.com”\n"
+#~ "标题写“undetected TV card”，\n"
+#~ "\n"
+#~ "\n"
+#~ "您可以作为 root 从控制台运行“urpmi xawtv”来安装它。"
 
 #~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 #~ msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
