@@ -25,7 +25,6 @@ sub read_conf {
     +{ getVarsFromSh($file) };
 }
 
-
 sub read_resolv_conf_raw {
     my ($file) = @_;
     $file ||= "$::prefix/etc/resolv.conf";
@@ -147,7 +146,7 @@ sub write_resolv_conf {
 	#-res_init();		# reinit the resolver so DNS changes take affect
 	1;
     } else {
-	log::l("neither domain name nor dns server are configured");
+	log::explanations("neither domain name nor dns server are configured");
 	0;
     }
 }
@@ -175,6 +174,7 @@ sub write_interface_conf {
     $intf->{BOOTPROTO} =~ s/dhcp.*/dhcp/;
 
     setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR MII_NOT_SUPPORTED), if_($intf->{wireless_eth}, qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)), if_($intf->{BOOTPROTO} eq "dhcp", qw(DHCP_HOSTNAME NEEDHOSTNAME)));
+    log::explanations("written $intf->{DEVICE} interface configuration in $file");
 }
 
 sub add2hosts {
@@ -186,7 +186,7 @@ sub add2hosts {
     my $sub_hostname = $hostname =~ /(.*?)\./ ? " $1" : '';
     $l{$_} = "\t\t$hostname$sub_hostname" foreach grep { $_ } @ips;
 
-    log::l("writing host information to $file");
+    log::explanations("writing host information to $file");
     output($file, map { "$_$l{$_}\n" } keys %l);
 }
 
@@ -199,9 +199,9 @@ sub guessHostname {
 
     write_resolv_conf("$prefix/etc/resolv.conf", $netc);
 
-    my $name = gethostbyaddr(Socket::inet_aton($intf->{IPADDR}), Socket::AF_INET()) or log::l("reverse name lookup failed"), return 0;
+    my $name = gethostbyaddr(Socket::inet_aton($intf->{IPADDR}), Socket::AF_INET()) or log::explanations("reverse name lookup failed"), return 0;
 
-    log::l("reverse name lookup worked");
+    log::explanations("reverse name lookup worked");
 
     add2hash($netc, { HOSTNAME => $name });
     1;
@@ -214,14 +214,16 @@ sub addDefaultRoute {
 
 sub sethostname {
     my ($netc) = @_;
-    syscall_("sethostname", $netc->{HOSTNAME}, length $netc->{HOSTNAME}) or log::l("sethostname failed: $!");
+    my $text;
+    syscall_("sethostname", $netc->{HOSTNAME}, length $netc->{HOSTNAME}) ? ($text="set sethostname to $netc->{HOSTNAME}") : ($text="sethostname failed: $!");
+    log::explanations($text);
 }
 
 sub resolv($) {
     my ($name) = @_;
     is_ip($name) and return $name;
     my $a = join(".", unpack "C4", (gethostbyname $name)[4]);
-    #-log::l("resolved $name in $a");
+    #-log::explanations("resolved $name in $a");
     $a;
 }
 
@@ -510,7 +512,7 @@ sub easy_dhcp {
     #- only for a single network card
     (any { $_->[0] eq 'eth0' } @all_cards) && (every { $_->[0] ne 'eth1' } @all_cards) or return;
 
-    log::l("easy_dhcp: found eth0");
+    log::explanations("easy_dhcp: found eth0");
 
     network::ethernet::conf_network_card_backend($netc, $intf, 'dhcp', 'eth0');
 

@@ -220,7 +220,7 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
 sub isdn_detect {
     my ($isdn, $netc) = @_;
     if ($isdn->{id}) {
-  	log::l("found isdn card : $isdn->{description}; vendor : $isdn->{vendor}; id : $isdn->{id}; driver : $isdn->{driver}\n");
+  	log::explanations("found isdn card : $isdn->{description}; vendor : $isdn->{vendor}; id : $isdn->{id}; driver : $isdn->{driver}\n");
 	$isdn->{description} =~ s/\|/ -- /;
 	
    isdn_detect_step_0:

@@ -43,7 +43,7 @@ sub find_servers {
     my @servers;
     local $_;
     while (<$F>) {
-	my ($ip, $name) = /(\S+)\s+(\S+)/ or log::l("bad line in rpcinfo output"), next;
+	my ($ip, $name) = /(\S+)\s+(\S+)/ or log::explanations("bad line in rpcinfo output"), next;
 	$name =~ s/\Q.$domain//; 
 	$name =~ s/\.$//;
 	push @servers, { ip => $ip, if_($name ne '(unknown)', name => $name) };
