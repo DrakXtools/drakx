@@ -974,9 +974,16 @@ sub install($$$;$$) {
 		$SIG{SEGV} = sub { log::l("segmentation fault on transactions"); c::_exit(0) };
 		my @prev_pids = grep { /^\d+$/ } all("/proc");
 		my $db;
-		eval {
-		    close INPUT;
-		    select((select(OUTPUT),  $| = 1)[0]);
+		close INPUT;
+		select((select(OUTPUT), $| = 1)[0]);
+		if ($::testing) {
+		    my $size_typical = $nb ? int($total/$nb) : 0;
+		    foreach (@transToInstall) {
+			log::l("i would install ", $_->name, " now");
+			my $id = $_->id;
+			print OUTPUT "inst:$id:start:0:$size_typical\ninst:$id:progress:0:$size_typical\nclose:$id\n";
+		    }
+		} else { eval {
 		    my $db = URPM::DB::open($prefix, 1) or die "error opening RPM database: ", c::rpmErrorString();
 		    my $trans = $db->create_transaction($prefix);
 		    if ($retry_pkg) {
@@ -1019,7 +1026,7 @@ sub install($$$;$$) {
 		    install_any::getFile('XXX'); #- close still opened fd.
 
 		    @probs and die "installation of rpms failed:\n  ", join("\n  ", @probs);
-		}; $@ and print OUTPUT "die:$@\n";
+		}; $@ and print OUTPUT "die:$@\n"; }
 		close OUTPUT;
 
 		#- now search for child process which may be locking the cdrom, making it unable to be ejected.
@@ -1036,7 +1043,7 @@ sub install($$$;$$) {
 		if (@killpid) {
 		    foreach (@killpid) {
 			my $s = "$_: " . join(' ', split("\0", cat_("/proc/$_/cmdline")));
-			log::l("ERROR: DrakX should not have to clean the packages shit. Killing $s");
+			log::l("ERROR: DrakX should not have to clean the packages shit. Killing $s.");
 		    }
 		    kill 15, @killpid;
 		    sleep 2;
@@ -1230,7 +1237,7 @@ sub hashtree2list {
     while (@todo) {
 	my $e = shift @todo;
 	push @l, $e;
-	push @todo, @{$h->{$e}};
+	push @todo, @{$h->{$e} || []};
     }
     @l;
 }

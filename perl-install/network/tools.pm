@@ -222,6 +222,7 @@ sub disconnected {}
 
 
 sub write_initscript {
+    $::testing and return;
     output_with_perm("$prefix/etc/rc.d/init.d/internet", 0755,
 		     sprintf(<<'EOF', $connect_file, $connect_file, $disconnect_file, $disconnect_file));
 #!/bin/bash
