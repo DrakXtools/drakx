@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: panoramix VERSION\n"
-"POT-Creation-Date: 1999-08-26 12:10+0200\n"
+"POT-Creation-Date: 1999-08-27 14:32+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -824,14 +824,14 @@ msgid ""
 "manager\" of the item \"System\"\n"
 " of the \"Control panel\"."
 msgstr ""
-"Systemet fant ikke noen SCSI-kort. Hvis du har ett (eller flere) klikk "
-"på \"Ja\" og velg modul\n"
+"Systemet fant ikke noen SCSI-kort. Hvis du har ett (eller flere) klikk på "
+"\"Ja\" og velg modul\n"
 "som skal testes. I motsatt fall klikk på \"Nei\".\n"
 "\n"
-"Hvis du ikke vet om du har SCSI grensesnitt, se i dokumentasjonen levert "
-"med datamaskinen din\n"
-"eller hvis du bruker Microsoft Windows 95/98, se i \"Enhets- "
-"behandling\" under \"System\"\n"
+"Hvis du ikke vet om du har SCSI grensesnitt, se i dokumentasjonen levert med "
+"datamaskinen din\n"
+"eller hvis du bruker Microsoft Windows 95/98, se i \"Enhets- behandling\" "
+"under \"System\"\n"
 " i \"Kontrollpanelet\"."
 
 #: ../install2.pm_.c:49
@@ -854,15 +854,15 @@ msgstr ""
 "DiskDrake-håndboken\n"
 "før du begynner."
 
-#: ../install2.pm_.c:55
+#: ../install2.pm_.c:66
 msgid ""
 "The partitions lately created must be formatted so that the system can use "
 "them.\n"
-"You can also format partitions before created and used if you wish to remove "
-"all the data which\n"
-"contain. Note that it is not necessary to format the partitions created "
-"before used if they contain data to\n"
-"which you want to keep (typical cases: / home and / usr/local)."
+"You can also format partitions previously created and used if you wish to "
+"remove all the data they\n"
+"contain. Note that it is not necessary to format the partitions already "
+"created and in use\n"
+"if they contain data you want to keep (typical cases: /home and /usr/local)."
 msgstr ""
 "Partisjonene som er opprettet må formateres så systemet kan bruke dem.\n"
 "Du kan også formatere partisjoner er opprettet og brukt før hvis du ønsker å "
@@ -871,20 +871,20 @@ msgstr ""
 "hvis de inneholder data som\n"
 "du ønsker å beholde (typiske tilfeller: / home and / usr/local)."
 
-#: ../install2.pm_.c:60
+#: ../install2.pm_.c:71
 msgid ""
-"You now have the possibility of choosing the software which you wish to "
+"You now have the possibility of choosing the software that you wish to "
 "install.\n"
 "\n"
 "Please note that packages manage the dependences: that means that if you "
 "wish to install\n"
-"a software requiring the presence of another software, this last will be "
+"a software requiring the presence of another software, the latter will be "
 "automatically selected\n"
-"and that it will be impossible for you to install the first without "
-"installing the second.\n"
+"and that it will be impossible for you to install the former without "
+"installing the latter.\n"
 "\n"
-"Information on each category of packages and each one of enter of them are "
-"available in zone \"Infos\"\n"
+"Information on each category of packages and each one of them is available "
+"in the zone \"Infos\"\n"
 "located above buttons of confirmation/selection/deselection."
 msgstr ""
 "Du har nå muligheten til å velge programvaren som du ønsker å installere.\n"
@@ -900,7 +900,7 @@ msgstr ""
 "sone \"Infos\"\n"
 "funnet over knappene til bekreftelse/valg/fjern valg."
 
-#: ../install2.pm_.c:69
+#: ../install2.pm_.c:80
 msgid ""
 "Selected packages are now getting installed on your system. This operation "
 "take only a few minutes."
@@ -908,7 +908,8 @@ msgstr ""
 "Pakkene som er valgt blir nå installert på systemet ditt. Dette tar bare "
 "noen få minutter."
 
-#: ../install2.pm_.c:71
+#: ../install2.pm_.c:82
+#, fuzzy
 msgid ""
 "The system now requires an administrator password for your Linux system.\n"
 "This passwd is required of you by twice in order to being certain of its "
@@ -925,7 +926,7 @@ msgid ""
 "\n"
 "When you wish to connect yourselves on your Linux system as an "
 "administrator, the \"login\" \n"
-"is \"root\" and the \"passswrd\", this one which you now will indicate."
+"is \"root\" and the \"password\", this one which you now will indicate."
 msgstr ""
 "Systemet krever nå et administrator-passord for Linux-systemet ditt.\n"
 "Passordet må oppgis to ganger for å bekrefte at stavingen er riktig.\n"
@@ -943,7 +944,7 @@ msgstr ""
 "inn\" \n"
 "\"root\" og \"passord\", som du nå vil opprette."
 
-#: ../install2.pm_.c:82
+#: ../install2.pm_.c:93
 msgid ""
 "You can now authorize one or more people to be connected on your Linux "
 "system. Each one of\n"
@@ -972,11 +973,11 @@ msgstr ""
 "Det her høyt anbefalt at du logger deg på som vanlig bruker og kun bruker "
 "kontoen \"root\" når det er nødvendig."
 
-#: ../install2.pm_.c:91
+#: ../install2.pm_.c:102
 msgid ""
-"The system being now copied on your disk, he is now time to indicate to him "
+"The system being now copied on your disk, he is now time to indicate to it "
 "from where he will have to start.\n"
-"With less than you know exactly what you do, always choose \"First sector of "
+"Unless than you know exactly what you do, always choose \"First sector of "
 "drive\"."
 msgstr ""
 "Systemet blir nå kopiert til disken din, det er nå på tide å indikere hvor "
@@ -984,7 +985,7 @@ msgstr ""
 "Med mindre du vet akkurat hva du gjør, velg alltid \"Første sektor av "
 "disken\"."
 
-#: ../install2.pm_.c:95
+#: ../install2.pm_.c:106
 msgid ""
 "It is now time to configure the graphic server. First of all, choose your "
 "monitor. You have then\n"
@@ -997,87 +998,92 @@ msgstr ""
 "til å teste konfigurasjonen din og endre dine valg hvis disse valgene ikke "
 "passet for deg."
 
-#: ../install2.pm_.c:103
+#: ../install2.pm_.c:114
 msgid "Choose your language"
 msgstr "Velg språk"
 
-#: ../install2.pm_.c:104
+#: ../install2.pm_.c:115
 msgid "Choose install or upgrade"
 msgstr "Velg installering eller oppgradering"
 
-#: ../install2.pm_.c:105
+#: ../install2.pm_.c:116
 msgid "Select installation class"
 msgstr "Velg installasjonsklasse"
 
-#: ../install2.pm_.c:106
+#: ../install2.pm_.c:117
 msgid "Setup SCSI"
 msgstr "Oppsett SCSI"
 
-#: ../install2.pm_.c:107
+#: ../install2.pm_.c:118
 msgid "Setup filesystems"
 msgstr "Oppsett filsystemer"
 
-#: ../install2.pm_.c:108
+#: ../install2.pm_.c:119
 msgid "Format partitions"
 msgstr "Formater partisjoner"
 
-#: ../install2.pm_.c:109
+#: ../install2.pm_.c:120
 msgid "Choose packages to install"
 msgstr "Velg pakker for installering"
 
-#: ../install2.pm_.c:110
+#: ../install2.pm_.c:121
 msgid "Install system"
 msgstr "Installer systemet"
 
-#: ../install2.pm_.c:112
+#: ../install2.pm_.c:122
+#, fuzzy
+msgid "Configure mouse"
+msgstr "Konfigurer X"
+
+#: ../install2.pm_.c:123
 msgid "Configure networking"
 msgstr "Konfigurer nettverk"
 
-#: ../install2.pm_.c:116 ../install_steps_graphical.pm_.c:402
+#: ../install2.pm_.c:127 ../install_steps_graphical.pm_.c:404
 msgid "Set root password"
 msgstr "Sett root passord"
 
-#: ../install2.pm_.c:117
+#: ../install2.pm_.c:128
 msgid "Add a user"
 msgstr "Legg til en bruker"
 
-#: ../install2.pm_.c:118
+#: ../install2.pm_.c:129
 msgid "Create bootdisk"
 msgstr "Opprett oppstartdiskett"
 
-#: ../install2.pm_.c:119
+#: ../install2.pm_.c:130
 msgid "Install bootloader"
 msgstr "Installer oppstartslaster"
 
-#: ../install2.pm_.c:120
+#: ../install2.pm_.c:131
 msgid "Configure X"
 msgstr "Konfigurer X"
 
-#: ../install2.pm_.c:121
+#: ../install2.pm_.c:132
 msgid "Exit install"
 msgstr "Gå ut av installering"
 
-#: ../install2.pm_.c:126
+#: ../install2.pm_.c:137
 msgid "Help"
 msgstr "Hjelp"
 
-#: ../install2.pm_.c:135
+#: ../install2.pm_.c:146
 msgid "beginner"
 msgstr "nybegynner"
 
-#: ../install2.pm_.c:135
+#: ../install2.pm_.c:146
 msgid "developer"
 msgstr "utvikler"
 
-#: ../install2.pm_.c:135
+#: ../install2.pm_.c:146
 msgid "expert"
 msgstr "ekspert"
 
-#: ../install2.pm_.c:135
+#: ../install2.pm_.c:146
 msgid "server"
 msgstr "tjener"
 
-#: ../install2.pm_.c:219
+#: ../install2.pm_.c:230
 msgid ""
 "An error has occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
@@ -1085,7 +1091,7 @@ msgstr ""
 "En feil har oppstått - ingen gyldige enheter ble funnet for å opprette nye "
 "filsystemer. Vennligst sjekk maskinvaren din for årsaken til dette problemet"
 
-#: ../install2.pm_.c:240
+#: ../install2.pm_.c:251
 msgid "partitionning failed: no root filesystem"
 msgstr "partisjonering feilet: intet root filsystem"
 
@@ -1142,59 +1148,60 @@ msgstr "forbereder installasjon"
 msgid "installing package %s"
 msgstr "installerer pakke %s"
 
-#: ../install_steps_graphical.pm_.c:373
+#: ../install_steps_graphical.pm_.c:375
+#, c-format
 msgid "Configuring network device %s"
 msgstr "Konfigurerer nettverks-enhet %s"
 
-#: ../install_steps_graphical.pm_.c:381
+#: ../install_steps_graphical.pm_.c:383
 msgid "IP address:"
 msgstr "IP adresse:"
 
-#: ../install_steps_graphical.pm_.c:382
+#: ../install_steps_graphical.pm_.c:384
 msgid "Netmask:"
 msgstr "Nettmaske:"
 
-#: ../install_steps_graphical.pm_.c:406 ../install_steps_graphical.pm_.c:432
+#: ../install_steps_graphical.pm_.c:408 ../install_steps_graphical.pm_.c:434
 msgid "Password"
 msgstr "Passord"
 
-#: ../install_steps_graphical.pm_.c:407 ../install_steps_graphical.pm_.c:433
+#: ../install_steps_graphical.pm_.c:409 ../install_steps_graphical.pm_.c:435
 msgid "Password (again)"
 msgstr "Passord (igjen)"
 
-#: ../install_steps_graphical.pm_.c:415 ../install_steps_graphical.pm_.c:448
+#: ../install_steps_graphical.pm_.c:417 ../install_steps_graphical.pm_.c:450
 msgid "Please try again"
 msgstr "Vennligst prøv igjen"
 
-#: ../install_steps_graphical.pm_.c:415 ../install_steps_graphical.pm_.c:448
+#: ../install_steps_graphical.pm_.c:417 ../install_steps_graphical.pm_.c:450
 msgid "You must enter the same password"
 msgstr "Du må skrive inn det samme passordet"
 
-#: ../install_steps_graphical.pm_.c:416
+#: ../install_steps_graphical.pm_.c:418
 msgid "This password is too simple"
 msgstr "Dette passordet er for enkelt"
 
-#: ../install_steps_graphical.pm_.c:427
+#: ../install_steps_graphical.pm_.c:429
 msgid "Add user"
 msgstr "Legg til bruker"
 
-#: ../install_steps_graphical.pm_.c:431
+#: ../install_steps_graphical.pm_.c:433
 msgid "User name"
 msgstr "Brukernavn"
 
-#: ../install_steps_graphical.pm_.c:434
+#: ../install_steps_graphical.pm_.c:436
 msgid "Real name"
 msgstr "Virkelig navn"
 
-#: ../install_steps_graphical.pm_.c:435
+#: ../install_steps_graphical.pm_.c:437
 msgid "Shell"
 msgstr "Skall"
 
-#: ../install_steps_graphical.pm_.c:450
+#: ../install_steps_graphical.pm_.c:452
 msgid "Please give a user name"
 msgstr "Vennligst oppgi et brukernavn"
 
-#: ../install_steps_graphical.pm_.c:451
+#: ../install_steps_graphical.pm_.c:453
 msgid "The user name must contain only letters, numbers, `-' and `_'"
 msgstr "Brukernavnet kan kun inneholde bokstaver, tall, `-' og `_'"
 
@@ -1368,4 +1375,3 @@ msgstr "Dårlig backup-fil"
 #, c-format
 msgid "Error writing to file %s"
 msgstr "Feil ved skriving til fil %s"
-
