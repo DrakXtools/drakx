@@ -581,12 +581,129 @@ sub whatUsbport() {
     @res;
 }
 
+sub getSNMPModel {
+
+    my ($host) = @_;
+    my $manufacturer = "";
+    my $model = "";
+    my $description = "";
+    my $serialnumber = "";
+    
+    # SNMP request to auto-detect model
+    local *F;
+    open F, "scli -1 -c \"show printer info\" $host |" ||
+	return { CLASS => 'PRINTER',
+		 MODEL => _("Unknown Model"),
+		 MANUFACTURER => "",
+		 DESCRIPTION => "",
+		 SERIALNUMBER => ""
+		 };
+    while (my $l = <F>) {
+	chomp $l;
+	if (($l =~ /^\s*Manufacturer:\s*(\S.*)$/i) &&
+	    ($l =~ /^\s*Vendor:\s*(\S.*)$/i)) {
+	    $manufacturer = $1;
+	    $manufacturer =~ s/Hewlett[-\s_]Packard/HP/;
+	    $manufacturer =~ s/HEWLETT[-\s_]PACKARD/HP/;
+	} elsif ($l =~ /^\s*Model:\s*(\S.*)$/i) {
+	    $model = $1;
+	} elsif ($l =~ /^\s*Description:\s*(\S.*)$/i) {
+	    $description = $1;
+	    $description =~ s/Hewlett[-\s_]Packard/HP/;
+	    $description =~ s/HEWLETT[-\s_]PACKARD/HP/;
+	} elsif ($l =~ /^\s*Serial\s*Number:\s*(\S.*)$/i) {
+	    $serialnumber = $1;
+	}
+    }
+    close F;
+
+    # Was there a manufacturer and a model in the output?
+    # If not, get them from the description
+    if (($manufacturer eq "") || ($model eq "")) {
+	if ($description =~ /^\s*(\S*)\s+(\S.*)$/) {
+	    if ($manufacturer eq "") {
+		$manufacturer = $1;
+	    }
+	    if ($model eq "") {
+		$model = $2;
+	    }
+	}
+	# No description field? Make one out of manufacturer and model.
+    } elsif ($description eq "") {
+	$description = "$manufacturer $model";
+    }
+    
+    # We couldn't determine a model
+    if ($model eq "") {
+	$model = _("Unknown Model");
+    }
+    
+    # Remove trailing spaces
+    $manufacturer =~ s/(\S+)\s+$/$1/;
+    $model =~ s/(\S+)\s+$/$1/;
+    $description =~ s/(\S+)\s+$/$1/;
+    $serialnumber =~ s/(\S+)\s+$/$1/;
+
+    # Now we have all info for one printer
+    # Store this auto-detection result in the data structure
+    return  { CLASS => 'PRINTER',
+	      MODEL => $model,
+	      MANUFACTURER => $manufacturer,
+	      DESCRIPTION => $description,
+	      SERIALNUMBER => $serialnumber
+	      };
+}
+
+sub whatNetPrinter () {
+    my $i; 
+    my @res = ();
+
+    # Scan network for printers (one of ports 9100-9199 open)
+    local *F;
+    open F, "export LC_ALL=\"C\"; nmap -p 4010,4020,4030,5503,9100-9104 `route | egrep \"^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+\" | cut -f 1 -d \" \" | grep -v \"127\\.0\\.0\\.0\" | sed \"s/\\.0\$/\\.*/\"` |" ||
+	return @res;
+    my $host = "";
+    my $ip = "";
+    my $port = "";
+    my $modelinfo = "";
+    while (my $line = <F>) {
+	chomp $line;
+
+	# head line of the report of a host with the ports in question open
+	#if ($line =~ m/^\s*Interesting\s+ports\s+on\s+(\S*)\s*\(([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\)\s*:\s*$/i) {
+	if ($line =~ m/^\s*Interesting\s+ports\s+on\s+(\S*)\s*\((\S+)\)\s*:\s*$/i) {
+	    $host = $1;
+	    $ip = $2;
+	    if ($host eq "") {
+		$host = $ip;
+	    }
+	    $port = "";
+
+	    # SNMP request to auto-detect model
+	    $modelinfo = getSNMPModel ($ip);
+
+	} elsif ($line =~ m/^\s*(\d+)\/\S+\s+open\s+/i) {
+	    next if ($ip eq "") || (!defined($modelinfo));
+	    $port = $1;
+
+	    # Now we have all info for one printer
+	    # Store this auto-detection result in the data structure
+	    push @res, { port => "socket://$host:$port",
+			 val => $modelinfo
+			 };
+	}
+    }
+    close F;
+    @res;
+}
+
 #-CLASS:PRINTER;
 #-MODEL:HP LaserJet 1100;
 #-MANUFACTURER:Hewlett-Packard;
 #-DESCRIPTION:HP LaserJet 1100 Printer;
 #-COMMAND SET:MLC,PCL,PJL;
 sub whatPrinter() {
+    #my @res = (whatParport(), whatUsbport(), whatNetPrinter());
     my @res = (whatParport(), whatUsbport());
     grep { $_->{val}{CLASS} eq "PRINTER"} @res;
 }
