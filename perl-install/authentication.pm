@@ -264,7 +264,7 @@ sub set {
 	#- defer running smbpassword until the network is up
 
 	$when_network_is_up->(sub {
-	    run_program::rooted($::prefix, 'net', 'join', '-j', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
+	    run_program::rooted($::prefix, 'net', 'join', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
 	});
     } elsif ($kind eq 'SMBKRB') {
 	 $authentication->{AD_server} ||= 'ads.' . $authentication->{AD_domain};
