@@ -342,6 +342,9 @@ static void method_select_and_prepare(void)
 #endif
 	means[i] = NULL;
 
+	unlink(IMAGE_LOCATION);
+	rmdir(IMAGE_LOCATION); /* useful if we change the method, eg: we have automatic:cdrom but go back to nfs */
+
 	results = ask_from_list_auto("Please choose the installation method.", means, &choice, "method", means_auto);
 
 	if (results != RETURN_OK)
