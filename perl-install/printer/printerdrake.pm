@@ -4258,7 +4258,8 @@ sub add_printer {
 		return 1;
 	    }
 	};
-	wizard_close($in, 0) if $@ =~ /wizcancel/;
+	die if $@ && $@ !~ /^wizcancel/;
+	wizard_close($in, 0);
     } else {
 	$printer->{expert} or $printer->{TYPE} = "LOCAL";
 	wizard_welcome($printer, $in, $upNetwork) or return 0;
