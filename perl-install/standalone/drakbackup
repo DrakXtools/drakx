@@ -350,18 +350,18 @@ sub wizard {
 	          $text,
 		  [ 
 		    { label => _("System Files"), val => \$backup_sys, type => "bool", text => _("  all files on your /etc directory.") },
-		    { label => _("User Files"), val => \$$backup_user, type => "bool", text => _("  all files on your /etc directory.") },
+		    { label => _("User Files"), val => \$backup_user, type => "bool", text => _("  all user files on your system.") },
 #		    map { { label => _("$_"), val => \$user, type => "bool", text => _("all data contained on $_ directory") } } @user_list,
 		    ],
 		  );
     
-
-   my $r = $in->ask_from_list_(_("Backup Configuration wizard"),
+    undef $::Wizard_no_previous;
+    my $res1 = $in->ask_from_list_(_("Backup Configuration wizard"),
 				_("Please choose what you need to backup from your system"),
 				[ __("Hard Drive or NFS file system"), __("Mandrake Online"), __("on CDROM") ]) 
 	or quit_global($in, 0);
-     
-
+    
+    
     $in->ask_from(_("Backup Configuration wizard"),
   	          (_("Please choose when you want to backup") . "\n\n") .
 	          $text,
@@ -369,12 +369,12 @@ sub wizard {
 		    { label => _("Daemon"), val => \$backup_daemon, type => "bool", text => _(" Select it if you want that backup run as daemon") },
 		    ],
 		  );
-
+    
     $in->ask_from(_("Backup Configuration wizard"),
   	          (_("Please choose that you want to do") . "\n\n") .
 	          $text,
 		  [ 
-		    { label => _("Build Auto-Boot CDROM"), val => \$user, type => "bool", text => _("this option work only if you have a CDR-W CDROM drive\n This options allow you to restore all\n your system (data and your system variables)") },
+		    { label => _("Build Auto-Boot CDROM"), val => \$user, type => "bool", text => _("This option work only if you have\na CDR-W CDROM drive and allow\n you to restore all your system (data\n and your system variables)") },
 		    ],
 		  );
 } 
@@ -621,7 +621,12 @@ sub advanced {
     my $combo_when_space = new Gtk::Combo();
     $combo_when_space->set_popdown_strings (_("daily"),_("week"),_("month"),_("year"),);    
     my $box_when =  gtkpack_(new Gtk::VBox(0,1),
-			     0, new Gtk::Pixmap($pix_time_map, $pix_time_mask),
+				 0, gtkpack_(new Gtk::HBox(0,10),
+					     1, _(""),
+					     1, new Gtk::Pixmap($pix_time_map, $pix_time_mask),
+					     0, my $check_when_daemon  = new Gtk::CheckButton( _(" Use daemon")  ), 
+					     1, _(""),
+					     ),
 			     0, new Gtk::HSeparator,
 			     0, gtkpack_(new Gtk::HBox(0,10),
 					 1, _("Please choose interval \nspace between each backup "),
@@ -683,7 +688,7 @@ sub advanced {
 
 
 
-    foreach ([$check_what_sys, \$backup_sys], [$check_what_cvs, \$backup_sys_cvs], [$check_what_browser, \$what_no_browser], [$check_remember_pass, \$remember_pass], [$check_cdrw, \$cdrw], [$check_where_net_daemon, \$net_daemon], [$check_where_hd_daemon, \$hd_daemon], [$check_where_cd_daemon, \$cd_daemon], [$check_where_hd_quota,  \$hd_quota], [$check_where_hd, \$where_hd], [$check_where_cd, \$where_cd], [$check_where_net, \$where_net]) {
+    foreach ([$check_what_sys, \$backup_sys], [$check_what_cvs, \$backup_sys_cvs], [$check_what_browser, \$what_no_browser], [$check_remember_pass, \$remember_pass], [$check_cdrw, \$cdrw], [$check_where_net_daemon, \$net_daemon], [$check_where_hd_daemon, \$hd_daemon], [$check_where_cd_daemon, \$cd_daemon], [$check_where_hd_quota,  \$hd_quota], [$check_where_hd, \$where_hd], [$check_where_cd, \$where_cd], [$check_where_net, \$where_net], [$check_when_daemon, \$backup_daemon]) {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
 	}
