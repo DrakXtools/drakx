@@ -303,7 +303,7 @@ sub lnx4win_postinstall {
     run_program::run("rdev", $kernel, "/dev/loop7");
 
     unlink "$dir/size.txt";
-    unlink "$dir/swapfile.txt";
+    unlink "$dir/swapsize.txt";
 
     mkdir "$prefix/initrd", 0755;
     symlinkf "/initrd/dos", "$prefix/mnt/dos";
@@ -317,6 +317,31 @@ sub killCardServices {
 sub unlockCdroms {
     ioctl detect_devices::tryOpen($_->{device}), c::CDROM_LOCKDOOR(), 0
       foreach detect_devices::cdroms();
+}
+
+sub setupFB {
+    my ($o, $vga) = @_;
+
+    #- install needed packages for frame buffer.
+    pkgs::select($o->{packages}, $o->{packages}{'kernel-fb'});
+    pkgs::select($o->{packages}, $o->{packages}{'XFree86-FBDev'});
+    $o->installPackages($o->{packages});
+
+    #- update lilo entries with a new fb label. a bit hack.
+    my $root = $o->{bootloader}{entries}{'/boot/vmlinuz'}{root};
+    if (lilo::add_kernel($o->{prefix}, $o->{bootloader}, kernelVersion(), 'fb',
+			 {
+			  label => 'fb',
+			  root => $root,
+			  vga => $vga || 785, #- TODO default to 640x480x16.
+			 })) {
+	$o->{bootloader}{default} = 'fb';
+	lilo::install($o->{prefix}, $o->{bootloader});
+    } else {
+	#- should deactivate X11 in such case.
+	#- TODO
+	die _("I can't access the kernel with frame buffer support.\nDisabling automatic X11 startup if any.");
+    }
 }
 
 sub auto_inst_file() { "$::o->{prefix}/root/auto_inst.cfg.pl" }

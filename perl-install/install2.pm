@@ -40,11 +40,11 @@ my @installSteps = (
   selectInstallClass => [ __("Select installation class"), 1, 1 ],
   setupSCSI          => [ __("Setup SCSI"), 1, 0 ],
   selectPath         => [ __("Choose install or upgrade"), 0, 0, "selectInstallClass" ],
-  selectMouse        => [ __("Configure mouse"), 1, 1 ],
-  selectKeyboard     => [ __("Choose your keyboard"), 1, 1 ],
+  selectMouse        => [ __("Configure mouse"), 1, 1, "selectPath" ],
+  selectKeyboard     => [ __("Choose your keyboard"), 1, 1, "selectPath" ],
   partitionDisks     => [ __("Setup filesystems"), 1, 0, "selectPath" ],
   formatPartitions   => [ __("Format partitions"), 1, -1, "partitionDisks" ],
-  choosePackages     => [ __("Choose packages to install"), 1, 1, "selectInstallClass" ],
+  choosePackages     => [ __("Choose packages to install"), 1, 1, "selectPath" ],
   doInstallStep      => [ __("Install system"), 1, -1, ["formatPartitions", "selectPath"] ],
   miscellaneous      => [ __("Miscellaneous"), 1, 1 ],
   configureNetwork   => [ __("Configure networking"), 1, 1, "formatPartitions" ],
@@ -55,7 +55,7 @@ my @installSteps = (
   addUser            => [ __("Add a user"), 1, 1, "doInstallStep" ],
   createBootdisk     => [ __("Create a bootdisk"), 1, 0, "doInstallStep" ],
   setupBootloader    => [ __("Install bootloader"), 1, 1, "doInstallStep" ],
-  configureX         => [ __("Configure X"), 1, 0, "formatPartitions" ],
+  configureX         => [ __("Configure X"), 1, 0, ["formatPartitions", "setupBootloader"] ],
   exitInstall        => [ __("Exit install"), 0, 0 ],
 );
 
@@ -271,6 +271,8 @@ sub setupSCSI {
 sub partitionDisks {
     return
       $o->{fstab} = [
+	#{ device => "loop7", mntpoint => "/", type => 0x83, size => ((cat_('/dos/lnx4win/size.txt'))[0]*2048), isFormatted => 1, isMounted => 1, noMakeDevice => 1 },
+	#{ device => "/initrd/dos/lnx4win/swapfile", mntpoint => "swap", type => 0x82, isFormatted => 1, isMounted => 1, noMakeDevice => 1 },
 	{ device => "loop7", type => 0x83, mntpoint => "/", isFormatted => 1, isMounted => 1 },
 	{ device => "/initrd/dos/lnx4win/swapfile", type => 0x82, mntpoint => "swap", isFormatted => 1, isMounted => 1 },
       ] if $o->{lnx4win};

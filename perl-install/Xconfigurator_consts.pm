@@ -30,9 +30,53 @@ $resolution_wanted = "1024x768";
     'VGA16'     => "vga16",
     'FBDev'     => "fbdev",
 );
-@svgaservers = grep { $serversdriver{$_} eq "svga" } keys(%serversdriver);#-qw(SVGA Rage128);
-@accelservers = grep { $serversdriver{$_} eq "accel" } keys(%serversdriver);#-qw(S3 Mach32 Mach8 8514 P9000 AGX W32 Mach64 I128 S3V 3DLabs);
-@allservers = keys(%serversdriver);#-(qw(Mono VGA16), @svgaservers, @accelservers);
+@svgaservers = grep { $serversdriver{$_} eq "svga" } keys(%serversdriver);
+@accelservers = grep { $serversdriver{$_} eq "accel" } keys(%serversdriver);
+@allbutfbservers = grep { $serversdriver{$_} ne "fbdev" } keys(%serversdriver);
+@allservers = keys(%serversdriver);
+
+%vgamodes = (
+    '640xx8'       => 769,
+    '640x480x8'    => 769,
+    '800xx8'       => 771,
+    '800x600x8'    => 771,
+    '1024xx8'      => 773,
+    '1024x768x8'   => 773,
+    '1280xx8'      => 775,
+    '1280x1024x8'  => 775,
+    '640xx15'      => 784,
+    '640x480x15'   => 784,
+    '800xx15'      => 787,
+    '800x600x15'   => 787,
+    '1024xx15'     => 790,
+    '1024x768x15'  => 790,
+    '1280xx15'     => 793,
+    '1280x1024x15' => 793,
+    '640xx16'      => 785,
+    '640x480x16'   => 785,
+    '800xx16'      => 788,
+    '800x600x16'   => 788,
+    '1024xx16'     => 791,
+    '1024x768x16'  => 791,
+    '1280xx16'     => 794,
+    '1280x1024x16' => 794,
+    '640xx24'      => 786,
+    '640x480x24'   => 786,
+    '800xx24'      => 789,
+    '800x600x24'   => 789,
+    '1024xx24'     => 792,
+    '1024x768x24'  => 792,
+    '1280xx24'     => 795,
+    '1280x1024x24' => 795,
+    '640xx32'      => 786, #- just in case.
+    '640x480x32'   => 786,
+    '800xx32'      => 789,
+    '800x600x32'   => 789,
+    '1024xx32'     => 792,
+    '1024x768x32'  => 792,
+    '1280xx32'     => 795,
+    '1280x1024x32' => 795,
+);
 
 { #- @monitorSize2resolution
     my %l = my @l = ( #- size in inch

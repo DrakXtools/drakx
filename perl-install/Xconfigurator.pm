@@ -2,7 +2,7 @@ package Xconfigurator;
 
 use diagnostics;
 use strict;
-use vars qw($in $install $resolution_wanted @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allservers %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1 %lines %xkb_options);
+use vars qw($in $install $resolution_wanted @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1 %lines %xkb_options);
 
 use pci_probing::main;
 use common qw(:common :file :functional :system);
@@ -16,6 +16,8 @@ my $tmpconfig = "/tmp/Xconfig";
 my ($prefix, %cards, %monitors);
 
 1;
+
+sub getVGAMode($) { $_[0]->{card}{vga_mode} || $vgamodes{"640x480x16"}; }
 
 sub setVirtual($) {
     my $vt = '';
@@ -142,8 +144,8 @@ sub cardConfigurationAuto() {
     $card;
 }
 
-sub cardConfiguration(;$$) {
-    my ($card, $noauto) = @_;
+sub cardConfiguration(;$$$) {
+    my ($card, $noauto, $allowFB) = @_;
     $card ||= {};
 
     readCardsDB("$prefix/usr/X11R6/lib/X11/Cards");
@@ -152,8 +154,9 @@ sub cardConfiguration(;$$) {
     $card->{type} = undef unless $card->{server}; #- bad type as we can't find the server
 
     add2hash($card, cardConfigurationAuto()) unless $card->{server} || $noauto;
+    $card->{server} = 'FBDev' unless !$allowFB || $card->{server} || $noauto;
     $card->{type} = $in->ask_from_list('', _("Select a graphic card"), ['Unlisted', keys %cards]) unless $card->{type} || $card->{server};
-    $card->{type} = undef, $card->{server} = $in->ask_from_list('', _("Choose a X server"), \@allservers) if $card->{type} eq "Unlisted";
+    $card->{type} = undef, $card->{server} = $in->ask_from_list('', _("Choose a X server"), $allowFB ? \@allservers : \@allbutfbservers ) if $card->{type} eq "Unlisted";
 
     add2hash($card, $cards{$card->{type}}) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
@@ -178,16 +181,24 @@ sub cardConfiguration(;$$) {
     $card;
 }
 
-sub monitorConfiguration(;$) {
+sub monitorConfiguration(;$$) {
     my $monitor = shift || {};
+    my $useFB = shift || 0;
 
-    $monitor->{hsyncrange} && $monitor->{vsyncrange} and return $monitor;
+    if ($useFB) {
+	#- use smallest values for monitor configuration since FB is used,
+	#- BIOS initialize graphics, hopes X server will not refuses that.
+	$monitor->{hsyncrange} ||= $hsyncranges[0];
+	$monitor->{vsyncrange} ||= $vsyncranges[0];
+	add2hash($monitor, { type => "Unknown", vendor => "Unknown", model => "Unknown" });
+    } else {
+	$monitor->{hsyncrange} && $monitor->{vsyncrange} and return $monitor;
 
-    readMonitorsDB(-e "MonitorsDB" ? "MonitorsDB" : "/usr/share/MonitorsDB");
+	readMonitorsDB(-e "MonitorsDB" ? "MonitorsDB" : "/usr/share/MonitorsDB");
 
-    add2hash($monitor, { type => $in->ask_from_list('', _("Choose a monitor"), ['Unlisted', keys %monitors]) }) unless $monitor->{type};
-    if ($monitor->{type} eq 'Unlisted') {
-	$in->ask_from_entries_ref('',
+	add2hash($monitor, { type => $in->ask_from_list('', _("Choose a monitor"), ['Unlisted', keys %monitors]) }) unless $monitor->{type};
+	if ($monitor->{type} eq 'Unlisted') {
+	    $in->ask_from_entries_ref('',
 _("The two critical parameters are the vertical refresh rate, which is the rate
 at which the whole screen is refreshed, and most importantly the horizontal
 sync rate, which is the rate at which scanlines are displayed.
@@ -195,13 +206,14 @@ sync rate, which is the rate at which scanlines are displayed.
 It is VERY IMPORTANT that you do not specify a monitor type with a sync range
 that is beyond the capabilities of your monitor: you may damage your monitor.
  If in doubt, choose a conservative setting."),
-				  [ _("Horizontal refresh rate"), _("Vertical refresh rate") ],
-				  [ { val => \$monitor->{hsyncrange}, list => \@hsyncranges },
-				    { val => \$monitor->{vsyncrange}, list => \@vsyncranges }, ]);
-    } else {
-	add2hash($monitor, $monitors{$monitor->{type}});
+				      [ _("Horizontal refresh rate"), _("Vertical refresh rate") ],
+				      [ { val => \$monitor->{hsyncrange}, list => \@hsyncranges },
+					{ val => \$monitor->{vsyncrange}, list => \@vsyncranges }, ]);
+	} else {
+	    add2hash($monitor, $monitors{$monitor->{type}});
+	}
+	add2hash($monitor, { type => "Unknown", vendor => "Unknown", model => "Unknown" });
     }
-    add2hash($monitor, { type => "Unknown", vendor => "Unknown", model => "Unknown" });
 
     $monitor;
 }
@@ -245,6 +257,8 @@ sub testFinalConfig($;$) {
     rename("$prefix/etc/X11/XF86Config", "$prefix/etc/X11/XF86Config.old") || die "unable to make a backup of XF86Config" unless $::testing;
 
     write_XF86Config($o, $::testing ? $tmpconfig : "$prefix/etc/X11/XF86Config");
+
+    $o->{card}{server} eq 'FBDev' and return 1; #- avoid testing since untestable without reboot.
 
     $auto
       or $in->ask_yesorno(_("Test configuration"), _("Do you want to test the configuration?"), 1)
@@ -351,19 +365,25 @@ sub autoDefaultDepth($$) {
     my ($card, $wres_wanted) = @_;
     my ($best, $depth);
 
-    while (my ($d, $r) = each %{$card->{depth}}) {
-	$depth = $depth ? max($depth, $d) : $d;
+    if ($card->{server} eq 'FBDev') {
+	16; #- assume 16 bits depth for this case.
+    } else {
+	while (my ($d, $r) = each %{$card->{depth}}) {
+	    $depth = $depth ? max($depth, $d) : $d;
 
-	# try to have $resolution_wanted
-	$best = $best ? max($best, $d) : $d if $r->[0][0] >= $wres_wanted;
+	    # try to have $resolution_wanted
+	    $best = $best ? max($best, $d) : $d if $r->[0][0] >= $wres_wanted;
+	}
+	$best || $depth or die "no valid modes";
     }
-    $best || $depth or die "no valid modes";
 }
 
-sub autoDefaultResolution(;$) {
+sub autoDefaultResolution(;$$) {
     my $size = round(shift || 14); #- assume a small monitor (size is in inch)
-    $monitorSize2resolution[$size] ||
-      $monitorSize2resolution[$#monitorSize2resolution]; #- no corresponding resolution for this size. It means a big monitor, take biggest we have
+    my $useFB = shift || 0;
+    $useFB ? "800x600" : #- always take this one since 640x480x16 should allow 800x600x16 in all case (?).
+      $monitorSize2resolution[$size] ||
+	$monitorSize2resolution[$#monitorSize2resolution]; #- no corresponding resolution for this size. It means a big monitor, take biggest we have
 }
 
 sub chooseResolutions($$;$) {
@@ -491,7 +511,7 @@ Try with another video card or monitor")), return;
     #- remove unusable resolutions (based on the video memory size and the monitor hsync rate)
     keepOnlyLegalModes($card, $o->{monitor});
 
-    my $res = $o->{resolution_wanted} || autoDefaultResolution($o->{monitor}{size});
+    my $res = $o->{resolution_wanted} || autoDefaultResolution($o->{monitor}{size}, $o->{card}{server} eq 'FBdev');
     my $wres = first(split 'x', $res);
     my $depth = eval { $card->{default_depth} || autoDefaultDepth($card, $wres) };
 
@@ -509,6 +529,7 @@ Try with another video card or monitor")), return;
     #- otherwise there'll be a virtual screen :(
     $card->{depth}{$depth} = [ grep { $_->[0] <= $wres } @{$card->{depth}{$depth}} ];
     $card->{default_depth} = $depth;
+    $card->{vga_mode} = $vgamodes{"${wres}xx$depth"} || $vgamodes{"${res}x$depth"}; #- for use with frame buffer.
     1;
 }
 
@@ -610,7 +631,7 @@ Section "Screen"
 	print F "    DefaultColorDepth $defdepth\n" if $defdepth;
 
         foreach (ikeys(%$depths)) {
-	    my $m = join(" ", map { qq("$_->[0]x$_->[1]") } @{$depths->{$_}});
+	    my $m = $server ne "fbdev" ? join(" ", map { qq("$_->[0]x$_->[1]") } @{$depths->{$_}}) : qq("default");
 	    print F qq(    Subsection "Display"\n);
 	    print F qq(        Depth       $_\n) if $_;
 	    print F qq(        Modes       $m\n);
@@ -640,6 +661,8 @@ Section "Screen"
 	     { '' => [[ 640, 480 ], [ 800, 600 ]]});
 
     &$screen("accel", $O->{default_depth}, $O->{type}, $O->{depth});
+
+    &$screen("fbdev", $O->{default_depth}, $O->{type}, $O->{depth});
 }
 
 sub XF86check_link {
@@ -675,17 +698,17 @@ sub show_info {
 
 #- Program entry point.
 sub main {
-    my $o;
-    ($prefix, $o, $in, $install) = @_;
+    my ($o, $allowFB);
+    ($prefix, $o, $in, $allowFB, $install) = @_;
     $o ||= {};
 
     XF86check_link();
 
-    $o->{card} = cardConfiguration($o->{card}, $::noauto);
+    $o->{card} = cardConfiguration($o->{card}, $::noauto, $allowFB);
 
-    $o->{monitor} = monitorConfiguration($o->{monitor});
+    $o->{monitor} = monitorConfiguration($o->{monitor}, $o->{card}{server} eq 'FBDev');
 
-    my $ok = resolutionsConfiguration($o, auto => $::auto, noauto => $::noauto);
+    my $ok = resolutionsConfiguration($o, auto => ($::auto && $o->{card}{server} ne 'FBDev'), noauto => $::noauto);
 
     $ok &&= testFinalConfig($o, $::auto);
 
