@@ -21,9 +21,9 @@ my $authentication = {}; # TODO
 my $kind = authentication::to_kind($authentication);
 
 main:
-$in->ask_from('', '', 
+$in->ask_from(N("Authentication"), join('', map { authentication::kind2description($_) } authentication::kinds()),
 	      [ 
-	       { label => N("Authentication"), val => \$kind, type => 'list' , list => [ authentication::kinds() ], format => \&authentication::kind2description },
+	       { label => N("Authentication"), val => \$kind, type => 'list' , list => [ authentication::kinds() ] },
 	      ]) or $in->exit;
 
 authentication::ask_parameters($in, $netc, $authentication, $kind) or goto main;
