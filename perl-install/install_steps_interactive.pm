@@ -487,7 +487,7 @@ sub chooseGroups {
     my $base = pkgs::selectedSize($packages);
     foreach (@{$o->{compssUsersSorted}}) {
 	my $b = pkgs::saveSelected($packages);
-	$_->{values}[$ind] < $min_level or pkgs::selectPackage($packages, $_) foreach @{$compssUsers->{$_}};
+	pkgs::packageValues($_)->[$ind] < $min_level or pkgs::selectPackage($packages, $_) foreach @{$compssUsers->{$_}};
 	$size{$_} = pkgs::selectedSize($packages) - $base;
 	pkgs::restoreSelected($b);
     }
@@ -498,7 +498,7 @@ sub chooseGroups {
 
 	my $b = pkgs::saveSelected($packages);
 	foreach (@{$o->{compssUsersSorted}}) {
-	    $_->{values}[$ind] < $min_level or pkgs::selectPackage($packages, $_) foreach @{$compssUsers->{$_}};
+	    pkgs::packageValues($_)->[$ind] < $min_level or pkgs::selectPackage($packages, $_) foreach @{$compssUsers->{$_}};
 	}
 	$size{Miscellaneous} = $max_size - pkgs::selectedSize($packages);
 	pkgs::restoreSelected($b);
@@ -526,7 +526,7 @@ sub chooseGroups {
     unless ($o->{compssUsersChoice}{Miscellaneous}) {
 	my %l;
 	$l{@{$compssUsers->{$_}}} = () foreach @{$o->{compssUsersSorted}};
-	exists $l{$_} or pkgs::packageSetFlagSkip($_, 1) foreach values %{$packages->[0]};
+	exists $l{$_} or pkgs::packageSetFlagSkip($_, 1) foreach values %{$packages->{names}};
     }
     foreach (@{$o->{compssUsersSorted}}) {
 	$o->{compssUsersChoice}{$_} or pkgs::skipSetWithProvides($packages, @{$compssUsers->{$_}});
@@ -548,7 +548,7 @@ sub chooseCD {
 
     unless (grep { /ram3/ } cat_("/proc/mounts")) {
 	#- mono-cd in case of no ramdisk
-	undef $packages->[2]{$_}{selected} foreach @mediums;
+	undef $packages->{mediums}{$_}{selected} foreach @mediums;
 	log::l("low memory install, using single CD installation (as it is not ejectable)");
 	return;
     }
@@ -562,7 +562,7 @@ sub chooseCD {
     foreach (@mediums) {
 	my $descr = pkgs::mediumDescr($packages, $_);
 	exists $mediumsDescr{$descr} or push @mediumsDescr, $descr;
-	$mediumsDescr{$descr} ||= $packages->[2]{$_}{selected};
+	$mediumsDescr{$descr} ||= $packages->{mediums}{$_}{selected};
     }
 
     $o->set_help('chooseCD');
@@ -582,17 +582,11 @@ If only some CDs are missing, unselect them, then click Ok."),
     #- restore true selection of medium (which may have been grouped together)
     foreach (@mediums) {
 	my $descr = pkgs::mediumDescr($packages, $_);
-	$packages->[2]{$_}{selected} = $mediumsDescr{$descr};
+	$packages->{mediums}{$_}{selected} = $mediumsDescr{$descr};
     }
 }
 
 #------------------------------------------------------------------------------
-sub beforeInstallPackages($) {
-    my ($o) = @_;
-    my $w = $o->wait_message('', $o->{isUpgrade} ? _("Rebuilding package database") : _("Opening package database"));
-    $o->SUPER::beforeInstallPackages($o);
-}
-
 sub installPackages {
     my ($o, $packages) = @_;
     my ($current, $total) = 0;

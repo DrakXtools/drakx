@@ -67,7 +67,7 @@ sub changeMedium($$) {
 }
 sub relGetFile($) {
     local $_ = $_[0];
-    m|\.rpm$| ? "$::o->{packages}[2]{$asked_medium}{rpmsdir}/$_" : $_;
+    m|\.rpm$| ? "$::o->{packages}{mediums}{$asked_medium}{rpmsdir}/$_" : $_;
 }
 sub askChangeMedium($$) {
     my ($method, $medium) = @_;
@@ -81,7 +81,7 @@ sub errorOpeningFile($) {
     my ($file) = @_;
     $file eq 'XXX' and return; #- special case to force closing file after rpmlib transaction.
     $current_medium eq $asked_medium and log::l("errorOpeningFile $file"), return; #- nothing to do in such case.
-    $::o->{packages}[2]{$asked_medium}{selected} or return; #- not selected means no need for worying about.
+    $::o->{packages}{mediums}{$asked_medium}{selected} or return; #- not selected means no need for worying about.
 
     my $max = 32; #- always refuse after $max tries.
     if ($::o->{method} eq "cdrom") {
@@ -107,7 +107,7 @@ sub errorOpeningFile($) {
 
     #- keep in mind the asked medium has been refused on this way.
     #- this means it is no more selected.
-    $::o->{packages}[2]{$asked_medium}{selected} = undef;
+    $::o->{packages}{mediums}{$asked_medium}{selected} = undef;
 
     #- on cancel, we can expect the current medium to be undefined too,
     #- this enable remounting if selecting a package back.
@@ -186,7 +186,7 @@ sub setup_postinstall_rpms($$) {
     #- the complete filename of each package.
     #- copy the package files in the postinstall RPMS directory.
     #- last arg is default medium '' known as the CD#1.
-    pkgs::extractHeaders($prefix, \@toCopy, $packages->[2]{1});
+    pkgs::extractHeaders($prefix, \@toCopy, $packages->{mediums}{1});
     commands::cp((map { "/tmp/rhimage/" . relGetFile(pkgs::packageFile($_)) } @toCopy), $postinstall_rpms);
 }
 sub clean_postinstall_rpms() {
@@ -280,7 +280,7 @@ sub setPackages($) {
     my ($o) = @_;
 
     require pkgs;
-    if (!$o->{packages} || is_empty_hash_ref($o->{packages}[0])) {
+    if (!$o->{packages} || is_empty_hash_ref($o->{packages}{names})) {
 	$o->{packages} = pkgs::psUsingHdlists($o->{prefix}, $o->{method});
 
 	push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
@@ -318,7 +318,8 @@ sub setPackages($) {
 	push @l, "Glide_V5"  if detect_devices::matching_desc('Voodoo 5');
 	push @l, "Glide_V3-DRI"  if detect_devices::matching_desc('Voodoo (3|Banshee)');
 	push @l, "Device3Dfx", "XFree86-glide-module" if detect_devices::matching_desc('Voodoo');
-	$_->{values} = [ map { $_ + 50 } @{$_->{values}} ] foreach grep {$_} map { pkgs::packageByName($o->{packages}, $_) } @l;
+	pkgs::packageSetValues([ map { $_ + 50 } @{pkgs::packageValues($_)} ])
+	    foreach grep {$_} map { pkgs::packageByName($o->{packages}, $_) } @l;
 
 	#- add OpenGL games that are only usefull if a 3D accelerated card is installed.
 	my @gl = ();
@@ -339,7 +340,8 @@ sub setPackages($) {
 	    push @gl, "csmash", "gltron" if (!detect_devices::matching_desc('Rage 128')); #- does not work well on transparancy.
 	    push @gl, "spacecup", "chromium", "tuxracer", "openuniverse";
 	}
-	$_->{values} = [ map { $_ + 60 } @{$_->{values}} ] foreach grep {$_} map { pkgs::packageByName($o->{packages}, $_) } @gl;
+	pkgs::packageSetValues([ map { $_ + 60 } @{pkgs::packageValues($_)} ])
+	    foreach grep {$_} map { pkgs::packageByName($o->{packages}, $_) } @gl;
     } else {
 	#- this has to be done to make sure necessary files for urpmi are
 	#- present.
@@ -530,7 +532,7 @@ sub g_auto_install(;$) {
     my $o = {};
 
     require pkgs;
-    $o->{default_packages} = [ map { pkgs::packageName($_) } grep { pkgs::packageFlagSelected($_) && !pkgs::packageFlagBase($_) } values %{$::o->{packages}[0]} ];
+    $o->{default_packages} = [ map { pkgs::packageName($_) } grep { pkgs::packageFlagSelected($_) && !pkgs::packageFlagBase($_) } values %{$::o->{packages}{names}} ];
 
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];

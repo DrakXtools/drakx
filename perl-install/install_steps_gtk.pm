@@ -298,8 +298,8 @@ sub choosePackagesTree {
     };
     my $add_node = sub {
 	my ($leaf, $root) = @_;
-	my $p = $packages->[0]{$leaf} or return;
-	$p->{medium}{selected} or return;
+	my $p = pkgs::packageByName($packages,$leaf) or return;
+	pkgs::packageMedium($p)->{selected} or return;
 	my $node = $tree->insert_node($add_parent->($root), 
 				      undef, [$leaf, '', ''], 5, (undef) x 4, 1, 0);
 	my $pix = pkgs::packageFlagBase($p) ? $pix_base : pkgs::packageFlagSelected($p) ? $pix_selected : pkgs::packageFlagInstalled($p) ? $pix_installed : $pix_unselect;
@@ -315,12 +315,12 @@ sub choosePackagesTree {
 	my ($root, $leaf);
 	if ($flat = $_[0]) {
 	    $add_node->($_, undef) foreach sort grep { my $pkg = pkgs::packageByName($packages, $_);
-						       $pkg->{medium}{selected} } keys %{$packages->[0]};
+						       pkgs::packageMedium($pkg)->{selected} } keys %{$packages->{names}};
 	} else {
 	    foreach (sort @$compss) {
 		($root, $leaf) = m|(.*)/(.+)|o or ($root, $leaf) = ('', $_);
 		my $pkg = pkgs::packageByName($packages, $leaf);
-		$add_node->($leaf, $root) if $pkg->{medium}{selected};
+		$add_node->($leaf, $root) if pkgs::packageMedium($pkg)->{selected};
 	    }
 	}
 	$tree->thaw;
@@ -341,20 +341,22 @@ sub choosePackagesTree {
     $toolbar->set_style("icons");
 
     my $display_info = sub {
-	my $p = $packages->[0]{$curr} or return gtktext_insert($info_widget, '');
-	pkgs::extractHeaders($o->{prefix}, [$p], $p->{medium});
-	$p->{header} or die;
+	my $p = pkgs::packageByName($packages, $curr) or return gtktext_insert($info_widget, '');
+	pkgs::extractHeaders($o->{prefix}, [$p], pkgs::packageMedium($p));
+	pkgs::packageHeader($p) or die;
 
 	my $ind = $o->{compssListLevels}{$o->{installClass}};
-	my $imp = translate($pkgs::compssListDesc{pkgs::packageFlagBase($p) ? 100 : round_down($p->{values}[$ind], 10)});
+	my $imp = translate($pkgs::compssListDesc{pkgs::packageFlagBase($p) ?
+						  100 : round_down(pkgs::packageValues($p)->[$ind], 10)});
 
 	gtktext_insert($info_widget, $@ ? _("Bad package") :
 		       _("Name: %s\n", pkgs::packageName($p)) .
 		       _("Version: %s\n", pkgs::packageVersion($p) . '-' . pkgs::packageRelease($p)) .
 		       _("Size: %d KB\n", pkgs::packageSize($p) / 1024) .
 		       ($imp && _("Importance: %s\n", $imp)) . "\n" .
-		       formatLines(c::headerGetEntry($p->{header}, 'description')));
-	c::headerFree(delete $p->{header});
+		       formatLines(c::headerGetEntry(pkgs::packageHeader($p), 'description')));
+	pkgs::packageFreeHeader($p);
+	#c::headerFree(delete $p->[$HEADER]);
 	0;
     };
 
@@ -375,7 +377,7 @@ sub choosePackagesTree {
 	    #- check for size before trying to select.
 	    my $size = pkgs::selectedSize($packages);
 	    foreach (@l) {
-		my $p = $packages->[0]{$_};
+		my $p = $packages->{names}{$_};
 		pkgs::packageFlagSelected($p) or $size += pkgs::packageSize($p);
 	    }
 	    if (pkgs::correctSize($size / sqr(1024)) > install_any::getAvailableSpace($o) / sqr(1024)) {
@@ -388,7 +390,7 @@ sub choosePackagesTree {
 							      join(", ", common::truncate_list(20, sort @l)) ], 1) || return;
 	    $isSelection ? pkgs::selectPackage($packages, $_) : pkgs::unselectPackage($packages, $_) foreach @_;
 	    foreach (@l) {
-		my $p = $packages->[0]{$_};
+		my $p = $packages->{names}{$_};
 		my $pix = pkgs::packageFlagSelected($p) ? $pix_selected : $pix_unselect;
 		$tree->node_set_pixmap($_, 1, $pix->[0], $pix->[1]) foreach @{$ptree{$_}};
 	    }
@@ -397,7 +399,7 @@ sub choosePackagesTree {
 	    $o->ask_warn('', _("You can't select/unselect this package"));
 	}
     };
-    my $children = sub { map { $packages->[0]{($tree->node_get_pixtext($_, 0))[0]} } gtkctree_children($_[0]) };
+    my $children = sub { map { $packages->{names}{($tree->node_get_pixtext($_, 0))[0]} } gtkctree_children($_[0]) };
     my $toggle = sub {
 	if (ref $curr && ! $_[0]) {
 	    $tree->toggle_expansion($curr);
@@ -411,7 +413,7 @@ sub choosePackagesTree {
 		$select->(@p);
 		$parent = $curr;
 	    } else {
-		my $p = $packages->[0]{$curr} or return;
+		my $p = $packages->{names}{$curr} or return;
 		if (pkgs::packageFlagBase($p)) {
 		    return $o->ask_warn('', _("This is a mandatory package, it can't be unselected"));
 		} elsif (pkgs::packageFlagInstalled($p)) {
@@ -499,8 +501,9 @@ sub installPackages {
 	    my $name = $_[0];
 	    $msg->set(_("Installing package %s", $name));
 	    $current_total_size += $last_size;
-	    $last_size = c::headerGetEntry($o->{packages}[0]{$name}{header}, 'size');
-	    $text->set((split /\n/, c::headerGetEntry($o->{packages}[0]{$name}{header}, 'summary'))[0] || '');
+	    my $p = pkgs::packageByName($o->{packages}, $name);
+	    $last_size = c::headerGetEntry(pkgs::packageHeader($p), 'size');
+	    $text->set((split /\n/, c::headerGetEntry(pkgs::packageHeader($p), 'summary'))[0] || '');
 	    $w->flush;
 	} elsif ($m =~ /^Progressing installing package/) {
 	    $progress->update($_[2] ? $_[1] / $_[2] : 0);

@@ -244,7 +244,7 @@ sub setPackages {
     my ($o) = @_;
     install_any::setPackages($o);
     pkgs::selectPackagesAlreadyInstalled($o->{packages}, $o->{prefix})
-	if -r "$o->{prefix}/var/lib/rpm/packages.rpm" && !$o->{isUpgrade};
+	if !$o->{isUpgrade} && (-r "$o->{prefix}/var/lib/rpm/packages.rpm" || -r "$o->{prefix}/var/lib/rpm/Packages");
 }
 sub selectPackagesToUpgrade {
     my ($o) = @_;
@@ -263,7 +263,7 @@ sub choosePackages {
     my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
     log::l(sprintf "available size %dMB (corrected %dMB)", $available / sqr(1024), $availableCorrected / sqr(1024));
 
-    foreach (values %{$packages->[0]}) {
+    foreach (values %{$packages->{names}}) {
 	pkgs::packageSetFlagSkip($_, 0);
     }
 
@@ -299,7 +299,7 @@ sub beforeInstallPackages {
     network::add2hosts("$o->{prefix}/etc/hosts", "localhost.localdomain", "127.0.0.1");
 
     require pkgs;
-    pkgs::init_db($o->{prefix}, $o->{isUpgrade});
+    pkgs::init_db($o->{prefix});
 }
 
 sub pkg_install {
@@ -363,7 +363,7 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 
     my $time = time;
     $ENV{DURING_INSTALL} = 1;
-    pkgs::install($o->{prefix}, $o->{isUpgrade}, \@toInstall, $packages->[1], $packages->[2]);
+    pkgs::install($o->{prefix}, $o->{isUpgrade}, \@toInstall, $packages->{depslist}, $packages->{mediums});
     delete $ENV{DURING_INSTALL};
     run_program::rooted($o->{prefix}, 'ldconfig') or die "ldconfig failed!" unless $::g_auto_install;
     log::l("Install took: ", formatTimeRaw(time - $time));
@@ -440,7 +440,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     if ($pkg && pkgs::packageSelectedOrInstalled($pkg)) {
 	install_any::install_urpmi($o->{prefix}, 
 				   $::oem ? 'cdrom' : $o->{method}, #- HACK
-				   $o->{packages}[2]);
+				   $o->{packages}{mediums});
     }
     if (my $charset = lang::charset($o->{lang}, $o->{prefix})) {
 	eval { update_userkderc("$o->{prefix}/usr/share/config/kdeglobals", 'Locale', Charset => $charset) };
