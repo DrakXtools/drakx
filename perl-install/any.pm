@@ -202,24 +202,24 @@ sub setupBootloader {
 
     while ($::expert || $more > 1) {
 	$in->set_help(arch() =~ /sparc/ ? 'setupSILOAddEntry' : arch() =~ /ppc/ ? 'setupYabootAddEntry' : 'setupBootloaderAddEntry') unless $::isStandalone;
-	my $c;
-	$in->ask_from_entries_refH_powered( 
+	my ($c, $e);
+	eval { $in->ask_from_entries_refH_powered( 
 		{
 		 messages => 
 _("Here are the different entries.
 You can add some more or change the existing ones."),
 		 ok => '',
 },
-		[ { val => \$c, format => sub {
+		[ { val => \$e, format => sub {
 		    my ($e) = @_;
 		    ref $e ? 
 		      "$e->{label} ($e->{kernel_or_dev})" . ($b->{default} eq $e->{label} && "  *") : 
 		      translate($e);
-		}, list => [ @{$b->{entries}}, __("Add"), __("Done") ] } ]
-	);
-	$c eq "Done" and last;
-
-	my ($e);
+		}, list => [ @{$b->{entries}} ] },
+		  (map { my $s = $_; { val => translate($_), clicked => sub { $c = $s; die } } } (__("Modify"), __("Add"), __("Done"))),
+		]
+	) };
+	!$c || $c eq "Done" and last;
 
 	if ($c eq "Add") {
 	    my @labels = map { $_->{label} } @{$b->{entries}};
@@ -238,8 +238,6 @@ You can add some more or change the existing ones."),
 	    }
 	    $e->{label} = $prefix;
 	    for (my $nb = 0; member($e->{label}, @labels); $nb++) { $e->{label} = "$prefix-$nb" }
-	} else { 
-	    $e = $c;
 	}
 	my %old_e = %$e;
 	my $default = my $old_default = $e->{label} eq $b->{default};
