@@ -22,7 +22,7 @@ my %serialprobe;
 #-######################################################################################
 #- Functions
 #-######################################################################################
-sub dev_is_devfs { -e "/dev/.devfsd" }
+sub dev_is_devfs { -e "/dev/.devfsd" } #- no $::prefix, returns false during install and that's nice :)
 
 
 sub get {
