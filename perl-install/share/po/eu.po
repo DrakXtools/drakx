@@ -2900,11 +2900,11 @@ msgstr "Ez dakit nola formateatu %s %s motan"
 
 # #this syntax does not work yet in perl :-(
 # #msgid "%s formatting of %s failed"
-# #msgstr "%2$s(r)i %1$s formatua emateak huts egin du"
+# #msgstr "%2$s(r)i %s$s formatua emateak huts egin du"
 #: fs/format.pm:88 fs/format.pm:90
 #, c-format
 msgid "%s formatting of %s failed"
-msgstr "%2$s(r)i %1$s formatua emateak huts egin du"
+msgstr "%2$s(r)i %s$s formatua emateak huts egin du"
 
 #: fs/mount_options.pm:112
 #, c-format
@@ -3884,9 +3884,9 @@ msgstr ""
 "dadin konfiguratuko du.\n"
 "\n"
 "   \"LSB\" taldea hautatzeak \"2.4\" nukleoaren seriea ere instalatuko da,\n"
-"\"2.6\" lehenetsiaren ordez. Hau sistemaren  %%100 LSB bateragarritasuna\n"
+"\"2.6\" lehenetsiaren ordez. Hau sistemaren  %%s00 LSB bateragarritasuna\n"
 "ziurtatzeko egiten da. Hala ere, \"LSB\" taldea aukeratzen ez baduzu ere\n"
-"LSB-rekin ia  %%100 bateragarria den sistema izango duzu.\n"
+"LSB-rekin ia  %%s00 bateragarria den sistema izango duzu.\n"
 "\n"
 " * \"%s\": zure makina zerbitzaria izatea nahi baduzu, aukeratu\n"
 "zerbitzu ohikoenetatik zeintzu instalatu nahi dituzun zure makinan.\n"
@@ -9555,7 +9555,7 @@ msgstr "Ikus hardwarearen informazioa"
 
 # #this syntax does not work yet in perl :-(
 # #msgid "Installing driver for %s card %s"
-# #msgstr "%2$s %1$s txartelaren kontrolatzailea instalatzen"
+# #msgstr "%2$s %s$s txartelaren kontrolatzailea instalatzen"
 #: modules/interactive.pm:82
 #, c-format
 msgid "Installing driver for USB controller"
@@ -9563,7 +9563,7 @@ msgstr "USB kontrolatzailearentzako gidaria instalatzen"
 
 # #this syntax does not work yet in perl :-(
 # #msgid "Installing driver for %s card %s"
-# #msgstr "%2$s %1$s txartelaren kontrolatzailea instalatzen"
+# #msgstr "%2$s %s$s txartelaren kontrolatzailea instalatzen"
 #: modules/interactive.pm:83
 #, c-format
 msgid "Installing driver for firewire controller %s"
@@ -9571,7 +9571,7 @@ msgstr "%s firewire kontrolatzailearentzako gidaria instalatzen"
 
 # #this syntax does not work yet in perl :-(
 # #msgid "Installing driver for %s card %s"
-# #msgstr "%2$s %1$s txartelaren kontrolatzailea instalatzen"
+# #msgstr "%2$s %s$s txartelaren kontrolatzailea instalatzen"
 #: modules/interactive.pm:84
 #, c-format
 msgid "Installing driver for hard drive controller %s"
@@ -9579,7 +9579,7 @@ msgstr "%s disko zurrun kontrolatzailearentzako gidaria instalatzen"
 
 # #this syntax does not work yet in perl :-(
 # #msgid "Installing driver for %s card %s"
-# #msgstr "%2$s %1$s txartelaren kontrolatzailea instalatzen"
+# #msgstr "%2$s %s$s txartelaren kontrolatzailea instalatzen"
 #: modules/interactive.pm:85
 #, c-format
 msgid "Installing driver for ethernet controller %s"
@@ -9587,13 +9587,13 @@ msgstr "%s ethernet kontrolatzailearentzako gidaria instalatzen"
 
 # #this syntax does not work yet in perl :-(
 # #msgid "Installing driver for %s card %s"
-# #msgstr "%2$s %1$s txartelaren kontrolatzailea instalatzen"
+# #msgstr "%2$s %s$s txartelaren kontrolatzailea instalatzen"
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
 #: modules/interactive.pm:96
 #, c-format
 msgid "Installing driver for %s card %s"
-msgstr "%2$s %1$s txartelaren kontrolatzailea instalatzen"
+msgstr "%2$s %s$s txartelaren kontrolatzailea instalatzen"
 
 #: modules/interactive.pm:99
 #, c-format
@@ -11494,7 +11494,7 @@ msgstr "beharbada"
 
 #: pkgs.pm:474
 #, fuzzy, c-format
-msgid "Downloading file %1..."
+msgid "Downloading file %s..."
 msgstr "Fitxategiak bidaltzen..."
 
 #: printer/cups.pm:103
