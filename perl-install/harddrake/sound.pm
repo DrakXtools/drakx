@@ -59,6 +59,7 @@ our %alsa2oss =
      "snd-dt0197h" => [ "unknown" ], # isa
      "snd-dt019x"  => [ "unknown" ], # isa
      "snd-emu10k1" => [ "audigy", "emu10k1" ],
+     "snd-emu10k1x" => [ "unknown" ],
      "snd-ens1370" => [ "es1370" ],
      "snd-ens1371" => [ "es1371" ],
      "snd-es1688"  => [ "sb" ], # isa
