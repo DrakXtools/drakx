@@ -354,8 +354,10 @@ area titled \"Info\",  located between list of packages and the five
 buttons \"Install\", \"Select more/less\" and \"Show more/less\"."),
 
 doInstallStep =>
- __("The packages selected are now being installed. This operation
-should only take a few minutes."),
+ __("The packages selected are now being installed.
+
+
+This operation should take a few minutes."),
 
 selectMouse =>
  __("If DrakX failed to find your mouse, or if you want to

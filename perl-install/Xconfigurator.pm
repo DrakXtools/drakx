@@ -19,6 +19,10 @@ my ($prefix, %cards, %monitors);
 
 sub getVGAMode($) { $_[0]->{card}{vga_mode} || $vgamodes{"640x480x16"}; }
 
+sub restart_xfs() {
+    run_program::rooted($prefix, "/etc/rc.d/init.d/xfs", $_) foreach "stop", "start";
+}
+
 sub setVirtual($) {
     my $vt = '';
     local *C;
@@ -153,9 +157,8 @@ sub cardConfiguration(;$$$) {
 
     add2hash($card, $cards{$card->{type}}) if $card->{type}; #- try to get info from given type
     $card->{type} = undef unless $card->{server}; #- bad type as we can't find the server
-
     add2hash($card, cardConfigurationAuto()) unless $card->{server} || $noauto;
-    $card->{server} = 'FBDev' unless !$allowFB || $card->{server} || $noauto;
+    $card->{server} = 'FBDev' unless !$allowFB || $card->{server} || $card->{type} || $noauto;
     $card->{type} = $in->ask_from_list('', _("Select a graphic card"), ['Unlisted', keys %cards]) unless $card->{type} || $card->{server};
     $card->{type} = undef, $card->{server} = $in->ask_from_list('', _("Choose a X server"), $allowFB ? \@allservers : \@allbutfbservers ) if $card->{type} eq "Unlisted";
 
@@ -226,6 +229,7 @@ sub testConfig($) {
     write_XF86Config($o, $tmpconfig);
 
     unlink "/tmp/.X9-lock";
+    restart_xfs;
 
     local *F;
     open F, "$prefix$o->{card}{prog} :9 -probeonly -pn -xf86config $tmpconfig 2>&1 |";
@@ -270,8 +274,7 @@ sub testFinalConfig($;$) {
     #- create a link from the non-prefixed /tmp/.X11-unix/X9 to the prefixed one
     #- that way, you can talk to :9 without doing a chroot
     symlinkf "$prefix/tmp/.X11-unix/X9", "/tmp/.X11-unix/X9" if $prefix;
-    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/xfs", "stop");
-    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/xfs", "start");
+    restart_xfs;
 
     my $f_err = "$prefix/tmp/Xoutput";
     my $pid;
@@ -289,8 +292,9 @@ sub testFinalConfig($;$) {
     
     local *F; open F, $f_err;
     while (<F>) {
-	if (/\berror\b/i) {
-	    my @msg; while (<F>) {
+	if (/\b(error|not supported)\b/i) {
+	    my @msg = !/error/ && $_ ; 
+	    while (<F>) {
 		/^$/ and last;
 		push @msg, $_;		
 	    }

@@ -129,6 +129,8 @@ sub setPackages($) {
 	$o->{compssUsers} = pkgs::readCompssUsers($o->{packages}, $o->{compss});
 	push @{$o->{base}}, "kernel-smp" if detect_devices::hasSMP();
 	push @{$o->{base}}, "kernel-pcmcia-cs" if $o->{pcmcia};
+
+	grep { !$o->{packages}{$_} && log::l("missing base package $_") } @{$o->{base}} and die "missing some base packages";
     } else {
     	$_->{selected} = 0 foreach values %{$o->{packages}};
     }
@@ -375,7 +377,7 @@ sub auto_inst_file() { "$::o->{prefix}/root/auto_inst.cfg.pl" }
 
 sub g_auto_install(;$) {
     my ($f) = @_; $f ||= auto_inst_file;
-    my $o = bless {};
+    my $o = {};
 
     $o->{default_packages} = [ map { $_->{name} } grep { $_->{selected} && !$_->{base} } values %{$::o->{packages}} ];
 
@@ -428,5 +430,5 @@ sub pkg_install {
 
 sub fsck_option() {
     my $y = $::o->{security} < 3 && $::beginner && "-y ";
-    substInFile { s/^(\s*fsckoptions=)(-y )?/$1$y/ } "$::o->{prefix}/etc/rc.d/rc.sysinit";
+    substInFile { s/^(\s*fsckoptions="?)(-y )?/$1$y/ } "$::o->{prefix}/etc/rc.d/rc.sysinit";
 }

@@ -46,7 +46,7 @@ my @mouses = (
   [ 2, "inportbm", "Busmouse",  "BusMouse",       __("Microsoft Bus Mouse") ],
   [ 3, "logibm",   "Busmouse",  "BusMouse",       __("Logitech Bus Mouse") ],
   [ 2, "usbmouse", "ps/2",      "PS/2",           __("USB Mouse") ],
-  [ 5, "usbmouse", "ps/2",      "PS/2",           __("USB Mouse (3 buttons or more)") ],
+  [ 3, "usbmouse", "ps/2",      "PS/2",           __("USB Mouse (3 buttons or more)") ],
 );
 map_index {
     my %l; @l{@mouses_fields} = @$_;
@@ -63,7 +63,7 @@ sub name2mouse {
     die "$name not found";
 }
 
-sub serial_ports_names {
+sub serial_ports_names() {
     map { "ttyS" . ($_ - 1) . " / COM$_" } 1..4;
 }
 sub serial_ports_names2dev {

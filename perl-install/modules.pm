@@ -245,12 +245,12 @@ sub read_conf($;$) {
 	    add2hash($c{$a}, $v);
 	}
     }
-    %c;
+    \%c;
 }
 
 sub write_conf {
     my ($file) = @_;
-    my %written = read_conf($file);
+    my $written = read_conf($file);
 
     my %net = detect_devices::net2module();
     while (my ($k, $v) = each %net) {
@@ -262,18 +262,16 @@ sub write_conf {
 
     while (my ($mod, $h) = each %conf) {
 	while (my ($type, $v2) = each %$h) {
-	    print F "$type $mod $v2\n" if $v2 && $type ne "loaded" && !$written{$mod}{$type};
+	    print F "$type $mod $v2\n" if $v2 && $type ne "loaded" && !$written->{$mod}{$type};
 	}
     }
 }
 
-sub get_stage1_conf {
-    %conf = read_conf($_[1], \$scsi);
-    add2hash(\%conf, $_[0]);
+sub read_stage1_conf {
+    add2hash(\%conf, read_conf($_[0], \$scsi));
     $conf{parport_lowlevel}{alias} ||= "parport_pc";
     $conf{pcmcia_core}{"pre-install"} ||= "CARDMGR_OPTS=-f /etc/rc.d/init.d/pcmcia start";
     $conf{plip}{"pre-install"} ||= "modprobe parport_pc ; echo 7 > /proc/parport/0/irq";
-    \%conf;
 }
 
 sub load_thiskind($;&$) {

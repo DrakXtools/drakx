@@ -119,6 +119,16 @@ sub ask_from_entries($$$$;$%) {
       map { $$_ } @$val :
       undef;
 }
+
+sub ask_from_entries_refH($$$;$%) {
+    my ($o, $title, $message, $h, %callback) = @_;
+
+    ask_from_entries_ref($o, $title, $message, 
+			 [ grep_index { even($::i) } @$h ],
+			 [ grep_index {  odd($::i) } @$h ], 
+			 %callback);    
+}
+
 #- can get a hash of callback: focus_out changed and complete
 #- moreove if you pass a hash with a field list -> combo
 #- if you pass a hash with a field hidden -> emulate stty -echo

@@ -178,11 +178,7 @@ sub syslog {
     `dmesg`;
 }
 
-sub hasSMP {
-#-    my $nb = grep { /^processor/ } cat_("/proc/cpuinfo");
-#-    $nb > 1;
-    c::detectSMP();
-}
+sub hasSMP { c::detectSMP() }
 
 sub whatParport() {
     my @res =();

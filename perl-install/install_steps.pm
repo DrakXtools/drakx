@@ -102,7 +102,7 @@ sub selectPath {}
 sub selectInstallClass($@) {
     my ($o) = @_;
     $o->{installClass} ||= "normal";
-    $o->{security} || ${{
+    $o->{security} ||= ${{
 	normal    => 2,
 	developer => 3,
 	server    => 4,
@@ -205,7 +205,6 @@ sub installPackages($$) {
     }
     push @toInstall, grep { $_->{base} && $_->{selected} && !$_->{installed} && !$firstInstalled{$_->{name}} } values %$packages;
     push @toInstall, grep { !$_->{base} && $_->{selected} && !$_->{installed} && !$firstInstalled{$_->{name}} } values %$packages;
-    print int @toInstall, "<<<<<<\n";
     pkgs::install($o->{prefix}, \@toInstall);
 }
 
@@ -237,6 +236,26 @@ sub configureNetwork($) {
 
     install_any::pkg_install($o, "dhcpcd") if grep { $_->{BOOTPROTO} =~ /^(dhcp|bootp)$/ } @{$o->{intf}};
     #-res_init();		#- reinit the resolver so DNS changes take affect
+
+    pppConfig($o);
+}
+
+#------------------------------------------------------------------------------
+sub pppConfig {
+    my ($o) = @_;
+    $o->{modem} or return;
+
+    symlinkf($o->{modem}{device}, "$o->{prefix}/dev/modem");
+    install_any::pkg_install($o, "ppp");
+
+    my %toreplace;
+    $toreplace{$_} = $o->{modem}{$_} foreach qw(connection phone login passwd auth domain);
+    $toreplace{phone} =~ s/[^\d]//g;
+    $toreplace{dnsserver} = join '', map { "$o->{modem}{$_}," } "dns1", "dns2";
+    
+    foreach ("$o->{prefix}/root", "$o->{prefix}/etc/skel") {
+	template2file("/usr/share/kppprc.in", "$_/.kde/share/config/kppprc", %toreplace) if -d "$_/.kde/share/config";
+    }
 }
 
 #------------------------------------------------------------------------------
@@ -252,24 +271,6 @@ sub pcmciaConfig($) {
 	PCIC_OPTS => "",
         CORE_OPTS => "",
     });
-}
-
-#------------------------------------------------------------------------------
-sub modemConfig {
-    my ($o) = @_;
-    symlinkf($o->{modem}{device}, "$o->{prefix}/dev/modem") if $o->{modem};
-}
-
-sub pppConfig {
-    my ($o) = @_;
-    my %toreplace;
-
-    $toreplace{$_} = $o->{modem}{$_} foreach qw(connection phone login passwd auth domain);
-    $toreplace{phone} =~ s/[^\d]//g;
-    $toreplace{dnsserver} = ($o->{modem}{dns1} && "$o->{modem}{dns1},") . ($o->{modem}{dns2} && "$o->{modem}{dns2},");
-    foreach ("$o->{prefix}/root", "$o->{prefix}/etc/skel") {
-	template2file("/usr/share/kppprc.in", "$_/.kde/share/config/kppprc", %toreplace) if -d "$_/.kde/share/config";
-    }
 }
 
 #------------------------------------------------------------------------------
@@ -336,9 +337,9 @@ sub addUser($) {
 	    if (!$g || getgrgid($g)) { for ($g = 500; getgrgid($g) || $gids{$g}; $g++) {} }
 
 	    $_->{home} ||= "/home/$_->{name}";
-	    $_->{uid} = $u;
-	    $_->{gid} = $g;
-	    $_{pw} ||= $_->{password} && install_any::crypt($_->{password});
+	    $_->{uid} = $u; $uids{$u} = 1;
+	    $_->{gid} = $g; $gids{$g} = 1;
+	    $_->{pw} ||= $_->{password} && install_any::crypt($_->{password});
 	    $done{$_->{name}} = 1;
 	}
     } @{$o->{users} || []};

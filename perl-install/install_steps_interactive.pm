@@ -18,6 +18,7 @@ use install_any;
 use detect_devices;
 use timezone;
 use run_program;
+use commands;
 use fsedit;
 use network;
 use mouse;
@@ -243,7 +244,7 @@ sub choosePackages {
 #------------------------------------------------------------------------------
 sub configureNetwork($) {
     my ($o, $first_time) = @_;
-    my $r = '';
+    local $_;
     if ($o->{intf}) {
 	if (!$::beginner && $first_time) {
 	    my @l = (
@@ -251,64 +252,46 @@ sub configureNetwork($) {
 		     __("Reconfigure network now"),
 		     __("Do not set up networking"),
 		    );
-	    $r = $o->ask_from_list_([ _("Network Configuration") ],
+	    $_ = $o->ask_from_list_([ _("Network Configuration") ],
 				    _("Local networking has already been configured. Do you want to:"),
 				    [ @l ]) || "Do not";
-	}
-	$r = "Keep" if $::beginner;
+	} else { $_ = "Keep"; } 
     } elsif ($o->{modem}) {
-	$r = "Dialup";
+	$_ = "Dialup";
     } else {
-	$r = !$::beginner &&
+	$_ = $::beginner ? "Do not" :
 	  $o->ask_from_list_([ _("Network Configuration") ],
 			     _("Do you want to configure networking for yout system?"),
-			     [ __("Local LAN"), __("Dialup with modem"), __("Do not set up networking") ]) || "Do not";
+			     [ __("Local LAN"), __("Dialup with modem"), __("Do not set up networking") ]);
     }
 
-    if ($r =~ /^Dialup/) {
-	my ($device, $desc) = $o->{modem}{device};
-	unless ($device || $::expert && $o->ask_yesorno('', _("Skip modem autodetection?"), 1)) {
-	    foreach (0..3) {
-		next if readlink("$o->{prefix}/dev/mouse") =~ /ttyS$_/;
-		$desc = detect_devices::hasModem("$o->{prefix}/dev/ttyS$_");
-		$device = "ttyS$_" if $desc;
-		last if $device;
-	    }
+    if (/^Dialup/) {
+	$o->pppConfig;
+    } elsif (/^Do not/) {
+	$o->{netc}{NETWORKING} = "false";
+    } elsif (!/^Keep/) {
+	$o->setup_thiskind('net', !$::expert, 1);
+	my @l = detect_devices::getNet() or die _("no network card found");
+
+	my $last; foreach ($::beginner ? $l[0] : @l) {
+	    my $intf = network::findIntf($o->{intf} ||= [], $_);
+	    add2hash($intf, $last);
+	    add2hash($intf, { NETMASK => '255.255.255.0' });
+	    $o->configureNetworkIntf($intf) or return;
+
+	    $o->{netc} ||= {};
+	    delete $o->{netc}{dnsServer};
+	    delete $o->{netc}{GATEWAY};
+	    $last = $intf;
 	}
-	$device = mouse::serial_ports_names2dev($o->ask_from_list('', _("Which serial port is your modem connected to?"),
-								  [ mouse::serial_ports_names() ])) unless $device;
-	log::l("using modem at /dev/$device");
-	$o->{modem}{device} = $device;
-	install_steps::modemConfig($o);
-
-	$o->pppConfig();
-    } else {
-	if ($r =~ /^Do not/) {
-	    $o->{netc}{NETWORKING} = "false";
-	} elsif ($r !~ /^Keep/) {
-	    $o->setup_thiskind('net', !$::expert, 1);
-	    my @l = detect_devices::getNet() or die _("no network card found");
-
-	    my $last; foreach ($::beginner ? $l[0] : @l) {
-		my $intf = network::findIntf($o->{intf} ||= [], $_);
-		add2hash($intf, $last);
-		add2hash($intf, { NETMASK => '255.255.255.0' });
-		$o->configureNetworkIntf($intf) or return;
-
-		$o->{netc} ||= {};
-		delete $o->{netc}{dnsServer};
-		delete $o->{netc}{GATEWAY};
-		$last = $intf;
-	    }
-	    #-	  {
-	    #-	      my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
-	    #-	      network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
-	    #-	  }
-	    $last->{BOOTPROTO} =~ /^(dhcp|bootp)$/ ||
-	      $o->configureNetworkNet($o->{netc}, $last ||= {}, @l) or return;
-	}
-	install_steps::configureNetwork($o);
+	#-	  {
+	#-	      my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
+	#-	      network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
+	#-	  }
+	$last->{BOOTPROTO} =~ /^(dhcp|bootp)$/ ||
+	  $o->configureNetworkNet($o->{netc}, $last ||= {}, @l) or return;
     }
+    install_steps::configureNetwork($o);
 }
 
 sub configureNetworkIntf {
@@ -361,22 +344,31 @@ You may also enter the IP address of the gateway if you have one"),
 #------------------------------------------------------------------------------
 sub pppConfig {
     my ($o) = @_;
+    my $m = $o->{modem} ||= {};
 
-    my @l = (
-_("Connection name") => \$o->{modem}{connection},
-_("Phone number") => \$o->{modem}{phone},
-_("Login ID") => \$o->{modem}{login},
-_("Password") => { val => \$o->{modem}{passwd}, hidden => 1 },
-_("Authentication") => { val => \$o->{modem}{auth}, list => [ __("PAP"), __("CHAP"), __("Terminal-based"), __("Script-based") ] },
-_("Domain name") => \$o->{modem}{domain},
-_("First DNS Server") => \$o->{modem}{dns1},
-_("Second DNS Server") => \$o->{modem}{dns2},
-	    );
+    unless ($m->{device} || $::expert && $o->ask_yesorno('', _("Skip modem autodetection?"), 1)) {
+	foreach (0..3) {
+	    next if readlink("$o->{prefix}/dev/mouse") =~ /ttyS$_/;
+	    detect_devices::hasModem("$o->{prefix}/dev/ttyS$_")
+		and $m->{device} = "ttyS$_", last;
+	}
+    }
 
-    install_steps::pppConfig($o) if $o->ask_from_entries_ref('',
-							     _("Dialup options"),
-							     [ grep_index { even($::i) } @l ],
-							     [ grep_index {  odd($::i) } @l ]);
+    $m->{device} ||= mouse::serial_ports_names2dev(
+	$o->ask_from_list('', _("Which serial port is your modem connected to?"),
+			  [ mouse::serial_ports_names ]));
+
+    install_steps::pppConfig($o) if $o->ask_from_entries_refH('',
+							     _("Dialup options"), [
+_("Connection name") => \$m->{connection},
+_("Phone number") => \$m->{phone},
+_("Login ID") => \$m->{login},
+_("Password") => { val => \$m->{passwd}, hidden => 1 },
+_("Authentication") => { val => \$m->{auth}, list => [ __("PAP"), __("CHAP"), __("Terminal-based"), __("Script-based") ] },
+_("Domain name") => \$m->{domain},
+_("First DNS Server") => \$m->{dns1},
+_("Second DNS Server") => \$m->{dns2},
+    ]);
 }
 
 #------------------------------------------------------------------------------
@@ -537,7 +529,7 @@ wish to access and any applicable user name and password."),
 
 	$o->{printer}{BITSPERPIXEL} = $depth_to_col{$o->{printer}{BITSPERPIXEL}} || $o->{printer}{BITSPERPIXEL}; #- translate.
 
-	my @l = (
+	$o->ask_from_entries_refH('', _("Printer options"), [
 _("Paper Size") => { val => \$o->{printer}{PAPERSIZE}, type => 'list', , not_edit => !$::expert, list => \@printer::papersize_type },
 @list_res ? (
 _("Resolution") => { val => \$o->{printer}{RESOLUTION}, type => 'list', , not_edit => !$::expert, list => \@res } ) : (),
@@ -546,12 +538,7 @@ _("Fix stair-stepping text?") => { val => \$o->{printer}{CRLF}, type => "bool" }
 $is_uniprint ? (
 _("Uniprint driver options") => { val => \$o->{printer}{BITSPERPIXEL}, type => 'list', , not_edit => !$::expert, list => \@col } ) : (
 _("Color depth options") => { val => \$o->{printer}{BITSPERPIXEL}, type => 'list', , not_edit => !$::expert, list => \@col } ), ) : ()
-);
-
-	$o->ask_from_entries_ref('',
-				 _("Printer options"),
-				 [ grep_index { even($::i) } @l ],
-				 [ grep_index {  odd($::i) } @l ]);
+]);;
 
 	$o->{printer}{BITSPERPIXEL} = $col_to_depth{$o->{printer}{BITSPERPIXEL}} || $o->{printer}{BITSPERPIXEL}; #- translate.
 
@@ -592,15 +579,16 @@ sub setRootPassword($) {
 
     return if $o->{security} < 1 && !$clicked;
 
-    $o->ask_from_entries_ref([_("Set root password"), _("Ok"), $o->{security} > 3 ? () : _("No password")],
-			 _("Set root password"),
-			 [_("Password:"), _("Password (again):"), $o->{installClass} eq "server" || $::expert ? (_("Use shadow file"), _("Use MD5 passwords")) : (), $::beginner ? () : _("Use NIS") ],
-			 [{ val => \$sup->{password},  hidden => 1 },
-			  { val => \$sup->{password2}, hidden => 1 },
-			  { val => \$o->{authentification}{shadow}, type => 'bool', text => _("shadow") },
-			  { val => \$o->{authentification}{md5}, type => 'bool', text => _("MD5") },
-			  { val => \$o->{authentification}{NIS}, type => 'bool', text => _("yellow pages") },
-			 ],
+    $o->ask_from_entries_refH([_("Set root password"), _("Ok"), $o->{security} > 3 ? () : _("No password")],
+			 _("Set root password"), [
+_("Password") => { val => \$sup->{password},  hidden => 1 },
+_("Password (again)") => { val => \$sup->{password2}, hidden => 1 },
+  $o->{installClass} eq "server" || $::expert ? (
+_("Use shadow file") => { val => \$o->{authentification}{shadow}, type => 'bool', text => _("shadow") },
+_("Use MD5 passwords") => { val => \$o->{authentification}{md5}, type => 'bool', text => _("MD5") },
+  ) : (), $::beginner ? () : 
+_("Use NIS") => { val => \$o->{authentification}{NIS}, type => 'bool', text => _("yellow pages") }
+			 ], 
 			 complete => sub {
 			     $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,1);
 			     length $sup->{password} < ($o->{security} > 3 ? 10 : 6)
@@ -631,13 +619,17 @@ sub addUser($) {
     my @fields = qw(realname name password password2);
     my @shells = install_any::shells($o);
 
-    if ($o->{security} < 2 && !$clicked || $o->ask_from_entries_ref(
+    if ($o->{security} < 2 && !$clicked || $o->ask_from_entries_refH(
         [ _("Add user"), _("Accept user"), _("Done") ],
         _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @{$o->{users}})) : ''),
-        [ _("Real name"), _("User name"), $o->{security} < 2 ? () : (_("Password"), _("Password (again)")), $::beginner ? () : _("Shell") ],
-        [ \$u->{realname}, \$u->{name},
-	  {val => \$u->{password}, hidden => 1}, {val => \$u->{password2}, hidden => 1},
-	  {val => \$u->{shell}, list => \@shells, not_edit => !$::expert},
+        [ 
+	 _("Real name") => \$u->{realname},
+	 _("User name") => \$u->{name},
+	   $o->{security} < 2 ? () : (
+         _("Password") => {val => \$u->{password}, hidden => 1},
+         _("Password (again)") => {val => \$u->{password2}, hidden => 1},
+	   ), $::beginner ? () : 
+         _("Shell") => {val => \$u->{shell}, list => \@shells, not_edit => !$::expert} 
         ],
         focus_out => sub {
 	    if ($_[0] eq 0) {
@@ -731,10 +723,7 @@ _("Restrict command line options") => { val => \$b->{restricted}, type => "bool"
 	@l = @l[0..3] if $::beginner;
 
 	$b->{vga} ||= 'Normal';
-	$o->ask_from_entries_ref('',
-				 _("LILO main options"), 
-				 [ grep_index { even($::i) } @l ],
-				 [ grep_index {  odd($::i) } @l ],
+	$o->ask_from_entries_refH('', _("LILO main options"), \@l,
 				 complete => sub {
 				     $o->{security} > 4 && length($b->{password}) < 6 and $o->ask_warn('', _("At this level of security, a password (and a good one) in lilo is requested")), return 1;
 				     $b->{restricted} && !$b->{password} and $o->ask_warn('', _("Option ``Restrict command line options'' is of no use without a password")), return 1;
@@ -787,10 +776,10 @@ _("Label") => \$e->{label},
 _("Default") => { val => \$default, type => 'bool' },
 	);
 
-	if ($o->ask_from_entries_ref('',
-				     '',
-				     [ grep_index { even($::i) } @l ],
-				     [ grep_index {  odd($::i) } @l ],
+	if ($o->ask_from_entries_refH('', '', \@l,
+				     complete => sub {
+					 $name ne $old_name && $b->{entries}{$name} and $o->ask_warn("A entry %s already exists", $name), return 1;
+				     }
 				    )) {
 	    $b->{default} = $old_default ^ $default ? $default && $e->{label} : $b->{default};
 	    
@@ -832,7 +821,7 @@ sub miscellaneous {
 	  _("Security level"),
 	  _("HTTP proxy"),
 	  _("FTP proxy"),
-	  _("Use kudzu"),
+#-GOLD	  _("Use kudzu"),
 	  _("Precise ram size (found %d MB)", availableRam / 1024),
 	],
 	[ { val => \$u->{LAPTOP}, type => 'bool' },
@@ -840,13 +829,13 @@ sub miscellaneous {
 	  { val => \$s, list => [ map { $l{$_} } ikeys %l ] },
 	  \$u->{http_proxy},
 	  \$u->{ftp_proxy},
-	  { val => \$u->{kudzu}, type => 'bool' },
+#-GOLD	  { val => \$u->{kudzu}, type => 'bool' },
 	  \$u->{memsize},
 	],
         complete => sub {
 	    $u->{http_proxy} =~ m,^($|http://), or $o->ask_warn('', _("Proxy should be http://...")), return 1,3;
 	    $u->{ftp_proxy} =~ m,^($|ftp://), or $o->ask_warn('', _("Proxy should be ftp://...")), return 1,4;
-	    $u->{memsize} =~ s/^(\d+)M?$/$1M/ or $o->ask_warn('', _("Give the ram size in Mb")), return 1,6;
+	    !$u->{memsize} || $u->{memsize} =~ s/^(\d+)M?$/$1M/i or $o->ask_warn('', _("Give the ram size in Mb")), return 1;
 	    0;
 	}
     ) || return;
@@ -970,7 +959,7 @@ sub setup_thiskind {
 	    push @l, \@r;
 	} else {
 	    eval { commands::modprobe("isapnp") };
-	    $o->ask_warn('', [ pci_probing::main::list(), cat_("/proc/isapnp") ]);
+	    $o->ask_warn('', [ pci_probing::main::list(), scalar cat_("/proc/isapnp") ]);
 	}
     }
 }

@@ -180,8 +180,8 @@ $o = $::o = {
     steps        => \%installSteps,
     orderedSteps => \@orderedInstallSteps,
 
-#-    base => [ qw(basesystem sed initscripts console-tools mkbootdisk anacron utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which perl-base) ],
-    base => [ qw(basesystem sed initscripts console-tools mkbootdisk anacron rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which cpio perl) ],
+#-GOLD    base => [ qw(basesystem sed initscripts console-tools mkbootdisk anacron utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which perl-base) ],
+    base => [ qw(basesystem sed initscripts console-tools mkbootdisk anacron utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which cpio perl) ],
 
 #- for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
 #-    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],
@@ -221,7 +221,14 @@ sub selectMouse {
     add2hash($o->{mouse} ||= {}, { mouse::read($o->{prefix}) }) if $o->{isUpgrade} && !$clicked;
 
     $o->selectMouse($clicked);
-    addToBeDone { mouse::write($o->{prefix}, $o->{mouse}); } 'formatPartitions';
+    addToBeDone { 
+	mouse::write($o->{prefix}, $o->{mouse});
+	my $t = "modprobe usbmouse\n";
+	substInFile { 
+	    s/$t//;
+	    $_ .= $t if eof;
+	} "$o->{prefix}/etc/rc.d/rc.local" if $o->{mouse}{FULLNAME} =~ /USB/i;
+    } 'doInstallStep';
 }
 
 #------------------------------------------------------------------------------
@@ -342,13 +349,13 @@ sub miscellaneous {
     $o->miscellaneous($_[0]); 
     addToBeDone { 
 	install_any::fsck_option();
-	run_program::rooted($o->{prefix}, "chkconfig --del kudzu") unless $o->{miscellaneous}{kudzu};
+#-GOLD	run_program::rooted($o->{prefix}, "chkconfig --del kudzu") unless $o->{miscellaneous}{kudzu};
     } 'doInstallStep';
 }
 
 #------------------------------------------------------------------------------
 sub configureNetwork {
-    my ($clicked, $entered) = @_;
+    my ($clicked) = @_;
 
     if ($o->{isUpgrade} && !$clicked) {
 	$o->{netc} or $o->{netc} = {};
@@ -361,11 +368,11 @@ sub configureNetwork {
 	}
     }
 
-    $o->configureNetwork($entered == 1 && !$clicked)
+    $o->configureNetwork;
 }
 #------------------------------------------------------------------------------
 sub configureTimezone {
-    my ($clicked) = $_[0];
+    my ($clicked) = @_;
     my $f = "$o->{prefix}/etc/sysconfig/clock";
 
     if ($o->{isUpgrade} && -r $f && -s $f > 0) {
@@ -524,7 +531,7 @@ sub main {
     }
 
     modules::load_deps("/modules/modules.dep");
-    $o->{modules} = modules::get_stage1_conf($o->{modules}, "/tmp/conf.modules");
+    modules::read_stage1_conf("/tmp/conf.modules");
     modules::read_already_loaded();
     modparm::read_modparm_file(-e "modparm.lst" ? "modparm.lst" : "/usr/share/modparm.lst");
 
