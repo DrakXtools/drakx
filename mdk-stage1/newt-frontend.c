@@ -33,7 +33,7 @@
 #include <sys/time.h>
 #include "stage1.h"
 #include "log.h"
-#include "newt.h"
+#include "newt/newt.h"
 
 #include "frontend.h"
 

@@ -47,22 +47,17 @@ INITOBJS = $(subst .c,.o,$(INITSRC))
 
  #- frontends
 NEWT_FRONTEND_SRC = newt-frontend.c
-NEWT_FRONTEND_LIBS = /usr/lib/libnewt.a /usr/lib/libslang.a
+GLIBC_NEWT_FRONTEND_LIBS = newt/libnewt.a slang/libslang.a
+DIETLIBC_NEWT_FRONTEND_LIBS = $(subst .a,-DIET.a,$(GLIBC_NEWT_FRONTEND_LIBS))
 
 STDIO_FRONTEND_SRC = stdio-frontend.c
-STDIO_FRONTEND_LIBS =
+GLIBC_STDIO_FRONTEND_LIBS =
+DIETLIBC_STDIO_FRONTEND_LIBS =
 
 
 FRONTEND_OBJS = $(subst .c,.o,$($(F)_FRONTEND_SRC))
-FRONTEND_LIBS = $($(F)_FRONTEND_LIBS)
 
-FRONTEND_LINK = $(FRONTEND_OBJS) $(FRONTEND_LIBS)
-
-ifeq (DIETLIBC, $(L))
-ifeq (NEWT, $(F))
-FRONTEND_LINK = $(subst .c,.o,$(STDIO_FRONTEND_SRC)) $(STDIO_FRONTEND_LIBS)
-endif
-endif
+FRONTEND_LINK = $(FRONTEND_OBJS) $($(L)_$(F)_FRONTEND_LIBS)
 
 ifeq (i386, $(ARCH))
 INSMOD = insmod-busybox
@@ -71,7 +66,7 @@ INSMOD = insmod-modutils
 endif
 
 GLIBC_STAGE1_OWN_LIBS = $(INSMOD)/libinsmod.a mar/libmar.a bzlib/libbzlib.a
-DIETLIBC_STAGE1_OWN_LIBS = $(INSMOD)/libinsmod-DIET.a mar/libmar-DIET.a bzlib/libbzlib-DIET.a
+DIETLIBC_STAGE1_OWN_LIBS = $(subst .a,-DIET.a,$(GLIBC_STAGE1_OWN_LIBS))
 STAGE1_OWN_LIBS = $($(L)_STAGE1_OWN_LIBS)
 
 
@@ -125,7 +120,7 @@ BINS += stage1-cdrom stage1-disk stage1-network
 endif
 
 
-DIRS = dietlibc mar pci-resource bzlib $(INSMOD)
+DIRS = dietlibc mar pci-resource bzlib $(INSMOD) slang newt
 ifeq (i386,$(ARCH))
 DIRS += pcmcia
 endif
