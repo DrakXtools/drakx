@@ -168,7 +168,7 @@ sub ask_from_listf_ {
 }
 sub ask_from_listf {
     my ($o, $title, $message, $f, $l, $def, $help) = @_;
-    @$l == 0 and die "ask_from_list: empty list\n" . common::backtrace();
+    @$l == 0 and die "ask_from_list: empty list\n" . backtrace();
     @$l == 1 and return $l->[0];
     goto &ask_from_listf_no_check;
 }
@@ -303,7 +303,7 @@ sub ask_from_normalize {
 	    if (@{$_->{list}} == ()) {
 		eval {
 		    require 'log.pm';
-		    log::l("ask_from_normalize: empty list for $_->{label}\n" . common::backtrace());
+		    log::l("ask_from_normalize: empty list for $_->{label}\n" . backtrace());
 		};
 	    }
 	    @{$_->{list}} > 1;
