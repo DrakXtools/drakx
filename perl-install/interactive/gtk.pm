@@ -355,7 +355,7 @@ sub ask_fromW {
     my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack, $has_horiz_scroll, $has_scroll, $max_width);
     my $total_size = 0;
     my $tooltips = Gtk2::Tooltips->new;
-
+    my $ok_clicked = sub { $mainw->{ok}->get_property('sensitive') and $mainw->{ok}->clicked };
     my $set_all = sub {
 	$ignore = 1;
 	$_->{set}->(${$_->{e}{val}}, $_) foreach @widgets_always, @widgets_advanced;
@@ -380,7 +380,7 @@ sub ask_fromW {
 	    my (undef, $event) = @_;
 	    if (!$event || ($event->keyval & 0x7f) == 0xd) {
 		if ($ind == $#widgets) {
-		    @widgets == 1 ? $mainw->{ok}->clicked : $mainw->{ok}->grab_focus;
+		    @widgets == 1 ? $ok_clicked->() : $mainw->{ok}->grab_focus;
 		} else {
 		    $widgets[$ind+1]{focus_w}->grab_focus;
 		}
@@ -489,7 +489,7 @@ sub ask_fromW {
 		my $quit_if_double_click = 
 		  #- i'm the only one, double click means accepting
 		  @$l == 1 || $e->{quit_if_double_click} ? 
-		    sub { if ($_[1]->type =~ /^2/) { $mainw->{retval} = 1; Gtk2->main_quit } } : ''; 
+		    sub { $_[1]->type =~ /^2/ && $ok_clicked->() } : ''; 
 
 		my @para = ($e, $may_go_to_next, $changed, $quit_if_double_click);
 		my $use_boxradio = exists $e->{gtk}{use_boxradio} ? $e->{gtk}{use_boxradio} : @{$e->{list}} <= 8;
