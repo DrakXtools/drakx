@@ -484,11 +484,12 @@ sub read_rpmsrate {
 	    ($t, $flag, $data) = ($1,$2,$3);
 	    while ($flag =~ s,^\s*(("[^"]*"|[^"\s]*)*)\s+,$1,) {}
 	    my $ok = 0;
+            my ($inv, $p);
 	    $flag = join('||', grep { 
-		if (my ($inv, $p) = /^(!)?HW"(.*)"/) {
+		if (($inv, $p) = /^(!)?HW"(.*)"/) {
 		    ($inv xor detect_devices::matching_desc($p)) and $ok = 1;
 		    0;
-                } elsif (my ($inv, $p) = /^(!)?DRIVER"(.*)"/) {
+                } elsif (($inv, $p) = /^(!)?DRIVER"(.*)"/) {
 		    ($inv xor detect_devices::matching_driver($p)) and $ok = 1;
 		    0;
 		} else {
