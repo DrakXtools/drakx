@@ -643,10 +643,10 @@ sub isolinux {
 default linux
 prompt 1
 timeout 150
-" . (-e "isolinux/boot.msg" ? "display boot.msg" : "display help.msg") . "
+display boot.msg
 F1 help.msg
 F2 advanced.msg
-" . (-e "isolinux/boot.msg" && "F3 boot.msg") . "
+F3 boot.msg
 " . join('', map {
 "label $_->[0]
   kernel alt0/vmlinuz
@@ -661,7 +661,7 @@ F2 advanced.msg
   kernel test/memtest.bin
 ";
 
-    output "isolinux/help.msg", (-e "isolinux/boot.msg" && pack "C*", 0x0E, 0x80, 0x03, 0x00) .
+    output "isolinux/help.msg", pack("C*", 0x0E, 0x80, 0x03, 0x00) .
 "
                   0aWelcome to 09Mandrake Linux0a install help07
 
@@ -684,11 +684,10 @@ kernel ($main) does not detect it correctly.
 0cNOTE07: You cannot pass options to modules (SCSI, ethernet card) or devices
 such as CD-ROM drives in this way. If you need to do so, use expert mode.
 
-" . (-e "isolinux/boot.msg" ?
-     "0c[F1-Help] [F2-Advanced Help] [F3-Main]07" :
-     "0c[F1-Help] [F2-Advanced Help]07") . "\n";
+0c[F1-Help] [F2-Advanced Help] [F3-Main]07
+";
 
-    output "isolinux/advanced.msg", (-e "isolinux/boot.msg" && pack "C*", 0x0E, 0x80, 0x03, 0x00) .
+    output "isolinux/advanced.msg", pack("C*", 0x0E, 0x80, 0x03, 0x00) .
 "
 The following install types may be used instead of previously notified :
  o  0fvgahi07 for high resolution graphical installation.
@@ -708,9 +707,8 @@ The following options may be added on the command line :
 
 You can choose the following kernels :
 " . join('', map_index { " o  0falt$::i07 is kernel $_\n" } @kernels) . "
-" . (-e "isolinux/boot.msg" ?
-     "0c[F1-Help] [F2-Advanced Help] [F3-Main]07" :
-     "0c[F1-Help] [F2-Advanced Help]07") . "\n";
+0c[F1-Help] [F2-Advanced Help] [F3-Main]07
+";
 }
 
 sub isolinux_move {   
