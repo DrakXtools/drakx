@@ -266,9 +266,9 @@ sub ask_from_entries {
 
     my @l = map { my $i = ''; { label => $_, val => \$i } } @$l;
 
-    $o->ask_from($title, $message, \@l, %callback) ?
-      map { ${$_->{val}} } @l :
-      undef;
+    $o->ask_from_({ title => $title, messages => $message, callbacks => \%callback, 
+		    focus_first => 1 }, \@l) or return;
+    map { ${$_->{val}} } @l;
 }
 
 sub ask_from__add_modify_remove {
