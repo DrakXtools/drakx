@@ -92,7 +92,7 @@ sub read_fstab {
 
 	    if ($h->{device} =~ m!/(disc|part\d+)$!) {
 		$h->{devfs_device} = $h->{device};
-		$h->{prefer_devfs_name} = 1;
+		$h->{prefer_devfs_name} = 1 if member('keep_devfs_name', @reading_options);
 	    }
 	}
 
@@ -197,7 +197,7 @@ sub merge_info_from_fstab {
 	} else {
 	    1;
 	}
-    } read_fstab($prefix, "/etc/fstab", 'keep_freq_passno');
+    } read_fstab($prefix, '/etc/fstab', 'keep_freq_passno', 'keep_devfs_name');
 
     merge_fstabs($loose, $fstab, @l);
 }
@@ -205,7 +205,7 @@ sub merge_info_from_fstab {
 # - when using "$loose", it does not merge in type&options from the fstab
 sub get_info_from_fstab {
     my ($all_hds, $prefix) = @_;
-    my @l = read_fstab($prefix, "/etc/fstab", 'keep_freq_passno');
+    my @l = read_fstab($prefix, '/etc/fstab', 'keep_freq_passno', 'keep_devfs_name');
     add2all_hds($all_hds, @l)
 }
 
@@ -558,7 +558,7 @@ sub get_raw_hds {
 
     get_major_minor(@{$all_hds->{raw_hds}});
 
-    my @fstab = read_fstab($prefix, "/etc/fstab", 'keep_freq_passno');
+    my @fstab = read_fstab($prefix, '/etc/fstab', 'keep_freq_passno', 'keep_devfs_name');
     $all_hds->{nfss} = [ grep { isThisFs('nfs', $_) } @fstab ];
     $all_hds->{smbs} = [ grep { isThisFs('smbfs', $_) } @fstab ];
     $all_hds->{davs} = [ grep { isThisFs('davfs', $_) } @fstab ];
