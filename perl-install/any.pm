@@ -108,9 +108,11 @@ sub setupBootloader {
 
 	$in->set_help('setupBootloaderBeginner') unless $::isStandalone;
 	if (arch() =~ /sparc/) {
-	    $b->{use_partition} = $in->ask_from_list_(N("SILO Installation"),
-						      N("Where do you want to install the bootloader?"),
-						      \@l, $l[$b->{use_partition}]) or return 0;
+	    $b->{use_partition} = $in->ask_from_listf_(N("SILO Installation"),
+						       N("Where do you want to install the bootloader?"),
+						       sub { $l[$_[0]] },
+						       [ 0, 1 ], $b->{use_partition});
+	    defined $b->{use_partition} or return 0
 	} elsif (arch() =~ /ppc/) {
 		if (defined $partition_table::mac::bootstrap_part) {
 			$b->{boot} = $partition_table::mac::bootstrap_part;
@@ -130,7 +132,6 @@ sub setupBootloader {
 	$in->set_help(arch() =~ /sparc/ ? "setupSILOGeneral" :  arch() =~ /ppc/ ? 'setupYabootGeneral' : "setupBootloader") unless $::isStandalone; #- TO MERGE ?
 
 	my @silo_install_lang = (N("First sector of drive (MBR)"), N("First sector of boot partition"));
-	my $silo_install_lang = $silo_install_lang[$b->{use_partition}];
 
 	my %bootloaders = (if_(exists $b->{methods}{silo},
 			       N_("SILO")                     => sub { $b->{methods}{silo} = 1 }),
@@ -156,7 +157,7 @@ sub setupBootloader {
 	$in->ask_from('', N("Bootloader main options"), [
 { label => N("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },
     arch() =~ /sparc/ ? (
-{ label => N("Bootloader installation"), val => \$silo_install_lang, list => \@silo_install_lang },
+{ label => N("Bootloader installation"), val => \$b->{use_partition}, list => [ 0, 1 ], format => sub { $silo_install_lang[$_[0]] } },
 ) : if_(arch() !~ /ia64/,
 { label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (@$hds, grep { !isFat($_) } @$fstab)), detect_devices::floppies_dev() ], not_edit => !$::expert },
 { label => N("Compact"), val => \$b->{compact}, type => "bool", text => N("compact"), advanced => 1 },
@@ -203,8 +204,6 @@ sub setupBootloader {
 
 	#- at least one method
 	grep_each { $::b } %{$b->{methods}} or return 0;
-
-	$b->{use_partition} = $silo_install_lang eq N("First sector of drive (MBR)") ? 0 : 1;
 
 	bootloader::set_profiles($b, $profiles);
 	bootloader::add_append($b, "mem", $memsize);
