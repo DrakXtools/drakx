@@ -484,7 +484,7 @@ sub getSpeedtouch() {
 }
 
 sub getBewan() {
-    matching_desc__regexp('Bewan Systems\|PCI ADSL Modem|BEWAN ADSL USB');
+    matching_desc__regexp('Bewan Systems\|.*ADSL|BEWAN ADSL USB');
 }
 sub getSagem() {
     matching_driver(qw(adiusbadsl eagle-usb));
