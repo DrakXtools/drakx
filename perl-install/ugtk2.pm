@@ -320,7 +320,7 @@ sub create_box_with_title {
     }
     $o->{box_size} = n_line_size($nbline, 'text', $box);
     #- hugly hack because GtkLabel doesn't wrap when using languages that don't contain spaces
-    if (@_ <= 2 && ($nbline > 4 || ($nbline > 1 && ref $::o && member($::o->{locale}{lang}, qw(ja))))) {
+    if (@_ <= 2 && ($nbline > 4 || ($nbline > 1 && ref($::o) && member($::o->{locale}{lang}, qw(ja))))) {
 	$o->{icon} && !$::isWizard and 
 	  eval { gtkpack__($box, gtkset_border_width(gtkpack_(Gtk2::HBox->new(0,0), 1, gtkcreate_img($o->{icon})),5)) };
 	my $wanted = $o->{box_size};
