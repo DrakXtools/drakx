@@ -202,6 +202,14 @@ sub set {
 			  shadowAccount => 'User',
 			  posixGroup => 'Group',
 			 ),
+
+
+			 scope => 'sub',
+			 pam_login_attribute => 'sAMAccountName',
+			 pam_filter => 'objectclass=User',
+			 pam_password => 'ad',
+
+			 
 			 (map_each { "nss_map_attribute_$::a" => $::b }
 			  uid => 'sAMAccountName',
 			  uidNumber => 'msSFU30UidNumber',
@@ -210,7 +218,7 @@ sub set {
 			  uniqueMember => 'member',
 			  userPassword => 'msSFU30Password',
 			  homeDirectory => 'msSFU30HomeDirectory',
-			  LoginShell => 'msSFU30LoginShell',
+			  loginShell => 'msSFU30LoginShell',
 			  gecos => 'name',
 			 ),
 			);
