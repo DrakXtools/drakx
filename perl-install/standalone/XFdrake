@@ -57,7 +57,8 @@ Xconfig::getinfoFromXF86Config($i) if $0 =~ Xdrakres;
 begin:
 Xconfig::getinfo($i);
 
+$::isEmbedded and kill USR2, $::CCPID;
 Xconfigurator::main('', $i, $in, 0, sub { $in->standalone::pkgs_install(@_) });
 !$::isEmbedded and $in->exit(0);
-kill(USR1, $::CCPID);
+kill USR1, $::CCPID;
 goto begin;
