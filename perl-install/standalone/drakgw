@@ -705,8 +705,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
     $bbox1->set_layout(-end);
     my $button_conf = new Gtk::Button _("Configure");
     $button_conf->signal_connect ( clicked => sub {
-					   system("/usr/sbin/drakgw --wizard");
-				       });
+				       system("/usr/sbin/drakgw --wizard");
+				       kill(USR1, $::CCPID);
+				   });
     $bbox1->add($button_conf);
     my $button_cancel = new Gtk::Button _("Cancel");
     $button_cancel->signal_connect ( clicked => sub {
@@ -724,6 +725,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.59  2002/02/22 18:58:22  gc
+#- exit the pur_gtk version after launching the wizard version
+#-
 #- Revision 1.58  2002/01/18 20:19:44  gc
 #- - move 'use standalone' up to comply to 'explanations'
 #- - write higher-level 'explanations'
