@@ -151,8 +151,7 @@ sub add_entry($$) {
 sub add_kernel($$$$$) {
     my ($prefix, $lilo, $kernelVersion, $specific, $v) = @_;
     my $ext = $specific && "-$specific"; $specific =~ s/\d+\.\d+|hack//;
-    my $kname = arch() =~ /ppc/ ? "vmlinux" : "vmlinuz";
-    my ($vmlinuz, $image, $initrdImage) = ("$kname-$kernelVersion$specific", "/boot/$kname$ext", "/boot/initrd$ext.img");    
+    my ($vmlinuz, $image, $initrdImage) = ("vmlinuz-$kernelVersion$specific", "/boot/vmlinuz$ext", "/boot/initrd$ext.img");    
     -e "$prefix/boot/$vmlinuz" or log::l("unable to find kernel image $prefix/boot/$vmlinuz"), return;
     {
 	my $f = "initrd-$kernelVersion$specific.img";
@@ -242,6 +241,7 @@ sub suggest {
 	 timeout => 50,
 	 enableofboot => 1,
 	 enablecdboot => 1,
+	 useboot => $boot,
 	} :
 	{
 	 boot => "/dev/" . ($onmbr ? $hds->[0]{device} : fsedit::get_root($fstab, 'boot')->{device}),
@@ -372,7 +372,7 @@ wait %d seconds for default boot.
 	}
     }
     my %l = (
- 		yaboot => bool(arch() =~ /ppc/),
+	     yaboot => bool(arch() =~ /ppc/),
 	     silo => bool(arch() =~ /sparc/),
 	     lilo => bool(arch() !~ /sparc|ppc/) && !isLoopback(fsedit::get_root($fstab)),
 	     grub => bool(arch() !~ /sparc|ppc/ && availableRamMB() < 800), #- don't use grub if more than 800MB
@@ -453,7 +453,7 @@ sub get_of_dev($$) {
 }
 
 sub install_yaboot($$$) {
-    my ($prefix, $lilo) = @_;
+    my ($prefix, $lilo, $fstab, $hds) = @_;
     $lilo->{prompt} = $lilo->{timeout};
 
     if ($lilo->{message}) {
@@ -484,15 +484,26 @@ sub install_yaboot($$$) {
 	$lilo->{$_} and print F $_ foreach qw(enablecdboot enableofboot);
 	$lilo->{$_} and print F "$_=$lilo->{$_}" foreach qw(defaultos default);
 	print F "nonvram";
-	
+	my $boot = "/dev/" . $lilo->{useboot} if $lilo->{useboot};
+		
 	foreach (@{$lilo->{entries}}) {
 
 	    if ($_->{type} eq "image") {
-		my $of_dev = get_of_dev($prefix, $_->{root});
-		print F "$_->{type}=$of_dev,$_->{kernel_or_dev}";
+		my $of_dev = '';
+		if ($boot !~ /$_->{root}/) {
+		    $of_dev = get_of_dev($prefix, $boot);
+		    print F "$_->{type}=$of_dev," . substr($_->{kernel_or_dev}, 5);
+		} else {
+		    $of_dev = get_of_dev($prefix, $_->{root});    			
+		    print F "$_->{type}=$of_dev,$_->{kernel_or_dev}";
+		}
 		print F "\tlabel=", substr($_->{label}, 0, 15); #- lilo doesn't handle more than 15 char long labels
 		print F "\troot=$_->{root}";
-		print F "\tinitrd=$of_dev,$_->{initrd}" if $_->{initrd};
+		if ($boot !~ /$_->{root}/) {
+		    print F "\tinitrd=$of_dev," . substr($_->{initrd}, 5) if $_->{initrd};
+		} else {
+		    print F "\tinitrd=$of_dev,$_->{initrd}" if $_->{initrd};
+		}
 		print F "\tappend=\"$_->{append}\"" if $_->{append};
 		print F "\tread-write" if $_->{'read-write'};
 		print F "\tread-only" if !$_->{'read-write'};
