@@ -29,15 +29,6 @@
 # find / -mtime -1 \! -type d -print > /tmp/liste.jour
 # build iso fs with rescue.
 # configuration file on /etc/drakconf/drakbackup/drakbakup.conf
-# perl -ne 'split(":");print "$_[0]:*:$_[2]:$_[3]:::\n";' /etc/passwd > passwd 
-#
-#
-# TODO:
-#	icon for cdrom.
-#	wizard step.
-#	implement all advanced.
-
-
 
 use Gtk;
 use lib qw(/usr/lib/libDrakX );
@@ -85,10 +76,8 @@ my $box;
 my $backup_choice = 0;
 my $cfg_file_exist = 0;
 my @user_and_path_list;
-my @user_list;
 my @all_user_list;
 my $list_other;
-my @list_other;
 my $mdk_cc = 0;
 my $DEBUG = 0;
 
@@ -103,14 +92,16 @@ my $option_replace = 0;
 my $comp_mode = 0;
 my $backup_mode = 0; 
 my $backup_sys = 1;
+my $backup_user = 1;
+my $backup_daemon = 0;
 my $backup_sys_cvs = 1;
 my $what_no_browser = 1;
 my $remember_pass = 0;
 my $cdrw = 0;
-my $net_proto;
-my $host_path;
-my $login_user;
-my $passwd_user;
+my $net_proto= '';
+my $host_path = '';
+my $login_user = '';
+my $passwd_user= '';
 my $net_daemon = 0;
 my $hd_daemon = 0;
 my $cd_daemon = 0;
@@ -119,7 +110,7 @@ my $where_net= 0;
 my $where_hd = 1;
 my $where_cd =0;
 my $cd_time = 650;
-my $when_space;
+my $when_space = 'year';
 
 foreach (@ARGV) {
     /--default/ and $default = 1, $mode=-1;
@@ -197,6 +188,7 @@ sub read_conf_file {
 	    if (/^PATH_TO_SAVE/)   { s/^PATH_TO_SAVE=//gi; $save_path = $_;	}
 	    if (/^OPTION_REPLACE/) { $option_replace = 1; }
 	    if (/^NO_SYS_FILES/)   { $backup_sys = 0;}
+	    if (/^NO_USER_FILES/)  { $backup_user = 0;}
 	    if (/^OPTION_COMP/)    { s/^OPTION_COMP=//gi; /TAR.GZ/ and  $comp_mode = 0; /TAR.BZ2/ and $comp_mode = 1; }
 	    if (/^NO_SYS_CVS/)	   { $backup_sys_cvs = 0;  }
 	    if (/^BROWSER_CACHE/)  { $what_no_browser = 0; }
@@ -343,8 +335,9 @@ sub  filedialog {
 }
 
 sub wizard {
-    my $user = 1;
-    my $user2;
+    my $backup_sys;
+    my $backup_user;
+    my $user;
     my $text;
 
   begin: 
@@ -356,8 +349,9 @@ sub wizard {
   	          (_("Please choose that you want to backup") . "\n\n") .
 	          $text,
 		  [ 
-		    { label => _("System Files"), val => \$user, type => "bool", text => _("  all files on your /etc directory.") },
-		    map { { label => _("$_"), val => \$user, type => "bool", text => _("all data contained on $_ directory") } } @user_list,
+		    { label => _("System Files"), val => \$backup_sys, type => "bool", text => _("  all files on your /etc directory.") },
+		    { label => _("User Files"), val => \$$backup_user, type => "bool", text => _("  all files on your /etc directory.") },
+#		    map { { label => _("$_"), val => \$user, type => "bool", text => _("all data contained on $_ directory") } } @user_list,
 		    ],
 		  );
     
@@ -372,7 +366,7 @@ sub wizard {
   	          (_("Please choose when you want to backup") . "\n\n") .
 	          $text,
 		  [ 
-		    { label => _("Daemon"), val => \$user, type => "bool", text => _(" Select it if you want that backup run as daemon") },
+		    { label => _("Daemon"), val => \$backup_daemon, type => "bool", text => _(" Select it if you want that backup run as daemon") },
 		    ],
 		  );
 
