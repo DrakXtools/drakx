@@ -1047,8 +1047,10 @@ sub write_lilo {
 	    push @entry_conf, "unsafe" if $entry->{unsafe} && !$entry->{table};
 		
 	    if ($entry->{table}) {
+		#- hum, things like table=c: are needed for some os2 cases,
+		#- in that $hd below is undef
 		my $hd = fs::get::device2part($entry->{table}, $all_hds->{hds});
-		if ($hd != $sorted_hds[0]) {		       
+		if ($hd && $hd != $sorted_hds[0]) {		       
 		    #- boot off the nth drive, so reverse the BIOS maps
 		    my $nb = sprintf("0x%x", 0x80 + (find_index { $hd == $_ } @sorted_hds));
 		    $entry->{mapdrive} ||= { '0x80' => $nb, $nb => '0x80' }; 
