@@ -34,7 +34,8 @@ sub load_category {
 	@l = modules::load_category($category, $wait_message, 'force') if !@l && $b_at_least_one;
     }
     if (my @err = grep { $_ } map { $_->{error} } @l) {
-	$in->ask_warn('', join("\n", @err));
+	my $return = $in->ask_warn('', join("\n", @err));
+	$in->exit(1) if !defined($return);
     }
     return @l if $b_auto && (@l || !$b_at_least_one);
 
