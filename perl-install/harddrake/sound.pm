@@ -157,8 +157,9 @@ sub do_switch {
 
 sub switch {
     my ($in, $device) = @_;
-    my $driver = $device->{driver};
-    $driver = modules::get_alias($driver) if $driver =~ /sound-card/; # alsaconf ...
+    my $driver = $device->{current_driver};
+    $driver = $device->{driver} unless $driver;
+
     foreach (@blacklist) { $blacklisted = 1 if $driver eq $_ }
     my $alternative = get_alternative($driver);
     if ($alternative) {
@@ -199,7 +200,9 @@ To use alsa, one can either use:
 		  $in->ask_warn(_("Warning"), _("The old \"%s\" driver is blacklisted.\n
 It has been reported to oopses the kernel on unloading.\n
 The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)) if $blacklisted;
+		  my $wait = $in->wait_message(_("Please wait"),_("Please Wait... Applying the configuration"));
 		  do_switch($driver, $new_driver);
+		  undef $wait;
 	   }
     } elsif ($driver eq "unknown") {
 	   $in->ask_warn(_("No known driver"), 

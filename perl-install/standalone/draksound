@@ -39,7 +39,8 @@ if (@devices) {
 	   # allocate sound-slot in the same order as install2.pm
 	   # fill $device->{driver} with the right sound-slot-XX or default driver if missing sound-slot [real fix'll be in harddrake service]
 	   my $driver = modules::get_alias("sound-slot-$::i");
-	   $_->{driver} = $driver if $driver;
+	   $driver = modules::get_alias($driver) if $driver =~ /sound-card/; # alsaconf ...
+	   $_->{current_driver} = $driver if $driver;
 	   harddrake::sound::config($in, $_);
 	 } modules::probe_category('multimedia/sound');
 } else {
