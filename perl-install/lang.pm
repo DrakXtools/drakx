@@ -132,7 +132,7 @@ my %languages = my @languages = (
 #- Tamil currently works only with TSCII encoding; which identifies
 #- itself as a fake iso-8859-1
 #'ta_IN.UTF-8'=> [ 'Tamil (UTF-8)',	'iso-8859-1',      'ta', 'ta', 'UTF-8' ],
-  'ta'  => [ 'Tamil (TSCII)',		'tscii',      'ta', 'ta' ],
+'ta_IN' => [ 'Tamil (TSCII)',		'tscii',      'ta', 'ta' ],
 'tg_TJ.UTF-8'=> [ 'Tajik',		'utf_koi8-k',    'tg', 'tg', 'UTF-8' ],
   'th'  => [ 'Thai|TIS-620',            'tis620',     'th', 'th' ],
 'th_TH.UTF-8'=> [ 'Thai (UTF-8)',         'tis620',     'th', 'th', 'UTF-8' ],
