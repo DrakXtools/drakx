@@ -951,7 +951,7 @@ sub write_lilo {
     #- normalize: RESTRICTED is only valid if PASSWORD is set
     delete $bootloader->{restricted} if !$bootloader->{password};
 
-    if (!get_label('default', $bootloader)) {
+    if (!get_label($bootloader->{default}, $bootloader)) {
 	log::l("default bootloader entry $bootloader->{default} is invalid, choose another one");
 	$bootloader->{default} = $bootloader->{entries}[0]{label};
     }
