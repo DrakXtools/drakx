@@ -470,10 +470,13 @@ sub psUsingHdlist {
     #- for getting header of package during installation or after by urpmi.
     my $newf = "$urpmidir/hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
     unless ($o_nocopy) {
+	my $w_wait;
+	$w_wait = $::o->wait_message(N("Please wait"), N("Downloading %s", $hdlist)) if $::o->{method} =~ /^(?:ftp|http|nfs)$/;
 	-e $newf and do { unlink $newf or die "cannot remove $newf: $!" };
 	install_any::getAndSaveFile($o_fhdlist || "media/media_info/$hdlist", $newf) or do { unlink $newf; die "no $hdlist found" };
 	$m->{hdlist_size} = -s $newf; #- keep track of size for post-check.
 	symlinkf $newf, "/tmp/$hdlist";
+	undef $w_wait;
     }
 
     my $newsf = "$urpmidir/synthesis.hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
