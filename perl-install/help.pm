@@ -11,7 +11,9 @@ selectLanguage =>
 license =>
  __("You need to accept the terms of the above license to continue installation.
 
+
 Please click on \"Accept\" if you are agree with its terms.
+
 
 Please click on \"Refuse\" if you disagree with its terms. Installation will end without modifying your current
 configuration."),
@@ -28,7 +30,9 @@ selectInstallClass =>
  __("Please choose \"Install\" if there are no previous version of Linux-Mandrake
 installed or if you wish to use several operating systems.
 
+
 Please choose \"Rescue\" if you wish to rescue an already installed version of Linux-Mandrake.
+
 
 Depend of your knowledge in GNU/Linux, you can choose one of the following levels to install or rescue your
 Linux-Mandrake operating system:
@@ -36,9 +40,11 @@ Linux-Mandrake operating system:
 	* Recommanded: if you have never installed a GNU/Linux operating system choose this. Installation will be
 	  be very easy and you will be asked only on few questions.
 
+
 	* Customized: if you are familiar enough with GNU/Linux, you may choose the primary usge (workstation, server,
 	  development) of your sytem. You will need to answer to more questions than in \"Recommanded\" installation
 	  class, so you need to know how works GNU/Linux to choose this installation class.
+
 
 	* Expert: if you have a good knowledge in GNU/Linux, you can choose this installation class. As in \"Customized\"
 	  installation class, you will be able to choose the primary usage (workstation, server, development). Be very
@@ -52,6 +58,7 @@ selectInstallClassCorpo =>
   - Customized: If you are familiar enough with GNU/Linux, you may then choose
     the primary usage for your machine. See below for details.
 
+
   - Expert: This supposes that you are fluent with GNU/Linux and want to
     perform a highly customized installation. As for a \"Customized\"
     installation class, you will be able to select the usage for your system.
@@ -63,9 +70,11 @@ selectInstallClass2 =>
 	* Workstation: this the ideal choice if you intend to use your machine primarily for everyday use, at office or
 	  at home.
 
+
 	* Development: if you intend to use your machine primarily for software development, it is the good choice. You
 	  will then have a complete collection of software installed in order to compile, debug and format source code,
 	  or create software packages.
+
 
 	* Server: if you intend to use this machine as a server, it is the good choice. Either a file server (NFS or
 	  SMB), a print server (Unix style or Microsoft Windows style), an authentication server (NIS), a database
@@ -76,15 +85,18 @@ setupSCSI =>
 finds an SCSI adapter and knows which driver to use, it will be automatically
 installed.
 
+
 If you have no SCSI adapter, an ISA SCSI adapter or a PCI SCSI adapter that
 DrakX doesn't recognize, you will be asked if a SCSI adapter is present in your
 system. If there is no adapter present, you can click on \"No\". If you click on
 \"Yes\", a list of drivers will be presented from which you can select your
 specific adapter.
 
+
 If you have to manually specify your adapter, DrakX will ask if you want to
 specify options for it. You should allow DrakX to probe the hardware for the
 options. This usually works well.
+
 
 If not, you will need to provide options to the driver. Please review the User
 Guide (chapter 3, section \"Collective informations on your hardware) for hints
@@ -99,17 +111,21 @@ existing operating system uses all the space available on it, you need to
 partition it. Basically, partitioning a hard drive consists of logically
 dividing it to create space to install your new Linux-Mandrake system.
 
+
 Because the effects of the partitioning process are usually irreversible,
 partitioning can be intimidating and stressful if you are an inexperienced user.
 This wizard simplifies this process. Before begining, please consult the manual
 and take your time.
 
+
 You need at least two partitions. One is for the operating system itself and the
 other is for the virtual memory (also called Swap).
+
 
 If partitions have been already defined (from a previous installation or from
 another partitioning tool), you just need choose those to use to install your
 Linux system.
+
 
 If partitions haven't been already defined, you need to create them. 
 To do that, use the wizard available above. Depending of your hard drive
@@ -118,22 +134,23 @@ configuration, several solutions can be available:
 	* Use existing partition: the wizard has detected one or more existing Linux partitions on your hard drive. If
 	  you want to keep them, choose this option. 
 
-	* Erase entire disk: if you want delete all data and
-all partitions present on your hard drive and replace them by
+
+	* Erase entire disk: if you want delete all data and all partitions present on your hard drive and replace them by
 	  your new Linux-Mandrake system, you can choose this option. Be careful with this solution, you will not be
 	  able to revert your choice after confirmation.
+
 
 	* Use the free space on the Windows partition: if Microsoft Windows is installed on your hard drive and takes
 	  all space available on it, you have to create free space for Linux data. To do that you can delete your
 	  Microsoft Windows partition and data (see \"Erase entire disk\" or \"Expert mode\" solutions) or resize your
-	  Microsoft Windows partition. Resizing can be performed
-without loss of any data. This solution is
+	  Microsoft Windows partition. Resizing can be performed without loss of any data. This solution is
 	  recommended if you want use both Linux-Mandrake and Microsoft Windows on same computer.
 
-	  Before choosing this solution, please understand
-that the size of your Microsoft
+
+	  Before choosing this solution, please understand that the size of your Microsoft
 	  Windows partition will be smaller than at present time. It means that you will have less free space under
 	  Microsoft Windows to store your data or install new software.
+
 
 	* Expert mode: if you want to partition manually your hard drive, you can choose this option. Be careful before
 	  choosing this solution. It is powerful but it is very dangerous. You can lose all your data very easily. So,
@@ -146,37 +163,50 @@ have been already defined (from a previous installation of GNU/Linux or from
 another partitioning tool), you can use existing partitions. In other cases,
 hard drive partitions must be defined.
 
+
 To create partitions, you must first select a hard drive. You can select the
 disk for partitioning by clicking on \"hda\" for the firs IDE drive, \"hdb\" for
 the second or \"sda\" for the first SCSI drive and so on.
+
 
 To partition the selected hard drive, you can use these options:
 
    * Clear all: this option deletes all partitions available on the selected hard drive.
 
+
    * Auto allocate:: this option allows you to automatically create Ext2 and swap partitions in free space of your
      hard drive.
+
 
    * Rescue partition table: if your partition table is damaged, you can try to recover it using this option. Please
      be careful and remember that it can fail.
 
+
    * Undo: you can use this option to cancel your changes.
 
+
    * Reload: you can use this option if you wish to undo all changes and load your initial partitions table
+
 
    * Wizard: If you wish to use a wizard to partition your hard drive, you can use this option. It is recommended if
      you do not have a good knowledge in partitioning.
 
+
    * Restore from floppy: if you have saved your partition table on a floppy during a previous installation, you can
      recover it using this option.
+
 
    * Save on floppy: if you wish to save your partition table on a floppy to be able to recover it, you can use this
      option. It is strongly recommended to use this option
 
+
    * Done: when you have finished partitioning your hard drive, use this option to save your changes.
 
-For information, you can reach any option using the keyboard: navigate trough the partitions using Tab and Up/Down
-        arrows. When a partition is selected, you can use:
+
+For information, you can reach any option using the keyboard: navigate trough the partitions using Tab and Up/Down arrows.
+
+
+When a partition is selected, you can use:
 
            * Ctrl-c to create a new partition (when a empty partition is selected)
 
@@ -193,13 +223,17 @@ to install enough software. If you want store your data on a separate partition,
 you need also to choose a \"/home\" (only possible if you have more than one
 Linux partition available).
 
+
 For information, each partition is listed as follows: \"Name\", \"Capacity\".
+
 
 \"Name\" is coded as follow: \"hard drive type\", \"hard drive number\",
 \"partition number\" (for example, \"hda1\").
 
+
 \"Hard drive type\" is \"hd\" if your hard drive is an IDE hard drive and \"sd\"
 if it is an SCSI hard drive.
+
 
 \"Hard drive number\" is always a letter after \"hd\" or \"sd\". With IDE hard drives:
 
@@ -210,6 +244,7 @@ if it is an SCSI hard drive.
    * \"c\" means \"master hard drive on the secondary IDE controller\",
 
    * \"d\" means \"slave hard drive on the secondary IDE controller\".
+
 
 With SCSI hard drives, a \"a\" means \"primary hard drive\", a \"b\" means \"secondary hard drive\", etc..."),
 
@@ -224,6 +259,7 @@ partitions present on this hard drive. Be careful, after clicking on \"OK\", you
 will not be able to recover any data and partitions present on this hard drive,
 including any Windows data.
 
+
 Click on \"Cancel\" to cancel this operation without losing any data and
 partitions present on this hard drive."),
 
@@ -232,14 +268,17 @@ resizeFATChoose =>
 detected on your hard drive. Please choose the one you want resize to install
 your new Linux-Mandrake operating system.
 
+
 For information, each partition is listed as follow; \"Linux name\", \"Windows
 name\" \"Capacity\".
 
 \"Linux name\" is coded as follow: \"hard drive type\", \"hard drive number\",
 \"partition number\" (for example, \"hda1\").
 
+
 \"Hard drive type\" is \"hd\" if your hard dive is an IDE hard drive and \"sd\"
 if it is an SCSI hard drive.
+
 
 \"Hard drive number\" is always a letter putted after \"hd\" or \"sd\". With IDE hard drives:
 
@@ -253,6 +292,7 @@ if it is an SCSI hard drive.
 
 With SCSI hard drives, a \"a\" means \"primary hard drive\", a \"b\" means \"secondary hard drive\", etc.
 
+
 \"Windows name\" is the letter of your hard drive under Windows (the first disk
 or partition is called \"C:\")."),
 
@@ -263,19 +303,24 @@ formatPartitions =>
  __("Any partitions that have been newly defined must be
 formatted for use (formatting meaning creating a filesystem).
 
+
 At this time, you may wish to reformat some already existing partitions to erase
 the data they contain. If you wish do that, please also select the partitions
 you want to format.
+
 
 Please note that it is not necessary to reformat all pre-existing partitions.
 You must reformat the partitions containing the operating system (such as \"/\",
 \"/usr\" or \"/var\") but do you no have to reformat partitions containing data
 that you wish to keep (typically /home).
 
+
 Please be careful selecting partitions, after formatting, all data will be
 deleted and you will not be able to recover any of them.
 
+
 Click on \"OK\" when you are ready to format partitions.
+
 
 Click on \"Cancel\" if you want to choose other partitions to install your new
 Linux-Mandrake operating system."),
@@ -283,6 +328,7 @@ Linux-Mandrake operating system."),
 choosePackages => 
  __("You may now select the group of packages you wish to
 install or upgrade.
+
 
 DrakX will then check whether you have enough room to install them all. If not,
 it will warn you about it. If you want to go on anyway, it will proceed onto the
@@ -295,11 +341,14 @@ choosePackagesTree =>
  __("You can now choose individually all the packages you
 wish to install.
 
+
 You can expand or collapse the tree by clicking on options in the left corner of
 the packages window.
 
+
 If you prefer to see packages sorted in alphabetic order, click on the icon
 \"Toggle flat and group sorted\".
+
 
 If you want not to be warned on dependencies, click on \"Automatic
 dependencies\". If you do this, note that unselecting one package may silently
@@ -314,6 +363,7 @@ installPackages =>
  __("Your new Linux-Mandrake operating system is currently
 installed. This operation should take a few minutes (it depends on size you
 choose to install and the speed of your computer).
+
 
 Please be patient."),
 
@@ -331,15 +381,17 @@ configureNetwork =>
 to a local network please choose the correct option. Please turn on your device
 before choosing the correct option to let DrakX detect it automatically.
 
+
 If you do not have any connection to the Internet or a local network, choose
 \"Disable networking\".
+
 
 If you wish to configure the network later after installation or if you have
 finished to configure your network connection, choose \"Done\"."),
 
 configureNetworkNoModemFound => 
- __("No modem has been detected. Please select
-the serial port on which it is plugged.
+ __("No modem has been detected. Please select the serial port on which it is plugged.
+
 
 For information, the first serial port (called \"COM1\" under Mircrosoft
 Windows) is called \"ttyS0\" under Linux."),
@@ -352,8 +404,7 @@ information here, this information will be obtained from your Internet Service
 Provider at connection time."),
 
 configureNetworkISDN => 
- __("If your modem is an external modem, please turn on
-it now to let DrakX detect it automatically."),
+ __("If your modem is an external modem, please turn on it now to let DrakX detect it automatically."),
 
 configureNetworkADSL => 
  __("Please turn on your modem and choose the correct one."),
@@ -373,15 +424,14 @@ obtained from your Internet Service Provider."),
 configureNetworkIP => 
  __("You may now configure your network device.
 
-* IP address: if you don't know or are not sure what to enter,
-ask your network administrator. You should not enter an IP address if
-you select the option \"Automatic IP\" below.
+   * IP address: if you don't know or are not sure what to enter, ask your network administrator.
+     You should not enter an IP address if you select the option \"Automatic IP\" below.
 
-* Netmask: \"255.255.255.0\" is generally a good choice. If you don't know or are not sure what to enter, ask your
-  network administrator.
+   * Netmask: \"255.255.255.0\" is generally a good choice. If you don't know or are not sure what to enter,
+     ask your network administrator.
 
-* Automatic IP: if your network uses BOOTP or DHCP protocol, select this option. If selected, no value is needed in
-  \"IP address\". If you don't know or are not sure if you need to select this option, ask your network administrator."),
+   * Automatic IP: if your network uses BOOTP or DHCP protocol, select this option. If selected, no value is needed in
+    \"IP address\". If you don't know or are not sure if you need to select this option, ask your network administrator."),
 
 configureNetworkHost => 
  __("You may now enter your host name if needed. If you
@@ -404,6 +454,7 @@ installCrypto =>
 set up correctly. First choose a mirror where you wish to download packages and
 after that select the packages to install.
 
+
 Note you have to select mirror and cryptographic packages according
 to your legislation."),
 
@@ -415,13 +466,16 @@ configureTimezoneGMT =>
 Time) and translates it in local time according to the time zone you have
 selected.
 
+
 If you use Microsoft Windows on this computer, choose \"No\"."),
 
 configureServices =>
  __("You may now choose which services you want to start at boot time.
 
+
 When your mouse comes over an item, a small balloon help will popup which
 describes the role of the service.
+
 
 Be very careful in this step if you intend to use your machine as a server: you
 will probably want not to start any services that you don't need. Please
@@ -501,8 +555,10 @@ __("You need to enter some informations here.
    * Printer Connection: If your printer is physically connected to your computer, select \"Local printer\".
      If you want to access a printer located on a remote Unix machine, select \"Remote lpd printer\".
 
+
      If you want to access a printer located on a remote Microsoft Windows machine (or on Unix machine using SMB
      protocol), select \"SMB/Windows 95/98/NT\".
+
 
      If you want to acces a printer located on NetWare network, select \"NetWare\".
 "),
@@ -510,6 +566,7 @@ __("You need to enter some informations here.
 configurePrinterDev => 
  __("Your printer has not been detected. Please enter the name of the device on
 which it is connected.
+
 
 For information, most printers are connected on the first parallel port. This
 one is called \"/dev/lp0\" under GNU/Linux and \"LPT1\" under Microsoft Windows."),
@@ -520,22 +577,24 @@ configurePrinterType =>
 configurePrinterOptions => 
 __("Please select rights options according to your printer.
 Please see its documentation if you don't know what choose here.
-	
-You will able to test your configuration in next step and
-you will be able to modify it if it doesn't work as you want."),
+
+
+You will able to test your configuration in next step and you will be able to modify it if it doesn't work as you want."),
 
 setRootPassword => 
- __("You can now enter the root password for your
-Linux-Mandrake system. The password must be entered twice to verify that both
-password entries are identical.
+ __("You can now enter the root password for your Linux-Mandrake system.
+The password must be entered twice to verify that both password entries are identical.
+
 
 Root is the system's administrator and is the only user allowed to modify the
 system configuration. Therefore, choose this password carefully. 
 Unauthorized use of the root account can be extemely dangerous to the integrity
 of the system, its data and other system connected to it.
 
+
 The password should be a mixture of alphanumeric characters and at least 8
 characters long. It should never be written down.
+
 
 Do not make the password too long or complicated, though: you must be able to
 remember it without too much effort."),
@@ -669,19 +728,24 @@ miscellaneous =>
   chipsets can ruin your data, so beware. Note that the kernel has a builtin blacklist of drives and chipsets, but if
   you want to avoid bad surprises, leave this option unset.
 
+
 * Choose security level: you can choose a security level for your system. Please refer to the manual for complete
   information. Basically, if you don't know what to choose, keep the default option.
+
 
 * Precise RAM if needed: unfortunately, there is no standard method to ask the BIOS about the amount of RAM present in
   your computer. As consequence, Linux may fail to detect your amount of RAM correctly. If this is the case, you can
   specify the correct amount or RAM here. Please note that a difference of 2 or 4 MB between detected memory and memory
   present in your system is normal.
 
+
 * Removable media automounting: if you would prefer not to manually mount removable media (CD-Rom, floppy, Zip, etc.) by
   typing \"mount\" and \"umount\", select this option.
 
+
 * Clean \"/tmp\" at each boot: if you want delete all files and directories stored in \"/tmp\" when you boot your system,
   select this option.
+
 
 * Enable num lock at startup: if you want NumLock key enabled after booting, select this option. Please note that you
   should not enable this option on laptops and that NumLock may or may not work under X."),
