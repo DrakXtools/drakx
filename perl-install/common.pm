@@ -9,7 +9,7 @@ use vars qw(@ISA @EXPORT $SECTORSIZE);
 
 @ISA = qw(Exporter);
 # no need to export ``_''
-@EXPORT = qw($SECTORSIZE N N_ translate untranslate formatXiB removeXiBSuffix formatTime setVirtual makedev unmakedev salt set_permissions files_exist set_alternative mandrake_release require_root_capability check_for_xserver);
+@EXPORT = qw($SECTORSIZE N N_ check_for_xserver files_exist formatTime formatXiB makedev mandrake_release removeXiBSuffix require_root_capability salt setVirtual set_alternative set_permissions translate unmakedev untranslate);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
