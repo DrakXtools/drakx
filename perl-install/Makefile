@@ -36,6 +36,10 @@ localcopy: clean
 	rm -rf standalone/pixmaps
 	$(MAKE) -C ../tools clean
 	cd .. ; rm -rf $(PACKAGE)-$(PKGVERSION) ; cp -af perl-install $(PACKAGE)-$(PKGVERSION) ; cp -af $(OTHERS) $(PACKAGE)-$(PKGVERSION)
+	cd
+	find ../$(PACKAGE)-$(PKGVERSION) -name '*.pm' | xargs perl -pi -e 's/\s*use\s+(diagnostics|vars|strict)//g'
+	find ../$(PACKAGE)-$(PKGVERSION)/standalone -type f | xargs perl -pi -e 's/\s*use\s+(diagnostics|vars|strict)//g'
+
 
 $(DIRS):
 	install -d auto

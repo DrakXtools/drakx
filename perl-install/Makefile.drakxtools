@@ -50,8 +50,6 @@ install:
 	install -d $(LIBDEST)/diskdrake
 	install -m 644 diskdrake/*.pm $(LIBDEST)/diskdrake
 
-	find $(LIBDEST) -name "*.pm" | xargs perl -pi -e 's/\s*use\s+(diagnostics|vars|strict)//g'
-
 	for i in $(HAVEINST_DIRS); do \
 		$(MAKE) -C $$i install PREFIX=$(PREFIX) DATADIR=$(DATADIR) NAME=$(NAME) ; \
 	done
