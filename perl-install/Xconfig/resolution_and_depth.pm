@@ -88,7 +88,6 @@ sub allowed {
     } elsif ($card->{Driver} eq 'vmware') {
 	push @depths, 16, 8;
     } elsif ($card->{Driver} eq 'fglrx') {
-	$prefered_depth = 24;
 	push @depths, 24;
     } else {
 	if ($card->{use_DRI_GLX}) {
