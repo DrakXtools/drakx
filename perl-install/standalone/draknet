@@ -20,8 +20,9 @@
 
 use lib qw(/usr/lib/libDrakX);
 
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+
 use interactive;
-use standalone;
 use common;
 use network::netconnect;
 use network::ethernet;
@@ -399,7 +400,7 @@ sub update2 {
         $isconnected = $to_update;
         if($isconnected !=-1) {
             if ($isconnected && !in_ifconfig($netcnx->{NET_INTERFACE})) {
-                $warning_label1->set(_("Warning, another internet connexion has been detected, maybe using your network"));
+                $warning_label1->set(_("Warning, another Internet connection has been detected, maybe using your network"));
                 $isconnected=0;
             } else { $warning_label1->set("") }
             $label8->set($isconnected ? _("Connected") : _("Not connected"));
