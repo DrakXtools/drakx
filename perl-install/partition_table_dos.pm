@@ -23,19 +23,24 @@ sub hasExtended { 1 }
 sub compute_CHS($$) {
     my ($hd, $e) = @_;
     my @l = qw(cyl head sec);
-    @$e{map { "start_$_" } @l} = $e->{start} || $e->{type} ? CHS2rawCHS(sector2CHS($hd, $e->{start})) : (0,0,0);
-    @$e{map { "end_$_"   } @l} = $e->{start} || $e->{type} ? CHS2rawCHS(sector2CHS($hd, $e->{start} + $e->{size} - 1)) : (0,0,0);
+    @$e{map { "start_$_" } @l} = $e->{start} || $e->{type} ? CHS2rawCHS($hd, sector2CHS($hd, $e->{start})) : (0,0,0);
+    @$e{map { "end_$_"   } @l} = $e->{start} || $e->{type} ? CHS2rawCHS($hd, sector2CHS($hd, $e->{start} + $e->{size} - 1)) : (0,0,0);
     1;
 }
 
-sub CHS2rawCHS($$$) {
-    my ($c, $h, $s) = @_;
-    $c = min($c, 1023); #- no way to have a #cylinder >= 1024
+sub CHS2rawCHS {
+    my ($hd, $c, $h, $s) = @_;
+    if ($c > 1023) {
+	#- no way to have a #cylinder >= 1024
+	$c = 1023;
+	$h = $hd->{geom}{heads} - 1;
+	$s = $hd->{geom}{sectors};
+    }
     ($c & 0xff, $h, $s | ($c >> 2 & 0xc0));
 }
 
 # returns (cylinder, head, sector)
-sub sector2CHS($$) {
+sub sector2CHS {
     my ($hd, $start) = @_;
     my ($s, $h);
     ($start, $s) = divide($start, $hd->{geom}{sectors});
@@ -43,7 +48,7 @@ sub sector2CHS($$) {
     ($start, $h, $s + 1);
 }
 
-sub read($$) {
+sub read {
     my ($hd, $sector) = @_;
     my $tmp;
 
