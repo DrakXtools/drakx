@@ -33,7 +33,7 @@ require '/usr/bin/merge2pcitable.pl';
 my $drivers = read_pcitable("/usr/share/ldetect-lst/pcitable");
 
 while (my ($k, $v) = each %$drivers) {
-    $v->[0] =~ /^usb-/ or next;
+    $v->[0] =~ /^usb-|^ehci-hcd/ or next;
     $k =~ /^(....)(....)/;
     printf qq|\t{ 0x%s, 0x%s, "", "%s" },\n|,
       $1, $2, $v->[0];
