@@ -104,34 +104,32 @@ my $chkfontpath = '/usr/sbin/chkfontpath';
 my $part;
 my @list_part;
 my @test;
-my @font_list = ();
-my @installed_fonts = ();
-my @installed_fonts_path = ();
-my @fontsdir_to_install= ();
-my @fontsdir_to_uninstall= ();
-my @installed_fonts_full_path = (); 
+my @font_list;
+my @installed_fonts;
+my @installed_fonts_path;
+my @fontsdir_to_install;
+my @fontsdir_to_uninstall;
+my @installed_fonts_full_path;
 
 
-sub search_installed_fonts {
+sub list_fontpath {
     foreach (grep { /\d+:\s/ } `$chkfontpath -l`) {
 	chomp;
 	s/\d+:\s//gi;
 	s/:\w*$//gi;
 	push @installed_fonts_path, $_;
     }
+}
+
+sub search_installed_fonts {
+    list_fontpath();
     push @installed_fonts, all($_) foreach @installed_fonts_path;
 }
 
 sub search_installed_fonts_full_path {
-    my $j;
-    foreach (grep { /\d+:\s/ } `$chkfontpath -l`) {
-	chomp;
-	s/\d+:\s//gi;
-	s/:\w*$//gi;
-	push @installed_fonts_path, $_;
-    }
+    list_fontpath();
     foreach my $i (@installed_fonts_path) {
-	foreach $j (all($i)) {
+	foreach my $j (all($i)) {
 	    push @installed_fonts_full_path, "$i/$j";
 	}
     }
@@ -146,16 +144,21 @@ sub search_windows_font {
 	    print "[35mdrakfont:: could not find any font in $win_dir/win*/fonts [0m\n";
 	    return 0;
 	}
-	if (!$replace)
-	  {
-	      foreach my $i (@list_fonts_win) {
-		  grep ( /$i$/, @font_list) || grep (/$i/, @installed_fonts) or push @font_list, "$win_dir/windows/fonts/$i";
-	      }
-	      foreach my $i (@list_fonts_winnt) {
-		  grep ( /$i$/, @font_list) || grep (/$i/, @installed_fonts) or push @font_list, "$win_dir/winnt/fonts/$i";
-	      }
-	  }
-	else {
+	# TODO : handle replace like on the other function
+	if (!$replace) {
+	    foreach ([\@list_fonts_win, "windows"], [\@list_fonts_winnt, "winnt"]) {
+		foreach my $i (@{$_[0]}) {
+		    grep ( /$i$/, @font_list) || grep (/$i/, @installed_fonts) or push @font_list, "$win_dir/$_[1]/fonts/$i";
+		}
+	    }
+#		    foreach my $i (@list_fonts_win) {
+#			grep ( /$i$/, @font_list) || grep (/$i/, @installed_fonts) or push @font_list, "$win_dir/windows/fonts/$i";
+#	      foreach my $i (@list_fonts_winnt) {
+#		  grep ( /$i$/, @font_list) || grep (/$i/, @installed_fonts) or push @font_list, "$win_dir/winnt/fonts/$i";
+#	      }
+	} else {
+#	    foreach ([\@list_fonts_win, "windows"], [\@list_fonts_winnt, "winnt"]) {
+	    #TODO : add a foreach to factorize
 	    foreach my $i (@list_fonts_win) {
 		grep ( /$i$/, @font_list)  or push @font_list, "$win_dir/windows/fonts/$i";
 	    }
@@ -169,32 +172,32 @@ sub search_windows_font {
 
 
 
+#TODO : replace ($i =~ /.ttf$/i) || ($i =~ /.pfa$/i) || ($i =~ /.pfb$/i) || ($i =~ /.pcf$/i) || ($i =~ /.pcf.gz$/i) by a function
+
+sub is_a_font {
+    local $_ = $_[0];
+    /.ttf$/i || /.pfa$/i || /.pfb$/i || /.pcf$/i || /.pcf.gz$/i;
+}
+
 sub search_dir_font {
+    my ($fn) = @_;
     my @font_list_tmp = ();
     my @font_list_tmpp = ();
     my $dir ;
-    my $fn = $_;
-    if (!(-e $fn )) { print "$_ :: no such file or directory \n";}
-    else {
-	if ( -d $fn ) { 
+    if (!(-e $fn )) { print "$_ :: no such file or directory \n" } else {
+	if ( -d $fn ) {
 	    $dir = $fn;
-	    foreach my $i (all($fn)) { 
-		if (($i =~ /.ttf$/i) || ($i =~ /.pfa$/i) || ($i =~ /.pfb$/i) || ($i =~ /.pcf$/i) || ($i =~ /.pcf.gz$/i)) {
+	    foreach my $i (all($fn)) {
+		if (is_a_font($i)) {
 		    push @font_list_tmp, "$i";
-		    if (!$replace) {
-			foreach my $i (@font_list_tmp) {
-			    !grep /$i/, (@installed_fonts) and push @font_list, "$fn$i";
-			}
-		    }
-		    else { 
-			foreach my $i (@font_list_tmp) {
-			    grep /$i/, @font_list or  push @font_list, $fn."/".$i;
-			}
+		    foreach my $i (@font_list_tmp) {
+			!$replace && grep(/$i/, @installed_fonts) and next;
+			grep /$i/, @font_list or push @font_list, "$fn/$i";
 		    }
 		}
 	    }
-	}
-	else {
+	} else {
+	    # TODO: add replace handling, and @font_list_tmp filling.
 	    if (($fn =~ /.ttf$/i) || ($fn =~ /.pfa$/i) || ($fn =~ /.pfb$/i) || ($fn =~ /.pcf$/i) || ($fn =~ /.pcf.gz$/i)) {
 		!grep /$fn/, (@installed_fonts) and push @font_list, "$fn";
 	    }
@@ -253,6 +256,7 @@ sub backend_mod {
 	print "\n...............The End...................\n";
     }
 
+    #TODO : test directly @install
     if ($install[0]) {
 	print ".......Install Specifics Fonts...........\n\n";
 	search_installed_fonts();
