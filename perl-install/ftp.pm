@@ -31,13 +31,13 @@ sub new {
 
 	my $ftp;
 	foreach (1..10) {
-	    $ftp = Net::FTP->new(resolv($host), %options) or die;
+	    $ftp = Net::FTP->new(resolv($host), %options) or die "Can't resolv hostname '$host'\n";
 	    $ftp && $ftp->login($o_login, $o_password) and last;
 
 	    log::l("ftp login failed, sleeping before trying again");
 	    sleep 5 * $_;
 	}
-	$ftp or die "unable to open ftp connection to $host";
+	$ftp or die "unable to open ftp connection to $host\n";
 	$ftp->binary;
 	$ftp->cwd($prefix);
 
