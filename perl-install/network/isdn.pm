@@ -160,16 +160,15 @@ sub isdn_read_config {
 	    /(.*)=(.*)/;
 	    $isdn->{$1} = $2;
 	}
-	;
 	foreach my $f ('ioptions1B', 'ioptions2B') {
-	    foreach (cat_ ("$prefix/etc/ppp/$f")) {
+	    foreach (cat_("$prefix/etc/ppp/$f")) {
 		if (/^\s*name\s*(.*)/) {
 		    $isdn->{login} = $1;
 		    goto NEXT;
 		}
 	    }
 	}
-	NEXT :
+	NEXT:
 	foreach my $f ('isdn1B.conf', 'isdn2B.conf') {
 	    foreach (cat_ ("$prefix/etc/isdn/$f")) {
 		/^\s*EAZ\s*=\s*(.*)/ and $isdn->{phone_in} = $1;
