@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 0.20mdk
+Release: 0.21mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -290,6 +290,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Mon Feb  3 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.21mdk
+- draksec:
+  o gui look nicer
+  o add help for check cron 
+  o fix "first notebook page do not show up"
+  o do not be listed in drakxtools-http
+- sanitize draxktools-http service script
+- diskdrake: ntfs resizing bug fixes (pixel)
+
 * Fri Jan 31 2003 Damien Chaumette <dchaumette@mandrakesoft.com> 9.1-0.20mdk
 - drakconnect: add more zeroconf support
 
