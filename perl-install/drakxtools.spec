@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 0.16mdk
+Release: 0.17mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -290,6 +290,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Tue Jan 28 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.17mdk
+- drakfont updates (poulpy):
+  o fix progress bar,
+  o about box,
+  o ugly border when embedded.
+- printerdrake: various fixes for local printer (till)
+- small fix in drakgw (florin)
+
 * Mon Jan 27 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.16mdk
 - fix wait messages (gc)
 - vietnamese translation update
