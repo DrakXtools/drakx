@@ -80,6 +80,8 @@ my $central_widget;
 my $interactive;
 my $up_box;
 my $box;
+my $backup_choice = 0;
+
 
 # PATH  & Global variables.
 my $cfg_file = "/etc/drakconf/drakbackup/drakbackup.conf";
@@ -130,6 +132,54 @@ my @xpm_data = ( "16 16 4 1",
 		 " ..X.......  ",
 		 " ..         ",
 		 " ");
+
+my @book_open_xpm = (
+"16 16 4 1",
+"       c None s None",
+".      c black",
+"X      c #808080",
+"o      c white",
+"                ",
+"  ..            ",
+" .Xo.    ...    ",
+" .Xoo. ..oo.    ",
+" .Xooo.Xooo...  ",
+" .Xooo.oooo.X.  ",
+" .Xooo.Xooo.X.  ",
+" .Xooo.oooo.X.  ",
+" .Xooo.Xooo.X.  ",
+" .Xooo.oooo.X.  ",
+"  .Xoo.Xoo..X.  ",
+"   .Xo.o..ooX.  ",
+"    .X..XXXXX.  ",
+"    ..X.......  ",
+"     ..         ",
+"                ");
+
+my @book_closed_xpm = (
+"16 16 6 1",
+"       c None s None",
+".      c black",
+"X      c red",
+"o      c yellow",
+"O      c #808080",
+"#      c white",
+"                ",
+"       ..       ",
+"     ..XX.      ",
+"   ..XXXXX.     ",
+" ..XXXXXXXX.    ",
+".ooXXXXXXXXX.   ",
+"..ooXXXXXXXXX.  ",
+".X.ooXXXXXXXXX. ",
+".XX.ooXXXXXX..  ",
+" .XX.ooXXX..#O  ",
+"  .XX.oo..##OO. ",
+"   .XX..##OO..  ",
+"    .X.#OO..    ",
+"     ..O..      ",
+"      ..        ",
+"                ");
 
 
 
@@ -192,12 +242,7 @@ sub build_backup_files {
 }
 
 sub interactive_mode {
-    my $fst_choice_box;
-    my $fst_choice_box1;
-    my $pixmap_fst_choice;
     $interactive = 1;
-    my $pixmap;
-    my $pixmapwid;
     my $mask;
     my $style;
     my $box;
@@ -221,7 +266,10 @@ sub interactive_mode {
     $box2->add( $radio2);
     my $radio3 = new Gtk::RadioButton( "Build Backup now", $radio1);
     $box2->add( $radio3);
-
+    gtksignal_connect( $radio1, clicked => sub { $backup_choice = 0 });
+    gtksignal_connect( $radio2, clicked => sub { $backup_choice = 1 });
+    gtksignal_connect( $radio3, clicked => sub { $backup_choice = 2 });
+    
     gtkadd($window1,
 	   gtkpack(new Gtk::VBox(0,0),
 		    gtkpack(new Gtk::VBox(0,0),
@@ -239,6 +287,14 @@ sub interactive_mode {
 									       ),
 								       ),
 							       _("Drakbackup allow you to build a backup of your system. With Drakbackup \n you will be able to save your backups on your Hard-disk or on CD, across the network\n with mandrake-online or other place, it accept ftp, sftp, scp, rsync, nfs. "),
+							       gtkadd(gtkset_layout(new Gtk::HButtonBox, -end),
+								      gtksignal_connect(new Gtk::Button(_("Next")), clicked => sub { 
+									  ${$central_widget}->destroy(); 
+									  $backup_choice == 0  and print "Wizard\n";
+									  $backup_choice == 1  and advanced();
+									  $backup_choice == 2  and print "now\n";
+								      }),
+								      ),
 							       ),
 						),
 				     ),
@@ -247,10 +303,8 @@ sub interactive_mode {
 				   gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub { Gtk->main_quit() }),
 				   gtksignal_connect(new Gtk::Button(_("About")), clicked => sub { 
 				       ${$central_widget}->destroy(); about() }),
-				   gtksignal_connect(new Gtk::Button(_("           Help            ")), clicked => sub { 
+				   gtksignal_connect(new Gtk::Button(_("                   Help                     ")), clicked => sub { 
 				       ${$central_widget}->destroy(); help() }),
-				   gtksignal_connect(new Gtk::Button(_("Next")), clicked => sub { 
-				       ${$central_widget}->destroy(); about() }),
 				   ),
 			    ),
 		   ),
@@ -370,8 +424,76 @@ sub wizard {
 
 
 sub advanced {
+    my $notebook; 
+    my $about_box;
+    my $book_open;
+    my $book_open_mask;
+    my $transparent;
+    my $book_closed;
+    my $book_closed_mask;
+    
+    my $checkbutton = new Gtk::CheckButton( "Check me please!" );
+    $checkbutton->set_usize( 100, 75 );
+    $checkbutton->show();
+    my ($pix_net_map, $pix_net_mask) = gtkcreate_png("pixmaps/backup_net.png");
+    my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("pixmaps/backup_hd.png");
+    my ($pix_time_map, $pix_time_mask) = gtkcreate_png("pixmaps/backup_time.png");
+    ($book_open, $book_open_mask) = Gtk::Gdk::Pixmap->create_from_xpm_d($up_box->window, $transparent, @book_open_xpm);
+    ($book_closed, $book_closed_mask) = Gtk::Gdk::Pixmap->create_from_xpm_d($up_box->window, $transparent, @book_closed_xpm);
 
+    my $label1 = gtkpack(new Gtk::HBox(0,10),
+			 new Gtk::Pixmap($pix_hd_map, $pix_hd_mask),
+			 _("What backup.")
+			 );
+    my $label2 = gtkpack(new Gtk::HBox(0,10),
+			 new Gtk::Pixmap($pix_net_map, $pix_net_mask),
+			 _("Where backup.")
+			 );
+    my $label3 = gtkpack(new Gtk::HBox(0,10),
+			 new Gtk::Pixmap($pix_time_map, $pix_time_mask),
+			 _("When backup.")
+			 );
+    gtkpack($up_box,
+	    $about_box = gtkpack_(new Gtk::VBox(0,10),
+				  1, gtkpack(new Gtk::HBox(0,0),
+					     gtkpack(my $notebook_box = new Gtk::VBox(0,5),
+						     $notebook = new Gtk::Notebook,
+						     $notebook->insert_page( $checkbutton, $label1, 2 ),
+						     $notebook->insert_page( $checkbutton, $label2, 2 ),
+						     $notebook->insert_page( $checkbutton, $label3, 2 )
+							 ),
+					     ),
+				  0, gtkadd(new Gtk::HButtonBox,
+					    gtksignal_connect(new Gtk::Button(_("Previous")), clicked => sub { Gtk->main_quit() }),
+					    gtksignal_connect(new Gtk::Button(_("Next")), clicked => sub { 
+						${$central_widget}->destroy(); 
+						$backup_choice == 0  and print "Wizard\n";
+						$backup_choice == 1  and advanced();
+						$backup_choice == 2  and print "now\n";
+					    }),
+					    ),				  
+				  ),
+	    ),
+    $central_widget = \$about_box;
+    $up_box->show_all();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #    my $checkbutton = new Gtk::CheckButton( "Check me please!" );
