@@ -199,9 +199,7 @@ wish to access and any applicable user name and password."),
 
 	$printer->{RESOLUTION} = "Default" unless @list_res;
 	$printer->{CRLF} = $db_entry{DESCR} =~ /HP/;
-	$printer->{BITSPERPIXEL} = "Default" unless @list_col;
-
-	$printer->{BITSPERPIXEL} = $depth_to_col{$printer->{BITSPERPIXEL}} || $printer->{BITSPERPIXEL}; #- translate.
+	$printer->{BITSPERPIXEL} = @list_col ? $depth_to_col{$printer->{BITSPERPIXEL}} || $depth_to_col{$col[0]} : "Default";
 
 	$in->ask_from_entries_refH('', _("Printer options"), [
 _("Paper Size") => { val => \$printer->{PAPERSIZE}, type => 'list', , not_edit => !$::expert, list => \@printer::papersize_type },
@@ -215,7 +213,7 @@ _("Uniprint driver options") => { val => \$printer->{BITSPERPIXEL}, type => 'lis
 _("Color depth options") => { val => \$printer->{BITSPERPIXEL}, type => 'list', , not_edit => !$::expert, list => \@col } ), ) : ()
 ]);;
 
-	$printer->{BITSPERPIXEL} = $col_to_depth{$printer->{BITSPERPIXEL}} || $printer->{BITSPERPIXEL}; #- translate.
+	$printer->{BITSPERPIXEL} = $col_to_depth{$printer->{BITSPERPIXEL}} || $printer->{BITSPERPIXEL}; #- translate back.
 
 	$printer->{complete} = 1;
 	copy_printer_params($printer, $printer->{configured}{$printer->{QUEUE}} ||= {});

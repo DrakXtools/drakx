@@ -333,6 +333,10 @@ sub crypt($) {
          crypt    ($password, salt(2));
 }
 
+sub lnx4win_preinstall {
+    require swap;
+    swap::swapon("/dos/lnx4win/swapfile"); #- allow lnx4win to run with a little more memory.
+}
 sub lnx4win_postinstall {
     my ($prefix) = @_;
     my $dir = "/dos/lnx4win";

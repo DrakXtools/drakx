@@ -609,6 +609,8 @@ sub main {
     modules::read_stage1_conf("/tmp/conf.modules");
     modules::read_already_loaded();
 
+    install_any::lnx4win_preinstall() if $o->{lnx4win};
+
     #-the main cycle
     my $clicked = 0;
     MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {
