@@ -1,3 +1,120 @@
+2002/09/12  alus
+
+	* share/po/pl.po: Updated polish translation
+
+2002/09/12  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/tools.pm, drakxtools.spec, standalone/net_monitor: 
+	  - patch net_monitor
+
+2002/09/12  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: fixed very stupid typo and inconsistency in
+	allowNVIDIA_rpms.
+
+	* install_steps.pm: added code after install of package to fix broken
+	alternatives.
+
+2002/09/12  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakgw: meumeuh
+	meuh
+	a fix from florin/pixel to make it work
+
+	* network/shorewall.pm: run_program crazyness
+
+	* drakxtools.spec: meuuuuh meuh meuh ?
+
+2002/09/12  Jonathan Gotti  <jgotti@mandrakesoft.com>
+
+	* bootlook.pm: resize previews pixmap to be nice when embedded
+
+	* share/po/fr.po: modif bootlook.pm translation to keep a good when
+	embedded
+
+2002/09/12  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/hu.po: Updated Hungarian file
+	updated pot file
+
+	* share/po/sk.po: updated slovak file
+	updated pot file
+
+	* share/po/mt.po, share/po/vi.po: updated Vietnamese and Maltese files
+	updated pot file
+
+	* share/po/tr.po: updated pot file
+	updated turkish file
+
+	* share/po/id.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/no.po, share/po/et.po,
+	share/po/ja.po, share/po/hr.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/sp.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/bs.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/ta.po, share/po/fr.po,
+	share/po/it.po, share/po/nl.po, share/po/eu.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/el.po, share/po/bg.po,
+	share/po/lv.po: updated pot file
+
+	* share/po/cs.po: updated Czech file
+	updated pot file
+
+	* share/po/ru.po: updated Russian file
+	updated pot file
+
+2002/09/12  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm, any.pm, install_any.pm, install2.pm,
+	install_steps_interactive.pm: do something with "Security Administrator
+	(login or email)"
+
+	* share/po/help_xml2pm.pl: 
+	  - discard &shy; (ie \x{ad})
+	  - handle <quote><literal>xxx</literal></quote> specially to not have
+	double
+	double quotes
+
+	* network/shorewall.pm: fix writing twice tcp instead of tcp & udp
+
+2002/09/12  siegel
+
+	* share/po/de.po: updates
+
+2002/09/12  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printerdrake.pm: When adding a local printer during an expert install
+	without network,
+	printerdrake insists on starting the network and does not enter the
+	add printer procedure.
+	Made the association of model names obtained by auto-detection and of
+	the model names in the printer database much more reliable.
+
+	* detect_devices.pm: Made the association of model names obtained by
+	auto-detection and of
+	the model names in the printer database much more reliable.
+
+2002/09/12  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/logdrake, standalone/drakfloppy: fix logdrake and drakfloppy
+
+	* drakxtools.spec: 45mdk
+
+	* security/main.pm, security/msec.pm: 
+	  - draksec window title is draksec, not "draksec - basic options" since
+	it offer
+	advanced options too now
+	  - mark some strings to be translated (mainly notebook pages titles)
+
+	* share/po/fr.po: update french translation
+
+2002/09/11  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/es.po, share/po/cs.po, share/po/vi.po, share/po/mt.po,
+	share/po/hu.po: updated po files
+
 2002/09/11  alus
 
 	* share/po/pl.po: updated po
@@ -3130,7 +3247,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.746 2002/09/10 11:50:32 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.747 2002/09/11 23:28:12 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
