@@ -1,3 +1,106 @@
+2003/01/14  Pixel  <pixel@mandrakesoft.com>
+
+	* share/list: unicore/To/Fold.pl is necessary to fix "panic: swash_fetch"
+	error occuring in
+	a regexp with /i on ->{device} (fixes bug #799)
+
+	* install2.pm: don't automatically configure network on upgrade, now only
+	done when called via summary
+
+2003/01/14  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/sound.pm: add missing sound modules (found by check_snd in
+	comparing
+	harddrake::sound vs list_modules).  we only left audio and bttv...
+	add a "trouble shooting" window
+
+	* harddrake/check_snd.pl: add harddrake::sound checker
+
+	* standalone/drakfont: fix font_choice()
+
+2003/01/13  Pixel  <pixel@mandrakesoft.com>
+
+	* install_interactive.pm: don't say "You must have a swap partition"
+	(since it's after using diskdrake which is for experts)
+
+2003/01/13  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/detect.pm: New CUPS printer sharing configuration dialog.
+	Reverted broken printer::main::set_usermode() to version of Mandrake
+	9.0.
+
+	* printer/main.pm: Avoid unnecessary restarts of the CUPS daemon.
+	New CUPS printer sharing configuration dialog.
+	Reverted broken printer::main::set_usermode() to version of Mandrake
+	9.0.
+
+	* printer/printerdrake.pm: Avoid unnecessary restarts of the CUPS daemon.
+	Removed debug helper line.
+	New CUPS printer sharing configuration dialog.
+	Reverted broken printer::main::set_usermode() to version of Mandrake
+	9.0.
+
+2003/01/13  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* printer/data.pm: remove old bug reference
+
+	* share/po/fr.po: typo fix
+
+	* printer/main.pm: make get_descr_from_ppd() clearer by :
+	  - using cat_() instead of manual open or ...
+	  - using "$var = s/$regexp//" instead of
+	"var=/regexp\(...\)/; var=$1;"
+	simplify set_cups_autoconf()
+	add_spooler_to_security_level(), configure_queue()
+	and config_sane() :
+	factorize common code, aka resuse MDK::Common
+
+	* harddrake/data.pm: add support for zip drives
+
+	* harddrake/TODO: update
+
+	* standalone/harddrake2: it's uneeded to force scalar context
+	this is not a per class help, but we told the user what
+	he can achieve (aka not only on startup)
+	listlength() is obviously just "overhead" for arrays
+	use diskdrake to configure cdroms, dvroms, cd|dvd -burners,
+	floppies and zip drives
+
+	* printer/printerdrake.pm: print_testpages() : factorize and simplify
+	options managment
+	by using an options hash
+	setup_local_autoscan():
+	  - don't reinvent the wheel, reverse is faster
+	  - remove doble $device initialization in one path
+	setup_local_autoscan() : simplify loop of loop
+	and optimize away useless $alreadyfound
+
+2003/01/12  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/sv.po: updated Albanian and Swedish files
+
+2003/01/12  Pixel  <pixel@mandrakesoft.com>
+
+	* docs/comparisons: add explained changes in hwdata and kudzu from redhat
+	8.0 to 8.1beta
+	add changes between anaconda 8.0 and current
+
+	* drakxtools.spec: drakxtools need latest perl-MDK-Common
+
+2003/01/11  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm: capitalise win $domain ASAP so that directory
+	/home/$domain is created
+	capitalised (thanks to Buchan Milne)
+
+2003/01/10  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: do not use supermount by default
+	(readBootloaderConfigBeforeInstall): set bootUnsafe to 0 when upgrading
+	so
+	that it doesn't ask where to install the bootloader (mbr vs boot
+	partition)
+
 2003/01/10  Damien Chaumette  <dchaumette@mandrakesoft.com>
 
 	* network/netconnect.pm: 
@@ -7888,7 +7991,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.764 2003/01/08 12:28:22 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.765 2003/01/10 16:26:50 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
