@@ -14,6 +14,8 @@
  #
  #*****************************************************************************
 
+ARCH := $(patsubst i%86,i386,$(shell uname -m))
+ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
  #- default lib is dietlibc (honoured by main Makefile whenever possible)
 L = DIETLIBC

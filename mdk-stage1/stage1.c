@@ -45,7 +45,7 @@
 #include "tools.h"
 #include "automatic.h"
 #include "mount.h"
-#include "insmod-busybox/insmod.h"
+#include "insmod.h"
 
 #ifdef ENABLE_PCMCIA
 #include "pcmcia/pcmcia.h"

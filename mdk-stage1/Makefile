@@ -26,9 +26,6 @@ top_dir = .
 include $(top_dir)/Makefile.common
 
 
-ARCH := $(patsubst i%86,i386,$(shell uname -m))
-ARCH := $(patsubst sparc%,sparc,$(ARCH))
-
 CFLAGS = -Os -pipe -Wall -Werror -fomit-frame-pointer
 
 DEFS = -DVERSION=\"$(VERSION)\"
@@ -73,9 +70,14 @@ MEDIAS_FRONTEND_LINK = $(FRONTEND_LINK)
 endif
 endif
 
+ifeq (i386, $(ARCH))
+INSMOD = insmod-busybox
+else
+INSMOD = insmod-modutils
+endif
 
-GLIBC_STAGE1_OWN_LIBS = insmod-busybox/libinsmod.a mar/libmar.a bzlib/libbzlib.a
-DIETLIBC_STAGE1_OWN_LIBS = insmod-busybox/libinsmod-DIET.a mar/libmar-DIET.a bzlib/libbzlib-DIET.a
+GLIBC_STAGE1_OWN_LIBS = $(INSMOD)/libinsmod.a mar/libmar.a bzlib/libbzlib.a
+DIETLIBC_STAGE1_OWN_LIBS = $(INSMOD)/libinsmod-DIET.a mar/libmar-DIET.a bzlib/libbzlib-DIET.a
 STAGE1_OWN_LIBS = $($(L)_STAGE1_OWN_LIBS)
 
 
@@ -116,10 +118,14 @@ INIT_LIBC = $(DIETLIBC_LIBC)
 endif
 
 
-BINS = init stage1-cdrom stage1-disk stage1-network stage1-full
+BINS = init stage1-full
+
+ifeq (i386, $(ARCH))
+BINS += stage1-cdrom stage1-disk stage1-network
+endif
 
 
-DIRS = dietlibc mar insmod-busybox pci-resource bzlib
+DIRS = dietlibc mar pci-resource bzlib $(INSMOD)
 ifeq (i386,$(ARCH))
 DIRS += pcmcia
 endif

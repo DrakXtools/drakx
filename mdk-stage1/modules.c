@@ -25,7 +25,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
-#include "insmod-busybox/insmod.h"
+#include "insmod.h"
 #include "stage1.h"
 #include "log.h"
 #include "mar/mar-extract-only.h"

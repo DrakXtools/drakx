@@ -36,6 +36,7 @@
  *
  */
 
+#include "../insmod.h"
 #include "busybox.h"
 #include <stdlib.h>
 #include <stdio.h>
