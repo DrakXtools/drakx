@@ -29,11 +29,12 @@ wizards - a layer on top of interactive that ensure proper stepping
                              next => "step1",   # which step should be displayed after the current one
                              pre =>  sub { },   # code executing when stepping backward
                              post => sub { },   # code executing when stepping forward;
-                                                # returned value is next step name (but is overriden by "next" field)
+                                                # returned value is next step name (it overrides "next" field)
                              end => ,       # is it the last step ?
                              no_cancel => , # do not display the cancel button (eg for first step)
                              no_back => ,   # do not display the back button (eg for first step)
                              ignore => ,    # do not stack this step for back stepping (eg for warnings and the like steps)
+                             interactive_help_id => , # help id  (for installer only)
                              data => [],    # the actual data passed to interactive
                          },
                          {
@@ -60,6 +61,26 @@ wizards - a layer on top of interactive that ensure proper stepping
 wizards is a layer built on top of the interactive layer that do proper
 backward/forward stepping for us.
 
+A step is made up of a name/description, a list of interactive fields (see
+interactive documentation), a "complete", "pre" and "post" callbacks, an help
+id, ...
+
+The "pre" callback is run first. Its only argument is the actual step hash.
+
+Then, if the "name" fiels is a code reference, that callback is run and its
+actual result is used as the description of the step.
+
+At this stage, the interactive layer is used to display the actual step.
+
+The "post" callback is only run if the user has steped forward.
+
+
+Alternatively, you can call safe_process() rather than process().
+safe_process() will handle for you the "wizcancel" exception while running the
+wizard.  Actually, it should be used everywhere but where the wizard is not the
+main path (eg "mail alert wizard" in logdrake, ...), ie when you may need to do
+extra exception managment such as destroying the wizard window and the like.
+
 =cut
 
 
@@ -82,14 +103,17 @@ sub check_rpm {
 }
 
 
+# sync me with interactive::ask_from_normalize() if needed:
+my %default_callback = (changed => sub {}, focus_out => sub {}, complete => sub { 0 }, canceled => sub { 0 }, advanced => sub {});
+
+
 sub process {
     my ($w, $o, $in) = @_;
-    my $page = $o->{pages}{welcome};
     local $::isWizard = 1;
     local $::Wizard_title = $o->{name} || $::Wizard_title;
     local $::Wizard_pix_up = $o->{defaultimage} || $::Wizard_pix_up;
     #require_root_capability() if $> && !$o->{allow_user} && !$::testing;
-    check_rpm($in, $o->{needed_rpm}) if $o->{needed_rpm};
+    check_rpm($in, $o->{needed_rpm}) if ref($o->{needed_rpm});
     if (defined $o->{init}) {
         my ($res, $msg) = &{$o->{init}};
         if (!$res) {
@@ -98,19 +122,25 @@ sub process {
         }
     }
     
-    my $next = 'welcome';  # initial step
     my @steps;             # steps stack
+
+    # initial step:
+    my $next = 'welcome';  
+    my $page = $o->{pages}{welcome};
     while ($next) {
         local $::Wizard_no_previous = $page->{no_back};
         local $::Wizard_no_cancel = $page->{no_cancel} || $page->{end};
         local $::Wizard_finished = $page->{end};
-        defined $page->{pre} and $page->{pre}();
+        defined $page->{pre} and $page->{pre}($page);
+        die "inexistant \"$next\" wizard step" if is_empty_hash_ref($page);
+        
         # FIXME or the displaying fails
-        my $data = defined $page->{data} ? ref $page->{data} ? $page->{data} : [ { label => '' } ] : [ { label => '' } ];
+        my $data = defined $page->{data} ? (ref($page->{data}) eq 'CODE' ? $page->{data}->() : $page->{data}) : [ { label => '' } ];
         my $data2;
         foreach my $d (@$data) {
             $d->{val} = ${$d->{val_ref}} if $d->{val_ref};
             $d->{list} = $d->{list_ref} if $d->{list_ref};
+            #$d->{val} = ref($d->{val}) eq 'CODE' ? $d->{val}->() : $d->{val};
             if ($d->{boolean_list}) { 
                 my $i;
                 foreach (@{$d->{boolean_list}}) { 
@@ -122,18 +152,42 @@ sub process {
             }
         }
         my $name = ref($page->{name}) ? $page->{name}->() : $page->{name};
-        my $a = $in->ask_from($o->{name}, $name, $data2, complete => $page->{complete} || sub { 0 });
+        my $a = $in->ask_from_({ title => $o->{name}, 
+                                 messages => $name, 
+                                 callbacks => { map { $_ => $page->{$_} || $default_callback{$_} } qw(focus_out complete) },
+                                 if_($page->{interactive_help_id}, interactive_help_id => $page->{interactive_help_id}),
+                               }, $data2);
         if ($a) {
             # step forward:
             push @steps, $next if !$page->{ignore} && $steps[-1] ne $next;
-            $next = defined $page->{post} ? $page->{post}() : 0;
-            defined $o->{pages}{$next} or $next = $page->{next};
+            my $current = $next;
+            $next = defined $page->{post} ? $page->{post}($a) : 0;
+            return if $current eq "end";
+            if (!$next) {
+                if (!defined $o->{pages}{$next}) {
+                    $next = $page->{next};
+                } else {
+                    die "the \"$next\" page (from previous wizard step) is undefined" if !$next;
+                }
+            }
+            die "Step \"$current\": inexistant \"$next\" page" if !exists $o->{pages}{$next};
         } else {
             # step back:
             $next = pop @steps
         }
-        $next or return;
         $page = $o->{pages}{$next}
+    }
+}
+
+
+sub safe_process {
+    my ($w, $wiz, $in) = @_;
+    eval { $w->process($wiz, $in) };
+    my $err = $@;
+    if ($err =~ /wizcancel/) {
+        $in->exit(0);
+    } else { 
+        die $err;
     }
 }
 
