@@ -82,7 +82,7 @@ sub get_subwizard {
       my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @all_cards, %eth_intf);
       my (%connections, @connection_list, $is_wireless);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
-      my ($adsl_type, $adsl_protocol, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
+      my ($adsl_type, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
       my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $need_restart_network);
       my ($module, $auto_ip, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
@@ -595,10 +595,10 @@ killall pppd
                     next => 'adsl_protocol',
                     post => sub {
                         $adsl_data = $adsl_data{$adsl_provider};
-                        $adsl_protocol = $adsl_types{pppoa} if $ntf_name eq 'speedtouch';
+                        $adsl_type = 'pppoa' if $ntf_name eq 'speedtouch';
                         if ($adsl_provider ne $adsl_old_provider) {
                             $netc->{$_} = $adsl_data->{$_} foreach qw(dnsServer2 dnsServer3 DOMAINNAME2 Encapsulation vpi vci);
-                              $adsl_protocol ||= $adsl_types{$adsl_data->{method}};
+                              $adsl_type ||= $adsl_data->{method};
                         }
                         return 'adsl_protocol';
                     },
@@ -668,14 +668,13 @@ and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.n
 Some connections use pptp, a few use dhcp.
 If you don't know, choose 'use pppoe'"),
                     data =>  [
-                              { text => N("ADSL connection type :"), val => \$adsl_protocol, type => "list",
-                                list => [ sort values %adsl_types ],
+                              { text => N("ADSL connection type :"), val => \$adsl_type, type => "list",
+                                list => [ sort { $adsl_types{$::a} <=> $adsl_types{$::b} } keys %adsl_types ],
+                                format => sub { $adsl_types{$_[0]} },
                               },
                              ],
                     post => sub {
                         $netcnx->{type} = 'adsl';
-                        $adsl_type = find { $adsl_types{$_} eq $adsl_protocol } keys %adsl_types;
-                        $adsl_type = { reverse %adsl_types }->{$adsl_protocol};
                         # process static/dhcp ethernet devices:
                         if (!exists $adsl_devices{$ntf_name} && member($adsl_type, qw(manual dhcp))) {
                             $auto_ip = $adsl_type eq 'dchp';
