@@ -48,6 +48,7 @@ install:
 
 	for i in $(HAVEINST_DIRS); do \
 		$(MAKE) -C $$i install PREFIX=$(PREFIX) DATADIR=$(DATADIR) NAME=$(NAME) ; \
- 	done
+	done
 
+	find auto -follow -name .exists -o -name "*.bs" | xargs rm -f
 	cp -rfL auto icons $(LIBDEST)
