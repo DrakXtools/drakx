@@ -482,7 +482,6 @@ sub ask_fromW {
 		foreach my $button (@buttons) {
 		    $button->{button}->signal_connect(clicked => sub { $do_action->($button) });
 		}
-		$w->set_size_request(400, -1);
 		$real_w = gtkpack_(Gtk2::HBox->new(0,0),
 				   1, create_scrolled_window($w), 
 				   0, gtkpack__(Gtk2::VBox->new(0,0), map { $_->{button} } @buttons));
@@ -599,7 +598,7 @@ sub ask_fromW {
 	my (@widgets) = @_;
 	gtkpack_(Gtk2::VBox->new,
               map {
-                  ($_->{real_w}->isa("Gtk2::ScrolledWindow") ? 1 : 0), 
+                  ($_->{real_w}->isa("Gtk2::ScrolledWindow") || $_->{real_w}->get_data('must_grow') ? 1 : 0), 
                    $_->{real_w}->isa("Gtk2::CheckButton") && !$_->{icon_w} && !$_->{e}{label} ?
                      $_->{real_w} : gtkpack_(Gtk2::HBox->new,
                                              0, $_->{icon_w},
