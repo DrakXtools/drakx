@@ -199,7 +199,7 @@ sub doPartitionDisksAfter {
 	die \N("You must have a FAT partition mounted in /boot/efi");
     }
 
-    if ($o->{partitioning}{use_existing_root}) {
+    if ($o->{partitioning}{use_existing_root} && !$::recovery) {
 	#- ensure those partitions are mounted so that they are not proposed in choosePartitionsToFormat
 	fs::mount_part($_, $o->{prefix}) foreach sort { $a->{mntpoint} cmp $b->{mntpoint} }
 						 grep { $_->{mntpoint} && maybeFormatted($_) } @{$o->{fstab}};
