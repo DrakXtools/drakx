@@ -584,6 +584,7 @@ sub configureNetwork {
 	    output $f, "\nif$_ eth0\n";
 	    chmod 0755, $f;
 	}
+	output "$o->{prefix}/etc/sysconfig/network-scripts/net_cnx_pg", "\n/usr/sbin/draknet\n";
     }
 }
 
