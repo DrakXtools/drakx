@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.11mdk
+Release: 0.12mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -327,6 +327,36 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Aug 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.12mdk
+- really fix drakxtools build for ppc & sparc
+- use sysfs to detect firewire devices thus fixing eth1394 detection
+  (blino)
+- drakconnect (blino):
+  o ensure iftab is always up-to-date
+  o fix spurious ifcfg-ippp0 creation
+- net_monitor (blino):
+  o do not assume internet isn't configured if obsoleted cnx scripts
+    do not exist
+  o fix connect button sensitivity
+  o watch connection time, not disconnection time
+- printerdrake:
+  o added fully automatic, non-interactive, X-less print queue set up
+    by the "autosetupprintqueues" command, preferrably to be started
+    by hotplug
+  o fix file check for package installation
+  o fix problem of Brother laser printer on parallel port not showing
+    its name in auto-detection result.
+  o let printer name, description, location be entered after
+    determining the model in the add printer wizard
+  o let default print queue name be derived from the model instead of
+    being "Printer", "Printer1", ...
+  o simplify print queue name generation in non-interactive printer
+    setup
+  o fix "Previous" button in the test page step of the add printer
+    wizard
+- XFdrake: do not set DRI mode anymore which is not needed anymore
+  with latest PAM
+
 * Thu Aug 19 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.11mdk
 - drakconnect: use mac_ieee1394 descriptor in iftab for firewire links
   (WIP) (oblin)
