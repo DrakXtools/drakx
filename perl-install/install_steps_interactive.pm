@@ -563,7 +563,7 @@ sub loadSavePackagesOnFloppy {
     my $choice = $o->ask_from_listf('', 
 _("Please choose load or save package selection on floppy.
 The format is the same as auto_install generated floppies."),
-				    sub { translate($_[0]{text}) },
+				    sub { $_[0]{text} },
 				    [ { text => _("Load from floppy"), code => sub {
 					    while (1) {
 						my $w = $o->wait_message(_("Package selection"), _("Loading from floppy"));
@@ -587,6 +587,7 @@ The format is the same as auto_install generated floppies."),
 					    log::l("save package selection to floppy");
 					    install_any::g_default_packages($o, 'quiet');
 					} },
+				      { text => _("Cancel") },
 				    ]);
     $choice->{code} and $choice->{code}();
 }
