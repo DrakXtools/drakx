@@ -627,7 +627,7 @@ sub appli_choice() {
     gtkpack($font_box,
             $choice_box = gtkpack__(Gtk2::VBox->new, 
                                     N("Choose the applications that will support the fonts:"),
-                                    Gtk2::WrappedLabel->new(N("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts the normal way. In rare cases, bogus fonts may hang up your X Server.")),
+                                    Gtk2::WrappedLabel->new(N("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\nYou can install the fonts the normal way. In rare cases, bogus fonts may hang up your X Server.")),
                                     (map {
                                         gtkpack_(Gtk2::HBox->new, 
                                                  0, $_->[0], 
