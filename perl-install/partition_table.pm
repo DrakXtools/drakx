@@ -244,8 +244,8 @@ sub isHiddenMacPart { defined $_[0]{isMap} }
 sub isThisFs { type2fs($_[1]) eq $_[0] }
 sub isTrueFS { member(type2fs($_[0]), qw(ext2 reiserfs xfs jfs ext3)) }
 
-sub isOtherAvailableFS { isFat($_[0]) || isSunOS($_[0]) || isThisFs('hfs', $_[0]) } #- other OS that linux can access its filesystem
-sub isMountableRW { isTrueFS($_[0]) || isOtherAvailableFS($_[0]) }
+sub isOtherAvailableFS { isFat($_[0]) || isSunOS($_[0]) || isThisFs('hfs', $_[0]) || isThisFs('ntfs', $_[0]) } #- other OS that linux can access its filesystem
+sub isMountableRW { (isTrueFS($_[0]) || isOtherAvailableFS($_[0])) && !isThisFs('ntfs', $_[0]) }
 sub isNonMountable { isRawRAID($_[0]) || isRawLVM($_[0]) }
 
 sub isPartOfLVM { defined $_[0]{lvm} }
