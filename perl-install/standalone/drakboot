@@ -220,7 +220,7 @@ sub lilo_choice() {
   ask:
     eval { any::setupBootloader($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) };
     my $err = $@;
-    if ($err) {
+    if ($err && $err !~ /wizcancel/) {
         $in->ask_warn(N("Error"), 
                       [ N("Installation of %s failed. The following error occured:", bootloader::detect_bootloader()), $err ]);
         goto ask;
