@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 use lib "..";
-use common qw(:common :file);
+use common;
 use modules;
 
 my $all = $ARGV[0] eq '-a';
