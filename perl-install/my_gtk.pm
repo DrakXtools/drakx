@@ -61,7 +61,7 @@ sub new {
 	    my ($im_left, $mask_left) = gtkcreate_png($::Wizard_pix_left || "wiz_default_left.png");
 	    my ($y2, $x2) = $im_left->get_size;
 	    my $style = $draw1->style->copy();
-	    $style->font(Gtk::Gdk::Font->fontset_load("-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*"));
+	    $style->font(Gtk::Gdk::Font->fontset_load(_("-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*")));
 	    my $w = $style->font->string_width($::Wizard_title);
 	    $draw1->signal_connect(expose_event => sub {
 				       for (my $i = 0; $i < (540/$y1); $i++) {
