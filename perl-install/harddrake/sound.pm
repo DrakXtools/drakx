@@ -72,7 +72,6 @@ our %alsa2oss =
      "snd-sbawe"   => [ "awe_wave" ],
      "snd-sgalaxy" => [ "sgalaxy" ], # isa
      "snd-sonicvibes" => [ "sonicvibes" ],
-     "snd-sscape" => [ "unknown" ], # isa
      "snd-trident" => [ "trident" ],
      "snd-usb-audio" => [ "audio" ], # usb
      "snd-via82xx"  => [ "via82cxxx_audio" ],
