@@ -100,7 +100,8 @@ sub ask_okcancel {
     my ($o, $title, $message, $def, $help) = @_;
 
     if ($::isWizard) {
-    	$o->ask_from_entries_refH({ title => $title, messages => $message, focus_cancel => !$def });
+	$::no_separator = 1;
+    	$o->ask_from_entries_refH_powered_no_check({ title => $title, messages => $message, focus_cancel => !$def });
     } else {
 	ask_from_list_($o, $title, $message, [ __("Ok"), __("Cancel") ], $def ? "Ok" : "Cancel", $help) eq "Ok";
     }
