@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 8mdk
+Release: 9mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -339,6 +339,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Sep 15 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-9mdk
+- bootloader-config: fix crash when when removing some break entries (pixel)
+- keyboarddrake, XFdrake: better turkish support (pablo)
+
 * Tue Sep 14 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-8mdk
 - localedrake: offer to select IM if language has one preselected
   (eg: CJKV, else option is only availlable in advanced mode)
