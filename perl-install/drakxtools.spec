@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.8
-Release: 15mdk
+Release: 16mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -263,6 +263,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Thu Aug  1 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-16mdk
+- my_gtk:
+	o splitup it into my_gtk and ugtk as done by dams
+	o resync with dams
+	o increase the icon blinkage from 50ms to 100ms
+- harddrake: 
+	o use new embedded managment
+
 * Thu Aug  1 2002 Pixel <pixel@mandrakesoft.com> 1.1.8-15mdk
 - harddrake (titi):
 	o add embedded mode for drakconf
