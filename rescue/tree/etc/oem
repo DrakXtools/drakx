@@ -577,7 +577,7 @@ sub select_packages {
     pkgs::setSelectedFromCompssList($o->{packages}, $o->{compssUsersChoice}, 4, 0);
 
     #- package that have to selected here as a bonus for oem install.
-    foreach (qw(cups cups-drivers drakprofile draksync numlock raidtools reiserfs-utils icewm-light
+    foreach (qw(cups cups-drivers drakprofile draksync numlock raidtools reiserfsprogs xfsprogs jfsprogs icewm-light
 		Mesa Mesa-demos alsa alsa-utils
 		xawtv kwintv xscreensaver-gl Mesa-demos xmms-mesa bzflag csmash gltron spacecup chromium tuxracer
                 glibc vim-minimal kernel kernel22
