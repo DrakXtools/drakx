@@ -69,12 +69,11 @@ sub configure_auto_install {
 	put_in_hash($monitors->[0], getinfoFromDDC());
     }
 
-    my $monitors_db = monitors_db();
     foreach my $monitor (@$monitors) {
-	if (!configure_automatic($monitor, $monitors_db)) {
+	if (!configure_automatic($monitor)) {
 	    good_default_monitor() =~ /(.*)\|(.*)/ or internal_error("bad good_default_monitor");
 	    put_in_hash($monitor, { VendorName => $1, ModelName => $2 });
-	    configure_automatic($monitor, $monitors_db) or internal_error("good_default_monitor (" . good_default_monitor()  . ") is unknown in MonitorsDB");
+	    configure_automatic($monitor) or internal_error("good_default_monitor (" . good_default_monitor()  . ") is unknown in MonitorsDB");
 	}
     }
     $raw_X->set_monitors(@$monitors);
@@ -84,15 +83,13 @@ sub configure_auto_install {
 sub choose {
     my ($in, $monitor, $head_nb, $b_auto) = @_;
 
-    my $monitors_db = monitors_db();
-
-    my $ok = configure_automatic($monitor, $monitors_db);
+    my $ok = configure_automatic($monitor);
     if ($b_auto) {
 	log::l("Xconfig::monitor: auto failed") if !$ok;
 	return $ok;
     }
 
-    my %h_monitors = map { ("$_->{VendorName}|$_->{ModelName}" => $_) } @$monitors_db;
+    my %h_monitors = map { ("$_->{VendorName}|$_->{ModelName}" => $_) } monitors_db();
 
   ask_monitor:
     my $merged_name = do {
@@ -125,7 +122,7 @@ sub choose {
 	local $::noauto = 0; #- hey, you asked for plug'n play, so i do probe!
 	delete @$monitor{'VendorName', 'ModelName', 'EISA_ID'};
 	put_in_hash($monitor, getinfoFromDDC()) if $head_nb <= 1;
-	if ($head_nb > 1 || configure_automatic($monitor, $monitors_db)) {
+	if ($head_nb > 1 || configure_automatic($monitor)) {
 	    $monitor->{VendorName} = "Plug'n Play";
 	} else {
 	    $in->ask_warn('', N("Plug'n Play probing failed. Please select the correct monitor"));
@@ -151,11 +148,11 @@ that is beyond the capabilities of your monitor: you may damage your monitor.
 }
 
 sub configure_automatic {
-    my ($monitor, $monitors_db) = @_;
+    my ($monitor) = @_;
 
     if ($monitor->{EISA_ID}) {
 	log::l("EISA_ID: $monitor->{EISA_ID}");
-	if (my $mon = find { lc($_->{EISA_ID}) eq $monitor->{EISA_ID} } @$monitors_db) {
+	if (my $mon = find { lc($_->{EISA_ID}) eq $monitor->{EISA_ID} } monitors_db()) {
 	    add2hash($monitor, $mon);
 	    log::l("EISA_ID corresponds to: $monitor->{ModelName}");
 	} elsif (!$monitor->{HorizSync} || !$monitor->{VertRefresh}) {
@@ -163,7 +160,7 @@ sub configure_automatic {
 	    delete @$monitor{'VendorName', 'ModelName', 'EISA_ID'};	    
 	}
     } elsif ($monitor->{VendorName}) {
-	if (my $mon = find { $_->{VendorName} eq $monitor->{VendorName} && $_->{ModelName} eq $monitor->{ModelName} } @$monitors_db) {
+	if (my $mon = find { $_->{VendorName} eq $monitor->{VendorName} && $_->{ModelName} eq $monitor->{ModelName} } monitors_db()) {
 	    put_in_hash($monitor, $mon);
 	}
     }
@@ -203,8 +200,10 @@ sub getinfoFromDDC() {
     $monitor;
 }
 
+my $monitors_db;
 sub monitors_db() {
-    readMonitorsDB("$ENV{SHARE_PATH}/ldetect-lst/MonitorsDB");
+    $monitors_db ||= readMonitorsDB("$ENV{SHARE_PATH}/ldetect-lst/MonitorsDB");
+    @$monitors_db;
 }
 sub readMonitorsDB {
     my ($file) = @_;
