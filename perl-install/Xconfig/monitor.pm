@@ -57,7 +57,7 @@ sub configure_auto_install {
 	$old_X->{monitors} = [ delete $old_X->{monitor} ];
     }
 
-    my $monitors = [ $raw_X->get_or_new_monitors($old_X->{monitors} ? @{$old_X->{monitors}} : 1) ];
+    my $monitors = [ $raw_X->get_or_new_monitors($old_X->{monitors} ? int @{$old_X->{monitors}} : 1) ];
     mapn {
 	my ($monitor, $auto_install_monitor) = @_;
 	put_in_hash($monitor, $auto_install_monitor);
