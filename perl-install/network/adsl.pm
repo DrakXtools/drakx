@@ -110,7 +110,12 @@ sub sagem_set_parameters {
     #- create CMV symlinks for both POTS and ISDN lines
     foreach my $type (qw(p i)) {
         my $cmv;
+        my ($country) = $netc->{provider_id} =~ /^([a-zA-Z]+)\d+$/;
+        #- try to find a CMV for this specific ISP
         $cmv = "$::prefix/etc/eagle-usb/CMVe${type}$netc->{provider_id}.txt" if $netc->{provider_id};
+        #- if not found, try to found a CMV for the country
+        -f $cmv or $cmv = "$::prefix/etc/eagle-usb/CMVe${type}${country}.txt";
+        #- fallback on the generic CMV if no other matched
         -f $cmv or $cmv = "$::prefix/etc/eagle-usb/CMVe${type}WO.txt";
         symlinkf($cmv, "$::prefix/etc/eagle-usb/CMVe${type}.txt");
     }
