@@ -63,7 +63,7 @@ int klog_pid;
 void fatal_error(char *msg)
 {
 	printf("FATAL ERROR IN INIT: %s\n\nI can't recover from this, please reboot manually and send bugreport.\n", msg);
-	while (1);
+        select(0, NULL, NULL, NULL, NULL);
 }
 
 void print_error(char *msg)
@@ -342,7 +342,7 @@ void unmount_filesystems(void)
 	
 	if (nb) {
 		printf("failed to umount some filesystems\n");
-		while (1);
+                select(0, NULL, NULL, NULL, NULL);
 	}
 }
 
@@ -499,7 +499,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		reboot(0xfee1dead, 672274793, reboot_magic);
 	} else {
 		printf("you may safely reboot or halt your system\n");
-		while (1);
+                select(0, NULL, NULL, NULL, NULL);
 	}
 
 	return 0;
