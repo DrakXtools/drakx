@@ -757,7 +757,7 @@ sub hd_grub {
     _ "cp @grub_files $mnt";
 
     output("$mnt/menu.lst", <<EOF);
-timeout 0
+timeout 10
 default 0
 fallback 1
 
