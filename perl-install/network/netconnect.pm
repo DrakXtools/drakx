@@ -138,6 +138,13 @@ sub get_subwizard {
               modules::add_alias($card->[0], $card->[1]);
           }
           %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) } @all_cards;
+          if ($is_wireless) {
+              require list_modules;
+              my @wmodules = list_modules::category2modules('network/wireless');
+              %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) } grep { member($_->[1], @wmodules) } @all_cards;
+          } else {
+              %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) } @all_cards;
+          }
       };
 
       my $find_lan_module = sub { $module ||= (find { $_->[0] eq $ethntf->{DEVICE} } @all_cards)->[1] };
