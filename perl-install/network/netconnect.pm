@@ -503,6 +503,7 @@ Take a look at http://www.linmodems.org"),
                                          hcfpcimodem => "$::prefix/usr/sbin/hcfpciconfig",
                                          hsflinmodem => "$::prefix/usr/sbin/hsfconfig",
                                          ltmodem => "$::prefix/etc/devfs/conf.d/ltmodem.conf",
+                                         slmodem => "$::prefix/usr/sbin/slmodemd",
                                         );
                         
                         my %devices = (ltmodem => '/dev/ttyS14',
@@ -514,6 +515,7 @@ Take a look at http://www.linmodems.org"),
                             $driver =~ /^Hcf:/ and $type = "hcfpcimodem";
                             $driver =~ /^Hsf:/ and $type = "hsflinmodem";
                             $driver =~ /^LT:/  and $type = "ltmodem";
+                            member($driver, list_modules::category2modules('network/slmodem')) and $type = "slmodem";
                             $type = undef if !($type && (-f $pkgs2path{$type} || $in->do_pkgs->ensure_is_installed_if_available($type, $pkgs2path{$type})));
                             $modem->{device} = $devices{$type} || '/dev/modem' if $type; # automatically linked by /etc/devfs/conf entry
                         }
