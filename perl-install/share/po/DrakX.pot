@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-12-21 23:44+0100\n"
+"POT-Creation-Date: 1999-12-22 15:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1020,17 +1020,18 @@ msgid ""
 "choose a mouse type in the menu which you think is the closest\n"
 "match for your mouse.\n"
 "\n"
+"\n"
 "In case of a serial mouse, you will also have to tell DrakX\n"
 "which serial port it is connected to."
 msgstr ""
 
-#: ../help.pm_.c:139
+#: ../help.pm_.c:140
 msgid ""
 "Please select the correct port. For example, the COM1 port in MS Windows\n"
 "is named ttyS0 in Linux."
 msgstr ""
 
-#: ../help.pm_.c:143
+#: ../help.pm_.c:144
 msgid ""
 "This section is dedicated to configuring a local area\n"
 "network (LAN) or a modem.\n"
@@ -1062,33 +1063,35 @@ msgid ""
 "your modem is connected to."
 msgstr ""
 
-#: ../help.pm_.c:173
+#: ../help.pm_.c:174
 msgid ""
 "Enter:\n"
 "\n"
 "  - IP address: if you don't know it, ask your network administrator.\n"
 "\n"
+"\n"
 "  - Netmask: \"255.255.255.0\" is generally a good choice. If you are not\n"
 "sure, ask your network administrator.\n"
+"\n"
 "\n"
 "  - Automatic IP: If your network uses bootp or dhcpd protocol, select \n"
 "this option. If selected, no value is needed in \"IP address\". If you are\n"
 "not sure, ask your network administrator.\n"
 msgstr ""
 
-#: ../help.pm_.c:186
+#: ../help.pm_.c:189
 msgid ""
 "You may now enter dialup options. If you're not sure what to enter, the\n"
 "correct information can be obtained from your ISP."
 msgstr ""
 
-#: ../help.pm_.c:190
+#: ../help.pm_.c:193
 msgid ""
 "If you will use proxies, please configure them now. If you don't know if\n"
 "you will use proxies, ask your network administrator or your ISP."
 msgstr ""
 
-#: ../help.pm_.c:194
+#: ../help.pm_.c:197
 msgid ""
 "You can install cryptographic package if your internet connection has been\n"
 "set up correctly. First choose a mirror where you wish to download packages "
@@ -1099,7 +1102,7 @@ msgid ""
 "to your legislation."
 msgstr ""
 
-#: ../help.pm_.c:202
+#: ../help.pm_.c:205
 msgid ""
 "You can now select your timezone according to where you live.\n"
 "\n"
@@ -1108,11 +1111,11 @@ msgid ""
 "in local time according to the time zone you have selected."
 msgstr ""
 
-#: ../help.pm_.c:209
+#: ../help.pm_.c:212
 msgid "Help"
 msgstr ""
 
-#: ../help.pm_.c:212
+#: ../help.pm_.c:215
 msgid ""
 "Linux can deal with many types of printer. Each of these\n"
 "types require a different setup.\n"
@@ -1137,7 +1140,7 @@ msgid ""
 "for a NetWare printer, except that you need no workgroup information."
 msgstr ""
 
-#: ../help.pm_.c:235
+#: ../help.pm_.c:238
 msgid ""
 "You can now enter the root password for your Linux-Mandrake\n"
 "system. The password must be entered twice to verify that both\n"
@@ -1155,19 +1158,19 @@ msgid ""
 "effort."
 msgstr ""
 
-#: ../help.pm_.c:251
+#: ../help.pm_.c:254
 msgid ""
 "To enable a more secure system, you should select \"Use shadow file\" and\n"
 "\"Use MD5 passwords\"."
 msgstr ""
 
-#: ../help.pm_.c:255
+#: ../help.pm_.c:258
 msgid ""
 "If your network uses NIS, select \"Use NIS\". If you don't know, ask your\n"
 "network administrator."
 msgstr ""
 
-#: ../help.pm_.c:259
+#: ../help.pm_.c:262
 msgid ""
 "You may now create one or more \"regular\" user account(s), as\n"
 "opposed to the \"privileged\" user account, root. You can create\n"
@@ -1191,7 +1194,7 @@ msgid ""
 "and maintenance purposes."
 msgstr ""
 
-#: ../help.pm_.c:278
+#: ../help.pm_.c:281
 msgid ""
 "It is strongly recommended that you answer \"Yes\" here. If you install\n"
 "Microsoft Windows at a later date it will overwrite the boot sector.\n"
@@ -1199,7 +1202,7 @@ msgid ""
 "boot into Linux any more."
 msgstr ""
 
-#: ../help.pm_.c:284
+#: ../help.pm_.c:287
 msgid ""
 "You need to indicate where you wish\n"
 "to place the information required to boot to Linux.\n"
@@ -1209,28 +1212,30 @@ msgid ""
 "drive (MBR)\"."
 msgstr ""
 
-#: ../help.pm_.c:292
+#: ../help.pm_.c:295
 msgid ""
 "Unless you know specifically otherwise, the usual choice is \"/dev/hda\"\n"
 "(the master drive on the primary channel)."
 msgstr ""
 
-#: ../help.pm_.c:296
+#: ../help.pm_.c:299
 msgid ""
 "LILO (the LInux LOader) can boot Linux and other operating systems.\n"
 "Normally they are correctly detected during installation. If you don't\n"
 "see yours detected, you can add one or more now.\n"
 "\n"
+"\n"
 "If you won't everybody can assess at one of them, you can remove it now\n"
 "(a boot disk will be needed to boot it)."
 msgstr ""
 
-#: ../help.pm_.c:304
+#: ../help.pm_.c:308
 msgid ""
 "LILO main options are:\n"
 "  - Boot device: Sets the name of the device (e.g. a hard disk\n"
 "partition) that contains the boot sector. Unless you know specifically\n"
 "otherwise, choose \"/dev/hda\".\n"
+"\n"
 "\n"
 "  - Linear: Generate linear sector addresses instead of\n"
 "sector/head/cylinder addresses. Linear addresses are translated at run\n"
@@ -1241,10 +1246,12 @@ msgid ""
 "inaccessible disk areas, because 3D sector addresses are not known\n"
 "before boot time.\n"
 "\n"
+"\n"
 "  - Compact: Tries to merge read requests for adjacent sectors into a\n"
 "single read request. This drastically reduces load time and keeps the\n"
 "map smaller. Using \"compact\" is especially recommended when booting from\n"
 "a floppy disk.\n"
+"\n"
 "\n"
 "  - Delay before booting default image: Specifies the number in tenths\n"
 "of a second the boot loader should wait before booting the first image.\n"
@@ -1252,13 +1259,14 @@ msgid ""
 "enabling the keyboard. The boot loader doesn't wait if \"delay\" is\n"
 "omitted or is set to zero.\n"
 "\n"
+"\n"
 "  - Video mode: This specifies the VGA text mode that should be selected\n"
 "when booting. The following values are available: \n"
 "    * normal: select normal 80x25 text mode.\n"
 "    * <number>:  use the corresponding text mode."
 msgstr ""
 
-#: ../help.pm_.c:335
+#: ../help.pm_.c:343
 msgid ""
 "Now it's time to configure the X Window System, which is the\n"
 "core of the Linux GUI (Graphical User Interface). For this purpose,\n"
@@ -1273,19 +1281,19 @@ msgid ""
 "change them, as many times as necessary."
 msgstr ""
 
-#: ../help.pm_.c:348
+#: ../help.pm_.c:356
 msgid ""
 "If something is wrong in X configuration, use these options to correctly\n"
 "configure the X Window System."
 msgstr ""
 
-#: ../help.pm_.c:352
+#: ../help.pm_.c:360
 msgid ""
 "If you prefer to use a graphical login, select \"Yes\". Otherwise, select\n"
 "\"No\"."
 msgstr ""
 
-#: ../help.pm_.c:356
+#: ../help.pm_.c:364
 msgid ""
 "You can now select some miscellaneous options for you system.\n"
 "\n"
@@ -1293,25 +1301,29 @@ msgid ""
 "accesses but is only for advanced users, it can ruin your hard drive if\n"
 "used incorrectly. Use it only if you know how.\n"
 "\n"
+"\n"
 "  - Choose security level: You can choose a security level for your\n"
 "system.\n"
 "    Please refer to the manual for more information.\n"
+"\n"
 "\n"
 "  - Precise RAM size if needed: In some cases, Linux is unable to\n"
 "correctly detect all the installed RAM on  some systems. If this is the\n"
 "case, specify the correct quantity. Note: a difference of 2 or 4 Mb is\n"
 "normal.\n"
 "\n"
+"\n"
 "  - Removable media automounting: If you would prefer not to manually\n"
 "mount removable drives (CD-ROM, Floppy, Zip) by typing \"mount and\n"
 "\"umount\", select this option. \n"
+"\n"
 "\n"
 "  - Enable Num Lock at startup: If you want Number Lock enabled after\n"
 "booting, select this option (Note: Num Lock will still not work under\n"
 "X)."
 msgstr ""
 
-#: ../help.pm_.c:380
+#: ../help.pm_.c:392
 msgid ""
 "Your system is going to reboot.\n"
 "\n"
