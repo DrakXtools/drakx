@@ -146,7 +146,7 @@ sub service_starts_on_boot ($) {
     local *F; 
     open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
 	"/bin/sh -c \"export LC_ALL=C; /sbin/chkconfig --list $service 2>&1\" |" ||
-	    die "Could not run chkconfig!";
+	    return 0;
     while (<F>) {
 	chomp;
 	if ($_ =~ /:on/) {
@@ -161,7 +161,8 @@ sub service_starts_on_boot ($) {
 sub start_service_on_boot ($) {
     my ($service) = @_;
     run_program::rooted($prefix, "/sbin/chkconfig", "--add", $service)
-	|| die "Could not start chkconfig!";
+	|| return 0;
+    return 1;
 }
 
 sub network_status {
@@ -331,14 +332,15 @@ sub read_configured_queues($) {
     my ($printer) = @_;
     my @QUEUES;
     # Get the default spooler choice from the config file
-    if (!($printer->{SPOOLER} ||= get_default_spooler())) {
+    $printer->{SPOOLER} ||= get_default_spooler();
+    if (!$printer->{SPOOLER}) {
 	#- Find the first spooler where there are queues
 	my $spooler;
 	for $spooler (qw(cups pdq lprng lpd)) {
 	    #- poll queue info 
 	    local *F; 
 	    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
-		"foomatic-configure -P -s $spooler |" ||
+		"foomatic-configure -P -q -s $spooler |" ||
 		    die "Could not run foomatic-configure";
 	    eval (join('',(<F>))); 
 	    close F;
@@ -352,7 +354,7 @@ sub read_configured_queues($) {
 	#- Poll the queues of the current default spooler
 	local *F; 
 	open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
-	    "foomatic-configure -P -s $printer->{SPOOLER} |" ||
+	    "foomatic-configure -P -q -s $printer->{SPOOLER} |" ||
 		die "Could not run foomatic-configure";
 	eval (join('',(<F>))); 
 	close F;
@@ -424,7 +426,7 @@ sub read_printer_db(;$) {
     # appropriate file when it is already generated
     if (!(-f $dbpath)) {
 	open DBPATH, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
-	    "foomatic-configure -O |" ||
+	    "foomatic-configure -O -q |" ||
 		die "Could not run foomatic-configure";
     } else {
 	open DBPATH, $dbpath or die "An error has occurred on $dbpath : $!";
@@ -553,7 +555,7 @@ sub read_foomatic_options ($) {
     my $COMBODATA;
     local *F;
     open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
-	"foomatic-configure -P -p $printer->{currentqueue}{'printer'}" .
+	"foomatic-configure -P -q -p $printer->{currentqueue}{'printer'}" .
 	    " -d $printer->{currentqueue}{'driver'}" . 
 		($printer->{OLD_QUEUE} ?
 		  " -s $printer->{SPOOLER} -n $printer->{OLD_QUEUE}" : "") .
@@ -728,7 +730,7 @@ sub get_cups_autoconf {
 sub set_default_printer {
     my ($printer) = $_[0];
     run_program::rooted($prefix, "foomatic-configure",
-			"-D", "-s", $printer->{SPOOLER},
+			"-D", "-q", "-s", $printer->{SPOOLER},
 			"-n", $printer->{DEFAULT}) || return 0;
     return 1;
 }
@@ -737,7 +739,7 @@ sub get_default_printer {
     my $printer = $_[0];
     local *F;
     open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
-	"foomatic-configure -Q -s $printer->{SPOOLER} |" || return undef;
+	"foomatic-configure -Q -q -s $printer->{SPOOLER} |" || return undef;
     my $line;
     while ($line = <F>) {
 	if ($line =~ m!^\s*<defaultqueue>(.*)</defaultqueue>\s*$!) {
@@ -922,7 +924,7 @@ sub configure_queue($) {
     if ($printer->{currentqueue}{foomatic}) {
 	#- Create the queue with "foomatic-configure", in case of queue
 	#- renaming copy the old queue
-        run_program::rooted($prefix, "foomatic-configure",
+        run_program::rooted($prefix, "foomatic-configure", "-q",
 			    "-s", $printer->{currentqueue}{'spooler'},
 			    "-n", $printer->{currentqueue}{'queue'},
 			    (($printer->{currentqueue}{'queue'} ne 
@@ -971,7 +973,7 @@ sub configure_queue($) {
 	}
     } else {
 	# Raw queue
-        run_program::rooted($prefix, "foomatic-configure",
+        run_program::rooted($prefix, "foomatic-configure", "-q",
 			    "-s", $printer->{currentqueue}{'spooler'},
 			    "-n", $printer->{currentqueue}{'queue'},
 			    "-c", $printer->{currentqueue}{'connect'},
@@ -1037,7 +1039,7 @@ sub configure_queue($) {
 sub remove_queue($$) {
     my ($printer) = $_[0];
     my ($queue) = $_[1];
-    run_program::rooted($prefix, "foomatic-configure", "-R",
+    run_program::rooted($prefix, "foomatic-configure", "-R", "-q",
 			"-s", $printer->{SPOOLER},
 			"-n", $queue);
     # Delete old stuff from data structure
@@ -1165,7 +1167,7 @@ sub get_copiable_queues {
     my @queuelist;      #- here we will list all Foomatic-generated queues
     # Get queue list with foomatic-configure
     open QUEUEOUTPUT, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
-	    "foomatic-configure -Q -s $oldspooler |" ||
+	    "foomatic-configure -Q -q -s $oldspooler |" ||
 		die "Could not run foomatic-configure";
 
     my $entry = {};
@@ -1226,7 +1228,7 @@ sub get_copiable_queues {
 
 sub copy_foomatic_queue {
     my ($printer, $oldqueue, $oldspooler, $newqueue) = @_;
-    run_program::rooted($prefix, "foomatic-configure",
+    run_program::rooted($prefix, "foomatic-configure", "-q",
 		      "-s", $printer->{SPOOLER},
 		      "-n", $newqueue,
 			"-C", $oldspooler, $oldqueue);
