@@ -39,7 +39,7 @@ If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("u
 	go_ethernet($netc, $intf, 'dhcp', '', '', $first_time) or goto conf_adsl_step1;
     }
     if ($type eq 'pptp') {
-	$in->do_pkgs->install(qw(pptp-adsl-fr));
+	$in->do_pkgs->install(qw(pptp-adsl));
 	$netcnx->{type} = "adsl_$type";
 	$netcnx->{"adsl_$type"} = {};
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
