@@ -287,7 +287,7 @@ sub all {
     my $d = shift;
 
     local *F;
-    opendir F, $d or die "all: can't open dir $d: $!\n";
+    opendir F, $d or return;
     my @l = grep { $_ ne '.' && $_ ne '..' } readdir F;
     closedir F;
 

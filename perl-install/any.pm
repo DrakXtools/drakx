@@ -17,33 +17,33 @@ use run_program;
 use modules;
 use log;
 
-#-PO: names (tie, curly...) have corresponding icons for kdm
-my @users_male = (__("tie"), __("default"), __("curly")); #- don't change the names, files correspond to them
-my @users_female = (__("brunette"), __("girl"), __("woman-blond"));
-@users = (@users_male, @users_female, __("automagic"));
-
-sub icon2file {
-    my ($icon, $prefix) = @_;
-    "$prefix/usr/share/icons/user-$icon-mdk.xpm";
+sub facesdir {
+    my ($prefix) = @_;
+    "$prefix/usr/share/faces/";
+}
+sub face2xpm {
+    my ($face, $prefix) = @_;
+    facesdir($prefix) . $face . ".xpm";
+}
+sub facesnames {
+    my ($prefix) = @_;
+    my $dir = facesdir($prefix);
+    grep { -e "$dir/$_.png" } map { /(.*)\.xpm/ } all($dir);
 }
 
 sub addKdmIcon {
-    my ($prefix, $user, $icon, $force) = @_;
-    my $dest = "$prefix/usr/share/apps/kdm/pics/users/$user.xpm";
-    unlink $dest if $force;
-    eval { commands::cp(icon2file($icon, $prefix), $dest) } if $icon;
+    my ($prefix, $user, $icon) = @_;
+    my $dest = "$prefix/usr/share/faces/$user.png";
+    eval { commands::cp("-f", facesdir($prefix) . $icon . ".png", $dest) } if $icon;
 }
 
 sub allocUsers {
     my ($prefix, @users) = @_;
-    require timezone;
-    my @u1 = @users_male;
-    my @u2 = @users_female;
+    my @m = my @l = facesnames($prefix);
     foreach (grep { !$_->{icon} || $_->{icon} eq "automagic" } @users) {
-	my $l = rand() < timezone::sexProb($_->{name}) ? \@u2 : \@u1;
-	$_->{auto_icon} = splice(@$l, rand(@$l), 1); #- known biased (see cookbook for better)
-	@u1 = @users_male   unless @u1;
-	@u2 = @users_female unless @u2;
+	$_->{auto_icon} = splice(@m, rand(@m), 1); #- known biased (see cookbook for better)
+	log::l("auto_icon is $_->{auto_icon}");
+	@m = @l unless @m;
     }
 }
 
@@ -54,10 +54,10 @@ sub addUsers {
     allocUsers($prefix, @users);
     foreach my $u (@users) {
 	substInFile { s/^$u->{name}\n//; $_ .= "$u->{name}\n" if eof } "$msec/user.conf" if -d $msec;
-	addKdmIcon($prefix, $u->{name}, delete $u->{auto_icon} || $u->{icon}, 'force');
+	addKdmIcon($prefix, $u->{name}, delete $u->{auto_icon} || $u->{icon});
     }
     run_program::rooted($prefix, "/usr/share/msec/grpuser.sh --refresh");
-    addKdmIcon($prefix, 'root', 'hat', 'force');
+#    addKdmIcon($prefix, 'root', 'root');
 }
 
 sub crypt {
@@ -193,10 +193,10 @@ You can add some more or change the existing ones."),
 	my @l;
 	if ($e->{type} eq "image") { 
 	    @l = (
-_("Image") => { val => \$e->{kernel_or_dev}, list => [ eval { map { s/$prefix//; $_ } glob_("$prefix/boot/vmlinuz*") } ] },
+_("Image") => { val => \$e->{kernel_or_dev}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/vmlinuz*") ] },
 _("Root") => { val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
 _("Append") => \$e->{append},
-_("Initrd") => { val => \$e->{initrd}, list => [ eval { map { s/$prefix//; $_ } glob_("$prefix/boot/initrd*") } ] },
+_("Initrd") => { val => \$e->{initrd}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/initrd*") ] },
 _("Read-write") => { val => \$e->{'read-write'}, type => 'bool' }
 	    );
 	    @l = @l[0..5] unless $::expert;

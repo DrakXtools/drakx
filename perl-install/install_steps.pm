@@ -723,7 +723,7 @@ sub setupBootloader($) {
 	map { run_program::rooted($o->{prefix}, "mkinitrd", "-f", "/boot/initrd-$_->[1]", "--ifneeded", $_->[1]) ;#or
 	  #unlink "$o->{prefix}/boot/initrd-$_->[1]";$_ } grep { $_->[0] && $_->[1] }
 	  $_ } grep { $_->[0] && $_->[1] }
-	map { [ m|$o->{prefix}(/boot/vmlinux-(.*))| ] } eval { glob_("$o->{prefix}/boot/vmlinux-*") };
+	map { [ m|$o->{prefix}(/boot/vmlinux-(.*))| ] } glob_("$o->{prefix}/boot/vmlinux-*");
 #	output "$o->{prefix}/etc/aboot.conf", 
 #	  map_index { "$::i:$b->{part_nb}$_ root=$b->{root} $b->{perImageAppend}\n" }
 #	    map { /$o->{prefix}(.*)/ } eval { glob_("$o->{prefix}/boot/vmlinux*") };

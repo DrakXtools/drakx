@@ -659,7 +659,7 @@ sub addUser {
 	   ), $::beginner ? () : (
          _("Shell") => {val => \$u->{shell}, list => [ any::shells($o->{prefix}) ], not_edit => !$::expert} 
 	   ), $o->{security} > 3 ? () : (
-	 _("Icon") => {val => \$u->{icon}, list => [ @any::users ], icon2f => sub { any::icon2file($_[0], $o->{prefix}) } },
+	 _("Icon") => {val => \$u->{icon}, list => [ any::facesnames() ], icon2f => sub { any::face2xpm($_[0], $o->{prefix}) } },
 	   ),
         ],
         focus_out => sub {

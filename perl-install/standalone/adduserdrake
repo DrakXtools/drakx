@@ -27,7 +27,7 @@ if (my @l = grep { ! /^-/ } @ARGV) {
     exit 0;
 }
 
-my $in = vnew interactive('su');
+my $in = interactive->vnew('su');
 my @users; 
 
 new:
@@ -44,7 +44,7 @@ if ($in->ask_from_entries_refH(
 	   ), $::beginner ? () : (
          _("Shell") => {val => \$u->{shell}, list => \@shells, not_edit => !$::expert} 
 	   ), $security > 3 ? () : (
-	 _("Icon") => {val => \$u->{icon}, list => [ @any::users ], icon2f => \&any::icon2file },
+	 _("Icon") => {val => \$u->{icon}, list => [ any::facesnames() ], icon2f => \&any::face2xpm },
 	   ),
         ],
         focus_out => sub {

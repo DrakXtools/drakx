@@ -485,7 +485,7 @@ sub kdeicons_postinstall {
     }
 
     my @l = list_skels($prefix, 'Desktop/Doc.kdelnk');
-    if (my ($lang) = eval { all("$prefix/usr/doc/mandrake") }) {
+    if (my ($lang) = all("$prefix/usr/doc/mandrake")) {
 	substInFile { s|^(URL=.*?)/?$|$1/$lang/index.html| } @l;
 	substInFile { s|^(url=/usr/doc/mandrake/)$|$1$lang/index.html| } "$prefix/usr/lib/desktop-links/mandrake.links";
     } else {
