@@ -338,7 +338,8 @@ sub psUsingHdlists {
 	my ($hdlist, $medium, $rpmsdir, $descr) = @$_;
 	my $f = install_any::getFile($hdlist) or die "no $hdlist found";
 
-	psUsingHdlist($prefix, $method, \@packages, $f, $hdlist, $medium, $rpmsdir, $descr, (!$medium || $method ne 'cdrom'));
+	#- make sure the first medium is always selected! so select any less than 2.
+	psUsingHdlist($prefix, $method, \@packages, $f, $hdlist, $medium, $rpmsdir, $descr, ($medium < 2 || $method ne 'cdrom'));
     }
 
     log::l("psUsingHdlists read " . scalar keys(%{$packages[0]}) . " headers on " . scalar keys(%{$packages[2]}) . " hdlists");
