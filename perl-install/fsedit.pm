@@ -355,7 +355,7 @@ sub check_mntpoint {
 
     die "raid / with no /boot" if $mntpoint eq "/" && isMDRAID($part) && !has_mntpoint("/boot", $hds);
     die _("You can't use a LVM Logical Volume for mount point %s", $mntpoint) if ($mntpoint eq '/' || $mntpoint eq '/boot') && isLVMBased($hd);
-    die _("This directory should remain within the root filesystem") if member($mntpoint, qw(/bin /dev /etc /lib /sbin /root));
+    die _("This directory should remain within the root filesystem") if member($mntpoint, qw(/bin /dev /etc /lib /sbin));
     die _("You need a true filesystem (ext2, reiserfs) for this mount point\n") if !isTrueFS($part) && member($mntpoint, qw(/ /home /tmp /usr /var));
 #-    if ($part->{start} + $part->{size} > 1024 * $hd->cylinder_size() && arch() =~ /i.86/) {
 #-	  die "/boot ending on cylinder > 1024" if $mntpoint eq "/boot";
