@@ -22,5 +22,5 @@ WriteMakefile(
     'VERSION_FROM' => 'stuff.pm', # finds $VERSION
     'LIBS'	=> [$libs],   # e.g., '-lm' 
     'DEFINE'	=> '',     # e.g., '-DHAVE_SOMETHING' 
-    'INC'	=> "-I/usr/include/rpm `pkg-config gtk+-2.0 --cflags` `glib-config --cflags`" . ($pcmcia_dir && " -I$pcmcia_dir -I$pcmcia_dir/.."), 
+    'INC'	=> "-I/usr/include/rpm `pkg-config gtk+-2.0 --cflags`" . ($pcmcia_dir && " -I$pcmcia_dir -I$pcmcia_dir/.."), 
 );
