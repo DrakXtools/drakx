@@ -247,7 +247,7 @@ sub build_tree {
     my ($netc, $intf, $interface, $interface_kind, $protocol) = @_;
     
     if ($interface eq 'adsl') {
-	$intf->{pages} = { N("TCP/IP") => 1, N("Account") => 1, N("Options") => 1, N("Informations") => 1 };
+	$intf->{pages} = { N("TCP/IP") => 1, N("Account") => 1, N("Options") => 1, N("Information") => 1 };
 	network::adsl::adsl_probe_info($intf, $netc, $protocol, $interface_kind);
 	$intf->{save} = sub { network::adsl::adsl_conf_backend($in, $intf, $netc, $interface_kind, $protocol) };
     }
@@ -270,7 +270,7 @@ sub build_tree {
     } 
     else {
 	#- ethernet is default
-	$intf->{pages} = { N("TCP/IP") => 1, if_($intf->{WIRELESS_MODE}, N("Wireless") => 1), N("Options") => 1, N("Informations") => 1 };
+	$intf->{pages} = { N("TCP/IP") => 1, if_($intf->{WIRELESS_MODE}, N("Wireless") => 1), N("Options") => 1, N("Information") => 1 };
     }
 }
 
@@ -453,11 +453,11 @@ sub build_notebook {
 	$protocol_radio[1]->signal_connect(toggled => sub { $gui->{intf_radio}{protocol} = 3; $apply->() });
     }
     
-    if ($intf->{pages}{N("Informations")}) {
+    if ($intf->{pages}{N("Information")}) {
 	my ($info) = $gui->{description} ? 
 	  find { $_->{description} eq $gui->{description} } detect_devices::probeall : network::ethernet::mapIntfToDevice($interface_kind);
 	
-	gtkpack($gui->{sheet}{N("Informations")} = Gtk2::VBox->new(0,0),
+	gtkpack($gui->{sheet}{N("Information")} = Gtk2::VBox->new(0,0),
 		gtktext_insert(Gtk2::TextView->new,
 			       join('',
 				    map { $_->[0] . ": \x{200e}" . $_->[1] . "\n" } (
@@ -481,7 +481,7 @@ sub build_notebook {
 
 sub populate_notebook {
     my ($notebook, $gui) = @_;
-    foreach (N("TCP/IP"), N("Account"), N("Wireless"), N("Modem"), N("Options"), N("Informations")) {
+    foreach (N("TCP/IP"), N("Account"), N("Wireless"), N("Modem"), N("Options"), N("Information")) {
 	!$gui->{sheet}{$_} and next;
 	$notebook->append_page($gui->{sheet}{$_}, Gtk2::Label->new($_));
     }
