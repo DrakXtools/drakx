@@ -246,15 +246,15 @@ arch() =~ /^sparc/ ? (
 #- list of  possible choices for the key combinations to toggle XKB groups
 #- (eg in X86Config file: XkbOptions "grp:toggle")
 my %grp_toggles = (
-    toggle => N("Right Alt key"),
-    shift_toggle => N("Both Shift keys simultaneously"),
-    ctrl_shift_toggle => N("Control and Shift keys simultaneously"),
-    caps_toggle => N("CapsLock key"),
-    ctrl_alt_toggle => N("Ctrl and Alt keys simultaneously"),
-    alt_shift_toggle => N("Alt and Shift keys simultaneously"),
-    menu_toggle => N("\"Menu\" key"),
-    lwin_toggle => N("Left \"Windows\" key"),
-    rwin_toggle => N("Right \"Windows\" key"),
+    toggle => N_("Right Alt key"),
+    shift_toggle => N_("Both Shift keys simultaneously"),
+    ctrl_shift_toggle => N_("Control and Shift keys simultaneously"),
+    caps_toggle => N_("CapsLock key"),
+    ctrl_alt_toggle => N_("Ctrl and Alt keys simultaneously"),
+    alt_shift_toggle => N_("Alt and Shift keys simultaneously"),
+    menu_toggle => N_("\"Menu\" key"),
+    lwin_toggle => N_("Left \"Windows\" key"),
+    rwin_toggle => N_("Right \"Windows\" key"),
 );
 
 
@@ -287,7 +287,7 @@ sub group_toggle_choose {
 	my $GRP_TOGGLE = $keyboard->{GRP_TOGGLE} || 'caps_toggle';
 	$GRP_TOGGLE = $in->ask_from_listf('', N("Here you can choose the key or key combination that will 
 allow switching between the different keyboard layouts
-(eg: latin and non latin)"), sub { $grp_toggles->{$_[0]} }, [ sort keys %$grp_toggles ], $GRP_TOGGLE) or return;
+(eg: latin and non latin)"), sub { translate($grp_toggles->{$_[0]}) }, [ sort keys %$grp_toggles ], $GRP_TOGGLE) or return;
 
         log::l("GRP_TOGGLE: $GRP_TOGGLE");
         $keyboard->{GRP_TOGGLE} = $GRP_TOGGLE;
