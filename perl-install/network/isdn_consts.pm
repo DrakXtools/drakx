@@ -76,11 +76,20 @@ package network::isdn; # $Id$
     type => '18',
     card => 'pci',
    },
+   {description => "ELSA Quickstep 3000 (PCI)", #18 no parameter
+    driver => 'hisax',
+    type => '18',
+    card => 'pci',
+   },
    {description => "ELSA generic (PCMCIA)", #10 irq, io  (set with card manager)
     driver => 'hisax',
     type => '10',
     irq => '',
     io => '0x',
+    card => 'isa',
+   },
+   {description => "ELSA MicroLink (PCMCIA)", #10 irq, io  (set with card manager)
+    driver => 'elsa_cs',
     card => 'isa',
    },
    {description => "ITK ix1-micro Rev.2 (ISA)", #9 irq, io
@@ -97,7 +106,22 @@ package network::isdn; # $Id$
     io => '0x180',
     card => 'isa',
    },
-   {description => "Eicon.Diehl Diva (PCI)", #11 no parameter
+   {description => "Eicon.Diehl Diva 20 (PCI)", #11 no parameter
+    driver => 'hisax',
+    type => '11',
+    card => 'pci',
+   },
+   {description => "Eicon.Diehl Diva 20PRO (PCI)", #11 no parameter
+    driver => 'hisax',
+    type => '11',
+    card => 'pci',
+   },
+   {description => "Eicon.Diehl Diva 20_U (PCI)", #11 no parameter
+    driver => 'hisax',
+    type => '11',
+    card => 'pci',
+   },
+   {description => "Eicon.Diehl Diva 20PRO_U (PCI)", #11 no parameter
     driver => 'hisax',
     type => '11',
     card => 'pci',
@@ -156,10 +180,7 @@ package network::isdn; # $Id$
     card => 'pci',
    },
    {description => "Sedlbauer Speed Star (PCMCIA)", #22 irq, io (set with card manager)
-    driver => 'hisax',
-    type => '22',
-    irq => '',
-    io => '0x',
+    driver => 'sedlbauer_cs',
     card => 'isa',
    },
    {description => "Sedlbauer Speed Fax+ (ISA Pnp)", #28 irq, io (from isapnp setup)
@@ -168,11 +189,13 @@ package network::isdn; # $Id$
     irq => '9',
     io => '0xd80',
     card => 'isa',
+    firmware => '/usr/lib/isdn/ISAR.BIN',
    },
    {description => "Sedlbauer Speed Fax+ (PCI)", #28 no parameter
     driver => 'hisax',
     type => '28',
     card => 'pci',
+    firmware => '/usr/lib/isdn/ISAR.BIN',
    },
    {description => "USR Sportster internal (ISA)", #16 irq, io
     driver => 'hisax',
@@ -215,21 +238,21 @@ package network::isdn; # $Id$
     type => '24',
     card => 'pci',
    },
-   {description => "AVM A1 (Fritz!) (ISA non PnP)", #5 irq, io
+   {description => "AVM A1 (Fritz) (ISA non PnP)", #5 irq, io
     driver => 'hisax',
     type => '5',
     irq => '10',
     io => '0x300',
     card => 'isa',
    },
-   {description => "AVM (Fritz!) (ISA Pnp)", #27 irq, io  (from isapnp setup)
+   {description => "AVM (ISA Pnp)", #27 irq, io  (from isapnp setup)
     driver => 'hisax',
     type => '27',
     irq => '5',
     io => '0x300',
     card => 'isa',
    },
-   {description => "AVM A1 (Fritz!) (PCMCIA)", #26 irq, io (set with card manager)
+   {description => "AVM A1 (Fritz) (PCMCIA)", #26 irq, io (set with card manager)
     driver => 'hisax',
     type => '26',
     irq => '',
@@ -238,6 +261,10 @@ package network::isdn; # $Id$
    {description => "AVM PCI (Fritz!) (PCI)", #27 no parameter
     driver => 'hisax',
     type => '27',
+    card => 'pci',
+   },
+   {description => "AVM B1 (PCI)",
+    driver => 'b1pci',
     card => 'pci',
    },
    {description => "Siemens I-Surf 1.0 (ISA Pnp)", #29 irq, io, memory (from isapnp setup)   
@@ -285,6 +312,11 @@ package network::isdn; # $Id$
     card => 'pci',
    },
    {description => "W6692 and Winbond based cards (PCI)", #36 none
+    driver => 'hisax',
+    type => '36',
+    card => 'pci',
+   },
+   {description => "Dynalink 128PH (PCI)", #36
     driver => 'hisax',
     type => '36',
     card => 'pci',
