@@ -213,6 +213,13 @@ drakx_stuff:
     #- don't use shadow passwords since pwconv overwrites /etc/shadow hence contents will be lost for usb key
     delete $o->{authentication}{shadow};
 
+    foreach my $lang (keys %lang::langs) {
+	my $dir = '/usr/share/locale/' . lang::l2locale($lang);
+	my $link = readlink($dir) or next;
+	my ($name) = $link =~ m!image_(i18n_.*?)/! or log::l("ERROR: bad link $link for $dir"), next;
+	log::l("disabling lang $lang");
+	-e "/cdrom/live_tree_$name.clp" or delete $lang::langs{$lang};
+    }   
 }
 
 sub lomount_clp {
@@ -243,6 +250,7 @@ sub install2::autoSelectLanguage {
 sub install2::handleI18NClp {
     my $o = $::o;
 
+    lomount_clp("i18n_$o->{locale}{lang}", '/usr');
     lomount_clp("always_i18n_$o->{locale}{lang}", '/usr');
 }
 
