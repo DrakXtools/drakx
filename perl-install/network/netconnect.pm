@@ -898,11 +898,11 @@ See iwpriv(8) man page for further information."),
                              }
                             ],
                     complete => sub {
-                        if ($ethntf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
+                        if ($ethntf->{WIRELESS_FREQ} && $ethntf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
                             $in->ask_warn(N("Error"), N("Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough '0' (zeroes)."));
                             return 1, 6;
                         }
-                        if ($ethntf->{WIRELESS_RATE} !~ /[0-9.]*[kGM]/) {
+                        if ($ethntf->{WIRELESS_RATE} && $ethntf->{WIRELESS_RATE} !~ /[0-9.]*[kGM]/) {
                             $in->ask_warn(N("Error"), N("Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough '0' (zeroes)."));
                             return 1, 8;
                         }
