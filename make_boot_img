@@ -52,6 +52,7 @@ sub initrd {
     my $tmp = "$ENV{HOME}/tmp/initrd";
     my $tar = "$instdir/install1_$type.$arch.tar.bz2";
     -e $tar or $tar = "$instdir/install1.$arch.tar.bz2";
+    -e $tar or $tar = "$instdir/install1.tar.bz2";
 
     __ "$sudo umount $tmp $mnt 2>/dev/null";
     _ "dd if=/dev/zero of=$tmp bs=1k count=2000";
