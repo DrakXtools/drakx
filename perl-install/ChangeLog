@@ -1,3 +1,269 @@
+2003/09/11  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: one fix
+	typo fixes
+
+2003/09/11  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/rpmsrate: Add   5 LOCALES"zh_CN" miniChinput (#4408)
+
+2003/09/11  Florin Grad  <florin at mandrakesoft.com>
+
+	* network/shorewall.pm: add the network interface window as in the
+	drakgw's case
+
+	* standalone/drakgw: silly me, I forgot the debug messages
+	some Cancel interface fix
+
+2003/09/11  François Pons  <fpons at mandrakesoft.com>
+
+	* bootloader.pm: protected restore entry to be only visible if restore
+	option added during boot.
+
+	* install2.pm: added restore option to allow restore entry to be created
+	(refused by default)
+
+	* any.pm: fixed to use meta_class desktop instead of virtual discovery
+	(mapped to desktop).
+
+	* Xconfig/resolution_and_depth.pm: fixed depth to 24 when using driver
+	fglrx (it won't work unless 24 bits)
+
+	* install_steps.pm: simplified oem theme generation, now use oem-theme.rpm
+	wait for processes that need to be correctly finished before.
+
+	* run_program.pm: added detach option to handle detached process running
+	(for update-menus).
+
+2003/09/11  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* install_gtk.pm: inactivate antialias in VGA16 because it makes fonts
+	look worse
+
+	* mdk-stage1/disk.c: fix recovery behaviour thx to francois comments
+
+	* any.pm: don't use images for language choice in vga16, it's too ugly
+
+2003/09/11  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/uz@Cyrl.po, share/po/uz.po, share/po/cy.po: updated Welsh and
+	Uzbek files
+
+	* share/po/lt.po, share/po/he.po, share/po/wa.po, share/po/ta.po,
+	share/po/tg.po, share/po/ms.po, share/po/sl.po, share/po/eo.po: updated
+	po files (country names strings merged from drakfw)
+
+	* share/po/it.po: updated Italian file
+	updated Italian file
+
+2003/09/11  Pixel  <pixel at mandrakesoft.com>
+
+	* lang.pm: move configuring kdmrc to lang::write so that it is done in
+	localedrake
+	don't configure kde config files when they are not present
+	(otherwise minimal install followed by urpmi kde gives a badly
+	configured kde)
+
+	* Xconfig/test.pm, ugtk2.pm: use center_always for popped windows (if
+	transient is not used), and force centering in Xconfig test
+
+	* install_steps.pm: move configuring kdmrc to lang::write so that it is
+	done in localedrake
+
+	* c/Makefile.PL: libXext seems to be needed, i don't know why...
+
+2003/09/11  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/logdrake: always display the log domain names in the same
+	order, that is in
+	english (not l10n) alphabetic order
+
+	* standalone/drakconnect: do not set hostname if there's a dynamic
+	interface
+
+	* standalone/drakperm: remove debugging assertion
+	display "the current level is X" instead of "the current level is level
+	X"
+
+2003/09/10  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: updated one string
+
+2003/09/10  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: 2 typo fixes
+	Updated
+
+2003/09/10  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/rpmsrate, share/compssUsers.desktop: Update
+
+2003/09/10  Frederic Crozat  <fcrozat at mandrakesoft.com>
+
+	* share/rpmsrate: Don't install nautilus-gtkhtml by default
+
+2003/09/10  François Pons  <fpons at mandrakesoft.com>
+
+	* install2.pm: make sure mouse modules are loaded before using them
+	(usefull for defcfg or recovery).
+	save recovery file if disk installation.
+	take recovery option into account.
+
+	* mouse.pm: fixed the fix of fpons trick...
+	fixed the fpons trick (which was false moreover)
+	added load_modules to load mouse module according to configuration.
+
+	* bootloader.pm: restore entry is a recovery entry.
+	restore entry shouldn't have reference of vga=... in append, moved to
+	vga.
+
+	* network/adsl.pm: added sagem support for dhcp (as used by Free
+	degroupped ;-))
+
+	* standalone/XFdrake, install_steps_interactive.pm: added nplanel patch
+	for ATI proprietary drivers.
+
+	* Xconfig/card.pm: fixed perl_checker fixes.
+	added nplanel patch for ATI proprietary drivers.
+
+2003/09/10  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* Xconfig/test.pm: clean
+	we don't have .jpg loader in install, file needs to be in .png
+	(mandrake_desk 9.2-8mdk)
+
+	* rescue/tree/etc/issue, mdk-stage1/Makefile: 9.2
+
+	* mdk-stage1/stage1.c, mdk-stage1/stage1.h, mdk-stage1/disk.h,
+	mdk-stage1/automatic.h, mdk-stage1/tools.c, mdk-stage1/disk.c: recovery
+
+2003/09/10  nplanel
+
+	* Xconfig/card.pm: fixup default fglrx config to be included in Device
+	Section. thanks pixel
+
+2003/09/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/pl.po, share/po/et.po, share/po/pt_BR.po, share/po/nb.po,
+	share/po/az.po, share/po/cs.po, share/po/zh_CN.po, share/po/hu.po:
+	updated Azeri, Czech, Estonian, Hungarian, Brazilian and Chinese files
+
+2003/09/10  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: no more "dos" label in bootloader (it seems WinXP use the
+	"DOS FAT16" for fat partitions)
+
+2003/09/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 9.2-10mdk
+
+	* standalone/drakperm: 
+	  - do not comply on filter change (system, user or system & user)
+	  - default to "system & user" by default
+	  - show customized rules after system ones since these are managed once
+	system ones get applied
+	  - add new rules to end of list
+
+	* network/netconnect.pm: follow std explanations policy
+
+	* standalone/drakedm: follow std explanations policy
+	add higher level explanations
+
+2003/09/09  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* any.pm: 
+	  - userdrake is in /usr/sbin/ (#5447)
+
+2003/09/09  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/netconnect.pm: profile is 'default' if no configuration file
+	found
+
+2003/09/09  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/09/09  François Pons  <fpons at mandrakesoft.com>
+
+	* install_messages.pm: fixed reference to 9.1 errata, (now
+	http://www.mandrakelinux.com/en/92errata.php3).
+
+	* standalone/drakautoinst: try again if no floppy (or error during
+	creation of floppy)
+
+	* bootloader.pm: avoid lilo-graphic for ProSavageDDR card as this card
+	seems to report bad window size.
+
+2003/09/09  keld
+
+	* share/po/da.po: updates
+	soft/GtkMdkWidgets/po/da.po soft/wizard_perl/po/da.po
+	gi/perl-install/share/po/da.po
+
+2003/09/09  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/de.po: updated German file
+	updated pot file
+
+	* share/po/help-es.pot, share/po/pt_BR.po, share/po/nb.po, share/po/eu.po,
+	share/po/ta.po, share/po/help-de.pot, share/po/it.po, share/po/ja.po,
+	share/po/uz.po, share/po/tr.po, share/po/et.po, share/po/sl.po,
+	share/po/fr.po, share/po/DrakX.pot, share/po/uk.po,
+	share/po/help-it.pot, share/po/nl.po, share/po/af.po, share/po/cs.po,
+	share/po/he.po, share/po/wa.po, share/po/bg.po, share/po/ru.po,
+	share/po/be.po, share/po/ms.po, share/po/pl.po, share/po/vi.po,
+	share/po/help-ru.pot, share/po/ga.po, share/po/cy.po, share/po/ca.po,
+	share/po/eo.po, share/po/th.po, share/po/sr.po, share/po/sk.po,
+	share/po/az.po, share/po/da.po, share/po/sq.po, share/po/ar.po,
+	share/po/mt.po, share/po/el.po, share/po/uz@Cyrl.po, share/po/tg.po,
+	share/po/hr.po, share/po/sv.po, share/po/pt.po, share/po/lt.po,
+	share/po/gl.po, share/po/fa.po, share/po/es.po, share/po/zh_TW.po,
+	share/po/fi.po, share/po/zh_CN.po, share/po/lv.po, share/po/ko.po,
+	share/po/bs.po, share/po/sr@Latn.po, share/po/ro.po, share/po/id.po,
+	share/po/is.po, share/po/hu.po: updated pot file
+
+2003/09/09  Pixel  <pixel at mandrakesoft.com>
+
+	* mouse.pm: write "MOVE YOUR WHEEL!" only for ps2 mice
+
+	* ugtk2.pm: remove too verbose _XSetInputFocus log
+
+	* modules.pm: increase sleep time after modprobing usb-uhci/usb-ohci
+	(otherwise USB mouse may be undetected)
+
+	* standalone/drakupdate_fstab: re-enable supermount
+
+	* standalone/diskdrake, any.pm: ensure userdrake works when diskdrake
+	--fileshare is embedded or run through kdesu
+
+	* install_steps_interactive.pm: don't ask security level when upgrading
+
+	* share/po/help-es.pot, share/po/help-fr.pot, share/po/help-de.pot,
+	share/po/help-ru.pot, help.pm, share/po/help-it.pot: update from xml
+	help
+
+2003/09/09  Till Kamppeter  <till at mandrakesoft.com>
+
+	* scanner.pm: Fixed functions for scanner database (ScannerDB) generation.
+
+	* printer/printerdrake.pm: Fixed bug #5423: Some option settings were not
+	be recognized or changed.
+
+2003/09/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/logdrake: fix #5448 (infinite entries)
+
+	* standalone/drakxtv: install xawtv if needed
+
+	* standalone/drakconnect: fix window size in when non embedded & non
+	wizard
+
+	* share/po/fr.po: fix drakboot layout
+
+	* interactive/gtk.pm: fix #5040 (too small drakboot's window width)
+
+	* standalone/drakboot: fix default size without draksplash
+
 2003/09/09  David Baudens  <baudens at mandrakesoft.com>
 
 	* share/po/ta.po, share/po/ko.po, share/po/fi.po, share/po/sq.po: Fix
@@ -21174,7 +21440,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.832 2003/09/09 09:14:46 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.833 2003/09/09 14:38:27 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
