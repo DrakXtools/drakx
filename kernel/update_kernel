@@ -31,7 +31,7 @@ function create_modules_mar() {
     ls *.o | packdrake -b9s "modules.cz" 400000
     echo "done"
     mv modules.cz ../modules.cz-$kern
-    for i in network network_gigabit_usb cdrom hd hd_usb pcmcia all; do
+    for i in network network_gigabit_usb cdrom hd hdcdrom_usb pcmcia all; do
 	modules_var="${i}_modules"
 	eval "create_marfile ${i}_modules.mar \$$modules_var"
     done

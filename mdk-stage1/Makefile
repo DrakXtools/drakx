@@ -113,9 +113,13 @@ CDROM_DEFS = -DDISABLE_DISK -DDISABLE_NETWORK
 
 
 STAGE1OBJS-DISK = $(subst .c,-DISK.o,$(STAGE1SRC) $(DISKSRC))
-STAGE1OBJS-DISK-USB = $(subst .c,-DISK-USB.o,$(STAGE1SRC) $(DISKSRC))
 
 DISK_DEFS = -DDISABLE_CDROM -DDISABLE_NETWORK
+
+
+STAGE1OBJS-MEDIAS-USB = $(subst .c,-MEDIAS-USB.o,$(STAGE1SRC) $(CDROMSRC) $(DISKSRC))
+
+MEDIAS-USB_DEFS = -DDISABLE_NETWORK
 
 
 STAGE1OBJS-NETWORK = $(subst .c,-NETWORK.o,$(STAGE1SRC) $(NETWORKSRC))
@@ -143,7 +147,7 @@ endif
 BINS = init stage1-full
 
 ifeq (i386, $(ARCH))
-BINS += stage1-cdrom stage1-disk stage1-network stage1-network-usb stage1-disk-usb
+BINS += stage1-cdrom stage1-disk stage1-network stage1-network-usb stage1-medias-usb
 endif
 
 ifneq (ia64, $(ARCH))
@@ -185,7 +189,7 @@ stage1-disk: $(STAGE1OBJS-DISK) $(STAGE1_OWN_LIBS) $(FRONTEND_LINK) $(STAGE1_LIB
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
-stage1-disk-usb: $(STAGE1OBJS-DISK-USB) $(STAGE1_OWN_LIBS) $(FRONTEND_LINK) $(STAGE1_LIBC)
+stage1-medias-usb: $(STAGE1OBJS-MEDIAS-USB) $(STAGE1_OWN_LIBS) $(FRONTEND_LINK) $(STAGE1_LIBC)
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
@@ -211,8 +215,8 @@ $(STAGE1OBJS-CDROM): %-CDROM.o: %.c
 $(STAGE1OBJS-DISK): %-DISK.o: %.c
 	$(COMPILE) $(INCLUDES) $(DISK_DEFS) -c $< -o $@
 
-$(STAGE1OBJS-DISK-USB): %-DISK-USB.o: %.c
-	$(COMPILE) $(INCLUDES) $(DISK_DEFS) $(USB_DEFS_GEN) -c $< -o $@
+$(STAGE1OBJS-MEDIAS-USB): %-MEDIAS-USB.o: %.c
+	$(COMPILE) $(INCLUDES) $(MEDIAS-USB_DEFS) $(USB_DEFS_GEN) -c $< -o $@
 
 $(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c
 	$(COMPILE) $(INCLUDES) $(NETWORK_DEFS) $(PCMCIA_DEFS) -c $< -o $@
@@ -259,7 +263,11 @@ endif
 
 *-DISK.o: %-DISK.o: %.o
 
+*-MEDIAS-USB.o: %-MEDIAS-USB.o: %.o
+
 *-NETWORK.o: %-NETWORK.o: %.o
+
+*-NETWORK-USB.o: %-NETWORK-USB.o: %.o
 
 *-USB.o: %-USB.o: %.o
 

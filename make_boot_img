@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-@ARGV >= 2 or die "usage: $0 <image> all|cdrom|hd|hd_usb|network|network_gigabit_usb|blank|pcmcia|live|tftp|tftprd\n";
+@ARGV >= 2 or die "usage: $0 <image> all|cdrom|hd|hdcdrom_usb|network|network_gigabit_usb|blank|pcmcia|live|tftp|tftprd\n";
 
 use Config;
 use MDK::Common;
@@ -44,7 +44,7 @@ $install = $ {{
     network_gigabit_usb => "stage1-network-usb",
     cdrom => "stage1-cdrom",
     hd => "stage1-disk",
-    hd_usb => "stage1-disk-usb",
+    hdcdrom_usb => "stage1-medias-usb",
     live64 => "stage1-full",
     tftp64 => "stage1-full",
     tftprd64 => "stage1-full",

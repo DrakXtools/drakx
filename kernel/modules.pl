@@ -95,7 +95,8 @@ my %images = (
             => 'fs/network network/raw bus/usb network/gigabit|usb',
     network => 'fs/network network/raw bus/pcmcia network/main',
     hd      => 'disk/raw fs/local|loopback disk/scsi|hardware_raid',
-    hd_usb  => 'disk/raw fs/local|loopback bus/usb disk/usb bus/firewire disk/firewire',
+    hdcdrom_usb
+	    => 'disk/cdrom|raw fs/local|loopback|cdrom bus/usb disk/usb bus/firewire disk/firewire',
     pcmcia  => 'fs/cdrom disk/cdrom|raw|pcmcia bus/pcmcia fs/network network/pcmcia|raw',
     cdrom   => 'fs/cdrom disk/cdrom|raw|scsi',
     all     => 'fs/cdrom disk/cdrom|raw bus/usb disk/usb|scsi fs/loopback|local bus/pcmcia disk/pcmcia|hardware_raid fs/network network/main|pcmcia|usb|raw bus/firewire disk/firewire',
