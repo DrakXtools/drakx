@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2002-08-05 15:42+0200\n"
+"POT-Creation-Date: 2002-08-08 16:49+0200\n"
 "PO-Revision-Date: 2002-03-10 11:04GMT\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: Norsk\n"
@@ -155,7 +155,7 @@ msgid "Xpmac (installation display driver)"
 msgstr "Xpmac (installasjons skjermdriver)"
 
 #: ../../Xconfig/main.pm_.c:76 ../../Xconfig/main.pm_.c:77
-#: ../../Xconfig/monitor.pm_.c:91 ../../any.pm_.c:977
+#: ../../Xconfig/monitor.pm_.c:91 ../../any.pm_.c:983
 msgid "Custom"
 msgstr "Skreddersydd"
 
@@ -181,6 +181,18 @@ msgstr ""
 #: ../../diskdrake/smbnfs_gtk.pm_.c:86
 msgid "Options"
 msgstr "Valg"
+
+#: ../../Xconfig/main.pm_.c:117 ../../Xconfig/resolution_and_depth.pm_.c:261
+#: ../../install_gtk.pm_.c:79 ../../install_steps_gtk.pm_.c:281
+#: ../../interactive.pm_.c:127 ../../interactive.pm_.c:142
+#: ../../interactive.pm_.c:318 ../../interactive.pm_.c:350
+#: ../../interactive/http.pm_.c:104 ../../interactive/newt.pm_.c:170
+#: ../../interactive/stdio.pm_.c:141 ../../interactive/stdio.pm_.c:142
+#: ../../my_gtk.pm_.c:154 ../../my_gtk.pm_.c:283 ../../my_gtk.pm_.c:306
+#: ../../standalone/drakbackup_.c:2672 ../../standalone/drakbackup_.c:2760
+#: ../../standalone/drakbackup_.c:2779
+msgid "Ok"
+msgstr "Ok"
 
 #: ../../Xconfig/main.pm_.c:117 ../../printerdrake.pm_.c:2925
 #: ../../standalone/logdrake_.c:224
@@ -282,13 +294,13 @@ msgstr "Velg oppløsning og fargedybde"
 msgid "Graphics card: %s"
 msgstr "Grafikk-kort: %s"
 
-#: ../../Xconfig/resolution_and_depth.pm_.c:261 ../../any.pm_.c:1018
-#: ../../bootlook.pm_.c:328 ../../diskdrake/smbnfs_gtk.pm_.c:87
-#: ../../install_steps_gtk.pm_.c:410 ../../install_steps_gtk.pm_.c:468
+#: ../../Xconfig/resolution_and_depth.pm_.c:261 ../../any.pm_.c:1024
+#: ../../bootlook.pm_.c:335 ../../diskdrake/smbnfs_gtk.pm_.c:87
+#: ../../install_steps_gtk.pm_.c:412 ../../install_steps_gtk.pm_.c:470
 #: ../../install_steps_interactive.pm_.c:576 ../../interactive.pm_.c:142
 #: ../../interactive.pm_.c:318 ../../interactive.pm_.c:350
 #: ../../interactive/stdio.pm_.c:141 ../../my_gtk.pm_.c:155
-#: ../../my_gtk.pm_.c:158 ../../my_gtk.pm_.c:280
+#: ../../my_gtk.pm_.c:158 ../../my_gtk.pm_.c:283
 #: ../../network/netconnect.pm_.c:46 ../../printerdrake.pm_.c:1983
 #: ../../standalone/drakautoinst_.c:202 ../../standalone/drakbackup_.c:2630
 #: ../../standalone/drakbackup_.c:2663 ../../standalone/drakbackup_.c:2684
@@ -303,18 +315,6 @@ msgstr "Grafikk-kort: %s"
 #: ../../standalone/tinyfirewall_.c:64
 msgid "Cancel"
 msgstr "Avbryt"
-
-#: ../../Xconfig/resolution_and_depth.pm_.c:261 ../../install_gtk.pm_.c:84
-#: ../../install_steps_gtk.pm_.c:279 ../../interactive.pm_.c:127
-#: ../../interactive.pm_.c:142 ../../interactive.pm_.c:318
-#: ../../interactive.pm_.c:350 ../../interactive/http.pm_.c:104
-#: ../../interactive/newt.pm_.c:170 ../../interactive/stdio.pm_.c:141
-#: ../../interactive/stdio.pm_.c:142 ../../my_gtk.pm_.c:154
-#: ../../my_gtk.pm_.c:280 ../../my_gtk.pm_.c:303
-#: ../../standalone/drakbackup_.c:2672 ../../standalone/drakbackup_.c:2760
-#: ../../standalone/drakbackup_.c:2779
-msgid "Ok"
-msgstr "Ok"
 
 #: ../../Xconfig/test.pm_.c:26
 msgid "Do you want to test the configuration?"
@@ -496,14 +496,14 @@ msgstr "Forsinkelse før oppstart av standard bilde"
 
 #: ../../any.pm_.c:180 ../../any.pm_.c:795
 #: ../../diskdrake/smbnfs_gtk.pm_.c:179
-#: ../../install_steps_interactive.pm_.c:1109 ../../network/modem.pm_.c:48
+#: ../../install_steps_interactive.pm_.c:1111 ../../network/modem.pm_.c:48
 #: ../../printerdrake.pm_.c:743 ../../printerdrake.pm_.c:858
 #: ../../standalone/drakconnect_.c:624 ../../standalone/drakconnect_.c:649
 msgid "Password"
 msgstr "Passord"
 
 #: ../../any.pm_.c:181 ../../any.pm_.c:796
-#: ../../install_steps_interactive.pm_.c:1110
+#: ../../install_steps_interactive.pm_.c:1112
 msgid "Password (again)"
 msgstr "Passord (igjen)"
 
@@ -540,12 +540,12 @@ msgstr ""
 
 #: ../../any.pm_.c:194 ../../any.pm_.c:771
 #: ../../diskdrake/interactive.pm_.c:1178
-#: ../../install_steps_interactive.pm_.c:1104
+#: ../../install_steps_interactive.pm_.c:1106
 msgid "Please try again"
 msgstr "Vennligst prøv igjen"
 
 #: ../../any.pm_.c:194 ../../any.pm_.c:771
-#: ../../install_steps_interactive.pm_.c:1104
+#: ../../install_steps_interactive.pm_.c:1106
 msgid "The passwords do not match"
 msgstr "Passordene stemmer ikke overens"
 
@@ -710,12 +710,12 @@ msgid "Do you have any %s interfaces?"
 msgstr "Har du noen %s grensesnitt?"
 
 #: ../../any.pm_.c:671 ../../any.pm_.c:830 ../../interactive.pm_.c:132
-#: ../../my_gtk.pm_.c:279
+#: ../../my_gtk.pm_.c:282
 msgid "No"
 msgstr "Nei"
 
 #: ../../any.pm_.c:671 ../../any.pm_.c:829 ../../interactive.pm_.c:132
-#: ../../my_gtk.pm_.c:279
+#: ../../my_gtk.pm_.c:282
 msgid "Yes"
 msgstr "Ja"
 
@@ -915,30 +915,30 @@ msgstr "Du kan velge andre språk som vil være tilgjengelige etter installasjon"
 msgid "All"
 msgstr "Alle"
 
-#: ../../any.pm_.c:977
+#: ../../any.pm_.c:983
 msgid "Allow all users"
 msgstr "Tillat alle brukere"
 
-#: ../../any.pm_.c:977
+#: ../../any.pm_.c:983
 msgid "No sharing"
 msgstr "Ingen deling"
 
-#: ../../any.pm_.c:987 ../../network/smbnfs.pm_.c:47
+#: ../../any.pm_.c:993 ../../network/smbnfs.pm_.c:47
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr "Pakken %s må installeres. Vil du installere den?"
 
-#: ../../any.pm_.c:990
+#: ../../any.pm_.c:996
 msgid ""
 "You can export using NFS or Samba. Please select which you'd like to use."
 msgstr "Du kan eksportere med NFS eller Samba. Hvilken av dem ønsker du"
 
-#: ../../any.pm_.c:998 ../../network/smbnfs.pm_.c:51
+#: ../../any.pm_.c:1004 ../../network/smbnfs.pm_.c:51
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr "Obligatorisk pakke %s mangler"
 
-#: ../../any.pm_.c:1004
+#: ../../any.pm_.c:1010
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
 "Allowing this will permit users to simply click on \"Share\" in konqueror "
@@ -947,11 +947,11 @@ msgid ""
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
 
-#: ../../any.pm_.c:1018
+#: ../../any.pm_.c:1024
 msgid "Launch userdrake"
 msgstr "Start userdrake"
 
-#: ../../any.pm_.c:1020
+#: ../../any.pm_.c:1026
 msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
 "You can use userdrake to add a user in this group."
@@ -959,31 +959,31 @@ msgstr ""
 "per-user deling bruker gruppen \"fileshare\". \n"
 "Du kan bruke userdrake til å legge til en bruker i denne gruppen."
 
-#: ../../any.pm_.c:1070 ../../security/msec.pm_.c:181
+#: ../../any.pm_.c:1077 ../../security/msec.pm_.c:181
 msgid "Welcome To Crackers"
 msgstr "Velkommen til Crackers"
 
-#: ../../any.pm_.c:1071 ../../security/msec.pm_.c:182
+#: ../../any.pm_.c:1078 ../../security/msec.pm_.c:182
 msgid "Poor"
 msgstr "Dårlig"
 
-#: ../../any.pm_.c:1072 ../../mouse.pm_.c:31 ../../security/msec.pm_.c:183
+#: ../../any.pm_.c:1079 ../../mouse.pm_.c:31 ../../security/msec.pm_.c:183
 msgid "Standard"
 msgstr "Standard"
 
-#: ../../any.pm_.c:1073 ../../security/msec.pm_.c:184
+#: ../../any.pm_.c:1080 ../../security/msec.pm_.c:184
 msgid "High"
 msgstr "Høy"
 
-#: ../../any.pm_.c:1074 ../../security/msec.pm_.c:185
+#: ../../any.pm_.c:1081 ../../security/msec.pm_.c:185
 msgid "Higher"
 msgstr "Høyere"
 
-#: ../../any.pm_.c:1075 ../../security/msec.pm_.c:186
+#: ../../any.pm_.c:1082 ../../security/msec.pm_.c:186
 msgid "Paranoid"
 msgstr "Paranoid"
 
-#: ../../any.pm_.c:1078
+#: ../../any.pm_.c:1085
 msgid ""
 "This level is to be used with care. It makes your system more easy to use,\n"
 "but very sensitive: it must not be used for a machine connected to others\n"
@@ -993,7 +993,7 @@ msgstr ""
 "bruke, men mer utsatt: det må ikke brukes på en maskin koblet til andre\n"
 "eller til Internett. Det er ingen adgang med passord."
 
-#: ../../any.pm_.c:1081 ../../security/msec.pm_.c:193
+#: ../../any.pm_.c:1088 ../../security/msec.pm_.c:193
 msgid ""
 "Password are now enabled, but use as a networked computer is still not "
 "recommended."
@@ -1001,7 +1001,7 @@ msgstr ""
 "Passord er nå aktivert, men bruk som nettverksmaskin er fortsatt ikke "
 "anbefalt."
 
-#: ../../any.pm_.c:1082 ../../security/msec.pm_.c:194
+#: ../../any.pm_.c:1089 ../../security/msec.pm_.c:194
 msgid ""
 "This is the standard security recommended for a computer that will be used "
 "to connect to the Internet as a client."
@@ -1009,7 +1009,7 @@ msgstr ""
 "Dette er standard sikkerhet anbefalt for en maskin som vil bli brukt til "
 "tilkobling mot Internett som klient."
 
-#: ../../any.pm_.c:1083 ../../security/msec.pm_.c:195
+#: ../../any.pm_.c:1090 ../../security/msec.pm_.c:195
 msgid ""
 "There are already some restrictions, and more automatic checks are run every "
 "night."
@@ -1017,7 +1017,7 @@ msgstr ""
 "Det er allerede noen restriksjoner, og flere automatiske kontroller kjøres "
 "hver natt."
 
-#: ../../any.pm_.c:1084
+#: ../../any.pm_.c:1091
 msgid ""
 "With this security level, the use of this system as a server becomes "
 "possible.\n"
@@ -1031,7 +1031,7 @@ msgstr ""
 "oppkoblinger fra mange klienter. Merk: Hvis maskinen din kun er en klient på "
 "Internett burde du velge et lavere nivå."
 
-#: ../../any.pm_.c:1087 ../../security/msec.pm_.c:199
+#: ../../any.pm_.c:1094 ../../security/msec.pm_.c:199
 msgid ""
 "This is similar to the previous level, but the system is entirely closed and "
 "security features are at their maximum."
@@ -1039,25 +1039,35 @@ msgstr ""
 "Basert på forrige nivå, men nå er systemet fullstendig stengt.\n"
 "Sikkerhetsfunksjonene er nå på maksimum."
 
-#: ../../any.pm_.c:1097 ../../security/msec.pm_.c:210
+#: ../../any.pm_.c:1100
+#, fuzzy
+msgid "DrakSec Basic Options"
+msgstr "Valg"
+
+#: ../../any.pm_.c:1101
+#, fuzzy
+msgid "Please choose the desired security level"
+msgstr "Velg sikkerhetsnivå"
+
+#: ../../any.pm_.c:1104 ../../security/msec.pm_.c:210
 msgid "Security level"
 msgstr "Sikkerhetsnivå"
 
-#: ../../any.pm_.c:1099 ../../security/msec.pm_.c:212
+#: ../../any.pm_.c:1106 ../../security/msec.pm_.c:212
 msgid "Use libsafe for servers"
 msgstr "Bruk libsafe for tjenere"
 
-#: ../../any.pm_.c:1100 ../../security/msec.pm_.c:213
+#: ../../any.pm_.c:1107 ../../security/msec.pm_.c:213
 msgid ""
 "A library which defends against buffer overflow and format string attacks."
 msgstr ""
 "Ett bibliotek som beskytter mot buffer overflow og strengformateringsangrep."
 
-#: ../../any.pm_.c:1101 ../../security/msec.pm_.c:214
+#: ../../any.pm_.c:1108 ../../security/msec.pm_.c:214
 msgid "Security Administrator (login or email)"
 msgstr ""
 
-#: ../../any.pm_.c:1191
+#: ../../any.pm_.c:1198
 msgid ""
 "Here you can choose the key or key combination that will \n"
 "allow switching between the different keyboard layouts\n"
@@ -1065,7 +1075,7 @@ msgid ""
 msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: ../../bootloader.pm_.c:363
+#: ../../bootloader.pm_.c:364
 #, c-format
 msgid ""
 "Welcome to %s the operating system chooser!\n"
@@ -1082,52 +1092,52 @@ msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:918
+#: ../../bootloader.pm_.c:919
 msgid "Welcome to GRUB the operating system chooser!"
 msgstr "Velkommen til GRUB, operativsystem-velgeren!"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:921
+#: ../../bootloader.pm_.c:922
 #, c-format
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Bruk %c og %c tastene for å velge hvilken inngang som er markert."
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:924
+#: ../../bootloader.pm_.c:925
 msgid "Press enter to boot the selected OS, 'e' to edit the"
 msgstr "Trykk enter for † starte opp valgt OS, 'e' for † redigere"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:927
+#: ../../bootloader.pm_.c:928
 msgid "commands before booting, or 'c' for a command-line."
 msgstr "kommandoer for oppstart, eller 'c' for en kommandolinje."
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:930
+#: ../../bootloader.pm_.c:931
 #, c-format
 msgid "The highlighted entry will be booted automatically in %d seconds."
 msgstr "Den markerte inngangen vil bli startet automatisk om %d sekunder."
 
-#: ../../bootloader.pm_.c:934
+#: ../../bootloader.pm_.c:935
 msgid "not enough room in /boot"
 msgstr "ikke nok plass i /boot"
 
 #. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
 #. -PO: so you may need to put them in English or in a different language if MS-windows doesn't exist in your language
-#: ../../bootloader.pm_.c:1034
+#: ../../bootloader.pm_.c:1035
 msgid "Desktop"
 msgstr "Skrivebord"
 
 #. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
-#: ../../bootloader.pm_.c:1036
+#: ../../bootloader.pm_.c:1037
 msgid "Start Menu"
 msgstr "Startmeny"
 
-#: ../../bootloader.pm_.c:1055
+#: ../../bootloader.pm_.c:1056
 #, c-format
 msgid "You can't install the bootloader on a %s partition\n"
 msgstr "Du kan ikke installere oppstartslasteren på en %s partisjon\n"
@@ -1197,9 +1207,9 @@ msgstr ""
 msgid "Can't create Bootsplash preview"
 msgstr ""
 
-#: ../../bootlook.pm_.c:167 ../../bootlook.pm_.c:183 ../../bootlook.pm_.c:184
-#: ../../bootlook.pm_.c:187 ../../bootlook.pm_.c:217 ../../bootlook.pm_.c:219
-#: ../../bootlook.pm_.c:229 ../../bootlook.pm_.c:237 ../../bootlook.pm_.c:242
+#: ../../bootlook.pm_.c:167 ../../bootlook.pm_.c:185 ../../bootlook.pm_.c:188
+#: ../../bootlook.pm_.c:191 ../../bootlook.pm_.c:221 ../../bootlook.pm_.c:223
+#: ../../bootlook.pm_.c:233 ../../bootlook.pm_.c:242 ../../bootlook.pm_.c:249
 #: ../../diskdrake/hd_gtk.pm_.c:116 ../../diskdrake/interactive.pm_.c:335
 #: ../../diskdrake/interactive.pm_.c:350 ../../diskdrake/interactive.pm_.c:463
 #: ../../diskdrake/interactive.pm_.c:468 ../../diskdrake/smbnfs_gtk.pm_.c:45
@@ -1209,63 +1219,78 @@ msgstr ""
 msgid "Error"
 msgstr "Feil"
 
-#: ../../bootlook.pm_.c:183
+#: ../../bootlook.pm_.c:184
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr ""
+
+#: ../../bootlook.pm_.c:185
 msgid "unable to backup lilo message"
 msgstr ""
 
-#: ../../bootlook.pm_.c:184
+#: ../../bootlook.pm_.c:187
+#, fuzzy, c-format
+msgid "Copy %s to %s"
+msgstr "Kopierer %s"
+
+#: ../../bootlook.pm_.c:188
 msgid "can't change lilo message"
 msgstr ""
 
-#: ../../bootlook.pm_.c:187
+#: ../../bootlook.pm_.c:191
 msgid "Lilo message not found"
 msgstr ""
 
-#: ../../bootlook.pm_.c:217
+#: ../../bootlook.pm_.c:221
 msgid "Can't write /etc/sysconfig/bootsplash."
 msgstr ""
 
-#: ../../bootlook.pm_.c:219
+#: ../../bootlook.pm_.c:221
+#, fuzzy, c-format
+msgid "Write %s"
+msgstr "XFree %s"
+
+#: ../../bootlook.pm_.c:223
 msgid ""
 "Can't write /etc/sysconfig/bootsplash\n"
 "File not found."
 msgstr ""
 
-#: ../../bootlook.pm_.c:230
-msgid ""
-".img $_.\n"
-"Type \"mkinitrd -f /boot/initrd-"
+#: ../../bootlook.pm_.c:234
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
 msgstr ""
 
-#: ../../bootlook.pm_.c:230
-msgid "Can't launch mkinitrd -f /boot/initrd-"
+#: ../../bootlook.pm_.c:237
+#, c-format
+msgid "Make initrd 'mkinird -f /boot/initrd-%s.img %s'."
 msgstr ""
 
-#: ../../bootlook.pm_.c:231
-msgid ".img $_\" in command line as root."
-msgstr ""
-
-#: ../../bootlook.pm_.c:238
+#: ../../bootlook.pm_.c:243
 msgid ""
 "Can't relaunch LiLo!\n"
 "Launch \"lilo\" as root in command line to complete LiLo theme installation."
 msgstr ""
 
-#: ../../bootlook.pm_.c:242
+#: ../../bootlook.pm_.c:247
+msgid "Relaunch 'lilo'"
+msgstr ""
+
+#: ../../bootlook.pm_.c:249
 #, fuzzy
 msgid "Notice"
 msgstr "Ingen video"
 
-#: ../../bootlook.pm_.c:243
+#: ../../bootlook.pm_.c:250
 msgid "LiLo and Bootsplash themes installation successfull"
 msgstr ""
 
-#: ../../bootlook.pm_.c:243
+#: ../../bootlook.pm_.c:250
 #, fuzzy
 msgid "Theme installation failed!"
 msgstr "Velg installasjonsklasse"
 
-#: ../../bootlook.pm_.c:252
+#: ../../bootlook.pm_.c:259
 #, c-format
 msgid ""
 "You are currently using %s as your boot manager.\n"
@@ -1274,22 +1299,22 @@ msgstr ""
 "Du bruker for øyeblikket %s som oppstartshåndterer.\n"
 "Klikk på Konfigurer for å starte oppsett-hjelperen."
 
-#: ../../bootlook.pm_.c:254 ../../standalone/drakbackup_.c:1803
+#: ../../bootlook.pm_.c:261 ../../standalone/drakbackup_.c:1803
 #: ../../standalone/drakbackup_.c:1814 ../../standalone/drakgw_.c:592
 #: ../../standalone/tinyfirewall_.c:58
 msgid "Configure"
 msgstr "Konfigurer"
 
-#: ../../bootlook.pm_.c:261
+#: ../../bootlook.pm_.c:268
 #, fuzzy
 msgid "Splash selection"
 msgstr "Lagre pakkevalg"
 
-#: ../../bootlook.pm_.c:264
+#: ../../bootlook.pm_.c:271
 msgid "Themes"
 msgstr ""
 
-#: ../../bootlook.pm_.c:266
+#: ../../bootlook.pm_.c:273
 msgid ""
 "\n"
 "Select a theme for\n"
@@ -1298,33 +1323,33 @@ msgid ""
 "them separatly"
 msgstr ""
 
-#: ../../bootlook.pm_.c:269
+#: ../../bootlook.pm_.c:276
 msgid "Lilo screen"
 msgstr ""
 
-#: ../../bootlook.pm_.c:273
+#: ../../bootlook.pm_.c:280
 msgid "Bootsplash"
 msgstr ""
 
-#: ../../bootlook.pm_.c:308
+#: ../../bootlook.pm_.c:315
 msgid "System mode"
 msgstr "Systemmodus"
 
-#: ../../bootlook.pm_.c:310
+#: ../../bootlook.pm_.c:317
 msgid "Launch the graphical environment when your system starts"
 msgstr "Start W-Windowsystemet ved oppstart"
 
-#: ../../bootlook.pm_.c:315
+#: ../../bootlook.pm_.c:322
 msgid "No, I don't want autologin"
 msgstr "Nei, jeg vil ikke ha autologin"
 
-#: ../../bootlook.pm_.c:317
+#: ../../bootlook.pm_.c:324
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "Ja, jeg vil ha autologin med denne (bruker; skrivebord)"
 
-#: ../../bootlook.pm_.c:327 ../../network/netconnect.pm_.c:101
+#: ../../bootlook.pm_.c:334 ../../network/netconnect.pm_.c:101
 #: ../../standalone/drakTermServ_.c:173 ../../standalone/drakTermServ_.c:300
-#: ../../standalone/drakTermServ_.c:402 ../../standalone/drakbackup_.c:2850
+#: ../../standalone/drakTermServ_.c:405 ../../standalone/drakbackup_.c:2850
 #: ../../standalone/drakbackup_.c:3773 ../../standalone/drakconnect_.c:108
 #: ../../standalone/drakconnect_.c:140 ../../standalone/drakconnect_.c:296
 #: ../../standalone/drakconnect_.c:435 ../../standalone/drakconnect_.c:521
@@ -1335,7 +1360,7 @@ msgstr "Ja, jeg vil ha autologin med denne (bruker; skrivebord)"
 msgid "OK"
 msgstr "OK"
 
-#: ../../bootlook.pm_.c:397
+#: ../../bootlook.pm_.c:404
 #, c-format
 msgid "can not open /etc/inittab for reading: %s"
 msgstr "kan ikke åpne /etc/inittab for lesing: %s"
@@ -1379,52 +1404,56 @@ msgstr "Jeg kan ikke ta skjembilder før partisjonering."
 msgid "Screenshots will be available after install in %s"
 msgstr "Skjermbilder vil være tilgjengelig etter installasjon i %s"
 
-#: ../../crypto.pm_.c:12 ../../crypto.pm_.c:26 ../../network/tools.pm_.c:113
+#: ../../crypto.pm_.c:14 ../../crypto.pm_.c:28 ../../network/tools.pm_.c:104
+#: ../../network/tools.pm_.c:113
 msgid "France"
 msgstr "Frankrike"
 
-#: ../../crypto.pm_.c:13
+#: ../../crypto.pm_.c:15
 msgid "Costa Rica"
 msgstr "Costa Rica"
 
-#: ../../crypto.pm_.c:14 ../../crypto.pm_.c:27 ../../network/tools.pm_.c:116
+#: ../../crypto.pm_.c:16 ../../crypto.pm_.c:29 ../../network/tools.pm_.c:104
+#: ../../network/tools.pm_.c:116
 msgid "Belgium"
 msgstr "Belgia"
 
-#: ../../crypto.pm_.c:15 ../../crypto.pm_.c:28
+#: ../../crypto.pm_.c:17 ../../crypto.pm_.c:30
 msgid "Czech Republic"
 msgstr "Tjekkia"
 
-#: ../../crypto.pm_.c:16 ../../crypto.pm_.c:29
+#: ../../crypto.pm_.c:18 ../../crypto.pm_.c:31
 msgid "Germany"
 msgstr "Germany"
 
-#: ../../crypto.pm_.c:17 ../../crypto.pm_.c:30
+#: ../../crypto.pm_.c:19 ../../crypto.pm_.c:32
 msgid "Greece"
 msgstr "Hellas"
 
-#: ../../crypto.pm_.c:18 ../../crypto.pm_.c:31
+#: ../../crypto.pm_.c:20 ../../crypto.pm_.c:33
 msgid "Norway"
 msgstr "Norge"
 
-#: ../../crypto.pm_.c:19 ../../crypto.pm_.c:32
+#: ../../crypto.pm_.c:21 ../../crypto.pm_.c:34
 msgid "Sweden"
 msgstr "Sverige"
 
-#: ../../crypto.pm_.c:20 ../../crypto.pm_.c:34 ../../network/tools.pm_.c:114
+#: ../../crypto.pm_.c:22 ../../crypto.pm_.c:36 ../../network/tools.pm_.c:104
+#: ../../network/tools.pm_.c:114
 msgid "Netherlands"
 msgstr "Netherlands"
 
-#: ../../crypto.pm_.c:21 ../../crypto.pm_.c:35 ../../network/tools.pm_.c:115
-#: ../../standalone/drakxtv_.c:74
+#: ../../crypto.pm_.c:23 ../../crypto.pm_.c:37 ../../network/tools.pm_.c:104
+#: ../../network/tools.pm_.c:115 ../../standalone/drakxtv_.c:74
 msgid "Italy"
 msgstr "Italia"
 
-#: ../../crypto.pm_.c:22 ../../crypto.pm_.c:36
+#: ../../crypto.pm_.c:24 ../../crypto.pm_.c:38
 msgid "Austria"
 msgstr "Østerrike"
 
-#: ../../crypto.pm_.c:33 ../../crypto.pm_.c:67 ../../network/tools.pm_.c:117
+#: ../../crypto.pm_.c:35 ../../crypto.pm_.c:61 ../../network/tools.pm_.c:104
+#: ../../network/tools.pm_.c:117
 msgid "United States"
 msgstr "USA"
 
@@ -1478,7 +1507,7 @@ msgid "Please click on a partition"
 msgstr "Vennligst klikk på en partisjon"
 
 #: ../../diskdrake/hd_gtk.pm_.c:205 ../../diskdrake/smbnfs_gtk.pm_.c:69
-#: ../../install_steps_gtk.pm_.c:469
+#: ../../install_steps_gtk.pm_.c:471
 msgid "Details"
 msgstr "Detaljer"
 
@@ -1510,8 +1539,8 @@ msgstr "Veksel"
 msgid "Empty"
 msgstr "Tom"
 
-#: ../../diskdrake/hd_gtk.pm_.c:324 ../../install_steps_gtk.pm_.c:329
-#: ../../install_steps_gtk.pm_.c:387 ../../mouse.pm_.c:162
+#: ../../diskdrake/hd_gtk.pm_.c:324 ../../install_steps_gtk.pm_.c:331
+#: ../../install_steps_gtk.pm_.c:389 ../../mouse.pm_.c:162
 #: ../../services.pm_.c:157 ../../standalone/drakbackup_.c:1231
 msgid "Other"
 msgstr "Andre"
@@ -2245,23 +2274,23 @@ msgstr "NIS-domene"
 msgid "Search servers"
 msgstr "Søk tjenere"
 
-#: ../../fs.pm_.c:551 ../../fs.pm_.c:561 ../../fs.pm_.c:565 ../../fs.pm_.c:569
-#: ../../fs.pm_.c:573 ../../fs.pm_.c:577
+#: ../../fs.pm_.c:559 ../../fs.pm_.c:569 ../../fs.pm_.c:573 ../../fs.pm_.c:577
+#: ../../fs.pm_.c:581 ../../fs.pm_.c:585
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s formatering av %s mislykket"
 
-#: ../../fs.pm_.c:614
+#: ../../fs.pm_.c:622
 #, c-format
 msgid "I don't know how to format %s in type %s"
 msgstr "Jeg vet ikke hvordan formatere %s i type %s"
 
-#: ../../fs.pm_.c:686 ../../fs.pm_.c:726 ../../fs.pm_.c:732
+#: ../../fs.pm_.c:694 ../../fs.pm_.c:734 ../../fs.pm_.c:740
 #, c-format
 msgid "mounting partition %s in directory %s failed"
 msgstr "montere partisjon %s i katalog %s gikk ikke"
 
-#: ../../fs.pm_.c:747 ../../partition_table.pm_.c:602
+#: ../../fs.pm_.c:755 ../../partition_table.pm_.c:602
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "feil ved demontering av %s: %s"
@@ -2278,33 +2307,33 @@ msgstr "med /usr"
 msgid "server"
 msgstr "server"
 
-#: ../../fsedit.pm_.c:471
+#: ../../fsedit.pm_.c:472
 msgid "You can't use JFS for partitions smaller than 16MB"
 msgstr "Du kan ikke bruke JFS for partisjoner mindre enn 16 MB"
 
-#: ../../fsedit.pm_.c:472
+#: ../../fsedit.pm_.c:473
 msgid "You can't use ReiserFS for partitions smaller than 32MB"
 msgstr "Du kan ikke bruke ReiserFS for partisjoner mindre enn 32MB"
 
-#: ../../fsedit.pm_.c:491
+#: ../../fsedit.pm_.c:492
 msgid "Mount points must begin with a leading /"
 msgstr "Monteringspunkter må begynne med /"
 
-#: ../../fsedit.pm_.c:492
+#: ../../fsedit.pm_.c:493
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Det finnes allerede en partisjon med monteringspunkt %s\n"
 
-#: ../../fsedit.pm_.c:496
+#: ../../fsedit.pm_.c:497
 #, c-format
 msgid "You can't use a LVM Logical Volume for mount point %s"
 msgstr "Du kan ikke bruke LVM logisk volum som monteringspunkt %s"
 
-#: ../../fsedit.pm_.c:498
+#: ../../fsedit.pm_.c:499
 msgid "This directory should remain within the root filesystem"
 msgstr "Denne katalogen bør forbli i root filsystemet"
 
-#: ../../fsedit.pm_.c:500
+#: ../../fsedit.pm_.c:501
 #, fuzzy
 msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
@@ -2313,25 +2342,25 @@ msgstr ""
 "Du trenger et virkelig filsystem (ext2, reiserfs) for dette "
 "monteringspunktet\n"
 
-#: ../../fsedit.pm_.c:502
+#: ../../fsedit.pm_.c:503
 #, c-format
 msgid "You can't use an encrypted file system for mount point %s"
 msgstr "Du kan ikke bruke ett kryptert filsystem som monteringspunkt %s"
 
-#: ../../fsedit.pm_.c:560
+#: ../../fsedit.pm_.c:561
 msgid "Not enough free space for auto-allocating"
 msgstr "Ikke nok plass for auto-allokering"
 
-#: ../../fsedit.pm_.c:562
+#: ../../fsedit.pm_.c:563
 msgid "Nothing to do"
 msgstr "Ikkenoe å gjøre"
 
-#: ../../fsedit.pm_.c:626
+#: ../../fsedit.pm_.c:627
 #, c-format
 msgid "Error opening %s for writing: %s"
 msgstr "Feil ved åpning av %s for skriving: %s"
 
-#: ../../fsedit.pm_.c:711
+#: ../../fsedit.pm_.c:712
 msgid ""
 "An error occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
@@ -2339,7 +2368,7 @@ msgstr ""
 "En feil har oppstått - ingen gyldige enheter ble funnet for å opprette nye "
 "filsystemer. Vennligst sjekk maskinvaren din for årsaken til dette problemet"
 
-#: ../../fsedit.pm_.c:734
+#: ../../fsedit.pm_.c:735
 msgid "You don't have any partitions!"
 msgstr "Du har ingen partisjoner!"
 
@@ -2589,35 +2618,11 @@ msgstr ""
 msgid "secondary"
 msgstr "%d sekunder"
 
-#: ../../harddrake/ui.pm_.c:182 ../../modparm.pm_.c:61
-#, fuzzy
-msgid "a number"
-msgstr "Telefonnummer"
-
-#: ../../harddrake/ui.pm_.c:184 ../../modparm.pm_.c:63
-#, c-format
-msgid "%d comma separated numbers"
-msgstr ""
-
-#: ../../harddrake/ui.pm_.c:184 ../../modparm.pm_.c:63
-#, c-format
-msgid "%d comma separated strings"
-msgstr ""
-
-#: ../../harddrake/ui.pm_.c:186 ../../modparm.pm_.c:65
-msgid "comma separated numbers"
-msgstr ""
-
-#: ../../harddrake/ui.pm_.c:186 ../../modparm.pm_.c:65
-#, fuzzy
-msgid "comma separated strings"
-msgstr "Formater partisjoner"
-
-#: ../../harddrake/ui.pm_.c:204
+#: ../../harddrake/ui.pm_.c:196
 msgid "You can configure each parameter of the module here."
 msgstr ""
 
-#: ../../harddrake/ui.pm_.c:226
+#: ../../harddrake/ui.pm_.c:217
 #, fuzzy, c-format
 msgid "Running \"%s\" ..."
 msgstr "Fjerner skriver \"%s\" ..."
@@ -4077,16 +4082,16 @@ msgstr ""
 msgid "Can't use broadcast with no NIS domain"
 msgstr "Kan ikke bruke broadcast med intet NIS domene"
 
-#: ../../install_any.pm_.c:840
+#: ../../install_any.pm_.c:842
 #, c-format
 msgid "Insert a FAT formatted floppy in drive %s"
 msgstr "Sett inn en FAT-formatert diskett i stasjon %s"
 
-#: ../../install_any.pm_.c:844
+#: ../../install_any.pm_.c:846
 msgid "This floppy is not FAT formatted"
 msgstr "Denne disketten er ikke FAT-formatert"
 
-#: ../../install_any.pm_.c:856
+#: ../../install_any.pm_.c:858
 msgid ""
 "To use this saved packages selection, boot installation with ``linux "
 "defcfg=floppy''"
@@ -4094,7 +4099,7 @@ msgstr ""
 "For å bruke dette valget av pakker, start installasjonen med'linux "
 "defcfg=floppy'"
 
-#: ../../install_any.pm_.c:878 ../../partition_table.pm_.c:771
+#: ../../install_any.pm_.c:880 ../../partition_table.pm_.c:771
 #, c-format
 msgid "Error reading file %s"
 msgstr "Feil ved lesing av fil %s"
@@ -4316,7 +4321,7 @@ msgstr ""
 msgid "Duplicate mount point %s"
 msgstr "Dupliser monteringspunkt %s"
 
-#: ../../install_steps.pm_.c:396
+#: ../../install_steps.pm_.c:401
 msgid ""
 "Some important packages didn't get installed properly.\n"
 "Either your cdrom drive or your cdrom is defective.\n"
@@ -4328,12 +4333,12 @@ msgstr ""
 "Sjekk cd-platen på en installert maskin med \"rpm -qpl Mandrake/RPMS/*.rpm"
 "\"\n"
 
-#: ../../install_steps.pm_.c:468
+#: ../../install_steps.pm_.c:473
 #, c-format
 msgid "Welcome to %s"
 msgstr "Velkommen til %s"
 
-#: ../../install_steps.pm_.c:522 ../../install_steps.pm_.c:764
+#: ../../install_steps.pm_.c:552 ../../install_steps.pm_.c:794
 msgid "No floppy drive available"
 msgstr "Ingen diskettstasjon tilgjengelig"
 
@@ -4343,7 +4348,7 @@ msgstr "Ingen diskettstasjon tilgjengelig"
 msgid "Entering step `%s'\n"
 msgstr "Entrer trinn `%s'\n"
 
-#: ../../install_steps_gtk.pm_.c:149
+#: ../../install_steps_gtk.pm_.c:150
 msgid ""
 "Your system is low on resources. You may have some problem installing\n"
 "Mandrake Linux. If that occurs, you can try a text install instead. For "
@@ -4355,79 +4360,79 @@ msgstr ""
 "installering\n"
 "i stedet. Trykk `F1' ved oppstart av CD-ROM, skriv så `text'."
 
-#: ../../install_steps_gtk.pm_.c:160 ../../install_steps_interactive.pm_.c:231
+#: ../../install_steps_gtk.pm_.c:161 ../../install_steps_interactive.pm_.c:231
 msgid "Install Class"
 msgstr "Installeringsklasse"
 
-#: ../../install_steps_gtk.pm_.c:163
+#: ../../install_steps_gtk.pm_.c:164
 msgid "Please choose one of the following classes of installation:"
 msgstr "Vennligst velg en av følgende installasjonsklasser:"
 
-#: ../../install_steps_gtk.pm_.c:242 ../../install_steps_interactive.pm_.c:694
+#: ../../install_steps_gtk.pm_.c:243 ../../install_steps_interactive.pm_.c:694
 msgid "Package Group Selection"
 msgstr "Valg pakkegruppe"
 
-#: ../../install_steps_gtk.pm_.c:274 ../../install_steps_interactive.pm_.c:709
+#: ../../install_steps_gtk.pm_.c:276 ../../install_steps_interactive.pm_.c:709
 msgid "Individual package selection"
 msgstr "Individuelt pakkevalg"
 
-#: ../../install_steps_gtk.pm_.c:297 ../../install_steps_interactive.pm_.c:633
+#: ../../install_steps_gtk.pm_.c:299 ../../install_steps_interactive.pm_.c:633
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Total størrelse: %d / %d MB"
 
-#: ../../install_steps_gtk.pm_.c:339
+#: ../../install_steps_gtk.pm_.c:341
 msgid "Bad package"
 msgstr "Dårlig pakke"
 
-#: ../../install_steps_gtk.pm_.c:340
+#: ../../install_steps_gtk.pm_.c:342
 #, c-format
 msgid "Name: %s\n"
 msgstr "Navn: %s\n"
 
-#: ../../install_steps_gtk.pm_.c:341
+#: ../../install_steps_gtk.pm_.c:343
 #, c-format
 msgid "Version: %s\n"
 msgstr "Versjon: %s\n"
 
-#: ../../install_steps_gtk.pm_.c:342
+#: ../../install_steps_gtk.pm_.c:344
 #, c-format
 msgid "Size: %d KB\n"
 msgstr "Størrelse: %d KB\n"
 
-#: ../../install_steps_gtk.pm_.c:343
+#: ../../install_steps_gtk.pm_.c:345
 #, c-format
 msgid "Importance: %s\n"
 msgstr "Viktighet: %s\n"
 
-#: ../../install_steps_gtk.pm_.c:365
+#: ../../install_steps_gtk.pm_.c:367
 msgid ""
 "You can't select this package as there is not enough space left to install it"
 msgstr ""
 "Du kan ikke velge denne pakken da det ikke er igjen nok plass til å "
 "installere denne"
 
-#: ../../install_steps_gtk.pm_.c:370
+#: ../../install_steps_gtk.pm_.c:372
 msgid "The following packages are going to be installed"
 msgstr "Følgende pakker vil bli installert"
 
-#: ../../install_steps_gtk.pm_.c:371
+#: ../../install_steps_gtk.pm_.c:373
 msgid "The following packages are going to be removed"
 msgstr "Følgende pakker vil bli fjernet"
 
-#: ../../install_steps_gtk.pm_.c:383
+#: ../../install_steps_gtk.pm_.c:385
 msgid "You can't select/unselect this package"
 msgstr "Du kan ikke velge/fjerne denne pakken"
 
-#: ../../install_steps_gtk.pm_.c:395
+#: ../../install_steps_gtk.pm_.c:397
 msgid "This is a mandatory package, it can't be unselected"
 msgstr "Dette er en bestemt pakke, den kan ikke fjernes"
 
-#: ../../install_steps_gtk.pm_.c:397
+#: ../../install_steps_gtk.pm_.c:399
 msgid "You can't unselect this package. It is already installed"
 msgstr "Du kan ikke fjerne denne pakken, den er allerede installert"
 
-#: ../../install_steps_gtk.pm_.c:400
+#: ../../install_steps_gtk.pm_.c:402
 msgid ""
 "This package must be upgraded.\n"
 "Are you sure you want to deselect it?"
@@ -4435,74 +4440,74 @@ msgstr ""
 "Denne pakken må oppgraderes\n"
 "Er du sikker på at du ikke vil velge denne?"
 
-#: ../../install_steps_gtk.pm_.c:403
+#: ../../install_steps_gtk.pm_.c:405
 msgid "You can't unselect this package. It must be upgraded"
 msgstr "Du kan ikke fjerne denne pakken. Den må oppgraderes"
 
-#: ../../install_steps_gtk.pm_.c:408
+#: ../../install_steps_gtk.pm_.c:410
 msgid "Show automatically selected packages"
 msgstr "Vis automatisk valgte pakker"
 
-#: ../../install_steps_gtk.pm_.c:409 ../../install_steps_interactive.pm_.c:255
+#: ../../install_steps_gtk.pm_.c:411 ../../install_steps_interactive.pm_.c:255
 #: ../../install_steps_interactive.pm_.c:259
 #: ../../standalone/drakbackup_.c:2934
 msgid "Install"
 msgstr "Installer"
 
-#: ../../install_steps_gtk.pm_.c:412
+#: ../../install_steps_gtk.pm_.c:414
 msgid "Load/Save on floppy"
 msgstr "Lagre på/hente fra diskett"
 
-#: ../../install_steps_gtk.pm_.c:413
+#: ../../install_steps_gtk.pm_.c:415
 msgid "Updating package selection"
 msgstr "Oppdaterer pakkevalg"
 
-#: ../../install_steps_gtk.pm_.c:418
+#: ../../install_steps_gtk.pm_.c:420
 msgid "Minimal install"
 msgstr "Minimal installasjon"
 
-#: ../../install_steps_gtk.pm_.c:433 ../../install_steps_interactive.pm_.c:538
+#: ../../install_steps_gtk.pm_.c:435 ../../install_steps_interactive.pm_.c:538
 msgid "Choose the packages you want to install"
 msgstr "Velg pakkene du ønsker å installere"
 
-#: ../../install_steps_gtk.pm_.c:449 ../../install_steps_interactive.pm_.c:776
+#: ../../install_steps_gtk.pm_.c:451 ../../install_steps_interactive.pm_.c:778
 msgid "Installing"
 msgstr "Installerer"
 
-#: ../../install_steps_gtk.pm_.c:455
+#: ../../install_steps_gtk.pm_.c:457
 msgid "Estimating"
 msgstr "Beregner"
 
-#: ../../install_steps_gtk.pm_.c:462
+#: ../../install_steps_gtk.pm_.c:464
 msgid "Time remaining "
 msgstr "Tid som gjenstår "
 
-#: ../../install_steps_gtk.pm_.c:474
+#: ../../install_steps_gtk.pm_.c:476
 msgid "Please wait, preparing installation..."
 msgstr "Vennligst vent, forbereder installasjon"
 
-#: ../../install_steps_gtk.pm_.c:558
+#: ../../install_steps_gtk.pm_.c:560
 #, c-format
 msgid "%d packages"
 msgstr "%d pakker"
 
-#: ../../install_steps_gtk.pm_.c:563
+#: ../../install_steps_gtk.pm_.c:565
 #, c-format
 msgid "Installing package %s"
 msgstr "Installerer pakke %s"
 
-#: ../../install_steps_gtk.pm_.c:600 ../../install_steps_interactive.pm_.c:189
-#: ../../install_steps_interactive.pm_.c:800
+#: ../../install_steps_gtk.pm_.c:602 ../../install_steps_interactive.pm_.c:189
+#: ../../install_steps_interactive.pm_.c:802
 #: ../../standalone/drakautoinst_.c:201
 msgid "Accept"
 msgstr "Godta"
 
-#: ../../install_steps_gtk.pm_.c:600 ../../install_steps_interactive.pm_.c:189
-#: ../../install_steps_interactive.pm_.c:800
+#: ../../install_steps_gtk.pm_.c:602 ../../install_steps_interactive.pm_.c:189
+#: ../../install_steps_interactive.pm_.c:802
 msgid "Refuse"
 msgstr "Nekte"
 
-#: ../../install_steps_gtk.pm_.c:601 ../../install_steps_interactive.pm_.c:801
+#: ../../install_steps_gtk.pm_.c:603 ../../install_steps_interactive.pm_.c:803
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -4517,17 +4522,17 @@ msgstr ""
 "ferdig.\n"
 "Hvis du ikke har den trykk Avbryt for å unngå installasjon fra denne CD'en."
 
-#: ../../install_steps_gtk.pm_.c:615 ../../install_steps_gtk.pm_.c:619
-#: ../../install_steps_interactive.pm_.c:813
-#: ../../install_steps_interactive.pm_.c:817
+#: ../../install_steps_gtk.pm_.c:617 ../../install_steps_gtk.pm_.c:621
+#: ../../install_steps_interactive.pm_.c:815
+#: ../../install_steps_interactive.pm_.c:819
 msgid "Go on anyway?"
 msgstr "Fortsette uansett?"
 
-#: ../../install_steps_gtk.pm_.c:615 ../../install_steps_interactive.pm_.c:813
+#: ../../install_steps_gtk.pm_.c:617 ../../install_steps_interactive.pm_.c:815
 msgid "There was an error ordering packages:"
 msgstr "Det var en feil ved endring av pakkenes rekkefølge:"
 
-#: ../../install_steps_gtk.pm_.c:619 ../../install_steps_interactive.pm_.c:817
+#: ../../install_steps_gtk.pm_.c:621 ../../install_steps_interactive.pm_.c:819
 msgid "There was an error installing packages:"
 msgstr "Det var en feil ved installering av pakkene:"
 
@@ -4846,7 +4851,7 @@ msgid "Are you sure you refuse the licence?"
 msgstr ""
 
 #: ../../install_steps_interactive.pm_.c:211
-#: ../../install_steps_interactive.pm_.c:1036
+#: ../../install_steps_interactive.pm_.c:1038
 #: ../../standalone/keyboarddrake_.c:31
 msgid "Keyboard"
 msgstr "Tastatur"
@@ -5104,7 +5109,7 @@ msgstr "Med grunnleggende dokumentasjon (anbefalt!)"
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Virkelig minimal installasjon (uten urpmi)"
 
-#: ../../install_steps_interactive.pm_.c:751
+#: ../../install_steps_interactive.pm_.c:752
 msgid ""
 "If you have all the CDs in the list below, click Ok.\n"
 "If you have none of those CDs, click Cancel.\n"
@@ -5114,16 +5119,16 @@ msgstr ""
 "Hvis du ikke har noen av disse CDene, klikk Avbryt.\n"
 "Hvis bare noen av CDene mangler, fjern disse, klikk så Ok."
 
-#: ../../install_steps_interactive.pm_.c:756
+#: ../../install_steps_interactive.pm_.c:757
 #, c-format
 msgid "Cd-Rom labeled \"%s\""
 msgstr "CD-ROMen ved navnet \"%s\""
 
-#: ../../install_steps_interactive.pm_.c:776
+#: ../../install_steps_interactive.pm_.c:778
 msgid "Preparing installation"
 msgstr "Forbereder installasjon"
 
-#: ../../install_steps_interactive.pm_.c:785
+#: ../../install_steps_interactive.pm_.c:787
 #, c-format
 msgid ""
 "Installing package %s\n"
@@ -5132,21 +5137,21 @@ msgstr ""
 "Installerer pakke %s\n"
 "%d%%"
 
-#: ../../install_steps_interactive.pm_.c:831
+#: ../../install_steps_interactive.pm_.c:833
 msgid "Post-install configuration"
 msgstr "Konfigurasjon postinstallering"
 
-#: ../../install_steps_interactive.pm_.c:837
+#: ../../install_steps_interactive.pm_.c:839
 #, c-format
 msgid "Please insert the Boot floppy used in drive %s"
 msgstr "Sett inn en oppstartsdiskett i stasjon %s"
 
-#: ../../install_steps_interactive.pm_.c:843
+#: ../../install_steps_interactive.pm_.c:845
 #, c-format
 msgid "Please insert the Update Modules floppy in drive %s"
 msgstr "Sett inn oppdater moduler disketten i stasjon %s"
 
-#: ../../install_steps_interactive.pm_.c:863
+#: ../../install_steps_interactive.pm_.c:865
 msgid ""
 "You now have the opportunity to download encryption software.\n"
 "\n"
@@ -5220,7 +5225,7 @@ msgstr ""
 "Altadena California 91001\n"
 "USA"
 
-#: ../../install_steps_interactive.pm_.c:902
+#: ../../install_steps_interactive.pm_.c:904
 #, fuzzy
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
@@ -5240,156 +5245,157 @@ msgstr ""
 "\n"
 "Ønsker du å installere oppdateringene?"
 
-#: ../../install_steps_interactive.pm_.c:917
+#: ../../install_steps_interactive.pm_.c:919
 msgid ""
 "Contacting Mandrake Linux web site to get the list of available mirrors..."
 msgstr ""
 "Kontakter Mandrake Linux web-sted for å få en liste over tilgjengelige speil"
 
-#: ../../install_steps_interactive.pm_.c:922
+#: ../../install_steps_interactive.pm_.c:924
 msgid "Choose a mirror from which to get the packages"
 msgstr "Velg et speil som pakkene kan hentes fra"
 
-#: ../../install_steps_interactive.pm_.c:931
+#: ../../install_steps_interactive.pm_.c:933
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Kontakter speilet for å få en liste over tilgjengelige pakker"
 
-#: ../../install_steps_interactive.pm_.c:958
+#: ../../install_steps_interactive.pm_.c:960
 msgid "Which is your timezone?"
 msgstr "Hva er din tidsone?"
 
-#: ../../install_steps_interactive.pm_.c:963
+#: ../../install_steps_interactive.pm_.c:965
 msgid "Hardware clock set to GMT"
 msgstr "Maskinvareklokken din satt til GMT"
 
-#: ../../install_steps_interactive.pm_.c:964
+#: ../../install_steps_interactive.pm_.c:966
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Automatisk tidssynkronisering (ved hjelp av NTP)"
 
-#: ../../install_steps_interactive.pm_.c:971
+#: ../../install_steps_interactive.pm_.c:973
 msgid "NTP Server"
 msgstr "NTP-tjener"
 
-#: ../../install_steps_interactive.pm_.c:1005
-#: ../../install_steps_interactive.pm_.c:1013
+#: ../../install_steps_interactive.pm_.c:1007
+#: ../../install_steps_interactive.pm_.c:1015
 msgid "Remote CUPS server"
 msgstr "Fjern-CUPS tjener"
 
-#: ../../install_steps_interactive.pm_.c:1006
+#: ../../install_steps_interactive.pm_.c:1008
 msgid "No printer"
 msgstr "Ingen skriver"
 
-#: ../../install_steps_interactive.pm_.c:1023
+#: ../../install_steps_interactive.pm_.c:1025
 msgid "Do you have an ISA sound card?"
 msgstr "Har du et ISA lydkort?"
 
-#: ../../install_steps_interactive.pm_.c:1025
+#: ../../install_steps_interactive.pm_.c:1027
 msgid "Run \"sndconfig\" after installation to configure your sound card"
 msgstr ""
 "Kjør \"sndconfig\" etter installasjonen for å konfigurere lydkortet ditt"
 
-#: ../../install_steps_interactive.pm_.c:1027
+#: ../../install_steps_interactive.pm_.c:1029
 msgid "No sound card detected. Try \"harddrake\" after installation"
 msgstr "Lydkort ikke oppdaget. Prøv \"harddrake\" etter installasjonen"
 
-#: ../../install_steps_interactive.pm_.c:1032 ../../steps.pm_.c:27
+#: ../../install_steps_interactive.pm_.c:1034 ../../steps.pm_.c:27
 msgid "Summary"
 msgstr "Oppsummering"
 
-#: ../../install_steps_interactive.pm_.c:1035
+#: ../../install_steps_interactive.pm_.c:1037
 msgid "Mouse"
 msgstr "Mus"
 
-#: ../../install_steps_interactive.pm_.c:1037
+#: ../../install_steps_interactive.pm_.c:1039
 msgid "Timezone"
 msgstr "Tidssone"
 
-#: ../../install_steps_interactive.pm_.c:1038 ../../printerdrake.pm_.c:2720
+#: ../../install_steps_interactive.pm_.c:1040 ../../printerdrake.pm_.c:2720
 #: ../../printerdrake.pm_.c:2806
 msgid "Printer"
 msgstr "Skriver"
 
-#: ../../install_steps_interactive.pm_.c:1040
+#: ../../install_steps_interactive.pm_.c:1042
 msgid "ISDN card"
 msgstr "ISDN-kort"
 
-#: ../../install_steps_interactive.pm_.c:1043
 #: ../../install_steps_interactive.pm_.c:1045
+#: ../../install_steps_interactive.pm_.c:1047
 msgid "Sound card"
 msgstr "Lydkort"
 
-#: ../../install_steps_interactive.pm_.c:1047
+#: ../../install_steps_interactive.pm_.c:1049
 msgid "TV card"
 msgstr "TV-kort"
 
-#: ../../install_steps_interactive.pm_.c:1087
-#: ../../install_steps_interactive.pm_.c:1112
-#: ../../install_steps_interactive.pm_.c:1116
+#: ../../install_steps_interactive.pm_.c:1089
+#: ../../install_steps_interactive.pm_.c:1114
+#: ../../install_steps_interactive.pm_.c:1118
 msgid "LDAP"
 msgstr "LDAP"
 
-#: ../../install_steps_interactive.pm_.c:1088
-#: ../../install_steps_interactive.pm_.c:1112
-#: ../../install_steps_interactive.pm_.c:1125
+#: ../../install_steps_interactive.pm_.c:1090
+#: ../../install_steps_interactive.pm_.c:1114
+#: ../../install_steps_interactive.pm_.c:1127
 msgid "NIS"
 msgstr "NIS"
 
-#: ../../install_steps_interactive.pm_.c:1089
-#: ../../install_steps_interactive.pm_.c:1112
-#: ../../install_steps_interactive.pm_.c:1133
+#: ../../install_steps_interactive.pm_.c:1091
+#: ../../install_steps_interactive.pm_.c:1114
+#: ../../install_steps_interactive.pm_.c:1135
+#: ../../install_steps_interactive.pm_.c:1141
 #, fuzzy
-msgid "Windows PDC"
-msgstr "Fjern Windows(TM)"
+msgid "Windows Domain"
+msgstr "NIS-domene"
 
-#: ../../install_steps_interactive.pm_.c:1090
-#: ../../install_steps_interactive.pm_.c:1112
+#: ../../install_steps_interactive.pm_.c:1092
+#: ../../install_steps_interactive.pm_.c:1114
 msgid "Local files"
 msgstr "Lokale filer"
 
-#: ../../install_steps_interactive.pm_.c:1099
-#: ../../install_steps_interactive.pm_.c:1100 ../../steps.pm_.c:24
+#: ../../install_steps_interactive.pm_.c:1101
+#: ../../install_steps_interactive.pm_.c:1102 ../../steps.pm_.c:24
 msgid "Set root password"
 msgstr "Sett root-passord"
 
-#: ../../install_steps_interactive.pm_.c:1101
+#: ../../install_steps_interactive.pm_.c:1103
 msgid "No password"
 msgstr "Intet passord"
 
-#: ../../install_steps_interactive.pm_.c:1106
+#: ../../install_steps_interactive.pm_.c:1108
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Dette passordet er for enkelt (må være minst %d tegn langt)"
 
-#: ../../install_steps_interactive.pm_.c:1112 ../../network/modem.pm_.c:49
+#: ../../install_steps_interactive.pm_.c:1114 ../../network/modem.pm_.c:49
 #: ../../standalone/drakconnect_.c:625 ../../standalone/logdrake_.c:172
 msgid "Authentication"
 msgstr "Autentifikasjon"
 
-#: ../../install_steps_interactive.pm_.c:1120
+#: ../../install_steps_interactive.pm_.c:1122
 msgid "Authentication LDAP"
 msgstr "Autentisering LDAP"
 
-#: ../../install_steps_interactive.pm_.c:1121
+#: ../../install_steps_interactive.pm_.c:1123
 msgid "LDAP Base dn"
 msgstr "LDAP grunnleggende dn"
 
-#: ../../install_steps_interactive.pm_.c:1122
+#: ../../install_steps_interactive.pm_.c:1124
 msgid "LDAP Server"
 msgstr "LDAP-tjener"
 
-#: ../../install_steps_interactive.pm_.c:1128
+#: ../../install_steps_interactive.pm_.c:1130
 msgid "Authentication NIS"
 msgstr "Autentisering NIS"
 
-#: ../../install_steps_interactive.pm_.c:1129
+#: ../../install_steps_interactive.pm_.c:1131
 msgid "NIS Domain"
 msgstr "NIS-domene"
 
-#: ../../install_steps_interactive.pm_.c:1130
+#: ../../install_steps_interactive.pm_.c:1132
 msgid "NIS Server"
 msgstr "NIS-tjener"
 
-#: ../../install_steps_interactive.pm_.c:1136
+#: ../../install_steps_interactive.pm_.c:1138
 msgid ""
 "For this to work for a W2K PDC, you will probably need to have the admin "
 "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
@@ -5398,33 +5404,28 @@ msgid ""
 "machine to the Windows(TM) domain.\n"
 "If networking is not yet enabled, Drakx will attempt to join the domain "
 "after the network setup step.\n"
-"Should this setup fail for some reason and PDC authentication is not "
+"Should this setup fail for some reason and domain authentication is not "
 "working, run 'smbpasswd -j DOMAIN -U USER%PASSWORD' using your Windows(tm) "
 "Domain, and Admin Username/Password, after system boot.\n"
 "The command 'wbinfo -t' will test whether your authentication secrets are "
 "good."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1138
+#: ../../install_steps_interactive.pm_.c:1140
 #, fuzzy
-msgid "Authentication Windows PDC"
+msgid "Authentication Windows Domain"
 msgstr "Autentisering LDAP"
 
-#: ../../install_steps_interactive.pm_.c:1139
-#, fuzzy
-msgid "Windows Domain"
-msgstr "NIS-domene"
-
-#: ../../install_steps_interactive.pm_.c:1140
+#: ../../install_steps_interactive.pm_.c:1142
 #, fuzzy
 msgid "Domain Admin User Name"
 msgstr "Domenenavn"
 
-#: ../../install_steps_interactive.pm_.c:1141
+#: ../../install_steps_interactive.pm_.c:1143
 msgid "Domain Admin Password"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1176
+#: ../../install_steps_interactive.pm_.c:1178
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -5455,19 +5456,19 @@ msgstr ""
 "en diskett\n"
 "i den første stasjonen og trykk \"Ok\"."
 
-#: ../../install_steps_interactive.pm_.c:1192
+#: ../../install_steps_interactive.pm_.c:1194
 msgid "First floppy drive"
 msgstr "Første diskettstasjon"
 
-#: ../../install_steps_interactive.pm_.c:1193
+#: ../../install_steps_interactive.pm_.c:1195
 msgid "Second floppy drive"
 msgstr "Andre diskettstasjon"
 
-#: ../../install_steps_interactive.pm_.c:1194 ../../printerdrake.pm_.c:2269
+#: ../../install_steps_interactive.pm_.c:1196 ../../printerdrake.pm_.c:2269
 msgid "Skip"
 msgstr "Dropp"
 
-#: ../../install_steps_interactive.pm_.c:1199
+#: ../../install_steps_interactive.pm_.c:1201
 #, c-format
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
@@ -5495,7 +5496,7 @@ msgstr ""
 "ditt?\n"
 "%s"
 
-#: ../../install_steps_interactive.pm_.c:1205
+#: ../../install_steps_interactive.pm_.c:1207
 msgid ""
 "\n"
 "\n"
@@ -5509,28 +5510,28 @@ msgstr ""
 "det å lage en oppstartsdiskett på en 1,44 Mb diskett vil\n"
 "antageligvis ikke gå, dan XFS trenger en veldig stor driver)."
 
-#: ../../install_steps_interactive.pm_.c:1213
+#: ../../install_steps_interactive.pm_.c:1215
 msgid "Sorry, no floppy drive available"
 msgstr "Beklager, ingen diskettstasjon tilgjengelig"
 
-#: ../../install_steps_interactive.pm_.c:1217
+#: ../../install_steps_interactive.pm_.c:1219
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr "Velg diskettstasjonen du ønsker å bruke for å lage oppstartsdisketten"
 
-#: ../../install_steps_interactive.pm_.c:1221
+#: ../../install_steps_interactive.pm_.c:1223
 #, c-format
 msgid "Insert a floppy in %s"
 msgstr "Sett inn en diskett i %s"
 
-#: ../../install_steps_interactive.pm_.c:1224
+#: ../../install_steps_interactive.pm_.c:1226
 msgid "Creating bootdisk..."
 msgstr "Oppretter oppstartdiskett"
 
-#: ../../install_steps_interactive.pm_.c:1231
+#: ../../install_steps_interactive.pm_.c:1233
 msgid "Preparing bootloader..."
 msgstr "Klargjør oppstartslaster"
 
-#: ../../install_steps_interactive.pm_.c:1242
+#: ../../install_steps_interactive.pm_.c:1244
 msgid ""
 "You appear to have an OldWorld or Unknown\n"
 " machine, the yaboot bootloader will not work for you.\n"
@@ -5542,11 +5543,11 @@ msgstr ""
 "Installasjonen vil fortsette, men du må\n"
 "bruke BootX for å starte din maskin."
 
-#: ../../install_steps_interactive.pm_.c:1248
+#: ../../install_steps_interactive.pm_.c:1250
 msgid "Do you want to use aboot?"
 msgstr "Ønsker du å bruke aboot?"
 
-#: ../../install_steps_interactive.pm_.c:1251
+#: ../../install_steps_interactive.pm_.c:1253
 msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
@@ -5554,15 +5555,15 @@ msgstr ""
 "Feil ved installasjon av aboot, \n"
 "prøve å installere selv om det ødelegger den første partisjonen?"
 
-#: ../../install_steps_interactive.pm_.c:1258
+#: ../../install_steps_interactive.pm_.c:1260
 msgid "Installing bootloader"
 msgstr "Installer oppstartslaster"
 
-#: ../../install_steps_interactive.pm_.c:1264
+#: ../../install_steps_interactive.pm_.c:1266
 msgid "Installation of bootloader failed. The following error occured:"
 msgstr "Installasjon av oppstartslaster mislykket. Følgende feil oppsto:"
 
-#: ../../install_steps_interactive.pm_.c:1272
+#: ../../install_steps_interactive.pm_.c:1274
 #, c-format
 msgid ""
 "You may need to change your Open Firmware boot-device to\n"
@@ -5579,17 +5580,17 @@ msgstr ""
 " Skriv så: shut-down\n"
 "Ved din neste oppstart burde du se oppstartslasteren."
 
-#: ../../install_steps_interactive.pm_.c:1306
+#: ../../install_steps_interactive.pm_.c:1308
 #: ../../standalone/drakautoinst_.c:79
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Sett inn en tom diskett i stasjon %s"
 
-#: ../../install_steps_interactive.pm_.c:1310
+#: ../../install_steps_interactive.pm_.c:1312
 msgid "Creating auto install floppy..."
 msgstr "Oppretter diskett for autoinstallasjon"
 
-#: ../../install_steps_interactive.pm_.c:1321
+#: ../../install_steps_interactive.pm_.c:1323
 msgid ""
 "Some steps are not completed.\n"
 "\n"
@@ -5599,7 +5600,7 @@ msgstr ""
 "\n"
 "Ønsker du virkelig å avslutte nå?"
 
-#: ../../install_steps_interactive.pm_.c:1332
+#: ../../install_steps_interactive.pm_.c:1334
 #, c-format
 msgid ""
 "Congratulations, installation is complete.\n"
@@ -5632,16 +5633,16 @@ msgstr ""
 "Informasjon om konfigurering av systemet ditt finnes i post\n"
 "install-kapittelet i Official Mandrake Linux User's Guide."
 
-#: ../../install_steps_interactive.pm_.c:1345
+#: ../../install_steps_interactive.pm_.c:1347
 #, fuzzy
 msgid "http://www.mandrakelinux.com/en/90errata.php3"
 msgstr "http://www.mandrakesoft.com/sales/contact"
 
-#: ../../install_steps_interactive.pm_.c:1350
+#: ../../install_steps_interactive.pm_.c:1352
 msgid "Generate auto install floppy"
 msgstr "Oppretter diskett for autoinstallasjon"
 
-#: ../../install_steps_interactive.pm_.c:1352
+#: ../../install_steps_interactive.pm_.c:1354
 msgid ""
 "The auto install can be fully automated if wanted,\n"
 "in that case it will take over the hard drive!!\n"
@@ -5655,15 +5656,15 @@ msgstr ""
 "\n"
 "Du kanskje ønske å kjøre installasjonen omigjen.\n"
 
-#: ../../install_steps_interactive.pm_.c:1357
+#: ../../install_steps_interactive.pm_.c:1359
 msgid "Automated"
 msgstr "Automatisert"
 
-#: ../../install_steps_interactive.pm_.c:1357
+#: ../../install_steps_interactive.pm_.c:1359
 msgid "Replay"
 msgstr "Gjør igjen"
 
-#: ../../install_steps_interactive.pm_.c:1360
+#: ../../install_steps_interactive.pm_.c:1362
 msgid "Save packages selection"
 msgstr "Lagre pakkevalg"
 
@@ -5807,11 +5808,11 @@ msgstr "Russisk"
 msgid "Swedish"
 msgstr "Svensk"
 
-#: ../../keyboard.pm_.c:176 ../../keyboard.pm_.c:257
+#: ../../keyboard.pm_.c:176 ../../keyboard.pm_.c:258
 msgid "UK keyboard"
 msgstr "UK-tastatur"
 
-#: ../../keyboard.pm_.c:177 ../../keyboard.pm_.c:258
+#: ../../keyboard.pm_.c:177 ../../keyboard.pm_.c:259
 msgid "US keyboard"
 msgstr "US-tastatur"
 
@@ -6016,74 +6017,78 @@ msgid "Serbian (cyrillic)"
 msgstr "Serbisk (cyrillic)"
 
 #: ../../keyboard.pm_.c:249
-msgid "Tamil"
-msgstr "Tamilsk"
+msgid "Tamil (Unicode)"
+msgstr "Tamilsk (Unicode)"
 
 #: ../../keyboard.pm_.c:250
+msgid "Tamil (TSCII)"
+msgstr "Tamilsk (TSCII)"
+
+#: ../../keyboard.pm_.c:251
 msgid "Thai keyboard"
 msgstr "Thai-tastatur"
 
-#: ../../keyboard.pm_.c:252
+#: ../../keyboard.pm_.c:253
 msgid "Tajik keyboard"
 msgstr "Tajik-tastatur"
 
-#: ../../keyboard.pm_.c:253
+#: ../../keyboard.pm_.c:254
 msgid "Turkish (traditional \"F\" model)"
 msgstr "Tyrkisk (tradisjonell \"F\" modell)"
 
-#: ../../keyboard.pm_.c:254
+#: ../../keyboard.pm_.c:255
 msgid "Turkish (modern \"Q\" model)"
 msgstr "Tyrkisk (moderne \"Q\" modell)"
 
-#: ../../keyboard.pm_.c:256
+#: ../../keyboard.pm_.c:257
 msgid "Ukrainian"
 msgstr "Ukrainsk"
 
-#: ../../keyboard.pm_.c:259
+#: ../../keyboard.pm_.c:260
 msgid "US keyboard (international)"
 msgstr "US-tastatur (internasjonal)"
 
-#: ../../keyboard.pm_.c:260
+#: ../../keyboard.pm_.c:261
 msgid "Vietnamese \"numeric row\" QWERTY"
 msgstr "Vietnamesisk \"nummer-rekke\" QWERTY"
 
-#: ../../keyboard.pm_.c:261
+#: ../../keyboard.pm_.c:262
 msgid "Yugoslavian (latin)"
 msgstr "Jugoslavisk (latin)"
 
-#: ../../keyboard.pm_.c:268
+#: ../../keyboard.pm_.c:269
 msgid "Right Alt key"
 msgstr "Høyre Alt tast"
 
-#: ../../keyboard.pm_.c:269
+#: ../../keyboard.pm_.c:270
 msgid "Both Shift keys simultaneously"
 msgstr "Begge Shift taster samtidig"
 
-#: ../../keyboard.pm_.c:270
+#: ../../keyboard.pm_.c:271
 msgid "Control and Shift keys simultaneously"
 msgstr "Control og Shift taster samtidig"
 
-#: ../../keyboard.pm_.c:271
+#: ../../keyboard.pm_.c:272
 msgid "CapsLock key"
 msgstr "CapsLock tast"
 
-#: ../../keyboard.pm_.c:272
+#: ../../keyboard.pm_.c:273
 msgid "Ctrl and Alt keys simultaneously"
 msgstr "Ctrl og Alt taster samtidig"
 
-#: ../../keyboard.pm_.c:273
+#: ../../keyboard.pm_.c:274
 msgid "Alt and Shift keys simultaneously"
 msgstr "Alt og Shift taster samtidig"
 
-#: ../../keyboard.pm_.c:274
+#: ../../keyboard.pm_.c:275
 msgid "\"Menu\" key"
 msgstr "\" Menu\" tast"
 
-#: ../../keyboard.pm_.c:275
+#: ../../keyboard.pm_.c:276
 msgid "Left \"Windows\" key"
 msgstr "Venstre \"Windows\" tast"
 
-#: ../../keyboard.pm_.c:276
+#: ../../keyboard.pm_.c:277
 msgid "Right \"Windows\" key"
 msgstr "Høyre \"Windows\" tast"
 
@@ -6095,6 +6100,30 @@ msgstr "Rund monterer %s\n"
 #: ../../lvm.pm_.c:88
 msgid "Remove the logical volumes first\n"
 msgstr "Fjern de logiske partisjoner først\n"
+
+#: ../../modparm.pm_.c:50
+#, fuzzy
+msgid "a number"
+msgstr "Telefonnummer"
+
+#: ../../modparm.pm_.c:52
+#, c-format
+msgid "%d comma separated numbers"
+msgstr ""
+
+#: ../../modparm.pm_.c:52
+#, c-format
+msgid "%d comma separated strings"
+msgstr ""
+
+#: ../../modparm.pm_.c:54
+msgid "comma separated numbers"
+msgstr ""
+
+#: ../../modparm.pm_.c:54
+#, fuzzy
+msgid "comma separated strings"
+msgstr "Formater partisjoner"
 
 #: ../../modules.pm_.c:283
 msgid ""
@@ -6227,23 +6256,23 @@ msgstr "Neste ->"
 msgid "<- Previous"
 msgstr "<- Forrige"
 
-#: ../../my_gtk.pm_.c:280
+#: ../../my_gtk.pm_.c:283
 msgid "Is this correct?"
 msgstr "Er dette riktig?"
 
-#: ../../my_gtk.pm_.c:352 ../../services.pm_.c:222
+#: ../../my_gtk.pm_.c:355 ../../services.pm_.c:222
 msgid "Info"
 msgstr "Info"
 
-#: ../../my_gtk.pm_.c:373
+#: ../../my_gtk.pm_.c:376
 msgid "Expand Tree"
 msgstr "Utvid tre"
 
-#: ../../my_gtk.pm_.c:374
+#: ../../my_gtk.pm_.c:377
 msgid "Collapse Tree"
 msgstr "Trekk sammen tre"
 
-#: ../../my_gtk.pm_.c:375
+#: ../../my_gtk.pm_.c:378
 msgid "Toggle between flat and group sorted"
 msgstr "Skift mellom flat og gruppesortert"
 
@@ -6963,7 +6992,7 @@ msgstr "Logg inn (brukernavn)"
 msgid "Account Password"
 msgstr "Passord"
 
-#: ../../network/tools.pm_.c:118
+#: ../../network/tools.pm_.c:104 ../../network/tools.pm_.c:118
 msgid "United Kingdom"
 msgstr ""
 
@@ -9257,7 +9286,7 @@ msgstr ""
 msgid "http://www.mandrakesoft.com/sales/contact"
 msgstr "http://www.mandrakesoft.com/sales/contact"
 
-#: ../../standalone.pm_.c:37
+#: ../../standalone.pm_.c:40
 msgid "Installing packages..."
 msgstr "Installerer pakke..."
 
@@ -9330,105 +9359,105 @@ msgstr "DHCP-klient"
 msgid "Help"
 msgstr "Hjelp"
 
-#: ../../standalone/drakTermServ_.c:433
+#: ../../standalone/drakTermServ_.c:436
 msgid "Boot Floppy"
 msgstr ""
 
-#: ../../standalone/drakTermServ_.c:435
+#: ../../standalone/drakTermServ_.c:438
 msgid "Boot ISO"
 msgstr ""
 
-#: ../../standalone/drakTermServ_.c:504
+#: ../../standalone/drakTermServ_.c:507
 msgid "Build Whole Kernel -->"
 msgstr ""
 
-#: ../../standalone/drakTermServ_.c:506 ../../standalone/drakTermServ_.c:536
+#: ../../standalone/drakTermServ_.c:509 ../../standalone/drakTermServ_.c:539
 msgid "This will take a few minutes."
 msgstr ""
 
-#: ../../standalone/drakTermServ_.c:518
+#: ../../standalone/drakTermServ_.c:521
 msgid "No kernel selected!"
 msgstr ""
 
-#: ../../standalone/drakTermServ_.c:521
+#: ../../standalone/drakTermServ_.c:524
 msgid "Build Single NIC -->"
 msgstr ""
 
-#: ../../standalone/drakTermServ_.c:532
+#: ../../standalone/drakTermServ_.c:535
 #, fuzzy
 msgid "No nic selected!"
 msgstr "Ikke tilkoblet"
 
-#: ../../standalone/drakTermServ_.c:535
+#: ../../standalone/drakTermServ_.c:538
 msgid "Build All Kernels -->"
 msgstr ""
 
-#: ../../standalone/drakTermServ_.c:549
+#: ../../standalone/drakTermServ_.c:552
 #, fuzzy
 msgid "<-- Delete"
 msgstr "Slett"
 
-#: ../../standalone/drakTermServ_.c:556
+#: ../../standalone/drakTermServ_.c:559
 #, fuzzy
 msgid "Delete All NBIs"
 msgstr "Velg fil"
 
-#: ../../standalone/drakTermServ_.c:618
+#: ../../standalone/drakTermServ_.c:621
 #, fuzzy
 msgid "Add User -->"
 msgstr "Legg til bruker"
 
-#: ../../standalone/drakTermServ_.c:626
+#: ../../standalone/drakTermServ_.c:629
 msgid "<-- Del User"
 msgstr ""
 
-#: ../../standalone/drakTermServ_.c:700
+#: ../../standalone/drakTermServ_.c:703
 msgid "Add Client -->"
 msgstr ""
 
-#: ../../standalone/drakTermServ_.c:732
+#: ../../standalone/drakTermServ_.c:735
 #, fuzzy
 msgid "<-- Del Client"
 msgstr "DHCP-klient"
 
-#: ../../standalone/drakTermServ_.c:738
+#: ../../standalone/drakTermServ_.c:741
 #, fuzzy
 msgid "dhcpd Config..."
 msgstr "Konfigurerer..."
 
-#: ../../standalone/drakTermServ_.c:885
+#: ../../standalone/drakTermServ_.c:888
 #, fuzzy
 msgid "Write Config"
 msgstr "Konfigurer på nytt"
 
-#: ../../standalone/drakTermServ_.c:943
+#: ../../standalone/drakTermServ_.c:946
 #, fuzzy
 msgid "Please insert floppy disk:"
 msgstr "Sett inn en oppstartsdiskett i stasjon %s"
 
-#: ../../standalone/drakTermServ_.c:947
+#: ../../standalone/drakTermServ_.c:950
 msgid "Couldn't access the floppy!"
 msgstr ""
 
-#: ../../standalone/drakTermServ_.c:949
+#: ../../standalone/drakTermServ_.c:952
 msgid "Floppy can be removed now"
 msgstr ""
 
-#: ../../standalone/drakTermServ_.c:952
+#: ../../standalone/drakTermServ_.c:955
 #, fuzzy
 msgid "No floppy drive available!"
 msgstr "Ingen diskettstasjon tilgjengelig"
 
-#: ../../standalone/drakTermServ_.c:961
+#: ../../standalone/drakTermServ_.c:964
 #, c-format
 msgid "Etherboot ISO image is %s"
 msgstr ""
 
-#: ../../standalone/drakTermServ_.c:963
+#: ../../standalone/drakTermServ_.c:966
 msgid "Something went wrong! - Is mkisofs installed?"
 msgstr ""
 
-#: ../../standalone/drakTermServ_.c:982
+#: ../../standalone/drakTermServ_.c:985
 msgid "Need to create /etc/dhcpd.conf first!"
 msgstr ""
 
@@ -12250,7 +12279,7 @@ msgid ""
 " Try to install them manually."
 msgstr ""
 
-#: ../../ugtk.pm_.c:602
+#: ../../ugtk.pm_.c:598
 msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 
@@ -12498,6 +12527,10 @@ msgid "Scientific Workstation"
 msgstr "Vitenskaplig arbeidsstasjon"
 
 #, fuzzy
+#~ msgid "Windows PDC"
+#~ msgstr "Fjern Windows(TM)"
+
+#, fuzzy
 #~ msgid "PDC Server Name"
 #~ msgstr "NTP-tjener"
 
@@ -12743,9 +12776,6 @@ msgstr "Vitenskaplig arbeidsstasjon"
 
 #~ msgid "Percentage of packages to install"
 #~ msgstr "Prosentdel av pakker å installere"
-
-#~ msgid "Please choose the desired security level."
-#~ msgstr "Velg sikkerhetsnivå"
 
 #~ msgid "Complete (%dMB)"
 #~ msgstr "Full (%dMB)"
