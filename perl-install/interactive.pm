@@ -26,7 +26,8 @@ use common;
 #-     range (with min, max)
 #-     combo (with list, not_edit)
 #-     list (with list, icon2f (aka icon), separator (aka tree), format (aka pre_format function),
-#-           help can be a hash or a function)
+#-           help can be a hash or a function,
+#-           allow_empty_list disables the special cases for 0 and 1 element lists)
 #-     entry (the default) (with hidden)
 #
 #- heritate from this class and you'll get all made interactivity for same steps.
@@ -270,7 +271,7 @@ sub ask_from_normalize {
 
     #- don't display empty lists and one element lists
     @$l = grep { 
-	if ($_->{list} && $_->{not_edit}) {
+	if ($_->{list} && $_->{not_edit} && !$_->{allow_empty_list}) {
 	    if (@{$_->{list}} == ()) {
 		eval {
 		    require log;
