@@ -1063,10 +1063,7 @@ my @bigseldom_used_groups = (
 sub check_prog {
     my ($f) = @_;
 
-    my @l = $f !~ m|^/| ?
-        map { "$_/$f" } split(":", $ENV{PATH}) :
-	$f;
-    return if any { -x $_ } @l;
+    return if $f =~ m|^/| ? -x $f : whereis_binary($f);
 
     common::usingRamdisk() or log::l("ERROR: check_prog can't find the program $f and we're not using ramdisk"), return;
 
