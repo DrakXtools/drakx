@@ -203,31 +203,6 @@ user "$adsl->{login}"
 						      ['ppp-compress-24', 'ppp_deflate'],
 						      ['ppp-compress-26', 'ppp_deflate'];
 	$::isStandalone and modules::write_conf();
-	$in->do_pkgs->what_provides("speedtouch_mgmt") and $in->do_pkgs->ensure_is_installed('speedtouch_mgmt', '/usr/share/speedtouch/mgmt.o', 'auto');
-	-e "$prefix/usr/share/speedtouch/mgmt.o" and goto end_firmware;
-	
-      firmware:
-	
-	my $l = [ N_("Use a floppy"),
-		  N_("Use my Windows partition"),
-		  N_("Do it later"),
-		];
-	
-	my $answer = $in->ask_from_list_(N("Firmware needed"),
-					 N("You need the Alcatel microcode.
-You can provide it now via a floppy or your windows partition,
-or skip and do it later."), $l) or return;
-	
-	my $destination = "$prefix/usr/share/speedtouch/";
-	$answer eq 'Use a floppy' && network::tools::copy_firmware('floppy', $destination, 'mgmt.o') || goto firmware;
-	$answer eq 'Use my Windows partition' && network::tools::copy_firmware('windows', $destination, 'alcaudsl.sys') || goto firmware;
-	$answer eq 'Do it later' and $in->ask_warn('', N("You need the Alcatel microcode.
-Download it at:
-%s
-and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.net/speedtouch/speedtouch-20011007.tar.bz2'));
-	
-	-e "$destination/alcaudsl.sys" and rename "$destination/alcaudsl.sys", "$destination/mgmt.o";
-      end_firmware:
     }
     
     if ($adsl_type eq 'eci') {
