@@ -123,7 +123,7 @@ if ($shorewall && $shorewall->{masquerade}) {
 
     if (!$shorewall->{disabled}) {
 	my $r = $in->ask_from_list_(N("Internet Connection Sharing currently enabled"),
-N("The setup of Internet connection sharing has already been done.
+N("The setup of Internet Connection Sharing has already been done.
 It's currently enabled.
 
 What would you like to do?"),
@@ -139,7 +139,7 @@ What would you like to do?"),
 	    sys("/etc/init.d/shorewall restart >/dev/null");
 	    log::l("[drakgw] Disabled");
 	    $::Wizard_finished = 1;
-	    $in->ask_okcancel('', N("Internet connection sharing is now disabled."));
+	    $in->ask_okcancel('', N("Internet Connection Sharing is now disabled."));
 	    quit_global($in, 0);
 	}
 	if ($r eq "dismiss") {
@@ -163,7 +163,7 @@ What would you like to do?"),
 	    }
             log::l("[drakgw] Enabled");
 	    $::Wizard_finished = 1;
-	    $in->ask_okcancel('', N("Internet connection sharing is now enabled."));
+	    $in->ask_okcancel('', N("Internet Connection Sharing is now enabled."));
 	    quit_global($in, 0);
 	}
 	if ($r eq "dismiss") {
@@ -284,7 +284,7 @@ Driver: %s", $device, $conf->{NETWORK}, $conf->{IPADDR}, $conf->{BOOTPROTO}, $al
 
 The default DNS entry is the Caching Nameserver configured on the firewall. You can replace that with your ISP DNS IP, for example.
 		      
-Else, I can reconfigure your interface and (re)configure a DHCP server for you.
+Otherwise, I can reconfigure your interface and (re)configure a DHCP server for you.
 
 ", $device),
       [ { label => N("Local Network adress"), val => \$lan_address, type => 'entry' },
@@ -528,7 +528,7 @@ sub pur_gtk_mode {
     $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     unless ($::isEmbedded) {
         $window1->{rwindow}->set_position('center');
-        $window1->{rwindow}->set_title(N("Internet connection sharing configuration"));
+        $window1->{rwindow}->set_title(N("Internet Connection Sharing configuration"));
     }
     $window1->{rwindow}->border_width(10);
     my $vbox1 = new Gtk2::VBox(0,0);

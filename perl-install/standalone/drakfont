@@ -47,13 +47,13 @@
 #         Commands buttons:
 #           - import from windows partition.
 #                 import from all fat32 partitions and look for winnt/windows/font
-#                 and import all (delete doublon) but don't import if already exist.
+#                 and import all (delete doubles) but don't import if they already exist.
 #           - import from directory
-#                 look for if it exist before for each font and not delete the original.
+#                 look to see if each font exists and do not delete the original.
 #                 (replace all, no, none)
 #                 expert options:
-#                         ask the directory, and look for if it exist before
-#                         if it exist ask: (replace all, no, none)
+#                         specify the directory, and look to see if it exists before
+#                         if it exists ask: (replace all, no, none)
 #           - uninstall with list per font type
 #         Expert additional switch
 #           - option support:   ghostscript, Staroffice, etc...
@@ -326,7 +326,7 @@ sub search_dir_font_uninstall {
 
 sub search_dir_font_uninstall_gi {
     @font_list = @uninstall;
-    $interactive and progress($pbar, 1, N("Search fonts in installed list"));
+    $interactive and progress($pbar, 1, N("Search for fonts in installed list"));
 }
 
 sub print_list {
@@ -450,7 +450,7 @@ sub put_font_dir {
 
         $interactive and progress($pbar2, 1, N("done"));
         $interactive
-          and progress($pbar3, 0.25, N("Suppress temporary Files"));
+          and progress($pbar3, 0.25, N("Suppress Temporary Files"));
         rm_rf("$drakfont_dir/tmp/");
         print "\n\nretarting xfs......\n";
         $interactive and progress($pbar3, 0.5, N("Restart XFS"));
@@ -530,7 +530,7 @@ sub remove_fonts {
 }
 
 sub license_msg {
-    print N("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server.") . "\n";
+    print N("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts the normal way. In rare cases, bogus fonts may hang up your X Server.") . "\n";
 }
 
      $list_all_font_path
@@ -614,7 +614,7 @@ sub interactive_mode {
     $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     unless ($::isEmbedded) {
         $window1->{rwindow}->set_position('center');
-        $window1->{rwindow}->set_title(N("Fonts Importation"));
+        $window1->{rwindow}->set_title(N("Import Fonts"));
     }
     $window1->{rwindow}->set_border_width(5);
 
@@ -817,13 +817,13 @@ Visual Interface:
         Commands buttons:
           - import from windows partition.
                 import from all fat32 partitions and look for winnt/windows/font
-                and import all (delete doublon) but don't import if already exist.
+                and import all (delete doubles) but don't import if they already exist.
           - import from directory
-                look for if it exist before for each font and not delete the original.
+                look to see if each font exists and do not delete the original.
                 (replace all, no, none)
                 expert options:
-                        ask the directory, and look for if it exist before
-                        if it exist ask: (replace all, no, none)
+                        specify the directory, and look to see if it exists before
+                        if it exists ask: (replace all, no, none)
           - uninstall with list per font type
         Expert additional switch
           - option support:   ghostscript, Staroffice, etc...
@@ -895,7 +895,7 @@ sub appli_choice {
                     1,
                     gtktext_insert(
                         gtkset_editable($text, 0),
-                        [ [ N("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server.") ] ]
+                        [ [ N("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts the normal way. In rare cases, bogus fonts may hang up your X Server.") ] ]
                     ),
                     0,
                     new Gtk2::VBox(0, 10),

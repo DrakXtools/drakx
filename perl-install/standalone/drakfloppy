@@ -346,7 +346,7 @@ sub build_it {
   while (<STATUS>) {
       $output->insert($fixed_font, undef, undef, $_);
   }
-  close STATUS or create_dialog(N("Unable to close properly mkbootdisk: \n %s \n %s", $!, $?), 0);
+  close STATUS or create_dialog(N("Unable to properly close mkbootdisk: \n %s \n %s", $!, $?), 0);
   
   return (0);
 }

@@ -1351,7 +1351,7 @@ sub build_backup_files {
     if ($send_mail) { 
 		if (send_mail($results)) { 
 	    	$interactive and send_mail_pb();
-	    	$interactive or print N(" Error during mail sending. \n");
+	    	$interactive or print N(" Error while sending mail. \n");
 		} 
     }
 	
@@ -4675,7 +4675,7 @@ sub adv_help {
 	This option allows you select all users that you want 
 	to backup.
 	To preserve disk space, it is recommended that you 
-	do not include web browser's cache.
+	do not include the web browser's cache.
 
  - Backup Other files: 
 
@@ -4688,7 +4688,7 @@ sub adv_help {
 	The incremental backup is the most powerful 
 	option for backup. This option allows you 
 	to backup all your data the first time, and 
-	only the changed afterward.
+	only the changed data afterward.
 	Then you will be able, during the restore
 	step, to restore your data from a specified
 	date.

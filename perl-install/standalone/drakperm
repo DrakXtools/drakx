@@ -67,7 +67,7 @@ my $F					= new Gtk2::Frame;
 $combo_perm->set_popdown_strings(sort(keys %perm));
 
 $tips->set_tip($B_add, N("Add a new rule at the end"));
-$tips->set_tip($B_edit, N("Edit curent rule"));
+$tips->set_tip($B_edit, N("Edit current rule"));
 $tips->set_tip($B_up, N("Up selected rule one level"));
 $tips->set_tip($B_down, N("Down selected rule one level"));
 $tips->set_tip($B_del, N("Delete selected rule"));
@@ -205,7 +205,7 @@ sub save_perm {
 	close F;
 	$modified = 0;
 }
-#- on list selection we get all data concerning the curent selection
+#- on list selection we get all data concerning the current selection
 sub row_setting_data {
 	my (undef, $row, $column, undef ) = @_;
 	%CURENT = ('clicked' => {'row' => $row,

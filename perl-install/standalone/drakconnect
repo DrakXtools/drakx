@@ -537,7 +537,7 @@ sub configure_net {
     my (undef, $_prefix, $netcnx, $netc, $_intf) = @_;
     if (!$netcnx->{type}) {
 	my $dialog = new_dialog();
-	$dialog->vbox->pack_start(new Gtk2::Label(N("You don't have any internet connection.
+	$dialog->vbox->pack_start(new Gtk2::Label(N("You don't have an Internet connection.
 Create one first by clicking on 'Configure'")),1,1,0);
 	my $bbox_dialog = new Gtk2::HButtonBox;
 	$dialog->action_area->add($bbox_dialog);
