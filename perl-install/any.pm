@@ -769,7 +769,7 @@ when your installation is complete and you restart your system.")),
 	$in->ask_from_($common,
 		       [ { val => \$lang, type => 'list',
                      format => sub { lang::l2name($_[0]) }, list => \@langs },
-                   { val => \$in->{locale}{utf8}, type => 'bool', text => N("Use Unicode by default") }, #, advanced => 1
+                   { val => \$in->{locale}{utf8}, type => 'bool', text => N("Use Unicode by default"), advanced => 1 },
                ]) or return;
 	$lang;
     }
