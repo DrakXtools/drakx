@@ -125,7 +125,7 @@ close F;
 for (1..2) {
     open F, "parted /dev/$hd -s print |";
     while (<F>) {
-	/^Disk geometry [^:]*:\s*([\d\.]+)-([\d\.]+)/ and do { $hd_size = $2 - $1 };
+	/^Disk geometry [^:]*:\s*([\d\.]+)-([\d\.]+)/ and do { $hd_size = $2 - $1 - 1 };
 	#/^Disk label type:\s*msdos/ and do { $hd_type = 'msdos' };
 	/^(\d+)\s+([\d\.]+)\s+([\d\.]+)\s+(primary|logical|extended)\s*(\S*)/ and do {
 	    #- this automatically drops extended partition here!
