@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 16mdk
+Release: 17mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Mar 31 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-17mdk
+- drakconnect: do not use ifplugd for wireless cards (and don't allow
+  to enable it) (blino)
+- drakfirewall: make it usable (pixel, #15116)
+- drakups: do not detect USB joystics as UPSes (#15131)
+- harddrake:
+  o do not try to install packages that are not availlable (#15106)
+  o do no try to install too generic hw packages (#15101)
+  o do not detect USB joystics as UPSes (#15102)
+- localedrake: do not try to logout wm (pixel, #15087)
+
 * Wed Mar 30 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-16mdk
 - drakconnect (blino):
   o fix speedtouch microcode url (#15095)
