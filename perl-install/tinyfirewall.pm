@@ -145,13 +145,6 @@ sub DoInterface {
 	my (undef, undef, @netstat) = `/bin/netstat -in`;
 	$settings{DHCP_IFACES} = join(' ', split(' ', $settings{DHCP_IFACES}), map { /(\S+)/ } @netstat );
     } else { $settings{DHCP_IFACES} = "" } };
-    my $install = sub {
-	if ($in->standalone::pkgs_install(Kernel22() ? "ipchains" : "iptables", "Bastille")) {
-	    $in->ask_warn('', _("Failure installing the needed packages : %s and Bastille.
- Try to install them manually.", Kernel22() ? "ipchains" : "iptables") );
-	    $in->exit(0);
-	}
-    };
     my $quit = sub {
 	$_[0] or $in->exit(0);
 	SaveConfig();
@@ -177,7 +170,7 @@ sub DoInterface {
 			    "/etc/rc.d/init.d/bastille-firewall stop", "/etc/rc.d/init.d/bastille-firewall start"); };
     my @struct = (
 		  [$GetNetworkInfo],
-		  [undef , undef, undef, $install ],
+		  [],
 		  [undef , undef, undef, undef, ["tcp", "80"], ["tcp", "443"]],
 		  [undef , undef, undef, undef, ["tcp", "53"], ["udp", "53"]],
 		  [undef , undef, undef, undef, ["tcp", "22"]],
@@ -234,6 +227,20 @@ sub Kernel22 {
 }
 sub main {
     my ($in)=@_;
+    my $dialog = new Gtk::Dialog();
+    $dialog->set_position(1);
+    $dialog->vbox->set_border_width(10);
+    my $label = new Gtk::Label(_("Please Wait... Verifying installed packages"));
+    $dialog->signal_connect ( delete_event => sub { Gtk->main_quit(); });
+    $dialog->vbox->pack_start($label,1,1,20);
+    $dialog->show_all;
+    Gtk->main_iteration while Gtk->events_pending;
+    if ($in->standalone::pkgs_install(Kernel22() ? "ipchains" : "iptables", "Bastille")) {
+	$in->ask_warn('', _("Failure installing the needed packages : %s and Bastille.
+ Try to install them manually.", Kernel22() ? "ipchains" : "iptables") );
+	$dialog->destroy;
+	$in->exit(0);
+    }
     ReadConfig;
     DoInterface($in);
 }
