@@ -135,7 +135,6 @@ sub wait_message {
 	    }
 	    $w->set($msg);
 	} elsif ($total) {
-	    log::l("set_fraction $current / $total");
 	    if ($progress) {
 		$progress->set_fraction($current / $total);
 		$progress->show;
