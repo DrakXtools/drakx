@@ -315,6 +315,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %changelog
 * Fri Jan  9 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-16mdk
 - support newer gtk2 bindings
+- fix drakboot --boot embedding
 - fix logdrake wizard when embedded
 
 * Fri Jan  9 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-15mdk
