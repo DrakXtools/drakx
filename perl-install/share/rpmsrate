@@ -145,7 +145,7 @@ NETWORKING_FILE_TRANSFER
   2 uucp
 
 NETWORKING_FILE_TRANSFER_SERVER
-  4 proftpd
+  4 proftpd bwbserver_linux
   4 WIZARDS wizards_lib-ftp
   2 wu-ftpd anonftp
 
@@ -173,7 +173,7 @@ NETWORKING_FIREWALLING_SERVER
   1 portsentry 
 
 NETWORKING_GROUPWARE_SERVER
-  4 phpgroupware
+  4 phpgroupware bwbserver_linux
 
 NETWORKING_MAIL
   5 mailx metamail
@@ -244,7 +244,7 @@ NETWORKING_FILE
 NETWORKING_FILE_SERVER 
   5 nfs-utils
   4 WIZARDS wizards_lib-samba
-  4 samba
+  4 samba bwbserver_linux
   3 BOOKS samba-doc 
   2 arkeia-server-shareware samba-winbind
   3 squid squidGuard
@@ -259,7 +259,7 @@ NETWORKING_WWW
   4 !LOCALES"eu" netscape-castellano netscape-catalan netscape-chinese_gb2312 netscape-chinese_big5 netscape-euskara netscape-francais netscape-german netscape-japanese netscape-polish netscape-russian netscape-walon
 NETWORKING_WWW_SERVER
   5 apache apache-mod_perl mod_ssl
-  4 apache-suexec 
+  4 apache-suexec bwbserver_linux
   4 WIZARDS wizards_lib-web
   4 BOOKS apache-manual
   3 php-dba_gdbm_db2 php-gd php-imap php-ldap php-manual php-mysql php-oracle
