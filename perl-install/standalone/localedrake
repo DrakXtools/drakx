@@ -14,7 +14,7 @@ my $file = $> ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n';
 my ($lang, $langs) = lang::read('', $file);
 $langs = '' if $>;
 if ($lang = any::selectLanguage($in, $lang, $langs)) {
-    lang::write('', $lang, $file, $>);
+    lang::write('', $lang, $>);
     lang::write_langs('', $langs) if $langs;
 	if ($>) {
 		if (my $wm = any::running_window_manager()) {
