@@ -1,3 +1,57 @@
+2001/08/15  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ko.po, share/po/it.po: updated Indonesian, Italian and Korean
+	files
+
+	* share/po/es.po: updated spanish and Indonesian files
+
+	* share/po/id.po: updated Indonesian, Italian and Korean files
+	updated spanish and Indonesian files
+
+2001/08/14  dam's  <damien@mandrakesoft.com>
+
+	* standalone/net_monitor: added options
+
+2001/08/14  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_any.pm: oops, fix type of installing X or not
+	  - fix choice of packages when auto install
+
+	* Makefile.config: add drakautoinst in drakxtools standalone binaries
+
+	* install_steps_interactive.pm, install2.pm: 
+	  - fix createBootdisk with auto
+	  - fix setupBootloader with auto
+	  - fix behaviour of draknet when auto-install
+	  - remove auto flag when error-in-step
+
+	* install_steps.pm, network/netconnect.pm: 
+	  - fix behaviour of draknet when auto-install
+	  - remove auto flag when error-in-step
+
+	* Xconfigurator.pm: fix automatic configuration
+
+2001/08/14  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/sv.po: updated Swedish file
+
+2001/08/14  Pixel  <pixel@mandrakesoft.com>
+
+	* devices.pm: add number-only device-name handling (eg: "801" is "sda1")
+
+	* interactive_gtk.pm, interactive.pm: 
+	  - small fixes (esp. gtk sensitive handling)
+	  - add ask_file
+	  - add "gtk" preference field
+
+	* my_gtk.pm: remove ask_file (was unused)
+
+	* http.pm: cleanup to please perl_checker
+
+	* Makefile (TAGS): add MDK/Common files
+
+	* services.pm: cleanup (it was working, but wasn't nice)
+
 2001/08/14  dam's  <damien@mandrakesoft.com>
 
 	* standalone/draknet: corrected activation button
