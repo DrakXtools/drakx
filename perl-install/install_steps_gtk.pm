@@ -458,7 +458,7 @@ sub installPackages {
     my ($progress, $progress_total) = map { new Gtk::ProgressBar } (1..2);
     $w->{rwindow}->set_policy(1, 1, 1);
     gtkadd($w->{window}, my $box = new Gtk::VBox(0,10));
-    $box->pack_end(gtkshow(gtkpack(gtkset_usize(new Gtk::VBox(0,5), $::windowwidth * 0.8, 0),
+    $box->pack_end(gtkshow(gtkpack(gtkset_usize(new Gtk::VBox(0,5), $::windowwidth * 0.6, 0),
 			   $msg, $progress,
 			   create_packtable({},
 					    [_("Time remaining "), $msg_time_remaining],
