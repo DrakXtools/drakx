@@ -85,6 +85,7 @@ my $activefw = activefw->new(sub {
       $msg->get_member eq "Attack";
 });
 my $interactive_cb;
+my @attacks_queue;
 
 checkNetwork();
 cronNetwork();
@@ -186,11 +187,24 @@ sub setAutoStart {
 }
 
 sub handle_attack {
-    my ($seq, $timestamp, $indev, $prefix, $sensor, $protocol, $addr, $port, $icmp_type) = @_;
+    push @attacks_queue, [ @_ ];
+    @attacks_queue == 1 and ask_attack_verdict($attacks_queue[0]);
+}
+
+sub set_attack_verdict {
+    my ($seq, $verdict) = @_;
+    $activefw->blacklist($seq, $verdict);
+    shift @attacks_queue;
+    @attacks_queue and ask_attack_verdict($attacks_queue[0]);
+}
+
+sub ask_attack_verdict {
+    my ($attack) = @_;
+    my ($seq, $timestamp, $indev, $prefix, $sensor, $protocol, $addr, $port, $icmp_type) = @$attack;
 
     unless ($interactive_cb->get_active) {
         #- let the daemon handle the blacklist policy in automatic mode
-        $activefw->blacklist($seq, undef);
+        set_attack_verdict($seq, undef);
         return;
     }
 
@@ -207,11 +221,12 @@ sub handle_attack {
         return;
     }
 
-    $ugtk2::wm_icon = "/usr/lib/libDrakX/icons/drakfirewall.png";
-    my $w = ugtk2->new(N("Active Firewall : intrusion detected"));
-    my ($yes, $no);
+    my $w = Gtk2::Window->new;
+    $w->set_title(N("Active Firewall : intrusion detected"));
+    $w->set_icon(gtknew('Pixbuf', file => "/usr/lib/libDrakX/icons/drakfirewall.png"));
+    my ($yes, $no, $auto);
 
-    gtkadd($w->{window},
+    gtkadd($w,
            gtknew('VBox', spacing => 5, children_loose => [
                gtknew('HBox', children => [
                    0, Gtk2::Image->new_from_stock('gtk-dialog-warning', 'dialog'),
@@ -222,15 +237,18 @@ sub handle_attack {
                    ])
                ]),
                gtknew('HButtonBox', layout => 'edge', children_loose => [
-                   $no = gtknew('Button', text => N("No"),
-                          clicked => sub { $activefw->blacklist($seq, 0); Gtk2->main_quit }),
-                   $yes = gtknew('Button', text => N("Yes"),
-                                   clicked => sub { $activefw->blacklist($seq, 1); Gtk2->main_quit })
+                   $no = gtknew('Button', text => N("No"), clicked => sub {
+                       $w->destroy;
+                       set_attack_verdict($seq, 0);
+                   }),
+                   $yes = gtknew('Button', text => N("Yes"), clicked => sub {
+                       $auto->get_active and $interactive_cb->set_active(0);
+                       $w->destroy;
+                       set_attack_verdict($seq, 1);
+                   })
                ]),
-               gtknew('CheckButton', text => N("Always blacklist (do not ask again)"), toggled => sub {
-                   my $interactive = !$_[0]->get_active;
-                   $no->set_sensitive($interactive);
-                   $interactive_cb->set_active($interactive);
+               $auto = gtknew('CheckButton', text => N("Always blacklist (do not ask again)"), toggled => sub {
+                   $no->set_sensitive(!$_[0]->get_active);
                }),
                gtkadd(Gtk2::Expander->new(N("Attack details")),
                       gtknew('HBox', children => [
@@ -249,5 +267,13 @@ sub handle_attack {
                       ])),
            ]));
     $yes->grab_focus;
-    $w->main;
+    gtksignal_connect($w, delete_event => sub {
+        if ($auto->get_active) {
+            $interactive_cb->set_active(0);
+            set_attack_verdict($seq, 1);
+        } else {
+            set_attack_verdict($seq, 0);
+        }
+    });
+    $w->show_all;
 }
