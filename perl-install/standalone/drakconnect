@@ -539,34 +539,31 @@ Create one first by clicking on 'Configure'")),1,1,0);
 	return;
     }
     my $cnx = {};
-    my @infos;
     $cnx = $netcnx->{$netcnx->{type}};
     my $window = Gtk2::Window->new('toplevel');
     $window->signal_connect(delete_event => sub { Gtk2->main_quit });
     $window->set_position('center');
     $window->set_title(N("Internet connection configuration"));
     $window->set_border_width(10);
-    my $vbox1 = new Gtk2::VBox(0,0);
-    $window->add($vbox1);
-    $vbox1->pack_start(new Gtk2::Label(N("Internet Connection Configuration")),0,1,0);
-
-    $vbox1->pack_start(new Gtk2::HSeparator,0,0,5);
     my $table1 = new Gtk2::Table(2, 4, 0);
     $table1->set_row_spacings(5);
     $table1->set_col_spacings(5);
-    $vbox1->pack_start($table1,0,0,0);
     $table1->attach(new Gtk2::Label(N("Profile: ")), 0, 1, 0, 1, 'fill', 'fill',0,0);
     $table1->attach(new Gtk2::Label(translate($netcnx->{PROFILE})), 1, 2, 0, 1, 'fill', 'fill',0,0);
     $table1->attach(new Gtk2::Label(N("Connection type: ")), 0, 1, 1, 2, 'fill', 'fill',0,0);
     $table1->attach(new Gtk2::Label(translate($netcnx->{type})), 1, 2, 1, 2, 'fill', 'fill',0,0);
 #    my $button_internet = new Gtk2::Button(N("Reconfigure using wizard..."));
 #    $table1->attach($button_internet, 2, 4, 0, 2, 'fill', 'fill',0,0);
-    $vbox1->pack_start(new Gtk2::HSeparator,0,0,5);
 
     my $vbox2 = new Gtk2::VBox(0,0);
-    $vbox1->pack_start(gtkadd(Gtk2::Frame->new(N("Parameters")), $vbox2),
-                       1,1,0);
     my $i = 0;
+    my @mask;
+@mask = (0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0) if $netcnx->{type} eq 'lan';
+@mask = (0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1) if $netcnx->{type} eq 'isdn_internal' && defined $cnx->{vendor} && defined $cnx->{id};
+@mask = (1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1) if $netcnx->{type} eq 'isdn_internal' && (!defined $cnx->{vendor} || !defined $cnx->{id});
+@mask = (0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0) if $netcnx->{type} eq 'modem' || $netcnx->{type} eq 'isdn_external';
+@mask = (0,0,0,0,0,0,1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0) if $netcnx->{type} =~ /adsl/;
+@mask = (0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0) if $netcnx->{type} eq 'cable';
 
     my @conf_data = ([ N("Card IRQ"), \$cnx->{irq} ],
 		     [ N("Card mem (DMA)"), \$cnx->{mem} ],
@@ -595,39 +592,32 @@ Create one first by clicking on 'Configure'")),1,1,0);
 		     [ N("Connection speed"), \$cnx->{speed}, ["64 Kb/s", "128 Kb/s"] ],
 		     [ N("Connection timeout (in sec)"), \$cnx->{huptimeout} ]
 );
+    my @infos;
     foreach (@conf_data) {
-	$infos[2*$i] = new Gtk2::HBox(0,0);
-	my $l = new Gtk2::Label($_->[0]);
-	$l->set_justify('left');
-	$infos[2*$i]->pack_start($l,1,1,0);
-	$vbox2->pack_start($infos[2*$i],0,0,0);
-  	if (defined $_->[2]) {
-	    my $c = new Gtk2::Combo();
-	    $c->set_popdown_strings(@{$_->[2]});
-	    $infos[2*$i+1] = $c->entry;
-	    $infos[2*$i]->pack_start($c,0,0,0);
-	} else {
-	    $infos[2*$i+1] = new Gtk2::Entry();
-	    $infos[2*$i]->pack_start($infos[2*$i+1],0,0,0);
-	    #hide password if Entry Password
-	    if ($_->[0] eq N("Account Password") || $_->[0] eq N("Password")) { $infos[2*$i+1]->set_visibility(0) };
-	}
-	$infos[2*$i+1]->set_text(${$_->[1]});
-  	$i++;
+        if (!$mask[$i]) {
+            $i++;
+            next;
+        }
+        $infos[2*$i] = new Gtk2::HBox(0,0);
+        my $l = new Gtk2::Label($_->[0]);
+        $l->set_justify('left');
+        $infos[2*$i]->pack_start($l, 0, 0, 0);
+        $vbox2->pack_start($infos[2*$i], 0, 0, 0);
+        if (defined $_->[2]) {
+            my $c = new Gtk2::Combo();
+            $c->set_popdown_strings(@{$_->[2]});
+            $infos[2*$i+1] = $c->entry;
+            $infos[2*$i]->pack_start($c,0 , 0, 0);
+        } else {
+            $infos[2*$i+1] = new Gtk2::Entry();
+            $infos[2*$i]->pack_start($infos[2*$i+1], 0, 0, 0);
+            #hide password if Entry Password
+            if ($_->[0] eq N("Account Password") || $_->[0] eq N("Password")) { $infos[2*$i+1]->set_visibility(0) };
+        }
+        $infos[2*$i+1]->set_text(${$_->[1]});
+        $i++;
     }
-    my @mask;
-@mask = (0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0) if $netcnx->{type} eq 'lan';
-@mask = (0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1) if $netcnx->{type} eq 'isdn_internal' && defined $cnx->{vendor} && defined $cnx->{id};
-@mask = (1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1) if $netcnx->{type} eq 'isdn_internal' && (!defined $cnx->{vendor} || !defined $cnx->{id});
-@mask = (0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0) if $netcnx->{type} eq 'modem' || $netcnx->{type} eq 'isdn_external';
-@mask = (0,0,0,0,0,0,1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0) if $netcnx->{type} =~ /adsl/;
-@mask = (0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0) if $netcnx->{type} eq 'cable';
-    $vbox1->pack_start(new Gtk2::HSeparator,0,0,5);
 
-
-    my $bbox9 = new Gtk2::HButtonBox;
-    $vbox1->pack_start($bbox9,0,0,0);
-    $bbox9->set_layout('end');
     my $button_ok = new Gtk2::Button(N("OK"));
     $button_ok->signal_connect(clicked => sub {
 				     each_index {
@@ -637,14 +627,27 @@ Create one first by clicking on 'Configure'")),1,1,0);
 				     $button_apply->set_sensitive(1);
 				     $window->destroy(); Gtk2->main_quit;
 				 });
-    $bbox9->add($button_ok);
     my $button_cancel = new Gtk2::Button(N("Cancel"));
     $button_cancel->signal_connect(clicked => sub { $window->destroy(); Gtk2->main_quit });
-    $bbox9->add($button_cancel);
 
     $window->set_modal(1);
+
+    gtkadd($window,
+           gtkpack__(new Gtk2::VBox(0, 0),
+                     new Gtk2::Label(N("Internet Connection Configuration")),
+                     new Gtk2::HSeparator,
+                     $table1,
+                     new Gtk2::HSeparator,
+                     gtkadd(Gtk2::Frame->new(N("Parameters")), $vbox2),
+                     new Gtk2::HSeparator,
+                     gtkadd(gtkset_layout(Gtk2::HButtonBox->new, 'end'),
+                            $button_ok,
+                            $button_cancel,
+                           ),
+                    ),
+          );
+
     $window->show_all();
-    each_index { $_ ? $infos[2*$::i]->show : $infos[2*$::i]->hide } @mask;
     Gtk2->main;
 }
 
