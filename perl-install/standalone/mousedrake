@@ -22,12 +22,21 @@ my $in = vnew interactive('su');
 
 -r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
 
+undef $::Plug;
 begin:
 my ($mouse) = mouse::detect() unless $::noauto;
 
 $::isEmbedded and kill USR2, $::CCPID;
 if (!$mouse || !$::auto) {
     $mouse ||= mouse::fullname2mouse("serial|Generic 2 Button Mouse");
+    if ($::isEmbedded && ref($in) =~ /gtk/) {
+	require my_gtk;
+	my $time_tag = Gtk->timeout_add(100, sub {
+					    defined $::Plug && defined $::Plug->child or return 1;
+					    test_mouse($mouse,$::Plug->child);
+					    0;
+					});
+    }
     my $name = $in->ask_from_treelistf('', _("Please, choose the type of your mouse."), '|',
 				       sub { join '|', map { translate($_) } split '\|', $_[0] },
 				       [ mouse::fullnames ], 
@@ -48,8 +57,88 @@ $mouse->{device} =
 		     \&mouse::serial_port2text,
 		     [ mouse::serial_ports ]) || goto begin if $mouse->{type} eq 'serial';
 
+#test_mouse($mouse) if $::isEmbedded;
 mouse::write_conf($mouse);
 -e "/var/lock/subsys/gpm" and system "service", "gpm", "restart";
 
 $::isEmbedded ? kill(USR1, $::CCPID) : $in->exit(0);
 goto begin;
+
+
+sub test_mouse {
+    my ($mouse, $hbox) = @_;
+
+    my ($width, $height, $offset) = (210, round_up(min(350, $::windowheight - 150), 6), 25);
+    my ($bw, $bh) = ($width / 3, $height / 3);
+
+    my $darea = new Gtk::DrawingArea;
+    $darea->set_events([ 'button_press_mask', 'button_release_mask' ]);  #$darea must be unrealized.
+    my_gtk::gtkpack($hbox, my_gtk::gtkset_border_width(my_gtk::gtkpack(new Gtk::VBox(0,10), my_gtk::gtksize(my_gtk::gtkset_usize($darea, $width+1, $height+1), $width, $height)),10));
+    my $draw_rect; $draw_rect = sub {
+	my ($black, $fill, $rect) = @_;
+	$draw_rect->(0, 1, $rect) if !$fill; #- blank it first
+	$darea->window->draw_rectangle($black ? $darea->style->fg_gc('normal') : $darea->style->bg_gc('normal'), $fill, @$rect);
+	$darea->draw($rect);
+    };
+    my $paintWheel = sub {
+	my ($x, $y, $w, $h) = ($width / 2 - $bw / 6, $bh / 4, $bw / 3, $bh / 2);
+	$mouse->{nbuttons} = max($mouse->{nbuttons}, 5); #- it means, the mouse has more than 3 buttons...
+	$draw_rect->(1, 0, [ $x, $y, $w, $h ]);
+
+	my $offset = 0 if 0;
+	$offset += $_[0] if $_[0];
+	my $step = 10;
+	for (my $i = $offset % $step; $i < $h; $i += $step) {
+	    $draw_rect->(1, 1, [ $x, $y + $i, $w, min(2, $h - $i) ]);
+	}
+    };
+    my $paintButton = sub {
+	my ($nb, $pressed) = @_;
+	my $rect = [ $bw * $nb, 0, $bw, $bh ];
+	$draw_rect->(1, $pressed, $rect);
+	$paintWheel->(0) if $nb == 1 && $mouse->{nbuttons} > 3;
+    };
+    my $draw_text = sub {
+	my ($t, $y) = @_;
+	my $font = $darea->style->font;
+	my $w = $font->string_width($t);
+	$darea->window->draw_string($font, $darea->style->fg_gc('normal'), ($width - $w) / 2, $y, $t);
+    };
+    my $default_time = 10;
+    my $time = $default_time;
+    my $expose1 = 0;
+    my $expose2 = 1;
+    $darea->signal_connect(button_press_event => sub {
+			       my $b = $_[1]{button};
+			       $time = $default_time;
+			       $b >= 4 ?
+				 $paintWheel->($b == 4 ? -1 : 1) :
+				 $paintButton->($b - 1, 1);
+			       $expose2 = 0;
+			   });
+    $darea->signal_connect(button_release_event => sub { 
+			       my $b = $_[1]{button};
+			       $paintButton->($b - 1, 0) if $b < 4;
+			       $expose2 = 1;
+			   });
+    $darea->signal_connect(expose_event => sub { $expose = 1 });
+    my $time_tag = Gtk->timeout_add(100, sub {
+					$expose && $expose2 or return 1;
+					print "PLOP\n";
+					$expose = 0;
+					$draw_rect->(1, 0, [ 0, 0, $width, $height]);
+					$draw_text->(_("Please test the mouse"), 2 * $bh - 20);
+					$draw_text->(_("To activate the mouse,"), 2 * $bh + 10) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+					$draw_text->(_("MOVE YOUR WHEEL!"),     2 * $bh + 30) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+					$paintButton->($_, 0) foreach 0..2;
+					$expose = 0;
+					1;
+				    });
+    $hbox->show_all;
+    Gtk->main_iteration while Gtk->events_pending;
+
+#    $w->{cancel}->grab_focus;
+#    my $timeout = Gtk->timeout_add(1000, sub { if ($time-- == 0) { log::l("timeout test_mouse"); undef $w->{retval}; Gtk->main_quit } 1 });
+#    my $b = before_leaving { log::l("removing timeout"); Gtk->timeout_remove($timeout) };
+#    $w->main;
+}
