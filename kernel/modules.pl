@@ -34,16 +34,13 @@ my %modules_only_for_all_img = (
   'disk/scsi' => [
     # ISA cards:
     qw(NCR53c406a aha152x psi240i qlogicfas qlogicfc wd7000 sim710 t128 ultrastor), '53c7,8xx',
+    qw(qla2x00 in2000 pas16 a100u2w seagate g_NCR5380),
+    qw(AM53C974), # deprecated by tmscsim
+    qw(u14-34f), #- duplicate from ultrastor.o
     #- still used, keeping them: qw(aha1542 sym53c416),
 
-    qw(dc395x_trm BusLogic seagate fdomain g_NCR5380),
-
-    qw(3w-xxxx pci2220i qla2x00),
-    qw(eata eata_pio eata_dma),
-    qw(in2000 pas16 a100u2w),
-
-    'AM53C974', # deprecated by tmscsim
-    "u14-34f", #- duplicate from ultrastor.o
+    qw(dc395x_trm BusLogic fdomain),
+    qw(pci2220i eata eata_pio eata_dma),
   ],
 
   'disk/hardware_raid' => [
