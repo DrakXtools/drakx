@@ -30,7 +30,7 @@ my %mice =
  [ [ 'psaux' ],
    [ [ 2, 'ps/2', 'PS/2', N_("Standard") ],
      [ 5, 'ps/2', 'MouseManPlusPS/2', N_("Logitech MouseMan+") ],
-     [ 5, 'imps2', 'IMPS/2', N_("Generic PS2 Wheel Mouse") ],
+     [ 5, 'imps2', 'auto', N_("Generic PS2 Wheel Mouse") ],
      [ 5, 'ps/2', 'GlidePointPS/2', N_("GlidePoint") ],
      '',
      [ 5, 'ps/2', 'ThinkingMousePS/2', N_("Kensington Thinking Mouse") ],
@@ -259,7 +259,7 @@ sub detect() {
 
     my @wacom;
     my $fast_mouse_probe = sub {
-	my $auxmouse = detect_devices::hasMousePS2("psaux") && fullname2mouse("PS/2|Standard", unsafe => 1);
+	my $auxmouse = detect_devices::hasMousePS2("psaux") && fullname2mouse("PS/2|Generic PS2 Wheel Mouse", unsafe => 0);
 
 	#- workaround for some special case were mouse is openable 1/2.
 	unless ($auxmouse) {
