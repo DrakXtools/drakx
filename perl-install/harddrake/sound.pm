@@ -19,7 +19,6 @@ use common;
 use interactive;
 use run_program;
 use modules;
-use standalone;
 use list_modules;
 use detect_devices;
 
@@ -143,6 +142,7 @@ sub get_alternative {
 
 sub do_switch {
     my ($old_driver, $new_driver) = @_;
+    require standalone;
     standalone::explanations("removing old $old_driver\n");
     rooted("service sound stop") unless $blacklisted;
     rooted("service alsa stop") if $old_driver =~ /^snd-/ && !$blacklisted;
@@ -263,7 +263,7 @@ initlevel 3
 sub configure_sound_slots {
     each_index {
         modules::add_alias("sound-slot-$::i", $_->{driver});
-      } getSoundDevices();
+    } detect_devices::getSoundDevices();
 }
 
 
