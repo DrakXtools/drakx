@@ -29,8 +29,10 @@ sub write_cnx_script {
 
 sub write_secret_backend {
     my ($a, $b) = @_;
-    foreach my $i ("pap-secrets", "chap-secrets") {
-	substInFile { s/^'$a'.*\n//; $_ .= "\n'$a' * '$b' * \n" if eof  } "$prefix/etc/ppp/$i";
+    foreach my $i ("$prefix/etc/ppp/pap-secrets", "$prefix/etc/ppp/chap-secrets") {
+	substInFile { s/^'$a'.*\n//; $_ .= "\n'$a' * '$b' * \n" if eof  } $i;
+	#- restore access right to secrets file, just in case.
+	chmod 0600, $i;
     }
 }
 
