@@ -574,7 +574,7 @@ killall pppd
                                         'speedtouch' => [ 'speedtouch', '/usr/share/speedtouch/speedtouch.sh' ],
                                        );
                         return 'adsl_unsupported_eci' if $ntf_name eq 'eci';
-                        $netconnect::need_restart_network = member($ntf_name, qw(speedtouch eci));
+                        $need_restart_network = member($ntf_name, qw(speedtouch eci));
                         $in->do_pkgs->install($packages{$ntf_name}->[0]) if $packages{$ntf_name} && !-e $packages{$ntf_name}->[1];
                         if ($ntf_name eq 'speedtouch' && ! -r '$::prefix/usr/share/speedtouch/mgmt.o' && !$::testing) {
                             $in->do_pkgs->what_provides("speedtouch_mgmt") and 
@@ -1084,7 +1084,7 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                         
                         network::network::configureNetwork2($in, $::prefix, $netc, $intf);
                         $network_configured = 1;
-                        return "restart" if $netconnect::need_restart_network && $::isStandalone && !$::expert;
+                        return "restart" if $need_restart_network && $::isStandalone && !$::expert;
                         return $offer_to_connect->();
                     },
                    },
