@@ -526,6 +526,10 @@ my %gtkqt_im =
            },
 
 );
+
+sub get_ims() {
+    %gtkqt_im;
+}
            
 
 my %xim = (
@@ -1002,6 +1006,7 @@ sub write {
 	}
 	
     }
+    add2hash $h, $gtkqt_im{$locale->{IM}};
     add2hash $h, $xim{$h->{LANG}};
 
     #- deactivate translations on console for RTL languages
