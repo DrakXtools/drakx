@@ -12,6 +12,8 @@ ln -s /tmp/stage2/etc/* /etc 2>/dev/null
 
 rm -f /dev ; cp -a /tmp/stage2/dev /dev
 
+mkdir /mnt
+
 mkdir /proc
 action "Mounting proc filesystem" mount -n -t proc /proc /proc
 
