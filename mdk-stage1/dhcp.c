@@ -174,6 +174,10 @@ static int initial_setup_interface(char * device, int s) {
 		return -1;
 	}
 
+	/* I need to sleep a bit in order for kernel to finish init of the
+           network device */
+	sleep(2);
+
 	return 0;
 }
 
@@ -215,26 +219,32 @@ static void parse_reply(struct bootp_request * breq, struct interface_info * int
 		case BOOTP_OPTION_DNS:
 			memcpy(&dns_server, chptr, sizeof(dns_server));
 			log_message("got dns %s", inet_ntoa(dns_server));
-			if (length >= sizeof(dns_server)*2)
+			if (length >= sizeof(dns_server)*2) {
 				memcpy(&dns_server2, chptr+sizeof(dns_server), sizeof(dns_server2));
+				log_message("got dns2 %s", inet_ntoa(dns_server2));
+			}
 			break;
 
 		case BOOTP_OPTION_NETMASK:
-			memcpy(&intf->netmask, chptr, 4);
+			memcpy(&intf->netmask, chptr, sizeof(intf->netmask));
+			log_message("got netmask %s", inet_ntoa(intf->netmask));
 			break;
 		    
 		case BOOTP_OPTION_DOMAIN:
 			memcpy(tmp_str, chptr, length);
 			tmp_str[length] = '\0';
 			domain = strdup(tmp_str);
+			log_message("got domain %s", domain);
 			break;
 
 		case BOOTP_OPTION_BROADCAST:
-			memcpy(&intf->broadcast, chptr, 4);
+			memcpy(&intf->broadcast, chptr, sizeof(intf->broadcast));
+			log_message("got broadcast %s", inet_ntoa(intf->broadcast));
 			break;
 
 		case BOOTP_OPTION_GATEWAY:
-			memcpy(&gateway, chptr, 4);
+			memcpy(&gateway, chptr, sizeof(gateway));
+			log_message("got gateway %s", inet_ntoa(gateway));
 			break;
 
 		case BOOTP_OPTION_HOSTNAME:
