@@ -586,6 +586,8 @@ _("Color depth options") => { val => \$o->{printer}{BITSPERPIXEL}, type => 'list
 	  if $action eq "ps" || $action eq "both";
 
 	if (@testpages) {
+	    my $w = $o->wait_message('', _(@testpages > 1 ? "Printing tests pages..." : "Printing test page..."));
+
 	    #- restart lpd with blank spool queue.
 	    foreach (("/var/spool/lpd/$o->{printer}{QUEUE}/lock", "/var/spool/lpd/lpd.lock")) {
 		$pidlpd = (cat_("$o->{prefix}$_"))[0]; kill 'TERM', $pidlpd if $pidlpd;
@@ -596,7 +598,16 @@ _("Color depth options") => { val => \$o->{printer}{BITSPERPIXEL}, type => 'list
 
 	    run_program::rooted($o->{prefix}, "lpr", "-P$o->{printer}{QUEUE}", $_) foreach @testpages;
 
-	    $action = $o->ask_yesorno('', _("Is this correct?"), 1) ? 'done' : 'change';
+	    sleep 3; #- allow lpr to send pages.
+	    local *F; open F, "chroot $o->{prefix} /usr/bin/lpq |";
+	    my @lpq_output = grep { !/^no entries/ && !(/^Rank\s+Owner/ .. /^\s*$/) } <F>;
+
+	    $w = undef; #- erase wait message window.
+	    if (@lpq_output) {
+		$action = $o->ask_yesorno('', _("Is this correct? Printing status:\n%s", "@lpq_output"), 1) ? 'done' : 'change';
+	    } else {
+		$action = $o->ask_yesorno('', _("Is this correct?"), 1) ? 'done' : 'change';
+	    }
 	}
     } while ($action ne 'done');
     $o->{printer}{complete} = 1;
@@ -911,10 +922,11 @@ sub setupXfree {
     my ($o) = @_;
     $o->setupXfreeBefore;
 
-    #- maybe better to do before getinfoFromDDC (probe for changed config).
-    if ($o->{isUpgrade} && -r "$o->{prefix}/etc/X11/XF86Config" &&
-	($::beginner || $o->ask_yesorno('', _("Use existing configuration for X11?"), 1))) {
-	Xconfig::getinfoFromXF86Config($o->{X}, $o->{prefix});
+    #- by default do not use existing configuration, so new card will be detected.
+    if ($o->{isUpgrade} && -r "$o->{prefix}/etc/X11/XF86Config") {
+	unless ($::beginner || !$o->ask_yesorno('', _("Use existing configuration for X11?"), 0)) {
+	    Xconfig::getinfoFromXF86Config($o->{X}, $o->{prefix});
+	}
     }
     #- strange, xfs must not be started twice...
     #- trying to stop and restart it does nothing good too...
@@ -1024,7 +1036,7 @@ sub load_thiskind {
     my $w; #- needed to make the wait_message stay alive
     my $pcmcia = $o->{pcmcia}
       unless !$::beginner && modules::pcmcia_need_config($o->{pcmcia}) && 
-	     $o->ask_yesorno('', _("Skip %s PCMCIA probing", $type), 1);
+	     !$o->ask_yesorno('', _("Try to find PCMCIA cards?"), 1);
     $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards...")) if modules::pcmcia_need_config($pcmcia);
     modules::load_thiskind($type, sub { $w = wait_load_module($o, $type, @_) }, $pcmcia);
 }
