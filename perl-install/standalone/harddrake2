@@ -144,8 +144,8 @@ $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                            1, create_hpaned(gtkadd(new Gtk2::Frame(N("Detected hardware")), 
                                                    create_scrolled_window(gtkset_size_request(my $tree = Gtk2::TreeView->new_with_model($tree_model), 350, -1))),
                                             gtkpack_(0, Gtk2::VBox->new(0, 0),
-                                                     1, gtkadd(gtkset_size_request(new Gtk2::Frame(N("Information")), 300, 450),
-                                                               create_scrolled_window(my $text = Gtk2::TextView->new)), 
+                                                     1, gtkadd(my $frame = new Gtk2::Frame(N("Information")),
+                                                               create_scrolled_window(my $text = Gtk2::TextView->new)),
                                                      0, my $module_cfg_button = gtksignal_connect(new Gtk2::Button(N("Configure module")),
                                                                                                   clicked => sub {
                                                                                                       require modules::interactive;
@@ -164,7 +164,7 @@ $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                                                                                                   }
                                                                                               })
                                                      ),
-                                            'resize2' => 1, 'resize1' => 1, 'shrink1' => 0, 'shrink2' => 1
+                                            ( 'resize1' => 1)
                                             ),
                            0, $statusbar = new Gtk2::Statusbar,
                            if_($::isEmbedded, 0, gtksignal_connect(my $but = new Gtk2::Button(N("Quit")),
@@ -172,6 +172,7 @@ $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                            )
                   );
 
+$frame->set_size_request(300, 450) unless $::isEmbedded;
 #    $tree->set_column_auto_resize(0, 1);
 my (%data, %configurators);
 $tree->append_column(my $pixcolumn  = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 0));
