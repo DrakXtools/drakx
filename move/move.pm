@@ -155,13 +155,13 @@ sub init {
 
 drakx_stuff:
     $o->{steps}{$_} = { reachable => 1, text => $_ }
-      foreach qw(displayBackground autoSelectLanguage handleI18NClp verifyKey configMove startMove);
+      foreach qw(initGraphical autoSelectLanguage handleI18NClp verifyKey configMove startMove);
     $o->{orderedSteps_orig} = $o->{orderedSteps};
     $o->{orderedSteps} = [ $using_existing_host_config ?
-                           qw(displayBackground verifyKey startMove)
+                           qw(initGraphical verifyKey startMove)
                          : $using_existing_user_config ?
-                           qw(displayBackground autoSelectLanguage verifyKey selectMouse selectKeyboard configMove startMove)
-                         : qw(displayBackground selectLanguage handleI18NClp acceptLicense verifyKey selectMouse selectKeyboard configMove startMove) ];
+                           qw(initGraphical autoSelectLanguage verifyKey selectMouse selectKeyboard configMove startMove)
+                         : qw(initGraphical selectLanguage handleI18NClp acceptLicense verifyKey selectMouse selectKeyboard configMove startMove) ];
     $o->{steps}{first} = $o->{orderedSteps}[0];
 
     #- don't use shadow passwords since pwconv overwrites /etc/shadow hence contents will be lost for usb key
@@ -288,6 +288,11 @@ sub key_installfiles {
     unlink($_), system("cp /image/$_ $_") foreach qw(/etc/sudoers);
 }
 
+sub reboot {
+    touch '/tmp/reboot';  #- tell X_move to not respawn
+    system("killall X");  #- kill it ourselves to be sure that it won't lock console when killed by our init
+    exit 0;
+}
 
 sub install2::verifyKey {
     my ($o) = $::o;
@@ -330,7 +335,7 @@ unplug it now.
 Click the button to reboot the machine, unplug it, remove write protection,
 plug the key again, and launch Mandrake Move again.")),
                             ok => N("Reboot") });
-            exit(0);
+            reboot();
         }
 
         modules::unload('usb-storage');  #- it won't notice change on write protection otherwise :/
@@ -471,11 +476,45 @@ sub install_TrueFS_in_home {
     }
 }
 
-sub install2::displayBackground {
+sub errorInStep {
+    my ($o, $err) = @_;
+
+    if (!fsedit::mntpoint2part('/home', $o->{fstab})) {
+        $o->ask_warn(N("Error"), [ N("An error occurred"), formatError($err) ]);
+        return;
+    }
+
+    $o->ask_okcancel_({ title => N("Error"), 
+                        messages => formatAlaTeX(
+N("An error occurred:
+
+
+%s
+
+This may come from corrupted system configuration files
+on the USB key, in this case removing them and then
+rebooting Mandrake Move would fix the problem. To do
+so, click on the corresponding button.
+
+
+You may also want to reboot and remove the USB key, or
+examine its contents under another OS, or even have
+a look at log files in console #3 and #4 to try to
+guess what's happening.", formatError($err))),
+                            ok => N("Remove system config files"),
+                            cancel => N("Simply reboot") }) or goto reboot;
+    eval { rm_rf $key_sysconf };
+reboot:
+    reboot();
+}
+
+sub install2::initGraphical {
     my $xdim = $::rootwidth;
     $xdim < 800 and $xdim = 800;
     $xdim > 1600 and $xdim = 1600;
     system("qiv --root /image/move/BOOT-$xdim-MOVE.jpg");
+    
+    *install_steps_interactive::errorInStep = \&errorInStep;
 }
 
 sub install2::startMove {
