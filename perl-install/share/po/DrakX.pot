@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-07-21 21:23+0200\n"
+"POT-Creation-Date: 2003-07-25 16:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,6 +86,13 @@ msgstr ""
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Post-install configuration"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"The current security level is %s\n"
+"Select permissions to see/edit"
 msgstr ""
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/hd_gtk.pm:1
@@ -527,7 +534,7 @@ msgstr ""
 msgid "dhcpd Server Configuration"
 msgstr ""
 
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakperm:1 ../../standalone/drakperm:1
 #, c-format
 msgid ""
 "Used for directory:\n"
@@ -552,14 +559,6 @@ msgstr ""
 #: ../../any.pm:1 ../../any.pm:1 ../../install_steps_interactive.pm:1 ../../diskdrake/smbnfs_gtk.pm:1 ../../network/modem.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Password"
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (max, inactive=-1)\n"
-"\n"
-"Set password aging to \\fImax\\fP days and delay to change to \\fIinactive\\fP."
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -910,23 +909,6 @@ msgstr ""
 msgid "Notice"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Activate/Disable daily security check."
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable crontab and at for users. Put allowed users in /etc/cron.allow and /etc/at.allow\n"
-"(see man at(1) and crontab(1))."
-msgstr ""
-
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
@@ -1004,16 +986,6 @@ msgid ""
 "\trestore the base and then the differential from a certain date.\n"
 "\n"
 ""
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, expr='*.*', dev='tty12')\n"
-"\n"
-"Enable/Disable syslog reports to console 12. \\fIexpr\\fP is the\n"
-"expression describing what to log (see syslog.conf(5) for more details) and\n"
-"dev the device to report the log."
 msgstr ""
 
 #: ../../modules/parameters.pm:1
@@ -1165,6 +1137,11 @@ msgid ""
 "The Mandrake Linux installation is distributed on several CD-ROMs. DrakX\n"
 "knows if a selected package is located on another CD-ROM so it will eject\n"
 "the current CD and ask you to insert the correct CD as required."
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "When checked, owner and group won't be changed"
 msgstr ""
 
 #: ../../harddrake/data.pm:1
@@ -1363,7 +1340,7 @@ msgstr ""
 msgid "Cable connection"
 msgstr ""
 
-#: ../../standalone/logdrake:1
+#: ../../standalone/drakperm:1 ../../standalone/drakperm:1 ../../standalone/logdrake:1
 #, c-format
 msgid "User"
 msgstr ""
@@ -1418,11 +1395,6 @@ msgstr ""
 #: ../../any.pm:1
 #, c-format
 msgid "access to rpm tools"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "edit"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -1546,6 +1518,11 @@ msgstr ""
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr ""
 
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr ""
+
 #: ../../mouse.pm:1 ../../mouse.pm:1
 #, c-format
 msgid "Generic 2 Button Mouse"
@@ -1604,6 +1581,11 @@ msgstr ""
 msgid ""
 "There is already a partition with mount point %s\n"
 ""
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable msec hourly security check."
 msgstr ""
 
 #: ../../help.pm:1
@@ -1772,6 +1754,18 @@ msgstr ""
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "Autoprobe"
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"if set to yes, check for :\n"
+"\n"
+"- empty passwords,\n"
+"\n"
+"- no password in /etc/shadow\n"
+"\n"
+"- for users with the 0 id other than root."
 msgstr ""
 
 #: ../../standalone/drakbackup:1 ../../standalone/drakbackup:1
@@ -1986,6 +1980,11 @@ msgstr ""
 msgid "The network access was not running and could not be started. Please check your configuration and your hardware. Then try to configure your remote printer again."
 msgstr ""
 
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to write the file"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Please insert the Boot floppy used in drive %s"
@@ -2132,6 +2131,11 @@ msgstr ""
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Terminal-based"
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable IP spoofing protection."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -2321,6 +2325,11 @@ msgstr ""
 msgid "Tokelau"
 msgstr ""
 
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "Matching"
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Bosnian"
@@ -2429,14 +2438,6 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Activate/Disable ethernet cards promiscuity check."
-msgstr ""
-
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Direct root login"
@@ -2507,14 +2508,14 @@ msgstr ""
 msgid "named (BIND) is a Domain Name Server (DNS) that is used to resolve host names to IP addresses."
 msgstr ""
 
-#: ../../standalone/drakconnect:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Disconnect..."
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Lucia"
+msgstr ""
+
+#: ../../standalone/drakconnect:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Disconnect..."
 msgstr ""
 
 #: ../../standalone/drakbug:1
@@ -2726,14 +2727,6 @@ msgstr ""
 msgid "Fiji"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (length, ndigits=0, nupper=0)\n"
-"\n"
-"Set the password minimum length and minimum number of digit and minimum number of capitalized letters."
-msgstr ""
-
 #: ../../any.pm:1
 #, c-format
 msgid "Second floppy drive"
@@ -2812,11 +2805,6 @@ msgid ""
 "%s\n"
 "are available on your system.\n"
 ""
-msgstr ""
-
-#: ../../standalone/draksec:1
-#, c-format
-msgid "N_ON_E"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -2909,6 +2897,11 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Romania"
+msgstr ""
+
+#: ../../standalone/drakperm:1 ../../standalone/drakperm:1
+#, c-format
+msgid "Group"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
@@ -3180,14 +3173,14 @@ msgstr ""
 msgid "not enough room in /boot"
 msgstr ""
 
-#: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid "Host name"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Liechtenstein"
+msgstr ""
+
+#: ../../network/ethernet.pm:1 ../../network/network.pm:1
+#, c-format
+msgid "Host name"
 msgstr ""
 
 #: ../../standalone/draksplash:1
@@ -3356,14 +3349,6 @@ msgstr ""
 msgid "Restarting printing system..."
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (name)\n"
-"\n"
-"Add the name as an exception to the handling of password aging by msec."
-msgstr ""
-
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "See hardware info"
@@ -3461,6 +3446,11 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "new"
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable syslog reports to console 12"
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
@@ -3649,14 +3639,6 @@ msgstr ""
 msgid "Argentina"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Accept/Refuse broadcasted icmp echo."
-msgstr ""
-
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Domain Name Server"
@@ -3753,17 +3735,14 @@ msgstr ""
 msgid "Please choose your CD/DVD media size (Mb)"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Enabling su only from members of the wheel group or allow su from any user."
-msgstr ""
-
 #: ../../Xconfig/monitor.pm:1
 #, c-format
 msgid "Choose a monitor"
+msgstr ""
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Bad Mask"
 msgstr ""
 
 #: ../../any.pm:1
@@ -4256,6 +4235,20 @@ msgstr ""
 msgid "Slovenian"
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Authorize:\n"
+"\n"
+"- all services controlled by tcp_wrappers (see hosts.deny(5) man page) if set to \"ALL\",\n"
+"\n"
+"- only local ones if set to \"LOCAL\"\n"
+"\n"
+"- none if set to \"NONE\".\n"
+"\n"
+"To authorize the services you need, use /etc/hosts.allow (see hosts.allow(5))."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Libya"
@@ -4293,14 +4286,6 @@ msgstr ""
 msgid "Model"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable libsafe if libsafe is found on the system."
-msgstr ""
-
 #: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "USB printer #%s"
@@ -4324,16 +4309,6 @@ msgstr ""
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Modem"
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, listen_tcp=None)\n"
-"\n"
-"Allow/Forbid X connections. First arg specifies what is done\n"
-"on the client side: ALL (all connections are allowed), LOCAL (only\n"
-"local connection) and NONE (no connection)."
 msgstr ""
 
 #: ../../lang.pm:1
@@ -4402,14 +4377,6 @@ msgstr ""
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Del profile..."
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid the list of users on the system on display managers (kdm and gdm)."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -4497,6 +4464,11 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Start sector: "
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Read"
 msgstr ""
 
 #: ../../lang.pm:1
@@ -4685,14 +4657,6 @@ msgstr ""
 msgid "Equatorial Guinea"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid autologin."
-msgstr ""
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Build Backup"
@@ -4731,14 +4695,6 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Kiribati"
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid remote root login."
 msgstr ""
 
 #: ../../standalone/draksplash:1
@@ -5242,6 +5198,14 @@ msgstr ""
 msgid "Account Password"
 msgstr ""
 
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+"%s cannot be displayed \n"
+". No Help entry of this type\n"
+""
+msgstr ""
+
 #: ../../any.pm:1
 #, c-format
 msgid ""
@@ -5588,6 +5552,11 @@ msgid ""
 "driver."
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid "Set the root umask."
+msgstr ""
+
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Script-based"
@@ -5774,11 +5743,6 @@ msgstr ""
 #: ../../mouse.pm:1
 #, c-format
 msgid "none"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "user :"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -6033,6 +5997,11 @@ msgstr ""
 msgid "Click on a device in the left tree in order to display its information here."
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid "Allow/Forbid autologin."
+msgstr ""
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "XawTV isn't installed!"
@@ -6095,11 +6064,6 @@ msgstr ""
 msgid "Connection Time: "
 msgstr ""
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr ""
-
 #: ../../standalone/livedrake:1
 #, c-format
 msgid ""
@@ -6107,7 +6071,7 @@ msgid ""
 "If you don't have it, press Cancel to avoid live upgrade."
 msgstr ""
 
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakperm:1 ../../standalone/drakperm:1
 #, c-format
 msgid "Use group id for execution"
 msgstr ""
@@ -6414,15 +6378,6 @@ msgstr ""
 msgid "Greek"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"If \\fIarg\\fP = ALL allow /etc/issue and /etc/issue.net to exist. If \\fIarg\\fP = NONE no issues are\n"
-"allowed else only /etc/issue is allowed."
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Kitts and Nevis"
@@ -6456,11 +6411,6 @@ msgid ""
 ""
 msgstr ""
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "path"
-msgstr ""
-
 #: ../../diskdrake/dav.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Mount point"
@@ -6472,6 +6422,11 @@ msgid ""
 "An error occurred:\n"
 "%s\n"
 "Try to change some parameters"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "User :"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -6745,14 +6700,6 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable the logging of IPv4 strange packets."
-msgstr ""
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Please test the mouse"
@@ -6763,6 +6710,11 @@ msgstr ""
 msgid ""
 "Do not update inode access times on this file system\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Sticky-bit"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -6928,14 +6880,6 @@ msgstr ""
 msgid "Montserrat"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (val)\n"
-"\n"
-"Set the shell timeout. A value of zero means no timeout."
-msgstr ""
-
 #: ../../help.pm:1
 #, c-format
 msgid "Automatic dependencies"
@@ -6944,6 +6888,11 @@ msgstr ""
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Swap"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Custom settings"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -6964,14 +6913,6 @@ msgstr ""
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid ", "
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (umask)\n"
-"\n"
-"Set the root umask."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -7299,6 +7240,19 @@ msgstr ""
 msgid "Alternatively, you can specify a device name/file name in the input line"
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"If SERVER_LEVEL (or SECURE_LEVEL if absent)\n"
+"is greater than 3 in /etc/security/msec/security.conf, creates the\n"
+"symlink /etc/security/msec/server to point to\n"
+"/etc/security/msec/server.<SERVER_LEVEL>.\n"
+"\n"
+"The /etc/security/msec/server is used by chkconfig --add to decide to\n"
+"add a service if it is present in the file during the installation of\n"
+"packages."
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Russian (Phonetic)"
@@ -7438,6 +7392,11 @@ msgstr ""
 #: ../../standalone/draksec:1
 #, c-format
 msgid "(default value: %s)"
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -7704,7 +7663,7 @@ msgstr ""
 msgid "To be able to print with your Lexmark inkjet and this configuration, you need the inkjet printer drivers provided by Lexmark (http://www.lexmark.com/). Click on the \"Drivers\" link. Then choose your model and afterwards \"Linux\" as operating system. The drivers come as RPM packages or shell scripts with interactive graphical installation. You do not need to do this configuration by the graphical frontends. Cancel directly after the license agreement. Then print printhead alignment pages with \"lexmarkmaintain\" and adjust the head alignment settings with this program."
 msgstr ""
 
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakperm:1 ../../standalone/drakperm:1
 #, c-format
 msgid "Permissions"
 msgstr ""
@@ -7779,7 +7738,7 @@ msgid ""
 ""
 msgstr ""
 
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakperm:1 ../../standalone/drakperm:1
 #, c-format
 msgid "Path"
 msgstr ""
@@ -8456,6 +8415,11 @@ msgid ""
 ""
 msgstr ""
 
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to read the file"
+msgstr ""
+
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "choose image"
@@ -8808,7 +8772,7 @@ msgid ""
 ""
 msgstr ""
 
-#: ../../install_steps_gtk.pm:1 ../../mouse.pm:1 ../../services.pm:1 ../../diskdrake/hd_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../install_steps_gtk.pm:1 ../../mouse.pm:1 ../../services.pm:1 ../../diskdrake/hd_gtk.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakperm:1
 #, c-format
 msgid "Other"
 msgstr ""
@@ -9075,11 +9039,6 @@ msgstr ""
 msgid "Save theme"
 msgstr ""
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "group"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Brazil"
@@ -9294,6 +9253,13 @@ msgstr ""
 msgid "Read-only"
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Enable/Disable name resolution spoofing protection.  If\n"
+"\"alert\" is true, also reports to syslog."
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "No known driver"
@@ -9339,6 +9305,11 @@ msgstr ""
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Run some checks against the rpm database"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Execute"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -9497,7 +9468,7 @@ msgid ""
 "The new \"%s\" driver'll only be used on next bootstrap."
 msgstr ""
 
-#: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakfloppy:1
 #, c-format
 msgid "Expert Mode"
 msgstr ""
@@ -9517,6 +9488,11 @@ msgstr ""
 msgid "Backup your System files. (/etc directory)"
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid "Set the user umask."
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid ""
@@ -9533,14 +9509,6 @@ msgstr ""
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Samba Server"
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, alert=1)\n"
-"\n"
-"Enable/Disable IP spoofing protection."
 msgstr ""
 
 #: ../../standalone/drakxtv:1
@@ -9583,16 +9551,6 @@ msgstr ""
 msgid "Finland"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Authorize all services controlled by tcp_wrappers (see hosts.deny(5)) if \\fIarg\\fP = ALL. Only local ones\n"
-"if \\fIarg\\fP = LOCAL and none if \\fIarg\\fP = NONE. To authorize the services you need, use /etc/hosts.allow\n"
-"(see hosts.allow(5))."
-msgstr ""
-
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid ""
@@ -9608,6 +9566,11 @@ msgstr ""
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Loading from floppy"
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable the logging of IPv4 strange packets."
 msgstr ""
 
 #: ../../lang.pm:1
@@ -9765,10 +9728,7 @@ msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Accept/Refuse icmp echo."
+msgid " Enabling su only from members of the wheel group or allow su from any user."
 msgstr ""
 
 #: ../../standalone/drakgw:1 ../../standalone/drakgw:1
@@ -9953,6 +9913,21 @@ msgstr ""
 msgid "chunk size"
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
+"\n"
+"If set to NONE, no issues are allowed.\n"
+"\n"
+"Else only /etc/issue is allowed."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid " Enable/Disable sulogin(8) in single user level."
+msgstr ""
+
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
 #: ../../bootloader.pm:1
@@ -10068,6 +10043,11 @@ msgstr ""
 #: ../../standalone/draksec:1
 #, c-format
 msgid "Security Administrator:"
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -10215,6 +10195,11 @@ msgstr ""
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Zeroconf host name must not contain a ."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid " Accept/Refuse icmp echo."
 msgstr ""
 
 #: ../../services.pm:1
@@ -10492,6 +10477,11 @@ msgid ""
 "Your card is supported by XFree %s which may have a better support in 2D."
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid " Activate/Disable daily security check."
+msgstr ""
+
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Enable libsafe if libsafe is found on the system"
@@ -10662,18 +10652,6 @@ msgstr ""
 msgid " (Default)"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: ()\n"
-"\n"
-"If SERVER_LEVEL (or SECURE_LEVEL if absent) is greater than 3\n"
-"in /etc/security/msec/security.conf, creates the symlink /etc/security/msec/server\n"
-"to point to /etc/security/msec/server.<SERVER_LEVEL>. The /etc/security/msec/server\n"
-"is used by chkconfig --add to decide to add a service if it is present in the file\n"
-"during the installation of packages."
-msgstr ""
-
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Automatic reconfiguration"
@@ -10687,11 +10665,6 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Turks and Caicos Islands"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "permissions"
 msgstr ""
 
 #: ../../help.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../interactive/newt.pm:1 ../../printer/printerdrake.pm:1
@@ -10826,6 +10799,15 @@ msgstr ""
 msgid "Select the memory size of your graphics card"
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Enable/Disable crontab and at for users.\n"
+"\n"
+"Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
+"and crontab(1))."
+msgstr ""
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -10862,11 +10844,6 @@ msgstr ""
 msgid "Found %s %s interfaces"
 msgstr ""
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "sticky-bit"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Post Install"
@@ -10880,14 +10857,6 @@ msgstr ""
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IRQ"
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (umask)\n"
-"\n"
-"Set the user umask."
 msgstr ""
 
 #: ../../ugtk.pm:1 ../../standalone/logdrake:1
@@ -10983,18 +10952,14 @@ msgstr ""
 msgid "Saint Vincent and the Grenadines"
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid "Allow/Forbid reboot by the console user."
+msgstr ""
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "/File/_Open"
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"The argument specifies if clients are authorized to connect\n"
-"to the X server on the tcp port 6000 or not."
 msgstr ""
 
 #: ../../standalone/drakpxe:1
@@ -11129,14 +11094,6 @@ msgid ""
 "If you want to add, remove, or rename a printer, or if you want to change the default option settings (paper input tray, printout quality, ...), select \"Printer\" in the \"Hardware\" section of the Mandrake Control Center."
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Set the password history length to prevent password reuse."
-msgstr ""
-
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid ""
@@ -11153,6 +11110,11 @@ msgstr ""
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "%s on %s"
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Allow/Forbid remote root login."
 msgstr ""
 
 #: ../../help.pm:1
@@ -11323,11 +11285,6 @@ msgstr ""
 msgid ""
 "Resolution: %s\n"
 ""
-msgstr ""
-
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "matching"
 msgstr ""
 
 #: ../../install2.pm:1
@@ -11527,14 +11484,6 @@ msgstr ""
 msgid "Ftp Server"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable msec hourly security check."
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Uganda"
@@ -11548,14 +11497,6 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "the type of bus on which the mouse is connected"
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (size)\n"
-"\n"
-"Set shell commands history size. A value of -1 means unlimited."
 msgstr ""
 
 #: ../../help.pm:1
@@ -11862,6 +11803,18 @@ msgstr ""
 msgid "ignore"
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Allow/Forbid X connections:\n"
+"\n"
+"- ALL (all connections are allowed),\n"
+"\n"
+"- LOCAL (only connection from local machine),\n"
+"\n"
+"- NONE (no connection)."
+msgstr ""
+
 #: ../../printer/main.pm:1
 #, c-format
 msgid ", multi-function device on parallel port #%s"
@@ -11932,6 +11885,11 @@ msgstr ""
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Select a scanner model"
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Accept/Refuse bogus IPv4 error messages."
 msgstr ""
 
 #: ../../printer/data.pm:1
@@ -12205,6 +12163,16 @@ msgstr ""
 msgid "parse all fonts"
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid "Allow/Forbid direct root login."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid " Accept/Refuse broadcasted icmp echo."
+msgstr ""
+
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "With X"
@@ -12254,6 +12222,11 @@ msgstr ""
 #: ../../install_messages.pm:1
 #, c-format
 msgid "http://www.mandrakelinux.com/en/91errata.php3"
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable libsafe if libsafe is found on the system."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -12362,14 +12335,6 @@ msgstr ""
 #: ../../Xconfig/main.pm:1
 #, c-format
 msgid "Test"
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid direct root login."
 msgstr ""
 
 #: ../../lang.pm:1
@@ -12491,11 +12456,6 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP."
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "delete"
 msgstr ""
 
 #: ../../standalone/drakfont:1
@@ -12737,11 +12697,6 @@ msgstr ""
 msgid "IDE"
 msgstr ""
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "group :"
-msgstr ""
-
 #: ../../fs.pm:1 ../../fs.pm:1
 #, c-format
 msgid "mounting partition %s in directory %s failed"
@@ -12827,6 +12782,11 @@ msgstr ""
 #: ../../fsedit.pm:1
 #, c-format
 msgid "You can't use an encrypted file system for mount point %s"
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Set the password history length to prevent password reuse."
 msgstr ""
 
 #: ../../lang.pm:1
@@ -13062,14 +13022,6 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid reboot by the console user."
-msgstr ""
-
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid ""
@@ -13253,6 +13205,16 @@ msgstr ""
 msgid "Tamil (Typewriter-layout)"
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid "Use password to authenticate users."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Allow/Forbid the list of users on the system on display managers (kdm and gdm)."
+msgstr ""
+
 #: ../../standalone/drakautoinst:1 ../../standalone/drakautoinst:1
 #, c-format
 msgid "manual"
@@ -13406,14 +13368,14 @@ msgstr ""
 msgid "Laos"
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid "Activate/Disable ethernet cards promiscuity check."
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Up"
 msgstr ""
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
@@ -13521,6 +13483,11 @@ msgstr ""
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "New profile..."
+msgstr ""
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid "NONE"
 msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
@@ -13768,14 +13735,6 @@ msgstr ""
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Accept/Refuse bogus IPv4 error messages."
-msgstr ""
-
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "mkinitrd optional arguments"
@@ -13888,11 +13847,6 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Add host/network"
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid "if set to yes, check for empty passwords, for no password in /etc/shadow and for users with the 0 id other than root."
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -14097,14 +14051,19 @@ msgstr ""
 msgid "Card IO_1"
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Kazakhstan"
+msgstr ""
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Routers:"
 msgstr ""
 
-#: ../../lang.pm:1
+#: ../../standalone/drakperm:1
 #, c-format
-msgid "Kazakhstan"
+msgid "Write"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -14444,15 +14403,6 @@ msgid ""
 "partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, alert=1)\n"
-"\n"
-"Enable/Disable name resolution spoofing protection.  If\n"
-"\\fIalert\\fP is true, also reports to syslog."
-msgstr ""
-
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Please wait, preparing installation..."
@@ -14582,6 +14532,11 @@ msgstr ""
 msgid "Mayotte"
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid "Set shell commands history size. A value of -1 means unlimited."
+msgstr ""
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid ""
@@ -14649,6 +14604,11 @@ msgstr ""
 msgid "There's no free driver for your sound card (%s), but there's a proprietary driver at \"%s\"."
 msgstr ""
 
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Group :"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
@@ -14664,6 +14624,11 @@ msgstr ""
 msgid ""
 "Please enter the maximum size\n"
 " allowed for Drakbackup (Mb)"
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Add the name as an exception to the handling of password aging by msec."
 msgstr ""
 
 #: ../../standalone/drakxtv:1
@@ -14739,6 +14704,13 @@ msgstr ""
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Show current interface configuration"
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"The argument specifies if clients are authorized to connect\n"
+"to the X server from the network on the tcp port 6000 or not."
 msgstr ""
 
 #: ../../help.pm:1
@@ -15216,6 +15188,11 @@ msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
+msgid "Set the password minimum length and minimum number of digit and minimum number of capitalized letters."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
 msgid "if set to yes, check open ports."
 msgstr ""
 
@@ -15642,11 +15619,6 @@ msgstr ""
 msgid "default:LTR"
 msgstr ""
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "add a rule"
-msgstr ""
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "A command line must be entered!"
@@ -15692,14 +15664,6 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use network connection to backup"
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Enable/Disable sulogin(8) in single user level."
 msgstr ""
 
 #: ../../help.pm:1
@@ -15965,6 +15929,11 @@ msgstr ""
 msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr ""
 
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Level 1"
+msgstr ""
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "DHCP client"
@@ -15975,6 +15944,11 @@ msgstr ""
 msgid "List users on display managers (kdm and gdm)"
 msgstr ""
 
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Level 2"
+msgstr ""
+
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Restoring from file %s failed: %s"
@@ -15983,6 +15957,21 @@ msgstr ""
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech Mouse (serial, old C7 type)"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Level 3"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Level 4"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Level 5"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -16214,7 +16203,7 @@ msgstr ""
 msgid "Congratulations!"
 msgstr ""
 
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakperm:1 ../../standalone/drakperm:1
 #, c-format
 msgid "Use owner id for execution"
 msgstr ""
@@ -16222,11 +16211,6 @@ msgstr ""
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Allow remote root login"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Down"
 msgstr ""
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
@@ -16371,14 +16355,6 @@ msgstr ""
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "%s found on %s, configure it automatically?"
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Use password to authenticate users."
 msgstr ""
 
 #: ../../Xconfig/various.pm:1
@@ -16664,11 +16640,6 @@ msgid ""
 "\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
 "             Convert ttf font files to afm and pfb fonts\n"
 ""
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "user"
 msgstr ""
 
 #: ../../standalone/drakbackup:1

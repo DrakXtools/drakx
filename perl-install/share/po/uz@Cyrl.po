@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-uz@Cyrl\n"
-"POT-Creation-Date: 2003-07-21 21:23+0200\n"
+"POT-Creation-Date: 2003-07-25 16:52+0200\n"
 "PO-Revision-Date: 2003-07-23 04:27+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <uz-li@yahoogroups.com>\n"
@@ -90,6 +90,13 @@ msgstr "CUPS серверида \"%s\""
 #, c-format
 msgid "Post-install configuration"
 msgstr "Ўрнатишдан кегин мослаш"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"The current security level is %s\n"
+"Select permissions to see/edit"
+msgstr ""
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -577,15 +584,6 @@ msgstr "Модулни олиб ташлаш"
 msgid "Password"
 msgstr "Махфий сўз"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (max, inactive=-1)\n"
-"\n"
-"Set password aging to \\fImax\\fP days and delay to change to \\fIinactive"
-"\\fP."
-msgstr ""
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Advanced Configuration"
@@ -979,27 +977,6 @@ msgstr "Параметр %s сон бўлиши керак!"
 msgid "Notice"
 msgstr "Билдиришнома"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Activate/Disable daily security check."
-msgstr ""
-"Аргументлар: (arg) \n"
-"\n"
-" Кундалик хавфсизлик текширувини ёқиш/ўчириш."
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable crontab and at for users. Put allowed users in /etc/cron."
-"allow and /etc/at.allow\n"
-"(see man at(1) and crontab(1))."
-msgstr ""
-
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
@@ -1081,16 +1058,6 @@ msgid ""
 "\tdata to the initial base backup. This method allows one to\n"
 "\trestore the base and then the differential from a certain date.\n"
 "\n"
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, expr='*.*', dev='tty12')\n"
-"\n"
-"Enable/Disable syslog reports to console 12. \\fIexpr\\fP is the\n"
-"expression describing what to log (see syslog.conf(5) for more details) and\n"
-"dev the device to report the log."
 msgstr ""
 
 #: ../../modules/parameters.pm:1
@@ -1244,6 +1211,11 @@ msgid ""
 "knows if a selected package is located on another CD-ROM so it will eject\n"
 "the current CD and ask you to insert the correct CD as required."
 msgstr ""
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "When checked, owner and group won't be changed"
+msgstr "белгиланса, эгаси ва гурҳ ўзгартирилмайди"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -1445,7 +1417,7 @@ msgstr "Ҳажм ўзгартирилмоқда"
 msgid "Cable connection"
 msgstr "Кабел орқали уланиш"
 
-#: ../../standalone/logdrake:1
+#: ../../standalone/drakperm:1 ../../standalone/logdrake:1
 #, c-format
 msgid "User"
 msgstr "Фойдаланувчи"
@@ -1500,11 +1472,6 @@ msgstr "Исроилча (фонетик)"
 #, c-format
 msgid "access to rpm tools"
 msgstr "RPM асбобларидан фойдаланишга рухсат этиш"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "edit"
-msgstr "тузатиш"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1627,6 +1594,11 @@ msgstr ""
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Belgilash uchun %c va %c tugmalaridan foydalaning."
 
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 2 Button Mouse"
@@ -1688,6 +1660,11 @@ msgstr "Синов бет(лар) босиб чиқарилмоқда..."
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "%s улаш нуқтали дискнинг қисми аллақачон мавжуд\n"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Enable/Disable msec hourly security check."
+msgstr "Кундалик хавфсизлик текшируви"
 
 #: ../../help.pm:1
 #, c-format
@@ -1859,6 +1836,18 @@ msgstr "Мослаш ёрдамчиси"
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "Autoprobe"
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"if set to yes, check for :\n"
+"\n"
+"- empty passwords,\n"
+"\n"
+"- no password in /etc/shadow\n"
+"\n"
+"- for users with the 0 id other than root."
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -2086,6 +2075,11 @@ msgid ""
 "printer again."
 msgstr ""
 
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to write the file"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Please insert the Boot floppy used in drive %s"
@@ -2246,6 +2240,11 @@ msgstr "Ўчириб бўлмайдиган маълумот ташувчи!"
 #, c-format
 msgid "Terminal-based"
 msgstr "Терминалда асосланган"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable IP spoofing protection."
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -2435,6 +2434,11 @@ msgstr "Емаил орқали хабар беришни мослаш"
 msgid "Tokelau"
 msgstr "Токелау"
 
+#: ../../standalone/logdrake:1
+#, fuzzy, c-format
+msgid "Matching"
+msgstr "мос келадиган"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Bosnian"
@@ -2545,14 +2549,6 @@ msgstr "Испанча"
 msgid "Start"
 msgstr "Ишга тушириш"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Activate/Disable ethernet cards promiscuity check."
-msgstr ""
-
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Direct root login"
@@ -2651,15 +2647,15 @@ msgid ""
 "names to IP addresses."
 msgstr ""
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Disconnect..."
-msgstr "Узиш..."
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Lucia"
 msgstr "Сент-Люсия"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Disconnect..."
+msgstr "Узиш..."
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -2888,19 +2884,6 @@ msgstr "Арманистон"
 msgid "Fiji"
 msgstr "Фижи"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (length, ndigits=0, nupper=0)\n"
-"\n"
-"Set the password minimum length and minimum number of digit and minimum "
-"number of capitalized letters."
-msgstr ""
-"Аргументлар: (length, ndigits=0, nupper=0)\n"
-"\n"
-"Махфий сўзнинг энг қисқа узунлигини, ундаги сонларнинг ва бош ҳарфларнинг "
-"энг кичик сонини аниқлайди."
-
 #: ../../any.pm:1
 #, c-format
 msgid "Second floppy drive"
@@ -2983,11 +2966,6 @@ msgstr ""
 "\n"
 "%s\n"
 "системангизда мавжуд.\n"
-
-#: ../../standalone/draksec:1
-#, c-format
-msgid "N_ON_E"
-msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -3101,6 +3079,11 @@ msgstr ""
 #, c-format
 msgid "Romania"
 msgstr "Руминия"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Group"
+msgstr "Гуруҳ"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -3400,15 +3383,15 @@ msgstr "Сичқонча"
 msgid "not enough room in /boot"
 msgstr "/boot директориясида етарли жой йўқ"
 
-#: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid "Host name"
-msgstr "Компютернинг номи"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Liechtenstein"
 msgstr "Лихтенштейн"
+
+#: ../../network/ethernet.pm:1 ../../network/network.pm:1
+#, c-format
+msgid "Host name"
+msgstr "Компютернинг номи"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -3589,14 +3572,6 @@ msgstr "Улаш нуқталари фақат сон ёки ҳарфларда�
 msgid "Restarting printing system..."
 msgstr "Босиб чиқариш ситемаси бошқадан ишга туширилмоқда..."
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (name)\n"
-"\n"
-"Add the name as an exception to the handling of password aging by msec."
-msgstr ""
-
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "See hardware info"
@@ -3702,6 +3677,11 @@ msgstr "ҲардДраке"
 #, c-format
 msgid "new"
 msgstr "янги"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable syslog reports to console 12"
+msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3894,14 +3874,6 @@ msgstr ""
 msgid "Argentina"
 msgstr "Аргентина"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Accept/Refuse broadcasted icmp echo."
-msgstr ""
-
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Domain Name Server"
@@ -3997,18 +3969,15 @@ msgstr ""
 msgid "Please choose your CD/DVD media size (Mb)"
 msgstr "Илтимос CD/DVD'нинг ҳажмини танланг (Мб)"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Enabling su only from members of the wheel group or allow su from any user."
-msgstr ""
-
 #: ../../Xconfig/monitor.pm:1
 #, c-format
 msgid "Choose a monitor"
 msgstr "Мониторни танлаш"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Mask"
+msgstr "Ёмон пакет"
 
 #: ../../any.pm:1
 #, c-format
@@ -4517,6 +4486,22 @@ msgstr ""
 msgid "Slovenian"
 msgstr "Словенча"
 
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Authorize:\n"
+"\n"
+"- all services controlled by tcp_wrappers (see hosts.deny(5) man page) if "
+"set to \"ALL\",\n"
+"\n"
+"- only local ones if set to \"LOCAL\"\n"
+"\n"
+"- none if set to \"NONE\".\n"
+"\n"
+"To authorize the services you need, use /etc/hosts.allow (see hosts.allow"
+"(5))."
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Libya"
@@ -4558,14 +4543,6 @@ msgstr "%s'ни %s турида қандай формат қилишни бил�
 msgid "Model"
 msgstr "Модел"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable libsafe if libsafe is found on the system."
-msgstr ""
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "USB printer #%s"
@@ -4595,16 +4572,6 @@ msgstr ""
 #, c-format
 msgid "Modem"
 msgstr "Модем"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, listen_tcp=None)\n"
-"\n"
-"Allow/Forbid X connections. First arg specifies what is done\n"
-"on the client side: ALL (all connections are allowed), LOCAL (only\n"
-"local connection) and NONE (no connection)."
-msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -4679,19 +4646,6 @@ msgstr ""
 #, c-format
 msgid "Del profile..."
 msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid the list of users on the system on display managers (kdm and "
-"gdm)."
-msgstr ""
-"Аргументлар: (arg)\n"
-"\n"
-"Системанинг фойдаланувчилар рўйхатини дисплей бошқарувчилар (KDM ва GDM) "
-"кўрсатишга рухсат этиш/этмас."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -4780,6 +4734,11 @@ msgstr ""
 #, c-format
 msgid "Start sector: "
 msgstr "Бошланғич сектор: "
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Read"
+msgstr "Фақат ўқишга"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4982,17 +4941,6 @@ msgstr ""
 msgid "Equatorial Guinea"
 msgstr "Экваториал Гвинея"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid autologin."
-msgstr ""
-"Аргументлар: (arg)\n"
-"\n"
-"Авто-киришга рухсат этиш/этмаш."
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Build Backup"
@@ -5032,17 +4980,6 @@ msgstr ""
 #, c-format
 msgid "Kiribati"
 msgstr "Кирибати"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid remote root login."
-msgstr ""
-"Аргументлар: (arg)\n"
-"\n"
-"Root узоқдан киришга рухсат этиш/этмаш."
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -5621,6 +5558,13 @@ msgstr ""
 msgid "Account Password"
 msgstr "Махфий сўз"
 
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+"%s cannot be displayed \n"
+". No Help entry of this type\n"
+msgstr ""
+
 #: ../../any.pm:1
 #, c-format
 msgid ""
@@ -5999,6 +5943,11 @@ msgstr ""
 "Агар кўрсатилган товуш картаси системангиздаги товуш картаси\n"
 "билан мос келмаса, тугмани босиб бошқа драйверни танлашингиз мумкин."
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set the root umask."
+msgstr "root учун махфий сўз"
+
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Script-based"
@@ -6198,11 +6147,6 @@ msgstr ", HP JetDirect'даги кўп амалли ускуна"
 #, c-format
 msgid "none"
 msgstr "йўқ"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "user :"
-msgstr "Фойдаланувчи:"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -6464,6 +6408,14 @@ msgstr ""
 "Ускуна ҳақида маълумотни бу ерда кўриш учун уни чап тарафдаги рўйхатдан "
 "танланг."
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid autologin."
+msgstr ""
+"Аргументлар: (arg)\n"
+"\n"
+"Авто-киришга рухсат этиш/этмаш."
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "XawTV isn't installed!"
@@ -6549,11 +6501,6 @@ msgstr ""
 #, c-format
 msgid "Connection Time: "
 msgstr "Уланиш вақти: "
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr "Кўриш ёки тузатиш учун ҳуқуқлар файлини танланг"
 
 #: ../../standalone/livedrake:1
 #, c-format
@@ -6893,16 +6840,6 @@ msgstr "Уланмаган"
 msgid "Greek"
 msgstr "Грекча"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"If \\fIarg\\fP = ALL allow /etc/issue and /etc/issue.net to exist. If \\fIarg"
-"\\fP = NONE no issues are\n"
-"allowed else only /etc/issue is allowed."
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Kitts and Nevis"
@@ -6936,11 +6873,6 @@ msgstr ""
 msgid "Monitor VertRefresh: %s\n"
 msgstr "Мониторнинг VertRefresh: %s\n"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "path"
-msgstr "Йўл"
-
 #: ../../diskdrake/dav.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/removable.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -6957,6 +6889,11 @@ msgstr ""
 "Хато рўй берди:\n"
 "%s\n"
 "Баъзи бир параметрларни ўзгартириб синаб кўринг"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "User :"
+msgstr "Фойдаланувчи:"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7242,14 +7179,6 @@ msgstr "Жорий қоидани тузатиш"
 msgid "%s"
 msgstr "%s"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable the logging of IPv4 strange packets."
-msgstr ""
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Please test the mouse"
@@ -7261,6 +7190,11 @@ msgid ""
 "Do not update inode access times on this file system\n"
 "(e.g, for faster access on the news spool to speed up news servers)."
 msgstr ""
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Sticky-bit"
+msgstr "Ёпишқоқ"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7433,14 +7367,6 @@ msgstr ""
 msgid "Montserrat"
 msgstr "Монцеррат"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (val)\n"
-"\n"
-"Set the shell timeout. A value of zero means no timeout."
-msgstr ""
-
 #: ../../help.pm:1
 #, c-format
 msgid "Automatic dependencies"
@@ -7450,6 +7376,11 @@ msgstr ""
 #, c-format
 msgid "Swap"
 msgstr "Своп"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Custom settings"
+msgstr "Дискни бошқача бўлиш"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7470,14 +7401,6 @@ msgstr "SMB/Windows 95/98/NT серверидаги принтер"
 #, c-format
 msgid ", "
 msgstr ", "
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (umask)\n"
-"\n"
-"Set the root umask."
-msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7831,6 +7754,19 @@ msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
 msgstr "Истасангиз, ускунанинг/файлнинг номини кўрсатишингиз мумкин."
 
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"If SERVER_LEVEL (or SECURE_LEVEL if absent)\n"
+"is greater than 3 in /etc/security/msec/security.conf, creates the\n"
+"symlink /etc/security/msec/server to point to\n"
+"/etc/security/msec/server.<SERVER_LEVEL>.\n"
+"\n"
+"The /etc/security/msec/server is used by chkconfig --add to decide to\n"
+"add a service if it is present in the file during the installation of\n"
+"packages."
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Russian (Phonetic)"
@@ -7971,6 +7907,11 @@ msgstr "Боцвана"
 #, c-format
 msgid "(default value: %s)"
 msgstr "(андоза қиймати: %s)"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9042,6 +8983,11 @@ msgid ""
 "    (for MS-DOS boot, not for lilo)\n"
 msgstr ""
 
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to read the file"
+msgstr ""
+
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "choose image"
@@ -9403,6 +9349,7 @@ msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../mouse.pm:1 ../../services.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakperm:1
 #, c-format
 msgid "Other"
 msgstr "Бошқаси"
@@ -9678,11 +9625,6 @@ msgstr ""
 msgid "Save theme"
 msgstr "Мавзуни сақлаш"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "group"
-msgstr "Гуруҳ"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Brazil"
@@ -9901,6 +9843,13 @@ msgstr "Фйлни бошқа loopback ишлатаяпти, бошқасини 
 msgid "Read-only"
 msgstr "Фақат ўқишга"
 
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Enable/Disable name resolution spoofing protection.  If\n"
+"\"alert\" is true, also reports to syslog."
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "No known driver"
@@ -9952,6 +9901,11 @@ msgstr "Компютерингизда товуш системасини ишг�
 #, c-format
 msgid "Run some checks against the rpm database"
 msgstr ""
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Execute"
+msgstr "Ekspert"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10120,7 +10074,7 @@ msgid ""
 msgstr ""
 
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Expert Mode"
 msgstr "Эксперт усули"
@@ -10140,6 +10094,11 @@ msgstr "Локал тармоқнинг манзили"
 msgid "Backup your System files. (/etc directory)"
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid "Set the user umask."
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid ""
@@ -10157,14 +10116,6 @@ msgstr ""
 #, c-format
 msgid "Samba Server"
 msgstr "Самба сервери"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, alert=1)\n"
-"\n"
-"Enable/Disable IP spoofing protection."
-msgstr ""
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -10208,18 +10159,6 @@ msgstr "Иккинчи DNS сервери (танлаб бўлади)"
 msgid "Finland"
 msgstr "Финляндия"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Authorize all services controlled by tcp_wrappers (see hosts.deny(5)) if "
-"\\fIarg\\fP = ALL. Only local ones\n"
-"if \\fIarg\\fP = LOCAL and none if \\fIarg\\fP = NONE. To authorize the "
-"services you need, use /etc/hosts.allow\n"
-"(see hosts.allow(5))."
-msgstr ""
-
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Color depth: %s\n"
@@ -10234,6 +10173,11 @@ msgstr "Бу пакетни танлашни бекор қилолмайсиз. 
 #, c-format
 msgid "Loading from floppy"
 msgstr "Дискетдан юклаяпман"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable the logging of IPv4 strange packets."
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -10405,9 +10349,7 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Accept/Refuse icmp echo."
+" Enabling su only from members of the wheel group or allow su from any user."
 msgstr ""
 
 #: ../../standalone/drakgw:1
@@ -10596,6 +10538,21 @@ msgstr "процессор # "
 msgid "chunk size"
 msgstr ""
 
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.\n"
+"\n"
+"If set to NONE, no issues are allowed.\n"
+"\n"
+"Else only /etc/issue is allowed."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid " Enable/Disable sulogin(8) in single user level."
+msgstr ""
+
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
 #: ../../bootloader.pm:1
@@ -10714,6 +10671,11 @@ msgstr ""
 #, c-format
 msgid "Security Administrator:"
 msgstr "Хавфсизлик бошқарувчиси:"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Set the shell timeout. A value of zero means no timeout."
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -10865,6 +10827,11 @@ msgstr "Xpmac (дисплей драйверини ўрнатиш)"
 #, c-format
 msgid "Zeroconf host name must not contain a ."
 msgstr "Zeroconf компютернинг номида \".\" белгиси бўлмаши керкак"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid " Accept/Refuse icmp echo."
+msgstr ""
 
 #: ../../services.pm:1
 #, c-format
@@ -11171,6 +11138,14 @@ msgid ""
 "Your card is supported by XFree %s which may have a better support in 2D."
 msgstr ""
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid " Activate/Disable daily security check."
+msgstr ""
+"Аргументлар: (arg) \n"
+"\n"
+" Кундалик хавфсизлик текширувини ёқиш/ўчириш."
+
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Enable libsafe if libsafe is found on the system"
@@ -11348,21 +11323,6 @@ msgstr "Бутун дискни ўчириш"
 msgid " (Default)"
 msgstr " (Андоза)"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: ()\n"
-"\n"
-"If SERVER_LEVEL (or SECURE_LEVEL if absent) is greater than 3\n"
-"in /etc/security/msec/security.conf, creates the symlink /etc/security/msec/"
-"server\n"
-"to point to /etc/security/msec/server.<SERVER_LEVEL>. The /etc/security/msec/"
-"server\n"
-"is used by chkconfig --add to decide to add a service if it is present in "
-"the file\n"
-"during the installation of packages."
-msgstr ""
-
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Automatic reconfiguration"
@@ -11377,11 +11337,6 @@ msgstr "Қабул қилиш тезлиги:"
 #, c-format
 msgid "Turks and Caicos Islands"
 msgstr "Туркс ва Каикос Ороллари"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "permissions"
-msgstr "Ҳуқуқлар"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
 #: ../../my_gtk.pm:1 ../../interactive/newt.pm:1
@@ -11526,6 +11481,15 @@ msgstr "Система юклагичини ўрнатиш"
 msgid "Select the memory size of your graphics card"
 msgstr "График картангизни хотирасининг ҳажмини танланг"
 
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Enable/Disable crontab and at for users.\n"
+"\n"
+"Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
+"and crontab(1))."
+msgstr ""
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -11560,11 +11524,6 @@ msgstr ""
 msgid "Found %s %s interfaces"
 msgstr "%s %s интерфейслар топилди"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "sticky-bit"
-msgstr "Ёпишқоқ"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Post Install"
@@ -11579,14 +11538,6 @@ msgstr ""
 #, c-format
 msgid "Card IRQ"
 msgstr "Картанинг IRQ'си"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (umask)\n"
-"\n"
-"Set the user umask."
-msgstr ""
 
 #: ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -11686,19 +11637,18 @@ msgstr "Системани ўрнатиш"
 msgid "Saint Vincent and the Grenadines"
 msgstr "Сент-Винсент ва Гренадина"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid reboot by the console user."
+msgstr ""
+"Аргументлар: (arg)\n"
+"\n"
+"Консол орқали компютерни ўчириб-ёқишга рухсат этиш/этмаш."
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "/File/_Open"
 msgstr "/Файл/_Очиш"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"The argument specifies if clients are authorized to connect\n"
-"to the X server on the tcp port 6000 or not."
-msgstr ""
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -11845,14 +11795,6 @@ msgid ""
 "Center."
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Set the password history length to prevent password reuse."
-msgstr ""
-
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Now, you can run xawtv (under X Window!) !\n"
@@ -11868,6 +11810,11 @@ msgstr ""
 #, c-format
 msgid "%s on %s"
 msgstr "%s %s'да"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid remote root login."
+msgstr "Root узоқдан киришига рухсат этиш"
 
 #: ../../help.pm:1
 #, c-format
@@ -12034,11 +11981,6 @@ msgstr ""
 #, c-format
 msgid "Resolution: %s\n"
 msgstr ""
-
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "matching"
-msgstr "мос келадиган"
 
 #: ../../install2.pm:1
 #, c-format
@@ -12249,14 +12191,6 @@ msgstr ""
 msgid "Ftp Server"
 msgstr "FTP сервери"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Enable/Disable msec hourly security check."
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Uganda"
@@ -12271,17 +12205,6 @@ msgstr "%s шрифтни айлантириш"
 #, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (size)\n"
-"\n"
-"Set shell commands history size. A value of -1 means unlimited."
-msgstr ""
-"Аргументлар: (ҳажм)\n"
-"\n"
-"Консолдан киритилган буйруқлар тарихининг ҳажми. -1 чексизга тенг."
 
 #: ../../help.pm:1
 #, c-format
@@ -12608,6 +12531,18 @@ msgstr ""
 msgid "ignore"
 msgstr "этибор бермаш"
 
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Allow/Forbid X connections:\n"
+"\n"
+"- ALL (all connections are allowed),\n"
+"\n"
+"- LOCAL (only connection from local machine),\n"
+"\n"
+"- NONE (no connection)."
+msgstr ""
+
 #: ../../printer/main.pm:1
 #, c-format
 msgid ", multi-function device on parallel port #%s"
@@ -12685,6 +12620,11 @@ msgstr "Бир вақтда иккала Shift тугмалари"
 #, c-format
 msgid "Select a scanner model"
 msgstr "Сканнернинг моделини танланг"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Accept/Refuse bogus IPv4 error messages."
+msgstr ""
 
 #: ../../printer/data.pm:1
 #, c-format
@@ -12968,6 +12908,19 @@ msgstr "Улаш нуқтаси: "
 msgid "parse all fonts"
 msgstr ""
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Allow/Forbid direct root login."
+msgstr ""
+"Аргументлар: (arg)\n"
+"\n"
+"Root тўғридан-тўғри киришига рухсат этиш/этмаш."
+
+#: ../../security/help.pm:1
+#, c-format
+msgid " Accept/Refuse broadcasted icmp echo."
+msgstr ""
+
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "With X"
@@ -13024,6 +12977,11 @@ msgstr ""
 #, c-format
 msgid "http://www.mandrakelinux.com/en/91errata.php3"
 msgstr "http://www.mandrakelinux.com/en/91errata.php3"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Enable/Disable libsafe if libsafe is found on the system."
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13134,17 +13092,6 @@ msgstr ""
 #, c-format
 msgid "Test"
 msgstr "Синаш"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid direct root login."
-msgstr ""
-"Аргументлар: (arg)\n"
-"\n"
-"Root тўғридан-тўғри киришига рухсат этиш/этмаш."
 
 #: ../../lang.pm:1
 #, c-format
@@ -13270,11 +13217,6 @@ msgid ""
 msgstr ""
 "Star Office/OpenOffice.org/GIMP дастурларидан \"%s\" принтерни олиб ташлаш "
 "муваффақиятсиз тугади."
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "delete"
-msgstr "Ўчириш"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -13539,11 +13481,6 @@ msgstr "Каталогдан тиклаш"
 msgid "IDE"
 msgstr "IDE"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "group :"
-msgstr "Гуруҳ:"
-
 #: ../../fs.pm:1
 #, c-format
 msgid "mounting partition %s in directory %s failed"
@@ -13638,6 +13575,11 @@ msgstr ""
 #, c-format
 msgid "You can't use an encrypted file system for mount point %s"
 msgstr "%s улаш нуқтаси учун кодланган файл системасини ишлатиб бўлмайди"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Set the password history length to prevent password reuse."
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -13877,17 +13819,6 @@ msgstr ""
 msgid "Delete"
 msgstr "Ўчириш"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Allow/Forbid reboot by the console user."
-msgstr ""
-"Аргументлар: (arg)\n"
-"\n"
-"Консол орқали компютерни ўчириб-ёқишга рухсат этиш/этмаш."
-
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid ""
@@ -14087,6 +14018,22 @@ msgstr ""
 msgid "Tamil (Typewriter-layout)"
 msgstr "Тамилча (ёзиш мошинаси)"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Use password to authenticate users."
+msgstr "Фойдаланувчиларни тасдиқлаш учун махфий сўздан фойдаланиш"
+
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Allow/Forbid the list of users on the system on display managers (kdm and "
+"gdm)."
+msgstr ""
+"Аргументлар: (arg)\n"
+"\n"
+"Системанинг фойдаланувчилар рўйхатини дисплей бошқарувчилар (KDM ва GDM) "
+"кўрсатишга рухсат этиш/этмас."
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "manual"
@@ -14241,17 +14188,17 @@ msgstr ", кўп амалли ускуна"
 msgid "Laos"
 msgstr "Лаос"
 
+#: ../../security/help.pm:1
+#, c-format
+msgid "Activate/Disable ethernet cards promiscuity check."
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Ҳажмини ўзгартириш учу дискда FAT қисм мавжуд эмас (ёки етарли жой мавжуд "
 "эмас)"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Up"
-msgstr "Юқорига"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -14355,6 +14302,11 @@ msgstr "Цилиндр %d dan %d gacha\n"
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "New profile..."
+msgstr ""
+
+#: ../../standalone/draksec:1
+#, c-format
+msgid "NONE"
 msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
@@ -14613,14 +14565,6 @@ msgstr ""
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr "SMB (Windows 9x/NT) принтернинг парамертрлари"
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Accept/Refuse bogus IPv4 error messages."
-msgstr ""
-
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "mkinitrd optional arguments"
@@ -14748,13 +14692,6 @@ msgstr "ХФС-ни бошқадан ишга тушириш"
 #, c-format
 msgid "Add host/network"
 msgstr "Хостни/тармоқни қўшиш"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"if set to yes, check for empty passwords, for no password in /etc/shadow and "
-"for users with the 0 id other than root."
-msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14975,15 +14912,20 @@ msgstr "Таиланд"
 msgid "Card IO_1"
 msgstr "Картанинг IO_1'си"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Kazakhstan"
+msgstr "Қозоғистон"
+
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Routers:"
 msgstr "Рутерлар:"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Kazakhstan"
-msgstr "Қозоғистон"
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Write"
+msgstr "Файлни (%s) ёзиш"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15357,15 +15299,6 @@ msgid ""
 "partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg, alert=1)\n"
-"\n"
-"Enable/Disable name resolution spoofing protection.  If\n"
-"\\fIalert\\fP is true, also reports to syslog."
-msgstr ""
-
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Please wait, preparing installation..."
@@ -15496,6 +15429,14 @@ msgstr "Тамилча (ISCII)"
 msgid "Mayotte"
 msgstr "Маёт"
 
+#: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid "Set shell commands history size. A value of -1 means unlimited."
+msgstr ""
+"Аргументлар: (ҳажм)\n"
+"\n"
+"Консолдан киритилган буйруқлар тарихининг ҳажми. -1 чексизга тенг."
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "%d KB\n"
@@ -15567,6 +15508,11 @@ msgid ""
 "driver at \"%s\"."
 msgstr ""
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Group :"
+msgstr "Гуруҳ:"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
@@ -15587,6 +15533,11 @@ msgid ""
 msgstr ""
 "Илтимос Drakbackup учун ажратилган\n"
 "юқори чегарани киритинг (Мб)"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "Add the name as an exception to the handling of password aging by msec."
+msgstr ""
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -15664,6 +15615,13 @@ msgstr ""
 #, c-format
 msgid "Show current interface configuration"
 msgstr "Жорий интерфейснинг мосламасини кўрсатиш"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"The argument specifies if clients are authorized to connect\n"
+"to the X server from the network on the tcp port 6000 or not."
+msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -16160,6 +16118,17 @@ msgid " on parallel port #%s"
 msgstr " \\#%s параллел портида"
 
 #: ../../security/help.pm:1
+#, fuzzy, c-format
+msgid ""
+"Set the password minimum length and minimum number of digit and minimum "
+"number of capitalized letters."
+msgstr ""
+"Аргументлар: (length, ndigits=0, nupper=0)\n"
+"\n"
+"Махфий сўзнинг энг қисқа узунлигини, ундаги сонларнинг ва бош ҳарфларнинг "
+"энг кичик сонини аниқлайди."
+
+#: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
 msgstr ""
@@ -16613,11 +16582,6 @@ msgstr "Француз Гвинея"
 msgid "default:LTR"
 msgstr "default:LTR"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "add a rule"
-msgstr "Қоидани қўшиш"
-
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "A command line must be entered!"
@@ -16668,14 +16632,6 @@ msgstr "%s (Порт %s)"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use network connection to backup"
-msgstr ""
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-" Enable/Disable sulogin(8) in single user level."
 msgstr ""
 
 #: ../../help.pm:1
@@ -16946,6 +16902,11 @@ msgstr ""
 msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr ""
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 1"
+msgstr "Даража"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "DHCP client"
@@ -16957,6 +16918,11 @@ msgid "List users on display managers (kdm and gdm)"
 msgstr ""
 "Фойдаланувчиларнинг рўйхатини дисплей бошқарувчиларда (KDM ва GDM) кўрсатиш"
 
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 2"
+msgstr "Даража"
+
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Restoring from file %s failed: %s"
@@ -16966,6 +16932,21 @@ msgstr "Файлдан (%s) қайта тиклаш муваффақиятсиз
 #, c-format
 msgid "Logitech Mouse (serial, old C7 type)"
 msgstr "Logitech сичқонча (кетма-кет, эски C7 тури)"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 3"
+msgstr "Даража"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 4"
+msgstr "Даража"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Level 5"
+msgstr "Даража"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17208,11 +17189,6 @@ msgstr ""
 msgid "Allow remote root login"
 msgstr "Root узоқдан киришига рухсат этиш"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Down"
-msgstr "Пастга"
-
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Raw printer (No driver)"
@@ -17368,17 +17344,6 @@ msgstr "Дискнинг Windows қисмидаги бўш жойдан фойд
 #, c-format
 msgid "%s found on %s, configure it automatically?"
 msgstr "%s %s'да топилди, уни автоматик равишда мослайми?"
-
-#: ../../security/help.pm:1
-#, c-format
-msgid ""
-"Arguments: (arg)\n"
-"\n"
-"Use password to authenticate users."
-msgstr ""
-"Аргументлар: (arg)\n"
-"\n"
-"Фойдаланувчиларни тасдиқлаш учун махфий сўздан фойдаланиш."
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -17675,11 +17640,6 @@ msgid ""
 "\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
 "             Convert ttf font files to afm and pfb fonts\n"
 msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "user"
-msgstr "Фойдаланувчи"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17988,14 +17948,56 @@ msgstr "NFS сервери, SMB сервери, Прокси сервери, SSH
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 
+#~ msgid "edit"
+#~ msgstr "тузатиш"
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Allow/Forbid remote root login."
+#~ msgstr ""
+#~ "Аргументлар: (arg)\n"
+#~ "\n"
+#~ "Root узоқдан киришга рухсат этиш/этмаш."
+
+#~ msgid "select perm file to see/edit"
+#~ msgstr "Кўриш ёки тузатиш учун ҳуқуқлар файлини танланг"
+
+#~ msgid "path"
+#~ msgstr "Йўл"
+
+#~ msgid "permissions"
+#~ msgstr "Ҳуқуқлар"
+
+#~ msgid "delete"
+#~ msgstr "Ўчириш"
+
+#~ msgid "Up"
+#~ msgstr "Юқорига"
+
+#~ msgid "add a rule"
+#~ msgstr "Қоидани қўшиш"
+
+#~ msgid "Down"
+#~ msgstr "Пастга"
+
+#~ msgid ""
+#~ "Arguments: (arg)\n"
+#~ "\n"
+#~ "Use password to authenticate users."
+#~ msgstr ""
+#~ "Аргументлар: (arg)\n"
+#~ "\n"
+#~ "Фойдаланувчиларни тасдиқлаш учун махфий сўздан фойдаланиш."
+
+#~ msgid "user"
+#~ msgstr "Фойдаланувчи"
+
 #~ msgid "Relaunch 'lilo'"
 #~ msgstr "\"lilo\" буйруғини қайтадан бажариш"
 
 #~ msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
 #~ msgstr "Initrd яратиш \"mkinitrd -f /boot/initrd-%s.img %s\"."
-
-#~ msgid "Write %s"
-#~ msgstr "Файлни (%s) ёзиш"
 
 #~ msgid "Copy %s to %s"
 #~ msgstr "%s'дан %s'га нусха кўчириш"
@@ -18180,9 +18182,6 @@ msgstr ""
 
 #~ msgid "Recommended"
 #~ msgstr "Tavsiya qilinadi"
-
-#~ msgid "Expert"
-#~ msgstr "Ekspert"
 
 #~ msgid "modinfo is not available"
 #~ msgstr "modinfo mavjud emas"
