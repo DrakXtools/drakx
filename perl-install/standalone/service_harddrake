@@ -115,7 +115,7 @@ foreach my $hw_class (@harddrake::data::tree) {
         undef @configurator_pool;
     }
 
-    next if $is_globetrotter && $configurator_pool[0] !~ /drakupdate_fstab/;
+    next if $is_globetrotter && !$hw_class->{automatic};
     next unless -x first(split /\s+/, $configurator_pool[0]);
     my ($pid, $no, $res);
     if (!$hw_class->{automatic}) {
