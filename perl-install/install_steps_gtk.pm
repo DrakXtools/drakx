@@ -279,7 +279,7 @@ sub reallyChooseGroups {
     };
     my $entries_in_path = sub {
 	my ($path) = @_;
-	$path, map { $entry->($_) } grep { !/Utilities/ && $o->{compssUsers}{$_}{path} eq $path } @{$o->{compssUsersSorted}};
+	translate($path), map { $entry->($_) } grep { !/Utilities/ && $o->{compssUsers}{$_}{path} eq $path } @{$o->{compssUsersSorted}};
     };
     gtkadd($w->{window},
 	   gtkpack($w->create_box_with_title(_("Package Group Selection")),
