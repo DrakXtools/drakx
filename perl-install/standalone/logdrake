@@ -214,7 +214,7 @@ $::isFile and gtkset_size_request($log_text, 400, 500);
 $my_win->{window}->realize;
 $my_win->{window}->show_all();
 search() if $::isFile;
-kill 'USR2', $::CCPID unless $::isExplain; # special case because logdrake is also embedded for logs
+kill 'USR2', $::CCPID unless $::isExplain || !$::isEmbedded; # special case because logdrake is also embedded for logs
 $my_win->main;
 
 sub quit { ugtk2->exit(0) }
@@ -244,11 +244,12 @@ sub parse_file {
   my ($file) = @_;#$_[0];
 
   $file =~ s/\.gz$//;
+  my ($pbar, $win_pb);
   unless ($::isEmbedded) {
-      gtkadd(my $win_pb = gtkset_modal(new Gtk2::Window('toplevel'), 1),
+      gtkadd($win_pb = gtkset_modal(new Gtk2::Window('toplevel'), 1),
              gtkpack(new Gtk2::VBox(2,0),
                      new Gtk2::Label(" " . N("please wait, parsing file: %s", $files{$_}{desc}) . " "),
-                     my $pbar = new Gtk2::ProgressBar()
+                     $pbar = new Gtk2::ProgressBar()
                      )
              );
       $win_pb->set_transient_for($my_win->{rwindow}) unless $::isEmbedded;
