@@ -414,22 +414,18 @@ process_recovery(void)
                                         goto examine_next_part;
                                 }
                                 strcpy(location, disk_own_mount);
-                                strcat(location, "/Mandrake/oem_patch.pl");
+                                strcat(location, "/Mandrake/base");
                                 if (access(location, R_OK)) {
-                                        log_message("Mandrake/oem_patch.pl is not here");
+                                        log_message("Mandrake/base is not here");
                                         goto examine_next_part;
                                 }
 
                                 log_message("going on with a recovery on disk %s partition %s", medias[i], *part);
 
                                 symlink(disk_own_mount, IMAGE_LOCATION);
-                                if (load_ramdisk() != RETURN_OK) {
-                                        log_perror("loading ramdisk failed");
-                                        umount(disk_own_mount);
-                                        return 0;
-                                }
-
-                                umount(disk_own_mount);
+                                if (ramdisk_possible())
+                                        load_ramdisk(); /* if load of ramdisk failed, try to continue in live */
+                                
                                 method_name = strdup("disk");
                                 return 1;
                         }
