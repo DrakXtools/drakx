@@ -1102,6 +1102,46 @@ See iwpriv(8) man page for further information."),
                     post => sub {
                         # untranslate parameters
                         $ethntf->{WIRELESS_MODE} = $wireless_mode{$ethntf->{WIRELESS_MODE}};
+                        if ($module =~ /^prism2_/) {
+                            $in->do_pkgs->install('prism2-utils');
+                            if ($ethntf->{WIRELESS_ESSID}) {
+                                my $update_vars_in_wlan = sub { #- FIXME: to be improved (quotes, comments) and moved in common files
+                                    my ($file, $vars) = @_;
+                                    substInFile {
+                                        while (my ($key, $value) = each(%$vars)) {
+                                            s/^#?\Q$key\E=(?:"[^#]*"|[^#\s]*)(\s*#.*)?/$key=$value$1/ and delete $vars->{$key};
+                                        }
+                                        $_ .= join('', map { "$_=$vars->{$_}\n" } keys %$vars) if eof;
+                                    } $file;
+                                };
+                                my $wlan_conf_file = "$::prefix/etc/wlan/wlan.conf";
+                                my @wlan_devices = split(/ /, (cat_($wlan_conf_file) =~ /^WLAN_DEVICES="(.*)"/m)[0]);
+                                push @wlan_devices, $ethntf->{DEVICE} unless member($ethntf->{DEVICE}, @wlan_devices);
+                                #- enable device and make it use the choosen ESSID
+                                $update_vars_in_wlan->($wlan_conf_file,
+                                                       {
+                                                        WLAN_DEVICES => qq("@wlan_devices"),
+                                                        "SSID_$ethntf->{DEVICE}" => qq("$ethntf->{WIRELESS_ESSID}"),
+                                                        "ENABLE_$ethntf->{DEVICE}" => "y"
+                                                       });
+                                my $wlan_ssid_file = "$::prefix/etc/wlan/wlancfg-$ethntf->{WIRELESS_ESSID}";
+                                #- copy default settings for this ESSID if config file doesn't exist
+                                -f $wlan_ssid_file or cp_f("$::prefix/etc/wlan/wlancfg-DEFAULT", $wlan_ssid_file);
+                                #- enable/disable encryption
+                                $update_vars_in_wlan->($wlan_ssid_file,
+                                                       {
+                                                        (map { $_ => $ethntf->{WIRELESS_ENC_KEY} ? "true" : "false" } qw(lnxreq_hostWEPEncrypt lnxreq_hostWEPDecrypt dot11PrivacyInvoked dot11ExcludeUnencrypted)),
+                                                        AuthType => $ethntf->{WIRELESS_ENC_KEY} ? qq("sharedkey") : qq("opensystem"),
+                                                        if_($ethntf->{WIRELESS_ENC_KEY},
+                                                            dot11WEPDefaultKeyID => 0,
+                                                            dot11WEPDefaultKey0 => qq("$ethntf->{WIRELESS_ENC_KEY}")
+                                                           )
+                                                       });
+                                #- apply settings on wlan interface
+                                require services;
+                                services::restart($module eq 'prism2_cs' ? 'pcmcia' : 'wlan');
+                            }
+                        }
                         return "static_hostname";
                     },
                    },
