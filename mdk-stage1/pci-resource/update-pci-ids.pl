@@ -22,8 +22,11 @@ struct pci_module_map {
 
 my %t = (scsi => 'scsi', eth => 'net');
 
-$modulez{'eth'} = [ `../mar/mar -l ../../modules/network_modules.mar` ];
-$modulez{'scsi'} = [ `../mar/mar -l ../../modules/hd_modules.mar` ];
+if (-x "../mar/mar" && -f "../../modules/network_modules.mar" && -f "../../modules/hd_modules.mar") {
+    $modulez{'eth'} = [ `../mar/mar -l ../../modules/network_modules.mar` ];
+    $modulez{'scsi'} = [ `../mar/mar -l ../../modules/hd_modules.mar` ];
+    $check_marfiles = 1;
+}
 
 
 foreach $type (keys %t) {
@@ -44,7 +47,9 @@ struct pci_module_map ${type}_pci_ids[] = {
 	$k =~ /^(....)(....)/;
 	printf qq|\t{0x%s  , 0x%s  , ( "%s" ), ( "%s" )} ,\n|,
 	   $1, $2, $v->[1], $v->[0];
-	($absent{$v->[0]} = 1) if (!grep(/^$v->[0]\.o\s/, @{$modulez{$type}}));
+	if (defined($check_marfiles)) {
+	    ($absent{$v->[0]} = 1) if (!grep(/^$v->[0]\.o\s/, @{$modulez{$type}}));
+	}
     }
 
     if (%absent) { print STDERR "\tmissing for $type: "; foreach (keys %absent) { print STDERR "$_ " } print STDERR "\n"; };
