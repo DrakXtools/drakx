@@ -48,6 +48,7 @@ parse_etc_passwd();
 my $no_bootsplash;
 my $x_mode = any::runlevel() == 5;
 my $a_mode = -e "/etc/aurora/Monitor" ? 1 : 0;
+my $auto_mode = any::get_autologin();
 my $inmain = 0;
 my $lilogrub = chomp_(`detectloader -q`);
 
@@ -111,8 +112,8 @@ if (member( $cur_res, qw( 785 788 791 794))) {
 #- and check that lilo is the correct loader
 $no_bootsplash ||= chomp_(`detectloader -q`) ne 'LILO';
 my @thms;
-my @lilo_thms = ($themes{default} ? () : qw(default));
-my @boot_thms = ($themes{default} ? () : qw(default));
+my @lilo_thms = if_(!$themes{default}, qw(default));
+my @boot_thms = if_(!$themes{default}, qw(default));
 chdir($themes{path}); #- we must change directory for correct @thms assignement
 foreach (all('.')) {
     if (-d $themes{path} . $_ && m/^[^.]/) {
