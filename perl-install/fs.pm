@@ -548,7 +548,7 @@ sub format_ext2($@) {
     my ($dev, @options) = @_;
     $dev =~ m,(rd|ida|cciss)/, and push @options, qw(-b 4096 -R stride=16); #- For RAID only.
     push @options, qw(-b 1024 -O none) if arch() =~ /alpha/;
-    run_program::run("mke2fs", @options, devices::make($dev)) or die _("%s formatting of %s failed", "ext2", $dev);
+    run_program::run('mke2fs', '-F', @options, devices::make($dev)) or die _("%s formatting of %s failed", "ext2", $dev);
 }
 sub format_ext3 {
     my ($dev, @options) = @_;
@@ -611,7 +611,7 @@ sub real_format_part {
 	my $check_blocks = grep { /^-c$/ } @options;
         swap::make($dev, $check_blocks);
     } else {
-	die _("I don't know how to format %s in type %s", $_->{device}, type2name($_->{type}));
+	die _("I don't know how to format %s in type %s", $part->{device}, type2name($part->{type}));
     }
     $part->{isFormatted} = 1;
 }
