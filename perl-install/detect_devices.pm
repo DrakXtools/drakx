@@ -179,19 +179,29 @@ sub pci_probe {
 	my %l;
 	@l{qw(vendor id subvendor subid type driver description)} = split "\t";
 	$l{$_} = hex $l{$_} foreach qw(vendor id subvendor subid);
+	$l{bus} = 'PCI';
 	\%l
     } c::pci_probe($probe_type);    
 }
 
-# pci_probing::main::probe with $probe_type is unsafe for pci! (bug in kernel&hardware)
+sub usb_probe {
+    map {
+	my %l;
+	@l{qw(vendor id driver description)} = split "\t";
+	$l{$_} = hex $l{$_} foreach qw(vendor id);
+	$l{bus} = 'USB';
+	\%l
+    } c::usb_probe();
+}
+
+# pci_probe with $probe_type is unsafe for pci! (bug in kernel&hardware)
 # get_pcmcia_devices provides field "device", used in network.pm
 # => probeall with $probe_type is unsafe
 sub probeall {
     my ($probe_type) = @_;
-    require pci_probing::main;
     require sbus_probing::main;
     require modules;
-    pci_probe($probe_type), sbus_probing::main::probe(), modules::get_pcmcia_devices();
+    pci_probe($probe_type), usb_probe(), sbus_probing::main::probe(), modules::get_pcmcia_devices();
 }
 sub matching_desc {
     my ($regexp) = @_;

@@ -4,6 +4,7 @@ use lib qw(/usr/lib/libDrakX);
 
 use common qw(:common :system);
 use interactive;
+use detect_devices;
 use mouse;
 use c;
 require 'dumpvar.pl';
@@ -29,9 +30,8 @@ if (!$mouse || !$::auto) {
     $mouse = mouse::fullname2mouse($name);
 
     if ($mouse->{device} eq "usbmouse") {
-	require pci_probing::main;
-	my ($c) = pci_probing::main::probe("serial_usb") or die _("no serial_usb found\n");
-	eval { modules::load($c->[1], "serial_usb") };
+	my ($c) = grep { $_->{driver} =~ /usb-[ou]hci/ } detect_devices::pci_probe(0) or die _("no serial_usb found\n");
+	eval { modules::load($c->{driver}, "serial_usb") };
     }
 }
 $mouse->{XEMU3} = 'yes' if $mouse->{nbuttons} < 3 && (!$::noauto || $in->ask_yesorno('', _("Emulate third button?"), 1));

@@ -167,7 +167,7 @@ Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN).
 Would you like to setup the Internet Connection Sharing?"), 1) or $in->exit(0);
 
 #my @pci_ethernet_cards;
-#require pci_probing::main;
+#OBSOLETE! require pci_probing::main;
 #($_->[0] =~ /NETWORK_ETHERNET/) and (push @pci_ethernet_cards, $_) foreach (pci_probing::main::probe('.'));
 
 #($#pci_ethernet_cards == -1) and $in->ask_warn('', _("No PCI network ethernet devices found!")) and $in->exit(0);
@@ -549,6 +549,9 @@ $in->exit(0);
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.18  2000/12/16 16:13:34  prigaux
+#- use ldetect-lst
+#-
 #- Revision 1.17  2000/11/13 15:48:33  gc
 #- Integrate Till's patches for better work with Cups.
 #-

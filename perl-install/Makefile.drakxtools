@@ -1,6 +1,6 @@
 include Makefile.config
 
-DIRS = ddcprobe serial_probe share/po Newt c pci_probing resize_fat
+DIRS = ddcprobe serial_probe share/po Newt c resize_fat
 PREFIX = 
 SBINDEST = $(PREFIX)/usr/sbin
 ETCDEST = $(PREFIX)/etc/gtk
@@ -33,7 +33,6 @@ install:
 	install -m 644 share/po/*.po $(LIBDEST)/po
 	install -m 644 $(patsubst %,Newt/%.pm,Newt) $(LIBDEST)/Newt
 	install -m 644 $(patsubst %,c/%.pm,stuff) $(LIBDEST)/c
-	install -m 644 $(patsubst %,pci_probing/%.pm,main pcitable pci_class) $(LIBDEST)/pci_probing
 	install -m 644 $(patsubst %,sbus_probing/%.pm,main) $(LIBDEST)/sbus_probing
 	install -m 644 $(patsubst %,resize_fat/%.pm,main any boot_sector c_rewritten dir_entry directory fat info_sector io) $(LIBDEST)/resize_fat
 	cp -rf auto icons $(LIBDEST)
