@@ -39,11 +39,11 @@ $::noauto = /-noauto/;
 $::testing = /-testing/;
 $i->{skiptest} = /-skiptest/;
 
-my $f = "/usr/X11R6/lib/X11/Cards";
--e $f or system("urpmi --auto XFree86 XFree86-75dpi-fonts");
--e $f or die "install XFree86 first!\n";
-
 my $in = interactive->vnew('su');
+
+my $f = "/usr/X11R6/lib/X11/Cards";
+if (!-e $f) { $in->suspend; system("urpmi --auto --best-output XFree86 XFree86-75dpi-fonts"); $in->resume; }
+-e $f or die "install XFree86 first!\n";
 
 `pidof xfs` > 0 or system("/etc/rc.d/init.d/xfs start");
 
@@ -52,7 +52,10 @@ system("mount /proc 2>/dev/null"); # ensure /proc is mounted for pci probing
 Xconfig::getinfoFromXF86Config($i) if $0 =~ Xdrakres;
 Xconfig::getinfo($i);
 
-Xconfigurator::main('', $i, $in, 0, -e "/etc/pcmcia", sub { my ($server, @l) = @_;
-							    system("urpmi --auto XFree86-$server " . join(' ', @l)) });
-
+Xconfigurator::main('', $i, $in, 0, -e "/etc/pcmcia",
+		    sub { my ($server, @l) = @_;
+			  $in->suspend;
+			  system("urpmi --auto --best-output XFree86-$server " . join(' ', @l));
+			  $in->resume;
+		      });
 $in->exit(0);
