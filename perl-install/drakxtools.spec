@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.23mdk
+Release: 0.24mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -327,6 +327,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Sep  8 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.24mdk
+- drakboot (blino, #11282):
+  o update splash when removed too
+  o use Mandrakelinux theme by default
+  o don't give theme name to remove-theme
+- drakconnect: fix empty "manage interface" (blino, #11287)
+- drakperm: fix freeze (#11274)
+- harddrake service: fix X11 autoconfiguration
+
 * Tue Sep  7 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.23mdk
 - bootloader-config: take care of symlink based bootloader entries (pixel)
 - diskdrake (pixel):
