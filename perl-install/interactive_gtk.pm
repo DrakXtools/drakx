@@ -463,8 +463,11 @@ sub ask_from_entries_refW {
 
     my $create_widgets = sub {
 	my $w = create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @_);
-	#- use a scrolled window if there is a lot of checkboxes (aka ask_many_from_list)
-	my $has = (grep { $_->{e}{type} eq 'bool' } @_) > 4;
+	#- use a scrolled window if there is a lot of checkboxes (aka
+	#- ask_many_from_list) or if there are many widgets in general (aka
+	#- options of native PostScript printer in printerdrake)
+	my $has = (((grep { $_->{e}{type} eq 'bool' } @_) > 4) ||
+		   ((@_) > 10));      
 	$has_scroll ||= $has;
 	$has ? createScrolledWindow($w) : $w;
     };
