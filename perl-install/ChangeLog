@@ -1,3 +1,186 @@
+2002/03/11  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: add Rage Mobility as bad card for XF4 (was already bad
+	card for XF3) (gégé report).
+
+2002/03/11  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* help.pm: updated help file
+
+	* share/po/de.po, share/po/DrakX.pot: updated GErman file
+
+2002/03/11  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake/interactive.pm (Mount_point): when files exist in the chosen
+	mount point, propose migration
+
+	* install_steps_interactive.pm: search /commercial/i instead of
+	/Application/ before showing the commercial license
+
+	* standalone/drakboot, bootloader.pm: fix Stew sucks
+
+	* install2.pm, install_steps.pm: 
+	  - default security level now set in miscellaneousBefore
+	  - default security level is 3 in meta_class server
+
+	* install_steps_gtk.pm: 
+	  - remove the hack for not displaying Utilities in classic meta_class
+	  - new compssUsers groups for the server meta_class
+	search /commercial/i instead of /Application/ before showing the
+	commercial license
+
+	* install_any.pm: 
+	  - fix the setting of compssUsersChoices in auto_install when it is
+	empty
+	  - set the default compssUsersChoices adapted to the server meta_class
+
+	* Makefile: upload the various compssUsers* (esp. compssUsers.server)
+
+	* share/compssUsers: remove "Utilities" here instead of removing it
+	hackily in install_steps_gtk
+
+	* share/compssUsers.server: fix the path=Utilities for the Utilities
+	section
+
+2002/03/11  yduret
+
+	* standalone/scannerdrake: re-re-re-re-re-re-uncomment the pkgs check
+	line.
+
+2002/03/10  chipaux
+
+	* share/po/fr.po: Corrected few typo mistakes.
+
+2002/03/10  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_steps.pm: gcize damienization
+
+	* share/rpmsrate: put userdrake together with drakconf so that
+	userdrake is not missing (till)
+
+2002/03/10  siegel
+
+	* share/po/help_xml2pm.pl: added tag filename
+
+	* any.pm: added missing i18n _()
+
+	* share/po/de.po: update
+	and still fixes ...
+	updates
+	update
+
+2002/03/10  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm: Protect the Star Office/OpenOffice.org configuration against
+	manual changing of the "update-alternatives" assignment of the "lpr"
+	command.
+
+	* detect_devices.pm: Made USB printer auto-detection more stable and
+	reliable.
+
+2002/03/10  yduret
+
+	* standalone/scannerdrake: added ASK DEVICE support
+
+	* scanner.pm: added ASK support for more interactiveness during
+	configuration
+
+2002/03/09  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/dhcp.c: comply better to ClientID stuff
+
+2002/03/09  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/sv.po: updated po file
+
+2002/03/09  yduret
+
+	* standalone/scannerdrake: added sum up at the end
+	uncomment line that checks if sane rpm is installed or not (thx gc).
+	i sux,
+
+2002/03/08  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakproxy: drakproxy rewritten
+	working drakproxy
+
+	* install_steps.pm: corrected network up/down when network install
+
+	* standalone/drakfont: ergonomy changed to fit in mcc
+	corrected network up/down when network install
+
+	* network/network.pm: proxy settings corrected
+
+2002/03/08  fabman
+
+	* share/po/es.po: updated spanish translation
+
+2002/03/08  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: fixed allowNVIDIA_rpms to take care of new kernel naming
+	conventions.
+
+	* standalone/XFdrake: fixed NVIDIA support to use newer kernel naming
+	conventions.
+
+	* Xconfigurator.pm: fixed possible additional XFree packages not installed
+	if server is already
+	installed.
+
+2002/03/08  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: missing translations + a few changes
+
+	* mdk-stage1/probing.c: have 4 seconds of delay for usb stuff
+	to show up rather than seconds
+
+2002/03/08  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/cs.po, share/po/it.po: updated po files
+
+	* share/po/es.po: corrected typo
+
+	* share/po/da.po: updated Danish file
+
+	* lang.pm, share/locales-skeleton.tar.bz2: Added symlinks in
+	locales-skeleton so non primary chinese encodings
+	can work
+
+	* share/po/ar.po: updated po file
+
+	* share/po/cy.po: removed the "translation" of licence, it was random
+	text.
+
+2002/03/07  dam's  <damien@mandrakesoft.com>
+
+	* share/po/fr.po, modparm.pm: corrected
+
+2002/03/07  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/newt-frontend.c: english fix thx to till & phil
+
+2002/03/07  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/fr.po: updated po file
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/DrakX.pot, share/po/es.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/cy.po, share/po/nl.po,
+	share/po/ja.po, share/po/wa.po, share/po/sv.po, share/po/is.po,
+	share/po/hu.po, share/po/it.po, share/po/id.po, share/po/pl.po,
+	share/po/fi.po, share/po/no.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/ar.po, share/po/sl.po,
+	share/po/vi.po, share/po/br.po, share/po/ca.po, share/po/gl.po,
+	share/po/lv.po, share/po/uk.po, share/po/eo.po, share/po/ro.po,
+	share/po/bs.po, share/po/da.po, share/po/zh_TW.po, share/po/cs.po,
+	share/po/af.po: updated pot file
+
+2002/03/07  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm: removing quota choices for reiserfs
+
 2002/03/07  dam's  <damien@mandrakesoft.com>
 
 	* standalone/net_monitor: make gc happy
