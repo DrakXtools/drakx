@@ -23,6 +23,7 @@ use lib qw(/usr/lib/libDrakX);
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 use interactive;
 use network::network;
+use any;
 
 $::o->{miscellaneous} ||= {};
 $::o->{miscellaneous} = { getVarsFromSh('/etc/profile.d/proxy.sh') };
@@ -30,4 +31,3 @@ my $in = 'interactive'->vnew('su', 'network');
 network::network::miscellaneousNetwork($in, 1, 1);
 any::miscellaneousNetwork('');
 $in->exit(0);
-
