@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.16mdk
+Release: 0.17mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -310,6 +310,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Jul 18 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.17mdk
+- draksec:
+  o fix preferences loading & saving
+  o sort again functions & checks
+
 * Thu Jul 17 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.16mdk
 - do not exit the whole application when one destroy a dialog
 - drop gtk+1 requires
