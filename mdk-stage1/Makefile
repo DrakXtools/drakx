@@ -162,12 +162,20 @@ DIRS += mar pci-resource usb-resource bzlib $(INSMOD) slang newt ppp/pppd rp-ppp
 ifeq (i386, $(ARCH))
 DIRS += pcmcia_
 endif
+ifeq (x86_64, $(ARCH))
+DIRS += pcmcia_
+endif
 
 
 ifeq (i386,$(ARCH))
 PCMCIA_LIB = pcmcia_/libpcmcia.a
 PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
+ifeq (x86_64,$(ARCH))
+PCMCIA_LIB = pcmcia_/libpcmcia.a
+PCMCIA_DEFS = -DENABLE_PCMCIA
+endif
+
 
 USB_DEFS_GEN = -DENABLE_USB
 USB_DEFS = -DENABLE_USB -DDISABLE_PCIADAPTERS
