@@ -28,7 +28,7 @@ our @tree =
      [ "ZIP", "Zip", "floppy.png", "", \&detect_devices::zips, 0 ],
      [ "HARDDISK", "Disk", "harddisk.png", "$sbindir/diskdrake", \&detect_devices::hds, 1 ],
      [ "CDROM", "CDROM", "cd.png", "", sub { grep { !(detect_devices::isBurner($_) || detect_devices::isDvdDrive($_)) } &detect_devices::cdroms }, 0 ],
-     [ "BURNER", "CD/DVD burners", "cd.png", "", \&detect_devices::burners(), 0 ],
+     [ "BURNER", "CD/DVD burners", "cd.png", "", \&detect_devices::burners, 0 ],
      [ "DVDROM", "DVD-ROM", "cd.png", "", sub { grep { ! detect_devices::isBurner($_) } detect_devices::dvdroms() }, 0 ],
      [ "TAPE", "Tape", "tape.png", "", \&detect_devices::tapes, 0 ],
      [ "VIDEO", "Videocard", "video.png", "$sbindir/XFdrake",  sub { grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ /DISPLAY_VGA/ } @devices }, 1 ],
