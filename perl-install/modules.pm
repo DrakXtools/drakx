@@ -109,6 +109,7 @@ if_(arch() !~ /alpha/ && arch() !~ /sparc/,
 }],
 [ 'net_raw', {
   "8390" => "8390",
+  "mii" => "mii",
   "af_packet" => "packet socket",
   "nfs" => "Network File System (nfs)",
   "lockd" => "lockd",
