@@ -323,13 +323,16 @@ sub pci_probe {
 sub usb_probe {
     -e "/proc/bus/usb/devices" or return ();
 
-    add_addons($usbtable_addons, map {
+    my @l = add_addons($usbtable_addons, map {
 	my %l;
 	@l{qw(vendor id media_type driver description)} = split "\t";
 	$l{$_} = hex $l{$_} foreach qw(vendor id);
 	$l{bus} = 'USB';
 	\%l
     } c::usb_probe());
+    use Data::Dumper;
+    log::l(Dumper \@l, backtrace());
+    @l;
 }
 
 sub pcmcia_probe {
@@ -454,8 +457,8 @@ sub whatParport() {
     @res;
 }
 
-sub usbMice      { grep { ($_->{media_type} =~ /\|Mouse/ || $_->{driver} =~ /Mouse:USB/) &&
-			    $_->{driver} !~ /Tablet:wacom/} usb_probe() };
+sub usbMice      { grep { $_->{media_type} =~ /\|Mouse/ && $_->{driver} !~ /Tablet:wacom/ ||
+			  $_->{driver} =~ /Mouse:USB/ } usb_probe() }
 sub usbWacom     { grep { $_->{driver} =~ /Tablet:wacom/ } usb_probe() }
 sub usbKeyboards { grep { $_->{media_type} =~ /\|Keyboard/ } usb_probe() }
 sub usbStorage   { grep { $_->{media_type} =~ /Mass Storage\|/ } usb_probe() }
