@@ -105,13 +105,17 @@ sub get_ports {
 }
 
 sub set_ports {
-    my ($disabled, $ports) = @_;
+    my ($in, $disabled, $ports) = @_;
 
     my $shorewall = network::shorewall::read() || network::shorewall::default_interfaces() or die N("No network card");
-    $shorewall->{disabled} = $disabled;
-    $shorewall->{ports} = $$ports;
 
-    network::shorewall::write($shorewall);
+    if (!$disabled || -x "$::prefix/sbin/shorewall") {
+	$in->do_pkgs->ensure_is_installed('shorewall', '/sbin/shorewall', $::isInstall) or return;
+    
+	$shorewall->{disabled} = $disabled;
+	$shorewall->{ports} = $$ports;
+	network::shorewall::write($shorewall);
+    }
 }
 
 sub get_conf {
@@ -176,9 +180,7 @@ sub main {
 
     ($disabled, my $servers, my $unlisted) = get_conf($in, $disabled) or return;
 
-    $in->do_pkgs->ensure_is_installed('shorewall', '/sbin/shorewall', $::isInstall) or return;
-
     ($disabled, my $ports) = choose($in, $disabled, $servers, $unlisted) or return;
 
-    set_ports($disabled, $ports);
+    set_ports($in, $disabled, $ports);
 }
