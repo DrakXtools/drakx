@@ -190,6 +190,7 @@ sub init_sizes() {
 sub createXconf {
     my ($file, $mouse_type, $mouse_dev, $wacom_dev) = @_;
 
+    $mouse_type = 'IMPS/2' if $mouse_type eq 'ExplorerPS/2';
     devices::make("/dev/kbd") if arch() =~ /^sparc/; #- used by Xsun style server.
     symlinkf(devices::make($mouse_dev), "/dev/mouse");
 
