@@ -449,7 +449,8 @@ sub choosePackages {
     my $b = pkgs::saveSelected($packages);
     pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $def_mark, 0);
     my $def_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
-    my $level = pkgs::setSelectedFromCompssList($packages, { map { $_ => 1 } map { @{$compssUsers->{$_}} } @{$o->{compssUsersSorted}} }, $min_mark, 0);
+    pkgs::computeGroupSize($packages, $min_mark);
+    my $level = pkgs::setSelectedFromCompssList($packages, { map { $_ => 1 } map { @{$compssUsers->{$_}{flags}} } @{$o->{compssUsersSorted}} }, $min_mark, 0);
     my $max_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
     pkgs::restoreSelected($b);
 
@@ -528,16 +529,16 @@ sub chooseGroups {
     my @groups = @{$o->{compssUsersSorted}};
     my %val;
     foreach (@groups) {
-	$val{$_} = ! grep { ! $o->{compssUsersChoice}{$_} } @{$compssUsers->{$_}};
+	$val{$_} = ! grep { ! $o->{compssUsersChoice}{$_} } @{$compssUsers->{$_}{flags}};
     }
 #    @groups = grep { $size{$_} = round_down($size{$_} / sqr(1024), 10) } @groups; #- don't display the empty or small one (eg: because all packages are below $min_level)
     my $all;
     $o->ask_many_from_list('', _("Package Group Selection"),
 			   { list => \@groups, 
-			     help => sub { translate($o->{compssUsersDescr}{$_}) },
+			     help => sub { translate($o->{compssUsers}{$_}{descr}) },
 			     val => sub { \$val{$_} },
 			     icon2f => sub { 
-				 my $f = "/usr/share/icons/" . ($o->{compssUsersIcons}{$_} || 'default');
+				 my $f = "/usr/share/icons/" . ($o->{compssUsers}{$_}{icons} || 'default');
 				 -e "$f.png" or $f .= "_section";
 				 -e "$f.png" or $f = '/usr/share/icons/default_section';
 				 "$f.png";
@@ -548,10 +549,10 @@ sub chooseGroups {
 			   if_($individual, { list => [ _("Individual package selection") ], val => sub { $individual }, advanced => 1 }),
 			  ) or return;
     if ($all) {
-	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}} } @{$o->{compssUsersSorted}};
+	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}{flags}} } @{$o->{compssUsersSorted}};
     } else {
-	$o->{compssUsersChoice}{$_} = 0 foreach map { @{$compssUsers->{$_}} } grep { !$val{$_} } keys %val;
-	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}} } grep {  $val{$_} } keys %val;
+	$o->{compssUsersChoice}{$_} = 0 foreach map { @{$compssUsers->{$_}{flags}} } grep { !$val{$_} } keys %val;
+	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}{flags}} } grep {  $val{$_} } keys %val;
     }
     1;
 }

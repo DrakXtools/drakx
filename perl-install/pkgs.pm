@@ -658,7 +658,7 @@ sub read_rpmsrate {
 
 sub readCompssUsers {
     my ($packages, $meta_class) = @_;
-    my (%compssUsers, %compssUsersIcons, , %compssUsersDescr, @sorted, $l);
+    my (%compssUsers, @sorted, $l);
     my (%compss); 
 
     my $file = 'Mandrake/base/compssUsers';
@@ -672,15 +672,15 @@ sub readCompssUsers {
 	    my ($icon, $descr);
 	    /^(.*?)\s*\[icon=(.*?)\](.*)/  and $_ = "$1$3", $icon  = $2;
 	    /^(.*?)\s*\[descr=(.*?)\](.*)/ and $_ = "$1$3", $descr = $2;
-	    $compssUsersIcons{$_} = $icon; 
-	    $compssUsersDescr{$_} = $descr; 
+	    $compssUsers{$_}{icons} = $icon; 
+	    $compssUsers{$_}{descr} = $descr; 
 	    push @sorted, $_;
-	    $compssUsers{$_} = $l = [];
+	    $compssUsers{$_}{flags} = $l = [];
 	} elsif (/^\s+(.*?)\s*$/) {
 	    push @$l, $1;
 	}
     }
-    \%compssUsers, \@sorted, \%compssUsersIcons, \%compssUsersDescr;
+    \%compssUsers, \@sorted;
 }
 
 sub setSelectedFromCompssList {
