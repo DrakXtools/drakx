@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 50mdk
+Release: 51mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -22,12 +22,16 @@ Obsoletes: draksec
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
 Requires: perl-base >= 1:5.8.0-20mdk, urpmi >= 4.4-23mdk, modutils >= 2.3.11, ldetect-lst >= 0.1.7-3mdk, usermode-consoleonly >= 1.44-4mdk, msec >= 0.38-5mdk
+Requires: %{name}-backend = %version-%release
 Requires: netprofile
 Obsoletes: diskdrake kbdconfig mouseconfig printtool setuptool drakfloppy
 Provides: diskdrake, kbdconfig mouseconfig printtool setuptool, drakfloppy = %version-%release
 Provides: perl(Newt::Newt)
 Provides: perl(network::isdn_consts)
-%define _requires_exceptions perl(interactive::gtk)\\|perl(ugtk2)
+
+%package backend
+Summary: Drakxtools libraries and background tools 
+Group: System/Configuration/Other
 
 %package http
 Summary: The drakxtools via http
@@ -128,6 +132,9 @@ possible
 
 net_applet: applet to check network connection
 
+%description backend
+See package %name
+
 %description newt
 See package %name
 
@@ -172,8 +179,9 @@ dirs1="usr/lib/libDrakX usr/share/libDrakX"
 (cd $RPM_BUILD_ROOT ; find $dirs1 usr/bin usr/sbin ! -type d -printf "/%%p\n")|egrep -v 'bin/.*harddrake' > %{name}.list
 (cd $RPM_BUILD_ROOT ; find $dirs1 -type d -printf "%%%%dir /%%p\n") >> %{name}.list
 
-perl -ni -e '/clock|drak(backup|bug|clock|floppy|font|log|net_monitor|perm|printer|sec|splash|TermServ)|gtk|icons|logdrake|net_applet|net_monitor|pixmaps|printer|xf86misc/ ? print STDERR $_ : print' %{name}.list 2> %{name}-gtk.list
+perl -ni -e '/clock|drak(backup|bug|clock|floppy|font|log|net_monitor|perm|printer|sec|splash|TermServ)|gtk|icons|logdrake|net_applet|net_monitor|pixmaps|printer|xf86misc|\.png$/ ? print STDERR $_ : print' %{name}.list 2> %{name}-gtk.list
 perl -ni -e '/http/ ? print STDERR $_ : print' %{name}.list 2> %{name}-http.list
+perl -ni -e 'm!lib/libDrakX|bootloader-config|fileshare|lsnetdrake|ddcxinfos|drakupdate_fstab|rpcinfo|serial_probe! && !/newt/i ? print STDERR $_ : print' %{name}.list 2> %{name}-backend.list
 
 #mdk menu entry
 mkdir -p $RPM_BUILD_ROOT/%_menudir
@@ -265,12 +273,15 @@ done
 %postun -n harddrake
 file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrake/convert || :
 
-%files newt -f %name.list
+%files backend -f %{name}-backend.list
 %defattr(-,root,root)
 %config(noreplace) /etc/security/fileshare.conf
+%attr(4755,root,root) %_sbindir/fileshareset
+
+%files newt -f %name.list
+%defattr(-,root,root)
 %_menudir/drakxtools-newt
 %doc diskdrake/diskdrake.html
-%attr(4755,root,root) %_sbindir/fileshareset
 %_iconsdir/localedrake.png
 %_iconsdir/large/localedrake.png
 %_iconsdir/mini/localedrake.png
@@ -301,7 +312,6 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %_iconsdir/mini/harddrake.png
 %_iconsdir/harddrake.png
 
-
 %files http -f %{name}-http.list
 %defattr(-,root,root)
 %dir %_sysconfdir/drakxtools_http
@@ -312,6 +322,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Jul  1 2004 Pixel <pixel@mandrakesoft.com> 10-51mdk
+- create package drakxtools-backend
+
 * Thu Jul  1 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-50mdk
 - drakupdate_fstab (oblin): fix moving mount point (#6982, #10175)
 - drakauth: for Active Directory, allow: Kerberos, SSL/TLS, simple and
