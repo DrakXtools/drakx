@@ -14,7 +14,7 @@ use c;
 #-#####################################################################################
 #- Globals
 #-#####################################################################################
-my @netdevices = map { my $l = $_; map { "$l$_" } (0..3) } qw(eth tr plip fddi);
+my @netdevices = map { my $l = $_; map { "$l$_" } (0..3) } (qw(eth tr fddi), $::isStandalone ? () : 'plip');
 my %serialprobe = ();
 my $usb_interface = undef;
 

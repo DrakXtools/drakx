@@ -291,7 +291,7 @@ sub choosePartitionsToFormat($$) {
 
     $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"),
 			       [ map { $label{$_} } @l ],
-			       [ map { \$toFormat{$_} } @l ]) or die "cancel";
+			       [ map { \$toFormat{$_} } @l ]) or die "already displayed";
     #- ok now we can really set toFormat
     $_->{toFormat} = $toFormat{$_} foreach @l;
 

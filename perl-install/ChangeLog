@@ -1,3 +1,21 @@
+2000-09-21  Pixel  <pixel@mandrakesoft.com>
+
+	* detect_devices.pm (@netdevices): plip removed in standalone,
+	otherwise plip is always there (because of kmod)
+
+	* install_steps_interactive.pm (choosePartitionsToFormat): replace
+	the die "cancel" by die "already displayed", so that no error is
+	displayed.
+
+	* pci_probing/pcitable: replace some rtl8139 by 8139too, added
+	cards DELTA8139 and ADDTRON8139 (for jeff)
+
+	* Xconfigurator.pm (show_info): also show the colordepth and
+	resolution. don't show server if none, show XF4 driver if there's
+	one.	
+	(main): change the "Forget the changes" to "Keep the changes?"
+	with displaying the current configuration.
+
 2000-09-21  François Pons  <fpons@mandrakesoft.com>
 
 	* printer.pm: changed "PostScript" ppd default description to "Raw
@@ -13,6 +31,9 @@
 	* netconnect.pm (conf_network_card): added check when dhcp. Cable connection
 	should now work.
 
+2000-09-21  DrakX <install@linux-mandrake.com>
+
+	* snapshot uploaded
 
 2000-09-21  Pixel  <pixel@mandrakesoft.com>
 

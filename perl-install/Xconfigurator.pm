@@ -995,7 +995,7 @@ sub XF86check_link {
     }
 }
 
-sub show_info {
+sub info {
     my ($o) = @_;
     my $info;
 
@@ -1007,9 +1007,18 @@ sub show_info {
     $info .= _("Monitor VertRefresh: %s\n", $o->{monitor}{vsyncrange}) if $::expert;
     $info .= _("Graphic card: %s\n", $o->{card}{type});
     $info .= _("Graphic memory: %s kB\n", $o->{card}{memory}) if $o->{card}{memory};
-    $info .= _("XFree86 server: %s\n", $o->{card}{server});
+    if ($o->{default_depth} and my $depth = $o->{card}{depth}{$o->{default_depth}}) {
+    $info .= _("Color depth: %s\n", translate($depths{$o->{default_depth}}));
+    $info .= _("Resolution: %s\n", join "x", @{$depth->[0]}) if $depth && !is_empty_array_ref($depth->[0]);
+    }
+    $info .= _("XFree86 server: %s\n", $o->{card}{server}) if $o->{card}{server};
+    $info .= _("XFree86 driver: %s\n", $o->{card}{driver}) if $o->{card}{driver};
+    $info;
+}
 
-    $in->ask_warn('', $info);
+sub show_info {
+    my ($o) = @_;
+    $in->ask_warn('', info($o));
 }
 
 #- Program entry point.
@@ -1053,7 +1062,10 @@ sub main {
 	$in->kill;
     }
     if (!$ok) {
-	$ok = !$in->ask_yesorno('', _("Forget the changes?"), 1);
+	$ok = $in->ask_yesorno('', _("Keep the changes?
+Current configuration is:
+
+%s", info($o)));
     }
     if ($ok) {
 	unless ($::testing) {
