@@ -752,15 +752,9 @@ sub wait_message_endW {
 }
 
 sub kill {
-    my ($o) = @_;
-    $o->{before_killing} ||= 0;
-
-    while (my $e = shift @tempory::objects) { $e->destroy }
-    while (@interactive::objects > $o->{before_killing}) {
-	my $w = pop @interactive::objects;
-	$w->destroy;
-    }
-    $o->{before_killing} = @interactive::objects;
+    my ($_o) = @_;
+    $_->destroy foreach $::WizardTable ? $::WizardTable->get_children : (), @tempory::objects, @interactive::objects;
+    @tempory::objects = @interactive::objects = ();
 }
 
 sub ok {
