@@ -40,7 +40,7 @@ my @column_sizes = (150, 100, 100, 15, -1);
 each_index {
     my $col = Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i);
     $col->set_min_width($column_sizes[$::i]);
-    $col->set_sort_column_id($::i);
+#    $col->set_sort_column_id($::i);
     $permList->append_column($col);
 } (N("path"), N("user"), N("group"), N("permissions"));
 
