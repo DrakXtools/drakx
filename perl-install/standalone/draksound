@@ -27,7 +27,7 @@ use harddrake::sound;
 use modules;
 use detect_devices;
 
-my $in = 'interactive'->vnew();
+my $in = 'interactive'->vnew('su');
 
 modules::mergein_conf('/etc/modules.conf');
 
