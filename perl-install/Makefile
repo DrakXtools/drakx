@@ -86,18 +86,18 @@ get_needed_files: $(DIRS) mo_files
 	eval `perl -V:version`; \
 	cat share/list `../tools/specific_arch share/list` | \
 	perl -pe "s/ARCH/$(ARCH)/g ; s/PERL_VERSION/$$version/g ; s|/LIB/|/$(LIB)/|g " | \
-	perl -lpe '@l = glob; m|\*.*/| && @l != 1 and die "no/multiple match for $$_\n"; $$_ = join("\n", @l)' > /tmp/list
-	rpm -ql perl-Gtk2 perl-Glib | grep '^/usr/lib/perl5' | grep -v '\.pod$$' >> /tmp/list
+	perl -lpe '@l = glob; m|\*.*/| && @l != 1 and die "no/multiple match for $$_\n"; $$_ = join("\n", @l)' > $(TMPDIR)/list
+	rpm -ql perl-Gtk2 perl-Glib | grep '^/usr/lib/perl5' | grep -v '\.pod$$' >> $(TMPDIR)/list
 
-	@missing=`perl -lne 'print if !-e $$_' /tmp/list`; [ -z "$$missing" ] || { echo "missing or multiple files vvvvvvvvvvvvvvvvvvvvvvvvvv" ; echo "$$missing" ; echo "missing or multiple files ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" ; exit 1; }
+	@missing=`perl -lne 'print if !-e $$_' $(TMPDIR)/list`; [ -z "$$missing" ] || { echo "missing or multiple files vvvvvvvvvvvvvvvvvvvvvvvvvv" ; echo "$$missing" ; echo "missing or multiple files ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" ; exit 1; }
 
-	find auto -follow -name "*.so" >> /tmp/list
+	find auto -follow -name "*.so" >> $(TMPDIR)/list
 
-	for i in $(LOCALFILES) `cat /tmp/list` ; do \
-		ldd $$i 2>/dev/null | grep "=>" | perl -pe 's/.*=> //; s/ .*//; s,^/lib/.*?/,/lib/,' | sort | uniq >> /tmp/list; \
+	for i in $(LOCALFILES) `cat $(TMPDIR)/list` ; do \
+		ldd $$i 2>/dev/null | grep "=>" | perl -pe 's/.*=> //; s/ .*//; s,^/lib/.*?/,/lib/,' | sort | uniq >> $(TMPDIR)/list; \
 	done
 
-	perl -Mlang -I. -e 'print "$$_\n" foreach lang::console_font_files()' >> /tmp/list
+	perl -Mlang -I. -e 'print "$$_\n" foreach lang::console_font_files()' >> $(TMPDIR)/list
 
 	install -d $(DEST)/etc
 	install -d $(DEST)/etc/sysconfig/network-scripts
@@ -128,7 +128,7 @@ ifeq (i386,$(ARCH))
 	install -s /sbin/cardmgr $(DEST)/usr/bin
 endif
 
-	for i in `cat /tmp/list`; do \
+	for i in `cat $(TMPDIR)/list`; do \
 	    if (echo $$i | grep -q "lib/[^/]*\.so"); then \
 	      install -s $$i $(DEST)/lib; \
 	    elif (echo $$i | grep -q "lib64/[^/]*\.so"); then \
