@@ -860,7 +860,7 @@ sub resolutionsConfiguration {
     #- there could be a problem.
     #- memory in KB is approximated by $wres*$dpeth/14 which is little less
     #- than memory really used, (correct factor is 13.65333 for w/h ratio of 1.33333).
-    if (!$wres || $auto && ($wres < 1024 && ($card->{memory} / ($wres * $depth / 14)) > 2)) {
+    if (!$wres || $auto && ref($in) !~ /class_discard/ && ($wres < 1024 && ($card->{memory} / ($wres * $depth / 14)) > 2)) {
 	delete $card->{depth};
 	return resolutionsConfiguration($o);
     }
