@@ -59,14 +59,14 @@ sub ask_okcancel($$$;$) {
 
 sub ask_from_list_ {
     my ($o, $title, $message, $l, $def) = @_;    
-    @$l == 0 and die;
+    @$l == 0 and die '';
     @$l == 1 and return $l->[0];
     goto &ask_from_list2_;
 }
 
 sub ask_from_list {
     my ($o, $title, $message, $l, $def) = @_;
-    @$l == 0 and die;
+    @$l == 0 and die '';
     @$l == 1 and return $l->[0];
     goto &ask_from_list2;
 }

@@ -382,19 +382,21 @@ sub setupSCSI {
 
 #------------------------------------------------------------------------------
 sub partitionDisks {
-    $o->{drives} = [ detect_devices::hds() ];
-    $o->{hds} = catch_cdie { fsedit::hds($o->{drives}, $o->{partitioning}) }
-      sub {
-	  $o->ask_warn(_("Error"), 
+    unless ($o->{hds}) {
+	$o->{drives} = [ detect_devices::hds() ];
+	$o->{hds} = catch_cdie { fsedit::hds($o->{drives}, $o->{partitioning}) }
+	  sub {
+	      $o->ask_warn(_("Error"), 
 _("I can't read your partition table, it's too corrupted for me :(
 I'll try to go on blanking bad partitions"));
-	  1;
-      };
+	      1;
+	  };
 
-    unless (@{$o->{hds}} > 0) {
-	$o->setupSCSI if $o->{autoSCSI}; #- ask for an unautodetected scsi card
+	unless (@{$o->{hds}} > 0) {
+	    $o->setupSCSI if $o->{autoSCSI}; #- ask for an unautodetected scsi card
+	}
     }
-    unless (@{$o->{hds}} > 0) { #- no way
+    if (@{$o->{hds}} == 0) { #- no way
 	die _("An error has occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
     }
 

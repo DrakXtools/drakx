@@ -36,6 +36,7 @@ my %types = (
   0xb => "Win98 FAT32 0xb",
   0xc => "Win98 FAT32",
   0xe => "Win98 FAT32 0xd",
+  0xf => "Win95 Ext'd (LBA)",
   0x12 => "Compaq setup",
   0x40 => "Venix 80286",
   0x51 => "Novell?",
@@ -89,7 +90,7 @@ sub type2fs($) { $type2fs{$_[0]} }
 sub name2type($) { $types_rev{$_[0]} }
 sub fs2type($) { $fs2type{$_[0]} }
 
-sub isExtended($) { $_[0]{type} == 5 }
+sub isExtended($) { $_[0]{type} == 5 || $_[0]{type} == 0xf }
 sub isSwap($) { $type2fs{$_[0]{type}} eq 'swap' }
 sub isExt2($) { $type2fs{$_[0]{type}} eq 'ext2' }
 sub isDos($) { $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]{type}} }

@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common     => [ qw(__ min max sum sign product bool listlength bool2text to_int ikeys member divide is_empty_array_ref add2hash set_new set_add round_up round_down first second top uniq translate untranslate warp_text) ],
+    common     => [ qw(__ min max sum sign product bool listlength bool2text to_int ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash set_new set_add round_up round_down first second top uniq translate untranslate warp_text) ],
     functional => [ qw(fold_left map_index map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
     file       => [ qw(dirname basename touch all glob_ cat_ chop_ mode) ],
     system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_ getVarsFromSh setVarsInSh) ],
@@ -62,6 +62,7 @@ sub divide { my $d = int $_[0] / $_[1]; wantarray ? ($d, $_[0] % $_[1]) : $d }
 sub round_up { my ($i, $r) = @_; $i += $r - ($i + $r - 1) % $r - 1; }
 sub round_down { my ($i, $r) = @_; $i -= $i % $r; }
 sub is_empty_array_ref { my $a = shift; !defined $a || @$a == 0 }
+sub is_empty_hash_ref { my $a = shift; !defined $a || keys(%$a) == 0 }
 sub difference2 { my %l; @l{@{$_[1]}} = (); grep { !exists $l{$_} } @{$_[0]} }
 sub intersection { my (%l, @m); @l{@{shift @_}} = (); foreach (@_) { @m = grep { exists $l{$_} } @$_; %l = (); @l{@m} = (); } keys %l }
 
@@ -136,7 +137,7 @@ sub add_f4before_leaving {
     my $list = *common::before_leaving::list;
     $list->{$b}{$name} = $f;
     *N = sub {
-	my $f = $list->{$_[0]}{$name} or die;
+	my $f = $list->{$_[0]}{$name} or die '';
 	$name eq 'DESTROY' and delete $list->{$_[0]};
 	goto $f;
     } unless defined &{*N};

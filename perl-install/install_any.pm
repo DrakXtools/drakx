@@ -75,9 +75,9 @@ sub spawnShell {
     local *F;
     sysopen F, "/dev/tty2", 2 or die "cannot open /dev/tty2 -- no shell will be provided";
 
-    open STDIN, "<&F" or die;
-    open STDOUT, ">&F" or die;
-    open STDERR, ">&F" or die;
+    open STDIN, "<&F" or die '';
+    open STDOUT, ">&F" or die '';
+    open STDERR, ">&F" or die '';
     close F;
 
     c::setsid();

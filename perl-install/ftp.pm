@@ -39,8 +39,8 @@ sub new {
 	$host = join ".", unpack "C4", (gethostbyname $host)[4];
     }
 
-    my $ftp = Net::FTP->new($host, %options) or die;
-    $ftp->login($ENV{LOGIN}, $ENV{PASSWORD}) or die;
+    my $ftp = Net::FTP->new($host, %options) or die '';
+    $ftp->login($ENV{LOGIN}, $ENV{PASSWORD}) or die '';
     $ftp->binary;
 
     $ftp;

@@ -251,7 +251,7 @@ sub move {
     return if $part2->{notFormatted} && !$part2->{isFormatted} || $::testing;
 
     local (*F, *G);
-    sysopen F, $hd->{file}, 0 or die;
+    sysopen F, $hd->{file}, 0 or die '';
     sysopen G, $hd2->{file}, 2 or die _("Error opening %s for writing: %s", $hd2->{file}, "$!");
 
     my $base = $part->{start};
@@ -273,7 +273,7 @@ sub move {
 	c::lseek_sector(fileno(G), $base2, 0) or die "seeking to sector $base2 failed on drive $hd2->{device}";
     
 	my $buf;
-	sysread F, $buf, $SECTORSIZE * abs($_[0]) or die;
+	sysread F, $buf, $SECTORSIZE * abs($_[0]) or die '';
 	syswrite G, $buf;
     };
 

@@ -252,7 +252,7 @@ sub testFinalConfig($;$) {
     symlink "$prefix/tmp/.X11-unix/X9", "/tmp/.X11-unix/X9" if $prefix;
 
     local *F;
-    open F, "|perl" or die;
+    open F, "|perl" or die '';
     print F "use lib qw(", join(' ', @INC), ");\n";
     print F q{
 	use interactive_gtk;
@@ -426,7 +426,7 @@ sub resolutionsConfiguration($$) {
     #-$unknown and $manual ||= !$in->ask_okcancel('', [ _("I can try to autodetect information about graphic card, but it may freeze :("),
     #-							_("Do you want to try?") ]);
     
-    unless ($card->{depth}) {
+    if (is_empty_hash_ref($card->{depth})) {
 	$card->{depth}{$_} = [ map { [ split "x" ] } @resolutions ] 
 	  foreach @depths;
 
@@ -435,6 +435,9 @@ _("I can try to find the available resolutions (eg: 800x600).
 Alas it can freeze sometimes
 Do you want to try?")))) {
 	    autoResolutions($o, $nowarning);
+	    is_empty_hash_ref($card->{depth}) and $in->ask_warn('', 
+_("No valid modes found
+Try with another video card or monitor")), return;
 	}
     }
 
@@ -449,7 +452,7 @@ Do you want to try?")))) {
     keepOnlyLegalModes($card);
 
     my $res = $o->{resolution_wanted} || $resolution_wanted;
-    my $depth = $card->{default_depth} || autoDefaultDepth($card, $res);
+    my $depth = eval { $card->{default_depth} || autoDefaultDepth($card, $res) };
 
     $auto or ($depth, $res) = chooseResolutions($card, $depth) or return;
 

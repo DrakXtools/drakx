@@ -61,7 +61,8 @@ $(DIRS):
 
 test_pms: verify_c
 	./perl2fcalls -excludec install2
-	(for i in $(PMS); do perl -cw -I. -Ic -Ic/blib/arch $$i || exit 1 ; done)
+	perl -cw -I. -Ic -Ic/blib/arch install2
+	perl -cw -I. -Ic -Ic/blib/arch install_steps_graphical.pm
 
 verify_c:
 	./verify_c $(PMS)

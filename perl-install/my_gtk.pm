@@ -163,7 +163,7 @@ sub gtkset_default_fontset($) {
     my ($fontset) = @_;
 
     my $style = Gtk::Widget->get_default_style;
-    my $f = Gtk::Gdk::Font->fontset_load($fontset) or die;
+    my $f = Gtk::Gdk::Font->fontset_load($fontset) or die '';
     $style->font($f);
     Gtk::Widget->set_default_style($style);
 }
