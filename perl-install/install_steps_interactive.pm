@@ -111,7 +111,7 @@ sub selectInstallClass($@) {
     } else {
 	my %c = (
 		 normal    => _("Normal"),
-		 developer => _("Developement"),
+		 developer => _("Development"),
 		 server    => _("Server"),
 		);
 	$o->{installClass} = ${{reverse %c}}{$o->ask_from_list(_("Install Class"),
