@@ -545,8 +545,11 @@ wait %d seconds for default boot.
 
     #- add a restore entry if installation is done from disk, in order to allow redoing it.
     if (my $hd_install_path = any::hdInstallPath()) {
+	my ($cmdline, $vga);
 	if (-e "/tmp/image/boot/vmlinuz" && -e "/tmp/image/boot/all.rdz" &&
-	    (my ($cmdline) = cat_("/tmp/image/boot/grub/menu.lst") =~ m|kernel \S+/boot/vmlinuz (.*)$|m)) {
+	    ($cmdline = cat_("/tmp/image/boot/grub/menu.lst") =~ m|kernel \S+/boot/vmlinuz (.*)$|m)) {
+	    #- cmdline should'n have any reference to vga=...
+	    $cmdline =~ s/vga=(\S+)//g and $vga = $1;
 	    log::l("copying kernel and stage1 install to $::prefix/boot/restore");
 	    eval { mkdir "$::prefix/boot/restore";
 		   cp_af("/tmp/image/boot/vmlinuz", "$::prefix/boot/restore/vmlinuz");
@@ -559,6 +562,7 @@ wait %d seconds for default boot.
 					kernel_or_dev => "/boot/restore/vmlinuz",
 					initrd => "/boot/restore/all.rdz",
 					append => $cmdline,
+					if_($vga, vga => $vga),
 				       });
 	    }
 	} else {
