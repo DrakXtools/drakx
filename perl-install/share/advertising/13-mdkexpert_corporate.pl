@@ -9,6 +9,6 @@ $icon_dy = 0;
 	 [ _("MandrakeExpert Corporate"), 0, 0, 400, 20, 1 ],
 	 [ _("An online platform to respond to enterprise support needs."), 0, 40, 400, 20, 0 ],
 	 [ _("All incidents will be followed up by a single qualified MandrakeSoft technical expert."), 0, 80, 400, 40, 0 ],
-	 [ ("http://corporate.mandrakeexpert.com"), 0, 120, 400, 20, 0 ],
+	 [ ("corporate.mandrakeexpert.com"), 0, 120, 400, 20, 0 ],
 #	 [ 'text', $x, $y, $area_width, $area_height ],
 	);
