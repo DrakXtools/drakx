@@ -1,3 +1,59 @@
+2001/07/19  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_auto_install.pm, install_steps_newt.pm, install2.pm: based
+	on Michael Brown <mbrown@fensystems.co.uk> patch:
+	  - enables graphical steps in auto_installs for more than gtk
+	  - various cleanup
+
+	* globals.pm: no strict 'refs' instead of 'vars'
+
+	* services.pm: rename ask_install_gtk in ask_install, ask_install is now
+	ask_install_simple (obsolete)
+
+2001/07/18  mbadaire
+
+	* modules.pm, install_any.pm, bootloader.pm: IA64 adaptation
+
+2001/07/18  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* modules.pm, install_steps.pm, install_steps_interactive.pm,
+	tools/serial_probe/serial.c, detect_devices.pm, partition_table_mac.pm,
+	diskdrake.pm: roll back some changes from PPC beta - OldWorld vs
+	NewWorld bootloader
+	modem detection on ttyS0, new sound module in 2.4.4
+
+2001/07/17  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps.pm: disabled Frame buffer for all S3 cards (hangs with XF4
+	and S3 ViRGE on reboot
+	with Aurora).
+
+	* Xconfigurator.pm: cleaned and added S3 Inc in the list to disable test
+	for these card.
+
+2001/07/16  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/rpmsrate: removed references to XFree86-ISO8859-{2,9} packages (no
+	more used)
+
+	* keyboard.pm: small keyboard changes
+
+2001/07/13  tvignaud
+
+	* share/po/fr.po: update
+
+2001/07/12  François Pons  <fpons@mandrakesoft.com>
+
+	* fs.pm: fixed wrong examination of fsck return code (exit code 1 says
+	fsck succeeded in
+	fixing partition and now is ok).
+
+	* run_program.pm: changed exit code of failed exec in rooted to 128
+	instead of 1 (may clash with
+	exit code of fsck else).
+
+	* any.pm: fixed bug for writing in /etc/sysconfig/desktop file.
+
 2001/07/12  François Pons  <fpons@mandrakesoft.com>
 
 	* interactive.pm: added ask_browse_tree_info and ask_browse_tree_info_refW
