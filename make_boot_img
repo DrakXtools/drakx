@@ -42,7 +42,7 @@ my @kernels = grep { /^2/ } all('kernel/all.kernels');
 my @kernels_BOOT = grep { /BOOT/ } @kernels;
 
 my @all_images = (
-		  if_($arch =~ /i.86|x86_64/, 'cdrom.img', 'cdrom-changedisk.img', 'pcmcia.img', 'isolinux', 'boot.iso', 'hd_grub.img', 'network.img', 'network_drivers.img'),
+		  if_($arch =~ /i.86|x86_64/, 'cdrom.img', 'cdrom-changedisk.img', 'pcmcia.img', 'isolinux', 'boot.iso', 'all.img', 'hd_grub.img', 'network.img', 'network_drivers.img'),
 		  if_($arch =~ /ia64/, 'all.img'),
 		  if_($arch =~ /ppc/, 'all.img'),
 		 );
@@ -81,8 +81,8 @@ foreach my $img (@images) {
 	initrd($tmp_mnt_initrd, $type, $I, "$img-$_") foreach @kernels;
     } elsif ($extension eq 'img') {
 	print STDERR "calling boot_img_$arch for $img\n";
-	$::{"boot_img_$arch"}->($type, $I, "$img-$_", "kernel/all.kernels/$_/vmlinuz") foreach @kernels_BOOT;
-	rename("$img-$main_BOOT", $img);
+	$::{"boot_img_$arch"}->($type, $I, "$img-$_", "kernel/all.kernels/$_/vmlinuz") foreach $type eq 'all' ? @kernels : @kernels_BOOT;
+	rename("$img-$main", $img) or rename("$img-$main_BOOT", $img);
     } else {
 	die "unknown image $img";
     }
@@ -250,13 +250,14 @@ sub boot_img_i386 {
 
     __ "$sudo umount $tmp_mnt 2>/dev/null";
 
-    _ "dd if=/dev/zero of=$img bs=1k count=" . ($type eq 'all' ? 2880 : 1440);
-    _ "mkdosfs -f 1 -r 16 -s 2 $img"; # keep the FAT bookkeeping as small as possible
+    _ "dd if=/dev/zero of=$img bs=1k count=" . ($type eq 'all' ? 7000 : 1440);
+    my $mk_options = $type eq 'all' ? '' : '-f 1 -r 16 -s 2'; # keep the FAT bookkeeping as small as possible
+    _ "mkdosfs $mk_options $img";
     _ "$sudo syslinux-graphic $img";
 
     _ "$sudo mount -t vfat -o umask=0 $img $tmp_mnt -o loop";
     _ "cat $kernel > $tmp_mnt/vmlinuz";
-    _ "lilo-bmp2mdk file:isolinux-graphic-simple.bmp >$tmp_mnt/boot.msg";
+    _ "lilo-bmp2mdk file:isolinux-graphic" . ($type eq 'all' ? '' : '-simple') . ".bmp >$tmp_mnt/boot.msg";
 
     output("$tmp_mnt/help.msg", syslinux_msg('help.msg.xml'));
     output("$tmp_mnt/advanced.msg", syslinux_msg('advanced.msg.xml'));
