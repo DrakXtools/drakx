@@ -104,7 +104,7 @@ sub getAvailableSpace {
 
     if ($::testing) {
 	log::l("taking 200MB for testing");
-	return 200 << 20;
+	return 2000 << 20;
     }
     die "missing root partition";
 }
@@ -503,9 +503,9 @@ sub install_urpmi {
 		      ftp => $ENV{URLPREFIX},
 		      http => $ENV{URLPREFIX},
 		      cdrom => "removable_cdrom_1://mnt/cdrom" }}{$method};
-	local *FILES; open FILES, "hdlist2files $f|";
+	local *FILES; open FILES, "hdlist2names $f|";
 	chop, print LIST "$dir/Mandrake/RPMS/$_\n" foreach <FILES>;
-	close FILES or log::l("hdlist2files failed"), return;
+	close FILES or log::l("hdlist2names failed"), return;
 
 	run_program::run("gzip", "-9", $f);
 
@@ -577,6 +577,17 @@ sub kderc_largedisplay($) {
 				      kpaneliconstyle => "kpanelIconStyle=Normal\n", #- to change to Large when icons looks better
 				      kdeiconstyle => "KDEIconStyle=Large\n",
 				     });
+    foreach ("/etc/skel", "/root", list_home()) {
+	my $found;
+	substInFile {
+	    $found ||= /KFM Misc Defaults/;
+	    $_ .= 
+"[KFM Misc Defaults]
+GridWidth=78
+GridHeight=75
+" if eof && !$found;
+	} "$prefix$_/.kde/share/config/kfmrc" 
+    }
 }
 
 sub kdelang_postinstall($) {

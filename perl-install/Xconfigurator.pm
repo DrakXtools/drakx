@@ -399,6 +399,8 @@ sub autoDefaultDepth($$) {
     my ($card, $wres_wanted) = @_;
     my ($best, $depth);
 
+    return 24 if $card->{identifier} =~ /SiS/;
+
     if ($card->{server} eq 'FBDev') {
 	return 16; #- this should work by default, FBDev is allowed only if install currently uses it at 16bpp.
     }

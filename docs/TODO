@@ -1,35 +1,22 @@
-(done,fpons)bug: Lrosqu'on effectue une mise à jour et que /etc/lilo.conf
-contient la variable « default » positionnée sur autre chose que
-« linux » ou « windows », DrakX est incapable de générer LILO.
-
-(done,fpons)bug: GeForce and hd.img?
-
-noatime option for ext2 fs on laptops (do not wake up the hd)
-       Do  not  update  inode  access times on this
-       file system (e.g, for faster access  on  the
-       news spool to speed up news servers).
-
-(done,fpons)for upgrade in expert, give choice of packages to install
-   choosing packages available in upgrade?
-
-refresh the kde desktop after package installation in rpmdrake
-(restart kpanel)
-rpmdrake: pb uninstalling package with dependencies (rpmdrake is killed?!) (as root too)
-
 with 2MB of video ram, chooses 8bpp instead of 16bpp
 
-kde's icons: 27 horiz and 25 vert grid for big icons
+the XFdrake test does not handle the fontset
+
+-c optional for mke2fs
+
+remount ro before X test.
 
 rpmdrake and same name packages
-
-UDMA66 (ultra66.o for promise)
 
 just before release:
 - mandrake_doc-xx, the symlink is no good in /usr/doc/mandrake as 
 - crypto dependencies to update
 - update kudzu's pcitable
+- update pcitable for 86C368 if 3.3.6 (and other S3 3D's)
 
 --------------------------------------------------------------------------------
+mandrake_desk has not installed while kdebase it there on upgrade
+
 bug (by dadou): Si la partition racine est trop petite pour installer le système, un
 message d'erreur apparaît pour signaler le problème (bien) mais on ne
 peut en sortir. La seule solution est de redémarrer.
@@ -41,6 +28,9 @@ peut en sortir. La seule solution est de redémarrer.
 > again.
 > ask_from_list cancel at /usr/lib/libDrakX/my_gtk.pm line 504.
 
+refresh the kde desktop after package installation in rpmdrake
+(restart kpanel)
+
 bug in ext2resizing (no sparse superbloc, don't finish properly)
 
 diskdrake: take from parted mklabel, hide(?)
@@ -48,6 +38,8 @@ diskdrake: take from parted mklabel, hide(?)
 error handling (like reading hdlist)
 
 smp not detected (mhoward@memphisonline.com on cooker, bios=BP6PW)
+
+UDMA66 (ultra66.o for promise)
 
 bug in kde desktop if keeps home but not an upgrade
 
@@ -309,4 +301,22 @@ suggested partition tables must be better foreach installClass
 (done,pix(was bug in upgrade reading old config))
   segfault in linuxconf (adapter 1 empty)
   (test with the sysconfig sent)
+
+(done,fpons)bug: Lrosqu'on effectue une mise à jour et que /etc/lilo.conf
+contient la variable « default » positionnée sur autre chose que
+« linux » ou « windows », DrakX est incapable de générer LILO.
+
+(done,fpons)bug: GeForce and hd.img?
+
+(done,fpons)for upgrade in expert, give choice of packages to install
+   choosing packages available in upgrade?
+
+(done,pix)rpmdrake: pb uninstalling package with dependencies (rpmdrake is killed?!) (as root too)
+
+(done,pix)noatime option for ext2 fs on laptops (do not wake up the hd)
+       Do  not  update  inode  access times on this
+       file system (e.g, for faster access  on  the
+       news spool to speed up news servers).
+
+(done,pix)kde's icons: 28 horiz and 25 vert grid for big icons
 

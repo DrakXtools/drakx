@@ -69,6 +69,7 @@ sub select($$;$) {
     my ($packages, $p, $base) = @_;
     my %preferred; @preferred{@preferred} = ();
     my ($n, $v);
+#   print "## $p->{name}\n";
     unless ($p->{installed}) { #- if the same or better version is installed, do not select.
 	$p->{base} ||= $base;
 	$p->{selected} = -1; #- selected by user
@@ -88,6 +89,8 @@ sub select($$;$) {
 	    $i->{deps} or log::l("missing deps for $n");
 	    unless ($i->{installed}) {
 		unless ($i->{selected}) {
+#		    print ">> $i->{name}\n";
+#		    /gnome-games/ and print ">>> $i->{name}\n" foreach @{$i->{deps} || []};
 		    $l{$_} ||= 0 foreach @{$i->{deps} || []};
 		}
 		$i->{selected}++ unless $i->{selected} == -1;
@@ -132,6 +135,19 @@ sub set($$$) {
 sub unselect_all($) {
     my ($packages) = @_;
     $_->{selected} = $_->{base} foreach values %$packages;
+}
+
+sub size_selected {
+    my ($packages) = @_;
+    my $nb = 0; foreach (values %$packages) {
+	$nb += $_->{size} if $_->{selected};
+    }
+    $nb;
+}
+
+sub skip_set {
+    my ($packages, @l) = @_;
+    $_->{skip} = 1 foreach @l, grep { $_ } map { Package($packages, $_) } map { @{$_->{provides} || []} } @l;
 }
 
 sub psUsingDirectory(;$) {
@@ -230,6 +246,7 @@ sub readCompssList($$$) {
     local $_ = <$f>;
     my $level = [ split ];
 
+    my $nb_values = 3;
     my $e;
     foreach (<$f>) {
 	/^\s*$/ || /^#/ and next;
@@ -251,7 +268,7 @@ sub readCompssList($$$) {
 	foreach ($locales, @{$p->{provides} || []}, @{$by_lang{$_} || []}) {
 	    next if $done{$_}; $done{$_} = 1;
 	    my $p = $packages->{$_} or next;
-	    $p->{values} = [ map { $_ + 70 } @{$p->{values}} ];
+	    $p->{values} = [ map { $_ + 90 } @{$p->{values} || [ (0) x $nb_values ]} ];
 	}
     }
     $level;
@@ -289,7 +306,7 @@ sub readCompssUsers {
 #- }
 
 sub setSelectedFromCompssList {
-    my ($compssListLevels, $packages, $min_level, $max_size, $install_class, $isUpgrade) = @_;
+    my ($compssListLevels, $packages, $min_level, $max_size, $install_class) = @_;
     my ($ind);
 
     my @packages = allpackages($packages);
@@ -302,15 +319,16 @@ sub setSelectedFromCompssList {
     };
     foreach (@places) {
 	my $p = $packages[$_];
+	next if $p->{skip};
 	last if $p->{values}[$ind] < $min_level;
 
-	&select($packages, $p) unless $isUpgrade;
+	&select($packages, $p);
 
 	my $nb = 0; foreach (@packages) {
 	    $nb += $_->{size} if $_->{selected};
 	}
 	if ($nb > $max_size) {
-	    unselect($packages, $p) unless $isUpgrade;
+	    unselect($packages, $p);
 	    $min_level = $p->{values}[$ind];
 	    last;
 	}

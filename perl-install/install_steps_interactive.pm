@@ -231,33 +231,66 @@ sub selectPackagesToUpgrade {
 }
 #------------------------------------------------------------------------------
 sub choosePackages {
-    my ($o, $packages, $compss, $compssUsers, $compssUsersSorted) = @_;
-    my $availableSpace = int(install_any::getAvailableSpace($o) / sqr(1024));
+    my ($o, $packages, $compss, $compssUsers, $compssUsersSorted, $first_time) = @_;
 
     require pkgs;
+    unless ($o->{isUpgrade}) {
+	my $available = pkgs::invCorrectSize(install_any::getAvailableSpace($o) / sqr(1024)) * sqr(1024);
+	
+	delete $_->{skip} foreach values %$packages;
+	pkgs::unselect_all($packages);
+	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $::expert ? 95 : 80, $available, $o->{installClass});
+	my $min_size = pkgs::size_selected($packages);
 
-    #- alas, it through away any tree selected packages
-    pkgs::unselect_all($o->{packages});
-    pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $::expert ? 95 : 80, $availableSpace * 0.7, $o->{installClass}) unless $o->{isUpgrade};
+	do { $o->{compssUsersChoice}{$_} = 1 foreach @$compssUsersSorted, 'Miscellaneous' } if $first_time;
+	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted) unless $::beginner;
+
+	my %save_selected; $save_selected{$_->{name}} = $_->{selected} foreach values %$packages;
+	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, $available, $o->{installClass});
+	my $max_size = pkgs::size_selected($packages);
+	$_->{selected} = $save_selected{$_->{name}} foreach values %$packages;	
+
+	my $size2install = $::beginner ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, $max_size);
+
+	($o->{packages_}{ind}) = 
+	  pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, $size2install, $o->{installClass});
+
+#	$_->{selected} and log::l("$_->{name}") foreach values %$packages;
+    }
+    $o->choosePackagesTree($packages, $compss) if $::expert;
+}
+
+sub chooseSizeToInstall {
+    my ($o, $packages, $min, $max) = @_;
+    install_any::getAvailableSpace($o) * 0.7;
+}
+sub choosePackagesTree {}
+
+sub chooseGroups {
+    my ($o, $packages, $compssUsers, $compssUsersSorted) = @_;
 
     $o->ask_many_from_list_ref('',
 			       _("Package Group Selection"),
-			       [ @$compssUsersSorted ],
-			       [ map { \$o->{compssUsersChoice}{$_} } @$compssUsersSorted ]
-			       ) or goto &choosePackages;
-    while (my ($k, $v) = each %{$o->{compssUsersChoice}}) {
-	$v or next;
-	pkgs::select($packages, $_) foreach @{$o->{compssUsers}{$k}};
-    }
-    my $current = pkgs::correctedSelectedSize($packages);
-    if ($availableSpace < $current) {
-	$o->ask_warn('', _("Too many packages chosen: %dMB doesn't fit in %dMB", $current, $availableSpace));
-	goto &choosePackages;
-    }
+			       [ @$compssUsersSorted, "Miscellaneous" ],
+			       [ map { \$o->{compssUsersChoice}{$_} } @$compssUsersSorted, "Miscellaneous" ]
+			       ) or goto &chooseGroups;
 
+    unless ($o->{compssUsersChoice}{Miscellaneous}) {
+	my %l;
+	$l{@{$compssUsers->{$_}}} = () foreach @$compssUsersSorted;
+#	exists $l{$_} or print ">>$_\n" foreach keys %$packages;
+	exists $l{$_} or $packages->{$_}{skip} = 1 foreach keys %$packages;
+    }
+    foreach (@$compssUsersSorted) {
+	$o->{compssUsersChoice}{$_} or pkgs::skip_set($packages, @{$compssUsers->{$_}});
+    }
+    foreach (@$compssUsersSorted) {
+	$o->{compssUsersChoice}{$_} or next;
+	delete $_->{skip} foreach @{$compssUsers->{$_}};
+    }
     my $f = "$o->{prefix}/etc/sysconfig/desktop";
-    output($f, "KDE\n") if !-e $f && $o->{compssUsersChoice}{KDE};
-    output($f, "GNOME\n") if !-e $f && $o->{compssUsersChoice}{Gnome};
+    output($f, "KDE\n") if $o->{compssUsersChoice}{KDE};
+    output($f, "GNOME\n") if $o->{compssUsersChoice}{Gnome};
 }
 
 #------------------------------------------------------------------------------

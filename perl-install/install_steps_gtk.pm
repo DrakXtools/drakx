@@ -259,8 +259,9 @@ sub doPartitionDisks($$) {
 _("WARNING!
 
 DrakX now needs to resize your Windows partition. Be careful: this operation is
-dangerous. If you have not already done so, you should first run scandisk (and
-optionally run defrag) on this partition and backup your data.
+dangerous. If you have not already done so, you should first exit the
+installation, run scandisk under Windows (and optionally run defrag), then
+restart the installation. You should also backup your data.
 When sure, press Ok."))) {
 	    my $hd = $hds->[0];
 	    my $oldsize = $part->{size};
@@ -299,29 +300,18 @@ When sure, press Ok."))) {
 }
 
 #------------------------------------------------------------------------------
-sub choosePackages {
-    my ($o, $packages, $compss, $compssUsers, $compssUsersSorted, $first_time) = @_;
-
-    if ($::beginner) {
-	require pkgs;
-	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, install_any::getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{isUpgrade});
-    } else {
-	install_steps_interactive::choosePackages(@_);
-	chooseSizeToInstall(@_);
-	choosePackagesTree(@_) if $::expert;
-    }
-}
 sub chooseSizeToInstall {
-    my ($o, $packages, $compss, $compssUsers, $first_time) = @_;
-    my $availableSpace = int(install_any::getAvailableSpace($o) / sqr(1024));
-    my $current = pkgs::correctedSelectedSize($packages);
+    my ($o, $packages, $min_size, $max_size) = @_;
+    my ($min, $max) = map { pkgs::correctSize($_ / sqr(1024)) } $min_size, $max_size;
     my $w = my_gtk->new('');
-    my $adj = create_adjustment($current * 1.3, $current, $availableSpace);
+    my $adj = create_adjustment($max, $min, $max);
     my $spin = gtkset_usize(new Gtk::SpinButton($adj, 0, 0), 100, 0);
 
     gtkadd($w->{window},
 	  gtkpack(new Gtk::VBox(0,20),
-		  _("Going to install %d MB. You can choose to install more programs", $current) .
+_("Now that you've selected desired groups, please choose 
+how many packages you want, ranging from minimal to full 
+installation of each selected groups.") .
 		  ($::expert ? "\n" . _("You will be able to choose more precisely in next step") : ''),
 		 create_packtable({ col_spacings => 10 },
 				  [ _("Choose the size you want to install"), $spin, _("MB"), ],
@@ -332,12 +322,7 @@ sub chooseSizeToInstall {
 	 );
     $spin->signal_connect(activate => sub { $w->{retval} = 1; Gtk->main_quit });
     $spin->grab_focus();
-    $w->main or return;
-
-    ($o->{packages_}{ind}, $o->{packages_}{select_level}) = 
-      pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, 1,
-				      pkgs::invCorrectSize($spin->get_value_as_int) * sqr(1024), 
-				      $o->{installClass}, $o->{isUpgrade});
+    $w->main and pkgs::invCorrectSize($spin->get_value_as_int) * sqr(1024);
 }
 sub choosePackagesTree {
     my ($o, $packages, $compss) = @_;
@@ -433,17 +418,17 @@ sub choosePackagesTree {
 	&$update();
     });
 
-    my $select_add = sub {
-	my ($ind, $level) = @{$o->{packages_}}{"ind", "select_level"};
-	$level = max(0, min(100, ($level + $_[0])));
-	$o->{packages_}{select_level} = $level;
-
-	pkgs::unselect_all($packages);
-	foreach (pkgs::allpackages($packages)) {
-	    pkgs::select($packages, $_) if $_->{values}[$ind] >= $level;
-	}
-	&$update;
-    };
+#-    my $select_add = sub {
+#-	  my ($ind, $level) = @{$o->{packages_}}{"ind", "select_level"};
+#-	  $level = max(0, min(100, ($level + $_[0])));
+#-	  $o->{packages_}{select_level} = $level;
+#-
+#-	  pkgs::unselect_all($packages);
+#-	  foreach (pkgs::allpackages($packages)) {
+#-	      pkgs::select($packages, $_) if $_->{values}[$ind] >= $level;
+#-	  }
+#-	  &$update;
+#-    };
 
     my $show_add = sub {
 	my ($ind, $level) = @{$o->{packages_}}{"ind", "show_level"};

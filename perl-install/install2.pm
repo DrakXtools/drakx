@@ -334,6 +334,12 @@ sub formatPartitions {
     mkdir "$o->{prefix}/$_", 0700 foreach qw(root);
 
     raid::prepare_prefixed($o->{raid}, $o->{prefix});
+
+    #-noatime option for ext2 fs on laptops (do not wake up the hd)
+    #-	 Do  not  update  inode  access times on this
+    #-	 file system (e.g, for faster access  on  the
+    #-	 news spool to speed up news servers).
+    $_->{options} = "noatime" foreach grep { isExt2($_) } @{$o->{fstab}};
 }
 
 #------------------------------------------------------------------------------
