@@ -43,7 +43,7 @@ Linux-Mandrake operating system:
 
 	* Customized: if you are familiar enough with GNU/Linux, you may choose the primary usage (workstation, server,
 	  development) of your sytem. You will need to answer to more questions than in \"Recommanded\" installation
-	  class, so you need to know how works GNU/Linux to choose this installation class.
+	  class, so you need to know how GNU/Linux works to choose this installation class.
 
 
 	* Expert: if you have a good knowledge in GNU/Linux, you can choose this installation class. As in \"Customized\"
