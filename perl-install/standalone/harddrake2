@@ -295,7 +295,7 @@ $tree->get_selection->signal_connect('changed' => sub {
                 next unless any { member($_, @fields) } @$grouped;
                 
                 push @formated, titleFormat($group);
-                push @formated, map { if_(ref $_, @$_) } $device_fields{$_} foreach @fields;
+                push @formated, map { if_(ref $_, @$_) } @device_fields{@fields};
             };
             push @formated, if_(@formated && @$ungrouped, titleFormat(N("Misc"))), map { @{$device_fields{$_}} } @$ungrouped;
             gtktext_insert($text, \@formated);
