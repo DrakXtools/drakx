@@ -111,6 +111,7 @@ endif
 	done
 	mv -f $(DEST)/lib/libimlib-png.so $(DEST)/usr/lib
 
+#	# transform xpm's in png's
 	for i in $(DEST)/usr/share/icons/*.xpm; do convert $$i `echo $$i | sed 's/xpm/png/'`; rm $$i; done
 
 	mv -f $(DEST)/bin/* $(DEST)/sbin/* $(DEST)/usr/bin
