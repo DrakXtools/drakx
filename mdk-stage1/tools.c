@@ -101,7 +101,6 @@ void process_cmdline(void)
 		params[param_number].name = name;
 		params[param_number].value = value;
 		param_number++;
-		if (!strcmp(name, "expert")) set_param(MODE_EXPERT);
 		if (!strcmp(name, "changedisk")) set_param(MODE_CHANGEDISK);
 		if (!strcmp(name, "updatemodules")) set_param(MODE_UPDATEMODULES);
 		if (!strcmp(name, "rescue")) set_param(MODE_RESCUE);
@@ -144,13 +143,11 @@ int get_param(int i)
 			buf[nb] = '\0';
 			ptr = buf;
 			while ((ptr = strstr(ptr, "+ "))) {
-				if (!strncmp(ptr+2, "expert", 6)) set_param(MODE_EXPERT);
 				if (!strncmp(ptr+2, "rescue", 6)) set_param(MODE_RESCUE);
 				ptr++;
 			}
 			ptr = buf;
 			while ((ptr = strstr(ptr, "- "))) {
-				if (!strncmp(ptr+2, "expert", 6)) unset_param(MODE_EXPERT);
 				if (!strncmp(ptr+2, "rescue", 6)) unset_param(MODE_RESCUE);
 				ptr++;
 			}

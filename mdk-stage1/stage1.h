@@ -31,7 +31,6 @@
 extern char * interactive_fifo;
 
 #define MODE_TESTING        (1 << 0)
-#define MODE_EXPERT         (1 << 1)
 #define MODE_RESCUE         (1 << 3)
 #define MODE_AUTOMATIC	    (1 << 4)
 #define MODE_KEEP_MOUNTED   (1 << 5) /* for rescue */
@@ -43,7 +42,6 @@ extern char * interactive_fifo;
 #define MODE_RECOVERY       (1 << 14)
 
 #define IS_TESTING     (get_param(MODE_TESTING))
-#define IS_EXPERT      (get_param(MODE_EXPERT))
 #define IS_RESCUE      (get_param(MODE_RESCUE))
 #define IS_AUTOMATIC   (get_param(MODE_AUTOMATIC))
 #define IS_DEBUGSTAGE1 (get_param(MODE_DEBUGSTAGE1))

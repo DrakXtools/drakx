@@ -193,7 +193,7 @@ static void spawn_interactive(void)
 				perror("could not set new controlling tty");
 
 			fif_out = open(interactive_fifo, O_WRONLY);
-			printf("Please enter your command (availables: [+,-] [rescue,expert]).\n");
+			printf("Please enter your command (availables: [+,-] [rescue]).\n");
 				
 			while (1) {
 				char s[50];
