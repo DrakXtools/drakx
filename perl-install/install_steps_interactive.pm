@@ -50,11 +50,11 @@ sub kill_action {
 sub selectLanguage($) {
     my ($o) = @_;
 
-    $o->{lang} = $o->ask_from_listf("Language",
-				    _("Please, choose a language to use."),
-				    \&lang::lang2text,
-				    [ lang::list() ],
-				    $o->{lang});
+    $o->ask_from_entries_refH("Language",
+			      _("Please, choose a language to use."),
+			      [ { val => \$o->{lang}, type => 'list', 
+				  format => \&lang::lang2text, list => [ lang::list() ] } ]);
+
     install_steps::selectLanguage($o);
 
     $o->ask_warn('', 
@@ -151,11 +151,12 @@ For any question on this document, please contact MandrakeSoft S.A.
 sub selectKeyboard($) {
     my ($o, $clicked) = @_;
 
-    $o->{keyboard} = $o->ask_from_listf_(_("Keyboard"),
-					 _("Please, choose your keyboard layout."),
-					 \&keyboard::keyboard2text,
-					 [ keyboard::xmodmaps() ],
-					 $o->{keyboard});
+    $o->ask_from_entries_refH(
+			      _("Keyboard"),
+			      _("Please, choose your keyboard layout."),
+			      [ { val => \$o->{keyboard}, type => 'list',
+				  format => sub { translate(keyboard::keyboard2text($_[0])) },
+				  list => [ keyboard::xmodmaps() ] } ]);
     delete $o->{keyboard_unsafe};
 
     if ($::expert && ref($o) !~ /newt/) { #- newt is buggy with big windows :-(
