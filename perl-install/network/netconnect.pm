@@ -638,7 +638,7 @@ Some connections use pptp, a few use dhcp.
 If you don't know, choose 'use pppoe'"),
                     data =>  [
                               { text => N("ADSL connection type :"), val => \$adsl_protocol, type => "list",
-                                list => [ values %adsl_types ],
+                                list => [ sort values %adsl_types ],
                               },
                              ],
                     post => sub {
