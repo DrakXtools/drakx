@@ -1,0 +1,16 @@
+#!/usr/bin/perl
+
+$width = 400;
+$height = 270;
+$icon = 0;
+$icon_dx = 0;
+$icon_dy = 0;
+@data = (
+	 [ _("Optimize your security"), 0, 50, 400, 20, 1],
+	 [ _("The MandrakeSecurity range includes the Multi Network Firewall product (M.N.F.)."), 0, 70, 400, 20, 0],
+	 [ _("This firewall product includes network features which allow you to fulfill all your security needs"), 0, 50, 400, 100, 0],
+	 [ _("This product is available on MandrakeStore website"), 0, 70, 400, 100, 0],
+
+
+#	 [ 'text', $x, $y, $area_width, $area_height, $bold ],
+	);
