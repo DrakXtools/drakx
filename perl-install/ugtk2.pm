@@ -521,19 +521,22 @@ sub create_okcancel {
         @last = ($wm_is_kde ? $bprev : $bok);
     }
 
-    gtkpack(Gtk2::HBox->new,
-            (map {
-                gtkpack(
-                        create_hbox($_->[1]),
-                        (map {
-                            $_->can_default($::isWizard);
-                            $_;
-                        } grep { $_ } @{$_->[0]})
-                       )
-            } ([ \@first, 'start' ],
-               [ \@last,  'end' ],
-              )
-            )
+    gtkpack(Gtk2::VBox->new,
+            Gtk2::HSeparator->new,
+            gtkpack(Gtk2::HBox->new,
+                    (map {
+                        gtkpack(
+                                create_hbox($_->[1]),
+                                (map {
+                                    $_->can_default($::isWizard);
+                                    $_;
+                                } grep { $_ } @{$_->[0]})
+                               )
+                    } ([ \@first, 'start' ],
+                       [ \@last,  'end' ],
+                      )
+                    )
+                   ),
            );
 }
 
