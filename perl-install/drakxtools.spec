@@ -303,6 +303,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Mar 21 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-26mdk
+- harddrake service: increase default timeout from 5 to 25 seconds
+
 * Sun Mar 16 2003 Warly <warly@mandrakesoft.com> 9.1-25mdk
 - do a correct cvs up of all gi before (me sux)
 
