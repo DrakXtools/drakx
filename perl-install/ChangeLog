@@ -1,3 +1,262 @@
+2005/02/02  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/02/02  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/drakfirewall.pm: fix samba port range syntax
+
+	* network/isdn.pm: fix capi kernel drivers installation
+	fix capi kernel drivers installation
+
+2005/02/02  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/make_rescue_img, rescue/make_partimage_save_rest_all: add a basic
+	partimage save_all/rest_all feature
+
+2005/02/02  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+
+2005/02/02  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/rpmsrate: prefer beep-media-player over xmms
+
+2005/02/02  vljubovic
+
+	* share/po/bs.po: Updating Bosnian translation
+
+2005/02/02  Youcef Rabah Rahal <rahal at arabeyes.org>
+
+	* share/po/ar.po: Arabic translation
+
+2005/02/01  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/po/fr.po: Update
+
+2005/02/01  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2005/02/01  mareklaane
+
+	* share/po/et.po: Updated translation.
+
+2005/02/01  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/drakfirewall.pm: supplement previous half-fix
+	port 445 is used for Samba (without NetBios)
+	use new range syntax for smb
+
+2005/02/01  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/it.po, share/po/cy.po: updated Italian and Welsh files
+
+2005/02/01  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_interactive.pm: check the given mount points
+
+	* loopback.pm, diskdrake/interactive.pm, fsedit.pm: $hd is now unused, no
+	need to pass it
+
+	* fs/type.pm: ensure isLVM() works on both the VG and the partitions
+	(isLVM() on a part was already used once in fsedit::check_mntpoint())
+
+	* lvm.pm: ensure {lv_name} is set for LVM partitions
+
+2005/02/01  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* share/po/fr.po: Restore a bunch of translation that have disappeared
+
+2005/02/01  tsdgeos
+
+	* share/po/ca.po: updates
+
+2005/02/01  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po, share/po/ga.po: update
+
+	* share/rpmsrate: like latest rxvt-CJK, rxvt-unicode works fine with SCIM
+	too, but is
+	multilingual too (unlike rxvt)
+	install rxvt-CJK with the same priority as rxvt
+
+2005/01/31  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/es.po: updated Spanish file
+
+	* share/po/fr.po: updated French file
+	updated French file
+
+	* share/po/sv.po: updated Swedish file
+
+	* share/po/eu.po: updated Basque file
+
+2005/01/31  Pixel  <pixel at mandrakesoft.com>
+
+	* mdk-stage1/modules.c, mdk-stage1/Makefile, rescue/make_rescue_img,
+	mdk-stage1/network.c, mdk-stage1/.cvsignore, mdk-stage1/network.h,
+	mdk-stage1/newt-frontend.c: add a dhcp-client built using mdk-stage1
+	code
+
+	* mdk-stage1/stage1.c: add a dhcp-client built using mdk-stage1 code
+	  - have nothing talking about interactive when SPAWN_INTERACTIVE is
+	unset
+	  - same for SPAWN_SHELL
+
+2005/01/30  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/sr@Latn.po, share/po/sq.po,
+	share/po/it.po, share/po/eu.po, share/po/es.po, share/po/lv.po,
+	share/po/hu.po, share/po/fa.po, share/po/id.po, share/po/ru.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/fr.po, share/po/ta.po, share/po/vi.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: s/Disk/Hard Disk/.
+	from Harddrake
+
+	* share/po/zh_CN.po: s/Disk/Hard Disk/. from Harddrake
+	Updated Simplified Chinese translation
+
+	* harddrake/data.pm: s/Disk/Hard Disk/
+
+2005/01/30  mbukovjan
+
+	* share/po/cs.po: Updated Czech translations.
+
+2005/01/30  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/fr.po,
+	share/po/ta.po, share/po/vi.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/bg.po, share/po/cs.po,
+	share/po/el.po, share/po/uz@Latn.po: updated pot file
+
+2005/01/29  mareklaane
+
+	* share/po/et.po: Small corrections (väljalasketeave -> info väljalaske
+	kohta + kasutaja õige -> lisa kasutaja).
+
+2005/01/28  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/es.po: updated po file
+
+	* share/po/am.po: updated Amharic file
+
+	* share/po/it.po: updated Italian file
+
+2005/01/28  Pixel  <pixel at mandrakesoft.com>
+
+	* mdk-stage1/Makefile: only prompt for "Additional Drivers floppy" for
+	network
+
+	* fs.pm, fs/type.pm, fsedit.pm, fs/mount_options.pm: 
+	  - create fs::type::directories_needed_to_boot() and use it
+	  - for removable drives used for / /usr and the like, ensure we check
+	it at boot time
+	(bugzilla #13283)
+
+	* mdk-stage1/modules.c: only prompt for "Additional Drivers floppy" for
+	network
+	don't prompt if no modules, otherwise "Ok" in ask_from_list_comments()
+	gets a segfault
+
+	* mdk-stage1/stage1.c: ensure switching between different install methods
+	do not break due to IMAGE_LOCATION (/sysroot/tmp/image can be either
+	symlink or a directory)
+
+2005/01/28  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* lang.pm (console_font_files) perl_checker cleanup
+
+	* share/po/pt_BR.po: typo fix (#12660)
+
+	* network/ethernet.pm (configure_eth_aliases) simplify
+
+	* drakxtools.spec: 
+	  - bump Glib/Gtk+2 requires
+	  - 10.2-0.17mdk
+
+	* standalone/service_harddrake: perl_checker cleanup
+	fix PCMCIA autoconfig in harddrake service
+	make --force force harddrake to eeconfigure everything
+
+2005/01/27  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* standalone/drakbug: 
+	  - vincent danen patch (barely tested)
+
+2005/01/27  Keld Jørn Simonsen  <keld at dkuug.dk>
+
+	* share/po/da.po: updates
+	soft/control-center/po/da.po gi/perl-install/share/po/da.po
+	soft/drakstats/po/da.po
+
+2005/01/27  Pixel  <pixel at mandrakesoft.com>
+
+	* fs/format.pm: remove log
+
+	* raid.pm: switch back to auto=yes :
+	> > the only problem with auto=yes is that it ignores the minor number
+	> > specified and always uses the first avaliable minor number, so you
+	might
+	> > find /dev/md2 with minor 0, /proc/mdstat will call it based on minor
+	> > number. This is going to get really confusing for users.
+	> > I was planning to fix this in upstream source, but i have not been
+	able
+	> > to find time to do it yet.
+	>
+	> ok, i fixed that in mdadm-1.8.0-2mdk
+	> there is a new option (auto=dev) that will create the device file with
+	> the correct minor number based on the device name.
+	> so please put auto=dev instead of auto=yes in the /etc/mdadm.conf
+	>
+	please hold the auto=dev change, the mdadm author feel this should be
+	the default behaviour for auto=yes, so i will upload a new
+	mdadm-1.9.0-0pre1.1mdk with fully working auto as soon as i return to
+	italy (this weekend i believe)
+	fix "mdadm package not installed" during install (bugzilla #13259)
+
+2005/01/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po: typo fix
+
+2005/01/26  huftis
+
+	* share/po/nn.po: Updated Norwegian Nynorsk translation.
+
+2005/01/26  Pixel  <pixel at mandrakesoft.com>
+
+	* partition_table.pm: nicer description() (esp. when the size is 0)
+
+2005/01/26  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Wizard, System Backup configuration problems
+	(#13235)
+
 2005/01/26  José JORGE <jjorge at free.fr>
 
 	* share/po/pt.po: melo
@@ -43954,7 +44213,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1003 2005/01/25 15:19:46 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1004 2005/01/26 17:43:11 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
