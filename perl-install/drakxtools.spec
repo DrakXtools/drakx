@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 50mdk
+Release: 51mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -288,10 +288,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Fri Sep 20 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-51mdk
+- printerdrake: various fixes (till)
+- drabug:
+	o fix spurious '1' file creation
+	o don't print error messages when a program isn't found
+
 * Tue Sep 17 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-50mdk
 - draksec:
 	o add ignore option to pull-down list
 	o remove not anymore used libsafe option
+	o save items
+	o reread already set item
 
 * Tue Sep 17 2002 Warly <warly@mandrakesoft.com> 1.1.9-49mdk
 - printerdrake fix for webfetch
