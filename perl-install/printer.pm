@@ -17,7 +17,7 @@ my $PRINTER_FILTER_DIR = "/usr/lib/rhs/rhs-printfilters";
 
 %printer_type = (
     __("Local printer")           => "LOCAL",
-    __("Network priner (lpd)")    => "REMOTE",
+    __("Network printer (lpd)")   => "REMOTE",
     __("SMB/Windows 95/98/NT")    => "SMB",
     __("NetWare")                 => "NCP",
     __("Socket")                  => "SOCKET",
