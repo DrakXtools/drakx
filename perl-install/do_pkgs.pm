@@ -29,6 +29,13 @@ sub ensure_is_installed {
     1;
 }
 
+sub ensure_is_installed_if_availlable {
+    my ($do, $pkg, $file) = @_;
+    if (! -e "$::prefix$file" && !$::testing) {
+        $do->{in}->do_pkgs->what_provides($pkg) and $do->{in}->do_pkgs->install($pkg);
+    }
+}
+    
 sub is_installed {
     my ($do, $name) = @_;
     $do->are_installed($name);
