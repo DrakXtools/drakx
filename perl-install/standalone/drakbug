@@ -120,7 +120,7 @@ gtkadd($window->{window},
 							 $options .= "&distro_code=$distrocode";
 							 $options .= "&kernel=$kernel_release" if $kernel_release;
 							 print($bugzilla . "?" . $options . "\n");
-							 any::launch_browser_with_wm($bugzilla . "?" . $options);
+							 system("/usr/bin/www-browser $bugzilla?$options &");
 						 }
 						),
 			    0, gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
