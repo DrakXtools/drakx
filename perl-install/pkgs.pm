@@ -488,10 +488,35 @@ sub psUsingHdlist {
     if ($m->{ignored}) {
 	log::l("ignoring packages in $hdlist");
     } else {
+	our %uniq_pkg_seen;
 	if (-s $newsf) {
-	    ($m->{start}, $m->{end}) = $packages->parse_synthesis($newsf);
+	    log::l("parse_synthesis");
+	    ($m->{start}, $m->{end}) = $packages->parse_synthesis(
+		$newsf,
+		callback => sub {
+		    my (undef, $p) = @_;
+		    if ($uniq_pkg_seen{$p->fullname}++) {
+			log::l("skipping " . scalar $p->fullname);
+			return 0;
+		    } else {
+			return 1;
+		    }
+		},
+	    );
 	} elsif (-s $newf) {
-	    ($m->{start}, $m->{end}) = $packages->parse_hdlist($newf, 1);
+	    log::l("parse_hdlist");
+	    ($m->{start}, $m->{end}) = $packages->parse_hdlist(
+		$newf,
+		callback => sub {
+		    my (undef, $p) = @_;
+		    if ($uniq_pkg_seen{$p->fullname}++) {
+			log::l("skipping " . scalar $p->fullname);
+			return 0;
+		    } else {
+			return 1;
+		    }
+		},
+	    );
 	} else {
 	    delete $packages->{mediums}{$medium_name};
 	    unlink $newf;
