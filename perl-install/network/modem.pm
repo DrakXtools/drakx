@@ -106,21 +106,7 @@ END
     my $chat_file = "$::prefix/etc/sysconfig/network-scripts/chat-ppp0";
     output_with_perm($chat_file, 0600, @chat);
 
-    if ($modem->{auth} eq 'PAP' || $modem->{auth} eq 'CHAP') {
-	#- need to create a secrets file for the connection.
-	my $secrets = "$::prefix/etc/ppp/" . lc($modem->{auth}) . "-secrets";
-	my @l = cat_($secrets);
-	my $replaced = 0;
-	do { $replaced ||= 1
-	       if s/^\s*"?$toreplace{login}"?\s+ppp0\s+(\S+)/"$toreplace{login}"  ppp0  "$toreplace{passwd}"/ } foreach @l;
-	if ($replaced) {
-	    output($secrets, @l);
-        } else {
-	    append_to_file($secrets, qq($toreplace{login}  ppp0  "$toreplace{passwd}"\n));
-	}
-	#- restore access right to secrets file, just in case.
-	chmod 0600, $secrets;
-    }
+    write_secret_backend($toreplace{login}, $toreplace{passwd});
 
     #- install kppprc file according to used configuration.
     mkdir_p("$::prefix/usr/share/config");
