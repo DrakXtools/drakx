@@ -581,7 +581,7 @@ sub installPackages {
     $w->sync;
     $msg->set(_("Please wait, preparing installation"));
     gtkset_mousecursor_normal($cancel->window);
-
+    gtkset_mousecursor_normal($details->window);
     my $advertize = sub {
 	@install_any::advertising_images or return;
 	$show_advertising ? $_->hide : $_->show foreach $msg, $progress, $text;
