@@ -127,9 +127,10 @@ sub guess_geometry_from_partition_table {
 sub geometry_from_edd {
     my ($hd, $edd_dir) = @_;
 
-    my $geom = { sectors => 0 + cat_("$edd_dir/legacy_sectors_per_track"), 
-		 heads => 1 + cat_("$edd_dir/legacy_max_head"),
-		 from_edd => 1 };
+    my $sectors = cat_("$edd_dir/legacy_sectors_per_track") or return;
+    my $heads = cat_("$edd_dir/legacy_max_head") or return;
+
+    my $geom = { sectors => 0 + $sectors, heads => 1 + $heads, from_edd => 1 };
     is_geometry_valid_for_the_partition_table($hd, $geom, 0) or return;
     partition_table::raw::compute_nb_cylinders($geom, $hd->{totalsectors});
 
