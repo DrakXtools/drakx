@@ -544,10 +544,21 @@ sub install_urpmi {
 	    my ($qname, $qdir) = ($name, $dir);
 	    $qname =~ s/(\s)/\\$1/g; $qdir =~ s/(\s)/\\$1/g;
 
+	    #- compute correctly reference to Mandrake/base
+	    my $with;
+	    if ($_->{update}) {
+		#- an update medium always use "../base/hdlist.cz";
+		$with = "../base/hdlist.cz";
+	    } else {
+		$with = $_->{rpmsdir};
+		$with =~ s|/+|/|g; $with =~ s|/$||; $with =~ s|[^/]||g; $with =~ s|/|../|g;
+		$with .= "Mandrake/base/$_->{hdlist}";
+	    }
+
 	    #- output new urpmi.cfg format here.
 	    push @cfg, "$qname " . ($need_list ? "" : $qdir) . " {
   hdlist: hdlist.$name.cz
-  with_hdlist: ../base/" . ($_->{update} ? "hdlist.cz" : $_->{hdlist}) . ($need_list ? "
+  with_hdlist: $with" . ($need_list ? "
   list: list.$name" : "") . ($dir =~ /removable:/ && "
   removable: /dev/cdrom") . "
   update" . "
