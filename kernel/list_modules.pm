@@ -77,11 +77,11 @@ our %l = (
       if_(arch() =~ /^sparc/, qw(qlogicpti)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
 	'53c7,8xx',
-        qw(3w-9xxx 3w-xxxx AM53C974 BusLogic NCR53c406a a100u2w advansys aha152x aha1542 aha1740),
+        qw(AM53C974 BusLogic NCR53c406a a100u2w advansys aha152x aha1542 aha1740),
         qw(atp870u dc395x dc395x_trm dtc g_NCR5380 in2000 initio pas16 pci2220i psi240i fdomain),
         qw(qla1280 qla2x00 qlogicfas qlogicfc),
         qw(seagate wd7000 sim710 sym53c416 t128 tmscsim u14-34f ultrastor),
-        qw(eata eata_pio eata_dma mptscsih nsp32),
+        qw(eata eata_pio eata_dma nsp32),
         qw(ahci ata_piix sata_nv sata_promise sata_sil sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
       ),
       qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicisp sym53c8xx lpfc lpfcdd), # ncr53c8xx
@@ -89,8 +89,8 @@ our %l = (
     hardware_raid => [
       if_(arch() =~ /^sparc/, qw(pluto)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
-        qw(DAC960 dpt_i2o megaraid aacraid cciss cpqarray gdth i2o_block),
-	qw(cpqfc ipr it8212 iteraid qla2100 qla2200 qla2300 qla2322 qla6312 qla6322 pdc-ultra),
+        qw(D3w-9xxx 3w-xxxxAC960 dpt_i2o megaraid aacraid cciss cpqarray gdth i2o_block),
+	qw(cpqfc ipr it8212 iteraid mptscsihqla2100 qla2200 qla2300 qla2322 qla6312 qla6322 pdc-ultra),
         qw(ips ppa imm),
        if_(c::kernel_version =~ /^\Q2.4/,
 	qw(ataraid hptraid silraid pdcraid)
