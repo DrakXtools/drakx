@@ -37,6 +37,8 @@ use POSIX;
 use Xconfig::various;
 use log;
 
+my $splash_working = 0;
+
 my $in = 'interactive'->vnew('su');
 
 if (!$in->isa('interactive::gtk')) {
@@ -245,6 +247,7 @@ gtkadd($window,
 				     
                        ),
                  #Splash Selector
+                 if_($splash_working,
                  gtkadd(my $thm_frame = new Gtk2::Frame(N("Splash selection")),
                         gtkpack(gtkset_border_width(new Gtk2::HBox(0, 5), 5),
                                   gtkpack__(new Gtk2::VBox(0, 5),
@@ -265,7 +268,7 @@ gtkadd($window,
                                             $boot_pic,
                                             $thm_button))
                        ),
-
+                    ),
                  gtkadd(new Gtk2::Frame(N("System mode")),
                         gtkpack__(new Gtk2::VBox(0, 5),
                                   gtksignal_connect(gtkset_active(new Gtk2::CheckButton(N("Launch the graphical environment when your system starts")), $x_mode), clicked => sub {
@@ -312,7 +315,7 @@ $x_box->set_sensitive($x_mode);
 $auto_box->set_sensitive($auto_mode->{autologin} ? 1 : 0);
 $window->show_all;
 #$no_bootsplash and $thm_frame->set_sensitive(0);
-$thm_frame->hide;
+$thm_frame->hide if !$splash_working;
 update_bootloader_label($lilogrub);
 gtkflush();
 $w->main;
