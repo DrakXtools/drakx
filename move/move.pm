@@ -354,7 +354,7 @@ sub install_TrueFS_in_home {
 		type => 0x483, 
 		device => "/home/.mdkmove-$_",
 	        loopback_file => "/.mdkmove-$_", loopback_device => $home,
-		mntpoint => "/home/$_/.mdkmove-truefs", size => 5 << 11,
+		mntpoint => "/home/$_/.mdkmove-truefs", size => 6 << 11,
 		toFormat => ! -e "/home/.mdkmove-$_",
 	};
 	$_ => $part;
@@ -369,7 +369,7 @@ sub install_TrueFS_in_home {
 	my $dir = $loopbacks{$user}{mntpoint};
         run_program::run("/bin/chown", "$user.$user", $dir);
 
-	foreach (qw(.kde)) {
+	foreach (qw(.kde .openoffice)) {
 	    if (-d "/home/$user/$_" && ! -d "$dir/$_") {
 		run_program::run('mv', "/home/$user/$_", "$dir/$_");
 	    }
