@@ -901,7 +901,7 @@ sub generate_queuename {
     my $queue;
     if ($printer->{currentqueue}{model}) {
 	if ($printer->{currentqueue}{model} eq N("Unknown model")) {
-	    $queue = N("Printer");
+	    $queue = "P";
 	} else {
 	    $queue = $printer->{currentqueue}{make} . '|' .
 		$printer->{currentqueue}{model};
@@ -916,6 +916,10 @@ sub generate_queuename {
     my $make = $printer->{currentqueue}{make};
     my $model = $printer->{currentqueue}{model};
     $queue =~ s/$make$make/$make/gi;
+    # Remove weird characters
+    $queue =~ s/[^A-Za-z0-9_]//g; 
+    $make =~ s/[^A-Za-z0-9_]//g; 
+    $model =~ s/[^A-Za-z0-9_]//g; 
     # Do not use a queue name longer than 12 characters, as otherwise
     # Windows clients will not be able to access the printer
     my $ml = 12;
@@ -2655,7 +2659,7 @@ sub choose_printer_name {
 	 { title => N("Enter Printer Name and Comments"),
 	   #cancel => !$printer->{configured}{$queue} ? '' : N("Remove queue"),
 	   callbacks => { complete => sub {
-	       unless ($printer->{currentqueue}{queue} =~ /^\w+$/) {
+	       unless ($printer->{currentqueue}{queue} =~ /^[A-Za-z0-9_]+$/) {
 		   $in->ask_warn(N("Error"), N("Name of printer should contain only letters, numbers and the underscore"));
 		   return 1, 0;
 	       }
