@@ -1,3 +1,108 @@
+2002/07/08  daouda
+
+	* Makefile.config: 
+	  - add drakbug
+
+	* drakxtools.spec: 
+	  - add dir recursively
+
+	* standalone/drakbug: 
+	  - detect package automatically when app is chosen
+	  - standalone app
+
+2002/07/08  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/mount.c: small readability & size enhancement
+
+2002/07/08  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: in case the licence is refused, ask for
+	confirmation
+	help perl_checker
+
+	* diskdrake/hd_gtk.pm: do not display "Clear all" (and the other per kind
+	buttons) for the raid tab
+
+	* diskdrake/interactive.pm: make Clear_all work on a LVM VG
+	make Clear_all remove partitions from raids
+
+	* Makefile: create the list_modules symlink
+	make test_pms should now work (was pb with list_modules.pm)
+
+2002/07/08  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/ui.pm: 
+	  - remove save_report menu entry, this is done by service_harddrake
+	  - move $in declaration near where it's used
+	eide hard disks : print master/slave for bus_location
+	  - remove dead stuff
+	  - comment some stuff
+	minor simplication
+	various cleanups:
+	  - move all harddrake modules to harddrake namespace
+	 - replace two use by require so that it's not done at compil time
+	   but at runtime
+	 - there was a missing $ in harddrake::ui.pm
+
+	* harddrake/TODO: update todo list
+
+	* install_steps_interactive.pm, standalone/draknet, harddrake/bttv.pm,
+	standalone/harddrake2, standalone/service_harddrake, harddrake/data.pm:
+	various cleanups:
+	  - move all harddrake modules to harddrake namespace
+	 - replace two use by require so that it's not done at compil time
+	   but at runtime
+	 - there was a missing $ in harddrake::ui.pm
+
+	* drakxtools.spec: 
+	  - some stuff moved into Makefile.drakxtools
+	  - fix harddrake menu entry
+	  - fix build
+	fixes for missing files
+	enhanced description
+
+	* modules.pm: 
+	  - s/snd-card/snd/
+	  - make some code clearer
+
+	* Makefile.drakxtools: 
+	  - simplifications
+	  - harddrake support is complete
+
+	* scanner.pm: this doesn't need either "#!/usr/bin/perl" nor "use lib
+	qw(/usr/lib/libDrakX);"
+
+	* standalone/drakxtv: 
+	  - fix options handling
+	  - use "perl -w"
+	  - s/bttv/harddrake::bttv/ due to recent changes
+
+2002/07/07  daouda
+
+	* drakxtools.spec: 
+	  - directory should exist before mv'ing things (mkdir
+	%%buildroot%%_initrddir)
+
+2002/07/07  Pixel  <pixel@mandrakesoft.com>
+
+	* detect_devices.pm: smarter raidAutoStartRaidtab
+	great new raidAutoStartRaidtab allowing to handle existing software
+	raids
+	even when RAID_AUTORUN is not supported by kernel (which is the case for
+	us
+	since md.o is a not builtin the kernel)
+
+	* fsedit.pm: great new raidAutoStartRaidtab allowing to handle existing
+	software raids
+	even when RAID_AUTORUN is not supported by kernel (which is the case for
+	us
+	since md.o is a not builtin the kernel)
+
+	* devices.pm: use c::total_sectors() instead of BLKGETSIZE
+
+	* diskdrake/interactive.pm, raid.pm: ensure the raid is disactivated and
+	marked dirty on any actions that destroy the raid
+
 2002/07/07  daouda
 
 	* Makefile: 
