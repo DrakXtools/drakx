@@ -103,7 +103,6 @@ sub test {
 
     $::noShadow = 1;
     open(my $F, "|perl 2>/dev/null");
-    print $F 
     printf $F q(
         use lib qw(%s);
         BEGIN { $::no_ugtk_init = 1 }
@@ -120,7 +119,7 @@ sub test {
         lang::bindtextdomain();
 
 	$ENV{DISPLAY} = ":9";
-        Gtk2->init([]);
+        Gtk2->init;
 
         gtkset_background(200 * 257, 210 * 257, 210 * 257);
         my ($h, $w) = gtkroot()->get_size;
