@@ -64,6 +64,9 @@ char *pcmcia_probe(void);
 ';
 
 $ENV{C_RPM} and print '
+#undef Fflush
+#undef Mkdir
+#undef Stat
 #include <rpm/rpmlib.h>
 #include <rpm/rpmio.h>
 
