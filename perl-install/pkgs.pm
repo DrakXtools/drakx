@@ -1304,8 +1304,8 @@ sub install($$$;$$) {
 	#- and make sure there are no staling open file descriptor too (before forking)!
 	install_any::getFile('XXX');
 
-	my $retry;
-	while ($retry || @transToInstall) {
+	my ($retry_package, $retry_count);
+	while ($retry_package || @transToInstall) {
 	    local (*INPUT, *OUTPUT); pipe INPUT, OUTPUT;
 	    if (my $pid = fork()) {
 		close OUTPUT;
@@ -1338,10 +1338,10 @@ sub install($$$;$$) {
 		    select((select(OUTPUT),  $| = 1)[0]);
 		    $db = c::rpmdbOpen($prefix) or die "error opening RPM database: ", c::rpmErrorString();
 		    my $trans = c::rpmtransCreateSet($db, $prefix);
-		    if ($retry) {
+		    if ($retry_package) {
 			log::l("opened rpm database for retry transaction of 1 package only");
-			c::rpmtransAddPackage($trans, $retry->[$HEADER], packageName($retry),
-					      $isUpgrade && allowedToUpgrade(packageName($retry)));
+			c::rpmtransAddPackage($trans, $retry_package->[$HEADER], packageName($retry_package),
+					      $isUpgrade && allowedToUpgrade(packageName($retry_package)));
 		    } else {
 			log::l("opened rpm database for transaction of ". scalar @transToInstall ." new packages, still $nb after that to do");
 			c::rpmtransAddPackage($trans, $_->[$HEADER], packageName($_),
@@ -1417,7 +1417,7 @@ sub install($$$;$$) {
 
 	    #- if we are using a retry mode, this means we have to split the transaction with only
 	    #- one package for each real transaction.
-	    unless ($retry) {
+	    unless ($retry_package) {
 		my @badPackages;
 		foreach (@transToInstall) {
 		    if (!packageFlagInstalled($_) && $_->[$MEDIUM]{selected} && !exists($ignoreBadPkg{packageName($_)})) {
@@ -1429,15 +1429,22 @@ sub install($$$;$$) {
 		}
 		@transToInstall = @badPackages;
 		#- if we are in retry mode, we have to fetch only one package at a time.
-		$retry = shift @transToInstall;
+		$retry_package = shift @transToInstall;
+		$retry_count = 3;
 	    } else {
-		if (!packageFlagInstalled($retry) && $retry->[$MEDIUM]{selected} && !exists($ignoreBadPkg{packageName($retry)})) {
-		    log::l("bad package $retry->[$FILE] unable to be installed");
-		    packageSetFlagSelected($retry, 0);
-		    cdie ("error installing package list: $retry->[$FILE]");
+		if ($retry_count) {
+		    log::l("retrying installing package $retry_package->[$FILE] alone in a transaction");
+		    --$retry_count;
+		} else {
+		    if (!packageFlagInstalled($retry_package) && $retry_package->[$MEDIUM]{selected} && !exists($ignoreBadPkg{packageName($retry_package)})) {
+			log::l("bad package $retry_package->[$FILE] unable to be installed");
+			packageSetFlagSelected($retry_package, 0);
+			cdie ("error installing package list: $retry_package->[$FILE]");
+		    }
+		    packageFreeHeader($retry_package);
+		    $retry_package = shift @transToInstall;
+		    $retry_count = 3;
 		}
-		packageFreeHeader($retry);
-		$retry = shift @transToInstall;
 	    }
 	}
 	cleanHeaders($prefix);
