@@ -126,18 +126,18 @@ my %boot_conf_frame = ('frame' => Gtk2::Frame->new(N("Configure bootsplash pictu
                                'quiet' => N("Make kernel message quiet by default"),
                            },
                        },
-                       'pos' => [ 'tx 1', 
-                                  'ty 1',
-                                  'tw 1', 
-                                  'th 1',
-                                  'px 1',
-                                  'py 1',
-                                  'pw 1',
-                                  'ph 1',
+                       'pos' => [ 'tx',
+                                  'ty',
+                                  'tw',
+                                  'th',
+                                  'px',
+                                  'py',
+                                  'pw',
+                                  'ph',
                                   'pc',
                                   'logo',
                                   'quiet',
-                                  'annul',
+                                  # 'annul',
                                   'prev',
                                   'save',
                                   'kill',
@@ -370,48 +370,49 @@ sub mk_frame {
     my $u = create_packtable({ col_spacings => 10, row_spacings => 5 },
                              map {
                                  my @widgets;
+                                 my $pos = $_;
 
                                  #- look for label
-                                 if ($ref->{widget}{label}{$1}) {
-                                     my $w = $ref->{widgets}{label}{$1} = Gtk2::Label->new($ref->{widget}{label}{$1});
+                                 if ($ref->{widget}{label}{$pos}) {
+                                     my $w = $ref->{widgets}{label}{$pos} = Gtk2::Label->new($ref->{widget}{label}{$pos});
                                      push @widgets, $w;
                                  }
 
                                  #- look for scale
-                                 if ($ref->{widget}{scale}{$1}) {
-                                     my $w = $ref->{widgets}{scale}{$1} = Gtk2::HScale->new($adj{$1} =  Gtk2::Adjustment->new(0, 0, $scale_size{$1}, 1, 10, 0));
-                                     $ref->{widgets}{scale}{$1}->set_digits(0);
+                                 if ($ref->{widget}{scale}{$pos}) {
+                                     my $w = $ref->{widgets}{scale}{$pos} = Gtk2::HScale->new($adj{$pos} =  Gtk2::Adjustment->new(0, 0, $scale_size{$pos}, 1, 10, 0));
+                                     $ref->{widgets}{scale}{$pos}->set_digits(0);
                                      push @widgets, $w;
                                  }
-                                 $adj{$1} and $adj{$1}->set_value($theme{boot_conf}{$1});
+                                 $adj{$pos} and $adj{$pos}->set_value($theme{boot_conf}{$pos});
 
                                  #- look for combo
                                  my @popdown;
-                                 if ($ref->{widget}{combo}{$1}) {
-                                     @popdown = @{$ref->{widget}{combo}{$1}};
-                                     my $w = $ref->{widgets}{combo}{$1} = $ref->{widget}{extras}{$1}{noneditable} ? Gtk2::ComboBox->new_text : Gtk2::Combo->new;
+                                 if ($ref->{widget}{combo}{$pos}) {
+                                     @popdown = @{$ref->{widget}{combo}{$pos}};
+                                     my $w = $ref->{widgets}{combo}{$pos} = $ref->{widget}{extras}{$pos}{noneditable} ? Gtk2::ComboBox->new_text : Gtk2::Combo->new;
                                      $w->set_popdown_strings(@popdown);
                                      $w->set_active(0) if $w->isa('Gtk2::ComboBox');
                                      push @widgets, $w;
                                  }
 
                                  #- look for checkbox
-                                 if ($ref->{widget}{check}{$1}) {
-                                     my $w =  $ref->{widgets}{check}{$1} = Gtk2::CheckButton->new($ref->{widget}{check}{$1});
-                                     $ref->{widgets}{check}{$1}->set_active(1);
+                                 if ($ref->{widget}{check}{$pos}) {
+                                     my $w =  $ref->{widgets}{check}{$pos} = Gtk2::CheckButton->new($ref->{widget}{check}{$pos});
+                                     $ref->{widgets}{check}{$pos}->set_active(1);
                                      push @widgets, $w;
                                  }
 
                                  #- look for button
-                                 if ($ref->{widget}{button}{$1}) {
-                                     my $w =  $ref->{widgets}{button}{$1} = Gtk2::Button->new($ref->{widget}{button}{$1});
+                                 if ($ref->{widget}{button}{$pos}) {
+                                     my $w =  $ref->{widgets}{button}{$pos} = Gtk2::Button->new($ref->{widget}{button}{$pos});
                                      @widgets ?
                                        push @widgets, $w
                                          : push @buttons, $w;
                                  }
 
                                  #- look for tooltips
-                                 $ref->{widget}{tooltip}{$1} and tool_tip($1, \%$ref);
+                                 $ref->{widget}{tooltip}{$pos} and tool_tip($pos, \%$ref);
                                  if_(@widgets, \@widgets);
                              } @{$ref->{pos}}
                             );
