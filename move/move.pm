@@ -159,7 +159,7 @@ drakx_stuff:
     $o->{orderedSteps} = [ $using_existing_host_config ?
                            qw(displayBackground verifyKey startMove)
                          : $using_existing_user_config ?
-                           qw(displayBackground autoSelectLanguage handleI18NClp verifyKey selectMouse selectKeyboard configMove startMove)
+                           qw(displayBackground autoSelectLanguage verifyKey selectMouse selectKeyboard configMove startMove)
                          : qw(displayBackground selectLanguage handleI18NClp acceptLicense verifyKey selectMouse selectKeyboard configMove startMove) ];
     $o->{steps}{first} = $o->{orderedSteps}[0];
 
