@@ -195,10 +195,10 @@ ugtk2->exit(0);
 
 sub toggle_expert_button() {
     if ($expert_mode) {
-        $expert_mod_frame->show;
+        $expert_mod_frame->set_sensitive(1);
         $expert_button->child->set(N("Normal Mode"));
     } else {
-        $expert_mod_frame->hide;
+        $expert_mod_frame->set_sensitive(0);
         $expert_button->child->set(N("Expert Mode"));
     }
 }
@@ -244,19 +244,14 @@ sub selected_tree {
 # Callback for expanding a tree - find subdirectories, files and add them to tree
 sub expand_tree {
     my ($tree, $parent_iter, $path) = @_;
-    print "K 0\n";
     my $dir   = $tree_model->get($parent_iter, 1);
-    print "K 1\n";
     my $child = $tree_model->iter_children($parent_iter);
+    return if !$child;
 
     #- hackish: if first child has '' as name, then we need to expand on the fly
-    print "K 2 $child\n";
     if ($child && $tree_model->get($child, 0) eq '') {
-    print "K 3\n";
         $tree_model->remove($child);
-    print "K 4\n";
     }
-    print "K 5\n";
     unless ($child && $tree_model->iter_has_child($parent_iter)) {
         foreach my $dir_entry (all($dir)) {
             my $entry_path = $dir . "/" . $dir_entry;
@@ -273,7 +268,6 @@ sub expand_tree {
         }
     }
     $tree->expand_row($path, 0);
-    print "K 9\n\n";
 }
 
 
