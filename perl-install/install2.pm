@@ -199,15 +199,13 @@ sub choosePackages {
     my ($clicked, $ent_number, $auto) = @_;
     require pkgs;
 
-    #- always setPackages as it may have to copy hdlist files and depslist file.
-    installStepsCall($o, $auto, 'setPackages');
-    installStepsCall($o, $auto, 'selectPackagesToUpgrade') if $o->{isUpgrade} && $ent_number == 1;
-
+    #- always setPackages as it may have to copy hdlist files and synthesis files.
+    installStepsCall($o, $auto, 'setPackages', $o->{isUpgrade} && $ent_number == 1);
     installStepsCall($o, $auto, 'choosePackages', $o->{packages}, $o->{compssUsers}, $ent_number == 1);
     log::l("compssUsersChoice's: ", join(" ", grep { $o->{compssUsersChoice}{$_} } keys %{$o->{compssUsersChoice}}));
 
     #- check pre-condition where base backage has to be selected.
-    pkgs::packageByName($o->{packages}, 'basesystem')->flag_selected or die "basesystem package not selected";
+    pkgs::packageByName($o->{packages}, 'basesystem')->flag_available or die "basesystem package not selected";
 
     #- check if there are package that need installation.
     $o->{steps}{installPackages}{done} = 0 if $o->{steps}{installPackages}{done} && pkgs::packagesToInstall($o->{packages}) > 0;
