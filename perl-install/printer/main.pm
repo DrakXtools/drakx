@@ -408,7 +408,7 @@ sub connectionstr {
     } elsif ($connect =~ m!^file:(.+)$!) {
 	$connection = N("Prints into %s", $1);
     } elsif ($connect =~ m!^lpd://([^/]+)/([^/]+)/?$!) {
-	$connection = N("LPD server \"%s\", printer \"%s\"", $2, $1);
+	$connection = N("LPD server \"%s\", printer \"%s\"", $1, $2);
     } elsif ($connect =~ m!^socket://([^/:]+):([^/:]+)/?$!) {
 	$connection = N("TCP/IP host \"%s\", port %s", $1, $2);
     } elsif ($connect =~ m!^smb://([^/\@]+)/([^/\@]+)/?$! ||
@@ -419,7 +419,7 @@ sub connectionstr {
 	     $connect =~ m!^ncp://.*/([^/\@]+)/([^/\@]+)/?$! ||
 	     $connect =~ m!^ncp://.*\@([^/\@]+)/([^/\@]+)/?$!) {
 	$connection = N("Novell server \"%s\", printer \"%s\"", $1, $2);
-    } elsif ($connect =~ m!^postpipe:(.+)$!) {
+    n elsif ($connect =~ m!^postpipe:(.+)$!) {
 	$connection = N("Uses command %s", $1);
     } else {
 	$connection = N("URI: %s", $connect);
