@@ -1208,7 +1208,6 @@ mon
 
     my @new_80 = qw(
 jabber
-FreeWnn
 MySQL
 am-utils
 apache
