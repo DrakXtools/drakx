@@ -40,6 +40,7 @@ my $PROVIDES             = 4;
 my $VALUES               = 5;
 my $HEADER               = 6;
 my $INSTALLED_CUMUL_SIZE = 7;
+my $EPOCH                = 8;
 
 #- constant for packing flags, see below.
 my $PKGS_SELECTED  = 0x00ffffff;
@@ -66,11 +67,17 @@ my %ignoreBadPkg = (
 #- size and deps are grouped to save memory too and make a much
 #- simpler and faster depslist reader, this gets (sizeDeps).
 sub packageHeaderFile   { $_[0]->[$FILE] }
-sub packageName         { $_[0]->[$FILE] =~ /(.*)-[^-]+-[^-]+\..*/ ? $1 : die "invalid file `$_[0]->[$FILE]'" }
-sub packageVersion      { $_[0]->[$FILE] =~ /.*-([^-]+)-[^-]+\..*/ ? $1 : die "invalid file `$_[0]->[$FILE]'" }
-sub packageRelease      { $_[0]->[$FILE] =~ /.*-[^-]+-([^-]+)\..*/ ? $1 : die "invalid file `$_[0]->[$FILE]'" }
-sub packageArch         { $_[0]->[$FILE] =~ /.*-[^-]+-[^-]+\.(.*)/ ? $1 : die "invalid file `$_[0]->[$FILE]'" }
-sub packageFile         { $_[0]->[$FILE] . ".rpm" }
+sub packageName         { $_[0]->[$FILE] =~ /^([^:\s]*)-[^:\-\s]+-[^:\-\s]+\.[^:\.\-\s]*(?::.*)?/ ? $1
+			    : die "invalid file `$_[0]->[$FILE]'" }
+sub packageVersion      { $_[0]->[$FILE] =~ /^[^:\s]*-([^:\-\s]+)-[^:\-\s]+\.[^:\.\-\s]*(?::.*)?/ ? $1
+			    : die "invalid file `$_[0]->[$FILE]'" }
+sub packageRelease      { $_[0]->[$FILE] =~ /^[^:\s]*-[^:\-\s]+-([^:\-\s]+)\.[^:\.\-\s]*(?::.*)?/ ? $1
+			    : die "invalid file `$_[0]->[$FILE]'" }
+sub packageArch         { $_[0]->[$FILE] =~ /^[^:\s]*-[^:\-\s]+-[^:\-\s]+\.([^:\.\-\s]*)(?::.*)?/ ? $1
+			    : die "invalid file `$_[0]->[$FILE]'" }
+sub packageFile         { $_[0]->[$FILE] =~ /^([^:\s]*-[^:\-\s]+-[^:\-\s]+\.[^:\.\-\s]*)(?::(.*))?/ ? ($2 || $1) . ".rpm"
+			    : die "invalid file `$_[0]->[$FILE]'" }
+sub packageEpoch        { $_[0]->[$EPOCH] || 0 }
 
 sub packageSize   { to_int($_[0]->[$SIZE_DEPS]) }
 sub packageDepsId { split ' ', ($_[0]->[$SIZE_DEPS] =~ /^\d*\s*(.*)/)[0] }
@@ -509,7 +516,7 @@ sub getDeps {
     local *F; open F, "$prefix/var/lib/urpmi/depslist.ordered" or die "can't find dependancies list";
     local $_;
     while (<F>) {
-	my ($name, $version, $release, $arch, $serial, $sizeDeps) =
+	my ($name, $version, $release, $arch, $epoch, $sizeDeps) =
 	  /^([^:\s]*)-([^:\-\s]+)-([^:\-\s]+)\.([^:\.\-\s]*)(?::(\d+)\S*)?\s+(.*)/;
 	my $pkg = $packages->{names}{$name};
 
@@ -517,12 +524,15 @@ sub getDeps {
 	#- in case of only one medium taken into account during install, there should be
 	#- silent warning for package which are unknown at this point.
 	$pkg or
-	  log::l("ignoring $name-$version-$release in depslist is not in hdlist"), next;
+	  log::l("ignoring $name-$version-$release.$arch in depslist is not in hdlist"), next;
 	$version eq packageVersion($pkg) or
-	  log::l("ignoring $name-$version-$release in depslist mismatch version in hdlist"), next;
+	  log::l("ignoring $name-$version-$release.$arch in depslist mismatch version in hdlist"), next;
 	$release eq packageRelease($pkg) or
-	  log::l("ignoring $name-$version-$release in depslist mismatch release in hdlist"), next;
+	  log::l("ignoring $name-$version-$release.$arch in depslist mismatch release in hdlist"), next;
+	$arch eq packageArch($pkg) or
+	  log::l("ignoring $name-$version-$release.$arch in depslist mismatch arch in hdlist"), next;
 
+	$epoch > 0 and $pkg->[$EPOCH] = $epoch; #- only 5% of the distribution use epoch (serial).
 	$pkg->[$SIZE_DEPS] = $sizeDeps;
 
 	#- check position of package in depslist according to precomputed
@@ -531,7 +541,7 @@ sub getDeps {
 	#- for debugging.
 	my $i = scalar @{$packages->{depslist}};
 	$i >= $pkg->[$MEDIUM]{min} && $i <= $pkg->[$MEDIUM]{max} or
-	  log::l("inconsistency in position for $name-$version-$release in depslist and hdlist"), $mismatch = 1;
+	  log::l("inconsistency in position for $name-$version-$release.$arch in depslist and hdlist"), $mismatch = 1;
 
 	#- package are already sorted in depslist to enable small transaction and multiple medium.
 	push @{$packages->{depslist}}, $pkg;
@@ -865,7 +875,7 @@ sub versionCompare($$) {
 
     while ($a || $b) {
 	my ($sb, $sa) =  map { $1 if $a =~ /^\W*\d/ ? s/^\W*0*(\d+)// : s/^\W*(\D*)// } ($b, $a);
-	$_ = length($sa) <=> length($sb) || $sa cmp $sb and return $_;
+	$_ = ($sa =~ /^\d/ || $sb =~ /^\d/) && length($sa) <=> length($sb) || $sa cmp $sb and return $_ || 0;
 	$sa eq '' && $sb eq '' and return $a cmp $b || 0;
     }
 }
@@ -887,9 +897,12 @@ sub selectPackagesAlreadyInstalled {
 			 my $p = $packages->{names}{c::headerGetEntry($header, 'name')};
 
 			 if ($p) {
-			     my $version_cmp = versionCompare(c::headerGetEntry($header, 'version'), packageVersion($p));
-			     my $version_rel_test = $version_cmp > 0 || $version_cmp == 0 &&
-			       versionCompare(c::headerGetEntry($header, 'release'), packageRelease($p)) >= 0;
+			     my $epoch_cmp = c::headerGetEntry($header, 'epoch') <=> packageEpoch($p);
+			     my $version_cmp = $epoch_cmp == 0 && versionCompare(c::headerGetEntry($header, 'version'),
+										 packageVersion($p));
+			     my $version_rel_test = $epoch_cmp > 0 || $epoch_cmp == 0 &&
+			       ($version_cmp > 0 || $version_cmp == 0 &&
+				versionCompare(c::headerGetEntry($header, 'release'), packageRelease($p)) >= 0);
 			     $version_rel_test or log::l("keeping an older package, avoiding selecting $p->[$FILE]");
 			     packageSetFlagInstalled($p, 1);
 			 }
@@ -940,7 +953,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 
 	#- generel purpose for forcing upgrade of package whatever version is.
 	my %packageNeedUpgrade = (
-				  'lilo' => 1, #- this package has been misnamed in 7.0.
+				  #'lilo' => 1, #- this package has been misnamed in 7.0.
 				 );
 
 	#- help removing package which may have different release numbering
@@ -1005,9 +1018,12 @@ sub selectPackagesToUpgrade($$$;$$) {
 				 my $p = $packages->{names}{c::headerGetEntry($header, 'name')};
 
 				 if ($p) {
-				     my $version_cmp = versionCompare(c::headerGetEntry($header, 'version'), packageVersion($p));
-				     my $version_rel_test = $version_cmp > 0 || $version_cmp == 0 &&
-				       versionCompare(c::headerGetEntry($header, 'release'), packageRelease($p)) >= 0;
+				     my $epoch_cmp = c::headerGetEntry($header, 'epoch') <=> packageEpoch($p);
+				     my $version_cmp = $epoch_cmp == 0 && versionCompare(c::headerGetEntry($header, 'version'),
+											 packageVersion($p));
+				     my $version_rel_test = $epoch_cmp > 0 || $epoch_cmp == 0 &&
+				       ($version_cmp > 0 || $version_cmp == 0 &&
+					versionCompare(c::headerGetEntry($header, 'release'), packageRelease($p)) >= 0);
 				     if ($packageNeedUpgrade{packageName($p)}) {
 					 log::l("package ". packageName($p) ." need to be upgraded");
 				     } elsif ($version_rel_test) { #- by default, package are upgraded whatever version is !
