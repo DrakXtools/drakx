@@ -431,14 +431,14 @@ Consoles 1,3,4,7 may also contain interesting information";
     substInFile { s/^cdrom\n//; $_ .= "cdrom\n" if eof } "$msec/group.conf" if -d $msec;
     substInFile { s/^cdwriter\n//; $_ .= "cdwriter\n" if eof } "$msec/group.conf" if -d $msec;
 
+    my $pkg = pkgs::packageByName($o->{packages}, 'urpmi');
+    if ($pkg && pkgs::packageFlagSelected($pkg)) {
+	install_any::install_urpmi($o->{prefix}, $o->{method}, $o->{packages}[2]);
 #- asked by jloup to disable urpmi for security level < 2, as it is managed a whole for
 #- security <= 2 by msec on "/usr/share/msec/grpuser.sh --refresh", it has been accepted to
 #- simply disable it :-(
-#    my $pkg = pkgs::packageByName($o->{packages}, 'urpmi');
-#    if ($pkg && pkgs::packageFlagSelected($pkg)) {
-#	install_any::install_urpmi($o->{prefix}, $o->{method}, $o->{packages}[2]);
 #	substInFile { s/^urpmi\n//; $_ .= "urpmi\n" if eof } "$msec/group.conf" if -d $msec;
-#    }
+    }
 
 #    #- update language and icons for KDE.
 #    update_userkderc($o->{prefix}, 'Locale', Language => "");
