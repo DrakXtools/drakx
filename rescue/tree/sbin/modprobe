@@ -29,7 +29,7 @@ sub load {
 
     system("packdrake -x /modules/modules.cz* /tmp $name.o");
     -r "/tmp/$name.o" or die "can't find module $name\n";
-    system("/sbin/insmod -f /tmp/$name.o"); $? and die("insmod $name failed");
+    system("/sbin/insmod /tmp/$name.o"); $? and die("insmod $name failed");
     system("rm /tmp/$name.o");
 }
 
