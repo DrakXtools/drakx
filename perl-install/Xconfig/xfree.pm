@@ -210,6 +210,47 @@ sub set_wacoms {
 
 
 ################################################################################
+# synaptics ####################################################################
+################################################################################
+sub set_synaptics {
+    my ($raw_X, @synaptics) = @_;
+    $raw_X->remove_InputDevices('synaptics');
+
+    my $layout = get_ServerLayout($raw_X)->{InputDevice} ||= [];
+    @$layout = grep { $_->{val} !~ /^"Synaptics Mouse/ } @$layout;
+
+    @synaptics or return;
+    add_load_module($raw_X, "synaptics");
+
+    each_index {
+	my $synaptics_mouse = $_;
+        my $identifier = "SynapticsMouse" . ($::i + 1);
+        my $pointer_type = $synaptics_mouse->{Primary} ? "CorePointer" : "AlwaysCore";
+        my $h = { Identifier => { val => $identifier },
+                  Driver => { val => "synaptics" },
+                  Device => { val => $synaptics_mouse->{Device}, Option => 1 },
+                  Protocol => { val => $synaptics_mouse->{Protocol}, Option => 1 },
+                  LeftEdge => { val => 1700, Option => 1 },
+                  RightEdge => { val => 5300, Option => 1 },
+                  TopEdge => { val => 1700, Option => 1 },
+                  BottomEdge => { val => 4200, Option => 1 },
+                  FingerLow => { val => 25, Option => 1 },
+                  FingerHigh => { val => 30, Option => 1 },
+                  MaxTapTime => { val => 180, Option => 1 },
+                  MaxTapMove => { val => 220, Option => 1 },
+                  VertScrollDelta => { val => 100, Option => 1 },
+                  MinSpeed => { val => 0.06, Option => 1 },
+                  MaxSpeed => { val => 0.12, Option => 1 },
+                  AccelFactor => { val => 0.0010, Option => 1 },
+                  SHMConfig => { val => "on", Option => 1 },
+                };
+        $raw_X->add_Section('InputDevice', $h);
+        push @$layout, { val => qq("$identifier" "$pointer_type") };
+    } @synaptics;
+}
+
+
+################################################################################
 # monitor ######################################################################
 ################################################################################
 my @monitor_fields = qw(VendorName ModelName HorizSync VertRefresh);

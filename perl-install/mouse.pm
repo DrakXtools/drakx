@@ -32,9 +32,9 @@ my %mice =
      [ 5, 'ps/2', 'MouseManPlusPS/2', N_("Logitech MouseMan+") ],
      [ 5, 'imps2', 'IMPS/2', N_("Generic PS2 Wheel Mouse") ],
      [ 5, 'ps/2', 'GlidePointPS/2', N_("GlidePoint") ],
-        if_(c::kernel_version() !~ /^\Q2.6/,
-     [ 5, 'imps2', 'auto', N_("Automatic") ],
-        ),
+     c::kernel_version() =~ /^\Q2.6/ ?
+       [ 5, 'ps/2', 'auto-dev', N_("Synaptics Touchpad") ] :
+       [ 5, 'imps2', 'auto', N_("Automatic") ],
      '',
      [ 5, 'ps/2', 'ThinkingMousePS/2', N_("Kensington Thinking Mouse") ],
      [ 5, 'netmouse', 'NetMousePS/2', N_("Genius NetMouse") ],
@@ -288,8 +288,16 @@ sub detect {
 
     if (c::kernel_version() =~ /^\Q2.6/) {
 	$modules_conf->get_probeall("usb-interface") and eval { modules::load('usbhid') };
-	if (cat_('/proc/bus/input/devices') =~ /^H: Handlers=mouse/m) {
-	    return fullname2mouse('Universal|Any PS/2 & USB mice', wacom => \@wacom);
+        my @input_devices = cat_('/proc/bus/input/devices');
+        my $synaptics_mouse;
+        if (my $mouse_nb = grep { /^H: Handlers=mouse/ } @input_devices) {
+            my $univ_mouse = fullname2mouse('Universal|Any PS/2 & USB mice', wacom => \@wacom);
+            if (any { m!^N: Name="(?:SynPS/2 Synaptics TouchPad|AlpsPS/2 ALPS TouchPad)"$! } @input_devices) {
+                $synaptics_mouse = fullname2mouse('PS/2|Synaptics Touchpad');
+                $mouse_nb < 2 and return $synaptics_mouse;
+                $univ_mouse->{auxmouse} = $synaptics_mouse;
+            }
+	    return $univ_mouse;
 	}
     } else {
 	my $ps2_mouse = detect_devices::hasMousePS2("psaux") && fullname2mouse("PS/2|Automatic", unsafe => 0);
@@ -346,12 +354,17 @@ sub load_modules {
 	/ttyS/   and push @l, qw(serial);
 	/event/  and push @l, qw(wacom evdev);
     }
+    if (member(N_("Synaptics Touchpad"), $mouse->{name}, $mouse->{auxmouse}{name})) {
+	push @l, qw(evdev);
+    }
     eval { modules::load(@l) };
 }
 
 sub set_xfree_conf {
     my ($mouse, $xfree_conf, $b_keep_auxmouse_unchanged) = @_;
-    
+
+    my ($synaptics, $mouse_) = partition { $_->{name} eq N_("Synaptics Touchpad") }
+      @{[ $mouse, if_($mouse->{auxmouse}, $mouse->{auxmouse}) ]};
     my @mice = map {
 	{
 	    Protocol => $_->{XMOUSETYPE},
@@ -360,7 +373,7 @@ sub set_xfree_conf {
 	    if_($_->{nbuttons} < 3, Emulate3Buttons => undef, Emulate3Timeout => 50),
 	    if_($_->{EMULATEWHEEL}, Emulate3Buttons => undef, Emulate3Timeout => 50, EmulateWheel => undef, EmulateWheelButton => 2),
 	};
-    } ($mouse, if_($mouse->{auxmouse}, $mouse->{auxmouse}));
+    } @$mouse_;
     
     if (!$mouse->{auxmouse} && $b_keep_auxmouse_unchanged) {
 	my (undef, @l) = $xfree_conf->get_mice;
@@ -372,6 +385,12 @@ sub set_xfree_conf {
     if (my @wacoms = @{$mouse->{wacom} || []}) {
 	$xfree_conf->set_wacoms(map { { Device => "/dev/$_", USB => m|input/event| } } @wacoms);
     }
+
+    $synaptics and $xfree_conf->set_synaptics(map { {
+        Device => "/dev/$_->{device}",
+        Protocol => $_->{XMOUSETYPE},
+        Primary => $_ ne $mouse->{auxmouse},
+    } } @$synaptics);
 }
 
 sub various_xfree_conf {
@@ -393,6 +412,10 @@ sub various_xfree_conf {
 	    $do_pkgs->install('xinput');
 	    output_with_perm($f, 0755, "xinput set-button-map Mouse2 1 2 3 6 7 4 5\n");
 	}
+    }
+
+    if (member(N_("Synaptics Touchpad"), $mouse->{name}, $mouse->{auxmouse}{name})) {
+	$do_pkgs->install("synaptics");
     }
 }
 
