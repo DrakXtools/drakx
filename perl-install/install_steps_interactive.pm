@@ -490,12 +490,12 @@ sub setPackages {
 			     _("Looking for available packages..."));
     install_any::setPackages($o, $rebuild_needed);
 
+    $w->set(_("Looking at packages already installed..."));
+    pkgs::selectPackagesAlreadyInstalled($o->{packages}, $o->{prefix});
+
     if ($rebuild_needed) {
 	$w->set(_("Finding packages to upgrade..."));
-	pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix}, $o->{base}, $o->{toRemove}, $o->{toSave});
-    } else {
-	$w->set(_("Looking at packages already installed..."));
-	pkgs::selectPackagesAlreadyInstalled($o->{packages}, $o->{prefix});
+	pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix});
     }
 }
 #------------------------------------------------------------------------------
