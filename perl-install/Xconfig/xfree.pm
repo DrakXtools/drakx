@@ -105,7 +105,7 @@ sub merge_values {
 	\%h;
     }
 
-    my @r = mapn(\&merge_values__hashes, $l3, $l4);
+    my @r = mapn_(\&merge_values__hashes, $l3, $l4);
 
     @r == 1 ? $r[0] : @r;
 }
