@@ -229,4 +229,10 @@ sub isdn_get_info {
     find { $_->{description} eq $desc } @isdndata;
 }
 
+sub isdn_get_cards_by_type {
+    my ($isdn_type) = @_;
+    grep { $_->{card} eq $isdn_type } @isdndata;
+}
+
+
 1;
