@@ -430,6 +430,7 @@ int in_reboot(void)
 }
 
 int exit_value_proceed = 66;
+int exit_value_restart = 0x35;
 
 int main(int argc, char **argv)
 {
@@ -504,20 +505,22 @@ int main(int argc, char **argv)
 	   2) we receive a SIGHUP 
 	*/
 
-	if (!(installpid = fork())) {
-		/* child */
-		char * child_argv[2];
-		child_argv[0] = BINARY;
-		child_argv[1] = NULL;
+        do {
+                if (!(installpid = fork())) {
+                        /* child */
+                        char * child_argv[2];
+                        child_argv[0] = BINARY;
+                        child_argv[1] = NULL;
 
-		execve(child_argv[0], child_argv, env);
-		printf("error in exec of %s :-( [%d]\n", BINARY, errno);
-		return 0;
-	}
+                        execve(child_argv[0], child_argv, env);
+                        printf("error in exec of %s :-( [%d]\n", BINARY, errno);
+                        return 0;
+                }
 
-	do {
-		childpid = wait4(-1, &wait_status, 0, NULL);
-	} while (childpid != installpid);
+                do {
+                        childpid = wait4(-1, &wait_status, 0, NULL);
+                } while (childpid != installpid);
+        } while (WIFEXITED(wait_status) && WEXITSTATUS(wait_status) == exit_value_restart);
 
         /* allow Ctrl Alt Del to reboot */
         reboot(0xfee1dead, 672274793, BMAGIC_HARD);
