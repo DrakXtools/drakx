@@ -452,6 +452,9 @@ Consoles 1,3,4,7 may also contain interesting information";
 	run_program::rooted($o->{prefix}, "chkconfig", "--del", "gpm") 
     }
 
+    #- install urpmi before as rpmdb will be opened, this will cause problem with update-menus.
+    $o->install_urpmi;
+
     #- update menu scheme before calling update menus if desktop mode.
     if ($o->{meta_class} eq 'desktop') {
 	run_program::rooted($o->{prefix}, "touch", "/etc/menu/do-not-create-menu-link");
@@ -475,8 +478,6 @@ braille-device $o->{brltty}{device}
 text-table $o->{brltty}{table}
 EOF
     }
-
-    $o->install_urpmi;
 
 
     install_any::disable_user_view() if $o->{security} >= 3 || $o->{authentication}{NIS};
