@@ -27,12 +27,9 @@ sub fromEnv() {
 
 sub new {
     my ($host, $prefix, $login, $password) = @_;
-    log::l("ftp::new");
     my @l = do { if ($hosts{"$host$prefix"}) {
-	log::l("ftp::new 1");
 	@{$hosts{"$host$prefix"}};
     } else {
-	log::l("ftp::new 2");
 	my %options = (Passive => 1, Timeout => 60, Port => 21);
 	$options{Firewall} = $ENV{PROXY} if $ENV{PROXY};
 	$options{Port} = $ENV{PROXYPORT} if $ENV{PROXYPORT};
@@ -43,7 +40,6 @@ sub new {
 
 	my $ftp;
 	while (1) {
-	    log::l("ftp::new 3");
 	    $ftp = Net::FTP->new(network::resolv($host), %options) or die;
 	    $ftp && $ftp->login($login, $password) and last;
 
