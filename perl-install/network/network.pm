@@ -446,15 +446,17 @@ sub configureNetwork2 {
             $in->do_pkgs->ensure_binary_is_installed('tmdns', 'tmdns', 'auto') if !$in->do_pkgs->is_installed('bind');
             $in->do_pkgs->ensure_binary_is_installed('zcip', 'zcip', 'auto');
             write_zeroconf("$etc/tmdns.conf", $netc->{ZEROCONF_HOSTNAME});
-            foreach (qw(tmdns zcip)) {
-                services::start_service_on_boot($_);
-                services::restart($_);
-            }
+            services::start_service_on_boot("tmdns");
+            services::restart("tmdns");
         } else {
             #- disable zeroconf
             require services;
-            -f "/etc/rc.d/init.d/$_" and services::do_not_start_service_on_boot($_) foreach qw(tmdns zcip);
+            #- write blank hostname so that drakconnect doesn't assume zeroconf is enabled
             -f "$etc/tmdns.conf" and write_zeroconf("$etc/tmdns.conf", '');
+            if (-f "$etc/rc.d/init.d/tmdns") {
+                services::stop("tmdns");
+                services::do_not_start_service_on_boot("tmdns");
+            }
         }
         any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');
     }
