@@ -20,7 +20,7 @@ function create_marfile() {
               && echo "WARNING! in $marfile, $k is missing (required by $i)"
         done
     done
-    ../mdk-stage1/mar/mar -c $marfile $*
+    ../mdk-stage1/mar/mar -c $marfile $(ls $*)
 }
 
 
@@ -63,7 +63,6 @@ rm -rf modules ; install -d modules
     /sbin/depmod -F ../System.map -e *.o | perl -pe 's/\\\n//' | perl -ne 's/\.o//g; s/[ \t]+/ /g; print if /: /' > modules.dep
     perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
     ls *.o               | packdrake -b9s modules.cz 400000
-    ls *.o               | cpio --quiet -H crc -o | bzip2 -9> modules.cpio.bz2
     create_marfile network_modules.mar  $NETWORK_MODULES
     create_marfile cdrom_modules.mar    $CDROM_MODULES
     create_marfile hd_modules.mar       $HD_MODULES
