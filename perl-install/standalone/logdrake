@@ -408,10 +408,7 @@ my $r;
 		  webmin => N("Webmin Service"),
 		  xinetd => N("Xinetd Service")
 		 };
-    my @installed_d;
-    foreach my $serv (keys %$service) {
-	-e "$initdir/$serv" && push @installed_d, $serv;
-    }
+    my @installed_d = grep { -e "$initdir/$_" } sort keys %$service;
     my %services_to_check;
     $in->ask_from(N("service setting"),
 		  N("You will receive an alert if one of the selected services is no longer running"),
