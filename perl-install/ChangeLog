@@ -1,3 +1,42 @@
+2002/01/22  fcrozat
+
+	* share/rpmsrate: Really install gnome control center when installing
+	GNOME
+
+2002/01/22  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps.pm: added mem=nopentium for any Athlon or Duron processor.
+
+2002/01/22  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* Makefile: exclude standalone from testing
+
+	* share/po/fr.po: resolve small conflict
+
+2002/01/22  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm: add the new "mii" module to 'net_raw'
+
+	* install_steps_interactive.pm: better messages for the minimal installs
+	fix a few cancel's (reported by slegros)
+	don't ask security level in non-expert
+
+	* install_steps_gtk.pm, install_interactive.pm: fix a few cancel's
+	(reported by slegros)
+
+	* share/rpmsrate: move mandrake-mime from SYSTEM to X
+	lower sndconfig
+
+2002/01/21  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive_gtk.pm, my_gtk.pm: hopefully better dialog box sizing
+
+	* install_steps_interactive.pm, install2.pm: can't call
+	any::config_libsafe so early during install, move it where msec is
+	called
+
+	* any.pm: quiet perl's warning
+
 2002/01/21  dam's  <damien@mandrakesoft.com>
 
 	* install_steps.pm: fixed network conf in auto install
