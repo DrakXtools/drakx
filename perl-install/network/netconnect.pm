@@ -830,6 +830,8 @@ and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.n
                         if (!exists $adsl_devices{$ntf_name}) {
                             $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
                             $adsl_type ||= $ethntf->{BOOTPROTO} || "dhcp";
+                            #- FIXME: use static instead of manual as key in %adsl_devices
+                            $adsl_type = "manual" if $adsl_type eq "static";
                             #- pppoa shouldn't be selected by default for ethernet devices, fallback on pppoe
                             $adsl_type = "pppoe" if $adsl_type eq "pppoa";
                         }
