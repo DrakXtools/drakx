@@ -25,7 +25,7 @@ our %l = (
         qw(ewrk3 hamachi hp hp-plus hp100 ibmtr),
         qw(lance natsemi ne ne2k-pci ni5010 ni52 ni65 nvnet olympic pcnet32 plip rcpci),
         qw(sb1000 sis900 smc-ultra smc9194 starfire tlan tmspci tulip via-rhine),
-        qw(wd winbond-840),
+        qw(wd winbond-840 forcedeth),
 	qw(fealnx 3c990 3c990fx bcm4400),
         qw(skfp tc35815 lanstreamer farsync sdladrv orinoco_pci prism2_plx),
 
