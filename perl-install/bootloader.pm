@@ -270,7 +270,7 @@ wait %d seconds for default boot.
     #- manage hackkernel if installed.
     my $hasHack = -e "$prefix/boot/vmlinuz-hack";
     if ($hasHack) {
-	my $hackVersion = first(readlink "$prefix/boot/vmlinuz-hack" =~ /vmlinux-(.*)/);
+	my $hackVersion = first(readlink("$prefix/boot/vmlinuz-hack") =~ /vmlinux-(.*)/);
 	add_kernel($prefix, $lilo, $hackVersion, 'hack',
 		  {
 		   label => 'hack',
