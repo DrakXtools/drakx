@@ -185,7 +185,7 @@ sub select_packages {
     foreach (qw(cups cups-drivers drakprofile draksync numlock raidtools reiserfsprogs xfsprogs jfsprogs icewm-light
 		Mesa Mesa-demos alsa alsa-utils Mesa-demos
                 glibc vim-minimal kernel
-               )) {
+               ), exists $options{server} ? qw(kernel22) : ()) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	$pkg and pkgs::selectPackage($o->{packages}, $pkg);
     }
@@ -196,7 +196,8 @@ sub select_packages {
 		csmash chromium tuxracer armagetron 
 		alsa imwheel nfs-utils-clients lvm usbd hotplug reiserfsprogs
 		sox aumix xmms-arts xawtv gatos kwintv sane-frontends gphoto gnome-toaster gcombust xcdroast apmd cdlabelgen
-		), exists $options{server} ? qw(Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib) : ()) {
+	       ), exists $options{server} ? qw(Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib
+						kernel-enterprise kernel22-secure) : ()) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	if ($pkg) {
 	    pkgs::selectPackage($o->{packages}, $pkg);
