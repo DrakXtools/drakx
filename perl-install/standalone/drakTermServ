@@ -219,81 +219,87 @@ sub interactive_mode() {
     $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     $window1->{rwindow}->set_border_width(5);
 
-    gtkadd($window1->{window},
-	   gtkpack_(gtkset_size_request(Gtk2::VBox->new(0,2), 620, 400),
+	my $s_buttons = Gtk2::HBox->new;
+	gtkpack_($s_buttons,
+		1, gtksignal_connect(Gtk2::Button->new(N("Enable Server")), clicked => sub {
+			destroy_widget();
+			gtkset_mousecursor_wait(); 
+			enable_ts();
+			gtkset_mousecursor_normal();
+		}),
+		1, gtksignal_connect(Gtk2::Button->new(N("Disable Server")), clicked => sub {
+			destroy_widget();
+			gtkset_mousecursor_wait();
+			disable_ts();
+			gtkset_mousecursor_normal(); 
+		}),
+		1, gtksignal_connect(Gtk2::Button->new(N("Start Server")), clicked => sub { 
+			destroy_widget();
+			gtkset_mousecursor_wait();	
+			start_ts();
+			gtkset_mousecursor_normal();
+		}),
+		1, gtksignal_connect(Gtk2::Button->new(N("Stop Server")), clicked => sub {
+			destroy_widget();
+			gtkset_mousecursor_wait();
+			stop_ts();
+			gtkset_mousecursor_normal();
+		}),
+	);
+	my $i_buttons = Gtk2::HBox->new;
+	gtkpack_($i_buttons,
+		1, gtksignal_connect(Gtk2::Button->new(N("Etherboot Floppy/ISO")), clicked => sub { 
+			destroy_widget();
+			make_boot();
+		}),
+		1, gtksignal_connect(Gtk2::Button->new(N("Net Boot Images")), clicked => sub {
+			destroy_widget();
+			make_nbi();
+		}),
+	);
+	my $c_buttons = Gtk2::HBox->new;
+	gtkpack_($c_buttons,
+		1, gtksignal_connect(Gtk2::Button->new(N("Add/Del Users")), clicked => sub {
+			destroy_widget();
+			maintain_users();
+		}),
+		1, gtksignal_connect(Gtk2::Button->new(N("Add/Del Clients")), clicked => sub { 
+			destroy_widget(); 
+			maintain_clients(); 
+		}),
+	);
+
+	$main_buttons = Gtk2::Notebook->new;
+	$main_buttons->append_page($s_buttons, gtkshow(Gtk2::Label->new(N("Server"))));
+	$main_buttons->append_page($i_buttons, gtkshow(Gtk2::Label->new(N("Images"))));
+	$main_buttons->append_page($c_buttons, gtkshow(Gtk2::Label->new(N("Clients/Users"))));
+	$main_buttons->set_show_border(0);
+	$main_buttons->set_tab_pos('bottom');
+	gtkadd($window1->{window}, 
+		gtkpack_(gtkset_size_request(Gtk2::VBox->new(0,2), 620, 400),
 		    1, gtkpack_(Gtk2::HBox->new(0,2),
 				1, gtkpack_(Gtk2::VBox->new(0,2),
 					1, gtkpack($status_box = Gtk2::VBox->new(0,5),
 						$main_box = Gtk2::VBox->new(0,10),
 					),
 					0, $wizard_buttons = gtkpack_(Gtk2::HBox->new(1,2)),
-					0, gtkpack_($main_buttons = Gtk2::VBox->new(0,2),
-						1, gtkpack_(Gtk2::HBox->new(1,2),
-						  1, gtkpack_(Gtk2::VBox->new(1,0),
-							1, gtksignal_connect(Gtk2::Button->new(N("Enable Server")), clicked => sub {
-								destroy_widget();
-								gtkset_mousecursor_wait(); 
-								enable_ts();
-								gtkset_mousecursor_normal();
-							}),
-							1, gtksignal_connect(Gtk2::Button->new(N("Disable Server")), clicked => sub {
-								destroy_widget();
-								gtkset_mousecursor_wait();
-								disable_ts();
-								gtkset_mousecursor_normal(); 
-							}),
-						  ),
-						  1, gtkpack_(Gtk2::VBox->new(1,0),
-							1, gtksignal_connect(Gtk2::Button->new(N("Start Server")), clicked => sub { 
-								destroy_widget();
-								gtkset_mousecursor_wait();	
-								start_ts();
-								gtkset_mousecursor_normal();
-							}),
-							1, gtksignal_connect(Gtk2::Button->new(N("Stop Server")), clicked => sub {
-								destroy_widget();
-								gtkset_mousecursor_wait();
-								stop_ts();
-								gtkset_mousecursor_normal();
-							}),
-						  ),
-						  1, gtkpack_(Gtk2::VBox->new(1,0),
-							1, gtksignal_connect(Gtk2::Button->new(N("Etherboot Floppy/ISO")), clicked => sub { 
-								destroy_widget();
-								make_boot();
-							}),
-							1, gtksignal_connect(Gtk2::Button->new(N("Net Boot Images")), clicked => sub {
-								destroy_widget();
-								make_nbi();
-							}),
-						  ),
-						  1, gtkpack_(Gtk2::VBox->new(1,0),
-							1, gtksignal_connect(Gtk2::Button->new(N("Add/Del Users")), clicked => sub {
-								destroy_widget();
-								maintain_users();
-							}),
-							1, gtksignal_connect(Gtk2::Button->new(N("Add/Del Clients")), clicked => sub { 
-								destroy_widget(); 
-								maintain_clients() 
-							}),
-						  ),
-						),
-						0, gtkpack_(Gtk2::HBox->new,
-							0, gtksignal_connect(Gtk2::Button->new(N("Help")),clicked => sub {
-								destroy_widget();
-								help();
-							}),
-							0, gtksignal_connect(Gtk2::Button->new(N("First Time Wizard")), clicked => sub {
-								destroy_widget();
-								start_wizard();
-							}),
-							1, "",
-							0, gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub {
-								write_conf_file();
-								restart_server() if $changes_made == 1;
-								Gtk2->main_quit;
-							}),
-						),
+					0, $main_buttons,
+					0, gtkpack_(Gtk2::HBox->new,
+						0, gtksignal_connect(Gtk2::Button->new(N("Help")),clicked => sub {
+							destroy_widget();
+							help();
+						}),
+						1, "",
+						0, gtksignal_connect(Gtk2::Button->new(N("First Time Wizard")), clicked => sub {
+							destroy_widget();
+							start_wizard();
+						}),
+						1, "",
+						0, gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub {
+							write_conf_file();
+							restart_server() if $changes_made == 1;
+							Gtk2->main_quit;
+						}),
 					),
 				),
 			),
@@ -302,7 +308,13 @@ sub interactive_mode() {
     $central_widget = \$main_box;
     $window1->{rwindow}->show_all;
     $window1->{rwindow}->realize;
-    $window1->{rwindow}->show_all;    
+    $window1->{rwindow}->show_all;
+	#- strange behavior with tabs, pressing a button actually ends up
+	#- activating a hiden button below it
+  	$main_buttons->set_current_page(2);
+	$main_buttons->set_current_page(1);
+	$main_buttons->set_current_page(0);
+	gtkflush(); 
     $window1->main;
     ugtk2->exit(0);
 }
@@ -373,7 +385,10 @@ sub wizard_step {
 	gtkadd($wizard_buttons, 
 		gtksignal_connect($next_button = Gtk2::Button->new(N("Next")), clicked => sub { 
 			clear_buttons();
-			wizard_step(\&dhcpd_config, 2) if $step == 1;
+			if ($step == 1) {
+				client_X_keyboard() if $conf{SYNC_KBD};
+				wizard_step(\&dhcpd_config, 2);
+			}
 			if ($step == 2) {
 				if ($config_written == 1) {
 					wizard_step(\&make_nbis, 3);
@@ -408,21 +423,24 @@ sub clear_buttons() {
 sub client_type() {
 	my $check_allow_thin = Gtk2::CheckButton->new(N("Use thin clients."));
 	$check_allow_thin->set_active($conf{ALLOW_THIN});
+	my $check_sync_kbd = Gtk2::CheckButton->new(N("Sync client X keyboard settings with server."));
+	$check_sync_kbd->set_active($conf{SYNC_KBD});
     text_view(N("Please select default client type.
     'Thin' clients run everything off the server's CPU/RAM, using the client display.
     'Fat' clients use their own CPU/RAM but the server's filesystem."), "wizard");
     gtkpack_($$central_widget,
-             0, gtkpack_(Gtk2::HBox->new(1,0), 
-                         1, Gtk2::VBox->new,
-                         0, gtksignal_connect($check_allow_thin, clicked => sub { 
-                                                  invbool \$conf{ALLOW_THIN};
-                                                  client_set("all"); 
-                                              }),	
-                         0, Gtk2::VBox->new,
-                        ),
-		0, gtksignal_connect(Gtk2::Button->new(N("Sync client X keyboard settings with server.")), 
-			clicked => sub { client_X_keyboard() }),
-		1, Gtk2::HBox->new(0,0),
+		0, gtkpack_(Gtk2::HBox->new(1,0), 
+			1, Gtk2::VBox->new,
+			0, gtksignal_connect($check_allow_thin, clicked => sub { 
+					invbool \$conf{ALLOW_THIN};
+					client_set("all"); 
+				}),
+			0, gtksignal_connect($check_sync_kbd, clicked => sub { 
+					invbool \$conf{SYNC_KBD}; 
+				}),
+			1, Gtk2::VBox->new,
+		),
+		0, Gtk2::VBox->new,
 	);
 }
 
@@ -757,7 +775,6 @@ sub make_nbi() {
 					}),
 					$combo_default_kernel,
 					$check_pxe,
-					Gtk2::HBox->new(1,1),
 					gtksignal_connect(Gtk2::Button->new(N("<-- Delete")), clicked => sub { 
 						if ($nbi) {
 							my $result = clear_nbi($nbi);
@@ -830,7 +847,7 @@ sub link_pxe {
 	}
 }
 
-sub get_platform_pxe {
+sub get_platform_pxe() {
 	my $adir = "X86PC";
 	$adir = "IA64PC" if arch() =~ /x86_64|ia64/;
 	$adir = "$tftpboot/$adir/linux/";
@@ -990,7 +1007,8 @@ sub maintain_clients() {
 	my $check_thin;
 	my $check_allow_thin;
 	my $is_thin = 0;
-			 
+	my $check_sync_kbd;
+		 
 	gtkpack($status_box,
 		$client_box = gtkpack_(Gtk2::VBox->new(0,10),
 			0, gtkadd(Gtk2::HBox->new(1,5),
@@ -1001,10 +1019,11 @@ sub maintain_clients() {
 					gtkadd($label_nbi), gtkadd($entry_nbi),
 					gtkadd($check_hdw_config),
 					gtksignal_connect($check_thin = Gtk2::CheckButton->new(N("Thin Client")), 
-						clicked => sub { invbool \$is_thin }),	
+						clicked => sub { invbool \$is_thin }),
 				),
 				gtkadd(Gtk2::VBox->new(1,10),
 					$check_allow_thin = Gtk2::CheckButton->new(N("Allow Thin Clients")),
+					$check_sync_kbd = Gtk2::CheckButton->new(N("Sync client X keyboard\n settings with server.")),
 					gtksignal_connect(Gtk2::Button->new(N("Add Client -->")), clicked => 
 						sub { my $hostname = $entry_host->get_text;
 							my $mac = $entry_mac->get_text;
@@ -1083,18 +1102,22 @@ sub maintain_clients() {
 				),
 				create_scrolled_window($tree_clients),
 			),
-			0, gtksignal_connect(Gtk2::Button->new(N("Sync client X keyboard settings with server.")), 
-				clicked => sub { client_X_keyboard() }),
 		),
 	);
 
 	$check_allow_thin->set_active($conf{ALLOW_THIN});
+	$check_sync_kbd->set_active($conf{SYNC_KBD});
 	$check_thin->set_sensitive($conf{ALLOW_THIN});
 	gtksignal_connect($check_allow_thin, clicked => 
 		sub { invbool \$conf{ALLOW_THIN};
 			$check_thin->set_sensitive($conf{ALLOW_THIN});
 			client_set("single");
 			$in->ask_warn(N("Warning"), N("Need to restart the Display Manager for full changes to take effect. \n(service dm restart - at the console)"));
+		}
+	);
+	gtksignal_connect($check_sync_kbd, clicked => 
+		sub { invbool \$conf{SYNC_KBD};
+			client_X_keyboard() if $conf{SYNC_KBD};
 		}
 	);
 	$button_edit->set_sensitive(0);
@@ -1151,7 +1174,7 @@ sub client_set {
 		if ($default eq "all") {
 			my $inittab = '/etc/initab$$CLIENT$$';
 			$in->ask_warn(N("Warning"), N("All clients will use %s", $inittab));
-			`mv '/etc/inittab\$\$CLIENT\$\$' '/etc/inittab\$\$CLIENT\$\$.fat'` if -f '/etc/inittab$$CLIENT$$';;
+			`mv '/etc/inittab\$\$CLIENT\$\$' '/etc/inittab\$\$CLIENT\$\$.fat'` if -f '/etc/inittab$$CLIENT$$';
 			write_thin_inittab("CLIENT");
 		}
 	} else {
@@ -1328,7 +1351,7 @@ sub dhcpd_config() {
 								$entry_name_server2->get_text,
 								$entry_name_server3->get_text,
 								$entry_ip_range_start->get_text,
-								$entry_ip_range_end->get_text) 
+								$entry_ip_range_end->get_text); 
 						} else {
 							write_dhcpd_config("append", @nothing) if $dhcpd_conf !~ /dhcpd.conf.terminal-server/; 
 						}
@@ -1401,8 +1424,6 @@ sub write_dhcpd_config {
 	my @dhcpd_config;
 
 	if ($mode eq "append") {
-print "got here...";
-print "PXE: $conf{CREATE_PXE}\n";
 		append_to_file("/etc/dhcpd.conf", qq(include "/etc/dhcpd.conf.terminal-server";\n));
 		push @dhcpd_config, qq(# Include PXE definitions and defaults\ninclude "/etc/dhcpd.conf.pxe.include";\n) if $conf{CREATE_PXE};
 		push @dhcpd_config, qq(# Include Etherboot definitions and defaults\ninclude "/etc/dhcpd.conf.etherboot.include";\n);
@@ -1456,9 +1477,9 @@ sub write_eb_image {
 			return if !($result);
 			$result = system("cat $rom_path/floppyload.bin $rom_path/start16.bin $rom_path/zimg/$nic > /dev/fd0") if $result;
 			if ($result) {
-				$in->ask_warn(N("Error"), N("Could not access the floppy!"))
+				$in->ask_warn(N("Error"), N("Could not access the floppy!"));
 			} else {
-				$in->ask_warn(N("Information"), N("Floppy can be removed now"))
+				$in->ask_warn(N("Information"), N("Floppy can be removed now"));
 			}
 		} else {
 			$in->ask_warn(N("Error"), N("No floppy drive available!"));
@@ -1466,20 +1487,21 @@ sub write_eb_image {
 	} elsif ($type eq 'pxe') {
 		system("cat $rom_path/pxeprefix.bin $rom_path/start16.bin $rom_path/zimg/$nic > $tftpboot/$nic.pxe");
 		if (-e "$tftpboot/$nic.pxe") {
-			$in->ask_warn(N("Information"), N("PXE image is %s/%s", $tftpboot, $nic))
+			$in->ask_warn(N("Information"), N("PXE image is %s/%s", $tftpboot, $nic));
 		} else { 
-			$in->ask_warn(N("Error"), N("Error writing %s/%s", $tftpboot, $nic))
+			$in->ask_warn(N("Error"), N("Error writing %s/%s", $tftpboot, $nic));
 		}			
 	} else {
-		mkdir_p("/tmp/eb");
-		system("cat $rom_path/floppyload.bin $rom_path/start16.bin $rom_path/zimg/$nic > /tmp/eb/eb.img");
-		system("dd if=/dev/zero of=/tmp/eb/eb.img bs=512 seek=72 count=2808");
-		system("mkisofs -b eb.img -o /tmp/$nic.iso /tmp/eb");
-		rm_rf("/tmp/eb");
-		if (-e "/tmp/$nic.iso") {
-			$in->ask_warn(N("Information"), N("Etherboot ISO image is %s", "/tmp/$nic.iso"))
+		my $tmp = "/root/tmp";
+		mkdir_p("$tmp/eb");
+		system("cat $rom_path/floppyload.bin $rom_path/start16.bin $rom_path/zimg/$nic > $tmp/eb/eb.img");
+		system("dd if=/dev/zero of=$tmp/eb/eb.img bs=512 seek=72 count=2808");
+		system("mkisofs -b eb.img -o $tmp/$nic.iso $tmp/eb");
+		rm_rf("$tmp/eb");
+		if (-e "$tmp/$nic.iso") {
+			$in->ask_warn(N("Information"), N("Etherboot ISO image is %s", "$tmp/$nic.iso"));
 		} else { 
-			$in->ask_warn(N("Error"), N("Something went wrong! - Is mkisofs installed?"))
+			$in->ask_warn(N("Error"), N("Something went wrong! - Is mkisofs installed?"));
 		}		
 	}
 }
@@ -1685,38 +1707,9 @@ sub adduser {
 sub deluser {
 	# del a user from the shadow$$CLIENT$$ file
 	my ($username) = @_;
-	my $i;
 	my $user_deleted;
-	my @ts_users = cat_('/etc/shadow$$CLIENT$$');
-	my @passwd_users = cat_('/etc/passwd$$CLIENT$$');
-	my $is_ts_user = any { /$username/ } @ts_users;
-	my $is_passwd_user = any { /$username/ } @passwd_users;
-	
-	if ($is_ts_user) {
-		$i = 0;
-		foreach my $user (@ts_users) {
-			if ($user =~ /$username/) {
-				splice(@ts_users, $i, 1);
-				$user_deleted = 1;
-				last;
-			}
-			$i++;
-		}
-		output_p('/etc/shadow$$CLIENT$$', @ts_users);
-	}
-	
-	if ($is_passwd_user) {
-		$i = 0;
-		foreach my $user (@passwd_users) {
-			if ($user =~ /$username/) {
-				splice(@passwd_users, $i, 1);
-				$user_deleted = 1;
-				last;
-			}
-			$i++;
-		}
-		output_p('/etc/passwd$$CLIENT$$', @passwd_users);
-	}
+	substInFile { $_ = '', $user_deleted = 1 if begins_with($_, "$username:") } '/etc/shadow$$CLIENT$$';                                        
+	substInFile { $_ = '', $user_deleted = 1 if begins_with($_, "$username:") } '/etc/passwd$$CLIENT$$';    
 
 	if ($cmd_line == 1) {
 		if ($user_deleted) {
@@ -1881,11 +1874,11 @@ qq(\tfilename\t\t"$ts_clients{$client}{filename}";),
 	$entry .= "\t#hdw_config\t\t$ts_clients{$client}{hdw_config};\n" if $ts_clients{$client}{hdw_config};
 	$entry .= "}\n";
 	if ($ts_clients{$client}{type} eq "thin") {
-		write_thin_inittab($ts_clients{$client}{address}) 
+		write_thin_inittab($ts_clients{$client}{address}); 
 	} else {
 		eval { rm_rf("/etc/inittab\$\$IP=$ts_clients{$client}{address}\$\$") };
 	}
-	$entry
+	$entry;
 }
 
 sub write_dhcpd_conf {
@@ -1945,10 +1938,10 @@ sub client_hdw_config {
 		cp_af("/etc/sysconfig/mouse", "/etc/sysconfig/mouse$suffix") if -f "/etc/sysconfig/mouse";
 		cp_af("/etc/X11/XF86Config", "/etc/X11/XF86Config$suffix") if -f "/etc/X11/XF86Config";
 		cp_af('/etc/X11/xorg.conf$$CLIENT$$', "/etc/X11/xorg.conf$suffix") if -f '/etc/X11/xorg.conf$$CLIENT$$';
-		cp_af("/dev/null", "/etc/modules.conf$suffix");
-		cp_af("/dev/null", "/etc/modules$suffix");
-		cp_af("/dev/null", "/etc/modprobe.conf$suffix");
-		cp_af("/dev/null", "/etc/modprobe.preload$suffix");
+		output("/etc/modules.conf$suffix", '');
+		output("/etc/modules$suffix", '');
+		output("/etc/modprobe.conf$suffix", '');
+		output("/etc/modprobe.preload$suffix", '');
 		# create mount points so they can be edited by the client
 		my $mnt_access = "$client_ip(rw,no_root_squash)";
 		append_to_file("/etc/exports", "/etc/sysconfig/mouse$suffix\t$mnt_access\n");
