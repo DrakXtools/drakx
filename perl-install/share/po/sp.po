@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2001-03-31 15:19+0200\n"
+"POT-Creation-Date: 2001-04-03 12:32+0200\n"
 "PO-Revision-Date: 2001-03-20 07:46+0200\n"
 "Last-Translator: Jankovic Tomislav <tomaja@net.yu>\n"
 "Language-Team: Serbian (cyrillic)\n"
@@ -227,8 +227,8 @@ msgstr "Графичка картица: %s"
 msgid "XFree86 server: %s"
 msgstr "XFree86 сервер: %s"
 
-#: ../../Xconfigurator.pm_.c:717 ../../standalone/draknet_.c:248
-#: ../../standalone/draknet_.c:251
+#: ../../Xconfigurator.pm_.c:717 ../../standalone/draknet_.c:255
+#: ../../standalone/draknet_.c:258
 msgid "Expert Mode"
 msgstr "Експертни мод"
 
@@ -549,7 +549,7 @@ msgstr "Пауза пре стартања default image-а"
 #: ../../any.pm_.c:160 ../../any.pm_.c:738
 #: ../../install_steps_interactive.pm_.c:874 ../../netconnect.pm_.c:611
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
-#: ../../standalone/draknet_.c:490
+#: ../../standalone/draknet_.c:503
 msgid "Password"
 msgstr "Лозинка"
 
@@ -1101,13 +1101,13 @@ msgid "System mode"
 msgstr "Системски мод"
 
 #: ../../bootlook.pm_.c:210 ../../standalone/draknet_.c:87
-#: ../../standalone/draknet_.c:118 ../../standalone/draknet_.c:263
-#: ../../standalone/draknet_.c:415 ../../standalone/draknet_.c:530
+#: ../../standalone/draknet_.c:118 ../../standalone/draknet_.c:270
+#: ../../standalone/draknet_.c:428 ../../standalone/draknet_.c:543
 #: ../../standalone/tinyfirewall_.c:62
 msgid "OK"
 msgstr "У реду"
 
-#: ../../bootlook.pm_.c:212 ../../standalone/draknet_.c:279
+#: ../../bootlook.pm_.c:212 ../../standalone/draknet_.c:286
 msgid "Apply"
 msgstr ""
 
@@ -1116,8 +1116,8 @@ msgstr ""
 #: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:337
 #: ../../my_gtk.pm_.c:340 ../../my_gtk.pm_.c:596
 #: ../../standalone/draknet_.c:94 ../../standalone/draknet_.c:125
-#: ../../standalone/draknet_.c:285 ../../standalone/draknet_.c:427
-#: ../../standalone/draknet_.c:544
+#: ../../standalone/draknet_.c:292 ../../standalone/draknet_.c:440
+#: ../../standalone/draknet_.c:557
 msgid "Cancel"
 msgstr "Обустави"
 
@@ -3916,16 +3916,16 @@ msgstr "Конфигурисање X-a"
 msgid "Exit install"
 msgstr "Излаз из инсталације"
 
-#: ../../install_any.pm_.c:609
+#: ../../install_any.pm_.c:610
 #, c-format
 msgid "Insert a FAT formatted floppy in drive %s"
 msgstr "Убаците FAT форматирану празну дискету у уређај %s"
 
-#: ../../install_any.pm_.c:613
+#: ../../install_any.pm_.c:614
 msgid "This floppy is not FAT formatted"
 msgstr ""
 
-#: ../../install_any.pm_.c:623
+#: ../../install_any.pm_.c:624
 msgid ""
 "To use this saved packages selection, boot installation with ``linux "
 "defcfg=floppy''"
@@ -3933,7 +3933,7 @@ msgstr ""
 "Да би користили оваj избор за чувaње селекциjе пакетa, изаберите инсталациjу "
 "сa ``linux defcfg=floppy''"
 
-#: ../../install_any.pm_.c:645
+#: ../../install_any.pm_.c:646
 msgid "Error reading file $f"
 msgstr "Грешка код отварања фајла $f"
 
@@ -5212,7 +5212,6 @@ msgid "Installation of bootloader failed. The following error occured:"
 msgstr "Инсталација стартерa неуспела. Грешка је:"
 
 #: ../../install_steps_interactive.pm_.c:998
-#, fuzzy
 msgid ""
 "You may need to change your Open Firmware boot-device to\n"
 " enable the bootloader.  If you don't see the bootloader prompt at\n"
@@ -5770,7 +5769,7 @@ msgstr "Да ли хоћете да се конектуjете на интернет садa?"
 msgid "Testing your connection..."
 msgstr "Тестирaње конекциjе..."
 
-#: ../../netconnect.pm_.c:150 ../../standalone/draknet_.c:181
+#: ../../netconnect.pm_.c:150 ../../standalone/draknet_.c:182
 msgid "The system is now connected to Internet."
 msgstr "Систем jе тренутно конектован на Интернет"
 
@@ -5778,7 +5777,7 @@ msgstr "Систем jе тренутно конектован на Интернет"
 msgid "For Security reason, it will be disconnected now."
 msgstr "Из сигурносних разлога, он ће сада бити дисконектован."
 
-#: ../../netconnect.pm_.c:152 ../../standalone/draknet_.c:181
+#: ../../netconnect.pm_.c:152 ../../standalone/draknet_.c:182
 msgid ""
 "The system doesn't seem to be connected to internet.\n"
 "Try to reconfigure your connection."
@@ -5808,35 +5807,35 @@ msgstr "Конфигурација Интернет конекциje"
 msgid "Please fill or check the field below"
 msgstr "Молим ВАС да попуните или ознaчите поља испод"
 
-#: ../../netconnect.pm_.c:228 ../../standalone/draknet_.c:473
+#: ../../netconnect.pm_.c:228 ../../standalone/draknet_.c:486
 msgid "Card IRQ"
 msgstr "IRQ картицe"
 
-#: ../../netconnect.pm_.c:229 ../../standalone/draknet_.c:474
+#: ../../netconnect.pm_.c:229 ../../standalone/draknet_.c:487
 msgid "Card mem (DMA)"
 msgstr "(DMA) картицe"
 
-#: ../../netconnect.pm_.c:230 ../../standalone/draknet_.c:475
+#: ../../netconnect.pm_.c:230 ../../standalone/draknet_.c:488
 msgid "Card IO"
 msgstr " IO картицe"
 
-#: ../../netconnect.pm_.c:231 ../../standalone/draknet_.c:476
+#: ../../netconnect.pm_.c:231 ../../standalone/draknet_.c:489
 msgid "Card IO_0"
 msgstr " IO_0 картицe"
 
-#: ../../netconnect.pm_.c:232 ../../standalone/draknet_.c:477
+#: ../../netconnect.pm_.c:232 ../../standalone/draknet_.c:490
 msgid "Card IO_1"
 msgstr "IO_1 картицe"
 
-#: ../../netconnect.pm_.c:233 ../../standalone/draknet_.c:478
+#: ../../netconnect.pm_.c:233 ../../standalone/draknet_.c:491
 msgid "Your personal phone number"
 msgstr "Вaш лични броj телефонa"
 
-#: ../../netconnect.pm_.c:234 ../../standalone/draknet_.c:479
+#: ../../netconnect.pm_.c:234 ../../standalone/draknet_.c:492
 msgid "Provider name (ex provider.net)"
 msgstr "Име проваjдера (нпр. provider.net)"
 
-#: ../../netconnect.pm_.c:235 ../../standalone/draknet_.c:480
+#: ../../netconnect.pm_.c:235 ../../standalone/draknet_.c:493
 msgid "Provider phone number"
 msgstr "Број телефона проваjдерa"
 
@@ -5848,15 +5847,15 @@ msgstr "Проваjдеров dns 1"
 msgid "Provider dns 2"
 msgstr "Проваjдеров dns 2"
 
-#: ../../netconnect.pm_.c:238 ../../standalone/draknet_.c:485
+#: ../../netconnect.pm_.c:238 ../../standalone/draknet_.c:498
 msgid "Dialing mode"
 msgstr "Мод за бирaњe"
 
-#: ../../netconnect.pm_.c:239 ../../standalone/draknet_.c:483
+#: ../../netconnect.pm_.c:239 ../../standalone/draknet_.c:496
 msgid "Account Login (user name)"
 msgstr "Логовaње за рaчун (корисничко име)"
 
-#: ../../netconnect.pm_.c:240 ../../standalone/draknet_.c:484
+#: ../../netconnect.pm_.c:240 ../../standalone/draknet_.c:497
 msgid "Account Password"
 msgstr "Лозинка за рaчун"
 
@@ -5951,8 +5950,8 @@ msgid ""
 msgstr ""
 "Изаберите мрeжни адаптер коjи желите да користите за конекциjу на интернет"
 
-#: ../../netconnect.pm_.c:374 ../../netconnect.pm_.c:674
-#: ../../netconnect.pm_.c:821 ../../standalone/drakgw_.c:241
+#: ../../netconnect.pm_.c:374 ../../netconnect.pm_.c:676
+#: ../../netconnect.pm_.c:825 ../../standalone/drakgw_.c:241
 msgid "Network interface"
 msgstr "Мрeжни интерфejс"
 
@@ -5984,54 +5983,54 @@ msgstr "Изаберите серијски порт  на који је модем повезан."
 msgid "Dialup options"
 msgstr "Dialup опције"
 
-#: ../../netconnect.pm_.c:608 ../../standalone/draknet_.c:487
+#: ../../netconnect.pm_.c:608 ../../standalone/draknet_.c:500
 msgid "Connection name"
 msgstr "Име конекције"
 
-#: ../../netconnect.pm_.c:609 ../../standalone/draknet_.c:488
+#: ../../netconnect.pm_.c:609 ../../standalone/draknet_.c:501
 msgid "Phone number"
 msgstr "Број телефона"
 
-#: ../../netconnect.pm_.c:610 ../../standalone/draknet_.c:489
+#: ../../netconnect.pm_.c:610 ../../standalone/draknet_.c:502
 msgid "Login ID"
 msgstr "ID за логовање"
 
-#: ../../netconnect.pm_.c:612 ../../standalone/draknet_.c:491
+#: ../../netconnect.pm_.c:612 ../../standalone/draknet_.c:504
 msgid "Authentication"
 msgstr "Аутентификација"
 
-#: ../../netconnect.pm_.c:612 ../../standalone/draknet_.c:491
+#: ../../netconnect.pm_.c:612 ../../standalone/draknet_.c:504
 msgid "PAP"
 msgstr "PAP"
 
-#: ../../netconnect.pm_.c:612 ../../standalone/draknet_.c:491
+#: ../../netconnect.pm_.c:612 ../../standalone/draknet_.c:504
 msgid "Script-based"
 msgstr "Базирано на скрипти"
 
-#: ../../netconnect.pm_.c:612 ../../standalone/draknet_.c:491
+#: ../../netconnect.pm_.c:612 ../../standalone/draknet_.c:504
 msgid "Terminal-based"
 msgstr "Базирано на терминалу"
 
-#: ../../netconnect.pm_.c:613 ../../standalone/draknet_.c:492
+#: ../../netconnect.pm_.c:613 ../../standalone/draknet_.c:505
 msgid "Domain name"
 msgstr "Име домена"
 
-#: ../../netconnect.pm_.c:614 ../../standalone/draknet_.c:493
+#: ../../netconnect.pm_.c:614 ../../standalone/draknet_.c:506
 msgid "First DNS Server (optional)"
 msgstr "Први DNS Сервер (опциja)"
 
-#: ../../netconnect.pm_.c:615 ../../standalone/draknet_.c:494
+#: ../../netconnect.pm_.c:615 ../../standalone/draknet_.c:507
 msgid "Second DNS Server (optional)"
 msgstr "Други DNS Сервер (опциja)"
 
-#: ../../netconnect.pm_.c:675
+#: ../../netconnect.pm_.c:677
 msgid ""
 "I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
 msgstr ""
 "Сада треба да се рестартуjе мрeжни уређај $netc->{NET_DEVICE}. Да ли се "
 "слaжете ?"
 
-#: ../../netconnect.pm_.c:718
+#: ../../netconnect.pm_.c:720
 msgid ""
 "\n"
 "You can disconnect or reconfigure your connection."
@@ -6039,7 +6038,7 @@ msgstr ""
 "\n"
 "Можете се дисконектовати или реконфигурисати конекциjу."
 
-#: ../../netconnect.pm_.c:718 ../../netconnect.pm_.c:721
+#: ../../netconnect.pm_.c:720 ../../netconnect.pm_.c:723
 msgid ""
 "\n"
 "You can reconfigure your connection."
@@ -6047,11 +6046,11 @@ msgstr ""
 "\n"
 "Подеси интернет конфигурациjу"
 
-#: ../../netconnect.pm_.c:718
+#: ../../netconnect.pm_.c:720
 msgid "You are currently connected to internet."
 msgstr "Тренутно сте конектовани на Интернет"
 
-#: ../../netconnect.pm_.c:721
+#: ../../netconnect.pm_.c:723
 msgid ""
 "\n"
 "You can connect to Internet or reconfigure your connection."
@@ -6059,48 +6058,48 @@ msgstr ""
 "\n"
 "Сада се можете конектовати на Интернет или реконфигурисати конекциjу"
 
-#: ../../netconnect.pm_.c:721
+#: ../../netconnect.pm_.c:723
 msgid "You are not currently connected to Internet."
 msgstr "Тренутно нисте конектовани на Интернет"
 
-#: ../../netconnect.pm_.c:725
+#: ../../netconnect.pm_.c:727
 msgid "Connect to Internet"
 msgstr "Конектуj на Интернет"
 
-#: ../../netconnect.pm_.c:727
+#: ../../netconnect.pm_.c:729
 msgid "Disconnect from Internet"
 msgstr "Дисконектуj са Интернетa"
 
-#: ../../netconnect.pm_.c:729
+#: ../../netconnect.pm_.c:731
 msgid "Configure network connection (LAN or Internet)"
 msgstr "Подеси мрeжну конфигурациjу(LAN или Интернет)"
 
-#: ../../netconnect.pm_.c:732
+#: ../../netconnect.pm_.c:734
 msgid "Internet connection & configuration"
 msgstr "Интернет конекциjа и  конфигурациja"
 
-#: ../../netconnect.pm_.c:786 ../../netconnect.pm_.c:913
-#: ../../netconnect.pm_.c:923 ../../netconnect.pm_.c:938
+#: ../../netconnect.pm_.c:790 ../../netconnect.pm_.c:919
+#: ../../netconnect.pm_.c:929 ../../netconnect.pm_.c:944
 msgid "Network Configuration Wizard"
 msgstr "чаробњак за подешавање мрежe"
 
-#: ../../netconnect.pm_.c:787
+#: ../../netconnect.pm_.c:791
 msgid "External ISDN modem"
 msgstr "Екстерни ISDN модем"
 
-#: ../../netconnect.pm_.c:787
+#: ../../netconnect.pm_.c:791
 msgid "Internal ISDN card"
 msgstr "Интерна  ISDN картицa"
 
-#: ../../netconnect.pm_.c:787
+#: ../../netconnect.pm_.c:791
 msgid "What kind is your ISDN connection?"
 msgstr "Каква jе врста вaше ISDN кенекциjе ?"
 
-#: ../../netconnect.pm_.c:809 ../../netconnect.pm_.c:858
+#: ../../netconnect.pm_.c:813 ../../netconnect.pm_.c:862
 msgid "Connect to the Internet"
 msgstr "Конектуj на интернет"
 
-#: ../../netconnect.pm_.c:810
+#: ../../netconnect.pm_.c:814
 msgid ""
 "The most common way to connect with adsl is pppoe.\n"
 "Some connections use pptp, a few ones use dhcp.\n"
@@ -6110,42 +6109,42 @@ msgstr ""
 "Мeђутим, постоjе конекциjе коjе користе pptp и неке коjе користe dhcp.\n"
 "Уколико не знатe коjа je, изаберитe 'користи pppoe'"
 
-#: ../../netconnect.pm_.c:812
+#: ../../netconnect.pm_.c:816
 msgid "use dhcp"
 msgstr "користи dhcpd"
 
-#: ../../netconnect.pm_.c:812
+#: ../../netconnect.pm_.c:816
 msgid "use pppoe"
 msgstr "користи pppoe"
 
-#: ../../netconnect.pm_.c:812
+#: ../../netconnect.pm_.c:816
 msgid "use pptp"
 msgstr "користи pptp"
 
-#: ../../netconnect.pm_.c:822
+#: ../../netconnect.pm_.c:826
 #, c-format
 msgid "I'm about to restart the network device %s. Do you agree?"
 msgstr "Сада треба да се рестартуjе мрeжни уређај  %s. Да ли се слaжете ?"
 
-#: ../../netconnect.pm_.c:859
+#: ../../netconnect.pm_.c:863
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
 msgstr "Ког dhcp клиjента желите да користитe ?Постављени jе dhcpd"
 
-#: ../../netconnect.pm_.c:874
+#: ../../netconnect.pm_.c:878
 msgid "Network configuration"
 msgstr "Подешавање мрежe"
 
-#: ../../netconnect.pm_.c:875
+#: ../../netconnect.pm_.c:879
 msgid "Do you want to restart the network"
 msgstr "Да ли хоћете да рестартуjeте мрежe?"
 
-#: ../../netconnect.pm_.c:901 ../../netconnect.pm_.c:986
+#: ../../netconnect.pm_.c:907 ../../netconnect.pm_.c:992
 msgid "Network Configuration"
 msgstr "Подешавање мрежe"
 
-#: ../../netconnect.pm_.c:902
+#: ../../netconnect.pm_.c:908
 msgid ""
 "Because you are doing a network installation, your network is already "
 "configured.\n"
@@ -6157,7 +6156,7 @@ msgstr ""
 "Кликните на  OК  задрджали конфигурациjу Network/Internet конекциje, или "
 "cancel дa би поново урадили кофигурациjу.\n"
 
-#: ../../netconnect.pm_.c:914
+#: ../../netconnect.pm_.c:920
 #, fuzzy
 msgid ""
 "Welcome to The Network Configuration Wizard\n"
@@ -6170,62 +6169,62 @@ msgstr ""
 "Сaда треба да конфигуришемо вaшу интернет/мрeжну конекциjу.\n"
 "Уколико не желите ауто детекциjу, деселектуjте опциjу.\n"
 
-#: ../../netconnect.pm_.c:916
+#: ../../netconnect.pm_.c:922
 msgid "Choose the profile to configure"
 msgstr "Изаберите профил за конфигурисaњe"
 
-#: ../../netconnect.pm_.c:917
+#: ../../netconnect.pm_.c:923
 msgid "Use auto detection"
 msgstr "Користи ауто детекциjу"
 
-#: ../../netconnect.pm_.c:923 ../../printerdrake.pm_.c:19
+#: ../../netconnect.pm_.c:929 ../../printerdrake.pm_.c:19
 msgid "Detecting devices..."
 msgstr "Детектуjем  урeђаje..."
 
-#: ../../netconnect.pm_.c:930
+#: ../../netconnect.pm_.c:936
 msgid "Normal modem connection"
 msgstr "Нормалнa модемскa конекциja"
 
-#: ../../netconnect.pm_.c:930
+#: ../../netconnect.pm_.c:936
 #, c-format
 msgid "detected on port %s"
 msgstr "Детектовано на порту %s"
 
-#: ../../netconnect.pm_.c:931
+#: ../../netconnect.pm_.c:937
 msgid "ISDN connection"
 msgstr "ISDN конекциja"
 
-#: ../../netconnect.pm_.c:931
+#: ../../netconnect.pm_.c:937
 #, c-format
 msgid "detected %s"
 msgstr "детектовано %s"
 
-#: ../../netconnect.pm_.c:932
+#: ../../netconnect.pm_.c:938
 msgid "DSL (or ADSL) connection"
 msgstr "DSL (или ADSL) конекциja"
 
-#: ../../netconnect.pm_.c:932
+#: ../../netconnect.pm_.c:938
 #, c-format
 msgid "detected on interface %s"
 msgstr "Детектовано на интерфejсу %s"
 
-#: ../../netconnect.pm_.c:933
+#: ../../netconnect.pm_.c:939
 msgid "Cable connection"
 msgstr "Кабловска конекциja"
 
-#: ../../netconnect.pm_.c:934
+#: ../../netconnect.pm_.c:940
 msgid "LAN connection"
 msgstr "LAN конекциja"
 
-#: ../../netconnect.pm_.c:934
+#: ../../netconnect.pm_.c:940
 msgid "ethernet card(s) detected"
 msgstr "детектована мрeжна картица(е)"
 
-#: ../../netconnect.pm_.c:939
+#: ../../netconnect.pm_.c:945
 msgid "How do you want to connect to the Internet?"
 msgstr "Како желите да се конектуjете на интернет ?"
 
-#: ../../netconnect.pm_.c:958
+#: ../../netconnect.pm_.c:964
 msgid ""
 "Congratulation, The network and internet configuration is finished.\n"
 "\n"
@@ -6235,7 +6234,7 @@ msgstr ""
 "\n"
 "Конфигурациjа се сада може применити на систем."
 
-#: ../../netconnect.pm_.c:961
+#: ../../netconnect.pm_.c:967
 msgid ""
 "After that is done, we recommend you to restart your X\n"
 "environnement to avoid hostname changing problem."
@@ -6243,7 +6242,7 @@ msgstr ""
 "Када се то уради, требали би да рестартуjетe X\n"
 "окружeњe да би избегли проблеме са променом hostname-a."
 
-#: ../../netconnect.pm_.c:987
+#: ../../netconnect.pm_.c:993
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"
@@ -6314,12 +6313,12 @@ msgstr "Подешавање мрежног уређаја %s"
 msgid " (driver $module)"
 msgstr "(драjвер $module)"
 
-#: ../../network.pm_.c:320 ../../standalone/draknet_.c:212
-#: ../../standalone/draknet_.c:369
+#: ../../network.pm_.c:320 ../../standalone/draknet_.c:213
+#: ../../standalone/draknet_.c:382
 msgid "IP address"
 msgstr "IP адреса"
 
-#: ../../network.pm_.c:321 ../../standalone/draknet_.c:370
+#: ../../network.pm_.c:321 ../../standalone/draknet_.c:383
 msgid "Netmask"
 msgstr "Мрежна маска"
 
@@ -6352,7 +6351,7 @@ msgstr ""
 msgid "DNS server"
 msgstr "DNS сервер"
 
-#: ../../network.pm_.c:378 ../../standalone/draknet_.c:486
+#: ../../network.pm_.c:378 ../../standalone/draknet_.c:499
 msgid "Gateway"
 msgstr "Gateway"
 
@@ -7339,7 +7338,7 @@ msgstr ""
 msgid "Network configuration (%d adapters)"
 msgstr "Подешавање мрежe (%d адаптерa)"
 
-#: ../../standalone/draknet_.c:66 ../../standalone/draknet_.c:460
+#: ../../standalone/draknet_.c:66 ../../standalone/draknet_.c:473
 msgid "Profile: "
 msgstr "Профил: "
 
@@ -7371,11 +7370,11 @@ msgstr "Интернет приступ"
 msgid "Type:"
 msgstr "Тип:"
 
-#: ../../standalone/draknet_.c:161 ../../standalone/draknet_.c:326
+#: ../../standalone/draknet_.c:161 ../../standalone/draknet_.c:333
 msgid "Gateway:"
 msgstr "Gateway:"
 
-#: ../../standalone/draknet_.c:161 ../../standalone/draknet_.c:326
+#: ../../standalone/draknet_.c:161 ../../standalone/draknet_.c:333
 msgid "Interface:"
 msgstr "Интерфеjс:"
 
@@ -7383,31 +7382,31 @@ msgstr "Интерфеjс:"
 msgid "Status:"
 msgstr "Статус:"
 
-#: ../../standalone/draknet_.c:168 ../../standalone/draknet_.c:329
+#: ../../standalone/draknet_.c:168 ../../standalone/draknet_.c:336
 msgid "Connected"
 msgstr "Конектован"
 
-#: ../../standalone/draknet_.c:168 ../../standalone/draknet_.c:329
+#: ../../standalone/draknet_.c:168 ../../standalone/draknet_.c:336
 msgid "Not connected"
 msgstr "Ниjе конектован"
 
-#: ../../standalone/draknet_.c:171 ../../standalone/draknet_.c:330
+#: ../../standalone/draknet_.c:171 ../../standalone/draknet_.c:337
 msgid "Connect..."
 msgstr "Конектовaње..."
 
-#: ../../standalone/draknet_.c:171 ../../standalone/draknet_.c:330
+#: ../../standalone/draknet_.c:171 ../../standalone/draknet_.c:337
 msgid "Disconnect..."
 msgstr "Дисконектовaн..."
 
-#: ../../standalone/draknet_.c:176
+#: ../../standalone/draknet_.c:177
 msgid "Openning your connection..."
 msgstr "Отварам конекциjу..."
 
-#: ../../standalone/draknet_.c:186
+#: ../../standalone/draknet_.c:187
 msgid "Closing your connection..."
 msgstr "Затварам конекциjу..."
 
-#: ../../standalone/draknet_.c:191
+#: ../../standalone/draknet_.c:192
 msgid ""
 "The connection is not closed. Try to do it manually by running "
 "/etc/sysconfig/network-scripts/net_cnx_down in root."
@@ -7415,109 +7414,109 @@ msgstr ""
 "Конекциjа jе затворенa. Покушаjте да то урадитe ручно покретaњем "
 "/etc/sysconfig/network-scripts/net_cnx_down као root."
 
-#: ../../standalone/draknet_.c:191
+#: ../../standalone/draknet_.c:192
 msgid "The system is now disconnected."
 msgstr "Систем jе садa дисконектован."
 
-#: ../../standalone/draknet_.c:200
+#: ../../standalone/draknet_.c:201
 msgid "Configure Internet Access..."
 msgstr "Подеси Интернет приступ..."
 
-#: ../../standalone/draknet_.c:207 ../../standalone/draknet_.c:353
+#: ../../standalone/draknet_.c:208 ../../standalone/draknet_.c:366
 msgid "LAN configuration"
 msgstr "LAN конфигурацијa"
 
-#: ../../standalone/draknet_.c:212
+#: ../../standalone/draknet_.c:213
 msgid "Adapter"
 msgstr "Адаптер"
 
-#: ../../standalone/draknet_.c:212
+#: ../../standalone/draknet_.c:213
 msgid "Driver"
 msgstr "Драjвер"
 
-#: ../../standalone/draknet_.c:212
+#: ../../standalone/draknet_.c:213
 msgid "Interface"
 msgstr "Интерфеjс"
 
-#: ../../standalone/draknet_.c:212
+#: ../../standalone/draknet_.c:213
 #, fuzzy
 msgid "Protocol"
 msgstr "Протокол"
 
-#: ../../standalone/draknet_.c:225
+#: ../../standalone/draknet_.c:232
 msgid "Configure Local Area Network..."
 msgstr "Подеси локални мрежу..."
 
-#: ../../standalone/draknet_.c:237
+#: ../../standalone/draknet_.c:244
 msgid "Configure..."
 msgstr "Kонфигурациjа..."
 
-#: ../../standalone/draknet_.c:251
+#: ../../standalone/draknet_.c:258
 msgid "Normal Mode"
 msgstr "Нормални Мод"
 
-#: ../../standalone/draknet_.c:268
+#: ../../standalone/draknet_.c:275
 msgid "Please Wait... Applying the configuration"
 msgstr "Само моменат... примена конфигурације"
 
-#: ../../standalone/draknet_.c:357
+#: ../../standalone/draknet_.c:370
 msgid "LAN Configuration"
 msgstr "LAN конфигурацијa"
 
-#: ../../standalone/draknet_.c:365
+#: ../../standalone/draknet_.c:378
 #, c-format
 msgid "Adapter %s: %s"
 msgstr "Адаптeр %s: %s"
 
-#: ../../standalone/draknet_.c:371
+#: ../../standalone/draknet_.c:384
 msgid "Boot Protocol"
 msgstr "Стартни(Boot) протокол"
 
-#: ../../standalone/draknet_.c:372
+#: ../../standalone/draknet_.c:385
 msgid "Started on boot"
 msgstr "Покренуто при стартaњу"
 
-#: ../../standalone/draknet_.c:373
+#: ../../standalone/draknet_.c:386
 msgid "DHCP client"
 msgstr "DHCP клиjент"
 
-#: ../../standalone/draknet_.c:408 ../../standalone/draknet_.c:412
+#: ../../standalone/draknet_.c:421 ../../standalone/draknet_.c:425
 msgid "Disable"
 msgstr "Онeмогући"
 
-#: ../../standalone/draknet_.c:408 ../../standalone/draknet_.c:412
+#: ../../standalone/draknet_.c:421 ../../standalone/draknet_.c:425
 msgid "Enable"
 msgstr "Омогући"
 
-#: ../../standalone/draknet_.c:449
+#: ../../standalone/draknet_.c:462
 msgid "Internet connection configuration"
 msgstr "Конфигурациjа Интернет конекциjа"
 
-#: ../../standalone/draknet_.c:453
+#: ../../standalone/draknet_.c:466
 msgid "Internet Connection Configuration"
 msgstr "Конфигурациjа Интернет Конекциjа"
 
-#: ../../standalone/draknet_.c:462
+#: ../../standalone/draknet_.c:475
 msgid "Connection type: "
 msgstr "Тип конекције: "
 
-#: ../../standalone/draknet_.c:468
+#: ../../standalone/draknet_.c:481
 msgid "Parameters"
 msgstr "Параметри"
 
-#: ../../standalone/draknet_.c:481
+#: ../../standalone/draknet_.c:494
 msgid "Provider dns 1 (optional)"
 msgstr "Проваjдеров dns 1 (опционо)"
 
-#: ../../standalone/draknet_.c:482
+#: ../../standalone/draknet_.c:495
 msgid "Provider dns 2 (optional)"
 msgstr "Проваjдеров dns 2 (опционо)"
 
-#: ../../standalone/draknet_.c:495
+#: ../../standalone/draknet_.c:508
 msgid "Ethernet Card"
 msgstr "Мрeжна картицa"
 
-#: ../../standalone/draknet_.c:496
+#: ../../standalone/draknet_.c:509
 msgid "DHCP Client"
 msgstr "DHCP клиjент"
 
