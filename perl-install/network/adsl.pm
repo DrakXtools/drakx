@@ -31,7 +31,7 @@ If you don't know, choose 'use pppoe'"),
 				   [ sort values %l ],
 				   $l{ find { $netc->{autodetect}{adsl}{$_} } keys %l }
 				  ) or return;
-    $type =~ s/use //;
+    $type = find { $l{$_} eq $type } keys %l;
     if ($type eq 'pppoe') {
 	$in->do_pkgs->install("rp-$type");
 	$netcnx->{type} = "adsl_$type";
