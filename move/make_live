@@ -32,6 +32,7 @@ sub installPackages {
 					     meta_class => 'desktop', 
 					     default_packages => [
                                  qw(XFree86-server XFree86-xfs XFree86-FBDev),
+				 qw(openssh-server), #- fred wants it
 				 qw(alsa-utils),
                                  qw(acpi acpid), #- so that removing acpi=ht will work
 				 qw(mountloop),	#- crypted folders
