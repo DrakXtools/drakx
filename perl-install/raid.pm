@@ -227,7 +227,7 @@ sub prepare_prefixed {
 
     output("$::prefix/etc/mdadm.conf",
 	   join(' ', 'DEVICE', @devices) . "\n",
-	   map { "ARRAY " . devices::make($_->{device}) . " UUID=$_->{UUID} auto=yes\n" } @$raids);
+	   map { "ARRAY " . devices::make($_->{device}) . " UUID=$_->{UUID} auto=dev\n" } @$raids);
 }
 
 sub get_md_info {
