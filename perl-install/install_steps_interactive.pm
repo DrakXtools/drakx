@@ -856,7 +856,8 @@ sub summary {
 	    return _("No printer");
 	}
 	my $entry;
-	foreach ($printer->{configured}{currentqueue}, values %{$printer->{configured}{queuedata}}) {
+	foreach ($printer->{currentqueue},
+		 map { $_->{queuedata} } ($printer->{configured}{$printer->{DEFAULT}}, values %{$printer->{configured}})) {
 	    $_ && ($_->{make} || $_->{model}) and return "$_->{make} $_->{model}";
 	}
 	return _("Remote CUPS server"); #- fall back in case of something wrong.
