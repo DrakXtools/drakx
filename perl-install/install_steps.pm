@@ -211,8 +211,8 @@ sub ask_mntpoint_s {
 	$m{$m} and die _("Duplicate mount point %s", $m);
 	$m{$m} = 1;
 
-	#- in case the type does not correspond, force it to ext2
-	$_->{type} = 0x83 if $m =~ m|^/| && !isFat($_) && !isTrueFS($_);
+	#- in case the type does not correspond, force it to ext3
+	$_->{type} = 0x483 if $m =~ m|^/| && !isTrueFS($_) && !isOtherAvailableFS($_);
     }
     1;
 }
