@@ -90,15 +90,19 @@ sub setupBootloader {
     require bootloader;
   general:
     {
+        print "STEP 1\n";
 	local $::Wizard_no_previous = 1 if $::isStandalone;
 	setupBootloader__general($in, $b, $all_hds, $fstab, $security) or return 0;
     }
+        print "STEP 2\n";
     setupBootloader__boot_bios_drive($in, $b, $hds) or goto general;
     {
+        print "STEP 3\n";
 	local $::Wizard_finished = 1 if $::isStandalone;
 	setupBootloader__entries($in, $b, $all_hds, $fstab) or goto general;
     }
 
+        print "STEP 4\n";
     #- somewhere should bootloader really installed ?
     $::isStandalone and my $_w = $in->wait_message(N("Please wait"), N("Bootloader installation in progress"));
 
@@ -353,7 +357,7 @@ sub setupBootloader__entries {
 	my ($e, $prefix);
 	if ($in->ask_from_list_('', N("Which type of entry do you want to add?"),
 				[ N_("Linux"), arch() =~ /sparc/ ? N_("Other OS (SunOS...)") : arch() =~ /ppc/ ? 
-				  N_("Other OS (MacOS...)") : N_("Other OS (windows...)") ]
+				  N_("Other OS (MacOS...)") : N_("Other OS (Windows...)") ]
 			       ) eq "Linux") {
 	    $e = { type => 'image',
 		   root => '/dev/' . fsedit::get_root($fstab)->{device}, #- assume a good default.
