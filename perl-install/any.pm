@@ -252,7 +252,7 @@ On which drive are you booting?"), \&partition_table::description, $hds) or goto
 	$in->ask_from_(
 		{
 		 messages => 
-_("Here are the different entries.
+_("Here are the entries on your boot menu so far.
 You can add some more or change the existing ones."),
 		 ok => '',
 },
@@ -1049,8 +1049,7 @@ or to the Internet. There is no password access."),
       4 => _("With this security level, the use of this system as a server becomes possible.
 The security is now high enough to use the system as a server which accept
 connections from many clients. Note: if your machine is only a client on the Internet, you should better choose a lower level."),
-      5 => _("Based on the previous level, but the system is entirely closed.
-Security features are at their maximum."),
+      5 => _("This is similar to the previous level, but the system is entirely closed and security features are at their maximum."),
     );
     delete @l{0,1};
     delete $l{5} if !$::expert;
