@@ -86,8 +86,8 @@ available for installation. Click \"OK\" when you are ready to continue.
 Packages are sorted in groups corresponding to a particular use of your
 machine. The groups themselves are sorted into four sections:
 
- * \"Workstation\": if you plant to use your machine as a workstation,
-select one or more of the corresponding groups.
+ * \"Workstation\": if you plan to use your machine as a workstation, select
+one or more of the corresponding groups.
 
  * \"Development\": if the machine is to be used for programming, choose the
 desired group(s).
