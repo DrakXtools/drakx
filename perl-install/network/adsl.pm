@@ -314,6 +314,8 @@ TYPE=$kind
 
     $netc->{NET_INTERFACE} = 'ppp0';
     write_cnx_script($netc);
+
+    $::isInstall && $modems{$adsl_device}{start} and run_program::rooted($::prefix, $modems{$adsl_device}{start});
 }
 
 1;
