@@ -297,7 +297,7 @@ sub setupBootloader__entries {
 { label => N("Video mode"), val => \$vga, list => [ '', Xconfig::resolution_and_depth::bios_vga_modes() ], format => \&Xconfig::resolution_and_depth::to_string, advanced => 1 },
 ),
 { label => N("Initrd"), val => \$e->{initrd}, list => [ map { if_(/^initrd/, "/boot/$_") } all("$::prefix/boot") ], not_edit => 0, advanced => 1 },
-{ label => N("Network profile"), val => \$netprofile, list => [ sort (uniq('', $netprofile, network::netconnect::get_profiles())) ], advanced => 1 },
+{ label => N("Network profile"), val => \$netprofile, list => [ sort(uniq('', $netprofile, network::netconnect::get_profiles())) ], advanced => 1 },
 	    );
 	} else {
 	    @l = ( 

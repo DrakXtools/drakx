@@ -200,7 +200,7 @@ sub selectMouse {
 }
 
 sub reallyChooseGroups {
-    my ($o, $size_to_display, $individual, $compssUsers) = @_;
+    my ($o, $size_to_display, $individual, $_compssUsers) = @_;
 
     my $w = ugtk2->new('');
     my $tips = Gtk2::Tooltips->new;
