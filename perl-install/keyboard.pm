@@ -292,7 +292,7 @@ sub setup {
 	}
     }
     my $f = xmodmap_file($keyboard);
-    eval { run_program::run('xmodmap', $f) } unless $::testing || !$f;
+    eval { run_program::run('xmodmap', $f) } if $f && !$::testing && $ENV{DISPLAY};
 }
 
 sub write {
