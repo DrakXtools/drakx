@@ -536,10 +536,14 @@ sub installPackages {
 	    my $f = $install_any::advertising_images[$i++ % @install_any::advertising_images];
 	    log::l("advertising $f");
 	    my $pl = $f; $pl =~ s/\.png$/\.pl/;
-	    my ($draw_text, $width, $height, @data);
+	    my $icon_name = $f; $icon_name =~ s/\.png$/_icon\.png/;
+	    my ($draw_text, $width, $height, @data, $icon, $icon_dx, $icon_dy, $icon_px);
 	    -e $pl and $draw_text = 1;
 	    eval(cat_($pl)) if $draw_text;
 	    my ($pix, undef) = gtkcreate_png($f);
+	    if ($icon) {
+		($icon_px, undef) = gtkcreate_png($icon_name);
+	    }
 	    my $dbl_area;
 	    my $darea = new Gtk::DrawingArea;
 	    gtkpack($box, $advertising = !$draw_text ?
@@ -553,18 +557,32 @@ sub installPackages {
 							  $pix, 0, 0, ($dx-$width)/2, 0, $width, $height);
 				   my $gc_text = new Gtk::Gdk::GC($darea->window);
 				   $gc_text->set_foreground(gtkcolor(65535, 65535, 65535));
+				   my $yicon = 0;
+				   my $decy = 0;
+				   my $first = 1;
 				   foreach (@data) {
 				       my ($text, $x, $y, $area_width, $area_height, $bold) = @$_;
 				       my ($width, $height, $lines, $widths, $heights, $ascents, $descents) =
 					 get_text_coord ($text, $darea->style, $area_width, $area_height, 1, 0, 1, 1);
+				       if ($first && $icon) {
+					   my $iconx = ($dx-$width)/2 + $x + ${$widths}[0] - $icon_dx;
+					   my $icony = $y + ${$heights}[0] - $icon_dy/2;
+					   $icony > 0 or $icony = 0;
+					   $dbl_area->draw_pixmap($darea->style->bg_gc('normal'), $icon_px, 0, 0,
+								  $iconx, $icony, $icon_dx, $icon_dy
+								 );
+					   $yicon = $icony + $icon_dy;
+				       }
 				       my $i = 0;
+				       $yicon > $y + ${$heights}[0] and $decy = $yicon - ($y + ${$heights}[$i]);
 				       foreach (@{$lines}) {
 					   $dbl_area->draw_string($darea->style->font, $gc_text,
-								  ($dx-$width)/2 + $x + ${$widths}[$i], $y + ${$heights}[$i], $_);
+								  ($dx-$width)/2 + $x + ${$widths}[$i], $decy + $y + ${$heights}[$i], $_);
  					   $bold and $dbl_area->draw_string($darea->style->font, $gc_text,
- 								  ($dx-$width)/2 + $x + ${$widths}[$i] + 1, $y + ${$heights}[$i], $_);
+ 								  ($dx-$width)/2 + $x + ${$widths}[$i] + 1, $decy + $y + ${$heights}[$i], $_);
 					   $i++;
 				       }
+				       $first = 0;
 				   }
 			       }
 			       $darea->window->draw_pixmap($darea->style->bg_gc('normal'),

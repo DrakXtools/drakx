@@ -1033,11 +1033,14 @@ sub copy_advertising {
 	    getAndSaveFile("$source_dir/$_", "$dir/$_");
 	    s/\.png/\.pl/;
 	    getAndSaveFile("$source_dir/$_", "$dir/$_");
-	    s/\.pl/\.png/;
+	    s/\.pl/_icon\.png/;
+	    getAndSaveFile("$source_dir/$_", "$dir/$_");
+	    s/_icon\.png/\.png/;
 	}
 	@advertising_images = map { "$dir/$_" } @files;
     }
 }
+
 sub remove_advertising {
     my ($o) = @_;
     unlink @advertising_images;
