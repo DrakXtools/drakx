@@ -141,11 +141,12 @@ sub write_resolv_conf {
 sub write_interface_conf {
     my ($file, $intf, $_netc, $_prefix) = @_;
 
-    my ($mac_address) = `LC_ALL= LANG= $::prefix/sbin/ip -o link show $intf->{DEVICE} 2>/dev/null` =~ m|.*link/ether\s([0-9a-z:]+)\s|;
+    my ($link_type, $mac_address) = `LC_ALL= LANG= $::prefix/sbin/ip -o link show $intf->{DEVICE} 2>/dev/null` =~ m|.*link/(\S+)\s([0-9a-z:]+)\s|;
     $intf->{HWADDR} &&= $mac_address; #- set HWADDR to MAC address if required
 
     #- write interface MAC address in iftab (if any)
-    substInFile { s/^$intf->{DEVICE}\s+.*\n//; $_ .= qq($intf->{DEVICE}\tmac $mac_address\n) if eof } "$::prefix/etc/iftab" if $mac_address;
+    my $descriptor = $link_type eq 'ether' ? 'mac' : 'unspec';
+    substInFile { s/^$intf->{DEVICE}\s+.*\n//; $_ .= qq($intf->{DEVICE}\t$descriptor $mac_address\n) if eof } "$::prefix/etc/iftab" if $mac_address;
 
     my @ip = split '\.', $intf->{IPADDR};
     my @mask = split '\.', $intf->{NETMASK};
