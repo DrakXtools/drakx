@@ -38,23 +38,8 @@ sub scan4channels() {
     # In the future, we might try to install xawtv if it'sn't there as
     # we're just a, xawtv wraper
 
-    # -x "/usr/bin/scantv" or $in->do_pkgs->install('xawtv');
-    # -x "/usr/bin/scantv" or { exec {'consolehelper'} $0, ("urpmi", "xawtv") or die N("consolehelper missing") };
-    if (!$::testing && ! -x "/usr/bin/scantv") {
-        #	log::explanations("package xawtv isn't installed");
-	   $in->ask_warn("XawTV isn't installed!", 
-				  formatAlaTeX(N("XawTV isn't installed!
+    -x "/usr/bin/scantv" or $in->do_pkgs->install('xawtv');
 
-
-If you do have a TV card but DrakX has neither detected it (no bttv nor saa7134
-module in \"/etc/modules\") nor installed xawtv, please send the
-results of \"lspcidrake -v -f\" to \"install\@mandrakesoft.com\"
-with subject \"undetected TV card\".
-
-
-You can install it by typing \"urpmi xawtv\" as root, in a console.")));
-	   
-    } else {
 	   my ($ftable_id, $norm);
         #   this table must be checked on each xawtv release:
 	   my %freqtables = 
@@ -125,7 +110,6 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
                               N("Now, you can run xawtv (under X Window!) !\n")) unless $use_X;
             }
 	   }
-    }
 }
 
 my @devices = grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' || $_->{driver} eq 'usbvision' } detect_devices::probeall();
