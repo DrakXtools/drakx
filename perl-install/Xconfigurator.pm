@@ -148,7 +148,7 @@ sub keepOnlyLegalModes {
 
 sub cardConfigurationAuto() {
     my @cards;
-    if (my @c = grep { $_->{driver} =~ /(Card|Server):/ } detect_devices::probeall(1)) {
+    if (my @c = grep { $_->{driver} =~ /(Card|Server):/ } detect_devices::probeall()) {
 	foreach my $i (0..$#c) {
 	    local $_ = $c[$i]->{driver};
 	    my $card = { identifier => ($c[$i]{description} . (@c > 1 && " $i")) };
