@@ -80,12 +80,7 @@ sub mkbootdisk($$$;$) {
     modules::load_multi(arch() =~ /sparc/ ? 'romfs' : (), 'loop');
     my @l = qw(mkbootdisk --noprompt); 
     push @l, "--appendargs", $append if $append;
-    if ($dev =~ /fd/) {
-	devices::make($dev . 'H1440');
-    } else {
-	push @l, "--bios", 0, if $dev !~ /fd/;
-    }
-    eval { modules::load_multi(qw(msdos vfat)) };
+    eval { modules::load('vfat') };
     run_program::rooted_or_die($prefix, @l, "--device", "/dev/$dev", $kernelVersion);
 }
 
