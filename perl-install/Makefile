@@ -122,10 +122,8 @@ endif
 
 ifeq (i386,$(ARCH))
 	cp ../tools/i386/busybox $(DEST)/usr/bin
-	ln -sf busybox $(DEST)/usr/bin/sh
-else
-	ln -sf ash $(DEST)/usr/bin/sh
 endif
+	ln -sf ash $(DEST)/usr/bin/sh
 
 	for i in fonts keyboards locales keymaps; do tar xfj `../tools/specific_arch share/$$i.tar.bz2` -C $(DEST); done
 
