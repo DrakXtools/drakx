@@ -6,7 +6,7 @@ use any;
 
 my %other = (
     'rpm -qa' => join('', sort `rpm -qa`),
-    'mandrake version' => join ('', `cat /etc/redhat-release`),
+    'mandrake version' => cat_('/etc/redhat-release'),
 );
 
 print any::report_bug('', %other);
