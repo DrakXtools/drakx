@@ -142,7 +142,7 @@ our %l = (
         qw(snd-au8810 snd-au8820 snd-au8830),
       ),
     ],
-    tv => [ qw(bttv cpia_usb ibmcam mod_quickcam ov511 ov518_decomp ultracam usbvideo cyber2000fb saa7134) ],
+    tv => [ qw(bttv cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp pwc saa7134 ultracam usbvideo) ],
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-maxiradio) ],
     scanner => [ qw(scanner microtek) ],

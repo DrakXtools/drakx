@@ -63,7 +63,7 @@ our @tree =
      [ "AUDIO", , N("Soundcard"), "sound.png", "$sbindir/draksound", sub { f(grep { $_->{media_type} =~ /MULTIMEDIA_AUDIO/ } @devices) }, 0 ],
      [ "WEBCAM", , N("Webcam"), "webcam.png", "", sub { 
            f(grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} ne 'PCI' || 
-                      member($_->{driver}, qw(cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp ultracam usbvideo)) } @devices) },
+                      member($_->{driver}, qw(cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp pwc ultracam usbvideo)) } @devices) },
        0 ],
      [ "CPU", , N("Processors"), "cpu.png", "", sub { detect_devices::getCPUs() }, 0 ],
      [ "ISDN", , N("ISDN adapters"), "modem.png", "$sbindir/drakconnect", sub { require network::isdn; my $isdn = network::isdn::isdn_detect_backend(); 
