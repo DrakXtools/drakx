@@ -391,6 +391,7 @@ int mandrake_move_pre(void)
 
 static enum return_type handle_clp(char* clp, char* live, char* location_live, char* location_mount, int* is_symlink, char* clp_tmpfs)
 {
+        static int count = 0;
         if (IS_LIVE || access(clp, R_OK)) {
                 log_message("no %s found (or disabled), trying to fallback on plain tree", clp);
                 if (!access(live, R_OK)) {
@@ -406,7 +407,9 @@ static enum return_type handle_clp(char* clp, char* live, char* location_live, c
 
         if (clp_tmpfs) {
                 int ret;
-                init_progression("Loading...", file_size(clp));
+                char buf[5000];
+                sprintf(buf, "Loading (part %d)...", ++count);
+                init_progression(buf, file_size(clp));
                 ret = copy_file(clp, clp_tmpfs, update_progression);
                 end_progression();
                 if (ret != RETURN_OK)
