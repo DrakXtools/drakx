@@ -140,13 +140,13 @@ sub get_alternative {
 }
 
 sub explain {
+    require standalone;
     standalone::explanations @_ unless $::isInstall;
 }
 
 
 sub do_switch {
     my ($old_driver, $new_driver) = @_;
-    require standalone;
     explain("removing old $old_driver\n");
     rooted("service sound stop") unless $blacklisted;
     rooted("service alsa stop") if $old_driver =~ /^snd-/ && !$blacklisted;
