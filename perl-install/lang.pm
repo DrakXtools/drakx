@@ -18,43 +18,51 @@ use log;
 #- languages, carefully choosen)
 #-
 #- when adding a new language here, also add a line in kleyboards list
+
+#
+# NOTE: we cheat for UTF-8 locales, in DrakX they are the 8bit ones;
+# it's easier like that now. Of course, on the installed system a real
+# UTF-8 locale will be used
+#
+
 my %languages = (
 'en_US' => [ 'English|United States',	'iso-8859-1', 'en', 'en_US:en' ],
 'en_GB' => [ 'English|United Kingdom',	'iso-8859-1', 'en', 'en_GB:en' ],
   'af'  => [ 'Afrikaans',		'iso-8859-1', 'af', 'af:en_ZA' ],
   'ar'  => [ 'Arabic',			'iso-8859-6', 'ar', 'ar' ],
-  'az'  => [ 'Azeri (Latin)',		'iso-8859-9e','az', 'az:tr' ],
-  'be'  => [ 'Belarussian',		 'cp1251',    'be', 'be:be_BY.CP1251:ru_RU.CP1251' ],
+'az_AZ.UTF-8'=> [ 'Azeri (Latin)',	'iso-8859-9e','az', 'az:tr' ],
+  'be'  => [ 'Belarussian|cp1251',		 'cp1251',    'be', 'be:be_BY.CP1251:ru_RU.CP1251' ],
+'be_BY.UTF-8'  => [ 'Belarussian|utf-8', 'cp1251',    'be', 'be:be_BY.CP1251:ru_RU.CP1251' ],
 #- provide aliases for some not very standard names used in po files...
   'bg'  => [ 'Bulgarian',		'cp1251',     'bg', 'bg:bg.CP1251:bg_BG.CP1251:bg_BG' ],
   'br'  => [ 'Brezhoneg',		'iso-8859-1', 'br', 'br:fr_FR:fr' ],
   'bs'  => [ 'Bosnian',			'iso-8859-2', 'bs', 'bs:hr:sr' ],
-  'ca'  => [ 'Catalan',			'iso-8859-1', 'ca', 'ca:es_ES:es:fr_FR:fr' ],
+'ca_ES@euro'=> [ 'Catalan','iso-8859-15','ca', 'ca:es_ES:es:fr_FR:fr' ],
   'cs'  => [ 'Czech',			'iso-8859-2', 'cs', 'cs' ],
   'cy'  => [ 'Cymraeg (Welsh)',		'iso-8859-14','cy', 'cy:en_GB:en' ],
-  'da'  => [ 'Danish',			'iso-8859-1', 'da', 'da' ],		
-'de_AT' => [ 'German|Austria',		'iso-8859-1', 'de', 'de_AT:de' ],
-'de_BE' => [ 'German|Belgium',		'iso-8859-1', 'de', 'de_BE:de' ],
+  'da'  => [ 'Danish',				'iso-8859-1', 'da', 'da' ],		
+'de_AT@euro' => [ 'German|Austria','iso-8859-15','de', 'de_AT:de' ],		
+'de_BE@euro' => [ 'German|Belgium',		'iso-8859-15', 'de', 'de_BE:de' ],
 'de_CH' => [ 'German|Switzerland',	'iso-8859-1', 'de', 'de_CH:de' ],
-'de_DE' => [ 'German|Germany',		'iso-8859-1', 'de', 'de_DE:de' ],
+'de_DE@euro' => [ 'German|Germany',		'iso-8859-15', 'de', 'de_DE:de' ],
   'el'  => [ 'Greek',                   'iso-8859-7', 'el', 'el' ],
   'eo'  => [ 'Esperanto',		'iso-8859-3', 'eo', 'eo' ],
 'es_AR' => [ 'Spanish|Argentina',	'iso-8859-1', 'es', 'es_AR:es_UY:es:es_ES' ],
-'es_ES' => [ 'Spanish|Spain (modern sorting)',	'iso-8859-1', 'es', 'es_ES:es' ],
+'es_ES@euro' => [ 'Spanish|Spain (modern sorting)',	'iso-8859-15', 'es', 'es_ES:es' ],
 'es@tradicional' => [ 'Spanish|Spain (traditional sorting)', 'iso-8859-1', 'es', 'es' ],
 'es_MX' => [ 'Spanish|Mexico',	'iso-8859-1', 'es', 'es_MX:es:es_ES' ],
   'et'  => [ 'Estonian',		'iso-8859-15','et', 'et' ],
-  'eu'  => [ 'Euskara (Basque)',	'iso-8859-1', 'eu', 'eu:es_ES:fr_FR:es:fr' ],
-  'fa'  => [ 'Farsi (Iranian)',		'isiri-3342', 'fa', 'fa' ],
-  'fi'  => [ 'Finnish (Suomi)',		'iso-8859-15', 'fi', 'fi' ],
+'eu_ES@euro'=> [ 'Euskara (Basque)',	'iso-8859-15', 'eu', 'eu:es_ES:fr_FR:es:fr' ],
+#-'fa'  => [ 'Farsi (Iranian)',		'isiri-3342', 'fa', 'fa' ],
+'fi_FI@euro'=> [ 'Finnish (Suomi)',	'iso-8859-15','fi', 'fi' ],
 #-'fo'  => [ 'Faroese',			'iso-8859-1', 'fo', 'fo' ],
-'fr_BE' => [ 'French|Belgium',		'iso-8859-1', 'fr', 'fr_BE:fr' ],
-'fr_CA' => [ 'French|Canada',		'iso-8859-1', 'fr', 'fr_CA:fr' ],
+'fr_BE@euro'=> [ 'French|Belgium',	'iso-8859-15','fr', 'fr_BE:fr' ],
+'fr_CA' => [ 'French|Canada',		'iso-8859-15','fr', 'fr_CA:fr' ],
 'fr_CH' => [ 'French|Switzerland',	'iso-8859-1', 'fr', 'fr_CH:fr' ],
-'fr_FR' => [ 'French|France',		'iso-8859-1', 'fr', 'fr_FR:fr' ],
-  'ga'  => [ 'Gaeilge (Irish)',		'iso-8859-14','ga', 'ga:en_IE:en' ],
+'fr_FR@euro'=> [ 'French|France',	'iso-8859-15','fr', 'fr_FR:fr' ],
+'ga_IE@euro'=> [ 'Gaeilge (Irish)',	'iso-8859-15','ga', 'ga:en_IE:en' ],
 #-'gd'  => [ 'Scottish gaelic',		'iso-8859-14','gd', 'gd:en_GB:en' ],
-  'gl'  => [ 'Galego (Galician)',	'iso-8859-1', 'gl', 'gl:es_ES:pt_PT:pt_BR:es:pt' ],
+'gl_ES@euro'=> [ 'Galego (Galician)',	'iso-8859-15','gl', 'gl:es_ES:pt_PT:pt_BR:es:pt' ],
 #-'gv'	=> [ 'Manx gaelic',		'iso-8859-14','gv', 'gv:en_GB:en' ],
 #- 'iw' was the old code for hebrew language
   'he'  => [ 'Hebrew',			'iso-8859-8', 'he', 'he:iw_IL' ],
@@ -66,11 +74,11 @@ my %languages = (
   'id'  => [ 'Indonesian',		'iso-8859-1', 'id', 'id:in_ID' ],
   'is'  => [ 'Icelandic', 		'iso-8859-1', 'is', 'is' ],
 'it_CH' => [ 'Italian|Switzerland',	'iso-8859-1', 'it', 'it_IT:it' ],
-'it_IT' => [ 'Italian|Italy',  		'iso-8859-1', 'it', 'it_IT:it' ],
+'it_IT@euro'=> [ 'Italian|Italy','iso-8859-15','it', 'it_IT:it' ],
 #-'iu'  => [ 'Inuktitut', 		'unicodeIU',  'iu', 'iu' ],
   'ja'  => [ 'Japanese',		'jisx0208',   'ja', 'ja_JP.ujis:ja' ],
-  'ka'  => [ 'Georgian',                'georgian-ps','ka', 'ka' ],
-  'kl'  => [ 'Greenlandic (inuit)',	'iso-8859-1', 'kl', 'kl' ],
+'ka_GE.UTF-8'=> [ 'Georgian',   'georgian-ps','ka', 'ka' ],
+#-'kl'  => [ 'Greenlandic (inuit)',	'iso-8859-1', 'kl', 'kl' ],
   'ko'  => [ 'Korean',                  'ksc5601',    'ko', 'ko' ],
 #-'kw'	=> [ 'Cornish gaelic',		'iso-8859-14','kw', 'kw:en_GB:en' ],
 #-'lo'  => [ 'Laotian',			'mulelao-1',  'lo', 'lo' ],
@@ -79,8 +87,8 @@ my %languages = (
   'mi'	=> [ 'Maori',			'iso-8859-13','mi', 'mi' ],
   'mk'  => [ 'Macedonian (Cyrillic)',	'iso-8859-5', 'mk', 'mk' ],
 #-'ms'  => [ 'Malay',			'iso-8859-1', 'ms', 'ms' ],
-'nl_BE' => [ 'Dutch|Belgium',		'iso-8859-1', 'nl', 'nl_NL:nl' ],
-'nl_NL' => [ 'Dutch|Netherlands',	'iso-8859-1', 'nl', 'nl_NL:nl' ],
+'nl_BE@euro'=> [ 'Dutch|Belgium',	'iso-8859-15', 'nl', 'nl_BE:nl' ],
+'nl_NL@euro'=> [ 'Dutch|Netherlands','iso-8859-15', 'nl', 'nl_NL:nl' ],
 # 'nb' is the new locale name in glibc 2.2
   'no'  => [ 'Norwegian|Bokmaal',	'iso-8859-1', 'no', 'no:nb:nn:no@nynorsk:no_NY' ],
 # no_NY is used by KDE (but not standard); 'nn' is the new locale in glibc 2.2
@@ -91,27 +99,27 @@ my %languages = (
   'pl'  => [ 'Polish',			'iso-8859-2', 'pl', 'pl' ],
 #-'pp'	=> [ 'Papiamento',		'iso-8859-1', 'pp', 'pp' ],
 'pt_BR' => [ 'Portuguese|Brazil',	'iso-8859-1', 'pt_BR', 'pt_BR:pt_PT:pt' ],
-'pt_PT' => [ 'Portuguese|Portugal',	'iso-8859-1', 'pt', 'pt_PT:pt:pt_BR' ],
+'pt_PT@euro'=> [ 'Portuguese|Portugal','iso-8859-15','pt', 'pt_PT:pt:pt_BR' ],
   'ro'  => [ 'Romanian',  		'iso-8859-2', 'ro', 'ro' ],
-'ru_RU.KOI8-R' => [ 'Russian|KOI8-R',	'koi8-r',     'ru', 'ru_RU.KOI8-R:ru' ],
-'ru_RU.CP1251' => [ 'Russian|CP1251',	'cp1251',     'ru', 'ru_RU.CP1251:ru' ],
+'ru_RU.KOI8-R' => [ 'Russian|KOI8-R',	'koi8-r',     'ru', 'ru_RU:ru' ],
+'ru_RU.CP1251' => [ 'Russian|CP1251',	'cp1251',     'ru', 'ru_RU:ru' ],
+'ru_RU.UTF-8' => [ 'Russian|UTF-8',	'cp1251',     'ru', 'ru_RU:ru' ],
   'sk'  => [ 'Slovak',    		'iso-8859-2', 'sk', 'sk' ],
   'sl'  => [ 'Slovenian',		'iso-8859-2', 'sl', 'sl' ],
   'sp'  => [ 'Serbian|Cyrillic',	'iso-8859-5', 'sp', 'sp:sr' ],
   'sr'  => [ 'Serbian|Latin',		'iso-8859-2', 'sr', 'sr' ],
   'sv'  => [ 'Swedish',			'iso-8859-1', 'sv', 'sv' ],
-  'ta'	=> [ 'Tamil',			'tscii-0',    'ta', 'ta' ],
-  'tg'	=> [ 'Tajik',			'koi8-c',     'tg', 'tg' ],
+#-'ta'	=> [ 'Tamil',			'tscii-0',    'ta', 'ta' ],
+'tg_TJ.UTF-8'=> [ 'Tajik',		'koi8-k',     'tg', 'tg' ],
   'th'  => [ 'Thai',                    'tis620',     'th', 'th' ],
   'tr'  => [ 'Turkish',	 		'iso-8859-9', 'tr', 'tr' ],
-  'tt'	=> [ 'Tatar',			'tatar-cyr',  'tg', 'tg' ],
+#-'tt_RU.UTF-8'=> [ 'Tatar',		'koi8-k',  'tg', 'tg' ],
 #-'ur'	=> [ 'Urdu',			'cp1256',     'ur', 'ur' ],  
 'uk_UA' => [ 'Ukrainian', 		'koi8-u',     'uk', 'uk_UA:uk' ],
   'uz'  => [ 'Uzbek',			'iso-8859-1', 'uz', 'uz' ],
-  'vi'  => [ 'Vietnamese|TCVN',       'tcvn',       'vi',
-					'vi_VN.TCVN:vi_VN.TCVN-5712:vi_VN.tcvn:vi' ],
-'vi_VN.VISCII' => [ 'Vietnamese|VISCII','viscii',   'vi',
-				        'vi_VN.VISCII:vi_VN.viscii:vi' ],
+'vi_VN.TCVN'  => [ 'Vietnamese|TCVN',   'tcvn',     'vi', 'vi' ],
+'vi_VN.VISCII' => [ 'Vietnamese|VISCII','viscii',   'vi', 'vi' ],
+'vi_VN.UTF-8' => [ 'Vietnamese|UTF-8','tcvn',   'vi', 'vi' ],
   'wa'  => [ 'Walon',     		'iso-8859-1', 'wa', 'wa:fr_BE:fr' ],
 #-'yi'	=> [ 'Yiddish',			'cp1255',     'yi', 'yi' ],
 #'zh_HK.Big5' => [ 'Chinese|Traditional|Hong Kong|Big5', 'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh_TW:zh_HK' ],
@@ -246,11 +254,11 @@ my %charsets = (
   "jisx0208"   => [ undef,		undef,		"trivial.trans",
 	"euc-jp", "932", "-*-*-*-*-*-*-*-*-*-*-*-*-jisx*.*-0" ],
   "koi8-r"     => [ "UniCyr_8x16",	undef,		"koi8-r",
-	"koi8-r", "866", std("koi8-r") ],
+	"koi8-r", "866", sub { std("microsoft-cp1251", @_) } ],
   "koi8-u"     => [ "UniCyr_8x16",	undef,		"koi8-u",
-	"koi8-u", "866", std("koi8-u") ],
+	"koi8-u", "866", sub { std("microsoft-cp1251", @_) } ],
   "koi8-k"     => [ "koi8-k",		"iso01",	"trivial.trans",
-	undef, undef, std("koi8-c") ],
+	undef, undef, std("koi8-k") ],
   "tatar-cyr"  => [ "tatar-cyr",	undef,		"cp1251",
 	undef, undef, std("tatar-cyr") ],
   "cp1251"     => [ "UniCyr_8x16",	undef,		"cp1251",
@@ -319,6 +327,8 @@ sub set {
 	    eval {
 		require packdrake;
 		my $packer = new packdrake("$ENV{SHARE_PATH}/locale.cz2", quiet => 1);
+		# "UTF-8" locale directory is always needed
+		$packer->extract_archive("$ENV{SHARE_PATH}/locale", "UTF-8");
 		$packer->extract_archive("$ENV{SHARE_PATH}/locale", split(":", $languages{$lang}[3]));
 	    };
 	}
@@ -336,7 +346,7 @@ sub set {
 	$ENV{LC_MEASUREMENT}	= "C";
 	$ENV{LC_IDENTIFICATION}	= "C";
 
-	$ENV{LC_CTYPE}  = $lang;
+	$ENV{LC_CTYPE}  = $languages{$lang}[2];
 	$ENV{LC_MESSAGES} = $languages{$lang}[2];
 	$ENV{LANG}      = $languages{$lang}[2];
 	$ENV{LANGUAGE}  = $languages{$lang}[3];

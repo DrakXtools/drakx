@@ -26,41 +26,50 @@ my %lang2keyboard =
   'af' => 'us_intl',
 #-'ar' => 'ar:80 ar_d:70 ar_azerty:60 ar_azerty_d:50',
   'az' => 'az:80 tr:10 us_intl:5',
+'az_AZ'=> 'az:80 tr:10 us_intl:5',
   'be' => 'by:80 ru:50 ru_yawerty:40',
-  'be_BY.CP1251' => 'by:80 ru:50 ru_yawerty:40',
+'be_BY'=> 'by:80 ru:50 ru_yawerty:40',
   'bg' => 'bg:90',
 'bg_BG'=> 'bg:90',
   'br' => 'fr:90',
   'bs' => 'hr:60 yu:50 si:40',
   'ca' => 'es:90 fr:15',
+'ca_ES'=> 'es:90 fr:15',
   'cs' => 'cz_qwerty:70 cz:50 cz_prog:10',
   'cy' => 'uk:90',
   'da' => 'dk:90',
+'da_DK'=> 'dk:90',
   'de' => 'de_nodeadkeys:70 de:50',
 'de_AT'=> 'de_nodeadkeys:70 de:50',
 'de_BE'=> 'be:70 de_nodeadkeys:60 de:50',
 'de_CH'=> 'ch_de:70 ch_fr:25 de_nodeadkeys:20 de:15',
 'de_DE'=> 'de_nodeadkeys:70 de:50', 
+'de_LU'=> 'de_nodeadkeys:70 de:50 fr:40 be:35', 
   'el' => 'gr:90',
+'el_GR'=> 'gr:90',
   'en' => 'us:90 us_intl:50',
 'en_US'=> 'us:90 us_intl:50',
 'en_GB'=> 'uk:90 us:60 us_intl:50',
   'eo' => 'us_intl:90 dvorak:20',
   'es' => 'es:90 la:80 us_intl:50',
-  'es@tradicional' => 'es:90 la:80 us_intl:50',
+'es@tr'=> 'es:90 la:80 us_intl:50',
 'es_AR'=> 'la:80 us_intl:50 es:20',
 'es_ES'=> 'es:90',
 'es_MX'=> 'la:80 us_intl:50 es:20',
   'et' => 'ee:90',
   'eu' => 'es:90 fr:15',
+'eu_ES'=> 'es:90 fr:15',
   'fa' => 'ir:90',
   'fi' => 'fi:90',
+'fi_FI'=> 'fi:90',
   'fr' => 'fr:90',
 'fr_BE'=> 'be:90 fr:5',
 'fr_CA'=> 'qc:90 fr:5',
 'fr_CH'=> 'ch_fr:70 ch_de:15 fr:10',
 'fr_FR'=> 'fr:90',
+'fr_LU'=> 'fr:70 de_nodeadkeys:50 de:40 be:35', 
   'ga' => 'uk:90',
+'ga_IE'=> 'uk:90',
   'gd' => 'uk:90',
   'gl' => 'es:90',
   'gv' => 'uk:90',
@@ -75,6 +84,7 @@ my %lang2keyboard =
 'it_IT' => 'it:90',
   'ja' => 'jp:80 us:50 us_intl:20',
   'ka' => 'ge_la:80 ge_ru:50',
+'ka_GE'=> 'ge_la:80 ge_ru:50',
   'kl' => 'dk:80 us_intl:30',
   'ko' => 'kr:80 us:60',
   'kw' => 'uk:90',
@@ -90,6 +100,7 @@ my %lang2keyboard =
   'nn' => 'no:90 dvorak_no:10',
   'no' => 'no:90 dvorak_no:10',
   'oc' => 'fr:90',
+'oc_FR'=> 'fr:90',
   'ph' => 'us:90 us_intl:20',
   'pl' => 'pl:80 pl2:60',
   'pp' => 'br:80 la:20 pt:10 us_intl:30',
@@ -97,27 +108,28 @@ my %lang2keyboard =
 'pt_PT'=> 'pt:80',
   'ro' => 'ro2:80 ro:40 us-intl:10',
   'ru' => 'ru:90 ru_yawerty:80',
-  'ru_RU.CP1251' => 'ru:90 ru_yawerty:80',
-  'ru_RU.KOI8-R' => 'ru:90 ru_yawerty:80',
+'ru_RU'=> 'ru:90 ru_yawerty:80',
   'sk' => 'sk_qwerty:80 sk:70 sk_prog:50',
   'sl' => 'si:80 hr:50',
   'sp' => 'sr:80',
   'sq' => 'al:80',
   'sr' => 'yu:80',
   'sv' => 'se:90 fi:20',
+'sv_FI'=> 'fi:90 sv:20',
+'sv_SE'=> 'se:90 fi:20',
   'tg' => 'tj:80 ru_yawerty:40',
   'th' => 'th:90',
   'tr' => 'tr_q:90 tr_q:30',
   'tt' => 'ru:50 ru_yawerty:40',
   'uk' => 'ua:90 ru:50 ru_yawerty:40',
-'uk_UA' => 'ua:90 ru:50 ru_yawerty:40',
+'uk_UA'=> 'ua:90 ru:50 ru_yawerty:40',
   'uz' => 'us:80',
   'vi' => 'vn:80 us:60 us_intl:50',
-'vi_VN.TCVN' => 'vn us:60 us_intl:50',
-'vi_VN.VISCII' => 'vn us:60 us_intl:50',
+'vi_VN'=> 'vn us:60 us_intl:50',
   'wa' => 'be:90 fr:5',
-'zh_CN.GB2312' => 'us:60',
-'zh_TW.Big5' => 'us:60',
+'wa_BE'=> 'be:90 fr:5',
+'zh_CN'=> 'us:60',
+'zh_TW'=> 'us:60',
 );
 
 #- key = extension for Xmodmap file, [0] = description of the keyboard,
@@ -269,13 +281,13 @@ sub unpack_keyboards {
     [ map { [ split ':' ] } split ' ', $k ];
 }
 sub lang2keyboards {
-    my ($l) = @_;
+    my ($l) = substr($_[0], 0, 5);
     my $li = unpack_keyboards($lang2keyboard{$l}) || [ $keyboards{$l} && $l || "us" ];
     $li->[0][1] ||= 100;
     $li;
 }
 sub lang2keyboard {
-    my ($l) = @_;
+    my ($l) = substr($_[0], 0, 5);
     my $kb = lang2keyboards($l)->[0][0];
     $keyboards{$kb} ? $kb : "us"; #- handle incorrect keyboad mapping to us.
 }
@@ -365,7 +377,7 @@ sub write {
     my ($prefix, $keyboard, $charset, $isNotDelete) = @_;
 
     my $config = read_raw($prefix);
-    put_in_hash($config, {
+    put_in_hash($config, { 
 			  KEYTABLE => keyboard2kmap($keyboard), 
 			  KBCHARSET => $charset,
 			 });
