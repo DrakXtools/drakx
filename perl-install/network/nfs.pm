@@ -33,15 +33,14 @@ sub check {
 }
 
 sub find_servers {
-    local *F;
-    my $pid = open F, "rpcinfo-flushed -b mountd 2 |";
+    my $pid = open(my $F, "rpcinfo-flushed -b mountd 2 |");
     $SIG{ALRM} = sub { kill(15, $pid) };
     alarm 1;
 
     my $domain = chomp_(`domainname`);
     my @servers;
     local $_;
-    while (<F>) {
+    while (<$F>) {
 	chomp;
 	my ($ip, $name) = /(\S+)\s+(\S+)/ or log::l("bad line in rpcinfo output"), next;
 	$name =~ s/\Q.$domain//; 
@@ -54,13 +53,10 @@ sub find_servers {
 sub find_exports {
     my ($class, $server) = @_;
 
-    local *F;
-    my $s = $server->{ip} || $server->{name};
-    my $pid = open F, "showmount -e $s |";
-    $SIG{ALRM} = sub { kill(15, $pid) };
-    alarm 5;
+    my @l;
+    run_program::raw({ timeout => 1 }, "showmount", '>', \@l, "-e", $server->{ip} || $server->{name});
 
-    my (undef, @l) = <F>;
+    shift @l; #- drop first line
     map { /(\S+)\s*(\S+)/; { name => $1, comment => $2, server => $server } } @l;
 }
 
