@@ -1773,7 +1773,6 @@ sub advanced_what_user {
 sub advanced_what_other() {
     my $box_what_other;
 	my $file_iter;
-	$iter = Gtk2::TreeIter->new;
 	my $other_file;
 			
 	$list_model = Gtk2::ListStore->new("Glib::String");
@@ -1782,8 +1781,7 @@ sub advanced_what_other() {
 	$list_others->set_headers_visible(0);	
 		
 	foreach (@list_other) {
-    	$list_model->append($iter);
-    	$list_model->set($iter, [ 0 => $_ ]);		
+    	$list_model->append_set(undef, $_);		
 	}
 	
 	$list_others->get_selection->signal_connect(changed => sub {
@@ -2901,14 +2899,13 @@ sub show_backup_details {
 	}
 	close TMP;	
 
-    my $text = new Gtk2::Text;
+    my $text = new Gtk2::TextView;
     my $advanced_box_archive;
-    $text->insert_text($archive_file_detail, 0);
+    gtktext_insert(gtkset_editable($text, 0), $archive_file_detail);
     gtkpack($advanced_box,
 	    $advanced_box_archive = gtkpack_(new Gtk2::VBox(0,10),
 			1, gtkpack_(new Gtk2::HBox(0,0),
-				1, $text, 
-				0, new Gtk2::VScrollbar($text->vadj),
+				1, create_scrolled_window($text), 
 			),
 			0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
 				gtksignal_connect(Gtk2::Button->new_from_stock(N("Done")), clicked => sub { 
@@ -3202,7 +3199,6 @@ sub restore_step_sys() {
 	my $check_backup_before;
     my $combo_restore_step_sys = new Gtk2::Combo();
     $combo_restore_step_sys->set_popdown_strings(@sys_backuped);
-
     gtkpack($advanced_box,
 		$restore_step_sys = gtkpack_(new Gtk2::VBox(0,10),
 			1, new Gtk2::VBox(0,10),
@@ -3424,7 +3420,7 @@ sub find_files_to_restore() {
 	my $start_restore;
 	
 	#- file info in tree view
-	my $model = Gtk2::TreeStore->new(Gtk2::GType->STRING);
+	my $model = Gtk2::TreeStore->new("Glib::String");
     my $file_list = Gtk2::TreeView->new_with_model($model);
 	my $file_wildcard_entry = new Gtk2::Entry();
 	
@@ -3464,10 +3460,13 @@ sub catalog_restore() {
     $tree_catalog->set_headers_visible(0);
     $tree_catalog->get_selection->set_mode('single');
 	
-	# file details in list widget
-	my $list_bu_files = new Gtk2::List();
-	$list_bu_files->set_selection_mode('extended');	
-	
+	# file details in list widget	
+	my $lmodel = Gtk2::ListStore->new("Glib::String");
+    my $tree_files = Gtk2::TreeView->new_with_model($lmodel);
+    $tree_files->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    $tree_files->set_headers_visible(0);
+    $tree_files->get_selection->set_mode('extended');
+
 	#- read the catalog
 	my @catalog = cat_("$cfg_dir/drakbackup_catalog");
 
@@ -3477,28 +3476,29 @@ sub catalog_restore() {
 		my @line_data = split(':', $_);
 		my $t = $line_data[0];
 
-        my $t_catalog = Gtk2::TreeIter->new;
-        $model->append($t_catalog, undef);
-        $model->set($t_catalog, [ 0 => $t ]);
+		my $t_catalog = $model->append_set(undef, [ 0 => $t ]);
         
-		gtksignal_connect($t_catalog, select => sub {
+		$tree_catalog->get_selection->signal_connect(changed => sub {
+			cursor_wait();
 		  	$cat_entry = $full_cat_entry;
 			@restore_files = ();
+			$lmodel->clear;
 			foreach my $filename (glob("$save_path/list*$t.txt")) {
 				my @contents = cat_($filename);
-				$list_bu_files->clear;
 				foreach (@contents) {
 					chop;
 					my $s = $_;
-					my $f_item = $list_bu_files->add(gtkshow(new Gtk2::ListItem($s)));
-					gtksignal_connect($f_item, select => sub { push @restore_files, $s });
-					gtksignal_connect($f_item, deselect => sub { @restore_files = () });
+					$lmodel->append_set(undef, $s);
+#					$lmodel->signal_connect(select => sub {
+#						push @restore_files, $s;
+#					});
+#					gtksignal_connect($f_item, select => sub { push @restore_files, $s });
+#					gtksignal_connect($f_item, deselect => sub { @restore_files = () });
 				}
 			}
+			cursor_norm();
 		});
-		
-		my $c_detail = Gtk2::TreeIter->new;
-		
+
 		my $indexer = 0;
 		foreach (@line_data) {
 			if ($indexer != 0) {
@@ -3509,9 +3509,8 @@ sub catalog_restore() {
 				$m = "Type: Incremental" if $_ eq "I";
 				$m = "Type: Differential" if $_ eq "D";
 				$m = "Type: Full" if $_ eq "F";
-				$m .= $_ if $_ ne "I" && $_ ne "F";
-				$model->append($c_detail, $t_catalog);
-				$model->set($c_detail, [ 0 => $m ]);
+				$m .= $_ if $_ ne "I" && $_ ne "F" && $_ ne "D";
+				$model->append_set($t_catalog, [ 0 => $m ]);
 			}
 			$indexer++;
 		}
@@ -3523,7 +3522,7 @@ sub catalog_restore() {
 			1, gtkpack_(new Gtk2::VBox(0,5),
 				1, gtkpack_(new Gtk2::VBox(0, 10),
 					1, create_scrolled_window($tree_catalog),
-					1, create_scrolled_window($list_bu_files),
+					1, create_scrolled_window($tree_files),
 				),
 				0, gtkpack_(new Gtk2::HBox(1, 10),
 					1, gtksignal_connect(Gtk2::Button->new_from_stock(N("Restore Selected\nCatalog Entry")), clicked => sub { 
@@ -3531,7 +3530,6 @@ sub catalog_restore() {
 							my $media_check = restore_catalog_entry($cat_entry, ());
 							if ($media_check) {
 								destroy_widget();
-#								button_box_restore();
 								interactive_mode_box();
 							} 
 						} 
@@ -3544,7 +3542,6 @@ sub catalog_restore() {
 							my $media_check = restore_catalog_entry($cat_entry, @passed_files);
 							if ($media_check) {
 								destroy_widget();
-#								button_box_restore();
 								interactive_mode_box();
 							} 
 						}
@@ -4518,7 +4515,7 @@ sub progress {
     my ($new_val) = $progressbar->get_fraction;
     $new_val += $incr;
     if ($new_val > 1) { $new_val = 1 }
-    $progressbar->fraction($new_val);
+    $progressbar->set_fraction($new_val);
     $plabel->set_text($label_text);
     gtkflush();
 }
