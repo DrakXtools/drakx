@@ -29,12 +29,24 @@ sub show_msec_help {
 }
 
 sub basic_seclevel_explanations {
-	my $msec = $_[0];
-	my $seclevel_explain = $msec->seclevel_explain();
-
 	my $text = new Gtk::Text(undef, undef);
 	$text->set_editable(0);
-	$text->insert(undef, $text->style->black, undef, $seclevel_explain);
+	$text->insert(undef, $text->style->black, undef,
+			    "Standard: This is the standard security recommended for a computer that will be used to connect
+               to the Internet as a client.
+
+High:       There are already some restrictions, and more automatic checks are run every night.
+
+Higher:    The security is now high enough to use the system as a server which can accept
+              connections from many clients. If your machine is only a client on the Internet, you
+	      should choose a lower level.
+
+Paranoid:  This is similar to the previous level, but the system is entirely closed and security
+                features are at their maximum
+
+Security Administrator:
+               If the 'Security Alerts' option is set, security alerts will be sent to this user (username or
+	       email)");
 
 	gtkpack_(gtkshow(new Gtk::HBox(0, 0)), 1, $text);
 }

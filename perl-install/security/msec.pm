@@ -131,26 +131,6 @@ sub get_default {
     $default_value;
 }
 
-# ***********************************************
-#                 EXPLANATIONS
-# ***********************************************
-sub seclevel_explain {
-"Standard: This is the standard security recommended for a computer that will be used to connect
-               to the Internet as a client.
-
-High:       There are already some restrictions, and more automatic checks are run every night.
-
-Higher:    The security is now high enough to use the system as a server which can accept
-              connections from many clients. If your machine is only a client on the Internet, you
-	      should choose a lower level.
-
-Paranoid:  This is similar to the previous level, but the system is entirely closed and security
-                features are at their maximum
-
-Security Administrator:
-               If the 'Security Alerts' option is set, security alerts will be sent to this user (username or
-	       email)";
-}
 
 # ***********************************************
 #               SPECIFIC OPTIONS
