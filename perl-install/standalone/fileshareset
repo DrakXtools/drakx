@@ -338,15 +338,13 @@ sub name_mangle {
 	if (length($s) > 8 && !grep { /\Q$s/ } @others) {
 	    # dropping leading directories when the resulting is still long and meaningful
 	    $_ = $s;
-	    next;
+	} else {
+	    s|(.*)[0-9#\-_!/]|$1|
+	      # inspired by "Christian Brolin" "Long names are doom" on comp.lang.functional
+	      || s|(.+)[AEIOU]|$1|# allButFirstVowels
+	      || s|(.*)(.)\2|$1$2| # adjacentDuplicates
+	      || s|(.*).|$1|; # booh, :'-(
 	}
-	s|(.*)[0-9#\-_!/]|$1| and next;
-
-	# inspired by "Christian Brolin" "Long names are doom" on comp.lang.functional
-	s|(.+)[AEIOU]|$1| and next; # allButFirstVowels
-	s|(.*)(.)\2|$1$2| and next; # adjacentDuplicates
-
-	s|(.*).|$1|; # booh, :'-(
     }
 
     # 5. remove "/"s still there
