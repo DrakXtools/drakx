@@ -170,31 +170,23 @@ sub setupBootloader__mbr_or_not {
 		 [ N("Skip") => '' ],
 		);
 
-	my $default = arch() =~ /sparc/ ? ($b->{use_partition} ? $l[1] : $l[0]) : 
-	                                  find { $_->[1] eq $b->{boot} } @l;
-	$in->ask_from_({ title => arch() =~ /sparc/ ? N("SILO Installation") : N("LILO/grub Installation"),
+	my $default = find { $_->[1] eq $b->{boot} } @l;
+	$in->ask_from_({ title => N("LILO/grub Installation"),
 			 messages => N("Where do you want to install the bootloader?"),
 			 interactive_help_id => 'setupBootloaderBeginner',
 		       },
 		      [ { val => \$default, list => \@l, format => sub { $_[0][0] }, type => 'list' } ]);
 	my $new_boot = $default->[1] or return;
 
-	if (arch() =~ /sparc/) {
-	    $b->{use_partition} = $new_boot eq $l[1][1];
-	}  else {
-	    #- remove bios mapping if the user changed the boot device
-	    delete $b->{bios} if $new_boot ne $b->{boot};
-
-	    $b->{boot} = $new_boot;
-	}
+	#- remove bios mapping if the user changed the boot device
+	delete $b->{bios} if $new_boot ne $b->{boot};
+	$b->{boot} = $new_boot;
     }
     1;
 }
 
 sub setupBootloader__general {
     my ($in, $b, $all_hds, $fstab, $security) = @_;
-
-    my @silo_install_lang = (N("First sector of drive (MBR)"), N("First sector of boot partition"));
 
     ($b->{method}, my $method_choices) = bootloader::method_choices($fstab, $b);
     my $profiles = bootloader::has_profiles($b);
@@ -221,9 +213,7 @@ sub setupBootloader__general {
 			 },
 		       }, [
             { label => N("Bootloader to use"), val => \$b->{method}, list => [ keys %$method_choices ], format => sub { $method_choices->{$_[0]} } },
-                arch() =~ /sparc/ ? (
-            { label => N("Bootloader installation"), val => \$b->{use_partition}, list => [ 0, 1 ], format => sub { $silo_install_lang[$_[0]] } },
-		) : if_(arch() !~ /ia64/,
+                if_(arch() !~ /ia64/,
             { label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (@{$all_hds->{hds}}, grep { !isFat_or_NTFS($_) } @$fstab)), detect_devices::floppies_dev() ], not_edit => !$::expert },
 		),
             { label => N("Delay before booting default image"), val => \$b->{timeout} },
@@ -291,10 +281,12 @@ sub setupBootloader__general {
 sub setupBootloader__entries {
     my ($in, $b, $_all_hds, $fstab) = @_;
 
+    require Xconfig::resolution_and_depth;
+
     my $Modify = sub {
 	my ($e) = @_;
 	my $default = my $old_default = $e->{label} eq $b->{default};
-	my $vga = $e->{vga} || 'normal';
+	my $vga = Xconfig::resolution_and_depth::from_bios($e->{vga});
 
 	my @l;
 	if ($e->{type} eq "image") { 
@@ -303,7 +295,7 @@ sub setupBootloader__entries {
 { label => N("Root"), val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
 { label => N("Append"), val => \$e->{append} },
   if_(arch() !~ /ppc|ia64/,
-{ label => N("Video mode"), val => \$vga, list => [ keys %bootloader::vga_modes ], format => sub { $bootloader::vga_modes{$_[0]} }, not_edit => !$::expert, advanced => 1 },
+{ label => N("Video mode"), val => \$vga, list => [ '', Xconfig::resolution_and_depth::bios_vga_modes() ], format => \&Xconfig::resolution_and_depth::to_string, advanced => 1 },
 ),
 { label => N("Initrd"), val => \$e->{initrd}, list => [ map { s/$::prefix//; $_ } glob_("$::prefix/boot/initrd*") ], not_edit => 0, advanced => 1 },
 	    );
@@ -343,7 +335,7 @@ sub setupBootloader__entries {
 	       } } }, \@l) or return;
 
 	$b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
-	$e->{vga} = $vga eq 'normal' ? '' : $vga;
+	$e->{vga} = ref($vga) ? $vga->{bios} : $vga;
 	bootloader::configure_entry($e); #- hack to make sure initrd file are built.
 	1;
     };
