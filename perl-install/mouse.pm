@@ -377,7 +377,7 @@ sub test_mouse_install {
     my ($mouse) = @_;
     require my_gtk;
     my_gtk->import(qw(:wrappers :helpers));
-    my $w = my_gtk->new;
+    my $w = my_gtk->new('', disallow_big_help => 1);
     my ($width, $height, $offset) = (210, round_up(min(350, $::windowheight - 150), 6), 25);
     my $darea = new Gtk::DrawingArea;
     $darea->set_events([ 'button_press_mask', 'button_release_mask' ]);  #$darea must be unrealized.

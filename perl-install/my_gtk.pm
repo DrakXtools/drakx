@@ -925,9 +925,9 @@ sub _create_window($$) {
 	            0xffc9 => 'next',
 		    0xffc8 => 'previous' }}{$_[1]{keyval}};
 
-	if ($d eq "help") {
+	if ($d eq 'help') {
 	    require install_gtk;
-	    install_gtk::create_big_help($::o);
+	    install_gtk::create_big_help($::o) if !$o->{disallow_big_help};
 	} elsif ($::isInstall && $d eq 'screenshot') {
 	    common::take_screenshot($o);
 	} elsif (chr($_[1]{keyval}) eq 'e' && $_[1]{state} & 8) {
