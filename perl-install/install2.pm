@@ -19,7 +19,7 @@ use pkgs;
 use smp;
 use lang;
 
-$::testing = 1;#$ENV{PERL_INSTALL_TEST};
+$::testing = $ENV{PERL_INSTALL_TEST};
 $INSTALL_VERSION = 0;
 
 my @installStepsFields = qw(text help skipOnCancel skipOnLocal prev next);
@@ -117,7 +117,7 @@ $o = $::o = { default => $default, steps => \%installSteps, orderedSteps => \@or
 sub selectLanguage {
     $o->{lang} = $o->chooseLanguage;
     lang::set($o->{lang});
-    keyboard::setup();
+    $o->{keyboard} = keyboard::setup();
 }
 
 sub selectPath {
@@ -238,7 +238,7 @@ install chapter of the Official Linux Mandrake User's Guide.");
 }
 
 sub main {
-#    $SIG{__DIE__} = sub { chomp $_[0]; log::l("ERROR: $_[0]") };
+    $SIG{__DIE__} = sub { chomp $_[0]; log::l("ERROR: $_[0]") };
 
     #  if this fails, it's okay -- it might help with free space though 
     unlink "/sbin/install";

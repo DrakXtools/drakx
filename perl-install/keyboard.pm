@@ -55,44 +55,17 @@ sub load($) {
 }
 
 sub setup(;$) {
-    my ($defkbd) = @_;
+    my ($keyboard) = @_;
     my $t; 
 
-    $defkbd ||= $defaultKeyboards{$ENV{LANG}} || "us";
+    $keyboard ||= $defaultKeyboards{$ENV{LANG}} || "us";
 
-    my $file = "/usr/share/keymaps/$defkbd.kmap";
+    my $file = "/usr/share/keymaps/$keyboard.kmap";
     if (-e $file) {
-	log::l("loading keymap $defkbd");
+	log::l("loading keymap $keyboard");
 	load(cat_($file));
     }
-
-#    local *F;
-#    open F, "/usr/etc/keymaps" or die "cannot open /usr/etc/keymaps: $!";
-#
-#    my $format = "i2";
-#    read F, $t, psizeof($format) or die "failed to read keymaps header: $!";
-#    my ($magic, $numEntries) = unpack $format, $t;
-#
-#    log::l("%d keymaps are available", $numEntries);
-#
-#    my @infoTable;
-#    my $format2 = "i Z40";
-#    foreach (1..$numEntries) {
-#	 read F, $t, psizeof($format2) or die "failed to read keymap information: $!";
-#	 push @infoTable, [ unpack $format2, $t ];
-#    }
-#
-#    foreach (@infoTable) {
-#	 read F, $t, $_->[0] or die "error reading keymap data: $!";
-#
-#	 if ($defkbd eq $_->[1]) {
-#	     log::l("using keymap $_->[1]");
-#	     load($t);
-#	     &write("/tmp", $_->[1]);
-#	     return;
-#	 }
-#    }
-#    die "keyboard $defkbd not found in /usr/etc/keymaps";
+    $keyboard;
 }
 
 sub write($$) {

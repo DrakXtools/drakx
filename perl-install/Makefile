@@ -51,8 +51,11 @@ test_pms: verify_c
 verify_c:
 	./verify_c $(PMS)
 
-depslist:
-	./gendepslist > $(ROOTDEST)/Mandrake/base/depslist
+gendepslist: %: %.cc
+	$(CXX) -I/usr/include/rpm $(CFLAGS) $< -lrpm -ldb -lz -o $@
+
+depslist: gendepslist
+	./gendepslist $(ROOTDEST)/Mandrake/base/depslist /tmp/rhimage/Mandrake/RPMS/*.rpm
 
 install_pms: all
 	for i in `perl -ne 's/sub (\w+?)_? {.*/$$1/ and print' commands.pm`; do ln -sf commands $(DEST)/usr/bin/$$i; done
@@ -113,6 +116,7 @@ get_needed_files: $(SO_FILES)
 	cp -a xmodmaps $(DEST)/usr/share
 	cp -a keymaps $(DEST)/usr/share
 	cp -a consolefonts $(DEST)/usr/share
+	cp compss $(ROOTDEST)/Mandrake/base
 
 	ln -s install2 $(DEST)/usr/bin/runinstall2
 #	echo -e "#!/bin/sh\n\nexec '/usr/bin/sh'" > $(DEST)/usr/bin/runinstall2
