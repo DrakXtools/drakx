@@ -332,6 +332,33 @@ sub add_entry {
     die 'add_entry';
 }
 
+sub _do_the_symlink {
+    my ($bootloader, $entry, $kind, $long_name) = @_;
+
+    my $existing_link = readlink("$::prefix$entry->{$kind}");
+    if ($existing_link && $existing_link eq $long_name) {
+	#- nothing to do :)
+	return;
+    }
+
+    #- the symlink is going to change! 
+    #- replace all the {$kind} using this symlink to the real file
+    my $old_long_name = $existing_link =~ m!^/! ? $existing_link : "/boot/$existing_link";
+    if (-e "$::prefix$old_long_name") {
+	foreach (@{$bootloader->{entries}}) {
+	    $_->{$kind} eq $entry->{$kind} && $_->{label} ne 'failsafe' or next;
+	    log::l("replacing $_->{$kind} with $old_long_name for bootloader label $_->{labe}");
+	    $_->{$kind} = $old_long_name;
+	}
+    } else {
+	log::l("ERROR: $entry->{$kind} points to $old_long_name which doesn't exist");
+    }
+
+    #- changing the symlink
+    symlinkf($long_name, "$::prefix$entry->{$kind}")
+      or cp_af("$::prefix/boot/$long_name", "$::prefix$entry->{$kind}");
+}
+
 sub add_kernel {
     my ($bootloader, $kernel_str, $nolink, $v) = @_;
 
@@ -341,30 +368,26 @@ sub add_kernel {
     $nolink ||= $kernel_str->{use_long_name};
 
     my $vmlinuz_long = kernel_str2vmlinuz_long($kernel_str);
-    my $image = "/boot/$vmlinuz_long";
-    -e "$::prefix$image" or log::l("unable to find kernel image $::prefix$image"), return;
+    $v->{kernel_or_dev} = "/boot/$vmlinuz_long";
+    -e "$::prefix$v->{kernel_or_dev}" or log::l("unable to find kernel image $::prefix$v->{kernel_or_dev}"), return;
     if (!$nolink) {
-	$image = '/boot/' . kernel_str2vmlinuz_short($kernel_str);
-	symlinkf($vmlinuz_long, "$::prefix$image") or cp_af("$::prefix/boot/$vmlinuz_long", "$::prefix$image");
+	$v->{kernel_or_dev} = '/boot/' . kernel_str2vmlinuz_short($kernel_str);
+	_do_the_symlink($bootloader, $v, 'kernel_or_dev', $vmlinuz_long);
     }
-    log::l("adding $image");
+    log::l("adding $v->{kernel_or_dev}");
 
     my $initrd_long = kernel_str2initrd_long($kernel_str);
-    my $initrd = "/boot/$initrd_long";
-    mkinitrd($kernel_str->{version}, $initrd, $v->{vga}) or undef $initrd;
-    if ($initrd && !$nolink) {
-	$initrd = '/boot/' . kernel_str2initrd_short($kernel_str);
-	symlinkf($initrd_long, "$::prefix$initrd") or cp_af("$::prefix/boot/$initrd_long", "$::prefix$initrd");
+    $v->{initrd} = "/boot/$initrd_long";
+    mkinitrd($kernel_str->{version}, $v->{initrd}, $v->{vga}) or undef $v->{initrd};
+    if ($v->{initrd} && !$nolink) {
+	$v->{initrd} = '/boot/' . kernel_str2initrd_short($kernel_str);
+	_do_the_symlink($bootloader, $v, 'initrd', $initrd_long);
     }
-
-    my $label = kernel_str2label($kernel_str);
 
     add2hash($v,
 	     {
 	      type => 'image',
-	      label => $label,
-	      kernel_or_dev => $image,
-	      initrd => $initrd,
+	      label => kernel_str2label($kernel_str),
 	     });
     $v->{append} = normalize_append("$bootloader->{perImageAppend} $v->{append}");
     add_entry($bootloader, $v);
