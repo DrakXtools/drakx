@@ -31,7 +31,7 @@ Gtk::Gdk::ImlibImage->init;
 
 my $in = 'interactive'->vnew;
 
-$::bugzilla_url = "https://qa.mandrakesoft.com";
+my $bugzilla_url = "https://drakbug.mandrakesoft.com";
 my $version = "0.9.0";
 my $prog;
 my $incident=1;
@@ -81,6 +81,7 @@ my $mdk_app = {
 	       _("Userdrake") => 'userdrake',
 	       _("Configuration Wizards") => 'wizdrake',
 	      };
+
 my @generic_tool = keys %{$mdk_app}; 
 my @all_drakxtools = @ { $mdk_app->{_("Standalone Tools")} };
 push(@generic_tool,@all_drakxtools);
