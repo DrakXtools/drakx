@@ -668,7 +668,7 @@ sub getHds {
 #    add2hash_($o->{partitioning}, { readonly => 1 }) if partition_table_raw::typeOfMBR($drives[0]{device}) eq 'system_commander';
 
   getHds: 
-    $o->{hds} = catch_cdie { fsedit::hds(\@drives, $flags) }
+    my $hds = catch_cdie { fsedit::hds(\@drives, $flags) }
       sub {
 	  $ok = 0;
 	  my $err = $@; $err =~ s/ at (.*?)$//;
@@ -676,15 +676,18 @@ sub getHds {
 	  !$flags->{readonly} && $f_err and $f_err->($err);
       };
 
-    if (is_empty_array_ref($o->{hds}) && $o->{autoSCSI}) {
+    if (is_empty_array_ref($hds) && $o->{autoSCSI}) {
 	$o->setupSCSI; #- ask for an unautodetected scsi card
 	goto getHds;
     }
 
-    $ok = fsedit::verifyHds($o->{hds}, $flags->{readonly}, $ok)
+    partition_table_raw::test_for_bad_drives($_) foreach @$hds;
+
+    $ok = fsedit::verifyHds($hds, $flags->{readonly}, $ok)
         unless $flags->{clearall} || $flags->{clear};
 
-    $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}) ];
+    $o->{hds} = $hds;
+    $o->{fstab} = [ fsedit::get_fstab(@$hds) ];
     fs::check_mounted($o->{fstab});
     fs::merge_fstabs($o->{fstab}, $o->{manualFstab});
 
