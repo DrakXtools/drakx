@@ -619,8 +619,8 @@ sub select_packages {
 
     #- special packages that are to be move to closure always ...
     foreach (qw(kernel-smp kernel-linus kernel-secure hackkernel-smp hackkernel-linus hackkernel-secure kernel-pcmcia-cs
-		xawtv kwintv xscreensaver-gl xmms-mesa 
-		bzflag csmash gltron spacecup chromium tuxracer FlightGear armagetron 
+		xawtv kwintv xscreensaver-gl xmms-mesa openuniverse
+		csmash chromium tuxracer armagetron 
 		alsa imwheel nfs-utils-clients lvm usbd hotplug reiserfsprogs xfsprogs jfsprogs 
 		sox aumix xmms-arts xawtv gatos kwintv sane-frontends gphoto gnome-toaster gcombust xcdroast apmd cdlabelgen
 		), exists $options{server} ? qw(Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib) : ()) {

@@ -8,6 +8,8 @@ $mode =~ s/^--(rebuild|clean)$/$1/ or die "mode should be --rebuild or --clean\n
 open F, "$dir/VERSION" or die "no installation found on $dir";
 while (<F>) {
     /[\s-]fr/ and $lang = 'fr';
+    /\[lang[=:]([^]]*)\]/ and $lang = $1;
+    /\[server\]/ and $options{server} = '';
 }
 close F;
 
@@ -21,6 +23,9 @@ foreach ($lang || 'en') {
     /es/ and ($lang, $flang, $charset) = ('es', 'es_ES@euro', 'iso-8859-15');
 }
 print "Found lang $lang\n";
+foreach (keys %options) {
+    print "Using option [$_" . ($options{$_} && "=$options{$_}") . "]\n";
+}
 
 
 my $packages = select_packages($dir, $lang);
@@ -187,10 +192,10 @@ sub select_packages {
 
     #- special packages that are to be move to closure always ...
     foreach (qw(kernel-smp kernel-linus kernel-secure hackkernel-smp hackkernel-linus hackkernel-secure kernel-pcmcia-cs
-		xawtv kwintv xscreensaver-gl xmms-mesa 
-		bzflag csmash gltron spacecup chromium tuxracer FlightGear armagetron 
+		xawtv kwintv xscreensaver-gl xmms-mesa openuniverse
+		csmash chromium tuxracer armagetron 
 		alsa imwheel nfs-utils-clients lvm usbd hotplug reiserfsprogs
-		sox aumix xawtv gatos kwintv sane-frontends gphoto gnome-toaster gcombust xcdroast apmd cdlabelgen
+		sox aumix xmms-arts xawtv gatos kwintv sane-frontends gphoto gnome-toaster gcombust xcdroast apmd cdlabelgen
 		), exists $options{server} ? qw(Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib) : ()) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	if ($pkg) {
