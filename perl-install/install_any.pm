@@ -546,7 +546,10 @@ sub ejectCdrom(;$) {
 	#- D state if the cdrom is already removed
 	eval { fs::umount("/tmp/image") };
 	if ($@) { log::l("files still open: ", readlink($_)) foreach map { glob_("$_/fd/*") } glob_("/proc/*") }
-	eval { ioctl detect_devices::tryOpen($cdrom), c::CDROMEJECT(), 1 };	
+	eval { 
+	    my $dev = detect_devices::tryOpen($cdrom);	    
+	    ioctl($dev, c::CDROMEJECT(), 1) if ioctl($dev, c::CDROM_DRIVE_STATUS(), 0) == c::CDS_DISC_OK();
+	};
     }
 }
 
