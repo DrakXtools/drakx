@@ -731,12 +731,12 @@ sub ftp_client {
     $ftp->cwd($host_path); 
     foreach (@file_list_to_send_by_ftp) {
 		$interactive and $pbar->set_fraction(0);
-		$interactive and progress($pbar, 0.5, $_);
+		$interactive and progress($pbar, $plabel, 0.5, $_);
 		$interactive and $pbar->set_text($_);
 		$ftp->put($_);
-		$interactive and progress($pbar, 0.5, $_);
+		$interactive and progress($pbar, $plabel, 0.5, $_);
 		$interactive and $pbar->set_text($_);
-		$interactive and progress($pbar3, 1/@file_list_to_send_by_ftp, N("Total progess"));
+		$interactive and progress($pbar3, $plabel3, 1/@file_list_to_send_by_ftp, N("Total progess"));
     }
     $ftp->quit; 
     return(0);
@@ -784,7 +784,7 @@ sub do_expect {
 	
 	$interactive and $pbar->set_fraction(0);
 	$interactive and $pbar3->set_fraction(0);
-	$interactive and progress($pbar, 0.5, "File Transfer...");
+	$interactive and progress($pbar, $plabel, 0.5, "File Transfer...");
 
 	foreach (@send_files) {
 		$exp_command = "scp -P $scp_port $_ $login_user\@$host_name:$host_path" if $mode eq "backup";
@@ -809,7 +809,7 @@ sub do_expect {
 		
 		my $exp = Expect->spawn($exp_command) or $in->ask_warn('', N("ERROR: Cannot spawn %s.", $exp_command));
 
-		$interactive and progress($pbar3, 1/@send_files, N("Total progess"));
+		$interactive and progress($pbar3, $plabel3, 1/@send_files, N("Total progess"));
 		$interactive and $stext->set_text($_);
 	
 		#- run scp, look for some common errors and try to track successful progress for GUI
@@ -838,7 +838,7 @@ sub do_expect {
 		$log_buff .= "$_\n" if $exit_stat eq 0 && $mode eq "backup";
 		$exp->hard_close();
 	}
-	$interactive and progress($pbar, 0.5, "Done...");
+	$interactive and progress($pbar, $plabel, 0.5, "Done...");
 	$interactive = 1 if $mode eq "sendkey";
 }
 
@@ -854,7 +854,7 @@ sub ssh_client {
 			$command = "scp -P $scp_port -i $backup_key $_ $login_user\@$host_name:$host_path";
 		}
 		$interactive and $pbar->set_fraction(0);
-		$interactive and progress($pbar, 0.5, "File Transfer...");
+		$interactive and progress($pbar, $plabel, 0.5, "File Transfer...");
 		$interactive and $stext->set_text($_);
 		$log_buff .= $command . "\n\n";
         local *TMP;
@@ -864,8 +864,8 @@ sub ssh_client {
 		}
 		close TMP;
 		$log_buff .= "\n";
-		$interactive and progress($pbar, 0.5, "Done...");
-		$interactive and progress($pbar3, 1/@file_list_to_send_by_ftp, N("Total progess"));
+		$interactive and progress($pbar, $plabel, 0.5, "Done...");
+		$interactive and progress($pbar3, $plabel3, 1/@file_list_to_send_by_ftp, N("Total progess"));
     }
     return(0);
 }
@@ -964,8 +964,7 @@ sub spawn_progress {
 	my $value;
 	my $timer;
 
-	$interactive and progress($pbar3, 0, translate($descr));
-#	$interactive and $pbar3->set_activity_mode(1);
+	$interactive and progress($pbar3, $plabel3, 0, translate($descr));
 	$interactive and $pbar3->set_fraction(0);
 	$interactive and $timer = Gtk2->timeout_add(2, \&progress_timeout);
 
@@ -982,16 +981,16 @@ sub spawn_progress {
 		}			
 	}
 	close TMP;
-#	$interactive and $pbar3->set_activity_mode(0);
 	$interactive and Gtk2->timeout_remove($timer);
 }
 
 sub progress_timeout {
 	my $new_val;
 	my $adj;
-	$new_val = $pbar3->get_value() + 1;
-   	$adj = $pbar3->adjustment;
- 	$new_val = $adj->lower if $new_val > $adj->upper;
+	$new_val = $pbar3->fraction + 0.1;
+#   	$adj = $pbar3->adjustment;
+#	$new_val = $adj->lower if $new_val > $adj->upper;
+    if ($new_val > 1) { $new_val = 0 }
 	$pbar3->set_fraction($new_val);	
 	return(1);
 }
@@ -2537,10 +2536,10 @@ sub find_backup_to_restore {
 }
 
 sub system_state {
-    $system_state;
+#    $system_state;
 
     if ($cfg_file_exist) { 
-		$system_state .= N("\nBackup Sources: \n");
+		$system_state = N("\nBackup Sources: \n");
         $backup_sys and $system_state .= N("\n- System Files:\n"); 
         $backup_sys and $system_state .= "\t\t$_\n" foreach @sys_files; 
         $backup_user and $system_state .= N("\n- User Files:\n");
@@ -4363,7 +4362,7 @@ sub build_backup_status {
 sub build_backup_ftp_status {
     $pbar =   new Gtk2::ProgressBar;
     $pbar3 =  new Gtk2::ProgressBar;
-    $table->destroy();
+	destroy_widget();
     button_box_build_backup_end();
     $pbar->set_fraction(0);
     $pbar3->set_fraction(0);
@@ -4374,7 +4373,6 @@ sub build_backup_ftp_status {
 			1, N("files sending by FTP"),
 			1, new Gtk2::VBox(0, 15),
 			1, create_packtable ({ col_spacings => 10, row_spacings => 5 },
-#						    [ $pbar->set_show_text( $show_text);
 				[N("Sending files...")],
 				[""], 
 				[ $plabel = new Gtk2::Label(' ') ],
@@ -4434,8 +4432,7 @@ sub aff_total_tail {
 }
 
 sub build_backup_box {
-    $box2->destroy();
-#    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_img("ic82-CD-40");
+	destroy_widget();
 
     gtkadd($advanced_box,
 		$box2 = gtkpack_(new Gtk2::HBox(0, 15),	
