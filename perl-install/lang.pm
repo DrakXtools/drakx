@@ -457,7 +457,7 @@ sub write {
 
 sub load_mo {
     my ($lang) = @_;
-    my ($localedir, $suffix) = ('/usr/share/locale', 'LC_MESSAGES/libDrakX.mo');
+    my ($localedir, $suffix) = ("$ENV{SHARE_PATH}/locale", 'LC_MESSAGES/libDrakX.mo');
     $localedir .= "_special" if $::isInstall;
 
     $lang ||= $ENV{LANGUAGE} || $ENV{LC_ALL} || $ENV{LC_MESSAGES} || $ENV{LANG};
