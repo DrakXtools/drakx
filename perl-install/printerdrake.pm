@@ -1244,7 +1244,7 @@ sub main {
 	}
 
 	# only experts should be asked for the spooler
-	!$::expert && ($printer->{SPOOLER} ||= 'cups');
+	!$::expert and $printer->{SPOOLER} ||= 'cups';
 
 	# If we have chosen a spooler, install it.
 	if (($printer->{SPOOLER}) && ($printer->{SPOOLER} ne '')) {
@@ -1253,8 +1253,7 @@ sub main {
 
     }
     # Control variables for the main loop
-    my ($queue, $continue, $newqueue, $editqueue, $expertswitch) = 
-	('', 1, 0, 0, 0);
+    my ($queue, $continue, $newqueue, $editqueue, $expertswitch) = ('', 1, 0, 0, 0);
     # Cursor position in queue modification window
     my $modify = _("Printer options");
     while ($continue) {
@@ -1355,15 +1354,14 @@ sub main {
 	    #- Set default values for a new queue
 	    $printer::printer_type_inv{$printer->{TYPE}} or 
 		$printer->{TYPE} = printer::default_printer_type($printer);
-	    $printer->{currentqueue} = {};
-	    $printer->{currentqueue}{'queue'} = $queue;
-	    $printer->{currentqueue}{'foomatic'} = 0;
-	    $printer->{currentqueue}{'desc'} = "";
-	    $printer->{currentqueue}{'loc'} = "";
-	    $printer->{currentqueue}{'make'} = "";
-	    $printer->{currentqueue}{'model'} = "";
-	    $printer->{currentqueue}{'spooler'} =
-		$printer->{SPOOLER};
+	    $printer->{currentqueue} = { queue    => $queue,
+					 foomatic => 0,
+					 desc     => "",
+					 loc      => "",
+					 make     => "",
+					 model    => "",
+					 spooler  => $printer->{SPOOLER},
+				       };
 	    #- Set OLD_QUEUE field so that the subroutines for the
 	    #- configuration work correctly.
 	    $printer->{OLD_QUEUE} = $printer->{QUEUE} = $queue;
