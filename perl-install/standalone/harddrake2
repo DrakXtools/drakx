@@ -233,6 +233,8 @@ $tree->get_selection->signal_connect('changed' => sub {
 
 my $index = 0;
 
+my @classes;
+
 # Fill the graphic devices tree with a "tree branch" widget per device category
 foreach (@harddrake::data::tree) {
     my ($Ident, $title, $icon, $configurator, $detector) = @$_;
@@ -244,6 +246,12 @@ foreach (@harddrake::data::tree) {
 
     my @devices = &$detector;
     next unless @devices; # Skip empty class (no devices)
+    push @classes, [ $Ident, $title, $icon, $configurator, @devices ];
+}
+
+# Fill the graphic devices tree with a "tree branch" widget per device category
+foreach (@classes) {
+    my ($Ident, $title, $icon, $configurator, @devices) = @$_;
 
     my $parent_iter = $tree_model->append_set(undef, [ 0 => gtkcreate_pixbuf($icon), 1 => $title, 2 => -1 ]);
 
