@@ -1383,7 +1383,10 @@ sub install($$$;$$) {
 		}
 		closedir DIR;
 		foreach (keys %tree) {
+		    #- remove child of this process (which will terminate).
 		    $pid = $_; while ($pid = $tree{$pid}) { $pid == $$ and push @killpid, $_ }
+		    #- remove child of 1 direct that have a pid greater than current one.
+		    $_ > $$ && $tree{$_} == 1 and push @killpid, $_;
 		}
 		if (@killpid) {
 		    log::l("killing process ". join(", ", @killpid));
