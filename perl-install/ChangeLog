@@ -1,3 +1,74 @@
+2001/09/17  dam's  <damien@mandrakesoft.com>
+
+	* network/network.pm: no expert mode needed to choose gateway
+
+2001/09/17  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/list: updated for rpm 4.0.3.
+
+	* rescue/tree/etc/oem: updated for 8.1, contains workaround for bug of
+	"rpm --root" but need more testing.
+
+	* printerdrake.pm: add eval around installing lexmark-driver
+	(proprietary).
+
+	* Xconfigurator.pm: deactivating bad card test (too).
+
+	* standalone/XFdrake: removed comment.
+	added support to configure NVIDIA driver if everything is correctly
+	installed.
+
+2001/09/17  odin
+
+	* share/po/fr.po: updated fr.po
+
+2001/09/17  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* keyboard.pm: Added choice of "English|Ireland (euro)" so people wanting
+	English language but also euro symbol can choose it.
+	fixed Belgian keyboard
+
+	* share/po/fr.po, share/po/wa.po, share/po/es.po: updated Spanish and
+	Wallon files; corrected error syntax in French file
+
+	* lang.pm: Added choice of "English|Ireland (euro)" so people wanting
+	English language but also euro symbol can choose it.
+
+2001/09/17  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm: 
+	  - '--' to separate options for supermount + small workaround (ro and
+	exec before --)
+	  - fix nfs in manualFstab (for auto_installs, reported by David
+	Eastcott)
+	(mount): do not hand update /etc/mtab for nfs mounts, already done by
+	mount(8)
+	(set_default_options): disable iocharset= and codepage= for supermount
+
+	* partition_table.pm (adjust_main_extended): do not use linux extended
+
+	* detect_devices.pm (pci_probe): log full pci probes
+
+	* standalone/drakbug_report: fix
+
+	* fsedit.pm: 
+	  - '--' to separate options for supermount + small workaround (ro and
+	exec before --)
+	  - fix nfs in manualFstab (for auto_installs, reported by David
+	Eastcott)
+
+2001/09/17  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm: Fixed bug of /etc/foomatic/defaultspooler not been written
+	in expert install.
+	Do not die when "chkconfig" fails (needed for "security_check").
+	Added "-q" option to foomatic-configure (should not get interactive).
+	Added handling of high and paranoid security levels.
+
+	* printerdrake.pm: /etc/foomatic/defaultspooler was not written in expert
+	mode installation.
+	Added handling of high and paranoid security levels.
+
 2001/09/17  François Pons  <fpons@mandrakesoft.com>
 
 	* printerdrake.pm: add eval around installing lexmark-driver
