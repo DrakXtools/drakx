@@ -87,7 +87,7 @@ hackkernel-pcmcia-cs hackkernel-smp hackkernel-smp-fb
 autoirpm autoirpm-icons numlock 
 );
 
-@preferred = qw(perl-GTK postfix ghostscript-X vim-minimal kernel ispell-en);
+@preferred = qw(perl-GTK postfix wu-ftpd ghostscript-X vim-minimal kernel ispell-en);
 
 #- constant for small transaction.
 $limitMinTrans = 8;
