@@ -473,6 +473,7 @@ sub configureNetwork2 {
     write_conf("$etc/sysconfig/network", $netc);
     write_resolv_conf("$etc/resolv.conf", $netc);
     write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $prefix) foreach grep { $_->{DEVICE} } values %$intf;
+    add2hosts("$etc/hosts", "localhost", "127.0.0.1");
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf);
 
     if (any { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf) {
