@@ -38,12 +38,14 @@ sub intro {
 	    $connected=0;
 	}
 	my @l=(
-	       !$connected && -e $connect_file ? { description => _("Connect to Internet"),
+	       !$connected && -e $connect_file ? { description => _("Connect"),
 						   c => 1} : (),
-	       $connected && -e $disconnect_file ? { description => _("Disconnect from Internet"),
+	       $connected && -e $disconnect_file ? { description => _("Disconnect"),
 						     c => 2} : (),
-	       { description => _("Configure network connection (LAN or Internet)"),
+	       { description => _("Configure the connection"),
 		 c => 3},
+	       { description => _("Cancel"),
+		 c => 4},
 	      );
 	my $e = $in->ask_from_listf(_("Internet connection & configuration"),
 				    _($text),
@@ -52,6 +54,7 @@ sub intro {
 	run_program::rooted($prefix, $connect_prog) if ($e->{c}==1);
 	run_program::rooted($prefix, $disconnect_file) if ($e->{c}==2);
 	main($prefix, $netcnx, $netc, $mouse, $in, $intf, 0, 0) if ($e->{c}==3);
+	$in->exit(0) if ($e->{c}==4);
     } else {
 	main($prefix, $netcnx, $netc, $mouse, $in, $intf, 0, 0);
     }
