@@ -1,4 +1,4 @@
-package proxy; $Id$
+package proxy; # $Id$
 
 use diagnostics;
 use strict;
