@@ -44,4 +44,44 @@ sub set {
     run_program::rooted($::prefix, "/usr/sbin/msec", $run_level ? $run_level : 3);
 }
 
+sub level_choose {
+    my ($in, $security, $libsafe, $email) = @_;
+
+    my %l = (
+      0 => N("Welcome To Crackers"),
+      1 => N("Poor"),
+      2 => N("Standard"),
+      3 => N("High"),
+      4 => N("Higher"),
+      5 => N("Paranoid"),
+    );
+    my %help = (
+      0 => N("This level is to be used with care. It makes your system more easy to use,
+but very sensitive: it must not be used for a machine connected to others
+or to the Internet. There is no password access."),
+      1 => N("Password are now enabled, but use as a networked computer is still not recommended."),
+      2 => N("This is the standard security recommended for a computer that will be used to connect to the Internet as a client."),
+      3 => N("There are already some restrictions, and more automatic checks are run every night."),
+      4 => N("With this security level, the use of this system as a server becomes possible.
+The security is now high enough to use the system as a server which can accept
+connections from many clients. Note: if your machine is only a client on the Internet, you should choose a lower level."),
+      5 => N("This is similar to the previous level, but the system is entirely closed and security features are at their maximum."),
+    );
+    delete @l{0,1};
+    delete $l{5} if !$::expert;
+
+    $in->ask_from(
+            N("DrakSec Basic Options"),
+            N("Please choose the desired security level") . "\n\n" .
+            join('', map { "$l{$_}: " . formatAlaTeX($help{$_}) . "\n\n" } ikeys %l),
+            [
+              { label => N("Security level"), val => $security, list => [ sort keys %l ], format => sub { $l{$_[0]} } },
+                if_($in->do_pkgs->is_installed('libsafe') && arch() =~ /^i.86/,
+                { label => N("Use libsafe for servers"), val => $libsafe, type => 'bool', text =>
+                  N("A library which defends against buffer overflow and format string attacks.") }),
+                { label => N("Security Administrator (login or email)"), val => $email, },
+            ],
+    );
+}
+
 1;

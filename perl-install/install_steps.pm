@@ -931,9 +931,10 @@ sub miscellaneousBefore {
     my %s = getVarsFromSh("$o->{prefix}/etc/sysconfig/system");
     $o->{miscellaneous}{HDPARM} = $s{HDPARM} if exists $s{HDPARM};
     require security::level;
+    require security::various;
     $o->{security} ||= security::level::get() || ($o->{meta_class} =~ /server|firewall/ ? 3 : 2);
-    $o->{security_user} ||= any::config_security_user($o->{prefix});
-    $o->{libsafe} ||= any::config_libsafe($o->{prefix});
+    $o->{security_user} ||= security::various::config_security_user($o->{prefix});
+    $o->{libsafe} ||= security::various::config_libsafe($o->{prefix});
 
     log::l("security $o->{security}");
 

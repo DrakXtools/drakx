@@ -288,8 +288,9 @@ sub setupBootloader {
     local $ENV{DRAKX_PASSWORD} = $o->{bootloader}{password};
     local $ENV{DURING_INSTALL} = 1;
     run_program::rooted($o->{prefix}, "/usr/sbin/msec", "-o", "run_commands=0", "-o", "log=stderr", $o->{security});
-    any::config_libsafe($o->{prefix}, $o->{libsafe});
-    any::config_security_user($o->{prefix}, $o->{security_user});
+    require security::various;
+    security::various::config_libsafe($o->{prefix}, $o->{libsafe});
+    security::various::config_security_user($o->{prefix}, $o->{security_user});
 }
 #------------------------------------------------------------------------------
 sub configureX {
