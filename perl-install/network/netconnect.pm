@@ -277,16 +277,19 @@ fi
 sub save_conf {
     my ($netcnx) = @_;
     my $string = "# Connection type reminder
-type=$netcnx->{type}
+name=$netcnx->{PROFILE}
 ";
     output_with_perm("$prefix/etc/sysconfig/drakconnect", 0600, $string);
 }
 
 sub set_profile {
-    my ($netcnx, $profile) = @_;
-    $netcnx->{PROFILE} = $profile;
+    my ($netcnx) = @_;
     system("/sbin/set-netprofile $netcnx->{PROFILE}");
+}
 
+sub save_profile {
+    my ($netcnx) = @_;
+    system("/sbin/save-netprofile $netcnx->{PROFILE}");
 }
 
 sub del_profile {
@@ -307,9 +310,9 @@ sub get_profiles() {
 
 sub load_conf {
     my ($netcnx, $netc, $intf) = @_; 
-    my $type = { getVarsFromSh("$prefix/etc/sysconfig/drakconnect") };
+    my $profile = { getVarsFromSh("$prefix/etc/sysconfig/drakconnect") };
     
-    $type->{type} and $netcnx->{type} = $type->{type};
+    $netcnx->{PROFILE} = $profile->{name};
     network::read_all_conf($prefix, $netc, $intf);
 }
 

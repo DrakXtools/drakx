@@ -91,6 +91,7 @@ my $profile_combo = gtksignal_connect(Gtk2::OptionMenu->new, changed => sub {
                                           my $selected_profile = $combo->get_text;
                                           return if $selected_profile eq $netcnx->{PROFILE};
                                           set_profiles($selected_profile) if $combo->window; # is realized?;
+					  $netcnx->{PROFILE} = $selected_profile;
                                    });
 
 sub update_profiles {
@@ -105,9 +106,8 @@ sub update_profiles {
 
 sub set_profiles {
     my ($new_profile) = @_;
-    network::netconnect::set_profile($netcnx, $new_profile);
+    network::netconnect::set_profile($netcnx);
     network::netconnect::load_conf($netcnx, $netc, $intf);
-    $netcnx->{$_} = $netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
     update_profiles($new_profile);
     update();
     $button_apply->set_sensitive(1);
@@ -224,7 +224,7 @@ $window1->{window}->add(
                                                                                      $button_apply->set_sensitive(1);
                                                                                      update();
                                                                                  };
-                                                                                 if ($@ =~ /wizcancel/) { } 
+                                                                                 if ($@ =~ /wizcancel/) {} 
                                                                                  $::WizardWindow->destroy;
                                                                                  undef $::WizardWindow;
                                                                                  sensitive_buttons(1);
@@ -376,6 +376,8 @@ sub apply() {
     network::configureNetwork2($in, $prefix, $netc, $intf);
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
     $netcnx->{type} !~ /adsl_p/ and system("$prefix/etc/rc.d/init.d/network restart");
+
+    network::netconnect::save_profile($netcnx);
     $button_apply->set_sensitive(0);
 }
 
