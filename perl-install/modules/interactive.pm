@@ -78,14 +78,25 @@ sub load_category__prompt_for_more {
     }
 }
 
+my %category2text = (
+    'bus/usb' => N_("Installing driver for USB controller"),
+    'bus/firewire' => N_("Installing driver for firewire controller %s"),
+    'disk/ide|scsi|hardware_raid|firewire' => N_("Installing driver for hard drive controller %s"),
+    list_modules::ethernet_categories() => N_("Installing driver for ethernet controller %s"),
+);
+
 sub wait_load_module {
     my ($in, $category, $text, $module) = @_;
-    $in->wait_message('',
-		     [ 
-		      #-PO: the first %s is the card type (scsi, network, sound,...)
-		      #-PO: the second is the vendor+model name
-		      N("Installing driver for %s card %s", $category, $text), if_($::expert, N("(module %s)", $module))
-		     ]);
+    my $msg = do {
+	if (my $t = $category2text{$category}) {
+	    sprintf(translate($t), $text);
+	} else {
+	    #-PO: the first %s is the card type (scsi, network, sound,...)
+	    #-PO: the second is the vendor+model name
+	    N("Installing driver for %s card %s", $category, $text);
+	}
+    };
+    $in->wait_message('', [ $msg, if_($::expert, N("(module %s)", $module)) ]);
 }
 
 sub load_module__ask_options {
