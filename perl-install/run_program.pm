@@ -23,10 +23,16 @@ sub rooted_get_stdout {
     wantarray ? @r : join('', @r);
 }
 
-sub run { rooted('', @_) }
+sub run { raw({}, @_) }
 
 sub rooted {
     my ($root, $name, @args) = @_;
+    raw({ root => $root }, $name, @args);
+}
+
+sub raw {
+    my ($options, $name, @args) = @_;
+    my $root = $options->{root} || '';
     my $str = ref $name ? $name->[0] : $name;
     log::l("running: $str @args" . ($root ? " with root $root" : ""));
 
@@ -45,8 +51,21 @@ sub rooted {
     my $stderr = $stderr_raw && (ref($stderr_raw) ? "$ENV{HOME}/tmp/.drakx-stderr.$$" : "$root$stderr_raw");
 
     if (my $pid = fork) {
-	waitpid $pid, 0;
-	$? == 0 or return;
+	my $ok;
+	eval {
+	    local $SIG{ALRM} = sub { die "ALARM" };
+	    alarm($options->{timeout} || 10 * 60);
+	    waitpid $pid, 0;
+	    $ok = $? == 0;
+	    alarm 0;
+	};
+	if ($@) {
+	    log::l("ERROR: killing runaway process");
+	    kill 9, $pid;
+	    return;
+	}
+	$ok or return;
+
 	if ($stdout_raw && ref($stdout_raw)) {
 	    if (ref($stdout_raw) eq 'ARRAY') { 
 		@$stdout_raw = cat_($stdout);
