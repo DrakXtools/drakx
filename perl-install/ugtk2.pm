@@ -518,11 +518,6 @@ sub gtktext_insert {
     $textview;
 }
 
-sub PANGO_PIXELS {
-    my ($d) = @_;
-    ($d + (0 <= $d ? 1024 : -1024) /2) / 1024;
-}
-
 # extracts interesting font metrics for a given widget
 sub gtkfontinfo {
     my ($widget) = @_;
@@ -533,7 +528,7 @@ sub gtkfontinfo {
     foreach (qw(ascent descent approximate_char_width approximate_digit_width)) {
 	no strict;
 	my $func = "get_$_";
-	$fontinfo{$_} = PANGO_PIXELS($metrics->$func);
+	$fontinfo{$_} = Gtk2::Pango->PANGO_PIXELS($metrics->$func);
     }
     $metrics->unref;
     %fontinfo;
