@@ -349,7 +349,7 @@ sub gtkcreate_xpm {
 sub gtkcreate_png {
     my ($f) = @_;
     $f =~ m|.png$| or $f="$f.png";
-    if ( $f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach $ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/libDrakX/pixmaps", "pixmaps" }
+    if ( $f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach $ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "$ENV{SHARE_PATH}/libDrakX/pixmaps", "pixmaps" }
     my $im = Gtk::Gdk::ImlibImage->load_image($f) or die "gtkcreate_png: missing png file $f";
     $im->render($im->rgb_width, $im->rgb_height);
     ($im->move_image(), $im->move_mask);
