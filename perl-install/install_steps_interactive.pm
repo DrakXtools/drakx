@@ -189,11 +189,11 @@ For any question on this document, please contact MandrakeSoft S.A.
 sub selectKeyboard {
     my ($o, $clicked) = @_;
 
-    my $l = keyboard::lang2keyboards($o->{lang});
+    my $l = keyboard::lang2keyboards(lang::langs($o->{langs}));
 
     #- good guess, don't ask
     return install_steps::selectKeyboard($o) 
-      if !$::expert && !$clicked && $l->[0][1] >= 90;
+      if !$::expert && !$clicked && $l->[0][1] >= 90 && listlength(lang::langs($o->{langs})) == 1;
 
     my @best = map { $_->[0] } @$l;
     push @best, 'us_intl' if !member('us_intl', @best);

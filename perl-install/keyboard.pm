@@ -336,10 +336,10 @@ sub unpack_keyboards {
     } map { [ split ':' ] } split ' ', $k ];
 }
 sub lang2keyboards {
-    my ($l) = @_;
-    my $li = unpack_keyboards($lang2keyboard{substr($l, 0, 5)}) || [ $keyboards{$l} && $l || "us" ];
-    $li->[0][1] ||= 100 if @$li;
-    $li;
+    my @li = sort { $b->[1] <=> $a->[1] } map { @$_ } map { 
+	unpack_keyboards($lang2keyboard{substr($_, 0, 5)}) || [ [ ($keyboards{$_} ? $_ : "us") => 100 ] ];
+    } @_;
+    \@li;
 }
 sub lang2keyboard {
     my ($l) = @_;
