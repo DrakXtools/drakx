@@ -1,0 +1,445 @@
+#!/usr/bin/perl
+
+# drakroam: wireless network roaming GUI
+# beta version uses wlandetect as backend
+# Austin Acton, 2004
+# <austin@mandrake.org>
+# Licensed under the GPL
+
+# problems
+# - deletes comments in config file
+# - expects an ifcfg file for static IP configurations (not uncommon)
+# - roaming status fails (no idea why)
+#   maybe same reason bash-completion killall can't see wlandetect?
+
+# todo
+# - make known and available lists have more rows by default (why so small?)
+# - refresh status every x seconds
+# - find a good way to drop the access point and resume roaming
+# - make 'key' column wider by default
+
+use Gtk2 '-init';
+use Gtk2::SimpleList;
+use Glib qw(TRUE FALSE);
+use lib qw(/usr/lib/libDrakX);
+use common;
+require_root_capability;
+
+# global settings
+$config = '/etc/wlandetect.conf';
+$route = '/sbin/route';
+$AboutFile = 'ABOUT';
+$HelpFile = 'README';
+$WLanDetect = '/usr/sbin/wlandetect';
+$IWList = '/sbin/iwlist';
+$IWConfig = '/sbin/iwconfig';
+$IFConfig = '/sbin/ifconfig';
+$IFUp = '/sbin/ifup';
+$IFDown = '/sbin/ifdown';
+$DHClient = '/sbin/dhclient';
+
+# initialize variables
+$ScanInterval = 60; # tell deamon to search for new nets every x seconds
+$NumberOfNets = 0; # really lame way to count the number of nets to write to config file
+# there must be a better way to count the number of arrays in $KnownList->{data} !!
+
+# initialize main window
+$MainWindow = Gtk2::Window->new;
+$MainWindow->set_title ('Drakroam');
+$MainWindow->set_border_width(2);
+$MainWindow->signal_connect (delete_event => sub {
+	Gtk2->main_quit;
+});
+
+# add main box; everything goes in here
+$MainBox = Gtk2::VBox->new(0);
+$MainWindow->add ($MainBox);
+
+# add status box and frame
+$StatusBox = Gtk2::VBox->new(0);
+$StatusFrame = Gtk2::Frame->new("Status");
+$StatusFrame->set_border_width(2);
+$StatusFrame->add($StatusBox);
+$MainBox->pack_start ($StatusFrame, 0, 0, 0);
+
+# add status labels in three columns
+$StatusLabels = Gtk2::HBox->new(0,0);
+$StatusBox->pack_start ($StatusLabels, 0, 0, 0);
+$StatusColumnA = Gtk2::VBox->new(0);
+$StatusColumnB = Gtk2::VBox->new(0);
+$StatusColumnC = Gtk2::VBox->new(0);
+$StatusLabels->pack_start ($StatusColumnA, 0, 0, 10);
+$StatusLabels->pack_start ($StatusColumnB, 0, 0, 10);
+$StatusLabels->pack_start ($StatusColumnC, 0, 0, 10);
+$StatusLabelA = Gtk2::Label->new;
+$StatusLabelB = Gtk2::Label->new;
+$StatusLabelC = Gtk2::Label->new;
+$StatusColumnA->pack_start ($StatusLabelA, 0, 0, 0);
+$StatusColumnB->pack_start ($StatusLabelB, 0, 0, 0);
+$StatusColumnC->pack_start ($StatusLabelC, 0, 0, 0);
+
+# add disconnect and refresh buttons
+$StatusControls = Gtk2::HBox->new(1,0);
+$DisconnectButton = Gtk2::Button->new("Disconnect");
+$StatusControls->pack_start($DisconnectButton, 0, 0, 0);
+$DisconnectButton->signal_connect (clicked=>sub { &Disconnect });
+$RefreshButton = Gtk2::Button->new("Refresh");
+$StatusControls->pack_start($RefreshButton, 0, 0, 0);
+$RefreshButton->signal_connect (clicked=>sub { &UpdateStatus });
+$StatusBox->pack_start($StatusControls, 0, 0, 0);
+
+# add roaming box and frame
+$RoamBox = Gtk2::HBox->new(1,0);
+$RoamFrame = Gtk2::Frame->new("Roaming");
+$RoamFrame->set_border_width(2);
+$RoamFrame->add($RoamBox);
+$MainBox->pack_start ($RoamFrame, 0, 0, 0);
+
+# add roam status and controls
+$RoamControls = Gtk2::VBox->new(0);
+$RoamStatus = Gtk2::Label->new("Roaming: off");
+$RoamControls->pack_start($RoamStatus, 0, 0, 0);
+$RoamStartStop = Gtk2::HBox->new(0);
+$StartButton = Gtk2::Button->new("Start");
+$StartButton->signal_connect(clicked=>sub { &StartRoam });
+$RoamStartStop->pack_start($StartButton, 0, 0, 0);
+$StopButton = Gtk2::Button->new("Stop");
+$RoamStartStop->pack_start($StopButton, 0, 0, 0);
+$StopButton->signal_connect(clicked=>sub { &StopRoam });
+$RoamControls->pack_start($RoamStartStop, 0, 0, 0);
+$RoamBox->pack_start($RoamControls, 0, 0, 0);
+
+# add scan controls
+$ScanControl = Gtk2::VBox->new(0);
+$ScanDialogue = Gtk2::HBox->new(0);
+$ScanLabel = Gtk2::Label->new("Scan interval (sec): ");
+$ScanControl->pack_start($ScanLabel, 0, 0, 0);
+$ScanEntry = Gtk2::Entry->new;
+$ScanEntry->set_width_chars(4);
+$ScanDialogue->pack_start($ScanEntry, 0, 0, 0);
+$ScanEntry->set_text("$ScanInterval");
+$ScanSetButton = Gtk2::Button->new("Set");
+$ScanSetButton->signal_connect(clicked=>sub { &SetInterval });
+$ScanDialogue->pack_start($ScanSetButton, 0, 0, 0);
+$ScanControl->pack_start($ScanDialogue, 0, 0, 0);
+$RoamBox->pack_start($ScanControl, 0, 0, 0);
+
+# add known network box
+$KnownBox = Gtk2::VBox->new(0);
+$KnownFrame = Gtk2::Frame->new("Known Networks (Drag up/down or edit)");
+$KnownFrame->set_border_width(2);
+$KnownFrame->add($KnownBox);
+$MainBox->pack_start ($KnownFrame, 0, 0, 0);
+
+# make list and scroll box for known networks
+$KnownList = Gtk2::SimpleList->new(
+	"ESSID" => "text",
+	"Mode" => "text",
+	"Channel" => "int",
+	"Key" => "text",
+	"DHCP" => "bool"
+);
+$KnownList->get_selection->set_mode ('single');
+$KnownList->set_reorderable(1);
+$KnownList->set_column_editable (1, TRUE); # allow to change mode
+$KnownList->set_column_editable (2, TRUE); # allow to change channel
+$KnownList->set_column_editable (3, TRUE); # allow to change key
+#$KnownBox->pack_start($KnownList, 0, 0, 0);
+$KnownScroll = Gtk2::ScrolledWindow->new;
+$KnownScroll->set_policy ('automatic', 'automatic');
+$KnownScroll->add ($KnownList);
+$KnownBox->pack_start ($KnownScroll, 0, 0, 0);
+
+# add controls for known networks
+$KnownControls = Gtk2::HBox->new(1);
+$RemoveNetButton = Gtk2::Button->new("Remove");
+$KnownControls->pack_start($RemoveNetButton, 0, 0, 0);
+$RemoveNetButton->signal_connect(clicked=>sub {
+	my @selected = $KnownList->get_selected_indices;
+	splice @{$KnownList->{data}}, "@selected", 1;
+	$NumberOfNets--;
+});
+$ConnectButton = Gtk2::Button->new("Connect");
+$KnownControls->pack_start($ConnectButton, 0, 0, 0);
+$ConnectButton->signal_connect(clicked=>sub {
+	my @selected = $KnownList->get_selected_indices;
+	&ConnectNow (@selected);
+});
+$SaveConfigButton = Gtk2::Button->new("Save");
+$KnownControls->pack_start($SaveConfigButton, 0, 0, 0);
+$SaveConfigButton->signal_connect(clicked=>sub { &WriteConfig });
+$KnownBox->pack_start($KnownControls, 0, 0, 0);
+
+# add available networks box
+$AvailableBox = Gtk2::VBox->new(0);
+$AvailableFrame = Gtk2::Frame->new("Available Networks");
+$AvailableFrame->set_border_width(2);
+$AvailableFrame->add($AvailableBox);
+$MainBox->pack_start ($AvailableFrame, 0, 0, 0);
+
+# make list and scroll box for available networks
+$AvailableList = Gtk2::SimpleList->new(
+	"ESSID" => "text",
+	"Type" => "text",
+	"Encryption" => "text",
+	"Signal (%)" => "int"
+);
+$AvailableList->get_selection->set_mode ('single');
+#$AvailableBox->pack_start($AvailableList, 0, 0, 0);
+$AvailableScroll = Gtk2::ScrolledWindow->new;
+$AvailableScroll->set_policy ('automatic', 'automatic');
+$AvailableScroll->add ($AvailableList);
+$AvailableBox->pack_start ($AvailableScroll, 0, 0, 0);
+
+# add controls for available networks
+$AvailableControls = Gtk2::HBox->new(1);
+$AddNetButton = Gtk2::Button->new("Add");
+$AvailableControls->pack_start($AddNetButton, 0, 0, 0);
+$AddNetButton->signal_connect(clicked=>sub { 
+	my @selected = $KnownList->get_selected_indices;
+	my $essid = $AvailableList->{data}[@selected][0];
+	my $mode = undef;
+	my $channel = undef;
+	my $key = undef;
+	my $dhcp = 1; # assume dhcp for new networks
+	&AddNet ($essid, $mode, $channel, $key, $dhcp);
+});
+$UpdateAvailableButton = Gtk2::Button->new("Rescan");
+$AvailableControls->pack_start($UpdateAvailableButton, 0, 0, 0);
+$UpdateAvailableButton->signal_connect(clicked=>sub { &UpdateAvailable });
+$AvailableBox->pack_start($AvailableControls, 0, 0, 0);
+
+# add master controls
+$MasterBox = Gtk2::HBox->new(1);
+$HelpButton = Gtk2::Button->new("Help");
+$MasterBox->pack_start($HelpButton, 0, 0, 0);
+$HelpButton->signal_connect (clicked=>sub { &Dialog ("$HelpFile") });
+$AboutButton = Gtk2::Button->new("About");
+$MasterBox->pack_start($AboutButton, 0, 0, 0);
+$AboutButton->signal_connect (clicked=>sub { &Dialog ("$AboutFile") });
+$CloseButton = Gtk2::Button->new("Save and close");
+$MasterBox->pack_start($CloseButton, 0, 0, 0);
+$CloseButton->signal_connect (clicked=>sub {
+	&WriteConfig;
+	Gtk2->main_quit;
+});
+$MainBox->pack_start($MasterBox, 0, 0, 0);
+
+# fill the GUI
+&ReadConfig;
+&UpdateAll;
+
+sub UpdateAll {
+	&UpdateAvailable; #must go first as it defines the device name
+	&UpdateStatus;
+	&UpdateRoaming;
+}
+
+sub UpdateRoaming {
+	open (PS, "ps -A |") or die ("Can't open ps\n");
+	while (<PS>) {
+		if (/wlandetect/) {
+			$RoamStatus->set_text("Roaming: on");
+		}
+		else {
+			$RoamStatus->set_text("Roaming: off");
+		}
+	}
+	close PS;
+}
+
+sub UpdateStatus {
+	my $CurrentNet = "-";
+	my $CurrentIP = "---.---.---.---";
+	$CurrentGW = "---.---.---.---";
+	$CurrentMode = "";
+	$CurrentWEP = "";
+	$CurrentSignal = "-";
+	print ("Updating\n");
+	open (IWSTATUS, "$IWConfig 2>/dev/null |") or die ("Can't run iwconfig\n");
+	while (<IWSTATUS>) {
+		if (/ESSID:\"(\S*)\"/) { $CurrentNet = $1 }
+		if (/Mode:(\S*)\s/) { $CurrentMode = $1 }
+		if (/key:(\S*)\s/) { $CurrentWEP = $1 }
+		if (/Quality:(\S*)\//) { $CurrentSignal = $1 }
+	}
+	close IWSTATUS;
+	open (IFSTATUS, "$IFConfig $device |") or die ("Can't run ifconfig\n");
+	while (<IFSTATUS>) {
+		if (/inet addr:(\S*)\s/) { $CurrentIP = $1 }
+	}
+	close IFSTATUS;
+	open (ROUTE, "$route |") or die ("Can't run route\n");
+	while (<ROUTE>) {
+		if (/default\s*(\S*)\s/) { $CurrentGW = $1 }
+		else { $CurrentGW = "---.---.---.---" }
+	}
+	close ROUTE;
+	$StatusLabelA->set_text ("Net: $CurrentNet\nMode: $CurrentMode");
+	$StatusLabelB->set_text ("IP: $CurrentIP\nEncryption: $CurrentWEP");
+	$StatusLabelC->set_text ("Gateway: $CurrentGW\nSignal: $CurrentSignal");
+}
+
+sub UpdateAvailable {
+	print ("Running iwlist\n");
+	open (LIST, "$IWList scan 2>/dev/null |") or die ("Can't run iwlist");
+	@{$AvailableList->{data}} = ();
+	while (<LIST>) {
+		if(/([^ ]+)([ \t]+)Scan completed :/) { $device = $1 }
+		elsif (/([^ ]+)([ \t]+)No scan results/) { $device = $1 }
+		if (/ESSID:"(\S*)"/) {
+			$essid = $1;
+			print ("Found $essid.\n");
+			my $mode = undef;
+			my $wep = undef;
+			my $signal = undef;
+		}
+		if (/Mode:(\S*)/) { $mode = $1 }
+		if (/Quality:(\S*)\//) { $signal = $1 }
+		if (/key:(\S*)\s/) {
+			$wep = $1;
+			print ("Mode: $mode, WEP: $wep, Signal: $signal\n");
+			push @{$AvailableList->{data}}, [$essid, $mode, $wep, $signal];
+		}
+	}
+	close LIST;
+}
+
+sub AddNet {
+	my $essid = shift @_;
+	my $mode = shift @_;
+	my $channel = shift @_;
+	my $key = shift @_;
+	my $dhcp = shift @_;
+	print "Adding net $essid\n";
+	push (@{$KnownList->{data}}, [$essid, $mode, $channel, $key, $dhcp]);
+	$NumberOfNets++;
+}
+
+sub ReadConfig {
+	open(CONFIG, $config) or die "Configuration file not found.\n";
+	print "Reading config file.\n\n";
+	$line = 0;
+	while (<CONFIG>) {
+		$line++;
+                if (/^#/) {} #ignore comments
+		elsif (/^\n/) {} #ignore blank lines
+		elsif (/([^ \t]+)([ \t]+)(.*)/) {
+                	my $essid = $1;
+			my $command = $3;
+			# setup new network entry
+			my $mode = undef;
+			my $channel = undef;
+			my $key = undef;
+			my $dhcp = undef;
+			if ($command =~ /mode\s(\S*);/) { $mode = $1; }
+			elsif ($command =~ /mode\s(\S*)\s/) { $mode = $1; }
+			if ($command =~ /channel\s(\S*);/) { $channel = $1; }
+			elsif ($command =~ /channel\s(\S*)\s/) { $channel = $1; }
+			if ($command =~ /key\s(\S*);/) { $key = $1; }
+			elsif ($command =~ /key\s(\S*)\s/) { $key = $1; }
+			if ($command =~ /dhclient/) { $dhcp = 1; }
+			else { $dhcp = 0; }
+			&AddNet ($essid, $mode, $channel, $key, $dhcp);
+		}
+		else { die "Line $line of configuration file is not parseable.\n"; }
+	}
+	close CONFIG;
+}
+
+sub WriteConfig {
+	open (CONFIG, "> $config") or die ("Can't open configuration file\n");
+	print CONFIG ("#wlandetect configuration file\n#format: essid<tab><tab>commands\n#use @DEV@ for device name\n");
+	for ($row=0; $row<$NumberOfNets; $row++) { # again, lame
+		print CONFIG "$KnownList->{data}[$row][0]\t\t$IWConfig essid $KnownList->{data}[$row][0]";
+		if ($KnownList->{data}[$row][1]) {
+			print CONFIG "mode $KnownList->{data}[$row][1] ";
+		}
+		if ($KnownList->{data}[$row][2]) {
+			print CONFIG "channel $KnownList->{data}[$row][2] ";
+		}
+		if ($KnownList->{data}[$row][3]) {
+			print CONFIG "key $KnownList->{data}[$row][3] ";
+		}
+		print CONFIG "; ";
+		if ($KnownList->{data}[$row][4]) {
+			print CONFIG "$IFConfig \@DEV\@ up; $DHClient \@DEV\@";
+		}
+		else {
+			print CONFIG "$IFUp \@DEV\@"
+		}
+		print CONFIG "\n";
+	}
+	close CONFIG;
+}
+
+sub StartRoam {
+	system ("killall wlandetect; $WLanDetect -d -t $ScanInterval &");
+	&UpdateRoaming
+}
+
+sub StopRoam {
+	system ("killall wlandetect");
+	&UpdateRoaming;
+}
+
+sub SetInterval {
+	$ScanInterval = $ScanEntry->get_text;
+	system ("killall wlandetect; $WLanDetect -d -t $ScanInterval &");
+}
+
+sub ConnectNow {
+	my @command = "";
+	push @command, "$IWConfig essid $KnownList->{data}[$row][0] ";
+	if ($KnownList->{data}[$row][1]) {
+		push @command, "mode $KnownList->{data}[$row][1] ";
+	}
+	if ($KnownList->{data}[$row][2]) {
+		push @command, "channel $KnownList->{data}[$row][2] ";
+	}
+	if ($KnownList->{data}[$row][3]) {
+		push @command, "key $KnownList->{data}[$row][3] ";
+	}
+	push @command, "; ";
+	if ($KnownList->{data}[$row][4]) {
+		push @command, "$IFConfig $decive up; $DHClient $device";
+	}
+	else {
+		push @command, "$IFUp $device"
+	}
+	$ToBash = join ("", @command);
+	print ("Sending $ToBash\n");
+	system ($ToBash);
+	&UpdateStatus;
+}
+
+sub Disconnect {
+	system ("$IFDown $device");
+	&UpdateStatus;
+}
+
+sub Dialog {
+# read file
+$FilePointer = pop @_;
+open FILE, "<$FilePointer";
+undef $/;
+my $content = <FILE>;
+close FILE;
+$/ = "\n";
+# dump into a dialog
+$AboutWindow = Gtk2::Dialog->new ("Drakroam Info", $MainWindow,
+                                    'destroy-with-parent',
+                                    'gtk-ok' => 'none');
+$AboutLabel = Gtk2::Label->new ($content);
+$DialogScroll = Gtk2::ScrolledWindow->new;
+#$DialogScroll->set_policy ('automatic', 'automatic');
+$DialogScroll->add_with_viewport($AboutLabel);
+$AboutWindow->vbox->add ($DialogScroll);
+$AboutWindow->signal_connect (response => sub { $_[0]->destroy });
+$AboutWindow->show_all;
+}
+
+# start GUI
+print "Stating GUI\n";
+$MainWindow->show_all;
+Gtk2->main;
