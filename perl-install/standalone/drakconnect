@@ -691,17 +691,17 @@ sub del_intf() {
                              post => sub {
                                  !$::testing and eval {
                                      if (member($intf2delete, qw(adsl modem))) {
-                                         rm_rf("/etc/ppp/peers/ppp0");
-                                         rm_rf("/etc/sysconfig/network-scripts/ifcfg-ppp0");
+                                         eval { rm_rf("/etc/ppp/peers/ppp0") };
+                                         eval { rm_rf("/etc/sysconfig/network-scripts/ifcfg-ppp0") };
                                      }
                                      if ($intf2delete eq 'adsl') {
-                                         rm_rf("/etc/sysconfig/network-scripts/ifcfg-sagem");
+                                         eval { rm_rf("/etc/sysconfig/network-scripts/ifcfg-sagem") };
                                      } elsif ($intf2delete eq 'isdn') {
-                                         rm_rf("/etc/sysconfig/network-scripts/ifcfg-ippp0");
+                                         eval { rm_rf("/etc/sysconfig/network-scripts/ifcfg-ippp0") };
                                      } else {
                                          system("ifdown $intf2delete");
-                                         rm_rf("/etc/sysconfig/network-scripts/$intf2delete");
-                                         rm_rf("/etc/sysconfig/network-scripts/ifcfg-$intf2delete");
+                                         eval { rm_rf("/etc/sysconfig/network-scripts/$intf2delete") };
+                                         eval { rm_rf("/etc/sysconfig/network-scripts/ifcfg-$intf2delete") };
                                      }
                                  };
                                  $faillure = $@;
