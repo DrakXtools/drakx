@@ -18,17 +18,10 @@ my %modules_only_for_all_img = (
     qw(acenic),
     qw(aironet4500_card com20020-pci hamachi starfire winbond-840),
 
-    if_(arch() =~ /x86_64/, qw(orinoco_plx)), # don't support laptop for now
-    if_(arch() =~ /x86_64/, qw(hp100 epic100)), # old (nico)
     if_(arch() =~ /alpha|ppc/, qw(sb1000)),
     qw(iph5526),
 
     qw(ac3200 at1700 atp ni5010 ni52 ni65),  #- unused from Jeff
-  ],
-
-  'bus/pcmcia' => [
-    if_(arch() =~ /x86_64/, qw(pcmcia_core ds tcic yenta_socket)), # don't support laptop for now
-    if_(arch() =~ /x86_64/, qw(i82092 i82365)), # doco says "older laptops"
   ],
 
   'disk/scsi' => [
@@ -51,7 +44,6 @@ my %modules_only_for_all_img = (
   ],
 
   'disk/hardware_raid' => [
-    if_(arch() =~ /x86_64/, qw(ataraid)), #- old
     qw(i2o_block qla2200 qla2300 cpqfc DAC960 gdth pdc-ultra mptscsih),
   ],
 );
