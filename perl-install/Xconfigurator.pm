@@ -1114,7 +1114,7 @@ If you don't want to use this feature, click on the cancel button."),
 				   [ _("Choose the default user:") => { val => \$o->{autologin}, list => [ '', @users ] },
  				     _("Choose the window manager to run:") => { val => \$o->{desktop}, list => \@wm }, ]) or delete $o->{autologin};
     }
-    $o->{autologin} and $::isStandalone ? system("urpmi --auto autologin") : $in->pkg_install("autologin");
+    $o->{autologin} and $::isStandalone ? do { $in->suspend; system("urpmi --auto --best-output autologin"); $in->resume; } : $in->pkg_install("autologin");
     any::setAutologin($prefix, $o->{autologin}, $o->{desktop});
     run_program::rooted($prefix, "chkconfig", "--del", "gpm") if $o->{mouse}{device} =~ /ttyS/ && !$::isStandalone;
 }
