@@ -37,7 +37,7 @@ use fs;
 );
 my @suggestions_mntpoints = (
     "/root", "/var/ftp", "/var/www", "/boot",
-    arch() =~ /sparc/ ? "/mnt/sunos" : "/mnt/windows",
+    arch() =~ /sparc/ ? "/mnt/sunos" : arch() =~ /ppc/ ? "/mnt/macos" : "/mnt/windows",
 );
 
 my @partitions_signatures = (

@@ -212,6 +212,8 @@ sub mount($$$;$) {
 	    $mount_opt = 'check=relaxed';
 	    eval { modules::load('vfat') }; #- try using vfat
 	    eval { modules::load('msdos') } if $@; #- otherwise msdos...
+	} elsif ($fs eq 'hfs') {
+	    eval { modules::load('hfs') };
 	} elsif ($fs eq 'ufs') {
 	    eval { modules::load('ufs') };
 	} elsif ($fs eq 'xfs') {

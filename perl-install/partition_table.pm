@@ -228,7 +228,7 @@ sub isWin($) { $ {{ 0xb=>1, 0xc=>1, 0xe=>1, 0x1b=>1, 0x1c=>1, 0x1e=>1 }}{$_[0]{t
 sub isFat($) { isDos($_[0]) || isWin($_[0]) }
 sub isSunOS($) { arch() =~ /sparc/ && $ {{ 0x1=>1, 0x2=>1, 0x4=>1, 0x6=>1, 0x7=>1, 0x8=>1 }}{$_[0]{type}} }
 sub isSolaris($) { 0; } #- hack to search for getting the difference ? TODO
-sub isOtherAvailableFS($) { isFat($_[0]) || isSunOS($_[0]) } #- other OS that linux can access its filesystem
+sub isOtherAvailableFS($) { isFat($_[0]) || isSunOS($_[0]) || isHFS($_[0]) } #- other OS that linux can access its filesystem
 sub isNfs($) { $_[0]{type} eq 'nfs' } #- small hack
 sub isNT($) { arch() !~ /^sparc/ && $_[0]{type} == 0x7 }
 sub isSupermount($) { $_[0]{type} eq 'supermount' }
