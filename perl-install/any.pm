@@ -1001,19 +1001,19 @@ sub choose_security_level {
       5 => _("Paranoid"),
     );
     my %help = (
-      0 => _("This level is to be used with care. It makes your system more easy to use,
+      0 => formatAlaTeX(_("This level is to be used with care. It makes your system more easy to use,
 but very sensitive: it must not be used for a machine connected to others
-or to the Internet. There is no password access."),
-      1 => _("Password are now enabled, but use as a networked computer is still not recommended."),
-      2 => _("Few improvements for this security level, the main one is that there are
-more security warnings and checks."),
-      3 => _("This is the standard security recommended for a computer that will be used
-to connect to the Internet as a client. There are now security checks. "),
-      4 => _("With this security level, the use of this system as a server becomes possible.
+or to the Internet. There is no password access.")),
+      1 => formatAlaTeX(_("Password are now enabled, but use as a networked computer is still not recommended.")),
+      2 => formatAlaTeX(_("Few improvements for this security level, the main one is that there are
+more security warnings and checks.")),
+      3 => formatAlaTeX(_("This is the standard security recommended for a computer that will be used
+to connect to the Internet as a client. There are now security checks. ")),
+      4 => formatAlaTeX(_("With this security level, the use of this system as a server becomes possible.
 The security is now high enough to use the system as a server which accept
-connections from many clients. "),
-      5 => _("We take level 4 features, but now the system is entirely closed.
-Security features are at their maximum."),
+connections from many clients. ")),
+      5 => formatAlaTeX(_("We take level 4 features, but now the system is entirely closed.
+Security features are at their maximum.")),
     );
     delete @l{0,1};
     delete $l{5} if !$::expert;
