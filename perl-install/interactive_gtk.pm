@@ -22,7 +22,7 @@ use my_gtk qw(:helpers :wrappers);
 sub ask_from_listW {
     my ($o, $title, $messages, $l, $def) = @_;
 
-    my $w = my_gtk->new($title, %$o);
+    my $w = my_gtk->new(first(deref($title)), %$o);
     $w->{retval} = $def || $l->[0]; #- nearly especially for the X test case (see timeout in Xconfigurator.pm)
     if (@$l < 5) { #- really ? : && sum(map { length $_ } @$l) < 90) {
 	my $defW;

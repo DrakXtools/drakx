@@ -716,7 +716,7 @@ sub setupBootloader {
 	$::expert and $o->ask_yesorno('', _("Do you want to use LILO?"), 1) || return;
     
 	my @l = (
-_("Boot device") => { val => \$b->{boot}, list => [ map { "/dev/$_->{device}" } @{$o->{hds}}, @{$o->{fstab}} ], not_edit => !$::expert },
+_("Boot device") => { val => \$b->{boot}, list => [ map { "/dev/$_->{device}" } @{$o->{hds}}, @{$o->{fstab}}, detect_devices::floppies ], not_edit => !$::expert },
 _("Linear (needed for some SCSI drives)") => { val => \$b->{linear}, type => "bool", text => _("linear") },
 _("Compact") => { val => \$b->{compact}, type => "bool", text => _("compact") },
 _("Delay before booting default image") => \$b->{timeout},
@@ -747,10 +747,21 @@ You can add some more or change the existent ones."),
 	);
 	$c eq "Done" and last;
 
-	my $e = { type => 'other' };
-	my $name = '';
+	my ($e, $name);
 
-	if ($c ne "Add") { 
+	if ($c eq "Add") {
+	    my @labels = map { $_->{label} } values %{$b->{entries}};
+	    my $prefix;
+	    if ($o->ask_from_list_('', _("Which type of entry do you want to add"), [ __("Linux"), __("Other OS (windows...)") ]) eq "Linux") {
+		$e = { type => 'image' };
+		$prefix = "linux";
+	    } else {
+		$e = { type => 'other' };
+		$prefix = "windows";
+	    }
+	    $e->{label} = $prefix;
+	    for (my $nb = 0; member($e->{label}, @labels); $nb++) { $e->{label} = "$prefix-$nb" }
+	} else {
 	    ($name) = $c =~ /\((.*?)\)/;
 	    $e = $b->{entries}{$name};
 	}
@@ -782,17 +793,20 @@ _("Label") => \$e->{label},
 _("Default") => { val => \$default, type => 'bool' },
 	);
 
-	if ($o->ask_from_entries_refH('', '', \@l,
-				     complete => sub {
-					 $name ne $old_name && $b->{entries}{$name} and $o->ask_warn("A entry %s already exists", $name), return 1;
-				     }
-				    )) {
+	if ($o->ask_from_entries_refH($c eq "Add" ? '' : ['', _("Ok"), _("Remove entry")], 
+	    '', \@l,
+	    complete => sub {
+		$e->{label} or $o->ask_warn('', _("Empty label not allowed")), return 1;
+		member($e->{label}, map { $_->{label} } grep { $_ != $e } values %{$b->{entries}}) and $o->ask_warn('', _("This label is already in use")), return 1;
+			    $name ne $old_name && $b->{entries}{$name} and $o->ask_warn('', _("A entry %s already exists", $name)), return 1;
+			   }
+		)) {
 	    $b->{default} = $old_default ^ $default ? $default && $e->{label} : $b->{default};
 	    
 	    delete $b->{entries}{$old_name};
 	    $b->{entries}{$name} = $e;
 	} else {
-	    %$e = %old_e;
+	    delete $b->{entries}{$old_name};	    
 	}
     }
     eval { $o->SUPER::setupBootloader };
