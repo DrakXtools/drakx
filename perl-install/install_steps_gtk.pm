@@ -32,75 +32,92 @@ sub new($$) {
     $SIG{__DIE__} = sub { $_[0] !~ /ugtk2\.pm/ and goto $old };
 
     $ENV{DISPLAY} ||= $o->{display} || ":0";
-    unless ($::testing) {
-	if ($ENV{DISPLAY} eq ":0" && !$::live) {
-	    my $f = "/tmp/Xconf";
+    my $wanted_DISPLAY = $::testing && -x '/usr/X11R6/bin/Xnest' ? ':1' : $ENV{DISPLAY};
+
+    if ($ENV{DISPLAY} =~ /^:\d/ || $ENV{DISPLAY} ne $wanted_DISPLAY) { #- is the display local or distant?
+	my $f = "/tmp/Xconf";
+	if (!$::testing) {
 	    install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{mouse}{wacom}[0]);
 	    devices::make("/dev/kbd");
+	}
+	my $launchX = sub {
+	    my ($server) = @_;
+	    my $ok = 1;
+	    my $xpmac_opts = cat_('/proc/cmdline');
+	    mkdir '/var/log' if !-d '/var/log';
+	    local $SIG{CHLD} = sub { $ok = 0 if waitpid(-1, c::WNOHANG()) > 0 };
 
-	    my $launchX = sub {
-		my $ok = 1;
-		my $xpmac_opts = cat_("/proc/cmdline");
-		unless (-d "/var/log") { mkdir("/var/log") }
-		local $SIG{CHLD} = sub { $ok = 0 if waitpid(-1, c::WNOHANG()) > 0 };
-		unless (fork()) {
-		    exec $_[0], if_(arch() !~ /^sparc/ && arch() ne "ppc", "-kb"), 'tty7', "-dpms", "-s", "240",
-		      ($_[0] =~ /Xpmac/ ? $xpmac_opts !~ /ofonly/ ? ("-mode", "17", "-depth", "32") : "-mach64" : ()),
-		      ($_[0] =~ /Xsun/ || $_[0] =~ /Xpmac/ ? ("-fp", "/usr/X11R6/lib/X11/fonts:unscaled") :
-		       ("-allowMouseOpenFail", "-xf86config", $f)) or exit 1;
-		}
-		foreach (1..60) {
-		    sleep 1;
-		    log::l("Server died"), return 0 if !$ok;
-		    if (c::Xtest($ENV{DISPLAY})) {
-			fork() || exec("aewm-drakx") || exec("true");
-			return 1;
-		    }
-		}
-		log::l("Timeout!!");
-		0;
-	    };
-	    my @servers = qw(FBDev VGA16); #-)
-	    if (arch() eq "alpha") {
-		require Xconfig::card;
-		my ($card) = Xconfig::card::probe();
-		Xconfig::card::add_to_card__using_Cards($card, $card->{type}) if $card && $card->{type};
-		@servers = $card->{server} || "TGA";
-		#-@servers = qw(SVGA 3DLabs TGA) 
-	    } elsif (arch() =~ /^sparc/) {
-		local $_ = cat_("/proc/fb");
-		if (/Mach64/) { @servers = qw(Mach64) }
-		elsif (/Permedia2/) { @servers = qw(3DLabs) }
-		else { @servers = qw(Xsun24) }
-	    } elsif (arch() =~ /ia64/) {
-		@servers = 'XFree86';
-	    } elsif (arch() eq "ppc") {
-	    	@servers = qw(Xpmac);
-            }
+	    my @options = (
+	      if_(arch() !~ /^sparc/ && arch() ne 'ppc' && $server ne 'Xnest', 
+		  '-kb', '-allowMouseOpenFail', '-xf86config', $f),
+	      ($wanted_DISPLAY, 'tty7', '-dpms', '-s', '240'),
+	    );
 
-	    foreach (@servers) {
-		log::l("Trying with server $_");
-		my $dir = "/usr/X11R6/bin";
-		my $prog = /Xsun|Xpmac|XFree86/ ? $_ : "XF86_$_";
-		unless (-x "$dir/$prog") {
-		    unlink $_ foreach glob_("$dir/X*");
-		    install_any::getAndSaveFile("Mandrake/mdkinst$dir/$prog", "$dir/$prog") or die "failed to get server $prog: $!";
-		    chmod 0755, "$dir/$prog";
-		}
-		if (/FB/) {
-		    !$o->{vga16} && $o->{allowFB} or next;
+	    push @options, $xpmac_opts !~ /ofonly/ ? ('-mode', '17', '-depth', '32') : '-mach64' if $server =~ /Xpmac/;
+	    push @options, '-fp', '/usr/X11R6/lib/X11/fonts:unscaled' if $server =~ /Xsun|Xpmac/;
+	    push @options, '-geometry', '800x600' if $server eq 'Xnest';
 
-		    $o->{allowFB} = &$launchX($prog) #- keep in mind FB is used.
-		      and goto OK;
-		} else {
-		    $o->{vga16} = 1 if /VGA16/;
-		    &$launchX($prog) and goto OK;
+	    unless (fork()) {
+		exec $server, @options or exit 1;
+	    }
+	    foreach (1..60) {
+		sleep 1;
+		log::l("Server died"), return 0 if !$ok;
+		if (c::Xtest($wanted_DISPLAY)) {
+		    fork() || exec("aewm-drakx") || exec("true");
+		    return 1;
 		}
 	    }
-	    return undef;
+	    log::l("Timeout!!");
+	    0;
+	};
+	my @servers = qw(FBDev VGA16); #-)
+	if ($::testing) {
+	    @servers = 'Xnest';
+	} elsif (arch() eq "alpha") {
+	    require Xconfig::card;
+	    my ($card) = Xconfig::card::probe();
+	    Xconfig::card::add_to_card__using_Cards($card, $card->{type}) if $card && $card->{type};
+	    @servers = $card->{server} || "TGA";
+	    #-@servers = qw(SVGA 3DLabs TGA) 
+	} elsif (arch() =~ /^sparc/) {
+	    local $_ = cat_("/proc/fb");
+	    if (/Mach64/) {
+		@servers = qw(Mach64);
+	    } elsif (/Permedia2/) {
+		@servers = qw(3DLabs);
+	    } else {
+		@servers = qw(Xsun24);
+	    }
+	} elsif (arch() =~ /ia64/) {
+	    @servers = 'XFree86';
+	} elsif (arch() eq "ppc") {
+	    @servers = qw(Xpmac);
 	}
+
+	foreach (@servers) {
+	    log::l("Trying with server $_");
+	    my $dir = "/usr/X11R6/bin";
+	    my $prog = /Xsun|Xpmac|XFree86|Xnest/ ? $_ : "XF86_$_";
+	    unless (-x "$dir/$prog") {
+		unlink $_ foreach glob_("$dir/X*");
+		install_any::getAndSaveFile("Mandrake/mdkinst$dir/$prog", "$dir/$prog") or die "failed to get server $prog: $!";
+		chmod 0755, "$dir/$prog";
+	    }
+	    if (/FB/) {
+		!$o->{vga16} && $o->{allowFB} or next;
+
+		$o->{allowFB} = &$launchX($prog) #- keep in mind FB is used.
+		  and goto OK;
+	    } else {
+		$o->{vga16} = 1 if /VGA16/;
+		&$launchX($prog) and goto OK;
+	    }
+	}
+	return undef;
     }
   OK:
+    $ENV{DISPLAY} = $wanted_DISPLAY;
     install_gtk::init_gtk();
     install_gtk::init_sizes();
     install_gtk::install_theme($o, install_gtk::default_theme($o));
