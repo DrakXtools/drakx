@@ -234,7 +234,7 @@ sub summary {
 }
 #------------------------------------------------------------------------------
 sub configureNetwork {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($_clicked, $_ent_number, $auto) = @_;
     #- get current configuration of network device.
     require network;
     eval { network::read_all_conf($o->{prefix}, $o->{netc} ||= {}, $o->{intf} ||= {}) };
