@@ -234,6 +234,7 @@ sub ask_from_entries_refW {
     my $set_all = sub {
 	$ignore = 1;
 	$_->{set}->(${$_->{e}{val}}) foreach @widgets_always, @widgets_advanced;
+	$_->{w}->set_sensitive(!$_->{e}{disabled}()) foreach @widgets_always, @widgets_advanced;
 	$ignore = 0;
     };
     my $get_all = sub {
@@ -261,7 +262,7 @@ sub ask_from_entries_refW {
 	};
 
 	my ($w, $real_w, $set, $get);
-	if ($e->{type} eq "iconlist") {
+	if ($e->{type} eq 'iconlist') {
 	    $w = new Gtk::Button;
 	    $set = sub {
 		gtkdestroy($e->{icon});
@@ -277,12 +278,12 @@ sub ask_from_entries_refW {
 		$changed->();
 	    });
 	    $real_w = gtkpack_(new Gtk::HBox(0,10), 1, new Gtk::HBox(0,0), 0, $w, 1, new Gtk::HBox(0,0), );
-	} elsif ($e->{type} eq "bool") {
+	} elsif ($e->{type} eq 'bool') {
 	    $w = Gtk::CheckButton->new($e->{text});
 	    $w->signal_connect(clicked => $changed);
 	    $set = sub { $w->set_active($_[0]) };
 	    $get = sub { $w->get_active };
-	} elsif ($e->{type} eq "range") {
+	} elsif ($e->{type} eq 'range') {
 	    my $adj = create_adjustment(${$e->{val}}, $e->{min}, $e->{max});
 	    $adj->signal_connect(value_changed => $changed);
 	    $w = new Gtk::HScale($adj);
@@ -299,7 +300,7 @@ sub ask_from_entries_refW {
 	     } else {
 		($w, $set) = create_clist($e, $may_go_to_next);
 	     }
-	    $real_w = may_createScrolledWindow(@{$e->{list}} > 15, $w, 200, min(350, $::windowheight - 60)); 
+	    $real_w = may_createScrolledWindow(@{$e->{list}} > 15, $w, 200, min(250, $::windowheight - 60)); 
 	} else {
 	    if ($e->{type} eq "combo") {
 		$w = new Gtk::Combo;
@@ -339,12 +340,18 @@ sub ask_from_entries_refW {
     };
     my $advanced_button = [ _("Advanced"), sub { $set_advanced->(!$advanced) } ];
 
-    gtkadd($mainw->{window},
-	   gtkpack(create_box_with_title($mainw, @{$common->{messages}}),
-		   may_createScrolledWindow(@widgets_always > 8, create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @widgets_always), 200, min(350, $::windowheight - 60)),
-		   new Gtk::HSeparator,
-		   $advanced_pack = create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @widgets_advanced),
-		   $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @$l2 ? $advanced_button : ())));
+    my $pack = gtkpack(create_box_with_title($mainw, @{$common->{messages}}),
+		   may_createScrolledWindow(@widgets_always > 8, create_packtable({ no_expand => 1 }, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @widgets_always), 200, min(350, $::windowheight - 60)),
+		   $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @$l2 ? $advanced_button : ()));
+    $advanced_pack = 
+      gtkpack_(new Gtk::VBox(0,0),
+	       0, '',
+	       (map {; 0, new Gtk::Label($_) } map { warp_text($_) } @{$common->{advanced_messages}}),
+	       0, new Gtk::HSeparator,
+	       1, create_packtable({ no_expand => 1 }, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @widgets_advanced));
+
+    $pack->pack_start($advanced_pack, 1, 0, 1);
+    gtkadd($mainw->{window}, $pack);
     $mainw->sync; #- for $set_all below (mainly for the set of clist)
     $set_all->();
     $set_advanced->(0);
