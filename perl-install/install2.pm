@@ -53,8 +53,8 @@ select \"No\".
 
 If you don't know if your computer has SCSI interfaces, consult the
 original documentation delivered with the computer, or if you use
-Microsoft Windows 95/98, inspect the information available via \"Control
-panel\", \"System\", \"Peripheral manager\"."),
+Microsoft Windows 95/98, inspect the information available via the \"Control
+panel\", \"System's icon, \"Device Manager\" tab."),
 
 partitionDisks => 
  __("At this point, hard drive partitions must be defined. (Unless you
@@ -125,8 +125,8 @@ complicated that it will be difficult to remember.
 When you login as Administrator, at \"login\" type \"root\" and at
 \"password\", type the password that was created here."),
 
-addUser => 
- __("You can now authorize one or more people to be use your Linux
+addUser =>
+ __("You can now authorize one or more people to use your Linux
 system. Each user account will have their own customizable environment.
 
 It is very important that you create a regular user account, even if 
@@ -151,9 +151,7 @@ configureX =>
  __("It is now time to configure the video card and monitor
 configuration for the X windows Graphic User Interface (GUI). First
 select your monitor. Next, you may test the configuration and change
-your
-selections if necessary."),
-
+your selections if necessary."),
 exitInstall =>
  __("Help"),
 );
@@ -171,9 +169,9 @@ my @installSteps = (
   doInstallStep => [ __("Install system"), 1, -1, ["formatPartitions", "selectPath"] ],
   configureMouse => [ __("Configure mouse"), 1, 1, "formatPartitions" ],
   configureNetwork => [ __("Configure networking"), 1, 1, "formatPartitions" ],
-#  configureTimezone => [ __("Configure timezone"), 0, 0 ],
-#  configureServices => [ __("Configure services"), 0, 0 ],
-#  configurePrinter => [ __("Configure printer"), 0, 0 ],
+  configureTimezone => [ __("Configure timezone"), 0, 0 ],
+  configureServices => [ __("Configure services"), 0, 0 ],
+  configurePrinter => [ __("Configure printer"), 0, 0 ],
   setRootPassword => [ __("Set root password"), 1, 1, "formatPartitions" ],
   addUser => [ __("Add a user"), 1, 1, "formatPartitions" ],
   createBootdisk => [ __("Create bootdisk"), 1, 0, "doInstallStep" ],
