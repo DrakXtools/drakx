@@ -2219,6 +2219,16 @@ sub configure_hpoj {
     } else {
 	return "";
     }
+    if ($#autodetected < 0) {
+	# Make a pseudo structure for the auto-detected data if there is
+	# no auto-detected data (for example when configuring manually)
+	$autodetected[0] = {
+	    'port' => $device,
+	    'val' => {
+		'MODEL' => N("Unknown model")
+	    }
+	};
+    }
     my $devdata;
     foreach (@autodetected) {
 	$device eq $_->{port} or next;
