@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-no\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
+"POT-Creation-Date: 2003-05-21 01:26+0200\n"
 "PO-Revision-Date: 2003-03-13 06:52+0100\n"
 "Last-Translator: Per Øyvind Karlsen <peroyvind@sintrax.net>\n"
 "Language-Team: Norwegian Bokmål <cooker-i18n@linux-mandrake.com>\n"
@@ -352,6 +352,11 @@ msgstr ""
 #, c-format
 msgid "Malaysia"
 msgstr "Malaysia"
+
+#: ../../standalone/drakedm:1
+#, fuzzy, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr "Nettverket trengs å startes på nytt. Vil du starte det på nytt ?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1826,11 +1831,6 @@ msgstr ""
 "ditt?\n"
 "%s"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid ", USB printer \\#%s"
-msgstr ", USB skriver \\/%s"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1871,6 +1871,11 @@ msgstr "Styrespake"
 #, c-format
 msgid "El Salvador"
 msgstr "El Salvador"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "DVD"
+msgstr "DVD-ROM"
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1964,11 +1969,6 @@ msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
 "Ta ny sikkerhetskopi før gjenoppretting (bare for inkrementelle "
 "sikkerhetskopier.)"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "Skriver på parallelport \\#%s"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -2132,11 +2132,6 @@ msgstr ""
 "Velg den harddisken du ønsker å slette for å installere din nye Mandrake\n"
 "Linux partisjon. Vær forsiktig, alle data på denne vil gå tapt og vil ikke\n"
 "kunne gjenopprettes!"
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid " on parallel port \\#%s"
-msgstr " på parallelport \\/#%s"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -4897,13 +4892,6 @@ msgstr "Jeg kan sette opp maskinen din til å automatisk logge på en bruker."
 msgid "Floppy format"
 msgstr "Diskettformat"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Generic Printers"
@@ -5455,6 +5443,11 @@ msgstr "Liberia"
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Konfigurerer script, installerer programvare, starter tjenere..."
 
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Printer on parallel port #%s"
+msgstr "Skriver på parallelport #%s"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5489,6 +5482,11 @@ msgstr ""
 "Argumenter: (arg)\n"
 "\n"
 "Aktiver/Deaktiver libsafe hvis libsafe er funnet på systemet."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "USB printer #%s"
+msgstr "USB skriver #%s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -5819,6 +5817,16 @@ msgstr ""
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr "Undertrykk midlertidige filer"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
+msgstr ""
+"Gratulerer, internett og nettverkskonfigurasjonen er fullført.\n"
+"\n"
+"Konfigurasjonen vil nå bli aktivert.\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7614,6 +7622,14 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Skriver standardoppsett"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
@@ -8322,11 +8338,6 @@ msgstr ""
 "  Din rapport ble ikke sent.\n"
 "  Venligst konfigurer sendmail"
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ", multifunksjonsenhet på parallelport \\#%s"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -8515,7 +8526,7 @@ msgstr "Info: "
 msgid "Button `%s': %s"
 msgstr "Valg: `%s': %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
 #: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -9954,6 +9965,11 @@ msgstr "Vennligst velg porten hvor skriveren din er koblet til."
 #, c-format
 msgid "Change Cd-Rom"
 msgstr "Bytt CD"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "Hvilken konfigurasjon av XFree vil du ha?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11460,6 +11476,11 @@ msgstr "SILO"
 msgid "Change type"
 msgstr "Endre type"
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid ", USB printer #%s"
+msgstr ", USB skriver \\/%s"
+
 #: ../../any.pm:1
 #, c-format
 msgid "SILO Installation"
@@ -11725,15 +11746,15 @@ msgstr "Ved oppstart"
 msgid "Bus identification"
 msgstr "Buss identifikasjon"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr "Vennligst ta sikkerhetskopi av din data først"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Vatican"
 msgstr "Vatikanstatene"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr "Vennligst ta sikkerhetskopi av din data først"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -14147,6 +14168,11 @@ msgstr ""
 "frekvens),\n"
 "eller tilstrekkelig antall nuller (0). "
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on parallel port #%s"
+msgstr ", multifunksjonsenhet på parallelport #%s"
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "serial"
@@ -14875,17 +14901,6 @@ msgid ""
 msgstr ""
 "For å dele din kunnskap og hjelpe til med å lage Linuxprogramvare, bli med i "
 "våre diskusjonsfora på våre \"Community\" vevsider. "
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-"Gratulerer, internett og nettverkskonfigurasjonen er fullført.\n"
-"\n"
-"Konfigurasjonen vil nå bli aktivert.\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16578,6 +16593,11 @@ msgstr "Sjekke fo rdårlige clustere?"
 msgid "Other MultiMedia devices"
 msgstr "Andre multimediaenheter"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "Skriver"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "No remote machines"
@@ -17363,6 +17383,11 @@ msgstr ""
 msgid "(already added %s)"
 msgstr "(allerede lagt til %s)"
 
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "Installasjon oppstartslaster"
+
 #: ../../printer/main.pm:1
 #, c-format
 msgid ", using command %s"
@@ -17793,6 +17818,11 @@ msgstr ""
 msgid "Restore all backups"
 msgstr "Gjenopprett alle sikkerhetskopier"
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on parallel port #%s"
+msgstr " på parallelport \\/#%s"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
@@ -18136,11 +18166,6 @@ msgstr ""
 #, c-format
 msgid "Connected"
 msgstr "Tilkoblet"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "USB printer \\#%s"
-msgstr "USB skriver \\#%s"
 
 #: ../../keyboard.pm:1
 #, c-format
