@@ -135,7 +135,7 @@ my $Report_Button = new Gtk::Button(_("Report"));
 $Report_Button->signal_connect(clicked => sub { my $options = "mdkbugreport=1";
 						$options.="&incident=1" if $incident;
 						$p = $package->get_text(); $k=$kernel_rel->get_text(); ($r =parse_release()) =~ s/\s//;
-						$options.="&package=$p" if $p =~ /rpm/;
+						$options.="&package=$p" if $p =~ /mdk/;
 						$options.="&kernel=$k";
 						$options.="&version=$r";
 						print "$bugzilla_url"."?"."$options" ."\n";
