@@ -8,6 +8,7 @@ use commands;
 use cpio;
 use log;
 
+my @fields =
 my %languages = (
   "en" => [ "English",   undef,		undef,		"en_US" ],
   "fr" => [ "French",    "lat0-sun16",	"iso15",	"fr_FR" ],
@@ -60,14 +61,15 @@ sub write {
     &$f("LANG", $lang);
     &$f("LINGUAS", $lang);
     if (my $l = $languages{$lang}) {
-	&$f("LC_ALL", $l->{lc_all});
-	&$f("SYSFONT", $l->{font});
-	&$f("SYSFONTACM", $l->{map});
+	&$f("LC_ALL", $l->[3]);
+	$l->[1] or return;
+	&$f("SYSFONT", $l->[1]);
+	&$f("SYSFONTACM", $l->[2]);
 
 	my $p = "$prefix/usr/lib/kbd";
 	commands::cp("-f", 
-		     "$p/consolefonts/$l->{font}.psf.gz", 
-		     glob_("$p/consoletrans/$l->{map}*"), 
+		     "$p/consolefonts/$l->[1].psf.gz", 
+		     glob_("$p/consoletrans/$l->[2]*"), 
 		     "$prefix/etc/sysconfig/console");
     }
 }

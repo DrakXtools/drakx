@@ -15,7 +15,7 @@ use log;
 
 1;
 
-sub fileInBase { member($_[0], qw(hdlist comps)); }
+sub fileInBase { member($_[0], qw(hdlist comps depslist)); }
 
 sub imageGetFile { 
     fileInBase($_[0]) and return "/tmp/rhimage/Mandrake/base/$_[0]";

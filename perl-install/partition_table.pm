@@ -286,6 +286,9 @@ sub add($$) {
 	raw_add($hd->{primary}->{raw}, $part);
 	@{$hd->{primary}->{normal}} = $part;
     } else {
+	$hd->{primary}->{extended} && !verifyInside($part, $hd->{primary}->{extended})
+	  and die "sorry, can't add outside the main extended partition";
+
 	foreach (@{$hd->{extended}}) {
 	    $_->{normal} and next;
 	    raw_add($_->{raw}, $part);

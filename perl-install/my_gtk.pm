@@ -127,8 +127,8 @@ sub create_okcancel($;$$) {
     my ($w, $ok, $cancel) = @_;
 
     gtkadd(create_hbox(),
-	  gtksignal_connect($w->{ok} = new Gtk::Button($ok || "Ok"), "clicked" => sub { $w->{retval} = 1; Gtk->main_quit }),
-	  gtksignal_connect(new Gtk::Button($cancel || "Cancel"), "clicked" => sub { $w->{retval} = 0; Gtk->main_quit }),
+	  gtksignal_connect($w->{ok} = new Gtk::Button($ok || _("Ok")), "clicked" => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk->main_quit }),
+	  gtksignal_connect(new Gtk::Button($cancel || _("Cancel")), "clicked" => $w->{cancel_clicked} || sub { $w->{retval} = 0; Gtk->main_quit }),
 	 );
 }
 
@@ -221,8 +221,8 @@ sub _create_window($$) {
 ################################################################################
 
 sub ask_warn       { my $w = my_gtk->new(shift @_); $w->_ask_warn(@_); main($w); }
-sub ask_yesorno    { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, "Yes", "No"); main($w); }
-sub ask_okcancel   { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, "Is it ok?", "Ok", "Cancel"); main($w); }
+sub ask_yesorno    { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Yes"), _("No")); main($w); }
+sub ask_okcancel   { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Is it ok?"), _("Ok"), _("Cancel")); main($w); }
 sub ask_from_entry { my $w = my_gtk->new(shift @_); $w->_ask_from_entry(@_); main($w); }
 sub ask_from_list  { my $w = my_gtk->new(shift @_); $w->_ask_from_list(pop @_, @_); main($w); }
 
@@ -230,15 +230,13 @@ sub _ask_from_entry($$@) {
     my ($o, @msgs) = @_;
     my $entry = new Gtk::Entry;
     my $f = sub { $o->{retval} = $entry->get_text; Gtk->main_quit };
+    $o->{ok_clicked} = $f;
+    $o->{cancel_clicked} = sub { $o->{retval} = undef; Gtk->main_quit };
 
     gtkadd($o->{window},
 	  gtkpack($o->create_box_with_title(@msgs),
 		 gtksignal_connect($entry, 'activate' => $f),
-		 ($o->{hide_buttons} ? () : gtkpack(new Gtk::HBox(0,0),
-			gtksignal_connect(new Gtk::Button('Ok'), 'clicked' => $f),
-			gtksignal_connect(new Gtk::Button('Cancel'), 'clicked' => sub { $o->{retval} = undef; Gtk->main_quit }),
-			)),
-		 ),
+		 ($o->{hide_buttons} ? () : create_okcancel($o))),
 	  );
     $entry->grab_focus();
 }
@@ -295,7 +293,7 @@ sub _ask_warn($@) {
     my ($o, @msgs) = @_;
     gtkadd($o->{window},
 	  gtkpack($o->create_box_with_title(@msgs),
-		 gtksignal_connect(my $w = new Gtk::Button("Ok"), "clicked" => sub { Gtk->main_quit }),
+		 gtksignal_connect(my $w = new Gtk::Button(_("Ok")), "clicked" => sub { Gtk->main_quit }),
 		 ),
 	  );
     $w->grab_focus();

@@ -6,5 +6,5 @@ WriteMakefile(
     'VERSION_FROM' => 'c.pm', # finds $VERSION
     'LIBS'	=> ['-lrpm -ldb1 -lz -L/usr/X11R6/lib -lX11 -lgdk'],   # e.g., '-lm' 
     'DEFINE'	=> '',     # e.g., '-DHAVE_SOMETHING' 
-    'INC'	=> '-Wall `gtk-config --cflags`',     # e.g., '-I/usr/include/other' 
+    'INC'	=> '-I/usr/include/rpm -Wall `gtk-config --cflags`',     # e.g., '-I/usr/include/other' 
 );

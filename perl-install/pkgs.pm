@@ -19,59 +19,108 @@ my @skipThesesPackages = qw(XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach
 
 sub skipThisPackage { member($_[0], @skipThesesPackages) }
 
-sub addInfosFromHeader($$) {
-    my ($packages, $header) = @_;
+
+sub Package {
+    my ($packages, $name) = @_;
+    $packages->{$name} or die "unknown package $name";
+}
+sub select($$) {
+    my ($packages, $name) = @_;
+    my $p = Package($packages, $name);
+    $p->{selected} = -1; # selected by user
+    my @l = @{$p->{deps}};
+    while (@l) {
+	my $n = shift @l;
+	my $i = Package($packages, $n);
+	push @l, @{$i->{deps}} unless $i->{selected};
+	$i->{selected}++ unless $i->{selected} == -1;
+    }
+}
+sub unselect($$) {
+    my ($packages, $name) = @_;
+    my $p = Package($packages, $name);
+    my $set = set_new($name);
+    my $l = $set->{list};
+
+    # get the list of provided packages
+    foreach my $q (@$l) {
+	my $i = Package($packages, $q);
+	$i->{selected} or next;
+	$i->{selected} = 1; # that way, its counter will be zero the first time
+	set_add($set, @{$i->{provides} || []});
+    }
+
+    while (@$l) {
+	my $n = shift @$l;
+	my $i = Package($packages, $n);
+
+	$i->{selected} <= 0 and next;
+	if (--$i->{selected} == 0) {
+	    push @$l, @{$i->{deps}};
+	}
+    }
+
+    # garbage collect for circular dependencies
+    my $changed = 1;
+    while ($changed) {
+	$changed = 0;
+      NEXT: foreach my $p (grep { $_->{selected} > 0 } values %$packages) {
+	    my $set = set_new(@{$p->{provides}});
+	    foreach (@{$set->{list}}) {
+		my $q = Package($packages, $_);
+		$q->{selected} == -1 and next NEXT;
+		set_add($set, @{$q->{provides}}) if $q->{selected};
+	    }
+	    $p->{selected} = 0;
+	    $changed = 1;
+	}
+    }
+}
+sub toggle($$) {
+    my ($packages, $name) = @_;
+    Package($packages, $name)->{selected} ? unselect($packages, $name) : &select($packages, $name);
+}
+sub set($$$) {
+    my ($packages, $name, $val) = @_;
+    $val ? &select($packages, $name) : unselect($packages, $name);
+}
+
+sub addInfosFromHeader($$;$) {
+    my ($packages, $header, $file) = @_;
 
     my $name = c::headerGetEntry($header, 'name');
     $packages->{$name} = {
-        name => $name,
+        name => $name, file => $file, selected => 0, deps => [],
 	header => $header, size => c::headerGetEntry($header, 'size'),
-	group => c::headerGetEntry($header, 'group') || "(unknown group)",
     };
 }
 
-sub psUsingDirectory {
+sub psUsingDirectory(;$) {
     my ($dirname) = @_;
     my %packages;
 
+    $dirname ||= install_any::imageGetFile('');
     log::l("scanning $dirname for packages");
     foreach (glob_("$dirname/*.rpm")) {
-	my $basename = basename($_);
 	local *F;
 	open F, $_ or log::l("failed to open package $_: $!");
-	my $header = c::rpmReadPackageHeader($_) or log::l("failed to rpmReadPackageHeader $basename: $!");
+	my $header = c::rpmReadPackageHeader(fileno F) or log::l("failed to rpmReadPackageHeader $_: $!");
 	my $name = c::headerGetEntry($header, 'name');
-	addInfosFromHeader(\%packages, $header);
+	addInfosFromHeader(\%packages, $header, $_);
     }
     \%packages;
 }
 
-sub psVerifyDependencies {
-#    my ($packages, $fixup) = @_;
-#
-#    -r "/mnt/var/lib/rpm/packages.rpm" or die "can't find packages.rpm";
-#
-#    my $db = rpmdbOpenRWCreate("/mnt");
-#    my $rpmdeps = rpmtransCreateSet($db, undef);
-#
-#    foreach (values %$packages) {
-#	 $_->{selected} ?
-#	     c::rpmtransAddPackage($rpmdeps, $_->{header}, undef, $_, 0, undef) :
-#	     c::rpmtransAvailablePackage($rpmdeps, $_->{header}, $_);
-#    }
-#    my @conflicts = c::rpmdepCheck($rpmdeps);
-#
-#    rpmtransFree($rpmdeps);
-#    rpmdbClose($db);
-#
-#    if ($fixup) {
-#	 foreach (@conflicts) {
-#	     $_->{suggestedPackage}->{selected} = 1;
-#	 }
-#	 rpmdepFreeConflicts(@conflicts);
-#    }
-#
-#    1;
+sub getDeps($) {
+    my ($packages) = @_;
+
+    local *F;
+    open F, install_any::imageGetFile("depslist"); # or die "can't find dependencies list";
+    foreach (<F>) {
+	my ($name, @deps) = split;
+	Package($packages, $name)->{deps} = \@deps;
+	map { push @{Package($packages, $_)->{provides}}, $name } @deps;
+    }
 }
 
 sub psFromHeaderListDesc {
@@ -130,9 +179,11 @@ sub install {
     my ($total, $nb);
 
     foreach my $p (@$toInstall) {
-	my $fullname = sprintf "%s-%s-%s.%s.rpm", 
-	                       map { c::headerGetEntry($p->{header}, $_) } qw(name version release arch);
-	c::rpmtransAddPackage($trans, $p->{header}, install_any::imageGetFile($fullname) , $isUpgrade);
+	$p->{file} ||= 
+	  install_any::imageGetFile(sprintf "%s-%s-%s.%s.rpm",
+				    map { c::headerGetEntry($p->{header}, $_) } 
+				    qw(name version release arch));
+	c::rpmtransAddPackage($trans, $p->{header}, $p->{file}, $isUpgrade);
 	$nb++;
 	$total += $p->{size};
     }

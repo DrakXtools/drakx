@@ -1,6 +1,7 @@
 SO_FILES = c/blib/arch/auto/c/c.so
 PMS = *.pm c/*.pm resize_fat/*.pm po/*.pm commands install2 diskdrake
-DEST = /tmp/t/Mandrake/instimage
+ROOTDEST = /tmp/t
+DEST = $(ROOTDEST)/Mandrake/instimage
 DESTREP4PMS = $(DEST)/usr/bin/perl-install
 PERL = perl
 LOCALFILES = $(PERL) mouseconfig
@@ -49,6 +50,9 @@ test_pms: verify_c
 
 verify_c:
 	./verify_c $(PMS)
+
+depslist:
+	./gendepslist > $(ROOTDEST)/Mandrake/base/depslist
 
 install_pms: all
 	for i in `perl -ne 's/sub (\w+?)_? {.*/$$1/ and print' commands.pm`; do ln -sf commands $(DEST)/usr/bin/$$i; done
@@ -110,8 +114,9 @@ get_needed_files: $(SO_FILES)
 	cp -a keymaps $(DEST)/usr/share
 	cp -a consolefonts $(DEST)/usr/share
 
-	echo -e "#!/usr/bin/perl\n\nsymlink '/tmp/rhimage/usr/lib/perl5', '/usr/lib/perl5';\nexec '/usr/bin/sh'" > $(DEST)/usr/bin/runinstall2
-	chmod a+x $(DEST)/usr/bin/runinstall2
+	ln -s install2 $(DEST)/usr/bin/runinstall2
+#	echo -e "#!/bin/sh\n\nexec '/usr/bin/sh'" > $(DEST)/usr/bin/runinstall2
+#	chmod a+x $(DEST)/usr/bin/runinstall2
 
 as_root:
 	/bin/dd if=/dev/zero of=/tmp/initrd bs=1k count=4000
@@ -128,17 +133,16 @@ full_stage2:
 
 stage2:
 	$(MAKE) install_pms
-	cd /tmp/t ; tar cfz /tmp/instimage-full.tgz Mandrake
-	cd /tmp/t ; tar cfz /tmp/instimage-light.tgz Mandrake/instimage/usr/[bl]*
+	cd $(ROOTDEST) ; tar cfz /tmp/instimage-full.tgz Mandrake
+	cd $(ROOTDEST) ; tar cfz /tmp/instimage-light.tgz Mandrake/instimage/usr/[bl]*
 
 	@#rm -rf /mnt/initrd/*
 	@#cp -a $(DEST)/* /mnt/initrd
 	@#sync
 	@#dd if=/dev/loop0 | gzip -9 > /tmp/t/Mandrake/base/stage2.img
 
-
 # function f() { grep "$*" /usr/include/*.h /usr/include/*/*.h; }
 
-# dd if=/dev/zero of=/tmp/initrd bs=1k count=2000 ; echo y | mke2fs /tmp/initrd ; mount /tmp/initrd /mnt/disk/ -o loop ; cp -a /tmp/disk/* /mnt/disk/ ; umount /mnt/disk ; gzip -c /tmp/initrd > /tmp/initrd.img ; mcopy -o /tmp/initrd.img a:
+# dd if=/dev/zero of=/tmp/initrd bs=1k count=2000 ; echo y | mke2fs /tmp/initrd ; mount /tmp/initrd /mnt/disk/ -o loop ; cd ~pixel/gi/perl-install ; install -s install/local-install install1/bin/install ; cp -a install1/* /mnt/disk/ ; umount /mnt/disk ; gzip -c /tmp/initrd > /tmp/initrd.img ; mcopy -o /tmp/initrd.img a:
 # mount /tmp/initrd /mnt/disk/ -o loop ;  ; umount /mnt/disk ; gzip -c /tmp/initrd > /tmp/initrd.img ; mcopy -o /tmp/initrd.img a:
 

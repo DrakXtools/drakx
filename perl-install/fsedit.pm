@@ -25,6 +25,11 @@ my @suggestions = (
 
 1;
 
+sub suggestions_mntpoint($) { 
+    my ($hds) = @_;
+    grep { !/swap/ && !has_mntpoint($_, $hds) } map { $_->{mntpoint} } @suggestions;
+}
+
 sub hds($$) {
     my ($drives, $flags) = @_;
     my @hds;
@@ -58,13 +63,11 @@ sub suggest_part($$$;$) {
     $suggestions ||= \@suggestions;
     foreach (@$suggestions) { $_->{minsize} ||= $_->{size} }
 
-    my $has_swap;
-    my @mntpoints = map { $has_swap ||= isSwap($_); $_->{mntpoint} } get_fstab(@$hds);
-    my %mntpoints; @mntpoints{@mntpoints} = undef;
+    my $has_swap = grep { isSwap($_) } get_fstab(@$hds);
 
     my ($best, $second) = 
       grep { $part->{size} >= $_->{minsize} }
-      grep { !exists $mntpoints{$_->{mntpoint}} || isSwap($_) && !$has_swap }
+      grep { ! has_mntpoint($_->{mntpoint}, $hds) || isSwap($_) && !$has_swap }
 	@$suggestions or return;
 
     $best = $second if 
@@ -100,27 +103,31 @@ sub suggest_part($$$;$) {
 #}
 
 
+sub has_mntpoint($$) {
+    my ($mntpoint, $hds) = @_;
+    scalar grep { $mntpoint eq $_->{mntpoint} } get_fstab(@$hds);
+}
 
-sub checkMountPoint($$) {
-#    my $type = shift;
-#    local $_ = shift;
-#
-#    m|^/| or die "The mount point $_ is illegal.\nMount points must begin with a leading /";
+sub check_mntpoint($$) {
+    my ($mntpoint, $hds) = @_;
+
+    $mntpoint eq '' and return;
+
+    local $_ = $mntpoint;
+    m|^/| or die _("Mount points must begin with a leading /");
 #    m|(.)/$| and die "The mount point $_ is illegal.\nMount points may not end with a /";
-#    c::isprint($_) or die "The mount point $_ is illegal.\nMount points must be made of printable characters (no accents...)";
-#
-#    foreach my $dev (qw(/dev /bin /sbin /etc /lib)) {
-#	 /^$dev/ and die "The $_ directory must be on the root filesystem.",
-#    }
-#
-#    if ($type eq 'linux_native') {
-#	 $_ eq '/'; and return 1;
-#	 foreach my $r (qw(/var /tmp /boot /root)) {
-#	     /^$r/ and return 1;
-#	 }
-#	 die "The mount point $_ is illegal.\nSystem partitions must be on Linux Native partitions";
-#    }
-#    1;
+
+    has_mntpoint($mntpoint, $hds) and die _("There is already a partition with mount point %s", $mntpoint);
+}
+
+sub add($$$) {
+    my ($hd, $part, $hds) = @_;
+
+    isSwap($part) ?
+      ($part->{mntpoint} = 'swap') :
+      check_mntpoint($part->{mntpoint}, $hds);
+
+    partition_table::add($hd, $part);
 }
 
 sub removeFromList($$$) {
@@ -183,9 +190,8 @@ sub allocatePartitions($$) {
 
 sub auto_allocate($;$) {
     my ($hds, $suggestions) = @_;
-    my %mntpoints; map { $mntpoints{$_->{mntpoint}} = 1 } get_fstab(@$hds);
     allocatePartitions($hds, [
-			      grep { ! $mntpoints{$_->{mntpoint}} }
+			      grep { ! has_mntpoint($_->{mntpoint}, $hds) }
 			      @{ $suggestions || \@suggestions } 
 			     ]);
     map { partition_table::assign_device_numbers($_) } @$hds;

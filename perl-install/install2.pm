@@ -24,7 +24,7 @@ $INSTALL_VERSION = 0;
 
 my @installStepsFields = qw(text help skipOnCancel skipOnLocal prev next);
 my @installSteps = (
-  selectLanguage => [ "Choose your language", "help", 0, 0 ],
+  selectLanguage => [ __("Choose your language"), "help", 0, 0 ],
   selectPath => [ __("Choose install or upgrade"), __("help"), 0, 0 ],
   selectInstallClass => [ __("Select installation class"), __("help"), 0, 0 ],
   setupSCSI => [ __("Setup SCSI"), __("help"), 0, 1 ],	
@@ -98,10 +98,10 @@ my $default = {
     installClass => 'Server',
     bootloader => { onmbr => 1, linear => 0 },
     mkbootdisk => 0,
-    base => [ qw(basesystem mkbootdisk linuxconf anacron linux_logo rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup setuptool filesystem MAKEDEV SysVinit ash at authconfig bash bdflush binutils console-tools cpio crontabs dev diffutils e2fsprogs ed eject etcskel file fileutils findutils getty_ps gpm grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup mailcap mailx man mkinitrd mingetty modutils mount mouseconfig net-tools passwd kernel-pcmcia-cs procmail procps psmisc pump mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which) ],
+    base => [ qw(basesystem console-tools mkbootdisk linuxconf anacron linux_logo rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup setuptool filesystem MAKEDEV SysVinit ash at authconfig bash bdflush binutils console-tools crontabs dev e2fsprogs ed etcskel file fileutils findutils getty_ps gpm grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which) ],
     comps => [ 
-	      [ 1, __('X Window System') => qw(XFree86 XFree86-xfs XFree86-75dpi-fonts) ],
-	      [ 1, __('KDE') => qw(kdeadmin kdebase kthememgr kdegames kjumpingcube kdegraphics kdelibs kdemultimedia kdenetwork kdesupport kdeutils kBeroFTPD kdesu kdetoys kpilot kcmlaptop kdpms kpppload kmpg) ],
+	      [ 0, __('X Window System') => qw(XFree86 XFree86-xfs XFree86-75dpi-fonts) ],
+	      [ 0, __('KDE') => qw(kdeadmin kdebase kthememgr kdegames kjumpingcube kdegraphics kdelibs kdemultimedia kdenetwork kdesupport kdeutils kBeroFTPD kdesu kdetoys kpilot kcmlaptop kdpms kpppload kmpg) ],
 	      [ 0, __('Console Multimedia') => qw(aumix audiofile esound sndconfig awesfx rhsound cdp mpg123 svgalib playmidi sox mikmod) ],
 	      [ 0, __('CD-R burning and utilities') => qw(mkisofs cdrecord cdrecord-cdda2wav cdparanoia xcdroast) ],
 	      [ 0, __('Games') => qw(xbill xboard xboing xfishtank xgammon xjewel xpat2 xpilot xpuzzles xtrojka xkobo freeciv) ],
@@ -197,10 +197,12 @@ sub findInstallFiles {
     c::rpmReadConfigFiles() or die "can't read rpm config files";
     log::l("\tdone");
 
-    $o->{packages} = pkgs::psFromHeaderListFile(install_any::imageGetFile("hdlist"));
+    $o->{packages} = pkgs::psUsingDirectory();
+    pkgs::getDeps($o->{packages});
 }
  
 sub choosePackages {
+    foreach (@{$o->{default}->{base}}) { pkgs::select($o->{packages}, $_) }
     $o->choosePackages($o->{packages}, $o->{comps}); 
 
     my @p = @{$o->{default}->{base}}, grep { $_->{selected} } @{$o->{comps}};
