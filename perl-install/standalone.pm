@@ -22,7 +22,7 @@ sub interactive::do_pkgs {
 sub install {
     my ($o, @l) = @_;
     $o->{in}->suspend;
-    my $ret = system('urpmi', '--auto', '--best-output', @l) == 0;
+    my $ret = system('urpmi', '--allow-medium-change', '--auto', '--best-output', @l) == 0;
     $o->{in}->resume;
     $ret;
 }
