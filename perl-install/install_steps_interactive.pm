@@ -850,7 +850,7 @@ sub summary {
 
     #- format printer description in a better way
     my $format_printers = sub {
-	my ($printer) = @_;
+	my $printer = $o->{printer};
 	if (is_empty_hash_ref($printer->{configured})) {
 	    pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'cups')) and return _("Remote CUPS server");
 	    return _("No printer");
