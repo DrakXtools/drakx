@@ -414,27 +414,38 @@ sub whatUsbport() {
 	$idstr =~ tr/[\x00-\x1f]/\./;
 	# Extract the printer data from the ID string
 	my ($manufacturer, $model, $description) = ("", "", "");
-	if ($idstr =~ /MFG:([^;]+);/) {
+	if (($idstr =~ /MFG:([^;]+);/) ||
+	    ($idstr =~ /MANUFACTURER:([^;]+);/)) {
 	    $manufacturer = $1;
 	    $manufacturer =~ s/Hewlett[-\s_]Packard/HP/;
+	    $manufacturer =~ s/HEWLETT[-\s_]PACKARD/HP/;
 	}
-	if ($idstr =~ /MDL:([^;]+);/) {
+	if (($idstr =~ /MDL:([^;]+);/) ||
+	    ($idstr =~ /MODEL:([^;]+);/)) {
 	    $model = $1;
 	}
-	if ($idstr =~ /DES:([^;]+);/) {
+	if (($idstr =~ /DES:([^;]+);/) ||
+	    ($idstr =~ /DESCRIPTION:([^;]+);/)) {
 	    $description = $1;
 	    $description =~ s/Hewlett[-\s_]Packard/HP/;
+	    $description =~ s/HEWLETT[-\s_]PACKARD/HP/;
 	}
 	# Was there a manufacturer and a model in the string?
-	if (($manufacturer eq "") && ($model eq "")) {
+	if (($manufacturer eq "") || ($model eq "")) {
 	    next;
 	}
+	# No description field? Make one out of manufacturer and model.
+	if ($description eq "") {
+	    $description = "$manufacturer $model";
+	}
+	# Store this auto-detection result in the data structure
 	push @res, { port => $port, val => { CLASS => 'PRINTER',
 					     MODEL => $model,
 					     MANUFACTURER => $manufacturer,
 					     DESCRIPTION => $description,
 					     }};
     }
+    use Data::Dumper;
     @res;
 }
 
