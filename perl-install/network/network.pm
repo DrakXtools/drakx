@@ -73,7 +73,7 @@ sub read_squid_conf {
 }
 
 sub read_tmdns_conf() {
-    my ($file) = "$::prefix/etc/tmdns.conf";
+    my $file = "$::prefix/etc/tmdns.conf";
     cat_($file) =~ /^\s*hostname\s*=\s*(\w+)/m && { ZEROCONF_HOSTNAME => $1 };
 }
 
