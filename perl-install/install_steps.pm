@@ -504,7 +504,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     #- for mandrake_firstime
     touch "$o->{prefix}/var/lock/TMP_1ST";
 
-    any::config_dvd($o->{prefix}, $have_devfsd);
+    any::config_dvd($o->{prefix}, 0);
     any::config_mtools($o->{prefix});
 
     #- make sure wins is disabled in /etc/nsswitch.conf
