@@ -15,7 +15,7 @@ local $_ = join '', @ARGV;
 /-h/ and die "usage: drakxservices\n";
 
 
-my $in = vnew interactive('su');
+my $in = vnew interactive('su', 'services');
 begin:
 my $l = services::ask($in);
 services::doit($in, $l) if $l;

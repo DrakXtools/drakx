@@ -43,7 +43,7 @@ my $printer; eval { $printer = printer::getinfo('') };
 /-cups/ and $printer->{mode} = 'CUPS';
 $printer->{mode} ||= 'CUPS'; #- assume this default if nothing found.
 
-my $in = vnew interactive('su');
+my $in = vnew interactive('su', 'printer');
 
 -r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
 

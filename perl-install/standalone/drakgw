@@ -54,7 +54,7 @@ log::l("[drakgw] kernel_version $kernel_version");
 
 $kernel_version eq '2.2' || $kernel_version eq '2.4' or die "Only for 2.2 or 2.4 kernels.\n";
 
-my $in = interactive::vnew('su');
+my $in = interactive::vnew('su', 'default');
 
 pur_gtk_mode() if $::isEmbedded && ref($in) =~ /gtk/;
 
@@ -656,6 +656,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.44  2001/05/16 11:13:21  damien
+#- added icon management
+#-
 #- Revision 1.43  2001/05/15 14:36:31  gc
 #- full path for iptables
 #-
