@@ -34,12 +34,11 @@ sub N_ { $_[0] }
 sub salt {
     my ($nb) = @_;
     require devices;
-    local *F;
-    open F, devices::make("random") or die "missing random";
-    my $s; read F, $s, $nb;
-    local $_ = pack "b8" x $nb, unpack "b6" x $nb, $s;
-    tr|\0-\x3f|0-9a-zA-Z./|;
-    $_;
+    open my $F, devices::make("random") or die "missing random";
+    my $s; read $F, $s, $nb;
+    $s = pack("b8" x $nb, unpack "b6" x $nb, $s);
+    $s =~ tr|\0-\x3f|0-9a-zA-Z./|;
+    $s;
 }
 
 sub makedev { ($_[0] << 8) | $_[1] }
@@ -71,12 +70,12 @@ sub availableRamMB()  {
 }
 
 sub setVirtual {
+    my ($vt_number) = @_;
     my $vt = '';
-    local *C;
-    sysopen C, "/dev/console", 2 or die "failed to open /dev/console: $!";
-    ioctl(C, c::VT_GETSTATE(), $vt) or die "ioctl VT_GETSTATE failed";
-    ioctl(C, c::VT_ACTIVATE(), $_[0]) or die "ioctl VT_ACTIVATE failed";
-    ioctl(C, c::VT_WAITACTIVE(), $_[0]) or die "ioctl VT_WAITACTIVE failed";
+    sysopen my $C, "/dev/console", 2 or die "failed to open /dev/console: $!";
+    ioctl($C, c::VT_GETSTATE(), $vt) &&
+      ioctl($C, c::VT_ACTIVATE(), $vt_number) &&
+	ioctl($C, c::VT_WAITACTIVE(), $vt_number) or die "setVirtual failed";
     unpack "S", $vt;
 }
 
