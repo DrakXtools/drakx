@@ -103,16 +103,6 @@ my @modules_removed_from_stage1 = flatten_and_check(\%modules_removed_from_stage
 
 
 my %images = (
-    network_gigabit 
-            => 'fs/network network/raw network/gigabit',
-    network_usb 
-            => 'fs/network network/raw bus/usb network/usb',
-    network_gigabit_usb 
-            => 'fs/network network/raw bus/usb network/gigabit|usb',
-    network => 'fs/network network/raw network/main',
-    hd      => 'disk/raw fs/local|loopback disk/scsi|hardware_raid',
-    hdcdrom_usb
-	    => 'disk/cdrom|raw fs/local|loopback|cdrom bus/usb disk/usb bus/firewire disk/firewire',
     pcmcia  => 'fs/cdrom disk/cdrom|raw|pcmcia bus/pcmcia',
     cdrom   => 'fs/cdrom disk/cdrom|raw|scsi',
     all     => 'fs/cdrom disk/cdrom|raw bus/usb disk/usb|scsi fs/loopback|local bus/pcmcia disk/pcmcia|hardware_raid fs/network network/main|pcmcia|usb|raw|gigabit bus/firewire disk/firewire',
@@ -137,6 +127,7 @@ sub images {
 	}
 	printf qq(%s_modules_raw="%s"\n), $image, join ' ', @modules;
     }
+    printf qq(images="%s"\n), join(' ', keys %images);
 }
 
 sub pci_modules4stage1 {
