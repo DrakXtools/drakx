@@ -229,8 +229,10 @@ sub from_devfs {
     $dev = "/dev/" . $dev;
     if (-e $dev) {
         my ($major, $minor) = unmakedev((stat($dev))[6]);
-        (find { $_->{major} == $major && $_->{minor} == $minor } read_proc_partitions_raw())->{dev};
+        my $r = find { $_->{major} == $major && $_->{minor} == $minor } read_proc_partitions_raw();
+        $r and return $r->{dev};
     }
+    undef;
 }
 
 1;
