@@ -83,9 +83,9 @@ sub gtkval_register {
 }
 sub gtkval_modify {
     my ($ref, $val, @to_skip) = @_;
-    my $prev = "$ref";
+    my $prev = '' . $ref;
     $$ref = $val;
-    if ($prev ne "$ref") {
+    if ($prev ne '' . $ref) {
 	internal_error();
     }
     foreach (map { @$_ } values %{$refs{$ref} || {}}) {	
