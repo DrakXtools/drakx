@@ -346,7 +346,8 @@ sub cardConfiguration {
     if (!$card->{server} && !$card->{driver} && !$noauto) {
 	my @cards = cardConfigurationAuto();	
 
-	$card = multi_head_config($noauto, @cards);
+	my $card_ = multi_head_config($noauto, @cards);
+	put_in_hash($card, $card_);
 
 	$card->{server} = 'FBDev' if $cardOptions->{allowFB} && !$card->{server} && !$card->{driver};
     }
@@ -430,7 +431,8 @@ sub cardConfiguration {
 
     
     $in->ask_from('', _("Select the memory size of your graphics card"),
-		  [ { list => [ sort keys %Xconfigurator_consts::VideoRams ],
+		  [ { val => \$card->{VideoRam},
+		      list => [ sort keys %Xconfigurator_consts::VideoRams ],
 		      format => sub { translate($Xconfigurator_consts::VideoRams{$_[0]}) },
 		      not_edit => !$::expert } ]) || return
 			if $card->{needVideoRam} && !$card->{VideoRam};
@@ -989,8 +991,8 @@ Section "InputDevice"
 	print F ($id > 1 && "    ") . qq(    Emulate3Timeout    50\n\n);
 	print G qq(    Option "Emulate3Timeout"    "50"\n\n);
 	$id > 1 and print F qq(    EndSubSection\n);
-	print F "EndSection\n\n\n";
-	print G "EndSection\n\n\n";
+	print F "EndSection\n\n";
+	print G "EndSection\n\n";
     };
     $pointer->($X->{mouse}, 1);
     $pointer->($X->{mouse}{auxmouse}, 2) if $X->{mouse}{auxmouse};
@@ -1254,13 +1256,13 @@ Section "Screen"
 	$subscreen->(*F, $server, $defdepth, $depths);
     };
 
-    &$screen("svga", $X->{default_depth}, 'device0', $O->{depth}) 
+    &$screen("svga", $X->{default_depth}, 'device1', $O->{depth}) 
       if $O->{server} eq 'SVGA';
 
-    &$screen("accel", $X->{default_depth}, 'device0', $O->{depth})
+    &$screen("accel", $X->{default_depth}, 'device1', $O->{depth})
       if $Xconfigurator_consts::serversdriver{$O->{server}} eq 'accel';
 
-    &$screen("fbdev", $X->{default_depth}, 'device0', $O->{depth});
+    &$screen("fbdev", $X->{default_depth}, 'device1', $O->{depth});
 
     &$screen("vga16", '', "Generic VGA", { '' => [[ 640, 480 ], [ 800, 600 ]]});
 
@@ -1371,8 +1373,8 @@ The current configuration is:
 	    if (-e "$f.test") {
 		rename $f, "$f.old" or die "unable to make a backup of XF86Config";
 		rename "$f-4", "$f-4.old";
-		rename "$f.test", $f;
-		rename "$f.test-4", "$f-4";
+		rename "$f.test", $f if $X->{card}{server};
+		rename "$f.test-4", "$f-4" if $X->{card}{driver};
 		symlinkf "../..$X->{card}{prog}", "$::prefix/etc/X11/X" if $X->{card}{server} !~ /Xpmac/;
 	    }
 	}
