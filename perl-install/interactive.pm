@@ -44,27 +44,41 @@ sub new($) {
 #-######################################################################################
 sub ask_warn($$$) {
     my ($o, $title, $message) = @_;
-    ask_from_list($o, $title, $message, [ _("Ok") ]);
+    ask_from_list2($o, $title, $message, [ _("Ok") ]);
 }
 
 sub ask_yesorno($$$;$) {
     my ($o, $title, $message, $def) = @_;
-    ask_from_list_($o, $title, $message, [ __("Yes"), __("No") ], $def ? "No" : "Yes") eq "Yes";
+    ask_from_list2_($o, $title, $message, [ __("Yes"), __("No") ], $def ? "No" : "Yes") eq "Yes";
 }
 
 sub ask_okcancel($$$;$) {
     my ($o, $title, $message, $def) = @_;
-    ask_from_list_($o, $title, $message, [ __("Ok"), __("Cancel") ], $def ? "Cancel" : "Ok") eq "Ok";
+    ask_from_list2_($o, $title, $message, [ __("Ok"), __("Cancel") ], $def ? "Cancel" : "Ok") eq "Ok";
 }
 
-sub ask_from_list_($$$$;$) {
+sub ask_from_list_ {
+    my ($o, $title, $message, $l, $def) = @_;    
+    @$l == 0 and die;
+    @$l == 1 and return $l->[0];
+    goto &ask_from_list2_;
+}
+
+sub ask_from_list {
+    my ($o, $title, $message, $l, $def) = @_;
+    @$l == 0 and die;
+    @$l == 1 and return $l->[0];
+    goto &ask_from_list2;
+}
+
+sub ask_from_list2_($$$$;$) {
     my ($o, $title, $message, $l, $def) = @_;
     untranslate(
        ask_from_list($o, $title, $message, [ map { translate($_) } @$l ], translate($def)),
        @$l);
 }
 
-sub ask_from_list($$$$;$) {
+sub ask_from_list2($$$$;$) {
     my ($o, $title, $message, $l, $def) = @_;
 
     $message = ref $message ? $message : [ $message ];

@@ -78,7 +78,7 @@ install_pms: all
 	for i in $(PMS); do \
 		dest=$(DESTREP4PMS)/`dirname $$i`; \
 		install -d $$dest; \
-		perl -ne 'print #unless /^use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
+		perl -ne 'print unless (/^=head/ .. /^=cut/) || /^\s*#-/ || /use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
 	done
 
 	rm $(DESTREP4PMS)/c/c.xs.pm
@@ -117,7 +117,7 @@ get_needed_files: $(SO_FILES)
 		  d=`echo $(DEST)/$$i | sed 's/\/usr\/local\//\/usr\//'`; \
 		  install -d `dirname $$d` && \
 		  if (echo $$i | grep -q "\.pm"); then \
-		     perl -ne '$$_ =~ /^__END__/ and exit(0); print unless /\s*#-/' $$i > $$d; \
+		     perl -pe '$$_ =~ /^__END__/ and exit(0);' $$i > $$d; \
 		  else \
 		  	  cp -f $$i $$d; \
 			  strip $$d 2>/dev/null || true; \
