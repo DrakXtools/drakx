@@ -393,7 +393,7 @@ sub getSerialModem {
 }
 
 sub getModem() {
-    my @pci_modems = grep { $_->{driver} eq 'Bad:www.linmodems.org' } probeall(0);
+    my @pci_modems = grep { $_->{driver} =~ /www.linmodems.org/ } probeall(0);
     my $serial_modem = {};
     getSerialModem($serial_modem);
     $serial_modem, @pci_modems;
