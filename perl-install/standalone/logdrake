@@ -423,8 +423,9 @@ sub alert_config() {
                                             },
                                            ],
                                    complete => sub {
-                                       if ($options{MAIL} !~ /[\w.-]*\@[\w.-]/) {
-                                           err_dialog(N("Wrong email"), N("\"%s\" is not a valid email!", $options{MAIL}));
+                                       if ($options{MAIL} !~ /[\w.-]*\@[\w.-]/ && !member($options{MAIL}, map { $_->[0] } list_passwd())) {
+                                           err_dialog(N("Wrong email"), N("\"%s\" neither is a valid email nor is an existing local user!",
+                                                                          $options{MAIL}));
                                            return 1;
                                        }
                                    },
