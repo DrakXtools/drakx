@@ -173,7 +173,7 @@ sub suggest_part($$$;$) {
 
     $best = $second if
       $best->{mntpoint} eq '/boot' &&
-      $part->{start} + $best->{size} > 1024 * partition_table::cylinder_size($hd); #- if the empty slot is beyond the 1024th cylinder, no use having /boot
+      $part->{start} + $best->{size} > 1024 * $hd->cylinder_size(); #- if the empty slot is beyond the 1024th cylinder, no use having /boot
 
     defined $best or return; #- sorry no suggestion :(
 
@@ -227,7 +227,7 @@ sub check_mntpoint {
 
     has_mntpoint($mntpoint, $hds) and die _("There is already a partition with mount point %s", $mntpoint);
 
-    if ($part->{start} + $part->{size} > 1024 * partition_table::cylinder_size($hd)) {
+    if ($part->{start} + $part->{size} > 1024 * $hd->cylinder_size()) {
 	die "/boot ending on cylinder > 1024" if $mntpoint eq "/boot";
 	die     "/ ending on cylinder > 1024" if $mntpoint eq "/" && !has_mntpoint("/boot", $hds);
     }
@@ -298,7 +298,7 @@ sub move {
     my $part1 = { %$part };
     my $part2 = { %$part };
     $part2->{start} = $sector2;
-    $part2->{size} += partition_table::cylinder_size($hd2) - 1;
+    $part2->{size} += $hd2->cylinder_size() - 1;
     partition_table::remove($hd, $part);
     {
 	local ($part2->{notFormatted}, $part2->{isFormatted}); #- do not allow partition::add to change this

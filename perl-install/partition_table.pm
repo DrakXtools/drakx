@@ -12,6 +12,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @fields2save);
 
 
 use common qw(:common :system :functional);
+use partition_table_raw;
 use partition_table_dos;
 use partition_table_bsd;
 use partition_table_sun;
@@ -201,29 +202,6 @@ sub isPrimary($$) {
     0;
 }
 
-sub cylinder_size($) {
-    my ($hd) = @_;
-    $hd->{geom}{sectors} * $hd->{geom}{heads};
-}
-
-sub adjustStart($$) {
-    my ($hd, $part) = @_;
-    my $end = $part->{start} + $part->{size};
-
-    $part->{start} = round_up($part->{start},
-			       $part->{start} % cylinder_size($hd) < 2 * $hd->{geom}{sectors} ?
-			       $hd->{geom}{sectors} : cylinder_size($hd));
-    $part->{size} = $end - $part->{start};
-}
-sub adjustEnd($$) {
-    my ($hd, $part) = @_;
-    my $end = $part->{start} + $part->{size};
-    my $end2 = round_down($end, cylinder_size($hd));
-    unless ($part->{start} < $end2) {
-	$end2 = round_up($end, cylinder_size($hd));
-    }
-    $part->{size} = $end2 - $part->{start};
-}
 sub adjustStartAndEnd($$) {
     my ($hd, $part) = @_;
 
@@ -527,7 +505,7 @@ The only solution is to move your primary partitions to have the hole next to th
 	my $l = first (@{$hd->{extended}});
 
 	#- the first is a special case, must recompute its real size
-	$l->{start} = round_down($l->{normal}{start} - 1, cylinder_size($hd));
+	$l->{start} = round_down($l->{normal}{start} - 1, $hd->cylinder_size());
 	$l->{size} = $l->{normal}{start} + $l->{normal}{size} - $l->{start};
 	my $ext = { %$l };
 	unshift @{$hd->{extended}}, { type => 5, raw => [ $part, $ext, {}, {} ], normal => $part, extended => $ext };

@@ -56,14 +56,6 @@ my $magic = 0x82564557;
 my $nb_primary = 8;
 my $offset = 0x40;
 
-#- use default partition table adust functions.
-sub adjustStart($$) {
-    &partition_table::adjustStart;
-}
-sub adjustEnd($$) {
-    &partition_table::adjustEnd;
-}
-
 sub read($$) {
     my ($hd, $sector) = @_;
     my $tmp;
@@ -132,7 +124,7 @@ sub info {
       dtype => $hd->{device} =~ /^sd/ ? $dtype_scsi : $dtype_ST506,
       secsize => $common::SECTORSIZE,
       ncylinders => $hd->{geom}{cylinders},
-      secpercyl => partition_table::cylinder_size($hd),
+      secpercyl => $hd->cylinder_size(),
       secprtunit => $hd->{geom}{totalsectors},
       rpm => 3600,
       interleave => 1,

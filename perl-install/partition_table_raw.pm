@@ -31,6 +31,30 @@ sub typeOfMBR_($) { typeFromMagic($_[0], @MBR_signatures) }
 
 sub hasExtended { 0 }
 
+sub cylinder_size($) {
+    my ($hd) = @_;
+    $hd->{geom}{sectors} * $hd->{geom}{heads};
+}
+
+sub adjustStart($$) {
+    my ($hd, $part) = @_;
+    my $end = $part->{start} + $part->{size};
+
+    $part->{start} = round_up($part->{start},
+			       $part->{start} % cylinder_size($hd) < 2 * $hd->{geom}{sectors} ?
+			       $hd->{geom}{sectors} : cylinder_size($hd));
+    $part->{size} = $end - $part->{start};
+}
+sub adjustEnd($$) {
+    my ($hd, $part) = @_;
+    my $end = $part->{start} + $part->{size};
+    my $end2 = round_down($end, cylinder_size($hd));
+    unless ($part->{start} < $end2) {
+	$end2 = round_up($end, cylinder_size($hd));
+    }
+    $part->{size} = $end2 - $part->{start};
+}
+
 sub get_geometry($) {
     my ($dev) = @_;
     my $g = "";
@@ -39,9 +63,6 @@ sub get_geometry($) {
     ioctl(F, c::HDIO_GETGEO(), $g) or return;
 
     my %geom; @geom{qw(heads sectors cylinders start)} = unpack "CCSL", $g;
-
-    #- handle this strange but necessary reduction of visible cylinders on sparc, assume 2 for instance.
-    $geom{total_cylinders} = $geom{cylinders}; $geom{cylinders} -= 2 if arch() =~ /^sparc/;
 
     { geom => \%geom, totalsectors => $geom{heads} * $geom{sectors} * $geom{cylinders} };
 }

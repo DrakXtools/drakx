@@ -2,8 +2,10 @@ ARCH := $(patsubst i%86,i386,$(shell uname -m))
 ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
 BOOT_IMG = hd.img cdrom.img network.img
+RELEASE_BOOT_IMG = hd.img cdrom.img network.img
 ifeq (i386,$(ARCH))
 BOOT_IMG += pcmcia.img pcmcia_ks.img network_ks.img
+RELEASE_BOOT_IMG += pcmcia.img
 endif
 ifeq (sparc,$(ARCH))
 BOOT_IMG += live.img tftp.img tftprd.img
@@ -27,7 +29,7 @@ AUTOBOOT = $(ROOTDEST)/dosutils/autoboot/mdkinst
 
 install: build autoboot
 	for i in images misc Mandrake Mandrake/base; do install -d $(ROOTDEST)/$$i ; done
-	cp -f $(BOOT_IMG) $(ROOTDEST)/images ; rm -f $(ROOTDEST)/images/*_ks.img
+	cp -f $(RELEASE_BOOT_IMG) $(ROOTDEST)/images
 	make -C perl-install full_stage2
 
 build: $(BOOT_IMG)

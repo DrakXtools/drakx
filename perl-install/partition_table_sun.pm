@@ -52,11 +52,8 @@ sub adjustStart($$) {
     #- since partition must always start on cylinders boundaries on sparc,
     #- note that if start sector is on the first cylinder, it is adjusted
     #- to 0 and it is valid.
-    $part->{start} = $part->{start} >= partition_table::cylinder_size() ? round_up($part->{start}, partition_table::cylinder_size($hd)) : 0;
+    $part->{start} = $part->{start} >= $hd->cylinder_size() ? round_up($part->{start}, $hd->cylinder_size()) : 0;
     $part->{size} = $end - $part->{start};
-}
-sub adjustEnd($$) {
-    &partition_table::adjustEnd;
 }
 
 #- compute crc checksum used for Sun Label partition, expect
@@ -93,7 +90,7 @@ sub read($$) {
 	my %h; 
 	@h{@$fields1} = unpack $format1, $_[0];
 	@h{@$fields2} = unpack $format2, $_[1];
-	$h{start} = $sector + $h{start_cylinder} * partition_table::cylinder_size($hd);
+	$h{start} = $sector + $h{start_cylinder} * $hd->cylinder_size();
 #	$h{type} = $typeToDos{$h{type}} || $h{type}; #- for rewrite it ?
 	$h{size} or $h{$_} = 0 foreach keys %h;
 	\%h;
@@ -118,9 +115,9 @@ sub write($$$;$) {
     }
 
     ($info->{infos}, $info->{partitions}) = map { join '', @$_ } list2kv map {
-	$_->{start} % partition_table::cylinder_size($hd) == 0 or die "partition not at beginning of cylinder";
+	$_->{start} % $hd->cylinder_size() == 0 or die "partition not at beginning of cylinder";
 #	local $_->{type} = $typeFromDos{$_->{type}} || $_->{type};
-	local $_->{start_cylinder} = $_->{start} / partition_table::cylinder_size($hd) - $sector;
+	local $_->{start_cylinder} = $_->{start} / $hd->cylinder_size() - $sector;
 	pack($format1, @$_{@$fields1}), pack($format2, @$_{@$fields2});
     } @$pt;
 
@@ -136,6 +133,15 @@ sub write($$$;$) {
 
 sub info {
     my ($hd) = @_;
+
+    #- take care of reduction of the number of cylinders, avoid loop of reduction!
+    unless ($hd->{geom}{total_cylinders} > $hd->{geom}{cylinders}) {
+	$hd->{geom}{total_cylinders} = $hd->{geom}{cylinders};
+	$hd->{geom}{cylinders} -= 2;
+
+	#- rebuild some constants according to number of cylinders.
+	$hd->{totalsectors} = $hd->{geom}{heads} * $hd->{geom}{sectors} * $hd->{geom}{cylinders};
+    }
 
     #- build a default suitable partition table,
     #- checksum will be built when writing on disk.
@@ -154,25 +160,6 @@ sub info {
     };
 
     $info;
-#    my $dtype_scsi  = 4; #- taken from fdisk, removed unused one,
-#    my $dtype_ST506 = 6; #- see fdisk for more
-#    {
-#      magic => $magic,
-#      magic2 => $magic,
-#      dtype => $hd->{device} =~ /^sd/ ? $dtype_scsi : $dtype_ST506,
-#      secsize => $common::SECTORSIZE,
-#      ncylinders => $hd->{geom}{cylinders},
-#      secpercyl => partition_table::cylinder_size($hd),
-#      secprtunit => $hd->{geom}{totalsectors},
-#      rpm => 3600,
-#      interleave => 1,
-#      trackskew => 0,
-#      cylskew => 0,
-#      headswitch => 0,
-#      trkseek => 0,
-#      bbsize => 8192, #- size of boot area, with label
-#      sbsize => 8192, #- max size of fs superblock
-#    };
 }
 
 sub clear_raw {
@@ -184,7 +171,7 @@ sub clear_raw {
 	type => 5, #- the whole disk type.
 	flags => 0,
 	start_cylinder => 0,
-	size => $hd->{geom}{cylinders} * partition_table::cylinder_size($hd),
+	size => $hd->{geom}{cylinders} * $hd->cylinder_size(),
     };
 
     $pt;

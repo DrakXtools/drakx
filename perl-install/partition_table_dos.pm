@@ -43,14 +43,6 @@ sub sector2CHS($$) {
     ($start, $h, $s + 1);
 }
 
-#- use default partition table adust functions.
-sub adjustStart($$) {
-    &partition_table::adjustStart;
-}
-sub adjustEnd($$) {
-    &partition_table::adjustEnd;
-}
-
 sub read($$) {
     my ($hd, $sector) = @_;
     my $tmp;
