@@ -381,7 +381,7 @@ sub create_dialog {
     gtkpack($dialog->vbox,
             gtkpack_(Gtk2::HBox->new,
                      if_($o_options->{stock}, 0, Gtk2::Image->new_from_stock($o_options->{stock}, 'dialog')),
-                     1, create_scrolled_window($text, [ 'never', 'automatic' ]),
+                     1, $o_options->{scroll} ? create_scrolled_window($text, [ 'never', 'automatic' ]) : $text,
                     ),
            );
 
