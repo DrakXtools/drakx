@@ -20,7 +20,7 @@ our %adsl_data = (
                   N("Belgium") . "|Tiscali BE" =>
                   {
                    vpi => 8,
-                   vci => 23,
+                   vci => 35,
                    Encapsulation => 6,
                    dnsServer2 => '212.35.2.1',
                    dnsServer3 => '212.35.2.2',
@@ -30,14 +30,14 @@ our %adsl_data = (
                   N("Belgium") . "|Belgacom" =>
                   {
                    vpi => 8,
-                   vci => 23,
+                   vci => 35,
                    Encapsulation => 6,
                   },
 
                   N("France") . "|Free non dégroupé 512/128" =>
                   { 
                    vpi => 8, 
-                   vci => 23,
+                   vci => 35,
                    Encapsulation => 4,
                    dnsServer2 => '213.228.0.68',
                    dnsServer3 => '212.27.32.176',
@@ -58,7 +58,7 @@ our %adsl_data = (
                   N("France") . "|9online 512" =>
                   {
                    vpi => 8,
-                   vci => 23,
+                   vci => 35,
                    Encapsulation => 6,
                    dnsServer2 => '62.62.156.12',
                    dnsServer3 => '62.62.156.13',
@@ -68,7 +68,7 @@ our %adsl_data = (
                   N("France") . "|Club-Internet" =>
                   {
                    vpi => 8,
-                   vci => 23,
+                   vci => 35,
                    Encapsulation => 6,
                    dnsServer2 => '194.117.200.10',
                    dnsServer3 => '194.117.200.15',
@@ -79,7 +79,7 @@ our %adsl_data = (
                   N("France") . "|Wanadoo" =>
                   {
                    vpi => 8,
-                   vci => 23,
+                   vci => 35,
                    Encapsulation => 6,
                    dnsServer2 => '193.252.19.3',
                    dnsServer3 => '193.252.19.4',
@@ -90,7 +90,7 @@ our %adsl_data = (
                   N("France") . "|Télé2 128k " =>
                   {
                    vpi => 8,
-                   vci => 23,
+                   vci => 35,
                    Encapsulation => 6,
                    dnsServer2 => '212.151.136.242',
                    dnsServer3 => '130.244.127.162',
@@ -100,7 +100,7 @@ our %adsl_data = (
                   N("France") . "|Tiscali.fr 128k" =>
                   {
                    vpi => 8,
-                   vci => 23, 
+                   vci => 35, 
                    Encapsulation => 5,
                    dnsServer2 => '213.36.80.1',
                    dnsServer3 => '213.36.80.2',
@@ -110,7 +110,7 @@ our %adsl_data = (
                   N("France") . "|Tiscali.fr 512k" =>
                   {
                    vpi => 8,
-                   vci => 23,
+                   vci => 35,
                    dnsServer2 => '213.36.80.1',
                    dnsServer3 => '213.36.80.2',
                    method => 'pppoa',
