@@ -449,7 +449,7 @@ Take a look at http://www.linmodems.org")
                             $modem->{passwd} = $_->{passwd} if $_->{login} eq $modem->{login};
                         }
                         
-                        return &$ppp_first_step->();
+                        return $ppp_first_step->();
                     },
                    },
 
