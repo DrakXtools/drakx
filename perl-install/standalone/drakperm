@@ -186,9 +186,9 @@ sub display_perm {
     local $_;
     while (<F>) {
         if (m/^([^#]\S+)\s+([^.\s]+)\.(\S+)?\s+(\d+)/) {
-            $treeModel->append_set(undef, [ 0 => $1, 1 => $2, 2 => $3, 3 => $4 ]);
+            $treeModel->append_set(undef, 0 => $1, 1 => $2, 2 => $3, 3 => $4);
         } elsif (m/^([^#]\S+)\s+current?\s+(\d+)/) {
-            $treeModel->append_set(undef, [ 0 => $1, 1 => 'current', 2 => '', 3 => $2 ]);
+            $treeModel->append_set(undef, 0 => $1, 1 => 'current', 2 => '', 3 => $2);
         }
     }
     close F;
@@ -303,19 +303,19 @@ sub row_setting_dialog {
                                 $iter = Gtk2::TreeIter->new;
                                 $treeModel->append($iter, undef);
                             }
-                            $treeModel->set($iter, [ 0 => $file->get_text ]);
+                            $treeModel->set($iter, 0 => $file->get_text);
                             if ($usr_check->get_active) {
-                                $treeModel->set($iter, [ 1 => 'current' ]);
-                                $treeModel->set($iter, [ 2 => '' ]);
+                                $treeModel->set($iter, 1 => 'current');
+                                $treeModel->set($iter, 2 => '');
                             } else {
-                                $treeModel->set($iter, [ 1 => $users->entry->get_text ]);
-                                $treeModel->set($iter, [ 2 => $groups->entry->get_text ]);
+                                $treeModel->set($iter, 1 => $users->entry->get_text);
+                                $treeModel->set($iter, 2 => $groups->entry->get_text);
                             }
                             $user = ($perms{user}{read}->get_active ? 4 : 0)+($perms{user}{write}->get_active ? 2 : 0)+($perms{user}{execute}->get_active ? 1 : 0);
                             $group = ($perms{group}{read}->get_active ? 4 : 0)+($perms{group}{write}->get_active ? 2 : 0)+($perms{group}{execute}->get_active ? 1 : 0);
                             $other = ($perms{other}{read}->get_active ? 4 : 0)+($perms{other}{write}->get_active ? 2 : 0)+($perms{other}{execute}->get_active ? 1 : 0);
                             my $s = ($sticky->get_active ? 1 : 0) + ($suid->get_active ? 4 : 0) + ($gid->get_active ? 2 : 0);
-                            $treeModel->set($iter, [ 3 => ($s || '') . $user . $group . $other ]);
+                            $treeModel->set($iter, 3 => ($s || '') . $user . $group . $other);
                             $dlg->destroy;
                             $modified++;
                         });
