@@ -907,7 +907,6 @@ Please run \"Internet access\" in control center."));
     }
     my @conf_data = (
                      [ N("Host name (optional)"), \$netc->{HOSTNAME} ],
-                     [ N("Domain name"), \$netc->{DOMAINNAME} ],
                      [ N("First DNS Server (optional)"),  \$netc->{dnsServer} ], # \$cnx->{dns1}
                      [ N("Second DNS Server (optional)"), \$netc->{dnsServer2} ], #\$cnx->{dns2}
                      [ N("Third DNS server (optional)"),  \$netc->{dnsServer3} ],
