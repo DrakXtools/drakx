@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.4mdk
+Release: 0.5mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -326,6 +326,25 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Aug  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.5mdk
+- drakclock: if ntp is used, get the new time before updating the
+  hwclock (Emmanuel Blindauer, #10537)
+- drakconnect (oblin):
+  o install kdenetwork-kppp-provider when configuring a modem
+  o fix external ISDN modem configuration (Anthill #1033)
+  o use ifup/ifdown rather than restarting the network service for
+    ADSL & ISDN
+- draksound:
+  o add support for ALSA on PPC and SPARC
+  o update sound drivers list
+  o map dmasound_pmac <=> snd-powermac (Christiaan Welvaart)
+- fix autologin somewhat (pixel)
+- localedrake:
+  o add x-unikey support for Vietnamese
+  o switch korean to scim-hangul IM by default
+- update ppc support (Christiaan Welvaart, pixel)
+- XFdrake: replaced XFree86 and XFree with Xorg (pixel, #10531)
+
 * Wed Aug  4 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.4mdk
 - don't set /etc/sysconfig/desktop anymore, configure ~/.wmrc,
   ~/.gnome2/gdm and ~/.desktop instead (pixel)
