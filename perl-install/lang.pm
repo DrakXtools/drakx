@@ -39,6 +39,7 @@ my %languages = (
   'eu'  => [ 'Euskara (Basque)',	'iso-8859-1', 'eu', 'eu:es_ES:fr_FR:es:fr' ],
 #-'fa'  => [ 'Farsi (Iranian)',		'isiri-3342', 'fa', 'fa' ],
   'fi'  => [ 'Suomi (Finnish)',		'iso-8859-1', 'fi', 'fi' ],
+'fr_CA' => [ 'French (Canada)',		'iso-8859-1', 'fr', 'fr_CA:fr' ],
 'fr_FR' => [ 'French (France)',		'iso-8859-1', 'fr', 'fr_FR:fr' ],
 #-'fo'  => [ 'Faroese',			'iso-8859-1', 'fo', 'fo:??:??' ],
   'ga'  => [ 'Gaeilge (Irish)',		'iso-8859-14','ga', 'ga:en_IE:en' ],
