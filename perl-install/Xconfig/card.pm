@@ -394,7 +394,7 @@ sub xfree_and_glx_choices {
     my ($card) = @_;
 
     #- XFree version available, better to parse available package and get version from it.
-    my ($xf4_ver, $xf3_ver) = ('4.2.0', '3.3.6');
+    my ($xf4_ver, $xf3_ver) = ('4.2.1', '3.3.6');
 
     my $xf3 = if_($card->{server}, { text => _("XFree %s", $xf3_ver), code => sub { $card->{prefer_xf3} = 1 } });
     my $xf4 = if_($card->{Driver}, { text => _("XFree %s", $xf4_ver), code => sub { $card->{prefer_xf3} = 0 } });
