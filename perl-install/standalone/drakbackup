@@ -1197,7 +1197,7 @@ sub build_backup_files {
     -d $save_path and @dir_content = all($save_path);
     grep (/^backup\_base\_sys/, @dir_content) and $base_sys_exist = 1;
 
-    if (($where_hd && !$daemon) || ($daemon && ($daemon_media eq 'hd'))) {
+    if (($where_hd && !$daemon) || ($daemon)) {
 	  $interactive and progress($pbar, 0.5, _("Backup system files..."));
 	  if ($backup_sys) { 
 	    if ($backup_sys_versions) {
