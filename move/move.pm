@@ -10,6 +10,7 @@ use fsedit;
 use run_program;
 use log;
 use lang;
+use Digest::MD5 qw(md5_hex);
 
 my @ALLOWED_LANGS = qw(en_US fr es it de);
 
@@ -185,7 +186,7 @@ sub keys_parts {
     my @keys = grep { $_->{usb_media_type} && index($_->{usb_media_type}, 'Mass Storage|') == 0 && $_->{media_type} eq 'hd' } @{$o->{all_hds}{hds}};
     map_index { 
 	$_->{mntpoint} = $::i ? "/mnt/key$::i" : '/home';
-	$_->{options} = 'umask=077,uid=501,gid=501';
+	$_->{options} = 'umask=077,uid=501,gid=501,shortname=mixed';
         $_;
     } fsedit::get_fstab(@keys);
 }
@@ -201,6 +202,11 @@ sub install2::handleMoveKey {
 
     require fs;
     fs::mount_part($_) foreach keys_parts($o);
+}
+
+sub machine_ident {
+    #- , c::get_hw_address('eth0');       before detect of network :(
+    md5_hex(join '', (map { (split)[1] } cat_('/proc/bus/pci/devices')));
 }
 
 sub install2::verifyKey {
@@ -246,6 +252,26 @@ unplug it, remove write protection, and then plug it again.")),
     }
     close F;
     unlink '/home/.touched';
+
+    my $wait = $o->wait_message(N("Setting up USB key"), N("Please wait, setting up system configuration files on USB key..."));
+    mkdir '/home/.sysconf';
+    my $sysconf = '/home/.sysconf/' . machine_ident();
+    if (!-d $sysconf) {
+        mkdir $sysconf;
+        foreach (chomp_(cat_('/image/move/keyfiles'))) {
+            mkdir_p("$sysconf/" . dirname($_));
+            system("cp $_ $sysconf$_");
+            symlinkf("$sysconf$_", $_);
+        }
+        system("cp /image/move/README.adding.more.files /home/.sysconf");
+    } else {
+        foreach (chomp_(`find $sysconf -type f`)) {
+            my ($path) = /^\Q$sysconf\E(.*)/;
+            mkdir_p(dirname($path));
+            symlinkf($_, $path);
+        }
+    }
+    $wait = undef;
 }
 
 sub install2::startMove {

@@ -2,7 +2,7 @@
 DEST_LIVETREE = /tmp/live_tree
 DEST_STAGE2 = $(DEST_LIVETREE)/usr/bin/stage2
 
-DATA_FILES = devices symlinks directories-to-create etcfiles all-etcfiles
+DATA_FILES = devices symlinks directories-to-create etcfiles all-etcfiles keyfiles README.adding.more.files
 LANG_FILES = $(shell perl -ne 'print $$1 if /ALLOWED_LANGS = qw\((.*)\)/' move.pm)
 
 STAGE1 = ../mdk-stage1
