@@ -443,7 +443,6 @@ sub selectSupplMedia {
 	    $cdrom =~ m,^/, or $cdrom = "/dev/$cdrom";
 	    devices::make($cdrom);
 	    ejectCdrom($cdrom);
-	    openCdromTray($cdrom);
 	    if ($o->ask_okcancel('', N("Insert the CD"), 1)) {
 		#- mount suppl CD in /mnt/cdrom to avoid umounting /tmp/image
 		mountCdrom("/mnt/cdrom", $cdrom);
@@ -920,10 +919,7 @@ sub ejectCdrom {
     $o_mountpoint and eval { fs::umount($o_mountpoint) };
     $@ and warnAboutFilesStillOpen();
     return if is_xbox();
-    eval { 
-	my $dev = detect_devices::tryOpen($cdrom);
-	ioctl($dev, c::CDROMEJECT(), 1) if ioctl($dev, c::CDROM_DRIVE_STATUS(), 0) == c::CDS_DISC_OK();
-    };
+    openCdromTray($cdrom);
 }
 
 sub warnAboutFilesStillOpen() {
