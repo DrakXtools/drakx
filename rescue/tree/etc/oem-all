@@ -118,9 +118,10 @@ unless (-e "/cdrom/VERSION") {
 }
 
 #- using default options for HP.
-#- $options{free_size} = 500;
-#- $options{free_primary} = 1;
-#- $options{free_fs} = 'fat16';
+$options{free_size} = 500;
+$options{free_primary} = 1;
+$options{free_fs} = 'fat16';
+$options{boot_entries} = 'linux,linux-nonfb,failsafe,floppy';
 
 open F, "/cdrom/VERSION" or die "no installation cdrom found on $cd";
 while (<F>) {
@@ -442,7 +443,7 @@ if (open F, ">/hd/Mandrake/oem_patch.pl") {
 		#- and select at least GAMES group, everything else has
 		#- already be selected during master preparation.
 		$o->{compssListLevel} = 4;
-		$o->{compssUsersChoice}{GAMES} = 1;
+		$o->{compssUsersChoice}{$_} = 1 foreach qw(GAMES VIDEO AUDIO GRAPHICS);
 	        pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $o->{compssListLevel}, $availableCorrected);
 
 		$availableCorrected;
