@@ -1,12 +1,12 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.28mdk
+Release: 0.29mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
-Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 0.90-5mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.2-2mdk
+Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 0.90-5mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.2-2mdk, gurpmi
 Conflicts: drakconf < 9.1-14mdk
 Conflicts: rpmdrake < 2.1-29mdk
 BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.9, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.3-1mdk
@@ -314,6 +314,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Aug 12 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.2-0.29mdk
+- drakxtools depends on gurpmi
+
 * Thu Aug  7 2003 Pixel <pixel@mandrakesoft.com> 9.2-0.28mdk
 - drakxservices: xinetd services have a special treatment
 - localedrake: fix the "zh_TW with country China" case
