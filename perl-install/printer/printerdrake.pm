@@ -605,12 +605,12 @@ sub configure_new_printers {
     require services;
     services::stop("hpoj");
 
-    # Auto-detect local printers   
+    # Auto-detect local printers
     my @autodetected = printer::detect::local_detect();
 
     # We are ready with auto-detection, so we restart HPOJ here. If it 
     # is not installed or not configured, this command has no effect.
-    printer::services::start("hpoj");
+    services::start("hpoj");
 
     # No printer found? So no need of new queues.
     return 1 if !@autodetected;
@@ -633,6 +633,7 @@ sub configure_new_printers {
     # Now install queues for all auto-detected printers which have no queue
     # yet
     $printer->{noninteractive} = 1; # Suppress all interactive steps
+    my $configapps = 0;
     foreach my $p (@autodetected) {
 	if (!member($p->{port}, @blacklist)) {
 	    # Initialize some variables for queue setup
@@ -740,6 +741,7 @@ Printerdrake could not determine which model your printer %s is. Please choose t
 	    get_printer_info($printer, $in) or next;
 	    setup_options($printer, $in) or next;
 	    configure_queue($printer, $in) or next;
+	    $configapps = 1;
 	    # If there is no default printer set, let this one get the
 	    # default
 	    if (!$printer->{DEFAULT}) {
@@ -756,11 +758,13 @@ Printerdrake could not determine which model your printer %s is. Please choose t
     }
     # Configure the current printer queues in applications
     undef $_w;
-    $_w =
-	$in->wait_message(N("Printerdrake"),
-			  N("Configuring applications..."));
-    printer::main::configureapplications($printer);
-    undef $_w;
+    if ($configapps) {
+	$_w =
+	    $in->wait_message(N("Printerdrake"),
+			      N("Configuring applications..."));
+	printer::main::configureapplications($printer);
+	undef $_w;
+    }
     undef $printer->{noninteractive};
 }
 
@@ -3585,6 +3589,7 @@ sub main {
 	my $modify = N("Printer options");
 	while (1) {
 	    $newqueue = 0;
+	    my $configapps = 0;
 	    if ($editqueue) {
 		# The user was either in the printer modification dialog
 		# and did not close it or he had set up a new queue and
@@ -3837,6 +3842,7 @@ sub main {
 			setup_options($printer, $in) or
 			    goto step_4;
 			configure_queue($printer, $in) or die 'wizcancel';
+			$configapps = 1;
 			undef $printer->{MANUAL} if $printer->{MANUAL};
 			$::Wizard_no_previous = 1;
 			setasdefault($printer, $in);
@@ -3878,6 +3884,7 @@ sub main {
 		    get_printer_info($printer, $in) or next;
 		    setup_options($printer, $in) or next;
 		    configure_queue($printer, $in) or next;
+		    $configapps = 1;
 		    undef $printer->{MANUAL} if $printer->{MANUAL};
 		    setasdefault($printer, $in);
 		    $cursorpos = 
@@ -3985,7 +3992,8 @@ What do you want to modify on this printer?",
 		            configure_queue($printer, $in);
 		    } elsif ($modify eq N("Printer name, description, location")) {
 			choose_printer_name($printer, $in) &&
-			    configure_queue($printer, $in);
+			    configure_queue($printer, $in) &&
+			    ($configapps = 1);
 			# Delete old queue when it was renamed
 			if (lc($printer->{QUEUE}) ne lc($printer->{OLD_QUEUE})) {
 			    my $_w = $in->wait_message(
@@ -4007,7 +4015,8 @@ What do you want to modify on this printer?",
 			choose_model($printer, $in) &&
 			    get_printer_info($printer, $in) &&
 			    setup_options($printer, $in) &&
-			    configure_queue($printer, $in);
+			    configure_queue($printer, $in) &&
+			    ($configapps = 1);
 		    } elsif ($modify eq N("Printer options")) {
 			get_printer_info($printer, $in) &&
 			    setup_options($printer, $in) &&
@@ -4015,6 +4024,7 @@ What do you want to modify on this printer?",
 		    } elsif ($modify eq N("Set this printer as the default")) {
 			$printer->{DEFAULT} = $queue;
 			printer::default::set_printer($printer);
+			$configapps = 1;
 			$in->ask_warn(N("Default printer"),
 				      N("The printer \"%s\" is set as the default printer now.", $queue));
 		    } elsif ($modify eq N("Add this printer to Star Office/OpenOffice.org/GIMP")) {
@@ -4039,6 +4049,7 @@ What do you want to modify on this printer?",
 				    N("Printerdrake"),
 				    N("Removing printer \"%s\"...", $queue));
 				if (printer::main::remove_queue($printer, $queue)) { 
+				    $configapps = 1;
 				    $editqueue = 0;
 				    # Define a new default printer if we have
 				    # removed the default one
@@ -4073,11 +4084,12 @@ What do you want to modify on this printer?",
 	    }
 
 	    # Configure the current printer queue in applications
-	    my $_w = $in->wait_message(N("Printerdrake"),
-				       N("Configuring applications..."));
-	    printer::main::configureapplications($printer);
-	    undef $_w;
-	    
+	    if ($configapps) {
+		my $_w = $in->wait_message(N("Printerdrake"),
+					   N("Configuring applications..."));
+		printer::main::configureapplications($printer);
+		undef $_w;
+	    }
 	    # Delete some variables
 	    foreach (qw(OLD_QUEUE QUEUE TYPE str_type DBENTRY ARGS OLD_CHOICE)){
 		$printer->{$_} = "";
