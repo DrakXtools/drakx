@@ -132,11 +132,12 @@ sub getPackages {
 	log::l("no updates available, bailing out");
 	return;
     }
+    my $fpubkey = getFile("base/pubkey", $mirror);
     
     #- extract hdlist of crypto, then depslist.
     require pkgs;
     my $update_medium = pkgs::psUsingHdlist($prefix, 'ftp', $packages, "hdlist-updates.cz", "1u", "RPMS",
-					    "Updates for Mandrake Linux " . version(), 1, $fhdlist);
+					    "Updates for Mandrake Linux " . version(), 1, $fhdlist, $fpubkey);
     if ($update_medium) {
 	log::l("read updates hdlist");
 	#- keep in mind where is the URL prefix used according to mirror (for install_any::install_urpmi).
