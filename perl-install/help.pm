@@ -12,30 +12,37 @@ empty => '',
 addUser => 
 __("GNU/Linux is a multiuser system, and this means that each user can have his
 own preferences, his own files and so on. You can read the ``User Guide''
-to learn more. But unlike \"root\", which is the administrator, the users
-you add here will not be entitled to change anything except their own files
-and their own configuration. You will have to create at least one regular
-user for yourself. That account is where you should log in for routine use.
-Although it is very practical to log in as \"root\" everyday, it may also
-be very dangerous! The slightest mistake could mean that your system would
-not work any more. If you make a serious mistake as a regular user, you may
-only lose some information, but not the entire system.
+to learn more this concept. But unlike \"root\", which is the
+administrator, the users you add here will not be entitled to change
+anything except their own files and their own configurations. You will have
+to create at least one regular user for yourself. That account is where you
+should log in for routine use. Although it is very practical to log in as
+\"root\" everyday, it may also be very dangerous! The slightest mistake
+could mean that your system would not work any more. If you make a serious
+mistake as a regular user, you may only lose some information, but not the
+entire system.
 
-First, you have to enter your real name. This is not mandatory, of course -
-as you can actually enter whatever you want. DrakX will then take the first
-word you have entered in the box and will bring it over to the \"User
+First, you have to enter your real name. This is not mandatory, of course
+-- as you can actually enter whatever you want. DrakX will then take the
+first word you have entered in the box and will bring it over to the \"User
 name\". This is the name this particular user will use to log onto the
 system. You can change it. You then have to enter a password here. A
-non-privileged (regular) user's password is not as crucial as the \"root\"'
+non-privileged (regular) user's password is not as crucial as the \"root\"
 one from a security point of view, but that is no reason to neglect it:
 after all, your files are at risk.
 
 If you click on \"Accept user\", you can then add as many as you want. Add
-a user for each one of your friends: your father or your sister, for
-example. When you finish adding all the users you want, select \"Done\".
+a user for each one of the people meant to use that computer. When you are
+finish adding all the users you want, select \"Done\".
 
 Clicking the \"Advanced\" button allows you to change the default \"shell\"
-for that user (bash by default)."),
+for that user (bash by default).
+
+When you are finished adding all users, you will be proposed to choose a
+user which can automatically log into the system when the computer boots
+up. If you are interested in that feature (and do not care much about local
+security), choose the desired user and window manager, then click \"Yes\".
+If you are not interested in this feature, click \"No\"."),
 
 ask_mntpoint_s => 
 __("Listed above are the existing Linux partitions detected on your hard drive.
@@ -43,7 +50,7 @@ You can keep the choices made by the wizard, they are good for most common
 installations. If you make any changes, you must at least define a root
 partition (\"/\"). Do not choose too small a partition or you will not be
 able to install enough software. If you want to store your data on a
-separate partition, you will also need to create a partition for \"/home\"
+separate partition, you will also need to create a \"/home\" partition
 (only possible if you have more than one Linux partition available).
 
 Each partition is listed as follows: \"Name\", \"Capacity\".
@@ -105,7 +112,7 @@ text about that group. If you unselect all groups when performing a regular
 installation (by opposition to an upgrade), a dialog will pop up proposing
 different options for a minimal installation:
 
- * \"With X\": install the fewer packages possible to have a working
+ * \"With X\": install the fewest packages possible to have a working
 graphical desktop;
 
  * \"With basic documentation\": installs the base system plus basic
@@ -121,8 +128,8 @@ you are familiar with the packages being offered or if you want to have
 total control over what will be installed.
 
 If you started the installation in \"Upgrade\" mode, you can unselect all
-groups to avoid installing any new package. This is useful for repairing or
-updating an existing system."),
+groups to avoid installing any new package. This is useful to repair or
+update an existing system."),
 
 choosePackagesTree => 
 __("Finally, depending on whether or not you chose to be able to select
@@ -134,9 +141,9 @@ Whenever you select a package on the tree, a description appears on the
 right. When your selection is finished, click the \"Install\" button which
 will then launch the installation process. Depending on the speed of your
 hardware and the number of packages that need to be installed, it may take
-a while to complete the process. An estimate of the time it will take to
-install everything is displayed on the screen, to help you gauge if there
-is sufficient time to enjoy a cup of coffee.
+a while to complete the process. An installation time estimate is displayed
+on the screen, to help you gauge if there is sufficient time to enjoy a cup
+of coffee.
 
 !! If a server package has been selected, either intentionally or because
 it was part of a whole group, you will be asked to confirm that you really
@@ -157,14 +164,14 @@ another package in order to successfully complete the installation.
 The tiny floppy disk icon at the bottom of the list allows to load the
 package list chosen during a previous installation. Clicking on this icon
 will ask you to insert a floppy disk previously created at the end of
-another installation. See the second tip of last step on how to create such
-a floppy."),
+another installation. See the second tip of the previous step on how to
+create such a floppy disk."),
 
 configureNetwork => 
 __("You are now able to set up your Internet/network connection. If you wish to
 connect your computer to the Internet or to a local network, click \"OK\".
 The autodetection of network devices and modem will be launched. If this
-detection fails, uncheck the \"Use auto detection\" box next time. You may
+detection fails, uncheck the \"Use auto-detection\" box next time. You may
 also choose not to configure the network, or do it later; in that case,
 simply click the \"Cancel\" button.
 
@@ -175,8 +182,8 @@ Here, we will not detail each configuration. Simply make sure that you have
 all the parameters from your Internet Service Provider or system
 administrator.
 
-You can consult the ``User Guide'' chapter about Internet connections for
-details about the configuration, or simply wait until your system is
+You can consult the ``Starter Guide'' chapter about Internet connections
+for details about the configuration, or simply wait until your system is
 installed and use the program described there to configure your connection.
 
 If you wish to configure the network later after installation, or if you
@@ -185,9 +192,9 @@ are finished configuring your network connection, click \"Cancel\"."),
 configureServices => 
 __("You may now choose which services you wish to start at boot time.
 
-Here are presented all the services available with the current
-installation. Review them carefully and uncheck those which are not always
-needed at boot time.
+Here are listed all the services available with the current installation.
+Review them carefully and uncheck those which are not always needed at boot
+time.
 
 You can get a short explanatory text about a service by selecting a
 specific service. However, if you are not sure whether a service is useful
@@ -216,12 +223,12 @@ by other machines on your local network."),
 configureX => 
 __("X (for X Window System) is the heart of the GNU/Linux graphical interface
 on which all the graphical environments (KDE, GNOME, AfterStep,
-WindowMaker, etc.) bundled with Mandrake Linux rely. In this section, DrakX
-will try to configure X automatically.
+WindowMaker, etc.) bundled with Mandrake Linux rely.
 
-It is extremely rare for it to fail, unless the hardware is very old (or
-very new). If it succeeds, it will start X automatically with the best
-resolution possible, depending on the size of the monitor. A window will
+You will be presented the list of available resolutions and color depth
+available for your hardware. Choose the one that best suit your needs (you
+will be able to change that after installation though). When you are
+satisfied with the sample shown in the monitor, click \"OK\". A window will
 then appear and ask you if you can see it.
 
 If you are doing an \"Expert\" installation, you will enter the X
@@ -231,7 +238,7 @@ information about this wizard.
 If you can see the message during the test, and answer \"Yes\", then DrakX
 will proceed to the next step. If you cannot see the message, it simply
 means that the configuration was wrong and the test will automatically end
-after 10 seconds, restoring the screen. Refer then to the Video
+after 10 seconds, restoring the screen. Refer then to the video
 configuration section of the user guide for more information on how to
 configure your display."),
 
@@ -248,12 +255,12 @@ booting from the CD-ROM, press the >>F1<< key at boot and type >>rescue<<
 at the prompt. But in case your computer cannot boot from the CD-ROM, you
 should come back to this step for help in at least two situations:
 
- * when installing the bootloader, DrakX will rewrite the boot sector (MBR)
-of your main disk (unless you are using another boot manager), to allow you
-to start up with either Windows or GNU/Linux (assuming you have Windows in
-your system). If you need to reinstall Windows, the Microsoft install
-process will rewrite the boot sector, and then you will not be able to
-start GNU/Linux!
+ * when installing the bootloader, DrakX will rewrite the boot sector (
+MBR) of your main disk (unless you are using another boot manager), to
+allow you to start up with either Windows or GNU/Linux (assuming you have
+Windows in your system). If you need to reinstall Windows, the Microsoft
+install process will rewrite the boot sector, and then you will not be able
+to start GNU/Linux!
 
  * if a problem arises and you cannot start up GNU/Linux from the hard
 disk, this floppy disk will be the only means of starting up GNU/Linux. It
@@ -267,12 +274,11 @@ need. You will not have to format it since DrakX will rewrite the whole
 disk."),
 
 doPartitionDisks => 
-__("At this point, you need to choose where you want to install the Mandrake
-Linux operating system on your hard drive. If your hard drive is empty or
-if an existing operating system is using all the available space, you will
-need to partition it. Basically, partitioning a hard drive consists of
-logically dividing it to create space to install your new Mandrake Linux
-system.
+__("You now need to choose where you want to install the Mandrake Linux
+operating system on your hard drive. If your hard drive is empty or if an
+existing operating system is using all the available space, you will need
+to partition it. Basically, partitioning a hard drive consists of logically
+dividing it to create space to install your new Mandrake Linux system.
 
 Because the partitioning process' effects are usually irreversible,
 partitioning can be intimidating and stressful if you are an inexperienced
@@ -281,9 +287,9 @@ beginning, please consult the manual and take your time.
 
 If you are running the installation in Expert mode, you will enter
 DiskDrake, the Mandrake Linux partitioning tool, which allows you to
-fine-tune your partitions. See the DiskDrake section in the ``User Guide''.
-From the installation interface, you can use the wizards as described here
-by clicking the dialog's \"Wizard\" button.
+fine-tune your partitions. See the DiskDrake section in the ``Starter
+Guide''. From the installation interface, you can use the wizards as
+described here by clicking the dialog's \"Wizard\" button.
 
 If partitions have already been defined, either from a previous
 installation or from another partitioning tool, simply select those to
@@ -291,7 +297,7 @@ install your Linux system.
 
 If partitions are not defined, you will need to create them using the
 wizard. Depending on your hard drive configuration, several options are
-available:
+available.
 
  * \"Use free space\": this option will simply lead to an automatic
 partitioning of your blank drive(s). You will not be prompted further;
@@ -302,9 +308,9 @@ option. You will then be asked to choose the mount points associated to
 each of the partitions. The legacy mount points are selected by default,
 and you should generally keep them.
 
- * \"Use the free space on the Windows; partition\": if Microsoft Windows
-is installed on your hard drive and takes all the space available on it,
-you have to create free space for Linux data. To do so, you can delete your
+ * \"Use the free space on the Windows partition\": if Microsoft Windows is
+installed on your hard drive and takes all the space available on it, you
+have to create free space for Linux data. To do so, you can delete your
 Microsoft Windows partition and data (see ``Erase entire disk'' or ``Expert
 mode'' solutions) or resize your Microsoft Windows partition. Resizing can
 be performed without the loss of any data, provided you previously
@@ -331,14 +337,14 @@ will be lost;
    !! If you choose this option, all data on your disk will be lost. !!
 
  * \"Expert mode\": choose this option if you want to manually partition
-your hard drive. Be careful - it is a powerful but dangerous choice. You
+your hard drive. Be careful -- it is a powerful but dangerous option. You
 can very easily lose all your data. Hence, do not choose this unless you
-know what you are doing. To know how do use the DiskDrake utility used
-here, refer to the section ``Managing Your Partitions'' of the ````User
+know what you are doing. To know how to use the DiskDrake utility used
+here, refer to the section ``Managing Your Partitions'' of the ````Starter
 Guide''''"),
 
 exitInstall => 
-__("There you are. Installation is now complete and your GNU/Linux system is
+__("There you are. Installation is now completed and your GNU/Linux system is
 ready to use. Just click \"OK\" to reboot the system. You can start
 GNU/Linux or Windows, whichever you prefer (if you are dual-booting), as
 soon as the computer has booted up again.
@@ -370,7 +376,7 @@ the [F1] key, and by issuing >>linux defcfg=\"floppy\"<<.
 
 formatPartitions => 
 __("Any partitions that have been newly defined must be formatted for use
-(formatting means creating a filesystem).
+(formatting means creating a filesystem on it).
 
 At this time, you may wish to reformat some already existing partitions to
 erase any data they contain. If you wish to do that, please select those
@@ -384,7 +390,7 @@ reformat partitions containing data that you wish to keep (typically
 
 Please be careful when selecting partitions. After formatting, all data on
 the selected partitions will be deleted and you will not be able to recover
-any of it.
+it.
 
 Click on \"OK\" when you are ready to format partitions.
 
@@ -418,9 +424,9 @@ install the selected package(s), or \"Cancel\" to abort."),
 license => 
 __("Before continuing, you should read carefully the terms of the license. It
 covers the whole Mandrake Linux distribution, and if you do not agree with
-all the terms in it, click on the \"Refuse\" button which will immediately
-terminate the installation. To continue with the installation, click on the
-\"Accept\" button."),
+all the terms included in it, click on the \"Refuse\" button which will
+immediately terminate the installation. To continue with the installation,
+click on the \"Accept\" button."),
 
 miscellaneous => 
 __("At this point, it is time to choose the security level desired for the
@@ -449,16 +455,16 @@ To partition the selected hard drive, you can use these options:
 drive;
 
  * \"Auto allocate\": this option enables to automatically create ext3 and
-swap partitions in free space of your hard drive;
+swap partitions on your hard drive's free space;
 
 \"More\": gives access to additional features:
 
  * \"Save partition table\": saves the partition table to a floppy. Useful
-for later partition-table recovery if necessary. It is strongly recommended
-to perform this step;
+for later partition-table recovery, if necessary. It is strongly
+recommended to perform this step;
 
  * \"Restore partition table\": allows to restore a previously saved
-partition table from floppy disk;
+partition table from a floppy disk;
 
  * \"Rescue partition table\": if your partition table is damaged, you can
 try to recover it using this option. Please be careful and remember that it
@@ -539,40 +545,38 @@ __("Please be patient. This operation can take several minutes."),
 
 selectInstallClass => 
 __("DrakX now needs to know if you want to perform a default (\"Recommended\")
-installation or if you want to have greater control (\"Expert\"). You can
-also choose to do a new install or an upgrade of an existing Mandrake Linux
-system:
+installation or if you want to have greater control (\"Expert\") over your
+installation. You can also choose to do a new installation or upgrade your
+existing Mandrake Linux system:
 
- * \"Install\": completely wipes out the old system, however, depending on
+ * \"Install\": completely wipes out the old system. However, depending on
 what is currently installed on your machine, you may be able to keep some
 old partitions (Linux or otherwise) unchanged;
 
  * \"Upgrade\": this installation class allows to simply update the
-packages currently installed on your Mandrake Linux system. It keeps the
-current partitions of your hard drives as well as user configurations. All
-other configuration steps remain available, similar to a normal
-installation;
+packages currently installed on your Mandrake Linux system. It keeps your
+hard drives' current partitions as well as user configurations. All other
+configuration steps remain available, similar to a normal installation;
 
  * \"Upgrade Packages Only\": this new installation class allows you to
 upgrade an existing Mandrake Linux system while keeping all system
 configurations unchanged. Adding new packages to the current installation
 is also possible.
 
-Upgrades should work fine on Mandrake Linux systems containing version
-\"8.1\" or later.
+Upgrades should work fine on Mandrake Linux systems using version \"8.1\"
+or later.
 
-Depending on your knowledge of GNU/Linux, select one of the following
-choices:
+Depending on your GNU/Linux knowledge, select one of the following choices:
 
  * Recommended: choose this if you have never installed a GNU/Linux
 operating system. The installation will be very easy and you will only be
 asked a few questions;
 
- * Expert: if you have a good understanding of GNU/Linux, you may wish to
+ * Expert: if you have a good GNU/Linux understanding, you may wish to
 perform a highly customized installation. Some of the decisions you will
-have to make may be difficult if you do not have good knowledge of
-GNU/Linux, so it is not recommended that those without a fair amount of
-experience select this installation class."),
+have to make may be difficult if you do not have good GNU/Linux knowledge,
+so it is not recommended that those without a fair amount of experience
+select this installation class."),
 
 selectKeyboard => 
 __("Normally, DrakX selects the right keyboard for you (depending on the
@@ -587,8 +591,8 @@ Click on the \"More\" button to be presented with the complete list of
 supported keyboards.
 
 If you choose a keyboard layout based on a non-latin alphabet, you will be
-asked on next dialog to choose the key binding that will switch the
-keyboard layout between the latin and non latin layouts."),
+asked in the next dialog to choose the key binding that will switch the
+keyboard layout between the latin and non-latin layouts."),
 
 selectLanguage => 
 __("The first step is to choose your preferred language.
@@ -598,20 +602,24 @@ Please choose your preferred language for installation and system usage.
 Clicking on the \"Advanced\" button will allow you to select other
 languages to be installed on your workstation. Selecting other languages
 will install the language-specific files for system documentation and
-applications. For example, if you will host users from Spain on your
-machine, select English as the main language in the tree view and in the
-Advanced section click on the box corresponding to \"Spanish|Spain\".
+applications. For example, if you host users from Spain on your machine,
+select English as the main language in the tree view and in the Advanced
+section, click on the box corresponding to \"Spanish|Spain\".
 
 Note that multiple languages may be installed. Once you have selected any
-additional locales, click the \"OK\" button to continue."),
+additional locales, click the \"OK\" button to continue.
+
+To switch from one language to the other, you can launch the
+\"/usr/sbin/localedrake\" command as \"root\" to change the whole system
+language, or as a simple user to only change that user's default language."),
 
 selectMouse => 
-__("DrakX generally detects the number of buttons your mouse has. If not, it
-assumes you have a two-button mouse and will set it up for third-button
+__("DrakX generally detects the number of buttons your mouse possesses. If not,
+it assumes you have a two-button mouse and will set it up for third-button
 emulation. DrakX will automatically know whether it is a PS/2, serial or
 USB mouse.
 
-If you wish to specify a different type of mouse select the appropriate
+If you wish to specify a different type of mouse, select the appropriate
 type from the provided list.
 
 If you choose a mouse other than the default, a test screen will be
@@ -619,33 +627,33 @@ displayed. Use the buttons and wheel to verify that the settings are
 correct. If the mouse is not working well, press the space bar or [Return]
 to \"Cancel\" and choose again.
 
-Wheel mouses are sometimes not automatically detected. You will need to
+Sometimes, wheel mouses are not automatically detected. You will need to
 manually select it in the list. Be sure to select the one corresponding to
 the correct port it is attached to. After you have pressed the \"OK\"
-button, a mouse image is displayed. You then need to move the wheel of your
-mouse to activate it correctly. Then test all buttons and movements are
-correct."),
+button, a mouse image will be displayed. You then need to move the wheel of
+your mouse to activate it correctly. Then test that all buttons and
+movements are correct."),
 
 selectSerialPort => 
 __("Please select the correct port. For example, the \"COM1\" port under
 Windows is named \"ttyS0\" under GNU/Linux."),
 
 setRootPassword => 
-__("This is the most crucial decision point for the security of your GNU/Linux
-system: you have to enter the \"root\" password. \"root\" is the system
-administrator and is the only one authorized to make updates, add users,
-change the overall system configuration, and so on. In short, \"root\" can
-do everything! That is why you must choose a password that is difficult to
-guess - DrakX will tell you if it is too easy. As you can see, you can
-choose not to enter a password, but we strongly advise you against this if
-only for one reason: do not think that because you booted GNU/Linux that
-your other operating systems are safe from mistakes. Since \"root\" can
-overcome all limitations and unintentionally erase all data on partitions
-by carelessly accessing the partitions themselves, it is important for it
-to be difficult to become \"root\".
+__("This is the most crucial decision in regards with the security of your
+GNU/Linux system: you have to enter the \"root\" password. \"Root\" is the
+system administrator and is the only one authorized to make updates, add
+users, change the overall system configuration, and so on. In short,
+\"root\" can do everything! That is why you must choose a password that is
+difficult to guess -- DrakX will tell you if it is too easy. As you can
+see, you can choose not to enter a password, but we strongly advise you
+against this if only for one reason: do not think that because you booted
+GNU/Linux that your other operating systems are safe from mistakes. Since
+\"root\" can overcome all limitations and unintentionally erase all data on
+partitions by carelessly accessing the partitions themselves, it is
+important for it to be difficult to become \"root\".
 
 The password should be a mixture of alphanumeric characters and at least 8
-characters long. Never write down the \"root\" password - it makes it too
+characters long. Never write down the \"root\" password -- it makes it too
 easy to compromise a system.
 
 However, please do not make the password too long or complicated because
@@ -659,17 +667,17 @@ error. If you do happen to make the same typing error twice, this
 In Expert mode, you will be asked if you will be connecting to an
 authentication server, like NIS or LDAP.
 
-If your network uses either of the LDAP, NIS, or PDC Windows Domain
-authentication services, select the appropriate one as \"authentication\".
-If you do not know, ask your network administrator.
+If your network uses either LDAP, NIS, or PDC Windows Domain authentication
+services, select the appropriate one as \"authentication\". If you have no
+clue, ask your network administrator.
 
 If your computer is not connected to any administrated network, you will
 want to choose \"Local files\" for authentication."),
 
 setupBootloader => 
-__("LILO and grub are GNU/Linux bootloaders. This stage, normally, is totally
+__("LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally
 automated. In fact, DrakX analyzes the disk boot sector and acts
-accordingly, depending on what it finds here:
+accordingly, depending on what it finds there:
 
  * if a Windows boot sector is found, it will replace it with a grub/LILO
 boot sector. Hence, you will be able to load either GNU/Linux or another
@@ -678,14 +686,14 @@ OS;
  * if a grub or LILO boot sector is found, it will replace it with a new
 one.
 
-If in doubt, DrakX will display a dialog with various options.
+if in doubt, DrakX will display a dialog with various options.
 
  * \"Bootloader to use\": you have three choices:
 
-    * \"GRUB\": if you prefer grub (text menu).
+    * \"GRUB\": if you prefer grub (text menu);
 
     * \"LILO with graphical menu\": if you prefer LILO with its graphical
-interface.
+interface;
 
     * \"LILO with text menu\": if you prefer LILO with its text menu
 interface.
@@ -695,7 +703,7 @@ interface.
 second hard drive (\"/dev/hdb\"), or even on a floppy disk (\"/dev/fd0\");
 
  * \"Delay before booting the default image\": when rebooting the computer,
-this is the delay granted to the user to choose - in the bootloader menu,
+this is the delay granted to the user to choose -- in the bootloader menu,
 another boot entry than the default one.
 
 !! Beware that if you choose not to install a bootloader (by selecting
@@ -713,7 +721,7 @@ boot options which will be available at boot time will be displayed.
 If there is another operating system installed on your machine, it will
 automatically be added to the boot menu. Here, you can choose to fine-tune
 the existing options. Select an entry and click \"Modify\" to modify or
-remove it; \"Add\" creates a new entry; and \"Done\" goes on to the next
+remove it. \"Add\" creates a new entry. and \"Done\" goes on to the next
 installation step.
 
 You may also not want to give access to these other operating systems to
@@ -722,41 +730,33 @@ you will need a boot disk in order to boot those other operating systems!"),
 
 setupBootloaderBeginner => 
 __("You must indicate where you wish to place the information required to boot
-to GNU/Linux.
+GNU/Linux.
 
 Unless you know exactly what you are doing, choose \"First sector of drive
 (MBR)\"."),
 
 setupDefaultSpooler => 
-__("Here, we select a printing system for your computer. Other OSs may offer
-you one, but Mandrake Linux offers three.
+__("Here, we select a printing system for your computer. Other OSes may offer
+you one, but Mandrake Linux offers two.
 
- * \"pdq\" - which means ``print, don't queue'', is the choice if you have
+ * \"pdq\" -- which means ``print, don't queue'', is the choice if you have
 a direct connection to your printer and you want to be able to panic out of
 printer jams, and you do not have networked printers. It will handle only
 very simple network cases and is somewhat slow for networks. Pick \"pdq\"
-if this is your maiden voyage to GNU/Linux. You can change your choices
+if this is your first voyage to GNU/Linux. You can change your choices
 after installation by running PrinterDrake from the Mandrake Control Center
 and clicking the expert button.
 
- * \"CUPS\" - ``Common Unix Printing System'', is excellent at printing to
+ * \"CUPS\" -- ``Common Unix Printing System'', is excellent at printing to
 your local printer and also halfway-around the planet. It is simple and can
 act as a server or a client for the ancient \"lpd\" printing system. Hence,
 it is compatible with the systems that went before. It can do many tricks,
 but the basic setup is almost as easy as \"pdq\". If you need this to
 emulate an \"lpd\" server, you must turn on the \"cups-lpd\" daemon. It has
-graphical front-ends for printing or choosing printer options.
-
- * \"lprNG\" - ``line printer daemon New Generation''. This system can do
-approximately the same things the others can do, but it will print to
-printers mounted on a Novell Network, because it supports the IPX protocol,
-and it can print directly to shell commands. If you have need of Novell or
-printing to commands without using a separate pipe construct, use lprNG.
-Otherwise, CUPS is preferable as it is simpler and better at working over
-networks."),
+graphical front-ends for printing or choosing printer options."),
 
 setupSCSI => 
-__("DrakX now detects any IDE devices present in your computer. It will also
+__("DrakX now detects any IDE device present in your computer. It will also
 scan for one or more PCI SCSI cards on your system. If a SCSI card is
 found, DrakX will automatically install the appropriate driver.
 
@@ -766,7 +766,7 @@ if you know that there is a SCSI card installed in your machine. You will
 be presented with a list of SCSI cards to choose from. Click \"No\" if you
 have no SCSI hardware. If you are unsure, you can check the list of
 hardware detected in your machine by selecting \"See hardware info\" and
-clicking \"OK\". Examine the list of hardware and then click on the \"OK\"
+clicking \"OK\". Examine the hardware list and then click on the \"OK\"
 button to return to the SCSI interface question.
 
 If you have to manually specify your adapter, DrakX will ask if you want to
@@ -775,18 +775,13 @@ the card-specific options which the hardware needs to initialize. This
 usually works well.
 
 If DrakX is not able to probe for the options which need to be passed, you
-will need to provide options to the driver manually. Please review the
-``User Guide'' (chapter 3, in the ``Collecting Information on Your
-Hardware'' section) for hints on retrieving the parameters required from
-hardware documentation, from the manufacturer's web site (if you have
-Internet access) or from Microsoft Windows (if you used this hardware with
-Windows on your system)."),
+will need to manually provide options to the driver."),
 
 setupYabootAddEntry => 
 __("You can add additional entries for yaboot, either for other operating
 systems, alternate kernels, or for an emergency boot image.
 
-For other OSs, the entry consists only of a label and the \"root\"
+For other OSes, the entry consists only of a label and the \"root\"
 partition.
 
 For Linux, there are a few possible options:
@@ -817,7 +812,7 @@ boot situation;
 need to allocate a large ramdisk, this option can be used;
 
  * Read-write: normally the \"root\" partition is initially brought up in
-read-only, to allow a file system check before the system becomes ``live''.
+read-only, to allow a filesystem check before the system becomes ``live''.
 Here, you can override this option;
 
  * NoVideo: should the Apple video hardware prove to be exceptionally
@@ -863,7 +858,7 @@ Firmware Delay expires."),
 
 summary => 
 __("Here are presented various parameters concerning your machine. Depending on
-your installed hardware, you may - or not, see the following entries:
+your installed hardware, you may (or may not), see the following entries:
 
  * \"Mouse\": check the current mouse configuration and click on the button
 to change it if necessary;
@@ -878,19 +873,19 @@ correspond. Hence, you may need to click on the \"Timezone\" button in
 order to configure the clock according to the time zone you are in;
 
  * \"Printer\": clicking on the \"No Printer\" button will open the printer
-configuration wizard. Consult the corresponding chapter of the ``User
+configuration wizard. Consult the correpsonding chapter of the ``Starter
 Guide'' for more information on how to setup a new printer. The interface
-presented there is similar to the one used during installation;
+presented there is similar to the one used at installation time;
 
- * \"Sound card\": if a sound card is detected on your system, it is
+ * \"Sound card\": if a sound card is detected on your system, it will be
 displayed here. No modification possible at installation time;
 
- * \"TV card\": if a TV card is detected on your system, it is displayed
-here. No modification possible at installation time;
+ * \"TV card\": if a TV card is detected on your system, it will be
+displayed here. No modification possible at installation time;
 
- * \"ISDN card\": if an ISDN card is detected on your system, it is
+ * \"ISDN card\": if an ISDN card is detected on your system, it will be
 displayed here. You can click on the button to change the parameters
-associated with it."),
+associated to it."),
 
 takeOverHdChoose => 
 __("Choose the hard drive you want to erase in order to install your new
@@ -903,6 +898,6 @@ this hard drive. Be careful, after clicking on \"OK\", you will not be able
 to recover any data and partitions present on this hard drive, including
 any Windows data.
 
-Click on \"Cancel\" to cancel this operation without losing any data and
+Click on \"Cancel\" to stop this operation without losing any data and
 partitions present on this hard drive."),
 );
