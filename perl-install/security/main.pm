@@ -92,7 +92,7 @@ sub network_generate_page {
 	my @items;
 
 	foreach my $tmp (@network_options) {
-#		my $hbutton = gtksignal_connect(new Gtk::Button(_('Help')),
+#		my $hbutton = gtksignal_connect(new Gtk::Button(_("Help")),
 #								  'clicked' => sub { show_msec_help($tmp) } );
 		my $default = $msec->get_function_default('', $tmp);
 		if (member($default, @yesno_choices) || member($default, @alllocal_choices)) {
@@ -111,7 +111,7 @@ sub network_generate_page {
 			$$rsecurity_net_hash{$tmp}->set_popdown_strings(@alllocal_choices);
 			$$rsecurity_net_hash{$tmp}->entry->set_text($msec->get_check_value('', $tmp));
 		}
-		push @items, [ new Gtk::Label(_($tmp." (default: ".$default.")")), $$rsecurity_net_hash{$tmp} ]; #, $hbutton];
+		push @items, [ new Gtk::Label($tmp._(" (default: %s)",$default)), $$rsecurity_net_hash{$tmp} ]; #, $hbutton];
 	}
 
 	gtkpack(new Gtk::VBox(0, 0),
@@ -128,7 +128,7 @@ sub system_generate_page {
 	my @items;
 
 	foreach my $tmp (@system_options) {
-#		my $hbutton = gtksignal_connect(new Gtk::Button(_('Help')),
+#		my $hbutton = gtksignal_connect(new Gtk::Button(_("Help")),
 #								  'clicked' => sub { show_msec_help($tmp) } );
 		my $default = $msec->get_function_default('', $tmp);
 		my $item_hbox = new Gtk::HBox(0, 0);
@@ -147,7 +147,7 @@ sub system_generate_page {
 			$$rsecurity_system_hash{$tmp}->set_popdown_strings(@alllocal_choices);
 			$$rsecurity_system_hash{$tmp}->entry->set_text($msec->get_check_value('', $tmp));
 		}
-		push @items, [ new Gtk::Label(_($tmp." (default: ".$default.")")), $$rsecurity_system_hash{$tmp} ]; #, $hbutton ];
+		push @items, [ new Gtk::Label($tmp._(" (default: %s)",$default)), $$rsecurity_system_hash{$tmp} ]; #, $hbutton ];
 	}
 
 	createScrolledWindow(gtkpack(new Gtk::VBox(0, 0),
@@ -165,7 +165,7 @@ sub checks_generate_page {
 	my @items;
 	foreach my $tmp (@security_checks) {
 		if (!member(@ignore_list, $tmp)) {
-#		     my $hbutton = gtksignal_connect(new Gtk::Button(_('Help')),
+#		     my $hbutton = gtksignal_connect(new Gtk::Button(_("Help")),
 #								  'clicked' => sub { show_msec_help($tmp) } );
 			$$rsecurity_checks_hash{$tmp} = new Gtk::Combo();
 			$$rsecurity_checks_hash{$tmp}->entry->set_editable(0);
