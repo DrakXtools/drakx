@@ -844,18 +844,24 @@ Allowing this will permit users to simply click on \"Share\" in konqueror and na
     my $custom = $r eq $l[2];
     if ($r ne $l[0]) {
 	require services;
-	#- verify we can export in $type
-	my %type2service = (nfs => [ 'nfs-utils', 'nfs' ], smb => [ 'samba-server', 'smb' ]);
+	my %types = (
+	    nfs => [ 'nfs-utils', 'nfs',
+		     N("NFS: the traditional Unix file sharing system, with less support on Mac and Windows.")
+		   ],
+	    smb => [ 'samba-server', 'smb',
+		     N("SMB: a file sharing system used by Windows, Mac OS X and many modern Linux systems.")
+		   ],
+       );
 	my %l;
 	if ($type) {
 	    %l = ($type => 1);
 	} else {
-	    %l = map_each { $::a => services::starts_on_boot($::b->[1]) } %type2service;
-	    $in->ask_from('', N("You can export using NFS or Samba. Please select which you'd like to use."),
-			  [ map { { text => $_, val => \$l{$_}, type => 'bool' } } keys %l ]) or return;
+	    %l = map_each { $::a => services::starts_on_boot($::b->[1]) } %types;
+	    $in->ask_from('', N("You can export using NFS or SMB. Please select which you would like to use."),
+			  [ map { { text => $types{$_}[2], val => \$l{$_}, type => 'bool' } } keys %l ]) or return;
 	}
-	foreach (keys %l) {
-	    my ($pkg, $service) = @{$type2service{$_}} or die "unknown type $_\n";
+	foreach (keys %types) {
+	    my ($pkg, $service, $_descr) = @{$types{$_}};
 	    my $file = "/etc/init.d/$service";
 	    if ($l{$_}) {
 		$in->do_pkgs->ensure_is_installed($pkg, $file) or return;
