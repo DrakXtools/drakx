@@ -355,7 +355,6 @@ sub lilo_choice() {
 sub updateAutologin() {
     my ($usern, $deskt) = ($user_combo->entry->get_text, $desktop_combo->entry->get_text);
     if ($auto_buttons[0]->get_active) {
-        $in->do_pkgs->install('autologin') if $x_mode;
         any::set_autologin($usern, $deskt);
     } else {
         any::set_autologin();
