@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 0.8mdk
+Release: 0.9mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -288,6 +288,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Tue Jan 07 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.9mdk
+- fix wizards
+
 * Tue Jan  7 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.8mdk
 - update french translation
 - harddrake: treat usb hubs as usb controllers
