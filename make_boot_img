@@ -181,7 +181,7 @@ sub initrd {
 	_ "$sudo mknod $mnt/dev/ttyp0 c 3 0";
     }
 
-    if (member($type, qw(pcmcia all network)) && $arch !~ /ppc|ia64|x86_64/) {
+    if (member($type, qw(pcmcia all network)) && $arch !~ /ppc|ia64/) {
 	 _ "$sudo cp -a /etc/pcmcia $mnt/etc";
 	 _ "cp $mnt/etc/pcmcia/config /tmp/pcmcia_config_tmp";
 	 _ "tools/patch_pcmcia_config.pl /tmp/pcmcia_config_tmp kernel/all.kernels/$main/modules.dep";
