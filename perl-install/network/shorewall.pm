@@ -140,7 +140,7 @@ sub write {
 			map_each { [ 'ACCEPT', $_, 'fw', $::a, join(',', @$::b), '-' ] } %ports_by_proto 
 		    } ('net', if_($conf->{loc_interface}[0], 'loc'))),
 		   );
-		   if (cat_("/etc/shorewall/rules") !~ /^\s*REDIRECT\s*loc\s*$squid_port\s+(\S+)/mg && $squid_port && -f "/var/run/squid.pid" && grep { /Loc/i} cat_("/etc/shorewall/zones")) {
+		   if (cat_("/etc/shorewall/rules") !~ /^\s*REDIRECT\s*loc\s*$squid_port\s+(\S+)/mg && $squid_port && -f "/var/run/squid.pid" && grep { /Loc/i } cat_("/etc/shorewall/zones")) {
 	substInFile {
 		s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tloc\t$squid_port\ttcp\twww\t-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
 	} "/etc/shorewall/rules"
