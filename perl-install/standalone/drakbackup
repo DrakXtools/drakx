@@ -194,7 +194,6 @@ my $results;
 my @net_methods = ("ftp", "rsync", "ssh", "webdav");
 my @media_types = ("cd", "hd", "tape");
 my %cd_devices;
-my $cd_drives;
 my $std_device;
 my @tape_devices;
 my $tar_ext = "tar.gz";
@@ -202,7 +201,7 @@ my $tar_ext = "tar.gz";
 # config. FILES -> Default PATH  & Global variables.
 my @sys_files = ("/etc");
 my @user_list;
-my @list_other = () ;
+my @list_other;
 my $cfg_dir = "/etc/drakxtools/drakbackup/";
 my $save_path = "/var/lib/drakbackup";
 my $log_buff;
@@ -430,53 +429,38 @@ sub get_cd_info {
 	my $i;
 	my $key;
 	my $info;
+
+     my %data => (
+                  "drive speed" => 'speed',
+                  "Can change speed" => 'chg_speed',
+                  "Can read multisession" => 'multisession',
+                  "Can write CD-R" => 'cdr',
+                  "Can write CD-RW" => 'cdrw',
+                  "Can write DVD-R" => 'dvdr',
+                  "Can write DVD-RAM" => 'dvdram',
+                  );
+
 	
 	#- kind of ugly - I'm sure Pixel could improve this, but it works
 	#- parse /proc/sys/dev/cdrom/info and get all the cd device capabilities
+     my $cd_drives;
 	foreach (@cd_info) {
 		@line_data = split(/[:\t]+/, $_);
-		if ($line_data[0] =~ "drive name") {
-			$cd_drives = @line_data-1;
-			chop($line_data[$cd_drives]);
-			@drive_names = @line_data;
-			print "drives: $cd_drives\n" unless $interactive;
-		}
+          if ($line_data[0] =~ "drive name") {
+              $cd_drives = @line_data-1;
+              chop($line_data[$cd_drives]);
+              @drive_names = @line_data;
+              print "drives: $cd_drives\n" unless $interactive;
+          }
 		chop($line_data[$cd_drives]) if $cd_drives;
-		if ($line_data[0] eq "drive speed") {
-			for ($i = 1; $i <= $cd_drives; $i++) {
-				$cd_devices{$drive_names[$i]}{speed} = $line_data[$i];
-			}
-		}
-		if ($line_data[0] eq "Can change speed") {
-			for ($i = 1; $i <= $cd_drives; $i++) {
-				$cd_devices{$drive_names[$i]}{chg_speed} = $line_data[$i];
-			}
-		}
-		if ($line_data[0] eq "Can read multisession") {
-			for ($i = 1; $i <= $cd_drives; $i++) {
-				$cd_devices{$drive_names[$i]}{multisession} = $line_data[$i];
-			}
-		}
-		if ($line_data[0] eq "Can write CD-R") {
-			for ($i = 1; $i <= $cd_drives; $i++) {
-				$cd_devices{$drive_names[$i]}{cdr} = $line_data[$i];
-			}
-		}
-		if ($line_data[0] eq "Can write CD-RW") {
-			for ($i = 1; $i <= $cd_drives; $i++) {
-				$cd_devices{$drive_names[$i]}{cdrw} = $line_data[$i];
-			}
-		}
-		if ($line_data[0] eq "Can write DVD-R") {
-			for ($i = 1; $i <= $cd_drives; $i++) {
-				$cd_devices{$drive_names[$i]}{dvdr} = $line_data[$i];
-			}
-		}
-		if ($line_data[0] eq "Can write DVD-RAM") {
-			for ($i = 1; $i <= $cd_drives; $i++) {
-				$cd_devices{$drive_names[$i]}{dvdram} = $line_data[$i];
-			}
-		}
+          foreach my $key (keys %data) {
+              if ($line_data[0] =~ $key) {
+                  for ($i = 1; $i <= $cd_drives; $i++) {
+                      $cd_devices{$drive_names[$i]}{$data{$key}} = $line_data[$i];
+                  }
+              }
+          }
+
 	}
 	
 	#- now we know all the capabilities, we need the cdrecord device id
