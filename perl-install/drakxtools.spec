@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.15mdk
+Release: 0.16mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -310,6 +310,27 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Jul 17 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.16mdk
+- drop gtk+1 requires
+- renew drakconnect gui:
+  o embedded mode:
+    * remove ugly icon
+    * fix internet gateway buttons layout
+    * smaller dialogs
+    * correctly align fields in "lan configuration" dialog
+    * run wizard in background (no more main window freeze until
+      wizard exit)
+  o wizard mode:
+    * proxy configuration step: do not go back two steps back on
+      "previous" click, but only one back
+    * properly use checkboxes (do not put extra labels before when
+      checkbox's label is empty)
+- wizard mode:
+  o stock items in wizards for previous/next
+  o do not force permanent center of wizard windows, which is not
+    user-friendly
+  o always use s/TextView/Label/ 
+
 * Tue Jul 15 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.15mdk
 - drakbackup, drakperm: fix button layout
 - drakboot, drakfloppy: use option menus rather than non editable
