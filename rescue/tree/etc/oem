@@ -50,8 +50,9 @@ cp -a /boot /cdrom/boot /cdrom/Mandrake /hd
 echo "Installing packages"
 export DURING_INSTALL=1
 export RPM_INSTALL_LANG=$langs
+export LD_LIBRARY_PATH=/usr/X11R6/lib
 export SECURE_LEVEL=2
-for i in /var/lib/rpm /proc ; do mkdir -p /mnt$i; done
+for i in /etc /var/lib/rpm /proc ; do mkdir -p /mnt$i; done
 mount -t proc proc /mnt/proc
 rpm --root /mnt --initdb
 touch /mnt/etc/fstab
