@@ -302,7 +302,7 @@ sub setPackages {
     my ($o, $rebuild_needed) = @_;
 
     require pkgs;
-    if (!$o->{packages} || is_empty_hash_ref($o->{packages}{depslist})) {
+    if (!$o->{packages} || is_empty_array_ref($o->{packages}{depslist})) {
 	$o->{packages} = pkgs::psUsingHdlists($o->{prefix}, $o->{method});
 
 	#- open rpm db according to right mode needed.
