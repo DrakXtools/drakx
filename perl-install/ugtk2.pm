@@ -979,7 +979,7 @@ sub new {
 		    my $d = ${{ $Gtk2::Gdk::Keysyms{F2} => 'screenshot', $Gtk2::Gdk::Keysyms{Delete} => 'restart' }}{$event->keyval};
 		    if ($d eq 'screenshot') {
 			common::take_screenshot();
-		    } elsif ($d eq 'restart' && $event->state >= ['control-mask', 'mod1-mask']) {
+		    } elsif ($d eq 'restart' && member('control-mask', @{$event->state}) && member('mod1-mask', @{$event->state})) {
 			log::l("restarting install");
                         $o->exit(0x35);
  		    }
