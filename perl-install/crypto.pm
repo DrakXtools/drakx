@@ -85,16 +85,18 @@ sub getPackages {
     $crypto::host = $mirror;
 
     #- extract hdlist of crypto, then depslist.
-    require pkgs;
-    my $update_medium = pkgs::psUsingHdlist($prefix, 'ftp', $packages, "hdlist-updates.cz",
-					    1+scalar(keys %{$packages->{mediums}}), "RPMS",
-					    #"Updates for Mandrake Linux $::VERSION", 1, getFile("base/hdlist.cz", $mirror)) and
-					    "Updates for Mandrake Linux 8.1", 1, getFile("base/hdlist.cz", $mirror)) and
-					      log::l("read updates hdlist");
-    #- keep in mind where is the URL prefix used according to mirror (for install_any::install_urpmi).
-    $update_medium->{prefix} = dir($mirror);
+    eval {
+	require pkgs;
+	my $update_medium = pkgs::psUsingHdlist($prefix, 'ftp', $packages, "hdlist-updates.cz", "1u", "RPMS",
+						#"Updates for Mandrake Linux $::VERSION", 1, getFile("base/hdlist.cz", $mirror)) and
+						"Updates for Mandrake Linux 8.1", 1, getFile("base/hdlist.cz", $mirror)) and
+						  log::l("read updates hdlist");
+	#- keep in mind where is the URL prefix used according to mirror (for install_any::install_urpmi).
+	$update_medium->{prefix} = dir($mirror);
 
-    return $update_medium;
+	return $update_medium;
+    };
+    return; #- an exception occurred, so ignore it.
 }
 
 sub get {

@@ -920,8 +920,10 @@ Do you want to continue ?")) || return;
     };
 
     if ($update_medium) {
-	$o->choosePackagesTree($o->{packages}, $update_medium);
-	$o->pkg_install();
+	if ($o->choosePackagesTree($o->{packages}, $update_medium)) {
+	    $o->pkg_install;
+	    $o->install_urpmi;
+	}
     }
  
     #- stop interface using ppp only.

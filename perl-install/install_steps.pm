@@ -435,13 +435,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     substInFile { s/^cdrom\n//; $_ .= "cdrom\n" if eof } "$msec/group.conf" if -d $msec;
     substInFile { s/^cdwriter\n//; $_ .= "cdwriter\n" if eof } "$msec/group.conf" if -d $msec;
 
-    my $pkg = pkgs::packageByName($o->{packages}, 'urpmi');
-    if ($pkg && pkgs::packageSelectedOrInstalled($pkg)) {
-	install_any::install_urpmi($o->{prefix}, 
-				   $::oem ? 'cdrom' : $o->{method}, #- HACK
-				   $o->{packages}{mediums});
-	pkgs::saveCompssUsers($o->{prefix}, $o->{packages}, $o->{compssUsers}, $o->{compssUsersSorted});
-    }
+    $o->install_urpmi;
 
 #    #- update language and icons for KDE.
 #    update_gnomekderc($_, 'Locale', Language => "") foreach list_skels($o->{prefix}, '.kderc');
@@ -525,6 +519,20 @@ sub copyKernelFromFloppy {
     fs::umount("/floppy");
 }
 
+sub install_urpmi {
+    my ($o) = @_;
+
+    my $pkg = pkgs::packageByName($o->{packages}, 'urpmi');
+    if ($pkg && pkgs::packageSelectedOrInstalled($pkg)) {
+	install_any::install_urpmi($o->{prefix}, 
+				   $::oem ? 'cdrom' : $o->{method}, #- HACK
+				   $o->{packages}{mediums});
+	pkgs::saveCompssUsers($o->{prefix}, $o->{packages}, $o->{compssUsers}, $o->{compssUsersSorted});
+    }
+
+
+}
+
 sub updateModulesFromFloppy {
     my ($o) = @_;
     return if $::testing || !$o->{updatemodules};
@@ -595,8 +603,11 @@ sub installUpates {
 
     upNetwork($o);
     require crypto;
-    my @crypto_packages = crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
-    $o->pkg_install(@{$u->{packages} || []});
+    crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror}) and
+	$o->pkg_install(@{$u->{packages} || []});
+
+    #- re-install urpmi with update security medium.
+    $o->install_urpmi;
 }
 
 sub summary {

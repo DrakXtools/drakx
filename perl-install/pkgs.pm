@@ -417,7 +417,7 @@ sub psUsingHdlist {
     log::l("trying to read $hdlist for medium $medium");
 
     #- if the medium already exist, use it.
-    $packages->{mediums}{$medium} and return;
+    $packages->{mediums}{$medium} and return $packages->{mediums}{$medium};
 
     my $m = $packages->{mediums}{$medium} = { hdlist     => $hdlist,
 					      method     => $method,
