@@ -547,7 +547,7 @@ sub bestMatchSentence {
 	}
 	$best = $count, $bestSentence = $_ if $count > $best;
     }
-    $bestSentence;
+    wantarray ? ($bestSentence, $best) : $bestSentence;
 }
 
 # count the number of character that match
@@ -563,7 +563,7 @@ sub bestMatchSentence2 {
 	}
 	$best = $count, $bestSentence = $_ if $count > $best;
     }
-    $bestSentence;
+    wantarray ? ($bestSentence, $best) : $bestSentence;
 }
 
 sub typeFromMagic($@) {
