@@ -642,7 +642,9 @@ sub read_rpmsrate {
 	    foreach (split ' ', $data) {
 		if ($packages) {
 		    my $p = packageByName($packages, $_) or next;
-		    packageSetRateRFlags($p, $rate, grep { !/^\d$/ } @m);
+		    
+		    my @m2 = map { packageName(packageById($packages, $_)) =~ /locales-(.*)/ ? qq(LOCALES"$1") : () } packageDepsId($p);
+		    packageSetRateRFlags($p, $rate, (grep { !/^\d$/ } @m), @m2);
 		} else {
 		    print "$_ = ", join(" && ", @m), "\n";
 		}
