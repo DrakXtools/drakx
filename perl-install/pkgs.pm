@@ -1020,7 +1020,7 @@ sub installTransactionClosure {
 	my $pkg = $packages->{depslist}[$l[0]];
 
 	#- force changeCD callback to be called from main process.
-	install_any::getFile($pkg->filename, $medium->{descr}, $suppl_CD ? supplCDMountPoint() : undef);
+	install_any::getFile($pkg->filename, $::o->{method}, $suppl_CD ? supplCDMountPoint() : undef);
 	#- close opened handle above.
 	install_any::getFile('XXX');
     }
@@ -1177,9 +1177,9 @@ sub install {
 						my $f = $pkg && $pkg->filename;
 						print $LOG "$f\n";
 						if (isSupplCDMedium($medium)) {
-						    $fd = install_any::getFile($f, $medium->{descr}, supplCDMountPoint());
+						    $fd = install_any::getFile($f, $::o->{method}, supplCDMountPoint());
 						} else {
-						    $fd = install_any::getFile($f, $medium->{descr}, $medium->{prefix});
+						    $fd = install_any::getFile($f, $::o->{method}, $medium->{prefix});
 						}
 						$fd ? fileno $fd : -1;
 					    }, callback_close => sub {
