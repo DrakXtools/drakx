@@ -53,16 +53,6 @@ If you don't know, choose 'use pppoe'"),
                            my $netcnx = $wiz->{var}{netcnx};
                            $netcnx->{type} = "adsl_$type";
                                          
-                           my %packages = (
-                                           'dhcp'  => [ 'dhcpcd' ],
-                                           'eci'   => [ 'eciadsl' ],
-                                           'pppoe' => [ 'rp-pppoe' ],
-                                           'pptp'  => [ 'pptp-adsl' ],
-                                           'sagem' => [ 'adiusbadsl' ],
-                                           'sagem_dhcp' => [ qw(adiusbadsl dhcpcd) ],
-                                           'speedtouch' => [ 'speedtouch' ],
-                                          );
-                           $in->do_pkgs->install(@{$packages{$type}});
                            $netcnx->{"adsl_$type"} = {};
                            $netcnx->{"adsl_$type"}{vpivci} = '' if $type =~ /eci|speedtouch/;
                            return 'ethernet' if $type eq 'dhcp';
@@ -72,19 +62,6 @@ If you don't know, choose 'use pppoe'"),
                            return "hw_account";
                        },
                       },
-              adsl_conf2 => {
-                             #$adsl_type =~ /sagem|speedtouch|eci/ or conf_network_card($netc, $intf, 'static', '10.0.0.10') or goto adsl_conf_step_1;
-                             #adsl_conf_backend($adsl, $netc, $adsl_type) or goto adsl_conf_step_1;
-                             #1;
-                            },
-              ethernet => {
-                           #go_ethernet($netc, $intf, 'dhcp', '', '', $first_time);
-                          },
-              adsl_old_end => {
-                      post => sub {
-                          $wiz->{var}{adsl}{type} =~ /speedtouch|eci/ or $netconnect::need_restart_network = 1;
-                      },
-                     },
              });
 };
 
