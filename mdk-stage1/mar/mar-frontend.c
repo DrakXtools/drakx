@@ -157,6 +157,7 @@ mar_create_file(char *dest_file, char **files)
 		gz_errnum = gzclose(f);
 	}
 
+	printf("mar: created archive %s (%d files, length %d)\n", dest_file, filenum, total_length);
 	return 0;
 }
 
