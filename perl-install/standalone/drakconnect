@@ -542,7 +542,7 @@ sub save {
     my ($netc, $p, $apply_button) = @_;
 
     foreach (keys %$p) {
-	save_notebook($netc, $p->{$_}{intf}, $p->{$_}{gui}) or $in->ask_warn(N("Error"), N("IP address should be in format 1.2.3.4")) and return;
+	save_notebook($netc, $p->{$_}{intf}, $p->{$_}{gui}) or return;
 	$p->{$_}{intf}{save} ? $p->{$_}{intf}{save}->() : apply($netc, $p->{$_}{intf});
     }
     system("/etc/rc.d/init.d/network restart");
@@ -559,8 +559,10 @@ sub save_notebook {
     $gui->{intf_bool}{MII_NOT_SUPPORTED} and $intf->{MII_NOT_SUPPORTED} = bool2yesno(!$gui->{intf_bool}{MII_NOT_SUPPORTED}->get_active);
     $gui->{intf_bool}{HWADDR} and (bool2yesno($gui->{intf_bool}{HWADDR}->get_active) eq 'yes' ? ($intf->{HWADDR} = 'yes') : delete $intf->{HWADDR});
 
-    $intf->{BOOTPROTO} eq 'static' and (check_field($intf, 'IPADDR', 'NETMASK') or return 0);
-    check_field($netc, 'GATEWAY') or return 0;
+    if ($intf->{BOOTPROTO} eq 'static') { 
+        check_field($intf, 'IPADDR', 'NETMASK') or $in->ask_warn(N("Error"), N("IP address should be in format 1.2.3.4")) and return 0;
+    }
+    check_field($netc, 'GATEWAY') or $in->ask_warn(N("Error"), N("Gateway address should be in format 1.2.3.4")) and return 0;
     1;
 }
 
