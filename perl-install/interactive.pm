@@ -167,7 +167,7 @@ sub ask_many_from_list {
 	    icon => may_apply($h->{icon2f}, $_, ''),
 	} foreach @{$h->{list}};
 	if ($h->{sort}) {
-	    $h->{list} = [ sort { $h->{e}{$a}{label} cmp $h->{e}{$b}{label} } @{$h->{list}} ];
+	    $h->{list} = [ sort { $h->{e}{$a}{text} cmp $h->{e}{$b}{text} } @{$h->{list}} ];
 	}
     }
     $o->ask_from_entries_refH($title, $message, [ map { my $h = $_; map { $h->{e}{$_} } @{$h->{list}} } @l ]) or return;
