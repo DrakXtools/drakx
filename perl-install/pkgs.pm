@@ -657,9 +657,8 @@ sub read_rpmsrate {
 }
 
 sub readCompssUsers {
-    my ($packages, $meta_class) = @_;
+    my ($meta_class) = @_;
     my (%compssUsers, @sorted, $l);
-    my (%compss); 
 
     my $file = 'Mandrake/base/compssUsers';
     my $f = $meta_class && install_any::getFile("$file.$meta_class") || install_any::getFile($file) or die "can't find $file";
@@ -669,18 +668,32 @@ sub readCompssUsers {
 	s/#.*//;
 
 	if (/^(\S.*)/) {
+	    my $verbatim = $_;
 	    my ($icon, $descr);
 	    /^(.*?)\s*\[icon=(.*?)\](.*)/  and $_ = "$1$3", $icon  = $2;
 	    /^(.*?)\s*\[descr=(.*?)\](.*)/ and $_ = "$1$3", $descr = $2;
-	    $compssUsers{$_}{icons} = $icon; 
-	    $compssUsers{$_}{descr} = $descr; 
+	    $compssUsers{$_} = { verbatim => $verbatim, icons => $icon, descr => $descr, flags => $l=[] };
 	    push @sorted, $_;
-	    $compssUsers{$_}{flags} = $l = [];
 	} elsif (/^\s+(.*?)\s*$/) {
 	    push @$l, $1;
 	}
     }
     \%compssUsers, \@sorted;
+}
+sub saveCompssUsers {
+    my ($prefix, $packages, $compssUsers, $sorted) = @_;
+    my $flat;
+    foreach (@$sorted) {
+	my %fl;
+	$fl{$_} = 1 foreach @{$compssUsers->{$_}{flags}};
+	$flat .= $compssUsers->{$_}{verbatim};
+	foreach my $p (values %{$packages->{names}}) {
+	    my ($rate, @flags) = packageRateRFlags($p);
+	    $flat .= "\t$rate " . packageName($p) 
+	      if grep { !grep { /^!(.*)/ ? !$fl{$1} : $fl{$_} } split('\|\|') } @flags;
+	}
+    }
+    output "$prefix/var/lib/urpmi/compssUsers.flat", $flat;
 }
 
 sub setSelectedFromCompssList {
