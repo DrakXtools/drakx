@@ -344,7 +344,7 @@ sub will_tell_kernel {
 	will_tell_kernel($hd, del => $o_part);
 	will_tell_kernel($hd, add => $o_part);
     } else {
-	my $part_number = sub { devices::part_number($o_part) || internal_error("bad device " . description($o_part)) };
+	my $part_number = sub { $o_part->{device} =~ /(\d+)$/ ? $1 : internal_error("bad device " . description($o_part)) };
 	push @{$hd->{'will_tell_kernel' . ($o_delay || '')} ||= []}, 
 	  [
 	   $action,
