@@ -736,8 +736,8 @@ sub new {
 	    $::WizardWindow->add($::WizardTable);
 
 	    if ($::isInstall) {
-		$::WizardTable->set_size_request($::windowwidth * 0.90, $::windowheight * 0.73);
-		$::WizardWindow->set_uposition($::stepswidth + $::windowwidth * 0.04, $::logoheight + $::windowheight * 0.15);
+		$::WizardTable->set_size_request($::windowwidth * 0.90, $::windowheight * ($::logoheight ? 0.73 : 0.9));
+		$::WizardWindow->set_uposition($::stepswidth + $::windowwidth * 0.04, $::logoheight + $::windowheight * ($::logoheight ? 0.15 : 0.05));
 		$::WizardWindow->signal_connect(key_press_event => sub {
 		    my (undef, $event) = @_;
 		    my $d = ${{ Gtk2::Gdk::Event::Key->Sym_F1  => 'help',

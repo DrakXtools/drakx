@@ -110,6 +110,8 @@ sub create_help_window {
 sub create_steps_window {
     my ($o) = @_;
 
+    return if $::stepswidth == 0;
+
     $o->{steps_window}->destroy if $o->{steps_window};
 
     my $w = bless {}, 'ugtk2';
@@ -137,6 +139,8 @@ sub create_steps_window {
 #------------------------------------------------------------------------------
 sub create_logo_window {
     my ($o) = @_;
+
+    return if $::logowidth == 0;
 
     gtkdestroy($o->{logo_window});
 
@@ -166,8 +170,8 @@ sub init_sizes() {
     ($::rootwidth,  $::rootheight)    = (Gtk2::Gdk->screen_width, Gtk2::Gdk->screen_height);
     $::live and $::rootheight -= 80;
     #- ($::rootheight,  $::rootwidth)    = (min(768, $::rootheight), min(1024, $::rootwidth));
-    ($::stepswidth,  $::stepsheight)  = (160, $::rootheight);
-    ($::logowidth,   $::logoheight)   = (500, 40);
+    ($::stepswidth,  $::stepsheight)  = $::rootwidth <= 640 ? (0, 0) : (160, $::rootheight);
+    ($::logowidth,   $::logoheight)   = $::rootwidth <= 640 ? (0, 0) : (500, 40);
     ($::helpwidth,   $::helpheight)   = ($::rootwidth - $::stepswidth, 0);
     ($::windowwidth, $::windowheight) = ($::rootwidth - $::stepswidth, $::rootheight - $::helpheight - $::logoheight);
 }
