@@ -1078,6 +1078,18 @@ sub disable_user_view {
     substInFile { s/^Browser=.*/Browser=0/ } "$prefix/etc/X11/gdm/gdm.conf";
 }
 
+sub set_security {
+    my ($o) = @_;
+    {
+	local $ENV{DRAKX_PASSWORD} = $o->{bootloader}{password};
+	local $ENV{DURING_INSTALL} = 1;
+	security::level::set($o->{security});
+    }
+    require security::various;
+    security::various::config_libsafe($::prefix, $o->{libsafe});
+    security::various::config_security_user($::prefix, $o->{security_user});
+}
+
 sub write_fstab {
     my ($o) = @_;
     fs::write_fstab($o->{all_hds}, $o->{prefix}) if !$::live && !$o->{isUpgrade};

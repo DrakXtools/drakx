@@ -282,12 +282,7 @@ sub setupBootloader {
     installStepsCall($o, $auto, 'setupBootloaderBefore') if $ent_number == 1;
     installStepsCall($o, $auto, 'setupBootloader');
 
-    local $ENV{DRAKX_PASSWORD} = $o->{bootloader}{password};
-    local $ENV{DURING_INSTALL} = 1;
-    run_program::rooted($o->{prefix}, "/usr/sbin/msec", "-o", "run_commands=0", "-o", "log=stderr", $o->{security});
-    require security::various;
-    security::various::config_libsafe($o->{prefix}, $o->{libsafe});
-    security::various::config_security_user($o->{prefix}, $o->{security_user});
+    install_any::set_security($o);
 }
 #------------------------------------------------------------------------------
 sub configureX {
