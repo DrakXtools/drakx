@@ -167,7 +167,7 @@ sub get_functions {
                          set_shell_history_size set_shell_timeout set_user_umask)]);
 
     my $file = "$::prefix/usr/share/msec/mseclib.py";
-    my $function = '';
+    my $function;
 
     # read mseclib.py to get each function's name and if it's
     # not in the ignore list, add it to the returned list.
@@ -255,8 +255,7 @@ sub get_check_default {
 # config_check(check, value)
 #   Apply the configuration to "$::prefix"/etc/security/msec/security.conf
 sub config_check {
-    shift;
-    my ($check, $value) = @_;
+    my (undef, $check, $value) = @_;
     if ($value eq 'default') {
 	   substInFile { s/^$check.*\n// } $check_file;
     } else {
