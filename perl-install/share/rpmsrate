@@ -27,7 +27,7 @@ KDE
 
 VIDEO
   4 xine-ui xine-oss xine-xv powerdvd RealPlayer
-  3 nist xanim xmms-smpeg xmovie 
+  3 nist xanim xmms-smpeg xmovie mplayer-guimplayer-gui
   2 mtv mtv-fullscreen-extension
   1 bcast mpeg2_movie
 TV
@@ -176,7 +176,7 @@ NETWORKING_GROUPWARE_SERVER
 NETWORKING_MAIL
   5 mailx metamail
   4 faces mozilla-mail evolution
-  3 fetchmail urlview mutt
+  3 fetchmail urlview mutt spamassassin
   3 !GNOME !KDE xmailbox
   2 FaxMail comsat elm faces-xface
   1 exmh sylpheed fetchmail-daemon fetchmailconf
@@ -230,7 +230,8 @@ NETWORKING_DNS_SERVER
   1 nslint
 
 NETWORKING_FILE
-  4 samba-client nfs-utils-clients
+  4 samba-client nfs-utils-clients 
+    X LinNeighborhood
   2 arkeia-gui arkeia-client arkeia-arkc
   2 GNOME gnomba gtm
   2 autofs
@@ -283,7 +284,8 @@ ARCHIVING
 BURNER
   5 mkisofs cdrecord
   4 GNOME gnome-toaster gcombust
-  4 X xcdroast
+  4 X !KDE xcdroast
+    KDE k3b
   2 X eroaster 
   DEVELOPMENT
     3 cdrecord-devel
