@@ -5,42 +5,43 @@
 
 use MDK::Common;
 
+my %probes;
 foreach (cat_('probe.c')) {
     if (/^pci_id_t pci_id\[\] = {/ ... /^};/) {
 	/^\s*{\s*0x([\da-f]+),\s*0x([\da-f]+),\s*"([^"]*)",\s*"([^"]*)"\s*}/
-	  and push @probes, { vendor => $1, device => $2, tag => $3, name => $4, vd => "$1$2" };
+	  and $probes{"$1$2"} = { vendor => $1, device => $2, driver => $3, name => $4 };
     }
 }
 
 require '/usr/bin/merge2pcitable.pl';
 my $drivers = read_pcitable("/usr/share/ldetect-lst/pcitable");
 
-foreach my $k (sort keys %$drivers) {
-    $v = $drivers->{$k};
-    $k =~ /^(....)(....)/;
-    push @pcitable, { vendor => $1, device => $2, driver => $v->[0], name => $v->[1], vd => "$1$2" };
+my %pcitable = map_each {
+    $::a =~ /^(....)(....)/ or die;
+    "$1$2" => { vendor => $1, device => $2, driver => $::b->[0], name => $::b->[1] };
+} %$drivers;
+
+my @yenta_socket_ids = grep { $pcitable{$_}{driver} eq 'yenta_socket' } keys %pcitable;
+
+if (my @missing_in_probe_c = difference2(\@yenta_socket_ids, [ keys %probes ])) {
+    print "Missing in `probe.c':\n",
+      map { 
+	  my $p = $pcitable{$_};
+	  qq(    { 0x$p->{vendor}, 0x$p->{device}, "yenta_socket", "$p->{name}" },\n);
+      } sort @missing_in_probe_c;
 }
 
 my @res;
-print "Missing in `probe.c':\n";
-foreach my $p (@pcitable) {
-    next if $p->{driver} ne 'yenta_socket';
-    member($p->{vd}, map { $_->{vd} } @probes) or
-      push @res, "    { 0x$p->{vendor}, 0x$p->{device}, \"..\", \"$p->{name}\" },\n";
-}
-print sort @res;
-@res = ();
-print "\n";
-
-print "Missing in pcitable:\n";
-foreach my $p (@probes) {
-    my @r = grep { $_->{vd} eq $p->{vd} } @pcitable;
-    @r > 1 and die "duplicate entry in pcitable <$p->{vd}>\n";
-    if (!@r || @r && $r[0]->{driver} ne 'yenta_socket') {
-	push @res, "0x$p->{vendor}\t0x$p->{device}\t\"yenta_socket\"\t\"" . (@r ? $r[0]->{name} : '(COMPLETELY MISSING)') . "\"\n";
-	@r and $r[0]->{driver} ne 'unknown' and print STDERR "WARNING, driver for <$p->{vd}> was <$r[0]->{driver}>\n";
+foreach my $id (keys %probes) {
+    my $p = $probes{$id};
+    my $r = $pcitable{$id};
+    if (!$r || $r->{driver} ne 'yenta_socket') {
+	push @res, qq(0x$p->{vendor}\t0x$p->{device}\t"yenta_socket"\t") . ($r ? $r->{name} : '(COMPLETELY MISSING)') . qq("\n);
+    }
+    if ($r && $r->{driver} ne 'unknown' && $r->{driver} ne $p->{driver}) {
+	warn "WARNING: $id: pcitable:$r->{driver} vs probe.c:$p->{driver}\n";
     }
 }
-print sort @res;
-@res = ();
-print "\n";
+if (@res) {
+    print "\n", "Missing in pcitable:\n", sort @res;
+}
