@@ -75,6 +75,8 @@ sub lvms {
     my ($all_hds) = @_;
     my @pvs = grep { isRawLVM($_) } fs::get::fstab($all_hds) or return;
 
+    log::l("looking for vgs in " . join(' ', map { $_->{device} } @pvs));
+
     #- otherwise vgscan won't find them
     devices::make($_->{device}) foreach @pvs; 
     require lvm;
