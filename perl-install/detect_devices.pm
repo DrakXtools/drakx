@@ -592,13 +592,13 @@ sub getUPS() {
         $_;
     } grep { $_->{DESCRIPTION} =~ /MGE UPS/ } values %serialprobe),
       # USB UPSs;
-      (grep { $_->{description} =~ /American Power Conversion\|Back-UPS/ } @usb_devices),
+      (grep { $_->{driver} = 'hidups' if $_->{driver} eq 'usbhid'; $_->{description} =~ /American Power Conversion\|Back-UPS/ } @usb_devices),
       (map {
           $_->{port} = "auto";
           $_->{media_type} = 'UPS';
           $_->{driver} = 'newhidups';
           $_;
-      } grep { $_->{driver} =~ /ups$/ } @usb_devices);
+      } grep { $_->{driver} =~ /ups$/ && $_->{description} !~ /American Power Conversion\|Back-UPS/ } @usb_devices);
 }
 
 $pcitable_addons = <<'EOF';
