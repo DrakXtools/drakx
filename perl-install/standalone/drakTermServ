@@ -28,7 +28,7 @@
 #		2) create/modify /etc/dhcpd.conf for diskless clients
 #		3) create/modify /etc/exports for clusternfs export of "/"
 #		4) add/remove entries in /etc/shadow$$CLIENTS$$ to allow user access
-#		5) per client XF86Config-4, using /etc/XF86Config-4$$IP-ADDRESS$$
+#		5) per client XF86Config-4, using /etc/XF86Config-4$$IP=IP-ADDRESS$$
 #		6) other per client customizations (modules.conf, keyboard, mouse)
 #		7) enable/modify /etc/xinetd.d/tftp for etherboot
 #		8) create etherboot floppies for client machines
@@ -354,7 +354,7 @@ sub help {
         		/etc/shadow needs to be duplicated in /etc/shadow\$\$CLIENTS\$\$. drakTermServ helps
         		in this respect by adding or removing system users from this file.
 
-        - Per client /etc/X11XF86Config-4\$\$IP-ADDRESS\$\$:
+        - Per client /etc/X11XF86Config-4\$\$IP=IP-ADDRESS\$\$:
         		Through clusternfs, each diskless client can have it's own unique configuration files
         		on the root filesystem of the server. In the future drakTermServ will help create these
         		files.
