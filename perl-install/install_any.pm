@@ -440,6 +440,7 @@ sub selectSupplMedia {
 	    (my $cdromdev) = detect_devices::cdroms();
 	    $o->ask_warn('', N("No device found")), return 'error' if !$cdromdev;
 	    $cdrom = $cdromdev->{device};
+	    $cdrom =~ m,^/, or $cdrom = "/dev/$cdrom";
 	    devices::make($cdrom);
 	    ejectCdrom($cdrom);
 	    if ($o->ask_okcancel('', N("Insert the CD"), 1)) {
