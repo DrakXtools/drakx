@@ -1,7 +1,7 @@
 package mouse; # $Id$
 
-use diagnostics;
-use strict;
+#use diagnostics;
+#use strict;
 
 #-######################################################################################
 #- misc imports
@@ -505,20 +505,11 @@ sub test_mouse {
 					     ($darea->allocation->[2]-$width)/2+98, ($darea->allocation->[3]-$height)/2 + 67,
 					     13, 62);
 	    } else {
-#############
-		$wait=1;
-		$darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
-					     $m3_middle, 0, 0,
-					     ($darea->allocation->[2]-$width)/2+98, ($darea->allocation->[3]-$height)/2 + 67,
-					     13, 62);
-		Gtk->timeout_add(200, sub { $wait = 0 });
-#############
-
-#  		$darea->window->draw_arc ( $darea->style->black_gc,
-#  					   1, ($darea->allocation->[2]-$width)/2 + $x, ($darea->allocation->[3]-$height)/2 + 90, 20, 25,
-#  					   0, 360*64);
+  		$darea->window->draw_arc ( $darea->style->black_gc,
+  					   1, ($darea->allocation->[2]-$width)/2 + $x, ($darea->allocation->[3]-$height)/2 + 90, 20, 25,
+  					   0, 360*64);
 	    }
-	} elsif ($nb == 4) {
+	} elsif ($nb == 3) {
 	    $wait=1;
 	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
 					 $aru, 0, 0,
@@ -529,11 +520,17 @@ sub test_mouse {
 					 ($darea->allocation->[2]-$width)/2+98, ($darea->allocation->[3]-$height)/2 + 67,
 					 13, 62);
 	    Gtk->timeout_add(200, sub { $wait = 0 });
-	} elsif ($nb == 5) {
+	} elsif ($nb == 4) {
+	    $wait=1;
+	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+					 $ard, 0, 0,
+					 ($darea->allocation->[2]-$width)/2+102, ($darea->allocation->[3]-$height)/2 + 131,
+					 6, 8);
 	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
 					 $m3_middle, 0, 0,
 					 ($darea->allocation->[2]-$width)/2+98, ($darea->allocation->[3]-$height)/2 + 67,
-					 13, 62)
+					 13, 62);
+	    Gtk->timeout_add(200, sub { $wait = 0 });
 	}
     };
     $darea->signal_connect(button_press_event => sub {
