@@ -894,24 +894,13 @@ Please run \"Internet access\" in control center."));
 
     my $param_vbox = Gtk2::VBox->new(0,0);
     my $i = 0;
-    my (@mask, $extra_netdevice);
-    if ($netcnx->{type} eq 'lan') {
-        @mask = (0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0);
-    } elsif ($netcnx->{type} eq 'isdn_internal') {
-        if (defined $cnx->{vendor} && defined $cnx->{id}) {
-            @mask = (0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1);
-        } else {
-            @mask = (1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1)
-        }
+    my $extra_netdevice;
+    if ($netcnx->{type} eq 'isdn_internal') {
         $extra_netdevice = "ppp0";
     } elsif ($netcnx->{type} eq 'modem' || $netcnx->{type} eq 'isdn_external') {
-        @mask = (0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0);
         $extra_netdevice = "ppp0" if $netcnx->{type} eq 'modem';
     } elsif ($netcnx->{type} =~ /adsl/) {
-        @mask = (0,0,0,0,0,0,1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0);
         $extra_netdevice = "ppp0";
-    } elsif ($netcnx->{type} eq 'cable') {
-        @mask = (0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0);
     }
     $extra_netdevice = "ippp0" if $netcnx->{type} =~ /^isdn/;
 
@@ -929,10 +918,6 @@ Please run \"Internet access\" in control center."));
                     );
     my @infos;
     foreach (@conf_data) {
-        if (!$mask[$i]) {
-            $i++;
-            next;
-        }
         $infos[2*$i] = Gtk2::HBox->new(0,0);
         gtkpack($infos[2*$i], gtkset_justify(Gtk2::Label->new($_->[0]), 'left'));
         gtkpack($param_vbox, $infos[2*$i]);
@@ -967,9 +952,9 @@ Please run \"Internet access\" in control center."));
                                      0, gtkpack(create_hbox('edge'),
                                                 gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => $exit_dialogsub),
                                                 gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
-                                                                          each_index {
-                                                                              ${$conf_data[$::i][1]} = $infos[2*$::i+1]->get_text if $_;
-                                                                          } @mask;
+                                                                          foreach my $i (0..$#conf_data) {
+                                                                              ${$conf_data[$::i][1]} = $infos[2*$::i+1]->get_text;
+                                                                          } @conf_data;
                                                                           update();
                                                                           $button_apply->set_sensitive(1);
                                                                           $exit_dialogsub->();
