@@ -373,7 +373,6 @@ xml:readonly:$defaults_dir
 
         #- ftp proxy
         if (my ($host, $port) = $u->{ftp_proxy} =~ m,^(?:http|ftp)://(?:[^:\@]+(?::[^:\@]+)?\@)?([^\:]+)(?::(\d+))?$,) {
-            print "bouh !\n";
             $port ||= 21;
             $gconf->set_string("/system/proxy/mode", "manual");
             $gconf->set_string("/system/proxy/ftp_host", $host);
