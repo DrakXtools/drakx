@@ -235,13 +235,18 @@ sub display_racoon_conf {
 	my ($racoon) = @_;
 	my $display = "";
 	my $prefix_to_simple_line = "";
+	my $pt;
 	foreach my $key1 (ikeys %$racoon) {
 		if (!$racoon->{$key1}{1}) {
 			$display .= $prefix_to_simple_line . $racoon->{$key1} . "\n";
 			$prefix_to_simple_line = "";
 		} else {
 			foreach my $key2 (ikeys %{$racoon->{$key1}}) {
-				$key2 > 1 ? my $pt = $racoon->{$key1}{$key2-1}[0] : my $pt = $racoon->{$key1}{1}[0];
+				if ($key2 > 1) {
+					$pt = $racoon->{$key1}{$key2-1}[0];
+				} else {
+					$pt = $racoon->{$key1}{1}[0];
+				};
 				my $t = $racoon->{$key1}{1}[0];
 				my $f = $racoon->{$key1}{$key2}[0];
 				my $list_length = scalar @{$racoon->{$key1}{$key2}};
@@ -297,13 +302,18 @@ sub write_racoon_conf {
 	my ($racoon_conf, $racoon) = @_;
 	my $display = "";
 	my $prefix_to_simple_line = "";
+	my $pt;
 	foreach my $key1 (ikeys %$racoon) {
 		if (!$racoon->{$key1}{1}) {
 			$display .= $prefix_to_simple_line . $racoon->{$key1} . "\n";
 			$prefix_to_simple_line = "";
 		} else {
 			foreach my $key2 (ikeys %{$racoon->{$key1}}) {
-				$key2 > 1 ? my $pt = $racoon->{$key1}{$key2-1}[0] : my $pt = $racoon->{$key1}{1}[0];
+				if ($key2 > 1) {
+					$pt = $racoon->{$key1}{$key2-1}[0];
+				} else {
+					$pt = $racoon->{$key1}{1}[0];
+				};
 				my $t = $racoon->{$key1}{1}[0];
 				my $f = $racoon->{$key1}{$key2}[0];
 				my $list_length = scalar @{$racoon->{$key1}{$key2}};
@@ -451,6 +461,7 @@ sub remove_section_racoon_conf {
 		delete $racoon->{$k} if $k > 1 && !$racoon->{$k-1};
 		my $closing_curly_bracket = 0;
 		while ($closing_curly_bracket < 2) {
+			print "-->$k\n";
 			$closing_curly_bracket++ if $racoon->{$k} eq "}"; 
 			delete $racoon->{$k};
 			$k++;

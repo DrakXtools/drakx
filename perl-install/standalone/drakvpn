@@ -333,7 +333,12 @@ my $existing_section = "";
 step_display_ipsec_conf:
 
 if ($d eq "display $ipsec_conf" || $d eq "display") {
-	if (-e $ipsec_conf) {
+	my $ipsec_exists = 0;
+	foreach my $key (keys %$ipsec) {
+		$ipsec_exists = 1 if  $ipsec->{$key};
+	};
+
+	if ($ipsec_exists) {
 		$in->ask_okcancel(N("Display configuration"),
 		network::ipsec::display_ipsec_conf($ipsec_conf,$ipsec,$kernel_version));
 		goto step_configure_ipsec_conf;
@@ -710,7 +715,7 @@ step_display_racoon_conf:
 if ($d eq "display") {
 
 	my $racoon_exists = 0;
-	foreach my $key (keys %{$racoon}) {
+	foreach my $key (keys %$racoon) {
 		$racoon_exists = 1 if  $racoon->{$key};
 	};
 
@@ -948,7 +953,7 @@ $::Wizard_finished = 1;
 $in->ask_okcancel(N("Congratulations!"), 
 N("Everything has been configured.\n
 You may now share ressources through the Internet,
-in a secure way, using a VPN connection.\n
+in a secure way, using a VPN connection.
 
 You should make sure that that the tunnels shorewall
 section is configured."));
