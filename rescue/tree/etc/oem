@@ -242,7 +242,7 @@ close F;
 open F, ">/mnt/etc/sysconfig/i18n";
 print F "LANG=$lang\n";
 print F "LANGUAGE=$flang:$lang\n";
-print F "LC_MESSAGES=$flang";
+print F "LC_MESSAGES=$flang\n";
 close F;
 system "rpm", "--root", "/mnt", "--initdb";
 
