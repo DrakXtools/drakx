@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "POT-Creation-Date: 2003-05-16 14:13+0200\n"
-"PO-Revision-Date: 2003-03-13 06:39-0300\n"
+"PO-Revision-Date: 2003-05-19 10:48-0300\n"
 "Last-Translator: Fabian Mandelbaum <fmandelbaum@hotmail.com>\n"
 "Language-Team: Español <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,8 +24,7 @@ msgstr "Rastreando las particiones para encontrar los puntos de montaje"
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
-msgstr ""
-"si se pone en sí, verificar adiciones/remociones de archivos suid root."
+msgstr "si se pone en sí, verificar adiciones/remociones de archivos suid root."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -366,9 +365,9 @@ msgid "Webcam"
 msgstr "Cámara web"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "size of the (second level) cpu cache"
-msgstr "Tamaño del caché del CPU (de 2do nivel)"
+msgstr "tamaño del caché de CPU (de 2do nivel)"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -1447,7 +1446,7 @@ msgid "Interface"
 msgstr "Interfaz"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Options Description:\n"
 "\n"
@@ -1491,7 +1490,7 @@ msgid ""
 "\trestore the base and then the differential from a certain date.\n"
 "\n"
 msgstr ""
-"descripción de las opciones:\n"
+"Descripción de las opciones:\n"
 "\n"
 " - Respladar archivos del sistema:\n"
 "       \n"
@@ -1505,27 +1504,34 @@ msgstr ""
 " - Respaldar archivos de usuario:\n"
 "\n"
 "\tEsta opción permite seleccionar todos los usuarios que\n"
-"\tdesea respaldar.\n"
-"\tPara preservar espacio, se recomienda no incluir el\n"
-"\tcache del navegador web.\n"
+"\tdesea respaldar. Para preservar espacio, se recomienda\n"
+"\tno incluir elcache del navegador web.\n"
 "\n"
 " - Respaldar otros archivos:\n"
 "\n"
-"\tEsta opción permite añadir más datos a guardar.\n"
-"\tCon el otro respaldo no es posible, por ahora,\n"
-"\tseleccionar el respaldo incremental.\t\t\n"
+"\tEsta opción permite incluir más datos a guardar.\n"
+"\tSi desea añadir archivos adicioneales, selecciónelos\n"
+"\tdesde la lista 'Archivos' a la derecha. Para añadir\n"
+"\tdirectorios, ingrese el directorio haciendo clic sobre\n"
+"\tel panel 'Carpetas' de la izquierda, y en ese punto\n"
+"\thaga clic sobre 'Aceptar' sin seleccionar archivos.\n"
 " \n"
 " - Respaldo incremental:\n"
 "\n"
 "\tEl respaldo incremental es la opción más potente.\n"
 "\tLe permite respaldar todos sus datos la primera\n"
 "\tvez, y luego sólo aquellos que cambiaron.\n"
-"\tLuego, podrá, durante la etapa de restauración,n\trestaurar sus datos "
-"desde una fecha especificada.\n"
-"\t\n"
+"\tLuego, podrá, durante la etapa de restauración, \n"
+"\trestaurar sus datos desde una fecha especificada.\n"
 "\tSi no ha seleccionado esta opción todos los\n"
-"\trespaldos antiguos se borran antes de volver a respaldar.\n"
+"\trespaldos antiguos se borran antes de volver a respaldar.    \n"
 "\n"
+" - Respaldo diferencial:\n"
+" \n"
+"\tEl respaldo diferencial en vez de comparar los cambios en\n"
+"\tlos datos con respecto al respaldo incremental previo, siempre\n"
+"\tlos compara con respecto al respaldo inicial. Esto le permite\n"
+"\trestaurar la base y luego la diferencia desde cierta fecha.\n"
 "\n"
 
 #: ../../security/help.pm:1
@@ -1552,8 +1558,7 @@ msgstr "cadenas de caracteres separadas por comas"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "These are the machines from which the scanners should be used:"
-msgstr ""
-"Estas son las máquinas desde las cuales deberían utilizarse los escáneres:"
+msgstr "Estas son las máquinas desde las cuales deberían utilizarse los escáneres:"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -1851,9 +1856,9 @@ msgid "Start at boot"
 msgstr "Iniciar al arrancar"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use Incremental Backups"
-msgstr "Usar respaldos incrementales (no reemplazar respaldos antiguos)"
+msgstr "Usar respaldos incrementales"
 
 #: ../../any.pm:1
 #, c-format
@@ -2555,10 +2560,9 @@ msgstr ""
 "\n"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "information level that can be obtained through the cpuid instruction"
-msgstr ""
-"Nivel de información que se puede obtener por medio de la instrucción cpuid"
+msgstr "nivel de información que se puede obtener por medio de la instrucción cpuid"
 
 #: ../../lang.pm:1
 #, c-format
@@ -2594,8 +2598,7 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Select the font file or directory and click on 'Add'"
-msgstr ""
-"Seleccione el archivo o directorio de tipografías y haga clic sobre 'Agregar'"
+msgstr "Seleccione el archivo o directorio de tipografías y haga clic sobre 'Agregar'"
 
 #: ../../lang.pm:1
 #, c-format
@@ -2736,8 +2739,7 @@ msgstr "Admitir las win-impresoras OKI 4w y compatibles."
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
-msgstr ""
-"Lanzar el sistema de sonido ALSA (Arquitectura avanzada de sonido de Linux)"
+msgstr "Lanzar el sistema de sonido ALSA (Arquitectura avanzada de sonido de Linux)"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -2787,9 +2789,9 @@ msgid "Local network(s)"
 msgstr "Red(es) local(es)"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove Windows"
-msgstr "Quitar Windows(TM)"
+msgstr "Quitar Windows"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -3474,8 +3476,7 @@ msgstr "Activar perfiles múltiples"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-"These options can backup and restore all files in your /etc directory.\n"
+msgid "These options can backup and restore all files in your /etc directory.\n"
 msgstr ""
 "Estas opciones pueden respaldar y restaurar todos los archivos en el "
 "directorio /etc.\n"
@@ -3961,8 +3962,7 @@ msgstr "activar"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid ""
-"Contacting Mandrake Linux web site to get the list of available mirrors..."
+msgid "Contacting Mandrake Linux web site to get the list of available mirrors..."
 msgstr ""
 "Contactando con el sitio web de Mandrake Linux para obtener la lista de las "
 "réplicas disponibles"
@@ -4039,10 +4039,8 @@ msgstr "Advertencia: probar esta tarjeta de vídeo puede colgar su computadora"
 
 #: ../../any.pm:1
 #, c-format
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr ""
-"El nombre de usuario (login) sólo debe contener letras, números, `-' y `_'"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgstr "El nombre de usuario (login) sólo debe contener letras, números, `-' y `_'"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -4277,8 +4275,7 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"The printer \"%s\" was successfully added to Star Office/OpenOffice.org/GIMP."
+msgid "The printer \"%s\" was successfully added to Star Office/OpenOffice.org/GIMP."
 msgstr ""
 "La impresora \"%s\" se agregó satisfactoriamente a Star Office/OpenOffice."
 "org."
@@ -4928,6 +4925,8 @@ msgid ""
 "the WP flag in the CR0 register enforce write proctection at the memory page "
 "level, thus enabling the processor to prevent kernel accesses)"
 msgstr ""
+"el indicador WP en el registro CR0 fuerza protección contra escritura al nivel de "
+"página de memoria, permitiendo así que el procesador evite accesos del núcleo)"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -4946,8 +4945,7 @@ msgstr ""
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "The scanners on this machine are available to other computers"
-msgstr ""
-"Los escáneres en esta máquina están disponibles para otras computadoras"
+msgstr "Los escáneres en esta máquina están disponibles para otras computadoras"
 
 #: ../../any.pm:1
 #, c-format
@@ -4979,15 +4977,15 @@ msgid "Cape Verde"
 msgstr "Cabo Verde"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "Si esta CPU tiene o no el bug de la coma de Cyrix 6x86"
+msgstr "si esta CPU tiene o no el bug de la coma de Cyrix 6x86"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
-"Los primeros Pentium eran defectuosos y se colgaban decodificando el código "
+"los primeros Pentium eran defectuosos y se colgaban decodificando el código "
 "de bytes F00F"
 
 #: ../../lang.pm:1
@@ -5481,8 +5479,7 @@ msgstr "Libia"
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Configuring scripts, installing software, starting servers..."
-msgstr ""
-"Configurando los scripts, instalando el software, iniciando los servidores..."
+msgstr "Configurando los scripts, instalando el software, iniciando los servidores..."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -5907,8 +5904,7 @@ msgstr "MM Series"
 
 #: ../../security/level.pm:1
 #, c-format
-msgid ""
-"A library which defends against buffer overflow and format string attacks."
+msgid "A library which defends against buffer overflow and format string attacks."
 msgstr ""
 "Una biblioteca que le defiende ante ataques de desbordamiento de búfer y "
 "ataques con cadenas de formato."
@@ -6077,8 +6073,7 @@ msgstr ""
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "%s is not in the scanner database, configure it manually?"
-msgstr ""
-"%s no está en la base de datos de escáneres, ¿configurarlo manualmente?"
+msgstr "%s no está en la base de datos de escáneres, ¿configurarlo manualmente?"
 
 #: ../../any.pm:1
 #, c-format
@@ -6219,9 +6214,9 @@ msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "Letra DOS: %s (simplemente una adivinanza)\n"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Select the files or directories and click on 'OK'"
-msgstr "Seleccione los archivos o directorios y haga clic sobre 'Agregar'"
+msgstr "Seleccione los archivos o directorios y haga clic sobre 'Aceptar'"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6234,9 +6229,9 @@ msgid "omit scsi modules"
 msgstr "omitir módulos scsi"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "family of the cpu (eg: 6 for i686 class)"
-msgstr "Familia de la CPU (ej: 6 para clase i686)"
+msgstr "familia de la CPU (ej: 6 para clase i686)"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -6287,9 +6282,9 @@ msgid "Tvcard"
 msgstr "Tarjeta de TV"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Toggle between normal/expert mode"
-msgstr "Cambiar al modo normal"
+msgstr "Cambiar entre el modo normal/experto"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -6297,9 +6292,9 @@ msgid "Size"
 msgstr "Tamaño"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "GRUB"
-msgstr "GB"
+msgstr "GRUB"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6393,8 +6388,7 @@ msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
-msgid ""
-"if set, send the mail report to this email address else send it to root."
+msgid "if set, send the mail report to this email address else send it to root."
 msgstr ""
 "si está activo, enviar el correo de reporte a esta dirección, caso contrario "
 "a root."
@@ -7087,8 +7081,7 @@ msgstr "Por favor, ingrese su contraseña"
 msgid ""
 "Name of the profile to create (the new profile is created as a copy of the "
 "current one) :"
-msgstr ""
-"Nombre del perfil a crear (el perfil nuevo se crea como copia del actual):"
+msgstr "Nombre del perfil a crear (el perfil nuevo se crea como copia del actual):"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -7235,8 +7228,7 @@ msgstr "La generación de claves puede tardar unos momentos."
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer auto-detection (Local, TCP/Socket, and SMB printers)"
-msgstr ""
-"Detección automática de impresora (Impresoras locales, TCP/Socket, y SMB)"
+msgstr "Detección automática de impresora (Impresoras locales, TCP/Socket, y SMB)"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -7376,8 +7368,7 @@ msgstr "Perfil: "
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid ""
-"Click on a device in the left tree in order to display its information here."
+msgid "Click on a device in the left tree in order to display its information here."
 msgstr ""
 "Haga clic sobre un dispositivo en el árbol de la izquierda para obtener aquí "
 "información sobre el mismo."
@@ -7700,8 +7691,7 @@ msgstr "el nombre del fabricante del procesador"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "All data on this partition should be backed-up"
-msgstr ""
-"Debería hacer una copia de seguridad de todos los datos de esta partición"
+msgstr "Debería hacer una copia de seguridad de todos los datos de esta partición"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -7776,8 +7766,7 @@ msgstr "Se perderán TODAS las particiones y sus datos en la unidad  %s"
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%d "
 "> %d)"
-msgstr ""
-"Su sistema no tiene espacio suficiente para instalar o actualizar (%d > %d)"
+msgstr "Su sistema no tiene espacio suficiente para instalar o actualizar (%d > %d)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8016,7 +8005,7 @@ msgid "Mounted\n"
 msgstr "Montado\n"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical Interface"
 msgstr "Interfaz gráfica"
 
@@ -8145,9 +8134,9 @@ msgid "Kyrgyzstan"
 msgstr "Kirguizistán"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "With basic documentation"
-msgstr "Con documentación básica (¡recomendado!)"
+msgstr "Con documentación básica"
 
 #: ../../services.pm:1
 #, c-format
@@ -8253,16 +8242,15 @@ msgstr "LDAP Base dn"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
-msgid ""
-"You can't select this package as there is not enough space left to install it"
+msgid "You can't select this package as there is not enough space left to install it"
 msgstr ""
 "No puede seleccionar este paquete porque no hay espacio suficiente para "
 "instalarlo"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "generate auto-install floppy"
-msgstr "Generar un disquete de instalación automática"
+msgstr "generar un disquete de instalación automática"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -8407,7 +8395,7 @@ msgstr "Monserrat"
 #: ../../help.pm:1
 #, c-format
 msgid "Automatic dependencies"
-msgstr ""
+msgstr "Dependencias automáticas"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -8521,8 +8509,7 @@ msgstr ""
 
 #: ../../network/ethernet.pm:1
 #, c-format
-msgid ""
-"Please choose which network adapter you want to use to connect to Internet."
+msgid "Please choose which network adapter you want to use to connect to Internet."
 msgstr ""
 "Por favor, elija el adaptador de red que desea usar para conectarse a "
 "Internet"
@@ -8530,8 +8517,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Photo memory card access on your HP multi-function device"
-msgstr ""
-"Acceso a la tarjeta de memoria de fotos en su dispositivo multifunción HP"
+msgstr "Acceso a la tarjeta de memoria de fotos en su dispositivo multifunción HP"
 
 #: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
@@ -8788,8 +8774,7 @@ msgstr "Primer servidor DNS (opcional)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Alternatively, you can specify a device name/file name in the input line"
+msgid "Alternatively, you can specify a device name/file name in the input line"
 msgstr ""
 "Alternativamente, puede especificar el nombre de un dispositivo o archivo en "
 "la línea de entrada"
@@ -8830,9 +8815,9 @@ msgid "Floppy can be removed now"
 msgstr "Ya se puede quitar el disquete"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Truly minimal install"
-msgstr "Instalación mínima"
+msgstr "Instalación realmente mínima"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9122,9 +9107,9 @@ msgid "NoVideo"
 msgstr "Sin vídeo"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "this field describes the device"
-msgstr "Este campo describe al dispositivo"
+msgstr "este campo describe al dispositivo"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9202,9 +9187,9 @@ msgid "Choose the window manager to run:"
 msgstr "Elija el gestor de ventanas a ejecutar:"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "sub generation of the cpu"
-msgstr "Sub-generación de la CPU"
+msgstr "sub-generación de la CPU"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -9491,9 +9476,9 @@ msgid "Netherlands"
 msgstr "Holanda"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sending files by FTP"
-msgstr "Enviando archivos..."
+msgstr "Enviando archivos por FTP"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -9566,8 +9551,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
-msgstr ""
-"Ingrese la dirección IP y el puerto del host cuyas impresoras desea utilizar."
+msgstr "Ingrese la dirección IP y el puerto del host cuyas impresoras desea utilizar."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9666,8 +9650,7 @@ msgstr "Importancia: %s\n"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please check if you want to eject your tape after the backup."
-msgstr ""
-"Por favor, marque si desea expulsar su cinta luego de la copia de seguridad."
+msgstr "Por favor, marque si desea expulsar su cinta luego de la copia de seguridad."
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -9704,7 +9687,7 @@ msgid "Croatian"
 msgstr "Croata"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use existing partition"
 msgstr "Usar la partición existente"
 
@@ -9903,13 +9886,13 @@ msgstr ""
 "en el arranque del sistema."
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "the CPU frequency in MHz (Megahertz which in first approximation may be "
 "coarsely assimilated to number of instructions the cpu is able to execute "
 "per second)"
 msgstr ""
-"La frecuencia de la CPU en MHz (Megahertz que en una primera aproximación se "
+"la frecuencia de la CPU en MHz (Megahertz que en una primera aproximación se "
 "puede considerar como la cantidad de millones instrucciones que la CPU puede "
 "ejecutar por segundo)"
 
@@ -10038,9 +10021,9 @@ msgid "Paraguay"
 msgstr "Paraguay"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use Incremental/Differential Backups  (do not replace old backups)"
-msgstr "Usar respaldos incrementales (no reemplazar respaldos antiguos)"
+msgstr "Usar respaldos incrementales/diferenciales  (no reemplazar respaldos antiguos)"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -10082,8 +10065,7 @@ msgstr "Estonio"
 
 #: ../../services.pm:1
 #, c-format
-msgid ""
-"Apache is a World Wide Web server. It is used to serve HTML files and CGI."
+msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 "Apache es un servidor de páginas web. Se usa para servir archivos HTML y "
 "programas CGI."
@@ -10624,7 +10606,7 @@ msgstr "Honduras"
 #: ../../help.pm:1
 #, c-format
 msgid "pdq"
-msgstr ""
+msgstr "pdq"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -10849,8 +10831,7 @@ msgstr "Controlador desconocido"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"There are no printers found which are directly connected to your machine"
+msgid "There are no printers found which are directly connected to your machine"
 msgstr "No se encontraron impresoras conectadas directamente a su máquina"
 
 #: ../../diskdrake/interactive.pm:1
@@ -11365,8 +11346,7 @@ msgstr "Televisión por cable Australian Optus"
 
 #: ../../install_steps_newt.pm:1
 #, c-format
-msgid ""
-"  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
+msgid "  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
 msgstr ""
 " <Tab>/<Alt-Tab> entre elementos  | <espacio> selecciona | <F12> pantalla "
 "sig. "
@@ -11689,7 +11669,7 @@ msgstr ""
 "primera partición?"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Options Description:\n"
 "\n"
@@ -11720,7 +11700,7 @@ msgid ""
 "      \n"
 "\n"
 msgstr ""
-"descripción de las opciones:\n"
+"Descripción de las opciones:\n"
 "\n"
 " En este paso Drakbackup le permite cambiar:\n"
 "\n"
@@ -11729,7 +11709,7 @@ msgstr ""
 "      Si marca compresión bzip2, comprimirá mejor sus datos\n"
 "      que gzip (alrededor del 2-10 %%).\n"
 "      Por defecto, esta opción no está marcada dado que este\n"
-"      modo de compresión necesita más tiempo (100 veces más)\n"
+"      modo de compresión necesita más tiempo (aprox. 100 veces más)\n"
 " \n"
 " - El modo de actualización:\n"
 "\n"
@@ -11742,7 +11722,7 @@ msgstr ""
 "      Al igual que cvs, Drakbackup ignorará todas las referencias\n"
 "      incluídas en los archivos .backupignore de cada directorio.\n"
 "      ej: \n"
-"         /*> cat .backupignore*/\n"
+"         #> cat .backupignore*/\n"
 "         *.o\n"
 "         *~\n"
 "         ...\n"
@@ -12285,9 +12265,9 @@ msgstr ""
 "de conexión."
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "generation of the cpu (eg: 8 for PentiumIII, ...)"
-msgstr "Generación de la CPU (ej: 8 para PentiumIII, ...)"
+msgstr "generación de la CPU (ej: 8 para PentiumIII, ...)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12580,8 +12560,7 @@ msgstr ""
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
-"El asistente de particionamiento de DrakX encontró las siguientes soluciones:"
+msgstr "El asistente de particionamiento de DrakX encontró las siguientes soluciones:"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -12691,8 +12670,7 @@ msgstr "Isla Navidad"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
-msgstr ""
-"Falló la instalación del cargador de arranque. Ocurrió el siguiente error:"
+msgstr "Falló la instalación del cargador de arranque. Ocurrió el siguiente error:"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -13459,8 +13437,7 @@ msgstr "Conexión ADSL"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "No configuration, please click Wizard or Advanced.\n"
-msgstr ""
-"Sin configuración, por favor haga clic sobre el Asistente o Avanzado.\n"
+msgstr "Sin configuración, por favor haga clic sobre el Asistente o Avanzado.\n"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -13495,8 +13472,7 @@ msgstr "Dominica"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please enter the device name to use for backup"
-msgstr ""
-"Por favor, ingrese el nombre del dispositivo a utilizar para el respaldo"
+msgstr "Por favor, ingrese el nombre del dispositivo a utilizar para el respaldo"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -13562,7 +13538,7 @@ msgid "Reselect correct fonts"
 msgstr "Volver a seleccionar tipografías correctas"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Options Description:\n"
 "\n"
@@ -13572,12 +13548,12 @@ msgid ""
 "drive before sending it to the server.\n"
 "\n"
 msgstr ""
-"descricpión de las opciones:\n"
+"Descricpión de las opciones:\n"
 "\n"
 "Por favor, tenga cuidado cuando use respaldos por ftp, porque\n"
 "sólo los respaldos ya hechos se envían al servidor.\n"
-"Por el momento, necesita realizar el respaldo en su disco rígido\n"
-"antes de enviarlo al servidor.\n"
+"Entonces, por el momento, necesita realizar el respaldo en su\n"
+"disco rígido antes de enviarlo al servidor.\n"
 "\n"
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
@@ -13621,14 +13597,14 @@ msgstr ""
 "       XFdrake resolución"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Write protection"
-msgstr "Detección automática de impresoras"
+msgstr "Protección contra escritura"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "You've not selected any font"
-msgstr "no se pueden encontrar tipografías.\n"
+msgstr "No seleccionó tipografía alguna"
 
 #: ../../steps.pm:1
 #, c-format
@@ -13642,10 +13618,8 @@ msgstr "Selección del modelo de impresora"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
-msgstr ""
-"Se perderán todos los datos de la partición %s después de cambiar su tipo"
+msgid "After changing type of partition %s, all data on this partition will be lost"
+msgstr "Se perderán todos los datos de la partición %s después de cambiar su tipo"
 
 #: ../../common.pm:1
 #, c-format
@@ -13751,14 +13725,14 @@ msgstr ""
 "Habilitar/deshabilitar verificación horaria de seguridad de msec."
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s fonts conversion"
-msgstr "Conversión de tipografías PFM"
+msgstr "Conversión de tipografías %s"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "the type of bus on which the mouse is connected"
-msgstr "El tipo de bus sobre el que está conectado el ratón"
+msgstr "el tipo de bus sobre el que está conectado el ratón"
 
 #: ../../lang.pm:1
 #, c-format
@@ -13779,7 +13753,7 @@ msgstr ""
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandrakesoft.com:/cooker/doc/manualB/modules/es/drakx-chapter.xml
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "As a review, DrakX will present a summary of information it has about your\n"
 "system. Depending on your installed hardware, you may have some or all of\n"
@@ -13966,7 +13940,7 @@ msgid "Software Manager"
 msgstr "Administrador de software"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Restore Description:\n"
 " \n"
@@ -13995,7 +13969,7 @@ msgid ""
 "\trestore the base and then the differential from a certain date.\n"
 "\n"
 msgstr ""
-"descripción de la restauración:\n"
+"Descripción de la restauración:\n"
 " \n"
 "Sólo se utilizará la fecha más reciente, ya que con respaldos \n"
 "incrementales sólo es necesario restaurar uno a uno los antiguos.\n"
@@ -14010,12 +13984,17 @@ msgstr ""
 "\tEl respaldo incremental es la opción más potente.\n"
 "\tLe permite respaldar todos sus datos la primera\n"
 "\tvez, y luego sólo aquellos que cambiaron.\n"
-"\tLuego, podrá, durante la etapa de restauración,\n"
+"\tLuego podrá, durante la etapa de restauración,\n"
 "\trestaurar sus datos desde una fecha especificada.\n"
 "\tSi no ha seleccionado esta opción todos los\n"
 "\trespaldos antiguos se borran antes de volver a respaldar...\n"
 "\n"
-"\n"
+" - Respaldo diferencial:\n"
+" \n"
+"\tEl respaldo diferencial, en vez de comparar los cambios en los\n"
+"\tdatos con los del anterior respaldo incremental siempre los compara\n"
+"\tcon el respaldo base. Esto permite que restaure la base y\n"
+"\tluego la diferencia con la misma a partir de cierta fecha.\n"
 "\n"
 
 #: ../../interactive/stdio.pm:1
@@ -14399,8 +14378,7 @@ msgstr "MB"
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, run some checks against the rpm database."
-msgstr ""
-"si se pone en sí, correr algunas pruebas contra la base de datos de rpm."
+msgstr "si se pone en sí, correr algunas pruebas contra la base de datos de rpm."
 
 #: ../../lang.pm:1
 #, c-format
@@ -14519,8 +14497,7 @@ msgstr "Filtrar el trabajo en un comando"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "new dynamic device name generated by core kernel devfs"
-msgstr ""
-"dispositivo dinámico nuevo generado por el devfs incorporado del núcleo"
+msgstr "dispositivo dinámico nuevo generado por el devfs incorporado del núcleo"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1
@@ -14552,8 +14529,7 @@ msgstr "Estonia"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-"Elija el host donde se deberían hacer disponibles los escáneres locales:"
+msgstr "Elija el host donde se deberían hacer disponibles los escáneres locales:"
 
 #: ../../partition_table.pm:1
 #, c-format
@@ -14639,8 +14615,7 @@ msgstr "activado"
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid "Please choose which network interface will be used for the dhcp server."
-msgstr ""
-"Por favor, elija la interfaz de red que se utilizará para el servidor DHCP."
+msgstr "Por favor, elija la interfaz de red que se utilizará para el servidor DHCP."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -14907,9 +14882,9 @@ msgid "Raw printer"
 msgstr "Impresora en crudo"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "official vendor name of the cpu"
-msgstr "Nombre oficial del fabricante de la CPU"
+msgstr "nombre oficial del fabricante de la CPU"
 
 #: ../../Xconfig/monitor.pm:1 ../../standalone/harddrake2:1
 #, c-format
@@ -14961,9 +14936,9 @@ msgid "Is this an install or an upgrade?"
 msgstr "¿Es una instalación o una actualización?"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "ISDN card"
-msgstr "Tarjeta RDSI interna"
+msgstr "Tarjeta RDSI"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
@@ -15047,10 +15022,8 @@ msgstr "Impresora en un servidor CUPS remoto"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP."
-msgstr ""
-"No se pudo quitar la impresora \"%s\" de Star Office/OpenOffice.org/GIMP."
+msgid "Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP."
+msgstr "No se pudo quitar la impresora \"%s\" de Star Office/OpenOffice.org/GIMP."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -15321,8 +15294,7 @@ msgstr "¿Seguir adelante?"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Looking for available packages and rebuilding rpm database..."
-msgstr ""
-"Buscando los paquetes disponibles y reconstruyendo la base de datos de RPM..."
+msgstr "Buscando los paquetes disponibles y reconstruyendo la base de datos de RPM..."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15379,8 +15351,7 @@ msgstr ""
 #: ../../fsedit.pm:1
 #, c-format
 msgid "You can't use an encrypted file system for mount point %s"
-msgstr ""
-"No puede usar un sistema de archivos cifrado para el punto de montaje %s"
+msgstr "No puede usar un sistema de archivos cifrado para el punto de montaje %s"
 
 #: ../../lang.pm:1
 #, c-format
@@ -15588,8 +15559,7 @@ msgstr ""
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
-msgid ""
-"Please enter your username, password and domain name to access this host."
+msgid "Please enter your username, password and domain name to access this host."
 msgstr ""
 "Por favor, ingrese su nombre de usuario, contraseña y nombre de dominio para "
 "acceder a este host."
@@ -15775,13 +15745,13 @@ msgid "mount failed: "
 msgstr "mount falló: "
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "the GNU/Linux kernel needs to run a calculation loop at boot time to "
 "initialize a timer counter.  Its result is stored as bogomips as a way to "
 "\"benchmark\" the cpu."
 msgstr ""
-"El núcleo GNU/Linux necesita correr un lazo de cálculo al arrancar para "
+"el núcleo GNU/Linux necesita correr un lazo de cálculo al arrancar para "
 "inicializar un contador. El resultado se almacena como bogomips como una "
 "manera de hacer un \"benchmark\" de la CPU."
 
@@ -15793,8 +15763,7 @@ msgstr "Imagen"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
-msgstr ""
-"No se pudo agregar la impresora \"%s\" a Star Office/OpenOffice.org/GIMP."
+msgstr "No se pudo agregar la impresora \"%s\" a Star Office/OpenOffice.org/GIMP."
 
 #: ../../services.pm:1
 #, c-format
@@ -15803,8 +15772,7 @@ msgstr "Administración remota"
 
 #: ../../modules.pm:1
 #, c-format
-msgid ""
-"PCMCIA support no longer exists for 2.2 kernels. Please use a 2.4 kernel."
+msgid "PCMCIA support no longer exists for 2.2 kernels. Please use a 2.4 kernel."
 msgstr ""
 "El soporte PCMCIA no existe en los núcleos 2.2. Por favor, utilice un núcleo "
 "2.4."
@@ -15817,8 +15785,7 @@ msgstr "Seleccionar todas."
 #: ../../printer/data.pm:1
 #, c-format
 msgid "CUPS - Common Unix Printing System"
-msgstr ""
-"CUPS - Common Unix Printing System (Sistema de impresión común de Unix)"
+msgstr "CUPS - Common Unix Printing System (Sistema de impresión común de Unix)"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -16022,8 +15989,7 @@ msgstr "Laos"
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr ""
-"No hay particiones FAT para redimensionar (o no queda espacio suficiente)"
+msgstr "No hay particiones FAT para redimensionar (o no queda espacio suficiente)"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16731,8 +16697,7 @@ msgstr "Autentificación NIS"
 
 #: ../../any.pm:1
 #, c-format
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
+msgid "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "La opción \"Restringir las opciones de la línea de comandos\"\n"
 "no tiene sentido sin contraseña"
@@ -17218,13 +17183,12 @@ msgstr "Modelo desconocido"
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check files/directories writable by everybody."
-msgstr ""
-"si se pone en sí, verificar archivos/directorios que todos pueden escribir."
+msgstr "si se pone en sí, verificar archivos/directorios que todos pueden escribir."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "authentication"
-msgstr "Autentificación"
+msgstr "autenticación"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17570,7 +17534,7 @@ msgstr "Nuevo"
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandrakesoft.com:/cooker/doc/manualB/modules/es/drakx-chapter.xml
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This is the most crucial decision point for the security of your GNU/Linux\n"
 "system: you have to enter the \"root\" password. \"Root\" is the system\n"
@@ -17703,9 +17667,9 @@ msgid "Apache World Wide Web Server"
 msgstr "Servidor de World Wide Web Apache"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "stepping of the cpu (sub model (generation) number)"
-msgstr "Paso de la CPU (número de sub-modelo - generación)"
+msgstr "stepping de la CPU (número de sub-modelo - generación)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17725,8 +17689,7 @@ msgstr "China"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid " (Make sure that all your printers are connected and turned on).\n"
-msgstr ""
-"(Debe asegurarse que todas sus impresoras están conectadas y encendidas).\n"
+msgstr "(Debe asegurarse que todas sus impresoras están conectadas y encendidas).\n"
 
 #: ../../lang.pm:1
 #, c-format
@@ -17813,8 +17776,7 @@ msgstr "Añadir un elemento"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "The printers on this machine are available to other computers"
-msgstr ""
-"Las impresoras en esta máquina están disponibles para otras computadoras"
+msgstr "Las impresoras en esta máquina están disponibles para otras computadoras"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -17824,8 +17786,7 @@ msgstr "No se encuentra el archivo de imagen `%s' necesario."
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr ""
-"No se detectó tarjeta de sonido. Pruebe \"harddrake\" luego de la instalación"
+msgstr "No se detectó tarjeta de sonido. Pruebe \"harddrake\" luego de la instalación"
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -18095,7 +18056,7 @@ msgid "MandrakeSoft has selected the best software for you"
 msgstr "MandrakeSoft ha seleccionado el mejor software para Usted"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This is HardDrake, a Mandrake hardware configuration tool.\n"
 "Version: %s\n"
@@ -18104,7 +18065,9 @@ msgid ""
 msgstr ""
 "Este es HardDrake, una herramienta de configuración de hardware de "
 "Mandrake.\n"
-"Versión:"
+"Versión: %s\n"
+"Autor: Thierry Vignaud <tvignaud\\@mandrakesoft.com>\n"
+"\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -18241,9 +18204,9 @@ msgid "Please enter the directory to save:"
 msgstr "Por favor, ingrese el directorio a guardar:"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "format of floppies supported by the drive"
-msgstr "Formatos que acepta la disquetera"
+msgstr "formatos de disquete que acepta la disquetera"
 
 #: ../../raid.pm:1
 #, c-format
@@ -18368,8 +18331,7 @@ msgstr ""
 
 #: ../../standalone/drakpxe:1
 #, c-format
-msgid ""
-"No CD or DVD image found, please copy the installation program and rpm files."
+msgid "No CD or DVD image found, please copy the installation program and rpm files."
 msgstr ""
 "No se encontró imagen de CD o DVD, por favor copie el programa de "
 "instalación y los archivos rpm"
@@ -18651,10 +18613,8 @@ msgstr "Las direcciones de la pasarela deberían estar en el formato 1.2.3.4"
 
 #: ../../network/modem.pm:1
 #, c-format
-msgid ""
-"\"%s\" based winmodem detected, do you want to install needed software ?"
-msgstr ""
-"winmodem basado en \"%s\" detectado, ¿desea instalar el software necesario?"
+msgid "\"%s\" based winmodem detected, do you want to install needed software ?"
+msgstr "winmodem basado en \"%s\" detectado, ¿desea instalar el software necesario?"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -18664,7 +18624,7 @@ msgstr "Buscando paquetes ya instalados..."
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Differential Backups"
-msgstr ""
+msgstr "Usar respaldos diferenciales"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -18815,7 +18775,7 @@ msgstr "¿Dónde quiere instalar el cargador de arranque?"
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandrakesoft.com:/cooker/doc/manualB/modules/es/drakx-chapter.xml
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your choice of preferred language will affect the language of the\n"
 "documentation, the installer and the system in general. Select first the\n"
@@ -18909,9 +18869,9 @@ msgid "Boot Style Configuration"
 msgstr "Configuración del estilo de arranque"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Automatic time synchronization"
-msgstr "Sincronización automática de hora (usando NTP)"
+msgstr "Sincronización automática de la hora"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18960,8 +18920,7 @@ msgstr "Instalar temas"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid ""
-" updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
+msgid " updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
 msgstr ""
 " actualizaciones 2002 MandrakeSoft por Stew Benedict <sbenedict"
 "\\@mandrakesoft.com>"
@@ -18969,7 +18928,7 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid "Espanol"
-msgstr ""
+msgstr "Español"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -19088,8 +19047,7 @@ msgstr "Opciones de sistema"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please enter the directory where backups are stored"
-msgstr ""
-"Por favor, ingrese el directorio donde se almacenan las copias de respaldo"
+msgstr "Por favor, ingrese el directorio donde se almacenan las copias de respaldo"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -19204,8 +19162,7 @@ msgstr "32 mil colores (15 bits)"
 
 #: ../../any.pm:1
 #, c-format
-msgid ""
-"You can export using NFS or Samba. Please select which you'd like to use."
+msgid "You can export using NFS or Samba. Please select which you'd like to use."
 msgstr "Puede exportar usando NFS o Samba. ¿Cuál elige"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
@@ -19582,12 +19539,12 @@ msgid "Do not transfer printers"
 msgstr "No transferir impresoras"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Delay before booting the default image"
 msgstr "Demora antes de arrancar la imagen predeterminada"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " Copyright (C) 2001-2002 by MandrakeSoft \n"
@@ -19621,8 +19578,8 @@ msgid ""
 msgstr ""
 "\n"
 " Copyright (C) 2001-2002 por MandrakeSoft \n"
-"\tDUPONT Sebastien (versión original)\n"
-"        CHAUMETTE Damien dchaumette\\@mandrakesoft.com\n"
+"     DUPONT Sebastien (versión original)\n"
+"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
 "\n"
 " Este programa es software libre; lo puede redistribuir y/o modificar\n"
 " bajo los términos de la Licencia Pública General GNU publicada por la\n"
@@ -19647,8 +19604,6 @@ msgstr ""
 "    -  ttf2pt1:   \n"
 "\t  por Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
 "             Convertir archivos de tipografías ttf a tipografías afm y pfb\n"
-"\n"
-"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -19775,8 +19730,7 @@ msgstr "Dvorak (US)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid ""
-"this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
+msgid "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
 "esto es el bus físico sobre el cual se conecta el dispositivo (ej.: PCI, "
 "USB, ...)"
@@ -20049,3 +20003,4 @@ msgstr ""
 
 #~ msgid "Fonts conversion"
 #~ msgstr "Conversión de tipografías"
+
