@@ -394,13 +394,16 @@ sub selectPackagesToUpgrade($$$;$$) {
     c::rpmdbTraverse($db, sub {
 			 my ($header) = @_;
 			 my $p = $packages->{c::headerGetEntry($header, 'name')};
-			 my $otherPackage = (c::headerGetEntry($header, 'release') !~ /mdk\w*$/ &&
-					     (c::headerGetEntry($header, 'name'). '-' .
-					      c::headerGetEntry($header, 'version'). '-' .
-					      c::headerGetEntry($header, 'release')));
+#			 my $otherPackage = (c::headerGetEntry($header, 'release') !~ /mdk\w*$/ &&
+#					     (c::headerGetEntry($header, 'name'). '-' .
+#					      c::headerGetEntry($header, 'version'). '-' .
+#					      c::headerGetEntry($header, 'release')));
+			 my $otherPackage = (c::headerGetEntry($header, 'name'). '-' .
+					     c::headerGetEntry($header, 'version'). '-' .
+					     c::headerGetEntry($header, 'release'));
 			 if ($p) {
 			     my $version_cmp = versionCompare(c::headerGetEntry($header, 'version'), $p->{version});
-			     if ($otherPackage && $version_cmp <= 0) {
+			     if ($otherPackage !~ /mdk\w*$/ && $version_cmp <= 0) {
 				 $toRemove{$otherPackage} = 1;
 			     } else {
 				 eval { getHeader($p) }; $@ && log::l("cannot get the header for package $p->{name}");
@@ -412,7 +415,8 @@ sub selectPackagesToUpgrade($$$;$$) {
 			     }
 			 } else {
 			     my @files = c::headerGetEntry($header, 'filenames');
-			     map { $installedFilesForUpgrade{$_} = $otherPackage } grep { $_ !~ m@^/etc/rc.d/@ } @files;
+			     map { $installedFilesForUpgrade{$_} = $otherPackage }
+			       grep { $_ !~ m@^/etc/rc.d/@ && ! -d "$prefix/$_" } @files;
 			 }
 		     });
 
@@ -439,18 +443,23 @@ sub selectPackagesToUpgrade($$$;$$) {
 	    #- all file for package marked for upgrade.
 	    c::rpmdbNameTraverse($db, $p->{name}, sub {
 				     my ($header) = @_;
-				     my $otherPackage = (c::headerGetEntry($header, 'release') !~ /mdk\w*$/ &&
-							 (c::headerGetEntry($header, 'name'). '-' .
-							  c::headerGetEntry($header, 'version'). '-' .
-							  c::headerGetEntry($header, 'release')));
+#				     my $otherPackage = (c::headerGetEntry($header, 'release') !~ /mdk\w*$/ &&
+#							 (c::headerGetEntry($header, 'name'). '-' .
+#							  c::headerGetEntry($header, 'version'). '-' .
+#							  c::headerGetEntry($header, 'release')));
+				     my $otherPackage = (c::headerGetEntry($header, 'name'). '-' .
+							 c::headerGetEntry($header, 'version'). '-' .
+							 c::headerGetEntry($header, 'release'));
 				     $cumulSize += c::headerGetEntry($header, 'size'); #- all these will be deleted on upgrade.
 				     $toRemove{$otherPackage} = 1;
 				     my @files = c::headerGetEntry($header, 'filenames');
-				     map { $installedFilesForUpgrade{$_} = $otherPackage } grep { $_ !~ m@^/etc/rc.d/@ } @files;
+				     map { $installedFilesForUpgrade{$_} = $otherPackage }
+				       grep { $_ !~ m@^/etc/rc.d/@ && ! -d "$prefix/$_" } @files;
 				 });
 	    eval { getHeader($p) };
 	    my @availFiles = $p->{header} ? c::headerGetEntry($p->{header}, 'filenames') : ();
-	    map { $toRemove{delete $installedFilesForUpgrade{$_}} = 1 } grep { $_ !~ m@^/etc/rc.d/@ } @availFiles;
+	    map { $toRemove{delete $installedFilesForUpgrade{$_}} = 1 }
+	      grep { $_ !~ m@^/etc/rc.d/@ && ! -d "$prefix/$_" } @availFiles;
 
 	    #- keep in mind the cumul size of installed package since they will be deleted
 	    #- on upgrade.
@@ -466,7 +475,8 @@ sub selectPackagesToUpgrade($$$;$$) {
 	if ($p->{selected}) {
 	    eval { getHeader($p) };
 	    my @availFiles = $p->{header} ? c::headerGetEntry($p->{header}, 'filenames') : ();
-	    map { $toRemove{delete $installedFilesForUpgrade{$_}} = 1 } grep { $_ !~ m@^/etc/rc.d/@ } @availFiles;
+	    map { $toRemove{delete $installedFilesForUpgrade{$_}} = 1 }
+	      grep { $_ !~ m@^/etc/rc.d/@ && ! -d "$prefix/$_" } @availFiles;
 	}
     }
 
@@ -480,7 +490,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 	    my $toSelect = 0;
 	    map { if (exists $installedFilesForUpgrade{$_}) {
 		$toSelect = $toRemove{delete $installedFilesForUpgrade{$_}} = 1; }
-	      } grep { $_ !~ m@^/etc/rc.d/@ } @availFiles;
+	      } grep { $_ !~ m@^/etc/rc.d/@ && ! -d "$prefix/$_" } @availFiles;
 	    pkgs::select($packages, $p) if ($toSelect);
 	}
     }
@@ -508,28 +518,22 @@ sub selectPackagesToUpgrade($$$;$$) {
     #- get filenames that should be saved for packages to remove.
     #- typically config files, but it may broke for packages that
     #- are very old when compabilty has been broken.
-    #- but new version are saved to .rpmnew so it not so hard !
+    #- but new version may saved to .rpmnew so it not so hard !
     if ($toSave && keys %toRemove) {
 	c::rpmdbTraverse($db, sub {
 			     my ($header) = @_;
-			     print "header=$header\n";
 			     my $otherPackage = (c::headerGetEntry($header, 'name'). '-' .
 						 c::headerGetEntry($header, 'version'). '-' .
 						 c::headerGetEntry($header, 'release'));
-			     print "other=$otherPackage\n";
 			     if ($toRemove{$otherPackage}) {
 				 my @files = c::headerGetEntry($header, 'filenames');
 				 my @flags = c::headerGetEntry($header, 'fileflags');
-				 print "count-1=$#files\n";
 				 for my $i (0..$#flags) {
 				     if ($flags[$i] & c::RPMFILE_CONFIG()) {
-					 print "before adding ... ";
 					 push @$toSave, $files[$i];
-					 print "after adding ... $files[$i]\n";
 				     }
 				 }
 			     }
-			     print "before leaving........\n\n";
 			 });
     }
 

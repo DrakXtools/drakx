@@ -282,7 +282,7 @@ sub configureNetwork($) {
 	    $_ = $o->ask_from_list_([ _("Network Configuration") ],
 				    _("Local networking has already been configured. Do you want to:"),
 				    [ @l ]) || "Do not";
-	} else { $_ = "Keep"; } 
+	} else { $_ = "Keep"; }
     } elsif ($o->{modem}) {
 	$_ = "Dialup";
     } else {
