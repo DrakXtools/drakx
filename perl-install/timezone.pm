@@ -128,42 +128,44 @@ sub fuzzyChoice {
 sub bestTimezone { $c2t{fuzzyChoice($_[0])} || 'GMT' }
 
 sub ntp_servers() { 
-q(Australia (ntp.adelaide.edu.au)
-Australia (ntp.saard.net)
-Australia (time.esec.com.au)
-Canada (ntp.cpsc.ucalgary.ca)
-Canada (ntp1.cmc.ec.gc.ca)
-Canada (ntp2.cmc.ec.gc.ca)
-Canada (time.chu.nrc.ca)
-Canada (time.nrc.ca)
-Canada (timelord.uregina.ca)
-Spain (slug.ctv.es)
-France (ntp.univ-lyon1.fr)
-Croatia (zg1.ntp.carnet.hr)
-Croatia (zg2.ntp.carnet.hr)
-Croatia (st.ntp.carnet.hr)
-Croatia (ri.ntp.carnet.hr)
-Croatia (os.ntp.carnet.hr)
-Indonesia (ntp.incaf.net)
-Italy (time.ien.it)
-Korea, republic of (time.nuri.net)
-Norway (fartein.ifi.uio.no)
-Russia (ntp.landau.ac.ru)
-Singapore (ntp.shim.org)
-Slovenia (time.ijs.si)
-United kingdom (ntp.cs.strath.ac.uk)
-United kingdom (ntp2a.mcc.ac.uk)
-United kingdom (ntp2b.mcc.ac.uk)
-United kingdom (ntp2c.mcc.ac.uk)
-United kingdom (ntp2d.mcc.ac.uk)
-United states DE (louie.udel.edu)
-United states IL (ntp-0.cso.uiuc.edu)
-United states IL (ntp-1.cso.uiuc.edu)
-United states IL (ntp-2.cso.uiuc.edu)
-United states IN (gilbreth.ecn.purdue.edu)
-United states IN (harbor.ecn.purdue.edu)
-United states IN (molecule.ecn.purdue.edu)
-);
+    +{
+	'ntp.adelaide.edu.au' => 'Australia',
+	'ntp.saard.net' => 'Australia',
+	'time.esec.com.au' => 'Australia',
+	'ntp.cpsc.ucalgary.ca' => 'Canada',
+	'ntp1.cmc.ec.gc.ca' => 'Canada',
+	'ntp2.cmc.ec.gc.ca' => 'Canada',
+	'time.chu.nrc.ca' => 'Canada',
+	'time.nrc.ca' => 'Canada',
+	'timelord.uregina.ca' => 'Canada',
+	'slug.ctv.es' => 'Spain',
+	'ntp.univ-lyon1.fr' => 'France',
+	'zg1.ntp.carnet.hr' => 'Croatia',
+	'zg2.ntp.carnet.hr' => 'Croatia',
+	'st.ntp.carnet.hr' => 'Croatia',
+	'ri.ntp.carnet.hr' => 'Croatia',
+	'os.ntp.carnet.hr' => 'Croatia',
+	'ntp.incaf.net' => 'Indonesia',
+	'time.ien.it' => 'Italy',
+	'time.nuri.net' => 'Korea, republic of',
+	'fartein.ifi.uio.no' => 'Norway',
+	'ntp.landau.ac.ru' => 'Russia',
+	'ntp.shim.org' => 'Singapore',
+	'time.ijs.si' => 'Slovenia',
+	'ntp.cs.strath.ac.uk' => 'United kingdom',
+	'ntp2a.mcc.ac.uk' => 'United kingdom',
+	'ntp2b.mcc.ac.uk' => 'United kingdom',
+	'ntp2c.mcc.ac.uk' => 'United kingdom',
+	'ntp2d.mcc.ac.uk' => 'United kingdom',
+	'louie.udel.edu' => 'United states DE',
+	'ntp-0.cso.uiuc.edu' => 'United states IL',
+	'ntp-1.cso.uiuc.edu' => 'United states IL',
+	'ntp-2.cso.uiuc.edu' => 'United states IL',
+	'gilbreth.ecn.purdue.edu' => 'United states IN',
+	'harbor.ecn.purdue.edu' => 'United states IN',
+	'molecule.ecn.purdue.edu' => 'United states IN',
+        'pool.ntp.org' => 'World Wide',
+    };
 }
 
 1;

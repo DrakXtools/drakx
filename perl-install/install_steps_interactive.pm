@@ -830,12 +830,13 @@ sub configureTimezone {
     ]) or goto &configureTimezone
 	    if $::expert || $clicked;
     if ($ntp) {
-	my @servers = split("\n", timezone::ntp_servers());
+	my $servers = timezone::ntp_servers();
+	$o->{timezone}{ntp} ||= 'pool.ntp.org';
 
-	$o->ask_from_({},
-	    [ { label => N("NTP Server"), val => \$o->{timezone}{ntp}, list => \@servers, not_edit => 0 } ]
+	$in->ask_from_({},
+	    [ { label => N("NTP Server"), val => \$o->{timezone}{ntp}, list => [ keys %$servers ], not_edit => 0,
+		format => sub { $servers->{$_[0]} ? "$servers->{$_[0]} ($_[0])" : $_[0] } } ]
         ) or goto &configureTimezone;
-	$o->{timezone}{ntp} =~ s/.*\((.+)\)/$1/;
     } else {
 	$o->{timezone}{ntp} = '';
     }
