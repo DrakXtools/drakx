@@ -49,6 +49,7 @@ arch() =~ /^sparc/ ? (
   "eexpress" => "Intel EtherExpress",
   "eepro" => "Intel EtherExpress Pro",
   "eepro100" => "Intel EtherExpress Pro 100", #- should run on sparc but no memory on floppy
+  "e100" => "Intel Ethernet Pro 100", #- newer Intel version of eepro100
   "hp100" => "HP10/100VG any LAN ",
   "hp" => "HP LAN/AnyLan",
   "hp-plus" => "HP PCLAN/plus",
@@ -328,8 +329,9 @@ my %type_aliases = (
 
 my @skip_big_modules_on_stage1 = 
 qw(
+sk98lin
 ); #******(missing-2.4)  dpt_i2o aztcd gscd isp16 mcd mcdx optcd cm206 sjcd cdu31a
-#sk98lin
+
 #acenic 
 #BusLogic seagate fdomain g_NCR5380 tmscsim
 #gdth eata eata_pio eata_dma
