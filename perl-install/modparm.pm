@@ -2,6 +2,7 @@ package modparm; # $Id$
 
 use diagnostics;
 use strict;
+use modules;
 
 #-######################################################################################
 #- misc imports
@@ -23,10 +24,14 @@ sub get_options_name($) {
   my ($module) = @_;
 
   my @names;
-  $modinfo = '/sbin/modinfo';
-  -e $modinfo or $modinfo = '/usr/bin/modinfo';
+  $modinfo = $::isStandalone ? '/sbin/modinfo' : '/usr/bin/modinfo';
   -e $modinfo or die _('modinfo is not available');
-  my @line = `$modinfo -p $module`;
+  if($::isStandalone) {
+      my @line = `$modinfo -p $module`;
+  } else {
+      modules::extract_modules('/tmp', $module);
+      my @line = `$modinfo -p /tmp/$module.o`;
+  }
   foreach (@line) {
       chomp;
       s/int/: (integer/;
