@@ -312,6 +312,10 @@ sub set_default_options {
 	    $is_auto = 0;
 	}
 
+	if ($part->{media_type} eq 'cdrom') {
+	    $options->{ro} = 1;
+	}
+
 	if ($part->{media_type} eq 'fd') {
 	    # slow device so don't loose time, write now!
 	    $options->{sync} = 1;
@@ -324,9 +328,13 @@ sub set_default_options {
             });
 	}
 	if (isFat($part) || $is_auto) {
+
 	    put_in_hash($options, {
-	        user => 1, 'umask=0' => $security < 3, exec => 1,
-	        'iocharset=' => $iocharset, 'codepage=' => $codepage,
+	        user => 1, exec => 1,
+            }) if !exists $part->{rootDevice}; # partition means no removable media
+
+	    put_in_hash($options, {
+                'umask=0' => $security < 3, 'iocharset=' => $iocharset, 'codepage=' => $codepage,
             });
 	}
 	if (isThisFs('ntfs', $part) || $is_auto) {
