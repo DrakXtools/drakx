@@ -54,7 +54,7 @@ sub new_mouse_sections {
 sub set_wacoms {
     my ($raw_X, @wacoms) = @_;
 
-    my %Modes = (Stylus => 'Absolute', Erasor => 'Absolute', Cursor => 'Relative');
+    my %Modes = (Stylus => 'Absolute', Eraser => 'Absolute', Cursor => 'Relative');
 
     my $XInput = $raw_X->get_Section('XInput');
     if ($XInput) {

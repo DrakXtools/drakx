@@ -258,7 +258,7 @@ sub raw_import_section {
 
 sub add_Section {
     my ($raw_X, $Section, $h) = @_;
-    my @suggested_ordering = qw(Files ServerFlags Keyboard Pointer XInput InputDevice Module DRI Monitor Device Screen ServerLayout);
+    my @suggested_ordering = qw(Files ServerFlags Module DRI Keyboard Pointer XInput InputDevice Monitor Device Screen ServerLayout);
     my %order = map_index { { lc($_) => $::i } } @suggested_ordering;
     my $e = { name => $Section, l => $h };
     my $added;

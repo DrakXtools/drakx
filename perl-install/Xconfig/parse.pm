@@ -137,6 +137,9 @@ my %kind_names = (
     Display  => [ qw(Depth Modes) ], # Subsection in Device
     Screen   => [ qw(Identifier Driver Device Monitor DefaultColorDepth) ],
     InputDevice => [ qw(Identifier Driver Protocol Device Type Mode XkbModel XkbLayout XkbDisable Emulate3Buttons Emulate3Timeout) ],
+    WacomCursor => [ qw(Port) ], #-\
+    WacomStylus => [ qw(Port) ], #--> Port must be first
+    WacomEraser => [ qw(Port) ], #-/
     ServerLayout => [ qw(Identifier) ],
 );
 my @want_string = qw(Identifier DeviceName VendorName ModelName BoardName Driver Device Chipset Monitor Protocol XkbModel XkbLayout XkbOptions Load BusID);

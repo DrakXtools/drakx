@@ -63,20 +63,21 @@ sub set_wacoms {
 
     @wacoms or return;
 
-    my %Modes = (Stylus => 'Absolute', Erasor => 'Absolute', Cursor => 'Relative');
+    my %Modes = (Stylus => 'Absolute', Eraser => 'Absolute', Cursor => 'Relative');
 
     each_index {
-	my ($wacom) = @_;
+	my $wacom = $_;
 	foreach (keys %Modes) {
-	    my $h = { Identifier => { val => $_ . ($::i + 1) }, 
+	    my $identifier = $_ . ($::i + 1);
+	    my $h = { Identifier => { val => $identifier }, 
 		      Driver => { val => 'wacom' },
-		      Style => { val => lc $_, Option => 1 },
+		      Type => { val => lc $_, Option => 1 },
 		      Device => { val => $wacom->{Device}, Option => 1 },
 		      Mode => { val => $Modes{$_}, Option => 1 },
 		      if_($wacom->{USB}, USB => { Option => 1 })
 		    };
 	    $raw_X->add_Section('InputDevice', $h);
-	    push @$layout, { val => qq("$_$::i" "AlwaysCore") };
+	    push @$layout, { val => qq("$identifier" "AlwaysCore") };
 	}
     } @wacoms;
 }
