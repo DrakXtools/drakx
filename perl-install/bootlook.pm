@@ -271,7 +271,7 @@ sub updateAurora {
 
 sub isAutologin {
     my $line;
-    open AUTOLOGIN, "/etc/sysconfig/autologin" or die _("can not open /etc/sysconfig/autologin for reading: %s", $!);
+    open AUTOLOGIN, "/etc/sysconfig/autologin";
     while (<AUTOLOGIN>) {
 	if (/AUTOLOGIN=(yes|no)/) { $line = $_; last; }
     }
