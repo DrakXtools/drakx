@@ -271,7 +271,7 @@ sub std2 { "-*-*-medium-r-normal-*-$_[1]-*-*-*-*-*-$_[0]" }
 sub std_ { std2($_[0], 10), std2($_[0], 10) }
 sub std  { std2($_[0], $_[1] || 10), std2($_[0],  8) }
 
-#- [0]: console font name; [1]: unicode map for console font
+#- [0]: console font name; [1]: sfm map for console font (if needed)
 #- [2]: acm file for console font;
 #- [3]: iocharset param for mount; [4]: codepage parameter for mount
 #- [5]: X11 fontset (for DrakX)
@@ -291,11 +291,11 @@ my %charsets = (
 	"utf8", undef, "-*-*-*-*-*-*-*-*-*-*-*-*-gb2312.1980-0" ],
   "utf_ka"      => [ "t_geors",		"geors.uni",	"geors_to_geops.trans",
 	"utf8",  undef, "-*-*-*-*-*-*-*-*-*-*-*-*-georgian-academy" ],
-  "C" => [ "lat0-sun16",	undef,		"iso15",
+  "C" => [ "lat1-16",	undef,		"iso15",
 	"iso8859-1", "850", sub { std("iso8859-1", @_) } ],
-  "iso-8859-1" => [ "lat0-sun16",	undef,		"iso15",
+  "iso-8859-1" => [ "lat1-16",	undef,		"iso1",
 	"iso8859-1", "850", sub { std("iso8859-15", @_) } ],
-  "utf_1"      => [ "lat0-sun16",	undef,		"iso15",
+  "utf_1"      => [ "lat0-16",	undef,		"iso15",
 	"utf8", undef, sub { std("iso8859-15", @_) } ],
   "iso-8859-2" => [ "lat2-sun16",	undef,		"iso02",
 	"iso8859-2", "852", sub { std("iso8859-2", @_) } ],
@@ -332,9 +332,9 @@ my %charsets = (
 	"iso8859-14", "850", std_("iso8859-14") ],
   "utf_14" => [ "tlat8",		"iso14",	"trivial.trans",
 	"utf8", undef, std_("iso8859-14") ],
-  "iso-8859-15" => [ "lat0-sun16",	undef,		"iso15",
+  "iso-8859-15" => [ "lat0-16",	undef,		"iso15",
 	"iso8859-15", "850", sub { std("iso8859-15", @_) } ],
-  "utf_15" => [ "lat0-sun16",	undef,		"iso15",
+  "utf_15" => [ "lat0-16",	undef,		"iso15",
 	"utf8", undef, sub { std("iso8859-15", @_) } ],
   "utf_az"      => [ "tiso09e",		"iso09",	"trivial.trans",
 	"utf8", undef, std2("iso8859-9e",10) ],
