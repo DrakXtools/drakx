@@ -560,21 +560,14 @@ sub  install_cpio($$;@) {
     "$dir/$name";
 }
 
-sub bug {
-    my ($h) = getopts(\@_, "h");
-    $h and die "usage: bug\nput file report.bug on fat formatted floppy\n";
-
-    require detect_devices;
-    mount devices::make(detect_devices::floppy()), "/fd0";
-
+sub report_bug {
     sub header { "
 ********************************************************************************
 * $_[0]
 ********************************************************************************";
     }
 
-    local $\ = "\n";
-    output "/fd0/report.bug", map { chomp; $_ }
+    join '', map { chomp; "$_\n" }
       header("lspci"), detect_devices::stringlist(),
       header("pci_devices"), cat_("/proc/bus/pci/devices"),
       header("fdisk"), `fdisk -l`,
@@ -590,6 +583,16 @@ sub bug {
       header("ddebug.log"), cat_("/tmp/ddebug.log"),
       header("install.log"), cat_("/mnt/root/install.log"),
       ;
+}
+
+sub bug {
+    my ($h) = getopts(\@_, "h");
+    $h and die "usage: bug\nput file report.bug on fat formatted floppy\n";
+
+    require detect_devices;
+    mount devices::make(detect_devices::floppy()), "/fd0";
+
+    output "/fd0/report.bug", report_bug();
     umount "/fd0";
     sync;
 }
