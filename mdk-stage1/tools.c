@@ -53,13 +53,23 @@ static int param_number = 0;
 void process_cmdline(void)
 {
 	char buf[512];
-	int fd, size, i;
-	
-	log_message("opening /proc/cmdline... ");
-	
-	if ((fd = open("/proc/cmdline", O_RDONLY)) == -1)
-		fatal_error("could not open /proc/cmdline");
-	
+	int size, i;
+	int fd = -1; 
+
+	if (IS_TESTING) {
+		log_message("TESTING: opening cmdline... ");
+
+		if ((fd = open("cmdline", O_RDONLY)) == -1)
+			log_message("TESTING: could not open cmdline");
+	}
+
+	if (fd == -1) {
+		log_message("opening /proc/cmdline... ");
+
+		if ((fd = open("/proc/cmdline", O_RDONLY)) == -1)
+			fatal_error("could not open /proc/cmdline");
+	}
+
 	size = read(fd, buf, sizeof(buf));
 	buf[size-1] = '\0'; // -1 to eat the \n
 	close(fd);
