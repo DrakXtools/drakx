@@ -16,13 +16,17 @@
 #include "minifind.h"
 
 /* misnomer */
-struct vbe_info *vbe_get_vbe_info()
+int vbe_get_vbe_info(struct vbe_info *ret)
 {
-	struct vbe_info *ret = NULL;
         struct fb_fix_screeninfo fix;
 	unsigned char *mem;
         int rc = 0;
-        int fd, i;
+        int fd = -1;
+	int i;
+
+	if (ret == NULL)
+		return 0;
+
 
         if (!rc && !(fd = open("/dev/fb0", O_RDONLY)))
         {
@@ -36,27 +40,27 @@ struct vbe_info *vbe_get_vbe_info()
                 fprintf(stderr, "Framebuffer ioctl failed. Exiting.\n");
         }
 
-        close(fd);
+	if (fd > 0)
+		close(fd);
 
         if (!rc)
         {
                 // Note: if OFfb, vram info is unreliable!
 		if (strcmp(fix.id, "OFfb"))
 		{
-	        	ret = malloc(sizeof(struct vbe_info));
 			mem = strdup(fix.id);
 			while(((i = strlen(mem)) > 0) && isspace(mem[i - 1])) {
 				mem[i - 1] = '\0';
 			}
-			ret->oem_name.string = mem;
-			ret->product_name.string = NULL;
-			ret->vendor_name.string = NULL;
-			ret->product_revision.string = NULL;
-			ret->memory_size = fix.smem_len/1024;
+			ret->oem_name = strdup(mem);
+			ret->product_name = NULL;
+			ret->vendor_name = NULL;
+			ret->product_revision = NULL;
+			ret->memory_size = fix.smem_len;
 		}
         }
 
-	return ret;
+	return !rc;
 }
 
 int get_edid_supported()
@@ -81,16 +85,18 @@ int get_edid_supported()
 }
 
 /* Get EDID info. */
-struct edid1_info *get_edid_info()
+int vbe_get_edid_info(struct vbe_edid1_info * ret)
 {
 	unsigned char *mem;
-	struct edid1_info *ret = NULL;
 	struct pathNode *n;
 	struct findNode *list;
 	u_int16_t man;
 	unsigned char edid[0x80];
 	FILE* edid_file = NULL;
 	char *path = NULL;
+
+	if (ret == NULL)
+		return 0;
 
 	list = (struct findNode *) malloc(sizeof(struct findNode));
         list->result = (struct pathNode *) malloc(sizeof(struct pathNode));
@@ -110,37 +116,30 @@ struct edid1_info *get_edid_info()
 
 
 	if (!edid_file)
-		return NULL;
+		return 0;
 
 	if (fread(edid, sizeof(unsigned char), 0x80, edid_file) != 0x80)
-		return NULL;
+		return 0;
   
     	fclose(edid_file);
     
-	mem = malloc(sizeof(struct edid1_info));
+	mem = malloc(sizeof(struct vbe_edid1_info));
 	if(mem == NULL) {
-		return NULL;
+		return 0;
 	}
 
 	memcpy(mem, edid, 0x80);
 
 
-	/* Get memory for return. */
-	ret = malloc(sizeof(struct edid1_info));
-	if(ret == NULL) {
-		free(mem);
-		return NULL;
-	}
-
 	/* Copy the buffer for return. */
-	memcpy(ret, mem, sizeof(struct edid1_info));
+	memcpy(ret, mem, sizeof(struct vbe_edid1_info));
 
 	memcpy(&man, &ret->manufacturer_name, 2);
 	man = ntohs(man);
 	memcpy(&ret->manufacturer_name, &man, 2);
 
 	free(mem);
-	return ret;
+	return 1;
 }
 
 #endif /* __powerpc__ */

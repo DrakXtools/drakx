@@ -1,5 +1,7 @@
 #include <sys/types.h>
+#if defined(__i386__) || defined(__x86_64__) || defined(__ia64__)
 #include <sys/io.h>
+#endif
 #include <sys/mman.h>
 #include <netinet/in.h>
 #include <stdlib.h>
@@ -12,7 +14,9 @@
 #include <unistd.h>
 #include "vesamode.h"
 #include "vbe.h"
+#if defined(__i386__) || defined(__x86_64__)
 #include "int10/vbios.h"
+#endif
 
 #define DEBUG 0
 #if DEBUG
@@ -28,6 +32,7 @@
 #define cpuemu 0
 #endif
 
+#if defined(__i386__) || defined(__x86_64__)
 /*
  * Create a 'canonical' version, i.e. no spaces at start and end.
  *
@@ -171,6 +176,7 @@ int vbe_get_edid_info(struct vbe_edid1_info *edid)
   edid->manufacturer_name.p = ntohs(edid->manufacturer_name.p);
   return 1;
 }
+#endif
 
 /* Just read ranges from the EDID. */
 void vbe_get_edid_ranges(struct vbe_edid1_info *edid,

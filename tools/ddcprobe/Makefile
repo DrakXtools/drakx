@@ -19,7 +19,7 @@ OBJS	= ddcxinfos.o vesamode.o vbe.o
 LIBS	= libint10.a libx86emu.a
 endif
 ifeq (ppc,$(ARCH))
-OBJS	= ddcxinfos.o of.o minifind.o
+OBJS	= ddcxinfos.o of.o minifind.o vbe.o vesamode.o
 endif
 ifeq (,$(OBJS))
 OBJS	= not_handled.o
