@@ -237,6 +237,8 @@ sub search {
     gtkflush();
 }
 
+local *F;
+
 sub parse_file {
   my ($file) = @_;#$_[0];
 
@@ -293,7 +295,7 @@ sub parse_file {
   $win_pb->destroy();
 
   if ($::isTail) {
-      local *F;
+      close F;
       open F, $file or die "E: $!";
       local $_;
       while (<F>) {}; #to prevent to output the file twice..
