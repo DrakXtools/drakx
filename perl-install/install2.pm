@@ -236,6 +236,7 @@ sub choosePackages {
 
     #- always setPackages as it may have to copy hdlist files and depslist file.
     $o->setPackages;
+    $o->selectPackagesToUpgrade if $o->{isUpgrade} && $_[1] == 1;
 
     $o->choosePackages($o->{packages}, $o->{compssUsers}, $_[1] == 1);
     log::l("compssUsersChoice's: ", join(" ", grep { $o->{compssUsersChoice}{$_} } keys %{$o->{compssUsersChoice}}));
