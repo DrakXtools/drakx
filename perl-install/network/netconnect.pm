@@ -131,7 +131,7 @@ sub real_main {
           %eth_intf = network::ethernet::get_eth_cards_names(@all_cards);
           require list_modules;
           %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) }
-            grep { $is_wireless ^ !c::isNetDeviceWirelessAware($_->[0])  } @all_cards;
+            grep { to_bool($is_wireless) == c::isNetDeviceWirelessAware($_->[0]) } @all_cards;
       };
 
       my $find_lan_module = sub { 
