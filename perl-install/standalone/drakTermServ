@@ -446,14 +446,14 @@ sub client_type() {
     'Thin' clients run everything off the server's CPU/RAM, using the client display.
     'Fat' clients use their own CPU/RAM but the server's filesystem."), "wizard");
     gtkpack_($$central_widget,
-		1, gtkpack_(new Gtk2::HBox(1,0), 
-	    	0, new Gtk2::VBox(0,10),
-			1, gtksignal_connect($check_allow_thin, clicked => sub { 
-				invbool \$thin_clients;
-				client_set("all"); 
-			}),	
-			0, new Gtk2::VBox(0,10)
-		),
+             0, gtkpack_(new Gtk2::HBox(1,0), 
+                         1, Gtk2::VBox->new,
+                         0, gtksignal_connect($check_allow_thin, clicked => sub { 
+                                                  invbool \$thin_clients;
+                                                  client_set("all"); 
+                                              }),	
+                         0, Gtk2::VBox->new,
+                        ),
 		0, gtksignal_connect(new Gtk2::Button(N("Sync client X keyboard settings with server.")), 
 			clicked => sub { client_X_keyboard() }),
 		1, new Gtk2::HBox(0,0),
