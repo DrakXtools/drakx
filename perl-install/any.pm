@@ -979,7 +979,7 @@ connections from many clients. "),
 Security features are at their maximum."),
     );
     delete @l{0,1};
-    delete @l{5} if !$::expert;
+    delete $l{5} if !$::expert;
 
     $in->ask_from('', _("Choose security level") . "\n\n" .
 		  join('', map { "$l{$_}: $help{$_}\n\n" } keys %l),
