@@ -111,9 +111,9 @@ install. It is impossible to install a package without installing all
 of its dependencies.
 
 
-Information on each category and specific package is available in the
-area titled \"Info\",  located between list of packages and the
-button \"Install\" to start the installation."),
+Informations on specific package are available in the
+area titled \"Info\", located on the right of the list of
+packages."),
 
 doInstallStep =>
  __("The packages selected are now being installed. This operation
