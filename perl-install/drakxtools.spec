@@ -335,9 +335,6 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - net_monitor: do not force switch to last page on network interface
   reload
 
-* Thu Jan 29 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-24mdk
-- drakconnect wizard: fix ethernet network card list
-
 * Wed Jan 28 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-23mdk
 - drakbackup: (stew)
   o another cron issue reported on Anthill
