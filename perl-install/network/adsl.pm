@@ -16,10 +16,14 @@ sub configure {
     my ($netcnx, $netc, $intf, $first_time) = @_;
     $::isInstall and $in->set_help('configureNetworkADSL');
   conf_adsl_step1:
+    # my $type = $in->ask_from_list_(_("Connect to the Internet"),
+    # 				   _("The most common way to connect with adsl is pppoe.
+    # Some connections use pptp, a few ones use dhcp.
+    # If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("use dhcp"), __("Alcatel speedtouch usb"), __("ECI Hi-Focus")]) or return;
     my $type = $in->ask_from_list_(_("Connect to the Internet"),
 				   _("The most common way to connect with adsl is pppoe.
 Some connections use pptp, a few ones use dhcp.
-If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("use dhcp"), __("Alcatel speedtouch usb"), __("ECI Hi-Focus")]) or return;
+If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("use dhcp"), __("Alcatel speedtouch usb")]) or return;
     $type =~ s/use //;
     if ($type eq 'pppoe') {
 	$in->do_pkgs->install("rp-$type");
