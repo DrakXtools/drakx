@@ -665,7 +665,11 @@ USA")) || return;
 
     require crypto;
     eval {
-      $u->{mirror} = $o->ask_from_listf('', _("Choose a mirror from which to get the packages"), \&crypto::mirror2text, [ crypto::mirrors() ], $u->{mirror});
+      $u->{mirror} = $o->ask_from_listf('', 
+					_("Choose a mirror from which to get the packages"), 
+					\&crypto::mirror2text, 
+					[ crypto::mirrors() ], 
+					$u->{mirror});
     };
     return if $@;
 
