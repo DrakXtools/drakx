@@ -107,7 +107,7 @@ sub detect_timezone() {
       $netc->{autodetect} = {};
 
       my $next_cnx_step = sub {
-          my $next = connection_steps{$cnx_type};
+          my $next = $connection_steps{$cnx_type};
           # FIXME: we want this in standalone mode too:
           $need_restart_network = 1 if $next =~ /lan|cable/;
           if ($next eq "multiple_internet_cnx") {
