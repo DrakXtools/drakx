@@ -268,19 +268,18 @@ sub read_proc_partitions {
     my ($hds) = @_;
 
     my @all = devices::read_proc_partitions_raw();
-    my @parts = grep { $_->{dev} =~ /\d$/ } @all;
-    my @disks = grep { $_->{dev} !~ /\d$/ } @all;
+    my ($parts, $disks) = partition { $_->{dev} =~ /\d$/ && $_->{dev} !~ /^(sr|scd)/ } @all;
 
-    my $devfs_like = any { $_->{dev} =~ m|/disc$| } @disks;
+    my $devfs_like = any { $_->{dev} =~ m|/disc$| } @$disks;
 
     my %devfs2normal = map {
 	my (undef, $major, $minor) = devices::entry($_->{device});
-	my $disk = find { $_->{major} == $major && $_->{minor} == $minor } @disks;
+	my $disk = find { $_->{major} == $major && $_->{minor} == $minor } @$disks;
 	$disk->{dev} => $_->{device};
     } @$hds;
 
     my $prev_part;
-    foreach my $part (@parts) {
+    foreach my $part (@$parts) {
 	my $dev;
 	if ($devfs_like) {
 	    $dev = -e "/dev/$part->{dev}" ? $part->{dev} : sprintf("0x%x%02x", $part->{major}, $part->{minor});
@@ -300,7 +299,7 @@ sub read_proc_partitions {
 	$prev_part = $part;
 	delete $part->{dev}; # cleanup
     }
-    @parts;
+    @$parts;
 }
 
 sub all_hds {
