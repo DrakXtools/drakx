@@ -679,6 +679,12 @@ sub next_val_in_array {
 
 sub isCdNotEjectable { scalar(grep { /ram3/ } cat_("/proc/mounts")) == 0 }
 
+sub formatError {
+    my ($err) = @_;
+    $err =~ s/ at .*?$/\./ if !$::testing;
+    $err;
+}
+
 
 #-######################################################################################
 #- Wonderful perl :(
