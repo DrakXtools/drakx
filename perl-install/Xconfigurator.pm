@@ -456,7 +456,7 @@ sub chooseResolutions($$;$) {
     my ($card, $chosen_depth, $chosen_w) = @_;
 
     my $best_w;
-    local $_ = $in->ask_from_list('', _(""), 
+    local $_ = $in->ask_from_list('', "", 
 				  [ map_each { map { "$_->[0]x$_->[1] ${main::a}bpp" } @$::b } %{$card->{depth}} ]) or return;
     reverse /(\d+)x\S+ (\d+)/;
 }
