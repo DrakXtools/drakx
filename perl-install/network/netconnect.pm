@@ -82,9 +82,9 @@ sub get_subwizard {
 # configuring all network devices
   sub main {
       my ($_prefix, $netcnx, $in, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;
-      my $netc  = $o_netc  || {};
-      my $mouse = $o_mouse || {};
-      my $intf  = $o_intf  || {};
+      my $netc  = $o_netc  ||= {};
+      my $mouse = $o_mouse ||= {};
+      my $intf  = $o_intf  ||= {};
       my $first_time = $o_first_time || 0;
       my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @cards, @all_cards, @devices);
       my (%connections, %rconnections, @connection_list);
