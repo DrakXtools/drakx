@@ -22,11 +22,7 @@ case "$1" in
 #	action "Updating /etc/fstab" /usr/sbin/updfstab
 
 	gprintf "Checking for new hardware"
-	rm -f /var/run/Xconfig
-	rm -f /var/run/Xconfig-failed
-
-        # Have a 30 second timeout.
- 	/usr/share/harddrake/service_harddrake
+ 	/usr/share/harddrake/service_harddrake 2>/dev/null
 	RETVAL=$?
 	if [ "$RETVAL" -eq 0 ]; then
   	   action "" /bin/true
