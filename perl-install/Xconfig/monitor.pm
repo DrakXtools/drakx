@@ -104,18 +104,18 @@ sub choose {
 		  [ { val => \$merged_name, separator => '|', 
 		      list => ['Custom', "Plug'n Play", sort keys %h_monitors],
 		      format => sub { $_[0] eq 'Custom' ? N("Custom") : 
-				      $_[0] eq "Plug'n Play" ? N("Plug'n Play") . " ($monitor->{ModelName})" :
+				      $_[0] eq "Plug'n Play" ? N("Plug'n Play") . ($monitor->{VendorName} eq "Plug'n Play" ? " ($monitor->{ModelName})" : '') :
 				      $_[0] =~ /^Generic\|(.*)/ ? N("Generic") . "|$1" :  
 				      N("Vendor") . "|$_[0]" },
 		      sort => 0 } ]) or return;
 
     if ($merged_name eq "Plug'n Play") {
 	local $::noauto = 0; #- hey, you asked for plug'n play, so i do probe!
+	delete @$monitor{'VendorName', 'ModelName', 'EISA_ID'};
 	put_in_hash($monitor, getinfoFromDDC());
 	if (configure_automatic($monitor, $monitors)) {
 	    $monitor->{VendorName} = "Plug'n Play";
 	} else {
-	    delete $monitor->{VendorName};
 	    $in->ask_warn('', N("Plug'n Play probing failed. Please select the correct monitor"));
 	    goto ask_monitor;
 	}
