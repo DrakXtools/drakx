@@ -1,3 +1,174 @@
+2004/09/14  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/isdn.pm: adapt to kernel packages naming
+	(write_config) remove unused parameter
+	(setup_capi_conf) use capi4linux file to detect isdn4k-utils package
+	(setup_capi_conf) install firmware if needed
+	(setup_capi_conf) do not do dsl-specific stuff here
+
+	* network/netconnect.pm: allow to configure slmodem
+	(get_eth_cards_names) remove unused parameter
+	(configureNetwork2) configure eth aliases, needs modules_conf
+	cleanup, remove unused parameters and comments
+	support dsl over capi
+
+	* network/network.pm (configureNetwork2) configure eth aliases, needs
+	modules_conf
+
+	* standalone/drakconnect (get_eth_cards_names) remove unused parameter
+	(configureNetwork2) configure eth aliases, needs modules_conf
+	remove unused parameter
+
+	* network/adsl.pm (adsl_conf_backend) move isdn4k-utils installation here
+	(adsl_conf_backend) remove ifcfg-sagem
+	(adsl_conf_backend) support dsl over capi
+
+	* detect_devices.pm (getModem) use network/slmodem category
+
+	* network/shorewall.pm, standalone/drakgw (get_eth_cards_names) remove
+	unused parameter
+
+	* do_pkgs.pm (check_kernel_module_packages) make ext package optionnal
+
+	* network/ethernet.pm (get_eth_cards_names) remove unused parameter
+	(configureNetwork2) configure eth aliases, needs modules_conf
+	(configure_eth_aliases) errm, use modules_conf
+	do not configure eth aliases in various places, move aliases
+	configuration code from get_eth_cards_names to configure_eth_aliases
+
+2004/09/14  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/es.po, share/po/ro.po, share/po/gl.po, share/po/fur.po,
+	share/po/wa.po, share/po/pt_BR.po, share/po/ca.po, share/po/eo.po,
+	share/po/fr.po: MandrakeSoft -> Mandrakesoft; Mandrake -> Mandrakelinux
+
+	* share/po/pt.po: MandrakeSoft -> Mandrakesoft; Mandrake -> Mandrakelinux
+	fixed typo
+
+	* share/po/ar.po: updated po file
+
+	* share/po/cs.po: updated Czech po file
+
+2004/09/14  Pixel  <pixel at mandrakesoft.com>
+
+	* diskdrake/interactive.pm, fsedit.pm, fs/mount_options.pm,
+	partition_table.pm: 
+	  - ensure {is_removable} field is there for created partitions, not
+	only existing partitions
+	  - it breaks Create(), fixing
+
+	* detect_devices.pm: get the scsi driver name in field {driver}
+
+2004/09/14  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Apparently perl_checker doesn't like my perfectly
+	sensible perl syntax.
+
+2004/09/14  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* network/smb.pm: syntax changes in winbind smb.conf (errors in
+	/var/log/messages)
+
+	* authentication.pm: Fix net join syntax for winbind setup.
+
+2004/09/14  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/man/C/man8/drakconnect.8: add drakconnect man page
+
+	* standalone/service_harddrake: space cleanup
+
+	* network/netconnect.pm: upcase acronyms
+
+	* Makefile, Makefile.drakxtools: package man pages
+
+	* standalone/draksec: 
+	  - fix label of entry in help
+	  - move help from tooltips into separate page (#9894)
+	rationale:
+	
+	  - there's already a "help" button that do the same thing as mcc one
+	
+	  - Gtk+ only support tooltips on widgets that have their own X window
+	(which new
+	  GtkComboBox widget has not)
+	
+	  - tooltips are usefull on first run but then are just annoying
+
+	* harddrake/data.pm: detect scanners later so that we filter out bogus usb
+	devices detected
+	by sane_find_scanner
+	detect not yet supported ethernnet cards too
+	(unknown) blacklist more bridges (though f() should already take care
+	of that)
+	detect more bridges and the like
+
+	* network/ethernet.pm (get_eth_cards) document it somewhat
+	(get_eth_cards_names) let detect_devices->firewire_probe() set the
+	device description
+	(get_eth_cards) workaround buggy eth1394 that returs a bogus driver
+	name for the GDRVINFO command of the ETHTOOL ioctl returns
+	(get_eth_cards_names) set a sensible name for firewire network
+	adapters in order to make GUIes look more user friendly
+
+	* standalone/drakTermServ, standalone/drakfont, standalone/drakbackup:
+	sanitize capitale usage on buttons
+
+	* drakxtools.spec: 10.1-7mdk
+	package man pages
+	10.1-6mdk
+	10.1-5mdk
+
+	* scanner.pm (detect) blacklist usb devices that have a driver and that
+	are wrongly
+	detected by sane-find-scanner (scanners are managed by scanner.o
+	module in 2.4.x and through libusb on 2.6.x)
+
+2004/09/14  Warly  <warly at mandrakesoft.com>
+
+	* share/logo-mandrake.png: Community 10.1 logo
+
+2004/09/14  Youcef Rabah Rahal <rahal at arabeyes.org>
+
+	* share/po/ar.po: Arabic translation
+
+2004/09/13  (Hilbert) <h at mandrake.org>
+
+	* share/po/zh_TW.po: DrakX-zh_TW: 711
+	Please insert the
+	locally modified
+
+2004/09/13  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2004/09/13  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/isdn_consts.pm: fix typo
+
+	* network/netconnect.pm: do not auto-select static/dhcp if the provider
+	uses pppoe
+	only write ifcfg-sagem when needed
+	add isdn_driver step to be able to choose between hisax and capi drivers
+
+	* network/isdn.pm (setup_capi_conf) install isdn4k-utils
+	handle capi drivers
+
+	* network/tools.pm (get_default_ippp_interface) use interfaces with true
+	DIAL_ON_IFUP
+
+2004/09/13  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps_interactive.pm: The "choose an update mirror" screen was
+	launched without notice when
+	a supplementary ftp media was selected.
+
+	* install_any.pm: redundant code
+
+2004/09/13  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Fix crashes in CD/Tape setup.  Fix UI behavior in
+	wizard. (Nicolas Adenis-Lamarre)
+
 2004/09/13  Funda Wang <fundawang at linux.net.cn>
 
 	* share/po/zh_CN.po: Updated Simplified Chinese translation
@@ -39033,7 +39204,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.968 2004/09/13 06:54:11 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.969 2004/09/13 11:46:32 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
