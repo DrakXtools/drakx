@@ -201,33 +201,4 @@ sub updateScannerDBfromSane {
     close Y;
 }
 
-#-######################################################################################
-#- Wonderful perl :(
-#-######################################################################################
 1; #
-
-#-----------------------------------------------
-# $Log$
-# Revision 1.9  2002/08/01 16:31:14  tvignaud
-# perl_checker fixes
-#
-# Revision 1.8  2002/08/01 16:20:15  tvignaud
-# perl_checker fixes
-#
-# Revision 1.7  2002/07/08 08:34:51  tvignaud
-# this doesn't need either "#!/usr/bin/perl" nor "use lib qw(/usr/lib/libDrakX);"
-#
-# Revision 1.6  2002/03/10 15:26:00  yduret
-# added ASK support for more interactiveness during configuration
-#
-# Revision 1.5  2002/02/18 17:34:31  yduret
-# update
-#
-# Revision 1.4  2002/02/18 16:16:13  yduret
-# scsi parport preliminary support
-# no more show unsupported scanner
-# common output for ScannerDB update from sane *.desc files and from usbtable
-#
-# Revision 1.3  2001/11/12 15:18:02  yduret
-# update, sync with cvs
-#
