@@ -442,7 +442,7 @@ sub pppConfig {
     $toreplace{$_} = $modem->{$_} foreach qw(connection phone login passwd auth domain dns1 dns2);
     $toreplace{kpppauth} = ${{ 'Script-based' => 0, 'PAP' => 1, 'Terminal-based' => 2, }}{$modem->{auth}};
     $toreplace{kpppauth} = ${{ 'Script-based' => 0, 'PAP' => 1, 'Terminal-based' => 2, 'CHAP' => 3 }}{$modem->{auth}};
-    $toreplace{phone} =~ s/\D//g;
+    $toreplace{phone} =~ s/[a-zA-Z]//g;
     $toreplace{dnsserver} = join ',', map { $modem->{$_} } "dns1", "dns2";
     $toreplace{dnsserver} .= $toreplace{dnsserver} && ',';
 
