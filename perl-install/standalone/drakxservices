@@ -8,13 +8,17 @@ use standalone;
 use services;
 use log;
 
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
+
 local $_ = join '', @ARGV;
 
 /-h/ and die "usage: drakxservices\n";
 
 
 my $in = vnew interactive('su');
+begin:
 my $l = services::ask($in);
 services::doit($in, $l) if $l;
-
-$in->exit(0);
+!$::isEmbedded and $in->exit(0);
+kill USR1, $::CCPID;
+goto begin;
