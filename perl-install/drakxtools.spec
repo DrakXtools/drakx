@@ -30,6 +30,7 @@ Provides: diskdrake setuptool Xconfigurator mouseconfig kbdconfig printtool
 Summary: The drakxtools via http
 Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-Net_SSLeay, perl-Authen-PAM, perl-CGI
+PreReq: rpm-helper
 
 %package -n harddrake
 Summary: Main Hardware Configuration/Information Tool
