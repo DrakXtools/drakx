@@ -521,16 +521,18 @@ sub setupBootloader($) {
 
     lilo::proposition($o->{hds}, $o->{fstab});
 
-    my @entries = grep { $_->{liloLabel} } @{$o->{fstab}};
+    unless ($::beginner) {
+	my @entries = grep { $_->{liloLabel} } @{$o->{fstab}};
 
-    $o->ask_from_entries_ref('',
-    		       _("The boot manager Mandrake uses can boot other 
-                         operating systems as well. You need to tell me  
-                         what partitions you would like to be able to boot 
-                         and what label you want to use for each of them."),
-			 [map {"$_->{device}" . type2name($_->{type})} @entries],
-			 [map {\$_->{liloLabel}} @entries],
-			 );
+	$o->ask_from_entries_ref('',
+_("The boot manager Mandrake uses can boot other 
+operating systems as well. You need to tell me  
+what partitions you would like to be able to boot 
+and what label you want to use for each of them."),
+				 [map {"$_->{device}" . type2name($_->{type})} @entries],
+				 [map {\$_->{liloLabel}} @entries],
+				);
+    }
 
     install_steps::setupBootloader($o);
 }
