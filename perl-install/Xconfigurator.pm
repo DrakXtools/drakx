@@ -1330,7 +1330,7 @@ sub main {
 	$in->ask_from_entries_refH_powered(
 		{ 
 		 title => 'XFdrake',
-		 messages => _("What do you want to do?"),
+		 messages => _("Which action do you want to perform?"),
 		 cancel => '',
 		}, [
 		    { format => sub { $_[0][0] }, val => \$f,
