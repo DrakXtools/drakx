@@ -10,11 +10,6 @@ use common;
 use any;
 
 
-sub show_info {
-    my ($in, $X) = @_;
-    $in->ask_warn('', info($X));
-}
-
 sub info {
     my ($raw_X, $card) = @_;
     my $info;
