@@ -69,6 +69,275 @@
 
 	* docs/HACKING: libbzip2* and more explanations about failing compilation
 
+	* mdk-stage1/Makefile, mdk-stage1/ppp/pppd/ipcp.c, mdk-stage1/probing.c:
+	adapt to gcc-3.1
+
+2002/05/02  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* lang.pm: Put back xcin as default XIM for zh_TW.Big5
+
+	* share/po/eu.po: small corrections
+
+2002/04/29  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/usb-resource/update-usb-ids.pl: support USB2 controllers as
+	well
+
+2002/04/29  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/wa.po, share/po/hu.po: updated po files
+
+2002/04/26  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: fixed some machine with two present i830 CGC but only
+	one in reality.
+
+	* detect_devices.pm: updated usbMice to take care of device declared as
+	Mouse:USB in usbtable (was
+	not the case !)
+
+2002/04/25  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/DrakX.pot, share/po/es.po, share/po/fr.po, share/po/bg.po,
+	share/po/ga.po, share/po/sr.po, share/po/de.po, share/po/et.po,
+	share/po/tr.po, share/po/eu.po, share/po/az.po, share/po/ru.po,
+	share/po/pt_BR.po, share/po/hr.po, share/po/ko.po, share/po/cy.po,
+	share/po/nl.po, share/po/ja.po, share/po/wa.po, share/po/sv.po,
+	share/po/is.po, share/po/hu.po, share/po/it.po, share/po/id.po,
+	share/po/pl.po, share/po/no.po, share/po/fi.po, share/po/th.po,
+	share/po/el.po, share/po/sk.po, share/po/lt.po, share/po/ar.po,
+	share/po/sl.po, share/po/mt.po, share/po/vi.po, share/po/br.po,
+	share/po/ca.po, share/po/gl.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/bs.po, share/po/da.po,
+	share/po/zh_TW.po, share/po/cs.po, share/po/af.po: updated pot file
+
+2002/04/23  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* bootlook.pm: a few english fixes
+
+	* any.pm: fixes
+	english fixes from v meyer
+	a few english fixes thx to vincent meyer
+
+2002/04/19  alus
+
+	* share/po/pl.po: It's only about 100 entries to the end
+
+2002/04/19  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/nl.po: updated Dutch file
+
+	* share/po/hu.po: updated po file
+
+2002/04/18  alus
+
+	* share/po/pl.po: 3 more long messages
+	one entry
+	stil working....
+
+2002/04/17  alus
+
+	* share/po/pl.po: Mostly finished polish translation
+	translations, fixes etc...
+
+2002/04/17  François Pons  <fpons@mandrakesoft.com>
+
+	* tools/oem-prepare: final candidate.
+
+	* rescue/tree/etc/oem: final candidate.
+	add gcc-cpp to oem install.
+
+2002/04/16  alus
+
+	* share/po/pl.po: still working
+	Few fixes
+	Updated translation. Many strings is not yet translated...
+
+2002/04/16  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem: sync with oem-prepare
+	fixed stupid error.
+	forget packdrake module invocation.
+	fixed to support non standard rpm filename.
+
+	* tools/oem-prepare: add gcc-cpp to always installed.
+	disable unselection of some package (gmc, all gcc3.0 stuff).
+
+2002/04/16  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/rpmsrate: only main version of automake
+
+2002/04/16  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/nl.po: updated po file
+
+2002/04/16  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: handle "Cancel" on NIS / LDAP server
+	dialog box
+
+2002/04/15  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/rpmsrate: ipchains now conflicts with iptables
+
+2002/04/15  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/eu.po: Another small fix
+	Small corrections
+
+2002/04/13  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ro.po: merged with drakfloppy strings
+
+2002/04/11  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/mt.po: updated Maltese file
+
+2002/04/10  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/eu.po: small typo correction
+
+2002/04/10  warly
+
+	* share/rpmsrate: autofs -> 2
+
+2002/04/09  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakgw: time to remove ipchains/2.2 stuff since now ipchains
+	and iptables
+	packages conflict
+
+2002/04/09  Pixel  <pixel@mandrakesoft.com>
+
+	* partition_table_dos.pm, partition_table_gpt.pm,
+	partition_table_empty.pm, partition_table_bsd.pm,
+	partition_table_sun.pm, partition_table_mac.pm: nicer debug "bag magic"
+	error message (thanks to Brian J. Murrell)
+
+2002/04/08  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: fixed a bunch of things
+
+	* install_steps_interactive.pm, install_interactive.pm, network/isdn.pm,
+	partition_table.pm, install_steps_gtk.pm, Xconfigurator.pm,
+	printerdrake.pm, network/tools.pm, diskdrake/interactive.pm,
+	network/netconnect.pm, fsedit.pm, diskdrake/removable_gtk.pm,
+	network/network.pm, printer.pm, interactive_stdio.pm: fix a few english
+	strings
+
+2002/04/08  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/DrakX.pot, share/po/es.po, share/po/fr.po, share/po/bg.po,
+	share/po/ga.po, share/po/sr.po, share/po/de.po, share/po/et.po,
+	share/po/tr.po, share/po/eu.po, share/po/az.po, share/po/ru.po,
+	share/po/pt_BR.po, share/po/hr.po, share/po/ko.po, share/po/cy.po,
+	share/po/nl.po, share/po/ja.po, share/po/wa.po, share/po/sv.po,
+	share/po/is.po, share/po/hu.po, share/po/it.po, share/po/id.po,
+	share/po/pl.po, share/po/no.po, share/po/fi.po, share/po/th.po,
+	share/po/el.po, share/po/sk.po, share/po/lt.po, share/po/ar.po,
+	share/po/sl.po, share/po/mt.po, share/po/vi.po, share/po/br.po,
+	share/po/ca.po, share/po/gl.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/bs.po, share/po/da.po,
+	share/po/zh_TW.po, share/po/cs.po, share/po/af.po: merged with
+	drakfloppy strings
+
+2002/04/07  Yves Duret <yduret@mandrakesoft.com>
+
+	* standalone/drakfloppy: moving from his own rpm to drakxtools
+
+	* Makefile.config: add drakfloppy to STANDALONEPMS_
+
+2002/04/04  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* c/Makefile.PL: rpmlib 4.0.4 now also needs libpopt
+
+2002/04/04  sdupont
+
+	* standalone/drakbackup: please yduret, do not commit these changes on cvs
+	before to test it.
+	you can say "bugs fixes" only if you have corrected  some errors but not
+	if you create it!
+	the backup on cd was disabled because the backend is not available for
+	moment.
+
+	* standalone/drakfont: remove uninteresting yduret changes,
+	would it be possible to know what are your "bugs fixies" ?
+	to yduret: I'm the creator of this program so please do not remove my
+	changes.
+
+2002/06/05  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm: use -ff for mkreiserfs, do not use -q for mkreiserfs
+
+2002/06/03  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/stage1.c, install_steps_interactive.pm, any.pm,
+	install_steps_gtk.pm, mdk-stage1/network.c, mdk-stage1/disk.c: english
+	fixes thx to vincent meyer
+
+2002/06/03  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: have the /root/drakx/auto_install.cfg.pl replay style
+	instead of weird style
+	with clearall unset & auto_allocate set
+
+2002/05/29  alus
+
+	* share/po/pl.po: little fixes
+
+2002/05/28  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* interactive_gtk.pm: remove typo fix when it's not a fix :-)
+	small typo
+	remove typo (hopefully really a typo ;p)
+
+	* any.pm: be a bit more polite
+
+2002/05/27  François Pons  <fpons@mandrakesoft.com>
+
+	* install2.pm: make sure patch is always read after defcfg to take
+	precedance.
+
+2002/05/27  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm: have usb-interface1 for ehci-hcd
+
+2002/05/24  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* Xconfigurator.pm: dams fixes a bug in the install :-)
+
+2002/05/21  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/rpmsrate: xtraceroute needs 3d
+
+2002/05/15  alus
+
+	* share/po/Changelog: info about polish translation
+
+2002/05/14  alus
+
+	* share/po/pl.po: polish finished
+	updated polish translation
+	polish updated to near finished. Fuzzy removed and checked
+
+2002/05/14  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* docs/HACKING: libncurses* also for the sucking neuneux
+
+2002/05/14  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/pl.po, share/po/id.po: updated po file
+
+2002/05/13  alus
+
+	* share/po/pl.po: mostly finished polish translation.!!
+
+2002/05/13  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* docs/HACKING: libbzip2* and more explanations about failing compilation
+
 	* mdk-stage1/Makefile, mdk-stage1/probing.c: adapt to gcc-3.1
 
 2002/05/02  Pablo Saratxaga <pablo@mandrakesoft.com>
