@@ -136,11 +136,12 @@ sub test {
     my $rc = close F;
     my $err = $?;
 
+    $rc || $err == 222 << 8 or $in->ask_warn('', _("An error occurred, try to change some parameters"));
+
     unlink "$::prefix/$f", "$::prefix/$f-4";
     unlink "/tmp/.X11-unix/X9" if $::prefix;
     kill 2, $pid;
     $::noShadow = 0;
 
-    $rc || $err == 222 << 8 or $in->ask_warn('', _("An error occurred, try to change some parameters"));
     $rc;
 }
