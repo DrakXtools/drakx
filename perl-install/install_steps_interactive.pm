@@ -140,7 +140,7 @@ sub configureNetwork($) {
 	my @l = network::getNet() or return die _("no network card found");
 
 	my $last; foreach ($::expert ? @l : $l[0]) {
-	    my $intf = network::findIntf($o->{intf}, $_);
+	    my $intf = network::findIntf($o->{intf} ||= [], $_);
 	    add2hash($intf, $last);
 	    add2hash($intf, { NETMASK => '255.255.255.0' });
 	    $o->configureNetworkIntf($intf);

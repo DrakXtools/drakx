@@ -13,7 +13,6 @@ use lilo;
 use lang;
 use keyboard;
 use pkgs;
-use cpio;
 use log;
 use fsedit;
 use commands;

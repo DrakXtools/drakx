@@ -5,7 +5,6 @@ use strict;
 
 use common qw(:file);
 use commands;
-use cpio;
 use log;
 
 # key (to be used in $LC_ALL), [0] = english name, [1] = charset encoding,

@@ -29,7 +29,8 @@ my @suggestions_mntpoints = qw(/mnt/dos);
 
 sub suggestions_mntpoint($) { 
     my ($hds) = @_;
-    sort @suggestions_mntpoints, grep { !/swap/ && !has_mntpoint($_, $hds) } map { $_->{mntpoint} } @suggestions;
+    sort grep { !/swap/ && !has_mntpoint($_, $hds) } 
+      (@suggestions_mntpoints, map { $_->{mntpoint} } @suggestions);
 }
 
 sub hds($$) {
