@@ -285,14 +285,14 @@ sub setupBootloader__entries {
 	my ($e) = @_;
 	my $default = my $old_default = $e->{label} eq $b->{default};
 	my $vga = Xconfig::resolution_and_depth::from_bios($e->{vga});
-	my $netprofile = bootloader::get_append($b, 'PROFILE');
+	my ($append, $netprofile) = bootloader::get_append_netprofile($e);
 
 	my @l;
 	if ($e->{type} eq "image") { 
 	    @l = (
 { label => N("Image"), val => \$e->{kernel_or_dev}, list => [ map { "/boot/$_" } bootloader::installed_vmlinuz() ], not_edit => 0 },
 { label => N("Root"), val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
-{ label => N("Append"), val => \$e->{append} },
+{ label => N("Append"), val => \$append },
   if_(arch() !~ /ppc|ia64/,
 { label => N("Video mode"), val => \$vga, list => [ '', Xconfig::resolution_and_depth::bios_vga_modes() ], format => \&Xconfig::resolution_and_depth::to_string, advanced => 1 },
 ),
@@ -336,7 +336,7 @@ sub setupBootloader__entries {
 
 	$b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
 	$e->{vga} = ref($vga) ? $vga->{bios} : $vga;
-	bootloader::set_append($b, PROFILE => $netprofile);
+	bootloader::set_append_netprofile($e, $append, $netprofile);
 	bootloader::configure_entry($e); #- hack to make sure initrd file are built.
 	1;
     };

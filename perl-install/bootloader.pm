@@ -538,6 +538,19 @@ sub may_append {
     set_append($b, $key, $val) if !get_append($b, $key);
 }
 
+sub get_append_netprofile {
+    my ($e) = @_;
+    my ($simple, $dict) = unpack_append($e->{append});
+    my ($p, $dict_) = partition { $_->[0] eq 'PROFILE' } @$dict;
+    pack_append($simple, $dict_), $p->[0][1];
+}
+sub set_append_netprofile {
+    my ($e, $append, $profile) = @_;
+    my ($simple, $dict) = unpack_append($append);
+    push @$dict, [ 'PROFILE', $profile ] if $profile;
+    $e->{append} = pack_append($simple, $dict);
+}
+
 sub configure_entry {
     my ($entry) = @_;
     $entry->{type} eq 'image' or return;
