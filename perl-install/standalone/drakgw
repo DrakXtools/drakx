@@ -530,7 +530,7 @@ sub pur_gtk_mode {
         $window1->{rwindow}->set_position('center');
         $window1->{rwindow}->set_title(N("Internet Connection Sharing configuration"));
     }
-    $window1->{rwindow}->border_width(10);
+    $window1->{rwindow}->set_border_width(10);
     my $vbox1 = new Gtk2::VBox(0,0);
     $window1->{rwindow}->add($vbox1);
     my $hbox1 = new Gtk2::HBox(0,0);

@@ -47,7 +47,7 @@ my $lilogrub = chomp_(`detectloader -q`);
 my $window = $::isEmbedded ? new Gtk2::Plug($::XID) : new Gtk2::Window("toplevel");
 $window->signal_connect(delete_event => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk2->exit(0) });
 $window->set_title(N("Boot Style Configuration"));
-$window->border_width(2);
+$window->set_border_width(2);
 #$window->realize;
 
 # drakX mode
@@ -162,7 +162,7 @@ $no_bootsplash == 0
     my $img_file = $themes{path}.$combo{boot}->entry->get_text().$themes{boot}{path}."bootsplash-$cur_res.jpg";
     undef($boot_pixmap);
     $boot_pixmap = gtkcreate_pixbuf( $img_file);
-    $boot_pixmap = $boot_pixmap->scale_simple(155,116,0);
+    $boot_pixmap = $boot_pixmap->scale_simple(155, 116, 'nearest');
     $boot_pic->set($boot_pixmap->render_pixmap_and_mask(0), '');
 });
 
