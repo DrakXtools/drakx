@@ -16,6 +16,7 @@ my @ALLOWED_LANGS = qw(en_US fr es it de);
 #- were not necessary to start stage2 itself (there were setup
 #- by stage1 of course)
 sub init {
+    my ($o) = @_;
     #- rw things
     mkdir "/$_" foreach qw(home mnt root etc var);
     mkdir_p "/var/$_" foreach qw(log run/console spool lib/xkb lock/subsys);
@@ -43,10 +44,22 @@ sub init {
     run_program::run('/sbin/devfsd', '/dev');
 
     modules::load_category('multimedia/sound');
+
+    $o->{steps}{exitMove} = { reachable => 1 };
+    $o->{orderedSteps} = qw(selectLanguage acceptLicense selectMouse selectKeyboard exitMove);
     
     member($_, @ALLOWED_LANGS) or delete $lang::langs{$_} foreach keys %lang::langs;
 }
 
+sub exit() {
+    run_program::run('adduser', 'mdk');
+
+    output('/var/run/console.lock', 'mdk');
+    output('/var/run/console/mdk', 1);
+    run_program::run('pam_console_apply');
+
+    run_program::run('su', 'mdk', 'startkde');
+}
 
 sub automatic_xconf {
     my ($o) = @_;
