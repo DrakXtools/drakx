@@ -68,6 +68,11 @@ sub lomount_clp {
     my ($name) = @_;
     my ($clp, $dir) = ("/image_raw/live_tree_$name.clp", "/image_$name");
 
+    if (! -e $clp || cat_('/proc/cmdline') =~ /\blive\b/) {
+	symlink "/image_raw/live_tree_$name", $dir;
+	return;
+    }
+
     mkdir_p($dir);
     my $dev = devices::find_free_loop();
     run_program::run('losetup', '-r', '-e', 'gz', $dev, $clp);
@@ -86,9 +91,6 @@ sub install2::startMove {
     }
     require install_steps;
     install_steps::addUser($o);
-
-    #- need be done early because it provide some libs such as libssl which is needed for automatic printer config
-    lomount_clp('totem') if ! -x '/usr/bin/totem' && cat_('/proc/cmdline') !~ /\blive\b/;
 
     #- automatic printer, timezone, network configs
     require install_steps_interactive;
