@@ -1,3 +1,102 @@
+2002/02/01  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* services.pm, standalone/drakbackup, printerdrake.pm,
+	standalone/logdrake: changed some strings to make translation easier
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/DrakX.pot, share/po/es.po, share/po/fr.po, share/po/bg.po,
+	share/po/ga.po, share/po/sr.po, share/po/de.po, share/po/et.po,
+	share/po/tr.po, share/po/eu.po, share/po/az.po, share/po/ru.po,
+	share/po/pt_BR.po, share/po/hr.po, share/po/ko.po, share/po/cy.po,
+	share/po/nl.po, share/po/ja.po, share/po/wa.po, share/po/sv.po,
+	share/po/is.po, share/po/hu.po, share/po/it.po, share/po/id.po,
+	share/po/pl.po, share/po/no.po, share/po/fi.po, share/po/th.po,
+	share/po/el.po, share/po/sk.po, share/po/lt.po, share/po/ar.po,
+	share/po/sl.po, share/po/vi.po, share/po/br.po, share/po/ca.po,
+	share/po/gl.po, share/po/lv.po, share/po/uk.po, share/po/eo.po,
+	share/po/ro.po, share/po/bs.po, share/po/da.po, share/po/zh_TW.po,
+	share/po/cs.po, share/po/af.po: updated pot file
+
+2002/02/01  Pixel  <pixel@mandrakesoft.com>
+
+	* my_gtk.pm: please perl_checker
+
+	* install_interactive.pm: use from_Mb for choosing the size of the windows
+	partition
+
+	* Xconfigurator.pm: testFinalConfig now returns false if test is skipped
+	because of a bad_card or
+	verybad_card and $skip_badcard is not set
+
+2002/01/31  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* lang.pm, share/keyboards.tar.bz2, keyboard.pm: Added Tamil language and
+	keyboard choices (KDE is translated to Tamil)
+
+2002/01/31  yduret
+
+	* pixmaps/wiz_scannerdrake.png: on rajoute la zolie image
+
+2002/01/30  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* Xconfigurator.pm: Added setting of model=jp106 for Japanese keyboard
+
+	* keyboard.pm, share/keyboards.tar.bz2: Added Bulgarian "phonetic"
+	keyboard
+
+	* lang.pm: Enabled "ms" language in the language selection list (there are
+	Gnome and KDE
+	translations for it)
+
+	* share/po/be.po, share/po/zh_CN.po, share/po/no.po, share/po/fi.po,
+	share/po/es.po, share/po/bg.po, share/po/de.po, share/po/et.po,
+	share/po/el.po, share/po/ru.po, share/po/br.po, share/po/uk.po,
+	share/po/eo.po, share/po/bs.po, share/po/nl.po, share/po/ro.po,
+	share/po/da.po, share/po/zh_TW.po, share/po/cs.po, share/po/hu.po:
+	updated some po files
+
+2002/01/30  Pixel  <pixel@mandrakesoft.com>
+
+	* share/rpmsrate: add gnome-core in GNOME (used to be required?)
+
+	* Xconfigurator_consts.pm, Xconfigurator.pm: move "what is the
+	running_window_manager" and "ask_window_manager_to_logout" to any.pm
+
+	* any.pm (ask_window_manager_to_logout, running_window_manager): created
+	from Xconfigurator and cleaned
+	(selectLanguage): if $langs is empty, don't ask for "other languages"
+
+	* pixmaps/wiz_printerdrake.png: re-adding with -kb
+	removing for re-adding with -kb
+
+	* standalone/localedrake: now works in normal user: it modifies the
+	~/.i18n (todo: handle kde crazy variables?)
+
+	* lang.pm: handle read'ing and write'ing to a specified file (useful
+	example: ~/.i18n)
+
+2002/01/30  sdupont
+
+	* standalone/drakbackup: complex merging....
+	change /var/drakbackup to /var/lib/drakbackup
+	crontab update
+	mail report update
+	sendmail update
+	require rpm mode
+	code optimisation
+	remove about gi
+	new help function
+
+2002/01/29  Till Kamppeter <till@mandrakesoft.com>
+
+	* pixmaps/wiz_printerdrake.png: Added logo for the "Add Printer" wizard of
+	printerdrake.
+
+	* printer.pm, printerdrake.pm: Prepared printerdrake for the "Add printer"
+	wizard.
+	Improvements for the selection of a local printer, especially when no or
+	one printer was detected.
+
 2002/01/29  dam's  <damien@mandrakesoft.com>
 
 	* my_gtk.pm: icons placements are better
