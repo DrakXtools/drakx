@@ -104,8 +104,7 @@ sub bestMirror {
     $possible[rand @possible];
 }
 
-#sub dir { $mirrors{$_[0]}[1] . '/' . $::VERSION }
-sub dir { $mirrors{$_[0]}[1] . '/' . '8.1' }
+sub dir { $mirrors{$_[0]}[1] . '/' . $::VERSION }
 sub ftp($) { ftp::new($_[0], dir($_[0])) }
 
 sub getFile {
