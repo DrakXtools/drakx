@@ -351,7 +351,6 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 }
 
 
-#ifndef DISABLE_MEDIAS
 static struct media_info * medias = NULL;
 
 static void find_media(enum media_bus bus)
@@ -447,6 +446,9 @@ static void find_media(enum media_bus bus)
 
 	fd = open("/proc/scsi/scsi", O_RDONLY);
 	if (fd != -1) {
+                FILE * f;
+                char buf[512];
+
 		enum { SCSI_TOP, SCSI_HOST, SCSI_VENDOR, SCSI_TYPE } state = SCSI_TOP;
 		char * start, * chptr, * next, * end;
 		char scsi_disk_count = 'a';
@@ -550,6 +552,20 @@ static void find_media(enum media_bus bus)
 					sprintf(tmp_name, "sr%c", scsi_cdrom_count++);
 					tmp[count].type = CDROM;
 				}
+
+                                if (!(f = fopen("/proc/partitions", "rb")) || !fgets(buf, sizeof(buf), f) || !fgets(buf, sizeof(buf), f)) {
+                                        log_message("Couldn't open /proc/partitions");
+                                } else {
+                                        while (fgets(buf, sizeof(buf), f)) {
+                                                char name[100];
+                                                int major, minor, blocks;
+                                                memset(name, 0, sizeof(name));
+                                                sscanf(buf, " %d %d %d %s", &major, &minor, &blocks, name);
+                                                if (streq(name, tmp_name) && ((blocks == 1048575) || (blocks == 1440)))
+                                                        tmp[count].type = FLOPPY;
+                                        }
+                                        fclose(f);
+                                }
 
 				if (*tmp_name) {
 					tmp[count].name = strdup(tmp_name);
@@ -662,7 +678,6 @@ void get_medias(enum media_type media, char *** names, char *** models, enum med
 	*names = memdup(tmp_names, sizeof(char *) * count);
 	*models = memdup(tmp_models, sizeof(char *) * count);
 }
-#endif /* DISABLE_MEDIAS */
 
 
 #ifndef DISABLE_NETWORK
