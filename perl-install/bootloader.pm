@@ -362,7 +362,6 @@ sub suggest {
 	 timeout => $onmbr && 10,
 	 nowarn => 1,
 	   if_(arch() !~ /ia64/,
-	 lba32 => 1,
 	 boot => "/dev/" . ($onmbr ? $hds->[0]{device} : fsedit::get_root($fstab, 'boot')->{device}),
 	 map => "/boot/map",
          ),
@@ -705,9 +704,6 @@ sub make_label_lilo_compatible {
 sub write_lilo_conf {
     my ($lilo, $fstab, $hds) = @_;
     $lilo->{prompt} = $lilo->{timeout};
-
-    delete $lilo->{linear} if $lilo->{lba32};
-    $lilo->{geometric} = !$lilo->{lba32} && !$lilo->{linear} if arch() !~ /ia64/;
 
     my $file2fullname = sub {
 	my ($file) = @_;
