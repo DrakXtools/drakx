@@ -92,6 +92,28 @@ sub unblacklist {
     }
 }
 
+sub whitelist {
+    my ($o, $addr) = @_;
+    eval {
+        $o->{daemon}->Whitelist(Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $addr));
+    };
+    if ($@) {
+        print "(Whitelist) exception: $@\n";
+        $o->dispatch;
+    }
+}
+
+sub unwhitelist {
+    my ($o, $addr) = @_;
+    eval {
+        $o->{daemon}->UnWhitelist(Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $addr));
+    };
+    if ($@) {
+        print "(UnWhitelist) exception: $@\n";
+        $o->dispatch;
+    }
+}
+
 sub set_interactive {
     my ($o, $mode) = @_;
     print "setting new IDS mode: $mode\n";
@@ -116,6 +138,20 @@ sub get_blacklist {
         return;
     }
     @blacklist;
+}
+
+sub get_whitelist {
+    my ($o) = @_;
+    my @whitelist;
+    eval {
+        @whitelist = $o->{daemon}->GetWhitelist;
+    };
+    if ($@) {
+        print "(GetWhitelist) exception: $@\n";
+        $o->dispatch;
+        return;
+    }
+    @whitelist;
 }
 
 sub format_date {
