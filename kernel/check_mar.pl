@@ -22,7 +22,7 @@ my $main_version = chomp_(cat_("all.kernels/.main"));
 
 foreach (keys %sanity_check) {
     my $marfile = "all.modules/$main_version/${_}_modules.mar";
-    -e $mar or die "ERROR: missing $marfile\n";
+    -e $marfile or die "ERROR: missing $marfile\n";
 
     my @l = map { /(\S+)\.o/ } `$mar -l $marfile`;
     my @pbs = difference2($sanity_check{$_}, \@l);
