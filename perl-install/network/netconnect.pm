@@ -1,4 +1,4 @@
-package network::netconnect;
+package network::netconnect; # $Id$
 
 use strict;
 use common;
