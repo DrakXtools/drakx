@@ -136,8 +136,8 @@ sub make($) {
     if (m,^(.*/(?:dev|tmp))/(.*),) {
 	$_ = $2;
     } else {
-	-e $file or $file = "/tmp/$_";
-	-e $file or $file = "/dev/$_";
+	$file =~ m|^/| && -e $file or $file = "/tmp/$_";
+	$file =~ m|^/| && -e $file or $file = "/dev/$_";
     }
     -e $file and return $file; #- assume nobody takes fun at creating files named as device
 
