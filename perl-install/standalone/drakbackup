@@ -263,7 +263,6 @@ my $user_keys = 1;
 my $user_home = $ENV{HOME};
 my $backup_key = $user_home . "/.ssh/identity-drakbackup";
 my $nonroot_user = 0;
-my $not_warned = 0;
 my $media_problem = 0;
 my $vol_name = 'Drakbackup';
 my $good_restore_path = 1;
@@ -274,7 +273,7 @@ my $time_string = "* * * * *";
 my $exec_string = "export USER=$ENV{USER}; /usr/sbin/drakbackup --daemon > /dev/null 2>&1";
 
 # allow not-root user with own config
-if ($ENV{HOME} ne '/root') {
+if ($ENV{USER} ne 'root' && $ENV{HOME} ne '/root') {
 	standalone::explanations("Running as $ENV{USER}...");
 	#- doesn't get defined when run from cron
 	$user_home = "/home/$ENV{USER}" if $user_home eq '';
@@ -283,7 +282,6 @@ if ($ENV{HOME} ne '/root') {
 	$log_file = $cfg_dir . "drakbackup.log";
 	-d $save_path or mkdir_p $save_path;
 	$nonroot_user = 1;
-	$not_warned = 1;
 	$backup_sys = 0;
 	@user_list = $ENV{USER};
 }
@@ -705,22 +703,18 @@ sub save_cron_files() {
 	my $entry_changed = 0;
 	my $tmpcron = "$ENV{HOME}/tmp/crontab.tmp";
 
-	if ($nonroot_user && $when_space ne "custom" && $backup_daemon)  {
-		show_warning("w", N("Cron not available yet as non-root")) if $not_warned;
-		$not_warned = 0;
+	if ($nonroot_user && $when_space ne "custom" && $when_space ne '' && $backup_daemon)  {
+		show_warning("w", N("Interval cron not available as non-root"));
 		$backup_daemon = 0;
 		return 1;
 	}
     my @cron_file = ("#!/bin/sh\n", "export USER=root\n", "/usr/sbin/drakbackup --daemon > /dev/null 2>&1\n");
 
     if ($backup_daemon) {
-		foreach (qw(hourly daily weekly monthly)) {
-	    	-f "/etc/cron.$_/drakbackup" and rm_rf("/etc/cron.$_/drakbackup");
-		}
-		if ($when_space ne "custom") {
+	if ($when_space ne "custom") {
 			output_p("/etc/cron.$when_space/drakbackup",  @cron_file);
 			system("chmod +x /etc/cron.$when_space/drakbackup");
-    	} else {
+	} else {
 			my $newdetail = join(" ", $time_string, $exec_string, "\n");
 			system("crontab -l | tail +4 > $tmpcron");
 			my @cronlines = cat_($tmpcron);
@@ -737,7 +731,7 @@ sub save_cron_files() {
 			system("crontab $tmpcron");
 			unlink($tmpcron);
 		}
-	} else {
+	} elsif (!$nonroot_user) {
 		foreach (qw(hourly daily weekly monthly)) {
 	    	-f "/etc/cron.$_/drakbackup" and rm_rf("/etc/cron.$_/drakbackup");
 		}
@@ -755,7 +749,7 @@ sub save_cron_files() {
 			system("crontab $tmpcron");
 			unlink($tmpcron);
 		}
-    }
+	}
 }
 
 sub read_conf_file() {
