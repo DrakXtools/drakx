@@ -603,7 +603,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		stg1_error_message(DISTRIB_NAME " typically needs more than %d Mbytes of memory (detected %d Mbytes). You may proceed, but the machine may crash or lock up for no apparent reason. Continue at your own risk. Alternatively, you may reboot your system now.",
 				   MEM_LIMIT_MOVE, total_memory());
         if (mandrake_move_pre() != RETURN_OK)
-                stg1_error_message("Fatal error when preparing MandrakeMove.");
+                stg1_error_message("Fatal error when preparing Mandrakemove.");
 #endif
 
 #ifndef DISABLE_DISK
@@ -623,7 +623,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 
 #ifdef MANDRAKE_MOVE
         if (mandrake_move_post() != RETURN_OK)
-                stg1_error_message("Fatal error when launching MandrakeMove.");
+                stg1_error_message("Fatal error when launching Mandrakemove.");
 #endif
 
 	if (shell_pid != 0) {
