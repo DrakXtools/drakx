@@ -45,7 +45,7 @@ my %modules_only_for_all_img = (
   ],
 
   'disk/hardware_raid' => [
-    qw(i2o_block qla2200 qla2300 cpqfc DAC960),
+    qw(i2o_block qla2200 qla2300 cpqfc DAC960 gdth),
   ],
 );
 
