@@ -1,15 +1,11 @@
-#!/usr/bin/perl -w
-
 package data;
 
 use strict;
-use lib qw(/usr/lib/libDrakX);
 use detect_devices;
 use MDK::Common;
 use class_discard;
 
 our (@ISA, @EXPORT_OK) = (qw(Exporter), (qw(version tree)));
-
 our ($version, $sbindir) = ("1.1.5", "/usr/sbin/");
 
 # Update me each time you handle one more devices class (aka configurator)
