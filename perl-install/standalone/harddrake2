@@ -273,6 +273,11 @@ foreach (@harddrake::data::tree) {
             my $i = $_;
             $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_}) } qw(channel id lun);
         }
+        if (defined $_->{capacity}) {
+            my ($burner, $dvd) = (N("burner"), N("DVD"));
+            $_->{capacity} =~ s/burner/$burner/;
+            $_->{capacity} =~ s/DVD/$dvd/;
+        }
         $configurator .= harddrake::data::set_removable_configurator($Ident, $_);
         if ($Ident eq "AUDIO") {
             require harddrake::sound;
