@@ -1056,7 +1056,7 @@ sub write {
     }
 
     #- deactivate translations on console for RTL languages
-    if ($console_support->{$locale->{lang}}) {
+    if ($console_support{$locale->{lang}}) {
 	add2hash $h, { CONSOLE_NOT_LOCALIZED => $console_support{$locale->{lang}}{CONSOLE_NOT_LOCALIZED} }
     }
 
