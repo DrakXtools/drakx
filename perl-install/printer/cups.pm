@@ -8,6 +8,66 @@ use common;
 
 
 #------------------------------------------------------------------------------
+
+sub lpstat_lpv() {
+
+    # Get a list of remotely defined print queues, with "Description" and
+    # "Location"
+
+    # Info to return
+    my @items;
+
+    # Hash to simplify the adding of the URIs
+    my $itemshash;
+
+    # Run the "lpstat" command in a mode to give as much info about the
+    # print queues as possible
+    my @lpstat = run_program::rooted_get_stdout
+	($::prefix, 'lpstat', '-l', '-p', '-v');
+    
+    my $line;
+    my $currentitem = -1;
+    for $line (@lpstat) {
+	chomp ($line);
+	if (!($line =~ m!^\s*$!)) {
+	    if ($line =~ m!^printer\s+(\S+)\s+(\S.*)$!) {
+		# Beginning of new printer's entry
+		my $name = $1;
+		push(@items, {});
+		$currentitem = $#items;
+		$itemshash->{$name} = $currentitem;
+		$items[$currentitem]{queuename} ||= $name;
+	    } elsif ($line =~ m!^\s+Description:\s+(\S.*)$!) {
+		# Description field
+		if ($currentitem != -1) {
+		    $items[$currentitem]{description} ||= $1;
+		}
+	    } elsif ($line =~ m!^\s+Location:\s+(\S.*)$!) {
+		# Location field
+		if ($currentitem != -1) {
+		    $items[$currentitem]{location} ||= $1;
+		}
+	    } elsif ($line =~ m!^device\s+for\s+(\S+):\s+(\S.*)$!) {
+		# "device for ..." line, extract URI
+		my $name = $1;
+		my $uri = $2;
+		if (defined($itemshash->{$name})) {
+		    if ($uri !~ /:/) {$uri = "file:" . $uri};
+		    $currentitem = $itemshash->{$name};
+		    if (($currentitem <= $#items) &&
+			($items[$currentitem]{queuename} eq $name)) {
+			$items[$currentitem]{uri} ||= $uri;
+			if ($uri =~ m!^ipp://([^/:]+)[:/]!) {
+			    $items[$currentitem]{ipp} = $1;
+			}
+		    }
+		}
+	    }
+	}
+    }
+    return @items;
+}
+
 sub lpstat_v() {
     map {
 	if (my ($queuename, $uri) = m/^\s*device\s+for\s+([^:\s]+):\s*(\S+)\s*$/) {
