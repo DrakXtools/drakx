@@ -15,7 +15,10 @@ RELEASE_BOOT_IMG = all.img
 endif
 BOOT_IMG += $(RELEASE_BOOT_IMG)
 
-BOOT_RDZ = $(BOOT_IMG:%.img=%.rdz)
+FRELEASE_BOOT_IMG = $(BOOT_IMG:%=images/%)
+FBOOT_IMG = $(BOOT_IMG:%=images/%)
+FBOOT_RDZ = $(FBOOT_IMG:%.img=%.rdz)
+
 BINS = mdk-stage1/init mdk-stage1/stage1-full mdk-stage1/stage1-cdrom mdk-stage1/stage1-network
 ifeq (ppc,$(ARCH))
 BINS = mdk-stage1/init mdk-stage1/stage1-full 
@@ -30,29 +33,20 @@ UPLOAD_SPARC_DEST = /mnt/BIG/distrib/sparc
 
 .PHONY: dirs $(FLOPPY_IMG) install
 
-install: build autoboot rescue
+install: build rescue
 	for i in images misc Mandrake Mandrake/base; do install -d $(ROOTDEST)/$$i ; done
 ifneq (ppc,$(ARCH))
-	for i in $(RELEASE_BOOT_IMG); do cp -f $${i}* $(ROOTDEST)/images; done
+	for i in $(FRELEASE_BOOT_IMG); do cp -f $${i}* $(ROOTDEST)/images; done
 endif
 ifeq (alpha,$(ARCH))
-	for i in $(BOOT_RDZ); do cp -f $${i}* $(ROOTDEST)/boot; done
+	for i in $(FBOOT_RDZ); do cp -f $${i}* $(ROOTDEST)/boot; done
 	cp -f vmlinux.gz $(ROOTDEST)/boot/instboot.gz
 	make -C tools/$(ARCH)/cd install ROOTDEST=$(ROOTDEST)
 endif
 	install live_update $(ROOTDEST)/live_update
 	make -C perl-install full_stage2
 
-build: $(BOOT_IMG)
-
-autoboot:
-ifeq (i386,$(ARCH))
-	install -d $(ROOTDEST)/boot
-#	cp -f vmlinuz {hd,cdrom,pcmcia,network,all,other}.rdz $(ROOTDEST)/boot
-	cp -f all.kernels/*/boot/vmlinuz* $(ROOTDEST)/boot
-	for i in $(BOOT_RDZ); do cp -f $${i}* $(ROOTDEST)/boot; done
-	for i in $(ROOTDEST)/boot/vmlinuz*; do /usr/sbin/rdev -v $$i 788; done
-endif
+build: $(FBOOT_IMG)
 
 dirs:
 	@for n in . $(DIRS); do \
@@ -64,11 +58,11 @@ rescue: all.modules
 
 network_ks.rdz pcmcia_ks.rdz: %_ks.rdz: %.rdz
 
-$(BOOT_RDZ): dirs all.modules
-	./make_boot_img $@ $(@:%.rdz=%)
+$(FBOOT_RDZ): dirs all.modules
+	./make_boot_img $@ `basename $(@:%.rdz=%)`
 
-$(BOOT_IMG): %.img: %.rdz
-	./make_boot_img $@ $(@:%.img=%)
+$(FBOOT_IMG): %.img: %.rdz
+	./make_boot_img $@ `basename $(@:%.img=%)`
 
 tar: clean
 	rpm -qa > needed_rpms.lst
@@ -78,13 +72,12 @@ tar: clean
 all.modules:
 	`./tools/specific_arch ./update_kernel`
 
-$(BOOT_IMG:%=%f): %f: %
+$(FBOOT_IMG:%=%f): %f: %
 	dd if=$< of=/dev/fd0
 	xmessage "Floppy done"
 
 clean:
-	for i in $(BOOT_IMG) $(BOOT_RDZ); do rm -rf $${i}*; done
-	rm -rf $(BINS) all.modules all.modules64 install_pcmcia_modules all.kernels/cardmgr
+	rm -rf $(BINS) images all.modules all.modules64 install_pcmcia_modules
 	for i in $(DIRS) rescue; do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 
@@ -92,7 +85,7 @@ upload:
 	$(MAKE) clean
 
 #	# done before make install to increment ChangeLog version
-	tools/addchangelog.pl tools/cvslog2changelog.pl | tools/mailchangelog.pl &
+#	tools/addchangelog.pl tools/cvslog2changelog.pl | tools/mailchangelog.pl &
 
 	$(MAKE) install
 
@@ -101,7 +94,6 @@ upload:
 	upload Mandrake/base compss* ;\
 	upload Mandrake/base rpmsrate ;\
 	upload Mandrake/base *_stage2.bz2 ;\
-	upload boot '' ;\
 	upload misc gendistrib ;\
 	upload misc make_mdkinst_stage2 ;\
 	upload misc packdrake ;\
@@ -109,7 +101,7 @@ upload:
 	upload misc rpmtools.pm ;\
 	upload misc auto ;\
 	upload '' live_update ;\
-	for i in $(RELEASE_BOOT_IMG); do for j in $${i}*; do upload images $$j; done; done;\
+	for i in $(FRELEASE_BOOT_IMG); do for j in $${i}*; do upload images $$j; done; done;\
 	echo
 
 upload_sparc:
