@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 32mdk
+Release: 33mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,21 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Apr 30 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-33mdk
+- create ~/tmp if needed when running a program
+- device managment: fix sdX <=> scsi devices mapping (especially for
+  USB devices) (pixel)
+- drakclock: time is displayed as HH:MM:SS with RTL languages
+- drakconnect (poulpy):
+  o manage interface: more gui layout fixes
+  o try harder to locate firmware on windows partition (#3793)
+  o no need to up ippp0 in net_cnx_up, it's been up'ed at startup
+- harddrake gui: list SATA controllers in their own category (anthill
+  #741)
+- harddrake service: log removed/added hw
+- localedrake: use utf8 if any of the languages chosen is utf8, not
+  only the main one (pixel)
+
 * Fri Apr 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-32mdk
 - diskdrake, XFdrake: make --auto really not interactive
 - drakconnect:
