@@ -20,7 +20,7 @@ sub to_string { +{ level_list() }->{$_[0]} }
 sub from_string { +{ reverse level_list() }->{$_[0]} || 2 }
 
 sub get_string() { to_string(get() || 2) }
-sub get_common_list() { map { to_string($_) } (2, 3, 4) }
+sub get_common_list() { map { to_string($_) } (1, 2, 3, 4, 5) }
 
 sub get() {
     cat_("$::prefix/etc/profile")           =~ /export SECURE_LEVEL=(\d+)/ && $1 || #- 8.0 msec
