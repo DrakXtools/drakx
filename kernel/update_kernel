@@ -79,28 +79,30 @@ function create_modules_mar() {
 
 [ -e $ALL_KERNELS/.main ] && main=$(cat $ALL_KERNELS/.main)
 
-if [ "$ARCH" == "ia64" ] || [ "$ARCH" == "ppc" ]; then
-	rpm=$(rpm -qp --qf '%{name}' $RPMS/kernel-[0-9]*.rpm | perl -pe 's/kernel-((\.?[0-9]+){3})\.(.*)/$1-${3}/')
-else 
-        #- allow specifying a kernel file on commandline (./update_kernel /RPMS/kernel-2.4.22.10mdk-1-1mdk.i586.rpm 2.4.22-10mdk)
-        if [ -n "$1" ]; then
-            file=$1
-            rpm=$2
-            MOVE=1
-        else
-            file=$RPMS/kernel-BOOT-*.rpm
-            rpm=$(rpm -qp --qf '%{name}' $file | perl -pe 's/kernel-BOOT-((\.?[0-9]+){3})\.(.*)/$1-${3}BOOT/')
-        fi
+if [ "$1" = "--move" ]; then
+    MOVE=1
+    shift
 fi
-if [ -n "$rpm" -a ! -e $ALL_KERNELS/$rpm ]; then
+
+#- allow specifying a kernel file on commandline (./update_kernel /RPMS/kernel-2.4.22.10mdk-1-1mdk.i586.rpm 2.4.22-10mdk)
+if [ -n "$1" ]; then
+    rpm=$1
+elif [ "$ARCH" == "ia64" ] || [ "$ARCH" == "ppc" ]; then
+    rpm=$RPMS/kernel-[0-9]*.rpm
+else 
+    rpm=$RPMS/kernel-BOOT-*.rpm
+fi
+ver=$(rpm -qp --qf '%{name}' $rpm | perl -pe 's/kernel(-(BOOT))?-((\.?[0-9]+){3})\.(.*)/$3-$5$2/')
+
+if [ -n "$ver" -a ! -e $ALL_KERNELS/$ver ]; then
     [ -n "$main" ] && rm -rf $ALL_KERNELS/$main
     cd $ALL_KERNELS
-    rm -rf $rpm ; mkdir $rpm
-    cd $rpm
+    rm -rf $ver ; mkdir $ver
+    cd $ver
     if [ "$ARCH" == "ia64" ] || [ "$ARCH" == "ppc" ]; then
       rpm2cpio $RPMS/kernel-[0-9]*.rpm | cpio -id
     else
-      rpm2cpio $file | cpio -id
+      rpm2cpio $rpm | cpio -id
     fi
     find -type f -name "*.o.gz" -o -name "*.ko.gz" | xargs gunzip
     cd ../..
