@@ -20,6 +20,9 @@ foreach (@ARGV) {
 ################################################################################
 package pkgs_interactive;
 
+use run_program;
+
+
 sub interactive::do_pkgs {
     my ($in) = @_;
     bless { in => $in }, 'pkgs_interactive';
