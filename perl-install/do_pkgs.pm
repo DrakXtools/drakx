@@ -60,14 +60,17 @@ sub check_kernel_module_packages {
     my ($do, $base_name, $o_ext_name) = @_;
     
     require bootloader;
-    my @l = map { $base_name . '-' . bootloader::vmlinuz2version($_) } bootloader::installed_vmlinuz();
-    my @ext = if_($o_ext_name, $o_ext_name);
-    my @rpms = $do->are_available(@ext, @l);
+    my ($short_name) = $base_name =~ /^(.*)-kernel$/;
+    my @rpms = $do->are_available("dkms-$short_name",
+                                  map {
+                                      $base_name . '-' . bootloader::vmlinuz2version($_);
+                                  } bootloader::installed_vmlinuz());
+    my @ext = if_($o_ext_name, $do->are_available($o_ext_name));
 
-    log::l("found kernel module packages $_") foreach @rpms;
+    log::l("found kernel module packages $_") foreach @rpms, @ext;
 
     #- we want at least a kernel package and the ext package if specified
-    @rpms > @ext && \@rpms;
+    @rpms && (!$o_ext_name || @ext) && [ @rpms, @ext ];
 }
 
 ################################################################################
