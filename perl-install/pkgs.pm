@@ -216,7 +216,7 @@ sub packageCallbackChoices {
 	#- is already selected.
 	foreach ($pkg->requires_nosense) {
 	    /locales-/ or next;
-	    my $p = packageByName($packages, $_) or next;
+	    my $p = packageByName($urpm, $_) or next;
 	    $p->flag_available and $prefer ||= $pkg;
 	}
     }
