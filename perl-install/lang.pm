@@ -30,8 +30,8 @@ my %languages = my @languages = (
 'en_IE' => [ 'English|Ireland',		'iso-8859-15', 'en', 'en_IE:en_GB:en' ],
 'en_US.UTF-8' => [ 'English|UTF-8',	'iso-8859-15', 'en', 'en_US:en', 'UTF-8', ],
   'af'  => [ 'Afrikaans',		'iso-8859-1', 'af', 'af:en_ZA' ],
+'am_ET.UTF-8' => [ 'Amharic',		'utf_am',     'am', 'am', 'UTF-8' ],
 'ar_EG.UTF-8' => [ 'Arabic',		'iso-8859-6', 'ar', 'ar', 'UTF-8' ],
-#'az_AZ.ISO-8859-9E'=> [ 'Azeri (Latin)','iso-8859-9e','az', 'az:tr' ],
 'az_AZ.UTF-8' => [ 'Azeri (Latin)',	'iso-8859-9e', 'az', 'az:tr', 'UTF-8' ],
   'be'  => [ 'Belarussian (CP1251)',	'cp1251',      'be', 'be:be_BY.CP1251:ru_RU.CP1251' ],
 'be_BY.UTF-8'  => [ 'Belarussian (UTF-8)', 'cp1251',   'be', 'be:be_BY.CP1251:ru_RU.CP1251', 'UTF-8' ],
@@ -42,7 +42,6 @@ my %languages = my @languages = (
   'bs'  => [ 'Bosnian',			'iso-8859-2', 'bs', 'bs' ],
 'ca_ES' => [ 'Catalan',			'iso-8859-15', 'ca', 'ca:es_ES:es' ],
   'cs'  => [ 'Czech',			'iso-8859-2', 'cs', 'cs' ],
-#-  'cy'  => [ 'Cymraeg (Welsh)','iso-8859-14','cy', 'cy:en_GB:en' ],
 'cy_GB.UTF-8' => [ 'Cymraeg (Welsh)',	'iso-8859-14',   'cy', 'cy:en_GB:en', 'UTF-8' ],
   'da'  => [ 'Danish',			'iso-8859-15', 'da', 'da' ],		
 'de_AT' => [ 'German|Austria',		'iso-8859-15', 'de', 'de_AT:de' ],
@@ -75,7 +74,6 @@ my %languages = my @languages = (
 'he_IL.UTF-8' => [ 'Hebrew',		'iso-8859-8', 'he', 'he:iw_IL', 'UTF-8' ],
   'hr'  => [ 'Croatian',		'iso-8859-2', 'hr', 'hr' ],
   'hu'  => [ 'Hungarian', 		'iso-8859-2', 'hu', 'hu' ],
-#'hy_AM.ARMSCII-8'=> [ 'Armenian|ARMSCII-8','utf_hy','hy','hy' ],
 'hy_AM.UTF-8' => [ 'Armenian',     'utf_hy',     'hy', 'hy', 'UTF-8' ],
 #- 'in' was the old code for indonesian language; by putting LANGUAGE=id:in_ID
 #- we catch the few catalog files still using the wrong code
@@ -94,11 +92,9 @@ my %languages = my @languages = (
 #-'lo'  => [ 'Laotian',			'utf_lo',  'lo', 'lo' ],
   'lt'  => [ 'Lithuanian',		'iso-8859-13', 'lt', 'lt' ],
   'lv'  => [ 'Latvian',			'iso-8859-13', 'lv', 'lv' ],   
-  'mi'	=> [ 'Maori',			'iso-8859-13', 'mi', 'mi' ],
-#- 'mk'  => [ 'Macedonian (Cyrillic)','iso-8859-5', 'mk', 'mk' ],
+'mi_NZ.UTF-8' => [ 'Maori',		'iso-8859-13', 'mi', 'mi', 'UTF-8' ],
 'mk_MK.UTF-8' => [ 'Macedonian (Cyrillic)', 'cp1251',   'mk', 'mk', 'UTF-8' ],
   'ms'  => [ 'Malay',			'iso-8859-1', 'ms', 'ms' ],
-#- 'mt'  => [ 'Maltese|ISO-8859-3',	'iso-8859-3', 'mt', 'mt' ],
 'mt_MT.UTF-8' => [ 'Maltese',	'iso-8859-3',      'mt', 'mt', 'UTF-8' ],
 'nl_BE' => [ 'Dutch|Belgium',	'iso-8859-15', 'nl', 'nl_BE:nl' ],
 'nl_NL' => [ 'Dutch|Netherlands', 'iso-8859-15', 'nl', 'nl_NL:nl' ],
@@ -143,8 +139,6 @@ my %languages = my @languages = (
 'uk_UA.CP1251' => [ 'Ukrainian|CP1251',	'cp1251',     'uk', 'uk_UA:uk' ],
 'uk_UA.UTF-8' => [ 'Ukrainian|UTF-8',	'cp1251',   'uk', 'uk_UA:uk', 'UTF-8' ],
   'uz'  => [ 'Uzbek',			'iso-8859-1', 'uz', 'uz' ],
-#'vi_VN.TCVN'  => [ 'Vietnamese|TCVN',   'utf_vi',     'vi', 'vi' ],
-#'vi_VN.VISCII' => [ 'Vietnamese|VISCII','utf_vi',   'vi', 'vi' ],
 'vi_VN.UTF-8' => [ 'Vietnamese',  'utf_vi',   'vi', 'vi', 'UTF-8' ],
   'wa'  => [ 'Walon',     		'iso-8859-15', 'wa', 'wa:fr_BE:fr' ],
 #-'yi'	=> [ 'Yiddish',			'cp1255',     'yi', 'yi' ],
@@ -330,6 +324,8 @@ my %charsets = (
 #- Tamil uses pseudo iso-8859-1 fonts
   "tscii" => [ "tamil",		undef,		"tscii-0",
 	undef, undef, "-tamil-tscakaram-medium-r-normal--12-120-75-75-p-92-tscii-0" ],
+  "utf_am"      => [ "Agafari-16",		undef,	undef,
+	"utf8",  undef, "-*-*-*-*-*-*-*-*-*-*-*-*-iso10646-1" ],
   "unicode" => [ undef,			undef,		undef,
 	"utf8", undef, "-*-*-*-*-*-*-*-*-*-*-*-*-iso10646-1" ],
 );
@@ -528,6 +524,7 @@ my %charset2kde_font = (
   #- get available
   'utf_hy' => [ "clearlyu,17" ],
   'utf_ka' => [ "clearlyu,17" ],
+  'utf_am' => [ "clearlyu,17" ],
   'default' => [ "misc-fixed,13", "misc-fixed,13", "misc-fixed,10", ],
 );
 
