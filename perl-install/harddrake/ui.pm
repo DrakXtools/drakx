@@ -242,12 +242,10 @@ sub new {
                                  } sort keys %$current_device ]);
                                  
                                  # we've valid driver, let's offer to configure it
-                                 if (exists $current_device->{driver} &&  $current_device->{driver} !~ /(unknown|.*\|.*)/ &&  $current_device->{driver} !~ /^Card:/) {
-                                     $module_cfg_button->show;
-                                 }
+                                 show_hide(exists $current_device->{driver} &&  $current_device->{driver} !~ /(unknown|.*\|.*)/ &&  $current_device->{driver} !~ /^Card:/, $module_cfg_button);
                                  
                                  $current_configurator = $configurators{$id};
-                                 $config_button->show if -x $current_configurator;
+                                 show_hide(-x $current_configurator, $config_button);
                                  return 1;
                              }
 					}
@@ -299,6 +297,15 @@ sub quit_global {
     kill(15, $pid) if $pid;
     setVarsInSh($conffile, \%options);
     ugtk2->exit(0);
+}
+
+sub show_hide {
+    my ($bool, $button) = @_;
+    if ($bool) {
+        $button->show();
+    } else {
+        $button->hide();
+    }
 }
 
 
