@@ -61,10 +61,8 @@ sub configure_lan {
     $::isInstall and $in->set_help('configureNetworkIP');
     configureNetwork($netc, $intf, $first_time) or return;
     configureNetwork2($in, $prefix, $netc, $intf);
-    my $hasdhcp = 0;
-    foreach (keys(%$intf)) { $intf->{$_}{BOOTPROTO} eq "dhcp" and $hasdhcp = 1}
     $netc->{NETWORKING} = "yes";
-    if ($netc->{GATEWAY} || $hasdhcp) {
+    if ($netc->{GATEWAY} || grep { $_->{BOOTPROTO} eq 'dhcp' } values %$intf) {
 	$netcnx->{type}='lan';
 	$netcnx->{NET_DEVICE} = $netc->{NET_DEVICE} = '';
 	$netcnx->{NET_INTERFACE} = 'lan'; #$netc->{NET_INTERFACE};
