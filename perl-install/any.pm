@@ -550,12 +550,12 @@ sub ask_users {
 
 	my %groups;
 	my $verif = sub {
-	    $u->{password} eq $u->{password2} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return (1,2);
-	    $security > 3 && length($u->{password}) < 6 and $in->ask_warn('', N("This password is too simple")), return (1,2);
-	    $u->{name} or $in->ask_warn('', N("Please give a user name")), return (1,0);
-	    $u->{name} =~ /^[a-z]+?[a-z0-9_-]*?$/ or $in->ask_warn('', N("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
-	    length($u->{name}) <= 32 or $in->ask_warn('', N("The user name is too long")), return (1,0);
-	    member($u->{name}, 'root', map { $_->{name} } @$users) and $in->ask_warn('', N("This user name has already been added")), return (1,0);
+	    $u->{password} eq $u->{password2} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return 1,2;
+	    $security > 3 && length($u->{password}) < 6 and $in->ask_warn('', N("This password is too simple")), return 1,2;
+	    $u->{name} or $in->ask_warn('', N("Please give a user name")), return 1,0;
+	    $u->{name} =~ /^[a-z]+?[a-z0-9_-]*?$/ or $in->ask_warn('', N("The user name must contain only lower cased letters, numbers, `-' and `_'")), return 1,0;
+	    length($u->{name}) <= 32 or $in->ask_warn('', N("The user name is too long")), return 1,0;
+	    member($u->{name}, 'root', map { $_->{name} } @$users) and $in->ask_warn('', N("This user name has already been added")), return 1,0;
 	    return 0;
 	};
 	my $ret = $in->ask_from_(
