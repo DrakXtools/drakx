@@ -111,12 +111,12 @@ our %l = (
     sound => [
       if_(arch() =~ /ppc/, qw(dmasound_awacs)),
       if_(arch() !~ /^sparc/,
-        qw(audigy cmpci cs46xx cs4281 emu10k1 es1370 es1371 esssolo1 i810_audio maestro maestro3),
+        qw(audigy btaudio cmpci cs46xx cs4281 emu10k1 es1370 es1371 esssolo1 i810_audio maestro maestro3),
         qw(nm256_audio pas16 rme96xx sonicvibes trident via82cxxx_audio ymfpci),
         qw(snd-ali5451 snd-als100 snd-als4000 snd-azt2320 snd-cmi8330 snd-cmipci snd-cs46xx snd-dt0197h),
 	   qw(snd-cs4281 snd-emu10k1),
-	   qw(snd-ad1816a snd-ad1848 snd-cs4232 snd-gusclassic snd-gusextreme snd-gusmax snd-interwave)
-	   qw(snd-mpu401 snd-opl3sa2 snd-opl3sa2 snd-opti93x snd-rme9652 snd-sb8 snd-sbawe)
+	   qw(snd-ad1816a snd-ad1848 snd-cs4232 snd-gusclassic snd-gusextreme snd-gusmax snd-interwave),
+	   qw(snd-mpu401 snd-opl3sa2 snd-opl3sa2 snd-opti93x snd-rme9652 snd-sb8 snd-sbawe),
 	   qw(snd-ens1370 snd-ens1371 snd-es18xx snd-es968 snd-es1938 snd-es1968 snd-es1688),
         qw(snd-fm801 snd-hdsp snd-ice1712 snd-intel8x0 snd-korg1212 snd-maestro3),
 	   qw(snd-nm256 snd-rme96 snd-rme32 snd-opl3sa2 snd-sb16 snd-sgalaxy snd-sonicvibes),
