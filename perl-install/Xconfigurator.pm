@@ -287,7 +287,12 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     #- in case of class discarding, this can help ...
     $tc or $tc = $choices[0];
     $tc->{code} and $tc->{code}();
-
+    
+    #- ugly hack - force 4.0.x for PPC in recommended mode
+    if (!$::expert && arch() =~ /ppc/) {
+		$card->{use_xf4} = 1;
+	}
+	
     $card->{prog} = "/usr/X11R6/bin/" . ($card->{use_xf4} ? 'XFree86' : $card->{server} =~ /Sun (.*)/x ?
 					 "Xsun$1" : "XF86_$card->{server}");
 

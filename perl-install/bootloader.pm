@@ -429,14 +429,25 @@ sub set_profiles {
 
 }
 
-sub get_of_dev($) {
-	my ($unix_dev) = @_;
-	open(INPIPE, "/usr/local/sbin/ofpath $unix_dev|") || die "Couldn't find ofpath";
-	my $of_dev = <INPIPE>;
-	close(INPIPE);
+sub get_of_dev($$) {
+	my ($prefix, $unix_dev) = @_;
+	#- don't care much for this - need to run ofpath rooted, and I need the result
+	#- In test mode, just run on "/", otherwise you can't get to the /proc files		
+	if ($::testing) {
+		$prefix = "";
+	}
+	run_program::rooted_or_die($prefix, "/usr/local/sbin/ofpath $unix_dev", ">", "/tmp/ofpath");
+	open(FILE, "$prefix/tmp/ofpath") || die "Can't open $prefix/tmp/ofpath";
+	my $of_dev = "";
+	local $_ = "";
+	while(<FILE>){
+		$of_dev = $_;
+	}
 	chop($of_dev);
+	my @del_file = ($prefix . "/tmp/ofpath");
+	unlink (@del_file);
 	log::l("OF Device: $of_dev");
-	$of_dev;	
+	$of_dev;
 }
 
 sub install_yaboot($$$) {
@@ -459,7 +470,7 @@ sub install_yaboot($$$) {
 
 	if ($lilo->{boot}) {
 		print F "boot=$lilo->{boot}";
-		my $of_dev = get_of_dev($lilo->{boot});
+		my $of_dev = get_of_dev($prefix, $lilo->{boot});
 	    print F "ofboot=$of_dev";
 	} else {
 		die "no bootstrap partition defined."
@@ -472,11 +483,11 @@ sub install_yaboot($$$) {
 	$lilo->{$_} and print F "$_=$lilo->{$_}" foreach qw(defaultos default);
 	print F "nonvram";
 	
-	foreach (@{$lilo->{entries}}) {	#- at the moment we only automatically do the 1st HD
+	foreach (@{$lilo->{entries}}) {
 
 	    if ($_->{type} eq "image") {
-			my $of_dev = get_of_dev($_->{root});
-	    	print F "$_->{type}=$of_dev,$_->{kernel_or_dev}";
+			my $of_dev = get_of_dev($prefix, $_->{root});
+			print F "$_->{type}=$of_dev,$_->{kernel_or_dev}";
 	    	print F "\tlabel=", substr($_->{label}, 0, 15); #- lilo doesn't handle more than 15 char long labels
 			print F "\troot=$_->{root}";
 			print F "\tinitrd=$_->{initrd}" if $_->{initrd};
@@ -484,7 +495,7 @@ sub install_yaboot($$$) {
 			print F "\tread-write" if $_->{'read-write'};
 			print F "\tread-only" if !$_->{'read-write'};
 	    } else {
-	    	my $of_dev = get_of_dev($_->{kernel_or_dev});
+	    	my $of_dev = get_of_dev($prefix, $_->{kernel_or_dev});
 			print F "$_->{label}=$of_dev";		
 	    }
 	}
