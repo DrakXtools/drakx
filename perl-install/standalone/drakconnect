@@ -30,7 +30,7 @@ use network::tools;
 use network::modem;
 use network;
 use c;
-use any;
+use modules;
 use network::isdn;
 use network::adsl;
 use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_prog $connect_file $disconnect_file);
@@ -64,7 +64,7 @@ require ugtk2;
 import ugtk2 qw(:helpers :wrappers);
 my $expert_mode = 0;
 network::netconnect::read_net_conf('', $netcnx, $netc);
-any::load_category_no_message('net', undef);
+modules::load_category('net');
 my @all_cards = network::ethernet::conf_network_card_backend($netc, $intf, undef, undef, undef, undef);
 network::netconnect::load_conf($netcnx, $netc, $intf);
 
