@@ -658,3 +658,5 @@ network::netconnect::init_globals($in);
 my %i;
 &network::netconnect::detect(\%i);
 print Dumper(\%i),"\n";
+
+=cut
