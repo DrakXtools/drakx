@@ -53,7 +53,7 @@ static enum return_type third_party_get_device(char ** device)
                         *device = floppy_dev;
                         return RETURN_OK;
                 } else { 
-                        stg1_error_message("I can't any floppy or disk on this system. "
+                        stg1_error_message("I can't find any floppy or disk on this system. "
                                            "No third-party kernel modules will be used.");
                         return RETURN_ERROR;
                 }
@@ -125,7 +125,7 @@ void thirdparty_load_modules(void)
 	modules = list_directory(mount_location);
 
 	if (!modules || !*modules) {
-		stg1_error_message("No modules found on floppy disk.");
+		stg1_error_message("No modules found on disk.");
 		umount(mount_location);
 		return thirdparty_load_modules();
 	}
