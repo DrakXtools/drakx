@@ -795,7 +795,7 @@ sector of drive (MBR)\"), but if you prefer, the bootloader can be
 installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk
 (\"On Floppy\").
 
-Checking \"Create a boot disk\" allows you to have a rescue bot media
+Checking \"Create a boot disk\" allows you to have a rescue boot media
 handy.
 
 The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by
