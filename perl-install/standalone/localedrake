@@ -49,8 +49,10 @@ eval {
 if ($@) {
     if ($@ =~ /^one lang only/) {
 	select_country() or $in->exit(0);
-    } else {
+    } elsif ($@ !~ /wizcancel/) {
 	die;
+    } else {
+        $in->exit(0);
     }
 }
 
