@@ -143,11 +143,9 @@ sub connected_bg {
     local $| = 1;
     my ($ref) = @_;
     if (defined $kid_pipe) {
-	local *F;
-	*F = *$kid_pipe;
-	fcntl(F, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
+	fcntl($kid_pipe, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
 	my $a;
-  	if (defined($a = <F>)) {
+  	if (defined($a = <$kid_pipe>)) {
 	    close($kid_pipe) || warn "kid exited $?";
 	    undef $kid_pipe;
 	    $$ref = $a;
@@ -176,16 +174,14 @@ sub test_connected {
 
     if ($cmd == 0) {
         if (defined $kid_pipe_connect) {
-	        local *F;
-                *F = *$kid_pipe_connect;
-		fcntl(F, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
-                my $a;
-                if (defined($a = <F>)) {
-                    close($kid_pipe_connect) || warn "kid exited $?";
-                    undef $kid_pipe_connect;
-		    undef $kid_pid;
-		    $current_connection_status = $a;
-                }
+	    fcntl($kid_pipe_connect, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
+	    my $a;
+	    if (defined($a = <$kid_pipe_connect>)) {
+		close($kid_pipe_connect) || warn "kid exited $?";
+		undef $kid_pipe_connect;
+		undef $kid_pid;
+		$current_connection_status = $a;
+	    }
         }
 	return $current_connection_status;
     }
@@ -206,12 +202,11 @@ sub test_connected {
 }
 
 sub connected2 {
-    local *KID_TO_READ;
-    my $pid = open(KID_TO_READ, "-|");
-    if ($pid) {   # parent
-	$kid_pid = $pid;
-	return *KID_TO_READ;
-    } else {      # child
+    if ($kid_pid = open(my $kid_to_read, "-|")) {
+	#- parent
+	$kid_to_read;
+    } else {      
+	#- child
 	my $a = gethostbyname("mandrakesoft.com") ? 1 : 0;
 	print $a;
 	c::_exit(0);
