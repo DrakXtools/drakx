@@ -848,8 +848,10 @@ sub installTransactionClosure {
 	unless ($_->{selected}) {
 	    #- this medium is not selected, but we have to make sure no package are left
 	    #- in $id2pkg.
-	    foreach ($_->{start} .. $_->{end}) {
-		delete $id2pkg->{$_};
+	    if (defined $_->{start} && defined $_->{end}) {
+		foreach ($_->{start} .. $_->{end}) {
+		    delete $id2pkg->{$_};
+		}
 	    }
 	    #- anyway, examine the next one.
 	    next;
