@@ -878,36 +878,6 @@ sub set {
     my $lang = $locale->{lang};
     exists $langs{$lang} or log::l("lang::set: trying to set to $lang but I don't know it!"), return;
 
-    my $dir = "$ENV{SHARE_PATH}/locale";
-    if (!-e "$dir/$lang" && common::usingRamdisk()) {
-	@ENV{qw(LANG LC_ALL LANGUAGE LINGUAS)} = ();
-
-	my @LCs = qw(LC_ADDRESS LC_CTYPE LC_IDENTIFICATION LC_MEASUREMENT LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE LC_TIME);
-	
-	#- model locale, everything is taken from it
-	my $model_locale = 'en_US.UTF-8';
-	
-	#- removing everything
-	#- except in model locale: only removing LC_COLLATE if it is there
-	#eval { rm_rf($_ eq $model_locale ? "$dir/$_/LC_COLLATE" : "$dir/$_") } foreach all($dir);
-	eval { $_ ne $model_locale and rm_rf("$dir/$_") } foreach all($dir);
-	
-	if (!-e "$dir/$model_locale") {
-	    #- getting the model locale
-	    mkdir "$dir/$model_locale";
-	    mkdir "$dir/$model_locale/LC_MESSAGES";
-	    install_any::getAndSaveFile("$dir/$model_locale/$_") foreach @LCs, 'LC_MESSAGES/SYS_LC_MESSAGES';
-	}
-	mkdir "$dir/$lang";
-	
-	#- linking to the main charset
-	symlink "../$model_locale/$_", "$dir/$lang/$_" foreach @LCs, 'LC_MESSAGES';	    
-	
-	#- getting LC_COLLATE (putting it directly in $lang)
-	#install_any::getAndSaveFile("install/stage2/live$dir/$lang/LC_COLLATE", "$dir/$lang/LC_COLLATE");
-	symlink "../$model_locale/LC_COLLATE", "$dir/$lang/LC_COLLATE";
-    }
-    
     #- set all LC_* variables to a unique locale ("C"), and only redefine
     #- LC_COLLATE (for sorting) and LANGUAGE (for the po files)
     $ENV{$_} = 'C' foreach qw(LC_NUMERIC LC_TIME LC_MONETARY LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT LC_IDENTIFICATION);

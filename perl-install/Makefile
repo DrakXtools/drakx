@@ -79,8 +79,6 @@ install_pms: $(DIRS)
 mo_files : $(MOFILES)
 
 get_needed_files: $(DIRS) mo_files
-	$(MAKE) -C share
-
 	eval `perl -V:version`; \
 	cat share/list `../tools/specific_arch share/list` | \
 	perl -pe "s/ARCH/$(ARCH)/g ; s/PERL_VERSION/$$version/g ; s|/LIB/|/$(LIB)/|g " | \
@@ -109,7 +107,7 @@ get_needed_files: $(DIRS) mo_files
 	install -d $(DEST)/usr/share/langs
 	install -d $(DEST)/usr/share/gtk
 	install -d $(DEST)/usr/share/xmodmap
-	install -d $(DEST)/usr/X11R6/lib/X11
+	install -d $(DEST)/usr/X11R6/lib/X11/locale
 	install -d $(MEDIA_INFO_DEST)
 	install -s $(LOCALFILES) $(DEST)/usr/bin
 #	cp -f $(LOCALFILES2) $(DEST)/usr/bin
@@ -120,6 +118,8 @@ ifeq (sparc,$(ARCH))
 	ln -s /tmp $(DEST)/usr/X11R6/lib/X11/xkb/compiled
 	ln -s /usr/X11R6/lib/X11/xkb/xkbcomp $(DEST)/usr/bin/xkbcomp
 endif
+	cp -a /usr/X11R6/lib/X11/locale/{C,en_US.UTF-8,iso8859-1} $(DEST)/usr/X11R6/lib/X11/locale
+
 ifeq (i386,$(ARCH))
 	install -s /sbin/cardmgr $(DEST)/usr/bin
 endif
@@ -163,7 +163,7 @@ else
 	ln -sf ash $(DEST)/usr/bin/sh
 endif
 
-	for i in fonts keyboards locales keymaps; do tar xfj `../tools/specific_arch share/$$i.tar.bz2` -C $(DEST); done
+	for i in fonts keyboards locales-skeleton keymaps; do tar xfj `../tools/specific_arch share/$$i.tar.bz2` -C $(DEST); done
 
 	grep ChangeLog CVS/Entries > $(DEST)/usr/share/VERSION
 
@@ -174,6 +174,8 @@ endif
 	-cd pixmaps ; cp -af *.png *.xpm $(DEST)/usr/share ; rm -f $(DEST)/usr/share/wiz_*
 	cp `perl -I. -Mlang -e 'lang::png_lang_files()'` $(DEST)/usr/share/langs
 	cd share ; cp compssUsers.pl* rpmsrate $(MEDIA_INFO_DEST)
+
+	perl -I. -Mlang -e 'symlink "UTF-8", "$(DEST)/usr/share/locale/$$_" foreach lang::list_langs()'
 
 	clean-rpmsrate $(MEDIA_INFO_DEST)/rpmsrate $(MAIN_RPMS_DIR)
 
