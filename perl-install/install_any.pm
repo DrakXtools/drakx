@@ -41,7 +41,8 @@ my $cdrom = undef;
 sub useMedium($) {
     #- before ejecting the first CD, there are some files to copy!
     #- does nothing if the function has already been called.
-    $_[0] > 1 and $::o->{method} eq 'cdrom' and setup_postinstall_rpms($::o->{prefix}, $::o->{packages});
+    #$_[0] > 1 and $::o->{method} eq 'cdrom' and setup_postinstall_rpms($::o->{prefix}, $::o->{packages});
+    $_[0] > 1 and setup_postinstall_rpms($::o->{prefix}, $::o->{packages});
 
     $asked_medium eq $_[0] or log::l("selecting new medium '$_[0]'");
     $asked_medium = $_[0];
@@ -366,15 +367,13 @@ sub setDefaultPackages {
     $o->{compssUsersChoice}{SMP} = 1 if detect_devices::hasSMP();
     $o->{compssUsersChoice}{'3D'} = 1 if 
       detect_devices::matching_desc('Matrox.* G[245][05]0') ||
-      detect_devices::matching_desc('Riva.*128') ||
       detect_devices::matching_desc('Rage X[CL]') ||
-      detect_devices::matching_desc('Rage Mobility [PL]') ||
       detect_devices::matching_desc('3D Rage (?:LT|Pro)') ||
       detect_devices::matching_desc('Voodoo [35]') ||
       detect_devices::matching_desc('Voodoo Banshee') ||
       detect_devices::matching_desc('8281[05].* CGC') ||
       detect_devices::matching_desc('Rage 128') ||
-      detect_devices::matching_desc('Radeon ') ||
+      detect_devices::matching_desc('Radeon ') && !detect_devices::matching_desc('Radeon 8500') ||
       detect_devices::matching_desc('[nN]Vidia.*T[nN]T2') || #- TNT2 cards
       detect_devices::matching_desc('[nN]Vidia.*NV[56]') ||
       detect_devices::matching_desc('[nN]Vidia.*Vanta') ||
