@@ -12,6 +12,7 @@ if ($::isInstall) {
     log::l('backtrace: ' . backtrace());
 }
 $::isStandalone = 1;
+$::noBorder = 1;
 
 $ENV{SHARE_PATH} ||= "/usr/share";
 
