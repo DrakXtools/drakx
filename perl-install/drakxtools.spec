@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 10mdk
+Release: 11mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -368,6 +368,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Mar 22 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-11mdk
+- drakconnect: do not list wifi* interfaces (blino, #14523)
+- harddrake2: install packages needed for hw support
+- keyboarddrake: run dmidecode only once we acquired root capabilities
+  (pixel, #13619)
+
 * Mon Mar 21 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-10mdk
 - drakboot: enhance yaboot macos entry handling (cjw, #14642)
 - drakconnect: disable network hotplug for the via-velocity driver
