@@ -73,7 +73,7 @@ sub get_subwizard {
 }
 
 # configuring all network devices
-  sub main {
+sub real_main {
       my ($_prefix, $netcnx, $in, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;
       my $netc  = $o_netc  ||= {};
       my $mouse = $o_mouse ||= {};
@@ -1242,6 +1242,18 @@ fi
     if ($::isInstall && $::o->{security} >= 3) {
 	require network::drakfirewall;
 	network::drakfirewall::main($in, $::o->{security} <= 3);
+    }
+}
+
+sub main {
+    my ($_prefix, $netcnx, $in, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;
+    eval { real_main('', , $netcnx, $in, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) };
+    my $err = $@;
+    if ($err) { # && $in->isa('interactive::gtk')
+        local $::isEmbedded = 0; # to prevent sub window embedding
+        local $::isWizard = 0 if !$::isInstall; # to prevent sub window embedding
+        #err_dialog(N("Error"), N("An unexpected error has happened:\n%s", $err));
+        $in->ask_warn(N("Error"), N("An unexpected error has happened:\n%s", $err));
     }
 }
 
