@@ -158,8 +158,6 @@ sub resetinfo($) {
     # -check which printing system was used previously and load the information
     # -about its queues
     read_configured_queues($printer);
-    #my $entry = $printer->{configured}{$printer->{QUEUE}} || (values %{$printer->{configured}})[0];
-    #print "##### $entry->{make} $entry->{model} $entry->{queuedata}{queue}\n";
 }
 
 sub read_configured_queues($) {
