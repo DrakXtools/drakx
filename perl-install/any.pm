@@ -101,15 +101,32 @@ sub setupBootloader {
 	local $::Wizard_finished = 1 if $::isStandalone;
 	setupBootloader__entries($in, $b, $all_hds, $fstab) or goto general;
     }
+}
 
-    #- somewhere should bootloader really installed ?
-    $::isStandalone and my $_w = $in->wait_message(N("Please wait"), N("Bootloader installation in progress"));
+sub installBootloader {
+    my ($in, $b, $all_hds) = @_;
+
+    install_acpi_pkgs($in, $b);
+
+    my $_w = $in->wait_message(N("Please wait"), N("Bootloader installation in progress"));
 
     eval { run_program::rooted($::prefix, 'lilo', '-u') } if $::isInstall && !$::o->{isUpgrade} && -e "$::prefix/etc/lilo.conf" && glob("$::prefix/boot/boot.*");
 
-    install_acpi_pkgs($in->do_pkgs, $b);
+    eval { bootloader::install($b, $all_hds) };
 
-    bootloader::install($b, $all_hds);
+    if (my $err = $@) {
+	$err =~ /wizcancel/ and return;
+	$err =~ s/^\w+ failed// or die;
+	$err = formatError($err);
+	while ($err =~ s/^Warning:.*//m) {}
+	$o->ask_warn('', [ N("Installation of bootloader failed. The following error occured:"), $err ]);
+	return;
+    } elsif (arch() =~ /ppc/) {
+	my $of_boot = cat_("$o->{prefix}/tmp/of_boot_dev") || die "Can't open $o->{prefix}/tmp/of_boot_dev";
+	chop($of_boot);
+	$o->ask_warn('', N("You may need to change your Open Firmware boot-device to\n enable the bootloader.  If you don't see the bootloader prompt at\n reboot, hold down Command-Option-O-F at reboot and enter:\n setenv boot-device %s,\\\\:tbxi\n Then type: shut-down\nAt your next boot you should see the bootloader prompt.", $of_boot));
+    }
+    1;
 }
 
 

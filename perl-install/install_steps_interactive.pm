@@ -1080,7 +1080,10 @@ sub summary {
 	    #-PO: example: lilo-graphic on /dev/hda1
 	    N("%s on %s", $o->{bootloader}{method}, $o->{bootloader}{boot})
 	},
-	clicked => sub { any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) },
+	clicked => sub { 
+	    any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security});
+	    any::installBootloader($o, $o->{bootloader}, $o->{all_hds});
+	},
     };
 
     push @l, {
@@ -1234,22 +1237,7 @@ try to force installation even if that destroys the first partition?"));
 	} else {
 	    any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) or return;
 	}
-
-	{
-	    my $_w = $o->wait_message('', N("Installing bootloader"));
-	    eval { $o->SUPER::setupBootloader };
-	}
-	if (my $err = $@) {
-	    $err =~ s/^\w+ failed// or die;
-            $err = formatError($err);
-            while ($err =~ s/^Warning:.*//m) {}
-	    $o->ask_warn('', [ N("Installation of bootloader failed. The following error occured:"), $err ]);
-	    die "already displayed";
-	} elsif (arch() =~ /ppc/) {
-	    my $of_boot = cat_("$o->{prefix}/tmp/of_boot_dev") || die "Can't open $o->{prefix}/tmp/of_boot_dev";
-	    chop($of_boot);
-	    $o->ask_warn('', N("You may need to change your Open Firmware boot-device to\n enable the bootloader.  If you don't see the bootloader prompt at\n reboot, hold down Command-Option-O-F at reboot and enter:\n setenv boot-device %s,\\\\:tbxi\n Then type: shut-down\nAt your next boot you should see the bootloader prompt.", $of_boot));
-	}
+	any::installBootloader($o, $o->{bootloader}, $o->{all_hds}) or die "already displayed";
     }
 }
 
