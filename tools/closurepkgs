@@ -27,29 +27,66 @@ sub read_depslist {
     $depslist;
 }
 
-sub main {
+sub read_compsslist {
     my ($file) = @_;
-    my $depslist = read_depslist($file);
+    my %compsslist;
+
+    local *F;
+    open F, $file or die "closurepkgs: unable to open compsslist file $file\n";
+    foreach (<F>) {
+	my ($name, $level) = /^\s*(\S+)\s+(\d+)/;
+	$compsslist{$name} = $level;
+    }
+    close F;
+
+    \%compsslist;
+}
+
+sub main {
+    my ($depslist_file, $compsslist_file) = @_;
+    my $depslist = read_depslist($depslist_file);
+    my $compsslist = read_compsslist($compsslist_file);
 
     my @pkgs = qw(XFree86 XFree86-server XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa dhcpcd pump dhcpxd dhcp-client isdn4net isdn4k-utils dev pptp-adsl-fr rp-pppoe ppp ypbind rhs-printfilters lpr cups cups-drivers samba ncpfs);
     push @pkgs, "XFree86-$_" foreach qw(3DLabs 3dfx 8514 AGX FBDev I128 Mach8 Mach32 Mach64 Mono P9000 Rage128 S3 S3V SVGA VGA16 W32);
 
+    #- closure the list of package to be kept for oem.
     my %closure;
     foreach (@pkgs) {
 	$closure{$_} = 1;
-	map { $closure{chop_version($_->{name})} = 1 } map { ($depslist->{ordered}[$_]) } @{$depslist->{packages}{$_}{deps}};
+	map { $closure{chop_version($_->{name})} = 1 } map { $depslist->{ordered}[$_] } map { split /\|/ } @{$depslist->{packages}{$_}{deps}};
     }
 
-    #- remove base package, which are already installed.
-    foreach (qw(basesystem sed initscripts console-tools utempter ldconfig chkconfig ntsysv setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep gzip hdparm info kernel less ldconfig logrotate losetup man mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash ash setserial shadow-utils sh-utils stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which perl-base msec)) {
-	delete $closure{$_};
-	map { delete $closure{chop_version($_->{name})} } map { ($depslist->{ordered}[$_]) } @{$depslist->{packages}{$_}{deps}};
+    #- closure the list of package to always install for oem. (level >= 50)...
+    my %install;
+    foreach (grep { $compsslist->{$_} >= 70 } keys %{$depslist->{packages}}) {
+	$install{$_} = 1;
+	map { $install{chop_version($_->{name})} = 1 } map { $depslist->{ordered}[$_] } map { split /\|/ } @{$depslist->{packages}{$_}{deps}};
     }
 
-    my $total = 0;
-    map { $total += $depslist->{packages}{$_}{size};
-	  print $depslist->{packages}{$_}{name}, "\n" } grep { $closure{$_} } keys %closure;
-    print "\n\ntotal=$total\n";
+    #- remove base packages, which have to be installed, according to basesystem.
+    delete $closure{'basesystem'};
+    $install{'basesystem'} = 1;
+    map { delete $closure{chop_version($_->{name})};
+	  $install{chop_version($_->{name})} = 1 } map { $depslist->{ordered}[$_] } map { split /\|/ } @{$depslist->{packages}{'basesystem'}{deps}};
+
+    #- special packages that are to be move to closure always ...
+    foreach (qw(kernel-smp kernel-linus kernel-secure hackkernel-smp hackkernel-linus hackkernel-secure)) {
+	$depslist->{packages}{$_} or next;
+	$closure{$_} = 1;
+	delete $install{$_};
+    }
+
+    #- dump out the list of package according to the 2 lists defined above.
+    my $total_install = 0;
+    map { $total_install += $depslist->{packages}{$_}{size};
+	  delete $closure{$_};
+	  print "I:", $depslist->{packages}{$_}{name}, "\n" } grep { $depslist->{packages}{$_} } keys %install;
+    my $total_closure = 0;
+    map { $total_closure += $depslist->{packages}{$_}{size};
+	  print "C:", $depslist->{packages}{$_}{name}, "\n" } grep { $depslist->{packages}{$_} } keys %closure;
+    print "\n\ntotal_install=$total_install\n";
+    print "total_closure=$total_closure\n";
 }
 
 main(@ARGV);
