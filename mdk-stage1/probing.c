@@ -163,8 +163,18 @@ static void probe_that_type(enum driver_type type)
 					log_message("PCI: device %04x %04x is \"%s\" (%s)", vendor, device, pcidb[i].name, pcidb[i].module);
 #ifndef DISABLE_MEDIAS
 					if (type == SCSI_ADAPTERS) {
-						stg1_info_message("About to load driver for SCSI adapter:\n \n%s", pcidb[i].name);
-						warning_insmod_failed(my_insmod(pcidb[i].module, SCSI_ADAPTERS, NULL));
+						int wait_msg = 0;
+						enum insmod_return failed;
+						if (IS_AUTOMATIC) {
+							wait_message("Loading driver for SCSI adapter:\n \n%s", pcidb[i].name);
+							wait_msg = 1;
+						} else
+							stg1_info_message("About to load driver for SCSI adapter:\n \n%s", pcidb[i].name);
+						failed = my_insmod(pcidb[i].module, SCSI_ADAPTERS, NULL);
+						if (wait_msg)
+							remove_wait_message();
+						warning_insmod_failed(failed);
+
 					}
 #endif
 #ifndef DISABLE_NETWORK
