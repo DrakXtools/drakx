@@ -545,7 +545,7 @@ sub chooseGroups {
 	$size_text = _("Selected size %d%s", pkgs::correctSize($size / sqr(1024)), _("MB"));
     }; &$update_size;
     $o->ask_from_entries_refH('', _("Package Group Selection"), [
-                           { val => \$size_text, type => 'label' }, {},
+#                           { val => \$size_text, type => 'label' }, {},
 			   (map {; 
 				 my $old = $path;
 				 $path = $o->{compssUsers}{$_}{path};
@@ -561,7 +561,7 @@ sub chooseGroups {
 				 "$f.png";
 			     },
 			     disabled => sub { $all },
-			     text => translate($o->{compssUsers}{$_}{label}) . sprintf(" (%d%s)", $compute_size->(@{$compssUsers->{$_}{flags}}) / sqr(1024), _("MB")),
+			     text => translate($o->{compssUsers}{$_}{label}),# . sprintf(" (%d%s)", $compute_size->(@{$compssUsers->{$_}{flags}}) / sqr(1024), _("MB")),
 			   } } @groups),
 			   if_($o->{meta_class} eq 'desktop', { text => _("All"), val => \$all, type => 'bool' }),
 			   if_($individual, { text => _("Individual package selection"), val => $individual, advanced => 1, type => 'bool' }),
