@@ -25,8 +25,8 @@ sub choose_printer_type {
 			    ($printer->{SPOOLER} eq "cups" ?
 			     _("
 Printers on remote CUPS servers you do not have to configure
-here; these printers will be automatically detected. In case
-of doubt, select \"Printer on remote CUPS server\".") : ()),
+here; these printers will be automatically detected. Please
+select \"Printer on remote CUPS server\" in this case.") : ()),
 			    [ printer::printer_type($printer) ],
 			    $printer->{str_type},
 			    ) or return 0;
@@ -40,87 +40,112 @@ sub setup_remote_cups_server {
     my $queue = $printer->{OLD_QUEUE};
     #- hack to handle cups remote server printing,
     #- first read /etc/cups/cupsd.conf for variable BrowsePoll address:port
-    my @cupsd_conf = printer::read_cupsd_conf();
-    my ($server, $port);
-    
-    foreach (@cupsd_conf) {
-	/^\s*BrowsePoll\s+(\S+)/ and $server = $1, last;
-    }
-    $server =~ /([^:]*):(.*)/ and ($server, $port) = ($1, $2);
-    
-    #- then ask user for this combination
-    #- and rewrite /etc/cups/cupsd.conf according to new settings.
-    #- there are no other point where such information is written in this file.
-    if ($in->ask_from_entries_refH
-	(_("Remote CUPS server"),
-_("With a remote CUPS server, you do not have to configure
-any printer here; printers will be automatically detected
-unless you have a server on a different network; in the
-latter case, you have to give the CUPS server IP address
-and optionally the port number."),
-	 [
-	  { label => _("CUPS server IP"), val => \$server },
-	  { label => _("Port"), val => \$port } ],
-	 complete => sub {
-	     unless (!$server || network::is_ip($server)) {
-		 $in->ask_warn('', _("IP address should be in format 1.2.3.4"));
-		 return (1,0);
-	     }
-	     if ($port !~ /^\d*$/) {
-		 $in->ask_warn('', _("Port number should be numeric"));
-		 return (1,1);
-	     }
-	     return 0;
-	 },
-	 )) {
-	$server && $port and $server = "$server:$port";
-	if ($server) {
-	    @cupsd_conf = map { $server and s/^\s*BrowsePoll\s+(\S+)/BrowsePoll $server/ and $server = '';
-				$_ } @cupsd_conf;
-	    $server and push @cupsd_conf, "\nBrowsePoll $server\n";
-	} else {
-	    @cupsd_conf = map { s/^\s*BrowsePoll\s+(\S+)/\#BrowsePoll $1/;
-				$_ } @cupsd_conf;
+    my ($server, $port, $default);
+    # Return value: 0 when nothing was changed ("Apply" never pressed), 1
+    # when "Apply" was at least pressed once.
+    my $retvalue = 0;
+    while (1) {
+	# Read CUPS config file
+	my @cupsd_conf = printer::read_cupsd_conf();
+	foreach (@cupsd_conf) {
+	    /^\s*BrowsePoll\s+(\S+)/ and $server = $1, last;
 	}
-        printer::write_cupsd_conf(@cupsd_conf);
-    } else {
-	return 0;
-    }
-    1;
-}
+	$server =~ /([^:]*):(.*)/ and ($server, $port) = ($1, $2);
+	# Read printer list
+	my @queuelist = printer::read_cups_printer_list();
+	if ($#queuelist >=0) {
+	    $default = printer::get_cups_default_printer();
+	    my $queue;
+	    for $queue (@queuelist) {
+		if ($queue =~ /^\s*$default/) {
+		    $default = $queue;
+		}
+	    }
+	} else {
+	    push(@queuelist, "None");
+	    $default = "None";
+	}
+	#- Remember the server/port settings to check whether the user changed
+	#- them.
+	my $oldserver = $server;
+	my $oldport = $port;
 
-sub choose_printer_name {
-    my ($printer, $in) = @_;
-    # Name, description, location
-    my $queue = $printer->{OLD_QUEUE};
-    $in->set_help('configurePrinterLocal') if $::isInstall;
-    $in->ask_from_entries_refH_powered
-	(
-	 { title => _("Enter Printer Name and Comments"),
-	   #cancel => !$printer->{configured}{$queue} ? '' : _("Remove queue"),
-	   callbacks => { complete => sub {
-	       unless ($printer->{currentqueue}{'queue'} =~ /^\w+$/) {
-		   $in->ask_warn('', _("Name of printer should contain only letters, numbers and the underscore"));
-		   return (1,0);
-	       }
-	       return 0;
+        #- then ask user for this combination and rewrite /etc/cups/cupsd.conf
+	#- according to new settings. There are no other point where such
+	#- information is written in this file.
+
+	print "##### @queuelist $default\n";
+	if ($in->ask_from_entries_refH_powered
+	    ({ title => _("Remote CUPS server"),
+	       messages => _("With a remote CUPS server, you do not have to configure any 
+printer here; CUPS servers inform your machine automatically
+about their printers. All printers known to your machine
+currently are listed in the \"Default printer\" field. Choose
+the default printer for your machine there and click the
+\"Apply/Re-read printers\" button. Click the same button to
+refresh the list (it can take up to 30 seconds after the start
+of CUPS until all remote printers are visible).
+When your CUPS server is in a different network, you have to 
+give the CUPS server IP address and optionally the port number
+to get the printer information from the server, otherwise leave
+these fields blank."),
+              cancel => _("Close"),
+              ok => _("Apply/Re-read printers"),
+	      callbacks => { complete => sub {
+		 unless (!$server || network::is_ip($server)) {
+		     $in->ask_warn('', _("IP address should be in format 1.2.3.4"));
+		     return (1,0);
+		 }
+		 if ($port !~ /^\d*$/) {
+		     $in->ask_warn('',
+			 _("Port number should be an integer number"));
+		     return (1,1);
+		 }
+		 return 0;
+	     } }
 	   },
-		      },
-	   messages =>
-_("Every printer needs a name (for example lp).
-The Description and Location fields do not need 
-to be filled in. They are comments for the users.") }, 
-	 [
-	  { label => _("Name of printer"),
-	    val => \$printer->{currentqueue}{'queue'} },
-	  { label => _("Description"),
-	    val => \$printer->{currentqueue}{'desc'} },
-	  { label => _("Location"),
-	    val => \$printer->{currentqueue}{'loc'} },
-	  ]) or return 0;
-
-    $printer->{QUEUE} = $printer->{currentqueue}{'queue'};
-    1;
+	     [	
+		{ label => _("Default printer"), val => \$default,
+		  not_edit => 0, list => \@queuelist},
+		#{ label => _("Default printer") },
+		#{ val => \$default,
+		#  format => \&translate, not_edit => 0, list => \@queuelist},
+		{ label => _("CUPS server IP"), val => \$server },
+		{ label => _("Port"), val => \$port }
+		]
+	     )) {
+	    # We have clicked "Apply/Re-read"
+	    $retvalue = 1;
+	    # Set default printer
+	    if ($default =~ /^\s*([^\s\(\)]+)\s*\(/) {
+		$default = $1;
+	    }
+	    if ($default ne "None") {
+	        printer::set_cups_default_printer($default);
+	    }
+	    # Set BrowsePoll line
+	    if (($server ne $oldserver) || ($port ne $oldport)) {
+		$server && $port and $server = "$server:$port";
+		if ($server) {
+		    @cupsd_conf = 
+			map { $server and 
+			      s/^\s*BrowsePoll\s+(\S+)/BrowsePoll $server/ and
+				  $server = '';
+			      $_ } @cupsd_conf;
+		    $server and push @cupsd_conf, "\nBrowsePoll $server\n";
+		} else {
+		    @cupsd_conf = 
+			map { s/^\s*BrowsePoll\s+(\S+)/\#BrowsePoll $1/;
+			      $_ } @cupsd_conf;
+		}
+	        printer::write_cupsd_conf(@cupsd_conf);
+		sleep 3;
+	    }
+	} else {
+	    last;
+	}
+    }
+    return $retvalue;
 }
 
 sub setup_printer_connection {
@@ -234,7 +259,7 @@ sub setup_lpd {
     }
 
     return if !$in->ask_from_entries_refH(_("Remote lpd Printer Options"),
-_("To use a remote lpd print, you need to supply
+_("To use a remote lpd printer, you need to supply
 the hostname of the printer server and the printer name
 on that server."), [
 { label => _("Remote host name"), val => \$remotehost },
@@ -441,7 +466,10 @@ sub setup_socket {
 
     return if !$in->ask_from_entries_refH(_("Socket Printer Options"),
 _("To print to a socket printer, you need to provide the
-host name of the printer and optionally the port number."), [
+host name of the printer and optionally the port number.
+On HP JetDirect servers the port number is usually 9100,
+on other servers it can vary. See the manual of your
+hardware."), [
 { label => _("Printer host name"), val => \$remotehost },
 { label => _("Port"), val => \$remoteport } ],
 complete => sub {
@@ -534,6 +562,47 @@ complete => sub {
     #- make the Foomatic URI
     $printer->{currentqueue}{'connect'} = "postpipe:$commandline";
     
+    1;
+}
+
+sub choose_printer_name {
+    my ($printer, $in) = @_;
+    # Name, description, location
+    $in->set_help('configurePrinterLocal') if $::isInstall;
+    my $default = $printer->{currentqueue}{'queue'};
+    $in->ask_from_entries_refH_powered
+	(
+	 { title => _("Enter Printer Name and Comments"),
+	   #cancel => !$printer->{configured}{$queue} ? '' : _("Remove queue"),
+	   callbacks => { complete => sub {
+	       unless ($printer->{currentqueue}{'queue'} =~ /^\w+$/) {
+		   $in->ask_warn('', _("Name of printer should contain only letters, numbers and the underscore"));
+		   return (1,0);
+	       }
+	       if (($printer->{configured}{$printer->{currentqueue}{'queue'}})
+		   && ($printer->{currentqueue}{'queue'} ne $default) && 
+		   (!$in->ask_yesorno('', _("The printer \"%s\" already exists,\ndo you really want to overwrite its configuration?",
+					    $printer->{currentqueue}{'queue'}),
+				      0))) {
+		   return (1,0); # Let the user correct the name
+	       }
+	       return 0;
+	   },
+		      },
+	   messages =>
+_("Every printer needs a name (for example lp).
+The Description and Location fields do not need 
+to be filled in. They are comments for the users.") }, 
+	 [
+	  { label => _("Name of printer"),
+	    val => \$printer->{currentqueue}{'queue'} },
+	  { label => _("Description"),
+	    val => \$printer->{currentqueue}{'desc'} },
+	  { label => _("Location"),
+	    val => \$printer->{currentqueue}{'loc'} },
+	  ]) or return 0;
+
+    $printer->{QUEUE} = $printer->{currentqueue}{'queue'};
     1;
 }
 
@@ -781,7 +850,12 @@ sub setup_options {
 		}
 	return 0 if !$in->ask_from_entries_refH
 	    ($windowtitle,
-	     _("Printer options"), \@widgets,
+	     _("Printer default settings
+You should make sure that the page size and the
+ink type (if available) are set correctly. Note
+that with a very high printout quality printing
+can get substantially slower."),
+	     \@widgets,
 	     complete => sub {
 		 my $i;
 		 for ($i = 0; $i <= $#{$printer->{ARGS}}; $i++) {
@@ -920,22 +994,6 @@ It may take some time before the printer starts.\n");
     return 0;
 }
 
-sub setup_gsdriver {
-    my ($printer, $in, $upNetwork) = @_;
-    my $queue = $printer->{OLD_QUEUE};
-    while (1) {
-	get_db_entry($printer);
-	choose_model($printer, $in) || return;
-	get_printer_info($printer);
-	setup_options($printer, $in) || return;
-	$printer->{complete} = 1;
-	printer::configure_queue($printer);
-	$printer->{complete} = 0;
-	print_testpages($printer, $in, $upNetwork) && last;
-    }
-    $printer->{complete} = 1;
-}
-
 sub setup_default_spooler {
     my ($printer, $in) = @_;
     $printer->{SPOOLER} ||= 'cups';
@@ -962,7 +1020,8 @@ sub install_spooler {
     my ($printer, $in) = @_;
     if (!$::testing) {
 	if ($printer->{SPOOLER} eq "cups") {
-	    $in->do_pkgs->install(('cups', 'xpp', 'qtcups', 'kups',
+	    $in->do_pkgs->install(('cups', 'xpp', 'qtcups', 
+		       if_($in->do_pkgs->is_installed('kdebase'), 'kups'),
 		       ($::expert ? 'cups-drivers' : ())));
 	    # Start daemon
 	    printer::start_service("cups");
@@ -1008,7 +1067,8 @@ sub main {
     }
 
     # Control variables for the main loop
-    my ($queue, $continue, $newqueue, $editqueue) = ('', 1, 0, 0);
+    my ($queue, $continue, $newqueue, $editqueue, $expertswitch) = 
+	('', 1, 0, 0, 0);
     # Cursor position in queue modification window
     my $modify = _("Printer options");
     while ($continue) {
@@ -1050,10 +1110,14 @@ sub main {
 		    # Cancelling the printer type dialog should leed to this
 		    # dialog
 		    $continue = 1;
-		    $in->ask_from_entries_refH_powered(
+		    # $expertwitch gets one when the "Expert mode"/
+		    # "Standard mode" button is clicked.
+		    $expertswitch = !$in->ask_from_entries_refH_powered(
 			{messages =>
 			     _("The following printers are configured.\nYou can add some more or modify the existing ones."),
-			 cancel => '',
+			 cancel => ($::isInstall ? 
+				    ('') : ($::expert ? 
+					  'Normal Mode' : 'Expert Mode')),
 			},
 			# List the queues
 			[ { val => \$queue, format => \&translate,
@@ -1087,12 +1151,20 @@ sub main {
 		    next;
 		}
 	    }
+	    # Toggle expert mode and standard mode
+	    if ($expertswitch) {
+		$expertswitch = 0;
+		$::expert = !$::expert;
+		# Read printer database for the new user mode
+		%printer::thedb = ();
+	        printer::read_printer_db($printer->{SPOOLER});
+		next;
+	    }
 	    # Save the default spooler
 	    printer::set_default_spooler($printer);
 	    #- Close printerdrake
 	    $queue eq _("Done") and last;
 	}
-
 	if ($newqueue) {
 	    #- Set default values for a new queue
 	    $printer::printer_type_inv{$printer->{TYPE}} or 
@@ -1111,23 +1183,19 @@ sub main {
 	    $printer->{OLD_QUEUE} = $printer->{QUEUE} = $queue;
 	    #- Do all the configuration steps for a new queue
 	    choose_printer_type($printer, $in) or next;
+	    if ($printer->{TYPE} eq 'CUPS') {
+		setup_remote_cups_server($printer, $in);
+		next;
+	    }
 	    #- Cancelling one of the following dialogs should restart 
 	    #- printerdrake
 	    $continue = 1;
-	    if ($printer->{TYPE} eq 'CUPS') {
-		if (setup_remote_cups_server($printer, $in)) {
-		    $continue = $::expert || !$::isInstall;
-		} else {
-		    $continue = 1;
-		}
-		next;
-	    }
 	    setup_printer_connection($printer, $in) or next;
 	    choose_printer_name($printer, $in) or next;
 	    get_db_entry($printer);
-	    choose_model($printer, $in) || return;
+	    choose_model($printer, $in) or next;
 	    get_printer_info($printer);
-	    setup_options($printer, $in) || return;
+	    setup_options($printer, $in) or next;
 	    $printer->{complete} = 1;
 	    printer::configure_queue($printer);
 	    $printer->{complete} = 0;
@@ -1140,7 +1208,7 @@ sub main {
 	} else {
 	    # Modify a queue, ask which part should be modified
 	    if ($in->ask_from_entries_refH_powered
-		   ({ title => _("Modify printer"),
+		   ({ title => _("Modify printer configuration"),
 		      messages => _("Printer %s: %s %s
 What do you want to modify on this printer?",
 				    $queue,

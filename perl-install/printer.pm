@@ -430,6 +430,50 @@ sub read_cups_options ($) {
 }
 
 #------------------------------------------------------------------------------
+
+sub read_cups_printer_list {
+    # This function reads in a list of all printers which the local CUPS
+    # daemon currently knows, including remote ones.
+    local *F;
+    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+	"lpstat -v |" || return ();
+    my @printerlist = ();
+    my $line;
+    while ($line = <F>) {
+	if ($line =~ m/^\s*device\s+for\s+([^:\s]+):\s*(\S+)\s*$/) {
+	    my $queuename = $1;
+	    my $comment = "";
+	    if ($2 =~ m!^ipp://([^/:]+)[:/]!) {
+		$comment = _("(on %s)", $1);
+	    } else {
+		$comment = _("(on this machine)");
+	    }
+	    push (@printerlist, "$queuename $comment");
+	}
+    }
+    close F;
+    return @printerlist;
+}
+
+sub get_cups_default_printer {
+    local *F;
+    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+	"lpstat -d |" || return undef;
+    my $line;
+    while ($line = <F>) {
+	if ($line =~ /^\s*system\s*default\s*destination:\s*(\S*)$/) {
+	    return $1;
+	}
+    }
+    return undef;
+}
+
+sub set_cups_default_printer {
+    my $default = $_[0];
+    run_program::rooted($prefix, "lpoptions",
+			"-d", $default) || return;
+}
+
 sub read_cupsd_conf {
     my @cupsd_conf;
     local *F;
