@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 7mdk
+Release: 8mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -368,6 +368,22 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Mar 18 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-8mdk
+- diskdrake (pixel):
+  o fix remove on LVM in newt interface (#14254)
+  o remove the lvm if destroying it succeeds (#14249)
+- drakboot: handle grub file names that do not correspond to a mounted
+  filesystem (pixel, #14410)
+- drakconnect: remove other mac address occurrences in iftab (blino)
+- drakTermServ (stew):
+  o lose the "system" calls
+  o use pxe.include now
+- drakperm:
+  o do not ignore groups with empty password field (#14777)
+  o better looking GUI: span groups & users on several columns (up to 3)
+- localedrake: always warn the user to logout, even if we can't help
+  (pixel, #14403)
+
 * Thu Mar 17 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-7mdk
 - drakconnect:
   o fix localized sorting (#14634)
