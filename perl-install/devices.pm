@@ -182,4 +182,39 @@ sub make($) {
     $file;
 }
 
+
+#- only isomorphic entries are allowed, 
+#- i.e. entries which can go devfs -> normal and normal -> devfs
+my %to_devfs = (
+    psaux => 'misc/psaux',
+    usbmouse => 'input/mouse0',
+);
+my %to_devfs_prefix = (
+    ttyS => 'tts/',
+);
+
+sub to_devfs {
+    my ($dev) = @_;
+    if (my $r = $to_devfs{$dev}) { 
+	return $r;
+    } elsif ($dev =~ /(.*?)(\d+)$/) {
+	my $r = $to_devfs_prefix{$1};
+	return "$r$2" if $r;
+    }
+    undef;
+}
+
+sub from_devfs {
+    my ($dev) = @_;
+    my %from_devfs = reverse %to_devfs;
+    if (my $r = $from_devfs{$dev}) { 
+	return $r;
+    } elsif ($dev =~ /(.*?)(\d+)$/) {
+	my %from_devfs_prefix = reverse %to_devfs_prefix;
+	my $r = $from_devfs_prefix{$1};
+	return "$r$2" if $r;
+    }
+    undef;
+}
+
 1;
