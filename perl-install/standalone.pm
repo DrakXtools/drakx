@@ -202,13 +202,13 @@ sub what_provides {
 
 sub is_installed {
     my ($_o, @l) = @_;
-    run_program::run('rpm', '>', '/dev/null', '-q', @l);
+    run_program::run('/bin/rpm', '>', '/dev/null', '-q', @l);
 }
 
 sub are_installed {
     my ($_o, @l) = @_;
     my @l2;
-    run_program::run('rpm', '>', \@l2, '-q', '--qf', "%{name}\n", @l);
+    run_program::run('/bin/rpm', '>', \@l2, '-q', '--qf', "%{name}\n", @l);
     intersection(\@l, [ map { chomp_($_) } @l2 ]);
 }
 
