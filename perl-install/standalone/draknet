@@ -59,7 +59,7 @@ $::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 
 my $in = vnew interactive('su');
 
-$::isEmbedded or goto dd;
+#$::isEmbedded or goto dd;
 my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
 $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
 $window1->set_position(1);
@@ -71,10 +71,9 @@ my $hbox1 = new Gtk::HBox(0,0);
 $vbox1->pack_start($hbox1,1,1,0);
 $hbox1->pack_start(new Gtk::Label(_("Profile: ")),0,0,0);
 my $combo1 = new Gtk::Combo;
-$combo1->set_popdown_strings ("default", "maison", "travail" );
+$combo1->set_popdown_strings (get_profiles() );
 $combo1->entry->set_editable(0);
 $combo1->entry->set_text("default");
-$combo1->entry->signal_connect( 'changed', sub { print "CHANGED\n" });#\&configure_net );
 $hbox1->pack_start($combo1,0,0,0);
 my $hbox2 = new Gtk::HBox(0,0);
 $vbox1->pack_start($hbox2,1,1,0);
@@ -142,27 +141,54 @@ my $bbox1 = new Gtk::HButtonBox;
 $vbox1->pack_start($bbox1,0,0,0);
 $bbox1->set_layout(-end);
 my $button_ok = new Gtk::Button "OK";
-$button_ok->signal_connect ( clicked => sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0); });
+$button_ok->signal_connect ( clicked => sub { quit_global(); });
 $bbox1->add($button_ok);
 my $button_cancel = new Gtk::Button "Cancel";
 $button_cancel->signal_connect ( clicked => sub {
+				     netconnect::load_conf('', $netcnx, $netc, $intf);
 				     $combo1->entry->set_text("default");
-				     kill(USR1, $::CCPID);
 				     chop (my $h = `hostname`);
 				     $label_host->set ($h);
 				     $label4->set($netcnx->{type});
 				     $label6->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netc->{NET_INTERFACE});
-				     $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0);
+				     quit_global();
 				 });
 $bbox1->add($button_cancel);
+$combo1->entry->signal_connect( 'changed', sub {
+				    print "************ " . $combo1->entry->get_text() . " *********\n";
+				    netconnect::set_profile('', $combo1->entry->get_text());
+				    netconnect::load_conf('', $netcnx, $netc, $intf);
+				    chop (my $h = `hostname`);
+				    $label_host->set ($h);
+				    $label4->set($netcnx->{type});
+				    print "************ $netc->{GATEWAY} *********\n";
+				    $label6->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netc->{NET_INTERFACE});
+				});
 
 $window1->show_all();
 Gtk->main;
 
 dd:
-
-netconnect::intro('', $netcnx, $in, -e "/etc/pcmcia", \&standalone::pkgs_install);
+netconnect::intro('', $netcnx, $in, \&standalone::pkgs_install);
 $in->exit(0);
+
+sub get_profiles {
+    my @a;
+    my $i=0;
+    foreach (glob("/etc/sysconfig/network-scripts/draknet_conf.*")) {
+	print "[$_]\n";
+	s/.*\.//;
+	print "$_\n";
+	$a[$i] = $_;
+	$i++;
+    }
+    @a;
+    #grep { s/.*?_//;} 
+}
+
+sub quit_global {
+    $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0);
+}
 
 sub configure_net {
     my (undef, $prefix, $netcnx, $netc, $intf) = @_;
