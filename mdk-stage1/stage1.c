@@ -214,7 +214,7 @@ static void expert_third_party_modules(void)
 
 	strcat(final_name, choice);
 
-	results = ask_from_entries("Please enter the options:", questions, &answers, 24);
+	results = ask_from_entries("Please enter the options:", questions, &answers, 24, NULL);
 	if (results != RETURN_OK) {
 		umount(floppy_mount_location);
 		return expert_third_party_modules();
@@ -368,7 +368,7 @@ int main(int argc, char **argv, char **env)
 		write(fd, "0x103", sizeof("0x103")); /* ram3 */
 #endif
 		close(fd);
-		return 1;
+		return 66;
 	}
 
 	if (IS_TESTING)

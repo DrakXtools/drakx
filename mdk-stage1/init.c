@@ -309,6 +309,7 @@ void unmount_filesystems(void)
 	}
 }
 
+int exit_value_rescue = 66;
 
 int main(int argc, char **argv)
 {
@@ -402,18 +403,18 @@ int main(int argc, char **argv)
 			end_stage2 = 1;
 	}
 
-	if (!WIFEXITED(wait_status) || (WEXITSTATUS(wait_status) != 0 && WEXITSTATUS(wait_status) != 1)) {
+	if (!WIFEXITED(wait_status) || (WEXITSTATUS(wait_status) != 0 && WEXITSTATUS(wait_status) != exit_value_rescue)) {
 		printf("install exited abnormally :-( ");
 		if (WIFSIGNALED(wait_status))
 			printf("-- received signal %d", WTERMSIG(wait_status));
 		printf("\n");
 		abnormal_termination = 1;
-	} else if (WIFEXITED(wait_status) && WEXITSTATUS(wait_status) == 1) {
+	} else if (WIFEXITED(wait_status) && WEXITSTATUS(wait_status) == exit_value_rescue) {
 		kill(klog_pid, 9);
-		printf("exiting stage1-initializer -- giving hand to rescue\n");
+		printf("exiting init -- giving hand to rescue\n");
 		return 0;
         } else
-		printf("back to stage1-initializer control (install succeeded)\n");
+		printf("install succeeded\n");
 
 	if (testing)
 		return 0;
