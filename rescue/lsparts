@@ -109,12 +109,15 @@ P: foreach (@parts) {
 			  );
     $skip_conditions{$_} and ($verbose and print(STDERR $_, "\n")), next P foreach keys %skip_conditions;
     my $type = typeFromMagic("/dev/$dev");
-    $type and printf "$dev: %6s Mbytes, type <0x%x> (%s)\n", commify($blocks >> 10), $type, $type2name{$type};
+    $type and printf "$dev: %6s Mbytes, type <0x%0x> (%s)\n", commify($blocks >> 10), $type, $type2name{$type};
 }
 
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.2  2002/01/10 21:28:15  gc
+#- better looking output of type of partition (%x => %0x)
+#-
 #- Revision 1.1  2001/10/24 22:34:01  gc
 #- - add a GUI to the rescue
 #-   - provide guessmounts with better efficiency and output, go to console, and reboot
