@@ -263,6 +263,7 @@ done
 
 %changelog 
 * Thu Jul 25 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-11mdk
+- rebuild against new libldetect (fix (null) descriptions)
 - new XFdrake (pixel)
 - harddrake:
 	o devfs names
@@ -270,7 +271,8 @@ done
 		* don't account scanners as unknown devices
 		* split scannerdrake:val into vendor and description
 		* don't display bogus "val:%HASH"
-- updated translations
+- updated translations (fr, pl)
+- tools can be runned on console again
 
 * Tue Jul 23 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-10mdk
 - harddrake :
