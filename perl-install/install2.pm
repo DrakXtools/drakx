@@ -341,7 +341,7 @@ sub doInstallStep {
     $o->afterInstallPackages;
 }
 #------------------------------------------------------------------------------
-sub miscellaneous { 
+sub miscellaneous {
     $o->{miscellaneous}{memsize} ||= $1 if first(cat_("/proc/cmdline")) =~ /mem=(\S+)/;
     $o->miscellaneous($_[0]); 
     addToBeDone { 

@@ -386,18 +386,13 @@ sub autoDefaultResolution(;$$) {
 	$monitorSize2resolution[$#monitorSize2resolution]; #- no corresponding resolution for this size. It means a big monitor, take biggest we have
 }
 
-sub chooseResolutions($$;$) {
+sub chooseResolutionsGtk($$;$) {
     my ($card, $chosen_depth, $chosen_w) = @_;
     my $W = my_gtk->new(_("Resolution"));
     my %txt2depth = reverse %depths;
-    my ($r, $best_w, $depth_combo, %w2depth, %w2h, %w2widget);
+    my ($r, $depth_combo, %w2depth, %w2h, %w2widget);
 
-    my $set_depth = sub { $depth_combo->entry->set_text(translate($depths{$chosen_depth})) };
-
-    #- the set function is usefull to toggle the CheckButton with the callback being ignored
-    my $ignore;
-    my $set = sub { $ignore = 1; $_[0]->set_active(1); $ignore = 0; };
-
+    my $best_w;
     while (my ($depth, $res) = each %{$card->{depth}}) {
 	foreach (@$res) {
 	    $w2h{$_->[0]} = $_->[1];
@@ -407,6 +402,13 @@ sub chooseResolutions($$;$) {
 	}
     }
     $chosen_w = $best_w;
+
+    my $set_depth = sub { $depth_combo->entry->set_text(translate($depths{$chosen_depth})) };
+
+    #- the set function is usefull to toggle the CheckButton with the callback being ignored
+    my $ignore;
+    my $set = sub { $ignore = 1; $_[0]->set_active(1); $ignore = 0; };
+
     while (my ($w, $h) = each %w2h) {
 	my $V = $w . "x" . $h;
 	$w2widget{$w} = $r = new Gtk::RadioButton($r ? ($V, $r) : $V);
@@ -420,7 +422,6 @@ sub chooseResolutions($$;$) {
 			       }
 			   });
     }
-
     gtkadd($W->{window},
 	   gtkpack_($W->create_box_with_title(_("Choose resolution and color depth")),
 		    1, gtkpack(new Gtk::HBox(0,20),
@@ -446,6 +447,15 @@ sub chooseResolutions($$;$) {
 
     $W->main or return;
     ($chosen_depth, $chosen_w);
+}
+
+sub chooseResolutions($$;$) {
+    my ($card, $chosen_depth, $chosen_w) = @_;
+
+    my $best_w;
+    local $_ = $in->ask_from_list('', _(""), 
+				  [ map_each { map { "$_->[0]x$_->[1] ${main::a}bpp" } @$::b } %{$card->{depth}} ]) or return;
+    reverse /(\d+)x\S+ (\d+)/;
 }
 
 
