@@ -1049,7 +1049,7 @@ sub write_lilo {
 		
 	    if ($entry->{table}) {
 		#- hum, things like table=c: are needed for some os2 cases,
-		#- in that $hd below is undef
+		#- in that case $hd below is undef
 		my $hd = fs::get::device2part($entry->{table}, $all_hds->{hds});
 		if ($hd && $hd != $sorted_hds[0]) {		       
 		    #- boot off the nth drive, so reverse the BIOS maps
