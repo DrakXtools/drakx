@@ -419,6 +419,8 @@ int main(int argc, char **argv, char **env)
 		*argptr++ = "--pcmcia";
 		*argptr++ = pcmcia_adapter;
 	}
+	if (disable_modules)
+		*argptr++ = "--blank";
 	*argptr++ = NULL;
 
 	execve(stage2_args[0], stage2_args, grab_env());

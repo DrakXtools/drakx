@@ -30,6 +30,6 @@ struct module_deps_elem {
     char ** deps;
 };
 
-
+extern int disable_modules;
 
 #endif

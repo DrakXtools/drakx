@@ -39,7 +39,7 @@
 static struct module_deps_elem * modules_deps = NULL;
 
 static char * archive_name = "/modules/modules.mar";
-static int disable_modules = 0;
+int disable_modules = 0;
 
 
 /* unarchive and insmod given module
