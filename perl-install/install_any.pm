@@ -16,8 +16,8 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $boot_medium $current_medium $asked_med
 use MDK::Common::System;
 use common;
 use run_program;
-use partition_table qw(:types);
-use partition_table::raw;
+use fs::type;
+use partition_table;
 use devices;
 use fsedit;
 use modules;
@@ -801,7 +801,7 @@ sub g_auto_install {
     require pkgs;
     $o->{default_packages} = pkgs::selected_leaves($::o->{packages});
 
-    my @fields = qw(mntpoint pt_type size);
+    my @fields = qw(mntpoint fs_type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
     exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(locale authentication mouse netc timezone superuser intf keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security security_user libsafe netcnx useSupermount autoExitInstall X services); #- TODO modules bootloader 
@@ -988,7 +988,9 @@ sub loadO {
 
     #- handle backward compatibility for things that changed
     foreach (@{$o->{partitions} || []}, @{$o->{manualFstab} || []}) {
-	$_->{pt_type} ||= $_->{type};
+	if (my $pt_type = delete $_->{type}) {
+	    fs::type::set_pt_type($_, $pt_type);
+	}
     }
 
     $o;
@@ -1118,7 +1120,7 @@ sub getHds {
     $o->{fstab} = [ fsedit::get_really_all_fstab($all_hds) ];
     fs::merge_info_from_mtab($o->{fstab});
 
-    my @win = grep { isFat_or_NTFS($_) && isFat_or_NTFS({ pt_type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
+    my @win = grep { isFat_or_NTFS($_) && maybeFormatted($_) } @{$o->{fstab}};
     log::l("win parts: ", join ",", map { $_->{device} } @win) if @win;
     if (@win == 1) {
 	#- Suggest /boot/efi on ia64.
@@ -1130,7 +1132,7 @@ sub getHds {
 	}
     }
 
-    my @sunos = grep { isSunOS($_) && part2name($_) =~ /root/i } @{$o->{fstab}}; #- take only into account root partitions.
+    my @sunos = grep { $_->{pt_type} == 2 } @{$o->{fstab}}; #- take only into account root partitions.
     if (@sunos) {
 	my $v = '';
 	map { $_->{mntpoint} = $_->{unsafeMntpoint} = "/mnt/sunos" . ($v && ++$v) } @sunos;

@@ -8,8 +8,9 @@ use vars qw(%suggestions);
 #- misc imports
 #-######################################################################################
 use common;
-use partition_table qw(:types);
+use partition_table;
 use partition_table::raw;
+use fs::type;
 use detect_devices;
 use fsedit;
 use devices;
@@ -19,21 +20,21 @@ use fs;
 
 %suggestions = (
   N_("simple") => [
-    { mntpoint => "/",     size => 300 << 11, pt_type =>0x483, ratio => 5, maxsize => 6000 << 11 },
-    { mntpoint => "swap",  size =>  64 << 11, pt_type => 0x82, ratio => 1, maxsize =>  500 << 11 },
-    { mntpoint => "/home", size => 300 << 11, pt_type =>0x483, ratio => 3 },
+    { mntpoint => "/",     size => 300 << 11, fs_type => 'ext3', ratio => 5, maxsize => 6000 << 11 },
+    { mntpoint => "swap",  size =>  64 << 11, fs_type => 'swap', ratio => 1, maxsize =>  500 << 11 },
+    { mntpoint => "/home", size => 300 << 11, fs_type => 'ext3', ratio => 3 },
   ], N_("with /usr") => [
-    { mntpoint => "/",     size => 250 << 11, pt_type =>0x483, ratio => 1, maxsize => 2000 << 11 },
-    { mntpoint => "swap",  size =>  64 << 11, pt_type => 0x82, ratio => 1, maxsize =>  500 << 11 },
-    { mntpoint => "/usr",  size => 300 << 11, pt_type =>0x483, ratio => 4, maxsize => 4000 << 11 },
-    { mntpoint => "/home", size => 100 << 11, pt_type =>0x483, ratio => 3 },
+    { mntpoint => "/",     size => 250 << 11, fs_type => 'ext3', ratio => 1, maxsize => 2000 << 11 },
+    { mntpoint => "swap",  size =>  64 << 11, fs_type => 'swap', ratio => 1, maxsize =>  500 << 11 },
+    { mntpoint => "/usr",  size => 300 << 11, fs_type => 'ext3', ratio => 4, maxsize => 4000 << 11 },
+    { mntpoint => "/home", size => 100 << 11, fs_type => 'ext3', ratio => 3 },
   ], N_("server") => [
-    { mntpoint => "/",     size => 150 << 11, pt_type =>0x483, ratio => 1, maxsize =>  800 << 11 },
-    { mntpoint => "swap",  size =>  64 << 11, pt_type => 0x82, ratio => 2, maxsize =>  800 << 11 },
-    { mntpoint => "/usr",  size => 300 << 11, pt_type =>0x483, ratio => 4, maxsize => 4000 << 11 },
-    { mntpoint => "/var",  size => 200 << 11, pt_type =>0x483, ratio => 3 },
-    { mntpoint => "/home", size => 150 << 11, pt_type =>0x483, ratio => 3 },
-    { mntpoint => "/tmp",  size => 150 << 11, pt_type =>0x483, ratio => 2, maxsize => 1000 << 11 },
+    { mntpoint => "/",     size => 150 << 11, fs_type => 'ext3', ratio => 1, maxsize =>  800 << 11 },
+    { mntpoint => "swap",  size =>  64 << 11, fs_type => 'swap', ratio => 2, maxsize =>  800 << 11 },
+    { mntpoint => "/usr",  size => 300 << 11, fs_type => 'ext3', ratio => 4, maxsize => 4000 << 11 },
+    { mntpoint => "/var",  size => 200 << 11, fs_type => 'ext3', ratio => 3 },
+    { mntpoint => "/home", size => 150 << 11, fs_type => 'ext3', ratio => 3 },
+    { mntpoint => "/tmp",  size => 150 << 11, fs_type => 'ext3', ratio => 2, maxsize => 1000 << 11 },
   ],
 );
 foreach (values %suggestions) {
@@ -47,33 +48,6 @@ my @suggestions_mntpoints = (
     arch() =~ /sparc/ ? "/mnt/sunos" : arch() =~ /ppc/ ? "/mnt/macos" : "/mnt/windows",
     #- RedHat also has /usr/local and /opt
 );
-
-my @partitions_signatures = (
-    [ 0x8e, 0, "HM\1\0" ],
-    [ 0x83, 0x438, "\x53\xEF" ],
-    [ 0x183, 0x10034, "ReIsErFs" ],
-    [ 0x183, 0x10034, "ReIsEr2Fs" ],
-    [ 0x283, 0, 'XFSB', 0x200, 'XAGF', 0x400, 'XAGI' ],
-    [ 0x383, 0x8000, 'JFS1' ],
-    [ 0x82, 4086, "SWAP-SPACE" ],
-    [ 0x82, 4086, "SWAPSPACE2" ],
-    [ 0x107, 0x1FE, "\x55\xAA", 0x3, "NTFS" ],
-    [ 0xc,  0x1FE, "\x55\xAA", 0x52, "FAT32" ],
-if_(arch() !~ /^sparc/,
-    [ 0x6,  0x1FE, "\x55\xAA", 0x36, "FAT" ],
-),
-);
-
-sub typeOfPart { 
-    my $dev = devices::make($_[0]);
-    my $t = typeFromMagic($dev, @partitions_signatures);
-    if ($t == 0x83) {
-	#- there is no magic to differentiate ext3 and ext2. Using libext2fs
-	#- to check if it has a journal
-	$t = 0x483 if c::is_ext3($dev);
-    }
-    $t;
-}
 
 #-######################################################################################
 #- Functions
@@ -113,10 +87,10 @@ sub raids {
 
 	my @raw_mdparts = map { /([^\[]+)/ } split ' ', $mdparts;
 
-	my $pt_type = typeOfPart("md$nb");
-	log::l("RAID: found md$nb (raid $level) chunks $chunks ", if_($pt_type, "type $pt_type "), "with parts ", join(", ", @raw_mdparts));
-	$raids[$nb] = { 'chunk-size' => $chunks, pt_type => $pt_type || 0x83, raw_mdparts => \@raw_mdparts,
-			device => "md$nb", notFormatted => !$pt_type, level => $level };
+	my $fs_type = fs::type::fs_type_from_magic({ device => "md$nb" });
+	log::l("RAID: found md$nb (raid $level) chunks $chunks ", if_($fs_type, "type $fs_type "), "with parts ", join(", ", @raw_mdparts));
+	$raids[$nb] = { 'chunk-size' => $chunks, fs_type => $fs_type || 'ext2', raw_mdparts => \@raw_mdparts,
+			device => "md$nb", notFormatted => !$fs_type, level => $level };
     }
 
     my %devname2part = map { $_->{dev} => { %$_, device => $_->{dev} } } devices::read_proc_partitions_raw();
@@ -127,7 +101,7 @@ sub raids {
 	      my $mdpart = $devname2part{$_} || { device => $_ };
 	      if (my $part = find { is_same_hd($mdpart, $_) } @parts, @raids) {
 		  $part->{raid} = $::i;
-		  $part->{pt_type} = 0xfd;
+		  fs::type::set_pt_type($part, 0xfd);
 		  delete $part->{mntpoint};
 		  $part;
 	      } else {
@@ -205,8 +179,9 @@ sub hds {
 		if ($hd->{readonly}) {
 		    log::l("using /proc/partitions since diskdrake failed :(");
 		    use_proc_partitions($hd);
-		} elsif (exists $hd->{usb_description} && ($hd->{pt_type} ||= typeOfPart($hd->{device}))) {
+		} elsif (exists $hd->{usb_description} && fs::type::fs_type_from_magic($hd)) {
 		    #- non partitioned drive
+		    $hd->{fs_type} = fs::type::fs_type_from_magic($hd);
 		    push @raw_hds, $hd;
 		    next;
 		} elsif ($o_ask_before_blanking && $o_ask_before_blanking->($hd->{device}, $err)) {
@@ -223,19 +198,18 @@ sub hds {
 
 	my @parts = partition_table::get_normal_parts($hd);
 
-	# special case for Various type
-	$_->{pt_type} = typeOfPart($_->{device}) || 0x100 foreach grep { $_->{pt_type} == 0x100 } @parts;
-
-	#- special case for type overloading (eg: reiserfs is 0x183)
-	foreach (grep { isExt2($_) || $_->{pt_type} == 0x7 || $_->{pt_type} == 0x17 } @parts) {
-	    my $wanted_pt_type = $_->{pt_type} == 0x17 ? 0x7 : $_->{pt_type};
-	    my $pt_type = typeOfPart($_->{device});
-	    $_->{pt_type} = $pt_type if ($pt_type & 0xff) == $wanted_pt_type || $pt_type && $hd->isa('partition_table::gpt');
+	# checking the magic of the filesystem, don't rely on pt_type
+	foreach (grep { member($_->{fs_type}, 'vfat', 'ntfs', 'ext2') || $_->{pt_type} == 0x100 } @parts) {
+	    if (my $fs_type = fs::type::fs_type_from_magic($_)) {
+		$_->{fs_type} = $fs_type;
+	    } else {
+		$_->{bad_fs_type_magic} = 1;
+	    }
 	}
 	
 	foreach (@parts) {
 	    my $label =
-	      member(type2fs($_), qw(ext2 ext3)) ?
+	      member($_->{fs_type}, qw(ext2 ext3)) ?
 		c::get_ext2_label(devices::make($_->{device})) :
 		'';
 	    $_->{device_LABEL} = $label if $label;
@@ -310,8 +284,8 @@ sub read_proc_partitions {
 
 	$part->{device} = $dev;
 	$part->{size} *= 2;	# from KB to sectors
-	$part->{pt_type} = typeOfPart($dev); 
 	$part->{start} = $prev_part ? $prev_part->{start} + $prev_part->{size} : 0;
+	put_in_hash($part, fs::type::type_subpart_from_magic($part));
 	$prev_part = $part;
 	delete $part->{dev}; # cleanup
     }
@@ -345,7 +319,7 @@ sub is_same_hd {
 #- are_same_partitions() do not look at the device name since things may have changed
 sub are_same_partitions {
     my ($part1, $part2) = @_;
-    foreach ('start', 'size', 'pt_type', 'rootDevice') {
+    foreach ('start', 'size', 'pt_type', 'fs_type', 'rootDevice') {
 	$part1->{$_} eq $part2->{$_} or return;
     }
     1;
@@ -358,7 +332,7 @@ sub get_fstab {
 
 #- get normal partition that should be visible for working on.
 sub get_visible_fstab {
-    grep { $_ && !partition_table::isWholedisk($_) && !partition_table::isHiddenMacPart($_) }
+    grep { $_ && !isWholedisk($_) && !isHiddenMacPart($_) }
       map { partition_table::get_normal_parts($_) } @_;
 }
 
@@ -482,6 +456,11 @@ sub suggest_part {
     my ($part, $all_hds, $o_suggestions) = @_;
     my $suggestions = $o_suggestions || $suggestions{server} || $suggestions{simple};
 
+    #- suggestions now use {fs_type}, but still keep compatibility
+    foreach (@$suggestions) {
+	fs::type::set_pt_type($_, $_->{pt_type}) if !exists $_->{fs_type};
+    }
+
     my $has_swap = any { isSwap($_) } get_all_fstab($all_hds);
 
     my @local_suggestions =
@@ -492,13 +471,13 @@ sub suggest_part {
     my ($best) =
       grep { !$_->{maxsize} || $part->{size} <= $_->{maxsize} }
       grep { $_->{size} <= ($part->{maxsize} || $part->{size}) }
-      grep { !$part->{pt_type} || $part->{pt_type} == $_->{pt_type} || isTrueFS($part) && isTrueFS($_) }
+      grep { !$part->{fs_type} || $part->{fs_type} eq $_->{fs_type} || isTrueFS($part) && isTrueFS($_) }
 	@local_suggestions;
 
     defined $best or return; #- sorry no suggestion :(
 
     $part->{mntpoint} = $best->{mntpoint};
-    $part->{pt_type} = $best->{pt_type} if !(isTrueFS($best) && isTrueFS($part));
+    fs::type::set_type_subpart($part, $best) if !isTrueFS($best) || !isTrueFS($part);
     $part->{size} = computeSize($part, $best, $all_hds, \@local_suggestions);
     foreach ('options', 'lv_name', 'encrypt_key') {
 	$part->{$_} = $best->{$_} if $best->{$_};
@@ -526,11 +505,11 @@ sub get_root_ {
 }
 sub get_root { &get_root_ || {} }
 
-#- do this before modifying $part->{pt_type}
-sub check_pt_type {
-    my ($pt_type, $_hd, $part) = @_;
-    isThisFs("jfs", { pt_type => $pt_type }) && $part->{size} < 16 << 11 and die N("You can't use JFS for partitions smaller than 16MB");
-    isThisFs("reiserfs", { pt_type => $pt_type }) && $part->{size} < 32 << 11 and die N("You can't use ReiserFS for partitions smaller than 32MB");
+#- do this before modifying $part->{fs_type}
+sub check_fs_type {
+    my ($fs_type, $_hd, $part) = @_;
+    $fs_type eq "jfs" && $part->{size} < 16 << 11 and die N("You can't use JFS for partitions smaller than 16MB");
+    $fs_type eq "reiserfs" && $part->{size} < 32 << 11 and die N("You can't use ReiserFS for partitions smaller than 32MB");
 }
 
 sub package_needed_for_partition_type {
@@ -540,7 +519,7 @@ sub package_needed_for_partition_type {
 	xfs => 'xfsprogs',
         jfs => 'jfsprogs',
     );
-    $l{type2fs($part)};
+    $l{$part->{fs_type}};
 }
 
 #- you can do this before modifying $part->{mntpoint}
@@ -655,7 +634,7 @@ sub auto_allocate_raids {
 
 	my %h = %$md;
 	delete @h{'hd', 'parts'};
-	put_in_hash($part, \%h); # mntpoint, level, chunk-size, pt_type
+	put_in_hash($part, \%h); # mntpoint, level, chunk-size, fs_type
 	raid::updateSize($part);
     }
 }
@@ -769,16 +748,15 @@ sub move {
     }
 }
 
-sub change_pt_type {
-    my ($pt_type, $hd, $part) = @_;
-    $pt_type != $part->{pt_type} or return;
-    check_pt_type($pt_type, $hd, $part);
+sub change_type {
+    my ($type, $hd, $part) = @_;
+    $type->{pt_type} != $part->{pt_type} || $type->{fs_type} ne $part->{fs_type} or return;
+    check_fs_type($type->{fs_type}, $hd, $part);
     $hd->{isDirty} = 1;
     $part->{mntpoint} = '' if isSwap($part) && $part->{mntpoint} eq "swap";
-    $part->{mntpoint} = '' if isRawLVM({ pt_type => $pt_type }) || isRawRAID({ pt_type => $pt_type });
-    $part->{pt_type} = $pt_type;
-    $part->{notFormatted} = 1;
-    $part->{isFormatted} = 0;
+    $part->{mntpoint} = '' if isRawLVM($type) || isRawRAID($type);
+    set_isFormatted($part, 0);
+    fs::type::set_type_subpart($part, $type);
     fs::rationalize_options($part);
     1;
 }
@@ -792,7 +770,8 @@ sub rescuept($) {
     local $_;
     while (<$F>) {
 	my ($st, $si, $id) = /start=\s*(\d+),\s*size=\s*(\d+),\s*Id=\s*(\d+)/ or next;
-	my $part = { start => $st, size => $si, pt_type => hex($id) };
+	my $part = { start => $st, size => $si };
+	fs::type::set_pt_type($part, hex($id));
 	if (isExtended($part)) {
 	    $ext = $part;
 	} else {

@@ -8,7 +8,8 @@ use vars qw(%vga_modes);
 #- misc imports
 #-######################################################################################
 use common;
-use partition_table qw(:types);
+use partition_table;
+use fs::type;
 use log;
 use any;
 use fsedit;
@@ -583,7 +584,7 @@ sub suggest {
     my $root = '/dev/' . (isLoopback($root_part) ? 'loop7' : $root_part->{device});
     my $boot = fsedit::get_root($fstab, 'boot')->{device};
     #- PPC xfs module requires enlarged initrd
-    my $xfsroot = isThisFs("xfs", $root_part);
+    my $xfsroot = $root_part->{fs_type} eq 'xfs';
 
     my ($onmbr, $unsafe) = $bootloader->{crushMbr} ? (1, 0) : suggest_onmbr($hds->[0]);
     add2hash_($bootloader, arch() =~ /ppc/ ?
@@ -692,7 +693,7 @@ wait for default boot.
     } elsif (arch() !~ /ia64/) {
 	#- search for dos (or windows) boot partition. Don't look in extended partitions!
 	my @windows_boot_parts =
-	  grep { isFat_or_NTFS($_) && isFat_or_NTFS({ pt_type => fsedit::typeOfPart($_->{device}) }) }
+	  grep { isFat_or_NTFS($_) && member(fs::type::fs_type_from_magic($_), 'vfat', 'ntfs') }
 	    map { @{$_->{primary}{normal}} } @$hds;
 	each_index {
 	    add_entry($bootloader,
@@ -910,7 +911,10 @@ sub write_lilo {
 	    my $fstab = [ fsedit::get_fstab(@$hds) ];
 	    (my $part, $file) = fsedit::file2part($fstab, $file);
 	    my %hds = map_index { $_ => "hd$::i" } map { $_->{device} } 
-	      sort { isFat($b) <=> isFat($a) || $a->{device} cmp $b->{device} } @$fstab;
+	      sort { 
+		  my ($a_is_fat, $b_is_fat) = ($a->{fs_type} eq 'vfat', $b->{fs_type} eq 'vfat');
+		  $a_is_fat <=> $b_is_fat || $a->{device} cmp $b->{device};
+	      } @$fstab;
 	    $hds{$part->{device}} . ":" . $file;
 	} else {
 	    $file
@@ -1208,8 +1212,8 @@ sub install {
     my ($bootloader, $hds) = @_;
 
     if (my $part = fs::device2part($bootloader->{boot}, [ fsedit::get_fstab(@$hds) ])) {
-	die N("You can't install the bootloader on a %s partition\n", partition_table::type2fs($part))
-	  if isThisFs('xfs', $part);
+	die N("You can't install the bootloader on a %s partition\n", $part->{fs_type})
+	  if $part->{fs_type} eq 'xfs';
     }
     $bootloader->{keytable} = keytable($bootloader->{keytable});
     action($bootloader, 'install', $hds);

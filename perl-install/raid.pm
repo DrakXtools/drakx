@@ -7,7 +7,7 @@ use strict;
 #- misc imports
 #-######################################################################################
 use common;
-use partition_table qw(:types);
+use fs::type;
 use run_program;
 use devices;
 use modules;
@@ -23,7 +23,7 @@ sub nb {
 sub new {
     my ($raids, @parts) = @_;
     my $nb = @$raids; 
-    $raids->[$nb] = { 'chunk-size' => "64k", pt_type => 0x483, disks => [ @parts ], device => "md$nb", notFormatted => 1, level => 1 };
+    $raids->[$nb] = { 'chunk-size' => "64k", fs_type => 'ext3', disks => [ @parts ], device => "md$nb", notFormatted => 1, level => 1 };
     foreach my $part (@parts) {
 	$part->{raid} = $nb;
 	delete $part->{mntpoint};
@@ -36,7 +36,7 @@ sub add {
     my ($raids, $part, $nb) = @_; $nb = nb($nb);
     $raids->[$nb]{isMounted} and die N("Can't add a partition to _formatted_ RAID md%d", $nb);
     inactivate_and_dirty($raids->[$nb]);
-    $part->{notFormatted} = 1; $part->{isFormatted} = 0;
+    set_isFormatted($part, 0);
     $part->{raid} = $nb;
     delete $part->{mntpoint};
     push @{$raids->[$nb]{disks}}, $part;
@@ -145,7 +145,7 @@ sub format_part {
 
     make($raids, $part);
     fs::format::part_raw($part);
-    $_->{isFormatted} = 1 foreach @{$part->{disks}};
+    set_isFormatted($_, 1) foreach @{$part->{disks}};
 }
 
 sub verify {
@@ -171,7 +171,7 @@ sub prepare_prefixed {
 sub inactivate_and_dirty {
     my ($part) = @_;
     run_program::run("raidstop", devices::make($part->{device}));
-    $part->{notFormatted} = 1; $part->{isFormatted} = 0;
+    set_isFormatted($part, 0);
 }
 
 sub active_mds() {

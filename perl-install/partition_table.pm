@@ -2,272 +2,15 @@ package partition_table; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @important_types2 @fields2save @bad_types);
-
-@ISA = qw(Exporter);
-%EXPORT_TAGS = (
-    types => [ qw(part2name type2fs name2pt_type fs2pt_type isExtended isExt2 isThisFs isTrueLocalFS isTrueFS isSwap isDos isWin isFat isFat_or_NTFS isSunOS isOtherAvailableFS isPrimary isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial maybeFormatted isApple isAppleBootstrap isEfi) ],
-);
-@EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
-
 
 use common;
+use fs::type;
 use partition_table::raw;
 use detect_devices;
+use fs::type;
 use log;
 
-@important_types = ('Linux native', 'Linux swap', 'Journalised FS: ext3', 'Journalised FS: ReiserFS',
-		    if_(arch() =~ /ppc/, 'Journalised FS: JFS', 'Journalised FS: XFS', 'Apple HFS Partition', 'Apple Bootstrap'),
-		    if_(arch() =~ /i.86/, 'Journalised FS: JFS', 'Journalised FS: XFS', 'FAT32'),
-		    if_(arch() =~ /ia64/, 'Journalised FS: XFS', 'FAT32'),
-		    if_(arch() =~ /x86_64/, 'FAT32'),
-		   );
-@important_types2 = ('Linux RAID', 'Linux Logical Volume Manager');
-
-@fields2save = qw(primary extended totalsectors isDirty will_tell_kernel);
-
-@bad_types = ('Empty', 'Extended', 'W95 Extended (LBA)', 'Linux extended');
-
-my %pt_type2name = (
-  0x0 => 'Empty',
-if_(arch() =~ /^ppc/, 
-  0x183 => 'Journalised FS: ReiserFS',
-  0x283 => 'Journalised FS: XFS',
-  0x383 => 'Journalised FS: JFS',
-  0x483 => 'Journalised FS: ext3',
-  0x401	=> 'Apple Partition',
-  0x401	=> 'Apple Bootstrap',
-  0x402	=> 'Apple HFS Partition',
-), if_(arch() =~ /^i.86/,
-  0x107 => 'NTFS',
-  0x183 => 'Journalised FS: ReiserFS',
-  0x283 => 'Journalised FS: XFS',
-  0x383 => 'Journalised FS: JFS',
-  0x483 => 'Journalised FS: ext3',
-), if_(arch() =~ /^ia64/,
-  0x100 => 'Various',
-  0x183 => 'Journalised FS: ReiserFS',
-  0x283 => 'Journalised FS: XFS',
-  0x483 => 'Journalised FS: ext3',
-), if_(arch() =~ /^x86_64/,
-  0x183 => 'Journalised FS: ReiserFS',
-  0x483 => 'Journalised FS: ext3',
-), if_(arch() =~ /^sparc/,
-  0x01 => 'SunOS boot',
-  0x02 => 'SunOS root',
-  0x03 => 'SunOS swap',
-  0x04 => 'SunOS usr',
-  0x05 => 'Whole disk',
-  0x06 => 'SunOS stand',
-  0x07 => 'SunOS var',
-  0x08 => 'SunOS home',
-), if_(arch() =~ /^i.86/,
-  0x01 => 'FAT12',
-  0x02 => 'XENIX root',
-  0x03 => 'XENIX usr',
-  0x04 => 'FAT16 <32M',
-  0x05 => 'Extended',
-  0x06 => 'FAT16',
-  0x07 => 'NTFS (or HPFS)',
-  0x08 => 'AIX',
-),
-  0x09 => 'AIX bootable',
-  0x0a => 'OS/2 Boot Manager',
-  0x0b => 'FAT32',
-  0x0c => 'W95 FAT32 (LBA)',
-  0x0e => 'W95 FAT16 (LBA)',
-  0x0f => 'W95 Extended (LBA)',
-  0x10 => 'OPUS',
-  0x11 => 'Hidden FAT12',
-  0x12 => 'Compaq diagnostics',
-  0x14 => 'Hidden FAT16 <32M',
-  0x16 => 'Hidden FAT16',
-  0x17 => 'Hidden HPFS/NTFS',
-  0x18 => 'AST SmartSleep',
-  0x1b => 'Hidden W95 FAT32',
-
-  0x1c => 'Hidden W95 FAT32 (LBA)',
-  0x1e => 'Hidden W95 FAT16 (LBA)',
-  0x24 => 'NEC DOS',
-  0x39 => 'Plan 9',
-  0x3c => 'PartitionMagic recovery',
-  0x40 => 'Venix 80286',
-  0x41 => 'PPC PReP Boot',
-  0x42 => 'SFS',
-  0x4d => 'QNX4.x',
-  0x4e => 'QNX4.x 2nd part',
-  0x4f => 'QNX4.x 3rd part',
-
-  0x50 => 'OnTrack DM',
-  0x51 => 'OnTrack DM6 Aux1',
-  0x52 => 'CP/M',
-  0x53 => 'OnTrack DM6 Aux3',
-  0x54 => 'OnTrackDM6',
-  0x55 => 'EZ-Drive',
-  0x56 => 'Golden Bow',
-  0x5c => 'Priam Edisk',
-  0x61 => 'SpeedStor',
-  0x63 => 'GNU HURD or SysV',
-  0x64 => 'Novell Netware 286',
-  0x65 => 'Novell Netware 386',
-  0x70 => 'DiskSecure Multi-Boot',
-  0x75 => 'PC/IX',
-  0x80 => 'Old Minix',
-  0x81 => 'Minix / old Linux',
-
-
-  0x82 => 'Linux swap',
-  0x83 => 'Linux native',
-
-  0x84 => 'OS/2 hidden C: drive',
-  0x85 => 'Linux extended',
-  0x86 => 'NTFS volume set',
-  0x87 => 'NTFS volume set',
-  0x8e => 'Linux Logical Volume Manager',
-  0x93 => 'Amoeba',
-  0x94 => 'Amoeba BBT',
-  0x9f => 'BSD/OS',
-  0xa0 => 'IBM Thinkpad hibernation',
-  0xa5 => 'FreeBSD',
-  0xa6 => 'OpenBSD',
-  0xa7 => 'NeXTSTEP',
-  0xa8 => 'Darwin UFS',
-  0xa9 => 'NetBSD',
-  0xab => 'Darwin boot',
-  0xb7 => 'BSDI fs',
-  0xb8 => 'BSDI swap',
-  0xbb => 'Boot Wizard hidden',
-  0xbe => 'Solaris boot',
-  0xc1 => 'DRDOS/sec (FAT-12)',
-  0xc4 => 'DRDOS/sec (FAT-16 < 32M)',
-  0xc6 => 'DRDOS/sec (FAT-16)',
-  0xc7 => 'Syrinx',
-  0xda => 'Non-FS data',
-  0xdb => 'CP/M / CTOS / ...',
-  0xde => 'Dell Utility',
-  0xdf => 'BootIt',
-  0xe1 => 'DOS access',
-  0xe3 => 'DOS R/O',
-  0xe4 => 'SpeedStor',
-  0xeb => 'BeOS fs',
-  0xee => 'EFI GPT',
-  0xef => 'EFI (FAT-12/16/32)',
-  0xf0 => 'Linux/PA-RISC boot',
-  0xf1 => 'SpeedStor',
-  0xf4 => 'SpeedStor',
-  0xf2 => 'DOS secondary',
-  0xfd => 'Linux RAID',
-  0xfe => 'LANstep',
-  0xff => 'BBT',
-);
-
-my %pt_type2fs = (
-arch() =~ /^ppc/ ? (
-  0x07 => 'hpfs',
-) : (
-  0x07 => 'ntfs',
-),
-arch() !~ /sparc/ ? (
-  0x01 => 'vfat',
-  0x04 => 'vfat',
-  0x05 => 'ignore',
-  0x06 => 'vfat',
-) : (
-  0x01 => 'ufs',
-  0x02 => 'ufs',
-  0x04 => 'ufs',
-  0x06 => 'ufs',
-  0x07 => 'ufs',
-  0x08 => 'ufs',
-),
-  0x0b => 'vfat',
-  0x0c => 'vfat',
-  0x0e => 'vfat',
-  0x1b => 'vfat',
-  0x1c => 'vfat',
-  0x1e => 'vfat',
-  0x82 => 'swap',
-  0x83 => 'ext2',
-  0xeb => 'befs',
-  0xef => 'vfat',
-  0x107 => 'ntfs',
-  0x183 => 'reiserfs',
-  0x283 => 'xfs',
-  0x383 => 'jfs',
-  0x483 => 'ext3',
-  0x401 => 'apple',
-  0x402 => 'hfs',
-);
-
-my %name2pt_type = reverse %pt_type2name;
-my %fs2pt_type = reverse %pt_type2fs;
-
-		foreach (@important_types, @important_types2, @bad_types) {
-		    exists $name2pt_type{$_} or die "unknown $_\n";
-		}
-
-
-1;
-
-sub important_types() { 
-    my @l = (@important_types, if_($::expert, @important_types2, sort values %pt_type2name));
-    difference2(\@l, \@bad_types);
-}
-
-sub type2fs {
-    my ($part, $o_default) = @_;
-    my $pt_type = $part->{pt_type};
-    $pt_type2fs{$pt_type} || $pt_type =~ /^(\d+)$/ && $o_default || $pt_type;
-}
-sub fs2pt_type { $fs2pt_type{$_[0]} || $_[0] }
-sub part2name { 
-    my ($part) = @_;
-    $pt_type2name{$part->{pt_type}} || $part->{pt_type};
-}
-sub name2pt_type { 
-    local ($_) = @_;
-    /0x(.*)/ ? hex $1 : $name2pt_type{$_} || $_;
-}
-#sub name2type { { pt_type => name2pt_type($_[0]) } }
-
-sub isEfi { arch() =~ /ia64/ && $_[0]{pt_type} == 0xef }
-sub isWholedisk { arch() =~ /^sparc/ && $_[0]{pt_type} == 5 }
-sub isExtended { arch() !~ /^sparc/ && ($_[0]{pt_type} == 5 || $_[0]{pt_type} == 0xf || $_[0]{pt_type} == 0x85) }
-sub isRawLVM { $_[0]{pt_type} == 0x8e }
-sub isRawRAID { $_[0]{pt_type} == 0xfd }
-sub isSwap { type2fs($_[0]) eq 'swap' }
-sub isExt2 { type2fs($_[0]) eq 'ext2' }
-sub isDos { arch() !~ /^sparc/ && ${{ 1 => 1, 4 => 1, 6 => 1 }}{$_[0]{pt_type}} }
-sub isWin { ${{ 0xb => 1, 0xc => 1, 0xe => 1, 0x1b => 1, 0x1c => 1, 0x1e => 1 }}{$_[0]{pt_type}} }
-sub isFat { isDos($_[0]) || isWin($_[0]) }
-sub isFat_or_NTFS { isDos($_[0]) || isWin($_[0]) || $_[0]{pt_type} == 0x107 }
-sub isSunOS { arch() =~ /sparc/ && ${{ 0x1 => 1, 0x2 => 1, 0x4 => 1, 0x6 => 1, 0x7 => 1, 0x8 => 1 }}{$_[0]{pt_type}} }
-sub isApple { type2fs($_[0]) eq 'apple' && defined $_[0]{isDriver} }
-sub isAppleBootstrap { type2fs($_[0]) eq 'apple' && defined $_[0]{isBoot} }
-sub isHiddenMacPart { defined $_[0]{isMap} }
-
-sub isThisFs { type2fs($_[1]) eq $_[0] }
-sub isTrueFS { isTrueLocalFS($_[0]) || member(type2fs($_[0]), qw(nfs)) }
-sub isTrueLocalFS { member(type2fs($_[0]), qw(ext2 reiserfs xfs jfs ext3)) }
-
-sub isOtherAvailableFS { isEfi($_[0]) || isFat_or_NTFS($_[0]) || isSunOS($_[0]) || isThisFs('hfs', $_[0]) } #- other OS that linux can access its filesystem
-sub isMountableRW { (isTrueFS($_[0]) || isOtherAvailableFS($_[0])) && !isThisFs('ntfs', $_[0]) }
-sub isNonMountable { 
-    my ($part) = @_;
-    isRawRAID($part) || isRawLVM($part) || isThisFs("ntfs", $part) && !$part->{isFormatted} && $part->{notFormatted};
-}
-
-sub isPartOfLVM { defined $_[0]{lvm} }
-sub isPartOfRAID { defined $_[0]{raid} }
-sub isPartOfLoopback { defined $_[0]{loopback} }
-sub isRAID { $_[0]{device} =~ /^md/ }
-sub isUBD { $_[0]{device} =~ /^ubd/ } #- should be always true during an $::uml_install
-sub isLVM { $_[0]{VG_name} }
-sub isLoopback { defined $_[0]{loopback_file} }
-sub isMounted { $_[0]{isMounted} }
-sub isBusy { isMounted($_[0]) || isPartOfRAID($_[0]) || isPartOfLVM($_[0]) || isPartOfLoopback($_[0]) }
-sub isSpecial { isRAID($_[0]) || isLVM($_[0]) || isLoopback($_[0]) || isUBD($_[0]) }
-sub maybeFormatted { $_[0]{isFormatted} || !$_[0]{notFormatted} }
+our @fields2save = qw(primary extended totalsectors isDirty will_tell_kernel);
 
 
 #- works for both hard drives and partitions ;p
@@ -281,7 +24,7 @@ sub description {
       formatXiB($hd->{totalsectors} || $hd->{size}, 512),
       $hd->{info} && ", $hd->{info}",
       $hd->{mntpoint} && ", " . $hd->{mntpoint},
-      $hd->{pt_type} && ", " . part2name($hd);
+      $hd->{fs_type} && ", $hd->{fs_type}";
 }
 
 sub isPrimary {
@@ -388,14 +131,11 @@ sub assign_device_numbers {
     #- first verify there's at least one primary dos partition, otherwise it
     #- means it is a secondary disk and all will be false :(
     #-
-    #- isFat_or_NTFS isn't true for 0x7 partitions, only for 0x107.
-    #- alas 0x107 is not set correctly at this stage
-    #- solution: don't bother with 0x7 vs 0x107 here
-    my ($c, @others) = grep { isFat_or_NTFS($_) || $_->{pt_type} == 0x7 || $_->{pt_type} == 0x17 } @{$hd->{primary}{normal}};
+    my ($c, @others) = grep { isFat_or_NTFS($_) } @{$hd->{primary}{normal}};
 
     $i = ord 'C';
     $c->{device_windobe} = chr($i++) if $c;
-    $_->{device_windobe} = chr($i++) foreach grep { isFat_or_NTFS($_) || $_->{pt_type} == 0x7 || $_->{pt_type} == 0x17 } map { $_->{normal} } @{$hd->{extended}};
+    $_->{device_windobe} = chr($i++) foreach grep { isFat_or_NTFS($_) } map { $_->{normal} } @{$hd->{extended}};
     $_->{device_windobe} = chr($i++) foreach @others;
 }
 
@@ -634,7 +374,7 @@ sub tell_kernel {
 	log::l("tell kernel force_reboot, rebootNeeded is now $hd->{rebootNeeded}.");
 
 	foreach (@magic_parts) {
-	    syscall_('mount', $_->{real_mntpoint}, type2fs($_), c::MS_MGC_VAL()) or log::l(N("mount failed: ") . $!);
+	    syscall_('mount', $_->{real_mntpoint}, $_->{fs_type}, c::MS_MGC_VAL()) or log::l(N("mount failed: ") . $!);
 	}
     }
 }
@@ -792,8 +532,7 @@ sub add {
 
     get_normal_parts($hd) >= ($hd->{device} =~ /^rd/ ? 7 : $hd->{device} =~ /^(sd|ida|cciss|ataraid)/ ? 15 : 63) and cdie "maximum number of partitions handled by linux reached";
 
-    $part->{notFormatted} = 1;
-    $part->{isFormatted} = 0;
+    set_isFormatted($part, 0);
     $part->{rootDevice} = $hd->{device};
     $part->{start} ||= 1 if arch() !~ /^sparc/; #- starting at sector 0 is not allowed
     adjustStartAndEnd($hd, $part) unless $b_forceNoAdjust;
@@ -868,3 +607,5 @@ sub save {
     eval { output($file, Data::Dumper->Dump([\@h], ['$h']), "\0") }
       or die N("Error writing to file %s", $file);
 }
+
+1;

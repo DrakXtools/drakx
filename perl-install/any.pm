@@ -8,7 +8,8 @@ use strict;
 #-######################################################################################
 use common;
 use detect_devices;
-use partition_table qw(:types);
+use partition_table;
+use fs::type;
 use fsedit;
 use fs;
 use lang;
@@ -265,7 +266,7 @@ sub setupBootloader__general {
 
     if ($prev_clean_tmp != $clean_tmp) {
 	if ($clean_tmp && !fsedit::has_mntpoint('/tmp', $all_hds)) {
-	    push @{$all_hds->{special}}, { device => 'none', mntpoint => '/tmp', pt_type => 'tmpfs' };
+	    push @{$all_hds->{special}}, { device => 'none', mntpoint => '/tmp', fs_type => 'tmpfs' };
 	} else {
 	    @{$all_hds->{special}} = grep { $_->{mntpoint} ne '/tmp' } @{$all_hds->{special}};
 	}
@@ -481,7 +482,7 @@ sub inspect {
 	$dir = '';
     } else {
 	mkdir $dir, 0700;
-	eval { fs::mount($part->{device}, $dir, type2fs($part, 'skip'), !$b_rw) };
+	eval { fs::mount($part->{device}, $dir, $part->{fs_type}, !$b_rw) };
 	$@ and return;
     }
     my $h = before_leaving {

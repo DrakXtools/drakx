@@ -17,7 +17,7 @@ use keyboard;
 use mouse;
 use fsedit;
 use devices;
-use partition_table qw(:types);
+use partition_table;
 use modules;
 use detect_devices;
 use run_program;

@@ -130,8 +130,8 @@ sub read_partitionEntries {
 	sysread $F, $tmp, psizeof($partitionEntry_format) or die "error while reading partition table in sector $info->{partitionEntriesLBA}";
 	my %h; @h{@$partitionEntry_fields} = unpack $partitionEntry_format, $tmp;
 	$h{size} = $h{ending} - $h{start} + 1;
-	$h{pt_type} = $gpt_types_rev{$h{gpt_type}};
-	$h{pt_type} = 0x100 if !defined $h{pt_type};
+	my $pt_type = $gpt_types_rev{$h{gpt_type}};
+	fs::type::set_pt_type(\%h, defined $pt_type ? $pt_type : 0x100);
 	\%h;
     } (1 .. $info->{nbPartitions});
     \@pt;

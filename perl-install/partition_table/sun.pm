@@ -9,6 +9,7 @@ use vars qw(@ISA);
 use common;
 use partition_table::raw;
 use partition_table;
+use fs::type;
 use c;
 
 my ($main_format, $main_fields) = list2kv(
@@ -92,8 +93,9 @@ sub read($$) {
     my @infos_up = unpack $format1 x $nb_primary, $info{infos};
     my @partitions_up = unpack $format2 x $nb_primary, $info{partitions};
     foreach (0..$nb_primary-1) {
-	my $h = { pt_type => $infos_up[2 * $_], flag => $infos_up[1 + 2 * $_],
+	my $h = { flag => $infos_up[1 + 2 * $_],
 		  start_cylinder => $partitions_up[2 * $_], size => $partitions_up[1 + 2 * $_] };
+	fs::type::set_pt_type($h, $infos_up[2 * $_]);
 	$h->{start} = $sector + $h->{start_cylinder} * $hd->cylinder_size;
 	$h->{pt_type} && $h->{size} or $h->{$_} = 0 foreach keys %$h;
 	push @pt, $h;
@@ -133,7 +135,7 @@ sub write($$$;$) {
 #	$csize += $_->{size} if $_->{pt_type} != 5;
 #	$wdsize += $_->{size} if $_->{pt_type} == 5;
 	$_->{flags} |= 0x10 if $_->{mntpoint} eq '/';
-	$_->{flags} |= 0x01 if partition_table::isSwap($_);
+	$_->{flags} |= 0x01 if !isSwap($_);
 	local $_->{start_cylinder} = $_->{start} / $hd->cylinder_size - $sector;
 	pack($format1, @$_{@$fields1}), pack($format2, @$_{@$fields2});
     } @$pt;

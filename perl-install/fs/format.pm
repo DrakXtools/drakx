@@ -1,9 +1,12 @@
 package fs::format;
 
+use diagnostics;
+use strict;
+
 use run_program;
 use common;
+use fs::type;
 use log;
-use partition_table qw(:types);
 
 my %cmds = (
     ext2     => 'mke2fs -F',
@@ -44,9 +47,9 @@ sub part_raw {
     my $dev = $part->{real_device} || $part->{device};
 
     my @options = if_($part->{toFormatCheck}, "-c");
-    log::l("formatting device $dev (type ", part2name($part), ")");
+    log::l("formatting device $dev (type $part->{fs_type})");
 
-    my $fs_type = type2fs($part);
+    my $fs_type = $part->{fs_type};
 
     if ($fs_type eq 'ext2' || $fs_type eq 'ext3') {
 	push @options, "-m", "0" if $part->{mntpoint} =~ m|^/home|;
@@ -58,7 +61,7 @@ sub part_raw {
 	push @options, '-l', 'bootstrap';
     }
 
-    my $cmd = $cmds{$fs_type} or die N("I don't know how to format %s in type %s", $part->{device}, part2name($part));
+    my $cmd = $cmds{$fs_type} or die N("I don't know how to format %s in type %s", $part->{device}, $part->{fs_type});
 
     run_program::raw({ timeout => 60 * 60 }, split(' ', $cmd), @options, devices::make($dev)) or die N("%s formatting of %s failed", $fs_type, $dev);
 
@@ -66,7 +69,7 @@ sub part_raw {
 	disable_forced_fsck($dev);
     }
 
-    $part->{isFormatted} = 1;
+    set_isFormatted($part, 1);
 }
 
 sub disable_forced_fsck {

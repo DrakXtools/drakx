@@ -4,7 +4,8 @@ use diagnostics;
 use strict;
 
 use common;
-use partition_table qw(:types);
+use fs::type;
+use partition_table;
 use partition_table::raw;
 use detect_devices;
 use run_program;
@@ -26,6 +27,7 @@ struct part {
   int start             # in sectors
   int size              # in sectors
   int pt_type           # 0x82, 0x83, 0x6 ...
+  string fs_type        # 'ext2', 'nfs', ...
   string device         # 'hda5', 'sdc1' ...
   string devfs_device   # 'ide/host0/bus0/target0/lun0/part5', ...
   string prefer_devfs_name # should the {devfs_device} or the {device} be used in fstab
@@ -144,7 +146,7 @@ struct hd_lvm inherits hd {
 }
 
 struct raw_hd inherits hd {
-  string pt_type       # 0x82, 0x83, 'nfs', ...
+  string fs_type       # 'ext2', 'nfs', ...
   string mntpoint   # '/', '/usr' ...
   string options    # 'defaults', 'noauto'
 
@@ -411,9 +413,9 @@ sub part_possible_actions {
 
     my %actions = my @l = (
         N_("Mount point")      => '($part->{real_mntpoint} && common::usingRamdisk()) || (!isBusy && !isSwap && !isNonMountable)',
-        N_("Type")             => '!isBusy && $::expert && (!readonly || ($part->{pt_type} & 0xff) == 0x83)',
+        N_("Type")             => '!isBusy && $::expert && (!readonly || $part->{pt_type} == 0x83)',
         N_("Options")          => '$::expert',
-        N_("Resize")	       => '!isBusy && !readonly && !isSpecial || isLVM($hd) && isMounted && isThisFs("xfs", $part)',
+        N_("Resize")	       => '!isBusy && !readonly && !isSpecial || isLVM($hd) && isMounted && $part->{fs_type} eq "xfs"',
         N_("Move")             => '!isBusy && !readonly && !isSpecial && $::expert && 0', # disable for the moment
         N_("Format")           => '!isBusy && !readonly && ($::expert || $::isStandalone)',
         N_("Mount")            => '!isBusy && (hasMntpoint || isSwap) && maybeFormatted && ($::expert || $::isStandalone)',
@@ -453,14 +455,14 @@ sub Create {
     $part->{maxsize} = $part->{size}; $part->{size} = 0;
     if (!fsedit::suggest_part($part, $all_hds)) {
 	$part->{size} = $part->{maxsize};
-	$part->{pt_type} ||= 0x483;
+	fs::type::suggest_fs_type($part, 'ext3');
     }
 
     #- update adjustment for start and size, take into account the minimum partition size
     #- including one less sector for start due to a capacity to increase the adjustement by
     #- one.
     my ($primaryOrExtended, $migrate_files);
-    my $type_name = part2name($part);
+    my $type_name = fs::type::part2type_name($part);
     my $mb_size = $part->{size} >> 11;
     my $has_startsector = ($::expert || arch() !~ /i.86/) && !isLVM($hd);
 
@@ -470,9 +472,9 @@ sub Create {
          { label => N("Start sector: "), val => \$part->{start}, min => $def_start, max => ($max - min_partition_size($hd)), type => 'range' },
            ),
          { label => N("Size in MB: "), val => \$mb_size, min => min_partition_size($hd) >> 11, max => $def_size >> 11, type => 'range' },
-         { label => N("Filesystem type: "), val => \$type_name, list => [ partition_table::important_types() ], sort => 0 },
+         { label => N("Filesystem type: "), val => \$type_name, list => [ fs::type::type_names() ], sort => 0 },
          { label => N("Mount point: "), val => \$part->{mntpoint}, list => [ fsedit::suggestions_mntpoint($all_hds), '' ],
-           disabled => sub { my $p = { pt_type => name2pt_type($type_name) }; isSwap($p) || isNonMountable($p) }, type => 'combo', not_edit => 0,
+           disabled => sub { my $p = fs::type::type_name2subpart($type_name); isSwap($p) || isNonMountable($p) }, type => 'combo', not_edit => 0,
          },
            if_($::expert && $hd->hasExtended,
          { label => N("Preference: "), val => \$primaryOrExtended, list => [ '', "Extended", "Primary", if_($::expert, "Extended_0x85") ] },
@@ -492,7 +494,7 @@ sub Create {
 	    }
         }, complete => sub {
 	    $part->{size} = from_Mb($mb_size, min_partition_size($hd), $max - $part->{start}); #- need this to be able to get back the approximation of using MB
-	    $part->{pt_type} = name2pt_type($type_name);
+	    put_in_hash($part, fs::type::type_name2subpart($type_name));
 	    $part->{mntpoint} = '' if isNonMountable($part);
 	    $part->{mntpoint} = 'swap' if isSwap($part);
 	    fs::set_default_options($part);
@@ -559,27 +561,28 @@ sub Type {
     my $warn = sub { ask_alldatawillbelost($in, $part, N_("After changing type of partition %s, all data on this partition will be lost")) };
 
     #- for ext2, warn after choosing as ext2->ext3 can be achieved without loosing any data :)
-    isExt2($part) or $warn->() or return;
+    $part->{fs_type} eq 'ext2' or $warn->() or return;
 
-    my @types = partition_table::important_types();
+    my @types = fs::type::type_names();
 
-    #- when readonly, Type() is allowed only when changing between various { 0x83, 0x183, ... }
-    @types = grep { (name2pt_type($_) & 0xff) == 0x83 } @types if $hd->{readonly};
+    #- when readonly, Type() is allowed only when changing {fs_type} but not {pt_type}
+    #- eg: switching between ext2, ext3, reiserfs...
+    @types = grep { fs::type::type_name2pt_type($_) == $part->{pt_type} } @types if $hd->{readonly};
 
-    my $type_name = part2name($part);
+    my $type_name = fs::type::part2type_name($part);
     $in->ask_from_({ title => N("Change partition type"),
 		     messages => N("Which filesystem do you want?"),
 		     focus_first => 1,
 		   },
 		  [ { label => N("Type"), val => \$type_name, list => \@types, sort => 0, not_edit => !$::expert } ]) or return;
 
-    my $pt_type = $type_name && name2pt_type($type_name);
+    my $type = $type_name && fs::type::type_name2subpart($type_name);
 
-    if (isExt2($part) && isThisFs('ext3', { pt_type => $pt_type })) {
+    if (member($type->{fs_type}, 'ext2', 'ext3')) {
 	my $_w = $in->wait_message('', N("Switching from ext2 to ext3"));
 	if (run_program::run("tune2fs", "-j", devices::make($part->{device}))) {
-	    $part->{pt_type} = $pt_type;
-	    $part->{isFormatted} = 1; #- assume that if tune2fs works, partition is formatted
+	    put_in_hash($part, $type);
+	    set_isFormatted($part, 1); #- assume that if tune2fs works, partition is formatted
 
 	    #- disable the fsck (don't do it together with -j in case -j fails?)
 	    fs::format::disable_forced_fsck($part->{device});	    
@@ -587,10 +590,10 @@ sub Type {
 	}
     }
     #- either we switch to non-ext3 or switching losslessly to ext3 failed
-    !isExt2($part) or $warn->() or return;
+    $part->{fs_type} ne 'ext2' or $warn->() or return;
 
-    if (defined $pt_type) {
-	check_pt_type($in, $pt_type, $hd, $part) and fsedit::change_pt_type($pt_type, $hd, $part);
+    if (defined $type) {
+	check_type($in, $type, $hd, $part) and fsedit::change_type($type, $hd, $part);
     }
 }
 
@@ -657,7 +660,7 @@ sub Resize {
 	# here we may have a non-formatted or a formatted partition
 	# -> doing as if it was formatted
 
-	if (isFat($part)) {
+	if ($part->{fs_type} eq 'vfat') {
 	    write_partitions($in, $hd) or return;
 	    #- try to resize without losing data
 	    my $_w = $in->wait_message(N("Resizing"), N("Computing FAT filesystem bounds"));
@@ -666,7 +669,7 @@ sub Resize {
 	    $nice_resize{fat} = resize_fat::main->new($part->{device}, devices::make($part->{device}));
 	    $min = max($min, $nice_resize{fat}->min_size);
 	    $max = min($max, $nice_resize{fat}->max_size);	    
-	} elsif (isExt2($part) || isThisFs('ext3', $part)) {
+	} elsif (member($part->{fs_type}, 'ext2', 'ext3')) {
 	    write_partitions($in, $hd) or return;
 	    my $dev = devices::make($part->{device});
 	    my $r = run_program::get_stdout('dumpe2fs', $dev);
@@ -678,18 +681,18 @@ sub Resize {
 		$min = max($min, ($block_count - $free_block) * ($block_size / 512));
 		$nice_resize{ext2} = $dev;
 	    }
-	} elsif (isThisFs('ntfs', $part)) {
+	} elsif ($part->{fs_type} eq 'ntfs') {
 	    write_partitions($in, $hd) or return;
 	    require diskdrake::resize_ntfs;
 	    $nice_resize{ntfs} = diskdrake::resize_ntfs->new($part->{device}, devices::make($part->{device}));
 	    $min = $nice_resize{ntfs}->min_size or delete $nice_resize{ntfs};
-	} elsif (isThisFs("reiserfs", $part)) {
+	} elsif ($part->{fs_type} eq 'reiserfs') {
 	    write_partitions($in, $hd) or return;
 	    if (defined(my $free = fs::df($part))) {
 		$nice_resize{reiserfs} = 1;		  
 		$min = max($min, $part->{size} - $free);
 	    }
-	} elsif (isThisFs('xfs', $part) && isLVM($hd) && $::isStandalone && isMounted($part)) {
+	} elsif ($part->{fs_type} eq 'xfs' && isLVM($hd) && $::isStandalone && $part->{isMounted}) {
 	    $min = $part->{size}; #- ensure the user can only increase
 	    $nice_resize{xfs} = 1;
 	}
@@ -764,10 +767,9 @@ filesystem checks will be run on your next boot into Windows(TM)"));
     }
 
     if (%nice_resize) {
-	$part->{isFormatted} = 1;
+	set_isFormatted($part, 1);
     } else {
-	$part->{notFormatted} = 1;
-	$part->{isFormatted} = 0;
+	set_isFormatted($part, 0);
 	partition_table::verifyParts($hd);
 	$part->{mntpoint} = '' if isNonMountable($part); #- mainly for ntfs, which we can't format
     }
@@ -866,20 +868,20 @@ sub Loopback {
     my $handle = any::inspect($real_part) or $in->ask_warn('', N("This partition can't be used for loopback")), return;
 
     my ($min, $max) = (1, loopback::getFree($handle->{dir}, $real_part));
-    $max = min($max, 1 << (31 - 9)) if isFat($real_part); #- FAT doesn't handle file size bigger than 2GB
+    $max = min($max, 1 << (31 - 9)) if $real_part->{fs_type} eq 'vfat'; #- FAT doesn't handle file size bigger than 2GB
     my $part = { maxsize => $max, size => 0, loopback_device => $real_part, notFormatted => 1 };
     if (!fsedit::suggest_part($part, $all_hds)) {
 	$part->{size} = $part->{maxsize};
-	$part->{pt_type} ||= 0x483;
+	fs::type::suggest_fs_type($part, 'ext3');
     }
     delete $part->{mntpoint}; # we don't want the suggested mntpoint
 
-    my $type_name = part2name($part);
+    my $type_name = fs::type::part2type_name($part);
     my $mb_size = $part->{size} >> 11;
     $in->ask_from(N("Loopback"), '', [
 		  { label => N("Loopback file name: "), val => \$part->{loopback_file} },
 		  { label => N("Size in MB: "), val => \$mb_size, min => $min >> 11, max => $max >> 11, type => 'range' },
-		  { label => N("Filesystem type: "), val => \$type_name, list => [ partition_table::important_types() ], not_edit => !$::expert, sort => 0 },
+		  { label => N("Filesystem type: "), val => \$type_name, list => [ fs::type::type_names() ], not_edit => !$::expert, sort => 0 },
              ],
 	     complete => sub {
 		 $part->{loopback_file} or $in->ask_warn('', N("Give a file name")), return 1, 0;
@@ -894,7 +896,7 @@ sub Loopback {
 		 }
 		 0;
 	     }) or return;
-    $part->{pt_type} = name2pt_type($type_name);
+    put_in_hash($part, fs::type::type_name2subpart($type_name));
     push @{$real_part->{loopback}}, $part;
     fsedit::recompute_loopbacks($all_hds);
 }
@@ -1018,21 +1020,20 @@ sub partitions_suggestions {
     $fsedit::suggestions{$t};
 }
 
-sub check_pt_type {
-    my ($in, $pt_type, $hd, $part) = @_;
-    eval { fsedit::check_pt_type($pt_type, $hd, $part) };
+sub check_type {
+    my ($in, $type, $hd, $part) = @_;
+    eval { fsedit::check_fs_type($type->{fs_type}, $hd, $part) };
     if (my $err = $@) {
 	$in->ask_warn('', formatError($err));
 	return;
     }
     if ($::isStandalone) {
-	if (my $pkg = fsedit::package_needed_for_partition_type({ pt_type => $pt_type })) {
-	    my $fs = type2fs({ pt_type => $pt_type });
-	    if (!-x "/sbin/mkfs.$fs") {
+	if (my $pkg = fsedit::package_needed_for_partition_type($type)) {
+	    if (!-x "/sbin/mkfs.$type->{fs_type}") {
 		$in->ask_yesorno('', N("The package %s is needed. Install it?", $pkg), 1) or return;
 		$in->do_pkgs->install($pkg);
 	    }
-	    -x "/sbin/mkfs.$fs" or $in->ask_warn('', "Mandatory package $pkg is missing"), return;
+	    -x "/sbin/mkfs.$type->{fs_type}" or $in->ask_warn('', "Mandatory package $pkg is missing"), return;
 	}
     }
     1;
@@ -1052,7 +1053,7 @@ sub check_mntpoint {
 }
 sub check {
     my ($in, $hd, $part, $all_hds) = @_;
-    check_pt_type($in, $part->{pt_type}, $hd, $part) &&
+    check_type($in, $part, $hd, $part) &&
       check_mntpoint($in, $part->{mntpoint}, $hd, $part, $all_hds);
 }
 
@@ -1157,17 +1158,16 @@ sub format_part_info {
     $info .= N("Volume label: ") . "$part->{device_LABEL}\n" if $part->{device_LABEL} && $::expert;
     $info .= N("DOS drive letter: %s (just a guess)\n", $part->{device_windobe}) if $part->{device_windobe};
     if (arch() eq "ppc") {
-      my $new_value = $part->{pType};
-      $new_value =~ s/[^A-Za-z0-9_]//g;
-      $info .= N("Type: ") . $new_value . ($::expert ? sprintf " (0x%x)", $part->{pt_type} : '') . "\n";
-      if (defined $part->{pName}) {
-      	$new_value = $part->{pName};
-      	$new_value =~ s/[^A-Za-z0-9_]//g;
-      	$info .= N("Name: ") . $new_value . "\n";
-      }
+	my $pType = $part->{pType};
+	$pType =~ s/[^A-Za-z0-9_]//g;
+	$info .= N("Type: ") . $pType . ($::expert ? sprintf " (0x%x)", $part->{pt_type} : '') . "\n";
+	if (defined $part->{pName}) {
+	    my $pName = $part->{pName};
+	    $pName =~ s/[^A-Za-z0-9_]//g;
+	    $info .= N("Name: ") . $pName . "\n";
+	}
     } elsif ($part->{pt_type}) {
-	my $type_name = substr(part2name($part), 0, 40); # limit the length
-	$info .= N("Type: ") . $type_name . ($::expert ? sprintf " (0x%x)", $part->{pt_type} : '') . "\n";
+	$info .= N("Type: ") . (fs::type::part2type_name($part) || $part->{fs_type}) . ($::expert ? sprintf " (0x%x)", $part->{pt_type} : '') . "\n";
     } else {
 	$info .= N("Empty") . "\n";
     }
@@ -1232,8 +1232,7 @@ sub format_raw_hd_info {
     $info .= N("Mount point: ") . "$raw_hd->{mntpoint}\n" if $raw_hd->{mntpoint};
     $info .= format_hd_info($raw_hd);
     if ($raw_hd->{pt_type}) {
-	my $type_name = substr(part2name($raw_hd), 0, 40); # limit the length
-	$info .= N("Type: ") . $type_name . "\n";
+	$info .= N("Type: ") . (fs::type::part2type_name($raw_hd) || $raw_hd->{fs_type}) . "\n";
     }
     if (my $s = $raw_hd->{options}) {
 	$s =~ s/password=([^\s,]*)/'password=' . ('x' x length($1))/e;

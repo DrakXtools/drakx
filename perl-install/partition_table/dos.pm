@@ -185,7 +185,9 @@ sub read {
 
     my @pt = map {
 	sysread $F, $tmp, psizeof($format) or die "error while reading partition table in sector $sector";
-	my %h; @h{@fields} = unpack $format, $tmp;
+	my %h; 
+	@h{@fields} = unpack $format, $tmp;
+	fs::type::set_pt_type(\%h, $h{pt_type});
 	\%h;
     } (1..$nb_primary);
 

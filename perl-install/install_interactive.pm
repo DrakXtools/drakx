@@ -4,8 +4,9 @@ use diagnostics;
 use strict;
 
 use common;
-use partition_table qw(:types);
+use partition_table;
 use partition_table::raw;
+use fs::type;
 use detect_devices;
 use install_steps;
 use install_any;
@@ -107,7 +108,7 @@ sub partitionWizardSolutions {
 	push @wizlog, N("There is no existing partition to use");
     }
 
-    my @fats = grep { isFat($_) } @$fstab;
+    my @fats = grep { $_->{fs_type} eq 'vfat' } @$fstab;
     fs::df($_) foreach @fats;
     if (my @ok_forloopback = sort { $b->{free} <=> $a->{free} } grep { $_->{free} > $min_linux + $min_swap + $min_freewin } @fats) {
 	$solutions{loopback} = 
@@ -121,8 +122,8 @@ sub partitionWizardSolutions {
 		   { label => N("Swap partition size in MB: "), val => \$s_swap, min => $min_swap >> 11,  max => $max_swap >> 11, type => 'range' },
 		]) or return;
 		push @{$part->{loopback}}, 
-		  { pt_type =>0x483, loopback_file => '/lnx4win/linuxsys.img', mntpoint => '/',    size => $s_root << 11, loopback_device => $part, notFormatted => 1 },
-		  { pt_type => 0x82, loopback_file => '/lnx4win/swapfile',     mntpoint => 'swap', size => $s_swap << 11, loopback_device => $part, notFormatted => 1 };
+		  { fs_type => 'ext3', loopback_file => '/lnx4win/linuxsys.img', mntpoint => '/',    size => $s_root << 11, loopback_device => $part, notFormatted => 1 },
+		  { fs_type => 'swap', loopback_file => '/lnx4win/swapfile',     mntpoint => 'swap', size => $s_swap << 11, loopback_device => $part, notFormatted => 1 };
 		fsedit::recompute_loopbacks($all_hds);
 		1;
 	    } ];
@@ -141,7 +142,7 @@ sub partitionWizardSolutions {
 						  }, \&partition_table::description, \@ok_for_resize_fat) or return;
 		my $hd = fsedit::part2hd($part, $all_hds);
 		my $resize_fat = eval {
-		    my $pkg = isFat($part) ? do { 
+		    my $pkg = $part->{fs_type} eq 'vfat' ? do { 
 			require resize_fat::main;
 			'resize_fat::main';
 		    } : do {
@@ -192,9 +193,9 @@ When sure, press Ok."))) or return;
 		}
 
 		$o->ask_warn('', N("To ensure data integrity after resizing the partition(s), 
-filesystem checks will be run on your next boot into Windows(TM)")) if !isFat($part);
+filesystem checks will be run on your next boot into Windows(TM)")) if $part->{fs_type} ne 'vfat';
 
-		$part->{isFormatted} = 1;
+		set_isFormatted($part, 1);
 		partition_table::will_tell_kernel($hd, resize => $part); #- down-sizing, write_partitions is not needed
 		partition_table::adjust_local_extended($hd, $part);
 		partition_table::adjust_main_extended($hd);

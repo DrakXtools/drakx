@@ -8,7 +8,7 @@ use strict;
 #-######################################################################################
 use MDK::Common::System;
 use common;
-use partition_table qw(:types);
+use fs::type;
 use fs;
 use fsedit;
 use log;

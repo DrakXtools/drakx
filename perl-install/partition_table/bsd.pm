@@ -73,7 +73,7 @@ sub read($$) {
     my $size = psizeof($format);
     my @pt = map {
 	my %h; @h{@fields} = unpack $format, $_;
-	$h{pt_type} = $pt_typeToDos{$h{pt_type}} || $h{pt_type};
+	fs::type::set_pt_type(\%h, $pt_typeToDos{$h{pt_type}} || $h{pt_type});
 	\%h;
     } $info{partitions} =~ /(.{$size})/g;
 

@@ -7,6 +7,7 @@ use vars qw(@ISA $freepart $bootstrap_part $macos_part);
 @ISA = qw(partition_table::raw);
 
 use common;
+use fs::type;
 use partition_table::raw;
 use partition_table;
 use c;
@@ -139,7 +140,7 @@ sub read($$) {
                 $h{start} = ($h{pPBlockStart} * $info{bzBlkSize}) / 512;
 
                 if ($h{pType} =~ /^Apple_UNIX_SVR2/i) {
-                    $h{pName} =~ /swap/i ? ($h{pt_type} = 0x82) : ($h{pt_type} = 0x83);
+		    $h{fs_type} = $h{pName} =~ /swap/i ? 'swap' : 'ext2';
                 } elsif ($h{pType} =~ /^Apple_Free/i) {
                 	#- need to locate a 1MB partition to setup a bootstrap on
                 	if ($freepart && $freepart->{size} >= 1) {
@@ -151,7 +152,7 @@ sub read($$) {
 			$h{pt_type} = 0x0;
 			$h{pName} = 'Extra';                    
                 } elsif ($h{pType} =~ /^Apple_HFS/i) {
-                 	$h{pt_type} = 0x402;
+			fs::type::set_pt_type(\%h, 0x402);
                  	if (defined $macos_part) {		
                  		#- swag at identifying MacOS - 1st HFS partition
                  	} else {	
@@ -297,27 +298,27 @@ sub write($$$;$) {
 		log::l("writing a bootstrap at /dev/$_->{device}");
 		$install_steps_interactive::new_bootstrap = 1 if !(defined $partition_table::mac::bootstrap_part);
 		$bootstrap_part = "/dev/" . $_->{device};
-            } elsif ($_->{pt_type} == 0x82) {
+            } elsif (isSwap($_)) {
                 $_->{pType} = "Apple_UNIX_SVR2";
                 $_->{pName} = "swap";
                 $_->{pFlags} = 0x33;
-            } elsif ($_->{pt_type} == 0x83) {
+            } elsif ($_->{fs_type} eq 'ext2') {
                 $_->{pType} = "Apple_UNIX_SVR2";
                 $_->{pName} = "Linux Native";
                 $_->{pFlags} = 0x33;
-            } elsif ($_->{pt_type} == 0x183) {
+            } elsif ($_->{fs_type} eq 'reiserfs') {
                 $_->{pType} = "Apple_UNIX_SVR2";
                 $_->{pName} = "Linux ReiserFS";
                 $_->{pFlags} = 0x33;
-            } elsif ($_->{pt_type} == 0x283) {
+            } elsif ($_->{fs_type} eq 'xfs') {
                 $_->{pType} = "Apple_UNIX_SVR2";
                 $_->{pName} = "Linux XFS";
                 $_->{pFlags} = 0x33;
-            } elsif ($_->{pt_type} == 0x383) {
+            } elsif ($_->{fs_type} eq 'jfs') {
                 $_->{pType} = "Apple_UNIX_SVR2";
                 $_->{pName} = "Linux JFS";
                 $_->{pFlags} = 0x33;
-            } elsif ($_->{pt_type} == 0x483) {
+            } elsif ($_->{fs_type} eq 'ext3') {
                 $_->{pType} = "Apple_UNIX_SVR2";
                 $_->{pName} = "Linux ext3";
                 $_->{pFlags} = 0x33;

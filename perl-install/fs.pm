@@ -8,7 +8,7 @@ use MDK::Common::Various;
 use common;
 use log;
 use devices;
-use partition_table qw(:types);
+use fs::type;
 use run_program;
 use detect_devices;
 use modules;
@@ -46,12 +46,11 @@ sub read_fstab {
 
 	$options = 'defaults' if $options eq 'rw'; # clean-up for mtab read
 
-	my $pt_type = fs2pt_type($fs_type);
-	if ($pt_type eq 'supermount') {
+	if ($fs_type eq 'supermount') {
 	    # normalize this bloody supermount
 	    $options = join(",", 'supermount', grep {
 		if (/fs=(.*)/) {
-		    $pt_type = $1;
+		    $fs_type = $1;
 		    0;
 		} elsif (/dev=(.*)/) {
 		    $dev = $1;
@@ -62,15 +61,15 @@ sub read_fstab {
 		    1;
 		}
 	    } split(',', $options));
-	} elsif ($pt_type eq 'smb') {
+	} elsif ($fs_type eq 'smb') {
 	    # prefering type "smbfs" over "smb"
-	    $pt_type = 'smbfs';
+	    $fs_type = 'smbfs';
 	}
 	$mntpoint =~ s/\\040/ /g;
 	$dev =~ s/\\040/ /g;
 
 	my $h = { 
-		 mntpoint => $mntpoint, pt_type => $pt_type,
+		 mntpoint => $mntpoint, fs_type => $fs_type,
 		 options => $options, comment => $comment,
 		 if_(member('keep_freq_passno', @reading_options), freq => $freq, passno => $passno),
 		};
@@ -110,16 +109,15 @@ sub merge_fstabs {
 
 	$p->{mntpoint} = $p2->{mntpoint} if delete $p->{unsafeMntpoint};
 
-	$p->{pt_type} = $p2->{pt_type} if $p2->{pt_type} && !$loose;
+	$p->{fs_type} = $p2->{fs_type} if $p2->{fs_type} && !$loose;
 	$p->{options} = $p2->{options} if $p2->{options} && !$loose;
 	#- important to get isMounted property else DrakX may try to mount already mounted partitions :-(
 	add2hash($p, $p2);
 	$p->{device_alias} ||= $p2->{device_alias} || $p2->{device} if $p->{device} ne $p2->{device} && $p2->{device} !~ m|/|;
 
-	$p->{pt_type} && $p2->{pt_type} && $p->{pt_type} ne $p2->{pt_type} && type2fs($p) ne type2fs($p2) &&
-	  $p->{pt_type} ne 'auto' && $p2->{pt_type} ne 'auto' and
-	    log::l("err, fstab and partition table do not agree for $p->{device} type: " .
-		   (type2fs($p) || part2name($p)) . " vs ", (type2fs($p2) || part2name($p2)));
+	$p->{fs_type} && $p2->{fs_type} && $p->{fs_type} ne $p2->{fs_type}
+	  && $p->{fs_type} ne 'auto' && $p2->{fs_type} ne 'auto' and
+	    log::l("err, fstab and partition table do not agree for $p->{device} type: $p->{fs_type} vs $p2->{fs_type}");
     }
     @l;
 }
@@ -180,9 +178,9 @@ sub add2all_hds {
 
     foreach (@l) {
 	my $s = 
-	    isThisFs('nfs', $_) ? 'nfss' :
-	    isThisFs('smbfs', $_) ? 'smbs' :
-	    isThisFs('davfs', $_) ? 'davs' :
+	    $_->{fs_type} eq 'nfs' ? 'nfss' :
+	    $_->{fs_type} eq 'smbfs' ? 'smbs' :
+	    $_->{fs_type} eq 'davfs' ? 'davs' :
 	    isTrueLocalFS($_) || isSwap($_) || isOtherAvailableFS($_) ? '' :
 	    'special';
 	push @{$all_hds->{$s}}, $_ if $s;
@@ -200,9 +198,9 @@ sub merge_info_from_mtab {
     my ($fstab) = @_;
 
     my @l1 = map { my $l = $_; 
-		   my %l = (pt_type => fs2pt_type('swap')); 
-		   $l{$_} = $l->{$_} foreach qw(device major minor); 
-		   \%l;
+		   my $h = fs::type::fs_type2subpart('swap');
+		   $h->{$_} = $l->{$_} foreach qw(device major minor); 
+		   $h;
 	       } read_fstab('', '/proc/swaps');
     
     my @l2 = map { read_fstab('', $_) } '/etc/mtab', '/proc/mounts';
@@ -216,7 +214,8 @@ sub merge_info_from_mtab {
 		$_->{mntpoint} = common::usingRamdisk() && "/mnt/hd"; #- remap for hd install.
 	    }
 	}
-	$_->{isMounted} = $_->{isFormatted} = 1;
+	$_->{isMounted} = 1;
+	set_isFormatted($_, 1);
 	delete $_->{options};
     } 
     merge_fstabs('loose', $fstab, @l1, @l2);
@@ -255,7 +254,7 @@ sub prepare_write_fstab {
 	my $device = 
 	  isLoopback($_) ? 
 	      ($_->{mntpoint} eq '/' ? "/initrd/loopfs" : $_->{loopback_device}{mntpoint}) . $_->{loopback_file} :
-	  part2device($o_prefix, $_->{prefer_devfs_name} ? $_->{devfs_device} : $_->{device}, $_->{pt_type});
+	  part2device($o_prefix, $_->{prefer_devfs_name} ? $_->{devfs_device} : $_->{device}, $_->{fs_type});
 
 	my $real_mntpoint = $_->{mntpoint} || ${{ '/tmp/hdimage' => '/mnt/hd' }}{$_->{real_mntpoint}};
 	mkdir_p("$o_prefix$real_mntpoint") if $real_mntpoint =~ m|^/|;
@@ -275,7 +274,7 @@ sub prepare_write_fstab {
 
 	    my $options = $_->{options};
 
-	    if (isThisFs('smbfs', $_) && $options =~ /password=/ && !$b_keep_smb_credentials) {
+	    if ($_->{fs_type} eq 'smbfs' && $options =~ /password=/ && !$b_keep_smb_credentials) {
 		require network::smb;
 		if (my ($opts, $smb_credentials) = network::smb::fstab_entry_to_credentials($_)) {
 		    $options = $opts;
@@ -283,7 +282,7 @@ sub prepare_write_fstab {
 		}
 	    }
 
-	    my $fs_type = type2fs($_, 'auto');
+	    my $fs_type = $_->{fs_type} || 'auto';
 
 	    my $dev = 
 	      $_->{prefer_device_LABEL} ? 'LABEL=' . $_->{device_LABEL} :
@@ -309,7 +308,7 @@ sub prepare_write_fstab {
 	} else {
 	    ()
 	}
-    } grep { $_->{device} && ($_->{mntpoint} || $_->{real_mntpoint}) && $_->{pt_type} && ($_->{isFormatted} || !$_->{notFormatted}) } @$fstab;
+    } grep { $_->{device} && ($_->{mntpoint} || $_->{real_mntpoint}) && $_->{fs_type} && ($_->{isFormatted} || !$_->{notFormatted}) } @$fstab;
 
     join('', map { $_->[1] } sort { $a->[0] cmp $b->[0] } @l), \@smb_credentials;
 }
@@ -331,8 +330,8 @@ sub write_fstab {
 }
 
 sub part2device {
-    my ($prefix, $dev, $pt_type) = @_;
-    $dev eq 'none' || member($pt_type, qw(nfs smbfs davfs)) ? 
+    my ($prefix, $dev, $fs_type) = @_;
+    $dev eq 'none' || member($fs_type, qw(nfs smbfs davfs)) ? 
       $dev : 
       do {
 	  my $dir = $dev =~ m!^(/|LABEL=)! ? '' : '/dev/';
@@ -373,13 +372,13 @@ sub mount_options_unpack {
     push @{$per_fs{$_}}, 'usrquota', 'grpquota' foreach 'ext2', 'ext3', 'xfs';
 
     while (my ($fs, $l) = each %per_fs) {
-	isThisFs($fs, $part) || $part->{pt_type} eq 'auto' && member($fs, @auto_fs) or next;
+	$part->{fs_type} eq $fs || $part->{fs_type} eq 'auto' && member($fs, @auto_fs) or next;
 	$non_defaults->{$_} = 1 foreach @$l;
     }
 
     $non_defaults->{encrypted} = 1 if !$part->{isFormatted} || isSwap($part);
 
-    $non_defaults->{supermount} = 1 if $part->{pt_type} =~ /:/ || member(type2fs($part), 'auto', @auto_fs);
+    $non_defaults->{supermount} = 1 if $part->{fs_type} =~ /:/ || member($part->{fs_type}, 'auto', @auto_fs);
 
     my $defaults = { reverse %$non_defaults };
     my %options = map { $_ => '' } keys %$non_defaults;
@@ -489,7 +488,7 @@ sub rationalize_options {
 
     my ($options, $unknown) = mount_options_unpack($part);
 
-    if (!isThisFs('reiserfs', $part)) {
+    if ($part->{fs_type} ne 'reiserfs') {
 	$options->{notail} = 0;
     }
 
@@ -504,8 +503,8 @@ sub set_default_options {
 
     if ($part->{is_removable}) {
 	$options->{supermount} = $opts{useSupermount} && !($opts{useSupermount} eq 'magicdev' && $part->{media_type} eq 'cdrom');
-	$part->{pt_type} = !$options->{supermount} ? 'auto' :
-	  $part->{media_type} eq 'cdrom' ? 'udf:iso9660' : 'ext2:vfat';
+	$part->{fs_type} = !$options->{supermount} ? 'auto' :
+		    $part->{media_type} eq 'cdrom' ? 'udf:iso9660' : 'ext2:vfat';
     }
 
     if ($part->{media_type} eq 'cdrom') {
@@ -524,15 +523,15 @@ sub set_default_options {
 	#- news spool to speed up news servers).
 	$options->{noatime} = detect_devices::isLaptop();
     }
-    if (isThisFs('nfs', $part)) {
+    if ($part->{fs_type} eq 'nfs') {
 	put_in_hash($options, { 
 			       nosuid => 1, 'rsize=8192,wsize=8192' => 1, soft => 1,
 			      });
     }
-    if (isThisFs('smbfs', $part)) {
+    if ($part->{fs_type} eq 'smbfs') {
 	add2hash($options, { 'username=' => '%' }) if !$options->{'credentials='};
     }
-    if (isFat($part) || member('vfat', split(':', $part->{pt_type})) || isThisFs('auto', $part)) {
+    if (member('vfat', split(':', $part->{fs_type})) || $part->{fs_type} eq 'auto') {
 
 	put_in_hash($options, {
 			       user => 1, noexec => 0,
@@ -543,15 +542,15 @@ sub set_default_options {
 			       'iocharset=' => $opts{iocharset}, 'codepage=' => $opts{codepage},
 			      });
     }
-    if (isThisFs('ntfs', $part)) {
+    if ($part->{fs_type} eq 'ntfs') {
 	put_in_hash($options, { ro => 1, 'nls=' => $opts{iocharset},
 				'umask=0' => $opts{security} < 3, 'umask=0022' => $opts{security} < 4,
 			      });
     }
-    if (member('iso9660', split(':', $part->{pt_type})) || isThisFs('auto', $part)) {
+    if (member('iso9660', split(':', $part->{fs_type})) || $part->{fs_type} eq 'auto') {
 	put_in_hash($options, { user => 1, noexec => 0, 'iocharset=' => $opts{iocharset} });
     }
-    if (isThisFs('reiserfs', $part)) {
+    if ($part->{fs_type} eq 'reiserfs') {
 	$options->{notail} = 1;
     }
     if (isLoopback($part) && !isSwap($part)) { #- no need for loop option for swap files
@@ -607,13 +606,13 @@ sub get_raw_hds {
     get_major_minor(@{$all_hds->{raw_hds}});
 
     my @fstab = read_fstab($prefix, '/etc/fstab', 'keep_default');
-    $all_hds->{nfss} = [ grep { isThisFs('nfs', $_) } @fstab ];
-    $all_hds->{smbs} = [ grep { isThisFs('smbfs', $_) } @fstab ];
-    $all_hds->{davs} = [ grep { isThisFs('davfs', $_) } @fstab ];
+    $all_hds->{nfss} = [ grep { $_->{fs_type} eq 'nfs' } @fstab ];
+    $all_hds->{smbs} = [ grep { $_->{fs_type} eq 'smbfs' } @fstab ];
+    $all_hds->{davs} = [ grep { $_->{fs_type} eq 'davfs' } @fstab ];
     $all_hds->{special} = [
-       (grep { isThisFs('tmpfs', $_) } @fstab),
-       { device => 'none', mntpoint => '/proc', pt_type => 'proc' },
-       { device => 'none', mntpoint => '/dev/pts', pt_type => 'devpts', options => 'mode=0620' },
+       (grep { $_->{fs_type} eq 'tmpfs' } @fstab),
+       { device => 'none', mntpoint => '/proc', fs_type => 'proc' },
+       { device => 'none', mntpoint => '/dev/pts', fs_type => 'devpts', options => 'mode=0620' },
     ];
 }
 
@@ -676,7 +675,7 @@ sub mount {
 
     $dev = part2device('', $dev, $fs);
 
-    $fs ne 'skip' or log::l("not mounting $dev partition"), return;
+    $fs or log::l("not mounting $dev partition"), return;
 
     my @fs_modules = qw(vfat hfs romfs ufs reiserfs xfs jfs ext3);
 
@@ -791,11 +790,12 @@ sub mount_part {
 		$mntpoint = "/initrd/loopfs";
 	    }
 	    my $dev = $part->{real_device} || $part->{device};
-	    mount($dev, $mntpoint, type2fs($part, 'skip'), $b_rdonly, $part->{options}, $o_wait_message);
+	    mount($dev, $mntpoint, $part->{fs_type}, $b_rdonly, $part->{options}, $o_wait_message);
 	    rmdir "$mntpoint/lost+found";
 	}
     }
-    $part->{isMounted} = $part->{isFormatted} = 1; #- assume that if mount works, partition is formatted
+    $part->{isMounted} = 1;
+    set_isFormatted($part, 1); #- assume that if mount works, partition is formatted
 }
 
 sub umount_part {
@@ -841,10 +841,9 @@ sub df {
 	return; #- won't even try!
     } else {
 	mkdir_p($dir);
-	eval { mount($part->{device}, $dir, type2fs($part, 'skip'), 'readonly') };
+	eval { mount($part->{device}, $dir, $part->{fs_type}, 'readonly') };
 	if ($@) {
-	    $part->{notFormatted} = 1;
-	    $part->{isFormatted} = 0;
+	    set_isFormatted($part, 0);
 	    unlink $dir;
 	    return;
 	}

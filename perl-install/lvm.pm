@@ -10,6 +10,7 @@ use common;
 use modules;
 use fsedit;
 use devices;
+use fs::type;
 use run_program;
 
 #- for partition_table_xxx emulation
@@ -92,10 +93,10 @@ sub get_lvs {
       [
        map {
 	   my $device = "$lvm->{VG_name}/$_";
-	   my $pt_type = -e "/dev/$device" && fsedit::typeOfPart($device);
+	   my $fs_type = -e "/dev/$device" && fs::type::fs_type_from_magic({ device => $device });
 
 	   { device => $device, 
-	     pt_type => $pt_type || 0x83,
+	     fs_type => $fs_type || 'ext2',
 	     size => get_lv_size($device) }
        } @l
       ];
@@ -117,8 +118,7 @@ sub vg_destroy {
     lvm_cmd_or_die('vgremove', $lvm->{VG_name});
     foreach (@{$lvm->{disks}}) {
 	delete $_->{lvm};
-	$_->{isFormatted} = 0;
-	$_->{notFormatted} = 1;	
+	set_isFormatted($_, 0);
     }
 }
 
@@ -138,8 +138,7 @@ sub lv_create {
     $lv->{device} = "$lvm->{VG_name}/$lv->{lv_name}";
     lvm_cmd_or_die('lvcreate', '--size', int($lv->{size} / 2) . 'k', '-n', $lv->{lv_name}, $lvm->{VG_name});
     $lv->{size} = get_lv_size($lv->{device}); #- the created size is smaller than asked size
-    $lv->{notFormatted} = 1;
-    $lv->{isFormatted} = 0;
+    set_isFormatted($lv, 0);
     push @$list, $lv;
 }
 

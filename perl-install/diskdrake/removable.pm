@@ -43,11 +43,11 @@ sub mount_point {
 sub type {
     my ($in, $raw_hd) = @_;
     my @fs = ('auto', fs::auto_fs());
-    my $pt_type = $raw_hd->{pt_type};
+    my $fs_type = $raw_hd->{fs_type};
     $in->ask_from(N("Change type"),
 			      N("Which filesystem do you want?"),
-			      [ { label => N("Type"), val => \$pt_type, list => [@fs], not_edit => !$::expert } ]) or return;
-    $raw_hd->{pt_type} = $pt_type;
+			      [ { label => N("Type"), val => \$fs_type, list => [@fs], not_edit => !$::expert } ]) or return;
+    $raw_hd->{fs_type} = $fs_type;
 }
 
 1;

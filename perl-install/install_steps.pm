@@ -9,8 +9,9 @@ use vars qw(@filesToSaveForUpgrade @filesNewerToUseAfterUpgrade);
 #-######################################################################################
 use common;
 use install_any qw(:all);
-use partition_table qw(:types);
+use partition_table;
 use detect_devices;
+use fs::type;
 use modules;
 use run_program;
 use lang;
@@ -215,7 +216,7 @@ sub doPartitionDisksAfter {
 
     cat_("/proc/mounts") =~ m|(\S+)\s+/tmp/nfsimage| &&
       !any { $_->{mntpoint} eq "/mnt/nfs" } @{$o->{all_hds}{nfss}} and
-	push @{$o->{all_hds}{nfss}}, { pt_type => 'nfs', mntpoint => "/mnt/nfs", device => $1, options => "noauto,ro,nosuid,soft,rsize=8192,wsize=8192" };
+	push @{$o->{all_hds}{nfss}}, { fs_type => 'nfs', mntpoint => "/mnt/nfs", device => $1, options => "noauto,ro,nosuid,soft,rsize=8192,wsize=8192" };
 }
 
 #------------------------------------------------------------------------------
@@ -243,7 +244,7 @@ sub ask_mntpoint_s {#-}}}
 	$m{$m} = 1;
 
 	#- in case the type does not correspond, force it to ext3
-	$_->{pt_type} = 0x483 if $m =~ m|^/| && !isTrueFS($_) && !isOtherAvailableFS($_);
+	fs::type::set_fs_type($_, 'ext3') if $m =~ m|^/| && !isTrueFS($_) && !isOtherAvailableFS($_);
     }
     1;
 }
@@ -266,10 +267,8 @@ sub choosePartitionsToFormat($$) {
         $_->{$::recovery ? 'toFormat' : 'toFormatUnsure'} ||= member($_->{mntpoint}, '/', '/usr');
 
 	if (!$_->{toFormat}) {
-	    my $t = fsedit::typeOfPart($_->{device});
-	    $_->{toFormatUnsure} ||=
-	      #- if detected dos/win, it's not precise enough to just compare the types (too many of them)
-	      (!$t || isOtherAvailableFS({ pt_type => $t }) ? !isOtherAvailableFS($_) : $t != $_->{pt_type});
+	    my $fs_type = fs::type::fs_type_from_magic($_);
+	    $_->{toFormatUnsure} ||= !$fs_type || $fs_type ne $_->{fs_type};
 	}
     }
 }

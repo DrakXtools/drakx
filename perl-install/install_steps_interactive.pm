@@ -12,8 +12,8 @@ use vars qw(@ISA $new_bootstrap);
 #- misc imports
 #-######################################################################################
 use common;
-use partition_table qw(:types);
-use partition_table::raw;
+use partition_table;
+use fs::type;
 use install_steps;
 use install_interactive;
 use install_any;
@@ -286,7 +286,9 @@ sub doPartitionDisks {
 		log::l("creating bootstrap partition on drive /dev/$freepart->{hd}{device}, block $freepart->{start}");
 		$partition_table::mac::bootstrap_part = $freepart->{part};	
 		log::l("bootstrap now at $partition_table::mac::bootstrap_part");
-		fsedit::add($freepart->{hd}, { start => $freepart->{start}, size => 1 << 11, pt_type => 0x401, mntpoint => '' }, $o->{all_hds}, { force => 1, primaryOrExtended => 'Primary' });
+                my $p = { start => $freepart->{start}, size => 1 << 11, mntpoint => '' };
+                fs::type::set_pt_type($p, 0x401);
+		fsedit::add($freepart->{hd}, $p, $o->{all_hds}, { force => 1, primaryOrExtended => 'Primary' });
 		$new_bootstrap = 1;    
 	    } else {
 		$o->ask_warn('', N("No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"));
@@ -335,7 +337,7 @@ sub choosePartitionsToFormat {
 	    ({
 	      text => partition_table::description($e), type => 'bool',
 	      val => \$e->{toFormatTmp}
-	     }, if_(!isLoopback($_) && !isThisFs("reiserfs", $_) && !isThisFs("xfs", $_) && !isThisFs("jfs", $_), {
+	     }, if_(!isLoopback($_) && !member($_->{fs_type}, 'reiserfs', 'xfs', 'jfs'), {
 	      text => partition_table::description($e), type => 'bool', advanced => 1, 
 	      disabled => sub { !$e->{toFormatTmp} },
 	      val => \$e->{toFormatCheck}
@@ -344,7 +346,7 @@ sub choosePartitionsToFormat {
     #- ok now we can really set toFormat
     foreach (@l) {
 	$_->{toFormat} = delete $_->{toFormatTmp};
-	$_->{isFormatted} = 0;
+	set_isFormatted($_, 0);
     }
 }
 
@@ -1251,7 +1253,7 @@ sub miscellaneous {
 	require security::level;
 	security::level::level_choose($o, \$o->{security}, \$o->{libsafe}, \$o->{security_user});
 
-	if ($o->{security} > 2 && find { isFat($_) } @{$o->{fstab}}) {
+	if ($o->{security} > 2 && find { $_->{fs_type} eq 'vfat' } @{$o->{fstab}}) {
 	    $o->ask_okcancel('', N("In this security level, access to the files in the Windows partition is restricted to the administrator."))
 	      or goto &miscellaneous;
 	}
