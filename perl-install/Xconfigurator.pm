@@ -256,14 +256,13 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 	$_->{memory} = 4096,  delete $_->{depth} if $_->{driver} eq 'i810';
 	$_->{memory} = 16384, delete $_->{depth} if $_->{chipset} =~ /PERMEDIA/ && $_->{memory} <= 1024;
     }
-
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX.
     $card->{Utah_glx} = ($card->{identifier} =~ /Matrox.* G[24][05]0/ || #- 8bpp does not work.
 			 $card->{identifier} =~ /Riva.*128/ ||
 			 $card->{identifier} =~ /Rage X[CL]/ ||
 			 $card->{identifier} =~ /3D Rage (?:LT|Pro)/);
                          #- NOT WORKING $card->{type} =~ /Intel 810/);
-    $card->{Utah_glx} = '' if arch() =~ /ppc/; #- No #D XFree 3.3 for PPC
+    $card->{Utah_glx} = '' if arch() =~ /ppc/; #- No 3D XFree 3.3 for PPC
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX but EXPERIMENTAL that may freeze the machine (FOR INFO NOT USED).
     $card->{Utah_glx_EXPERIMENTAL} = ($card->{type} =~ /RIVA TNT/ || #- all RIVA/GeForce comes from NVIDIA and may freeze (gltron).
 				      #$card->{type} =~ /RIVA128/ ||
@@ -290,7 +289,6 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 							       $card->{identifier} =~ /[nN]Vidia.*GeForce/ || #- GeForce cards
 							       $card->{identifier} =~ /[nN]Vidia.*NV1[15]/ ||
 							       $card->{identifier} =~ /[nN]Vidia.*Quadro/);
-
     #- check to use XFree 4.0 or XFree 3.3.
     $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported};
     $card->{force_xf4} = arch() =~ /ppc/; #- try to figure out ugly hack for PPC (recommend XF4 always so...)
@@ -319,7 +317,6 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 					    code => sub { $card->{Utah_glx} = $card->{DRI_glx} = $card->{NVIDIA_glx} = '';
 							  log::l("Using XFree $xf4_ver") } }),
 				      if_(!$card->{prefer_xf3} && $::expert, $xf3_tc)) : $xf3_tc;
-
     #- try to figure if 3D acceleration is supported
     #- by XFree 3.3 but not XFree 4.0 then ask user to keep XFree 3.3 ?
     if ($card->{Utah_glx}) {
@@ -364,7 +361,11 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 	unshift @choices, { text => _("XFree %s with 3D hardware acceleration", $xf4_ver),
 			    code => sub { log::l("Using XFree $xf4_ver with 3D hardware acceleration") } };
     }
-
+    if (arch() =~ /ppc/) {
+	#- not much choice for PPC - we only have XF4    
+	@choices = { text => _("XFree %s", $xf4_ver), code => '' };
+	log::l("Using XFree $xf4_ver");
+    }
     #- examine choice of user, beware the list MUST NOT BE REORDERED AS the first item should be the
     #- proposed one by DrakX.
     my $tc = $in->ask_from_listf(_("XFree configuration"), formatAlaTeX($msg), sub { translate($_[0]{text}) }, \@choices) or return;

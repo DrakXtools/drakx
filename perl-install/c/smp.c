@@ -64,6 +64,34 @@ int sparcDetectSMP(void)
 }
 #endif /* __sparc__ */
 
+/* just a placeholder for now - don't have an SMP machine
+   need something in place to build - s.benedict */
+
+#ifdef __powerpc__
+int ppcDetectSMP(void)
+{
+    int issmp = 0;
+    FILE *f;
+    
+    f = fopen("/proc/cpuinfo", "r");
+    if (f) {     
+        char buff[1024];
+        
+        while (fgets (buff, 1024, f) != NULL) {
+            if (!strncmp (buff, "ncpus active\t: ", 15)) {
+                if (strtoul (buff + 15, NULL, 0) > 1)
+                    issmp = 1;
+                break;
+            }
+        }
+        fclose(f);
+    } else
+        return -1;
+    
+    return issmp;
+}
+#endif /* __powerpc__ */
+
 #ifdef __i386__
 /*
  * Copyright (c) 1996, by Steve Passe
@@ -458,6 +486,8 @@ int detectSMP(void)
     return isSMP = sparcDetectSMP();
 #elif __alpha__
     return isSMP = alphaDetectSMP();
+#elif __powerpc__
+    return isSMP = ppcDetectSMP();
 #elif __ia64__
     return isSMP = 1;
 #else
