@@ -948,10 +948,7 @@ sub ask_info2 {
 
 sub ask_info3 {
     my ($title, $text, $section) = @_;
-	$in->ask_from('',
-N("Add a Security Policy.\n
-You can now add a new Security Policy.\n
-Choose continue when you are done to write the data.\n"),
+	$in->ask_from($title, $text,
 	[	{ label => N("Command"), val => \$section->{command}, list => [ 'spdadd' ], allow_empty_list => 1 },
 		{ label => N("Source IP range"), val => \$section->{src_range}, type => 'entry' },
 		{ label => N("Destination IP range"), val => \$section->{dst_range}, type => 'entry' },
