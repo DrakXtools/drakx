@@ -388,7 +388,7 @@ sub afterInstallPackages($) {
 sub configureNetwork($) {
     my ($o, $first_time) = @_;
     local $_;
-    if ($o->{intf} && $first_time) {
+    if (@{$o->{intf}} > 0 && $first_time) {
 	my @l = (
 		 __("Keep the current IP configuration"),
 		 __("Reconfigure network now"),
