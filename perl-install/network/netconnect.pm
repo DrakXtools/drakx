@@ -425,6 +425,7 @@ killall pppd
                         $modem ||= $netcnx->{$netcnx->{type}};
                         $modem->{device} ||= $first_modem->()->{device};
                         my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
+                        $l{Authentication} = 4 if !exists $l{Authentication};
                         $modem->{auth} ||= { 0 => N("Script-based"), 1 => N("PAP"), 2 => N("Terminal-based"), 3 => N("CHAP"), 4 => N("PAP/CHAP") }->{$l{Authentication}};
                         $modem->{$_} ||= $l{$_} foreach qw(Gateway IPAddr SubnetMask);
                         $modem->{connection} ||= $l{Name};
