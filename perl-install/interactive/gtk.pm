@@ -402,8 +402,8 @@ sub ask_fromW {
 	$set_all->();
     };
 
-    my $label_sizegrp = Gtk2::SizeGroup->new('horizontal');
-    my $realw_sizegrp = Gtk2::SizeGroup->new('horizontal');
+    my @label_sizegrp = map { Gtk2::SizeGroup->new('horizontal') } 0 .. 1;
+    my @realw_sizegrp = map { Gtk2::SizeGroup->new('horizontal') } 0 .. 1;
 
     my $create_widget = sub {
 	my ($e, $ind) = @_;
@@ -585,8 +585,8 @@ sub ask_fromW {
 	$real_w ||= $w;
 	$real_w = gtkpack_(Gtk2::HBox->new,
 			   if_($e->{icon}, 0, eval { gtkcreate_img($e->{icon}) }),
-			   0, gtkadd_widget($label_sizegrp, $e->{label}),
-			   1, gtkadd_widget($realw_sizegrp, $real_w),
+			   0, gtkadd_widget($label_sizegrp[$e->{advanced} ? 1 : 0], $e->{label}),
+			   1, gtkadd_widget($realw_sizegrp[$e->{advanced} ? 1 : 0], $real_w),
 			  ) if !$real_w->isa("Gtk2::CheckButton") || $e->{icon} || $e->{label};
 
 	{ e => $e, w => $w, real_w => $real_w, focus_w => $focus_w || $w,
