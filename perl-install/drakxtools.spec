@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 19mdk
+Release: 20mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -303,6 +303,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Mar 12 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-20mdk
+- drakedm: install dm if needed
+- harddrake service: handle multiple remvable devices in the same hw
+  class (eg: 2+ cd burners or 2+ dvd drives or 2 floppies, ...)
+- drakgw: really use the chosen net_connect interface (florin)
+- drakbackup: gtk2 port fixes (stew)
+- drakboot: fix #3048 (pixel)
+
 * Tue Mar 11 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-19mdk
 - ugtk2: fix still seldom happening #1445 (clicking two times too
   fast) (gc)
@@ -312,7 +320,6 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   both standalone and embedded modes (tv)
 - printerdrake fixes (till)
 - translation updates
-- drakboot: fix #3048 (pixel)
 
 * Fri Mar  7 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.1-18mdk
 - ugtk2.pm: fix rpmdrake dumping core when multiple searchs in some
