@@ -222,12 +222,23 @@ sub configure_auto_install {
     $default_resolution;
 }
 
+sub resolution2ratio {
+    my ($resolution) = @_;
+    $Xconfig::xfree::resolution2ratio{$resolution->{X} . 'x' . $resolution->{Y}};
+}
+
 sub choose_gtk {
     my ($in, $card, $default_resolution, @resolutions) = @_;
 
+    $_->{ratio} ||= resolution2ratio($_) foreach @resolutions;
+
     my $chosen_Depth = $default_resolution->{Depth};
     my $chosen_res = { X => $default_resolution->{X} || 640, Y => $default_resolution->{Y} };
+    my $chosen_ratio = resolution2ratio($chosen_res) || '4/3';
 
+    my $filter_on_ratio = sub {
+	grep { $_->{ratio} eq $chosen_ratio } @_;
+    };
     my $filter_on_Depth = sub {
 	grep { $_->{Depth} == $chosen_Depth } @_;
     };
@@ -252,26 +263,45 @@ sub choose_gtk {
 	%h;
     };
 
+    my $res2text = sub { "$_[0]{X}x$_[0]{Y}" };
+    my @matching_ratio;
+    my $proposed_resolutions = [];
+    my $set_proposed_resolutions = sub {
+	@matching_ratio = $filter_on_ratio->(@resolutions);
+	gtkval_modify(\$proposed_resolutions, 
+		      [ reverse uniq_ { $res2text->($_) } @matching_ratio ]);
+	if (!$filter_on_res->(@matching_ratio)) {	    
+	    my $res = find { $_->{X} == $chosen_res->{X} } @matching_ratio;
+	    gtkval_modify(\$chosen_res, $res || $matching_ratio[0]);
+	}
+    };
+    $set_proposed_resolutions->();
+
+    my $ratio_combo = gtknew('ComboBox',
+			     text_ref => \$chosen_ratio,
+			     format => \&translate,
+			     list => [ keys %Xconfig::xfree::ratio2resolutions ],
+			     changed => $set_proposed_resolutions,
+			     );
+
     my $depth_combo = gtknew('ComboBox', width => 220, 
 			     text_ref => \$chosen_Depth,
 			     format => sub { translate($depth2text{$_[0]}) },
-			     list => [ uniq(sort_numbers(map { $_->{Depth} } @resolutions)) ],
+			     list => [ uniq(reverse map { $_->{Depth} } @resolutions) ],
 			     changed => sub {
-				 my @matching_Depth = $filter_on_Depth->(@resolutions);
+				 my @matching_Depth = $filter_on_Depth->(@matching_ratio);
 				 if (!$filter_on_res->(@matching_Depth)) {
-				     my ($res) = sort { $b->{X} <=> $a->{X} } @matching_Depth;
-				     gtkval_modify(\$chosen_res, $res);
+				     gtkval_modify(\$chosen_res, $matching_Depth[0]);
 				 }
 			     });
-    my $res2text = sub { "$_[0]{X}x$_[0]{Y}" };
     my $res_combo = gtknew('ComboBox', 
 			   text_ref => \$chosen_res,
 			   format => $res2text,
-			   list => [ uniq_ { $res2text->($_) } sort { $a->{X} <=> $b->{X} } @resolutions ],
+			   list_ref => \$proposed_resolutions,
 			   changed => sub {
-			       my @matching_res = $filter_on_res->(@resolutions);
+			       my @matching_res = $filter_on_res->(@matching_ratio);
 			       if (!$filter_on_Depth->(@matching_res)) {
-				   gtkval_modify(\$chosen_Depth, max(map { $_->{Depth} } @matching_res));
+				   gtkval_modify(\$chosen_Depth, $matching_res[0]{Depth});
 			       }
 			   });
     my $pix_colors = gtknew('Image', 
@@ -296,6 +326,7 @@ sub choose_gtk {
 			  1, '',
 			  0, gtknew('Table', col_spacings => 5, row_spacings => 5, 
 				    children => [
+						 [ $ratio_combo, gtknew('Label', text => "") ],
 						 [ $res_combo, gtknew('Label', text => "") ],
 						 [ $depth_combo, gtknew('Frame', shadow_type => 'etched_out', child => $pix_colors) ],
 						]),
