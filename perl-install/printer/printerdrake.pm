@@ -19,33 +19,6 @@ use printer::data;
 my $hp1000fwtext = N("The HP LaserJet 1000 needs its firmware to be uploaded after being turned on. Download the Windows driver package from the HP web site (the firmware on the printer's CD does not work) and extract the firmware file from it by uncompresing the self-extracting '.exe' file with the 'unzip' utility and searching for the 'sihp1000.img' file. Copy this file into the '/etc/printer' directory. There it will be found by the automatic uploader script and uploaded whenever the printer is connected and turned on.
 ");
 
-sub choose_printer_type {
-    my ($printer, $in) = @_;
-    $printer->{str_type} = $printer_type_inv{$printer->{TYPE}};
-    my $autodetect = 0;
-    $autodetect = 1 if $printer->{AUTODETECT};
-    my @printertypes = printer::main::printer_type($printer);
-    $in->ask_from_(
-		   { title => N("Select Printer Connection"),
-		     messages => N("How is the printer connected?") .
-			 if_($printer->{SPOOLER} eq "cups",
-			  N("
-Printers on remote CUPS servers do not need to be configured here; these printers will be automatically detected.")),
-		     },
-		   [
-		    { val => \$printer->{str_type},
-		      list => \@printertypes, 
-		      not_edit => 1, sort => 0,
-		      type => 'list' },
-		    { text => N("Printer auto-detection (Local, TCP/Socket, and SMB printers)"),
-		      type => 'bool', val => \$autodetect }
-		    ]
-		   ) or return 0;
-    $printer->{AUTODETECT} = $autodetect ? 1 : undef;
-    $printer->{TYPE} = $printer_type{$printer->{str_type}};
-    1;
-}
-
 sub config_cups {
     my ($printer, $in, $upNetwork) = @_;
 
@@ -512,6 +485,33 @@ N("Examples for correct IPs:\n") .
     return $retvalue;
 }
 
+sub choose_printer_type {
+    my ($printer, $in) = @_;
+    $printer->{str_type} = $printer_type_inv{$printer->{TYPE}};
+    my $autodetect = 0;
+    $autodetect = 1 if $printer->{AUTODETECT};
+    my @printertypes = printer::main::printer_type($printer);
+    $in->ask_from_(
+		   { title => N("Select Printer Connection"),
+		     messages => N("How is the printer connected?") .
+			 if_($printer->{SPOOLER} eq "cups",
+			  N("
+Printers on remote CUPS servers do not need to be configured here; these printers will be automatically detected.")),
+		     },
+		   [
+		    { val => \$printer->{str_type},
+		      list => \@printertypes, 
+		      not_edit => 1, sort => 0,
+		      type => 'list' },
+		    { text => N("Printer auto-detection (Local, TCP/Socket, and SMB printers)"),
+		      type => 'bool', val => \$autodetect }
+		    ]
+		   ) or return 0;
+    $printer->{AUTODETECT} = $autodetect ? 1 : undef;
+    $printer->{TYPE} = $printer_type{$printer->{str_type}};
+    1;
+}
+
 sub setup_printer_connection {
     my ($printer, $in, $upNetwork) = @_;
     # Choose the appropriate connection config dialog
@@ -677,7 +677,8 @@ sub configure_new_printers {
 		} else {
 		    $queue = $make . $p->{val}{MODEL};
 		}
-		$queue =~ s/\s+//g;
+		$queue =~ s/series//gi;
+		$queue =~ s/[\s\(\)\-,]//g;
 		$queue =~ s/^$make$make/$make/;
 	    }
 	    # Append a number if the queue name already exists
@@ -733,7 +734,8 @@ Printerdrake could not determine which model your printer %s is. Please choose t
 		    $queue = $printer->{DBENTRY};
 		    $queue =~ s/\|/ /g;
 		    $printer->{currentqueue}{desc} = $queue;
-		    $queue =~ s/[\s\(\),]//g;
+		    $queue =~ s/series//gi;
+		    $queue =~ s/[\s\(\)\-,]//g;
 		    # Append a number if the queue name already exists
 		    if ($printer->{configured}{$queue}) {
 			$queue =~ s/(\d)$/$1_/;
