@@ -497,7 +497,7 @@ sub configure_queue($) {
 				$entry->{cupsPPD} ? ("-m", $entry->{cupsPPD}) : (),
 				$entry->{Info} ? ("-D", $entry->{Info}) : (),
 				$entry->{Location} ? ("-L", $entry->{Location}) : (),
-			       );
+			       ) or die "lpadmin failed";
 	    last };
 	/lpr/  && do {
 	    #- old style configuration scheme for lpr.
