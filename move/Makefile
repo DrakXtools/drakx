@@ -76,3 +76,6 @@ clean:
 	else \
 	mkisofs -r $< | create_compressed_fs - 65536 $@ 2000 2>/dev/null ; \
 	fi
+
+# touch r/isolinux/boot.cat ; find r/isolinux -type f -printf '%p 100\n' > r.sort ; echo 'r/isolinux/live_tree_boot.clp 5' >> r.sort
+# mkisofs -r -J -hide-rr-moved -nobak -cache-inodes -V 'Mandrake Move' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table r | cdrecord -v -eject dev=0,0,0 blank=fast gracetime=2 speed=99 -
