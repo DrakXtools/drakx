@@ -70,7 +70,7 @@ require my_gtk;
 import my_gtk qw(:helpers :wrappers);
 my $expert_mode=0;
 network::netconnect::read_net_conf('', $netcnx, $netc);
-any::setup_thiskind_backend('net', undef);
+any::load_category_no_message('net', undef);
 my @all_cards = network::ethernet::conf_network_card_backend ($netc, $intf, undef, undef, undef, undef);
 network::netconnect::load_conf($netcnx, $netc, $intf);
 
