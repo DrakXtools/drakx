@@ -639,8 +639,10 @@ sub testFinalConfig {
     print F q{
         require lang;
 	use interactive::gtk;
+        use run_program;
         use my_gtk qw(:wrappers);
 
+        $::prefix = "} . $::$prefix . q{";
         $::isStandalone = 1;
 
         lang::bindtextdomain();
@@ -661,8 +663,8 @@ sub testFinalConfig {
 
         my $background = "/usr/share/pixmaps/backgrounds/linux-mandrake/XFdrake-image-test.jpg";
         my $qiv = "/usr/bin/qiv";
-        -r "} . $::prefix . q{/$background" && -x "} . $::prefix . q{/$qiv" and
-            system(($::testing ? "} . $::prefix . q{" : "chroot } . $::prefix . q{/ ") . "$qiv -y $background");
+        run_program::rooted($::prefix, $qiv, "-y", $background)
+            if -r "$::prefix/$background" && -x "$::prefix/$qiv";
 
         my $in = interactive::gtk->new;
 	$in->exit($in->ask_yesorno('', [ _("Is this the correct setting?"), $text ], 0) ? 0 : 222);
