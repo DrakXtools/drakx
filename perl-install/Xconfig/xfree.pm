@@ -43,7 +43,7 @@ sub get_both {
 
     my @l3 = $both->{xfree3}->$getter;
     my @l4 = $both->{xfree4}->$getter;
-    mapn {
+    my @r = mapn {
 	my ($h3, $h4) = @_;
 	my %h = %$h4;
 	foreach (keys %$h3) {
@@ -63,6 +63,8 @@ sub get_both {
 	}
 	\%h;
     } \@l3, \@l4;
+
+    @r == 1 ? $r[0] : @r;
 }
 sub set_both {
     my ($setter, $both, @l) = @_;
