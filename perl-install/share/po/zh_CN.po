@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 10.2\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-03-12 15:09+0800\n"
+"PO-Revision-Date: 2005-03-13 01:08+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: Mandrakelinux i18n Team <cooker-i18n@linux-mandrake.com>\n"
 "MIME-Version: 1.0\n"
@@ -7515,11 +7515,11 @@ msgid ""
 msgstr "韩国键盘"
 
 #: keyboard.pm:254
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Kurdish (arabic script)"
-msgstr "阿拉伯"
+msgstr "库尔德语(阿拉伯)"
 
 #: keyboard.pm:255
 #, c-format
@@ -7704,11 +7704,11 @@ msgid ""
 msgstr "北部沙米语(瑞典/芬兰)"
 
 #: keyboard.pm:292
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Sindhi"
-msgstr "泰国语键盘"
+msgstr "Sindhi"
 
 #: keyboard.pm:294
 #, c-format
@@ -7795,11 +7795,11 @@ msgid ""
 msgstr "泰国语(Pattachote)"
 
 #: keyboard.pm:311
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Tifinagh (+latin/arabic)"
-msgstr "南斯拉夫(拉丁)"
+msgstr "Tifinagh(+拉丁/阿拉伯)"
 
 #: keyboard.pm:313
 #, c-format
@@ -7837,11 +7837,11 @@ msgid ""
 msgstr "乌克兰"
 
 #: keyboard.pm:322
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Urdu keyboard"
-msgstr "奥里雅"
+msgstr "乌尔都键盘"
 
 #: keyboard.pm:324
 #, c-format
@@ -11840,6 +11840,8 @@ msgid ""
 "network printers will be, but the scan can take longer then, especially if "
 "there are many machines with local firewalls in the network. "
 msgstr ""
+"您所选的超时越长，网络打印机的监测就越可靠，但是扫描速度也会越慢，尤其是"
+"当网络中有很多本机中安装防火墙的机器时。"
 
 #: printer/printerdrake.pm:635
 #, c-format
@@ -12744,6 +12746,9 @@ msgid ""
 "inkjets, scanning on multi-function devices, and memory card access on "
 "printers with card readers. "
 msgstr ""
+"在许多惠普打印机中都可以使用特殊的功能，比如型号较新的喷墨打印机可进行维护(墨水"
+"容量检查)，喷头清理，打印头对齐等等)，在一体机上进行扫描，内置读卡器的打印机"
+"可以直接访问存储卡。"
 
 #: printer/printerdrake.pm:2106
 #, c-format
@@ -12751,6 +12756,7 @@ msgid ""
 "To access these extra functions on your HP printer, it must be set up with "
 "the appropriate software: "
 msgstr ""
+"要访问您惠普打印机的这些额外功能，您必须安装相应的软件："
 
 #: printer/printerdrake.pm:2107
 #, c-format
@@ -12759,6 +12765,8 @@ msgid ""
 "easy-to-use graphical application \"Toolbox\" and four-edge full-bleed on "
 "newer PhotoSmart models "
 msgstr ""
+"第一个可选项是使用较新的 HPLIP，它允许通过使用简便的图形化应用程序对打印机"
+"进行维护，但该工具只支持较新的 PhotoSmart 型号。"
 
 #: printer/printerdrake.pm:2108
 #, c-format
@@ -12766,11 +12774,13 @@ msgid ""
 "or with the older HPOJ which allows only scanner and memory card access, but "
 "could help you in case of failure of HPLIP. "
 msgstr ""
+"第二个可选项是使用较早版本的 HPOJ，它只只能允许使用扫描仪和存储卡访问，但它"
+"的适应情况比 HPLIP 更广。"
 
 #: printer/printerdrake.pm:2110
 #, c-format
 msgid "What is your choice (choose \"None\" for non-HP printers)? "
-msgstr ""
+msgstr "请进行选择(选择“无”表示您没有惠普打印机):"
 
 #: printer/printerdrake.pm:2111 printer/printerdrake.pm:2112
 #: printer/printerdrake.pm:2138 printer/printerdrake.pm:2144
@@ -13466,6 +13476,7 @@ msgid ""
 "features of your printer are supported.\n"
 "\n"
 msgstr ""
+"您的 %s 已经设置好了惠普的 HPLIP 驱动软件。您现在就可以使用您打印机的特殊特性了。\n\n"
 
 #: printer/printerdrake.pm:3830
 #, c-format
@@ -13473,6 +13484,8 @@ msgid ""
 "The scanner in your printer can be used with the usual SANE software, for "
 "example Kooka or XSane (Both in the Multimedia/Graphics menu). "
 msgstr ""
+"您打印机的扫描功能可以使用传统的 SANE 软件访问，比如 Kooka 和 XSane(都可在"
+"多媒体/图像菜单中找到)。"
 
 #: printer/printerdrake.pm:3831
 #, c-format
@@ -13481,13 +13494,14 @@ msgid ""
 "your scanner on the network.\n"
 "\n"
 msgstr ""
+"运行 SannerDrake (Mandrakelinux 控制中心中的硬件/扫描仪)可在网络上共向您的扫描仪。\n\n"
 
 #: printer/printerdrake.pm:3835
 #, c-format
 msgid ""
 "The memory card readers in your printer can be accessed like a usual USB "
 "mass storage device. "
-msgstr ""
+msgstr "您打印机上的读卡器可像普通的 USB 存储设备一样进行访问。"
 
 #: printer/printerdrake.pm:3836
 #, c-format
@@ -13496,6 +13510,7 @@ msgid ""
 "your desktop.\n"
 "\n"
 msgstr ""
+"插入存储卡后，桌面上会出现一个硬盘图标以便让您访问该存储卡。"
 
 #: printer/printerdrake.pm:3838
 #, c-format
@@ -13504,6 +13519,8 @@ msgid ""
 "Toolbox (Menu: System/Monitoring/HP Printer Toolbox) clicking the \"Access "
 "Photo Cards...\" button on the \"Functions\" tab. "
 msgstr ""
+"您打印机中的读卡器可使用 HP 打印机工具箱(位于系统/监视/惠普打印机工具箱菜单)访问，"
+"请单击“功能”标签中的“访问存储卡...”按钮。"
 
 #: printer/printerdrake.pm:3839
 #, c-format
@@ -13512,6 +13529,7 @@ msgid ""
 "card reader is usually faster.\n"
 "\n"
 msgstr ""
+"请注意，此功能非常慢，从数码相机或 USB 读卡器访问要快得多。\n\n"
 
 #: printer/printerdrake.pm:3842
 #, c-format
@@ -13520,6 +13538,7 @@ msgid ""
 "lot of status monitoring and maintenance functions for your %s:\n"
 "\n"
 msgstr ""
+"惠普打印机工具箱(位于系统/监视/惠普打印机工具箱菜单)提供了适合 %s 的许多状态监视和维护功能：\n\n"
 
 #: printer/printerdrake.pm:3843
 #, c-format
@@ -25048,6 +25067,8 @@ msgid ""
 "Manual adjustments are required. Please edit the configuration file /etc/"
 "sane.d/%s.conf. "
 msgstr ""
+"您的 %s 无法全自动进行配置。\n\n"
+"您需要手动调节。请自行编辑配置文件 /etc/sane.d/%s.conf。"
 
 #: standalone/scannerdrake:392 standalone/scannerdrake:401
 #, c-format
@@ -25055,6 +25076,7 @@ msgid ""
 "More info in the driver's manual page. Run the command \"man sane-%s\" to "
 "read it."
 msgstr ""
+"更多信息请参看驱动程序的手册页。运行“man sane-%s”可阅读。"
 
 #: standalone/scannerdrake:394 standalone/scannerdrake:403
 #, c-format
@@ -25070,6 +25092,7 @@ msgid ""
 "Your %s has been configured, but it is possible that additional manual "
 "adjustments are needed to get it to work. "
 msgstr ""
+"您的 %s 已经配置好了，但可能需要额外的手动调节才能正常工作。"
 
 #: standalone/scannerdrake:399
 #, c-format
@@ -25077,11 +25100,12 @@ msgid ""
 "If it does not appear in the list of configured scanners in the main window "
 "of Scannerdrake or if it does not work correctly, "
 msgstr ""
+"如果您没有在 ScannerDrake 主窗口的已配置扫描仪列表中找到它，或者无法正常工作，"
 
 #: standalone/scannerdrake:400
 #, c-format
 msgid "edit the configuration file /etc/sane.d/%s.conf. "
-msgstr ""
+msgstr "请编辑配置文件 /etc/sane.d/%s.conf。"
 
 #: standalone/scannerdrake:406
 #, c-format
