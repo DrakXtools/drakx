@@ -27,7 +27,7 @@ use common;
 use ugtk2 qw(:all);
 use Config;
 
-my ($bugzilla, $upload_info, $wizard_name);
+my ($bugzilla, $wizard_name);
 my $prog;
 my ($incident, $stable_release) = (0, 0);
 my ($bugdesc, $bugwrite, $table, $comb_app, $button_pkg, $package, $extra_data, $summary, $textview, $kversion, $cpuinfo, $lspci);
@@ -77,7 +77,6 @@ if ($mandrake_release =~ /(official|community)/i) {
     $bugzilla = 'http://qa.mandrakesoft.com/enter_bug.cgi';
     $wizard_name = "Bugzilla wizard";
 }
-$upload_info = N("To submit a bug report, click on the report button.\nThis will open  a web browser window on %s\n where you'll find a form to fill in.  The information displayed above will be \ntransferred to that server.", $wizard_name);
 
 if ($stable_release == 0) {
     $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
@@ -122,7 +121,7 @@ gtkadd($window->{window},
 		0, gtkadd($table),
 		1, gtkadd($extra_data),
 		0, gtkpack(Gtk2::HBox->new(0,0),
-			   gtkpack(gtkset_justify(Gtk2::Label->new($upload_info), "left")),
+			   gtkpack(gtkset_justify(Gtk2::WrappedLabel->new(formatAlaTeX(N("To submit a bug report, click on the report button.\nThis will open  a web browser window on %s\n where you'll find a form to fill in.  The information displayed above will be \ntransferred to that server.", $wizard_name))), "left")),
 			  ),
 		0, gtkpack(Gtk2::HSeparator->new),
 		0, gtkpack_(Gtk2::HBox->new(0,0),
