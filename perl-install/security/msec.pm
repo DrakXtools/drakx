@@ -149,13 +149,13 @@ sub apply_checks {
     my ($msec) = @_;
     my @list =  sort $msec->raw_checks_list;
     setVarsInSh($msec->{checks}{values_file},
-		{
-		    map {
-			my $value = $msec->get_check_value($_);
-			if_($value ne 'default', $_ => $value);
-		    } @list
-		}
-	       );
+                {
+                 map {
+                     my $value = $msec->get_check_value($_);
+                     if_($value ne 'default', $_ => $value);
+                 } @list
+                }
+               );
 }
 
 sub reload {
