@@ -99,6 +99,7 @@ if_(arch() !~ /alpha/ && arch() !~ /sparc/,
 #******(missing-2.4)    "smc-ultra32" => "SMC Ultra 32",
 #******(missing-2.4)  "rl100a" => "rl100a",
 #******(missing-2.4)  "z85230" => "Z85x30",
+  "ns83820" => "National Semiconductor DP83820 10/100/1000 driver",
 ),
   "3c59x" => "3com Vortex/Boomerang/Hurricane/Cyclone/Etherlink",
   "8139too" => "Realtek RTL-8139",
@@ -426,6 +427,7 @@ qw(
 olympic
 sk98lin acenic
 3c90x
+ns83820
 aironet4500_card aironet4500_core com20020-pci hamachi starfire winbond-840
 
 dc395x_trm
