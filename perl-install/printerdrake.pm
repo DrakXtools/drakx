@@ -32,12 +32,12 @@ Printers on remote CUPS servers you do not have to configure here; these printer
 }
 
 sub config_cups {
-    my ($printer, $in) = @_;
+    my ($printer, $in, $upNetwork) = @_;
 
     local $::isWizard = 0;
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in)) {return 0};
+    if (!check_network($printer, $in, $upNetwork)) {return 0};
 
     $in->set_help('configureRemoteCUPSServer') if $::isInstall;
     my $queue = $printer->{OLD_QUEUE};
@@ -123,16 +123,16 @@ Normally, CUPS is automatically configured according to your network environment
 }
 
 sub setup_printer_connection {
-    my ($printer, $in) = @_;
+    my ($printer, $in, $upNetwork) = @_;
     # Choose the appropriate connection config dialog
     my $done = 1;
     for ($printer->{TYPE}) {
 	/LOCAL/     and setup_local    ($printer, $in) and last;
-	/LPD/       and setup_lpd      ($printer, $in) and last;
-	/SOCKET/    and setup_socket   ($printer, $in) and last;
-	/SMB/       and setup_smb      ($printer, $in) and last;
-	/NCP/       and setup_ncp      ($printer, $in) and last;
-	/URI/       and setup_uri      ($printer, $in) and last;
+	/LPD/       and setup_lpd      ($printer, $in, $upNetwork) and last;
+	/SOCKET/    and setup_socket   ($printer, $in, $upNetwork) and last;
+	/SMB/       and setup_smb      ($printer, $in, $upNetwork) and last;
+	/NCP/       and setup_ncp      ($printer, $in, $upNetwork) and last;
+	/URI/       and setup_uri      ($printer, $in, $upNetwork) and last;
 	/POSTPIPE/  and setup_postpipe ($printer, $in) and last;
 	$done = 0; last;
     }
@@ -601,11 +601,11 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 }
 
 sub setup_lpd {
-    my ($printer, $in) = @_;
+    my ($printer, $in, $upNetwork) = @_;
 
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in)) {return 0};
+    if (!check_network($printer, $in, $upNetwork)) {return 0};
 
     $in->set_help('setupLPD') if $::isInstall;
     my ($uri, $remotehost, $remotequeue);
@@ -652,11 +652,11 @@ complete => sub {
 }
 
 sub setup_smb {
-    my ($printer, $in) = @_;
+    my ($printer, $in, $upNetwork) = @_;
 
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in)) {return 0};
+    if (!check_network($printer, $in, $upNetwork)) {return 0};
 
     $in->set_help('setupSMB') if $::isInstall;
     my ($uri, $smbuser, $smbpassword, $workgroup, $smbserver, $smbserverip, $smbshare);
@@ -739,11 +739,11 @@ complete => sub {
 }
 
 sub setup_ncp {
-    my ($printer, $in) = @_;
+    my ($printer, $in, $upNetwork) = @_;
 
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in)) {return 0};
+    if (!check_network($printer, $in, $upNetwork)) {return 0};
 
     $in->set_help('setupNCP') if $::isInstall;
     my ($uri, $ncpuser, $ncppassword, $ncpserver, $ncpqueue);
@@ -809,11 +809,11 @@ complete => sub {
 }
 
 sub setup_socket {
-    my ($printer, $in) = @_;
+    my ($printer, $in, $upNetwork) = @_;
 
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in)) {return 0};
+    if (!check_network($printer, $in, $upNetwork)) {return 0};
 
     $in->set_help('setupSocket') if $::isInstall;
     my ($hostname, $port, $uri, $remotehost,$remoteport);
@@ -859,7 +859,7 @@ complete => sub {
 }
 
 sub setup_uri {
-    my ($printer, $in) = @_;
+    my ($printer, $in, $upNetwork) = @_;
 
     $in->set_help('setupURI') if $::isInstall;
     return if !$in->ask_from(_("Printer Device URI"),
@@ -887,7 +887,7 @@ complete => sub {
 
     # Non-local printer, check network and abort if no network available
     if (($printer->{currentqueue}{'connect'} !~ m!^file:/!) &&
-        (!check_network($printer, $in))) {return 0};
+        (!check_network($printer, $in, $upNetwork))) {return 0};
 
     # If the chosen protocol needs additional software, install it.
 
@@ -1869,10 +1869,18 @@ You can also type a new name or skip this printer.",
 }
 
 sub start_network {
-    my $in = $_[0];
+    my ($in, $upNetwork) = @_;
     my $w = $in->wait_message(_("Configuration of a remote printer"), 
 			      _("Starting network ..."));
-    return printer::start_service("network");
+    if ($::isInstall) {
+	return ($upNetwork and 
+		do { my $ret = &$upNetwork(); 
+		     undef $upNetwork; 
+		     sleep(1);
+		     $ret});
+    } else {
+	return printer::start_service("network");
+    }
 }
 
 sub check_network {
@@ -1882,7 +1890,7 @@ sub check_network {
     # that the network is up and running so that the remote printer is
     # reachable.
 
-    my ($printer, $in) = @_;
+    my ($printer, $in, $upNetwork) = @_;
 
     # Any additional dialogs caused by this subroutine should appear as
     # extra windows and not embedded in the "Add printer" wizard.
@@ -1932,7 +1940,7 @@ sub check_network {
     if (printer::network_running()) {return 1;}
 
     # The network is configured now, start it.
-    if (!start_network($in)) {
+    if (!start_network($in, $upNetwork)) {
 	$in->ask_warn(_("Configuration of a remote printer"), 
 ($::isInstall ?
 _("The network configuration done during the installation cannot be started now. Please check whether the network gets accessable after booting your system and correct the configuration using the Mandrake Control Center, section \"Network & Internet\"/\"Connection\", and afterwards set up the printer, also using the Mandrake Control Center, section \"Hardware\"/\"Printer\"") :
@@ -2033,7 +2041,7 @@ Do you want to have the automatic starting of the printing system turned on agai
 
 sub install_spooler {
     # installs the default spooler and start its daemon
-    my ($printer, $in) = @_;
+    my ($printer, $in, $upNetwork) = @_;
     if (!$::testing) {
 	# If the user refuses to install the spooler in high or paranoid
 	# security level, exit.
@@ -2055,6 +2063,14 @@ sub install_spooler {
 					   'curl',
 					   ($::expert ? 'cups-drivers' : ())));
 		}
+		# Try to start the network when CUPS is the spooler, so that
+		# remote CUPS printers get displayed (especially during
+		# installation)
+		$upNetwork and do {
+		    &$upNetwork(); 
+		    undef $upNetwork; 
+		    sleep(1);
+		};
 		# Start daemon
 	        printer::start_service("cups");
 		# Set the CUPS tools as defaults for "lpr", "lpq", "lprm", ...
@@ -2159,7 +2175,7 @@ sub install_spooler {
 }
 
 sub setup_default_spooler {
-    my ($printer, $in) = @_;
+    my ($printer, $in, $upNetwork) = @_;
     $in->set_help('setupDefaultSpooler') if $::isInstall;
     $printer->{SPOOLER} ||= 'cups';
     my $oldspooler = $printer->{SPOOLER};
@@ -2171,7 +2187,7 @@ sub setup_default_spooler {
 			    ) or return;
     $printer->{SPOOLER} = $printer::spooler{$str_spooler};
     # Install the spooler if not done yet
-    if (!install_spooler($printer, $in)) {
+    if (!install_spooler($printer, $in, $upNetwork)) {
 	$printer->{SPOOLER} = $oldspooler;
 	return;
     }
@@ -2261,7 +2277,7 @@ sub main {
 
     # If we have chosen a spooler, install it and mark it as default spooler
     if (($printer->{SPOOLER}) && ($printer->{SPOOLER} ne '')) {
-	if (!install_spooler($printer, $in)) {return;}
+	if (!install_spooler($printer, $in, $upNetwork)) {return;}
         printer::set_default_spooler($printer);
     }
 
@@ -2318,12 +2334,12 @@ sub main {
 				    0) ? "\@addprinter" : "\@quit";
 		if ($menuchoice ne "\@quit") {
 		    $printer->{SPOOLER} ||= 
-			setup_default_spooler ($printer, $in) ||
+			setup_default_spooler ($printer, $in, $upNetwork) ||
 			    return;
 		}
 	    } else {
 		# Ask for a spooler when none is defined
-		$printer->{SPOOLER} ||=  setup_default_spooler ($printer, $in) || return;
+		$printer->{SPOOLER} ||=  setup_default_spooler ($printer, $in, $upNetwork) || return;
 		# This entry and the check for this entry have to use
 		# the same translation to work properly
 		my $spoolerentry = _("Printing system: ");
@@ -2460,7 +2476,7 @@ sub main {
 		}
 		# Configure CUPS
 		if ($menuchoice eq "\@cupsconfig") {
-		    config_cups($printer, $in);
+		    config_cups($printer, $in, $upNetwork);
 		    next;
 		}
 	        # Determine a default name for a new printer queue
@@ -2473,7 +2489,7 @@ sub main {
 		}
 		# Function to switch to another spooler
 		if ($menuchoice eq "\@spooler") {
-		    $printer->{SPOOLER} = setup_default_spooler ($printer, $in) || $printer->{SPOOLER};
+		    $printer->{SPOOLER} = setup_default_spooler ($printer, $in, $upNetwork) || $printer->{SPOOLER};
 		    next;
 		}
 		# Rip the queue name out of the chosen menu entry
@@ -2535,10 +2551,11 @@ sub main {
 		    !$::expert or choose_printer_type($printer, $in) or
 			goto step_0;
 		  step_2:
-		    setup_printer_connection($printer, $in) or do {
-			goto step_1 if $::expert;
-			goto step_0;
-		    };
+		    setup_printer_connection($printer, $in, $upNetwork) or 
+			do {
+			    goto step_1 if $::expert;
+			    goto step_0;
+			};
 		  step_3:
 		    if (($::expert) or ($printer->{MANUAL}) or
 			($printer->{MORETHANONE})) {
@@ -2604,7 +2621,7 @@ sub main {
 		#- are no local printers. In expert mode this is the second
 		#- dialog of the sequence.
 		$continue = 1 if ($::expert || !$::isInstall);
-		setup_printer_connection($printer, $in) or next;
+		setup_printer_connection($printer, $in, $upNetwork) or next;
 		#- Cancelling one of the following dialogs should
 		#- restart printerdrake
 		$continue = 1;
@@ -2737,7 +2754,7 @@ What do you want to modify on this printer?",
 		# Do the chosen task
 		if ($modify eq _("Printer connection type")) {
 		    choose_printer_type($printer, $in) &&
-			setup_printer_connection($printer, $in) &&
+			setup_printer_connection($printer, $in, $upNetwork) &&
 		            configure_queue($printer, $in);
 		} elsif ($modify eq _("Printer name, description, location")) {
 		    choose_printer_name($printer, $in) &&
