@@ -982,8 +982,7 @@ sub write_lilo {
 	    push @entry_conf, "initrd=" . $file2fullname->($_->{initrd}) if $_->{initrd};
 	    push @entry_conf, qq(append="$_->{append}") if $_->{append};
 	    push @entry_conf, "vga=$_->{vga}" if $_->{vga};
-	    push @entry_conf, "read-write" if $_->{'read-write'};
-	    push @entry_conf, "read-only" if !$_->{'read-write'};
+	    push @entry_conf, $_->{'read-write'} ? "read-write" : "read-only";
 	} else {
 	    push @entry_conf, "table=$_->{table}" if $_->{table};
 	    push @entry_conf, "unsafe" if $_->{unsafe} && !$_->{table};
