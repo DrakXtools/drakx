@@ -203,8 +203,17 @@ sub setupBootloader__general {
     $b->{vga} ||= 'normal';
     if (arch() !~ /ppc/) {
 	$in->ask_from_({ messages => N("Bootloader main options"),
-                      title => N("Boot Style Configuration"),
+			 title => N("Boot Style Configuration"),
 			 interactive_help_id => 'setupBootloader',
+			 callbacks => {
+			     complete => sub {
+				 !$memsize || $memsize =~ /^\d+K$/ || $memsize =~ s/^(\d+)M?$/$1M/i or $in->ask_warn('', N("Give the ram size in MB")), return 1;
+				 #- $security > 4 && length($b->{password}) < 6 and $in->ask_warn('', N("At this level of security, a password (and a good one) in lilo is requested")), return 1;
+				 $b->{restricted} && !$b->{password} and $in->ask_warn('', N("Option ``Restrict command line options'' is of no use without a password")), return 1;
+				 $b->{password} eq $b->{password2} or !$b->{restricted} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return 1;
+				 0;
+			     },
+			 },
 		       }, [
             { label => N("Bootloader to use"), val => \$b->{method}, list => [ keys %$method_choices ], format => sub { $method_choices->{$_[0]} } },
                 arch() =~ /sparc/ ? (
@@ -225,14 +234,7 @@ sub setupBootloader__general {
 		if_(detect_devices::isLaptop(),
             { text => N("Enable multiple profiles"), val => \$profiles, type => 'bool', advanced => 1 },
 		),
-        ],
-        complete => sub {
-	    !$memsize || $memsize =~ /K$/ || $memsize =~ s/^(\d+)M?$/$1M/i or $in->ask_warn('', N("Give the ram size in MB")), return 1;
-	    #-				     $security > 4 && length($b->{password}) < 6 and $in->ask_warn('', N("At this level of security, a password (and a good one) in lilo is requested")), return 1;
-	    $b->{restricted} && !$b->{password} and $in->ask_warn('', N("Option ``Restrict command line options'' is of no use without a password")), return 1;
-	    $b->{password} eq $b->{password2} or !$b->{restricted} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return 1;
-	    0;
-	}) or return 0;
+        ]) or return 0;
     } else {
 	$b->{boot} = $partition_table::mac::bootstrap_part;	
 	$in->ask_from_({ messages => N("Bootloader main options"),
