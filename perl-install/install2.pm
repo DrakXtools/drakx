@@ -528,6 +528,8 @@ sub main {
 	$o->{mkbootdisk} = 0;
     }
     unless ($::testing || $::live) {
+	symlink "image", "/tmp/rhimage"; #- for compatibility with new mdk-stage1
+
 	unlink $_ foreach ( $o->{pcmcia} ? () : ("/sbin/install"), #- #- install include cardmgr!
 			   "/modules/modules.cgz",
 			   "/sbin/insmod", "/sbin/rmmod",

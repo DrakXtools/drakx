@@ -351,6 +351,9 @@ sub ask_from_entries_refW {
 		   $ok
 		   ));
     widget($widgets[0],$val->[0])->grab_focus();
+
+#    mapn { $_[0]{expert} and $_[1]->hide } $val, \@widgets, $l;
+
     if ($hcallback{complete}) {
 	my $callback = sub {
 	    my ($error, $focus) = &{$hcallback{complete}};
