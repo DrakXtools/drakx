@@ -3703,7 +3703,7 @@ sub check_network {
 			my $o = $in;
 			require network::netconnect;
 		        network::netconnect::main(
-			     $o->{prefix}, $o->{netcnx} ||= {}, 
+			     $o->{netcnx} ||= {}, 
 			     $in, $o->{modules_conf}, $o->{netc}, $o->{mouse}, 
 			     $o->{intf});
 #    my ($prefix, $netcnx, $in, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;

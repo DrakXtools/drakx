@@ -794,7 +794,7 @@ sub configureNetwork {
 
     if ($o->{meta_class} eq 'firewall') {
 	require network::netconnect;
-	network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o, $o->{modules_conf}, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
+	network::netconnect::main($o->{netcnx} ||= {}, $o, $o->{modules_conf}, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
     } else {
 	require network::network;
 	network::network::easy_dhcp($o->{modules_conf}, $o->{netc}, $o->{intf}) and $o->{netcnx}{type} = 'lan';
@@ -1073,7 +1073,7 @@ sub summary {
 	clicked => sub { 
 	    local $::expert = $::expert;
 	    require network::netconnect;
-	    network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o, $o->{modules_conf}, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
+	    network::netconnect::main($o->{netcnx} ||= {}, $o, $o->{modules_conf}, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
 	    #- in case netcnx type is not updated.
 	    require network::network;
 	    network::network::probe_netcnx_type($o->{prefix}, $o->{netc}, $o->{intf}, $o->{netcnx});

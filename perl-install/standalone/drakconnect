@@ -136,7 +136,7 @@ $window1->{window}->add(
                                                               clicked => sub {
                                                                   local ($::isWizard, $::Wizard_finished) = (1, 1);
                                                                   eval { # For wizcancel
-                                                                      network::netconnect::main('', $netcnx, $in, $modules_conf, $netc, undef, $intf);
+                                                                      network::netconnect::main($netcnx, $in, $modules_conf, $netc, undef, $intf);
                                                                       $button_apply->set_sensitive(1);
                                                                       update();
                                                                   };
@@ -660,7 +660,7 @@ sub check_field {
 
 sub add_intf() {
     $::isWizard = 1;
-    network::netconnect::main('', $netcnx, $in, $modules_conf, $netc, undef, $intf);
+    network::netconnect::main($netcnx, $in, $modules_conf, $netc, undef, $intf);
     $in->exit(0);
 }
 

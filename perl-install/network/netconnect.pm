@@ -75,7 +75,7 @@ sub get_subwizard {
 
 # configuring all network devices
 sub real_main {
-      my ($_prefix, $netcnx, $in, $modules_conf, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;
+      my ($netcnx, $in, $modules_conf, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;
       my $netc  = $o_netc  ||= {};
       my $mouse = $o_mouse ||= {};
       my $intf  = $o_intf  ||= {};
@@ -1387,8 +1387,8 @@ Click on Ok to keep your configuration, or cancel to reconfigure your Internet &
 }
 
 sub main {
-    my ($_prefix, $netcnx, $in, $modules_conf, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;
-    eval { real_main('', , $netcnx, $in, $modules_conf, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) };
+    my ($netcnx, $in, $modules_conf, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;
+    eval { real_main($netcnx, $in, $modules_conf, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) };
     my $err = $@;
     if ($err) { # && $in->isa('interactive::gtk')
 	$err =~ /wizcancel/ and $in->exit(0);

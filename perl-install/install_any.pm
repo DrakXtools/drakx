@@ -434,7 +434,7 @@ sub prep_net_suppl_media {
     #- from install_steps_interactive:
     local $::expert = $::expert;
     require network::netconnect;
-    network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o, $o->{modules_conf}, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
+    network::netconnect::main($o->{netcnx} ||= {}, $o, $o->{modules_conf}, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
     require install_interactive;
     install_interactive::upNetwork($o);
     sleep(3);
