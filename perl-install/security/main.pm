@@ -10,6 +10,7 @@ use security::msec;
 
 sub myexit { my_gtk->exit(@_) }
 
+# factorize this with rpmdrake and harddrake2
 sub wait_msg {
     my $mainw = my_gtk->new('wait');
     my $label = new Gtk::Label($_[0]);
