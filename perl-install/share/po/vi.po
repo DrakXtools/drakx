@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-vi\n"
-"POT-Creation-Date: 2003-09-09 17:07+0200\n"
-"PO-Revision-Date: 2003-09-12 13:19+0700\n"
+"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"PO-Revision-Date: 2003-09-19 17:57+0700\n"
 "Last-Translator: Trinh Minh Thanh <tmthanh@yahoo.com>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -191,7 +191,7 @@ msgstr ""
 "Nếu đặt, gửi thư báo cáo tới địa chỉ email này, nếu không đặt thì gửi đến "
 "root"
 
-#: ../../standalone/drakconnect:1
+#: ../../modules/interactive.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Parameters"
 msgstr "Các thông số"
@@ -508,6 +508,11 @@ msgstr "Bus"
 msgid "Iraq"
 msgstr "Iraq"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "connecting to %s ..."
+msgstr "đang kết nối đến %s ..."
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
@@ -551,6 +556,20 @@ msgstr "Tìm các phông chữ đã cài đặt"
 #, c-format
 msgid "Default desktop"
 msgstr "Desktop mặc định"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click on the button report.\n"
+"This will open  a web browser window on %s\n"
+" where you'll find a form to fill in.  The information displayed above will "
+"be \n"
+"transferred to that server."
+msgstr ""
+"Để thông báo ghi nhận lỗi, nhấn nút báo cáo.\n"
+"Nó sẽ mở một cửa sổ trình duyệt web trên %s\n"
+"Nơi bạn sẽ thấy một biểu mẫu để điền vào. Thông tin hiển thị ở trên sẽ\n"
+"được truyền đến máy chủ đó."
 
 #: ../../lang.pm:1
 #, c-format
@@ -1111,6 +1130,61 @@ msgid ""
 msgstr ""
 "Giao thức cho phần còn lại của thế giới \n"
 " không có D-Channel (đường truyền thuê)"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \tdrakTermServ will configure this file to work in conjunction with "
+"the images created\n"
+"        \tby mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to \n"
+"        \teach diskless client.\n"
+"\n"
+"        \tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \tputs its images."
+msgstr ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ sẽ cấu hình tập tin này để làm việc kết hợp với các "
+"ảnh được tạo bởi\n"
+"        \t\tmkinitrd-net, và các mục nhập trong /etc/dhcpd.conf, để cung cấp "
+"ảnh khởi động đến\n"
+"        \t\ttừng máy khách không ổ đĩa.\n"
+"\n"
+"        \t\tMột tập tin cấu hình tftp nhìn như sau:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \tputs its images."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1768,15 +1842,15 @@ msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr ""
 "Du`ng ca'c phi'm %c va` %c dde^? cho.n mu.c nha^.p ddu+o+.c ba^.t sáng."
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Enable \"%s\" to execute the file"
-msgstr "Bật chạy \"%s\" để thực thi tập tin"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 2 Button Mouse"
 msgstr "Chuột chuẩn chung 2 nút"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr "Bật chạy \"%s\" để thực thi tập tin"
 
 #: ../../lvm.pm:1
 #, c-format
@@ -2987,6 +3061,35 @@ msgstr "Gói này bắt buộc chọn, không thể bỏ chọn nó"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \tThe diskless client machines need either ROM images on the NIC, or "
+"a boot floppy\n"
+"        \tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these\n"
+"        \timages, based on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgstr ""
+"        - Tạo đĩa mềm/CD cho etherboot:\n"
+"        \tMáy khách không ổ cứng cần hoặc là các ảnh ROM trên NIC, hay một "
+"đĩa mềm\n"
+"        \tthay CD khởi động để sơ khởi chuỗi khởi động.  drakTermServ giúp "
+"tạo các ảnh\n"
+"        \ttnày, dựa trên NIC trong máy khách.\n"
+"        \t\t\n"
+"        \tVí dụ cơ bản về việc tạo thủ công một đĩa mềm khởi động cho 3Com "
+"3c509:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
 msgid "Etherboot ISO image is %s"
 msgstr "Ảnh Etherboot ISO là %s"
 
@@ -3397,32 +3500,6 @@ msgstr "Các tập tin ẩn"
 #, c-format
 msgid "Auto-detect printers connected to this machine"
 msgstr "Tự động phát hiện máy in nối với máy tính này"
-
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid ""
-"XawTV isn't installed!\n"
-"\n"
-"\n"
-"If you do have a TV card but DrakX has neither detected it (no bttv nor "
-"saa7134\n"
-"module in \"/etc/modules\") nor installed xawtv, please send the\n"
-"results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
-"with subject \"undetected TV card\".\n"
-"\n"
-"\n"
-"You can install it by typing \"urpmi xawtv\" as root, in a console."
-msgstr ""
-"Chưa cài đặt XawTV!\n"
-"\n"
-"\n"
-"Nếu có một card TV nhưng DrakX không phát hiện ra (do không có module bttv\n"
-"hay saa7134 trong \"/etc/modules\") hay chưa cài đặt XawTV, hãy\n"
-"gửi kết quả \"lspcidrake -v -f\" tới \"install\\@mandrakesoft.com\"\n"
-"với chủ đề: \"undetected TV card\".\n"
-"\n"
-"\n"
-"Có thể cài đặt nó bằng cách gõ \"urpmi xawtv\" trong console của root."
 
 #: ../../any.pm:1
 #, c-format
@@ -3999,6 +4076,17 @@ msgstr "/etc/hosts.allow và /etc/hosts.deny đã cấu hình rồi - không tha
 msgid "Restore From Tape"
 msgstr "Khôi Phục Từ Băng Từ"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click the report button, which will open your "
+"default browser\n"
+"to Anthill where you will be able to upload the above information as a bug "
+"report."
+msgstr ""
+"Để đua ra thông báo lỗi, nhấn nút báo cáo. Nó sẽ mở trình duyệt mặc định\n"
+"tới Anthill, nơi bạn có thể tải lên thông tin báo lỗi ở trên."
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Choose the profile to configure"
@@ -4157,7 +4245,7 @@ msgstr ""
 msgid "Need hostname, username and password!"
 msgstr "Cần tên chủ (hostname), tên người dùng và mật khẩu!"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Insert floppy"
 msgstr "Nạp đĩa mềm"
@@ -4299,10 +4387,22 @@ msgstr "Giao diện mạng đã được cấu hình"
 msgid "Couldn't access the floppy!"
 msgstr "Không thể truy cập đĩa mềm!"
 
-#: ../../standalone/drakbug:1
+#: ../../install_messages.pm:1
 #, c-format
-msgid "connecting to Bugzilla wizard ..."
-msgstr "đang kết nối với đồ thuật Bugzilla..."
+msgid ""
+"Warning: Free Software may not necessarily be patent free, and some Free\n"
+"Software included may be covered by patents in your country. For example, "
+"the\n"
+"MP3 decoders included may require a licence for further usage (see\n"
+"http://www.mp3licensing.com for more details). If you are unsure if a "
+"patent\n"
+"may be applicable to you, check your local laws."
+msgstr ""
+"Cảnh báo: Phần Mềm Tự Do có thể không nhất thiết là miễn giấy đăng ký\n"
+"và một số có thể bị kiểm soát đăng ký ở nước bạn. Ví dụ, bộ giải mã MP3\n"
+"có thể yêu cầu bạn có giấy phép để tăng khả năng sử dụng (hãy xem \n"
+"http://www.mp3licensing.com ). Nếu bạn không nắm rõ, hãy tham khảo luật\n"
+"nơi bạn ở. "
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -4488,6 +4588,11 @@ msgstr "Chấp thuận"
 #, c-format
 msgid "Description"
 msgstr "Mô tả"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter summary text."
+msgstr "Hãy nhập đoạn tóm tắt."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -5445,7 +5550,7 @@ msgstr ""
 msgid "Right Control key"
 msgstr "Phím Ctrl phải"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
@@ -6574,6 +6679,32 @@ msgstr "Cảnh báo: địa chỉ IP %s hay bị đảo !"
 msgid "busmouse"
 msgstr "busmouse"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \tTo boot a kernel via etherboot, a special kernel/initrd image must "
+"be created.\n"
+"        \tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical \n"
+"        \tinterface to help manage/customize these images. To create the "
+"file \n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
+"        - Tạo các ảnh khởi động được phép chạy bằng Etherboot:\n"
+"        \tĐể khởi động một kernel qua etherboot, cần tạo ảnh kernel/initrd "
+"đặc biệt.\n"
+"        \tmkinitrd-net thực hiện việc này và drakTermServ là giao diện đồ "
+"họa\n"
+"        \tđể giúp quản lý/tùy chỉnh những ảnh này. Để tạo tập tin \n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include mà nó được đặt vào trong "
+"như \n"
+"        \tmột thành phần trong dhcpd.conf, bạn nên tạo các ảnh etherboot cho "
+"ít nhất một kernel đầy đủ."
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Login (user name)"
@@ -6951,37 +7082,6 @@ msgstr ""
 #, c-format
 msgid "Floppy"
 msgstr "Đĩa mềm"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network."
-msgstr ""
-"        - Bảo trì /etc/exports:\n"
-"        \t\tClusternfs cho phép xuất ra hệ thống tập tin root tới các máy "
-"khách không đĩa. drakTermServ\n"
-"        \t\tthiết lập mục nhập đúng để cho phép người dùng vô danh truy cập "
-"hệ thống tập tin root từ\n"
-"        \t\tmáy khách không đĩa.\n"
-"\n"
-"        \t\tMột mục xuất ra điển hình cho clusternfs là:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tVới  SUBNET/MASK đang được định nghĩa cho mạng của bạn."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7630,6 +7730,11 @@ msgstr "Chia Sẻ Kết Nối Internet"
 msgid "Choose file"
 msgstr "Chọn tập tin"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Summary: "
+msgstr "Tóm tắt:"
+
 #: ../../network/shorewall.pm:1
 #, c-format
 msgid ""
@@ -7670,6 +7775,9 @@ msgid ""
 "memory page level, thus enabling the processor to prevent unchecked kernel "
 "accesses to user memory (aka this is a bug guard)"
 msgstr ""
+"WP flag trong CR0 register của cpu buộc phải chống ghi lên memory page "
+"level, do đó cho phép bộ vi xử lý phòng chống việc truy cập kernel không "
+"được kiểm đến bộ nhớ của người dùng (aka đây là cơ chế bảo vệ lỗi)"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -7705,6 +7813,23 @@ msgstr "French Southern Territories"
 #, c-format
 msgid "the vendor name of the processor"
 msgstr "tên nhà sản xuất bộ vi xử lý"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain %s:\n"
+"        \tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t/etc/shadow needs to be duplicated in %s. drakTermServ\n"
+"        \thelps in this respect by adding or removing system users from this "
+"file."
+msgstr ""
+"        - Bảo trì %s:\n"
+"        \t\tĐể người dùng có thể đăng nhập hệ thống từ máy khách không đĩa, "
+"mục nhập của chúng trong\n"
+"        \t\t/etc/shadow cần được nhân đôi trong %s$. Trợ giúp drakTermServ\n"
+"        \t\ttrong sự lưu ý này bằng việc thêm hay bớt người dùng hệ thống từ "
+"tập tin này."
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8026,6 +8151,11 @@ msgstr "Khôi phục Người dùng"
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Khóa mã hóa cho %s"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Do you want to recover your system?"
+msgstr "Bạn muốn khôi phục hệ thống không?"
 
 #: ../../services.pm:1
 #, c-format
@@ -8470,6 +8600,11 @@ msgstr "/Cấ_u hình CUPS"
 msgid ", "
 msgstr ", "
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit lspci"
+msgstr "Đưa ra lspci"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove selected host/network"
@@ -8707,6 +8842,11 @@ msgstr ""
 "\n"
 "Chuẩn bị thiết lập mạng cục bộ của bạn với adapter đó."
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit cpuinfo"
+msgstr "Đưa ra cpuinfo"
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Minimal install"
@@ -8716,6 +8856,11 @@ msgstr "Cài đặt tối thiểu"
 #, c-format
 msgid "Ethiopia"
 msgstr "Ethiopia"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "YES"
+msgstr "CÓ"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -9056,15 +9201,6 @@ msgstr "Kiểu cài đặt"
 msgid "Printer \"%s\" on SMB/Windows server \"%s\""
 msgstr "Máy in \"%s\" trên máy chủ SMB/Windows \"%s\""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"- Daemon (%s) include:\n"
-msgstr ""
-"\n"
-"- Daemon (%s) gồm có :\n"
-
 #: ../../modules/parameters.pm:1
 #, c-format
 msgid "%d comma separated numbers"
@@ -9386,6 +9522,11 @@ msgstr "Tần số quét ngang: %s\n"
 #, c-format
 msgid "Path"
 msgstr "Đường dẫn"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "NOT FOUND"
+msgstr "KHÔNG TÌM THẤY"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9984,25 +10125,6 @@ msgstr "quan trọng"
 msgid "Total Progress"
 msgstr "Tổng Tiến trình"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file."
-msgstr ""
-"        - Bảo trì /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tĐể người dùng có thể đăng nhập hệ thống từ máy khách không đĩa, "
-"mục nhập của chúng trong\n"
-"        \t\t/etc/shadow cần được nhân đôi trong /etc/shadow\\$\\$CLIENTS\\$\\"
-"$. Trợ giúp drakTermServ\n"
-"        \t\ttrong sự lưu ý này bằng việc thêm hay bớt người dùng hệ thống từ "
-"tập tin này."
-
 #: ../../help.pm:1
 #, c-format
 msgid ""
@@ -10133,6 +10255,40 @@ msgstr "Hoàn thành việc cấu hình, bạn muốn áp dụng các thiết l�
 msgid "Use Incremental/Differential Backups  (do not replace old backups)"
 msgstr "Dùng các sao lưu mới/loại khác  (không thay thế các sao lưu cũ)"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP \n"
+"        \taddress and net boot images to the machine. drakTermServ helps "
+"create/remove \n"
+"        \tthese entries.\n"
+"\t\t\t\n"
+"        \t(PCI cards may omit the image - etherboot will request the correct "
+"image. \n"
+"\t\t\tYou should also consider that when etherboot looks for the images, it "
+"expects \n"
+"\t\t\tnames like boot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
+msgstr ""
+"        - Bảo trì /etc/dhcpd.conf:\n"
+"        \t\tcho các máy khách khởi động qua mạng, mỗi máy khách cần một mục "
+"nhập dhcpd.conf, cấp phát một địa chỉ IP\n"
+"        \t\tvà các ảnh khởi động mạng đến máy tính. drakTermServ giúp tạo/bỏ "
+"các mục nhập này.\n"
+"\t\t\t\n"
+"        \t\t(Các PCI card có thể bỏ quên ảnh - etherboot sẽ yêu cầu ảnh "
+"đúng. Bạn cũng\n"
+"        \t\tnên biết là khi etherboot tìm các ảnh, nó sẽ cần các tên kiểu "
+"như\n"
+"        \t\tboot-3c59x.nbi, hơn là boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tMột dhcpd.conf stanza điển hình để hỗ trợ máy khách không ổ đĩa "
+"sẽ có kiểu:"
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
@@ -10251,6 +10407,15 @@ msgid ""
 msgstr ""
 "x coordinate của hộp văn bản (text box)\n"
 "trong số hiệu của ký tự"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid ""
+"You may not be able to install lilo (since lilo doesn't handle a LV on "
+"multiple PVs)"
+msgstr ""
+"Có thể  không có khả năng cài đặt lilo (vì lilo không xử lý LV trên multiple "
+"PVs)"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -10549,6 +10714,16 @@ msgstr "Yêu Cầu Tên Chủ"
 msgid "Unselect fonts installed"
 msgstr "Bỏ chọn các phông chữ đã cài đặt"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Wheel"
+msgstr "Wheel"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit kernel version"
+msgstr "Đưa ra phiên bản kernel"
+
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
@@ -10569,11 +10744,6 @@ msgstr "Bỏ qua"
 #, c-format
 msgid "Searching for configured scanners ..."
 msgstr "Đang tìm các máy quét đã cấu hình ..."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Wheel"
-msgstr "Wheel"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -10642,6 +10812,11 @@ msgstr "Mặc định"
 #, c-format
 msgid "Button 2 Emulation"
 msgstr "Mô phỏng nút thứ 2"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter a package name."
+msgstr "Hãy nhập tên gói tin."
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -10725,6 +10900,11 @@ msgstr ""
 " Bản quyền (C) 2002 của MandrakeSoft \n"
 "\tStew Benedict sbenedict\\@mandrakesoft.com\n"
 "\n"
+
+#: ../../install_messages.pm:1
+#, c-format
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
+msgstr "http://www.mandrakelinux.com/en/92errata.php3"
 
 #: ../../lang.pm:1
 #, c-format
@@ -10892,6 +11072,65 @@ msgstr "Khóa mã hóa hệ thống tập tin"
 #, c-format
 msgid "Gujarati"
 msgstr "Gujarati"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        While you can use a pool of IP addresses, rather than setup a "
+"specific entry for\n"
+"        a client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"        of client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"        Note: The '#type' entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"        or 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"        most software on the client machine. A special inittab, %s is\n"
+"        written for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"        modified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"        using xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"        subnet.\n"
+"\t\t\t\n"
+"        Note: The '#hdw_config' entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"        be 'true' or 'false'.  'true' enables root login at the client "
+"machine and allows local \n"
+"        hardware configuration of sound, mouse, and X, using the 'drak' "
+"tools. This is enabled \n"
+"        by creating separate config files associated with the client's IP "
+"address and creating \n"
+"        read/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"        with the configuration, you can remove root login privileges from "
+"the client.\n"
+"\t\t\t\n"
+"        Note: You must stop/start the server after adding or changing "
+"clients."
+msgstr ""
+"\t\t\tKhi bạn có thể dùng pool của địa chỉ IP, hơn là lập một mục nhập riêng "
+"cho\n"
+"\t\t\tmột máy khách, dùng một fixed address scheme để tiện dùng tính năng "
+"này\n"
+"\t\t\tcủa các tập tin cấu hình máy khách cụ thể mà ClusterNFS cung cấp.\n"
+"\t\t\t\n"
+"\t\t\tLưu ý: Mục nhập \"/*type\" chỉ có drakTermServ sử dụng. Máy khách có "
+"thể là \"gầy\"*/\n"
+"\t\t\tor 'béo'.  Máy khách gầy chạy các phần mềm trên máy chủ qua xdmcp, "
+"trong khi máy khách béo chạy\n"
+"\t\t\tchủ yếu trên máy tính khách. Một inittab, %s is\n"
+"\t\t\tđặc biệt được viết cho máy khách gầy. Các tập tin cấu hình hệ thống "
+"xdm-config, kdmrc, và gdm.conf được thay đổi\n"
+"\t\t\tnếu máy khách gầy được dùng, để bật chạy xdmcp. Vì có các vấn đề về "
+"bảo mật khi dùng xdmcp,\n"
+"\t\t\thosts.deny và hosts.allow được thay đổi để giới hạn truy cập vào "
+"subnet cục bộ.\n"
+"\t\t\t\n"
+"\t\t\tLưu ý: Bạn phải dừng/chạy máy chủ sau khi thêm hay thay đổi các máy "
+"khách."
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -11213,66 +11452,6 @@ msgstr ""
 "\n"
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating separate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login privileges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing clients."
-msgstr ""
-"\t\t\tKhi bạn có thể dùng pool của địa chỉ IP, hơn là lập một mục nhập riêng "
-"cho\n"
-"\t\t\tmột máy khách, dùng một fixed address scheme để tiện dùng tính năng "
-"này\n"
-"\t\t\tcủa các tập tin cấu hình máy khách cụ thể mà ClusterNFS cung cấp.\n"
-"\t\t\t\n"
-"\t\t\tLưu ý: Mục nhập \"/*type\" chỉ có drakTermServ sử dụng. Máy khách có "
-"thể là \"gầy\"*/\n"
-"\t\t\tor 'béo'.  Máy khách gầy chạy các phần mềm trên máy chủ qua xdmcp, "
-"trong khi máy khách béo chạy\n"
-"\t\t\tchủ yếu trên máy tính khách. Một inittab, /etc/inittab\\$\\"
-"$IP=client_ip\\$\\$ is\n"
-"\t\t\tđặc biệt được viết cho máy khách gầy. Các tập tin cấu hình hệ thống "
-"xdm-config, kdmrc, và gdm.conf được thay đổi\n"
-"\t\t\tnếu máy khách gầy được dùng, để bật chạy xdmcp. Vì có các vấn đề về "
-"bảo mật khi dùng xdmcp,\n"
-"\t\t\thosts.deny và hosts.allow được thay đổi để giới hạn truy cập vào "
-"subnet cục bộ.\n"
-"\t\t\t\n"
-"\t\t\tLưu ý: Bạn phải dừng/chạy máy chủ sau khi thêm hay thay đổi các máy "
-"khách."
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -11688,38 +11867,14 @@ msgstr "/dev/hda"
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
 
-#: ../../standalone/drakTermServ:1
+#: ../../standalone/drakbug:1
 #, c-format
 msgid ""
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:"
+"Application Name\n"
+"or Full Path:"
 msgstr ""
-"        - Bảo trì /etc/dhcpd.conf:\n"
-"        \t\tcho các máy khách khởi động qua mạng, mỗi máy khách cần một mục "
-"nhập dhcpd.conf, cấp phát một địa chỉ IP\n"
-"        \t\tvà các ảnh khởi động mạng đến máy tính. drakTermServ giúp tạo/bỏ "
-"các mục nhập này.\n"
-"\t\t\t\n"
-"        \t\t(Các PCI card có thể bỏ quên ảnh - etherboot sẽ yêu cầu ảnh "
-"đúng. Bạn cũng\n"
-"        \t\tnên biết là khi etherboot tìm các ảnh, nó sẽ cần các tên kiểu "
-"như\n"
-"        \t\tboot-3c59x.nbi, hơn là boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tMột dhcpd.conf stanza điển hình để hỗ trợ máy khách không ổ đĩa "
-"sẽ có kiểu:"
+"Tên ứng dụng\n"
+"hoặc đường dẫn:"
 
 #: ../../services.pm:1
 #, c-format
@@ -12099,26 +12254,6 @@ msgstr "Các trục trặc cài đặt gói %s"
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "Bạn sẽ nhận được cảnh báo nếu tải cao hơn giá trị này"
 
-#: ../../standalone/drakbug:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"To submit a bug report, click on the button report.\n"
-"This will open  a web browser window  on https://drakbug.mandrakesoft.com\n"
-" where you'll find a form to fill in.The information displayed above will "
-"be \n"
-"transferred to that server\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-"Để thông báo ghi nhận lỗi, nhấn nút báo cáo.\n"
-"Nó sẽ mở một cửa sổ trình duyệt web trên https://drakbug.mandrakesoft.com\n"
-"Nơi bạn sẽ thấy một biểu mẫu để điền vào. Thông tin hiển thị ở trên sẽ\n"
-"được truyền đến máy chủ đó\n"
-"\n"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Add a scanner manually"
@@ -12252,7 +12387,7 @@ msgstr "Người Quản Trị Bảo Mật:"
 msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr "Đặt thời hạn shell. Giá trị bằng 0 sẽ là không có thời hạn."
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr "Hoàn thành sao chép firmware"
@@ -12627,11 +12762,6 @@ msgstr ""
 "Máy in \"%s\" đang tồn tại,\n"
 "bạn thực sự muốn ghi đè lên cấu hình của nó?"
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "No partition available"
-msgstr "không có sẵn các phân vùng"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
@@ -12641,6 +12771,11 @@ msgstr "Dùng các máy quét trên các host: "
 #, c-format
 msgid "Unselected All"
 msgstr "Mọi thứ không được chọn"
+
+#: ../../install_steps_interactive.pm:1 ../../network/tools.pm:1
+#, c-format
+msgid "No partition available"
+msgstr "không có sẵn các phân vùng"
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -12682,7 +12817,7 @@ msgstr "Xây dựng toàn bộ Kernel -->"
 msgid "modem"
 msgstr "modem"
 
-#: ../../install_steps.pm:1
+#: ../../lang.pm:1
 #, c-format
 msgid "Welcome to %s"
 msgstr "Chào mừng %s"
@@ -12766,6 +12901,15 @@ msgstr ""
 #, c-format
 msgid "Not the correct CD label. Disk is labelled %s."
 msgstr "Không đúng nhãn CD. Đĩa có nhãn là %s."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"\n"
+"- Daemon, %s via:\n"
+msgstr ""
+"\n"
+"- Daemon, %s qua:\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -12900,40 +13044,6 @@ msgid ""
 msgstr ""
 "\n"
 "- Tập tin Hệ thống:\n"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured."
-msgstr ""
-"        - Đối với từng tập tin cấu hình hệ thống máy khách:\n"
-"        \t\tThông qua clusternfs, mỗi máy khách không ổ đĩa có thể có riêng "
-"các tập tin cấu hình\n"
-"        \t\tduy nhất trên hệ thống tập tin root của máy chủ. Bằng việc cho "
-"phép cấu hình phần cứng,\n"
-"\t\t\t\tmáy khách cục bộ, máy khách có thể tùy chỉnh tập tin như /etc/"
-"modules.conf, /etc/sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard trên cơ sở từng máy khách một.\n"
-"\n"
-"        Lưu ý: Bật cấu hình phần cứng máy khách cục bộ là cho đăng nhập root "
-"đến terminal server \n"
-"        trên từng máy khách có bật chức năng này.  Cấu hình cục bộ có thể "
-"tắt đi, giữ lại tập tin cấu hình,\n"
-"        mỗi khi máy khách được cấu hình."
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -13782,7 +13892,7 @@ msgstr "Xây dựng tương lai của Linux!"
 msgid "Local Printer"
 msgstr "Máy in Cục bộ"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Floppy access error, unable to mount device %s"
 msgstr "Lỗi truy cập đĩa mềm, không thể gắn kết thiết bị %s"
@@ -13886,61 +13996,6 @@ msgstr "Thiết bị chuột: %s\n"
 #, c-format
 msgid "Reselect correct fonts"
 msgstr "Chọn lại các phông chữ đúng"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs its images."
-msgstr ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ sẽ cấu hình tập tin này để làm việc kết hợp với các "
-"ảnh được tạo bởi\n"
-"        \t\tmkinitrd-net, và các mục nhập trong /etc/dhcpd.conf, để cung cấp "
-"ảnh khởi động đến\n"
-"        \t\ttừng máy khách không ổ đĩa.\n"
-"\n"
-"        \t\tMột tập tin cấu hình tftp nhìn như sau:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs its images."
 
 #: ../../help.pm:1
 #, c-format
@@ -14264,6 +14319,11 @@ msgstr "Tháng Năm"
 msgid "Yaboot mode"
 msgstr "Chế độ Yaboot"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic 3 Button Mouse"
+msgstr "Chuột chuẩn chung 3 nút"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "USA (cable)"
@@ -14278,11 +14338,6 @@ msgstr ""
 "Không thể chạy lại LiLo!\n"
 "Hãy chạy \"lilo\" bằng root trong dòng lệnh để hoàn thành cài đặt theme của "
 "LiLo."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic 3 Button Mouse"
-msgstr "Chuột chuẩn chung 3 nút"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14629,35 +14684,6 @@ msgid ""
 msgstr ""
 " --id <id_label>       - nạp trang trợ giúp html mà nó tham chiếu đến "
 "id_label\n"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
-msgstr ""
-"        - Tạo đĩa mềm/CD etherboot:\n"
-"        \t\tMáy khách không ổ cứng cần hoặc là các ảnh ROM trên NIC, hay một "
-"đĩa mềm\n"
-"        \t\thay CD khởi động để sơ khởi chuỗi khởi động.  drakTermServ giúp "
-"tạo các ảnh\n"
-"        \t\tnày, dựa trên NIC trong máy khách.\n"
-"        \t\t\n"
-"        \t\tVí dụ cơ bản về việc tạo thủ công một đĩa mềm khởi động cho 3Com "
-"3c509:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -15050,11 +15076,6 @@ msgstr "Tên miền"
 msgid "Sharing of local printers"
 msgstr "Chia sẻ máy in cục bộ"
 
-#: ../../install_messages.pm:1
-#, c-format
-msgid "http://www.mandrakelinux.com/en/92errata.php3"
-msgstr "http://www.mandrakelinux.com/en/92errata.php3"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable libsafe if libsafe is found on the system."
@@ -15064,6 +15085,11 @@ msgstr "Bật/Tắt libsafe nếu libsafe được tìm thấy trong hệ thốn
 #, c-format
 msgid "Available printers"
 msgstr "Các máy in sẵn có"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "NO"
+msgstr "KHÔNG"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -15097,31 +15123,6 @@ msgstr ""
 "\n"
 "\n"
 "Nhấn \"%s\" để tiếp tục."
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel."
-msgstr ""
-"        - Tạo các ảnh khởi động được phép chạy bằng Etherboot:\n"
-"        \t\tĐể khởi động một kernel qua etherboot, cần tạo ảnh kernel/initrd "
-"đặc biệt.\n"
-"        \t\tmkinitrd-net thực hiện việc này và drakTermServ là giao diện đồ "
-"họa\n"
-"        \t\tđể giúp quản lý/tùy chỉnh những ảnh này. Để tạo tập tin \n"
-"        \t\tetc/dhcpd.conf.etherboot-pcimap.include mà nó được đặt vào trong "
-"như \n"
-"        \t\tmột thành phần trong dhcpd.conf, bạn nên tạo các ảnh etherboot "
-"cho ít nhất một kernel đầy đủ."
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -15948,6 +15949,23 @@ msgstr "Trầm Trọng"
 msgid "Refresh the list"
 msgstr "Cập nhật lại danh sách"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client %s:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tdrakTermServ will help create these files."
+msgstr ""
+"        - Cho từng máy khách %s:\n"
+"        \t\tThông qua clusternfs, mỗi máy khách không ổ đĩa có thể có riêng "
+"các tập tin cấu hình\n"
+"        \t\tduy nhất trên hệ thống tập tin root của máy chủ. Bằng việc cho "
+"phép cấu hình phần cứng\n"
+"        \t\tmáy khách cục bộ, drakTermServ sẽ giúp tạo các tập tin này."
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -16512,12 +16530,17 @@ msgstr "Chuẩn chung"
 msgid "Cylinder %d to %d\n"
 msgstr "Cylinder %d đến %d\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "YOUR TEXT HERE"
+msgstr "NHẬP VĂN BẢN VÀO ĐÂY"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "New profile..."
 msgstr "Lý lịch mới..."
 
-#: ../../standalone/draksec:1
+#: ../../modules/interactive.pm:1 ../../standalone/draksec:1
 #, c-format
 msgid "NONE"
 msgstr "KHÔNG PHẢI"
@@ -17098,6 +17121,11 @@ msgstr "Thiết bị đa phương tiện khác"
 msgid "burner"
 msgstr "ổ ghi"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Bug Description/System Information"
+msgstr "Mô Tả Lỗi/Thông Tin Hệ Thống"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid " (Default is all users)"
@@ -17231,6 +17259,40 @@ msgstr "Tùy chọn kết nối quay số"
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
 msgstr "Nếu không chọn cổng, 631 sẽ được lấy làm mặc định."
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be\n"
+"        turned back off, retaining the configuration files, once the client "
+"machine is configured."
+msgstr ""
+"        - Đối với từng tập tin cấu hình hệ thống máy khách:\n"
+"        \tThông qua clusternfs, mỗi máy khách không ổ đĩa có thể có riêng "
+"các tập tin cấu hình\n"
+"        \tduy nhất trên hệ thống tập tin root của máy chủ. Bằng việc cho "
+"phép cấu hình phần cứng,\n"
+"        \tmáy khách cục bộ, máy khách có thể tùy chỉnh tập tin như /etc/"
+"modules.conf, /etc/sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard trên cơ sở từng máy khách một.\n"
+"\n"
+"        Lưu ý: Bật cấu hình phần cứng máy khách cục bộ là cho đăng nhập root "
+"đến terminal server \n"
+"        trên từng máy khách có bật chức năng này.  Cấu hình cục bộ có thể "
+"tắt đi, giữ lại tập tin cấu hình,\n"
+"        mỗi khi máy khách được cấu hình."
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -17458,7 +17520,7 @@ msgstr ""
 " (Cổng song song: /dev/lp0, /dev/lp1, ..., tương đương với LPT1:, "
 "LPT2:, ...; máy in USB thứ nhất: /dev/usb/lp0, thứ hai: /dev/usb/lp1, ...)."
 
-#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
+#: ../../network/netconnect.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Next"
 msgstr "Tiếp theo"
@@ -18151,7 +18213,7 @@ msgstr ""
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Name resolution spoofing protection"
-msgstr ""
+msgstr "Chống giả mạo diễn giải tên"
 
 #: ../../help.pm:1
 #, c-format
@@ -18771,7 +18833,7 @@ msgstr "ADSL"
 msgid "format of floppies supported by the drive"
 msgstr "định dạng đĩa mềm được hỗ trợ"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr "Không sao chép được firmware, không thấy tập tin %s"
@@ -19472,6 +19534,11 @@ msgstr ""
 "\n"
 "Bạn có đồng ý để mất toàn bộ các phân vùng?\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Find Package"
+msgstr "Tìm Gói Tin"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Are you sure that you want to set up printing on this machine?\n"
@@ -19586,6 +19653,37 @@ msgstr "Cấu hình LAN"
 #, c-format
 msgid "hard disk model"
 msgstr "Model đĩa cứng "
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \tdiskless clients.\n"
+"\n"
+"        \tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t/home\t\t\t\tSUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"        \tWith SUBNET/MASK being defined for your network."
+msgstr ""
+"        - Bảo trì /etc/exports:\n"
+"        \t\tClusternfs cho phép xuất ra hệ thống tập tin root tới các máy "
+"khách không đĩa. drakTermServ\n"
+"        \t\tthiết lập mục nhập đúng để cho phép người dùng vô danh truy cập "
+"hệ thống tập tin root từ\n"
+"        \t\tmáy khách không đĩa.\n"
+"\n"
+"        \t\tMột mục xuất ra điển hình cho clusternfs là:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t/home\t\t\t\tSUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tVới  SUBNET/MASK đang được định nghĩa cho mạng của bạn."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -19773,15 +19871,15 @@ msgstr "Bàn phím Anh"
 msgid "Unmount"
 msgstr "Thôi gắn kết"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid "Uninstall Fonts"
-msgstr "Bỏ cài đặt phông chữ"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Microsoft Explorer"
 msgstr "Microsoft Explorer"
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid "Uninstall Fonts"
+msgstr "Bỏ cài đặt phông chữ"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20155,23 +20253,6 @@ msgstr "Đang chạy \"%s\" ..."
 #, c-format
 msgid "enable radio support"
 msgstr "bật hỗ trợ radio"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files."
-msgstr ""
-"        - Cho từng máy khách /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThông qua clusternfs, mỗi máy khách không ổ đĩa có thể có riêng "
-"các tập tin cấu hình\n"
-"        \t\tduy nhất trên hệ thống tập tin root của máy chủ. Bằng việc cho "
-"phép cấu hình phần cứng\n"
-"        \t\tmáy khách cục bộ, drakTermServ sẽ giúp tạo các tập tin này."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -20599,12 +20680,3 @@ msgstr "Máy chủ NFS, SMB, SSH, ủy nhiệm"
 #: ../../share/compssUsers:999
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "Bộ công cụ đọc và gửi thư, tin tức và duyệt Web"
-
-#~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
-#~ msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
-
-#~ msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-#~ msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-
-#~ msgid "Error while parsing \"MODULES\" line from %s"
-#~ msgstr "Lỗi khi phân tích dòng \"MODULES\" từ %s"
