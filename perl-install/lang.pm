@@ -80,14 +80,12 @@ my %languages = my @languages = (
 'hr_HR' => [ 'Croatian',		'iso-8859-2', 'hr', 'hr' ],
 'hu_HU' => [ 'Hungarian', 		'iso-8859-2', 'hu', 'hu' ],
 'hy_AM.UTF-8' => [ 'Armenian',     'armscii-8',     'hy', 'hy', 'UTF-8' ],
-#'ia_XX' => [ 'Interlingua',		'unicode',     'ia', 'ia' ],
-#- 'in' was the old code for indonesian language; by putting LANGUAGE=id:in_ID
-#- we catch the few catalog files still using the wrong code
-'id_ID' => [ 'Indonesian',		'iso-8859-1', 'id', 'id:in_ID' ],
+#'ia_XX' => [ 'Interlingua',		'unicode',     'ia', 'ia', 'UTF-8' ],
+'id_ID' => [ 'Indonesian',		'iso-8859-1', 'id', 'id', 'UTF-8' ],
 'is_IS' => [ 'Icelandic', 		'iso-8859-1', 'is', 'is' ],
 'it_CH' => [ 'Italian|Switzerland',	'iso-8859-15', 'it', 'it_IT:it' ],
 'it_IT' => [ 'Italian|Italy', 'iso-8859-15', 'it', 'it_IT:it' ],
-#-'iu_CA' => [ 'Inuktitut', 		'utf_iu',  'iu', 'iu' ],
+#-'iu_CA' => [ 'Inuktitut', 		'utf_iu',  'iu', 'iu', 'UTF-8' ],
 'ja_JP' => [ 'Japanese',		'jisx0208',   'ja', 'ja_JP.ujis:ja' ],
 'ja_JP.UTF-8' => [ 'Japanese (UTF-8)',	'jisx0208',     'ja', 'ja_JP.ujis:ja', 'UTF-8' ],
 'ka_GE.UTF-8' => [ 'Georgian',  		'georgian-ps',     'ka', 'ka', 'UTF-8' ],
@@ -100,7 +98,7 @@ my %languages = my @languages = (
 'lv_LV' => [ 'Latvian',			'iso-8859-13', 'lv', 'lv' ],   
 'mi_NZ.UTF-8' => [ 'Maori',		'iso-8859-13', 'mi', 'mi', 'UTF-8' ],
 'mk_MK.UTF-8' => [ 'Macedonian (Cyrillic)', 'cp1251',   'mk', 'mk', 'UTF-8' ],
-'ms_MY' => [ 'Malay',			'iso-8859-1', 'ms', 'ms' ],
+'ms_MY' => [ 'Malay',			'iso-8859-1', 'ms', 'ms', 'UTF-8' ],
 'mt_MT.UTF-8' => [ 'Maltese',	'iso-8859-3',      'mt', 'mt', 'UTF-8' ],
 'nl_BE' => [ 'Dutch|Belgium',	'iso-8859-15', 'nl', 'nl_BE:nl' ],
 'nl_NL' => [ 'Dutch|Netherlands', 'iso-8859-15', 'nl', 'nl_NL:nl' ],
@@ -109,7 +107,7 @@ my %languages = my @languages = (
 #- no_NY is used by KDE (but not standard); 'nn' is the new locale in glibc 2.2
 'nn_NO'	=> [ 'Norwegian|Nynorsk',	'iso-8859-1', 'no', 'nn:no@nynorsk:no_NY:no:nb' ],
 #-'oc_FR' => [ 'Occitan',			'iso-8859-1', 'oc', 'oc:fr_FR' ],
-#-'ph_PH' => [ 'Pilipino',		'iso-8859-1', 'ph', 'ph:tl' ],
+#-'ph_PH' => [ 'Pilipino',		'iso-8859-1', 'ph', 'ph:tl', 'UTF-8' ],
 'pl_PL' => [ 'Polish',			'iso-8859-2', 'pl', 'pl' ],
 #-'pp_AN'=> [ 'Papiamento',		'iso-8859-1', 'pp', 'pp' ],
 'pt_BR' => [ 'Portuguese|Brazil',	'iso-8859-1', 'pt_BR', 'pt_BR:pt_PT:pt' ],
@@ -126,28 +124,21 @@ my %languages = my @languages = (
 'sr_YU.ISO-8859-2' => [ 'Serbian|Latin (ISO-8859-2)', 'iso-8859-2', 'sr', 'sr' ],
 'sr_YU.UTF-8' => [ 'Serbian|Latin (UTF-8)',	'iso-8859-2',      'sr', 'sr', 'UTF-8' ],
 'sv_SE' => [ 'Swedish',			'iso-8859-1', 'sv', 'sv' ],
-#- there is no tamil font curently; so set DrakX encoding to utf_1
-#- note: most of the gnome translations for tamil are broken (using bad
-#- encoding)
-#-
-#- Tamil currently works only with TSCII encoding; which identifies
-#- itself as a fake iso-8859-1
-#'ta_IN.UTF-8' => [ 'Tamil (UTF-8)',	'iso-8859-1',      'ta', 'ta', 'UTF-8' ],
 'ta_IN' => [ 'Tamil (TSCII)',		'tscii',      'ta', 'ta' ],
-'ta_IN.UTF-8' => [ 'Tamil (UTF-8)',	'unicode',     'ta', 'ta' ],
+'ta_IN.UTF-8' => [ 'Tamil (UTF-8)',	'unicode',     'ta', 'ta', 'UTF-8' ],
 'tg_TJ.UTF-8' => [ 'Tajik',		'koi8-k',    'tg', 'tg', 'UTF-8' ],
 'th_TH' => [ 'Thai|TIS-620',            'tis620',     'th', 'th' ],
 'th_TH.UTF-8' => [ 'Thai (UTF-8)',         'tis620',     'th', 'th', 'UTF-8' ],
 'tr_TR' => [ 'Turkish',	 		'iso-8859-9', 'tr', 'tr' ],
-#-'tt_RU.UTF-8' => [ 'Tatar',		'koi8-k',  'tt', 'tt' ],
-#-'ur_PK' => [ 'Urdu',			'cp1256',     'ur', 'ur' ],  
+#-'tt_RU.UTF-8' => [ 'Tatar',		'koi8-k',  'tt', 'tt', 'UTF-8' ],
+#-'ur_PK' => [ 'Urdu',			'cp1256',     'ur', 'ur', 'UTF-8' ],  
 'uk_UA' => [ 'Ukrainian|KOI8-U', 	'koi8-u',     'uk', 'uk_UA:uk' ],
 'uk_UA.CP1251' => [ 'Ukrainian|CP1251',	'cp1251',     'uk', 'uk_UA:uk' ],
 'uk_UA.UTF-8' => [ 'Ukrainian|UTF-8',	'cp1251',   'uk', 'uk_UA:uk', 'UTF-8' ],
-'uz_UZ' => [ 'Uzbek',			'iso-8859-1', 'uz', 'uz' ],
+'uz_UZ' => [ 'Uzbek',			'iso-8859-1', 'uz', 'uz', 'UTF-8' ],
 'vi_VN.UTF-8' => [ 'Vietnamese',  'tcvn',   'vi', 'vi', 'UTF-8' ],
 'wa_BE' => [ 'Walon',     		'iso-8859-15', 'wa', 'wa:fr_BE:fr' ],
-#-'yi'	=> [ 'Yiddish',			'cp1255',     'yi', 'yi' ],
+#-'yi'	=> [ 'Yiddish',			'cp1255',     'yi', 'yi', 'UTF-8' ],
 #- NOTE: 'zh' must be in the LANGUAGE list, it is not used for translations
 #- themselves but is needed for our selection of locales-xx packages
 #- and the language dependent packages resolution

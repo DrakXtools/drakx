@@ -220,7 +220,7 @@ arch() =~ /^sparc/ ? (
 # some functioanlity; "us" used for XKB until this is fixed
  "kr" => [ N_("Korean keyboard"), "us",             "us",    1 ],
  "la" => [ N_("Latin American"), "la-latin1",       "la",    0 ],
- "lao" => [ N_("Laotian"),	 "us",	            "lao",   1 ], 
+ "lao" => [ N_("Laotian"),	 "us",	            "lo",    1 ], 
  "lt" => [ N_("Lithuanian AZERTY (old)"), "lt-latin7", "lt_a", 0 ],
 #- TODO: write a console kbd map for lt_new
  "lt_new" => [ N_("Lithuanian AZERTY (new)"), "lt-latin7", "lt_std", 0 ],
