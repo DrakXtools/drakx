@@ -303,13 +303,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-* Sat Mar  8 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.1-19mdk
-- ugtk2.pm: fix still seldom happening #1445 (clicking two times too
-  fast)
+* Tue Mar 11 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-19mdk
+- ugtk2: fix still seldom happening #1445 (clicking two times too
+  fast) (gc)
 - drakxservices: fix embedding and packing in standalone mode (tv)
 - localedrake: add menu entry (fix #1461) (tv)
 - draksec: fix wait messages displaying (label was not displayed) in
   both standalone and embedded modes (tv)
+- printerdrake fixes (till)
+- translation updates
 
 * Fri Mar  7 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.1-18mdk
 - ugtk2.pm: fix rpmdrake dumping core when multiple searchs in some
