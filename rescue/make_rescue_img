@@ -4,10 +4,7 @@ use MDK::Common;
 use lib "../perl-install";
 use keyboard;
 
-use Config;
-Config->import;
-my ($arch) = $Config{archname} =~ /(.*)-/;
-
+$lib = (arch() =~ /x86_64/ ? "lib64" : "lib");
 $tmp = "/tmp/rescue_tmp";
 $mnt = "/tmp/rescue_stage2_img";
 $mke2fs = "/sbin/mke2fs -q -m 0 -F -s 1";
@@ -36,7 +33,7 @@ sub install_l {
 
     @l = uniq(map { chomp_($_) } @l);
     push @l, 
-      `ldd @l 2>/dev/null | grep "=>" | sed -e 's/.*=> //' -e 's/ .*//'`;
+      `ldd @l 2>/dev/null | grep "=>" | perl -pe 's/.*=> //; s/ .*//; s,^/lib/.*?/,/lib/,'`;
 
     @l = uniq(map { chomp_($_) } @l);
     install_raw(grep { !/lib.*\.so/ } @l);
@@ -77,7 +74,7 @@ foreach (keyboard::loadkeys_files()) {
 }
 
 my $perl_version = join ".", unpack "C3", $^V;
-@files = map { chomp; s/PERL_VERSION/$perl_version/g; $_ } (cat_("list"), cat_(`../tools/specific_arch list`));
+@files = map { chomp; s/PERL_VERSION/$perl_version/g; s|/LIB/|/$lib/|g; $_ } (cat_("list"), cat_(`../tools/specific_arch list`));
 @files = `ls -d @files`; 
 $? == 0 or exit 1;
 
@@ -98,7 +95,7 @@ _ "cp ../kernel/all.modules/$main/modules.dep $tmp/modules";
 installown("drvinst", "/usr/bin");
 installown("guessmounts", "/usr/bin");
 installown("install_bootloader", "/usr/bin");
-if ($arch =~ /^i.86/) {
+if (arch() =~ /^i.86/) {
     installown("restore_ms_boot", "/usr/bin");
 }
 installown("lsparts", "/usr/bin");
@@ -110,7 +107,7 @@ __ "strip $tmp/{lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
 
 exit 0 if $ARGV[0];
 
-if ($arch =~ /ppc/) {
+if (arch() =~ /ppc/) {
     #- xfs module on PPC is 4MB! - need room to unpack it
     $size = `du -s $tmp | cut -f1` + 4096; #- add 4MB of free space
 } else {
