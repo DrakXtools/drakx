@@ -9,19 +9,8 @@ use strict;
 use common;
 use modules;
 
-sub parameter_type {
-    my ($min, $max, $is_a_number) = @_;
-    $min == 1 && $max == 1 ?
-	   ($is_a_number ? _("a number") : '') :
-	   $min == $max ? 
-	   ($is_a_number ? _("%d comma separated numbers", $min) : _("%d comma separated strings", $min)) :
-	   $min == 1 ?
-	   ($is_a_number ? _("comma separated numbers") : _("comma separated strings")) :
-	   ''; #- to weird and buggy, do not display it
-}
 
-
-sub raw_parameters {
+sub parameters {
   my ($module) = @_;
 
   my $modinfo = '/sbin/modinfo';
@@ -57,18 +46,14 @@ sub raw_parameters {
       }
       #- print "STILL HAVE ($_)\n" if $_;
 
-      push @parameters, [ $name, $description, $min, $max, $is_a_number ];
-  }
-  @parameters;
-}
-
-sub parameters {
-  my ($module) = @_;
-  my @parameters ;
-  foreach (raw_parameters($module)) {
-    my ($name, $description, $min, $max, $is_a_number) = @$_;
-    my $format = parameter_type($min, $max, $is_a_number);
-    push @parameters, [ $format ? "$name ($format)" : $name, $description ];
+	 my $format = $min == 1 && $max == 1 ?
+		($is_a_number ? _("a number") : '') :
+		$min == $max ? 
+		($is_a_number ? _("%d comma separated numbers", $min) : _("%d comma separated strings", $min)) :
+		$min == 1 ?
+		($is_a_number ? _("comma separated numbers") : _("comma separated strings")) :
+		''; #- to weird and buggy, do not display it
+    push @parameters, [ $format ? "$name ($format)" : $name, $description, $min, $max, $is_a_number ];
   }
   @parameters;
 }

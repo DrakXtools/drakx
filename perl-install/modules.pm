@@ -8,7 +8,7 @@ use run_program;
 use log;
 use list_modules;
 
-my %conf;
+our %conf;
 
 sub category2modules_and_description {
     my ($categories) = @_;
