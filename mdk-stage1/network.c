@@ -1013,6 +1013,7 @@ enum return_type ftp_prepare(void)
 		        if (!use_http_proxy)
 			        ftp_end_data_command(ftp_serv_response);
 		} else {
+			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
 			return results;
 		}
 
@@ -1089,8 +1090,10 @@ enum return_type http_prepare(void)
 
 		log_message("HTTP: size of download %d bytes", size);
 		
-		if (load_ramdisk_fd(fd, size) != RETURN_OK)
+		if (load_ramdisk_fd(fd, size) != RETURN_OK) {
+			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
 			return RETURN_ERROR;
+                }
 
                 add_to_env("METHOD", "http");
 		sprintf(location_full, "http://%s%s", answers[0], answers[1]);
