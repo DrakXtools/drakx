@@ -23,6 +23,8 @@ print '
 #include <sys/stat.h>
 #include <sys/utsname.h>
 #include <sys/mount.h>
+#undef __USE_MISC
+#include <linux/wireless.h>
 #include <linux/keyboard.h>
 #include <linux/kd.h>
 #include <linux/hdreg.h>
@@ -421,6 +423,24 @@ hasNetDevice(device)
     close(s);
   OUTPUT:
   RETVAL
+
+
+int
+isNetDeviceWirelessAware(device)
+  char * device
+  CODE:
+    struct iwreq ifr;
+
+    int s = socket(AF_INET, SOCK_DGRAM, 0);
+
+    memset(&ifr, 0, sizeof(ifr));
+    strncpy(ifr.ifr_name, device, sizeof(ifr.ifr_name)-1);
+    RETVAL = ioctl(s, SIOCGIWNAME, &ifr) != -1;
+    close(s);
+  OUTPUT:
+  RETVAL
+
+
 
 char*
 getNetDriver(char* device)
