@@ -70,8 +70,6 @@ network::netconnect::read_net_conf('', $netcnx, $netc);
 modules::load_category('net');
 my @all_cards = network::ethernet::conf_network_card_backend($netc, $intf);
 network::netconnect::load_conf($netcnx, $netc, $intf);
-require Data::Dumper;
-print STDERR Data::Dumper->Dump([ $intf ]);
 network::network::probe_netcnx_type('', $netc, $intf, $netcnx);
 
 my $window1 = ugtk2->new('drakconnect');
@@ -398,7 +396,7 @@ sub quit_global {
 }
 
 sub configure_lan {
-    my (undef, $prefix, $netcnx, undef, $intf) = @_;
+    my ($prefix, $netcnx, undef, $intf) = @_;
     my $window = Gtk2::Window->new('toplevel');
 
     my @card_tab;
@@ -641,7 +639,7 @@ Create one first by clicking on 'Configure'")),1,1,0);
 				 });
     $bbox9->add($button_ok);
     my $button_cancel = new Gtk2::Button(N("Cancel"));
-    $button_cancel->signal_connect(clicked => sub { $window->destroy(); Gtk->main_quit });
+    $button_cancel->signal_connect(clicked => sub { $window->destroy(); Gtk2->main_quit });
     $bbox9->add($button_cancel);
 
     $window->set_modal(1);
