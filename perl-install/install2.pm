@@ -171,34 +171,6 @@ $o = $::o = {
 #-                   timezone => "Europe/Paris",
 #-                   UTC      => 1,
                 },
-    printer => {
-                 want         => 0,
-                 complete     => 0,
-                 str_type     => $printer::printer_type_default,
-                 QUEUE        => "lp",
-                 SPOOLDIR     => "/var/spool/lpd/lp",
-                 DBENTRY      => "PostScript",
-                 PAPERSIZE    => "",
-                 CRLF         => 0,
-                 AUTOSENDEOF  => 1,
-
-                 DEVICE       => "/dev/lp0",
-
-                 REMOTEHOST   => "",
-                 REMOTEQUEUE  => "",
-
-                 NCPHOST      => "", #-"printerservername",
-                 NCPQUEUE     => "", #-"queuename",
-                 NCPUSER      => "", #-"user",
-                 NCPPASSWD    => "", #-"pass",
-
-                 SMBHOST      => "", #-"hostname",
-                 SMBHOSTIP    => "", #-"1.2.3.4",
-                 SMBSHARE     => "", #-"printername",
-                 SMBUSER      => "", #-"user",
-                 SMBPASSWD    => "", #-"passowrd",
-                 SMBWORKGROUP => "", #-"AS3",
-               },
 #-    superuser => { password => 'a', shell => '/bin/bash', realname => 'God' },
 #-    user => { name => 'foo', password => 'bar', home => '/home/foo', shell => '/bin/bash', realname => 'really, it is foo' },
 

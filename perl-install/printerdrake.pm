@@ -32,7 +32,8 @@ sub setup_local($$$) {
     my @str = ();
     my @parport = auto_detect($in);
     foreach (@parport) {
-	push @str, _("A printer, model \"%s\", has been detected on ", $_->{val}{DESCRIPTION}) . $_->{port};
+	$_->{val}{DESCRIPTION} and push @str, _("A printer, model \"%s\", has been detected on ",
+						$_->{val}{DESCRIPTION}) . $_->{port};
     }
     if (@str) {
 	@port = map { $_->{port} } @parport;
@@ -47,13 +48,28 @@ sub setup_local($$$) {
 _("Printer Device") => {val => \$printer->{DEVICE}, list => \@port } ],
 					 );
 
-    #- select right DBENTRY according to device selected.
+    #- make the DeviceURI from DEVICE.
+    $printer->{DeviceURI} = ($printer->{DEVICE} =~ /usb/ ? "usb:" : "parallel:") . $printer->{DEVICE};
+
+    #- select right DBENTRY according to device selected. #- TODO with cups (keep all configuration files)
     foreach (@parport) {
 	$printer->{DEVICE} eq $_->{port} or next;
 	$printer->{DBENTRY} = $printer::descr_to_db{common::bestMatchSentence2($parport[0]{val}{DESCRIPTION},
 									       @printer::entry_db_description)};
     }
     1;
+}
+
+sub setup_uri_local($$$) {
+    my ($printer, $in, $install) = @_;
+
+    my @direct_uri = printer::get_direct_uri();
+    return if !$in->ask_from_entries_refH(_("Local Printer Device (URI)"),
+					  _("What URI device is your printer connected to
+(note that parallel:/dev/lp0 is equivalent to LPT1:)?"), [
+_("Printer Device URI") => { val => \$printer->{DeviceURI}, list => \@direct_uri } ],
+                                         );
+   1;
 }
 
 sub setup_remote($$$) {
@@ -66,6 +82,8 @@ on that server which jobs should be placed in."), [
 _("Remote hostname") => \$printer->{REMOTEHOST},
 _("Remote queue") => \$printer->{REMOTEQUEUE}, ],
 			      );
+    #- make the DeviceURI from DEVICE.
+    $printer->{DeviceURI} = "lpd://$printer->{REMOTEHOST}/$printer->{REMOTEQUEUE}";
 }
 
 sub setup_smb($$$) {
@@ -92,7 +110,16 @@ _("Workgroup") => \$printer->{SMBWORKGROUP} ],
 					     return 0;
 					 },
 					);
+    #- make the DeviceURI from DEVICE, try to probe for available variable to build a some suitable URI.
+    #- Yes, SMBWORKGROUP is not used here, seems to be not usefull for cups.
+    $printer->{DeviceURI} = join '', ("smb://",
+				      ($printer->{SMBUSER} && ($printer->{SMBUSER} .
+							       ($printer->{SMBPASSWD} && ":$printer->{SMBPASSWD}") . "@")),
+				      ($printer->{SMBHOST} || $printer->{SMBHOSTIP}),
+				      "/$printer->{SMBSHARE}");
+
     &$install('samba');
+    $printer->{mode} eq 'cups' and printer::restart_queue($printer);
     1;
 }
 
@@ -113,7 +140,73 @@ _("Password") => {val => \$printer->{NCPPASSWD}, hidden => 1} ],
     1;
 }
 
+sub setup_uri_net($$$) {
+    my ($printer, $in, $install) = @_;
+
+    return if !$in->ask_from_entries_refH(_("Network Printer Options (URI)"),
+_("Choose the right Device URI for a network printer or a local file. Examples:
+   file:/path/to/filename.prn
+   http://hostname:631/ipp/port1
+   ipp://hostname/ipp/port1
+   lpq://hostname/queue
+   socket://hostname
+   socket://hostname:9100"), [
+_("Printer Device URI") => \$printer->{DeviceURI} ],
+					  );
+    1;
+}
+
 sub setup_gsdriver($$$;$) {
+    my ($printer, $in, $install, $upNetwork) = @_;
+    for ($printer->{mode}) {
+	/cups/ && return setup_gsdriver_cups($printer, $in, $install, $upNetwork);
+	/lpr/  && return setup_gsdriver_lpr($printer, $in, $install, $upNetwork);
+	die "mode not chosen to configure a printer";
+    }
+}
+
+sub setup_gsdriver_cups($$$;$) {
+    my ($printer, $in, $install, $upNetwork) = @_;
+    my $testpage = "/usr/share/cups/data/testprint.ps";
+
+    while (1) {
+	$printer->{cupsDescr} ||= printer::get_descr_from_ppd($printer);
+	print ">> $printer->{cupsDescr}\n";
+	$printer->{cupsDescr} = $in->ask_from_treelist('', _("What type of printer do you have?"), '|',
+						       [ keys %printer::descr_to_ppd ], $printer->{cupsDescr}) or return;
+	$printer->{cupsPPD} = $printer::descr_to_ppd{$printer->{cupsDescr}};
+
+	$printer->{complete} = 1;
+	printer::copy_printer_params($printer, $printer->{configured}{$printer->{QUEUE}} ||= {});
+	printer::configure_queue($printer);
+	$printer->{complete} = 0;
+	
+	if ($in->ask_yesorno('', _("Do you want to test printing?"), 1)) {
+	    my @lpq_output;
+	    {
+		my $w = $in->wait_message('', _("Printing test page(s)..."));
+
+		$upNetwork and do { &$upNetwork(); undef $upNetwork; sleep(1) };
+		@lpq_output = printer::print_pages($printer, $testpage);
+	    }
+
+	    if (@lpq_output) {
+		$in->ask_yesorno('', _("Test page(s) have been sent to the printer daemon.
+This may take a little time before printer start.
+Printing status:\n%s\n\nDoes it work properly?", "@lpq_output"), 1) and last;
+	    } else {
+		$in->ask_yesorno('', _("Test page(s) have been sent to the printer daemon.
+This may take a little time before printer start.
+Does it work properly?"), 1) and last;
+	    }
+	} else {
+	    last;
+	}
+    }
+    $printer->{complete} = 1;
+}
+
+sub setup_gsdriver_lpr($$$;$) {
     my ($printer, $in, $install, $upNetwork) = @_;
     my $action;
     my @action = qw(ascii ps both done);
@@ -132,13 +225,13 @@ sub setup_gsdriver($$$;$) {
 					  [ @printer::entry_db_description ],
 					  { %printer::descr_to_help },
 					  $printer::db_to_descr{$printer->{DBENTRY}},
-					 )
-			       };
+					  )
+	    };
 	}; $@ =~ /^ask_from_list cancel/ and return;
 
 	my %db_entry = %{$printer::thedb{$printer->{DBENTRY}}};
 
-	#- specific printer driver to install.
+	#- specific printer drivers to install.
 	&$install('pnm2ppa') if $db_entry{GSDRIVER} eq 'ppa';
 
 	my @list_res = @{$db_entry{RESOLUTION} || []};
@@ -209,8 +302,8 @@ _("Extra Text options") => \$printer->{TEXTONLYOPTIONS},
 		my $w = $in->wait_message('', _("Printing test page(s)..."));
 
 		$upNetwork and do { &$upNetwork(); undef $upNetwork; sleep(1) };
-		printer::restart_queue(printer::default_queue($printer->{QUEUE}));
-		@lpq_output = printer::print_pages(printer::default_queue($printer->{QUEUE}), @testpages);
+		printer::restart_queue($printer);
+		@lpq_output = printer::print_pages($printer, @testpages);
 	    }
 
 	    if (@lpq_output) {
@@ -227,7 +320,7 @@ Does it work properly?"), 1) ? 'done' : 'change';
     $printer->{complete} = 1;
 }
 
-#- Program entry point.
+#- Program entry point for configuration with lpr or cups (stored in $mode).
 sub main($$$;$) {
     my ($printer, $in, $install, $upNetwork) = @_;
     my ($queue, $continue) = ('', 1);
@@ -251,51 +344,71 @@ You can add some more or change the existing ones."),
 	}
 	$queue eq 'Done' and last;
 
-	&$install('rhs-printfilters') unless $::testing;
-	printer::read_printer_db();
+	#- switch according to what is being installed: cups, lpr or other.
+	for ($printer->{mode}) {
+	    /cups/ && do { &$install('cups') unless $::testing;
+			   printer::poll_ppd_base(); last };
+	    /lpr/  && do { &$install('rhs-printfilters') unless $::testing;
+			   printer::read_printer_db(); last };
+	}
 
 	printer::copy_printer_params($printer->{configured}{$queue}, $printer) if $printer->{configured}{$queue};
 	$printer->{OLD_QUEUE} = $printer->{QUEUE} = $queue; #- keep in mind old name of queue (in case of changing)
 
 	while ($continue) {
-	    $printer->{TYPE} = 'LOCAL' unless $printer::printer_type_inv{$printer->{TYPE}};
+	    $printer::printer_type_inv{$printer->{TYPE}} or $printer->{TYPE} = printer::default_printer_type($printer);
 	    $printer->{str_type} = $printer::printer_type_inv{$printer->{TYPE}};
 	    if ($::beginner) {
 		$printer->{str_type} =
 		  $in->ask_from_list_(_("Select Printer Connection"),
 				      _("How is the printer connected?"),
-				      [ keys %printer::printer_type ],
+				      [ printer::printer_type($printer) ],
 				      $printer->{str_type},
 				     );
 	    } else {
-		$in->ask_from_entries_refH([_("Select Printer Connection"), _("Ok"), $::beginner ? () : _("Remove queue")],
+		if ($printer->{mode} eq 'cups') {
+		    $in->ask_from_entries_refH([_("Select Printer Connection"), _("Ok"), $::beginner ? () : _("Remove queue")],
+_("Every printer managed by CUPS need a name (for example lp).
+Other parameter like the description of the printer or its location
+can be defined. What name should be used for this printer and
+how is the printer connected?"), [
+_("Name of printer") => { val => \$printer->{QUEUE} },
+_("Description") => { val => \$printer->{Info} },
+_("Location") => { val => \$printer->{Location} },
+_("Printer Connection") => { val => \$printer->{str_type}, not_edit => 1, list => [ printer::printer_type($printer) ] },
+				  ],
+					       ) or printer::remove_queue($printer), $continue = 1, last;
+		} else {
+		    $in->ask_from_entries_refH([_("Select Printer Connection"), _("Ok"), $::beginner ? () : _("Remove queue")],
 _("Every print queue (which print jobs are directed to) needs a
 name (often lp) and a spool directory associated with it. What
 name and directory should be used for this queue and how is the printer connected?"), [
 _("Name of queue") => { val => \$printer->{QUEUE} },
 _("Spool directory") => { val => \$printer->{SPOOLDIR} },
-_("Printer Connection") => { val => \$printer->{str_type}, not_edit => 1, list => [ keys %printer::printer_type ] },
+_("Printer Connection") => { val => \$printer->{str_type}, not_edit => 1, list => [ printer::printer_type($printer) ] },
 										      ],
 					   changed => sub {
-					       $printer->{SPOOLDIR} = "$printer::spooldir/" .
-                                                                      printer::default_queue($printer->{QUEUE}) unless $_[0];
+					       $printer->{SPOOLDIR} = printer::default_spooldir($printer) unless $_[0];
 					   }
-					  ) or delete $printer->{configured}{$queue}, $continue = 1, last;
+					  ) or printer::remove_queue($printer), $continue = 1, last;
+		}
 	    }
 	    $printer->{TYPE} = $printer::printer_type{$printer->{str_type}};
 
 	    $continue = 0;
-	    for ($printer->{TYPE}) {
-		/LOCAL/  and setup_local ($printer, $in, $install) and last;
-		/REMOTE/ and setup_remote($printer, $in, $install) and last;
-		/SMB/    and setup_smb   ($printer, $in, $install) and last;
-		/NCP/    and setup_ncp   ($printer, $in, $install) and last;
+	    for ($printer->{TYPE}) { #- chooser lpr/cups ? not good !
+		/URI_LOCAL/ and setup_uri_local($printer, $in, $install) and last;
+		/URI_NET/   and setup_uri_net  ($printer, $in, $install) and last;
+		/LOCAL/     and setup_local    ($printer, $in, $install) and last;
+		/REMOTE/    and setup_remote   ($printer, $in, $install) and last; #- make common for cups/lpr ?
+		/SMB/       and setup_smb      ($printer, $in, $install) and last; #- make common for cups/lpr ?
+		/NCP/       and setup_ncp      ($printer, $in, $install) and last;
 		$continue = 1; last;
 	    }
 	}
 
-	#- configure ghostscript driver to be used.
-	if (!$continue && setup_gsdriver($printer, $in, $install, $printer->{TYPE} ne 'LOCAL' && $upNetwork)) {
+	#- configure specific part according to lpr/cups.
+	if (!$continue && setup_gsdriver($printer, $in, $install, $printer->{TYPE} !~ /LOCAL/ && $upNetwork)) {
 	    delete $printer->{OLD_QUEUE}
 		if $printer->{QUEUE} ne $printer->{OLD_QUEUE} && $printer->{configured}{$printer->{QUEUE}};
 	    $continue = !$::beginner;
@@ -304,3 +417,4 @@ _("Printer Connection") => { val => \$printer->{str_type}, not_edit => 1, list =
 	}
     }
 }
+

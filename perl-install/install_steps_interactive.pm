@@ -642,7 +642,7 @@ sub configureServices {
 sub configurePrinter {
     my ($o, $clicked) = @_;
 
-    return if $::corporate;
+    $::corporate and return;
 
     require printer;
     require printerdrake;
@@ -651,11 +651,20 @@ sub configurePrinter {
         printerdrake::auto_detect($o) or return;
     }
 
-    #- bring interface up for installing ethernet packages but avoid ppp by default,
-    #- else the guy know what he is doing...
-    #install_interactive::upNetwork($o, 'pppAvoided');
-
+    #- take default configuration, this include choosing the right system
+    #- currently used by the system.
     eval { add2hash($o->{printer} ||= {}, printer::getinfo($o->{prefix})) };
+
+    #- figure out what printing system to use, currently are suported cups and lpr,
+    #- in case this has not be detected above.
+    $::beginner and $o->{printer}{mode} ||= 'cups'; #'lpr';
+    if (!$o->{printer}{mode}) {
+	$o->{printer}{mode} = $o->ask_from_list_([''], _("What printing system do you want to use?"),
+						 [ 'cups', 'lpr', __("Cancel") ],
+						);
+	$o->{printer}{mode} eq 'Cancel' and $o->{printer}{mode} = undef, return;
+    }
+
     $o->{printer}{PAPERSIZE} = $o->{lang} eq 'en' ? 'letter' : 'a4';
     printerdrake::main($o->{printer}, $o, sub { $o->pkg_install($_[0]) }, sub { install_interactive::upNetwork($o, 'pppAvoided') });
 }
