@@ -51,7 +51,7 @@ sub read_tmdns_conf {
     my %outf;
 
     while (<F>) {
-	($outf{ZEROCONF_HOSTNAME}, ) = /^\s*hostname\s*=\s*(\w+)/ and return \%outf;
+	($outf{ZEROCONF_HOSTNAME}) = /^\s*hostname\s*=\s*(\w+)/ and return \%outf;
     }
     
     \%outf;
@@ -351,7 +351,7 @@ notation (for example, 1.2.3.4).");
 	         ],
 	         complete => sub {
 		     
-		     $intf->{BOOTPROTO} = $auto_ip ? join('', if_($auto_ip, "dhcp") ) : "static";
+		     $intf->{BOOTPROTO} = $auto_ip ? join('', if_($auto_ip, "dhcp")) : "static";
 		     $netc->{DHCP} = $auto_ip;
 		     $netc->{ZEROCONF} = $zeroconf;
 		     return 0 if $auto_ip;
@@ -408,7 +408,7 @@ You may also enter the IP address of the gateway if you have one."),
 				       $in->ask_warn('', N("Gateway address should be in format 1.2.3.4"));
 				       return 1;
 				   }
-				   if ($netc->{ZEROCONF_HOSTNAME} and $netc->{ZEROCONF_HOSTNAME} =~ /\./ ) {
+				   if ($netc->{ZEROCONF_HOSTNAME} and $netc->{ZEROCONF_HOSTNAME} =~ /\./) {
 				       $in->ask_warn('', N("Zeroconf host name must not contain a ."));
 				       return 1;
 				   }

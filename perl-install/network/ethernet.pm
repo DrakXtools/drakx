@@ -193,7 +193,7 @@ such as ``mybox.mylab.myco.com''."),
 			if_($netc->{ZEROCONF}, { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} }),
 		      ],
 		      complete => sub {
-			  if ($netc->{ZEROCONF_HOSTNAME} and $netc->{ZEROCONF_HOSTNAME} =~ /\./ ) {
+			  if ($netc->{ZEROCONF_HOSTNAME} and $netc->{ZEROCONF_HOSTNAME} =~ /\./) {
 			      $in->ask_warn('', N("Zeroconf host name must not contain a ."));
 			      return 1;
 			  }

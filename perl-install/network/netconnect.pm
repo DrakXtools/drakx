@@ -466,7 +466,7 @@ sub get_net_device {
 	my $connect_file = "/etc/sysconfig/network-scripts/net_cnx_up";
 	my $network_file = "/etc/sysconfig/network";
 	if (cat_("$prefix$connect_file") =~ /network/) {
-		${ {getVarsFromSh("$prefix$network_file")} }{GATEWAYDEV};
+		${ { getVarsFromSh("$prefix$network_file") } }{GATEWAYDEV};
 	} else {
 		"ppp+";
 	};
