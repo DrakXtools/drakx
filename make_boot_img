@@ -86,7 +86,7 @@ sub boot_img_i386 {
     __ "$sudo umount $mnt 2>/dev/null";
     my $automatic = "";
 
-    if ($type eq "hd" || $type eq "network") {
+    if ($type eq "hd") {
 	_ "bunzip2 -c $instdir/init-data/msgboot.img.bz2 > $img";
     } elsif ($type eq "all") {
 	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo-2880.img.bz2 > $img";
