@@ -98,7 +98,7 @@ sub update_status {
     fcntl($fd, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
     local $| = 1;
     if (defined(my $output = <$fd>)) {
-      ($o->{address}, $o->{ping}) = $output =~ /^([\d\.]+)\|([\d\.]+)*$/;
+      ($o->{address}, $o->{ping}) = $output =~ /^([\d\.]+)\|([\d\.\,]+)*$/;
       $o->{done} = 1;
       undef $o->{kid};
     }
