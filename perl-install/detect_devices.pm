@@ -809,7 +809,7 @@ sub computer_info() {
 sub isLaptop() {
     arch() =~ /ppc/ ? 
       get_mac_model() =~ /Book/ :
-      { dmidecode() }->{isLaptop}
+      { computer_info() }->{isLaptop}
 	|| (matching_desc__regexp('C&T.*655[45]\d') || matching_desc__regexp('C&T.*68554') ||
 	    matching_desc__regexp('Neomagic.*Magic(Media|Graph)') ||
 	    matching_desc__regexp('ViRGE.MX') || matching_desc__regexp('S3.*Savage.*[IM]X') ||
