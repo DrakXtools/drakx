@@ -878,10 +878,12 @@ sub selectPackagesToUpgrade($$$;$$) {
 	close OUTPUT_CHILD;
 	select((select(OUTPUT), $| = 1)[0]);
 
-	#- internal reading from the child.
+	#- internal reading from interactive mode of parsehdlist.
 	my $ask_child = sub {
+	    my ($name, $tag) = @_;
 	    my @list;
-	    print OUTPUT $_[0], "\n";
+	    print OUTPUT "$name:$tag\n";
+	    log::l("ask_child: ask parsehdlist for $name:$tag");
 
 	    local $_;
 	    while (<INPUT>) {
@@ -890,7 +892,8 @@ sub selectPackagesToUpgrade($$$;$$) {
 		push @list, $_;
 	    }
 
-	    \@list;
+	    log::l("ask_child: ask parsehdlist returned $name:$tag -> " . scalar(@list) . " items");
+	    @list;
 	};
 
 	#- mark all files which are not in /etc/rc.d/ for packages which are already installed but which
@@ -965,10 +968,10 @@ sub selectPackagesToUpgrade($$$;$$) {
 									   ! -d "$prefix/$_" && ! -l "$prefix/$_") } @files} = ();
 				     });
 
-		my $list = $ask_child->(packageName($p));
-		my @commonparts = map { /^=(.*)/ ? ($1) : () } @$list;
-		map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m|^/etc/rc.d/| }
-		  map { /^(\d)(.*)/ ? ($commonparts[$1] . $2) : /^ (.*)/ ? ($1) : () } @$list;
+#		my $list = 
+#		my @commonparts = map { /^=(.*)/ ? ($1) : () } @$list;
+		map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m|^/etc/rc.d/| } $ask_child->(packageName($p), "files");
+#		  map { /^(\d)(.*)/ ? ($commonparts[$1] . $2) : /^ (.*)/ ? ($1) : () } @$list;
 
 		#- keep in mind the cumul size of installed package since they will be deleted
 		#- on upgrade.
@@ -982,10 +985,10 @@ sub selectPackagesToUpgrade($$$;$$) {
 	    my $p = $_;
 
 	    if (packageFlagSelected($p)) {
-		my $list = $ask_child->(packageName($p));
-		my @commonparts = map { /^=(.*)/ ? ($1) : () } @$list;
-		map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m|^/etc/rc.d/| }
-		  map { /^(\d)(.*)/ ? ($commonparts[$1] . $2) : /^ (.*)/ ? ($1) : () } @$list;
+#		my $list = $ask_child->(packageName($p));
+#		my @commonparts = map { /^=(.*)/ ? ($1) : () } @$list;
+		map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m|^/etc/rc.d/| } $ask_child->(packageName($p), "files");
+#		  map { /^(\d)(.*)/ ? ($commonparts[$1] . $2) : /^ (.*)/ ? ($1) : () } @$list;
 	    }
 	}
 
@@ -1000,11 +1003,11 @@ sub selectPackagesToUpgrade($$$;$$) {
 
 	    unless (packageFlagSelected($p)) {
 		my $toSelect = 0;
-		my $list = $ask_child->(packageName($p));
-		my @commonparts = map { /^=(.*)/ ? ($1) : () } @$list;
+#		my $list = $ask_child->(packageName($p));
+#		my @commonparts = map { /^=(.*)/ ? ($1) : () } @$list;
 		map { if (exists $installedFilesForUpgrade{$_}) {
 		    ++$toSelect if ! -d "$prefix/$_" && ! -l "$prefix/$_"; delete $installedFilesForUpgrade{$_} }
-		  } grep { $_ !~ m|^/etc/rc.d/| } map { /^(\d)(.*)/ ? ($commonparts[$1] . $2) : /^ (.*)/ ? ($1) : () } @$list;
+		  } grep { $_ !~ m|^/etc/rc.d/| } $ask_child->(packageName($p), "files"); #map { /^(\d)(.*)/ ? ($commonparts[$1] . $2) : /^ (.*)/ ? ($1) : () } @$list;
 		if ($toSelect) {
 		    if ($toSelect <= 1 && packageName($p) =~ /-devel/) {
 			log::l("avoid selecting " . packageName($p) . " as not enough files will be updated");
@@ -1031,9 +1034,10 @@ sub selectPackagesToUpgrade($$$;$$) {
 	foreach (values %{$packages->[0]}) {
 	    my $p = $_;
 
-	    my $list = $ask_child->(packageName($p));
-	    my @obsoletes = map { /^\*(\S*)/ ? ($1) : () } @$list;
-	    foreach (@obsoletes) {
+#	    my $list = $ask_child->(packageName($p));
+#	    my @obsoletes = map { /^\*(\S*)/ ? ($1) : () } @$list;
+#	    foreach (@obsoletes) {
+	    foreach (map { /^(\S*)/ ? ($1) : () } $ask_child->(packageName($p), "obsoletes")) {
 		if (c::rpmdbNameTraverse($db, $_) > 0) {
 		    log::l("selecting " . packageName($p) . " by selection on obsoletes");
 		    selectPackage($packages, $p);
@@ -1046,6 +1050,14 @@ sub selectPackagesToUpgrade($$$;$$) {
 	close INPUT;
 	waitpid $pid, 0;
     } else {
+	close INPUT;
+	close OUTPUT;
+	open STDIN, "<&INPUT_CHILD";
+	open STDOUT, ">&OUTPUT_CHILD";
+	exec "parsehdlist", "--interactive", map { "/tmp/$_->{hdlist}" } values %{$packages->[2]};
+	c::_exit(1);
+
+	#- THE FOLLOWING IS OBSOLETE AND WILL BE REMOVED SOON, OR KEPT FOR INFO
 	local $_;
 
 	#- child process will hashes filelist and answer its parent
