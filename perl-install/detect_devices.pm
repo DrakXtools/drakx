@@ -584,7 +584,7 @@ sub getUPS() {
       (grep { $_->{description} =~ /American Power Conversion\|Back-UPS/ } @usb_devices),
       (map {
           ($_->{name} = $_->{description}) =~ s/.*\|//;
-          $_->{port} = "/dev/"; # FIXME
+          $_->{port} = "auto";
           $_->{media_type} = 'UPS';
           $_->{driver} =~ s/^UPS://;
           $_;
