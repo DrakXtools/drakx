@@ -592,6 +592,8 @@ void finish_preparing(void)
 
 int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused)), char **env)
 {
+	if (getenv("DEBUGSTAGE1"))
+		set_param(MODE_TESTING);
 
 	mkdir(SLASH_LOCATION, 0755);
 	if (scall(mount("none", SLASH_LOCATION, "tmpfs", MS_MGC_VAL, NULL), "mount tmpfs"))
