@@ -95,7 +95,7 @@ sub get_lvs {
 	   my $pt_type = -e "/dev/$device" && fsedit::typeOfPart($device);
 
 	   { device => $device, 
-	     type => $pt_type || 0x83,
+	     pt_type => $pt_type || 0x83,
 	     size => get_lv_size($device) }
        } @l
       ];
