@@ -504,7 +504,7 @@ sub make_menuentry {
     my $spooler = $shortspooler_inv{$printer->{SPOOLER}};
     my $connect = $printer->{configured}{$queue}{'queuedata'}{'connect'};
     my $localremote;
-    if (($connect =~ m!^file:!) || ($connect =~ m!^ptal:!)) {
+    if (($connect =~ m!^file:!) || ($connect =~ m!^ptal:/mlc:!)) {
 	$localremote = _("Local Printers");
     } else {
 	$localremote = _("Remote Printers");
@@ -518,6 +518,19 @@ sub make_menuentry {
     } elsif ($connect =~ m!^file:/dev/usb/lp(\d+)$!) {
 	my $number = $1;
 	$connection = _(", USB printer \#%s", $number);
+    } elsif ($connect =~ m!^ptal:/(.+)$!) {
+	my $ptaldevice = $1;
+	if ($ptaldevice =~ /^mlc:par:(\d+)$/) {
+	    my $number = $1;
+	    $connection = _(", multi-function device on parallel port \#%s",
+			    $number);
+	} elsif ($ptaldevice =~ /^mlc:usb:/) {
+	    $connection = _(", multi-function device on USB");
+	} elsif ($ptaldevice =~ /^hpjd:/) {
+	    $connection = _(", multi-function device on HP JetDirect");
+	} else {
+	    $connection = _(", multi-function device");
+	}
     } elsif ($connect =~ m!^file:(.+)$!) {
 	$connection = _(", printing to %s", $1);
     } elsif ($connect =~ m!^lpd://([^/]+)/([^/]+)/?$!) {

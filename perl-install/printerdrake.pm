@@ -219,7 +219,7 @@ This wizard will help you to install your printer(s) connected to this computer.
 
 Please plug in your printer(s) on this computer and turn it/them on. Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now.
 
-Note that some computers can crash during the printer auto-detection, use the \"Expert Mode\" of printerdrake to do a printer installation without auto-detection. You also need the \"Expert Mode\" when you want to set up printing on a remote printer when printerdrake does not list it automatically.")),
+Note that some computers can crash during the printer auto-detection, use the \"Expert Mode\" of printerdrake to do a printer installation without auto-detection. You also need the \"Expert Mode\" when you want to set up printing on a remote printer when printerdrake does not list it automatically."));
     }
 }
 
@@ -249,6 +249,10 @@ For local printers auto-detection is not really necessary, because they are exte
     my $menuentries;
     $in->set_help('setupLocal') if $::isInstall;
     if ($do_auto_detect) {
+	# When HPOJ is running, it blocks the printer ports on which it is
+	# configured, so we stop it here. If it is not installed or not 
+	# configured, this command has no effect.
+	printer::stop_service("hpoj");
 	@parport = auto_detect($in);
 	for my $p (@parport) {
 	    if ($p->{val}{DESCRIPTION}) {
@@ -303,6 +307,9 @@ For local printers auto-detection is not really necessary, because they are exte
 		$menuentries->{$menustr} = $q;
 	    }
 	}
+	# We are ready with auto-detection, so we restart HPOJ here. If it 
+	# is not installed or not configured, this command has no effect.
+	printer::start_service("hpoj");
     } else {
 	my $m;
 	for ($m = 0; $m <= 2; $m++) {
@@ -324,12 +331,40 @@ For local printers auto-detection is not really necessary, because they are exte
     my $oldmenuchoice = "";
     if (($printer->{configured}{$queue}) &&
 	($printer->{currentqueue}{'connect'} =~ m/^file:/)) {
+	# Non-HP or HP print-only device (HPOJ not used)
 	$device = $printer->{currentqueue}{'connect'};
 	$device =~ s/^file://;
 	for my $p (keys %{$menuentries}) {
 	    if ($device eq $menuentries->{$p}) {
 		$menuchoice = $p;
 		last;
+	    }
+	}
+    } elsif (($printer->{configured}{$queue}) &&
+	($printer->{currentqueue}{'connect'} =~ m!^ptal:/mlc:!)) {
+	# HP multi-function device (controlled by HPOJ)
+	my $ptaldevice = $printer->{currentqueue}{'connect'};
+	$ptaldevice =~ s!^ptal:/mlc:!!;
+	if ($ptaldevice =~ /^par:(\d+)$/) {
+	    $device = "/dev/lp$1";
+	    for my $p (keys %{$menuentries}) {
+		if ($device eq $menuentries->{$p}) {
+		    $menuchoice = $p;
+		    last;
+		}
+	    }
+	} else {
+	    my $make = lc($printer->{currentqueue}{'make'});
+	    my $model = lc($printer->{currentqueue}{'model'});
+	    $device = "";
+	    for my $p (keys %{$menuentries}) {
+		my $menumakemodel = lc($p);
+		if (($menumakemodel =~ /$make/) && 
+		    ($menumakemodel =~ /$model/)) {
+		    $menuchoice = $p;
+		    $device = $menuentries->{$p};
+		    last;
+		}
 	    }
 	}
     } else {
