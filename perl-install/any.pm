@@ -206,7 +206,7 @@ sub setupBootloader {
 	bootloader::add_append($b, "mem", $memsize);
     }
 
-    $ask_per_entries or last;
+    $ask_per_entries or return;
 
     while (1) {
 	$in->set_help(arch() =~ /sparc/ ? 'setupSILOAddEntry' : arch() =~ /ppc/ ? 'setupYabootAddEntry' : 'setupBootloaderAddEntry') unless $::isStandalone;
