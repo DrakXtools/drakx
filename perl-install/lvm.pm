@@ -40,8 +40,10 @@ sub init() {
 	mkdir_p(dirname($control));
 	syscall_('mknod', $control, c::S_IFCHR() | 0600, makedev($major, $minor)) or die "mknod $control failed: $!";	
     }
-    run_program::run('lvm2', 'vgscan') if !-e '/etc/lvmtab';
-    run_program::run('lvm2', 'vgchange', '-a', 'y');
+    if ($::isInstall) {
+	run_program::run('lvm2', 'vgscan');
+	run_program::run('lvm2', 'vgchange', '-a', 'y');
+    }
     1;
 }
 
