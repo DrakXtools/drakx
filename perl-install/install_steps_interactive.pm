@@ -1045,7 +1045,7 @@ sub generateAutoInstFloppy {
 	}
         fs::mount($dev, "/floppy", "vfat", 0);
 	substInFile { 
-	    s/timeout.*/$replay ? 'timeout 0' : ''/e;
+	    s/timeout.*/$replay ? 'timeout 1' : ''/e;
 	    s/^(\s*append)/$1 kickstart=floppy/ 
 	} "/floppy/syslinux.cfg";
 
