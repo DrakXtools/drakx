@@ -83,7 +83,7 @@ sub sec_options {
         ("DrakSec Advanced Options"),
 	("For explanations on the following options, click on the Help button"),
 	[
-	    %options;
+	    %options
 	],
     );
 }
