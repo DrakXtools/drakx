@@ -1,0 +1,24 @@
+# /etc/profile
+# (c) MandrakeSoft, Chmouel Boudjnah <chmouel@mandrakesoft.com>
+
+# System wide environment and startup programs
+# Functions and aliases go in /etc/bashrc
+
+PROFILE_LOADED=1
+
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+
+PS1="[root@rescue]\\$ "
+ls () { /bin/ls --color=auto -F "$@";}
+ll () { /bin/ls --color=auto -Fl "$@";}
+d () { /bin/ls --color=auto -F "$@";}
+s () { cd .. ;}
+which () { type -p "$@" ;}
+HOSTNAME=rescue
+HISTSIZE=1000
+HISTFILESIZE=1000
+
+INPUTRC=/etc/inputrc
+export PATH PS1 USER HOSTNAME HISTSIZE HISTFILESIZE INPUTRC
+
+cat /etc/issue

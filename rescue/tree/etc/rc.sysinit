@@ -1,0 +1,28 @@
+#!/bin/sh
+
+action() { echo $1; shift; $*; }
+
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+
+echo -e "\t\t\tWelcome to Linux \\033[1;36mMandrake\\033[0;39m"
+
+action "Mounting proc filesystem" mount -n -t proc /proc /proc
+action "Remounting root filesystem in read-write mode" mount -n -o remount,rw /
+
+>/etc/mtab
+mount -f /
+mount -f /proc
+
+# Set the hostname.
+action "Setting hostname rescue" hostname rescue
+echo rescue > /etc/HOSTNAME
+
+load() { modprobe $* 2>/dev/null; }
+load ide-mod
+load ide-probe
+load ide-disk
+load ide-cd
+load af_packet
+
+/sbin/ifconfig lo 127.0.0.1 netmask 255.0.0.0
+/sbin/route add 127.0.0.1 lo

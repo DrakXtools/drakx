@@ -1,0 +1,9 @@
+#!/bin/sh
+
+sleep 1
+/sbin/killall5 -9
+
+umount -a -f -t noproc
+mount -n -o remount,ro /
+
+reboot -i -d

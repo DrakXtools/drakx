@@ -1,0 +1,78 @@
+#!/usr/bin/perl
+
+use lib "../perl-install";
+use keyboard;
+use common qw(:file);
+
+use Config;
+Config->import;
+my ($arch) = $Config{archname} =~ /(.*)-/;
+
+$tmp = "/tmp/rescue_tmp";
+$mnt = "/tmp/rescue_stage2_img";
+$mke2fs = "/sbin/mke2fs -q -m 0 -F -s 1";
+$rescue = "rescue_stage2";
+
+if ($>) {
+    $sudo = "sudo";
+    $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
+}
+
+BEGIN { undef *_; }
+sub __ { print @_, "\n"; system(@_); }
+sub _ { __ @_; $? and die; }
+
+sub install {
+    return if -e "$tmp$_[0]";
+    my $d = dirname($_[0]);
+    commands::mkdir_("-p", "$tmp$d") unless -d "$tmp$d";
+    _ "$sudo cp -a $_[0] $tmp$d";
+}
+sub install_lib {
+    _ "cp $_[0] $tmp$_[0]" unless -e "$tmp$_[0]";
+}
+
+_ "$sudo rm -rf $tmp" if -e $tmp;
+_ "mkdir $tmp";
+_ 'find . -name "*~" | xargs rm -f';
+_ "cp -a tree/* $tmp";
+foreach (keyboard::loadkeys_files) {
+    install($_);
+    symlink "$2.kmap.gz", "$tmp$1/$3.kmap.gz" if m|(.*)/((..).+)\.kmap\.gz|;
+}
+unlink "$tmp/usr/lib/kbd/keymaps/i386/qwertz/fr.kmap.gz";
+
+foreach (cat_("list")) {
+    chomp;
+    install($_);
+    chomp, install_lib($_) foreach `ldd $_ 2>/dev/null | grep "=>" | sed -e 's/.*=> //' -e 's/ .*//'`;
+}
+foreach (cat_("aliases")) {
+    chomp; my ($f, $dest) = split;
+    symlink $dest, "$tmp$f";
+}
+_ "cp ../modules/modules.{cz*,dep} $tmp/modules";
+
+__ "$sudo strip $tmp/{lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
+
+exit 0 if $ARGV[0];
+
+$size = `du -s $tmp | cut -f1` + 2048; #- add 2MB of free space
+
+commands::mkdir_("-p", $mnt) if !-e $mnt;
+__ "$sudo umount $rescue";
+
+_ "dd if=/dev/zero of=$rescue bs=1k count=$size";
+_ "$mke2fs $rescue";
+_ "$sudo mount -t ext2 $rescue $mnt -o loop";
+_ "rmdir $mnt/lost+found";
+
+_ "$sudo chown -R root.root $tmp";
+_ "$sudo cp -a $tmp/* $mnt";
+_ "$sudo rm -rf $tmp";
+
+_ "$sudo umount $rescue";
+_ "rmdir $mnt";
+
+_ "echo gzipping $rescue";
+_ "gzip -f -9 $rescue";
