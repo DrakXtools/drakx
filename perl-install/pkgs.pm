@@ -173,7 +173,7 @@ sub packageById {
 }
 
 sub analyse_kernel_name {
-    $_[0] =~ /kernel[^\-]*(-enterprise|-i686-up-4GB|-p3-smp-64GB|-secure|-smp)?(?:-([^\-]+))?$/;
+    $_[0] =~ /kernel[^\-]*(-enterprise|-i686-up-4GB|-p3-smp-64GB|-secure|-smp|-multimedia|-multimedia-smp)?(?:-([^\-]+))?$/;
 }
 
 sub packages2kernels {
