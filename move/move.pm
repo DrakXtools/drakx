@@ -88,7 +88,7 @@ sub init {
     #- ro things
     symlinkf_short("/image/etc/$_", "/etc/$_")
       foreach qw(alternatives man.config services shells pam.d security inputrc ld.so.conf 
-                 DIR_COLORS bashrc profile rc.d init.d devfsd.conf gtk-2.0 pango fonts modules.devfs 
+                 DIR_COLORS bashrc profile init.d devfsd.conf gtk-2.0 pango fonts modules.devfs 
                  dynamic hotplug gnome-vfs-2.0 gnome-vfs-mime-magic gtk gconf menu menu-methods nsswitch.conf default login.defs 
                  skel ld.so.cache openoffice xinetd.d xinetd.conf syslog.conf sysctl.conf sysconfig/networking/ifcfg-lo
                  ifplugd);
@@ -342,6 +342,10 @@ unplug it, remove write protection, and then plug it again.")),
     key_installfiles('full');
 }
 
+sub enable_service {
+    run_program::run('/sbin/chkconfig', '--level', 5, $_[0], 'on');
+}
+
 sub install2::configMove {
     my $o = $::o;
 
@@ -368,14 +372,14 @@ sub install2::configMove {
     require install_steps_interactive;
     if (cat_('/proc/mounts') !~ /nfs/) {
         install_steps_interactive::configureNetwork($o);
-        #- seems that applications have trouble with the loopback interface
-        #- after successful network configuration if we don't do that
-        run_program::run('/sbin/service', 'network', 'restart');
+        enable_service('network');
     }
     install_steps_interactive::summaryBefore($o);
 
     modules::load_category('multimedia/sound');
-    run_program::raw({ detach => 1 }, 'service', 'sound', 'start');
+    enable_service('sound');
+
+    enable_service('syslog');
 
     $o->{useSupermount} = 1;
     fs::set_removable_mntpoints($o->{all_hds});    
@@ -472,23 +476,25 @@ sub install2::startMove {
     
     install_TrueFS_in_home($o);
 
-    run_program::run('/sbin/service', 'syslog', 'start');
-    run_program::run('killall', 'minilogd');  #- get rid of minilogd
-    run_program::run('/sbin/service', 'syslog', 'restart');  #- otherwise minilogd will strike back
-
     my $username = $o->{users}[0]{name};
     output('/var/run/console.lock', $username);
     output("/var/run/console/$username", 1);
     run_program::run('pam_console_apply');
+
+    touch '/var/run/utmp';
+    run_program::run('runlevel_set', '5');
+    member($_, qw(xfs dm devfsd)) or run_program::run($_, 'start') foreach glob('/etc/rc.d/rc5.d/*');
+    run_program::run('killall', 'minilogd');
+    run_program::run('/sbin/service', 'syslog', 'restart');  #- otherwise minilogd will strike back
+
+    #- allow user customisation of startup through /etc/rc.d/rc.local
+    run_program::run('/etc/rc.d/rc.local');
 
     if (cat_('/proc/mounts') =~ m|\s/home\s|) {
         output '/var/lib/machine_ident', machine_ident();
         run_program::run('/usr/bin/etc-monitorer.pl', uniq map { dirname($_) } chomp_(`find /etc -type f`));
         run_program::raw({ detach => 1 }, '/usr/bin/dnotify', '-MCRD', '/etc', '-r', '-e', '/usr/bin/etc-monitorer.pl', '{}') or die "dnotify not found!";
     }
-
-    #- allow user customisation of startup through /etc/rc.d/rc.local
-    run_program::run('/etc/rc.d/rc.local');
 
     if (fork()) {
 	sleep 1;
