@@ -135,10 +135,16 @@ sub same_entries {
     my ($a, $b) = @_;
 
     foreach (uniq(keys %$a, keys %$b)) {
-	next if $_ eq 'label';
-	next if $a->{$_} eq $b->{$_};
-	my ($inode_a, $inode_b) = map { (stat "$::prefix$_")[1] } ($a->{$_}, $b->{$_});
-	next if $inode_a && $inode_b && $inode_a == $inode_b;
+	if ($_ eq 'label') {
+	    next;
+	} elsif ($_ eq 'append') {
+	    next if join(' ', sort split(' ', $a->{$_})) eq join(' ', sort split(' ', $b->{$_}))
+	} else {
+	    next if $a->{$_} eq $b->{$_};
+
+	    my ($inode_a, $inode_b) = map { (stat "$::prefix$_")[1] } ($a->{$_}, $b->{$_});
+	    next if $inode_a && $inode_b && $inode_a == $inode_b;
+	}
 
 	log::l("entries $a->{label} don't have same $_: $a->{$_} ne $b->{$_}");
 	return;
