@@ -631,7 +631,9 @@ sub summary_prompt {
 	    push @table, [ gtkpack__(Gtk2::HBox->new(0, 0), $e->{group}), '' ];
 	};
 	$e->{widget} = Gtk2::Label->new;
-	push @table, [], [ gtkpack__(Gtk2::HBox->new(0, 20), '', $e->{widget}), 
+	$e->{widget}->set_property(wrap => 1);
+	$e->{widget}->set_size_request($::windowwidth * 0.65, -1);
+	push @table, [], [ gtkpack__(Gtk2::HBox->new(0, 20), '', $e->{widget}),
 			   gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub { 
 						 $w->{rwindow}->hide;
 						 $e->{clicked}(); 
@@ -652,7 +654,7 @@ sub summary_prompt {
 
     gtkadd($w->{window},
 	   gtkpack_(Gtk2::VBox->new(0,5),
-		    1, create_packtable({ mcc => 1 }, @table),
+		    1, create_scrolled_window(create_packtable({ mcc => 1 }, @table)),
 		    0, $w->create_okcancel(undef, '', '', if_($help_sub, [ N("Help"), $help_sub, 1 ]))
 		  ));
 
