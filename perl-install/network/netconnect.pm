@@ -981,9 +981,9 @@ I cannot set up this connection type.")), return;
                    static_hostname => 
                    {
                     pre => sub {
-                        $netc->{dnsServer} ||= dns($intf->{IPADDR});
-                        $gateway_ex = gateway($intf->{IPADDR});
-                        #-    $netc->{GATEWAY}   ||= gateway($intf->{IPADDR});
+                        $netc->{dnsServer} ||= dns($ethntf->{IPADDR});
+                        $gateway_ex = gateway($ethntf->{IPADDR});
+                        #-    $netc->{GATEWAY}   ||= gateway($ethntf->{IPADDR});
                     },
                     name => N("Please enter your host name.
 Your host name should be a fully-qualified host name,
