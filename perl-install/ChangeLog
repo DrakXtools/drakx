@@ -1,3 +1,138 @@
+2002/03/07  dam's  <damien@mandrakesoft.com>
+
+	* standalone/net_monitor: make gc happy
+
+	* modparm.pm, share/po/fr.po: corrected
+
+	* standalone/draknet: corrected network/internet restart when already
+	connected
+
+	* network/netconnect.pm: corrected bad previous behaviour
+
+	* standalone/drakfont: corrected bad system command
+
+	* share/advertising/02-internet_icon.png,
+	share/advertising/05-contcenter_icon.png,
+	share/advertising/10-MDKexpert_icon.png, share/advertising/06-user.pl,
+	share/advertising/08-games.pl, share/advertising/02-internet.pl,
+	share/advertising/03-graphic_icon.png, share/advertising/07-server.pl,
+	share/advertising/12-MDKstore_icon.png,
+	share/advertising/06-user_icon.png,
+	share/advertising/07-server_icon.png, share/advertising/09-MDKcampus.pl,
+	share/advertising/10-MDKexpert.pl, share/advertising/05-contcenter.pl,
+	share/advertising/04-develop.pl,
+	share/advertising/09-MDKcampus_icon.png,
+	share/advertising/12-MDKstore.pl, share/advertising/03-graphic.pl,
+	share/advertising/04-develop_icon.png,
+	share/advertising/08-games_icon.png: changed icon sizes
+
+2002/03/07  fcrozat
+
+	* share/rpmsrate: Evolution is not dependent on GNOME selection (not
+	require gnome-core)
+
+2002/03/07  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps.pm: avoid destroying some files in /etc.
+
+	* install_steps_interactive.pm: fixed package tree with a given medium.
+
+	* any.pm: fix autologin sometimes activated without user intervention.
+
+2002/03/07  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_any.pm: generate_automatic_stage1_params: also save
+	the interface number in case the machine will
+	have several interfaces; clean code a bit
+
+	* mdk-stage1/network.c: better error msg regarding pcmcia net
+	adapters supported either with pcmcia.img
+	or network.img (amaury sucks)
+
+	* install_steps_auto_install.pm: in replay mode, since
+	$o->{interactiveSteps}
+	exists, we can't simply ||= @graphical_steps,
+	we need to push to ensure that the
+	@graphical_steps is always honoured
+
+	* standalone/drakgw: 
+	  - call net_monitor to disable internet
+	connection before network-restart
+	  - user return value when status'ing the
+	  initscripts rather than grepping their
+	  text output
+
+	* modules.pm: try to avoid segfaulting probeall stuff
+	add ns83820 gigabit (goes to other.img)
+
+	* rescue/rescue-doc: english fixes thx to phil
+
+2002/03/07  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* standalone/drakfont: Added a missing _( ) around a text
+
+	* share/po/vi.po, share/po/cy.po, share/po/hu.po, share/po/id.po: updated
+	po files
+
+	* share/po/ko.po, share/po/ca.po, share/po/tr.po: commented out the
+	translations using argument switching (not yet handled by DrakX)
+
+	* bootlook.pm, standalone/drakboot: i18n changes
+
+	* keyboard.pm: corrected the locale->keyboard list building
+	make keyboard selection choose first the 5 first chars of lang;
+	then the 2 first chars;
+
+	* share/po/eu.po: commented out the translations using argument switching
+	(not yet handled by DrakX)
+	updated po file
+
+2002/03/07  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm: fix fileshare custom config
+	fix *some* stew errors
+
+	* bootloader.pm: "--timeout=" must be after terminal
+	add --timeout=... for "terminal serial ..." line in grub's menu.lst
+	fix *some* stew errors
+
+	* install_any.pm: don't have the adsl & modem passwords in report.bug
+
+	* detect_devices.pm (zips__faking_ide_scsi): fix returned value in
+	standalone
+	(getSCSI): don't call isFloppyOrHD for ZIPs (lowers the number of kernel
+	error when there is no floppy)
+
+	* fs.pm: removing quota choices for reiserfs
+
+2002/03/07  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* any.pm, bootlook.pm, standalone/drakboot, bootloader.pm: drakboot
+	functionality for PPC
+
+2002/03/07  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: Fixed bug of network not being started by Printerdrake
+	during installation.
+
+2002/03/07  warly
+
+	* share/compssUsers.server, share/compssUsers, share/rpmsrate: update
+	server, merge with normal rpmsrate
+
+2002/03/06  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakautoinst: corrected HASH and ARRAY label
+
+2002/03/06  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ja.po, share/po/no.po, share/po/cy.po: updated po file
+
+2002/03/06  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/fileshareset (nfs_exports::update_server): ensure portmap is
+	running
+
 2002/03/06  dam's  <damien@mandrakesoft.com>
 
 	* my_gtk.pm: corrected font stuff
