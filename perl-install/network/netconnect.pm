@@ -725,7 +725,7 @@ If you don't know, choose 'use pppoe'"),
                     },
                     post => sub {
                         network::adsl::adsl_conf_backend($in, $netcnx, $netc, $ntf_name, $adsl_type); #FIXME
-			$config->{adsl} = { kind => "$ntf_name", protocol => "$adsl_type" };
+                        $config->{adsl} = { kind => "$ntf_name", protocol => $adsl_type };
                         $handle_multiple_cnx->();
                     },
                    },
