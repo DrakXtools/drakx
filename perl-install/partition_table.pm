@@ -85,10 +85,13 @@ my %fs2type = reverse %type2fs;
 
 sub important_types { $_[0] and return sort values %types; @important_types }
 
-sub type2name($) { $types{$_[0]} || 'unknown' }
+sub type2name($) { $types{$_[0]} || $_[0] }
 sub type2fs($) { $type2fs{$_[0]} }
-sub name2type($) { $types_rev{$_[0]} }
 sub fs2type($) { $fs2type{$_[0]} }
+sub name2type($) { 
+    local ($_) = @_;
+    /0x(.*)/ ? hex $1 : $types_rev{$_} || $_;
+}
 
 sub isExtended($) { $_[0]{type} == 5 || $_[0]{type} == 0xf }
 sub isSwap($) { $type2fs{$_[0]{type}} eq 'swap' }
