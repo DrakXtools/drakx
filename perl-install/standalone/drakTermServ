@@ -57,6 +57,12 @@ my $server_ip = get_ip_from_sys();
 my $changes_made = 0;
 my $client_cfg = "/etc/dhcpd.conf.etherboot.clients";
 my $tftpboot = "/var/lib/tftpboot";
+my @kernels = grep { /vmlinuz-/ } all("/boot");
+my $i = 0;
+foreach (@kernels) {
+	splice(@kernels, $i, 1) if -l $_;
+	$i++;
+}
 
 #- make sure terminal server and friends are installed
 my $ts = system("rpm -q terminal-server > /dev/null");
@@ -448,7 +454,6 @@ sub make_nbis() {
 	my $buff = N("Creating net boot images for all kernels");
 	$in->ask_warn(N("Information"), N("This will take a few minutes."));
 	cursor_wait();
-	my @kernels = grep { /vmlinuz-/ } all("/boot");
 	system("/usr/bin/mknbi-set -k /boot/$_") foreach @kernels;
 	cursor_norm();
 	$buff .= "\n\n\t" . N("Done!");	
@@ -662,7 +667,6 @@ sub make_boot() {
 
 sub make_nbi() {
 	my $nbi_box;
-	my @kernels = grep { /vmlinuz-/ } all("/boot");
 	my $kernel;
 	my $nic;
 	
