@@ -209,5 +209,7 @@ sub main {
 
     ($disabled, my $ports) = choose($in, $disabled, $servers, $unlisted) or return;
 
-    set_ports($in->do_pkgs, $disabled, $ports, $in);
+    set_ports($in->do_pkgs, $disabled, $ports, $in) or return;
+
+    ($disabled, $ports);
 }
