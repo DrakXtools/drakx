@@ -363,7 +363,7 @@ sub part_possible_actions {
         __("Mount point")      => '($part->{real_mntpoint} && common::usingRamdisk()) || (!isBusy && !isSwap && !isNonMountable)',
         __("Type")             => '!isBusy && $::expert',
         __("Options")          => '$::expert',
-        __("Resize")	       => '!isBusy && !isSpecial',
+        __("Resize")	       => '!isBusy && !isSpecial || isLVM($hd) && isMounted && isThisFs("xfs", $part)',
         __("Move")             => '!isBusy && !isSpecial && $::expert && 0', # disable for the moment
         __("Format")           => '!isBusy && ($::expert || $::isStandalone)',
         __("Mount")            => '!isBusy && (hasMntpoint || isSwap) && maybeFormatted && ($::expert || $::isStandalone)',
@@ -390,9 +390,6 @@ sub part_possible_actions {
     	        $cond =~ s/$k/qq(($v))/e;
     	    }
     	    $cond =~ s/(^|[^:\$]) \b ([a-z]\w{3,}) \b ($|[\s&\)])/$1 . $2 . '($part)' . $3/exg;
-    	    if (/Create/) {
-    	        1;
-    	    }
     	    eval $cond;
         } @$actions_names;
     }
@@ -566,7 +563,7 @@ sub Mount_point_raw_hd {
 
 sub Resize {
     my ($in, $hd, $part) = @_;
-    my ($resize_fat, $resize_ext2, $resize_reiserfs, $block_count, $free_block, $block_size);
+    my (%nice_resize, $block_count, $free_block, $block_size);
     my ($min, $max) = (min_partition_size($hd), partition_table::next_start($hd, $part) - $part->{start});
 
     if (maybeFormatted($part)) {
@@ -578,29 +575,32 @@ sub Resize {
 	    #- try to resize without losing data
 	    my $w = $in->wait_message(_("Resizing"), _("Computing FAT filesystem bounds"));
 
-	    $resize_fat = resize_fat::main->new($part->{device}, devices::make($part->{device}));
-	    $min = max($min, $resize_fat->min_size);
-	    $max = min($max, $resize_fat->max_size);	    
+	    $nice_resize{fat} = resize_fat::main->new($part->{device}, devices::make($part->{device}));
+	    $min = max($min, $nice_resize{fat}->min_size);
+	    $max = min($max, $nice_resize{fat}->max_size);	    
 	} elsif (isExt2($part)) {
 	    write_partitions($in, $hd) or return;
-	    $resize_ext2 = devices::make($part->{device});
-	    my $r = `dumpe2fs $resize_ext2 2>/dev/null`;
+	    $nice_resize{ext2} = devices::make($part->{device});
+	    my $r = `dumpe2fs $nice_resize{ext2} 2>/dev/null`;
 	    $r =~ /Block count:\s*(\d+)/ and $block_count = $1;
 	    $r =~ /Free blocks:\s*(\d+)/ and $free_block = $1;
 	    $r =~ /Block size:\s*(\d+)/ and $block_size = $1;
-	    log::l("dumpe2fs $resize_ext2 gives: Block_count=$block_count, Free_blocks=$free_block, Block_size=$block_size");
+	    log::l("dumpe2fs $nice_resize{ext2} gives: Block_count=$block_count, Free_blocks=$free_block, Block_size=$block_size");
 	    if ($block_count && $free_block && $block_size) {
 		$min = max($min, ($block_count - $free_block) * $block_size / 512);
 		$max = min($max, $block_count * $block_size / 512);
 	    } else {
-		$resize_ext2 = undef;
+		delete $nice_resize{ext2};
 	    }
 	} elsif (isThisFs("reiserfs", $part)) {
 	    write_partitions($in, $hd) or return;
 	    if (defined (my $free = fs::df($part))) {
-		$resize_reiserfs = 1;		  
+		$nice_resize{reiserfs} = 1;		  
 		$min = max($min, $free);
 	    }
+	} elsif (isThisFs('xfs', $part) && isLVM($hd) && $::isStandalone && isMounted($part)) {
+	    $min = $part->{size}; #- ensure the user can only increase
+	    $nice_resize{xfs} = 1;
 	}
 	#- make sure that even after normalizing the size to cylinder boundaries, the minimun will be saved,
 	#- this save at least a cylinder (less than 8Mb).
@@ -609,7 +609,7 @@ sub Resize {
 
 	#- for these, we have tools to resize partition table
 	#- without losing data (or at least we hope so :-)
-	if ($resize_fat || $resize_ext2 || $resize_reiserfs) {
+	if (%nice_resize) {
 	    ask_alldatamaybelost($in, $part, __("All data on this partition should be backed-up")) or return;
 	} else {
 	    ask_alldatawillbelost($in, $part, __("After resizing partition %s, all data on this partition will be lost")) or return;
@@ -634,17 +634,23 @@ sub Resize {
     my $b = before_leaving { $@ and $part->{size} = $oldsize };
     my $w = $in->wait_message(_("Resizing"), '');
 
-    if ($resize_fat) {
+    if (isLVM($hd)) {
+	lvm::lv_resize($part, $oldsize) if $size > $oldsize;	
+    }
+
+    if ($nice_resize{fat}) {
 	local *log::l = sub { $w->set(join(' ', @_)) };
-	$resize_fat->resize($part->{size});
-    } elsif ($resize_ext2) {
+	$nice_resize{fat}->resize($part->{size});
+    } elsif ($nice_resize{ext2}) {
 	my $s = int(($part->{size} << 9) / $block_size);
-	log::l("resize2fs $resize_ext2 to size $s in block of $block_size bytes");
-	system "resize2fs", "-pf", $resize_ext2, $s;
-    } elsif ($resize_reiserfs) {
+	log::l("resize2fs $nice_resize{ext2} to size $s in block of $block_size bytes");
+	system "resize2fs", "-pf", $nice_resize{ext2}, $s;
+    } elsif ($nice_resize{reiserfs}) {
 	log::l("reiser resize to $part->{size} sectors");
 	install_any::check_prog ("resize_reiserfs") if $::isInstall;
 	system "resize_reiserfs", "-f", "-q", "-s" . $part->{size}/2 . "K", devices::make($part->{device});
+    } elsif ($nice_resize{xfs}) {
+	system "xfs_growfs", $part->{mntpoint};
     } else {
 	$part->{notFormatted} = 1;
 	$part->{isFormatted} = 0;
@@ -652,8 +658,13 @@ sub Resize {
 	return;
     }
     $part->{isFormatted} = 1;
-    partition_table::adjust_local_extended($hd, $part);
-    partition_table::adjust_main_extended($hd);
+
+    if (isLVM($hd)) {
+	lvm::lv_resize($part, $oldsize) if $size < $oldsize;
+    } else {
+	partition_table::adjust_local_extended($hd, $part);
+	partition_table::adjust_main_extended($hd);
+    }
 }
 sub Move {
     my ($in, $hd, $part, $all_hds) = @_;
