@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.8
-Release: 14mdk
+Release: 15mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -263,6 +263,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Wed Jul 31 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-15mdk
+- harddrake:
+	o add embedded mode for drakconf
+	o print less gtk warnings
+	o module configuration window
+- don't require detect-lst
+- Xconfig fixes (pixel)
+- printerdrake work in progress (till)
+
 * Wed Jul 31 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-14mdk
 - harddrake:
 	o fix pcmcia network card detection (unknown => ethernet)
