@@ -116,12 +116,10 @@ if (-r $themes{sysconfig}) {
     close($SYSF);
 }
 
-my @thms;
 my @boot_thms = if_(!$themes{default}, qw(default));
-chdir($themes{path}); #- we must change directory for correct @thms assignement
+chdir($themes{path}); #- we must change directory for correct @boot_thms assignement
 foreach (all('.')) {
     if (-d "$themes{path}$_" && m/^[^.]/) {
-        push @thms, $_;
         -f "$themes{path}$_$themes{boot}{path}bootsplash-$cur_res.jpg" and push @boot_thms, $_;
     }
 }
