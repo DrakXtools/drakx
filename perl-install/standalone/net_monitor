@@ -30,12 +30,34 @@ use network::netconnect;
 use network::tools;
 use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
 
-my ($connect, $default_intf);
+"@ARGV" =~ /--help/ and print q(Network & Internet connection and monitoring application
+
+--defaultintf interface : show this interface by default
+--connect : connect to internet if not already connected
+--disconnect : disconnect to internet if already connected
+--force : used with (dis)connect : force (dis)connection.
+--status : returns 1 if connected 0 otherwise, then exit.
+--quiet : don't be interactive. To be used with (dis)connect.
+);
+
+if ("@ARGV" =~ /--status/) { print connected(); exit(0) }
+my $force = "@ARGV" =~ /--force/;
+my $quiet = "@ARGV" =~ /--quiet/;
+my $connect = "@ARGV" =~ /--connect/;
+my $disconnect = "@ARGV" =~ /--disconnect/;
+my ($default_intf) = "@ARGV" =~ /--defaultintf (\w+)/;
+
+if ($force) {
+    $connect and system("/etc/sysconfig/network-scripts/net_cnx_up &");
+    $disconnect and system("/etc/sysconfig/network-scripts/net_cnx_down &");
+    $connect = $disconnect = 0;
+}
+$quiet and exit(0);
 init Gtk;
 my $in = 'interactive'->vnew('su', 'default');
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
-($default_intf) = "@ARGV" =~ /--defaultintf (\w+)/;
-$connect = "@ARGV" =~ /--connect/;
+
+
 my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
 $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
 $window1->set_position(1);
@@ -130,9 +152,9 @@ $window1->show_all();
 my $time_tag = Gtk->timeout_add(1000, \&rescan);
 my $time_tag2 = Gtk->timeout_add(5000, \&update);
 update();
-
 rescan();
-connection() if ($connect && ! $isconnected);
+connection() if ($connect && !$isconnected);
+connection() if ($disconnect && $isconnected);
 Gtk->main;
 Gtk->exit(0);
 
