@@ -1035,7 +1035,7 @@ sub summary {
 	label => N("Firewall"),
 	val => sub { 
 	    require network::shorewall;
-	    my $shorewall = network::shorewall::read();
+	    my $shorewall = network::shorewall::read($o);
 	    $shorewall && !$shorewall->{disabled} ? N("activated") : N("disabled");
 	},
 	clicked => sub { 
