@@ -393,8 +393,8 @@ int ftp_end_data_command(int sock)
 	return 0;
 }
 
-  
-int http_download_file(char * hostname, char * remotename, int * size)
+
+int http_download_file(char * hostname, char * remotename, int * size, char * proxyprotocol, char * proxyname, char * proxyport)
 {
 	char * buf;
 	char headers[4096];
@@ -406,8 +406,22 @@ int http_download_file(char * hostname, char * remotename, int * size)
 	int rc;
 	struct sockaddr_in destPort;
 	char * header_content_length = "Content-Length: ";
+	char * http_server_name;
+	int http_server_port;
 
-	if ((rc = get_host_address(hostname, &serverAddress))) return rc;
+	if (proxyprotocol) {
+		http_server_name = proxyname;
+		http_server_port = atoi(proxyport);
+	} else {
+		http_server_name = hostname;
+		http_server_port = 80;
+	}		
+
+	log_message("HTTP: connecting to server %s:%i (%s)",
+		    http_server_name, http_server_port,
+		    proxyprotocol ? "proxy" : "no proxy");
+
+	if ((rc = get_host_address(http_server_name, &serverAddress))) return rc;
 
 	sock = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
 	if (sock < 0) {
@@ -415,7 +429,7 @@ int http_download_file(char * hostname, char * remotename, int * size)
 	}
 
 	destPort.sin_family = AF_INET;
-	destPort.sin_port = htons(80);
+	destPort.sin_port = htons(http_server_port);
 	destPort.sin_addr = serverAddress;
 
 	if (connect(sock, (struct sockaddr *) &destPort, sizeof(destPort))) {
@@ -423,8 +437,14 @@ int http_download_file(char * hostname, char * remotename, int * size)
 		return FTPERR_FAILED_CONNECT;
 	}
 
-	buf = alloca(4 + strlen(remotename) + 12 + 6 + strlen(hostname) + 4 + 1);
-	sprintf(buf, "GET %s HTTP/0.9\r\nHost: %s\r\n\r\n", remotename, hostname);
+	if (proxyprotocol) {
+		buf = alloca(4 + strlen(proxyprotocol) + 3 + strlen(hostname) + strlen(remotename) + 11 + 6 + strlen(hostname) + 4 + 1);
+		sprintf(buf, "GET %s://%s%s HTTP/0.9\r\nHost: %s\r\n\r\n", proxyprotocol, hostname, remotename, hostname);
+	} else {
+		buf = alloca(4 + strlen(remotename) + 11 + 6 + strlen(hostname) + 4 + 1);
+		sprintf(buf, "GET %s HTTP/0.9\r\nHost: %s\r\n\r\n", remotename, hostname);
+	}
+
 	write(sock, buf, strlen(buf));
 
 	/* This is fun; read the response a character at a time until we:

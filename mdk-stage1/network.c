@@ -691,8 +691,8 @@ enum return_type nfs_prepare(void)
 
 enum return_type ftp_prepare(void)
 {
-	char * questions[] = { "FTP server", DISTRIB_NAME " directory", "Login", "Password", NULL };
-	char * questions_auto[] = { "server", "directory", "user", "pass", NULL };
+	char * questions[] = { "FTP server", DISTRIB_NAME " directory", "Login", "Password", "HTTP proxy host", "HTTP proxy port", NULL };
+	char * questions_auto[] = { "server", "directory", "user", "pass", "proxy_host", "proxy_port", NULL };
 	static char ** answers = NULL;
 	enum return_type results;
 
@@ -709,42 +709,67 @@ enum return_type ftp_prepare(void)
 
 	do {
 		char location_full[500];
-		int ftp_serv_response;
+		int ftp_serv_response = -1;
 		int fd, size;
+		int use_http_proxy;
+		char ftp_hostname[500];
 
 		results = ask_from_entries_auto("Please enter the name or IP address of the FTP server, "
 						"the directory containing the " DISTRIB_NAME " Distribution, "
-						"and the login/pass if necessary (leave login blank for anonymous).",
+						"and the login/pass if necessary (leave login blank for anonymous). "
+						"Please enter HTTP proxy host and port if you need it.",
 						questions, &answers, 40, questions_auto, NULL);
 		if (results != RETURN_OK || streq(answers[0], "")) {
 			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
 			return ftp_prepare();
 		}
 
-		log_message("FTP: trying to connect to %s", answers[0]);
+		use_http_proxy = !streq(answers[4], "") && !streq(answers[5], "");
 
-		ftp_serv_response = ftp_open_connection(answers[0], answers[2], answers[3], "");
-		if (ftp_serv_response < 0) {
-			log_message("FTP: error connect %d", ftp_serv_response);
-			if (ftp_serv_response == FTPERR_BAD_HOSTNAME)
-				stg1_error_message("Error: bad hostname.");
-			else if (ftp_serv_response == FTPERR_FAILED_CONNECT)
-				stg1_error_message("Error: failed to connect to remote host.");
-			else
-				stg1_error_message("Error: couldn't connect.");
-			results = RETURN_BACK;
-			continue;
-		}
+		if (use_http_proxy) {
+		        log_message("FTP: don't connect to %s directly, will use proxy", answers[0]);
+		} else {
+		        log_message("FTP: trying to connect to %s", answers[0]);
+			ftp_serv_response = ftp_open_connection(answers[0], answers[2], answers[3], "");
+                        if (ftp_serv_response < 0) {
+                                log_message("FTP: error connect %d", ftp_serv_response);
+                                if (ftp_serv_response == FTPERR_BAD_HOSTNAME)
+                                        stg1_error_message("Error: bad hostname.");
+                                else if (ftp_serv_response == FTPERR_FAILED_CONNECT)
+                                        stg1_error_message("Error: failed to connect to remote host.");
+                                else
+                                        stg1_error_message("Error: couldn't connect.");
+                                results = RETURN_BACK;
+                                continue;
+                        }
+                }
+
 		strcpy(location_full, answers[1]);
 		strcat(location_full, get_ramdisk_realname());
 
 		log_message("FTP: trying to retrieve %s", location_full);
 
-		fd = ftp_start_download(ftp_serv_response, location_full, &size);
+		if (use_http_proxy) {
+			if (strcmp(answers[2], "")) {
+			        strcpy(ftp_hostname, answers[2]); /* user name */
+				strcat(ftp_hostname, ":");
+				strcat(ftp_hostname, answers[3]); /* password */
+				strcat(ftp_hostname, "@");
+			} else {
+			    strcpy(ftp_hostname, "");
+			}
+			strcat(ftp_hostname, answers[0]);
+			fd = http_download_file(ftp_hostname, location_full, &size, "ftp", answers[4], answers[5]);
+		} else {
+		        fd = ftp_start_download(ftp_serv_response, location_full, &size);
+		}
+
 		if (fd < 0) {
 			log_message("FTP: error get %d", fd);
 			if (fd == FTPERR_PASSIVE_ERROR)
 				stg1_error_message("Error: error with passive connection.");
+			else if (fd == FTPERR_FAILED_CONNECT)
+				stg1_error_message("Error: couldn't connect to server.");
 			else if (fd == FTPERR_FILE_NOT_FOUND)
 				stg1_error_message("Error: file not found (%s).", location_full);
 			else if (fd == FTPERR_BAD_SERVER_RESPONSE)
@@ -758,17 +783,27 @@ enum return_type ftp_prepare(void)
 		log_message("FTP: size of download %d bytes", size);
 		
 		results = load_ramdisk_fd(fd, size);
-		if (results == RETURN_OK)
-			ftp_end_data_command(ftp_serv_response);
-		else
+		if (results == RETURN_OK) {
+		        if (!use_http_proxy)
+			        ftp_end_data_command(ftp_serv_response);
+		} else {
 			return results;
+		}
 
-		method_name = strdup("ftp");
-		add_to_env("HOST", answers[0]);
-		add_to_env("PREFIX", answers[1]);
-		if (strcmp(answers[2], "")) {
-			add_to_env("LOGIN", answers[2]);
-			add_to_env("PASSWORD", answers[3]);
+		if (use_http_proxy) {
+		        method_name = strdup("http");
+		        sprintf(location_full, "ftp://%s%s", ftp_hostname, answers[1]);
+		        add_to_env("URLPREFIX", location_full);
+			add_to_env("PROXY", answers[4]);
+			add_to_env("PROXYPORT", answers[5]);
+		} else {
+		        method_name = strdup("ftp");
+		        add_to_env("HOST", answers[0]);
+			add_to_env("PREFIX", answers[1]);
+			if (!streq(answers[2], "")) {
+			        add_to_env("LOGIN", answers[2]);
+				add_to_env("PASSWORD", answers[3]);
+			}
 		}
 	}
 	while (results == RETURN_BACK);
@@ -778,8 +813,8 @@ enum return_type ftp_prepare(void)
 
 enum return_type http_prepare(void)
 {
-	char * questions[] = { "HTTP server", DISTRIB_NAME " directory", NULL };
-	char * questions_auto[] = { "server", "directory", NULL };
+	char * questions[] = { "HTTP server", DISTRIB_NAME " directory", "HTTP proxy host", "HTTP proxy port", NULL };
+	char * questions_auto[] = { "server", "directory", "proxy_host", "proxy_port", NULL };
 	static char ** answers = NULL;
 	enum return_type results;
 
@@ -797,9 +832,11 @@ enum return_type http_prepare(void)
 	do {
 		char location_full[500];
 		int fd, size;
+		int use_http_proxy;
 
 		results = ask_from_entries_auto("Please enter the name or IP address of the HTTP server, "
-						"and the directory containing the " DISTRIB_NAME " Distribution.",
+						"and the directory containing the " DISTRIB_NAME " Distribution."
+						"Please enter HTTP proxy host and port if you need it.",
 						questions, &answers, 40, questions_auto, NULL);
 		if (results != RETURN_OK || streq(answers[0], "")) {
 			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
@@ -811,7 +848,9 @@ enum return_type http_prepare(void)
 
 		log_message("HTTP: trying to retrieve %s from %s", location_full, answers[0]);
 		
-		fd = http_download_file(answers[0], location_full, &size);
+		use_http_proxy = !streq(answers[2], "") && !streq(answers[3], "");
+
+		fd = http_download_file(answers[0], location_full, &size, use_http_proxy ? "http" : NULL, answers[2], answers[3]);
 		if (fd < 0) {
 			log_message("HTTP: error %d", fd);
 			if (fd == FTPERR_FAILED_CONNECT)
@@ -830,6 +869,10 @@ enum return_type http_prepare(void)
 		method_name = strdup("http");
 		sprintf(location_full, "http://%s%s", answers[0], answers[1]);
 		add_to_env("URLPREFIX", location_full);
+                if (!streq(answers[2], ""))
+			add_to_env("PROXY", answers[2]);
+                if (!streq(answers[3], ""))
+			add_to_env("PROXYPORT", answers[3]);
 	}
 	while (results == RETURN_BACK);
 

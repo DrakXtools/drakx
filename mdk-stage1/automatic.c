@@ -78,7 +78,8 @@ char * get_auto_value(char * auto_param)
 		{ { "method", "met" }, { "network", "netw" }, { "interface", "int" }, { "gateway", "gat" },
 		  { "netmask", "netm" }, { "adsluser", "adslu" }, { "adslpass", "adslp" }, { "hostname", "hos" },
 		  { "domain", "dom" }, { "server", "ser" }, { "directory", "dir" }, { "user", "use" },
-		  { "pass", "pas" }, { "disk", "dis" }, { "partition", "par" }, { NULL, NULL } };
+		  { "pass", "pas" }, { "disk", "dis" }, { "partition", "par" }, { "proxy_host", "proxh" },
+		  { "proxy_port", "proxp" }, { NULL, NULL } };
 	struct param_elem * ptr_alias = short_aliases;
 	while (ptr_alias->name) {
 		if (streq(auto_param, ptr_alias->name))
