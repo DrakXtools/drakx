@@ -80,7 +80,7 @@ sub write_resolv_conf {
     #- get the list of used dns.
     my %used_dns; @used_dns{$netc->{dnsServer}, $netc->{dnsServer2}, $netc->{dnsServer3}} = (1, 2, 3);
 
-    unless ($netc->{DOMAINNAME} || keys %used_dns > 0) {
+    unless ($netc->{DOMAINNAME} || $netc->{DOMAINNAME2} || keys %used_dns > 0) {
 	unlink($file);
 	log::l("neither domain name nor dns server are configured");
 	return 0;
@@ -95,8 +95,8 @@ sub write_resolv_conf {
     }
 
     close F; open F, ">$file" or die "cannot write $file: $!";
-    print F "# search $_\n" foreach grep { $_ ne $netc->{DOMAINNAME} } sort { $search{$a} <=> $search{$b} } keys %search;
-    print F "search $netc->{DOMAINNAME}\n\n" if $netc->{DOMAINNAME};
+    print F "# search $_\n" foreach grep { $_ ne "$netc->{DOMAINNAME} $netc->{DOMAINNAME2}" } sort { $search{$a} <=> $search{$b} } keys %search;
+    print F "search $netc->{DOMAINNAME} $netc->{DOMAINNAME2}\n\n" if ($netc->{DOMAINNAME} || $netc->{DOMAINNAME2});
     print F "# nameserver $_\n" foreach grep { ! exists $used_dns{$_} } sort { $dns{$a} <=> $dns{$b} } keys %dns;
     print F "nameserver $_\n" foreach  sort { $used_dns{$a} <=> $used_dns{$b} } grep { $_ } keys %used_dns;
     print F "\n";
@@ -369,7 +369,7 @@ sub configureNetwork2 {
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf);
     sethostname($netc) unless $::testing;
     addDefaultRoute($netc) unless $::testing;
-    
+
     grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf and $install && $install->('dhcpcd');
     grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $install && $install->('pump');
     #-res_init();		#- reinit the resolver so DNS changes take affect
