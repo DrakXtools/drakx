@@ -767,8 +767,13 @@ If you don't know, choose 'use PPPoE'"),
                         # blacklist bogus driver, enable ifplugd support else:
                         $find_lan_module->();
                         $ethntf->{MII_NOT_SUPPORTED} ||= $is_hotplug_blacklisted->();
+                        if ($ntf_name eq "sagem") {
+                            #- FIXME: duplicated with %modems from adsl.pm
+                            $ethntf = $intf->{$ntf_name} = { DEVICE => "`/usr/sbin/eaglectrl -i`", MII_NOT_SUPPORTED => "yes" };
+                        }
                         # process static/dhcp ethernet devices:
-                        if (!exists $adsl_devices{$ntf_name} && member($adsl_type, qw(manual dhcp))) {
+                        if (exists($intf->{$ntf_name}) && member($adsl_type, qw(manual dhcp))) {
+                            $ethntf->{TYPE} = "ADSL";
                             $auto_ip = $adsl_type eq 'dhcp';
                             return 'lan_intf';
                         }
