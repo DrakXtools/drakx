@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 10mdk
+Release: 11mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -315,6 +315,24 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Sep 11 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-11mdk
+- drakboot: misc fixes (pixel, fpons)
+- drakconnect:
+  o do not set hostname if there's a dynamic interface
+  o fix firmware loading
+  o fix profiles with spaces in name (#5586)
+- drakfont: fix failling to install fonts (#5571)
+- drakfirewall not working with dialup connexion (#4424) (florin)
+- drakgw: fix canceling info steps (florinà
+- harddrake2:
+  o fix freeze while configuring modules (infamous #4136)
+  o warn about no module instead of not showing the dialog
+- localedrake: configure kdmrc too (pixel)
+- logdrake: always display the log domain names in the same order
+- printerdrake: help making printerdrake icon bar be shorter (#5282)
+- update wizard banners (davod beidebs)
+- XFdrake: handle ati drivers (nplanel, fpons)
+
 * Tue Sep  9 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-10mdk
 - disdrake: fix userdrake not runnable (#5447) (pixel)
 - drakboot:
