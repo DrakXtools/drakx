@@ -263,6 +263,7 @@ my @partitions_signatures = (
     [ 'FAT32',  0x1FE, "\x55\xAA", 0x52, "FAT32" ],
 if_(arch() !~ /^sparc/,
     [ 'FAT16',  0x1FE, "\x55\xAA", 0x36, "FAT" ],
+    [ 'iso9660', 0x8001, "CD001" ],
 ),
 );
 
