@@ -18,7 +18,7 @@ INCS	= -I.
 LDFLAGS	= -lm
 ifeq (y,$(HAS_VBE))
 LDFLAGS	+= -L. -lint10 -lx86emu
-OBJS	= ddcxinfos.o vesamode.o vbe.o
+OBJS	= ddcxinfos.o vesamode.o vbe.o xbox.o
 LIBS	= libint10.a libx86emu.a
 DEFS	+= -DHAVE_VBE
 endif
