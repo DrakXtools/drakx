@@ -24,7 +24,7 @@ if (arch() =~ /ppc/) {
 
 @fields2save = qw(primary extended totalsectors isDirty needKernelReread);
 
-@bad_types = ('DOS 3.3+ Extended Partition', 'Win95: Extended partition, LBA-mapped', 'Linux extended partition');
+@bad_types = ('Empty', 'DOS 3.3+ Extended Partition', 'Win95: Extended partition, LBA-mapped', 'Linux extended partition');
 
 my %types = (
   0x0 => 'Empty',
@@ -150,7 +150,7 @@ arch() =~ /^ppc/ ? (
   0xeb => 'BeOS',
   0xee => 'Indication that this legacy MBR is followed by an EFI header',
   0xef => 'Partition that contains an EFI file system',
-  0xf1 => 'SpeedStor',
+  0xf1 => 'SpeedStor 0xf1',
   0xf2 => 'DOS 3.3+ secondary partition',
   0xf4 => 'SpeedStor large partition / Prologue single-volume partition',
   0xf5 => 'Prologue multi-volume partition',
