@@ -126,9 +126,9 @@ $W->add(gtkpack_(Gtk2::VBox->new(0,5),
                                                                    [ N("add a rule"), N("Add a new rule at the end"), \&add_callback ],
                                                                    [ N("delete"), N("Delete selected rule"), \&del_callback ], 
                                                                    [ N("edit"), N("Edit current rule"), \&edit_callback ])),
-                                    0, gtkpack(Gtk2::HBox->new(0, 5),
+                                    0, gtkpack(Gtk2::HButtonBox->new,
+                                               gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { ugtk2->exit }),
                                                gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'), clicked => \&save_perm),
-                                               gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { ugtk2->exit })
                               )
                        )
                  )
