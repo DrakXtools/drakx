@@ -1681,6 +1681,14 @@ sub configurestaroffice {
 	    makestarofficeprinterentry($printer, $queue, $configprefix,
 				       $configfilecontent);
     }
+    # Patch PostScript output to print Euro symbol correctly also for
+    # the "Generic Printer"
+    $configfilecontent = removeentry
+	("ports", "default_queue=", $configfilecontent);
+    $configfilecontent = addentry
+	("ports",
+	 "default_queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/lpr",
+	 $configfilecontent);
     # Write back Star Office configuration file
     return writesofficeconfigfile($configfilename, $configfilecontent);
 }
@@ -1738,6 +1746,14 @@ sub configureopenoffice {
 	    makeopenofficeprinterentry($printer, $queue, $configprefix,
 				       $configfilecontent);
     }
+    # Patch PostScript output to print Euro symbol correctly also for
+    # the "Generic Printer"
+    $configfilecontent = removeentry
+	("Generic Printer", "Command=", $configfilecontent);
+    $configfilecontent = addentry
+	("Generic Printer", 
+	 "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/lpr",
+	 $configfilecontent);
     # Write back OpenOffice.org configuration file
     return writesofficeconfigfile($configfilename, $configfilecontent);
 }
@@ -1912,9 +1928,11 @@ sub makestarofficeprinterentry {
 			   "$queue=$queue PostScript,$queue",
 			   $configfile);
     # Make an entry in the "[ports]" section
+    # The "perl" command patches the PostScript output to print the Euro
+    # symbol correctly.
     $configfile = removeentry("ports", "$queue=", $configfile);
     $configfile = addentry("ports", 
-			   "$queue=/usr/bin/lpr -P $queue",
+			   "$queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/lpr -P $queue",
 			   $configfile);
     # Make printer's section
     $configfile = addsection("$queue,PostScript,$queue", $configfile);
@@ -1977,9 +1995,11 @@ sub makeopenofficeprinterentry {
 			       "PPD_PageSize=$papersize", $configfile);
     }
     # "Command" line
+    # The "perl" command patches the PostScript output to print the Euro
+    # symbol correctly.
     $configfile = removeentry($queue, "Command=", $configfile);
     $configfile = addentry($queue, 
-			   "Command=/usr/bin/lpr -P $queue",
+			   "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/lpr -P $queue",
 			   $configfile);
     # "Comment" line 
     $configfile = removeentry($queue, "Comment=", $configfile);
