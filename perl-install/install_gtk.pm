@@ -95,8 +95,7 @@ widget "*" style "default-font"
 #------------------------------------------------------------------------------
 sub default_theme {
     my ($o) = @_;
-    $o->{meta_class} eq 'desktop' ? 'blue' :
-      $o->{meta_class} eq 'firewall' ? 'mdk-Firewall' : 
+    $o->{meta_class} eq 'firewall' ? 'mdk-Firewall' : 
       $o->{simple_themes} || $o->{vga16} ? 'blue' : 'galaxy';
 }
 
