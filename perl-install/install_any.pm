@@ -634,7 +634,7 @@ sub suggest_mount_points {
 	$part->{mntpoint} = $mnt; delete $part->{unsafeMntpoint};
 
 	#- try to find other mount points via fstab
-	fs::get_mntpoints_from_fstab([ fsedit::get_fstab(@$hds) ], $d, $uniq) if $mnt eq '/';
+	fs::get_mntpoints_from_fstab([ fsedit::get_fstab(@$hds) ], $d, $uniq) if $mnt eq '/' && $uniq;
     }
 #-    $_->{mntpoint} || fsedit::suggest_part($_, $hds) foreach @parts;
 
