@@ -44,6 +44,19 @@ sub read_interface_conf {
     \%intf;
 }
 
+sub read_tmdns_conf {
+    my ($file) = @_;
+    local *F; open F, $file or die "cannot open file $file: $!";
+    local $_;
+    my %outf;
+
+    while (<F>) {
+	($outf{ZEROCONF_HOSTNAME}, ) = /^\s*hostname\s*=\s*(\w+)/ and return \%outf;
+    }
+    
+    \%outf;
+}
+
 sub up_it {
     my ($prefix, $intfs) = @_;
     $_->{isUp} and return foreach values %$intfs;
@@ -77,7 +90,7 @@ sub write_conf {
 
 sub write_zeroconf {
     my ($file, $zhostname) = @_;
-    eval { substInFile { s/^(hostname) =.*/$1 = $zhostname/ } $file };
+    eval { substInFile { s/^\s*(hostname)\s*=.*/$1 = $zhostname/ } $file };
 }
 
 sub write_resolv_conf {
@@ -338,9 +351,9 @@ notation (for example, 1.2.3.4).");
 	         ],
 	         complete => sub {
 		     
-		     $intf->{BOOTPROTO} = $auto_ip ? join('', if_($auto_ip, "dhcp") , if_($zeroconf, "zeroconf")) : "static";
+		     $intf->{BOOTPROTO} = $auto_ip ? join('', if_($auto_ip, "dhcp") ) : "static";
 		     $netc->{DHCP} = $auto_ip;
-		     $netc->{ZEROCONF} = $zeroconf if $auto_ip;
+		     $netc->{ZEROCONF} = $zeroconf;
 		     return 0 if $auto_ip;
 
 		     if (my @bad = map_index { if_(!is_ip($intf->{$_}), $::i) } @fields) {
@@ -379,6 +392,7 @@ Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''.
 You may also enter the IP address of the gateway if you have one."),
 			       [ { label => N("Host name"), val => \$netc->{HOSTNAME} },
+                                 if_($netc->{ZEROCONF}, { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} }),
 				 { label => N("DNS server"), val => \$netc->{dnsServer} },
 				 { label => N("Gateway (e.g. %s)", $gateway_ex), val => \$netc->{GATEWAY} },
 				    if_(@devices > 1,
@@ -392,6 +406,10 @@ You may also enter the IP address of the gateway if you have one."),
 				   }
 				   if ($netc->{GATEWAY} and !is_ip($netc->{GATEWAY})) {
 				       $in->ask_warn('', N("Gateway address should be in format 1.2.3.4"));
+				       return 1;
+				   }
+				   if ($netc->{ZEROCONF_HOSTNAME} and $netc->{ZEROCONF_HOSTNAME} =~ /\./ ) {
+				       $in->ask_warn('', N("Zeroconf host name must not contain a ."));
 				       return 1;
 				   }
 				   0;
@@ -431,6 +449,8 @@ sub read_all_conf {
     $netc ||= {}; $intf ||= {};
     add2hash($netc, read_conf("$prefix/etc/sysconfig/network")) if -r "$prefix/etc/sysconfig/network";
     add2hash($netc, read_resolv_conf("$prefix/etc/resolv.conf")) if -r "$prefix/etc/resolv.conf";
+    add2hash($netc, read_tmdns_conf("$prefix/etc/tmdns.conf")) if -r "$prefix/etc/tmdns.conf";
+    print "zcn=$netc->{ZEROCONF_HOSTNAME}\n";
     foreach (all("$prefix/etc/sysconfig/network-scripts")) {
 	if (/ifcfg-(\w+)/ && $1 ne 'lo') {
 	    my $intf = findIntf($intf, $1);
@@ -496,13 +516,14 @@ sub configureNetwork2 {
     
     $netc->{wireless_eth} and $in->do_pkgs->install(qw(wireless-tools));
     write_conf("$etc/sysconfig/network", $netc);
-    write_resolv_conf("$etc/resolv.conf", $netc);
+    write_resolv_conf("$etc/resolv.conf", $netc) if ! $netc->{DHCP};
     write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $netc, $prefix) foreach grep { $_->{DEVICE} } values %$intf;
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf) if $netc->{HOSTNAME};
     add2hosts("$etc/hosts", "localhost", "127.0.0.1");
 
     $netc->{DHCP} && $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
-    $netc->{ZEROCONF} && $in->do_pkgs->install(qw(tmdns zcip)) and write_zeroconf('/etc/tmdns.conf', $netc->{ZEROCONF_HOSTNAME});      
+    $netc->{ZEROCONF} and $in->do_pkgs->install(qw(zcip tmdns));
+    $netc->{ZEROCONF_HOSTNAME} and write_zeroconf("$etc/tmdns.conf", $netc->{ZEROCONF_HOSTNAME});      
     any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');
             
     proxy_configure($::o->{miscellaneous});
