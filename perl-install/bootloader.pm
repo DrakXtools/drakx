@@ -605,8 +605,8 @@ sub install_yaboot {
     $lilo->{prompt} = $lilo->{timeout};
 
     if ($lilo->{message}) {
-	local *F;
-	open F, ">$::prefix/boot/message" and print F $lilo->{message} or $lilo->{message} = 0;
+	eval { output("$::prefix/boot/message", $lilo->{message}) }
+	  or $lilo->{message} = 0;
     }
     {
         local $\ = "\n";
@@ -704,8 +704,7 @@ sub install_silo {
     c::hasAliases() or log::l("clearing promvars alias as non supported"), $silo->{bootalias} = '';
 
     if ($silo->{message}) {
-	local *F;
-	open F, ">$::prefix/boot/message" and print F $silo->{message} or $silo->{message} = 0;
+	eval { output("$::prefix/boot/message", $silo->{message}) } or $silo->{message} = 0;
     }
     {
         local $\ = "\n";
