@@ -19,8 +19,8 @@ $::o = { locale => lang::read() } if !$::isInstall;
                      gtktext_insert ) ],
 
     helpers => [ qw(add2notebook add_icon_path fill_tiled fill_tiled_coords gtkcolor gtkcreate_img
-                    gtkcreate_pixbuf gtkfontinfo gtkset_background n_line_size set_back_pixbuf string_size
-                    string_width string_height wrap_paragraph) ],
+                    gtkcreate_pixbuf gtkfontinfo gtkset_background n_line_size set_back_pixbuf set_back_pixmap
+                    string_size string_width string_height wrap_paragraph) ],
 
     create => [ qw(create_adjustment create_box_with_title create_dialog create_factory_menu create_factory_popup_menu
                    create_hbox create_hpaned create_menu create_notebook create_okcancel create_packtable
