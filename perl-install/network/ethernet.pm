@@ -80,7 +80,12 @@ sub get_eth_cards {
 
 sub get_eth_cards_names {
     my (@all_cards) = @_;
-    { map { $_->[0] => join(': ', $_->[0], $_->[2]) } @all_cards };
+    {
+        map {
+            $_->[2] ||= "Firewire (IEE1394) Network Adapter" if $_->[1] eq 'ip1394';
+            $_->[0] => join(': ', $_->[0], $_->[2]);
+        } @all_cards;
+    };
 }
 
 #- returns (link_type, mac_address)
