@@ -1138,18 +1138,18 @@ sub import_status {
             { col_spacings => 10, row_spacings => 50 },
             [ "", "" ],
             [
-                N("Initial tests"), $pbar, $pbar->{label} = new Gtk2::Label(' ')
+                N("Initial tests"), $pbar, $pbar->set_text(' ')
             ],
             [
                 N("Copy fonts on your system"), $pbar1,
-                $pbar1->{label} = new Gtk2::Label(' ')
+                $pbar1->set_text(' ')
             ],
             [
                 N("Install & convert Fonts"), $pbar2,
-                $pbar2->{label} = new Gtk2::Label(' ')
+                $pbar2->set_text(' ')
             ],
             [
-                N("Post Install"), $pbar3, $pbar3->{label} = new Gtk2::Label(' ')
+                N("Post Install"), $pbar3, $pbar3->set_text(' ')
             ],
         ),
     );
@@ -1171,15 +1171,15 @@ sub import_status_uninstall {
             [ "", "" ],
             [ "", "" ],
             [
-                N("Initial tests"), $pbar, $pbar->{label} = new Gtk2::Label(' ')
+                N("Initial tests"), $pbar, $pbar->set_text(' ')
             ],
             [
                 N("Remove fonts on your system"), $pbar1,
-                $pbar1->{label} = new Gtk2::Label(' ')
+                $pbar1->set_text(' ')
             ],
             [
                 N("Post Uninstall"), $pbar2,
-                $pbar2->{label} = new Gtk2::Label(' ')
+                $pbar2->set_text(' ')
             ],
         ),
     );
