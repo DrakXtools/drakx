@@ -2704,13 +2704,9 @@ sub install_spooler {
 		# startup of printerdrake for several seconds.
 		printer::services::start_not_running_service("cups");
 		# Set the CUPS tools as defaults for "lpr", "lpq", "lprm", ...
-	        set_alternative("lpr", "/usr/bin/lpr-cups");
-	        set_alternative("lpq", "/usr/bin/lpq-cups");
-	        set_alternative("lprm", "/usr/bin/lprm-cups");
-	        set_alternative("lp", "/usr/bin/lp-cups");
-	        set_alternative("cancel", "/usr/bin/cancel-cups");
-	        set_alternative("lpstat", "/usr/bin/lpstat-cups");
-	        set_alternative("lpc", "/usr/sbin/lpc-cups");
+          foreach (@{$spoolers{cups}{alternatives}}){
+              set_alternative($_->[0], $_->[1]);
+          }
 		# Remove PDQ panic buttons from the user's KDE Desktops
 	        printer::main::pdq_panic_button("remove");
 	    }
@@ -2746,10 +2742,9 @@ sub install_spooler {
 		# Start daemon
 	        printer::services::restart("lpd");
 		# Set the LPD tools as defaults for "lpr", "lpq", "lprm", ...
-	        set_alternative("lpr", "/usr/bin/lpr-lpd");
-	        set_alternative("lpq", "/usr/bin/lpq-lpd");
-	        set_alternative("lprm", "/usr/bin/lprm-lpd");
-	        set_alternative("lpc", "/usr/sbin/lpc-lpd");
+          foreach (@{$spoolers{lpd}{alternatives}}){
+              set_alternative($_->[0], $_->[1]);
+          }
 		# Remove PDQ panic buttons from the user's KDE Desktops
 	        printer::main::pdq_panic_button("remove");
 	    }
@@ -2785,13 +2780,9 @@ sub install_spooler {
 		# Start daemon
 	        printer::services::restart("lpd");
 		# Set the LPRng tools as defaults for "lpr", "lpq", "lprm", ...
-	        set_alternative("lpr", "/usr/bin/lpr-lpd");
-	        set_alternative("lpq", "/usr/bin/lpq-lpd");
-	        set_alternative("lprm", "/usr/bin/lprm-lpd");
-	        set_alternative("lp", "/usr/bin/lp-lpd");
-	        set_alternative("cancel", "/usr/bin/cancel-lpd");
-	        set_alternative("lpstat", "/usr/bin/lpstat-lpd");
-	        set_alternative("lpc", "/usr/sbin/lpc-lpd");
+          foreach (@{$spoolers{lprng}{alternatives}}){
+              set_alternative($_->[0], $_->[1]);
+          }
 		# Remove PDQ panic buttons from the user's KDE Desktops
 	        printer::main::pdq_panic_button("remove");
 	    }
@@ -2812,9 +2803,9 @@ sub install_spooler {
 		# PDQ has no daemon, so nothing needs to be started
 		
 		# Set the PDQ tools as defaults for "lpr", "lpq", "lprm", ...
-	        set_alternative("lpr", "/usr/bin/lpr-pdq");
-	        set_alternative("lpq", "/usr/bin/lpq-foomatic");
-	        set_alternative("lprm", "/usr/bin/lprm-foomatic");
+          foreach (@{$spoolers{pdq}{alternatives}}){
+              set_alternative($_->[0], $_->[1]);
+          }
 		# Add PDQ panic buttons to the user's KDE Desktops
 	        printer::main::pdq_panic_button("add");
 	    }
