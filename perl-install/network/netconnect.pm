@@ -132,6 +132,17 @@ sub get_subwizard {
               return $::isInstall ? "network_on_boot" : "apply_settings";
           }
       };
+
+      my $lan_detect = sub {
+          detect($netc->{autodetect}, 'lan') if !$::isInstall;
+          modules::interactive::load_category($in, 'network/main|gigabit|usb|pcmcia', !$::expert, 1);
+          @all_cards = network::ethernet::conf_network_card_backend($netc, $intf);
+          @cards = map { $_->[0] } @all_cards;
+          foreach my $card (@all_cards) {
+              modules::remove_alias($card->[1]);
+              modules::add_alias($card->[0], $card->[1]);
+          }
+      };
     
       # main wizard:
       my $wiz;
@@ -501,16 +512,7 @@ killall pppd
          
                    lan => 
                    {
-                    pre => sub {
-                        detect($netc->{autodetect}, 'lan') if !$::isInstall;
-                        modules::interactive::load_category($in, 'network/main|gigabit|usb|pcmcia', !$::expert, 1);
-                        @all_cards = network::ethernet::conf_network_card_backend($netc, $intf);
-                        @cards = map { $_->[0] } @all_cards;
-                        foreach my $card (@all_cards) {
-                            modules::remove_alias($card->[1]);
-                            modules::add_alias($card->[0], $card->[1]);
-                        }
-                    },
+                    pre => $lan_detect,
                     name => N("Select the network interface to configure:"),
                     data =>  [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ detect_devices::getNet() ], allow_empty_list => 1 } ],
                     post => sub {
