@@ -1,3 +1,119 @@
+2003/03/12  François Pons  <fpons at mandrakesoft.com>
+
+	* install_any.pm: added log for kernel module packages found.
+
+	* network/modem.pm: fixed typo.
+	fix ltmodem package name with newer version.
+
+	* install_steps_interactive.pm: fix for newer kernel module package name.
+
+	* standalone/XFdrake: fix for newer commercial kernel module package name.
+
+	* install_steps.pm: fix for newer commercial package name (kernel module).
+	added minimal of what is selected log for pkg_install.
+
+	* detect_devices.pm: fix titi sucks.
+
+	* standalone.pm: fixed return value of check_kernel_module_packages and
+	examination of synthesis
+	file using current interface of urpm library.
+	fix small typo.
+
+2003/03/12  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* ugtk2.pm: fix non-important (but still valid) part of #2488, a.k.a
+	package tree not expanding visually when it should (needs the mouse
+	pointer over it to be updated visually)
+
+	* share/po/ja.po: fix for "Advanced" by utuhiro <utuhiro at
+	mx12.freecom.ne.jp>
+
+2003/03/12  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/he.po, share/po/sp.po, share/po/cy.po, share/po/ca.po,
+	share/po/da.po, share/po/ar.po, share/po/tg.po, share/po/bs.po,
+	share/po/uz.po, share/po/ro.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sq.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/lv.po, share/po/hu.po: updated pot file
+
+	* share/po/nl.po: updated dutch file
+	updated pot file
+
+	* keyboard.pm: Tagged cyrillic keyboard as non-latin
+
+2003/03/12  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/diskdrake: set by default the fs type and mntpoint for
+	removables not present in fstab
+	(useful for harddrake)
+
+	* standalone/drakupdate_fstab: have fd0 & fd1 be recognised as known
+	entries, even if we don't probe them
+	(useful for harddrake)
+
+	* diskdrake/interactive.pm, install_interactive.pm: fix maximum loopback
+	size (bug #3188)
+
+2003/03/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/data.pm: jackadit^h^h^h^h^ hpixel said: "we do not need
+	anymore --auto"
+	fix typo
+	handle multiple removable devices: their managment is different from
+	other hw
+	classes since we need to run a config tool per device and not one per hw
+	class
+
+	* standalone/harddrake2: fix first message display
+	better packed paned behavior in both embedded and standalone modes
+	handle multiple removable devices: their managment is different from
+	other hw
+	classes since we need to run a config tool per device and not one per hw
+	class
+
+	* drakxtools.spec: update requires
+	9.1-20mdk
+
+	* standalone/service_harddrake: let it look better
+	shut up perl_checker
+	handle multiple removable devices: their managment is different from
+	other hw
+	classes since we need to run a config tool per device and not one per hw
+	class
+
+	* docs/mdk-9.2: better embedded diskdrake hint
+
+	* diskdrake/hd_gtk.pm: 
+	  - let diskdrake fit when embedded in mcc
+	  - let action box be larger so that there's no horizontal scrollbar in
+	standalone mode
+
+	* share/po/wa.po: fix package build :-(
+
+	* standalone/drakedm: really sort
+	  - check if dm package is installed and install it if needed
+	  - use format instead of reverse() (not a big slow down but small
+	rivers make
+	big ones and it makes gc happier...)
+
+2003/03/11  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* lang.pm: thx perl checko
+	(pablo) change kde font scheme (crossing fingers)
+
+2003/03/11  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nl.po, share/po/cs.po: updated Dutch and Czech files
+
 2003/03/11  Alice Lafox  <alice at lafox.com.ua>
 
 	* share/po/ru.po: typos fixed
@@ -14648,7 +14764,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.805 2003/03/10 21:12:57 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.806 2003/03/12 00:01:58 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
