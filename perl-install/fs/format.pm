@@ -84,13 +84,11 @@ sub part_raw {
 
     my @args = ($cmd, @first_options, @options, devices::make($dev));
 
-    my $time = time();
     if ($cmd eq 'mke2fs' && $wait_message) {
 	mke2fs($wait_message, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
     } else {
 	run_program::raw({ timeout => 60 * 60 }, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
     }
-    warn "$cmd took: ", formatTimeRaw(time() - $time);
 
     if ($fs_type eq 'ext3') {
 	disable_forced_fsck($dev);
