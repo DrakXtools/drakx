@@ -40,9 +40,9 @@ my $usage =
        fileshareset --remove <dir>";
 my $non_authorised =
 qq(You are not authorised to use fileshare'ing
-To grant you the rights, either:
+To grant you the rights:
 - put "RESTRICT=no" in $authorisation_file
-- put user "$username" in group "$authorisation_group");
+- or put user "$username" in group "$authorisation_group");
 my $no_export_method = "can't export anything: no nfs, no smb";
 
 my %exit_codes = reverse (
