@@ -460,14 +460,23 @@ sub getIPsInLocalNetworks {
     close(IFCONFIG_OUT);
 
     my @addresses;
-    # Now ping all broadcast addresses 
+    # Now ping all broadcast addresses and additionally "nmblookup" the
+    # networks (to find Windows servers which do not answer to ping)
     for my $bcast (@local_bcasts) {
 	local *F;
 	open F, ($::testing ? "" : "chroot $prefix/ ") . 
-	    "/bin/sh -c \"export LC_ALL=C; ping -w 1 -b -n $bcast | cut -f 4 -d ' ' | sed s/:// | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' | uniq\" |" 
+	    "/bin/sh -c \"export LC_ALL=C; ping -w 1 -b -n $bcast | cut -f 4 -d ' ' | sed s/:// | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' | uniq | sort\" |" 
 	    or next;
 	while (<F>) { chomp; push @addresses, $_ }
 	close F;
+	if (-x "/usr/bin/nmblookup") {
+	    open F, ($::testing ? "" : "chroot $prefix/ ") . 
+		"/bin/sh -c \"export LC_ALL=C; nmblookup -B $bcast \\* | cut -f 1 -d ' ' | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' | uniq | sort\" |" 
+		or next;
+	    while (<F>) { chomp;
+			  push @addresses, $_ if !(member($_,@addresses)) }
+	    close F;
+	}
     }
 
     @addresses;
@@ -500,10 +509,11 @@ sub whatNetPrinter {
     return () if $#hostips < 0;
     my $hostlist = join (" ", @hostips);
 
-    # Scan network for printers
+    # Scan network for printers, the timeout settings are there to avoid
+    # delays caused by machines blocking their ports with a firewall
     local *F;
     open F, ($::testing ? "" : "chroot $prefix/ ") .
-	"/bin/sh -c \"export LC_ALL=C; nmap -r -P0 -p $portlist $hostlist\" |"
+	"/bin/sh -c \"export LC_ALL=C; nmap -r -P0 --host_timeout 400 --initial_rtt_timeout 200 -p $portlist $hostlist\" |"
 	or return @res;
     my $host = "";
     my $ip = "";
