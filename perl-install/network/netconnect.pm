@@ -383,7 +383,7 @@ Take a look at http://www.linmodems.org"),
                         my %relocations = (ltmodem => $in->do_pkgs->check_kernel_module_packages('ltmodem'));
                         my $type;
                         
-                        foreach (map { $_->{description} } values %{$netc->{autodetect}{modem}}) {
+                        foreach (map { $_->{driver} } values %{$netc->{autodetect}{modem}}) {
                             /Hcf/ and $type = "hcfpcimodem";
                             /Hsf/ and $type = "hsflinmodem";
                             /LT/  and $type = "ltmodem";
