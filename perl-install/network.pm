@@ -20,19 +20,20 @@ use log;
 sub read_conf {
     my ($file) = @_;
     my %netc = getVarsFromSh($file);
-    foreach (0..2) {
-	exists $netc{"NS$_"} and $netc{dnsServers}{delete $netc{"NS$_"}} = $_ + 1;
-    }
+    $netc{dnsServer} = delete $netc{NS0};
+    $netc{dnsServer2} = delete $netc{NS1};
+    $netc{dnsServer3} = delete $netc{NS2};
     \%netc;
 }
 
 sub read_resolv_conf {
     my ($file) = @_;
-    my ($i, %netc);
+    my @l = qw(dnsServer dnsServer2 dnsServer3);
+    my %netc;
 
     local *F; open F, $file or die "cannot open $file: $!";
     foreach (<F>) {
-	/^\s*nameserver\s+(\S+)/ and $netc{dnsServers}{$1} = ++$i;
+	/^\s*nameserver\s+(\S+)/ and $netc{shift @l} = $1;
     }
     \%netc;
 }
@@ -76,7 +77,10 @@ sub write_conf {
 sub write_resolv_conf {
     my ($file, $netc) = @_;
 
-    unless ($netc->{DOMAINNAME} || dnsServers($netc)) {
+    #- get the list of used dns.
+    my %used_dns; @used_dns{$netc->{dnsServer}, $netc->{dnsServer2}, $netc->{dnsServer3}} = (1, 2, 3);
+
+    unless ($netc->{DOMAINNAME} || keys %used_dns > 0) {
 	unlink($file);
 	log::l("neither domain name nor dns server are configured");
 	return 0;
@@ -85,16 +89,16 @@ sub write_resolv_conf {
     my (%search, %dns, @unknown);
     local *F; open F, $file;
     foreach (<F>) {
-	/^\s*search\s+(.*?)\s*$/ and $search{$1} = $., next;
-	/^\s*nameserver\s+(.*?)\s*$/ and $dns{$1} = $., next;
+	/^[#\s]*search\s+(.*?)\s*$/ and $search{$1} = $., next;
+	/^[#\s]*nameserver\s+(.*?)\s*$/ and $dns{$1} = $., next;
 	/^[#\s]*(\S.*?)\s*$/ and push @unknown, $1;
     }
 
     close F; open F, ">$file" or die "cannot write $file: $!";
     print F "# search $_\n" foreach grep { $_ ne $netc->{DOMAINNAME} } sort { $search{$a} <=> $search{$b} } keys %search;
     print F "search $netc->{DOMAINNAME}\n\n" if $netc->{DOMAINNAME};
-    print F "# nameserver $_\n" foreach grep { ! exists $netc->{dnsServers}{$_} } sort { $dns{$a} <=> $dns{$b} } keys %dns;
-    print F "nameserver $_\n" foreach dnsServers($netc);
+    print F "# nameserver $_\n" foreach grep { ! exists $used_dns{$_} } sort { $dns{$a} <=> $dns{$b} } keys %dns;
+    print F "nameserver $_\n" foreach  sort { $used_dns{$a} <=> $used_dns{$b} } grep { $_ } keys %used_dns;
     print F "\n";
     print F "# $_\n" foreach @unknown;
 
@@ -177,7 +181,8 @@ sub resolv($) {
 
 sub dnsServers {
     my ($netc) = @_;
-    sort { $netc->{dnsServers}{$a} <=> $netc->{dnsServers}{$b} } grep { $_ } keys %{$netc->{dnsServers} || {}};
+    my %used_dns; @used_dns{$netc->{dnsServer}, $netc->{dnsServer2}, $netc->{dnsServer3}} = (1, 2, 3);
+    sort { $used_dns{$a} <=> $used_dns{$b} } grep { $_ } keys %used_dns;
 }
 
 sub findIntf {
@@ -305,10 +310,8 @@ notation (for example, 1.2.3.4)."),
 sub configureNetworkNet {
     my ($in, $netc, $intf, @devices) = @_;
 
-    my ($dns1, $dns2) = dnsServers($netc);
-    my ($lvl_dns1, $lvl_dns2) = (delete $netc->{dnsServers}{$dns1}, delete $netc->{dnsServers}{$dns2});
-    $dns1 ||= dns($intf->{IPADDR});
-    $netc->{GATEWAY} ||= gateway($intf->{IPADDR});
+    $netc->{dnsServer} ||= dns($intf->{IPADDR});
+    $netc->{GATEWAY}   ||= gateway($intf->{IPADDR});
 
     $in->ask_from_entries_refH(_("Configuring network"),
 _("Please enter your host name.
@@ -316,16 +319,11 @@ Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''.
 You may also enter the IP address of the gateway if you have one"),
 			       [ _("Host name") => \$netc->{HOSTNAME},
-				 _("First DNS server") => \$dns1,
-				 _("Second DNS server") => \$dns2,
+				 _("DNS server") => \$netc->{dnsServer},
 				 _("Gateway") => \$netc->{GATEWAY},
 				 $::expert ? (_("Gateway device") => {val => \$netc->{GATEWAYDEV}, list => \@devices }) : (),
 			       ],
 			      ) or return;
-
-    my ($old_dns1, $old_dns2) = dnsServers($netc);
-    $netc->{dnsServers}{$dns1} = $lvl_dns1 || 1;
-    $netc->{dnsServers}{$dns2} = $lvl_dns2 || $lvl_dns1 + 1 || 2;
 }
 
 sub miscellaneousNetwork {
