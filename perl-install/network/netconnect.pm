@@ -156,7 +156,7 @@ If you don't want to use the auto detection, deselect the checkbox.
                     #-PO here, "forward" is the standard gtk+ button for "next"; check what is displayed in your language
                     $in->ask_okcancel(N("Network Configuration Wizard"), N("We are now going to configure the %s connection.\n\n\nPress \"%s\" to continue.", translate($type), N("Next")), 1) or goto step_2;
                     &{$net_conf_callbacks{$type}} or goto step_2;
-                    $netconnect::need_restart_network = 1 if $type =~/lan|cable/;
+                    $netconnect::need_restart_network = 1 if $type =~ /lan|cable/;
                 }
             }
         }
@@ -367,7 +367,7 @@ sub stop_internet {
     run_program::rooted($prefix, $disconnect_file);
 }
 
-my @connection_types = (N_("modem"), N_(" isdn"), N_(" adsl"), N_(" cable"), N_(" local network")) ;
+my @connection_types = (N_("modem"), N_(" isdn"), N_(" adsl"), N_(" cable"), N_(" local network"));
 
 #---------------------------------------------
 #                WONDERFULL pad
