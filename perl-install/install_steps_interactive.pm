@@ -785,54 +785,13 @@ sub setRootPassword {
 #------------------------------------------------------------------------------
 sub addUser {
     my ($o, $clicked) = @_;
-    my $u = $o->{user} ||= {};
+    $o->{users} ||= [];
     if ($o->{security} < 1) {
-	add2hash_($u, { name => "mandrake", password => "mandrake", realname => "default", icon => 'automagic' });
-	$o->{users} ||= [ $u ];
+	push @{$o->{users}}, { password => 'mandrake', realname => 'default', icon => 'automagic' } 
+	  if !member('mandrake', map { $_->{name} } @{$o->{users}});
     }
-    $u->{password2} ||= $u->{password} ||= "";
-    $u->{shell} ||= "/bin/bash";
-    my @fields = qw(realname name password password2);
-    my @shells = map { chomp; $_ } cat_("$o->{prefix}/etc/shells");
-
     if (($o->{security} >= 1 || $clicked)) {
-	$u->{icon} = translate($u->{icon});
-	if ($o->ask_from_entries_refH_powered(
-	    { title => _("Add user"),
-	      messages => _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @{$o->{users}})) : ''),
-	      ok => _("Accept user"),
-	      cancel => ($o->{security} < 4 || @{$o->{users}} ? _("Done") : ''),
-	      callbacks => {
-	          focus_out => sub {
-		      if ($_[0] eq 0) {
-			  $u->{name} ||= lc first($u->{realname} =~ /((\w|-)+)/);
-		      }
-		  },
-	          complete => sub {
-		      $u->{password} eq $u->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,2);
-		      $o->{security} > 3 && length($u->{password}) < 6 and $o->ask_warn('', _("This password is too simple")), return (1,2);
-		      $u->{name} or $o->ask_warn('', _("Please give a user name")), return (1,0);
-		      $u->{name} =~ /^[a-z0-9_-]+$/ or $o->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
-		      member($u->{name}, map { $_->{name} } @{$o->{users}}) and $o->ask_warn('', _("This user name is already added")), return (1,0);
-		      return 0;
-		  },
-	    } }, [ 
-	 { label => _("Real name"), val => \$u->{realname} },
-	 { label => _("User name"), val => \$u->{name} },
-	   if_($o->{security} >= 2,
-         { label => _("Password"),val => \$u->{password}, hidden => 1},
-         { label => _("Password (again)"), val => \$u->{password2}, hidden => 1},
-	   ), if_(!$::beginner,
-         { label => _("Shell"), val => \$u->{shell}, list => [ any::shells($o->{prefix}) ], not_edit => !$::expert} 
-	   ), if_($o->{security} <= 3,
-	 { label => _("Icon"), val => \$u->{icon}, list => [ any::facesnames($o->{prefix}) ], icon2f => sub { any::face2xpm($_[0], $o->{prefix}) } },
-	   ),
-        ],
-    )) {
-	    push @{$o->{users}}, $o->{user};
-	    $o->{user} = {};
-	    goto &addUser;
-	}
+	any::ask_users($o->{prefix}, $o, $o->{users}, $o->{security});
     }
     install_steps::addUser($o);
 }
