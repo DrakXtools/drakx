@@ -98,7 +98,7 @@ sub format_reiserfs($@) {
 sub format_xfs($@) {
     my ($dev, @options) = @_;
 
-    run_program::run("mkxfs", "-f", "-q", @options, devices::make($dev)) or die _("%s formatting of %s failed", "xfs", $dev);
+    run_program::run("mkfs.xfs", "-f", "-q", @options, devices::make($dev)) or die _("%s formatting of %s failed", "xfs", $dev);
 }
 
 sub format_dos($@) {
