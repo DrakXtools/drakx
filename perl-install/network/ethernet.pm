@@ -193,7 +193,9 @@ N("Please enter your host name if you know it.
 Some DHCP servers require the hostname to work.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''."),
-		      [ { label => N("Host name"), val => \$netc->{HOSTNAME} } ]) or goto configureNetwork_step_1;
+		      [ { label => N("Host name"), val => \$netc->{HOSTNAME} },
+			{ label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} },
+		      ]) or goto configureNetwork_step_1;
     } else {
 	configureNetworkNet($in, $netc, $last ||= {}, @l) or goto configureNetwork_step_1;
     }
