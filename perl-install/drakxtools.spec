@@ -109,12 +109,12 @@ hardware classes.
 %setup -q
 
 %build
-make
+%make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-make PREFIX=$RPM_BUILD_ROOT install
+%make PREFIX=$RPM_BUILD_ROOT install
 mkdir -p $RPM_BUILD_ROOT/{%_initrddir,etc/sysconfig/harddrake2}
 touch $RPM_BUILD_ROOT/etc/sysconfig/harddrake2/previous_hw
 
