@@ -1120,7 +1120,7 @@ If you don't want to use this feature, click on the cancel button."),
 				       [ _("Choose the default user:") => { val => \$o->{miscellaneous}{autologuser}, list => \@users, not_edit => 1},
 					 _("Choose the window_manager to run:") => { val => \$o->{miscellaneous}{autologwm}, list => \@wm, not_edit => 1}, ])
 	      ? do { $flag='yes';
-		     $::isStandalone ? system("urpmi --auto autologin") : $o->pkgs_install("autologin");
+		     $::isStandalone ? system("urpmi --auto autologin") : $o->pkg_install("autologin");
 		 } : delete $o->{miscellaneaous}{autologuser};
 	}
 	any::setAutologin($prefix, $o->{miscellaneous}{autologuser}, $o->{miscellaneous}{autologwm}, "/usr/X11R6/bin/startx", $flag);

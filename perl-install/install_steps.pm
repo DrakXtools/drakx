@@ -407,9 +407,10 @@ Consoles 1,3,4,7 may also contain interesting information";
     }
 
     my $msec = "$o->{prefix}/etc/security/msec";
+    substInFile { s/^xgrp\n//; $_ .= "xgrp\n" if eof } "$msec/group.conf" if -d $msec;
     substInFile { s/^audio\n//; $_ .= "audio\n" if eof } "$msec/group.conf" if -d $msec;
     substInFile { s/^cdrom\n//; $_ .= "cdrom\n" if eof } "$msec/group.conf" if -d $msec;
-    substInFile { s/^xgrp\n//; $_ .= "xgrp\n" if eof } "$msec/group.conf" if -d $msec;
+    substInFile { s/^cdwriter\n//; $_ .= "cdwriter\n" if eof } "$msec/group.conf" if -d $msec;
 
     my $pkg = pkgs::packageByName($o->{packages}, 'urpmi');
     if ($pkg && pkgs::packageFlagSelected($pkg)) {

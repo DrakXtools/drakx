@@ -335,7 +335,7 @@ sub choosePackages {
     $o->chooseGroups($packages, $compssUsers, $compssUsersSorted, \$individual) unless $::beginner || $::corporate;
 
     #- avoid reselection of package if individual selection is requested and this is not the first time.
-    if ($first_time || !$individual) {
+    if (1 || $first_time || !$individual) {
 	my $min_mark = $::beginner ? 10 : $::expert ? 0 : 1;
 	my ($size, $level) = pkgs::fakeSetSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
 	my $max_size = 1 + $size; #- avoid division by zero.

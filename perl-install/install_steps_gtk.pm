@@ -287,6 +287,7 @@ sub choosePackagesTree {
     my $pix_installed= [ gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/rpm-installed.xpm") ];
 
     my $add_parent; $add_parent = sub {
+	$_[0] or return undef;
 	if (my $w = $wtree{$_[0]}) { return $w }
 	my $s; foreach (split '/', $_[0]) {
 	    my $s2 = $s ? "$s/$_" : $_;
