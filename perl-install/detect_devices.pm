@@ -108,7 +108,8 @@ sub get_sys_cdrom_info {
     my @drives_order;
     foreach (cat_("/proc/sys/dev/cdrom/info")) {
 	my ($t, $l) = split ':';
-	my @l = split ' ', $l;
+	my @l;
+	@l = split(' ', $l) if $l;
 	if ($t eq 'drive name') {
 	    @drives_order = map {
 		s/^sr/scd/;
@@ -196,11 +197,11 @@ sub isDvdDrive {
 sub isZipDrive { $_[0]{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
 sub isJazzDrive { $_[0]{info} =~ /\bJAZZ?\b/i } #- accept "iomega jaz 1GB"
 sub isLS120Drive { $_[0]{info} =~ /LS-?120|144MB/ }
-sub isRemovableUsb { index($_[0]{usb_media_type}, 'Mass Storage|') == 0 && usb2removable($_[0]) }
-sub isFloppyUsb { $_[0]{usb_driver} eq 'Removable:floppy' }
+sub isRemovableUsb { $_[0]{usb_media_type} && index($_[0]{usb_media_type}, 'Mass Storage|') == 0 && usb2removable($_[0]) }
+sub isFloppyUsb { $_[0]{usb_driver} && $_[0]{usb_driver} eq 'Removable:floppy' }
 sub isRemovableDrive { 
     my ($e) = @_;
-    isZipDrive($e) || isLS120Drive($e) || $e->{media_type} eq 'fd' || isRemovableUsb($e) || index($e->{usb_media_type}, 'Mass Storage|Floppy (UFI)') == 0;
+    isZipDrive($e) || isLS120Drive($e) || $e->{media_type} && $e->{media_type} eq 'fd' || isRemovableUsb($e) || $e->{usb_media_type} && index($e->{usb_media_type}, 'Mass Storage|Floppy (UFI)') == 0;
 }
 
 sub getSCSI() {
@@ -530,7 +531,8 @@ sub tryWrite($) {
 
 sub syslog {
     -r "/tmp/syslog" and return map { /<\d+>(.*)/ } cat_("/tmp/syslog");
-    `$ENV{LD_LOADER} /bin/dmesg`;
+    my $LD_LOADER = $ENV{LD_LOADER} ? $ENV{LD_LOADER} : "";
+    `$LD_LOADER /bin/dmesg`;
 }
 
 sub get_mac_model() {
