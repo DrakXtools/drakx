@@ -45,7 +45,7 @@ my $netcnx = {};
 my $netc = {};
 my $intf = {};
 network::netconnect::read_net_conf($netcnx, $netc, $intf);
-$default_intf or ($default_intf, undef, undef, undef) = get_internet_connection($netc, $intf);
+$default_intf or ($default_intf, undef, undef, undef) = network::tools::get_internet_connection($netc, $intf);
 
 if ($force) {
     $connect and network::tools::start_interface($default_intf);
