@@ -368,6 +368,7 @@ sub remove_empty_extended {
 
 sub adjust_main_extended {
     my ($hd, $no_auto_win_extended) = @_;
+    $no_auto_win_extended = 1;
 
     if (!is_empty_array_ref $hd->{extended}) {
 	my ($l, @l) = @{$hd->{extended}};
