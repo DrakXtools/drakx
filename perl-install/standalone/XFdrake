@@ -1,0 +1,59 @@
+#!/usr/bin/perl
+
+# XFdrake
+# Copyright (C) 1999 MandrakeSoft (pixel@linux-mandrake.com)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use lib qw(/usr/lib/libDrakX .);
+
+use common qw(:file);
+use Xconfigurator;
+use Xconfig;
+
+local $_ = join '', @ARGV;
+
+/-h/ and die "usage: XFdrake [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
+
+$::beginner = /--beginner/;
+$::expert = /--expert/;
+$::auto = /--auto/;
+$::noauto = /--noauto/;
+$::skiptest = /--skiptest/;
+$::testing = /--testing/;
+$::isStandalone = 1;
+
+my $hasX = do { `xtest`; $? == 0 };
+
+my $in; if ($hasX) {
+    require 'interactive_gtk.pm';
+    $in = interactive_gtk->new;
+} else {
+    *log::l = undef;
+    *log::l = sub {};
+    require 'interactive_newt.pm';
+    $in = interactive_newt->new;
+}
+
+Xconfigurator::main('', Xconfig::getinfo(), $in,
+#   sub {
+#       use install_any;
+#	print "Here\n";
+#	my ($X) = glob_("/mnt/disk/XFree86-$_[0]-*") or die "$_[0]'s X server rpm not found";
+#	pkgs::install('', [ { name => $_[0], file => $X } ], 1, 0);
+#   }
+);
+
+exec 'true' if $hasX; #- workaround for perl-GTK

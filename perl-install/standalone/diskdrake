@@ -1,0 +1,66 @@
+#!/usr/bin/perl
+
+# DiskDrake
+# Copyright (C) 1999 MandrakeSoft (pixel@linux-mandrake.com)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+# DiskDrake uses resize_fat which is a perl rewrite of the work of Andrew
+# Clausen (libresize).
+# DiskDrake is also based upon the libfdisk and the install from Red Hat Software
+
+
+use lib qw(/usr/lib/libDrakX .);
+use common qw(:common :functional);
+use diskdrake;
+use interactive_gtk;
+use detect_devices;
+use fsedit;
+use fs;
+use log;
+
+$::isStandalone = 1;
+#$::expert = 1;
+
+if ($>) {
+    $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
+}
+
+
+#if ($ARGV[0] eq '-l') {
+#    $@ and print "Error\n";
+#    $::expert = 1;
+#    print diskdrake::get_info($_, $hds->[0]) foreach fsedit::get_fstab($hds->[0]);
+#    exit !$@;
+#}
+my $in = interactive_gtk->new;
+my $hds =
+    catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) }
+    sub {
+	my ($err) = $@ =~ /(.*) at /;
+	$@ =~ /overlapping/ and $in->ask_warn('', $@), return 1;
+	$in->ask_okcancel(_("Error"),
+[_("I can't read your partition table, it's too corrupted for me :(
+I'll try to go on blanking bad partitions"), $err]);
+    };
+
+$SIG{__DIE__} = sub { chomp $_[0]; log::l("ERROR: $_[0]") };
+my $fstab = [ fsedit::get_fstab(@$hds) ];
+ 
+fs::get_mntpoints_from_fstab($fstab);
+fs::check_mounted($fstab);
+diskdrake::main($hds, {}, $in);
+
+exec "true";

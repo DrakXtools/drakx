@@ -468,6 +468,9 @@ sub install_urpmi {
 	local *FILES; open FILES, "hdlist2files $f|";
 	chop, print LIST "$dir/Mandrake/RPMS/$_\n" foreach <FILES>;
 	close FILES or die "hdlist2files failed";
+
+	$dir .= "/Mandrake/RPMS with ../base/hdlist" if $method =~ /ftp|http/;
+	eval { output "$prefix/etc/urpmi/urpmi.cfg", "$name $dir\n" };
     }
     run_program::rooted($prefix, "urpmi.update");
 }

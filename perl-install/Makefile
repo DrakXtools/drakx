@@ -1,7 +1,8 @@
 VERSION     = 2.2.10-BOOT                                                                             
 SUDO        = sudo
 SO_FILES    = c/blib/arch/auto/c/c.so                                                                 
-PMS         = *.pm Newt/*.pm c/stuff.pm resize_fat/*.pm pci_probing/*.pm commands install2 diskdrake XFdrake g_auto_install
+PMS         = *.pm Newt/*.pm c/stuff.pm resize_fat/*.pm pci_probing/*.pm commands install2 g_auto_install
+PMS	   .= $(patsubst %, standalone/%,diskdrake XFdrake rpmdrake)
 REP4PMS     = /usr/bin/perl-install
 ROOTDEST    = /export
 DEST        = $(ROOTDEST)/Mandrake/mdkinst
@@ -25,12 +26,12 @@ TAGS: $(PMS)
 
 clean:
 	for i in $(DIRS); do $(MAKE) -C $$i clean; done
-	rm -rf auto ../diskdrake*
+	rm -rf auto
 	find . -name "*~" -o -name ".#*" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
 tar-drakxtools: clean
 	cd .. ; rm -rf drakxtools ; cp -af perl-install drakxtools ; cp -af tools/ddcprobe drakxtools	
-	cd ../drakxtools ; rm -f install* ForMakefile.pm pkgs.pm ftp.pm t.pm ; mv Makefile.drakxtools Makefile
+	cd ../drakxtools ; rm -f install* ForMakefile.pm pkgs.pm ftp.pm t.pm ; mv Makefile.drakxtools Makefile ; mv -f standalone/* .
 	cd .. ; tar cfy drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile MonitorsDB Newt c ddcprobe po pci_probing resize_fat diskdrake diskdrake.rc XFdrake *.pm)
 	cd .. ; rm -rf drakxtools
 

@@ -12,9 +12,9 @@ print '
 #include <sys/ioctl.h>
 #include <sys/stat.h>
 #include <sys/utsname.h>
+#include <sys/mount.h>
 #include <linux/keyboard.h>
 #include <linux/kd.h>
-#include <linux/fs.h>
 #include <linux/hdreg.h>
 #include <linux/vt.h>
 #include <linux/cdrom.h>
