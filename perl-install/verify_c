@@ -6,7 +6,7 @@
 eof && close ARGV;
 
 END {
-    $_ = join '', `cat c/c.xs.pm`; 
+    $_ = join '', `cat c/stuff.xs.pm`; 
     foreach $c (@c) {
 	/$c->[0]/ or $err = print "$c->[1]:$c->[2]: $c->[0] not in c.xs\n";
     }
