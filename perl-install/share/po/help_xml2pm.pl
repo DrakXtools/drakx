@@ -45,8 +45,8 @@ use common;
 
 # IMPORTANT: Don't edit this File - It is automatically generated 
 #            from the manuals !!! 
-#            Write a mail to <doc@linux-mandrake.com> if you want 
-#            it changed.
+#            Write a mail to <documentation@mandrakesoft.com> if
+#            you want it changed.
 
 %steps = (
 empty => '',
