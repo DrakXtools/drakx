@@ -171,7 +171,7 @@ sub setupSCSI {
     my ($o) = @_;
     { my $w = $o->wait_message(_("IDE"), _("Configuring IDE"));
       modules::load_ide() }
-    setup_thiskind($_[0], 'scsi', $_[1], $_[2]);
+    setup_thiskind($_[0], 'scsi|raid', $_[1], $_[2]);
 }
 
 sub ask_mntpoint_s {

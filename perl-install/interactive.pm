@@ -228,8 +228,7 @@ sub ask_from_entries_ref($$$$;$%) {
 	    { val => $_ }
 	} else {
 	    if (@{$_->{list} || []} > 1) {
-		add2hash_($_, { not_edit => 1 });
-		add2hash_($_, { type => 'list' });
+		add2hash_($_, { not_edit => 1, type => 'list' });
 		${$_->{val}} = $_->{list}[0] if $_->{not_edit} && !member(${$_->{val}}, @{$_->{list}});
 	    }
 	    $_;

@@ -120,7 +120,7 @@ sub selectInstallClass($@) {
 #------------------------------------------------------------------------------
 sub setupSCSI { 
     modules::load_ide();
-    modules::load_thiskind('scsi');
+    modules::load_thiskind('scsi|raid');
 }
 #------------------------------------------------------------------------------
 sub doPartitionDisks {

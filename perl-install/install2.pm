@@ -162,7 +162,7 @@ $o = $::o = {
 #-	     ],
     shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash ksh) ],
     authentication => { md5 => 1, shadow => 1 },
-    lang         => 'en',
+    lang         => 'en_US',
     isUpgrade    => 0,
     toRemove     => [],
     toSave       => [],

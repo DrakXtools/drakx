@@ -589,6 +589,7 @@ sub g_auto_install(;$) {
     
     local *F;
     open F, ">$f" or log::l("can't output the auto_install script in $f"), return;
+    print F "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl' before testing\n";
     print F Data::Dumper->Dump([$o], ['$o']), "\0";
 }
 

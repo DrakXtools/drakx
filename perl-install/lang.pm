@@ -202,7 +202,7 @@ my %charsets = (
 
 sub list { sort { $a cmp $b } map { $_->[0] } values %languages }
 sub lang2text { $languages{$_[0]} && $languages{$_[0]}[0] }
-sub text2lang {
+sub text2lang { 
     my ($t) = @_;
     foreach (keys %languages) {
 	lc($languages{$_}[0]) eq lc($t) and return $_;
@@ -210,18 +210,19 @@ sub text2lang {
     die "unknown language $t";
 }
 
-sub lang2charset { $languages{$_[0]} }
+sub lang2charset {  
+    $languages{$_[0]} }
 
-sub set {
+sub set { 
     my ($lang) = @_;
 
-    if ($lang) {
+    if ($lang && $languages{$lang}) {
 	#- use extract_archive that follow symlinks and expand directory.
 	#- it is necessary as there is a lot of symlinks inside locale.cz2,
 	#- using a compressed cpio archive is nighmare to extract all files.
 	#- reset locale environment variable to avoid any warnings by perl,
 	#- so installation of new locale is done with empty locale ...
-	unless (-e "$ENV{SHARE_PATH}/locale/".$languages{$lang}[2]) {
+	unless (-e "$ENV{SHARE_PATH}/locale/$languages{$lang}[2]") {
 	    @ENV{qw(LANG LC_ALL LANGUAGE LINGUAS)} = ();
 
 	    eval { commands::rm("-r", "$ENV{SHARE_PATH}/locale") };
@@ -244,7 +245,7 @@ sub set {
     }
 }
 
-sub set_langs {
+sub set_langs { 
     my ($l) = @_; 
     $l or return;
     $ENV{RPM_INSTALL_LANG} = member('all', @$l) ? 'all' :
@@ -252,7 +253,7 @@ sub set_langs {
     log::l("RPM_INSTALL_LANG: $ENV{RPM_INSTALL_LANG}");
 }
 
-sub write {
+sub write { 
     my ($prefix) = @_;
     my $lang = $ENV{LC_ALL};
 
@@ -357,7 +358,7 @@ sub load_po($) {
 
 sub load_console_font {
     my ($lang) = @_;
-    my ($charset) = $languages{$lang}[1] ;
+    my ($charset) = $languages{$lang} && $languages{$lang}[1] ;
     my ($f, $u, $m) = @{$charsets{$charset} || []};
 
     run_program::run('consolechars',

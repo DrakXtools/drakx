@@ -388,7 +388,7 @@ sub load {
 
     if ($type) {
 	add_alias('usb-interface', $name) if $type =~ /SERIAL_USB/i;
-	add_alias('scsi_hostadapter', $name), load('sd_mod') if $type eq "scsi" || $type eq $type_aliases{scsi};
+	add_alias('scsi_hostadapter', $name), load('sd_mod') if $type =~ /scsi/ || $type eq $type_aliases{scsi};
     }
     $conf{$name}{options} = join " ", @options if @options;
 }
@@ -554,7 +554,7 @@ sub load_thiskind($;&$) {
 	$loaded_text{$mod} = $text;
     }
 
-    if ($type eq 'scsi') {
+    if ($type =~ /scsi/) {
 	#- hey, we're allowed to pci probe :)   let's do a lot of probing!
 
 	#- probe for USB SCSI.
@@ -574,7 +574,7 @@ sub load_thiskind($;&$) {
 	}
     }
     my @loaded = map { $loaded_text{$_} || $_ } @{$loaded{$type} || []};
-    $type eq 'scsi' and @loaded and eval { load("sd_mod") };
+    $type =~ /scsi/ and @loaded and eval { load("sd_mod") };
     @loaded;
 }
 

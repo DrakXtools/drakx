@@ -742,8 +742,6 @@ sub create_steps_window {
     my ($o) = @_;
 
     $o->{steps_window}->destroy if $o->{steps_window};
-    my %reachableSteps if 0;
-    %reachableSteps = ();
 
     my $w = bless {}, 'my_gtk';
     $w->{rwindow} = $w->{window} = new Gtk::Window;
@@ -751,14 +749,6 @@ sub create_steps_window {
     $w->{rwindow}->set_usize($::stepswidth, $::stepsheight);
     $w->{rwindow}->set_name("Steps");
     $w->{rwindow}->set_events('button_press_mask');
-    $w->{rwindow}->signal_connect(button_press_event => sub {
-	$::setstep or return;
-        my $Y = $_[1]{'y'};
-	map_each {
-	    my (undef, $y, undef, $height) = @{$::b->allocation};
-	    $y <= $Y && $Y < $y + $height and die "setstep $::a\n";
-	} %reachableSteps;
-    });
     $w->show;
 
     my @steps_icons = map { [ gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/step-$_.xpm") ] } qw(green orange red);
@@ -766,15 +756,20 @@ sub create_steps_window {
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::VBox(0,0),
 		    (map {; 1, $_ } map {
+			my $step_name = $_;
 			my $step = $o->{steps}{$_};
 			my $w = new Gtk::Label(translate($step->{text}));
 
-			$w->set_name("Steps" . ($step->{reachable} && "Reachable"));
-			gtkpack_(my $b = new Gtk::HBox(0,5), 0, 
-				 new Gtk::Pixmap(@{$steps_icons[$step->{done} ? 0 : $step->{entered} ? 1 : 2]}), 0, $w);
+			my $pixmap = new Gtk::Pixmap(@{$steps_icons[$step->{done} ? 0 : $step->{entered} ? 1 : 2]});
+			gtkpack_(my $b = new Gtk::HBox(0,5), 0, $pixmap, 0, $w);
 
-			$reachableSteps{$_} = $b if $step->{reachable};
-			$b;
+			$pixmap->set_events('enter_notify_mask');
+			$pixmap->signal_connect(enter_notify_event => sub {  print "HERE\n" });
+
+			if ($step->{reachable}) {
+			    gtksignal_connect(gtkadd(new Gtk::Button, $b),
+					      clicked => sub { die "setstep $step_name\n" });
+			} else { $b }
 		    } grep {
 			!eval $o->{steps}{$_}{hidden};
 		    } @{$o->{orderedSteps}}),
@@ -782,7 +777,7 @@ sub create_steps_window {
 			my $t = $_;
 			my $w = new Gtk::Button('');
 			$w->set_name($t);
-			$w->set_usize(0, 7);
+#			$w->set_usize(0, 7);
 			gtksignal_connect($w, clicked => sub {
 			    $::setstep or return; #- just as setstep s
 			    install_theme($o, $t); die "theme_changed\n" 

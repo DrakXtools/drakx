@@ -13,6 +13,21 @@ use common qw(:common);
 use install_steps;
 use log;
 
+my $graphical = 1;
+
+sub new {
+    my ($type, $o) = @_;
+
+    if ($graphical) {
+	require install_steps_gtk;
+	undef *enteringStep; *enteringStep = *install_steps_gtk::enteringStep;
+	undef *installPackages; *installPackages = *install_steps_gtk::installPackages;
+	goto &install_steps_gtk::new;
+    } else {
+	(bless {}, ref $type || $type)->SUPER::new($o);
+    }
+}
+
 sub enteringStep($$$) {
     my ($o, $step) = @_;
     print _("Entering step `%s'\n", translate($o->{steps}{$step}{text}));
@@ -33,13 +48,18 @@ sub errorInStep {
 }
 
 sub exitInstall {
-    my ($o) = @_;
+    my ($o, $alldone) = @_;
     return if $o->{autoExitInstall};
 
-    print "\a";
-    print "Auto installation complete\n";
-    print "Press <Enter> to reboot\n";
-    <STDIN>;
+    if ($graphical) {
+	my $O = bless $o, "install_steps_gtk";
+	$O->exitInstall($alldone);
+    } else {
+	print "\a";
+	print "Auto installation complete\n";
+	print "Press <Enter> to reboot\n";
+	<STDIN>;
+    }
 }
 
 1;

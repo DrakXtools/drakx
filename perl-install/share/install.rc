@@ -14,13 +14,8 @@ style "logo" = "background"
   engine "pixmap" { image { function = FLAT_BOX } }
 }
 
-style "stepsReachable"
-{
-}
-
 widget "*" style "default-font"
 widget "Steps" style "steps"
 widget "*Steps*" style "small-font"
-widget "*StepsReachable*" style "stepsReachable"
 widget "*logo*" style "logo"
 
