@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 42mdk
+Release: 43mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -184,7 +184,7 @@ cat > $RPM_BUILD_ROOT%_menudir/harddrake-ui <<EOF
 	icon="harddrake.png"
 EOF
 
-cat > $RPM_BUILD_ROOT%_sbindir/convert-harddrake <<EOF
+cat > $RPM_BUILD_ROOT%_datadir/harddrake/convert <<EOF
 #!/usr/bin/perl
 use Storable;
  
@@ -198,7 +198,18 @@ cat > $RPM_BUILD_ROOT%_sysconfdir/X11/xinit.d/harddrake2 <<EOF
 #!/bin/sh
 exec /usr/share/harddrake/service_harddrake X11
 EOF
-chmod +x $RPM_BUILD_ROOT{%_sbindir/convert-harddrake,%_sysconfdir/X11/xinit.d/harddrake2}
+
+cat > $RPM_BUILD_ROOT%_datadir/harddrake/confirm <<EOF
+#!/usr/bin/perl
+use lib qw(/usr/lib/libDrakX);
+use interactive;
+
+my \$in = interactive->vnew;
+my $res = \$in->ask_okcancel(\$ARGV[0], \$ARGV[1], 1);
+$in->exit($res);
+EOF
+
+chmod +x $RPM_BUILD_ROOT{%_datadir/harddrake/*,%_sysconfdir/X11/xinit.d/harddrake2}
 
 %find_lang libDrakX
 cat libDrakX.lang >> %name.list
@@ -236,7 +247,7 @@ done
 %_preun_service harddrake
 
 %postun -n harddrake
-file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-harddrake || :
+file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrake/convert || :
 
 %files newt -f %name.list
 %defattr(-,root,root)
@@ -255,9 +266,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-
 %config(noreplace) %_initrddir/harddrake
 %dir /etc/sysconfig/harddrake2/
 %config(noreplace) /etc/sysconfig/harddrake2/previous_hw
-%_datadir/harddrake/service_harddrake
-%_sbindir/convert-harddrake
-%_sysconfdir/X11/xinit.d/harddrake2
+%_datadir/harddrake/*
+#%_sysconfdir/X11/xinit.d/harddrake2
 
 %files -n harddrake-ui
 %defattr(-,root,root)
@@ -279,6 +289,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Sun Sep  8 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-43mdk
+- harddrake:
+  o don't pollute sbin namespace with one shot scripts
+  o add run wrapper script for harddrake service
+  o disable ?dm part
+
 * Sat Sep  7 2002 Daouda LO <daouda@mandrakesoft.com> 1.1.9-42mdk
 - cvs up before packaging (fix messy drakboot conf). 
 

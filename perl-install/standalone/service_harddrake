@@ -9,15 +9,16 @@ use interactive;
 use harddrake::data;
 use Storable qw(store retrieve);
 
-my $hw_sysconfdir = "/etc/sysconfig/harddrake2";
+my $invert_do_it = $ARGV[0] eq 'X11' ? 1 : 0;
+my ($hw_sysconfdir, $timeout) = ("/etc/sysconfig/harddrake2", $invert_do_it ? 600 : 5);
 my $last_boot_config = $hw_sysconfdir."/previous_hw";
 
-my $invert_do_it = $ARGV[0] eq 'X11' ? 1 : 0;
 $last_boot_config .= '_X11' if $invert_do_it;
 
 # first run ? if not read old hw config
 my $previous_config = (-f $last_boot_config && -s $last_boot_config) ? retrieve($last_boot_config) : {};
-my (%config, $in);
+my (%config, $wait);
+my $in = interactive->vnew;
 
 # For each hw, class, detect device, compare and offer to reconfigure if needed
 foreach (@harddrake::data::tree) {
@@ -38,33 +39,36 @@ foreach (@harddrake::data::tree) {
 
     my $msg;
     my @was_removed = difference2([ keys %$oldconfig ], [ keys %ID ]);
-    $msg .= _("Some devices in the \"%s\" hardware class were removed:\n", $item) if @was_removed;
-    $msg .= "- ". harddrake::data::custom_id($oldconfig->{$_}, $item) ." was removed\n" foreach @was_removed;
+    if (@was_removed) {
+	$msg .= _("Some devices in the \"%s\" hardware class were removed:\n", $item) .
+	    "- ". harddrake::data::custom_id($oldconfig->{$_}, $item) ." was removed\n" foreach @was_removed . "\n";
+    }
     my @added = difference2([ keys %ID ], [ keys %$oldconfig ]);
-    $msg .= _("\nSome devices in the %s class were added:\n", $item) if @added;
+    $msg .= _("Some devices were added:\n", $item) if @added;
     $msg .= "- ". harddrake::data::custom_id($ID{$_}, $item) ." was added\n" foreach (@added);
     @added || @was_removed or next;
     next unless (-x $configurator);
-
-    my $res;
-    $SIG{ALRM} = sub { undef $in; undef $res; next }; #die "TIMED OUT\n" };
-    undef $@;
-    eval {
-	alarm (5) unless $invert_do_it;
-	$in = 'interactive'->vnew('su') unless defined $in;
-	$res = $in->ask_okcancel("Hardware changes in $Ident class (5 seconds to answer)",
-				 $msg . "\nDo you want to run the appropriate config tool ?", 1)
-	    or $in->wait_message(_('Please wait'), _('Hardware probing in progress'));
-	alarm (0) unless $invert_do_it;
-    };
-    next if ($@ || !$res);     # timed out || canceled
-    if (my $pid = fork) {
-		require POSIX;
-		POSIX::wait();
-    } else { exec("$configurator 2>/dev/null") or die "$configurator missing\n" }
+    my ($pid, $no);
+    $SIG{ALRM} = sub { $no = 1; kill 15, $pid };
+    unless ($pid = fork) {
+	exec("/usr/share/harddrake/confirm 'Hardware changes in $Ident class ($timeout seconds to answer)' '" . $msg . "Do you want to run the appropriate config tool ?'");
+    }
+    alarm($timeout);
+    wait;
+    my $res = $?;
+    alarm(0);
+    if ($no) {
+	require interactive;
+	undef $wait;
+	$wait = $in->wait_message(_('Please wait'), _('Hardware probing in progress'));
+    } elsif ($res) {
+	if (my $pid = fork) {
+	    wait;
+	} else { exec("$configurator 2>/dev/null") or die "$configurator missing\n" }
+    }
 }
 
 # output new hw config
 standalone::explanations "created file $last_boot_config";
 store \%config, $last_boot_config;
-$in->exit(0) if defined $in; exit 0;
+$in->exit(0);
