@@ -22,28 +22,36 @@ struct pci_module_map {
 
 my %t = (scsi => 'scsi', eth => 'net');
 
-foreach (keys %t) {
-    print "#ifndef DISABLE_NETWORK\n" if ($_ eq 'eth');
-    print "#ifndef DISABLE_MEDIAS\n" if ($_ eq 'scsi');
+$modulez{'eth'} = [ `../mar/mar -l ../../modules/network_modules.mar` ];
+$modulez{'scsi'} = [ `../mar/mar -l ../../modules/hd_modules.mar` ];
+
+
+foreach $type (keys %t) {
+    print "#ifndef DISABLE_NETWORK\n" if ($type eq 'eth');
+    print "#ifndef DISABLE_MEDIAS\n" if ($type eq 'scsi');
 
     print "
-struct pci_module_map ${_}_pci_ids[] = {
+struct pci_module_map ${type}_pci_ids[] = {
 ";
     my %l;
-    foreach (glob("../../kernel*/lib/modules/*/$t{$_}/*.o")) {
+    foreach (glob("../../kernel*/lib/modules/*/kernel/drivers/$t{$type}/*.o")) {
 	m|([^/]*)\.o$|;
 	$l{$1} = 1;
     }
+    my %absent;
     while (my ($k, $v) = each %$drivers) {
 	$l{$v->[0]} or next;
 	$k =~ /^(....)(....)/;
 	printf qq|\t{0x%s  , 0x%s  , ( "%s" ), ( "%s" )} ,\n|,
 	   $1, $2, $v->[1], $v->[0];
+	($absent{$v->[0]} = 1) if (!grep(/^$v->[0]\.o\s/, @{$modulez{$type}}));
     }
+
+    if (%absent) { print STDERR "missing for $type: "; foreach (keys %absent) { print STDERR "$_ " } print STDERR "\n"; };
 
 print "
 };
-int ${_}_num_ids=sizeof(${_}_pci_ids)/sizeof(struct pci_module_map);
+int ${type}_num_ids=sizeof(${type}_pci_ids)/sizeof(struct pci_module_map);
 ";
 
     print "#endif\n";
