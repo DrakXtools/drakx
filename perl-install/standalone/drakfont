@@ -312,7 +312,7 @@ sub remove_gs_fonts {
 	    grep ( $_ =~ /$tmp_list[0]/ , @Fontmap_out) or  push @Fontmap_new, $font_gs;
 	}
 	print $_ foreach @Fontmap_new;
-	output($FontmapGS.".tmp2", @Fontmap_new );
+	output($FontmapGS, @Fontmap_new );
     }
 }
 
