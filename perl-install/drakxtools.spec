@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.3mdk
+Release: 0.4mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,20 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Nov 25 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.4mdk
+- diskdrake: more intelligent sort of fstab to handle loopback files
+ or bind directory (pixel, bug anthil #1198)
+- drakboot: detect on lilo on floppy (pixel, #12213)
+- drakconnect: in "ADSL provider" step, reset the protocol on provider
+  switch
+- draksound: handle new sound drivers from kernel-tmb and kernel-multimedia
+- drakupdate_fstab: fix /dev//dev/foobar in /etc/fstab (pixel, #12224)
+- harddrake service:
+  o fix setting scsi and usb probell in live CD (thus fixing
+    mousedrake --auto with USB mice on live CD)
+  o do not die if sound never was configured (aka on first boot from a
+    live CD)
+
 * Wed Nov 17 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.3mdk
 - bootloader: let be kernel-i686-up-64GB aware (pixel)
 - diskdrake: LVM/DM/MD fixes (pixel)
