@@ -70,15 +70,21 @@ sub merge_fstabs {
 	my ($p2) = grep { fsedit::is_same_hd($_, $p) } @l or next;
 	@l       = grep { !fsedit::is_same_hd($_, $p) } @l;
 
-	$p->{type} && $p2->{type} && $p->{type} ne $p2->{type} && type2fs($p) ne type2fs($p2) && $p->{type} ne 'auto' && $p2->{type} ne 'auto' and
-	  log::l("err, fstab and partition table do not agree for $p->{device} type: " . (type2fs($p) || type2name($p->{type})) . " vs ", (type2fs($p2) || type2name($p2->{type}))), next;
-	
 	$p->{mntpoint} = $p2->{mntpoint} if delete $p->{unsafeMntpoint};
 
 	$p->{type} ||= $p2->{type};
 	$p->{options} = $p2->{options} if $p->{type} eq 'defaults';
+	#- important to get isMounted property else DrakX may try to mount already mounted partitions :-(
 	add2hash($p, $p2);
 	$p->{device_alias} ||= $p2->{device_alias} || $p2->{device} if $p->{device} ne $p2->{device} && $p2->{device} !~ m|/|;
+
+	#- for hd install, we may encounter problem as /tmp/hdimage is already mounted as ext2
+	#- and system may want to use it as ext3 for example (specific mount points).
+	#- this is problably not an error here but we may want to use existing type.
+	$p->{type} && $p2->{type} && $p->{type} ne $p2->{type} && type2fs($p) ne type2fs($p2) &&
+	  $p->{type} ne 'auto' && $p2->{type} ne 'auto' and
+	    log::l("err, fstab and partition table do not agree for $p->{device} type: " .
+		   (type2fs($p) || type2name($p->{type})) . " vs ", (type2fs($p2) || type2name($p2->{type})));
     }
     @l;
 }
@@ -116,7 +122,9 @@ sub merge_info_from_mtab {
     my @l2 = map { read_fstab('', $_) } '/etc/mtab', '/proc/mounts';
 
     foreach (@l1, @l2) {
+	log::l("found mounted partition on $_->{device} with $_->{mntpoint}");
 	if ($::isInstall && $_->{mntpoint} eq '/tmp/hdimage') {
+	    log::l("found hdimage on $_->{device}");
 	    $_->{real_mntpoint} = delete $_->{mntpoint};
 	    $_->{mntpoint} = common::usingRamdisk() && "/mnt/hd"; #- remap for hd install.
 	}
@@ -670,6 +678,7 @@ sub mount_part {
     #- root carrier's link can't be mounted
     loopback::carryRootCreateSymlink($part, $prefix);
 
+    log::l("isMounted=$part->{isMounted}, real_mntpoint=$part->{real_mntpoint}, mntpoint=$part->{mntpoint}");
     if ($part->{isMounted} && $part->{real_mntpoint} && $part->{mntpoint}) {
 	log::l("remounting partition on $prefix$part->{mntpoint} instead of $part->{real_mntpoint}");
 	if ($::isInstall) { #- ensure partition will not be busy.
