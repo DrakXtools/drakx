@@ -44,6 +44,7 @@ sub partition_with_diskdrake {
 	my $do_force_reload = sub {
 	    $o->{all_hds} = fsedit::empty_all_hds();
 	    install_any::getHds($o, $o);
+	    $all_hds = $o->{all_hds};
 	    $o->{all_hds};
 	};
 	require diskdrake::interactive;
