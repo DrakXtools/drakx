@@ -147,12 +147,15 @@ sub add_entry($$) {
 sub add_kernel {
     my ($prefix, $lilo, $version, $ext, $root, $v) = @_;
 
+    log::l("adding vmlinuz$ext as vmlinuz-$version");
     -e "$prefix/boot/vmlinuz-$version" or log::l("unable to find kernel image $prefix/boot/vmlinuz-$version"), return;
-    my $image = "/boot/vmlinuz" . (symlinkf("vmlinuz-$version", "$prefix/boot/vmlinuz$ext") ? $ext : "-$version");
+    my $image = "/boot/vmlinuz" . ($ext ne "-$version" &&
+				   symlinkf("vmlinuz-$version", "$prefix/boot/vmlinuz$ext") ? $ext : "-$version");
 
     my $initrd = eval { 
 	mkinitrd($prefix, $version, "/boot/initrd-$version.img");
-	"/boot/initrd" . (symlinkf("initrd-$version.img", "$prefix/boot/initrd$ext.img") ? $ext : "-$version") . ".img";
+	"/boot/initrd" . ($ext ne "-$version" &&
+			  symlinkf("initrd-$version.img", "$prefix/boot/initrd$ext.img") ? $ext : "-$version") . ".img";
     };
     my $label = $ext =~ /-(default)/ ? $1 : "linux$ext";
 
