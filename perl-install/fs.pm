@@ -169,6 +169,7 @@ sub formatMount_all {
     #- for fun :)
     #- that way, when install exits via ctrl-c, it gives hand to partition
     eval {
+	local $SIG{__DIE__} = 'ignore';
 	my ($type, $major, $minor) = devices::entry(fsedit::get_root($fstab)->{device});
 	output "/proc/sys/kernel/real-root-dev", makedev($major, $minor);
     };

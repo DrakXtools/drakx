@@ -275,13 +275,10 @@ sub assign_device_numbers($) {
     #- first verify there's at least one primary dos partition, otherwise it
     #- means it is a secondary disk and all will be false :(
     my ($c, @others) = grep { isFat($_) } @{$hd->{primary}{normal}};
-    $c or return;
 
-    $i = ord 'D';
-    foreach (grep { isFat($_) } map { $_->{normal} } @{$hd->{extended}}) {
-	$_->{device_windobe} = chr($i++);
-    }
-    $c->{device_windobe} = 'C';
+    $i = ord 'C';
+    $c->{device_windobe} = chr($i++) if $c;
+    $_->{device_windobe} = chr($i++) foreach grep { isFat($_) } map { $_->{normal} } @{$hd->{extended}};
     $_->{device_windobe} = chr($i++) foreach @others;
 }
 

@@ -63,7 +63,7 @@ sub entry {
 		   'c' => [22,0], 'd' => [22,64],
 		   'e' => [33,0], 'f' => [33,64],
 		   'g' => [34,0], 'h' => [34,64],
-	       }}{$1} or die "unknown device $_ (caller is " . caller . ")" };
+	       }}{$1} or die "unknown device $_" };
 	$minor += $2 || 0;
     } elsif (/^ram(.*)/) {
 	$type = c::S_IFBLK();
@@ -114,7 +114,7 @@ sub entry {
 #		   "usbmouse"=> [ c::S_IFCHR(), 10, 32], #- aka hidbp-mse-0
 		   "usbmouse"=> [ c::S_IFCHR(), 13, 32], #- aka /dev/usb/usbmouse0
 		   "zero"    => [ c::S_IFCHR(), 1,  5 ],		     
-	       }}{$_} or die "unknown device $_" };
+	       }}{$_} or die "unknown device $_ (caller is " . join(":", caller()) . ")" };
     }
     ($type, $major, $minor);
 }
