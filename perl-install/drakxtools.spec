@@ -195,6 +195,7 @@ done
 %config(noreplace) %_initrddir/harddrake
 %dir /etc/sysconfig/harddrake2/
 %config(noreplace) /etc/sysconfig/harddrake2/previous_hw
+%_datadir/harddrake/service_harddrake
 
 %files -n harddrake-ui
 %defattr(-,root,root)
