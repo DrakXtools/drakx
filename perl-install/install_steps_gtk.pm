@@ -135,7 +135,7 @@ sub new($$) {
     }
   OK:
     $ENV{DISPLAY} = $wanted_DISPLAY;
-    install_gtk::init_gtk();
+    install_gtk::init_gtk($o);
     install_gtk::init_sizes();
     install_gtk::install_theme($o);
     install_gtk::create_logo_window($o);

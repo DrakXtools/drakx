@@ -197,10 +197,12 @@ sub create_logo_window {
 }
 
 #------------------------------------------------------------------------------
-sub init_gtk() {
+sub init_gtk {
+    my ($o) = @_;
+
     symlink("/tmp/stage2/etc/$_", "/etc/$_") foreach qw(gtk-2.0 pango fonts);
 
-    if (!listlength(cat_('/proc/fb'))) {
+    if ($o->{vga16}) {
         #- inactivate antialias in VGA16 because it makes fonts look worse
         output('/tmp/fonts.conf',
 q(<fontconfig>
