@@ -55,6 +55,7 @@ sub getFile {
 	my ($ftp, $retr) = new(@para ? @para : fromEnv);
 	$$retr->close if $$retr;
 	$$retr = $ftp->retr($f) and return $$retr;
+	($ftp->code == 550) and log::l("FTP: 550 file unavailable"), return;
 	rewindGetFile();
 	log::l("ftp get failed, sleeping before trying again");
 	sleep 1;
