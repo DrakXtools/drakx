@@ -138,7 +138,7 @@ my $up_box;
 my $advanced_box;
 my $box2;
 my $cfg_file_exist = 0;
-my @all_user_list;
+my @user_list_all;
 my $list_other;
 my $DEBUG = 0;
 my $restore_sys = 1; 
@@ -416,7 +416,7 @@ sub all_user_list() {
     my $passwdfile = "/etc/passwd";
     my $user;
     my $uid;
-    @all_user_list = ();
+    @user_list_all = ();
 
 	local *PASSWD;
     open(PASSWD, $passwdfile) or exit 1; 
@@ -424,13 +424,13 @@ sub all_user_list() {
 		chomp($line);
 		($user, $uid) = (split(/:/, $line))[0, 2];
 		if ($uid >= 500 || $uid == 0) {
-	    	push @all_user_list, $user;
+	    	push @user_list_all, $user;
 		}
     }
     close(PASSWD);
     if ($DEBUG) {
 		print "/--  User list  --/ \n";
-		print " -> $_\n" foreach @all_user_list;
+		print " -> $_\n" foreach @user_list_all;
 		print "\n";
     }
 }
@@ -760,7 +760,28 @@ sub read_conf_file() {
 		#- inverse behavior. this allows incremental as the default if not configured
 		$backup_sys_versions = 1;
 		$backup_user_versions = 1; 
-    }    
+    }
+	# deal with users that may have been deleted from the system
+	check_valid_users() if $cfg_file_exist;    
+}
+
+sub check_valid_users() {
+	my @new_user_list;
+	all_user_list();
+	foreach my $user (@user_list) {
+		push @new_user_list, $user if any { /$user/ } @user_list_all;
+	}
+	if (@user_list != @new_user_list) {
+		log::l(N("Valid user list changed, rewriting config file."));
+		if ($DEBUG) {
+			print N("Old user list:\n");
+			print "@user_list\n";
+			print N("New user list:\n");
+			print "@new_user_list\n";	
+		}
+		@user_list = @new_user_list;
+		save_conf_file();
+	}
 }
 
 sub write_sitecopyrc() {
@@ -1769,7 +1790,7 @@ sub advanced_what_user {
 								if (!member($name, @user_list)) { push @user_list, $name }
 							}
 						});
-					$b } (@all_user_list) 
+					$b } (@user_list_all) 
 				),
 			),
 			0, my $check_what_browser = new Gtk2::CheckButton(N("Do not include the browser cache")),
