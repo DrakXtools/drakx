@@ -2,7 +2,7 @@ DEST = /tmp
 DEST_LIVETREE = $(DEST)/live_tree
 DEST_STAGE2 = $(DEST_LIVETREE)/usr/lib/stage2
 
-ISO = /BIG/mdkmove.iso
+ISO = /tmp/mdkmove.iso
 
 DATA_FILES = devices symlinks directories-to-create etcfiles all-etcfiles keyfiles \
              BOOT-800-MOVE.jpg BOOT-1024-MOVE.jpg BOOT-1280-MOVE.jpg BOOT-1600-MOVE.jpg
