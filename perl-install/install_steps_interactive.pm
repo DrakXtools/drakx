@@ -718,10 +718,11 @@ sub summary {
 	$o->configurePrinter(0) if !$::expert;
 	install_any::preConfigureTimezone($o);
     }
+    my $mouse_name = "$o->{mouse}{type} $o->{mouse}{name}";
 
     $o->ask_from_entries_refH('', _("Summary"),
     [
-{ label => _("Mouse"), val => \$o->{mouse}{name}, clicked => sub { $o->selectMouse(1) } },
+{ label => _("Mouse"), val => \$mouse_name, clicked => sub { $o->selectMouse(1); $mouse_name = "$o->{mouse}{type} $o->{mouse}{name}" } },
 { label => _("Keyboard"), val => \$o->{keyboard}, clicked => sub { $o->selectKeyboard(1) }, format => sub { translate(keyboard::keyboard2text($_[0])) } },
 { label => _("Timezone"), val => \$o->{timezone}{timezone}, clicked => sub { $o->configureTimezone(1) } },
 { label => _("Printer"), val => \$o->{printer}{mode}, clicked => sub { $o->configurePrinter(1) }, format => sub { $_[0] || _("No printer") } },
@@ -988,7 +989,7 @@ sub configureX {
 
 #------------------------------------------------------------------------------
 sub generateAutoInstFloppy {
-    my ($o) = @_;
+    my ($o, $replay) = @_;
 
     my $floppy = detect_devices::floppy();
 #+    $o->ask_yesorno('', 
@@ -1043,17 +1044,20 @@ sub generateAutoInstFloppy {
 	    install_any::getAndSaveFile("images/$image.img", $dev) or log::l("failed to write $dev"), return;
 	}
         fs::mount($dev, "/floppy", "vfat", 0);
-	substInFile { s/timeout.*//; s/^(\s*append)/$1 kickstart=floppy/ } "/floppy/syslinux.cfg";
+	substInFile { 
+	    s/timeout.*/$replay ? 'timeout 0' : ''/e;
+	    s/^(\s*append)/$1 kickstart=floppy/ 
+	} "/floppy/syslinux.cfg";
 
 	unlink "/floppy/help.msg";
 	output "/floppy/ks.cfg", install_any::generate_ks_cfg($o);
 	output "/floppy/boot.msg", "\n0c",
 "!! If you press enter, an auto-install is going to start.
    All data on this computer is going to be lost !!
-", "07\n";
+", "07\n" if !$replay;
 
-	local $o->{partitioning}{clearall} = 1;
-	install_any::g_auto_install("/floppy/auto_inst.cfg");
+	local $o->{partitioning}{clearall} = !$replay;
+	install_any::g_auto_install("/floppy/auto_inst.cfg", $replay);
 
 	fs::umount("/floppy");
     }
@@ -1086,7 +1090,16 @@ install chapter of the Official Linux-Mandrake User's Guide.")
 	},
 	[
 	 if_($::expert,
-	     { val => \ (my $t1 = _("Generate auto install floppy")), clicked => sub { $o->generateAutoInstFloppy }, advanced => 1 },
+	     { val => \ (my $t1 = _("Generate auto install floppy")), clicked => sub {
+		   my $t = $o->ask_from_list_('', 
+_("The auto install can be fully automated if wanted,
+in that case it will take over the hard drive!!
+(this is meant for installing on another box).
+
+You may prefer to replay the installation.
+"), [ _("Replay"), _("Automated") ]);
+		   $t and $o->generateAutoInstFloppy($t eq 'Replay');
+	       }, advanced => 1 },
 	     { val => \ (my $t2 = _("Save packages selection")), clicked => sub { install_any::g_default_packages($o) }, advanced => 1 },
 	 ),
 	]
