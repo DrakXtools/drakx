@@ -325,6 +325,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
     * do not automatically swtich from nv to nvidia driver (b/c the
       nvidia driver is buggy on some machines)
     * automatic configuration of new card
+  o only stop the boot progress bar if we've a non automatic tool to run
 - harddrake GUI:
   o show more data on SCSI disks
   o do not display USB disks in both harddisks and unknown sections
