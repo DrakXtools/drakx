@@ -642,7 +642,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 
 #ifdef MANDRAKE_MOVE
 	if (total_memory() < MEM_LIMIT_MOVE)
-		stg1_error_message(DISTRIB_NAME " typically needs more than %d Mbytes of memory (detected %d Mbytes). You may proceed, but the machine may crash or lock up for no apparent reason. Continue at your own risk. Alternatively, you may reboot your system now.",
+		stg1_info_message(DISTRIB_NAME " typically needs more than %d Mbytes of memory (detected %d Mbytes). You may proceed, but the machine may crash or lock up for no apparent reason. Continue at your own risk. Alternatively, you may reboot your system now.",
 				   MEM_LIMIT_MOVE, total_memory());
 #endif
 
