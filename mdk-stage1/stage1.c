@@ -66,7 +66,7 @@ char * method_name;
 
 void fatal_error(char *msg)
 {
-	printf("FATAL ERROR IN STAGE1: %s\n\nI can't recover from this.\n", msg);
+	printf("FATAL ERROR IN STAGE1: %s\n\nI can't recover from this.\nYou may reboot your system.\n", msg);
 	while (1);
 }
 
@@ -75,6 +75,7 @@ void fatal_error(char *msg)
 /* spawns a shell on console #2 */
 static void spawn_shell(void)
 {
+#ifdef SPAWN_SHELL
 	int fd;
 	pid_t pid;
 	char * shell_name = "/sbin/sash";
@@ -108,6 +109,7 @@ static void spawn_shell(void)
 		
 		close(fd);
 	}
+#endif
 }
 
 
