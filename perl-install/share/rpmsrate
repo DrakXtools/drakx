@@ -59,12 +59,14 @@ ACCESSIBILITY
 
 PUBLISHING
   5 enscript ghostscript-module-X
-    xpp
   4 docbook-dtd31-sgml ghostscript-utils gv jadetex latex2html psutils tetex-afm
     tetex-doc tetex-dvilj tetex-dvips tetex-latex tetex-xdvi texinfo
   1 docbook-style-dsssl docbook-style-dsssl-doc openjade sgml-tools ghostscript-module-SVGALIB
-  KDE
-    4 kups
+
+  5 CUPS 
+      cups-drivers xpp
+      KDE kups
+  5 LPR rhs-printfilters
 
 SHELLS
   4 bash-doc zsh zsh-doc
@@ -303,8 +305,9 @@ SERVER
   3 inn intimed mcserv nscd tftp tftp-server anonftp dhcp gated imap pidentd
     postfix rdate routed samba wu-ftpd bind bootparamd caching-nameserver
     cleanfeed timed ucd-snmp xntp3 leafnode rsh-server squid sympa vnc-server
-    ypbind am-utils cvsweb finger-server heartbeat jabber mars-nwe openssh-server
+    am-utils cvsweb finger-server heartbeat jabber mars-nwe openssh-server
     telnet-server inews portsentry XFree86-Xvfb XFree86-Xnest webmin
+  5 NIS ypbind
 
 CONFIG
   5 drakxtools ldetect
@@ -323,12 +326,13 @@ SYSTEM
     imlib-cfgeditor imwheel menudrake reiserfs-utils sndconfig tksysv ftp
   3 X11R6-contrib XFree86-100dpi-fonts 
     autofs drakprofile ext2resize sane 
-    yp-tools
   2 DrakeLogo adns audiofile awesfx compat-glibc fbset gfcc grub-doc
     lilo-doc sudo
   1 xtoolwait fdutils genromfs ext2ed mailcap pango usbview kernel-utils
   GNOME
     3 gnome-print gnorpm
+
+  4 NIS yp-tools
 
   3 PCMCIA irda-utils
   4 PCI"Voodoo 5" Glide_V5
@@ -352,3 +356,10 @@ SYSTEM
 EMULATORS
   3 wine
   2 BasiliskII BasiliskII-sheepnet xdosemu xmame xmess
+
+INSTALL
+  5 pptp-adsl-fr dhcpcd dhcpxd dhcp-client isdn4net isdn4k-utils rp-pppoe pump wireless-tools
+  5 XFree86-SVGA XFree86-server
+  4 XFree86-S3 XFree86-S3V XFree86-VGA16 XFree86-Mach64 XFree86-FBDev
+  3 XFree86-3DLabs
+  1 XFree86-8514 XFree86-AGX XFree86-I128 XFree86-Mach32 XFree86-Mach8 XFree86-Mono XFree86-P9000 XFree86-W32
