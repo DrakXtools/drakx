@@ -372,7 +372,7 @@ If you want to skip some of them, you can unselect them now."),
 	    label => sub { $_[0][3] },
 	},
     );
-    log::l("keeping media " . map { $_->[1] } @$l);
+    log::l("keeping media " . join ',', map { $_->[1] } @$l);
     @$l;
 }
 
@@ -414,7 +414,7 @@ sub selectSupplMedia {
 	    : int(keys %{$o->{packages}{mediums}}) + 1;
 	local $::isWizard = 0;
 	#- configure network if needed
-	if (!our $asked && !scalar keys %{$o->{intf}}) {
+	if (!(our $asked) && !scalar keys %{$o->{intf}}) {
 	    $asked = 1;
 	    #- install basesystem now
 	    $::o->do_pkgs->ensure_is_installed('basesystem', undef, 1);
