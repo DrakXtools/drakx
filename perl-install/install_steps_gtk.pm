@@ -481,26 +481,7 @@ sub choosePackagesTree {
 sub beforeInstallPackages {
     my ($o) = @_;    
     $o->SUPER::beforeInstallPackages;
-    $o->copy_advertising;
-}
-
-my @advertising_images;
-sub copy_advertising {
-    my ($o) = @_;
-
-    return if $::rootwidth < 800;
-
-    my $f = install_any::getFile('Mandrake/share/advertising/list');
-    if (my @files = <$f>) {
-	my $dir = "$o->{prefix}/tmp/drakx-images";
-	mkdir $dir;
-	unlink glob_("$dir/*");
-	foreach (@files) {
-	    chomp;
-	    install_any::getAndSaveFile("Mandrake/share/advertising/$_", "$dir/$_");
-	}
-	@advertising_images = map { "$dir/$_" } @files;
-    }
+    install_any::copy_advertising($o);
 }
 
 #------------------------------------------------------------------------------
@@ -533,7 +514,7 @@ sub installPackages {
     $cancel->signal_connect(clicked => sub { $pkgs::cancel_install = 1 });
 
     my ($change_time, $i);
-    if (@advertising_images) {
+    if (@install_any::advertising_images) {
 	log::l("hiding");
 	$msg->hide;
 	$progress->hide;
@@ -558,9 +539,9 @@ sub installPackages {
 	    $last_size = c::headerGetEntry(pkgs::packageHeader($p), 'size');
 	    $text->set((split /\n/, c::headerGetEntry(pkgs::packageHeader($p), 'summary'))[0] || '');
 
-	    if (@advertising_images && time() - $change_time > 20) {
+	    if (@install_any::advertising_images && time() - $change_time > 20) {
 		$change_time = time();
-                my $f = $advertising_images[$i++ % @advertising_images];
+                my $f = $install_any::advertising_images[$i++ % @install_any::advertising_images];
 		log::l("advertising $f");
 		gtkdestroy($advertising);
 		gtkpack($box, $advertising = gtkpng($f));

@@ -3,7 +3,7 @@ package install_any; # $Id$
 use diagnostics;
 use strict;
 
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @needToCopy @needToCopyIfRequiresSatisfied $boot_medium);
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @needToCopy @needToCopyIfRequiresSatisfied $boot_medium @advertising_images);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -92,7 +92,7 @@ sub errorOpeningFile($) {
 	    $current_medium = $asked_medium;
 	    eval { fs::mount($cdrom, "/tmp/image", "iso9660", 'readonly') };
 	    my $getFile = getFile($file); 
-	    $getFile and $::o->copy_advertising;
+	    $getFile && @advertising_images and copy_advertising($::o);
 	    $getFile and return $getFile;
 	    $current_medium = 'unknown'; #- don't know what CD is inserted now.
 	    ejectCdrom($cdrom);
@@ -760,5 +760,28 @@ sub log_sizes {
 	   formatXiB(sum(`rpm --root $o->{prefix}/ -qa --queryformat "%{size}\n"`))) if -x "$o->{prefix}/bin/rpm";
 }
 
+sub copy_advertising {
+    my ($o) = @_;
+
+    return if $::rootwidth < 800;
+
+    my $f = getFile('Mandrake/share/advertising/list');
+    if (my @files = <$f>) {
+	my $dir = "$o->{prefix}/tmp/drakx-images";
+	mkdir $dir;
+	unlink glob_("$dir/*");
+	foreach (@files) {
+	    chomp;
+	    getAndSaveFile("Mandrake/share/advertising/$_", "$dir/$_");
+	}
+	@advertising_images = map { "$dir/$_" } @files;
+    }
+}
+sub remove_advertising {
+    my ($o) = @_;
+    unlink @advertising_images;
+    rmdir "$o->{prefix}/tmp/drakx-images";
+    @advertising_images = ();
+}
 
 1;
