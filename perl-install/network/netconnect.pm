@@ -369,7 +369,6 @@ Take a look at http://www.linmodems.org"),
                     },
                     post => sub {
                         $ntf_name = $netc->{autodetect}{modem}{$modem_name}{device} || $netc->{autodetect}{modem}{$modem_name}{description};
-                        print "Interface is $ntf_name\n";
 
                         return "ppp_account" if $ntf_name =~ m!^/dev/!;
                         return "choose_serial_port" if !$ntf_name;
