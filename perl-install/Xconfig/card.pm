@@ -274,10 +274,12 @@ sub configure {
     my @cards = probe();
     @cards or @cards = {};
 
-    if (!$cards[0]{server} && !$cards[0]{Driver}) {
-	return if $auto;
+    if ($auto) {
+	return 0 if !$cards[0]{server} && !$cards[0]{Driver};
+    } else {
 	card_config__not_listed($in, $cards[0], $options) or return;
     }
+
     my $card = multi_head_choose($in, $auto, @cards) or return;
 
     $card->{Driver} = 'fbdev' if $options->{allowFB} && !$card->{server} && !$card->{Driver};
