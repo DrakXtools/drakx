@@ -430,7 +430,6 @@ Take a look at http://www.linmodems.org")
                    modem =>
                    {
                     pre => sub {
-                        my ($in, $netcnx, $mouse, $netc) = @_;
                         $netcnx->{type} = 'modem';
                         my $modem = $netcnx->{$netcnx->{type}};
                         $modem->{device} = $netc->{autodetect}{modem};
@@ -687,7 +686,6 @@ I cannot set up this connection type.")), return;
                    static_hostname => 
                    {
                     pre => sub {
-                        my ($in, $netc, $intf, @devices) = @_;
                         
                         $netc->{dnsServer} ||= dns($intf->{IPADDR});
                         $gateway_ex = gateway($intf->{IPADDR});
