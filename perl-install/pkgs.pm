@@ -826,7 +826,7 @@ sub versionCompare($$) {
     local $_;
 
     while ($a || $b) {
-	my ($sb, $sa) =  map { $1 if $a =~ /^\W*\d/ ? s/^\W*0*(\d+)// : s/^\W*(\D+)// } ($b, $a);
+	my ($sb, $sa) =  map { $1 if ($a || 0) =~ /^\W*\d/ ? s/^\W*0*(\d+)// : s/^\W*(\D+)// } ($b, $a);
 	$_ = length($sa) cmp length($sb) || $sa cmp $sb and return $_;
     }
 }
@@ -1038,8 +1038,10 @@ sub selectPackagesToUpgrade($$$;$$) {
 				 });
 
 		    #- keep in mind the cumul size of installed package since they will be deleted
-		    #- on upgrade.
-		    print UPGRADE_OUTPUT "$cumulSize:" . packageName($p) . "\n";
+		    #- on upgrade, only for package that are allowed to be upgraded.
+		    if (allowedToUpgrade(packageName($p))) {
+			print UPGRADE_OUTPUT "$cumulSize:" . packageName($p) . "\n";
+		    }
 		}
 	    }
 
@@ -1163,8 +1165,8 @@ sub selectPackagesToUpgrade($$$;$$) {
 sub allowedToUpgrade { $_[0] !~ /^(kernel|kernel-secure|kernel-smp|kernel-linus|hackkernel)$/ }
 
 sub installCallback {
-    my $msg = shift;
-    log::l($msg .": ". join(',', @_));
+#    my $msg = shift;
+#    log::l($msg .": ". join(',', @_));
 }
 
 sub install($$$;$$) {
