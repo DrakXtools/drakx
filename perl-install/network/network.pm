@@ -175,7 +175,7 @@ sub add2hosts {
     my %l;
     foreach (cat_($file)) {
         my ($ip, $aliases) = /^\s*(\S+)\s+(\S+.*)$/ or next;
-        push @{$l{$ip}}, grep { !member($_, $hostname, $sub_hostname) } split /\s+/, $aliases;
+        push @{$l{$ip}}, difference2([ split /\s+/, $aliases ], [ $hostname, $sub_hostname ]);
     } cat_($file);
 
     push @{$l{$_}}, $hostname, if_($sub_hostname, $sub_hostname) foreach grep { $_ } @ips;
