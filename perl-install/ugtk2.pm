@@ -837,7 +837,7 @@ sub new {
 
 	    if ($::isInstall) {
 		$::WizardTable->set_size_request($::windowwidth * 0.90, $::windowheight * ($::logoheight ? 0.73 : 0.9));
-		$::WizardWindow->set_uposition($::stepswidth + $::windowwidth * 0.04, $::logoheight + $::windowheight * ($::logoheight ? 0.12 : 0.05));
+		$::WizardWindow->set_uposition($::stepswidth + $::windowwidth * 0.04 + ($::move && 50), $::logoheight + $::windowheight * ($::logoheight ? 0.12 : 0.05));
 		$::WizardWindow->signal_connect(key_press_event => sub {
 		    my (undef, $event) = @_;
 		    my $d = ${{ $Gtk2::Gdk::Keysyms{F2} => 'screenshot' }}{$event->keyval};

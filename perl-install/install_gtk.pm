@@ -184,7 +184,7 @@ sub update_steps_position {
 sub create_logo_window {
     my ($o) = @_;
 
-    return if $::logowidth == 0;
+    return if $::logowidth == 0 || $::move;
 
     gtkdestroy($o->{logo_window});
 
@@ -228,9 +228,10 @@ sub init_sizes() {
     $::live and $::rootheight -= 80;
     #- ($::rootheight,  $::rootwidth)    = (min(768, $::rootheight), min(1024, $::rootwidth));
     $::move or $::stepswidth = $::rootwidth <= 640 ? 0 : 160;
-    $::move or ($::logowidth, $::logoheight) = $::rootwidth <= 640 ? (0, 0) : (500, 40);
+    ($::logowidth, $::logoheight) = $::rootwidth <= 640 ? (0, 0) : (500, 40);
     ($::helpwidth,   $::helpheight)   = ($::rootwidth - $::stepswidth, 0);
     ($::windowwidth, $::windowheight) = ($::rootwidth - $::stepswidth, $::rootheight - $::helpheight - $::logoheight);
+    $::move and $::windowwidth -= 100;
 }
 
 #------------------------------------------------------------------------------
