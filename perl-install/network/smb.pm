@@ -171,12 +171,12 @@ sub write_smb_conf {
 	log file = /var/log/samba/log.%m
 	max log size = 50
 	socket options = TCP_NODELAY SO_RCVBUF=8192 SO_SNDBUF=8192
-	character set = ISO8859-15
+	unix charset = ISO8859-15
 	os level = 18
 	local master = No
 	dns proxy = No
-	winbind uid = 10000-20000
-	winbind gid = 10000-20000
+	idmap uid = 10000-20000
+	idmap gid = 10000-20000
 	winbind separator = +
 	template homedir = /home/%D/%U
 	template shell = /bin/bash
