@@ -17,7 +17,7 @@ use log;
 #- [2] = value for $LANG, [3] = value for LANGUAGE (a list of possible
 #- languages, carefully choosen)
 my %languages = (
-  'en'  => [ 'English (US)',		undef,	      'en', 'en_US:en' ],
+  'en'  => [ 'English (US)',		'iso-8859-1', 'en', 'en_US:en' ],
 'en_GB' => [ 'English (UK)',		'iso-8859-1', 'en', 'en_GB:en' ],
   'af'  => [ 'Afrikaans',		'iso-8859-1', 'af', 'af:en_ZA' ],
   'ar'  => [ 'Arabic',			'iso-8859-6', 'ar', 'ar' ],
