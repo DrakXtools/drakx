@@ -61,8 +61,11 @@ msdos
 ppa
 # ISA network card needing options
 ne io=0x300 irq=7
-[root@obiwan mnt]# ls floppy/2.6.8.1-20mdk
-msdos.ko.gz  ppa.ko.gz  uhci.ko.gz  wacom.ko.gz
+[root@obiwan mnt]# (cd floppy/2.6.8.1-20mdk ; find -type f)
+./kernel/fs/msdos/msdos.ko.gz
+./kernel/drivers/scsi/ppa.ko.gz
+./kernel/drivers/usb/host/uhci-hcd.ko.gz
+./kernel/drivers/usb/input/wacom.ko.gz
 [root@obiwan mnt]# 
 --=----=----=----=----=----=----=----=----=--
 
