@@ -2,7 +2,7 @@ package install_steps; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw(@filesToSaveForUpgrade);
+use vars qw(@filesToSaveForUpgrade @ISA);
 
 #-######################################################################################
 #- misc imports
