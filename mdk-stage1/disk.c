@@ -27,6 +27,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <string.h>
+#include <libgen.h>
 #include "stage1.h"
 #include "frontend.h"
 #include "modules.h"
@@ -224,6 +225,7 @@ static enum return_type try_with_device(char *dev_name)
 		return try_with_device(dev_name);
 	}
 
+ ask_dir:
 	if (ask_from_entries_auto("Please enter the directory (or ISO image file) containing the "
 				  DISTRIB_NAME " Distribution install source.",
 				  questions_location, &answers_location, 24, questions_location_auto, NULL) != RETURN_OK) {
@@ -237,16 +239,14 @@ static enum return_type try_with_device(char *dev_name)
 
 	if (access(location_full, R_OK)) {
 		stg1_error_message("Directory or ISO image file could not be found on partition.\n"
-			      "Here's a short extract of the files in the root of the partition:\n"
-			      "%s", extract_list_directory(disk_own_mount));
-		umount(disk_own_mount);
-		return try_with_device(dev_name);
+			      "Here's a short extract of the files in the directory %s:\n"
+			      "%s", dirname(answers_location[0]), extract_list_directory(dirname(location_full)));
+		goto ask_dir;
 	}
 
 	results = try_with_directory(location_full, "disk", "disk-iso");
 	if (results != RETURN_OK) {
-		umount(disk_own_mount);
-		return try_with_device(dev_name);
+		goto ask_dir;
 	}
 
 	if (IS_RESCUE)
