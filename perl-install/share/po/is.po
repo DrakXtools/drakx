@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-01-05 22:10+0100\n"
+"POT-Creation-Date: 2000-05-10 19:25+0200\n"
 "PO-Revision-Date: 2000-01-05 18:53-0500\n"
 "Last-Translator: Thorarinn Einarsson <thori@mindspring.com>\n"
 "Language-Team: Icelandic\n"
@@ -16,39 +16,43 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../Xconfigurator.pm_.c:159
+#: ../../Xconfigurator.pm_.c:116 ../../Xconfigurator.pm_.c:228
+msgid "Generic"
+msgstr ""
+
+#: ../../Xconfigurator.pm_.c:165
 msgid "Graphic card"
 msgstr "Skjákort"
 
-#: ../Xconfigurator.pm_.c:159
+#: ../../Xconfigurator.pm_.c:165
 msgid "Select a graphic card"
 msgstr "Veldu skjákort"
 
-#: ../Xconfigurator.pm_.c:160
+#: ../../Xconfigurator.pm_.c:166
 msgid "Choose a X server"
 msgstr "Veldu X þjón"
 
-#: ../Xconfigurator.pm_.c:160
+#: ../../Xconfigurator.pm_.c:166
 msgid "X server"
 msgstr "X þjónn"
 
-#: ../Xconfigurator.pm_.c:181
+#: ../../Xconfigurator.pm_.c:190
 msgid "Select the memory size of your graphic card"
 msgstr "Veldu minnisstærð skjákortsins"
 
-#: ../Xconfigurator.pm_.c:203
+#: ../../Xconfigurator.pm_.c:217
 msgid "Choose options for server"
 msgstr "Veldu valmöguleika fyrir þjón"
 
-#: ../Xconfigurator.pm_.c:221
+#: ../../Xconfigurator.pm_.c:228
 msgid "Choose a monitor"
 msgstr "Veldu skjá"
 
-#: ../Xconfigurator.pm_.c:221
+#: ../../Xconfigurator.pm_.c:228
 msgid "Monitor"
 msgstr "Skjár"
 
-#: ../Xconfigurator.pm_.c:224
+#: ../../Xconfigurator.pm_.c:231
 msgid ""
 "The two critical parameters are the vertical refresh rate, which is the "
 "rate\n"
@@ -68,68 +72,69 @@ msgstr ""
 "það er MJÖG MIKILVÆGT að velja ekki of hátt tíðnisvið fyrir skjáinn. Hafir\n"
 "þú einhverjar efasemdir, veldu þá lægri stillingar."
 
-#: ../Xconfigurator.pm_.c:231
+#: ../../Xconfigurator.pm_.c:238
 msgid "Horizontal refresh rate"
 msgstr "Lárétt tíðni"
 
-#: ../Xconfigurator.pm_.c:231
+#: ../../Xconfigurator.pm_.c:238
 msgid "Vertical refresh rate"
 msgstr "Lóðrétt tíðni"
 
-#: ../Xconfigurator.pm_.c:272
+#: ../../Xconfigurator.pm_.c:277
 msgid "Monitor not configured"
 msgstr "Skjár ekki skilgreindur"
 
-#: ../Xconfigurator.pm_.c:275
+#: ../../Xconfigurator.pm_.c:280
 msgid "Graphic card not configured yet"
 msgstr "Skjákort ekki skilgreint enn"
 
-#: ../Xconfigurator.pm_.c:278
+#: ../../Xconfigurator.pm_.c:283
 msgid "Resolutions not chosen yet"
 msgstr "Upplausn ekki valin enn"
 
-#: ../Xconfigurator.pm_.c:289
+#: ../../Xconfigurator.pm_.c:296
 msgid "Do you want to test the configuration?"
 msgstr "Viltu prófa skilgreininguna"
 
-#: ../Xconfigurator.pm_.c:293
+#: ../../Xconfigurator.pm_.c:300
 msgid "Warning: testing is dangerous on this graphic card"
 msgstr "Aðvörun: Prófanir eru varasamar með þetta skjákort"
 
-#: ../Xconfigurator.pm_.c:296
-msgid "Test configuration"
+#: ../../Xconfigurator.pm_.c:303
+msgid "Test of the configuration"
 msgstr "Prófunar skilgreining"
 
-#: ../Xconfigurator.pm_.c:328
-msgid "An error occurred:"
-msgstr "Villa átti sér stað"
-
-#: ../Xconfigurator.pm_.c:330
+#: ../../Xconfigurator.pm_.c:342
 msgid ""
 "\n"
-"try changing some parameters"
+"try to change some parameters"
 msgstr ""
 "\n"
 "prófaðu að breyta stillingum"
 
-#: ../Xconfigurator.pm_.c:351
-#, c-format
-msgid "(leaving in %d seconds)"
-msgstr "(hætti eftir %d sekúndur)"
+#: ../../Xconfigurator.pm_.c:342
+msgid "An error has occurred:"
+msgstr "Villa átti sér stað"
 
-#: ../Xconfigurator.pm_.c:355 ../my_gtk.pm_.c:425
-msgid "Is this correct?"
+#: ../../Xconfigurator.pm_.c:365
+#, c-format
+msgid "Leaving in %d seconds"
+msgstr "Hætti eftir %d sekúndur"
+
+#: ../../Xconfigurator.pm_.c:369
+#, fuzzy
+msgid "Is this the correct setting?"
 msgstr "Er þetta rétt?"
 
-#: ../Xconfigurator.pm_.c:363
-msgid "An error occurred, try changing some parameters"
+#: ../../Xconfigurator.pm_.c:377
+msgid "An error has occurred, try to change some parameters"
 msgstr "Villa kom upp, reyndu að breyta færibreytum"
 
-#: ../Xconfigurator.pm_.c:371 ../Xconfigurator.pm_.c:540
+#: ../../Xconfigurator.pm_.c:385 ../../Xconfigurator.pm_.c:558
 msgid "Automatic resolutions"
 msgstr "Sjálfvirk upplausn"
 
-#: ../Xconfigurator.pm_.c:372
+#: ../../Xconfigurator.pm_.c:386
 msgid ""
 "To find the available resolutions I will try different ones.\n"
 "Your screen will blink...\n"
@@ -139,23 +144,33 @@ msgstr ""
 "Skjárinn þinn mun blikka...\n"
 "Þú getur slökkt á honum ef þú vilt, tölvan flautar þegar því er lokið"
 
-#: ../Xconfigurator.pm_.c:427 ../printerdrake.pm_.c:210
+#: ../../Xconfigurator.pm_.c:441 ../../printerdrake.pm_.c:167
 msgid "Resolution"
 msgstr "Upplausn"
 
-#: ../Xconfigurator.pm_.c:462
-msgid "Choose resolution and color depth"
+#: ../../Xconfigurator.pm_.c:476
+msgid "Choose the resolution and the color depth"
 msgstr "Veldu upplausn og fjölda lita"
 
-#: ../Xconfigurator.pm_.c:470
+#: ../../Xconfigurator.pm_.c:478
+#, c-format
+msgid "Graphic card: %s"
+msgstr "Skjákort: %s"
+
+#: ../../Xconfigurator.pm_.c:479
+#, c-format
+msgid "XFree86 server: %s"
+msgstr "XFree86 þjónn: %s"
+
+#: ../../Xconfigurator.pm_.c:488
 msgid "Show all"
 msgstr "Sýna alla"
 
-#: ../Xconfigurator.pm_.c:494
+#: ../../Xconfigurator.pm_.c:512
 msgid "Resolutions"
 msgstr "Upplausnir"
 
-#: ../Xconfigurator.pm_.c:541
+#: ../../Xconfigurator.pm_.c:559
 msgid ""
 "I can try to find the available resolutions (eg: 800x600).\n"
 "Sometimes, though, it may hang the machine.\n"
@@ -165,7 +180,7 @@ msgstr ""
 "Stundum getur tölvan frosið við það.\n"
 "Viltu prófa?"
 
-#: ../Xconfigurator.pm_.c:546
+#: ../../Xconfigurator.pm_.c:564
 msgid ""
 "No valid modes found\n"
 "Try with another video card or monitor"
@@ -173,109 +188,109 @@ msgstr ""
 "Engar leyfilegar upplausnir fundust\n"
 "Prófaðu að velja annað skjákort eða skjá"
 
-#: ../Xconfigurator.pm_.c:760
+#: ../../Xconfigurator.pm_.c:904
 #, c-format
 msgid "Keyboard layout: %s\n"
 msgstr "Tegund lyklaborðs: %s\n"
 
-#: ../Xconfigurator.pm_.c:761
+#: ../../Xconfigurator.pm_.c:905
 #, c-format
 msgid "Mouse type: %s\n"
 msgstr "Tegund músar: %s\n"
 
-#: ../Xconfigurator.pm_.c:762
+#: ../../Xconfigurator.pm_.c:906
 #, c-format
 msgid "Mouse device: %s\n"
 msgstr "Mús: %s\n"
 
-#: ../Xconfigurator.pm_.c:763
+#: ../../Xconfigurator.pm_.c:907
 #, c-format
 msgid "Monitor: %s\n"
 msgstr "Skjár: %s\n"
 
-#: ../Xconfigurator.pm_.c:764
+#: ../../Xconfigurator.pm_.c:908
 #, c-format
 msgid "Monitor HorizSync: %s\n"
 msgstr "Lárétt tíðni skjás: %s\n"
 
-#: ../Xconfigurator.pm_.c:765
+#: ../../Xconfigurator.pm_.c:909
 #, c-format
 msgid "Monitor VertRefresh: %s\n"
 msgstr "Lóðrétt tíðni skjás: %s\n"
 
-#: ../Xconfigurator.pm_.c:766
+#: ../../Xconfigurator.pm_.c:910
 #, c-format
 msgid "Graphic card: %s\n"
 msgstr "Skjákort: %s\n"
 
-#: ../Xconfigurator.pm_.c:767
+#: ../../Xconfigurator.pm_.c:911
 #, c-format
 msgid "Graphic memory: %s kB\n"
 msgstr "Skjákortsminni: %s kB\n"
 
-#: ../Xconfigurator.pm_.c:768
+#: ../../Xconfigurator.pm_.c:912
 #, c-format
 msgid "XFree86 server: %s\n"
 msgstr "XFree86 þjónn: %s\n"
 
-#: ../Xconfigurator.pm_.c:782
+#: ../../Xconfigurator.pm_.c:927
 msgid "Preparing X-Window configuration"
 msgstr "Undirbý X-Window skilgreiningu"
 
-#: ../Xconfigurator.pm_.c:796
+#: ../../Xconfigurator.pm_.c:941
 msgid "Change Monitor"
 msgstr "Skipta um skjá"
 
-#: ../Xconfigurator.pm_.c:797
+#: ../../Xconfigurator.pm_.c:942
 msgid "Change Graphic card"
 msgstr "Skipta um skjákort"
 
-#: ../Xconfigurator.pm_.c:798
+#: ../../Xconfigurator.pm_.c:943
 msgid "Change Server options"
 msgstr "Breyta þjóns möguleikum"
 
-#: ../Xconfigurator.pm_.c:799
+#: ../../Xconfigurator.pm_.c:944
 msgid "Change Resolution"
 msgstr "Breyta upplausn"
 
-#: ../Xconfigurator.pm_.c:800
+#: ../../Xconfigurator.pm_.c:945
 msgid "Automatical resolutions search"
 msgstr "Sjálfvirk leit upplausna"
 
-#: ../Xconfigurator.pm_.c:804
+#: ../../Xconfigurator.pm_.c:949
 msgid "Show information"
 msgstr "Sýna upplýsingar"
 
-#: ../Xconfigurator.pm_.c:805
+#: ../../Xconfigurator.pm_.c:950
 msgid "Test again"
 msgstr "Prófa aftur"
 
-#: ../Xconfigurator.pm_.c:806 ../standalone/rpmdrake_.c:46
+#: ../../Xconfigurator.pm_.c:951 ../../standalone/rpmdrake_.c:46
 msgid "Quit"
 msgstr "Hætta"
 
-#: ../Xconfigurator.pm_.c:810
+#: ../../Xconfigurator.pm_.c:955 ../../standalone/drakboot_.c:36
 msgid "What do you want to do?"
 msgstr "Hvað viltu gera?"
 
-#: ../Xconfigurator.pm_.c:817
+#: ../../Xconfigurator.pm_.c:962
 msgid "Forget the changes?"
 msgstr "Eyða breytingum?"
 
-#: ../Xconfigurator.pm_.c:833
+#: ../../Xconfigurator.pm_.c:980
 #, c-format
 msgid "Please relog into %s to activate the changes"
 msgstr "Stimplaðu þig aftur inn í %s til að virkja breytingarnar"
 
-#: ../Xconfigurator.pm_.c:849
+#: ../../Xconfigurator.pm_.c:996
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "Stimplaðu þig út og sláðu á Ctrl-Alt-Backspace"
 
-#: ../Xconfigurator.pm_.c:852
+#: ../../Xconfigurator.pm_.c:999
 msgid "X at startup"
 msgstr "X í ræsingu"
 
-#: ../Xconfigurator.pm_.c:853
+#: ../../Xconfigurator.pm_.c:1000
 msgid ""
 "I can set up your computer to automatically start X upon booting.\n"
 "Would you like X to start when you reboot?"
@@ -283,184 +298,404 @@ msgstr ""
 "Ég get stillt tölvuna þína til að kveikja sjálfvirkt á X við ræsingu\n"
 "Vilt þú kveikja á X við endurræsingu?"
 
-#: ../Xconfigurator_consts.pm_.c:4
+#: ../../Xconfigurator_consts.pm_.c:4
 msgid "256 colors (8 bits)"
 msgstr "256 litir (8 bits)"
 
-#: ../Xconfigurator_consts.pm_.c:5
+#: ../../Xconfigurator_consts.pm_.c:5
 msgid "32 thousand colors (15 bits)"
 msgstr "32 þúsund litir (15 bits)"
 
-#: ../Xconfigurator_consts.pm_.c:6
+#: ../../Xconfigurator_consts.pm_.c:6
 msgid "65 thousand colors (16 bits)"
 msgstr "65 þúsund litir (16 bits)"
 
-#: ../Xconfigurator_consts.pm_.c:7
+#: ../../Xconfigurator_consts.pm_.c:7
 msgid "16 million colors (24 bits)"
 msgstr "16 miljón litir (24 bits)"
 
-#: ../Xconfigurator_consts.pm_.c:8
+#: ../../Xconfigurator_consts.pm_.c:8
 msgid "4 billion colors (32 bits)"
 msgstr "4 miljarðar lita (32 bits)"
 
-#: ../Xconfigurator_consts.pm_.c:96
+#: ../../Xconfigurator_consts.pm_.c:103
 msgid "256 kB"
 msgstr "256 kB"
 
-#: ../Xconfigurator_consts.pm_.c:97
+#: ../../Xconfigurator_consts.pm_.c:104
 msgid "512 kB"
 msgstr "512 kB"
 
-#: ../Xconfigurator_consts.pm_.c:98
+#: ../../Xconfigurator_consts.pm_.c:105
 msgid "1 MB"
 msgstr "1 MB"
 
-#: ../Xconfigurator_consts.pm_.c:99
+#: ../../Xconfigurator_consts.pm_.c:106
 msgid "2 MB"
 msgstr "2 MB"
 
-#: ../Xconfigurator_consts.pm_.c:100
+#: ../../Xconfigurator_consts.pm_.c:107
 msgid "4 MB"
 msgstr "4 MB"
 
-#: ../Xconfigurator_consts.pm_.c:101
+#: ../../Xconfigurator_consts.pm_.c:108
 msgid "8 MB"
 msgstr "8 MB"
 
-#: ../Xconfigurator_consts.pm_.c:102
+#: ../../Xconfigurator_consts.pm_.c:109
 msgid "16 MB or more"
 msgstr "16 MB eða meira"
 
-#: ../Xconfigurator_consts.pm_.c:106 ../Xconfigurator_consts.pm_.c:107
+#: ../../Xconfigurator_consts.pm_.c:114 ../../Xconfigurator_consts.pm_.c:115
 msgid "Standard VGA, 640x480 at 60 Hz"
 msgstr "Staðlað VGA, 640x480 @ 60 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:108
+#: ../../Xconfigurator_consts.pm_.c:116
 msgid "Super VGA, 800x600 at 56 Hz"
 msgstr "Super VGA, 800x600 @ 56 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:109
+#: ../../Xconfigurator_consts.pm_.c:117
 msgid "8514 Compatible, 1024x768 at 87 Hz interlaced (no 800x600)"
 msgstr "8514 Samhæft, 1024x768 @ 87 Hz samtvinnað (ekkert 800x600)"
 
-#: ../Xconfigurator_consts.pm_.c:110
+#: ../../Xconfigurator_consts.pm_.c:118
 msgid "Super VGA, 1024x768 at 87 Hz interlaced, 800x600 at 56 Hz"
 msgstr "Super VGA, 1024x768 @ 87 Hz samtvinnað, 800x600 @ 56 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:111
+#: ../../Xconfigurator_consts.pm_.c:119
 msgid "Extended Super VGA, 800x600 at 60 Hz, 640x480 at 72 Hz"
 msgstr "Extended Super VGA, 800x600 @ 60 Hz, 640x480 @ 72 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:112
+#: ../../Xconfigurator_consts.pm_.c:120
 msgid "Non-Interlaced SVGA, 1024x768 at 60 Hz, 800x600 at 72 Hz"
 msgstr "Ósamtvinnað SVGA, 1024x768 @ 60 Hz, 800x600 @ 72 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:113
+#: ../../Xconfigurator_consts.pm_.c:121
 msgid "High Frequency SVGA, 1024x768 at 70 Hz"
 msgstr "Hátíðni SVGA, 1024x768 @ 70 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:114
+#: ../../Xconfigurator_consts.pm_.c:122
 msgid "Multi-frequency that can do 1280x1024 at 60 Hz"
 msgstr "Skjár sem ræður við 1280x1024 @ 60 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:115
+#: ../../Xconfigurator_consts.pm_.c:123
 msgid "Multi-frequency that can do 1280x1024 at 74 Hz"
 msgstr "Skjár sem ræður við 1280x1024 @ 74 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:116
+#: ../../Xconfigurator_consts.pm_.c:124
 msgid "Multi-frequency that can do 1280x1024 at 76 Hz"
 msgstr "Skjár sem ræður við 1280x1024 @ 76 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:117
+#: ../../Xconfigurator_consts.pm_.c:125
 msgid "Monitor that can do 1600x1200 at 70 Hz"
 msgstr "Skjár sem ræður við 1600x1200 @ 70 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:118
+#: ../../Xconfigurator_consts.pm_.c:126
 msgid "Monitor that can do 1600x1200 at 76 Hz"
 msgstr "Skjár sem ræður við 1600x1200 @ 76 Hz"
 
-#: ../diskdrake.pm_.c:16 ../diskdrake.pm_.c:370
-msgid "Create"
-msgstr "Búa til"
+#: ../../any.pm_.c:17
+msgid "curly"
+msgstr ""
 
-#: ../diskdrake.pm_.c:17
-msgid "Unmount"
-msgstr "Aftengja"
+#: ../../any.pm_.c:17
+#, fuzzy
+msgid "default"
+msgstr "Sjálfgefið"
 
-#: ../diskdrake.pm_.c:18 ../diskdrake.pm_.c:372
-msgid "Delete"
-msgstr "Eyða"
+#. -PO: names (tie, curly...) have corresponding icons for kdm
+#: ../../any.pm_.c:17
+#, fuzzy
+msgid "tie"
+msgstr "Virk"
 
-#: ../diskdrake.pm_.c:18
-msgid "Format"
-msgstr "Forsníða"
+#: ../../any.pm_.c:18
+msgid "brunette"
+msgstr ""
 
-#: ../diskdrake.pm_.c:18 ../diskdrake.pm_.c:527
-msgid "Resize"
-msgstr "Endurstækka"
+#: ../../any.pm_.c:18
+msgid "girl"
+msgstr ""
 
-#: ../diskdrake.pm_.c:18 ../diskdrake.pm_.c:370 ../diskdrake.pm_.c:414
-msgid "Type"
-msgstr "Tegund"
+#: ../../any.pm_.c:18
+msgid "woman-blond"
+msgstr ""
 
-#: ../diskdrake.pm_.c:19 ../diskdrake.pm_.c:430
-msgid "Mount point"
-msgstr "Tengipunktur"
+#: ../../any.pm_.c:19
+#, fuzzy
+msgid "automagic"
+msgstr "Sjálfvirkt IP"
 
-#: ../diskdrake.pm_.c:33
-msgid "Write /etc/fstab"
-msgstr "Skrifa /etc/fstab"
+#: ../../any.pm_.c:60
+msgid "First sector of boot partition"
+msgstr "Á fyrsta geira ræsidisksneiðar"
 
-#: ../diskdrake.pm_.c:34
-msgid "Toggle to expert mode"
-msgstr "Færa í snillingsham"
+#: ../../any.pm_.c:60
+msgid "First sector of drive (MBR)"
+msgstr "Í ræsifærsluna (MBR)"
 
-#: ../diskdrake.pm_.c:35
-msgid "Toggle to normal mode"
-msgstr "Fara í venjulegan ham"
+#: ../../any.pm_.c:65
+#, fuzzy
+msgid "LILO/grub Installation"
+msgstr "Uppsetning LILO"
 
-#: ../diskdrake.pm_.c:36
-msgid "Restore from file"
-msgstr "Endurheimta frá skrá"
+#: ../../any.pm_.c:66
+msgid "Where do you want to install the bootloader?"
+msgstr "Hvert viltu setja ræsistjórann?"
 
-#: ../diskdrake.pm_.c:37
-msgid "Save in file"
-msgstr "Vista í skrá"
+#: ../../any.pm_.c:73
+#, fuzzy
+msgid "None"
+msgstr "Búið"
 
-#: ../diskdrake.pm_.c:38
-msgid "Restore from floppy"
-msgstr "Endurheimta frá diskling"
+#: ../../any.pm_.c:73
+#, fuzzy
+msgid "Which bootloader(s) do you want to use?"
+msgstr "Hverju viltu bæta við?"
 
-#: ../diskdrake.pm_.c:39
-msgid "Save on floppy"
-msgstr "Vista á diskling"
+#: ../../any.pm_.c:84
+msgid "Boot device"
+msgstr "Ræsitæki"
 
-#: ../diskdrake.pm_.c:40 ../install_steps_interactive.pm_.c:612
-#: ../install_steps_interactive.pm_.c:742 ../standalone/adduserdrake_.c:34
+#: ../../any.pm_.c:85
+msgid "LBA (doesn't work on old BIOSes)"
+msgstr ""
+
+#: ../../any.pm_.c:86
+msgid "Compact"
+msgstr "Samþjappað"
+
+#: ../../any.pm_.c:86
+msgid "compact"
+msgstr "samþjappað"
+
+#: ../../any.pm_.c:87 ../../install_steps_interactive.pm_.c:809
+msgid "Delay before booting default image"
+msgstr "Töf áður en sjálfgefin ræsing byrjar"
+
+#: ../../any.pm_.c:88
+msgid "Video mode"
+msgstr "Skjáhamur"
+
+#: ../../any.pm_.c:90 ../../install_steps_interactive.pm_.c:531
+#: ../../install_steps_interactive.pm_.c:654
+#: ../../install_steps_interactive.pm_.c:705
+#: ../../install_steps_interactive.pm_.c:811 ../../printerdrake.pm_.c:85
+#: ../../printerdrake.pm_.c:110 ../../standalone/adduserdrake_.c:42
+msgid "Password"
+msgstr "Lykilorð"
+
+#: ../../any.pm_.c:91 ../../install_steps_interactive.pm_.c:655
+#: ../../install_steps_interactive.pm_.c:706
+#: ../../install_steps_interactive.pm_.c:812
+#: ../../standalone/adduserdrake_.c:43
+msgid "Password (again)"
+msgstr "Lykilorð (aftur)"
+
+#: ../../any.pm_.c:92 ../../install_steps_interactive.pm_.c:813
+msgid "Restrict command line options"
+msgstr "Takmarka alla rofa á skipanlínu"
+
+#: ../../any.pm_.c:92 ../../install_steps_interactive.pm_.c:813
+msgid "restrict"
+msgstr "takmarka"
+
+#: ../../any.pm_.c:98
+#, fuzzy
+msgid "Bootloader main options"
+msgstr "Stillingar LILO"
+
+#: ../../any.pm_.c:101 ../../install_steps_interactive.pm_.c:820
+msgid ""
+"Option ``Restrict command line options'' is of no use without a password"
+msgstr ""
+"Valkosturinn ``Takmarka alla rofa á skipanalínu'' gerir ekkert án lykilorðs"
+
+#: ../../any.pm_.c:102 ../../install_steps_interactive.pm_.c:664
+#: ../../install_steps_interactive.pm_.c:719
+#: ../../install_steps_interactive.pm_.c:821
+#: ../../standalone/adduserdrake_.c:56
+msgid "Please try again"
+msgstr "Reyndu aftur"
+
+#: ../../any.pm_.c:102 ../../install_steps_interactive.pm_.c:664
+#: ../../install_steps_interactive.pm_.c:719
+#: ../../install_steps_interactive.pm_.c:821
+#: ../../standalone/adduserdrake_.c:56
+msgid "The passwords do not match"
+msgstr "Mismunandi lykilorð"
+
+#: ../../any.pm_.c:112
+#, fuzzy
+msgid ""
+"Here are the different entries.\n"
+"You can add some more or change the existing ones."
+msgstr ""
+"Hérna eru núverandi stillingar LILO .\n"
+"Þú getur bætt við fleirum eða breytt þessum."
+
+#: ../../any.pm_.c:114 ../../install_steps_interactive.pm_.c:832
+#: ../../printerdrake.pm_.c:245 ../../standalone/rpmdrake_.c:302
+msgid "Add"
+msgstr "Bæta við"
+
+#: ../../any.pm_.c:114 ../../diskdrake.pm_.c:42
+#: ../../install_steps_interactive.pm_.c:699
+#: ../../install_steps_interactive.pm_.c:832 ../../printerdrake.pm_.c:245
+#: ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "Búið"
 
-#: ../diskdrake.pm_.c:43
+#: ../../any.pm_.c:123
+msgid "Linux"
+msgstr "Linux"
+
+#: ../../any.pm_.c:123
+msgid "Other OS (windows...)"
+msgstr "Öðru stýrikerfi (Window$...)"
+
+#: ../../any.pm_.c:123
+msgid "Which type of entry do you want to add?"
+msgstr "Hverju viltu bæta við?"
+
+#: ../../any.pm_.c:142 ../../install_steps_interactive.pm_.c:857
+msgid "Image"
+msgstr "Ræsikjarna"
+
+#: ../../any.pm_.c:143 ../../any.pm_.c:151
+#: ../../install_steps_interactive.pm_.c:859
+msgid "Root"
+msgstr "Rót"
+
+#: ../../any.pm_.c:144 ../../install_steps_interactive.pm_.c:860
+msgid "Append"
+msgstr "Bæta aftan við"
+
+#: ../../any.pm_.c:145 ../../install_steps_interactive.pm_.c:861
+msgid "Initrd"
+msgstr "Initrd"
+
+#: ../../any.pm_.c:146 ../../install_steps_interactive.pm_.c:862
+msgid "Read-write"
+msgstr "Les-skrif"
+
+#: ../../any.pm_.c:152
+msgid "Table"
+msgstr "Tafla"
+
+#: ../../any.pm_.c:153
+msgid "Unsafe"
+msgstr "Óöruggt"
+
+#: ../../any.pm_.c:158 ../../install_steps_interactive.pm_.c:869
+msgid "Label"
+msgstr "Nafn"
+
+#: ../../any.pm_.c:160 ../../install_steps_interactive.pm_.c:871
+msgid "Default"
+msgstr "Sjálfgefið"
+
+#: ../../any.pm_.c:163 ../../install_steps_gtk.pm_.c:674
+#: ../../install_steps_interactive.pm_.c:652
+#: ../../install_steps_interactive.pm_.c:874 ../../interactive.pm_.c:74
+#: ../../interactive.pm_.c:84 ../../interactive.pm_.c:224
+#: ../../interactive_newt.pm_.c:49 ../../interactive_newt.pm_.c:98
+#: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:200
+#: ../../my_gtk.pm_.c:459 ../../my_gtk.pm_.c:634 ../../printerdrake.pm_.c:272
+msgid "Ok"
+msgstr "Í lagi"
+
+#: ../../any.pm_.c:163 ../../install_steps_interactive.pm_.c:874
+msgid "Remove entry"
+msgstr "Fjarlægja"
+
+#: ../../any.pm_.c:166 ../../install_steps_interactive.pm_.c:877
+msgid "Empty label not allowed"
+msgstr "Autt er ekki leyft"
+
+#: ../../any.pm_.c:167
+#, fuzzy
+msgid "This label is already used"
+msgstr "Þetta nafn er nú þegar í notkun."
+
+#: ../../diskdrake.pm_.c:18 ../../diskdrake.pm_.c:413
+msgid "Create"
+msgstr "Búa til"
+
+#: ../../diskdrake.pm_.c:19
+msgid "Unmount"
+msgstr "Aftengja"
+
+#: ../../diskdrake.pm_.c:20 ../../diskdrake.pm_.c:415
+msgid "Delete"
+msgstr "Eyða"
+
+#: ../../diskdrake.pm_.c:20
+msgid "Format"
+msgstr "Forsníða"
+
+#: ../../diskdrake.pm_.c:20 ../../diskdrake.pm_.c:590
+msgid "Resize"
+msgstr "Endurstækka"
+
+#: ../../diskdrake.pm_.c:20 ../../diskdrake.pm_.c:413
+#: ../../diskdrake.pm_.c:466
+msgid "Type"
+msgstr "Tegund"
+
+#: ../../diskdrake.pm_.c:21 ../../diskdrake.pm_.c:485
+msgid "Mount point"
+msgstr "Tengipunktur"
+
+#: ../../diskdrake.pm_.c:35
+msgid "Write /etc/fstab"
+msgstr "Skrifa /etc/fstab"
+
+#: ../../diskdrake.pm_.c:36
+msgid "Toggle to expert mode"
+msgstr "Færa í snillingsham"
+
+#: ../../diskdrake.pm_.c:37
+msgid "Toggle to normal mode"
+msgstr "Fara í venjulegan ham"
+
+#: ../../diskdrake.pm_.c:38
+msgid "Restore from file"
+msgstr "Endurheimta frá skrá"
+
+#: ../../diskdrake.pm_.c:39
+msgid "Save in file"
+msgstr "Vista í skrá"
+
+#: ../../diskdrake.pm_.c:40
+msgid "Restore from floppy"
+msgstr "Endurheimta frá diskling"
+
+#: ../../diskdrake.pm_.c:41
+msgid "Save on floppy"
+msgstr "Vista á diskling"
+
+#: ../../diskdrake.pm_.c:45
 msgid "Clear all"
 msgstr "Hreinsa allt"
 
-#: ../diskdrake.pm_.c:44
+#: ../../diskdrake.pm_.c:46
 msgid "Format all"
 msgstr "Forsníð"
 
-#: ../diskdrake.pm_.c:45
+#: ../../diskdrake.pm_.c:47
 msgid "Auto allocate"
 msgstr "Ráðstafa skjálfkrafa"
 
-#: ../diskdrake.pm_.c:48
+#: ../../diskdrake.pm_.c:50
 msgid "All primary partitions are used"
 msgstr "Öll aðal skráarsnið eru í notkun"
 
-#: ../diskdrake.pm_.c:48
+#: ../../diskdrake.pm_.c:50
 msgid "I can't add any more partition"
 msgstr "Get ekki bætt við disksneiðum"
 
-#: ../diskdrake.pm_.c:48
+#: ../../diskdrake.pm_.c:50
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
 "partition"
@@ -468,54 +703,59 @@ msgstr ""
 "Til að fá fleiri disksneiðar, vinsamlega eyddu einni til að búa til "
 "viðbótarsneið"
 
-#: ../diskdrake.pm_.c:51
+#: ../../diskdrake.pm_.c:53
 msgid "Rescue partition table"
 msgstr "Bjarga sneiðatöflunni"
 
-#: ../diskdrake.pm_.c:52
+#: ../../diskdrake.pm_.c:54
 msgid "Undo"
 msgstr "Endurheimta"
 
-#: ../diskdrake.pm_.c:53
+#: ../../diskdrake.pm_.c:55
 msgid "Write partition table"
 msgstr "Skrifa sneiðatöflu"
 
-#: ../diskdrake.pm_.c:54
+#: ../../diskdrake.pm_.c:56
 msgid "Reload"
 msgstr "Endurhlaða"
 
-#: ../diskdrake.pm_.c:98
+#: ../../diskdrake.pm_.c:96
+msgid "loopback"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:109
 msgid "Empty"
 msgstr "Tóm"
 
-#: ../diskdrake.pm_.c:98
+#: ../../diskdrake.pm_.c:109
 msgid "Ext2"
 msgstr "Ext2"
 
-#: ../diskdrake.pm_.c:98
+#: ../../diskdrake.pm_.c:109
 msgid "FAT"
 msgstr "FAT"
 
-#: ../diskdrake.pm_.c:98
+#: ../../diskdrake.pm_.c:109
 msgid "Other"
 msgstr "Annað"
 
-#: ../diskdrake.pm_.c:98
+#: ../../diskdrake.pm_.c:109
 msgid "Swap"
 msgstr "Diskminni"
 
-#: ../diskdrake.pm_.c:104
+#: ../../diskdrake.pm_.c:115
 msgid "Filesystem types:"
 msgstr "Tegundir skráakerfa:"
 
-#: ../diskdrake.pm_.c:113
+#: ../../diskdrake.pm_.c:124
 msgid "Details"
 msgstr "Ítarleg atriði"
 
-#: ../diskdrake.pm_.c:127
+#: ../../diskdrake.pm_.c:138
+#, fuzzy
 msgid ""
-"You have one big fat partition\n"
-"(generally use by MicroSoft Dos/Windows).\n"
+"You have one big FAT partition\n"
+"(generally used by MicroSoft Dos/Windows).\n"
 "I suggest you first resize that partition\n"
 "(click on it, then click on \"Resize\")"
 msgstr ""
@@ -524,85 +764,94 @@ msgstr ""
 "Ég legg til að þú endursníðir hana\n"
 "(smelltu á hana, síðan á \"Endursníða\")"
 
-#: ../diskdrake.pm_.c:132
+#: ../../diskdrake.pm_.c:143
 msgid "Please make a backup of your data first"
 msgstr "Vinsamlega taktu fyrst afrit af öllum gögnum"
 
-#: ../diskdrake.pm_.c:132 ../diskdrake.pm_.c:146 ../diskdrake.pm_.c:458
-#: ../diskdrake.pm_.c:487
+#: ../../diskdrake.pm_.c:143 ../../diskdrake.pm_.c:160
+#: ../../diskdrake.pm_.c:169 ../../diskdrake.pm_.c:517
+#: ../../diskdrake.pm_.c:546
 msgid "Read carefully!"
 msgstr "Lestu vandlega!"
 
-#: ../diskdrake.pm_.c:146
-#, c-format
-msgid "After %s partition %s,"
-msgstr "Eftir %s disksneiðar %s,"
+#: ../../diskdrake.pm_.c:146
+msgid ""
+"If you plan to use aboot, be carefull to leave a free space (2048 sectors is "
+"enough)\n"
+"at the beginning of the disk"
+msgstr ""
 
-#: ../diskdrake.pm_.c:146
-msgid "all data on this partition will be lost"
-msgstr "öll gögn á þessari disksneið tapast"
+#: ../../diskdrake.pm_.c:160
+msgid "Be careful: this operation is dangerous."
+msgstr ""
 
-#: ../diskdrake.pm_.c:165 ../install_any.pm_.c:191 ../install_steps.pm_.c:67
-#: ../install_steps_interactive.pm_.c:37 ../standalone/diskdrake_.c:60
-#: ../standalone/rpmdrake_.c:294 ../standalone/rpmdrake_.c:304
+#: ../../diskdrake.pm_.c:197 ../../install_any.pm_.c:330
+#: ../../install_steps.pm_.c:74 ../../install_steps_interactive.pm_.c:40
+#: ../../standalone/diskdrake_.c:60 ../../standalone/rpmdrake_.c:294
+#: ../../standalone/rpmdrake_.c:304
 msgid "Error"
 msgstr "Villa"
 
-#: ../diskdrake.pm_.c:189 ../diskdrake.pm_.c:610
+#: ../../diskdrake.pm_.c:221 ../../diskdrake.pm_.c:680
 msgid "Mount point: "
 msgstr "Tengipunktur: "
 
-#: ../diskdrake.pm_.c:190 ../diskdrake.pm_.c:228
+#: ../../diskdrake.pm_.c:222 ../../diskdrake.pm_.c:263
 msgid "Device: "
 msgstr "Tæki: "
 
-#: ../diskdrake.pm_.c:191
+#: ../../diskdrake.pm_.c:223
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS drifstafur: %s (bara ágiskun)\n"
 
-#: ../diskdrake.pm_.c:192 ../diskdrake.pm_.c:231
+#: ../../diskdrake.pm_.c:224 ../../diskdrake.pm_.c:266
 msgid "Type: "
 msgstr "Tegund: "
 
-#: ../diskdrake.pm_.c:193
+#: ../../diskdrake.pm_.c:225
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Byrja: geiri %s\n"
 
-#: ../diskdrake.pm_.c:194
-#, c-format
-msgid "Size: %s MB"
-msgstr "Stærð: %s MB"
+#: ../../diskdrake.pm_.c:226
+#, fuzzy, c-format
+msgid "Size: %d MB"
+msgstr "Stærð: %d MB\n"
 
-#: ../diskdrake.pm_.c:196
+#: ../../diskdrake.pm_.c:228
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s geirar"
 
-#: ../diskdrake.pm_.c:198
+#: ../../diskdrake.pm_.c:230
 #, c-format
 msgid "Cylinder %d to cylinder %d\n"
 msgstr "Sívalningur %d til %d\n"
 
-#: ../diskdrake.pm_.c:199
+#: ../../diskdrake.pm_.c:231
 msgid "Formatted\n"
 msgstr "Forsniðinn\n"
 
-#: ../diskdrake.pm_.c:200
+#: ../../diskdrake.pm_.c:232
 msgid "Not formatted\n"
 msgstr "Ekki forsniðinn\n"
 
-#: ../diskdrake.pm_.c:201
+#: ../../diskdrake.pm_.c:233
 msgid "Mounted\n"
 msgstr "Tengdur\n"
 
-#: ../diskdrake.pm_.c:202
+#: ../../diskdrake.pm_.c:234
 #, c-format
 msgid "RAID md%s\n"
 msgstr "RAID md%s\n"
 
-#: ../diskdrake.pm_.c:203
+#: ../../diskdrake.pm_.c:235
+#, c-format
+msgid "Loopback file(s): %s\n"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:236
 msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
@@ -610,65 +859,79 @@ msgstr ""
 "Sjálfgefin disksneið ræst\n"
 "    (fyrir MS-DOS ræsingu, ekki fyrir LILO)\n"
 
-#: ../diskdrake.pm_.c:205
+#: ../../diskdrake.pm_.c:238
 #, c-format
 msgid "Level %s\n"
 msgstr "Stig %s\n"
 
-#: ../diskdrake.pm_.c:206
+#: ../../diskdrake.pm_.c:239
 #, c-format
 msgid "Chunk size %s\n"
 msgstr "Hlunkastærð %s\n"
 
-#: ../diskdrake.pm_.c:207
+#: ../../diskdrake.pm_.c:240
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID-diskar %s\n"
 
-#: ../diskdrake.pm_.c:224
+#: ../../diskdrake.pm_.c:242
+#, c-format
+msgid "Loopback file name: %s"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:259
 msgid "Please click on a partition"
 msgstr "Smelltu á disksneið"
 
-#: ../diskdrake.pm_.c:229
+#: ../../diskdrake.pm_.c:264
 #, c-format
 msgid "Size: %d MB\n"
 msgstr "Stærð: %d MB\n"
 
-#: ../diskdrake.pm_.c:230
+#: ../../diskdrake.pm_.c:265
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Skilgreining: %s sívalningar, %s hausar, %s geirar\n"
 
-#: ../diskdrake.pm_.c:232
+#: ../../diskdrake.pm_.c:267
+#, fuzzy, c-format
+msgid "Partition table type: %s\n"
+msgstr "Rótardisksneið"
+
+#: ../../diskdrake.pm_.c:268
 #, c-format
 msgid "on bus %d id %d\n"
 msgstr "á gagnabraut %d id %d\n"
 
-#: ../diskdrake.pm_.c:245
+#: ../../diskdrake.pm_.c:281
 msgid "Mount"
 msgstr "Tengipunktur"
 
-#: ../diskdrake.pm_.c:246
+#: ../../diskdrake.pm_.c:282
 msgid "Active"
 msgstr "Virk"
 
-#: ../diskdrake.pm_.c:247
+#: ../../diskdrake.pm_.c:283
 msgid "Add to RAID"
 msgstr "Bæta við RAID"
 
-#: ../diskdrake.pm_.c:248
+#: ../../diskdrake.pm_.c:284
 msgid "Remove from RAID"
 msgstr "Taka úr RAID"
 
-#: ../diskdrake.pm_.c:249
+#: ../../diskdrake.pm_.c:285
 msgid "Modify RAID"
 msgstr "Breyta RAID"
 
-#: ../diskdrake.pm_.c:256
+#: ../../diskdrake.pm_.c:286
+msgid "Use for loopback"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:293
 msgid "Choose action"
 msgstr "Veldu aðgerð"
 
-#: ../diskdrake.pm_.c:349
+#: ../../diskdrake.pm_.c:386
 msgid ""
 "Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
 "1024).\n"
@@ -680,7 +943,7 @@ msgstr ""
 "Annaðhvort notar þú LILO og það mun ekki virka, eða þú notar ekki LILO og "
 "sleppir því að hafa /boot"
 
-#: ../diskdrake.pm_.c:353
+#: ../../diskdrake.pm_.c:390
 msgid ""
 "The partition you've selected to add as root (/) is physically located "
 "beyond\n"
@@ -691,146 +954,198 @@ msgstr ""
 "1024. sívalnings á harða disknum og þú hefur enga /boot sneið.\n"
 "Ef þú ætlar að nota LILO ræsistjórann skaltu muna að bæta við /boot sneið"
 
-#: ../diskdrake.pm_.c:370 ../diskdrake.pm_.c:372
+#: ../../diskdrake.pm_.c:396
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"So be careful to add a /boot partition if you want to use lilo or grub"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:413 ../../diskdrake.pm_.c:415
 #, c-format
 msgid "Use ``%s'' instead"
 msgstr "Nota ``%s'' í staðinn"
 
-#: ../diskdrake.pm_.c:375
+#: ../../diskdrake.pm_.c:418
 msgid "Use ``Unmount'' first"
 msgstr "Nota ``Aftengja'' fyrst"
 
-#: ../diskdrake.pm_.c:376 ../diskdrake.pm_.c:409
-msgid "changing type of"
-msgstr "breyti tegund"
+#: ../../diskdrake.pm_.c:419 ../../diskdrake.pm_.c:461
+#, fuzzy, c-format
+msgid ""
+"After changing type of partition %s, all data on this partition will be lost"
+msgstr "öll gögn á þessari disksneið tapast"
 
-#: ../diskdrake.pm_.c:388
+#: ../../diskdrake.pm_.c:431
 msgid "Continue anyway?"
 msgstr "Halda samt áfram?"
 
-#: ../diskdrake.pm_.c:393
+#: ../../diskdrake.pm_.c:436
 msgid "Quit without saving"
 msgstr "Hætta án þess að vista"
 
-#: ../diskdrake.pm_.c:393
+#: ../../diskdrake.pm_.c:436
 msgid "Quit without writing the partition table?"
 msgstr "Hætta án þess að skrifa sneiðatöfluna?"
 
-#: ../diskdrake.pm_.c:412
+#: ../../diskdrake.pm_.c:464
 msgid "Change partition type"
 msgstr "Breyta tegund sneiðar"
 
-#: ../diskdrake.pm_.c:413
+#: ../../diskdrake.pm_.c:465
 msgid "Which partition type do you want?"
 msgstr "Hvaða sneiðtegund viltu?"
 
-#: ../diskdrake.pm_.c:429
+#: ../../diskdrake.pm_.c:483
+#, fuzzy, c-format
+msgid "Where do you want to mount loopback file %s?"
+msgstr "Hvar viltu tengja tæki %s?"
+
+#: ../../diskdrake.pm_.c:484
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Hvar viltu tengja tæki %s?"
 
-#: ../diskdrake.pm_.c:451
-msgid "formatting"
-msgstr "forsníð"
+#: ../../diskdrake.pm_.c:489
+msgid ""
+"Can't unset mount point as this partition is used for loop back.\n"
+"Remove the loopback first"
+msgstr ""
 
-#: ../diskdrake.pm_.c:453
+#: ../../diskdrake.pm_.c:508
+#, fuzzy, c-format
+msgid "After formatting partition %s, all data on this partition will be lost"
+msgstr "öll gögn á þessari disksneið tapast"
+
+#: ../../diskdrake.pm_.c:510
 msgid "Formatting"
 msgstr "Forsníðing"
 
-#: ../diskdrake.pm_.c:453 ../install_steps_interactive.pm_.c:221
+#: ../../diskdrake.pm_.c:511
+#, fuzzy, c-format
+msgid "Formatting loopback file %s"
+msgstr "Forsníð disksneið %s"
+
+#: ../../diskdrake.pm_.c:512 ../../install_steps_interactive.pm_.c:253
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Forsníð disksneið %s"
 
-#: ../diskdrake.pm_.c:458
+#: ../../diskdrake.pm_.c:517
 msgid "After formatting all partitions,"
 msgstr "Eftir forsníðingu allra sneiða"
 
-#: ../diskdrake.pm_.c:458
+#: ../../diskdrake.pm_.c:517
 msgid "all data on these partitions will be lost"
 msgstr "munu öll gögn á þessum disksneiðum tapast"
 
-#: ../diskdrake.pm_.c:468
+#: ../../diskdrake.pm_.c:527
 msgid "Move"
 msgstr "Færa"
 
-#: ../diskdrake.pm_.c:469
-msgid "Which disk do you want to move to?"
+#: ../../diskdrake.pm_.c:528
+msgid "Which disk do you want to move it to?"
 msgstr "Hvaða disk viltu færa til?"
 
-#: ../diskdrake.pm_.c:473
+#: ../../diskdrake.pm_.c:532
 msgid "Sector"
 msgstr "Geiri"
 
-#: ../diskdrake.pm_.c:474
-msgid "Which sector do you want to move to?"
+#: ../../diskdrake.pm_.c:533
+msgid "Which sector do you want to move it to?"
 msgstr "Hvaða geira viltu færa gögn til?"
 
-#: ../diskdrake.pm_.c:477
+#: ../../diskdrake.pm_.c:536
 msgid "Moving"
 msgstr "Færi"
 
-#: ../diskdrake.pm_.c:477
+#: ../../diskdrake.pm_.c:536
 msgid "Moving partition..."
 msgstr "Færi disksneið..."
 
-#: ../diskdrake.pm_.c:487
+#: ../../diskdrake.pm_.c:546
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Disksneiðatafla drifs %s mun verða skrifuð á disk!"
 
-#: ../diskdrake.pm_.c:489
+#: ../../diskdrake.pm_.c:548
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Þú þarft að endurræsa áður en breytingar taka gildi"
 
-#: ../diskdrake.pm_.c:510 ../install_steps_gtk.pm_.c:255
-msgid "Computing fat filesystem bounds"
+#: ../../diskdrake.pm_.c:569 ../../install_steps_gtk.pm_.c:208
+msgid "Computing FAT filesystem bounds"
 msgstr "Reikna takmarkanir FAT skráarkerfis..."
 
-#: ../diskdrake.pm_.c:510 ../diskdrake.pm_.c:555
-#: ../install_steps_gtk.pm_.c:255
+#: ../../diskdrake.pm_.c:569 ../../diskdrake.pm_.c:618
+#: ../../install_steps_gtk.pm_.c:208
 msgid "Resizing"
 msgstr "Endursníð"
 
-#: ../diskdrake.pm_.c:524
-msgid "resizing"
-msgstr "Endursníð..."
+#: ../../diskdrake.pm_.c:585
+#, fuzzy
+msgid "All data on this partition should be backed-up"
+msgstr "öll gögn á þessari disksneið tapast"
 
-#: ../diskdrake.pm_.c:534
+#: ../../diskdrake.pm_.c:587
+#, fuzzy, c-format
+msgid "After resizing partition %s, all data on this partition will be lost"
+msgstr "öll gögn á þessari disksneið tapast"
+
+#: ../../diskdrake.pm_.c:597
 msgid "Choose the new size"
 msgstr "Veldu nýja stærð"
 
-#: ../diskdrake.pm_.c:534 ../install_steps_graphical.pm_.c:287
-#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:317
-#: ../install_steps_gtk.pm_.c:361
+#: ../../diskdrake.pm_.c:597 ../../install_steps_graphical.pm_.c:287
+#: ../../install_steps_graphical.pm_.c:334
 msgid "MB"
 msgstr "MB"
 
-#: ../diskdrake.pm_.c:587
+#: ../../diskdrake.pm_.c:652
 msgid "Create a new partition"
 msgstr "Búa til nýja disksneið"
 
-#: ../diskdrake.pm_.c:603
+#: ../../diskdrake.pm_.c:672
 msgid "Start sector: "
 msgstr "Byrjunar geiri"
 
-#: ../diskdrake.pm_.c:606
+#: ../../diskdrake.pm_.c:676 ../../diskdrake.pm_.c:750
 msgid "Size in MB: "
 msgstr "Stærð í MB: "
 
-#: ../diskdrake.pm_.c:609
+#: ../../diskdrake.pm_.c:679 ../../diskdrake.pm_.c:753
 msgid "Filesystem type: "
 msgstr "Tegund skráakerfis:"
 
-#: ../diskdrake.pm_.c:611
+#: ../../diskdrake.pm_.c:682
 msgid "Preference: "
 msgstr "Valkostur:"
 
-#: ../diskdrake.pm_.c:655 ../diskdrake.pm_.c:671
+#: ../../diskdrake.pm_.c:729 ../../install_steps.pm_.c:132
+msgid "This partition can't be used for loopback"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:739
+msgid "Loopback"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:749
+msgid "Loopback file name: "
+msgstr ""
+
+#: ../../diskdrake.pm_.c:775
+msgid "File already used by another loopback, choose another one"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:776
+#, fuzzy
+msgid "File already exists. Use it?"
+msgstr "Nafnið %s er þegar í notkun"
+
+#: ../../diskdrake.pm_.c:798 ../../diskdrake.pm_.c:814
 msgid "Select file"
 msgstr "Veljið skrá"
 
-#: ../diskdrake.pm_.c:664
+#: ../../diskdrake.pm_.c:807
 msgid ""
 "The backup partition table has not the same size\n"
 "Still continue?"
@@ -838,11 +1153,11 @@ msgstr ""
 "Disksneiðin sem var tekin sem afrit er ekki af sömu stærð\n"
 "Halda áfram?"
 
-#: ../diskdrake.pm_.c:672
+#: ../../diskdrake.pm_.c:815
 msgid "Warning"
 msgstr "Aðvörun"
 
-#: ../diskdrake.pm_.c:673
+#: ../../diskdrake.pm_.c:816
 msgid ""
 "Insert a floppy in drive\n"
 "All data on this floppy will be lost"
@@ -850,68 +1165,77 @@ msgstr ""
 "Settu diskling í drifið\n"
 "Öll gögn á þessum diskling tapast"
 
-#: ../diskdrake.pm_.c:687
+#: ../../diskdrake.pm_.c:830
 msgid "Trying to rescue partition table"
 msgstr "Reyni að endurheimta disksneiðatöfluna"
 
-#: ../diskdrake.pm_.c:698
+#: ../../diskdrake.pm_.c:841
 msgid "device"
 msgstr "tæki"
 
-#: ../diskdrake.pm_.c:699
+#: ../../diskdrake.pm_.c:842
 msgid "level"
 msgstr "stig"
 
-#: ../diskdrake.pm_.c:700
+#: ../../diskdrake.pm_.c:843
 msgid "chunk size"
 msgstr "stærð hlutar"
 
-#: ../diskdrake.pm_.c:712
+#: ../../diskdrake.pm_.c:855
 msgid "Choose an existing RAID to add to"
 msgstr "Veldu RAID sem til er fyrir til að bæta við"
 
-#: ../diskdrake.pm_.c:713
+#: ../../diskdrake.pm_.c:856
 msgid "new"
 msgstr "ný"
 
-#: ../fs.pm_.c:67 ../fs.pm_.c:73
-#, c-format
+#: ../../fs.pm_.c:85 ../../fs.pm_.c:91 ../../fs.pm_.c:97 ../../fs.pm_.c:103
+#, fuzzy, c-format
 msgid "%s formatting of %s failed"
 msgstr "gat ekki forsniðið %s"
 
-#: ../fs.pm_.c:93
+#: ../../fs.pm_.c:129
 #, c-format
-msgid "don't know how to format %s in type %s"
+msgid "I don't know how to format %s in type %s"
 msgstr "kann ekki að forsníða %s af tegundinni %s"
 
-#: ../fs.pm_.c:106
+#: ../../fs.pm_.c:186
 msgid "nfs mount failed"
 msgstr "tókst ekki að tengja nfs"
 
-#: ../fs.pm_.c:123
+#: ../../fs.pm_.c:209
 msgid "mount failed: "
 msgstr "tókst ekki að tengja: "
 
-#: ../fs.pm_.c:134
+#: ../../fs.pm_.c:220
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "villa við að aftengja %s: %s"
 
-#: ../fsedit.pm_.c:219
+#: ../../fsedit.pm_.c:250
 msgid "Mount points must begin with a leading /"
 msgstr "Heiti tengipunkta verða að byrja á /."
 
-#: ../fsedit.pm_.c:222
-#, c-format
-msgid "There is already a partition with mount point %s"
+#: ../../fsedit.pm_.c:253
+#, fuzzy, c-format
+msgid "There is already a partition with mount point %s\n"
 msgstr "Það er þegar disksneið með tengipunktinn %s"
 
-#: ../fsedit.pm_.c:306
+#: ../../fsedit.pm_.c:261
+#, c-format
+msgid "Circular mounts %s\n"
+msgstr ""
+
+#: ../../fsedit.pm_.c:273
+msgid "You need a true filesystem (ext2, reiserfs) for this mount point\n"
+msgstr ""
+
+#: ../../fsedit.pm_.c:355
 #, c-format
 msgid "Error opening %s for writing: %s"
 msgstr "Villa við að opna %s til skriftar: %s"
 
-#: ../fsedit.pm_.c:388
+#: ../../fsedit.pm_.c:437
 msgid ""
 "An error has occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
@@ -919,59 +1243,90 @@ msgstr ""
 "Það kom upp villa. Engin tæki fundust sem unnt er að búa til ný skráakerfi "
 "á. Vinsamlegast athugaðu vélbúnaðinn í leit að orsök vandamálsins."
 
-#: ../fsedit.pm_.c:403
+#: ../../fsedit.pm_.c:452
 msgid "You don't have any partitions!"
 msgstr "Þú hefur ekki neinar disksneiðar"
 
-#: ../help.pm_.c:7
+#: ../../help.pm_.c:7
 msgid "Choose preferred language for install and system usage."
 msgstr "Veldu tungumál til að nota við innsetningu og kerfisnotkun."
 
-#: ../help.pm_.c:10
+#: ../../help.pm_.c:10
 msgid "Choose the layout corresponding to your keyboard from the list above"
 msgstr "Veldu snið sem passar við lyklaborðið þitt frá listanum að ofan"
 
-#: ../help.pm_.c:13
+#: ../../help.pm_.c:13
+#, fuzzy
 msgid ""
 "Choose \"Install\" if there are no previous versions of Linux\n"
 "installed, or if you wish to use multiple distributions or versions.\n"
 "\n"
+"Choose \"Upgrade\" if you wish to update a previous version of Mandrake "
+"Linux:\n"
+"5.1 (Venice), 5.2 (Leloo), 5.3 (Festen), 6.0 (Venus), 6.1 (Helios), Gold "
+"2000\n"
+"or 7.0 (Air).\n"
 "\n"
-"Choose \"Upgrade\" if you wish to update a previous version of Mandrake\n"
-"Linux: 5.1 (Venice), 5.2 (Leloo), 5.3 (Festen), 6.0 (Venus), 6.1\n"
-"(Helios) or Gold 2000."
+"\n"
+"Select:\n"
+"\n"
+"  - Automated (recommended): If you have never installed Linux before, "
+"choose this. NOTE:\n"
+"    networking will not be configured during installation, use "
+"\"LinuxConf\"\n"
+"    to configure it after the install completes.\n"
+"\n"
+"  - Customized: If you are familiar enough with GNU/Linux, you may then "
+"choose\n"
+"    the primary usage for your machine. See below for details.\n"
+"\n"
+"  - Expert: This supposes that you are fluent with GNU/Linux and want to\n"
+"    perform a highly customized installation. As for a \"Customized\"\n"
+"    installation class, you will be able to select the usage for your "
+"system.\n"
+"    But please, please, DO NOT CHOOSE THIS UNLESS YOU KNOW WHAT YOU ARE "
+"DOING!\n"
 msgstr ""
 "Veldu \"Innsetning\" ef það eru engar fyrri útgáfur af Linux á tölvunni\n"
 "eða ef þú vilt nota fleiri en eina dreifingu af Linux.\n"
 "\n"
-"\n"
 "Veldu \"Uppfærsla\" ef þú vilt uppfæra fyrri innsetningu af Linux Mandrake:\n"
-"5.1 (Venice), 5.2 (Leloo), 5.3 (Festen), 6.0 (Venus), 6.1 (Helios)\n"
-"eða Gold 2000."
-
-#: ../help.pm_.c:22
-msgid ""
+"5.1 (Venice), 5.2 (Leloo), 5.3 (Festen), 6.0 (Venus), 6.1 (Helios),\n"
+"Gold 2000 eða 7.0 (Air).\n"
+"\n"
+"\n"
 "Select:\n"
 "\n"
-"  - Recommended: If you have never installed Linux before.\n"
+"  - Ráðlagt: Ef þú hefur aldrei sett Linux inn áður.\n"
 "\n"
-"\n"
-"  - Customized: If you are familiar with Linux, you will be able to \n"
+"  - Eftir óskum: Ef þú hefur þó nokkra reynslu meðiar with Linux, you will "
+"be able to \n"
 "select the usage for the installed system between normal, development or\n"
 "server. Choose \"Normal\" for a general purpose installation of your\n"
 "computer. You may choose \"Development\" if you will be using the computer\n"
 "primarily for software development, or choose \"Server\" if you wish to\n"
 "install a general purpose server (for mail, printing...).\n"
 "\n"
-"\n"
 "  - Expert: If you are fluent with GNU/Linux and want to perform\n"
 "a highly customized installation, this Install Class is for you. You will\n"
-"be able to select the usage of your installed system as for \"Customized\"."
-msgstr ""
+"be able to select the usage of your installed system as for \"Customized\".\n"
+
+#: ../../help.pm_.c:37
+msgid ""
 "Select:\n"
 "\n"
-"  - Ráðlagt: Ef þú hefur aldrei sett Linux inn áður.\n"
+"  - Customized: If you are familiar enough with GNU/Linux, you may then "
+"choose\n"
+"    the primary usage for your machine. See below for details.\n"
 "\n"
+"  - Expert: This supposes that you are fluent with GNU/Linux and want to\n"
+"    perform a highly customized installation. As for a \"Customized\"\n"
+"    installation class, you will be able to select the usage for your "
+"system.\n"
+"    But please, please, DO NOT CHOOSE THIS UNLESS YOU KNOW WHAT YOU ARE "
+"DOING!\n"
+msgstr ""
+"Select:\n"
 "\n"
 "  - Eftir óskum: Ef þú hefur þó nokkra reynslu meðiar with Linux, you will "
 "be able to \n"
@@ -984,10 +1339,37 @@ msgstr ""
 "\n"
 "  - Expert: If you are fluent with GNU/Linux and want to perform\n"
 "a highly customized installation, this Install Class is for you. You will\n"
-"be able to select the usage of your installed system as for \"Customized\"."
+"be able to select the usage of your installed system as for \"Customized\".\n"
+
+#: ../../help.pm_.c:49
+msgid ""
+"The different choices for your machine's usage (provided, hence, that you "
+"have\n"
+"chosen either \"Custom\" or \"Expert\" as an installation class) are the\n"
+"following:\n"
+"\n"
+"  - Normal: choose this if you intend to use your machine primarily for\n"
+"    everyday use (office work, graphics manipulation and so on). Do not\n"
+"    expect any compiler, development utility et al. installed.\n"
+"\n"
+"  - Development: as its name says. Choose this if you intend to use your\n"
+"    machine primarily for software development. You will then have a "
+"complete\n"
+"    collection of software installed in order to compile, debug and format\n"
+"    source code, or create software packages.\n"
+"\n"
+"  - Server: choose this if the machine which you're installing "
+"Linux-Mandrake\n"
+"    on is intended to be used as a server. Either a file server (NFS or "
+"SMB),\n"
+"    a print server (Unix' lp (Line Printer) protocol or Windows style SMB\n"
+"    printing), an authentication server (NIS), a database server and so on. "
+"As\n"
+"    such, do not expect any gimmicks (KDE, GNOME...) to be installed.\n"
+msgstr ""
 
 # ## skrytid
-#: ../help.pm_.c:40
+#: ../../help.pm_.c:70
 msgid ""
 "DrakX will attempt at first to look for one or more PCI\n"
 "SCSI adapter(s). If it finds it (or them)  and knows which driver(s)\n"
@@ -1013,8 +1395,7 @@ msgid ""
 "are the options you will need to provide to the driver."
 msgstr ""
 
-# ## skrytid
-#: ../help.pm_.c:64
+#: ../../help.pm_.c:94
 msgid ""
 "At this point, you may choose what partition(s) to use to install\n"
 "your Linux-Mandrake system if they have been already defined (from a\n"
@@ -1039,12 +1420,23 @@ msgid ""
 "\n"
 "Because the effects of this process are usually irreversible, partitioning\n"
 "can be intimidating and stressful to the unexperienced user. DiskDrake\n"
-"simplifies the process so that it need not be. Consult the documentation\n"
-"and take your time before proceeding."
+"simplifies the process so that it must not be. Consult the documentation\n"
+"and take your time before proceeding.\n"
+"\n"
+"\n"
+"You can reach any option using the keyboard: navigate through the "
+"partitions\n"
+"using Tab and Up/Down arrows. When a partition is selected, you can use:\n"
+"\n"
+"- Ctrl-c  to create a new partition (when an empty partition is selected)\n"
+"\n"
+"- Ctrl-d  to delete a partition\n"
+"\n"
+"- Ctrl-m  to set the mount point\n"
 msgstr ""
 
 # ## skrytid
-#: ../help.pm_.c:90
+#: ../../help.pm_.c:131
 msgid ""
 "Any partitions that have been newly defined must be formatted for\n"
 "use (formatting meaning creating a filesystem). At this time, you may\n"
@@ -1054,32 +1446,31 @@ msgid ""
 "Typically retained are /home and /usr/local."
 msgstr ""
 
-# ## skrytid
-#: ../help.pm_.c:98
+#: ../../help.pm_.c:139
 msgid ""
-"You may now select the packages you wish to install.\n"
+"You may now select the group of packages you wish to\n"
+"install or upgrade.\n"
 "\n"
-"\n"
-"First you can select group of package to install or upgrade. After that\n"
-"you can select more packages according to the total size you wish to\n"
-"select.\n"
-"\n"
-"\n"
-"If you are in expert mode, you can select packages individually.\n"
-"Please note that some packages require the installation of others.\n"
-"These are referred to as package dependencies. The packages you select,\n"
-"and the packages they require will be automatically selected for\n"
-"install. It is impossible to install a package without installing all\n"
-"of its dependencies.\n"
-"\n"
-"\n"
-"Informations on specific package are available in the\n"
-"area titled \"Info\", located on the right of the list of\n"
-"packages."
+"DrakX will then check whether you have enough room to install them all. If "
+"not,\n"
+"it will warn you about it. If you want to go on anyway, it will proceed "
+"onto\n"
+"the installation of all selected groups but will drop some packages of "
+"lesser\n"
+"interest. At the bottom of the list you can select the option\n"
+"\"Individual package selection\"; in this case you will have to browse\n"
+"through more than 1000 packages..."
+msgstr ""
+
+#: ../../help.pm_.c:150
+msgid ""
+"If you have all the CDs in the list above, click Ok.\n"
+"If you have none of those CDs, click Cancel.\n"
+"If only some CDs are missing, unselect them, then click Ok."
 msgstr ""
 
 # ## skrytid
-#: ../help.pm_.c:119
+#: ../../help.pm_.c:155
 msgid ""
 "The packages selected are now being installed. This operation\n"
 "should take a few minutes unless you have chosen to upgrade an\n"
@@ -1088,7 +1479,7 @@ msgid ""
 msgstr ""
 
 # ## skrytid
-#: ../help.pm_.c:125
+#: ../../help.pm_.c:161
 msgid ""
 "If DrakX failed to find your mouse, or if you want to\n"
 "check what it has done, you will be presented the list of mice\n"
@@ -1105,10 +1496,10 @@ msgid ""
 "which serial port it is connected to."
 msgstr ""
 
-#: ../help.pm_.c:140
+#: ../../help.pm_.c:176
 msgid ""
-"Please select the correct port. For example, the COM1 port in MS Windows\n"
-"is named ttyS0 in Linux."
+"Please select the correct port. For example, the COM1 port under MS Windows\n"
+"is named ttyS0 under Linux."
 msgstr ""
 "Veldu tengið sem þú vilt nota.  Tengið COM1 í MS Windows er kallað\n"
 "ttyS0 í Linux, COM2 er ttyS1, o.s.frv."
@@ -1119,7 +1510,7 @@ msgstr ""
 #          ***   þýtt fyrir ofan.  :-)  - Þórarinn     ***
 #          *** (Ég klára þetta seinnipartinn á morgun) ***
 #          ***********************************************
-#: ../help.pm_.c:144
+#: ../../help.pm_.c:180
 msgid ""
 "This section is dedicated to configuring a local area\n"
 "network (LAN) or a modem.\n"
@@ -1179,7 +1570,7 @@ msgstr ""
 "þá verður þú sjálf(ur) að velja raðtengið (COM port) sem mótaldið er\n"
 "tengt við."
 
-#: ../help.pm_.c:174
+#: ../../help.pm_.c:210
 msgid ""
 "Enter:\n"
 "\n"
@@ -1212,7 +1603,7 @@ msgstr ""
 "og með aðrar stillingar, þá væri ekki slæm hugmynd að hafa samband við "
 "kerfisstjóra.\n"
 
-#: ../help.pm_.c:189
+#: ../../help.pm_.c:225
 msgid ""
 "You may now enter dialup options. If you're not sure what to enter, the\n"
 "correct information can be obtained from your ISP."
@@ -1221,17 +1612,17 @@ msgstr ""
 "þarft,\n"
 "hafðu þá samband við þjónustuveituna til að fá þær upplýsingar."
 
-#: ../help.pm_.c:193
+#: ../../help.pm_.c:229
 msgid ""
 "If you will use proxies, please configure them now. If you don't know if\n"
-"you will use proxies, ask your network administrator or your ISP."
+"you should use proxies, ask your network administrator or your ISP."
 msgstr ""
 "Ef þú notar einhverskonar sel (e. proxy), stilltu þau þá núna. Ef þú veist "
 "ekki\n"
 "hvort þú þarft að still þau, hafðu þá samband við kerfisstjóra eða "
 "þjónustuveitu."
 
-#: ../help.pm_.c:197
+#: ../../help.pm_.c:233
 msgid ""
 "You can install cryptographic package if your internet connection has been\n"
 "set up correctly. First choose a mirror where you wish to download packages "
@@ -1249,31 +1640,45 @@ msgstr ""
 "leyfa\n"
 "á Íslandi eða hvar sem þú ert núna að nota tölvuna."
 
-#: ../help.pm_.c:205
+#: ../../help.pm_.c:241
 msgid ""
 "You can now select your timezone according to where you live.\n"
 "\n"
 "\n"
-"Linux manages time in GMT or \"Greenwich Meridian Time\" and translates it\n"
+"Linux manages time in GMT or \"Greenwich Mean Time\" and translates it\n"
 "in local time according to the time zone you have selected."
 msgstr ""
 "Hérna velur þú tímasvæðið sem gildir þar sem þú býrð.\n"
 "\n"
 "\n"
-"Linux notar GMT eða \"Greenwich Meridian Time\" og breytir þeim tíma\n"
+"Linux notar GMT eða \"Greenwich Mean Time\" og breytir þeim tíma\n"
 "síðan í staðartíma samkvæmt því tímasvæði sem þú velur."
 
-#: ../help.pm_.c:212
-msgid "Help"
-msgstr "Hjálp"
+#: ../../help.pm_.c:248
+msgid ""
+"You may now choose which services you want to see started at boot time.\n"
+"When your mouse comes over an item, a small balloon help will popup which\n"
+"describes the role of the service.\n"
+"\n"
+"Be especially careful in this step if you intend to use your machine as a\n"
+"server: you will probably want not to start any services which you don't\n"
+"want."
+msgstr ""
 
-#: ../help.pm_.c:215
+#: ../../help.pm_.c:257
+#, fuzzy
 msgid ""
 "Linux can deal with many types of printer. Each of these\n"
-"types require a different setup.\n"
+"types require a different setup. Note however that the print\n"
+"spooler uses 'lp' as the default printer name; so you\n"
+"must have one printer with such a name; but you can give\n"
+"several names, separated by '|' characters, to a printer.\n"
+"So, if you prefer to have a more meaningful name you just have\n"
+"to put it first, eg: \"My Printer|lp\".\n"
+"The printer having \"lp\" in its name(s) will be the default printer.\n"
 "\n"
 "\n"
-"If your printer is directly connected to your computer, select\n"
+"If your printer is physically connected to your computer, select\n"
 "\"Local printer\". You will then have to tell which port your\n"
 "printer is connected to, and select the appropriate filter.\n"
 "\n"
@@ -1313,7 +1718,7 @@ msgstr ""
 "nafn prentarans.  Sama gildir um NetWare prentara, nema þú þarft\n"
 "ekkert vinnuhópsnafn."
 
-#: ../help.pm_.c:238
+#: ../../help.pm_.c:286
 msgid ""
 "You can now enter the root password for your Linux-Mandrake\n"
 "system. The password must be entered twice to verify that both\n"
@@ -1326,7 +1731,7 @@ msgid ""
 "be extremely dangerous to the integrity of the system and its data,\n"
 "and other systems connected to it. The password should be a\n"
 "mixture of alphanumeric characters and a least 8 characters long. It\n"
-"should *never* be written down. Do not make the password too long or\n"
+"should NEVER be written down. Do not make the password too long or\n"
 "complicated, though: you must be able to remember without too much\n"
 "effort."
 msgstr ""
@@ -1345,7 +1750,7 @@ msgstr ""
 "á því að þú gleymir því.  Þú þarft að geta munað hvaða lykilorð\n"
 "gefur rótaraðgang til að geta breytt uppsetningu og stillingum."
 
-#: ../help.pm_.c:254
+#: ../../help.pm_.c:302
 msgid ""
 "To enable a more secure system, you should select \"Use shadow file\" and\n"
 "\"Use MD5 passwords\"."
@@ -1353,7 +1758,7 @@ msgstr ""
 "Ef þú vilt gera kerfið öruggara þá ættir þú að velja \"Nota skuggaskrá\" og\n"
 "\"Nota MD5 lykilorð\"."
 
-#: ../help.pm_.c:258
+#: ../../help.pm_.c:306
 msgid ""
 "If your network uses NIS, select \"Use NIS\". If you don't know, ask your\n"
 "network administrator."
@@ -1363,7 +1768,7 @@ msgstr ""
 "viss hvort það sé notað, spurðu þá kerfisstjóra netsins."
 
 # ## skrytid
-#: ../help.pm_.c:262
+#: ../../help.pm_.c:310
 msgid ""
 "You may now create one or more \"regular\" user account(s), as\n"
 "opposed to the \"privileged\" user account, root. You can create\n"
@@ -1407,7 +1812,7 @@ msgstr ""
 "you will have created here, and login as root only for administration\n"
 "and maintenance purposes."
 
-#: ../help.pm_.c:281
+#: ../../help.pm_.c:329
 msgid ""
 "It is strongly recommended that you answer \"Yes\" here. If you install\n"
 "Microsoft Windows at a later date it will overwrite the boot sector.\n"
@@ -1419,7 +1824,7 @@ msgstr ""
 "gerir þér þar með ókleyft að ræsa Linux nema þú hafir verið búin(n)\n"
 "að útbúa ræsidiskling."
 
-#: ../help.pm_.c:287
+#: ../../help.pm_.c:335
 msgid ""
 "You need to indicate where you wish\n"
 "to place the information required to boot to Linux.\n"
@@ -1435,56 +1840,37 @@ msgstr ""
 "Veldu \"Í ræsifærsluna (MBR)\" nema þú vitir nákvæmlega\n"
 "hvað þú ert að gera."
 
-#: ../help.pm_.c:295
+#: ../../help.pm_.c:343
+#, fuzzy
 msgid ""
 "Unless you know specifically otherwise, the usual choice is \"/dev/hda\"\n"
-"(the master drive on the primary channel)."
+" (primary master IDE disk) or \"/dev/sda\" (first SCSI disk)."
 msgstr ""
 "Ef um algengar aðstæður er að ræða þá er rétt svar \"/dev/hda\"\n"
 "(aðal diskurinn á aðal IDE rásinni)."
 
-#: ../help.pm_.c:299
+#: ../../help.pm_.c:347
 msgid ""
-"LILO (the LInux LOader) can boot Linux and other operating systems.\n"
-"Normally they are correctly detected during installation. If you don't\n"
-"see yours detected, you can add one or more now.\n"
+"LILO (the LInux LOader) and Grub are bootloaders: they are able to boot\n"
+"either Linux or any other operating system present on your computer.\n"
+"Normally, these other operating systems are correctly detected and\n"
+"installed. If this is not the case, you can add an entry by hand in this\n"
+"screen. Be careful as to choose the correct parameters.\n"
 "\n"
 "\n"
-"If you don't want that everybody could access at one of them, you can "
-"remove\n"
-"it now (a boot disk will be needed to boot it)."
+"You may also want not to give access to these other operating systems to\n"
+"anyone, in which case you can delete the corresponding entries. But\n"
+"in this case, you will need a boot disk in order to boot them!"
 msgstr ""
-"LILO (LInux LOader) getur ræst Linux og önnur stýrikerfi.\n"
-"Venjulega finnast þau við innsetningu á Linux.  Ef þú sérð\n"
-"ekki þitt kerfi þá getur þú bætt því við núna ásamt öðrum.\n"
-"\n"
-"\n"
-"Ef þú vilt ekki að aðrir hafi aðgang að einhverju kerfanna þá getur\n"
-"þú einfaldlega fjarlægt það núna (en þá þarf ræsidiskling til að ræsa það)."
 
 # ## skrytid
-#: ../help.pm_.c:308
+#: ../../help.pm_.c:359
+#, fuzzy
 msgid ""
-"LILO main options are:\n"
+"LILO and grub main options are:\n"
 "  - Boot device: Sets the name of the device (e.g. a hard disk\n"
 "partition) that contains the boot sector. Unless you know specifically\n"
 "otherwise, choose \"/dev/hda\".\n"
-"\n"
-"\n"
-"  - Linear: Generate linear sector addresses instead of\n"
-"sector/head/cylinder addresses. Linear addresses are translated at run\n"
-"time and do not depend on disk geometry. Note that boot disks may not be\n"
-"portable if \"linear\" is used, because the BIOS service to determine the\n"
-"disk geometry does not work reliably for floppy  disks. When using\n"
-"\"linear\" with large disks, /sbin/lilo may generate references to\n"
-"inaccessible disk areas, because 3D sector addresses are not known\n"
-"before boot time.\n"
-"\n"
-"\n"
-"  - Compact: Tries to merge read requests for adjacent sectors into a\n"
-"single read request. This drastically reduces load time and keeps the\n"
-"map smaller. Using \"compact\" is especially recommended when booting from\n"
-"a floppy disk.\n"
 "\n"
 "\n"
 "  - Delay before booting default image: Specifies the number in tenths\n"
@@ -1533,7 +1919,7 @@ msgstr ""
 "    * normal: select normal 80x25 text mode.\n"
 "    * <number>:  use the corresponding text mode."
 
-#: ../help.pm_.c:343
+#: ../../help.pm_.c:378
 msgid ""
 "Now it's time to configure the X Window System, which is the\n"
 "core of the Linux GUI (Graphical User Interface). For this purpose,\n"
@@ -1559,7 +1945,7 @@ msgstr ""
 "stillingarnar séu viðunnandi. Ef þú ert ekki sátt(ur) við þær X\n"
 "stillingar sem eru valdar, þá getur þú breytt þeim að eigin vild."
 
-#: ../help.pm_.c:356
+#: ../../help.pm_.c:391
 msgid ""
 "If something is wrong in X configuration, use these options to correctly\n"
 "configure the X Window System."
@@ -1567,7 +1953,7 @@ msgstr ""
 "Ef eitthvað kemur upp á í X, notaðu þá þessar stillingar til að stilla\n"
 "það aftur."
 
-#: ../help.pm_.c:360
+#: ../../help.pm_.c:395
 msgid ""
 "If you prefer to use a graphical login, select \"Yes\". Otherwise, select\n"
 "\"No\"."
@@ -1576,36 +1962,45 @@ msgstr ""
 "þá \"Nei\"."
 
 # ## skrytid
-#: ../help.pm_.c:364
+#: ../../help.pm_.c:399
+#, fuzzy
 msgid ""
-"You can now select some miscellaneous options for you system.\n"
+"You can now select some miscellaneous options for your system.\n"
 "\n"
-"  - Use hard drive optimizations: This option can improve hard disk\n"
-"accesses but is only for advanced users, it can ruin your hard drive if\n"
-"used incorrectly. Use it only if you know how.\n"
+"  - Use hard drive optimizations: this option can improve hard disk "
+"performance\n"
+"    but is only for advanced users: some buggy chipsets can ruin your data, "
+"so\n"
+"    beware. Note that the kernel has a builtin blacklist of drives and\n"
+"    chipsets, but if you want to avoid bad surprises, leave this option "
+"unset.\n"
 "\n"
+"  - Choose security level: you can choose a security level for your\n"
+"    system. Please refer to the manual for complete information. Basically: "
+"if\n"
+"    you don't know, select \"Medium\" ; if you really want to have a secure\n"
+"    machine, choose \"Paranoid\" but beware: IN THIS LEVEL, ROOT LOGIN AT\n"
+"    CONSOLE IS NOT ALLOWED! If you want to be root, you have to login as a "
+"user\n"
+"    and then use \"su\". More generally, do not expect to use your machine\n"
+"    for anything but as a server. You have been warned.\n"
 "\n"
-"  - Choose security level: You can choose a security level for your\n"
-"system.\n"
-"    Please refer to the manual for more information.\n"
+"  - Precise RAM size if needed: unfortunately, in today's PC world, there is "
+"no\n"
+"    standard method to ask the BIOS about the amount of RAM present in your\n"
+"    computer. As a consequence, Linux may fail to detect your amount of RAM\n"
+"    correctly. If this is the case, you can specify the correct amount of "
+"RAM\n"
+"    here. Note that a difference of 2 or 4 MB is normal.\n"
 "\n"
+"  - Removable media automounting: if you would prefer not to manually\n"
+"    mount removable media (CD-ROM, Floppy, Zip) by typing \"mount\" and\n"
+"    \"umount\", select this option. \n"
 "\n"
-"  - Precise RAM size if needed: In some cases, Linux is unable to\n"
-"correctly detect all the installed RAM on  some systems. If this is the\n"
-"case, specify the correct quantity. Note: a difference of 2 or 4 Mb is\n"
-"normal.\n"
-"\n"
-"\n"
-"  - Removable media automounting: If you would prefer not to manually\n"
-"mount removable drives (CD-ROM, Floppy, Zip) by typing \"mount\" and\n"
-"\"umount\", select this option. \n"
-"\n"
-"\n"
-"  - Enable Num Lock at startup: If you want Number Lock enabled after\n"
-"booting, select this option (Note: Num Lock will still not work under\n"
-"X)."
+"  - Enable NumLock at startup: if you want NumLock enabled after booting,\n"
+"    select this option (Note: NumLock may or may not work under X)."
 msgstr ""
-"You can now select some miscellaneous options for you system.\n"
+"You can now select some miscellaneous options for your system.\n"
 "\n"
 "  - Use hard drive optimizations: This option can improve hard disk\n"
 "accesses but is only for advanced users, it can ruin your hard drive if\n"
@@ -1618,7 +2013,7 @@ msgstr ""
 "\n"
 "\n"
 "  - Precise RAM size if needed: In some cases, Linux is unable to\n"
-"correctly detect all the installed RAM on  some systems. If this is the\n"
+"correctly detect all the installed RAM on some systems. If this is the\n"
 "case, specify the correct quantity. Note: a difference of 2 or 4 Mb is\n"
 "normal.\n"
 "\n"
@@ -1632,7 +2027,7 @@ msgstr ""
 "booting, select this option (Note: Num Lock will still not work under\n"
 "X)."
 
-#: ../help.pm_.c:392
+#: ../../help.pm_.c:428
 msgid ""
 "Your system is going to reboot.\n"
 "\n"
@@ -1646,108 +2041,98 @@ msgstr ""
 "keyra upp eitthvað annað stýrikerfi, lestu þá leiðbeiningarnar\n"
 "sem fylgja."
 
-#: ../install2.pm_.c:43
+#: ../../install2.pm_.c:43
 msgid "Choose your language"
 msgstr "Veldu tungumál"
 
-#: ../install2.pm_.c:44
+#: ../../install2.pm_.c:44
 msgid "Select installation class"
 msgstr "Veldu innsetningarflokk"
 
-#: ../install2.pm_.c:45
-msgid "Setup SCSI"
-msgstr "Setja upp SCSI"
+#: ../../install2.pm_.c:45
+#, fuzzy
+msgid "Hard drive detection"
+msgstr "Nota fínstillingar á hörðum disk(um)"
 
-#: ../install2.pm_.c:46
-msgid "Choose install or upgrade"
-msgstr "Veldu innsetningu eða uppfærslu"
-
-#: ../install2.pm_.c:47
+#: ../../install2.pm_.c:46
 msgid "Configure mouse"
 msgstr "Tilgreindu mús"
 
-#: ../install2.pm_.c:48
+#: ../../install2.pm_.c:47
 msgid "Choose your keyboard"
 msgstr "Veldu lyklaborð"
 
-#: ../install2.pm_.c:49
+#: ../../install2.pm_.c:48 ../../install_steps_interactive.pm_.c:318
 msgid "Miscellaneous"
 msgstr "Ýmislegt"
 
-#: ../install2.pm_.c:50
+#: ../../install2.pm_.c:49
 msgid "Setup filesystems"
 msgstr "Setja upp skráarkerfi"
 
-#: ../install2.pm_.c:51
+#: ../../install2.pm_.c:50
 msgid "Format partitions"
 msgstr "Forsníða disksneiðar"
 
-#: ../install2.pm_.c:52
+#: ../../install2.pm_.c:51
 msgid "Choose packages to install"
 msgstr "Veldu pakka til að setja inn"
 
-#: ../install2.pm_.c:53
+#: ../../install2.pm_.c:52
 msgid "Install system"
 msgstr "Setja kerfið inn"
 
-#: ../install2.pm_.c:54
+#: ../../install2.pm_.c:53
 msgid "Configure networking"
 msgstr "Stilla nettengingu"
 
-#: ../install2.pm_.c:55
+#: ../../install2.pm_.c:54
 msgid "Cryptographic"
 msgstr "Dulkóðun"
 
-#: ../install2.pm_.c:56
+#: ../../install2.pm_.c:55
 msgid "Configure timezone"
 msgstr "Tilgreina tímasvæði"
 
-#: ../install2.pm_.c:58
+#: ../../install2.pm_.c:56
+#, fuzzy
+msgid "Configure services"
+msgstr "Setja upp prentara"
+
+#: ../../install2.pm_.c:57
 msgid "Configure printer"
 msgstr "Setja upp prentara"
 
-#: ../install2.pm_.c:59 ../install_steps_interactive.pm_.c:570
-#: ../install_steps_interactive.pm_.c:571
+#: ../../install2.pm_.c:58 ../../install_steps_interactive.pm_.c:652
+#: ../../install_steps_interactive.pm_.c:653
 msgid "Set root password"
 msgstr "Ákveða rótarlykilorð"
 
-#: ../install2.pm_.c:60
+#: ../../install2.pm_.c:59
 msgid "Add a user"
 msgstr "Bæta við notanda"
 
-#: ../install2.pm_.c:61
+#: ../../install2.pm_.c:61
 msgid "Create a bootdisk"
 msgstr "Búa til ræsidiskling"
 
-#: ../install2.pm_.c:62
+#: ../../install2.pm_.c:63
 msgid "Install bootloader"
 msgstr "Setja inn ræsihlaðara"
 
-#: ../install2.pm_.c:63
+#: ../../install2.pm_.c:64
 msgid "Configure X"
 msgstr "Stilla X"
 
-#: ../install2.pm_.c:64
+#: ../../install2.pm_.c:65
+msgid "Auto install floppy"
+msgstr ""
+
+#: ../../install2.pm_.c:66
 msgid "Exit install"
 msgstr "Hætta innsetningu"
 
-#: ../install2.pm_.c:83
-msgid "beginner"
-msgstr "byrjandi"
-
-#: ../install2.pm_.c:83
-msgid "developer"
-msgstr "forritari"
-
-#: ../install2.pm_.c:83
-msgid "expert"
-msgstr "snillingur"
-
-#: ../install2.pm_.c:83
-msgid "server"
-msgstr "netþjónn"
-
-#: ../install2.pm_.c:309
+#: ../../install2.pm_.c:308
 msgid ""
 "You must have a root partition.\n"
 "For this, create a partition (or click on an existing one).\n"
@@ -1757,11 +2142,7 @@ msgstr ""
 "til rótarsneið eða veldu sneið sem nú þegar er til á disknum.\n"
 "Veldu síðan ``Tengipunktur'' og sláðu inn `/'"
 
-#: ../install2.pm_.c:325
-msgid "Not enough swap to fulfill installation, please add some"
-msgstr "Ekki nægjanlegt diskminni fyrir innsetningu.  Bættu við það"
-
-#: ../install_any.pm_.c:192 ../standalone/diskdrake_.c:61
+#: ../../install_any.pm_.c:331 ../../standalone/diskdrake_.c:61
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
 "I'll try to go on blanking bad partitions"
@@ -1769,7 +2150,7 @@ msgstr ""
 "Ég get ekki lesið disksneiðatöflu þína, hún er of skemmd fyrir mig :-(\n"
 "Ég mun reyna að halda áfram með því að hreinsa skemmdar disksneiðar"
 
-#: ../install_any.pm_.c:208
+#: ../../install_any.pm_.c:348
 msgid ""
 "DiskDrake failed to read correctly the partition table.\n"
 "Continue at your own risk!"
@@ -1777,37 +2158,32 @@ msgstr ""
 "DiskDrake gat ekki lesið sneiðatöfluna.\n"
 "Haltu áfram á eigin ábyrgð!"
 
-#: ../install_any.pm_.c:218
+#: ../../install_any.pm_.c:370
 msgid "Searching root partition."
 msgstr "Leita að rótardisksneið"
 
-#: ../install_any.pm_.c:247
+#: ../../install_any.pm_.c:399
 msgid "Information"
 msgstr "Upplýsingar"
 
-#: ../install_any.pm_.c:248
+#: ../../install_any.pm_.c:400
 #, c-format
 msgid "%s: This is not a root partition, please select another one."
-msgstr "Þetta er ekki rótardisksneið.  Veldu aðra."
+msgstr "%s: Þetta er ekki rótardisksneið.  Veldu aðra."
 
-#: ../install_any.pm_.c:250
+#: ../../install_any.pm_.c:402
 msgid "No root partition found"
 msgstr "Engin rótarsneið fannst"
 
-#: ../install_any.pm_.c:287
+#: ../../install_any.pm_.c:440
 msgid "Can't use broadcast with no NIS domain"
 msgstr "Get ekki notað útsendingu án NIS léns"
 
-#: ../install_any.pm_.c:462
+#: ../../install_any.pm_.c:602
 msgid "Error reading file $f"
 msgstr "Villa við lestur skráarinnar $f"
 
-#: ../install_any.pm_.c:468
-#, c-format
-msgid "Bad kickstart file %s (failed %s)"
-msgstr "Skemmd flýtiskrá %s (villa %s)"
-
-#: ../install_steps.pm_.c:68
+#: ../../install_steps.pm_.c:75
 msgid ""
 "An error occurred, but I don't know how to handle it nicely.\n"
 "Continue at your own risk."
@@ -1815,25 +2191,31 @@ msgstr ""
 "Óþekkt villa kom upp sem ekki er hægt að meðhöndla.\n"
 "Haltu áfram á eigin ábyrgð."
 
-#: ../install_steps.pm_.c:132
+#: ../../install_steps.pm_.c:174
 #, c-format
 msgid "Duplicate mount point %s"
 msgstr "%s tengipunktur er nú þegar til"
 
-#: ../install_steps.pm_.c:516
+#: ../../install_steps.pm_.c:380
+#, fuzzy, c-format
+msgid "Welcome to %s"
+msgstr "Velkomin(n) í tölvuþrjótinn"
+
+#: ../../install_steps.pm_.c:732
 msgid "No floppy drive available"
 msgstr "Ekkert disklingadrif aðgengilegt"
 
-#: ../install_steps_auto_install.pm_.c:18 ../install_steps_stdio.pm_.c:26
+#: ../../install_steps_auto_install.pm_.c:18 ../../install_steps_gtk.pm_.c:125
+#: ../../install_steps_stdio.pm_.c:26
 #, c-format
 msgid "Entering step `%s'\n"
 msgstr "Hef skref `%s'\n"
 
-#: ../install_steps_graphical.pm_.c:259 ../install_steps_gtk.pm_.c:294
+#: ../../install_steps_graphical.pm_.c:259 ../../install_steps_gtk.pm_.c:249
 msgid "You must have a swap partition"
 msgstr "Þú verður að hafa diskminni"
 
-#: ../install_steps_graphical.pm_.c:261 ../install_steps_gtk.pm_.c:296
+#: ../../install_steps_graphical.pm_.c:261 ../../install_steps_gtk.pm_.c:251
 msgid ""
 "You don't have a swap partition\n"
 "\n"
@@ -1843,79 +2225,96 @@ msgstr ""
 "\n"
 "Halda samt áfram?"
 
-#: ../install_steps_graphical.pm_.c:287 ../install_steps_gtk.pm_.c:317
+#: ../../install_steps_graphical.pm_.c:287
 msgid "Choose the size you want to install"
 msgstr "Veldu þá stærð sem þú vilt setja inn"
 
-#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:361
+#: ../../install_steps_graphical.pm_.c:334
 msgid "Total size: "
 msgstr "Heildarstærð: "
 
-#: ../install_steps_graphical.pm_.c:346 ../install_steps_gtk.pm_.c:373
-#: ../standalone/rpmdrake_.c:136
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:447
+#: ../../standalone/rpmdrake_.c:136
 #, c-format
 msgid "Version: %s\n"
 msgstr "Útgáfa: %s\n"
 
-#: ../install_steps_graphical.pm_.c:347 ../install_steps_gtk.pm_.c:374
-#: ../standalone/rpmdrake_.c:137
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:448
+#: ../../standalone/rpmdrake_.c:137
 #, c-format
 msgid "Size: %d KB\n"
 msgstr "Stærð: %d KB\n"
 
-#: ../install_steps_graphical.pm_.c:462 ../install_steps_gtk.pm_.c:489
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:360
 msgid "Choose the packages you want to install"
 msgstr "Veldu pakkana sem þú vilt setja inn"
 
-#: ../install_steps_graphical.pm_.c:465 ../install_steps_gtk.pm_.c:492
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:363
 msgid "Info"
 msgstr "Upplýsingar"
 
-#: ../install_steps_graphical.pm_.c:473 ../install_steps_gtk.pm_.c:500
-#: ../install_steps_interactive.pm_.c:81 ../standalone/rpmdrake_.c:161
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:368
+#: ../../install_steps_interactive.pm_.c:129 ../../standalone/rpmdrake_.c:161
 msgid "Install"
 msgstr "Innsetning"
 
-#: ../install_steps_graphical.pm_.c:492 ../install_steps_gtk.pm_.c:519
-#: ../install_steps_interactive.pm_.c:312
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:533
+#: ../../install_steps_interactive.pm_.c:382
 msgid "Installing"
 msgstr "Set inn"
 
-#: ../install_steps_graphical.pm_.c:499 ../install_steps_gtk.pm_.c:526
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:539
 msgid "Please wait, "
 msgstr "Vinsamlegast hinkrið, "
 
-#: ../install_steps_graphical.pm_.c:501 ../install_steps_gtk.pm_.c:528
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:541
 msgid "Time remaining "
 msgstr "Tími eftir "
 
-#: ../install_steps_graphical.pm_.c:502 ../install_steps_gtk.pm_.c:529
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:542
 msgid "Total time "
 msgstr "Heildar tími "
 
-#: ../install_steps_graphical.pm_.c:507 ../install_steps_gtk.pm_.c:534
-#: ../install_steps_interactive.pm_.c:312
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:551
+#: ../../install_steps_interactive.pm_.c:382
 msgid "Preparing installation"
 msgstr "Undirbý innsetningu"
 
-#: ../install_steps_graphical.pm_.c:528 ../install_steps_gtk.pm_.c:549
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:566
 #, c-format
 msgid "Installing package %s"
 msgstr "Set inn pakka %s"
 
-#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:574
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:607
+#: ../../install_steps_gtk.pm_.c:611
 msgid "Go on anyway?"
 msgstr "Viltu samt halda áfram?"
 
-#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:574
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:607
 msgid "There was an error ordering packages:"
 msgstr "Það kom upp villa við að raða pökkum:"
 
-#: ../install_steps_graphical.pm_.c:577 ../install_steps_interactive.pm_.c:887
+#: ../../install_steps_graphical.pm_.c:577
+#: ../../install_steps_interactive.pm_.c:997
 msgid "Use existing configuration for X11?"
 msgstr "Nota þá X uppsetningu sem er til?"
 
-#: ../install_steps_gtk.pm_.c:259
+#: ../../install_steps_gtk.pm_.c:154
+#, fuzzy
+msgid "Please, choose one of the following classes of installation:"
+msgstr "Vinsamlega tilgreindu eftirfarandi"
+
+#: ../../install_steps_gtk.pm_.c:195
+#, fuzzy
+msgid "You don't have any windows partitions!"
+msgstr "Þú hefur ekki neinar disksneiðar"
+
+#: ../../install_steps_gtk.pm_.c:197
+#, fuzzy
+msgid "You don't have any enough room for Lnx4win"
+msgstr "Þú hefur ekki neinar disksneiðar"
+
+#: ../../install_steps_gtk.pm_.c:213
 msgid ""
 "WARNING!\n"
 "\n"
@@ -1942,169 +2341,359 @@ msgstr ""
 #      ***  ATH: Það er sumt eftir fyrir ofan ***
 #      ******************************************
 #
-#: ../install_steps_gtk.pm_.c:278
+#: ../../install_steps_gtk.pm_.c:232
 msgid "Automatic resizing failed"
 msgstr "Sjálfvirk endurstækkun brást"
 
-#: ../install_steps_gtk.pm_.c:312
-msgid ""
-"Now that you've selected desired groups, please choose \n"
-"how many packages you want, ranging from minimal to full \n"
-"installation of each selected groups."
-msgstr ""
-"Nú þegar flokkar hafa verið valdir skaltu velja hve marga \n"
-"þú vilt sitja inn.  Þú getur tilgreint litla eða fulla \n"
-"innsetningu af pökkum úr þeim flokkum sem þú valdir."
+#: ../../install_steps_gtk.pm_.c:261
+#, fuzzy
+msgid "Which partition do you want to use to put Linux4Win?"
+msgstr "Hvaða disksneið vilt þú nota sem rótardisksneið"
 
-#: ../install_steps_gtk.pm_.c:315
-msgid "You will be able to choose more precisely in next step"
+#: ../../install_steps_gtk.pm_.c:280
+#, fuzzy
+msgid "Choose the sizes"
+msgstr "Veldu nýja stærð"
+
+#: ../../install_steps_gtk.pm_.c:282
+#, fuzzy
+msgid "Root partition size in MB: "
+msgstr "Rótardisksneið"
+
+#: ../../install_steps_gtk.pm_.c:284
+#, fuzzy
+msgid "Swap partition size in MB: "
+msgstr "Stærð í MB: "
+
+#: ../../install_steps_gtk.pm_.c:316
+#, c-format
+msgid ""
+"The total size for the groups you have selected is approximately %d MB.\n"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:318
+msgid ""
+"If you wish to install less than this size,\n"
+"select the percentage of packages that you want to install.\n"
+"\n"
+"A low percentage will install only the most important packages;\n"
+"a percentage of 100%% will install all selected packages."
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:323
+msgid ""
+"You have space on your disk for only %d%% of these packages.\n"
+"\n"
+"If you wish to install less than this,\n"
+"select the percentage of packages that you want to install.\n"
+"A low percentage will install only the most important packages;\n"
+"a percentage of %d%% will install as many packages as possible."
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:329
+#, fuzzy
+msgid "You will be able to choose them more specifically in the next step."
 msgstr "Þú munt geta valið af meiri nákvæmni í næsta skrefi"
 
-#: ../install_steps_gtk.pm_.c:372
+#: ../../install_steps_gtk.pm_.c:331
+#, fuzzy
+msgid "Percentage of packages to install"
+msgstr "Veldu pakka til að setja inn"
+
+#: ../../install_steps_gtk.pm_.c:372
+#, fuzzy
+msgid "Automatic dependencies"
+msgstr "Athuga tengsli milli pakka"
+
+#: ../../install_steps_gtk.pm_.c:425 ../../standalone/rpmdrake_.c:101
+msgid "Expand Tree"
+msgstr "Opna tré"
+
+#: ../../install_steps_gtk.pm_.c:426 ../../standalone/rpmdrake_.c:102
+msgid "Collapse Tree"
+msgstr "Loka tré"
+
+#: ../../install_steps_gtk.pm_.c:427
+msgid "Toggle between flat and group sorted"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:445
 msgid "Bad package"
 msgstr "Skemmdur pakki"
 
-#: ../install_steps_gtk.pm_.c:522
+#: ../../install_steps_gtk.pm_.c:446
+#, c-format
+msgid "Name: %s\n"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:449
+#, c-format
+msgid "Importance: %s\n"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:457
+#, fuzzy, c-format
+msgid "Total size: %d / %d MB"
+msgstr "Heildarstærð: "
+
+#: ../../install_steps_gtk.pm_.c:467
+msgid "This is a mandatory package, it can't be unselected"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:469
+msgid "You can't unselect this package. It is already installed"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:473
+msgid ""
+"This package must be upgraded\n"
+"Are you sure you want to deselect it?"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:476
+msgid "You can't unselect this package. It must be upgraded"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:489
+msgid ""
+"You can't select this package as there is not enough space left to install it"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:492
+#, fuzzy
+msgid "The following packages are going to be installed/removed"
+msgstr "Eftirfarandi pakkar verða fjarlægðir"
+
+#: ../../install_steps_gtk.pm_.c:501
+msgid "You can't select/unselect this package"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:536
 msgid "Estimating"
 msgstr "Áætla"
 
-#: ../install_steps_gtk.pm_.c:544
+#: ../../install_steps_gtk.pm_.c:548 ../../interactive.pm_.c:84
+#: ../../interactive.pm_.c:223 ../../interactive_newt.pm_.c:49
+#: ../../interactive_newt.pm_.c:98 ../../interactive_stdio.pm_.c:27
+#: ../../my_gtk.pm_.c:201 ../../my_gtk.pm_.c:459
+msgid "Cancel"
+msgstr "Hætta við"
+
+#: ../../install_steps_gtk.pm_.c:561
 #, c-format
 msgid "%d packages"
 msgstr "%d pakkar"
 
-#: ../install_steps_gtk.pm_.c:544
+#: ../../install_steps_gtk.pm_.c:561
 msgid ", %U MB"
 msgstr ", %U MB"
 
-#: ../install_steps_interactive.pm_.c:37
+#: ../../install_steps_gtk.pm_.c:592
+#, c-format
+msgid ""
+"Change your Cd-Rom!\n"
+"\n"
+"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when "
+"done.\n"
+"If you don't have it, press Cancel to avoid installation from this Cd-Rom."
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:611
+#, fuzzy
+msgid "There was an error installing packages:"
+msgstr "Það kom upp villa við að raða pökkum:"
+
+#: ../../install_steps_interactive.pm_.c:40
 msgid "An error occurred"
 msgstr "Villa kom upp"
 
-#: ../install_steps_interactive.pm_.c:54
-msgid "Which language do you want?"
-msgstr "Hvaða tungumál viltu?"
+#: ../../install_steps_interactive.pm_.c:57
+msgid "Please, choose a language to use."
+msgstr ""
 
-#: ../install_steps_interactive.pm_.c:68 ../standalone/keyboarddrake_.c:22
+#: ../../install_steps_interactive.pm_.c:72
+#: ../../standalone/keyboarddrake_.c:22
 msgid "Keyboard"
 msgstr "Lyklaborð"
 
-#: ../install_steps_interactive.pm_.c:69 ../standalone/keyboarddrake_.c:23
-msgid "What is your keyboard layout?"
+#: ../../install_steps_interactive.pm_.c:73
+#, fuzzy
+msgid "Please, choose your keyboard layout."
 msgstr "Hvaða lyklaborðsuppsetningu viltu?"
 
-#: ../install_steps_interactive.pm_.c:79
-msgid "Install/Upgrade"
-msgstr "Innsetning/Uppfærsla"
+#: ../../install_steps_interactive.pm_.c:81
+msgid "You can choose other languages that will be available after install"
+msgstr ""
 
-#: ../install_steps_interactive.pm_.c:80
-msgid "Is this an install or an upgrade?"
-msgstr "Er þetta innsetning eða uppfærsla?"
-
-#: ../install_steps_interactive.pm_.c:81
-msgid "Upgrade"
-msgstr "Uppfærsla"
-
-#: ../install_steps_interactive.pm_.c:89
+#: ../../install_steps_interactive.pm_.c:91
 msgid "Root Partition"
 msgstr "Rótardisksneið"
 
-#: ../install_steps_interactive.pm_.c:90
+#: ../../install_steps_interactive.pm_.c:92
 msgid "What is the root partition (/) of your system?"
 msgstr "Hver er rótardisksneið (/) kerfisins?"
 
-#: ../install_steps_interactive.pm_.c:100
-msgid "Recommended"
-msgstr "Auðvelda"
-
-#: ../install_steps_interactive.pm_.c:101
-msgid "Customized"
-msgstr "Sérlagaða"
-
-#: ../install_steps_interactive.pm_.c:102
-msgid "Expert"
-msgstr "F. snillinga"
-
-#: ../install_steps_interactive.pm_.c:104
-#: ../install_steps_interactive.pm_.c:118
+#: ../../install_steps_interactive.pm_.c:100
+#: ../../install_steps_interactive.pm_.c:140
 msgid "Install Class"
 msgstr "Innsetningaraðferð"
 
-#: ../install_steps_interactive.pm_.c:105
-msgid "What installation class do you want?"
+#: ../../install_steps_interactive.pm_.c:100
+#, fuzzy
+msgid "Which installation class do you want?"
 msgstr "Hverskonar innsetningaraðferð viltu?"
 
-#: ../install_steps_interactive.pm_.c:114
+#: ../../install_steps_interactive.pm_.c:102
+msgid "Install/Upgrade"
+msgstr "Innsetning/Uppfærsla"
+
+#: ../../install_steps_interactive.pm_.c:102
+msgid "Is this an install or an upgrade?"
+msgstr "Er þetta innsetning eða uppfærsla?"
+
+#: ../../install_steps_interactive.pm_.c:110
+#, fuzzy
+msgid "Automated"
+msgstr "Sjálfvirkt IP"
+
+#: ../../install_steps_interactive.pm_.c:112
+#: ../../install_steps_interactive.pm_.c:124
+msgid "Customized"
+msgstr "Sérlagaða"
+
+#: ../../install_steps_interactive.pm_.c:113
+#: ../../install_steps_interactive.pm_.c:124
+msgid "Expert"
+msgstr "F. snillinga"
+
+#: ../../install_steps_interactive.pm_.c:122
+msgid ""
+"Are you sure you are an expert? \n"
+"You will be allowed to make powerfull but dangerous things here."
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:129
+msgid "Upgrade"
+msgstr "Uppfærsla"
+
+#: ../../install_steps_interactive.pm_.c:135
 msgid "Normal"
 msgstr "Venjulega"
 
-#: ../install_steps_interactive.pm_.c:115
+#: ../../install_steps_interactive.pm_.c:136
 msgid "Development"
 msgstr "Forritun"
 
-#: ../install_steps_interactive.pm_.c:116
+#: ../../install_steps_interactive.pm_.c:137
 msgid "Server"
 msgstr "Sem þjón"
 
-#: ../install_steps_interactive.pm_.c:119
-msgid "What usage do you want?"
-msgstr "Hverskyns notkun viltu?"
+#: ../../install_steps_interactive.pm_.c:141
+#, fuzzy
+msgid "Which usage is your system used for ?"
+msgstr "Á hvaða tímasvæði ertu?"
 
-#: ../install_steps_interactive.pm_.c:132 ../standalone/mousedrake_.c:25
-msgid "What is the type of your mouse?"
+#: ../../install_steps_interactive.pm_.c:152
+#, fuzzy
+msgid "Please, choose the type of your mouse."
 msgstr "Hvernig mús ertu með?"
 
-#: ../install_steps_interactive.pm_.c:140 ../standalone/mousedrake_.c:38
+#: ../../install_steps_interactive.pm_.c:160 ../../standalone/mousedrake_.c:38
 msgid "Mouse Port"
 msgstr "Músartengi"
 
-#: ../install_steps_interactive.pm_.c:141 ../standalone/mousedrake_.c:39
-msgid "Which serial port is your mouse connected to?"
+#: ../../install_steps_interactive.pm_.c:161
+#, fuzzy
+msgid "Please choose on which serial port your mouse is connected to."
 msgstr "Við hvaða raðtengi er músin þín tengd?"
 
-#: ../install_steps_interactive.pm_.c:157
+#: ../../install_steps_interactive.pm_.c:172
+#, fuzzy
+msgid "Configuring IDE"
+msgstr "Uppsetning"
+
+#: ../../install_steps_interactive.pm_.c:172
+msgid "IDE"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:182
 msgid "no available partitions"
 msgstr "engar reiðubúnar disksneiðar"
 
-#: ../install_steps_interactive.pm_.c:159
+#: ../../install_steps_interactive.pm_.c:184
 #, c-format
-msgid "(%dMb)"
+msgid "(%dMB)"
 msgstr "(%dMB)"
 
-#: ../install_steps_interactive.pm_.c:166
-msgid "Which partition do you want to use as your root partition"
+#: ../../install_steps_interactive.pm_.c:191
+#, fuzzy
+msgid "Please choose a partition to use as your root partition."
 msgstr "Hvaða disksneið vilt þú nota sem rótardisksneið"
 
-#: ../install_steps_interactive.pm_.c:173
+#: ../../install_steps_interactive.pm_.c:198
 msgid "Choose the mount points"
 msgstr "Veldu tengipunktana"
 
-#: ../install_steps_interactive.pm_.c:185
+#: ../../install_steps_interactive.pm_.c:210
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
 "Þú verður að ræsa tölvuna aftur svo breytingar á sneiðatöflunni taki gildi"
 
-#: ../install_steps_interactive.pm_.c:207
+#: ../../install_steps_interactive.pm_.c:236
 msgid "Choose the partitions you want to format"
 msgstr "Veldu þær disksneiðar sem á að forsníða"
 
-#: ../install_steps_interactive.pm_.c:211
+#: ../../install_steps_interactive.pm_.c:240
 msgid "Check bad blocks?"
 msgstr "Athuga skemmdar blokkir?"
 
-#: ../install_steps_interactive.pm_.c:230
+#: ../../install_steps_interactive.pm_.c:248
+#, fuzzy
+msgid "Formatting partitions"
+msgstr "Forsníð disksneið %s"
+
+#: ../../install_steps_interactive.pm_.c:252
+#, c-format
+msgid "Creating and formatting file %s"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:255
+msgid "Not enough swap to fulfill installation, please add some"
+msgstr "Ekki nægjanlegt diskminni fyrir innsetningu.  Bættu við það"
+
+#: ../../install_steps_interactive.pm_.c:261
 msgid "Looking for available packages"
 msgstr "Leita að fáanlegum pökkum"
 
-#: ../install_steps_interactive.pm_.c:236
+#: ../../install_steps_interactive.pm_.c:267
 msgid "Finding packages to upgrade"
 msgstr "Leita að pökkum til að uppfæra"
 
-#: ../install_steps_interactive.pm_.c:282
+#: ../../install_steps_interactive.pm_.c:284
+msgid "Your system has not enough space left for installation or upgrade"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:317
 msgid "Package Group Selection"
 msgstr "Val á pakkahóp"
 
-#: ../install_steps_interactive.pm_.c:321
+#: ../../install_steps_interactive.pm_.c:320
+msgid "Individual package selection"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:360
+msgid ""
+"If you have all the CDs in the list below, click Ok.\n"
+"If you have none of those CDs, click Cancel.\n"
+"If only some CDs are missing, unselect them, then click Ok."
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:363
+#, c-format
+msgid "Cd-Rom labeled \"%s\""
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:391
 msgid ""
 "Installing package %s\n"
 "%d%%"
@@ -2112,55 +2701,58 @@ msgstr ""
 "Set inn pakka %s\n"
 "%d%%"
 
-#: ../install_steps_interactive.pm_.c:330
-msgid "Post install configuration"
+#: ../../install_steps_interactive.pm_.c:400
+msgid "Post-install configuration"
 msgstr "Lokauppsetning"
 
-#: ../install_steps_interactive.pm_.c:341
+#: ../../install_steps_interactive.pm_.c:410
 msgid "Keep the current IP configuration"
 msgstr "Halda núverandi IP stillingum"
 
-#: ../install_steps_interactive.pm_.c:342
+#: ../../install_steps_interactive.pm_.c:411
 msgid "Reconfigure network now"
 msgstr "Endurstilla netstillingar núna"
 
-#: ../install_steps_interactive.pm_.c:343
-#: ../install_steps_interactive.pm_.c:355
+#: ../../install_steps_interactive.pm_.c:412
 msgid "Do not set up networking"
 msgstr "Ekki setja upp netstillingar"
 
-#: ../install_steps_interactive.pm_.c:345
-#: ../install_steps_interactive.pm_.c:353
+#: ../../install_steps_interactive.pm_.c:415
+#: ../../install_steps_interactive.pm_.c:420
 msgid "Network Configuration"
 msgstr "Netstillingar"
 
-#: ../install_steps_interactive.pm_.c:346
+#: ../../install_steps_interactive.pm_.c:416
 msgid "Local networking has already been configured. Do you want to:"
 msgstr "LAN netuppsetning er þegar til staðar. Hvað viltu gera?"
 
-#: ../install_steps_interactive.pm_.c:354
-msgid "Do you want to configure networking for your system?"
+#: ../../install_steps_interactive.pm_.c:421
+#, fuzzy
+msgid "Do you want to configure a local network for your system?"
 msgstr "Viltu setja upp staðarnet (ekki innhringingu)?"
 
-#: ../install_steps_interactive.pm_.c:355
-msgid "Dialup with modem"
-msgstr "Hringja inn með mótaldi"
-
-#: ../install_steps_interactive.pm_.c:355
-msgid "Local LAN"
-msgstr "Staðarnet(LAN)"
-
-#: ../install_steps_interactive.pm_.c:364
+#: ../../install_steps_interactive.pm_.c:427
 msgid "no network card found"
 msgstr "ekkert netkort fannst"
 
-#: ../install_steps_interactive.pm_.c:394
-#: ../install_steps_interactive.pm_.c:395
+#: ../../install_steps_interactive.pm_.c:449
+#, fuzzy
+msgid "Modem Configuration"
+msgstr "Uppsetning"
+
+#: ../../install_steps_interactive.pm_.c:450
+#, fuzzy
+msgid ""
+"Do you want to configure a dialup connection with modem for your system?"
+msgstr "Viltu setja upp staðarnet (ekki innhringingu)?"
+
+#: ../../install_steps_interactive.pm_.c:462
+#: ../../install_steps_interactive.pm_.c:463
 #, c-format
 msgid "Configuring network device %s"
 msgstr "Stilli nettæki %s"
 
-#: ../install_steps_interactive.pm_.c:396
+#: ../../install_steps_interactive.pm_.c:464
 msgid ""
 "Please enter the IP configuration for this machine.\n"
 "Each item should be entered as an IP address in dotted-decimal\n"
@@ -2170,31 +2762,31 @@ msgstr ""
 "á að vera IP tala rituð með punkt á milli.\n"
 "(dæmi 192.168.1.13)"
 
-#: ../install_steps_interactive.pm_.c:399
+#: ../../install_steps_interactive.pm_.c:467
 msgid "Automatic IP"
 msgstr "Sjálfvirkt IP"
 
-#: ../install_steps_interactive.pm_.c:399
+#: ../../install_steps_interactive.pm_.c:467
 msgid "IP address:"
 msgstr "IP vistfang:"
 
-#: ../install_steps_interactive.pm_.c:399
+#: ../../install_steps_interactive.pm_.c:467
 msgid "Netmask:"
 msgstr "Netsía:"
 
-#: ../install_steps_interactive.pm_.c:400
+#: ../../install_steps_interactive.pm_.c:468
 msgid "(bootp/dhcp)"
 msgstr "(bootp/dhcp)"
 
-#: ../install_steps_interactive.pm_.c:406 ../printerdrake.pm_.c:149
+#: ../../install_steps_interactive.pm_.c:474 ../../printerdrake.pm_.c:89
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP vistfang á að vera á sniðinu 192.168.1.10"
 
-#: ../install_steps_interactive.pm_.c:424
+#: ../../install_steps_interactive.pm_.c:492
 msgid "Configuring network"
 msgstr "Stilli staðarnetstenginu"
 
-#: ../install_steps_interactive.pm_.c:425
+#: ../../install_steps_interactive.pm_.c:493
 msgid ""
 "Please enter your host name.\n"
 "Your host name should be a fully-qualified host name,\n"
@@ -2206,91 +2798,82 @@ msgstr ""
 "vistfang gáttarinnar ef þú veist hvað það vistfang er.\n"
 "Gáttin gefur þér aðgang út úr staðarnetinu (t.d. á Internetið)."
 
-#: ../install_steps_interactive.pm_.c:429
+#: ../../install_steps_interactive.pm_.c:497
 msgid "DNS server:"
 msgstr "Nafnamiðlari:"
 
 # ## skrytid
-#: ../install_steps_interactive.pm_.c:429
+#: ../../install_steps_interactive.pm_.c:497
 msgid "Gateway device:"
 msgstr "Gátt (tækið):"
 
-#: ../install_steps_interactive.pm_.c:429
+#: ../../install_steps_interactive.pm_.c:497
 msgid "Gateway:"
 msgstr "Gátt:"
 
-#: ../install_steps_interactive.pm_.c:429
+#: ../../install_steps_interactive.pm_.c:497
 msgid "Host name:"
 msgstr "Vélarheiti:"
 
-#: ../install_steps_interactive.pm_.c:442
+#: ../../install_steps_interactive.pm_.c:510
 msgid "Try to find a modem?"
 msgstr "Reyna að finna mótald?"
 
-#: ../install_steps_interactive.pm_.c:452
-msgid "Which serial port is your modem connected to?"
+#: ../../install_steps_interactive.pm_.c:521
+#, fuzzy
+msgid "Please choose which serial port your modem is connected to."
 msgstr "Hvaða raðtengi er mótaldið tengt við?"
 
-#: ../install_steps_interactive.pm_.c:457
+#: ../../install_steps_interactive.pm_.c:527
 msgid "Dialup options"
 msgstr "Innhringistillingar"
 
-#: ../install_steps_interactive.pm_.c:458
+#: ../../install_steps_interactive.pm_.c:528
 msgid "Connection name"
 msgstr "Nafn tengingar"
 
-#: ../install_steps_interactive.pm_.c:459
+#: ../../install_steps_interactive.pm_.c:529
 msgid "Phone number"
 msgstr "Símanúmer"
 
-#: ../install_steps_interactive.pm_.c:460
+#: ../../install_steps_interactive.pm_.c:530
 msgid "Login ID"
 msgstr "Notendanafn"
 
-#: ../install_steps_interactive.pm_.c:461
-#: ../install_steps_interactive.pm_.c:572
-#: ../install_steps_interactive.pm_.c:618
-#: ../install_steps_interactive.pm_.c:718 ../standalone/adduserdrake_.c:40
-msgid "Password"
-msgstr "Lykilorð"
-
-#: ../install_steps_interactive.pm_.c:462
+#: ../../install_steps_interactive.pm_.c:532
 msgid "Authentication"
 msgstr "Auðkenning"
 
-#: ../install_steps_interactive.pm_.c:462
+#: ../../install_steps_interactive.pm_.c:532
 msgid "CHAP"
 msgstr "CHAP"
 
-#: ../install_steps_interactive.pm_.c:462
+#: ../../install_steps_interactive.pm_.c:532
 msgid "PAP"
 msgstr "PAP"
 
-#: ../install_steps_interactive.pm_.c:462
+#: ../../install_steps_interactive.pm_.c:532
 msgid "Script-based"
 msgstr "Með skriftu"
 
-#: ../install_steps_interactive.pm_.c:462
+#: ../../install_steps_interactive.pm_.c:532
 msgid "Terminal-based"
 msgstr "Með skjáhermi"
 
-#: ../install_steps_interactive.pm_.c:463
+#: ../../install_steps_interactive.pm_.c:533
 msgid "Domain name"
 msgstr "Nafn léns"
 
-#: ../install_steps_interactive.pm_.c:464
+#: ../../install_steps_interactive.pm_.c:535
 msgid "First DNS Server"
 msgstr "Aðal nafnamiðlari"
 
-#: ../install_steps_interactive.pm_.c:465
+#: ../../install_steps_interactive.pm_.c:536
 msgid "Second DNS Server"
 msgstr "Vara nafnamiðlari"
 
-#: ../install_steps_interactive.pm_.c:478
-msgid "Bringing up the network"
-msgstr "Keyri upp netið"
-
-#: ../install_steps_interactive.pm_.c:487
+#: ../../install_steps_interactive.pm_.c:549
+#, fuzzy
 msgid ""
 "You have now the possibility to download software aimed for encryption.\n"
 "\n"
@@ -2307,7 +2890,7 @@ msgid ""
 "In addition customer and/or end user shall particularly be aware to not "
 "infringe\n"
 "the laws of his/their jurisdiction. Should customer and/or end user do not\n"
-"respect the provision of these applicable laws, he/they will incur serious\n"
+"respect the provision of these applicable laws, he/they will incure serious\n"
 "sanctions.\n"
 "\n"
 "In no event shall Mandrakesoft nor its manufacturers and/or suppliers be "
@@ -2320,6 +2903,7 @@ msgid ""
 "pursuant to a court decision) arising out of use, possession, or the sole\n"
 "downloading of these software, to which customer and/or end user could\n"
 "eventually have access after having sign up the present agreement.\n"
+"\n"
 "\n"
 "For any queries relating to these agreement, please contact \n"
 "Mandrakesoft, Inc.\n"
@@ -2371,124 +2955,90 @@ msgstr ""
 "Altadena, California, 91001\n"
 "USA"
 
-#: ../install_steps_interactive.pm_.c:517
+#: ../../install_steps_interactive.pm_.c:580
 msgid "Choose a mirror from which to get the packages"
 msgstr "Veldu spegilvélina þaðan sem á að sækja pakkanna"
 
-#: ../install_steps_interactive.pm_.c:522
+#: ../../install_steps_interactive.pm_.c:588
 msgid "Contacting the mirror to get the list of available packages"
 msgstr "Hef samband við vélina til að sækja lista yfir fáanlega pakka"
 
-#: ../install_steps_interactive.pm_.c:526
-msgid "Which packages do you want to install"
-msgstr "Hvaða pakka viltu setja inn"
+#: ../../install_steps_interactive.pm_.c:592
+#, fuzzy
+msgid "Please choose the packages you want to install."
+msgstr "Veldu pakkana sem þú vilt setja inn"
 
-#: ../install_steps_interactive.pm_.c:528
-msgid "Downloading cryptographic packages"
-msgstr "Sæki dulritunarpakkana"
-
-#: ../install_steps_interactive.pm_.c:538
+#: ../../install_steps_interactive.pm_.c:606
 msgid "Which is your timezone?"
 msgstr "Á hvaða tímasvæði ertu?"
 
-#: ../install_steps_interactive.pm_.c:539
+#: ../../install_steps_interactive.pm_.c:607
 msgid "Is your hardware clock set to GMT?"
 msgstr "Veltu stilla tölvuklukkuna á GMT?"
 
-#: ../install_steps_interactive.pm_.c:549
-msgid "Printer"
-msgstr "Prentari"
-
-#: ../install_steps_interactive.pm_.c:550
-msgid "Would you like to configure a printer?"
-msgstr "Viltu setja upp prentara?"
-
-#: ../install_steps_interactive.pm_.c:570
+#: ../../install_steps_interactive.pm_.c:652
 msgid "No password"
 msgstr "Ekkert lykilorð"
 
-#: ../install_steps_interactive.pm_.c:570
-#: ../install_steps_interactive.pm_.c:792 ../interactive.pm_.c:74
-#: ../interactive.pm_.c:84 ../interactive.pm_.c:163
-#: ../interactive_newt.pm_.c:50 ../interactive_newt.pm_.c:94
-#: ../interactive_stdio.pm_.c:27 ../my_gtk.pm_.c:192 ../my_gtk.pm_.c:425
-#: ../my_gtk.pm_.c:525
-msgid "Ok"
-msgstr "Í lagi"
-
-#: ../install_steps_interactive.pm_.c:573
-#: ../install_steps_interactive.pm_.c:619
-#: ../install_steps_interactive.pm_.c:719 ../standalone/adduserdrake_.c:41
-msgid "Password (again)"
-msgstr "Lykilorð (aftur)"
-
-#: ../install_steps_interactive.pm_.c:575
+#: ../../install_steps_interactive.pm_.c:657
 msgid "Use shadow file"
 msgstr "Nota skuggaskrá"
 
-#: ../install_steps_interactive.pm_.c:575
+#: ../../install_steps_interactive.pm_.c:657
 msgid "shadow"
 msgstr "skuggi"
 
-#: ../install_steps_interactive.pm_.c:576
+#: ../../install_steps_interactive.pm_.c:658
 msgid "MD5"
 msgstr "MD5"
 
-#: ../install_steps_interactive.pm_.c:576
+#: ../../install_steps_interactive.pm_.c:658
 msgid "Use MD5 passwords"
 msgstr "Nota MD5 lykilorð"
 
-#: ../install_steps_interactive.pm_.c:578
+#: ../../install_steps_interactive.pm_.c:660
 msgid "Use NIS"
 msgstr "Nota NIS"
 
-#: ../install_steps_interactive.pm_.c:578
+#: ../../install_steps_interactive.pm_.c:660
 msgid "yellow pages"
 msgstr "Gular síður (yp)"
 
-#: ../install_steps_interactive.pm_.c:582
-#: ../install_steps_interactive.pm_.c:630
-#: ../install_steps_interactive.pm_.c:730 ../standalone/adduserdrake_.c:52
-msgid "Please try again"
-msgstr "Reyndu aftur"
-
-#: ../install_steps_interactive.pm_.c:582
-#: ../install_steps_interactive.pm_.c:630
-#: ../install_steps_interactive.pm_.c:730 ../standalone/adduserdrake_.c:52
-msgid "The passwords do not match"
-msgstr "Mismunandi lykilorð"
-
-#: ../install_steps_interactive.pm_.c:584
+#: ../../install_steps_interactive.pm_.c:666
 #, c-format
 msgid "This password is too simple (must be at least %d characters long)"
 msgstr "Þetta lykilorð er of einfalt (verður að vera minnst %d stafa langt)"
 
-#: ../install_steps_interactive.pm_.c:591
+#: ../../install_steps_interactive.pm_.c:673
 msgid "Authentification NIS"
 msgstr "Auðkenning NIS"
 
-#: ../install_steps_interactive.pm_.c:592
+#: ../../install_steps_interactive.pm_.c:674
 msgid "NIS Domain"
 msgstr "NIS lén"
 
-#: ../install_steps_interactive.pm_.c:592
+#: ../../install_steps_interactive.pm_.c:674
 msgid "NIS Server"
 msgstr "NIS þjónn"
 
-#: ../install_steps_interactive.pm_.c:612 ../standalone/adduserdrake_.c:34
+#: ../../install_steps_interactive.pm_.c:699
+#: ../../standalone/adduserdrake_.c:36
 msgid "Accept user"
 msgstr "Samþykkja notanda"
 
-#: ../install_steps_interactive.pm_.c:612 ../standalone/adduserdrake_.c:34
+#: ../../install_steps_interactive.pm_.c:699
+#: ../../standalone/adduserdrake_.c:36
 msgid "Add user"
 msgstr "Bæta við notanda"
 
-#: ../install_steps_interactive.pm_.c:613 ../standalone/adduserdrake_.c:35
+#: ../../install_steps_interactive.pm_.c:700
+#: ../../standalone/adduserdrake_.c:37
 #, c-format
 msgid "(already added %s)"
 msgstr "(%s er nú þegar til)"
 
-#: ../install_steps_interactive.pm_.c:613 ../standalone/adduserdrake_.c:35
+#: ../../install_steps_interactive.pm_.c:700
+#: ../../standalone/adduserdrake_.c:37
 #, c-format
 msgid ""
 "Enter a user\n"
@@ -2497,54 +3047,69 @@ msgstr ""
 "Sláðu inn notanda\n"
 "%s"
 
-#: ../install_steps_interactive.pm_.c:615 ../standalone/adduserdrake_.c:37
+#: ../../install_steps_interactive.pm_.c:702
+#: ../../standalone/adduserdrake_.c:39
 msgid "Real name"
 msgstr "Nafn notanda"
 
-#: ../install_steps_interactive.pm_.c:616 ../standalone/adduserdrake_.c:38
+#: ../../install_steps_interactive.pm_.c:703 ../../printerdrake.pm_.c:84
+#: ../../printerdrake.pm_.c:109 ../../standalone/adduserdrake_.c:40
 msgid "User name"
 msgstr "Notandanafn:"
 
-#: ../install_steps_interactive.pm_.c:621 ../standalone/adduserdrake_.c:43
+#: ../../install_steps_interactive.pm_.c:708
+#: ../../standalone/adduserdrake_.c:45
 msgid "Shell"
 msgstr "Skel"
 
-#: ../install_steps_interactive.pm_.c:631 ../standalone/adduserdrake_.c:53
+#: ../../install_steps_interactive.pm_.c:710
+#: ../../standalone/adduserdrake_.c:47
+msgid "Icon"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:720
+#: ../../standalone/adduserdrake_.c:57
 msgid "This password is too simple"
 msgstr "Þetta lykilorð er of einfalt"
 
-#: ../install_steps_interactive.pm_.c:632 ../standalone/adduserdrake_.c:54
+#: ../../install_steps_interactive.pm_.c:721
+#: ../../standalone/adduserdrake_.c:58
 msgid "Please give a user name"
 msgstr "Vinsamlega sláðu inn notandanafn"
 
-#: ../install_steps_interactive.pm_.c:633 ../standalone/adduserdrake_.c:55
+#: ../../install_steps_interactive.pm_.c:722
+#: ../../standalone/adduserdrake_.c:59
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "Notandanafnið má bara innihalda litla stafi, tölustafi, `-' og `_'"
 
-#: ../install_steps_interactive.pm_.c:634 ../standalone/adduserdrake_.c:56
+#: ../../install_steps_interactive.pm_.c:723
+#: ../../standalone/adduserdrake_.c:60
 msgid "This user name is already added"
 msgstr "Þetta notandanafn er nú þegar til"
 
-#: ../install_steps_interactive.pm_.c:653
-msgid "First drive"
+#: ../../install_steps_interactive.pm_.c:747
+#, fuzzy
+msgid "First floppy drive"
 msgstr "Fyrsta drif"
 
-#: ../install_steps_interactive.pm_.c:654
-msgid "Second drive"
+#: ../../install_steps_interactive.pm_.c:748
+#, fuzzy
+msgid "Second floppy drive"
 msgstr "Annað drif"
 
-#: ../install_steps_interactive.pm_.c:655
+#: ../../install_steps_interactive.pm_.c:749
 msgid "Skip"
 msgstr "Sleppa"
 
-#: ../install_steps_interactive.pm_.c:660
+#: ../../install_steps_interactive.pm_.c:755
+#, fuzzy
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
 "install\n"
-"LILO on your system, or another operating system removes LILO, or LILO "
-"doesn't\n"
+"LILO (or grub) on your system, or another operating system removes LILO, or "
+"LILO doesn't\n"
 "work with your hardware configuration. A custom bootdisk can also be used "
 "with\n"
 "the Mandrake rescue image, making it much easier to recover from severe "
@@ -2562,260 +3127,185 @@ msgstr ""
 " vélinni ef alvarleg vandamál koma upp.\n"
 "Viltu búa til ræsidiskling fyrir vélina þína?"
 
-#: ../install_steps_interactive.pm_.c:669
+#: ../../install_steps_interactive.pm_.c:764
 msgid "Sorry, no floppy drive available"
 msgstr "Ekkert disklingadrif til staðar"
 
-#: ../install_steps_interactive.pm_.c:672
+#: ../../install_steps_interactive.pm_.c:767
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr "Veldu disklingadrifið sem þú vilt nota til að gera ræsidisk"
 
-#: ../install_steps_interactive.pm_.c:677
+#: ../../install_steps_interactive.pm_.c:772
 #, c-format
 msgid "Insert a floppy in drive %s"
 msgstr "Settu tóman diskling í drif %s"
 
-#: ../install_steps_interactive.pm_.c:678
-#: ../install_steps_interactive.pm_.c:1036
+#: ../../install_steps_interactive.pm_.c:773
 msgid "Creating bootdisk"
 msgstr "Bý til ræsidiskling..."
 
-#: ../install_steps_interactive.pm_.c:685
-msgid "Preparing bootloader"
-msgstr "Set upp ræsistjórann..."
-
-#: ../install_steps_interactive.pm_.c:697
-msgid "First sector of boot partition"
-msgstr "Á fyrsta geira ræsidisksneiðar"
-
-#: ../install_steps_interactive.pm_.c:697
-msgid "First sector of drive (MBR)"
-msgstr "Í ræsifærsluna (MBR)"
-
-#: ../install_steps_interactive.pm_.c:702
-msgid "LILO Installation"
-msgstr "Uppsetning LILO"
-
-#: ../install_steps_interactive.pm_.c:703
-msgid "Where do you want to install the bootloader?"
-msgstr "Hvert viltu setja ræsistjórann?"
-
-#: ../install_steps_interactive.pm_.c:709
-msgid "Do you want to use LILO?"
-msgstr "Viltu nota LILO?"
-
-#: ../install_steps_interactive.pm_.c:712
-msgid "Boot device"
-msgstr "Ræsitæki"
-
-#: ../install_steps_interactive.pm_.c:713
-msgid "Linear (needed for some SCSI drives)"
-msgstr "Nota línulegan ham (nauðsynlegt fyrir sum SCSI drif)"
-
-#: ../install_steps_interactive.pm_.c:713
-msgid "linear"
-msgstr "línulegan"
-
-#: ../install_steps_interactive.pm_.c:714
-msgid "Compact"
-msgstr "Samþjappað"
-
-#: ../install_steps_interactive.pm_.c:714
-msgid "compact"
-msgstr "samþjappað"
-
-#: ../install_steps_interactive.pm_.c:715
-msgid "Delay before booting default image"
-msgstr "Töf áður en sjálfgefin ræsing byrjar"
-
-#: ../install_steps_interactive.pm_.c:716
-msgid "Video mode"
-msgstr "Skjáhamur"
-
-#: ../install_steps_interactive.pm_.c:720
-msgid "Restrict command line options"
-msgstr "Takmarka alla rofa á skipanlínu"
-
-#: ../install_steps_interactive.pm_.c:720
-msgid "restrict"
-msgstr "takmarka"
-
-#: ../install_steps_interactive.pm_.c:726
-msgid "LILO main options"
-msgstr "Stillingar LILO"
-
-#: ../install_steps_interactive.pm_.c:729
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
-msgstr ""
-"Valkosturinn ``Takmarka alla rofa á skipanalínu'' gerir ekkert án lykilorðs"
-
-#: ../install_steps_interactive.pm_.c:740
-msgid ""
-"Here are the following entries in LILO.\n"
-"You can add some more or change the existing ones."
-msgstr ""
-"Hérna eru núverandi stillingar LILO .\n"
-"Þú getur bætt við fleirum eða breytt þessum."
-
-#: ../install_steps_interactive.pm_.c:742 ../standalone/rpmdrake_.c:302
-msgid "Add"
-msgstr "Bæta við"
-
-#: ../install_steps_interactive.pm_.c:751
-msgid "Linux"
-msgstr "Linux"
-
-#: ../install_steps_interactive.pm_.c:751
-msgid "Other OS (windows...)"
-msgstr "Öðru stýrikerfi (Window$...)"
-
-#: ../install_steps_interactive.pm_.c:751
-msgid "Which type of entry do you want to add"
-msgstr "Hverju viltu bæta við?"
-
-#: ../install_steps_interactive.pm_.c:771
-msgid "Image"
-msgstr "Ræsikjarna"
-
-#: ../install_steps_interactive.pm_.c:772
-#: ../install_steps_interactive.pm_.c:780
-msgid "Root"
-msgstr "Rót"
-
-#: ../install_steps_interactive.pm_.c:773
-msgid "Append"
-msgstr "Bæta aftan við"
-
-#: ../install_steps_interactive.pm_.c:774
-msgid "Initrd"
-msgstr "Initrd"
-
-#: ../install_steps_interactive.pm_.c:775
-msgid "Read-write"
-msgstr "Les-skrif"
-
-#: ../install_steps_interactive.pm_.c:781
-msgid "Table"
-msgstr "Tafla"
-
-#: ../install_steps_interactive.pm_.c:782
-msgid "Unsafe"
-msgstr "Óöruggt"
-
-#: ../install_steps_interactive.pm_.c:787
-msgid "Label"
-msgstr "Nafn"
-
-#: ../install_steps_interactive.pm_.c:789
-msgid "Default"
-msgstr "Sjálfgefið"
-
-#: ../install_steps_interactive.pm_.c:792
-msgid "Remove entry"
-msgstr "Fjarlægja"
-
-#: ../install_steps_interactive.pm_.c:795
-msgid "Empty label not allowed"
-msgstr "Autt er ekki leyft"
-
-#: ../install_steps_interactive.pm_.c:796
-msgid "This label is already in use"
-msgstr "Þetta nafn er nú þegar í notkun."
-
-#: ../install_steps_interactive.pm_.c:797
-#, c-format
-msgid "A entry %s already exists"
-msgstr "Nafnið %s er þegar í notkun"
-
-#: ../install_steps_interactive.pm_.c:811
+#: ../../install_steps_interactive.pm_.c:785 ../../standalone/drakboot_.c:55
 msgid "Installation of LILO failed. The following error occured:"
 msgstr "Innsetning LILO brást sökum eftirfarandi villu:"
 
-#: ../install_steps_interactive.pm_.c:825
+#: ../../install_steps_interactive.pm_.c:806
+msgid "Do you want to use SILO?"
+msgstr "Viltu nota SILO?"
+
+#: ../../install_steps_interactive.pm_.c:817
+msgid "SILO main options"
+msgstr "Stillingar SILO"
+
+#: ../../install_steps_interactive.pm_.c:830
+msgid ""
+"Here are the following entries in SILO.\n"
+"You can add some more or change the existing ones."
+msgstr ""
+"Hérna eru núverandi stillingar SILO .\n"
+"Þú getur bætt við fleirum eða breytt þessum."
+
+#: ../../install_steps_interactive.pm_.c:858
+#, fuzzy
+msgid "Partition"
+msgstr "Rótardisksneið"
+
+#: ../../install_steps_interactive.pm_.c:878
+msgid "This label is already in use"
+msgstr "Þetta nafn er nú þegar í notkun."
+
+#: ../../install_steps_interactive.pm_.c:891
+msgid "Installation of SILO failed. The following error occured:"
+msgstr "Innsetning SILO brást sökum eftirfarandi villu:"
+
+#: ../../install_steps_interactive.pm_.c:901
+msgid "Preparing bootloader"
+msgstr "Set upp ræsistjórann..."
+
+#: ../../install_steps_interactive.pm_.c:909
+msgid "Do you want to use aboot?"
+msgstr "Viltu nota aboot?"
+
+#: ../../install_steps_interactive.pm_.c:912
+msgid ""
+"Error installing aboot, \n"
+"try to force installation even if that destroys the first partition?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:929
 msgid "Proxies configuration"
 msgstr "Sel stillingar"
 
-#: ../install_steps_interactive.pm_.c:826
+#: ../../install_steps_interactive.pm_.c:930
 msgid "HTTP proxy"
 msgstr "HTTP sel:"
 
-#: ../install_steps_interactive.pm_.c:827
+#: ../../install_steps_interactive.pm_.c:931
 msgid "FTP proxy"
 msgstr "FTP Sel:"
 
-#: ../install_steps_interactive.pm_.c:833
+#: ../../install_steps_interactive.pm_.c:937
 msgid "Proxy should be http://..."
 msgstr "Sel á að vera http://..."
 
-#: ../install_steps_interactive.pm_.c:834
+#: ../../install_steps_interactive.pm_.c:938
 msgid "Proxy should be ftp://..."
 msgstr "Sel á að vera ftp://..."
 
-#: ../install_steps_interactive.pm_.c:844 ../standalone/draksec_.c:20
+#: ../../install_steps_interactive.pm_.c:948 ../../standalone/draksec_.c:20
 msgid "Welcome To Crackers"
 msgstr "Velkomin(n) í tölvuþrjótinn"
 
-#: ../install_steps_interactive.pm_.c:845 ../standalone/draksec_.c:21
+#: ../../install_steps_interactive.pm_.c:949 ../../standalone/draksec_.c:21
 msgid "Poor"
 msgstr "Lélegt"
 
-#: ../install_steps_interactive.pm_.c:846 ../standalone/draksec_.c:22
+#: ../../install_steps_interactive.pm_.c:950 ../../standalone/draksec_.c:22
 msgid "Low"
 msgstr "Lágt"
 
-#: ../install_steps_interactive.pm_.c:847 ../standalone/draksec_.c:23
+#: ../../install_steps_interactive.pm_.c:951 ../../standalone/draksec_.c:23
 msgid "Medium"
 msgstr "Miðlungs"
 
-#: ../install_steps_interactive.pm_.c:848 ../standalone/draksec_.c:24
+#: ../../install_steps_interactive.pm_.c:952 ../../standalone/draksec_.c:24
 msgid "High"
 msgstr "Hátt"
 
-#: ../install_steps_interactive.pm_.c:849 ../standalone/draksec_.c:25
+#: ../../install_steps_interactive.pm_.c:953 ../../standalone/draksec_.c:25
 msgid "Paranoid"
 msgstr "Taugaveiklað"
 
-#: ../install_steps_interactive.pm_.c:862
+#: ../../install_steps_interactive.pm_.c:966
 msgid "Miscellaneous questions"
 msgstr "Ýmsar spurningar:"
 
-#: ../install_steps_interactive.pm_.c:863
+#: ../../install_steps_interactive.pm_.c:967
 msgid "(may cause data corruption)"
 msgstr "(getur skaðað vistuð gögn)"
 
-#: ../install_steps_interactive.pm_.c:863
+#: ../../install_steps_interactive.pm_.c:967
 msgid "Use hard drive optimisations?"
 msgstr "Nota fínstillingar á hörðum disk(um)"
 
-#: ../install_steps_interactive.pm_.c:864 ../standalone/draksec_.c:46
+#: ../../install_steps_interactive.pm_.c:968 ../../standalone/draksec_.c:46
 msgid "Choose security level"
 msgstr "Veldu öryggisstig"
 
-#: ../install_steps_interactive.pm_.c:865
+#: ../../install_steps_interactive.pm_.c:969
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
 msgstr "Nákvæm stærð vinnsluminnis (fann %d MB)"
 
 # ## skrytid
-#: ../install_steps_interactive.pm_.c:866
+#: ../../install_steps_interactive.pm_.c:970
 msgid "Removable media automounting"
 msgstr "Sjálfvirk tenging aukatækja"
 
-#: ../install_steps_interactive.pm_.c:868
+#: ../../install_steps_interactive.pm_.c:972
+msgid "Clean /tmp at each boot"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:975
+msgid "Enable multi profiles"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:977
 msgid "Enable num lock at startup"
 msgstr "Kveikja á NUMLOCK við eftir ræsingu"
 
-#: ../install_steps_interactive.pm_.c:871
-msgid "Give the ram size in Mb"
+#: ../../install_steps_interactive.pm_.c:980
+msgid "Give the ram size in MB"
 msgstr "Sláðu inn vinnsluminni í MB"
 
-#: ../install_steps_interactive.pm_.c:899
-#: ../install_steps_interactive.pm_.c:1069
+#: ../../install_steps_interactive.pm_.c:982
+#, fuzzy
+msgid "Can't use supermount in high security level"
+msgstr "Stilli öryggisþrep"
+
+#: ../../install_steps_interactive.pm_.c:1002
+msgid ""
+"DrakX will generate config files for both XFree 3.3 and XFree 4.0.\n"
+"By default, the 3.3 server is used because it works on more graphic cards.\n"
+"\n"
+"Do you want to try XFree 4.0?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:1015
+#: ../../install_steps_interactive.pm_.c:1166
 msgid "Try to find PCI devices?"
 msgstr "Leita að PCI kortum?"
 
-#: ../install_steps_interactive.pm_.c:914
+#: ../../install_steps_interactive.pm_.c:1036
+#, fuzzy, c-format
+msgid "Insert a blank floppy in drive %s"
+msgstr "Settu tóman diskling í drif %s"
+
+#: ../../install_steps_interactive.pm_.c:1044
+#, fuzzy
+msgid "Creating auto install floppy"
+msgstr "Undirbý innsetningu"
+
+#: ../../install_steps_interactive.pm_.c:1067
 msgid ""
 "Some steps are not completed.\n"
 "\n"
@@ -2825,7 +3315,7 @@ msgstr ""
 "\n"
 "Viltu virkilega hætta núna?"
 
-#: ../install_steps_interactive.pm_.c:921
+#: ../../install_steps_interactive.pm_.c:1074
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -2846,26 +3336,26 @@ msgstr ""
 "Frekari upplýsingar um hvernig á að stilla vélina eftir innsetninguna er að\n"
 "finna í viðeigandi kafla í Official Linux Mandrake User's Guide bókinni."
 
-#: ../install_steps_interactive.pm_.c:930
+#: ../../install_steps_interactive.pm_.c:1083
 msgid "Shutting down"
 msgstr "Slekk á tölvunni"
 
-#: ../install_steps_interactive.pm_.c:944
+#: ../../install_steps_interactive.pm_.c:1095
 #, c-format
 msgid "Installing driver for %s card %s"
 msgstr "Set inn rekil fyrir %s kortið %s"
 
-#: ../install_steps_interactive.pm_.c:945
+#: ../../install_steps_interactive.pm_.c:1096
 #, c-format
 msgid "(module %s)"
 msgstr "(eining %s)"
 
-#: ../install_steps_interactive.pm_.c:955
+#: ../../install_steps_interactive.pm_.c:1106
 #, c-format
 msgid "Which %s driver should I try?"
 msgstr "Hvaða %s rekil viltu prófa?"
 
-#: ../install_steps_interactive.pm_.c:963
+#: ../../install_steps_interactive.pm_.c:1114
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
@@ -2882,21 +3372,21 @@ msgstr ""
 " hann þarf?  Stundum frystir sjálfvirk stilling vélina en það ætti ekki\n"
 "að skemma neitt."
 
-#: ../install_steps_interactive.pm_.c:968
+#: ../../install_steps_interactive.pm_.c:1119
 msgid "Autoprobe"
 msgstr "Stilla sjálfvirkt"
 
-#: ../install_steps_interactive.pm_.c:968
+#: ../../install_steps_interactive.pm_.c:1119
 msgid "Specify options"
 msgstr "Stilla handvirkt"
 
-#: ../install_steps_interactive.pm_.c:972
+#: ../../install_steps_interactive.pm_.c:1123
 #, c-format
 msgid "You may now provide its options to module %s."
 msgstr "Þú getur núna gefið upp viðföng fyrir %s eininguna."
 
 # ## skrytid
-#: ../install_steps_interactive.pm_.c:978
+#: ../../install_steps_interactive.pm_.c:1129
 #, c-format
 msgid ""
 "You may now provide its options to module %s.\n"
@@ -2907,313 +3397,322 @@ msgstr ""
 "Viðföng eru gefin upp sem ``viðfang=gildi viðfang2=gildi2 ...''.\n"
 "Til dæmis: ``io=0x300 irq=7''"
 
-#: ../install_steps_interactive.pm_.c:981
+#: ../../install_steps_interactive.pm_.c:1132
 msgid "Module options:"
 msgstr "Stillingar kjarnaeininga:"
 
-#: ../install_steps_interactive.pm_.c:991
+#: ../../install_steps_interactive.pm_.c:1142
 #, c-format
 msgid ""
 "Loading module %s failed.\n"
 "Do you want to try again with other parameters?"
 msgstr ""
-"Innsetning á einingu % mistókst.\n"
+"Innsetning á einingu %s mistókst.\n"
 "Viltu prófa aftur með ólík viðföng?"
 
-#: ../install_steps_interactive.pm_.c:1004
+#: ../../install_steps_interactive.pm_.c:1155
 msgid "Try to find PCMCIA cards?"
 msgstr "Viltu leita að PCMCIA kortun?"
 
-#: ../install_steps_interactive.pm_.c:1005
+#: ../../install_steps_interactive.pm_.c:1156
 msgid "Configuring PCMCIA cards..."
 msgstr "Stilli PCMCIA kort..."
 
-#: ../install_steps_interactive.pm_.c:1005
+#: ../../install_steps_interactive.pm_.c:1156
 msgid "PCMCIA"
 msgstr "PCMCIA"
 
-#: ../install_steps_interactive.pm_.c:1012
-msgid ""
-"Linux does not yet fully support ultra dma 66 HPT.\n"
-"As a work-around i can make a custom floppy giving access the hard drive on "
-"ide2 and ide3"
-msgstr ""
-"Linux styður ekki ennþá að fullu Ultra DMA 66 HPT.\n"
-"Í staðinn er hægt að búa til sérstaka diskettu til að fáaðgang að hinum "
-"hörðu diskunum."
-
-#: ../install_steps_interactive.pm_.c:1033
-msgid ""
-"Enter a floppy to create an HTP enabled boot\n"
-"(all data on floppy will be lost)"
-msgstr ""
-"Settu diskling í drifið til að búa til HTP ræsingu\n"
-"(Öll gögn á þessum diskling tapast)"
-
-#: ../install_steps_interactive.pm_.c:1050
-msgid "It is necessary to restart installation booting on the floppy"
-msgstr "Það þarf að byrja innsetninguna upp á nýtt og ræsa með diskling"
-
-#: ../install_steps_interactive.pm_.c:1051
-msgid "It is necessary to restart installation with the new parameters"
-msgstr "Það þarf að byrja innsetningu upp á nýtt með nýju viðföngunum"
-
-#: ../install_steps_interactive.pm_.c:1055
-#, c-format
-msgid ""
-"Failed to create an HTP boot floppy.\n"
-"You may have to restart installation and give ``%s'' at the prompt"
-msgstr ""
-"Smíði HTP ræsidisks mistókst.\n"
-"Þú gætir þurft að endurræsa og slá inn ``%s'' á skipanalínuna"
-
-#: ../install_steps_interactive.pm_.c:1075
+#: ../../install_steps_interactive.pm_.c:1175
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr "Fann %s %s tengi"
 
-#: ../install_steps_interactive.pm_.c:1076
+#: ../../install_steps_interactive.pm_.c:1176
 msgid "Do you have another one?"
 msgstr "Er kannski eitt enn í vélinni?"
 
-#: ../install_steps_interactive.pm_.c:1077
+#: ../../install_steps_interactive.pm_.c:1177
 #, c-format
-msgid "Do you have any %s interface?"
+msgid "Do you have any %s interfaces?"
 msgstr "Eru einhver %s tengi í tölvunni?"
 
-#: ../install_steps_interactive.pm_.c:1079 ../interactive.pm_.c:79
-#: ../my_gtk.pm_.c:424 ../printerdrake.pm_.c:176
+#: ../../install_steps_interactive.pm_.c:1179 ../../interactive.pm_.c:79
+#: ../../my_gtk.pm_.c:458 ../../printerdrake.pm_.c:124
 msgid "No"
 msgstr "Nei"
 
-#: ../install_steps_interactive.pm_.c:1079 ../interactive.pm_.c:79
-#: ../my_gtk.pm_.c:424
+#: ../../install_steps_interactive.pm_.c:1179 ../../interactive.pm_.c:79
+#: ../../my_gtk.pm_.c:458
 msgid "Yes"
 msgstr "Já"
 
-#: ../install_steps_interactive.pm_.c:1080
+#: ../../install_steps_interactive.pm_.c:1180
 msgid "See hardware info"
 msgstr "Skoðaðu vélbúnaðarupplýsingar"
 
-#: ../install_steps_newt.pm_.c:19
+#: ../../install_steps_interactive.pm_.c:1196
+msgid "Bringing up the network"
+msgstr "Keyri upp netið"
+
+#: ../../install_steps_interactive.pm_.c:1201
+#, fuzzy
+msgid "Bringing down the network"
+msgstr "Keyri upp netið"
+
+#: ../../install_steps_newt.pm_.c:21
 #, c-format
 msgid "Linux-Mandrake Installation %s"
 msgstr "Linux Mandrake innsetning %s"
 
-#: ../install_steps_newt.pm_.c:30
+#: ../../install_steps_newt.pm_.c:32
 msgid ""
 "  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
 msgstr ""
 "  <Tab>/<Alt-Tab> milli hluta   |   <Bilslá> velur   |   <F12> næsti skjár "
 
-#: ../interactive.pm_.c:84 ../interactive.pm_.c:162
-#: ../interactive_newt.pm_.c:50 ../interactive_newt.pm_.c:94
-#: ../interactive_stdio.pm_.c:27 ../my_gtk.pm_.c:193 ../my_gtk.pm_.c:425
-msgid "Cancel"
-msgstr "Hætta við"
+#: ../../install_steps_newt.pm_.c:43
+#, c-format
+msgid ""
+"You can now partition your %s hard drive\n"
+"When you are done, don't forget to save using `w'"
+msgstr ""
 
-#: ../interactive.pm_.c:180
+#: ../../interactive.pm_.c:244
 msgid "Please wait"
 msgstr "Augnablik..."
 
-#: ../interactive_stdio.pm_.c:35
+#: ../../interactive_stdio.pm_.c:35
 #, c-format
 msgid "Ambiguity (%s), be more precise\n"
 msgstr "Óljóst (%s), vertu nákvæmari\n"
 
-#: ../interactive_stdio.pm_.c:36 ../interactive_stdio.pm_.c:51
-#: ../interactive_stdio.pm_.c:70
+#: ../../interactive_stdio.pm_.c:36 ../../interactive_stdio.pm_.c:51
+#: ../../interactive_stdio.pm_.c:70
 msgid "Bad choice, try again\n"
 msgstr "Slæm hugmynd, reyndu aftur\n"
 
-#: ../interactive_stdio.pm_.c:39
+#: ../../interactive_stdio.pm_.c:39
 #, c-format
 msgid " ? (default %s) "
 msgstr " ? (sjálfgefið %s) "
 
-#: ../interactive_stdio.pm_.c:52
+#: ../../interactive_stdio.pm_.c:52
 #, c-format
 msgid "Your choice? (default %s) "
 msgstr "Þitt val? (sjálfgefið %s) "
 
-#: ../interactive_stdio.pm_.c:71
+#: ../../interactive_stdio.pm_.c:71
 #, c-format
 msgid "Your choice? (default %s  enter `none' for none) "
 msgstr "Þitt val? (sjálfgefið %s  sláðu inn  `none' fyrir engan) "
 
-#: ../keyboard.pm_.c:88
-msgid "Armenian"
-msgstr "Armenískt"
-
-#: ../keyboard.pm_.c:89
-msgid "Belgian"
-msgstr "Belgískt"
-
-#: ../keyboard.pm_.c:90
-msgid "Bulgarian"
-msgstr "Búlgarskt"
-
-#: ../keyboard.pm_.c:91
-msgid "Brazilian"
-msgstr "Brasilískt"
-
-#: ../keyboard.pm_.c:92
-msgid "Swiss (French layout)"
-msgstr "Svissneskt (frönsk uppsetn.)"
-
-#: ../keyboard.pm_.c:93
-msgid "Swiss (German layout)"
-msgstr "Svissneskt (þýsk uppsetn.)"
-
-#: ../keyboard.pm_.c:94
+#: ../../keyboard.pm_.c:89 ../../keyboard.pm_.c:116
 msgid "Czech"
 msgstr "Tékkneskt"
 
-#: ../keyboard.pm_.c:95
+#: ../../keyboard.pm_.c:90 ../../keyboard.pm_.c:103 ../../keyboard.pm_.c:117
 msgid "German"
 msgstr "Þýskt"
 
-#: ../keyboard.pm_.c:96
-msgid "Danish"
-msgstr "Danskt"
-
-#: ../keyboard.pm_.c:97
+#: ../../keyboard.pm_.c:91 ../../keyboard.pm_.c:120
 msgid "Dvorak"
 msgstr "Dvorak"
 
-#: ../keyboard.pm_.c:98
-msgid "Estonian"
-msgstr "Eistlenskt"
-
-#: ../keyboard.pm_.c:99
+#: ../../keyboard.pm_.c:92 ../../keyboard.pm_.c:122
 msgid "Spanish"
 msgstr "Spænskt"
 
-#: ../keyboard.pm_.c:100
+#: ../../keyboard.pm_.c:93 ../../keyboard.pm_.c:123
 msgid "Finnish"
 msgstr "Finnskt"
 
-#: ../keyboard.pm_.c:101
+#: ../../keyboard.pm_.c:94 ../../keyboard.pm_.c:104 ../../keyboard.pm_.c:124
 msgid "French"
 msgstr "Franskt"
 
-#: ../keyboard.pm_.c:102
-msgid "Georgian (\"Russian\" layout)"
-msgstr "Georgískt (\"Rússneskt\")"
-
-#: ../keyboard.pm_.c:103
-msgid "Georgian (\"Latin\" layout)"
-msgstr "Georgískt (\"Latínu\")"
-
-#: ../keyboard.pm_.c:104
-msgid "Greek"
-msgstr "Grískt"
-
-#: ../keyboard.pm_.c:105
-msgid "Hungarian"
-msgstr "Ungverskt"
-
-#: ../keyboard.pm_.c:106
-msgid "Israeli"
-msgstr "Ísraelískt"
-
-#: ../keyboard.pm_.c:107
-msgid "Israeli (Phonetic)"
-msgstr "Ísraelískt (hljóðfr.)"
-
-#: ../keyboard.pm_.c:108
-msgid "Icelandic"
-msgstr "Íslenskt"
-
-#: ../keyboard.pm_.c:109
-msgid "Italian"
-msgstr "Ítalskt"
-
-#: ../keyboard.pm_.c:110
-msgid "Latin American"
-msgstr "Suður amerískt"
-
-#: ../keyboard.pm_.c:112
-msgid "Dutch"
-msgstr "Hollenskt"
-
-#: ../keyboard.pm_.c:113
-msgid "Lithuanian AZERTY"
-msgstr "Litháenískt AZERTY"
-
-#: ../keyboard.pm_.c:114
-msgid "Lithuanian \"number row\" QWERTY"
-msgstr "Litháenískt \"töluröð\" QWERTY"
-
-#: ../keyboard.pm_.c:115
-msgid "Lithuanian \"phonetic\" QWERTY"
-msgstr "Litháenískt \"hljóðfræðilegt\" QWERTY"
-
-#: ../keyboard.pm_.c:116
+#: ../../keyboard.pm_.c:95 ../../keyboard.pm_.c:143
 msgid "Norwegian"
 msgstr "Norkst"
 
-#: ../keyboard.pm_.c:117
+#: ../../keyboard.pm_.c:96
 msgid "Polish"
 msgstr "Pólskt"
 
-#: ../keyboard.pm_.c:118
-msgid "Portuguese"
-msgstr "Portúgískt"
-
-#: ../keyboard.pm_.c:119
-msgid "Canadian (Quebec)"
-msgstr "Kanadískt (Quebec)"
-
-#: ../keyboard.pm_.c:120
+#: ../../keyboard.pm_.c:97 ../../keyboard.pm_.c:148
 msgid "Russian"
 msgstr "Rússneskt"
 
-#: ../keyboard.pm_.c:121
-msgid "Russian (Yawerty)"
-msgstr "Rússneskt (Yawerty)"
-
-#: ../keyboard.pm_.c:122
-msgid "Swedish"
-msgstr "Sænskt"
-
-#: ../keyboard.pm_.c:123
-msgid "Slovenian"
-msgstr "Slóvenskt"
-
-#: ../keyboard.pm_.c:124
-msgid "Slovakian"
-msgstr "Slóvakískt"
-
-#: ../keyboard.pm_.c:125
-msgid "Thai keyboard"
-msgstr "Thælenskt lyklaborð"
-
-#: ../keyboard.pm_.c:126
-msgid "Turkish (traditional \"F\" model)"
-msgstr "Tyrkneskt (hefðbundið \"F\" módel)"
-
-#: ../keyboard.pm_.c:127
-msgid "Turkish (modern \"Q\" model)"
-msgstr "Tyrkneskt (nútíma \"Q\" módel)"
-
-#: ../keyboard.pm_.c:128
-msgid "Ukrainian"
-msgstr "Úkraínkst"
-
-#: ../keyboard.pm_.c:129
+#: ../../keyboard.pm_.c:98 ../../keyboard.pm_.c:157
 msgid "UK keyboard"
 msgstr "Breskt lyklaborð"
 
-#: ../keyboard.pm_.c:130
+#: ../../keyboard.pm_.c:99 ../../keyboard.pm_.c:102 ../../keyboard.pm_.c:158
 msgid "US keyboard"
 msgstr "Bandarískt lyklaborð"
 
-#: ../keyboard.pm_.c:131
+#: ../../keyboard.pm_.c:106
+#, fuzzy
+msgid "Armenian (old)"
+msgstr "Armenískt"
+
+#: ../../keyboard.pm_.c:107
+#, fuzzy
+msgid "Armenian (typewriter)"
+msgstr "Armenískt (hljóðfræðilegt)"
+
+#: ../../keyboard.pm_.c:108
+msgid "Armenian (phonetic)"
+msgstr "Armenískt (hljóðfræðilegt)"
+
+#: ../../keyboard.pm_.c:111
+msgid "Belgian"
+msgstr "Belgískt"
+
+#: ../../keyboard.pm_.c:112
+msgid "Bulgarian"
+msgstr "Búlgarskt"
+
+#: ../../keyboard.pm_.c:113
+msgid "Brazilian (ABNT-2)"
+msgstr "Brasilískt"
+
+#: ../../keyboard.pm_.c:114
+msgid "Swiss (German layout)"
+msgstr "Svissneskt (þýsk uppsetn.)"
+
+#: ../../keyboard.pm_.c:115
+msgid "Swiss (French layout)"
+msgstr "Svissneskt (frönsk uppsetn.)"
+
+#: ../../keyboard.pm_.c:118
+msgid "German (no dead keys)"
+msgstr ""
+
+#: ../../keyboard.pm_.c:119
+msgid "Danish"
+msgstr "Danskt"
+
+#: ../../keyboard.pm_.c:121
+msgid "Estonian"
+msgstr "Eistlenskt"
+
+#: ../../keyboard.pm_.c:125
+msgid "Georgian (\"Russian\" layout)"
+msgstr "Georgískt (\"Rússneskt\")"
+
+#: ../../keyboard.pm_.c:126
+msgid "Georgian (\"Latin\" layout)"
+msgstr "Georgískt (\"Latínu\")"
+
+#: ../../keyboard.pm_.c:127
+msgid "Greek"
+msgstr "Grískt"
+
+#: ../../keyboard.pm_.c:128
+msgid "Hungarian"
+msgstr "Ungverskt"
+
+#: ../../keyboard.pm_.c:129
+msgid "Croatian"
+msgstr ""
+
+#: ../../keyboard.pm_.c:130
+msgid "Israeli"
+msgstr "Ísraelískt"
+
+#: ../../keyboard.pm_.c:131
+msgid "Israeli (Phonetic)"
+msgstr "Ísraelískt (hljóðfr.)"
+
+#: ../../keyboard.pm_.c:134
+msgid "Icelandic"
+msgstr "Íslenskt"
+
+#: ../../keyboard.pm_.c:135
+msgid "Italian"
+msgstr "Ítalskt"
+
+#: ../../keyboard.pm_.c:136
+msgid "Latin American"
+msgstr "Suður amerískt"
+
+#: ../../keyboard.pm_.c:137
+msgid "Dutch"
+msgstr "Hollenskt"
+
+#: ../../keyboard.pm_.c:138
+#, fuzzy
+msgid "Lithuanian AZERTY (old)"
+msgstr "Litháenískt AZERTY"
+
+#: ../../keyboard.pm_.c:140
+#, fuzzy
+msgid "Lithuanian AZERTY (new)"
+msgstr "Litháenískt AZERTY"
+
+#: ../../keyboard.pm_.c:141
+msgid "Lithuanian \"number row\" QWERTY"
+msgstr "Litháenískt \"töluröð\" QWERTY"
+
+#: ../../keyboard.pm_.c:142
+msgid "Lithuanian \"phonetic\" QWERTY"
+msgstr "Litháenískt \"hljóðfræðilegt\" QWERTY"
+
+#: ../../keyboard.pm_.c:144
+#, fuzzy
+msgid "Polish (qwerty layout)"
+msgstr "Svissneskt (þýsk uppsetn.)"
+
+#: ../../keyboard.pm_.c:145
+#, fuzzy
+msgid "Polish (qwertz layout)"
+msgstr "Svissneskt (þýsk uppsetn.)"
+
+#: ../../keyboard.pm_.c:146
+msgid "Portuguese"
+msgstr "Portúgískt"
+
+#: ../../keyboard.pm_.c:147
+msgid "Canadian (Quebec)"
+msgstr "Kanadískt (Quebec)"
+
+#: ../../keyboard.pm_.c:149
+msgid "Russian (Yawerty)"
+msgstr "Rússneskt (Yawerty)"
+
+#: ../../keyboard.pm_.c:150
+msgid "Swedish"
+msgstr "Sænskt"
+
+#: ../../keyboard.pm_.c:151
+msgid "Slovenian"
+msgstr "Slóvenskt"
+
+#: ../../keyboard.pm_.c:152
+msgid "Slovakian"
+msgstr "Slóvakískt"
+
+#: ../../keyboard.pm_.c:153
+msgid "Thai keyboard"
+msgstr "Thælenskt lyklaborð"
+
+#: ../../keyboard.pm_.c:154
+msgid "Turkish (traditional \"F\" model)"
+msgstr "Tyrkneskt (hefðbundið \"F\" módel)"
+
+#: ../../keyboard.pm_.c:155
+msgid "Turkish (modern \"Q\" model)"
+msgstr "Tyrkneskt (nútíma \"Q\" módel)"
+
+#: ../../keyboard.pm_.c:156
+msgid "Ukrainian"
+msgstr "Úkraínkst"
+
+#: ../../keyboard.pm_.c:159
 msgid "US keyboard (international)"
 msgstr "Bandarískt (alþjóðlegt)"
 
-#: ../keyboard.pm_.c:132
+#: ../../keyboard.pm_.c:160
 msgid "Yugoslavian (latin layout)"
 msgstr "Júgoslavneskt (Latínu upps.)"
 
@@ -3232,7 +3731,7 @@ msgstr "Júgoslavneskt (Latínu upps.)"
 # '\243' is 'ú' (oacute) in cp437 encoding
 # there is no 'þ' nor 'ð' in cp437; changed respectively to 'th' and 'd'
 #
-#: ../lilo.pm_.c:142
+#: ../../lilo.pm_.c:176
 #, c-format
 msgid ""
 "Welcome to LILO the operating system chooser!\n"
@@ -3251,131 +3750,213 @@ msgstr ""
 "eda b¡ddu ¡ %d sek£ndur thar til sj lfgefin r‘sing hefst.\n"
 "\n"
 
-#: ../mouse.pm_.c:20
-msgid "No Mouse"
-msgstr "Engin mús"
+# NOTE: this message will be displayed by grub at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is the nsuggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+#
+# The lines must fit on screen, aka length < 80
+# and only one line per string for the GRUB messages
+#
+#: ../../lilo.pm_.c:431
+msgid "Welcome to GRUB the operating system chooser!"
+msgstr ""
 
-#: ../mouse.pm_.c:21
-msgid "Microsoft Rev 2.1A or higher (serial)"
-msgstr "Microsoft útgáfa 2.1A eða nýrri (raðtengd)"
+#: ../../lilo.pm_.c:432
+#, c-format
+msgid "Use the %c and %c keys for selecting which entry is highlighted."
+msgstr ""
 
-#: ../mouse.pm_.c:22
-msgid "Logitech CC Series (serial)"
-msgstr "Logitech CC Series (raðtengd)"
+#: ../../lilo.pm_.c:433
+msgid "Press enter to boot the selected OS, 'e' to edit the"
+msgstr ""
 
-#: ../mouse.pm_.c:23
-msgid "Logitech MouseMan+/FirstMouse+ (serial)"
-msgstr "Logitech MouseMan+/FirstMouse+ (raðtengd)"
+#: ../../lilo.pm_.c:434
+msgid "commands before booting, or 'c' for a command-line."
+msgstr ""
 
-#: ../mouse.pm_.c:24
-msgid "ASCII MieMouse (serial)"
-msgstr "ASCII MieMouse (raðtengd)"
+#: ../../lilo.pm_.c:435
+#, c-format
+msgid "The highlighted entry will be booted automatically in %d seconds."
+msgstr ""
 
-#: ../mouse.pm_.c:25
-msgid "Genius NetMouse (serial)"
-msgstr "Genius NetMouse (raðtengd)"
+#: ../../lilo.pm_.c:439
+msgid "not enough room in /boot"
+msgstr ""
 
-#: ../mouse.pm_.c:26
-msgid "Microsoft IntelliMouse (serial)"
-msgstr "Microsoft IntelliMouse (raðtengd)"
+#. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
+#: ../../lilo.pm_.c:518
+msgid "Desktop"
+msgstr ""
 
-#: ../mouse.pm_.c:27
-msgid "MM Series (serial)"
-msgstr "MM Series (raðtengd)"
+#: ../../lilo.pm_.c:518
+msgid "Start Menu"
+msgstr ""
 
-#: ../mouse.pm_.c:28
-msgid "MM HitTablet (serial)"
-msgstr "MM HitTablet (raðtengd)"
+#: ../../mouse.pm_.c:21
+#, fuzzy
+msgid "Sun - Mouse"
+msgstr "USB mús"
 
-#: ../mouse.pm_.c:29
-msgid "Logitech Mouse (serial, old C7 type)"
-msgstr "Logitech mús (raðtengd, gömul C7 tegund)"
+#: ../../mouse.pm_.c:23
+#, fuzzy
+msgid "Apple ADB Mouse"
+msgstr "ATI brautarmús"
 
-#: ../mouse.pm_.c:30
-msgid "Logitech MouseMan/FirstMouse (serial)"
-msgstr "Logitech MouseMan/FirstMouse (raðtengd)"
+#: ../../mouse.pm_.c:24
+#, fuzzy
+msgid "Apple ADB Mouse (2 Buttons)"
+msgstr "USB mús (3 eða fleiri takkar)"
 
-#: ../mouse.pm_.c:31
-msgid "Generic Mouse (serial)"
-msgstr "Almenn mús (raðtengd)"
+#: ../../mouse.pm_.c:25
+#, fuzzy
+msgid "Apple ADB Mouse (3+ Buttons)"
+msgstr "USB mús (3 eða fleiri takkar)"
 
-#: ../mouse.pm_.c:32
-msgid "Microsoft compatible (serial)"
-msgstr "Microsoft samhæfð (raðtengd)"
+#: ../../mouse.pm_.c:26
+#, fuzzy
+msgid "Apple USB Mouse"
+msgstr "USB mús"
 
-#: ../mouse.pm_.c:33
-msgid "Generic 3 Button Mouse (serial)"
-msgstr "Almenn þriggja hnappa mús (raðtengd)"
+#: ../../mouse.pm_.c:27
+#, fuzzy
+msgid "Apple USB Mouse (2 Buttons)"
+msgstr "USB mús (3 eða fleiri takkar)"
 
-#: ../mouse.pm_.c:34
-msgid "Mouse Systems (serial)"
-msgstr "Mouse Systems (raðtengd)"
+#: ../../mouse.pm_.c:28
+#, fuzzy
+msgid "Apple USB Mouse (3+ Buttons)"
+msgstr "USB mús (3 eða fleiri takkar)"
 
-#: ../mouse.pm_.c:35
+#: ../../mouse.pm_.c:30
 msgid "Generic Mouse (PS/2)"
 msgstr "Almenn mús (PS/2)"
 
-#: ../mouse.pm_.c:36
+#: ../../mouse.pm_.c:31
 msgid "Logitech MouseMan/FirstMouse (ps/2)"
 msgstr "Logitech MouseMan/FirstMouse (ps/2)"
 
-#: ../mouse.pm_.c:37
+#: ../../mouse.pm_.c:32
 msgid "Generic 3 Button Mouse (PS/2)"
 msgstr "Almenn þriggja hnappa mús (PS/2)"
 
-#: ../mouse.pm_.c:38
+#: ../../mouse.pm_.c:33
 msgid "ALPS GlidePoint (PS/2)"
 msgstr "ALPS GlidePoint (PS/2)"
 
-#: ../mouse.pm_.c:39
+#: ../../mouse.pm_.c:34
 msgid "Logitech MouseMan+/FirstMouse+ (PS/2)"
 msgstr "Logitech MouseMan+/FirstMouse+ (PS/2)"
 
-#: ../mouse.pm_.c:40
+#: ../../mouse.pm_.c:35
 msgid "Kensington Thinking Mouse (PS/2)"
 msgstr "Kensington Thinking Mouse (PS/2)"
 
-#: ../mouse.pm_.c:41
+#: ../../mouse.pm_.c:36
 msgid "ASCII MieMouse (PS/2)"
 msgstr "ASCII MieMouse (PS/2)"
 
-#: ../mouse.pm_.c:42
+#: ../../mouse.pm_.c:37
 msgid "Genius NetMouse (PS/2)"
 msgstr "Genius NetMouse (PS/2)"
 
-#: ../mouse.pm_.c:43
+#: ../../mouse.pm_.c:38
 msgid "Genius NetMouse Pro (PS/2)"
 msgstr "Genius NetMouse Pro (PS/2)"
 
-#: ../mouse.pm_.c:44
+#: ../../mouse.pm_.c:39
 msgid "Genius NetScroll (PS/2)"
 msgstr "Genius NetScroll (PS/2)"
 
-#: ../mouse.pm_.c:45
+#: ../../mouse.pm_.c:40
 msgid "Microsoft IntelliMouse (PS/2)"
 msgstr "Microsoft IntelliMouse (PS/2)"
 
-#: ../mouse.pm_.c:46
+#: ../../mouse.pm_.c:41
 msgid "ATI Bus Mouse"
 msgstr "ATI brautarmús"
 
-#: ../mouse.pm_.c:47
+#: ../../mouse.pm_.c:42
 msgid "Microsoft Bus Mouse"
 msgstr "Microsoft brautarmús"
 
-#: ../mouse.pm_.c:48
+#: ../../mouse.pm_.c:43
 msgid "Logitech Bus Mouse"
 msgstr "Logitech brautarmús"
 
-#: ../mouse.pm_.c:49
+#: ../../mouse.pm_.c:44
 msgid "USB Mouse"
 msgstr "USB mús"
 
-#: ../mouse.pm_.c:50
+#: ../../mouse.pm_.c:45
 msgid "USB Mouse (3 buttons or more)"
 msgstr "USB mús (3 eða fleiri takkar)"
 
-#: ../partition_table.pm_.c:486
+#: ../../mouse.pm_.c:47
+msgid "No Mouse"
+msgstr "Engin mús"
+
+#: ../../mouse.pm_.c:48
+msgid "Microsoft Rev 2.1A or higher (serial)"
+msgstr "Microsoft útgáfa 2.1A eða nýrri (raðtengd)"
+
+#: ../../mouse.pm_.c:49
+msgid "Logitech CC Series (serial)"
+msgstr "Logitech CC Series (raðtengd)"
+
+#: ../../mouse.pm_.c:50
+msgid "Logitech MouseMan+/FirstMouse+ (serial)"
+msgstr "Logitech MouseMan+/FirstMouse+ (raðtengd)"
+
+#: ../../mouse.pm_.c:51
+msgid "ASCII MieMouse (serial)"
+msgstr "ASCII MieMouse (raðtengd)"
+
+#: ../../mouse.pm_.c:52
+msgid "Genius NetMouse (serial)"
+msgstr "Genius NetMouse (raðtengd)"
+
+#: ../../mouse.pm_.c:53
+msgid "Microsoft IntelliMouse (serial)"
+msgstr "Microsoft IntelliMouse (raðtengd)"
+
+#: ../../mouse.pm_.c:54
+msgid "MM Series (serial)"
+msgstr "MM Series (raðtengd)"
+
+#: ../../mouse.pm_.c:55
+msgid "MM HitTablet (serial)"
+msgstr "MM HitTablet (raðtengd)"
+
+#: ../../mouse.pm_.c:56
+msgid "Logitech Mouse (serial, old C7 type)"
+msgstr "Logitech mús (raðtengd, gömul C7 tegund)"
+
+#: ../../mouse.pm_.c:57
+msgid "Logitech MouseMan/FirstMouse (serial)"
+msgstr "Logitech MouseMan/FirstMouse (raðtengd)"
+
+#: ../../mouse.pm_.c:58
+msgid "Generic Mouse (serial)"
+msgstr "Almenn mús (raðtengd)"
+
+#: ../../mouse.pm_.c:59
+msgid "Microsoft compatible (serial)"
+msgstr "Microsoft samhæfð (raðtengd)"
+
+#: ../../mouse.pm_.c:60
+msgid "Generic 3 Button Mouse (serial)"
+msgstr "Almenn þriggja hnappa mús (raðtengd)"
+
+#: ../../mouse.pm_.c:61
+msgid "Mouse Systems (serial)"
+msgstr "Mouse Systems (raðtengd)"
+
+#: ../../my_gtk.pm_.c:459
+msgid "Is this correct?"
+msgstr "Er þetta rétt?"
+
+#: ../../partition_table.pm_.c:533
 msgid ""
 "You have a hole in your partition table but I can't use it.\n"
 "The only solution is to move your primary partitions to have the hole next "
@@ -3385,113 +3966,136 @@ msgstr ""
 "Eina lausnins er að færa aðalsneiðar svo að gatið verði við hliðina á "
 "viðbótasneið"
 
-#: ../partition_table.pm_.c:572
+#: ../../partition_table.pm_.c:621
 #, c-format
 msgid "Error reading file %s"
 msgstr "villa við lestur úr skránni %s"
 
-#: ../partition_table.pm_.c:579
+#: ../../partition_table.pm_.c:628
 #, c-format
 msgid "Restoring from file %s failed: %s"
 msgstr "Villa við lestur úr skránni %s: %s"
 
-#: ../partition_table.pm_.c:581
+#: ../../partition_table.pm_.c:630
 msgid "Bad backup file"
 msgstr "Skemmd afritsskrá"
 
-#: ../partition_table.pm_.c:602
+#: ../../partition_table.pm_.c:651
 #, c-format
 msgid "Error writing to file %s"
 msgstr "Villa við að skrifa í skrána %s"
 
-#: ../placeholder.pm_.c:5
+#: ../../pkgs.pm_.c:20
+msgid "mandatory"
+msgstr ""
+
+#: ../../pkgs.pm_.c:21
+msgid "must have"
+msgstr ""
+
+#: ../../pkgs.pm_.c:22
+msgid "important"
+msgstr ""
+
+#: ../../pkgs.pm_.c:24
+msgid "very nice"
+msgstr ""
+
+#: ../../pkgs.pm_.c:25
+#, fuzzy
+msgid "nice"
+msgstr "tæki"
+
+#: ../../pkgs.pm_.c:26 ../../pkgs.pm_.c:27
+#, fuzzy
+msgid "interesting"
+msgstr "Endursníð..."
+
+#: ../../pkgs.pm_.c:28 ../../pkgs.pm_.c:29
+#, fuzzy
+msgid "maybe"
+msgstr "Ræsikjarna"
+
+#: ../../pkgs.pm_.c:30
+msgid "useless"
+msgstr ""
+
+#: ../../pkgs.pm_.c:31
+msgid "garbage"
+msgstr ""
+
+#: ../../pkgs.pm_.c:33
+msgid "i18n (important)"
+msgstr ""
+
+#: ../../pkgs.pm_.c:34
+msgid "i18n (very nice)"
+msgstr ""
+
+#: ../../pkgs.pm_.c:35
+msgid "i18n (nice)"
+msgstr ""
+
+#: ../../placeholder.pm_.c:5
 msgid "Show less"
 msgstr "Sýna færri"
 
-#: ../placeholder.pm_.c:6
+#: ../../placeholder.pm_.c:6
 msgid "Show more"
 msgstr "Sýna fleiri"
 
-#: ../printer.pm_.c:244
+#: ../../printer.pm_.c:244
 msgid "Local printer"
 msgstr "Staðbundinn prentari"
 
-#: ../printer.pm_.c:245
+#: ../../printer.pm_.c:245
 msgid "Remote lpd"
 msgstr "Fjartengdur"
 
-#: ../printer.pm_.c:246
+#: ../../printer.pm_.c:246
 msgid "SMB/Windows 95/98/NT"
 msgstr "SMB/Windows 95/98/NT"
 
-#: ../printer.pm_.c:247
+#: ../../printer.pm_.c:247
 msgid "NetWare"
 msgstr "NetWare"
 
-#: ../printerdrake.pm_.c:75
-msgid "Local Printer Options"
-msgstr "Viðföng staðbundinna prentara"
-
-#: ../printerdrake.pm_.c:76
-msgid ""
-"Every print queue (which print jobs are directed to) needs a\n"
-"name (often lp) and a spool directory associated with it. What\n"
-"name and directory should be used for this queue?"
-msgstr ""
-"Allar prentraðir (sem taka við prentverkum) þurfa heiti\n"
-"(oft bara lp) og möppu. Hvaða heiti og möppu viltu nota fyrir\n"
-"þessa prentröð?"
-
-#: ../printerdrake.pm_.c:79
-msgid "Name of queue:"
-msgstr "Heiti prentraðar:"
-
-#: ../printerdrake.pm_.c:79
-msgid "Spool directory:"
-msgstr "Mappa prentraðar:"
-
-#: ../printerdrake.pm_.c:90
-msgid "Select Printer Connection"
-msgstr "Veldu prenttengingu"
-
-#: ../printerdrake.pm_.c:91
-msgid "How is the printer connected?"
-msgstr "Hvernig er þessi prentari tengdur?"
-
-#: ../printerdrake.pm_.c:99
+#: ../../printerdrake.pm_.c:19
 msgid "Detecting devices..."
 msgstr "Leita að tækjum..."
 
-#: ../printerdrake.pm_.c:99
+#: ../../printerdrake.pm_.c:19
 msgid "Test ports"
 msgstr "Prófa tengi"
 
-#: ../printerdrake.pm_.c:112
+#: ../../printerdrake.pm_.c:35
 #, c-format
 msgid "A printer, model \"%s\", has been detected on "
 msgstr "Prentari af gerðinni \"%s\" fannst á "
 
-#: ../printerdrake.pm_.c:119
+#: ../../printerdrake.pm_.c:44
 msgid "Local Printer Device"
 msgstr "Staðbundið prenttæki"
 
-#: ../printerdrake.pm_.c:120
+#: ../../printerdrake.pm_.c:45
+#, fuzzy
 msgid ""
-"What device is your printer connected to  \n"
+"What device is your printer connected to \n"
 "(note that /dev/lp0 is equivalent to LPT1:)?\n"
 msgstr ""
 "Við hvaða tæki er prentarinn þinn tengdur\n"
 " (Athugaðu að /dev/lp0 er það sama og LPT1:)?\n"
 
-#: ../printerdrake.pm_.c:121
-msgid "Printer Device:"
+#: ../../printerdrake.pm_.c:47
+#, fuzzy
+msgid "Printer Device"
 msgstr "Prenttæki:"
 
-#: ../printerdrake.pm_.c:125
+#: ../../printerdrake.pm_.c:62
 msgid "Remote lpd Printer Options"
 msgstr "Viðföng fyrir fjartengda lpd prentara"
 
-#: ../printerdrake.pm_.c:126
+#: ../../printerdrake.pm_.c:63
 msgid ""
 "To use a remote lpd print queue, you need to supply\n"
 "the hostname of the printer server and the queue name\n"
@@ -3501,19 +4105,20 @@ msgstr ""
 "upp vélarheiti prentþjónsins og prentröðina á þeim sem\n"
 "þú vilt senda prentverkin í."
 
-#: ../printerdrake.pm_.c:129
-msgid "Remote hostname:"
+#: ../../printerdrake.pm_.c:66
+#, fuzzy
+msgid "Remote hostname"
 msgstr "Prentþjónn:"
 
-#: ../printerdrake.pm_.c:129
+#: ../../printerdrake.pm_.c:67
 msgid "Remote queue"
 msgstr "Fjartengd prentröð"
 
-#: ../printerdrake.pm_.c:134
+#: ../../printerdrake.pm_.c:75
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr "SMB/Windows 9x/NT prentviðföng"
 
-#: ../printerdrake.pm_.c:135
+#: ../../printerdrake.pm_.c:76
 msgid ""
 "To print to a SMB printer, you need to provide the\n"
 "SMB host name (Note! It may be different from its\n"
@@ -3527,35 +4132,27 @@ msgstr ""
 "ásamt samnýtingarheiti prentarans, notandaheiti, lykilorði og\n"
 "vinnuhópsupplýsingum fyrir prentarann."
 
-#: ../printerdrake.pm_.c:140
-msgid "SMB server IP:"
-msgstr "Vistfang SMB þjóns:"
+#: ../../printerdrake.pm_.c:81
+msgid "SMB server host"
+msgstr "Heiti SMB þjóns"
 
-#: ../printerdrake.pm_.c:140
-msgid "SMB server host:"
-msgstr "Heiti SMB þjóns:"
+#: ../../printerdrake.pm_.c:82
+msgid "SMB server IP"
+msgstr "Vistfang SMB þjóns"
 
-#: ../printerdrake.pm_.c:141 ../printerdrake.pm_.c:163
-msgid "Password:"
-msgstr "Lykilorð:"
+#: ../../printerdrake.pm_.c:83
+msgid "Share name"
+msgstr "Samnýtingarheiti"
 
-#: ../printerdrake.pm_.c:141
-msgid "Share name:"
-msgstr "Samnýtingarheiti:"
+#: ../../printerdrake.pm_.c:86
+msgid "Workgroup"
+msgstr "Vinnuhópur"
 
-#: ../printerdrake.pm_.c:141 ../printerdrake.pm_.c:163
-msgid "User name:"
-msgstr "Notandaheiti:"
-
-#: ../printerdrake.pm_.c:142
-msgid "Workgroup:"
-msgstr "Vinnuhópur:"
-
-#: ../printerdrake.pm_.c:157
+#: ../../printerdrake.pm_.c:102
 msgid "NetWare Printer Options"
 msgstr "Viðföng NetWare prentara"
 
-#: ../printerdrake.pm_.c:158
+#: ../../printerdrake.pm_.c:103
 msgid ""
 "To print to a NetWare printer, you need to provide the\n"
 "NetWare print server name (Note! it may be different from its\n"
@@ -3567,67 +4164,96 @@ msgstr ""
 "ásamt heiti prentaraðar, notandaheiti og lykilorði fyrir\n"
 "prentarann."
 
-#: ../printerdrake.pm_.c:162
-msgid "Print Queue Name:"
-msgstr "Heiti prentraðar:"
+#: ../../printerdrake.pm_.c:107
+msgid "Printer Server"
+msgstr "Prentþjónn"
 
-#: ../printerdrake.pm_.c:162
-msgid "Printer Server:"
-msgstr "Prentþjónn:"
+#: ../../printerdrake.pm_.c:108
+msgid "Print Queue Name"
+msgstr "Heiti prentraðar"
 
-#: ../printerdrake.pm_.c:173
+#: ../../printerdrake.pm_.c:121
 msgid "Yes, print ASCII test page"
 msgstr "Já, prenta ASCII prufusíðu"
 
-#: ../printerdrake.pm_.c:174
+#: ../../printerdrake.pm_.c:122
 msgid "Yes, print PostScript test page"
 msgstr "Já, prenta PostScript prufusíðu"
 
-#: ../printerdrake.pm_.c:175
+#: ../../printerdrake.pm_.c:123
 msgid "Yes, print both test pages"
 msgstr "Já, prenta báðar prufusíður"
 
-#: ../printerdrake.pm_.c:183
+#: ../../printerdrake.pm_.c:130
 msgid "Configure Printer"
 msgstr "Stilla prentara"
 
-#: ../printerdrake.pm_.c:184
+#: ../../printerdrake.pm_.c:131
 msgid "What type of printer do you have?"
 msgstr "Hvernig prentara ertu með?"
 
-#: ../printerdrake.pm_.c:206
+#: ../../printerdrake.pm_.c:163
 msgid "Printer options"
 msgstr "Stillingar á prentara"
 
-#: ../printerdrake.pm_.c:207
+#: ../../printerdrake.pm_.c:164
 msgid "Paper Size"
 msgstr "Pappírsstærð"
 
-#: ../printerdrake.pm_.c:208
+#: ../../printerdrake.pm_.c:165
 msgid "Eject page after job?"
 msgstr "Koma blaðsíðu út eftirá?"
 
-#: ../printerdrake.pm_.c:211
-msgid "Fix stair-stepping text?"
-msgstr "Afstalla texta (tröppurnar)?"
-
-#: ../printerdrake.pm_.c:214
+#: ../../printerdrake.pm_.c:170
 msgid "Uniprint driver options"
 msgstr "Uniprint rekilvalkostir"
 
-#: ../printerdrake.pm_.c:215
+#: ../../printerdrake.pm_.c:171
 msgid "Color depth options"
 msgstr "Stillingar á litadýpt"
 
-#: ../printerdrake.pm_.c:225
+#: ../../printerdrake.pm_.c:173
+msgid "Print text as PostScript?"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:174
+msgid "Reverse page order"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:176
+msgid "Fix stair-stepping text?"
+msgstr "Afstalla texta (tröppurnar)?"
+
+#: ../../printerdrake.pm_.c:179
+msgid "Number of pages per output pages"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:180
+msgid "Right/Left margins in points (1/72 of inch)"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:181
+msgid "Top/Bottom margins in points (1/72 of inch)"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:184
+msgid "Extra GhostScript options"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:187
+#, fuzzy
+msgid "Extra Text options"
+msgstr "Stillingar á litadýpt"
+
+#: ../../printerdrake.pm_.c:198
 msgid "Do you want to test printing?"
 msgstr "Viltu prenta út prufublaðsíðu?"
 
-#: ../printerdrake.pm_.c:236
+#: ../../printerdrake.pm_.c:210
 msgid "Printing test page(s)..."
 msgstr "Prenta út prufublaðsíðu(r)..."
 
-#: ../printerdrake.pm_.c:254
+#: ../../printerdrake.pm_.c:218
 #, c-format
 msgid ""
 "Test page(s) have been sent to the printer daemon.\n"
@@ -3638,41 +4264,323 @@ msgid ""
 "Does it work properly?"
 msgstr ""
 
-#: ../printerdrake.pm_.c:258
+#: ../../printerdrake.pm_.c:222
 msgid ""
 "Test page(s) have been sent to the printer daemon.\n"
 "This may take a little time before printer start.\n"
 "Does it work properly?"
 msgstr ""
 
-#: ../raid.pm_.c:36
+#: ../../printerdrake.pm_.c:238
+msgid "Printer"
+msgstr "Prentari"
+
+#: ../../printerdrake.pm_.c:239
+msgid "Would you like to configure a printer?"
+msgstr "Viltu setja upp prentara?"
+
+#: ../../printerdrake.pm_.c:243
+#, fuzzy
+msgid ""
+"Here are the following print queues.\n"
+"You can add some more or change the existing ones."
+msgstr ""
+"Hérna eru núverandi stillingar LILO .\n"
+"Þú getur bætt við fleirum eða breytt þessum."
+
+#: ../../printerdrake.pm_.c:266 ../../printerdrake.pm_.c:272
+msgid "Select Printer Connection"
+msgstr "Veldu prenttengingu"
+
+#: ../../printerdrake.pm_.c:267
+msgid "How is the printer connected?"
+msgstr "Hvernig er þessi prentari tengdur?"
+
+#: ../../printerdrake.pm_.c:272
+#, fuzzy
+msgid "Remove queue"
+msgstr "Fjartengd prentröð"
+
+#: ../../printerdrake.pm_.c:273
+#, fuzzy
+msgid ""
+"Every print queue (which print jobs are directed to) needs a\n"
+"name (often lp) and a spool directory associated with it. What\n"
+"name and directory should be used for this queue and how is the printer "
+"connected?"
+msgstr ""
+"Allar prentraðir (sem taka við prentverkum) þurfa heiti\n"
+"(oft bara lp) og möppu. Hvaða heiti og möppu viltu nota fyrir\n"
+"þessa prentröð?"
+
+#: ../../printerdrake.pm_.c:276
+#, fuzzy
+msgid "Name of queue"
+msgstr "Heiti prentraðar:"
+
+#: ../../printerdrake.pm_.c:277
+#, fuzzy
+msgid "Spool directory"
+msgstr "Mappa prentraðar:"
+
+#: ../../printerdrake.pm_.c:278
+#, fuzzy
+msgid "Printer Connection"
+msgstr "Veldu prenttengingu"
+
+#: ../../raid.pm_.c:36
 #, c-format
 msgid "Can't add a partition to _formatted_ RAID md%d"
 msgstr ""
 
-#: ../raid.pm_.c:106
+#: ../../raid.pm_.c:106
 msgid "Can't write file $file"
 msgstr ""
 
-#: ../raid.pm_.c:146
+#: ../../raid.pm_.c:131
+msgid "mkraid failed"
+msgstr ""
+
+#: ../../raid.pm_.c:131
+msgid "mkraid failed (maybe raidtools are missing?)"
+msgstr ""
+
+#: ../../raid.pm_.c:147
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "Ekki nógu margar disksneiðar fyrir RAID %d\n"
 
-#: ../standalone/draksec_.c:28
+#: ../../services.pm_.c:14
+msgid "Anacron a periodic command scheduler."
+msgstr ""
+
+#: ../../services.pm_.c:15
+msgid ""
+"apmd is used for monitoring batery status and logging it via syslog.\n"
+"It can also be used for shutting down the machine when the battery is low."
+msgstr ""
+
+#: ../../services.pm_.c:17
+msgid ""
+"Runs commands scheduled by the at command at the time specified when\n"
+"at was run, and runs batch commands when the load average is low enough."
+msgstr ""
+
+#: ../../services.pm_.c:19
+msgid ""
+"cron is a standard UNIX program that runs user-specified programs\n"
+"at periodic scheduled times. vixie cron adds a number of features to the "
+"basic\n"
+"UNIX cron, including better security and more powerful configuration options."
+msgstr ""
+
+#: ../../services.pm_.c:22
+msgid ""
+"GPM adds mouse support to text-based Linux applications such the\n"
+"Midnight Commander. It also allows mouse-based console cut-and-paste "
+"operations,\n"
+"and includes support for pop-up menus on the console."
+msgstr ""
+
+#: ../../services.pm_.c:25
+msgid ""
+"Apache is a World Wide Web server.  It is used to serve HTML files\n"
+"and CGI."
+msgstr ""
+
+#: ../../services.pm_.c:27
+msgid ""
+"The internet superserver daemon (commonly called inetd) starts a\n"
+"variety of other internet services as needed. It is responsible for "
+"starting\n"
+"many services, including telnet, ftp, rsh, and rlogin. Disabling inetd "
+"disables\n"
+"all of the services it is responsible for."
+msgstr ""
+
+#: ../../services.pm_.c:31
+msgid ""
+"This package loads the selected keyboard map as set in\n"
+"/etc/sysconfig/keyboard.  This can be selected using the kbdconfig utility.\n"
+"You should leave this enabled for most machines."
+msgstr ""
+
+#: ../../services.pm_.c:34
+msgid ""
+"lpd is the print daemon required for lpr to work properly. It is\n"
+"basically a server that arbitrates print jobs to printer(s)."
+msgstr ""
+
+#: ../../services.pm_.c:36
+msgid ""
+"named (BIND) is a Domain Name Server (DNS) that is used to resolve\n"
+"host names to IP addresses."
+msgstr ""
+
+#: ../../services.pm_.c:38
+msgid ""
+"Mounts and unmounts all Network File System (NFS), SMB (Lan\n"
+"Manager/Windows), and NCP (NetWare) mount points."
+msgstr ""
+
+#: ../../services.pm_.c:40
+msgid ""
+"Activates/Deactivates all network interfaces configured to start\n"
+"at boot time."
+msgstr ""
+
+#: ../../services.pm_.c:42
+msgid ""
+"NFS is a popular protocol for file sharing across TCP/IP networks.\n"
+"This service provides NFS server functionality, which is configured via the\n"
+"/etc/exports file."
+msgstr ""
+
+#: ../../services.pm_.c:45
+msgid ""
+"NFS is a popular protocol for file sharing across TCP/IP\n"
+"networks. This service provides NFS file locking functionality."
+msgstr ""
+
+#: ../../services.pm_.c:47
+msgid ""
+"PCMCIA support is usually to support things like ethernet and\n"
+"modems in laptops.  It won't get started unless configured so it is safe to "
+"have\n"
+"it installed on machines that don't need it."
+msgstr ""
+
+#: ../../services.pm_.c:50
+msgid ""
+"The portmapper manages RPC connections, which are used by\n"
+"protocols such as NFS and NIS. The portmap server must be running on "
+"machines\n"
+"which act as servers for protocols which make use of the RPC mechanism."
+msgstr ""
+
+#: ../../services.pm_.c:53
+msgid ""
+"Postfix is a Mail Transport Agent, which is the program that\n"
+"moves mail from one machine to another."
+msgstr ""
+
+#: ../../services.pm_.c:55
+msgid ""
+"Saves and restores system entropy pool for higher quality random\n"
+"number generation."
+msgstr ""
+
+#: ../../services.pm_.c:57
+msgid ""
+"The routed daemon allows for automatic IP router table updated via\n"
+"the RIP protocol. While RIP is widely used on small networks, more complex\n"
+"routing protocols are needed for complex networks."
+msgstr ""
+
+#: ../../services.pm_.c:60
+msgid ""
+"The rstat protocol allows users on a network to retrieve\n"
+"performance metrics for any machine on that network."
+msgstr ""
+
+#: ../../services.pm_.c:62
+msgid ""
+"The rusers protocol allows users on a network to identify who is\n"
+"logged in on other responding machines."
+msgstr ""
+
+#: ../../services.pm_.c:64
+msgid ""
+"The rwho protocol lets remote users get a list of all of the users\n"
+"logged into a machine running the rwho daemon (similiar to finger)."
+msgstr ""
+
+#: ../../services.pm_.c:66
+msgid ""
+"Syslog is the facility by which many daemons use to log messages\n"
+"to various system log files.  It is a good idea to always run syslog."
+msgstr ""
+
+#: ../../services.pm_.c:68
+msgid "This startup script try to load your modules for your usb mouse."
+msgstr ""
+
+#: ../../services.pm_.c:69
+msgid "Starts and stops the X Font Server at boot time and shutdown."
+msgstr ""
+
+#: ../../services.pm_.c:92
+msgid "Choose which services should be automatically started at boot time"
+msgstr "Veldu þær þjónustur sem skal sjálfkrafa keyra við ræsingu"
+
+# NOTE: this message will be displayed by lilo at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is then suggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+# When possible cp437 accentuated letters can be used too.
+#
+# '\240' is 'á' (aacute) in cp437 encoding
+# '\224' is 'ö' (odiaeresis) in cp437 encoding.
+# '\221' is 'æ' (ae) in cp437 encoding
+# '\241' is 'í' (iacute) in cp437 encoding
+# '\242' is 'ó' (oacute) in cp437 encoding
+# '\230' is 'ý' (yacute) in cp437 encoding
+# '\243' is 'ú' (oacute) in cp437 encoding
+# there is no 'þ' nor 'ð' in cp437; changed respectively to 'th' and 'd'
+#
+#: ../../silo.pm_.c:116
+#, c-format
+msgid ""
+"Welcome to SILO the operating system chooser!\n"
+"\n"
+"To list the possible choices, press <TAB>.\n"
+"\n"
+"To load one of them, write its name and press <ENTER> or\n"
+"wait %d seconds for default boot.\n"
+"\n"
+msgstr ""
+"Velkomin(n) ¡ SILO st˜rikerfisr‘sistj¢rann!\n"
+"\n"
+"Sl du   <TAB> til ad f  lista yfir m”gulega valkosti.\n"
+"\n"
+"Til r‘sa einn af theim, sl du inn nafnid og s¡dan   <ENTER>\n"
+"eda b¡ddu ¡ %d sek£ndur thar til sj lfgefin r‘sing hefst.\n"
+"\n"
+
+#: ../../standalone/drakboot_.c:23
+#, fuzzy
+msgid "Configure LILO/GRUB"
+msgstr "Stilla X"
+
+#: ../../standalone/drakboot_.c:24
+#, fuzzy
+msgid "Create a boot floppy"
+msgstr "Búa til ræsidiskling"
+
+#: ../../standalone/drakboot_.c:25
+#, fuzzy
+msgid "Format floppy"
+msgstr "Forsníð"
+
+#: ../../standalone/drakboot_.c:36
+#, fuzzy
+msgid "Choice"
+msgstr "tæki"
+
+#: ../../standalone/draksec_.c:28
 msgid ""
 "This level is to be used with care. It makes your system more easy to use,\n"
 "but very sensitive: it must not be used for a machine connected to others\n"
 "or to the Internet. There is no password access."
 msgstr ""
 
-#: ../standalone/draksec_.c:31
+#: ../../standalone/draksec_.c:31
 msgid ""
 "Password are now enabled, but use as a networked computer is still not "
 "recommended."
 msgstr ""
 
-#: ../standalone/draksec_.c:32
+#: ../../standalone/draksec_.c:32
 msgid ""
 "Few improvements for this security level, the main one is that there are\n"
 "more security warnings and checks."
@@ -3680,7 +4588,7 @@ msgstr ""
 "Few improvements for this security level, the main one is that there are\n"
 "more security warnings and checks."
 
-#: ../standalone/draksec_.c:34
+#: ../../standalone/draksec_.c:34
 msgid ""
 "This is the standard security recommended for a computer that will be used\n"
 "to connect to the Internet as a client. There are now security checks. "
@@ -3688,7 +4596,7 @@ msgstr ""
 "Þetta er hið hefðbundna öryggi sem mælt er með fyrir tölvu sem verður notuð\n"
 "til að tengja við netið sem biðill. Öryggisathuganir eru núna í gangi. "
 
-#: ../standalone/draksec_.c:36
+#: ../../standalone/draksec_.c:36
 msgid ""
 "With this security level, the use of this system as a server becomes "
 "possible.\n"
@@ -3699,7 +4607,7 @@ msgstr ""
 "Öryggið er nógu nógu mikið til að taka við fyrirspurnum frá\n"
 "mörgum biðlum. "
 
-#: ../standalone/draksec_.c:39
+#: ../../standalone/draksec_.c:39
 msgid ""
 "We take level 4 features, but now the system is entirely closed.\n"
 "Security features are at their maximum."
@@ -3707,177 +4615,177 @@ msgstr ""
 "Kerfið er komið á 4. stig og er nú alveg lokað.\n"
 "Öryggið er á hæsta stigi."
 
-#: ../standalone/draksec_.c:49
+#: ../../standalone/draksec_.c:49
 msgid "Setting security level"
 msgstr "Stilli öryggisþrep"
 
-#: ../standalone/drakxconf_.c:21
+#: ../../standalone/drakxconf_.c:21
 msgid "Choose the tool you want to use"
 msgstr "Veldu forritið sem þú vilt nota"
 
-#: ../standalone/drakxservices_.c:21
-msgid "Choose which services should be automatically started at boot time"
-msgstr "Veldu þær þjónustur sem skal sjálfkrafa keyra við ræsingu"
+#: ../../standalone/keyboarddrake_.c:23
+msgid "What is your keyboard layout?"
+msgstr "Hvaða lyklaborðsuppsetningu viltu?"
 
-#: ../standalone/mousedrake_.c:30
+#: ../../standalone/mousedrake_.c:25
+msgid "What is the type of your mouse?"
+msgstr "Hvernig mús ertu með?"
+
+#: ../../standalone/mousedrake_.c:30
 msgid "no serial_usb found\n"
 msgstr "ekkert serial_usb fannst\n"
 
-#: ../standalone/mousedrake_.c:35
+#: ../../standalone/mousedrake_.c:35
 msgid "Emulate third button?"
 msgstr "Herma eftir þriðja hnapp?"
 
-#: ../standalone/rpmdrake_.c:25
+#: ../../standalone/mousedrake_.c:39
+msgid "Which serial port is your mouse connected to?"
+msgstr "Við hvaða raðtengi er músin þín tengd?"
+
+#: ../../standalone/rpmdrake_.c:25
 msgid "reading configuration"
 msgstr "Les uppsetningarskrá"
 
-#: ../standalone/rpmdrake_.c:45 ../standalone/rpmdrake_.c:50
-#: ../standalone/rpmdrake_.c:253
+#: ../../standalone/rpmdrake_.c:45 ../../standalone/rpmdrake_.c:50
+#: ../../standalone/rpmdrake_.c:253
 msgid "File"
 msgstr "Skrá"
 
-#: ../standalone/rpmdrake_.c:48 ../standalone/rpmdrake_.c:229
-#: ../standalone/rpmdrake_.c:253 ../standalone/rpmdrake_.c:269
+#: ../../standalone/rpmdrake_.c:48 ../../standalone/rpmdrake_.c:229
+#: ../../standalone/rpmdrake_.c:253 ../../standalone/rpmdrake_.c:269
 msgid "Search"
 msgstr "Leita"
 
-#: ../standalone/rpmdrake_.c:49 ../standalone/rpmdrake_.c:56
+#: ../../standalone/rpmdrake_.c:49 ../../standalone/rpmdrake_.c:56
 msgid "Package"
 msgstr "Pakka"
 
-#: ../standalone/rpmdrake_.c:51
+#: ../../standalone/rpmdrake_.c:51
 msgid "Text"
 msgstr "Texta"
 
-#: ../standalone/rpmdrake_.c:53
+#: ../../standalone/rpmdrake_.c:53
 msgid "Tree"
 msgstr "Tré"
 
-#: ../standalone/rpmdrake_.c:54
+#: ../../standalone/rpmdrake_.c:54
 msgid "Sort by"
 msgstr "Raða eftir"
 
-#: ../standalone/rpmdrake_.c:55
+#: ../../standalone/rpmdrake_.c:55
 msgid "Category"
 msgstr "Flokk"
 
-#: ../standalone/rpmdrake_.c:58
+#: ../../standalone/rpmdrake_.c:58
 msgid "See"
 msgstr "Skoða"
 
-#: ../standalone/rpmdrake_.c:59 ../standalone/rpmdrake_.c:163
+#: ../../standalone/rpmdrake_.c:59 ../../standalone/rpmdrake_.c:163
 msgid "Installed packages"
 msgstr "Pakkar sem eru inni"
 
-#: ../standalone/rpmdrake_.c:60
+#: ../../standalone/rpmdrake_.c:60
 msgid "Available packages"
 msgstr "Tiltækir pakkar"
 
-#: ../standalone/rpmdrake_.c:62
+#: ../../standalone/rpmdrake_.c:62
 msgid "Show only leaves"
 msgstr "Sýna aðeins laufblöð"
 
-#: ../standalone/rpmdrake_.c:67
+#: ../../standalone/rpmdrake_.c:67
 msgid "Expand all"
 msgstr "Opna allt"
 
-#: ../standalone/rpmdrake_.c:68
+#: ../../standalone/rpmdrake_.c:68
 msgid "Collapse all"
 msgstr "Loka öllu"
 
-#: ../standalone/rpmdrake_.c:70
+#: ../../standalone/rpmdrake_.c:70
 msgid "Configuration"
 msgstr "Uppsetning"
 
-#: ../standalone/rpmdrake_.c:71
+#: ../../standalone/rpmdrake_.c:71
 msgid "Add location of packages"
 msgstr "Bæta slóð pakkanna við"
 
-#: ../standalone/rpmdrake_.c:75
+#: ../../standalone/rpmdrake_.c:75
 msgid "Update location"
 msgstr "Uppfærsluslóð"
 
-#: ../standalone/rpmdrake_.c:79 ../standalone/rpmdrake_.c:328
+#: ../../standalone/rpmdrake_.c:79 ../../standalone/rpmdrake_.c:328
 msgid "Remove"
 msgstr "Fjarlægja"
 
-#: ../standalone/rpmdrake_.c:100
+#: ../../standalone/rpmdrake_.c:100
 msgid "Configuration: Add Location"
 msgstr "Uppsetning: Bæta slóð við"
 
-#: ../standalone/rpmdrake_.c:101
-msgid "Expand Tree"
-msgstr "Opna tré"
-
-#: ../standalone/rpmdrake_.c:102
-msgid "Collapse Tree"
-msgstr "Loka tré"
-
-#: ../standalone/rpmdrake_.c:103
+#: ../../standalone/rpmdrake_.c:103
 msgid "Find Package"
 msgstr "Finna pakka"
 
-#: ../standalone/rpmdrake_.c:104
+#: ../../standalone/rpmdrake_.c:104
 msgid "Find Package containing file"
 msgstr "Finna pakka sem inniheldur skrá"
 
-#: ../standalone/rpmdrake_.c:105
+#: ../../standalone/rpmdrake_.c:105
 msgid "Toggle between Installed and Available"
 msgstr "Skipta á milli innsettra og tiltækra"
 
-#: ../standalone/rpmdrake_.c:139
+#: ../../standalone/rpmdrake_.c:139
 msgid "Files:\n"
 msgstr "Skrár:\n"
 
-#: ../standalone/rpmdrake_.c:161 ../standalone/rpmdrake_.c:209
+#: ../../standalone/rpmdrake_.c:161 ../../standalone/rpmdrake_.c:209
 msgid "Uninstall"
 msgstr "Fjarlægja"
 
-#: ../standalone/rpmdrake_.c:163
+#: ../../standalone/rpmdrake_.c:163
 msgid "Choose package to install"
 msgstr "Veldu pakka til að setja inn"
 
-#: ../standalone/rpmdrake_.c:190
+#: ../../standalone/rpmdrake_.c:190
 msgid "Checking dependencies"
 msgstr "Athuga tengsli milli pakka"
 
-#: ../standalone/rpmdrake_.c:190 ../standalone/rpmdrake_.c:409
+#: ../../standalone/rpmdrake_.c:190 ../../standalone/rpmdrake_.c:409
 msgid "Wait"
 msgstr "Augnablik"
 
-#: ../standalone/rpmdrake_.c:209
+#: ../../standalone/rpmdrake_.c:209
 msgid "The following packages are going to be uninstalled"
 msgstr "Eftirfarandi pakkar verða fjarlægðir"
 
-#: ../standalone/rpmdrake_.c:210
+#: ../../standalone/rpmdrake_.c:210
 msgid "Uninstalling the RPMs"
 msgstr "Fjarlægji RPM pakkana"
 
-#: ../standalone/rpmdrake_.c:229 ../standalone/rpmdrake_.c:269
+#: ../../standalone/rpmdrake_.c:229 ../../standalone/rpmdrake_.c:269
 msgid "Regexp"
 msgstr "Regexp"
 
-#: ../standalone/rpmdrake_.c:229
+#: ../../standalone/rpmdrake_.c:229
 msgid "Which package are looking for"
 msgstr "Hvaða pakka ertu að leita að?"
 
-#: ../standalone/rpmdrake_.c:238 ../standalone/rpmdrake_.c:262
-#: ../standalone/rpmdrake_.c:278
+#: ../../standalone/rpmdrake_.c:238 ../../standalone/rpmdrake_.c:262
+#: ../../standalone/rpmdrake_.c:278
 #, c-format
 msgid "%s not found"
 msgstr "%s fannst ekki"
 
-#: ../standalone/rpmdrake_.c:238 ../standalone/rpmdrake_.c:262
-#: ../standalone/rpmdrake_.c:278
+#: ../../standalone/rpmdrake_.c:238 ../../standalone/rpmdrake_.c:262
+#: ../../standalone/rpmdrake_.c:278
 msgid "No match"
 msgstr "Ekkert fannst"
 
-#: ../standalone/rpmdrake_.c:238 ../standalone/rpmdrake_.c:262
-#: ../standalone/rpmdrake_.c:278
+#: ../../standalone/rpmdrake_.c:238 ../../standalone/rpmdrake_.c:262
+#: ../../standalone/rpmdrake_.c:278
 msgid "No more match"
 msgstr "Fleira fannst ekki"
 
-#: ../standalone/rpmdrake_.c:246
+#: ../../standalone/rpmdrake_.c:246
 msgid ""
 "rpmdrake is currently in ``low memory'' mode.\n"
 "I'm going to relaunch rpmdrake to allow searching files"
@@ -3885,31 +4793,31 @@ msgstr ""
 "rpmdrake er núna í ``lágminnis'' ham.\n"
 "Það verður eyrt aftur til að leyfa skráarleit."
 
-#: ../standalone/rpmdrake_.c:253
-msgid "Which file are you looking for"
+#: ../../standalone/rpmdrake_.c:253
+msgid "Which file are you looking for?"
 msgstr "Hvaða skrá ertu að leita að?"
 
-#: ../standalone/rpmdrake_.c:269
-msgid "What are looking for"
+#: ../../standalone/rpmdrake_.c:269
+msgid "What are looking for?"
 msgstr "Hverju ertu að leita að?"
 
-#: ../standalone/rpmdrake_.c:289
+#: ../../standalone/rpmdrake_.c:289
 msgid "Give a name (eg: `extra', `commercial')"
 msgstr "Gefðu upp nafn (t.d. `extra', `commercial')"
 
-#: ../standalone/rpmdrake_.c:291
+#: ../../standalone/rpmdrake_.c:291
 msgid "Directory"
 msgstr "Mappa"
 
-#: ../standalone/rpmdrake_.c:294
+#: ../../standalone/rpmdrake_.c:294
 msgid "No cdrom available (nothing in /mnt/cdrom)"
 msgstr "Ekkert geisladrif til staðar (ekkert í /mnt/cdrom)"
 
-#: ../standalone/rpmdrake_.c:298
+#: ../../standalone/rpmdrake_.c:298
 msgid "URL of the directory containing the RPMs"
 msgstr "Slóð í möppu sem inniheldur RPM pakka"
 
-#: ../standalone/rpmdrake_.c:299
+#: ../../standalone/rpmdrake_.c:299
 msgid ""
 "For FTP and HTTP, you need to give the location for hdlist\n"
 "It must be relative to the URL above"
@@ -3917,29 +4825,207 @@ msgstr ""
 "Fyrir FTP og HTTP, þá þarftu að gefa upp staðsetningu hdlist.\n"
 "Staðsetningin verður að vera miðuð við slóðina hér að ofan."
 
-#: ../standalone/rpmdrake_.c:302
+#: ../../standalone/rpmdrake_.c:302
 msgid "Please submit the following information"
 msgstr "Vinsamlega tilgreindu eftirfarandi"
 
-#: ../standalone/rpmdrake_.c:304
+#: ../../standalone/rpmdrake_.c:304
 #, c-format
 msgid "%s is already in use"
 msgstr "%s er nú þegar í notkun."
 
-#: ../standalone/rpmdrake_.c:315 ../standalone/rpmdrake_.c:321
-#: ../standalone/rpmdrake_.c:329
+#: ../../standalone/rpmdrake_.c:315 ../../standalone/rpmdrake_.c:321
+#: ../../standalone/rpmdrake_.c:329
 msgid "Updating the RPMs base"
 msgstr "Uppfæri RPM gagnaskrána"
 
-#: ../standalone/rpmdrake_.c:328
+#: ../../standalone/rpmdrake_.c:328
 #, c-format
 msgid "Going to remove entry %s"
 msgstr "Fjarlægji nafnið %s"
 
-#: ../standalone/rpmdrake_.c:360
+#: ../../standalone/rpmdrake_.c:360
 msgid "Finding leaves"
 msgstr "Leita að \"laufblöðum\"."
 
-#: ../standalone/rpmdrake_.c:360
+#: ../../standalone/rpmdrake_.c:360
 msgid "Finding leaves takes some time"
 msgstr "Þessi leit mun taka dálítinn tíma"
+
+#~ msgid "Recommended"
+#~ msgstr "Auðvelda"
+
+#~ msgid ""
+#~ "Choose \"Install\" if there are no previous versions of Linux\n"
+#~ "installed, or if you wish to use multiple distributions or versions.\n"
+#~ "\n"
+#~ "\n"
+#~ "Choose \"Upgrade\" if you wish to update a previous version of Mandrake "
+#~ "Linux:\n"
+#~ "5.1 (Venice), 5.2 (Leloo), 5.3 (Festen), 6.0 (Venus), 6.1 (Helios), Gold "
+#~ "2000\n"
+#~ "or 7.0 (Air)."
+#~ msgstr ""
+#~ "Veldu \"Innsetning\" ef það eru engar fyrri útgáfur af Linux á tölvunni\n"
+#~ "eða ef þú vilt nota fleiri en eina dreifingu af Linux.\n"
+#~ "\n"
+#~ "\n"
+#~ "Veldu \"Uppfærsla\" ef þú vilt uppfæra fyrri innsetningu af Linux Mandrake:\n"
+#~ "5.1 (Venice), 5.2 (Leloo), 5.3 (Festen), 6.0 (Venus), 6.1 (Helios),\n"
+#~ "Gold 2000 eða 7.0 (Air)."
+
+#~ msgid "Do you want to use LILO?"
+#~ msgstr "Viltu nota LILO?"
+
+#~ msgid ""
+#~ "LILO (the LInux LOader) can boot Linux and other operating systems.\n"
+#~ "Normally they are correctly detected during installation. If you don't\n"
+#~ "see yours detected, you can add one or more now.\n"
+#~ "\n"
+#~ "\n"
+#~ "If you don't want that everybody could access at one of them, you can "
+#~ "remove\n"
+#~ "it now (a boot disk will be needed to boot it)."
+#~ msgstr ""
+#~ "LILO (LInux LOader) getur ræst Linux og önnur stýrikerfi.\n"
+#~ "Venjulega finnast þau við innsetningu á Linux.  Ef þú sérð\n"
+#~ "ekki þitt kerfi þá getur þú bætt því við núna ásamt öðrum.\n"
+#~ "\n"
+#~ "\n"
+#~ "Ef þú vilt ekki að aðrir hafi aðgang að einhverju kerfanna þá getur\n"
+#~ "þú einfaldlega fjarlægt það núna (en þá þarf ræsidiskling til að ræsa það)."
+
+#~ msgid ""
+#~ "Now that you've selected desired groups, please choose \n"
+#~ "how many packages you want, ranging from minimal to full \n"
+#~ "installation of each selected groups."
+#~ msgstr ""
+#~ "Nú þegar flokkar hafa verið valdir skaltu velja hve marga \n"
+#~ "þú vilt sitja inn.  Þú getur tilgreint litla eða fulla \n"
+#~ "innsetningu af pökkum úr þeim flokkum sem þú valdir."
+
+#, fuzzy
+#~ msgid "Choose other CD to install"
+#~ msgstr "Veldu pakka til að setja inn"
+
+#~ msgid ""
+#~ "Select:\n"
+#~ "\n"
+#~ "  - Recommended: If you have never installed Linux before.\n"
+#~ "\n"
+#~ "\n"
+#~ "  - Customized: If you are familiar with Linux, you will be able to \n"
+#~ "select the usage for the installed system between normal, development or\n"
+#~ "server. Choose \"Normal\" for a general purpose installation of your\n"
+#~ "computer. You may choose \"Development\" if you will be using the computer\n"
+#~ "primarily for software development, or choose \"Server\" if you wish to\n"
+#~ "install a general purpose server (for mail, printing...).\n"
+#~ "\n"
+#~ "\n"
+#~ "  - Expert: If you are fluent with GNU/Linux and want to perform\n"
+#~ "a highly customized installation, this Install Class is for you. You will\n"
+#~ "be able to select the usage of your installed system as for \"Customized\"."
+#~ msgstr ""
+#~ "Select:\n"
+#~ "\n"
+#~ "  - Ráðlagt: Ef þú hefur aldrei sett Linux inn áður.\n"
+#~ "\n"
+#~ "\n"
+#~ "  - Eftir óskum: Ef þú hefur þó nokkra reynslu meðiar with Linux, you will "
+#~ "be able to \n"
+#~ "select the usage for the installed system between normal, development or\n"
+#~ "server. Choose \"Normal\" for a general purpose installation of your\n"
+#~ "computer. You may choose \"Development\" if you will be using the computer\n"
+#~ "primarily for software development, or choose \"Server\" if you wish to\n"
+#~ "install a general purpose server (for mail, printing...).\n"
+#~ "\n"
+#~ "\n"
+#~ "  - Expert: If you are fluent with GNU/Linux and want to perform\n"
+#~ "a highly customized installation, this Install Class is for you. You will\n"
+#~ "be able to select the usage of your installed system as for \"Customized\"."
+
+#~ msgid "Help"
+#~ msgstr "Hjálp"
+
+#~ msgid "Downloading cryptographic packages"
+#~ msgstr "Sæki dulritunarpakkana"
+
+#~ msgid "Setup SCSI"
+#~ msgstr "Setja upp SCSI"
+
+#~ msgid "Which packages do you want to install"
+#~ msgstr "Hvaða pakka viltu setja inn"
+
+#~ msgid "Local LAN"
+#~ msgstr "Staðarnet(LAN)"
+
+#~ msgid "Dialup with modem"
+#~ msgstr "Hringja inn með mótaldi"
+
+#~ msgid "Size: %s MB"
+#~ msgstr "Stærð: %s MB"
+
+#~ msgid "formatting"
+#~ msgstr "forsníð"
+
+#~ msgid "changing type of"
+#~ msgstr "breyti tegund"
+
+#~ msgid "After %s partition %s,"
+#~ msgstr "Eftir %s disksneiðar %s,"
+
+#~ msgid "linear"
+#~ msgstr "línulegan"
+
+#~ msgid "Linear (needed for some SCSI drives)"
+#~ msgstr "Nota línulegan ham (nauðsynlegt fyrir sum SCSI drif)"
+
+#~ msgid "User name:"
+#~ msgstr "Notandaheiti:"
+
+#~ msgid "Password:"
+#~ msgstr "Lykilorð:"
+
+#~ msgid "Local Printer Options"
+#~ msgstr "Viðföng staðbundinna prentara"
+
+#~ msgid "server"
+#~ msgstr "netþjónn"
+
+#~ msgid "expert"
+#~ msgstr "snillingur"
+
+#~ msgid "developer"
+#~ msgstr "forritari"
+
+#~ msgid "beginner"
+#~ msgstr "byrjandi"
+
+#~ msgid ""
+#~ "Failed to create an HTP boot floppy.\n"
+#~ "You may have to restart installation and give ``%s'' at the prompt"
+#~ msgstr ""
+#~ "Smíði HTP ræsidisks mistókst.\n"
+#~ "Þú gætir þurft að endurræsa og slá inn ``%s'' á skipanalínuna"
+
+#~ msgid "It is necessary to restart installation with the new parameters"
+#~ msgstr "Það þarf að byrja innsetningu upp á nýtt með nýju viðföngunum"
+
+#~ msgid "It is necessary to restart installation booting on the floppy"
+#~ msgstr "Það þarf að byrja innsetninguna upp á nýtt og ræsa með diskling"
+
+#~ msgid ""
+#~ "Enter a floppy to create an HTP enabled boot\n"
+#~ "(all data on floppy will be lost)"
+#~ msgstr ""
+#~ "Settu diskling í drifið til að búa til HTP ræsingu\n"
+#~ "(Öll gögn á þessum diskling tapast)"
+
+#~ msgid "A entry %s already exists"
+#~ msgstr "Nafnið %s er þegar í notkun"
+
+#~ msgid "Choose install or upgrade"
+#~ msgstr "Veldu innsetningu eða uppfærslu"
+
+#~ msgid "What usage do you want?"
+#~ msgstr "Hverskyns notkun viltu?"
