@@ -124,11 +124,11 @@ sub connected_bg {
 	*F = *$kid_pipe;
 	fcntl(F, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
 	my $a;
-  	if ($a = <F> ) {
+  	if (defined($a = <F>)) {
 	    close($kid_pipe) || warn "kid exited $?";
 	    undef $kid_pipe;
-	    $a eq '1' and $$ref = 1;
-	    $a eq '0' and $$ref = 0;
+	    print STDERR "debug - hostname result : $a\n"
+	    $$ref = $a;
   	}
     } else { $kid_pipe = connected2() }
     1;
@@ -140,7 +140,6 @@ sub connected2 {
 	return \*KID_TO_READ;
     } else {      # child
 	my $a = gethostbyname("mandrakesoft.com") ? 1 : 0;
-	print "$a";
 	c::_exit(0);
     }
 }
