@@ -125,6 +125,12 @@ substInFile {
     s|\s*shadow||;
 } "$::prefix/etc/pam.d/system-auth";
 
+substInFile { 
+    #- remove this line which D-state mounting /home again
+    #- we don't know what this line is for
+    $_ = "# $_" if /Mounting other filesystems/;
+} "$::prefix/etc/init.d/netfs";
+
 #- remove services we start ourselves from chkconfig system
 substInFile {
     s|chkconfig:|chkconfig-disabled:|;

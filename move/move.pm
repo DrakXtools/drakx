@@ -456,6 +456,7 @@ sub install2::configMove {
         install_steps_interactive::configureNetwork($o);
         enable_service('network');
     }
+    enable_service('netfs');
     install_steps_interactive::summaryBefore($o);
 
     modules::load_category('multimedia/sound');
