@@ -132,9 +132,13 @@ gtkadd($window->{window},
 							 my $options = "mdkbugreport=1";
 							 $options .= "&incident=1" if $incident;
 							 my $p = $package->get_text;
-							 $options .= "&package=$p" if $p =~ /mdk/;
+							 my ($product, $version) = $p =~ /^(.*)-([^-]+-[^-]+mdk)$/;
+							 my $app = $comb_app->entry->get_text;
+							 my $component = if_(member($app, @all_drakxtools), $app) || $mdk_app->{$app};
+							 $options .= "&product=$product" if $product;
+							 $options .= "&component=$component" if $component;
+							 $options .= "&version=$version" if $version;
 							 $options .= "&kernel=$kernel_release";
-							 $options .= "&version=$mandrake_version";
 							 print($bugzilla . "?" . $options . "\n");
 							 connect_bugzilla($bugzilla . "?" . $options);
 						      } else {
