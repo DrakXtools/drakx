@@ -31,28 +31,94 @@ use Gtk2::SimpleList;
 require_root_capability();
 
 # global settings
-my $config = '/etc/wlandetect.conf';
 my $route = '/sbin/route';
 my $AboutFile = 'ABOUT';
 my $HelpFile = 'README';
-my $WLanDetect = '/usr/sbin/wlandetect';
 my $IWList = '/sbin/iwlist';
 my $IWConfig = '/sbin/iwconfig';
 my $IFConfig = '/sbin/ifconfig';
 my $IFUp = '/sbin/ifup';
 my $IFDown = '/sbin/ifdown';
 my $DHClient = '/sbin/dhclient';
-my $device;
 
 # initialize variables
 my $ScanInterval = 30; # tell deamon to search for new nets every x seconds
 
+my ($KnownList, $AvailableList);
+my $device;
+
+my %available_roaming_daemons = (
+		       wlandetect => {
+				      config_file => '/etc/wlandetect.conf',
+				      binary => '/usr/sbin/wlandetect',
+				      start_options => sub {
+					  my ($interval) = @_;
+					  "-d -t $interval";
+				      },
+				      read_config => sub {
+					  my ($config) = @_;
+					  my $line = 0;
+					  foreach (cat_($config)) {
+					      $line++;
+					      if (/^#/) {} #ignore comments
+					      elsif (/^\n/) {} #ignore blank lines
+					      elsif (/([^ \t]+)([ \t]+)(.*)/) {
+						  my $essid = $1;
+						  my $command = $3;
+						  # setup new network entry
+						  my $mode;
+						  my $channel;
+						  my $key;
+						  my $dhcp;
+						  if ($command =~ /mode\s(\S*);/) { $mode = $1 }
+						  elsif ($command =~ /mode\s(\S*)\s/) { $mode = $1 }
+						  if ($command =~ /channel\s(\S*);/) { $channel = $1 }
+						  elsif ($command =~ /channel\s(\S*)\s/) { $channel = $1 }
+						  if ($command =~ /key\s(\S*);/) { $key = $1 }
+						  elsif ($command =~ /key\s(\S*)\s/) { $key = $1 }
+						  if ($command =~ /dhclient/) { $dhcp = 1 }
+						  else { $dhcp = 0 }
+						  &AddNet($essid, $mode, $channel, $key, $dhcp);
+					      }
+					      else { die "Line $line of configuration file is not parseable.\n" }
+					  }
+				      },
+				      write_config => sub {
+					  my ($config) = @_;
+					  open(my $CONFIG, "> $config") or die("Can't open configuration file\n");
+					  print $CONFIG "#wlandetect configuration file\n#format: essid<tab><tab>commands\n#use \@DEV\@ for device name\n";
+					  foreach my $row (@{$KnownList->{data}}) { # again, lame
+					      print $CONFIG "$row->[0]\t\t$IWConfig essid $row->[0]";
+					      if ($row->[1]) {
+						  print $CONFIG "mode $row->[1] ";
+					      }
+					      if ($row->[2]) {
+						  print $CONFIG "channel $row->[2] ";
+					      }
+					      if ($row->[3]) {
+						  print $CONFIG "key $row->[3] ";
+					      }
+					      print $CONFIG "; ";
+					      if ($row->[4]) {
+						  print $CONFIG "$IFConfig \@DEV\@ up; $DHClient \@DEV\@";
+					      }
+					      else {
+						  print $CONFIG "$IFUp \@DEV\@"
+					      }
+					      print $CONFIG "\n";
+					  }
+					  close $CONFIG;
+				      },
+				     },
+);
+
+my $roaming_daemon = $available_roaming_daemons{wlandetect};
 
 my $ScanEntry = Gtk2::Entry->new;
 $ScanEntry->set_width_chars(4);
 $ScanEntry->set_text($ScanInterval);
 
-my $KnownList = Gtk2::SimpleList->new(
+$KnownList = Gtk2::SimpleList->new(
                                       "ESSID" => "text",
                                       "Mode" => "text",
                                       "Channel" => "int",
@@ -65,7 +131,7 @@ $KnownList->set_column_editable(1, TRUE); # allow to change mode
 $KnownList->set_column_editable(2, TRUE); # allow to change channel
 $KnownList->set_column_editable(3, TRUE); # allow to change key
 
-my $AvailableList = Gtk2::SimpleList->new(
+$AvailableList = Gtk2::SimpleList->new(
                                           "ESSID" => "text",
                                           "Type" => "text",
                                           "Encryption" => "text",
@@ -166,7 +232,8 @@ sub UpdateAll {
 }
 
 sub UpdateRoaming() {
-	my $status = (any { /wlandetect$/ } run_program::get_stdout("ps", "-A")) ? "on" : "off";
+	my $name = basename($roaming_daemon->{binary});
+	my $status = (any { /\Q$name\E$/ } run_program::get_stdout("ps", "-A")) ? "on" : "off";
 	$RoamStatus->set_text("Roaming: $status");
 	return FALSE; #- do not update again if launched on timeout
 }
@@ -225,73 +292,30 @@ sub AddNet {
 }
 
 sub ReadConfig() {
-	print "Reading config file.\n\n";
-	my $line = 0;
-	foreach (cat_($config)) {
-		$line++;
-                if (/^#/) {} #ignore comments
-		elsif (/^\n/) {} #ignore blank lines
-		elsif (/([^ \t]+)([ \t]+)(.*)/) {
-                	my $essid = $1;
-			my $command = $3;
-			# setup new network entry
-			my $mode;
-			my $channel;
-			my $key;
-			my $dhcp;
-			if ($command =~ /mode\s(\S*);/) { $mode = $1 }
-			elsif ($command =~ /mode\s(\S*)\s/) { $mode = $1 }
-			if ($command =~ /channel\s(\S*);/) { $channel = $1 }
-			elsif ($command =~ /channel\s(\S*)\s/) { $channel = $1 }
-			if ($command =~ /key\s(\S*);/) { $key = $1 }
-			elsif ($command =~ /key\s(\S*)\s/) { $key = $1 }
-			if ($command =~ /dhclient/) { $dhcp = 1 }
-			else { $dhcp = 0 }
-			&AddNet($essid, $mode, $channel, $key, $dhcp);
-		}
-		else { die "Line $line of configuration file is not parseable.\n" }
-	}
+	$_->{read_config}($_->{config_file}) foreach values %available_roaming_daemons;
 }
 
 sub WriteConfig() {
-	open(my $CONFIG, "> $config") or die("Can't open configuration file\n");
-	print $CONFIG "#wlandetect configuration file\n#format: essid<tab><tab>commands\n#use \@DEV\@ for device name\n";
-	foreach my $row (@{$KnownList->{data}}) { # again, lame
-		print $CONFIG "$row->[0]\t\t$IWConfig essid $row->[0]";
-		if ($row->[1]) {
-			print $CONFIG "mode $row->[1] ";
-		}
-		if ($row->[2]) {
-			print $CONFIG "channel $row->[2] ";
-		}
-		if ($row->[3]) {
-			print $CONFIG "key $row->[3] ";
-		}
-		print $CONFIG "; ";
-		if ($row->[4]) {
-			print $CONFIG "$IFConfig \@DEV\@ up; $DHClient \@DEV\@";
-		}
-		else {
-			print $CONFIG "$IFUp \@DEV\@"
-		}
-		print $CONFIG "\n";
-	}
-	close $CONFIG;
+	$_->{write_config}($_->{config_file}) foreach values %available_roaming_daemons;
 }
 
 sub StartRoam() {
-	system("killall wlandetect; $WLanDetect -d -t $ScanInterval &");
+	my $options = $roaming_daemon->{start_options}($ScanInterval, $device);
+	my $name = basename($roaming_daemon->{binary});
+	system("killall $name; $roaming_daemon->{binary} $options &");
 	Glib::Timeout->add(1000, \&UpdateRoaming);
 }
 
 sub StopRoam() {
-	system("killall wlandetect");
+	my $name = basename($roaming_daemon->{binary});
+	system("killall $name");
 	Glib::Timeout->add(1000, \&UpdateRoaming);
 }
 
 sub SetInterval() {
 	$ScanInterval = $ScanEntry->get_text;
-	system("killall wlandetect; $WLanDetect -d -t $ScanInterval &");
+	StopRoam();
+	StartRoam();
 }
 
 sub ConnectNow {
