@@ -597,15 +597,15 @@ my %xim = (
 	ENC => 'utf8',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
-  #- XFree86 has an internal XIM for Thai that enables syntax checking etc.
-  #-?Passthroug' is no check at all, 'BasicCheck' accepts bad sequences
-  #- and convert them to right ones, 'Strict' refuses bad sequences
+  #-XFree86 has an internal XIM for Thai that enables syntax checking etc.
+  #-'Passthroug' is no check at all, 'BasicCheck' accepts bad sequences
+  #-and convert them to right ones, 'Strict' refuses bad sequences
   'th_TH' => {
 	XIM_PROGRAM => '/bin/true', #- it's an internal module
 	XMODIFIERS => '"@im=BasicCheck"',
   },
-  #- xvnkb is not an XIM input method; but an input method of another
-  #- kind, only XIM_PROGRAM needs to be defined
+  #-xvnkb is not an XIM input method; but an input method of another
+  #-kind, only XIM_PROGRAM needs to be defined
   #- ! xvnkb doesn't work in UTF-8 !
 #-  'vi_VN.VISCII' => {
 #-	XIM_PROGRAM => 'xvnkb',
