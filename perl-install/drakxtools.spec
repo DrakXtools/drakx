@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 17mdk
+Release: 18mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -317,6 +317,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Mar  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-18mdk
+- drakboot (pixel):
+  o if the default bootloader entry is invalid, choose another one
+  o remove "VT8751 [ProSavageDDR P4M266] VGA Controller" (0x5333,
+    0x8d04) from graphical lilo blacklist (#8133)
+- drakconnect:
+  o fix pci modem type matching
+  o list pump in dhcp clients list (synced with ifup one)
+  o preselect first availlable dhcp client (according to ifup priority
+    list)
+
 * Tue Mar  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-17mdk
 - logdrake mail alert: fix crash due to icon renaming
 
