@@ -79,7 +79,7 @@ sub modem_detect_backend {
 
     #- add an alias for macserial on PPC
     modules::add_alias('serial', $serdev) if (arch() =~ /ppc/ && $modem->{device});
-    my @devs = modules::get_pcmcia_devices();
+    my @devs = detect_devices::pcmcia_probe();
     foreach (@devs) {
 	$_->{type} =~ /serial/ and $modem->{device} = $_->{device};
     }

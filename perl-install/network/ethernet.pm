@@ -141,7 +141,7 @@ sub conf_network_card_backend {
 	my @all_cards = detect_devices::getNet();
 	$netc->{nb_cards} = @all_cards;
 
-	my @devs = modules::get_pcmcia_devices();
+	my @devs = detect_devices::pcmcia_probe();
 	modules::mergein_conf("$prefix/etc/modules.conf");
 	my $saved_driver;
 	return map {
