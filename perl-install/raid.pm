@@ -33,6 +33,8 @@ sub new {
 sub add {
     my ($raids, $part, $nb) = @_; $nb = nb($nb);
     $raids->[$nb]{isMounted} and die _("Can't add a partition to _formatted_ RAID md%d", $nb);
+    inactivate_and_dirty($raids->[$nb]);
+    $part->{notFormatted} = 1; $part->{isFormatted} = 0;
     $part->{raid} = $nb;
     delete $part->{mntpoint};
     push @{$raids->[$nb]{disks}}, $part;
@@ -42,7 +44,7 @@ sub add {
 sub delete {
     my ($raids, $nb) = @_;
     $nb = nb($nb);
-
+    inactivate_and_dirty($raids->[$nb]);
     delete $_->{raid} foreach @{$raids->[$nb]{disks}};
     undef $raids->[$nb];
 }
@@ -50,6 +52,8 @@ sub delete {
 sub changeNb {
     my ($raids, $oldnb, $newnb) = @_;
     if ($oldnb != $newnb) {
+	inactivate_and_dirty($raids->[$_]) foreach $oldnb, $newnb;
+
 	($raids->[$newnb], $raids->[$oldnb]) = ($raids->[$oldnb], undef);
 	$raids->[$newnb]{device} = "md$newnb";
 	$_->{raid} = $newnb foreach @{$raids->[$newnb]{disks}};
@@ -60,7 +64,7 @@ sub changeNb {
 sub removeDisk {
     my ($raids, $part) = @_;
     my $nb = nb($part->{raid});
-    run_program::run("raidstop", devices::make($part->{device}));
+    inactivate_and_dirty($raids->[$nb]);
     delete $part->{raid};
     my $disks = $raids->[$nb]{disks};
     @$disks = grep { $_ != $part } @$disks;
@@ -92,16 +96,9 @@ sub module {
     $mod;
 }
 
-sub updateIsFormatted {
-    my ($part) = @_;
-    $part->{isFormatted}  = and_ map { $_->{isFormatted}  } @{$part->{disks}};
-    $part->{notFormatted} = and_ map { $_->{notFormatted} } @{$part->{disks}};
-}
+
 sub update {
-    foreach (@_) {
-	updateSize($_);
-	updateIsFormatted($_);
-    }
+    updateSize($_) foreach @_;
 }
 
 sub write {
@@ -126,12 +123,16 @@ EOF
 }
 
 sub make {
-    my ($raids, $part) = @_;
+    my ($raids, $part) = @_;    
+
+    return if is_active($part->{device});
+
+    inactivate_and_dirty($part);
+
     isRAID($_) and make($raids, $_) foreach @{$part->{disks}};
     my $dev = devices::make($part->{device});
     eval { modules::load(module($part)) };
     &write($raids, "/etc/raidtab");
-    run_program::run("raidstop", $dev);
     run_program::run("mkraid", "--really-force", $dev) or die
 	$::isStandalone ? _("mkraid failed (maybe raidtools are missing?)") : _("mkraid failed");
 }
@@ -163,6 +164,17 @@ sub prepare_prefixed {
     }
 }
 
-sub stopAll() { run_program::run("raidstop", devices::make("md$_")) foreach 0..7 }
+sub inactivate_and_dirty {
+    my ($part) = @_;
+    run_program::run("raidstop", devices::make($part->{device}));
+    $part->{notFormatted} = 1; $part->{isFormatted} = 0;
+}
+
+sub is_active {
+    my ($dev) = @_;
+    grep { /^$dev / } cat_("/proc/mdstat");
+}
+
+sub inactivate_all() { run_program::run("raidstop", devices::make("md$_")) foreach 0..7 }
 
 1;

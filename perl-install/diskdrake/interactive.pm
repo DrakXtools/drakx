@@ -714,7 +714,6 @@ sub Add2RAID {
 	raid::add($raids, $part, $_);
     }
     raid::update(@$raids);
-    raid::stopAll();
 }
 sub Add2LVM {
     my ($in, $hd, $part, $all_hds) = @_;
