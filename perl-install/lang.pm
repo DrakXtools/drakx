@@ -26,7 +26,7 @@ use log;
 
 my %languages = my @languages = (
 'en_US' => [ 'English|United States',	'C', 'en', 'en_US:en' ],
-'en_GB' => [ 'English|United Kingdom',	'iso-8859-1', 'en', 'en_GB:en' ],
+'en_GB' => [ 'English|United Kingdom',	'iso-8859-15', 'en', 'en_GB:en' ],
 'en_IE' => [ 'English|Ireland',		'iso-8859-15','en', 'en_IE:en_GB:en' ],
 'en_US.UTF-8'=> [ 'English|UTF-8',	'utf_15',     'en', 'en_US:en' ],
   'af'  => [ 'Afrikaans',		'iso-8859-1', 'af', 'af:en_ZA' ],
@@ -44,10 +44,10 @@ my %languages = my @languages = (
   'cs'  => [ 'Czech',			'iso-8859-2', 'cs', 'cs' ],
   'cy'  => [ 'Cymraeg (Welsh)','iso-8859-14','cy', 'cy:en_GB:en' ],
 'cy_GB.UTF-8'=> [ 'Cymraeg (Welsh) (UTF-8)','utf_14',   'cy', 'cy:en_GB:en' ],
-  'da'  => [ 'Danish',			'iso-8859-1', 'da', 'da' ],		
+  'da'  => [ 'Danish',			'iso-8859-15', 'da', 'da' ],		
 'de_AT' => [ 'German|Austria',		'iso-8859-15','de', 'de_AT:de' ],
 'de_BE' => [ 'German|Belgium',		'iso-8859-15','de', 'de_BE:de' ],
-'de_CH' => [ 'German|Switzerland',	'iso-8859-1', 'de', 'de_CH:de' ],
+'de_CH' => [ 'German|Switzerland',	'iso-8859-15', 'de', 'de_CH:de' ],
 'de_DE' => [ 'German|Germany',		'iso-8859-15','de', 'de_DE:de' ],
   'el'  => [ 'Greek',        'iso-8859-7', 'el', 'el' ],
 'el_GR.UTF-8'=> [ 'Greek (UTF-8)',        'utf_el',     'el', 'el' ],
@@ -55,7 +55,7 @@ my %languages = my @languages = (
 'eo_XX.UTF-8'=> [ 'Esperanto (UTF-8)',	'utf_3',      'eo', 'eo' ],
 'es_AR' => [ 'Spanish|Argentina',	'iso-8859-1', 'es', 'es_AR:es_UY:es:es_ES' ],
 'es_ES' => [ 'Spanish|Spain (modern sorting)',	'iso-8859-15', 'es', 'es_ES:es' ],
-'es@tradicional' => [ 'Spanish|Spain (traditional sorting)', 'iso-8859-1', 'es', 'es' ],
+'es@tradicional' => [ 'Spanish|Spain (traditional sorting)', 'iso-8859-15', 'es', 'es' ],
 'es_ES.UTF-8'=> [ 'Spanish|Spain (UTF-8)','utf_15', 'es', 'es_ES:es' ],
 'es_MX' => [ 'Spanish|Mexico',	'iso-8859-1', 'es', 'es_MX:es:es_ES' ],
   'et'  => [ 'Estonian',		'iso-8859-15','et', 'et' ],
@@ -65,7 +65,7 @@ my %languages = my @languages = (
 #-'fo'  => [ 'Faroese',			'iso-8859-1', 'fo', 'fo' ],
 'fr_BE' => [ 'French|Belgium',	'iso-8859-15','fr', 'fr_BE:fr' ],
 'fr_CA' => [ 'French|Canada',		'iso-8859-15','fr', 'fr_CA:fr' ],
-'fr_CH' => [ 'French|Switzerland',	'iso-8859-1', 'fr', 'fr_CH:fr' ],
+'fr_CH' => [ 'French|Switzerland',	'iso-8859-15', 'fr', 'fr_CH:fr' ],
 'fr_FR' => [ 'French|France',	'iso-8859-15','fr', 'fr_FR:fr' ],
 'fr_FR.UTF-8'=> [ 'French|France (UTF-8)','utf_15','fr', 'fr_FR:fr' ],
 'ga_IE' => [ 'Gaeilge (Irish)',	'iso-8859-15','ga', 'ga:en_IE:en' ],
@@ -83,7 +83,7 @@ my %languages = my @languages = (
 #- we catch the few catalog files still using the wrong code
   'id'  => [ 'Indonesian',		'iso-8859-1', 'id', 'id:in_ID' ],
   'is'  => [ 'Icelandic', 		'iso-8859-1', 'is', 'is' ],
-'it_CH' => [ 'Italian|Switzerland',	'iso-8859-1', 'it', 'it_IT:it' ],
+'it_CH' => [ 'Italian|Switzerland',	'iso-8859-15', 'it', 'it_IT:it' ],
 'it_IT' => [ 'Italian|Italy','iso-8859-15','it', 'it_IT:it' ],
 #-'iu'  => [ 'Inuktitut', 		'unicodeIU',  'iu', 'iu' ],
   'ja'  => [ 'Japanese',		'jisx0208',   'ja', 'ja_JP.ujis:ja' ],
@@ -142,7 +142,7 @@ my %languages = my @languages = (
 'vi_VN.TCVN'  => [ 'Vietnamese|TCVN',   'tcvn',     'vi', 'vi' ],
 'vi_VN.VISCII' => [ 'Vietnamese|VISCII','viscii',   'vi', 'vi' ],
 'vi_VN.UTF-8' => [ 'Vietnamese|UTF-8',  'utf_vi',   'vi', 'vi' ],
-  'wa'  => [ 'Walon',     		'iso-8859-1', 'wa', 'wa:fr_BE:fr' ],
+  'wa'  => [ 'Walon',     		'iso-8859-15', 'wa', 'wa:fr_BE:fr' ],
 #-'yi'	=> [ 'Yiddish',			'cp1255',     'yi', 'yi' ],
 # NOTE: 'zh' must be in the LANGUAGE list, it is not used for translations
 # themselves but is needed for our selection of locales-xx packages
