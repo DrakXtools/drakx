@@ -138,7 +138,6 @@ are you ready to answer that kind of questions?"),
 					      first(list2kv(@c)), ${{reverse %c}}{$::beginner ? "beginner" : $::expert ? "expert" : "specific"},
 					      [ __("Install"), __("Rescue") ], $o->{isUpgrade} ? "Rescue" : "Install") eq "Rescue";
 
-    print STDERR "isUpgrade=$o->{isUpgrade}\n";
     if ($::corporate || $::beginner) {
 	delete $o->{installClass};
     } else {
@@ -912,7 +911,7 @@ sub configureX {
     #- strange, xfs must not be started twice...
     #- trying to stop and restart it does nothing good too...
     my $xfs_started if 0;
-    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/xfs", "start") unless $xfs_started;
+    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/xfs", "start") unless $::live || $xfs_started;
     $xfs_started = 1;
 
     { local $::testing = 0; #- unset testing

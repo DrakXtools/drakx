@@ -28,12 +28,28 @@ if [ -x "/tmp/drakx/mdkinst/usr/bin/perl-install/live_install2" ]; then
     fi
     ln -sf /tmp/drakx/mdkinst/usr/bin/packdrake /usr/bin/packdrake
 
+    for i in MonitorsDB CardsNames Cards+
+    do
+	if [ -e /usr/X11R6/lib/X11/$i ]; then
+	    mv /usr/X11R6/lib/X11/$i /tmp/drakx/mdkinst
+	fi
+	ln -sf /tmp/drakx/mdkinst/usr/X11R6/lib/X11/$i /usr/X11R6/lib/X11/$i
+    done
+
     # start DrakX
     ../../../lib/ld-linux.so.2 ../perl ./live_install2
 
+    for i in MonitorsDB CardsNames Cards+
+    do
+	rm -f /usr/X11R6/lib/X11/$i
+	if [ -e /tmp/drakx/mdkinst/$i ]; then
+	    mv /tmp/drakx/mdkinst/$i /usr/X11R6/lin/X11/$i
+	fi
+    done
+
     rm -f /usr/bin/packdrake
     if [ -x /tmp/drakx/mdkinst/packdrake ]; then
-	mv /tmp/drakx/mdkinst/packdrake.so /usr/bin/packdrake
+	mv /tmp/drakx/mdkinst/packdrake /usr/bin/packdrake
     fi
 
     rm -f $perlcoredir/libperl.so
