@@ -86,8 +86,13 @@ sub spawnShell {
 }
 
 sub mouse_detect() {
-    my ($type, $dev) = split("\n", `./mouseconfig --nointeractive 2>/dev/null`) or die "mouseconfig failed";
+    my ($type, $dev) = split("\n", `mouseconfig --nointeractive 2>/dev/null`) or die "mouseconfig failed";
     $type, $dev;
+}
+
+sub shells($) {
+    my ($o) = @_;
+    grep { -x "$o->{prefix}$_" } @{$o->{default}->{shells}};
 }
 
 sub upgrFindInstall {

@@ -23,5 +23,7 @@ use strict;
 use lib qw(/usr/bin/perl-install . c c/blib/arch);
 use install2;
 
+$::testing = $ENV{PERL_INSTALL_TEST};
+
 install2::main(@ARGV);
  

@@ -2,7 +2,7 @@ package partition_table;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types);
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @fields2save);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -17,6 +17,9 @@ use Data::Dumper;
 
 
 @important_types = ("Linux native", "Linux swap", "DOS FAT16", "Win98 FAT32");
+
+@fields2save = qw(primary extended totalsectors);
+
 
 my %types = (
   0 => "Empty",
@@ -76,8 +79,6 @@ my %type2fs = (
 my %types_rev = reverse %types;
 my %fs2type = reverse %type2fs;
 
-my @fields2save = qw(primary extended totalsectors);
-
 
 1;
 
@@ -135,27 +136,73 @@ sub verifyInside($$) {
     $b->{start} <= $a->{start} && $a->{start} + $a->{size} <= $b->{start} + $b->{size};
 }
 
+sub verifyPrimary($) {
+    my ($pt) = @_;
+    my @l = (@{$pt->{normal}}, $pt->{extended});
+    foreach my $i (@l) { foreach (@l) {
+	$i != $_ and verifyNotOverlap($i, $_) || die "partitions $i->{start} $i->{size} and $_->{start} $_->{size} are overlapping!";
+    }}
+}
+
 sub assign_device_numbers($) {
     my ($hd) = @_;
 
-    my $i = 1; foreach (@{$hd->{primary}->{raw}}, map { $_->{normal} } @{$hd->{extended}}) { 
-	$_->{device} = $hd->{prefix} . $i++;
-    }
+    my $i = 1; 
+    $_->{device} = $hd->{prefix} . $i++ foreach @{$hd->{primary}->{raw}}, 
+                                                map { $_->{normal} } @{$hd->{extended} || []};
 
     # try to figure what the windobe drive letter could be!
     #
     # first verify there's at least one primary dos partition, otherwise it
     # means it is a secondary disk and all will be false :(
-    my ($c, @others) = grep { isDos($_) || isWin($_) } @{$hd->{primary}->{raw}};
+    my ($c, @others) = grep { isDos($_) || isWin($_) } @{$hd->{primary}->{normal}};
     $c or return;
 
     $i = ord 'D';
-    foreach (grep { isDos($_) || isWin($_) } @{$hd->{extended}}) {
+    foreach (grep { isDos($_) || isWin($_) } map { $_->{normal} } @{$hd->{extended}}) {
 	$_->{device_windobe} = chr($i++);
     }
     $c->{device_windobe} = 'C';
     $_->{device_windobe} = chr($i++) foreach @others;
 }
+
+sub remove_empty_extended($) {
+    my ($hd) = @_;
+    my $last = $hd->{primary}->{extended} or return;
+    @{$hd->{extended}} = grep {
+	if ($_->{normal}) {
+	    $last = $_;
+	} else {
+	    %{$last->{extended}} = $_->{extended} ? %{$_->{extended}} : ();
+	}
+	$_->{normal};
+    } @{$hd->{extended}};
+    adjust_main_extended($hd);
+}
+
+sub adjust_main_extended($) {
+    my ($hd) = @_;
+
+    if (!is_empty_array_ref $hd->{extended}) {
+	my ($l, @l) = @{$hd->{extended}};
+
+	# the first is a special case, must recompute its real size
+	my $start = round_down($l->{normal}->{start} - 1, cylinder_size($hd));
+	my $end = $l->{normal}->{start} + $l->{normal}->{size};
+	foreach (map $_->{normal}, @l) {
+	    $start = min($start, $_->{start});
+	    $end = max($end, $_->{start} + $_->{size});
+	}
+	$l->{start} = $hd->{primary}->{extended}->{start} = $start;
+	$l->{size} = $hd->{primary}->{extended}->{size} = $end - $start;
+    }
+    unless (@{$hd->{extended}} || !$hd->{primary}->{extended}) {
+	%{$hd->{primary}->{extended}} = (); # modify the raw entry
+	delete $hd->{primary}->{extended};
+    }
+    verifyPrimary($hd->{primary}); # verify everything is all right
+}
+
 
 sub get_normal_parts($) {
     my ($hd) = @_;
@@ -180,21 +227,20 @@ sub read_one($$) {
 
 sub read($;$) {
     my ($hd, $clearall) = @_;
-    my $pt = $clearall ? { raw => [ {}, {}, {}, {} ] } : read_one($hd, 0) || return 0;
+    my $pt = $clearall ? 
+      partition_table_raw::clear_raw() : 
+      read_one($hd, 0) || return 0;
 
     $hd->{primary} = $pt;
     $hd->{extended} = undef;
     $clearall and return $hd->{isDirty} = $hd->{needKernelReread} = 1;
-
-    my @l = (@{$pt->{normal}}, $pt->{extended});
-    foreach my $i (@l) { foreach (@l) {
-	$i != $_ and verifyNotOverlap($i, $_) || die "partitions $i->{device} and $_->{device} are overlapping!";
-    }}
+    verifyPrimary($pt);
 
     eval {
 	$pt->{extended} and read_extended($hd, $pt->{extended}) || return 0;
     }; die "extended partition: $@" if $@;
     assign_device_numbers($hd);
+    remove_empty_extended($hd);
     1;
 }
 
@@ -222,7 +268,7 @@ sub read_extended($$) {
     1;
 }
 
-# give a hard drive hd, write the partition data 
+# write the partition table
 sub write($) {
     my ($hd) = @_;
 
@@ -266,67 +312,105 @@ sub remove($$) {
     $i = 0; foreach (@{$hd->{primary}->{normal}}) {
 	if ($_ eq $part) {
 	    splice(@{$hd->{primary}->{normal}}, $i, 1);
-	    %$_ = ();
+	    %$_ = (); # blank it
 
 	    return $hd->{isDirty} = $hd->{needKernelReread} = 1;
 	}
 	$i++;
     }
     # otherwise search it in extended partitions
-    my $last = $hd->{primary}->{extended};
-    $i = 0; foreach (@{$hd->{extended}}) {
-	if ($_->{normal} eq $part) {
-	    %{$last->{extended}} = $_->{extended} ? %{$_->{extended}} : ();
-	    splice(@{$hd->{extended}}, $i, 1);
-	    
-	    unless (@{$hd->{extended}}) {
-		%{$hd->{primary}->{extended}} = ();
-		delete $hd->{primary}->{extended};
-	    }
+    foreach (@{$hd->{extended}}) {
+	$_->{normal} eq $part or next;
 
-	    return $hd->{isDirty} = $hd->{needKernelReread} = 1;
-	}
-	$last = $_;
-	$i++;
+	delete $_->{normal}; # remove it
+	remove_empty_extended($hd);
+
+	return $hd->{isDirty} = $hd->{needKernelReread} = 1;
     }
     0;
 }
 
 # create of partition at starting at `start', of size `size' and of type `type' (nice comment, uh?)
-# !be carefull!, no verification is done (start -> start+size must be free)
-sub add($$) {
+sub add_primary($$) {
     my ($hd, $part) = @_;
+
+    {
+	local $hd->{primary}->{normal}; # save it to fake an addition of $part, that way add_primary do not modify $hd if it fails
+	push @{$hd->{primary}->{normal}}, $part;
+	adjust_main_extended($hd); # verify
+	raw_add($hd->{primary}->{raw}, $part);
+    }
+    push @{$hd->{primary}->{normal}}, $part; # really do it
+}
+
+sub add_extended($$) {
+    my ($hd, $part) = @_;
+
+    my $e = $hd->{primary}->{extended};
+
+    if ($e && !verifyInside($part, $e)) {
+	#ie "sorry, can't add outside the main extended partition" unless $::unsafe;
+	my $end = $e->{start} + $e->{size};
+	my $start = min($e->{start}, $part->{start});
+	$end = max($end, $part->{start} + $part->{size}) - $start;
+	
+	{ # faking a resizing of the main extended partition to test for problems
+	    local $e->{start} = $start;
+	    local $e->{size} = $end - $start;
+	    eval { verifyPrimary($hd->{primary}) };
+	    $@ and die
+_("You have a hole in your partition table but I can't use it.
+The only solution is to move your primary partitions to have the hole next to the extended partitions");
+	}
+    }
+
+    if ($e && $part->{start} < $e->{start}) {
+
+	my $l = first (@{$hd->{extended}});
+
+	# the first is a special case, must recompute its real size
+	$l->{start} = round_down($l->{normal}->{start} - 1, cylinder_size($hd));
+	$l->{size} = $l->{normal}->{start} + $l->{normal}->{size} - $l->{start};
+	my $ext = { %$l };
+	unshift @{$hd->{extended}}, { type => 5, raw => [ $part, $ext, {}, {} ], normal => $part, extended => $ext };
+	# size will be autocalculated :)
+    } else {
+
+	my ($ext, $ext_size) = is_empty_array_ref($hd->{extended}) ?
+	  ($hd->{primary}, -1) : # -1 size will be computed by adjust_main_extended
+	  (top(@{$hd->{extended}}), $part->{size});
+	my %ext = ( type => 5, start => $part->{start}, size => $ext_size );
+    
+	raw_add($ext->{raw}, \%ext);
+	$ext->{extended} = \%ext;
+	push @{$hd->{extended}}, { %ext, raw => [ $part, {}, {}, {} ], normal => $part };
+    }
+    $part->{start}++; $part->{size}--; # let it start after the extended partition sector
+    adjustStartAndEnd($hd, $part);
+
+    adjust_main_extended($hd);
+}
+
+sub add($$;$) {
+    my ($hd, $part, $want_primary) = @_;
 
     $part->{notFormatted} = 1;
     $part->{isFormatted} = 0;
     $part->{rootDevice} = $hd->{device};
     $hd->{isDirty} = $hd->{needKernelReread} = 1;
+    $part->{start} ||= 1; # starting at sector 0 is not allowed
     adjustStartAndEnd($hd, $part);
 
-    if (is_empty_array_ref($hd->{primary}->{normal})) {
-	raw_add($hd->{primary}->{raw}, $part);
-	@{$hd->{primary}->{normal}} = $part;
-    } else {
-	$hd->{primary}->{extended} && !verifyInside($part, $hd->{primary}->{extended})
-	  and die "sorry, can't add outside the main extended partition";
+    my $e = $hd->{primary}->{extended};
 
-	foreach (@{$hd->{extended}}) {
-	    $_->{normal} and next;
-	    raw_add($_->{raw}, $part);
-	    $_->{normal} = $part;
-	    return;
-	}
-	my ($ext, $ext_size) = is_empty_array_ref($hd->{extended}) ?
-	  ($hd->{primary}, $hd->{totalsectors} - $part->{start}) :
-	  (top(@{$hd->{extended}}), $part->{size});
-	my %ext = ( type => 5, start => $part->{start}, size => $ext_size );
-	
-	raw_add($ext->{raw}, \%ext);
-	$ext->{extended} = \%ext;
-	push @{$hd->{extended}}, { %ext, raw => [ $part, {}, {}, {} ], normal => $part };
-
-	$part->{start}++; $part->{size}--; # let it start after the extended partition sector
-	adjustStartAndEnd($hd, $part);
+    if (is_empty_array_ref($hd->{primary}->{normal}) || $want_primary) {
+	eval { add_primary($hd, $part) };
+	return unless $@;
+    }
+    eval { add_extended($hd, $part) }; # try adding extended
+    if (my $err = $@) {
+	eval { add_primary($hd, $part) };
+	die $@ if $@; # send the add extended error which should be better
     }
 }
 
@@ -366,30 +450,30 @@ sub load($$;$) {
 
     my $h;
     {
-	no strict 'vars';
-	$h = eval join '', <F>;
+	local $/ = "\0";
+	eval <F>;
     }
     $@ and die _("Restoring from file %s failed: %s", $file, $@);
 
-    ref $h eq 'HASH' or die _("Bad backup file");
+    ref $h eq 'ARRAY' or die _("Bad backup file");
 
-    $h->{totalsectors} == $hd->{totalsectors} or $force 
-      or die "Bad totalsectors";
+    my %h; @h{@fields2save} = @$h;
+
+    $h{totalsectors} == $hd->{totalsectors} or $force or die "Bad totalsectors";
 
     # unsure we don't modify totalsectors
-    $h->{totalsectors} = $hd->{totalsectors} if $force;
+    local $hd->{totalsectors};
 
-    @{$hd}{@fields2save} = @{$h}{@fields2save};
+    @{$hd}{@fields2save} = @$h;
 
     $hd->{isDirty} = $hd->{needKernelReread} = 1;
 }
 
-
 sub save($$) {
     my ($hd, $file) = @_;
-    my %h; @h{@fields2save} = @{$hd}{@fields2save};
+    my @h = @{$hd}{@fields2save};
     local *F;
     open F, ">$file"
-      and print F Dumper(\%h) 
+      and print F Data::Dumper->Dump([\@h], ['$h']), "\0" 
       or die _("Error writing to file %s", $file);
 }

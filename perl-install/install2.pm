@@ -2,7 +2,7 @@ package install2;
 
 use diagnostics;
 use strict;
-use vars qw($testing $INSTALL_VERSION $o);
+use vars qw($o);
 
 use common qw(:common :file :system);
 use install_any qw(:all);
@@ -18,9 +18,6 @@ use detect_devices;
 use pkgs;
 use smp;
 use lang;
-
-$::testing = $ENV{PERL_INSTALL_TEST};
-$INSTALL_VERSION = 0;
 
 my @installStepsFields = qw(text help skipOnCancel skipOnLocal prev next);
 my @installSteps = (
@@ -42,7 +39,7 @@ my @installSteps = (
   addUser => [ __("Add a user"), __("help"), 0, 0 ],
   createBootdisk => [ __("Create bootdisk"), __("help"), 0, 1 ],
   setupBootloader => [ __("Install bootloader"), __("help"), 0, 1 ],
-#  configureX => [ __("Configure X"), __("help"), 0, 0 ],
+  configureX => [ __("Configure X"), __("help"), 0, 0 ],
   exitInstall => [ __("Exit install"), __("help"), 0, 0, undef, 'done' ],
 );
 
@@ -97,10 +94,10 @@ my $default = {
     rootPassword => 'toto',
     lang => 'fr',
     isUpgrade => 0,
-    installClass => 'Server',
+    installClass => 'newbie',
     bootloader => { onmbr => 1, linear => 0 },
     mkbootdisk => 0,
-    base => [ qw(basesystem console-tools mkbootdisk linuxconf anacron linux_logo rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup setuptool filesystem MAKEDEV SysVinit ash at authconfig bash bdflush binutils console-tools crontabs dev e2fsprogs ed etcskel file fileutils findutils getty_ps gpm grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which) ],
+    base => [ qw(basesystem initscripts console-tools mkbootdisk linuxconf anacron linux_logo rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup setuptool filesystem MAKEDEV SysVinit ash at authconfig bash bdflush binutils console-tools crontabs dev e2fsprogs ed etcskel file fileutils findutils getty_ps gpm grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which) ],
     packages => [ qw() ],
     partitionning => { clearall => $::testing, eraseBadPartitions => 1, autoformat => 1 },
     partitions => [
@@ -128,6 +125,7 @@ sub selectPath {
 
 sub selectInstallClass {
     $o->{installClass} = $o->selectInstallClass(@install_classes);
+    $::expert = $o->{installClass} eq "expert";
 }
 
 sub setupSCSI {
@@ -220,7 +218,7 @@ sub setupBootloader {
     $o->{isUpgrade} or modules::read_conf("$o->{prefix}/etc/conf.modules");
     $o->setupBootloader;
 }
-sub configureX { $o->setupXfree }
+sub configureX { $o->setupXfree if $o->{packages}->{XFree86}->{installed} }
 sub exitInstall { $o->exitInstall }
 
 
@@ -232,7 +230,7 @@ sub main {
 
     print STDERR "in second stage install\n";
     log::openLog(($::testing || $o->{localInstall}) && 'debug.log');
-    log::l("second stage install running (version $INSTALL_VERSION)");
+    log::l("second stage install running");
     log::ld("extra log messages are enabled");
 
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : "/mnt";
@@ -244,6 +242,9 @@ sub main {
 
     spawnSync();
     eval { spawnShell() };
+
+    # needed very early for install_steps_graphical
+    @{$o->{mouse}}{"xtype", "device"} = install_any::mouse_detect() unless $::testing;
 
     $o = install_steps_graphical->new($o);
 
@@ -258,17 +259,15 @@ sub main {
 
     for (my $step = $o->{steps}->{first}; $step ne 'done'; $step = getNextStep($step)) {
 	$o->enteringStep($step);
-	#eval { 
+	eval { 
 	    &{$install2::{$step}}();
-	#};
+	};
 	$o->errorInStep($@) if $@;
 	$o->leavingStep($step);
     }
     killCardServices();
 
     log::l("installation complete, leaving");
-
-    <STDIN> unless $::testing;
 }
 
 sub killCardServices { 

@@ -3,9 +3,10 @@ package fsedit;
 use diagnostics;
 use strict;
 
-use common qw(:common);
+use common qw(:common :constant);
 use partition_table qw(:types);
 use partition_table_raw;
+use Data::Dumper;
 use devices;
 use log;
 
@@ -45,12 +46,14 @@ sub hds($$) {
 	# for RAID arrays of format c0d0p1 
 	$hd->{prefix} .= "p" if $hd->{prefix} =~ m,(rd|ida)/,;
 
-	eval { $rc = partition_table::read($hd, $flags->{clearall}) }; 
+	eval { partition_table::read($hd, $flags->{clearall}) }; 
 	if ($@) {
-	    $@ =~ /bad magic number/ or die;
-	    partition_table_raw::zero_MBR($hd) if $flags->{eraseBadPartitions};
+#	    $@ =~ /bad magic number/ or die;
+	    $flags->{eraseBadPartitions} ?
+	      partition_table_raw::zero_MBR($hd) :
+	      die;
 	}
-	$rc ? push @hds, $hd : log::l("An error occurred reading the partition table for the block device $_->{device}");
+	push @hds, $hd;
     }
     [ @hds ];
 }
@@ -114,7 +117,7 @@ sub has_mntpoint($$) {
 sub check_mntpoint {
     my ($mntpoint, $hd, $part, $hds) = @_;
 
-    $mntpoint eq '' and return;
+    $mntpoint eq '' || isSwap($part) and return;
 
     local $_ = $mntpoint;
     m|^/| or die _("Mount points must begin with a leading /");
@@ -122,20 +125,20 @@ sub check_mntpoint {
 
     has_mntpoint($mntpoint, $hds) and die _("There is already a partition with mount point %s", $mntpoint);
 
-    if ($part->{start} + $part->{size} > 124 * partition_table::cylinder_size($hd)) {
+    if ($part->{start} + $part->{size} > 1024 * partition_table::cylinder_size($hd)) {
 	die "/boot ending on cylinder > 1024" if $mntpoint eq "/boot";
 	die     "/ ending on cylinder > 1024" if $mntpoint eq "/" && !has_mntpoint("/boot", $hds);
     }
 }
 
 sub add($$$;$) {
-    my ($hd, $part, $hds, $force) = @_;
+    my ($hd, $part, $hds, $options) = @_;
 
     isSwap($part) ?
       ($part->{mntpoint} = 'swap') :
-      $force || check_mntpoint($part->{mntpoint}, $hd, $part, $hds);
+      $options->{force} || check_mntpoint($part->{mntpoint}, $hd, $part, $hds);
 
-    partition_table::add($hd, $part);
+    partition_table::add($hd, $part, $options->{want_primary});
 }
 
 sub removeFromList($$$) {
@@ -203,4 +206,90 @@ sub auto_allocate($;$) {
 			      @{ $suggestions || \@suggestions } 
 			     ]);
     map { partition_table::assign_device_numbers($_) } @$hds;
+}
+
+sub undo_prepare($) {
+    my ($hds) = @_;
+    $Data::Dumper::Purity = 1;
+    foreach (@$hds) {
+	my @h = @{$_}{@partition_table::fields2save};
+	push @{$_->{undo}}, Data::Dumper->Dump([\@h], ['$h']);
+    }
+}
+
+sub undo($) {
+    my ($hds) = @_;
+    foreach (@$hds) {
+	my $h; eval pop @{$_->{undo}} || next;
+	@{$_}{@partition_table::fields2save} = @$h;
+	
+	$_->{isDirty} = $_->{needKernelReread} = 1;
+    }
+}
+
+sub verify_room {
+    my ($part, $hd2, $sector2) = @_;
+    my $free_sectors = [ 1, $hd2->{totalsectors} ]; # first sector is always occupied by the MBR
+    my $remove = sub { removeFromList($_[0]->{start}, $_[0]->{start} + $_[0]->{size}, $free_sectors) };
+
+    $_ eq $part or &$remove($_) foreach get_fstab($hd2);
+
+    for (my $i = 0; $i < @$free_sectors; $i += 2) {
+	$sector2 < $free_sectors->[$i] && $sector2 < $free_sectors->[$i + 1] or next;
+	$sector2 + $part->{size} < $free_sectors->[$i + 1] or die
+_("Not enough place to move (%dGb, should be %dGb)", ($free_sectors->[$i + 1] - $free_sectors->[$i]), $part->{size} >> 11);
+	return;
+    }
+    die _("There is already a partition there");
+}
+
+sub move {
+    my ($hd, $part, $hd2, $sector2) = @_;
+
+    my $part2 = { %$part };
+    $part2->{start} = $sector2;
+    partition_table::remove($hd, $part);
+    {
+    local ($part2->{notFormatted}, $part2->{isFormatted}); # do not allow partition::add to change this
+    partition_table::add($hd2, $part2);
+    }
+    verify_room($part, $hd2, $part2->{start});
+
+    return if $part2->{notFormatted} && !$part2->{isFormatted} || $::testing;
+
+    local (*F, *G);
+    sysopen F, $hd->{file}, 0 or die;
+    sysopen G, $hd2->{file}, 2 or die _("Error opening %s for writing: %s", $hd2->{file}, "$!");
+
+    my $base = $part->{start};
+    my $base2 = $part2->{start};
+    my $step = 1 << 10;
+    if ($hd eq $hd2) {
+	$part->{start} == $part2->{start} and return;
+	$step = min($step, abs($part->{start} - $part2->{start}));
+
+	if ($part->{start} < $part2->{start}) {
+	    $base  += $part->{size} - $step;
+	    $base2 += $part->{size} - $step;
+	    $step = -$step;
+	}
+    }
+
+    my $f = sub {
+	c::lseek_sector(fileno(F), $base,  0) or die "seeking to sector $base failed on drive $hd->{device}";
+	c::lseek_sector(fileno(G), $base2, 0) or die "seeking to sector $base2 failed on drive $hd2->{device}";
+    
+	my $buf;
+	sysread F, $buf, $SECTORSIZE * abs($_[0]) or die;
+	syswrite G, $buf;
+    };
+
+    for (my $i = 0; $i < $part->{size} / abs($step); $i++, $base += $step, $base2 += $step) {
+	&$f($step);
+    }
+    if (my $v = $part->{size} % abs($step) * sign($step)) {
+	$base += $v;
+	$base2 += $v;
+	&$f($v);
+    }
 }

@@ -33,13 +33,13 @@ use lang;
 use log;
 
 1;
+=cut
 
 sub errorInStep($$) {
     my ($o, $err) = @_;
     $o->ask_warn(_("Error"), [ _("An error occured"), $err ]);
 }
 
-=cut
 sub chooseLanguage($) {
     my ($o) = @_;
     lang::text2lang($o->ask_from_list("Language",
@@ -79,20 +79,6 @@ sub choosePartitionsToFormat($$) {
     }
 }
 
-sub installPackages {
-    my $o = shift;
-
-    my $old = \&log::ld;
-    local *log::ld = sub { 
-	my $m = shift;
-	if ($m =~ /^starting installing/) {
-	    my $name = first($_[0] =~ m|([^/]*)-.+?-|);
-	    print("installing package $name");
-	} else { goto $old }
-    };    
-    $o->SUPER::installPackages(@_);
-}
-
 sub createBootdisk($) {
     my ($o) = @_;
     
@@ -114,7 +100,7 @@ sub setupBootloader($) {
     
     $o->SUPER::setupBootloader;
 }
-=cut
+
 sub exitInstall { 
     my ($o) = @_;
     $o->ask_warn('',
@@ -126,3 +112,4 @@ Information on configuring your system is available in the post
 install chapter of the Official Linux Mandrake User's Guide.");
 }
 
+=cut

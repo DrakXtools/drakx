@@ -198,13 +198,6 @@ sub setupBootloader($) {
 
 sub setupXfree {
     my ($o) = @_;
-    my $x = $o->{default}->{Xserver} or return;
-    $o->{packages}->{$x} or die "can't find X server $x";
-
-    log::l("I will install the $x package");
-    pkgs::install($o->{prefix}, $o->{packages}->{$x}, $o->{isUpgrade}, 0);
-
-    #TODO
 }
 
 sub exitInstall {}

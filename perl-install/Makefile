@@ -1,5 +1,5 @@
 SO_FILES = c/blib/arch/auto/c/c.so
-PMS = *.pm c/*.pm resize_fat/*.pm po/*.pm commands install2 diskdrake
+PMS = *.pm c/*.pm resize_fat/*.pm po/*.pm pci_probing/*.pm commands install2 diskdrake
 ROOTDEST = /tmp/t
 DEST = $(ROOTDEST)/Mandrake/instimage
 DESTREP4PMS = $(DEST)/usr/bin/perl-install
@@ -24,11 +24,22 @@ clean:
 tar: clean
 	cd .. ; tar cfy perl-install.tar.bz2 $(EXCLUDE:%=--exclude %) perl-install
 
+floppy: tar
+	mcopy -o ../perl-install.tar.bz2 a:
+	mcopy -o ../perl-install.tar.bz2 a:a
+	mcopy -o ../perl-install.tar.bz2 a:aa
+
 tar-diskdrake: clean
 	cd .. ; rm -rf diskdrake ; cp -af perl-install diskdrake
 
-	l=`perl2fcalls -uses -excludec diskdrake | sort | uniq | sed -e 's/::/\//' -e 's/^/diskdrake\//' -e 's/$$/.pm/'` ; \
+	l=`./perl2fcalls -uses -excludec diskdrake | sort | uniq | sed -e 's/::/\//' -e 's/^/diskdrake\//' -e 's/$$/.pm/'` ; \
 	cd .. ; tar cfz diskdrake.tgz --exclude CVS $(patsubst %,diskdrake/%,c po diskdrake*) $$l
+
+tar-XFdrake: clean
+	cd .. ; rm -rf XFdrake ; cp -af perl-install XFdrake
+
+	l=`./perl2fcalls -uses -excludec -excludepci_probing::ids XFdrake | sort | uniq | sed -e 's/::/\//' -e 's/^/XFdrake\//' -e 's/$$/.pm/'` ; \
+	cd .. ; tar cfz XFdrake.tgz --exclude CVS $(patsubst %,XFdrake/%,c MonitorsDB po pci_probing XFdrake*) $$l
 
 c/c.xs: c/c.xs.pm
 	rm -f $@
@@ -46,7 +57,7 @@ $(DIRS):
 	$(MAKE) -C $@
 
 test_pms: verify_c
-	perl2fcalls -excludec install2
+	./perl2fcalls -excludec install2
 	(for i in $(PMS); do perl -cw -I. -Ic -Ic/blib/arch $$i || exit 1 ; done)
 
 verify_c:
@@ -118,6 +129,7 @@ get_needed_files: $(SO_FILES)
 	cp -a xmodmaps $(DEST)/usr/share
 	cp -a keymaps $(DEST)/usr/share
 	cp -a consolefonts $(DEST)/usr/share
+	cp MonitorsDB $(DEST)/usr/share
 	cp compss $(ROOTDEST)/Mandrake/base
 
 	ln -s install2 $(DEST)/usr/bin/runinstall2

@@ -49,5 +49,10 @@ sub ask_many_from_list($$$$;$) {
     $o->ask_many_from_listW($title, $message, $l, $def);
 }
 
+sub ask_from_entry($$$;$) {
+    my ($o, $title, $message, $def) = @_;
 
+    $message = ref $message ? $message : [ $message ];
 
+    $o->ask_from_entryW($title, $message, $def);
+}

@@ -6,10 +6,10 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common => [ qw(_ __ min max sum product bool ikeys member divide is_empty_array_ref add2hash set_new set_add round_up round_down first second top uniq translate untranslate) ],
-    functional => [ qw(fold_left) ],
-    file => [ qw(dirname basename touch all glob_ cat_ chop_ mode getVarsFromSh) ],
-    system => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_) ],
+    common => [ qw(__ min max sum sign product bool ikeys member divide is_empty_array_ref add2hash set_new set_add round_up round_down first second top uniq translate untranslate) ],
+    functional => [ qw(fold_left difference2) ],
+    file => [ qw(dirname basename touch all glob_ cat_ chop_ mode) ],
+    system => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_ getVarsFromSh) ],
     constant => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
@@ -22,10 +22,12 @@ $SECTORSIZE = 512;
 1;
 
 sub _ { my $s = shift @_; sprintf translate($s), @_ }
+#delete $main::{'_'};
 sub __ { $_[0] }
 sub min { fold_left(sub { $a < $b ? $a : $b }, @_) }
 sub max { fold_left(sub { $a > $b ? $a : $b }, @_) }
 sub sum { fold_left(sub { $a + $b }, @_) }
+sub sign { $_[0] <=> 0 }
 sub product { fold_left(sub { $a * $b }, @_) }
 sub first { $_[0] }
 sub second { $_[1] }
@@ -44,6 +46,7 @@ sub divide { my $d = int $_[0] / $_[1]; wantarray ? ($d, $_[0] % $_[1]) : $d }
 sub round_up { my ($i, $r) = @_; $i += $r - ($i + $r - 1) % $r - 1; }
 sub round_down { my ($i, $r) = @_; $i -= $i % $r; }
 sub is_empty_array_ref { my $a = shift; !defined $a || @$a == 0 }
+sub difference2 { my %l; @l{@{$_[1]}} = (); grep { !exists $l{$_} } @{$_[0]} }
 
 sub set_new(@) { my %l; @l{@_} = undef; { list => [ @_ ], hash => \%l } }
 sub set_add($@) { my $o = shift; foreach (@_) { exists $o->{hash}->{$_} and next; push @{$o->{list}}, $_; $o->{hash}->{$_} = undef } }

@@ -12,6 +12,11 @@ use my_gtk qw(:helpers :wrappers);
 
 1;
 
+sub ask_from_entryW {
+    my ($o, $title, $messages, $def) = @_;
+    my_gtk::ask_from_entry($title, @$messages);
+}
+
 sub ask_from_listW {
     my ($o, $title, $messages, $l, $def) = @_;
 

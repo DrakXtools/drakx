@@ -79,7 +79,7 @@ sub format_part($;$) {
 
     $part->{isFormatted} and return;
 
-    log::l("formatting device $part->{device} (type ", type2name($_->{type}), ")");
+    log::l("formatting device $part->{device} (type ", type2name($part->{type}), ")");
 
     if (isExt2($part)) {
 	format_ext2($part->{device}, $bad_blocks);
@@ -151,7 +151,7 @@ sub umount_part($;$) {
 
     isSwap($part) ?
       swap::swapoff($part->{device}) :
-      umount(($prefix || '') . ($part->{mntpoint} || "/dev/$part->{device}"));
+      umount(($prefix || '') . ($part->{mntpoint} || devices::make($part->{device})));
     $part->{isMounted} = 0;
 }
 

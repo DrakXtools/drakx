@@ -66,7 +66,7 @@ sub addUser($) {
     } until ($w{password} eq $o->readln());
     print "Real name: "; $w{realname} = $o->readln();
     
-    $w{shell} = $o->ask_from_list('', 'Shell', $o->{default}->{shells}, "/bin/bash");
+    $w{shell} = $o->ask_from_list('', 'Shell', [ install_any::shells($o) ], "/bin/bash");
     
     $o->{default}->{user} = { map { $_ => $w{$_}->get_text } qw(name password realname shell) };
     $o->SUPER::addUser;

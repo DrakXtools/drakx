@@ -13,7 +13,7 @@ use my_gtk qw(:wrappers);
 
 my $tmpconfig = "/tmp/Xconfig";
 
-my (%cards, %monitors);
+my ($prefix, %cards, %monitors);
 
 1;
 
@@ -84,7 +84,7 @@ sub readMonitorsDB {
     %monitors and return;
 
     local *F;
-    open F, $file or die "can't open monitors database ($file): ?!";
+    open F, $file or die "can't open monitors database ($file): $!";
     my $lineno = 0; foreach (<F>) {
 	$lineno++;
 	s/\s+$//;
@@ -109,15 +109,15 @@ sub rewriteInittab {
     my ($runlevel) = @_;
     {
 	local (*F, *G);
-	open F, "/etc/inittab" or die "cannot open /etc/inittab: $!";
-	open G, "> /etc/inittab-" or die "cannot write in /etc/inittab-: $!";
+	open F, "$prefix/etc/inittab" or die "cannot open $prefix/etc/inittab: $!";
+	open G, "> $prefix/etc/inittab-" or die "cannot write in $prefix/etc/inittab-: $!";
     
 	foreach (<F>) {
-	    print G /^(id:)[35](:initdefault:)\s*$/ ? "$1$runlevel$2\n" : $_;
+	    print G /^(id:)[35](:initdefault:)\s*$/ ? "$1$runlevel$2\n" : $_; # **
 	}
     }
-    unlink("/etc/inittab");
-    rename("/etc/inittab-", "/etc/inittab");
+    unlink("$prefix/etc/inittab");
+    rename("$prefix/etc/inittab-", "$prefix/etc/inittab");
 }
 
 sub keepOnlyLegalModes {
@@ -144,21 +144,25 @@ sub cardConfiguration(;$$) {
     my ($card, $noauto) = @_;
     $card ||= {};
 
-    readCardsDB("/usr/X11R6/lib/X11/Cards");
+    readCardsDB("$prefix/usr/X11R6/lib/X11/Cards");
 
-    add2hash($card, cardConfigurationAuto()) unless $card->{type} || $card->{server} || $noauto;
+    add2hash($card, $cards{$card->{type}}) if $card->{type}; # try to get info from given type
+    $card->{type} = undef unless $card->{server}; # bad type as we can't find the server
+	
+    add2hash($card, cardConfigurationAuto()) unless $card->{server} || $noauto;
     add2hash($card, { type => $in->ask_from_list('', _("Choose a graphic card"), [keys %cards]) }) unless $card->{type} || $card->{server};
+
     add2hash($card, $cards{$card->{type}}) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
     $card->{prog} = "/usr/X11R6/bin/XF86_$card->{server}";
-
-    -x $card->{prog} or !defined $install or &$install($card->{server});
-    -x $card->{prog} or die "server $card->{server} is not available (should be in $card->{prog})";
-
+    
+    -x "$prefix$card->{prog}" or !defined $install or &$install($card->{server});
+    -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
+	
     unless ($::testing) {
-	unlink("/etc/X11/X");
-	symlink("../../$card->{prog}", "/etc/X11/X");
+	unlink("$prefix/etc/X11/X");
+	symlink("../..$card->{prog}", "$prefix/etc/X11/X");
     }
 
     unless ($card->{type}) {
@@ -177,11 +181,13 @@ sub cardConfiguration(;$$) {
 sub monitorConfiguration(;$) {
     my $monitor = shift || {};
 
-    readMonitorsDB("MonitorsDB");
+    $monitor->{hsyncrange} && $monitor->{vsyncrange} and return $monitor;
+
+    readMonitorsDB(-e "MonitorsDB" ? "MonitorsDB" : "/usr/share/MonitorsDB");
 
     add2hash($monitor, { type => $in->ask_from_list('', _("Choose a monitor"), [keys %monitors]) }) unless $monitor->{type};
     add2hash($monitor, $monitors{$monitor->{type}});
-    add2hash($monitor, { vendor => "Unknown", model => "Unknown" });
+    add2hash($monitor, { type => "Unknown", vendor => "Unknown", model => "Unknown" });
     $monitor;
 }
 
@@ -192,7 +198,7 @@ sub testConfig($) {
     write_XF86Config($o, $tmpconfig);
 
     local *F;
-    open F, "$o->{card}->{prog} :9 -probeonly -pn -xf86config $tmpconfig 2>&1 |";
+    open F, "$prefix$o->{card}->{prog} :9 -probeonly -pn -xf86config $tmpconfig 2>&1 |";
     foreach (<F>) {
 	$o->{card}->{memory} ||= $2 if /(videoram|Video RAM):\s*(\d*)/;
 
@@ -219,9 +225,9 @@ sub testFinalConfig($;$) {
     $o->{card}->{depth} or
       $in->ask_warn('', _("Resolutions not chosen yet")), return;
 
-    rename("/etc/X11/XF86Config", "/etc/X11/XF86Config.old") || die "unable to make a backup of XF86Config" unless $::testing;
+    rename("$prefix/etc/X11/XF86Config", "$prefix/etc/X11/XF86Config.old") || die "unable to make a backup of XF86Config" unless $::testing;
 
-    write_XF86Config($o, $::testing ? $tmpconfig : "/etc/X11/XF86Config");
+    write_XF86Config($o, $::testing ? $tmpconfig : "$prefix/etc/X11/XF86Config");
 
     $auto 
       or $in->ask_yesorno(_("Test configuration"), _("Do you want to test configuration?"))
@@ -230,9 +236,15 @@ sub testFinalConfig($;$) {
     my $pid; unless ($pid = fork) {
 	my @l = "X";
 	@l = ($o->{card}->{prog}, "-xf86config", $tmpconfig) if $::testing;
+	chroot $prefix if $prefix;
 	exec @l, ":9" or exit 1;
     }
     do { sleep 1; } until (c::Xtest(':0'));
+
+    # create a link from the non-prefixed /tmp/.X11-unix/X9 to the prefixed one
+    # that way, you can talk to :9 without doing a chroot
+    unlink "/tmp/.X11-unix/X9" if $prefix;
+    symlink "$prefix/tmp/.X11-unix/X9", "/tmp/.X11-unix/X9" if $prefix;
 
     local *F;
     open F, "|perl" or die;
@@ -242,7 +254,7 @@ sub testFinalConfig($;$) {
         use my_gtk qw(:wrappers);
 
 	$ENV{DISPLAY} = ":9";
-        gtkset_mousecursor(2);
+        gtkset_mousecursor(68);
         gtkset_background(200, 210, 210);
         my ($h, $w) = Gtk::Gdk::Window->new_foreign(Gtk::Gdk->ROOT_WINDOW)->get_size;
         $my_gtk::force_position = [ $w / 3, $h / 2.4 ];
@@ -259,10 +271,11 @@ sub testFinalConfig($;$) {
     };
     my $rc = close F;
     my $err = $?;
+
+    unlink "/tmp/.X11-unix/X9" if $prefix;
     kill 2, $pid;
 
     $rc || $err == 222 << 8 or $in->ask_warn('', _("An error occured, try changing some parameters"));
-
     $rc;
 }
 
@@ -378,11 +391,6 @@ sub resolutionsConfiguration($$) {
     my $nowarning = $auto || $option eq 'nowarning';
     my $noauto = $option eq 'noauto';
 
-    unless ($card->{depth}) {
-	$card->{depth}->{$_} = [ map { [ split "x" ] } @resolutions ] 
-	  foreach @depths;
-    }
-
     # For the mono and vga16 server, no further configuration is required.
     return if member($card->{server}, "Mono", "VGA16");
 
@@ -411,15 +419,25 @@ sub resolutionsConfiguration($$) {
     #$unknown and $manual ||= !$in->ask_okcancel('', [ _("I can try to autodetect information about graphic card, but it may freeze :("),
     #						       _("Do you want to try?") ]);
     
-    if ($nowarning || (!$noauto && $in->ask_okcancel(_("Automatic resolutions"), 
+    unless ($card->{depth}) {
+	$card->{depth}->{$_} = [ map { [ split "x" ] } @resolutions ] 
+	  foreach @depths;
+
+	if ($nowarning || (!$noauto && $in->ask_okcancel(_("Automatic resolutions"), 
 _("I can try to find the available resolutions (eg: 800x600).
 Alas it can freeze sometimes
 Do you want to try?")))) {
-	autoResolutions($o, $nowarning);
+	    autoResolutions($o, $nowarning);
+	}
     }
 
     # sort resolutions in each depth
-    @$_ = sort { $b->[0] <=> $a->[0] } @$_ foreach values %{$card->{depth}};
+    { 
+	my $i;
+	@$_ = grep { first($i != $_->[0], $i = $_->[0]) }
+	      sort { $b->[0] <=> $a->[0] } @$_ 
+		foreach values %{$card->{depth}};
+    } 
 
     # remove unusable resolutions (based on the video memory size)
     keepOnlyLegalModes($card);
@@ -462,11 +480,11 @@ sub write_XF86Config {
     # Write pointer section.     
     $O = $o->{mouse};
     print F $pointersection_text1;
-    print F qq(    Protocol    "$O->{type}"\n);
+    print F qq(    Protocol    "$O->{xtype}"\n);
     print F qq(    Device      "$O->{device}"\n);
     # this will enable the "wheel" or "knob" functionality if the mouse supports it 
     print F "    ZAxisMapping 4 5\n" if
-      member($O->{type}, qw(IntelliMouse IMPS/2 ThinkingMousePS/2 NetScrollPS/2 NetMousePS/2 MouseManPlusPS/2));
+      member($O->{xtype}, qw(IntelliMouse IMPS/2 ThinkingMousePS/2 NetScrollPS/2 NetMousePS/2 MouseManPlusPS/2));
 
     print F $pointersection_text2;
     print F "#" unless $O->{emulate3buttons};
@@ -538,9 +556,7 @@ Section "Screen"
 	print F "    DefaultColorDepth $defdepth\n" if $defdepth;
 
         foreach (ikeys(%$depths)) {
-	    my $m = join(" ", 
-			 map { '"' . join("x", @$_) . '"' }
-			 sort { $b->[0] <=> $a->[0] } @{$depths->{$_}});
+	    my $m = join(" ", map { qq("$_->[0]x$_->[1]") } @{$depths->{$_}});
 	    print F qq(    Subsection "Display"\n);
 	    print F qq(        Depth       $_\n) if $_;
 	    print F qq(        Modes       $m\n);
@@ -575,10 +591,10 @@ Section "Screen"
 sub XF86check_link {
     my ($void) = @_;
 
-    my $f = "/etc/X11/XF86Config";
+    my $f = "$prefix/etc/X11/XF86Config";
     touch($f);
 
-    my $l = "/usr/X11R6/lib/X11/XF86Config";
+    my $l = "$prefix/usr/X11R6/lib/X11/XF86Config";
 
     if (-e $l && (stat($f))[1] != (stat($l))[1]) { # compare the inode, must be the sames
 	-e $l and unlink($l) || die "can't remove bad $l";
@@ -589,10 +605,9 @@ sub XF86check_link {
 
 # * Program entry point. 
 sub main {
-    my ($default, $interact, $install_pkg) = @_;
-    my $o = $default;
-    $in = $interact;
-    $install = $install_pkg;
+    my $o;
+    ($prefix, $o, $in, $install) = @_;
+    $o ||= {};
 
     XF86check_link();
 
@@ -611,7 +626,10 @@ sub main {
 	   __("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() },
            __("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto') },
 	   __("Change Resolution") => sub { resolutionsConfiguration($o, 'noauto') },
-	   __("Automaticall resolutions search") => sub { resolutionsConfiguration($o, 'nowarning') },
+	   __("Automaticall resolutions search") => sub { 
+	       delete $o->{card}->{depth};
+	       resolutionsConfiguration($o, 'nowarning');
+	   },
 	   __("Test again") => sub { $ok = testFinalConfig($o, 1) },
 	   __("Quit") => sub { $quit = 1 },
         );

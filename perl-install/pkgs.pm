@@ -34,7 +34,7 @@ sub select($$;$) {
 	my $n = shift @l;
 	$n =~ /|/ and $n = first(split '\|', $n); #TODO better handling of choice
 	my $i = Package($packages, $n);
-	$i->{base} = $base;
+	$i->{base} ||= $base;
 	$i->{deps} or log::l("missing deps for $n");
 	push @l, @{$i->{deps} || []} unless $i->{selected};
 	$i->{selected}++ unless $i->{selected} == -1;
@@ -42,6 +42,7 @@ sub select($$;$) {
 }
 sub unselect($$) {
     my ($packages, $p) = @_;
+    $p->{base} and return;
     my $set = set_new($p->{name});
     my $l = $set->{list};
 
@@ -57,7 +58,7 @@ sub unselect($$) {
 	my $n = shift @$l;
 	my $i = Package($packages, $n);
 
-	$i->{selected} <= 0 and next;
+	$i->{selected} <= 0 || $i->{base} and next;
 	if (--$i->{selected} == 0) {
 	    push @$l, @{$i->{deps} || []};
 	}
@@ -121,6 +122,7 @@ sub getDeps($) {
     open F, install_any::imageGetFile("depslist") or die "can't find dependencies list";
     foreach (<F>) {
 	my ($name, $size, @deps) = split;
+	$packages->{$name} or next;
 	$packages->{$name}->{size} = $size;
 	$packages->{$name}->{deps} = \@deps;
 	map { push @{$packages->{$_}->{provides}}, $name } @deps;
@@ -160,6 +162,7 @@ sub setCompssSelected($$$) {
     my $L = uc $l;
 
     my $verif_lang = sub {
+	local $SIG{__DIE__} = 'none';
 	$_[0] =~ /-([^-]*)$/;
 	$1 eq $ENV{LANG} || eval { lang::text2lang($1) eq $ENV{LANG} } && !$@;
     };
@@ -252,6 +255,7 @@ sub install {
     my ($total, $nb);
 
     foreach my $p (@$toInstall) {
+	$p->{installed} = 1;
 	c::rpmtransAddPackage($trans, getHeader($p), $p->{file}, $isUpgrade);
 	$nb++;
 	$total += $p->{size};

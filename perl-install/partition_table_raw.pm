@@ -98,4 +98,10 @@ sub write($$$) {
     syswrite F, $magic, length $magic or return 0;
     1;
 }
-sub zero_MBR($) { &write($_[0], 0, [ {} x $nb_primary ]); }
+
+sub clear_raw { { raw => [ ({}) x $nb_primary ] } }
+
+sub zero_MBR($) { 
+    $_[0]->{primary} = clear_raw();
+    delete $_[0]->{extended};
+}
