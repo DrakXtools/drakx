@@ -1320,15 +1320,7 @@ sub setup_common {
 	    $isHPOJ = $in->ask_yesorno(_("Add a new printer"),
 				       _("Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300 with scanner, Sony IJP-V100), an HP PhotoSmart or an HP LaserJet 2200?"), 0);
 	}
-	if (($makemodel =~ /HP\s+OfficeJet/i) ||
-	    ($makemodel =~ /HP\s+PSC/i) ||
-	    ($makemodel =~ /HP\s+PhotoSmart/i) ||
-	    ($makemodel =~ /HP\s+LaserJet\s+1100/i) ||
-	    ($makemodel =~ /HP\s+LaserJet\s+1200/i) ||
-	    ($makemodel =~ /HP\s+LaserJet\s+1220/i) ||
-	    ($makemodel =~ /HP\s+LaserJet\s+2200/i) ||
-	    ($makemodel =~ /HP\s+LaserJet\s+3200/i) ||
-	    ($makemodel =~ /HP\s+LaserJet\s+33.0/i) ||
+	if (($makemodel =~ /HP\s+(OfficeJet|PSC|PhotoSmart|LaserJet\s+(1200|1220|2200|3200|33.0))/i) ||
 	    ($makemodel =~ /Sony\s+IJP[\s\-]+V[\s\-]+100/i) ||
 	    ($isHPOJ)) {
 	    # Install HPOJ package
@@ -2343,11 +2335,11 @@ The \"%s\" command also allows to modify the option settings for a particular pr
 (!$cupsremote ?
  _("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s%s
 
-", $scanning, $photocard) . printer::help_output($printer, 'lp') : 
+", $scanning, $photocard) . printer::help_output($printer, 'lpd') : 
  $scanning . $photocard .
  _("Here is a list of the available printing options for the current printer:
 
-") . printer::help_output($printer, 'lp')) : $scanning . $photocard);
+") . printer::help_output($printer, 'lpd')) : $scanning . $photocard);
     } elsif ($spooler eq "lprng") {
 	$dialogtext =
 _("To print a file from the command line (terminal window) use the command \"%s <file>\".
