@@ -475,15 +475,16 @@ sub choosePackages {
 	    my $max = round_up(min($max_size, $availableC) / sqr(1024), 100);
 
 	    if ($::beginner) {		
-		my (@l, @text);
+		my (@l);
+		my @text = (__("Minimum (%dMB)"), __("Recommended (%dMB)"), __("Complete (%dMB)"));
 		if ($o->{meta_class} eq 'desktop') {
-		    @l = (500, 800, 0);
-		    @text = (__("Minimum (%dMB)"), __("Complete (%dMB)"), __("Custom"));
-		    $max > $l[1] or splice(@l, 1, 1), splice(@text, 1, 1);
+		    @l = (300, 500, 800, 0);
+		    $max > $l[2] or splice(@l, 2, 1);
+		    $max > $l[1] or splice(@l, 1, 1);
 		    $max > $l[0] or @l = $max;
+		    $text[$#l] = __("Custom");
 		} else {
 		    @l = (300, 700, $max);
-		    @text = (__("Minimum (%dMB)"), __("Recommended (%dMB)"), __("Complete (%dMB)"));
 		    $l[2] > $l[1] + 200 or splice(@l, 1, 1); #- not worth proposing too alike stuff
 		    $l[1] > $l[0] + 100 or splice(@l, 0, 1);
 		}

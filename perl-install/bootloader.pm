@@ -439,6 +439,7 @@ sub install_lilo($$) {
 	#- print F "password=", $lilo->{password} if $lilo->{restricted} && $lilo->{password}; #- done by msec
 	print F "timeout=", round(10 * $lilo->{timeout}) if $lilo->{timeout};
 	print F "message=/boot/message" if $lilo->{message};
+	print F "menu-scheme=wb:bw:wb:bw";
 
 	foreach (@{$lilo->{entries}}) {
 	    print F "$_->{type}=$_->{kernel_or_dev}";
