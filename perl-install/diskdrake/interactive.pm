@@ -1295,7 +1295,7 @@ sub tell_wm_and_reboot() {
 	    my ($wm, $pid) = @ARGV;
 	    my $nb;
 	    for ($nb = 20; $nb && -e "/proc/$pid"; $nb--) { sleep 1 }
-	    exec 'reboot';
+	    exec 'reboot' if $nb;
 	), $wm, $pid;
     }
 }
