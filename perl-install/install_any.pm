@@ -643,9 +643,9 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
 	    do {
 		askChangeMedium($o->{method}, $k)
 		    or next;
-		mountCdrom("/tmp/image", $cdrom)
-	    } while (!-d "/tmp/image/$m->{rpmsdir}");
-	    $current_medium = $k
+		mountCdrom("/tmp/image", $cdrom);
+	    } while !-d "/tmp/image/$m->{rpmsdir}";
+	    $current_medium = $k;
 	}
 	log::l("copying /tmp/image/$m->{rpmsdir} to $o->{prefix}/var/ftp/pub/Mandrakelinux/media");
 	my $wait_w = $o->wait_message(N("Please wait"), N("Copying in progress"));
