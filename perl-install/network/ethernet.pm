@@ -126,13 +126,13 @@ sub conf_network_card_backend {
     #-type =static or dhcp
     if (!$interface) {
 	my @all_cards = detect_devices::getNet();
-	my @unconfigured_interfaces = qw(ADIModem);
 
 	my @devs = detect_devices::pcmcia_probe();
 	modules::mergein_conf("$prefix/etc/modules.conf");
 	my $saved_driver;
 	return map {
 	    my $interface = $_;
+	    my $interface_state = `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig "$interface"`;
 	    my $a = modules::get_alias($interface);
 	    my $b;
 	    foreach (@devs) {
@@ -140,10 +140,10 @@ sub conf_network_card_backend {
 	    }
 	    $a ||= $b;
 	    $a and $saved_driver = $a;
-	    if_(!member($interface, @unconfigured_interfaces) || $a, [$interface, $saved_driver]);
+	    if_($interface_state =~ /inet addr|Bcast|Mask|Interrupt|Base address/ && $a, [$interface, $saved_driver]);
 	} @all_cards, @unconfigured_interfaces;
     }
-    my ($device) = $interface =~ /(ADIModem|eth[0-9]+)/ or die("the interface is not an ethx or other (like ADIModem)");
+    my ($device) = $interface =~ /eth[0-9]+/ or die("the interface is not an ethx");
     $netc->{NET_DEVICE} = $device; #- one consider that there is only ONE Internet connection device..
 
     @{$intf->{$device}}{qw(DEVICE BOOTPROTO   NETMASK     NETWORK ONBOOT)} = ($device, $type, '255.255.255.0', $netadr, 'yes');
