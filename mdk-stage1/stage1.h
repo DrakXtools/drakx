@@ -36,7 +36,7 @@ extern char * interactive_fifo;
 #define MODE_KEEP_MOUNTED   (1 << 5) /* for rescue */
 #define MODE_DEBUGSTAGE1    (1 << 6)
 #define MODE_CHANGEDISK     (1 << 10)
-#define MODE_UPDATEMODULES  (1 << 11)
+#define MODE_THIRDPARTY     (1 << 11)
 #define MODE_NOAUTO         (1 << 12)
 #define MODE_NETAUTO        (1 << 13)
 #define MODE_RECOVERY       (1 << 14)
@@ -46,7 +46,7 @@ extern char * interactive_fifo;
 #define IS_AUTOMATIC   (get_param(MODE_AUTOMATIC))
 #define IS_DEBUGSTAGE1 (get_param(MODE_DEBUGSTAGE1))
 #define IS_CHANGEDISK  (get_param(MODE_CHANGEDISK))
-#define IS_UPDATEMODULES (get_param(MODE_UPDATEMODULES))
+#define IS_THIRDPARTY  (get_param(MODE_THIRDPARTY))
 #define IS_NOAUTO      (get_param(MODE_NOAUTO))
 #define IS_NETAUTO     (get_param(MODE_NETAUTO))
 #define IS_RECOVERY    (get_param(MODE_RECOVERY))

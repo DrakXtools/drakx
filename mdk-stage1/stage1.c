@@ -585,8 +585,8 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
         /* load usb interface as soon as possible, helps usb mouse detection in stage2 */
 	probe_that_type(USB_CONTROLLERS, BUS_USB);
 
-	if (IS_UPDATEMODULES)
-		update_modules();
+	if (IS_THIRDPARTY)
+		thirdparty_load_modules();
 
 #ifdef ENABLE_PCMCIA
 	if (!IS_NOAUTO)

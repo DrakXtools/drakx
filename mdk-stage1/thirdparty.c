@@ -1,4 +1,5 @@
 /*
+ * Guillaume Cottenceau (gc@mandrakesoft.com)
  * Olivier Blin (oblin@mandrakesoft.com)
  *
  * Copyright 2005 Mandrakesoft
@@ -24,11 +25,13 @@
 #include "mount.h"
 #include "frontend.h"
 #include "partition.h"
+#include "automatic.h"
 
 #include "thirdparty.h"
 
+#define THIRDPARTY_MOUNT_LOCATION "/tmp/thirdparty"
 
-static enum return_type third_party_choose_device(char ** device, char *mount_location)
+static enum return_type third_party_choose_device(char ** device)
 {
 	char ** medias, ** medias_models;
 	char ** ptr, ** ptr_models;
@@ -61,23 +64,17 @@ static enum return_type third_party_choose_device(char ** device, char *mount_lo
 	if (strstr(floppy_dev, "/dev/") == floppy_dev) {
 		floppy_dev = floppy_dev + 5;
 	}
+	if (floppy_dev)
+		count += 1;
 
 	remove_wait_message();
 
 	if (count == 0) {
-		if (floppy_dev) {
-			log_message("third party : no disk or cdrom drive found, trying with floppy");
-			*device = floppy_dev;
-			return RETURN_OK;
-		} else { 
-			stg1_error_message("I can't find any floppy, disk or cdrom on this system. "
-					   "No third-party kernel modules will be used.");
-			return RETURN_ERROR;
-		}
+		stg1_error_message("I can't find any floppy, disk or cdrom on this system. "
+				   "No third-party kernel modules will be used.");
+		return RETURN_BACK;
 	}
 
-	if (floppy_dev)
-		count += 1;
 
 	ptr = medias = malloc((count + 1) * sizeof(char *));
 	ptr_models =medias_models = malloc((count + 1) * sizeof(char *));
@@ -107,31 +104,24 @@ static enum return_type third_party_choose_device(char ** device, char *mount_lo
 	ptr[0] = NULL;
 	ptr_models[0] = NULL;
 
-	results = ask_from_list_comments("If you want to insert third-party kernel modules, "
-					 "please select the disk containing the modules.",
-					 medias, medias_models, device);
-	if (results != RETURN_OK)
-		return results;
-
+	if (count == 1) {
+		*device = medias[0];
+	}  else {
+		results = ask_from_list_comments("If you want to insert third-party kernel modules, "
+						 "please select the disk containing the modules.",
+						 medias, medias_models, device);
+		if (results != RETURN_OK)
+			return results;
+	}
+ 
 	/* a floppy is selected, don't try to list partitions */
 	if (streq(*device, floppy_dev)) {
-		if (try_mount(floppy_dev, mount_location) == -1) {
-			stg1_error_message("I can't mount the selected floppy.");
-			return RETURN_ERROR;
-		}
 		return RETURN_OK;
 	}
 
 #ifndef DISABLE_CDROM
-	/* a cdrom is selected, mount it as iso9660 */
+	/* a cdrom is selected, don't try to list partitions */
 	if (device >= cdrom_medias) {
-		char device_fullname[50];
-		strcpy(device_fullname, "/dev/");
-		strcat(device_fullname, *device);
-		if (my_mount(device_fullname, mount_location, "iso9660", 0)) {
-			stg1_error_message("I can't mount the selected cdrom.");
-			return RETURN_ERROR;
-		}
 		return RETURN_OK;
 	}
 #endif
@@ -157,69 +147,150 @@ static enum return_type third_party_choose_device(char ** device, char *mount_lo
 	results = ask_from_list_comments("Please select the partition containing "
 					 "the third party modules.",
 					 parts, parts_comments, device);
-	if (results == RETURN_OK) {
-		if (try_mount(*device, mount_location) == -1) {
-			stg1_error_message("I can't mount the selected partition.");
-			return RETURN_ERROR;
-		}
+	if (results == RETURN_OK)
 		return RETURN_OK;
-	}
 #endif
 
-	stg1_error_message("I can't mount the selected device.");
+	stg1_error_message("Sorry, no third party device can be used.");
 
-	return RETURN_ERROR;
+	return RETURN_BACK;
 }
 
-void thirdparty_load_modules(void)
+
+static enum return_type thirdparty_mount_device(char * device)
+{
+        log_message("third party : trying to mount device %s", device);
+	if (try_mount(device, THIRDPARTY_MOUNT_LOCATION) == -1) {
+		stg1_error_message("I can't mount the selected device (%s).", device);
+		return RETURN_ERROR;
+	}
+	return RETURN_OK;
+}
+
+
+static enum return_type thirdparty_prompt_modules(char ** modules_list)
 {
 	enum return_type results;
-	char * mount_location = "/tmp/thirdparty";
-	char ** modules;
 	char final_name[500];
-	char * choice;
+	char *module_name;
 	int rc;
 	char * questions[] = { "Options", NULL };
 	static char ** answers = NULL;
 
-	do {
-		results = third_party_choose_device(&choice, mount_location);
-		if (results == RETURN_BACK)
-			return;
-	} while (results == RETURN_ERROR);
+	while (1) {
+		results = ask_from_list("Which driver would you like to insmod?", modules_list, &module_name);
+		if (results != RETURN_OK)
+			break;
 
-        log_message("third party : using device %s", choice);
+		sprintf(final_name, "%s/%s", THIRDPARTY_MOUNT_LOCATION, module_name);
 
-	modules = list_directory(mount_location);
+		results = ask_from_entries("Please enter the options:", questions, &answers, 24, NULL);
+		if (results != RETURN_OK)
+			continue;
 
-	if (!modules || !*modules) {
-		stg1_error_message("No modules found on disk.");
-		umount(mount_location);
-		return thirdparty_load_modules();
+		rc = insmod_local_file(final_name, answers[0]);
+		if (rc) {
+			log_message("\tfailed");
+			stg1_error_message("Insmod failed.");
+		}
 	}
-
-	results = ask_from_list("Which driver would you like to insmod?", modules, &choice);
-	if (results != RETURN_OK) {
-		umount(mount_location);
-		return thirdparty_load_modules();
-	}
-
-	sprintf(final_name, "%s/%s", mount_location, choice);
-
-	results = ask_from_entries("Please enter the options:", questions, &answers, 24, NULL);
-	if (results != RETURN_OK) {
-		umount(mount_location);
-		return thirdparty_load_modules();
-	}
-
-	rc = insmod_local_file(final_name, answers[0]);
-	umount(mount_location);
-
-	if (rc) {
-		log_message("\tfailed");
-		stg1_error_message("Insmod failed.");
-	}
-
-	return thirdparty_load_modules();
+	return RETURN_OK;
 }
 
+
+static enum return_type thirdparty_autoload_modules(char ** modules_list, FILE *f)
+{
+	while (1) {
+		char final_name[500];
+		char module[500];
+		char * options;
+		char ** entry = modules_list;
+
+		if (!fgets(module, sizeof(module), f)) break;
+		if (module[0] == '#' || strlen(module) == 0)
+			continue;
+
+		while (module[strlen(module)-1] == '\n')
+			module[strlen(module)-1] = '\0';
+		options = strchr(module, ' ');
+		if (options) {
+			options[0] = '\0';
+			options++;
+		}
+
+		log_message("updatemodules: (%s) (%s)", module, options);
+		while (entry && *entry) {
+			if (!strncmp(*entry, module, strlen(module)) && (*entry)[strlen(module)] == '.') {
+				sprintf(final_name, "%s/%s", THIRDPARTY_MOUNT_LOCATION, *entry);
+				if (insmod_local_file(final_name, options)) {
+					log_message("\t%s (floppy): failed", *entry);
+					stg1_error_message("Insmod %s (floppy) failed.", *entry);
+				}
+				break;
+			}
+			entry++;
+		}
+		if (!entry || !*entry) {
+			enum insmod_return ret = my_insmod(module, ANY_DRIVER_TYPE, options, 0);
+			if (ret != INSMOD_OK) {
+				log_message("\t%s (marfile): failed", module);
+				stg1_error_message("Insmod %s (marfile) failed.", module);
+			}
+		}
+	}
+	fclose(f);
+
+	return RETURN_OK;
+}
+
+
+void thirdparty_load_modules(void)
+{
+	enum return_type results;
+	char * device = NULL;
+	char ** modules_list;
+	char toload_name[500];
+	FILE * f;
+
+	if (IS_AUTOMATIC) {
+		device = get_auto_value("thirdparty");
+		log_message("third party : trying automatic device %s", device);
+		if (thirdparty_mount_device(device) != RETURN_OK)
+			device = NULL;
+	}
+
+	while (!device || streq(device, "")) {
+		results = third_party_choose_device(&device);
+		if (results == RETURN_BACK)
+			return;
+		if (thirdparty_mount_device(device) != RETURN_OK)
+			device = NULL;
+	}
+
+	log_message("third party : using device %s", device);
+
+	modules_list = list_directory(THIRDPARTY_MOUNT_LOCATION);
+
+	if (!modules_list || !*modules_list) {
+		stg1_error_message("No modules found on disk.");
+		umount(THIRDPARTY_MOUNT_LOCATION);
+		return thirdparty_load_modules();
+	}
+
+	sprintf(toload_name, "%s/to_load", THIRDPARTY_MOUNT_LOCATION);
+	f = fopen(toload_name, "rb");
+	if (f) {
+		results = thirdparty_autoload_modules(modules_list, f);
+	} else {
+		if (IS_AUTOMATIC)
+			stg1_error_message("I can't find a \"to_load\" file. Please select the modules manually.");
+		log_message("No \"to_load\" file, prompting for modules");
+		results = thirdparty_prompt_modules(modules_list);
+	}
+	umount(THIRDPARTY_MOUNT_LOCATION);
+
+	if (results == RETURN_OK)
+		return;
+	else
+		return thirdparty_load_modules();
+}

@@ -102,7 +102,8 @@ void process_cmdline(void)
 		params[param_number].value = value;
 		param_number++;
 		if (!strcmp(name, "changedisk")) set_param(MODE_CHANGEDISK);
-		if (!strcmp(name, "updatemodules")) set_param(MODE_UPDATEMODULES);
+		if (!strcmp(name, "updatemodules") ||
+		    !strcmp(name, "thirdparty")) set_param(MODE_THIRDPARTY);
 		if (!strcmp(name, "rescue")) set_param(MODE_RESCUE);
 		if (!strcmp(name, "keepmounted")) set_param(MODE_KEEP_MOUNTED);
 		if (!strcmp(name, "noauto")) set_param(MODE_NOAUTO);
@@ -452,7 +453,8 @@ int try_mount(char * dev, char * location)
 	if (my_mount(device_fullname, location, "ext2", 0) == -1 &&
 	    my_mount(device_fullname, location, "vfat", 0) == -1 &&
 	    my_mount(device_fullname, location, "ntfs", 0) == -1 &&
-	    my_mount(device_fullname, location, "reiserfs", 0) == -1) {
+	    my_mount(device_fullname, location, "reiserfs", 0) == -1 &&
+	    my_mount(device_fullname, location, "iso9660", 0) == -1) {
                 return 1;
         }
 
