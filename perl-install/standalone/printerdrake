@@ -45,6 +45,8 @@ $printer->{mode} ||= 'CUPS'; #- assume this default if nothing found.
 
 my $in = vnew interactive('su');
 
+-r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
+
 begin:
 $::isEmbedded and kill USR2, $::CCPID;
 printerdrake::main($printer, $in, sub { $in->standalone::pkgs_install(@_) });
