@@ -45,6 +45,17 @@ sub get_config_file {
     map { [ split ' ' ] } grep { !/^#/ } cat_("$::prefix/etc/shorewall/$file");
 }
 
+sub get_net_device() {
+    my $netcnx = {};
+    my $netc = {};
+    my $intf = {};
+    network::netconnect::read_net_conf($netcnx, $netc, $intf);
+    my $default_intf = network::tools::get_default_gateway_interface($netc, $intf);
+    $default_intf->{DEVICE} =~ /^ippp/ && "ippp+" ||
+    $default_intf->{DEVICE} =~ /^ppp/ && "ppp+" ||
+    $default_intf->{DEVICE};
+}
+
 sub default_interfaces_silent {
 	my ($_in) = @_;
 	my %conf;
@@ -52,7 +63,7 @@ sub default_interfaces_silent {
 	if (@l == 1) {
 	$conf{net_interface} = $l[0];
     } else {
-	$conf{net_interface} = network::netconnect::get_net_device() || $l[0];
+	$conf{net_interface} = get_net_device() || $l[0];
 	$conf{loc_interface} = [  grep { $_ ne $conf{net_interface} } @l ];
     }
     \%conf;
