@@ -1283,6 +1283,7 @@ sub main {
 		$continue = ($::expert || !$::isInstall);
 	    } else {
 		$editqueue = 1;
+		$queue = $printer->{currentqueue}{queue};
 	    }
 	} else {
 	    # Modify a queue, ask which part should be modified
