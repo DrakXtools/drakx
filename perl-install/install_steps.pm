@@ -655,13 +655,6 @@ sub configureNetwork {
     network::network::configureNetwork2($o, $o->{prefix}, $o->{netc}, $o->{intf});
     if ($o->{method} =~ /ftp|http|nfs/) {
 	$o->{netcnx}{type} = 'lan';
-	foreach ("up", "down") {
-	    my $f = "$o->{prefix}/etc/sysconfig/network-scripts/net_cnx_$_";
-	    output_with_perm($f, 0755, "\nif$_ eth0\n");
-	}
-	output "$o->{prefix}/etc/sysconfig/network-scripts/net_cnx_pg", "\n/usr/sbin/drakconnect\n";
-
-	require network::netconnect;
 	$o->{netcnx}{$_} = $o->{netc}{$_} foreach qw(NET_DEVICE NET_INTERFACE);
     }
 }
