@@ -287,6 +287,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_initrddir/harddrake
 %dir /etc/sysconfig/harddrake2/
 %config(noreplace) /etc/sysconfig/harddrake2/previous_hw
+%dir %_datadir/harddrake/
 %_datadir/harddrake/*
 #%_sysconfdir/X11/xinit.d/harddrake2
 
