@@ -77,7 +77,7 @@ install: build
 	sudo install -m 644 tree/mdk_move_boot_loop.desktop $(DEST_LIVETREE)/usr/share/autostart
 	sudo install tree/{mdk_move_loop,mdk_totem,mdk_behind_totem} $(DEST_LIVETREE)/usr/bin
 	sudo install -m 644 -D tree/mdk_totem.desktop $(DEST_LIVETREE)/etc/skel/Desktop/mdk_totem.desktop
-	sudo install -m 644 tree/kdedrc $(DEST_LIVETREE)/usr/share/config
+	sudo install -m 644 tree/{kdedrc,konsolerc} $(DEST_LIVETREE)/usr/share/config
 	sudo install -m 644 img/Mandrake.png $(DEST_LIVETREE)/usr/share/mdk/backgrounds
 	sudo install -m 644 img/FE* $(DEST_LIVETREE)/usr/share/wallpapers
 
