@@ -91,11 +91,13 @@ upload:
 	upload Mandrake/base rpmsrate ;\
 	upload Mandrake/base *_stage2.bz2 ;\
 	upload boot '' ;\
-	upload misc genbasefiles ;\
-	upload misc genhdlist_cz2 ;\
+	upload misc gendistrib ;\
 	upload misc make_mdkinst_stage2 ;\
 	upload misc packdrake ;\
+	upload misc packdrake.pm ;\
 	upload misc rpm2header ;\
+	upload misc rpmtools.pm ;\
+	upload misc auto ;\
 	upload '' live_update ;\
 	for i in $(RELEASE_BOOT_IMG); do upload images $$i; done ;\
 	echo
