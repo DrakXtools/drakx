@@ -127,7 +127,7 @@ sub find_fstab_entry {
 
 sub import_tree {
     my ($kind, $info_box) = @_;
-    my (%servers_displayed, %wservers, %wexports, $inside);
+    my (%servers_displayed, %wservers, %wexports);
 
     $tree_model = Gtk2::TreeStore->new(Gtk2::GType->OBJECT, Gtk2::GType->STRING);
     my $tree = Gtk2::TreeView->new_with_model($tree_model);
