@@ -632,6 +632,9 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	init_modules_insmoding();
 	init_frontend("Welcome to " DISTRIB_DESCR ", " __DATE__ " " __TIME__);
 
+        /* load usb interface as soon as possible, helps usb mouse detection in stage2 */
+	probe_that_type(USB_CONTROLLERS, BUS_USB);
+
 	if (IS_EXPERT)
 		expert_third_party_modules();
 
@@ -643,9 +646,6 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		handle_pcmcia();
 #endif
         
-        /* load usb interface as soon as possible, helps usb mouse detection in stage2 */
-	probe_that_type(USB_CONTROLLERS, BUS_USB);
-
 	if (IS_CHANGEDISK)
 		stg1_info_message("You are starting the installation with an alternate booting method. "
 				  "Please change your disk, and insert the Installation disk.");
