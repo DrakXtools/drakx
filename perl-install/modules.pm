@@ -664,9 +664,11 @@ sub read_conf {
 	}
     }
     #- convert old scsi_hostadapter's to new probeall
-    while (my ($alias, $type) = each %c) {
-	$alias =~ /^scsi_hostadapter/ && $type->{alias} or next;
-	push @{$c{scsi_hostadapter}{probeall} ||= []}, delete $type->{alias};
+    my @old_scsi_hostadapters = 
+        map { $_->[0] } sort { $a->[1] <=> $b->[1] } 
+	map { if_(/^scsi_hostadapter(\d*)/ && $c{$_}{alias}, [ $_, $1 || 0 ]) } keys %c;
+    foreach my $alias (@old_scsi_hostadapters) {
+	push @{$c{scsi_hostadapter}{probeall} ||= []}, delete $c{$alias}{alias};
     }
 
     \%c;
