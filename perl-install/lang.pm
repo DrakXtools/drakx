@@ -644,6 +644,24 @@ set_default_im('x-unikey',  qw(vi_VN vi_VN.TCVN vi_VN.UTF-8 vi_VN.VISCII));
 # CJK default input methods:
 set_default_im('scim',  qw(ja_JP ja_JP.UTF-8 ko_KR ko_KR.UTF-8 zh_CN zh_CN.UTF-8 zh_HK zh_HK.UTF-8 zh_SG zh_SG.UTF-8 zh_TW zh_TW.UTF-8));
 
+# keep the following list in sync with share/rpmsrate:
+my %IM2packages = (
+                   'scim' => {
+                              generic => [ qw(scim scim-tables) ],
+                              'ko' => [ qw(scim-hangul) ],
+                              'zh' => [ qw(scim-chinese scim-tables) ],
+                             },
+                   'scim+uim' => { generic => [ qw(scim-uim) ] },
+                   'uim' => { generic => [ qw(uim-applet) ] },
+                  );
+
+sub IM2packages {
+    my ($im, $locale) = @_;
+    return if $im eq "None";
+    my $packages = $IM2packages{$im}{$locale} || $IM2packages{$im}{generic};
+    return $packages ? @$packages : $im;
+}
+
 
 #- [0]: console font name
 #- [1]: sfm map for console font (if needed)
