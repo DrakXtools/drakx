@@ -28,6 +28,7 @@ BusLogic seagate fdomain g_NCR5380
 my @skip_modules_on_stage1 = (
   qw(sktr tmspci ibmtr abyss), # alt token ring
   qw(old_tulip rtl8139),
+  qw(3c501 3c503 3c505 3c507 3c515), # unused, hopefully?
   if_(arch() =~ /alpha|ppc/, qw(sb1000)),
   qw(
   tg3 r8169
@@ -42,6 +43,8 @@ my @skip_modules_on_stage1 = (
   qw(ac3200 at1700 atp ni5010 ni52 ni65),  #- unused from Jeff
   "u14-34f", #- duplicate from ultrastor.o
 );
+
+my @modules_always_on_stage1 = qw(floppy);
 
 my %images = (
     network => 'fs/network network/raw bus/pcmcia network/main',
@@ -62,7 +65,7 @@ sub images {
     load_dependencies('modules.dep');
 
     while (my ($image, $l) = each %images) {
-	my @modules;
+	my @modules = @modules_always_on_stage1;
 	foreach (split(' ', $l)) { 
 	    if (/ONLY_BIG/) {
 		@modules = intersection(\@modules, \@skip_big_modules_on_stage1);
