@@ -201,9 +201,22 @@ sub read_configured_queues($) {
 		$descr =~ m/^([^\|]*)\|([^\|]*)\|.*$/;
 		$printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'make'} ||= $1;
 		$printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'model'} ||= $2;
+		# Read out which PPD file was originally used to set up this
+		# queue
+		local *F;
+		if (open F, "< $prefix/etc/cups/ppd/$QUEUES[$i]->{'queuedata'}{'queue'}.ppd") {
+		    while (<F>) {
+			if ($_ =~ /^\*%MDKMODELCHOICE:(.+)$/) {
+			    $printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'ppd'} = $1;
+			}
+		    }
+		    close F;
+		}
 		# Mark that we have a CUPS queue but do not know the name
 		# the PPD file in /usr/share/cups/model
-		$printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'ppd'} = '1';
+		if (!$printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'ppd'}) {
+		    $printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'ppd'} = '1';
+		}
 		$printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'driver'} = 'CUPS/PPD';
 		$printer->{OLD_QUEUE} = "";
 		# Read out the printer's options
@@ -382,12 +395,10 @@ sub read_cups_options ($) {
     local *F;
     if ($queue_or_file =~ /.ppd.gz$/) { # compressed PPD file
 	open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
-	    "gunzip -cd $queue_or_file | lphelp - |" ||
-		die "Could not run lphelp";
+	    "gunzip -cd $queue_or_file | lphelp - |" || return 0;
     } else { # PPD file not compressed or queue
 	open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
-	    "lphelp $queue_or_file |" ||
-		die "Could not run lphelp";
+	    "lphelp $queue_or_file |" || return 0;
     }
     my $i;
     my $j;
@@ -725,6 +736,7 @@ sub poll_ppd_base {
 
 sub configure_queue($) {
     my ($printer) = @_;
+    local *F;
 
     if ($printer->{currentqueue}{foomatic}) {
 	#- Create the queue with "foomatic-configure", in case of queue
@@ -760,14 +772,21 @@ sub configure_queue($) {
 			        ("-L", $printer->{currentqueue}{'loc'}) : (),
 			    @{$printer->{currentqueue}{options}}
 			    ) or die "lpadmin failed";
+	# Add a comment line containing the path of the used PPD file to the
+	# end of the PPD file
+	if ($printer->{currentqueue}{'ppd'} ne '1') {
+	    open F, ">> $prefix/etc/cups/ppd/$printer->{currentqueue}{'queue'}.ppd";
+	    print F "*%MDKMODELCHOICE:$printer->{currentqueue}{'ppd'}\n";
+	    close F;
+	}
 	# Copy the old queue's PPD file to the new queue when it is renamed,
 	# to conserve the option settings
 	if (($printer->{currentqueue}{'queue'} ne 
 	     $printer->{OLD_QUEUE}) &&
 	    ($printer->{configured}{$printer->{OLD_QUEUE}})) {
-	    run_program::rooted($prefix, "cp", "-f",
-		"/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd",
-		"/etc/cups/ppd/$printer->{currentqueue}{'queue'}.ppd");
+	    system("echo yes | cp -f " .
+		   "$prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd " .
+		   "$prefix/etc/cups/ppd/$printer->{currentqueue}{'queue'}.ppd");
 	}
     }
 
