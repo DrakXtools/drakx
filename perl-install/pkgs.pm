@@ -706,6 +706,7 @@ sub setSelectedFromCompssList {
 	selectPackage($packages, $p);
     }
     log::l("setSelectedFromCompssList: reached size ", formatXiB($nb), ", up to indice $min_level (less than ", formatXiB($max_size), ")");
+    log::l("setSelectedFromCompssList: ", join(" ", sort map { packageName($_) } grep { packageFlagSelected($_) } @{$packages->{depslist}}));
     $min_level;
 }
 
@@ -747,10 +748,11 @@ sub computeGroupSize {
 		map { "$_&&$n" } @l;
 	    } split('\|\|');
 	}
-	@l;
+	#- HACK, remove LOCALES, too costly
+	grep { !/LOCALES/ } @l;
     }
     sub or_clean {
-	my (@l) = map { [ sort split('&&') ] } @_;
+	my (@l) = map { [ sort split('&&') ] } @_ or return '';
 	my @r;
 	B: while (@l) {
 	    my $e = shift @l;
@@ -768,7 +770,7 @@ sub computeGroupSize {
 	next if !$rate || $rate < $min_level;
 
 	my $flags = join("\t", @flags = or_ify(@flags));
-	$group{packageName($p)} = $flags =~ /SYSTEM/ ? 'SYSTEM' : ($memo{$flags} ||= or_clean(@flags));
+	$group{packageName($p)} = ($memo{$flags} ||= or_clean(@flags));
 
 	#- determine the packages that will be selected when selecting $p. the packages are not selected.
 	my %newSelection;
@@ -778,8 +780,9 @@ sub computeGroupSize {
 		$packages->{names}{$_}[$VALUES] =~ /\t(.*)/;
 		join("\t", or_ify(split("\t", $1)));
 	    };
+	    next if length($s) > 80; # HACK, truncated too complicated expressions, too costly
 	    my $m = "$flags\t$s";
-	    $group{$_} = $m =~ /SYSTEM/ ? 'SYSTEM' : ($memo{$m} ||= or_clean(@flags, split("\t", $s)));
+	    $group{$_} = ($memo{$m} ||= or_clean(@flags, split("\t", $s)));
 	}
     }
     my (%sizes, %pkgs);
@@ -788,7 +791,7 @@ sub computeGroupSize {
 	$sizes{$v} += packageSize($packages->{names}{$k});
     }
     log::l(sprintf "%s %dMB %s", $_, $sizes{$_} / sqr(1024), join(',', @{$pkgs{$_}})) foreach keys %sizes;
-    \%sizes;
+    \%sizes, \%pkgs;
 }
 
 
