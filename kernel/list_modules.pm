@@ -20,7 +20,7 @@ our %l = (
         qw(3c501 3c503 3c505 3c507 3c509 3c515), # 3c90x
         qw(82596 abyss ac3200 acenic aironet4500_card at1700 atp com20020-pci),
         qw(cs89x0 de600 de620),
-        qw(defxx), # most unused
+        qw(defxx orinoco_plx), # most unused
         qw(depca dgrs dmfe e100 e1000 e2100 eepro eepro100 eexpress epic100 eth16i),
         qw(ewrk3 hamachi hp hp-plus hp100 ibmtr),
         qw(lance natsemi ne ne2k-pci ni5010 ni52 ni65 olympic pcnet32 plip rcpci), #old_tulip 
@@ -66,6 +66,7 @@ our %l = (
       if_(arch() =~ /^sparc/, qw(pluto)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
         qw(DAC960 dpt_i2o megaraid aacraid ataraid cciss cpqarray gdth i2o_block),
+	qw(qla2200 qla2300 cpqfc),
         qw(ips ppa imm),
       ),
     ],
@@ -110,17 +111,19 @@ our %l = (
       if_(arch() !~ /^sparc/,
         qw(cmpci cs46xx cs4281 es1370 es1371 esssolo1 i810_audio maestro maestro3),
         qw(nm256_audio pas16 trident via82cxxx_audio sonicvibes emu10k1 ymfpci),
+	qw(rme96xx audigy),
 
         qw(snd-ice1712 snd-cmipci snd-ens1371 snd-via8233),
         qw(snd-es1938 snd-fm801 snd-intel8x0 snd-rme96),
+	qw(snd-cs46xx snd-maestro3 snd-korg1212 snd-ens1370 snd-als4000),
         qw(snd-trident snd-ymfpci),
       ),
     ],
-    tv => [ qw(bttv cpia_usb ibmcam mod_quickcam ov511 ultracam usbvideo) ],
+    tv => [ qw(bttv cpia_usb ibmcam mod_quickcam ov511 ultracam usbvideo cyber2000fb) ],
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-maxiradio) ],
     scanner => [ qw(scanner microtek) ],
-    joystick => [ qw(ns558) ],
+    joystick => [ qw(ns558 emu10k1-gp iforce) ],
   },
 
   various => 
@@ -133,10 +136,16 @@ our %l = (
       qw(busmouse msbusmouse logibusmouse serial qpmouse atixlmouse),
     ],
     char => [
-      qw(amd768_rng applicom n_r3964 nvram pc110pad ppdev amd768_pm),
+      qw(amd768_rng applicom n_r3964 nvram pc110pad ppdev),
+      qw(mxser moxa isicom wdt_pci epca synclink istallion sonypi i810-tco sx), #- what are these???
     ],
     other => [
-      qw(agpgart defxx i810_rng i810fb ide-floppy ide-scsi ide-tape loop lp nbd sg st parport parport_pc),
+      qw(agpgart defxx i810_rng i810fb ide-floppy ide-scsi ide-tape loop lp nbd sg st),
+      qw(parport parport_pc parport_serial),
+      qw(btaudio),
+
+      #- these need checking
+      qw(pcilynx sktr rrunner gmac meye 3c559 buz paep),
     ],
   },
 );
