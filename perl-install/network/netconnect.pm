@@ -199,7 +199,7 @@ sub real_main {
       };
 
       my $goto_start_on_boot_ifneeded = sub {
-          return $after_start_on_boot_step->() if $netcnx->{type} =~ /lan|cable/;
+          return $after_start_on_boot_step->() if $need_restart_network;
           return "isdn_dial_on_boot" if  $netcnx->{type} =~ /isdn/;
           return "network_on_boot";
       };
