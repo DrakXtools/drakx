@@ -352,84 +352,20 @@ sub write_conf {
     &write('', $mouse);
     modules::write_conf('') if $mouse->{device} eq "usbmouse" && !$::testing;
 
-    my $f = "/etc/X11/XF86Config";
-    my $g = "/etc/X11/XF86Config-4";
+    require Xconfig::xfree;
+    my $xfree_conf = Xconfig::xfree->read;
 
-    my $update_mouse = sub {
-	my ($mouse) = @_;
-
-	my ($zaxis, $zaxis_aux) = map { [
-					 $_->{nbuttons} > 3 ? [ "ZAxisMapping", "4 5" ] : (),
-					 $_->{nbuttons} > 5 ? [ "ZAxisMapping", "6 7" ] : (),
-					 $_->{nbuttons} < 3 ? ([ "Emulate3Buttons" ], [ "Emulate3Timeout", "50" ]) : ()
-					] } grep { $_ } ($mouse, $mouse->{auxmouse});
-
-	my ($str_zaxis, $str_zaxis_aux) = map { join('', map { qq(\n    $_->[0]) . ($_->[1] && qq( $_->[1])) } @$_)
-					    } grep { $_ } ($zaxis, $zaxis_aux);
-	my $found_auxmouse = 0;
-	substInFile {
-	    if (/^Section\s+"Pointer"/ .. /^EndSection/) {
-		$_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
-		s|^(\s*Protocol\s+).*|$1"$mouse->{XMOUSETYPE}"|;
-		s|^(\s*Device\s+).*|$1"/dev/$mouse->{device}"$str_zaxis|;
-	    }
-	    if ($mouse->{auxmouse}) {
-		if (/DeviceName\s+"Mouse2"/ .. /^EndSection/) {
-		    $found_auxmouse = 1;
-		    $_ = '' if /(ZAxisMapping|Emulate3|AlwaysCore)/; #- remove existing line
-		    s|^(\s*Protocol\s+).*|$1"$mouse->{auxmouse}{XMOUSETYPE}"|;
-		    s|^(\s*Device\s+).*|$1"/dev/$mouse->{auxmouse}{device}"\n        AlwaysCore$str_zaxis_aux|;
-		}
-	    }
-	} $f if -e $f && !$::testing;
-	substInFile {
-	    if (my $l = /^Section\s+"Pointer"/ .. /^EndSection/) {
-		$l =~ /E/ and $_ .= qq(
-
-Section "XInput"
-    SubSection "Mouse"
-        DeviceName "Mouse2"
-        Protocol   "$mouse->{auxmouse}{XMOUSETYPE}"
-        Device     "/dev/$mouse->{auxmouse}{device}"
-        AlwaysCore$str_zaxis_aux
-    EndSubSection
-EndSection
-);
-	    }
-	} $f if !$found_auxmouse && $mouse->{auxmouse} && -e $f && !$::testing;
-
-	($str_zaxis, $str_zaxis_aux) = map { join('', map { qq(\n    Option "$_->[0]") . ($_->[1] && qq( "$_->[1]")) } @$_)
-					 } grep { $_ } ($zaxis, $zaxis_aux);
-	$found_auxmouse = 0;
-	substInFile {
-	    if (/Identifier\s+"Mouse1"/ .. /^EndSection/) {
-		$_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
-		s|^(\s*Option\s+"Protocol"\s+).*|$1"$mouse->{XMOUSETYPE}"|; #"
-		s|^(\s*Option\s+"Device"\s+).*|$1"/dev/mouse"$str_zaxis|;
-	    }
-	    if ($mouse->{auxmouse}) {
-		if (/Identifier\s+"Mouse2"/ .. /^EndSection/) {
-		    $found_auxmouse = 1;
-		    $_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
-		    s|^(\s*Option\s+"Protocol"\s+).*|$1"$mouse->{auxmouse}{XMOUSETYPE}"|; #"
-		    s|^(\s*Option\s+"Device"\s+).*|$1"/dev/$mouse->{auxmouse}{device}"$str_zaxis_aux|; #"
-		}
-	    }
-	} $g if -e $g && !$::testing;
-	substInFile {
-	    if (my $l = /Identifier\s+"Mouse1"/ .. /^EndSection/) {
-		$l =~ /E/ and $_ .= qq(
-
-Section "InputDevice"
-    Identifier "Mouse2"
-    Option     "Protocol" "$mouse->{auxmouse}{XMOUSETYPE}"
-    Option     "Device"   "/dev/$mouse->{auxmouse}{XMOUSETYPE}"$str_zaxis_aux
-EndSection
-);
-	    }
-	} $g if !$found_auxmouse && $mouse->{auxmouse} && -e $g && !$::testing;
-    };
-    $update_mouse->($mouse);
+    my @mice = map {
+	{
+	    Protocol => $_->{XMOUSETYPE},
+	    Device => "/dev/$_->{device}",
+	    if_($_->{nbuttons} > 3, ZAxisMapping => [ '4 5', if_($_->{nbuttons} > 5, '6 7') ]),
+	    if_($_->{nbuttons} < 3, Emulate3Buttons => undef, Emulate3Timeout => 50),
+	};
+    } ($mouse, $mouse->{auxmouse});
+    
+    $xfree_conf->set_mice(@mice);
+    $xfree_conf->write;    
 }
 
 sub test_mouse_install {
