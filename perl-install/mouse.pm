@@ -336,7 +336,7 @@ sub detect() {
 }
 
 sub set_xfree_conf {
-    my ($mouse, $xfree_conf) = @_;
+    my ($mouse, $xfree_conf, $keep_auxmouse_unchanged) = @_;
     
     my @mice = map {
 	{
@@ -347,6 +347,11 @@ sub set_xfree_conf {
 	};
     } ($mouse, if_($mouse->{auxmouse}, $mouse->{auxmouse}));
     
+    if (!$mouse->{auxmouse} && $keep_auxmouse_unchanged) {
+	my (undef, @l) = $xfree_conf->get_mice;
+	push @mice, @l;
+    }
+
     $xfree_conf->set_mice(@mice);
 }
 
@@ -362,14 +367,14 @@ sub set_xfree_conf {
 #-  $mouse->{MOUSETYPE} : type of the mouse : string : ex "ps/2"
 #-  $mouse->{XEMU3} : emulate 3rd button : string : 'yes' or 'no'
 sub write_conf {
-    my ($mouse) = @_;
+    my ($mouse, $keep_auxmouse_unchanged) = @_;
 
     &write('', $mouse);
     modules::write_conf('') if $mouse->{device} eq "usbmouse" && !$::testing;
 
     require Xconfig::xfree;
     my $xfree_conf = Xconfig::xfree->read;
-    set_xfree_conf($mouse, $xfree_conf);
+    set_xfree_conf($mouse, $xfree_conf, $keep_auxmouse_unchanged);
     $xfree_conf->write;    
 }
 
