@@ -846,6 +846,10 @@ sub check_enough_space() {
 
 sub write_yaboot {
     my ($bootloader, $_all_hds) = @_;
+
+    my $mac_type = detect_devices::get_mac_model();
+    return if $mac_type =~ /Power Macintosh/;
+
     $bootloader->{prompt} ||= $bootloader->{timeout};
 
     if ($bootloader->{message}) {
@@ -860,16 +864,21 @@ sub write_yaboot {
 	if ($bootloader->{boot}) {
 	    push @conf, "boot=$bootloader->{boot}";
 	    push @conf, "ofboot=" . get_of_dev($bootloader->{boot})
+	} elsif ($mac_type =~ /IBM/) {
+	    push @conf, "boot=/dev/sda1";
 	} else {
 	    die "no bootstrap partition defined."
 	}
 	
-	push @conf, map { "$_=$bootloader->{$_}" } grep { $bootloader->{$_} } qw(delay timeout defaultos default);
+	push @conf, map { "$_=$bootloader->{$_}" } grep { $bootloader->{$_} } (qw(delay timeout default), if_($mac_type !~ /IBM/, 'defaultos'));
 	push @conf, "install=/usr/lib/yaboot/yaboot";
-	push @conf, "magicboot=/usr/lib/yaboot/ofboot";
-	push @conf, grep { $bootloader->{$_} } qw(enablecdboot enableofboot);
-	#- push @conf, "nonvram";
-	my $boot = "/dev/" . $bootloader->{useboot} if $bootloader->{useboot};
+	if ($mac_type =~ /IBM/) {
+	    push @conf, 'nonvram';
+	} else {
+	    push @conf, 'magicboot=/usr/lib/yaboot/ofboot';
+	    push @conf, grep { $bootloader->{$_} } qw(enablecdboot enableofboot);
+	}
+	my $boot = $bootloader->{useboot} && "/dev/" . $bootloader->{useboot};
 		
 	foreach (@{$bootloader->{entries}}) {
 
@@ -914,9 +923,10 @@ sub install_yaboot {
 }
 sub when_config_changed_yaboot {
     my ($bootloader) = @_;
-    my $f = "$::prefix/tmp/of_boot_dev";
-    my $of_dev = get_of_dev($bootloader->{boot});
-    output($f, "$of_dev\n");  
+    if ($bootloader->{boot}) {
+	my $of_dev = get_of_dev($bootloader->{boot});
+	output("$::prefix/tmp/of_boot_dev", "$of_dev\n");
+    }
     $::testing and return;
     if (defined $install_steps_interactive::new_bootstrap) {
 	run_program::run("hformat", $bootloader->{boot}) or die "hformat failed";
