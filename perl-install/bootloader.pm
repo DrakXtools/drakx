@@ -489,7 +489,9 @@ wait %d seconds for default boot.
 	my %nbs;
 	foreach (@$hds) {
 	    foreach (@{$_->{primary}{normal}}) {
+		isNT($_) || isFat($_) or next;
 		my $from_magic = { type => fsedit::typeOfPart($_->{device}) };
+		isNT($from_magic) || isFat($from_magic) or next;
 		my $label = isNT($_) ? 'NT' : isDos($_) ? 'dos' : 'windows';
 		add_entry($lilo,
 			  {
@@ -500,7 +502,7 @@ wait %d seconds for default boot.
 			   table => "/dev/$_->{rootDevice}"
 				),
 			   unsafe => 1
-			  }) if isNT($from_magic) || isFat($from_magic);
+			  })
 	    }
 	}
     }
