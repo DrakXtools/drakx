@@ -205,7 +205,11 @@ static enum return_type try_with_device(char *dev_name)
 	static char ** answers_location = NULL;
 	char location_full[500];
 
+#ifndef MANDRAKE_MOVE
 	char * disk_own_mount = "/tmp/hdimage";
+#else
+	char * disk_own_mount = SLASH_LOCATION "/tmp/hdimage";
+#endif
         char * loopdev = NULL;
 
 	char * parts[50];
@@ -219,16 +223,24 @@ static enum return_type try_with_device(char *dev_name)
 		return RETURN_ERROR;
         }
 
-	if (parts[0] == NULL) {
-		stg1_error_message("No partitions found.");
-		return RETURN_ERROR;
-	}
+        /* uglyness to allow auto starting with devfs */
+        if (IS_AUTOMATIC)
+		choice = get_auto_value("partition");
+        else {
+                if (parts[0] == NULL) {
+                        stg1_error_message("No partitions found.");
+                        return RETURN_ERROR;
+                }
 
-	results = ask_from_list_comments_auto("Please choose the partition where " DISTRIB_NAME " is copied.",
-					      parts, parts_comments, &choice, "partition", parts);
-	if (results != RETURN_OK)
-		return results;
-
+                results = ask_from_list_comments_auto("Please choose the partition where " DISTRIB_NAME " is copied.",
+                                                      parts, parts_comments, &choice, "partition", parts);
+                if (results != RETURN_OK)
+                        return results;
+        }
+#ifdef MANDRAKE_MOVE
+	mkdir (SLASH_LOCATION "/tmp", 0755);
+#endif
+	
         if (try_mount(choice, disk_own_mount)) {
 		stg1_error_message("I can't find a valid filesystem (tried: ext2, vfat, reiserfs).");
 		return try_with_device(dev_name);
@@ -264,6 +276,7 @@ static enum return_type try_with_device(char *dev_name)
 	} else
 		symlink(location_full, IMAGE_LOCATION);
 
+#ifndef MANDRAKE_MOVE
 	if (IS_SPECIAL_STAGE2 || ramdisk_possible()) {
 		/* RAMDISK install */
 		if (access(IMAGE_LOCATION RAMDISK_LOCATION, R_OK)) {
@@ -282,9 +295,13 @@ static enum return_type try_with_device(char *dev_name)
 			return try_with_device(dev_name);
 		}
 	} else {
+#endif
 		/* LIVE install */
-		char p;
+#ifdef MANDRAKE_MOVE
+		if (access(IMAGE_LOCATION "/live_tree.clp", R_OK)) {
+#else
 		if (access(IMAGE_LOCATION LIVE_LOCATION, R_OK)) {
+#endif
 			stg1_error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
 				      "(I need the subdirectory " LIVE_LOCATION ")\n"
 				      "Here's a short extract of the files in the directory:\n"
@@ -293,6 +310,8 @@ static enum return_type try_with_device(char *dev_name)
 			umount(disk_own_mount);
 			return try_with_device(dev_name);
 		}
+#ifndef MANDRAKE_MOVE
+		char p;
 		if (readlink(IMAGE_LOCATION LIVE_LOCATION "/usr/bin/runinstall2", &p, 1) != 1) {
 			stg1_error_message("The " DISTRIB_NAME " Distribution seems to be copied on a Windows partition. "
 				      "You need more memory to perform an installation from a Windows partition. "
@@ -303,6 +322,7 @@ static enum return_type try_with_device(char *dev_name)
 		}
 		log_message("found the " DISTRIB_NAME " Installation, good news!");
 	}
+#endif
 
 	if (IS_RESCUE) {
                 del_loop(loopdev);
