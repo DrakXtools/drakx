@@ -487,7 +487,7 @@ sub mount {
 	$o_wait_message->(N("Mounting partition %s", $dev)) if $o_wait_message;
 	system('mount', '-t', $fs, $dev, $where, if_($o_options, '-o', $o_options)) == 0 or die N("mounting partition %s in directory %s failed", $dev, $where);
     } else {
-	my @types = ('ext2', 'proc', 'sysfs', 'usbdevfs', 'iso9660', 'devfs', 'devpts', @fs_modules);
+	my @types = ('ext2', 'proc', 'sysfs', 'usbfs', 'usbdevfs', 'iso9660', 'devfs', 'devpts', @fs_modules);
 
 	member($fs, @types) or log::l("skipping mounting $dev partition ($fs)"), return;
 
@@ -664,6 +664,13 @@ sub df {
 
     $part->{free} = 2 * $free if defined $free;
     $part->{free};
+}
+
+sub mount_usbfs {
+    my ($prefix) = @_;
+    
+    my $fs = cat_('/proc/filesystems') =~ /usbfs/ ? 'usbfs' : 'usbdevfs';
+    mount('none', "$prefix/proc/bus/usb", $fs);
 }
 
 1;
