@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-12-02 00:49+0100\n"
+"POT-Creation-Date: 2001-12-03 16:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1073,8 +1073,7 @@ msgstr ""
 msgid "KB"
 msgstr ""
 
-#: ../../common.pm_.c:94 ../../install_steps_graphical.pm_.c:287
-#: ../../install_steps_graphical.pm_.c:334
+#: ../../common.pm_.c:94
 msgid "MB"
 msgstr ""
 
@@ -2889,11 +2888,11 @@ msgid ""
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:49 ../../install_steps_graphical.pm_.c:259
+#: ../../install_interactive.pm_.c:49
 msgid "You must have a swap partition"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:50 ../../install_steps_graphical.pm_.c:261
+#: ../../install_interactive.pm_.c:50
 msgid ""
 "You don't have a swap partition\n"
 "\n"
@@ -3085,80 +3084,6 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:287
-msgid "Choose the size you want to install"
-msgstr ""
-
-#: ../../install_steps_graphical.pm_.c:334
-msgid "Total size: "
-msgstr ""
-
-#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:389
-#, c-format
-msgid "Version: %s\n"
-msgstr ""
-
-#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:390
-#, c-format
-msgid "Size: %d KB\n"
-msgstr ""
-
-#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:483
-#: ../../install_steps_interactive.pm_.c:541
-msgid "Choose the packages you want to install"
-msgstr ""
-
-#: ../../install_steps_graphical.pm_.c:465 ../../interactive_gtk.pm_.c:570
-msgid "Info"
-msgstr ""
-
-#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:459
-#: ../../install_steps_interactive.pm_.c:242
-msgid "Install"
-msgstr ""
-
-#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:499
-#: ../../install_steps_interactive.pm_.c:733
-msgid "Installing"
-msgstr ""
-
-#: ../../install_steps_graphical.pm_.c:499
-msgid "Please wait, "
-msgstr ""
-
-#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:512
-msgid "Time remaining "
-msgstr ""
-
-#: ../../install_steps_graphical.pm_.c:502
-msgid "Total time "
-msgstr ""
-
-#: ../../install_steps_graphical.pm_.c:507
-#: ../../install_steps_interactive.pm_.c:733
-msgid "Preparing installation"
-msgstr ""
-
-#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:560
-#, c-format
-msgid "Installing package %s"
-msgstr ""
-
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:616
-#: ../../install_steps_gtk.pm_.c:620 ../../install_steps_interactive.pm_.c:770
-#: ../../install_steps_interactive.pm_.c:774
-msgid "Go on anyway?"
-msgstr ""
-
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:616
-#: ../../install_steps_interactive.pm_.c:770
-msgid "There was an error ordering packages:"
-msgstr ""
-
-#: ../../install_steps_graphical.pm_.c:577
-msgid "Use existing configuration for X11?"
-msgstr ""
-
 #: ../../install_steps_gtk.pm_.c:148
 msgid ""
 "Your system is low on resource. You may have some problem installing\n"
@@ -3232,6 +3157,16 @@ msgstr ""
 msgid "Name: %s\n"
 msgstr ""
 
+#: ../../install_steps_gtk.pm_.c:389
+#, c-format
+msgid "Version: %s\n"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:390
+#, c-format
+msgid "Size: %d KB\n"
+msgstr ""
+
 #: ../../install_steps_gtk.pm_.c:391
 #, c-format
 msgid "Importance: %s\n"
@@ -3276,6 +3211,10 @@ msgstr ""
 msgid "Show automatically selected packages"
 msgstr ""
 
+#: ../../install_steps_gtk.pm_.c:459 ../../install_steps_interactive.pm_.c:242
+msgid "Install"
+msgstr ""
+
 #: ../../install_steps_gtk.pm_.c:462
 msgid "Load/Save on floppy"
 msgstr ""
@@ -3288,8 +3227,20 @@ msgstr ""
 msgid "Minimal install"
 msgstr ""
 
+#: ../../install_steps_gtk.pm_.c:483 ../../install_steps_interactive.pm_.c:541
+msgid "Choose the packages you want to install"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:499 ../../install_steps_interactive.pm_.c:733
+msgid "Installing"
+msgstr ""
+
 #: ../../install_steps_gtk.pm_.c:505
 msgid "Estimating"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:512
+msgid "Time remaining "
 msgstr ""
 
 #: ../../install_steps_gtk.pm_.c:524
@@ -3299,6 +3250,11 @@ msgstr ""
 #: ../../install_steps_gtk.pm_.c:555
 #, c-format
 msgid "%d packages"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:560
+#, c-format
+msgid "Installing package %s"
 msgstr ""
 
 #: ../../install_steps_gtk.pm_.c:601 ../../install_steps_interactive.pm_.c:178
@@ -3320,6 +3276,16 @@ msgid ""
 "Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when "
 "done.\n"
 "If you don't have it, press Cancel to avoid installation from this Cd-Rom."
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:616 ../../install_steps_gtk.pm_.c:620
+#: ../../install_steps_interactive.pm_.c:770
+#: ../../install_steps_interactive.pm_.c:774
+msgid "Go on anyway?"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:616 ../../install_steps_interactive.pm_.c:770
+msgid "There was an error ordering packages:"
 msgstr ""
 
 #: ../../install_steps_gtk.pm_.c:620 ../../install_steps_interactive.pm_.c:774
@@ -3710,6 +3676,10 @@ msgstr ""
 msgid "Cd-Rom labeled \"%s\""
 msgstr ""
 
+#: ../../install_steps_interactive.pm_.c:733
+msgid "Preparing installation"
+msgstr ""
+
 #: ../../install_steps_interactive.pm_.c:742
 #, c-format
 msgid ""
@@ -4094,6 +4064,10 @@ msgstr ""
 
 #: ../../interactive.pm_.c:347
 msgid "Please wait"
+msgstr ""
+
+#: ../../interactive_gtk.pm_.c:570
+msgid "Info"
 msgstr ""
 
 #: ../../interactive_gtk.pm_.c:680
