@@ -54,6 +54,8 @@ my $lilogrub = chomp_(`detectloader -q`);
 
 my $w = ugtk2->new();
 my $window = $w->{window};
+$::main_window = $w->{rwindow} if !$::isEmbedded;
+
 $window->signal_connect(delete_event => sub { utk2->exit(0) });
 unless ($::isEmbedded) {
     $w->{rwindow}->set_title(N("Boot Style Configuration"));
@@ -302,9 +304,13 @@ Click on Configure to launch the setup wizard.", $lilogrub),
                 )
       );
 
-$auto_buttons[0]->signal_connect('toggled' => sub { $auto_box->set_sensitive($auto_buttons[0]->get_active()) });
-$auto_buttons[1]->signal_connect('toggled' => sub { $auto_box->set_sensitive(!$auto_buttons[1]->get_active()) });
+$auto_buttons[0]->signal_connect('toggled' => sub { print "TOG\n"; $auto_box->set_sensitive($auto_buttons[0]->get_active()) });
+$auto_buttons[1]->signal_connect('toggled' => sub { print "TOG\n"; $auto_box->set_sensitive(!$auto_buttons[1]->get_active()) });
+$auto_buttons[0]->set_active(1) if $auto_mode->{autologin};
+$auto_buttons[1]->set_active(1) if !$auto_mode->{autologin};
 
+$x_box->set_sensitive($x_mode);
+$auto_box->set_sensitive($auto_mode->{autologin} ? 1 : 0);
 $window->show_all();
 $no_bootsplash and $thm_frame->hide();
 gtkflush();
@@ -349,6 +355,6 @@ sub updateAutologin {
         $in->do_pkgs->install('autologin') if $x_mode;
         any::set_autologin($usern, $deskt);
     } else {
-        any::set_autologin(undef) if $auto_buttons[0]->get_active();
+        any::set_autologin();
     }
 }
