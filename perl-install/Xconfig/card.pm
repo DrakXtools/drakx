@@ -230,7 +230,7 @@ sub multi_head_choose {
     my $tc = $choices[0];
     if (!$auto) {
 	$tc = $in->ask_from_listf(N("Multi-head configuration"),
-				  N("Your system support multiple head configuration.
+				  N("Your system supports multiple head configuration.
 What do you want to do?"), sub { $_[0]{text} }, \@choices) or return;
     }
     $tc->{code} or die internal_error();
