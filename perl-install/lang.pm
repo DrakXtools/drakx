@@ -742,6 +742,7 @@ sub bindtextdomain() {
     $localedir .= "_special" if $::isInstall;
 
     c::setlocale();
+    c::bind_textdomain_codeset('libDrakX', 'UTF-8');
     c::bindtextdomain('libDrakX', $localedir);
 
     $localedir;
