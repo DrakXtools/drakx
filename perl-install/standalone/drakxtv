@@ -31,40 +31,46 @@ use detect_devices;
 
 sub scan4channels {
     my $in = shift;
+    my $wait;
+    if ( ! -f "/usr/bin/scantv" ) {
+	   $wait = $in->ask_warn(_('Error'),
+						_("XawTV isn't installed ...\nYou should install it.\n Just type \"urpmi xawtv\""));
+	   $in->exit(0);
+	   return;
+    }
+
     my ($i, $ftable_id, $norm, $check);
 
-#    my %freqtables = map {$i=$_;$i =~ s/ (.*)/-\1/;_($_) => $i} (...)
+#   my %freqtables = map {$i=$_;$i =~ s/ (.*)/-\1/;_($_) => $i} (...)
 #   this table must be checked on each xawtv release :
     my %freqtables = 
-	   ("us-bcast" => _("USA (bcast)"), "us-cable" => _("USA (cable)"), "us-cable-hrc" => _("USA (cable-hrc)"), "canada-cable" => _("Canada (cable)"),
-	    "japan-bcast" => _("Japan (bcast)"), "japan-cable" => _("Japan (cable)"), "china-bcast" => _("China (bcast)"),
-	    "europe-west" => _("West Europe"), "europe-east" => _("East Europe"), "italy" => _("Italy"), "ireland" => _("Ireland"), "france" => _("France"),
-	    "newzealand" => _("Newzealand"), "australia" => _("Australia"),
-	    "southafrica" => _("South Africa"),
-	    "argentina" => _("Argentina"),
-	    -1 =>_("All")
-	    );
+    ("us-bcast" => _("USA (bcast)"), "us-cable" => _("USA (cable)"), "us-cable-hrc" => _("USA (cable-hrc)"), "canada-cable" => _("Canada (cable)"),
+     "japan-bcast" => _("Japan (bcast)"), "japan-cable" => _("Japan (cable)"), "china-bcast" => _("China (bcast)"),
+     "europe-west" => _("West Europe"), "europe-east" => _("East Europe"), "italy" => _("Italy"), "ireland" => _("Ireland"), "france" => _("France"),
+     "newzealand" => _("Newzealand"), "australia" => _("Australia"),
+     "southafrica" => _("South Africa"),
+     "argentina" => _("Argentina"),
+     -1 =>_("All")
+     );
 # HRC means Harmonically Related Carrier
 
     if ($in->ask_from("TVdrake", _("Please,\ntype in your tv norm and country"),
-			   [
-			    { label => _("TV norm :"), val => \$norm, list => ["NTSC", "NTSC-JP","PAL", "PAL-M", "PAL-N", "PAL-NC", "SECAM"], type => 'combo'},
-			    { label => _("Area :"), val => \$ftable_id, list => [keys %freqtables], format => sub { $freqtables{$_[0]} }, sort => 1},
-			    ]
-				 )) {
-	   my $wait = $in->wait_message(_('Please wait'),
+				  [
+				   { label => _("TV norm :"), val => \$norm, list => ["NTSC", "NTSC-JP","PAL", "PAL-M", "PAL-N", "PAL-NC", "SECAM"], type => 'combo'},
+				   { label => _("Area :"), val => \$ftable_id, list => [keys %freqtables], format => sub { $freqtables{$_[0]} }, sort => 1},
+				   ]
+				  )) {
+	   $wait = $in->wait_message(_('Please wait'),
 							  _("Scanning for TV channels in progress ..."));
-	   
 #       we provide scantv a bogus table (france) which will
 #       will be ignored as "All" is selected because of -a
 	   $ftable_id = "france -a " if ($ftable_id eq -1);
 	   # Note that this'll be broken if/when we implement interactive_qt
 	   my $use_X =$in->isa('interactive_gtk') && -x "/usr/X11R6/bin/xvt";
 	   system ( (($use_X ) ?
-			  "xvt -T '"._("Scanning for TV channels")." ...' -e ":"")
-			 . "scantv -n $norm -f $ftable_id -o ~/.xawtv".(($use_X )?"":" &>~/tmp/scantv.log"));
+			   "xvt -T '"._("Scanning for TV channels")." ...' -e ":"")
+			  . "scantv -n $norm -f $ftable_id -o ~/.xawtv".(($use_X )?"":" &>~/tmp/scantv.log"));
 	   print "Now, you can run xawtv !\n";
-	   $in->exit(0);
     };
     $in->exit(0);
 }
@@ -81,4 +87,3 @@ scan4channels('interactive'->vnew())
 # - use Video-Capture-V4l-0.221 ?
 # - reput kwintv and test it ? => still buggy it seems ...
 # - configure kwintv and zapping ? => they've already wizards :-(
-# - check than scantv is there
