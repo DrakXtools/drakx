@@ -168,7 +168,11 @@ sub gtktext_insert {
     my ($w, $t) = @_;
     $w->freeze;
     $w->backward_delete($w->get_length);
-    $w->insert(undef, undef, undef, $t); 
+    if (ref($t) eq 'ARRAY') {
+	$w->insert($_->[0], $_->[1], $_->[2], $_->[3]) foreach @$t;
+    } else {
+	$w->insert(undef, undef, undef, $t); 
+    }
     #- DEPRECATED? needs \n otherwise in case of one line text the beginning is not shown (even with the vadj->set_value)
     $w->set_word_wrap(1);
 #-    $w->vadj->set_value(0);
