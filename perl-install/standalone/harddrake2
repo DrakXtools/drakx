@@ -378,7 +378,7 @@ foreach (@classes) {
         # EIDE detection incoherency:
         if ($_->{bus} && $_->{bus} eq 'ide') {
             $_->{channel} = $_->{channel} ? N("secondary") : N("primary");
-            delete $_->{info};
+            delete $_->{info} if $_->{Vendor};
         }
         if (defined $_->{capacity}) {
             my ($burner, $dvd) = (N("burner"), N("DVD"));
