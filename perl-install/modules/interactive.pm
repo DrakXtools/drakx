@@ -67,7 +67,7 @@ sub load_category__prompt_for_more {
 	if ($r eq "Yes") {
 	    push @l, load_category__prompt($in, $category) || next;
 	} else {
-	    $in->ask_warn('', [ detect_devices::stringlist() ]);
+	    $in->ask_warn('', join("\n", detect_devices::stringlist()));
 	}
     }
 }
