@@ -89,6 +89,7 @@ my @attacks_queue;
 
 checkNetwork();
 cronNetwork();
+get_unprocessed_attacks();
 
 $icon->show_all;
 Gtk2->main;
@@ -184,6 +185,13 @@ sub setAutoStart {
     output_p $onstartupfile,
     qq(AUTOSTART=$state
 );
+}
+
+sub get_unprocessed_attacks {
+    my @packets = $activefw->get_reports;
+    while (my @attack = splice(@packets, 0, 9)) {
+        handle_attack(@attack);
+    }
 }
 
 sub handle_attack {
