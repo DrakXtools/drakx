@@ -168,7 +168,7 @@ my %charsets = (
   "koi8-u"     => [ "koi8u_8x16",	"koi8-r",	"trivial.trans",
 	std("koi8-u") ],
   "cp1251"     => [ "iso05.f16",	"iso05",	"iso05_to_cp1251.trans",
-	std2("microsoft-cp1251",100) ],
+	std_("microsoft-cp1251") ],
 #- korean needs special console driver for text mode
   "ksc5601"    => [ undef,		undef,		undef,
 	"-*-*-*-*-*-*-*-*-*-*-*-*-ksc5601.1987-*" ],
