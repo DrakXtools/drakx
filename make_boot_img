@@ -116,8 +116,7 @@ sub initrd {
 	_ "$sudo mknod $mnt/dev/ttyp0 c 3 0";
     }
 
-    my $ftype = $type =~ /^(all)$/ ? "pcmcia" : $type;
-    if ($ftype eq "pcmcia" && $arch !~ /ppc/ && $arch !~ /ia64/) {
+    if (member($type, qw(pcmcia all network)) && $arch !~ /ppc/ && $arch !~ /ia64/) {
 	 _ "$sudo cp -a /etc/pcmcia $mnt/etc";
 	 patch_pcmcia_config("$mnt/etc");
     }

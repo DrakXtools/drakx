@@ -339,8 +339,8 @@ static void write_stab(void)
 	fprintf(f, "Socket %d: ", i);
 	if (!(s->state & SOCKET_PRESENT)) {
 	    fprintf(f, "empty\n");
-	} else if (s->state & SOCKET_HOTPLUG) {
-	    fprintf(f, "CardBus hotplug device\n");
+//mdk-stage1// 	} else if (s->state & SOCKET_HOTPLUG) {
+//mdk-stage1// 	    fprintf(f, "CardBus hotplug device\n");
 	} else if (!s->card) {
 	    fprintf(f, "unsupported card\n");
 	} else {
@@ -547,10 +547,10 @@ static card_info_t *lookup_card(int ns)
 	    }
 	} else {
 	    /* this is a 2.4 kernel; hotplug handles these cards */
-	    s->state |= SOCKET_HOTPLUG;
+//mdk-stage1//	    s->state |= SOCKET_HOTPLUG;
 	    log_message("CM: socket %d: CardBus hotplug device", ns);
 	    //beep(BEEP_TIME, BEEP_OK);
-	    return NULL;
+//mdk-stage1//	    return NULL;
 	}
     }
 

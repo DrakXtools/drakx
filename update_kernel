@@ -69,7 +69,10 @@ f "pcmcia net usb usbnet usbstorage cdrom scsi disk keepbig" ; ALL_DRIVERS=$v
 [ $ARCH == "i386" ] && DOSMODULES="vfat.o fat.o"
 echo "done."
 
-NETWORK_MODULES="  $NETWORK_DRIVERS"
+PCMCIA_COREMODULES="pcmcia_core.o tcic.o ds.o i82365.o yenta_socket.o"
+GENERIC_MODULES="isa-pnp.o floppy.o"
+
+NETWORK_MODULES="  $NETWORK_DRIVERS $PCMCIA_COREMODULES cb_enabler.o"
 USB_MODULES="      $USB_DRIVERS usbkbd.o keybdev.o input.o"
 CDROM_MODULES="    $CD_DRIVERS"
 HD_MODULES="       $DOSMODULES $SCSI_DRIVERS $DISK_DRIVERS loop.o isofs.o reiserfs.o"
@@ -79,10 +82,6 @@ BIG_MODULES="      $BIG_DRIVERS"
 ALL_MODULES="      $DOSMODULES $ALL_DRIVERS loop.o isofs.o reiserfs.o"
 [ "$ARCH" == "ppc" ] && ALL_MODULES="$ALL_MODULES hfs.o"
 NOT_USEFULL_IN_STAGE1="nls_*.o parport_probe.o raid*.o serial.o smbfs.o"
-
-GENERIC_MODULES="isa-pnp.o floppy.o"
-
-PCMCIA_COREMODULES="pcmcia_core.o tcic.o ds.o i82365.o yenta_socket.o"
 
 
 if [ "$ARCH" == "i386" ]; then
