@@ -48,7 +48,7 @@ unless ($::no_ugtk_init) {
     Gtk2->init;
     c::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', @::textdomains;
     $::need_utf8_i18n = 1;
-    Gtk2->croak_execeptions() if 0.95 < $Gtk2::VERSION;
+    Gtk2->croak_execeptions if 0.95 < $Gtk2::VERSION;
 }
 
 
@@ -327,7 +327,7 @@ sub create_box_with_title {
 	my $scroll = create_scrolled_window(gtktext_insert($wtext, $text));
      my $width = 400;
      $scroll->signal_connect(realize => sub {
-                                my $layout = $wtext->create_pango_layout ($text);
+                                my $layout = $wtext->create_pango_layout($text);
                                 $layout->set_width(($width - 10) * Gtk2::Pango->scale);
                                 $wtext->set_size_request($width,  min(200, ($layout->get_pixel_size)[1] + 10));
                                 $scroll->set_size_request($width, min(200, ($layout->get_pixel_size)[1] + 10));
