@@ -402,7 +402,7 @@ notation (for example, 1.2.3.4).");
     	    ) or return;
     $intf->{ONBOOT} = bool2yesno($onboot);
     $intf->{NEEDHOSTNAME} = bool2yesno($needhostname);
-    $intf->{MII_NOT_SUPPORTED} = !$hotplug && bool2yesno(!$hotplug) or delete $intf->{MII_NOT_SUPPORTED};
+    $intf->{MII_NOT_SUPPORTED} = bool2yesno(!$hotplug);
     $intf->{HWADDR} = $track_network_id or delete $intf->{HWADDR};
     1;
 }
