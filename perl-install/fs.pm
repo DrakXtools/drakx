@@ -65,6 +65,52 @@ sub check_mounted($) {
     }
 }
 
+sub auto_fs() {
+    grep { chop; $_ && !/nodev/ } cat_("/etc/filesystems");
+}
+
+sub mount_options {
+    my %non_defaults = (
+			sync => 'async', noatime => 'atime', noauto => 'auto', ro => 'rw', 
+			user => 'nouser', nodev => 'dev', noexec => 'exec', nosuid => 'suid',
+		       );
+    my %per_fs = (
+		  iso9660 => [ qw(unhide) ],
+		  vfat => [ qw(umask=0) ],
+		  nfs => [ 'rsize=8192,wsize=8192' ],
+		 );
+    my @user_implies = qw(noexec nodev nosuid);
+    my @options = keys %non_defaults;
+    my %help = map { $_ => '' } (@options, map { @$_ } values %per_fs);
+    my %short = map { /(.*?)=/ ? ("$1=" => $_) : () } keys %help;
+
+    foreach (split(':', $ENV{LANGUAGE}), '') {
+	my $manpage = "/usr/share/man/$_/man8/mount.8.bz2";
+	-e $manpage or next;
+
+	my ($tp, $option);
+	foreach (`bzip2 -dc $manpage`) {
+	    my $prev_tp = $tp;
+	    $tp = /^\.(TP|RE)/;
+	    my ($s) = /^\.B (.*)/;
+	    if ($prev_tp && $s eq '\-o' .. /X^/) {
+		if (my $v = $prev_tp && $s =~ /^[a-z]/i .. $tp) {
+		    if ($v == 1) {
+			$s = $short{$s} || $s;
+			$option = exists $help{$s} && !$help{$s} ? $s : '';
+		    } elsif ($v !~ 'E0') {
+			s/\\//g;
+			s/\s*"(.*?)"\s*/$1/g if s/^\.BR\s+//;
+			s/^\.B\s+//;
+			$help{$option} .= $_ if $option;
+		    }
+		}        
+	    }
+	}
+    }
+    \%help, \%non_defaults, \%per_fs, \@user_implies;
+}
+
 sub get_mntpoints_from_fstab {
     my ($l, $prefix, $uniq) = @_;
     log::l("reading fstab");
