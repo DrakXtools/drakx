@@ -40,6 +40,7 @@
 #include <sys/time.h>
 #include <time.h>
 #include <fcntl.h>
+#include <sys/poll.h>
 
 #include "stage1.h"
 #include "log.h"
@@ -213,6 +214,7 @@ static void parse_reply(struct bootp_request * breq, struct interface_info * int
 		switch (option) {
 		case BOOTP_OPTION_DNS:
 			memcpy(&dns_server, chptr, sizeof(dns_server));
+			log_message("got dns %s", inet_ntoa(dns_server));
 			if (length >= sizeof(dns_server)*2)
 				memcpy(&dns_server2, chptr+sizeof(dns_server), sizeof(dns_server2));
 			break;
@@ -239,7 +241,7 @@ static void parse_reply(struct bootp_request * breq, struct interface_info * int
 			memcpy(tmp_str, chptr, length);
 			tmp_str[length] = '\0';
 			hostname = strdup(tmp_str);
-			log_message("DHCP: got hostname %s", hostname);
+			log_message("got hostname %s", hostname);
 			break;
 
 		}
@@ -360,8 +362,7 @@ static void rfc951_sleep(int exp)
 static int handle_transaction(int s, struct bootp_request * breq, struct bootp_request * bresp,
 			      struct sockaddr_in * server_addr, int dhcp_type)
 {
-	struct timeval tv;
-	fd_set readfs;
+	struct pollfd polls;
 	int i, j;
 	int retry = 1;
 	int sin;
@@ -390,12 +391,10 @@ static int handle_transaction(int s, struct bootp_request * breq, struct bootp_r
 			return -1;
 		}
 		
-		FD_ZERO(&readfs);
-		FD_SET(sin, &readfs);
-		tv.tv_usec = 0;
-		tv.tv_sec = timeout;
+		polls.fd = sin;
+		polls.events = POLLIN;
 
-		while (select(sin + 1, &readfs, NULL, NULL, &tv) == 1) {
+		while (poll(&polls, 1, timeout*1000) == 1) {
 
 			if ((j = recv(sin, eth_packet, sizeof(eth_packet), 0)) == -1) {
 				log_perror("recv");
