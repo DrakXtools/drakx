@@ -43,7 +43,7 @@ sub ls120s() { grep { $_->{type} =~ /.d/ && isLS120Drive($_) } get(); }
 sub usbfdus() { grep { $_->{type} =~ /.d/ && isUSBFDUDrive($_) } get(); }
 sub cdroms() { 
     my @l = grep { $_->{type} eq 'cdrom' } get(); 
-    if (my @l2 = grep { isBurner($_->{device}) } @l) {
+    if (my @l2 = IDEburners()) {
 	require modules;
 	modules::add_alias('scsi_hostadapter', 'ide-scsi');
 	my $nb = 1 + max(-1, map { $_->{device} =~ /scd (\d+)/x } @l);

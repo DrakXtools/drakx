@@ -314,9 +314,6 @@ sub setPackages($) {
 	push @l, "Glide_V5"  if detect_devices::matching_desc('Voodoo 5');
 	push @l, "Glide_V3-DRI"  if detect_devices::matching_desc('Voodoo (3|Banshee)');
 	push @l, "Device3Dfx", "XFree86-glide-module" if detect_devices::matching_desc('Voodoo');
-	require timezone;
-	require lang;
-	push @l, "isdn4k-utils" if ($o->{timezone}{timezone} || timezone::bestTimezone(lang::lang2text($o->{lang}))) =~ /Europe/;
 	$_->{values} = [ map { $_ + 50 } @{$_->{values}} ] foreach grep {$_} map { pkgs::packageByName($o->{packages}, $_) } @l;
 
 	#- add OpenGL games that are only usefull if a 3D accelerated card is installed.

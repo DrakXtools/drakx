@@ -440,7 +440,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 #	substInFile { s/^urpmi\n//; $_ .= "urpmi\n" if eof } "$msec/group.conf" if -d $msec;
     }
     if (my $charset = lang::charset($o->{lang}, $o->{prefix})) {
-	update_userkderc("$o->{prefix}/usr/share/config/kdeglobals", 'Locale', Charset => $charset);
+	eval { update_userkderc("$o->{prefix}/usr/share/config/kdeglobals", 'Locale', Charset => $charset) };
     }
 
 #    #- update language and icons for KDE.
