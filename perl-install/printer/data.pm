@@ -29,7 +29,7 @@ our $localqueuepackages = [ [ 'foomatic-filters', 'foomatic-db',
 			      'ghostscript', 'hplip-hpijs', 'gimpprint-ijs',
 			      'gimpprint-foomatic', 'gimpprint-escputil', 
 			      'postscript-ppds', 'hplip-hpijs-ppds', 
-			      'nmap', 'scli' ],
+			      'hplip-model-data', 'nmap', 'scli' ],
 			    [qw(/usr/bin/foomatic-rip
 				/usr/share/foomatic/db/source/driver/ljet4.xml
 				/usr/share/foomatic/db/source/driver/hpijs.xml
@@ -44,6 +44,7 @@ our $localqueuepackages = [ [ 'foomatic-filters', 'foomatic-db',
 				/usr/bin/escputil
 				/usr/share/cups/model/postscript.ppd.gz
 				/usr/share/ppd/HP/HP-2000C-hpijs.ppd.gz
+				/usr/share/hplip/data/xml/models.xml
 				/usr/bin/nmap
 				/usr/bin/scli)] ];
 
