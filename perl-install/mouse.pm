@@ -365,7 +365,8 @@ sub set_xfree_conf {
     my ($mouse, $xfree_conf, $b_keep_auxmouse_unchanged) = @_;
 
     my ($synaptics, $mouse_) = partition { $_->{name} eq N_("Synaptics Touchpad") }
-      @{[ $mouse, if_(!is_empty_hash_ref $mouse->{auxmouse}, $mouse->{auxmouse}) ]};
+      ($mouse, if_(!is_empty_hash_ref($mouse->{auxmouse}), $mouse->{auxmouse}));
+    undef $mouse->{auxmouse} if ($synaptics && $synaptics == $mouse->{auxmouse});
     my @mice = map {
 	{
 	    Protocol => $_->{XMOUSETYPE},
@@ -375,7 +376,7 @@ sub set_xfree_conf {
 	    if_($_->{EMULATEWHEEL}, Emulate3Buttons => undef, Emulate3Timeout => 50, EmulateWheel => undef, EmulateWheelButton => 2),
 	};
     } @$mouse_;
-    
+
     if (!$mouse->{auxmouse} && $b_keep_auxmouse_unchanged) {
 	my (undef, @l) = $xfree_conf->get_mice;
 	push @mice, @l;
