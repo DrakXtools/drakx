@@ -1,3 +1,98 @@
+2003/07/21  François Pons  <fpons at mandrakesoft.com>
+
+	* install_steps_gtk.pm: avoid src package to be seen in tree.
+
+	* pkgs.pm: fixed setSelectedFromCompssList (updated with newer perl-URPM
+	interface),
+	more need to be done. maybe increased speed of unselectAllPackages.
+
+2003/07/19  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/draksec: fix checks loading
+	fix checks setting
+	fix config load
+
+	* drakxtools.spec: 9.2-0.18mdk
+
+	* security/msec.pm: sort functions & checks when writing configuration
+
+2003/07/18  erwan
+
+	* pixmaps/drakcluster.png: new drakcluster icon from LN
+
+2003/07/18  François Pons  <fpons at mandrakesoft.com>
+
+	* Makefile: trying to follow the sucking of titi...
+	use perl-Gtk2 and perl-Glib files.
+
+2003/07/18  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm: new binding returns a list intead of an array ref
+
+	* network/netconnect.pm: sync translation with stock item
+
+	* standalone/draksec: now that we display localized descriptions instead
+	of raw function
+	names, we've to sort the formers instead of sorting the laters
+	fix preferences loading & saving
+
+	* interactive/gtk.pm: only catch real wrong callees
+
+	* drakxtools.spec: add bug ref
+	first 9.2-0.17mdk bits
+
+2003/07/17  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/07/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm: do not exit the whole app when one destroy a dialog
+	(_create_dialog) default is "as much as needed" size
+	perl_checker fixes
+	center_always is unuser-friendly
+	  - ihm team said: always use labels, textview are stupid nonsenses
+	  - fcrozat then said: labels have no wrapping problems with cjk and the
+	like
+	use stock items in wizards
+
+	* network/ethernet.pm: proxy configuration step: do not go back two steps
+	back on "previous"
+	click, but only one back
+
+	* standalone/drakconnect: adjust dialogs size
+	correctly align fields in "lan configuration" dialog
+	perl_checker fixes
+	center_always is unuser-friendly
+	fix internet gateway buttons layout
+	remove ugly icon
+
+	* network/network.pm: properly use checkboxes
+
+	* drakxtools.spec: one more bit for 0.16mdk
+	9.2-0.16mdk
+	frop gtk+1 requires
+
+	* network/netconnect.pm: fix usage of bool type in interactive: put the
+	text in the checkbox's
+	label instead of packing a standalone label *and* a checkbox with an
+	empty label
+
+	* interactive/gtk.pm: perl_checker fix
+	simplify with gtkshow()
+	intercept buggy callees/users of bool type that wrongly pass label
+	instead of text
+
+2003/07/16  aginies
+
+	* fsedit.pm: now swap is before / on client node
+
+2003/07/16  Pixel  <pixel at mandrakesoft.com>
+
+	* commands.pm, swap.pm, Makefile: remove mkswap from commands.pm, so no
+	need anymore to have mkswap_ (the drawback is that the mkswap command
+	won't create the device anymore)
+
 2003/06/06  Guillaume Cottenceau  <gc at mandrakesoft.com>
 
 	* mdk-stage1/Makefile: we're in cooker now
@@ -17444,7 +17539,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.809 2003/03/13 23:40:17 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.810 2003/06/06 16:26:48 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
