@@ -370,7 +370,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 * Tue Mar  8 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-2mdk
 - drakconnect (oblin):
   o scan hidden ssid
-  o manage interface
+  o manage interface:
     * handle more DHCP options
     * move DHCP settings in a notebook page
 - XFdrake: choose a 4/3 resolution by default (pixel)
