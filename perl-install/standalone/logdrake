@@ -210,7 +210,7 @@ gtkadd($window,
 		   ),
 		!$::isExplain ? (1, gtkadd(new Gtk::Frame(_("Content of the file")),
 					 createScrolledWindow($log_text)
-					)) : (1, $log_text),
+					)) : (1, createScrolledWindow($log_text)),
 		if_(!$::isExplain, 0, gtkadd (gtkset_border_width(gtkset_layout(new Gtk::HButtonBox,-end), 5),
 					      if_(!$::isFile, gtksignal_connect(new Gtk::Button (_("Mail alert")), 
 										clicked => sub { eval { alert_config() };  
