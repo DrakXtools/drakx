@@ -518,11 +518,7 @@ killall pppd
                         add2hash($ethntf, $intf->{$ntf_name});
                         $net_device = $netc->{NET_DEVICE};
                         return "lan_intf" if $type eq 'cable';
-                        if ($::isInstall && $net_device eq $ethntf->{DEVICE}) {
-                            return 'lan_alrd_cfg';
-                        } else {
-                            return 'lan_protocol';
-                        }
+                        $::isInstall && $net_device eq $ethntf->{DEVICE} ? 'lan_alrd_cfg' : 'lan_protocol';
                     },
                    },
 
