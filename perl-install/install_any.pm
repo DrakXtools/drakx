@@ -1072,10 +1072,11 @@ sub remove_bigseldom_used {
     log::l("remove_bigseldom_used");
     $::testing and return;
     remove_unused();
+    unlink "/usr/X11R6/lib/modules/xf86Wacom.so";
     unlink glob_("/usr/share/gtk/themes/$_*") foreach qw(marble3d);
     unlink(m|^/| ? $_ : "/usr/bin/$_") foreach 
       ((map { @$_ } @bigseldom_used_groups),
-       qw(mkreiserfs resize_reiserfs),
+       qw(mkreiserfs resize_reiserfs mkfs.xfs),
       );
 }
 
