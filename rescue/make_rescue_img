@@ -4,18 +4,19 @@ use MDK::Common;
 use lib "../perl-install";
 use keyboard;
 
-$lib = (arch() =~ /x86_64/ ? "lib64" : "lib");
-$tmp = "/tmp/rescue_tmp";
-$rescue = "rescue.clp";
+my $lib = (arch() =~ /x86_64/ ? "lib64" : "lib");
+my $tmp = "/tmp/rescue_tmp";
+my $rescue = "rescue.clp";
 
+my $sudo = '';
 if ($>) {
     $sudo = "sudo";
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 }
 
-BEGIN { undef *_; }
-sub __ { print @_, "\n"; system(@_); }
-sub _ { __ @_; $? and die; }
+BEGIN { undef *_ }
+sub __ { print @_, "\n"; system(@_) }
+sub _ { __ @_; $? and die }
 
 sub install_raw {
     s|^/|| foreach @_;
@@ -73,7 +74,7 @@ foreach (keyboard::loadkeys_files()) {
 
 my $perl_version = join ".", unpack "C3", $^V;
 my @bad;
-@files = map { 
+my @files = map { 
     chomp;
     s/PERL_VERSION/$perl_version/g;
     s|/LIB/|/$lib/|g;
@@ -91,7 +92,7 @@ foreach (cat_("aliases")) {
 
 -e "../kernel/all.kernels" or die "use ./update_kernel in gi/kernel first\n";
 
-chomp($main = `cat ../kernel/all.kernels/.main`);
+my $main = chomp_(`cat ../kernel/all.kernels/.main`);
 
 _ "cp ../kernel/all.kernels/$main/modules.{cz,dep} $tmp/modules";
 
@@ -111,5 +112,5 @@ __ "strip $tmp/{lib,$lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
 
 exit 0 if $ARGV[0];
 
-_ "mkisofs -quiet -D -R $tmp | create_compressed_fs - 65536 $rescue 200 2>/dev/null"
+_ "mkisofs -quiet -D -R $tmp | create_compressed_fs - 65536 $rescue 200 2>/dev/null";
 _ "$sudo rm -rf $tmp";
