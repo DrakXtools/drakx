@@ -126,7 +126,7 @@ sub create_steps_window {
 	    push @l, $s, N_("System configuration");
 	    $s = '';
 	}
-	$s .= "- " . translate($o->{steps}{$_}{text}) . "\n";	
+	$s .= ($o->{steps}{$_}{done} ? '+' : '-') . ' ' . translate($o->{steps}{$_}{text}) . "\n";	
     }
 
     gtkadd($w->{window}, gtkpack__(Gtk2::VBox->new(0,15), @l, $s));
