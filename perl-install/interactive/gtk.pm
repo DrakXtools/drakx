@@ -167,8 +167,8 @@ sub create_treeview_tree {
 	my $to_unref;
 	$build_value = sub {
 	    my ($text, $image) = $e->{image2f}->($_[0]);
-	    [ $text  ? (0 => $text) : (),
-	      $image ? (1 => my $to_unref = gtkcreate_pixbuf($image)) : () ];
+	    [ $text  ? (0 => $text) : @{[]},
+	      $image ? (1 => $to_unref = gtkcreate_pixbuf($image)) : @{[]} ];
 	};
 	$clean_image = sub { $to_unref and $to_unref->unref };
     } else {
