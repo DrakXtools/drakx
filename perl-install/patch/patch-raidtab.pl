@@ -17,3 +17,21 @@ log::l("PATCHING");
     }
     unlink "/tmp/raidtab";
 };
+
+use raid;
+package raid;
+
+*prepare_prefixed = sub {
+    my ($raids, $prefix) = @_;
+
+    log::l("patched prepare_prefixed");
+
+    $raids or return;
+
+    &write($raids, "/etc/raidtab") if ! -e "/etc/raidtab";
+    
+    eval { cp_af("/etc/raidtab", "$prefix/etc/raidtab") };
+    foreach (grep { $_ } @$raids) {
+	devices::make("$prefix/dev/$_->{device}") foreach @{$_->{disks}};
+    }
+};

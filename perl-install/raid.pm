@@ -158,6 +158,8 @@ sub prepare_prefixed {
     my ($raids, $prefix) = @_;
     $raids or return;
 
+    &write($raids, "/etc/raidtab") if ! -e "/etc/raidtab";
+    
     eval { cp_af("/etc/raidtab", "$prefix/etc/raidtab") };
     foreach (grep { $_ } @$raids) {
 	devices::make("$prefix/dev/$_->{device}") foreach @{$_->{disks}};
