@@ -83,7 +83,10 @@ our %langs = (
 'lo' =>    [ 'Laotian',             'Laotian',           'lo_LA', ' 2   ', 'utf_lo' ],
 'lt' =>    [ 'Lithuanian',          'Lietuviskai',       'lt_LT', '1    ', 'iso-8859-13' ],
 #- ltg_LV locale not done yet, using lv_LV for now
-'ltg' =>   [ 'Latgalian',           'Latgalisu',         'lv_LV', '1    ', 'iso-8859-13', 'ltg:lv' ],
+#- "ltg" is not a standard lang code, ISO-639 code was refused;
+#- LTG_LV should be used instead (uppercase is for non-standard
+#- langcodes, as defined by locale naming standard
+'ltg' =>   [ 'Latgalian',           'Latgalisu',         'lv_LV', '1    ', 'iso-8859-13', 'ltg:LTG:lv' ],
 'lv' =>    [ 'Latvian',             'Latviesu',          'lv_LV', '1    ', 'iso-8859-13' ],
 'mi' =>    [ 'Maori',               'Maori',             'mi_NZ', '   4 ', 'unicode' ],
 'mk' =>    [ 'Macedonian',          'Makedonski',        'mk_MK', '1    ', 'utf_cyr1' ],
@@ -99,9 +102,11 @@ our %langs = (
 'nn' =>    [ 'Norwegian Nynorsk',   'Norsk, Nynorsk',    'nn_NO', '1    ', 'iso-8859-1',  'nn:no@nynorsk:no_NY:no:nb' ],
 'oc' =>    [ 'Occitan',             'Occitan',           'oc_FR', '1    ', 'iso-8859-1',  'oc:fr_FR:fr' ],
 'pa' =>    [ 'Punjabi',             'ZZ Punjabi',        'pa_IN', ' 2   ', 'unicode' ],
-# 'tl' in priority position for now, as 'ph' is not yet official and 'tl'
-# is used instead. Monolingual window managers will not see the menus otherwise
-'ph' =>    [ 'Filipino',            'Filipino',          'ph_PH', ' 2   ', 'iso-8859-1',  'tl:ph' ],
+#- 'tl' in priority position for now, as 'fil' is not much used.
+#- Monolingual window managers will not see the menus otherwise
+#- "ph_PH" should change to "fil_PH" in the future ("ph" is not
+#- standard lang code, "fil" is standard)
+'ph' =>    [ 'Filipino',            'Filipino',          'ph_PH', ' 2   ', 'iso-8859-1',  'tl:fil' ],
 'pl' =>    [ 'Polish',              'Polski',            'pl_PL', '1    ', 'iso-8859-2' ],
 'pt' =>    [ 'Portuguese',          'Portugues',         'pt_PT', '1 3  ', 'iso-8859-15', 'pt_PT:pt:pt_BR' ],
 'pt_BR' => [ 'Portuguese Brazil', 'Portugues do Brasil', 'pt_BR', '    5', 'iso-8859-1',  'pt_BR:pt_PT:pt' ],
