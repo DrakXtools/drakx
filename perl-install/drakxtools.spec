@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 33mdk
+Release: 34mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue May  4 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-34mdk
+- drakconnect:
+  o fix last step of interface destruction wizard
+  o wizard: take ISDN protocol into account for people outside Europe
+    to use it (poulpy)
+- drakupdate_fstab: fix adding twice an entry in fstab, one with the
+  old name, one with the devfs name (pixel)
+- XFdrake: kill XFree86 3.x support (pixel)
+
 * Fri Apr 30 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-33mdk
 - create ~/tmp if needed when running a program
 - device managment: fix sdX <=> scsi devices mapping (especially for
