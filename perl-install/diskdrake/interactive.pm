@@ -1297,5 +1297,5 @@ sub update_bootloader_for_renumbered_partitions {
     my @renumbering = map { @{$_->{allPartitionsRenumbered} || []} } @{$all_hds->{hds}} or return;
 
     require bootloader;
-    bootloader::update_for_renumbered_partitions($in, \@renumbering);    
+    bootloader::update_for_renumbered_partitions($in, \@renumbering, $all_hds->{hds});
 }
