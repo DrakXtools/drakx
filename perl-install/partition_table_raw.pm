@@ -27,6 +27,7 @@ my @MBR_signatures = (
 );
 
 sub typeOfMBR($) { typeFromMagic(devices::make($_[0]), @MBR_signatures) }
+sub typeOfMBR_($) { typeFromMagic($_[0], @MBR_signatures) }
 
 sub compute_CHS($$) {
     my ($hd, $e) = @_;

@@ -20,17 +20,14 @@ Linux: 5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen) or 6.0 (Venus)."),
 selectInstallClass =>
  __("Select:
 
-  - Beginner: If you have never installed Linux before, and wish to
-install the distribution elected \"Product of the year\" for 1999,
-click here.
+  - Beginner: If you have never installed Linux before, click here.
 
   - Developer: If you are familiar with Linux and will be using the
 computer primarily for software development, you will find happiness
 here.
 
-  - Server: If you wish to install a general purpose server, or the
-Linux distribution elected \"Distribution/Server\" for 1999, select
-this.
+  - Server: If you wish to install a general purpose server (for mail,
+printing...), select this.
 
   - Expert: If you are fluent with GNU/Linux and want to perform
 a highly customized installation, this Install Class is for you."),
@@ -52,9 +49,9 @@ want to specify options for it. First, try and let the driver
 probe for the hardware: it usually works fine.
 
 If not, do not forget the information on your hardware that you
-could get from Windows (if you have it on your system), as
-suggested by the installation guide. These are the options
-you will need to provide to the driver."),
+could get from your documentation or from Windows (if you have it
+on your system), as suggested by the installation guide. These
+are the options you will need to provide to the driver."),
 
 partitionDisks =>
  __("At this point, hard drive partitions must be defined. (Unless you
@@ -283,9 +280,9 @@ want to specify options for it. First, try and let the driver
 probe for the hardware: it usually works fine.
 
 If not, do not forget the information on your hardware that you
-could get from Windows (if you have it on your system), as
-suggested by the installation guide. These are the options
-you will need to provide to the driver."),
+could get from you documentation or from Windows (if you have
+it on your system), as suggested by the installation guide.
+These are the options you will need to provide to the driver."),
 
 partitionDisks =>
  __("At this point, hard drive partitions must be defined. (Unless you
