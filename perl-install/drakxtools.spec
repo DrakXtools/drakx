@@ -1,12 +1,12 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 0.12mdk
+Release: 0.13mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
-Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2002.12.11.1, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.4-14mdk
+Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2003.01.21.2, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.4-14mdk
 Conflicts: drakconf < 9.1-0.4mdk 
 BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.8, ncurses-devel, newt-devel, perl-devel, libext2fs-devel, perl-MDK-Common-devel
 BuildRoot: %_tmppath/%name-buildroot
@@ -16,7 +16,7 @@ Obsoletes: draksec
 %package newt
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
-Requires: perl-base >= 1:5.8.0-10mdk, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.4-1mdk, usermode-consoleonly >= 1.44-4mdk
+Requires: perl-base >= 1:5.8.0-10mdk, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.4-1mdk, usermode-consoleonly >= 1.44-4mdk, msec >= 0.38
 Obsoletes: diskdrake setuptool
 Obsoletes: mouseconfig kbdconfig printtool drakfloppy
 Provides: diskdrake setuptool mouseconfig kbdconfig printtool
@@ -288,6 +288,39 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Thu Jan 23 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.13mdk
+- fix standalone apps error on --help
+- many enhancements to draksound:
+  o no more unlisted message
+  o "how to debug sound problem" window
+  o offer to pick any driver if no detected sound card (for eg isa
+    card owners) or if no alternative driver 
+  o handle proprietary drivers
+  o fix unchrooted chkconfig call
+- draksec: display help in tooltips
+- drakconnect :
+  o cleaning (poulpy, me)
+  o zeroconf support (poulpy)
+- big interactive cleanup for drakx and focus handling (pixel)
+- boot floppy fixes (pixel)
+- diskdrake: don't display twice the same mount point (pixel)
+- keyboardrake:
+  o cleanups (pixel)
+  o update supported keyboard layouts ... (pablo)
+- xfdrake: (pixel)
+  o cleanups
+  o don't use anymore qiv to render background while testing X config
+- add drakpxe (francois)
+- printerdrake:
+  o updates (till)
+  o fix chrooted services (me)
+- translation updates (many people)
+- mousedrake: fix scrolling test (gc)
+- ugtk2: fix some (small) memory leaks (gc)
+- ppc updates (stew)
+- english sentences proofreading (pablo, stew)
+- fix gtk+-2 port of mousedrake (me), 
+
 * Fri Jan 17 2003 Damien Chaumette <dchaumette@mandrakesoft.com> 9.1-0.12mdk
 - drakconnect : 
   o little dhcp behavior rework
