@@ -14,7 +14,7 @@ use MDK::Common::File;
 
 
 @ISA = qw(Exporter);
-@EXPORT = qw(get_info_providers_backend isdn_detect_backend isdn_get_info isdn_get_list isdn_read_config isdn_write_config isdn_write_config_backend read_providers_backend);
+@EXPORT = qw(get_info_providers_backend isdn_detect_backend isdn_get_cards isdn_get_info isdn_get_list isdn_read_config isdn_write_config isdn_write_config_backend read_providers_backend);
 
 
 sub isdn_write_config {
@@ -158,6 +158,19 @@ sub isdn_get_info {
 sub isdn_get_cards_by_type {
     my ($isdn_type) = @_;
     grep { $_->{card} eq $isdn_type } @isdndata;
+}
+
+
+sub isdn_get_cards() {
+    my %buses = (
+                 isa => N("ISA / PCMCIA") . "/" . N("I don't know"),
+                 pci => N("PCI"),
+                 usb => N("USB"),
+                );
+    # pmcia alias (we should really split up pcmcia from isa in isdn db): 
+    $buses{pcmcia} = $buses{isa};
+
+    map { $buses{$_->{card}} . "|" . $_->{description} => $_ } @isdndata;
 }
 
 
