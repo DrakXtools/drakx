@@ -45,8 +45,10 @@ sub size2default_resolution {
     my ($size) = @_; #- size in inch
 
     if (arch() =~ /ppc/) {
-     require detect_devices;
+	require detect_devices;
 	return "1024x768" if detect_devices::get_mac_model() =~ /^PowerBook|^iMac/;
+    } elsif (is_xbox()) {
+	return "640x480";
     }
 
     my %monitorSize2resolution = (
