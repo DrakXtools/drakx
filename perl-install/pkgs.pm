@@ -418,6 +418,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 				versionCompare(c::headerGetEntry($header, 'release'), $p->{release}) >= 0);
 			     if ($version_rel_test) {
 				 if ($otherPackage && $version_cmp <= 0) {
+				     log::l("removing $otherPackage since it be not be updated otherwise");
 				     $toRemove{$otherPackage} = 1; #- force removing for theses other packages, select our.
 				 } else {
 				     $p->{installed} = 1;
@@ -560,7 +561,7 @@ sub installCallback {
     log::l($msg .": ". join(',', @_));
 }
 
-sub install($$$) {
+sub install($$$;$) {
     my ($prefix, $isUpgrade, $toInstall) = @_;
     my %packages;
 
@@ -587,7 +588,7 @@ sub install($$$) {
 	                       $p->{name}, $p->{version}, $p->{release},
 			       c::headerGetEntry(getHeader($p), 'arch');
 	$packages{$p->{name}} = $p;
-	c::rpmtransAddPackage($trans, getHeader($p), $p->{name}, $isUpgrade && $p->{name} !~ /kernel/); #- TODO: replace `named kernel' by `provides kernel'
+	c::rpmtransAddPackage($trans, getHeader($p), $p->{name}, $isUpgrade && ($useOnlyUpgrade || $p->{name} !~ /kernel/)); #- TODO: replace `named kernel' by `provides kernel'
 	$nb++;
 	$total += $p->{size};
     }
@@ -595,8 +596,8 @@ sub install($$$) {
     c::rpmdepOrder($trans) or
 	cdie "error ordering package list: " . c::rpmErrorString(),
 	  sub {
-	      c::rpmdbClose($db);
 	      c::rpmtransFree($trans);
+	      c::rpmdbClose($db);
 	  };
     c::rpmtransSetScriptFd($trans, fileno LOG);
 
@@ -623,6 +624,14 @@ sub install($$$) {
 		$parts{$3} ? 0 : ($parts{$3} = 1);
 	    } else { 1; }
 	} reverse @probs;
+
+	c::rpmtransFree($trans);
+	c::rpmdbClose($db);
+#	if ($isUpgrade && !$useOnlyUpgrade && %parts) {
+#	    #- recurse only once to try with only upgrade (including kernel).
+#	    log::l("trying to upgrade all packages to save space");
+#	    install($prefix,$isUpgrade,$toInstall,1);
+#	}
 	die "installation of rpms failed:\n  ", join("\n  ", @probs);
     }
     c::rpmtransFree($trans);
