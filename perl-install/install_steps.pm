@@ -9,7 +9,6 @@ use vars qw(@filesToSaveForUpgrade);
 #-######################################################################################
 use common qw(:file :system :common :functional);
 use install_any qw(:all);
-use install_interactive;
 use partition_table qw(:types);
 use detect_devices;
 use modules;
