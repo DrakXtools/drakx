@@ -1,3 +1,233 @@
+2002/08/28  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* standalone/logdrake: 
+	  - fix logdrake display window in embedded mode
+
+2002/08/28  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: small fix
+
+2002/08/28  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/vi.po: updated po files
+	Changed encoding of Vietnamese file to be the same as used in vi.po of
+	rpmdrake
+
+	* share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/bs.po, share/po/af.po, share/po/az.po, share/po/eo.po,
+	share/po/el.po, share/po/cs.po, share/po/bg.po: fixed Project-Id header
+	updated pot file
+
+	* share/po/br.po, share/po/be.po, share/po/DrakX.pot, share/po/de.po:
+	updated pot file
+
+	* share/po/ro.po: updated po files
+	updated po files
+	updated Italian and Romanian files
+
+	* share/po/tr.po: updated Turkish file
+	updated po files
+	updated po files
+
+	* share/po/sk.po, share/po/no.po, share/po/mt.po, share/po/sv.po,
+	share/po/ta.po, share/po/nl.po: updated po files
+	updated po files
+
+	* harddrake/sound.pm: Fixed typo (no space before a colon in English)
+
+	* share/po/gl.po, share/po/pt_BR.po, share/po/ga.po, share/po/pl.po,
+	share/po/fi.po: fixed Project-Id header
+	updated po files
+
+	* share/po/it.po: updated po files
+	updated Italian and Romanian files
+
+	* share/po/th.po: fixed Project-Id line
+	updated po files
+	updated po files
+
+	* share/po/id.po, share/po/et.po, share/po/hr.po, share/po/wa.po,
+	share/po/is.po, share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/fr.po, share/po/eu.po, share/po/es.po, share/po/hu.po: updated
+	po files
+
+	* share/po/ru.po, share/po/sl.po, share/po/ja.po, share/po/uk.po,
+	share/po/ko.po, share/po/sr.po, share/po/lt.po, share/po/sp.po,
+	share/po/lv.po: fixed Project-Id header
+	updated po files
+	updated po files
+
+2002/08/28  Pixel  <pixel@mandrakesoft.com>
+
+	* fsedit.pm (is_same_hd): add ugly support for davfs devices (http://...)
+	comparison without the ending "/"
+
+	* partition_table/dos.pm (partition_table::dos::last_usable_sector): don't
+	use totalsectors, compute it so that it is cylinder aligned
+
+	* Xconfig/monitor.pm: choose a good_default_monitor based on laptop-or-not
+	(thanks to cosmic flo)
+
+	* fs.pm: use add2hash_ for setting "username=%" otherwise it causes havoc
+	in auto_install's manualFstab
+	  - read_fstab, write_fstab: add the possibility to not change
+	credentials
+	  - use detect_devices::removables()
+	remove deprecated comment (supermount *does* handle auto type nowadays)
+	(set_default_options): use $is_removable to know if it is removable
+	instead of
+	testing the presence of $part->{rootDevice} (this must be old code
+	predating
+	the avaibility of $is_removable)
+	create detect_devices::suggest_mount_point and use it instead of doing
+	it in fs::set_removable_mntpoints
+	use mkdir_p instead of mkdir
+	use new function part2device() to have the file from {device} (fixes
+	mounting of ntfs in standalone)
+	default option username=% for smb
+
+	* Makefile.config, standalone/drakupdate_fstab: new prog drakupdate_fstab
+
+	* interactive.pm, interactive/gtk.pm: add {callbacks}{advanced}, called
+	when "Advance" button is pressed
+
+	* standalone/diskdrake: remove unused $fstab
+
+	* detect_devices.pm: 
+	  - why did hds() did return removable drives in standalone? changing
+	this (this was written in 1999 so no good reason must stand)
+	  - remove the ugly isFloppyOrHD
+	  - new function get_usb_storage_info which magically links
+	/proc/scsi/scsi entries to /proc/bus/usb/devices & usbtable one :)
+	  - new function usb_description2removable which tries to categorize the
+	removables
+	  - new function removables returning various things
+	  - new function isRemovableUsb using usb class
+	  - new function isFloppyUsb using the usbtable "Removable:floppy"
+	  - suggest_mount_point use "Removable:xxx" entries from usbtable, or
+	usb_description2removable()
+	create detect_devices::suggest_mount_point and use it instead of doing
+	it in fs::set_removable_mntpoints
+	use mkdir_p instead of mkdir
+
+	* Xconfig/main.pm: fix calling export_to_install_X in
+	configure_everything_auto_install
+
+	* install_steps.pm: 
+	  - use $::prefix in any::get_secure_level()
+	  - fix any::get_secure_level() not using prefix when it should
+
+	* Xconfig/xfree3.pm, Xconfig/xfree4.pm: Xconfig::xfree3::set_resolution
+	and Xconfig::xfree4::set_resolution must not modify parameter $Screen
+	before calling Xconfig::xfreeX::set_resolution (otherwise the resolution
+	setting is done on only one device which is bad for multi-head)
+
+	* any.pm: 
+	  - use $::prefix in any::get_secure_level()
+	  - fix any::get_secure_level() not using prefix when it should
+	(selectLanguage): fix the ugly use of focus_out for setting langs. Was
+	completly rubbish in newt.
+
+	* network/tinyfirewall.pm: better error message
+
+	* partition_table.pm: remove associating 0x35 => 'jfs' since it causes
+	types_rev to associate jfs to 0x35 instead of 0x383
+
+	* loopback.pm, devices.pm, install_any.pm: use mkdir_p instead of mkdir
+
+	* install_steps_interactive.pm: bus/usb category prompting is automatic
+
+	* diskdrake/interactive.pm, diskdrake/removable.pm,
+	diskdrake/smbnfs_gtk.pm: in "Mount point", by default choose the default
+	proposition (asked by dadou for smb)
+
+	* diskdrake/dav.pm: add "Mount" and "Unmount"
+	in "Mount point", by default choose the default proposition (asked by
+	dadou for smb)
+
+	* Xconfig/resolution_and_depth.pm: on a "Flat Panel" use the flat planel
+	resolution (as suggested by Alastair Scott)
+
+	* install_steps_gtk.pm, share/list, Makefile: group icons are not used,
+	remove them
+
+2002/08/28  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer.pm: Printerdrake remembers now whether it was in normal mode or
+	in expert
+	mode last time.
+	OpenOffice.org: Remove default printer tag from the "Generic Printer"
+	when Printerdrake adds an entry for the system's default printer.
+
+	* pixmaps/printer-mdk.png, pixmaps/printer.png: Renamed icon of
+	Printerdrake so that it does not get overwritten by
+	Star Office.
+
+	* standalone/printerdrake: Printerdrake remembers now whether it was in
+	normal mode or in expert
+	mode last time.
+	Renamed icon of Printerdrake so that it does not get overwritten by
+	Star Office.
+
+	* printerdrake.pm: Printerdrake remembers now whether it was in normal
+	mode or in expert
+	mode last time.
+
+2002/08/28  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/ui.pm: 
+	  - embeded mode:
+	o only display menu bar if not in embedded mode
+	  o add a "quit" button in  embedded mode
+	  - make my_gtk ui be readable by indentation
+
+	* harddrake/TODO: update
+
+2002/08/27  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/various.pm, standalone/drakboot: use the new fsedit::get_hds
+
+	* detect_devices.pm: set {prefix} for rd/ida/cciss/... (instead of doing
+	it in fsedit::hds)
+
+	* fsedit.pm: 
+	  - create lvms() which contains what was in hds()
+	  - create get_hds() which handle errors when calling hds()
+	  - remove commented obsolete code
+	  - read_partitions is now read_proc_partitions_raw
+	  - readProcPartitions is now read_proc_partitions
+	  - read_proc_partitions use fake {start}s so that the empty space is
+	computed ok by get_normal_parts_and_holes
+	  - verifyHds doesn't exist anymore
+	  - part of it is in hds() using compare_with_proc_partitions() and
+	use_proc_partitions()
+	  - part of it is in install_any::getHds
+
+	* partition_table.pm: 
+	  - do not handle clearall in read()
+	  - ensure not partition table in written when "readonly" (it must not
+	happen, but just in case)
+
+	* diskdrake/interactive.pm: handle "readonly" per hds
+
+	* partition_table/raw.pm (test_for_bad_drives): classify error messages
+	(either read, write or something-else)
+
+	* install_interactive.pm: handle "readonly" flag per hard drives instead
+	of a global one
+
+	* standalone/diskdrake: use function fsedit::get_hds which handles errors
+
+	* share/po/de.po: remove duplicate entries
+
+	* install_steps_interactive.pm, install_any.pm: remove/simplify error
+	hanling (most of it is moved to fsedit.pm)
+
+	* any.pm, bootloader.pm, install2.pm: :x
+
+	* diskdrake/hd_gtk.pm: nicer error message when no devices are available
+	(esp. for standalone)
+
 2002/08/27  Damien Chaumette  <dchaumette@mandrakesoft.com>
 
 	* network/network.pm: 
@@ -665,7 +895,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.727 2002/08/26 22:15:10 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.728 2002/08/27 22:19:06 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
