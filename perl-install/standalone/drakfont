@@ -840,7 +840,7 @@ Visual Interface:
 
 sub appli_choice {
     my $choice_box;
-    my $text = new Gtk2::Text;
+    my $text = new Gtk2::TextView;
     gtkpack(
         $font_box,
         $choice_box = gtkpack_(
@@ -899,10 +899,8 @@ sub appli_choice {
                     1,
                     gtktext_insert(
                         gtkset_editable($text, 0),
-                        N("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server.")
+                        [ [ N("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server.") ] ]
                     ),
-                    0,
-                    new Gtk2::VScrollbar($text->vadj),
                     0,
                     new Gtk2::VBox(0, 10),
                 ),
