@@ -371,8 +371,8 @@ Section "Monitor"
    ModelName   "Unknown"
    HorizSync   31.5-35.5
    VertRefresh 50-70
-   Modeline "640x480"     25.175 640  664  760  800   480  491  493  525
-   Modeline "640x480"     28.3   640  664  760  800   480  491  493  525
+   ModeLine "640x480"     25.175 640  664  760  800   480  491  493  525
+   ModeLine "640x480"     28.3   640  664  760  800   480  491  493  525
    ModeLine "800x600"     36     800  824  896 1024   600  601  603  625
 EndSection
 
