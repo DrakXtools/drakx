@@ -171,16 +171,13 @@ mar_open_file(char *filename, struct mar_stream *s)
 
 	/* verify integrity */
 	if (s->crc32 != mar_calc_integrity(s))
+		log_message("ERROR! mar_open_file: CRC check failed (trying to continue)");
+
+	if (gzseek(s->mar_gzfile, sizeof(int), SEEK_SET) != sizeof(int))
 	{
-		log_message("E: mar::open_marfile CRC check failed");
+		gzerr(s->mar_gzfile);
 		return -1;
 	}
-	else
-		if (gzseek(s->mar_gzfile, sizeof(int), SEEK_SET) != sizeof(int))
-		{
-			gzerr(s->mar_gzfile);
-			return -1;
-		}
 
 	while (end_filetable == 0)
 	{

@@ -86,14 +86,15 @@ mar_create_file(char *dest_file, char **files)
 		total_length += fsiz;
 		filenum++;
 	}
-	temp_marfile_buffer = (char *) alloca(total_length); /* create the whole file in-memory  */
+
+	temp_marfile_buffer = (char *) malloc(total_length); /* create the whole file in-memory (not with alloca! it can be bigger than typical limit for stack of programs (ulimit -s) */
 	DEBUG_MAR(printf("D: mar::create_marfile total-length %d\n", total_length););
 
 	current_offset_filetable = sizeof(int); /* first file is after the crc */
 	filenum = 0;
 	while (files[filenum])
 	{
-		FILE * f = fopen(files[filenum], "rb");
+		FILE * f = fopen(files[filenum], "r");
 		int fsize;
 		if (!f)
 		{
@@ -143,7 +144,7 @@ mar_create_file(char *dest_file, char **files)
 
 	/* ok, buffer is ready, let's write it on-disk */
 	{
-		gzFile f = gzopen(dest_file, "wb9");
+		gzFile f = gzopen(dest_file, "w9");
 		if (!f)
 		{
 			perror(dest_file);
@@ -207,11 +208,11 @@ main(int argc, char **argv)
 		}
 		if ((strcmp(argv[1], "-c") == 0) && argc >= 4)
 		{
-			char **files = (char **) malloc(((argc-3)+1) * sizeof(char *));
+			char **files = (char **) alloca(((argc-3)+1) * sizeof(char *));
 			int i = 3;
 			while (i < argc)
 			{
-				files[i-3] = strdup(argv[i]);
+				files[i-3] = argv[i];
 				i++;
 			}
 			files[argc-3] = NULL;
