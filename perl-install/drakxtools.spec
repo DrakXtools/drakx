@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 13mdk
+Release: 14mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Oct  1 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-14mdk
+- mousedrake, harddrake service: do not crash with touchpads (blino)
+- harddrake service: on stop, blacklist snd-usb-audio
+
 * Fri Oct  1 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-13mdk
 - diskdrake: don't die when device-mapper is missing (eg on 2.4
   kernel) (pixel, #11834)
