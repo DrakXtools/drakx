@@ -43,7 +43,13 @@ sub dvdroms     { grep { isDvdDrive($_) } cdroms() }
 sub raw_zips    { grep { member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) } get() }
 #-sub jazzs     { grep { member($_->{media_type}, 'fd', 'hd') && isJazzDrive($_) } get() }
 sub ls120s      { grep { member($_->{media_type}, 'fd', 'hd') && isLS120Drive($_) } get() }
-sub zips        { map { $_->{device} .= 4; $_ } raw_zips() }
+sub zips        { 
+    map { 
+	$_->{device} .= 4; 
+	$_->{devfs_device} = $_->{devfs_prefix} . '/part4'; 
+	$_;
+    } raw_zips();
+}
 
 sub cdroms__faking_ide_scsi {
     my @l = cdroms();
@@ -78,9 +84,9 @@ sub floppies() {
     require modules;
     eval { modules::load("floppy") };
     my @fds = map {
-	my $info = (!dev_is_devfs() || -e "/dev/$_") && c::floppy_info(devices::make($_));
-	if_($info && $info ne '(null)', { device => $_, media_type => 'fd', info => $info })
-    } qw(fd0 fd1);
+	my $info = (!dev_is_devfs() || -e "/dev/fd$_") && c::floppy_info(devices::make("fd$_"));
+	if_($info && $info ne '(null)', { device => "fd$_", devfs_device => "floppy/$_", media_type => 'fd', info => $info })
+    } qw(0 1);
     my @ide = ls120s() and eval { modules::load("ide-floppy") };
 
     eval { modules::load("usb-storage") } if usbStorage();
@@ -120,6 +126,17 @@ sub get_sys_cdrom_info {
     }
 }
 
+sub get_devfs_devices {
+    my (@l) = @_;
+
+    my %h = (cdrom => 'cd', hd => 'disc');
+
+    foreach (@l) {
+	my $t = $h{$_->{media_type}} or next;
+	$_->{devfs_device} = $_->{devfs_prefix} . '/' . $t;
+    }
+}
+
 sub isBurner { 
     my ($e) = @_;
     $e->{capacity} =~ /burner/ and return 1;
@@ -155,10 +172,12 @@ sub getSCSI() {
     $first =~ /^Attached devices:/ or $err->($first);
 
     @l = map_index {
-	my ($id) = /^Host:.*?Id: (\d+)/ or $err->($_);
+	my ($host, $channel, $id, $lun) = /^Host: scsi(\d+) Channel: (\d+) Id: (\d+) Lun: (\d+)/ or $err->($_);
 	my ($vendor, $model) = /^\s*Vendor:\s*(.*?)\s+Model:\s*(.*?)\s+Rev:/m or $err->($_);
 	my ($type) = /^\s*Type:\s*(.*)/m or $err->($_);
-	{ info => "$vendor $model", id => $id, channel => 0, device => "sg$::i", raw_type => $type, bus => 'SCSI' };
+	{ info => "$vendor $model", channel => $channel, id => $id, lun => $lun, 
+	  device => "sg$::i", devfs_prefix => sprintf('scsi/host%d/bus%d/target%d/lun%d', $host, $channel, $id, $lun),
+          raw_type => $type, bus => 'SCSI' };
     } @l;
 
     each_index {
@@ -178,6 +197,7 @@ sub getSCSI() {
 	put_in_hash $_, { media_type => 'scanner' };
     } grep { $_->{raw_type} =~ /Scanner/ } @l;
 
+    get_devfs_devices(@l);
     get_sys_cdrom_info(@l);
     @l;
 }
@@ -228,8 +248,15 @@ sub getIDE() {
 	    if_($info =~ /^$_\b\s*(.*)/, $eide_hds{$_}, $1);
 	} keys %eide_hds;
 
-	push @idi, { media_type => $type, device => basename($d), info => $info, channel => $num/2, id => $num%2, bus => 'ide', Vendor => $vendor, Model => $model };
+	my ($channel, $id) = ($num / 2, $num % 2);
+	my $devfs_prefix = sprintf('ide/host0/bus%d/target%d/lun0', $channel, $id);
+
+	push @idi, { media_type => $type, device => basename($d), 
+		     devfs_prefix => $devfs_prefix,
+		     info => $info, channel => $channel, id => $id, bus => 'ide', 
+		     Vendor => $vendor, Model => $model };
     }
+    get_devfs_devices(@idi);
     get_sys_cdrom_info(@idi);
     @idi;
 }

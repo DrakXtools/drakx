@@ -343,18 +343,23 @@ sub assign_device_numbers {
 		log::l("PPC: found a hole on $hd->{prefix} before $_->{start}, skipping device..."); 
 		$i++;
 	    }
-	    $_->{device} = $hd->{prefix} . $i++;
+	    $_->{device} = $hd->{prefix} . $i;
+	    $_->{devfs_device} = $hd->{devfs_prefix} . '/part' . $i;
 	    $start = $_->{start} + $_->{size};
+	    $i++;
 	}
     } else {
 	foreach (@{$hd->{primary}{raw}}) {
-	    my $dev = $hd->{prefix} . $i++;
-	    $_->{device} = $dev;
+	    $_->{device} = $hd->{prefix} . $i;
+	    $_->{devfs_device} = $hd->{devfs_prefix} . '/part' . $i;
+	    $i++;
 	}
 	foreach (map { $_->{normal} } @{$hd->{extended} || []}) {
-	    my $dev = $hd->{prefix} . $i++;
+	    my $dev = $hd->{prefix} . $i;
 	    push @{$hd->{partitionsRenumbered}}, [ $_->{device}, $dev ] if $_->{device} && $dev ne $_->{device};
 	    $_->{device} = $dev;
+	    $_->{devfs_device} = $hd->{devfs_prefix} . '/part' . $i;
+	    $i++;
 	}
     }
 
