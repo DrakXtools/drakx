@@ -174,11 +174,15 @@ sub inactivate_and_dirty {
     $part->{notFormatted} = 1; $part->{isFormatted} = 0;
 }
 
-sub is_active {
-    my ($dev) = @_;
-    cat_("/proc/mdstat") =~ /^$dev /m;
+sub active_mds {
+    map { if_(/^(md\d+) /, $1) } cat_("/proc/mdstat");
 }
 
-sub inactivate_all() { run_program::run("raidstop", devices::make("md$_")) foreach 0..max_nb() }
+sub is_active {
+    my ($dev) = @_;
+    member($dev, active_mds());
+}
+
+sub inactivate_all() { run_program::run("raidstop", devices::make($_)) foreach active_mds() }
 
 1;
