@@ -345,58 +345,63 @@ sub choosePackagesTree {
 			    },
 			    toggle_nodes => sub {
 				my $set_state = shift @_;
-				my @n = map { pkgs::packageByName($packages, $_) } @_;
-				my %l;
-				my $isSelection = !$n[0]->flag_selected;
-				my $i = 0;
-                                foreach (@n) {
-                                    #pkgs::togglePackageSelection($packages, $_, my $l = {});
-                                    #@l{grep {$l->{$_}} keys %$l} = ();
-				    $i++; log::l("$i:toggle of ".$_->fullname);
-                                    pkgs::togglePackageSelection($packages, $_, \%l);
-                                }
-				if (my @l = map { $packages->{depslist}[$_]->name } keys %l) {
-				    #- check for size before trying to select.
-				    my $size = pkgs::selectedSize($packages);
-				    foreach (@l) {
-					my $p = pkgs::packageByName($packages, $_);
-					$p->flag_selected or $size += $p->size;
-				    }
-				    if (pkgs::correctSize($size / sqr(1024)) > $available / sqr(1024)) {
-					return $o->ask_warn('', N("You can't select this package as there is not enough space left to install it"));
-				    }
+				my $isSelection = 0;
+				my %l = map { my $p = pkgs::packageByName($packages, $_);
+					      $p->flag_selected or ++$isSelection;
+					      $p->id => 1 } @_;
+				my $state = $packages->{state} ||= {};
+				my @l = $isSelection ? $packages->resolve_requested($packages->{rpmdb}, $state, \%l,
+										    callback_choices => \&pkgs::packageCallbackChoices) :
+						       $packages->disable_selected($packages->{rpmdb}, $state,
+										   map { $packages->{depslist}[$_] } keys %l);
+				my $size = pkgs::selectedSize($packages);
+				my $error;
 
-				    @l > @n && $common->{state}{auto_deps} and
-				      $o->ask_okcancel('', [ $isSelection ? 
-							     N("The following packages are going to be installed") :
-							     N("The following packages are going to be removed"),
-							     common::formatList(20, sort @l) ], 1) || return;
-				    if ($isSelection) {
-					pkgs::selectPackage($packages, $_) foreach @n;
-				    } else {
-					pkgs::unselectPackage($packages, $_) foreach @n;
+				if (!@l) {
+				    #- no package can be selected or unselected.
+				    my @ask_unselect = grep { $state->{rejected}{$_}{backtrack} &&
+								exists $l{$packages->search($_, strict_fullname => 1)->id} }
+				      keys %{$state->{rejected} || {}};
+				    #- extend to closure (to given more detailed and not absurd reason).
+				    my %ask_unselect;
+				    while (@ask_unselect > keys %ask_unselect) {
+					@ask_unselect{@ask_unselect} = ();
+					foreach (keys %ask_unselect) {
+					    push @ask_unselect, grep { ! exists $ask_unselect{$_} }
+					                        keys %{$state->{rejected}{$_}{backtrack}{closure} || {}};
+					}
 				    }
+				    $error = [ N("You can't select/unselect this package"),
+					       common::formatList(20, map { my $rb = $state->{rejected}{$_}{backtrack};
+									    my @froms = keys %{$rb->{closure} || {}};
+									    my @unsatisfied = @{$rb->{unsatisfied} || []};
+									    my $s = join ", ", ((map { N("due to missing %s", $_) } @froms),
+												(map { N("due to unsatisfied %s", $_) } @unsatisfied),
+												$rb->{promote} && !$rb->{keep} ? N("trying to promote %s", join(", ", @{$rb->{promote}})) : @{[]},
+												$rb->{keep} ? N("in order to keep %s", join(", ", @{$rb->{keep}})) : @{[]},
+											       );
+									    $_ . ($s ? " ($s)" : '');
+									} sort @ask_unselect) ];
+				} elsif (pkgs::correctSize($size / sqr(1024)) > $available / sqr(1024)) {
+				    $error = N("You can't select this package as there is not enough space left to install it");
+				} elsif (@l > @_ && $common->{state}{auto_deps}) {
+				    $o->ask_okcancel('', [ $isSelection ? 
+							   N("The following packages are going to be installed") :
+							   N("The following packages are going to be removed"),
+							       common::formatList(20, sort @l) ], 1) or $error = ''; #- defined
+				}
+				$error and $o->ask_warn('', $error);
+				if (defined $error) {
+				    #- disable selection (or unselection).
+				    $isSelection ? $packages->disable_selected($packages->{rpmdb}, $state, @l) :
+				                   $packages->resolve_requested($packages->{rpmdb}, $state, \%l,
+										callback_choices => \&pkgs::packageCallbackChoices);
+				} else {
+				    #- keep the changes, update visible state.
 				    foreach (@l) {
 					my $p = pkgs::packageByName($packages, $_);
 					$set_state->($_, $p->flag_selected ? 'selected' : 'unselected');
 				    }
-				} else {
-				    $o->ask_warn('', N("You can't select/unselect this package"));
-				    my @ask_unselect = grep { $packages->{state}{rejected}{$_}{backtrack} }
-				      keys %{$packages->{state}{rejected} || {}};
-				    my @l = map { my $rb = $packages->{state}->{rejected}{$_}{backtrack};
-						  my @froms = keys %{$rb->{closure} || {}};
-						  my @unsatisfied = @{$rb->{unsatisfied} || []};
-						  my $s = join ", ", ((map { sprintf("due to missing %s", $_) } @froms),
-								      (map { sprintf("due to unsatisfied %s", $_) } @unsatisfied),
-								      $rb->{promote} && !$rb->{keep} ? sprintf("trying to promote %s", join(", ", @{$rb->{promote}})) : @{[]},
-								      $rb->{keep} ? sprintf("in order to keep %s", join(", ", @{$rb->{keep}})) : @{[]},
-								     );
-						  $_ . ($s ? " ($s)" : '');
-					      } sort @ask_unselect;
-
-				    @ask_unselect and log::l("package cannot be selected or unselected for the following reason:",
-							     map { "\n    $_" } @l);
 				}
 			    },
 			    grep_allowed_to_toggle => sub {
