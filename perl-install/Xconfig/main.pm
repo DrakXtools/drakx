@@ -98,7 +98,7 @@ sub configure_chooser_raw {
     };
 
     my $ok;
-    $in->ask_from_({ ok => '' }, 
+    $in->ask_from_({ if_($::isStandalone, ok => N("Quit")) }, 
 		   [
 		    { label => N("Graphic Card"), val => \$texts{card}, icon => "eth_card_mini", clicked => sub { 
 			  $may_set->('card', Xconfig::card::configure($in, $raw_X, $do_pkgs, 0, $options));
@@ -120,7 +120,6 @@ sub configure_chooser_raw {
 			  Xconfig::various::various($in, $X->{card}, $options);
 			  $X->{various} = 'done';
 		      } },
-		    { val => $::isInstall ? N("Next ->") : N("Quit"), icon => "exit", clicked_may_quit => sub { 1 } },
 		   ]);
     $ok, $modified;
 }
