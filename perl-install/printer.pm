@@ -496,6 +496,7 @@ sub configure_queue($) {
 				$entry->{cupsPPD} ? ("-m", $entry->{cupsPPD}) : (),
 				$entry->{Info} ? ("-D", $entry->{Info}) : (),
 				$entry->{Location} ? ("-L", $entry->{Location}) : (),
+				if_($entry->{CUPSOPTIONS}, $entry->{CUPSOPTIONS}), #- use it if available, only for auto_install
 			       ) or die "lpadmin failed";
 	    last };
 	/lpr/  && do {
