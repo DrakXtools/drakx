@@ -1257,12 +1257,6 @@ sub install($$$;$$) {
 	my $f = packageFile($p);
 	print LOG "$f $p->[$MEDIUM]{descr}\n";
 	my $fd = install_any::getFile($f, $p->[$MEDIUM]{descr});
-	unless ($fd) {
-	    my ($fp, $rp, $lp) = $f =~ /(.*)(\d+)(mdk\..*)/ or return -1; #- we can't analyse filename correctly.
-	    $rp += 1; #- try with release number increased, hey this is just a try for Cooker.
-	    print LOG "problem to get above file, trying with $fp$rp$lp instead\n";
-	    $fd = install_any::getFile("$fp$rp$lp", $p->[$MEDIUM]{descr});
-	}
 	$fd ? fileno $fd : -1;
     };
     my $callbackClose = sub { packageSetFlagInstalled($packages{$_[0]}, 1) };
