@@ -25,12 +25,16 @@
 #include <string.h>
 #include <sys/mount.h>
 #include <dirent.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include "stage1.h"
 #include "frontend.h"
 #include "modules.h"
 #include "probing.h"
 #include "log.h"
 #include "mount.h"
+#include "lomount.h"
 
 #include "disk.h"
 
@@ -69,13 +73,14 @@ static enum return_type try_with_device(char *dev_name)
 	FILE * f;
 	char * parts[50];
 	char * parts_comments[50];
+	struct stat statbuf;
 	int i = 0;
 	enum return_type results;
 	char * choice;
 
 	if (!(f = fopen("/proc/partitions", "rb")) || !fgets(buf, sizeof(buf), f) || !fgets(buf, sizeof(buf), f)) {
 		log_perror(dev_name);
-		error_message("Could not read partitions information");
+		error_message("Could not read partitions information.");
 		return RETURN_ERROR;
 	}
 
@@ -106,7 +111,7 @@ static enum return_type try_with_device(char *dev_name)
 		return try_with_device(dev_name);
 	}
 
-	if (ask_from_entries("Please enter the directory containing the " DISTRIB_NAME " Distribution.",
+	if (ask_from_entries("Please enter the directory (or ISO image file) containing the " DISTRIB_NAME " Distribution.",
 			     questions_location, &answers_location, 24) != RETURN_OK) {
 		umount(disk_own_mount);
 		return try_with_device(dev_name);
@@ -117,7 +122,7 @@ static enum return_type try_with_device(char *dev_name)
 	strcat(location_full, answers_location[0]);
 
 	if (access(location_full, R_OK)) {
-		error_message("Directory could not be found on partition.\n"
+		error_message("Directory or ISO image file could not be found on partition.\n"
 			      "Here's a short extract of the files in the root of the partition:\n"
 			      "%s", list_directory(disk_own_mount));
 		umount(disk_own_mount);
@@ -125,7 +130,16 @@ static enum return_type try_with_device(char *dev_name)
 	}
 
 	unlink(IMAGE_LOCATION);
-	symlink(location_full, IMAGE_LOCATION);
+
+	if (!stat(location_full, &statbuf) && !S_ISDIR(statbuf.st_mode)) {
+		log_message("%s exists and is not a directory, assuming this is an ISO image", location_full);
+		if (lomount(location_full, IMAGE_LOCATION)) {
+			error_message("Could not mount ISO image.");
+			umount(IMAGE_LOCATION);
+			return try_with_device(dev_name);
+		}
+	} else
+		symlink(location_full, IMAGE_LOCATION);
 
 	if (IS_SPECIAL_STAGE2 || ramdisk_possible()) {
 		/* RAMDISK install */
@@ -139,7 +153,7 @@ static enum return_type try_with_device(char *dev_name)
 			return try_with_device(dev_name);
 		}
 		if (load_ramdisk() != RETURN_OK) {
-			error_message("Could not load program into memory");
+			error_message("Could not load program into memory.");
 			return try_with_device(dev_name);
 		}
 	} else {
