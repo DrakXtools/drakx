@@ -303,8 +303,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-* Thu Apr  3 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.1-30mdk
-- ugtk2.pm: fix slight pb with gtktext_insert (#3633)
+* Fri Apr  4 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-30mdk
+- fix drakfloppy crash on boot floppy creation
+- ugtk2.pm: fix slight pb with gtktext_insert (#3633) (gc)
 
 * Fri Mar 28 2003 Pixel <pixel@mandrakesoft.com> 9.1-29mdk
 - use ServerFlags DontVTSwitch for i845, i865 and i85x
