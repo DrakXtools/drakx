@@ -8,7 +8,7 @@ Gnome Workstation [icon=gnome] [path=Graphical Environment] [descr=A graphical e
 	GNOME
 	X
 
-Other Graphical Desktops [icon=windowmanager] [path=Graphical Environment] [descr=Icewm, Window Maker, Enlightenment, Fvwm, etc]
+Other Graphical Desktops [icon=windowmanager] [path=Graphical Environment] [descr=Icewm, Window Maker]
 	GRAPHICAL_DESKTOP
 	X
 
@@ -48,9 +48,20 @@ DNS/NIS [icon=hardware] [path=Server] [descr=Domain Name and Network Information
 File & Printer Sharing Server [icon=archiving] [path=Server] [descr=NFS server, Samba server] 
 	NETWORKING_FILE_SERVER
 
-Remote Administration [icon=networking] [path=Server] [descr=NFS server, SMB server, Proxy server, ssh server]
-	NETWORKING_REMOTE_ACCESS_SERVER
-
 Database [icon=archiving] [path=Server] [descr=PostgreSQL or MySQL database server]
 	DATABASES
 	DATABASES_SERVER
+
+     # --- Utilities
+
+SSH server [icon=networking] [path=Server] [descr=ssh server]
+	NETWORKING_REMOTE_ACCESS_SERVER
+
+Webmin [icon=archiving] [path=Server] [descr=webmin remote configuration server]
+	WEBMIN
+
+Network Utilities/Monitoring [icon=archiving] [path=Server] [descr=Monitoring tools, processes accounting, tcpdump, nmap, ...]
+	MONITORING	
+
+MandrakeSoft Wizards [icon=archiving] [path=Server] [descr=Wizards to configure servers]
+	WIZARDS
