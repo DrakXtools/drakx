@@ -954,7 +954,7 @@ sub miscellaneous {
 }
 sub miscellaneousAfter {
     my ($o) = @_;
-    add2hash_ $o, { useSupermount => 1 && $o->{security} < 4 && arch() !~ /sparc/ && !$::corporate };
+    add2hash_ $o, { useSupermount => 0 };
 
     $ENV{SECURE_LEVEL} = $o->{security}; #- deprecated with chkconfig 1.3.4-2mdk, uses /etc/sysconfig/msec
 
