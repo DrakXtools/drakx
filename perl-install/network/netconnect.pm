@@ -94,7 +94,6 @@ sub pre_func {
 			1, write_on_pixmap(gtkpng ("draknet_step"),
 					   20,200,
 					   _("We are now going to configure the %s connection.",_($text)),
-					   _("Press next to continue."),
 					  ),
 			0, $W->create_okcancel
 		       )
@@ -382,8 +381,8 @@ PPPProviderPhone=$modem->{phone}
 PPPProviderDomain=$modem->{domain}
 PPPProviderDNS1=$modem->{dns1}
 PPPProviderDNS2=$modem->{dns2}
-PPPLogin=$modem->{connection}
-PPPPassword=$modem->{login}
+PPPLogin=$modem->{login}
+PPPPassword=$modem->{passwd}
 PPPConfirmPassword=$modem->{passwd}
 PPPAuthentication=$modem->{auth}
 PPPSpecialCommand=" . ($netcnx->{type} eq 'isdn_external' ? $netcnx->{isdn_external}{special_command} : '' ) . "
