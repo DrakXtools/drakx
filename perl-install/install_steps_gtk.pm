@@ -116,7 +116,7 @@ sub new($$) {
 		  and goto OK;
 	    } else {
 		$o->{vga16} = 1 if /VGA16/;
-		&$launchX($prog) and goto OK;
+		&$launchX($prog, $Driver) and goto OK;
 	    }
 	}
 	return undef;
