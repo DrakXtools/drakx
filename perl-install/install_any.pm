@@ -516,7 +516,7 @@ sub kdeicons_postinstall {
 	    template2userfile($prefix, "/usr/share/zip.kdelnk.in", "Desktop/zip$2.kdelnk", 0, %toreplace);
 	} elsif (/^\/dev\/(\S+)\s+\/mnt\/DOS_ (\S*)\s+/x) {
 	    my %toreplace = ( device => $1, id => $2 );
-	    template2userfile($prefix, "/usr/share/DOS_.kdelnk.in", "Desktop/DOS_$2.kdelnk", 0, %toreplace);
+	    template2userfile($prefix, "/usr/share/Dos_.kdelnk.in", "Desktop/Dos_$2.kdelnk", 0, %toreplace);
 	}
     }
 }
