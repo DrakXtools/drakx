@@ -707,8 +707,8 @@ sub automatic_xconf {
     
 	require Xconfig::main;
 	require class_discard;
-	Xconfig::main::configure_everything_auto_install($o->{raw_X}, class_discard->new, {},
-                                                         { allowNVIDIA_rpms => sub { [] }, allowATI_rpms => sub { [] }, allowFB => $o->{allowFB} });
+
+	Xconfig::main::configure_everything_auto_install($o->{raw_X}, class_discard->new, {}, install_any::X_options_from_o($o));
     }
 
     modules::load_category('various/agpgart'); 
