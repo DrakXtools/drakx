@@ -63,6 +63,8 @@ sub raids {
     my @parts = fs::get::hds_fstab(@$hds);
 
     my @l = grep { isRawRAID($_) } @parts or return [];
+
+    log::l("looking for raids in " . join(' ', map { $_->{device} } @l));
     
     require raid;
     raid::detect_during_install(@l) if $::isInstall;
@@ -183,8 +185,13 @@ Do you agree to lose all the partitions?
 
 	# checking the magic of the filesystem, don't rely on pt_type
 	foreach (grep { member($_->{fs_type}, 'vfat', 'ntfs', 'ext2') || $_->{pt_type} == 0x100 } @parts) {
-	    if (my $fs_type = fs::type::fs_type_from_magic($_)) {
-		$_->{fs_type} = $fs_type;
+	    if (my $type = fs::type::type_subpart_from_magic($_)) {
+                if ($type->{fs_type}) {
+                    #- keep {pt_type}
+		    $_->{fs_type} = $fs_type;
+                } else {
+                    put_in_hash($_, $type); 
+                }
 	    } else {
 		$_->{bad_fs_type_magic} = 1;
 	    }

@@ -278,7 +278,22 @@ sub fs_type_from_magic {
 sub type_subpart_from_magic { 
     my ($part) = @_;
     my $dev = devices::make($part->{device});
-    my $t = typeFromMagic($dev, @partitions_signatures) or return;
+
+    my $check_md = sub {
+	my ($F) = @_;
+	my $MD_RESERVED_SECTORS = 128;
+	my $sector = round_down($part->{size}, $MD_RESERVED_SECTORS) - $MD_RESERVED_SECTORS; #- MD_NEW_SIZE_SECTORS($part->{size})
+	if (c::lseek_sector(fileno $F, $sector, 0)) {
+	    my $tmp;
+	    my $signature = "\xfc\x4e\x2b\xa9";
+	    sysread($F, $tmp, length $signature);
+	    $tmp eq $signature and return "Linux RAID";
+	}
+	'';
+    };
+    my $t = typeFromMagic($dev, 
+			  $check_md,
+			  @partitions_signatures) or return;
 
     my $p = type_name2subpart($t) || fs_type2subpart($t) || internal_error("unknown name/fs $t");
     if ($p->{fs_type} eq 'ext2') {
