@@ -132,7 +132,7 @@ drakx_stuff:
     $o->{steps}{startMove} = { reachable => 1, text => "Start Move" };
     $o->{orderedSteps_orig} = $o->{orderedSteps};
     $o->{orderedSteps} = [ $using_existing_host_config ?
-                           qw(handleI18NClp startMove)
+                           qw(handleI18NClp verifyKey startMove)
                          : $using_existing_user_config ?
                            qw(autoSelectLanguage handleI18NClp verifyKey selectMouse selectKeyboard configMove startMove)
                          : qw(selectLanguage handleI18NClp acceptLicense verifyKey selectMouse selectKeyboard configMove startMove) ];
@@ -199,6 +199,12 @@ sub key_mount {
     fs::mount_part($_) foreach key_parts($o);
 }
 
+sub key_umount {
+    my ($o) = @_;
+    eval { fs::umount_part($_) foreach key_parts($o) };
+    !$@;
+}
+
 sub machine_ident {
     #- , c::get_hw_address('eth0');       before detect of network :(
     md5_hex(join '', (map { (split)[1] } cat_('/proc/bus/pci/devices')));
@@ -207,11 +213,15 @@ sub machine_ident {
 sub key_installfiles {
     my ($mode) = @_;
 
+    my $done if 0;
+    $done and return;
+
     mkdir $key_sysconf;
     my $sysconf = "$key_sysconf/" . machine_ident();
 
     if (!-d $sysconf) {
         if ($mode eq 'full') {
+            log::l("key_installfiles: installing config files in $sysconf");
             mkdir $sysconf;
             foreach (chomp_(cat_('/image/move/keyfiles'))) {
                 my $target_dir = "$sysconf/" . dirname($_);
@@ -225,19 +235,23 @@ sub key_installfiles {
                 }
             }
             system("cp /image/move/README.adding.more.files $key_sysconf");
+            $done = 1;
         } else {
             #- not in full mode and no host directory, grab user config from first existing host directory if possible
+            log::l("key_installfiles: only looking for user config files");
             foreach (qw(/etc/passwd /etc/group /etc/sysconfig/i18n)) {
                 my $first_available = first(glob("$key_sysconf/*$_")) or next;
                 system("cp $first_available $_");
             }
         }
     } else {
+        log::l("key_installfiles: installing symlinks to key");
         foreach (chomp_(`find $sysconf -type f`)) {
             my ($path) = /^\Q$sysconf\E(.*)/;
             mkdir_p(dirname($path));
             symlinkf($_, $path);
         }
+        $done = 1;
     }
 
     #- /etc/sudoers can't be a link
@@ -272,7 +286,21 @@ Operating System.")),
     local *F;
     while (!open F, '>/home/.touched') {
 
-        fs::umount_part($_) foreach key_parts($o);
+        if (!key_umount($o)) {
+            #- this case happens when the user boots with a write-protected key containing
+            #- all user and host data, /etc/X11/X which is on key busyfies it
+            $o->ask_okcancel_({ title => N("Key isn't writable"), 
+                                messages => formatAlaTeX(
+N("The USB key seems to have write protection enabled, but we can't safely
+unplug it now.
+
+
+Click the button to reboot the machine, unplug it, remove write protection,
+plug the key again, and launch Mandrake Move again.")),
+                            ok => N("Reboot") });
+            exit(0);
+        }
+
         modules::unload('usb-storage');  #- it won't notice change on write protection otherwise :/
 
         $o->ask_okcancel_({ title => N("Key isn't writable"), 
@@ -289,9 +317,9 @@ unplug it, remove write protection, and then plug it again.")),
     close F;
     unlink '/home/.touched';
 
-    my $wait = $o->wait_message(N("Setting up USB key"), N("Please wait, setting up system configuration files on USB key..."));
+    my $wait = $using_existing_host_config
+               || $o->wait_message(N("Setting up USB key"), N("Please wait, setting up system configuration files on USB key..."));
     key_installfiles('full');
-    $wait = undef;
 }
 
 sub install2::configMove {
