@@ -72,7 +72,7 @@ our @tree =
      [ "JOYSTICK", , N("Joystick"), "joystick.png", "", sub {}, 0 ],
 
      [ "ATA_STORAGE", , N("(E)IDE/ATA controllers"), "ide_hd.png", "", sub { grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices }, 0 ],
-     [ "FIREWIRE_CONTROLLER", , N("Firewire controllers"), "usb.png", "", sub { grep { $_->{driver} =~ /ohci1394/ } @devices }, 0 ],
+     [ "FIREWIRE_CONTROLLER", , N("Firewire controllers"), "usb.png", "", sub { grep { $_->{driver} =~ /ohci1394/ } @devices }, 1 ],
      [ "SCSI_CONTROLLER", , N("SCSI controllers"), "scsi.png", "", sub { grep { $_->{media_type} =~ /STORAGE_SCSI/ } @devices }, 0 ],
      [ "USB_CONTROLLER", , N("USB controllers"), "usb.png", "", sub { grep { $_->{media_type} =~ /SERIAL_USB|Hub/ } @devices }, 0 ],
      [ "SMB_CONTROLLER", , N("SMBus controllers"), "usb.png", "", sub { grep { $_->{media_type} =~ /SERIAL_SMBUS/ } @devices }, 0 ],
