@@ -12,9 +12,9 @@ use devices;
 #-INTERN CONSTANT
 #-#####################################################################################
 my @themes_vga16 = qw(blue blackwhite savane);
-my @themes_desktop = qw(mdk-Desktop DarkMarble marble3d blueHeart);
+my @themes_desktop = qw(mdk-Desktop marble3d);
 my @themes_firewall = qw(mdk-Firewall);
-my @themes = qw(mdk DarkMarble marble3d blueHeart);
+my @themes = qw(mdk marble3d);
 
 my (@background1, @background2);
 
