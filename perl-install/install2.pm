@@ -585,14 +585,16 @@ sub main {
 
     if (!$::move && !$::testing && !$o->{meta_class}) {
 	my $VERSION = cat__(install_any::getFile("VERSION")) or do { print "VERSION file missing\n"; sleep 5 };
-	$o->{meta_class} = 'desktop' if $VERSION =~ /desktop|discovery/i;
-	$o->{meta_class} = 'download' if $VERSION =~ /download/i;
-	$o->{meta_class} = 'firewall' if $VERSION =~ /firewall/i;
-	$o->{meta_class} = 'server' if $VERSION =~ /server|prosuite/i;
+	my @classes = qw(powerpackplus powerpack desktop download server firewall);
+	if (my $meta_class = find { $VERSION =~ /$_/i } @classes) {
+	    $o->{meta_class} = $meta_class;
+	}
 	$o->{distro_type} = 'community' if $VERSION =~ /community/i;
 	$o->{distro_type} = 'cooker' if $VERSION =~ /cooker/i;
     }
     $o->{meta_class} eq 'discovery' and $o->{meta_class} = 'desktop';
+    $o->{meta_class} eq 'powerpackplus' and $o->{meta_class} = 'server';
+
     log::l("meta_class $o->{meta_class}");
     if ($::oem) {
 	$o->{partitioning}{use_existing_root} = 1;
