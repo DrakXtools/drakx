@@ -447,6 +447,13 @@ sub xmodmap_file {
     -e $f && $f;
 }
 
+sub setxkbmap {
+    my ($keyboard) = @_;
+    my $xkb = keyboard::keyboard2full_xkb($keyboard) or return;
+    run_program::rooted($::prefix, 'setxkbmap', '-option', '') if $xkb->{XkbOptions}; #- need re-initialised other toggles are cumulated
+    run_program::rooted($::prefix, 'setxkbmap', $xkb->{XkbLayout}, '-model' => $xkb->{XkbModel}, '-option' => $xkb->{XkbOptions} || '', '-compat' => $xkb->{XkbCompat} || '');
+}
+
 sub setup {
     my ($keyboard) = @_;
 
