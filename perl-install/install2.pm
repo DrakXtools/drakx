@@ -433,11 +433,9 @@ sub main {
     log::openLog(($::testing || $o->{localInstall}) && 'debug.log');
     log::l("second stage install running (", any::drakx_version(), ")");
 
-    $o->{prefix} = $::testing ? "/tmp/test-perl-install" : $::live ? "" : "/mnt";
-    $o->{root}   = $::testing ? "/tmp/root-perl-install" : "/";
+    $o->{prefix} = $::prefix = $::testing ? "/tmp/test-perl-install" : $::live ? "" : "/mnt";
     $o->{isUpgrade} = 1 if $::live;
     mkdir $o->{prefix}, 0755;
-    mkdir $o->{root}, 0755;
     devices::make("/dev/zero"); #- needed by ddcxinfos
 
     #-  make sure we don't pick up any gunk from the outside world
