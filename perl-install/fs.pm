@@ -240,7 +240,7 @@ sub prepare_write_fstab {
 		}
 	    }
 
-	    my $type = type2fs($_);
+	    my $type = type2fs($_, 'auto');
 
 	    my $dev = 
 	      $_->{device_LABEL} ? $_->{device_LABEL} :

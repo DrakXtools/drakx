@@ -226,7 +226,11 @@ sub important_types() {
     difference2(\@l, \@bad_types);
 }
 
-sub type2fs { $type2fs{$_[0]{type}} || $_[0]{type} }
+sub type2fs {
+    my ($part, $o_default) = @_;
+    my $type = $part->{type};
+    $type2fs{$type} || $type =~ /^(\d+)$/ && $o_default || $type;
+}
 sub fs2type { $fs2type{$_[0]} || $_[0] }
 sub type2name { $types{$_[0]} || $_[0] }
 sub name2type { 
