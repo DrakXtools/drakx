@@ -725,16 +725,10 @@ sub openInstallLog {
     my ($prefix) = @_;
 
     my $f = "$prefix/root/drakx/install.log";
-    open(LOG, ">> $f") ? log::l("opened $f") : log::l("Failed to open $f. No install log will be kept."); #-#
-    *LOG or *LOG = log::F() or *LOG = *STDERR;
-    CORE::select((CORE::select(LOG), $| = 1)[0]);
-    c::rpmErrorSetCallback(fileno LOG);
+    open(my $LOG, ">> $f") ? log::l("opened $f") : log::l("Failed to open $f. No install log will be kept."); #-#
+    CORE::select((CORE::select($LOG), $| = 1)[0]);
+    c::rpmErrorSetCallback(fileno $LOG);
 #-    c::rpmSetVeryVerbose();
-}
-
-sub closeInstallLog {
-    log::l("closing install.log file");
-    close LOG;
 }
 
 sub rpmDbOpen {
@@ -917,7 +911,7 @@ sub install($$$;$$) {
     eval { fs::mount("/proc", "$prefix/proc", "proc", 0) } unless -e "$prefix/proc/cpuinfo";
 
     URPM::read_config_files();
-    openInstallLog($prefix);
+    my $LOG = openInstallLog($prefix);
 
     #- do not modify/translate the message used with installCallback since
     #- these are keys during progressing installation, or change in other
@@ -995,7 +989,7 @@ sub install($$$;$$) {
 		    }
 
 		    $trans->order or die "error ordering package list: " . c::rpmErrorString();
-		    $trans->set_script_fd(fileno LOG);
+		    $trans->set_script_fd(fileno $LOG);
 
 		    log::l("rpm transactions start");
 		    my $fd; #- since we return the "fileno", perl doesn't know we're still using it, and so closes it, and :-(
@@ -1004,7 +998,7 @@ sub install($$$;$$) {
 						my $pkg = defined $id && $data->{depslist}[$id];
 						my $medium = packageMedium($packages, $pkg);
 						my $f = $pkg && $pkg->filename;
-						print LOG "$f\n";
+						print $LOG "$f\n";
 						$fd = install_any::getFile($f, $medium->{descr});
 						$fd ? fileno $fd : -1;
 					    }, callback_close => sub {
@@ -1035,7 +1029,7 @@ sub install($$$;$$) {
 		    push @{$ppids{$1 || 1}}, $_;
 		}
 		my @killpid = difference2(\@allpids, [ @prev_pids, 
-						       difference2([ $$, hashtree2list(getppid, \%ppids) ],
+						       difference2([ $$, hashtree2list(getppid(), \%ppids) ],
 								   [ hashtree2list($$, \%ppids) ]) ]);
 	
 		if (@killpid) {
@@ -1097,7 +1091,8 @@ sub install($$$;$$) {
 	cleanHeaders($prefix);
     } while $nb > 0 && !$pkgs::cancel_install;
 
-    closeInstallLog();
+    log::l("closing install.log file");
+    close $LOG;
 
     cleanHeaders($prefix);
 
