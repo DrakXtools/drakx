@@ -718,7 +718,7 @@ sub new {
     }
     push @interactive::objects, $o if !$opts{no_interactive_objects};
     $o->{rwindow}->set_position('center-always') if $::isStandalone;
-    $o->{rwindow}->set_modal(1) if $grab || $o->{grab} || $o->{modal};
+    $o->{rwindow}->set_modal(1) if ($grab || $o->{grab} || $o->{modal}) && !$::isInstall;
     $o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient};
     
 
