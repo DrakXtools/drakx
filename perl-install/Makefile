@@ -5,8 +5,12 @@ TAG := $(shell echo "V$(PKGVERSION)_$(RELEASE)" | tr -- '-.' '__')
 
 include Makefile.config
 
-POFILES = $(shell ls share/po/*.po)
-MOFILES = $(POFILES:%.po=%.mo)
+POFILES   = $(shell ls share/po/*.po)
+MOFILES   = $(POFILES:%.po=%.mo)
+DISTFILES = Makefile Makefile.config Newt apps.net_monitor diskdrake c ddcprobe drakxtools.spec pam.net_monitor serial_probe share/po sbus_probing resize_fat share/diskdrake.rc share/wizard.rc $(STANDALONEPMS) standalone/icons pixmaps network standalone/interactive_http rpcinfo-flushed.c *.pm security
+OTHERS     = $(OTHERDIRS) $(OTHERFILES)
+OTHERDIRS  = tools/ddcprobe tools/serial_probe
+OTHERFILES = tools/rpcinfo-flushed.c
 
 .PHONY: all $(DIRS) install clean stage2 full_stage2 verify_c 
 
@@ -28,12 +32,7 @@ check:
 localcopy: clean
 	rm -rf standalone/pixmaps
 	$(MAKE) -C ../tools clean
-	cd .. ; rm -rf $(PACKAGE)-$(PKGVERSION) ; cp -af perl-install $(PACKAGE)-$(PKGVERSION) ; cp -af tools/rpcinfo-flushed.c tools/ddcprobe tools/serial_probe $(PACKAGE)-$(PKGVERSION)
-	cd ../$(PACKAGE)-$(PKGVERSION) ; perl -pi -e 's/^C_RPM.*/C_RPM=0/; s/^C_DRAKX.*/C_DRAKX=0/' c/Makefile
-	cd ../$(PACKAGE)-$(PKGVERSION) ; perl -pi -e 's/^all: help/all:/' share/po/Makefile
-	cd ../$(PACKAGE)-$(PKGVERSION) ; rm -rf install* pkgs.pm help.pm ftp.pm http.pm crypto.pm t.pm */CVS ; mv Makefile.drakxtools Makefile
-	cd .. ; tar cfj $(PACKAGE)-$(PKGVERSION).tar.bz2 --exclude CVS $(patsubst %,$(PACKAGE)-$(PKGVERSION)/%,Makefile Makefile.config Newt apps.net_monitor diskdrake c ddcprobe drakxtools.spec pam.net_monitor serial_probe share/po sbus_probing resize_fat share/diskdrake.rc share/wizard.rc $(STANDALONEPMS) standalone/icons pixmaps network standalone/interactive_http rpcinfo-flushed.c *.pm security)
-	cd .. ; rm -rf $(PACKAGE)-$(PKGVERSION)
+	cd .. ; rm -rf $(PACKAGE)-$(PKGVERSION) ; cp -af perl-install $(PACKAGE)-$(PKGVERSION) ; cp -af $(OTHERS) $(PACKAGE)-$(PKGVERSION)
 
 $(DIRS):
 	install -d auto
@@ -193,15 +192,17 @@ localrpm: localdist buildrpm
 
 localsrpm: localdist buildsrpm
 
-localdist: cleandist localcopy
+localdist: cleandist localcopy tar
 
 cleandist:
 	rm -rf ../$(PACKAGE)-$(PKGVERSION) ../$(PACKAGE)-$(PKGVERSION).tar.bz2
 
 tar:
-	tar cvf ../$(PACKAGE)-$(PKGVERSION).tar ../$(PACKAGE)-$(PKGVERSION)
-	bzip2 -9vf ../$(PACKAGE)-$(PKGVERSION).tar
-	rm -rf ../$(PACKAGE)-$(PKGVERSION)
+	cd ../$(PACKAGE)-$(PKGVERSION) && perl -pi -e 's/^C_RPM.*/C_RPM=0/; s/^C_DRAKX.*/C_DRAKX=0/' c/Makefile
+	cd ../$(PACKAGE)-$(PKGVERSION) && perl -pi -e 's/^all: help/all:/' share/po/Makefile
+	cd ../$(PACKAGE)-$(PKGVERSION) && rm -rf install* pkgs.pm help.pm ftp.pm http.pm crypto.pm t.pm */CVS && mv Makefile.drakxtools Makefile
+	cd ..; tar cfj $(PACKAGE)-$(PKGVERSION).tar.bz2 --exclude CVS $(patsubst %,$(PACKAGE)-$(PKGVERSION)/%,$(DISTFILES))
+	cd ..; rm -rf $(PACKAGE)-$(PKGVERSION)
 
 buildrpm:
 	rpm -ta ../$(PACKAGE)-$(PKGVERSION).tar.bz2
@@ -219,7 +220,9 @@ dist: cleandist export tar
 
 export:
 	cd ..; cvs export -d $(PACKAGE)-$(PKGVERSION) -r $(TAG) $(PACKAGE)
+	cd ../$(PACKAGE)-$(PKGVERSION) && rm -rf $(OTHERDIRS) && set -x && for f in $(OTHERDIRS); do cvs -d `cat ../CVS/Root` export -r $(TAG) -d `basename $$f` gi/$$f; done
+	cd ..; set -x && for f in $(OTHERFILES); do cvs -d `cat ../CVS/Root` export -r $(TAG) -d $(PACKAGE)-$(PKGVERSION) gi/$$f; done
 
 cvstag:
 	cvs tag $(CVSTAGOPT) $(TAG)
-
+	cd ..; cvs tag $(CVSTAGOPT) $(TAG) $(OTHERS)
