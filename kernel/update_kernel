@@ -44,7 +44,7 @@ function create_modules() {
             | perl -ne 's/\.o//g; s/[ \t]+/ /g; print if /: /' > modules.dep
     else
         cp $kernel_path/lib/modules/*/modules.dep .
-        perl -ni -e 's|/\S+/([^/]+)\.k?o|$1|g; print if /: /' modules.dep
+        perl -ni -e 's|/\S+/([^/]+)\.k?o(\.gz)|$1|g; print if /: /' modules.dep
     fi
     perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
 
@@ -126,7 +126,8 @@ fi
 
 [ -n "$main" -a -e $ALL_KERNELS/$main ] || {
     cd $ALL_KERNELS
-    main=$(echo 2.* | sed 's/.* //')
+    main=$(echo 2.6* | sed 's/.* //')
+    [ -n "$main" ] || main=$(echo 2.4* | sed 's/.* //')
     echo "Choosing $main"
     echo $main > .main
     cd ..
