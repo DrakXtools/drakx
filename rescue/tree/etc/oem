@@ -8,11 +8,11 @@ where [options] are:
     server                          : allow server installalation
     boot_entries=entry1,...,entryN  : set boot entries to use,
                                       the first one is the default one
+    no<option>                      : disable options <option>
 ";
     exit 1;
 }
 my (%options, $yes, $hd, $cd);
-foreach (@ARGV) { /([^=:]*)[=:]?(.*)/ and $options{$1} = $2 }
 
 #- avoid globing as it is not available in rescue ramdisk.
 foreach my $device (split ' ', `/bin/ls -d /proc/ide/hd*`) {
@@ -57,16 +57,23 @@ unless (-e "/cdrom/VERSION") {
     system "mount", "-r", "-t", "iso9660", "/dev/$cd", "/cdrom";
 }
 
-#- detect language used.
+#- detect language used and default options.
 my ($lang, $flang);
 open F, "/cdrom/VERSION" or die "no installation cdrom found on $cd";
 while (<F>) {
     /[\s-]fr/ and ($lang, $flang) = ("fr", "fr_FR");
+    /\[server\]/ and $options{server} = '';
+    /\[boot_entries[=:]([^]]*)\]/ and $options{boot_entries} = $1;
 }
 close F;
+foreach (@ARGV) { /^([^=:]*)[=:]?(.*)/ and $options{$1} = $2; /^no([^=:]*)/ and delete $options{$1} }
+
 #- default language fall to english ?
 $lang or ($lang, $flang) = ("en", "en_US");
 print "Found lang $lang\n";
+foreach (keys %options) {
+    print "Using option [$_" . ($options{$_} && "=$options{$_}") . "]\n";
+}
 
 #- check for already existing partition table, if none are found
 #- create 3 partitions (one for install, one for swap and one for root).
@@ -167,6 +174,10 @@ Type \`\`yes'' and [enter] to go on\n"
     open F, "| parted -s /dev/$hd";
     print F "mklabel msdos\n";
 }
+
+#- at this point, the partition are created.
+my ($instz, $inst, $swap, $root, $var) = ($minor-1, $minor, $minor+1, $minor+2, undef);
+
 #- all linux partition are stored inside an extended partition, this is easier to manipulate after.
 if ($minor == 5) {
     print F "mkpart extended $point $hd_size\n";
@@ -177,12 +188,16 @@ if ($minor == 5) {
 }
 printf F "mkpart logical ext2 %s %s\n", $point, $point+$inst_size; $point+=$inst_size+5;
 printf F "mkpart logical linux-swap %s %s\n", $point, $point+$swap_size; $point+=$swap_size+5;
-printf F "mkpart logical ext2 %s %s\n", $point, $point+$root_size < $hd_size ? $point+$root_size : $hd_size;
+printf F "mkpart logical ext2 %s %s\n", $point, $point+$root_size < $hd_size ? $point+$root_size : $hd_size; $point+=$root_size+5;
+if (exists $options{server}) {
+    my $var_size = ($hd_size - $point) / 2;
+    if ($var_size > 1500) {
+	$var = $minor+3;
+	printf F "mkpart logical ext2 %s %s\n", $point, $point+$var_size < $hd_size ? $point+$var_size : $hd_size;
+    }
+}
 print F "quit\n";
 close F or die "unable to partition the disk $hd";
-
-#- at this point, the partition are created.
-my ($instz, $inst, $swap, $root) = ($minor-1, $minor, $minor+1, $minor+2);
 
 #- we have to build swap and mount it.
 print "Setting swap\n";
@@ -194,12 +209,20 @@ print "Formatting /dev/$hd$inst partition\n";
 system "mkfs.ext2", "/dev/$hd$inst";
 print "Formatting /dev/$hd$root partition\n";
 system "mkfs.ext2", "/dev/$hd$root";
+if ($var) {
+    print "Formatting /dev/$hd$var partition\n";
+    system "mkfs.ext2", "/dev/$hd$var";
+}
 
 print "Mounting partitions\n";
 mkdir "/hd";
 system "mount", "-t", "ext2", "/dev/$hd$inst", "/hd";
 mkdir "/mnt";
 system "mount", "-t", "ext2", "/dev/$hd$root", "/mnt";
+if ($var) {
+    mkdir "/mnt/var";
+    system "mount", "-t", "ext2", "/dev/$hd$var", "/mnt/var";
+}
 
 print "Copying installation on hard drive\n";
 if (-e "/boot/vmlinuz" && -e "/boot/hd.rdz" || -e "/cdrom/boot/vmlinuz" && -e "/cdrom/boot/hd.rdz") {
@@ -222,32 +245,63 @@ system "cp", "-a", "/cdrom/Mandrake/base", "/cdrom/Mandrake/mdkinst", "/hd/Mandr
 
 if (open F, ">/hd/Mandrake/oem_patch.pl") {
     print "Setting OEM specific extension to DrakX\n";
-    print F q{
-	use install_steps;
-	package install_steps;
-	undef *choosePackages;
-	*choosePackages = sub {
-	    my ($o, $packages, $compssUsers, $first_time) = @_;
+    if (exists $options{server}) {
+	print F q{
+	    use install_steps;
+	    package install_steps;
+	    undef *choosePackages;
+	    *choosePackages = sub {
+		my ($o, $packages, $compssUsers, $first_time) = @_;
 
-	    #- make sure we kept some space left for available else the system may
-	    #- not be able to start (xfs at least).
-	    my $available = install_any::getAvailableSpace($o);
-	    my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
+		#- make sure we kept some space left for available else the system may
+		#- not be able to start (xfs at least).
+		my $available = install_any::getAvailableSpace($o);
+		my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
 
-	    #- avoid destroying user selection of packages but only
-	    #- for expert, as they may have done individual selection before.
-	    install_any::unselectMostPackages($o);
+		#- avoid destroying user selection of packages but only
+		#- for expert, as they may have done individual selection before.
+	        install_any::unselectMostPackages($o);
 
-	    #- use specific OEM packages selection, go to level 4.
-	    #- and select at least GAMES group, everything else has
-	    #- already be selected during master preparation.
-	    $o->{compssListLevel} = 4;
-	    $o->{compssUsersChoice}{GAMES} = 1;
-	    pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $o->{compssListLevel}, $availableCorrected);
+		#- use specific OEM packages selection, go to level 4.
+		#- and select at least GAMES group, everything else has
+		#- already be selected during master preparation.
+		$o->{compssUsersChoice}{$_} = 0 foreach 'GNOME';
+		$o->{compssUsersChoice}{$_} = 0 
+		    foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
+		$o->{compssListLevel} = 5;
+	        pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $o->{compssListLevel}, $availableCorrected);
 
-	    $availableCorrected;
+		$availableCorrected;
+	    };
 	};
-    };
+    } else {
+	print F q{
+	    use install_steps;
+	    package install_steps;
+	    undef *choosePackages;
+	    *choosePackages = sub {
+		my ($o, $packages, $compssUsers, $first_time) = @_;
+
+		#- make sure we kept some space left for available else the system may
+		#- not be able to start (xfs at least).
+		my $available = install_any::getAvailableSpace($o);
+		my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
+
+		#- avoid destroying user selection of packages but only
+		#- for expert, as they may have done individual selection before.
+	        install_any::unselectMostPackages($o);
+
+		#- use specific OEM packages selection, go to level 4.
+		#- and select at least GAMES group, everything else has
+		#- already be selected during master preparation.
+		$o->{compssListLevel} = 4;
+		$o->{compssUsersChoice}{GAMES} = 1;
+	        pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $o->{compssListLevel}, $availableCorrected);
+
+		$availableCorrected;
+	    };
+	};
+    }
     if ($options{boot_entries}) {
 	print "Setting OEM specific extension for boot entries\n";
 	print F q{
@@ -327,6 +381,9 @@ foreach (qw(/etc /etc/sysconfig /etc/rpm /var /var/lib /var/lib/rpm /proc)) {
 system "mount", "-t", "proc", "proc", "/mnt/proc";
 open F, ">/mnt/etc/fstab";
 print F "/dev/$hd$root / ext2 defaults 1 1\n";
+if ($var) {
+    print F "/dev/$hd$var /var ext2 defaults 1 2\n";
+}
 close F;
 open F, ">/mnt/etc/sysconfig/i18n";
 print F "LANG=$lang\n";
@@ -450,9 +507,26 @@ sub select_packages {
       pkgs::readCompssUsers($o->{packages}, $o->{meta_class});
     eval { install_any::getFile("XXX") }; #- close out any still opened filehandle..
 
-    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
-    $o->{compssUsersChoice}{SYSTEM} = 1;
-    exists $options{server} or @{$o->{compssUsersChoice}}{grep { /SERVER/ } keys %{$o->{compssUsersChoice}}} = ();
+    if (exists $options{server}) {
+	foreach (qw(KDE ACCESSIBILITY PUBLISHING CUPS EDITORS TEXT_TOOLS COMMUNICATIONS TERMINALS
+		    NETWORKING_FILE_TRANSFER NETWORKING_OTHER
+		    NETWORKING_FILE_TRANSFER_SERVER NETWORKING_FIREWALLING_SERVER
+		    NETWORKING_MAIL_SERVER NETWORKING_OTHER_SERVER
+		    NETWORKING_REMOTE_ACCESS NETWORKING_REMOTE_ACCESS_SERVER NETWORKING_DNS
+		    NETWORKING_FILE NETWORKING_FILE_SERVER NETWORKING_WWW NETWORKING_WWW_SERVER
+		    ARCHIVING DEVELOPMENT MONITORING FILE_TOOLS CONFIG BOOKS SYSTEM)) {
+	    $o->{compssUsersChoice}{$_} = 1;
+	}
+	#- additional packages to be selected for server, databases with MySQL (avoid rpmsrate modifications).
+	foreach (qw(MySQL-client MySQL-shared MySQL perl-Mysql)) {
+	    my $pkg = pkgs::packageByName($o->{packages}, $_);
+	    $pkg and pkgs::selectPackage($o->{packages}, $pkg);
+	}
+    } else {
+	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
+	$o->{compssUsersChoice}{SYSTEM} = 1;
+	@{$o->{compssUsersChoice}}{grep { /SERVER|DATABASES/ } keys %{$o->{compssUsersChoice}}} = ();
+    }
 
     my $lang_pkg = $lang && pkgs::packageByName($o->{packages}, "locales-$lang");
     if ($lang_pkg) {
@@ -464,7 +538,7 @@ sub select_packages {
     pkgs::setSelectedFromCompssList($o->{packages}, $o->{compssUsersChoice}, 4, 0);
 
     #- package that have to selected here as a bonus for oem install.
-    foreach (qw(cups cups-drivers drakprofile draksync irda-utils numlock raidtools reiserfs-utils icewm-light
+    foreach (qw(cups cups-drivers drakprofile draksync numlock raidtools reiserfs-utils icewm-light
 		Mesa Mesa-demos alsa alsa-utils
 		xawtv kwintv xscreensaver-gl Mesa-demos xmms-mesa bzflag csmash gltron spacecup chromium tuxracer
                 glibc vim-minimal kernel kernel22
@@ -479,7 +553,7 @@ sub select_packages {
 		xawtv kwintv xscreensaver-gl xmms-mesa bzflag csmash gltron spacecup chromium tuxracer
 		kernel22-smp kernel22-secure alsa imwheel nfs-utils-clients lvm usbd reiserfsprogs
 		sox aumix xawtv gatos kwintv sane-frontends gphoto gnome-toaster gcombust xcdroast apmd cdlabelgen
-		)) {
+		), exists $options{server} ? qw(Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib) : ()) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	$pkg and $pkg->{closure} = 1, delete $pkg->{selected};
     }
