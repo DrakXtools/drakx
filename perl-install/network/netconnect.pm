@@ -768,7 +768,7 @@ and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.n
                         # preselect right protocol for ethernet though connections:
                         if (!exists $adsl_devices{$ntf_name}) {
                             $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
-                            $adsl_type = $ethntf->{BOOTPROTO} || "dhcp";
+                            $adsl_type ||= $ethntf->{BOOTPROTO} || "dhcp";
                             #- pppoa shouldn't be selected by default for ethernet devices, fallback on pppoe
                             $adsl_type = "pppoe" if $adsl_type eq "pppoa";
                         }
