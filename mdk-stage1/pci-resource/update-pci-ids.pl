@@ -20,7 +20,7 @@ struct pci_module_map {
 ';
 
 my %t = ( network => [ 'network' ],
-	  medias => [ 'hd', 'cdrom' ]
+	  medias => [ 'hd', 'cdrom', 'other' ]
 	);
 my %sanity_check = 
   arch() =~ /ia64/ ?
@@ -38,7 +38,7 @@ foreach $type (keys %t) {
 	foreach $marfile (glob("../../all.modules/*/${floppy}_modules.mar")) {
 	    -f $marfile or die "\t*FAILED* Sorry, need $marfile mar file\n";
 	    my @modz = `../mar/mar -l $marfile`;
-	    if ($marfile !~ /2\.2\.14/) {
+	    if ($marfile !~ /(2\.2\.14)|(other)/) {
 		foreach $mandatory (@{$sanity_check{$type}}) {
 		    grep(/\t$mandatory\.o/, @modz) or die "\t*FAILED* Sanity check should prove that $mandatory.o be part of $marfile\n"
 		}
