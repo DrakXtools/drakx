@@ -3,6 +3,7 @@ package printer::detect;
 use strict;
 use common;
 use modules;
+use detect_devices;
 
 sub local_detect {
     modules::get_probeall("usb-interface") and eval { modules::load("printer") };
@@ -53,7 +54,7 @@ sub whatParport() {
 }
 
 sub whatPrinterPort() {
-    grep { tryWrite($_) } qw(/dev/lp0 /dev/lp1 /dev/lp2 /dev/usb/lp0 /dev/usb/lp1 /dev/usb/lp2 /dev/usb/lp3 /dev/usb/lp4 /dev/usb/lp5 /dev/usb/lp6 /dev/usb/lp7 /dev/usb/lp8 /dev/usb/lp9);
+    grep { detect_devices::tryWrite($_) } qw(/dev/lp0 /dev/lp1 /dev/lp2 /dev/usb/lp0 /dev/usb/lp1 /dev/usb/lp2 /dev/usb/lp3 /dev/usb/lp4 /dev/usb/lp5 /dev/usb/lp6 /dev/usb/lp7 /dev/usb/lp8 /dev/usb/lp9);
 }
 
 sub whatUsbport() {
