@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 32mdk
+Release: 33mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -19,8 +19,8 @@ Obsoletes: draksec
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
 Requires: perl-base >= 1:5.8.0-10mdk, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.7-3mdk, usermode-consoleonly >= 1.44-4mdk, msec >= 0.38
-Obsoletes: diskdrake drakfloppy kbdconfig mouseconfig printtool setuptool
-Provides: diskdrake drakfloppy kbdconfig mouseconfig printtool setuptool
+Obsoletes: diskdrake kbdconfig mouseconfig printtool setuptool drakfloppy
+Provides: diskdrake, kbdconfig mouseconfig printtool setuptool, drakfloppy = %version-%release
 
 %package http
 Summary: The drakxtools via http
@@ -308,6 +308,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Apr 24 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-33mdk
+- fix provides
+
 * Wed Apr 23 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-32mdk
 - translation snapshot
 
