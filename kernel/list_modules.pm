@@ -115,7 +115,7 @@ our %l = (
       if_(arch() =~ /ppc/, qw(dmasound_awacs)),
       if_(arch() !~ /^sparc/,
         qw(ad1816 ad1848 awe_wave audigy cmpci cs46xx cs4232 cs4281 emu10k1 es1370 es1371 esssolo1),
-	   qw(gus i810_audio mad16 maestro maestro3 mpu401 msnd_pinnacle opl3 opl3sa opl3sa2 nm256_audio),
+	   qw(gus i810_audio mad16 maestro maestro3 mpu401 msnd_pinnacle nvaudio opl3 opl3sa opl3sa2 nm256_audio),
         qw(pas2 rme96xx sb sgalaxy sam9407 sonicvibes sscape trident via82cxxx_audio wavefront ymfpci),
         qw(snd-ali5451 snd-als100 snd-als4000 snd-azt2320 snd-cmi8330 snd-cmipci snd-cs46xx snd-dt0197h),
 	   qw(snd-cs4281 snd-emu10k1),
