@@ -748,28 +748,6 @@ You may also enter the IP address of the gateway if you have one."),
                     post => sub { $::isInstall ? "miscellaneous_choose" : "apply_settings" },
                    },
                    
-                   miscellaneous_choose => 
-                   {
-                    name => N("Proxies configuration"),
-                    data => [
-                             { label => N("HTTP proxy"), val => \$::o->{miscellaneous}->{http_proxy} },
-                             { label => N("FTP proxy"),  val => \$::o->{miscellaneous}->{ftp_proxy} },
-                            ],
-                    complete => sub {
-                        if ($::o->{miscellaneous}->{http_proxy} !~ m,^($|http://),) {
-                            $in->ask_warn('', N("Proxy should be http://..."));
-                            return 1, 0;
-                        }
-                        if ($::o->{miscellaneous}->{ftp_proxy} !~ m,^($|ftp://|http://),) {
-                            $in->ask_warn('', N("URL should begin with 'ftp:' or 'http:'"));
-                            return 1, 1;
-                        }
-                        0;
-                    },
-                    # FIXME: call     ether_conf();
-                    post => sub { return !$::isInstall ? "apply_settings" : "network_on_boot" },
-                   },
-                   
                    apply_settings => 
                    {
                     name => N("Configuration is complete, do you want to apply settings ?"),
