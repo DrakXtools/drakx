@@ -585,16 +585,11 @@ sub setup_local_autoscan {
 	my @port;
 	if ($::expert) {
 	    @port = detect_devices::whatPrinterPort();
-	    foreach my $q (@port) {
+	    LOOP: foreach my $q (@port) {
 		if (@str) {
-		    my $alreadyfound = 0;
 		    foreach my $p (@autodetected) {
-			if ($p->{port} eq $q) {
-			    $alreadyfound = 1;
-			    last;
-			}
+			last LOOP if $p->{port} eq $q;
 		    }
-		    next if $alreadyfound;
 		}
 		my $menustr;
 		if ($q =~ m!^/dev/lp(\d+)$!) {
