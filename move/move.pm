@@ -76,7 +76,7 @@ Continue at your own risk."), formatError($@) ]) if $@;
         }
     }
 
-    $::WizardWindow->destroy;
+    $::WizardWindow->destroy if $::WizardWindow;
     require ugtk2;
     my $root = ugtk2::gtkroot();
     my $pixbuf = Gtk2::Gdk::Pixbuf->new_from_file('/usr/share/mdk/screensaver/3.png');
