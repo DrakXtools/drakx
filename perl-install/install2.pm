@@ -360,6 +360,7 @@ sub miscellaneous {
 MOUSE=
 KEYBOARD=
 STORAGE=
+VISOR=no
 " if modules::get_alias("usb-interface") && ! -e $f;
 
 	install_any::fsck_option($o);
