@@ -57,10 +57,9 @@ sub addUsers {
 
     allocUsers($prefix, $users);
     foreach my $u (@$users) {
-	substInFile { s/^$u->{name}\n//; $_ .= "$u->{name}\n" if eof } "$msec/user.conf" if -d $msec;
+	run_program::rooted($prefix, "usermod", "-G", join(",", @{$u->{groups}}), $u->{name}) if !is_empty_array_ref($u->{groups});
 	addKdmIcon($prefix, $u->{name}, delete $u->{auto_icon} || $u->{icon});
     }
-    run_program::rooted($prefix, "/usr/share/msec/grpuser.sh --refresh >/dev/null");
 }
 
 sub crypt {
@@ -724,11 +723,18 @@ sub ask_users {
     my @shells = map { chomp; $_ } cat_("$prefix/etc/shells");
     my @icons = facesnames($prefix);
 
+    my %high_security_groups = (
+        xgrp => _("access to X programs"),
+	rpm => _("access to rpm tools"),
+	wheel => _("allow \"su\""),
+	adm => _("access to administrative files"),
+    );
     while (1) {
 	$u->{password2} ||= $u->{password} ||= '';
 	$u->{shell} ||= '/bin/bash';
 	my $names = @$users ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @$users)) : '';
 
+	my %groups;
 	my $verif = sub {
 	    $u->{password} eq $u->{password2} or $in->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,2);
 	    $security > 3 && length($u->{password}) < 6 and $in->ask_warn('', _("This password is too simple")), return (1,2);
@@ -759,8 +765,14 @@ sub ask_users {
 	      if_($security <= 3 && @icons,
 	    { label => _("Icon"), val => \ ($u->{icon} ||= 'man'), list => \@icons, icon2f => sub { face2png($_[0], $prefix) }, format => \&translate },
 	      ),
+	      if_($security > 3,
+		  map {; 
+            { label => $_, val => \$groups{$_}, text => $high_security_groups{$_}, type => 'bool' }
+		  } keys %high_security_groups,
+	      ),
            ],
         );
+	$u->{groups} = [ grep { $groups{$_} } keys %groups ];
 
 	push @$users, $u if $u->{name};
 	$u = {};
