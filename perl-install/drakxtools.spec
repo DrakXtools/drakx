@@ -102,10 +102,6 @@ rm -rf $RPM_BUILD_ROOT
 
 make PREFIX=$RPM_BUILD_ROOT install
 mkdir -p $RPM_BUILD_ROOT%_initrddir/
-if [ -f $RPM_BUILD_ROOT%_sbindir/service_harddrake ]; then
-	mv $RPM_BUILD_ROOT%_sbindir/service_harddrake $RPM_BUILD_ROOT%_initrddir/harddrake2
-	else cp standalone/service_harddrake $RPM_BUILD_ROOT%_initrddir/harddrake2
-fi
 
 mv ${RPM_BUILD_ROOT}%{_sbindir}/net_monitor \
    ${RPM_BUILD_ROOT}%{_sbindir}/net_monitor.real
@@ -115,7 +111,7 @@ cp pam.net_monitor $RPM_BUILD_ROOT%{_sysconfdir}/pam.d/net_monitor
 cp apps.net_monitor $RPM_BUILD_ROOT%{_sysconfdir}/security/console.apps/net_monitor
 
 dirs1="usr/lib/libDrakX usr/share/libDrakX"
-(cd $RPM_BUILD_ROOT ; find $dirs1 usr/bin usr/sbin ! -type d -printf "/%%p\n") > %{name}.list
+(cd $RPM_BUILD_ROOT ; find $dirs1 usr/bin usr/sbin ! -type d -printf "/%%p\n")|egrep -v 'bin/.*harddrake' > %{name}.list
 (cd $RPM_BUILD_ROOT ; find $dirs1 -type d -printf "%%%%dir /%%p\n") >> %{name}.list
 
 perl -ni -e '/gtk|icons|pixmaps|XFdrake|bootlook|drakbackup|drakfont|logdrake|net_monitor/ ? print STDERR $_ : print' %{name}.list 2> %{name}-gtk.list
@@ -123,13 +119,13 @@ perl -ni -e '/http/ ? print STDERR $_ : print' %{name}.list 2> %{name}-http.list
 
 #mdk menu entry
 mkdir -p $RPM_BUILD_ROOT/%_menudir
-cat > $RPM_BUILD_ROOT%_menudir/%name <<EOF
+cat > $RPM_BUILD_ROOT%_menudir/harddrake <<EOF
 ?package(harddrake):\
 	needs="X11"\
 	section="Configuration/Hardware"\
 	title="HardDrake"\
 	longtitle="Hardware Central Configuration/information tool"\
-	command="/usr/sbin/harddrake"\
+	command="/usr/sbin/harddrake2"\
 	icon="harddrake.png"
 EOF
 %find_lang libDrakX
@@ -140,11 +136,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 [[ ! -e /usr/X11R6/bin/Xconfigurator ]] && %__ln_s -f ../sbin/XFdrake /usr/X11R6/bin/Xconfigurator
-
 [[ ! -e %_sbindir/kbdconfig ]] && %__ln_s -f keyboarddrake %_sbindir/kbdconfig
 [[ ! -e %_sbindir/setuptool ]] && %__ln_s -f drakxconf %_sbindir/setuptool
 [[ ! -e %_sbindir/mouseconfig ]] && %__ln_s -f mousedrake %_sbindir/mouseconfig
 [[ ! -e %_bindir/printtool ]] && %__ln_s -f ../sbin/printerdrake %_bindir/printtool
+:
 
 %postun
 for i in /usr/X11R6/bin/Xconfigurator %{_sbindir}/kbdconfig %{_sbindir}/mouseconfig %{_bindir}/printtool;do
@@ -185,7 +181,9 @@ done
 %files -n harddrake
 %defattr(-,root,root)
 %_sbindir/harddrake2
-%_initrddir/harddrake2
+%config(noreplace) %_initrddir/harddrake
+%_datadir/pixmaps/harddrake2
+%_menudir/harddrake
 
 %files http -f %{name}-http.list
 %defattr(-,root,root)
@@ -197,8 +195,7 @@ done
 %config(noreplace) %{_sysconfdir}/logrotate.d/drakxtools-http
 
 %changelog 
-
-* Sun Jul  7 2002 Daouda LO <daouda@mandrakesoft.com> 1.1.8-1mdk
+* Mon Jul 08 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-1mdk
 - snapshot
 - new entries: 
 	o harddrake2 : new hardware detection && configuration tool
