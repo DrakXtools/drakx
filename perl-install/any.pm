@@ -810,28 +810,6 @@ sub fileshare_config {
     my @l = (N_("No sharing"), N_("Allow all users"), N_("Custom"));
     my $restrict = exists $conf{RESTRICT} ? text2bool($conf{RESTRICT}) : 1;
 
-    if ($restrict) {
-	#- verify we can export in $type
-	my %type2file = (nfs => [ '/etc/init.d/nfs', 'nfs-utils' ], smb => [ '/etc/init.d/smb', 'samba' ]);
-	my @wanted = $type ? $type : keys %type2file;
-	my @have = grep { -e $type2file{$_}[0] } @wanted;
-	if (!@have) {
-	    if (@wanted == 1) {
-		$in->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $type2file{$wanted[0]}[1]), 1) or return;
-	    } else {
-		my $wanted = $in->ask_many_from_list('', N("You can export using NFS or Samba. Please select which you'd like to use."),
-						  { list => \@wanted }) or return;
-		@wanted = @$wanted or return;
-	    }
-	    $in->do_pkgs->install(map { $type2file{$_}[1] } @wanted);
-	    @have = grep { -e $type2file{$_}[0] } @wanted;
-	}
-	if (!@have) {
-	    $in->ask_warn('', N("Mandatory package %s is missing", $wanted[0]));
-	    return;
-	}
-    }
-
     my $r = $in->ask_from_list_('fileshare',
 N("Would you like to allow users to share some of their directories?
 Allowing this will permit users to simply click on \"Share\" in konqueror and nautilus.
@@ -840,11 +818,32 @@ Allowing this will permit users to simply click on \"Share\" in konqueror and na
 "),
 				\@l, $l[$restrict ? 0 : 1]) or return;
     $restrict = $r ne $l[1];
+    my $custom = $r eq $l[2];
+    if ($r ne $l[0]) {
+	#- verify we can export in $type
+	my %type2file = (nfs => [ 'nfs-utils', '/etc/init.d/nfs' ], smb => [ 'samba-server', '/etc/init.d/smb' ]);
+	my %l;
+	if ($type) {
+	    %l = ($type => 1);
+	} else {
+	    %l = map_each { $::a => -e $::b->[1] } %type2file;
+	    $in->ask_from('', N("You can export using NFS or Samba. Please select which you'd like to use."),
+			  [ map { { text => $_, val => \$l{$_}, type => 'bool' } } keys %l ]) or return;
+	}
+	foreach (keys %l) {
+	    my ($pkg, $file) = @{$type2file{$_}} or die "unknown type $_\n";
+	    if ($l{$_}) {
+		$in->do_pkgs->ensure_is_installed($pkg, $file) or return;
+	    } elsif (-e $file) {
+		$in->ask_okcancel('', N("The package %s is going to be removed.", $pkg), 1) or return;
+		$in->do_pkgs->remove($pkg);
+	    }
+	}
+    }
     $conf{RESTRICT} = bool2yesno($restrict);
-
     setVarsInSh($file, \%conf);
-    if ($r eq $l[2]) {
-	# custom
+
+    if ($custom) {
 	run_program::rooted($::prefix, 'groupadd', '-r', 'fileshare');
 	if ($in->ask_from_no_check(
 	{
