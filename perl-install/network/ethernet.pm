@@ -46,6 +46,15 @@ Default is dhcpcd"),
 	$install->(qw(dhcpcd));
     }
     go_ethernet($netc, $intf, 'dhcp', '', '', $first_time);
+    write_cnx_script($netc, "cable",
+qq(
+#!/bin/bash
+ifup $netc->{NET_DEVICE}
+),
+qq(
+#!/bin/bash
+ifdown $netc->{NET_DEVICE}
+));
 }
 
 sub configure_lan {
@@ -166,15 +175,6 @@ sub go_ethernet {
     conf_network_card($netc, $intf, $type, $ipadr, $netadr) or return;
     $netc->{NET_INTERFACE}=$netc->{NET_DEVICE};
     configureNetwork($netc, $intf, $first_time) or return;
-    write_cnx_script($netc, "Local network",
-qq(
-#!/bin/bash
-ifup $netc->{NET_DEVICE}
-),
-qq(
-#!/bin/bash
-ifdown $netc->{NET_DEVICE}
-));
     if ( $::isStandalone and $netc->{NET_DEVICE}) {
 	$in->ask_yesorno(_("Network interface"),
 			 _("I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"), 1) and system("$prefix/sbin/ifdown $netc->{NET_DEVICE}; $prefix/sbin/ifup $netc->{NET_DEVICE}");
