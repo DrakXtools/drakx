@@ -11,7 +11,7 @@ my @devices = detect_devices::probeall(1);
 
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown {
-    grep { ($_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|Printer|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|STORAGE_(IDE|SCSI|OTHER)|BRIDGE|NETWORK/) && ($_->{driver} ne 'scanner') && $_->{type} ne 'network' && $_->{driver} !~ /Mouse:USB|class\|Mouse/ } @devices;
+    grep { ($_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|Printer|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|STORAGE_(IDE|SCSI|OTHER)|BRIDGE|NETWORK/) && ($_->{driver} ne '^(scanner|usbvideo)$') && $_->{type} ne 'network' && $_->{driver} !~ /Mouse:USB|class\|Mouse/ } @devices;
 }
 
 
@@ -28,7 +28,7 @@ our @tree =
      ["DVDROM","DVD-ROM", "cd.png", "", sub { grep { ! detect_devices::isBurner($_) } detect_devices::dvdroms() }, 0 ],
      ["TAPE","Tape", "tape.png", "", \&detect_devices::tapes, 0 ],
      ["VIDEO","Videocard", "video.png", "$sbindir/XFdrake",  sub { grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ /DISPLAY_VGA/ } @devices }, 1 ],
-     ["TV","Tvcard", "tv.png", "/usr/bin/XawTV", sub { grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} eq 'PCI' } @devices }, 0 ],
+     ["TV","Tvcard", "tv.png", "/usr/bin/XawTV", sub { grep { ($_->{media_type} =~ 'MULTIMEDIA_VIDEO' && $_->{bus} eq 'PCI') || $_->{driver} eq 'usbvision' } @devices }, 0 ],     
      ["MULTIMEDIA_OTHER","Other MultiMedia devices", "multimedia.png", "", sub { grep { $_->{media_type} =~ /MULTIMEDIA_OTHER/ } @devices }, 0 ],
      ["AUDIO","Soundcard", "sound.png", "$sbindir/draksound", sub { grep { $_->{media_type} =~ /MULTIMEDIA_AUDIO/ } @devices }, 0 ],
      ["WEBCAM","Webcam", "webcam.png", "", sub { grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} ne 'PCI' } @devices }, 0 ],

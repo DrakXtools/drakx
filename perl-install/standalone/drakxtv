@@ -134,11 +134,11 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
     }
 }
 
-my @devices = grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' } detect_devices::probeall(1);
+my @devices = grep { ($_->{media_type} eq 'MULTIMEDIA_VIDEO') || $_->{driver} eq 'usbvision' } detect_devices::probeall(1);
 if (@devices) {
     # TODO: That need some work for multiples TV cards
     foreach (@devices) {
-	   if (($< == 0) && (grep { $_->{driver} =~ '(bttv|saa7134)' } @devices)) {
+	   if (( $< == 0) && (grep { $_->{driver} =~ '(bttv|saa7134|usbvision)' } @devices)) {
 		  require harddrake::v4l;
 		  require modules;
 		  no strict 'subs';
@@ -147,8 +147,6 @@ if (@devices) {
 		  modules::write_conf;
 	   }
 	   scan4channels();
-	   $in->exit(0);
-    }
 } else {
     $in->ask_warn(N("No TV Card detected!"), formatAlaTeX(
 											   N("No TV Card has been detected on your machine. Please verify that a Linux-supported Video/TV Card is correctly plugged in.
@@ -159,6 +157,7 @@ You can visit our hardware database at:
 
 http://www.linux-mandrake.com/en/hardware.php3")));
 }
+$in->exit(0) if defined $in;
 
 
 # TODO:
