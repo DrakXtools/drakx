@@ -85,7 +85,7 @@ sub real_main {
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my ($adsl_type, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
       my ($ntf_name, $gateway_ex, $up, $need_restart_network);
-      my ($isdn, $isdn_capi, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
+      my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
       my ($module, $auto_ip, $protocol, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
@@ -360,7 +360,7 @@ sub real_main {
                         network::isdn::read_config($isdn);
                         $isdn->{driver} = $isdn_cards{$isdn_name}{driver}; #- do not let config overwrite default driver
 
-                        $isdn_capi = network::isdn::get_capi_card($isdn) and return "isdn_driver";
+                        network::isdn::get_capi_card($isdn) and return "isdn_driver";
                         return "isdn_protocol";
                     },
                    },
@@ -425,9 +425,7 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
                                      list => [ $isdn->{driver}, "capidrv" ] }
                                   ] },
                     post => sub {
-                        if ($isdn_name eq "capidrv") {
-                            put_in_hash($isdn, $isdn_capi);
-                        }
+                        $isdn->{driver} = $isdn_name;
                         return "isdn_protocol";
                     }
                    },

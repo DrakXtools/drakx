@@ -49,7 +49,7 @@ defaultroute
 
     services::stop("isdn4linux"); #- to be stopped before capi is loaded
     if ($isdn->{driver} eq "capidrv") {
-        setup_capi_conf($isdn);
+        setup_capi_conf(get_capi_card($isdn));
         services::start_service_on_boot("capi4linux");
         services::restart("capi4linux");
     } else {
