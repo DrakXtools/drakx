@@ -738,8 +738,8 @@ sub install_silo {
     }
     log::l("Installing boot loader...");
     $::testing and return;
-    run_program::rooted($::prefix, "silo", "2>", "/tmp/.error", $silo->{use_partition} ? "-t" : ()) or 
-        run_program::rooted_or_die($::prefix, "silo", "2>", "/tmp/.error", "-p", "2", $silo->{use_partition} ? "-t" : ());
+    run_program::rooted($::prefix, "silo", "2>", "/tmp/.error", if_($silo->{use_partition}, "-t")) or 
+        run_program::rooted_or_die($::prefix, "silo", "2>", "/tmp/.error", "-p", "2", if_($silo->{use_partition}, "-t"));
     unlink "$::prefix/tmp/.error";
 
     #- try writing in the prom.

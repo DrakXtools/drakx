@@ -114,8 +114,8 @@ sub getFile {
     my $dir = dir($host) . ($file =~ /\.rpm$/ && "/RPMS");
     log::l("getting crypto file $file on directory $dir with login $mirrors{$host}[2]");
     my ($ftp, $retr) = ftp::new($host, $dir,
-				$mirrors{$host}[2] ? $mirrors{$host}[2] : (),
-				$mirrors{$host}[3] ? $mirrors{$host}[3] : ()
+				if_($mirrors{$host}[2], $mirrors{$host}[2]),
+				if_($mirrors{$host}[3], $mirrors{$host}[3])
 			       );
     $$retr->close if $$retr;
     $$retr   = $ftp->retr($file) or ftp::rewindGetFile();

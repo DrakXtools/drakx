@@ -33,14 +33,10 @@ sub intro {
 	    $connected = 0;
 	}
 	my @l = (
-	       !$connected && -e $connect_file ? { description => N("Connect"),
-						   c => 1 } : (),
-	       $connected && -e $disconnect_file ? { description => N("Disconnect"),
-						     c => 2 } : (),
-	       { description => N("Configure the connection"),
-		 c => 3 },
-	       { description => N("Cancel"),
-		 c => 4 },
+	       if_(!$connected && -e $connect_file, { description => N("Connect"), c => 1 }),
+	       if_($connected && -e $disconnect_file, { description => N("Disconnect"), c => 2 }),
+	       { description => N("Configure the connection"), c => 3 },
+	       { description => N("Cancel"), c => 4 },
 	      );
 	my $e = $in->ask_from_listf(N("Internet connection & configuration"),
 				    translate($text),

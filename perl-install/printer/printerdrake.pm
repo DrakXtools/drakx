@@ -27,9 +27,9 @@ sub choose_printer_type {
     $in->ask_from_(
 		   { title => N("Select Printer Connection"),
 		     messages => N("How is the printer connected?") .
-			 ($printer->{SPOOLER} eq "cups" ?
+			 if_($printer->{SPOOLER} eq "cups",
 			  N("
-Printers on remote CUPS servers you do not have to configure here; these printers will be automatically detected.") : ())
+Printers on remote CUPS servers you do not have to configure here; these printers will be automatically detected.")),
 		     },
 		   [
 		    { val => \$printer->{str_type},
@@ -83,8 +83,8 @@ sub config_cups {
 	 { title => ($::expert ? N("CUPS configuration") :
 		     N("Specify CUPS server")),
 	   messages => N("To get access to printers on remote CUPS servers in your local network you do not have to configure anything; the CUPS servers inform your machine automatically about their printers. All printers currently known to your machine are listed in the \"Remote printers\" section in the main window of Printerdrake. When your CUPS server is not in your local network, you have to enter the CUPS server IP address and optionally the port number to get the printer information from the server, otherwise leave these fields blank.") .
-	       ($::expert ? "\n" . N("
-Normally, CUPS is automatically configured according to your network environment, so that you can access the printers on the CUPS servers in your local network. If this does not work correctly, turn off \"Automatic CUPS configuration\" and edit your file /etc/cups/cupsd.conf manually. Do not forget to restart CUPS afterwards (command: \"service cups restart\").") : ()),
+	       if_($::expert, "\n" . N("
+Normally, CUPS is automatically configured according to your network environment, so that you can access the printers on the CUPS servers in your local network. If this does not work correctly, turn off \"Automatic CUPS configuration\" and edit your file /etc/cups/cupsd.conf manually. Do not forget to restart CUPS afterwards (command: \"service cups restart\").")),
 	   callbacks => { complete => sub {
 	       if ($server && !network::is_ip($server)) {
 		   $in->ask_warn('', N("The IP address should look like 192.168.1.20"));
@@ -100,9 +100,9 @@ Normally, CUPS is automatically configured according to your network environment
 	 [	
 		{ label => N("CUPS server IP"), val => \$server },
 		{ label => N("Port"), val => \$port },
-		($::expert ?
+		if_($::expert,
 		 { text => N("Automatic CUPS configuration"), type => 'bool',
-		   val => \$autoconf } : ()),
+		   val => \$autoconf }),
 	 ]
 	 )) {
 	# We have clicked "OK"
@@ -308,12 +308,12 @@ If you have printer(s) connected to this machine, Please plug it/them in on this
 		     [
 		      { text => N("Auto-detect printers connected to this machine"), type => 'bool',
 			val => \$autodetectlocal },
-		      ($havelocalnetworks ?
-		       ({ text => N("Auto-detect printers connected directly to the local network"), type => 'bool',
-			  val => \$autodetectnetwork },
-			($printer->{SPOOLER} ne "pdq" ?
-			 { text => N("Auto-detect printers connected to machines running Microsoft Windows"), type => 'bool',
-			   val => \$autodetectsmb } : ())) : ())
+		           if_($havelocalnetworks,
+		      { text => N("Auto-detect printers connected directly to the local network"), type => 'bool',
+			val => \$autodetectnetwork },
+			   if_($printer->{SPOOLER} ne "pdq",
+		      { text => N("Auto-detect printers connected to machines running Microsoft Windows"), type => 'bool',
+			val => \$autodetectsmb })),
 		      ]);
 		$printer->{AUTODETECTLOCAL} = $autodetectlocal ? 1 : undef;
 		$printer->{AUTODETECTNETWORK} = $autodetectnetwork ? 1 : undef;
@@ -559,9 +559,8 @@ sub setup_local_autoscan {
 				 ($::expert ?
 				  N("Please choose the port where your printer is connected to or enter a device name/file name in the input line") :
 				  N("Please choose the port where your printer is connected to."))) .
-				($::expert ?
-				 N(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...).") :
-				 ())), 
+				if_($::expert,
+				 N(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."))), 
 				 callbacks => {
 				     complete => sub {
 					 unless ($menuchoice ne "") {
@@ -579,14 +578,13 @@ sub setup_local_autoscan {
 				     }
 				 } },
 		 [
-		  ($::expert ? 
-		   { val => \$device } : ()),
+		  if_($::expert, { val => \$device }),
 		  { val => \$menuchoice, list => \@menuentrieslist, 
 		    not_edit => !$::expert, format => \&translate, sort => 0,
 		    allow_empty_list => 1, type => 'list' },
-		  ((!$::expert && $do_auto_detect && $printer->{NEW}) ? 
+		  if_(!$::expert && $do_auto_detect && $printer->{NEW}, 
 		   { text => N("Manual configuration"), type => 'bool',
-		     val => \$manualconf } : ()),
+		     val => \$manualconf }),
 		  ]
 		 )) {
 		return 0;
@@ -806,12 +804,11 @@ sub setup_smb {
 	  { label => N("User name"), val => \$smbuser },
 	  { label => N("Password"), val => \$smbpassword, hidden => 1 },
 	  { label => N("Workgroup"), val => \$workgroup },
-	  ($autodetect ?
+	  if_($autodetect,
 	   { label => N("Auto-detected"),
 	     val => \$menuchoice, list => \@menuentrieslist, 
 	     not_edit => 1, format => \&translate, sort => 0,
-	     allow_empty_list => 1, type => 'combo' } :
-	     ()) ],
+	     allow_empty_list => 1, type => 'combo' }) ],
 	 complete => sub {
 	     if (!network::is_ip($smbserverip) && $smbserverip ne "") {
 		 $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
@@ -1064,11 +1061,10 @@ sub setup_socket {
 	  { label => ($autodetect ? "" : N("Printer host name or IP")),
 	    val => \$remotehost },
 	  { label => ($autodetect ? "" : N("Port")), val => \$remoteport },
-	  ($autodetect ?
+	  if_($autodetect,
 	   { val => \$menuchoice, list => \@menuentrieslist, 
 	     not_edit => 0, format => \&translate, sort => 0,
-	     allow_empty_list => 1, type => 'list' } :
-	     ())
+	     allow_empty_list => 1, type => 'list' })
 	  ]
 	 );
     
@@ -1277,9 +1273,8 @@ sub setup_common {
 						   /usr/bin/xsane
 						   /etc/sane.d/dll.conf
 						   /usr/lib/libsane-hpoj.so.1),
-						(files_exist('/usr/bin/gimp') ? 
-						 '/usr/bin/xsane-gimp' : 
-						 ()))) {
+						if_(files_exist('/usr/bin/gimp'), 
+						    '/usr/bin/xsane-gimp'))) {
 			my $w = $in->wait_message(
 			     N("Printerdrake"),
 			     N("Installing SANE packages..."));
@@ -2120,18 +2115,18 @@ Note: the photo test page can take a rather long time to get printed and on lase
 	 [
 	  { text => N("Standard test page"), type => 'bool',
 	    val => \$standard },
-	  ($::expert ?
+	  if_($::expert,
 	   { text => N("Alternative test page (Letter)"), type => 'bool', 
-	     val => \$altletter } : ()),
-	  ($::expert ?
+	     val => \$altletter }),
+	  if_($::expert,
 	   { text => N("Alternative test page (A4)"), type => 'bool', 
-	     val => \$alta4 } : ()), 
+	     val => \$alta4 }), 
 	  { text => N("Photo test page"), type => 'bool', val => \$photo },
 	  #{ text => N("Plain text test page"), type => 'bool',
 	  #  val => \$ascii }
-	  ($::isWizard ?
+	  if_($::isWizard,
 	   { text => N("Do not print any test page"), type => 'bool', 
-	     val => \$res2 } : ())
+	     val => \$res2 })
 	  ]);
     $res2 = 1 if !($standard || $altletter || $alta4 || $photo || $ascii);
     if ($res1 && !$res2) {
@@ -2379,8 +2374,8 @@ Not all queues can be transferred due to the following reasons:
   N("LPD and LPRng do not support IPP printers.
 "))) .
 N("In addition, queues not created with this program or \"foomatic-configure\" cannot be transferred.") .
-($oldspooler eq "cups" ? N("
-Also printers configured with the PPD files provided by their manufacturers or with native CUPS drivers cannot be transferred.") : ()) . N("
+if_($oldspooler eq "cups", N("
+Also printers configured with the PPD files provided by their manufacturers or with native CUPS drivers cannot be transferred.")) . N("
 Mark the printers which you want to transfer and click 
 \"Transfer\"."),
 	   cancel => N("Do not transfer printers"),
@@ -2779,8 +2774,7 @@ sub main {
 				       /usr/bin/nmap
 				       /usr/bin/scli
 				       ),
-				    (files_exist("/usr/bin/gimp") ?
-				     "/usr/lib/gimp/1.2/plug-ins/print" : ())
+				    if_(files_exist("/usr/bin/gimp"), "/usr/lib/gimp/1.2/plug-ins/print")
 				    )) {
 	    $in->do_pkgs->install('foomatic', 'printer-utils', 'printer-testpages', 'nmap', 'scli',
 				  if_($in->do_pkgs->is_installed('gimp'), 'gimpprint'));
@@ -2926,7 +2920,7 @@ sub main {
 			 ok => (""),
 			},
 			# List the queues
-			[ ($noprinters ? () :
+			[ if_(!$noprinters,
 			   { val => \$menuchoice, format => \&translate,
 			     sort => 0, separator => "!",tree_expanded => 1,
 			     quit_if_double_click => 1,allow_empty_list =>1,
@@ -3125,8 +3119,7 @@ sub main {
 		    setasdefault($printer, $in);
 		    $cursorpos = 
 			$printer->{configured}{$printer->{QUEUE}}{queuedata}{menuentry} .
-			($printer->{QUEUE} eq $printer->{DEFAULT} ?
-			 N(" (Default)") : ());
+			($printer->{QUEUE} eq $printer->{DEFAULT} ? N(" (Default)") : '');
 		    my $testpages = print_testpages($printer, $in, $printer->{TYPE} !~ /LOCAL/ && $upNetwork);
 		    if ($testpages == 1) {
 			# User was content with test pages
@@ -3177,8 +3170,7 @@ sub main {
 		setasdefault($printer, $in);
 		$cursorpos = 
 		    $printer->{configured}{$printer->{QUEUE}}{queuedata}{menuentry} .
-		    ($printer->{QUEUE} eq $printer->{DEFAULT} ?
-		     N(" (Default)") : ());
+		    ($printer->{QUEUE} eq $printer->{DEFAULT} ? N(" (Default)") : '');
 		my $testpages = print_testpages($printer, $in, $printer->{TYPE} !~ /LOCAL/ && $upNetwork);
 		if ($testpages == 1) {
 		    # User was content with test pages
@@ -3204,13 +3196,13 @@ sub main {
 		$printer->{configured}{$queue}{queuedata}{menuentry} =~
 		    /!([^!]+)$/;
 		$infoline = $1 .
-		    ($queue eq $printer->{DEFAULT} ? N(" (Default)") : ()) .
+		    ($queue eq $printer->{DEFAULT} ? N(" (Default)") : '') .
 		    ($printer->{configured}{$queue}{queuedata}{desc} ?
-		     ", Descr.: $printer->{configured}{$queue}{queuedata}{desc}" : ()) .
+		     ", Descr.: $printer->{configured}{$queue}{queuedata}{desc}" : '') .
 		    ($printer->{configured}{$queue}{queuedata}{loc} ?
-		     ", Loc.: $printer->{configured}{$queue}{queuedata}{loc}" : ()) .
+		     ", Loc.: $printer->{configured}{$queue}{queuedata}{loc}" : '') .
 		    ($::expert ?
-		     ", Driver: $printer->{configured}{$queue}{queuedata}{driver}" : ());
+		     ", Driver: $printer->{configured}{$queue}{queuedata}{driver}" : '');
 	    } else {
 		# The parameters of a remote CUPS queue cannot be changed,
 		# so we can simply take the menu entry.
@@ -3234,22 +3226,18 @@ What do you want to modify on this printer?",
 				    ($::expert ?
 				     N("Printer manufacturer, model, driver") :
 				     N("Printer manufacturer, model")),
-				    ($printer->{configured}{$queue}{queuedata}{make} ne
-				      "" &&
-				     ($printer->{configured}{$queue}{queuedata}{model} ne
-				       N("Unknown model") &&
-				      $printer->{configured}{$queue}{queuedata}{model} ne
-				       N("Raw printer")) ?
-				     N("Printer options") : ())) : ()),
-				   ($queue ne $printer->{DEFAULT} ?
-				    N("Set this printer as the default") : ()),
-				   ($printer->{configured}{$queue} ? () :
-				    (N("Add this printer to Star Office/OpenOffice.org/GIMP"),
-				     N("Remove this printer from Star Office/OpenOffice.org/GIMP"))),
+				    if_($printer->{configured}{$queue}{queuedata}{make} ne "" &&
+					$printer->{configured}{$queue}{queuedata}{model} ne N("Unknown model") &&
+					$printer->{configured}{$queue}{queuedata}{model} ne N("Raw printer"),
+				     N("Printer options"))) : ()),
+				   if_($queue ne $printer->{DEFAULT},
+				       N("Set this printer as the default")),
+				   if_(!$printer->{configured}{$queue},
+				       N("Add this printer to Star Office/OpenOffice.org/GIMP"),
+				       N("Remove this printer from Star Office/OpenOffice.org/GIMP")),
 				   N("Print test pages"),
 				   N("Know how to use this printer"),
-				   ($printer->{configured}{$queue} ?
-				    N("Remove printer") : ()) ] } ])) {
+				   if_($printer->{configured}{$queue}, N("Remove printer")) ] } ])) {
 		# Stay in the queue edit window until the user clicks "Close"
 		# or deletes the queue
 		$editqueue = 1; 
@@ -3363,7 +3351,7 @@ What do you want to modify on this printer?",
 		    if ($printer->{configured}{$printer->{QUEUE}}) {
 			$cursorpos = 
 			    $printer->{configured}{$printer->{QUEUE}}{queuedata}{menuentry} . 
-			    ($printer->{QUEUE} eq $printer->{DEFAULT} ? N(" (Default)") : ());
+			    if_($printer->{QUEUE} eq $printer->{DEFAULT}, N(" (Default)"));
 		    } else {
 			my $s1 = N(" (Default)");
 			my $s2 = $s1;

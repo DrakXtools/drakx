@@ -579,7 +579,7 @@ sub real_format_part {
 
     my $dev = $part->{real_device} || $part->{device};
 
-    my @options = $part->{toFormatCheck} ? "-c" : ();
+    my @options = if_($part->{toFormatCheck}, "-c");
     log::l("formatting device $dev (type ", type2name($part->{type}), ")");
 
     if (isExt2($part)) {

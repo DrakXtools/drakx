@@ -59,9 +59,9 @@ my @partitions_signatures = (
     [ 0x82, 4086, "SWAPSPACE2" ],
     [ 0x7,  0x1FE, "\x55\xAA", 0x3, "NTFS" ],
     [ 0xc,  0x1FE, "\x55\xAA", 0x52, "FAT32" ],
-arch() !~ /^sparc/ ? (
+if_(arch() !~ /^sparc/,
     [ 0x6,  0x1FE, "\x55\xAA", 0x36, "FAT" ],
-) : (),
+),
 );
 
 sub typeOfPart { 
