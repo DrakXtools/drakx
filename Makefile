@@ -43,7 +43,7 @@ ifeq (alpha,$(ARCH))
 	cp -f vmlinux.gz $(ROOTDEST)/boot/instboot.gz
 	make -C tools/$(ARCH)/cd install ROOTDEST=$(ROOTDEST)
 endif
-	cd $(ROOTDEST)/images; mkdir -p alternatives ; mv *.img-* alternatives
+	cd $(ROOTDEST)/images; rm -rf alternatives ; mkdir alternatives ; mv *.img-* alternatives
 	cd $(ROOTDEST)/images; md5sum *.img* > MD5SUM
 	cd $(ROOTDEST)/images/alternatives; md5sum *.img* > MD5SUM
 
