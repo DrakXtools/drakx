@@ -21,13 +21,13 @@ sub get_stdout {
     my ($name, @args) = @_;
     my @r;
     run($name, '>', \@r, @args) or return;
-    wantarray ? @r : join('', @r);
+    wantarray() ? @r : join('', @r);
 }
 sub rooted_get_stdout {
     my ($root, $name, @args) = @_;
     my @r;
     rooted($root, $name, '>', \@r, @args) or return;
-    wantarray ? @r : join('', @r);
+    wantarray() ? @r : join('', @r);
 }
 
 sub run { raw({}, @_) }

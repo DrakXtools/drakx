@@ -13,7 +13,7 @@ sub AUTOLOAD {
 	  die("can't find function $AUTOLOAD\n" . backtrace()) :
 	  die($err);	
     }
-    wantarray ? @l : $l[0];
+    wantarray() ? @l : $l[0];
 }
 
 1;

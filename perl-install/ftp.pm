@@ -45,7 +45,7 @@ sub new {
 	$hosts{"$host$prefix"} = \@l;
 	@l;
     } };
-    wantarray ? @l : $l[0];
+    wantarray() ? @l : $l[0];
 }
 
 sub getFile {

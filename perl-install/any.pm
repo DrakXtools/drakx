@@ -1111,7 +1111,7 @@ sub running_window_manager {
 
     foreach (@window_managers) {
 	my @pids = fuzzy_pidofs(qr/\b$_\b/) or next;
-	return wantarray ? ($_, @pids) : $_;
+	return wantarray() ? ($_, @pids) : $_;
     }
     undef;
 }

@@ -233,7 +233,7 @@ sub ask_many_from_list {
 	my $h = $_;
 	[ grep { ${$h->{e}{$_}{val}} } @{$h->{list}} ];
     } @l;
-    wantarray ? @l : $l[0];
+    wantarray() ? @l : $l[0];
 }
 
 sub ask_from_entry {
