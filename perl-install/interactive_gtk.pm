@@ -348,7 +348,7 @@ sub ask_from_entries_refW {
     $mainw->sync; #- for $set_all below (mainly for the set of clist)
     $set_all->();
     $set_advanced->(0);
-    (@widgets ? $widgets[0]{w} : $mainw->{ok})->grab_focus();
+    (@widgets ? $widgets[0]{w} : $common->{focus_cancel} ? $mainw->{cancel} : $mainw->{ok})->grab_focus();
 
     $mainw->main(sub {
         $get_all->();
