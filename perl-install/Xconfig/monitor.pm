@@ -91,7 +91,10 @@ sub choose {
 	}
     };
 
-    $in->ask_from(N("Monitor"), N("Choose a monitor"), 
+    $in->ask_from_({ title => N("Monitor"),
+		     messages => N("Choose a monitor"), 
+		     interactive_help_id => 'configureX_monitor' 
+		   },
 		  [ { val => \$merged_name, separator => '|', 
 		      list => ['Custom', "Plug'n Play", sort keys %h_monitors],
 		      format => sub { $_[0] eq 'Custom' ? N("Custom") : 

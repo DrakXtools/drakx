@@ -199,12 +199,14 @@ sub card_config__not_listed {
 	(map { 'XFree 4|' . $_ } @xf4),
     );
 
-    my $r = $in->ask_from_treelistf(
-	N("X server"), N("Choose an X server"), '|', 
-	sub { $_[0] =~ /^Vendor\|($vendors_regexp)\s*-?(.*)/ ? "Vendor|$1|$2" : 
-	      $_[0] =~ /^Vendor\|(.*)/ ? "Vendor|Other|$1" : $_[0] },
-	\@list, 
-	exists $cards->{$card->{BoardName}} ? "Vendor|$card->{BoardName}" : 'XFree 4|vesa') or return;
+    my $r = exists $cards->{$card->{BoardName}} ? "Vendor|$card->{BoardName}" : 'XFree 4|vesa';
+    $in->ask_from_({ title => N("X server"), 
+		     messages => N("Choose an X server"),
+		     interactive_help_id => 'configureX_card_list',
+		   },
+		   [ { val => \$r, separator => '|', list => \@list, sort => 1,
+		       format => sub { $_[0] =~ /^Vendor\|($vendors_regexp)\s*-?(.*)/ ? "Vendor|$1|$2" : 
+				       $_[0] =~ /^Vendor\|(.*)/ ? "Vendor|Other|$1" : $_[0] } } ]) or return;
 
     $r eq "Vendor|$card->{BoardName}" and return 1; #- it is unchanged, don't modify $card
 
@@ -352,10 +354,12 @@ sub xfree_and_glx_choose {
 
     my $tc = 
       $auto ? $choices[0] :
-	$in->ask_from_listf(N("XFree configuration"), 
-			    formatAlaTeX(join("\n\n\n", (grep { $_ } map { $_->{more_messages} } @choices),
-					      N("Which configuration of XFree do you want to have?"))), 
-			    sub { $_[0]{text} }, \@choices) or return;
+	$in->ask_from_listf_raw({ title => N("XFree configuration"), 
+				  messages => formatAlaTeX(join("\n\n\n", (grep { $_ } map { $_->{more_messages} } @choices),
+								N("Which configuration of XFree do you want to have?"))), 
+				  interactive_help_id => 'configureX_xfree_and_glx',
+				},
+				sub { $_[0]{text} }, \@choices) or return;
     log::l("Using $tc->{text}");
     $tc->{code}();
     set_glx_restrictions($card);

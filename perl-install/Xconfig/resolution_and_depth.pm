@@ -176,7 +176,7 @@ sub configure {
     if ($auto) {
 	#- use $default_resolution
     } elsif ($in->isa('interactive::gtk')) {
-	$default_resolution = choose_gtk($card, $default_resolution, @resolutions) or return;
+	$default_resolution = choose_gtk($in, $card, $default_resolution, @resolutions) or return;
     } else {
 	$default_resolution = choose($in, $default_resolution, @resolutions) or return;
     }
@@ -199,7 +199,7 @@ sub configure_auto_install {
 }
 
 sub choose_gtk {
-    my ($card, $default_resolution, @resolutions) = @_;
+    my ($in, $card, $default_resolution, @resolutions) = @_;
 
     my ($chosen_x_res, $chosen_y_res, $chosen_Depth) = @$default_resolution{'X', 'Y', 'Depth'};
     $chosen_x_res ||= 640;
@@ -268,7 +268,11 @@ sub choose_gtk {
 						   ),
 					  ),
 			       ),
-		    0, gtkadd($W->create_okcancel(N("Ok"), N("Cancel"))),
+		    0, gtkadd($W->create_okcancel(N("Ok"), N("Cancel"), '',
+						  [ N("Help"), sub { 
+							my $message = $in->interactive_help_get_id('configureX_resolution') or return;
+							$in->ask_warn(N("Help"), $message);
+						    }, 1 ])),
 		    ));
     $depth_combo->disable_activate;
     $depth_combo->set_use_arrows_always(1);

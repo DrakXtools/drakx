@@ -663,6 +663,7 @@ sub selectCountry {
     $o->ask_from_(
 		  { title => N("Country"), 
 		    messages => N("Please choose your country."),
+		    interactive_help_id => 'selectCountry',
 		    advanced_messages => N("Here is the full list of available countries"),
 		    advanced_label => N("More"),
 		    advanced_state => $ext_country && scalar(@best),
