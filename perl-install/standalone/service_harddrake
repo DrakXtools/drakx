@@ -165,6 +165,7 @@ foreach my $hw_class (@harddrake::data::tree) {
             if (fork()) {
                 wait();
             } else {
+                log::explanations("run \"$program\"");
                 exec("$program 2>/dev/null") or do {
                     log::explanations("cannot run \"$program\"");
                     require POSIX;
