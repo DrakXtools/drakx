@@ -28,7 +28,7 @@ if (!$mouse || !$::auto) {
     if ($::isEmbedded && $in->isa('interactive::gtk')) {
 	#- HACK: waiting for the ask_from_treelistf to attach itself
 	#- and adding the nice test mouse to it
-	Gtk->timeout_add(100, sub {
+	Gtk2->timeout_add(100, sub {
 			     defined $::Plug && defined $::Plug->child or return 1;
 			     mouse::test_mouse_standalone($mouse,$::Plug->child);
 			     0;
