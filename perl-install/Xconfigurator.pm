@@ -976,6 +976,7 @@ sub write_XF86Config {
 
     $O->{xkb_model} ||= 
       arch() =~ /sparc/ ? 'sun' :
+      $O->{xkb_keymap} eq 'jp' ? 'jp106' : 
       $O->{xkb_keymap} eq 'br' ? 'abnt2' : 'pc105';
     print F qq(    XkbModel        "$O->{xkb_model}"\n);
     print G qq(    Option "XkbModel" "$O->{xkb_model}"\n);
