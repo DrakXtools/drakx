@@ -428,7 +428,7 @@ sub selectSupplMedia {
 	local $o->{method} = $suppl_method;
 	if ($suppl_method eq 'cdrom') {
 	    (my $cdromdev) = detect_devices::cdroms();
-	    return '' if !$cdromdev;
+	    $o->ask_warn('', N("No device found")), return 'error' if !$cdromdev;
 	    $cdrom = $cdromdev->{device};
 	    devices::make($cdrom);
 	    ejectCdrom($cdrom);
