@@ -110,7 +110,9 @@ sub new($$) {
 
     $my_gtk::force_center = [ $::rootwidth - $::windowwidth, $::logoheight, $::windowwidth, $::windowheight ];
 
-    (bless {}, ref $type || $type)->SUPER::new($o);
+    $o = (bless {}, ref $type || $type)->SUPER::new($o);
+    $o->interactive_gtk::new;
+    $o;
 }
 
 sub enteringStep {
