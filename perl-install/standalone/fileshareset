@@ -84,10 +84,10 @@ if ($modify) {
 
     if ($cmd eq '--add') {
 	my @errs = map { eval { $_->add($dir) }; $@ } @exports;
-	any { !$_ } @errs or error("already exported");
+	grep { !$_ } @errs or error("already exported");
     } else {
 	my @errs = map { eval { $_->remove($dir) }; $@ } @exports;
-	any { !$_ } @errs or error("not exported");
+	grep { !$_ } @errs or error("not exported");
     }    
     foreach my $export (@exports) {
 	$export->write;
@@ -338,7 +338,7 @@ sub name_mangle {
     # 4. if size is too big, shorten it
     while (length > 12) {
 	my ($s) = m|.*?/(.*)|;
-	if (length($s) > 8 && !any { /\Q$s/ } @others) {
+	if (length($s) > 8 && !grep { /\Q$s/ } @others) {
 	    # dropping leading directories when the resulting is still long and meaningful
 	    $_ = $s;
 	    next;
