@@ -532,6 +532,54 @@ sub advanced_what_user {
     $up_box->show_all();
 }
 
+sub advanced_what_user_wizard {
+    my $box_what_user;
+    my %check_what_user;
+    
+    gtkpack($advanced_box,
+	    $box_what_user = gtkpack_(new Gtk::VBox(0, 15),
+				      0, _("Please check all user that you want to include inb your backup."),
+				      0, new Gtk::HSeparator,
+				      1, createScrolledWindow( 
+						gtkpack(new Gtk::VBox(0,0),
+							map { my $name = $_;
+							      my @user_list_tmp;
+							      my $b = new Gtk::CheckButton($name); 
+							      if (grep /^$name$/, @user_list) {
+								  $check_what_user{$_}[1] = 1;
+								  gtkset_active($b, 1);
+							      } else {
+								  $check_what_user{$_}[1] = 0;
+								  gtkset_active($b, 0);
+							      }
+							      $b->signal_connect(toggled => sub { 
+								  if ($check_what_user{$name}[1] ) {
+								      $check_what_user{$name}[1] = 0;
+								      @user_list_tmp = grep(!/^$name$/, @user_list);
+								      @user_list = @user_list_tmp;
+								  } else { 
+								      $check_what_user{$name}[1] = 1;
+								      if (!member($name, @user_list) ) {push @user_list, $name;}
+								  }
+							      });
+							      $b } (@all_user_list) 
+							),
+							       ),
+				      0, new Gtk::HSeparator,
+				      0, my $check_what_browser = new Gtk::CheckButton( _(" do not include the browser cache") ),
+				      0, gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub {
+					  ${$central_widget}->destroy();
+					  wizard();
+					  }),
+				 ),
+	    );
+    $current_widget = \&advanced_what_user_wizard;
+    $previous_widget =\&wizard;
+    $central_widget = \$box_what_user;
+    $up_box->show_all();
+}
+
+
 sub advanced_what_other {
     my $box_what_other;
     $list_other = new Gtk::List();
@@ -950,6 +998,75 @@ sub advanced_box{
     $up_box->show_all();
 }
 
+
+sub wizard_step2 {
+    my $box2;    
+    read_conf_file();
+    
+    gtkpack($advanced_box,
+	    $box2 =  gtkpack_(new Gtk::HBox(0, 15),	
+			      1, new Gtk::VBox(0, 5),	
+			      1, gtkpack_(new Gtk::VBox(0, 15),	
+					  1, new Gtk::VBox(0, 5),
+					  0, _("Please choose where you want to backup"),
+					  0, my $check_restore_sys = new Gtk::CheckButton(_("on Hard Drive")),
+					  0, my $check_restore_user = new Gtk::CheckButton(_("across Network")),
+					  0, my $check_restore_other = new Gtk::CheckButton(_("on CDROM")),
+					  1, new Gtk::VBox(0, 5),	
+					  ),
+			      1, new Gtk::VBox(0, 5),	
+			      ),
+	    );
+    wizard_button_box();
+    $custom_help = "";
+    $central_widget = \$box2;
+    $next_widget = \&wizard_step3;
+    $current_widget = \&wizard_step2;
+    $previous_widget =\&wizard;
+    $up_box->show_all();
+}
+
+
+sub wizard_step2 {
+    my $box2;    
+    read_conf_file();
+    
+    gtkpack($advanced_box,
+	    $box2 =  gtkpack_(new Gtk::HBox(0, 15),	
+			      1, new Gtk::VBox(0, 5),	
+			      1, gtkpack_(new Gtk::VBox(0, 15),	
+					  1, new Gtk::VBox(0, 5),
+					  0, _("Please choose where you want to backup"),
+					  0, gtkpack_(new Gtk::HBox(0, 15),	      
+						      0, my $check_restore_sys = new Gtk::CheckButton(_("on Hard Drive")),
+						      1, new Gtk::VBox(0, 5),
+						      0, gtksignal_connect(new Gtk::Button(_("Configure it")), clicked => sub {filedialog()  }),
+						      ),
+					  0, gtkpack_(new Gtk::HBox(0, 15),	      
+						      0, my $check_restore_user = new Gtk::CheckButton(_("across Network")),
+						      1, new Gtk::VBox(0, 5),
+						      0, gtksignal_connect(new Gtk::Button(_("Configure it")), clicked => sub {filedialog()  }),
+						      ),
+					  0, gtkpack_(new Gtk::HBox(0, 15),	      
+						      0, my $check_restore_other = new Gtk::CheckButton(_("on CDROM")),
+						      1, new Gtk::VBox(0, 5),	
+						      0, gtksignal_connect(new Gtk::Button(_("Configure it")), clicked => sub {filedialog()  }),
+						      ),
+						      1, new Gtk::VBox(0, 5),
+						      ),
+			      1, new Gtk::VBox(0, 5),	
+			      ),
+	    );
+    wizard_button_box();
+    $custom_help = "";
+    $central_widget = \$box2;
+    $next_widget = \&wizard_step3;
+    $current_widget = \&wizard_step2;
+    $previous_widget =\&wizard;
+    $up_box->show_all();
+}
+
+
 sub wizard   {
     my $box2;    
     read_conf_file();
@@ -958,18 +1075,28 @@ sub wizard   {
 	    $box2 =  gtkpack_(new Gtk::HBox(0, 15),	
 			      1, new Gtk::VBox(0, 5),	
 			      1, gtkpack_(new Gtk::VBox(0, 15),	
-					  1, new Gtk::VBox(0, 5),	
-					  1, gtksignal_connect(my $button_options = new Gtk::Button(), clicked => sub {
-					      $box2->destroy(); }),
+					  1, new Gtk::VBox(0, 5),
+					  0, _("Please choose that you want to backup"),
+					  0, my $check_restore_sys = new Gtk::CheckButton(_("Restore system")),
+					  0, my $check_restore_user = new Gtk::CheckButton(_("Restore Users")),
+					  0, gtkpack_(new Gtk::HBox(0, 15),
+						      1, new Gtk::VBox(0, 5),	
+						      0, gtksignal_connect(new Gtk::Button(_("Select user manually")), clicked => sub {
+							  ${$central_widget}->destroy();
+							  advanced_what_user_wizard();
+							  }),
+						      ),
 					  1, new Gtk::VBox(0, 5),	
 					  ),
 			      1, new Gtk::VBox(0, 5),	
 			      ),
 	    );
+    wizard_button_box();
     $custom_help = "";
     $central_widget = \$box2;
+    $next_widget = \&wizard_step2;
     $current_widget = \&advanced_box;
-    $previous_widget =\&interactive_mode;
+    $previous_widget =\&interactive_mode_box;
     $up_box->show_all();
 }
 
@@ -1302,6 +1429,27 @@ sub restore_button_box {
 				       ),
 	    );
 }
+
+sub wizard_button_box {
+
+    $button_box_tmp->destroy();
+    gtkpack($button_box,
+	    $button_box_tmp = gtkpack_(new Gtk::HButtonBox,
+				       1, gtksignal_connect(new Gtk::Button(_(" Cancel ")), clicked => sub { 
+					   ${$central_widget}->destroy(); interactive_mode_box();  }),
+				       1, gtksignal_connect(new Gtk::Button(_("     Help      ")), clicked => sub {
+					   ${$central_widget}->destroy(); adv_help(\&$current_widget,$custom_help); }),
+				       1, new Gtk::HBox(0, 0),
+				       0, gtksignal_connect(new Gtk::Button(_(" Previous ")), clicked => sub { 
+					   ${$central_widget}->destroy(); $previous_widget->(); }),
+				       1, gtksignal_connect(new Gtk::Button(_("     Next      ")), clicked => sub {
+					   ${$central_widget}->destroy(); $next_widget->();
+				       }),
+				       ),
+	    );
+}
+
+
 
 sub main_button_box {
 
