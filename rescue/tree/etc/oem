@@ -43,6 +43,7 @@ eval {
     close F;
 };
 #- examine DAC960 device.
+#- there is a problem as there is no more than 7 partitions available, this means no /home and no /var.
 unless ($hd) {
     local $_;
     open F, "dmesg |";
@@ -283,14 +284,14 @@ if ($minor == 5) {
 printf F "mkpart logical ext2 %s %s\n", correct_start_end(\$point, $point+$inst_size);
 printf F "mkpart logical linux-swap %s %s\n", correct_start_end(\$point, $point+$swap_size);
 printf F "mkpart logical ext2 %s %s\n", correct_start_end(\$point, $point+$root_size);
-if (exists $options{server}) {
+if (exists $options{server} && $hd !~ /^rd\//) {
     my $var_size = ($hd_size - $point) / 2;
     if ($var_size > 1500) {
 	$var = $root+1;
 	printf F "mkpart logical ext2 %s %s\n", correct_start_end(\$point, $point+$var_size);
     }
 }
-if ($hd_size - $point > 100) {
+if ($hd_size - $point > 100 && $hd !~ /^rd\//) {
     $home = ($var || $root) + 1;
     printf F "mkpart logical ext2 %s %s\n", correct_start_end(\$point, $hd_size);
 }
