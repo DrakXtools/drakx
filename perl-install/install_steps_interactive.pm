@@ -466,9 +466,6 @@ sub choosePackages {
 	my $max = round_up(min($max_size, $availableC) / sqr(1024), 100);
 	
 	if (1) {
-	    if ($o->{isUpgrade}) {
-		min($def_size, $max);
-	    } else {
 		my (@l);
 		my @text = (__("Minimum (%dMB)"), __("Recommended (%dMB)"), __("Complete (%dMB)"));
 		if ($o->{meta_class} eq 'desktop') {
@@ -486,7 +483,6 @@ sub choosePackages {
 #		$o->ask_from_listf('', _("Select the size you want to install"),
 #				   sub { _ ($text[$_[0]], $_[0]) }, \@l, $l[1]) * sqr(1024);
 		$max * sqr(1024);
-	    }
 	} else {
 	    $o->chooseSizeToInstall($packages, $min_size, $def_size, $max_size, $availableC, $individual) || goto &choosePackages;
 	}
