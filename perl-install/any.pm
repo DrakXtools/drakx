@@ -815,7 +815,7 @@ sub set_login_serial_console {
 }
 
 sub report_bug {
-    my ($prefix, @other) = @_;
+    my (@other) = @_;
 
     sub header { "
 ********************************************************************************
@@ -832,23 +832,23 @@ sub report_bug {
       header("/sys/bus/scsi/devices"), `ls -l /sys/bus/scsi/devices`,
       header("lsmod"), cat_("/proc/modules"),
       header("cmdline"), cat_("/proc/cmdline"),
-      header("pcmcia: stab"), cat_("$prefix/var/lib/pcmcia/stab") || cat_("$prefix/var/run/stab"),
+      header("pcmcia: stab"), cat_("$::prefix/var/lib/pcmcia/stab") || cat_("$::prefix/var/run/stab"),
       header("usb"), cat_("/proc/bus/usb/devices"),
       header("partitions"), cat_("/proc/partitions"),
       header("cpuinfo"), cat_("/proc/cpuinfo"),
-      header("syslog"), cat_("/tmp/syslog") || cat_("$prefix/var/log/syslog"),
+      header("syslog"), cat_("/tmp/syslog") || cat_("$::prefix/var/log/syslog"),
       header("ddcxinfos"), ddcxinfos(),
-      header("stage1.log"), cat_("/tmp/stage1.log") || cat_("$prefix/root/drakx/stage1.log"),
-      header("ddebug.log"), cat_("/tmp/ddebug.log") || cat_("$prefix/root/drakx/ddebug.log"),
-      header("install.log"), cat_("$prefix/root/drakx/install.log"),
-      header("fstab"), cat_("$prefix/etc/fstab"),
-      header("modules.conf"), cat_("$prefix/etc/modules.conf"),
-      header("lilo.conf"), cat_("$prefix/etc/lilo.conf"),
-      header("menu.lst"), cat_("$prefix/boot/grub/menu.lst"),
-      header("XF86Config"), cat_("$prefix/etc/X11/XF86Config"),
-      header("XF86Config-4"), cat_("$prefix/etc/X11/XF86Config-4"),
-      header("/etc/modules"), cat_("$prefix/etc/modules"),
-      header("sysconfig/i18n"), cat_("$prefix/etc/sysconfig/i18n"),
+      header("stage1.log"), cat_("/tmp/stage1.log") || cat_("$::prefix/root/drakx/stage1.log"),
+      header("ddebug.log"), cat_("/tmp/ddebug.log") || cat_("$::prefix/root/drakx/ddebug.log"),
+      header("install.log"), cat_("$::prefix/root/drakx/install.log"),
+      header("fstab"), cat_("$::prefix/etc/fstab"),
+      header("modules.conf"), cat_("$::prefix/etc/modules.conf"),
+      header("lilo.conf"), cat_("$::prefix/etc/lilo.conf"),
+      header("menu.lst"), cat_("$::prefix/boot/grub/menu.lst"),
+      header("XF86Config"), cat_("$::prefix/etc/X11/XF86Config"),
+      header("XF86Config-4"), cat_("$::prefix/etc/X11/XF86Config-4"),
+      header("/etc/modules"), cat_("$::prefix/etc/modules"),
+      header("sysconfig/i18n"), cat_("$::prefix/etc/sysconfig/i18n"),
       map_index { even($::i) ? header($_) : $_ } @other;
 }
 

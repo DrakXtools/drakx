@@ -930,7 +930,7 @@ sub exitInstall {
     eval { 
 	my $report = '/root/drakx/report.bug';
 	unlink "$::prefix$report", "$::prefix$report.gz";
-	output "$::prefix$report", install_any::report_bug($o->{prefix});
+	output "$::prefix$report", install_any::report_bug();
 	run_program::rooted($::prefix, 'gzip', $report);
     };
     install_any::getAndSaveAutoInstallFloppies($o, 1) if arch() !~ /^ppc/;

@@ -481,7 +481,7 @@ sub bug {
     mount devices::make(detect_devices::floppy()), "/fd0";
 
     require install_any;
-    output("/fd0/report.bug", install_any::report_bug("/mnt")); #- no other way :-(
+    output("/fd0/report.bug", install_any::report_bug());
     umount "/fd0";
     common::sync();
 }
