@@ -1,3 +1,277 @@
+2002/08/26  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/ethernet.pm: 
+	  - fix previous button behavior in Proxies configuration
+
+2002/08/26  François Pons  <fpons@mandrakesoft.com>
+
+	* detect_devices.pm: avoid using serial_probe on non terminal device
+	(ttyxx or ttySxx).
+
+2002/08/26  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/rpmsrate: autoselection of tamil fonts when tamil locale is chosen
+
+	* lang.pm: Now console fonts (at least those used by DrakX) include an sfm
+	map;
+	no need to provide one.
+	small fix (ta->ta_IN)
+
+	* share/po/zh_CN.po: updated Chinese file
+
+2002/08/26  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: fix deleting previous report.bug when upgrading
+	revert (not needed by gnome-panel)
+	move modules::write_pcmcia before install packages
+
+	* Xconfig/monitor.pm: fix 2 occurences of use of $monitors as a hash
+	(thanks to Nora Etukudo)
+
+	* bootloader.pm: correctly handle empty and commented lines in lilo.conf
+
+	* mouse.pm: create /dev/usbmouse symlink for non devfs use
+
+	* network/shorewall.pm: ensure net_interface is found in any case
+
+	* fsedit.pm: increase maxsize for / (partitioning with /usr) since it
+	contains /tmp and /opt (as requested by Arnaud de Lorbeau)
+
+	* detect_devices.pm: dev_is_devfs always return false during install
+
+	* fs.pm (prepare_write_fstab): use mkdir_p instead of mkdir to handle
+	mount points like /mnt/foo/bar (bug reported by David Eastcott)
+
+2002/08/26  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer.pm: Dialog for printing test pages: Unmark all test pages when
+	"No test
+	pages" is marked.
+	Accelerated printing of the photo test page when CUPS is the spooler,
+	the internal image converter of CUPS is faster than ImageMagick.
+
+	* printerdrake.pm: Dialog for printing test pages: Unmark all test pages
+	when "No test
+	pages" is marked.
+	Accelerated printing of the photo test page when CUPS is the spooler,
+	the internal image converter of CUPS is faster than ImageMagick.
+	Hide buttons to choose network printer auto-detection in the add printer
+	wizard when there is no local network (recommended mode).
+	Let "samba-client" only be installed when really needed.
+
+2002/08/26  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* ugtk.pm: 
+	  - lots of cleanups
+	  - documente gtkcreate_png()
+	  - fix Gdk::DrawingArea usage in gtkpng_pixbuf()
+	  - common bring MDK::Common::Math for us
+	  - globalize state (aka highlith icon or not)
+	code is much more understandable now
+	instead of creating a global callback for repainting exposing widgets,
+	all Gdk::DrawingArea'll come from gtkpng_pixbuf() whose code is 80 %
+	the redrawing callback
+
+2002/08/25  gbeauchesne
+
+	* share/rpmsrate: 
+	  - Suggest "OpenOffice.org" instead of "openoffice"
+	  - First attempt to get localized installations of OOo
+
+2002/08/25  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/es.po, share/po/da.po: updated Danish and Spanish files
+
+2002/08/25  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/drakautoinst: fixe explanation use
+
+2002/08/24  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/sv.po: updated Swedish file
+
+	* lang.pm: ichanged kde default fonts to match what we ship
+
+2002/08/24  Till Kamppeter  <till@mandrakesoft.com>
+
+	* detect_devices.pm, printer.pm, printerdrake.pm: Let command line tools
+	for network scanning run under "chroot $refix", otherwise they take ages
+	during installation.
+	Moved network scanning functions from "detect_devices.pm" to
+	"printer.pm" so that they have access to the "$prefix" variable.
+
+2002/08/23  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/zh_TW.po, share/po/hu.po: updated Hungarian and Chinese files
+
+2002/08/23  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/xfree4.pm: fix "screen1 RightOf screen2", it must be "screen2
+	RightOf screen1"
+
+	* network/netconnect.pm (read_raw_net_conf): new function to access
+	/etc/sysconfig/drakconnect and /etc/sysconfig/drakconnect.$type ensuring
+	migration from /etc/sysconfig/draknet and /etc/sysconfig/draknet.$type
+
+	* network/shorewall.pm: remove debug code
+
+	* Xconfig/card.pm: 
+	  - fix setting "Screen <number>" for multi-head cards
+	  - don't propose XFree3 when using multi-head
+
+	* standalone.pm: add modules network::tinyfirewall and network::shorewall
+
+	* interactive.pm: when standalone, use the name of the program for the
+	window title
+
+	* Xconfig/xfreeX.pm (set_resolution): set the resolution on all Screen
+	sections (otherwise Xinerama fails (?))
+
+2002/08/23  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakbackup: combine file browser subs into generic routine
+	catalog restore - check restore media params - verify media
+	reworked failure to find restore path treatment
+	  - now user gets option to reselect dir, install
+	   media, or use the catalog browser for
+	   unmountable media
+	 - fix eject media typo
+	 - create/read tape label for catalog
+	 - more GUI crash fixes
+	 - catalog browser - can select session or
+	   individual files for restore - needs backend
+	 - merge with other CVS changes, some language fixes
+
+2002/08/23  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* ugtk.pm: 19mdk
+	  - ugtk:
+	o switch from imlib to gdk-pixbuf
+		o kill gtkcreate_imlib()
+		o big cleanup by the way
+		o support alpha blender [not complete]
+		o fix mem leak
+		o remove dynamic support of imlib||gdk-pixbuf since:
+		  * gtk2 require gdk-pixbuf anyway
+		  * imlib sucks
+		  * less code/libs in install
+	    o kill unused cursors
+	    o kill icon flashing
+	    o gtkcreate_png_pixbuf() : load a png into a pixbuf
+	    o gtkpng_pixbuf() : render a pixbuf into a drawable
+	    o simplify gtkcreate_png(): render a pixbuf into a pixmap and an
+	      alpha bitmap
+	    o add2notebook() : simplify
+	fix 95% of mcc memory leaks
+	  - ugtk:
+	     o switch from imlib to gdk-pixbuf
+		o kill gtkcreate_imlib()
+		o big cleanup by the way
+		o support alpha blender
+		o fix mem leak
+		o remove dynamic support of imlib||gdk-pixbuf since:
+		  * gtk2 require gdk-pixbuf anyway
+	    o kill unused cursors
+	    o kill icon flashing
+	    o gtkcreate_png_pixbuf() : load a png into a pixbuf
+	    o gtkpng_pixbuf() : render a pixbuf into a drawable
+	    o simplify gtkcreate_png(): render a pixbuf into a pixmap and an
+	      alpha bitmap
+	    o add2notebook() : simplify
+	  - harddrake:
+	    o bump version number
+
+	* standalone/draksound: use right sound-slot
+
+	* share/po/fr.po: s/p,bi(Bph,bi(Briques/p,bi(Briph,bi(Briques/
+
+	* network/netconnect.pm, standalone/drakgw: florin fixes for multiple NIC
+	boxes
+
+	* harddrake/sound.pm: 20mdk:
+	  - florin fixes for firewalling
+	  - check that alternative is unknown, not the current driver, before
+	saying that there's no alternative.
+	  anyway, our only caller cannot get there's with a current unknown
+	  driver since he only try listed/know drivers ....
+	19mdk
+	use right sound-slot
+	check that alternative is unknown, not the current driver, before
+	saying that there's no alternative.
+	anyway, our only caller cannot get there's with a current unknown
+	driver since he only try listed/know drivers ....
+
+	* drakxtools.spec: 20mdk:
+	  - florin fixes for firewalling
+	  - check that alternative is unknown, not the current driver, before
+	saying that there's no alternative.
+	  anyway, our only caller cannot get there's with a current unknown
+	  driver since he only try listed/know drivers ....
+	19mdk
+	  - ugtk:
+	     o switch from imlib to gdk-pixbuf
+		o kill gtkcreate_imlib()
+		o big cleanup by the way
+		o support alpha blender [not complete]
+		o fix mem leak
+		o remove dynamic support of imlib||gdk-pixbuf since:
+		  * gtk2 require gdk-pixbuf anyway
+		  * imlib sucks
+		  * less code/libs in install
+	    o kill unused cursors
+	    o kill icon flashing
+	    o gtkcreate_png_pixbuf() : load a png into a pixbuf
+	    o gtkpng_pixbuf() : render a pixbuf into a drawable
+	    o simplify gtkcreate_png(): render a pixbuf into a pixmap and an
+	      alpha bitmap
+	    o add2notebook() : simplify
+	18mdk
+	  - ugtk:
+	     o switch from imlib to gdk-pixbuf
+		o kill gtkcreate_imlib()
+		o big cleanup by the way
+		o support alpha blender
+		o fix mem leak
+		o remove dynamic support of imlib||gdk-pixbuf since:
+		  * gtk2 require gdk-pixbuf anyway
+	    o kill unused cursors
+	    o kill icon flashing
+	    o gtkcreate_png_pixbuf() : load a png into a pixbuf
+	    o gtkpng_pixbuf() : render a pixbuf into a drawable
+	    o simplify gtkcreate_png(): render a pixbuf into a pixmap and an
+	      alpha bitmap
+	    o add2notebook() : simplify
+	  - harddrake:
+	    o bump version number
+
+2002/08/23  Warly  <warly@mandrakesoft.com>
+
+	* share/logo-mandrake.png: beta 4 logo
+
+2002/08/22  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/ca.po, share/po/hu.po: updated Hungarian file
+
+2002/08/22  Pixel  <pixel@mandrakesoft.com>
+
+	* network/shorewall.pm: make perl_checker happy
+	use $::prefix to access shorewall config files
+	  - add network::shorewall
+	  - add tinyfirewall during install
+
+	* standalone/tinyfirewall: complete rewrite
+
+	* network/netconnect.pm, tinyfirewall.pm, network/tinyfirewall.pm: 
+	  - add network::shorewall
+	  - add tinyfirewall during install
+
+	* pixmaps/monitor-1152.png, pixmaps/monitor-1920.png,
+	pixmaps/monitor-1400.png, pixmaps/monitor-2048.png,
+	pixmaps/monitor-1600.png: re-adding with -kb
+	removing for re-adding with -kb
+
+	* standalone/drakgw: use shorewall (need testing)
+
 2002/08/21  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* tools/cvslog2changelog.pl: uniformize real names
@@ -277,7 +551,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.725 2002/08/21 11:17:30 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.726 2002/08/22 22:56:12 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
