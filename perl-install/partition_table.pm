@@ -525,8 +525,12 @@ sub write {
     $hd->{isDirty} or return;
 
     #- set first primary partition active if no primary partitions are marked as active.
-    for ($hd->{primary}{raw}) {
-	(grep { $_->{local_start} = $_->{start}; $_->{active} ||= 0 } @$_) or $_->[0]{active} = 0x80;
+    if (my @l = @{$hd->{primary}{raw}}) {
+	foreach (@l) { 
+	    $_->{local_start} = $_->{start}; 
+	    $_->{active} ||= 0;
+	}
+	$l[0]{active} = 0x80 if !grep { $_->{active} } @l;
     }
 
     #- last chance for verification, this make sure if an error is detected,
