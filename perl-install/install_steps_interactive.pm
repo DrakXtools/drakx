@@ -1125,7 +1125,7 @@ sub configureX {
       local $::auto = !$::expert && !$clicked;
 
       symlink "$o->{prefix}/etc/gtk", "/etc/gtk";
-      Xconfigurator::main($o->{prefix}, $o->{X}, $o,
+      Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->do_pkgs,
 			  { allowFB          => $o->{allowFB},
 			    allowNVIDIA_rpms => install_any::allowNVIDIA_rpms($o->{packages}),
 			  });

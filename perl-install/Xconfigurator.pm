@@ -2,7 +2,7 @@ package Xconfigurator; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw($in @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions @resolutions_laptop %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text_ext $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $good_default_monitor $low_default_monitor $layoutsection_v4 $modelines_text_apple);
+use vars qw($in $do_pkgs @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions @resolutions_laptop %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text_ext $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $good_default_monitor $low_default_monitor $layoutsection_v4 $modelines_text_apple);
 
 use common;
 use log;
@@ -404,7 +404,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 	$card->{server} = 'Xpmac';
     }
     
-    -x "$prefix$card->{prog}" or $in->do_pkgs->install($card->{use_xf4} ? 'XFree86-server' : "XFree86-$card->{server}", @l);
+    -x "$prefix$card->{prog}" or $do_pkgs->install($card->{use_xf4} ? 'XFree86-server' : "XFree86-$card->{server}", @l);
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
 
     #- check for Matrox G200 PCI cards, disable AGP in such cases, causes black screen else.
@@ -1377,7 +1377,7 @@ sub show_info {
 
 #- Program entry point.
 sub main {
-    ($prefix, my $o, $in, my $cardOptions) = @_;
+    ($prefix, my $o, $in, $do_pkgs, my $cardOptions) = @_;
     $o ||= {};
 
     XF86check_link('');
