@@ -118,7 +118,6 @@ sub errorOpeningFile($) {
 sub getFile {
     my ($f, $method) = @_;
     my $rel = relGetFile($f);
-    log::l("getFile $f ($method) relGetFile $rel");
     do {
 	if ($method =~ /crypto/i) {
 	    require crypto;
@@ -141,7 +140,6 @@ sub getFile {
 }
 sub getAndSaveFile {
     my ($file, $local) = @_;
-    log::l("getAndSaveFile $file $local");
     local *F; open F, ">$local" or return;
     local $/ = \ (16 * 1024);
     my $f = ref($file) ? $file : getFile($file) or return;
