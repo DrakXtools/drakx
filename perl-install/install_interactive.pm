@@ -31,8 +31,8 @@ sub partition_with_diskdrake {
     $o->set_help('partition_with_diskdrake');
     do {
 	$ok = 1;
-	require diskdrake;
-	diskdrake::main(interactive_gtk->new, $all_hds, $nowizard);
+	require diskdrake_interactive;
+	diskdrake_interactive::main($o, $all_hds, $nowizard);
 	delete $o->{wizard} and return partitionWizard($o, 'nodiskdrake');
 	my @fstab = fsedit::get_all_fstab($all_hds);
 	
@@ -166,7 +166,7 @@ When sure, press Ok.")) or return;
 	    } ];
     }
 
-    if (!$readonly && $o->isa('interactive_gtk')) { #- diskdrake only available in gtk for now
+    if (!$readonly) {
 	$solutions{diskdrake} = [ 0, _("Custom disk partitioning"), sub { partition_with_diskdrake($o, $all_hds, 'nowizard') } ];
     }
 
