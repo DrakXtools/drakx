@@ -46,29 +46,31 @@ sub ask_from_list_with_helpW {
 	my $b;
 	$w->sync;
 	$::isWizard and my $pixmap = new Gtk::Pixmap( gtkcreate_xpm($w->{window}, $::wizard_xpm)) || die "pixmap $! not found.";
-	$::isWizard and gtkset_usize($w->{rwindow}, 500, 400);
-	my $rc = "/etc/gtk/draknet.rc";
-	-r $rc or $rc = common::dirname(__FILE__) . "/draknet.rc";
-	Gtk::Rc->parse($rc);
- 	my $style = $w->{rwindow}->style->copy();
-	$style->bg_pixmap(0);
-	$style->bg_pixmap(1);
-	$style->bg_pixmap(2);
-	$style->bg_pixmap(3);
-	$style->bg_pixmap(4);
-	$style->bg(0, $style->white());
-	$style->bg(1, $style->white());
-	$style->bg(2, $style->white());
-	$style->bg(3, $style->white());
-	$style->bg(4, $style->white());
-	$style->bg_gc(0, $style->white_gc);
-	$style->bg_gc(1, $style->white_gc);
-	$style->bg_gc(2, $style->white_gc);
-	$style->bg_gc(3, $style->white_gc);
-	$style->bg_gc(4, $style->white_gc);
-#	$style->engine = undef;
-#	$style->rc_style = undef;
-	$w->{rwindow}->set_style($style);
+	if ($::isWizard) {
+	    gtkset_usize($w->{rwindow}, 500, 400);
+	    my $rc = "/etc/gtk/draknet.rc";
+	    -r $rc or $rc = common::dirname(__FILE__) . "/draknet.rc";
+	    Gtk::Rc->parse($rc) ;
+	    my $style = $w->{rwindow}->style->copy();
+	    $style->bg_pixmap(0);
+	    $style->bg_pixmap(1);
+	    $style->bg_pixmap(2);
+	    $style->bg_pixmap(3);
+	    $style->bg_pixmap(4);
+	    $style->bg(0, $style->white());
+	    $style->bg(1, $style->white());
+	    $style->bg(2, $style->white());
+	    $style->bg(3, $style->white());
+	    $style->bg(4, $style->white());
+	    $style->bg_gc(0, $style->white_gc);
+	    $style->bg_gc(1, $style->white_gc);
+	    $style->bg_gc(2, $style->white_gc);
+	    $style->bg_gc(3, $style->white_gc);
+	    $style->bg_gc(4, $style->white_gc);
+	    #	$style->engine = undef;
+	    #	$style->rc_style = undef;
+	    $w->{rwindow}->set_style($style);
+	}
 	gtkadd($w->{window},
 	       gtkpack2_(create_box_with_title($w, @$messages),
 			 1,
