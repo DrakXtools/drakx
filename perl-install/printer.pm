@@ -281,7 +281,7 @@ sub read_printer_db(;$) {
     %thedb and return;
 
     my %available_devices; #- keep only available devices in our database.
-    local *AVAIL; open AVAIL, "$prefix/usr/bin/gs --help |";
+    local *AVAIL; open AVAIL, "chroot ". ($prefix || '/') ." /usr/bin/gs --help |";
     foreach (<AVAIL>) {
 	if (/^Available devices:/ ... /^\S/) {
 	    @available_devices{split /\s+/, $_} = () if /^\s+/;
