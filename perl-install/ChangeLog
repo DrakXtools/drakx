@@ -1,3 +1,57 @@
+2002/01/03  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakbackup: user can be equal to 500
+
+2002/01/03  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: updated code to create synthesis file (including
+	provides on files).
+
+2002/01/03  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ar.po: updated Arabic file
+
+2002/01/03  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm, Xconfig.pm: save the output of ddcxinfos before
+	modprobe'ing i810fb, and use that output for Xconfig (when i810fb is
+	modprobe'd, ddc probe doesn't work anymore)
+
+	* install_steps_interactive.pm, install_steps_gtk.pm: fix english messages
+
+	* share/rpmsrate: as asked by Vincent Danen, lower uucp and raise sudo
+
+	* pkgs.pm: prefer gcc-cpp
+
+	* interactive_gtk.pm, interactive.pm: toggle Advanced/Basic button
+
+	* any.pm: fix english messages
+	save the output of ddcxinfos before modprobe'ing i810fb, and use that
+	output for Xconfig (when i810fb is modprobe'd, ddc probe doesn't work
+	anymore)
+
+2002/01/02  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* lang.pm: changed @euro locales to plain names; now old currencies ones
+	are obsolete
+
+2001/12/31  sdupont
+
+	* standalone/drakfont: new fixed size and add a head pixmap (to update).
+
+	* standalone/drakbackup: lots of update ...
+	  - cron work.
+	 - backup incremental & normal work.
+	 - corrupted backup data files supported.
+	 - error messages updated.
+	 - aff list of backup data files pbs.
+	 - test all backup files before to restore it.
+
+2001/12/30  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm: format home directories with "-m 0" for ext2&ext3, so that the
+	root reserved part is 0% (and not 5%)
+
 2001/12/30  Pixel  <pixel@mandrakesoft.com>
 
 	* fs.pm: format home directories with "-m 0" for ext2&ext3, so that the
