@@ -1,3 +1,194 @@
+2002/07/17  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_gtk.pm: added missing use pkgs.
+
+2002/07/17  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* pkgs.pm: spell right harddrake (two 'd') in @preferred
+
+2002/07/17  Pixel  <pixel@mandrakesoft.com>
+
+	* install_gtk.pm: normalize Modeline to ModeLine
+
+	* common.pm: add function "internal_error" (a specialized "die")
+
+	* drakxtools.spec: the new XFdrake needs latest ldetect-lst
+
+	* Makefile (test_pms): exclude urpm from uses
+
+	* printer.pm, printerdrake.pm: use {XXX} instead of {'XXX'} (as detected
+	by new perl_checker)
+	remove "$_ =~ " (as detected by new perl_checker)
+
+	* any.pm: move the "if !$::testing" for not modifying inittab in function
+	runlevel()
+	(was in install_steps.pm)
+
+	* commands.pm: remove "$_ =~ " (as detected by new perl_checker)
+
+	* Xconfigurator.pm, Xconfigurator_consts.pm, install_steps.pm,
+	standalone/XFdrake, Xconfig.pm: Big Xconfigurator.pm cleanup/rework
+	  - use $X instead of $o (to avoid name conflict with DrakX's $o)
+	  - {flag}{noclockprobe} unused, dropping it
+	  - rename {memory} into "VideoRam"
+	  - rename {ramdac} into {Ramdac}
+	  - rename {chipset} into {Chipset}
+	  - rename {clockchip} into {Clockchip}
+	  - rename {keyboard}{xkb_model} into {keyboard}{XkbModel}
+	  - rename {keyboard}{xkb_keymap} into {keyboard}{XkbLayout}
+	  - drop {mouse}{chordmiddle} (obsolete)
+	  - drop {mouse}{cleardtrrts} (obsolete, was not written to XF4 config)
+	  - &testConfig is unused, removing it
+	  - as a concequence, {clocklines} is never set, dropping it
+	  - when UNSUPPORTED remove {driver}, instead of setting
+	{flag}{unsupported}
+	  - Cards+ now only provide {Chipset} for cards needing it
+	  => {flag}{needChipset} not needed anymore
+	  - moved setting needVideoRam in Cards+ (via NEEDVIDEORAM)
+	  (hoping it will work: since the regexp was broken, it was never done.
+	   (it was applied on the module field of pcitable, instead of the
+	description))
+	  - dropped modelines_text_Trident_TG_96xx case (it has never been used)
+	  - rename %xkb_options into %XkbOptions
+	  - rename {DRI_glx} into {DRI_GLX}, the value now comes from Cards+
+	  instead of regexp'ing {identifier}
+	  - rename {Utah_glx} into {UTAH_GLX}, the value now comes from Cards+
+	  instead of regexp'ing {identifier}
+	  - rename {Utah_glx_EXPERIMENTAL} into {UTAH_GLX_EXPERIMENTAL}, the
+	value now comes from Cards+
+	  instead of regexp'ing {identifier}
+	  - very_bad_card and bad_card are now the same, the value now comes
+	from
+	  Cards+ (BAD_FB_RESTORE & BAD_FB_RESTORE_XF3)
+	  - drop unused @accelservers
+	  - remove $modelines_text_apple, use $modelines_text_ext instead
+	  - don't use a <Section "Modes"> together with <UseModes "Mac Modes">,
+	put
+	  directly modelines in Section "Monitor"
+	  (why should ppc behave differently than others!?)
+	  - replace (conflicting) ModeLines "1280x1024 @ 74 Hz" and
+	  "1280x1024 @ 76 Hz" with "1280x1024 @ 75 Hz" (from ddcxinfos)
+	  - drop ModeLine "640x480 @ 72 Hz"
+	  (it conflicts, and anyway, it has no real use nowadays :)
+	  - drop comments about HorizSync, VertRefresh and ModeLine's from
+	  XF86Config
+	  - drop many unneeded stuff from XF86Config:
+	  AutoRepeat, Xqueue, Xleds, NoTrapSignals, XkbTypes, XkbKeycodes,
+	  XkbCompat, XkbRules, LeftAlt/RightAlt/ScrollLock/RightCtl
+	  - drop section comments from XF86Config
+	  - drop XF86_Mono configuration
+	  (it doesn't work anyway, seems like it needs a special ModeLine?)
+	  - drop 320x200 with XF86_SVGA (who can use this!?)
+	  - do not write Screen section "accel" if the server configured is not
+	an
+	  accel one
+	  - drop the "Generic VGA" Device section for XF4
+	  (this device is unused)
+	  - drop {monitor}{vendor}, {monitor}{model}, {card}{vendor},
+	{card}{model},
+	  {card}{board} (only description strings, not useful for running the
+	server)
+	  - use x_res instead of wres for things like 1024 in 1024x768
+
+2002/07/16  alus
+
+	* share/po/pl.po: unused string removed
+
+2002/07/16  cbelisle
+
+	* standalone/draksec: re-write the part setting the security admin
+
+	* security.pm: draksec - initial commit. preparing for the advanced
+	section.
+
+	* any.pm: draksec:
+	  - rewrite the function to set the security admin
+	  - remove ugly buttons, 'advanced' button will come later
+
+2002/07/16  dchaumette
+
+	* standalone/drakbug, standalone/interactive_http/authorised_progs,
+	standalone/drakxconf: o finish moving draknet to drakconnect in
+	standalone
+
+2002/07/16  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: update with newer perl-URPM.
+	added log (finding packages to upgrade or computing installed flag)
+
+	* install_steps.pm: removed useless package selection cleaning.
+
+	* install_steps_gtk.pm: code cleanup.
+
+	* install_steps_interactive.pm: improve a little.
+	fixed missing upgrade.
+	added wait message when finding packages to upgrade.
+
+	* install2.pm: fixed reference to step 'selectPackagesToUpgrade'.
+
+	* install_any.pm: fixed die when choosePackages step is redone.
+
+	* crypto.pm: allow upgrade (if any) by using version at 8.2.
+
+2002/07/16  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* any.pm: small english fix thx to vdanen
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/sp.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/bs.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/fr.po,
+	share/po/nl.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/lv.po, share/po/el.po,
+	share/po/cs.po, share/po/bg.po, share/po/hu.po: reflect typo fix in
+	any.pm in the po's so that the translation are not broken
+
+	* mdk-stage1/stage1.c: extend a bit fatal error when trying to execute
+	/usr/bin/runinstall2 and it's not possible
+
+2002/07/16  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/drakTermServ: fix "$" in translated string
+
+	* Makefile: don't display etags command (too long, not nice)
+
+2002/07/15  daouda
+
+	* standalone/drakbug: 
+	  - isStandalone is set in standalone.pm, removed
+
+	* standalone/draksec: 
+	  - isStandalone is set in standalone.pm, removed.
+	  - set isStandalone to 1 to center wait messages
+
+2002/07/15  François Pons  <fpons@mandrakesoft.com>
+
+	* install2.pm: synced.
+
+	* install_any.pm: synced with other module updated.
+
+	* c/stuff.xs.pm: cleaned no more used method.
+
+	* pkgs.pm: made upgrade almost work again (need testing and
+	remove/deselect still doesn't
+	work properly).
+
+	* install_steps.pm: code re-organisation (a little).
+
+	* install_steps_gtk.pm: fixed flag usage (still check selected package to
+	upgrade but already selected
+	are correctly shown).
+
+2002/07/15  Pixel  <pixel@mandrakesoft.com>
+
+	* ChangeLog: revert titi's error
+
 2002/07/11  Pixel  <pixel@mandrakesoft.com>
 
 	* rescue/list.i386: switch to vendor_perl
