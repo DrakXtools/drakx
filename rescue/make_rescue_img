@@ -28,8 +28,8 @@ sub install_ {
     commands::mkdir_("-p", "$tmp$d") unless -d "$tmp$d";
     _ "$sudo cp $_[1] $_[0] $tmp$d";
 }
-sub install { install_($_[0], "-a") }
 sub install_lib { install_($_[0], "") }
+sub install { grep {/lib\w+.so/} @_ and install_lib(@_) or install_($_[0], "-a") }
 
 sub installown($$) {
     my ($own, $dir) = @_;
