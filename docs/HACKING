@@ -23,10 +23,8 @@ done
 Then, log yourself into the cvs:
 % export CVS_RSH=ssh
 % export CVSROOT=:ext:anoncvs@cvs.mandrakesoft.com:/cooker
-% cvs login
-% Passwd: cvs
 % cvs checkout gi
-
+	(passwd: 'cvs')
 And update the gi package:
 cvs update -P
 
