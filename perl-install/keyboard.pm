@@ -89,6 +89,9 @@ my %lang2keyboard =
   'tr' => 'tr_q',
   'uk' => 'ua',
 'uk_UA' => 'ua',
+  'vi' => 'vn',
+'vi_VN.tcvn' => 'vn',
+'vi_VN.viscii' => 'vn',
   'wa' => 'be',
 );
 
@@ -169,6 +172,7 @@ arch() eq "ppc" ? (
  "uk" => [ __("UK keyboard"),    "uk",           "gb" ],
  "us" => [ __("US keyboard"),    "us",           "us" ],
  "us_intl" => [ __("US keyboard (international)"), "us-latin1", "us_intl" ],
+ "vn" => [ __("Vietnamese \"numeric row\" QWERTY"),"vn", "vn" ], 
  "yu" => [ __("Yugoslavian (latin layout)"), "sr", "yu" ],
 )),
 );
