@@ -29,6 +29,16 @@
 #		  --build_cd_autoinst 	
 #		  --backup_now --backup_default_now
 #	restore user: pbs with list selection	  
+#  
+#  CD: only create iso image
+#
+#  WARNING: ne pas ecraser les fichiers /etc/passwd fstab 
+#           after a other install
+#
+#  REQUIRE: cron if daemon
+#           cvs if version control of /etc directory
+#           cdrecord & mkisofs
+#           
 
 use Gtk;
 use lib qw(/usr/lib/libDrakX );
@@ -39,7 +49,9 @@ use common;
 use strict;
 
 my $in = 'interactive'->vnew('', 'default');
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 !$::isEmbedded && $in->isa('interactive_gtk') and $::isWizard=1;
+
 
 
 if ("@ARGV" =~ /--help|-h/) {
@@ -84,7 +96,6 @@ my $DEBUG = 0;
 my $restore_sys = 1; 
 my $restore_user = 1; 
 my $restore_other = 1; 
-
 my @user_backuped = ();
 my $sys_backuped = 0;
 my $other_backuped = 0;
@@ -101,7 +112,7 @@ my $option_replace = 1;
 my $comp_mode = 0;
 my $backup_sys = 1;
 my $backup_user = 1;
-my $backup_daemon = 0;
+my $backup_daemon = 1;
 my $backup_sys_cvs = 1;
 my $what_no_browser = 1;
 my $remember_pass = 0;
@@ -118,7 +129,7 @@ my $where_net= 0;
 my $where_hd = 1;
 my $where_cd =0;
 my $cd_time = 650;
-my $when_space = 'year';
+my $when_space;
 my $cd_with_install_boot = 0;
 my $cd_devive = '';
 my $host_name = '';
@@ -168,6 +179,7 @@ sub save_conf_file {
 		     "CDRW_DEVICE=$cd_devive\n",
 		     "HOST_NAME=$host_name\n"
 		     );
+
     $cd_with_install_boot and push @cfg_list, "CD_WITH_INSTALL_BOOT\n" ;
     $remember_pass and push @cfg_list, "LOGIN=$login_user\n" ;
     $remember_pass and push @cfg_list, "PASSWD=$passwd_user\n" ;
@@ -187,6 +199,38 @@ sub save_conf_file {
     if ($comp_mode) {	push @cfg_list, "OPTION_COMP=TAR.BZ2\n"; } 
     else { push @cfg_list, "OPTION_COMP=TAR.GZ\n"; }
     output_p( $cfg_file, @cfg_list);
+    save_cron_files();
+}
+
+
+sub read_cron_files {
+    if (-f '/etc/cron.hourly/drakbackup') { $when_space = 'hourly'; }
+    elsif (-f '/etc/cron.daily/drakbackup') { $when_space = 'daily'; }
+    elsif (-f '/etc/cron.weekly/drakbackup') { $when_space = 'weekly';}
+    elsif (-f '/etc/cron.monthly/drakbackup') { $when_space = 'monthly';}
+    else {$backup_daemon = 0; }
+}
+
+sub save_cron_files {
+    my @cron_file = ("#!/bin/sh\n", "\n", "/seb/cvs/gi/perl-install/standalone --default" );
+
+    if ($backup_daemon) {
+	foreach ('hourly', 'daily', 'weekly', 'monthly'){
+	    -f "/etc/cron.$_/drakbackup" and rm_rf("/etc/cron.$_/drakbackup");
+	}
+	if ( $when_space eq _("hourly"))     { output_p('/etc/cron.hourly/drakbackup',  @cron_file )}
+	elsif ( $when_space eq _("daily"))   { output_p('/etc/cron.daily/drakbackup',   @cron_file )}
+	elsif ( $when_space eq _("weekly"))  { output_p('/etc/cron.weekly/drakbackup',  @cron_file )}
+	elsif ( $when_space eq _("monthly")) { output_p('/etc/cron.monthly/drakbackup', @cron_file )}
+    } else {
+	foreach ('hourly', 'daily', 'weekly', 'monthly'){
+	    -f "/etc/cron.$_/drakbackup" and rm_rf("/etc/cron.$_/drakbackup");
+	}
+    }
+#	-f '/etc/cron.daily/drakbackup' and rm_rf( "/etc/cron.daily/drakbackup");
+#	-f '/etc/cron.weekly/drakbackup' and rm_rf( "/etc/cron.weekly/drakbackup");
+#	-f '/etc/cron.monthly/drakbackup' and rm_rf( "/etc/cron.monthly/drakbackup");
+
 }
 
 sub read_conf_file {
@@ -221,11 +265,12 @@ sub read_conf_file {
 	    if (/^USE_CD/)         { $where_cd = 1;  }
 	    if (/^USE_NET/)        { $where_net = 1; }
 	    if (/^CD_TIME/)        { s/^CD_TIME=//gi; $cd_time = $_; }
-	    if (/^DAEMON_TIME_SPACE/)    { s/^DAEMON_TIME_SPACE=//gi; $when_space = $_; }
+#	    if (/^DAEMON_TIME_SPACE/)    { s/^DAEMON_TIME_SPACE=//gi; $when_space = $_; }
 	    if (/^CD_WITH_INSTALL_BOOT/) { $cd_with_install_boot = 1; }
 	    if (/^CDRW_DEVICE/)    { s/^CDRW_DEVICE=//gi; $cd_devive = $_;}
 	    if (/^HOST_NAME/)      { s/^HOST_NAME=//gi; $host_name = $_;} 
 	}
+	read_cron_files();
 	$cfg_file_exist = 1;
     } 
     else { $cfg_file_exist = 0; }
@@ -718,9 +763,9 @@ sub advanced {
 			     );
 
     my $combo_when_space = new Gtk::Combo();
-    $combo_when_space->set_popdown_strings (_("daily"),_("week"),_("month"),_("year"),);    
+    $combo_when_space->set_popdown_strings (_("hourly"),_("daily"),_("weekly"),_("monthly"));    
     my $box_when =  gtkpack_(new Gtk::VBox(0,1),
-				 0, gtkpack_(new Gtk::HBox(0,10),
+			     0, gtkpack_(new Gtk::HBox(0,10),
 					     1, _(""),
 					     1, new Gtk::Pixmap($pix_time_map, $pix_time_mask),
 					     0, my $check_when_daemon  = new Gtk::CheckButton( _(" Use daemon")  ), 
@@ -743,10 +788,10 @@ sub advanced {
 					 ),
 			     
 			     0, new Gtk::HSeparator,
+			     1, _("Please be careful that cron deamon is include on your services. "),
 			     );
     $combo_when_space->entry->set_text( $when_space );
-    $combo_when_space->entry->signal_connect( 'changed', sub { $when_space = $combo_when_space->entry->get_text()});
-
+    $combo_when_space->entry->signal_connect( 'changed', sub { $when_space = $combo_when_space->entry->get_text();  print $when_space."\n";});
     my $box_options = gtkpack_(new Gtk::VBox(0,1),
 			      0, new Gtk::HSeparator,
 			      0, gtkpack_(new Gtk::VBox(0,10),
@@ -758,7 +803,7 @@ sub advanced {
 						      ),
 					  0, new Gtk::HSeparator,
 					  0, gtkpack_(new Gtk::VBox(0,10),
-			      0, my $check_tar_bz2  = new Gtk::CheckButton( _(" Use Tar and bzip2  ( else use tar and gunzip.)") ),
+			      0, my $check_tar_bz2  = new Gtk::CheckButton( _(" Use Tar and bzip2  ( else use tar and gunzip, very slow)") ),
 						      0, my $check_replace = new Gtk::CheckButton( _(" Replace (no update backup files)")),
 						      0, my $check_backupignore = new Gtk::CheckButton( _(" Use .backupignore files")),
 						      ),
@@ -849,6 +894,11 @@ sub find_backup_to_restore {
     $DEBUG and print $_."\n" foreach @user_backuped;
 }
 
+sub do_cron {
+
+
+}
+
 sub do_restore_backend {
     $restore_user  and system("cd / && tar xvfz $save_path/backup_user_$_.tar.gz ") foreach @user_list_to_restore;
     $restore_sys   and system("cd / && tar xvfz $save_path/backup_sys.tar.gz ");
@@ -860,29 +910,33 @@ sub do_restore {
     my $do_restore;
     gtkpack($retore_box2,
 	    $do_restore = gtkpack_(new Gtk::VBox(0,10),
-					  0, new Gtk::VBox(0,10),
-					  1, new Gtk::Button(_("RESTORE...... ")),
-					  0, gtkpack_(new Gtk::HBox(0,10),
-						      0, gtksignal_connect(new Gtk::Button(_("     Previous   ")), clicked => sub { 
-							  ${$central_widget}->destroy();
-							  restore_step2();				
-						      }),
-						      1,  new Gtk::VBox(0,10),
-						      0,  gtksignal_connect(new Gtk::Button(_("     Next   ")), clicked => sub { 
-							  ${$central_widget}->destroy();
-						      }),
-						      ),
-					  ),
+				   1, new Gtk::VBox(0,10),
+				   1, gtkpack(new Gtk::HBox(0,10),
+					       new Gtk::VBox(0,10),
+					       gtksignal_connect(new Gtk::Button(_(" Restore ")), clicked => sub { 
+						   do_restore_backend(); }),
+					       new Gtk::VBox(0,10),
+					       ),
+				   1, new Gtk::VBox(0,10),
+				   0, gtkpack_(new Gtk::HBox(0,10),
+					       0, gtksignal_connect(new Gtk::Button(_("     Previous   ")), clicked => sub { 
+						   ${$central_widget}->destroy();
+						   restore_step2();				
+					       }),
+					       1,  new Gtk::VBox(0,10),
+					       0,  gtksignal_connect(new Gtk::Button(_("     Next   ")), clicked => sub { 
+						   ${$central_widget}->destroy();
+					       }),
+					       ),
+				   ),
 	    );
-    do_restore_backend();
     $central_widget = \$do_restore;
     $up_box->show_all();
-
 }
 
 sub restore_step_other {
     my $retore_step_other;
-    print $_."\n" foreach (@user_list_to_restore);
+    $DEBUG and print "user list to restore" . $_."\n" foreach (@user_list_to_restore);
     gtkpack($retore_box2,
 	    $retore_step_other = gtkpack_(new Gtk::VBox(0,10),
 		     1, new Gtk::VBox(0,10),
@@ -920,7 +974,7 @@ sub restore_step_other {
 
 my %check_user_to_restore;
 sub restore_step_user {
-
+    @user_list_to_restore = @user_backuped;
     my $retore_step_user;
     gtkpack($retore_box2,
 	    $retore_step_user = gtkpack_(new Gtk::VBox(0,10),
@@ -928,9 +982,13 @@ sub restore_step_user {
 					 0, _("User list to restore "),
 					 1, createScrolledWindow( gtkpack(new Gtk::VBox(0,0),
 									  map { my $name = $_;
-										push @user_list_to_restore, $name;
+#										push @user_list_to_restore, $name;
 										my $b = new Gtk::CheckButton($name); 
-										gtkset_active($b, 1);
+										if ( grep /^$name$/, @user_list_to_restore)  {
+										    gtkset_active($b, 1);
+										} else {
+										    gtkset_active($b, 0);
+										}
 										$b->signal_connect(toggled => sub { 
 										    if ($check_user_to_restore{$name}[1] ) {
 											print "add : $name \n";
@@ -1000,7 +1058,6 @@ sub restore_step_sys {
 }
 
 sub restore_step2 {
-    my $un = 1;
     my $retore_step2;
     gtkpack($retore_box2,
 	    $retore_step2 = gtkpack_(new Gtk::VBox(0,10),
@@ -1013,7 +1070,7 @@ sub restore_step2 {
 						 1,  new Gtk::VBox(0,10),
 						 0, gtksignal_connect(new Gtk::Button(_("     Next   ")), clicked => sub { 
 						     ${$central_widget}->destroy();
-						     if ($restore_sys) { restore_step_sys(); }
+						     if ($restore_sys && $backup_sys_cvs) { restore_step_sys(); }
 						     elsif ($restore_user) { restore_step_user();}
 						     elsif ($restore_other){ restore_step_other();}
 						     else{ do_restore();}
@@ -1056,7 +1113,7 @@ sub restore {
 						 1, new Gtk::HBox(0,10),
 						 1, gtkpack_(new Gtk::VBox(0,10),
 							     0, gtksignal_connect(new Gtk::Button(_("Restore all backups (last)")), 
-								 clicked => sub { $retore_box3->destroy(); }),
+								 clicked => sub { $retore_box3->destroy(); do_restore(); }),
 							     0, gtksignal_connect(new Gtk::Button(_("Custom Restore")), 
 								 clicked => sub { $retore_box3->destroy(); restore_step2(); }),
 							     ),
