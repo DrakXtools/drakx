@@ -325,12 +325,12 @@ while (my ($k, $v) = each %drivers) {
 sub module_of_type__4update_kernel {
     my ($type) = @_;
     my %skip; @skip{@skip_modules_on_stage1} = ();
-    grep { !exists $skip{$_} } grep { $drivers{$_}{type} =~ /^$type$/ } keys %drivers;
+    grep { !exists $skip{$_} } grep { $drivers{$_}{type} =~ /^($type)$/ } keys %drivers;
 }
 sub module_of_type {
     my ($type) = @_;
     my $alias = $type_aliases{$type};
-    grep { $drivers{$_}{type} =~ /^$type|$alias$/ } keys %drivers;
+    grep { $drivers{$_}{type} =~ /^(($type)|$alias)$/ } keys %drivers;
 }
 sub module2text { $drivers{$_[0]}{text} }
 

@@ -127,7 +127,6 @@ label auto
   kernel vmlinuz
   append ramdisk_size=32000 initrd=$type.rdz $type auto_install=auto_inst.cfg.pl
 ");
-    _ "cp -f $instdir/installinit/ks.cfg $mnt 2>/dev/null";
     _ "sync";
     _ "df $mnt";
 }
