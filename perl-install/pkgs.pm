@@ -1293,8 +1293,8 @@ sub install($$$;$$) {
 	#- and make sure there are no staling open file descriptor too (before forking)!
 	install_any::getFile('XXX');
 
-	my $retry = 3;
-	while (@transToInstall) {
+	my $retry;
+	while ($retry || @transToInstall) {
 	    local (*INPUT, *OUTPUT); pipe INPUT, OUTPUT;
 	    if (my $pid = fork()) {
 		close OUTPUT;
@@ -1327,10 +1327,16 @@ sub install($$$;$$) {
 		    select((select(OUTPUT),  $| = 1)[0]);
 		    $db = c::rpmdbOpen($prefix) or die "error opening RPM database: ", c::rpmErrorString();
 		    my $trans = c::rpmtransCreateSet($db, $prefix);
-		    log::l("opened rpm database for transaction of ". scalar @transToInstall ." new packages, still $nb after that to do");
-
-		    c::rpmtransAddPackage($trans, $_->[$HEADER], packageName($_), $isUpgrade && allowedToUpgrade(packageName($_)))
-			foreach @transToInstall;
+		    if ($retry) {
+			log::l("opened rpm database for retry transaction of 1 package only");
+			c::rpmtransAddPackage($trans, $retry->[$HEADER], packageName($retry),
+					      $isUpgrade && allowedToUpgrade(packageName($retry)));
+		    } else {
+			log::l("opened rpm database for transaction of ". scalar @transToInstall ." new packages, still $nb after that to do");
+			c::rpmtransAddPackage($trans, $_->[$HEADER], packageName($_),
+					      $isUpgrade && allowedToUpgrade(packageName($_)))
+			    foreach @transToInstall;
+		    }
 
 		    c::rpmdepOrder($trans) or die "error ordering package list: " . c::rpmErrorString();
 		    c::rpmtransSetScriptFd($trans, fileno LOG);
@@ -1398,37 +1404,32 @@ sub install($$$;$$) {
 		c::_exit(0);
 	    }
 
-	    #- after enough retry, abort.
-	    my @badPackages;
-	    foreach (@transToInstall) {
-		if (!packageFlagInstalled($_) && $_->[$MEDIUM]{selected} && !exists($ignoreBadPkg{packageName($_)})) {
-		    push @badPackages, $_;
-		} else {
-		    packageFreeHeader($_);
-		}
-	    }
-	    @transToInstall = @badPackages;
-	    $retry or last;
-
-	    #- examine each package, check they have been installed accordingly.
-	    if (@transToInstall) {
+	    #- if we are using a retry mode, this means we have to split the transaction with only
+	    #- one package for each real transaction.
+	    unless ($retry) {
+		my @badPackages;
 		foreach (@transToInstall) {
-		    log::l("bad package $_->[$FILE]");
+		    if (!packageFlagInstalled($_) && $_->[$MEDIUM]{selected} && !exists($ignoreBadPkg{packageName($_)})) {
+			push @badPackages, $_;
+			log::l("bad package $_->[$FILE]");
+		    } else {
+			packageFreeHeader($_);
+		    }
 		}
-		log::l("retrying transaction on bad packages");
-		--$retry;
+		@transToInstall = @badPackages;
+		#- if we are in retry mode, we have to fetch only one package at a time.
+		$retry = shift @transToInstall;
+	    } else {
+		if (!packageFlagInstalled($retry) && $retry->[$MEDIUM]{selected} && !exists($ignoreBadPkg{packageName($retry)})) {
+		    log::l("bad package $retry->[$FILE] unable to be installed");
+		    packageSetFlagSelected($retry, 0);
+		    cdie ("error installing package list: $retry->[$FILE]");
+		}
+		packageFreeHeader($retry);
+		$retry = shift @transToInstall;
 	    }
 	}
-	packageFreeHeader($_) foreach @transToInstall;
 	cleanHeaders($prefix);
-
-	if (@transToInstall) {
-	    foreach (@transToInstall) {
-		log::l("bad package $_->[$FILE] unable to be installed");
-		packageSetFlagSelected($_, 0);
-	    }
-	    cdie ("error installing package list: " . join(", ", map { $_->[$FILE] } @transToInstall));
-	}
     } while ($nb > 0 && !$pkgs::cancel_install);
 
     cleanHeaders($prefix);
