@@ -64,6 +64,7 @@ my $activefw = activefw->new(sub {
 init_blacklist();
 init_whitelist();
 
+$ugtk2::wm_icon = "/usr/lib/libDrakX/icons/drakfirewall.png";
 my $w = ugtk2->new(N("Active Firewall"));
 gtkpack($w->{window},
         gtknew('Notebook', children => [
