@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.27mdk
+Release: 0.28mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -358,6 +358,22 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Feb 22 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.28mdk
+- drakfont: allow to select multiple files (blino)
+- localedrake:
+  o adapt to new uim splitting (UTUMI Hirosi)
+  o adapt to new scim packages splitting (Funda Wang)
+  o fix koi8-u font size (Funda Wang, #13809)
+- keyboardrake: handle lb locale (pablo)
+- printerdrake: if a printer is set up with HPLIP and has still an old
+  HPOJ configuration, it will be automatically removed (till)
+- scannerdrake (till):
+  o display unsupported scanners as such in the scanners list (#12049)
+  o load kernel modules (and make them loaded on boot) if specified in
+    ScannerDB
+  o tell user if his scanner requires manual editing of config files
+    to work (the appropriate scanner models are marked in ScannerDB)
+
 * Wed Feb 16 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.27mdk
 - drakboot: make it more robust (pixel)
 - drakproxy: set up KDE too (blino)
