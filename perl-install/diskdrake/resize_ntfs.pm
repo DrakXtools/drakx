@@ -12,6 +12,11 @@ sub new {
     bless { dev => $dev }, $type;
 }
 
+sub check_prog {
+    my ($in) = @_;
+    $::isInstall || $in->do_pkgs->ensure_binary_is_installed('ntfsprogs', 'ntfsresize');
+}
+
 sub min_size {
     my ($o) = @_;
     my $r;
