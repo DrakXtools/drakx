@@ -153,10 +153,10 @@ if (-e "/boot/vmlinuz" && -e "/boot/hd.rdz" || -e "/cdrom/boot/vmlinuz" && -e "/
 } else {
     mkdir "/hd/boot";
     unless (-e "/tmp/hd/vmlinuz" && -e "/tmp/hd/hd.rdz") {
-	system "cp", "/cdrom/images/hd.img", "/tmp/hd.img";
+	system "cp", "/cdrom/images/hd.img", "/hd/hd.img";
 	mkdir "/tmp/hd";
 	system "modprobe", "loop";
-	system "mount", "/tmp/hd.img", "/tmp/hd", "-o", "loop";
+	system "mount", "/hd/hd.img", "/tmp/hd", "-o", "loop";
     }
     system "cp", "-a", "/tmp/hd/vmlinuz", "/tmp/hd/hd.rdz", "/hd/boot";
 }
