@@ -127,6 +127,7 @@ cat > $RPM_BUILD_ROOT%_menudir/%name <<EOF
 	command="/usr/sbin/harddrake"\
 	icon="harddrake.png"
 EOF
+mv mv $RPM_BUILD_ROOT%_sbindir/service_harddrake $RPM_BUILD_ROOT%_initrddir/harddrake2
 
 
 %find_lang libDrakX
