@@ -117,11 +117,6 @@ PUBLISHING
   1 docbook-style-dsssl openjade sgml-tools ghostscript-module-SVGALIB cttex
   1 BOOKS docbook-style-dsssl-doc
 
-  5 CUPS
-      cups-drivers xpp
-  5 CUPS || LPR foomatic-db-engine foomatic-filters foomatic-db
-  1 CUPS hpoj
-
 SHELLS
   3 zsh
   3 BOOKS bash-doc zsh-doc
@@ -646,6 +641,13 @@ SYSTEM
 EMULATORS
   3 wine
 
+PRINTER
+  4 xpp printer-testpages scli net-tools cups gimpprint foomatic-db-engine 
+    foomatic-filters foomatic-db ImageMagick ghostscript printer-filters mpage 
+    a2ps ppdfilt libppd gpr groff libgimpprint
+    sane-backends sane-frontends xsane xsane-gimp 
+    libhpojip libsnmp xojpanel libsane-hpoj
+
 INSTALL
   NOCOPY
     5 kernel-2.4.22.6mdk kernel-2.4.22.7mdk kernel-2.4.22.7mdk kernel kernel-smp-2.4.22.6mdk kernel-smp-2.4.22.7mdk kernel-smp-2.4.22.7mdk kernel-smp kernel-enterprise-2.4.22.6mdk kernel-enterprise-2.4.22.7mdk kernel-enterprise-2.4.22.7mdk kernel-enterprise
@@ -666,11 +668,4 @@ INSTALL
   3 XFree86-S3 XFree86-S3V XFree86-VGA16
   2 XFree86-8514 XFree86-AGX XFree86-I128 XFree86-Mach32 XFree86-Mach8 XFree86-Mono XFree86-P9000 XFree86-W32
   1 XFree86-3DLabs
-
-PRINTER
-  5 xpp printer-testpages nmap scli net-tools cups gimpprint foomatic-db-engine 
-    foomatic-filters foomatic-db ImageMagick ghostscript printer-filters mpage 
-    a2ps ppdfilt libppd gpr groff libgimpprint
-    sane-backends sane-frontends xsane xsane-gimp 
-    libhpojip libsnmp xojpanel libsane-hpoj
-   
+    
