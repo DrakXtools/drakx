@@ -20,9 +20,9 @@ my $banner = __();
 
 sub banner {
     my $banner = translate(__("Mandrake Linux Installation %s"));
-    my $l = first(Newt::GetScreenSize) - length($banner) - length($_[0]) + 1;
+    my $l = first(Newt::GetScreenSize()) - length($banner) - length($_[0]) + 1;
     Newt::DrawRootText(0, 0, sprintf($banner, ' ' x $l . $_[0]));
-    Newt::Refresh;
+    Newt::Refresh();
 }
 
 sub new($$) {

@@ -78,7 +78,7 @@ sub detect {
     my $modem = {};
     require network::modem;
     network::modem->import;
-    my ($modem, @pci_modems) = detect_devices::getModem;
+    my ($modem, @pci_modems) = detect_devices::getModem();
     $modem->{device} and $auto_detect->{modem} = $modem->{device};
     show_pci_modems(@pci_modems) if @pci_modems;
 }

@@ -141,7 +141,7 @@ sub do_switch {
     unload($old_driver); #    run_program("/sbin/modprobe -r $driver"); # just in case ...
     modules::remove_module($old_driver); # completed by the next add_alias()
     modules::add_alias("sound-slot-$::i", $new_driver);
-    modules::write_conf;
+    modules::write_conf();
     if ($new_driver =~ /^snd-/) {
         rooted("service alsa start") unless $blacklisted;
         rooted("/sbin/chkconfig --add alsa");
