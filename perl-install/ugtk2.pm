@@ -42,7 +42,7 @@ unless ($::no_ugtk_init) {
     !check_for_xserver() and die "Cannot be run in console mode.\n";
     $::one_message_has_been_translated and warn("N() was called from $::one_message_has_been_translated BEFORE gtk2 initialisation, replace it with a N_() AND a translate() later.\n"), c::_exit(1);
 
-    Gtk2->init();
+    Gtk2->init;
     c::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', @::textdomains;
     $::need_utf8_i18n = 1;
 }
@@ -152,7 +152,7 @@ sub gtkradio {
 
 sub gtkroot() {
     my $root if 0;
-    $root ||= Gtk2::Gdk->get_default_root_window();
+    $root ||= Gtk2::Gdk->get_default_root_window;
 }
 
 sub gtkset_text {
@@ -357,7 +357,7 @@ sub create_dialog {
     my $ret = 0;
     my $dialog = _create_dialog($title, $o_options);
     $dialog->set_border_width(10);
-    my $text = $o_options->{use_markup} ? gtkset_markup(Gtk2::Label->new(), $label) : Gtk2::Label->new($label);
+    my $text = $o_options->{use_markup} ? gtkset_markup(Gtk2::Label->new, $label) : Gtk2::Label->new($label);
     gtkpack($dialog->vbox,
             gtkpack_(Gtk2::HBox->new,
                      if_($o_options->{stock}, 0, Gtk2::Image->new_from_stock($o_options->{stock}, 'dialog')),
@@ -1323,7 +1323,7 @@ sub append_set {
     my ($model, @values) = @_;
     # compatibility:
     @values = @{$values[0]} if $#values == 0 && ref($values[0]) eq 'ARRAY';
-    my $iter = $model->append();
+    my $iter = $model->append;
     $model->set($iter, @values);
     return $iter;
 }
@@ -1394,7 +1394,7 @@ sub entry {
 
 sub get_text {
     my ($w) = @_;
-    $w->{strings}->[$w->get_history];
+    $w->{strings}[$w->get_history];
 }
 
 sub set_text {
