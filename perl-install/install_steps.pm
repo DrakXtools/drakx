@@ -5,6 +5,7 @@ use strict;
 
 use common qw(:file :system);
 use install_any qw(:all);
+use partition_table qw(:types);
 use run_program;
 use lilo;
 use lang;
@@ -14,7 +15,6 @@ use cpio;
 use log;
 use fsedit;
 use commands;
-use smp;
 
 
 my $o;
@@ -46,6 +46,14 @@ sub doPartitionDisks($$) {
     my ($o, $hds) = @_;
     fsedit::auto_allocate($hds, $o->{default}->{partitions});
 }
+sub choosePartitionsToFormat($$) {
+    my ($o, $fstab) = @_;
+
+    foreach (@$fstab) { 
+	$_->{toFormat} = $_->{mntpoint} && (isExt2($_) || isSwap($_)) &&
+	  ($_->{notFormatted} || $o->{default}->{partitionning}->{autoformat});
+    }
+}
 
 sub choosePackages($$$) {
     my ($o, $packages, $comps) = @_;
@@ -55,8 +63,6 @@ sub choosePackages($$$) {
 	foreach (@{$comps->{$_}->{packages}}) { $_->{selected} = 1; }
     }
     foreach (@{$o->{default}->{packages}}) { $packages->{$_}->{selected} = 1; }
-
-    smp::detect() and $packages->{"kernel-smp"}->{selected} = 1;
 }
 
 sub beforeInstallPackages($) {

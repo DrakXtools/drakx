@@ -68,7 +68,7 @@ sub format_ext2($;$) {
     run_program::run("mke2fs", devices::make($dev), @options) or die "ext2 formatting of $dev failed";
 }
 
-sub format_dos($;$) {
+sub format_dos($;$@) {
     my ($dev, $bad_blocks, @options) = @_;
 
     run_program::run("mkdosfs", devices::make($dev), @options, $bad_blocks ? "-c" : ()) or die "dos formatting of $dev failed";

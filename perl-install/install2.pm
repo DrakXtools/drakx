@@ -19,6 +19,7 @@ use install_methods;
 use modules;
 use partition_table qw(:types);
 use detect_devices;
+use smp;
 
 $testing = $ENV{PERL_INSTALL_TEST};
 $INSTALL_VERSION = 0;
@@ -93,7 +94,7 @@ my $default = {
     mkbootdisk => 0,
     comps => [ qw() ],
     packages => [ qw() ],
-    partitionning => { clearall => 0, eraseBadPartitions => 1, autoformat => 1 },
+    partitionning => { clearall => 1, eraseBadPartitions => 1, autoformat => 1 },
     partitions => [
 		   { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
 		   { mntpoint => "/",     size => 300 << 11, type => 0x83 }, 
@@ -143,16 +144,15 @@ sub partitionDisks {
 
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}) ];
 
-    my $root_fs; map { $_->{mntpoint} eq '/' and $root_fs = $_ } @{$o->{fstab}};                  
+    my $root_fs; map { $_->{mntpoint} eq '/' and $root_fs = $_ } @{$o->{fstab}};
     $root_fs or die "partitionning failed: no root filesystem";
 
-    $testing and return;
-    if ($o->{default}->{partitionning}->{autoformat}) {
-	log::l("formatting all filesystems");
+    $o->choosePartitionsToFormat($o->{fstab});
 
-	foreach (@{$o->{fstab}}) {
-	    fs::format_part($_) if $_->{mntpoint} && isExt2($_) || isSwap($_);
-	}
+    $testing and return;
+
+    foreach (@{$o->{fstab}}) {
+	fs::format_part($_) if $_->{toFormat};
     }
     fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
 }
@@ -162,7 +162,10 @@ sub findInstallFiles {
     $o->{comps} = $o->{method}->getComponentSet($o->{packages});
 }
  
-sub choosePackages { $o->choosePackages($o->{packages}, $o->{comps}); }
+sub choosePackages { 
+    $o->choosePackages($o->{packages}, $o->{comps}); 
+    smp::detect() and $o->{packages}->{"kernel-smp"}->{selected} = 1;
+}
 
 sub doInstallStep {
     $o->beforeInstallPackages;
@@ -198,11 +201,16 @@ sub main {
 
     #  if this fails, it's okay -- it might help with free space though 
     unlink "/sbin/install";
+    symlink '/tmp/rhimage/usr/X11R6', '/usr/X11R6';
 
     print STDERR "in second stage install\n";
     log::openLog(($testing || $o->{localInstall}) && 'debug.log');
     log::l("second stage install running (version $INSTALL_VERSION)");
     log::ld("extra log messages are enabled");
+
+    #  make sure we don't pick up any gunk from the outside world 
+    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";
+    $ENV{LD_LIBRARY_PATH} = "";
 
     spawnSync();
     eval { spawnShell() };
@@ -227,10 +235,6 @@ sub main {
 
     modules::load_deps("/modules/modules.dep");
     modules::read_conf("/tmp/conf.modules");
-
-    #  make sure we don't pick up any gunk from the outside world 
-    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin";
-    $ENV{LD_LIBRARY_PATH} = "";
 
     $o->{keyboard} = eval { keyboard::read("/tmp/keyboard") } || $default->{keyboard};
 

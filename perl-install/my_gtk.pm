@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    all => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_adjustment gtksignal_connect gtkpack gtkpack_ gtkappend gtkadd gtkset_usize gtkset_justify gtkshow gtkdestroy) ],
+    all => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_adjustment gtksignal_connect gtkpack gtkpack_ gtkappend gtkadd gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -63,6 +63,7 @@ sub gtkshow($) { $_[0]->show; $_[0] }
 sub gtkdestroy($) { $_[0] and $_[0]->destroy }
 sub gtkset_usize($$$) { $_[0]->set_usize($_[1],$_[2]); $_[0] }
 sub gtkset_justify($$) { $_[0]->set_justify($_[1]); $_[0] }
+sub gtkset_active($$) { $_[0]->set_active($_[1]); $_[0] }
 
 sub gtksignal_connect($@) {
     my $w = shift;
@@ -85,7 +86,7 @@ sub gtkpack_($@) {
 	my $l = $_[$i + 1]; 
 	ref $l or $l = new Gtk::Label($l);
 	$box->pack_start($l, $_[$i], 1, 0);
-	$_[$i + 1]->show;
+	$l->show;
     }
     $box
 }
@@ -237,11 +238,14 @@ sub _ask_from_entry($$@) {
 	  );
     $entry->grab_focus();
 }
-sub _ask_from_list($\@$@) {
+sub _ask_from_list($$$@) {
     my ($o, $l, @msgs) = @_;
-    my $f = sub { $o->{retval} = $_[1]; Gtk->main_quit };
-    my $list = new Gtk::List();
-    map { gtksignal_connect(gtkadd($list, new Gtk::ListItem($_)), selection_changed => $f, $_) } @$l;
+    my $list = new Gtk::List;
+    $list->signal_connect(select_child => sub { 
+	$o->{retval} = $l->[$list->child_position($_[1])];
+	Gtk->main_quit;
+    });
+    gtkadd($list, map { new Gtk::ListItem($_) } @$l);
 
 #    myadd($o->{window}, 
 #	   mypack_(myset_usize(new Gtk::VBox(0,0), 0, 200),

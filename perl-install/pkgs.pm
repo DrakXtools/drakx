@@ -64,7 +64,9 @@ sub psReadComponentsFile {
 		$inComp = 0;
 		$comps{$current{name}} = { %current };
 	    } else {
-		push @{$current{packages}}, $packages->{$_} || log::w "package $_ does not exist (line $n of comps file)";
+		$packages->{$_} ? 
+		  push @{$current{packages}}, $packages->{$_} :
+		  log::w("package $_ does not exist (line $n of comps file)");
 	    }
 	} else {
 	    my ($selected, $hidden, $name) = /^([01])\s*(--hide)?\s*(.*)/ or die "bad comps file at line $n";
