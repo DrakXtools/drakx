@@ -4,13 +4,11 @@ package data;
 
 use strict;
 use lib qw(/usr/lib/libDrakX);
-use vars qw(@ISA @EXPORT_OK);
 use detect_devices;
 use MDK::Common;
 use class_discard;
 
-@ISA = qw(Exporter);
-@EXPORT_OK = (qw(version tree));
+our (@ISA, @EXPORT_OK) = (qw(Exporter), (qw(version tree)));
 
 our ($version, $sbindir) = ("1.1.5", "/usr/sbin/");
 
