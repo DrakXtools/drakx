@@ -378,14 +378,14 @@ sub psUpdateHdlistsDeps {
 }
 
 sub psUsingHdlists {
-    my ($prefix, $method, $hdlistsfile, $packages) = @_;
-    my $listf = install_any::getFile($hdlistsfile || 'media/media_info/hdlists')
+    my ($prefix, $method, $o_hdlistsfile, $o_packages) = @_;
+    my $listf = install_any::getFile($o_hdlistsfile || 'media/media_info/hdlists')
 	or die "no hdlists found";
     my $suppl_CDs = 0;
-    if (!$packages) {
-	$packages = new URPM;
+    if (!$o_packages) {
+	$o_packages = new URPM;
 	#- add additional fields used by DrakX.
-	@$packages{qw(count mediums)} = (0, {});
+	@$o_packages{qw(count mediums)} = (0, {});
     }
 
     #- parse hdlists file.
@@ -401,15 +401,15 @@ sub psUsingHdlists {
 
 	#- make sure the first medium is always selected!
 	#- by default select all image.
-	psUsingHdlist($prefix, $method, $packages, $2, $medium_name, $3, $4, !$1);
+	psUsingHdlist($prefix, $method, $o_packages, $2, $medium_name, $3, $4, !$1);
 
 	++$medium_name;
     }
 
-    log::l("psUsingHdlists read " . int(@{$packages->{depslist}}) .
-	   " headers on " . int(keys %{$packages->{mediums}}) . " hdlists");
+    log::l("psUsingHdlists read " . int(@{$o_packages->{depslist}}) .
+	   " headers on " . int(keys %{$o_packages->{mediums}}) . " hdlists");
 
-    return $packages, $suppl_CDs;
+    return $o_packages, $suppl_CDs;
 }
 
 sub psUsingHdlist {
