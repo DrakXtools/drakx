@@ -119,7 +119,7 @@ if ($enable_activefw) {
     });
 }
 
-checkNetwork();
+checkNetworkForce();
 cronNetwork();
 get_unprocessed_attacks() if $enable_activefw;
 
