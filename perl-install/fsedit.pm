@@ -14,6 +14,7 @@ use Data::Dumper;
 use fsedit;
 use devices;
 use loopback;
+use raid;
 use fs;
 use log;
 
@@ -268,6 +269,7 @@ sub check_mntpoint {
     };
     $check->($fake_part) unless $mntpoint eq '/' && $loopbackDevice; #- '/' is a special case, no loop check
 
+    die "raid / with no /boot" if $mntpoint eq "/" && raid::is($part) && !has_mntpoint("/boot", $hds);
 #-    if ($part->{start} + $part->{size} > 1024 * $hd->cylinder_size() && arch() =~ /i386/) {
 #-	  die "/boot ending on cylinder > 1024" if $mntpoint eq "/boot";
 #-	  die     "/ ending on cylinder > 1024" if $mntpoint eq "/" && !has_mntpoint("/boot", $hds);

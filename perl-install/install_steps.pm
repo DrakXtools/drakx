@@ -228,7 +228,7 @@ sub choosePackages {
     #- not be able to start (xfs at least).
     my $available = install_any::getAvailableSpace($o);
     my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
-    $available < $availableCorrected or $available = $availableCorrected;
+    log::l("available size $available (corrected $availableCorrected)");
 
     foreach (values %{$packages->[0]}) {
 	pkgs::packageSetFlagSkip($_, 0);
@@ -394,10 +394,16 @@ Consoles 1,3,4,7 may also contain interesting information";
 	    $D .= "/fonts";
 	    -d "$o->{prefix}$D" or next;
 	    log::l("found win font dir $D");
-	    $hasttf ||= mkdir "$o->{prefix}$dest", 0755;
+	    if (!$hasttf) {
+		$hasttf = $o->ask_okcancel('', 
+_("Some true type fonts from windows have been found on your computer.
+Do you want to use them? Be sure you have the right to use them under Linux.")) or goto nottf;
+		mkdir "$o->{prefix}$dest", 0755;
+	    }
 	    /(.*)\.ttf/i and symlink "$D/$_", "$o->{prefix}$dest/$1.ttf" foreach grep { /\.ttf/i } all("$o->{prefix}$D");
 	}
     }
+  nottf:
     if ($hasttf) {
 	run_program::rooted($o->{prefix}, "ttmkfdir", "-d", $dest, "-o", "$dest/fonts.dir");
 	run_program::rooted($o->{prefix}, "chkfontpath", "--add", $dest);

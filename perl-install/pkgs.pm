@@ -172,8 +172,8 @@ sub extractHeaders($$$) {
 my $A = -1.922e-05;
 my $B = 1.18411;
 my $C = 33.2;
-sub correctSize { ($A * $_[0] + $B) * $_[0] + $C } #- size correction in MB.
-sub invCorrectSize { (sqrt(sqr($B) + 4 * $A * ($_[0] - $C)) - $B) / 2 / $A }
+sub correctSize { max($_[0], ($A * $_[0] + $B) * $_[0] + $C) } #- size correction in MB.
+sub invCorrectSize { min($_[0], (sqrt(sqr($B) + 4 * $A * ($_[0] - $C)) - $B) / 2 / $A) } #- size correction in MB.
 
 sub selectedSize {
     my ($packages) = @_;
@@ -604,7 +604,6 @@ sub readCompssUsers {
 #- }
 
 sub setSelectedFromCompssList {
-    log::l("setSelectedFromCompssList");
     my ($compssListLevels, $packages, $min_level, $max_size, $install_class) = @_;
     my $ind = $compssListLevels->{$install_class}; defined $ind or log::l("unknown install class $install_class in compssList"), return;
     my $nb = selectedSize($packages);
@@ -630,13 +629,13 @@ sub setSelectedFromCompssList {
 	}
 	if ($max_size && $nb > $max_size) {
 	    $min_level = $p->{values}[$ind];
-	    log::l("setSelectedFromCompssList: up to indice $min_level (reached size $nb)");
 	    last;
 	}
 
 	#- at this point the package can safely be selected.
 	selectPackage($packages, $p);
     }
+    log::l("setSelectedFromCompssList: reached size $nb, up to indice $min_level (less than $max_size)");
     $ind, $min_level;
 }
 
@@ -891,6 +890,7 @@ sub install($$$;$$) {
     #- one or many transaction.
     my ($total, $nb);
     foreach my $pkg (@$toInstall) {
+	print packageName($pkg), "\n";
 	$packages{packageName($pkg)} = $pkg;
 	$nb++;
 	$total += packageSize($pkg);
