@@ -261,7 +261,7 @@ sub parse_file {
   } elsif ($ey && !$en) {
       $test = sub { /$ey/ };
   } else {
-      $test = sub { /$ey/o && !/$en/ };
+      $test = sub { /$ey/ && !/$en/ };
   }
 
   foreach (@all) {
