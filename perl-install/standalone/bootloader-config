@@ -117,5 +117,5 @@ sub remove_splash() {
 }
 
 sub detectloader() {
-    print $bootloader && uc(bootloader::main_method($bootloader->{method})), "\n";
+    print uc(bootloader::main_method($bootloader->{method})), "\n" if $bootloader;
 }
