@@ -283,7 +283,7 @@ sub all_user_list() {
 
 sub the_time() {
     my ($sec, $min, $hour, $day, $month, $year) = localtime(time());
-    sprintf("_%d%02d%02d_%02d%02d%02d", $year + 1900, $month + 1, $day, $hour, $min, $sec);
+    $the_time = sprintf("_%d%02d%02d_%02d%02d%02d", $year + 1900, $month + 1, $day, $hour, $min, $sec);
 }
 
 sub get_tape_info() {
@@ -1764,7 +1764,7 @@ sub advanced_where_net_types {
 		}
 		$conf{NET_PROTO} = '' if $conf{USE_NET} == 0; 
 		destroy_widget();
- 		$current_widget->();
+ 		$current_widget->($previous_function);
     });
 	gtksignal_connect(gtkset_active($check_use_expect, $conf{USE_EXPECT}), toggled => sub { 
 		invbool \$conf{USE_EXPECT};
@@ -1774,7 +1774,7 @@ sub advanced_where_net_types {
 			$conf{USER_KEYS} = 0;
 		}
 		destroy_widget();
- 		$current_widget->();
+ 		$current_widget->($previous_function);
     });
 	gtksignal_connect(gtkset_active($check_xfer_keys, $conf{DRAK_KEYS}), toggled => sub { 
 		invbool \$conf{DRAK_KEYS};
@@ -1784,7 +1784,7 @@ sub advanced_where_net_types {
 			$conf{USER_KEYS} = 0;
 		}
 		destroy_widget();
- 		$current_widget->();
+ 		$current_widget->($previous_function);
     });
 	gtksignal_connect(gtkset_active($check_user_keys, $conf{USER_KEYS}), toggled => sub { 
 		invbool \$conf{USER_KEYS};
@@ -1794,7 +1794,7 @@ sub advanced_where_net_types {
 			$conf{USE_EXPECT} = 0;
 		}
 		destroy_widget();
- 		$current_widget->();
+ 		$current_widget->($previous_function);
     });
 	set_help_tip($check_use_expect, 'use_expect');
 	set_help_tip($check_remember_pass, 'remember_pass');
@@ -1883,14 +1883,14 @@ sub advanced_where_cd {
 			$conf{USE_TAPE} = 0;
 		}
 		destroy_widget();
-		$current_widget->();
+		$current_widget->($previous_function);
     });
     gtksignal_connect(gtkset_active($check_cdrw, $conf{CDRW}), toggled => sub { 
 		$conf{CDRW} = $conf{CDRW} ? 0 : 1;
 		$conf{MEDIA_ERASE} = $conf{MEDIA_ERASE} ? 0 : 1;
 		$check_cdrw_erase->set_sensitive($conf{CDRW});
 		destroy_widget();
-		$current_widget->();
+		$current_widget->($previous_function);
     });
 	$button_erase_now->signal_connect('clicked', sub { 
 		if ($conf{CD_DEVICE}) {
@@ -1914,7 +1914,7 @@ sub advanced_where_cd {
 	});
 	
 	set_help_tip($button_erase_now, 'erase_cdrw');
-	
+
     if ($previous_function) { 
 		fonction_env(\$box_where_cd, \&advanced_where_cd, \&$previous_function, \&wizard_step3); 
 		button_box_wizard();
@@ -1949,7 +1949,6 @@ sub advanced_where_tape {
 				0, gtkset_sensitive(new Gtk2::Label(N("Device name to use for backup")), $conf{USE_TAPE}),
 				1, new Gtk2::VBox(0, 6),
 				0, gtkset_sensitive($combo_where_tape_device, $conf{USE_TAPE}),
-
 			),
 			0, new Gtk2::VBox(0, 5),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
@@ -1981,7 +1980,7 @@ sub advanced_where_tape {
 			$conf{USE_CD} = 0;
 		}
 		destroy_widget();
-		$current_widget->();
+		$current_widget->($previous_function);
     });
 	gtksignal_connect(gtkset_active($check_tape_rewind, $conf{TAPE_NOREWIND}), toggled => sub { 
 		$conf{TAPE_NOREWIND} = $conf{TAPE_NOREWIND} ? 0 : 1;
@@ -1993,18 +1992,17 @@ sub advanced_where_tape {
 		}
 		$combo_where_tape_device->entry->set_text($conf{TAPE_DEVICE});
 		destroy_widget();
-		$current_widget->();
-
+		$current_widget->($previous_function);
     });
 	gtksignal_connect(gtkset_active($check_tape_erase, $conf{MEDIA_ERASE}), toggled => sub { 
 		$conf{MEDIA_ERASE} = $conf{MEDIA_ERASE} ? 0 : 1;
 		destroy_widget();
-		$current_widget->();
+		$current_widget->($previous_function);
     });
 	gtksignal_connect(gtkset_active($check_tape_eject, $conf{MEDIA_EJECT}), toggled => sub { 
 		$conf{MEDIA_EJECT} = $conf{MEDIA_EJECT} ? 0 : 1;
 		destroy_widget();
-		$current_widget->();
+		$current_widget->($previous_function);
     });
     $combo_where_tape_device->entry->set_text($conf{TAPE_DEVICE});
 	$combo_where_tape_device->entry->signal_connect('changed', sub {
@@ -2058,11 +2056,7 @@ sub advanced_where_hd {
 			# seems to be the easiest way to avoid the widgets fighting over values
 			# and getting garbage in $max_value
 			destroy_widget();
-			if ($previous_function) {
-				advanced_where_hd(\&$previous_function);
-			} else {
-				advanced_where_hd();
-			}
+			$current_widget->($previous_function);
 		}
 	});
     if ($previous_function) { 
