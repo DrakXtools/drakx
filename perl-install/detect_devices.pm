@@ -427,6 +427,26 @@ sub getSagem() {
     grep { $_->{description} eq 'Analog Devices Inc.|USB ADSL modem' } probeall();
 }
 
+# generate from the following from eci driver sources:
+# perl -e 'while (<>) { print qq("$1$2$3$4",\n) if /\b([a-z\d]*)\s*([a-z\d]*)\s*([a-z\d]*)\s*([a-z\d]*)$/ }' <modems.db|sort|uniq
+sub getECI() {
+    my @ids =(
+              "0509080109150802",
+              "0547213109158000",
+              "0659091509150916",
+              "071dac810915ac82",
+              "08ea00c9091500ca",
+              "0915000109150002",
+              "0baf00e6091500e7",
+              "0e60010009150101",
+              "0e60010109150102",
+              "0fe8800009158001",
+              "1690020309150204",
+              "1690020509150206",
+             );
+    grep { member(sprintf("%04x%04x%04x%04x", $_->{vendor}, $_->{id}, $_->{subvendor}, $_->{subid}), @ids) } usb_probe();
+}
+
 sub getNet() {
     grep { !($::isStandalone && /plip/) && c::hasNetDevice($_) }
       grep { /^(eth|fddi|plip|tr|usb|wifi|wlan)/ }
