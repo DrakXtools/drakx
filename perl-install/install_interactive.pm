@@ -72,8 +72,9 @@ Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 }
 
 sub partitionWizardSolutions {
-    my ($o, $all_hds, $fstab, $readonly) = @_;
+    my ($o, $all_hds, $readonly) = @_;
     my $hds = $all_hds->{hds};
+    my $fstab = [ fsedit::get_all_fstab($all_hds) ];
     my @wizlog;
     my (@solutions, %solutions);
 
@@ -218,12 +219,12 @@ sub partitionWizard {
 
     $o->set_help('doPartitionDisks');
 
-    my %solutions = partitionWizardSolutions($o, $o->{all_hds}, $o->{fstab}, $o->{partitioning}{readonly});
+    my %solutions = partitionWizardSolutions($o, $o->{all_hds}, $o->{partitioning}{readonly});
     if ($o->{lnx4win}) {
 	if ($solutions{loopback}) {
 	    %solutions = (loopback => $solutions{loopback});
 	} else {
-	    $o->ask_warn('', _("You don't have enough free space on your Windows partition")) if grep { isFat($_) } @{$o->{fstab}}
+	    $o->ask_warn('', _("You don't have enough free space on your Windows partition")) if grep { isFat($_) } fsedit::get_all_fstab($o->{all_hds});
 	}
     }
 
@@ -241,17 +242,15 @@ sub partitionWizard {
     log::l("solutions: ", int @solutions);
     @solutions or $o->ask_warn('', _("I can't find any room for installing")), die 'already displayed';
 
-    my $ok; while (!$ok) {
-	log::l('HERE: ', join(',', map { $_->[1] } @solutions));
-	if (my $sol = $o->ask_from_listf('', _("The DrakX Partitioning wizard found the following solutions:"), sub { $_[0][1] }, \@solutions)) {
-	    log::l("partitionWizard calling solution $sol->[1]");
-	    eval { $ok = $sol->[2]->() };
-	    die if $@ =~ /setstep/;
-	    $ok &&= !$@;
-	    $@ and $o->ask_warn('', _("Partitioning failed: %s", $@));
-	} else {
-	    $nodiskdrake ? return : die "setstep setupSCSI\n";
-	}
+    log::l('HERE: ', join(',', map { $_->[1] } @solutions));
+    if (my $sol = $o->ask_from_listf('', _("The DrakX Partitioning wizard found the following solutions:"), sub { $_[0][1] }, \@solutions)) {
+	log::l("partitionWizard calling solution $sol->[1]");
+	my $ok = eval { $sol->[2]->() };
+	die if $@ =~ /setstep/;
+	$@ and $o->ask_warn('', _("Partitioning failed: %s", $@));
+	$ok or goto &partitionWizard;
+    } else {
+	$nodiskdrake ? return : die "setstep setupSCSI\n";
     }
     1;
 }
