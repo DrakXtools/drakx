@@ -227,10 +227,6 @@ sub save_cron_files {
 	    -f "/etc/cron.$_/drakbackup" and rm_rf("/etc/cron.$_/drakbackup");
 	}
     }
-#	-f '/etc/cron.daily/drakbackup' and rm_rf( "/etc/cron.daily/drakbackup");
-#	-f '/etc/cron.weekly/drakbackup' and rm_rf( "/etc/cron.weekly/drakbackup");
-#	-f '/etc/cron.monthly/drakbackup' and rm_rf( "/etc/cron.monthly/drakbackup");
-
 }
 
 sub read_conf_file {
@@ -265,7 +261,7 @@ sub read_conf_file {
 	    if (/^USE_CD/)         { $where_cd = 1;  }
 	    if (/^USE_NET/)        { $where_net = 1; }
 	    if (/^CD_TIME/)        { s/^CD_TIME=//gi; $cd_time = $_; }
-#	    if (/^DAEMON_TIME_SPACE/)    { s/^DAEMON_TIME_SPACE=//gi; $when_space = $_; }
+	    if (/^DAEMON_TIME_SPACE/)    { s/^DAEMON_TIME_SPACE=//gi; $when_space = $_; }
 	    if (/^CD_WITH_INSTALL_BOOT/) { $cd_with_install_boot = 1; }
 	    if (/^CDRW_DEVICE/)    { s/^CDRW_DEVICE=//gi; $cd_devive = $_;}
 	    if (/^HOST_NAME/)      { s/^HOST_NAME=//gi; $host_name = $_;} 
@@ -467,7 +463,6 @@ sub wizard {
 		  [ 
 		    { label => _("System Files"), val => \$backup_sys, type => "bool", text => _("  all files on your /etc directory.") },
 		    { label => _("User Files"), val => \$backup_user, type => "bool", text => _("  all user files on your system.") },
-
 		    ],
 		  );
     
@@ -982,7 +977,7 @@ sub restore_step_user {
 					 0, _("User list to restore "),
 					 1, createScrolledWindow( gtkpack(new Gtk::VBox(0,0),
 									  map { my $name = $_;
-#										push @user_list_to_restore, $name;
+
 										my $b = new Gtk::CheckButton($name); 
 										if ( grep /^$name$/, @user_list_to_restore)  {
 										    gtkset_active($b, 1);
@@ -1233,13 +1228,12 @@ sub interactive_mode_my {
 								   ),
 						       ),
 					   0, new Gtk::HSeparator,
-					   0, new Gtk::HSeparator,
-					   0, gtkpack_(gtkset_layout(new Gtk::HButtonBox, -end),
-						       1, gtksignal_connect(new Gtk::Button(_("Advanced Conf.")), clicked => 
+					   0, gtkpack(new Gtk::HButtonBox,
+						       gtksignal_connect(new Gtk::Button(_(" Advanced Configuration ")), clicked => 
 									    sub { ${$central_widget}->destroy(); advanced() }),
-						       1, gtksignal_connect(new Gtk::Button(_("Wizard Conf.")), clicked => 
+						       gtksignal_connect(new Gtk::Button(_(" Wizard Configuration ")), clicked => 
 									    sub { ${$central_widget}->destroy(); wizard() }),
-						       1, gtksignal_connect(new Gtk::Button(_("close")), clicked => 
+						       gtksignal_connect(new Gtk::Button(_("close")), clicked => 
 									    sub {  Gtk->main_quit() }),
 						       ),
 					   ),
