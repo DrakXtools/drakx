@@ -321,7 +321,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o fix drakboot crashing once bootloader has been altered in text
     mode
 - printerdrake: further fix cups configuration (till)
-- upate translations
+- update translations
 
 * Wed Sep 17 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-14mdk
 - printerdrake: fix cups configuration regarding commented out rules
