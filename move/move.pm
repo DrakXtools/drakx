@@ -106,7 +106,7 @@ drakx_stuff:
     $o->{steps}{handleI18NClp} = { reachable => 1, text => "Handle I18N CLP" };
     $o->{steps}{handleMoveKey} = { reachable => 1, text => "Handle Move Key" };
     $o->{orderedSteps_orig} = $o->{orderedSteps};
-    $o->{orderedSteps} = [ qw(selectLanguage handleI18NClp acceptLicense handleMoveKey selectMouse selectKeyboard startMove) ];
+    $o->{orderedSteps} = [ qw(setupSCSI handleMoveKey selectLanguage handleI18NClp acceptLicense selectMouse selectKeyboard startMove) ];
     
     member($_, @ALLOWED_LANGS) or delete $lang::langs{$_} foreach keys %lang::langs;
 }
@@ -130,6 +130,43 @@ sub lomount_clp {
     run_program::run('mount', '-r', $dev, $dir);
 }
 
+sub install_TrueFS_in_home {
+    my ($o) = @_;
+    my $home = fsedit::mntpoint2part('/home', $o->{fstab}) or return;
+
+    my %loopbacks = map {
+	my $part = { 
+		type => 0x483, 
+		device => "/home/.mdkmove-$_",
+	        loopback_file => "/.mdkmove-$_", loopback_device => $home,
+		mntpoint => "/home/$_/.mdkmove-truefs", size => 5 << 11,
+		toFormat => ! -e "/home/.mdkmove-$_",
+	};
+	$_ => $part;
+    } list_users();
+    $home->{loopback} = [ values %loopbacks ];
+    fsedit::recompute_loopbacks($o->{all_hds});
+
+    $o->{fstab} = [ fsedit::get_all_fstab($o->{all_hds}) ];
+    install_steps_interactive::formatMountPartitions($o);
+
+    foreach my $user (keys %loopbacks) {
+	my $dir = $loopbacks{$user}{mntpoint};
+        run_program::run("/bin/chown", "$user.$user", $dir);
+
+	foreach (qw(.kde)) {
+	    if (-d "/home/$user/$_" && ! -d "$dir/$_") {
+		run_program::run('mv', "/home/$user/$_", "$dir/$_");
+	    }
+	    mkdir $_ and run_program::run("/bin/chown", "$user.$user", $_)
+	      foreach "/home/$user/$_", "$dir/$_";
+
+	    run_program::run('mount', '-o', 'bind', "$dir/$_", "/home/$user/$_");
+	}
+	$ENV{ICEAUTHORITY} = "$dir/.ICEauthority";
+    }
+}
+
 sub install2::handleI18NClp {
     my $o = $::o;
 
@@ -143,13 +180,7 @@ sub install2::handleMoveKey {
     require fsedit;
     require fs;
 
-    my @keys = grep { $_->{usb_media_type} && index($_->{usb_media_type}, 'Mass Storage|') == 0 && $_->{media_type} eq 'hd' } detect_devices::get();
-
-    foreach my $hd (@keys) {
-	$hd->{file} = devices::make($hd->{device});
-	fsedit::use_proc_partitions($hd);
-    }
-
+    my @keys = grep { $_->{usb_media_type} && index($_->{usb_media_type}, 'Mass Storage|') == 0 && $_->{media_type} eq 'hd' } @{$o->{all_hds}{hds}};
     my @parts = fsedit::get_fstab(@keys);
     each_index { 
 	$_->{mntpoint} = $::i ? "/mnt/key$::i" : '/home';
@@ -175,7 +206,9 @@ sub install2::startMove {
     require install_steps;
     install_steps::addUser($o);
 
-    my $w = $o->wait_message(N("Auto configuration"), N("Please wait, detecting and configuring devices..."));
+    install_TrueFS_in_home($o);
+
+    my $wait = $o->wait_message(N("Auto configuration"), N("Please wait, detecting and configuring devices..."));
 
     #- automatic printer, timezone, network configs
     require install_steps_interactive;
@@ -198,7 +231,7 @@ Continue at your own risk."), formatError($@) ]) if $@;
         }
     }
 
-    $w = undef;
+    $wait = undef;
 
     $::WizardWindow->destroy if $::WizardWindow;
     require ugtk2;
