@@ -89,7 +89,7 @@ sub real_main {
       my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
       my ($ndiswrapper_driver, $ndiswrapper_inf_file);
-      my ($module, $auto_ip, $protocol, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
+      my ($module, $auto_ip, $protocol, $onboot, $needhostname, $peerdns, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
       my $ethntf = {};
       my $db_path = "/usr/share/apps/kppp/Provider";
@@ -987,9 +987,10 @@ Do you really want to reconfigure this device?"),
                    lan_intf =>
                    {
                     pre => sub  {
-                        $onboot = $ethntf->{ONBOOT} ? $ethntf->{ONBOOT} =~ /yes/ : bool2yesno(!member($ethntf->{DEVICE}, 
+                        $onboot = $ethntf->{ONBOOT} ? $ethntf->{ONBOOT} =~ /yes/ : bool2yesno(!member($ethntf->{DEVICE},
                                                                                                       map { $_->{device} } detect_devices::pcmcia_probe()));
-                        $needhostname = $ethntf->{NEEDHOSTNAME} !~ /no/; 
+                        $needhostname = $ethntf->{NEEDHOSTNAME} !~ /no/;
+                        $peerdns = $ethntf->{PEERDNS} !~ /no/;
                         # blacklist bogus driver, enable ifplugd support else:
                         $ethntf->{MII_NOT_SUPPORTED} ||= $is_hotplug_blacklisted->();
                         $hotplug = !text2bool($ethntf->{MII_NOT_SUPPORTED});
@@ -1023,9 +1024,10 @@ notation (for example, 1.2.3.4).")),
                           if_($netcnx->{type} eq "lan",
                               { text => N("Start at boot"), val => \$onboot, type => "bool" },
                              ),
-                          if_($auto_ip, 
-                              { label => N("DHCP client"), val => \$netc->{dhcp_client}, 
+                          if_($auto_ip,
+                              { label => N("DHCP client"), val => \$netc->{dhcp_client},
                                 list => [ qw(dhcp-client dhcpcd pump dhcpxd) ], advanced => 1 },
+                              { text => N("Get DNS servers from DHCP"), val => \$peerdns, type => "bool", advanced => 1 },
                              ),
                         ];
                     },
@@ -1053,6 +1055,7 @@ notation (for example, 1.2.3.4).")),
                     post => sub {
                         $ethntf->{ONBOOT} = bool2yesno($onboot);
                         $ethntf->{NEEDHOSTNAME} = bool2yesno($needhostname);
+                        $ethntf->{PEERDNS} = bool2yesno($peerdns);
                         $ethntf->{MII_NOT_SUPPORTED} = bool2yesno(!$hotplug);
                         $ethntf->{HWADDR} = $track_network_id or delete $ethntf->{HWADDR};
                         $netc->{$_} = $ethntf->{DEVICE} foreach qw(NET_DEVICE NET_INTERFACE);
