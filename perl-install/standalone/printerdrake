@@ -518,13 +518,13 @@ sub About() {
     $list->can_focus(0);
     each_index { $list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => $::i)) } 0..2;
     $list->set_headers_visible(0);
-    foreach my $row ([ N("Authors: "), '', '' ], [ '', 'Till Kamppeter', "<till\@$domainname>" ], ['', '', '']) {
+    foreach my $row ([ '', '', ''], [ N("Authors: "), 'Till Kamppeter', "<till\@$domainname>" ], ['', '', '']) {
         $tree_model->append_set(undef, [ map_index { $::i => $_ } @$row ]);
     }
     $list->get_selection->set_mode('none');
     gtkpack_($window_about->vbox,
-             -r "$pixdir/printerdrake.png" ?
-             (0, Gtk2::Image->new_from_file("$pixdir/printerdrake.png")) : (1, gtkmodify_font(Gtk2::Label->new(N("Printer Management \n") . $us->{VERSION}), 'Bold 18'),),
+             -r "$pixdir/about-printerdrake.png" ?
+             (0, Gtk2::Image->new_from_file("$pixdir/about-printerdrake.png")) : (1, gtkmodify_font(Gtk2::Label->new(N("Printer Management \n") . $us->{VERSION}), 'Bold 18'),),
 	     1, $list,
 	    );
     $window_about->show_all;
