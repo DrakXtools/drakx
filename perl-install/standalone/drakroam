@@ -75,29 +75,21 @@ my %available_roaming_daemons = (
 				      },
 				      write_config => sub {
 					  my ($config) = @_;
-					  open(my $CONFIG, "> $config") or die("Can't open configuration file\n");
-					  print $CONFIG "#wlandetect configuration file\n#format: essid<tab><tab>commands\n#use \@DEV\@ for device name\n";
+					  my @contents = (
+							  "#wlandetect configuration file\n",
+							  "#format: essid<tab><tab>commands\n",
+							  "#use \@DEV\@ for device name\n"
+							 );
 					  foreach my $row (@{$KnownList->{data}}) { # again, lame
-					      print $CONFIG "$row->[0]\t\t$IWConfig essid $row->[0]";
-					      if ($row->[1]) {
-						  print $CONFIG "mode $row->[1] ";
-					      }
-					      if ($row->[2]) {
-						  print $CONFIG "channel $row->[2] ";
-					      }
-					      if ($row->[3]) {
-						  print $CONFIG "key $row->[3] ";
-					      }
-					      print $CONFIG "; ";
-					      if ($row->[4]) {
-						  print $CONFIG "$IFConfig \@DEV\@ up; $DHClient \@DEV\@";
-					      }
-					      else {
-						  print $CONFIG "$IFUp \@DEV\@"
-					      }
-					      print $CONFIG "\n";
+					      my $essid = $row->[0];
+					      my $iwc = join(' ', $IWConfig, "essid $essid",
+							     if_($row->[1], "mode $row->[1]"),
+							     if_($row->[2], "channel $row->[2]"),
+							     if_($row->[3], "key $row->[3]"));
+					      my $ifc = $row->[4] ? "$IFConfig \@DEV\@ up; $DHClient \@DEV\@" : "$IFUp \@DEV\@";
+					      push @contents, "$essid\t\t$iwc; $ifc\n";
 					  }
-					  close $CONFIG;
+					  output($config, @contents);
 				      },
 				     },
 );
