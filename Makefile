@@ -24,10 +24,10 @@ tar: clean
 install_only:
 	for i in images misc Mandrake Mandrake/base Mandrake/share; do install -d $(ROOTDEST)/$$i ; done
     ifneq (ppc,$(ARCH))
-	cp -f images/* $(ROOTDEST)/images; done
+	cp -f images/* $(ROOTDEST)/images
     endif
     ifeq (alpha,$(ARCH))
-	cp -f images/* $(ROOTDEST)/boot; done
+	cp -f images/* $(ROOTDEST)/boot
 	cp -f vmlinux.gz $(ROOTDEST)/boot/instboot.gz
 	make -C tools/$(ARCH)/cd install ROOTDEST=$(ROOTDEST)
     endif
