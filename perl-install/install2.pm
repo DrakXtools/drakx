@@ -217,16 +217,16 @@ sub choosePackages {
     my ($_clicked, $ent_number, $auto) = @_;
     require pkgs;
 
-    #- always setPackages as it may have to copy hdlist files and synthesis files.
+    #- always setPackages as it may have to copy hdlist and synthesis files.
     installStepsCall($o, $auto, 'setPackages', $o->{isUpgrade} && $ent_number == 1);
     installStepsCall($o, $auto, 'choosePackages', $o->{packages}, $o->{compssUsers}, $ent_number == 1);
     my @flags = map_each { if_($::b, $::a) } %{$o->{rpmsrate_flags_chosen}};
     log::l("rpmsrate_flags_chosen's: ", join(' ', sort @flags));
 
-    #- check pre-condition where base backage has to be selected.
+    #- check pre-condition that basesystem package must be selected.
     pkgs::packageByName($o->{packages}, 'basesystem')->flag_available or die "basesystem package not selected";
 
-    #- check if there are package that need installation.
+    #- check if there are packages that need installation.
     $o->{steps}{installPackages}{done} = 0 if $o->{steps}{installPackages}{done} && pkgs::packagesToInstall($o->{packages}) > 0;
 }
 
