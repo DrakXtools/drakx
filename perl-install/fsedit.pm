@@ -311,6 +311,8 @@ sub rescuept($) {
 	    $_->{start}--;
 	    $_->{size}++;
 	}
+	local $b->{notFormatted};
+
 	partition_table::add($hd, $_, ($b ? 'Extended' : 'Primary'), 1);
     }
 }

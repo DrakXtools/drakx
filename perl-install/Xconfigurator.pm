@@ -2,7 +2,7 @@ package Xconfigurator;
 
 use diagnostics;
 use strict;
-use vars qw($in $install $resolution_wanted @depths %depths @resolutions @svgaservers @accelservers @allservers %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate @vsync_range %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1);
+use vars qw($in $install $resolution_wanted @depths @hsyncranges @vsyncranges %depths @resolutions @svgaservers @accelservers @allservers %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1);
 
 use pci_probing::main;
 use common qw(:common :file);
@@ -190,8 +190,22 @@ sub monitorConfiguration(;$) {
 
     readMonitorsDB(-e "MonitorsDB" ? "MonitorsDB" : "/usr/share/MonitorsDB");
 
-    add2hash($monitor, { type => $in->ask_from_list('', _("Choose a monitor"), [keys %monitors]) }) unless $monitor->{type};
-    add2hash($monitor, $monitors{$monitor->{type}});
+    add2hash($monitor, { type => $in->ask_from_list('', _("Choose a monitor"), ['Unlisted', keys %monitors]) }) unless $monitor->{type};
+    if ($monitor->{type} eq 'Unlisted') {
+	$in->ask_from_entries_ref('', 
+_("The two critical parameters are the vertical refresh rate, which is the rate
+at which the whole screen is refreshed, and most importantly the horizontal
+sync rate, which is the rate at which scanlines are displayed.
+
+It is VERY IMPORTANT that you do not specify a monitor type with a sync range
+that is beyond the capabilities of your monitor. If in doubt, choose a
+conservative setting."),
+				  [ _("Horizontal refresh rate"), _("Vertical refresh rate") ],
+				  [ { val => \$monitor->{hsyncrange}, list => \@hsyncranges },
+				    { val => \$monitor->{vsyncrange}, list => \@vsyncranges }, ]);
+    } else {
+	add2hash($monitor, $monitors{$monitor->{type}});
+    }
     add2hash($monitor, { type => "Unknown", vendor => "Unknown", model => "Unknown" });
 
     $monitor;
