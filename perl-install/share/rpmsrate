@@ -33,10 +33,11 @@ TV
 OFFICE
   4 staroffice-en staroffice-de staroffice-es staroffice-fr staroffice-it
     acroread acroread-nppdf
-  4 !KDE abiword 
+  4 GNOME abiword 
   4 cbb gaddr ical xpdf moneydance
   3 wv 
-  2 units lyx
+  4 LOCALES"zh" pyDict
+  2 units lyx phpgroupware
   GNOME
     4 gnome-pim gnome-pim-conduits gnumeric
     3 gnome-pilot-conduits
@@ -79,6 +80,7 @@ PUBLISHING
       foomatic cups-drivers xpp
       KDE kups
   5 LPR foomatic
+  1 CUPS hpoj
 
 SHELLS
   3 zsh
@@ -115,6 +117,7 @@ TEXT_TOOLS
 COMMUNICATIONS
   4 efax
   3 dip jpilot pilot-link
+  2 hylafax-server hylafax-client
   2 lrzsz mgetty mgetty-contrib mgetty-sendfax mgetty-viewfax mgetty-voice minicom
   1 jpilot-Mail jpilot-syncmal statserial tkbabel
 
@@ -158,7 +161,7 @@ NETWORKING_IRC
   1 eggdrop
 
 NETWORKING_FIREWALLING_SERVER
-  5 iproute2 routed 
+  5 iproute2 routed iptables ipchains
   1 portsentry 
 
 NETWORKING_MAIL
@@ -168,7 +171,7 @@ NETWORKING_MAIL
   3 fetchmail urlview
   3 !GNOME !KDE xmailbox
   2 FaxMail comsat elm faces-xface
-  1 exmh mutt fetchmail-daemon fetchmailconf
+  1 exmh mutt fetchmail-daemon fetchmailconf pine
 NETWORKING_MAIL_SERVER
   5 postfix 
   4 sympa 
@@ -226,25 +229,25 @@ NETWORKING_FILE
 NETWORKING_FILE_SERVER 
   5 nfs-utils
   4 samba arkeia-server-shareware
-  3 squid
+  3 squid squidGard
 
 NETWORKING_WWW
   5 lynx
-  4 bluefish netscape-communicator wget links mozilla mozilla-psm
+  4 netscape-communicator wget links mozilla mozilla-psm
   4 GNOME screem galeon nautilus nautilus-mozilla
-  3 plugger opera
+  3 plugger opera bluefish
   4 netscape-castellano netscape-catalan netscape-chinese_gb2312 netscape-chinese_big5 netscape-euskara netscape-francais netscape-german netscape-japanese netscape-polish netscape-russian netscape-walon
 NETWORKING_WWW_SERVER
   5 apache apache-mod_perl mod_ssl
   4 apache-suexec 
   4 BOOKS apache-manual
   3 php-dba_gdbm_db2 php-gd php-imap php-ldap php-manual php-mysql php-oracle
-    php-pgsql php-readline php mod_php mod_ssl-sxnet auth_ldap HTML-Embperl
+    php-pgsql php-readline php mod_php mod_ssl-sxnet auth_ldap HTML-Embperl PHP-nuke
   1 Zope Zope-core Zope-pcgi Zope-zserver
 
 GRAPHICS
   4 blender
-  4 ImageMagick giftrans gimp gphoto qiv xli ac3d dia
+  4 ImageMagick giftrans gimp gphoto gphoto2 qiv xli ac3d dia
   3 gimp-data-extras gqview sketch xloadimage xpcd xwpick
   2 gif2png gimp-perl xfig xpcd-gimp gd-utils cameleo VariCAD VariCAD_de VariCAD_it VariCAD_es 
   1 libgr-progs libungif-progs qcad transfig zgv xpaint xmorph
@@ -316,6 +319,7 @@ GAMES
       
     4 !HW"Riva.*128" !HW"Rage X[CL]" !HW"Rage Mobility (?:P\/M|L) " !HW"3D Rage (?:LT|Pro)" # XF3 3D
         bzflag
+    3 FlightGear
 
 DEVELOPMENT
   5 autoconf automake m4 make 
@@ -335,7 +339,7 @@ DEVELOPMENT
   2 doxygen C++2LaTeX
 
   3 jikes kaffe
-  1 gcc-java
+  1 gcc-java gcc3.0 gcc3.0-g77
 
   5 cvs rcs
   2 diffstat tkcvs
@@ -394,7 +398,7 @@ DEVELOPMENT
       recode-devel aspell-devel cdrecord-devel cracklib-devel faces-devel fnlib-devel
       freetype-devel gtk+mdk-devel gtkglarea-devel XFree86-static-libs imap-devel
       php-devel pth-devel sane-devel swig-devel xdelta-devel isapnptools-devel
-      pango-devel
+      pango-devel readline-devel
 
 MONITORING
   5 procinfo psacct
@@ -431,9 +435,10 @@ X
   4 gurpmi rpmdrake drakconf fonts-ttf-decoratives harddrake fonts-ttf-west_european
     menudrake drakfloppy drakfont mandrake_desk
     Aurora-Monitor-NewStyle-Categorizing-WsLib
-  4 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" rxvt-CJK
+  4 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" rxvt-CJK 
 
   3 XFree86-100dpi-fonts draksync drakprofile
+  2 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" jmcce 
   2 tksysv imlib-cfgeditor
     Aurora-Monitor-NewStyle-WsLib Aurora-Monitor-Traditional-Gtk+
     Aurora-Monitor-Traditional-WsLib
@@ -442,7 +447,7 @@ X
   GNOME
     3 gnome-print gnorpm
 
-  5 xcin xa+cv xvnkb FreeWnn ami
+  5 xcin Chinput xa+cv xvnkb FreeWnn ami
   5 GNOME ami-gnome
   2 app-defaults-be app-defaults-cs app-defaults-ga app-defaults-ru app-defaults-th app-defaults-uk
 
@@ -465,10 +470,10 @@ SYSTEM
     linux_logo locales man-pages iputils 
     urpmi cpio
 
-  4 sndconfig ftp ftp-client-krb5 gpm hexedit strace
+  4 sndconfig ftp ftp-client-krb5 gpm hexedit strace lvm
 
   3 bc
-  2 kernel-utils sane acpid adns audiofile awesfx fbset sudo
+  2 kernel-utils sane acpid adns audiofile freeswan awesfx fbset sudo
   1 fdutils genromfs mailcap pinfo
 
   BOOKS 
@@ -480,6 +485,7 @@ SYSTEM
   3 PCMCIA irda-utils
 
   4 LOCALES"ar" || LOCALES"fa" || LOCALES"he" || LOCALES"yi" acon
+  3 LOCALES"zh" zh-autoconvert
 
 EMULATORS
   3 wine
@@ -495,6 +501,9 @@ INSTALL
     XFree86 XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa
     XFree86-3DLabs XFree86-FBDev
     kernel kernel-smp kernel-enterprise kernel22 kernel22-smp kernel22-secure 
+    autologin foomatic ntp cups-drivers lpr samba ncpfs ghostscript-utils
+    reiserfsprogs jfsprogs ipchains printer-utils rlpr samba-client ncpfs nc
+    xpp LPRng pdq kups printer-testpages 
     autologin ntp reiserfsprogs ipchains
     cups LPRng lpr pdq foomatic printer-utils printer-testpages gimpprint xpp 
     qtcups kups cups-drivers rlpr samba samba-common samba-client ncpfs nc 
