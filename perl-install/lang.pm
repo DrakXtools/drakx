@@ -3,6 +3,7 @@ package lang; # $Id$
 use diagnostics;
 use strict;
 use common;
+use utf8;
 use log;
 
 #- key: lang name (locale name for some (~5) special cases needing
