@@ -451,6 +451,7 @@ sub read_rpmsrate {
     my $line_nb = 0;
     my $fatal_error;
     my (@l);
+    local $_;
     while (<$f>) {
 	$line_nb++;
 	/\t/ and die "tabulations not allowed at line $line_nb\n";

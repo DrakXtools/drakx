@@ -67,12 +67,14 @@ sub test {
     my $b = before_leaving { unlink $f_err };
 
     if (!xtest(":9")) {
-	local $_;
 	local *F; open F, $f_err;
+
+	local $_;
       i: while (<F>) {
 	    if (Xconfig::card::using_xf4($card)) {
 		if (/^\(EE\)/ && !/Disabling/ || /^Fatal\b/) {
 		    my @msg = !/error/ && $_ ;
+		    local $_;
 		    while (<F>) {
 			/reporting a problem/ and last;
 			push @msg, $_;
@@ -83,6 +85,7 @@ sub test {
 	    } else {
 		if (/\b(error|not supported)\b/i) {
 		    my @msg = !/error/ && $_ ;
+		    local $_;
 		    while (<F>) {
 			/not fatal/ and last i;
 			/^$/ and last;

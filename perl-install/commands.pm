@@ -319,11 +319,13 @@ sub head_tail {
     $n = $n ? shift : 10;
     local *F; @_ ? open(F, $_[0]) || die "error: can't open file $_[0]\n" : (*F = *STDIN);
 
-    local $_;
     if ($0 eq 'head') {
+	local $_;
 	while (<F>) { $n-- or return; print }
     } else {
-	@_ = (); while (<F>) { push @_, $_; @_ > $n and shift }
+	@_ = (); 
+	local $_;
+	while (<F>) { push @_, $_; @_ > $n and shift }
 	print @_;
     }
 }
@@ -334,7 +336,9 @@ sub strings {
     my ($h, $o, $n) = getopts(\@_, qw(hon));
     $h and die "usage: strings [-o] [-n min-length] [<files>]\n";
     $n = $n ? shift : 4;
-    $/ = "\0"; @ARGV = @_; my $l = 0; while (<>) {
+    $/ = "\0"; @ARGV = @_; my $l = 0; 
+    local $_;
+    while (<>) {
 	while (/[$printable_chars]{$n,}/og) {
 	    printf "%07d ", ($l + length $') if $o;
 	    print "$&\n" ;
@@ -344,7 +348,9 @@ sub strings {
 }
 
 sub hexdump {
-    my $i = 0; $/ = \16; @ARGV = @_; while (<>) {
+    my $i = 0; $/ = \16; @ARGV = @_; 
+    local $_;
+    while (<>) {
 	printf "%08lX  ", $i; $i += 16;
 	print join(" ", (map { sprintf "%02X", $_ } unpack("C*", $_)),
 		   (s/[^$printable_chars]/./og, $_)[1]), "\n";
@@ -355,8 +361,10 @@ sub more {
     @ARGV = @_;
     require devices;
     my $tty = devices::make('tty');
-    local *IN; open IN, "<$tty" or die "can't open $tty\n";
-    my $n = 0; while (<>) {
+    my $n = 0; 
+    local *IN; open IN, $tty or die "can't open $tty\n";
+    local $_;
+    while (<>) {
 	if (++$n == 25) {
 	    my $v = <IN>;
 	    $v =~ /^q/ and exit 0;

@@ -117,7 +117,7 @@ sub get_default_spooler () {
 sub set_default_spooler ($) {
     my ($printer) = @_;
     # Make Foomatic config directory if it does not exist yet
-    mkdir "$prefix$FOOMATICCONFDIR" if (!(-d "$prefix$FOOMATICCONFDIR"));
+    mkdir "$prefix$FOOMATICCONFDIR" if !(-d "$prefix$FOOMATICCONFDIR");
     # Mark the default driver in a file
     open DEFSPOOL, "> $prefix$FOOMATIC_DEFAULT_SPOOLER" or 
 	die "Cannot create $prefix$FOOMATIC_DEFAULT_SPOOLER!";
@@ -148,13 +148,13 @@ sub set_permissions {
 sub restart_service ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
-    return 1 if (!(-x "$prefix/etc/rc.d/init.d/$service"));
+    return 1 if !(-x "$prefix/etc/rc.d/init.d/$service");
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "restart");
     if (($? >> 8) != 0) {
 	return 0;
     } else {
 	# CUPS needs some time to come up.
-	wait_for_cups() if ($service eq "cups");
+	wait_for_cups() if $service eq "cups";
 	return 1;
     }
 }
@@ -162,13 +162,13 @@ sub restart_service ($) {
 sub start_service ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
-    return 1 if (!(-x "$prefix/etc/rc.d/init.d/$service"));
+    return 1 if !(-x "$prefix/etc/rc.d/init.d/$service");
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "start");
     if (($? >> 8) != 0) {
 	return 0;
     } else {
 	# CUPS needs some time to come up.
-	wait_for_cups() if ($service eq "cups");
+	wait_for_cups() if $service eq "cups";
 	return 1;
     }
 }
@@ -176,7 +176,7 @@ sub start_service ($) {
 sub start_not_running_service ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
-    return 1 if (!(-x "$prefix/etc/rc.d/init.d/$service"));
+    return 1 if !(-x "$prefix/etc/rc.d/init.d/$service");
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "status");
     # The exit status is not zero when the service is not running
     if (($? >> 8) != 0) {
@@ -185,7 +185,7 @@ sub start_not_running_service ($) {
 	    return 0;
 	} else {
 	    # CUPS needs some time to come up.
-	    wait_for_cups() if ($service eq "cups");
+	    wait_for_cups() if $service eq "cups";
 	    return 1;
 	}
     } else {
@@ -196,7 +196,7 @@ sub start_not_running_service ($) {
 sub stop_service ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
-    return 1 if (!(-x "$prefix/etc/rc.d/init.d/$service"));
+    return 1 if !(-x "$prefix/etc/rc.d/init.d/$service");
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "stop");
     if (($? >> 8) != 0) { return 0 } else { return 1 }
 }
@@ -204,7 +204,7 @@ sub stop_service ($) {
 sub service_running ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
-    return 0 if (!(-x "$prefix/etc/rc.d/init.d/$service"));
+    return 0 if !(-x "$prefix/etc/rc.d/init.d/$service");
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "status");
     # The exit status is not zero when the service is not running
     if (($? >> 8) != 0) {
@@ -244,7 +244,7 @@ sub SIGHUP_daemon {
     # PDQ has no daemon, exit.
     if ($service eq "pdq") { return 1 };
     # CUPS needs auto-correction for its configuration
-    run_program::rooted($prefix, "/usr/sbin/correctcupsconfig") if ($service eq "cups");
+    run_program::rooted($prefix, "/usr/sbin/correctcupsconfig") if $service eq "cups";
     # Name of the daemon
     my %daemons = (
 			    "lpr" => "lpd",
@@ -254,7 +254,7 @@ sub SIGHUP_daemon {
 			    "devfs" => "devfsd",
 			    );
     my $daemon = $daemons{$service};
-    $daemon = $service if (! defined $daemon);
+    $daemon = $service if ! defined $daemon;
 #    if ($service eq "cups") {
 #	# The current CUPS (1.1.13) dies on SIGHUP, do the normal restart.
 #	restart_service($service);
@@ -493,12 +493,14 @@ sub getIPsInLocalNetworks {
 	open F, ($::testing ? "" : "chroot $prefix/ ") . 
 	    "/bin/sh -c \"export LC_ALL=C; ping -w 1 -b -n $bcast | cut -f 4 -d ' ' | sed s/:// | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' | uniq | sort\" |" 
 	    or next;
+	local $_;
 	while (<F>) { chomp; push @addresses, $_ }
 	close F;
 	if (-x "/usr/bin/nmblookup") {
 	    open F, ($::testing ? "" : "chroot $prefix/ ") . 
 		"/bin/sh -c \"export LC_ALL=C; nmblookup -B $bcast \\* | cut -f 1 -d ' ' | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' | uniq | sort\" |" 
 		or next;
+	    local $_;
 	    while (<F>) { chomp;
 			  push @addresses, $_ if !(member($_,@addresses)) }
 	    close F;
@@ -517,8 +519,8 @@ sub whatNetPrinter {
 
     # Which ports should be scanned?
     my @portstoscan;
-    push @portstoscan, "139" if ($smb);
-    push @portstoscan, "4010", "4020", "4030", "5503", "9100-9104" if ($network);
+    push @portstoscan, "139" if $smb;
+    push @portstoscan, "4010", "4020", "4030", "5503", "9100-9104" if $network;
     
     return () if $#portstoscan < 0;
     my $portlist = join (",", @portstoscan);
@@ -558,7 +560,7 @@ sub whatNetPrinter {
 	    undef $modelinfo;
 
 	} elsif ($line =~ m/^\s*(\d+)\/\S+\s+open\s+/i) {
-	    next if ($ip eq "");
+	    next if $ip eq "";
 	    $port = $1;
 	    
 	    # Now we have all info for one printer
@@ -878,8 +880,6 @@ sub read_printer_db(;$) {
 
     my $dbpath = $prefix . $PRINTER_DB_FILE;
 
-    local $_; #- use of while (<...
-
     local *DBPATH; #- don't have to do close ... and don't modify globals at least
     # Generate the Foomatic printer/driver overview, read it from the
     # appropriate file when it is already generated
@@ -895,6 +895,7 @@ sub read_printer_db(;$) {
     my $inentry = 0;
     my $indrivers = 0;
     my $inautodetect = 0;
+    local $_;
     while (<DBPATH>) {
 	chomp;
 	if ($inentry) {
@@ -1698,7 +1699,7 @@ sub help_output {
     open F, ($::testing ? $prefix : "chroot $prefix/ ") . sprintf($spoolers{$spooler}{help}, $queue);
     $helptext = join("", <F>);
     close F;
-    $helptext = "Option list not available!\n" if ($spooler eq 'lpq' && (!$helptext || ($helptext eq "")));
+    $helptext = "Option list not available!\n" if $spooler eq 'lpq' && (!$helptext || ($helptext eq ""));
     return $helptext;
 }
 
@@ -1728,7 +1729,6 @@ sub print_optionlist {
 
 sub get_copiable_queues {
     my ($oldspooler, $newspooler) = @_;
-    local $_; #- use of while (<...
 
     local *QUEUEOUTPUT; #- don't have to do close ... and don't modify globals
                         #- at least
@@ -1740,6 +1740,7 @@ sub get_copiable_queues {
 
     my $entry = {};
     my $inentry = 0;
+    local $_;
     while (<QUEUEOUTPUT>) {
 	chomp;
 	if ($inentry) {
@@ -1827,6 +1828,7 @@ sub configure_hpoj {
 	    die "unable to open $prefix/usr/sbin/ptal-init";
 	};
 	my @ptalinitfunctions; # subroutine definitions in /usr/sbin/ptal-init
+	local $_;
 	while (<PTALINIT>) {
 	    if (m!sub main!) {
 		last;
@@ -1892,8 +1894,8 @@ sub configure_hpoj {
     } elsif ($device =~ /socket/) {
 	$bus = "hpjd";
 	$hostname = $model;
-	return "" if ($port) && (($port < 9100) || ($port > 9103));
-	if (($port) && ($port != 9100)) {
+	return "" if $port && ($port < 9100 || $port > 9103);
+	if ($port && $port != 9100) {
 	    $port -= 9100;
 	    $hostname .= ":$port";
 	}
@@ -2865,8 +2867,7 @@ sub addentry {
     my $sectionfound = 0;
     my $entryinserted = 0;
     my @lines = split("\n", $filecontent);
-    local $_;
-    for (@lines) {
+    foreach (@lines) {
 	if (!$sectionfound) {
 	    if (/^\s*\[\s*$section\s*\]\s*$/) {
 		$sectionfound = 1;
@@ -2889,8 +2890,7 @@ sub addsection {
     my ($section, $filecontent) = @_;
     my $entryinserted = 0;
     my @lines = split("\n", $filecontent);
-    local $_;
-    for (@lines) {
+    foreach (@lines) {
 	if (/^\s*\[\s*$section\s*\]\s*$/) {
 	    # section already there, nothing to be done
 	    return $filecontent;
@@ -2904,8 +2904,7 @@ sub removeentry {
     my $sectionfound = 0;
     my $done = 0;
     my @lines = split("\n", $filecontent);
-    local $_;
-    for (@lines) {
+    foreach (@lines) {
 	$_ = "$_\n";
 	next if ($done);
 	if (!$sectionfound) {
@@ -2929,8 +2928,7 @@ sub removesection {
     my $sectionfound = 0;
     my $done = 0;
     my @lines = split("\n", $filecontent);
-    local $_;
-    for (@lines) {
+    foreach (@lines) {
 	$_ = "$_\n";
 	next if ($done);
 	if (!$sectionfound) {
@@ -3182,6 +3180,7 @@ sub findgimpconfigfiles {
     my @filestotreat;
     local *PASSWD;
     open PASSWD, "< $prefix/etc/passwd" or die "Cannot read /etc/passwd!\n";
+    local $_;
     while (<PASSWD>) {
 	chomp;
 	if (/^([^:]+):[^:]*:([^:]+):([^:]+):[^:]*:([^:]+):[^:]*$/) {
@@ -3240,8 +3239,7 @@ sub addgimpentry {
     my $sectionfound = 0;
     my $entryinserted = 0;
     my @lines = split("\n", $filecontent);
-    local $_;
-    for (@lines) {
+    foreach (@lines) {
 	if (!$sectionfound) {
 	    if (/^\s*Printer\s*:\s*($section)\s*$/) {
 		$sectionfound = 1;
@@ -3264,8 +3262,7 @@ sub addgimpprinter {
     my ($section, $filecontent) = @_;
     my $entryinserted = 0;
     my @lines = split("\n", $filecontent);
-    local $_;
-    for (@lines) {
+    foreach (@lines) {
 	if (/^\s*Printer\s*:\s*($section)\s*$/) {
 	    # section already there, nothing to be done
 	    return $filecontent;
@@ -3279,8 +3276,7 @@ sub removegimpentry {
     my $sectionfound = 0;
     my $done = 0;
     my @lines = split("\n", $filecontent);
-    local $_;
-    for (@lines) {
+    foreach (@lines) {
 	$_ = "$_\n";
 	next if ($done);
 	if (!$sectionfound) {
@@ -3304,8 +3300,7 @@ sub removegimpprinter {
     my $sectionfound = 0;
     my $done = 0;
     my @lines = split("\n", $filecontent);
-    local $_;
-    for (@lines) {
+    foreach (@lines) {
 	$_ = "$_\n";
 	next if ($done);
 	if (!$sectionfound) {
@@ -3332,8 +3327,7 @@ sub isgimpprinterconfigured {
     my $ppdfileset = 0;
     my $nonrawprinting = 0;
     my @lines = split("\n", $filecontent);
-    local $_;
-    for (@lines) {
+    foreach (@lines) {
 	last if ($done);
 	if (!$sectionfound) {
 	    if (/^\s*Printer\s*:\s*($queue)\s*$/) {

@@ -787,7 +787,7 @@ sub gtkcreate_xpm {
 
 sub gtkcreate_png_pixbuf {
     my ($f) = shift;
-    die 'gdk-pixbuf library is not available' unless ($use_pixbuf);
+    die 'gdk-pixbuf library is not available' unless $use_pixbuf;
     $f =~ /\.(png|jpg)$/ or $f .= '.png';
     if ($f !~ /^\//) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
     Gtk::Gdk::Pixbuf->new_from_file($f) or die "gtkcreate_png: missing png file $f";

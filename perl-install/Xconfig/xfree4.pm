@@ -49,7 +49,7 @@ sub new_mouse_sections {
     } (1 .. $nb_new);
 
     push @$layout, { val => qq("Mouse1" "CorePointer") };
-    push @$layout, { val => qq("Mouse$_" "SendCoreEvents") } foreach (2 .. $nb_new);
+    push @$layout, { val => qq("Mouse$_" "SendCoreEvents") } foreach 2 .. $nb_new;
 
     @l;
 }

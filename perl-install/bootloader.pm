@@ -591,7 +591,7 @@ sub get_of_dev {
 	run_program::rooted_or_die($::prefix, "/usr/sbin/ofpath $unix_dev", ">", "/tmp/ofpath");
 	open(FILE, "$::prefix/tmp/ofpath") || die "Can't open $::prefix/tmp/ofpath";
 	my $of_dev = "";
-	local $_ = "";
+	local $_;
 	while (<FILE>){
 		$of_dev = $_;
 	}

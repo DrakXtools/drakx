@@ -177,7 +177,7 @@ sub detect {
 
 sub first_time_dialog {
     my ($printer, $in, $upNetwork) = @_;
-    return 1 if (printer::get_default_spooler () or $::isInstall);
+    return 1 if printer::get_default_spooler () or $::isInstall;
 
     # Wait message
     my $w = $in->wait_message(N("Printerdrake"), 
@@ -2452,7 +2452,7 @@ sub copy_queues_from {
 	@oldqueues = sort(@oldqueues);
 	$newspoolerstr = $printer::shortspooler_inv{$newspooler};
 	$oldspoolerstr = $printer::shortspooler_inv{$oldspooler};
-	for (@oldqueues) {
+	foreach (@oldqueues) {
 	    push (@queuesselected, 1);
 	    push (@queueentries, { text => $_, type => 'bool', 
 				   val => \$queuesselected[$#queuesselected] });
@@ -2488,7 +2488,7 @@ Mark the printers which you want to transfer and click
          \@queueentries
       )) {
 	my $queuecopied = 0;
-	for (@oldqueues) {
+	foreach (@oldqueues) {
 	    if (shift(@queuesselected)) {
                 my $oldqueue = $_;
                 my $newqueue = $_;
