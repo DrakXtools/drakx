@@ -33,6 +33,7 @@
 void init_frontend(char * welcome_msg)
 {
 	printf(welcome_msg);
+	printf("\n");
 }
 
 
