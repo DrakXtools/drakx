@@ -232,9 +232,9 @@ sub cardConfiguration(;$$$) {
 	    push @choices, { text => _("Configure all heads independantly"), code => sub { $configure_multi_head->('') } };
 	    push @choices, { text => _("Use Xinerama extension"), code => sub { $configure_multi_head->(1) } };
 	}
-	foreach (values %single_heads) {
-	    push @choices, { text => _("Configure only card \"%s\" (%s)", $_->{identifier}, $_->{busid}),
-			     code => sub { add2hash($card, $_); delete $card->{cards}; delete $card->{Xinerama} } };
+	foreach my $e (values %single_heads) {
+	    push @choices, { text => _("Configure only card \"%s\" (%s)", $e->{identifier}, $e->{busid}),
+			     code => sub { add2hash($card, $e); delete $card->{cards}; delete $card->{Xinerama} } };
 	}
 	$tc = $in->ask_from_listf(_("Multi-head configuration"),
 _("Your system support multiple head configuration.
