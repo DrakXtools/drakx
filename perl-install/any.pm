@@ -411,6 +411,7 @@ sub get_autologin() {
 
 sub set_autologin {
     my ($user, $wm) = @_;
+    log::l("set_autologin $user $wm");
     my $autologin = bool2text($user);
 
     #- Configure KDM / MDKKDM
@@ -440,6 +441,7 @@ sub set_autologin {
 }
 sub set_window_manager {
     my ($home, $wm) = @_;
+    log::l("set_window_manager $home $wm");
     my $p_home = "$::prefix$home";
 
     #- for KDM/GDM
