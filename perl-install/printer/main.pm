@@ -427,18 +427,14 @@ sub read_printer_db(;$) {
 		    } elsif (m!^\s*<ieee1284>\s*([^<>]+)\s*</ieee1284>\s*$!) {
 			# Full ID string
 			my $idstr = $1;
-			$idstr =~ m!(MFG|MANUFACTURER):([^;]+);!i;
-			$entry->{devidmake} = $2;
-			undef $2;
-			$idstr =~ m!(MDL|MODEL):([^;]+);!i;
-			$entry->{devidmodel} = $2;
-			undef $2;
-			$idstr =~ m!(DES|DESCRIPTION):([^;]+);!i;
-			$entry->{deviddesc} = $2;
-			undef $2;
-			$idstr =~ m!(CMD|COMMAND\s*SET):([^;]+);!i;
-			$entry->{devidcmdset} = $2;
-			undef $2;
+			$idstr =~ m!(MFG|MANUFACTURER):([^;]+);!i
+			    and $entry->{devidmake} = $2;
+			$idstr =~ m!(MDL|MODEL):([^;]+);!i
+			    and $entry->{devidmodel} = $2;
+			$idstr =~ m!(DES|DESCRIPTION):([^;]+);!i
+			    and $entry->{deviddesc} = $2;
+			$idstr =~ m!(CMD|COMMAND\s*SET):([^;]+);!i
+			    and $entry->{devidcmdset} = $2;
 		    }
 		} else {
 		    if (m!^.*</autodetect>\s*$!) {
