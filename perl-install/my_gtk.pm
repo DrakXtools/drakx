@@ -10,7 +10,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
-    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkset_editable gtksetstyle gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_modal gtkset_border_width gtkmove gtkresize gtkshow gtkhide gtkdestroy gtkcolor gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng create_pix_text get_text_coord fill_tiled gtkicons_labels_widget write_on_pixmap gtkcreate_xpm gtkcreate_png gtkbuttonset) ],
+    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkpowerpack gtkset_editable gtksetstyle gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_modal gtkset_border_width gtkmove gtkresize gtkshow gtkhide gtkdestroy gtkcolor gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng create_pix_text get_text_coord fill_tiled gtkicons_labels_widget write_on_pixmap gtkcreate_xpm gtkcreate_png gtkbuttonset) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -169,52 +169,17 @@ sub gtkradio {
 	  $radio->set_active($_ eq $def); $radio } @_;
 }
 
-sub gtkpack($@) {
-    my $box = shift;
-    gtkpack_($box, map {; 1, $_ } @_);
-}
-sub gtkpack__($@) {
-    my $box = shift;
-    gtkpack_($box, map {; 0, $_ } @_);
-}
-
-sub gtkpack_($@) {
-    my $box = shift;
-    for (my $i = 0; $i < @_; $i += 2) {
-	my $l = $_[$i + 1];
-	ref $l or $l = new Gtk::Label($l);
-	$box->pack_start($l, $_[$i], 1, 0);
-	$l->show;
-    }
-    $box
-}
-sub gtkpack2($@) {
-    my $box = shift;
-    gtkpack2_($box, map {; 1, $_ } @_);
-}
-sub gtkpack2__($@) {
-    my $box = shift;
-    gtkpack2_($box, map {; 0, $_ } @_);
-}
-sub gtkpack3 {
-    my $a = shift;
-    $a && goto \&gtkpack2__;
-    goto \&gtkpack2;
-}
-sub gtkpack2_($@) {
-    my $box = shift;
-    for (my $i = 0; $i < @_; $i += 2) {
-	my $l = $_[$i + 1];
-	ref $l or $l = new Gtk::Label($l);
-	$box->pack_start($l, $_[$i], 0, 0);
-	$l->show;
-    }
-    $box
-}
+sub gtkpack_($@) { gtkpowerpack('arg', 1, @_) }
+sub gtkpack($@) { gtkpowerpack(1, 1, @_) }
+sub gtkpack__($@) { gtkpowerpack(0, 1, @_) }
+sub gtkpack2_($@) { gtkpowerpack('arg', 0, @_) }
+sub gtkpack2($@) { gtkpowerpack(1, 0, @_) }
+sub gtkpack2__($@) { gtkpowerpack(0, 0, @_) }
+sub gtkpack3 { gtkpowerpack($a?1:0, 0, @_) }
 
 sub gtkpowerpack {
     #- Get Default Attributes (if any). 2 syntaxes allowed :
-    #- gtkpowerpack( {expand => 1, fill => 0}, $box...) : the attributes are picked from a specified hash
+    #- gtkpowerpack( {expand => 1, fill => 0}, $box...) : the attributes are picked from a specified hash ref
     #- gtkpowerpack(1,0,1, $box, ...) : the attributes are picked from the non-ref list, in the order (expand, fill, padding, pack_end).
     my $RefDefaultAttrs;
     if (ref($_[0]) eq 'HASH') {
@@ -222,34 +187,46 @@ sub gtkpowerpack {
     } elsif (!ref($_[0])) {
 	my %tmp;
 	foreach my $i ("expand", "fill", "padding", "pack_end") {
-	    !ref($_[0]) ? $tmp{$i} = shift : last;
+	    !ref($_[0]) ? $tmp{$i} = shift : last
 	}
 	$RefDefaultAttrs = \%tmp;
     }
-    my $box = shift; #- The packing box
+    my $box = shift;
+
     while (@_) {
-	#- Get attributes (if specified). 3 syntaxes allowed :
+	#- Get attributes (if specified). 4 syntaxes allowed (default values are undef ie. false...) :
 	#- gtkpowerpack({defaultattrs}, $box, $widget1, $widget2, ...) : the attrs are picked from the default ones (if they exist)
-	#- gtkpowerpack($box, {fill=>1, expand=>0, ...}, $widget1, ...) : the attributes are picked from a specified hash
-	#- gtkpowerpack($box, 1,0,1, $widget1, ...) : the attributes are picked from the non-ref list, in the order (expand, fill, padding, pack_end).
+	#- gtkpowerpack($box, {fill=>1, expand=>0, ...}, $widget1, ...) : the attributes are picked from a specified hash ref
+	#- gtkpowerpack($box, [1,0,1], $widget1, ...) : the attributes are picked from the array ref, in the order (expand, fill, padding, pack_end).
+	#- gtkpowerpack({attr=>'arg'}, $box, 1, $widget1, 0, $widget2, etc...) : the 'arg' value will tell gtkpowerpack to always read the attr value directly in the arg list (avoiding confusion between value 0 and Gtk::Label("0"). That can simplify some writings but this arg(s) MUST then be present...
 	my %attr;
-	my $RefAttrs = shift if (ref($_[0]) eq 'HASH');
+	my $RefAttrs = shift if (ref($_[0]) eq 'HASH' or ref($_[0]) eq 'ARRAY');
 	foreach my $i ("expand", "fill", "padding", "pack_end") {
-	    if (defined($RefAttrs->{$i})) {
-		$attr{$i} = $RefAttrs->{$i};
-	    } elsif (!ref ($_[0])) {
-		$attr{$i} = shift; #-default values are undef ie. false...
+	    if (defined($RefDefaultAttrs->{$i}) and $RefDefaultAttrs->{$i} eq 'arg') {
+		if (!ref ($_[0])) {
+		    $attr{$i} = shift;
+		    shift @$RefAttrs if (ref($RefAttrs) eq 'ARRAY')
+		} else {
+		    die "error in packing definition\n"
+		}
+	    } elsif (ref($RefAttrs) eq 'HASH' and defined($RefAttrs->{$i})) {
+		$attr{$i} = $RefAttrs->{$i}
+	    } elsif (ref($RefAttrs) eq 'ARRAY') {
+		$attr{$i} = shift @$RefAttrs
 	    } elsif (defined($RefDefaultAttrs->{$i})) {
-		$attr{$i} = $RefDefaultAttrs->{$i};
+		$attr{$i} = int $RefDefaultAttrs->{$i}
 	    } else {
-		$attr{$i} = 0;
+		$attr{$i} = 0
 	    }
 	}
-	my $widget = ref($_[0]) ? shift : new Gtk::Label(shift); #- The widget we pack
-	if (!$attr{pack_end}) {
-	    $box->pack_start($widget, $attr{expand}, $attr{fill}, $attr{padding})
+print "expand : $attr{expand}, fill : $attr{fill}, padding : $attr{padding}, pack_end : $attr{pack_end}\n";
+
+	#- Get and pack the widget (create it if necessary when it is a label...)
+	my $widget = ref($_[0]) ? shift : new Gtk::Label(shift);
+	if (! $attr{pack_end}) {
+	    $box->pack_start($widget, $attr{expand}, $attr{fill}, $attr{padding});
 	} else {
-	    $box->pack_end($widget, $attr{expand}, $attr{fill}, $attr{padding})
+	    $box->pack_end($widget, $attr{expand}, $attr{fill}, $attr{padding});
 	}
 	$widget->show;
     }
