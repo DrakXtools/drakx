@@ -58,6 +58,16 @@ drakx_stuff:
     member($_, @ALLOWED_LANGS) or delete $lang::langs{$_} foreach keys %lang::langs;
 }
 
+sub lomount_clp {
+    my ($name) = @_;
+    my ($clp, $dir) = ("/image_raw/live_tree_$name.clp", "/image_$name");
+
+    mkdir_p($dir);
+    my $dev = devices::find_free_loop();
+    run_program::run('losetup', '-r', '-e', 'gz', $dev, $clp);
+    run_program::run('mount', '-r', $dev, $dir);
+}
+
 sub install2::startMove {
     my $o = $::o;
     
@@ -102,6 +112,8 @@ Continue at your own risk."), formatError($@) ]) if $@;
     output('/var/run/console.lock', $username);
     output("/var/run/console/$username", 1);
     run_program::run('pam_console_apply');
+
+    lomount_clp('totem') if ! -x '/usr/bin/totem';
 
     if (fork()) {
 	sleep 1;
