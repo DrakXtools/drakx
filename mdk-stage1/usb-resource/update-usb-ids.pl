@@ -23,7 +23,8 @@ print "struct pci_module_map usb_pci_ids[] = {
 
 ";
 
-while (my ($k, $v) = each %$pci) {
+foreach my $k (sort keys %$pci) {
+    my $v = $pci->{$k};
     $v->[0] =~ /^usb-|^ehci-hcd|^ohci1394/ or next;
     $k =~ /^(....)(....)/;
     printf qq|\t{ 0x%s, 0x%s, "", "%s" },\n|,
