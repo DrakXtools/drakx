@@ -73,7 +73,7 @@ sub get_mac_generation() {
     return "Unknown Generation";	
 }
 
-sub dev_is_devfs { 0 && -e "/dev/.devfsd" }
+sub dev_is_devfs { -e "/dev/.devfsd" }
 
 sub floppies() {
     require modules;
