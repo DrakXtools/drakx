@@ -9,7 +9,6 @@ use Config;
 if ($::isInstall) {
     require 'log.pm'; #- "require log" causes some pb, perl thinking that "log" is the log() function
     log::l('ERROR: use standalone made during install :-(');
-    require common;
     log::l('backtrace: ' . backtrace());
 }
 $::isStandalone = 1;
