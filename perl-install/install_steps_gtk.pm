@@ -141,6 +141,8 @@ press `F1' when booting on CDROM, then enter `text'.")) if $first_time && availa
 
 #------------------------------------------------------------------------------
 sub selectInstallClass1 {
+    $::live and $o->SUPER::selectInstallClass1(@_);
+
     my ($o, $verif, $l, $def, $l2, $def2) = @_;
 
     my $w = my_gtk->new('');

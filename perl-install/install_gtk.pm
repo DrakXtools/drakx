@@ -191,7 +191,7 @@ sub create_logo_window {
     $w->{rwindow}->set_usize($::logowidth, $::logoheight);
     $w->{rwindow}->set_name("logo");
     $w->show;
-    my $file = "logo-mandrake.xpm";
+    my $file = $o->{meta_class} eq 'desktop' ? "logo-mandrake-Desktop.xpm" : "logo-mandrake.xpm";
     -r $file or $file = "$ENV{SHARE_PATH}/$file";
     if (-r $file) {
 	my $ww = $w->{window};

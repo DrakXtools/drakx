@@ -96,7 +96,7 @@ sub selectInstallClass1 {
     my ($o, $verif, $l, $def, $l2, $def2) = @_;
     $verif->($o->ask_from_list(_("Install Class"), _("Which installation class do you want?"), $l, $def));
 
-    $o->ask_from_list_(_("Install/Rescue"), _("Is this an install or a rescue?"), $l2, $def2);
+    $::live or $o->ask_from_list_(_("Install/Rescue"), _("Is this an install or a rescue?"), $l2, $def2);
 }
 
 #------------------------------------------------------------------------------

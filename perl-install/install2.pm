@@ -199,7 +199,6 @@ $o = $::o = {
 
 #------------------------------------------------------------------------------
 sub selectLanguage {
-    $::live and return;
     $o->selectLanguage($_[1] == 1);
 
     addToBeDone {
@@ -210,7 +209,6 @@ sub selectLanguage {
 
 #------------------------------------------------------------------------------
 sub selectMouse {
-    $::live and return;
     my ($first_time) = $_[1] == 1;
 
     add2hash($o->{mouse} ||= {}, mouse::read($o->{prefix})) if $o->{isUpgrade} && $first_time;
@@ -221,7 +219,6 @@ sub selectMouse {
 
 #------------------------------------------------------------------------------
 sub setupSCSI {
-    $::live and return;
     my ($clicked) = $_[0];
     $o->{autoSCSI} ||= $::beginner;
 
@@ -230,7 +227,6 @@ sub setupSCSI {
 
 #------------------------------------------------------------------------------
 sub selectKeyboard {
-    $::live and return;
     my ($clicked) = $_[0];
 
     return if !$o->{isUpgrade} && $::beginner && !$clicked;
@@ -247,7 +243,6 @@ sub selectKeyboard {
 
 #------------------------------------------------------------------------------
 sub selectInstallClass {
-    $::live and return;
     $o->selectInstallClass(@install_classes);
    
     $o->{partitions} ||= $suggestedPartitions{$o->{installClass}};
@@ -268,7 +263,6 @@ sub selectInstallClass {
 
 #------------------------------------------------------------------------------
 sub doPartitionDisks {
-    $::live and return;
     $o->{steps}{formatPartitions}{done} = 0;
     $o->doPartitionDisksBefore;
     $o->doPartitionDisks;
@@ -276,7 +270,6 @@ sub doPartitionDisks {
 }
 
 sub formatPartitions {
-    $::live and return;
     unless ($o->{isUpgrade}) {
 	$o->choosePartitionsToFormat($o->{fstab});
 	$o->formatMountPartitions($o->{fstab}) unless $::testing;
@@ -342,7 +335,6 @@ sub installPackages {
 }
 #------------------------------------------------------------------------------
 sub miscellaneous {
-    $::live and return;
     $o->miscellaneousBefore($_[0]);
     $o->miscellaneous($_[0]);
 
@@ -370,17 +362,15 @@ VISOR=no
 
 #------------------------------------------------------------------------------
 sub configureNetwork {
-    $::live and return;
     #- get current configuration of network device.
     require network;
     eval { network::read_all_conf($o->{prefix}, $o->{netc} ||= {}, $o->{intf} ||= {}) };
     $o->configureNetwork($_[1] == 1);
 }
 #------------------------------------------------------------------------------
-sub installCrypto { $::live or $o->installCrypto }
+sub installCrypto { $o->installCrypto }
 #------------------------------------------------------------------------------
 sub configureTimezone {
-    $::live and return;
     my ($clicked) = @_;
     my $f = "$o->{prefix}/etc/sysconfig/clock";
 
@@ -395,9 +385,9 @@ sub configureTimezone {
     $o->configureTimezone($f, $clicked);
 }
 #------------------------------------------------------------------------------
-sub configureServices { $::live or $::expert and $o->configureServices }
+sub configureServices { $::expert and $o->configureServices }
 #------------------------------------------------------------------------------
-sub configurePrinter  { $::live or $o->configurePrinter($_[0]) }
+sub configurePrinter  { $o->configurePrinter($_[0]) }
 #------------------------------------------------------------------------------
 sub setRootPassword {
     return if $o->{isUpgrade};
@@ -415,14 +405,12 @@ sub addUser {
 
 #------------------------------------------------------------------------------
 sub createBootdisk {
-    $::live and return;
     modules::write_conf($o->{prefix});
     $o->createBootdisk($_[1] == 1);
 }
 
 #------------------------------------------------------------------------------
 sub setupBootloader {
-    $::live and return;
     return if $::g_auto_install;
 
     modules::write_conf($o->{prefix});
@@ -435,7 +423,6 @@ sub setupBootloader {
 }
 #------------------------------------------------------------------------------
 sub configureX {
-    $::live and return;
     my ($clicked) = $_[0];
 
     #- done here and also at the end of install2.pm, just in case...
@@ -445,10 +432,10 @@ sub configureX {
     $o->configureX if pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'XFree86')) && !$o->{X}{disabled} || $clicked;
 }
 #------------------------------------------------------------------------------
-sub generateAutoInstFloppy { $::live or $o->generateAutoInstFloppy }
+sub generateAutoInstFloppy { $o->generateAutoInstFloppy }
 
 #------------------------------------------------------------------------------
-sub exitInstall { $::live or $o->exitInstall(getNextStep() eq "exitInstall") }
+sub exitInstall { $o->exitInstall(getNextStep() eq "exitInstall") }
 
 
 #-######################################################################################
@@ -562,8 +549,7 @@ sub main {
 	    $s = $o->{steps}{$_};
 	}
 	$o->{isUpgrade} = 1;
-	$::beginner = 0; #- use custom by default.
-	$::expert = 1;
+	#$::beginner = 0; #- use custom by default.
     }
     mkdir $o->{prefix}, 0755;
     mkdir $o->{root}, 0755;
