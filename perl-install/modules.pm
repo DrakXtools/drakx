@@ -470,7 +470,12 @@ sub unload {
 sub load_raw {
     my @l = map { my ($i, @i) = @$_; [ $i, \@i ] } grep { $_->[0] !~ /ignore/ } @_;
     my $cz = "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz"; -e $cz or $cz .= "2";
-    run_program::run("packdrake", "-x", $cz, "/tmp", map { "$_->[0].o" } @l);
+    eval {
+	require packdrake;
+	my $packer = new packdrake($cz);
+	$packer->extract_archive("/tmp", map { "$_->[0].o" } @l);
+    };
+    #run_program::run("packdrake", "-x", $cz, "/tmp", map { "$_->[0].o" } @l);
     my @failed = grep {
 	my $m = "/tmp/$_->[0].o";
 	if (-e $m && run_program::run(["insmod_", "insmod"], '2>', '/dev/tty5', '-f', $m, @{$_->[1]})) {

@@ -256,7 +256,12 @@ sub xmodmap_file {
     my ($keyboard) = @_;
     my $f = "$ENV{SHARE_PATH}/xmodmap/xmodmap.$keyboard";
     if (! -e $f) {
-	run_program::run("packdrake", "-x", "$ENV{SHARE_PATH}/xmodmap.cz2", '/tmp', "xmodmap.$keyboard");
+	eval {
+	    require packdrake;
+	    my $packer = new packdrake("$ENV{SHARE_PATH}/xmodmap.cz2");
+	    $packer->extract_archive("/tmp", "xmodmap.$keyboard");
+	};
+	#run_program::run("packdrake", "-x", "$ENV{SHARE_PATH}/xmodmap.cz2", '/tmp', "xmodmap.$keyboard");
 	$f = "/tmp/xmodmap.$keyboard";
     }
     -e $f && $f;
@@ -272,9 +277,18 @@ sub setup {
 	load(scalar cat_($f));
     } else {
 	local *F;
-	open F, "packdrake -x $ENV{SHARE_PATH}/keymaps.cz2 '' $o->[1].bkmap |";
-	local $/ = undef;
-	eval { load(join('', <F>)) };
+	#open F, "packdrake -x $ENV{SHARE_PATH}/keymaps.cz2 '' $o->[1].bkmap |";
+	if (my $pid = open F, "-|") {
+	    local $/ = undef;
+	    eval { load(join('', <F>)) };
+	    waitpid $pid, 0;
+	} else {
+	    eval {
+		require packdrake;
+		my $packer = new packdrake("$ENV{SHARE_PATH}/keymaps.cz2");
+		$packer->extract_archive(undef, "$o->[1].bkmap");
+	    };
+	}
     }
     my $f = xmodmap_file($keyboard);
     eval { run_program::run('xmodmap', $f) } unless $::testing || !$f;

@@ -279,9 +279,14 @@ sub set {
 	    @ENV{qw(LANG LC_ALL LANGUAGE LINGUAS)} = ();
 
 	    eval { commands::rm("-r", "$ENV{SHARE_PATH}/locale") };
-	    require 'run_program.pm';
-	    run_program::run("packdrake", "-x", "$ENV{SHARE_PATH}/locale.cz2", "$ENV{SHARE_PATH}/locale", "UTF-8");
-	    run_program::run("packdrake", "-x", "$ENV{SHARE_PATH}/locale.cz2", "$ENV{SHARE_PATH}/locale", $languages{$lang}[2]);
+	    eval {
+		require packdrake;
+		my $packer = new packdrake("$ENV{SHARE_PATH}/locale.cz2");
+		$packer->extract_archive("$ENV{SHARE_PATH}/locale", "UTF-8", $languages{$lang}[2]);
+	    };
+	    #require 'run_program.pm';
+	    #run_program::run("packdrake", "-x", "$ENV{SHARE_PATH}/locale.cz2", "$ENV{SHARE_PATH}/locale", "UTF-8");
+	    #run_program::run("packdrake", "-x", "$ENV{SHARE_PATH}/locale.cz2", "$ENV{SHARE_PATH}/locale", $languages{$lang}[2]);
 	}
 
 	$ENV{LC_ALL}    = $lang;
@@ -367,6 +372,7 @@ sub load_po($) {
     my $f; -e ($f = "$_/po/$lang.po") and last foreach @INC;
 
     local *F;
+    my $pid;
     unless ($f && -e $f) {
 	-e ($f = "$_/po/$lang.po.bz2") and last foreach @INC;
 	if (-e $f) {
@@ -374,7 +380,14 @@ sub load_po($) {
 	} else {
 	    -e ($f = "$_/po.cz2") and last foreach @INC;
 	    log::l("trying to load $lang.po from $f");
-	    open F, "packdrake -x $f '' $lang.po 2>/dev/null |";
+	    #open F, "packdrake -x $f '' $lang.po 2>/dev/null |";
+	    unless ($pid = open F, "-|") {
+		eval {
+		    require packdrake;
+		    my $packer = new packdrake($f);
+		    $packer->extract_archive(undef, "$lang.po");
+		};
+	    }
 	}
     } else {
 	open F, $f; #- not returning here help avoiding reading the same multiple times.
@@ -404,6 +417,7 @@ sub load_po($) {
     $s .= ");";
     no strict "vars";
     eval $s;
+    $pid and waitpid $pid, 0;
     !$@;
 }
 
@@ -420,6 +434,7 @@ sub load_console_font {
     my ($charset) = $languages{$lang} && $languages{$lang}[1] ;
     my ($f, $u, $m) = @{$charsets{$charset} || []};
 
+    require run_program;
     run_program::run('consolechars', '-v',
 		          ('-f', $f || 'lat0-sun16'),
 		     $u ? ('-u', $u) : (),

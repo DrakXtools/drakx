@@ -122,10 +122,15 @@ sub extractHeaders($$$) {
 
     cleanHeaders($prefix);
 
-    run_program::run("packdrake", "-x",
-		     "/tmp/$medium->{hdlist}",
-		     "$prefix/tmp/headers",
-		     map { packageHeaderFile($_) } @$pkgs);
+    eval {
+	require packdrake;
+	my $packer = new packdrake("/tmp/$medium->{hdlist}");
+	$packer->extract_archive("$prefix/tmp/headers", map { packageHeaderFile($_) } @$pkgs);
+    };
+    #run_program::run("packdrake", "-x",
+	#	     "/tmp/$medium->{hdlist}",
+	#	     "$prefix/tmp/headers",
+	#	     map { packageHeaderFile($_) } @$pkgs);
 
     foreach (@$pkgs) {
 	my $f = "$prefix/tmp/headers/". packageHeaderFile($_);
@@ -417,38 +422,44 @@ sub psUsingHdlist {
 
     #- extract filename from archive, this take advantage of verifying
     #- the archive too.
-    local *F; open F, "packdrake $newf |";
-    local $_;
-    while (<F>) {
-	chomp;
-	/^[dlf]\s+/ or next;
-	if (/^f\s+\d+\s+(.*)/) {
-	    my $pkg = [ (undef) x 8 ]; $pkg->[$FILE] = $1; $pkg->[$MEDIUM] = $m;
+#    local *F; open F, "packdrake $newf |";
+#    local $_;
+#    while (<F>) {
+#	chomp;
+#	/^[dlf]\s+/ or next;
+    eval {
+	require packdrake;
+	my $packer = new packdrake($newf);
+	foreach (@{$packer->{files}}) {
+	    $packer->{data}{$_}[0] eq 'f' or next;
+	    #if (/^f\s+\d+\s+(.*)/) {
+	    #my $pkg = [ (undef) x 8 ]; $pkg->[$FILE] = $1; $pkg->[$MEDIUM] = $m;
+	    my $pkg = [ (undef) x 8 ]; $pkg->[$FILE] = $_; $pkg->[$MEDIUM] = $m;
 	    my $specific_arch = packageSpecificArch($pkg);
 	    if (!$specific_arch || compat_arch($specific_arch)) {
 		my $old_pkg = $packages->{names}{packageName($pkg)};
 		if ($old_pkg) {
 		    if (packageVersion($pkg) eq packageVersion($old_pkg) && packageRelease($pkg) eq packageRelease($old_pkg)) {
 			if (better_arch($specific_arch, packageSpecificArch($old_pkg))) {
-			    log::l("replacing old package with package $1 with better arch: $specific_arch");
+			    log::l("replacing old package with package $_ with better arch: $specific_arch");
 			    $packages->{names}{packageName($pkg)} = $pkg;
 			} else {
-			    log::l("keeping old package against package $1 with worse arch");
+			    log::l("keeping old package against package $_ with worse arch");
 			}
 		    } else {
-		        log::l("ignoring package $1 already present in distribution with different version or release");
+		        log::l("ignoring package $_ already present in distribution with different version or release");
 		    }
 		} else {
 		    $packages->{names}{packageName($pkg)} = $pkg;
 		}
 	    } else {
-	        log::l("ignoring package $1 with incompatible arch: $specific_arch");
+	        log::l("ignoring package $_ with incompatible arch: $specific_arch");
 	    }
-	} else {
-	    die "bad hdlist file: $newf";
-	}
-    }
-    close F or die "unable to parse $newf";
+	}# else {
+	#    die "bad hdlist file: $newf";
+	#}
+    };
+    #close F or die "unable to parse $newf";
 
     #- update maximal index.
     $m->{max} = scalar(keys %{$packages->{names}}) - 1;

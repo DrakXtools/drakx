@@ -428,7 +428,7 @@ sub install_urpmi {
 		      http => $ENV{URLPREFIX},
 		      cdrom => "removable_cdrom_$::i://mnt/cdrom" }}{$method} . "/$_->{rpmsdir}";
 
-	local *FILES; open FILES, "packdrake -c /tmp/$_->{hdlist} | parsehdlist - |";
+	local *FILES; open FILES, "parsehdlist /tmp/$_->{hdlist} |";
 	chop, print LIST "$dir/$_\n" foreach <FILES>;
 	close FILES or log::l("parsehdlist failed"), return;
 	close LIST;
