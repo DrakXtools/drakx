@@ -126,7 +126,7 @@ foreach (@ARGV) {
     $i++;
     if (/^-(-help|h)$/) {
 	version();
-	print STDERR N("\nUsage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--testing] [-v|--version] ", $progname),  if_($usages{$progname}, $usages{$progname}), "\n";
+	print N("\nUsage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--testing] [-v|--version] ", $progname),  if_($usages{$progname}, $usages{$progname}), "\n";
 #    print N("\nUsage: "), $::usage, "\n" if $::usage;
 	exit(0);
     } elsif (/^-(-version|v)$/) {
@@ -154,7 +154,7 @@ foreach (@ARGV) {
 
 
 sub version {
-    print STDERR 'Drakxtools version 9.3.0
+    print 'Drakxtools version 9.3.0
 Copyright (C) 1999-2004 MandrakeSoft by <install@mandrakesoft.com>
 ',  $::license, "\n";
 }
