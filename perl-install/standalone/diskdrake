@@ -69,6 +69,11 @@ fs::get_raw_hds('', $all_hds);
 
 fs::merge_info_from_fstab([ fsedit::get_really_all_fstab($all_hds) ]);
 fs::merge_info_from_mtab([ fsedit::get_really_all_fstab($all_hds) ]);
+
+if (getenv("TEST_DEFAULT_OPTIONS")) {
+    fs::set_default_options($all_hds);
+    fs::set_removable_mntpoints($all_hds);
+}
 diskdrake_interactive::main($in, $all_hds);
 
 $in->exit(0);
