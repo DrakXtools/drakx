@@ -56,7 +56,7 @@ $wait = undef;
 my $changed = 0;
 @f and $changed = auto();
 if ($changed) {
-    my $wait =
+    my $_wait =
 	$in->wait_message(N("Scannerdrake"),
 			  N("Re-generating list of configured scanners ..."));
     @c = scanner::configured();
@@ -67,14 +67,13 @@ quit();
 sub removeverticalbar {
     my ($s) = @_;
     $s =~ s/\|/ /g;
-    $s =~ /^\s*(\S+)\s+/;
-    my $make = $1;
+    my $make = $1 if $s =~ /^\s*(\S+)\s+/;
     my $searchmake = handle_configs::searchstr($make);
     $s =~ s/($searchmake)\s*$searchmake/$1/;
     return $s; 
 }
 
-sub auto {
+sub auto() {
     my $changed = 0;
     foreach (@f) {
 	my $c = 0;
@@ -88,7 +87,7 @@ sub auto {
 	    if ($in->ask_yesorno('Scannerdrake', N("%s found on %s, configure it automatically?", removeverticalbar($name), $_->{port}),1)) {
 		$c = (tryConfScanner($name, $_->{port}, 
 				     $_->{val}{vendor},
-				     $_->{val}{id}) or 
+				     $_->{val}{id}) || 
 		      manual($_->{port}, $_->{val}{vendor},
 			     $_->{val}{id}, $name));
 	    } else {
@@ -99,9 +98,9 @@ sub auto {
 	    $in->ask_yesorno('Scannerdrake',
 			     N("%s is not in the scanner database, configure it manually?", 
 			       removeverticalbar($_->{val}{DESCRIPTION})),1)
-		and ($c =
+		and $c =
 		     manual($_->{port}, $_->{val}{vendor}, $_->{val}{id},
-			    $_->{val}{DESCRIPTION}));
+			    $_->{val}{DESCRIPTION});
 	}
 	$changed ||= $c;
     }
@@ -129,7 +128,7 @@ sub manual {
     return tryConfScanner($s, $port, $vendor, $product);
 }
 
-sub dynamic {
+sub dynamic() {
     @f = scanner::detect();
     my $name;
     foreach (@f) { 
@@ -233,7 +232,7 @@ sub tryConfScanner {
     return 1;
 }
 
-sub quit {
+sub quit() {
     $in->exit(0);
 }
 
@@ -327,7 +326,7 @@ sub mainwindow {
 		$maindone = 1;
 	    }
 	    if ($changed) {
-		my $wait =
+		my $_wait =
 		    $in->wait_message(N("Scannerdrake"),
 				      N("Re-generating list of configured scanners ..."));
 		@configured = scanner::configured();
@@ -345,7 +344,7 @@ sub makeexportmenues {
 	($_ eq '+' ? N("All remote machines") : $_) => $_;
     } map {
 	# Remove comments and blank lines
-	(/^\s*($|\#)/ ? () : chomp_($_));
+	(/^\s*($|#)/ ? () : chomp_($_));
     } @exports;
     my %menuexports_inv = reverse %menuexports;
     return (\%menuexports, \%menuexports_inv);
@@ -357,14 +356,14 @@ sub makeimportmenues {
 	($_ eq 'localhost' ? N("This machine") : $_) => $_;
     } map {
 	# Remove comments and blank lines
-	if_(!/^\s*($|\#)/, chomp_($_));
+	if_(!/^\s*($|#)/, chomp_($_));
     } @imports;
     my %menuimports_inv = reverse %menuimports;
     return (\%menuimports, \%menuimports_inv);
 }
 
 sub sharewindow {
-    my @configured = @_;
+    my @_configured = @_;
     # Read list of hosts to where to export the local scanners
     my @exports = cat_("/etc/sane.d/saned.conf");
     my ($menuexports, $menuexports_inv) =
@@ -401,10 +400,10 @@ sub sharewindow {
 	      { text => N("The scanners on this machine are available to other computers"), type => 'bool',
 		val => \$sanedrunning },
 	      { val => N("Scanner sharing to hosts: ") .
-		    (keys %{$menuexports} > 0 ?
-		     (keys %{$menuexports} > 2 ?
-		      join(", ", (keys %{$menuexports})[0,1]) . " ..." :
-		      join(", ", keys %{$menuexports})) :
+		    (keys %$menuexports > 0 ?
+		     (keys %$menuexports > 2 ?
+		      join(", ", (keys %$menuexports)[0,1]) . " ..." :
+		      join(", ", keys %$menuexports)) :
 		     N("No remote machines")), 
 		type => 'button',
 		clicked_may_quit => sub {
@@ -418,10 +417,10 @@ sub sharewindow {
 		type => 'bool',
 		val => \$netbackendactive },
 	      { val => N("Use the scanners on hosts: ") .
-		    (keys %{$menuimports} > 0 ?
-		     (keys %{$menuimports} > 2 ?
-		      join(", ", (keys %{$menuimports})[0,1]) . " ..." :
-		      join(", ", keys %{$menuimports})) :
+		    (keys %$menuimports > 0 ?
+		     (keys %$menuimports > 2 ?
+		      join(", ", (keys %$menuimports)[0,1]) . " ..." :
+		      join(", ", keys %$menuimports)) :
 		     N("No remote machines")), 
 		type => 'button',
 		clicked_may_quit => sub {
@@ -439,7 +438,7 @@ sub sharewindow {
 		my $subdone = 0;
 		my $choice;
 		while (!$subdone) {
-		    my @list = keys %{$menuexports};
+		    my @list = keys %$menuexports;
 		    # Entry should be edited when double-clicked
 		    $buttonclicked = "edit";
 		    $in->ask_from_
@@ -589,7 +588,7 @@ sub sharewindow {
 		my $subdone = 0;
 		my $choice;
 		while (!$subdone) {
-		    my @list = keys %{$menuimports};
+		    my @list = keys %$menuimports;
 		    # Entry should be edited when double-clicked
 		    $buttonclicked = "edit";
 		    $in->ask_from_

@@ -19,7 +19,7 @@ $window->{rwindow}->signal_connect(delete_event => \&CloseAppWindow);
 #- verification of package image magik
 unless ($in->do_pkgs->is_installed('ImageMagick')) {
     $in->ask_okcancel(N("Error"), N("package 'ImageMagick' is required to be able to complete configuration.\nClick \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit")) 
-        and $in->do_pkgs->install('ImageMagick')
+        && $in->do_pkgs->install('ImageMagick')
         or &CloseAppWindow;
 }
 
@@ -153,7 +153,7 @@ $first{widgets}{combo}{res}->entry->signal_connect(changed => sub {
 	$boot_conf_frame{frame} = new Gtk2::Frame(N("Configure bootsplash picture"));
 	&make_boot_frame;
 	$first_vbox->add($boot_conf_frame{frame});
-	member($theme{name}, &giv_exist_thm) and &thm_in_this_res and &get_this_thm_res_conf or $in->ask_warn(N("Notice"), N("This theme does not yet have a bootsplash in %s !", $theme{res}{res}));
+	member($theme{name}, &giv_exist_thm) and &thm_in_this_res and &get_this_thm_res_conf || $in->ask_warn(N("Notice"), N("This theme does not yet have a bootsplash in %s !", $theme{res}{res}));
       });
 #- go to bootsplash configuration step 2
 #$first{widgets}{button}{boot_conf}->signal_connect(clicked => sub{show_act(\%boot_conf_frame) } );
@@ -193,7 +193,7 @@ $window->main;
 ugtk2->exit(0);
 
 ### Callback function to close the window
-sub CloseAppWindow {
+sub CloseAppWindow() {
    ugtk2->exit(0);
 }
 
@@ -252,14 +252,12 @@ pw='.$theme{boot_conf}{pw}.'
 ph='.$theme{boot_conf}{ph}.'
 
 # pc is the color of the progress bar
-pc='.$theme{boot_conf}{pc}.''
-;
+pc='.$theme{boot_conf}{pc}.'';
 	my $globalconf_cont = '# Display logo on console.
 LOGO_CONSOLE='.$logo.'
 
 # Make kernel message quiet by default.
-QUIET='.$quiet
-;
+QUIET='.$quiet;
 	output($globalconf_file, $globalconf_cont);
 	output($cfg_file,$cfg_cont);
 }
@@ -294,7 +292,7 @@ sub read_boot_conf {
 }
 
 my %adj;
-sub set_scale_values {
+sub set_scale_values() {
     foreach (keys %{$theme{boot_conf}}) {
         $adj{$_} and $adj{$_}->set_value($theme{boot_conf}{$_});
     }
@@ -309,7 +307,7 @@ sub thm_in_this_res {
   (-f $thm_path.$theme{name}."/images/bootsplash-".$theme{res}{res}.".jpg") ? return 1 : $check_res == 1 ? return &which_res_exist : return 0;
 }
 
-sub which_res_exist {
+sub which_res_exist() {
 	chdir($thm_path.$theme{name}."/images/");
 	my $is_ok = 0;
 	foreach (@{$first{widget}{combo}{res}}) {
@@ -326,7 +324,7 @@ sub which_res_exist {
 #- Desc  => retrieve all installed theme
 #- Args  => ø
 #- Return=> @arr of available theme
-sub giv_exist_thm {
+sub giv_exist_thm() {
   chdir($thm_path);
   my @thms_dirs;
   foreach (glob("*")) {
@@ -371,8 +369,7 @@ my %hboxes;
 sub mk_frame {
 	my ($box , $ref) = @_;
 	foreach my $pos (@{$ref->{pos}}) {
-	  $pos =~ m/^(\w+)(\s+)?(\w+)?$/;
-       my $key = $1.'hb';
+       my $key = $1.'hb' if $pos =~ m/^(\w+)(\s+)?(\w+)?$/;
 	  #- open a new hbox
 	  $hboxes{$key} = new Gtk2::HBox($3 ? 1 : 0, 5);
 	  #- look for label
@@ -402,7 +399,7 @@ sub mk_frame {
 	    and $ref->{widgets}{button}{$1} = new Gtk2::Button($ref->{widget}{button}{$1})
 	    and  $hboxes{$key}->add($ref->{widgets}{button}{$1});
 	  #- look for tooltips
-	  $ref->{widget}{tooltip}{$1} and &tool_tip($1, \%{$ref});
+	  $ref->{widget}{tooltip}{$1} and &tool_tip($1, \%$ref);
 	  $box->add($hboxes{$key});
 	}
 	$ref->{frame}->add($box);
@@ -423,14 +420,13 @@ sub dec2hex {
 }
 
 #- Desc  => prepare and set all signal_connect for boot_frame widget 
-sub make_boot_frame {
+sub make_boot_frame() {
 	my $VB = new Gtk2::VBox(0,5);
 	&mk_frame($VB, \%boot_conf_frame);
 	#- open a color choose box
 	$boot_conf_frame{widgets}{button}{pc}->signal_connect(clicked => sub {
 		my $color = gtkshow(Gtk2::ColorSelectionDialog->new(N("ProgressBar color selection")));
-		$theme{boot_conf}{pc} =~ m/0x(.{2})(.{2})(.{2})/;
-		my @rgb = map { hex($_)/255 }  ($1 ,$2, $3);
+		my @rgb = map { hex($_)/255 } ($1 ,$2, $3) if $theme{boot_conf}{pc} =~ m/0x(.{2})(.{2})(.{2})/;
 		$color->colorsel->set_current_color(Gtk2::Gdk::Color->new(@rgb));
 		$color->cancel_button->signal_connect(clicked => sub { $color->destroy });
 		$color->ok_button->signal_connect(clicked => sub {
@@ -475,7 +471,7 @@ sub make_boot_frame {
 }
 
 #- Desc  => set theme values from user entry (scales widgets)
-sub set_thm_values {
+sub set_thm_values() {
   foreach (keys %{$theme{boot_conf}}) {
     	m/[tp][hwyx]/
 	  and $theme{boot_conf}{$_} = int($adj{$_}->get_value);
@@ -486,7 +482,7 @@ sub set_thm_values {
 my ($prev_pic, $prev_pix, $prev_canvas);
 
 #- Desc  => destroy properly all widget of preview window
-sub kill_preview {
+sub kill_preview() {
 		$prev_window->destroy; undef($prev_window);
 		$prev_canvas->destroy; undef($prev_canvas);
 		undef($prev_pic);
@@ -495,7 +491,7 @@ sub kill_preview {
 #- Desc  => create a new window with a preview of splash screen
 #- Args  => $file (str) full path to preview file
 sub show_prev {
- my ($file,$txt_tl_x,$txt_tl_y,$txt_width,$txt_height,$prog_tl_x,$prog_tl_y,$prog_width, $prog_height) = @_;
+ my ($file, $txt_tl_x, $txt_tl_y, $txt_width, $txt_height, $prog_tl_x, $prog_tl_y, $prog_width, $prog_height) = @_;
  $prev_window
    or $prev_window = new Gtk2::Window('toplevel') and $prev_window->set_policy(0, 1, 1); 
 #-PO  First %s is theme name, second %s (in parenthesis) is resolution
@@ -503,7 +499,7 @@ sub show_prev {
  $prev_pic = gtkcreate_pixbuf($file);
  $prev_pic->scale_simple($theme{res}{w}, $theme{res}{h},0);
  $prev_pix = $prev_pic->render_pixmap_and_mask($prev_pic);
- $prev_canvas and $prev_canvas->isa('Gtk2::Widget')
+ $prev_canvas && $prev_canvas->isa('Gtk2::Widget')
 	 or $prev_canvas = new Gtk2::DrawingArea() and $prev_window->add($prev_canvas);
  $prev_canvas->set_size_request($theme{res}{w}, $theme{res}{h});
  $prev_canvas->signal_connect(expose_event => sub {
@@ -517,7 +513,7 @@ sub show_prev {
 }
 
 #- Desc  => define the max size of boot's scales
-sub set_scale_size {
+sub set_scale_size() {
 	 %scale_size = ('tx' => ($theme{res}{w} / $font_size{w}),
  			'ty' => ($theme{res}{h} / $font_size{h}),
 			'tw' => ($theme{res}{w} / $font_size{w}),
