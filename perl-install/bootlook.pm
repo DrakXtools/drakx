@@ -71,6 +71,7 @@ my ($t_pixmap, $t_mask) = gtkcreate_png("tradi.png");
 my ($h_pixmap, $h_mask) = gtkcreate_png("hori.png");
 my ($v_pixmap, $v_mask) = gtkcreate_png("verti.png");
 my ($g_pixmap, $g_mask) = gtkcreate_png("gmon.png");
+my ($c_pixmap, $c_mask) = gtkcreate_png("categ.png");
 
 # a pixmap widget to contain the pixmap
 my $pixmap = new Gtk::Pixmap( $h_pixmap, $h_mask );
@@ -112,15 +113,19 @@ $global_vbox->pack_start (new Gtk::Label(_("Boot style configuration")), 0, 0, 0
 my $a_dedans = new Gtk::VBox(0, 10);
 $a_dedans->border_width(5);
 my $a_box = new Gtk::VBox(0, 0);
-my $a_h_button = new Gtk::RadioButton _("horizontal nice looking aurora");
+my $a_c_button = new Gtk::RadioButton _("NewStyle Categorizing Monitor");
+$a_c_button->signal_connect(clicked => sub { $pixmap->set($c_pixmap, $c_mask) });
+$a_box->pack_start($a_c_button, 0, 0, 0);
+
+my $a_h_button = new Gtk::RadioButton _("NewStyle Monitor");
 $a_h_button->signal_connect(clicked => sub { $pixmap->set($h_pixmap, $h_mask) });
 $a_box->pack_start($a_h_button, 0, 0, 0);
 
-my $a_v_button = new Gtk::RadioButton _("vertical traditional aurora"), $a_h_button;
+my $a_v_button = new Gtk::RadioButton _("Traditional Monitor"), $a_h_button;
 $a_v_button->signal_connect(clicked => sub { $pixmap->set($v_pixmap, $v_mask) });
 $a_box->pack_start($a_v_button, 0, 0, 0);
 
-my $a_g_button = new Gtk::RadioButton _("gMonitor"), $a_h_button;
+my $a_g_button = new Gtk::RadioButton _("Traditional Gtk+ Monitor"), $a_h_button;
 $a_g_button->signal_connect(clicked => sub { $pixmap->set($g_pixmap, $g_mask) });
 $a_box->pack_start($a_g_button, 0, 0, 0);
 
@@ -130,6 +135,7 @@ $a_button->signal_connect(clicked => sub {
 				  $a_box->set_sensitive(!$a_mode);
 				  $a_mode = !$a_mode;
 				  if ($a_mode) {
+				      $pixmap->set($c_pixmap, $c_mask) if $a_c_button->get_active();
 				      $pixmap->set($h_pixmap, $h_mask) if $a_h_button->get_active();
 				      $pixmap->set($v_pixmap, $v_mask) if $a_v_button->get_active();
 				      $pixmap->set($g_pixmap, $g_mask) if $a_g_button->get_active();
@@ -217,6 +223,7 @@ $a_button->set_active($a_mode); # up == false == "0"
 if ($a_mode) {
     my $a = readlink "/etc/aurora/Monitor";
     $a =~ s#/lib/aurora/Monitors/##;
+    $a_c_button->set_active(1) && $pixmap->set($c_pixmap, $c_mask) if ($a eq "NewStyle-Categorizing-WsLib");
     $a_h_button->set_active(1) && $pixmap->set($h_pixmap, $h_mask) if ($a eq "NewStyle-WsLib");
     $a_v_button->set_active(1) && $pixmap->set($v_pixmap, $v_mask) if ($a eq "Traditional-WsLib");
     $a_g_button->set_active(1) && $pixmap->set($g_pixmap, $g_mask) if ($a eq "Traditional-Gtk+");
@@ -302,16 +309,18 @@ sub updateInit
 sub updateAurora
 {
     if ($a_mode) {
+        if ($a_c_button->get_active()) {
+            symlinkf("/lib/aurora/Monitors/NewStyle-Categorizing-WsLib",    "/etc/aurora/Monitor");
+            $in->standalone::pkgs_install(qw(Aurora-Monitor-NewStyle-Categorizing-WsLib)) if !(-e "/lib/aurora/Monitors/NewStyle-Categorizing-WsLib");
+        }
         if ($a_h_button->get_active()) {
             symlinkf("/lib/aurora/Monitors/NewStyle-WsLib",    "/etc/aurora/Monitor");
             $in->standalone::pkgs_install(qw(Aurora-Monitor-NewStyle-WsLib)) if !(-e "/lib/aurora/Monitors/NewStyle-WsLib");
         }
- 
         if ($a_v_button->get_active()) {
             symlinkf("/lib/aurora/Monitors/Traditional-WsLib", "/etc/aurora/Monitor");
             $in->standalone::pkgs_install(qw(Aurora-Monitor-Traditional-WsLib)) if !(-e "/lib/aurora/Monitors/Traditional-WsLib");
         }
- 
         if ($a_g_button->get_active()) {
             symlinkf("/lib/aurora/Monitors/Traditional-Gtk+",  "/etc/aurora/Monitor");
             $in->standalone::pkgs_install(qw(Aurora-Monitor-Traditional-Gtk+)) if !(-e "/lib/aurora/Monitors/Traditional-Gtk+");
