@@ -18,13 +18,20 @@ sub new {
     set_DBus_watch($con);
     $con->dispatch;
 
-    my $service = $bus->get_service("com.mandrakesoft.activefirewall.daemon");
-    my $daemon = $service->get_object("/com/mandrakesoft/activefirewall", "com.mandrakesoft.activefirewall.daemon");
-
-    bless {
+    my $o = bless {
         bus => $bus,
         daemon => $daemon
     }, $type;
+
+    $o->find_daemon;
+
+    $o;
+}
+
+sub find_daemon {
+    my ($o) = @_;
+    my $service = $o->{bus}->get_service("com.mandrakesoft.activefirewall.daemon");
+    $o->{daemon} = $service->get_object("/com/mandrakesoft/activefirewall", "com.mandrakesoft.activefirewall.daemon");
 }
 
 sub set_DBus_watch {
