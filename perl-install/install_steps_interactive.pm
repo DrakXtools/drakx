@@ -225,7 +225,7 @@ name (often lp) and a spool directory associated with it. What
 name and directory should be used for this queue?"),
 				 [_("Name of queue:"), _("Spool directory:")],
 				 [\$o->{printer}{QUEUE}, \$o->{printer}{SPOOLDIR}],
-				 changed => sub 
+				 focus_out => sub 
 				 { 
 				     $o->{printer}{SPOOLDIR} 
 				       = "$printer::spooldir/$o->{printer}{QUEUE}" unless $_[0];

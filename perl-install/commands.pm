@@ -10,7 +10,6 @@ my $BUFFER_SIZE = 1024;
 
 1;
 
-
 sub getopts {
     my $o = shift;
     my @r = map { '' } (@_ = split //, $_[0]);
@@ -212,7 +211,6 @@ sub ls {
 	} else { print "$_\n"; }
     }
 }
-
 sub cp {
     my ($force) = getopts(\@_, qw(f));
     @_ >= 2 or die "usage: cp [-f] <sources> <dest>\n(this cp does -Rl by default)\n";

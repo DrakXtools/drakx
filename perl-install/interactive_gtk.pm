@@ -77,9 +77,10 @@ sub ask_many_from_list_refW($$$$$) {
 sub ask_from_entries_refW {
     my ($o, $title, $messages, $l, $val, %hcallback) = @_;
     my $num_champs = @{$l};
-    my $ignore = 0;
+    my $ignore = 0; #to handle recursivity 
 
     my $w       = my_gtk->new($title, %$o);
+    #the widgets
     my @entries = map { 
 	if ($_->{type} eq "list") {
 	    my $depth_combo = new Gtk::Combo;
@@ -111,7 +112,9 @@ sub ask_from_entries_refW {
 
 
     for (my $i = 0; $i < $num_champs; $i++) {
-	my $ind = $i;
+	my $ind = $i; #cos lexical bindings pb !!
+	my $entry = $entries[$i];
+	#changed callback
 	my $callback = sub {
 	    return if $ignore; #handle recursive deadlock
 	    &{$updates[$ind]};
@@ -121,9 +124,19 @@ sub ask_from_entries_refW {
 		$ignore = 1;
 		foreach (@updates_inv) { &{$_};}
 		$ignore = 0;
-	    }
+	    };
 	};
-	my $entry = $entries[$i];
+	if ($hcallback{focus_out}) {
+	    my $callfocusout = sub {
+		return if $ignore;
+		&{$hcallback{focus_out}}($ind);
+		#update all the value
+		$ignore = 1;
+		foreach (@updates_inv) { &{$_};}
+		$ignore = 0;
+	    };
+	    comb_entry($entry,$val->[$i])->signal_connect(focus_out_event => $callfocusout);
+	}
 	comb_entry($entry,$val->[$i])->signal_connect(changed => $callback);
 	comb_entry($entry,$val->[$i])->signal_connect(activate => sub {
 				   ($ind == ($num_champs -1)) ?
