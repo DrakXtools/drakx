@@ -2,9 +2,6 @@ do not allow empty password for root, otherwise you can't login :(
 
 xmodmap needed even for english as the backspace is not what it should
 
-when we have /mnt mounted, check that all the devices of fstab are in /mnt/dev
-(otherwise it won't boot)
-
 remove the hack in pkgs.pm (search for hack)
 
 detect and propose to choose devices before diskdrake
@@ -25,7 +22,7 @@ insmod of /modules/loop.o fails (eg: in mkbootdisk)
 (no /modules nor insmod)
 
 install2 sigsegv when leaving :(
-(just do active and it will do it)
+(i hacked init to reboot on error)
 
 xmodmaps for every languages (maybe gnome-core xmodmaps can help)
 

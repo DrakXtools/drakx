@@ -208,7 +208,7 @@ sub configureServices { $o->servicesConfig }
 sub setRootPassword { $o->setRootPassword }
 sub addUser { 
     $o->addUser;
-    run_program::rooted($o->{prefix}, "pwconv"); # use shadow passwords
+    run_program::rooted($o->{prefix}, "pwconv") or log::l("pwconv failed"); # use shadow passwords
 }
 
 sub createBootdisk {

@@ -92,7 +92,9 @@ sub mouse_detect() {
 
 sub shells($) {
     my ($o) = @_;
-    grep { -x "$o->{prefix}$_" } @{$o->{default}->{shells}};
+    my @l = grep { -x "$o->{prefix}$_" } @{$o->{default}->{shells}};
+    @l or die "no shell available";
+    @l;
 }
 
 sub upgrFindInstall {

@@ -33,7 +33,7 @@ use lang;
 use log;
 
 1;
-=cut
+
 
 sub errorInStep($$) {
     my ($o, $err) = @_;
@@ -115,4 +115,3 @@ consult the Errata available from http://www.linux-mandrake.com/.
 Information on configuring your system is available in the post
 install chapter of the Official Linux Mandrake User's Guide."));
 }
-=cut

@@ -25,6 +25,9 @@ sub rooted($$@) {
 	$root and chroot $root;
 	chdir "/";
 
-	exec $name, @args or log::l("exec of $name failed: $!"), exec('false') || exit(1);
+	unless (exec $name, @args) {
+	    log::l("exec of $name failed: $!");
+	    exec('false') or exit(1);
+	}
     }
 }

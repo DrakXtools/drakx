@@ -1,0 +1,22 @@
+
+
+style "border"
+{
+  bg[NORMAL] = { 0, 0, 0 }
+}
+
+style "steps"
+{
+  bg[NORMAL] = { 0, 0, 0 }
+  fg[NORMAL] = { 1.0, 1.0, 1.0 }
+}
+
+style "title"
+{
+  bg[NORMAL] = { 0, 0.66, 1.0 }
+#  fg[NORMAL] = { 1.0, 1.0, 1.0 }
+}
+
+
+widget "*Title" style "title"
+widget "*Steps" style "steps"
