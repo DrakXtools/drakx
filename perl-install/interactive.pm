@@ -143,7 +143,7 @@ sub ask_warn {
 
 sub ask_yesorno {
     my ($o, $title, $message, $def, $help) = @_;
-    ask_from_list_($o, $title, $message, [ N_("Yes"), N_("No") ], $def ? "Yes" : "No", $help) eq "Yes";
+    ask_from_list_($o, $title, $message, [ N_("Yes"), N_("No") ], $def ? "Yes" : "No", $help, 'nocancel') eq "Yes";
 }
 
 sub ask_okcancel {
@@ -153,7 +153,7 @@ sub ask_okcancel {
 	$::no_separator = 1;
     	$o->ask_from_no_check({ title => $title, messages => $message, focus_cancel => !$def }, []);
     } else {
-	ask_from_list_($o, $title, $message, [ N_("Ok"), N_("Cancel") ], $def ? "Ok" : "Cancel", $help) eq "Ok";
+	ask_from_list_($o, $title, $message, [ N_("Ok"), N_("Cancel") ], $def ? "Ok" : "Cancel", $help, 'nocancel') eq "Ok";
     }
 }
 
@@ -167,28 +167,28 @@ sub ask_fileW {
 }
 
 sub ask_from_list {
-    my ($o, $title, $message, $l, $def, $help) = @_;
-    ask_from_listf($o, $title, $message, undef, $l, $def, $help);
+    my ($o, $title, $message, $l, $def, $help, $nocancel) = @_;
+    ask_from_listf($o, $title, $message, undef, $l, $def, $help, $nocancel);
 }
 
 sub ask_from_list_ {
-    my ($o, $title, $message, $l, $def, $help) = @_;
-    ask_from_listf($o, $title, $message, sub { translate($_[0]) }, $l, $def, $help);
+    my ($o, $title, $message, $l, $def, $help, $nocancel) = @_;
+    ask_from_listf($o, $title, $message, sub { translate($_[0]) }, $l, $def, $help, $nocancel);
 }
 
 sub ask_from_listf_ {
-    my ($o, $title, $message, $f, $l, $def, $help) = @_;
-    ask_from_listf($o, $title, $message, sub { translate($f->(@_)) }, $l, $def, $help);
+    my ($o, $title, $message, $f, $l, $def, $help, $nocancel) = @_;
+    ask_from_listf($o, $title, $message, sub { translate($f->(@_)) }, $l, $def, $help, $nocancel);
 }
 sub ask_from_listf {
-    my ($_o, $_title, $_message, $_f, $l, $_def, $_help) = @_;
+    my ($_o, $_title, $_message, $_f, $l, $_def, $_help, $_nocancel) = @_;
     @$l == 0 and die "ask_from_list: empty list\n" . backtrace();
     @$l == 1 and return $l->[0];
     goto &ask_from_listf_no_check;
 }
 
 sub ask_from_listf_no_check {
-    my ($o, $title, $message, $f, $l, $def, $help) = @_;
+    my ($o, $title, $message, $f, $l, $def, $help, $nocancel) = @_;
 
     if (@$l <= 2 && !$::isWizard) {
 	my ($ok, $cancel) = map { $_ && may_apply($f, $_) } @$l;
@@ -203,7 +203,11 @@ sub ask_from_listf_no_check {
 	    return $@ ? undef : $ret;
 	}
     }
-    ask_from($o, $title, $message, [ { val => \$def, type => 'list', list => $l, help => $help, format => $f } ]) && $def;
+    ask_from_($o, 
+	      { title => $title, 
+		messages => $message,
+		if_($nocancel, cancel => ''),
+	      }, [ { val => \$def, type => 'list', list => $l, help => $help, format => $f } ]) && $def;
 }
 
 sub ask_from_treelist {
