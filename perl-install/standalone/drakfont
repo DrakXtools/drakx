@@ -91,7 +91,6 @@ use interactive;
 use ugtk2 qw(:helpers :wrappers :create);
 use common;
 
-
 my $in = 'interactive'->vnew('su');
 
 #   global variables needed by each functions
@@ -176,20 +175,12 @@ my $ttmkfdir     = '/usr/sbin/ttmkfdir';
 my $fccache      = '/usr/bin/fc-cache';
 my $ghostscript;
 
-# Global lists, just to manipulate it easily.
-# my @font_list                    => list of fonts to install.
-# my @installed_fonts;             => list of installed fonts.
-# my @installed_fonts_path;        => list of path included in xfs.
-# my @fontsdir_to_install;         => list of fonts to uninstall.
-# my @fontsdir_to_uninstall;       => path to remove in xfs font file.
-# my @installed_fonts_full_path;   => full path list of fonts to uninstall.
-
-my @font_list;
-my @installed_fonts;
-my @installed_fonts_path;
-my @fontsdir_to_install;
-my @fontsdir_to_uninstall;
-my @installed_fonts_full_path;
+my @font_list;                 # list of fonts to install
+my @installed_fonts;           # list of installed fonts
+my @installed_fonts_path;      # list of path included in xfs
+my @fontsdir_to_install;       # list of fonts to uninstall
+my @fontsdir_to_uninstall;     # path to remove in xfs font file
+my @installed_fonts_full_path; # full path list of fonts to uninstall
 
 sub list_fontpath() {
     foreach (grep { /\d+:\s/ } `$chkfontpath -l`) {
@@ -252,8 +243,7 @@ sub search_windows_font() {
                     }
                 }
                 !$replace && any { /$i/ } @installed_fonts and next;
-                grep { /$i$/ } @font_list
-                  or push @font_list, "$win_dir/$_->[1]/fonts/$i";
+                grep { /$i$/ } @font_list or push @font_list, "$win_dir/$_->[1]/fonts/$i";
             }
         }
         $interactive && $nb_dir and progress($pbar, 1, N("done"));
@@ -268,9 +258,9 @@ sub search_windows_font() {
     1;
 }
 
-sub is_a_font {
+sub is_a_font($) {
     local $_ = $_[0];
-         /\.ttf$/i || /\.pfa$/i || /\.pfb$/i || /\.pcf$/i || /\.pcf\.gz$/i || /\.pfm$/i || /\.gsf$/;
+    /\.ttf$/i || /\.pfa$/i || /\.pfb$/i || /\.pcf$/i || /\.pcf\.gz$/i || /\.pfm$/i || /\.gsf$/;
 }
 
 # Optimisation de cette etape indispensable
@@ -322,7 +312,7 @@ sub search_dir_font_uninstall() {
     print "Fonts to uninstal: " . $_ . "\n" foreach @font_list;
 }
 
-sub search_dir_font_uninstall_gi {
+sub search_dir_font_uninstall_gi() {
     @font_list = @uninstall;
     $interactive and progress($pbar, 1, N("Search for fonts in installed list"));
 }
@@ -453,6 +443,7 @@ sub remove_fonts() {
     my @list_dir;
     -e $drakfont_dir . "/remove" || mkdir_p($drakfont_dir . "/remove");
     $interactive and progress($pbar, 1, N("done"));
+    
     foreach my $i (@font_list) {
         $_ = $i;
         if (/.pfb$/ || /.gsf$/ || /.pfm$/ || /.pfa$/) {
@@ -467,7 +458,7 @@ sub remove_fonts() {
             else { rm_rf($i) }
         }
         $i =~ s/\/\w*\.\w*//gi;
-        grep { $i } @list_dir or push @list_dir, $i;
+	grep { $i } @list_dir or push @list_dir, $i;
         $interactive and progress($pbar1, 1 / @font_list, N("Suppress Fonts Files"));
     }
     $interactive and progress($pbar1, 0.01, N("done"));
@@ -521,7 +512,7 @@ sub backend_mod() {
         print "\nUninstall Specifics Fonts.........\n";
         search_installed_fonts_full_path();
         if ($interactive) { search_dir_font_uninstall_gi() }
-        else { search_dir_font_uninstall foreach @uninstall }
+        else { search_dir_font_uninstall() foreach @uninstall }
         remove_fonts();
         print "\nThe End............................\n";
     }
@@ -712,7 +703,7 @@ sub appli_choice() {
 								     }),
 						   gtksignal_connect(new Gtk2::Button(N("Cancel")),
 								     clicked => sub {
-									 undef @install;
+									 @install = ();
 									 $$central_widget->destroy();
 									 create_fontsel();
 								     }),
@@ -741,7 +732,7 @@ sub font_choice() {
     $file_dialog->show();
 }
 
-sub file_ok_sel {
+sub file_ok_sel($$) {
     my ($_widget, $file_selection) = @_;
     my $file_name = $file_selection->get_filename();
     print "-- @install\n";
@@ -918,7 +909,7 @@ sub import_status_uninstall() {
     backend_mod();
 }
 
-sub progress {
+sub progress($$$) {
     my ($progressbar, $incr, $label_text) = @_;
     my ($new_val) = $progressbar->fraction;
     $new_val += $incr;
