@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 22mdk
+Release: 23mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -317,6 +317,56 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Mar 15 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-23mdk
+- drakbackup: (stew)
+  o install extra packages when using wizard too
+  o report error on key transfer in GUI if needed
+- drakboot:
+  o list yes/no for autologin in a more intuitive way, that is yes is
+    grouped with user and wm pull down menus (robert.vojta@qcm.cz,
+    anthill #390)
+  o always generate a precise entry using the precise version and
+    remove the linux-2.4 or linux-2.6 (but keep the "linux" entry)
+    (pixel)
+- drakclock: make the ntpdate after stopping the ntpd (manu@agat.net,
+  #8141)
+- drakfont: make "install" button be insensitive when there's no
+  selected fonts
+- drakconnect:
+  o fix misdetection of some network cards (aka do not try to match a
+    physical device when SIOCETHTOOL ioctl is not supported) (#8010)
+  o fix missing quotes around wireless encryption key (#8887)
+  o wizard:
+    * do not list anymore wireless cards in LAN connection, only in
+      wireless connections
+    * fix unlisted ADSL modems when there's no network card (#8611)
+    * handle orinoco_pci and orinoco_plx driven card as wireless ones
+    * skip "start on boot" step for LAN (already managed by network
+      scripts)
+    * write ether conf later on QA request
+  o renew "internet access" window:
+    * sanitize buttons layout (#8637)
+    * sanitize fields layout
+    * fix config reading/writing
+    * fix connection status (#7800)
+    * fix unlisted first dns server
+  o manage interface:
+    * do not write IPADDR, NETMASK and NETWORK fields in ifcfg-ethX
+      when using DHCP (fix writing "no ip"/"no netmask" in config file)
+    * default protocol is dhcp (fix fields checking when an interface
+      isn't yet configured)
+    * fix gateway setting (#6527)
+- drakfirewall, drakgw: add ppp+ and ippp+ at the interfaces list
+  (florin) (#8419)
+- localedrake: always define KDM fonts dependending on encoding
+  (pablo, #8714)
+- logdrake: fix explanations in mcc that got broken by #8412 speedup
+- printerdrake: install "scanner-gui" instead of "xsane" when it sets
+  up an HP multi-function device (till)
+- scannerdrake: install "scanner-gui" instead of "xsane", so that
+  scanning GUI actually used can be determined by the system
+  environment (till)
+
 * Thu Mar 11 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-22mdk
 - fix imm & ppa managment on kernel 2.6 (pixel)
 - no entry in fstab for zips (now cleanly done by hotplug) (pixel)
