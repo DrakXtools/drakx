@@ -603,7 +603,10 @@ sub ask_fromW {
     my $set_advanced = sub {
 	($advanced) = @_;
 	$update->($common->{callbacks}{advanced}) if $advanced && !$first_time;
-	$advanced ? $_->{real_w}->show : $_->{real_w}->hide foreach @before_widgets_advanced, @widgets_advanced;
+	foreach (@before_widgets_advanced, @widgets_advanced) {
+	    my $w = $_->{embed_scroll} || $_->{real_w};
+	    $advanced ? $w->show : $w->hide;
+	}	    
 	@widgets = (@widgets_always, if_($advanced, @widgets_advanced));
 	$mainw->sync; #- for $set_all below (mainly for the set of clist)
 	$first_time = 0;
@@ -626,13 +629,35 @@ sub ask_fromW {
         $advanced_button->[0] = $common->{advanced_label_close};
     }
     my $buttons_pack = ($common->{ok} || !exists $common->{ok}) && $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @help, if_(@$l2, $advanced_button));
+    
+    my @widgets_to_pack;
+    foreach my $l (\@widgets_always, if_(@widgets_advanced, [ @before_widgets_advanced, @widgets_advanced ])) {
+	my @grouped;
+	my $add_grouped = sub {
+	    if (@grouped == 0) {
+		push @widgets_to_pack, 1 => Gtk2::VBox->new(0,0) if @$l == 0;
+	    } elsif (@grouped == 1 && @$l > 1) {
+		push @widgets_to_pack, 0 => $grouped[0]{real_w};
+	    } else {
+		my $scroll = create_scrolled_window(gtkpack__(Gtk2::VBox->new(0,0), map { $_->{real_w} } @grouped),
+						    [ 'automatic', 'automatic' ], 'none');
+		$_->{embed_scroll} = $scroll foreach @grouped;
+		push @widgets_to_pack, 1 => $scroll;
+	    }
+	    @grouped = ();
+	};
+	foreach (@$l) {
+	    if ($_->{grow}) {
+		$add_grouped->();
+		push @widgets_to_pack, 1 => $_->{real_w};
+	    } else {
+		push @grouped, $_;
+	    }
+	}
+	$add_grouped->();
+    }
 
-    gtkpack($pack,
-	    create_scrolled_window(gtkpack_(Gtk2::VBox->new(0,0),
-					    (map { $_->{grow}, $_->{real_w} } 
-					      @widgets_always, 
-					      if_(@widgets_advanced, @before_widgets_advanced, @widgets_advanced))),
-				   [ 'automatic', 'automatic' ], 'none')) if @$l || !$mainw->{pop_it};
+    gtkpack_($pack, @widgets_to_pack);
 	    
     if ($buttons_pack) {
 	if ($::isWizard && !$mainw->{pop_it} && $::isInstall) {
