@@ -308,6 +308,14 @@ our %adsl_data = (
                    Encapsulation => 3,
                   },
 
+                  N("Finland") . "|Sonera" =>
+                  {
+                   vpi => 0,
+                   vci => 64,
+                   Encapsulation => 3,
+                   method => 'pppoe',
+                  },
+
                   N("France") . "|Free non dégroupé 512/128 & 1024/128" =>
                   { 
                    vpi => 8, 
@@ -399,14 +407,6 @@ our %adsl_data = (
                    dnsServer2 => '213.36.80.1',
                    dnsServer3 => '213.36.80.2',
                    method => 'pppoa',
-                  },
-
-                  N("Finland") . "|Sonera" =>
-                  {
-                   vpi => 0,
-                   vci => 64,
-                   Encapsulation => 3,
-                   method => 'pppoe',
                   },
 
                   N("Germany") . "|Deutsche Telekom (DT)" =>
