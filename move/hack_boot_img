@@ -67,7 +67,7 @@ sub initrd {
     my $tar = "$instdir/stage1-data/stage1-with-busybox.tar.bz2";
 
     __ "$sudo umount $tmp $mnt 2>/dev/null";
-    _ "dd if=/dev/zero of=$tmp bs=1k count=4000";
+    _ "dd if=/dev/zero of=$tmp bs=1k count=" . ($arch =~ /ia64/ ? 16386 : ($type eq "all" ? 6000 : 4000));
     _ "$mke2fs $tmp";
     _ "$sudo mount -t ext2 $tmp $mnt -o loop";
 

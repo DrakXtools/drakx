@@ -27,7 +27,7 @@ endif
 all: install
 
 build: xwait runlevel_set isolinux/boot.msg
-	cd $(STAGE1) && ADDITIONAL_DEFS="-DMANDRAKE_MOVE" MOVE=1 make init stage1-network stage1-cdrom init-move
+	cd $(STAGE1) && ADDITIONAL_DEFS="-DMANDRAKE_MOVE" MOVE=1 make init stage1-full init-move
 	sudo ./collect-directories-to-create.pl $(DEST_LIVETREE) > data/directories-to-create
 	sudo find $(DEST_LIVETREE)/etc -type f | perl -pe 's|$(DEST_LIVETREE)||' > data/all-etcfiles
 	$(MAKE) -C ../perl-install mo_files

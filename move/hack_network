@@ -1,5 +1,0 @@
-#!/bin/sh
-
-make || exit 1
-./hack_boot_img network.rdz network
-cp -f network.rdz /tftpboot/gc/network.rdz

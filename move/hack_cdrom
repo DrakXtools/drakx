@@ -1,5 +1,0 @@
-#!/bin/sh
-
-make || exit 1
-./hack_boot_img cdrom.rdz cdrom
-cp -f cdrom.rdz /tftpboot/gc/network.rdz
