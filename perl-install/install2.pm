@@ -599,8 +599,9 @@ sub main {
     modules::write_conf($o->{prefix});
 
     #- mainly for auto_install's
-    run_program::run("bash", "-c", $o->{postInstallNonRooted}) if $o->{postInstallNonRooted};
-    run_program::rooted($o->{prefix}, "sh", "-c", $o->{postInstall}) if $o->{postInstall};
+    #- do not use run_program::xxx because it doesn't leave stdin/stdout unchanged
+    system("bash", "-c", $o->{postInstallNonRooted}) if $o->{postInstallNonRooted};
+    system("chroot", $o->{prefix}, "bash", "-c", $o->{postInstall}) if $o->{postInstall};
 
     install_any::ejectCdrom();
 
