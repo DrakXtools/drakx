@@ -255,7 +255,7 @@ static enum return_type try_with_device(char *dev_name)
 
 	if (!stat(location_full, &statbuf) && !S_ISDIR(statbuf.st_mode)) {
 		log_message("%s exists and is not a directory, assuming this is an ISO image", location_full);
-		if (lomount(location_full, IMAGE_LOCATION)) {
+		if (lomount(location_full, IMAGE_LOCATION, 0)) {
 			stg1_error_message("Could not mount file %s as an ISO image of the " DISTRIB_NAME " Distribution.", answers_location[0]);
 			umount(disk_own_mount);
 			return try_with_device(dev_name);

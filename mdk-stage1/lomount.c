@@ -132,7 +132,7 @@ del_loop(void)
 static char * where_mounted = NULL;
 
 int
-lomount(char *loopfile, char *where)
+lomount(char *loopfile, char *where, int gz)
 {
   
 	long int flag;
@@ -142,7 +142,7 @@ lomount(char *loopfile, char *where)
 
 	my_insmod("loop", ANY_DRIVER_TYPE, NULL);
 
-	if (set_loop(loopdev, loopfile)) {
+	if (set_loop(loopdev, loopfile, gz)) {
 		log_message("set_loop failed on %s (%s)", loopdev, strerror(errno));
 		return 1;
 	}
