@@ -891,24 +891,27 @@ my @bigseldom_used_groups = (
 );
 
 sub check_prog {
-    my ($f, $prefix) = @_;
+    my ($f) = @_;
 
     my @l = $f !~ m|^/| ?
         map { "$_/$f" } split(":", $ENV{PATH}) :
 	$f;
-    return if grep { -x "$prefix$_" } @l;
+    return if grep { -x $_ } @l;
 
-    #remove_bigseldom_used();
+    my ($f_) = map { m|^/| ? $_ : "/usr/bin/$_" } $f;
+    remove_bigseldom_used();
     foreach (@bigseldom_used_groups) {
-	my ($f_, @l) = map { m|^/| ? $_ : "/usr/bin/$_" } $f, @$_;
+	my (@l) = map { m|^/| ? $_ : "/usr/bin/$_" } @$_;
 	if (member($f_, @l)) {
 	    foreach (@l) {
-		getAndSaveFile("Mandrake/mdkinst$_", "$prefix$_");
-		chmod 0755, "$prefix$_";
+		getAndSaveFile($_);
+		chmod 0755, $_;
 	    }
-	    last;
+	    return;
 	}
     }
+    getAndSaveFile($f_);
+    chmod 0755, $f_;
 }
 
 sub remove_bigseldom_used {
