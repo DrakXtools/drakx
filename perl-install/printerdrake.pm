@@ -273,10 +273,15 @@ sub setup_local {
 	$do_auto_detect = !$printer->{NOAUTODETECT};
     } else {
 	local $::isWizard = 0;
-	$do_auto_detect = $in->ask_yesorno(_("Auto-Detection of Printers"),
-					   _("Printerdrake is able to auto-detect your locally connected parallel and USB printers for you, but note that on some systems the auto-detection CAN FREEZE YOUR SYSTEM AND THIS CAN LEAD TO CORRUPTED FILE SYSTEMS! So do it ON YOUR OWN RISK!
+	my $res = $in->ask_from_list_
+	    (_("Auto-Detection of Printers"),
+	     _("Printerdrake is able to auto-detect your locally connected parallel and USB printers for you, but note that on some systems the auto-detection CAN FREEZE YOUR SYSTEM AND THIS CAN LEAD TO CORRUPTED FILE SYSTEMS! So do it ON YOUR OWN RISK!
 
-Do you really want to get your printers auto-detected?"), 1);
+Do you really want to get your printers auto-detected?"),
+	     [_("Do auto-detection"),
+	      _("Set up printer manually")],
+	     _("Do auto-detection"));
+	$do_auto_detect = ($res eq _("Do auto-detection"));
     }
     my @parport = ();
     my $menuentries = {};
