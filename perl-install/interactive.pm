@@ -104,7 +104,7 @@ sub vnew {
     if ($su && $>) {
 	die "you must be root to run this program";
     }
-    require log;
+    require 'log.pm'; #- "require log" causes some pb, perl thinking that "log" is the log() function
     undef *log::l;
     *log::l = sub {}; # otherwise, it will bother us :(
     require interactive::newt;
@@ -302,7 +302,7 @@ sub ask_from_normalize {
 	if ($_->{list} && $_->{not_edit} && !$_->{allow_empty_list}) {
 	    if (@{$_->{list}} == ()) {
 		eval {
-		    require log;
+		    require 'log.pm'; #- "require log" causes some pb, perl thinking that "log" is the log() function
 		    log::l("ask_from_normalize: empty list for $_->{label}\n" . backtrace());
 		};
 	    }

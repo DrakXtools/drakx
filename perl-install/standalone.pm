@@ -7,7 +7,7 @@ use Config;
 
 #- for sanity (if a use standalone is made during install, MANY problems will happen)
 if ($::isInstall) {
-    require log;
+    require 'log.pm'; #- "require log" causes some pb, perl thinking that "log" is the log() function
     log::l('ERROR: use standalone made during install :-(');
     require common;
     log::l('backtrace: ' . backtrace());
