@@ -382,7 +382,7 @@ sub psUsingHdlists {
     my $prefix = $o->{prefix};
     my $listf = install_any::getFile($o_hdlistsfile || 'media/media_info/hdlists')
 	or die "no hdlists found";
-    my $suppl_CDs = 0;
+    my ($suppl_CDs, $deselectionAllowed) = (0, 0);
     if (!$o_packages) {
 	$o_packages = new URPM;
 	#- add additional fields used by DrakX.
@@ -399,6 +399,9 @@ sub psUsingHdlists {
 	#- we'll ask afterwards for supplementary CDs, if the hdlists file contains
 	#- a line that begins with "suppl"
 	if (/^suppl/) { $suppl_CDs = 1; next }
+	#- if the hdlists contains a line "askmedia", delection of media found
+	#- in this hdlist is allowed
+	if (/^askmedia/) { $deselectionAllowed = 1; next }
 	my $cdsuppl = index($medium_name, 's') >= 0;
 	m/^\s*(noauto:)?(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die qq(invalid hdlist description "$_" in hdlists file);
 	push @hdlists, [ $2, $medium_name, $3, $4, !$1, 
@@ -407,7 +410,7 @@ sub psUsingHdlists {
 	];
 	$cdsuppl ? ($medium_name = ($medium_name + 1) . 's') : ++$medium_name;
     }
-    @hdlists = $o->deselectFoundMedia(\@hdlists) unless defined $o_initialmedium;
+    @hdlists = $o->deselectFoundMedia(\@hdlists) if $deselectionAllowed && !defined $o_initialmedium;
 
     foreach my $h (@hdlists) {
 	#- make sure the first medium is always selected!
