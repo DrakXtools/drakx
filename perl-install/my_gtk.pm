@@ -422,7 +422,7 @@ sub create_treeitem($) {
     my $w = new Gtk::TreeItem($name);
     $w->signal_connect(key_press_event => sub {
         my (undef, $e) = @_;
-        local $_ = chr ($e->{keyval} & 0xff);
+        local $_ = chr ($e->{keyval});
 
 	if ($e->{keyval} > 0x100) {
 	    my $n;
@@ -500,7 +500,7 @@ sub _ask_from_list {
     });
     $list->signal_connect(key_press_event => sub {
         my ($w, $e) = @_;
-	my $c = chr $e->{keyval};
+	my $c = chr($e->{keyval} & 0xff);
 
 	Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
 
@@ -573,7 +573,7 @@ sub _ask_from_list_with_help {
     });
     $list->signal_connect(key_press_event => sub {
         my ($w, $e) = @_;
-	my $c = chr $e->{keyval};
+	my $c = chr($e->{keyval} & 0xff);
 
 	Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
 

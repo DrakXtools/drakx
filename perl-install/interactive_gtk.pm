@@ -125,7 +125,7 @@ sub ask_from_treelistW {
     $tree->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
     $tree->signal_connect(key_press_event => sub {
         my ($w, $e) = @_;
-	my $c = chr $e->{keyval};
+	my $c = chr($e->{keyval} & 0xff);
 	$curr or return;
 	if ($e->{keyval} >= 0x100 ? $c eq "\r" || $c eq "\x8d" : $c eq ' ') {
 	    if ($curr->row->is_leaf) { &$leave }
@@ -261,7 +261,7 @@ sub ask_from_entries_refW {
 		my ($w, $e) = @_;
 		#-don't know why it works, i believe that
 		#-i must say before &$go_to_next, but with it doen't work HACK!
-		$w->signal_emit_stop("key_press_event") if chr($e->{keyval}) eq "\x8d";
+		$w->signal_emit_stop("key_press_event") if chr($e->{keyval} & 0xff) eq "\x8d";
 	    });
 	    $widget->set_text(${$val->[$i]{val}});
 	    $widget->set_visibility(0) if $val->[$i]{hidden};
