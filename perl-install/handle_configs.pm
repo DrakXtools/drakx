@@ -77,11 +77,12 @@ sub comment_directive {
 
     my ($lines_ptr, $directive, $exactmatch) = @_;
 
+    my $success = 0;
     my $searchdirective = searchstr($directive);
     $searchdirective .= ".*" if !$exactmatch;
-    (s/^\s*($searchdirective)$/#$1/ and return 1)
+    (s/^\s*($searchdirective)$/#$1/ and $success = 1)
 	foreach @$lines_ptr;
-    return 0;
+    return $success;
 }
 
 sub replace_directive {
