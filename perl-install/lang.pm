@@ -619,13 +619,12 @@ sub set {
 
 sub langs {
     my ($l) = @_;
-    grep { $l->{$_} } keys %$l;
+    $l->{all} ? list() : grep { $l->{$_} } keys %$l;
 }
 
 sub langsLANGUAGE {
     my ($l) = @_;
-    my @l = $l->{all} ? list() : langs($l);
-    uniq(map { split ':', lang2LANGUAGE($_) } @l);
+    uniq(map { split ':', lang2LANGUAGE($_) } langs($l));
 }
 
 sub pack_langs { 
