@@ -1034,7 +1034,8 @@ You can use userdrake to add a user in this group.")
 sub ddcxinfos {
     return if $::noauto;
 
-    my @l = `$ENV{LD_LOADER} ddcxinfos`;
+    my @l;
+    run_program::raw({ timeout => 20 }, 'ddcxinfos', '>', \@l);
     if ($::isInstall && -e "/tmp/ddcxinfos") {
 	my @l_old = cat_("/tmp/ddcxinfos");
 	if (@l < @l_old) {
