@@ -174,6 +174,7 @@ sub bestKernelPackage {
 	$pkg->name =~ /kernel-i686/ and $best2 = $pkg;
 	$pkg->name =~ /kernel-enterprise/ and $best3 = $pkg;
     }
+    log::l("bestKernelPackage's: " . join(' ', map { if_($_, $_->name) } $best, $best2, $best3));
 
     $best || $best2 || $best3;
 }
@@ -227,8 +228,10 @@ sub packageCallbackChoices {
 	my @l = grep {
 	    #- or if a kernel has to be chosen, chose the basic one.
 	    if ($_->arch ne 'src') {
-		$_->name =~ /kernel-\d/ and return $_;
-		$_->name =~ /kernel-i686/ and return $_;
+		if ($_->name =~ /kernel-\d/ || $_->name =~ /kernel-i686/) {
+		    log::l("packageCallbackChoices: chosen " . $_->name);
+		    return $_;
+		}
 	    }
 
 	    #- or even if a package requires a specific locales which
