@@ -7,48 +7,71 @@ use common qw(:common :system :file);
 use log;
 use c;
 
+my $config_file = "/usr/lib/wgetrc";
+
 sub main {
     my ($prefix, $in, $install) = @_;
   begin:
     $::isWizard = 1;
     $::Wizard_no_previous = 1;
-    $in->ask_okcancel(_("Proxy configuration"), _("blabla proxy"), 1) or quit_global($in, 0);
-   
+    $in->ask_okcancel(_("Proxy configuration"),
+                      _("Welcome to the proxy configuration utility.\n\nHere, you'll be able to set up your http and ftp proxies\nwith or without login and password\n"
+	               ), 1) or quit_global($in, 0);
+  
+    my $proxy_cfg = {};
+
+    # grab current config
+    open F, $config_file;
+    while (<F>)
+    {
+      if (/http_proxy = (http:.*):(.*)/)
+      {
+        $proxy_cfg->{http_url} = $1;
+	$proxy_cfg->{http_port} = $2;
+      }
+      if (/ftp_proxy = (ftp:.*):(.*)/)
+      {
+        $proxy_cfg->{ftp_url} = $1;
+	$proxy_cfg->{ftp_port} = $2;
+      }
+      /http_user = (.*)/ and $proxy_cfg->{login} = $1;
+      /http_passwd = (.*)/ and $proxy_cfg->{passwd} = $1;
+    }
+    
     # http proxy
-    my $http_proxy = {};
-    $http_proxy->{url} = "http://bla.foo.fr/";
     $in->ask_from_entries_refH(_("Proxy configuration"),
                                _("Please fill in the http proxy informations"),
          [
-           { label => _("URL"), val => \$http_proxy->{url} },
-           { label => _("port"), val => \$http_proxy->{port} }
+           { label => _("URL"), val => \$proxy_cfg->{http_url} },
+           { label => _("port"), val => \$proxy_cfg->{http_port} }
 	 ]
     );
     undef $::Wizard_no_previous;
     # ftp proxy
-    my $ftp_proxy = {};
-    $ftp_proxy->{url} = "http://bla.foo.fr/";
     $in->ask_from_entries_refH(_("Proxy configuration"),
                                _("Please fill in the ftp proxy informations"),
          [
-           { label => _("URL"), val => \$ftp_proxy->{url} },
-           { label => _("port"), val => \$ftp_proxy->{port} }
+           { label => _("URL"), val => \$proxy_cfg->{ftp_url} },
+           { label => _("port"), val => \$proxy_cfg->{ftp_port} }
 	 ]
     );
     # proxy login/passwd
-    my $proxy_login = {};
     $in->ask_from_entries_refH(_("Proxy configuration"),
-                               _("Please enter proxy login and password, if any"),
+                               _("Please enter proxy login and password, if any.\nLeave it blank if you don't want login/passwd"),
          [
-	   { label => _("login"), val => \$proxy_login->{login} },
-	   { label => _("password"), val => \$proxy_login->{passwd} }
+	   { label => _("login"), val => \$proxy_cfg->{login} },
+	   { label => _("password"), val => \$proxy_cfg->{passwd} }
 	 ]
     );
     
-    print "http: $http_proxy->{url}:$http_proxy->{port}\n";
-    print "ftp: $ftp_proxy->{url}:$ftp_proxy->{port}\n";
-    print "login: $proxy_login->{login}, $proxy_login->{passwd}\n";
-    
+    # save config
+    substInFile { s/^http_proxy.*\n//; $_ .= "http_proxy = $proxy_cfg->{http_url}:$proxy_cfg->{http_port}\n" if eof } $config_file;
+    substInFile { s/^ftp_proxy.*\n//; $_ .= "ftp_proxy = $proxy_cfg->{ftp_url}:$proxy_cfg->{ftp_port}\n" if eof } $config_file;
+    if ($proxy_cfg->{login})
+    {
+      substInFile { s/^http_user.*\n//; $_ .= "http_user = $proxy_cfg->{login}\n" if eof } $config_file;
+      substInFile { s/^http_passwd.*\n//; $_ .= "http_passwd = $proxy_cfg->{passwd}\n" if eof } $config_file;
+    }
     log::l("[drakproxy] Installation complete, exiting\n");
 }
 
