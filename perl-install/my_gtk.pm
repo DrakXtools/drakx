@@ -542,11 +542,15 @@ sub gtkicons_labels_widget {
 	$fixed->put($_, 75, 65);
 	$i++;
     }
+    my $timeout;
     $fixed->signal_connect(expose_event => sub {
 			       my ($fx, $fy) = ($fixed->allocation->[2], $fixed->allocation->[3]);
-			       foreach (compute($fx, $fy, 40, 30, 5, @tab)) {
-				   $fixed->move(@$_);
-			       }
+			       defined($timeout) or $timeout = Gtk->timeout_add(100, sub {
+								 $fixed->move(@$_) foreach compute_icons($fx, $fy, 40, 30, 5, @tab);
+								 Gtk->timeout_remove($timeout);
+								 undef $timeout;
+								 0;
+							     });
 			   });
 
     $fixed->signal_connect( realize => sub { $fixed->window->set_back_pixmap($background, 0) });
@@ -555,7 +559,7 @@ sub gtkicons_labels_widget {
     $fixed;
 }
 
-sub compute {
+sub compute_icons {
     my ($fx, $fy, $decx, $decy, $interstice, @tab) = @_;
     my $nb = $#tab;
     my $nb_sav = $nb;
