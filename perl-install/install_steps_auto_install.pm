@@ -100,8 +100,9 @@ sub charsetChanged {
 }
 
 sub errorInStep {
-    my ($_o, $_err) = @_;
+    my ($_o, $err) = @_;
     print "error :(\n"; 
+    print "$err\n\n";
     print "switch to console f2 for a shell\n";
     print "Press <Enter> to reboot\n";
     <STDIN>;
