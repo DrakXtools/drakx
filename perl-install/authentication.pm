@@ -32,6 +32,16 @@ my %kind2pam_kind = (
     SMBKRB    => ['winbind'],
 );
 
+my %kind2nsswitch = (
+    local     => [],
+    SmartCard => [],
+    LDAP      => ['ldap'], 
+    NIS       => ['nis'],
+    AD        => ['ldap'],
+    winbind   => ['winbind'], 
+    SMBKRB    => ['winbind'],
+);
+
 sub kind2description() {
     join('', 
          map {
@@ -197,6 +207,10 @@ sub set {
     sshd_config_UsePAM(@$pam_modules > 0);
     set_pam_authentication(@$pam_modules);
 
+    my $nsswitch = $kind2nsswitch{$kind} or log::l("kind2nsswitch does not know $kind");
+    $nsswitch ||= [];
+    set_nsswitch_priority(@$nsswitch);
+
     if ($kind eq 'local') {
     } elsif ($kind eq 'SmartCard') {
 	$in->do_pkgs->install('castella-pam');
@@ -207,8 +221,6 @@ sub set {
 	    my $s = run_program::rooted_get_stdout($::prefix, 'ldapsearch', '-x', '-h', $authentication->{LDAP_server}, '-b', '', '-s', 'base', '+');
 	    first($s =~ /namingContexts: (.+)/);
 	} or log::l("no ldap domain found on server $authentication->{LDAP_server}"), return;
-
-	set_nsswitch_priority('ldap');
 
 	update_ldap_conf(
 			 host => $authentication->{LDAP_server},
@@ -221,8 +233,6 @@ sub set {
 	$in->do_pkgs->install(qw(nss_ldap pam_krb5 libsasl2-plug-gssapi));
 	my $port = "389";
 	
-	set_nsswitch_priority('ldap');
-
 	my $ssl = { 
 		   anonymous => 'off', 
 		   simple => 'off', 
@@ -289,7 +299,6 @@ sub set {
 	    $_ .= "$t $authentication->{NIS_server}\n" if eof;
 	} "$::prefix/etc/yp.conf";
 
-	set_nsswitch_priority('nis');
 	#- no need to modify system-auth for nis
 
 	$when_network_is_up->(sub {
@@ -305,7 +314,6 @@ sub set {
 	my $domain = uc $netc->{WINDOMAIN};
 	
 	$in->do_pkgs->install('samba-winbind');
-	set_nsswitch_priority('winbind');
 
 	require network::smb;
 	network::smb::write_smb_conf($domain);
@@ -326,8 +334,6 @@ sub set {
 
 	configure_krb5_for_AD($authentication);
 	$in->do_pkgs->install('samba-winbind', 'pam_krb5', 'samba-server', 'samba-client');
-	set_nsswitch_priority('winbind');
-
 		
 	require network::smb;
 	network::smb::write_smb_ads_conf($domain,$realm);
@@ -440,10 +446,11 @@ sub get_pam_authentication_kinds() {
 
 sub set_nsswitch_priority {
     my (@kinds) = @_;
-    # allowed: files nis ldap dns
+    my @known = qw(nis ldap winbind);
     substInFile {
 	if (my ($database, $l) = /^(\s*(?:passwd|shadow|group|automount):\s*)(.*)/) {
-	    $_ = $database . join(' ', uniq('files', @kinds, split(' ', $l))) . "\n";
+	    my @l = difference2([ split(' ', $l) ], \@known);
+	    $_ = $database . join(' ', uniq('files', @kinds, @l)) . "\n";
 	}	
     } "$::prefix/etc/nsswitch.conf";
 }
