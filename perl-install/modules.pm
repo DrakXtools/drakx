@@ -90,7 +90,7 @@ sub load_and_configure {
     my $category = module2category($module) || '';
     my $network_devices = $category =~ m!network/(main|gigabit|usb|wireless)! && [ detect_devices::getNet() ];
 
-    my @l = remove_loaded_modules(dependencies_closure(cond_mapping_24_26($module))) or return;
+    my @l = remove_loaded_modules(dependencies_closure(cond_mapping_24_26($module)));
     load_raw(\@l, { $module => $o_options });
 
     if ($network_devices) {
