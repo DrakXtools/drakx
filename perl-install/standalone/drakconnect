@@ -906,6 +906,7 @@ Please run \"Internet access\" in control center."));
 	network::adsl::adsl_probe_info($cnx, $netc, $intf);
     }
     my @conf_data = (
+                     [ N("Host name (optional)"), \$netc->{HOSTNAME} ],
                      [ N("Domain name"), \$netc->{DOMAINNAME} ],
                      [ N("First DNS Server (optional)"),  \$netc->{dnsServer} ], # \$cnx->{dns1}
                      [ N("Second DNS Server (optional)"), \$netc->{dnsServer2} ], #\$cnx->{dns2}
@@ -954,6 +955,7 @@ Please run \"Internet access\" in control center."));
                                                                               update();
                                                                               $button_apply->set_sensitive(1);
                                                                           } else {
+                                                                              configureNetwork2($in, '', $netc, $intf);
                                                                               write_resolv_conf("/etc/resolv.conf", $netc);
                                                                           }
                                                                           $exit_dialogsub->();
