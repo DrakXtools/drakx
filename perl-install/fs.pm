@@ -257,7 +257,7 @@ sub prepare_write_fstab {
 		my @l1 = grep { member($_, 'ro', 'exec') } @l;
 		my @l2 = difference2(\@l, \@l1);
 		$options = join(",", "dev=$dev", "fs=$type", @l1, if_(@l2, '--', @l2));
-		($dev, $type) = ($mntpoint, 'supermount');
+		($dev, $type) = ('none', 'supermount');
 	    }
 
 	    [ $mntpoint, $_->{comment} . join(' ', $dev, $mntpoint, $type, $options || 'defaults', $freq, $passno) . "\n" ];
