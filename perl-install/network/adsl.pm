@@ -138,7 +138,7 @@ user "$adsl->{login}"
 						      ['ppp-compress-24', 'ppp_deflate'],
 						      ['ppp-compress-26', 'ppp_deflate']);
 	$::isStandalone and modules::write_conf($prefix);
-	$in->do_pkgs->install('speedtouch_mgmt');
+	$in->do_pkgs->what_provides("speedtouch_mgmt") and $in->do_pkgs->install('speedtouch_mgmt');
 	-e "$prefix/usr/share/speedtouch/mgmt.o" or $in->ask_warn('', _('You need the alcatel microcode.
 Download it at
 http://www.alcatel.com/consumer/dsl/dvrreg_lx.htm
