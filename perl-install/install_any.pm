@@ -610,7 +610,7 @@ sub install_urpmi {
 	    $qname =~ s/(\s)/\\$1/g; $qdir =~ s/(\s)/\\$1/g;
 
 	    #- output new urpmi.cfg format here.
-	    push @cfg, "$qname " . ($need_list ? "" : $dir) . " {
+	    push @cfg, "$qname " . ($need_list ? "" : $qdir) . " {
   hdlist: hdlist.$name.cz
   with_hdlist: ../base/" . ($_->{update} ? "hdlist.cz" : $_->{hdlist}) . ($need_list ? "
   list: list.$name" : "") . ($dir =~ /removable:/ && "
