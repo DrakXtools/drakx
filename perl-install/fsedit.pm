@@ -57,7 +57,7 @@ my @partitions_signatures = (
     [ 0x383, 0x8000, 'JFS1' ],
     [ 0x82, 4086, "SWAP-SPACE" ],
     [ 0x82, 4086, "SWAPSPACE2" ],
-    [ 0x7,  0x1FE, "\x55\xAA", 0x3, "NTFS" ],
+    [ 0x107, 0x1FE, "\x55\xAA", 0x3, "NTFS" ],
     [ 0xc,  0x1FE, "\x55\xAA", 0x52, "FAT32" ],
 if_(arch() !~ /^sparc/,
     [ 0x6,  0x1FE, "\x55\xAA", 0x36, "FAT" ],
@@ -211,7 +211,7 @@ sub hds {
 	$_->{type} = typeOfPart($_->{device}) || 0x100 foreach grep { $_->{type} == 0x100 } partition_table::get_normal_parts($hd);
 
 	#- special case for type overloading (eg: reiserfs is 0x183)
-	foreach (grep { isExt2($_) } partition_table::get_normal_parts($hd)) {
+	foreach (grep { isExt2($_) || $_->{type} == 0x7 } partition_table::get_normal_parts($hd)) {
 	    my $type = typeOfPart($_->{device});
 	    $_->{type} = $type if $type > 0x100 || $type && $hd->isa('partition_table::gpt');
 	}

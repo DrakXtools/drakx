@@ -37,6 +37,7 @@ if_(arch() =~ /^ppc/,
   0x401	=> 'Apple Bootstrap',
   0x402	=> 'Apple HFS Partition',
 ), if_(arch() =~ /^i.86/,
+  0x107 => 'NTFS',
   0x183 => 'Journalised FS: ReiserFS',
   0x283 => 'Journalised FS: XFS',
   0x383 => 'Journalised FS: JFS',
@@ -62,7 +63,7 @@ if_(arch() =~ /^ppc/,
   0x4 => 'DOS 16-bit FAT (up to 32M)',
   0x5 => 'DOS 3.3+ Extended Partition',
   0x6 => 'DOS FAT16',
-  0x7 => 'NTFS',
+  0x7 => 'NTFS (or HPFS)',
   0x8 => 'OS/2 (v1.0-1.3 only) / AIX boot partition / SplitDrive / Commodore DOS / DELL partition spanning multiple drives / QNX 1.x and 2.x ("qny")',
 ),
   0x9 => 'AIX data partition / Coherent filesystem / QNX 1.x and 2.x ("qnz")',
@@ -199,6 +200,7 @@ arch() !~ /sparc/ ? (
   0x1e => 'vfat',
   0x82 => 'swap',
   0x83 => 'ext2',
+  0x107 => 'ntfs',
   0x183 => 'reiserfs',
   0x283 => 'xfs',
   0x383 => 'jfs',
@@ -235,7 +237,7 @@ sub isExt2 { type2fs($_[0]) eq 'ext2' }
 sub isDos { arch() !~ /^sparc/ && ${{ 1 => 1, 4 => 1, 6 => 1 }}{$_[0]{type}} }
 sub isWin { ${{ 0xb => 1, 0xc => 1, 0xe => 1, 0x1b => 1, 0x1c => 1, 0x1e => 1 }}{$_[0]{type}} }
 sub isFat { isDos($_[0]) || isWin($_[0]) }
-sub isFat_or_NTFS { isDos($_[0]) || isWin($_[0]) || $_[0]{type} == 0x7 }
+sub isFat_or_NTFS { isDos($_[0]) || isWin($_[0]) || $_[0]{type} == 0x107 }
 sub isSunOS { arch() =~ /sparc/ && ${{ 0x1 => 1, 0x2 => 1, 0x4 => 1, 0x6 => 1, 0x7 => 1, 0x8 => 1 }}{$_[0]{type}} }
 sub isApple { type2fs($_[0]) eq 'apple' && defined $_[0]{isDriver} }
 sub isAppleBootstrap { type2fs($_[0]) eq 'apple' && defined $_[0]{isBoot} }
