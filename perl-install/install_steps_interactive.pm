@@ -1237,7 +1237,9 @@ try to force installation even if that destroys the first partition?"));
 sub miscellaneous {
     my ($o, $clicked) = @_;
 
-    any::choose_security_level($o, \$o->{security}, \$o->{libsafe}) or return;
+    if ($::expert) {
+	any::choose_security_level($o, \$o->{security}, \$o->{libsafe}) or return;
+    }
     install_steps::miscellaneous($o);
 }
 
