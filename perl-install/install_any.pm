@@ -1556,6 +1556,21 @@ sub write_fstab {
     fs::write_fstab($o->{all_hds}, $o->{prefix}) if !$o->{isUpgrade} || $o->{migrate_device_names};
 }
 
+my $clp_name = 'mdkinst.clp';
+sub clp_on_disk() { "$::prefix/tmp/$clp_name" }
+
+sub move_clp_to_disk() {
+    return if -e clp_on_disk();
+
+    my ($loop, $current_clp) = devices::find_clp_loop($clp_name);
+    log::l("move_clp_to_disk: copying $current_clp to ", clp_on_disk());
+    cp_af($current_clp, clp_on_disk());
+    run_program::run('losetup', $loop, clp_on_disk());
+
+    #- in $current_clp eq "/tmp/$clp_name"
+    unlink "/tmp/$clp_name";
+}
+
 #-###############################################################################
 #- pcmcia various
 #-###############################################################################

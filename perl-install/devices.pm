@@ -64,6 +64,17 @@ sub set_loop {
     $dev;
 }
 
+sub find_clp_loop {
+    my ($name) = @_;
+    foreach (0..255) {
+	my $dev = make("loop$_");
+	my ($file) = `losetup $dev 2>/dev/null` =~ m!\((.*?)\)! or return;
+	$file =~ s!^/sysroot/!/!;
+	basename($file) eq $name and return $dev, $file;
+    }
+    undef;
+}
+
 sub init_device_mapper() {
     eval { modules::load('dm-mod') };
     make('urandom');
