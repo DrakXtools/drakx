@@ -91,9 +91,9 @@ if (@busy) {
     if ($choice eq 'keep') {
 	exec 'totem' or $in->exit;
     } else {
-	kill 15, map { $_->{pid} } @busy;
+	system('sudo', 'kill', map { $_->{pid} } @busy);
 	sleep 2;
-	kill 9, map { $_->{pid} } @busy;
+	system('sudo', 'kill', '-9', map { $_->{pid} } @busy);
     }
 }
 
