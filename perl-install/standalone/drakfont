@@ -145,27 +145,32 @@ sub search_windows_font {
 	    return 0;
 	}
 	# TODO : handle replace like on the other function
-	if (!$replace) {
-	    foreach ([\@list_fonts_win, "windows"], [\@list_fonts_winnt, "winnt"]) {
-		foreach my $i (@{$_[0]}) {
-		    grep ( /$i$/, @font_list) || grep (/$i/, @installed_fonts) or push @font_list, "$win_dir/$_[1]/fonts/$i";
-		}
+#			!$replace && grep(/$i/, @installed_fonts) and next;
+
+#	if (!$replace) {
+	foreach $_ ([\@list_fonts_win, "windows"], [\@list_fonts_winnt, "winnt"]) {
+#	    print "totoottoootototo  (@{$_[0]}) \n";
+	    foreach my $i (@{$_[0]}) {
+		print "result__________ : $i \n";
+		!$replace && grep(/$i/, @installed_fonts) and next;
+		grep ( /$i$/, @font_list) or push @font_list, "$win_dir/$_[1]/fonts/$i";
 	    }
+	}
 #		    foreach my $i (@list_fonts_win) {
 #			grep ( /$i$/, @font_list) || grep (/$i/, @installed_fonts) or push @font_list, "$win_dir/windows/fonts/$i";
 #	      foreach my $i (@list_fonts_winnt) {
 #		  grep ( /$i$/, @font_list) || grep (/$i/, @installed_fonts) or push @font_list, "$win_dir/winnt/fonts/$i";
 #	      }
-	} else {
+#	} else {
 #	    foreach ([\@list_fonts_win, "windows"], [\@list_fonts_winnt, "winnt"]) {
 	    #TODO : add a foreach to factorize
-	    foreach my $i (@list_fonts_win) {
-		grep ( /$i$/, @font_list)  or push @font_list, "$win_dir/windows/fonts/$i";
-	    }
-	    foreach my $i (@list_fonts_winnt) {
-		grep ( /$i$/, @font_list)  or push @font_list, "$win_dir/winnt/fonts/$i";
-	    }
-	}
+#	    foreach my $i (@list_fonts_win) {
+#		grep ( /$i$/, @font_list)  or push @font_list, "$win_dir/windows/fonts/$i";
+#	    }
+#	    foreach my $i (@list_fonts_winnt) {
+#		grep ( /$i$/, @font_list)  or push @font_list, "$win_dir/winnt/fonts/$i";
+#	    }
+#	}
     }
     1;
 }
