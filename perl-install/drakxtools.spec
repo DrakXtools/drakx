@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 1mdk
+Release: 2mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -315,6 +315,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Nov  5 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-2mdk
+- drakbackup: enable bz2 compression option (stew)
+- drakconnect: detect again unconfigured network interfaces
+
 * Tue Nov  4 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-1mdk
 - overall misc cleanups
 - diskdrake: check both nfs servers version 2 and version 3, and
