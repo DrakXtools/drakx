@@ -7,7 +7,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
-    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkpowerpack gtkcombo_setpopdown_strings gtkset_editable gtksetstyle gtkset_text gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkexpand gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_modal gtkset_border_width gtkmove gtkresize gtkshow gtkhide gtkdestroy gtkflush gtkcolor gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng create_pix_text get_text_coord fill_tiled gtkicons_labels_widget write_on_pixmap gtkcreate_xpm gtkcreate_png gtkbuttonset gtkroot gtkentry) ],
+    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkpowerpack gtkcombo_setpopdown_strings gtkset_editable gtksetstyle gtkset_text gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkexpand gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_modal gtkset_border_width gtkmove gtkresize gtkshow gtkhide gtkdestroy gtkflush gtkcolor gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng create_pix_text get_text_coord fill_tiled gtkicons_labels_widget write_on_pixmap gtkcreate_xpm gtkcreate_png gtkcreate_png_pixbuf gtkbuttonset gtkroot gtkentry compose_with_back) ],
     various => [ qw(add2notebook add_icon_path n_line_size) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -18,8 +18,8 @@ my $use_imlib;
 my $use_gnome;
 
 BEGIN { 
-#    eval { require Gtk::Gdk::Pixbuf; Gtk::Gdk::Pixbuf->init };
-    $use_pixbuf = 0;# = $@ ? 0 : 1;
+    eval { require Gtk::Gdk::Pixbuf; Gtk::Gdk::Pixbuf->init };
+    $use_pixbuf = $@ ? 0 : 1;
     eval { require Gtk::Gdk::ImlibImage; Gtk::Gdk::ImlibImage->init };
     $use_imlib = $@ ? 0 : 1;
     eval { require Gnome };
@@ -489,7 +489,7 @@ sub get_text_coord {
 }
 
 sub gtkicons_labels_widget {
-    my ($args, $w, $color_text, $widget_for_font, $background, $x_back, $y_back, $x_round,
+    my ($args, $w, $color_text, $widget_for_font, $background,  $back_pixbuf, $x_back, $y_back, $x_round,
 	$y_round, $x_back2, $y_back2, $icon_width, $icon_height, $exec_func, $exec_hash) = @_;
 
     my @tab;
@@ -500,55 +500,46 @@ sub gtkicons_labels_widget {
 	my $label = $_->[0];
 	my $dbl_area;
 	my $darea = new Gtk::DrawingArea;
-        my ($icon, undef) = gtkcreate_png($_->[1]);
-	my ($icon_h, undef) = gtkcreate_png("$_->[1]_highlight");
-
-	my $imlib_icon_h;
-	my $imlib_counter = 0;
-	my $imlib_counter_add = 1;
-	my $imlib_icon_h_width;
-	my $imlib_icon_h_height;
-
-	if ($use_imlib) {
-	    $imlib_icon_h = gtkcreate_imlib("$_->[1]_highlight");
-	    $imlib_icon_h_width = $imlib_icon_h->rgb_width;
-	    $imlib_icon_h_height = $imlib_icon_h->rgb_height;
-	}
+	my ($icon, undef) = gtkcreate_png($_->[1]);
+	my $pixbuf = compose_with_back($_->[1], $back_pixbuf);
 
 	$darea->{state} = 0;
 	$darea->signal_connect(expose_event => sub {
-                  my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
-                  if (!defined($dbl_area) || $darea->{state} != $dbl_area->{state}) {
-		      my $state = $darea->{state};
-                      my ($pix, $width, $height) = create_pix_text($darea, $label, $color_text, $widget_for_font->style->font, $x_round, 1,
-                                                               1, 0, $background, $x_back2, $y_back2, 1, 0, $state);
-                      ($dx, $dy) = (max($width, $x_round), $y_round + $height);
-                      $darea->set_usize($dx, $dy);
-                      $dbl_area = new Gtk::Gdk::Pixmap($darea->window, max($width, $x_round), $y_round + $height);
-		      $dbl_area->{state} = $darea->{state};
-                      fill_tiled($darea, $dbl_area, $background, $x_back2, $y_back2, $dx, $dy);
-                      $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
-                                             $darea->{state} ? $icon_h : $icon, 0, 0, ($dx - $icon_width)/2, 0, $icon_width, $icon_height);
-                      $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
-                                             $pix, 0, 0, ($dx - $width)/2, $y_round, $width, $height);
-                  }
-                  $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
-                                              $dbl_area, 0, 0, 0, 0, $dx, $dy);
-                  ($darea->{dx}, $darea->{dy}) = ($dx, $dy);
-              });
+	    my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
+	    if (!defined($dbl_area) || $darea->{state} != $dbl_area->{state}) {
+		   my $state = $darea->{state};
+		   my ($pix, $width, $height) = create_pix_text($darea, $label, $color_text, $widget_for_font->style->font, $x_round, 1,
+											   1, 0, $background, $x_back2, $y_back2, 1, 0, $state);
+		   ($dx, $dy) = (max($width, $x_round), $y_round + $height);
+		   $darea->set_usize($dx, $dy);
+		   $dbl_area = new Gtk::Gdk::Pixmap($darea->window, max($width, $x_round), $y_round + $height);
+		   $dbl_area->{state} = $darea->{state};
+		   fill_tiled($darea, $dbl_area, $background, $x_back2, $y_back2, $dx, $dy);
+#                     $darea->{state} ? $icon_h : $icon
+		   $darea->window->set_back_pixmap($background,0);
+
+		   $pixbuf->render_to_drawable($dbl_area, $darea->style->fg_gc('normal'), 0, 0, 0, 0,
+								 $pixbuf->get_width, $pixbuf->get_height, 'normal', 0, 0);
+		   
+		   $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
+							 $pix, 0, 0, ($dx - $width)/2, $y_round, $width, $height);
+	    }
+	    $darea->window->draw_pixmap($darea->style->bg_gc('normal'), $dbl_area, 0, 0, 0, 0, $dx, $dy);
+	    ($darea->{dx}, $darea->{dy}) = ($dx, $dy);
+	});
 	$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
 	$darea->signal_connect(enter_notify_event => sub {
 				    if ($darea->{state} == 0) {
 					$darea->{state} = 1;
-					$darea->draw(undef);
-					$imlib_counter = 0;
-					$imlib_counter_add = 1;
+					$pixbuf->render_to_drawable($dbl_area, $darea->style->fg_gc('normal'), 0, 0, 0, 0,
+										   $pixbuf->get_width, $pixbuf->get_height, 'normal', 0, 0);
 				    }
 				});
 	$darea->signal_connect(leave_notify_event => sub {
 				    if ($darea->{state} == 1) {
 					$darea->{state} = 0;
-					$darea->draw(undef);
+					$pixbuf->render_to_drawable($dbl_area, $darea->style->fg_gc('normal'), 0, 0, 0, 0,
+										   $pixbuf->get_width, $pixbuf->get_height, 'normal', 0, 0);
 				    }
 				});
 	my $label_exec = $_->[0];
@@ -556,7 +547,6 @@ sub gtkicons_labels_widget {
 				    $darea->{state} = 0;
 				    $darea->draw(undef);
 				    $exec_func->($exec_hash->{$label_exec});
-#				    $exec_hash->{$label_exec}{function}->($exec_hash->{$label_exec}{arg});
 				});
 	$darea->signal_connect(realize => sub { $darea->window->set_cursor($cursor_hand) });
 	$tab[$i] = $darea;
@@ -753,11 +743,24 @@ sub gtkcreate_xpm {
     @l;
 }
 
+sub gtkcreate_png_pixbuf {
+    my ($f) = shift;
+    die 'gdk-pixbuf loibrary is unavaillable' unless ($use_pixbuf);
+    $f =~ m|.png$| or $f = "$f.png";
+    if ($f !~ /\//) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
+    Gtk::Gdk::Pixbuf->new_from_file($f) or die "gtkcreate_png: missing png file $f";
+}
+
 sub gtkcreate_png {
     my ($f) = shift;
     $f =~ m|.png$| or $f = "$f.png";
     if ($f !~ /\//) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
-    if ($use_pixbuf) {
+    if ($use_imlib) {
+	my $im = Gtk::Gdk::ImlibImage->load_image($f) or die "gtkcreate_png: missing png file $f";
+	$im->render($im->rgb_width, $im->rgb_height);
+	return ($im->move_image(), $im->move_mask);
+    } elsif ($use_pixbuf) {
+#	my $pixbuf = gtkcreate_png_pixbuf($f);
 	my $pixbuf = Gtk::Gdk::Pixbuf->new_from_file($f) or die "gtkcreate_png: missing png file $f";
 	my ($width, $height) = ($pixbuf->get_width(), $pixbuf->get_height);
 	my $rw = gtkroot();
@@ -766,13 +769,24 @@ sub gtkcreate_png {
  	my $bit = new Gtk::Gdk::Bitmap($rw, $width, $height, 1);
  	$pixbuf->render_threshold_alpha($bit, 0, 0, 0, 0, $width, $height, '127');
 	return ($pix, $bit);
-    } elsif ($use_imlib) {
-	my $im = Gtk::Gdk::ImlibImage->load_image($f) or die "gtkcreate_png: missing png file $f";
-	$im->render($im->rgb_width, $im->rgb_height);
-	return ($im->move_image(), $im->move_mask);
     } else {
 	die "gtkcreate_png: cannot find a suitable library for rendering png (imlib1 or gdk_pixbuf)";
     }
+}
+
+sub compose_pixbufs {
+    my ($pixbuf, $back_pixbuf_unaltered) = @_;
+    my ($width, $height) = ($pixbuf->get_height, $pixbuf->get_width);
+    my $back_pixbuf = Gtk::Gdk::Pixbuf->new('rgb', 0, 8, $height, $width);
+
+    $back_pixbuf_unaltered->copy_area(0, 0, $height, $width, $back_pixbuf, 0, 0);
+    $pixbuf->composite($back_pixbuf, 0, 0, $width, $height, 0, 0, 1, 1, 'nearest', 255);
+    $back_pixbuf;
+}
+
+sub compose_with_back {
+    my ($f, $back_pixbuf_unaltered) = @_;
+    compose_pixbufs(gtkcreate_png_pixbuf($f), $back_pixbuf_unaltered);
 }
 
 sub xpm_d { my $w = shift; Gtk::Gdk::Pixmap->create_from_xpm_d($w->window, undef, @_) }

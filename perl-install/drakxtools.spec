@@ -266,7 +266,23 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Thu Aug 29 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-27mdk
+* Fri Aug 30 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-27mdk
+- ugtk: add alpha blendering support for mcc's icons through pixbufs
+  o readd gdkpixbuf support
+  o ensure imlib is used by default to load files, not gdk-pixbuf
+  o compose_with_back(): load a png icon into a pixbuf and call
+    compose_pixbufs with background pixbuf
+  o compose_pixbufs(): render transparent icon onto background into a
+    new pixbuf
+  o merge gtkcreate_png_pixbuf() from gdk-pixbuf-0-branch : load an
+    icon into a pixbuf
+    gdk-pixbuf-0-branch also uses it to simplify a lot of code
+  o gtkicons_labels_widget() :
+    * add a new background pixbuf parameter that'll be composited with icons
+    * render icons with alpha blender in right area
+    * kill imlib_counter
+    * kill imlib usage for 
+    * kill dead code (was dead since i fixed mcc memory leaks)
 - fix init-script-without-chkconfig-{post,preun}
 
 * Thu Aug 29 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-26mdk
