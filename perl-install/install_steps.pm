@@ -737,7 +737,6 @@ sub setupBootloaderBefore {
 	my $vga = $o->{allowFB} && (!detect_devices::matching_desc('3D Rage LT') &&
 				    !detect_devices::matching_desc('Rage Mobility [PL]') &&
 				    !detect_devices::matching_desc('i740') &&
-				    !detect_devices::matching_desc('ViRGE') &&
 				    !detect_devices::matching_desc('Matrox') &&
 				    !detect_devices::matching_desc('Tseng.*ET6\d00') &&
 				    !detect_devices::matching_desc('SiS.*SG86C2.5') &&
