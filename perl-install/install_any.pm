@@ -141,7 +141,7 @@ sub getAndSaveFile {
     my $f = ref($file) ? $file : getFile($file) or return;
     open(my $F, ">$local") or return;
     local $_;
-    while (<$f>) { syswrite($F, $_) or die("getAndSaveFile: $!") }
+    while (<$f>) { syswrite($F, $_) or die("getAndSaveFile($local): $!") }
     1;
 }
 
