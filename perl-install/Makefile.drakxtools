@@ -30,7 +30,7 @@ $(DIRS):
 install:
 	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{harddrake,pixmaps,icons/{large,mini},autostart} $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) $(INITDIR) $(MENUDIR)
 	install -d $(INLIBDEST_DIRS:%=$(LIBDEST)/%)
-	install $(STANDALONEPMS) standalone/service_harddrake.sh $(SBINDEST)
+	install $(STANDALONEPMS) standalone/service_harddrake.sh standalone/convert $(SBINDEST)
 	install -s rpcinfo-flushed ddcprobe/ddcxinfos serial_probe/serial_probe $(SBINDEST)
 	ln -s ../../$(patsubst $(PREFIX)/usr%,%,$(SBINDEST))/XFdrake $(BINX11DEST)/Xdrakres
 	ln -s fileshareset $(SBINDEST)/filesharelist
@@ -67,6 +67,7 @@ install:
 	rmdir $(LIBDEST)/icons/harddrake2/menu
 	mv $(LIBDEST)/icons/harddrake2/ $(DATADIR)/pixmaps/
 	mv $(SBINDEST)/service_harddrake.sh $(INITDIR)/harddrake
+	mv $(SBINDEST)/convert $(DATADIR)/harddrake
 	mv $(SBINDEST)/service_harddrake $(DATADIR)/harddrake/
 	ln -s {XFdrake,$(SBINDEST)/drakx11}
 	ln -s {diskdrake,$(SBINDEST)/drakdisk}

@@ -252,7 +252,6 @@ case \$DESKTOP in
 esac
 EOF
 
-mv $RPM_BUILD_ROOT%_sbindir/convert $RPM_BUILD_ROOT%_datadir/harddrake/
 mv $RPM_BUILD_ROOT%_sbindir/service_harddrake_confirm $RPM_BUILD_ROOT%_datadir/harddrake/confirm
 
 chmod +x $RPM_BUILD_ROOT{%_datadir/harddrake/*,%_sysconfdir/X11/xinit.d/{harddrake2,net_applet}}
