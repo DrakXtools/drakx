@@ -133,3 +133,6 @@ unlink "$::prefix/usr/sbin/$_" foreach qw(drakautoinst drakboot drakfloppy drakg
 substInFile {
     s|chkconfig:|chkconfig-disabled:|;
 } "/etc/rc.d/init.d/$_" foreach qw(xfs dm devfsd syslog);
+
+#- we're not using sysv init, we need to replace these
+output("/sbin/$_", "#!/bin/sh\nhalt_reboot"), chmod(0755, "/sbin/$_") foreach qw(halt reboot);
