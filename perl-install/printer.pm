@@ -1449,10 +1449,19 @@ sub configure_hpoj {
 	    if (m!sub main!) {
 		last;
 	    } elsif (m!^[^\#]!) {
+		# Make the subroutines also working during installation
+		if ($::isInstall) {
+		    s!\$prefix!\$hpoj_prefix!g;
+		    s!prefix=\"/usr\"!prefix=\"$prefix/usr\"!g;
+		    s!etcPtal=\"/etc/ptal\"!etcPtal=\"$prefix/etc/ptal\"!g;
+		    s!varLock=\"/var/lock\"!varLock=\"$prefix/var/lock\"!g;
+		    s!varRunPrefix=\"/var/run\"!varRunPrefix=\"$prefix/var/run\"!g;
+		}
 		push (@ptalinitfunctions, $_);
 	    }
 	}
 	close PTALINIT;
+
 	eval "@ptalinitfunctions
         sub getDevnames {
 	    return (%devnames)
@@ -1610,7 +1619,7 @@ sub configure_hpoj {
 
     # Open configuration file
     local *CONFIG;
-    open(CONFIG,"> /etc/ptal/$ptaldevice") ||
+    open(CONFIG,"> $prefix/etc/ptal/$ptaldevice") ||
 	die "Could not open /etc/ptal/$ptaldevice for writing!\n";
 
     # Write file header.
