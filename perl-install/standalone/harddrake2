@@ -172,6 +172,7 @@ my $selection = gtksignal_connect($tree->get_selection(), 'changed' => sub {
     my ($model, $iter) = $select->get_selected();
     if ($model) {
         my $id = $model->get($iter, 1);
+        $iter->free;
         $current_device = $data{$id};
         
         if ($current_device) {
@@ -206,25 +207,20 @@ foreach (@harddrake::data::tree) {
     next if $Ident =~ /(MODEM|PRINTER)/ && $::testing;
     next if $Ident =~ /MODEM/ && !$options{MODEMS_DETECTION};
     next if $Ident =~ /PRINTER/ && !$options{PRINTERS_DETECTION};
-#    print N("Probing %s class\n", $Ident);
-#    standalone::explanations("Probing %s class\n", $Ident);
 
     my @devices = &$detector;
     next unless listlength(@devices); # Skip empty class (no devices)
 
-    my $parent_iter = Gtk2::TreeIter->new;
-    $tree_model->append($parent_iter, undef);
-    $tree_model->set($parent_iter, [ 0 => gtkcreate_pixbuf($icon), 1 => $title ]);
+    my $parent_iter = $tree_model->append_set(undef, [ 0 => gtkcreate_pixbuf($icon), 1 => $title ]);
 
     # Fill the graphic tree with a "tree leaf" widget per device
     foreach (@devices) {
-        my $custom_id = harddrake::data::custom_id($_, $title);
+        # we really should test for $title there:
         if (exists $_->{bus} && $_->{bus} eq "PCI") {
             my $i = $_;
             $_->{bus_id} = join ':', map { if_($i->{$_} ne "65535",  sprintf("%lx", $i->{$_})) } qw(vendor id subvendor subid);
             $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_}) } qw(pci_bus pci_device pci_function);
         }
-        # we really should test for $title there:
         # split description into manufacturer/description
         ($_->{Vendor}, $_->{description}) = split(/\|/, $_->{description}) if exists $_->{description};
 
@@ -247,14 +243,16 @@ foreach (@harddrake::data::tree) {
             $_->{alternative_drivers} = join(':', @$alter) if $alter->[0] ne 'unknown';
         }
         foreach my $i (qw(vendor id subvendor subid pci_bus pci_device pci_function MOUSETYPE XMOUSETYPE unsafe val devfs_prefix wacom auxmouse)) { delete $_->{$i} };
-        $_->{device} = '/dev/'.$_->{device} if exists $_->{device};
 
+        my $custom_id = harddrake::data::custom_id($_, $title);
         $custom_id .= ' ' while exists($data{$custom_id}); # get a unique id for eg bt8xx audio/video funtions
-        $tree_model->append_set($parent_iter, [ 1 => $custom_id ]);
+        $_->{device} = '/dev/'.$_->{device} if exists $_->{device};
+        $tree_model->append_set($parent_iter, [ 1 => $custom_id ])->free;
         $data{$custom_id} = $_;
         $configurators{$custom_id} = $configurator;
     }
     $tree->expand_row($tree_model->get_path($parent_iter), 1) unless $title eq "Unknown/Others";
+    $parent_iter->free;
 }
 
 $SIG{CHLD} = sub { undef $pid; $statusbar->pop($sig_id) };
@@ -267,7 +265,7 @@ foreach (['PRINTERS_DETECTION', N("/Autodetect printers")], ['MODEMS_DETECTION',
     $check_boxes{$_->[0]}->set_active($options{$_->[0]});    # restore saved values
 }
 
-$w->{rwindow}->show_all();
+$w->{rwindow}->show_all;
 undef $wait;
 gtkset_mousecursor_normal();
 $_->hide foreach $module_cfg_button, $config_button; # hide buttons while no device
@@ -282,5 +280,5 @@ sub quit_global {
 
 sub show_hide {
     my ($bool, $button) = @_;
-    if ($bool) { $button->show() } else { $button->hide() }
+    if ($bool) { $button->show } else { $button->hide }
 }
