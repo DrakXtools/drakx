@@ -543,23 +543,20 @@ sub interactive_mode {
     gtkadd($window1,
 	   gtkpack_(gtkset_usize(new Gtk::VBox(0,2),,620, 390),
 		    0,  new Gtk::Pixmap($pix_u_map, $pix_u_mask),
-		    0, new Gtk::VBox(0,0),
 		    1, gtkpack_(new Gtk::HBox(0,2),
 			     1, gtkpack_(new Gtk::VBox(0,2),
-					 1, new Gtk::VBox(0,0),
 					 1, gtkpack($font_box = new Gtk::VBox(0,5),
 						    $font_sel = new Gtk::FontSelection,
 						    ),
-					 1, new Gtk::VBox(0,0)
 					 ),
 			     0, gtkpack_(new Gtk::VBox(0,5),
 					 0, new Gtk::VBox(0,0),
 					 0, new Gtk::Pixmap($pix_user_map, $pix_user_mask),
 					 0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
 						   gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=>
-						       sub { ${$central_widget}->destroy(); $windows = 1; license(\&appli_choice)}),
+						       sub { ${$central_widget}->destroy(); $windows = 1; appli_choice();}),
 						   gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked =>
-						       sub {  ${$central_widget}->destroy(); $windows = 0; license(\&advanced_install)}),
+						       sub {  ${$central_widget}->destroy(); $windows = 0; advanced_install();}),
 						   gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked => 
 								     sub { ${$central_widget}->destroy(); uninstall() }),
 						   gtksignal_connect(new Gtk::Button(_("Font List")), clicked 	=>
@@ -569,8 +566,8 @@ sub interactive_mode {
 					 1, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
 						   gtksignal_connect(new Gtk::Button(_("About")), clicked => sub { 
 						       ${$central_widget}->destroy(); about() }),
-					  gtksignal_connect(new Gtk::Button(_("             Help           ")), clicked => sub { 
-					      ${$central_widget}->destroy(); help() }),
+						   gtksignal_connect(new Gtk::Button(_("             Help           ")), clicked => sub { 
+						       ${$central_widget}->destroy(); help() }),
 						   gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub { Gtk->main_quit() }),
 						   ),
 					 )
@@ -583,28 +580,6 @@ sub interactive_mode {
     $window1->show_all();    
     Gtk->main;
     Gtk->exit(0);
-}
-
-sub license {
-    my ($function) = @_,
-    my $text = new Gtk::Text(undef, undef);
-    my $license_box;
-    gtkpack($font_box,
-	    $license_box = gtkpack_(new Gtk::VBox(0,10),
-				    1, gtkpack_(new Gtk::HBox(0,0),
-						1, gtktext_insert(gtkset_editable($text, 1), "Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server."),
-						0, new Gtk::VScrollbar($text->vadj),
-						),
-				    0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
-					      gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { 
-						  ${$central_widget}->destroy(); $function->(); }),
-					      gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub {
-						  ${$central_widget}->destroy(); create_fontsel() }),
-					      ),
-				    )
-	    );   
-    $central_widget = \$license_box;
-    $font_box->show_all();
 }
 
 sub about {
@@ -722,23 +697,51 @@ Visual Interface:
 
 sub appli_choice {
     my $choice_box;
+    my $text = new Gtk::Text(undef, undef);
     gtkpack($font_box,
-	    $choice_box = gtkpack_(new Gtk::VBox(0,10),
-				   1, my $table2 = create_packtable({ col_spacings => 2, row_spacings => 15},
-	    [_("Choose the applications that will support the fonts :"), ],
-	    [ "" , "" ],		    
-	    [_("Ghostscript"), gtksignal_connect(my $check11 = new Gtk::CheckButton(), clicked =>  sub { print "appli = " ; })],
-	    [_("StarOffice"),  my $check22 = new Gtk::CheckButton()],
-	    [_("Abiword"),  my $check33 = new Gtk::CheckButton()],
-	    [_("Generic Printers"), my $check44 = new Gtk::CheckButton()],
-								    ),
-				   0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
-					     gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { 
-						 ${$central_widget}->destroy(); import_status() }),
-					     gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { 
-						 ${$central_widget}->destroy(); create_fontsel() }),
-					     ),
-				   )
+	    $choice_box = gtkpack_(new Gtk::HBox(0,10),
+				   0, new Gtk::VBox(0,10),
+				   0, new Gtk::VBox(0,10),
+				   1, gtkpack_(new Gtk::VBox(0,10),
+					       1, gtkpack_(new Gtk::VBox(0,10),
+							   1, gtkpack(new Gtk::HBox(0,10),
+								      new Gtk::HBox(0,10),
+								      _("Choose the applications that will support the fonts :"),
+								      new Gtk::HBox(0,10),),
+							   0, new Gtk::HBox(0,10),
+							   0, gtkpack_(new Gtk::HBox(0,10),
+								       0, _("Ghostscript"), 
+								       1, new Gtk::HBox(0,10),
+								       0, my $check11 = new Gtk::CheckButton(),),
+							   0, gtkpack_(new Gtk::HBox(0,10),
+								       0, _("StarOffice"),
+								       1, new Gtk::HBox(0,10),
+								       0, my $check22 = new Gtk::CheckButton(),),
+							   0, gtkpack_(new Gtk::HBox(0,10),
+								       0, _("Abiword"), 
+								       1, new Gtk::HBox(0,10),
+								       0, my $check33 = new Gtk::CheckButton(),),
+							   0, gtkpack_(new Gtk::HBox(0,10),
+								       0, _("Generic Printers"),
+								       1, new Gtk::HBox(0,10),
+								       0, my $check44 = new Gtk::CheckButton(),),
+							   ),
+					       0, gtkpack_(new Gtk::HBox(0,10),
+							   1, gtktext_insert(gtkset_editable($text, 0), "Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server."),
+							   0, new Gtk::VScrollbar($text->vadj),
+							   0, new Gtk::VBox(0,10),
+							   ),
+					       0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+							 gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { 
+							     ${$central_widget}->destroy(); import_status() }),
+							 gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { 
+							     ${$central_widget}->destroy(); create_fontsel() }),
+							 ),
+					       ),
+				   0, new Gtk::VBox(0,10),
+				   0, new Gtk::VBox(0,10),
+				   ),
+
 	    );
     foreach ([$check11, \$gs], [$check22, \$so], [$check33, \$abi], [$check44, \$printer]) {
 	my $ref = $_->[1];
