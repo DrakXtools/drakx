@@ -1,3 +1,1233 @@
+2004/06/08  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_gtk.pm, share/list.i386, install2.pm, standalone/XFdrake,
+	install_steps_interactive.pm: switch to xorg
+
+	* authentication.pm: add "Active Directory" authentication (alpha code)
+
+	* share/rpmsrate: 
+	  - obsolete: gnome-vfs-extras xanim nist mtv gatos mokmod
+	ghostscript-utils tetex-latex-arab-doc sgml-tools
+	  ghostscript-module-SVGALIB kdenetwork-kit ApacheJServ
+	  cameleo unarj unstuff postgresql-python mercury NVIDIA_nforce*
+	  fonts-type1-baltic gnorpm
+	  - obsolete games: xtrojka bunnies xgammon xpuzzles 7colors xrally
+	gtulpas gtkgo
+	  - obsolete and the new one is auto required: MAKEDEV
+	  - xine-oss xine-xv are in xine-plugins which is required by xine-ui
+	  - gatos is no more, replacing with ati.2 (??)
+	  - replace php with php-cgi (??)
+	  - replace scanner-gui with xsane and "KDE kdegraphics-kooka"
+	  - replace clispp2c with clisp (??)
+	  - replace autoconf with autoconf2.1
+	  - replace automake with automake1.4
+	  - switch to gimp2_0
+	  - everybuddy is now ayttm
+	  - gimp-plugin is no more, but adding gimp-help
+	  - Epplets is now epplets (since a lot of time)
+	  - mandrake-galaxy is now mandrakegalaxy
+	  - prelude is now prelude-manager
+	  - kdenetwork-kmail is now kdepim-kmail (same for kdepim-korn and
+	kdepim-knode)
+	  - many XFree86-* are now xorg-x11-*, others are removed (the old
+	XFree3 servers)
+	  - libxfree86-devel is now libxorg-x11-devel
+	  - libxfree86-static-devel is now libxorg-x11-static-devel
+	  - tight-vnc-doc is now tightvnc-doc
+	  - php-manual is now php-manual-{en,fr,...}
+	  - sketch is now skencil
+	  - libgr-progs is now netpbm
+	  - MySQL-devel is now libmysqlXX-devel
+	  - replace xkobo with skobo
+	  - fix typo for xtraceroute (bad layout for flag 3D)
+	
+	  - libiw27 instead of libiw26
+	  - libhpojip0 instead of libhpojip
+
+2004/06/08  rgarciasuarez
+
+	* share/list: Report revisions 1.124, 1.125 and 1.126 from HEAD
+
+2004/06/07  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po: updated Estonian file
+	updated pot file
+
+	* share/po/ms.po, share/po/sk.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/th.po, share/po/ja.po, share/po/hr.po, share/po/be.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/he.po, share/po/ca.po,
+	share/po/da.po, share/po/ar.po, share/po/ltg.po, share/po/nb.po,
+	share/po/ky.po, share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/lv.po, share/po/hu.po,
+	share/po/fa.po, share/po/id.po, share/po/ru.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/fr.po,
+	share/po/ta.po, share/po/vi.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/bg.po, share/po/cs.po,
+	share/po/el.po, share/po/uz@Latn.po: updated pot file
+
+2004/06/07  Pixel  <pixel at mandrakesoft.com>
+
+	* mdk-stage1/stage1.c, mdk-stage1/init.c: nasty kernel now gives us weird
+	PIDs, so we can't rely on this to detect if we are running
+	on a live box or not. So set testing to 0
+
+	* mdk-stage1/dietlibc/lib/alloc.c: fix build with gcc 3.4 (+ little
+	cleanup)
+
+	* mouse.pm: hid is missing (and not needed) on kernel 2.6.7.0.rc2
+
+	* mdk-stage1/dietlibc/Makefile: 
+	  - fix build on gcc 3.4
+	  - much nicer detection of wether $ARCH/Makefile.add modifies CFLAGS or
+	not
+
+2004/06/04  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/netconnect.pm: switch ONBOOT to on/off for isdn and adsl
+	connections
+
+	* network/adsl.pm: remove some FIXME comments
+
+2004/06/04  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/gl.po: updated Galician file
+
+2004/06/04  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/service_harddrake.sh: run harddrake service earlier
+
+	* any.pm (setupBootloader) remove debugging messages
+	(setupBootloader__entries) fix typo (Andrea Celli)
+
+2004/06/03  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/xfree.pm: add resolution 1920x1200 called WUXGA (used by Dell
+	Laptops Inspiron 8500, 8600 and Latitude D800) (bugzilla #6795)
+
+	* tools/cvslog2changelog.pl: add AUTHOR environment option for my warly
+	reports
+
+	* patch/patch-rh9-mdk10.pl: only big known bug remaining is mouse
+	configuration
+
+	* mdk-stage1/probing.c: use the same technique as ldetect for detecting
+	usb and firewire controllers (based on the pci class)
+	use the same technique as ldetect for detecting usb and firewire
+	controllers (based on the pci class)
+
+2004/06/02  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/de.po: updated German file
+
+2004/06/02  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: 
+	  - add descriptions for NFS and SMB (thanks to bugzilla #9940)
+	  - don't iterate on %l, better iterate on %types
+
+	* fs.pm: 
+	  - stop mounting ext3 partitions using type ext2 during install
+	  - stop fsck'ing ext3 partitions (it was only done during install, not
+	upgrade)
+
+2004/06/01  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/adsl.pm: s#ppp/peers/adsl#ppp/peers/ppp0#
+	as we now use ifup-ppp for adsl, it will look for ppp0
+	new way to specify how to up connection for pppoe(xDSL) and others(ADSL)
+
+2004/06/01  jjorge
+
+	* share/po/pt.po: saraiva
+
+2004/06/01  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/am.po: updated Amharic file
+
+	* share/po/nb.po: updated Norwegian po file
+
+2004/06/01  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/drakboot: rollback weird and ugly workaround when pressing
+	cancel on the ask_warn. The real fix is in ugtk2.pm
+
+	* any.pm: handle the nfs/smb service disabled (enhancement given by
+	Olivier Blin)
+
+	* ugtk2.pm: when wizcancel occurs, ugtk2 object is not destroyed (the
+	garbage collector seems to have some pbs taking care of this, but since
+	many callbacks using it are registered, it's no wonder)
+	(fixes pressing "Cancel" on a ->ask_warn in wizard mode)
+	(set_text): fix "cleanups"
+
+2004/06/01  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Really apply gui fix.
+	Use array rather than hash per Thierry.
+	Insure ftp transfers are binary, fix gui problem (in 10.0 update also).
+	Binary ftp/gui fixes from cooker branch.
+
+	* standalone/drakTermServ: Use array rather than hash per Thierry.
+	Insure ftp transfers are binary, fix gui problem (in 10.0 update also).
+
+2004/06/01  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/tools.pm: remove debug message
+	(use_windows) space cleanup
+
+	* ugtk2.pm (set_text) cleanups
+
+	* network/netconnect.pm: make LAN wizard more user friendly: move "manual
+	choice" after detected
+	interfaces
+
+	* standalone/drakboot (lilo_choice) fix error title
+	fix "two windows after exception" bug
+
+	* network/drakfirewall.pm: mark it as translatable for non alphabetic
+	languages
+
+	* drakxtools.spec: 10-42mdk
+
+	* bootloader.pm (write_grub_config) do not write partial config file (thus
+	garbaging previous
+	config) if an error occured
+
+	* detect_devices.pm (getNet) handle interface w/o ip addresses
+	(getNet) rollbacl to MDK10.0 detection scheme
+
+2004/05/28  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Typo in tape restore (Federico Belvisi).
+
+2004/05/28  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm (real_main) fix protocol switching from manual to
+	auto when stepping back
+	merge brown paper bug fix from TRUNK
+
+	* network/ethernet.pm (get_eth_cards) fallback on sysfs in order to get
+	driver and card
+	description when ethtool is not supported (eg: ipw2100 driver for
+	intel centrino)
+	merge from HEAD:
+	(get_eth_cards) fallback on sysfs in order to get
+	driver and card description when ethtool is not supported (eg: ipw2100
+	driver for intel centrino)
+	merge fixes from HEAD
+
+	* keyboard.pm, any.pm, c/stuff.xs.pl, standalone/drakTermServ,
+	standalone/net_monitor, network/drakfirewall.pm, authentication.pm,
+	detect_devices.pm: merge fixes from HEAD
+
+	* standalone/drakbackup: merge fix from TRUNK
+	merge fixes from HEAD
+
+	* network/network.pm (read_all_conf) read VLAN interfaces too
+	(read_all_conf) read ip aliased interfaces too
+
+	* drakxtools.spec: update 10-41mdk's changelog
+	10-41mdk
+	10-40mdk
+	fix 10-37mdk's indentation
+	fix perl Glib/Gtk2 binding requires for mdk10.0
+	fix 10-34.2mdk changelog indentation
+	update 10-34.2mdk's changelog
+	update 10-34.2mdk's changelog
+	merge fixes from HEAD
+
+2004/05/27  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/adsl.pm: 
+	  - drop old internet service code
+	  - only one way to configure/up/down an adsl connection
+
+	* network/netconnect.pm: 
+	  - call remove_initscript because internet service is dropped
+	  - drop write_initscript call
+
+	* network/tools.pm: 
+	  - kill write_initscript
+	  - add remove_initscript
+
+2004/05/27  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/am.po: Added Amharic file
+
+2004/05/27  Pixel  <pixel at mandrakesoft.com>
+
+	* fs.pm: new function isTrueLocalFS() to make a distinction between
+	ext3/reiserfs/... and nfs
+	=> allow /home on nfs (bugzilla #7460)
+	new function isTrueLocalFS() to make a distinction between
+	ext3/reiserfs/... and nfs
+	=> allow /home on nfs (bugzilla #7460)
+
+	* fsedit.pm, install_interactive.pm, partition_table.pm: new function
+	isTrueLocalFS() to make a distinction between ext3/reiserfs/... and nfs
+	=> allow /home on nfs (bugzilla #7460)
+
+	* Xconfig/card.pm, install2.pm, install_steps.pm, install_any.pm,
+	install_steps_interactive.pm: handle freeDriver which disable using
+	proprietary X driver (esp. for nvidia)
+
+	* any.pm: really chkconfig --add and --del for "diskdrake --fileshare"
+	(thanks to Olivier Blin)
+	instead of removing package nfs-utils or samba-server (when "diskdrake
+	--fileshare" disables a export kind) (bugzilla #9804)
+
+2004/05/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* detect_devices.pm (getNet) ignore loopback device
+
+	* standalone/net_monitor (get_val) reuse c::get_netdevices() and thus skip
+	bogus sit0
+
+	* drakxtools.spec: 10-39mdk
+	10-38mdk
+
+2004/05/26  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* docs/HACKING: 
+	  - perl-XML-Parser is needed at build stage
+
+2004/05/26  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/tl.po: updated Filipino file
+
+	* keyboard.pm, share/rpmsrate, lang.pm: enabled Latgalian language choice;
+	prepared for Sardian;
+	rpmsrate: Japanese input method is now "uim"
+
+2004/05/26  Pixel  <pixel at mandrakesoft.com>
+
+	* common.pm, crypto.pm, install_any.pm: /etc/mandrake-release is now
+	/etc/mandrakelinux-release
+
+	* lang.pm: 
+	  - call handleI18NClp() ASAP
+	  - create and use lang2move_clp_name()
+
+	* install2.pm: "expert" flag in stage2 is bad and deprecated, removing it!
+
+2004/05/26  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* detect_devices.pm (getNet) reuse c::get_netdevices()
+	(getNet) support br (bridging) and tr (UML) interfaces (florin)
+
+	* c/stuff.xs.pl (netdevices) introduce it in order to list network
+	interfaces
+
+2004/05/25  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/tg.po, share/po/eu.po: updated Basque and Tajik files
+
+	* share/keyboards.tar.bz2: new keyboards; new lang->keyboard
+	correspondences
+
+	* keyboard.pm: Nepali uses devanagari script
+	new keyboards; new lang->keyboard correspondences
+	don't trust the USB keyboard layout announc when it claims to be "us"
+	layout (mosdt manufacturers just keep that default value while seeling
+	different layouts)
+
+2004/05/25  rvojta
+
+	* network/drakfirewall.pm: 
+	  - BitTorrent support added
+
+2004/05/25  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: update 10-37mdk's changelog
+	10-37mdk
+
+	* network/ethernet.pm (mapIntfToDevice) only try to lookup pci or usb
+	device by bus location
+	if its location is defined (some driver are returning bogus data on
+	ETHTOOL_GDRVINFO command)
+	(get_eth_cards) brown paper bug: fix card name lookup when driver does
+	not support GDRVINFO command from ETHTOOL ioctl and there's only one
+	card managed by this driver
+
+	* share/po/br.po: update
+
+2004/05/24  rgarciasuarez
+
+	* share/list: Don't hardcode architecture
+
+2004/05/24  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Fix dropped .txt files when running mkisofs.
+	(Anthill #799)
+
+2004/05/24  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/draksplash (mk_frame) minor cleanup
+	switch from deprecated OptionMenu into new ComboBox widget
+
+	* share/po/br.po: typo fix
+
+	* drakxtools.spec: 10-36mdk
+
+	* standalone/drakperm, standalone/drakbug, interactive/gtk.pm,
+	standalone/drakboot, standalone/draksec, standalone/drakfloppy,
+	standalone/drakTermServ, Xconfig/resolution_and_depth.pm,
+	standalone/drakbackup: switch from deprecated OptionMenu into new
+	ComboBox widget
+
+	* standalone/drakconnect: switch from deprecated OptionMenu into new
+	ComboBox widget
+	(build_notebook) simplify pull down menu filling and do not duplicate
+	protocols
+	list
+
+	* ugtk2.pm: still provide compat stuff for OptionMenu (#9826) until all
+	tools are
+	converted
+
+2004/05/21  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup, standalone/drakTermServ: Some new perl_checker
+	fixes.
+
+2004/05/20  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Add /etc/modprobe* mount points for client
+	hardware config.
+
+2004/05/19  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* share/list: 
+	  - Share pango modules between the FT2 and Xft backend (named fc in
+	pango 1.4)
+	  - pango-modules file is now located in /etc/pango/i386/
+	  - Add Build.pm
+
+2004/05/19  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* c/stuff.xs.pl (hasNetDevice, isNetDeviceWirelessAware, getNetDriver)
+	explicitely use
+	system IFNAMSIZ instead of implicitely defining it
+	(isNetDeviceWirelessAware) introduce it in order to detect whether a
+	network interface support wireless extensions or not
+	forward better LAN vs wireless filtering
+
+	* network/adsl.pm: forward speedtouch fix (using kernel mode)
+
+	* network/netconnect.pm: filter LAN and Wireless cards by explicitely
+	checking whether network
+	interfaces support wireless extensions or not instead of relying on
+	both ethtool support (in order to get the module name) and checking
+	against a whitelist of known wireless awere cards
+	forward speedtouch fix (using kernel mode)
+	forward better LAN vs wireless filtering
+
+	* drakxtools.spec: 10-35mdk
+
+2004/05/18  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/cy.po, share/po/ky.po, share/po/es.po, share/po/pl.po: updated
+	Kyrgyz and Welsh files
+
+2004/05/18  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm (Gtk2::OptionMenu->new) kill debug message
+	(Gtk2::OptionMenu) transparently replace obsolete OptionMenu widget by
+	the new ComboBox widget
+
+2004/05/17  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/netconnect.pm: perl_checker compliance
+	remove speedtouch and ISDN 'only working under 2.4 kernel' warnings
+
+2004/05/17  Pixel  <pixel at mandrakesoft.com>
+
+	* authentication.pm: install autofs for nis authentication (dixit florin &
+	fcrozat)
+
+	* Xconfig/xfree.pm: restore the ability to specify the file where the
+	config should be written (since it's used by Xconfig/test.pm)
+
+	* Makefile: instead of keeping stage1 (mostly as temporary space but with
+	a fixed size, and for the background init),
+	exit the stage1 giving hand to stage2 in a tmpfs (same as what was done
+	for Mandrakemove)
+	stage2 now builds the full mdkinst, and full_stage2 is stage2 + building
+	mdkinst_stage2
+
+2004/05/17  rgarciasuarez
+
+	* tools/Makefile: Clean up perl version checking in the tools makefile.
+
+	* Makefile: Remove an obsolete check for XFree86-VGA16
+
+	* share/list: Fix version of PerlIO::gzip in file list
+
+2004/05/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/icons/drakconnect_step.png: kill unused image
+
+	* share/po/br.po: update
+
+2004/05/16  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Fixes
+
+2004/05/16  yrahal
+
+	* share/po/ar.po: Arabic translation
+
+2004/05/15  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Upadted Spanish messages
+
+2004/05/14  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/adsl.pm: Fixes to use speedtouch kernel driver / drop userspace
+	one
+	(happy modem with both 2.4 and 2.6)
+	  - fix modem_run parameters to use kernel driver
+	  - change/move pty declaration in /etc/ppp/peers/adsl
+	  - plugin pppoatm has to be set and vpi.vci too
+	  - new net_cnx_{up/down}, speedtouch.sh seems to be useless now
+
+2004/05/13  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/sl.po, share/po/ky.po, share/po/hi.po: fixed "default:LTR"
+	string
+
+	* share/po/et.po, share/po/pt_BR.po: updated Estonian and Brazilian files
+
+2004/05/13  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm: in manualFstab coming from auto_install.cfg, allow device
+	/dev/XXX instead of simply XXX
+	instead of keeping stage1 (mostly as temporary space but with a fixed
+	size, and for the background init),
+	exit the stage1 giving hand to stage2 in a tmpfs (same as what was done
+	for Mandrakemove)
+
+	* mdk-stage1/probing.c: usb cdrom has a weird size in /proc/partitions,
+	the result is that it is detected as floppy
+	usb cdrom has a weird size in /proc/partitions, the result is that it is
+	detected as floppy
+
+	* c/stuff.xs.pl, diskdrake/interactive.pm, fs.pm, fsedit.pm,
+	standalone/drakupdate_fstab: really handle LABEL=XXX in fstab (as used
+	by redhat) (no xfs labels yet)
+
+	* mdk-stage1/Makefile, mdk-stage1/disk.c, mdk-stage1/tools.h,
+	mdk-stage1/log.c, mdk-stage1/adsl.c, Makefile, mdk-stage1/cdrom.c,
+	share/devices, mdk-stage1/config-stage1.h, mdk-stage1/stage1.h,
+	mdk-stage1/tools.c, mdk-stage1/.cvsignore, share/symlinks,
+	mdk-stage1/stage1.c, mdk-stage1/init.c, mdk-stage1/dhcp.c,
+	mdk-stage1/network.c: instead of keeping stage1 (mostly as temporary
+	space but with a fixed size, and for the background init),
+	exit the stage1 giving hand to stage2 in a tmpfs (same as what was done
+	for Mandrakemove)
+
+	* ugtk2.pm: better error logging when gtkcreate_img or gtkcreate_pixbuf
+	can't find the image
+
+	* Xconfig/resolution_and_depth.pm: simplify
+	Xconfig::resolution_and_depth::allowed(): adapt it to the way it's
+	really used
+	$prefered_depth defaults to the greatest depths, no need to set it to 24
+	vmware doesn't like 24bpp (bugzilla #9755)
+
+	* Xconfig/monitor.pm: speed-up monitor choosing dialog when {VendorName}
+	is undef (esp. when using "use diagnostics")
+
+2004/05/12  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/advertising/dwd-07.pl: unified two strings
+
+	* share/po/et.po: updated Estonian file
+
+	* share/po/be.po: updated po file
+
+2004/05/12  Pixel  <pixel at mandrakesoft.com>
+
+	* keyboard.pm, install_steps_interactive.pm: fix typo
+
+	* lang.pm: no lang-ltg.png, so disabling ltg
+	  - fix typo
+	  - fix last commit which was not using $locale_country as it should in
+	system_locales_to_ourlocale()
+
+	* Makefile: use busybox when dont_run_directly_stage2
+
+	* install_any.pm: fix selecting locales-LANG (it didn't really work, but
+	it doesn't seem needed?)
+
+2004/05/11  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ms.po, share/po/sk.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/th.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/be.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/ltg.po,
+	share/po/nb.po, share/po/ky.po, share/po/uz.po, share/po/ro.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/br.po, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/mn.po,
+	share/po/uk.po, share/po/lt.po, share/po/cy.po, share/po/tg.po,
+	share/po/bs.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/fr.po, share/po/ta.po, share/po/vi.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: updated pot file
+
+2004/05/11  Pixel  <pixel at mandrakesoft.com>
+
+	* authentication.pm: fix winbind configuration and do the same for LDAP
+	and NIS (modifs proposed and checked by Vincent Guardiola)
+
+	* mdk-stage1/stage1.c: adapt copyright
+
+	* lang.pm: 
+	  - new function locale_to_main_locale() to replace the typical
+	substr($lang, 0, 2) or $lang =~ /(..)/
+	  - new function analyse_locale_name() to replace various regexps on
+	locale name
+	  - use those 2 functions for cleanup
+	  - cleanup even more standard_locale()
+	perl_checker compliance
+	remove unused function
+
+	* drakxtools.spec: new update:
+	  - fix pam configuration when using winbind (also fixes LDAP and NIS
+	(?))
+
+	* detect_devices.pm: rewrite a little probeSerialDevices(), the beginning
+	is still very strange
+
+	* Xconfig/test.pm: fix typo
+
+	* printer/main.pm, install_steps.pm, keyboard.pm: use
+	lang::analyse_locale_name() and lang::analyse_locale_name()
+
+	* http.pm, Xconfig/card.pm, printer/detect.pm, wizards.pm,
+	interactive/newt.pm, network/netconnect.pm, mouse.pm, install2.pm,
+	.perl_checker: perl_checker compliance
+
+	* ugtk2.pm: perl_checker compliance
+	better error logging when gtkcreate_img or gtkcreate_pixbuf can't find
+	the image
+
+	* any.pm: use lang::analyse_locale_name() and lang::analyse_locale_name()
+	more cleanup in selectLanguage()
+	selectLanguage():
+	  - simplify @langs generation
+	  - use a tree if @langs > 15, not when $::move is set
+
+	* install_steps_interactive.pm: use lang::analyse_locale_name() and
+	lang::analyse_locale_name()
+	fix ugly typo (thanks to perl_checker)
+
+	* install_any.pm: fix selecting locales-LANG (i didn't really work, but it
+	doesn't seem needed?)
+
+2004/05/11  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po: update
+
+	* harddrake/data.pm: do not run XFdrake in automatic mode, it's useless
+
+2004/05/10  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/man/C/man5/drakbackup.conf.5: Man page for drakbackup.conf.
+
+2004/05/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po: update breton translation
+
+2004/05/08  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Updated partially
+
+2004/05/08  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/diskdrake: perl_checker compliance
+
+2004/05/08  Till Kamppeter  <till at mandrakesoft.com>
+
+	* standalone/scannerdrake: Fixed firmware installation.
+
+2004/05/07  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/main.pm: remove debugging code
+	you can now configure monitors on heads > 1
+	fix an old typo
+
+	* Xconfig/various.pm, Xconfig/resolution_and_depth.pm, Xconfig/xfree.pm:
+	you can now configure monitors on heads > 1
+
+	* Xconfig/monitor.pm: you can now configure monitors on heads > 1
+	rename monitors() and $monitors to monitors_db() and $monitors_db
+	(preparation for next commit which adds ability to configure each
+	monitor)
+
+2004/05/07  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakclock: do saner check for ntp package (Robert Vojta)
+
+2004/05/06  Pixel  <pixel at mandrakesoft.com>
+
+	* fs.pm, standalone/drakupdate_fstab: don't prefer_devfs_name when reading
+	/proc/mounts (which uses devfs names)
+
+	* Xconfig/card.pm: don't succeed automatic configuration (not
+	auto_install) when there is many cards (as requested by Joe Bolin on
+	cooker)
+
+2004/05/06  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po: update
+
+2004/05/05  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* lang.pm: preparing for Furlan
+
+	* share/po/gl.po: updated Galician file
+
+2004/05/05  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: fix 10-31mdk's changelog
+
+	* network/drakfirewall.pm: open more ports for samba
+
+	* network/netconnect.pm: do not offer to set DOMAINNAME2 since it is never
+	saved nor read (#9580)
+
+2004/05/04  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/ethernet.pm: use @cards instead of $#cards as told by master
+	pipi
+	perl_checker fixes
+
+	* network/netconnect.pm: perlchecker fixes
+
+2004/05/04  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10-34mdk
+
+	* standalone/drakconnect: fix interface destruction wizard
+
+	* share/po/de.po: update
+
+2004/05/03  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/netconnect.pm, network/isdn.pm: take ISDN protocol into account
+	for people outside Europe to use it
+	(kind of lost in space before)
+
+2004/05/03  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/de.po: updated German file
+
+2004/05/03  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps.pm: no need for defensive programming
+	blank.img has been removed, so remove special code handling it
+
+	* docs/README: quick update, not complete
+
+	* mdk-stage1/modules.c, install_steps_interactive.pm, install2.pm,
+	modules.pm, mdk-stage1/stage1.c: blank.img has been removed, so remove
+	special code handling it
+
+	* Xconfig/xfree3.pm, Xconfig/various.pm, Xconfig/card.pm,
+	Xconfig/resolution_and_depth.pm, Xconfig/xfree.pm, Xconfig/test.pm,
+	Xconfig/xfreeX.pm, mouse.pm, Xconfig/xfree4.pm, standalone.pm,
+	Xconfig/default.pm, Xconfig/main.pm, Xconfig/screen.pm, Xconfig/FILES:
+	XFree 3 is gone!
+
+	* mdk-stage1/Makefile: stage1-disk and stage1-medias-usb are dead already
+
+2004/05/01  Pixel  <pixel at mandrakesoft.com>
+
+	* fs.pm, standalone/drakupdate_fstab, diskdrake/interactive.pm, fsedit.pm:
+	fix drakupdate_fstab adding twice an entry in fstab, one with the old
+	name, one with the devfs name
+
+2004/04/30  Pixel  <pixel at mandrakesoft.com>
+
+	* detect_devices.pm, any.pm, devices.pm: 
+	  - new getSCSI_26() not using /proc/scsi/scsi
+	(since we can't say first Direct-Access entry is sda anymore)
+	  - deprecate field {raw_type}
+	  - don't fill {device} with sgX for non-(cdrom|hd|floppy)
+	  (hopefully not used by anything, except maybe scanners?)
+	  - replace scdX with srX (which everybody use)
+
+2004/04/30  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone.pm (version) bump release number
+
+	* standalone/drakclock: time is displayed as HH:MM:SS with RTL languages
+
+	* drakxtools.spec: 10-32mdk
+
+	* harddrake/data.pm: list SATA controllers in their own category (anthill
+	#741)
+
+2004/04/28  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/isdn.pm: cleaning _last_ 'isdn_' prefix
+	drop unused ISA and EXPORT
+	drop isdn_ fonction names
+
+	* network/netconnect.pm: drop isdn_ fonction names
+	drop network::isdn->import
+
+	* harddrake/data.pm: change last isdn_detect_backend() remaining
+
+	* standalone/drakconnect: drop isdn_ fonction names
+
+2004/04/28  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ky.po: updated Kyrgyz file
+
+	* share/po/nn.po: Updated Nynorsk file
+
+2004/04/28  tsdgeos
+
+	* share/po/ca.po: updating catalan translations of DrakX and drakfax
+
+2004/04/28  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: update
+
+	* standalone/service_harddrake: log removed/added hw
+
+2004/04/27  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/isdn.pm: no need to up ippp0 in net_cnx_up, it's been up'ed at
+	startup
+
+	* standalone/drakconnect: more gui layout fixes
+
+	* network/netconnect.pm, network/tools.pm: try to fix #3793 or at least
+	enhance firmware seeking on windows partition
+	(based upon titi's patch)
+
+2004/04/27  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/de.po, share/po/pt_BR.po: updated Brazilian file
+
+2004/04/27  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/XFdrake: not needed for Lacie, so removing
+
+	* diskdrake/removable.pm, diskdrake/interactive.pm: revert handling --auto
+	for removable, it is much better done in a separate function
+	(the goal of this --auto is not clear at all, and is better explicitly
+	done)
+
+2004/04/27  yrahal
+
+	* share/po/ar.po: Arabeyes' Arabic translation
+
+2004/04/26  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/de.po: updated German translations
+
+2004/04/26  Pixel  <pixel at mandrakesoft.com>
+
+	* run_program.pm: create ~/tmp when needed
+
+	* mdk-stage1/stage1.c, mdk-stage1/config-stage1.h: rename MandrakeMove to
+	Mandrakemove
+
+	* lang.pm: utf8_should_be_needed() must return true if any of the
+	languages chosen is utf8, not only the main one
+	(it also returns true when there are many charsets)
+
+2004/04/25  fwang
+
+	* share/po/zh_CN.po: update
+
+2004/04/25  yrahal
+
+	* share/po/ar.po: Arabeyes.org's Arabic translation
+
+2004/04/24  fwang
+
+	* share/po/zh_CN.po: update
+
+2004/04/23  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: re-indentation
+	use gtkset_border_width(Gtk2::VBox->new, 5) to create a vbox and set a
+	border_width at the same time
+	change packing to get a better GUI
+
+	* ugtk2.pm: create frame with a border witdth (titi rulez)
+
+2004/04/23  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nn.po: updated Nynorsk file
+
+	* share/po/gl.po: updated Galician files
+
+2004/04/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm (shrink_topwindow) support both 10.0 and cooker
+
+	* standalone/drakconnect: remove useless ::prefix references
+	(build_notebook) sort ppp auth methods
+
+	* drakxtools.spec: 10-32mdk
+
+	* standalone/service_harddrake: do automatic sound configuration (one can
+	still switch between OSS and
+	ALSA through mcc)
+	handle again timeouts
+	do X11 configuration automagically
+	  - when automatic flag is set for one hardware class, do not ask for
+	confirmation and just do what is needed
+	  - only show "probing in progress" message if we did run an interactive
+	  tool
+
+	* modules.pm (probe_category) perl_checker cleanup
+	(remove_alias, remove_alias_regexp, remove_alias_regexp_byname,
+	remove_module, set_options) add more explanations
+
+	* harddrake/data.pm: do X11 configuration automagically
+	(set_removable_configurator) use diskdrake instead of drakupdate_fstab
+	for removable media in automatic mode
+	set automatic flag for removable media
+
+	* diskdrake/interactive.pm, diskdrake/removable.pm: handle --auto when
+	managing removable media
+
+	* Xconfig/various.pm, standalone/XFdrake: handle --auto
+
+2004/04/22  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* modules.pm: fix 'somewhat' broken isdn type and driver name fetching
+	from pcitable
+	(this is no paper-bag)
+
+2004/04/22  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/sl.po: updated Slovanian file
+
+2004/04/22  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/service_harddrake, standalone/harddrake2: switch to new
+	harddrake data structure
+
+	* install_steps_interactive.pm (summary) install alsaconf too for isapnp
+	sound cards (it better handle some
+	isapnp sound cards)
+
+	* standalone/drakxtv: fix tv cards detection
+
+	* harddrake/data.pm: split usb ports from usb controllers (arnaud request)
+	new harddrake data structure (easier to extend)
+
+	* harddrake/v4l.pm: sync tuners list with 2.6.6-rc2 too
+	sync card lists with 2.6.6-rc2
+
+2004/04/20  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: move reread_net_conf to tools.pm
+	remove unneeded @all_cards initialisation in reread_net_conf
+
+	* network/tools.pm: move reread_net_conf to tools.pm
+
+2004/04/20  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakconnect (populate_notebook) fix drakxtools' build
+	(build_notebook) do not assume there's not language that want to
+	translate the "dhcp" string as in other code
+
+	* drakxtools.spec: 10-31mdk
+
+2004/04/19  dam's  <dams at idm.fr>
+
+	* standalone/drakfont: attempt to correct bug #9423
+
+2004/04/19  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/adsl.pm: $adsl_modem is optional, moved to $o_adsl_modem
+
+	* standalone/drakconnect: dropped $::i in foreach loop, use $i instead
+	  - translate strings once and only for the user.
+	don't bother with translated strings internally..
+	  - drop DHCP translation, it's always DHCP
+	IPADDR, NETMASK and GATEWAY fields are not sensitive by default in DHCP
+	(broken by #8498 fix)
+
+2004/04/19  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/cy.po, share/po/nb.po: updated Welsh and Norwegian files
+
+2004/04/19  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Consolidate button_box* code, remaining
+	file_dialogs.
+
+2004/04/18  tsdgeos
+
+	* share/po/ca.po: Unfuzzying and updating
+
+2004/04/18  yrahal
+
+	* share/po/ar.po: Arabic translation (Arabeyes.org)
+
+2004/04/16  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Some drives don't return "ATIP info from disk".
+
+2004/04/11  yrahal
+
+	* share/po/ar.po: Arabic translation
+
+2004/04/09  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/cy.po, share/po/uk.po: updated Ukrainian and Welsh files
+
+	* share/po/nn.po, share/po/tl.po: updated Nynorsk and Filipino files
+
+	* share/po/hi.po, share/po/eu.po: corrected default:LTR entries
+
+2004/04/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* install_steps.pm, lang.pm (lang::write_langs) drop prefix parameter
+
+2004/04/08  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* standalone/drakclock: 
+	  - test /etc/init.d/ntpd instead of /etc/ntp.conf for ntp installation
+
+2004/04/08  keld
+
+	* share/po/da.po: updates
+	soft/mdkonline/po/da.po soft/wizard_perl/po/da.po
+	gi/perl-install/share/po/da.po
+
+2004/04/08  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm: mount /sys before move::init() since move::init() needs it
+
+	* mdk-stage1/lomount.c: 
+	  - no need for chloop device anymore, my kernel patch applies directly
+	on the default loop module :)
+	  - gzloop needs cryptoloop and zlib_inflate (why must i handle this by
+	hand? is my gzloop ugly?...)
+
+	* devices.pm: get rid of the chloop code (not used anymore)
+
+2004/04/08  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: bump glib/gtk+ perl binding requires
+	use Mandrakelinux now
+	10-30mdk
+
+2004/04/07  dam's  <dams at idm.fr>
+
+	* standalone/drakups: corrected drakups against new libconf 0.32
+
+2004/04/07  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* lang.pm: defined default font to use in KDE for devanagari and malayalam
+	scripts
+
+2004/04/06  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/advertising/list-pwp, share/advertising/list-dwd,
+	share/advertising/list-dis, share/advertising/list-ppp: Don't display
+	commercial advertisement in development version
+
+2004/04/06  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ky.po, share/po/eu.po: Added Kyrgyz file; updated Basque file
+
+2004/04/06  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Use a scalar with cat_ (Pixel suggestion).
+	Don't move existing dhcpd.conf, add an include for terminal-server
+	instead.
+
+2004/04/06  tbacklund
+
+	* share/po/fi.po: fully translated, was 3 fuzzy, 3 untranslated
+
+2004/04/06  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm (shrink_topwindow) fix faillure with perl-Gtk+-1.04x (#9411)
+
+	* install_steps_interactive.pm: typo fix
+
+2004/04/05  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/hi.po: updated Hindi file
+
+2004/04/05  Pixel  <pixel at mandrakesoft.com>
+
+	* fs.pm: allow mounting type devpts
+	perl now handle cleanly utf8 string in exceptions, no need to die
+	\N("...")
+
+	* loopback.pm, diskdrake/hd_gtk.pm, diskdrake/interactive.pm, lvm.pm,
+	install2.pm, fsedit.pm, network/drakfirewall.pm, authentication.pm,
+	install_steps.pm, raid.pm, bootloader.pm, swap.pm, install_any.pm,
+	install_interactive.pm, partition_table/raw.pm, partition_table.pm,
+	install_steps_interactive.pm: perl now handle cleanly utf8 string in
+	exceptions, no need to die \N("...")
+
+2004/04/05  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Remove config-info (new home to be man page).
+	Use ugtk2 cursor wait/normal (share the wheel).
+	Combine/rework restore code.
+
+2004/04/05  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* install_any.pm (setDefaultPackages) despite find and any are
+	semantically equivalent
+	in this context, any will be used there (boolean vs scalar context)
+	(setDefaultPackages) install alsa-utils if *any* of the present sound
+	card is driven by ALSA
+
+	* standalone/service_harddrake: log nv<=>nvidia switches
+
+	* share/rpmsrate: install gnome-alsamixer and alsa-utils when there's an
+	alsa driver sound card
+	setDefaultPackages
+	im-ja has been reported to be more user-friendly than uim
+
+2004/04/04  keld
+
+	* share/po/da.po: updates
+	gi/perl-install/share/po/da.po
+
+2004/04/04  yrahal
+
+	* share/po/ar.po: Commmitting Arabeyes.org's Arabic translation of the
+	week
+
+2004/04/02  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/04/02  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/nb.po: updated Farsi and Norwegian files
+
+2004/04/02  Pixel  <pixel at mandrakesoft.com>
+
+	* mdk-stage1/Makefile: clean init-move when cleaning
+
+	* mdk-stage1/nfsmount.c: enable nfs install on old i586 machines (or maybe
+	poor network cards) (bugzilla #9322) (thanks to Michael Riss)
+
+2004/04/02  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po: update
+
+2004/04/01  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ms.po, share/po/gl.po, share/po/pt_BR.po, share/po/th.po,
+	share/po/et.po, share/po/ja.po, share/po/be.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/uz.po, share/po/ro.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/sl.po, share/po/nn.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/uk.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/az.po, share/po/pt.po, share/po/fr.po, share/po/vi.po,
+	share/po/nl.po, share/po/de.po, share/po/tl.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: updated pot file
+
+	* share/po/sk.po, share/po/hr.po, share/po/fi.po, share/po/br.po,
+	share/po/mn.po, share/po/ta.po, share/po/eo.po: updated Mongol files
+	updated pot file
+
+2004/04/01  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: move harddrake service confirmation script from spec
+	file into its own file
+
+	* Makefile.config: list service_harddrake_confirm too
+
+	* ugtk2.pm: space cleanup
+
+	* standalone/service_harddrake_confirm: pass timeout parameter too
+	move harddrake service confirmation script from spec file into its own
+	file
+
+	* standalone/service_harddrake: let execl() handle the arg array (this is
+	safer)
+	pass timeout parameter too
+	enable to translate a few more messages
+	translate "XYZ was added/removed" messages
+
+2004/03/31  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: typo fix
+
+	* drakxtools.spec: fix drakxtools postuninstall script
+
+2004/03/30  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* pixmaps/langs/lang-ltg.png, lang.pm: Added missing choice for Latgalian
+	(it had been forgotten when adding the
+	10.0 new languages)
+
+2004/03/30  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/list: add /sbin/badblocks
+
+	* ugtk2.pm: fix relative file names (mostly (only?) for debugging)
+
+2004/03/30  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po: update
+	update
+	update
+
+	* any.pm: share translation with help.pm
+
+	* share/po/fr.po: fix inverted translations (#8217)
+
+2004/03/29  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/hi.po: corrected default:LTR entries
+
+	* share/po/it.po: corrected default:LTR entries
+	updated Italian file
+
+2004/03/29  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/service_harddrake: space "fix"
+	typo fix
+	only alter xfree config if we found an nvidia card
+	try several locations
+	check for compressed nvidia modules too
+	typo fix
+
+	* drakxtools.spec: 10-29mdk
+	10-28mdk
+
+	* share/po/fr.po: typo fix
+	update
+
 2004/03/29  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/po/hi.po: corrected default:LTR entries
@@ -29964,7 +31194,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.924 2004/03/26 15:39:46 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.925 2004/03/29 08:15:49 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
