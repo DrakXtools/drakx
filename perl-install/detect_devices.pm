@@ -624,7 +624,19 @@ sub usb_probe() {
 }
 
 sub firewire_probe() {
-    my ($e, @l);
+    my $dev_dir = '/sys/bus/ieee1394/devices';
+    my @l = map {
+        my $dir = "$dev_dir/$_";
+        my $get = sub { chomp_(cat_($_[0])) };
+        {
+            version => hex($get->("$dir/../vendor_id")),
+            specifier_id => hex($get->("$dir/specifier_id")),
+            specifier_version => hex($get->("$dir/version")),
+            bus => 'Firewire',
+        }
+    } grep { -f "$dev_dir/$_/specifier_id" } all($dev_dir);
+
+    my $e;
     foreach (cat_('/proc/bus/ieee1394/devices')) {
 	if (m!Vendor/Model ID: (.*) \[(\w+)\] / (.*) \[(\w+)\]!) {
 	    push @l, $e = { 
@@ -638,9 +650,12 @@ sub firewire_probe() {
 	    $e->{specifier_version} = hex $1;	    
 	}
     }
+
     foreach (@l) {
 	if ($_->{specifier_id} == 0x00609e && $_->{specifier_version} == 0x010483) {
 	    add2hash($_, { driver => 'sbp2', description => "Generic Firewire Storage Controller" });
+	} elsif ($_->{specifier_id} == 0x00005e && $_->{specifier_version} == 0x000001) {
+	    add2hash($_, { driver => 'eth1394', description => "IEEE 1394 IPv4 Driver (IPv4-over-1394 as per RFC 2734)" });
 	}
     }
     @l;
