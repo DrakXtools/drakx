@@ -408,6 +408,9 @@ sub install2::startMove {
         output '/var/lib/machine_ident', machine_ident();
     }
 
+    #- allow user customisation of startup through /etc/rc.d/rc.local
+    run_program::run('/etc/rc.d/rc.local');
+
     if (fork()) {
 	sleep 1;
         log::l("DrakX waves bye-bye");
