@@ -240,6 +240,7 @@ When sure, press Ok."))) {
 	    partition_table::adjust_main_extended($hd);
 
 	    local *log::l = sub { $w->set(join(' ', @_)) };
+	    my $b = before_leaving { close $resize_fat->{fd} };
 	    eval { $resize_fat->resize($part->{size}) };
 	    if ($@) {
 		$part->{size} = $oldsize;
@@ -269,14 +270,14 @@ When sure, press Ok."))) {
 }
 
 sub doPartitionDisksLnx4winDev {
-    my ($o, $l) = @_;
-    return if $::beginner;
-    $o->ask_from_listf('', _("Which partition do you want to use to put Linux4Win?"), \&partition_table_raw::description, @$l);
+    my ($o, @l) = @_;
+    return $l[0] if $::beginner;
+    $o->ask_from_listf('', _("Which partition do you want to use to put Linux4Win?"), \&partition_table_raw::description, \@l);
 }
 
 sub doPartitionDisksLnx4winSize {
     my ($o, $root_size, $swap_size, $max_root_size, $max_swap_size) = @_;
-    return if $::beginner;
+    return 1 if $::beginner;
     
     my $w = my_gtk->new('');
 
@@ -301,8 +302,7 @@ _("Choose the sizes"),
     $w->main(sub {
 		 $$root_size = $root_spin->get_value_as_int << 11;
 		 $$swap_size = $swap_spin->get_value_as_int << 11;
-	     });	     
-    
+	     });
 }
 
 #------------------------------------------------------------------------------

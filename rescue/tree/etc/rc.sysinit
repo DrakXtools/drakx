@@ -17,6 +17,7 @@ mount -f /proc
 action "Setting hostname rescue" hostname rescue
 echo rescue > /etc/HOSTNAME
 
+# Loads common modules ( no kerneld :( )
 load() { modprobe $* 2>/dev/null; }
 load ide-mod
 load ide-probe
@@ -24,6 +25,8 @@ load ide-disk
 load ide-cd
 load af_packet
 load isofs
+load vfat
+load reiserfs
 
 grep -q oem /proc/cmdline && exec /etc/oem -f
 

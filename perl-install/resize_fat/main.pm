@@ -41,12 +41,17 @@ sub new($$$) {
     my ($type, $device, $fs_name) = @_;
     my $fs = { device => $device, fs_name => $fs_name } ;
 
-    resize_fat::io::open($fs);
-    resize_fat::boot_sector::read($fs);
-    $resize_fat::isFAT32 and eval { resize_fat::info_sector::read($fs) };
-    resize_fat::fat::read($fs);
-    resize_fat::any::flag_clusters($fs);
-
+    eval {
+	resize_fat::io::open($fs);
+	resize_fat::boot_sector::read($fs);
+	$resize_fat::isFAT32 and eval { resize_fat::info_sector::read($fs) };
+	resize_fat::fat::read($fs);
+	resize_fat::any::flag_clusters($fs);
+    };
+    if ($@) {
+	close $fs->{fd};
+	die;
+    }
     bless $fs, $type;
 }
 

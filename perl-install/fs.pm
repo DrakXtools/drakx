@@ -305,6 +305,35 @@ sub umount_all($;$) {
     }
 }
 
+sub df {
+    my ($part, $prefix) = @_;
+    my $dir = "/tmp/tmp_fs_df";
+
+    return $part->{free} if exists $part->{free};
+
+    if ($part->{isMounted}) {
+	$dir = ($prefix || '') . $part->{mntpoint};
+    } elsif ($part->{notFormatted} && !$part->{isFormatted}) {
+	return; #- won't even try!
+    } else {
+	mkdir $dir;
+	eval { mount($part->{device}, $dir, type2fs($part->{type}), 'readonly') };
+	if ($@) {
+	    unlink $dir;
+	    return;
+	}
+    }
+    my (undef, $free) = common::df($dir);
+
+    if (!$part->{isMounted}) {
+	umount($dir);
+	unlink($dir)
+    }
+
+    $part->{free} = 2 * $free if defined $free;
+    $part->{free};
+}
+
 #- do some stuff before calling write_fstab
 sub write($$$$) {
     my ($prefix, $fstab, $manualFstab, $useSupermount) = @_;

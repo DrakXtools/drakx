@@ -127,36 +127,43 @@ sub doPartitionDisks {
     my ($o, $hds) = @_;
 
     if ($o->{lnx4win}) {
-	my @l = sort { $a->{device_windobe} cmp $b->{device_windobe} } 
-	        grep { isFat($_) } fsedit::get_fstab(@{$o->{hds}}) or die "wow, lnx4win with no fat partitions! hard times :(";
-	my $real_part = $o->doPartitionDisksLnx4winDev(\@l) || $l[0];
-
-	my $handle = loopback::inspect($real_part, '', 'rw') or die _("This partition can't be used for loopback");
-	my $size = loopback::getFree($handle->{dir}, $real_part); 
-
-	my $max_linux = 1000 << 11; $max_linux *= 10 if $::expert;
-	my $min_linux =  300 << 11; $min_linux /=  3 if $::expert;
-	my $min_freewin = 100 << 11; $min_freewin /= 10 if $::expert;
-
-	my $swap = { type => 0x82, loopback_file => '/lnx4win/swapfile',     mntpoint => 'swap', size => 64 << 11, device => $real_part, notFormatted => 1 };
-	my $root = { type => 0x83, loopback_file => '/lnx4win/linuxsys.img', mntpoint => '/',    size => 0, device => $real_part, notFormatted => 1 };
-	$root->{size} = min($size - $swap->{size} - $min_freewin, $max_linux);
-	log::l("lnx4win $root->{size} <= $min_linux (minlinux), $size (minavail) - $swap->{size} (swapsize) - $min_freewin (minfreewin), $max_linux (maxlinux)");
-	$root->{size} > $min_linux or die "not enough room on that partition for lnx4win";
-
-	$o->doPartitionDisksLnx4winSize(\$root->{size}, \$swap->{size}, $size - 2 * $swap->{size}, 2 * $swap->{size});
-
-	unlink "$handle->{dir}$_" foreach "/lnx4win/swapfile", "/lnx4win/linuxsys.img";
-
-	push @{$real_part->{loopback}}, $root, $swap;	
+	my @fat_parts = grep { isFat($_) } fsedit::get_fstab(@$hds) or die "wow, lnx4win with no fat partitions! hard times :(";
+	doPartitionDisksLnx4win($o, @fat_parts);
     } else {
 	unless ($::testing) {
 	    partition_table::write($_) foreach @$hds;
 	}
     }
 }
-sub doPartitionDisksLnx4winDev {}
-sub doPartitionDisksLnx4winSize {}
+
+#------------------------------------------------------------------------------
+sub doPartitionDisksLnx4win {
+    my ($o, @fat_parts) = @_;
+
+    my $real_part = $o->doPartitionDisksLnx4winDev(@fat_parts) or return;
+
+    my $handle = loopback::inspect($real_part, '', 'rw') or die _("This partition can't be used for loopback");
+    my $size = loopback::getFree($handle->{dir}, $real_part); 
+
+    my $max_linux = 1000 << 11; $max_linux *= 10 if $::expert;
+    my $min_linux =  300 << 11; $min_linux /=  3 if $::expert;
+    my $min_freewin = 100 << 11; $min_freewin /= 10 if $::expert;
+    
+    my $swap = { type => 0x82, loopback_file => '/lnx4win/swapfile',     mntpoint => 'swap', size => 64 << 11, device => $real_part, notFormatted => 1 };
+    my $root = { type => 0x83, loopback_file => '/lnx4win/linuxsys.img', mntpoint => '/',    size => 0, device => $real_part, notFormatted => 1 };
+    $root->{size} = min($size - $swap->{size} - $min_freewin, $max_linux);
+    log::l("lnx4win $root->{size} <= $min_linux (minlinux), $size (minavail) - $swap->{size} (swapsize) - $min_freewin (minfreewin), $max_linux (maxlinux)");
+    $root->{size} > $min_linux or die "not enough room on that partition for lnx4win";
+
+    $o->doPartitionDisksLnx4winSize(\$root->{size}, \$swap->{size}, $size - 2 * $swap->{size}, 2 * $swap->{size}) or return;
+
+    unlink "$handle->{dir}$_" foreach "/lnx4win/swapfile", "/lnx4win/linuxsys.img";
+
+    push @{$real_part->{loopback}}, $root, $swap;
+    1;
+}
+sub doPartitionDisksLnx4winDev { my ($o, $fat_part) = @_; $fat_part }
+sub doPartitionDisksLnx4winSize { 1 }
 
 #------------------------------------------------------------------------------
 

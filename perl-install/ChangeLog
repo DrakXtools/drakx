@@ -1,5 +1,25 @@
 2000-08-06  Pixel  <pixel@mandrakesoft.com>
 
+	* interactive.pm (ask_from_listf): created this GREAT function
+	that should have been created a long time ago.
+	* any.pm, install_any.pm, install_steps_gtk.pm,
+	install_steps_interactive.pm: a lot of rewrite to use the new
+	ask_from_listf, a lot of nice cleanup!
+
+	* fs.pm (df): created, returns the free space of the part. Save it
+	in $part->{free}
+
+	* install_steps_gtk.pm (doPartitionDisks): ensure the closing of
+	the device in case of error
+	* resize_fat/main.pm (new): ensure the closing of the device in
+	case of error
+
+	* install_any.pm (partitionWizard): the great partitioning wizard
+	is created. Not finished yet (nor called from anywhere)
+
+	* install_steps.pm (doPartitionDisksLnx4win): created function out
+	of doPartitionDisks
+
 	* install_steps_gtk.pm (installPackages): removed the displaying
 	of size to install (people are bothered cuz not the same size)
 

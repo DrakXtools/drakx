@@ -873,27 +873,61 @@ sub generate_ks_cfg {
 
 sub partitionWizard {
     my ($o, $hds, $fstab, $readonly) = @_;
+    my $wizlog;
     my @solutions;
 
+    my $min_linux = 500 << 11;
+    my $min_freewin = 100 << 11;
+
     # each solutions is a [ text, function ], where the function retunrs true if succeeded
-    if (fsedit::free_space(@$hds) > 500 << 11 && !$readonly) {
+    if (fsedit::free_space(@$hds) > $min_linux and !$readonly) {
 	push @solutions, [ _("Use free space"), sub { fsedit::auto_allocate($hds, $o->{partitions}); 1 } ];
-    } elsif (my @l = grep { isTrueFS($_) } @$fstab) {
-	push @solutions, [ _("Use existing partition"), sub { $o->ask_mntpoint_s($o->{fstab}) } ];
-    } elsif (@l = grep { isFat($_) } @$fstab) {
+    } else { 
+	$wizlog .= _("Not enough free space to allocate new partitions");
     }
-    require diskdrake;
-    push @solutions, 
-      [ _("Take over the hard drive (beware!)"), 
-	sub {
-	    my $hd = $o->ask_from_listf('', _("You have more than one hard drive, which one do you install linux on?"),
-					\&partition_table_raw::description, @$hds) or return;
-	    $o->ask_okcancel('', _("All existing partitions and their data will be lost on drive %s", $hd->{device})) or return;
-	    partition_table_raw::zero_MBR($hd);
-	    fsedit::auto_allocate($hds, $o->{partitions});
-	    1;
-	} ],
-      [ _("Use diskdrake"), sub { diskdrake::main($hds, $o->{raid}, interactive_gtk->new, $o->{partitions}); 1 } ],
+
+    if (my @l = grep { isTrueFS($_) } @$fstab) {
+	push @solutions, [ _("Use existing partition"), sub { $o->ask_mntpoint_s($o->{fstab}) } ];
+    } else {
+	$wizlog .= _("There is no existing linux partition to use");
+    }
+
+    if (my @l = grep { isFat($_) } @$fstab) {
+	fs::df($_) foreach @l;
+	my @ok_forloopback = sort { $b->{free} <=> $a->{free} } grep { $_->{free} > $min_linux + $min_freewin } @l
+	  or $wizlog .= _("There is not enough space left on the FAT partition(s) (or the FAT partition is corrupted)");
+	
+	push @solutions, [ _("Use the FAT partition for loopback"), 
+			   sub { $o->doPartitionDisksLnx4win(@ok_forloopback) } ];
+			   
+	my @ok_forresizing = grep {
+	    !$readonly && eval {
+		my $resize_fat = resize_fat::main->new($_->{device}, devices::make($_->{device}));
+		my $min_win = $resize_fat->min_size;
+		$_->{size} > $min_linux + $min_freewin + $min_win;
+	    } && !$@;
+	} @ok_forloopback or $wizlog .= _("The FAT resizer can't find enough space left on the FAT partition(s)");
+    } else {
+	$wizlog .= _("There is no FAT partitions to resize or to use as loopback");
+    }
+
+    if (@$fstab && !$readonly) {
+	require diskdrake;
+	push @solutions, 
+	  [ _("Take over the hard drive (beware!)"), 
+	    sub {
+		my $hd = $o->ask_from_listf('', _("You have more than one hard drive, which one do you install linux on?"),
+					    \&partition_table_raw::description, @$hds) or return;
+		$o->ask_okcancel('', _("All existing partitions and their data will be lost on drive %s", $hd->{device})) or return;
+		partition_table_raw::zero_MBR($hd);
+		fsedit::auto_allocate($hds, $o->{partitions});
+		1;
+	    } ];
+    }
+    if (!$readonly) {
+	push @solutions,
+	  [ _("Use diskdrake"), sub { diskdrake::main($hds, $o->{raid}, interactive_gtk->new, $o->{partitions}); 1 } ];
+    }
 }
 
 1;
