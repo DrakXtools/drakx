@@ -526,7 +526,7 @@ sub getNet() {
 
     grep { !/^(?:lo|ippp|isdn|plip|ppp|sit0)/ }
       uniq(
-           (map { if_(/^\s*([A-Za-z0-9:\.]*):\s/, $1) } cat_("/proc/net/dev")),
+           (map { if_(/^\s*([A-Za-z0-9:\.]*):/, $1) } cat_("/proc/net/dev")),
            c::get_netdevices(),
           );
  }
