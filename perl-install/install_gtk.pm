@@ -96,16 +96,14 @@ sub create_help_window {
     if ($w = $o->{help_window}) {
 	$_->destroy foreach $w->{window}->children;
     } else {
-	$w = bless {}, 'my_gtk';
+	$w = $o->{help_window} = bless {}, 'my_gtk';
 	$w->{rwindow} = $w->{window} = new Gtk::Window;
 	$w->{rwindow}->set_uposition($::rootwidth - $::helpwidth, $::rootheight - $::helpheight);
 	$w->{rwindow}->set_usize($::helpwidth, $::helpheight);
 	$w->{rwindow}->set_title('skip');
-	$w->sync;
     };
     gtkadd($w->{window}, createScrolledWindow($o->{help_window_text} = new Gtk::Text));
     $w->show;
-    $o->{help_window} = $w;
 }
 
 #------------------------------------------------------------------------------

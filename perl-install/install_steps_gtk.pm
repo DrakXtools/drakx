@@ -123,7 +123,8 @@ sub enteringStep {
     printf "Entering step `%s'\n", $o->{steps}{$step}{text};
     $o->SUPER::enteringStep($step);
     install_gtk::create_steps_window($o);
-    $o->set_help($step);
+    install_gtk::create_help_window($o); #- HACK: without this it doesn't work (reaches step doPartitionDisks then fail)
+    $o->set_help($o->{step});
 }
 sub leavingStep {
     my ($o, $step) = @_;
