@@ -303,8 +303,8 @@ sub add_kernel {
 	      label => $label,
 	      kernel_or_dev => $image,
 	      initrd => $initrd,
-	      append => $bootloader->{perImageAppend},
 	     });
+    $v->{append} = normalize_append("$bootloader->{perImageAppend} $v->{append}");
     add_entry($bootloader, $v);
 }
 
@@ -324,7 +324,18 @@ sub unpack_append {
 }
 sub pack_append {
     my ($simple, $dict) = @_;
+
+    #- normalize
+    $simple = [ reverse(uniq(reverse @$simple)) ];
+    $dict = [ reverse(uniq_ { my ($k, $v) = @{$_[0]}; $k eq 'mem' ? "$k=$v" : $k } reverse @$dict) ];
+
     join(' ', @$simple, map { "$_->[0]=$_->[1]" } @$dict);
+}
+
+sub normalize_append {
+    my ($s) = @_;
+    my ($simple, $dict) = unpack_append($s);
+    pack_append($simple, $dict);
 }
 
 sub append__mem_is_memsize { $_[0] =~ /^\d+[kM]?$/i }
@@ -583,11 +594,11 @@ wait for default boot.
     $labels{''} or die "no kernel installed";
 
     while (my ($ext, $version) = each %labels) {
-	my $entry = add_kernel($bootloader, $version, $ext, $root,
+	add_kernel($bootloader, $version, $ext, $root,
 	       {
 		if_($options{vga_fb} && $ext eq '', vga => $options{vga_fb}), #- using framebuffer
+		if_($options{vga_fb} && $options{quiet}, append => "splash=silent"),
 	       });
-	$entry->{append} .= " splash=silent" if $options{vga_fb} && $options{quiet};
 
 	if ($options{vga_fb} && $ext eq '') {
 	    add_kernel($bootloader, $version, $ext, $root, { label => 'linux-nonfb' });
@@ -597,9 +608,8 @@ wait for default boot.
     #- remove existing libsafe, don't care if the previous one was modified by the user?
     @{$bootloader->{entries}} = grep { $_->{label} ne 'failsafe' } @{$bootloader->{entries}};
 
-    my $failsafe = add_kernel($bootloader, $labels{''}, '', $root, { label => 'failsafe' });
-    $failsafe->{append} =~ s/devfs=mount/devfs=nomount/;
-    $failsafe->{append} .= " failsafe";
+    add_kernel($bootloader, $labels{''}, '', $root,
+	       { label => 'failsafe', append => 'devfs=nomount failsafe' });
 
     if (arch() =~ /sparc/) {
 	#- search for SunOS, it could be a really better approach to take into account
