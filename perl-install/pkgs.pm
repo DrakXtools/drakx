@@ -418,7 +418,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 				versionCompare(c::headerGetEntry($header, 'release'), $p->{release}) >= 0);
 			     if ($version_rel_test) {
 				 if ($otherPackage && $version_cmp <= 0) {
-				     log::l("removing $otherPackage since it be not be updated otherwise");
+				     log::l("removing $otherPackage since it will not be updated otherwise");
 				     $toRemove{$otherPackage} = 1; #- force removing for theses other packages, select our.
 				 } else {
 				     $p->{installed} = 1;
