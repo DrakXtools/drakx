@@ -1069,6 +1069,8 @@ sub write {
             s!^function lang\b.*!function lang()="$h->{LANG}"!g;
         } "$::prefix/etc/menu-methods/lang.h" if !$b_user_only;
     }
+
+    configure_hal($locale) if !$b_user_only;
     
     my $charset = l2charset($locale->{lang});
     my $qtglobals = $b_user_only ? "$ENV{HOME}/.qt/qtrc" : "$::prefix/etc/qtrc";
@@ -1110,6 +1112,35 @@ sub write {
 	}
 
     } if !$b_dont_touch_kde_files;
+}
+
+sub configure_hal {
+    my ($locale) = @_;
+    my $options = join("\n", map_each { 
+	if_($::b, qq(\t\t<merge key="volume.policy.mount_option.$::a=$::b" type="bool">true</merge>));
+    } fs_options($locale));
+    
+    output_p("$::prefix/usr/share/hal/fdi/30osvendor/locale-policy.fdi", sprintf(<<'EOF', $options));
+<?xml version="1.0" encoding="ISO-8859-1"?> <!-- -*- SGML -*- --> 
+
+<deviceinfo version="0.2">
+
+  <device>
+    <!-- Normal volumes; use volume label, uuid or drive_type -->
+    <match key="block.is_volume" bool="true">
+      <match key="volume.fsusage" string="filesystem">
+
+	  <match key="volume.fstype" string="auto">
+%s
+          </match>
+	  
+      </match>
+    </match>
+    
+  </device>
+
+</deviceinfo>
+EOF
 }
 
 sub configure_kdeglobals {
