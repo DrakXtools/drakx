@@ -81,7 +81,7 @@ sub ppp_configure {
     }
 
     my %toreplace = map { $_ => $modem->{$_} } qw(Authentication AutoName connection dns1 dns2 domain IPAddr login passwd phone SubnetMask);
-    $toreplace{phone} =~ s/[a-zA-Z]//g;
+    $toreplace{phone} =~ s/\D//g;
     if ($modem->{auto_dns} ne N("Automatic")) {
         $toreplace{dnsserver} = join ',', map { $modem->{$_} } "dns1", "dns2";
         $toreplace{dnsserver} .= $toreplace{dnsserver} && ',';
