@@ -536,26 +536,28 @@ sub _create_window($$) {
     $my_gtk::shape_width = 7;
 #-  $gc->set_foreground(gtkcolor(8448, 17664, 40191)); #- in hex : 33, 69, 157
     $gc->set_foreground(gtkcolor(5120, 10752, 22784)); #- in hex : 20, 42, 89
-    gtkadd($w, my $table = new Gtk::Table(2, 2, 0));
-    $table->attach( gtkadd(my $f_ = gtkset_shadow_type(new Gtk::Frame(undef), 'out'),
-			   my $f = gtkset_border_width(gtkset_shadow_type(new Gtk::Frame(undef), 'none'), 3)
-			  ),
-		    0, 1, 0, 1, 1|4, 1|4, 0, 0);
-    $table->attach( gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, 7, 1), expose_event => sub {
-					  $_[0]->window->draw_rectangle($_[0]->style->bg_gc('normal'), 1, 0, 0, 7, 7);
-					  $_[0]->window->draw_rectangle($gc, 1, 0, 7, 7, $_[0]->allocation->[3]);
-				      }),
-		    1, 2, 0, 1, 'fill', 'fill', 0, 0);
-    $table->attach( gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, 1, 7), expose_event => sub {
-					  $_[0]->window->draw_rectangle($_[0]->style->bg_gc('normal'), 1, 0, 0, 7, 7);
-					  $_[0]->window->draw_rectangle($gc, 1, 7, 0, $_[0]->allocation->[2], 7);
-				      }),
-		    0, 1, 1, 2, 'fill', 'fill', 0, 0);
-    $table->attach( gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, 7, 7), expose_event => sub {
-					  $_[0]->window->draw_rectangle($gc, 1, 0, 0, 7, 7);
-				      }),
-		    1, 2, 1, 2, 'fill', 'fill', 0, 0);
-    $table->show_all;
+    my $inner = gtkadd(my $f_ = gtkset_shadow_type(new Gtk::Frame(undef), 'out'),
+		       my $f = gtkset_border_width(gtkset_shadow_type(new Gtk::Frame(undef), 'none'), 3)
+		      );
+    if ($::isStandalone) { gtkadd($w, $inner) } else {
+	gtkadd($w, my $table = new Gtk::Table(2, 2, 0));
+	$table->attach( $inner, 0, 1, 0, 1, 1|4, 1|4, 0, 0);
+	$table->attach( gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, 7, 1), expose_event => sub {
+					      $_[0]->window->draw_rectangle($_[0]->style->bg_gc('normal'), 1, 0, 0, 7, 7);
+					      $_[0]->window->draw_rectangle($gc, 1, 0, 7, 7, $_[0]->allocation->[3]);
+					  }),
+			1, 2, 0, 1, 'fill', 'fill', 0, 0);
+	$table->attach( gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, 1, 7), expose_event => sub {
+					      $_[0]->window->draw_rectangle($_[0]->style->bg_gc('normal'), 1, 0, 0, 7, 7);
+					      $_[0]->window->draw_rectangle($gc, 1, 7, 0, $_[0]->allocation->[2], 7);
+					  }),
+			0, 1, 1, 2, 'fill', 'fill', 0, 0);
+	$table->attach( gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, 7, 7), expose_event => sub {
+					      $_[0]->window->draw_rectangle($gc, 1, 0, 0, 7, 7);
+					  }),
+			1, 2, 1, 2, 'fill', 'fill', 0, 0);
+	$table->show_all;
+    }
     $w->set_name("Title");
     $w->set_title($title);
 
@@ -617,7 +619,7 @@ sub _create_window($$) {
 
     $o->{window} = $f;
     $o->{rwindow} = $w;
-    $table->draw(undef);
+    $table and $table->draw(undef);
 }
 
 my ($next_child, $left, $right, $up, $down);
