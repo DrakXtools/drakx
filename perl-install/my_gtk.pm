@@ -293,7 +293,7 @@ sub create_okcancel {
     my ($w, $ok, $cancel, $spread, @other) = @_;
     my $one = ($ok xor $cancel);
     $spread ||= $::isWizard ? "end" : "spread";
-    $ok ||= $::isWizard ? _("Next ->") : _("Ok"); 
+    $ok ||= $::isWizard ? ($::Wizard_finished ? _("Finish") : _("Next ->")) : _("Ok");
     $cancel ||= $::isWizard ? _("<- Previous") : _("Cancel");
     my $b1 = gtksignal_connect($w->{ok} = new Gtk::Button($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk->main_quit });
     my $b2 = !$one && gtksignal_connect($w->{cancel} = new Gtk::Button($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk->main_quit });
