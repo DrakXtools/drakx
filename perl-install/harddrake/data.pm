@@ -50,55 +50,296 @@ sub set_removable_remover {
 # Format is (HW class ID, l18n class name, icon, config tool , is_to_be_detected_on_boot)
 our @tree =
     (
-     [ "FLOPPY", , N("Floppy"), "floppy.png", "", \&detect_devices::floppies, 1 ],
-     [ "ZIP", , N("Zip"), "floppy.png", "", \&detect_devices::zips, 1 ],
-     [ "HARDDISK", , N("Disk"), "harddisk.png", "$sbindir/diskdrake", \&detect_devices::hds, 1 ],
-     [ "CDROM", , N("CDROM"), "cd.png", "", sub { grep { !(detect_devices::isBurner($_) || detect_devices::isDvdDrive($_)) } &detect_devices::cdroms }, 1 ],
-     [ "BURNER", , N("CD/DVD burners"), "cd.png", "", \&detect_devices::burners, 1 ],
-     [ "DVDROM", , N("DVD-ROM"), "cd.png", "", sub { grep { ! detect_devices::isBurner($_) } detect_devices::dvdroms() }, 1 ],
-     [ "TAPE", , N("Tape"), "tape.png", "", \&detect_devices::tapes, 0 ],
-     [ "VIDEO", , N("Videocard"), "video.png", "$sbindir/XFdrake",  sub { f(grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ /DISPLAY_VGA/ } @devices) }, 1 ],
-     [ "TV", , N("Tvcard"), "tv.png", "/usr/bin/XawTV", sub { f(grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} eq 'PCI' || $_->{driver} eq 'usbvision' } @devices) }, 0 ],     
-     [ "MULTIMEDIA_OTHER", , N("Other MultiMedia devices"), "multimedia.png", "", sub { f(grep { $_->{media_type} =~ /MULTIMEDIA_OTHER/ } @devices) }, 0 ],
-     [ "AUDIO", , N("Soundcard"), "sound.png", "$sbindir/draksound", sub { f(grep { $_->{media_type} =~ /MULTIMEDIA_AUDIO/ } @devices) }, 1 ],
-     [ "WEBCAM", , N("Webcam"), "webcam.png", "", sub { 
-           f(grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} ne 'PCI' || 
-                      member($_->{driver}, qw(cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp pwc ultracam usbvideo)) } @devices) },
-       0 ],
-     [ "CPU", , N("Processors"), "cpu.png", "", sub { detect_devices::getCPUs() }, 0 ],
-     [ "ISDN", , N("ISDN adapters"), "modem.png", "$sbindir/drakconnect", sub { require network::isdn; my $isdn = network::isdn::isdn_detect_backend(); if_(@$isdn, f(@$isdn)) }, 0 ],
-     [ "ETHERNET", , N("Ethernetcard"), "hw_network.png", "$sbindir/drakconnect", sub {
-         #- generic NIC detection for USB seems broken (class, subclass, 
-         #- protocol report are not accurate) so I'll need to verify against
-         #- known drivers :-(
-         require list_modules;
-         my @usbnet = (list_modules::category2modules('network/usb'), "nvnet"); # rought hack for nforce2's nvet
-         
-         f(grep { $_->{media_type} && $_->{media_type} =~ /^NETWORK/ || member($_->{driver}, @usbnet) || $_->{type} && $_->{type} eq 'network' } @devices) }, 1 ],
-     [ "MODEM", , N("Modem"), "modem.png", "$sbindir/drakconnect", sub { detect_devices::getModem() }, 0 ],
-     [ "ADSL", , N("ADSL adapters"), "modem.png", "$sbindir/drakconnect", sub { 
-           require network::adsl; my $a = network::adsl::adsl_detect(); $a ? f(grep { $_ } values %$a) : () }, 0 ],
-     [ "AGP", , N("AGP controllers"), "memory.png", "", sub { f(modules::probe_category('various/agpgart')) }, 0 ],
-     [ "BRIDGE", , N("Bridges and system controllers"), "memory.png", "", sub { f(grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM/ && $_->{driver} ne 'nvnet' } @devices) }, 0 ],
-     [ "PRINTER", , N("Printer"), "hw_printer.png", "$sbindir/printerdrake", sub { 
-         require printer::detect; printer::detect::local_detect() }, 0 ],
-     [ "MOUSE", , N("Mouse"), "hw_mouse.png", "$sbindir/mousedrake", sub { 
-         require mouse;
-         require modules;
-         modules::mergein_conf('/etc/modules.conf') if -r '/etc/modules.conf';
-         &mouse::detect() }, 1 ],
-     [ "JOYSTICK", , N("Joystick"), "joystick.png", "", sub {}, 0 ],
+     {
+      class => "FLOPPY",
+      string => N("Floppy"),
+      icon => "floppy.png",
+      configurator => "",
+      detector => \&detect_devices::floppies,
+      checked_on_boot => 1,
+     },
 
-     [ "ATA_STORAGE", , N("(E)IDE/ATA controllers"), "ide_hd.png", "", sub { f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/
-                                                                                        || $_->{driver} eq '3w-xxxx' } @devices) }, 0 ],
-     [ "FIREWIRE_CONTROLLER", , N("Firewire controllers"), "usb.png", "", sub { f(grep { $_->{driver} =~ /ohci1394/ } @devices) }, 1 ],
-     [ "SCSI_CONTROLLER", , N("SCSI controllers"), "scsi.png", "", sub { f(grep { $_->{media_type} =~ /STORAGE_SCSI/ || $_->{driver} eq 'megaraid' } @devices) }, 0 ],
-     [ "USB_CONTROLLER", , N("USB controllers"), "usb.png", "", sub { f(grep { $_->{media_type} =~ /SERIAL_USB|Hub/ } @devices) }, 0 ],
-     [ "SMB_CONTROLLER", , N("SMBus controllers"), "usb.png", "", sub { f(grep { $_->{media_type} =~ /SERIAL_SMBUS/ } @devices) }, 0 ],
-     [ "SCANNER", , N("Scanner"), "scanner.png", "$sbindir/scannerdrake", sub { 
-         require scanner; f(scanner::detect()) }, 0 ],
-     [ "UNKNOWN", , N("Unknown/Others"), "unknown.png", "", sub { f(unknown()) }, 0 ]
-     );
+     {
+      class => "ZIP",
+      string => N("Zip"),
+      icon => "floppy.png",
+      configurator => "",
+      detector => \&detect_devices::zips,
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "HARDDISK",
+      string => N("Disk"),
+      icon => "harddisk.png",
+      configurator => "$sbindir/diskdrake",
+      detector => \&detect_devices::hds,
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "CDROM",
+      string => N("CDROM"),
+      icon => "cd.png",
+      configurator => "",
+      detector => sub { grep { !(detect_devices::isBurner($_) || detect_devices::isDvdDrive($_)) } &detect_devices::cdroms },
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "BURNER",
+      string => N("CD/DVD burners"),
+      icon => "cd.png",
+      configurator => "",
+      detector => \&detect_devices::burners,
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "DVDROM",
+      string => N("DVD-ROM"),
+      icon => "cd.png",
+      configurator => "",
+      detector => sub { grep { ! detect_devices::isBurner($_) } detect_devices::dvdroms() },
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "TAPE",
+      string => N("Tape"),
+      icon => "tape.png",
+      configurator => "",
+      detector => \&detect_devices::tapes,
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "VIDEO",
+      string => N("Videocard"),
+      icon => "video.png",
+      configurator => "$sbindir/XFdrake",
+      detector =>  sub { f(grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ /DISPLAY_VGA/ } @devices) },
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "TV",
+      string => N("Tvcard"),
+      icon => "tv.png",
+      configurator => "/usr/bin/XawTV",
+      detector => sub { f(grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} eq 'PCI' || $_->{driver} eq 'usbvision' } @devices) },
+      checked_on_boot => 0,
+     },
+     
+     {
+      class => "MULTIMEDIA_OTHER",
+      string => N("Other MultiMedia devices"),
+      icon => "multimedia.png",
+      configurator => "",
+      detector => sub { f(grep { $_->{media_type} =~ /MULTIMEDIA_OTHER/ } @devices) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "AUDIO",
+      string => N("Soundcard"),
+      icon => "sound.png",
+      configurator => "$sbindir/draksound",
+      detector => sub { f(grep { $_->{media_type} =~ /MULTIMEDIA_AUDIO/ } @devices) },
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "WEBCAM",
+      string => N("Webcam"),
+      icon => "webcam.png",
+      configurator => "",
+      detector => sub { 
+          f(grep {
+              $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} ne 'PCI'
+                || member($_->{driver}, qw(cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp pwc ultracam usbvideo))
+            } @devices)
+      },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "CPU",
+      string => N("Processors"),
+      icon => "cpu.png",
+      configurator => "",
+      detector => sub { detect_devices::getCPUs() },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "ISDN",
+      string => N("ISDN adapters"),
+      icon => "modem.png",
+      configurator => "$sbindir/drakconnect",
+      detector => sub { require network::isdn; my $isdn = network::isdn::isdn_detect_backend(); if_(@$isdn, f(@$isdn)) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "ETHERNET",
+      string => N("Ethernetcard"),
+      icon => "hw_network.png",
+      configurator => "$sbindir/drakconnect",
+      detector => sub {
+          #- generic NIC detection for USB seems broken (class, subclass, 
+          #- protocol report are not accurate) so I'll need to verify against
+          #- known drivers :-(
+          require list_modules;
+          my @usbnet = (list_modules::category2modules('network/usb'), "nvnet"); # rought hack for nforce2's nvet
+          
+          f(grep {
+              $_->{media_type} && $_->{media_type} =~ /^NETWORK/
+                || member($_->{driver}, @usbnet)
+                  || $_->{type} && $_->{type} eq 'network'
+              } @devices)
+      },
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "MODEM",
+      string => N("Modem"),
+      icon => "modem.png",
+      configurator => "$sbindir/drakconnect",
+      detector => sub { detect_devices::getModem() },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "ADSL",
+      string => N("ADSL adapters"),
+      icon => "modem.png",
+      configurator => "$sbindir/drakconnect",
+      detector => sub { 
+          require network::adsl;
+          my $a = network::adsl::adsl_detect();
+          $a ? f(grep { $_ } values %$a) : ();
+      },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "AGP",
+      string => N("AGP controllers"),
+      icon => "memory.png",
+      configurator => "",
+      detector => sub { f(modules::probe_category('various/agpgart')) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "BRIDGE",
+      string => N("Bridges and system controllers"),
+      icon => "memory.png",
+      configurator => "",
+      detector => sub { f(grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM/ && $_->{driver} ne 'nvnet' } @devices) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "PRINTER",
+      string => N("Printer"),
+      icon => "hw_printer.png",
+      configurator => "$sbindir/printerdrake",
+      detector => sub { require printer::detect; printer::detect::local_detect() },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "MOUSE",
+      string => N("Mouse"),
+      icon => "hw_mouse.png",
+      configurator => "$sbindir/mousedrake",
+      detector => sub { 
+          require mouse;
+          require modules;
+          modules::mergein_conf('/etc/modules.conf') if -r '/etc/modules.conf';
+          &mouse::detect();
+      },
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "JOYSTICK",
+      string => N("Joystick"),
+      icon => "joystick.png",
+      configurator => "",
+      detector => sub {},
+      checked_on_boot => 0,
+     },
+
+
+     {
+      class => "ATA_STORAGE",
+      string => N("(E)IDE/ATA controllers"),
+      icon => "ide_hd.png",
+      configurator => "",
+      detector => sub { f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ || $_->{driver} eq '3w-xxxx' } @devices) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "FIREWIRE_CONTROLLER",
+      string => N("Firewire controllers"),
+      icon => "usb.png",
+      configurator => "",
+      detector => sub { f(grep { $_->{driver} =~ /ohci1394/ } @devices) },
+      checked_on_boot => 1,
+     },
+
+     {
+      class => "SCSI_CONTROLLER",
+      string => N("SCSI controllers"),
+      icon => "scsi.png",
+      configurator => "",
+      detector => sub { f(grep { $_->{media_type} =~ /STORAGE_SCSI/ || $_->{driver} eq 'megaraid' } @devices) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "USB_CONTROLLER",
+      string => N("USB controllers"),
+      icon => "usb.png",
+      configurator => "",
+      detector => sub { f(grep { $_->{media_type} =~ /SERIAL_USB|Hub/ } @devices) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "SMB_CONTROLLER",
+      string => N("SMBus controllers"),
+      icon => "usb.png",
+      configurator => "",
+      detector => sub { f(grep { $_->{media_type} =~ /SERIAL_SMBUS/ } @devices) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "SCANNER",
+      string => N("Scanner"),
+      icon => "scanner.png",
+      configurator => "$sbindir/scannerdrake",
+      detector => sub { 
+         require scanner; f(scanner::detect()) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "UNKNOWN",
+      string => N("Unknown/Others"),
+      icon => "unknown.png",
+      configurator => "",
+      detector => sub { f(unknown()) },
+      checked_on_boot => 0,
+     },
+
+    );
 
 sub pciusb_id {
     my ($dev) = @_;
