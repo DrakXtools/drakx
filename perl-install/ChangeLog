@@ -1,3 +1,339 @@
+2003/09/08  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: last updates
+
+2003/09/08  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* standalone/printerdrake: 
+	  - support new help call
+
+2003/09/08  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: shrink
+
+	* network/network.pm, network/adsl.pm, network/isdn.pm,
+	network/netconnect.pm, network/nfs.pm: 
+	  - fix/use explanations
+	  - fix #5307 (firmware)
+
+	* share/po/fr.po: s/Utiliserer une disquette/Utiliser une disquette/
+
+2003/09/08  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/09/08  François Pons  <fpons at mandrakesoft.com>
+
+	* install2.pm: set xcon=6 when loading i810fb module (to have console 7
+	with X).
+
+2003/09/08  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/uz.po, share/po/ru.po, share/po/lv.po, share/po/lt.po,
+	share/po/ga.po, share/po/sr@Latn.po, share/po/ar.po, share/po/hu.po,
+	share/po/bg.po, share/po/zh_TW.po, share/po/sl.po, share/po/mt.po,
+	share/po/gl.po, share/po/DrakX.pot, share/po/cy.po, share/po/sv.po,
+	share/po/uk.po, share/po/tg.po, share/po/id.po, share/po/hr.po,
+	share/po/ms.po, share/po/nl.po, share/po/de.po, share/po/uz@Cyrl.po,
+	share/po/is.po, share/po/fr.po, share/po/ja.po, share/po/sk.po,
+	share/po/eo.po, share/po/el.po, share/po/cs.po, share/po/it.po,
+	share/po/tr.po, share/po/sr.po, share/po/nb.po, share/po/be.po,
+	share/po/fa.po, share/po/eu.po, share/po/da.po, share/po/ko.po,
+	share/po/af.po, share/po/es.po, share/po/ro.po, share/po/pl.po,
+	share/po/vi.po, share/po/bs.po, share/po/wa.po, share/po/sq.po,
+	share/po/he.po, share/po/ta.po, share/po/pt.po, share/po/ca.po,
+	share/po/th.po, share/po/pt_BR.po: updated pot file
+
+	* share/po/az.po, share/po/zh_CN.po, share/po/et.po, share/po/fi.po:
+	updated Azeri, Estonian, Finnish and Chinese files
+	updated pot file
+
+2003/09/08  Pixel  <pixel at mandrakesoft.com>
+
+	* tools/aewm-drakx/aewm-drakx.c, install_steps_gtk.pm,
+	tools/aewm-drakx/client.c, tools/Makefile, tools/aewm-drakx/aewm.h,
+	tools/aewm-drakx/README, tools/aewm-drakx/misc.c, Makefile.config,
+	ugtk2.pm, tools/aewm-drakx/Makefile, tools/aewm-drakx/events.c: fixing
+	keyboard focus during install:
+	  - removed aewm-drakx which doesn't work nicely
+	  - fix @interactive::objects handling
+	(don't push non pop_it windows, ensure destroyed windows are removed)
+	  - ensure XSetInputFocus is called on $::WizardWindow
+
+	* Xconfig/resolution_and_depth.pm: 
+	  - use OptionMenu's instead of Combo's (better looking and mcc doesn't
+	like embedding combos)
+	  - cleanup
+
+	* any.pm: ~fix~ calling userdrake in "diskdrake --fileshare"
+
+	* standalone/XFdrake: Xdrakres is "XFdrake resolution" not simply
+	"XFdrake"
+
+	* fsedit.pm: fix check_mntpoint to get back error "There is already a
+	partition with mount point %s\n"
+
+	* install_steps_interactive.pm: don't warnAboutNaughtyServers when
+	upgrading
+
+	* standalone/diskdrake: remove obsolete code
+	~fix~ calling userdrake in "diskdrake --fileshare"
+	use formatError to have the error message instead of SCALAR(0x....)
+
+2003/09/08  Till Kamppeter  <till at mandrakesoft.com>
+
+	* standalone/printerdrake: Fixed copyright notice.
+	  - Use a field in the $printer data structure and no a global variable
+	for the expert mode.
+	  - Fixed bug of database not being re-read when switching between
+	  normal and expert mode with the new GTK2 main window.
+
+	* standalone/scannerdrake: Show an error message if saned could not be
+	installed.
+
+	* printer/printerdrake.pm, printer/main.pm, printer/cups.pm: 
+	  - Use a field in the $printer data structure and no a global variable
+	for the expert mode.
+	  - Fixed bug of database not being re-read when switching between
+	  normal and expert mode with the new GTK2 main window.
+
+2003/09/08  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 9.2-9mdk
+
+	* standalone/drakfont: fix #4964 (not being able to select directories)
+
+	* ugtk.pm, my_gtk.pm: no more used (drakcronat just removed from distro)
+	=> less dependancies :-)
+
+2003/09/07  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: typo fix
+
+2003/09/07  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect, network/netconnect.pm: 
+	  - $netcnx->{PROFILE} is current profile name (now scalar)
+	  - fix non working profiles loading/saving
+	  - perl_checker
+
+2003/09/07  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: Fixed first-time dialog.
+
+2003/09/07  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 9.2-8mdk
+
+	* share/po/br.po: update
+
+2003/09/06  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Update
+
+2003/09/06  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/hu.po, share/po/vi.po, share/po/bs.po, share/po/he.po,
+	share/po/cy.po: updated Bosnian, Welsh, Hebrew, Hungarian and Vietnamese
+	files
+
+2003/09/05  David Baudens  <baudens at mandrakesoft.com>
+
+	* pixmaps/monitor-640.png, pixmaps/monitor-2048.png,
+	pixmaps/monitor-1920.png, pixmaps/monitor-1600.png,
+	pixmaps/monitor-800.png, pixmaps/monitor-1280.png,
+	pixmaps/monitor-1400.png, pixmaps/monitor.png, pixmaps/monitor-1152.png,
+	pixmaps/monitor-1024.png: Update
+
+2003/09/05  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/network.pm: workaround messed up ppp0 configration
+
+2003/09/05  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/09/05  Florin Grad  <florin at mandrakesoft.com>
+
+	* network/network.pm, network/netconnect.pm: small fixes for drakgw and
+	drakfirewall
+
+2003/09/05  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* lang.pm: add support for "variants" as explained by pablo (in uz@Cyrl
+	the @Cyrl is a variant)
+
+	* keyboard.pm: /me sux
+	apply patch asked by pablo so that users are not confused during
+	install that their chosen grp_toggle is not usable. yes it's too
+	late for additional translations but it's not very important that
+	this is untranslated, it's better to have it in.
+
+2003/09/05  keld
+
+	* share/po/da.po: updates
+	soft/control-center/po/da.po gi/perl-install/share/po/da.po
+
+2003/09/05  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/pt.po: updated Portuguese file
+
+	* lang.pm: increazed size of Arabic font in KDE
+
+	* share/po/uz.po, share/po/ru.po, share/po/zh_CN.po, share/po/uz@Cyrl.po,
+	share/po/sk.po, share/po/cs.po: updated Czech, Slovak, Uzbek and Chinese
+	files
+
+	* share/po/hu.po, share/po/nb.po, share/po/fa.po: updated pot files
+
+2003/09/05  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Change the strings again for Pablo
+
+2003/09/05  Till Kamppeter  <till at mandrakesoft.com>
+
+	* standalone/printerdrake: Reverted button texts to not break existing
+	translations, added hints
+	for translators to make the button texts short.
+	Shorter button texts, so that translations do not let the buttons go
+	out of the window.
+
+2003/09/05  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: update fr translation
+	help making printerdrake icon bar be shorter (#5282)
+
+2003/09/04  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: passed spellchecking, fixed some typos
+	last updates
+
+2003/09/04  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Fully updated
+
+2003/09/04  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/compssUsers.desktop: Update
+
+2003/09/04  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/modem.pm: always ask for modem device even if not detected,
+	unless user has winmodem
+	fix #5242, don't go back to main menu if winmodem isn't found
+
+2003/09/04  François Pons  <fpons at mandrakesoft.com>
+
+	* Xconfig/resolution_and_depth.pm: XF 3.3 should use depth 16 if
+	use_UTAH_GLX, this has been glitched in XF4 mode
+	(so never available).
+
+2003/09/04  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po, share/po/sq.po: updated Estonian and Albanian files
+	updated pot file
+
+	* share/po/uz.po, share/po/ru.po, share/po/lv.po, share/po/lt.po,
+	share/po/az.po, share/po/zh_CN.po, share/po/ga.po, share/po/sr@Latn.po,
+	share/po/ar.po, share/po/hu.po, share/po/bg.po, share/po/zh_TW.po,
+	share/po/sl.po, share/po/mt.po, share/po/gl.po, share/po/DrakX.pot,
+	share/po/cy.po, share/po/sv.po, share/po/uk.po, share/po/tg.po,
+	share/po/id.po, share/po/hr.po, share/po/ms.po, share/po/nl.po,
+	share/po/de.po, share/po/uz@Cyrl.po, share/po/is.po, share/po/fr.po,
+	share/po/ja.po, share/po/sk.po, share/po/eo.po, share/po/el.po,
+	share/po/cs.po, share/po/tr.po, share/po/sr.po, share/po/be.po,
+	share/po/fa.po, share/po/da.po, share/po/ko.po, share/po/af.po,
+	share/po/es.po, share/po/ro.po, share/po/pl.po, share/po/vi.po,
+	share/po/bs.po, share/po/wa.po, share/po/he.po, share/po/ta.po,
+	share/po/ca.po, share/po/fi.po, share/po/th.po, share/po/pt_BR.po:
+	updated pot file
+
+	* share/po/eu.po: updated pot file
+	updated Basque file
+
+	* share/po/nb.po: updated Norwegian file
+	updated pot file
+
+	* share/po/it.po: updated pot file
+	updated Italian file
+
+	* share/po/pt.po: updated pot file
+	updated Portuguese file
+
+2003/09/04  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/icons/drakbackup.540x57.png,
+	standalone/icons/drakTS.620x57.png: No longer needed with reworked
+	banners.
+
+	* standalone/drakTermServ: Add application title in banner.
+
+	* standalone/drakbackup: CDROM -> CDR
+
+2003/09/04  Till Kamppeter  <till at mandrakesoft.com>
+
+	* standalone/scannerdrake: Abort scannerdrake when SANE packages cannot be
+	installed.
+
+2003/09/04  tpittich
+
+	* share/po/sk.po: updated slovak translation
+
+2003/09/04  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 
+	  - printerdrake needs foomatic-db-engine
+	  - printerdrake is moved to drakxtools since it does not anymore run on
+	  the console
+	remove doble entry
+	9.2-7mdk (arghh, 9.2-6mdk was really uploaded)
+	9.2-6mdk last bits
+	fix buildrequires for 64bit ports
+
+2003/09/03  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/rpmsrate: Update
+	Update
+	Update
+
+2003/09/03  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/tr.po: updated Turkish file
+
+	* share/po/nl.po, share/po/nb.po: updated Norwegian and Dutch files
+
+2003/09/03  Pixel  <pixel at mandrakesoft.com>
+
+	* pixmaps/mouse_3b+_middle.png, pixmaps/mouse_2b.png, mouse.pm,
+	pixmaps/mouse_right.xpm, pixmaps/mouse_3b.xpm,
+	pixmaps/mouse_2b_left.png, pixmaps/mouse_3b.png,
+	pixmaps/mouse_3b_middle.png, pixmaps/mouse_middle.xpm,
+	pixmaps/mouse_3b_left.png, pixmaps/arrow_up.png,
+	pixmaps/mouse_3b_mini.xpm, pixmaps/arrow_down.xpm,
+	pixmaps/mouse_2b_right.png, pixmaps/mouse_3b+_mini.xpm,
+	pixmaps/mouse_3b+.png, pixmaps/mouse_3b_right.png,
+	pixmaps/mouse_3b+.xpm, pixmaps/arrow_down.png, pixmaps/mouse_left.xpm,
+	pixmaps/arrow_up.xpm: 
+	  - much cleanup in test_mouse()
+	  - new images for mouse test (thanks to Jerome Villette)
+
+	* install_steps_newt.pm, install_steps_interactive.pm, install_steps.pm,
+	install_steps_stdio.pm, install_steps_auto_install.pm: 
+	  - move call to ->charsetChanged from install_steps_interactive to
+	install_steps
+	so that we can use it in install_steps_auto_install_non_interactive
+	  - don't overload ->selectLanguage to call lang::load_console_font(),
+	overload ->charsetChanged instead
+
+	* diskdrake/hd_gtk.pm, diskdrake/interactive.pm: require resize_fat::main
+	when needed (fix bug #5204)
+
+2003/09/03  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Default to all users for wizard->Users (as root).
+	Only allow 1 media select from wizard.
+	Limit possible user list to self for nonroot users.
+
 2003/09/03  Daouda Lo  <daouda at mandrakesoft.com>
 
 	* standalone/drakhelp: 
@@ -20671,7 +21007,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.829 2003/08/30 01:04:19 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.830 2003/09/03 17:13:20 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
