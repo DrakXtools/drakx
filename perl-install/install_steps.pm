@@ -888,6 +888,11 @@ sub setupBootloaderBefore {
     if (cat_("/proc/cmdline") =~ /\bnoapic/) {
 	bootloader::set_append($o->{bootloader}, 'noapic');
     }
+    my ($MemTotal) = cat_("/proc/meminfo") =~ /^MemTotal:\s*(\d+)/m;
+    if (my ($biggest_swap) = sort { $b->{size} <=> $a->{size} } grep { isSwap($_) } @{$o->{fstab}}) {
+	log::l("MemTotal: $MemTotal < ", $biggest_swap->{size} / 2);
+	bootloader::set_append($o->{bootloader}, resume => devices::make($biggest_swap->{device})) if $MemTotal < $biggest_swap->{size} / 2;
+    }
 
     if (arch() =~ /alpha/) {
 	if (my $dev = fsedit::get_root($o->{fstab})) {
