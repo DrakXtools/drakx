@@ -55,7 +55,7 @@ sub floppies() {
     my @fds;
     my @dmis = dmidecode();
     # do not try to load floppy if there's no floppy drive:
-    if (!@dmis || find { $_->{'Internal Reference Designator'} =~ /^(FLOPPY|FDD)$/ && $_->{name} eq 'Port Connector' } @dmis) {
+    if ($::isInstall || !@dmis || find { $_->{'Internal Reference Designator'} =~ /^(FLOPPY|FDD)$/ && $_->{name} eq 'Port Connector' } @dmis) {
         eval { modules::load("floppy") if $::isInstall };
         if (!$@) {
             @fds = map {
