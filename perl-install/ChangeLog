@@ -1,3 +1,82 @@
+2004/12/12  Pixel  <pixel at mandrakesoft.com>
+
+	* .perl_checker: ignore packdrake for now
+
+	* install_gtk.pm, share/list.i386: keyboard_drv.o is needed by Xorg, and
+	driver must "keyboard", not "Keyboard"
+
+2004/12/10  Pixel  <pixel at mandrakesoft.com>
+
+	* Makefile: move drakx VERSION file in install/stage2 (used by bugzilla)
+
+2004/12/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/ja.po: update (Yukiko Bando)
+
+2004/12/09  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps.pm: commit warly's fix in HEAD
+	commit warly's fix in 10.1 branch
+
+2004/12/08  Warly  <warly at mandrakesoft.com>
+
+	* install_steps.pm: fix the updatemodules mode for installation
+
+2004/12/07  Pixel  <pixel at mandrakesoft.com>
+
+	* detect_devices.pm, install_steps_interactive.pm: look for yenta_socket
+	in pci_probe too (nb: ldetect pci_probe has a special rule for it, not
+	simply pcitable)
+	look for yenta_socket in pci_probe too
+	look for yenta_socket in pci_probe too (nb: ldetect pci_probe has a
+	special rule for it, not simply pcitable)
+
+	* share/rpmsrate: xcdroast only if X is chosen (bugzilla #12594)
+
+2004/12/06  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate.corpo-server, share/rpmsrate.corpo-desktop: Added
+	mdkonline, slmodem and ipw2?00
+
+2004/12/05  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2004/12/05  Pixel  <pixel at mandrakesoft.com>
+
+	* fs/format.pm, install_any.pm: don't allow partition types we don't know
+	how to format in {partitions} for auto_installs (eg of bad type: ntfs)
+
+2004/12/05  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: typo fixes (#12580)
+
+2004/12/04  Pixel  <pixel at mandrakesoft.com>
+
+	* mdk-stage1/pcmcia_/merge_from_pcitable: simplify
+
+2004/12/04  tsdgeos
+
+	* share/po/ca.po: Update
+
+2004/12/03  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm: disable kmod, otherwise we get a different behaviour in
+	kernel vs kernel-BOOT
+
+	* Makefile: use the cute "perldoc -l" instead of perl -V:vendorlib which
+	doesn't work when the module hasn't been rebuilt
+
+	* unused/migrate-ugtk2-to-mygtk2.pl, unused/migrate-ugtk2-to-mygtk2.el: be
+	more automatic and less .emacs dependent
+
+	* tools/Makefile: use perldoc -l instead of perl -M + %INC
+
+	* install_steps_gtk.pm: more debug log
+
+	* commands: during install, commands should $::isInstall set (otherwise
+	poor modprobe becomes a fork bomb)
+
 2004/12/03  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/po/bn.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
@@ -42421,7 +42500,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.990 2004/12/02 21:17:51 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.991 2004/12/03 11:20:39 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
