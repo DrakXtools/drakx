@@ -21,7 +21,7 @@ if (my ($kb) = grep { !/^-/ } @ARGV) {
     $in = 'interactive'->vnew('su');
 
     my ($xkb_models, $model2text) = keyboard::xkb_models();
-    $_ =~ s/ /|/ foreach values %$model2text;
+    s/ /|/ foreach values %$model2text;
     $keyboard->{XkbModel} ||= 'pc105';
 
   choose:
