@@ -285,5 +285,26 @@ sub check_for_xserver() {
     return $::xtest;
 }
 
+#- special unpack
+#- - returning an array refs for each element like "s10"
+#- - handling things like s10* at the end of the format
+sub unpack_with_refs {
+    my ($format, $s) = @_;
+    my $initial_format = $format;
+    my @r;
+    while ($format =~ s/\s*(\w(\d*))(\*?)\s*//) {
+	my ($sub_format, $nb, $many) = ($1, $2, $3);
+	$many && $format and internal_error("bad * in the middle of format in $initial_format");
+
+	my $done = $many && !length($s);
+	while (!$done) {
+	    my @l = unpack("$sub_format a*", $s);
+	    $s = pop @l;
+	    push @r, $nb ? \@l : @l;
+	    $done = !$many || !length($s);
+	}
+    }
+    @r;
+}
 
 1;
