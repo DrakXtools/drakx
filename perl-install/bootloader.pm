@@ -88,8 +88,7 @@ sub read_grub {
     foreach (cat_("$::prefix$file")) {
         next if /^\s*#/ || /^\s*$/;
         chomp;
-        #	($_, $v) = /^\s*([^=\s]+)\s*(?:=\s*(.*?))?\s*$/ or log::l("unknown line in $file: $_"), next;
-        if (! /^\s*([^\s]*)\s*(.*?)\s*$/) {
+        if (! /^\s*(\S*)\s*(.*?)\s*$/) {
             print STDERR "unknown line in $file: \"",  chomp_($_), "\"\n";
             next;
         }
