@@ -709,12 +709,7 @@ sub install_grub {
     }
     my $bootIsReiser = isReiserfs(fsedit::get_root($fstab, 'boot'));
     my $file2grub = sub {	
-	my $file = expand_symlinks "$prefix$_[0]";
-	if (!$bootIsReiser) { #- grub in reiserfs doesn't handle symlinks.
-	    if (my $l = readlink "$prefix$_[0]") {
-		$l =~ m|/| or $file =~ s/\Q$l/basename $_[0]/e; #- keep simple end symlinks
-	    }
-	}
+	my $file = expand_symlinks "$prefix$_[0]"; #- grub in reiserfs doesn't handle symlinks.
 	unless ($file =~ s/^$prefix//) {
 	    my ($fs) = grep { loopback::carryRootLoopback($_) } @$fstab or die;
 	    log::l("found $fs->{mntpoint}");
@@ -744,8 +739,10 @@ sub install_grub {
 	print F "i18n ", $file2grub->("/boot/grub/messages");
 	print F "keytable ", $file2grub->($lilo->{keytable}) if $lilo->{keytable};
 	#- since we use notail in reiserfs, altconfigfile is broken :-(
-	print F "altconfigfile ", $file2grub->(my $once = "/boot/grub/menu.once") if !$bootIsReiser;
-	output "$prefix$once", " " x 100;
+	unless ($bootIsReiser) {
+	    print F "altconfigfile ", $file2grub->(my $once = "/boot/grub/menu.once");
+	    output "$prefix$once", " " x 100;
+	}
 
 	map_index {
 	    print F "default $::i" if $_->{label} eq $lilo->{default};
