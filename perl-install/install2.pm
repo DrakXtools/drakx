@@ -62,7 +62,9 @@ arch() !~ /alpha|sparc/ ? (
 ) : (),
   setupBootloader    => [ __("Install bootloader"), 1, 1, '$::o->{lnx4win} && !$::expert', "doInstallStep" ],
   configureX         => [ __("Configure X"), 1, 1, '', ["formatPartitions", "setupBootloader"] ],
+arch() !~ /sparc/ ? (
   generateAutoInstFloppy => [ __("Auto install floppy"), 1, 1, '!$::expert || $o->{lnx4win}', "doInstallStep" ],
+) : (),
   exitInstall        => [ __("Exit install"), 0, 0, '$::beginner' ],
 );
     for (my $i = 0; $i < @installSteps; $i += 2) {
@@ -488,6 +490,8 @@ sub createBootdisk {
 #------------------------------------------------------------------------------
 sub setupBootloader {
     return if $::g_auto_install;
+
+    modules::write_conf("$o->{prefix}/etc/conf.modules");
 
     $o->setupBootloaderBefore if $_[1] == 1;
     $o->setupBootloader($_[1] - 1);

@@ -854,11 +854,11 @@ You can add some more or change the existing ones."),
 	my @l;
 	if ($e->{type} eq "image") { 
 	    @l = (
-_("Image") => { val => \$e->{kernel_or_dev}, list => [ eval { glob_("/boot/vmlinuz*") } ] },
-_("Partition") => { val => \$e->{partition}, list => [ map { ("/dev/$_->{device}" =~ /\D*(\d*)/)[0] || 1} @{$o->{fstab}} ], not_edit => !$::expert },
-_("Root") => { val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
+_("Image") => { val => \$e->{kernel_or_dev}, list => [ eval { glob_("$o->{prefix}/boot/vmlinuz*") } ] },
+_("Partition") => { val => \$e->{partition}, list => [ map { ("$o->{prefix}/dev/$_->{device}" =~ /\D*(\d*)/)[0] || 1} @{$o->{fstab}} ], not_edit => !$::expert },
+_("Root") => { val => \$e->{root}, list => [ map { "$o->{prefix}/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
 _("Append") => \$e->{append},
-_("Initrd") => { val => \$e->{initrd}, list => [ eval { glob_("/boot/initrd*") } ] },
+_("Initrd") => { val => \$e->{initrd}, list => [ eval { glob_("$o->{prefix}/boot/initrd*") } ] },
 _("Read-write") => { val => \$e->{'read-write'}, type => 'bool' }
 	    );
 	    @l = @l[0..7] unless $::expert;
@@ -879,8 +879,9 @@ _("Default") => { val => \$default, type => 'bool' },
 		0;
 	    })) {
 	    $b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
-	    
-	    push @{$b->{entries}}, $e if $c eq "Add";
+	    require silo;
+	    silo::configure_entry($o->{prefix}, $e);
+	    $c eq 'Add' and push @{$b->{entries}}, $e;
 	} else {
 	    @{$b->{entries}} = grep { $_ != $e } @{$b->{entries}};
 	}

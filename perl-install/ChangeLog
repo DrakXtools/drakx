@@ -1,3 +1,14 @@
+2000-05-25  François Pons  <fpons@mandrakesoft.com>
+
+	* silo.pm: added configure_entry to try creating an initrd for an image
+	entry in bootloader. fixed wrong usage of run_programm::rooted with 2>.
+	* commands.pm: fixed insmod command to take modules64.cz* on sparc*
+	* install2.pm: removed create boot disk and create auto install disk on
+	sparc*. force writing of /etc/conf.modules for step setupBootloader.
+	* install_steps_interactive.pm: added missing $prefix for glob_. call
+	configure_entry in setupSILO.
+	* modules.pm: updated alias for sparc*.
+
 2000-05-24  François Pons  <fpons@mandrakesoft.com>
 
 	* partition_tabel.pm: fixed wrong detection of DOS partition on sparc*.

@@ -423,7 +423,7 @@ sub insmod {
 	$_ = $1 if m@.*/([^/]*)\.o@;
 	unless (-r ($f = "/lib/modules/$_.o")) {
 	    $f = "/tmp/$_.o";
-	    my $cz = "/lib/modules.cz"; -e $cz or $cz .= "2";
+	    my $cz = "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz"; -e $cz or $cz .= "2";
 	    if (-e $cz) {
 		run_program::run("extract_archive $cz /tmp $_.o");
 	    } elsif (-e "/lib/modules.cpio.bz2") {
