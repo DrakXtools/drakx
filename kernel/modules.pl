@@ -42,13 +42,13 @@ my @skip_modules_on_stage1 = (
 );
 
 my %images = (
-    network => 'fs/network network/main|raw bus/pcmcia',
-    cdrom   => 'fs/cdrom disk/cdrom|scsi|raw',
-    hd      => 'fs/local fs/loopback disk/scsi|hardware_raid|raw',
-    usb     => 'fs/network|cdrom bus/usb network/usb|raw disk/cdrom|usb|raw',
-    pcmcia  => 'fs/network|cdrom disk/cdrom|pcmcia|raw bus/pcmcia network/pcmcia|raw',
-    other   => 'network/main disk/scsi|hardware_raid ONLY_BIG fs/network network/raw fs/cdrom disk/cdrom|raw',
-    all     => 'fs/network|cdrom|loopback|local bus/pcmcia|usb network/main|pcmcia|usb|raw disk/cdrom|scsi|hardware_raid|pcmcia|usb|raw',
+    network => 'fs/network network/raw bus/pcmcia network/main',
+    hd      => 'disk/raw fs/local|loopback disk/scsi|hardware_raid',
+    other   => 'disk/scsi|hardware_raid network/main ONLY_BIG fs/cdrom disk/cdrom|raw fs/network network/raw',
+    pcmcia  => 'fs/cdrom disk/cdrom|raw|pcmcia bus/pcmcia fs/network network/pcmcia|raw',
+    cdrom   => 'fs/cdrom disk/cdrom|raw|scsi',
+    usb     => 'fs/cdrom disk/cdrom|raw bus/usb disk/usb fs/network network/usb|raw',
+    all     => 'fs/cdrom disk/cdrom|raw bus/usb disk/usb|scsi fs/loopback|local bus/pcmcia disk/pcmcia|hardware_raid fs/network network/main|pcmcia|usb|raw',
 );
 
 my $verbose = "@ARGV" =~ /-v/;
@@ -76,7 +76,7 @@ sub images {
 	    @modules = difference2(\@modules, \@skip_big_modules_on_stage1)
 	}
 	@modules = map { dependencies_closure($_) } @modules;
-	printf qq(%s_modules="%s"\n), $image, join(" ", map { "$_.o" } sort @modules);
+	printf qq(%s_modules="%s"\n), $image, join(" ", map { "$_.o" } @modules);
     }
 }
 

@@ -75,7 +75,7 @@ our %l = (
     pcmcia => [ qw(aha152x_cs fdomain_cs nsp_cs qlogic_cs ide-cs) ], #ide_cs
     raw => [ qw(scsi_mod sd_mod) ],
     usb => [ qw(usb-storage) ],
-    cdrom => [ qw(ide-cd sr_mod cdrom) ],
+    cdrom => [ qw(ide-cd cdrom sr_mod) ],
   },
 
   ################################################################################
