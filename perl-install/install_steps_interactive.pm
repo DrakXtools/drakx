@@ -870,7 +870,7 @@ sub summaryBefore {
     eval {
 	network::network::read_all_conf($o->{prefix}, $o->{netc} ||= {}, $o->{intf} ||= {}, $o->{netcnx} ||= {});
     };
-    log::l("summaryBefore: network configuration: ", formatError($@));
+    log::l("summaryBefore: network configuration: ", formatError($@)) if $@;
 }
 
 sub summary_prompt {
