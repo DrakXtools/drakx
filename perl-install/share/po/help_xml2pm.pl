@@ -42,6 +42,12 @@ sub save_help {
     open F, "| LC_ALL=fr iconv -f utf8 -t ascii//TRANSLIT > ../../help.pm";
     print F q{package help;
 use common;
+
+# IMPORTANT: Don't edit this File - It is automatically generated 
+#            from the manuals !!! 
+#            Write a mail to <doc@linux-mandrake.com> if you want 
+#            it changed.
+
 %steps = (
 empty => '',
 };
