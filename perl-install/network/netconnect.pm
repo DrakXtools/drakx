@@ -462,7 +462,14 @@ my $file = "$dir/draknet$suffix";
 }
 
 sub get_net_device {
-    ${{ read_raw_net_conf() }}{InternetInterface};
+	#${{ read_raw_net_conf() }}{InternetInterface};
+	my $connect_file = "/etc/sysconfig/network-scripts/net_cnx_up";
+	my $network_file = "/etc/sysconfig/network";
+	if (cat_("$prefix$connect_file") =~ /network/) {
+		${{getVarsFromSh("$prefix$network_file")}}{GATEWAYDEV};
+	} else {
+		"ppp+";
+	};
 }
 
 sub read_net_conf {
