@@ -1,3 +1,50 @@
+2005/02/15  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/activefw.pm: initial import
+
+	* standalone/net_applet: remove unneeded variable
+	use network::activefw;
+
+2005/02/15  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/th.po: small fix
+	small fix
+	automerging
+
+	* share/po/nb.po: corrected encoding
+
+	* share/po/ltg.po, share/po/ky.po, share/po/uz.po, share/po/ms.po,
+	share/po/ro.po, share/po/fur.po, share/po/br.po, share/po/hr.po,
+	share/po/tr.po, share/po/ta.po, share/po/sr@Latn.po, share/po/sq.po,
+	share/po/ga.po, share/po/be.po, share/po/mn.po, share/po/am.po,
+	share/po/ko.po, share/po/sr.po, share/po/lt.po, share/po/eo.po,
+	share/po/el.po, share/po/lv.po, share/po/uz@Latn.po: automerging
+
+2005/02/15  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: Even more fixes:)
+
+2005/02/15  Pixel  <pixel at mandrakesoft.com>
+
+	* mygtk2.pm: add FileChooser creation and rollback ugly ->run thing
+	(hopefully now unneeded)
+
+	* install_steps_gtk.pm, diskdrake/interactive.pm, install_any.pm,
+	install_steps_interactive.pm: replace load/save from floppy with using
+	media_browser()
+
+	* ugtk2.pm: _ask_dir and _ask_file now use FileChooser
+
+	* tools/cvslog2changelog.pl: fix typo
+
+	* interactive/gtk.pm, interactive.pm: create ->ask_filename and
+	->ask_directory to replace ->ask_file
+
+2005/02/15  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps_gtk.pm, pkgs.pm: Support media size check when copying
+	every rpm on HD
+
 2005/02/14  Funda Wang <fundawang at linux.net.cn>
 
 	* lang.pm: Modified font settings for zh_CN and zh_TW, 10pt would be fine
@@ -44895,7 +44942,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1008 2005/02/10 16:09:01 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1009 2005/02/14 11:54:59 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
