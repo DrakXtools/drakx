@@ -40,7 +40,7 @@ sub rooted {
     ($stdout_mode, $stdout_raw, @args) = @args if $args[0] =~ /^>>?$/;
     ($stderr_mode, $stderr_raw, @args) = @args if $args[0] =~ /^2>>?$/;
     
-    $ENV{HOME} || $::isInstall or die q($HOME is unset, so I don't know where to put my temporary files);
+    $ENV{HOME} || $::isInstall or $ENV{HOME} = '/root';
     my $stdout = $stdout_raw && (ref($stdout_raw) ? "$ENV{HOME}/tmp/.drakx-stdout.$$" : "$root$stdout_raw");
     my $stderr = $stderr_raw && (ref($stderr_raw) ? "$ENV{HOME}/tmp/.drakx-stderr.$$" : "$root$stderr_raw");
 
