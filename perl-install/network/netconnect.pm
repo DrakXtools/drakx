@@ -660,7 +660,7 @@ or skip and do it later."),
 Download it at:
 %s
 and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.net/speedtouch/speedtouch-20011007.tar.bz2'),
-                    next => "adsl_protocol",
+                    next => "adsl_provider",
                    },
          
 
