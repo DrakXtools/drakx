@@ -388,7 +388,7 @@ sub ask_browse_tree_info {
     my %toolbar = @toolbar;
     $toolbar->set_button_relief("none");
     foreach (grep_index { $::i % 2 == 0 } @toolbar) {
-	gtksignal_connect($toolbar->append_item(undef, $toolbar{$_}[0], undef, gtkpng("$ENV{SHARE_PATH}/$_.png")),
+	gtksignal_connect($toolbar->append_item(undef, $toolbar{$_}[0], undef, gtkpng("$_.png")),
 			  clicked => $toolbar{$_}[1]);
     }
     $toolbar->set_style("icons");
