@@ -66,6 +66,7 @@ sub adsl_ask_info {
 #- output:
 #-  true/false : success|failed
 sub adsl_detect {
+    return 0;
     my ($interface) = @_;
     run_program::rooted($prefix, "ifconfig $interface 10.0.0.10 netmask 255.255.255.0");
     my $ret=run_program::rooted($prefix, "/bin/ping -c 1 10.0.0.138  2> /dev/null");
