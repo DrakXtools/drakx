@@ -128,13 +128,15 @@ Do you prefer autodetect UPS devices connected to this machine or  ?"),
                                      N("UPS driver configuration") . "\n\n" . N("We are configuring the \"%s\" UPS from \"%s\".
 Please fill in its name, its driver and its port.", $model, $vendor);
                                  },
-                                 data => [
-                                          { label => N("Name:"),   val_ref => \\$name, help => N("The name of your ups") },
-                                          { label => N("Driver:"), val_ref => \\$driver, help => N("The driver that manage your ups") },
-                                          { label => N("Port:"),   val_ref => \\$port, format => \&mouse::serial_port2text, type => "combo",
-                                            list => [ &mouse::serial_ports() ], not_edit => 0, 
-                                            help => N("The port on which is connected your ups") },
-                                         ],
+                                 data => sub {
+                                     [
+                                      { label => N("Name:"),   val => \$name, help => N("The name of your ups") },
+                                      { label => N("Driver:"), val => \$driver, help => N("The driver that manage your ups") },
+                                      { label => N("Port:"),   val => \$port, format => \&mouse::serial_port2text, type => "combo",
+                                        list => [ &mouse::serial_ports() ], not_edit => 0, 
+                                        help => N("The port on which is connected your ups") },
+                                     ];
+                                 },
                                  next => "end",
                                 },
                       end => {
