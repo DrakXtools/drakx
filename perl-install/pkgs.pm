@@ -846,12 +846,6 @@ sub selectPackagesToUpgrade($$$;$$) {
 				 'compat-libs' => 1,
 				);
 
-	#- these package are not named as ours, need to be translated before working.
-	#- a version may follow to setup a constraint 'installed version greater than'.
-	my %otherPackageToRename = (
-				    'qt' => [ 'qt2', '2.0' ],
-				    'qt1x' => [ 'qt' ],
-				   );
 	#- generel purpose for forcing upgrade of package whatever version is.
 	my %packageNeedUpgrade = (
 				  'lilo' => 1, #- this package has been misnamed in 7.0.
@@ -894,10 +888,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 
 	    #- select packages which obseletes other package, obselete package are not removed,
 	    #- should we remove them ? this could be dangerous !
-	    foreach (values %{$packages->{names}}) {
-		my $p = $_;
-
-		#- TODO take into account version number and flags (that's why regexp :-)
+	    foreach my $p (values %{$packages->{names}}) {
 		$ask_child->(packageName($p), "obsoletes", sub {
 				 #- take care of flags and version and release if present
 				 if ($_[0] =~ /^(\S*)\s*(\S*)\s*([^\s-]*)-?(\S*)/ && c::rpmdbNameTraverse($db, $1) > 0) {
@@ -919,18 +910,15 @@ sub selectPackagesToUpgrade($$$;$$) {
 						     (c::headerGetEntry($header, 'name'). '-' .
 						      c::headerGetEntry($header, 'version'). '-' .
 						      c::headerGetEntry($header, 'release')));
-				 my $renaming = $otherPackage && $otherPackageToRename{c::headerGetEntry($header, 'name')};
-				 my $name = $renaming &&
-				   (!$renaming->[1] || versionCompare(c::headerGetEntry($header, 'version'),
-								      $renaming->[1]) >= 0) && $renaming->[0];
-				 $name and $packageNeedUpgrade{$name} = 1; #- keep in mind to force upgrading this package.
-				 my $p = $packages->{names}{$name || c::headerGetEntry($header, 'name')};
+				 my $p = $packages->{names}{c::headerGetEntry($header, 'name')};
 
 				 if ($p) {
 				     my $version_cmp = versionCompare(c::headerGetEntry($header, 'version'), packageVersion($p));
 				     my $version_rel_test = $version_cmp > 0 || $version_cmp == 0 &&
 				       versionCompare(c::headerGetEntry($header, 'release'), packageRelease($p)) >= 0;
-				     if ($version_rel_test) { #- by default, package selecting are upgrade whatever version is !
+				     if ($packageNeedUpgrade{packageName($p)}) {
+					 log::l("package ". packageName($p) ." need to be upgraded");
+				     } elsif ($version_rel_test) { #- by default, package are upgraded whatever version is !
 					 if ($otherPackage && $version_cmp <= 0) {
 					     log::l("force upgrading $otherPackage since it will not be updated otherwise");
 					 } else {
@@ -946,7 +934,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 					 $toRemove{$otherPackage} = 1; #- force removing for theses other packages, select our.
 				     }
 				 } else {
-				     if (! exists $obsoletedPackages{$name || c::headerGetEntry($header, 'name')}) {
+				     if (! exists $obsoletedPackages{c::headerGetEntry($header, 'name')}) {
 					 my @files = c::headerGetEntry($header, 'filenames');
 					 @installedFilesForUpgrade{grep { ($_ !~ m|^/etc/rc.d/| && $_ !~ m|\.la$| &&
 									   ! -d "$prefix/$_" && ! -l "$prefix/$_") } @files} = ();
@@ -955,8 +943,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 			     });
 
 	    #- find new packages to upgrade.
-	    foreach (values %{$packages->{names}}) {
-		my $p = $_;
+	    foreach my $p (values %{$packages->{names}}) {
 		my $skipThis = 0;
 		my $count = c::rpmdbNameTraverse($db, packageName($p), sub {
 						     my ($header) = @_;
@@ -1000,9 +987,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 
 	    #- unmark all files for all packages marked for upgrade. it may not have been done above
 	    #- since some packages may have been selected by depsList.
-	    foreach (values %{$packages->{names}}) {
-		my $p = $_;
-
+	    foreach my $p (values %{$packages->{names}}) {
 		if (packageFlagSelected($p)) {
 		    $ask_child->(packageName($p), "files", sub {
 				     delete $installedFilesForUpgrade{$_[0]};
@@ -1016,9 +1001,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 	    #- another special case are for devel packages where fixes over the time has
 	    #- made some files moving between the normal package and its devel couterpart.
 	    #- if only one file is affected, no devel package is selected.
-	    foreach (values %{$packages->{names}}) {
-		my $p = $_;
-
+	    foreach my $p (values %{$packages->{names}}) {
 		unless (packageFlagSelected($p)) {
 		    my $toSelect = 0;
 		    $ask_child->(packageName($p), "files", sub {
@@ -1062,9 +1045,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 	}
 
 	#- let the parent known about what we found here!
-	foreach (values %{$packages->{names}}) {
-	    my $p = $_;
-
+	foreach my $p (values %{$packages->{names}}) {
 	    print UPGRADE_OUTPUT "select:" . packageName($p) . "\n" if packageFlagSelected($p);
 	}
 
@@ -1108,9 +1089,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 
     #- keep a track of packages that are been selected for being upgraded,
     #- these packages should not be unselected (unless expertise)
-    foreach (values %{$packages->{names}}) {
-	my $p = $_;
-
+    foreach my $p (values %{$packages->{names}}) {
 	packageSetFlagUpgrade($p, 1) if packageFlagSelected($p);
     }
 }
