@@ -469,7 +469,7 @@ sub choosePackages {
 
     #- this is done at the very beginning to take into account
     #- selection of CD by user if using a cdrom.
-    $o->chooseCD($packages) if $o->{method} eq 'cdrom';
+    $o->chooseCD($packages) if $o->{method} eq 'cdrom' && !$::oem;
 
     my $availableC = install_steps::choosePackages(@_);
     my $individual = $::expert;
@@ -749,7 +749,7 @@ sub installPackages {
 	my ($method, $medium) = @_;
 
 	#- if not using a cdrom medium, always abort.
-	$method eq 'cdrom' and do {
+	$method eq 'cdrom' && !$::oem and do {
 	    my $name = pkgs::mediumDescr($o->{packages}, $medium);
 	    local $| = 1; print "\a";
 	    my $r = $name !~ /Application/ || ($o->{useless_thing_accepted2} ||= $o->ask_from_list_('', formatAlaTeX($com_license), [ __("Accept"), __("Refuse") ], "Accept") eq "Accept");
