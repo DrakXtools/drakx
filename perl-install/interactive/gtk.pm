@@ -592,11 +592,15 @@ sub ask_fromW {
 	}
     };
 
+    my $set_advanced_raw = sub {
+        ($advanced) = @_;
+        $advanced ? $advanced_pack->show : $advanced_pack->hide;
+    };
     my $set_advanced = sub {
 	($advanced) = @_;
 	$set_default_size->() if $advanced;
 	$update->($common->{callbacks}{advanced}) if $advanced;
-	$advanced ? $advanced_pack->show : $advanced_pack->hide;
+	$set_advanced_raw->($advanced);
 	@widgets = (@widgets_always, if_($advanced, @widgets_advanced));
 	$mainw->sync; #- for $set_all below (mainly for the set of clist)
 	$set_all->(); #- must be done when showing advanced lists (to center selected value)
@@ -661,7 +665,8 @@ sub ask_fromW {
     }
     gtkadd($mainw->{window}, $pack);
     $set_default_size->() if $has_scroll_always;
-    $set_advanced->($common->{advanced_state} || $::expert);
+    $set_advanced->($common->{advanced_state});
+    $set_advanced_raw->($::expert) if $::isStandalone;
     
     my $widget_to_focus =
       $common->{focus_cancel} ? $mainw->{cancel} :
