@@ -165,14 +165,6 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
         static int already_probed_usb_controllers = 0;
         static int already_loaded_usb_scsi = 0;
 
-        if (type == SCSI_ADAPTERS && already_probed_usb_controllers && !already_loaded_usb_scsi) {
-                already_loaded_usb_scsi = 1;
-                /* we can't allow additional modules floppy since we need usbkbd for keystrokes of usb keyboards */
-                my_insmod("usb-storage", SCSI_ADAPTERS, NULL, 0); 
-                if (module_already_present("ieee1394"))
-                        my_insmod("sbp2", SCSI_ADAPTERS, NULL, 0);
-        }
-
 	/* ---- PCI probe ---------------------------------------------- */
 	{
 		FILE * f = NULL;
@@ -354,6 +346,16 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
                         fclose(f);
 	}
 #endif
+
+        /* be sure to load usb-storage after SCSI adapters, so that they are in
+           same order than reboot, so that naming is the same */
+        if (type == SCSI_ADAPTERS && already_probed_usb_controllers && !already_loaded_usb_scsi) {
+                already_loaded_usb_scsi = 1;
+                /* we can't allow additional modules floppy since we need usbkbd for keystrokes of usb keyboards */
+                my_insmod("usb-storage", SCSI_ADAPTERS, NULL, 0); 
+                if (module_already_present("ieee1394"))
+                        my_insmod("sbp2", SCSI_ADAPTERS, NULL, 0);
+        }
 }
 
 
