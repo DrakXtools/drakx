@@ -604,8 +604,7 @@ sub setupBootloader {
 
 	my $boot = $o->{hds}[0]{device};
 	my $onmbr = "/dev/$boot" eq $b->{boot};
-	$b->{boot} = "/dev/$boot" if !$onmbr &&
-	  $o->ask_from_list_(_("LILO Installation"),
+	$b->{boot} = "/dev/$boot" if $o->ask_from_list_(_("LILO Installation"),
 			     _("Where do you want to install the bootloader?"),
 			     \@l, $l[!$onmbr]) eq $l[0];
     } elsif ($more || !$::beginner) {
