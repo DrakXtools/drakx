@@ -823,6 +823,7 @@ sub install_silo {
 sub make_label_lilo_compatible {
     my ($label) = @_; 
     $label = substr($label, 0, 15); #- lilo doesn't handle more than 15 char long labels
+    $label =~ s/ /_/g; #- lilo does not support blank character in image names, labels or aliases
     qq("$label");
 }
 
