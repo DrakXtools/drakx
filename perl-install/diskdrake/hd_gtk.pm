@@ -4,7 +4,6 @@ use diagnostics;
 use strict;
 
 use common;
-use resize_fat::main;
 use ugtk2 qw(:helpers :wrappers :create);
 use partition_table qw(:types);
 use partition_table::raw;

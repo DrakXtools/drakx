@@ -650,6 +650,7 @@ sub Resize {
 	    #- try to resize without losing data
 	    my $_w = $in->wait_message(N("Resizing"), N("Computing FAT filesystem bounds"));
 
+	    require resize_fat::main;
 	    $nice_resize{fat} = resize_fat::main->new($part->{device}, devices::make($part->{device}));
 	    $min = max($min, $nice_resize{fat}->min_size);
 	    $max = min($max, $nice_resize{fat}->max_size);	    
