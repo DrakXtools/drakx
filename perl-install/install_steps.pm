@@ -821,13 +821,11 @@ sub setupBootloaderBefore {
 					  detect_devices::matching_desc('GeForce.*Integrated') #- needed for fbdev driver (hack).
 					 );
 
-	#- propose the default fb mode for kernel fb, if aurora is installed too.
-	my $need_fb;
-	foreach (qw(Aurora bootsplash)) {
+	#- propose the default fb mode for kernel fb, if aurora or bootsplash is installed.
+	my $need_fb = grep {
 	    my $p = pkgs::packageByName($o->{packages}, $_);
-	    $p && pkgs::packageFlagInstalled($p) and $need_fb = 1;
-	}
-
+	    $p && pkgs::packageFlagInstalled($p);
+	} 'Aurora', 'bootsplash';
         bootloader::suggest($o->{prefix}, $o->{bootloader}, $o->{all_hds}{hds}, $o->{fstab},
 			    ($force_vga || $vga && $need_fb) && $o->{vga});
 	bootloader::suggest_floppy($o->{bootloader}) if $o->{security} <= 3 && arch() !~ /ppc/;
