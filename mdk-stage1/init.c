@@ -336,9 +336,26 @@ void unmount_filesystems(void)
                 fd = open("/dev/cdrom", O_RDONLY|O_NONBLOCK, 0);
                 if (fd > 0) {
                         ioctl(fd, CDROM_LOCKDOOR, 0);
+                        close(fd);
+                }
+                fd = open("/dev/cdrom", O_RDONLY|O_NONBLOCK, 0);
+                if (fd > 0) {
+                        if (!ioctl(fd, CDROMEJECT, 0))
+                                goto ejected;
+                        close(fd);
+                }
+                fd = open("/dev/cdrom", O_RDONLY|O_NONBLOCK, 0);
+                if (fd > 0) {
+                        ioctl(fd, CDROM_LOCKDOOR, 0);
+                        close(fd);
+                }
+                fd = open("/dev/cdrom", O_RDONLY|O_NONBLOCK, 0);
+                if (fd > 0) {
                         ioctl(fd, CDROMEJECT, 0);
                         close(fd);
                 }
+        ejected:
+                close(fd);
         }
 #endif
 	
