@@ -24,7 +24,7 @@ use modules;
 #-#####################################################################################
 #- Functions
 #-#####################################################################################
-my $vmlinuz_regexp = 'vmlinuz';
+my $vmlinuz_regexp = 'vmlinuz|win4lin';
 my $decompose_vmlinuz_name = qr/((?:$vmlinuz_regexp).*)-(\d+\.\d+.*)/;
 
 sub expand_vmlinuz_symlink {
@@ -86,9 +86,10 @@ sub vmlinuz2kernel_str {
 }
 sub kernel_str2label {
     my ($kernel, $o_use_long_name) = @_;
+    my $base = $kernel->{basename} eq 'vmlinuz' ? 'linux' : $kernel->{basename};
     $o_use_long_name || $kernel->{use_long_name} ?
-      sanitize_ver("linux-$kernel->{version}") : 
-        $kernel->{ext} ? "linux$kernel->{ext}" : 'linux';
+      sanitize_ver("$base-$kernel->{version}") : 
+        $kernel->{ext} ? "$base$kernel->{ext}" : $base;
 }
 
 sub get {
@@ -558,14 +559,15 @@ sub get_kernels_and_labels {
 sub sanitize_ver {
     my ($string) = @_;
 
-    my ($main_version, undef, $extraversion, $rest) = 
-      $string =~ m!(\d+\.\d+\.\d+)(-((?:pre|rc)\d+))?(.*)!;
+    my ($name, $main_version, undef, $extraversion, $rest) = 
+      $string =~ m!(.*)(\d+\.\d+\.\d+)(-((?:pre|rc)\d+))?(.*)!;
 
     if (my ($mdkver, $cpu, $nproc, $mem) = $rest =~ m|-(.+)-(.+)-(.+)-(.+)|) {
 	$rest = "$cpu$nproc$mem-$mdkver";
     }
+    $name = '' if $name eq 'linux-';
 
-    my $return = "$main_version$extraversion$rest";
+    my $return = "$name$main_version$extraversion$rest";
 
     $return =~ s|\.||g;
     $return =~ s|mdk||;
