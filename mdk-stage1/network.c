@@ -773,7 +773,7 @@ static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port,
 					medialist, &selected_medium);
 
 		if (results == RETURN_BACK) {
-			return RETURN_ERROR;
+			return RETURN_BACK;
 		} else if (results == RETURN_OK) {
 			if (!strcmp(selected_medium, medialist[0])) {
 				/* enter the mirror manually */
@@ -909,7 +909,7 @@ enum return_type ftp_prepare(void)
 
 			results = choose_mirror_from_list(http_proxy_host, http_proxy_port, "ftp", &answers[0], &answers[1]);
 
-			if (results != RETURN_OK)
+			if (results == RETURN_BACK)
 				return ftp_prepare();
 		}
 
