@@ -227,7 +227,7 @@ sub selectKeyboard {
 
     return unless $o->{isUpgrade} || !$::beginner || $clicked;
 
-    $o->{keyboard} = (keyboard::read($o->{prefix}))[0] if $o->{isUpgrade} && !$clicked && !$o->{keyboard};
+    $o->{keyboard} = (keyboard::read($o->{prefix}))[0] if $o->{isUpgrade} && !$clicked && !$o->{keyboard_force};
     $o->selectKeyboard if !$::beginner || $clicked;
 
     #- if we go back to the selectKeyboard, you must rewrite

@@ -181,8 +181,11 @@ sub beforeInstallPackages {
 
 sub installPackages($$) {
     my ($o, $packages) = @_;
-    my $toInstall = [ grep { $_->{selected} && !$_->{installed} } values %$packages ];
-    pkgs::install($o->{prefix}, $toInstall);
+    #-    my $toInstall = [ grep { $_->{selected} && !$_->{installed} } values %$packages ];
+    my @toInstall = $packages->{basesystem}{selected} && !$packages->{basesystem}{installed} ? ($packages->{basesystem}) : ();
+    push @toInstall, grep { $_->{base} && $_->{selected} && !$_->{installed} } values %$packages;
+    push @toInstall, grep { !$_->{base} && $_->{selected} && !$_->{installed} } values %$packages;
+    pkgs::install($o->{prefix}, \@toInstall);
 }
 
 sub afterInstallPackages($) {
