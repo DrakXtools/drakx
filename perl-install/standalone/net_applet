@@ -80,7 +80,7 @@ my %actions = (
                    choice_selected => sub { $_[0] eq $netcnx->{PROFILE} },
                    launch => sub {
                        $netcnx->{PROFILE} = $_[0];
-                       network::netconnect::set_profile($netcnx);
+                       network::tools::bg_command_as_root('/sbin/set-netprofile', $netcnx->{PROFILE});
                        checkNetworkForce();
                    }
                },
