@@ -5,23 +5,25 @@
 # Mohammad DAMT <mdamt@cdl2000.com>, 1999-2001
 # Andy <chandy@indo.net.id>, 1999
 # Kelana <nk@telkom.net>, 1999
+# Bayu Artanto <bayuart@yahoo.com>, 2005.
+# Willy Sudiarto Raharjo <willysr@jogja.citra.net.id>, 2005
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2004-09-15 13:29+0200\n"
-"Last-Translator: Budi Rachmanto <rac@linux-mandrake.com>\n"
-"Language-Team: Bahasa Indonesia <id@li.org>\n"
+"PO-Revision-Date: 2005-03-13 23:40+0700\n"
+"Last-Translator: bayu artanto <bayuart@yahoo.com>\n"
+"Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.6\n"
 
 #: ../move/move.pm:292
-#, fuzzy, c-format
+#, c-format
 msgid "Which USB key do you want to format?"
-msgstr "Tipe entri mana yang hendak ditambahkan?"
+msgstr "USB mana yang ingin di format?"
 
 #: ../move/move.pm:296
 #, c-format
@@ -32,11 +34,14 @@ msgid ""
 "We advise you to unplug all other USB storage devices while doing this "
 "operation."
 msgstr ""
+"Anda akan memformat divais USB \"%s\". Ini akan menghapus semua data didalamnya.\n"
+"Pastikan divais USB ini yang akan diformat.\n"
+"Kami menyarankan Anda untuk melepas divais USB lainnya selama proses ini berlangsung."
 
 #: ../move/move.pm:448 ../move/move.pm:460
-#, fuzzy, c-format
+#, c-format
 msgid "Key is not writable"
-msgstr "XawTV tak diinstal"
+msgstr "Kunci tidak dapat ditulisi"
 
 #: ../move/move.pm:450
 #, c-format
@@ -44,6 +49,8 @@ msgid ""
 "The USB key seems to have write protection enabled. Please\n"
 "unplug it, remove write protection, and then plug it again."
 msgstr ""
+"Tampaknya proteksi penulisan USB diaktifkan. Harap\n"
+"lepas USB, hilangkan proteksi di USB, kemudian pasang kembali."
 
 #: ../move/move.pm:452
 #, c-format
@@ -53,7 +60,7 @@ msgstr "Coba lagi"
 #: ../move/move.pm:453 ../move/move.pm:497
 #, c-format
 msgid "Continue without USB key"
-msgstr ""
+msgstr "Teruskan tanpa USB"
 
 #: ../move/move.pm:462
 #, c-format
@@ -65,6 +72,12 @@ msgid ""
 "Click the button to reboot the machine, unplug it, remove write protection,\n"
 "plug the key again, and launch Mandrake Move again."
 msgstr ""
+"Tampaknya proteksi penulisan USB diaktifkan, tetapi USB tidak bisa dilepas dengan\n"
+"aman sekarang.\n"
+"\n"
+"\n"
+"Klik tombol reboot pada komputer, lepaskan USB, hilangkan proteksinya,\n"
+"pasang kembali USB, lalu jalankan Mandrake Move lagi."
 
 #: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1317
 #, c-format
@@ -85,6 +98,16 @@ msgid ""
 "able to use Mandrake Move as a normal live Mandrake\n"
 "Operating System."
 msgstr ""
+"USB Anda tidak mempunyai partisi Windows (FAT). Diperlukan minimal\n"
+"satu partisi untuk melanjutkan (selain itu, partisi FAT lebih standar sehingga \n"
+"Anda bisa memindahkan dan mengakses file Anda dari komputer\n"
+"Windows). Silahkan pasang USB yang berisi partisi\n"
+"Windows didalamnya.\n"
+"\n"
+"\n"
+"Anda bisa melanjutkan proses tanpa USB - Anda akan tetap \n"
+"bisa menjalankan Mandrake Move seperti layaknya Sistem Operasi \n"
+"Mandrake."
 
 #: ../move/move.pm:483
 #, c-format
@@ -101,41 +124,52 @@ msgid ""
 "able to use Mandrake Move as a normal live Mandrake\n"
 "Operating System."
 msgstr ""
+"Kami tidak mendeteksi adanya USB pada sistem Anda. Jika \n"
+"Anda memasang USB sekarang, Mandrake Move dapat \n"
+"menyimpan data secara tranparan ke direktori home dan\n"
+"konfigurasi umum sistem, untuk boot selanjutnya dikomputer ini\n"
+"atau komputer lain. Catatan:jika USB dipasang sekarang, tunggu beberapa\n"
+"detik sebelum mendeteksi lagi.\n"
+"\n"
+"\n"
+"Anda bisa melanjutkan proses tanpa USB - Anda akan tetap \n"
+"bisa menjalankan Mandrake Move seperti layaknya Sistem Operasi \n"
+"Mandrake."
 
 #: ../move/move.pm:494
 #, c-format
 msgid "Need a key to save your data"
-msgstr ""
+msgstr "Membutuhkan USB untuk menyimpan data"
 
 #: ../move/move.pm:496
 #, c-format
 msgid "Detect USB key again"
-msgstr ""
+msgstr "Mendeteksi USB lagi"
 
 #: ../move/move.pm:517
-#, fuzzy, c-format
+#, c-format
 msgid "Setting up USB key"
-msgstr "Setel perangkat PNP ISA: "
+msgstr "Setting USB"
 
 #: ../move/move.pm:517
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait, setting up system configuration files on USB key..."
-msgstr "Tunggu, tingkat keamanan sedang diset..."
+msgstr "Harap tunggu, sedang melakukan setting file konfigurasi sistem pada USB..."
 
 #: ../move/move.pm:546
 #, c-format
 msgid "Enter your user information, password will be used for screensaver"
-msgstr ""
+msgstr "Masukkan informasi user, katasandi akan digunakan untuk screensaver"
 
 #: ../move/move.pm:556
-#, fuzzy, c-format
+#, c-format
 msgid "Auto configuration"
-msgstr "Konfigurasi pribadi"
+msgstr "Konfigurasi otomatis"
 
 #: ../move/move.pm:556
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait, detecting and configuring devices..."
-msgstr "Tunggu, tingkat keamanan sedang diset..."
+msgstr "Harap tunggu, sedang mendeteksi dan mengkonfigurasi divais...."
 
 #: ../move/move.pm:604 ../move/move.pm:660 ../move/move.pm:664
 #: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:116 diskdrake/interactive.pm:227
@@ -195,7 +229,7 @@ msgstr "Tunggu, tingkat keamanan sedang diset..."
 #: standalone/scannerdrake:946 wizards.pm:95 wizards.pm:99 wizards.pm:121
 #, c-format
 msgid "Error"
-msgstr "Ada Kesalahan"
+msgstr "Kesalahan"
 
 #: ../move/move.pm:605 install_steps.pm:83
 #, c-format
@@ -203,13 +237,13 @@ msgid ""
 "An error occurred, but I do not know how to handle it nicely.\n"
 "Continue at your own risk."
 msgstr ""
-"Ada error, tapi cara mengatasinya tak diketahui.\n"
-"Jalan terus tapi resiko tanggung sendiri."
+"Terjadi kesalahan, tetapi tidak diketahui cara mengatasinya dengan baik.\n"
+"Lanjutkan dengan resiko ditanggung sendiri."
 
 #: ../move/move.pm:660 install_steps_interactive.pm:38
 #, c-format
 msgid "An error occurred"
-msgstr "Ada error"
+msgstr "Terjadi kesalahan"
 
 #: ../move/move.pm:666
 #, c-format
@@ -230,31 +264,46 @@ msgid ""
 "a look at log files in console #3 and #4 to try to\n"
 "guess what's happening."
 msgstr ""
+"Terjadi kesalahan:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"Hal ini bisa datang dari file konfigurasi sistem pada USB \n"
+"yang terkorupsi, dalam kasus ini menghapus lalu mereboot \n"
+"Mandrake Move akan memperbaiki masalah. Untuk melakukannya\n"
+"klik tombol ini.\n"
+"\n"
+"\n"
+"Anda juga bisa mereboot dan melepas USB, atau\n"
+"melihat isinya pada sistem operasi lain, dan atau melihat\n"
+"file log pada konsol #3 dan #4 untuk mencoba\n"
+"melihat apa yang terjadi."
 
 #: ../move/move.pm:681
-#, fuzzy, c-format
+#, c-format
 msgid "Remove system config files"
-msgstr "Hapus file loopback?"
+msgstr "Menghapus file konfigurasi sistem"
 
 #: ../move/move.pm:682
 #, c-format
 msgid "Simply reboot"
-msgstr ""
+msgstr "Boot ulang"
 
 #: ../move/tree/mdk_totem:50 ../move/tree/mdk_totem:96
 #, c-format
 msgid "You can only run with no CDROM support"
-msgstr ""
+msgstr "Anda bisa menjalankan tanpa dukungan CDROM"
 
 #: ../move/tree/mdk_totem:71
-#, fuzzy, c-format
+#, c-format
 msgid "Kill those programs"
-msgstr "akses ke program X"
+msgstr "Kill program itu"
 
 #: ../move/tree/mdk_totem:72
-#, fuzzy, c-format
+#, c-format
 msgid "No CDROM support"
-msgstr "Support radio :"
+msgstr "Tanpa dukungan CDROM"
 
 #: ../move/tree/mdk_totem:76 diskdrake/hd_gtk.pm:95
 #: diskdrake/interactive.pm:1020 diskdrake/interactive.pm:1030
@@ -269,21 +318,23 @@ msgid ""
 "You can not use another CDROM when the following programs are running: \n"
 "%s"
 msgstr ""
+"Anda tidak bisa menggunakan CDROM ketika program berikut berjalan :\n"
+"%s "
 
 #: ../move/tree/mdk_totem:101
 #, c-format
 msgid "Copying to memory to allow removing the CDROM"
-msgstr ""
+msgstr "Menyalin ke memori untuk mengijinkan pelepasan CDROM"
 
 #: Xconfig/card.pm:13
 #, c-format
 msgid "256 kB"
-msgstr "256 kb"
+msgstr "256 kB"
 
 #: Xconfig/card.pm:14
 #, c-format
 msgid "512 kB"
-msgstr "512 kb"
+msgstr "512 kB"
 
 #: Xconfig/card.pm:15
 #, c-format
@@ -328,12 +379,12 @@ msgstr "Server X"
 #: Xconfig/card.pm:160
 #, c-format
 msgid "Choose an X server"
-msgstr "Pilih server X"
+msgstr "Memilih server X"
 
 #: Xconfig/card.pm:192
 #, c-format
 msgid "Multi-head configuration"
-msgstr "Konfigurasi head majemuk"
+msgstr "Konfigurasi multi-head"
 
 #: Xconfig/card.pm:193
 #, c-format
@@ -341,18 +392,18 @@ msgid ""
 "Your system supports multiple head configuration.\n"
 "What do you want to do?"
 msgstr ""
-"Sistem Anda men-support konfigurasi head majemuk.\n"
-"Apa yg ingin Anda lakukan?"
+"Sistem Anda mendukung konfigurasi multiple head.\n"
+"Apa yang ingin Anda lakukan?"
 
 #: Xconfig/card.pm:262
-#, fuzzy, c-format
+#, c-format
 msgid "Can not install Xorg package: %s"
-msgstr "Instalasi paket %s"
+msgstr "Tidak dapat menginstall paket Xorg: %s"
 
 #: Xconfig/card.pm:272
 #, c-format
 msgid "Select the memory size of your graphics card"
-msgstr "Pilih memori kartu grafis Anda"
+msgstr "Pilih ukuran memori kartu grafis Anda"
 
 #: Xconfig/card.pm:349
 #, c-format
@@ -406,12 +457,12 @@ msgid ""
 "NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER."
 msgstr ""
 "Kartu Anda dapat menggunakan akselerasi hardware 3D pada Xorg %s,\n"
-"NAMUN INI BARU DALAM TAHAP PERCOBAAN DAN DAPAT MEMBUAT KOMPUTER ANDA HANG."
+"PERHATIKAN, INI DALAM TAHAP PERCOBAAN DAN DAPAT MEMBUAT KOMPUTER ANDA HANG."
 
 #: Xconfig/main.pm:90 Xconfig/main.pm:91 Xconfig/monitor.pm:117 any.pm:914
 #, c-format
 msgid "Custom"
-msgstr "Custom"
+msgstr "Kebiasaan"
 
 #: Xconfig/main.pm:115 diskdrake/dav.pm:26 help.pm:14
 #: install_steps_interactive.pm:86 printer/printerdrake.pm:737
@@ -452,7 +503,7 @@ msgstr "Opsi"
 #: Xconfig/main.pm:168
 #, c-format
 msgid "Your Xorg configuration file is broken, we will ignore it."
-msgstr ""
+msgstr "File konfigurasi Xorg Anda rusak, akan diabaikan."
 
 #: Xconfig/main.pm:186
 #, c-format
@@ -462,15 +513,15 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"Lakukan perubahan?\n"
+"Simpan perubahan?\n"
 "Konfigurasi sekarang adalah:\n"
 "\n"
 "%s"
 
 #: Xconfig/monitor.pm:112
-#, fuzzy, c-format
+#, c-format
 msgid "Choose a monitor for head #%d"
-msgstr "Pilih monitor"
+msgstr "Pilih Monitor untuk head #%d"
 
 #: Xconfig/monitor.pm:112
 #, c-format
@@ -496,7 +547,7 @@ msgstr "Pembuat"
 #: Xconfig/monitor.pm:130
 #, c-format
 msgid "Plug'n Play probing failed. Please select the correct monitor"
-msgstr "Probe Plug'n Play gagal. Pilihlah monitor yang benar"
+msgstr "Pendeteksian Plug'n Play gagal. Silahkan memilih monitor yang benar"
 
 #: Xconfig/monitor.pm:135
 #, c-format
@@ -512,23 +563,24 @@ msgid ""
 "monitor.\n"
 " If in doubt, choose a conservative setting."
 msgstr ""
-"Ada dua parameter penting, yaitu laju refresh vertikal, yaitu laju\n"
+"Dua parameter penting adalah vertical refresh rate, yaitu \n"
 "kecepatan saat seluruh layar direfresh, dan yang lebih penting lagi adalah\n"
-"laju sync horisontal, yaitu laju kecepatan saat menanyangkan scan line.\n"
+"horisontal sync rate, yaitu kecepatan saat menanyangkan scan line.\n"
 "\n"
-"Anda TIDAK BOLEH mengisi parameter yang tak dapat diimbangi oleh kemampuan\n"
-"monitor Anda, karena ia akan rusak berat.\n"
-"Jika ragu, gunakan setting yang umum."
+"Ini SANGAT PENTING sehingga Anda jangan menentukan jenis monitor dengan jangkauan \n"
+"yang melebihi kemampuan monitor Anda: Anda bisa merusak "
+"monitor Anda.\n"
+"Jika ragu-ragu, gunakan setting yang umum."
 
 #: Xconfig/monitor.pm:142
 #, c-format
 msgid "Horizontal refresh rate"
-msgstr "Laju refresh horisontal"
+msgstr "Kecepatan refresh horisontal"
 
 #: Xconfig/monitor.pm:143
 #, c-format
 msgid "Vertical refresh rate"
-msgstr "Laju refresh vertikal"
+msgstr "kecepatan refresh vertikal"
 
 #: Xconfig/resolution_and_depth.pm:12
 #, c-format
@@ -606,7 +658,7 @@ msgstr "Batal"
 #: ugtk2.pm:1031 ugtk2.pm:1032
 #, c-format
 msgid "Help"
-msgstr "Pertolongan"
+msgstr "Bantuan"
 
 #: Xconfig/test.pm:30
 #, c-format
@@ -616,12 +668,12 @@ msgstr "Tes konfigurasi"
 #: Xconfig/test.pm:31
 #, c-format
 msgid "Do you want to test the configuration?"
-msgstr "Anda ingin tes konfigurasi ini?"
+msgstr "Apakah Anda ingin menguji konfigurasi?"
 
 #: Xconfig/test.pm:31
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
-msgstr "Awas: pengujian kartu grafis ini dapat membekukan komputer"
+msgstr "Peringatan: pengujian kartu grafis ini dapat membuat komputer hang"
 
 #: Xconfig/test.pm:69
 #, c-format
@@ -630,9 +682,9 @@ msgid ""
 "%s\n"
 "Try to change some parameters"
 msgstr ""
-"Ada error:\n"
+"Terjadi kesalahan:\n"
 "%s\n"
-"Cobalah ganti parameternya"
+"Cobalah mengubah beberapa paramater"
 
 #: Xconfig/test.pm:129
 #, c-format
@@ -642,22 +694,22 @@ msgstr "Keluar dalam %d detik"
 #: Xconfig/test.pm:129
 #, c-format
 msgid "Is this the correct setting?"
-msgstr "Sudah benar?"
+msgstr "Apakah seting sudah benar?"
 
 #: Xconfig/various.pm:29
 #, c-format
 msgid "Keyboard layout: %s\n"
-msgstr "Layout papanketik: %s\n"
+msgstr "Layout keyboard: %s\n"
 
 #: Xconfig/various.pm:30
 #, c-format
 msgid "Mouse type: %s\n"
-msgstr "Jenis Mouse: %s\n"
+msgstr "Jenis mouse: %s\n"
 
 #: Xconfig/various.pm:31
 #, c-format
 msgid "Mouse device: %s\n"
-msgstr "Device Mouse: %s\n"
+msgstr "Divais mouse: %s\n"
 
 #: Xconfig/various.pm:33
 #, c-format
@@ -687,7 +739,7 @@ msgstr "Memori grafis: %s KB\n"
 #: Xconfig/various.pm:40
 #, c-format
 msgid "Color depth: %s\n"
-msgstr "Pilihan kedalaman warna: %s\n"
+msgstr "Kedalaman warna: %s\n"
 
 #: Xconfig/various.pm:41
 #, c-format
@@ -711,8 +763,8 @@ msgid ""
 "(Xorg) upon booting.\n"
 "Would you like Xorg to start when you reboot?"
 msgstr ""
-"Komputer Anda bisa diset agar menjalankan X saat booting.\n"
-"Anda mau fasilitas ini?"
+"Komputer Anda bisa diset agar menjalankana antarmuka grafis (Xorg) saat booting.\n"
+"Apakah Anda mau agar Xorg dijalankan ketika Anda reboot?
 
 #: Xconfig/various.pm:87
 #, c-format
@@ -726,14 +778,14 @@ msgid ""
 "\n"
 "Do you have this feature?"
 msgstr ""
-"Kartu grafik Anda tak punya konektor TV-OUT.\n"
+"Kartu grafik Anda tidak memiliki konektor TV-OUT.\n"
 "Ia dapat dikonfigurasikan agar bekerja menggunakan frame-buffer.\n"
 "\n"
 "Untuk ini Anda harus menyambung kartu grafik ke TV sebelum memboot "
 "komputer.\n"
-"Lalu pilih entri \"TVout\" di bootloader\n"
+"Lalu pilih entri \"TVout\" pada bootloader\n"
 "\n"
-"Anda punya fitur ini?"
+"Apakah Anda punya fitur ini?"
 
 #: Xconfig/various.pm:99
 #, c-format
@@ -746,6 +798,8 @@ msgid ""
 "_:weird aspect ratio\n"
 "other"
 msgstr ""
+"_:aspek rasio aneh\n"
+"lainnya"
 
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
@@ -753,12 +807,12 @@ msgstr ""
 #: standalone/service_harddrake:204
 #, c-format
 msgid "Please wait"
-msgstr "Tunggu..."
+msgstr "Harap tunggu"
 
 #: any.pm:140
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader installation in progress"
-msgstr "Instalasi Bootloader"
+msgstr "Proses instalasi Bootloader"
 
 #: any.pm:151
 #, c-format
@@ -770,11 +824,17 @@ msgid ""
 "\n"
 "Assign a new Volume ID?"
 msgstr ""
+"LILO akan memberi Volume ID baru pada drive %s. Namun, mengubah\n"
+"Volume ID disk boot Windows NT, 2000, atau XP adalah kesalahan Windows "
+"yang fatal.\n"
+"Peringatan ini tidak berlaku terhadap disk data Windows 95 atau 98, atau NT.\n"
+"\n"
+"Beri Volume ID baru?"
 
 #: any.pm:162
 #, c-format
 msgid "Installation of bootloader failed. The following error occurred:"
-msgstr "Instalasi bootloader gagal. Ada kesalahan berikut:"
+msgstr "Instalasi bootloader gagal. Terjadi kesalahan berikut:"
 
 #: any.pm:168
 #, c-format
@@ -786,12 +846,12 @@ msgid ""
 " Then type: shut-down\n"
 "At your next boot you should see the bootloader prompt."
 msgstr ""
-"Gantilah bootdevice Open Firmware untuk mengaktifkan bootloader.\n"
+"Anda harus mengganti bootdevice Open Firmware untuk mengaktifkan bootloader.\n"
 " Jika Anda tak melihat prompt bootloader saat reboot, tekan\n"
 " Command-Option-O-F saat reboot dan ketik:\n"
 " setenv boot-device %s,\\\\:tbxi\n"
-" kemudian: shut-down\n"
-"Anda akan melihat prompt bootloader pada boot selanjutnya."
+" kemudian ketikkan: shut-down\n"
+"Pada boot berikutnya, Anda akan melihat prompt bootloader."
 
 #: any.pm:206
 #, c-format
@@ -802,26 +862,26 @@ msgid ""
 "\n"
 "On which drive are you booting?"
 msgstr ""
-"Anda memutuskan instalasi pemuat boot di partisi.\n"
-"Berarti Anda sudah punya pemuat boot di harddisk yang Anda boot (mis: System "
+"Anda memutuskan untuk menginstall bootloader pada partisi.\n"
+"Berarti Anda sudah punya bootloader di harddisk yang Anda boot (mis: System "
 "Commander).\n"
 "\n"
-"Di drive mana Anda boot?"
+"Pada drive mana Anda melakukan booting?"
 
 #: any.pm:229 help.pm:739
 #, c-format
 msgid "First sector of drive (MBR)"
-msgstr "Sektor pertama di drive (MBR)"
+msgstr "Sektor pertama pada drive (MBR)"
 
 #: any.pm:230
 #, c-format
 msgid "First sector of the root partition"
-msgstr "Sektor pertama di partisi root"
+msgstr "Sektor pertama pada partisi root"
 
 #: any.pm:232
 #, c-format
 msgid "On Floppy"
-msgstr "Di disket"
+msgstr "Di Disket"
 
 #: any.pm:234 help.pm:739 printer/printerdrake.pm:3962
 #, c-format
@@ -836,22 +896,22 @@ msgstr "Instalasi LILO/grub"
 #: any.pm:239
 #, c-format
 msgid "Where do you want to install the bootloader?"
-msgstr "Bootloader akan diinstal di mana?"
+msgstr "Dimana Anda akan menginstall Bootloader?"
 
 #: any.pm:264 standalone/drakboot:307
 #, c-format
 msgid "Boot Style Configuration"
-msgstr "Konfigurasi Tipe Boot"
+msgstr "Konfigurasi Gaya Boot"
 
 #: any.pm:266 any.pm:298
 #, c-format
 msgid "Bootloader main options"
-msgstr "Parameter Bootloader utama"
+msgstr "Opsi utama Bootloader"
 
 #: any.pm:270
 #, c-format
 msgid "Give the ram size in MB"
-msgstr "Berikan jumlah RAM dalam satuan MB"
+msgstr "Berikan ukuran RAM dalam MB"
 
 #: any.pm:272
 #, c-format
@@ -863,12 +923,12 @@ msgstr ""
 #: any.pm:273 any.pm:606 authentication.pm:176
 #, c-format
 msgid "The passwords do not match"
-msgstr "Katasandi tidak sama"
+msgstr "Katasandi tidak cocok"
 
 #: any.pm:273 any.pm:606 authentication.pm:176 diskdrake/interactive.pm:1270
 #, c-format
 msgid "Please try again"
-msgstr "Silakan ulangi"
+msgstr "Silahkan coba lagi"
 
 #: any.pm:278 any.pm:301
 #, c-format
@@ -878,12 +938,12 @@ msgstr "Bootloader yang hendak digunakan"
 #: any.pm:280 any.pm:303
 #, c-format
 msgid "Boot device"
-msgstr "Device boot"
+msgstr "Divais boot"
 
 #: any.pm:282
 #, c-format
 msgid "Delay before booting default image"
-msgstr "Delay sebelum boot ke image default"
+msgstr "Jeda sebelum boot ke image default"
 
 #: any.pm:283
 #, c-format
@@ -891,14 +951,14 @@ msgid "Enable ACPI"
 msgstr "Aktifkan ACPI"
 
 #: any.pm:285
-#, fuzzy, c-format
+#, c-format
 msgid "Force no APIC"
-msgstr "Tanpa ACPI"
+msgstr "Tanpa APIC"
 
 #: any.pm:287
-#, fuzzy, c-format
+#, c-format
 msgid "Force No Local APIC"
-msgstr "Tanpa ACPI"
+msgstr "Tanpa APIC Lokal"
 
 #: any.pm:289 any.pm:633 authentication.pm:181 diskdrake/smbnfs_gtk.pm:180
 #: network/netconnect.pm:633 printer/printerdrake.pm:1596
@@ -926,12 +986,12 @@ msgstr "batasi"
 #: any.pm:293
 #, c-format
 msgid "Clean /tmp at each boot"
-msgstr "Hapus /tmp saat boot"
+msgstr "Hapus /tmp tiap kali boot"
 
 #: any.pm:294
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
-msgstr "Ukuran RAM yg tepat (ditemukan %d MB)"
+msgstr "Ukuran RAM yang tepat jika diperlukan (ditemukan %d MB)"
 
 #: any.pm:302
 #, c-format
@@ -941,12 +1001,12 @@ msgstr "Pesan Init"
 #: any.pm:304
 #, c-format
 msgid "Open Firmware Delay"
-msgstr "Delay Open Firmware"
+msgstr "Jeda Open Firmware"
 
 #: any.pm:305
 #, c-format
 msgid "Kernel Boot Timeout"
-msgstr "Timeout Kernel Boot"
+msgstr "Timeout Booting Kernel"
 
 #: any.pm:306
 #, c-format
@@ -961,7 +1021,7 @@ msgstr "Aktifkan boot dari OF?"
 #: any.pm:308
 #, c-format
 msgid "Default OS?"
-msgstr "Default OS?"
+msgstr "OS Standar?"
 
 #: any.pm:361
 #, c-format
@@ -976,7 +1036,7 @@ msgstr "Root"
 #: any.pm:363 any.pm:385
 #, c-format
 msgid "Append"
-msgstr "Sambung"
+msgstr "Tambahkan"
 
 #: any.pm:365 standalone/drakboot:309 standalone/drakboot:313
 #, c-format
@@ -989,9 +1049,9 @@ msgid "Initrd"
 msgstr "Initrd"
 
 #: any.pm:368
-#, fuzzy, c-format
+#, c-format
 msgid "Network profile"
-msgstr "Browser jaringan"
+msgstr "Profil Jaringan"
 
 #: any.pm:377 any.pm:382 any.pm:384
 #, c-format
@@ -1002,12 +1062,12 @@ msgstr "Label"
 #: standalone/drakfloppy:90 standalone/draksec:52
 #, c-format
 msgid "Default"
-msgstr "Default"
+msgstr "Standar"
 
 #: any.pm:386
 #, c-format
 msgid "Initrd-size"
-msgstr "Initrd-size"
+msgstr "Ukuran Initrd"
 
 #: any.pm:388
 #, c-format
@@ -1017,17 +1077,17 @@ msgstr "NoVideo"
 #: any.pm:399
 #, c-format
 msgid "Empty label not allowed"
-msgstr "Label tak boleh kosong"
+msgstr "Label kosong tidak diperbolehkan"
 
 #: any.pm:400
 #, c-format
 msgid "You must specify a kernel image"
-msgstr "Anda harus tentukan image kernel"
+msgstr "Anda harus menentukan image kernel"
 
 #: any.pm:400
 #, c-format
 msgid "You must specify a root partition"
-msgstr "Anda harus tentukan partisi swap"
+msgstr "Anda harus menentukan partisi root"
 
 #: any.pm:401
 #, c-format
@@ -1065,8 +1125,8 @@ msgid ""
 "Here are the entries on your boot menu so far.\n"
 "You can create additional entries or change the existing ones."
 msgstr ""
-"Ini adalah entri yang lain lagi.\n"
-"Anda boleh tambahkan atau mengubah yang sudah ada."
+"Ini adalah daftar pada menu boot Anda yang ada saat ini.\n"
+"Anda boleh menambah atau mengubah yang sudah ada."
 
 #: any.pm:592
 #, c-format
@@ -1076,7 +1136,7 @@ msgstr "akses ke program X"
 #: any.pm:593
 #, c-format
 msgid "access to rpm tools"
-msgstr "akses ke peralatan rpm"
+msgstr "akses ke perkakas rpm"
 
 #: any.pm:594
 #, c-format
@@ -1091,17 +1151,17 @@ msgstr "akses ke file administratif"
 #: any.pm:596
 #, c-format
 msgid "access to network tools"
-msgstr "akses ke peralatan jaringan"
+msgstr "akses ke perkakas jaringan"
 
 #: any.pm:597
 #, c-format
 msgid "access to compilation tools"
-msgstr "akses ke peralatan kompilasi"
+msgstr "akses ke perkakas kompilasi"
 
 #: any.pm:602
 #, c-format
 msgid "(already added %s)"
-msgstr "(sudah ditambahkan %s)"
+msgstr "(%s sudah ditambahkan)"
 
 #: any.pm:607
 #, c-format
@@ -1111,13 +1171,14 @@ msgstr "Katasandi ini terlalu sederhana"
 #: any.pm:608
 #, c-format
 msgid "Please give a user name"
-msgstr "Silakan tulis nama pengguna"
+msgstr "Silakan berikan nama pengguna"
 
 #: any.pm:609
 #, c-format
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr "Nama pengguna hanya boleh terdiri dari huruf, angka, `-' dan `_'"
+msgstr ""
+"Nama pengguna hanya boleh terdiri dari huruf, angka, `-' dan `_'"
 
 #: any.pm:610
 #, c-format
@@ -1156,12 +1217,12 @@ msgstr "Selesai"
 #: any.pm:620 help.pm:51
 #, c-format
 msgid "Accept user"
-msgstr "Buat pengguna baru"
+msgstr "Menerima pengguna"
 
 #: any.pm:631
 #, c-format
 msgid "Real name"
-msgstr "Nama Lengkap"
+msgstr "Nama asli"
 
 #: any.pm:632 standalone/drakbackup:1648
 #, c-format
@@ -1171,27 +1232,27 @@ msgstr "Nama login"
 #: any.pm:635
 #, c-format
 msgid "Shell"
-msgstr "Cangkang"
+msgstr "Shell"
 
 #: any.pm:637
 #, c-format
 msgid "Icon"
 msgstr "Ikon"
 
-#: any.pm:684 security/l10n.pm:14
+#: tis.pm:684 security/l10n.pm:14
 #, c-format
 msgid "Autologin"
-msgstr "Autologin"
+msgstr "Login otomatis"
 
 #: any.pm:685
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
-msgstr "Komputer Anda dapat diset agar secara otomatis login dg satu pengguna."
+msgstr "Komputer dapat diset agar secara otomatis login dengan satu pengguna."
 
 #: any.pm:686 help.pm:51
 #, c-format
 msgid "Do you want to use this feature?"
-msgstr "Ingin pakai fitur ini?"
+msgstr "Apakah Anda ingin menggunakan fitur ini?"
 
 #: any.pm:687
 #, c-format
@@ -1201,17 +1262,17 @@ msgstr "Pilih pengguna standar:"
 #: any.pm:688
 #, c-format
 msgid "Choose the window manager to run:"
-msgstr "Pilih manajer window yg akan dipakai:"
+msgstr "Pilih window manajer yang akan dijalankan:"
 
 #: any.pm:700
 #, c-format
 msgid "Please choose a language to use."
-msgstr "Pilihlah bahasa yg akan dipakai."
+msgstr "Pilihlah bahasa yang akan dipakai."
 
 #: any.pm:701
-#, fuzzy, c-format
+#, c-format
 msgid "Language choice"
-msgstr "manual"
+msgstr "Pilihan bahasa"
 
 #: any.pm:727
 #, c-format
@@ -1219,12 +1280,15 @@ msgid ""
 "Mandrakelinux can support multiple languages. Select\n"
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
-msgstr "Anda dapat memilih bahasa lain yang akan tersedia seusai instalasi."
+msgstr ""
+"Mandrakelinux mendukung beberapa bahasa. Pilihlah\n"
+"bahasa yang akan diinstall. Bahasa pilihan akan ditampilkan\n"
+"setelah proses instalasi selesai dan Anda merestart sistem Anda."
 
 #: any.pm:746 help.pm:647
 #, c-format
 msgid "Use Unicode by default"
-msgstr "Pakai Unicode sebagai standar"
+msgstr "Gunakan Unicode sebagai standar"
 
 #: any.pm:747 help.pm:647
 #, c-format
@@ -1234,7 +1298,7 @@ msgstr "Semua bahasa"
 #: any.pm:786 help.pm:566 help.pm:855 install_steps_interactive.pm:946
 #, c-format
 msgid "Country / Region"
-msgstr "Negara"
+msgstr "Negara / Wilayah"
 
 #: any.pm:787
 #, c-format
@@ -1244,24 +1308,24 @@ msgstr "Pilih negara Anda."
 #: any.pm:789
 #, c-format
 msgid "Here is the full list of available countries"
-msgstr "Ini adalah daftar negara yang tersedia"
+msgstr "Berikut adalah daftar lengkap negara yang tersedia"
 
 #: any.pm:790
-#, fuzzy, c-format
+#, c-format
 msgid "Other Countries"
-msgstr "Port lain"
+msgstr "Negara lain"
 
 #: any.pm:798
-#, fuzzy, c-format
+#, c-format
 msgid "Input method:"
-msgstr "Metode Jaring:"
+msgstr "Metode Input:"
 
 #: any.pm:799 install_any.pm:388 network/netconnect.pm:323
 #: network/netconnect.pm:328 printer/printerdrake.pm:99
 #: printer/printerdrake.pm:2111
 #, c-format
 msgid "None"
-msgstr "Tiada"
+msgstr "Tak ada"
 
 #: any.pm:914
 #, c-format
@@ -1282,8 +1346,8 @@ msgid ""
 "\n"
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
-"Bolehkah pengguna mengekspor direktori di home mereka?\n"
-"Jika diizinkan, pengguna akan dapat meng-klik \"Share\" di konqueror and "
+"Apakah Anda mengijinkan pengguna melakukan sharing pada direktori mereka?\n"
+"Mengijinkan hal ini akan membuat pengguna dapat meng-klik \"Share\" pada konqueror and "
 "nautilus.\n"
 "\n"
 "\"Custom\" memungkinkan tuning masing-masing pengguna.\n"
@@ -1294,6 +1358,7 @@ msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
 "Windows."
 msgstr ""
+"NFS: Sistem file sharing tradisional Unix, dengan dukungan Windows dan Mac"
 
 #: any.pm:933
 #, c-format
@@ -1301,17 +1366,19 @@ msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
 "systems."
 msgstr ""
+"SMB: Sistem file sharing yang digunakan Windows, Mac OS X dan sistem Linux modern"
 
 #: any.pm:941
 #, c-format
 msgid ""
 "You can export using NFS or SMB. Please select which you would like to use."
-msgstr "Anda dapat mengekspor dg NFS atau SMB. Pilih yg Anda ingin."
+msgstr "
+"Anda dapat mengekspor menggunakan NFS atau SMB. Pilih yang hendak Anda gunakan."
 
 #: any.pm:966
 #, c-format
 msgid "Launch userdrake"
-msgstr "Luncurkan userdrake"
+msgstr "Jalankan userdrake"
 
 #: any.pm:966 printer/printerdrake.pm:3802 printer/printerdrake.pm:3805
 #: printer/printerdrake.pm:3806 printer/printerdrake.pm:3807
@@ -1329,11 +1396,11 @@ msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
 "You can use userdrake to add a user to this group."
 msgstr ""
-"Sharing tiap pengguna menggunakan grup \"fileshare\". \n"
-"Anda dapat memakai userdrake utk menambah pengguna di grup ini."
+"Sharing setiap user menggunakan grup \"fileshare\". \n"
+"Anda menggunakan userdrake untuk menambah user pada grup ini."
 
 #: authentication.pm:16
-#, fuzzy, c-format
+#, c-format
 msgid "Local file"
 msgstr "File lokal"
 
@@ -1348,27 +1415,27 @@ msgid "NIS"
 msgstr "NIS"
 
 #: authentication.pm:19
-#, fuzzy, c-format
+#, c-format
 msgid "Smart Card"
-msgstr "Kartu Ethernet"
+msgstr "Kartu Pintar"
 
 #: authentication.pm:20 authentication.pm:148
 #, c-format
 msgid "Windows Domain"
-msgstr "Domain Mindows"
+msgstr "Domain Windows"
 
 #: authentication.pm:21
-#, fuzzy, c-format
+#, c-format
 msgid "Active Directory with SFU"
-msgstr "Restorasi semua backup"
+msgstr "Active Directory dengan SFU"
 
 #: authentication.pm:22
-#, fuzzy, c-format
+#, c-format
 msgid "Active Directory with Winbind"
-msgstr "Restorasi semua backup"
+msgstr "Active Directory dengan Winbind"
 
 #: authentication.pm:51
-#, fuzzy, c-format
+#, c-format
 msgid "Local file:"
 msgstr "File lokal:"
 
@@ -1377,6 +1444,7 @@ msgstr "File lokal:"
 msgid ""
 "Use local for all authentication and information user tell in local file"
 msgstr ""
+"Gunakan lokal untuk semua otentikasi dan informasi pengguna dalam file lokal"
 
 #: authentication.pm:52
 #, c-format
@@ -1389,6 +1457,8 @@ msgid ""
 "Tells your computer to use LDAP for some or all authentication. LDAP "
 "consolidates certain types of information within your organization."
 msgstr ""
+"Memberitahu komputer untuk menggunakan LDAP untuk beberapa atau semua otentikasi."
+"LDAP mengkonsolisadi beberapa jenis informasi dalam organisasi Anda."
 
 #: authentication.pm:53
 #, c-format
@@ -1401,11 +1471,13 @@ msgid ""
 "Allows you to run a group of computers in the same Network Information "
 "Service domain with a common password and group file."
 msgstr ""
+"Mengijinkan Anda untuk menjalankan sekelompok komputer dalam domain NIS "
+"yang sama dengan password umum dan file grup."
 
 #: authentication.pm:54
 #, c-format
 msgid "Windows Domain:"
-msgstr "Domain Mindows:"
+msgstr "Domain Windows:"
 
 #: authentication.pm:54
 #, c-format
@@ -1413,22 +1485,25 @@ msgid ""
 "Winbind allows the system to retrieve information and authenticate users in "
 "a Windows domain."
 msgstr ""
+"Winbind mengijinkan sistem untuk menerima informasi dan mengotentikasi pengguna "
+"dalam domain Windows"
 
 #: authentication.pm:55
-#, fuzzy, c-format
+#, c-format
 msgid "Active Directory with SFU:"
-msgstr "Restorasi semua backup"
+msgstr "Active Directory dengan SFU:"
 
 #: authentication.pm:55 authentication.pm:56
 #, c-format
 msgid ""
 "Kerberos is a secure system for providing network authentication services."
 msgstr ""
+"Kerberos adalah sistem yang aman untuk menyediakan layanan otentikasi jaringan."
 
 #: authentication.pm:56
-#, fuzzy, c-format
+#, c-format
 msgid "Active Directory with Winbind:"
-msgstr "Restorasi semua backup"
+msgstr "Active Directory dengan Winbind:"
 
 #: authentication.pm:81
 #, c-format
@@ -1438,7 +1513,7 @@ msgstr "Otentikasi LDAP"
 #: authentication.pm:82
 #, c-format
 msgid "LDAP Base dn"
-msgstr "Basis dn LDAP"
+msgstr "LDAP Base dn"
 
 #: authentication.pm:83 share/compssUsers.pl:101
 #, c-format
@@ -1448,12 +1523,12 @@ msgstr "Server LDAP"
 #: authentication.pm:96 fsedit.pm:21
 #, c-format
 msgid "simple"
-msgstr "mudah"
+msgstr "sederhana"
 
 #: authentication.pm:97
-#, fuzzy, c-format
+#, c-format
 msgid "TLS"
-msgstr "LSB"
+msgstr "TLS"
 
 #: authentication.pm:98
 #, c-format
@@ -1463,12 +1538,12 @@ msgstr "SSL"
 #: authentication.pm:99
 #, c-format
 msgid "security layout (SASL/Kerberos)"
-msgstr ""
+msgstr "layout keamanan (SASL/Kerberos)"
 
 #: authentication.pm:106 authentication.pm:144
-#, fuzzy, c-format
+#, c-format
 msgid "Authentication Active Directory"
-msgstr "otentikasi"
+msgstr "Otentikasi Active Directory"
 
 #: authentication.pm:107 authentication.pm:146 diskdrake/smbnfs_gtk.pm:181
 #, c-format
@@ -1483,24 +1558,24 @@ msgid "Server"
 msgstr "Server"
 
 #: authentication.pm:110
-#, fuzzy, c-format
+#, c-format
 msgid "LDAP users database"
-msgstr "Database"
+msgstr "Database pengguna LDAP"
 
 #: authentication.pm:111
 #, c-format
 msgid "Use Anonymous BIND "
-msgstr ""
+msgstr "Gunakan BIND anonymous"
 
 #: authentication.pm:112
 #, c-format
 msgid "LDAP user allowed to browse the Active Directory"
-msgstr ""
+msgstr "Pengguna LDAP diijinkan untuk menjelajah Active Directory"
 
 #: authentication.pm:113
-#, fuzzy, c-format
+#, c-format
 msgid "Password for user"
-msgstr "Katasandi dibutuhkan"
+msgstr "Katasandi untuk pengguna"
 
 #: authentication.pm:114
 #, c-format
@@ -1538,22 +1613,22 @@ msgid ""
 "The command 'wbinfo -t' will test whether your authentication secrets are "
 "good."
 msgstr ""
-"Agar dapat bekerja dg PDC W2K, Anda mungkin perlu minta tolong admin "
+"Agar dapat bekerja dengan PDC W2K, Anda mungkin perlu minta tolong admin "
 "menjalankan: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" "
 "everyone / add dan me-reboot server.\n"
-"Anda mungkin juga perlu namapengguna/katasandi Admin Domain utk mengikutkan "
-"mesin ke domain Mindows(TM).\n"
-"Jika jaringan belum aktif, Drakx akan mencoba ikut domain setelah tahapan "
+"Anda mungkin juga perlu nama pengguna/katasandi Admin Domain untuk menggabungkan "
+"mesin ke domain Windows(TM).\n"
+"Jika jaringan belum aktif, Drakx akan mencoba bergabung dengan domain setelah tahapan "
 "setup jaringan.\n"
 "Jika setup dan otentikasi domain gagal, jalankan 'smbpasswd -j DOMAIN -U USER"
-"%%PASSWORD' menggunakan Domain Mindows(tm) Anda, dan Namapengguna/Katasandi "
+"%%PASSWORD' menggunakan Domain Windows(tm) Anda, dan Nama pengguna/Katasandi "
 "Admin, setelah boot system.\n"
-"Perintah 'wbinfo -t' akan mengetes apakah rahasia otentikasi Anda baik."
+"Perintah 'wbinfo -t' akan menguji apakah rahasia otentikasi Anda baik."
 
 #: authentication.pm:144
 #, c-format
 msgid "Authentication Windows Domain"
-msgstr "Otentikasi Domain Mindows"
+msgstr "Otentikasi Domain Windows"
 
 #: authentication.pm:149
 #, c-format
@@ -1568,27 +1643,27 @@ msgstr "Katasandi Admin Domain"
 #: authentication.pm:151
 #, c-format
 msgid "Use Idmap for store UID/SID "
-msgstr ""
+msgstr "Gunakan Idmap untuk menyimpan UID/SID"
 
 #: authentication.pm:152
-#, fuzzy, c-format
+#, c-format
 msgid "Default Idmap "
-msgstr "Desktop standar"
+msgstr "Idmap standar"
 
 #: authentication.pm:165
-#, fuzzy, c-format
+#, c-format
 msgid "Set administrator (root) password and network authentication methods"
-msgstr "Set katasandi root dan metode otentikasi jaringan."
+msgstr "Tentukan katasandi root dan metode otentikasi jaringan."
 
 #: authentication.pm:166
-#, fuzzy, c-format
+#, c-format
 msgid "Set administrator (root) password"
-msgstr "Set katasandi root"
+msgstr "Tentukan katasandi root"
 
 #: authentication.pm:167 standalone/drakvpn:1125
-#, fuzzy, c-format
+#, c-format
 msgid "Authentication method"
-msgstr "otentikasi"
+msgstr "Metode otentikasi"
 
 #. -PO: keep this short or else the buttons will not fit in the window
 #: authentication.pm:172 help.pm:722
@@ -1599,7 +1674,7 @@ msgstr "Tanpa katasandi"
 #: authentication.pm:178
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
-msgstr "Katasandinya terlalu mudah (harus paling tidak %d karakter)"
+msgstr "Katasandi ini terlalu pendek (paling tidak harus %d karakter)"
 
 #: authentication.pm:183 network/netconnect.pm:328 network/netconnect.pm:634
 #: standalone/drakauth:23 standalone/drakauth:25 standalone/drakconnect:459
@@ -1610,7 +1685,7 @@ msgstr "Otentikasi"
 #: authentication.pm:296
 #, c-format
 msgid "Can not use broadcast with no NIS domain"
-msgstr "Tanpa domain NIS, broadcast tak dapat dipakai"
+msgstr "Tidak dapat menggunakan broadcast tanpa domain NIS"
 
 # NOTE: this message will be displayed at boot time; that is
 # only the ascii charset will be available on most machines
@@ -1619,7 +1694,7 @@ msgstr "Tanpa domain NIS, broadcast tak dapat dipakai"
 #
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #: bootloader.pm:728
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Welcome to the operating system chooser!\n"
 "\n"
@@ -1627,10 +1702,10 @@ msgid ""
 "wait for default boot.\n"
 "\n"
 msgstr ""
-"Selamat datang di pemilih sistem operasi %s!\n"
+"Selamat datang di pemilih sistem operasi!\n"
 "\n"
-"Pilih sistem operasi pada daftar di atas atau tunggu %d detik untuk boot "
-"default.\n"
+"Pilih sistem operasi pada daftar di atas atau \n"
+"tunggu %d detik untuk boot default.\n"
 "\n"
 
 #: bootloader.pm:815
@@ -1656,12 +1731,12 @@ msgstr "Yaboot"
 #: bootloader.pm:881
 #, c-format
 msgid "not enough room in /boot"
-msgstr "tak cukup ruang di /boot"
+msgstr "tidak cukup ruang pada /boot"
 
 #: bootloader.pm:1295
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
-msgstr "Anda tak dapat menginstal bootloader pada partisi %s\n"
+msgstr "Anda tidak dapat menginstal bootloader pada partisi %s\n"
 
 #: bootloader.pm:1340
 #, c-format
@@ -1669,6 +1744,7 @@ msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
 msgstr ""
+"Konfigurasi bootloader Anda harus diupdate karena nomor partisi telah berubah"
 
 #: bootloader.pm:1355
 #, c-format
@@ -1676,11 +1752,13 @@ msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
 "choose \"%s\""
 msgstr ""
+"Bootloader tidak bisa diinstall dengan benar. Anda harus melakukan boot penyelamatan "
+"dan memilih \"%s\""
 
 #: bootloader.pm:1356
-#, fuzzy, c-format
+#, c-format
 msgid "Re-install Boot Loader"
-msgstr "Instal bootloader"
+msgstr "Instal ulang Boot Loader"
 
 #: common.pm:125
 #, c-format
@@ -1744,12 +1822,12 @@ msgstr "Belgia"
 #: network/adsl_consts.pm:788 network/adsl_consts.pm:798
 #, c-format
 msgid "Switzerland"
-msgstr "Swiss"
+msgstr "Switzerland"
 
 #: crypto.pm:17 lang.pm:237
 #, c-format
 msgid "Costa Rica"
-msgstr "Costa Rica"
+msgstr "Costa Rika"
 
 #: crypto.pm:18 crypto.pm:35 lang.pm:243 network/adsl_consts.pm:319
 #, c-format
@@ -1787,7 +1865,7 @@ msgstr "Hungaria"
 #: network/adsl_consts.pm:517 network/netconnect.pm:49 standalone/drakxtv:47
 #, c-format
 msgid "Italy"
-msgstr "Itali"
+msgstr "itali"
 
 #: crypto.pm:24 crypto.pm:41 lang.pm:347 network/adsl_consts.pm:545
 #: network/adsl_consts.pm:553 network/adsl_consts.pm:561
@@ -1838,9 +1916,9 @@ msgid ""
 "configured as a WebDAV server). If you would like to add WebDAV mount\n"
 "points, select \"New\"."
 msgstr ""
-"WebDAV adalah protokol yg memungkinkan Anda me-mount direktori server web\n"
-"secara lokal, dan memperlakukannya sbg sistem file lokal (asal server web\n"
-"dikonfigurasikan sbg server WebDAV). Jika Anda ingin menambah titik mount\n"
+"WebDAV adalah protokol yang memungkinkan Anda me-mount direktori server web\n"
+"secara lokal, dan menganggapnya seperti sistem file lokal (web server \n"
+"dikonfigurasikan sebagai server WebDAV). Jika Anda ingin menambah titik mount\n"
 "WebDav, pilih \"Baru\"."
 
 #: diskdrake/dav.pm:25
@@ -1863,7 +1941,7 @@ msgstr "Mount"
 #: diskdrake/removable.pm:23 diskdrake/smbnfs_gtk.pm:79
 #, c-format
 msgid "Mount point"
-msgstr "Posisi mount"
+msgstr "Titik mount"
 
 #: diskdrake/dav.pm:83
 #, c-format
@@ -1873,7 +1951,7 @@ msgstr "Masukkan URL server WebDAV"
 #: diskdrake/dav.pm:87
 #, c-format
 msgid "The URL must begin with http:// or https://"
-msgstr "URL harus dimulai dg http:// atau https://"
+msgstr "URL harus dimulai dengan http:// atau https://"
 
 #: diskdrake/dav.pm:109
 #, c-format
@@ -1884,17 +1962,17 @@ msgstr "Server: "
 #: diskdrake/interactive.pm:1166 diskdrake/interactive.pm:1241
 #, c-format
 msgid "Mount point: "
-msgstr "Posisi mount: "
+msgstr "Titik mount: "
 
 #: diskdrake/dav.pm:111 diskdrake/interactive.pm:1248
 #, c-format
 msgid "Options: %s"
-msgstr "Pilihan: %s"
+msgstr "Opsi: %s"
 
 #: diskdrake/hd_gtk.pm:95
 #, c-format
 msgid "Please make a backup of your data first"
-msgstr "Lebih dulu buatlah backup data Anda"
+msgstr "Buatlah backup data Anda terlebih dahulu"
 
 #: diskdrake/hd_gtk.pm:98
 #, c-format
@@ -1903,12 +1981,13 @@ msgid ""
 "enough)\n"
 "at the beginning of the disk"
 msgstr ""
-"Jika Anda ingin pakai aboot, sisakan ruang (cukup 2048 sektor) di awal disk"
+"Jika Anda ingin menggunakan aboot, sisakan ruang kosong (cukup 2048 sektor) "
+"di awal disk"
 
 #: diskdrake/hd_gtk.pm:155 help.pm:530
 #, c-format
 msgid "Wizard"
-msgstr "Dukun"
+msgstr "Wizard"
 
 #: diskdrake/hd_gtk.pm:188
 #, c-format
@@ -1923,13 +2002,13 @@ msgid ""
 "(click on it, then click on \"Resize\")"
 msgstr ""
 "Anda punya satu partisi besar Windows Microsoft.\n"
-"Disarankan utk mengubah ukuran partisi ini\n"
+"Disarankan untuk mengubah ukuran partisi ini\n"
 "(klik di situ, lalu pilih \"Ubah ukuran\")"
 
 #: diskdrake/hd_gtk.pm:194
 #, c-format
 msgid "Please click on a partition"
-msgstr "Silakan pilih partisi"
+msgstr "Silakan klik pada partisi"
 
 #: diskdrake/hd_gtk.pm:208 diskdrake/smbnfs_gtk.pm:63 install_steps_gtk.pm:482
 #: standalone/drakbackup:2943 standalone/drakbackup:3003
@@ -1970,7 +2049,7 @@ msgstr "HFS"
 #: diskdrake/hd_gtk.pm:338
 #, c-format
 msgid "Windows"
-msgstr "Mindows"
+msgstr "Windows"
 
 #: diskdrake/hd_gtk.pm:339 install_steps_gtk.pm:284 mouse.pm:168
 #: services.pm:162 standalone/drakbackup:1609 standalone/drakperm:250
@@ -2344,7 +2423,7 @@ msgid ""
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
 "Utk memastikan integritas data setelah ukuran partisi berubah,\n"
-"cek sistem file akan dilakukan pada boot berikut dalam Mindows(TM)"
+"cek sistem file akan dilakukan pada boot berikut dalam Windows(TM)"
 
 #: diskdrake/interactive.pm:825
 #, c-format
@@ -3220,7 +3299,7 @@ msgstr ""
 "Di sini dapat dipilih driver alternatif (OSS atau ALSA) utk kartu suara Anda "
 "(%s)"
 
-#. -PO: here the first %s is either "OSS" or "ALSA", 
+#. -PO: here the first %s is either "OSS" or "ALSA",
 #. -PO: the second %s is the name of the current driver
 #. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:241
@@ -3972,7 +4051,7 @@ msgstr ""
 "GNU/Linux mengatur waktu dlm GMT (Greenwich Mean Time) dan menerjemahkannya\n"
 "ke waktu lokal sesuai zona waktu yang Anda pilih. Dapat di-nonaktifkan\n"
 "dengan melepas tanda \"Jam hardware diset ke GMT\" sehingga jam hardware\n"
-"sama dengan jam sistem. Berguna bila mesin didiami OS lain seperti Mindows.\n"
+"sama dengan jam sistem. Berguna bila mesin didiami OS lain seperti Windows.\n"
 "\n"
 "Opsi \"Sinkronisasi waktu otomatis\" akan otomatis mengatur jam dengan\n"
 "menghubungi server waktu remote di internet. Pilihlah server terdekat saat\n"
@@ -4145,7 +4224,7 @@ msgid ""
 msgstr ""
 "Resolusi\n"
 "\n"
-"   Anda dapat memilih resolusi dan kedalaman warna yg tersedia utk piranti\n"
+"   Anda dapat memilih resolusi dan kedalaman warna yg tersedia utk divais\n"
 "keras Anda. Pilihlah yg paling sesuai dg kebutuhan Anda (Anda dapat\n"
 "menggantinya setelah instalasi). Contoh konfigurasi yg Anda pilih akan\n"
 "ditampilkan di monitor."
@@ -4258,7 +4337,7 @@ msgstr ""
 " * \"Pakai partisi yang sudah ada\": akan dideteksi satu/lebih partisi\n"
 "Linux di hard drive Anda. Jika Anda ingin menggunakannya, pilih opsi ini.\n"
 "\n"
-" * \"Pakai ruang kosong pada partisi Mindows\": jika wicrosoft mindows\n"
+" * \"Pakai ruang kosong pada partisi Windows\": jika wicrosoft mindows\n"
 "terinstal dan menghabiskan seluruh kapasitas disk, Anda perlu membuat ruang\n"
 "kosong untuk data Linux dg menghapus partisi dan data wicrosoft mindows\n"
 "(lihat solusi \"Hapus seluruh disk\" atau mode \"Ahli\") atau dapat juga\n"
@@ -4276,7 +4355,7 @@ msgstr ""
 "\n"
 "   !! Jika Anda pilih opsi ini semua data di disk Anda akan hilang. !!\n"
 "\n"
-" * \"Buang Mindows\": ini akan menghapus semua di drive dan mulai proses\n"
+" * \"Buang Windows\": ini akan menghapus semua di drive dan mulai proses\n"
 "partisi dari nol. Semua data di disk akan hilang.\n"
 "\n"
 "   !! Jika Anda pilih opsi ini semua data di disk Anda akan hilang. !!\n"
@@ -4951,7 +5030,7 @@ msgid ""
 "Please select the correct port. For example, the \"COM1\" port under\n"
 "Windows is named \"ttyS0\" under GNU/Linux."
 msgstr ""
-"Pilih port yang benar. Misalnya \"COM1\" di Mindows bernama \"ttyS0\" di \n"
+"Pilih port yang benar. Misalnya \"COM1\" di Windows bernama \"ttyS0\" di \n"
 "GNU/Linux."
 
 #: help.pm:688
@@ -5056,7 +5135,7 @@ msgstr ""
 "LILO dan grub adalah pemuat boot GNU/Linux. DrakX akan menganalisa sektor\n"
 "boot disk dan bekerja menurut apa yg ditemukannya di sana:\n"
 "\n"
-" * jika ditemukan sektor boot Mindows, ia akan menggantinya dg sektor boot\n"
+" * jika ditemukan sektor boot Windows, ia akan menggantinya dg sektor boot\n"
 "grub/LILO. Dg demikian Anda akan dapat memuat GNU/Linux atau OS lain.\n"
 "\n"
 " * jika ditemukan sektor boot grub/LILO, ia akan menggantinya dg yg baru.\n"
@@ -5371,7 +5450,7 @@ msgid ""
 msgstr ""
 "Klik \"%s\" jika Anda ingin menghapus semua data dan partisi yang ada \n"
 "di harddisk ini. Awas, setelah mengklik \"%s\" Anda tak dapat \n"
-"mengembalikan data dan partisi di drive ini termasuk data Mindows.\n"
+"mengembalikan data dan partisi di drive ini termasuk data Windows.\n"
 "\n"
 "Pilih \"%s\" utk membatalkan aksi ini tanpa kehilangan data dan partisi\n"
 "yang ada dalam harddisk ini."
@@ -5647,7 +5726,7 @@ msgstr "Tidak ada partisi yang bisa digunakan"
 #: install_interactive.pm:114
 #, c-format
 msgid "Use the Windows partition for loopback"
-msgstr "Gunakan partisi Mindows untuk loopback"
+msgstr "Gunakan partisi Windows untuk loopback"
 
 #: install_interactive.pm:117
 #, c-format
@@ -5691,7 +5770,7 @@ msgstr ""
 #: install_interactive.pm:156
 #, c-format
 msgid "Computing the size of the Windows partition"
-msgstr "Hitung ukuran partisi Mindows"
+msgstr "Hitung ukuran partisi Windows"
 
 #: install_interactive.pm:163
 #, c-format
@@ -5699,7 +5778,7 @@ msgid ""
 "Your Windows partition is too fragmented. Please reboot your computer under "
 "Windows, run the ``defrag'' utility, then restart the Mandrakelinux "
 "installation."
-msgstr "Partisi Mindows Anda terlalu terfragmen, jalankan ``defrag'' dulu"
+msgstr "Partisi Windows Anda terlalu terfragmen, jalankan ``defrag'' dulu"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_interactive.pm:166
@@ -5718,7 +5797,7 @@ msgid ""
 msgstr ""
 "AWAS!\n"
 "\n"
-"DrakX sekarang hendak mengubah ukuran partisi Mindows Anda. Hati-hati:\n"
+"DrakX sekarang hendak mengubah ukuran partisi Windows Anda. Hati-hati:\n"
 "proses ini amat berbahaya. Bila Anda belum melakukannya, silakan\n"
 "keluar dari proses instalasi ini, lalu reboot ke windows\n"
 "jalankan scandisk (dan defrag juga) di partisi ini lalu backup datanya.\n"
@@ -5727,7 +5806,7 @@ msgstr ""
 #: install_interactive.pm:178
 #, c-format
 msgid "Which size do you want to keep for Windows on"
-msgstr "Tentukan ukuran untuk menyimpan Mindows"
+msgstr "Tentukan ukuran untuk menyimpan Windows"
 
 #: install_interactive.pm:179
 #, c-format
@@ -5737,7 +5816,7 @@ msgstr "Partisi %s"
 #: install_interactive.pm:188
 #, c-format
 msgid "Resizing Windows partition"
-msgstr "Sedang menghitung bound sistem file Mindows"
+msgstr "Sedang menghitung bound sistem file Windows"
 
 #: install_interactive.pm:193
 #, c-format
@@ -5752,7 +5831,7 @@ msgstr "Tiada partisi FAT untuk diubah ukurannya (atau tak ada cukup ruangan)"
 #: install_interactive.pm:213
 #, c-format
 msgid "Remove Windows(TM)"
-msgstr "Buang Mindows"
+msgstr "Buang Windows"
 
 #: install_interactive.pm:215
 #, c-format
@@ -7460,7 +7539,7 @@ msgstr "Islandia"
 #, c-format
 msgid ""
 "_: keyboard\n"
-"Italian"
+"italin"
 msgstr "Itali"
 
 #: keyboard.pm:243
@@ -7889,12 +7968,12 @@ msgstr "Kunci \"Menu\""
 #: keyboard.pm:343
 #, c-format
 msgid "Left \"Windows\" key"
-msgstr "Kunci \"Mindows\" kiri"
+msgstr "Kunci \"Windows\" kiri"
 
 #: keyboard.pm:344
 #, c-format
 msgid "Right \"Windows\" key"
-msgstr "Kunci \"Mindows\" kanan"
+msgstr "Kunci \"Windows\" kanan"
 
 #: keyboard.pm:345
 #, c-format
@@ -7909,7 +7988,7 @@ msgstr "Kedua kunci Alt bersamaan"
 #: keyboard.pm:347
 #, fuzzy, c-format
 msgid "Left Shift key"
-msgstr "Kunci \"Mindows\" kiri"
+msgstr "Kunci \"Windows\" kiri"
 
 #: keyboard.pm:348
 #, c-format
@@ -10287,7 +10366,7 @@ msgstr "Simpan di floppy"
 #: network/netconnect.pm:777 network/netconnect.pm:786
 #, fuzzy, c-format
 msgid "Use my Windows partition"
-msgstr "Sedang menghitung bound sistem file Mindows"
+msgstr "Sedang menghitung bound sistem file Windows"
 
 #: network/netconnect.pm:777 network/netconnect.pm:789
 #, c-format
@@ -11245,7 +11324,7 @@ msgstr ", host TCP/IP \"%s\", port %s"
 #: printer/main.pm:400
 #, c-format
 msgid " on SMB/Windows server \"%s\", share \"%s\""
-msgstr " di server SMB/Mindows \"%s\", share \"%s\""
+msgstr " di server SMB/Windows \"%s\", share \"%s\""
 
 #: printer/main.pm:405
 #, c-format
@@ -11336,7 +11415,7 @@ msgstr ", host TCP/IP \"%s\", port %s"
 #: printer/main.pm:468
 #, fuzzy, c-format
 msgid "SMB/Windows server \"%s\", share \"%s\""
-msgstr " di server SMB/Mindows \"%s\", share \"%s\""
+msgstr " di server SMB/Windows \"%s\", share \"%s\""
 
 #: printer/main.pm:473
 #, fuzzy, c-format
@@ -11397,7 +11476,7 @@ msgid ""
 "and uploaded whenever the printer is connected and turned on.\n"
 msgstr ""
 "HP LaserJet 1000 perlu firmware di-upload setelah dinyalakan. Downloadlah "
-"paket driver Mindows dari situs web HP (firmware di CD printer tak bekerja) "
+"paket driver Windows dari situs web HP (firmware di CD printer tak bekerja) "
 "dan urailah file firmware (self-extracting '.exe' file) dg utilitas 'unzip' "
 "dan carilah file 'sihp1000.img'. Copy file ini ke direktori '/etc/printer'. "
 "Di sana ia akan ditemukan oleh skrip uploader otomatis dan di-upload ketika "
@@ -11907,7 +11986,7 @@ msgid ""
 "NOTE: Depending on the printer model and the printing system up to %d MB of "
 "additional software will be installed."
 msgstr ""
-"CATATAN: Akan diinstal piranti lunak tambahan hingga %d MB tergantung model "
+"CATATAN: Akan diinstal divais lunak tambahan hingga %d MB tergantung model "
 "printer dan sistem cetak."
 
 #: printer/printerdrake.pm:767
@@ -12033,15 +12112,15 @@ msgstr ""
 "Selamat Datang di Penolong Setup Printer\n"
 "\n"
 "Alat ini menolong Anda menginstal printer yg terhubung dg komputer ini, dg "
-"jaringan atau dg mesin Mindows remote.\n"
+"jaringan atau dg mesin Windows remote.\n"
 "\n"
 "Hubungkan dan nyalakan semua printer yg terhubung dg mesin ini agar dapat "
-"dideteksi. Juga printer jaringan dan mesin Mindows harus terhubung dan "
+"dideteksi. Juga printer jaringan dan mesin Windows harus terhubung dan "
 "dinyalakan.\n"
 "\n"
 "Ingat, deteksi printer jaringan butuh waktu lebih lama daripada printer yg "
 "terhubung langsung dg mesin ini. Matikan deteksi printer jaringan dan/atau "
-"Mindows jika tak perlu.\n"
+"Windows jika tak perlu.\n"
 "\n"
 " Klik \"Lanjut\" jika siap, dan \"Batal\" jika Anda tak ingin men-setup "
 "printer sekarang."
@@ -12541,21 +12620,21 @@ msgid ""
 "type in Printerdrake.\n"
 "\n"
 msgstr ""
-"Anda akan menset up pencetakan ke account Mindows dengan katasandi. "
-"Berhubung kesalahan arsitekture piranti lunak klien Samba, katasandi "
+"Anda akan menset up pencetakan ke account Windows dengan katasandi. "
+"Berhubung kesalahan arsitekture divais lunak klien Samba, katasandi "
 "ditampilkan dalam teks di baris perintah klien Samba untuk mengirim job "
-"cetak ke server Mindows. Ini memungkinkan tiap pengguna di mesin ini melihat "
+"cetak ke server Windows. Ini memungkinkan tiap pengguna di mesin ini melihat "
 "katasandi di layar dengan perintah \"ps auxwww\".\n"
 "\n"
 "Kami anjurkan beberapa alternatif berikut (pada semua kasus Anda harus yakin "
-"bahwa hanya mesin di jaringan lokal Anda yang dapat mengakses server Mindows "
+"bahwa hanya mesin di jaringan lokal Anda yang dapat mengakses server Windows "
 "Anda, misalnya dengan adanya firewall):\n"
 "\n"
-"Pakailah account tanpa-katasandi di server Mindows Anda, sebagai account "
+"Pakailah account tanpa-katasandi di server Windows Anda, sebagai account "
 "\"GUEST\" atau account khusus untuk pencetakan. Jangan hapus proteksi "
 "katasandi account pribadi atau administrator.\n"
 "\n"
-"Set up server Mindows Anda agar printer dapat dipakai dengan protokol LPD. "
+"Set up server Windows Anda agar printer dapat dipakai dengan protokol LPD. "
 "Laluset up pencetakan dari mesin ini dengan tipe koneksi \"%s\" di "
 "Printerdrake.\n"
 "\n"
@@ -12579,7 +12658,7 @@ msgid ""
 "\n"
 "Do you really want to continue setting up this printer as you are doing now?"
 msgstr ""
-"Hubungkan printer Anda ke server Linux server dan membuat mesin Mindows "
+"Hubungkan printer Anda ke server Linux server dan membuat mesin Windows "
 "terhubung sebagai klien.\n"
 "\n"
 "Anda ingin lanjutkan set up printer ini seperti yang Anda lakukan sekarang?"
@@ -14461,7 +14540,7 @@ msgstr "jika diset ya, cek izin file-file di home pengguna."
 #: security/help.pm:118
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
-msgstr "jika ya, cek apakah piranti jaringan berada dalam modus promiscuous."
+msgstr "jika ya, cek apakah divais jaringan berada dalam modus promiscuous."
 
 #: security/help.pm:119
 #, c-format
@@ -14750,7 +14829,7 @@ msgstr "jika diset ya, cek izin file-file di home pengguna."
 #: security/l10n.pm:48
 #, fuzzy, c-format
 msgid "Check if the network devices are in promiscuous mode"
-msgstr "jika ya, cek apakah piranti jaringan berada dalam modus promiscuous."
+msgstr "jika ya, cek apakah divais jaringan berada dalam modus promiscuous."
 
 #: security/l10n.pm:49
 #, c-format
@@ -15260,7 +15339,7 @@ msgstr ""
 #: services.pm:90
 #, c-format
 msgid "Load the drivers for your usb devices."
-msgstr "Muat driver piranti USB"
+msgstr "Muat driver divais USB"
 
 #: services.pm:91
 #, c-format
@@ -19481,7 +19560,7 @@ msgstr "Urpmi"
 #: standalone/drakbug:57
 #, c-format
 msgid "Windows Migration tool"
-msgstr "Alat Migrasi Mindows"
+msgstr "Alat Migrasi Windows"
 
 #: standalone/drakbug:58
 #, c-format
@@ -21365,7 +21444,7 @@ msgstr ""
 "terhubung dengan benar.\n"
 "\n"
 "\n"
-"Kunjungi database piranti keras di:\n"
+"Kunjungi database divais keras di:\n"
 "\n"
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
@@ -22499,7 +22578,7 @@ msgstr ""
 #: standalone/drakvpn:974
 #, fuzzy, c-format
 msgid "Sainfo destination protocol"
-msgstr "Alat Migrasi Mindows"
+msgstr "Alat Migrasi Windows"
 
 #: standalone/drakvpn:975
 #, c-format
@@ -23019,7 +23098,7 @@ msgstr ""
 "terhubung dengan benar.\n"
 "\n"
 "\n"
-"Kunjungi database piranti keras di:\n"
+"Kunjungi database divais keras di:\n"
 "\n"
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
@@ -24920,7 +24999,7 @@ msgstr "Pakai scanner di komputer remote"
 #: standalone/scannerdrake:605
 #, c-format
 msgid "Use the scanners on hosts: "
-msgstr "Pakai scanner di host: "
+msgstr "Gunakan scanner pada host: "
 
 #: standalone/scannerdrake:632 standalone/scannerdrake:704
 #: standalone/scannerdrake:854
@@ -24933,7 +25012,8 @@ msgstr "Sharing scanner local"
 msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
 "available:"
-msgstr "Ini adalah mesin yg scanner lokalnya akan dibuat agar dapat dipakai:"
+msgstr ""
+"Ini adalah mesin yang scanner lokalnya akan tersedia:"
 
 #: standalone/scannerdrake:644 standalone/scannerdrake:794
 #, c-format
@@ -24961,17 +25041,17 @@ msgstr "Nama/alamat IP host:"
 #: standalone/scannerdrake:705 standalone/scannerdrake:855
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
-msgstr "Pilihlah host yg scanner lokalnya akan dibuat agar dapat dipakai:"
+msgstr "Pilihlah host yang scanner lokalnya akan dipakai:"
 
 #: standalone/scannerdrake:716 standalone/scannerdrake:866
 #, c-format
 msgid "You must enter a host name or an IP address.\n"
-msgstr "Masukkan nama host atau alamat IP.\n"
+msgstr "Anda harus memasukkan nama host atau alamat IP.\n"
 
 #: standalone/scannerdrake:727 standalone/scannerdrake:877
 #, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
-msgstr "Host ini sudah terdaftar, tak dapat ditambahkan lagi.\n"
+msgstr "Host ini sudah terdaftar, tidak dapat ditambahkan lagi.\n"
 
 #: standalone/scannerdrake:782
 #, c-format
@@ -24981,60 +25061,63 @@ msgstr "Pemakaian scanner remote"
 #: standalone/scannerdrake:783
 #, c-format
 msgid "These are the machines from which the scanners should be used:"
-msgstr "Mesin yg scanner-nya akan dipakai:"
+msgstr "Berikut adalah mesin dimana scanner akan dipakai:"
 
 #: standalone/scannerdrake:940
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "saned needs to be installed to share the local scanner(s).\n"
 "\n"
 "Do you want to install the saned package?"
-msgstr "Paket %s perlu diupgrade. Anda ingin instal?"
+msgstr ""
+"saned perlu diinstall untuk men-share scanner lokal.\n"
+"\n"
+"Apakah Anda ingin menginstall paket saned?"
 
 #: standalone/scannerdrake:944 standalone/scannerdrake:948
 #, c-format
 msgid "Your scanner(s) will not be available on the network."
-msgstr ""
+msgstr "Scanner Anda tidak akan tersedia pada jaringan."
 
 #: standalone/service_harddrake:104
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
-msgstr "Beberapa alat di kelas perangkat keras \"%s\" dihapus:\n"
+msgstr "Beberapa divais pada kelas perangkat keras \"%s\" dihapus:\n"
 
 #: standalone/service_harddrake:105
 #, c-format
 msgid "- %s was removed\n"
-msgstr ""
+msgstr "- %s telah dihapus\n"
 
 #: standalone/service_harddrake:108
-#, fuzzy, c-format
+#, c-format
 msgid "Some devices were added: %s\n"
-msgstr "Beberapa device ditambahkan:\n"
+msgstr "Beberapa divais ditambahkan: %s\n"
 
 #: standalone/service_harddrake:109
 #, c-format
 msgid "- %s was added\n"
-msgstr ""
+msgstr "- %s telah ditambahkan\n"
 
 #: standalone/service_harddrake:204
 #, c-format
 msgid "Hardware probing in progress"
-msgstr "Penyalaan perangkat keras sedang berjalan"
+msgstr "Pendeteksian perangkat keras sedang berjalan"
 
 #: standalone/service_harddrake_confirm:7
 #, c-format
 msgid "Hardware changes in \"%s\" class (%s seconds to answer)"
-msgstr ""
+msgstr "Perubahan perangkat keras pada kelas \"%s\" (%s detik untuk menjawab)"
 
 #: standalone/service_harddrake_confirm:8
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to run the appropriate config tool?"
-msgstr "Anda ingin tes konfigurasi ini?"
+msgstr "Apakah Anda ingin menjalankan perkakas konfigurasi yang sesuai?"
 
 #: steps.pm:14
 #, c-format
 msgid "Language"
-msgstr "Pilih bahasa"
+msgstr "Bahasa"
 
 #: steps.pm:15
 #, c-format
@@ -25059,7 +25142,7 @@ msgstr "Pilih kelas instalasi"
 #: steps.pm:19
 #, c-format
 msgid "Choose your keyboard"
-msgstr "Pilih papanketik"
+msgstr "Pilih keyboard"
 
 #: steps.pm:21
 #, c-format
@@ -25069,12 +25152,12 @@ msgstr "Pembuatan partisi"
 #: steps.pm:22
 #, c-format
 msgid "Format partitions"
-msgstr "Melakukan format partisi"
+msgstr "Format partisi"
 
 #: steps.pm:23
 #, c-format
 msgid "Choose packages to install"
-msgstr "Paket yang akan diinstal"
+msgstr "Pilih paket yang akan diinstal"
 
 #: steps.pm:24
 #, c-format
@@ -25082,9 +25165,9 @@ msgid "Install system"
 msgstr "Instal sistem"
 
 #: steps.pm:25
-#, fuzzy, c-format
+#, c-format
 msgid "Administrator password"
-msgstr "Set katasandi root"
+msgstr "Katasandi root"
 
 #: steps.pm:26
 #, c-format
@@ -25109,7 +25192,7 @@ msgstr "Konfigurasi X"
 #: steps.pm:31
 #, c-format
 msgid "Configure services"
-msgstr "Konfigurasi service"
+msgstr "Konfigurasi layanan"
 
 #: steps.pm:32
 #, c-format
@@ -25124,32 +25207,32 @@ msgstr "Keluar dari proses instalasi"
 #: ugtk2.pm:900
 #, c-format
 msgid "Is this correct?"
-msgstr "Sudah sesuai?"
+msgstr "Sudah benar?"
 
 #: ugtk2.pm:960
-#, fuzzy, c-format
+#, c-format
 msgid "No file chosen"
-msgstr "Tidak ada berkas yang ditemukan"
+msgstr "Tidak ada file yang dipilih"
 
 #: ugtk2.pm:962
 #, c-format
 msgid "You have chosen a file, not a directory"
-msgstr ""
+msgstr "Anda telah memilih file, bukan direktori"
 
 #: ugtk2.pm:964
-#, fuzzy, c-format
+#, c-format
 msgid "You have chosen a directory, not a file"
-msgstr "Nama '/' hanya dapat berupa direktori, bukan key"
+msgstr "Anda telah memilih sebuah direktori, bukan file"
 
 #: ugtk2.pm:966
-#, fuzzy, c-format
+#, c-format
 msgid "No such directory"
-msgstr "Bukan direktori"
+msgstr "Tidak ada direktori itu"
 
 #: ugtk2.pm:966
-#, fuzzy, c-format
+#, c-format
 msgid "No such file"
-msgstr "File `%s' tidak ada\n"
+msgstr "Tidak ada file itu"
 
 #: ugtk2.pm:1045
 #, c-format
@@ -25164,7 +25247,7 @@ msgstr "Tutup Tree"
 #: ugtk2.pm:1047
 #, c-format
 msgid "Toggle between flat and group sorted"
-msgstr "Togel tampilan rata dan terurut grupnya"
+msgstr "Pindah tampilan antara terurut rata dan grup"
 
 #: wizards.pm:95
 #, c-format
@@ -25172,33 +25255,33 @@ msgid ""
 "%s is not installed\n"
 "Click \"Next\" to install or \"Cancel\" to quit"
 msgstr ""
-"%s tak diinstal\n"
-"Klik \"Maju\" utk menginstal atau \"Batal\" utk keluar"
+"%s tidak terinstall\n"
+"Klik \"Maju\" untuk menginstal atau \"Batal\" untuk keluar"
 
 #: wizards.pm:99
 #, c-format
 msgid "Installation failed"
 msgstr "Instalasi gagal"
 
-#, fuzzy
+#,
 #~ msgid "MandrakeSoft Wizards"
-#~ msgstr "Pusat Kontrol Mandrakelinux"
+#~ msgstr "Wizard MandrakeSoft"
 
 #~ msgid "No browser available! Please install one"
-#~ msgstr "Browser tak tersedia! Installah satu"
+#~ msgstr "Browser tak tersedia! Silahkan menginstall satu buah"
 
 #~ msgid ""
 #~ "No browser is installed on your system, Please install one if you want to "
 #~ "browse the help system"
 #~ msgstr ""
-#~ "Browser tak ditemukan. Silakan instal satu jika Anda ingin menjelajah "
+#~ "Browser tidak ditemukan. Silakan instal satu buah jika Anda ingin menjelajah "
 #~ "sistem pertolongan"
 
 #~ msgid "Installing HPOJ package..."
 #~ msgstr "Instalasi paket HPOJ..."
 
 #~ msgid "Checking device and configuring HPOJ..."
-#~ msgstr "Pengecekan alat dan penyetelan HPOJ..."
+#~ msgstr "Pengujian divais dan konfigurasi HPOJ..."
 
 #~ msgid ""
 #~ "Insert a floppy in drive\n"
@@ -25208,10 +25291,10 @@ msgstr "Instalasi gagal"
 #~ "semua data di disket ini akan hilang"
 
 #~ msgid "Insert a FAT formatted floppy in drive %s"
-#~ msgstr "Masukkan disket yang sudah diformat dengan tipe FAT di drive %s"
+#~ msgstr "Masukkan disket yang sudah diformat dengan tipe FAT pada drive %s"
 
 #~ msgid "This floppy is not FAT formatted"
-#~ msgstr "Disket ini tak diformat dengan sistem FAT"
+#~ msgstr "Disket ini tidak diformat dengan sistem FAT"
 
 #~ msgid ""
 #~ "To use this saved packages selection, boot installation with ``linux "
@@ -25221,37 +25304,37 @@ msgstr "Instalasi gagal"
 #~ "instalasi dengan pilihan ''linux defcfg=floppy''"
 
 #~ msgid "Load/Save on floppy"
-#~ msgstr "Muat/Simpan di floppy"
+#~ msgstr "Muat/Simpan pada floppy"
 
 #~ msgid ""
 #~ "Please choose load or save package selection on floppy.\n"
 #~ "The format is the same as auto_install generated floppies."
 #~ msgstr ""
-#~ "Pilih muat/simpan seleksi paket di floppy.\n"
+#~ "Pilih muat/simpan pilihan paket pada floppy.\n"
 #~ "Formatnya sama dengan floppy buatan auto_install."
 
 #~ msgid "Load from floppy"
 #~ msgstr "Muat dari floppy"
 
 #~ msgid "Save on floppy"
-#~ msgstr "Simpan di floppy"
+#~ msgstr "Simpan pada floppy"
 
 #~ msgid "Package selection"
 #~ msgstr "Pilihan paket"
 
 #~ msgid "Loading from floppy"
-#~ msgstr "Memuat dari floppy"
+#~ msgstr "Memuat dari disket"
 
 #~ msgid "Insert a floppy containing package selection"
-#~ msgstr "Masukkan disket yg berisi seleksi paket"
+#~ msgstr "Masukkan disket yang berisi pilihan paket"
 
-#, fuzzy
+#,
 #~ msgid "Active Firewall : intrusion detected"
-#~ msgstr "Konfigurasi firewall terdeteksi!"
+#~ msgstr "Firewall Aktif : intrusi terdeteksi"
 
-#, fuzzy
+#,
 #~ msgid "Do you want to blacklist the attacker ?"
-#~ msgstr "Aktifkan fasilitas Tombol Lekat?"
+#~ msgstr "Apakah Anda ingin memasukkan penyerang dalam daftar hitam?"
 
 #~ msgid ""
 #~ "_: keyboard\n"
@@ -25262,48 +25345,48 @@ msgstr "Instalasi gagal"
 #~ msgstr "Aplikasi:"
 
 #~ msgid "Release: "
-#~ msgstr "Release: "
+#~ msgstr "Rilis: "
 
-#, fuzzy
+#,
 #~ msgid "Summary: "
-#~ msgstr "Ringkasan"
+#~ msgstr "Ringkasan: "
 
-#, fuzzy
+#,
 #~ msgid "Submit kernel version"
-#~ msgstr "versi kernel"
+#~ msgstr "Kirimkan versi kernel"
 
-#, fuzzy
+#,
 #~ msgid "connecting to %s..."
-#~ msgstr "koneksi ke dukun Bugzilla ..."
+#~ msgstr "menghubungkan ke %s..."
 
-#, fuzzy
+#,
 #~ msgid "Please enter a package name."
-#~ msgstr "Silakan tulis nama pengguna"
+#~ msgstr "Silahkan masukkan nama paket."
 
-#, fuzzy
+#,
 #~ msgid "Please enter summary text."
-#~ msgstr "Masukkan login"
+#~ msgstr "Silahkan masukkan teks ringkasan"
 
-#, fuzzy
+#,
 #~ msgid "Loading printer configuration... Please wait"
-#~ msgstr "Modifikasi konfigurasi printer"
+#~ msgstr "Memuat konfigurasi printer... Silahkan menunggu"
 
-#, fuzzy
+#,
 #~ msgid "The "
-#~ msgstr "Tema"
+#~ msgstr "Sebuah "
 
-#, fuzzy
+#,
 #~ msgid "%s (was %s)"
-#~ msgstr "%s (Port %s)"
+#~ msgstr "%s (adalah %s)"
 
 #~ msgid "Root password"
 #~ msgstr "Katasandi root"
 
-#, fuzzy
+#,
 #~ msgid "Do you want to recover your system?"
-#~ msgstr "Ingin pakai aboot?"
+#~ msgstr "Apakah Anda ingin mengembalikan sistem Anda?"
 
-#, fuzzy
+#,
 #~ msgid "Samba server"
 #~ msgstr "Server Samba"
 
@@ -25320,13 +25403,13 @@ msgstr "Instalasi gagal"
 #~ msgstr "Sektor mana yang hendak dipindah"
 
 #~ msgid "Moving"
-#~ msgstr "Pindah"
+#~ msgstr "Memindahkan"
 
 #~ msgid "Moving partition..."
 #~ msgstr "Memindahkan partisi..."
 
 #~ msgid "Error opening %s for writing: %s"
-#~ msgstr "error membuka file %s untuk ditulisi: %s"
+#~ msgstr "Kesalahan membuka file %s untuk penulisan: %s"
 
 #~ msgid "OK"
 #~ msgstr "OK"
@@ -25335,11 +25418,11 @@ msgstr "Instalasi gagal"
 #~ "The following options can be set to customize your\n"
 #~ "system security. If you need an explanation, look at the help tooltip.\n"
 #~ msgstr ""
-#~ "Opsi berikut dapat diset utk mengatur keamanan sistem Anda.\n"
-#~ "Jika Anda butuh penjelasan, carilah di bagian Pertolongan.\n"
+#~ "Opsi berikut dapat diset untuk mengatur keamanan sistem Anda.\n"
+#~ "Jika Anda butuh penjelasan, carilah di tooltip Bantuan.\n"
 
 #~ msgid "The %s is not known by this version of Scannerdrake."
-#~ msgstr "%s tak dikenal oleh Scannerdrake versi ini."
+#~ msgstr "%s tidak dikenal oleh Scannerdrake versi ini."
 
 #~ msgid "Czech (QWERTZ)"
 #~ msgstr "Ceko (QWERTZ)"
@@ -25476,17 +25559,17 @@ msgstr "Instalasi gagal"
 #~ msgid "Icelandic"
 #~ msgstr "Islandia"
 
-#~ msgid "Italian"
-#~ msgstr "Itali"
+#~ msgid "italin"
+#~ msgstr "itali"
 
 #~ msgid "Inuktitut"
-#~ msgstr "Eskimo"
+#~ msgstr "Inuktitut"
 
 #~ msgid "Japanese 106 keys"
 #~ msgstr "Jepang 106 tombol"
 
 #~ msgid "Kannada"
-#~ msgstr "Kannada (India)"
+#~ msgstr "Kannada"
 
 #~ msgid "Korean keyboard"
 #~ msgstr "Keyboard Korea"
@@ -25525,10 +25608,10 @@ msgstr "Instalasi gagal"
 #~ msgstr "Mongol (cyrillic)"
 
 #~ msgid "Maltese (UK)"
-#~ msgstr "Malta (Inggris)"
+#~ msgstr "Malta (UK)"
 
 #~ msgid "Maltese (US)"
-#~ msgstr "Malta (Amerika)"
+#~ msgstr "Malta (US)"
 
 #~ msgid "Dutch"
 #~ msgstr "Belanda"
@@ -25585,13 +25668,13 @@ msgstr "Instalasi gagal"
 #~ msgstr "Tamil (layout ISCII)"
 
 #~ msgid "Tamil (Typewriter-layout)"
-#~ msgstr "Tamil (layout mesintik)"
+#~ msgstr "Tamil (layout mesin ketik)"
 
 #~ msgid "Thai keyboard"
-#~ msgstr "Papanketik Muangthai"
+#~ msgstr "keyboard Thai"
 
 #~ msgid "Tajik keyboard"
-#~ msgstr "Papanketik Tajik"
+#~ msgstr "keyboard Tajik"
 
 #~ msgid "Turkish (traditional \"F\" model)"
 #~ msgstr "Turki (model \"F\" tradisional)"
@@ -25612,7 +25695,7 @@ msgstr "Instalasi gagal"
 #~ msgstr "Yugoslavia (latin)"
 
 #~ msgid "Enable multiple profiles"
-#~ msgstr "Aktifkan profil majemuk"
+#~ msgstr "Aktifkan banyak profil"
 
 #~ msgid ""
 #~ "You now have the opportunity to download updated packages. These "
@@ -25625,23 +25708,24 @@ msgstr "Instalasi gagal"
 #~ "\n"
 #~ "Do you want to install the updates ?"
 #~ msgstr ""
-#~ "Anda kini dapat men-download paket update yg mungkin dirilis setelah\n"
-#~ "distribusi ini dirilis.\n"
+#~ "Anda memiliki kesempatan untuk mendownload paket update. \n"
+#~ "Paket ini telah diupdate setelah distribusi dirilis. Mereka mungkin\n"
+#~ "memiliki perbaikan keamanan atau cacat.\n"
 #~ "\n"
-#~ "Anda perlu koneksi Internet untuk men-download.\n"
+#~ "Untuk mendownload paket ini, Anda perlu koneksi Internet.\n"
 #~ "\n"
-#~ "Ingin instal update?"
+#~ "Apakah Anda ingin menginstall update?"
 
 #~ msgid "Installing bootloader"
-#~ msgstr "Instalasi bootloader"
+#~ msgstr "Menginstall bootloader"
 
 #~ msgid ""
 #~ "You may now provide options to module %s.\n"
 #~ "Options are in format ``name=value name2=value2...''.\n"
 #~ "For instance, ``io=0x300 irq=7''"
 #~ msgstr ""
-#~ "Silakan beri parameter untuk modul %s ini.\n"
-#~ "Parameter biasanya dalam format ``nama=nilai nama2=nilai2...''.\n"
+#~ "Anda bisa menyediakan opsi untuk modul %s.\n"
+#~ "Opsi biasanya dalam format ``nama=nilai nama2=nilai2...''.\n"
 #~ "Misalnya, ``io=0x300 irq=7''"
 
 #~ msgid "Configuring printer..."
@@ -25657,7 +25741,7 @@ msgstr "Instalasi gagal"
 #~ msgstr "Hapus printer ini dari Star Office/OpenOffice.org/GIMP"
 
 #~ msgid "Adding printer to Star Office/OpenOffice.org/GIMP"
-#~ msgstr "Penambahan printer ke Star Office/OpenOffice.org/GIMP"
+#~ msgstr "Menambahkan printer ke Star Office/OpenOffice.org/GIMP"
 
 #~ msgid ""
 #~ "The printer \"%s\" was successfully added to Star Office/OpenOffice.org/"
@@ -25666,8 +25750,7 @@ msgstr "Instalasi gagal"
 #~ "Printer \"%s\" sukses ditambahkan ke Star Office/OpenOffice.org/GIMP."
 
 #~ msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
-#~ msgstr ""
-#~ "Gagal menambahkan printer \"%s\" ke Star Office/OpenOffice.org/GIMP."
+#~ msgstr "Gagal menambahkan printer \"%s\" ke Star Office/OpenOffice.org/GIMP."
 
 #~ msgid "Removing printer from Star Office/OpenOffice.org/GIMP"
 #~ msgstr "Hapus printer dari Star Office/OpenOffice.org/GIMP"
@@ -25683,11 +25766,10 @@ msgstr "Instalasi gagal"
 #~ "Gagal menghapus printer \"%s\" dari Star Office/OpenOffice.org/GIMP."
 
 #~ msgid "Installation of %s failed. The following error occurred:"
-#~ msgstr "Instalasi %s gagal. Ada kesalahan berikut:"
+#~ msgstr "Instalasi %s gagal. Terdapat kesalahan berikut:"
 
 #~ msgid "Set of tools to read and send mail and news and to browse the Web"
-#~ msgstr ""
-#~ "Kumpulan tool utk membaca, mengirim email dan news serta membrowse Web"
+#~ msgstr "Kumpulan perkakas untuk membaca, mengirim email dan berita serta menjelajah Web"
 
 #~ msgid "Use auto detection"
 #~ msgstr "Gunakan deteksi otomatis"
@@ -25701,10 +25783,12 @@ msgstr "Instalasi gagal"
 #~ "is\n"
 #~ "similar to the one used during installation."
 #~ msgstr ""
-#~ "\"%s\": klik \"%s\" utk membuka konfigurator printer. Baca\n"
-#~ "bab yg bersangkutan di ``Pedoman Pemula'' utk info lebih lanjut ttg cara\n"
-#~ "setup printer baru. Antarmuka yg ditampilkan di sana sama dg yg dipakai\n"
-#~ "saat instalasi."
+#~ "\"%s\": Mengklik pada tombol \"%s\" akan membuka wizard konfigurasi "
+#~ "printer.\n"
+#~ "Periksa bab yang bersangkutan pada ``Pedoman Pemula'' untuk informasi \n"
+#~ "lebih lanjut tentang cara \n"
+#~ "setup printer baru. Antarmuka yang ditampilkan \n"
+#~ "sama dengan yang dipakai saat instalasi."
 
 #~ msgid ""
 #~ "\"%s\": check the current country selection. If you are not in this\n"
@@ -25714,9 +25798,9 @@ msgstr "Instalasi gagal"
 #~ "complete\n"
 #~ "country list."
 #~ msgstr ""
-#~ "\"%s\": cek pilihan negara saat ini. Jika tak berada di sini, klik\n"
-#~ "\"%s\" dan pilih yg lain. Jika negara Anda tak ada di daftar,\n"
-#~ "klik \"%s\" utk mendapatkan daftar lengkap."
+#~ "\"%s\": pastikan pilihan negara aktual. Jika Anda tidak berada pada negara\n"
+#~ "ini, klik pada tombol \"%s\" dan pilih yang lain. Jika negara Anda \n"
+#~ "tidak ada pada daftar, klik tombol \"%s\" untuk mendapatkan daftar lengkap negara."
 
 #~ msgid "GRUB"
 #~ msgstr "GRUB"
@@ -25737,16 +25821,16 @@ msgstr "Instalasi gagal"
 #~ "present on your system, you can click on the button and choose another\n"
 #~ "driver."
 #~ msgstr ""
-#~ "\"%s\": jika kartu suara terdeteksi di sistem Anda, ia ditampilkan\n"
-#~ "di sini. Jika kartu suara yg tampil tak sesuai dg yg ada di sistem, "
-#~ "pilih\n"
-#~ "driver lain."
+#~ "\"%s\": jika kartu suara terdeteksi pada sistem Anda, akan ditampilkan"
+#~ "di sini.\n"
+#~ "Jika Anda mendapati kartu suara yang tampil tidak sesuai dengan yang ada\n"
+#~ "pada sistem Anda, Anda bisa klik pada tombol dan pilih driver lain.\n"
 
 #~ msgid ""
 #~ "No ethernet network adapter has been detected on your system.\n"
 #~ "I cannot set up this connection type."
 #~ msgstr ""
-#~ "Tidak ada adapter jaringan ethernet yang terdeteksi di sistem ini.\n"
+#~ "Tidak ada adapter jaringan ethernet yang terdeteksi pada sistem Anda.\n"
 #~ "Tipe koneksi ini tak dapat diset up."
 
 #~ msgid ""
@@ -25762,16 +25846,16 @@ msgstr "Instalasi gagal"
 #~ "will be \n"
 #~ "transferred to that server."
 #~ msgstr ""
-#~ "Klik tombol utk mengirim laporan kutu.\n"
-#~ "Ini akan membuka window browser web di %s\n"
-#~ "dan akan ada formulir untuk diisi. Info yang tampil di atas akan\n"
-#~ "ditransfer ke server tsb."
+#~ "Untuk mengirimkan laporan kesalahan, klik pada tombol laporan.\n"
+#~ "Ini akan membuka window browser web pada %s\n"
+#~ "dimana Anda akan menemukan formulir untuk diisi. Info yang ditampilkan di atas akan\n"
+#~ "ditransfer ke server tersebut."
 
 #~ msgid "chunk size"
 #~ msgstr "ukuran chunk"
 
 #~ msgid "mkraid failed (maybe raidtools are missing?)"
-#~ msgstr "mkraid gagal (mungkin raidtoolsnya tak ada?)"
+#~ msgstr "mkraid gagal (mungkin raidtoolsnya tidak ada?)"
 
 #~ msgid "mkraid failed"
 #~ msgstr "mkraid gagal"
@@ -25787,9 +25871,9 @@ msgstr "Instalasi gagal"
 #~ "[OPSI] [NAMA_PROGRAM]\n"
 #~ "\n"
 #~ "OPSI:\n"
-#~ "  --help            - cetak pesan ini.\n"
-#~ "  --report          - program harus berupa alat mandrake\n"
-#~ "  --incident        - program harus berupa alat mandrake"
+#~ "  --help            - cetak pesan bantuan ini.\n"
+#~ "  --report          - program harus berupa perkakas mandrake\n"
+#~ "  --incident        - program harus berupa perkakas mandrake"
 
 #~ msgid "Mandrake Online"
 #~ msgstr "Mandrake Online"
@@ -25802,7 +25886,7 @@ msgstr "Instalasi gagal"
 #~ "Periksa konfigurasi Anda di Pusat Kontrol Mandrake."
 
 #~ msgid "The package %s is needed. Install it?"
-#~ msgstr "Perlu paket %s. Anda ingin instal?"
+#~ msgstr "Paket %s diperlukan. Anda ingin instal?"
 
 #~ msgid "ignore"
 #~ msgstr "abaikan"
@@ -25817,7 +25901,7 @@ msgstr "Instalasi gagal"
 #~ msgstr "Instalasi SILO"
 
 #~ msgid "First sector of boot partition"
-#~ msgstr "Sektor pertama di partisi boot"
+#~ msgstr "Sektor pertama pada partisi boot"
 
 #~ msgid "Bootloader installation"
 #~ msgstr "Instalasi Bootloader"
@@ -25835,30 +25919,31 @@ msgstr "Instalasi gagal"
 #~ msgstr "Harddrake2 versi %s"
 
 #~ msgid "transmitted"
-#~ msgstr "dipancarkan"
+#~ msgstr "dikirimkan"
 
 #~ msgid "received"
 #~ msgstr "diterima"
 
 #~ msgid ""
 #~ "You can export using NFS or SMB. Please select which you'd like to use."
-#~ msgstr "Anda dapat mengekspor dg NFS atau SMB. Pilih yg Anda ingin."
+#~ msgstr ""
+#~ "Anda bisa mengekspor menggunakan NFS atau SMB. Pilih yang hendak Anda gunakan."
 
 #~ msgid ""
 #~ "You can export using NFS or Samba. Please select which you'd like to use."
 #~ msgstr "Anda dapat mengekspor dg NFS atau Samba. Pilih yg Anda ingin."
 
 #~ msgid "You must be root to read configuration file. \n"
-#~ msgstr "Hanya root yg dapat membaca file konfigurasi.\n"
+#~ msgstr "Hanya root yang dapat membaca file konfigurasi.\n"
 
 #~ msgid ""
 #~ "Your card can have 3D hardware acceleration support but only with Xorg %"
 #~ "s.\n"
 #~ "Your card is supported by Xorg %s which may have a better support in 2D."
 #~ msgstr ""
-#~ "Kartu Anda punya akselerasi hardware 3D, tapi hanya bisa digunakan pada "
+#~ "Kartu Anda bisa memiliki dukungan akselerasi hardware 3D, tapi hanya pada "
 #~ "Xorg %s.\n"
-#~ "Kartu Anda ini dapat dipakai pada Xorg %s yg punya dukungan baik dalam 2D."
+#~ "Kartu Anda ini didukung oleh Xorg %s yang mungkin memiliki dukungan lebih baik dalam 2D."
 
 #~ msgid ""
 #~ "Your card can have 3D hardware acceleration support but only with Xorg %"
@@ -25867,9 +25952,9 @@ msgstr "Instalasi gagal"
 #~ "Your card is supported by Xorg %s which may have a better support in 2D."
 #~ msgstr ""
 #~ "Kartu Anda dapat menggunakan akselerasi hardware 3D pada Xorg %s,\n"
-#~ "NAMUN INI BARU DALAM TAHAP PERCOBAAN DAN DAPAT MEMBUAT KOMPUTER ANDA "
+#~ "PERHATIKAN INI DALAM TAHAP PERCOBAAN DAN DAPAT MEMBUAT KOMPUTER ANDA "
 #~ "HANG.\n"
-#~ "Kartu Anda ini dapat digunakan Xorg %s yang lebih baik dalam 2D."
+#~ "Kartu Anda ini didukung oleh Xorg %s yang mungkin memiliki dukungan lebih baik dalam 2D."
 
 #~ msgid "Xpmac (installation display driver)"
 #~ msgstr "Xpmac (instalasi driver display)"
@@ -25881,19 +25966,19 @@ msgstr "Instalasi gagal"
 #~ msgstr "Server XFree86: %s\n"
 
 #~ msgid "Here is the full list of keyboards available"
-#~ msgstr "Ini adalah daftar papanketik yang tersedia"
+#~ msgstr "Berikut adalah daftar keyboard yang tersedia"
 
 #~ msgid "Please insert the Boot floppy used in drive %s"
 #~ msgstr "Masukkan floppy boot ke drive %s"
 
 #~ msgid "XawTV is not installed!"
-#~ msgstr "XawTV tak diinstal"
+#~ msgstr "XawTV tidak terinstall"
 
 #~ msgid "Provider dns 1 (optional)"
-#~ msgstr "DNS Provider 1 (boleh diisi boleh tidak)"
+#~ msgstr "DNS Provider 1 (opsional)"
 
 #~ msgid "Provider dns 2 (optional)"
-#~ msgstr "DNS Provider 2 (boleh diisi boleh tidak)"
+#~ msgstr "DNS Provider 2 (opsional)"
 
 #~ msgid "DHCP Client"
 #~ msgstr "Klien DHCP"
@@ -25915,23 +26000,23 @@ msgstr "Instalasi gagal"
 #~ msgstr "Tipe koneksi ISDN apa yang Anda miliki?"
 
 #~ msgid "Do you want to start a new configuration ?"
-#~ msgstr "Ingin jalankan konfigurasi baru?"
+#~ msgstr "Apakah Anda ingin menjalankan konfigurasi baru?"
 
 #~ msgid ""
 #~ "I have detected an ISDN PCI card, but I do not know its type. Please "
 #~ "select a PCI card on the next screen."
 #~ msgstr ""
-#~ "Saya mendeteksi adanya sebuah card ISDN PCI, tapi saya tidak tahu "
-#~ "tipenya. Silakan pilih card PCI tersebut pada layar berikutnya."
+#~ "Telah terdeteksi sebuah card ISDN PCI, tapi tidak diketahui jenisnya. "
+#~ "Silakan pilih card PCI tersebut pada layar berikutnya."
 
 #~ msgid "No ISDN PCI card found. Please select one on the next screen."
-#~ msgstr "Tiada kartu PCI ISDN ditemukan. Pilihlah satu pd layar berikut."
+#~ msgstr "Tidak ada kartu PCI ISDN yang ditemukan. Pilihlah satu pada layar berikut."
 
 #~ msgid "Under Devel ... please wait."
-#~ msgstr "Sedang dibangun ... tunggu."
+#~ msgstr "Sedang dikembangkan ... harap menunggu."
 
 #~ msgid "Windows (FAT32)"
-#~ msgstr "Mindows (FAT32)"
+#~ msgstr "Windows (FAT32)"
 
 #~ msgid ""
 #~ "This uses the same syntax as the command line program 'cdrecord'. "
@@ -25944,35 +26029,35 @@ msgstr "Instalasi gagal"
 #~ "Enter your CD Writer device name\n"
 #~ " ex: 0,1,0"
 #~ msgstr ""
-#~ "Masukkan nama device Penulis CD Anda\n"
+#~ "Masukkan nama divais CD Writer Anda\n"
 #~ " mis: 0,1,0"
 
 #~ msgid "Scientific Workstation"
-#~ msgstr "Aplikasi Ilmu pengetahuan"
+#~ msgstr "Workstation Ilmiah"
 
 #~ msgid "Scientific applications such as gnuplot"
-#~ msgstr "Aplikasi ilmiah semacam gnuplot"
+#~ msgstr "Aplikasi ilmiah seperti gnuplot"
 
 #~ msgid "Can not create log file!"
-#~ msgstr "File log tak dapat dibuat!"
+#~ msgstr "Tidak bisa membuat file log!"
 
 #~ msgid "Please select media for backup..."
-#~ msgstr "Pilih media backup..."
+#~ msgstr "Pilih media untuk backup..."
 
 #~ msgid "Configuration of a remote printer"
 #~ msgstr "Konfigurasi printer remote"
 
 #~ msgid "Gnome Workstation"
-#~ msgstr "Stasiunkerja Gnome"
+#~ msgstr "Workstation Gnome"
 
 #~ msgid "Running \"%s\" ..."
-#~ msgstr "Jalankan \"%s\"..."
+#~ msgstr "Menjalankan \"%s\"..."
 
 #~ msgid "utopia 25"
 #~ msgstr "utopia 25"
 
 #~ msgid "On Hard Drive"
-#~ msgstr "di Hard Drive"
+#~ msgstr "Pada Hard Drive"
 
 #~ msgid "Messages"
 #~ msgstr "Pesan"
@@ -25981,4 +26066,4 @@ msgstr "Instalasi gagal"
 #~ msgstr "Syslog"
 
 #~ msgid "Compact"
-#~ msgstr "Kompak"
+#~ msgstr "Ringkas"
