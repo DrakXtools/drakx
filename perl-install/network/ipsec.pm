@@ -72,7 +72,11 @@ sub recreate_racoon_conf {
 			 } elsif ($racoon->{$key1}{$key2}[0] =~ /^sainfo/) {
 				$in_a_section = "y";
 				$in_a_proposal_section = "n";
-				print  "$racoon->{$key1}{$key2}[0] $racoon->{$key1}{$key2}[1] $racoon->{$key1}{$key2}[2] $racoon->{$key1}{$key2}[3] $racoon->{$key1}{$key2}[4] $racoon->{$key1}{$key2}[5] $racoon->{$key1}{$key2}[6] {\n"; 
+				if ($racoon->{$key1}{$key2}[2] && $racoon->{$key1}{$key2}[5]) {
+					print  "$racoon->{$key1}{$key2}[0] $racoon->{$key1}{$key2}[1] $racoon->{$key1}{$key2}[2] $racoon->{$key1}{$key2}[3] $racoon->{$key1}{$key2}[4] $racoon->{$key1}{$key2}[5] $racoon->{$key1}{$key2}[6] {\n";
+				} else {
+					print "$racoon->{$key1}{$key2}[0] anonymous {\n";
+				}
 			} elsif ($racoon->{$key1}{$key2}[0] =~ /^proposal /) {
 				$in_a_proposal_section = "y";
 				print "\t$racoon->{$key1}{$key2}[0] {\n";
@@ -252,31 +256,35 @@ sub display_racoon_conf {
 				my $list_length = scalar @{$racoon->{$key1}{$key2}};
 				my $already_read = 0;
 				my $line = "";
+				
+				if ($racoon->{$key1}{$key2}[0] eq "sainfo" && !$racoon->{$key1}{$key2}[2]) {
+					$line = "sainfo anonymous";
+				} else {
+					for (my $i = 0; $i <= $list_length-1; $i++) {	
 
-				for (my $i = 0; $i <= $list_length-1; $i++) {	
+						my $c = $racoon->{$key1}{$key2}[$i];
+						my $n = $racoon->{$key1}{$key2}[$i+1];
 
-					my $c = $racoon->{$key1}{$key2}[$i];
-					my $n = $racoon->{$key1}{$key2}[$i+1];
-
-					if ($c =~ /^path|^log|^timer|^listen|^padding|^remote|^proposal|^sainfo/) {
-						$line .= "$c "; 
-					} elsif ($i == $list_length-2 && $n =~ /^#/) {
-						$line .= "$c; "; 
-					} elsif ($i == $list_length-1) {
-						if ($f =~ /^#|^$|^timer|^listen|^padding|^remote|^proposal\s+|^sainfo/) {
-							$line .= $c; 
-						} elsif ($c =~ /^#/) {
-							$line .= "\t$c"; 
+						if ($c =~ /^path|^log|^timer|^listen|^padding|^remote|^proposal|^sainfo/) {
+							$line .= "$c "; 
+						} elsif ($i == $list_length-2 && $n =~ /^#/) {
+							$line .= "$c; "; 
+						} elsif ($i == $list_length-1) {
+							if ($f =~ /^#|^$|^timer|^listen|^padding|^remote|^proposal\s+|^sainfo/) {
+								$line .= $c; 
+							} elsif ($c =~ /^#/) {
+								$line .= "\t$c"; 
+							} else {
+								$line .= "$c;"; 
+							}
 						} else {
-							$line .= "$c;"; 
+							$line .= "$c "; 
 						}
-					} else {
-						$line .= "$c "; 
+	
+						$already_read = 1;
 					}
-
-					$already_read = 1;
 				}
-
+	
 				if ($f =~ /^timer|^listen|^padding|^remote|^sainfo/) {
 					$line .= " {";
 					$prefix_to_simple_line = "";
@@ -320,28 +328,32 @@ sub write_racoon_conf {
 				my $already_read = 0;
 				my $line = "";
 
-				for (my $i = 0; $i <= $list_length-1; $i++) {	
-
-					my $c = $racoon->{$key1}{$key2}[$i];
-					my $n = $racoon->{$key1}{$key2}[$i+1];
-
-					if ($c =~ /^path|^log|^timer|^listen|^padding|^remote|^proposal|^sainfo/) {
-						$line .= "$c "; 
-					} elsif ($i == $list_length-2 && $n =~ /^#/) {
-						$line .= "$c; "; 
-					} elsif ($i == $list_length-1) {
-						if ($f =~ /^#|^$|^timer|^listen|^padding|^remote|^proposal\s+|^sainfo/) {
-							$line .= $c; 
-						} elsif ($c =~ /^#/) {
-							$line .= "\t$c"; 
+				if ($racoon->{$key1}{$key2}[0] eq "sainfo" && !$racoon->{$key1}{$key2}[2]) {
+					$line = "sainfo anonymous";
+				} else {
+					for (my $i = 0; $i <= $list_length-1; $i++) {	
+	
+						my $c = $racoon->{$key1}{$key2}[$i];
+						my $n = $racoon->{$key1}{$key2}[$i+1];
+	
+						if ($c =~ /^path|^log|^timer|^listen|^padding|^remote|^proposal|^sainfo/) {
+							$line .= "$c "; 
+						} elsif ($i == $list_length-2 && $n =~ /^#/) {
+							$line .= "$c; "; 
+						} elsif ($i == $list_length-1) {
+							if ($f =~ /^#|^$|^timer|^listen|^padding|^remote|^proposal\s+|^sainfo/) {
+								$line .= $c; 
+							} elsif ($c =~ /^#/) {
+								$line .= "\t$c"; 
+							} else {
+								$line .= "$c;"; 
+							}
 						} else {
-							$line .= "$c;"; 
+							$line .= "$c "; 
 						}
-					} else {
-						$line .= "$c "; 
+	
+						$already_read = 1;
 					}
-
-					$already_read = 1;
 				}
 
 				if ($f =~ /^timer|^listen|^padding|^remote|^sainfo/) {
