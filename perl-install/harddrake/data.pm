@@ -192,6 +192,7 @@ our @tree =
       icon => "modem.png",
       configurator => "$sbindir/drakconnect",
       detector => sub { require network::isdn; my $isdn = network::isdn::detect_backend($modules_conf); if_(@$isdn, f(@$isdn)) },
+      # we do not check these b/c this need user interaction (auth, ...):
       checked_on_boot => 0,
      },
 
@@ -215,6 +216,7 @@ our @tree =
       icon => "modem.png",
       configurator => "$sbindir/drakconnect",
       detector => sub { detect_devices::getModem($modules_conf) },
+      # we do not check these b/c this need user interaction (auth, ...):
       checked_on_boot => 0,
      },
 
@@ -228,6 +230,7 @@ our @tree =
           my $a = network::adsl::adsl_detect();
           $a ? f(grep { $_ } values %$a) : ();
       },
+      # we do not check these b/c this need user interaction (auth, ...):
       checked_on_boot => 0,
      },
 
@@ -255,6 +258,7 @@ our @tree =
       icon => "hw_printer.png",
       configurator => "$sbindir/printerdrake",
       detector => sub { require printer::detect; printer::detect::local_detect() },
+      # we do not check these b/c this need user interaction (auth, ...):
       checked_on_boot => 0,
      },
 
