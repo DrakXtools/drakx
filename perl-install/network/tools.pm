@@ -181,7 +181,7 @@ sub remove_initscript() {
 
 sub use_windows {
     my ($file) = @_;
-    my $all_hds = fsedit::get_hds({}, undef); 
+    my $all_hds = fsedit::get_hds(); 
     fs::get_info_from_fstab($all_hds);
     if (my $part = find { $_->{device_windobe} eq 'C' } fs::get::fstab($all_hds)) {
 	my $source = find { -d $_ && -r "$_/$file" } map { "$part->{mntpoint}/$_" } qw(windows/system winnt/system windows/system32/drivers winnt/system32/drivers);
