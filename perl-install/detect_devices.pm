@@ -432,7 +432,8 @@ sub whatParport() {
     @res;
 }
 
-sub usbMice      { grep { $_->{media_type} =~ /\|Mouse/ && $_->{driver} !~ /Tablet:wacom/} usb_probe() }
+sub usbMice      { grep { ($_->{media_type} =~ /\|Mouse/ || $_->{driver} =~ /Mouse:USB/) &&
+			    $_->{driver} !~ /Tablet:wacom/} usb_probe() };
 sub usbWacom     { grep { $_->{driver} =~ /Tablet:wacom/ } usb_probe() }
 sub usbKeyboards { grep { $_->{media_type} =~ /\|Keyboard/ } usb_probe() }
 sub usbStorage   { grep { $_->{media_type} =~ /Mass Storage\|/ } usb_probe() }
