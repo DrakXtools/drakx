@@ -14,9 +14,10 @@ my $tmpconfig = "/tmp/Xconfig";
 
 sub xtest {
     my ($display) = @_;
-    $::isStandalone ? 
-      system("DISPLAY=$display /usr/X11R6/bin/xtest") == 0 : 
-      c::Xtest($display);    
+    eval {
+	require xf86misc::main;
+	xf86misc::main::Xtest($display);
+    };
 }
 
 sub test {

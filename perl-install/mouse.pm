@@ -424,7 +424,10 @@ sub change_mouse_live {
     if (!$::testing) {
 	devices::make($mouse->{device});
 	symlinkf($mouse->{device}, "/dev/mouse");
-	c::setMouseLive($ENV{DISPLAY}, $xId, $mouse->{nbuttons} < 3);
+	eval {
+	    require xf86misc::main;
+	    xf86misc::main::setMouseLive($ENV{DISPLAY}, $xId, $mouse->{nbuttons} < 3);
+	};
     }
     1;
 }

@@ -12,6 +12,7 @@ use vars qw(@ISA);
 use pkgs;
 use install_steps_interactive;
 use interactive::gtk;
+use xf86misc::main;
 use common;
 use ugtk2 qw(:helpers :wrappers :create);
 use devices;
@@ -63,7 +64,7 @@ sub new($$) {
 	    foreach (1..60) {
 		sleep 1;
 		log::l("Server died"), return 0 if !fuzzy_pidofs(qr/\b$server\b/);
-		$nb++ if c::Xtest($wanted_DISPLAY);
+		$nb++ if xf86misc::main::Xtest($wanted_DISPLAY);
 		if ($nb > 2) { #- one succeeded test is not enough :-(
 		    $ugtk2::force_focus = 1;
 		    log::l("AFAIK X server is up");
