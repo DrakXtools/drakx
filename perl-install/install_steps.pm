@@ -930,7 +930,7 @@ sub miscellaneous {
 }
 sub miscellaneousAfter {
     my ($o) = @_;
-    add2hash_ $o, { useSupermount => $o->{security} < 4 };
+    add2hash_ $o, { useSupermount => $o->{security} < 4 ? 'magicdev' : 0 };
 
     $ENV{SECURE_LEVEL} = $o->{security}; #- deprecated with chkconfig 1.3.4-2mdk, uses /etc/sysconfig/msec
 

@@ -438,7 +438,7 @@ sub set_default_options {
     my ($options, $unknown) = mount_options_unpack($part);
 
     if ($opts{is_removable}) {
-	$options->{supermount} = $opts{useSupermount};
+	$options->{supermount} = $opts{useSupermount} && !($opts{useSupermount} eq 'magicdev' && $part->{media_type} eq 'cdrom');
 	$part->{type} = !$options->{supermount} ? 'auto' :
 	  $part->{media_type} eq 'cdrom' ? 'udf:iso9660' : 'ext2:vfat';
     }
