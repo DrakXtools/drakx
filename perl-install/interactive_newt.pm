@@ -143,7 +143,6 @@ sub ask_from_entries_refW {
 	 my ($w, $ref) = @_;
 	 my $val = ${$ref->{val}};
 	 sub { 
-	     print STDERR "$ref->{type}: ($val)\n";
 	     $ref->{type} eq "bool" ? 
 	       $w->CheckboxSetValue(checkval($val)) :
 	     $ref->{type} eq "list" ?

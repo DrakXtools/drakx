@@ -9,11 +9,10 @@ STAGE2      = $(ROOTDEST)/Mandrake/base/mdkinst_stage2
 BASE        = $(ROOTDEST)/Mandrake/base
 DESTREP4PMS = $(DEST)$(REP4PMS)
 PERL        = perl
-LOCALFILES  = pnp_serial mouseconfig ddcxinfos
+LOCALFILES  = pnp_serial mouseconfig
 LOCALFILES2 = extract_archive
 DIRS        = c Newt po pci_probing resize_fat
 EXCLUDE     = $(LOCALFILES) boot.img keymaps consolefonts install
-RPMS        = $(wildcard $(ROOTDEST)/Mandrake/RPMS/*.rpm)
 CFLAGS	    = -Wall
 override CFLAGS  += -pipe
 
@@ -26,7 +25,7 @@ TAGS: $(PMS)
 
 clean:
 	for i in $(DIRS); do $(MAKE) -C $$i clean; done
-	rm -rf gendepslist auto ../diskdrake*
+	rm -rf auto ../diskdrake*
 	find . -name "*~" -o -name ".#*" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
 tar: clean
@@ -54,15 +53,6 @@ test_pms: verify_c
 
 verify_c:
 	./verify_c $(PMS)
-
-gendepslist: %: %.cc 
-	$(CXX) -I/usr/include/rpm $(CFLAGS) $< -lrpm -ldb1 -lz -o $@
-
-$(BASE)/depslist: $(BASE)/hdlist gendepslist
-	./gendepslist -h $@ $<
-
-$(BASE)/hdlist: $(RPMS) 
-	$(ROOTDEST)/misc/genhdlist $(ROOTDEST)
 
 install_pms: $(DIRS)
 	for i in `perl -ne 's/sub (\w+?)_? {.*/$$1/ and print' commands.pm`; do ln -sf commands $(DEST)/usr/bin/$$i; done
@@ -155,7 +145,7 @@ get_needed_files: $(DIRS)
 
 	tar xyC $(DEST) -f ../install/install1_pcmcia.tar.bz2 ./etc/pcmcia
 
-full_stage2: $(BASE)/depslist $(BASE)/hdlist
+full_stage2:
 	sudo rm -rf $(DEST)
 	mkdir -p $(DEST)
 	$(MAKE) get_needed_files 

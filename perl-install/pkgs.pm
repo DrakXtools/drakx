@@ -21,6 +21,11 @@ hackkernel hackkernel-BOOT hackkernel-fb hackkernel-headers
 hackkernel-pcmcia-cs hackkernel-smp hackkernel-smp-fb
 );
 
+my @preferred = qw(
+
+);
+
+
 my $A = 20471;
 my $B = 16258;
 sub correctSize { ($A - $_[0]) * $_[0] / $B } #- size correction in MB.
@@ -46,7 +51,14 @@ sub select($$;$) {
 	my %l; @l{@{$p->{deps} || die "missing deps file"}} = ();
 	while (do { my %l = %l; while (($n, $v) = each %l) { last if $v != 1; } $n }) {
 	    $l{$n} = 1;
-	    my $i = Package($packages, $n) or next;
+	    my $i = Package($packages, $n);
+	    if (!$i && $n =~ /\|/) {
+		foreach (split '\|', $n) {
+		    print "SSSSSSSSSSSSS $_\n";
+		    $i = Package($packages, $_);
+		    last if $i && $i->{selected};
+		}
+	    }
 	    $i->{base} ||= $base;
 	    $i->{deps} or log::l("missing deps for $n");
 	    unless ($i->{installed}) {
@@ -163,7 +175,7 @@ sub getDeps($) {
     my $f = install_any::getFile("depslist") or die "can't find dependencies list";
     foreach (<$f>) {
 	my ($name, $size, @deps) = split;
-	($name, @deps) = map { chop_version(first(split '\|')) } ($name, @deps); #-TODO better handling of choice
+	($name, @deps) = map { join '|', map { chop_version($_) } split '\|' } ($name, @deps);
 	$packages->{$name} or next;
 	$packages->{$name}{size} = $size;
 	$packages->{$name}{deps} = \@deps;
