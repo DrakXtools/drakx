@@ -44,7 +44,7 @@ sub read_resolv_conf {
 
 sub read_interface_conf {
     my ($file) = @_;
-    my %intf = getVarsFromSh($file) or die "cannot open file $file: $!";
+    my %intf = getVarsFromSh($file);
 
     $intf{BOOTPROTO} ||= 'static';
     $intf{isPtp} = $intf{NETWORK} eq '255.255.255.255';

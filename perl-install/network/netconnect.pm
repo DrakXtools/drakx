@@ -316,12 +316,14 @@ sub load_conf {
 sub get_net_device() {
     my $connect_file = "/etc/sysconfig/network-scripts/net_cnx_up";
     my $network_file = "/etc/sysconfig/network";
-    if (cat_("$prefix$connect_file") =~ /network/) {
-	${{ getVarsFromSh("$prefix$network_file") }}{GATEWAYDEV};
+		if (cat_("$prefix$connect_file") =~ /ifup/) {
+  		if_(cat_($connect_file) =~ /^\s*ifup\s+(.*)/m, split(' ', $1))
+		} elsif (cat_("$prefix$connect_file") =~ /network/) {
+			${{ getVarsFromSh("$prefix$network_file") }}{GATEWAYDEV};
     } elsif (cat_("$prefix$connect_file") =~ /isdn/) {
-	"ippp+"; 
+			"ippp+"; 
     } else {
-	"ppp+";
+			"ppp+";
     };
 }
 
