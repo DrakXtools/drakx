@@ -32,6 +32,7 @@
 #define STAGE2_LOCATION  "/tmp/stage2"
 
 #ifdef MANDRAKE_MOVE
+#define MEM_LIMIT_MOVE 120
 #define DISTRIB_NAME "Mandrake Move"
 #define IMAGE_LOCATION   "/sysroot/image_raw"
 #define IMAGE_LOCATION_REAL "/sysroot/image"
