@@ -32,8 +32,8 @@ sub entry_size { $psizeof_format }
 
 #- call `f' for each entry of the directory
 #- if f return true, then modification in the entry are taken back
-sub traverse($$$) {
-    my ($fs, $directory, $f) = @_;
+sub traverse($$) {
+    my ($directory, $f) = @_;
 
     for (my $i = 0;; $i++) {
 	my $raw = \substr($directory, $i * $psizeof_format, $psizeof_format);
@@ -58,7 +58,7 @@ sub traverse_all($$) {
 	&$f($entry);
 
         resize_fat::dir_entry::is_directory($entry)
-	    and traverse($fs, resize_fat::io::read_file($fs, resize_fat::dir_entry::get_cluster($entry)), $traverse_all);
+	    and traverse(resize_fat::io::read_file($fs, resize_fat::dir_entry::get_cluster($entry)), $traverse_all);
 
 	undef; #- no need to write back (cf traverse)
     };
@@ -66,14 +66,14 @@ sub traverse_all($$) {
     my $directory = $resize_fat::isFAT32 ?
 	resize_fat::io::read_file($fs, $fs->{fat32_root_dir_cluster}) :
 	resize_fat::io::read($fs, $fs->{root_dir_offset}, $fs->{root_dir_size});
-    traverse($fs, $directory, $traverse_all);
+    traverse($directory, $traverse_all);
+    $traverse_all = undef; #- circular reference is no good for perl's poor GC :(
 }
 
 
 #- function used by construct_dir_tree to translate the `cluster' fields in each
 #- directory entry
-sub remap {
+sub remap($$) {
     my ($fs, $directory) = @_;
-
-    traverse($fs->{fat_remap}, $directory, sub { resize_fat::dir_entry::remap($fs->{fat_remap}, $_[0]) });
+    traverse($directory, \&resize_fat::dir_entry::remap);
 }

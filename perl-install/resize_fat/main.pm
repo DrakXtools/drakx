@@ -45,11 +45,12 @@ sub new($$$) {
     resize_fat::boot_sector::read($fs);
     $resize_fat::isFAT32 and eval { resize_fat::info_sector::read($fs) };
     resize_fat::fat::read($fs);
-    resize_fat::fat::check($fs);
     resize_fat::any::flag_clusters($fs);
 
     bless $fs, $type;
 }
+
+sub DESTROY { resize_fat::c_rewritten::free_all() }
 
 #- copy all clusters >= <start_cluster> to a new place on the partition, less
 #- than <start_cluster>. Only copies files, not directories.
@@ -65,7 +66,9 @@ sub copy_clusters {
     };
     for (; $cluster < $fs->{nb_clusters} + 2; $cluster++) {
 	resize_fat::c_rewritten::flag($cluster) == $resize_fat::any::FILE or next;
-	push @buffer, $fs->{fat_remap}[$cluster], resize_fat::io::read_cluster($fs, $cluster);
+	push @buffer, 
+	  resize_fat::c_rewritten::fat_remap($cluster), 
+	  resize_fat::io::read_cluster($fs, $cluster);
 	@buffer > 50 and &$flush();
     }
     &$flush();
@@ -85,8 +88,8 @@ sub construct_dir_tree {
 	resize_fat::c_rewritten::flag($cluster) == $resize_fat::any::DIRECTORY or next;
 
       resize_fat::io::write_cluster($fs,
-				    $fs->{fat_remap}[$cluster],
-				  resize_fat::directory::remap($fs, resize_fat::io::read_cluster($fs, $cluster)));
+				    resize_fat::c_rewritten::fat_remap($cluster),
+				    resize_fat::directory::remap($fs, resize_fat::io::read_cluster($fs, $cluster)));
     }
 
     sync();
@@ -101,7 +104,7 @@ sub construct_dir_tree {
 	my $cluster = $fs->{fat32_root_dir_cluster};
 
 	resize_fat::io::write_cluster($fs,
-		      $fs->{fat_remap}[$cluster],
+		      resize_fat::c_rewritten::fat_remap($cluster),
 		      resize_fat::directory::remap($fs, resize_fat::io::read_cluster($fs, $cluster)));
     } else {
 	resize_fat::io::write($fs, $fs->{root_dir_offset}, $fs->{root_dir_size},

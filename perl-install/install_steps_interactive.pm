@@ -749,17 +749,17 @@ _("Linear (needed for some SCSI drives)") => { val => \$b->{linear}, type => "bo
 _("Compact") => { val => \$b->{compact}, type => "bool", text => _("compact") },
 _("Delay before booting default image") => \$b->{timeout},
 _("Video mode") => { val => \$b->{vga}, list => [ keys %lilo::vga_modes ], not_edit => $::beginner },
-$o->{security} < 2 ? () : (
+$o->{security} >= 4 ? () : (
 _("Password") => { val => \$b->{password}, hidden => 1 },
 _("Restrict command line options") => { val => \$b->{restricted}, type => "bool", text => _("restrict") },
 )
 	);
-	@l = @l[0..3] if $::beginner;
+	@l = @l[0..3] unless $::expert;
 
 	$b->{vga} ||= 'Normal';
 	$o->ask_from_entries_refH('', _("LILO main options"), \@l,
 				 complete => sub {
-				     $o->{security} > 4 && length($b->{password}) < 6 and $o->ask_warn('', _("At this level of security, a password (and a good one) in lilo is requested")), return 1;
+#-				     $o->{security} > 4 && length($b->{password}) < 6 and $o->ask_warn('', _("At this level of security, a password (and a good one) in lilo is requested")), return 1;
 				     $b->{restricted} && !$b->{password} and $o->ask_warn('', _("Option ``Restrict command line options'' is of no use without a password")), return 1;
 				     0;
 				 }

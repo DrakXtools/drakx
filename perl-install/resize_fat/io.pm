@@ -10,7 +10,7 @@ use resize_fat::fat;
 
 sub read($$$) {
     my ($fs, $pos, $size) = @_;
-    my $buf;
+    my $buf = "\0" x $size;
     sysseek $fs->{fd}, $pos, 0 or die "seeking to byte #$pos failed on device $fs->{fs_name}";
     sysread $fs->{fd}, $buf, $size or die "reading at byte #$pos failed on device $fs->{fs_name}";
     $buf;

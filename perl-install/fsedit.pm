@@ -20,14 +20,14 @@ use log;
 #- Globals
 #-#####################################################################################
 my @suggestions = (
-  { mntpoint => "/boot",    minsize =>  10 << 11, size =>  16 << 11, type => 0x83 },
-  { mntpoint => "/",        minsize =>  50 << 11, size => 100 << 11, type => 0x83 },
-  { mntpoint => "swap",     minsize =>  30 << 11, size =>  60 << 11, type => 0x82 },
-  { mntpoint => "/usr",     minsize => 200 << 11, size => 600 << 11, type => 0x83 },
-  { mntpoint => "/home",    minsize =>  50 << 11, size => 200 << 11, type => 0x83 },
-  { mntpoint => "/var",     minsize => 200 << 11, size => 250 << 11, type => 0x83 },
-  { mntpoint => "/tmp",     minsize =>  50 << 11, size => 100 << 11, type => 0x83 },
-  { mntpoint => "/mnt/iso", minsize => 700 << 11, size => 800 << 11, type => 0x83 },
+  { mntpoint => "/boot",    size =>  16 << 11, type => 0x83, maxsize =>  30 << 11 },
+  { mntpoint => "/",        size =>  50 << 11, type => 0x83, ratio => 1, maxsize => 300 << 11 },
+  { mntpoint => "swap",     size =>  30 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
+  { mntpoint => "/usr",     size => 200 << 11, type => 0x83, ratio => 6, maxsize =>1500 << 11 },
+  { mntpoint => "/home",    size =>  50 << 11, type => 0x83, ratio => 3 },
+  { mntpoint => "/var",     size => 200 << 11, type => 0x83, ratio => 1, maxsize =>1000 << 11 },
+  { mntpoint => "/tmp",     size =>  50 << 11, type => 0x83, ratio => 3, maxsize => 500 << 11 },
+  { mntpoint => "/mnt/iso", size => 700 << 11, type => 0x83 },
 );
 my @suggestions_mntpoints = qw(/mnt/dos);
 
@@ -44,12 +44,6 @@ sub typeOfPart($) { typeFromMagic(devices::make($_[0]), @partitions_signatures) 
 #-######################################################################################
 #- Functions
 #-######################################################################################
-sub suggestions_mntpoint($) {
-    my ($hds) = @_;
-    sort grep { !/swap/ && !has_mntpoint($_, $hds) }
-      (@suggestions_mntpoints, map { $_->{mntpoint} } @suggestions);
-}
-
 sub hds($$) {
     my ($drives, $flags) = @_;
     my @hds;
@@ -94,6 +88,10 @@ sub get_fstab(@) {
     map { partition_table::get_normal_parts($_) } @_;
 }
 
+sub free_space(@) {
+    sum map { $_->{size} } map { partition_table::get_holes($_) } @_;
+}
+
 sub hasRAID {
     my $b = 0;
     map { $b ||= isRAID($_) } get_fstab(@_);
@@ -107,30 +105,50 @@ sub get_root($) {
 }
 sub get_root_ { get_root([ get_fstab(@{$_[0]}) ]) }
 
+
+sub computeSize($$$$) {
+    my ($part, $best, $hds, $suggestions) = @_;
+    my $max = $part->{maxsize} || $part->{size};
+    my $tot_ratios = sum(map { $_->{ratio} } grep { !has_mntpoint($_->{mntpoint}, $hds) } @$suggestions);
+
+    min($max,
+	$best->{maxsize} || $max, 
+	$best->{size} 
+	+ free_space(@$hds)
+	* ($tot_ratios && $best->{ratio} / $tot_ratios));
+}
+
 sub suggest_part($$$;$) {
     my ($hd, $part, $hds, $suggestions) = @_;
     $suggestions ||= \@suggestions;
-    foreach (@$suggestions) { $_->{minsize} ||= $_->{size} }
 
     my $has_swap = grep { isSwap($_) } get_fstab(@$hds);
 
     my ($best, $second) =
-      grep { $part->{size} >= $_->{minsize} }
-      grep { ! has_mntpoint($_->{mntpoint}, $hds) || isSwap($_) && !$has_swap }
+      grep { !$_->{maxsize} || $part->{size} <= $_->{maxsize} }
+      grep { $_->{size} <= ($part->{maxsize} || $part->{size}) }
+      grep { !has_mntpoint($_->{mntpoint}, $hds) || isSwap($_) && !$has_swap }
+      grep { !$part->{type} || $part->{type} == $_->{type} }
 	@$suggestions or return;
 
     $best = $second if
       $best->{mntpoint} eq '/boot' &&
-      $part->{start} + $best->{minsize} > 1024 * partition_table::cylinder_size($hd); #- if the empty slot is beyond the 1024th cylinder, no use having /boot
+      $part->{start} + $best->{size} > 1024 * partition_table::cylinder_size($hd); #- if the empty slot is beyond the 1024th cylinder, no use having /boot
 
     defined $best or return; #- sorry no suggestion :(
 
     $part->{mntpoint} = $best->{mntpoint};
     $part->{type} = $best->{type};
-    $part->{size} = min($part->{size}, $best->{size});
+    $part->{size} = computeSize($part, $best, $hds, $suggestions);
+    print "<<<<$part->{size}, $part->{maxsize}\n";
     1;
 }
 
+sub suggestions_mntpoint($) {
+    my ($hds) = @_;
+    sort grep { !/swap/ && !has_mntpoint($_, $hds) }
+      (@suggestions_mntpoints, map { $_->{mntpoint} } @suggestions);
+}
 
 #-sub partitionDrives {
 #-
@@ -183,78 +201,32 @@ sub add($$$;$) {
       ($part->{mntpoint} = 'swap') :
       $options->{force} || check_mntpoint($part->{mntpoint}, $hd, $part, $hds);
 
+    delete $part->{maxsize};
     partition_table::add($hd, $part, $options->{primaryOrExtended});
 }
 
-sub removeFromList($$$) {
-    my ($start, $end, $list) = @_;
-    my $err = "error in removeFromList: removing an non-free block";
-
-    for (my $i = 0; $i < @$list; $i += 2) {
-	$start < $list->[$i] and die $err;
-	$start > $list->[$i + 1] and next;
-
-	if ($start == $list->[$i]) {
-	    $end > $list->[$i + 1] and die $err;
-	    if ($end == $list->[$i + 1]) {
-		#- the free block is just the same size, removing it
-		splice(@$list, $i, 2);
-	    } else {
-		#- the free block now start just after this block
-		$list->[$i] = $end;
-	    }
-	} else {
-	    $end <= $list->[$i + 1] or die $err;
-	    if ($end < $list->[$i + 1]) {
-		splice(@$list, $i + 2, 0, $end, $list->[$i + 1]);
-	    }
-	    $list->[$i + 1] = $start; #- shorten the free block
-	}
-	return;
-    }
-}
-
-
 sub allocatePartitions($$) {
     my ($hds, $to_add) = @_;
-    my %free_sectors = map { $_->{device} => [1, $_->{totalsectors} ] } @$hds; #- first sector is always occupied by the MBR
-    my $remove = sub { removeFromList($_[0]{start}, $_[0]->{start} + $_[0]->{size}, $free_sectors{$_[0]->{rootDevice}}) };
-    my $success = 0;
 
-    foreach (get_fstab(@$hds)) { &$remove($_); }
-
-    FSTAB: foreach (@$to_add) {
-	my %e = %$_;
-	foreach my $hd (@$hds) {
-	    my $v = $free_sectors{$hd->{device}};
-	    for (my $i = 0; $i < @$v; $i += 2) {
-		my $size = $v->[$i + 1] - $v->[$i];
-		$e{size} > $size and next;
-
-		if ($v->[$i] + $e{size} > 1024 * partition_table::cylinder_size($hd)) {
-		    next if $e{mntpoint} eq "/boot" || 
-		            $e{mntpoint} eq "/" && !has_mntpoint("/boot", $hds);
-		}
-		$e{start} = $v->[$i];
-		$e{rootDevice} = $hd->{device};
-		partition_table::adjustStartAndEnd($hd, \%e);
-		&$remove(\%e);
-		partition_table::add($hd, \%e);
-		$success++;
-		next FSTAB;
+    foreach my $hd (@$hds) {
+	foreach (partition_table::get_holes($hd)) {
+	    my ($start, $size) = @$_{"start", "size"};
+	    my $part;
+	    while (suggest_part($hd, 
+				$part = { start => $start, size => 0, maxsize => $size }, 
+				$hds, $to_add)) {
+		add($hd, $part, $hds);
+		$start = $part->{start} + $part->{size};
+		$size -= $part->{size};
 	    }
+	    $start = $_->{start} + $_->{size};
 	}
-	log::ld("can't allocate partition $e{mntpoint} of size $e{size}, not enough room");
     }
-    $success;
 }
 
 sub auto_allocate($;$) {
-    my ($hds, $suggestions) = @_;
-    allocatePartitions($hds, [
-			      grep { ! has_mntpoint($_->{mntpoint}, $hds) }
-			      @{ $suggestions || \@suggestions }
-			     ]);
+    my ($hds, $suggestions) = @_;    
+    allocatePartitions($hds, $suggestions || \@suggestions);
     map { partition_table::assign_device_numbers($_) } @$hds;
 }
 

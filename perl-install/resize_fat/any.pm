@@ -54,12 +54,11 @@ sub max_size($) {
 	divide($fs->{cluster_offset}, $SECTORSIZE);
 }
 
-#- fills in $fs->{fat_flag_map}.
+#- fills in fat_flag_map in c_rewritten.
 #- Each FAT entry is flagged as either FREE, FILE or DIRECTORY.
 sub flag_clusters {
     my ($fs) = @_;
     my ($cluster, $entry, $type, $nb_dirs);
-    my $fat_flag_map = "\0" x ($fs->{nb_clusters} + 2);
 
     my $f = sub {
 	($entry) = @_;
@@ -71,11 +70,11 @@ sub flag_clusters {
 	    $type = $DIRECTORY;
 	} else { return }
 
-	my $nb = resize_fat::c_rewritten::checkFat($fat_flag_map, $cluster, $type, $entry->{name});
+	my $nb = resize_fat::c_rewritten::checkFat($cluster, $type, $entry->{name});
 	$nb_dirs += $nb if $type == $DIRECTORY;
 	0;
     };
+    resize_fat::c_rewritten::allocate_fat_flag($fs->{nb_clusters} + 2);
     resize_fat::directory::traverse_all($fs, $f);
-    $fs->{fat_flag_map} = $fat_flag_map;
     $fs->{clusters}{count}{dirs} = $nb_dirs;
 }

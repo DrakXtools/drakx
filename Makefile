@@ -8,7 +8,7 @@ ROOTDEST = /export
 
 install: build
 	for i in images misc Mandrake Mandrake/base; do install -d $(ROOTDEST)/$$i ; done
-	cp -f $(BOOT_IMG) $(ROOTDEST)/images
+	cp -f $(BOOT_IMG) $(ROOTDEST)/images ; rm $(ROOTDEST)/images/*_ks.img
 	install make_mdkinst_stage2 $(ROOTDEST)/misc
 	make -C perl-install full_stage2
 
@@ -39,10 +39,9 @@ clean:
 
 upload: tar install
 	touch /tmp/mdkinst_done
-	rm ~/gi/*_ks.img
 	cd $(ROOTDEST)/Mandrake ; tar cfz mdkinst.tgz mdkinst
 
-#	lftp -c "open -u devel mandrakesoft.com; cd ~/cooker/cooker/images ; mput ~/gi/gi_*.img ;"
+#	lftp -c "open -u devel mandrakesoft.com; cd ~/cooker/cooker/images ; mput $(ROOTDEST)/images/gi_*.img"
 	lftp -c "open -u devel mandrakesoft.com; cd ~/tmp ; put $(ROOTDEST)/Mandrake/mdkinst.tgz ; put /tmp/mdkinst_done ; cd ~/cooker/cooker/Mandrake/base ; put $(ROOTDEST)/Mandrake/base/mdkinst_stage2.gz ; put ~/gi/perl-install/compss ; put ~/gi/perl-install/compssList ; put ~/gi/perl-install/compssUsers ; cd ~/cooker/cooker/misc ; put ~/gi/make_mdkinst_stage2 "
 #	lftp -c "open -u devel mandrakesoft.com; cd ~/cooker/contrib/others/src ; put ~/gi.tar.bz2"
 	rm -f $(ROOTDEST)/Mandrake/mdkinst.tgz

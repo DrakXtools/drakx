@@ -220,7 +220,7 @@ sub verifyInside($$) {
 
 sub verifyParts_ {
     foreach my $i (@_) { foreach (@_) {
-	$i != $_ and verifyNotOverlap($i, $_) || cdie "partitions sector #$i->{start} ($i->{size}bytes) and sector #$_->{start} ($_->{size}bytes) are overlapping!";
+	$i != $_ and verifyNotOverlap($i, $_) || cdie sprintf "partitions sector #$i->{start} (%dMB) and sector #$_->{start} (%dMB) are overlapping!", $i->{size} >> 9, $_->{size} >> 9;
     }}
 }
 sub verifyParts($) {
@@ -298,6 +298,17 @@ sub get_normal_parts($) {
     $hd->{raid} and return grep {$_} @{$hd->{raid}};
 
     @{$hd->{primary}{normal} || []}, map { $_->{normal} } @{$hd->{extended} || []}
+}
+
+sub get_holes($) {
+    my ($hd) = @_;
+
+    my $start = 1;
+    map {
+	my $current = $start;
+	$start = $_->{start} + $_->{size};
+	{ start => $current, size => $_->{start} - $current }
+    } sort { $a->{start} <=> $b->{start} } get_normal_parts($hd), { start => $hd->{totalsectors}, size => 0 };    
 }
 
 

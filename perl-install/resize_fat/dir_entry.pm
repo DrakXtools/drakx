@@ -51,12 +51,12 @@ sub is_special_entry($) {
 
 #- return true if entry has been modified
 sub remap {
-    my ($fat_remap, $entry) = @_;
+    my ($entry) = @_;
 
     is_special_entry($entry) and return;
 
     my $cluster = get_cluster($entry);
-    my $new_cluster = $fat_remap->[$cluster];
+    my $new_cluster = resize_fat::c_rewritten::fat_remap($cluster);
 
     #-print "remapping cluster ", get_first_cluster($fs, $entry), " to $new_cluster";
 
