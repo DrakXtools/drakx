@@ -1259,9 +1259,9 @@ static void adjust_resources(void)
 	if (ret != 0) {
 	    switch (al->adj.Resource) {
 	    case RES_MEMORY_RANGE:
-		sprintf(tmp, "memory %#lx-%#lx",
-			al->adj.resource.memory.Base,
-			al->adj.resource.memory.Base +
+		sprintf(tmp, "memory %p-%p",
+			(char *)al->adj.resource.memory.Base,
+			(char *)al->adj.resource.memory.Base +
 			al->adj.resource.memory.Size - 1);
 		break;
 	    case RES_IO_RANGE:
