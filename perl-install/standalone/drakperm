@@ -142,9 +142,7 @@ $combo_perm->entry->set_text($default_perm_level);
 $permList->get_selection->signal_connect('changed' => sub {
                                                my ($select) = @_;
                                                my (undef, $iter) = $select->get_selected;
-                                               my $editable = $editable;
-                                               $editable = 0 unless $iter;
-                                               sensitive_buttons($editable);
+                                               sensitive_buttons($iter ? $editable : 0);
                                            });
 
 $w->main;
