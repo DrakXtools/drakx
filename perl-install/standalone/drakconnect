@@ -40,7 +40,6 @@ use network::isdn;
 use network::adsl;
 use MDK::Common::Globals "network", qw($in);
 use POSIX ":sys_wait_h";
-use Storable qw(store retrieve);
 
 my ($netcnx, $netc, $intf)  = ({}, {}, {});
 #my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'lan');
@@ -194,7 +193,8 @@ sub manage {
     $notebook->set_property('show-border', 0);
     my $apply_button;
   
-    my $config = -f '/etc/sysconfig/drakconnect' ? Storable::retrieve('/etc/sysconfig/drakconnect') : {};
+    my $config = {};
+    eval(cat_('/etc/sysconfig/drakconnect'));
 
     #- duplicated from network::ethernet, to be factorized
     @all_cards = network::ethernet::get_eth_cards();

@@ -11,7 +11,6 @@ use mouse;
 use network::network;
 use network::tools;
 use MDK::Common::Globals "network", qw($in);
-use Storable qw(store retrieve);
 
 sub detect {
     my ($auto_detect, $o_class) = @_;
@@ -90,7 +89,8 @@ sub get_subwizard {
       my $ethntf = {};
       my $db_path = "/usr/share/apps/kppp/Provider";
       my (%countries, @isp, $country, $provider, $old_provider);
-      my $config = -f '/etc/sysconfig/drakconnect' ? Storable::retrieve('/etc/sysconfig/drakconnect') : {};
+      my $config = {};
+      eval(cat_('/etc/sysconfig/drakconnect'));
 
       my %wireless_mode = (N("Ad-hoc") => "Ad-hoc", 
                            N("Managed") => "Managed", 
@@ -1009,7 +1009,10 @@ You may also enter the IP address of the gateway if you have one."),
                    {
                     name => N("Configuration is complete, do you want to apply settings ?"),
                     type => "yesorno",
-                    post => sub { Storable::store($config, '/etc/sysconfig/drakconnect'); "network_on_boot" },
+                    post => sub {
+			require Data::Dumper;
+			output('/etc/sysconfig/drakconnect', Data::Dumper->Dump([$config], ['$config']));
+			"network_on_boot" },
                    },
                    
                    network_on_boot => 
