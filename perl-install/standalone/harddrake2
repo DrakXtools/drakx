@@ -204,10 +204,10 @@ my @menu_items =
                                  my $info = lookup_field($_);
                                  if_($info->[0], formatAlaTeX(qq(<span foreground="royalblue3">$info->[0]:</span> $info->[1])));
                              } sort keys %$current_device),
-                             { use_markup => 1, if_(!$::isEmbedded, transient => $w->{window}), height => 400, scroll => 1 });
+                             { use_markup => 1, if_(!$::isEmbedded, transient => $w->{rwindow}), height => 400, scroll => 1 });
 
            } else {
-               create_dialog(N("Select a device!"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"), { if_(!$::isEmbedded, transient => $w->{window}) });
+               create_dialog(N("Select a device!"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"), { if_(!$::isEmbedded, transient => $w->{rwindow}) });
            }
        },
        undef, '<Item>'
@@ -220,7 +220,7 @@ my @menu_items =
 #-PO: Do not alter the <span ..> and </span> tags
                          N("This is HardDrake, a %s hardware configuration tool.\n<span foreground=\"royalblue3\">Version:</span> %s
 <span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud\@mandrakesoft.com&gt;\n\n", $distro_name, $harddrake::data::version) . "\n" .
-                         formatAlaTeX($::license), { use_markup => 1, if_(!$::isEmbedded, transient => $w->{window}) });
+                         formatAlaTeX($::license), { use_markup => 1, if_(!$::isEmbedded, transient => $w->{rwindow}) });
        }, undef, '<Item>'
      ]
     );
