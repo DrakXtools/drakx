@@ -29,7 +29,6 @@ $border = 5;
 sub new {
     my ($type, $title, %opts) = @_;
 
-    Gtk->init;
     Gtk->set_locale;
 
     my $o = bless { %opts }, $type;

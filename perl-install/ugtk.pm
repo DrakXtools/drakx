@@ -2,7 +2,7 @@ package ugtk;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border $use_pixbuf $use_imlib);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -13,23 +13,16 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
-my $use_pixbuf;
-my $use_imlib;
-my $use_gnome;
-
-BEGIN {
-    unless ($::isInstall) {
-	eval { require Gtk; Gtk->init };
-	eval { require Gtk::Gdk::Pixbuf; Gtk::Gdk::Pixbuf->init };
-    }
-    $use_pixbuf = $@ ? 0 : 1;
-    eval { require Gtk::Gdk::ImlibImage; Gtk::Gdk::ImlibImage->init };
-    $use_imlib = $@ ? 0 : 1;
-    eval { require Gnome };
-    $use_gnome = $@ ? 0 : 1;
-}
-
 use Gtk;
+
+unless ($::isInstall) {
+    !$ENV{DISPLAY} || system('/usr/X11R6/bin/xtest') and die "Cannot be run in console mode.\n";
+    Gtk->init;
+    eval { require Gtk::Gdk::Pixbuf; Gtk::Gdk::Pixbuf->init };
+    $use_pixbuf = $@ ? 0 : 1;
+}
+eval { require Gtk::Gdk::ImlibImage; Gtk::Gdk::ImlibImage->init };
+$use_imlib = $@ ? 0 : 1;
 
 use c;
 use log;
@@ -758,7 +751,7 @@ sub gtkcreate_xpm {
 
 sub gtkcreate_png_pixbuf {
     my ($f) = shift;
-    die 'gdk-pixbuf loibrary is unavaillable' unless ($use_pixbuf);
+    die 'gdk-pixbuf library is not available' unless ($use_pixbuf);
     $f =~ /\.png$/ or $f .= '.png';
     if ($f !~ /^\//) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
     Gtk::Gdk::Pixbuf->new_from_file($f) or die "gtkcreate_png: missing png file $f";
