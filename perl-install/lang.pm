@@ -122,9 +122,12 @@ my %languages = (
 'vi_VN.UTF-8' => [ 'Vietnamese|UTF-8','tcvn',   'vi', 'vi' ],
   'wa'  => [ 'Walon',     		'iso-8859-1', 'wa', 'wa:fr_BE:fr' ],
 #-'yi'	=> [ 'Yiddish',			'cp1255',     'yi', 'yi' ],
-#'zh_HK.Big5' => [ 'Chinese|Traditional|Hong Kong|Big5', 'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh_TW:zh_HK' ],
+# NOTE: 'zh' must be in the LANGUAGE list, it is not used for translations
+# themselves but is needed for our selection of locales-xx packages
+# and the language dependent packages resolution
+#'zh_HK.Big5' => [ 'Chinese|Traditional|Hong Kong|Big5', 'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh_TW:zh_HK:zh' ],
 #'zh_HK.UTF-8' => [ 'Chinese|Traditional|Hong Kong|UTF-8','unicodeTW','zh_HK', 'zh_HK:zh_TW.Big5:zh_TW.big5:zh_TW:zh_CN.GB2312:zh_CN:zh' ],
-'zh_TW.Big5' => [ 'Chinese|Traditional', 'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh_TW:zh_HK' ],
+'zh_TW.Big5' => [ 'Chinese|Traditional', 'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh_TW:zh_HK:zh' ],
 #'zh_TW.UTF-8' => [ 'Chinese|Traditional|Taiwan|UTF-8','unicodeTW','zh_TW', 'zh_TW.Big5:zh_TW.big5:zh_TW:zh_HK:zh_CN.GB2312:zh_CN:zh' ],
 'zh_CN.GB2312' => [ 'Chinese|Simplified', 'gb2312', 'zh_CN.GB2312', 'zh_CN.GB2312:zh_CN.gb2312:zh_CN:zh' ],
 #'zh_TW.UTF-8' => [ 'Chinese|Simplified|UTF-8','unicodeCN','zh_CN', 'zh_CN.GB2312:zh_CN.gb2312:zh_CN:zh:zh_TW.Big5:zh_TW.big5:zh_TW:zh_HK' ],
@@ -148,7 +151,10 @@ my %xim = (
   'ko' => {
 	ENC => 'kr',
 	XIM => 'Ami',
-	XIM_PROGRAM => 'ami',
+	# NOTE: there are several possible versions of ami, for the different
+	# desktops (kde, gnome, etc). So XIM_PROGRAM isn't defined; it will
+	# be the xinitrc script, XIM section, that will choose the right one 
+	# XIM_PROGRAM => 'ami',
 	XMODIFIERS => '"@im=Ami"',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
