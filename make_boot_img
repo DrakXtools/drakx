@@ -83,9 +83,9 @@ sub initrd {
     if ($type eq "network" || $type eq "usbnet" || $type eq "all" || $type eq "other" || $type eq "blank") {
 	install_stripped("$instdir/ppp/pppd-bin", "$mnt/sbin/pppd");
 	install_stripped("$instdir/rp-pppoe/pppoe-bin", "$mnt/sbin/pppoe");
-	_ "$sudo cp -a /dev/ppp $mnt/dev";
-	_ "$sudo cp -a /dev/ptyp0 $mnt/dev";
-	_ "$sudo cp -a /dev/ttyp0 $mnt/dev";
+	_ "$sudo mknod $mnt/dev/ppp c 108 0";
+	_ "$sudo mknod $mnt/dev/ptyp0 c 2 0";
+	_ "$sudo mknod $mnt/dev/ttyp0 c 3 0";
     }
 
     my $ftype = $type =~ /^(all)$/ ? "pcmcia" : $type;
