@@ -2801,11 +2801,7 @@ sub install_spooler {
 	    {
 		my $w = $in->wait_message(N("Printerdrake"),
 					  N("Checking installed software..."));
-		if (!$::testing &&
-		    !files_exist((qw(/usr/bin/pdq
-					       /usr/X11R6/bin/xpdq)))) {
-		    $in->do_pkgs->install('pdq');
-		}
+          $in->do_pkgs->install('pdq') if !$::testing && !files_exist(qw(/usr/bin/pdq /usr/X11R6/bin/xpdq));
 		# Start the network (especially during installation), so the
 		# user can set up queues to remote printers.
 		$upNetwork and do {
@@ -2861,8 +2857,7 @@ sub setup_default_spooler {
 	# Re-read the printer database (CUPS has additional drivers, PDQ
 	# has no raw queue)
 	%printer::main::thedb = ();
-	#my $w = $in->wait_message(N("Printerdrake"),
-	#                          N("Reading printer database..."));
+	#my $w = $in->wait_message(N("Printerdrake"), N("Reading printer database..."));
 	#printer::main::read_printer_db($printer->{SPOOLER});
     }
     # Save spooler choice
@@ -2872,8 +2867,7 @@ sub setup_default_spooler {
 
 sub configure_queue {
     my ($printer, $in) = @_;
-    my $w = $in->wait_message(N("Printerdrake"),
-			      N("Configuring printer \"%s\"...",
+    my $w = $in->wait_message(N("Printerdrake"), N("Configuring printer \"%s\"...",
 				$printer->{currentqueue}{queue}));
     $printer->{complete} = 1;
     printer::main::configure_queue($printer);
@@ -3510,20 +3504,15 @@ What do you want to modify on this printer?",
 				# Define a new default printer if we have
 				# removed the default one
 				if ($queue eq $printer->{DEFAULT}) {
-				    my @k = sort(keys(%{$printer->{configured}}));
-				    if (@k) {
-					$printer->{DEFAULT} = $k[0];
-				        printer::default::set_printer($printer);
-				    } else {
-					$printer->{DEFAULT} = "";
-				    }
+				    my @k = sort(keys %{$printer->{configured}});
+                        $printer->{DEFAULT} = $k[0];
+                        printer::default::set_printer($printer) if @k;
 				}
-				# Let the main menu cursor go to the default
-				# position
+				# Let the main menu cursor go to the default position
 				$cursorpos = "::";
 			    }
 			}
-		    }		
+		    }
 		}
 		# Make sure that the cursor is still at the same position
 		# in the main menu when one has modified something on the
@@ -3532,25 +3521,18 @@ What do you want to modify on this printer?",
 		    if ($printer->{configured}{$printer->{QUEUE}}) {
 			$cursorpos = 
 			    $printer->{configured}{$printer->{QUEUE}}{queuedata}{menuentry} . 
-			    ($printer->{QUEUE} eq $printer->{DEFAULT} ? 
-			     N(" (Default)") : ());
+			    ($printer->{QUEUE} eq $printer->{DEFAULT} ? N(" (Default)") : ());
 		    } else {
 			my $s1 = N(" (Default)");
 			my $s2 = $s1;
 			$s2 =~ s/\(/\\\(/;
 			$s2 =~ s/\)/\\\)/;
-			if ($printer->{QUEUE} eq $printer->{DEFAULT} &&
-			    $cursorpos !~ /$s2/) {
-			    $cursorpos .= $s1;
-			}
+			$cursorpos .= $s1 if $printer->{QUEUE} eq $printer->{DEFAULT} && $cursorpos !~ /$s2/;
 		    }
 		}
-	    } else {
-		$editqueue = 0;
-	    }
-	    $continue = ($editqueue || $::expert || !$::isInstall || 
-			 $menushown ||
-			 $in->ask_yesorno('', N("Do you want to configure another printer?")));
+	    } else { $editqueue = 0 }
+	    $continue = $editqueue || $::expert || !$::isInstall || $menushown ||
+			 $in->ask_yesorno('', N("Do you want to configure another printer?"));
 	}
 
 	# Configure the current printer queue in applications when main menu
@@ -3572,13 +3554,9 @@ What do you want to modify on this printer?",
     # Clean up the $printer data structure for auto-install log
     foreach my $queue (keys %{$printer->{configured}}) {
 	foreach my $item (keys %{$printer->{configured}{$queue}}) {
-	    if ($item ne "queuedata") {
-		delete($printer->{configured}{$queue}{$item});
-	    }
+         delete($printer->{configured}{$queue}{$item}) if $item ne "queuedata";
 	}
-	if ($printer->{configured}{$queue}{queuedata}{menuentry}) {
-	    delete($printer->{configured}{$queue}{queuedata}{menuentry});
-	}
+     delete($printer->{configured}{$queue}{queuedata}{menuentry});
     }
     foreach (qw(Old_queue QUEUE TYPE str_type currentqueue DBENTRY ARGS complete OLD_CHOICE NEW MORETHANONE MANUALMODEL AUTODETECT AUTODETECTLOCAL AUTODETECTNETWORK AUTODETECTSMB))
     { delete $printer->{$_} };
