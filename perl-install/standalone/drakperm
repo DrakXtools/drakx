@@ -30,14 +30,15 @@ $window->signal_connect(delete_event => sub { $::isEmbedded ? kill(USR1, $::CCPI
 #- vars declaration
 my ($default_perm_level) = "level ".chomp_(`cat /etc/sysconfig/msec | grep SECURE_LEVEL= |cut -d= -f2`);
 my %CURENT;
-my %perm = 	(	'level 1'	=> 'perm.1',
-							'level 2'	=> 'perm.2',
-							'level 3'	=> 'perm.3',
-							'level 4'	=> 'perm.4',
-							'level 5'	=> 'perm.5',
-							'editable'=> 'perm.local',
+my $perm_path		= '/usr/share/msec/';
+my $local_path	= '/etc/security/msec/';
+my %perm = 	(	'level 1'	=> $perm_path.'perm.1',
+							'level 2'	=> $perm_path.'perm.2',
+							'level 3'	=> $perm_path.'perm.3',
+							'level 4'	=> $perm_path.'perm.4',
+							'level 5'	=> $perm_path.'perm.5',
+							'editable'=> $local_path.'perm.local',
 						);
-my $perm_path= '/usr/share/msec/';
 my $rows_cnt = 0;
 my $editable = 0;
 my $modified = 0;
@@ -51,7 +52,7 @@ my $vb				= new Gtk::VBox(0,5);
 my $select_box= new Gtk::HBox(0,5);
 my $action_box= new Gtk::HBox(0,5);
 my $up_down_box=new Gtk::HBox(0,5);
-my $B_quit		= new Gtk::Button('cancel');
+my $B_quit		= new Gtk::Button('quit');
 my $B_sav			= new Gtk::Button('save');
 my $B_up			= new Gtk::Button(_("Up"));
 my $B_del			= new Gtk::Button(_("delete"));
@@ -177,7 +178,7 @@ sub check_save{
 #- Desc => set the Perm_list CList with the appropriate value
 sub display_perm{
 	local $perm_level = shift @_;
-	local $file = $perm_path.$perm{$perm_level};
+	local $file = $perm{$perm_level};
 	local $sav_ = &check_save;
 	local $i=0;
 	if($modified && ! $sav_){
@@ -212,7 +213,7 @@ sub display_perm{
 #- Desc => save the perm.local file if modification made
 sub save_perm{
 	$modified or return 0;
-	open F, '>'.$perm_path.'perm.local' or die("F CHIER BORDEL");
+	open F, '>'.$local_path.'perm.local' or die("F CHIER BORDEL");
 	for($i = 0 ; $i <= $rows_cnt;$i++){
 		$line = $Perm_list->get_text( $i , 0 )."\t".$Perm_list->get_text($i,1).(($Perm_list->get_text($i,2))?".".$Perm_list->get_text($i,2):"")."\t".$Perm_list->get_text($i,3)."\n";
 		print F  $line ;
