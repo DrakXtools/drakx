@@ -34,13 +34,14 @@ if_(arch() !~ /alpha/ && arch() !~ /sparc/,
   "3c509" => "3com 3c509",
   "3c515" => "3com 3c515",
   "3c90x" => "3Com 3c90x (Cyclone/Hurricane/Tornado)",
+  "3c90x" => "3Com 3c90x (Cyclone/Hurricane/Tornado)",
   "82596" => "Apricot 82596",
   "abyss" => "Smart 16/4 PCI Ringnode (token ring)",
-# unused from Jeff  "ac3200" => "Ansel Communication AC3200",
+  "ac3200" => "Ansel Communication AC3200",
   "acenic" => "AceNIC Gigabit Ethernet",
   "aironet4500_card" => "aironet4500_card",
-# unused from Jeff "at1700" => "Allied Telesis AT1700",
-# unused from Jeff  "atp" => "ATP", 
+  "at1700" => "Allied Telesis AT1700",
+  "atp" => "ATP", 
   "com20020-pci" => "com20020-pci",
   "cs89x0" => "CS89x0",
   "de600" => "D-Link DE-600 pocket adapter",
@@ -69,9 +70,9 @@ if_(arch() !~ /alpha/ && arch() !~ /sparc/,
   "natsemi" => "National Semiconductor 10/100",
   "ne" => "NE2000 and compatible",
   "ne2k-pci" => "NE2000 PCI",
-# unused from Jeff  "ni5010" => "NI 5010",
-# unused from Jeff  "ni52" => "NI 5210",
-# unused from Jeff  "ni65" => "NI 6510",
+  "ni5010" => "NI 5010",
+  "ni52" => "NI 5210",
+  "ni65" => "NI 6510",
   "old_tulip" => "Digital 21040/21041/21140 (old Tulip driver)",
   "olympic" => "olympic",
   "pcnet32" => "AMD PC/Net 32",
@@ -399,6 +400,7 @@ my @skip_big_modules_on_stage1 = (
 qw(
 olympic
 sk98lin acenic
+3c90x
 aironet4500_card com20020-pci hamachi starfire winbond-840
 
 dc395x_trm
@@ -419,6 +421,7 @@ my @skip_modules_on_stage1 = (
   "plip",
   qw(3w-xxxx pci2220i qla1280 qla2x00 i2o_block),
   qw(gdth eata eata_pio eata_dma ips),
+  qw(ac3200 at1700 atp ni5010 ni52 ni65),  #- unused from Jeff
 );
 
 
