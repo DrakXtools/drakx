@@ -2176,12 +2176,11 @@ sub advanced_when() {
 		$entry_crontab->set_text("$time_string $exec_string");
 	}
 	
-	$combo_minute_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_minute_when->get_text - 1, 0) });
-	$combo_hour_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_hour_when->get_text - 1, 1) });
+	$combo_minute_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_minute_when->get_text, 0) });
+	$combo_hour_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_hour_when->get_text, 1) });
 	$combo_day_when->entry->signal_connect('changed', sub {	combo_to_cron_string($combo_day_when->get_text, 2) });	
-	$combo_month_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_month_when->get_text, 3) });
-	$combo_weekday_when->entry->signal_connect('changed', sub {	combo_to_cron_string($combo_weekday_when->get_text - 1, 4) });
-	
+	$combo_month_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_month_when->get_active, 3) });
+	$combo_weekday_when->entry->signal_connect('changed', sub {	combo_to_cron_string($combo_weekday_when->get_active - 1, 4) });	
 	$entry_media_type->entry->signal_connect('changed', sub { $conf{DAEMON_MEDIA} = $entry_media_type->entry->get_text });
     fonction_env(\$box_when, \&advanced_when, \&advanced_box);
     $up_box->show_all;
@@ -2189,8 +2188,8 @@ sub advanced_when() {
 
 sub combo_to_cron_string {
 	my ($field, $location) = @_;
-	$field = "*" if $field == 0 && $location > 1 && $location < 4;
-	$field = "*" if $field == -1 && ($location < 2 || $location == 4);
+	$field = "*" if $field == 0 && $location == 3;
+	$field = "*" if $field == -1 && $location == 4;
 	my @time_list = split(" ", $time_string);
 	splice(@time_list, $location, 1, $field);
 	$time_string = join(" ", @time_list);
