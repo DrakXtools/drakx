@@ -34,6 +34,7 @@ BEGIN {
 }
 use common;
 use run_program;
+use bootloader;
 use MDK::Common::File qw(:all);
 
 use Config;
@@ -68,7 +69,7 @@ my $server_ip = get_ip_from_sys();
 my $changes_made = 0;
 my $client_cfg = "/etc/dhcpd.conf.etherboot.clients";
 my $tftpboot = "/var/lib/tftpboot";
-my @kernels = grep { /vmlinuz-/ && ! -l "/boot/$_" } all("/boot");
+my @kernels = bootloader::installed_vmlinuz();
 
 #- make sure terminal server and friends are installed
 my $ts = system("rpm -q terminal-server > /dev/null");
@@ -724,7 +725,7 @@ sub make_nbi() {
  	update_list($list_model);
 
 	my $combo_default_kernel = Gtk2::ComboBox->new_text;
-	$combo_default_kernel->set_popdown_strings(N("Default kernel version"), @kernels);
+	$combo_default_kernel->set_popdown_strings(N("Default kernel version"), map { bootloader::vmlinuz2version($_) } @kernels);
 	$combo_default_kernel->set_active(0);
 	$combo_default_kernel->entry->signal_connect('changed', sub {
 		my $default_kernel = $combo_default_kernel->entry->get_text;
@@ -732,7 +733,6 @@ sub make_nbi() {
 		if ($default_kernel eq translate("Default kernel version")) {
 			$config = "";
 		} else {
-			$default_kernel =~ s/vmlinuz-//gi;
 			$config = 'option bootfile-name = pick-first-value ( concat ( "boot-",' . "\n";
 			$config .= '    config-option etherboot.kmod, ".' . $default_kernel . '", ".nbi" ), concat' . "\n"; 
             $config .= '    ( "boot-", config-option etherboot.kmod, ".nbi") ,"boot.nbi" );' . "\n";
