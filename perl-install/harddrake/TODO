@@ -6,7 +6,7 @@
 * Harddrake TODO:
 ** rename it drakhw by default
 ** ui
-*** translate topics
+*** mdk9.2: put data into a third hidden column rather in %data
 *** more usb mice infos
 *** enable the user to force a module (isa, isapnp, ...)
 *** print "(not loaded)" if module isn't loaded
@@ -14,7 +14,6 @@
 *** cdrom (must be done by diskdrake):
 **** ide-scsi / ide-cd switch
 *** use fbgtk+2 when booting on fbcon for smoother GUI => interactive::fbgtk
-*** write dialogs in ugtk rather in interactive to make them transcient
 *** help: 
 **** print fields in black and their description in blue as for information fields
 *** check there's at least one config option before showing the "condigure module" button
@@ -23,7 +22,6 @@
 *** configure at boot-time (hw hooks shared by both harddrake & drakx ?):
     all /etc/modules aliases 
 **** usb-interfaces (or rewrite usb service in perl for speed)
-**** snd cards
 **** switch nvidia/nv in /etc/X11/XF86Config
      if [[ -e /lib/modules/`uname -r`/kernel/drivers/video/NVdriver ]]; then
            perl -pi -e 's!Driver "nv.*"!Driver "nvidia"!g;s!#HARDDRAKE (Load.*glx)!\1!g' /etc/X11/XF86Config-4
