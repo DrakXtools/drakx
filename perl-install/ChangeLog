@@ -1,3 +1,756 @@
+2004/01/20  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: part. update
+
+2004/01/20  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: fix typo
+
+2004/01/20  hilbert
+
+	* share/po/zh_TW.po: This is a test commit
+
+2004/01/20  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps.pm: help perl_checker seeing charsetChanged even if known
+	install_steps_* can be seen
+	kernel 2.6 .ko adaptation
+
+	* share/advertising/Makefile: CVS has all the advertisings, but only
+	upload the dwd (download) one
+
+	* modules.pm, modules/parameters.pm: kernel 2.6 .ko adaptation
+
+	* install_steps_interactive.pm: help perl_checker seeing charsetChanged
+	even if known install_steps_* can be seen
+
+	* commands.pm: cleanup & kernel 2.6 .ko adaptation
+
+	* rescue/list: replace rpmpopt-4.2 with rpmpopt-* (since we now have
+	rpmpopt-4.2.2)
+
+2004/01/20  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* bootloader.pm: workaround buggy installkernel that left default value be
+	geater than
+	the current number of entries, thus making drakboot displaying
+	(default-entries_count) spurious "()*" entries which then results in
+	writing back bogus grub conf file.
+	kernel team should just be shuted down :-(
+
+	* share/po/bs.po: fix duplicate message
+	fix duplicate message
+
+	* install_gtk.pm: fix set_default_direction() call
+
+	* network/adsl.pm: fix wizard layer usage (b/c of new api)
+	remove useless parameter
+
+	* network/modem.pm: simpkify %toreplace build
+	merge ppp_configure_raw() into its only caller (ppp_configure())
+	do not bother try installing packages in testing mode
+
+	* network/netconnect.pm: load adsl wizard on demand
+	(get_subwizard) introduce the infrastructure that enable to load a
+	part of a wizard from another module
+	init modem data structure when manually selecting a serial port
+	fix modem dns servers reading
+	keep entered data when stepping back to dialup options step
+	do not mix modem choice and modem configuration, so that we keep
+	entered data when stepping back and forward
+	pass dynamically build data into interactive layer when configuring
+	modems
+	fix device (was broken due to the fact we kept all the data collected
+	about modems)
+	fix ppp_configure call
+	prepare killing obfuscated install path
+	merge in next_cnx_step into handle_multiple_cnx
+
+2004/01/19  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/advertising/ppp-04.pl: Update
+
+2004/01/19  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: 
+	  - add build_tree to fetch info before doing GUI stuff
+	  - use $intf->{$interface}{save} to re-use existing write_foo specific
+	fonctions
+	  - change build_notebook thing
+	  - indenting && perl_checking
+
+2004/01/19  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/01/19  Frederic Crozat  <fcrozat at mandrakesoft.com>
+
+	* share/rpmsrate: Epiphany is now GNOME default web browser.
+
+2004/01/19  Florin Grad  <florin at mandrakesoft.com>
+
+	* standalone/drakgw: typo error
+	add transparent proxy support
+
+	* network/network.pm: add the silly read_squid function
+
+2004/01/19  fwang
+
+	* share/po/zh_CN.po: update
+	update
+
+2004/01/19  keld
+
+	* share/po/da.po: Trying to get rid of "Translated to da.po" problem - did
+	not work:-(
+	soft/menu-messages/da.po soft/control-center/po/da.po
+	soft/drakcronat/po/da.po soft/ftw/po/da.po
+	soft/GtkMdkWidgets/po/da.po soft/kdebase-servicemenu/po/da.po
+	soft/krozat/po/da.po soft/mandrake-menu-directory/po/da.po
+	soft/mdkkdm/po/da.po soft/mdklaunchhelp/po/da.po
+	soft/menudrake/po/da.po soft/rpmdrake/po/da.po
+	soft/urpmi/po/da.po soft/userdrake2/po/da.po
+	soft/wizard_perl/po/da.po gi/perl-install/share/po/da.po
+	soft/galaxy/thememdk/mandrake_client/po/da.po
+	updates
+	soft/control-center/po/da.po soft/ftw/po/da.po
+	soft/rpmdrake/po/da.po soft/urpmi/po/da.po
+	gi/perl-install/share/po/da.po
+
+2004/01/19  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nb.po, share/po/et.po: updated Estonian and Norwegian files
+
+2004/01/19  Pixel  <pixel at mandrakesoft.com>
+
+	* install_any.pm: kernel22 is not there anymore (since a long time now)
+	select bestKernelPackage before selecting basesystem (otherwise
+	basesystem already requires kernel)
+
+	* modules.pm, fs.pm: kernel 2.2 is deprecated
+
+	* bootloader.pm: cleanup sanitize_ver (re-synced with common.pm from
+	bootloader-utils)
+	add a warning telling to run lilo after modifying the lilo.conf
+	(bugzilla #6924)
+
+	* pkgs.pm: 
+	  - factorize kernel regexp in analyse_kernel_name()
+	  - remove special kernel choosing in packageCallbackChoices()
+	add some logging explaining the default kernel choice
+
+	* do_pkgs.pm: 
+	  - factorize kernel regexp in analyse_kernel_name()
+	  - remove special kernel choosing in packageCallbackChoices()
+
+	* install_steps_interactive.pm: $::testing means testing, not "testing
+	what titi wants to test"
+
+2004/01/19  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakgw: perl_checker fixes
+	remove empty lines in order to get more place for entry fields
+
+	* detect_devices.pm (getSerialModem) fix device field
+	(getModem) simplify
+	(getSerialModem)
+	  - drop useless first arg
+	  - return all detected serial modems, not only first
+	  - return all data we collected on serial modems
+	(getSerialModem) do not even bother check for /dev/modem since anyway
+	probeSerialDevices() set a bijection between modems and /dev/ttySx
+	devices (not /dev/modem) thus making hasModem() test useless for
+	/dev/modem
+	(getUPS) use HIDIOCAPPLICATION ioctl definition from c module
+
+	* share/po/br.po: minor update
+	update
+	update
+
+	* ugtk2.pm (reate_box_with_title) shrink TextView size to its minimal size
+	in
+	order to get the bigger place for other widgets
+
+	* network/modem.pm (ppp_configure_raw) remove code stolen from
+	ppp_configure()
+
+	* interactive/gtk.pm: prevent unpoped wait messages when called from
+	within wizards in standalone
+	mode
+	remove useless spacing above advanced options
+
+	* network/netconnect.pm: 
+	  - kill duplicated code
+	  - move some code where it belongs so that it's shared by isdn/modem
+	  - merge wireless step into normal modem one
+	  - report all detected serial modems
+	  - use all collected data on modems in order to have a nice list
+	rollback bogus change
+	dot not try to alter squid config in --testing mode
+	isdn: detect serial modems if needed
+	rename "ppp_choose step" as "choose_serial_port" and "ppp_choose2" one
+	as "ppp_choose"
+	chain hostname/dns step with zeroconf one (more work on zeroconf will
+	be done between beta 1 and 2)
+	turn "unsupported winmodem" into a terminal step
+	add strings for future options
+	fix next_cnx_step call
+	(detect) display a nice string for serial modems
+	(detect)
+	  - adapt modem detection to new detect_devices
+	  - keep all data collected on modems
+	add proper window title
+	make a real wizard step out of first modem step
+	winmodem connection'll be merge into modem connection
+	kill Data::Dumper orphean
+	merge dhcp hostname into hostname step
+	use radio button instead of optionmenu if possible (aka not too many
+	network interfaces)
+
+	* standalone/drakbug: simplify
+
+	* share/po/cy.po: add missing empty lines
+	another update
+	further update
+	update
+
+	* share/po/fr.po: update
+
+	* standalone/drakconnect: kill useless diagnostics pragma
+
+2004/01/18  fwang
+
+	* share/po/zh_CN.po: update
+
+2004/01/18  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/cy.po: update
+	update
+
+	* share/po/fr.po: 
+	  - typo fix (#6919)
+	  - let drakconnect message be wrapped by gtk+ rather than us
+
+2004/01/17  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/advertising/dwd-09.pl: Fix (r)
+
+2004/01/17  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: add wait message as hardware detection takes
+	time
+
+2004/01/17  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/uz@Cyrl.po, share/po/et.po,
+	share/po/ja.po, share/po/hr.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/be.po, share/po/uk.po, share/po/mn.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/he.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/tg.po, share/po/nb.po, share/po/uz.po, share/po/ro.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/hi.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/nl.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/de.po, share/po/eo.po,
+	share/po/lv.po, share/po/el.po, share/po/bg.po, share/po/cs.po,
+	share/po/hu.po: udated pot file; converted to UTF-8 all po files (as
+	therer are utf-8 msgid
+
+	* diskdrake/hd_gtk.pm: spell checking
+
+2004/01/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: fix obvious typo
+	update
+	fix doble entries
+
+	* share/po/ms.po, share/po/sk.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/th.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/be.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/da.po, share/po/ca.po, share/po/ar.po, share/po/nb.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sl.po, share/po/uz@Cyrl.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/uk.po,
+	share/po/mn.po, share/po/lt.po, share/po/cy.po, share/po/tg.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/hi.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/nl.po, share/po/de.po, share/po/eo.po,
+	share/po/el.po, share/po/cs.po, share/po/bg.po: fix doble entries
+
+	* ugtk2.pm: fix #6899: tools failling to popup windows while embedded
+
+	* share/po/br.po: update
+	fix doble entries
+
+	* share/advertising/dwd-08.pl, share/advertising/dwd-04.pl,
+	share/advertising/dis-11.pl, share/advertising/ppp-11.pl,
+	share/advertising/ppp-09.pl, share/advertising/dwd-05.pl,
+	share/advertising/pwp-09.pl, share/advertising/dwd-06.pl,
+	share/advertising/ppp-07.pl, share/advertising/pwp-10.pl,
+	share/advertising/ppp-05.pl, share/advertising/dis-09.pl,
+	share/advertising/ppp-04.pl, share/advertising/pwp-04.pl,
+	share/advertising/pwp-08.pl: fix package build
+
+2004/01/16  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: * manage interfaces:
+	  - fix Ok button logic
+	  - fix some calls to $apply
+	* manage interfaces
+	  - added Modem page
+	  - most of the GUI in place
+
+2004/01/16  Pixel  <pixel at mandrakesoft.com>
+
+	* network/shorewall.pm: fix N() badly used
+	  - add icmp support
+	  - add "Echo request (ping)" choice
+
+	* network/drakfirewall.pm: 
+	  - add icmp support
+	  - add "Echo request (ping)" choice
+
+2004/01/16  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup, standalone/drakTermServ: ask_warn fixes per
+	Thierry, purge some old, unused code
+
+2004/01/16  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/tools.pm: prevent faillure when trying to dereference undef in
+	testing mode
+
+	* install_steps_interactive.pm (Accept) default to accept in testing mode
+	do not complain about root password in testing mode
+
+	* network/adsl.pm, network/isdn.pm, network/ethernet.pm: do not export
+	dead functions
+
+	* share/po/da.po: rollback bogus change
+	remove arrows from previous/next buttons according to interface team
+
+	* network/modem.pm (ppp_configure) reintroduce it for drakconnect's
+	manager
+
+	* network/network.pm: do not alter proxies config while configuring
+	network interfaces (needed since
+	we've disabled proxy config in network interface config path)
+	do not install zeroconf if no zeroconf hostname was typed in (we may add
+	a
+	USE_ZEROCONF variable to /etc/sysconfig/network instead)
+
+	* network/netconnect.pm: new host settings step
+	clean horrible code
+	split/merge lan config steps according to new specs
+	(card => protocol => parameters => hostname)
+	rollback "separate standalone and install paths" try (just too painful
+	to
+	maintain and anyway install net wizard has no logic)
+	  - make a real step out of "manage multiple internet connections" case
+	  - factorize and fix accessing to this step
+	drop proxy configuration step.
+	rationale:
+	  - miscellaneous_choose() was reintroduced in network::network since it
+	was still
+	  needed by drakproxy
+	  - anyway configuring proxies is:
+	  o not supposed to be done while configuring network interfaces
+	  o duplicated with drakproxy and the like
+	  o removed in new drakconnect specs
+	morph hw_account step through reusing new wizard layer capabilites (aka
+	dynamically return just build needed data rather than ackwardly puting
+	it in
+	place)
+	fix ppp_first_step() call
+	small reindenting
+	remove overrided variables
+	enable to step forward after to "connect now?" step since wizard
+	infrastructure fixed the ask_yesorno design flaw (and remove bug hint
+	left by
+	previous maintainers)
+	use wizard layer 's yesorno type
+	typo fix
+
+	* share/po/ms.po, share/po/sk.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/th.po, interactive.pm, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, standalone/drakbackup, share/po/ca.po, share/po/ar.po,
+	share/po/nb.po, share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/lv.po, share/po/hu.po,
+	printer/printerdrake.pm, share/po/fa.po, share/po/id.po,
+	drakxtools.spec, share/po/ru.po, help.pm, share/po/br.po,
+	share/po/sl.po, share/po/uz@Cyrl.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/uk.po, share/po/mn.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, install_steps_gtk.pm, share/po/bs.po,
+	interactive/newt.pm, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/hi.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/ta.po, share/po/fr.po, share/po/nl.po,
+	share/po/de.po, share/po/eo.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po: remove arrows from previous/next buttons according to
+	interface team
+
+	* standalone/drakconnect: kill unused variables
+
+	* standalone/logdrake: 
+	  - set a meaningfull window title when called from mcc for explanations
+	  - upcase default window title
+	do not abuse global namespace (this also allow to track variables
+	usage through static code analysers such as perl_checker)
+
+2004/01/15  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/01/15  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_gtk.pm: fix individual package selection (was broken since
+	30 september...)
+	formatList is imported, no need to get it in common::
+
+	* c/stuff.xs.pl, diskdrake/interactive.pm, fsedit.pm,
+	install_interactive.pm, partition_table/raw.pm, partition_table.pm: 
+	  - remove the use of BLKRRPART (telling the kernel to re-read the
+	partition table) in most cases
+	  - replace with tell_kernel() and will_tell_kernel()
+	  - correctly handle in standalone the need to reboot, with no way to
+	forget it
+	(telling the WM to quit nicely then call reboot when it's done)
+
+	* rescue/list: insmod.old is needed when the kernel is a 2.4
+
+	* lvm.pm: adaptation/simplification for new lvm2 (thanks to Luca Berra)
+
+	* share/rpmsrate: have hylafax-client installed when kdebase-kdeprintfax
+	is selected
+
+	* bootloader.pm: don't modify {append} after add_kernel(), call
+	add_kernel() directly with the append parameter
+	(so that comparison with previous entries is done correctly)
+
+2004/01/15  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: First time wizard
+
+2004/01/15  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po: update
+	update
+
+	* standalone/drakboot: add bug hint
+	remove unused variable
+	(lilo_choice) do not complain on canceling
+	(lilo_choice) let's set dialog title when poping up an error message
+	(lilo_choice) do not complaing about lilo faillure when we use another
+	bootloader: just complain about the actually used bootloader
+	warly said that we should not restrict ourselves to lilo
+	make splash config looks better when embedded
+
+	* standalone/drakups: reuse create_okcancel() in ordet to get some std
+	button layout
+	remove useless menu infrastucture
+
+	* drakxtools.spec: require a fixed perl-Glib
+	fix changelog
+	9.3-21mdk
+	9.3-20mdk
+
+	* ugtk2.pm: do not create spurious top window when embedded (why does this
+	fsck us
+	only now?)
+
+2004/01/14  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/advertising/README, share/advertising/dis-06.pl,
+	share/advertising/dis-05.png, share/advertising/dwd-08.pl,
+	share/advertising/pwp-02.pl, share/advertising/dwd-04.pl,
+	share/advertising/06-development.pl, share/advertising/01-thanks.png,
+	share/advertising/dis-10.png, share/advertising/dwd-07.png,
+	share/advertising/dis-02.pl, share/advertising/ppp-06.png,
+	share/advertising/dis-04.pl, share/advertising/02-community.png,
+	share/advertising/pwp-05.png, share/advertising/11-mnf.png,
+	share/advertising/02-community.pl, share/advertising/05-desktop.pl,
+	share/advertising/dis-11.pl, share/advertising/01-thanks.pl,
+	share/advertising/dwd-04.png, share/advertising/dis-10.pl,
+	share/advertising/ppp-11.pl, share/advertising/08-store.pl,
+	share/advertising/pwp-07.pl, share/advertising/08-store.png,
+	share/advertising/pwp-08.png, share/advertising/dwd-03.png,
+	share/advertising/dwd-02.pl, share/advertising/12-mdkexpert.png,
+	share/advertising/dis-05.pl, share/advertising/06-development.png,
+	share/advertising/ppp-09.pl, share/advertising/11-mnf.pl,
+	share/advertising/dis-03.png, share/advertising/dwd-01.pl,
+	share/advertising/dwd-08.png, share/advertising/dis-01.pl,
+	share/advertising/pwp-06.png, share/advertising/dis-07.pl,
+	share/advertising/pwp-02.png, share/advertising/list,
+	share/advertising/dwd-05.pl, share/advertising/ppp-06.pl,
+	share/advertising/ppp-07.png, share/advertising/pwp-09.png,
+	share/advertising/ppp-10.pl, share/advertising/dis-03.pl,
+	share/advertising/dwd-09.png,
+	share/advertising/13-mdkexpert_corporate.png,
+	share/advertising/pwp-07.png, share/advertising/pwp-09.pl,
+	share/advertising/pwp-04.png, share/advertising/pwp-05.pl,
+	share/advertising/dis-01.png, share/advertising/10-security.png,
+	share/advertising/07-server.pl, share/advertising/dwd-06.png,
+	share/advertising/dis-08.png, share/advertising/pwp-01.png,
+	share/advertising/ppp-08.png, share/advertising/ppp-03.pl,
+	share/advertising/07-server.png, share/advertising/dis-08.pl,
+	share/advertising/dwd-02.png, share/advertising/pwp-06.pl,
+	share/advertising/dis-07.png, share/advertising/ppp-03.png,
+	share/advertising/dwd-03.pl, share/advertising/ppp-01.png,
+	share/advertising/03-software.png, share/advertising/ppp-08.pl,
+	share/advertising/dis-02.png, share/advertising/dwd-06.pl,
+	share/advertising/10-security.pl, share/advertising/Makefile,
+	share/advertising/pwp-03.png, share/advertising/ppp-05.png,
+	share/advertising/ppp-02.pl, share/advertising/dwd-07.pl,
+	share/advertising/ppp-07.pl, share/advertising/dis-09.png,
+	share/advertising/09-mdksecure.png, share/advertising/ppp-04.png,
+	share/advertising/ppp-11.png, share/advertising/pwp-10.pl,
+	share/advertising/ppp-09.png, share/advertising/dis-06.png,
+	share/advertising/ppp-10.png, share/advertising/dis-11.png,
+	share/advertising/dis-04.png, share/advertising/03-software.pl,
+	share/advertising/pwp-10.png, share/advertising/09-mdksecure.pl,
+	share/advertising/13-mdkexpert_corporate.pl,
+	share/advertising/12-mdkexpert.pl, share/advertising/ppp-05.pl,
+	share/advertising/ppp-01.pl, share/advertising/dis-09.pl,
+	share/advertising/pwp-03.pl, share/advertising/04-configuration.png,
+	share/advertising/dwd-01.png, share/advertising/ppp-04.pl,
+	share/advertising/dwd-05.png, share/advertising/pwp-04.pl,
+	share/advertising/pwp-01.pl, share/advertising/ppp-02.png,
+	share/advertising/05-desktop.png, share/advertising/pwp-08.pl,
+	share/advertising/04-configuration.pl, share/advertising/dwd-09.pl: New
+	texts to translate for next release.
+	Images will be modified in a short time.
+
+2004/01/14  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: 
+	  - manage interfaces :
+	o add Account page
+	  o speedtouch and sagem modems
+	  o build_notebook don't need $window anymore
+	  o cosmetic change to Infornations page
+
+2004/01/14  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/uz@Cyrl.po, share/po/et.po,
+	share/po/ja.po, share/po/hr.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/be.po, share/po/uk.po, share/po/mn.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/he.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/tg.po, share/po/nb.po, share/po/bs.po, share/po/uz.po,
+	share/po/ro.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/hi.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/fr.po, share/po/sr@Latn.po, share/po/sq.po, share/po/nl.po,
+	share/po/it.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/lv.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/hu.po: updated pot file
+
+2004/01/14  Pixel  <pixel at mandrakesoft.com>
+
+	* fs.pm: don't write fstab entries which are notFormatted
+
+2004/01/14  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: Let list of printer models get sorted.
+
+2004/01/14  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: update
+	update
+
+	* drakxtools.spec: 9.3-19mdk
+
+	* network/network.pm (miscellaneous_choose) restore it for drakproxy (we'd
+	better split out
+	network interface and proxy configuration at install time)
+
+	* standalone/drakboot: typo fix
+	use class->new rather than new class style
+	minor cleanup
+	perl_checker cleanups
+	proper indenting
+	  - offer to configure bootsplash only on --splash
+	  - drop useless frames
+	  - set main window title according to current mode (autologin,
+	bootloader or bootsplash)
+
+	* install_steps_interactive.pm: proxy conf: do not touch files in
+	--testing mode
+	split out proxy configuration out of network interfaces configuration
+
+	* standalone/drakautoinst: 
+	  - kill unused variables
+	  - fix gtk+2 notebook usage
+	  - perl_checker cleanups
+
+	* any.pm: move bootloader title from drakboot
+
+	* standalone/drakclock: unused variable
+
+	* network/tools.pm: ask_info2 is dead
+
+	* install2.pm: fix fix
+	fix logic test order in order to prevent useless error message in
+	--testing mode
+
+	* wizards.pm: using box radio looks better for yes/no like questions
+	(process) in yes/no case, keep the same logic as
+	interactive->ask_yesorno() and pass 1 if /yes/ and undef else
+
+2004/01/14  Warly  <warly at mandrakesoft.com>
+
+	* standalone/drakboot: clean splash management code
+
+2004/01/13  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/Makefile: cookr
+
+	* pkgs.pm: perl check
+	allow DRIVER"regexp" in rpmsrate and use it to install xmms-alsa when we
+	use alsa sound driver
+
+	* share/rpmsrate: allow DRIVER"regexp" in rpmsrate and use it to install
+	xmms-alsa when we use alsa sound driver
+
+	* Xconfig/card.pm, common.pm, detect_devices.pm, modules.pm:
+	detect_devices::matching_driver -> matching_desc but matching driver
+	names (kernel modules)
+
+	* any.pm: changing utf8 flag on an installed OS is not supported
+
+2004/01/13  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nb.po, share/po/et.po: updated Estonian and Norwegian files
+
+2004/01/13  Pixel  <pixel at mandrakesoft.com>
+
+	* devices.pm: lvm2 uses urandom
+
+	* lvm.pm: lvm2 uses urandom
+	  - install lvm2 rpm instead of lvm (and using ->ensure_is_installed)
+	  - "vgdisplay" error status is not good, using "vgs" instead
+
+	* diskdrake/smbnfs_gtk.pm: revert titi breaking the code, keeping the only
+	valid change
+
+2004/01/13  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakautoinst: alter message according to interface team
+	suggestion
+
+	* ugtk2.pm: 
+	  - "Next->" => "Next"
+	  - "<-Previous" => "Previous"
+	enable to access extra buttons $w->{buttons}{<label>}
+	do not pack empty label before extra buttons if there'll be no button
+	before it
+	rationale: when there's no cancel button, packing an empty label
+	instead of the cancel button results in extra buttons (eg: help,
+	advanced) to be shifted with a space before;
+
+	* standalone/drakboot, standalone/draksec, standalone/drakconnect:
+	sanitize buttons through reusing create_okcancel()
+
+	* standalone/drakedm: perl_checker sometimes wrongly complain
+
+	* standalone/drakfloppy: sanitize buttons through reusing
+	create_okcancel()
+	upcase label
+
+	* share/po/fr.po: typo fix
+
+	* standalone/drakfont: hide about butto b/c there's already mcc about
+	dialog and there're
+	already too much buttons
+	sanitize buttons through reusing create_okcancel()
+
+	* standalone/drakperm, standalone/drakclock: alter message according to
+	interface team suggestion
+	sanitize buttons through reusing create_okcancel()
+
+	* wizards.pm: add support for yes/no questions
+	better rely on the end field being set rather than on the last step to
+	be named "end" (thus allowing to have several different last steps)
+
+2004/01/12  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/01/12  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* pixmaps/langs/lang-sr.png: changed the Serbian cyrillic image to display
+	using cyrillic.
+
+	* share/po/et.po: updated Estonian file
+	updated pot file
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/uz@Cyrl.po, share/po/ja.po,
+	share/po/hr.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/be.po, share/po/uk.po, share/po/mn.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/lt.po, share/po/he.po, share/po/cy.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/tg.po,
+	share/po/nb.po, share/po/bs.po, share/po/uz.po, share/po/ro.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/hi.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/nl.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/de.po, share/po/eo.po,
+	share/po/lv.po, share/po/el.po, share/po/cs.po, share/po/bg.po,
+	share/po/hu.po: updated pot file
+
+	* lang.pm: adding spaces to please perl_checker
+	Added to the language selection menu languages with recently appeared
+	translations in Gnome or KDE (fo, ia, ku, nds, ne, oc, wen, yi)
+
+2004/01/12  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm: used the ip from stage1 instead of using IPADDR which is
+	not given for dhcp
+	for auto_install file (as asked by Michael Riss)
+
+	* install_gtk.pm: wacom support should be re-added :-/
+
+2004/01/12  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm, printer/printerdrake.pm: Added functionality to
+	configure a PostScript printer with a
+	manufacturer-supplied PPD file.
+
+2004/01/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakedm: perl_checker cleanups
+
+	* drakxtools.spec: 9.3-18mdk
+
+	* standalone/drakfloppy: handle both kernel 2.4.x and 2.6.x (before size
+	field was not properly
+	when switching between threes b/c we looked for module.ko instead of
+	module.o.gz and the like)
+
+	* standalone/drakfont: upcase first letter of error messages
+	perl_checker fixes
+	new layout with subdialogs
+	remove spurious minus at beginning of paragraph
+
+	* standalone/printerdrake: do not push anymore help menu at right (hig and
+	kde guidelines are
+	against this)
+
 2004/01/12  Fabian Mandelbaum  <fabman at 2vias.com.ar>
 
 	* share/po/es.po: Updated Spanish translations
@@ -22814,7 +23567,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.849 2004/01/09 18:36:55 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.850 2004/01/12 16:05:23 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
