@@ -792,6 +792,7 @@ sub use_proc_partitions {
     log::l("using /proc/partitions since diskdrake failed :(");
     partition_table::raw::zero_MBR($hd);
     $hd->{readonly} = 1;
+    $hd->{getting_rid_of_readonly_allowed} = 1;
     $hd->{primary} = { normal => [ grep { $_->{rootDevice} eq $hd->{device} } read_proc_partitions([$hd]) ] };
 }
 

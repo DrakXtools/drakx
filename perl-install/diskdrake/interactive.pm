@@ -105,6 +105,7 @@ struct hd {
   string info           # name of the hd, eg: 'QUANTUM ATLAS IV 9 WLS'
 
   bool readonly         # is it allowed to modify the partition table
+  bool getting_rid_of_readonly_allowed # is it forbidden to write because the partition table is badly handled, or is it because we MUST not change the partition table
   bool isDirty          # does it need to be written to the disk 
   bool needKernelReread # must we tell the kernel to reread the partition table
   bool hasBeenDirty     # for undo
@@ -264,7 +265,11 @@ sub Done {
 ################################################################################
 sub hd_possible_actions {
     my ($in, $hd, $all_hds) = @_;
-    __("Clear all"), if_($::isInstall && !$hd->{readonly}, __("Auto allocate")), __("More");
+    ( 
+     if_(!$hd->{readonly} || $hd->{getting_rid_of_readonly_allowed}, __("Clear all")), 
+     if_(!$hd->{readonly} && $::isInstall, __("Auto allocate")),
+     __("More"),
+    );
 }
 sub hd_possible_actions_interactive {
     my ($in, $hd, $all_hds) = @_;
@@ -282,7 +287,8 @@ sub Clear_all {
     if (isLVM($hd)) {
 	lvm::lv_delete($hd, $_) foreach @parts
     } else {
-	$hd->{readonly} = 0; #- give a way out of readonly-ness. Dangerous!
+	$hd->{readonly} = 0; #- give a way out of readonly-ness. only allowed when getting_rid_of_readonly_allowed
+	$hd->{getting_rid_of_readonly_allowed} = 0;
 	partition_table::raw::zero_MBR_and_dirty($hd);
     }
 }
