@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 
 use XML::Parser;
 use MDK::Common;
@@ -20,6 +20,7 @@ my $base = delete $helps{en} || die;
 save_help($base);
 
 foreach my $lang (keys %helps) {
+    print "Now transforming: $lang\n";
     local *F;
     my ($charset) = cat_("$lang.po") =~ /charset=([^\\]+)/ or die "missing charset in $lang.po\n";
     open F, "| iconv -f utf8 -t $charset//TRANSLIT > help-$lang.pot";
@@ -35,7 +36,7 @@ foreach my $lang (keys %helps) {
 	print F qq("\n\n);
     }
 }
-
+unlink(".memdump");
 
 sub save_help {
     my ($help) = @_;
@@ -130,7 +131,7 @@ sub rewrite2_ {
 
     my $text = do {
 	my @l = map { rewrite2_($_) } @{$tree->{children}};
-	my $text;
+	my $text = "";
 	foreach (grep { !/^\s*$/ } @l) {
 	    s/^ // if $text =~ /\s$/;
 	    $text =~ s/ $// if /^\s/;
