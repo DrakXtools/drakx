@@ -118,8 +118,6 @@ sub configure_chooser_raw {
 			  $may_set->('card', Xconfig::card::configure($in, $raw_X, $do_pkgs, 0, $options));
 		      } },
 		    { label => N("Monitor"), val => \$texts{monitors}, clicked => sub { 
-			  use Data::Dumper;
-			  print Dumper($raw_X->get_devices);
 			  $may_set->('monitors', Xconfig::monitor::configure($in, $raw_X, int($raw_X->get_devices)));
 		      } },
 		    { label => N("Resolution"), val => \$texts{resolution}, disabled => sub { !$X->{card} || !$X->{monitors} },
