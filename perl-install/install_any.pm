@@ -210,8 +210,6 @@ sub searchAndMount4Upgrade {
 
     my $w = $::beginner && $o->wait_message('', _("Searching root partition."));
 
-    $o->{partitioning}{readonly} = 1;
-
     #- try to find the partition where the system is installed if beginner
     #- else ask the user the right partition, and test it after.
     getHds($o);
