@@ -189,24 +189,6 @@ sub beforeInstallPackages {
     pkgs::init_db($o->{prefix}, $o->{isUpgrade});
 }
 
-sub beforeRemoveOtherPackages($) {
-    my ($prefix) = @_;
-
-    #- hack to save some files that may be removed during installation of other packages.
-    do {
-	unlink "$prefix/$_.mdkgisave"; rename "$prefix/$_", "$prefix/$_.mdkgisave";
-    } foreach qw(/etc/passwd);
-}
-
-sub afterRemoveOtherPackages($) {
-    my ($prefix) = @_;
-
-    #- hack to restore what have been saved before removing other packages.
-    do {
-	unlink "$prefix/$_"; rename "$prefix/$_.mdkgisave", "$prefix/$_";
-    } foreach qw(/etc/passwd);
-}
-
 sub installPackages($$) {
     my ($o, $packages) = @_;
 
@@ -216,7 +198,7 @@ sub installPackages($$) {
 	#- important files and restore them after.
 	foreach (@{$o->{toSave} || []}) {
 	    if (-e "$o->{prefix}/$_") {
-		unlink "$o->{prefix}/$_.mdkgisave"; rename "$o->{prefix}/$_", "$o->{prefix}/$_.mdkgisave";
+		unlink "$o->{prefix}/$_.mdkgisave"; eval { commands::cp("$o->{prefix}/$_", "$o->{prefix}/$_.mdkgisave") };
 	    }
 	}
 	pkgs::remove($o->{prefix}, $o->{toRemove});
@@ -226,6 +208,11 @@ sub installPackages($$) {
 	    }
 	}
 	$o->{toSave} = [];
+
+	#- hack for compat-glibc to upgrade properly :-(
+	if ($packages->{'compat-glibc'}{selected}) {
+	    rename "$o->{prefix}/usr/i386-glibc20-linux", "$o->{prefix}/usr/i386-glibc20-linux.mdkgisave";
+	}
     }
 
     #- hack to ensure proper ordering for installation of packages.
@@ -278,6 +265,12 @@ sub afterInstallPackages($) {
     install_any::kdeicons_postinstall($o->{prefix});
 
     run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
+
+    #- move some file after an upgrade that may be seriously annoying.
+    if ($o->{isUpgrade}) {
+	log::l("moving previous desktop files that have been updated to \$HOME/tmp of each user");
+	install_any::move_desktop_file($o->{prefix});
+    }
 }
 
 #------------------------------------------------------------------------------

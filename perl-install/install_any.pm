@@ -525,7 +525,7 @@ sub list_passwd() {
 }
 
 sub list_home() {
-    map { $_->[7] } grep { $_->[2] >= 501 } list_passwd();
+    map { $_->[7] } grep { $_->[2] >= 500 } list_passwd();
 }
 
 sub template2userfile($$$$%) {
@@ -545,23 +545,23 @@ sub update_userkderc($$$) {
 
     foreach ("/etc/skel", "/root", list_home()) {
 	my ($inputfile, $outputfile) = ("$prefix$_/.kderc", "$prefix$_/.kderc.new");
-	my %subst = %$subst;
+	my %tosubst = (%$subst);
 	local *INFILE; local *OUTFILE;
 	open INFILE, $inputfile or return;
 	open OUTFILE, ">$outputfile" or return;
 
 	print OUTFILE map {
 	    if (my $i = /^\s*\[$cat\]/i ... /^\s*\[/) {
-		if (/^\s*(\w*)=/ && $subst{lc($1)}) {
-		    delete $subst{lc($1)};
+		if (/^\s*(\w*)=/ && $tosubst{lc($1)}) {
+		    delete $tosubst{lc($1)};
 		} else {
-		    ($i > 1 && /^\s*\[/ && join '', values %subst). $_;
+		    ($i > 1 && /^\s*\[/ && join '', values %tosubst). $_;
 		}
 	    } else {
 		$_;
 	    }
 	} <INFILE>;
-	print OUTFILE "[$cat]\n", values %subst if values %subst; #- if categorie has not been found above.
+	print OUTFILE "[$cat]\n", values %tosubst if values %tosubst; #- if categorie has not been found above.
 
 	unlink $inputfile;
 	rename $outputfile, $inputfile;
@@ -582,9 +582,9 @@ sub kderc_largedisplay($) {
 sub kdelang_postinstall($) {
     my ($prefix) = @_;
     my %i18n = getVarsFromSh("$prefix/etc/sysconfig/i18n");
-    my $lang = $i18n{LANG} eq 'se' ? 'sv' : $i18n{LANG};
 
-    update_userkderc($prefix, 'Locale', { language => "Language=$lang\n" });
+    #- remove existing reference to $lang.
+    update_userkderc($prefix, 'Locale', { language => "Language=\n" });
 }
 
 sub kdeicons_postinstall($) {
@@ -626,6 +626,29 @@ sub kdeicons_postinstall($) {
 	} elsif (/^\/dev\/(\S+)\s+(\S*)\s+vfat\s+/x) {
 	    my %toreplace = ( device => $1, id => $1, mntpoint => $2 );
 	    template2userfile($prefix, "/usr/share/Dos_.kdelnk.in", "Desktop/Dos_$1.kdelnk", 1, %toreplace);
+	}
+    }
+}
+
+sub move_desktop_file($) {
+    my ($prefix) = @_;
+    my @toMove = qw(doc.kdelnk news.kdelnk updates.kdelnk home.kdelnk printer.kdelnk floppy.kdelnk cdrom.kdelnk);
+
+    foreach ("/etc/skel", "/root", list_home()) {
+	my $dir = "$prefix$_";
+	if (-d "$dir/Desktop") {
+	    my @toSubst = glob_("$dir/Desktop/.*\.rpmorig");
+
+	    push @toSubst, "$dir/Desktop/$_" foreach @toMove;
+
+	    #- remove any existing save in Trash of each user and
+	    #- move appropriate file there after an upgrade.
+	    foreach (@toSubst) {
+		my $basename = basename($_);
+
+		unlink "$dir/Desktop/Trash/$basename";
+		rename $_, "$dir/Desktop/Trash/$basename";
+	    }
 	}
     }
 }

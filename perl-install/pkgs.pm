@@ -499,11 +499,15 @@ sub selectPackagesToUpgrade($$$;$$) {
 						 c::headerGetEntry($header, 'version'). '-' .
 						 c::headerGetEntry($header, 'release'));
 			     if ($toRemove{$otherPackage}) {
-				 my @files = c::headerGetEntry($header, 'filenames');
-				 my @flags = c::headerGetEntry($header, 'fileflags');
-				 for my $i (0..$#flags) {
-				     if ($flags[$i] & c::RPMFILE_CONFIG()) {
-					 push @$toSave, $files[$i];
+				 if ($otherPackage =~ /^libtermcap/) {
+				     delete $toRemove{$otherPackage}; #- keep it selected, but force upgrade.
+				 } else {
+				     my @files = c::headerGetEntry($header, 'filenames');
+				     my @flags = c::headerGetEntry($header, 'fileflags');
+				     for my $i (0..$#flags) {
+					 if ($flags[$i] & c::RPMFILE_CONFIG()) {
+					     push @$toSave, $files[$i] unless $files[$i] =~ /kdelnk/; #- avoid doublons for KDE.
+					 }
 				     }
 				 }
 			     }
