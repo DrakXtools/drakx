@@ -1129,6 +1129,8 @@ sub main {
 		if (`pidof $_` > 0) {
 		    if ($in->ask_okcancel('', _("Please relog into %s to activate the changes", ucfirst $_), 1)) {
 			system("kwmcom logout") if /kwm/;
+			system("dcop kdesktop default logout") if /kwin/;
+			system("save-session --kill") if /gnome-session/;
 
 			open STDIN, "</dev/zero";
 			open STDOUT, ">/dev/null";

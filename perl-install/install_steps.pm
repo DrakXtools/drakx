@@ -431,7 +431,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     log::l("updating kde icons according to available devices");
     install_any::kdeicons_postinstall($o->{prefix});
 
-    my $welcome = _("Welcome to %s", "[HOSTNAME]");
+    my $welcome = _("Welcome to %s", "HOSTNAME");
     substInFile { s/^(GreetString)=.*/$1=$welcome/ } "$o->{prefix}/usr/share/config/kdmrc";
     substInFile { s/^(UserView)=false/$1=true/ } "$o->{prefix}/usr/share/config/kdmrc" if $o->{security} < 3;
     run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
@@ -817,8 +817,11 @@ sub miscellaneous {
 	$_ .= " " . join(" ", (map { "$_=ide-scsi" } @l), 
 			 map { "$_->{device}=ide-floppy" } detect_devices::ide_zips());
     }
+    if ($o->{miscellaneous}{HDPARM}) {
+	$_ .= join('', map { " $_=autotune" } grep { /ide.*/ } all("/proc/ide")) if !/ide.=autotune/;
+    }
     if (my $m = detect_devices::hasUltra66()) {
-	$_ .= " $m" if !/ide.=/;
+	$_ .= " $m" if !/ide.=0x/;
     }
 
     #- keep some given parameters

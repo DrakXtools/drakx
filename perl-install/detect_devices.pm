@@ -158,21 +158,6 @@ sub getDAC960() {
     values %idi;
 }
 
-sub net2module() {
-    my @modules = map { quotemeta first(split) } cat_("/proc/modules");
-    my $modules = join '|', @modules;
-    my $net     = join '|', @netdevices;
-    my ($module, %l);
-    foreach (syslog()) {
-	if (/^($modules)\.c:/) {
-	    $module = $1;
-	} elsif (/^($net):/) {
-	    $l{$1} = $module if $module;
-	}
-    }
-    %l;
-}
-
 sub getNet() {
     grep { hasNetDevice($_) } @netdevices;
 }

@@ -351,7 +351,6 @@ sub miscellaneous {
 
     addToBeDone {
 	setVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
-            HDPARM => $o->{miscellaneous}{HDPARM},
             CLEAN_TMP => $o->{miscellaneous}{CLEAN_TMP},
             CLASS => $::expert && "expert" || $::beginner && "beginner" || "medium",
             TYPE => $o->{installClass},

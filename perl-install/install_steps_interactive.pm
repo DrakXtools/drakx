@@ -86,9 +86,10 @@ sub selectKeyboard($) {
 
     if ($::expert && ref($o) !~ /newt/) { #- newt is buggy with big windows :-(
 	my %langs; $langs{$_} = 1 foreach @{$o->{langs}};
+	my @l = sort { $a->[0] cmp $b->[0] } map { [ lang::lang2text($_) || $_, \$langs{$_} ] } lang::list();
 	$o->ask_many_from_list_ref('', 
 		_("You can choose other languages that will be available after install"),
-		[ (map { lang::lang2text($_) } lang::list()), 'All' ], [ map { \$langs{$_} } lang::list(), 'all' ] ) or goto &selectKeyboard;
+		[ map { $_->[0] } @l ], [ map { $_->[1] } @l ], [ 'All' ], [ \$langs{all} ]) or goto &selectKeyboard;
 	$o->{langs} = $langs{all} ? [ 'all' ] : [ grep { $langs{$_} } keys %langs ];
     }
     install_steps::selectKeyboard($o);

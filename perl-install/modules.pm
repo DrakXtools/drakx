@@ -3,7 +3,7 @@ package modules;
 use strict;
 use vars qw(%drivers);
 
-use common qw(:common :file :system);
+use common qw(:common :file :system :functional);
 use detect_devices;
 use run_program;
 use log;
@@ -394,12 +394,16 @@ sub remove_alias($) {
 
 sub when_load {
     my ($name, $type, @options) = @_;
-    add_alias('scsi_hostadapter', $name), eval { load('sd_mod') } if $type =~ /scsi/ || $type eq $type_aliases{scsi};
+    if ($type =~ /scsi/ || $type eq $type_aliases{scsi}) {
+	add_alias('scsi_hostadapter', $name), eval { load('sd_mod') };
+    }
     $conf{$name}{options} = join " ", @options if @options;
 }
 
 sub load {
     my ($name, $type, @options) = @_;
+
+    my @netdev = detect_devices::getNet() if $type eq 'net';
 
     if ($::testing) {
 	log::l("i try to install $name module (@options)");
@@ -412,6 +416,10 @@ sub load {
 	load_raw([ $name, @options ]);
     }
     sleep 2 if $name =~ /usb-storage|mousedev/;
+
+    if ($type eq 'net') {
+	add_alias($_, $name) foreach difference2([ detect_devices::getNet() ], \@netdev);
+    }
 
     when_load($name, $type, @options);
 }
@@ -523,9 +531,6 @@ sub write_conf {
     substInFile { $_ = '' if /^post-install supermount/ } $file;
 
     my $written = read_conf($file);
-
-    my %net = detect_devices::net2module();
-    while (my ($k, $v) = each %net) { add_alias($k, $v) }
 
     local *F;
     open F, ">> $file" or die("cannot write module config file $file: $!\n");

@@ -241,7 +241,7 @@ my %charsets = (
 #- Functions
 #-######################################################################################
 
-sub list { sort { $a cmp $b } keys %languages }
+sub list { keys %languages }
 sub lang2text { $languages{$_[0]} && $languages{$_[0]}[0] }
 sub lang2charset { $languages{$_[0]} && $languages{$_[0]}[1] }
 

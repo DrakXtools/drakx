@@ -376,7 +376,7 @@ sub choosePackagesTree {
 	my $isSelection = !pkgs::packageFlagSelected($_[0]);
 	foreach (@_) {
 	    pkgs::togglePackageSelection($packages, $_, my $l = {});
-	    @l{keys %$l} = ();
+	    @l{grep {$l->{$_}} keys %$l} = ();
 	}
 	if (my @l = keys %l) {
 	    #- check for size before trying to select.
@@ -609,8 +609,9 @@ sub create_big_help {
 	   gtkpack_(new Gtk::VBox(0,0),
 		    1, createScrolledWindow(gtktext_insert(new Gtk::Text, 
 							   formatAlaTeX(_ deref($help::steps{$::o->{step}})))),
-		    0, gtksignal_connect(new Gtk::Button(_("Ok")), "clicked" => sub { Gtk->main_quit }),
+		    0, gtksignal_connect(my $ok = new Gtk::Button(_("Ok")), "clicked" => sub { Gtk->main_quit }),
 		   ));
+    $ok->grab_focus;
     $w->main;
     gtkset_mousecursor_normal();
 }
