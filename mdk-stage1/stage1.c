@@ -389,6 +389,28 @@ int mandrake_move_pre(void)
 }
 
 
+static enum return_type handle_clp(char* clp, char* live, char* location_live, char* location_mount, int* is_symlink)
+{
+        if (IS_LIVE || access(clp, R_OK)) {
+                log_message("no %s found (or disabled), trying to fallback on plain tree", clp);
+                if (!access(live, R_OK)) {
+                        if (scall(symlink(location_live, location_mount), "symlink"))
+                                return RETURN_ERROR;
+                        *is_symlink = 1;
+                        return RETURN_OK;
+                }
+                log_message("move: panic, can't find %s nor %s", clp, live);
+                return RETURN_ERROR;
+        }
+
+        if (lomount(clp, location_mount, NULL, 1)) {
+                stg1_error_message("Could not mount compressed loopback :(.");
+                return RETURN_ERROR;
+        }
+
+        return RETURN_OK;
+}
+
 int mandrake_move_post(void)
 {
         FILE *f;
@@ -396,6 +418,7 @@ int mandrake_move_post(void)
         int fd;
         char rootdev[] = "0x0100"; 
         int boot__real_is_symlink_to_raw = 0;
+        int always__real_is_symlink_to_raw = 0;
         int main__real_is_symlink_to_raw = 0;
         char* clp       = IMAGE_LOCATION "/live_tree_boot.clp";
         char* clp_tmpfs = SLASH_LOCATION "/live_tree_boot.clp";
@@ -407,10 +430,10 @@ int mandrake_move_post(void)
                         if (scall(symlink(IMAGE_LOCATION "/live_tree_boot", BOOT_LOCATION), "symlink"))
                                 return RETURN_ERROR;
                         boot__real_is_symlink_to_raw = 1;
-                        goto live_tree_clp;
+                        goto handle_clps;
                 } else {
                         log_message("move: can't find %s nor %s, proceeding with live_tree.clp hoping files will be there", clp, live);
-                        goto live_tree_clp;
+                        goto handle_clps;
                 }
         }
 
@@ -451,26 +474,17 @@ int mandrake_move_post(void)
                         stg1_error_message("Could not mount boot compressed loopback :(.");
         }
 
- live_tree_clp:
-        clp = IMAGE_LOCATION "/live_tree.clp";
-        live = IMAGE_LOCATION "/live_tree/etc/fstab";
-        if (IS_LIVE || access(clp, R_OK)) {
-                log_message("no %s found (or disabled), trying to fallback on plain tree", clp);
-                if (!access(live, R_OK)) {
-                        if (scall(symlink(IMAGE_LOCATION "/live_tree", IMAGE_LOCATION_REAL), "symlink"))
-                                return RETURN_ERROR;
-                        main__real_is_symlink_to_raw = 1;
-                        goto live_tree_ok;
-                }
-                log_message("move: panic, can't find %s nor %s", clp, live);
+ handle_clps:
+        if (handle_clp(IMAGE_LOCATION "/live_tree_always.clp", IMAGE_LOCATION "/live_tree_always/bin/bash",
+                       IMAGE_LOCATION "/live_tree_always", ALWAYS_LOCATION,
+                       &always__real_is_symlink_to_raw) != RETURN_OK)
                 return RETURN_ERROR;
-        }
 
-        if (lomount(clp, IMAGE_LOCATION_REAL, NULL, 1))
-                stg1_error_message("Could not mount main compressed loopback :(.");
-
+        if (handle_clp(IMAGE_LOCATION "/live_tree.clp", IMAGE_LOCATION "/live_tree/etc/fstab",
+                       IMAGE_LOCATION "/live_tree", IMAGE_LOCATION_REAL,
+                       &main__real_is_symlink_to_raw) != RETURN_OK)
+                return RETURN_ERROR;
        
-live_tree_ok:
         if (scall(!(f = fopen(IMAGE_LOCATION_REAL "/move/symlinks", "rb")), "fopen[" IMAGE_LOCATION_REAL "/move/symlinks]"))
                 return RETURN_ERROR;
         while (fgets(buf, sizeof(buf), f)) {
@@ -505,6 +519,13 @@ live_tree_ok:
                 if (scall(unlink(BOOT_LOCATION), "unlink"))
                         return RETURN_ERROR;
                 if (scall(symlink(RAW_LOCATION_REL "/live_tree_boot", BOOT_LOCATION), "symlink"))
+                        return RETURN_ERROR;
+        }
+
+        if (always__real_is_symlink_to_raw) {
+                if (scall(unlink(ALWAYS_LOCATION), "unlink"))
+                        return RETURN_ERROR;
+                if (scall(symlink(RAW_LOCATION_REL "/live_tree_always", ALWAYS_LOCATION), "symlink"))
                         return RETURN_ERROR;
         }
 
