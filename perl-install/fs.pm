@@ -663,10 +663,7 @@ sub format_part {
 ################################################################################
 sub set_loop {
     my ($part) = @_;
-    if (!$part->{real_device}) {
-	eval { modules::load('loop') };
-	$part->{real_device} = devices::set_loop(devices::make($part->{device}), $part->{encrypt_key}, $part->{options} =~ /encryption=(\w+)/);
-    }
+    $part->{real_device} ||= devices::set_loop(devices::make($part->{device}), $part->{encrypt_key}, $part->{options} =~ /encryption=(\w+)/);
 }
 
 sub formatMount_part {

@@ -51,9 +51,11 @@ sub find_free_loop() { find_free_loop_raw() }
 sub find_free_chloop() { find_free_loop_raw('chloop') }
 sub set_loop {
     my ($file, $o_encrypt_key, $o_encryption) = @_;
+    eval { modules::load('loop') };
     my $dev = find_free_loop();
 
     if ($o_encrypt_key && $o_encryption) {
+	eval { modules::load('cryptoloop', 'aes') };
 	my $cmd = "losetup -p 0 -e $o_encryption $dev $file";
 	log::l("calling $cmd");
 	open(my $F, "|$cmd");
