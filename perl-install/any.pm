@@ -843,7 +843,7 @@ sub selectLanguage {
 the languages you would like to install. They will be available
 when your installation is complete and you restart your system.")),
 	  callbacks => {
-	      focus_out => sub { $langs->{$lang} = 1 },
+	      advanced => sub { $langs->{$lang} = 1 },
 	  },
 	},
 	[ { val => \$lang, separator => '|', 
@@ -855,6 +855,7 @@ when your installation is complete and you restart your system.")),
 	   } sort { $a->[1] cmp $b->[1] } map { [ $_, lang::lang2text($_) ] } lang::list()),
 	  { val => \$langs->{all}, type => 'bool', text => _("All"), advanced => 1 }),
 	]) or return;
+    $langs->{$lang} = 1;
     $lang;
 }
 
