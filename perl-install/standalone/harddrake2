@@ -254,7 +254,7 @@ $tree->get_selection->signal_connect('changed' => sub {
             show_hide(defined($current_device->{driver}) && $current_device->{driver} !~ /^unknown|^Bad|^Card|^Hsf|^Removable:|\|/, $module_cfg_button);
             
             $current_configurator = $configurators[$idx];
-            show_hide(-x first(split /\s+/, $current_configurator), $config_button);  # strip arguments for -x test
+            show_hide($current_configurator && -x first(split /\s+/, $current_configurator), $config_button);  # strip arguments for -x test
             return 1;
         }
     }

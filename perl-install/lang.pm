@@ -904,7 +904,7 @@ sub system_locales_to_ourlocale {
 	$h->{main};
     $locale->{lang} .= '@' . $h->{variant} if $h->{variant};
     $locale->{country} = analyse_locale_name($locale_country)->{country};
-    $locale->{utf8} = $h->{encoding} eq 'UTF-8';
+    $locale->{utf8} = $h->{encoding} && $h->{encoding} eq 'UTF-8';
     #- safe fallbacks
     $locale->{lang} ||= 'en_US';
     $locale->{country} ||= 'US';
@@ -913,6 +913,7 @@ sub system_locales_to_ourlocale {
 
 sub read {
     my ($prefix, $user_only) = @_;
+    $prefix ||= "";
     my ($f1, $f2) = ("$prefix$ENV{HOME}/.i18n", "$prefix/etc/sysconfig/i18n");
     my %h = getVarsFromSh($user_only && -e $f1 ? $f1 : $f2);
     system_locales_to_ourlocale($h{LC_MESSAGES} || 'en_US', $h{LC_MONETARY} || 'en_US');

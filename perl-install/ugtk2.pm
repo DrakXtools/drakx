@@ -916,7 +916,7 @@ sub new {
 	}
 	$o->{rwindow}->set_position('center_always') if $force_center || $o->{force_center};
 	$o->{rwindow}->set_modal(1) if $grab || $o->{grab} || $o->{modal};
-	$o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient} =~ /Gtk2::Window/;
+	$o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient} && $o->{transient} =~ /Gtk2::Window/;
 
     } else {
 	$o->{rwindow} = $o->{window} = Gtk2::VBox->new(0,0);
