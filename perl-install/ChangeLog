@@ -1,5 +1,66 @@
 2001/03/20  dam's  <damien@mandrakesoft.com>
 
+	* netconnect.pm: corrected bug in reading resolv.conf, and changed chmod
+	for net_cnx_*
+
+	* interactive.pm: no wizard if warning
+
+	* standalone/draknet: added update after {dis}connecting
+
+2001/03/20  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* diskdrake.pm: fix formatting of raid
+
+2001/03/20  Pixel  <pixel@mandrakesoft.com>
+
+	* share/rpmsrate: use bastille backend
+	  - add nautilus
+
+	* install_steps_interactive.pm: fix pcmcia functions only on x86
+	  - create install_any::unselectMostPackages
+	  - use it instead of pkgs::unselectAllPackages (otherwise
+	default_packages ends up non-selected)
+	(setupSCSI): don't pcmcia_probe if testing
+	  - tellAboutProprietaryModules moved to setupSCSI
+	  - miscellaneous step re-enabled, called Security
+	  - pcmcia_probe moved to setupSCSI, skipped in noauto
+
+	* any.pm: use bastille backend
+
+	* install2.pm: use bastille backend
+	  - tellAboutProprietaryModules moved to setupSCSI
+	  - miscellaneous step re-enabled, called Security
+	  - pcmcia_probe moved to setupSCSI, skipped in noauto
+	have pcmcia_probe in stage2 (for non pcmcia.img, stage1 doesn't give the
+	parameter any more)
+
+	* netconnect.pm (modem_detect_backend): cleanup
+
+	* c/stuff.xs.pm, c/Makefile.PL: fix pcmcia functions only on x86
+	have pcmcia_probe in stage2 (for non pcmcia.img, stage1 doesn't give the
+	parameter any more)
+
+	* Makefile: install cardmgr
+
+	* install_any.pm: 
+	  - create install_any::unselectMostPackages
+	  - use it instead of pkgs::unselectAllPackages (otherwise
+	default_packages ends up non-selected)
+	(setPackages): install usbd in case of usb
+
+	* install_steps.pm: 
+	  - create install_any::unselectMostPackages
+	  - use it instead of pkgs::unselectAllPackages (otherwise
+	default_packages ends up non-selected)
+
+2001/03/20  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* any.pm, netconnect.pm, detect_devices.pm: any.pm: enable module load PPC
+	detect_devices.pm: forgot to remove commented code after test
+	netconnect.pm: load macserial module for PPC
+
+2001/03/20  dam's  <damien@mandrakesoft.com>
+
 	* standalone/draknet, netconnect.pm: improved connection windows, and
 	loading / saving of /etc/sysconfig/network-scripot/netècnx*
 
