@@ -509,6 +509,17 @@ Section "ServerFlags"
     #DontZap # disable <Crtl><Alt><BS> (server abort)
     #DontZoom # disable <Crtl><Alt><KP_+>/<KP_-> (resolution switching)
     AllowMouseOpenFail # allows the server to start up even if the mouse does not work
+END
+
+$default_header .= <<'END_XBOX' if is_xbox(); 
+    Option "PciProbe1" "false"
+    Option "PciProbe2" "false"
+    Option "PciForceConfig1" "false"
+    Option "PciForceConfig2" "false"
+    Option "PciOsConfig" "true"
+END_XBOX
+
+$default_header .= <<'END';
 EndSection
 END
 

@@ -9,7 +9,7 @@ use vars qw(@ISA @EXPORT $SECTORSIZE);
 
 @ISA = qw(Exporter);
 # no need to export ``_''
-@EXPORT = qw($SECTORSIZE N N_ check_for_xserver files_exist formatTime formatXiB makedev mandrake_release removeXiBSuffix require_root_capability salt setVirtual set_alternative set_permissions translate unmakedev untranslate);
+@EXPORT = qw($SECTORSIZE N N_ check_for_xserver files_exist formatTime formatXiB is_xbox makedev mandrake_release removeXiBSuffix require_root_capability salt setVirtual set_alternative set_permissions translate unmakedev untranslate);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
@@ -255,6 +255,10 @@ sub check_for_xserver() {
 	} if $ENV{DISPLAY};
     }
     return $::xtest;
+}
+
+sub is_xbox() {
+    return any { $_->{vendor} . $_->{id} == hex('10de') . hex('02a5') } detect_devices::pci_probe();                                                 
 }
 
 #- special unpack

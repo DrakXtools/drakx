@@ -784,10 +784,6 @@ sub get_mac_generation() {
     cat_('/proc/cpuinfo') =~ /^pmac-generation\s*:\s*(.*)/m ? $1 : "Unknown Generation";	
 }
 
-sub is_xbox() {
-    any { $_->{vendor} == 0x10de && $_->{id} == 0x02a5 } detect_devices::pci_probe();
-}
-
 sub hasSMP() { 
     return if $::testing;
     c::detectSMP() || any { /\bProcessor #(\d+)\s+(\S*)/ && $1 > 0 && $2 ne 'invalid' } syslog();
