@@ -328,7 +328,12 @@ sub change_color {
     $doit ? $colorsel->get_current_color : $color;
 }
 
-my $scale;
+my ($echr, $echt);
+$echr = $echt = $height;
+
+sub scale_tranmistted($) { $_[0] * $echt }
+sub scale_received($) { $_[0] * $echr }
+
 sub update() {
      if (!$during_connection) {
         my $isconnect = test_connected(0);
@@ -407,8 +412,8 @@ sub update() {
                                     my $received    = $x >= 0 ? $monitor->{$intf}{stack_r}[$x] : 0;
                                     my $transmitted = $x >= 0 ? $monitor->{$intf}{stack_t}[$x] : 0;
                                     my $type;
-                                    $y * $scale / $height < $transmitted and $type = N("transmitted");
-                                    ($height - $y) * $scale / $height < $received and $type = N("received");
+                                    $y * $echt / $height < $transmitted and $type = N("transmitted");
+                                    ($height - $y) * $echr / $height < $received and $type = N("received");
                                     $measure_r->set_label(formatXiB($received));
                                     $measure_t->set_label(formatXiB($transmitted));
                                 });
@@ -458,12 +463,12 @@ sub draw_monitor {
     foreach (@{$o->{stack_r}}) { $maxr = $_ if $_ > $maxr }
     my $maxt = 0;
     foreach (@{$o->{stack_t}}) { $maxt = $_ if $_ > $maxt }
-    my $ech = $maxr + $maxt;
-    $ech == 0 and $ech = 1;
-    $scale = $ech;
+
+    $echr = $echt = $height / max($maxr + $maxt, 1);
+
     my $step = $left_border - 1;
     foreach (@{$o->{stack_t}}) {
-	$pixmap->draw_rectangle($gct, 1, $step, 0, 1, $_*$height/$ech);
+	$pixmap->draw_rectangle($gct, 1, $step, 0, 1, scale_tranmistted($_));
 	$step++;
     }
     $step = $left_border - 1;
@@ -472,17 +477,17 @@ sub draw_monitor {
 	if ($_ != -1) {
 	    if (!defined $av1) { $av1 = $_ } else { defined $av2 or $av2 = $_ }
 	    if ($av1 && $av2) {
-		$pixmap->draw_line($gca, $step-15, $av1*$height/$ech, $step-5, $av2*$height/$ech);
+		$pixmap->draw_line($gca, $step-15, scale_tranmistted($av1), $step-5, scale_tranmistted($av2));
 		$av1 = $av2;
 		undef $av2;
-		$last_a = $step - $left_border;
+		$last_a = $step - $left_border + 1;
 	    }
 	}
 	$step++;
     }
     $step = $left_border - 1;
     foreach (@{$o->{stack_r}}) {
-	$pixmap->draw_rectangle($gcr, 1, $step, $height-$_*$height/$ech, 1, $_*$height/$ech);
+	$pixmap->draw_rectangle($gcr, 1, $step, $height-scale_received($_), 1, scale_received($_));
 	$step++;
     }
     $step = $left_border - 1;
@@ -491,7 +496,7 @@ sub draw_monitor {
 	if ($_ != -1) {
 	    if (!defined $av1) { $av1 = $_ } else { defined $av2 or $av2 = $_ }
 	    if (defined $av1 && defined $av2) {
-		$pixmap->draw_line($gca, $step-15, $height-$av1*$height/$ech, $step-5, $height-$av2*$height/$ech);
+		$pixmap->draw_line($gca, $step-15, $height-scale_received($av1), $step-5, $height-scale_received($av2));
 		$av1 = $av2;
 		undef $av2;
 	    }
@@ -503,41 +508,47 @@ sub draw_monitor {
     my $gcl = Gtk2::Gdk::GC->new($darea->{$intf}->window);
     $gcl->set_foreground($darea->{$intf}->style->white);
     $gcl->set_line_attributes(1, 'on-off-dash', 'not-last', 'round');
+
+    my ($pix_maxr, $pix_maxt);
+    if ($last_a) {
+        $pix_maxr = $height - scale_received(@{$o->{stack_ra}}[$last_a]);
+        $pix_maxt = scale_tranmistted(@{$o->{stack_ta}}[$last_a]);
+    } else {
+        $pix_maxr = $height - scale_received(@{$o->{stack_r}}[@{$o->{stack_r}}-1]);
+        $pix_maxt = scale_tranmistted(@{$o->{stack_t}}[@{$o->{stack_t}}-1]);
+    }
+
     for (my $i = $grid_interval; $i <= $height - $grid_interval; $i += $grid_interval) {
 	$pixmap->draw_line($gcl, $left_border, $i, $width, $i);
 	my ($gc2, $text);
-	my ($dif1, $dif2);
-	if ($last_a) {
-	    $dif1 = abs($height-(@{$o->{stack_ra}}[$last_a])*$height/$ech - $i);
-	    $dif2 = abs((@{$o->{stack_ta}}[$last_a])*$height/$ech - $i);
-	} else {
-	    $dif1 = abs($height-(@{$o->{stack_r}}[@{$o->{stack_r}}-1])*$height/$ech - $i);
-	    $dif2 = abs((@{$o->{stack_t}}[@{$o->{stack_t}}-1])*$height/$ech - $i);
-	}
-	if ($dif1 < $dif2) {
-	    $text = formatXiB(($height-$i)*$ech/$height);
+        if ($i > $pix_maxt) {
+	    $text = formatXiB(($height-$i)/$echr);
 	    $gc2 = $gcr;
-	    my $x_l = 5;
-            if ($switch) {
-                if ($i > $grid_interval) {
-                    $pixmap->draw_line($gct, $x_l, 0, $x_l, $i-$grid_interval);
-                    $pixmap->draw_line($gct, $x_l-1, 0, $x_l-1, $i-$grid_interval);
-                    $pixmap->draw_line($gct, $x_l+1, 0, $x_l+1, $i-$grid_interval);
-                    $pixmap->draw_polygon($gct, 1, $x_l-4, $i-$grid_interval, $x_l+5, $i-$grid_interval, $x_l, $i-25);
-                }
-
-                $pixmap->draw_line($gcr, $x_l, $height, $x_l, $i);
-                $pixmap->draw_line($gcr, $x_l-1, $height, $x_l-1, $i);
-                $pixmap->draw_line($gcr, $x_l+1, $height, $x_l+1, $i);
-                $pixmap->draw_polygon($gcr, 1, $x_l-5, $i, $x_l+5, $i, $x_l, $i-6);
-
-                undef $switch;
-            }
-	} else {
-	    $text = formatXiB($i*$ech/$height);
+        } else {
+	    $text = formatXiB($i/$echt);
 	    $gc2 = $gct;
+        }
+
+	if ($i > $pix_maxt && $switch) {
+            my $x_l = 5;
+            my $y_l;
+            if ($i > $grid_interval) {
+                $y_l = $i-$grid_interval/2;
+                $pixmap->draw_line($gct, $x_l, 0, $x_l, $y_l);
+                $pixmap->draw_line($gct, $x_l-1, 0, $x_l-1, $y_l);
+                $pixmap->draw_line($gct, $x_l+1, 0, $x_l+1, $y_l);
+                $pixmap->draw_polygon($gct, 1, $x_l-5, $y_l, $x_l+5, $y_l, $x_l, $y_l+5);
+            }
+
+            $y_l = $i+$grid_interval/2;
+            $pixmap->draw_line($gcr, $x_l, $height, $x_l, $y_l);
+            $pixmap->draw_line($gcr, $x_l-1, $height, $x_l-1, $y_l);
+            $pixmap->draw_line($gcr, $x_l+1, $height, $x_l+1, $y_l);
+            $pixmap->draw_polygon($gcr, 1, $x_l-5, $y_l, $x_l+5, $y_l, $x_l, $y_l-5);
+
+            undef $switch;
 	}
-     $pixmap->draw_layout($gc2, 45-string_width($darea->{$intf}, $text), $i-5, $darea->{$intf}->create_pango_layout($text));
+        $pixmap->draw_layout($gc2, 45-string_width($darea->{$intf}, $text), $i-5, $darea->{$intf}->create_pango_layout($text));
     }
     $darea->{$intf}->queue_draw;
 }
