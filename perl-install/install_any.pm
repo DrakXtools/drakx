@@ -568,17 +568,30 @@ sub kderc_largedisplay($) {
 sub kdeicons_postinstall($) {
     my ($prefix) = @_;
 
-    #- parse etc/fstab file to search for dos/win, zip, cdroms icons.
+    #- parse etc/fstab file to search for dos/win, floppy, zip, cdroms icons.
+    #- handle both supermount and fsdev usage.
     local *F;
     open F, "$prefix/etc/fstab" or log::l("failed to read $prefix/etc/fstab"), return;
 
     foreach (<F>) {
 	if (/^\/dev\/(\S+)\s+\/mnt\/cdrom (\d*)\s+/x) {
 	    my %toreplace = ( device => $1, id => $2 );
-	    template2userfile($prefix, "/usr/share/cdrom.kdelnk.in", "Desktop/cdrom$2.kdelnk", 1, %toreplace);
+	    template2userfile($prefix, "/usr/share/cdrom.fsdev.kdelnk.in", "Desktop/cdrom$2.kdelnk", 1, %toreplace);
 	} elsif (/^\/dev\/(\S+)\s+\/mnt\/zip (\d*)\s+/x) {
 	    my %toreplace = ( device => $1, id => $2 );
+	    template2userfile($prefix, "/usr/share/zip.fsdev.kdelnk.in", "Desktop/zip$2.kdelnk", 1, %toreplace);
+	} elsif (/^\/dev\/(\S+)\s+\/mnt\/floppy (\d*)\s+/x) {
+	    my %toreplace = ( device => $1, id => $2 );
+	    template2userfile($prefix, "/usr/share/floppy.fsdev.kdelnk.in", "Desktop/floppy$2.kdelnk", 1, %toreplace);
+	} elsif (/^\/mnt\/cdrom (\d*)\s+\/mnt\/cdrom\d*\s+supermount/x) {
+	    my %toreplace = ( id => $1 );
+	    template2userfile($prefix, "/usr/share/cdrom.kdelnk.in", "Desktop/cdrom$2.kdelnk", 1, %toreplace);
+	} elsif (/^\/mnt\/zip (\d*)\s+\/mnt\/zip\d*\s+supermount/x) {
+	    my %toreplace = ( id => $1 );
 	    template2userfile($prefix, "/usr/share/zip.kdelnk.in", "Desktop/zip$2.kdelnk", 1, %toreplace);
+	} elsif (/^\/mnt\/floppy (\d*)\s+\/mnt\/floppy\d*\s+supermount/x) {
+	    my %toreplace = ( id => $1 );
+	    template2userfile($prefix, "/usr/share/floppy.kdelnk.in", "Desktop/floppy$2.kdelnk", 1, %toreplace);
 	} elsif (/^\/dev\/(\S+)\s+\/mnt\/DOS_ (\S*)\s+/x) {
 	    my %toreplace = ( device => $1, id => $2 );
 	    template2userfile($prefix, "/usr/share/Dos_.kdelnk.in", "Desktop/Dos_$2.kdelnk", 1, %toreplace);
