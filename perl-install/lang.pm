@@ -20,7 +20,7 @@ my %languages = (
   'en'  => [ 'English',			undef,	      'en', 'en_US:en' ],
   'af'  => [ 'Afrikaans',		'iso-8859-1', 'af', 'af:en_ZA' ],
 #-'ar'  => [ 'Arabic',			'iso-8859-6', 'ar', 'ar' ],
-  'bg'  => [ 'Bulgarian',		'cp1250',     'bg', 'bg' ],
+  'bg'  => [ 'Bulgarian',		'cp1251',     'bg', 'bg' ],
   'br'  => [ 'Brezhoneg',		'iso-8859-1', 'br', 'br:fr_FR:fr' ],
   'ca'  => [ 'Catalan',			'iso-8859-1', 'ca', 'ca:es_ES:fr_FR:es:fr' ],
   'cs'  => [ 'Czech',			'iso-8859-2', 'cs', 'cs' ],
@@ -31,6 +31,7 @@ my %languages = (
 'es_ES' => [ 'Spanish (Spain)',		'iso-8859-1', 'es', 'es' ],
   'et'  => [ 'Estonian',		'iso-8859-15','et', 'et' ],
   'eu'  => [ 'Euskara (Basque)',	'iso-8859-1', 'eu', 'eu:es_ES:fr_FR:es:fr' ],
+#-'fa'  => [ 'Farsi (Iranian)',		'isiri-3342', 'fa', 'fa' ],
 'fr_FR' => [ 'French (France)',		'iso-8859-1', 'fr', 'fr_FR:fr' ],
   'ga'  => [ 'Gaeilge (Irish)',		'iso-8859-14','ga', 'ga:en_IE:en' ],
   'gl'  => [ 'Galician',		'iso-8859-1', 'gl', 'gl:es_ES:pt_PT:pt_BR:es:pt' ],
@@ -126,6 +127,7 @@ my %charsets = (
 	"-*-*-*-*-*-*-*-*-*-*-*-*-jisx*.*-0" ],
   "koi8-r"     => [ "Cyr_a8x16",	"koi2alt", std("koi8-r") ],
   "koi8-u"     => [ "ruscii_8x16",	"koi2alt", std("koi8-u") ],
+  "cp1251"     => [ undef,		undef, std2("microsoft-cp1251",100) ],
 #- korean needs special console driver for text mode
   "ksc5601"    => [ undef,            undef,
 	"-*-*-*-*-*-*-*-*-*-*-*-*-ksc5601.1987-*" ],
@@ -133,6 +135,10 @@ my %charsets = (
   "tcvn"       => [ "tcvn8x16",		"tcvn", std2("tcvn-5712", 130), std2("tcvn-5712", 100) ],
   "viscii"     => [ "viscii10-8x16",	"viscii",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-viscii1.1-1" ],
+#- Farsi (iranian) needs special console driver for text mode [patching acon ?]
+#- (and gtk support isn't done yet)
+  "isiri-3342" => [ undef,		undef,
+	"-*-*-*-*-*-*-*-*-*-*-*-*-isiri-3342" ],
 );
 
 #-######################################################################################
