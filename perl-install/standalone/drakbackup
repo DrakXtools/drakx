@@ -774,12 +774,9 @@ sub do_expect {
 	
 	my ($mode, $filename) = @_;
 		
-	eval { require Expect; 1 };
+	eval { require Expect };
 	
-	if ($@ ne '') {
-		$log_buff .= "perl-Expect not installed!";
-		return(1); 	
-	}
+	$@ and $log_buff .= "perl-Expect not installed!", return(1); 	
 
 	#- for debugging set to 1
 	$Expect::Exp_Internal = 0;
