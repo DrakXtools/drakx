@@ -281,6 +281,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %defattr(-,root,root)
 %config(noreplace) %_sysconfdir/pam.d/net_monitor
 %config(noreplace) %_sysconfdir/security/console.apps/net_monitor
+/usr/share/autostart/net_applet.desktop
 /usr/X11R6/bin/*
 
 %files -n harddrake
