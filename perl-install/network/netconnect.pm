@@ -409,9 +409,10 @@ Take a look at http://www.linmodems.org"),
                    {
                     name => N("Please choose which serial port your modem is connected to."),
                     interactive_help_id => 'selectSerialPort',
-                    data => [ { var => \$modem->{device}, format => \&mouse::serial_port2text, type => "list",
-                                list => [ grep { $_ ne $o_mouse->{device} } (if_(-e '/dev/modem', '/dev/modem'), mouse::serial_ports()) ] } ],
-                        
+                    data => sub {
+                        [ { var => \$modem->{device}, format => \&mouse::serial_port2text, type => "list",
+                            list => [ grep { $_ ne $o_mouse->{device} } (if_(-e '/dev/modem', '/dev/modem'), mouse::serial_ports()) ] } ],
+                        },
                     next => "ppp_choose",
                    },
 
@@ -445,7 +446,8 @@ killall pppd
                         #my @cnx_list = map { $_->{server} } @$secret;
                     },
                     name => N("Dialup options"), 
-                    data => [
+                    data => sub {
+                            [
                              { label => N("Connection name"), val => \$modem->{connection} },
                              { label => N("Phone number"), val => \$modem->{phone} },
                              { label => N("Login ID"), val => \$modem->{login} },
@@ -455,6 +457,7 @@ killall pppd
                                                                 { label => N("First DNS Server (optional)"), val => \$modem->{dns1} },
                              { label => N("Second DNS Server (optional)"), val => \$modem->{dns2} },
                             ],
+                        },
                     post => sub {
                         network::modem::ppp_configure($in, $modem);
                         $netc->{$_} = 'ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
