@@ -1,3 +1,196 @@
+2001/03/23  dam's  <damien@mandrakesoft.com>
+
+	* tinyfirewall.pm: corrected bad translation
+	correctedd typo
+	updated
+	code cleaning
+	tinyfirewall now works.
+
+	* Makefile.config: added tinyfirewall
+
+	* any.pm, mouse.pm: added /dev/modem in modem list selection
+
+	* standalone/drakxconf: added tinyfirewall entry
+
+	* standalone/tinyfirewall: added update code
+	updated wrapper to launch tinyfirewall in embedded mode
+
+	* netconnect.pm: added /dev/modem in modem list selection
+	netconnect doesn't write the file 1
+
+2001/03/23  fcrozat
+
+	* share/rpmsrate: nautilus-mozilla and xalf are installed by default in
+	GNOME
+	gmc is not installed by default in GNOME
+	gabber gaim are moved to instant messaging
+	gcombust in moved to GNOME CD burner
+	gtm is installed by GNOME/File transfer
+	mozilla is installed by default as www browser
+	galeon is installed by default as www browser for GNOME
+
+2001/03/23  François Pons  <fpons@mandrakesoft.com>
+
+	* tools/syncrpms: added size-stamp test to copy identical file in version,
+	release.
+
+	* Xconfig.pm: fixed typo for wacom.
+	added multiple tablet support (wacom), moved usb probe for mouse and
+	tablet
+	at the beginning.
+
+	* Xconfigurator.pm: added multiple tablet support (wacom), moved usb probe
+	for mouse and tablet
+	at the beginning.
+	fixed wrong usage of Screen keyword in Device section, should be present
+	and
+	reseted for any multi head card with only one BusID.
+
+	* mouse.pm, detect_devices.pm, install_steps_gtk.pm, install2.pm: added
+	multiple tablet support (wacom), moved usb probe for mouse and tablet
+	at the beginning.
+
+2001/03/23  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/es.po, share/po/de.po, share/po/fi.po: Added Vietnamese file
+	Updated Finnish file
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/fr.po, share/po/bg.po, share/po/ga.po, share/po/sr.po,
+	share/po/et.po, share/po/tr.po, share/po/eu.po, share/po/az.po,
+	share/po/ru.po, share/po/pt_BR.po, share/po/hr.po, share/po/ko.po,
+	share/po/cy.po, share/po/nl.po, share/po/ja.po, share/po/wa.po,
+	share/po/is.po, share/po/hu.po, share/po/zh_TW.Big5.po, share/po/it.po,
+	share/po/id.po, share/po/pl.po, share/po/no.po,
+	share/po/zh_CN.GB2312.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/sl.po, share/po/vi.po,
+	share/po/br.po, share/po/ca.po, share/po/gl.po, share/po/lv.po,
+	share/po/uk.po, share/po/eo.po, share/po/ro.po, share/po/da.po,
+	share/po/cs.po, share/po/af.po: Added Vietnamese file
+
+2001/03/23  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm: ifix the dams stuff
+
+	* install_steps_interactive.pm (exitInstall): no "cancel" button
+
+	* share/po/i18n_compssUsers: fix for better compliance with po format
+
+	* netconnect.pm: ifix the dams stuff
+	cleanup and enable gzip'ed isdn.db
+
+	* Makefile: gzip ldetect-lst files
+
+	* modules.pm: add i810_audio (still need a script to add missing one and
+	keep in sync)
+
+	* bootloader.pm (suggest_floppy): don't add an entry for non-fd0 drives
+
+	* interactive.pm (ask_from_listf_no_check): fix the fix fix fix
+	(ask_from_listf_no_check): fix the fix fix
+	(ask_from_listf_no_check): fix the bad fix
+
+	* common.pm (formatError): created
+	(openFileMaybeCompressed, catMaybeCompressed): added
+	(getVarsFromSh): take care of comments
+
+	* network.pm (configureNetworkIntf): gray "IP address" and "Netmask" in
+	DHCP/BOOTP
+
+	* partition_table.pm: add Empty to bad_types
+
+	* mouse.pm (detect): never probe psaux (workaround for kernel/xfree bug)
+
+	* fsedit.pm (change_type): When changing a partition type from ext2fs to
+	Linux RAID
+	(or LVM), the mount point should be removed.
+
+	* detect_devices.pm (isUSBFDUDrive, usbfdus): removed, doesn't scale
+	(isFloppyOrHD): floppy type is 'fd', not 'floppy'
+	(stringlist): nicer (a la new lspcidrake)
+
+	* Xconfigurator.pm: enable use of gzip'ed Cards+, CardsNames and
+	MonitorsDB
+
+	* diskdrake.pm (try): format the error (no more "at line ...")
+	(Add2LVM): "new" was not i18n'ed
+
+2001/03/23  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* mouse.pm, bootloader.pm: mods to create/move image, to /export for PPC,
+	use vmlinux for PPC
+	prepend of_dev to initrd stanza in yaboot.conf
+	add 1-button mouse for PPC
+
+2001/03/23  siegel
+
+	* share/po/de.po: new german version
+
+2001/03/22  Chmouel Boudjnah  <chmouel@mandrakesoft.com>
+
+	* tools/i386/netboot/stage1.rtl8139, tools/i386/netboot/stage2.rtl8139:
+	Add 8139 grub stage.
+
+2001/03/22  dam's  <damien@mandrakesoft.com>
+
+	* bootlook.pm: corrected mapn
+
+	* standalone/draknet: removed use Data::Dumper
+
+	* netconnect.pm: removed mail informat oin
+	comment update
+
+	* tinyfirewall.pm: removed use Data::Dumper
+	working on tinyfirewall
+
+2001/03/22  fabman
+
+	* share/po/es.po: changed "swap" for "intercambio" in the spanish .po
+	files
+	updated DrakX, menudrake and urpmi es.po files
+
+2001/03/22  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: fixed wrong access to undefined value promoted to
+	empty array reference.
+
+2001/03/22  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/probing.c, mdk-stage1/tools.h: 
+	  - fix detection of more than 3 scsi attached devices
+	  - cleaner code for cmp of ptr against static strings
+
+2001/03/22  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/mousedrake: remove test ugliness of dams
+
+	* c/Makefile.PL: no pcmcia_probe in drakxtools
+
+	* modules.pm (load_thiskind): indent as it should be
+
+	* install_steps_interactive.pm (generateAutoInstFloppy): fix the message
+	which was uptodate only for
+	sparc :-(
+
+	* Xconfigurator.pm: no need for "use Data::Dumper;"
+
+2001/03/22  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* modules.pm: no imm,ppa PPC, scan mesh,mac53c94 scsi only, pmac should
+	have been mace
+
+2001/03/22  yduret
+
+	* bootlook.pm: mapn works tx dams
+	nmap
+	added mapn fun to reduce code.. testing it
+	added install of rpm
+	xpm  png files
+
+	* pixmaps/hori.png, pixmaps/gmon.png, pixmaps/tradi.png, pixmaps/hori.xpm,
+	pixmaps/verti.png, pixmaps/gmon.xpm, pixmaps/tradi.xpm,
+	pixmaps/verti.xpm: convert xpm to png
+
 2001/03/21  dam's  <damien@mandrakesoft.com>
 
 	* standalone/tinyfirewall, tinyfirewall.pm: new tinyfirewall conf tool
