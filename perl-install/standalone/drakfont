@@ -399,47 +399,60 @@ init Gtk;
 my $window1 =  $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
 $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
 $window1->set_position(1);
-$window1->set_title(_("Network Monitoring"));
+$window1->set_title(_("Fonts Importation"));
 $window1->set_policy(1, 1, 1);
 $window1->set_border_width(5);
 
-my $netcnx = {};
-my $doit;
 
-sub main_quit {}
+sub install_gi {
+    my $window1 =  $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
+    $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
+    $window1->set_position(1);
+    $window1->set_title(_("Fonts Importation"));
+    $window1->set_policy(1, 1, 1);
+    $window1->set_border_width(5);
+
+    gtkadd($window1,
+	   gtkpack_(new Gtk::HBox(0,6),
+		    1, my $notebook =  new Gtk::FontSelection,		
+		    0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+			      _("DrakFont"),
+			      gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=> sub { $windows = 1; backend_mod() }),
+			      gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked => sub { $window1->destroy(); install_gi() }),
+			      gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked 	=> sub { Gtk->main_quit() }),
+			      gtksignal_connect(new Gtk::Button(_("Close")), clicked 		=> sub { Gtk->main_quit() }),
+			      )
+		    ),
+	   );   
+    $window1->show_all;
+    $window1->realize;
+    $window1->show_all();
+}
 
 gtkadd($window1,
        gtkpack_(new Gtk::HBox(0,6),
-		1, my $notebook 								=  new Gtk::FontSelection,		
+		1, my $notebook =  new Gtk::FontSelection,		
   		0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
 			  _("DrakFont"),
-			  gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=> sub { $doit=1; Gtk->main_quit() }),
-			  gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked => sub { Gtk->main_quit() }),
+			  gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=> sub { $windows = 1; backend_mod() }),
+			  gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked => sub { $window1->destroy(); install_gi() }),
 			  gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked 	=> sub { Gtk->main_quit() }),
 			  gtksignal_connect(new Gtk::Button(_("Close")), clicked 		=> sub { Gtk->main_quit() }),
   			  )
 		),
        );
 
-
-sub test {
-    print "test\n";
-
-}
-
 $window1->show_all;
 $window1->realize;
 $window1->show_all();
+
 Gtk->main;
 Gtk->exit(0);
-
-
-    #gtk
 }
 
 
 
-
+#1, gtksignal_connect(my $button_connect = gtkset_sensitive(new Gtk::Button(), 0), clicked => \&connection),
 
 
 
