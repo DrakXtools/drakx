@@ -464,7 +464,7 @@ $r .= "Load is huge: $load\n" if ($load >@ . "$load);\n\n";
 open F, '|/usr/sbin/sendmail -oi -t';
 
 print F
-q(Subject: Mail Alert
+q(Subject: logdrake Mail Alert
 From: root@localhost
 To: ), "$email\n";
 print F $r;
@@ -472,7 +472,7 @@ print F $r;
 # EOF!;
     } elsif ($sms) {
 	$in->do_pkgs->install('smssend');
-	$cron .= q!`smssend !, $smssend, q! chomp_(`date`);!
+	$cron .= q!system(smssend !, $smssend, q! chomp_(`date`));!
     }
 
     undef $::isWizard; 
@@ -545,6 +545,9 @@ sub destroy_window {
 
 # log
 # $Log$
+# Revision 1.15  2002/03/14 18:09:12  yduret
+# fix some bug
+#
 # Revision 1.14  2002/03/14 12:25:43  yduret
 # fix * bug in field matching/ not matching
 #
