@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 42mdk
+Release: 43mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,25 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Jun  9 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-43mdk
+- drakauth: add "Active Directory" authentication (WIP) (pixel)
+- drakbackup: (stew)
+  o deal with kernel ring buffer that is flooded with msgs for tape
+    device detection (#9877)
+  o GUI fixes
+  o enforce binary ftp transfers
+- drakconnect: (poulpy)
+  o switch ONBOOT to on/off for isdn and adsl connections
+  o new way to specify how to up connection for pppoe(xDSL) and
+    others(ADSL)
+  o rename /etc/ppp/peers/adsl as /etc/ppp/peers/ppp0 as we now use
+    ifup-ppp for adsl, it will look for ppp0
+- drakservices: add descriptions for NFS and SMB (#9940) (pixel)
+- harddrake service: run it earlier (aka before network service)
+- XFdrake: add resolution 1920x1200 called WUXGA (used by Dell Laptops
+  Inspiron 8500, 8600 and Latitude D800) (#6795) (pixel)
+- XFdrake, drakedm: switch to x.org  (pixel)
+
 * Tue Jun  1 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-42mdk
 - handle the nfs/smb service disabled (Olivier Blin)
 - drakconnect:
