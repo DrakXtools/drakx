@@ -825,6 +825,10 @@ sub load_console_font {
     run_program::run(if_($ENV{LD_LOADER}, $ENV{LD_LOADER}), 
 		     'consolechars', '-v', '-f', $name || 'lat0-sun16',
 		     if_($sfm, '-u', $sfm), if_($acm, '-m', $acm));
+
+    #- in console mode install, ensure we'll get translations in the right codeset
+    #- (charset of locales reported by the glibc are UTF-8 during install)
+    $acm and c::bind_textdomain_codeset('libDrakX', lang2charset($lang));
 }
 
 sub get_x_fontset {

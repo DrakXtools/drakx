@@ -178,9 +178,9 @@ setMouseLive(display, type, emulate3buttons)
   }
 ';
 
-if ($ENV{C_DRAKX}) { print '
+print '
 SV *
-dgettext(domainname, msgid)
+dgettext_utf8(domainname, msgid)
    char * domainname
    char * msgid
 
@@ -194,16 +194,10 @@ dgettext(domainname, msgid)
    OUTPUT:
    RETVAL
 
-' } else { print '
-
 char *
 dgettext(domainname, msgid)
    char * domainname
    char * msgid
-
-' }
-
-print '
 
 int
 add_partition(hd, start_sector, size_sector, part_number)
