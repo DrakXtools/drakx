@@ -1,0 +1,13 @@
+(defun my-close-children ()
+  (interactive)
+  (end-of-buffer) 
+  (let ((p t))
+    (while (setq p (search-backward-regexp "\\<children\\(\\|_tight\\|_loose\\) => \\[" nil t))
+      (progn
+	(search-forward "[")
+	(backward-char)
+	(forward-sexp)
+	(backward-char)
+	(if (not (string-equal (buffer-substring (point) (1+ (point))) "]"))
+	    (insert "]"))
+	(goto-char p)))))
