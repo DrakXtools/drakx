@@ -820,7 +820,7 @@ sub resolutionsConfiguration {
 	return 1; #- aka we cannot test, assumed as good (should be).
     }
     if (is_empty_hash_ref($card->{depth})) {
-	$card->{depth}{$_} = [ map { [ split "x" ] } (detect_devices::isLaptop() ? @resolutions : @resolutions_laptop) ]
+	$card->{depth}{$_} = [ map { [ split "x" ] } (detect_devices::isLaptop() ? @resolutions_laptop : @resolutions) ]
 	  foreach @depths;
     }
     #- sort resolutions in each depth
