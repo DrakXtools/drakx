@@ -1,10 +1,10 @@
 Index: Makefile
 ===================================================================
 RCS file: /home/cvs/cooker/gi/perl-install/Makefile,v
-retrieving revision 1.150
-diff -u -r1.150 Makefile
---- Makefile	2000/12/18 12:03:08	1.150
-+++ Makefile	2000/12/19 18:19:45
+retrieving revision 1.151
+diff -u -r1.151 Makefile
+--- Makefile	2000/12/19 18:21:05	1.151
++++ Makefile	2000/12/20 23:29:33
 @@ -44,7 +44,7 @@
  
  	cp share/*.rc $(DESTREP4PMS)
@@ -22,7 +22,7 @@ diff -u -r1.150 Makefile
 +	rpm -ql xmms libao0 | grep /usr/lib >> /tmp/list
 +	echo /sbin/isapnp >> /tmp/list
 +	echo /sbin/pnpdump >> /tmp/list
-+
++	echo /usr/sbin/sndconfig >> /tmp/list
 +	echo /usr/bin/vim >> /tmp/list
 +	echo /usr/bin/aumix >> /tmp/list
 +	echo /usr/bin/ogg123 >> /tmp/list
@@ -64,18 +64,30 @@ diff -u -r1.150 Makefile
 Index: install_steps_gtk.pm
 ===================================================================
 RCS file: /home/cvs/cooker/gi/perl-install/install_steps_gtk.pm,v
-retrieving revision 1.170
-diff -u -r1.170 install_steps_gtk.pm
---- install_steps_gtk.pm	2000/12/14 11:41:11	1.170
-+++ install_steps_gtk.pm	2000/12/19 18:19:46
-@@ -99,6 +99,15 @@
+retrieving revision 1.171
+diff -u -r1.171 install_steps_gtk.pm
+--- install_steps_gtk.pm	2000/12/20 21:57:35	1.171
++++ install_steps_gtk.pm	2000/12/20 23:29:33
+@@ -99,6 +99,27 @@
  	}
      }
    OK:
 +    keyboard::setup("fr");
 +    commands::mknod("/dev/dsp", "c", 14, 3);
 +    commands::mknod("/dev/mixer", "c", 14, 0);
-+    modules::load_thiskind("sound") unless $::expert;
++    if (!$::expert) {
++	if (!modules::load_thiskind("sound")) {
++	    eval {
++		symlink "/usr/bin/pnpdump", "/sbin/pnpdump";
++		run_program::run("sndconfig", "--quiet");
++		run_program::run("isapnp", "/etc/isapnp.conf");
++		my @l = cat_("/etc/modules.conf");
++		my $module; /alias sound-slot-0 (\S+)/ and $module = $1 foreach @l;
++		my @options; /options\s+$module\s+(.*)/ and @options = split ' ', $1 foreach @l;
++		modules::load($module, 'sound', @options);
++	    }
++	}
++    }
 +    symlink "/tmp/rhimage/lyrics", "/lyrics";
 +    symlink "/tmp/rhimage", "/Sound";
 +    fork or exec "rotate /tmp/rhimage/Mandrake/images" or die;
@@ -84,3 +96,20 @@ diff -u -r1.170 install_steps_gtk.pm
      install_gtk::init_sizes();
      install_gtk::default_theme($o);
      install_gtk::create_logo_window($o);
+Index: interactive_gtk.pm
+===================================================================
+RCS file: /home/cvs/cooker/gi/perl-install/interactive_gtk.pm,v
+retrieving revision 1.94
+diff -u -r1.94 interactive_gtk.pm
+--- interactive_gtk.pm	2000/12/18 19:36:04	1.94
++++ interactive_gtk.pm	2000/12/20 23:29:33
+@@ -351,6 +351,9 @@
+ 		   $ok
+ 		   ));
+     widget($widgets[0],$val->[0])->grab_focus();
++
++#    mapn { $_[0]{expert} and $_[1]->hide } $val, \@widgets, $l;
++
+     if ($hcallback{complete}) {
+ 	my $callback = sub {
+ 	    my ($error, $focus) = &{$hcallback{complete}};
