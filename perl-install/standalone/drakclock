@@ -66,16 +66,12 @@ my $mode = 0;
 
 my (undef, undef, $h_old, $old_day, $old_month, $old_year) = localtime(time());
 
-my @image_size = (300, 300);
+my @image_size = (200, 200);
 
 $my_win->{window}->add(gtkpack_(gtkset_border_width(Gtk2::VBox->new, $::isEmbedded ? 0 : 5),
                                 1, gtkpack_(Gtk2::HBox->new,
                                             1, gtkpack_(Gtk2::VBox->new,
                                                         0, $calendar,
-                                                        0, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Timezone")), 'etched_in'),
-                                                                  gtkpack__(gtkset_border_width(Gtk2::VBox->new, 5),
-                                                                            $label_timezone,
-                                                                            $button_time)),
                                                         1, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Network Time Protocol")), 'etched_in'),
                                                                   gtkpack_(gtkset_border_width(Gtk2::VBox->new, 5),
                                                                            0, Gtk2::Label->new(N("Your computer can synchronize its clock\n with a remote time server using NTP")),
@@ -101,6 +97,10 @@ $my_win->{window}->add(gtkpack_(gtkset_border_width(Gtk2::VBox->new, $::isEmbedd
                                                                     0, my $spinner_m = Gtk2::SpinButton->new($adjm, 0, 0),
                                                                     0, my $spinner_s = Gtk2::SpinButton->new($adjs, 0, 0),
                                                                    ),
+                                                        1, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Timezone")), 'etched_in'),
+                                                                  gtkpack__(gtkset_border_width(Gtk2::VBox->new, 5),
+                                                                            $label_timezone,
+                                                                            $button_time)),
                                                        ),
                                            ),
                                 0, create_okcancel(my $w =
