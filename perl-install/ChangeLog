@@ -1,3 +1,81 @@
+2001/03/19  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draknet: corrected graphical layout for newbies
+
+	* netconnect.pm: added net_cnx_{up, down} save
+
+2001/03/19  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ko.po: updated korean file
+	Updated po files
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/cy.po, share/po/nl.po, share/po/ja.po,
+	share/po/wa.po, share/po/sv.po, share/po/is.po, share/po/hu.po,
+	share/po/zh_TW.Big5.po, share/po/it.po, share/po/id.po, share/po/pl.po,
+	share/po/fi.po, share/po/no.po, share/po/zh_CN.GB2312.po,
+	share/po/th.po, share/po/el.po, share/po/sk.po, share/po/lt.po,
+	share/po/sl.po, share/po/br.po, share/po/ca.po, share/po/gl.po,
+	share/po/lv.po, share/po/uk.po, share/po/eo.po, share/po/ro.po,
+	share/po/da.po, share/po/cs.po, share/po/af.po: Updated po files
+
+2001/03/19  Pixel  <pixel@mandrakesoft.com>
+
+	* pkgs.pm (computeGroupSize): fix hacks, better hacks
+	(saveCompssUsers): fix
+
+	* share/rpmsrate: 
+	  - add rxvt-CJK
+	  - exchange xterm and rxvt
+	  - move bc from SCIENCES to SYSTEM
+
+	* interactive_newt.pm (ask_from_entries_refW):
+	  - ensure the width is less than $width - 7 (in french and 80x25, the
+	treelist was too big)
+	  - if term is very big, use 10 lines instead of 5
+	  - if no button is asked, but one in any case otherwise it's buggy
+
+	* install_steps_interactive.pm (chooseGroups):
+	  - make the computed size work
+	  - unselectAll when a profile is unselected
+
+	* interactive.pm (ask_from_listf_no_check): fix fix
+	(ask_from_listf_no_check): fix the filtering of exceptions
+
+2001/03/19  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* mdk-stage1/stage1.c: stage1.c: fix for rescue image PPC
+
+2001/03/18  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/lomount.h, mdk-stage1/lomount.c, mdk-stage1/disk.c: fix for
+	hd-install when you provide a not valid ISO (cd #2 for example)
+
+	* mdk-stage1/frontend.h, mdk-stage1/minilibc.h, mdk-stage1/stage1.h,
+	mdk-stage1/log.h: use some help with __attribute__
+
+2001/03/17  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* rescue/tree/etc/rc.sysinit: load sr_mod and sd_mod at startup
+
+	* mdk-stage1/Makefile.mkinitrd_helper, mdk-stage1/.cvsignore: sync
+
+	* mdk-stage1/stdio-frontend.c: handle left and right arrow keys, in
+	editing ask_from_entries in stdio mode
+
+	* mdk-stage1/pci-resource/Makefile: do not use marfiles for deps
+
+2001/03/17  Pixel  <pixel@mandrakesoft.com>
+
+	* lang.pm (write_langs): in case of empty %_install_langs, don't write it
+
+	* install_steps.pm (pkg_install_if_requires_satisfied): better logging
+
+	* share/rpmsrate: add gpm & evolution
+
 2001/03/17  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* mdk-stage1/insmod-busybox/utility.c: fix insmod calling realloc(0,0) to
