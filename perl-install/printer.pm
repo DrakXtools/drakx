@@ -20,24 +20,24 @@ my $FOOMATICCONFDIR = "/etc/foomatic";
 my $FOOMATIC_DEFAULT_SPOOLER = "$FOOMATICCONFDIR/defaultspooler";
 
 %spooler = (
-    __("CUPS - Common Unix Printing System") => "cups",
-    __("LPRng - LPR New Generation")         => "lprng",
-    __("LPD - Line Printer Daemon")          => "lpd",
-    __("PDQ - Print, Don't Queue")           => "pdq"
-#    __("PDQ - Marcia, click here!")           => "pdq"
+    _("CUPS - Common Unix Printing System") => "cups",
+    _("LPRng - LPR New Generation")         => "lprng",
+    _("LPD - Line Printer Daemon")          => "lpd",
+    _("PDQ - Print, Don't Queue")           => "pdq"
+#    _("PDQ - Marcia, click here!")           => "pdq"
 );
 %spooler_inv = reverse %spooler;
 
 %printer_type = (
-    __("Local printer")            => "LOCAL",
-    __("Remote printer")           => "REMOTE",
-    __("Remote CUPS server")       => "CUPS",
-    __("Remote lpd server")        => "LPD",
-    __("Network printer (socket)") => "SOCKET",
-    __("SMB/Windows 95/98/NT")     => "SMB",
-    __("NetWare")                  => "NCP",
-    __("Printer Device URI")       => "URI",
-    __("Pipe into command")        => "POSTPIPE"
+    _("Local printer")                              => "LOCAL",
+    _("Remote printer")                             => "REMOTE",
+    _("Printer on remote CUPS server")              => "CUPS",
+    _("Printer on remote lpd server")               => "LPD",
+    _("Network printer (socket)")                   => "SOCKET",
+    _("Printer on SMB/Windows 95/98/NT server")     => "SMB",
+    _("Printer on NetWare server")                  => "NCP",
+    _("Enter a printer device URI")                 => "URI",
+    _("Pipe job into a command")                    => "POSTPIPE"
 );
 %printer_type_inv = reverse %printer_type;
 
@@ -124,6 +124,7 @@ sub resetinfo($) {
     my ($printer) = @_;
     $printer->{QUEUE} = "";
     $printer->{OLD_QUEUE} = "";
+    $printer->{OLD_CHOICE} = "";
     $printer->{ARGS} = "";
     $printer->{DBENTRY} = "";
     @{$printer->{OPTIONS}} = ();
@@ -181,7 +182,7 @@ sub read_configured_queues($) {
 		$printer->{OLD_QUEUE} = "";
 	    }
 	    $printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{make} ||= "";
-	    $printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{model} ||= __("Unknown model");
+	    $printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{model} ||= _("Unknown model");
 	}
     }
 }
