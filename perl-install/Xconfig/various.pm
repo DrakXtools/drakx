@@ -95,9 +95,26 @@ sub configure_FB_TVOUT {
     my ($monitor) = $xfree4->get_monitors;
     $xfree4->set_screens({ Device => $device->{Identifier}, Monitor => $monitor->{Identifier} });
 
+    my $Screen = $xfree4->get_default_screen;
+    $Screen->{Display} = [ map { { l => { Depth => { val => $_ } } } } 8, 16 ];
+
     $xfree4->write("$::prefix/etc/X11/XF86Config-4.tvout");
 
     check_XF86Config_symlink();
+
+    {
+	require bootloader;
+	require fsedit;
+	require detect_devices;
+	my ($bootloader, $all_hds) =
+	  $::isInstall ? ($::o->{bootloader}, $::o->{all_hds}) : 
+	    (bootloader::read(), fsedit::hds([ detect_devices::hds() ], {}));
+	
+	if (my $tvout = bootloader::duplicate_kernel_entry($bootloader, 'TVout')) {
+	    $tvout->{append} .= " XFree=tvout";
+	    bootloader::install($bootloader, [ fsedit::get_all_fstab($all_hds) ], $all_hds->{hds});
+	}
+    }
 }
 
 sub check_XF86Config_symlink {
