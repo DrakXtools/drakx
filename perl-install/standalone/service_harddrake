@@ -135,7 +135,13 @@ foreach my $hw_class (@harddrake::data::tree) {
         foreach my $configurator (@configurator_pool) {
             if (fork()) {
                 wait();
-            } else { exec("$configurator 2>/dev/null") or die "$configurator missing\n" }
+            } else {
+                exec("$configurator 2>/dev/null") or do {
+                    log::explanations(qw(cannot run "$configurator"));
+                    require POSIX;
+                    POSIX::_exit();
+                };
+            }
         }
     }
     if (!$hw_class->{automatic}) {
