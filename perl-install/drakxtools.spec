@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 23mdk
+Release: 24mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -317,6 +317,55 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Mar 17 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-24mdk
+- set window icon
+- diskdrake: (pixel)
+  o fix "xp does not boot anymore" (#7302, #7959, #8891)
+  o add --change-geometry=<device>=[<cylinders>,]<heads>,<sectors>
+  option in order to allow forcing the geometry used in the partition
+  table. This allows helping poor Windows booting using old int13
+  function 2.  This should work when Windows has not been resized.
+- drakclock: fix server lookup (#8846)
+- drakconnect:
+  o do not pass eth interface and user to adsl-start, they're already
+    provided in pppoe.conf (#2004)
+  o fix pci modem support
+  o fix SmartLink modem managment (#8959)
+  o really fix modem symlink (#7967)
+  o try harder to get a name (in wizard) and information (in manage
+    interface) for cards whose driver do not support ethtool ioctl
+  o update wanadoo dns servers ip addresses
+  o wizard:
+    * bewan support
+    * fix adsl stop on pppoa links
+    * preselect pppoa for bewan modems
+    * for ADSL Bewan, ISDN and PCI modems, warn that only 2.4.x
+      kernels are supported
+    * only show encapsulation parameter for sagem modem
+  o "internet access" window:
+    * enable to alter hostname
+    * do not offer to alter domain name since this is achievable
+      through FQDN
+- drakfont: make subdialogs be transcient for main window when not
+  embedded
+- drakedm: fix dm restart
+- draksound (olivier blin, #8501):
+   o do not alter oss<->alsa drivers mapping table
+   o when current driver doesn't match current sound card, list
+     alternatives for both current driver and the default driver
+- drakTermServ: fix misnamed inittab (stew)
+- drakupdate_fstab: choose wether to use supermount is now based on
+  variable SUPERMOUNT in /etc/sysconfig/dynamic (pixel)
+- harddrake2:
+  o show module for system bridges if it's not unknown (aka not
+    managed by kernel core)
+  o update icons
+- localedrake: list Filipino, Low-Saxon and Kyrgyz (pablo)
+- logdrake: fix wizard
+- service_harddrake:
+  o remove /etc/asound.state *before* restarting sound service
+  o add agpgart modules to modprobe.preload if needed
+
 * Mon Mar 15 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-23mdk
 - drakbackup: (stew)
   o install extra packages when using wizard too
