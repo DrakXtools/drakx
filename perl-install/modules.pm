@@ -125,11 +125,13 @@ sub load_category {
 	  if_(arch() !~ /ppc/, 'parport_pc', 'imm', 'ppa'),
 	  if_(detect_devices::usbStorage(), 'usb-storage'),
       ),
-      if_(arch() =~ /ppc/, 
-	  if_($category =~ /scsi/, 'mesh', 'mac53c94'),
+      arch() =~ /ppc/ ? (
+	  if_($category =~ /scsi/,
+	    if_(detect_devices::has_mesh(), 'mesh'),
+	    if_(detect_devices::has_53c94(), 'mac53c94'),
+	  ),
 	  if_($category =~ /net/, 'bmac', 'gmac', 'mace', 'airport'),
-	  if_($category =~ /sound/, 'dmasound_pmac'),
-      ),
+      ) : (),
     );
     grep {
 	$o_wait_message->($_->{description}, $_->{driver}) if $o_wait_message;
@@ -148,6 +150,9 @@ sub probe_category {
 
     my @modules = category2modules($category);
 
+    if_($category =~ /sound/ && arch() =~ /ppc/ && detect_devices::get_mac_model() !~ /IBM/,
+	{ driver => 'snd-powermac', description => 'Macintosh built-in' },
+    ),
     grep {
 	if ($category eq 'network/isdn') {
 	    my $b = $_->{driver} =~ /ISDN:([^,]*),?([^,]*)(?:,firmware=(.*))?/;

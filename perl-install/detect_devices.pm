@@ -831,6 +831,8 @@ sub usbMice()      { grep { $_->{media_type} =~ /\|Mouse/ && $_->{driver} !~ /wa
 sub usbWacom()     { grep { $_->{driver} =~ /wacom/ } usb_probe() }
 sub usbKeyboards() { grep { $_->{media_type} =~ /\|Keyboard/ } usb_probe() }
 sub usbStorage()   { grep { $_->{media_type} =~ /Mass Storage\|/ } usb_probe() }
+sub has_mesh()     { find { /mesh/ } all_files_rec("/proc/device-tree") }
+sub has_53c94()    { find { /53c94/ } all_files_rec("/proc/device-tree") }
 
 sub usbKeyboard2country_code {
     my ($usb_kbd) = @_;
