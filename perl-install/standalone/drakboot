@@ -319,7 +319,6 @@ sub lilo_choice() {
     fs::merge_info_from_fstab($fstab, '', 0, undef);
 
   ask:
-    local $::isEmbedded = 0;
     eval { any::setupBootloader($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) };
     my $loader = arch() =~ /ppc/ ? "Yaboot" : "LILO";
     my $err = $@;
