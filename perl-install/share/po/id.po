@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-03-21 20:51+0700\n"
+"PO-Revision-Date: 2005-03-22 11:57+0700\n"
 "Last-Translator: bayu artanto <bayuart@yahoo.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -18043,19 +18043,19 @@ msgid ""
 "\t\t\t\n"
 "        \tWith SUBNET/MASK being defined for your network."
 msgstr ""
-"        - Rawat /etc/exports:\n"
-"        \t\tClusternfs memungkinkan ekspor sistem file root ke klien "
+"        - Mengelola /etc/exports:\n"
+"        \tClusternfs mengijinkan ekspor sistem file root ke klien "
 "diskless. drakTermServ\n"
-"        \t\tmensetup entri untuk mengizinkan akses anonim ke sistem file "
-"root\n"
-"        \t\tdari klien diskless.\n"
+"        \tmensetup entri untuk mengizinkan akses anonim ke sistem file "
+"root dari klien\n"
+"        \tdiskless.\n"
 "\n"
-"        \t\tContoh entri ekspor clusternfs:\n"
+"        \tContoh entri ekspor untuk clusternfs:\n"
 "        \t\t\n"
 "        \t/\t\t\t\t\t(ro,all_squash)\n"
 "        \t/home\t\t\t\tSUBNET/MASK(rw,root_squash)\n"
 "\t\t\t\n"
-"\t\t\tDg SUBNET/MASK terdefinisikan untuk jaringan Anda."
+"				 \tDengan SUBNET/MASK terdefinisikan untuk jaringan Anda."
 
 #: standalone/drakTermServ:566
 #, c-format
@@ -18067,10 +18067,11 @@ msgid ""
 "        \thelps in this respect by adding or removing system users from this "
 "file."
 msgstr ""
-"        - Rawat %s:\n"
-"        \t\tAgar pengguna dapat login ke sistem dari klien diskless, entri\n"
-"        \t\tdi /etc/shadow harus disalin ke %s. drakTermServ membantu\n"
-"        \t\thal ini dg menambahkan/hapus pengguna sistem dari file ini."
+"        - Mengelola %s:\n"
+"        \tAgar pengguna dapat login ke sistem dari klien diskless, entri\n"
+"        \tpada /etc/shadow harus diduplikasi pada %s. drakTermServ \n"
+"        \tmembantu hal ini dengan menambahkan atau menghapus pengguna "
+"sistem dari file ini."
 
 #: standalone/drakTermServ:570
 #, c-format
@@ -18083,13 +18084,14 @@ msgid ""
 "        \tdrakTermServ will help create these files."
 msgstr ""
 "        - %s masing-masing klien:\n"
-"        \t\tVia clusternfs, tiap klien diskless dapat memiliki file "
+"        \tMelalui clusternfs, setiap klien diskless dapat memiliki file "
 "konfigurasi sendiri\n"
-"        \t\tdi sistemfile root server. drakTermServ nantinya akan membantu\n"
-"        \t\tmembuat file-file ini."
+"        \tpada sistem file root server. Dengan mengijinkan konfigurasi "
+"perangkat keras klien \n"
+"				 \tlokal, drakTermServ akan membantu membuat file ini."
 
 #: standalone/drakTermServ:575
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "        - Per client system configuration files:\n"
 "        \tThrough clusternfs, each diskless client can have its own unique "
@@ -18108,12 +18110,20 @@ msgid ""
 "machine is configured."
 msgstr ""
 "        - File konfigurasi sistem per klien:\n"
-"        \t\tVia clusternfs, tiap klien diskless dapat memiliki file "
+"        \tMelalui clusternfs, setiap klien diskless dapat memiliki file "
 "konfiguras sendiri\n"
-"        \t\tdi sistemfile root server. drakTermServ nantinya akan membantu\n"
-"        \t\tmembuat file /etc/modules.conf, /etc/sysconfig/mouse, /etc/"
-"sysconfig/keyboard\n"
-"        \t\ttiap klien.\n"
+"        \tpada sistem file root server. Dengan mengijinkan konfigurasi "
+"perangkat keras klien \n"
+"				 \tlokal, klien dapat mengkustomisasi file seperti /etc/modules.conf, "
+"/etc/sysconfig/mouse, \n"
+"				 \t/etc/sysconfig/keyboard pada setiap klien.\n"
+"\n"
+"				 Catatan: Mengijinkan konfigurasi perangkat keras klien lokal akan "
+"mengaktifkan login root pada \n"
+"				 terminal server pada setiap komputer klien yang mengaktifkan fitur "
+"ini. Konfigurasi lokal\n"
+"				 dapat dimatikan, mempertahankan file konfigurasi, setelah komputer "
+"klien terkonfigurasi."
 
 #: standalone/drakTermServ:584
 #, c-format
@@ -18145,15 +18155,15 @@ msgid ""
 "        \tputs its images."
 msgstr ""
 "        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ mengkonfigurasikan file ini agar bekerja dlm "
-"hubungan dg image yg dibuat oleh\n"
-"        \t\tmkinitrd-net, dan entri di /etc/dhcpd.conf, untuk melayani image "
-"boot ke tiap\n"
-"        \t\tklien diskless.\n"
+"        \tdrakTermServ akan mengkonfigurasi file ini agar bekerja bersama "
+"dengan image yang dibuat \n"
+"        \toleh mkinitrd-net, dan entri pada /etc/dhcpd.conf, untuk melayani "
+"image boot pada \n"
+"        \tsetiap klien diskless.\n"
 "\n"
-"        \t\tContoh file konfigurasi TFTP:\n"
+"        \tContoh file konfigurasi TFTP:\n"
 "        \t\t\n"
-"        \tservice tftp\n"
+"        \tlayanan tftp\n"
 "\t\t\t{\n"
 "                        disable         = no\n"
 "                        socket_type  = dgram\n"
@@ -18164,12 +18174,12 @@ msgstr ""
 "                        server_args  = -s /var/lib/tftpboot\n"
 "        \t}\n"
 "        \t\t\n"
-"        \t\tPerubahan dari instalasi standar adalah flag disable jadi 'no'\n"
-"        \t\tdan path direktori jadi /var/lib/tftpboot, tempat mkinitrd-net\n"
-"        \t\tmenaruh image."
+"        \tPerubahan dari instalasi standar adalah flag disable jadi 'no'\n"
+"        \tdan path direktori menjadi /var/lib/tftpboot, tempat mkinitrd-net\n"
+"        \tmeletakkan image."
 
 #: standalone/drakTermServ:605
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "        - Create etherboot floppies/CDs:\n"
 "        \tThe diskless client machines need either ROM images on the NIC, or "
@@ -18185,15 +18195,16 @@ msgid ""
 "        \t\t/usr/share/etherboot/start16.bin \\\t\t\t\n"
 "        \t\t/usr/lib/etherboot/zimg/3c509.zimg > /dev/fd0"
 msgstr ""
-"        - Buat disket/CD etherboot:\n"
-"        \t\tMesin klien diskless perlu image ROM di NIC, disket boot atau\n"
-"        \t\tCD untuk memulai boot. drakTermServ membantu membuat image ini,\n"
-"        \t\tberdasarkan NIC di komputer klien.\n"
+"        - Membuat disket/CD etherboot:\n"
+"        \tMesin klien diskless perlu image ROM pada NIC, disket boot atau\n"
+"        \tCD untuk memulai boot. drakTermServ membantu membuat image ini,\n"
+"        \tberdasarkan NIC pada komputer klien.\n"
 "        \t\t\n"
 "        \t\tContoh pembuatan disket boot untuk 3Com 3c509 secara manual:\n"
 "        \t\t\n"
-"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+"        \tcat /usr/lib/etherboot/floppyload.bin \\\n"
+"        \t\t/usr/share/etherboot/start16.bin \\\t\t\t\n"
+"        \t\t/usr/lib/etherboot/zimg/3c509.zimg > /dev/fd0"
 
 #: standalone/drakTermServ:640
 #, c-format
@@ -18206,19 +18217,19 @@ msgid "Boot ISO"
 msgstr "ISO boot"
 
 #: standalone/drakTermServ:644
-#, fuzzy, c-format
+#, c-format
 msgid "PXE Image"
-msgstr "Image"
+msgstr "Image PXE"
 
 #: standalone/drakTermServ:712
-#, fuzzy, c-format
+#, c-format
 msgid "Default kernel version"
-msgstr "versi kernel"
+msgstr "Versi kernel default"
 
 #: standalone/drakTermServ:715
 #, c-format
 msgid "Create PXE images."
-msgstr ""
+msgstr "Buat image PXE."
 
 #: standalone/drakTermServ:745
 #, c-format
@@ -18228,17 +18239,17 @@ msgstr "Bangun Seluruh Kernel -->"
 #: standalone/drakTermServ:753
 #, c-format
 msgid "No kernel selected!"
-msgstr "Tiada kernel terpilih!"
+msgstr "Tidak ada kernel yang dipilih!"
 
 #: standalone/drakTermServ:756
 #, c-format
 msgid "Build Single NIC -->"
-msgstr "Bangun NIC Single -->"
+msgstr "Bangun NIC Tunggal -->"
 
 #: standalone/drakTermServ:760
 #, c-format
 msgid "No NIC selected!"
-msgstr "Tidak ada NIC yg dipilih!"
+msgstr "Tidak ada NIC yang dipilih!"
 
 #: standalone/drakTermServ:763
 #, c-format
@@ -18251,9 +18262,9 @@ msgid "<-- Delete"
 msgstr "<-- Hapus"
 
 #: standalone/drakTermServ:779
-#, fuzzy, c-format
+#, c-format
 msgid "No image selected!"
-msgstr "Tidak ada NIC yg dipilih!"
+msgstr "Tidak ada image yang dipilih!"
 
 #: standalone/drakTermServ:782
 #, c-format
@@ -18267,9 +18278,9 @@ msgid ""
 " the one in the Terminal Server database.\n"
 "Delete/re-add the user to the Terminal Server to enable login."
 msgstr ""
-"!!! Menunjukkan bhw katasandi di database sistem berbeda dg yg di database\n"
-"Server Terminal. Hapus/tambahlah lagi pengguna ke Server Terminal agar\n"
-"dapat login."
+"!!! Mengindikasikan katasandi pada database sistem berbeda dengan\n"
+"yang ada pada database Server Terminal.\n"
+"Hapus/tambah lagi pengguna ke Server Terminal agar dapat login."
 
 #: standalone/drakTermServ:913
 #, c-format
@@ -18296,12 +18307,14 @@ msgstr "konfigurasi lokal: %s"
 msgid ""
 "Allow local hardware\n"
 "configuration."
-msgstr "Aktifkan konfigurasi hardware lokal."
+msgstr ""
+"Ijinkan konfigurasi\n"
+"hardware lokal."
 
 #: standalone/drakTermServ:998
 #, c-format
 msgid "No net boot images created!"
-msgstr "Image boot jaringan tak dibuat!"
+msgstr "Tidak ada image boot jaringan yang dibuat!"
 
 #: standalone/drakTermServ:1017
 #, c-format
@@ -18319,6 +18332,8 @@ msgid ""
 "Sync client X keyboard\n"
 " settings with server."
 msgstr ""
+"Sinkronisasi setting keyboard \n"
+"X klien dengan server."
 
 #: standalone/drakTermServ:1023
 #, c-format
@@ -18326,24 +18341,24 @@ msgid "Add Client -->"
 msgstr "Tambah Klien -->"
 
 #: standalone/drakTermServ:1037
-#, fuzzy, c-format
+#, c-format
 msgid "type: fat"
-msgstr "tipe: %s"
+msgstr "tipe: fat"
 
 #: standalone/drakTermServ:1038
 #, c-format
 msgid "type: thin"
-msgstr "tipe: tipis"
+msgstr "tipe: thin"
 
 #: standalone/drakTermServ:1045
 #, c-format
 msgid "local config: false"
-msgstr "konfigurasi lokal: salah"
+msgstr "konfigurasi lokal: false"
 
 #: standalone/drakTermServ:1046
-#, fuzzy, c-format
+#, c-format
 msgid "local config: true"
-msgstr "tak dikonfigurasikan"
+msgstr "konfigurasi lokal: true: true"
 
 #: standalone/drakTermServ:1054
 #, c-format
@@ -18371,18 +18386,19 @@ msgid ""
 "Need to restart the Display Manager for full changes to take effect. \n"
 "(service dm restart - at the console)"
 msgstr ""
-"Manajer Display harus dijalankan ulang agar perubahan berlaku.\n"
-"(di konsol lakukan: service dm restart)"
+"Manajer Display harus di-restart agar perubahan berlaku.\n"
+"(pada konsol lakukan: service dm restart)"
 
 #: standalone/drakTermServ:1156
 #, c-format
 msgid "Thin clients will not work with autologin. Disable autologin?"
-msgstr ""
+msgstr "Klien thin tidak akan bekerja dengan autologin. Nonaktifkan "
+"autologin?"
 
 #: standalone/drakTermServ:1172
 #, c-format
 msgid "All clients will use %s"
-msgstr ""
+msgstr "Semua klien akan menggunakan %s"
 
 #: standalone/drakTermServ:1204
 #, c-format
@@ -18407,7 +18423,7 @@ msgstr "Mask Subnet:"
 #: standalone/drakTermServ:1232
 #, c-format
 msgid "Broadcast Address:"
-msgstr "Alamat Siaran(Broadcast):"
+msgstr "Alamat Broadcast:"
 
 #: standalone/drakTermServ:1239
 #, c-format
@@ -18422,17 +18438,17 @@ msgstr "Server Nama:"
 #: standalone/drakTermServ:1258
 #, c-format
 msgid "IP Range Start:"
-msgstr "Awal Kisaran IP:"
+msgstr "Awal Jangkauan IP:"
 
 #: standalone/drakTermServ:1259
 #, c-format
 msgid "IP Range End:"
-msgstr "Akhir Kisaran IP:"
+msgstr "Akhir Jangkauan IP:"
 
 #: standalone/drakTermServ:1301
 #, c-format
 msgid "Append TS Includes To Existing Config"
-msgstr ""
+msgstr "Tambahkan TS Includes pada Konfigurasi yang ada"
 
 #: standalone/drakTermServ:1303
 #, c-format
@@ -18452,42 +18468,42 @@ msgid ""
 "You can modify as needed."
 msgstr ""
 "Sebagian besar nilai disusun dari sistem Anda\n"
-"yg sedang berjalan. Ubah seperlunya."
+"yang sedang berjalan.\n"
+"Anda bisa mengubah jika diperlukan."
 
 #: standalone/drakTermServ:1323
 #, c-format
 msgid "Dynamic IP Address Pool:"
-msgstr "Pool Alamat IP Dinamik"
+msgstr "Pool Alamat IP Dinamis"
 
 #: standalone/drakTermServ:1474
 #, c-format
 msgid "Please insert floppy disk:"
-msgstr "Masukkan floppy:"
+msgstr "Harap masukkan disket:"
 
 #: standalone/drakTermServ:1478
 #, c-format
 msgid "Could not access the floppy!"
-msgstr "Gagal akses ke floppy!"
+msgstr "Tidak bisa mengakses disket!"
 
 #: standalone/drakTermServ:1480
 #, c-format
 msgid "Floppy can be removed now"
 msgstr "Disket dapat dilepas sekarang"
 
-#: standalone/drakTermServ:1483
 #, c-format
 msgid "No floppy drive available!"
-msgstr "Floppy drive tak tersedia"
+msgstr "Tidak ada drive disket!"
 
 #: standalone/drakTermServ:1488
-#, fuzzy, c-format
+#, c-format
 msgid "PXE image is %s/%s"
-msgstr "Image ISO Etherboot adalah %s"
+msgstr "Image PXE adalah %s/%s"
 
 #: standalone/drakTermServ:1490
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing %s/%s"
-msgstr "Error pada saat menulis file %s"
+msgstr "Kesalahan menulis %s/%s"
 
 #: standalone/drakTermServ:1500
 #, c-format
@@ -18497,68 +18513,68 @@ msgstr "Image ISO Etherboot adalah %s"
 #: standalone/drakTermServ:1502
 #, c-format
 msgid "Something went wrong! - Is mkisofs installed?"
-msgstr "Ada yg salah! - mkisofs sudah diinstal?"
+msgstr "Terjadi kesalahan! - apakah mkisofs sudah diinstal?"
 
 #: standalone/drakTermServ:1523
 #, c-format
 msgid "Need to create /etc/dhcpd.conf first!"
-msgstr "Perlu bikin dulu /etc/dhcpd.conf first!"
+msgstr "Perlu membuat /etc/dhcpd.conf dahulu!"
 
 #: standalone/drakTermServ:1683
 #, c-format
 msgid "%s passwd bad in Terminal Server - rewriting...\n"
-msgstr ""
+msgstr "%s katasandi buruk pada Server Terminal - menulis ulang...\n"
 
 #: standalone/drakTermServ:1696
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not a user..\n"
-msgstr "%s tak ditemukan...\n"
+msgstr "%s bukanlah pengguna...\n"
 
 #: standalone/drakTermServ:1697
-#, fuzzy, c-format
+#, c-format
 msgid "%s is already a Terminal Server user\n"
-msgstr "%s sudah dipakai\n"
+msgstr "%s sudah merupakan pengguna Server Terminal\n"
 
 #: standalone/drakTermServ:1699
 #, c-format
 msgid "Addition of %s to Terminal Server failed!\n"
-msgstr ""
+msgstr "Penambahan %s pada Server Terminal gagal!\n"
 
 #: standalone/drakTermServ:1701
-#, fuzzy, c-format
+#, c-format
 msgid "%s added to Terminal Server\n"
-msgstr "Tak berguna tanpa Server Terminal"
+msgstr "%s ditambahkan pada Server Terminal\n"
 
 #: standalone/drakTermServ:1718
-#, fuzzy, c-format
+#, c-format
 msgid "Deleted %s...\n"
-msgstr "Terdeteksi %s...\n"
+msgstr "%s dihapus...\n"
 
 #: standalone/drakTermServ:1720 standalone/drakTermServ:1793
 #, c-format
 msgid "%s not found...\n"
-msgstr "%s tak ditemukan...\n"
+msgstr "%s tidak ditemukan...\n"
 
 #: standalone/drakTermServ:1821
 #, c-format
 msgid "/etc/hosts.allow and /etc/hosts.deny already configured - not changed"
 msgstr ""
-"/etc/hosts.allow dan /etc/hosts.deny sudah dikonfigurasikan - tak diubah"
+"/etc/hosts.allow dan /etc/hosts.deny sudah dikonfigurasikan - tidak diubah"
 
 #: standalone/drakTermServ:1961
 #, c-format
 msgid "Configuration changed - restart clusternfs/dhcpd?"
-msgstr ""
+msgstr "Konfigurasi berubah - restart clusternfs/dhcpd?"
 
 #: standalone/drakautoinst:38
 #, c-format
 msgid "Error!"
-msgstr "Ada Kesalahan"
+msgstr "Kesalahan!"
 
 #: standalone/drakautoinst:39
 #, c-format
 msgid "I can not find needed image file `%s'."
-msgstr "File image `%s' tak ditemukan."
+msgstr "Tidak bisa menemukan file image `%s'."
 
 #: standalone/drakautoinst:41
 #, c-format
@@ -18566,7 +18582,7 @@ msgid "Auto Install Configurator"
 msgstr "Konfigurasi Instalasi Otomatis"
 
 #: standalone/drakautoinst:42
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You are about to configure an Auto Install floppy. This feature is somewhat "
 "dangerous and must be used circumspectly.\n"
@@ -18580,17 +18596,17 @@ msgid ""
 "\n"
 "Press ok to continue."
 msgstr ""
-"Konfigurasi disket Instalasi Otomatis akan dilakukan. Fitur ini agak "
-"berbahaya dan harus hati-hati digunakan.\n"
+"Anda akan mengkonfigurasikan disket Installasi Otomatis. Fitur ini cukup "
+"berbahaya dan harus digunakan dengan hati-hati.\n"
 "\n"
-"Dg fitur ini, Anda akan dapat mengulang instalasi yang Anda terapkan pada "
+"Dengan fitur ini, Anda akan dapat mengulang instalasi yang Anda terapkan pada "
 "komputer ini, sementara pada beberapa tahapan akan ada pertanyaan interaktif "
 "untuk mengubah nilainya.\n"
 "\n"
-"Utk keamanan maximum, proses partisi dan format takkan pernah dijalankan\n"
-"secara otomatis, apapun yg Anda pilih selama instalasi komputer ini.\n"
+"Untuk keamanan maksimal, proses partisi dan format tidak dijalankan\n"
+"secara otomatis, apapun yang Anda pilih selama instalasi komputer ini.\n"
 "\n"
-"Jalan terus?"
+"Tekan ok untuk melanjutkan."
 
 #: standalone/drakautoinst:60
 #, c-format
@@ -18605,7 +18621,7 @@ msgstr "manual"
 #: standalone/drakautoinst:64
 #, c-format
 msgid "Automatic Steps Configuration"
-msgstr "Konfigurasi Step Otomatis"
+msgstr "Langkah Konfigurasi Otomatis"
 
 #: standalone/drakautoinst:65
 #, c-format
@@ -18619,17 +18635,17 @@ msgstr ""
 #: standalone/drakautoinst:92
 #, c-format
 msgid "Creating auto install floppy"
-msgstr "Disket auto install sedang dibuat"
+msgstr "Membuat disket auto install"
 
 #: standalone/drakautoinst:90
-#, fuzzy, c-format
+#, c-format
 msgid "Insert another blank floppy in drive %s (for drivers disk)"
-msgstr "Masukkan disket kosong di drive %s"
+msgstr "Masukkan disket kosong pada drive %s (untuk disket driver)"
 
 #: standalone/drakautoinst:91
-#, fuzzy, c-format
+#, c-format
 msgid "Creating auto install floppy (drivers disk)"
-msgstr "Disket auto install sedang dibuat"
+msgstr "Membuat disket auto install (disket driver)"
 
 #: standalone/drakautoinst:158
 #, c-format
@@ -18642,7 +18658,7 @@ msgstr ""
 "\n"
 "Selamat Datang.\n"
 "\n"
-"Parameter instalasi otomatis tersedia di bagian sebelah kiri"
+"Parameter instalasi otomatis tersedia pada bagian sebelah kiri"
 
 #: standalone/drakautoinst:252 standalone/drakgw:597 standalone/drakvpn:902
 #: standalone/scannerdrake:405
@@ -18655,7 +18671,9 @@ msgstr "Selamat!"
 msgid ""
 "The floppy has been successfully generated.\n"
 "You may now replay your installation."
-msgstr "Floppy sukses dibuat. Instalasi bisa direplikasi."
+msgstr ""
+"Disket telah dibuat dengan sukses.\n"
+"Anda bisa mengulang installasi Anda."
 
 #: standalone/drakautoinst:289
 #, c-format
@@ -18673,14 +18691,14 @@ msgid "Remove the last item"
 msgstr "Hapus item terakhir"
 
 #: standalone/drakbackup:88
-#, fuzzy, c-format
+#, c-format
 msgid "hd"
-msgstr "Chad"
+msgstr "hd"
 
 #: standalone/drakbackup:88
-#, fuzzy, c-format
+#, c-format
 msgid "tape"
-msgstr "Tape"
+msgstr "tape"
 
 #: standalone/drakbackup:152
 #, c-format
@@ -18688,13 +18706,13 @@ msgid ""
 "Expect is an extension to the TCL scripting language that allows interactive "
 "sessions without user intervention."
 msgstr ""
-"Expect adalah kepanjangan bahasa skrip TCL yg memungkinkan sesi interaktif "
+"Expect adalah perluasan bahasa skrip TCL yang memungkinkan sesi interaktif "
 "tanpa intervensi pengguna."
 
 #: standalone/drakbackup:153
 #, c-format
 msgid "Store the password for this system in drakbackup configuration."
-msgstr "Simpan katasandi sistem di konfigurasi drakbackup."
+msgstr "Simpan katasandi sistem pada konfigurasi drakbackup."
 
 #: standalone/drakbackup:154
 #, c-format
@@ -18702,8 +18720,8 @@ msgid ""
 "For a multisession CD, only the first session will erase the cdrw. Otherwise "
 "the cdrw is erased before each backup."
 msgstr ""
-"Pada CD multisesi, hanya sesi pertama yg akan menghapus cdrw. Lainnya, cdrw "
-"dihapus sebelum tiap backup."
+"Pada CD multisesi, hanya sesi pertama yang akan menghapus cdrw. Lainnya, cdrw "
+"dihapus sebelum setiap backup."
 
 #: standalone/drakbackup:155
 #, c-format
@@ -18711,8 +18729,8 @@ msgid ""
 "This option will save files that have changed.  Exact behavior depends on "
 "whether incremental or differential mode is used."
 msgstr ""
-"Opsi ini akan menyimpan file yg telah berubah, menurut mode yg digunakan "
-"(incremental atau differential)."
+"Opsi ini akan menyimpan file yang telah berubah. Perilaku yang sebenarnya "
+"bergantung pada mode incremental atau differential yang digunakan."
 
 #: standalone/drakbackup:156
 #, c-format
@@ -18720,7 +18738,7 @@ msgid ""
 "Incremental backups only save files that have changed or are new since the "
 "last backup."
 msgstr ""
-"Backup incremental hanya menyimpan file yg telah berubah atau yg baru "
+"Backup incremental hanya menyimpan file yang telah berubah atau yang baru "
 "semenjak backup terakhir."
 
 #: standalone/drakbackup:157
@@ -18729,16 +18747,18 @@ msgid ""
 "Differential backups only save files that have changed or are new since the "
 "original 'base' backup."
 msgstr ""
+"Back differential hanya menyimpan file yang telah berubah atau yang baru "
+"semenjak backup 'dasar' orisinal."
 
 #: standalone/drakbackup:158
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This should be a local user or email address that you want the backup "
 "results sent to. You will need to define a functioning mail server."
 msgstr ""
-"Daftar (dipisahkan oleh koma) pengguna lokal atau alamat email ke mana hasil "
-"backup akan dikirim. Anda memerlukan agen transfer mail yg berfungsi dg "
-"benar."
+"Ini seharusnya berisi pengguna lokal atau alamat email yang digunakan "
+"untuk mengirimkan hasil. Anda harus mendefinisikan server mail yang "
+"berfungsi."
 
 #: standalone/drakbackup:159
 #, c-format
@@ -18746,8 +18766,8 @@ msgid ""
 "Files or wildcards listed in a .backupignore file at the top of a directory "
 "tree will not be backed up."
 msgstr ""
-"File atau wildcard yg terdaftar dalam file .backupignore pada puncak pohon "
-"direktori takkan di-backup."
+"File atau wildcard yang terdaftar dalam file .backupignore pada puncak pohon "
+"direktori tidak akan di-backup."
 
 #: standalone/drakbackup:160
 #, c-format
@@ -18756,8 +18776,8 @@ msgid ""
 "moved to the other media.  Enabling this option will remove the hard drive "
 "tar files after the backup."
 msgstr ""
-"Utk backup ke media lain, file tetap dibuat di harddisk, lalu dipindah ke "
-"media lain. Pengaktifan opsi ini akan menghapus file tar di harddisk setelah "
+"Untuk backup pada media lain, file tetap dibuat pada harddisk, lalu dipindah ke "
+"media lain. Pengaktifan opsi ini akan menghapus file tar pada harddisk setelah "
 "backup."
 
 #: standalone/drakbackup:161
@@ -18767,8 +18787,8 @@ msgid ""
 "than using a directory path, you would use the 'module' name for the service "
 "path."
 msgstr ""
-"Bbrp protokol, misalnya rsync, dikonfigurasikan di pihak server. Nama "
-"'modul' path servis akan dipakai, bukan path direktori."
+"Beberapa protokol, misalnya rsync, dapat dikonfigurasikan pada server. Nama "
+"'modul' layanan akan dipakai, bukan path direktori."
 
 #: standalone/drakbackup:162
 #, c-format
@@ -18776,26 +18796,28 @@ msgid ""
 "Custom allows you to specify your own day and time.  The other options use "
 "run-parts in /etc/crontab."
 msgstr ""
+"Custom mengijinkan Anda menentukan hari dan waktu Anda. Opsi lain menggunakan "
+"bagian pada /etc/crontab."
 
 #: standalone/drakbackup:326
 #, c-format
 msgid "No media selected for cron operation."
-msgstr ""
+msgstr "Tidak ada media yang dipilih untuk operasi cron."
 
 #: standalone/drakbackup:330
 #, c-format
 msgid "No interval selected for cron operation."
-msgstr ""
+msgstr "Tidak ada interval yang dipilih untuk operasi cron."
 
 #: standalone/drakbackup:377
-#, fuzzy, c-format
+#, c-format
 msgid "Interval cron not available as non-root"
-msgstr "Cron non-root belum tersedia"
+msgstr "Interval cron tidak tersedia selain untuk root"
 
 #: standalone/drakbackup:462 standalone/logdrake:437
 #, c-format
 msgid "\"%s\" neither is a valid email nor is an existing local user!"
-msgstr ""
+msgstr "\"%s\" bukanlah email valid atau pengguna lokal!"
 
 #: standalone/drakbackup:466 standalone/logdrake:442
 #, c-format
@@ -18803,11 +18825,13 @@ msgid ""
 "\"%s\" is a local user, but you did not select a local smtp, so you must use "
 "a complete email address!"
 msgstr ""
+"\"%s\" adalah pengguna lokal, tetapi Anda tidak memilih smtp lokal, sehingga "
+"Anda harus menggunakan alamat email lengkap!"
 
 #: standalone/drakbackup:475
 #, c-format
 msgid "Valid user list changed, rewriting config file."
-msgstr "Daftar pengguna berubah, file konfigurasi ditulis ulang."
+msgstr "Daftar pengguna berubah, menulis ulang file konfigurasi."
 
 #: standalone/drakbackup:477
 #, c-format
@@ -18846,63 +18870,63 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-"                    Detil Laporan DrakBackup\n"
+"                    Detail Laporan DrakBackup\n"
 "\n"
 "\n"
 
 #: standalone/drakbackup:556 standalone/drakbackup:627
 #: standalone/drakbackup:683
-#, fuzzy, c-format
+#, c-format
 msgid "Total progress"
-msgstr "Total perkembangan"
+msgstr "Total kemajuan"
 
 #: standalone/drakbackup:609
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s exists, delete?\n"
 "\n"
 "If you've already done this process you'll probably\n"
 " need to purge the entry from authorized_keys on the server."
 msgstr ""
-"Ada %s, hapus?\n"
+"%s ada, hapus?\n"
 "\n"
-"Awas: Jika Anda telah melakukan proses ini Anda mungkin perlu\n"
+"Jika Anda telah melakukan proses ini Anda mungkin perlu\n"
 " membersihkan entri dari authorized_keys pada server."
 
 #: standalone/drakbackup:618
 #, c-format
 msgid "This may take a moment to generate the keys."
-msgstr "Perlu waktu untuk membuat kunci"
+msgstr "Membutuhkan beberapa waktu untuk membuat kunci"
 
 #: standalone/drakbackup:625
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot spawn %s."
-msgstr "ERROR: Tak dapat menghasilkan %s."
+msgstr "Tidak bisa menghasilkan %s."
 
 #: standalone/drakbackup:642
 #, c-format
 msgid "No password prompt on %s at port %s"
-msgstr "Tiada prompt katasandi di %s pada port %s"
+msgstr "Tidak ada prompt katasandi pada %s pada port %s"
 
 #: standalone/drakbackup:643
 #, c-format
 msgid "Bad password on %s"
-msgstr "Salah katasandi pada %s"
+msgstr "Katasandi rusak pada %s"
 
 #: standalone/drakbackup:644
 #, c-format
 msgid "Permission denied transferring %s to %s"
-msgstr "Tak ada izin pemindahan %s ke %s"
+msgstr "Tidak ada izin pemindahan %s ke %s"
 
 #: standalone/drakbackup:645
 #, c-format
 msgid "Can not find %s on %s"
-msgstr "%s di %s tak tercari"
+msgstr "Tidak bisa menemukan %s pada %s"
 
 #: standalone/drakbackup:649
 #, c-format
 msgid "%s not responding"
-msgstr "tak ada respon %s"
+msgstr "%s tidak merespon"
 
 #: standalone/drakbackup:653
 #, c-format
@@ -18915,7 +18939,7 @@ msgid ""
 "without being prompted for a password."
 msgstr ""
 "Transfer sukses\n"
-"Anda mungkin ingin mengecek Anda dapat login ke server dg:\n"
+"Anda mungkin ingin menguji apakah Anda dapat login ke server dengan:\n"
 "\n"
 "ssh -i %s %s@%s\n"
 "\n"
@@ -18934,7 +18958,7 @@ msgstr "Transfer WebDAV gagal!"
 #: standalone/drakbackup:722
 #, c-format
 msgid "No CD-R/DVD-R in drive!"
-msgstr "Tiada CDR/DVDR di drive!"
+msgstr "Tidak ada CDR/DVDR pada drive!"
 
 #: standalone/drakbackup:726
 #, c-format
@@ -18944,22 +18968,22 @@ msgstr "Tampaknya bukan media yang dapat merekam!"
 #: standalone/drakbackup:731
 #, c-format
 msgid "Not erasable media!"
-msgstr "Media tak terhapuskan"
+msgstr "Bukan media yang bisa dihapus!"
 
 #: standalone/drakbackup:773
 #, c-format
 msgid "This may take a moment to erase the media."
-msgstr "Perlu waktu untuk menghapus media."
+msgstr "Membutuhkan beberapa waktu untuk menghapus media."
 
 #: standalone/drakbackup:831
 #, c-format
 msgid "Permission problem accessing CD."
-msgstr "Problem izin pada akses CD."
+msgstr "Masalah izin pada pengaksesan CD."
 
 #: standalone/drakbackup:858
 #, c-format
 msgid "No tape in %s!"
-msgstr "Tak ada pita di %s!"
+msgstr "Tidak ada pita pada %s!"
 
 #: standalone/drakbackup:965
 #, c-format
@@ -18967,11 +18991,13 @@ msgid ""
 "Backup quota exceeded!\n"
 "%d MB used vs %d MB allocated."
 msgstr ""
+"Quota backup terlampaui!\n"
+"%d MB digunakan vs %d MB yang dialokasikan."
 
 #: standalone/drakbackup:984 standalone/drakbackup:1017
 #, c-format
 msgid "Backup system files..."
-msgstr "Backup file sistem..."
+msgstr "Backup sistem file..."
 
 #: standalone/drakbackup:1018 standalone/drakbackup:1059
 #, c-format
@@ -18996,7 +19022,7 @@ msgstr "Kemajuan Backup Hard Disk..."
 #: standalone/drakbackup:1099
 #, c-format
 msgid "No changes to backup!"
-msgstr "Tak ada perubahan backup!"
+msgstr "Tidak ada perubahan backup!"
 
 #: standalone/drakbackup:1117 standalone/drakbackup:1141
 #, c-format
@@ -19017,22 +19043,19 @@ msgid ""
 "FTP.\n"
 msgstr ""
 "\n"
-" Problem koneksi FTP: Gagal mengirim file backup dengan FTP.\n"
+" Masalah koneksi FTP: Tidak mungkin mengirim file backup Anda melalui FTP.\n"
 
 #: standalone/drakbackup:1127
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Error during sending file via FTP. Please correct your FTP configuration."
 msgstr ""
-"Error saat pengiriman file via FTP.\n"
-" Betulkan konfigurasi FTP Anda."
+"Kesalahan saat pengiriman file via FTP. Harap perbaiki konfigurasi FTP Anda."
 
 #: standalone/drakbackup:1129
-#, fuzzy, c-format
+#, c-format
 msgid "file list sent by FTP: %s\n"
-msgstr ""
-"daftar file yg dikirim oleh FTP: %s\n"
-" "
+msgstr "daftar file yang dikirim oleh FTP: %s\n"
 
 #: standalone/drakbackup:1146
 #, c-format
@@ -19057,12 +19080,9 @@ msgstr ""
 "\n"
 
 #: standalone/drakbackup:1160
-#, fuzzy, c-format
+#, c-format
 msgid "Error sending mail. Your report mail was not sent."
-msgstr ""
-"Error saat sendmail.\n"
-"  Surat laporan Anda tak terkirim.\n"
-"  Mohon konfigurasikan sendmail"
+msgstr "Kesalahan pengiriman email. Laporan Anda tidak dikirim."
 
 #: standalone/drakbackup:1161
 #, c-format
@@ -19072,7 +19092,7 @@ msgstr " Kesalahan saat pengiriman surat. \n"
 #: standalone/drakbackup:1191
 #, c-format
 msgid "Can not create catalog!"
-msgstr "Katalog tak dapat dibuat!"
+msgstr "Tidak dapat membuat katalog!"
 
 #: standalone/drakbackup:1420
 #, c-format
@@ -19081,14 +19101,14 @@ msgid ""
 "Please check all options that you need.\n"
 msgstr ""
 "\n"
-"Periksa semua opsi yang Anda inginkan.\n"
+"Periksa semua opsi yang Anda perlukan.\n"
 
 #: standalone/drakbackup:1421
 #, c-format
 msgid ""
 "These options can backup and restore all files in your /etc directory.\n"
 msgstr ""
-"Opsi ini memungkinkan backup / restorasi semua file di direktori /etc.\n"
+"Opsi ini dapat mem-backup dan mengembalikan semua file pada direktori /etc.\n"
 
 #: standalone/drakbackup:1422
 #, c-format
@@ -19099,13 +19119,13 @@ msgstr "Backup file System Anda. (direktori /etc)"
 #: standalone/drakbackup:1553
 #, c-format
 msgid "Use Incremental/Differential Backups  (do not replace old backups)"
-msgstr "Pakai Backup Incremental/Diferensial (tak menghapus backup lama)"
+msgstr "Gunakan Backup Incremental/Diferensial (tidak menghapus backup lama)"
 
 #: standalone/drakbackup:1425 standalone/drakbackup:1489
 #: standalone/drakbackup:1555
 #, c-format
 msgid "Use Incremental Backups"
-msgstr "Pakai Backup Incremental"
+msgstr "Gunakan Backup Incremental"
 
 #: standalone/drakbackup:1425 standalone/drakbackup:1489
 #: standalone/drakbackup:1555
@@ -19116,24 +19136,25 @@ msgstr "Gunakan Backup Diferensial"
 #: standalone/drakbackup:1427
 #, c-format
 msgid "Do not include critical files (passwd, group, fstab)"
-msgstr "Tidak memasukkan file penting (passwd, group, fstab)"
+msgstr "Tidak menyertakan file penting (passwd, group, fstab)"
 
 #: standalone/drakbackup:1428
 #, c-format
 msgid ""
 "With this option you will be able to restore any version\n"
 " of your /etc directory."
-msgstr "Dengan opsi ini Anda dapat menyimpan ulang semua versi direktori /etc."
+msgstr ""
+"Dengan opsi ini Anda dapat menyimpan ulang semua versi direktori /etc."
 
 #: standalone/drakbackup:1459
 #, c-format
 msgid "Please check all users that you want to include in your backup."
-msgstr "Periksa semua pengguna yang ingin Anda masukkan ke backup."
+msgstr "Periksa semua pengguna yang ingin Anda masukkan pada backup."
 
 #: standalone/drakbackup:1486
 #, c-format
 msgid "Do not include the browser cache"
-msgstr "Jangan masukkan cache browser"
+msgstr "Tidak menyertakan cache browser"
 
 #: standalone/drakbackup:1540
 #, c-format
@@ -19153,50 +19174,44 @@ msgstr "Pengguna"
 #: standalone/drakbackup:1624
 #, c-format
 msgid "Use network connection to backup"
-msgstr "Pakai koneksi jaringan untuk backup"
+msgstr "Gunakan koneksi jaringan untuk backup"
 
 #: standalone/drakbackup:1626
 #, c-format
 msgid "Net Method:"
-msgstr "Metode Jaring:"
+msgstr "Metode Net:"
 
 #: standalone/drakbackup:1630
 #, c-format
 msgid "Use Expect for SSH"
-msgstr "Pakai Expect untuk SSH"
+msgstr "Gunakan Expect untuk SSH"
 
 #: standalone/drakbackup:1631
-#, fuzzy, c-format
+#, c-format
 msgid "Create/Transfer backup keys for SSH"
-msgstr ""
-"Buat/Transfer\n"
-"kunci cadangan SSH"
+msgstr "Membuat/Mentransfer kunci backup untuk SSH"
 
 #: standalone/drakbackup:1633
-#, fuzzy, c-format
+#, c-format
 msgid "Transfer Now"
-msgstr ""
-"  Transfer  \n"
-"Sekarang"
+msgstr "Transfer Sekarang"
 
 #: standalone/drakbackup:1635
-#, fuzzy, c-format
+#, c-format
 msgid "Other (not drakbackup) keys in place already"
-msgstr ""
-"Kunci lain (bukan drakbackup)\n"
-"sudah ada di tempat"
+msgstr "Kunci lainnya (bukan drakbackup) sudah pada "
+"tempatnya"
 
 #: standalone/drakbackup:1638
-#, fuzzy, c-format
+#, c-format
 msgid "Host name or IP."
-msgstr "Nama Host"
+msgstr "Nama Host atau IP."
 
 #: standalone/drakbackup:1643
-#, fuzzy, c-format
+#, c-format
 msgid "Directory (or module) to put the backup on this host."
-msgstr ""
-"Masukkan direktori (atau modul) untuk\n"
-" meletakkan backup di host ini."
+msgstr "Direktori (atau modul) untuk meletakkan backup pada "
+"host ini."
 
 #: standalone/drakbackup:1655
 #, c-format
@@ -19206,22 +19221,22 @@ msgstr "Ingat katasandi ini"
 #: standalone/drakbackup:1671
 #, c-format
 msgid "Need hostname, username and password!"
-msgstr "Perlu namahost, namapengguna dan katasandi!"
+msgstr "Membutuhkan nama host, nama pengguna dan katasandi!"
 
 #: standalone/drakbackup:1762
 #, c-format
 msgid "Use CD-R/DVD-R to backup"
-msgstr "Pakai CD/DVDROM untuk backup"
+msgstr "Gunakan CD/DVDROM untuk backup"
 
 #: standalone/drakbackup:1765
 #, c-format
 msgid "Choose your CD/DVD device"
-msgstr "Pilih device CD/DVD"
+msgstr "Pilih divais CD/DVD"
 
 #: standalone/drakbackup:1770
-#, fuzzy, c-format
+#, c-format
 msgid "Choose your CD/DVD media size"
-msgstr "Pilih ukuran media CD/DVD (Mb)"
+msgstr "Pilih ukuran media CD/DVD"
 
 #: standalone/drakbackup:1777
 #, c-format
@@ -19244,24 +19259,24 @@ msgid " Erase Now "
 msgstr " Hapus Sekarang "
 
 #: standalone/drakbackup:1792
-#, fuzzy, c-format
+#, c-format
 msgid "DVD+RW media"
-msgstr "media CDRW"
+msgstr "Media DVD+RW"
 
 #: standalone/drakbackup:1794
-#, fuzzy, c-format
+#, c-format
 msgid "DVD-R media"
-msgstr "media CDRW"
+msgstr "Media DVD-R"
 
 #: standalone/drakbackup:1796
-#, fuzzy, c-format
+#, c-format
 msgid "DVDRAM device"
-msgstr "device"
+msgstr "Divais DVDRAM"
 
 #: standalone/drakbackup:1827
 #, c-format
 msgid "No CD device defined!"
-msgstr "Tidak ada alat CD didefinisikan!"
+msgstr "Tidak ada divais CD yang terdefinisi!"
 
 #: standalone/drakbackup:1869
 #, c-format
@@ -19269,14 +19284,14 @@ msgid "Use tape to backup"
 msgstr "Gunakan pita untuk backup"
 
 #: standalone/drakbackup:1872
-#, fuzzy, c-format
+#, c-format
 msgid "Device name to use for backup"
-msgstr "Masukkan nama alat untuk backup"
+msgstr "Nama divais yang digunakan untuk backup"
 
 #: standalone/drakbackup:1878
 #, c-format
 msgid "Backup directly to tape"
-msgstr ""
+msgstr "Backup langsung pada tape"
 
 #: standalone/drakbackup:1884
 #, c-format
@@ -19291,7 +19306,7 @@ msgstr "Hapus pita sebelum backup"
 #: standalone/drakbackup:1896
 #, c-format
 msgid "Eject tape after the backup"
-msgstr "Eject pita setelah backup"
+msgstr "Keluarkan pita setelah backup"
 
 #: standalone/drakbackup:1968
 #, c-format
@@ -19299,23 +19314,23 @@ msgid "Enter the directory to save to:"
 msgstr "Masukkan direktori untuk penyimpanan:"
 
 #: standalone/drakbackup:1972
-#, fuzzy, c-format
+#, c-format
 msgid "Directory to save to"
-msgstr "Masukkan direktori untuk penyimpanan:"
+msgstr "Direktori penyimpanan"
 
 #: standalone/drakbackup:1977
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Maximum size\n"
 " allowed for Drakbackup (MB)"
 msgstr ""
-"Masukkan ukuran maximum\n"
-" yg diizinkan untuk Drakbackup"
+"Ukuran maksimal\n"
+" yang diizinkan untuk Drakbackup (MB)"
 
 #: standalone/drakbackup:2041
 #, c-format
 msgid "CD-R / DVD-R"
-msgstr "CDROM / DVDROM"
+msgstr "CD-R / DVD-R"
 
 #: standalone/drakbackup:2046
 #, c-format
@@ -19348,9 +19363,9 @@ msgstr "bulanan"
 
 #: standalone/drakbackup:2061 standalone/drakbackup:2066
 #: standalone/drakbackup:2071
-#, fuzzy, c-format
+#, c-format
 msgid "custom"
-msgstr "Custom"
+msgstr "custom"
 
 #: standalone/drakbackup:2075
 #, c-format
@@ -19450,17 +19465,17 @@ msgstr "Sabtu"
 #: standalone/drakbackup:2113
 #, c-format
 msgid "Use daemon"
-msgstr "Pakai daemon"
+msgstr "Gunakan daemon"
 
 #: standalone/drakbackup:2117
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the time interval between each backup"
-msgstr "Pilih interval waktu backup"
+msgstr "Silahkan pilih interval waktu antar backup"
 
 #: standalone/drakbackup:2123
 #, c-format
 msgid "Custom setup/crontab entry:"
-msgstr ""
+msgstr "Setup custom/entri crontab:"
 
 #: standalone/drakbackup:2128
 #, c-format
@@ -19483,61 +19498,56 @@ msgid "Month"
 msgstr "Bulan"
 
 #: standalone/drakbackup:2144
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday"
-msgstr "Rabu"
+msgstr "Mingguan"
 
 #: standalone/drakbackup:2150
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the media for backup."
-msgstr "Pilih media backup."
+msgstr "Pilih media untuk backup."
 
 #: standalone/drakbackup:2156
-#, fuzzy, c-format
+#, c-format
 msgid "Please be sure that the cron daemon is included in your services."
-msgstr ""
-"Pastikan daemon cron masuk dalam daftar servis.\n"
-"\n"
-"Ingat bahwa kini semua media 'net' juga menggunakan harddisk."
+msgstr "Pastikan daemon cron masuk dalam daftar layanan."
 
 #: standalone/drakbackup:2157
 #, c-format
 msgid ""
 "If your machine is not on all the time, you might want to install anacron."
 msgstr ""
+"Jika komputer tidak selalu menyala, Anda mungkin ingin menginstall anacron."
 
 #: standalone/drakbackup:2158
-#, fuzzy, c-format
+#, c-format
 msgid "Note that currently all 'net' media also use the hard drive."
-msgstr ""
-"Pastikan daemon cron masuk dalam daftar servis.\n"
-"\n"
-"Ingat bahwa kini semua media 'net' juga menggunakan harddisk."
+msgstr "Perhatikan bahwa semua media 'net' juga menggunakan harddisk."
 
 #: standalone/drakbackup:2205
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the compression type"
-msgstr "pilih tanggal restorasi"
+msgstr "Pilih tipe kompresi"
 
 #: standalone/drakbackup:2209
 #, c-format
 msgid "Use .backupignore files"
-msgstr "Pakai file .backupignore"
+msgstr "Gunakan file .backupignore"
 
 #: standalone/drakbackup:2211
 #, c-format
 msgid "Send mail report after each backup to:"
-msgstr "Kirim laporan mail setelah tiap backup ke :"
+msgstr "Kirim laporan mail setelah backup ke :"
 
 #: standalone/drakbackup:2217
-#, fuzzy, c-format
+#, c-format
 msgid "SMTP server for mail:"
-msgstr "Host server SMB"
+msgstr "Server SMTP untuk mail:"
 
 #: standalone/drakbackup:2222
 #, c-format
 msgid "Delete Hard Drive tar files after backup to other media."
-msgstr "Hapus file tar Harddisk setelah backup ke media lain."
+msgstr "Hapus file tar Hard disk setelah backup pada media lain."
 
 #: standalone/drakbackup:2262
 #, c-format
@@ -19560,9 +19570,9 @@ msgid "More Options"
 msgstr "Opsi Tambahan"
 
 #: standalone/drakbackup:2290
-#, fuzzy, c-format
+#, c-format
 msgid "Backup destination not configured..."
-msgstr "Fungsi network tak dikonfigurasi"
+msgstr "Tujuan backup belum terkonfigurasi..."
 
 #: standalone/drakbackup:2310 standalone/drakbackup:4234
 #, c-format
@@ -19575,24 +19585,25 @@ msgid "Please choose where you want to backup"
 msgstr "Pilih tempat backup"
 
 #: standalone/drakbackup:2329
-#, fuzzy, c-format
+#, c-format
 msgid "Hard Drive used to prepare backups for all media"
-msgstr "Hapus file tar Harddisk setelah backup ke media lain."
+msgstr "Hard disk yang digunakan untuk mempersiapkan backup untuk "
+"semua media"
 
 #: standalone/drakbackup:2329
 #, c-format
 msgid "Across Network"
-msgstr "lewat Network"
+msgstr "Melalui Jaringan"
 
 #: standalone/drakbackup:2329
 #, c-format
 msgid "On CD-R"
-msgstr "di CDROM"
+msgstr "Pada CD-R"
 
 #: standalone/drakbackup:2329
 #, c-format
 msgid "On Tape Device"
-msgstr "di Device Pita"
+msgstr "Pada Divais Tape"
 
 #: standalone/drakbackup:2375
 #, c-format
@@ -19600,9 +19611,9 @@ msgid "Backup Users"
 msgstr "Backup Pengguna"
 
 #: standalone/drakbackup:2376
-#, fuzzy, c-format
+#, c-format
 msgid " (Default is all users)"
-msgstr "Pengguna standar"
+msgstr " (Default adalah semua pengguna)"
 
 #: standalone/drakbackup:2389
 #, c-format
@@ -19622,7 +19633,7 @@ msgstr "Pilih pengguna secara manual"
 #: standalone/drakbackup:2421
 #, c-format
 msgid "Please select data to backup..."
-msgstr "Pilih data backup..."
+msgstr "Pilih data untuk di-backup..."
 
 #: standalone/drakbackup:2493
 #, c-format
@@ -19640,7 +19651,7 @@ msgid ""
 "- System Files:\n"
 msgstr ""
 "\n"
-"- File Sistem:\n"
+"- Sistem File:\n"
 
 #: standalone/drakbackup:2496
 #, c-format
@@ -19667,12 +19678,12 @@ msgid ""
 "- Save on Hard drive on path: %s\n"
 msgstr ""
 "\n"
-"- Simpan di Hard drive di path: %s\n"
+"- Simpan pada Hard drive pada path: %s\n"
 
 #: standalone/drakbackup:2501
 #, c-format
 msgid "\tLimit disk usage to %s MB\n"
-msgstr ""
+msgstr "\tBatas penggunaan disk pada %s MB\n"
 
 #: standalone/drakbackup:2504
 #, c-format
@@ -19681,7 +19692,7 @@ msgid ""
 "- Delete hard drive tar files after backup.\n"
 msgstr ""
 "\n"
-"- Hapus file tar harddisk setelah backup.\n"
+"- Hapus file tar hard disk setelah backup.\n"
 
 #: standalone/drakbackup:2509
 #, c-format
@@ -19700,7 +19711,7 @@ msgstr "RW"
 #: standalone/drakbackup:2511
 #, c-format
 msgid " on device: %s"
-msgstr " di device: %s"
+msgstr " pada divais: %s"
 
 #: standalone/drakbackup:2512
 #, c-format
@@ -19714,7 +19725,7 @@ msgid ""
 "- Save to Tape on device: %s"
 msgstr ""
 "\n"
-"- Simpan ke tape di alat: %s"
+"- Simpan pada tape pada divais: %s"
 
 #: standalone/drakbackup:2514
 #, c-format
@@ -19724,7 +19735,7 @@ msgstr "\t\tHapus=%s"
 #: standalone/drakbackup:2516
 #, c-format
 msgid "\tBackup directly to Tape\n"
-msgstr ""
+msgstr "\tBackup langsung pada Tape\n"
 
 #: standalone/drakbackup:2518
 #, c-format
@@ -19733,7 +19744,7 @@ msgid ""
 "- Save via %s on host: %s\n"
 msgstr ""
 "\n"
-"- Simpan via %s di host: %s\n"
+"- Simpan via %s pada host: %s\n"
 
 #: standalone/drakbackup:2519
 #, c-format
@@ -19742,7 +19753,7 @@ msgid ""
 "\t\t on path: %s \n"
 msgstr ""
 "\t\t name pengguna: %s\n"
-"\t\t di path: %s \n"
+"\t\t pada path: %s \n"
 
 #: standalone/drakbackup:2520
 #, c-format
@@ -19756,7 +19767,7 @@ msgstr ""
 #: standalone/drakbackup:2521
 #, c-format
 msgid "\tDo not include System Files\n"
-msgstr "\tJangan masukkan File Sistem\n"
+msgstr "\tJangan sertakan File Sistem\n"
 
 #: standalone/drakbackup:2523
 #, c-format
@@ -19769,14 +19780,14 @@ msgid "\tBackups use tar and gzip\n"
 msgstr "\tBackup dengan tar dan gzip\n"
 
 #: standalone/drakbackup:2525
-#, fuzzy, c-format
+#, c-format
 msgid "\tBackups use tar only\n"
-msgstr "\tBackup dengan tar dan gzip\n"
+msgstr "\tBackup hanya dengan tar\n"
 
 #: standalone/drakbackup:2527
 #, c-format
 msgid "\tUse .backupignore files\n"
-msgstr "\tPakai file .backupignore\n"
+msgstr "\tGunakan file .backupignore\n"
 
 #: standalone/drakbackup:2528
 #, c-format
@@ -19784,18 +19795,18 @@ msgid "\tSend mail to %s\n"
 msgstr "\tKirim mail ke %s\n"
 
 #: standalone/drakbackup:2529
-#, fuzzy, c-format
+#, c-format
 msgid "\tUsing SMTP server %s\n"
-msgstr "Di server CUPS \"%s\""
+msgstr "\tMenggunakan server SMTP %s\n"
 
 #: standalone/drakbackup:2531
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "- Daemon, %s via:\n"
 msgstr ""
 "\n"
-"- Cakupan daemon (%s) :\n"
+"- Daemon, %s via:\n"
 
 #: standalone/drakbackup:2532
 #, c-format
@@ -19815,27 +19826,27 @@ msgstr "\t-Tape \n"
 #: standalone/drakbackup:2535
 #, c-format
 msgid "\t-Network by FTP.\n"
-msgstr "\t-Network dg FTP.\n"
+msgstr "\t-Jaringan melalui FTP.\n"
 
 #: standalone/drakbackup:2536
 #, c-format
 msgid "\t-Network by SSH.\n"
-msgstr "\t-Network dg SSH.\n"
+msgstr "\t-Jaringan melalui SSH.\n"
 
 #: standalone/drakbackup:2537
 #, c-format
 msgid "\t-Network by rsync.\n"
-msgstr "\t-Network dg rsync.\n"
+msgstr "\t-Jaringan melalui rsync.\n"
 
 #: standalone/drakbackup:2538
 #, c-format
 msgid "\t-Network by webdav.\n"
-msgstr "\t-Network dg webdav.\n"
+msgstr "\t-Jaringan melalui webdav.\n"
 
 #: standalone/drakbackup:2540
 #, c-format
 msgid "No configuration, please click Wizard or Advanced.\n"
-msgstr "Tiada konfigurasi, mohon klik Dukun atau Lanjutan.\n"
+msgstr "Tidak ada konfigurasi, silahkan klik Wizard atau Tingkat Lanjut.\n"
 
 #: standalone/drakbackup:2545
 #, c-format
@@ -19843,34 +19854,28 @@ msgid ""
 "List of data to restore:\n"
 "\n"
 msgstr ""
-"Daftar data restorasi:\n"
+"Daftar data yang akan dipulihkan:\n"
 "\n"
 
 #: standalone/drakbackup:2547
-#, fuzzy, c-format
+#, c-format
 msgid "- Restore System Files.\n"
-msgstr ""
-"\n"
-"- File Sistem:\n"
+msgstr "- Pulihkan File Sistem.\n"
 
 #: standalone/drakbackup:2549 standalone/drakbackup:2559
 #, c-format
 msgid "   - from date: %s %s\n"
-msgstr ""
+msgstr "   - dari tanggal %s %s\n"
 
 #: standalone/drakbackup:2552
-#, fuzzy, c-format
+#, c-format
 msgid "- Restore User Files: \n"
-msgstr ""
-"\n"
-"- File Pengguna:\n"
+msgstr "- Pulihkan File Pengguna: \n"
 
 #: standalone/drakbackup:2557
-#, fuzzy, c-format
+#, c-format
 msgid "- Restore Other Files: \n"
-msgstr ""
-"\n"
-"- File Lain:\n"
+msgstr "- Pulihkan File Lain: \n"
 
 #: standalone/drakbackup:2736
 #, c-format
@@ -19884,7 +19889,7 @@ msgstr ""
 #: standalone/drakbackup:2738
 #, c-format
 msgid "Please uncheck or remove it on next time."
-msgstr "Mohon uncheck atau hapus nanti."
+msgstr "Silahkan hilangkan pilihan atau hapus lain kali."
 
 #: standalone/drakbackup:2748
 #, c-format
@@ -19899,48 +19904,48 @@ msgstr "          Semua data terpilih telah           "
 #: standalone/drakbackup:2770
 #, c-format
 msgid "          Successfully Restored on %s       "
-msgstr "          Berhasil Direstorasi di %s    "
+msgstr "          Berhasil Dipulihkan pada %s    "
 
 #: standalone/drakbackup:2890
 #, c-format
 msgid "         Restore Configuration       "
-msgstr "         Restorasi Konfigurasi    "
+msgstr "         Pemulihan Konfigurasi    "
 
 #: standalone/drakbackup:2918
 #, c-format
 msgid "OK to restore the other files."
-msgstr "OK untuk restorasi file lain."
+msgstr "OK untuk pemulihan file lain."
 
 #: standalone/drakbackup:2934
 #, c-format
 msgid "User list to restore (only the most recent date per user is important)"
-msgstr ""
-"Daftar pengguna restorasi (hanya tanggal terakhir per pengguna yg penting)"
+msgstr "Daftar pengguna untuk pemulihan (hanya tanggal terakhir per "
+"pengguna yang penting)"
 
 #: standalone/drakbackup:2999
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the date to restore:"
-msgstr "pilih tanggal restorasi"
+msgstr "Silahkan pilih tanggal untuk dipulihkan:"
 
 #: standalone/drakbackup:3036
 #, c-format
 msgid "Restore from Hard Disk."
-msgstr "Restorasi dari Hard Disk."
+msgstr "Pemulihan dari Hard Disk."
 
 #: standalone/drakbackup:3038
-#, fuzzy, c-format
+#, c-format
 msgid "Enter the directory where backups are stored"
 msgstr "Masukkan direktori tempat backup disimpan"
 
 #: standalone/drakbackup:3042
-#, fuzzy, c-format
+#, c-format
 msgid "Directory with backups"
-msgstr "Restorasi semua backup"
+msgstr "Direktori dengan backup"
 
 #: standalone/drakbackup:3096
 #, c-format
 msgid "Select another media to restore from"
-msgstr "Pilih media lain untuk direstorasi"
+msgstr "Pilih media lain tempat pemulihan"
 
 #: standalone/drakbackup:3098
 #, c-format
@@ -19950,43 +19955,43 @@ msgstr "Media Lain"
 #: standalone/drakbackup:3103
 #, c-format
 msgid "Restore system"
-msgstr "Restorasi sistem"
+msgstr "Pemulihan sistem"
 
 #: standalone/drakbackup:3104
 #, c-format
 msgid "Restore Users"
-msgstr "Restorasi Pengguna"
+msgstr "Pemulihan Pengguna"
 
 #: standalone/drakbackup:3105
 #, c-format
 msgid "Restore Other"
-msgstr "Restorasi Lain-lain"
+msgstr "Pemulihan Lainnya"
 
 #: standalone/drakbackup:3107
 #, c-format
 msgid "Select path to restore (instead of /)"
-msgstr "pilih path untuk restorasi (selain /)"
+msgstr "Pilih path untuk pemulihan (selain /)"
 
 #: standalone/drakbackup:3111 standalone/drakbackup:3393
-#, fuzzy, c-format
+#, c-format
 msgid "Path To Restore To"
-msgstr "Restorasi pilihan sendiri"
+msgstr "Path untuk Pemulihan"
 
 #: standalone/drakbackup:3114
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
-msgstr ""
-"Lakukan backup baru sebelum restorasi (hanya untuk backup incremental.)"
+msgstr "Lakukan backup baru sebelum pemulihan (hanya untuk backup incremental.)"
 
 #: standalone/drakbackup:3116
 #, c-format
 msgid "Remove user directories before restore."
-msgstr "Hapus direktori pengguna sebelum restorasi."
+msgstr "Hapus direktori pengguna sebelum pemulihan."
 
 #: standalone/drakbackup:3201
 #, c-format
 msgid "Filename text substring to search for (empty string matches all):"
-msgstr ""
+msgstr "Substring teks nama file untuk pencarian (string kosong akan "
+"cocok dengan semua):"
 
 #: standalone/drakbackup:3204
 #, c-format
@@ -19994,14 +19999,14 @@ msgid "Search Backups"
 msgstr "Cari Backup"
 
 #: standalone/drakbackup:3222
-#, fuzzy, c-format
+#, c-format
 msgid "No matches found..."
-msgstr "Image tak ditemukan"
+msgstr "Tidak ada image yang ditemukan..."
 
 #: standalone/drakbackup:3226
 #, c-format
 msgid "Restore Selected"
-msgstr "Restorasi Terpilih"
+msgstr "Pemulihan Terpilih"
 
 #: standalone/drakbackup:3361
 #, c-format
