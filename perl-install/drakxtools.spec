@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 21mdk
+Release: 22mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Jan 20 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-22mdk
+- drakboot: add a warning telling to run lilo after modifying
+  lilo.conf (#6924)
+- drakconnect: enhanced "manage" part (poulpy)
+- drakfirewall: add icmp support and "Echo request (ping)" choice
+  (pixel)
+- drakgw: transparent proxy support (florin)
+- more kernel 2.6.x support (pixel)
+- fix subdialogs when embedded (#6899)
+
 * Thu Jan 15 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-21mdk
 - prevent spurious top windows to appears when embedded in mcc
 
