@@ -103,8 +103,9 @@ sub test {
 
     $::noShadow = 1;
     open(my $F, "|perl 2>/dev/null");
-    print $F "use lib qw(", join(' ', @INC), ");\n";
-    print $F q(
+    print $F 
+    printf $F q(
+        use lib qw(%s);
         BEGIN { $::no_ugtk_init = 1 }
         require lang;
         require ugtk2; #- help perl_checker
@@ -113,7 +114,7 @@ sub test {
         use run_program;
         use common;
 
-        $::prefix = ") . $::prefix . q(";
+        $::prefix = "%s";
         $::isStandalone = 1;
 
         lang::bindtextdomain();
@@ -128,7 +129,7 @@ sub test {
         my $text = Gtk2::Label->new;
         my $time = 12;
         Gtk2->timeout_add(1000, sub {
-	    $text->set(N("Leaving in %d seconds", $time));
+	    $text->set(sprintf(translate("%s"), $time));
 	    $time-- or Gtk2->main_quit;
             1;
 	});
@@ -146,8 +147,8 @@ sub test {
         };
 
         my $in = interactive::gtk->new;
-	$in->exit($in->ask_yesorno('', [ N("Is this the correct setting?"), $text ], 0) ? 0 : 222);
-    );
+	$in->exit($in->ask_yesorno('', [ translate("%s"), $text ], 0) ? 0 : 222);
+    ), join(' ', @INC), $::prefix, N_("Leaving in %d seconds"), N_("Is this the correct setting?");
     my $rc = close $F;
     my $err = $?;
 
