@@ -724,7 +724,7 @@ sub check_for_cd() {
 		show_warning("f", N("No CD-R/DVD-R in drive!"));
 		return 1;
 	}
-	if ($log_buff !~ /ATIP info from disk|Found DVD media/) {
+	if ($log_buff !~ /ATIP info from disk|ATIP start of lead in|Found DVD media/) {
 		show_warning("f", N("Does not appear to be recordable media!"));
 		return 1;
 	}
