@@ -468,6 +468,9 @@ $r .= "Load is huge: $load\n" if ($load >@ . "$load);\n\n";
 
     $cron .= q@#- report it@;
     if ($mail) { 
+	$cron .= q@
+$email = @."$email;\n\n";
+
 	$cron .= q!
 open F, '|/usr/sbin/sendmail -oi -t';
 
@@ -554,6 +557,9 @@ sub destroy_window {
 
 # log
 # $Log$
+# Revision 1.21  2002/08/02 17:27:31  daouda
+# - expand $email in cron script
+#
 # Revision 1.20  2002/08/02 17:10:01  daouda
 # - disable sms alerts (free sms site too complicated to
 #   handle). Postponed
