@@ -357,15 +357,15 @@ sub createOrChangeType {
               { pt_type => 0, start => 1, size => $hd->{totalsectors} - 1 };
     $part or return;
     if ($fs_type eq 'other') {
-	$in->ask_warn('', N("Use ``%s'' instead", $part->{pt_type} ? N("Type") : N("Create")));
+	$in->ask_warn('', N("Use ``%s'' instead", isEmpty($part) ? N("Create") : N("Type")));
     } elsif (!$fs_type) {
-	$in->ask_warn('', N("Use ``%s'' instead", N("Delete"))) if $part->{pt_type};
-    } elsif ($part->{pt_type}) {
-	return if $fs_type eq $part->{fs_type};
-	$in->ask_warn('', isBusy($part) ? N("Use ``Unmount'' first") : N("Use ``%s'' instead", N("Type")));
-    } else {
+	$in->ask_warn('', N("Use ``%s'' instead", N("Delete"))) if !isEmpty($part);
+    } elsif (isEmpty($part)) {
 	fs::type::set_fs_type($part, $fs_type);
 	diskdrake::interactive::Create($in, $hd, $part, $all_hds);
+    } else {
+	return if $fs_type eq $part->{fs_type};
+	$in->ask_warn('', isBusy($part) ? N("Use ``Unmount'' first") : N("Use ``%s'' instead", N("Type")));
     }
 }
 

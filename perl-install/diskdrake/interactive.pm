@@ -443,7 +443,7 @@ sub part_possible_actions {
         isPrimary => 'isPrimary($part, $hd)',
 	canModifyRAID => 'isPartOfRAID($part) && !isMounted(fs::get::device2part($part->{raid}, $all_hds->{raids}))',
     );
-    if ($part->{pt_type} eq '0') {
+    if (isEmpty($part)) {
 	if_(!$hd->{readonly}, N_("Create"));
     } else {
         grep { 
@@ -1173,17 +1173,17 @@ sub format_part_info {
 	    $pName =~ s/[^A-Za-z0-9_]//g;
 	    $info .= N("Name: ") . $pName . "\n";
 	}
-    } elsif ($part->{fs_type} || $part->{pt_type}) {
-	$info .= N("Type: ") . (fs::type::part2type_name($part) || $part->{fs_type}) . ($::expert ? sprintf " (0x%x)", $part->{pt_type} : '') . "\n";
-    } else {
+    } elsif (isEmpty($part)) {
 	$info .= N("Empty") . "\n";
+    } else {
+	$info .= N("Type: ") . (fs::type::part2type_name($part) || $part->{fs_type}) . ($::expert ? sprintf " (0x%x)", $part->{pt_type} : '') . "\n";
     }
     $info .= N("Start: sector %s\n", $part->{start}) if $::expert && !isSpecial($part) && !isLVM($hd);
     $info .= N("Size: %s", formatXiB($part->{size}, 512));
     $info .= sprintf " (%s%%)", int 100 * $part->{size} / $hd->{totalsectors} if $hd->{totalsectors};
     $info .= N(", %s sectors", $part->{size}) if $::expert;
     $info .= "\n";
-    $info .= N("Cylinder %d to %d\n", $part->{start} / $hd->cylinder_size, ($part->{start} + $part->{size} - 1) / $hd->cylinder_size) if ($::expert || !$part->{pt_type}) && !isSpecial($part) && !isLVM($hd);
+    $info .= N("Cylinder %d to %d\n", $part->{start} / $hd->cylinder_size, ($part->{start} + $part->{size} - 1) / $hd->cylinder_size) if ($::expert || isEmpty($part)) && !isSpecial($part) && !isLVM($hd);
     $info .= N("Number of logical extents: %d", $part->{size} / $hd->cylinder_size) if $::expert && isLVM($hd);
     $info .= N("Formatted\n") if $part->{isFormatted};
     $info .= N("Not formatted\n") if !$part->{isFormatted} && $part->{notFormatted};
@@ -1212,9 +1212,7 @@ sub format_part_info {
 
 sub format_part_info_short { 
     my ($hd, $part) = @_;
-    $part->{pt_type} ? 
-      partition_table::description($part) :
-      format_part_info($hd, $part);
+    isEmpty($part) ? format_part_info($hd, $part) : partition_table::description($part);
 }
 
 sub format_hd_info {
@@ -1238,7 +1236,7 @@ sub format_raw_hd_info {
     my $info = '';
     $info .= N("Mount point: ") . "$raw_hd->{mntpoint}\n" if $raw_hd->{mntpoint};
     $info .= format_hd_info($raw_hd);
-    if ($raw_hd->{pt_type}) {
+    if (!isEmpty($raw_hd)) {
 	$info .= N("Type: ") . (fs::type::part2type_name($raw_hd) || $raw_hd->{fs_type}) . "\n";
     }
     if (my $s = $raw_hd->{options}) {

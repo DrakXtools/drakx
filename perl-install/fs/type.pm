@@ -8,7 +8,7 @@ use common;
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(
-   isExtended isTrueLocalFS isTrueFS isDos isSwap isSunOS isOtherAvailableFS isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial isApple isAppleBootstrap isWholedisk isHiddenMacPart isFat_or_NTFS
+   isEmpty isExtended isTrueLocalFS isTrueFS isDos isSwap isSunOS isOtherAvailableFS isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial isApple isAppleBootstrap isWholedisk isHiddenMacPart isFat_or_NTFS
    maybeFormatted set_isFormatted
 );
 
@@ -307,6 +307,7 @@ sub type_subpart_from_magic {
 }
 
 
+sub isEmpty { !$_[0]{fs_type} && $_[0]{pt_type} == 0 }
 sub isEfi { arch() =~ /ia64/ && $_[0]{pt_type} == 0xef }
 sub isWholedisk { arch() =~ /^sparc/ && $_[0]{pt_type} == 5 }
 sub isExtended { arch() !~ /^sparc/ && ($_[0]{pt_type} == 5 || $_[0]{pt_type} == 0xf || $_[0]{pt_type} == 0x85) }

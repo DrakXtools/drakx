@@ -227,7 +227,7 @@ sub get_normal_parts_and_holes {
     } sort { $a->{start} <=> $b->{start} } grep { !isWholedisk($_) } get_normal_parts($hd);
 
     push @l, { start => $start, size => $last - $start, %$minimal_hole };
-    grep { $_->{pt_type} || $_->{size} >= $hd->cylinder_size } @l;
+    grep { !isEmpty($_) || $_->{size} >= $hd->cylinder_size } @l;
 }
 
 sub read_one($$) {
@@ -264,8 +264,8 @@ sub read_one($$) {
     }
 
     my @extended = $hd->hasExtended ? grep { isExtended($_) } @$pt : ();
-    my @normal = grep { $_->{size} && $_->{pt_type} && !isExtended($_) } @$pt;
-    my $nb_special_empty = int(grep { $_->{size} && $_->{pt_type} == 0 } @$pt);
+    my @normal = grep { $_->{size} && !isEmpty($_) && !isExtended($_) } @$pt;
+    my $nb_special_empty = int(grep { $_->{size} && isEmpty($_) } @$pt);
 
     @extended > 1 and die "more than one extended partition";
 

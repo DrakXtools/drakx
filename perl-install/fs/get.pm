@@ -30,10 +30,10 @@ sub fstab_and_holes {
 
 sub holes {
     my ($all_hds) = @_;
-    grep { $_->{pt_type} == 0 } fstab_and_holes($all_hds);
+    grep { isEmpty($_) } fstab_and_holes($all_hds);
 }
 sub hds_holes {
-    grep { $_->{pt_type} == 0 } hds_fstab_and_holes(@_);
+    grep { isEmpty($_) } hds_fstab_and_holes(@_);
 }
 sub free_space {
     my ($all_hds) = @_;
