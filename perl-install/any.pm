@@ -141,7 +141,7 @@ sub setupBootloader {
 			  );
 	my $bootloader = arch() =~ /sparc/ ? __("SILO") : arch() =~ /ppc/ ? __("Yaboot") : __("LILO with graphical menu");
 	my $profiles = bootloader::has_profiles($b);
-	my $memsize = bootloader::get_append('mem');
+	my $memsize = bootloader::get_append($b, 'mem');
 
 	$b->{vga} ||= 'Normal';
 	if (arch !~ /ppc/) {
