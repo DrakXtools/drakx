@@ -511,7 +511,10 @@ sub interactive_mode() {
         $window1->{rwindow}->set_position('center');
         $window1->{rwindow}->set_title(N("Import Fonts"));
     }
-    my ($adv_opt_button, $font_button);
+    
+    my $button = {};
+    my $disable = sub { my ($b) = @_; $button->{$_}->set_sensitive($_ ne $b) foreach keys %$button };
+
     gtkadd($window1->{window},
 	   gtkpack_(new Gtk2::VBox(0, 2), if_(!$::isEmbedded, 0, gtkcreate_img("drakfont.620x57")), 1,
 		    gtkpack_(new Gtk2::HBox(0, 2), 1,
@@ -519,31 +522,31 @@ sub interactive_mode() {
 				      gtkpack($font_box = new Gtk2::VBox(0, 5), $font_sel = new Gtk2::FontSelection,), 1,
 				      gtkpack_(new Gtk2::HBox(0, 2), 0,
 					       gtkadd(gtkset_layout(new Gtk2::VButtonBox, 'end'),
-						      gtksignal_connect(new Gtk2::Button(N("Get Windows Fonts")),
+						      gtksignal_connect($button->{windows} = new Gtk2::Button(N("Get Windows Fonts")),
 									clicked => sub {
+									    $disable->('windows');
 									    $$central_widget->destroy;
 									    $windows = 1;
 									    appli_choice();
 									}),
-						      gtksignal_connect(new Gtk2::Button(N("Uninstall Fonts")),
+						      gtksignal_connect($button->{uninstall} = new Gtk2::Button(N("Uninstall Fonts")),
 									clicked => sub {
+									    $disable->('uninstall');
 									    $$central_widget->destroy;
 									    uninstall();
 									}),
 						     ), 0,
 					       gtkadd(gtkset_layout(new Gtk2::VButtonBox, 'end'),
-						      gtksignal_connect($adv_opt_button = new Gtk2::Button(N("Advanced Options")),
+						      gtksignal_connect($button->{adv_option} = new Gtk2::Button(N("Advanced Options")),
 									clicked => sub {
-                                                 $font_button->set_sensitive(1);
-                                                 $adv_opt_button->set_sensitive(0);
+									    $disable->('adv_option');
 									    $$central_widget->destroy;
 									    $windows = 0;
 									    advanced_install();
 									}),
-						      gtksignal_connect($font_button = new Gtk2::Button(N("Font List")),
+						      gtksignal_connect($button->{font_list} = new Gtk2::Button(N("Font List")),
 									clicked => sub {
-                                                 $font_button->set_sensitive(0);
-                                                 $adv_opt_button->set_sensitive(1);
+									    $disable->('font_list');
 									    $$central_widget->destroy;
 									    create_fontsel();
 									}),
@@ -558,8 +561,9 @@ sub interactive_mode() {
 			    ),
 		   ),
 	  );
+
     $central_widget = \$font_sel;
-    $font_button->set_sensitive(0);
+    $disable->('font_list');
     $window1->{rwindow}->show_all;
     $window1->{rwindow}->realize;
     $window1->main;
