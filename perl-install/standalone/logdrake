@@ -428,7 +428,7 @@ my $initdir = "/etc/init.d";
     }
   
     $in->ask_from(_("service setting"),
-		  _("You will receive an alert if one of the selected service is no more running"),
+		  _("You will receive an alert if one of the selected services is no more running"),
 		  [ map { { label => "$_", val => \${ $_ }, type => "bool", text => "$service->{ $_ }" } } @installed_d
 		  ]) or goto begin;
 
