@@ -529,6 +529,7 @@ sub load_raw {
     my $cz = "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz-" . c::kernel_version();
     if (!-e $cz) {
 	unlink $_ foreach glob_("/lib/modules*.cz*");
+	require install_any;
         install_any::getAndSaveFile("Mandrake/mdkinst$cz", $cz) or die "failed to get modules $cz: $!";
     }
     eval {
