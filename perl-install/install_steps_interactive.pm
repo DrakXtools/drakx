@@ -716,7 +716,7 @@ sub setupBootloader {
 	$::expert and $o->ask_yesorno('', _("Do you want to use LILO?"), 1) || return;
     
 	my @l = (
-_("Boot device") => { val => \$b->{boot}, list => [ map { "/dev/$_->{device}" } @{$o->{hds}}, @{$o->{fstab}}, detect_devices::floppies ], not_edit => !$::expert },
+_("Boot device") => { val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } @{$o->{hds}}, @{$o->{fstab}}), detect_devices::floppies ], not_edit => !$::expert },
 _("Linear (needed for some SCSI drives)") => { val => \$b->{linear}, type => "bool", text => _("linear") },
 _("Compact") => { val => \$b->{compact}, type => "bool", text => _("compact") },
 _("Delay before booting default image") => \$b->{timeout},
