@@ -21,47 +21,72 @@ use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
+use Xconfig::main;
+use Xconfig::xfree;
+use Xconfig::default;
 use interactive;
-use modules;
-use Xconfigurator;
-use Xconfig;
 use c;
 
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: XFdrake [--xf3] [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
+my ($configure_this) = grep { !/^-/ } @ARGV;
+$configure_this ||= 'everything';
 
-my $X = {};
+/-h/ || $configure_this !~ /^(resolution|monitor|everything|auto_install)/ and die <<'EOF';
+usage: XFdrake [--expert] [--noauto] [--skiptest] [--auto] [everything]
+       XFdrake [--noauto] monitor
+       XFdrake resolution
+EOF
 
-$::force_xf3 = /-xf3/;
-$::beginner = /-beginner/;
+my $auto = /-auto/;
 $::expert = /-expert/;
-$::auto = /-auto/;
 $::noauto = /-noauto/;
 $::testing = /-testing/;
-$X->{skiptest} = /-skiptest/;
-
-my $in = 'interactive'->vnew('su', 'X');
-
--r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
-
-my $f = "/usr/X11R6/lib/X11/rgb.txt"; #- this one is on all platform (instead of Cards ?)
-$in->do_pkgs->install('XFree86', 'XFree86-75dpi-fonts') if !-e $f;
--e $f or die "install XFree86 first!\n";
-
-`pidof xfs` > 0 or system("/etc/rc.d/init.d/xfs start") if !$X->{skiptest};
-
-system("mount /proc 2>/dev/null"); # ensure /proc is mounted for pci probing
 
 begin:
-Xconfig::getinfo($X);
-Xconfig::getinfoFromXF86Config($X); #- take default from here at least.
+{ 
+    $X->{skiptest} = /-skiptest/;
 
-my $allowNVIDIA_rpms;
-{
+    my $in = 'interactive'->vnew('su', 'X');
+
+    $::isEmbedded and kill USR2, $::CCPID;
+
+    my $rc = do {	
+	if ($configure_this eq 'everything') {
+	    check_XFree($in);
+	    Xconfig::main::configure_everything($in, Xconfig::default::configure(), $in->do_pkgs, $auto, { allowNVIDIA_rpms => allowNVIDIA_rpms() });
+	} elsif ($configure_this eq 'auto_install') {
+	    Xconfig::main::configure_everything_auto_install(Xconfig::default::configure(), $in->do_pkgs, {}, { allowNVIDIA_rpms => allowNVIDIA_rpms() });
+	} elsif ($configure_this eq 'monitor') {
+	    Xconfig::main::configure_monitor($in, Xconfig::xfree->read);
+	} elsif ($configure_this eq 'resolution') {
+	    Xconfig::main::configure_resolution($in, Xconfig::xfree->read);
+	}
+    };
+    $rc && $rc eq 'config_changed' and ask_for_X_restart($in);
+
+    $in->exit(0) if !$::isEmbedded;
+
+    kill USR1, $::CCPID;
+    goto begin;
+}
+
+sub check_XFree {
+    my ($in) = @_;
+
+    my $f = "/usr/X11R6/lib/X11/rgb.txt"; #- this one is on all platform
+    -e $f or $in->do_pkgs->install('XFree86', 'XFree86-75dpi-fonts');
+    -e $f or die "install XFree86 first!\n";
+
+    system("mount /proc 2>/dev/null"); # ensure /proc is mounted for pci probing
+}
+
+sub allowNVIDIA_rpms {
+    my $allowNVIDIA_rpms;
     my (%list, %select);
+
     eval {
 	require urpm;
 	my $urpm = new urpm;
@@ -90,12 +115,33 @@ my $allowNVIDIA_rpms;
     if (!$allowNVIDIA_rpms) {
 	$allowNVIDIA_rpms = system("modprobe NVdriver 2>/dev/null") == 0 && []; #- empty list but true.
     }
+    $allowNVIDIA_rpms;
 }
 
-$::isEmbedded and kill USR2, $::CCPID;
-Xconfigurator::main($X, $in, $in->do_pkgs, 
-		    { allowFB          => $::expert,
-		      allowNVIDIA_rpms => $allowNVIDIA_rpms });
-!$::isEmbedded and $in->exit(0);
-kill USR1, $::CCPID;
-goto begin;
+sub ask_for_X_restart {
+    my ($in) = @_;
+
+    $::isStandalone && $in->isa('interactive::gtk') or return;
+
+    my ($wm, $pid) = any::running_window_manager();
+
+    if (!$wm) {
+    	$in->ask_warn('', _("Please log out and then use Ctrl-Alt-BackSpace"));
+	return;
+    }
+
+    $in->ask_okcancel('', _("Please relog into %s to activate the changes", ucfirst (lc $wm)), 1) or return;
+
+    fork and $in->exit;
+    any::ask_window_manager_to_logout($wm);
+    
+    open STDIN, "</dev/zero";
+    open STDOUT, ">/dev/null";
+    open STDERR, ">&STDERR";
+    c::setsid();
+    exec qw(perl -e), q{
+	my ($wm, $pid) = @_;
+	for (my $nb = 30; $nb && -e "/proc/$pid"; $nb--) { sleep 1 }
+	system("killall X ; killall -15 xdm gdm kdm prefdm") if $nb;
+    }, $wm, $pid;
+}
