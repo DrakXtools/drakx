@@ -1,9 +1,26 @@
+ARCH	:= $(patsubst i%86,i386,$(shell uname -m))
+ARCH	:= $(patsubst sparc%,sparc,$(ARCH))
+ARCH	:= $(patsubst amd64,x86_64,$(ARCH))
+
+ifeq (i386,$(ARCH))
+HAS_VBE	= y
+endif
+ifeq (x86_64,$(ARCH))
+HAS_VBE = y
+endif
+
 CC	= gcc
 CFLAGS	= -O -Wall # -g -DDEBUG
 INCS	= -I.
-LDFLAGS	= -lm -L. -lint10 -lx86emu
+LDFLAGS	= -lm
+ifeq (y,$(HAS_VBE))
+LDFLAGS	+= -L. -lint10 -lx86emu
 OBJS	= ddcxinfos.o vesamode.o vbe.o
 LIBS	= libint10.a libx86emu.a
+endif
+ifeq (,$(OBJS))
+OBJS	= not_handled.o
+endif
 TARGETS	= ddcxinfos
 
 all: $(TARGETS)
