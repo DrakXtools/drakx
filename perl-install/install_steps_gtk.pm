@@ -193,7 +193,7 @@ sub new($$) {
 		0;
 	    };
 	    my @servers = qw(FBDev VGA16); #-)
-	    @servers = qw(3DLabs) if arch() eq "alpha";
+	    @servers = qw(SVGA 3DLabs TGA) if arch() eq "alpha";
 	    @servers = qw(Mach64) if arch() =~ /^sparc/;
 
 	    foreach (@servers) {

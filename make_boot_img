@@ -121,6 +121,7 @@ sub boot_img_alpha {
     mkdir "$mnt/etc", 0777;
     output("$mnt/etc/aboot.conf", 
 "0:vmlinux.gz initrd=$type.rdz mdkinst rw ramdisk=32000
+1:vmlinux.gz initrd=$type.rdz mdkinst rw ramdisk=32000 text
 ");
     _ "sync";
     _ "df $mnt";
