@@ -627,7 +627,7 @@ sub Resize {
 	    write_partitions($in, $hd) or return;
 	    if (defined (my $free = fs::df($part))) {
 		$nice_resize{reiserfs} = 1;		  
-		$min = max($min, $free);
+		$min = max($min, $part->{size} - $free);
 	    }
 	} elsif (isThisFs('xfs', $part) && isLVM($hd) && $::isStandalone && isMounted($part)) {
 	    $min = $part->{size}; #- ensure the user can only increase
@@ -675,13 +675,13 @@ sub Resize {
     } elsif ($nice_resize{ext2}) {
 	my $s = int(($part->{size} << 9) / $block_size);
 	log::l("resize2fs $nice_resize{ext2} to size $s in block of $block_size bytes");
-	system "resize2fs", "-pf", $nice_resize{ext2}, $s;
+	run_program::run("resize2fs", "-pf", $nice_resize{ext2}, $s);
     } elsif ($nice_resize{reiserfs}) {
 	log::l("reiser resize to $part->{size} sectors");
-	install_any::check_prog ("resize_reiserfs") if $::isInstall;
-	system "resize_reiserfs", "-f", "-q", "-s" . $part->{size}/2 . "K", devices::make($part->{device});
+	run_program::run("resize_reiserfs", "-f", "-q", "-s" . $part->{size}/2 . "K", devices::make($part->{device}));
     } elsif ($nice_resize{xfs}) {
-	system "xfs_growfs", $part->{mntpoint};
+	#- happens only with mounted LVM, see above
+	run_program::run("xfs_growfs", $part->{mntpoint});
     }
 
     if (%nice_resize) {
