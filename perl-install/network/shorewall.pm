@@ -51,7 +51,7 @@ sub default_interfaces {
     if (@l == 1) {
 	$conf{net_interface} = $l[0];
     } else {
-	$conf{net_interface} = network::netconnect::get_net_device() or return;
+	$conf{net_interface} = network::netconnect::get_net_device() || $l[0];
 	$conf{loc_interface} = [ grep { $_ ne $conf{net_interface} } @l ];
     }
     \%conf;
