@@ -143,24 +143,37 @@ sub choices {
     @resolutions = filter_using_HorizSync_VertRefresh($monitors->[0]{HorizSync}, $monitors->[0]{VertRefresh}, @resolutions) if $monitors->[0]{HorizSync};
     @resolutions = filter_using_VideoRam($card->{VideoRam}, @resolutions) if $card->{VideoRam};
 
-    my $x_res = do {
-	my $res = $resolution_wanted->{X} || ($monitors->[0]{ModelName} =~ /^Flat Panel (\d+x\d+)$/ ? $1 : size2default_resolution($monitors->[0]{diagonal_size} * 1.08 || 14));
-	my $x_res = first(split 'x', $res);
+    if ($resolution_wanted->{X} && !$resolution_wanted->{Y}) {
+	#- assuming ratio 4/3
+	$resolution_wanted->{Y} = round($resolution_wanted->{X} * 3 / 4);
+    } elsif (!$resolution_wanted->{X}) {
+	if ($monitors->[0]{preferred_resolution}) {
+	    put_in_hash($resolution_wanted, $monitors->[0]{preferred_resolution});
+	} elsif ($monitors->[0]{ModelName} =~ /^Flat Panel (\d+)x(\d+)$/) {
+	    put_in_hash($resolution_wanted, { X => $1, Y => $2 });
+	} else {
+	    my ($X, $Y) = split('x', size2default_resolution($monitors->[0]{diagonal_size} * 1.08 || 14));
+	    put_in_hash($resolution_wanted, { X => $X, Y => $Y });
+	}
+    }
+    my @matching = grep { $_->{X} eq $resolution_wanted->{X} && $_->{Y} eq $resolution_wanted->{Y} } @resolutions;
+    if (!@matching) {
+	#- hard choice :-(
+	#- first trying the greater resolution with same ratio
+	my $ratio = $resolution_wanted->{X} / $resolution_wanted->{Y};
+	@matching = grep { abs($ratio - $_->{X} / $_->{Y}) < 0.01 } @resolutions;
+    }
+    if (!@matching) {
+	#- really hard choice :'-(
 	#- take the first available resolution <= the wanted resolution
-	max map { if_($_->{X} <= $x_res, $_->{X}) } @resolutions;
-    };
+	@matching = grep { $_->{X} < $resolution_wanted->{X} } @resolutions;
+    }
 
-    my @matching = grep { $_->{X} eq $x_res } @resolutions;
-    my @Depths = map { $_->{Depth} } @matching;
-
-    my $Depth = $resolution_wanted->{Depth};
-    $Depth = $prefered_depth if !$Depth || !member($Depth, @Depths);
-    $Depth = max(@Depths)    if !$Depth || !member($Depth, @Depths);
-
-    #- finding it in @resolutions (well @matching)
-    #- (that way, we check it exists, and we get field "bios" for fbdev)
-    my @default_resolutions = sort { $b->{Y} <=> $a->{Y} } grep { $_->{Depth} eq $Depth } @matching;
-    my $default_resolution = (find { $resolution_wanted->{Y} eq $_->{Y} } @default_resolutions) || $default_resolutions[0];
+    my $max_Depth = max(map { $_->{Depth} } @matching);
+    my $default_resolution;
+    foreach my $Depth ($resolution_wanted->{Depth}, $prefered_depth, $max_Depth) {
+	$default_resolution = find { $_->{Depth} eq $Depth } @matching and last;
+    }
 
     $default_resolution, @resolutions;
 }
@@ -190,7 +203,10 @@ sub configure {
 sub configure_auto_install {
     my ($raw_X, $card, $monitors, $old_X) = @_;
 
-    my $resolution_wanted = { X => $old_X->{resolution_wanted}, Depth => $old_X->{default_depth} };
+    my $resolution_wanted = do {
+	my ($X, $Y) = split('x', $old_X->{resolution_wanted});
+	{ X => $X, Y => $Y, Depth => $old_X->{default_depth} };
+    };
 
     my ($default_resolution) = choices($raw_X, $resolution_wanted, $card, $monitors);
     $default_resolution or die "you selected an unusable depth";

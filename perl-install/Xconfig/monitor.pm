@@ -178,10 +178,15 @@ sub getinfoFromDDC() {
 	$monitor->{VideoRam_probed} = $1;
     }
     $monitor->{ModeLine} = Xconfig::xfree::default_ModeLine();
-    foreach (@{$monitor->{detailed_timings} || []}) {
-	next if $_->{bad_ratio};
+    my $detailed_timings = $monitor->{detailed_timings} || [];
+    foreach (grep { !$_->{bad_ratio} } @$detailed_timings) {
 	unshift @{$monitor->{ModeLine}},
 	  { val => $_->{ModeLine}, pre_comment => $_->{ModeLine_comment} . "\n" };
+
+	if (@$detailed_timings == 1) {
+	    #- should we care about {has_preferred_timing} ?
+	    $monitor->{preferred_resolution} = { X => $_->{horizontal_active}, Y => $_->{vertical_active} };
+	}
     }
 
     if ($monitor->{EISA_ID}) {
