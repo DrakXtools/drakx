@@ -702,6 +702,10 @@ sub get_usermode() { $sysconfig{USER_MODE} eq 'expert' ? 1 : 0 }
 
 sub set_jap_textmode {
     my $textmode = ($_[0] ? 'cjk' : '');
+    # Do not write mime.convs if the file does not exist, as then
+    # CUPS is not installed and the created mime.convs will be broken.
+    # When installing CUPS later it will not work.
+    return 1 if (! -r "$::prefix/etc/cups/mime.convs");
     substInFile {
         s!^(\s*text/plain\s+\S+\s+\d+\s+)\S+(\s*$)!$1${textmode}texttops$2!        
     } "$::prefix/etc/cups/mime.convs";
@@ -719,11 +723,44 @@ sub get_jap_textmode() {
 # Handling of /etc/cups/cupsd.conf
 
 sub read_cupsd_conf() {
-    cat_("$::prefix/etc/cups/cupsd.conf");
+    # If /etc/cups/cupsd.conf a default cupsd.conf will be put out to avoid
+    # writing of a broken cupsd.conf file when we write it back later.
+    my @cupsd_conf = cat_("$::prefix/etc/cups/cupsd.conf");
+    if (!@cupsd_conf) {
+	@cupsd_conf = map { /\n$/s or "$_\n" } split('\n',
+'LogLevel info
+TempDir /var/spool/cups/tmp
+Port 631
+Browsing On
+BrowseAddress @LOCAL
+BrowseDeny All
+BrowseAllow 127.0.0.1
+BrowseAllow @LOCAL
+BrowseOrder deny,allow
+<Location />
+Order Deny,Allow
+Deny From All
+Allow From 127.0.0.1
+Allow From @LOCAL
+</Location>
+<Location /admin>
+AuthType Basic
+AuthClass System
+Order Deny,Allow
+Deny From All
+Allow From 127.0.0.1
+</Location>
+');
+    }
+    return @cupsd_conf;
 }
 
 sub write_cupsd_conf {
     my (@cupsd_conf) = @_;
+    # Do not write cupsd.conf if the file does not exist, as then
+    # CUPS is not installed and the created cupsd.conf will be broken.
+    # When installing CUPS later it will not start.
+    return 1 if (! -r "$::prefix/etc/cups/cupsd.conf");
     output("$::prefix/etc/cups/cupsd.conf", @cupsd_conf);
 }
 
@@ -1386,6 +1423,7 @@ sub clean_cups_config {
 # Handling of /etc/cups/client.conf
 
 sub read_client_conf() {
+    return (0, undef) if (! -r "$::prefix/etc/cups/client.conf");
     my @client_conf = cat_("$::prefix/etc/cups/client.conf");
     my @servers = handle_configs::read_directives(\@client_conf, 
 						  "ServerName");
@@ -1396,6 +1434,8 @@ sub read_client_conf() {
 
 sub write_client_conf {
     my ($daemonless_cups, $remote_cups_server) = @_;
+    # Create the directory for client.conf if needed
+    (-d "$::prefix/etc/cups/" ) || mkdir ("$::prefix/etc/cups/") || return 1;
     my (@client_conf) = cat_("$::prefix/etc/cups/client.conf");
     if ($daemonless_cups) {
 	handle_configs::set_directive(\@client_conf, 
