@@ -72,19 +72,7 @@ if ($type eq 'fileshare') {
     $in->exit(0);
 }
 
-my $all_hds =
-	catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) }
-	  sub {
-	      my $err = formatError($@);
-	      if ($err =~ s/ask_before_blanking://) {
-		  $in->ask_okcancel(_("Error"),
-[_("I can't read your partition table, it's too corrupted for me :(
-I'll try to go on blanking bad partitions"), $err]);
-              } else {
-	          $in->ask_warn('', $err);
-		  1;
-	      }
-	  };
+my $all_hds = fsedit::get_hds({}, $in);
 
 $SIG{__DIE__} = sub { my $m = chomp_($_[0]); log::l("ERROR: $m") };
 my $fstab = [ fsedit::get_all_fstab($all_hds) ];
