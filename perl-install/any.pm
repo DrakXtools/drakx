@@ -17,7 +17,7 @@ use modules;
 use log;
 
 sub drakx_version { 
-    sprintf "DrakX v%s built %s", $::testing ? ('TEST', scalar gmtime()) : (split('/', cat_("/usr/share/VERSION")))[2,3];
+    sprintf "DrakX v%s built %s", $::testing ? ('TEST', scalar gmtime()) : (split('/', cat_("$ENV{SHARE_PATH}/VERSION")))[2,3];
 }
 
 sub facesdir {
