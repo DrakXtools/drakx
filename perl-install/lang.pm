@@ -1,4 +1,4 @@
-package lang;
+ package lang;
 
 use diagnostics;
 use strict;
@@ -13,25 +13,25 @@ use log;
 # languages, carefully choosen)
 my @fields =
 my %languages = (
-  "en"  => [ "English",			undef,	      "en", "en_US" ],
-"fr_FR" => [ "French (France)",		"iso-8859-1", "fr", "fr_FR" ],
-"de_DE" => [ "German (Germany)",	"iso-8859-1", "de", "de_DE" ],
-  "hu"  => [ "Hungarian", 		"iso-8859-2", "hu", "hu" ],
-  "is"  => [ "Icelandic", 		"iso-8859-1", "is", "is" ],
-  "id"  => [ "Indonesian",		"iso-8859-1", "id", "id" ],
-  "it"  => [ "Italian",   		"iso-8859-1", "it", "it_IT" ],
-  "ja"  => [ "Japanese",		"jisx0208",   "ja", "ja_JP.ujis" ],
-  "no"  => [ "Norwegian (Bokmaal)",	"iso-8859-1", "no", "no:no\@nynorsk" ],
-"no\@nynorsk" => [ "Norwegian (Nynorsk)","iso-8859-1","no", "no\@nynorsk" ],
-"pt_BR" => [ "Portuguese (Brazil)",	"iso-8859-1", "pt", "pt_BR:pt_PT" ],
-"pt_PT" => [ "Portuguese (Portugal)",	"iso-8859-1", "pt", "pt_PT:pt_BR" ],
-  "ro"  => [ "Romanian",  		"iso-8859-2", "ro", "ro" ],
-  "ru"  => [ "Russian",   		"koi8-r",     "ru", "ru" ],
-  "sk"  => [ "Slovak",    		"iso-8859-2", "sk", "sk" ],
-"es_ES" => [ "Spanish (Spain)",		"iso-8859-1", "es", "es" ],
-  "tr"  => [ "Turkish",	 		"iso-8859-9", "tr", "tr" ],
-  "uk"  => [ "Ukrainian", 		"koi8-u",     "uk", "uk" ],
-  "wa"  => [ "Walon",     		"iso-8859-1", "wa", "wa:fr_BE" ],
+  'en'  => [ 'English',			undef,	      'en', 'en_US' ],
+'fr_FR' => [ 'French (France)',		'iso-8859-1', 'fr', 'fr_FR' ],
+'de_DE' => [ 'German (Germany)',	'iso-8859-1', 'de', 'de_DE' ],
+  'hu'  => [ 'Hungarian', 		'iso-8859-2', 'hu', 'hu' ],
+  'is'  => [ 'Icelandic', 		'iso-8859-1', 'is', 'is' ],
+  'id'  => [ 'Indonesian',		'iso-8859-1', 'id', 'id' ],
+  'it'  => [ 'Italian',   		'iso-8859-1', 'it', 'it_IT' ],
+  'ja'  => [ 'Japanese',		'jisx0208',   'ja', 'ja_JP.ujis' ],
+  'no'  => [ 'Norwegian (Bokmaal)',	'iso-8859-1', 'no', 'no:no@nynorsk' ],
+'no@nynorsk' => [ 'Norwegian (Nynorsk)','iso-8859-1','no', 'no@nynorsk' ],
+'pt_BR' => [ 'Portuguese (Brazil)',	'iso-8859-1', 'pt', 'pt_BR:pt_PT' ],
+'pt_PT' => [ 'Portuguese (Portugal)',	'iso-8859-1', 'pt', 'pt_PT:pt_BR' ],
+  'ro'  => [ 'Romanian',  		'iso-8859-2', 'ro', 'ro' ],
+  'ru'  => [ 'Russian',   		'koi8-r',     'ru', 'ru' ],
+  'sk'  => [ 'Slovak',    		'iso-8859-2', 'sk', 'sk' ],
+'es_ES' => [ 'Spanish (Spain)',		'iso-8859-1', 'es', 'es' ],
+  'tr'  => [ 'Turkish',	 		'iso-8859-9', 'tr', 'tr' ],
+  'uk'  => [ 'Ukrainian', 		'koi8-u',     'uk', 'uk' ],
+  'wa'  => [ 'Walon',     		'iso-8859-1', 'wa', 'wa:fr_BE' ],
 );
 
 my %charsets = (

@@ -139,7 +139,7 @@ sub add($$$;$) {
       ($part->{mntpoint} = 'swap') :
       $options->{force} || check_mntpoint($part->{mntpoint}, $hd, $part, $hds);
 
-    partition_table::add($hd, $part, $options->{want_primary});
+    partition_table::add($hd, $part, $options->{primaryOrExtended});
 }
 
 sub removeFromList($$$) {

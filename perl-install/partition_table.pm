@@ -401,7 +401,7 @@ The only solution is to move your primary partitions to have the hole next to th
 }
 
 sub add($$;$) {
-    my ($hd, $part, $want_primary) = @_;
+    my ($hd, $part, $primaryOrExtended) = @_;
 
     $part->{notFormatted} = 1;
     $part->{isFormatted} = 0;
@@ -412,7 +412,8 @@ sub add($$;$) {
 
     my $e = $hd->{primary}{extended};
 
-    if (is_empty_array_ref($hd->{primary}{normal}) || $want_primary) {
+    if ($primaryOrExtended eq 'Primary' || 
+	$primaryOrExtended ne 'Extended' && is_empty_array_ref($hd->{primary}{normal})) {
 	eval { add_primary($hd, $part) };
 	return unless $@;
     }
