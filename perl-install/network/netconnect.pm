@@ -754,7 +754,7 @@ or skip and do it later."),
                         }
                         return "adsl_no_firmawre" if $adsl_answer eq N("Do it later");
 
-                        my $_b = before_leaving { fs::umount('/mnt') } if $mounted;
+                        my $_b = $mounted && before_leaving { fs::umount('/mnt') };
                         if (!$adsl_failed) {
                             if (-e "$source/$file") { 
                                 cp_af("$source/$file", $destination) if !$::testing;

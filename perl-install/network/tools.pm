@@ -199,10 +199,14 @@ sub use_floppy {
     my $floppy = detect_devices::floppy();
     $in->ask_okcancel(N("Insert floppy"),
 		      N("Insert a FAT formatted floppy in drive %s with %s in root directory and press %s", $floppy, $file, N("Next"))) or return;
-    eval { fs::mount(devices::make($floppy), '/mnt', 'vfat', 'readonly'); 1 } or my $failed = N("Floppy access error, unable to mount device %s", $floppy);
-    log::explanations($failed || "Mounting floppy device $floppy in /mnt");
-
-    return '/mnt', $failed;
+    if (eval { fs::mount(devices::make($floppy), '/mnt', 'vfat', 'readonly'); 1 }) {
+	log::explanations("Mounting floppy device $floppy in /mnt");
+	'/mnt';
+    } else {
+	my $failed = N("Floppy access error, unable to mount device %s", $floppy);
+	log::explanations($failed);
+	undef, $failed;
+    }
 }
 
 
