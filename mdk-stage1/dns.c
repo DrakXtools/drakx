@@ -38,7 +38,13 @@
 
 int mygethostbyname(char * name, struct in_addr * addr)
 {
-	struct hostent * h = gethostbyname(name);
+	struct hostent * h;
+
+        /* prevent from timeouts */
+        if (dns_server.s_addr == 0) 
+                return -1;
+
+        h = gethostbyname(name);
 	if (!h) {
 		if (domain) {
 			// gethostbyname from dietlibc doesn't support domain handling
@@ -65,6 +71,11 @@ char * mygethostbyaddr(char * ipnum)
 {
 	struct in_addr in;
 	struct hostent * host;
+
+        /* prevent from timeouts */
+        if (dns_server.s_addr == 0) 
+                return NULL;
+
 	if (!inet_aton(ipnum, &in))
 		return NULL;
 	host = gethostbyaddr(&(in.s_addr), sizeof(in.s_addr) /* INADDRSZ */, AF_INET);

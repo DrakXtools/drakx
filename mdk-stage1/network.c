@@ -348,8 +348,12 @@ static void static_ip_callback(char ** strings)
 {
 	struct in_addr addr;
 
-	if (!inet_aton(strings[0], &addr))
+        static int done = 0;
+        if (done)
+                return;
+	if (streq(strings[0], "") || !inet_aton(strings[0], &addr))
 		return;
+        done = 1;
 
 	if (!strcmp(strings[1], "")) {
 		char * ptr;
@@ -397,6 +401,11 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 
 		if (!inet_aton(answers[1], &dns_server)) {
 			log_message("invalid DNS");
+			dns_server.s_addr = 0; /* keep an understandable state */
+		}
+
+		if (streq(answers[0], answers[1])) {
+			log_message("IP and DNS are the same, guess you don't want a DNS, disabling it");
 			dns_server.s_addr = 0; /* keep an understandable state */
 		}
 
