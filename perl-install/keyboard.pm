@@ -236,7 +236,7 @@ arch() =~ /^sparc/ ? (
 #-"tw => [ N_("Chineses bopomofo"), "tw",           "tw",    1 ],
  "ua" => [ N_("Ukrainian"),      "ua",              "ua",    1 ],
  "uk" => [ N_("UK keyboard"),    "uk",              "gb",    0 ],
- "us" => [ N_("US keyboard"),    "us",              "us",    0 ],
+ "us" => [ N_("US keyboard"),    "us",              "en_US", 0 ],
  "us_intl" => [ N_("US keyboard (international)"), "us-latin1", "us_intl", 0 ],
  "vn" => [ N_("Vietnamese \"numeric row\" QWERTY"), "vn-tcvn", "vn(toggle)", 0 ], 
  "yu" => [ N_("Yugoslavian (latin)"), "sr",         "yu",    0 ],
@@ -255,6 +255,13 @@ my %grp_toggles = (
     menu_toggle => N_("\"Menu\" key"),
     lwin_toggle => N_("Left \"Windows\" key"),
     rwin_toggle => N_("Right \"Windows\" key"),
+    ctrls_toggle => N_("Both Control keys simultaneously"),
+    alts_toggle => N_("Both Alt keys simultaneously"),
+    lshift_toggle => N_("Left Shift key"),
+    rshift_toggle => N_("Right Shift key"),
+    lalt_toggle => N_("Left Alt key"),
+    lctrl_toggle => N_("Left Control key"),
+    rctrl_toggle => N_("Right Control key"),
 );
 
 
