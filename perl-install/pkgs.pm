@@ -589,6 +589,8 @@ sub setSelectedFromCompssList {
 	my @values = map { $_->{values}[$ind] + (packageFlagUnskip($_) && packageName($_) !~ /^k/ ? 10 : 0) } @packages;
 	sort { $values[$b] <=> $values[$a] } 0 .. $#packages;
     };
+    #- select at least 25 for beginner installation.
+    $min_level < 25 && $::beginner and $min_level = 25;
     foreach (@places) {
 	my $p = $packages[$_];
 	next if packageFlagSkip($p);
