@@ -215,7 +215,7 @@ gtkflush();
 
 # Build the gui
 add_icon_path('/usr/share/pixmaps/harddrake2/');
-$w = ugtk2->new(N("Harddrake2 version %s", $harddrake::data::version));
+$w = ugtk2->new(N("Harddrake2"));
 local $::main_window;   # fake diagnostics pragma
 my ($menubar, $factory, $opt_menu, $help_menu);
 if ($::isEmbedded) {
