@@ -7,5 +7,5 @@ use common;
 
 sub check {
     my ($class, $in) = @_;
-    $class->raw_check($in, 'davfs', '/sbin/mount.davfs');
+    $in->do_pkgs->ensure_is_installed('davfs', '/sbin/mount.davfs');
 }

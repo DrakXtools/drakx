@@ -29,7 +29,7 @@ sub to_dev_raw {
 
 sub check {
     my ($class, $in) = @_;
-    $class->raw_check($in, 'nfs-utils-clients', '/usr/sbin/showmount');
+    $in->do_pkgs->ensure_is_installed('nfs-utils-clients', '/usr/sbin/showmount');
 }
 
 sub find_servers {

@@ -41,18 +41,5 @@ sub to_fstab_entry_raw {
     $fs_entry;
 }
 
-sub raw_check {
-    my ($class, $in, $pkg, $file) = @_;
-    if (! -e $file) {
-	$in->ask_okcancel('', _("The package %s needs to be installed. Do you want to install it?", $pkg), 1) or return;
-	$in->do_pkgs->install($pkg);
-    }
-    if (! -e $file) {
-	$in->ask_warn('', _("Mandatory package %s is missing", $pkg));
-	return;
-    }
-    1;
-}
-
 1;
 
