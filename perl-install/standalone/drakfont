@@ -279,6 +279,7 @@ sub print_list() {
 }
 
 sub dir_created() {
+  return if $::testing;
     -e $drakfont_dir or mkdir_p($drakfont_dir);
     -e $drakfont_dir . "/Type1"     or mkdir_p($drakfont_dir . "/Type1");
     -e $drakfont_dir . "/ttf"       or mkdir_p($drakfont_dir . "/ttf");
@@ -391,7 +392,7 @@ sub remove_gs_fonts() {
 
 sub remove_fonts() {
     my @list_dir;
-    -e $drakfont_dir . "/remove" or mkdir_p($drakfont_dir . "/remove");
+    -e $drakfont_dir . "/remove" or mkdir_p($drakfont_dir . "/remove") if !$::testing;
     interactive_progress($pbar, 1, N("done"));
     
     foreach my $i (@font_list) {
@@ -399,6 +400,7 @@ sub remove_fonts() {
         if (/.pfb$/ || /.gsf$/ || /.pfm$/ || /.pfa$/) {
             system("mv $_ $drakfont_dir/remove ");
         } else {
+	  next if $::testing;
 	    if (/.ttf$/) {
 		rm_rf($_);
 		# rebuild of the fonts.dir and fc-cache files
@@ -422,7 +424,7 @@ sub remove_fonts() {
     interactive_progress($pbar2, 0.01, N("xfs restart"));
     system("/etc/rc.d/init.d/xfs restart");
     system('xset fp rehash');
-    -e "/usr/share/ghostscript" and rm_rf("$drakfont_dir/remove");
+    -e "/usr/share/ghostscript" and rm_rf("$drakfont_dir/remove") if !$::testing;
     interactive_progress($pbar2, 0.01, N("done"));
 }
 
