@@ -60,6 +60,14 @@ my $window1;
 my $windows;
 my $status_box;
 my $main_box;
+my $wizard_buttons;
+my $previous_button;
+my $cancel_button;
+my $next_button;
+my $main_buttons;
+my $in_wizard = 0;
+my $config_written = 0;
+my $clients_set = 0;
 
 my $nfs_subnet;
 my $nfs_mask;
@@ -121,6 +129,12 @@ if ("@ARGV" =~ /--deluser/) {
 	my $cmd_line = 1;
 	deluser($cmd_line, $ARGV[1]);
 	exit(0);	
+}
+
+if ("@ARGV" =~ /--syncusers/) {
+	my $cmd_line = 1;
+	sync_users($cmd_line);
+	exit(0);
 }
 
 if ("@ARGV" =~ /--addclient/) {
@@ -262,78 +276,84 @@ sub interactive_mode() {
 		    if_(!$::isEmbedded, 0, $darea),
 		    1, gtkpack_(new Gtk2::HBox(0,2),
 				1, gtkpack_(new Gtk2::VBox(0,2),
-					    1, gtkpack($status_box = new Gtk2::VBox(0,5),
-						       $main_box = new Gtk2::VBox(0,10),
-						       ),
-					    1, gtkpack_(new Gtk2::HBox(0,2),
-							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
-								  gtksignal_connect(new Gtk2::Button(N("Enable Server")), clicked => sub {
-								      destroy_widget();
-								      $windows = 1;
-								      cursor_wait(); 
-								      enable_ts();
-								      cursor_norm();
-								  }),
-								  gtksignal_connect(new Gtk2::Button(N("Disable Server")), clicked => sub {
-								      destroy_widget();
-								      cursor_wait();
-								      disable_ts();
-								      cursor_norm(); 
-								  }),
-								  ),
-							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
-								  gtksignal_connect(new Gtk2::Button(N("Start Server")), clicked => sub { 
-								      destroy_widget();
-								      $windows = 0; 
-								      cursor_wait();	
-								      start_ts();
-								      cursor_norm();
-								  }),
-								  gtksignal_connect(new Gtk2::Button(N("Stop Server")), clicked => sub {
-								      destroy_widget();
-								      cursor_wait();
-								      stop_ts();
-								      cursor_norm();
-								  }),
-								  ),
-							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
-								  gtksignal_connect(new Gtk2::Button(N("Etherboot Floppy/ISO")), clicked => sub { 
-								      destroy_widget();
-								      $windows = 1; 
-								      make_boot();
-								  }),
-								  gtksignal_connect(new Gtk2::Button(N("Net Boot Images")), clicked => sub {
-								      destroy_widget();
-								      make_nbi();
-								  }),
-								  ),
-							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
-								  gtksignal_connect(new Gtk2::Button(N("Add/Del Users")), clicked => sub {
-								      destroy_widget();
-								      $windows = 0;
-								      maintain_users();
-								  }),
-								  gtksignal_connect(new Gtk2::Button(N("Add/Del Clients")), clicked => sub { destroy_widget(); maintain_clients() }),
-								  ),
-							1, new Gtk2::HBox(0,2),
-							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
-								gtksignal_connect(new Gtk2::Button(N("Help")),clicked => sub {
-									destroy_widget();
-									help();
-								}),
-								gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub {
-									write_conf_file();
-									if ($changes_made == 1) {
-										restart_server();
-									}
-									Gtk2->main_quit;
-								}),
-							),
+					1, gtkpack($status_box = new Gtk2::VBox(0,5),
+						$main_box = new Gtk2::VBox(0,10),
+					),
+					0, $wizard_buttons = gtkpack_(new Gtk2::HBox(1,2)),
+					1, gtkpack_($main_buttons = new Gtk2::HBox(0,2),
+						0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
+							gtksignal_connect(new Gtk2::Button(N("Enable Server")), clicked => sub {
+								destroy_widget();
+								$windows = 1;
+								cursor_wait(); 
+								enable_ts();
+								cursor_norm();
+							}),
+							gtksignal_connect(new Gtk2::Button(N("Disable Server")), clicked => sub {
+								destroy_widget();
+								cursor_wait();
+								disable_ts();
+								cursor_norm(); 
+							}),
+						),
+						0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
+							gtksignal_connect(new Gtk2::Button(N("Start Server")), clicked => sub { 
+								destroy_widget();
+								$windows = 0; 
+								cursor_wait();	
+								start_ts();
+								cursor_norm();
+							}),
+							gtksignal_connect(new Gtk2::Button(N("Stop Server")), clicked => sub {
+								destroy_widget();
+								cursor_wait();
+								stop_ts();
+								cursor_norm();
+							}),
+						),
+						0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
+							gtksignal_connect(new Gtk2::Button(N("Etherboot Floppy/ISO")), clicked => sub { 
+								destroy_widget();
+								$windows = 1; 
+								make_boot();
+							}),
+							gtksignal_connect(new Gtk2::Button(N("Net Boot Images")), clicked => sub {
+								destroy_widget();
+								make_nbi();
+							}),
+						),
+						0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
+							gtksignal_connect(new Gtk2::Button(N("Add/Del Users")), clicked => sub {
+								destroy_widget();
+								$windows = 0;
+								maintain_users();
+							}),
+							gtksignal_connect(new Gtk2::Button(N("Add/Del Clients")), clicked => sub { destroy_widget(); maintain_clients() }),
+						),
+						1, new Gtk2::HBox(0,2),
+						0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
+							gtksignal_connect(new Gtk2::Button(N("First Time Wizard")), clicked => sub {
+								destroy_widget();
+								start_wizard();
+							}),
+							new Gtk2::VBox(0,0),
+						),
+						0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
+							gtksignal_connect(new Gtk2::Button(N("Help")),clicked => sub {
+								destroy_widget();
+								help();
+							}),
+							gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub {
+								write_conf_file();
+								restart_server() if $changes_made == 1;
+								Gtk2->main_quit;
+							}),
 						),
 					),
 				),
-		    ),
-	   );
+			),
+		),
+	);
     $central_widget = \$main_box;
     $window1->{rwindow}->show_all;
     $window1->{rwindow}->realize;
@@ -341,6 +361,142 @@ sub interactive_mode() {
 
     $window1->main;
     ugtk2->exit(0);
+}
+
+sub start_wizard() {
+    text_view(N("
+ This wizard routine will:
+ 	1) Ask you to select either 'thin' or 'fat' clients.
+	2) Setup dhcp.
+	
+After doing these steps, the wizard will:
+	
+    a) Make all nbis.                                                                
+    b) Activate the server.                                                          
+    c) Start the server.                                                     
+    d) Synchronize the shadow files so that all users, including root, 
+       are added to the shadow\$\$CLIENT\$\$ file.                                              
+    e) Ask you to make a boot floppy.
+    f) If it's thin clients, ask if you want to restart KDM.
+"), "wizard");
+}
+
+sub do_wizard() {
+	destroy_widget();
+	$main_buttons->hide;
+	$in_wizard = 1;
+	$config_written = 0;
+	wizard_step(\&client_type, 1);
+}
+
+sub wizard_step {
+	my ($do_step, $step) = @_;
+	&$do_step();
+	gtkadd($wizard_buttons, 
+		gtksignal_connect($previous_button = new Gtk2::Button(N("<-- Wizard Previous Step")), clicked => sub { 
+			clear_buttons();
+			if ($step == 1) {
+				exit_wizard();
+				start_wizard();
+			}
+			wizard_step(\&client_type, 1) if $step == 2;
+			wizard_step(\&dhcpd_config, 2) if $step == 3;
+			wizard_step(\&make_nbis, 3) if $step == 4;
+			wizard_step(\&enable_ts, 4) if $step == 5;
+			wizard_step(\&restart_ts, 5) if $step == 6;
+			wizard_step(\&sync_users, 6) if $step == 7;
+			wizard_step(\&make_boot, 7) if $step == 8;
+		})
+	); 	
+	gtkadd($wizard_buttons, 
+		gtksignal_connect($cancel_button = new Gtk2::Button(N("Cancel Wizard")), clicked => sub { 
+			exit_wizard();
+		})
+	); 	
+	gtkadd($wizard_buttons, 
+		gtksignal_connect($next_button = new Gtk2::Button(N("Wizard Next Step -->")), clicked => sub { 
+			clear_buttons();
+			wizard_step(\&dhcpd_config, 2) if $step == 1;
+			if ($step == 2) {
+				if ($config_written == 1) {
+					wizard_step(\&make_nbis, 3);
+				} else {
+					$in->ask_warn('', N("Please save dhcpd config!"));
+					wizard_step(\&dhcpd_config, 2);
+				} 
+			}
+			wizard_step(\&enable_ts, 4) if $step == 3;				 
+			wizard_step(\&restart_ts, 5) if $step == 4;				 
+			wizard_step(\&sync_users, 6) if $step == 5;
+			wizard_step(\&make_boot, 7) if $step == 6;
+			wizard_step(\&restart_dm, 8) if $step == 7;
+		})
+	);
+	exit_wizard() if $step == 8; 	
+}
+
+sub exit_wizard() {
+	clear_buttons();
+	$in_wizard = 0;
+	$main_buttons->show;
+}
+
+sub clear_buttons() {
+	destroy_widget();
+	$previous_button->destroy;
+	$cancel_button->destroy;
+	$next_button->destroy;
+}
+
+sub client_type() {
+    text_view(N("Please select client type.
+    'Thin' clients run everything off the server's CPU/RAM, using the client display.
+    'Fat' clients use their own CPU/RAM but the server's filesystem."), "wizard");
+    gtkpack_($$central_widget,
+		1, gtkpack_(new Gtk2::HBox(1,0), 
+	    	0, new Gtk2::VBox(0,10),
+			1, gtksignal_connect(new Gtk2::CheckButton(N("Allow thin clients.")), 
+				clicked => sub { invbool \$thin_clients; client_set() }),	
+			0, new Gtk2::VBox(0,10)
+		)
+	)
+}
+
+sub make_nbis() {
+	my $buff = N("Creating net boot images for all kernels");
+	$in->ask_warn('', N("This will take a few minutes."));
+	cursor_wait();
+	system("/usr/bin/mknbi-set");
+	cursor_norm();
+	$buff .= "\n\n\t" . N("Done!");	
+	text_view($buff, "wizard");
+}
+
+sub sync_users {
+	my ($cmd_line) = @_;
+	my $buff = N("Syncing server user list with client list, including root.");
+	my @active_users = cat_("/etc/shadow");
+
+	local *SHADOW;
+	open(SHADOW, '> /etc/shadow$$CLIENT$$');
+		
+	#- only users with home dirs, and root
+	foreach my $user (@active_users) {
+		my @fields = split(/:/, $user);
+		if (-d "/home/" . $fields[0] || $fields[0] eq "root") {
+			print SHADOW $user;
+		}
+	}
+	close SHADOW;
+	$buff .= "\n\n\t" . N("Done!");
+	text_view($buff, "wizard") if !$cmd_line;
+}
+
+sub restart_dm() {
+	if ($clients_set) {
+    	my $result = $in->ask_okcancel('', N("In order to enable changes made for thin clients, the display manager must be restarted. Restart now?"));
+		system('/sbin/service dm restart') if $result;
+	}
 }
 
 sub about() {
@@ -354,11 +510,11 @@ sub about() {
 	- LTSP Project http://www.ltsp.org
 	- Michael Brown <mbrown\@fensystems.co.uk>
 
-"));
+"), "close");
 }
 
 sub text_view {
-    my ($text) = @_;
+    my ($text, $option) = @_;
     my $box;
     gtkpack($status_box,
 	    $box = gtkpack_(new Gtk2::VBox(0,10),
@@ -368,14 +524,18 @@ sub text_view {
 				),
 			),
 			0, gtkpack(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
-				gtksignal_connect(new Gtk2::Button(N("OK")), clicked => 
-					sub { destroy_widget() }),
+				gtksignal_connect(my $ok_button = new Gtk2::Button(N("OK")), clicked => sub { 
+					destroy_widget() if $option eq "close";
+					do_wizard() if $option eq "wizard"; 
+				}),
 			),
 		)
 	);
 	gtkset_size_request($box, 580, 280);
     $central_widget = \$box;
     $status_box->show_all;
+	$ok_button->hide if $in_wizard;
+	$main_buttons->hide if $in_wizard;
 }
 
 sub help() {
@@ -488,7 +648,7 @@ N("        - Create etherboot floppies/CDs:
         		
         	cat /usr/lib/etherboot/floppyload.bin \\
         		/usr/share/etherboot/start16.bin \\			
-        		/usr/lib/etherboot/zimg/3c509.zimg > /dev/fd0") . "\n\n");
+        		/usr/lib/etherboot/zimg/3c509.zimg > /dev/fd0") . "\n\n", "close");
 }
 
 sub make_boot() {
@@ -531,7 +691,7 @@ sub make_boot() {
 
 sub make_nbi() {
 	my $nbi_box;
-	my @kernels = grep { /vmlinuz/ } all("/boot");
+	my @kernels = grep { /vmlinuz-/ } all("/boot");
 	my $kernel;
 	my $nic;
 	
@@ -601,61 +761,61 @@ sub make_nbi() {
 			0, gtkadd(new Gtk2::HBox(0,10),
 				create_scrolled_window($tree_kernels),
 				gtkadd(new Gtk2::VBox(1,10),
-					gtksignal_connect(new Gtk2::Button(N("Build Whole Kernel -->")), clicked => 
-						sub { if ($kernel) {
-								$in->ask_warn('', N("This will take a few minutes."));
-								cursor_wait();
-								system("/usr/bin/mknbi-set -k /boot/$kernel");
-								$list_model->clear;
-								@nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
-								foreach (@nbis) {
-    								$list_model->append_set($iter, $_);		
-								}
-								cursor_norm(); 
-							} else {
-								$in->ask_warn('', N("No kernel selected!")) if !($kernel); 
-							}
-						}),
-					gtksignal_connect(new Gtk2::Button(N("Build Single NIC -->")), clicked => 
-						sub { if ($nic) {
-								system("/usr/bin/mknbi-set -k /boot/$kernel -r $nic");
-								$list_model->clear;
-								@nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
-								foreach (@nbis) {
-    								$list_model->append_set($iter, $_);	
-								} 
-							} else {
-								$in->ask_warn('', N("No NIC selected!"));
-							}
-						}),
-					gtksignal_connect(new Gtk2::Button(N("Build All Kernels -->")), clicked => sub {
-					                $in->ask_warn('', N("This will take a few minutes."));
+					gtksignal_connect(new Gtk2::Button(N("Build Whole Kernel -->")), clicked => sub { 
+						if ($kernel) {
+							$in->ask_warn('', N("This will take a few minutes."));
 							cursor_wait();
-							system("/usr/bin/mknbi-set");
+							system("/usr/bin/mknbi-set -k /boot/$kernel");
+							$list_model->clear;
+							@nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
+							foreach (@nbis) {
+    							$list_model->append_set($iter, $_);		
+							}
+							cursor_norm(); 
+						} else {
+							$in->ask_warn('', N("No kernel selected!")) if !($kernel); 
+						}
+					}),
+					gtksignal_connect(new Gtk2::Button(N("Build Single NIC -->")), clicked => sub { 
+						if ($nic) {
+							system("/usr/bin/mknbi-set -k /boot/$kernel -r $nic");
 							$list_model->clear;
 							@nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
 							foreach (@nbis) {
     							$list_model->append_set($iter, $_);	
-							}
-							cursor_norm(); 
-						}),
+							} 
+						} else {
+							$in->ask_warn('', N("No NIC selected!"));
+						}
+					}),
+					gtksignal_connect(new Gtk2::Button(N("Build All Kernels -->")), clicked => sub {
+						$in->ask_warn('', N("This will take a few minutes."));
+						cursor_wait();
+						system("/usr/bin/mknbi-set");
+						$list_model->clear;
+						@nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
+						foreach (@nbis) {
+    						$list_model->append_set($iter, $_);	
+						}
+						cursor_norm(); 
+					}),
 					new Gtk2::HBox(1,1),
-					gtksignal_connect(new Gtk2::Button(N("<-- Delete")), clicked => 
-						sub { my $nbi = "/var/lib/tftpboot/" . $nbi;
-							my $result = unlink($nbi) || warn("Can't delete $nbi...");
-							if ($result == 1) {
-								$list_model->remove($nbi_iter);
-							}
-						}),
-					gtksignal_connect(new Gtk2::Button(N("Delete All NBIs")), clicked => 
-						sub { cursor_wait();
-							foreach (grep { /\.nbi/ } all("/var/lib/tftpboot")) {
-								my $nbi = "/var/lib/tftpboot/" . $_;
-								unlink($nbi) || warn("Can't delete $nbi...");
-							}
-							$list_model->clear;
-							cursor_norm();
-						}),	
+					gtksignal_connect(new Gtk2::Button(N("<-- Delete")), clicked => sub { 
+						my $nbi = "/var/lib/tftpboot/" . $nbi;
+						my $result = unlink($nbi) || warn("Can't delete $nbi...");
+						if ($result == 1) {
+							$list_model->remove($nbi_iter);
+						}
+					}),
+					gtksignal_connect(new Gtk2::Button(N("Delete All NBIs")), clicked => sub { 
+						cursor_wait();
+						foreach (grep { /\.nbi/ } all("/var/lib/tftpboot")) {
+							my $nbi = "/var/lib/tftpboot/" . $_;
+							unlink($nbi) || warn("Can't delete $nbi...");
+						}
+						$list_model->clear;
+						cursor_norm();
+					}),	
 					new Gtk2::HBox(1,1),
 				),
 				create_scrolled_window($list_nbis),
@@ -919,26 +1079,7 @@ sub maintain_clients() {
 	gtksignal_connect($check_allow_thin, clicked => 
 		sub { invbool \$thin_clients;
 			$check_thin->set_sensitive($thin_clients);
-			# we need to change some system files to allow the thin clients
-			# to access the server - enabling xdmcp and modify hosts.deny/hosts.allow for some security
-			# we also need to set runlevel to 5 and restart the display manager
-			if ($thin_clients == 1) {
-				substInFile { s/id:3:initdefault:/id:5:initdefault:/ } "/etc/inittab";
-				substInFile { s/! DisplayManager.requestPort:/DisplayManager.requestPort:/ } "/etc/X11/xdm/xdm-config";
-				substInFile { s/Enable=false/Enable=true/ } "/usr/share/config/kdm/kdmrc";
-				# This file had 2 "Enable=" entries, one for xdmcp and one for debug
-				change_gdm_xdmcp("true");
-				log::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
-				# just xdmcp in hosts.allow is enough for xdm & kdm, but gdm doesn't work - x11 doesn't help either
-				update_hosts_allow("enable");
-			} else {
-				substInFile { s/id:5:initdefault:/id:3:initdefault:/ } '/etc/inittab';
-				substInFile { s/DisplayManager.requestPort:/! DisplayManager.requestPort:/ } "/etc/X11/xdm/xdm-config";
-				substInFile { s/Enable=true/Enable=false/ } "/usr/share/config/kdm/kdmrc";
-				change_gdm_xdmcp("false");
-				log::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
-				update_hosts_allow("disable");
-			}
+			client_set();
 			$in->ask_warn('', N("Need to restart the Display Manager for full changes to take effect. \n(service dm restart - at the console)"));
 		}
 	);
@@ -947,6 +1088,30 @@ sub maintain_clients() {
 	$button_delete->set_sensitive(0);
 	$central_widget = \$client_box;
 	$client_box->show_all;
+}
+
+sub client_set() {
+	# we need to change some system files to allow the thin clients
+	# to access the server - enabling xdmcp and modify hosts.deny/hosts.allow for some security
+	# we also need to set runlevel to 5 and restart the display manager
+	if ($thin_clients == 1) {
+		substInFile { s/id:3:initdefault:/id:5:initdefault:/ } "/etc/inittab";
+		substInFile { s/! DisplayManager.requestPort:/DisplayManager.requestPort:/ } "/etc/X11/xdm/xdm-config";
+		substInFile { s/Enable=false/Enable=true/ } "/usr/share/config/kdm/kdmrc";
+		# This file had 2 "Enable=" entries, one for xdmcp and one for debug
+		change_gdm_xdmcp("true");
+		log::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
+		# just xdmcp in hosts.allow is enough for xdm & kdm, but gdm doesn't work - x11 doesn't help either
+		update_hosts_allow("enable");
+	} else {
+		substInFile { s/id:5:initdefault:/id:3:initdefault:/ } '/etc/inittab';
+		substInFile { s/DisplayManager.requestPort:/! DisplayManager.requestPort:/ } "/etc/X11/xdm/xdm-config";
+		substInFile { s/Enable=true/Enable=false/ } "/usr/share/config/kdm/kdmrc";
+		change_gdm_xdmcp("false");
+		log::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
+		update_hosts_allow("disable");
+	}
+	$clients_set = 1;
 }
 
 sub dhcpd_config() {
@@ -1069,7 +1234,7 @@ sub dhcpd_config() {
 				new Gtk2::Label(N("dhcpd Server Configuration") . "\n\n" .
 					N("Most of these values were extracted\nfrom your running system.\nYou can modify as needed.")),
 				new Gtk2::HSeparator,
-				gtkadd((new Gtk2::HBox),
+				gtkadd(new Gtk2::HBox,
 					new Gtk2::Label(N("Dynamic IP Address Pool:")),
 				),
 				gtkadd(new Gtk2::HBox(0,0),
@@ -1177,7 +1342,8 @@ sub write_dhcpd_config {
 	print FHANDLE "}\n\n";
 	
 	print FHANDLE qq(# Include client machine configurations\ninclude "$client_cfg";\n);
-	close FHANDLE	
+	close FHANDLE;	
+	$config_written = 1;
 }
 
 sub write_eb_image {
@@ -1309,7 +1475,7 @@ sub service_change {
 		$buff_index++;
 	}
 	close STATUS;
-	unlink "/tmp/drakTSservice.status" or warn("Can't delete /tmp/drakTSservice.status\n");
+	unlink "/tmp/drakTSservice.status"; 
 	$buff_index;		
 }
 	
@@ -1345,7 +1511,9 @@ sub stop_ts {
 	my $buff_index = service_change("dhcpd", "stop", 2);
 	$buff_index = service_change("clusternfs", "stop", $buff_index);
 	$buff[$buff_index] = "\n\tDone!";	
-	
+
+	return if $in_wizard;
+		
 	if ($cmd_line == 1) {
 		print "@buff\n";
 		return;
@@ -1355,8 +1523,14 @@ sub stop_ts {
 
 }
 
+#- for the wizard, stop the server first
+sub restart_ts() {
+	stop_ts();
+	start_ts();
+}
+
 sub show_status() {
-    text_view("@buff");
+    text_view("@buff", "close");
 }
 
 sub adduser {
