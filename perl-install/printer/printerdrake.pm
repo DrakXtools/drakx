@@ -2881,8 +2881,8 @@ You should make sure that the page size and the ink type/printing mode (if avail
 	    }
 	    if ($printer->{ARGS}[$i]{type} eq 'enum') {
 		# enumerated option
-		push(@choicelists, []);
-		push(@shortchoicelists, []);
+		$choicelists[$i] = [];
+		$shortchoicelists[$i] = [];
 		foreach my $choice (@{$printer->{ARGS}[$i]{vals}}) {
 		    push(@{$choicelists[$i]}, $choice->{comment});
 		    push(@{$shortchoicelists[$i]}, $choice->{value});
@@ -2901,16 +2901,16 @@ You should make sure that the page size and the ink type/printing mode (if avail
 		    if ($printer->{ARGS}[$i]{name} ne 'PageRegion');
 	    } elsif ($printer->{ARGS}[$i]{type} eq 'bool') {
 		# boolean option
-		push(@choicelists, [($printer->{ARGS}[$i]{comment_true} ||
+		$choicelists[$i] = [($printer->{ARGS}[$i]{comment_true} ||
 				     $printer->{ARGS}[$i]{name} || "Yes"),
 				    ($printer->{ARGS}[$i]{comment_false} ||
 				     $printer->{ARGS}[$i]{name_false} ||
-				     "No")]);
-		push(@shortchoicelists, []);
+				     "No")];
+		$shortchoicelists[$i] = [];
 		my $numdefault = 
 		    ($optshortdefault =~ m!^\s*(true|on|yes|1)\s*$! ? 
 		     "1" : "0");
-		push(@userinputs, $choicelists[$i][1-$numdefault]);
+		$userinputs[$i] = $choicelists[$i][1-$numdefault];
 		push(@widgets,
 		     { label => $printer->{ARGS}[$i]{comment},
 		       val => \$userinputs[$i],
@@ -2921,9 +2921,9 @@ You should make sure that the page size and the ink type/printing mode (if avail
 		       help => $helptext });
 	    } else {
 		# numerical option
-		push(@choicelists, []);
-		push(@shortchoicelists, []);
-		push(@userinputs, $optshortdefault);
+		$choicelists[$i] = [];
+		$shortchoicelists[$i] = [];
+		$userinputs[$i] = $optshortdefault;
 		push(@widgets,
 		     { label => $printer->{ARGS}[$i]{comment} . 
 			   " ($printer->{ARGS}[$i]{min}... " .
