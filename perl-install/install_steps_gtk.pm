@@ -531,7 +531,7 @@ sub installPackages {
 	$method eq 'cdrom' and do {
 	    local $my_gtk::grab = 1;
 	    my $name = pkgs::mediumDescr($o->{packages}, $medium);
-	    print "\a";	    
+	    local $| = 1; print "\a";
 	    my $time = time();
 	    my $r = $name !~ /Application/ || ($o->{useless_thing_accepted2} ||= $o->ask_from_list_('', formatAlaTeX(_("
 Warning
