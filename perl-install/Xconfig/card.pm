@@ -21,7 +21,7 @@ my %VideoRams = (
    65536 => N_("64 MB or more"),
 );
 
-my $lib = (arch() =~ /x86_64/) ? "lib64" : "lib";
+my $lib = arch() =~ /x86_64/ ? "lib64" : "lib";
  
 my @xfree4_Drivers = ((arch() =~ /^sparc/ ? qw(sunbw2 suncg14 suncg3 suncg6 sunffb sunleo suntcx) :
 		    qw(apm ark chips cirrus cyrix glide i128 i740 i810 imstt 
