@@ -23,6 +23,9 @@ use strict qw(subs vars refs);
 #- compare a version string.
 use URPM;
 
+#- keep some packages...
+my $keep = 'kernel-BOOT';
+
 #- get basename for a file.
 sub basename { $_[0] =~ /([^\/]*)$/ ? $1 : $_[0]; }
 
@@ -149,21 +152,23 @@ sub sync_medium {
 sub sync_rpms {
     my ($source, $target, $flag) = @_;
 
-    #- search in source part.
-    foreach (keys %$source) {
-	unless ($target->{$_}) {
+    #- search in target part.
+    foreach (keys %$target) {
+	/$keep/ and next;
+	unless ($source->{$_}) {
 	    if ($flag->{verbose}) {
-		print "adding $source->{$_}{file}" . (-d $flag->{add} ? " to $flag->{add}\n" : " is neccessary!\n");
+		print "removing $target->{$_}{file}" . ($flag->{remove} ? " from $target->{$_}{dir}\n" : " is neccessary!\n");
+		my $k = $_;
 	    }
-	    if (-d $flag->{add}) {
-		cp("$source->{$_}{dir}/$source->{$_}{file}", $flag->{add});
-		chmod 0644, "$flag->{add}/$source->{$_}{file}";
+	    if ($flag->{remove}) {
+		rm("$target->{$_}{dir}/$target->{$_}{file}");
 	    }
 	}
     }
 
     #- search in both part.
     foreach (keys %$source) {
+	/$keep/ and next;
 	if ($target->{$_}) {
 	    if (URPM::ranges_overlap("== $source->{$_}{version}-$source->{$_}{release}",
 				     ">= $target->{$_}{version}-$target->{$_}{release}")) {
@@ -189,15 +194,16 @@ sub sync_rpms {
 	}
     }
 
-    #- search in target part.
-    foreach (keys %$target) {
-	unless ($source->{$_}) {
+    #- search in source part.
+    foreach (keys %$source) {
+	/$keep/ and next;
+	unless ($target->{$_}) {
 	    if ($flag->{verbose}) {
-		print "removing $target->{$_}{file}" . ($flag->{remove} ? " from $target->{$_}{dir}\n" : " is neccessary!\n");
-		my $k = $_;
+		print "adding $source->{$_}{file}" . (-d $flag->{add} ? " to $flag->{add}\n" : " is neccessary!\n");
 	    }
-	    if ($flag->{remove}) {
-		rm("$target->{$_}{dir}/$target->{$_}{file}");
+	    if (-d $flag->{add}) {
+		cp("$source->{$_}{dir}/$source->{$_}{file}", $flag->{add});
+		chmod 0644, "$flag->{add}/$source->{$_}{file}";
 	    }
 	}
     }
