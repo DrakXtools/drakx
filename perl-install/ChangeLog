@@ -1,3 +1,29 @@
+2000-09-22  DrakX <install@linux-mandrake.com>
+
+	* snapshot uploaded
+
+2000-09-22  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm (main): if /lnx4win/i in VERSION, set $o->{lnx4win}
+
+	* Xconfigurator.pm (cardConfiguration): fix setting 4MB of meg for
+	i810	
+	(testFinalConfig): i810 is a verybad_card, aka can't test anything
+	on it :-(
+	(main): fork to background and stay there while waiting for the WM
+	to exit
+	(testFinalConfig): update the backgroung image path
+
+	* interactive_gtk.pm (exit): flush X before leaving (otherwise the
+	mousecursor is not restored)
+
+	* run_program.pm (rooted): don't redirect the stdout and stderr to
+	ddebug.log if not $::isInstall
+
+	* modules.pm (load_raw): redirect stderr to tty5
+
+	* install2.pm (main): set variable $::isInstall
+
 2000-09-22  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* standalone/drakgw: now includes information from netconnect to
