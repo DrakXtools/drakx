@@ -946,7 +946,6 @@ sub summary {
 
     my $sound_index = 0;
     foreach my $device (@sound_cards) {
-	my $own_sound_index = $sound_index;
 	push @l, {
 	    group => N("Hardware"),
 	    label => N("Sound card"),
@@ -955,7 +954,8 @@ sub summary {
 	    },
 	    clicked => sub {
 	        require harddrake::sound; 
-	        harddrake::sound::config($o, $device, $own_sound_index)
+             $device->{sound_slot_index} = $sound_index;
+	        harddrake::sound::config($o, $device);
 	    },
 	};
      $sound_index++;

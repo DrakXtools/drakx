@@ -142,17 +142,18 @@ sub get_alternative {
 
 sub do_switch {
     my ($old_driver, $new_driver, $index) = @_;
+    my $wait = $in->wait_message(N("Please wait"), N("Please Wait... Applying the configuration"));
     log::explanations("removing old $old_driver\n");
     rooted("service sound stop") unless $blacklisted;
     rooted("service alsa stop") if $old_driver =~ /^snd-/ && !$blacklisted;
-    unload($old_driver); #    run_program("/sbin/modprobe -r $driver"); # just in case ...
+    unload($old_driver);    # run_program("/sbin/modprobe -r $driver"); # just in case ...
     modules::remove_module($old_driver); # completed by the next add_alias()
     modules::add_alias("sound-slot-$index", $new_driver);
     modules::write_conf();
-    if ($new_driver =~ /^snd-/) {
+    if ($new_driver =~ /^snd-/) {   # new driver is an alsa one
         rooted("service alsa start") unless $blacklisted;
         rooted("/sbin/chkconfig --add alsa");
-        load($new_driver); # service alsa is buggy
+        load($new_driver);   # service alsa is buggy
     } else { rooted("/sbin/chkconfig --del alsa") }
     log::explanations("loading new $new_driver\n");
     rooted("/sbin/chkconfig --add sound"); # just in case ...
@@ -160,9 +161,8 @@ sub do_switch {
 }
 
 sub switch {
-    my ($in, $device, $index) = @_;
-    my $driver = $device->{current_driver};
-    $driver ||= $device->{driver};
+    my ($in, $device) = @_;
+    my $driver = $device->{current_driver} || $device->{driver};
 
     foreach (@blacklist) { $blacklisted = 1 if $driver eq $_ }
     my $alternative = get_alternative($driver);
@@ -173,7 +173,7 @@ sub switch {
                           N("There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\"",
                             $device->{description}, $driver),
                           [
-                           &get_any_driver_entry($in, $driver, $device, $index),
+                           &get_any_driver_entry($in, $driver, $device),
                           ]
                          );
         } elsif ($in->ask_from_({ title => N("Sound configuration"),
@@ -207,7 +207,7 @@ To use alsa, one can either use:
                                     val => N("Trouble shooting"), disabled => sub {},
                                     clicked => sub { &trouble($in) }
                                 },
-                                &get_any_driver_entry($in, $driver, $device, $index),
+                                &get_any_driver_entry($in, $driver, $device),
                                 ]))
         {
             return if $new_driver eq $driver;
@@ -215,9 +215,7 @@ To use alsa, one can either use:
             $in->ask_warn(N("Warning"), N("The old \"%s\" driver is blacklisted.\n
 It has been reported to oops the kernel on unloading.\n
 The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)) if $blacklisted;
-            my $wait = $in->wait_message(N("Please wait"), N("Please Wait... Applying the configuration"));
-            do_switch($driver, $new_driver, $index);
-            undef $wait;
+            do_switch($driver, $new_driver, $device->{sound_slot_index});
         }
     } elsif ($driver =~ /^Bad:/) {
         $driver =~ s/^Bad://;
@@ -228,7 +226,7 @@ The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)
         $in->ask_from(N("No known driver"), 
                       N("There's no known driver for your sound card (%s)",
                         $device->{description}),
-                      [ &get_any_driver_entry($in, $driver, $device, $index) ]);
+                      [ &get_any_driver_entry($in, $driver, $device) ]);
     } else {
         $in->ask_warn(N("Unkown driver"), 
                       N("Error: The \"%s\" driver for your sound card is unlisted"),
@@ -267,28 +265,25 @@ initlevel 3
 ")));
 }
 
-sub choose_any_driver {
-    my ($in, $driver, $card, $index) = @_;
-    my $old_driver = $driver;
-    if ($in->ask_from(N("Choosing an arbitratry driver"),
-                      formatAlaTeX(N("If you really think that you know which driver is the right one for your card
+sub get_any_driver_entry {
+    my ($in, $driver, $device) = @_;
+    +{
+        val => N("Let me pick any driver"), disabled => sub {},
+        clicked => sub {
+            my $old_driver = $driver;
+            if ($in->ask_from(N("Choosing an arbitratry driver"),
+                              formatAlaTeX(N("If you really think that you know which driver is the right one for your card
 you can pick one in the above list.
 
-The current driver for your \"%s\" sound card is \"%s\" ", $card, $driver)),
-                      [
-                       { label => N("Driver:"), val => \$driver, list => [ category2modules("multimedia/sound") ], type => 'combo', default => $driver, sort =>1, separator => '|' },
-                      ]
-                     )) {
-        do_switch($old_driver, $driver, $index);
-        goto end;
-    }
-}
-
-sub get_any_driver_entry {
-    my ($in, $driver, $device, $index) = @_;
-    {
-        val => N("Let me pick any driver"), disabled => sub {},
-        clicked => sub { &choose_any_driver($in, $driver, $device->{description}, $index) }
+The current driver for your \"%s\" sound card is \"%s\" ", $device->{description}, $driver)),
+                              [
+                               { label => N("Driver:"), val => \$driver, list => [ category2modules("multimedia/sound") ], type => 'combo', default => $driver, sort =>1, separator => '|' },
+                              ]
+                             )) {
+                do_switch($old_driver, $driver, $device->{sound_slot_index});
+                goto end;
+            }
+        }
     }
 }
 
