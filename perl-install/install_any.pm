@@ -625,7 +625,7 @@ sub setPackages {
 
 	my $rpmsrate_flags_was_chosen = $o->{rpmsrate_flags_chosen};
 
-	put_in_hash($o->{rpmsrate_flags_chosen}, rpmsrate_always_flags($o)); #- must be done before pkgs::read_rpmsrate()
+	put_in_hash($o->{rpmsrate_flags_chosen} ||= {}, rpmsrate_always_flags($o)); #- must be done before pkgs::read_rpmsrate()
 	load_rate_files($o);
 
 	set_rpmsrate_default_category_flags($o, $rpmsrate_flags_was_chosen);
