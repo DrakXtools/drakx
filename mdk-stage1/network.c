@@ -336,12 +336,13 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 		return results;
 
 	if (!strcmp(choice, "Static")) {
-		char * questions[] = { "IP of this machine", "IP of Domain Name Server", "IP of default gateway", NULL };
-		char * questions_auto[] = { "ip", "dns", "gateway" };
+		char * questions[] = { "IP of this machine", "IP of Domain Name Server", "IP of default gateway", "Netmask", NULL };
+		char * questions_auto[] = { "ip", "dns", "gateway", "netmask" };
 		char ** answers;
 		struct in_addr addr;
 
-		results = ask_from_entries_auto("Please enter the network information.", questions, &answers, 16, questions_auto);
+		results = ask_from_entries_auto("Please enter the network information. (leave netmask void for Internet standard)",
+						questions, &answers, 16, questions_auto);
 		if (results != RETURN_OK)
 			return setup_network_interface(intf);
 
@@ -361,21 +362,14 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 			gateway.s_addr = 0; /* keep an understandable state */
 		}
 
-		if (IS_EXPERT) {
-			char * questions_expert[] = { "Netmask", NULL };
-			char ** answers_expert;
-			results = ask_from_entries("Please enter additional network information.", questions_expert, &answers_expert, 16);
-			if (results != RETURN_OK)
-				return results;
-
-			if (!inet_aton(answers_expert[0], &addr)) {
-				error_message("Invalid netmask");
-				return setup_network_interface(intf);
-			}
-			memcpy(&intf->netmask, &addr, sizeof(addr));
+		if (!strcmp(answers[3], ""))
+			guess_netmask(intf);
+		else if (!inet_aton(answers[3], &addr)) {
+			log_message("invalid netmask -- back to the guess");
+			guess_netmask(intf);
 		}
 		else
-			guess_netmask(intf);
+			memcpy(&intf->netmask, &addr, sizeof(addr));
 
 		*((uint32_t *) &intf->broadcast) = (*((uint32_t *) &intf->ip) &
 						    *((uint32_t *) &intf->netmask)) | ~(*((uint32_t *) &intf->netmask));
