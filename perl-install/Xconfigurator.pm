@@ -714,6 +714,8 @@ sub write_XF86Config {
     #- this will enable the "wheel" or "knob" functionality if the mouse supports it
     print F "    ZAxisMapping 4 5\n" if $O->{nbuttons} > 3;
     print F "    ZAxisMapping 6 7\n" if $O->{nbuttons} > 5;
+    print G qq(    Option "ZAxisMapping" "4 5"\n) if $O->{nbuttons} > 3;
+    print G qq(    Option "ZAxisMapping" "6 7"\n) if $O->{nbuttons} > 5;
 
     print F "#" unless $O->{XEMU3};
     print G "#" unless $O->{XEMU3};
