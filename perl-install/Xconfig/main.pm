@@ -43,7 +43,7 @@ sub configure_everything_auto_install {
 
     &write($raw_X, $X);
 
-    any::runlevel($::prefix, exists $old_X->{xdm} && !$old_X->{xdm} ? 3 : 5);
+    any::runlevel(exists $old_X->{xdm} && !$old_X->{xdm} ? 3 : 5);
 }
 
 sub configure_everything {
