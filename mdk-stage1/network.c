@@ -169,7 +169,7 @@ int configure_net_device(struct interface_info * intf)
 
 	intf->is_up = 1;
 
-	if (intf->boot_proto == BOOTPROTO_STATIC) {
+	if (intf->boot_proto == BOOTPROTO_STATIC && !streq(intf->device, "lo")) {
 		/* I need to sleep a bit in order for kernel to finish
 		   init of the network device; if not, first sendto() for
 		   gethostbyaddr will get an EINVAL. */
