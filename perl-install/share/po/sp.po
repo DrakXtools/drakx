@@ -91,6 +91,32 @@ msgid "No sharing"
 msgstr "Нема заједничког дељења"
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "More"
+msgstr "Jош"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Here is the full list of available countries"
+msgstr "Овде jе представљенa цела листа доступних тастатурa"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Please choose your country."
+msgstr "Изаберитe тип миша"
+
+#: ../../any.pm:1 ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Country"
+msgstr "Земља:"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Use Unicode by default"
+msgstr ""
+
+#: ../../any.pm:1 ../../install_steps_interactive.pm:1
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "All"
@@ -1052,62 +1078,63 @@ msgstr "MB"
 msgid "KB"
 msgstr "KB"
 
-#: ../../crypto.pm:1 ../../network/tools.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "United States"
 msgstr "САД"
 
-#: ../../crypto.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Austria"
 msgstr "Аустрија"
 
-#: ../../crypto.pm:1 ../../network/tools.pm:1 ../../standalone/drakxtv:1
+#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
+#: ../../standalone/drakxtv:1
 #, c-format
 msgid "Italy"
 msgstr "Италија"
 
-#: ../../crypto.pm:1 ../../network/tools.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Netherlands"
 msgstr "Холандија"
 
-#: ../../crypto.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Sweden"
 msgstr "Шведска"
 
-#: ../../crypto.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Norway"
 msgstr "Норвешка"
 
-#: ../../crypto.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Greece"
 msgstr "Грчка"
 
-#: ../../crypto.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Germany"
 msgstr "Немачкa"
 
-#: ../../crypto.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Czech Republic"
 msgstr "Чешка"
 
-#: ../../crypto.pm:1 ../../network/tools.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Belgium"
 msgstr "Белгија"
 
-#: ../../crypto.pm:1 ../../network/tools.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "France"
 msgstr "Францускa"
 
-#: ../../crypto.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Costa Rica"
 msgstr "Костарика"
@@ -1205,6 +1232,11 @@ msgstr "са /usr"
 msgid "simple"
 msgstr "jедноставно"
 
+#: ../../fs.pm:1
+#, fuzzy, c-format
+msgid "Enabling swap partition %s"
+msgstr "Форматирање партиције %s"
+
 #: ../../fs.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "error unmounting %s: %s"
@@ -1214,6 +1246,26 @@ msgstr "Грешка при демонтирању %s: %s"
 #, c-format
 msgid "mounting partition %s in directory %s failed"
 msgstr "монтирање партиције %s у директоријум %s није успело"
+
+#: ../../fs.pm:1
+#, fuzzy, c-format
+msgid "Mounting partition %s"
+msgstr "Форматирање партиције %s"
+
+#: ../../fs.pm:1
+#, fuzzy, c-format
+msgid "Checking %s"
+msgstr "Копирање %s"
+
+#: ../../fs.pm:1
+#, c-format
+msgid "Formatting partition %s"
+msgstr "Форматирање партиције %s"
+
+#: ../../fs.pm:1
+#, c-format
+msgid "Creating and formatting file %s"
+msgstr "Креирaње и форматирaње датотекe %s"
 
 #: ../../fs.pm:1
 #, c-format
@@ -3587,8 +3639,8 @@ msgstr ""
 "поглављу званичног Mandrake Linux 'Водича за кориснике'."
 
 #: ../../install_messages.pm:1
-#, c-format
-msgid "http://www.mandrakelinux.com/en/90errata.php3"
+#, fuzzy, c-format
+msgid "http://www.mandrakelinux.com/en/91errata.php3"
 msgstr "http://www.mandrakelinux.com/en/90errata.php3"
 
 #: ../../install_messages.pm:1
@@ -4664,21 +4716,6 @@ msgstr ""
 "Неуспешна првера фајл система %s. Да ли желите да поправите грешке? (будите "
 "пажљиви, можете изгубити податке)"
 
-#: ../../install_steps_interactive.pm:1 ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Formatting partition %s"
-msgstr "Форматирање партиције %s"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Creating and formatting file %s"
-msgstr "Креирaње и форматирaње датотекe %s"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Formatting partitions"
-msgstr "Форматирање партицију"
-
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Check bad blocks?"
@@ -4788,11 +4825,6 @@ msgstr "Да ли је ово инсталација или aжурирање?"
 #, c-format
 msgid "Install/Upgrade"
 msgstr "Инсталација/Ажурирање"
-
-#: ../../install_steps_interactive.pm:1 ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "More"
-msgstr "Jош"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5376,6 +5408,1136 @@ msgstr "Пољски"
 #, c-format
 msgid "Dvorak"
 msgstr "Дворак"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Zimbabwe"
+msgstr "Зимбабве"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Zambia"
+msgstr "Замбија"
+
+#: ../../lang.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "South Africa"
+msgstr "Јужна Африка"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Serbia"
+msgstr "серијски"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Mayotte"
+msgstr "Мајот"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Yemen"
+msgstr "Јемен"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Samoa"
+msgstr "Самоа"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Wallis and Futuna"
+msgstr "Валис и Футуна Острва"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Vanuatu"
+msgstr "Вануату"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Vietnam"
+msgstr "Вијетнам"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Virgin Islands (U.S.)"
+msgstr "Девичанска Острва (С.А.Д)"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Virgin Islands (British)"
+msgstr "Девичанска Острва(В.Британија)"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Venezuela"
+msgstr "Венецуела"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Saint Vincent and the Grenadines"
+msgstr "Свети Винсент и Гренандини"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Vatican"
+msgstr "Летонски"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Uzbekistan"
+msgstr "Узбекистан"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Uruguay"
+msgstr "Уругвај"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "United States Minor Outlying Islands"
+msgstr "United States Minor Outlying Islands"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr "Уганда"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Ukraine"
+msgstr "Украјина"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Tanzania"
+msgstr ""
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Taiwan"
+msgstr "Тајланд"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Tuvalu"
+msgstr "Тувалу"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Trinidad and Tobago"
+msgstr "Тринидад и Тобаго"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Turkey"
+msgstr "Турска"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Tonga"
+msgstr "Тонга"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Tunisia"
+msgstr "Тунис"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Turkmenistan"
+msgstr "Туркменистан"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "East Timor"
+msgstr "Источни Тимор"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Tokelau"
+msgstr "Токелау"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Tajikistan"
+msgstr "Таџикистан"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Thailand"
+msgstr "Тајланд"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Togo"
+msgstr "Того"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "French Southern Territories"
+msgstr "Француске Јужне Територије"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Chad"
+msgstr "Чад"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Turks and Caicos Islands"
+msgstr "Turks and Caicos Islands"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Swaziland"
+msgstr "Свазиленд"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Syria"
+msgstr "Суринам"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "El Salvador"
+msgstr "Ел Салвадор"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Sao Tome and Principe"
+msgstr "Сао Томе и Принципе"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Suriname"
+msgstr "Суринам"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Somalia"
+msgstr "Сомалија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Senegal"
+msgstr "Сенегал"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "San Marino"
+msgstr "Сан Марино"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Sierra Leone"
+msgstr "Сијера Леоне"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Slovakia"
+msgstr "Славачка"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Svalbard and Jan Mayen Islands"
+msgstr "Svalbard and Jan Mayen Islands"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Slovenia"
+msgstr "Словенија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Saint Helena"
+msgstr "Света Јелена"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Singapore"
+msgstr "Сингапур"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Sudan"
+msgstr "Судан"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Seychelles"
+msgstr "Сејшели"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Solomon Islands"
+msgstr "Соломонова Острва"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Saudi Arabia"
+msgstr "Саудијска Арабија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Rwanda"
+msgstr "Руанда"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Russia"
+msgstr "Руски"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Romania"
+msgstr "Румунија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Reunion"
+msgstr "Reunion"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Qatar"
+msgstr "Катар"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Palau"
+msgstr "Палау"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Paraguay"
+msgstr "Парагвај"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Portugal"
+msgstr "Португал"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Palestina"
+msgstr "Селекција путање"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Puerto Rico"
+msgstr "Порто Рико"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Pitcairn"
+msgstr "Pitcairn"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Saint Pierre and Miquelon"
+msgstr "Свети Пјер и Микелон"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Poland"
+msgstr "Пољска"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Pakistan"
+msgstr "Пакистан"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Philippines"
+msgstr "Филипини"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Papua New Guinea"
+msgstr "Папуа Нова Гвинеја"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "French Polynesia"
+msgstr "Франсуска Полинезија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Peru"
+msgstr "Перу"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Panama"
+msgstr "Панама"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Oman"
+msgstr "Оман"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "New Zealand"
+msgstr "НОви Зеланд"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Niue"
+msgstr "Niue"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Nauru"
+msgstr "Науру"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Nepal"
+msgstr "Непал"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Nicaragua"
+msgstr "Никарагва"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Nigeria"
+msgstr "Нигерија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Norfolk Island"
+msgstr "Норфолк Острва"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Niger"
+msgstr "Нигер"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "New Caledonia"
+msgstr "Нова Каледонија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Namibia"
+msgstr "Намибија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Mozambique"
+msgstr "Мозамбик"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Malaysia"
+msgstr "Малезија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Mexico"
+msgstr "Мексико"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Malawi"
+msgstr "Малави"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Maldives"
+msgstr "Малдиви"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Mauritius"
+msgstr "Маурицијус"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Malta"
+msgstr "Малта"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Montserrat"
+msgstr "Монсерат"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Mauritania"
+msgstr "Мауританија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Martinique"
+msgstr "Мартиник"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Northern Mariana Islands"
+msgstr "Северно Маријанска Острва"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Mongolia"
+msgstr "Монголија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Myanmar"
+msgstr "Мианмар (Бурма)"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Mali"
+msgstr "Мали"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Macedonia"
+msgstr "Македонија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Marshall Islands"
+msgstr "Маршалова Острва"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Madagascar"
+msgstr "Мадагаскар"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Moldova"
+msgstr "Молдавија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Monaco"
+msgstr "Монако"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Morocco"
+msgstr "Мароко"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Libya"
+msgstr "Либерија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Latvia"
+msgstr "Летонија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Luxembourg"
+msgstr "Луксембург"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Lithuania"
+msgstr "Литванија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Lesotho"
+msgstr "Лесото"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Liberia"
+msgstr "Либерија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Sri Lanka"
+msgstr "Шри Ланка"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Liechtenstein"
+msgstr "Лихтенштајн"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Saint Lucia"
+msgstr "Света Луција"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Lebanon"
+msgstr "Либан"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Laos"
+msgstr "Логови"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Kazakhstan"
+msgstr "Казахстан"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cayman Islands"
+msgstr "Кајманска Острва"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Kuwait"
+msgstr "Кувајт"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Korea"
+msgstr "Jош"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Korea (North)"
+msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Saint Kitts and Nevis"
+msgstr "Свети Китс и Невис"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Comoros"
+msgstr "Комори"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Kiribati"
+msgstr "Кирибати"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cambodia"
+msgstr "Камбоџа"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Kyrgyzstan"
+msgstr "Киргистан"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Kenya"
+msgstr "Кенија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Japan"
+msgstr "Јапан"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Jordania"
+msgstr "Јордан"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Jamaica"
+msgstr "Јамајка"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Iceland"
+msgstr "Исланд"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Iran"
+msgstr "Ирак"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Iraq"
+msgstr "Ирак"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "British Indian Ocean Territory"
+msgstr "Британска Индијска Океанска Територија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "India"
+msgstr "Индија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Israel"
+msgstr "Израел"
+
+#: ../../lang.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "Ireland"
+msgstr "Ирска"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Indonesia"
+msgstr "Индонезија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Hungary"
+msgstr "Мађарска"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Haiti"
+msgstr "Хаити"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Croatia"
+msgstr "Хрватска"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Honduras"
+msgstr "Хондурас"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Heard and McDonald Islands"
+msgstr "Хердова Острва и McDonald Острва"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Hong Kong"
+msgstr "Хонг Конг"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Guyana"
+msgstr "Гвајана"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Guinea-Bissau"
+msgstr "Гвинеја-Бисао"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Guam"
+msgstr "Гуам"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Guatemala"
+msgstr "Гватемала"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "South Georgia and the South Sandwich Islands"
+msgstr "Јужна Џорџија и Јужна Сендвичка Острва"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Equatorial Guinea"
+msgstr "Екваторијална Гвинеја"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Guadeloupe"
+msgstr "Гвадалупе"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Guinea"
+msgstr "Гвинеја"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Gambia"
+msgstr "Гамбија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Greenland"
+msgstr "Гренланд"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Gibraltar"
+msgstr "Гилбратлар"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Ghana"
+msgstr "Гана"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "French Guiana"
+msgstr "Француска Гвајана"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Georgia"
+msgstr "Грузија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Grenada"
+msgstr "Гренада"
+
+#: ../../lang.pm:1 ../../network/tools.pm:1
+#, c-format
+msgid "United Kingdom"
+msgstr "Велика Британија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Gabon"
+msgstr "Габон"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Faroe Islands"
+msgstr "Фарска Острва"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Micronesia"
+msgstr "Микронезија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Falkland Islands (Malvinas)"
+msgstr "Фокландска Острва"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Fiji"
+msgstr "Фиџи"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Finland"
+msgstr "Финска"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Ethiopia"
+msgstr "Етиопија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Spain"
+msgstr "Шпанија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Eritrea"
+msgstr "Еритреја"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Western Sahara"
+msgstr "Западна Сахара"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Egypt"
+msgstr "Египат"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Estonia"
+msgstr "Естонија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Ecuador"
+msgstr "Еквадор"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Algeria"
+msgstr "Алжир"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Dominican Republic"
+msgstr "Доминиканска Република"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Dominica"
+msgstr "Доминикана"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Denmark"
+msgstr "Данска"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Djibouti"
+msgstr "Џибути"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cyprus"
+msgstr "Кипар"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Christmas Island"
+msgstr "Ускршња острава"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cape Verde"
+msgstr "Капе Верде"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cuba"
+msgstr "Куба"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Colombia"
+msgstr "Колумбија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "China"
+msgstr "Кина"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cameroon"
+msgstr "Камерун"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Chile"
+msgstr "Чиле"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cook Islands"
+msgstr "Кукова Острва"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cote d'Ivoire"
+msgstr "Обала слоноваче"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Switzerland"
+msgstr "Швајцарска"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Congo (Brazzaville)"
+msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Central African Republic"
+msgstr "Централно Афричка Република"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Congo (Kinshasa)"
+msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cocos (Keeling) Islands"
+msgstr "Кокос (Келингова) Острва"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Canada"
+msgstr "Канада"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Belize"
+msgstr "Белизе"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Belarus"
+msgstr "Беолорусија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Botswana"
+msgstr "Боцвана"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bouvet Island"
+msgstr "Острва Буве"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bhutan"
+msgstr "Бутан"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bahamas"
+msgstr "Бахами"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Brazil"
+msgstr "Бразил"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bolivia"
+msgstr "Боливија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Brunei Darussalam"
+msgstr "Брунеји Darussalam"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bermuda"
+msgstr "Бермуда"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Benin"
+msgstr "Бенин"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Burundi"
+msgstr "Бурунди"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bahrain"
+msgstr "Бахреин"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bulgaria"
+msgstr "Бугарска"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Burkina Faso"
+msgstr "Буркина Фасо"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bangladesh"
+msgstr "Бангладеш"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Barbados"
+msgstr "Барбадос"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bosnia and Herzegovina"
+msgstr "Босна и Хрецеговина"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Azerbaijan"
+msgstr "Азербејџан"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Aruba"
+msgstr "Аруба"
+
+#: ../../lang.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "Australia"
+msgstr "Аустралија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "American Samoa"
+msgstr "Америчка Самоа"
+
+#: ../../lang.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "Argentina"
+msgstr "Аргентина"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Antarctica"
+msgstr "Антартик"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Angola"
+msgstr "Ангола"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Netherlands Antilles"
+msgstr "Холандски Антили"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Armenia"
+msgstr "Јерменија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Albania"
+msgstr "Албанија"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Anguilla"
+msgstr "Анигла"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Antigua and Barbuda"
+msgstr "Антигва и Барбуда"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "United Arab Emirates"
+msgstr "Уједињени Арапски Емирати"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Andorra"
+msgstr "Андора"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Afghanistan"
+msgstr "Авганистан"
 
 #: ../../loopback.pm:1
 #, c-format
@@ -7260,16 +8422,6 @@ msgstr "Премести фајлове на нову партицију"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
-msgid "Formatting loopback file %s"
-msgstr "Форматирање loopback датотекe %s"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Formatting"
-msgstr "Форматирање"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "После форматирaњa партициje %s,сви подаци на овој партицији ће бити избрисани"
@@ -8548,7 +9700,12 @@ msgstr "Domain Name Сервер"
 msgid "Web Server"
 msgstr "Веб Сервер"
 
-#: ../../network/ethernet.pm:1
+#: ../../network/ethernet.pm:1 ../../network/network.pm:1
+#, c-format
+msgid "Zeroconf host name must not contain a ."
+msgstr ""
+
+#: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, fuzzy, c-format
 msgid "Zeroconf Host name"
 msgstr "Име хоста:"
@@ -8557,6 +9714,15 @@ msgstr "Име хоста:"
 #, c-format
 msgid "Host name"
 msgstr "Име хоста:"
+
+#: ../../network/ethernet.pm:1 ../../network/network.pm:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+"Enter a Zeroconf host name without any dot if you don't\n"
+"want to use the default host name."
+msgstr ""
 
 #: ../../network/ethernet.pm:1
 #, c-format
@@ -8915,9 +10081,9 @@ msgstr ""
 "%s"
 
 #: ../../network/netconnect.pm:1
-#, c-format
-msgid "The network needs to be restarted"
-msgstr "Мрежа мора бити рестартована"
+#, fuzzy, c-format
+msgid "The network needs to be restarted. Do you want to restart it ?"
+msgstr "Пакет %s мора бити инсталиран. Да ли желите да га инсталирате?"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -9145,11 +10311,6 @@ msgstr "Proxy треба да буде http://..."
 
 #: ../../network/network.pm:1
 #, c-format
-msgid "Track network card id (useful for laptops)"
-msgstr "Track мрежна картица id (корисно за лаптоп рачунаре)"
-
-#: ../../network/network.pm:1
-#, c-format
 msgid "FTP proxy"
 msgstr "FTP proxy"
 
@@ -9230,24 +10391,24 @@ msgid "Start at boot"
 msgstr "Покрени при стартaњу"
 
 #: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "Network Hotplugging"
+msgstr "Праћење стања мреже"
+
+#: ../../network/network.pm:1
 #, c-format
-msgid "zeroconf"
-msgstr ""
+msgid "Track network card id (useful for laptops)"
+msgstr "Track мрежна картица id (корисно за лаптоп рачунаре)"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
-msgid "(bootp/dhcp)"
+msgid "(bootp/dhcp/zeroconf)"
 msgstr "(bootp/dhcp)"
 
 #: ../../network/network.pm:1
 #, c-format
 msgid "Automatic IP"
 msgstr "Аутоматски IP"
-
-#: ../../network/network.pm:1
-#, fuzzy, c-format
-msgid "(bootp/dhcp/zeroconf)"
-msgstr "(bootp/dhcp)"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -9307,11 +10468,6 @@ msgstr ""
 #, c-format
 msgid "Firewalling configuration detected!"
 msgstr "Детектована Firewalling конфигурациja"
-
-#: ../../network/tools.pm:1
-#, c-format
-msgid "United Kingdom"
-msgstr "Велика Британија"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -15093,13 +16249,33 @@ msgstr "Промени"
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Click here to launch the wizard ->"
+msgstr "Кликните овде за покретање чаробњака ->"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "Wizard..."
 msgstr "Чаробњак..."
 
 #: ../../standalone/drakconnect:1
 #, c-format
-msgid "Click here to launch the wizard ->"
-msgstr "Кликните овде за покретање чаробњака ->"
+msgid "Status:"
+msgstr "Статус:"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Type:"
+msgstr "Тип:"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet access"
+msgstr "Интернет приступ"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Hostname: "
+msgstr "Име хоста:"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -15135,26 +16311,6 @@ msgstr "Подеси Интернет приступ..."
 #, c-format
 msgid "Wait please"
 msgstr "Молим Вас сачекајте"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Status:"
-msgstr "Статус:"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Type:"
-msgstr "Тип:"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet access"
-msgstr "Интернет приступ"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Hostname: "
-msgstr "Име хоста:"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -15432,8 +16588,8 @@ msgstr "Изаберите апликације које ће подржавати фонтове :"
 msgid ""
 "\n"
 " Copyright (C) 2001-2002 by MandrakeSoft \n"
-"\tDUPONT Sebastien (initial version)\n"
-"        CHAUMETTE Damien dchaumette\\@mandrakesoft.com\n"
+"\tDUPONT Sebastien (original version)\n"
+"        CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
 "\n"
 " This program is free software; you can redistribute it and/or modify\n"
 " it under the terms of the GNU General Public License as published by\n"
@@ -15459,8 +16615,6 @@ msgid ""
 "    -  ttf2pt1:   \n"
 "\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
 "             Convert ttf font files to afm and pfb fonts\n"
-"\n"
-"\n"
 msgstr ""
 "\n"
 " Copyright (C) 2001-2002 by MandrakeSoft \n"
@@ -16099,29 +17253,19 @@ msgid "browse"
 msgstr "претражи"
 
 #: ../../standalone/drakperm:1
-#, c-format
-msgid "Delete selected rule"
-msgstr "Избриши одабрано правило"
+#, fuzzy, c-format
+msgid "quit"
+msgstr "Крај"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "save"
+msgstr "Сачувај"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Move selected rule down one level"
-msgstr "Спусти одабрано правило за један ниво"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Move selected rule up one level"
-msgstr "Подигни одабрано правило за један ниво"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Edit current rule"
-msgstr "Уреди тренутно правило"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Add a new rule at the end"
-msgstr "Додај ново правило на крају"
+msgid "select perm file to see/edit"
+msgstr "изаберите perm фајл да би видели/изменили"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16137,18 +17281,8 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "select perm file to see/edit"
-msgstr "изаберите perm фајл да би видели/изменили"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "add a rule"
-msgstr "Додаjте правило"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Down"
-msgstr "Доле"
+msgid "Edit current rule"
+msgstr "Уреди тренутно правило"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16157,8 +17291,38 @@ msgstr "уреди"
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "Delete selected rule"
+msgstr "Избриши одабрано правило"
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "delete"
 msgstr "обриши"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Add a new rule at the end"
+msgstr "Додај ново правило на крају"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "add a rule"
+msgstr "Додаjте правило"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Move selected rule down one level"
+msgstr "Спусти одабрано правило за један ниво"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Down"
+msgstr "Доле"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Move selected rule up one level"
+msgstr "Подигни одабрано правило за један ниво"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16670,21 +17834,6 @@ msgstr "Аустралијска Optus кабловска ТВ"
 
 #: ../../standalone/drakxtv:1
 #, c-format
-msgid "Argentina"
-msgstr "Аргентина"
-
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "South Africa"
-msgstr "Јужна Африка"
-
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "Australia"
-msgstr "Аустралија"
-
-#: ../../standalone/drakxtv:1
-#, c-format
 msgid "Newzealand"
 msgstr "Нови Зеланд"
 
@@ -16692,11 +17841,6 @@ msgstr "Нови Зеланд"
 #, c-format
 msgid "France [SECAM]"
 msgstr "Француска [SECAM]"
-
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "Ireland"
-msgstr "Ирска"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -18007,393 +19151,3 @@ msgstr "Личне финансиje"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Програми за управљaње вaшим финансиjамa, као што jе gnucash"
-
-#~ msgid "FAT"
-#~ msgstr "FAT"
-
-#~ msgid "Local printers available on: "
-#~ msgstr "Локални штампачи су доступни на: "
-
-#~ msgid "modinfo is not available"
-#~ msgstr "modinfo није доступан"
-
-#~ msgid "You don't have enough free space on your Windows partition"
-#~ msgstr "Немате довољно слободног просторa на Windows партициjи"
-
-#~ msgid ""
-#~ "Here is a list of all auto-detected printers. Please choose the printer "
-#~ "you want to set up or enter a device name/file name in the input line"
-#~ msgstr ""
-#~ "Овде се налази листа свих ауто-детектованих штампача. Изаберите штампач "
-#~ "који желите или унесите имеиме фајла уређаја у линији за унос"
-
-#~ msgid "/_Help..."
-#~ msgstr "/_Помоћ..."
-
-#~ msgid "Do you really want to leave the installation?"
-#~ msgstr "Да ли заиста хоћете да прекинете инсталацију?"
-
-#~ msgid "Are you sure you refuse the licence?"
-#~ msgstr "Да ли сте сигурни да одбијате лиценцу?"
-
-#~ msgid "Upgrade partition %s"
-#~ msgstr "Ажурирање партиције %s"
-
-#~ msgid "Tamil (Unicode)"
-#~ msgstr "Тамилски (Unicode)"
-
-#~ msgid "Setup filesystems"
-#~ msgstr "Подеси датотeчне системе"
-
-#~ msgid "Boot from DOS/Windows (loadlin)"
-#~ msgstr "Стартaње из DOS/Windows-a (loadlin)"
-
-#~ msgid "Remove entry"
-#~ msgstr "Уклањам унос"
-
-#~ msgid "Desktop"
-#~ msgstr "Десктоп"
-
-#~ msgid "Start Menu"
-#~ msgstr "Старт мени "
-
-#~ msgid "You must have a swap partition"
-#~ msgstr "Морате имати swap партицију"
-
-#~ msgid "Install Class"
-#~ msgstr "Инсталационe класе"
-
-#~ msgid "Please choose one of the following classes of installation:"
-#~ msgstr "Молим вас да изаберете jедну од следeћих инсталационих класa:"
-
-#~ msgid "Which installation class do you want?"
-#~ msgstr "Коjу  инсталациону класу бирате ?"
-
-#~ msgid "Recommended"
-#~ msgstr "Препоручено"
-
-#~ msgid "Expert"
-#~ msgstr "Експерт"
-
-#~ msgid "Upgrade packages only"
-#~ msgstr "Ажурирање само пакета"
-
-#~ msgid "No root partition found to perform an upgrade"
-#~ msgstr "Није root партиције потребне за ажурирање"
-
-#~ msgid "Root Partition"
-#~ msgstr "Root партиција"
-
-#~ msgid "What is the root partition (/) of your system?"
-#~ msgstr "На којој партицији је root партиција (/) вашег система?"
-
-#~ msgid "ISDN card"
-#~ msgstr "ISDN картицa"
-
-#~ msgid "Specify CUPS server"
-#~ msgstr "Одредите CUPS сервер"
-
-#~ msgid ""
-#~ "To get access to printers on remote CUPS servers in your local network "
-#~ "you do not have to configure anything; the CUPS servers inform your "
-#~ "machine automatically about their printers. All printers currently known "
-#~ "to your machine are listed in the \"Remote printers\" section in the main "
-#~ "window of Printerdrake. When your CUPS server is not in your local "
-#~ "network, you have to enter the CUPS server IP address and optionally the "
-#~ "port number to get the printer information from the server, otherwise "
-#~ "leave these fields blank."
-#~ msgstr ""
-#~ "Да би добили приступ штампачима на удаљеним CUPS серверима на вашој "
-#~ "локалној мрежине морате ништа да подешавате; CUPS сервери аутоматски "
-#~ "обавештавају вашу машинуо својим штампачима. Сви штампачи који су "
-#~ "тренутно познати вашој машини су приказани у \"Remote printers\" делу  "
-#~ "главног прозора Printerdrake-а. Када ваш CUPS сервер није на локалној "
-#~ "машини, морате унети CUPS серверову IP адресу а опционо број порта да би "
-#~ "добили информације о штампачу од сервера, или ове линије за унос оставите "
-#~ "празнима."
-
-#~ msgid ""
-#~ "\n"
-#~ "Normally, CUPS is automatically configured according to your network "
-#~ "environment, so that you can access the printers on the CUPS servers in "
-#~ "your local network. If this does not work correctly, turn off \"Automatic "
-#~ "CUPS configuration\" and edit your file /etc/cups/cupsd.conf manually. Do "
-#~ "not forget to restart CUPS afterwards (command: \"service cups restart\")."
-#~ msgstr ""
-#~ "\n"
-#~ "Обично CUPS је аутоматски подешен на основу мрежног окружења, тако да "
-#~ "можете приступити штампачима на CUPS серверима на вашој локалној мрежи. "
-#~ "Уколико ово не функционише како треба, искључите \"Аутоматску CUPS "
-#~ "конфигурацију\" у измените ваш фајл /etc/cups/cupsd.conf ручно. Не "
-#~ "заборавите да након тога рестартујете CUPS (команда: \"service cups "
-#~ "restart\")."
-
-#~ msgid "The IP address should look like 192.168.1.20"
-#~ msgstr "IP адреса треба да изгледа као нпр. 192.168.1.20"
-
-#~ msgid "CUPS server IP"
-#~ msgstr "SMB сервер IP:"
-
-#~ msgid "can not open /etc/inittab for reading: %s"
-#~ msgstr "не могу отворити /etc/inittab за читaњe: %s"
-
-#~ msgid ""
-#~ "You now have the opportunity to download encryption software.\n"
-#~ "\n"
-#~ "WARNING:\n"
-#~ "\n"
-#~ "Due to different general requirements applicable to these software and "
-#~ "imposed\n"
-#~ "by various jurisdictions, customer and/or end user of theses software "
-#~ "should\n"
-#~ "ensure that the laws of his/their jurisdiction allow him/them to "
-#~ "download, stock\n"
-#~ "and/or use these software.\n"
-#~ "\n"
-#~ "In addition customer and/or end user shall particularly be aware to not "
-#~ "infringe\n"
-#~ "the laws of his/their jurisdiction. Should customer and/or end user not\n"
-#~ "respect the provision of these applicable laws, he/they will incure "
-#~ "serious\n"
-#~ "sanctions.\n"
-#~ "\n"
-#~ "In no event shall Mandrakesoft nor its manufacturers and/or suppliers be "
-#~ "liable\n"
-#~ "for special, indirect or incidental damages whatsoever (including, but "
-#~ "not\n"
-#~ "limited to loss of profits, business interruption, loss of commercial "
-#~ "data and\n"
-#~ "other pecuniary losses, and eventual liabilities and indemnification to "
-#~ "be paid\n"
-#~ "pursuant to a court decision) arising out of use, possession, or the "
-#~ "sole\n"
-#~ "downloading of these software, to which customer and/or end user could\n"
-#~ "eventually have access after having sign up the present agreement.\n"
-#~ "\n"
-#~ "\n"
-#~ "For any queries relating to these agreement, please contact \n"
-#~ "Mandrakesoft, Inc.\n"
-#~ "2400 N. Lincoln Avenue Suite 243\n"
-#~ "Altadena California 91001\n"
-#~ "USA"
-#~ msgstr ""
-#~ "Због различитих општиx захтева коjи се односе на оваj  софтвер  као и "
-#~ "изложеност\n"
-#~ "многим законодавствима,купац и/или корисник софтвера треба\n"
-#~ "да провери да ли закон омогућава  download и употребу софтвера.\n"
-#~ "\n"
-#~ "Купци  и корисници треба да знаjу да не требада изврдаваjу\n"
-#~ "закон.Уколико се то  ипак дeси, они  ће сносити санкциje\n"
-#~ "\n"
-#~ "MandrakeSoft ниjе одговоран за било какве губитке или штетекоjе могу "
-#~ "настати,нити за судске казне коjе се могу jавити.\n"
-#~ "\n"
-#~ "\n"
-#~ "За било каква питaња везана за ову тему контактираjтe \n"
-#~ "Mandrakesoft, Inc.\n"
-#~ "2400 N. Lincoln Avenue Suite 243\n"
-#~ "Altadena California 91001\n"
-#~ "USA"
-
-#~ msgid "Proxy configuration"
-#~ msgstr "Подeшавaње проксиja"
-
-#~ msgid ""
-#~ "Welcome to the proxy configuration utility.\n"
-#~ "\n"
-#~ "Here, you'll be able to set up your http and ftp proxies\n"
-#~ "with or without login and password\n"
-#~ msgstr ""
-#~ "Добродошли у алат за конфигурацију proxy-ја.\n"
-#~ "\n"
-#~ "Овде можете да подесите ваше http и ftp проксије\n"
-#~ "са или без корисничког имена и лозинке\n"
-
-#~ msgid ""
-#~ "Please fill in the http proxy informations\n"
-#~ "Leave it blank if you don't want an http proxy"
-#~ msgstr ""
-#~ "Молим Вас да унесете http proxy информације\n"
-#~ "Оставите поља празнима уколико не желите да користетите прокси"
-
-#~ msgid "URL"
-#~ msgstr "URL"
-
-#~ msgid "port"
-#~ msgstr "Порт"
-
-#~ msgid "URL should begin with 'http:'"
-#~ msgstr "Url треба да почиње са http://..."
-
-#~ msgid "The port part should be numeric"
-#~ msgstr "Броj порта би требао да буде нумеричка ознака (број)"
-
-#~ msgid ""
-#~ "Please fill in the ftp proxy informations\n"
-#~ "Leave it blank if you don't want an ftp proxy"
-#~ msgstr ""
-#~ "Молим Вас да унесете информације о ftp proxy-ју\n"
-#~ "Поља оставите празнима уколико не желите да користите ftp прокси"
-
-#~ msgid ""
-#~ "Please enter proxy login and password, if any.\n"
-#~ "Leave it blank if you don't want login/passwd"
-#~ msgstr ""
-#~ "Унесите proxy корисничко име и лозинку, уколико постоје.\n"
-#~ "Поља оставите пазнима уколико не желите да користите корисничко име/"
-#~ "лозинку"
-
-#~ msgid "login"
-#~ msgstr "логовaњe"
-
-#~ msgid "password"
-#~ msgstr "лозинка"
-
-#~ msgid "re-type password"
-#~ msgstr "помово унесите лозинке"
-
-#~ msgid "The passwords don't match. Try again!"
-#~ msgstr "Неподударност лозинки. Пробајте поново!"
-
-#~ msgid "Can't write file %s"
-#~ msgstr "Није могућ унос у фајл %s"
-
-#~ msgid "-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-*,*"
-#~ msgstr "-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-*,*"
-
-#~ msgid "-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-*,*"
-#~ msgstr "-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-*,*"
-
-#~ msgid "no help implemented yet.\n"
-#~ msgstr "помоћ jош ниjе имплементирана.\n"
-
-#~ msgid "Please click on a medium"
-#~ msgstr "Кликните на медиј"
-
-#~ msgid "Removing LPRng..."
-#~ msgstr "Уклањам LPRng..."
-
-#~ msgid "Removing LPD..."
-#~ msgstr "Уклањам LPD..."
-
-#~ msgid ""
-#~ "Description:\n"
-#~ "\n"
-#~ "  Drakbackup is used to backup your system.\n"
-#~ "  During the configuration you can select \n"
-#~ "\t- System files, \n"
-#~ "\t- Users files, \n"
-#~ "\t- Other files.\n"
-#~ "\tor All your system ...  and Other (like Windows Partitions)\n"
-#~ "\n"
-#~ "  Drakbackup allows you to backup your system on:\n"
-#~ "\t- Harddrive.\n"
-#~ "\t- NFS.\n"
-#~ "\t- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).\n"
-#~ "\t- FTP.\n"
-#~ "\t- Rsync.\n"
-#~ "\t- Webdav.\n"
-#~ "\t- Tape.\n"
-#~ "\n"
-#~ "  Drakbackup allows you to restore your system to\n"
-#~ "  a user selected directory.\n"
-#~ "\n"
-#~ "  Per default all backup will be stored on your\n"
-#~ "  /var/lib/drakbackup directory\n"
-#~ "\n"
-#~ "  Configuration file:\n"
-#~ "\t/etc/drakconf/drakbackup/drakbackup.conf\n"
-#~ "\n"
-#~ "Restore Step:\n"
-#~ "  \n"
-#~ "  During the restore step, Drakbackup will remove\n"
-#~ "  your original directory and verify that all\n"
-#~ "  backup files are not corrupted. It is recommended\n"
-#~ "  you do a last backup before restoring.\n"
-#~ " \n"
-#~ "\n"
-#~ msgstr ""
-#~ "Опис:\n"
-#~ "\n"
-#~ "  Drakbackup се користи за backup вашег система.\n"
-#~ "  Током конфигурације можете изабрати \n"
-#~ "\t- Систесмке фајлове, \n"
-#~ "\t- Корисничке фајлове, \n"
-#~ "\t- Остале фајлове.\n"
-#~ "\tor Цео ваш систем ...  и Друго (нпр. Windows Партиција)\n"
-#~ "\n"
-#~ "  Drakbackup вам дозвољава да backup-ујете ваш систем на:\n"
-#~ "\t- Хард диск.\n"
-#~ "\t- NFS.\n"
-#~ "\t- CDROM (CDRW), DVDROM (са autoboot, rescue и autoinstall.).\n"
-#~ "\t- FTP.\n"
-#~ "\t- Rsync.\n"
-#~ "\t- Webdav.\n"
-#~ "\t- Tape.\n"
-#~ "\n"
-#~ "  Drakbackup вам дозвољава да обновите ваш систем у \n"
-#~ "  одабраном корисничком директоријуму.\n"
-#~ "\n"
-#~ "  По default-у сви backup-ови ће бити смештени у ваш\n"
-#~ "  /var/lib/drakbackup директоријум\n"
-#~ "\n"
-#~ "  Конфигурациони фајл:\n"
-#~ "\t/etc/drakconf/drakbackup/drakbackup.conf\n"
-#~ "\n"
-#~ "Поступак обнављања:\n"
-#~ "  \n"
-#~ "  Током процеса обнављања, Drakbackup ће уклонити\n"
-#~ "  ваш оргинални директоријум и проверити да ли су сви\n"
-#~ "  backup фајлови исправни. Препоручује се\n"
-#~ "  да урадите последњи backup пре обнављања.\n"
-#~ " \n"
-#~ "\n"
-
-#~ msgid ""
-#~ "drakbug version %s\n"
-#~ "Copyright (C) 2002 MandrakeSoft.\n"
-#~ "This is free software and may be redistributed under the terms of the GNU "
-#~ "GPL.\n"
-#~ "\n"
-#~ "usage: drakbug [OPTIONS] [PROGRAM_NAME]\n"
-#~ "\n"
-#~ "OPTIONS:\n"
-#~ msgstr ""
-#~ "drakbug верзија %s\n"
-#~ "Copyright (C) 2002 MandrakeSoft.\n"
-#~ "Ово је бесплатан софтвер и може бити дистрибуиран под условима GNU GPL.\n"
-#~ "\n"
-#~ "употреба: drakbug [OPTIONS] [PROGRAM_NAME]\n"
-#~ "\n"
-#~ "ОПЦИЈЕ:\n"
-
-#~ msgid "  --help            - print this help message.\n"
-#~ msgstr "  --help            - приказује ову поруку.\n"
-
-#~ msgid "  --report          - program should be one of mandrake tools\n"
-#~ msgstr ""
-#~ "  --report          - програм треба да буде један од mandrake алата\n"
-
-#~ msgid "  --incident        - program should be one of mandrake tools\n"
-#~ msgstr ""
-#~ "  --incident           - програм треба да буде један од mandrake алата\n"
-
-#~ msgid "usage: drakfloppy\n"
-#~ msgstr "употреба: drakfloppy\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Usage: harddrake [-h|--help] [--test]\n"
-#~ msgstr "употреба: harddrake [-h|--help] [--test]\n"
-
-#~ msgid "usage: keyboarddrake [--expert] [keyboard]\n"
-#~ msgstr "употреба: keyboarddrake [--expert] [keyboard]\n"
-
-#~ msgid "detected on interface %s"
-#~ msgstr "Детектовано на интерфejсу %s"
-
-#~ msgid "unable to backup lilo message"
-#~ msgstr "Не могу да сачувам lilo поруку"
-
-#~ msgid "can't change lilo message"
-#~ msgstr "Не могу да изменим lilo поруку"

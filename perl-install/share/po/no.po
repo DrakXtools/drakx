@@ -86,6 +86,32 @@ msgid "No sharing"
 msgstr "Ingen deling"
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
+#: ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "More"
+msgstr "Mer"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Here is the full list of available countries"
+msgstr "Her er den komplette lista over tilgjengelige tastatur"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Please choose your country."
+msgstr "Vennligst velg din musetype."
+
+#: ../../any.pm:1 ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Country"
+msgstr "Land:"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Use Unicode by default"
+msgstr ""
+
+#: ../../any.pm:1 ../../install_steps_interactive.pm:1
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "All"
@@ -1018,62 +1044,63 @@ msgstr "MB"
 msgid "KB"
 msgstr "KB"
 
-#: ../../crypto.pm:1 ../../network/tools.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "United States"
 msgstr "USA"
 
-#: ../../crypto.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Austria"
 msgstr "Østerrike"
 
-#: ../../crypto.pm:1 ../../network/tools.pm:1 ../../standalone/drakxtv:1
+#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
+#: ../../standalone/drakxtv:1
 #, c-format
 msgid "Italy"
 msgstr "Italia"
 
-#: ../../crypto.pm:1 ../../network/tools.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Netherlands"
 msgstr "Netherlands"
 
-#: ../../crypto.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Sweden"
 msgstr "Sverige"
 
-#: ../../crypto.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Norway"
 msgstr "Norge"
 
-#: ../../crypto.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Greece"
 msgstr "Hellas"
 
-#: ../../crypto.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Germany"
 msgstr "Germany"
 
-#: ../../crypto.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Czech Republic"
 msgstr "Tjekkia"
 
-#: ../../crypto.pm:1 ../../network/tools.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Belgium"
 msgstr "Belgia"
 
-#: ../../crypto.pm:1 ../../network/tools.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "France"
 msgstr "Frankrike"
 
-#: ../../crypto.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
 msgid "Costa Rica"
 msgstr "Costa Rica"
@@ -1169,6 +1196,11 @@ msgstr "med /usr"
 msgid "simple"
 msgstr "enkel"
 
+#: ../../fs.pm:1
+#, fuzzy, c-format
+msgid "Enabling swap partition %s"
+msgstr "Formaterer partisjon %s"
+
 #: ../../fs.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "error unmounting %s: %s"
@@ -1178,6 +1210,26 @@ msgstr "feil ved demontering av %s: %s"
 #, c-format
 msgid "mounting partition %s in directory %s failed"
 msgstr "montere partisjon %s i katalog %s gikk ikke"
+
+#: ../../fs.pm:1
+#, fuzzy, c-format
+msgid "Mounting partition %s"
+msgstr "Formaterer partisjon %s"
+
+#: ../../fs.pm:1
+#, fuzzy, c-format
+msgid "Checking %s"
+msgstr "Kopierer %s"
+
+#: ../../fs.pm:1
+#, c-format
+msgid "Formatting partition %s"
+msgstr "Formaterer partisjon %s"
+
+#: ../../fs.pm:1
+#, c-format
+msgid "Creating and formatting file %s"
+msgstr "Lager of formaterer fila %s"
 
 #: ../../fs.pm:1
 #, c-format
@@ -3011,7 +3063,7 @@ msgstr ""
 
 #: ../../install_messages.pm:1
 #, fuzzy, c-format
-msgid "http://www.mandrakelinux.com/en/90errata.php3"
+msgid "http://www.mandrakelinux.com/en/91errata.php3"
 msgstr "http://www.mandrakesoft.com/sales/contact"
 
 #: ../../install_messages.pm:1
@@ -4077,21 +4129,6 @@ msgid ""
 "you can loose data)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm:1 ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Formatting partition %s"
-msgstr "Formaterer partisjon %s"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Creating and formatting file %s"
-msgstr "Lager of formaterer fila %s"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Formatting partitions"
-msgstr "Formaterer partisjoner"
-
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Check bad blocks?"
@@ -4200,11 +4237,6 @@ msgstr "Er dette en installering eller en oppdatering?"
 #, fuzzy, c-format
 msgid "Install/Upgrade"
 msgstr "Installer/Oppdater"
-
-#: ../../install_steps_interactive.pm:1 ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "More"
-msgstr "Mer"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4786,6 +4818,1136 @@ msgstr "Polsk"
 #, c-format
 msgid "Dvorak"
 msgstr "Dvorak"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Zimbabwe"
+msgstr "Zimbabwe"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Zambia"
+msgstr "Zambia"
+
+#: ../../lang.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "South Africa"
+msgstr "South Africa"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Serbia"
+msgstr "seriell"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Mayotte"
+msgstr "Mayotte"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Yemen"
+msgstr "Yemen"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Samoa"
+msgstr "Samoa"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Wallis and Futuna"
+msgstr "Wallis and Futuna Islands"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Vanuatu"
+msgstr "Vanuatu"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Vietnam"
+msgstr "Viet Nam"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Virgin Islands (U.S.)"
+msgstr "Virgin Islands (U.S.)"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Virgin Islands (British)"
+msgstr "Virgin Islands (British)"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Venezuela"
+msgstr "Venezuela"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Saint Vincent and the Grenadines"
+msgstr "Saint Vincent and the Grenadines"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Vatican"
+msgstr "Lotvisk"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Uzbekistan"
+msgstr "Uzbekistan"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Uruguay"
+msgstr "Uruguay"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "United States Minor Outlying Islands"
+msgstr "United States Minor Outlying Islands"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr "Uganda"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Ukraine"
+msgstr "Ukraina"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Tanzania"
+msgstr ""
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Taiwan"
+msgstr "Thailand"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Tuvalu"
+msgstr "Tuvalu"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Trinidad and Tobago"
+msgstr "Trinidad and Tobago"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Turkey"
+msgstr "Tyrkia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Tonga"
+msgstr "Tonga"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Tunisia"
+msgstr "Tunisia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Turkmenistan"
+msgstr "Turkmenistan"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "East Timor"
+msgstr "Øst Timor"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Tokelau"
+msgstr "Tokelau"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Tajikistan"
+msgstr "Tajikistan"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Thailand"
+msgstr "Thailand"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Togo"
+msgstr "Togo"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "French Southern Territories"
+msgstr "French Southern Territories"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Chad"
+msgstr "Chad"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Turks and Caicos Islands"
+msgstr "Turks and Caicos Islands"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Swaziland"
+msgstr "Swaziland"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Syria"
+msgstr "Suriname"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "El Salvador"
+msgstr "El Salvador"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Sao Tome and Principe"
+msgstr "Sao Tome and Principe"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Suriname"
+msgstr "Suriname"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Somalia"
+msgstr "Somalia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Senegal"
+msgstr "Senegal"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "San Marino"
+msgstr "San Marino"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Sierra Leone"
+msgstr "Sierra Leone"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Slovakia"
+msgstr "Slovakia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Svalbard and Jan Mayen Islands"
+msgstr "Svalbard og Jan Mayen"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Slovenia"
+msgstr "Slovenia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Saint Helena"
+msgstr "Saint Helena"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Singapore"
+msgstr "Singapore"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Sudan"
+msgstr "Sudan"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Seychelles"
+msgstr "Seychelles"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Solomon Islands"
+msgstr "Solomon Islands"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Saudi Arabia"
+msgstr "Saudi Arabia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Rwanda"
+msgstr "Rwanda"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Russia"
+msgstr "Russisk"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Romania"
+msgstr "Romania"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Reunion"
+msgstr "Reunion"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Qatar"
+msgstr "Qatar"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Palau"
+msgstr "Palau"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Paraguay"
+msgstr "Paraguay"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Portugal"
+msgstr "Portugal"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Palestina"
+msgstr "Lagre pakkevalg"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Puerto Rico"
+msgstr "Puerto Rico"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Pitcairn"
+msgstr "Pitcairn"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Saint Pierre and Miquelon"
+msgstr "Saint Pierre and Miquelon"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Poland"
+msgstr "Polen"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Pakistan"
+msgstr "Pakistan"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Philippines"
+msgstr "Philippines"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Papua New Guinea"
+msgstr "Papua New Guinea"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "French Polynesia"
+msgstr "French Polynesia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Peru"
+msgstr "Peru"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Panama"
+msgstr "Panama"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Oman"
+msgstr "Oman"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "New Zealand"
+msgstr "New Zealand"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Niue"
+msgstr "Niue"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Nauru"
+msgstr "Nauru"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Nepal"
+msgstr "Nepal"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Nicaragua"
+msgstr "Nicaragua"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Nigeria"
+msgstr "Nigeria"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Norfolk Island"
+msgstr "Norfolk Island"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Niger"
+msgstr "Niger"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "New Caledonia"
+msgstr "New Caledonia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Namibia"
+msgstr "Namibia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Mozambique"
+msgstr "Mozambique"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Malaysia"
+msgstr "Malaysia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Mexico"
+msgstr "Mexico"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Malawi"
+msgstr "Malawi"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Maldives"
+msgstr "Maldivene"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Mauritius"
+msgstr "Mauritius"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Malta"
+msgstr "Malta"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Montserrat"
+msgstr "Montserrat"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Mauritania"
+msgstr "Mauritania"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Martinique"
+msgstr "Martinique"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Northern Mariana Islands"
+msgstr "Northern Mariana Islands"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Mongolia"
+msgstr "Mongolia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Myanmar"
+msgstr "Myanmar"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Mali"
+msgstr "Mali"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Macedonia"
+msgstr "Makedonia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Marshall Islands"
+msgstr "Marshall Islands"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Madagascar"
+msgstr "Madagaskar"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Moldova"
+msgstr "Moldova"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Monaco"
+msgstr "Monaco"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Morocco"
+msgstr "Morocco"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Libya"
+msgstr "Liberia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Latvia"
+msgstr "Latvia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Luxembourg"
+msgstr "Luxembourg"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Lithuania"
+msgstr "Litauen"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Lesotho"
+msgstr "Lesotho"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Liberia"
+msgstr "Liberia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Sri Lanka"
+msgstr "Sri Lanka"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Liechtenstein"
+msgstr "Liechtenstein"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Saint Lucia"
+msgstr "Saint Lucia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Lebanon"
+msgstr "Lebanon"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Laos"
+msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Kazakhstan"
+msgstr "Kazakhstan"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cayman Islands"
+msgstr "Cayman Islands"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Kuwait"
+msgstr "Kuwait"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Korea"
+msgstr "Mer"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Korea (North)"
+msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Saint Kitts and Nevis"
+msgstr "Saint Kitts and Nevis"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Comoros"
+msgstr "Comoros"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Kiribati"
+msgstr "Kiribati"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cambodia"
+msgstr "Cambodia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Kyrgyzstan"
+msgstr "Kyrgyzstan"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Kenya"
+msgstr "Kenya"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Japan"
+msgstr "Japan"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Jordania"
+msgstr "Jordan"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Jamaica"
+msgstr "Jamaica"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Iceland"
+msgstr "Island"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Iran"
+msgstr "Irak"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Iraq"
+msgstr "Irak"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "British Indian Ocean Territory"
+msgstr "British Indian Ocean Territory"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "India"
+msgstr "India"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Israel"
+msgstr "Israel"
+
+#: ../../lang.pm:1 ../../standalone/drakxtv:1
+#, fuzzy, c-format
+msgid "Ireland"
+msgstr "Islansk"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Indonesia"
+msgstr "Indonesia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Hungary"
+msgstr "Hungarn"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Haiti"
+msgstr "Haiti"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Croatia"
+msgstr "Kroatia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Honduras"
+msgstr "Honduras"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Heard and McDonald Islands"
+msgstr "Heard Island and McDonald Islands"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Hong Kong"
+msgstr "Hong Kong"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Guyana"
+msgstr "Guyana"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Guinea-Bissau"
+msgstr "Guinea-Bissau"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Guam"
+msgstr "Guam"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Guatemala"
+msgstr "Guatemala"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "South Georgia and the South Sandwich Islands"
+msgstr "South Georgia and the South Sandwich Island"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Equatorial Guinea"
+msgstr "Equatorial Guinea"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Guadeloupe"
+msgstr "Guadeloupe"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Guinea"
+msgstr "Guinea"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Gambia"
+msgstr "Gambia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Greenland"
+msgstr "Grønland"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Gibraltar"
+msgstr "Gibraltar"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Ghana"
+msgstr "Ghana"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "French Guiana"
+msgstr "French Guiana"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Georgia"
+msgstr "Georgia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Grenada"
+msgstr "Grenada"
+
+#: ../../lang.pm:1 ../../network/tools.pm:1
+#, c-format
+msgid "United Kingdom"
+msgstr "United Kingdom"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Gabon"
+msgstr "Gabon"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Faroe Islands"
+msgstr "Faroe Islands"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Micronesia"
+msgstr "Mikronesia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Falkland Islands (Malvinas)"
+msgstr "Falkland Islands (Malvinas)"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Fiji"
+msgstr "Fiji"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Finland"
+msgstr "Finland"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Ethiopia"
+msgstr "Ethiopia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Spain"
+msgstr "Spania"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Eritrea"
+msgstr "Eritrea"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Western Sahara"
+msgstr "Western Sahara"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Egypt"
+msgstr "Egypt"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Estonia"
+msgstr "Estland"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Ecuador"
+msgstr "Ecuador"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Algeria"
+msgstr "Algerie"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Dominican Republic"
+msgstr "Dominikanske republikk"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Dominica"
+msgstr "Dominikanske republikk"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Denmark"
+msgstr "Danmark"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Djibouti"
+msgstr "Djibouti"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cyprus"
+msgstr "Kypros"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Christmas Island"
+msgstr "Christmas Island"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cape Verde"
+msgstr "Cape Verde"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cuba"
+msgstr "Kuba"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Colombia"
+msgstr "Colombia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "China"
+msgstr "Kina"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cameroon"
+msgstr "Kamerun"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Chile"
+msgstr "Chile"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cook Islands"
+msgstr "Cook Islands"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cote d'Ivoire"
+msgstr "Cote d'Ivoire"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Switzerland"
+msgstr "Sveits"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Congo (Brazzaville)"
+msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Central African Republic"
+msgstr "Central African Republic"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Congo (Kinshasa)"
+msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Cocos (Keeling) Islands"
+msgstr "Cocos (Keeling) Islands"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Canada"
+msgstr "Kanada"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Belize"
+msgstr "Belize"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Belarus"
+msgstr "Hviterussland"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Botswana"
+msgstr "Botswana"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bouvet Island"
+msgstr "Bouvetøya"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bhutan"
+msgstr "Bhutan"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bahamas"
+msgstr "Bahamas"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Brazil"
+msgstr "Brasil"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bolivia"
+msgstr "Bolivia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Brunei Darussalam"
+msgstr "Brunei Darussalam"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bermuda"
+msgstr "Bermuda"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Benin"
+msgstr "Benin"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Burundi"
+msgstr "Burundi"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bahrain"
+msgstr "Bahrain"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bulgaria"
+msgstr "Bulgaria"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Burkina Faso"
+msgstr "Burkina Faso"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bangladesh"
+msgstr "Bangladesh"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Barbados"
+msgstr "Barbados"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Bosnia and Herzegovina"
+msgstr "Bosnia og Herzegovina"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Azerbaijan"
+msgstr "Azerbaijan"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Aruba"
+msgstr "Aruba"
+
+#: ../../lang.pm:1 ../../standalone/drakxtv:1
+#, fuzzy, c-format
+msgid "Australia"
+msgstr "Østerrike"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "American Samoa"
+msgstr "Amerikansk Samoa"
+
+#: ../../lang.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "Argentina"
+msgstr "Argentina"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Antarctica"
+msgstr "Antarktis"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Angola"
+msgstr "Angola"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Netherlands Antilles"
+msgstr "Netherlands Antilles"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Armenia"
+msgstr "Armenia"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Albania"
+msgstr "Albania"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Anguilla"
+msgstr "Anguilla"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Antigua and Barbuda"
+msgstr "Antigua and Barbuda"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "United Arab Emirates"
+msgstr "United Arab Emirates"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Andorra"
+msgstr "Andorra"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Afghanistan"
+msgstr "Afghanistan"
 
 #: ../../loopback.pm:1
 #, c-format
@@ -6592,16 +7754,6 @@ msgstr "Flytt filer til en ny partisjon"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
-msgid "Formatting loopback file %s"
-msgstr "Formaterer loopback-fil %s"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Formatting"
-msgstr "Formatering"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "Etter formatering av partisjon %s vil alle data på denne partisjonen\n"
@@ -7831,7 +8983,12 @@ msgstr "Domenenavn"
 msgid "Web Server"
 msgstr "Tjener"
 
-#: ../../network/ethernet.pm:1
+#: ../../network/ethernet.pm:1 ../../network/network.pm:1
+#, c-format
+msgid "Zeroconf host name must not contain a ."
+msgstr ""
+
+#: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, fuzzy, c-format
 msgid "Zeroconf Host name"
 msgstr "Vertsnavn"
@@ -7840,6 +8997,15 @@ msgstr "Vertsnavn"
 #, c-format
 msgid "Host name"
 msgstr "Vertsnavn"
+
+#: ../../network/ethernet.pm:1 ../../network/network.pm:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+"Enter a Zeroconf host name without any dot if you don't\n"
+"want to use the default host name."
+msgstr ""
 
 #: ../../network/ethernet.pm:1
 #, c-format
@@ -8198,9 +9364,9 @@ msgstr ""
 "%s"
 
 #: ../../network/netconnect.pm:1
-#, c-format
-msgid "The network needs to be restarted"
-msgstr "Nettverket må startes på nytt"
+#, fuzzy, c-format
+msgid "The network needs to be restarted. Do you want to restart it ?"
+msgstr "Pakken %s må installeres. Vil du installere den?"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8429,11 +9595,6 @@ msgstr "Proxy burde være http://..."
 
 #: ../../network/network.pm:1
 #, c-format
-msgid "Track network card id (useful for laptops)"
-msgstr "Spor id nettverkskort (nyttig for bærbare)"
-
-#: ../../network/network.pm:1
-#, c-format
 msgid "FTP proxy"
 msgstr "FTP-proxy"
 
@@ -8510,24 +9671,24 @@ msgid "Start at boot"
 msgstr "Startet ved oppstart"
 
 #: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "Network Hotplugging"
+msgstr "Nettverkskonfigurasjon"
+
+#: ../../network/network.pm:1
 #, c-format
-msgid "zeroconf"
-msgstr ""
+msgid "Track network card id (useful for laptops)"
+msgstr "Spor id nettverkskort (nyttig for bærbare)"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
-msgid "(bootp/dhcp)"
+msgid "(bootp/dhcp/zeroconf)"
 msgstr "(bootp/dhcp)"
 
 #: ../../network/network.pm:1
 #, c-format
 msgid "Automatic IP"
 msgstr "Automatisk IP"
-
-#: ../../network/network.pm:1
-#, fuzzy, c-format
-msgid "(bootp/dhcp/zeroconf)"
-msgstr "(bootp/dhcp)"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -8587,11 +9748,6 @@ msgstr ""
 #, c-format
 msgid "Firewalling configuration detected!"
 msgstr "Brannmurkonfigurasjon oppdaget!"
-
-#: ../../network/tools.pm:1
-#, c-format
-msgid "United Kingdom"
-msgstr ""
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -13634,7 +14790,7 @@ msgstr ""
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "First Time Wizard"
-msgstr ""
+msgstr "Veiviseren for første kjøring"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -13790,13 +14946,33 @@ msgstr "Bruk"
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Click here to launch the wizard ->"
+msgstr ""
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "Wizard..."
 msgstr "Wizard..."
 
 #: ../../standalone/drakconnect:1
 #, c-format
-msgid "Click here to launch the wizard ->"
-msgstr ""
+msgid "Status:"
+msgstr "Status:"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Type:"
+msgstr "Type:"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet access"
+msgstr "Internett-tilgang"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Hostname: "
+msgstr "Vertsnavn: "
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -13832,26 +15008,6 @@ msgstr "Konfigurer internetttilgang...."
 #, c-format
 msgid "Wait please"
 msgstr ""
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Status:"
-msgstr "Status:"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Type:"
-msgstr "Type:"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet access"
-msgstr "Internett-tilgang"
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Hostname: "
-msgstr "Vertsnavn: "
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -14123,8 +15279,8 @@ msgstr "Velg partisjonene du ønsker å partisjonere"
 msgid ""
 "\n"
 " Copyright (C) 2001-2002 by MandrakeSoft \n"
-"\tDUPONT Sebastien (initial version)\n"
-"        CHAUMETTE Damien dchaumette\\@mandrakesoft.com\n"
+"\tDUPONT Sebastien (original version)\n"
+"        CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
 "\n"
 " This program is free software; you can redistribute it and/or modify\n"
 " it under the terms of the GNU General Public License as published by\n"
@@ -14150,8 +15306,6 @@ msgid ""
 "    -  ttf2pt1:   \n"
 "\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
 "             Convert ttf font files to afm and pfb fonts\n"
-"\n"
-"\n"
 msgstr ""
 
 #: ../../standalone/drakfont:1
@@ -14728,28 +15882,18 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, fuzzy, c-format
-msgid "Delete selected rule"
-msgstr "Fjern inngang"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Move selected rule down one level"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Move selected rule up one level"
-msgstr ""
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Edit current rule"
-msgstr ""
+msgid "quit"
+msgstr "Avslutt"
 
 #: ../../standalone/drakperm:1
 #, fuzzy, c-format
-msgid "Add a new rule at the end"
-msgstr "Legg til en ny skriver"
+msgid "save"
+msgstr "Status"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -14761,18 +15905,8 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "select perm file to see/edit"
+msgid "Edit current rule"
 msgstr ""
-
-#: ../../standalone/drakperm:1
-#, fuzzy, c-format
-msgid "add a rule"
-msgstr "Legg til en modul"
-
-#: ../../standalone/drakperm:1
-#, fuzzy, c-format
-msgid "Down"
-msgstr "Ferdig"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -14781,8 +15915,38 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, fuzzy, c-format
+msgid "Delete selected rule"
+msgstr "Fjern inngang"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
 msgid "delete"
 msgstr "Slett"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Add a new rule at the end"
+msgstr "Legg til en ny skriver"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "add a rule"
+msgstr "Legg til en modul"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Move selected rule down one level"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid "Down"
+msgstr "Ferdig"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Move selected rule up one level"
+msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -15236,21 +16400,6 @@ msgid "Australian Optus cable TV"
 msgstr ""
 
 #: ../../standalone/drakxtv:1
-#, c-format
-msgid "Argentina"
-msgstr ""
-
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "South Africa"
-msgstr ""
-
-#: ../../standalone/drakxtv:1
-#, fuzzy, c-format
-msgid "Australia"
-msgstr "Østerrike"
-
-#: ../../standalone/drakxtv:1
 #, fuzzy, c-format
 msgid "Newzealand"
 msgstr "Netherlands"
@@ -15259,11 +16408,6 @@ msgstr "Netherlands"
 #, fuzzy, c-format
 msgid "France [SECAM]"
 msgstr "Frankrike"
-
-#: ../../standalone/drakxtv:1
-#, fuzzy, c-format
-msgid "Ireland"
-msgstr "Islansk"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -16537,334 +17681,3 @@ msgstr "Personlig finans"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programmer for å håndtere dine finanser, så som gnucash"
-
-#~ msgid "FAT"
-#~ msgstr "FAT"
-
-#, fuzzy
-#~ msgid "Local printers available on: "
-#~ msgstr "ingen tilgjengelige partisjoner"
-
-#, fuzzy
-#~ msgid "modinfo is not available"
-#~ msgstr "Ingen diskettstasjon tilgjengelig"
-
-#~ msgid "You don't have enough free space on your Windows partition"
-#~ msgstr "Du har ikke nok ledig plass på Windows partisjonen din"
-
-#~ msgid "/_Help..."
-#~ msgstr "/_Hjelp..."
-
-#~ msgid "Do you really want to leave the installation?"
-#~ msgstr "Ønsker du virkelig å forlate installasjonen?"
-
-#, fuzzy
-#~ msgid "Upgrade partition %s"
-#~ msgstr "partisjon %s"
-
-#~ msgid "Tamil (Unicode)"
-#~ msgstr "Tamilsk (Unicode)"
-
-#~ msgid "Setup filesystems"
-#~ msgstr "Oppsett filsystemer"
-
-#~ msgid "Boot from DOS/Windows (loadlin)"
-#~ msgstr "Start fra DOS/Windows (loadlin)"
-
-#~ msgid "Remove entry"
-#~ msgstr "Fjern inngang"
-
-#~ msgid "Desktop"
-#~ msgstr "Skrivebord"
-
-#~ msgid "Start Menu"
-#~ msgstr "Startmeny"
-
-#~ msgid ""
-#~ "The \"%s\" driver for your sound card is unlisted\n"
-#~ "\n"
-#~ "Please send the output of the \"lspcidrake -v\" command to\n"
-#~ "<install at mandrakesoft dot com>\n"
-#~ "with subject: unlisted sound driver \"%s\""
-#~ msgstr ""
-#~ "\"%s\" driveren for lydkortet ditt er ikke listet\n"
-#~ "\n"
-#~ "Vennligst send utskrift av \"lspcidrake -v\" kommandoen til\n"
-#~ "<install at mandrakesoft dot com>\n"
-#~ "med subject: unlisted sound driver \"%s\""
-
-#~ msgid "You must have a swap partition"
-#~ msgstr "Du må ha en vekslingspartisjon"
-
-#~ msgid "Install Class"
-#~ msgstr "Installeringsklasse"
-
-#~ msgid "Please choose one of the following classes of installation:"
-#~ msgstr "Vennligst velg en av følgende installasjonsklasser:"
-
-#~ msgid "Which installation class do you want?"
-#~ msgstr "Hvilken installasjonsklasse ønsker du?"
-
-#~ msgid "Recommended"
-#~ msgstr "Anbefalt"
-
-#~ msgid "Expert"
-#~ msgstr "Ekspert"
-
-#~ msgid "Upgrade packages only"
-#~ msgstr "Oppgrader kun pakker"
-
-#~ msgid "No root partition found to perform an upgrade"
-#~ msgstr "Ingen rotpartisjon funnet for oppgradering"
-
-#~ msgid "Root Partition"
-#~ msgstr "Rotpartisjon"
-
-#~ msgid "What is the root partition (/) of your system?"
-#~ msgstr "Hva er rotpartisjonen (/) på ditt system?"
-
-#~ msgid "ISDN card"
-#~ msgstr "ISDN-kort"
-
-#~ msgid "Specify CUPS server"
-#~ msgstr "Spesifiser CUPS tjener"
-
-#~ msgid ""
-#~ "To get access to printers on remote CUPS servers in your local network "
-#~ "you do not have to configure anything; the CUPS servers inform your "
-#~ "machine automatically about their printers. All printers currently known "
-#~ "to your machine are listed in the \"Remote printers\" section in the main "
-#~ "window of Printerdrake. When your CUPS server is not in your local "
-#~ "network, you have to enter the CUPS server IP address and optionally the "
-#~ "port number to get the printer information from the server, otherwise "
-#~ "leave these fields blank."
-#~ msgstr ""
-#~ "For å få tilgang til fjern CUPS-tjenere i ditt lokale nettverk trenger du "
-#~ "ikke å konfigurere noen ting; CUPS-tjenerene informerer maskinen din "
-#~ "automatisk om skriverene. Alle skriverene som før øyeblikket er kjent for "
-#~ "maskinen din er listet i \"Remote printers\" seksjonen i hovedvinduet til "
-#~ "Printerdrake. Når CUPS-tjeneren din ikke er i ditt lokale nettverk, må du "
-#~ "entre CUPS-tjenerens IP-adresse og evnt. portnummeret for å få skriver- "
-#~ "informasjon fra tjeneren, ellers la disse feltene være tomme."
-
-#~ msgid ""
-#~ "\n"
-#~ "Normally, CUPS is automatically configured according to your network "
-#~ "environment, so that you can access the printers on the CUPS servers in "
-#~ "your local network. If this does not work correctly, turn off \"Automatic "
-#~ "CUPS configuration\" and edit your file /etc/cups/cupsd.conf manually. Do "
-#~ "not forget to restart CUPS afterwards (command: \"service cups restart\")."
-#~ msgstr ""
-#~ "\n"
-#~ "Normalt er CUPS konfigurert automatisk ihht. til nettverksmiljøet ditt, "
-#~ "så du kan ha tilgang til skrivere på CUPS-tjenerene i ditt lokale "
-#~ "nettverk. Hvis dette ikke virker ordentlig, skru av \"Automatic CUPS "
-#~ "configuration\" og rediger filen /etc/cups/cupsd.conf manuelt. Ikke glem "
-#~ "å starte CUPS på nytt etterpå (kommando: \"service cups restart\")."
-
-#~ msgid "The IP address should look like 192.168.1.20"
-#~ msgstr "IP-adresse bør være i format 1.2.3.4"
-
-#~ msgid "CUPS server IP"
-#~ msgstr "CUPS tjener IP"
-
-#, fuzzy
-#~ msgid ""
-#~ "The following printer\n"
-#~ "\n"
-#~ msgstr "Følgende pakker vil bli fjernet"
-
-#, fuzzy
-#~ msgid ""
-#~ "The following packages need to be installed:\n"
-#~ " @list_of_rpm_to_install"
-#~ msgstr "Følgende pakker vil bli installert"
-
-#~ msgid "can not open /etc/inittab for reading: %s"
-#~ msgstr "kan ikke åpne /etc/inittab for lesing: %s"
-
-#, fuzzy
-#~ msgid "cpu number "
-#~ msgstr "Telefonnummer"
-
-#~ msgid ""
-#~ "You now have the opportunity to download encryption software.\n"
-#~ "\n"
-#~ "WARNING:\n"
-#~ "\n"
-#~ "Due to different general requirements applicable to these software and "
-#~ "imposed\n"
-#~ "by various jurisdictions, customer and/or end user of theses software "
-#~ "should\n"
-#~ "ensure that the laws of his/their jurisdiction allow him/them to "
-#~ "download, stock\n"
-#~ "and/or use these software.\n"
-#~ "\n"
-#~ "In addition customer and/or end user shall particularly be aware to not "
-#~ "infringe\n"
-#~ "the laws of his/their jurisdiction. Should customer and/or end user not\n"
-#~ "respect the provision of these applicable laws, he/they will incure "
-#~ "serious\n"
-#~ "sanctions.\n"
-#~ "\n"
-#~ "In no event shall Mandrakesoft nor its manufacturers and/or suppliers be "
-#~ "liable\n"
-#~ "for special, indirect or incidental damages whatsoever (including, but "
-#~ "not\n"
-#~ "limited to loss of profits, business interruption, loss of commercial "
-#~ "data and\n"
-#~ "other pecuniary losses, and eventual liabilities and indemnification to "
-#~ "be paid\n"
-#~ "pursuant to a court decision) arising out of use, possession, or the "
-#~ "sole\n"
-#~ "downloading of these software, to which customer and/or end user could\n"
-#~ "eventually have access after having sign up the present agreement.\n"
-#~ "\n"
-#~ "\n"
-#~ "For any queries relating to these agreement, please contact \n"
-#~ "Mandrakesoft, Inc.\n"
-#~ "2400 N. Lincoln Avenue Suite 243\n"
-#~ "Altadena California 91001\n"
-#~ "USA"
-#~ msgstr ""
-#~ "Du har nå mulighet til å laste ned programvare for kryptering.\n"
-#~ "\n"
-#~ "ADVARSEL:\n"
-#~ "\n"
-#~ "Pga. forskjellige krav som er tillagt denne programvaren og pålagt av "
-#~ "forskjellige\n"
-#~ "myndigheter, bør kunde og/eller sluttbruker av denne programvaren "
-#~ "forsikre seg\n"
-#~ "om at lovene i sin/deres jurisdiksjon tillater han/dem å laste ned, ha i "
-#~ "besittelse\n"
-#~ "og/eller bruke denne programvaren.\n"
-#~ "\n"
-#~ "I tillegg skal kunde og/eller sluttbruker spesielt være oppmerksom på å "
-#~ "ikke bryte\n"
-#~ "lovene i sin/deres jurisdiksjon. Skulle kunde og/eller sluttbruker ikke\n"
-#~ "respektere bestemmelsene av disse lovene, vil han/de pådra seg alvorlige\n"
-#~ "sanksjoner.\n"
-#~ "\n"
-#~ "Under ingen omstendighet skal Mandrakesoft og eller ikke sine produsenter "
-#~ "og/eller\n"
-#~ "leverandører bli holdt ansvarlige for særskilte, indirekte eller "
-#~ "tilfeldige\n"
-#~ "skader uansett hva som enn skulle (inkludert, men ikke begrenset til tap "
-#~ "av fortjeneste,\n"
-#~ "forretningsavbrudd, tap av kommersiell data og andre pengemessige tap, og "
-#~ "endelige\n"
-#~ "ansvarsforhold og erstatninger som skal betales ifølge en rettslig\n"
-#~ "avgjørelse) oppstå ut av bruk, besittelse, eller ene og alene "
-#~ "nedlastingen\n"
-#~ "av denne programvaren, som kunde og/eller sluttbruker til slutt kan ha\n"
-#~ "tilgang til etter å ha sagt seg enig i og undertegnet fremviste avtale.\n"
-#~ "\n"
-#~ "For spørsmål angående denne avtalen, vennligst kontakt \n"
-#~ "Mandrakesoft, Inc.\n"
-#~ "2400 N. Lincoln Avenue Suite 243\n"
-#~ "Altadena California 91001\n"
-#~ "USA"
-
-#~ msgid "Proxy configuration"
-#~ msgstr "Proxy-konfigurasjon"
-
-#~ msgid ""
-#~ "Welcome to the proxy configuration utility.\n"
-#~ "\n"
-#~ "Here, you'll be able to set up your http and ftp proxies\n"
-#~ "with or without login and password\n"
-#~ msgstr ""
-#~ "Velkommen til proxy-konfigurasjonsverktøyet.\n"
-#~ "\n"
-#~ "Her kan du sette opp dine http og ftp proxier\n"
-#~ "med eller uten brukernavn og passord\n"
-
-#~ msgid ""
-#~ "Please fill in the http proxy informations\n"
-#~ "Leave it blank if you don't want an http proxy"
-#~ msgstr ""
-#~ "Vennligst fill ut med http proxy informasjon\n"
-#~ "La feltet være hvis du ikke ønsker en http proxy"
-
-#~ msgid "URL"
-#~ msgstr "URL"
-
-#~ msgid "port"
-#~ msgstr "port"
-
-#~ msgid "URL should begin with 'http:'"
-#~ msgstr "URLen bør begynne med \"http:\""
-
-#~ msgid "The port part should be numeric"
-#~ msgstr "Portnummer burde være numerisk"
-
-#~ msgid ""
-#~ "Please fill in the ftp proxy informations\n"
-#~ "Leave it blank if you don't want an ftp proxy"
-#~ msgstr ""
-#~ "Vennligst fyll ut ftp-proxy informasjonen-nLa feltet være hvis du ikke "
-#~ "ønsker en ftp-proxy"
-
-#~ msgid ""
-#~ "Please enter proxy login and password, if any.\n"
-#~ "Leave it blank if you don't want login/passwd"
-#~ msgstr ""
-#~ "Vennligst skriv inn proxy brukernavn og passord, hvis det eksisterer.\n"
-#~ "La det være hvis du ikke ønsker brukernavn/passord"
-
-#~ msgid "login"
-#~ msgstr "brukernavn"
-
-#~ msgid "password"
-#~ msgstr "passord"
-
-#~ msgid "re-type password"
-#~ msgstr "skriv inn passord på nytt"
-
-#~ msgid "The passwords don't match. Try again!"
-#~ msgstr "Passordene stemmer ikke overens. Prøv igjen!"
-
-#~ msgid "Can't write file %s"
-#~ msgstr "Kan ikke skrive fil %s"
-
-#~ msgid "-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-*,*"
-#~ msgstr "-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-*,*"
-
-#~ msgid "-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-*,*"
-#~ msgstr "-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-*,*"
-
-#~ msgid "no help implemented yet.\n"
-#~ msgstr "ingen hjelp implementert ennå.\n"
-
-#~ msgid "Please click on a medium"
-#~ msgstr "Vennligst klikk på ett media"
-
-#~ msgid "Removing LPRng..."
-#~ msgstr "Fjerner LPRng..."
-
-#~ msgid "Removing LPD..."
-#~ msgstr "Fjerner LPD..."
-
-#~ msgid "usage: drakfloppy\n"
-#~ msgstr "bruk: drakfloppy\n"
-
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Usage: harddrake [-h|--help] [--test]\n"
-#~ msgstr "bruk: keyboarddrake [--expert] [tastatur]\n"
-
-#~ msgid "usage: keyboarddrake [--expert] [keyboard]\n"
-#~ msgstr "bruk: keyboarddrake [--expert] [tastatur]\n"
-
-#~ msgid "Probing %s class\n"
-#~ msgstr "Søker %s klasse\n"
-
-#~ msgid "detected on interface %s"
-#~ msgstr "oppdaget på grensesnitt %s"
-
-#~ msgid "unable to backup lilo message"
-#~ msgstr "kan ikke ta backup av lilo beskjed"
-
-#~ msgid "can't change lilo message"
-#~ msgstr "kan ikke endre lilo beskjed"
