@@ -1,3 +1,277 @@
+2004/02/04  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* drakxtools.spec: 
+	  - don't be afraid, this is not the doc package but just perl module
+	needed by drakhelp.
+
+	* timezone.pm: 
+	  - less arguments in ntp_server, $prefix no more passed to function
+	args
+
+	* share/rpmsrate: 
+	  - new mandrake-doc* names
+
+2004/02/04  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/netconnect.pm: 
+	  - add network::ethernet::get_eth_cards_names
+	  - kill duplicated code
+	drop Storable and use Dumper (queen & pipi rulez)
+
+	* network/ethernet.pm: 
+	  - add network::ethernet::get_eth_cards_names
+	  - kill duplicated code
+
+	* standalone/drakconnect: compact declaration
+	ethernet cards get via get_eth_cards()
+	  - add network::ethernet::get_eth_cards_names
+	  - kill duplicated code
+	drop Storable and use Dumper (queen & pipi rulez)
+	typo fix...
+
+2004/02/04  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* standalone.pm: http://www.gnu.org/prep/standards_18.html says --help and
+	--version are printed on standard output
+
+	* docs/README: update netauto doc
+
+2004/02/04  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* lang.pm: a bit of locales corrections
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/be.po, share/po/uk.po, share/po/mn.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/lt.po, share/po/he.po, share/po/cy.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/tg.po,
+	share/po/nb.po, share/po/bs.po, share/po/uz.po, share/po/ro.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/hi.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/nl.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/de.po, share/po/eo.po,
+	share/po/lv.po, share/po/el.po, share/po/cs.po, share/po/bg.po,
+	share/po/hu.po, share/po/uz@Latn.po: updated pot file
+
+2004/02/04  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/icons/wiz_default_left.png: remove $draw2 (in ugtk2.pm) and
+	wiz_default_left.png which are unused
+
+	* lvm.pm: create /dev/mapper/control (needed when you don't have devfs)
+	  - replace PE_size with extent_size and get it (fix illegal division by
+	0)
+	  - fix getting the output of pvs vgs lvs commands
+	(chomp_ is not enough because of spaces at the end)
+	  - fix get_lvs() (and use lvs instead of vgdisplay)
+
+	* diskdrake/interactive.pm: 
+	  - don't display start sector and cylinders used for LVs
+	  - display "Number of logical extents" of LVs
+
+	* install_gtk.pm: we now use XF4 during install, so we can support
+	ExplorerPS/2 (XF3 didn't know it)
+
+	* install_steps_gtk.pm: rename $ugtk2::force_center used at install with
+	$ugtk2::force_center_at_pos
+	the boolean $ugtk2::force_center value used standalone is kept as before
+
+	* mouse.pm: use protocol "ExplorerPS/2" instead of "auto" for kernel 2.6
+	(not statisfying since people booting with kernel 2.4 will not get a
+	working
+	mouse, but at least we can test if this really works nicely for 2.6)
+
+	* Xconfig/card.pm: replace 4.3 with 4.4 (XFree version) (bugzilla #7378)
+
+	* ugtk2.pm: 
+	  - rename $ugtk2::force_center used at install with
+	$ugtk2::force_center_at_pos
+	the boolean $ugtk2::force_center value used standalone is kept as before
+	  - deprecate $::noBorder (it was the same as !$::isInstall)
+	  - deprecate $ugtk2::force_position (unused AFAIK)
+	
+	  - _create_window() now returns the created window, it doesn't assign
+	{rwindow}
+	  nor {window} anymore. It doesn't handle a Frame for the window
+	  (it is now directly done by ugtk2->new which is the only function
+	using _create_window())
+	
+	  - deprecate option no_interactive_objects (unused AFAIK)
+	
+	  - {rwindow} is a VBox for both isWizard and isEmbedded
+	  (when isEmbedded, a HBox was created, replacing the create VBox)
+	
+	  - call ->set_title on $::WizardWindow so that the title is honored in
+	non embedded wizard
+	
+	  - remove $draw2 and wiz_default_left.png which are unused
+	
+	  - remove ->set_uposition on $::WizardWindow for install. This is not
+	needed
+	  anymore since force_center_at_pos now works on $::WizardWindow
+	
+	  - hoist $::WizardTable creation
+	
+	  - explicitly set the size of the window during install. The chosen
+	value is
+	  the same as before +9 pixels for the height
+	  (the size needs to be fixed since the advertising images must fit)
+	
+	  - remove the callbacks on expose_event and delete_event for non
+	embedded wizard.
+	  they are the same as the one in _create_window()
+	  (except for the delete_event which explicitly destroy the window, is
+	that ok??)
+	
+	more questions:
+	  - ->set_title on a plug may break, it needs testing
+	  - flush() just after Gtk2::Plug->new, is it needed? (since there is
+	another flush())
+	(gtk_TextView_get_log): handle errors
+
+	* standalone/harddrake2, standalone.pm: $::noBorder is deprecated (it was
+	the same as !$::isInstall)
+
+	* interactive.pm: 
+	  ->ask_from_entry and ->ask_from_entries are better with focus_first
+
+	* do_pkgs.pm (ensure_is_installed): file to test if the package is
+	installed is optional.
+	But in that case, you have to check if it is installed first.
+
+2004/02/03  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/netconnect.pm, standalone/drakconnect: 
+	  - fix adsl_conf_backend call
+	  - store and retreive network interfaces via $config file
+
+2004/02/03  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/02/03  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/modules.c: differentiate no floppy disk in driver or ext2 fs
+
+	* mdk-stage1/dhcp.c: document when netauto is not provided and bootfile
+	DHCP server param is given
+
+	* mdk-stage1/doc/TECH-INFOS: more doc on DHCP server response conf
+
+2004/02/03  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm: perl_checker fix
+
+	* modules.pm: fix typo
+	fix typo
+
+2004/02/03  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Maintain /etc/passwd$$CLIENT$$ so mdkkdm has a
+	valid userlist.
+
+2004/02/03  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* modules/parameters.pm (parameters) fix modinfo parsing (format had been
+	altered between
+	modutils and module-init-tools :-()
+
+	* modules/interactive.pm (config_window) do not even try to hint the user
+	about the parameter
+	format on a 2.6.x kernel
+
+	* share/po/fr.po: fix translator that ignore shortcut hints
+
+2004/02/02  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/advertising/dis-07.pl, share/advertising/dis-09.pl: Update
+	Update
+
+	* share/advertising/pwp-05.pl, share/advertising/dis-06.pl,
+	share/advertising/dwd-08.pl, share/advertising/pwp-02.pl,
+	share/advertising/dwd-04.pl, share/advertising/ppp-03.pl,
+	share/advertising/dis-02.pl, share/advertising/dis-08.pl,
+	share/advertising/dis-04.pl, share/advertising/pwp-06.pl,
+	share/advertising/dis-11.pl, share/advertising/dwd-03.pl,
+	share/advertising/dis-10.pl, share/advertising/ppp-08.pl,
+	share/advertising/dwd-06.pl, share/advertising/ppp-02.pl,
+	share/advertising/pwp-07.pl, share/advertising/dwd-07.pl,
+	share/advertising/ppp-07.pl, share/advertising/dwd-02.pl,
+	share/advertising/dis-05.pl, share/advertising/ppp-09.pl,
+	share/advertising/dis-01.pl, share/advertising/pwp-10.pl,
+	share/advertising/dwd-05.pl, share/advertising/ppp-06.pl,
+	share/advertising/ppp-05.pl, share/advertising/ppp-01.pl,
+	share/advertising/dis-03.pl, share/advertising/pwp-03.pl,
+	share/advertising/ppp-04.pl, share/advertising/pwp-01.pl,
+	share/advertising/pwp-04.pl, share/advertising/pwp-08.pl,
+	share/advertising/pwp-09.pl, share/advertising/dwd-09.pl: Update
+
+2004/02/02  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/uz@Cyrl.po, share/po/et.po,
+	share/po/ja.po, share/po/hr.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/be.po, share/po/uk.po, share/po/mn.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/he.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/tg.po, share/po/nb.po, share/po/bs.po, share/po/uz.po,
+	share/po/ro.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/hi.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/fr.po, share/po/sr@Latn.po, share/po/sq.po, share/po/nl.po,
+	share/po/it.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/lv.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/hu.po, share/po/uz@Latn.po: updated pot file;
+	changed Uzbek to default to cyrillic
+
+2004/02/02  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10-0.3mdk
+	10-0.2mdk
+
+	* share/po/fr.po: make installer look smoother in french
+	fix drakboot layout when localized in french
+	update
+
+	* ugtk2.pm: use wrapped labels in various places
+
+	* interactive/gtk.pm: do not pass extra empty invisible label (really
+	cosmetic)
+	use wrapped labels in various places
+
+	* c/stuff.xs.pl: kill warning
+
+	* network/netconnect.pm: only list wireless capabale cards when one choose
+	wireless cnx
+	split out wireless connections out of lan ones so that users are less
+	confused
+	fix preselecting ppoa for speedtouch modem
+
+	* standalone/logdrake: remove unneeded next fields
+	make cron script be able to use either local smtp server or a remote
+	one (arnaud)
+	add "remove cron entry" on arnaud request
+
+	* standalone.pm: update drakfont help message
+	bump copyright
+	  --help: documente new drakboot and drakconnect parameters
+
+	* any.pm: fix drakboot layout: use checkboxes own labels rather than
+	packing extra
+	labels
+
+	* network/tools.pm (is_wireless_intf) kill it since it's no more usefull.
+	rationale: rather than duplicating modules list in
+	kernel/list_modules.pm
+	and network/tools.pm (with usual sync bugs), it's quite much easier to
+	maintain one single list of wireless modules in list_modules.pm
+
 2004/02/02  Fabian Mandelbaum  <fabman at 2vias.com.ar>
 
 	* share/po/es.po: Updated Spanish translations
@@ -24839,7 +25113,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.864 2004/02/02 12:45:36 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.865 2004/02/02 16:20:57 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
