@@ -541,7 +541,6 @@ sub gtkicons_labels_widget {
 	$y_round, $x_back2, $y_back2, $icon_width, $icon_height, $exec_func, $exec_hash) = @_;
 
     my @tab;
-    my $i = 0;
     my $cursor_hand = new Gtk::Gdk::Cursor 60;
     my $cursor_normal = new Gtk::Gdk::Cursor 68;
 	my @args = @$args;
@@ -599,15 +598,13 @@ sub gtkicons_labels_widget {
 				    $exec_func->($tag, $exec_hash->{$label});
 				});
 	$darea->signal_connect(realize => sub { $darea->window->set_cursor($cursor_hand) });
-	$tab[$i] = $darea;
-	$i++;
+	push @tab, $darea;
     }
     my $fixed = new Gtk::Fixed;
     foreach (@tab) { $fixed->put($_, 75, 65) }
     my $w_ret = createScrolledWindow($fixed, undef, 'none');
-    my $redraw_function;
-    $redraw_function = sub { 
-	$fixed->move(@$_) foreach compute_icons($fixed->allocation->[2]-22, $fixed->allocation->[3], 40, 15, 20, @tab);
+    my $redraw_function = sub { 
+	 $fixed->move(@$_) foreach compute_icons($fixed->allocation->[2], $fixed->allocation->[3], 40, 15, 20, @tab);
     };
     $fixed->signal_connect(expose_event => $redraw_function);
     $fixed->signal_connect(realize => sub { $fixed->window->set_back_pixmap($background, 0) });
@@ -863,8 +860,8 @@ sub compute_icons {
   bcl_init:
     @dx2 = undef;
   bcl:
-    @dx = map { $_->{dx} } @tab[$index..$index+$nb];
-    $dy[$index] = max(map { $_->{dy} } @tab[$index..$index+$nb]);
+    @dx = map { $_->{dx} || 78 } @tab[$index..$index+$nb];
+    $dy[$index] = max(map { $_->{dy} || 89 } @tab[$index..$index+$nb]);
     foreach (0..$#dx) {
 	if ($dx[$_] > $dx2[$_]) { $dx2[$_] = $dx[$_] } else { $dx[$_] = $dx2[$_] }
     }
