@@ -83,7 +83,7 @@ sub readMonitorsDB {
 	/^#/ and next;
 	/^$/ and next;
 
-	my @fields = qw(VendorName ModelName eisa hsyncrange vsyncrange dpms);
+	my @fields = qw(VendorName ModelName EISA_ID hsyncrange vsyncrange dpms);
 	my @l = split /\s*;\s*/;
 
 	my %l; @l{@fields} = @l;
@@ -112,6 +112,8 @@ sub keepOnlyLegalModes {
 }
 
 sub cardConfigurationAuto() {
+#-for Pixel tests
+#-    my @c = { driver => 'Card:Matrox Millennium G400 DualHead', description => 'Matrox|Millennium G400 Dual HeadCard' };
     my @c = grep { $_->{driver} =~ /(Card|Server|Driver):/ } detect_devices::probeall();
 
     my @cards = map {
@@ -331,7 +333,6 @@ sub xfree_and_glx_choose {
 
 sub cardConfiguration {
     my ($card, $noauto, $cardOptions) = @_;
-    $card ||= {};
 
     #- using XF4 if {driver} && !{prefer_xf3} otherwise using XF3
     #- error if $force_xf4 && !{driver} || !{driver} && !{server}
@@ -360,25 +361,27 @@ sub cardConfiguration {
     }
 
     #- manage X 3.3.6 or above 4.2.0 specific server or driver.
-    if (!$card->{server} && !$card->{driver}) {
+    if (!$card->{server} && !$card->{driver} || $noauto) {
 	undef $card->{card_name};
 
-	my @list = ('server', $cardOptions->{allowFB} ? @Xconfigurator_consts::allservers : @Xconfigurator_consts::allbutfbservers);
-	my $default_server = $card->{prefer_xf3} && $card->{server} || 'server';
-	$card->{server} = $in->ask_from_list(_("X server"), _("Choose a X server"), \@list, $default_server) or return;
+	my @xf3 = $cardOptions->{allowFB} ? @Xconfigurator_consts::allservers : @Xconfigurator_consts::allbutfbservers;
+	my @xf4 = $cardOptions->{allowFB} ? @Xconfigurator_consts::alldrivers : @Xconfigurator_consts::allbutfbdrivers;
+	my @list = (if_(!$force_xf4, map { 'XFree 3|' . $_ } @xf3), map { 'XFree 4|' . $_ } @xf4);
 
-	if ($card->{server} eq 'server') {
-	    my $fake_card = {};
-	    updateCardAccordingName($fake_card, $card->{card_name}) if $card->{card_name};
-	    delete $card->{server};
-	    $card->{prefer_xf3} = 0;
-	    $card->{driver} = $in->ask_from_list(_("X driver"), _("Choose a X driver"),
-						 ($cardOptions->{allowFB} ? \@Xconfigurator_consts::alldrivers : \@Xconfigurator_consts::allbutfbdrivers),
-						 $card->{driver} || $fake_card->{driver} || $card->{driver}) or return;
-	} else {
+	my $default = $card->{prefer_xf3} ? 'XFree 3|' . $card->{server} : 'XFree 4|' . ($card->{driver} || 'fbdev');
+
+	my $r = $in->ask_from_treelist(_("X server"), _("Choose a X server"), '|', \@list, $default) or return;
+
+	my ($kind, $s) = split '\|', $r;
+
+	if ($kind eq 'XFree 3') {
 	    delete $card->{driver};
-	    $card->{prefer_xf3} = 1;
+	    $card->{server} = $s;
+	} else {
+	    delete $card->{server};
+	    $card->{driver} = $s;
 	}
+	$card->{prefer_xf3} = $kind eq 'XFree 3';
     }
 
     foreach ($card, @{$card->{cards} || []}) {
@@ -434,11 +437,11 @@ sub cardConfiguration {
 		  [ { val => \$card->{VideoRam},
 		      list => [ sort keys %Xconfigurator_consts::VideoRams ],
 		      format => sub { translate($Xconfigurator_consts::VideoRams{$_[0]}) },
-		      not_edit => !$::expert } ]) || return
+		      not_edit => !$::expert } ]) or return
 			if $card->{needVideoRam} && !$card->{VideoRam};
 
 
-    $card;
+    1;
 }
 
 sub optionsConfiguration($) {
@@ -468,22 +471,36 @@ sub monitorConfiguration {
 
     if ($monitor->{EISA_ID}) {
 	log::l("EISA_ID: $monitor->{EISA_ID}");
-	if (my ($mon) = grep { lc($_->{eisa}) eq $monitor->{EISA_ID} } values %$monitors) {
+	if (my ($mon) = grep { lc($_->{EISA_ID}) eq $monitor->{EISA_ID} } values %$monitors) {
 	    add2hash($monitor, $mon);
 	    log::l("EISA_ID corresponds to: $monitor->{ModelName}");
 	}
     }
+    my $merged_name = $monitor->{VendorName} . '|' . $monitor->{ModelName};
+
+    $merged_name = $Xconfigurator_consts::low_default_monitor
+      if $::auto_install && !exists $monitors->{$merged_name};
+
+    put_in_hash($monitor, $monitors->{$merged_name});
+
     if ($monitor->{hsyncrange} && $monitor->{vsyncrange} && !$noauto) {
-	return $monitor;
+	return 1;
     }
-    if (!$monitor->{ModelName} || $noauto) {
-	my $m = 
-	  ($::auto_install ? $Xconfigurator_consts::low_default_monitor :
-	   $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Custom', keys %$monitors], $Xconfigurator_consts::good_default_monitor));
-	if ($m ne 'Custom') {
-	    put_in_hash($monitor, $monitors->{$m});
-	} else {
-	    $in->ask_from('',
+
+    #- below is interactive stuff
+
+    if (!exists $monitors->{$merged_name}) {
+	$merged_name = $monitor->{hsyncrange} ? 'Custom' : $Xconfigurator_consts::good_default_monitor;
+    }
+
+    $merged_name = $in->ask_from_treelistf(_("Monitor"), _("Choose a monitor"), '|', 
+					   sub { $_[0] eq 'Custom' ? _("Custom") : $_[0] =~ /^Generic\|(.*)/ ? _("Generic") . "|$1" :  _("Vendor") . "|$_[0]" },
+					   ['Custom', keys %$monitors], $merged_name) or return;
+
+    if ($merged_name ne 'Custom') {
+	put_in_hash($monitor, $monitors->{$merged_name});
+    } else {
+	$in->ask_from('',
 _("The two critical parameters are the vertical refresh rate, which is the rate
 at which the whole screen is refreshed, and most importantly the horizontal
 sync rate, which is the rate at which scanlines are displayed.
@@ -491,13 +508,11 @@ sync rate, which is the rate at which scanlines are displayed.
 It is VERY IMPORTANT that you do not specify a monitor type with a sync range
 that is beyond the capabilities of your monitor: you may damage your monitor.
  If in doubt, choose a conservative setting."),
-				  [ { val => \$monitor->{hsyncrange}, list => \@Xconfigurator_consts::hsyncranges, label => _("Horizontal refresh rate"), not_edit => 0 },
-				    { val => \$monitor->{vsyncrange}, list => \@Xconfigurator_consts::vsyncranges, label => _("Vertical refresh rate"), not_edit => 0 } ]);
-	}
-    } else {
-	my $m = join('|', if_($monitor->{VendorName}, $monitor->{VendorName}), $monitor->{ModelName});
-	put_in_hash($monitor, $monitors->{$m});
+		      [ { val => \$monitor->{hsyncrange}, list => \@Xconfigurator_consts::hsyncranges, label => _("Horizontal refresh rate"), not_edit => 0 },
+			{ val => \$monitor->{vsyncrange}, list => \@Xconfigurator_consts::vsyncranges, label => _("Vertical refresh rate"), not_edit => 0 } ]) or return;
+	delete @$monitor{'VendorName', 'ModelName', 'EISA_ID'};
     }
+    1;
 }
 
 sub finalize_config {
@@ -1154,6 +1169,10 @@ EndSection
     print G qq(\nSection "Monitor"\n);
     print F qq(    Identifier "monitor1"\n);
     print G qq(    Identifier "monitor1"\n);
+    print F qq(    VendorName  "$O->{VendorName}"\n) if $O->{VendorName};
+    print G qq(    VendorName  "$O->{VendorName}"\n) if $O->{VendorName};
+    print F qq(    ModelName   "$O->{ModelName}"\n) if $O->{ModelName};
+    print G qq(    ModelName   "$O->{ModelName}"\n) if $O->{ModelName};
     print F qq(    HorizSync  $O->{hsyncrange}\n\n);
     print G qq(    HorizSync  $O->{hsyncrange}\n\n);
     print F qq(    VertRefresh $O->{vsyncrange}\n\n);
@@ -1321,14 +1340,15 @@ sub main {
     Xconfig::XF86check_link($::prefix, '');
     Xconfig::XF86check_link($::prefix, '-4');
 
+    my $ok = 1;
     {
 	my $w = $in->wait_message('', _("Preparing X-Window configuration"), 1);
 
-	$X->{card} = cardConfiguration($X->{card}, $::noauto, $cardOptions);
+	$ok &&= cardConfiguration($X->{card} ||= {}, $::noauto, $cardOptions);
 
-	monitorConfiguration($X->{monitor} ||= {}, 1);
+	$ok &&= monitorConfiguration($X->{monitor} ||= {}, $::noauto);
     }
-    my $ok = resolutionsConfiguration($X, $::auto);
+    $ok &&= resolutionsConfiguration($X, $::auto);
 
     $ok &&= testFinalConfig($X, $::auto, $X->{skiptest}, $::auto);
 
@@ -1348,8 +1368,7 @@ sub main {
 		    { format => sub { $_[0][0] }, val => \$f,
 		      list => [
 	   [ _("Change Monitor") => sub { monitorConfiguration($X->{monitor}, 'noauto') } ],
-           [ _("Change Graphics card") => sub { my $card = cardConfiguration('', 'noauto', $cardOptions);
-					       $card and $X->{card} = $card } ],
+           [ _("Change Graphics card") => sub { cardConfiguration($X->{card}, 'noauto', $cardOptions) } ],
                     if_($::expert, 
            [ _("Change Server options") => sub { optionsConfiguration($X) } ]),
 	   [ _("Change Resolution") => sub { resolutionsConfiguration($X) } ],
