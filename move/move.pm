@@ -140,11 +140,11 @@ sub init {
     key_installfiles('simple');
     if (`getent passwd 501` =~ /([^:]+):/) {
         $o->{users} = [ { name => $1 } ];
-        print "Using existing user configuration\n";
+        print "using existing user configuration\n";
         $using_existing_user_config = 1;
     }
     if (-f '/etc/X11/X') {
-        print "Using existing host configuration\n";
+        print "using existing host configuration\n";
         $using_existing_host_config = 1;
     }
     if (-s '/etc/sysconfig/i18n') {
