@@ -2107,7 +2107,6 @@ sub advanced_when() {
 				0, my $check_when_daemon  = Gtk2::CheckButton->new(N("Use daemon")), 
 				1, Gtk2::HBox->new(0,10),
 			),
-			0, Gtk2::HSeparator->new,
 			0, gtkpack_(Gtk2::HBox->new(0,10),
 				0, gtkset_sensitive(Gtk2::Label->new(N("Please choose the time interval between each backup")),  $backup_daemon),
 				1, Gtk2::HBox->new(0,10),
@@ -2148,8 +2147,8 @@ sub advanced_when() {
 					0, gtkset_sensitive($entry_media_type, $backup_daemon),
 				),
 			),
-			0, Gtk2::HSeparator->new,
-			0, gtkset_sensitive(Gtk2::Label->new(N("Please be sure that the cron daemon is included in your services.")), $backup_daemon), 
+			0, gtkset_sensitive(Gtk2::Label->new(N("Please be sure that the cron daemon is included in your services.")), $backup_daemon),
+			0, gtkset_sensitive(Gtk2::Label->new(N("If your machine isn't on all the time, you might want to install anacron.")), $backup_daemon), 
 			0, gtkset_sensitive(Gtk2::Label->new(N("Note that currently all 'net' media also use the hard drive.")),  $backup_daemon),
 		),
 	);
