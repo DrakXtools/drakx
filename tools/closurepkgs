@@ -30,7 +30,6 @@ sub main {
     $params->keep_only_cleaned_provides_files();
     foreach (glob("$dir/*.cz*")) { $params->read_hdlists($_) }
     $params->compute_depslist();
-    $params->write_depslist(\*STDERR);
 
     my $compsslist = read_compsslist("$dir/compssList");
 
@@ -57,6 +56,10 @@ sub main {
     if ($params->{info}{"locales-$lang"}) {
 	foreach (keys %{$params->{info}}) {
 	    push @force_install, $_ if grep { $_ == $params->{info}{"locales-$lang"}{id} } split ' ', $params->{info}{$_}{deps};
+	}
+    } else {
+	foreach (keys %{$params->{info}}) {
+	    push @force_install, $_ if grep { $params->{depslist}[$_]{name} =~ /locales-/ } split ' ', $params->{info}{$_}{deps};
 	}
     }
     push @force_install, qw(cups cups-drivers drakprofile draksync irda-utils numlock raidtools reiserfs-utils
