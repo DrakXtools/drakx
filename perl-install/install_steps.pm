@@ -269,7 +269,7 @@ sub afterInstallPackages($) {
     substInFile { s/^(UserView)=false/$1=true/ } "$o->{prefix}/usr/share/config/kdmrc" if $o->{security} < 3;
     run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
 
-    foreach ("/etc/skel", "/root", install_any::list_home()) {
+    foreach (install_any::list_skels()) {
 	my $found;
 	substInFile {
 	    $found ||= /KFM Misc Defaults/;

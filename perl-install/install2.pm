@@ -284,6 +284,8 @@ sub partitionDisks {
       ] if $o->{lnx4win};
     return if $o->{isUpgrade};
 
+    ($o->{hd_dev}) = cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/hdimage|;
+
     $::o->{steps}{formatPartitions}{done} = 0;
     eval { fs::umount_all($o->{fstab}, $o->{prefix}) } if $o->{fstab} && !$::testing;
 
@@ -323,7 +325,7 @@ sub formatPartitions {
 	    $o->formatPartitions(@{$o->{fstab}});
 	    fs::mount_all([ grep { isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
 	    die _("Not enough swap to fulfill installation, please add some") if availableMemory < 40 * 1024;
-	    fs::mount_all([ grep { isExt2($_) } @{$o->{fstab}} ], $o->{prefix});
+	    fs::mount_all([ grep { isExt2($_) } @{$o->{fstab}} ], $o->{prefix}, $o->{hd_dev});
 	}
 	eval { $o = $::o = install_any::loadO($o) } if $_[1] == 1;
 

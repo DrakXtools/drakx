@@ -1,20 +1,11 @@
-with 2MB of video ram, chooses 8bpp instead of 16bpp
-
-the XFdrake test does not handle the fontset
-
-when you set the kde icons to Large, maybe it'd be good to chown the .kderc
+(done,pix) zip with automount -> ppa not autoloaded
+(done,pix)when you set the kde icons to Large, maybe it'd be good to chown the .kderc
+(done,pix)lilo in russian/japaneese is horrible
+(ok,pix)test ide burners
 
 test check bad blocks optional for mke2fs
 
-test ide burners (do not work with axalon)
-
-hd install: no umount is done at the end of install :(
-
-bug: zip with automount -> ppa not autoloaded
-
-remount ro before X test.
-
-rpmdrake and same name packages
+(done,pix)hd install: no umount is done at the end of install :(
 
 just before release:
 - mandrake_doc-xx, the symlink is no good in /usr/doc/mandrake as 
@@ -22,13 +13,28 @@ just before release:
 - update kudzu's pcitable
 - update pcitable for 86C368 if 3.3.6 (and other S3 3D's)
 
+remount ro before X test.
+
+
+--------------------------------------------------------------------------------
+rpmdrake and same name packages
+
+(workaround)with 2MB of video ram, chooses 8bpp instead of 16bpp
+
+the XFdrake test does not handle the fontset
+
 --------------------------------------------------------------------------------
 mandrake_desk has not installed while kdebase it there on upgrade
 
-bug (by dadou): Si la partition racine est trop petite pour installer le système, un
+(done,pix)bug (by dadou): Si la partition racine est trop petite pour installer le système, un
 message d'erreur apparaît pour signaler le problème (bien) mais on ne
 peut en sortir. La seule solution est de redémarrer.
 
+Je viens de faire une installation sur une machine où seul Be était
+installé. Je l'ai supprimé et installé (mode recommandé) Oxygen. Au
+redémarrage, le boot manager de Be apparaît et il est impossible de
+démarrer Linux.
+Pourquoi ne pas installer LILO si on supprime toutes les partitions ?
 
 > Here I go into the printer configuration select 'HP Deskjet 722C Colour',
 > print a test ASCII page, pressing 'No' when prompted to indicate the page did
@@ -54,9 +60,9 @@ bug in kde desktop if keeps home but not an upgrade
 bug in users: mandrake user is added twice in strange installs
 (mixed of security 0 + ???)
 
-bug when selecting compssUsers, do not deselect after (if u deselect)
+(obsolete)bug when selecting compssUsers, do not deselect after (if u deselect)
 
-in ftp install, bug with X server install with wu-ftpd 2.6 (see http://www.wu-ftpd.org/broken-clients.html)
+(done,fpons)in ftp install, bug with X server install with wu-ftpd 2.6 (see http://www.wu-ftpd.org/broken-clients.html)
 
 bug rpmdrake: just after installing a package, switch to `Installed', the package has wrong name
 
@@ -79,7 +85,7 @@ bug keyboard focus: after switch in console at Xconfig step
 
 rpmdrake proposition for cdrom labels
 
-detect ide burners and then add hdX=ide-scsi to kernel cmdline
+(done,pix)detect ide burners and then add hdX=ide-scsi to kernel cmdline
 
 bug in upgrade: install from hda1:/usr/local/blah with hda1:/
 

@@ -249,6 +249,8 @@ sub choosePackages {
 	    delete $_->{unskip};
 	}
 	pkgs::unselect_all($packages);
+	pkgs::select($o->{packages}, $o->{packages}{$_} || next) foreach @{$o->{default_packages}};
+
 	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $::expert ? 90 : 80, $available, $o->{installClass});
 	my $min_size = pkgs::size_selected($packages);
 
@@ -505,6 +507,7 @@ other pecuniary losses, and eventual liabilities and indemnification to be paid
 pursuant to a court decision) arising out of use, possession, or the sole
 downloading of these software, to which customer and/or end user could
 eventually have access after having sign up the present agreement.
+
 
 For any queries relating to these agreement, please contact 
 Mandrakesoft, Inc.

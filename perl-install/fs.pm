@@ -164,12 +164,12 @@ sub umount_part($;$) {
     $part->{isMounted} = 0;
 }
 
-sub mount_all($;$) {
-    my ($fstab, $prefix) = @_;
+sub mount_all($;$$) {
+    my ($fstab, $prefix, $hd_dev) = @_; #- hd_dev is the device used for hd install
 
     log::l("mounting all filesystems");
 
-    my ($hd_dev) = cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/hdimage| unless $::isStandalone;
+    $hd_dev ||= cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/hdimage| unless $::isStandalone;
 
     #- order mount by alphabetical ordre, that way / < /home < /home/httpd...
     foreach (grep { $_->{mntpoint} } sort { ($a->{mntpoint} || '') cmp ($b->{mntpoint} || '') } @$fstab) {

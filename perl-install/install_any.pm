@@ -131,6 +131,7 @@ sub setPackages($) {
 	push @{$o->{default_packages}}, "kernel-pcmcia-cs" if $o->{pcmcia};
 	push @{$o->{default_packages}}, "apmd" if $o->{pcmcia};
 	push @{$o->{default_packages}}, "raidtools" if $o->{raid} && !is_empty_array_ref($o->{raid}{raid});
+	push @{$o->{default_packages}}, "cdrecord" if detect_devices::getIDEBurners();
 
 	pkgs::getDeps($o->{packages});
 
@@ -543,6 +544,7 @@ sub template2userfile($$$$%) {
 	if (-d dirname($outputfile) && ($force || ! -e $outputfile)) {
 	    log::l("generating $outputfile from template $inputfile");
 	    template2file($inputfile, $outputfile, %toreplace);
+	    m|/home/(.*)| and commands::chown_($1, $outputfile);
 	}
     }
 }
@@ -643,7 +645,7 @@ sub kdeicons_postinstall($) {
     }
 
     my @l = map { "$prefix$_/Desktop/Doc.kdelnk" } list_skels();
-    if (my ($lang) = all("$prefix/usr/doc/mandrake")) {
+    if (my ($lang) = eval { all("$prefix/usr/doc/mandrake") }) {
 	substInFile { s|^(URL=.*?)/?$|$1/$lang| } @l;
     } else {
 	unlink @l;

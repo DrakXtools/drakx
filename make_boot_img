@@ -14,7 +14,6 @@ if ($>) {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 }
 
-
 $install = $ {{
     pcmcia => "full-install",
     network => "install",
@@ -22,10 +21,8 @@ $install = $ {{
     hd => "local-install"
 }}{$type} or die;
 
-$0 =~ /initrd/ ?
-    initrd($mnt, $img) :
-    msg_boot_img($mnt, $img);
-    #boot_img($mnt, $img);
+$img =~ /rdz$/ ? initrd($mnt, $img) : msg_boot_img($mnt, $img);
+#boot_img($mnt, $img);
 
 sub __ { print @_, "\n"; system(@_); }
 sub _ { __ @_; $? and die; }
@@ -67,7 +64,7 @@ sub boot_img {
     _ "bunzip2 -c $instdir/installinit/emptyboot.img.bz2 > $img";
     _ "$sudo mount -t msdos -o umask=0 $img $mnt -o loop";
     _ "cat vmlinuz > $mnt/vmlinuz";
-    initrd("${mnt}2", "$mnt/$type.rdz");
+    -f "$type.rdz" ? _ "cp -f $type.rdz $mnt" : initrd("${mnt}2", "$mnt/$type.rdz");
     
     output("$mnt/syslinux.cfg", "
 default linux
@@ -92,7 +89,7 @@ sub msg_boot_img {
     }
     _ "$sudo mount -t msdos -o umask=0 $img $mnt -o loop";
     _ "cat vmlinuz > $mnt/vmlinuz";
-    initrd("${mnt}2", "$mnt/$type.rdz");
+    -f "$type.rdz" ? _ "cp -f $type.rdz $mnt" : initrd("${mnt}2", "$mnt/$type.rdz");
     
     my $timeout = $ks ? 1 : 72;
     my $setmode = !($type eq 'hd') && "mode 0x101\n";

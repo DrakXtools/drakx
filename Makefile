@@ -1,22 +1,34 @@
 BOOT_IMG = hd.img cdrom.img network.img network_ks.img pcmcia.img pcmcia_ks.img
+BOOT_RDZ = hd.rdz cdrom.rdz network.rdz pcmcia.rdz
 BINS = install/install install/full-install install/local-install install/installinit/init
 DIRS = tools install install/installinit perl-install lnx4win
 ROOTDEST = /export
 
+AUTOBOOT = $(ROOTDEST)/dosutils/autoboot/mdkinst
 
 .PHONY: dirs $(FLOPPY_IMG)
 
-install: build
+install: build autoboot
 	for i in images misc Mandrake Mandrake/base; do install -d $(ROOTDEST)/$$i ; done
 	cp -f $(BOOT_IMG) $(ROOTDEST)/images ; rm $(ROOTDEST)/images/*_ks.img
 	make -C perl-install full_stage2
 
 build: $(BOOT_IMG)
 
+autoboot:
+	install -d $(AUTOBOOT)
+	cp -f hd.rdz $(AUTOBOOT)/initrd.hd
+	cp -f cdrom.rdz $(AUTOBOOT)/initrd.cd
+	cp -f pcmcia.rdz $(AUTOBOOT)/initrd.pc
+	cp -f network.rdz $(AUTOBOOT)/initrd.nt
+
 dirs:
 	for i in $(DIRS); do make -C $$i; done
 
-$(BOOT_IMG): dirs modules
+$(BOOT_RDZ): dirs modules
+	./make_boot_img $@ $(@:%.rdz=%)
+
+$(BOOT_IMG): %.img: %.rdz
 	./make_boot_img $@ $(@:%.img=%)
 
 tar: clean

@@ -318,10 +318,11 @@ sub testFinalConfig($;$$) {
 
     local $_;
     local *F; open F, $f_err;
-    while (<F>) {
+    i: while (<F>) {
 	if (/\b(error|not supported)\b/i) {
 	    my @msg = !/error/ && $_ ;
 	    while (<F>) {
+		/not fatal/ and last i;
 		/^$/ and last;
 		push @msg, $_;
 	    }

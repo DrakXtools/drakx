@@ -421,14 +421,14 @@ sub write_conf {
     while (my ($k, $v) = each %net) { add_alias($k, $v) }
 
     add_alias('scsi_hostadapter', 'ide-scsi') if detect_devices::getIDEBurners();
-    $conf{supermount}{"post-install"} = 
-      join " ; ", 
-	map { "modprobe $_" } 
-	grep { $conf{$_}{alias} && $conf{$_}{alias} =~ /scsi_hostadapter/ } keys %conf;
+
+    if (my @scsis = grep { $conf{$_}{alias} && /scsi_hostadapter/ } keys %conf) {
+	log::l("has scsis ", join " ; ", map { "modprobe $_" } @scsis);
+	$conf{supermount}{"post-install"} = join " ; ", map { "modprobe $_" } @scsis;
+    }
 
     local *F;
     open F, ">> $file" or die("cannot write module config file $file: $!\n");
-
     while (my ($mod, $h) = each %conf) {
 	while (my ($type, $v2) = each %$h) {
 	    print F "$type $mod $v2\n" if $v2 && $type ne "loaded" && !$written->{$mod}{$type};
