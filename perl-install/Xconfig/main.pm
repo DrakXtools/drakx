@@ -44,6 +44,7 @@ sub configure_everything_auto_install {
     &write($raw_X, $X);
 
     Xconfig::various::runlevel(exists $old_X->{xdm} && !$old_X->{xdm} ? 3 : 5);
+    'config_changed';
 }
 
 sub configure_everything {
