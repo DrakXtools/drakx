@@ -47,7 +47,7 @@ my $isTail = 1 if $isFile;
 $| = 1 if $isTail;
 my $h = chomp_(`hostname -s`);
 
-my $explain_title = N("Mandrake Tools Explanation");
+my $explain_title = N("Mandrake Tools Logs");
 my $my_win = ugtk2->new($isExplain ? $explain_title : N("Logdrake"));
 
 unless ($::isEmbedded) {
