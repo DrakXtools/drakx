@@ -10,7 +10,7 @@ all: $(BOOT_IMG)
 	cp -f $(BOOT_IMG) /export/images
 
 clean:
-	rm -rf $(BOOT_IMG) $(BINS) modules vmlinuz
+	rm -rf $(BOOT_IMG) $(BINS) modules vmlinuz System.map
 
 $(BOOT_IMG): $(BINS)
 	if [ ! -e modules ]; then $(MAKE) update_kernel; fi
