@@ -513,8 +513,8 @@ killall pppd
                     post => sub {
                         network::modem::ppp_configure($in, $modem);
                         $netc->{$_} = 'ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
+                        $in->do_pkgs->ensure_is_installed('kdenetwork-kppp', '/usr/bin/kppp');
                         $handle_multiple_cnx->();
-                        $in->do_pkgs->install('kdenetwork-kppp');
                     },
                    },
 
@@ -536,14 +536,14 @@ killall pppd
                                list => \@adsl_devices, } ],
                     post => sub {
                         my %packages = (
-                                        'eci'        => 'eciadsl',
-                                        'sagem'      => 'adiusbadsl',
-                                        'speedtouch' => 'speedtouch',
+                                        'eci'        => [ 'eciadsl', 'missing' ],
+                                        'sagem'      => [ 'adiusbadsl', '/usr/sbin/adictrl' ],
+                                        'speedtouch' => [ 'speedtouch', '/usr/share/speedtouch/speedtouch.sh' ],
                                        );
                         $adsl_device = { reverse %adsl_devices }->{$ntf_name} || $ntf_name; # ethernet device case
                         return 'adsl_unsupported_eci' if $adsl_device eq 'eci';
                         $netconnect::need_restart_network = member($adsl_device, qw(speedtouch eci));
-                        $in->do_pkgs->install($packages{$adsl_device}) if $packages{$adsl_device};
+                        $in->do_pkgs->ensure_is_installed(@{$packages{$adsl_device}}) if $packages{$adsl_device};
                         return 'adsl_sagem800' if $adsl_device eq 'sagem';
                         if ($adsl_device eq 'speedtouch' && !$::testing) {
                             $in->do_pkgs->what_provides("speedtouch_mgmt") and 
