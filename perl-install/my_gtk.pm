@@ -381,7 +381,7 @@ sub create_pix_text {
     elsif ($background =~ /#(\d+)#(\d+)#(\d+)/) { $color_background = gtkcolor(map{$_*65535/255}($1, $2, $3)) }
     elsif (ref($background) eq 'Gtk::Gdk::Pixmap' && $x_back && $y_back) { $backpix = 1 }
     my $style= new Gtk::Style;
-    if(ref($font) eq 'Gtk::Gdk::Font') {
+    if (ref($font) eq 'Gtk::Gdk::Font') {
 	$style->font($font);
     } else {
 	$font ||= _("-adobe-utopia-medium-r-normal-*-12-*-*-*-p-*-iso8859-*,*-r-*");
@@ -406,8 +406,6 @@ sub create_pix_text {
     my $i = 0;
     foreach (@{$lines}) {
 	$pix->draw_string($style->font, $gc_text, ${$widths}[$i], ${$heights}[$i], $_);
-#	$pix->draw_string($style->font, $gc_text, ${$widths}[$i], ${$ascents}[$i] + ${$heights}[$i], $_);
-#	$pix->draw_string($style->font, $gc_text, ${$widths}[$i], ${$ascents}[$i] + ${$descents}[$i], $_);
 	$i++;
     }
     ($pix, $width, $height);
@@ -423,12 +421,10 @@ sub get_text_coord {
     my @lines;
     my @widths;
     my @heights;
-    my $ascent = $style->font->ascent;
-    my $descent = $style->font->descent;
-    print "ascent : $ascent | descent : $descent\n";
+    my $height_elem = $style->font->ascent + $style->font->descent;
     $heights[0] = 0;
     my $max_width2 = $max_width;
-    my $height = $heights[0] = $ascent + $descent;
+    my $height = $heights[0] = $height_elem;
     my $width = 0;
     my $flag = 1;
     my @t = split(' ', $text);
@@ -436,7 +432,7 @@ sub get_text_coord {
 	my $l = $style->font->string_width($_ . if_(!$flag, " "));
 	if ($width + $l > $max_width2 && !$flag) {
 	    $flag = 1;
-	    $height += $ascent + $descent + 1;
+	    $height += $height_elem + 1;
 	    $heights[$idx+1] = $height;
 	    $widths[$idx] = $centeredx && !$can_be_smaller ? (max($max_width2-$width, 0))/2 : 0;
 	    $width = 0;
@@ -448,7 +444,7 @@ sub get_text_coord {
 	$l <= $max_width2 or $max_width2 = $l;
 	$width <= $real_width or $real_width = $width;
     }
-    $height += $ascent + $descent;
+    $height += $height_elem;
 
     $height < $real_height or $real_height = $height;
     $width = $max_width;
@@ -457,8 +453,8 @@ sub get_text_coord {
     $real_width > $max_width && $can_be_greater and $width = $real_width;
     $real_height < $max_height && $can_be_smaller and $height = $real_height;
     $real_height > $max_height && $can_be_greater and $height = $real_height;
-    if($centeredy) {
- 	my $dh = ($height-$real_height)/2 + ($ascent+$descent)/2;
+    if ($centeredy) {
+ 	my $dh = ($height-$real_height)/2 + ($height_elem)/2;
  	@heights = map { $_ + $dh } @heights;
     }
     ($width, $height, \@lines, \@widths, \@heights)
@@ -469,7 +465,7 @@ sub fill_tiled {
     my ($x2, $y2) = (0, 0);
     while (1) {
 	$x2 = 0;
-	while(1) {
+	while (1) {
 	    $pix->draw_pixmap($w->style->bg_gc('normal'),
 			      $bitmap, 0, 0, $x2, $y2, $x_back, $y_back);
 	    $x2 += $x_back;
@@ -506,7 +502,6 @@ sub gtkicons_labels_widget {
 		       ($dx, $dy) = (max($width, $x_round), $y_round + $height);
 		       $darea->set_usize($dx, $dy);
 		       $dbl_area = new Gtk::Gdk::Pixmap($darea->window, max($width, $x_round), $y_round + $height);
-		       #$dbl_area->draw_rectangle($darea->style->black_gc, 1, 0, 0, 500, 500);
 		       fill_tiled($darea, $dbl_area, $background, $x_back2, $y_back2, $dx, $dy);
 		       print " coord : $dx - $icon_width\n";
 		       $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
@@ -531,6 +526,7 @@ sub gtkicons_labels_widget {
     $fixed->signal_connect( size_allocate => sub {
 				my ($dx, $dy) = ($fixed->allocation->[2], $fixed->allocation->[3]);
 				foreach (@tab) {
+				    $fixed->move();
 				}
 			    });
     $fixed->signal_connect( realize => sub { $fixed->window->set_back_pixmap($background, 0) });

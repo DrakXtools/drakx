@@ -17,6 +17,7 @@ use network;
 use network::tools;
 use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
 
+@EXPORT = qw(start_internet stop_internet);
 
 #- intro is called only in standalone.
 sub intro {
@@ -107,14 +108,19 @@ sub pre_func {
     undef $::Wizard_no_previous;
 }
 
+sub init_globals {
+    my ($in, $prefix) = @_;
+    MDK::Common::Globals::init(
+			       in => $in,
+			       prefix => $prefix,
+			       connect_file => "/etc/sysconfig/network-scripts/net_cnx_up",
+			       disconnect_file => "/etc/sysconfig/network-scripts/net_cnx_down",
+			       connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg" );
+}
+
 sub main {
     my ($prefix, $netcnx, $netc, $mouse, $in, $intf, $first_time, $direct_fr, $noauto) = @_;
-    MDK::Common::Globals::init(
-		  in => $in,
-		  prefix => $prefix,
-		  connect_file => "/etc/sysconfig/network-scripts/net_cnx_up",
-		  disconnect_file => "/etc/sysconfig/network-scripts/net_cnx_down",
-		  connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg" );
+    init_globals ($in, $prefix);
     $netc->{minus_one}=0; #When one configure an eth in dhcp without gateway
     $::isInstall and $in->set_help('configureNetwork');
     $::isStandalone and read_net_conf($prefix, $netcnx, $netc); # REDONDANCE with intro. FIXME
@@ -587,6 +593,18 @@ sub set_net_conf {
     setVarsInShMode("$prefix/etc/sysconfig/draknet", 0600, $netcnx, "NET_DEVICE", "NET_INTERFACE", "type", "PROFILE" );
     setVarsInShMode("$prefix/etc/sysconfig/draknet." . $netcnx->{type}, 0600, $netcnx->{$netcnx->{type}}); #- doesn't work, don't know why
     setVarsInShMode("$prefix/etc/sysconfig/draknet.netc", 0600, $netc); #- doesn't work, don't know why
+}
+
+sub start_internet {
+    my ($o) = @_;
+    init_globals ($o, $o->{prefix});
+    run_program::rooted($prefix, $connect_file);
+}
+
+sub stop_internet {
+    my ($o) = @_;
+    init_globals ($o, $o->{prefix});
+    run_program::rooted($prefix, $disconnect_file);
 }
 
 #---------------------------------------------

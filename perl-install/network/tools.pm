@@ -4,7 +4,7 @@ use common;
 use run_program;
 use c;
 use vars qw(@ISA @EXPORT);
-use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_prog $connect_file $disconnect_file);
+use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_prog $connect_file);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(write_cnx_script write_secret_backend write_initscript ask_connect_now connect_backend disconnect_backend read_providers_backend ask_info2 type2interface connected connected_bg connected2 disconnected);

@@ -939,30 +939,30 @@ sub exitInstall {
 #------------------------------------------------------------------------------
 sub hasNetwork {
     my ($o) = @_;
-
-    $o->{intf} && $o->{netc}{NETWORKING} ne 'no' || $o->{netcnx}{modem};
+    $o->{netcnx}{internet_cnx_choice} && $o->{netc}{NETWORKING} ne 'no'
 }
 
 #------------------------------------------------------------------------------
 sub upNetwork {
     my ($o, $pppAvoided) = @_;
 
-    foreach (qw(resolv.conf protocols services)) {
-	symlinkf("$o->{prefix}/etc/$_", "/etc/$_");
-    }
+    symlinkf("$o->{prefix}/etc/$_", "/etc/$_") foreach (qw(resolv.conf protocols services));
 
     modules::write_conf($o->{prefix});
-    if ($o->{intf} && $o->{netc}{NETWORKING} ne 'no') {
-	network::up_it($o->{prefix}, $o->{intf});
-    } elsif (!$pppAvoided && $o->{netcnx}{modem} && !$o->{netcnx}{modem}{isUp}) {
-	eval { modules::load_multi(qw(serial ppp bsd_comp ppp_deflate)) };
-	run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/syslog", "start");
-	run_program::rooted($o->{prefix}, "ifup", "ppp0");
-	$o->{netcnx}{modem}{isUp} = 1;
-    } else {
-	$::testing or return;
+    if (hasNetwork($o)) {
+	if ($o->{netc}{internet_cnx_choice} =~ /adsl|network|cable/) {
+	    require network::netconnect;
+	    network::netconnect::start_internet($o);
+	    return 1;
+	} elsif (!$pppAvoided) {
+	    eval { modules::load_multi(qw(serial ppp bsd_comp ppp_deflate)) };
+	    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/syslog", "start");
+	    require network::netconnect;
+	    network::netconnect::start_internet($o);
+	    return 1;
+	}
     }
-    1;
+    $::testing;
 }
 
 #------------------------------------------------------------------------------
@@ -970,17 +970,20 @@ sub downNetwork {
     my ($o, $pppOnly) = @_;
 
     modules::write_conf($o->{prefix});
-    if (!$pppOnly && $o->{intf} && $o->{netc}{NETWORKING} ne 'no') {
-	network::down_it($o->{prefix}, $o->{intf});
-    } elsif ($o->{netcnx}{modem} && $o->{netcnx}{modem}{isUp}) {
-	run_program::rooted($o->{prefix}, "ifdown", "ppp0");
-	run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/syslog", "stop");
-	eval { modules::unload($_) foreach qw(ppp_deflate bsd_comp ppp serial) };
-	$o->{netcnx}{modem}{isUp} = 0;
-    } else {
-	$::testing or return;
+    if (hasNetwork($o)) {
+	if (!$pppOnly && $o->{netc}{internet_cnx_choice} =~ /adsl|network|cable/) {
+	    require network::netconnect;
+	    network::netconnect::stop_internet($o);
+	    return 1;
+	} else {
+	    require network::netconnect;
+	    network::netconnect::stop_internet($o);
+	    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/syslog", "stop");
+	    eval { modules::unload($_) foreach qw(ppp_deflate bsd_comp ppp serial) };
+	    return 1;
+	}
     }
-    1;
+    $::testing;
 }
 
 #------------------------------------------------------------------------------
