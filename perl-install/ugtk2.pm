@@ -746,7 +746,7 @@ sub new {
     $o->{rwindow}->set_position('center-always') if $::isStandalone;
     $o->{rwindow}->set_modal(1) if ($grab || $o->{grab} || $o->{modal}) && !$::isInstall;
     $o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient};
-    
+    $o->{rwindow}->signal_connect(destroy => sub { $o->{destroyed} = 1 });
 
     $o->{pop_it} ||= $pop_it || $::WizardTable && do {
 	my @l = $::WizardTable->get_children;
@@ -840,7 +840,7 @@ sub main {
 
     do {
 	Gtk2->main;
-    } while ($o->{retval} ? $completed && !$completed->() : $canceled && !$canceled->());
+    } while (!$o->{destroyed} && ($o->{retval} ? $completed && !$completed->() : $canceled && !$canceled->()));
     $o->destroy;
     $o->{retval}
 }
@@ -852,7 +852,6 @@ sub show($) {
 sub destroy($) {
     my ($o) = @_;
     $o->{rwindow}->destroy if !$o->{destroyed};
-    $o->{destroyed} = 1;  #- the perl DESTROY will call us, so avoid Gtk-CRITICAL if user explicitely called us before
     gtkset_mousecursor_wait();
     flush();
 }
