@@ -117,6 +117,12 @@ sub to_raw_X {
     $raw_X->{xfree4}->add_Section('DRI', { Mode => { val => '0666' } }) if $card->{use_DRI_GLX};
 
     $raw_X->{xfree4}->remove_load_module('v4l') if $card->{use_DRI_GLX} && $card->{Driver} eq 'r128';
+
+    #- Specific ATI fglrx driver default options
+    if($card->{Driver} eq 'fglrx') {
+	# $default_ATI_fglrx_config need to be move in proprietary ?
+	$card->{raw_LINES} = $default_ATI_fglrx_config if !$card->{raw_LINES};
+    }
 }
 
 sub probe() {
@@ -332,8 +338,11 @@ sub install_server {
     if ($card->{use_UTAH_GLX}) {
 	push @packages, 'Mesa';
     }
-    #- 3D acceleration configuration for XFree 4 using NVIDIA driver (TNT, TN2 and GeForce cards only).
+    #- 3D acceleration configuration for XFree 4 
+    #- using NVIDIA driver (TNT, TN2 and GeForce cards only).
     push @packages, @{$options->{allowNVIDIA_rpms}} if $card->{Driver2} eq 'nvidia' && $options->{allowNVIDIA_rpms};
+    #- using ATI fglrx driver (Radeon, Fire GL cards only).
+    push @packages, @{$options->{allowATI_rpms}} if $card->{Driver2} eq 'fglrx' && $options->{allowATI_rpms};
 
     $do_pkgs->install(@packages) if @packages;
     -x "$::prefix$prog" or die "server $card->{server} is not available (should be in $::prefix$prog)";
@@ -346,6 +355,12 @@ sub install_server {
 	log::l("Using specific NVIDIA driver and GLX extensions");
 	$card->{Driver} = 'nvidia';
 	$card->{DRI_GLX_SPECIAL} = 1;
+    }
+    if ($card->{Driver2} eq 'fglrx' &&
+	-e "$::prefix/usr/X11R6/lib/modules/dri/fglrx_dri.so" &&
+	-e "$::prefix/usr/X11R6/lib/modules/drivers/fglrx_drv.o") {
+	log::l("Using specific ATI fglrx and DRI drivers");
+	$card->{Driver} = 'fglrx';
     }
 
     if ($card->{need_MATROX_HAL}) {
@@ -597,4 +612,66 @@ sub readCardsDB {
     }
     \%cards;
 }
+
+our $default_ATI_fglrx_config = <<'END';
+# === disable PnP Monitor  ===
+    #Option                              "NoDDC"
+# === disable/enable XAA/DRI ===
+    Option "no_accel"                   "no"
+    Option "no_dri"                     "no"
+# === FireGL DDX driver module specific settings ===
+# === Screen Management ===
+    Option "DesktopSetup"               "0x00000000" 
+    Option "MonitorLayout"              "AUTO, AUTO"
+    Option "IgnoreEDID"                 "off"
+    Option "HSync2"                     "unspecified" 
+    Option "VRefresh2"                  "unspecified" 
+    Option "ScreenOverlap"              "0" 
+# === TV-out Management ===
+    Option "NoTV"                       "yes"     
+    Option "TVStandard"                 "NTSC-M"     
+    Option "TVHSizeAdj"                 "0"     
+    Option "TVVSizeAdj"                 "0"     
+    Option "TVHPosAdj"                  "0"     
+    Option "TVVPosAdj"                  "0"     
+    Option "TVHStartAdj"                "0"     
+    Option "TVColorAdj"                 "0"     
+    Option "GammaCorrectionI"           "0x00000000"
+    Option "GammaCorrectionII"          "0x00000000"
+# === OpenGL specific profiles/settings ===
+    Option "Capabilities"               "0x00000000"
+# === Video Overlay for the Xv extension ===
+    Option "VideoOverlay"               "on"
+# === OpenGL Overlay ===
+# Note: When OpenGL Overlay is enabled, Video Overlay
+#       will be disabled automatically
+    Option "OpenGLOverlay"              "off"
+    Option "CenterMode"                 "off"
+# === QBS Support ===
+    Option "Stereo"                     "off"
+    Option "StereoSyncEnable"           "1"
+# === Misc Options ===
+    Option "UseFastTLS"                 "0"
+    Option "BlockSignalsOnLock"         "on"
+# Note : DON'T ENABLE UseInternalAGPGART
+    Option "UseInternalAGPGART"         "no"
+    Option "ForceGenericCPU"            "no"
+# === FSAA ===
+    Option "FSAAScale"                  "1"
+    Option "FSAADisableGamma"           "no"
+    Option "FSAACustomizeMSPos"         "no"
+    Option "FSAAMSPosX0"                "0.000000"
+    Option "FSAAMSPosY0"                "0.000000"
+    Option "FSAAMSPosX1"                "0.000000"
+    Option "FSAAMSPosY1"                "0.000000"
+    Option "FSAAMSPosX2"                "0.000000"
+    Option "FSAAMSPosY2"                "0.000000"
+    Option "FSAAMSPosX3"                "0.000000"
+    Option "FSAAMSPosY3"                "0.000000"
+    Option "FSAAMSPosX4"                "0.000000"
+    Option "FSAAMSPosY4"                "0.000000"
+    Option "FSAAMSPosX5"                "0.000000"
+    Option "FSAAMSPosY5"                "0.000000"
+END
+
 1;
