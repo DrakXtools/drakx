@@ -163,10 +163,8 @@ int my_mount(char *dev, char *location, char *fs)
 		log_message("preparing nfsmount for %s", dev);
 
 		rc = nfsmount_prepare(dev, &flags, &opts);
-		if (rc != 0) {
-			log_perror(dev);
+		if (rc != 0)
 			return rc;
-		}
 	}
 #endif
 

@@ -192,6 +192,22 @@ static void add_modules_conf(char * str)
 }
 
 
+static int module_already_present(const char * name)
+{
+	FILE * f;
+	int answ = 0;
+	f = fopen("/proc/modules", "rb");
+	while (1) {
+		char buf[500];
+		if (!fgets(buf, sizeof(buf), f)) break;
+		if (!strncmp(name, buf, strlen(name)))
+			answ = 1;
+	}
+	fclose(f);
+	return answ;
+}
+
+
 static int insmod_with_deps(const char * mod_name, char * options)
 {
 	struct module_deps_elem * dep;
@@ -209,6 +225,9 @@ static int insmod_with_deps(const char * mod_name, char * options)
 			one_dep++;
 		}
 	}
+
+	if (module_already_present(mod_name))
+		return 0;
 
 	log_message("needs %s", mod_name);
 	return insmod_archived_file(mod_name, options);

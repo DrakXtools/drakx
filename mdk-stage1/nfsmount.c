@@ -232,7 +232,12 @@ int nfsmount_prepare(const char *spec, int *flags, char **mount_opts)
 		goto fail;
 
 	if (status.fhs_status != 0) {
-		log_message("nfsmount prepare failed, reason given by server: %d", status.fhs_status);
+		if (status.fhs_status == 2)
+			log_message("NFS server says: No such file or directory");
+		else if (status.fhs_status == 13)
+			log_message("NFS server says: Permission denied");
+		else 
+			log_message("nfsmount prepare failed, reason given by server: %d", status.fhs_status);
 		goto fail;
 	}
 
