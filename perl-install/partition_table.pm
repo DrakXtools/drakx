@@ -618,10 +618,11 @@ sub add($$;$$) {
     adjustStartAndEnd($hd, $part) unless $forceNoAdjust;
 
     my $e = $hd->{primary}{extended};
+    my $nb_primaries = $hd->{device} =~ /^rd/ ? 3 : 1;
 
     if (arch() =~ /^sparc|ppc/ ||
 	$primaryOrExtended eq 'Primary' ||
-	$primaryOrExtended !~ /Extended/ && is_empty_array_ref($hd->{primary}{normal})) {
+	$primaryOrExtended !~ /Extended/ && @{$hd->{primary}{normal} || []} < $nb_primaries) {
 	eval { add_primary($hd, $part) };
 	return unless $@;
     }
