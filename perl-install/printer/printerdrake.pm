@@ -2451,7 +2451,7 @@ sub choose_model {
 				  N("Reading printer database..."));
         printer::main::read_printer_db($printer, $printer->{SPOOLER});
     }
-    if (!member($printer->{DBENTRY}, keys(%printer::main::thedb))) {
+    unless (exists($printer::main::thedb{$printer->{DBENTRY}})) {
 	$printer->{DBENTRY} = N("Raw printer (No driver)");
     }
     # Choose the printer/driver from the list
@@ -2537,7 +2537,7 @@ sub installppd {
 	    return 0;
 	}
 	# Let user select a PPD file from a floppy, hard disk, ...
-        $ppdfile = $in->ask_file(N("Select PPD file"), "$dir");
+        $ppdfile = $in->ask_file(N("Select PPD file"), $dir);
 	last if !$ppdfile;
 	if (! -r $ppdfile) {
 	    $in->ask_warn(N("Error"),
@@ -3458,11 +3458,13 @@ sub start_network {
     my $_w = $in->wait_message(N("Printerdrake"), 
 			      N("Starting network..."));
     if ($::isInstall) {
-	return ($upNetwork and 
-		do { my $ret = &$upNetwork(); 
-		     undef $upNetwork; 
-		     sleep(1);
-		     $ret });
+	my $ret;
+	if ($upNetwork) {
+            $ret = &$upNetwork();
+            undef $upNetwork;
+            sleep(1);
+        }
+        return $ret;
     } else { return printer::services::start("network") }
 }
 
