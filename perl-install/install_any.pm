@@ -555,38 +555,8 @@ sub setPackages {
     require pkgs;
     if (!$o->{packages} || is_empty_array_ref($o->{packages}{depslist})) {
 	($o->{packages}, my $suppl_method) = pkgs::psUsingHdlists($o, $o->{method});
-	my $nb_suppl_media = 0;
 
-	++$nb_suppl_media while $suppl_method = $o->selectSupplMedia($suppl_method);
-
-	if ($nb_suppl_media) {
-	    #- reread all hdlists and recompute dependencies
-	    log::l("re-read hdlists");
-	    pkgs::cleanHeaders($o->{prefix});
-	    %pkgs::uniq_pkg_seen = ();
-	    my $oldmediums = $o->{packages}{mediums};
-	    delete $o->{packages}{rpmdb}; delete $o->{packages};
-	    $o->{packages} = new URPM;
-	    @{$o->{packages}}{qw(count mediums)} = (0, {}); #- add additional fields used by DrakX
-	    for my $h (sort { _media_rank($b) <=> _media_rank($a) } glob(pkgs::urpmidir($o->{prefix}) . "/hdlist.*.cz")) {
-		my ($description, $method, $medium_name) = $h =~ /hdlist\.(.*) \(([-a-z]*)(\d+s?)\)\.cz/;
-		my $m = pkgs::psUsingHdlist(
-		    $o->{prefix},
-		    $method,
-		    $o->{packages},
-		    $oldmediums->{$medium_name}{hdlist},
-		    $medium_name,
-		    $oldmediums->{$medium_name}{rpmsdir},
-		    $description,
-		    1, #- selected
-		    $h, #- fhdlist
-		    undef, #- pubkey
-		    1, #- nocopy
-		);
-		defined $oldmediums->{$medium_name}{$_} and $m->{$_} = $oldmediums->{$medium_name}{$_} for qw(hdlist_size synthesis_hdlist_size with_hdlist ftp_prefix pubkey);
-	    }
-	    #$o->{packages}->compute_deps;
-	}
+	1 while $suppl_method = $o->selectSupplMedia($suppl_method);
 
 	#- open rpm db according to right mode needed.
 	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{prefix}, $rebuild_needed);
