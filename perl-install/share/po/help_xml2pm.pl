@@ -5,12 +5,19 @@ use MDK::Common;
 
 my $help;
 my $dir = "doc/manual/literal/drakx";
+my $xsltproc = "/usr/bin/xsltproc";
+
+if ( ! -x "$xsltproc" ){
+    print "You need to have \"$xsltproc\" - ";
+    print "so type \"urpmi libxslt-proc\" please.\n";
+    exit 1;
+}
 my @langs = grep { /^..$/ && -e "$dir/$_/drakx-help.xml" } all($dir) or die "no XML help found in $dir\n";
 
 my %helps = map {
     my $lang = $_;
     my $p = new XML::Parser(Style => 'Tree');
-    open F, "xsltproc id.xsl $dir/$lang/drakx-help.xml|";
+    open F, "$xsltproc id.xsl $dir/$lang/drakx-help.xml|";
     my $tree = $p->parse(*F);
 
     $lang => rewrite2(rewrite1(@$tree), $lang);
