@@ -211,7 +211,7 @@ sub createXconf {
     my ($file, $mouse_type, $mouse_dev, $wacom_dev) = @_;
 
     devices::make("/dev/kbd") if arch() =~ /^sparc/; #- used by Xsun style server.
-    symlinkf($mouse_dev, "/dev/mouse");
+    symlinkf(devices::make($mouse_dev), "/dev/mouse");
 
     #- needed for imlib to start on 8-bit depth visual.
     symlink("/tmp/stage2/etc/imrc", "/etc/imrc");
