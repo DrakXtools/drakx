@@ -499,7 +499,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 						 c::headerGetEntry($header, 'version'). '-' .
 						 c::headerGetEntry($header, 'release'));
 			     if ($toRemove{$otherPackage}) {
-				 if ($otherPackage =~ /^libtermcap/) {
+				 if (c::headerGetEntry($header, 'name') eq 'libtermcap') {
 				     delete $toRemove{$otherPackage}; #- keep it selected, but force upgrade.
 				 } else {
 				     my @files = c::headerGetEntry($header, 'filenames');

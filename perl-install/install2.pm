@@ -334,12 +334,10 @@ sub formatPartitions {
 
 #------------------------------------------------------------------------------
 sub choosePackages {
-    my ($clicked) = $_[0];
-
     require pkgs;
     $o->setPackages if $_[1] == 1;
     $o->selectPackagesToUpgrade($o) if $o->{isUpgrade} && $_[1] == 1;
-    if ($clicked || !$o->{isUpgrade}) {
+    if ($_[1] > 1 || !$o->{isUpgrade}) {
 	$o->choosePackages($o->{packages}, $o->{compss}, 
 			   $o->{compssUsers}, $o->{compssUsersSorted}, $_[1] == 1);
 	pkgs::unselect($o->{packages}, $o->{packages}{kdesu}) if $o->{packages}{kdesu} && $o->{security} > 3;
