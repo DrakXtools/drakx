@@ -669,6 +669,7 @@ sub install2::startMove {
     output("/var/run/console/$username", 1);
     run_program::run('pam_console_apply');
 
+    run_program::run('hwclock', '-s', '--localtime');
     run_program::run('chown', "$username.root", '/var/run/rebootctl');
 
     touch '/var/run/utmp';
