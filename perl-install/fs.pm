@@ -88,7 +88,7 @@ sub add2all_hds {
     foreach (@l) {
 	my $s = 
 	    isNfs($_) ? 'nfss' :
-	    isThisFs('smbfs', $_) ? 'smbs' :
+	    isThisFs('smbfs', $_) || isThisFs('smb', $_) ? 'smbs' :
 	    'special';
 	push @{$all_hds->{$s}}, $_;
     }
