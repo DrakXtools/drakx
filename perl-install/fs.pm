@@ -54,7 +54,7 @@ sub check_mounted($) {
     open H, "/proc/swaps";
     foreach (<F>, <G>, <H>) {
 	foreach my $p (@$fstab) {
-	    /$p->{device}\s+([^\s]*)\s+/ and $p->{mntpoint} = $1, $p->{isMounted} = $p->{isFormatted} = 1, print STDERR "ok for $p->{mntpoint} with mounted=$p->{isMounted}\n";
+	    /$p->{device}\s+([^\s]*)\s+/ and $p->{mntpoint} = $1, $p->{isMounted} = $p->{isFormatted} = 1;
 	}
     }
 }

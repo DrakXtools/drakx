@@ -62,7 +62,7 @@ arch() !~ /alpha/ ? (
 arch() !~ /alpha/ ? (
   generateAutoInstFloppy => [ __("Auto install floppy"), 1, 1, '!$::expert || $o->{lnx4win}', "installPackages" ],
 ) : (),
-  exitInstall        => [ __("Exit install"), 0, 0, '$::beginner' ],
+  exitInstall        => [ __("Exit install"), 0, 0, '$::beginner && !$::live' ],
 );
     for (my $i = 0; $i < @installSteps; $i += 2) {
 	my %h; @h{@installStepsFields} = @{ $installSteps[$i + 1] };

@@ -29,6 +29,7 @@ install: build autoboot rescue
 ifeq (alpha,$(ARCH))
 	cp -f $(BOOT_RDZ) $(ROOTDEST)/boot
 	cp -f vmlinux.gz $(ROOTDEST)/boot/instboot.gz
+	install -m 0755 live_update $(ROOTDEST)/live_update
 #	 sudo install -d /mnt/loop
 #	 for i in $(ROOTDEST)/images/disks/*; do \
 #	   sudo mount $$i /mnt/loop -o loop ;\
