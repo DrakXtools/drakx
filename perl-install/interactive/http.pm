@@ -111,7 +111,7 @@ sub ask_fromW {
     while (1) {	
 	local *F;
 	open F, "<$pipe_r" or die;
-	$q = CGI->new(\*F);
+	$q = CGI->new(*F);
 	$q->param('force_exit_dead_prog') and $o->exit;
 	last if $q->param('uid') == $uid;
 
