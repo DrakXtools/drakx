@@ -111,7 +111,7 @@ sub debug {
 
 sub save_conf_file {
 # perl -ne 'split(":");print "$_[0]:*:$_[2]:$_[3]:::\n";' /etc/passwd > passwd 
-# gawk -F":" '{ if ($3 >= 500 ) print "login " $1 " uid = " $3 " rép perso : " $6}' /etc/passwd
+# gawk -F":" '{ if ($3 >= 500 ) print "login " $1 " uid = " $3 " rép perso : " $6}' /etc/passwdgawk -F":" '{ if ($3 >= 500 ) print "login " $1 " uid = " $3 " rép perso : " $6}' /etc/passwd
     my @cfg_list = ( "SYS_FILES=@sys_files\n",
 		      "HOME_FILES=@home_files\n", 
 		      "OTHER_FILES=@other_files\n",
@@ -427,7 +427,8 @@ sub advanced {
 
 
     my $box_what_sys =  gtkpack(new Gtk::VBox(0,1),
-			new Gtk::Pixmap($pix_time_map, $pix_time_mask),
+				new Gtk::CheckButton( "Check me please!" ),
+				new Gtk::Pixmap($pix_time_map, $pix_time_mask),
 			_("When backup.")
 			);
 
