@@ -484,6 +484,8 @@ sub isolinux {
     _ "cp /usr/lib/isolinux$debug.bin isolinux/isolinux.bin";
     output "isolinux/isolinux.cfg", "
 default linux
+prompt 1
+timeout 150
 display help.msg
 label linux
   kernel alt0/vmlinuz
