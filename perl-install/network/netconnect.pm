@@ -15,7 +15,7 @@ use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_fil
 my %conf;
 
 sub detect {
-    my ($auto_detect, $net_install) = @_;
+    my ($auto_detect, $_net_install) = @_;
     my $isdn = {};
     require network::isdn;
     network::isdn->import;
@@ -27,7 +27,9 @@ sub detect {
     require network::ethernet;
     network::ethernet->import;
     my @all_cards = conf_network_card_backend();
-    map { $auto_detect->{lan}{$_->[0]} = $_->[1] } @all_cards if !$net_install;
+    foreach (@all_cards) {
+        $auto_detect->{lan}{$_->[0]} = $_->[1];
+    }
 
     my $adsl = {};
     require network::adsl;
