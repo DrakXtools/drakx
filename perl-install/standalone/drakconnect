@@ -90,8 +90,8 @@ my $profile_combo = gtksignal_connect(Gtk2::OptionMenu->new, changed => sub {
                                           return if $::ignore_profile_change;
                                           my $selected_profile = $combo->get_text;
                                           return if $selected_profile eq $netcnx->{PROFILE};
-                                          set_profiles($selected_profile) if $combo->window; # is realized?;
 					  $netcnx->{PROFILE} = $selected_profile;
+                                          set_profiles($netcnx) if $combo->window; # is realized?;
                                    });
 
 sub update_profiles {
@@ -359,7 +359,6 @@ sub update_list() {
 
 sub apply() {
     network::sethostname($netc);
-    network::netconnect::save_conf($netcnx);
 
     $netcnx->{type} eq 'modem' and network::modem::ppp_configure($in, $netcnx->{$netcnx->{type}});
     $netcnx->{type} eq 'isdn_internal' and network::isdn::isdn_write_config_backend($netcnx->{$netcnx->{type}}, $netc, $netcnx); #$light
