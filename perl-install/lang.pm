@@ -27,6 +27,7 @@ use log;
 my %languages = (
 'en_US' => [ 'English|United States',	'iso-8859-1', 'en', 'en_US:en' ],
 'en_GB' => [ 'English|United Kingdom',	'iso-8859-1', 'en', 'en_GB:en' ],
+'en_IE@euro' => [ 'English|Ireland (euro)','iso-8859-15', 'en', 'en_IE:en_GB:en' ],
   'af'  => [ 'Afrikaans',		'iso-8859-1', 'af', 'af:en_ZA' ],
   'ar'  => [ 'Arabic',			'iso-8859-6', 'ar', 'ar' ],
 'az_AZ.UTF-8'=> [ 'Azeri (Latin)',	'iso-8859-9e','az', 'az:tr' ],
@@ -334,6 +335,7 @@ sub set {
 		my $packer = new packdrake("$ENV{SHARE_PATH}/locale.cz2", quiet => 1);
 		# "UTF-8" locale directory is always needed
 		$packer->extract_archive("$ENV{SHARE_PATH}/locale", "UTF-8");
+		$packer->extract_archive("$ENV{SHARE_PATH}/locale", $languages{$lang}[2]);
 		$packer->extract_archive("$ENV{SHARE_PATH}/locale", split(":", $languages{$lang}[3]));
 	    };
 	}

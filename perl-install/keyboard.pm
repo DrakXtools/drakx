@@ -50,6 +50,7 @@ my %lang2keyboard =
   'en' => 'us:90 us_intl:50',
 'en_US'=> 'us:90 us_intl:50',
 'en_GB'=> 'uk:90 us:60 us_intl:50',
+'en_IE'=> 'uk:90 us:60 us_intl:50',
   'eo' => 'us_intl:90 dvorak:20',
   'es' => 'es:90 la:80 us_intl:50',
 'es@tr'=> 'es:90 la:80 us_intl:50',
