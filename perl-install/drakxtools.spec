@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.16mdk
+Release: 0.17mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -327,6 +327,20 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Aug 30 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.17mdk
+- drakclock: fix layout so that NTP frame is not badly cut on small
+  resolution (#10971)
+- net_applet:
+  o allow to connect/disconnect from net_applet
+  o launch net_monitor once
+  o launch net_monitor in background
+- printerdrake:
+  o add column to show whether the printers are enabled or disabled to
+    the list of available print queues in the main window
+  o add command to the edit-printer window to enable and disable print
+    queues
+  o fix managment of "--expert" command line option
+
 * Sun Aug 29 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.16mdk
 - drakconnect: add metric support according to connection type (blino)
 - drakroam (Austin):
