@@ -1,11 +1,6 @@
-#!/usr/bin/perl -w
-
 package bttv;
 
 use strict;
-use lib qw(/usr/lib/libDrakX);
-
-use standalone;
 
 use interactive;
 use detect_devices;
@@ -154,24 +149,23 @@ my %pll_lst =
 
 sub config {
     my ($in) = @_;
-    my ($card, $tuner, $radio, $pll) = (-1, -1, 0, -1);
+    my %conf = (card => -1, tuner => -1, radio => 0, pll => -1);
 #    return unless (grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' } detect_devices::probeall(1));
     if ($in->ask_from("BTTV configuration", _("Please,\nselect your tv card parameters if needed"),
 				  [
-				   { label => _("Card model :"), val => \$card, list => [keys %cards_lst], format => sub { $cards_lst{$_[0]} }, type => 'combo', default => -1, sort =>1},
-				   { label => _("PLL type :"), val => \$pll, list => [keys %pll_lst], format => sub { $pll_lst{$_[0]} }, sort => 1, default => 0, advanced =>1},
-				   { label => _("Tuner type :"), val => \$tuner, list => [keys %tuners_lst], format => sub { $tuners_lst{$_[0]} }, sort => 1},
-				   { label => _("Radio support :"), val => \$radio, type => "bool", text => _("enable radio support")},
+				   { label => _("Card model :"), val => \$conf{card}, list => [keys %cards_lst], format => sub { $cards_lst{$_[0]} }, type => 'combo', default => -1, sort =>1},
+				   { label => _("PLL type :"), val => \$conf{pll}, list => [keys %pll_lst], format => sub { $pll_lst{$_[0]} }, sort => 1, default => 0, advanced =>1},
+				   { label => _("Tuner type :"), val => \$conf{tuner}, list => [keys %tuners_lst], format => sub { $tuners_lst{$_[0]} }, sort => 1},
+				   { label => _("Radio support :"), val => \$conf{radio}, type => "bool", text => _("enable radio support")},
 				   ]
 				  ))
     {
-	   my $options = join ' ', mapn {if  ($_[0] ne "-1") { $_[1]."=".$_[0]} else {} } [$card, $pll, $tuner], ["card", "pll", "tuner"];
-	   print "@",$options,"@\n";
+	   my $options = 
+	     'radio=' . ($conf{radio} ? 1 : 0) . ' '.
+	     join(' ', map { if_($conf{$_} ne -1, "$_=$conf{$_}") } qw(card pll tuner));
 	   log::l("[harddrake::tv] $options");
 	   standalone::explanations("modified file /etc/modules.conf ($options)");
-	   modules::read_conf("/etc/modules.conf");
-	   modules::set_options("bttv",$options) if ($options ne "");
-	   modules::write_conf();
+	   modules::set_options("bttv", $options) if $options;
 	 }
 }
 
