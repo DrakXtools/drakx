@@ -1,3 +1,36 @@
+2003/08/05  François Pons  <fpons at mandrakesoft.com>
+
+	* pkgs.pm: checking transaction allow ordering them ;-)
+	make default size of transaction to 13 (?) and avoid rpm ordering which
+	seems
+	nasty at present (missing configuration read ?).
+	fixed ordering of packages.
+	fixed otherOnly for package selection not correctly updated (according
+	to
+	changes in perl-URPM).
+
+	* install2.pm: added discovery and download meta_class facility in VERSION
+	file.
+
+2003/08/05  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* drakxtools.spec: commit titi's requested typos changes
+
+	* ftp.pm: revert my bad change
+
+2003/08/05  Pixel  <pixel at mandrakesoft.com>
+
+	* ugtk2.pm: do not invert Ok/Cancel for mdk 9.2 (per IHM team request)
+	remove stock icons (per IHM team request)
+
+	* interactive/gtk.pm, standalone/mousedrake, standalone/drakconnect,
+	standalone/draksec, standalone/drakperm, diskdrake/hd_gtk.pm,
+	standalone/net_monitor, standalone/drakbackup, standalone/harddrake2,
+	standalone/drakgw, standalone/drakbug, standalone/drakboot,
+	Xconfig/resolution_and_depth.pm, Xconfig/main.pm, standalone/logdrake,
+	standalone/drakfloppy, services.pm, standalone/drakfont: remove stock
+	icons (per IHM team request)
+
 2003/08/05  Guillaume Cottenceau  <gc at mandrakesoft.com>
 
 	* drakxtools.spec: commit titi's requested typos changes
@@ -18316,7 +18349,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.814 2003/08/05 10:05:48 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.815 2003/08/05 11:17:56 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
