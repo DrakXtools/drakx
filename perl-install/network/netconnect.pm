@@ -10,7 +10,7 @@ use any;
 use mouse;
 use network::network;
 use network::tools;
-use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
+use MDK::Common::Globals "network", qw($in $connect_file $disconnect_file $connect_prog);
 
 my %conf;
 
@@ -39,10 +39,9 @@ sub detect {
 }
 
 sub init_globals {
-    my ($in, $prefix) = @_;
+    my ($in) = @_;
     MDK::Common::Globals::init(
 			       in => $in,
-			       prefix => $prefix,
 			       connect_file => "/etc/sysconfig/network-scripts/net_cnx_up",
 			       disconnect_file => "/etc/sysconfig/network-scripts/net_cnx_down",
 			       connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg");
@@ -547,7 +546,7 @@ killall pppd
                         if ($adsl_device eq 'speedtouch' && ! -r '/usr/share/speedtouch/mgmt.o' && !$::testing) {
                             $in->do_pkgs->what_provides("speedtouch_mgmt") and 
                               $in->do_pkgs->install('speedtouch_mgmt', 'auto');
-                            return 'adsl_speedtouch_firmware' if ! -e "$prefix/usr/share/speedtouch/mgmt.o";
+                            return 'adsl_speedtouch_firmware' if ! -e "$::prefix/usr/share/speedtouch/mgmt.o";
                         }
                         return 'adsl_provider' if $adsl_devices{$adsl_device};
                         return 'adsl_protocol';
@@ -584,7 +583,7 @@ or skip and do it later."),
                                 list => [ N("Use a floppy"), N("Use my Windows partition"), N("Do it later") ], }
                             ],
                     post => sub {
-                        my $destination = "$prefix/usr/share/speedtouch/";
+                        my $destination = "$::prefix/usr/share/speedtouch/";
                         my ($file, $source, $mounted);
                         if ($adsl_answer eq N("Use a floppy")) {
                             $mounted = 1;
@@ -1110,7 +1109,7 @@ else
 fi
 );
     }
-    output_with_perm("$prefix$connect_prog", 0755, $connect_cmd) if $connect_cmd;
+    output_with_perm("$::prefix$connect_prog", 0755, $connect_cmd) if $connect_cmd;
     $netcnx->{$_} = $netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
 
@@ -1152,20 +1151,20 @@ sub get_profiles() {
 
 sub load_conf {
     my ($netcnx, $netc, $intf) = @_;
-    my $current = { getVarsFromSh("$prefix/etc/netprofile/current") };
+    my $current = { getVarsFromSh("$::prefix/etc/netprofile/current") };
     
     $netcnx->{PROFILE} = $current->{PROFILE} || 'default';
-    network::network::read_all_conf($prefix, $netc, $intf);
+    network::network::read_all_conf($::prefix, $netc, $intf);
 }
 
 sub get_net_device() {
     my $connect_file = "/etc/sysconfig/network-scripts/net_cnx_up";
     my $network_file = "/etc/sysconfig/network";
-		if (cat_("$prefix$connect_file") =~ /ifup/) {
+		if (cat_("$::prefix$connect_file") =~ /ifup/) {
   		if_(cat_($connect_file) =~ /^\s*ifup\s+(.*)/m, split(' ', $1))
-		} elsif (cat_("$prefix$connect_file") =~ /network/) {
-			${{ getVarsFromSh("$prefix$network_file") }}{GATEWAYDEV};
-    } elsif (cat_("$prefix$connect_file") =~ /isdn/) {
+		} elsif (cat_("$::prefix$connect_file") =~ /network/) {
+			${{ getVarsFromSh("$::prefix$network_file") }}{GATEWAYDEV};
+    } elsif (cat_("$::prefix$connect_file") =~ /isdn/) {
 			"ippp+"; 
     } else {
 			"ppp+";
@@ -1180,16 +1179,16 @@ sub read_net_conf {
 
 sub start_internet {
     my ($o) = @_;
-    init_globals($o, $o->{prefix});
+    init_globals($o);
     #- give a chance for module to be loaded using kernel-BOOT modules...
     $::isStandalone or modules::load_category('network/main|gigabit|usb');
-    run_program::rooted($prefix, $connect_file);
+    run_program::rooted($::prefix, $connect_file);
 }
 
 sub stop_internet {
     my ($o) = @_;
     init_globals($o, $o->{prefix});
-    run_program::rooted($prefix, $disconnect_file);
+    run_program::rooted($::prefix, $disconnect_file);
 }
 
 1;

@@ -9,7 +9,7 @@ use run_program;
 use log;
 use network::tools;
 use vars qw(@ISA @EXPORT);
-use MDK::Common::Globals "network", qw($in $prefix);
+use MDK::Common::Globals "network", qw($in);
 use MDK::Common::File;
 
 
@@ -28,7 +28,7 @@ sub isdn_write_config_backend {
     my ($isdn, $netc, $o_netcnx) = @_;
     defined $o_netcnx and $netc->{isdntype} = $o_netcnx->{type};
 
-    output_with_perm("$prefix/etc/isdn/profile/link/myisp", 0600,
+    output_with_perm("$::prefix/etc/isdn/profile/link/myisp", 0600,
 	  qq(
 I4L_USERNAME="$isdn->{login}"
 I4L_SYSNAME=""
@@ -37,7 +37,7 @@ I4L_REMOTE_OUT="$isdn->{phone_out}"
 I4L_DIALMODE="$isdn->{dialing_mode}"
 ) . if_($isdn->{speed} =~ /128/, 'SLAVE="ippp1"
 '));
-	output "$prefix/etc/isdn/profile/card/mycard",
+	output "$::prefix/etc/isdn/profile/card/mycard",
 	  qq(
 I4L_MODULE="$isdn->{driver}"
 I4L_TYPE="$isdn->{type}"
@@ -50,17 +50,17 @@ I4L_ID="HiSax"
 I4L_FIRMWARE="$isdn->{firmware}"
 );
 
-	output "$prefix/etc/ppp/ioptions",
+	output "$::prefix/etc/ppp/ioptions",
 	  "lock
 usepeerdns
 defaultroute
 ";
-	system "$prefix/etc/rc.d/init.d/isdn4linux restart";
+	system "$::prefix/etc/rc.d/init.d/isdn4linux restart";
 
-    substInFile { s/^FIRMWARE.*\n//; $_ .= qq(FIRMWARE="$isdn->{firmware}"\n) if eof  } "$prefix/etc/sysconfig/network-scripts/ifcfg-ippp0";
+    substInFile { s/^FIRMWARE.*\n//; $_ .= qq(FIRMWARE="$isdn->{firmware}"\n) if eof  } "$::prefix/etc/sysconfig/network-scripts/ifcfg-ippp0";
 
     # we start the virtual interface at boot (we dial only on demand.
-    substInFile { s/^ONBOOT.*\n//; $_ .= qq(ONBOOT=yes\n) if eof  } "$prefix/etc/sysconfig/network-scripts/ifcfg-ippp$isdn->{intf_id}";
+    substInFile { s/^ONBOOT.*\n//; $_ .= qq(ONBOOT=yes\n) if eof  } "$::prefix/etc/sysconfig/network-scripts/ifcfg-ippp$isdn->{intf_id}";
 
     write_secret_backend($isdn->{login}, $isdn->{passwd});
 
@@ -93,7 +93,7 @@ sub isdn_read_config {
 		 I4L_IO1 => 'io1',
 		 I4L_FIRMWARE => 'firmware');
     foreach ('link/myisp', 'card/mycard') {
-	my %conf = getVarsFromSh("$prefix/etc/isdn/profile/$_");
+	my %conf = getVarsFromSh("$::prefix/etc/isdn/profile/$_");
 	foreach (keys %conf) {	 
 	    $isdn->{$match{$_}} = $conf{$_} if $match{$_};
 	}
@@ -122,7 +122,7 @@ sub get_info_providers_backend {
 sub isdn_ask_info {
     my ($isdn, $netc) = @_;
     my $f = "$ENV{SHARE_PATH}/ldetect-lst/isdn.db";
-    $f = "$prefix$f" if !-e $f;
+    $f = "$::prefix$f" if !-e $f;
   isdn_ask_info_step1:
     my $str = $in->ask_from_treelist(N("ISDN Configuration"), N("Select your provider.\nIf it isn't listed, choose Unlisted."),
 				     '|', ['Unlisted - edit manually',

@@ -5,7 +5,7 @@ use common;
 use run_program;
 use c;
 use vars qw(@ISA @EXPORT @EXPORT_OK);
-use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_prog $connect_file);
+use MDK::Common::Globals "network", qw($in $disconnect_file $connect_prog $connect_file);
 use MDK::Common::System qw(getVarsFromSh);
 
 @ISA = qw(Exporter);
@@ -19,7 +19,7 @@ sub write_cnx_script {
 	$netc->{internet_cnx}{$o_type}{type} = $o_type2;
     } else {
 	foreach ($connect_file, $disconnect_file) {
-	    output_with_perm("$prefix$_", 0755,
+	    output_with_perm("$::prefix$_", 0755,
 '#!/bin/bash
 ' . if_(!$netc->{at_boot}, 'if [ "x$1" == "x--boot_time" ]; then exit; fi
 ') . $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{$_});
@@ -29,7 +29,7 @@ sub write_cnx_script {
 
 sub write_secret_backend {
     my ($a, $b) = @_;
-    foreach my $i ("$prefix/etc/ppp/pap-secrets", "$prefix/etc/ppp/chap-secrets") {
+    foreach my $i ("$::prefix/etc/ppp/pap-secrets", "$::prefix/etc/ppp/chap-secrets") {
 	substInFile { s/^'$a'.*\n//; $_ .= "\n'$a' * '$b' * \n" if eof  } $i;
 	#- restore access right to secrets file, just in case.
 	chmod 0600, $i;
@@ -44,7 +44,7 @@ sub unquotify {
 sub read_secret_backend() {
     my $conf = [];
     foreach my $i ("pap-secrets", "chap-secrets") {
-	foreach (cat_("$prefix/etc/ppp/$i")) {
+	foreach (cat_("$::prefix/etc/ppp/$i")) {
 	    my ($login, $server, $passwd) = split(' ');
 	    if ($login && $passwd) {
 		unquotify \$passwd;
@@ -69,9 +69,9 @@ sub passwd_by_login {
     }
 }
 
-sub connect_backend() { run_program::rooted($prefix, "$connect_file &") }
+sub connect_backend() { run_program::rooted($::prefix, "$connect_file &") }
 
-sub disconnect_backend() { run_program::rooted($prefix, "$disconnect_file &") }
+sub disconnect_backend() { run_program::rooted($::prefix, "$disconnect_file &") }
 
 sub read_providers_backend { my ($file) = @_; map { /(.*?)=>/ } catMaybeCompressed($file) }
 
@@ -137,7 +137,7 @@ sub check_link_beat() {
 
 sub write_initscript() {
     $::testing and return;
-    output_with_perm("$prefix/etc/rc.d/init.d/internet", 0755,
+    output_with_perm("$::prefix/etc/rc.d/init.d/internet", 0755,
 		     sprintf(<<'EOF', $connect_file, $connect_file, $disconnect_file, $disconnect_file));
 #!/bin/bash
 #
@@ -183,7 +183,7 @@ esac
 exit 0
 EOF
     $::isStandalone ? system("/sbin/chkconfig --add internet") : do {
-	symlinkf("../init.d/internet", "$prefix/etc/rc.d/rc$_") foreach
+	symlinkf("../init.d/internet", "$::prefix/etc/rc.d/rc$_") foreach
 	  '0.d/K11internet', '1.d/K11internet', '2.d/K11internet', '3.d/S89internet', '5.d/S89internet', '6.d/K11internet';
     };
 }

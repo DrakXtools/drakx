@@ -6,7 +6,7 @@ use network::tools;
 use network::ethernet;
 use modules;
 use vars qw(@ISA @EXPORT);
-use MDK::Common::Globals "network", qw($in $prefix);
+use MDK::Common::Globals "network", qw($in);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(adsl_conf_backend);
@@ -90,17 +90,17 @@ If you don't know, choose 'use pppoe'"),
 
 sub adsl_probe_info {
     my ($adsl, $netc, $adsl_type, $adsl_modem) = @_;
-    my $pppoe_file = "$prefix/etc/ppp/pppoe.conf";
-    my $pptp_file = "$prefix/etc/sysconfig/network-scripts/net_cnx_up";
+    my $pppoe_file = "$::prefix/etc/ppp/pppoe.conf";
+    my $pptp_file = "$::prefix/etc/sysconfig/network-scripts/net_cnx_up";
     my %pppoe_conf; %pppoe_conf = getVarsFromSh($pppoe_file) if (! defined $adsl_type || $adsl_type =~ /pppoe/) && -f $pppoe_file;
     my $login = $pppoe_conf{USER};
     foreach (qw(/etc/ppp/peers/adsl /etc/ppp/options /etc/ppp/options.adsl)) {
-	($login) = map { if_(/^user\s+"([^"]+)"/, $1) } cat_("$prefix/$_") if !$login && -r "$prefix/$_";
+	($login) = map { if_(/^user\s+"([^"]+)"/, $1) } cat_("$::prefix/$_") if !$login && -r "$::prefix/$_";
     }
     ($login) = map { if_(/\sname\s+([^ \n]+)/, $1) } cat_($pptp_file) if (! defined $adsl_type || $adsl_type =~ /pptp/) && -r $pptp_file;
     my $passwd = passwd_by_login($login);
     ($netc->{vpivci}) = 
-      map { if_(/^.*-vpi\s+(\d+)\s+-vci\s+(\d+)/, "$1_$2") } cat_("$prefix/etc/ppp/peers/adsl") if $adsl_modem eq 'speedtouch';
+      map { if_(/^.*-vpi\s+(\d+)\s+-vci\s+(\d+)/, "$1_$2") } cat_("$::prefix/etc/ppp/peers/adsl") if $adsl_modem eq 'speedtouch';
     $pppoe_conf{DNS1} ||= '';
     $pppoe_conf{DNS2} ||= '';
     add2hash($netc, { dnsServer2 => $pppoe_conf{DNS1}, dnsServer3 => $pppoe_conf{DNS2}, DOMAINNAME2 => '' });
@@ -120,8 +120,8 @@ sub adsl_conf_backend {
     my ($adsl, $netc, $adsl_type, $o_netcnx) = @_;
     defined $o_netcnx and $netc->{adsltype} = $o_netcnx->{type};
     $netc->{adsltype} ||= "adsl_$adsl_type";
-    mkdir_p("$prefix/etc/ppp");
-    output("$prefix/etc/ppp/options",
+    mkdir_p("$::prefix/etc/ppp");
+    output("$::prefix/etc/ppp/options",
 'lock
 noipdefault
 persist
@@ -138,15 +138,15 @@ defaultroute
 	    s/USER=.*\n/USER=$adsl->{login}\n/;
 	    s/DNS1=.*\n/DNS1=$netc->{dnsServer2}\n/;
 	    s/DNS2=.*\n/DNS2=$netc->{dnsServer3}\n/;
-	} "$prefix/etc/ppp/pppoe.conf";
+	} "$::prefix/etc/ppp/pppoe.conf";
     }
 
     if ($adsl_type eq 'sagem') {
 	substInFile {
 	    s/VCI=.*\n/VCI=00000023\n/;
 	    s/Encapsulation=.*\n/Encapsulation=00000006\n/;
-	} "$prefix/etc/analog/adiusbadsl";
-	output("$prefix/etc/ppp/peers/adsl",
+	} "$::prefix/etc/analog/adiusbadsl";
+	output("$::prefix/etc/ppp/peers/adsl",
 qq(noauth
 noipdefault
 pty "/usr/sbin/pppoa -I `/usr/sbin/adictrl -s; /usr/sbin/adictrl -i`"
@@ -173,12 +173,12 @@ user "$adsl->{login}"
 	substInFile {
 	    s/VCI=.*\n/VCI=00000024\n/;
 	    s/Encapsulation=.*\n/Encapsulation=00000004\n/;
-	} "$prefix/etc/analog/adiusbadsl";
+	} "$::prefix/etc/analog/adiusbadsl";
     }
 
     if ($adsl_type eq 'speedtouch') {
 	my ($vpi, $vci) = $netc->{vpivci} =~ /(\d+)_(\d+)/ or return;
-	output("$prefix/etc/ppp/peers/adsl", 
+	output("$::prefix/etc/ppp/peers/adsl", 
 qq(noauth
 noipdefault
 pty "/usr/sbin/pppoa3 -e 1 -c -vpi $vpi -vci $vci"
@@ -208,7 +208,7 @@ user "$adsl->{login}"
     
     if ($adsl_type eq 'eci') {
 	my ($vpi, $vci) = $netc->{vpivci} =~ /(\d+)_(\d+)/ or return;
-	output("$prefix/etc/ppp/peers/adsl", 
+	output("$::prefix/etc/ppp/peers/adsl", 
 qq(debug
 kdebug 1
 noipdefault

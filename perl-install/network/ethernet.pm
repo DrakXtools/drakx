@@ -10,7 +10,7 @@ use run_program;
 use network::tools;
 use vars qw(@ISA @EXPORT);
 
-use MDK::Common::Globals "network", qw($in $prefix);
+use MDK::Common::Globals "network", qw($in);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(conf_network_card_backend);
@@ -20,8 +20,8 @@ my (@cards, @ether_steps, $last, %last);
 
 sub ether_conf{
     # my ($netcnx, $netc, $intf, $first_time) = @_;
-    my ($in, $prefix, $netc, $intf) = @_;
-    configureNetwork2($in, $prefix, $netc, $intf);
+    my ($in, $_prefix, $netc, $intf) = @_;
+    configureNetwork2($in, $::prefix, $netc, $intf);
     $netc->{NETWORKING} = "yes";
     if ($netc->{GATEWAY} || any { $_->{BOOTPROTO} =~ /dhcp/ } values %$intf) {
 	$netcnx->{type} = 'lan';
@@ -69,7 +69,7 @@ sub conf_network_card_backend {
 	my @all_cards = detect_devices::getNet();
 
 	my @devs = detect_devices::pcmcia_probe();
-	modules::mergein_conf("$prefix/etc/modules.conf");
+	modules::mergein_conf("$::prefix/etc/modules.conf");
 	my $saved_driver;
 	return map {
 	    my $interface = $_;

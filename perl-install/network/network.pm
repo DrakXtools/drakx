@@ -147,11 +147,11 @@ sub write_resolv_conf {
 }
 
 sub write_interface_conf {
-    my ($file, $intf, $_netc, $prefix) = @_;
+    my ($file, $intf, $_netc, $_prefix) = @_;
 
-    if ($intf->{HWADDR} && -e "$prefix/sbin/ip") {
+    if ($intf->{HWADDR} && -e "$::prefix/sbin/ip") {
 	$intf->{HWADDR} = undef;
-	if (my $s = `LC_ALL= LANG= $prefix/sbin/ip -o link show $intf->{DEVICE} 2>/dev/null`) {
+	if (my $s = `LC_ALL= LANG= $::prefix/sbin/ip -o link show $intf->{DEVICE} 2>/dev/null`) {
 	    if ($s =~ m|.*link/ether\s([0-9a-z:]+)\s|) {
 		$intf->{HWADDR} = $1;
 	    }
@@ -190,12 +190,12 @@ sub add2hosts {
 
 # The interface/gateway needs to be configured before this will work!
 sub guessHostname {
-    my ($prefix, $netc, $intf) = @_;
+    my ($_prefix, $netc, $intf) = @_;
 
     $intf->{isUp} && dnsServers($netc) or return 0;
     $netc->{HOSTNAME} && $netc->{DOMAINNAME} and return 1;
 
-    write_resolv_conf("$prefix/etc/resolv.conf", $netc);
+    write_resolv_conf("$::prefix/etc/resolv.conf", $netc);
 
     my $name = gethostbyaddr(Socket::inet_aton($intf->{IPADDR}), Socket::AF_INET()) or log::explanations("reverse name lookup failed"), return 0;
 
@@ -333,28 +333,28 @@ sub proxy_configure {
 }
 
 sub read_all_conf {
-    my ($prefix, $netc, $intf, $o_netcnx) = @_;
+    my ($_prefix, $netc, $intf, $o_netcnx) = @_;
     $netc ||= {}; $intf ||= {};
     my $netcnx = $o_netcnx || {};
-    add2hash($netc, read_conf("$prefix/etc/sysconfig/network")) if -r "$prefix/etc/sysconfig/network";
+    add2hash($netc, read_conf("$::prefix/etc/sysconfig/network")) if -r "$::prefix/etc/sysconfig/network";
     add2hash($netc, read_resolv_conf());
-    add2hash($netc, read_tmdns_conf("$prefix/etc/tmdns.conf")) if -r "$prefix/etc/tmdns.conf";
-    foreach (all("$prefix/etc/sysconfig/network-scripts")) {
+    add2hash($netc, read_tmdns_conf("$::prefix/etc/tmdns.conf")) if -r "$::prefix/etc/tmdns.conf";
+    foreach (all("$::prefix/etc/sysconfig/network-scripts")) {
 	if (/^ifcfg-(\w+)$/ && $1 ne 'lo') {
 	    my $intf = findIntf($intf, $1);
-	    add2hash($intf, { getVarsFromSh("$prefix/etc/sysconfig/network-scripts/$_") });
+	    add2hash($intf, { getVarsFromSh("$::prefix/etc/sysconfig/network-scripts/$_") });
 	}
     }
-    $netcnx->{type} or probe_netcnx_type($prefix, $netc, $intf, $netcnx);
+    $netcnx->{type} or probe_netcnx_type($::prefix, $netc, $intf, $netcnx);
 }
 
 sub probe_netcnx_type {
-    my ($prefix, $_netc, $intf, $netcnx) = @_;
+    my ($_prefix, $_netc, $intf, $netcnx) = @_;
     #- try to probe $netcnx->{type} which is used almost everywhere.
     unless ($netcnx->{type}) {
 	#- ugly hack to determine network type (avoid saying not configured in summary).
-	-e "$prefix/etc/ppp/peers/adsl" and $netcnx->{type} ||= 'adsl'; # enough ?
-	-e "$prefix/etc/ppp/ioptions1B" || -e "$prefix/etc/ppp/ioptions2B" and $netcnx->{type} ||= 'isdn'; # enough ?
+	-e "$::prefix/etc/ppp/peers/adsl" and $netcnx->{type} ||= 'adsl'; # enough ?
+	-e "$::prefix/etc/ppp/ioptions1B" || -e "$::prefix/etc/ppp/ioptions2B" and $netcnx->{type} ||= 'isdn'; # enough ?
 	$intf->{ppp0} and $netcnx->{type} ||= 'modem';
 	$intf->{eth0} and $netcnx->{type} ||= 'lan';
     }
@@ -409,13 +409,13 @@ sub easy_dhcp {
 #-  $intf->{$device}{DEVICE} : DEVICE = $device
 #-  $intf->{$device}{BOOTPROTO} : boot prototype : "bootp" or "dhcp" or "pump" or ...
 sub configureNetwork2 {
-    my ($in, $prefix, $netc, $intf) = @_;
-    my $etc = "$prefix/etc";
+    my ($in, $_prefix, $netc, $intf) = @_;
+    my $etc = "$::prefix/etc";
     if (!$::testing) {
         $netc->{wireless_eth} and $in->do_pkgs->ensure_is_installed('wireless-tools', '/sbin/iwconfig', 'auto');
         write_conf("$etc/sysconfig/network", $netc);
         write_resolv_conf("$etc/resolv.conf", $netc) if ! $netc->{DHCP};
-        write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $netc, $prefix) foreach grep { $_->{DEVICE} ne 'ppp0' } values %$intf;
+        write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $netc, $::prefix) foreach grep { $_->{DEVICE} ne 'ppp0' } values %$intf;
         add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf) if $netc->{HOSTNAME} && !$netc->{DHCP};
         add2hosts("$etc/hosts", "localhost", "127.0.0.1");
         
