@@ -851,7 +851,7 @@ sub setupBootloaderBefore {
 	bootloader::set_append($o->{bootloader}, $_, 'autotune') foreach grep { /ide/ } all("/proc/ide");
     }
     if (cat_("/proc/cmdline") =~ /mem=nopentium/) {
-	bootloader::set_append($o->{bootloader}, 'mem', 'nopentium');
+	bootloader::set_append($o->{bootloader}, mem => 'nopentium');
     }
     if (cat_("/proc/cmdline") =~ /\b(pci)=(\S+)/) {
 	bootloader::set_append($o->{bootloader}, $1, $2);
