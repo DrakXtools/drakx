@@ -202,6 +202,7 @@ my $D = (-sqrt(sqr($B - 1) - 4 * $A * $C) - ($B - 1)) / 2 / $A; #- $A is negativ
 sub correctSize {
     my $csz = ($A * $_[0] + $B) * $_[0] + $C;
     $csz > $_[0] ? $csz : $_[0]; #- size correction (in MB) should be above input argument (as $A is negative).
+}
 sub invCorrectSize {
     my $sz = $_[0] < $D ? (sqrt(sqr($B) + 4 * $A * ($_[0] - $C)) - $B) / 2 / $A : $_[0];
     $sz < $_[0] ? $sz : $_[0];
