@@ -62,5 +62,5 @@ rm -rf modules ; install -d modules
 # v=kernel-2.2.17-BOOT3.tar.bz2
 # scp kenobi:~chmou/work/kernel/archive/$v /tmp
 # cd ~/gi/kernel ; rm -rf * ; tar xfI /tmp/$v 
-# cd ~/gi ; ./update-kernel ; rm -f network.rdz ; ./make_boot_img network.rdz network ; scp vmlinuz network.rdz kenobi:/tftpboot
+# cd ~/gi ; ./update_kernel ; rm -f network.rdz ; ./make_boot_img network.rdz network ; scp vmlinuz network.rdz kenobi:/tftpboot
 # cp -f ~/gi/modules/modules.cz /export/Mandrake/mdkinst/lib/modules.cz
