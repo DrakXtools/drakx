@@ -215,7 +215,7 @@ sub ppp_choose {
     $o_mouse ||= {};
 
     $o_mouse->{device} ||= readlink "$::prefix/dev/mouse";
-    my $need_to_ask = $modem->{device};
+    my $need_to_ask = $modem->{device} || !$netc->{autodetect}{winmodem};
   step_1:
     $need_to_ask and $modem->{device} = $in->ask_from_listf_raw({ messsages => N("Please choose which serial port your modem is connected to."),
 						   interactive_help_id => 'selectSerialPort',
