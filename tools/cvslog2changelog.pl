@@ -76,5 +76,7 @@ BEGIN {
 	      'daouda' => 'Daouda Lo  <daouda@mandrakesoft.com>',
 	      'dchaumette' => 'Damien Chaumette  <dchaumette@mandrakesoft.com>',
 	      'cbelisle' => 'Christian Belisle  <cbelisle@mandrakesoft.com>',
+	      'warly' => 'Warly  <warly@mandrakesoft.com>',
+	      'jgotti' => 'Jonathan Gotti  <jgotti@mandrakesoft.com>',
 	     );
 }
