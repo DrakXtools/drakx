@@ -47,67 +47,68 @@ each_index {
 
 #TV $permList->set_shadow_type('out');
 
-my $up_down_box = new Gtk2::HBox(0,5);
-my $B_up = new Gtk2::Button(N("Up"));
-my $B_del = new Gtk2::Button(N("delete"));
-my $B_edit = new Gtk2::Button(N("edit"));
-my $B_down = new Gtk2::Button(N("Down"));
-my $B_add = new Gtk2::Button(N("add a rule"));
-my $tips = new Gtk2::Tooltips;
-
 #- widgets settings
 my $combo_perm = new Gtk2::Combo;
 $combo_perm->set_popdown_strings(sort(keys %perm));
-
-$tips->set_tip($B_add, N("Add a new rule at the end"));
-$tips->set_tip($B_edit, N("Edit current rule"));
-$tips->set_tip($B_up, N("Move selected rule up one level"));
-$tips->set_tip($B_down, N("Move selected rule down one level"));
-$tips->set_tip($B_del, N("Delete selected rule"));
 
 #- signal management
 $W->signal_connect(delete_event => sub { ugtk2->exit });
 $permList->signal_connect(select_row => \&row_setting_data);
 #$permList->signal_connect( unselect_row => sub { undef(%CURENT)});
-$B_edit->signal_connect(clicked => \&row_setting_dialog);
-$B_add->signal_connect(clicked  => sub {
-			    #$permList->insert( $rows_cnt , '');
-			    $treeModel->append_set(undef, [ 0 => 'NEW', 1 => '-', 2 => '-', 3 => '-' ]);
-			    #$permList->($rows_cnt , 0);
-			    &row_setting_dialog;
-			    $rows_cnt++;
-			});
-$B_del->signal_connect(clicked => sub {
-			    
-			    $permList->remove(${$CURENT{clicked}}{row});
-			    $rows_cnt--;
-			    $modified++;
-			});
-$B_down->signal_connect(clicked => sub {
-			     my $row = ${$CURENT{clicked}}{row};
-			     $permList->row_move($row, $row+1);
-			     $permList->unselect_all;
-			     $permList->select_row($row+1,0);
-			     $CURENT{clicked}{row} = $row+1;
-			 });
-$B_up->signal_connect(clicked => sub {
-			   my $row = ${$CURENT{clicked}}{row};
-			   $permList->row_move($row, $row-1);
-			   $permList->unselect_all;
-			   $permList->select_row($row-1,0);
-			   $CURENT{clicked}{row} = $row-1;
-		       });
+
+sub add_callback {
+    #$permList->insert( $rows_cnt , '');
+    $treeModel->append_set(undef, [ 0 => 'NEW', 1 => '-', 2 => '-', 3 => '-' ]);
+    #$permList->($rows_cnt , 0);
+    row_setting_dialog();
+    $rows_cnt++;
+}
+
+sub del_callback {
+    $permList->remove(${$CURENT{clicked}}{row});
+    $rows_cnt--;
+    $modified++;
+}
+
+sub down_callback {
+    my $row = ${$CURENT{clicked}}{row};
+    $permList->row_move($row, $row+1);
+    $permList->unselect_all;
+    $permList->select_row($row+1,0);
+    $CURENT{clicked}{row} = $row+1;
+}
+
+sub up_callback {
+    my $row = ${$CURENT{clicked}}{row};
+    $permList->row_move($row, $row-1);
+    $permList->unselect_all;
+    $permList->select_row($row-1,0);
+    $CURENT{clicked}{row} = $row-1;
+}
+
 my $combo_sig = $combo_perm->entry->signal_connect( changed => sub { &display_perm($combo_perm->entry->get_text , @_) });
-$permList->signal_connect( button_press_event => sub { 
+$permList->signal_connect(button_press_event => sub { 
 				$editable or return 0;
 				my (undef, $event) = @_;
 				&row_setting_dialog if $event->type eq '2button_press';
 			    });
 
 
+my $up_down_box = new Gtk2::HBox(0,5);
 
-foreach ($B_up, $B_down, $B_add, $B_del, $B_edit) {
-    $up_down_box->add($_);
+
+my $tips = new Gtk2::Tooltips;
+
+foreach ([ N("Up"), N("Move selected rule up one level"), \&up_callback ], 
+         [ N("Down"), N("Move selected rule down one level"), \&down_callback ], 
+         [ N("add a rule"), N("Add a new rule at the end"), \&add_callback ],
+         [ N("delete"), N("Delete selected rule"), \&del_callback ], 
+         [ N("edit"), N("Edit current rule", \&row_setting_dialog) ]) {
+    $up_down_box->add(gtkset_tip($tips,
+                                 gtksignal_connect(Gtk2::Button->new($_->[0]),
+                                                   clicked => $_->[2]
+                                                   ),
+                                 $_->[1]));
 }
 
 
@@ -252,7 +253,7 @@ sub row_setting_dialog {
     $hb_rights->add($vb_rights);
 
     foreach my $r (keys %rights) {
-	$perms{$r} = get_right($rights{$r});
+	$perms{$r} = { get_right($rights{$r}) };
 	my $vbox = gtkadd(Gtk2::VBox->new(0,5), Gtk2::Label->new($r));
 	foreach my $c (@check) {
 	    $c eq '' and next;
@@ -382,7 +383,7 @@ sub get_user_or_group {
 
 #- Desc  => return hash of boolean value for read write and execution permission from a value between 0 - 7
 sub get_right {
-    my $right	= shift @_;
+    my ($right) = @_;
     my %rght	= ('read' => 0, 'write' => 0, 'execute' => 0);
     $right - 4 >= 0 and $rght{read}=1 and $right = $right-4;
     $right - 2 >= 0 and $rght{write}=1 and $right = $right-2;
