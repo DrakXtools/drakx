@@ -20,20 +20,20 @@ my $isMD5 = cat_("/etc/pam.d/passwd") =~ /md5/;
 my $isShadow = cat_("/etc/pam.d/passwd") =~ /shadow/;
 
 
-my $users = {}; 
+my $users = []; 
 my $in;
 
 if (my @l = grep { ! /^-/ } @ARGV) {
-    $users->{$_} = { name => $_, realname => $_ } foreach @l;
+    $users = [ map { { name => $_, realname => $_ } } @l ];
 } else {
     $in = interactive->vnew('su');
     any::ask_users('', $in, $users, $ENV{SECURE_LEVEL});
 }
 
-system("adduser", $_) foreach keys %$users;
+system("adduser", $_->{name}) foreach @$users;
 any::addUsers('', $users);
 
-any::write_passwd_user('', $_, $isMD5) foreach values %$users;
+any::write_passwd_user('', $_, $isMD5) foreach @$users;
 system("pwconv") if $isShadow;
 
 #$in->pkgs_install("autologin") if $o->{autologin};
