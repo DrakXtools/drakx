@@ -32,7 +32,8 @@ sub read_resolv_conf {
     my %netc;
 
     local *F; open F, $file or die "cannot open $file: $!";
-    foreach (<F>) {
+    local $_;
+    while (<F>) {
 	/^\s*nameserver\s+(\S+)/ and $netc{shift @l} = $1;
     }
     \%netc;
@@ -88,7 +89,8 @@ sub write_resolv_conf {
 
     my (%search, %dns, @unknown);
     local *F; open F, $file;
-    foreach (<F>) {
+    local $_;
+    while (<F>) {
 	/^[#\s]*search\s+(.*?)\s*$/ and $search{$1} = $., next;
 	/^[#\s]*nameserver\s+(.*?)\s*$/ and $dns{$1} = $., next;
 	/^.*# ppp temp entry\s*$/ and next;

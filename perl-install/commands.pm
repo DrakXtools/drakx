@@ -261,7 +261,8 @@ sub cp {
 		local (*F, *G);
 		open F, $src or die "can't open $src for reading: $!\n";
 		open G, "> $dest" or $force or die "can't create $dest : $!\n";
-		foreach (<F>) { print G $_ }
+		local $_;
+		while (<F>) { print G $_ }
 		chmod mode($src), $dest;
 	    }
 	}
@@ -328,10 +329,11 @@ sub head_tail {
     $n = $n ? shift : 10;
     local *F; @_ ? open(F, $_[0]) || die "error: can't open file $_[0]\n" : (*F = *STDIN);
 
+    local $_;
     if ($0 eq 'head') {
-	foreach (<F>) { $n-- or return; print }
+	while (<F>) { $n-- or return; print }
     } else {
-	@_ = (); foreach (<F>) { push @_, $_; @_ > $n and shift; }
+	@_ = (); while (<F>) { push @_, $_; @_ > $n and shift; }
 	print @_;
     }
 }

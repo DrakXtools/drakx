@@ -125,7 +125,8 @@ sub read_configured_queue($) {
 
     #- read /etc/printcap file.
     local *PRINTCAP; open PRINTCAP, "$prefix/etc/printcap" or return;
-    foreach (<PRINTCAP>) {
+    local $_;
+    while (<PRINTCAP>) {
 	chomp;
 	my $p = '(?:\{(.*?)\}|(\S+))';
 	if (/^##PRINTTOOL3##\s+$p\s+$p\s+$p\s+$p\s+$p\s+$p\s+$p(?:\s+$p)?/) {
@@ -157,7 +158,8 @@ sub read_configured_queue($) {
     foreach (values %{$printer->{configured}}) {
 	my $entry = $_;
 	local *F; open F, "$prefix$entry->{SPOOLDIR}/general.cfg" or next;
-	foreach (<F>) {
+	local $_;
+	while (<F>) {
 	    chomp;
 	    if (/^\s*(?:export\s+)?PRINTER_TYPE=(.*?)\s*$/) { $entry->{TYPE} = $1 unless defined $entry->{TYPE} }
 	    elsif (/^\s*(?:export\s+)?ASCII_TO_PS=(.*?)\s*$/) { $entry->{ASCII_TO_PS} = $1 eq 'YES' unless defined $entry->{ASCII_TO_PS} }
@@ -170,7 +172,8 @@ sub read_configured_queue($) {
     foreach (values %{$printer->{configured}}) {
 	my $entry = $_;
 	local *F; open F, "$prefix$entry->{SPOOLDIR}/postscript.cfg" or next;
-	foreach (<F>) {
+	local $_;
+	while (<F>) {
 	    chomp;
 	    if (/^\s*(?:export\s+)?GSDEVICE=(.*?)\s*$/) { $entry->{GSDRIVER} = $1 unless defined $entry->{GSDRIVER} }
 	    elsif (/^\s*(?:export\s+)?RESOLUTION=(.*?)\s*$/) { $entry->{RESOLUTION} = $1 unless defined $entry->{RESOLUTION} }
@@ -191,7 +194,8 @@ sub read_configured_queue($) {
     foreach (values %{$printer->{configured}}) {
 	my $entry = $_;
 	local *F; open F, "$prefix$entry->{SPOOLDIR}/textonly.cfg" or next;
-	foreach (<F>) {
+	local $_;
+	while (<F>) {
 	    chomp;
 	    if (/^\s*(?:export\s+)?TEXTONLYOPTIONS=(.*?)\s*$/) { $entry->{TEXTONLYOPTIONS} = $1 unless defined $entry->{TEXTONLYOPTIONS}; $entry->{TEXTONLYOPTIONS} =~ s/^\"(.*)\"/$1/ }
 	    elsif (/^\s*(?:export\s+)?CRLFTRANS=(.*?)\s*$/) { $entry->{CRLF} = $1 eq 'YES' unless defined $entry->{CRLF} }
@@ -206,7 +210,8 @@ sub read_configured_queue($) {
 	if ($entry->{TYPE} eq 'SMB') {
 	    my $config_file = "$prefix$entry->{SPOOLDIR}/.config";
 	    local *F; open F, "$config_file" or next; #die "Can't open $config_file $!";
-	    foreach (<F>) {
+	    local $_;
+	    while (<F>) {
 		chomp;
 		if (/^\s*share='\\\\(.*?)\\(.*?)'/) {
 		    $entry->{SMBHOST} = $1;
@@ -225,7 +230,8 @@ sub read_configured_queue($) {
 	} elsif ($entry->{TYPE} eq 'NCP') {
 	    my $config_file = "$prefix$entry->{SPOOLDIR}/.config";
 	    local *F; open F, "$config_file" or next; #die "Can't open $config_file $!";
-	    foreach (<F>) {
+	    local $_;
+	    while (<F>) {
 		chomp;
 		if (/^\s*server=(.*)/) {
 		    $entry->{NCPHOST} = $1;
@@ -251,8 +257,9 @@ sub read_printer_db(;$) {
     scalar(keys %thedb) > 4 and return; #- try reparse if using only ppa, POSTSCRIPT, TEXT.
 
     my %available_devices; #- keep only available devices in our database.
+    local $_; #- use of while (<...
     local *AVAIL; open AVAIL, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/gs --help |";
-    foreach (<AVAIL>) {
+    while (<AVAIL>) {
 	if (/^Available devices:/ ... /^\S/) {
 	    @available_devices{split /\s+/, $_} = () if /^\s+/;
 	}
@@ -262,7 +269,6 @@ sub read_printer_db(;$) {
     delete $available_devices{''};
     @available_devices{qw/POSTSCRIPT TEXT/} = (); #- these are always available.
 
-    local $_; #- use of while (<...
     local *DBPATH; #- don't have to do close ... and don't modify globals at least
     open DBPATH, $dbpath or die "An error has occurred on $dbpath : $!";
 
@@ -343,7 +349,8 @@ sub read_printers_conf {
     #-    State     > Idle|Stopped
     #-    Accepting > Yes|No
     local *PRINTERS; open PRINTERS, "$prefix/etc/cups/printers.conf" or return;
-    foreach (<PRINTERS>) {
+    local $_;
+    while (<PRINTERS>) {
 	chomp;
 	/^\s*#/ and next;
 	if (/^\s*<(?:DefaultPrinter|Printer)\s+([^>]*)>/) { $current = { mode => 'CUPS', QUEUE => $1, } }
@@ -361,7 +368,8 @@ sub get_direct_uri {
     #- get the local printer to access via a Device URI.
     my @direct_uri;
     local *F; open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/sbin/lpinfo -v |";
-    foreach (<F>) {
+    local $_;
+    while (<F>) {
 	/^(direct|usb|serial)\s+(\S*)/ and push @direct_uri, $2;
     }
     close F;
@@ -374,7 +382,8 @@ sub get_descr_from_ppd {
 
     #- if there is no ppd, this means this is the PostScript generic filter.
     local *F; open F, "$prefix/etc/cups/ppd/$printer->{QUEUE}.ppd" or return "Generic PostScript";
-    foreach (<F>) {
+    local $_;
+    while (<F>) {
 	/^\*([^\s:]*)\s*:\s*\"([^\"]*)\"/ and do { $ppd{$1} = $2; next };
 	/^\*([^\s:]*)\s*:\s*([^\s\"]*)/   and do { $ppd{$1} = $2; next };
     }
@@ -394,7 +403,8 @@ sub poll_ppd_base {
 
     foreach (1..60) {
 	local *PPDS; open PPDS, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/poll_ppd_base -a |";
-	foreach (<PPDS>) {
+	local $_;
+	while (<PPDS>) {
 	    chomp;
 	    my ($ppd, $mf, $descr, $lang) = split /\|/;
 	    $ppd && $mf && $descr and $descr_to_ppd{"$mf|$descr" . ($lang && " ($lang)")} = $ppd;

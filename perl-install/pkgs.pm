@@ -394,7 +394,8 @@ sub psUpdateHdlistsDeps {
 
     #- parse hdlist.list file.
     my $medium = 1;
-    foreach (<$listf>) {
+    local $_;
+    while (<$listf>) {
 	chomp;
 	s/\s*#.*$//;
 	/^\s*$/ and next;
@@ -425,7 +426,8 @@ sub psUsingHdlists {
 
     #- parse hdlist.list file.
     my $medium = 1;
-    foreach (<$listf>) {
+    local $_;
+    while (<$listf>) {
 	chomp;
 	s/\s*#.*$//;
 	/^\s*$/ and next;
@@ -474,8 +476,9 @@ sub psUsingHdlist {
 
     #- extract filename from archive, this take advantage of verifying
     #- the archive too.
-    open F, "packdrake $newf |";
-    foreach (<F>) {
+    local *F; open F, "packdrake $newf |";
+    local $_;
+    while (<F>) {
 	chomp;
 	/^[dlf]\s+/ or next;
 	if (/^f\s+\d+\s+(.*)/) {
@@ -521,7 +524,8 @@ sub getOtherDeps($$) {
 
     #- this version of getDeps is customized for handling errors more easily and
     #- convert reference by name to deps id including closure computation.
-    foreach (<$f>) {
+    local $_;
+    while (<$f>) {
 	my ($name, $version, $release, $size, $deps) = /^(\S*)-([^-\s]+)-([^-\s]+)\s+(\d+)\s+(.*)/;
 	my $pkg = $packages->[0]{$name};
 
@@ -566,9 +570,9 @@ sub getDeps($) {
     #- cross reference to be resolved on id (think of loop requires)
     #- provides should be updated after base flag has been set to save
     #- memory.
-    local *F;
-    open F, "$prefix/var/lib/urpmi/depslist.ordered" or die "cann't find dependancies list";
-    foreach (<F>) {
+    local *F; open F, "$prefix/var/lib/urpmi/depslist.ordered" or die "can't find dependancies list";
+    local $_;
+    while (<F>) {
 	my ($name, $version, $release, $sizeDeps) = /^(\S*)-([^-\s]+)-([^-\s]+)\s+(.*)/;
 	my $pkg = $packages->[0]{$name};
 
@@ -624,9 +628,9 @@ sub readCompss {
     #- this is necessary for urpmi.
     install_any::getAndSaveFile('Mandrake/base/compss', "$prefix/var/lib/urpmi/compss");
 
-    local *F;
-    open F, "$prefix/var/lib/urpmi/compss" or die "can't find compss";
-    foreach (<F>) {
+    local *F; open F, "$prefix/var/lib/urpmi/compss" or die "can't find compss";
+    local $_;
+    while (<F>) {
 	/^\s*$/ || /^#/ and next;
 	s/#.*//;
 
@@ -646,7 +650,8 @@ sub readCompssList {
     my $f = install_any::getFile('Mandrake/base/compssList') or die "can't find compssList";
     my @levels = split ' ', <$f>;
 
-    foreach (<$f>) {
+    local $_;
+    while (<$f>) {
 	/^\s*$/ || /^#/ and next;
 	my ($name, @values) = split;
 	my $p = packageByName($packages, $name) or log::l("unknown entry $name (in compssList)"), next;
@@ -679,7 +684,8 @@ sub readCompssUsers {
     };
     my $file = 'Mandrake/base/compssUsers';
     my $f = $meta_class && install_any::getFile("$file.$meta_class") || install_any::getFile($file) or die "can't find $file";
-    foreach (<$f>) {
+    local $_;
+    while (<$f>) {
 	/^\s*$/ || /^#/ and next;
 	s/#.*//;
 

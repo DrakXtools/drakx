@@ -409,9 +409,9 @@ sub formatLines($) {
 
 sub getVarsFromSh($) {
     my %l;
-    local *F;
-    open F, $_[0] or return;
-    foreach (<F>) {
+    local *F; open F, $_[0] or return;
+    local $_;
+    while (<F>) {
 	my ($v, $val, $val2) =
 	  /^\s*			# leading space
 	   (\w+) =		# variable

@@ -507,9 +507,9 @@ sub read_already_loaded() {
 sub load_deps($) {
     my ($file) = @_;
 
-    local *F;
-    open F, $file or log::l("error opening $file: $!"), return 0;
-    foreach (<F>) {
+    local *F; open F, $file or log::l("error opening $file: $!"), return 0;
+    local $_;
+    while (<F>) {
 	my ($f, $deps) = split ':';
 	push @{$deps{$f}}, split ' ', $deps;
     }

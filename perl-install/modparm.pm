@@ -19,9 +19,9 @@ sub read_modparm_file {
   my @line;
 
   my %modparm_hash;
-  local *F;
-  open F, $file or log::l("missing $file: $!"), return;
-  foreach (<F>) {
+  local *F; open F, $file or log::l("missing $file: $!"), return;
+  local $_;
+  while (<F>) {
     chomp;
     @line = split ':';
 

@@ -367,7 +367,8 @@ sub load_po($) {
     } else {
 	open F, $f; #- not returning here help avoiding reading the same multiple times.
     }
-    foreach (<F>) {
+    local $_;
+    while (<F>) {
 	/^msgstr/ and $state = 1;
 	/^msgid/  && !$fuzzy and $state = 2;
 	s/@/\\@/g;

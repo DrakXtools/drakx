@@ -40,9 +40,9 @@ sub getinfoFromXF86Config {
 
     $o->{card}{server} ||= $1 if readlink("$prefix/etc/X11/X") =~ /XF86_ (\w+)$/x; #- /x for perl2fcalls
 
-    local *F;
-    open F, "$prefix/etc/X11/XF86Config" or return {};
-    foreach (<F>) {
+    local *F; open F, "$prefix/etc/X11/XF86Config" or return {};
+    local $_;
+    while (<F>) {
 	if (/^Section "Keyboard"/ .. /^EndSection/) {
 	    $o->{keyboard}{xkb_keymap} ||= $1 if /^\s*XkbLayout\s+"(.*?)"/;
 	} elsif (/^Section "Pointer"/ .. /^EndSection/) {

@@ -75,9 +75,9 @@ sub isUSBFDUDrive { $_[0]->{info} =~ /USB-?FDU/ }
 sub isRemovableDrive { &isZipDrive || &isLS120Drive || &isUSBFDUDrive } #-or &isJazzDrive }
 
 sub hasSCSI() {
-    local *F;
-    open F, "/proc/scsi/scsi" or return 0;
-    foreach (<F>) {
+    local *F; open F, "/proc/scsi/scsi" or return 0;
+    local $_;
+    while (<F>) {
 	/devices: none/ and log::l("no scsi devices are available"), return 0;
     }
 #-    log::l("scsi devices are available");
@@ -247,10 +247,10 @@ sub hasUltra66 {
 sub whatParport() {
     my @res =();
     foreach (0..3) {
-	local *F;
 	my $elem = {};
-	open F, "/proc/parport/$_/autoprobe" or next;
-	foreach (<F>) { $elem->{$1} = $2 if /(.*):(.*);/ }
+	local *F; open F, "/proc/parport/$_/autoprobe" or next;
+	local $_;
+	while (<F>) { $elem->{$1} = $2 if /(.*):(.*);/ }
 	push @res, { port => "/dev/lp$_", val => $elem};
     }
     @res;
@@ -258,9 +258,9 @@ sub whatParport() {
 
 sub whatUsbport() {
     my ($i, $elem, @res) = (0, {});
-    local *F;
-    open F, "/proc/bus/usb/devices" or return;
-    foreach (<F>) {
+    local *F; open F, "/proc/bus/usb/devices" or return;
+    local $_;
+    while (<F>) {
 	$elem->{$1} = $2 if /S:\s+(.*)=(.*\S)/;
 	if (/I:.*Driver=(printer|usblp)/ && $elem->{Manufacturer} && $elem->{Product}) {
 	    my $MF = ${{ 'Hewlett-Packard' => 'HP' }}{$elem->{Manufacturer}} || $elem->{Manufacturer};
@@ -303,9 +303,9 @@ sub probeSerialDevices {
     print STDERR "Please wait while probing serial ports...\n";
     #- start probing all serial ports... really faster than before ...
     #- ... but still take some time :-)
-    local *F;
-    open F, "serial_probe 2>/dev/null |";
-    my %current = (); foreach (<F>) {
+    local *F; open F, "serial_probe 2>/dev/null |";
+    local $_;
+    my %current = (); while (<F>) {
 	$serialprobe{$current{DEVICE}} = { %current } and %current = () if /^\s*$/ && $current{DEVICE};
 	$current{$1} = $2 if /^([^=]+)=(.*?)\s*$/;
     }

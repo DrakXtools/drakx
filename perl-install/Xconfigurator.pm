@@ -57,7 +57,8 @@ sub readCardsDB {
 	COMMENT => sub {},
     };
 
-    foreach (<F>) { $lineno++;
+    local $_;
+    while (<F>) { $lineno++;
 	s/\s+$//;
 	/^#/ and next;
 	/^$/ and next;
@@ -80,7 +81,8 @@ sub cardName2RealName {
     my $file = "/usr/X11R6/lib/X11/CardsNames";
     my ($name) = @_;
     local *F; open F, $file or die "can't find $file\n";
-    foreach (<F>) { chop;
+    local $_;
+    while (<F>) { chop;
 	my ($name_, $real) = split '=>';
 	return $real if $name eq $name_;
     }
@@ -100,9 +102,9 @@ sub readMonitorsDB {
 
     %monitors and return;
 
-    local *F;
-    open F, $file or die "can't open monitors database ($file): $!";
-    my $lineno = 0; foreach (<F>) {
+    local *F; open F, $file or die "can't open monitors database ($file): $!";
+    local $_;
+    my $lineno = 0; while (<F>) {
 	$lineno++;
 	s/\s+$//;
 	/^#/ and next;
@@ -384,9 +386,9 @@ sub testConfig($) {
     #- restart_xfs;
 
     my $f = $tmpconfig . ($o->{card}{use_xf4} && "-4");
-    local *F;
-    open F, "$prefix$o->{card}{prog} :9 -probeonly -pn -xf86config $f 2>&1 |";
-    foreach (<F>) {
+    local *F; open F, "$prefix$o->{card}{prog} :9 -probeonly -pn -xf86config $f 2>&1 |";
+    local $_;
+    while (<F>) {
 	$o->{card}{memory} ||= $2 if /(videoram|Video RAM):\s*(\d*)/;
 
 	# look for clocks
