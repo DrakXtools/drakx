@@ -363,6 +363,7 @@ sub ask_from_entries_refW {
 	    $get = sub { $w->get_active };
 	} elsif ($e->{type} eq 'label') {
 	    $w = Gtk::Label->new(${$e->{val}});
+	    $set = sub { $w->set($_[0]) };
 	} elsif ($e->{type} eq 'button') {
 	    $w = Gtk::Button->new('');
 	    $w->signal_connect(clicked => sub {
