@@ -109,6 +109,10 @@ sub set_default_spooler ($) {
 
 sub set_permissions {
     my ($file, $perms, $owner, $group) = @_;
+    # We only need to set the permissions during installation to be able to
+    # print test pages. After installation the devfsd daemon does the business
+    # automatically.
+    if (!$isInstall) {return 1;}
     if ($owner && $group) {
         run_program::rooted($prefix, "/bin/chown", "$owner.$group", $file)
 	    || die "Could not start chown!";
@@ -166,26 +170,28 @@ sub start_service_on_boot ($) {
 }
 
 sub SIGHUP_daemon {
-    my ($spooler) = @_;
+    my ($service) = @_;
     # PDQ has no daemon, exit.
-    if ($spooler eq "pdq") {return 1};
+    if ($service eq "pdq") {return 1};
     # CUPS needs auto-configuration
-    if ($spooler eq "cups") {
+    if ($service eq "cups") {
         run_program::rooted($prefix, "/usr/sbin/setcupsconfig");
     }
     # Name of the daemon
     my $daemon;
-    if (($spooler eq "lpr") || ($spooler eq "lpd") || ($spooler eq "lprng")) {
+    if (($service eq "lpr") || ($service eq "lpd") || ($service eq "lprng")) {
 	$daemon = "lpd";
-    } elsif ($spooler eq "cups") {
+    } elsif ($service eq "cups") {
 	$daemon = "cupsd";
+    } elsif ($service eq "devfs") {
+	$daemon = "devfsd";
     } else {
 	return 1;
     }
     # Send the SIGHUP
     run_program::rooted($prefix, "/usr/bin/killall", "-HUP", $daemon);
     # CUPS needs some time to come up.
-    if ($spooler eq "cups") {
+    if ($service eq "cups") {
 	sleep 5;
     }
     return 1;

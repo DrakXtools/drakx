@@ -1744,6 +1744,9 @@ sub install_spooler {
 	        printer::pdq_panic_button("add");
 	    }
 	}
+	# Give a SIGHUP to the devfsd daemon to correct the permissions
+	# for the /dev/... files according to the spooler
+	printer::SIGHUP_daemon("devfs");
     }
     1;
 }
