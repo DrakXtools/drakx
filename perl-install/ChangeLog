@@ -1,3 +1,13 @@
+2000-09-29  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm (adsl_conf): dhcp should better work.
+
+	* network.pm (configureNetwork): remove connection script if a
+	gateway is given.
+
+	* common.pm (setVarsInShMode): created. chmod the file with
+	permissions passed in argument.
+
 2000-09-29  François Pons  <fpons@mandrakesoft.com>
 
 	* modules.pm (load): fixed when standalone, use modprobe.

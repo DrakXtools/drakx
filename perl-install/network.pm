@@ -277,6 +277,10 @@ such as ``mybox.mylab.myco.com''."),
 	$netc->{HOSTNAME} ne $dhcp_hostname and $netc->{DHCP_HOSTNAME} = $netc->{HOSTNAME};
     } else {
 	configureNetworkNet($in, $netc, $last ||= {}, @l);
+	if ( $netc->{GATEWAY} ) {
+	    unlink "$prefix/etc/sysconfig/network-scripts/net_cnx_up";
+	    unlink "$prefix/etc/sysconfig/network-scripts/net_cnx_down";
+	}
     }
     miscellaneousNetwork($in);
 }

@@ -406,6 +406,7 @@ END
     commands::mkdir_("-p", "$prefix/usr/share/config");
     local *KPPPRC;
     open KPPPRC, ">$prefix/usr/share/config/kppprc" or die "Can't open $prefix/usr/share/config/kppprc: $!";
+    chmod 0600, "$prefix/usr/share/config/kppprc";
     print KPPPRC <<END;
 # KDE Config File
 [Account0]
