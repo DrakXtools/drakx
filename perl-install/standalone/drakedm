@@ -39,7 +39,7 @@ foreach (cat_($cfg_file)) {
     $dm = $1 if /^DISPLAYMANAGER=(.*)$/; 
 }
 
-if (my $new_dm = $in->ask_from_list_(N("Choosing an display manager"),
+if (my $new_dm = $in->ask_from_list_(N("Choosing a display manager"),
                                      formatAlaTeX(N("X11 Display Manager allows you to graphically log
 into your system with the X Window System running and supports running
 several different X sessions on your local machine at the same time.")),
