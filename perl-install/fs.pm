@@ -39,7 +39,7 @@ sub check_mounted($) {
     open H, "/proc/swaps";
     foreach (<F>, <G>, <H>) {
 	foreach my $p (@$fstab) {
-	    /$p->{device}\s/ and $p->{isMounted} = 1;
+	    /$p->{device}\s/ and $p->{isMounted} = $p->{isFormatted} = 1;
 	}
     }
 }
@@ -62,16 +62,16 @@ sub format_ext2($;$) {
     my ($dev, $bad_blocks) = @_;
     my @options;
 
-    $dev =~ m,(rd|ida)/, and push @options, qw(-b 4096 -R stride=16); # For RAID only. 
+    $dev =~ m,(rd|ida)/, and push @options, qw(-b 4096 -R stride=16); # For RAID only.
     $bad_blocks and push @options, "-c";
 
     run_program::run("mke2fs", devices::make($dev), @options) or die "ext2 formatting of $dev failed";
 }
 
 sub format_dos($;$) {
-    my ($dev, $bad_blocks) = @_;
+    my ($dev, $bad_blocks, @options) = @_;
 
-    run_program::run("mkdosfs", devices::make($dev), $bad_blocks ? "-c" : ()) or die "dos formatting of $dev failed";
+    run_program::run("mkdosfs", devices::make($dev), @options, $bad_blocks ? "-c" : ()) or die "dos formatting of $dev failed";
 }
 
 sub format_part($;$) {
@@ -85,6 +85,8 @@ sub format_part($;$) {
 	format_ext2($part->{device}, $bad_blocks);
     } elsif (isDos($part)) {
         format_dos($part->{device}, $bad_blocks);
+    } elsif (isWin($part)) {
+        format_dos($part->{device}, $bad_blocks, '-F', 32);
     } elsif (isSwap($part)) {
         swap::make($part->{device}, $bad_blocks);
     } else {
@@ -139,7 +141,7 @@ sub mount_part($;$) {
     isSwap($part) ?
 	swap::swapon($part->{device}) :
 	mount(devices::make($part->{device}), ($prefix || '') . $part->{mntpoint}, type2fs($part->{type}), 0);
-    $part->{isMounted} = 1;
+    $part->{isMounted} = $part->{isFormatted} = 1; # assume that if mount works, partition is formatted
 }
 
 sub umount_part($;$) {

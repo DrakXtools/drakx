@@ -5,6 +5,7 @@ use strict;
 
 use common qw(:file :system);
 use install_any qw(:all);
+use run_program;
 use lilo;
 use lang;
 use keyboard;
@@ -28,7 +29,8 @@ sub new($$) {
 }
 
 sub chooseLanguage($) {
-    $o->{default}->{lang}
+#    eval { run_program::run('loadkeys', "/tmp/$o->{default}->{lang}) }; $@ and log::l("loadkeys failed");
+    $o->{default}->{lang};
 }
 sub selectInstallOrUpgrade($) {
     $o->{default}->{isUpgrade} || 0;

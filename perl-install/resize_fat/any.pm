@@ -21,11 +21,11 @@ $DIRECTORY = 2;
 # returns the number of clusters for a given filesystem type
 sub min_cluster_count($) {
     my ($fs) = @_;
-    (1 << $ {{ FAT16 => 12, FAT32 => 16 }}{$fs->{fs_type}}) - 12;
+    (1 << $ {{ FAT16 => 12, FAT32 => 12 }}{$fs->{fs_type}}) - 12;
 }
 sub max_cluster_count($) {
     my ($fs) = @_;
-    $resize_fat::bad_cluster_value - 2;
+    2 ** $fs->{fs_type_size} - 11;
 }
 
 

@@ -15,11 +15,6 @@ use resize_fat::fat;
 use resize_fat::any;
 
 
-#@ARGV == 2 or die "usage: fatresize <device> <size>\n  <size> = 100 means `resize to 100Mb'\n  <size> = +10 means `keep 10Mb of free space'\n";
-#
-#my $fs = init($ARGV[0]);
-#resize($fs, $ARGV[1]);
-
 1;
 
 # - reads in the boot sector/partition info., and tries to make some sense of it
@@ -134,7 +129,7 @@ sub resize {
     $fs->{nb_sectors} = $size;
     $fs->{nb_clusters} = $new_nb_clusters;
     $fs->{clusters}->{count}->{free} = 
-	$fs->{nb_clusters} - $fs->{clusters}->{count}->{used} - $fs->{clusters}->{count}->{bad};
+	$fs->{nb_clusters} - $fs->{clusters}->{count}->{used} - $fs->{clusters}->{count}->{bad} - 2;
 
     $fs->{system_id} = 'was here!';
     $fs->{small_nb_sectors} = 0;

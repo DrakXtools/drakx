@@ -64,6 +64,7 @@ sub read($) {
         $fs->{fs_type} = 'FAT16';
 	$fs->{fs_type_size} = 16;
 	$fs->{fat_length} = $fs->{fat16_fat_length};
+	$resize_fat::bad_cluster_value = 0xfff7; # 2**16 - 1
     } else {
 	$resize_fat::isFAT32 = 1;
         $fs->{fs_type} = 'FAT32';
@@ -72,8 +73,8 @@ sub read($) {
 
 	$fs->{nb_root_dir_entries} = 0;
 	$fs->{info_offset} = $fs->{info_offset_in_sectors} * $fs->{sector_size};
+	$resize_fat::bad_cluster_value = 0xffffff7;
     }
-    $resize_fat::bad_cluster_value = (1 << $fs->{fs_type_size}) - 9;
     
     $fs->{fat_offset} = $fs->{nb_reserved} * $fs->{sector_size};
     $fs->{fat_size} = $fs->{fat_length} * $fs->{sector_size};
@@ -88,7 +89,7 @@ sub read($) {
 
     $fs->{dir_entries_per_cluster} = divide($fs->{cluster_size}, psizeof($format));
 
-    $fs->{nb_clusters} >= resize_fat::any::min_cluster_count($fs) or die "error: not enough sectors for a $fs->{fs_type}\n";
+#    $fs->{nb_clusters} >= resize_fat::any::min_cluster_count($fs) or die "error: not enough sectors for a $fs->{fs_type}\n";
     $fs->{nb_clusters} <  resize_fat::any::max_cluster_count($fs) or die "error: too many sectors for a $fs->{fs_type}\n";
 }
 

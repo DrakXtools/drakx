@@ -20,7 +20,7 @@ my @fields = (
 
 sub read($) {
     my ($fs) = @_;
-    my $info = resize_fat::io::read($fs, $fs->{offset}, psizeof($format));
+    my $info = resize_fat::io::read($fs, $fs->{info_offset}, psizeof($format));
     @{$fs->{info_sector}}{@fields} = unpack $format, $info;
     $fs->{info_sector}->{signature} == 0x61417272 or die "Invalid information sector signature\n";
 }

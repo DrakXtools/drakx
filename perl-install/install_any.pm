@@ -74,7 +74,10 @@ sub spawnShell {
     exec {"/bin/sh"} "-/bin/sh" or log::l("exec of /bin/sh failed: $!");
 }
 
-
+sub mouse_detect() {
+    my ($type, $dev) = split("\n", `mouseconfig --nointeractive 2>/dev/null`) or die "mouseconfig failed";
+    $type, $dev;
+}
 
 sub upgrFindInstall {
 #    int rc;

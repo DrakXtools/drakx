@@ -240,15 +240,14 @@ sub _ask_from_entry($$@) {
 sub _ask_from_list($\@$@) {
     my ($o, $l, @msgs) = @_;
     my $f = sub { $o->{retval} = $_[1]; Gtk->main_quit };
-    my @l = map { gtksignal_connect(new Gtk::Button($_), "clicked" => $f, $_) } @$l;
+    my $list = new Gtk::List();
+    map { gtksignal_connect(gtkadd($list, new Gtk::ListItem($_)), selection_changed => $f, $_) } @$l;
 
-#    gtkadd($o->{window}, 
-#	   gtkpack_(myset_usize(new Gtk::VBox(0,0), 0, 200),
+#    myadd($o->{window}, 
+#	   mypack_(myset_usize(new Gtk::VBox(0,0), 0, 200),
 #		   0, $o->create_box_with_title(@msgs), 
-#		   1, createScrolledWindow(gtkpack(new Gtk::VBox(0,0), @l))));
-    gtkadd($o->{window}, 
-	  gtkpack($o->create_box_with_title(@msgs), @l));
-    $l[0]->grab_focus();
+#		   1, createScrolledWindow(mypack(new Gtk::VBox(0,0), @l))));
+    gtkadd($o->{window}, gtkpack($o->create_box_with_title(@msgs), $list));
 }
 
 sub _ask_warn($@) {
