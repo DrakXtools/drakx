@@ -906,7 +906,8 @@ sub generate_automatic_stage1_params {
 	if ($ENV{PROXY}) {
 	    push @ks, proxy_host => $ENV{PROXY}, proxy_port => $ENV{PROXYPORT};
 	}
-	push @ks, interface => first(values %{$o->{intf}})->{DEVICE};
+	my ($intf) = values %{$o->{intf}};
+	push @ks, interface => $intf->{DEVICE};
 	if ($intf->{BOOTPROTO} eq 'dhcp') {
 	    push @ks, network => 'dhcp';
 	} else {
