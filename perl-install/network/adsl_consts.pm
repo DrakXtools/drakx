@@ -238,7 +238,7 @@ our %adsl_data = (
                   N("United Kingdom") . "|British Telecom " =>
                   {
                    vpi => 0,
-                   vci => 26
+                   vci => 26,
                    Encapsulation => 6,
                   },
                  );
