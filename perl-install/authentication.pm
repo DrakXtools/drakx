@@ -5,15 +5,20 @@ use any;
 
 
 sub kinds() { 
-    ('local', 'LDAP', 'NIS', 'winbind');
+    ('local', 'LDAP', 'NIS', 'winbind', 'AD');
 }
 sub kind2description {
     my ($kind) = @_;
-    ${{ local => N("Local files"), LDAP => N("LDAP"), NIS => N("NIS"), winbind => N("Windows Domain") }}{$kind};
+    ${{ local => N("Local files"), LDAP => N("LDAP"), NIS => N("NIS"), winbind => N("Windows Domain"), AD => N("Active Directory") }}{$kind};
 }
 sub to_kind {
     my ($authentication) = @_;
     (find { exists $authentication->{$_} } kinds()) || 'local';
+}
+
+sub domain_to_ldap_domain {
+    my ($domain) = @_;
+    join(',', map { "dc=$_" } split /\./, $domain);
 }
 
 sub ask_parameters {
@@ -28,12 +33,29 @@ sub ask_parameters {
 
     if ($kind eq 'LDAP') {
 	$val ||= 'ldap.' . $netc->{DOMAINNAME};
-	$netc->{LDAPDOMAIN} ||= join(',', map { "dc=$_" } split /\./, $netc->{DOMAINNAME});
+	$netc->{LDAPDOMAIN} ||= domain_to_ldap_domain($netc->{DOMAINNAME});
 	$in->ask_from('',
 		     N("Authentication LDAP"),
 		     [ { label => N("LDAP Base dn"), val => \$netc->{LDAPDOMAIN} },
 		       { label => N("LDAP Server"), val => \$val },
 		     ]) or return;
+    } elsif ($kind eq 'AD') {
+	$val ||= $netc->{DOMAINNAME};
+	$authentication->{AD_server} ||= 'kerberos.' . $val;
+	$authentication->{AD_users_db} ||= 'cn=users,' . domain_to_ldap_domain($authentication->{AD_server});
+
+	my $AD_user = $authentication->{AD_user} =~ /cn=(.*),\Q$authentication->{AD_users_db}\E$/ ? $1 : $authentication->{AD_user};
+
+	$in->ask_from('',
+		     N("Authentication Active Directory"),
+		     [ { label => N("Domain"), val => \$val },
+		       { label => N("Server"), val => \$authentication->{AD_server} },
+		       { label => N("LDAP users database"), val => \$authentication->{AD_users_db} },
+		       { label => N("LDAP user allowed to browse the Active Directory"), val => \$AD_user },
+		       { label => N("Password for user"), val => \$authentication->{AD_password}, disabled => sub { !$AD_user } },
+		     ]) or return;
+	$authentication->{AD_user} = !$AD_user ? '' : $AD_user =~ /cn=/ ? $AD_user : 
+	                                         "cn=$AD_user,$authentication->{AD_users_db}";
     } elsif ($kind eq 'NIS') { 
 	$val ||= 'broadcast';
 	$in->ask_from('',
@@ -76,7 +98,51 @@ sub set {
 
 	set_nsswitch_priority('ldap');
 	set_pam_authentication('ldap');
-	set_ldap_conf($domain, $val, 1);
+
+	update_ldap_conf(
+			 host => $val,
+			 base => $domain,
+			 port => 636,
+			 ssl => 'on',
+			 nss_base_shadow => "ou=People,$domain",
+			 nss_base_passwd => "ou=People,$domain",
+			 nss_base_group => "ou=Group,$domain",
+			);
+    } elsif ($kind eq 'AD') {
+	$in->do_pkgs->install(qw(nss_ldap pam_krb5));
+
+	set_nsswitch_priority('ldap');
+	set_pam_authentication('krb5');
+
+	update_ldap_conf(
+			 host => $authentication->{AD_server},
+			 base => domain_to_ldap_domain($val),
+			 nss_base_shadow => "$authentication->{AD_users_db}?one",
+			 nss_base_passwd => "$authentication->{AD_users_db}?one",
+			 nss_base_group => "$authentication->{AD_users_db}?one",
+
+			 binddn => $authentication->{AD_user},
+			 bindpw => $authentication->{AD_password},
+
+			 (map_each { "nss_map_objectclass_$::a" => $::b }
+			  posixAccount => 'User',
+			  shadowAccount => 'User',
+			  posixGroup => 'Group',
+			 ),
+			 (map_each { "nss_map_attribute_$::a" => $::b }
+			  uid => 'sAMAccountName',
+			  uidNumber => 'msSFU30UidNumber',
+			  gidNumber => 'msSFU30GidNumber',
+			  cn => 'sAMAccountName',
+			  uniqueMember => 'member',
+			  userPassword => 'msSFU30Password',
+			  homeDirectory => 'msSFU30HomeDirectory',
+			  LoginShell => 'msSFU30LoginShell',
+			 ),
+			);
+
+	configure_krb5_for_AD($authentication);
+
     } elsif ($kind eq 'NIS') {
 	$in->do_pkgs->install(qw(ypbind autofs));
 	my $domain = $netc->{NISDOMAIN};
@@ -207,32 +273,146 @@ sub set_nsswitch_priority {
     } "$::prefix/etc/nsswitch.conf";
 }
 
+my $special_ldap_cmds = join('|', 'nss_map_attribute', 'nss_map_objectclass');
+sub _after_read_ldap_line {
+    my ($s) = @_;
+    $s =~ s/\b($special_ldap_cmds)\s*/$1 . '_'/e;
+    $s;
+}
+sub _pre_write_ldap_line {
+    my ($s) = @_;
+    $s =~ s/\b($special_ldap_cmds)_/$1 . ' '/e;
+    $s;
+}
+
 sub read_ldap_conf() {
-    my %conf = map { s/^\s*#.*//; if_(/(\S+)\s+(.*)/, $1 => $2) } cat_("$::prefix/etc/ldap.conf");
+    my %conf = map { 
+	s/^\s*#.*//; 
+	if_(_after_read_ldap_line($_) =~ /(\S+)\s+(.*)/, $1 => $2);
+    } cat_("$::prefix/etc/ldap.conf");
     \%conf;
 }
 
-sub set_ldap_conf {    
-    my ($domain, $servers, $b_ssl) = @_;
-
-    my %wanted_conf = (
-	host => $servers,
-	base => $domain,
-	port => $b_ssl ? 636 : 389,
-	ssl => $b_ssl ? 'on' : 'off',
-	nss_base_shadow => "ou=People,$domain",
-	nss_base_passwd => "ou=People,$domain",
-	nss_base_group => "ou=Group,$domain",
-    );
+sub update_ldap_conf {    
+    my (%conf) = @_;
 
     substInFile {
-	my ($cmd) = /^#?\s*(\w+)\s/;
-	if ($cmd && exists $wanted_conf{$cmd}) {
-	    my $val = $wanted_conf{$cmd};
-	    $wanted_conf{$cmd} = '';
-	    $_ = $val ? "$cmd $val\n" : '';
+	my ($cmd) = _after_read_ldap_line($_) =~ /^\s*#?\s*(\w+)\s/;
+	if ($cmd && exists $conf{$cmd}) {
+	    my $val = $conf{$cmd};
+	    $conf{$cmd} = '';
+	    $_ = $val ? _pre_write_ldap_line("$cmd $val\n") : /^\s*#/ ? $_ : "#$_";
         }
+	if (eof) {
+	    foreach my $cmd (keys %conf) {
+		my $val = $conf{$cmd} or next;
+		$_ .= _pre_write_ldap_line("$cmd $val\n");
+	    }
+	}
     } "$::prefix/etc/ldap.conf";
+}
+
+sub configure_krb5_for_AD {
+    my ($authentication) = @_;
+
+    my $uc_domain = uc $authentication->{AD};
+    my $krb5_conf_file = "$::prefix/etc/krb5.conf";
+
+    krb5_conf_update($krb5_conf_file,
+		     libdefaults => (
+				     default_realm => $uc_domain,
+				     dns_lookup_realm => $authentication->{AD_server} ? 'false' : 'true',
+				     dns_lookup_kdc => $authentication->{AD_server} ? 'false' : 'true',
+				    ));
+
+    my @sections = (
+		    realms => <<EOF,
+ MANDRAKESOFT.COM = {
+  kdc = $authentication->{AD_server}:88
+  admin_server = $authentication->{AD_server}:749
+  default_domain = $authentication->{AD}
+ }
+EOF
+		    domain_realm => <<EOF,
+ .$authentication->{AD} = $uc_domain
+EOF
+		    kdc => <<'EOF',
+ profile = /etc/kerberos/krb5kdc/kdc.conf
+EOF
+		    pam => <<'EOF',
+ debug = false
+ ticket_lifetime = 36000
+ renew_lifetime = 36000
+ forwardable = true
+ krb4_convert = false
+EOF
+		    login => <<'EOF',
+ krb4_convert = false
+ krb4_get_tickets = false
+EOF
+		       );
+    foreach (group_by2(@sections)) {
+	my ($section, $txt) = @$_;
+	krb5_conf_overwrite_category($krb5_conf_file, $section => $authentication->{AD_server} ? $txt : '');
+    }
+}
+
+sub krb5_conf_overwrite_category {
+    my ($file, $category, $new_val) = @_;
+
+    my $done;
+    substInFile {
+	if (my $i = /^\s*\[\Q$category\E\]/i ... /^\[/) {
+	    if ($new_val) {
+		if ($i == 1) {
+		    $_ .= $new_val;
+		    $done = 1;
+		} elsif ($i =~ /E/) {
+		    $_ = "\n$_";
+		} else {
+		    $_ = '';
+		}
+	    } else {
+		$_ = '' if $i !~ /E/;
+	    }
+	}
+	#- if category has not been found above.
+	if (eof && $new_val && !$done) {
+	    $_ .= "\n[$category]\n$new_val";
+	}
+    } $file;
+}
+
+sub krb5_conf_update {
+    my ($file, $category, %subst_) = @_;
+
+    my %subst = map { lc($_) => [ $_, $subst_{$_} ] } keys %subst_;
+
+    my $s;
+    foreach (MDK::Common::File::cat_($file), "[NOCATEGORY]\n") {
+	if (my $i = /^\s*\[\Q$category\E\]/i ... /^\[/) {
+	    if ($i =~ /E/) { #- for last line of category
+		chomp $s; $s .= "\n";
+		$s .= " $_->[0] = $_->[1]\n" foreach values %subst;
+		%subst = ();
+	    } elsif (/^\s*([^=]*?)\s*=/) {
+		if (my $e = delete $subst{lc($1)}) {
+		    $_ = " $1 = $e->[1]\n";
+		}
+	      }
+	}
+	$s .= $_ if !/^\Q[NOCATEGORY]/;
+    }
+
+    #- if category has not been found above.
+    if (keys %subst) {
+	chomp $s;
+	$s .= "\n[$category]\n";
+	$s .= " $_->[0] = $_->[1]\n" foreach values %subst;
+    }
+
+    MDK::Common::File::output($file, $s);
+
 }
 
 1;
