@@ -133,9 +133,9 @@ $hbx->pack_start($Close_Button,0,0,0);
 
 my $Report_Button = new Gtk::Button(_("Report"));
 $Report_Button->signal_connect(clicked => sub { my $options = "mdkwizard=1";
-						$options.="incident=1" if $incident;
+						$options.="?incident=1" if $incident;
 						$p = $package->get_text(); $k=$kernel_rel->get_text(); ($r =parse_release()) =~ s/\s//;
-						$options.="?package=$p" ;
+						$options.="?package=$p" if $p =~ /rpm/;
 						$options.="?kernel=$k";
 						$options.="?mdkrelease=$r";
 						print "$bugzilla_url/wizard?"."$options" ."\n";
