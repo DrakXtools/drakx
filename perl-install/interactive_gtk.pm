@@ -48,14 +48,13 @@ sub ask_from_listW {
 
 sub ask_many_from_list_refW($$$$$) {
     my ($o, $title, $messages, $list, $val) = @_;
-    my $n = 0;
     my $w = my_gtk->new('', %$o);
     my $box = gtkpack(new Gtk::VBox(0,0),
 	map {
-	    my $nn = $n++;
+	    my $i = $::i;
 	    my $o = Gtk::CheckButton->new($_);
-	    $o->set_active(${$val->[$nn]});
-	    $o->signal_connect(clicked => sub { invbool \${$val->[$nn]} });
+	    $o->set_active(${$val->[$i]});
+	    $o->signal_connect(clicked => sub { invbool \${$val->[$i]} });
 	    $o;
 	} @$list);
     gtkadd($w->{window},

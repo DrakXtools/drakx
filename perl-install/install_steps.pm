@@ -323,7 +323,7 @@ sub addUser($) {
 
     foreach (@l) {
 	if (! -d "$p$_->{home}") {
-	    my $mode = $o->{security} < 3 ? 0755 : 0750;
+	    my $mode = $o->{security} < 2 ? 0755 : 0750;
 	    eval { commands::cp("-f", "$p/etc/skel", "$p$_->{home}") };
 	    if ($@) {
 		log::l("copying of skel failed: $@"); mkdir("$p$_->{home}", $mode); 

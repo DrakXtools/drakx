@@ -17,6 +17,7 @@ use pci_probing::main;
 use install_any;
 use detect_devices;
 use timezone;
+use run_program;
 use fsedit;
 use network;
 use mouse;
@@ -541,9 +542,9 @@ sub setRootPassword($) {
     my $sup = $o->{superuser} ||= {};
     $sup->{password2} ||= $sup->{password} ||= "";
 
-    return if $o->{security} < 2 && !$clicked;
+    return if $o->{security} < 1 && !$clicked;
 
-    $o->{security} < 2 or 
+    $o->{security} < 1 or 
       $o->ask_from_entries_ref([_("Set root password"), _("Ok"), _("No password")],
 			 _("Set root password"),
 			 [_("Password:"), _("Password (again):"), $o->{installClass} eq "server" || $::expert ? (_("Use shadow file"), _("Use MD5 passwords")) : (), $::beginner ? () : _("Use NIS") ],
@@ -555,7 +556,7 @@ sub setRootPassword($) {
 			 ],
 			 complete => sub {
 			     $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,1);
-			     length $sup->{password} < ($o->{security} > 4 ? 10 : 6)
+			     length $sup->{password} < ($o->{security} > 3 ? 10 : 6)
 			       and $o->ask_warn('', _("This password is too simple")), return (1,0);
 			     return 0
 			 }
@@ -577,7 +578,7 @@ sub setRootPassword($) {
 #------------------------------------------------------------------------------
 sub addUser($) {
     my ($o, $clicked) = @_;
-    my $u = $o->{user} ||= $o->{security} < 2 ? { name => "mandrake", realname => "default" } : {};
+    my $u = $o->{user} ||= $o->{security} < 1 ? { name => "mandrake", realname => "default" } : {};
     $u->{password2} ||= $u->{password} ||= "";
     my @fields = qw(realname name password password2);
     my @shells = install_any::shells($o);
@@ -585,7 +586,7 @@ sub addUser($) {
     if ($o->{security} < 2 && !$clicked || $o->ask_from_entries_ref(
         [ _("Add user"), _("Accept user"), _("Done") ],
         _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", map { $_->{realname} } @{$o->{users}})) : ''),
-        [ _("Real name"), _("User name"), $o->{security} < 3 ? () : (_("Password"), _("Password (again)")), $::beginner ? () : _("Shell") ],
+        [ _("Real name"), _("User name"), $o->{security} < 2 ? () : (_("Password"), _("Password (again)")), $::beginner ? () : _("Shell") ],
         [ \$u->{realname}, \$u->{name},
 	  {val => \$u->{password}, hidden => 1}, {val => \$u->{password2}, hidden => 1},
 	  {val => \$u->{shell}, list => \@shells, not_edit => !$::expert},
@@ -605,7 +606,7 @@ sub addUser($) {
     )) {
 	push @{$o->{users}}, $o->{user};
 	$o->{user} = {};
-	goto &addUser unless $o->{security} < 2 && !$clicked;
+	goto &addUser unless $o->{security} < 1 && !$clicked;
     }
     install_steps::addUser($o);
 }
@@ -673,7 +674,7 @@ _("Linear (needed for some SCSI drives)") => { val => \$b->{linear}, type => "bo
 _("Compact") => { val => \$b->{compact}, type => "bool", text => _("compact") },
 _("Delay before booting default image") => \$b->{timeout},
 _("Video mode") => { val => \$b->{vga}, list => [ keys %lilo::vga_modes ], not_edit => $::beginner },
-$o->{security} < 3 ? () : (
+$o->{security} < 2 ? () : (
 _("Password") => { val => \$b->{password}, hidden => 1 },
 _("Restrict command line options") => { val => \$b->{restricted}, type => "bool", text => _("restrict") },
 )
@@ -763,7 +764,8 @@ _("Default") => { val => \$default, type => 'bool' },
 sub miscellaneous {
     my ($o, $clicked) = @_;
     my %l = (
-	1 => _("Windows(TM)"),
+	0 => _("Windows(TM)"),
+	1 => _("Poor"),
 	2 => _("Low"),
 	3 => _("Medium"),
 	4 => _("High"),

@@ -10,6 +10,9 @@ use interactive;
 use common qw(:common :functional);
 use Term::Newt;
 
+my $width = 80;
+my $height = 25;
+
 my $n = Term::Newt->new;
 $n->init;
 $n->cls;
@@ -28,36 +31,36 @@ sub ask_from_listW {
 	$l->[$n->win_ternary($title, @$l, $mesg) - 1];
     } else {
 	my $i; map_index { $i = $::i if $def eq $_ } @$l;
-	print STDERR "($i)\n";
 	my ($r, $e) = $n->newtWinMenu($title, $mesg, 40, 5, 5, 8, $l, $i, @okcancel);
 	return if $r > 1;
 	$l->[$e];
     }
 }
 
-#sub ask_many_from_list_refW($$$$$) {
-#    my ($o, $title, $messages, $list, $val) = @_;
-#    my $n = 0;
-#    my $w = my_gtk->new('', %$o);
-#    my $box = gtkpack(new Gtk::VBox(0,0),
-#	 map {
-#	     my $nn = $n++;
-#	     my $o = Gtk::CheckButton->new($_);
-#	     $o->set_active(${$val->[$nn]});
-#	     $o->signal_connect(clicked => sub { invbool \${$val->[$nn]} });
-#	     $o;
-#	 } @$list);
-#    gtkadd($w->{window},
-#	    gtkpack_(create_box_with_title($w, @$messages),
-#		    1, @$list > 11 ? gtkset_usize(createScrolledWindow($box), 0, 250) : $box,
-#		    0, $w->create_okcancel,
-#		   )
-#	   );
-#    $w->{ok}->grab_focus;
-#    $w->main && $val;
-#}
-#
-#
+sub ask_many_from_list_refW($$$$$) {
+    my ($o, $title, $messages, $list, $val) = @_;
+    my $w = my_gtk->new('', %$o);
+    my @box = map_index {
+	     $n->newtCheckbox(1, $::i + 1, $_, ${$val->[$::i]} ? '*' : ' ', " *", ${$val->[$::i]});
+	 } @$list;
+    
+    my $l = max(22, 2 + max map { length } @$list);
+    my $h = max(10, 2 + @$list + @$messages);
+
+    $n->open_window(($width - $l) / 2, ($height - $h) / 2, $l, $h, $title);
+    my $form = $n->form(\ (my $ref = 0),'', 0);
+
+    $n->form_add_components($form, @box,
+			    $n->button(1,  @$list + 3, _("Ok")),
+			    $n->button(10, @$list + 3, _("Cancel")));
+
+    $n->run_form($form);
+    $n->form_destroy($form);
+
+    $$_ = $$_ eq "*" foreach @$val;
+}
+
+
 #sub ask_from_entries_refW {
 #    my ($o, $title, $messages, $l, $val, %hcallback) = @_;
 #    my ($title_, @okcancel) = ref $title ? @$title : $title;

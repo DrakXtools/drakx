@@ -123,8 +123,8 @@ $o = $::o = {
     autoSCSI   => 0,
     mkbootdisk => 1, #- no mkbootdisk if 0 or undef, find a floppy with 1, or fd1
 #-    packages   => [ qw() ],
-    partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0, readonly => 0 },
-#-    security => 3,
+    partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 }, #- , readonly => 0
+#-    security => 2,
 #-    partitions => [
 #-		      { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
 #-		      { mntpoint => "/",     size => 256 << 11, type => 0x83 },
@@ -178,7 +178,7 @@ $o = $::o = {
 #-    user => { name => 'foo', password => 'bar', home => '/home/foo', shell => '/bin/bash', realname => 'really, it is foo' },
 
 #-    keyboard => 'de',
-#-    display => "192.168.1.19:2",
+#-    display => "192.168.1.15:0",
     steps        => \%installSteps,
     orderedSteps => \@orderedInstallSteps,
 
@@ -269,8 +269,6 @@ sub setupSCSI {
 sub partitionDisks {
     return
       $o->{fstab} = [
-	#{ device => "loop7", mntpoint => "/", type => 0x83, size => ((cat_('/dos/lnx4win/size.txt'))[0]*2048), isFormatted => 1, isMounted => 1, noMakeDevice => 1 },
-	#{ device => "/initrd/dos/lnx4win/swapfile", mntpoint => "swap", type => 0x82, isFormatted => 1, isMounted => 1, noMakeDevice => 1 },
 	{ device => "loop7", type => 0x83, mntpoint => "/", isFormatted => 1, isMounted => 1 },
 	{ device => "/initrd/dos/lnx4win/swapfile", type => 0x82, mntpoint => "swap", isFormatted => 1, isMounted => 1 },
       ] if $o->{lnx4win};
@@ -558,7 +556,7 @@ sub main {
 
 	last if $o->{step} eq 'exitInstall';
     }
-    substInFile { s|/sbin/mingetty tty1.*|/bin/bash --login| } "$o->{prefix}/etc/inittab" if $o->{security} < 2;
+    substInFile { s|/sbin/mingetty tty1.*|/bin/bash --login| } "$o->{prefix}/etc/inittab" if $o->{security} < 1;
 
     fs::write($o->{prefix}, $o->{fstab});
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');

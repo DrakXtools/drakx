@@ -18,7 +18,8 @@ my @MBR_signatures = (
     [ 'empty', 0, "\0\0\0\0" ],
     [ 'lilo', 0x6,  "LILO" ],
     [ 'osbs', 0x2,  "OSBS" ], #- http://www.prz.tu-berlin.de/~wolf/os-bs.html
-    [ 'pqmagic', 0xef, "PQV" ],      
+    [ 'pqmagic', 0xef, "PQV" ],
+    [ 'BootStar', 0x130, "BootStar:" ],
     [ 'DocsBoot', 0x148, 'DocsBoot' ],
     [ 'system_commander', 0x1ad, "SYSCMNDRSYS" ],
     [ 'dos', 0xa0, "\x25\x03\x4E\x02\xCD\x13" ],

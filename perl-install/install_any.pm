@@ -17,6 +17,7 @@ use common qw(:common :system :functional :file);
 use commands;
 use run_program;
 use partition_table qw(:types);
+use partition_table_raw;
 use devices;
 use fsedit;
 use network;
@@ -164,8 +165,11 @@ sub getHds {
     my ($o) = @_;
     my ($ok, $ok2) = 1;
 
+    my @drives = detect_devices::hds();
+    add2hash_($o->{partitioning}, { readonly => 1 }) if partition_table_raw::typeOfMBR($drives[0]{device}) eq 'system_commander';
+
   getHds: 
-    $o->{hds} = catch_cdie { fsedit::hds([ detect_devices::hds() ], $o->{partitioning}) }
+    $o->{hds} = catch_cdie { fsedit::hds(\@drives, $o->{partitioning}) }
       sub {
 	$o->ask_warn(_("Error"),
 _("I can't read your partition table, it's too corrupted for me :(
@@ -415,6 +419,6 @@ sub pkg_install {
 }
 
 sub fsck_option() {
-    my $y = $::o->{security} < 4 && $::beginner && "-y ";
+    my $y = $::o->{security} < 3 && $::beginner && "-y ";
     substInFile { s/^(\s*fsckoptions=)(-y )?/$1$y/ } "$::o->{prefix}/etc/rc.d/rc.sysinit";
 }
