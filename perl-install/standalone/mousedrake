@@ -34,7 +34,7 @@ if (!$mouse || !$::auto) {
 	require my_gtk;
 	my $time_tag = Gtk->timeout_add(100, sub {
 					    defined $::Plug && defined $::Plug->child or return 1;
-					    test_mouse($mouse,$::Plug->child);
+					    test_mouse2($mouse,$::Plug->child);
 					    0;
 					});
     }
@@ -135,4 +135,96 @@ sub test_mouse {
 					$expose = 0;
 					1;
 				    });
+}
+
+sub test_mouse2 {
+    my ($mouse, $hbox) = @_;
+
+   my ($width, $height, $offset) = (210, round_up(min(350, $::windowheight - 150), 6), 25);
+#   my ($bw, $bh) = ($width / 3, $height / 3);
+
+    my $darea = new Gtk::DrawingArea;
+    $darea->set_events([ 'button_press_mask', 'button_release_mask' ]);  #$darea must be unrealized.
+    my_gtk::gtkpack($hbox, my_gtk::gtkset_border_width(my_gtk::gtkpack(new Gtk::VBox(0,10), my_gtk::gtksize(my_gtk::gtkset_usize($darea, $width+1, $height+1), $width, $height)),10));
+
+
+    my ($m3_image, $m3_mask) = my_gtk::gtkcreate_xpm($darea, '/usr/share/libDrakX/pixmaps/mouse_3b.xpm');
+    my ($m3_imagep, $m3_maskp) = my_gtk::gtkcreate_xpm($darea, '/usr/share/libDrakX/pixmaps/mouse_3b+.xpm');
+    my ($m3_middle, $m3_middle_mask) = my_gtk::gtkcreate_xpm($darea, '/usr/share/libDrakX/pixmaps/mouse_middle.xpm');
+    $image = $m3_image;
+    $mouse->{nbuttons} > 3 and $image = $m3_imagep;
+    my $drawarea; $drawarea = sub { $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+						      $image, 0, 0,
+						      ($darea->allocation->[2]-$width)/2, ($darea->allocation->[3]-$height)/2,
+						      210, 350)
+		     };
+
+#      my $draw_rect; $draw_rect = sub {
+#  	my ($black, $fill, $rect) = @_;
+#  	$draw_rect->(0, 1, $rect) if !$fill; #- blank it first
+#  	$darea->window->draw_rectangle($black ? $darea->style->fg_gc('normal') : $darea->style->bg_gc('normal'), $fill, @$rect);
+#  	$darea->draw($rect);
+#      };
+#      my $paintWheel = sub {
+#  	my ($x, $y, $w, $h) = ($width / 2 - $bw / 6, $bh / 4, $bw / 3, $bh / 2);
+#  	$mouse->{nbuttons} = max($mouse->{nbuttons}, 5); #- it means, the mouse has more than 3 buttons...
+#  	$draw_rect->(1, 0, [ $x, $y, $w, $h ]);
+
+#  	my $offset = 0 if 0;
+#  	$offset += $_[0] if $_[0];
+#  	my $step = 10;
+#  	for (my $i = $offset % $step; $i < $h; $i += $step) {
+#  	    $draw_rect->(1, 1, [ $x, $y + $i, $w, min(2, $h - $i) ]);
+#  	}
+#      };
+      my $paintButton = sub {
+	  my ($nb, $pressed) = @_;
+	  my $x = 60 + $nb*33;
+	  $drawarea->();
+	  if ($mouse->{nbuttons} <= 3) {
+	      $darea->window->draw_arc ( $darea->style->black_gc,
+					 1, ($darea->allocation->[2]-$width)/2 + $x, ($darea->allocation->[3]-$height)/2 + 90, 20, 25,
+					 0, 360*64);
+	  } else {
+	      $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+					   $m3_middle, 0, 0,
+					   ($darea->allocation->[2]-$width)/2+81, ($darea->allocation->[3]-$height)/2 + 49,
+					   45, 96);
+	  }
+      };
+#      my $draw_text = sub {
+#  	my ($t, $y) = @_;
+#  	my $font = $darea->style->font;
+#  	my $w = $font->string_width($t);
+#  	$darea->window->draw_string($font, $darea->style->fg_gc('normal'), ($width - $w) / 2, $y, $t);
+#      };
+#      my $default_time = 10;
+#      my $time = $default_time;
+#      my $expose1 = 0;
+#      my $expose2 = 1;
+      $darea->signal_connect(button_press_event => sub {
+  			       my $b = $_[1]{button};
+  			       $time = $default_time;
+  			       $b >= 4 ?
+  				 $paintWheel->($b == 4 ? -1 : 1) :
+  				 $paintButton->($b - 1);
+  			       $expose2 = 0;
+  			   });
+      $darea->signal_connect(button_release_event => sub { 
+				 $drawarea->()
+  			   });
+      $darea->signal_connect(expose_event => sub { $drawarea->() });
+#      $time_tag2 = Gtk->timeout_add(100, sub {
+#  					$expose or return 1;
+#  					$expose && $expose2 or return 1;
+#  					$expose = 0;
+#					$drawarea->();
+#  					$draw_rect->(1, 0, [ 0, 0, $width, $height]);
+#  					$draw_text->(_("Test the mouse here."), 2 * $bh - 20);
+#  					$draw_text->(_("To activate the mouse,"), 2 * $bh + 10) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+#  					$draw_text->(_("MOVE YOUR WHEEL!"),     2 * $bh + 30) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+#  					$paintButton->($_, 0) foreach 0..2;
+#  					$expose = 0;
+#  					1;
+#  				    });
 }
