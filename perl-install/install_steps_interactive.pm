@@ -738,6 +738,7 @@ sub chooseCD {
     #- all the medium grouped together on only one CD.
     foreach (@mediums) {
 	my $descr = pkgs::mediumDescr($packages, $_);
+	$packages->{mediums}{$_}{ignored} and next;
 	exists $mediumsDescr{$descr} or push @mediumsDescr, $descr;
 	$mediumsDescr{$descr} ||= $packages->{mediums}{$_}{selected};
     }
@@ -763,6 +764,7 @@ If only some CDs are missing, unselect them, then click Ok."),
     #- restore true selection of medium (which may have been grouped together)
     foreach (@mediums) {
 	my $descr = pkgs::mediumDescr($packages, $_);
+	$packages->{mediums}{$_}{ignored} and next;
 	$packages->{mediums}{$_}{selected} = $mediumsDescr{$descr};
 	log::l("select status of medium $_ is $packages->{mediums}{$_}{selected}");
     }
