@@ -543,16 +543,18 @@ sub ask_users {
 	my $ret = $in->ask_from_(
 	    { title => N("Add user"),
 	      messages => N("Enter a user\n%s", $names),
-	      ok => N("Accept user"),
-	      cancel => $security < 4 || @$users ? N("Done") : '',
+	      focus_first => 1,
+	      if_(!$::isInstall, ok => N("Done")),
+	      cancel => N("Accept user"),
 	      callbacks => {
 	          focus_out => sub {
 		      if ($_[0] eq 0) {
 			  $u->{name} ||= lc first($u->{realname} =~ /([\w-]+)/);
 		      }
 		  },
-	          complete => $verif,
-                  canceled => sub { $u->{name} ? &$verif : 0 },
+	          complete => sub { $u->{name} ? &$verif : 0 },
+                  canceled => $verif,
+                  ok_disabled => sub { $security >= 4 && !@$users },
 	    } }, [ 
 	    { label => N("Real name"), val => \$u->{realname} },
 	    { label => N("User name"), val => \$u->{name} },
@@ -573,7 +575,7 @@ sub ask_users {
 
 	push @$users, $u if $u->{name};
 	$u = {};
-	$ret or return;
+	$ret and return;
     }
 }
 
