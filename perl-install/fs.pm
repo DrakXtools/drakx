@@ -429,6 +429,11 @@ sub get_raw_hds {
 ################################################################################
 # formatting functions
 ################################################################################
+sub disable_forced_fsck {
+    my ($dev) = @_;
+    run_program::run("tune2fs", "-c0", "-i0", devices::make($dev));
+}
+
 sub format_ext2($@) {
     #- mke2fs -b (1024|2048|4096) -c -i(1024 > 262144) -N (1 > 100000000) -m (0-100%) -L volume-label
     #- tune2fs
@@ -440,6 +445,7 @@ sub format_ext2($@) {
 sub format_ext3 {
     my ($dev, @options) = @_;
     format_ext2($dev, "-j", @options);
+    disable_forced_fsck($dev);
 }
 sub format_reiserfs {
     my ($dev, @options) = @_;
