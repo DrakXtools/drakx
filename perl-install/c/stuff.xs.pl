@@ -441,6 +441,43 @@ isNetDeviceWirelessAware(device)
   RETVAL
 
 
+void
+get_netdevices()
+  PPCODE:
+     struct ifconf ifc;
+     struct ifreq *ifr;
+     int i;
+     int numreqs = 10;
+
+     int s = socket(AF_INET, SOCK_DGRAM, 0);
+
+     ifc.ifc_buf = NULL;
+     for (;;) {
+          ifc.ifc_len = sizeof(struct ifreq) * numreqs;
+          ifc.ifc_buf = realloc(ifc.ifc_buf, ifc.ifc_len);
+
+          if (ioctl(s, SIOCGIFCONF, &ifc) < 0) {
+               perror("SIOCGIFCONF");
+               return;
+          }
+          if (ifc.ifc_len == sizeof(struct ifreq) * numreqs) {
+               /* assume it overflowed and try again */
+               numreqs += 10;                                                                         
+               continue;                                                                              
+          }
+          break;
+     }
+     if (ifc.ifc_len) {
+          ifr = ifc.ifc_req;
+          EXTEND(sp, ifc.ifc_len);
+          for (i=0; i < ifc.ifc_len; i+= sizeof(struct ifreq)) {
+               PUSHs(sv_2mortal(newSVpv(ifr->ifr_name, 0)));
+               ifr++;
+          }
+     }
+
+     close(s);
+
 
 char*
 getNetDriver(char* device)
