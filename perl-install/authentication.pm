@@ -51,23 +51,21 @@ sub ask_parameters {
 	    kerberos => N("security layout (SASL/Kerberos)"),
 	);
 
-	
-
-
-
-
-	
+	my $anonymous = "1";
 	my $AD_user = $authentication->{AD_user} =~ /(.*)\@\Q$val\E$/ ? $1 : $authentication->{AD_user};
 
 	$in->ask_from('',
-		     N("Authentication Active Directory"),
-		     [ { label => N("Domain"), val => \$val },
-		       { label => N("Server"), val => \$authentication->{AD_server} },
+		     N("Authentication Active Directory") . "\n\n",
+		       [{ label => N("Domain") . "\n", val => \$val },
+		       { label => N("Server\n"), val => \$authentication->{AD_server} },
 		       { label => N("LDAP users database"), val => \$authentication->{AD_users_db} },
-		       { label => N("LDAP user allowed to browse the Active Directory"), val => \$AD_user, },
-		       { label => N("Password for user"), val => \$authentication->{AD_password}, disabled => sub { !$AD_user || $authentication->{sub_kind} eq 'anonymous' } },
-		       { label => N("LDAP Authentication"), val => \$authentication->{sub_kind}, list => [ map { $_->[0] } group_by2(@sub_kinds) ], format => sub { $sub_kinds{$_[0]} } },
+		       { label => N("Use Anonymous BIND "), val => \$anonymous, type => bool },
+		       { label => N("LDAP user allowed to browse the Active Directory"), val => \$AD_user, disabled => sub { $anonymous}},
+		       { label => N("Password for user"), val => \$authentication->{AD_password}, disabled => sub { $anonymous }},
+		       { label => N("Chiffrement"), val => \$authentication->{sub_kind}, list => [ map { $_->[0] } group_by2(@sub_kinds) ], format => sub { $sub_kinds{$_[0]} } },
 		     ]) or return;
+
+		     
 	$authentication->{AD_user} = !$AD_user || $authentication->{sub_kind} eq 'anonymous' ? '' : 
 	                             $AD_user =~ /@/ ? $AD_user : "$AD_user\@$val";
 	$authentication->{AD_password} = '' if !$authentication->{AD_user};
