@@ -174,13 +174,13 @@ our %l = (
           qw(snd-ymfpci sonicvibes sscape trident via82cxxx_audio wavefront ymfpci),
       ),
     ],
-    tv => [ qw(bt878 bttv cx8800 cyber2000fb dpc7146 ivtv ov518_decomp saa7134 zr36067) ],
+    tv => [ qw(bt878 bttv cx8800 dpc7146 ivtv saa7134 zr36067) ],
     dvb => [ qw(budget budget-av budget-ci dvb-ttpci hexium_orion hexium_gemini skystar2) ],
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-gemtek-pci radio-maxiradio) ],
     scanner => [ qw(scanner microtek) ],
     joystick => [ qw(cs461x ns558 emu10k1-gp fm801-gp iforce lightning ns558 vortex) ],
-    webcam => [ qw(cpia_usb ibmcam mod_quickcam ov511 pwc quickcam ultracam usbvideo usbvision) ],
+    webcam => [ qw(cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp pwc quickcam ultracam usbvideo usbvision) ],
   },
 
   various => 
