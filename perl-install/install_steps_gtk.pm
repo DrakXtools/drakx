@@ -129,7 +129,7 @@ sub new($$) {
 		$o->{vga16} = 1 if /VGA16/;
 		&$launchX($prog, $Driver) and goto OK;
 	    }
-            $::move and die "can't launch graphical mode :(\n";
+            $::move and print("can't launch graphical mode :(\n"), c::_exit(1);
 	}
 	return undef;
     }
