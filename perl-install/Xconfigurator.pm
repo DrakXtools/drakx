@@ -11,7 +11,6 @@ use run_program;
 use Xconfigurator_consts;
 use any;
 use modules;
-use Data::Dumper;
 use my_gtk qw(:helpers :wrappers);
 
 my $tmpconfig = "/tmp/Xconfig";
