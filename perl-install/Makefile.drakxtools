@@ -60,4 +60,13 @@ install:
 	mv $(LIBDEST)/icons/harddrake2/ $(DATADIR)/pixmaps/
 	mv $(SBINDEST)/service_harddrake.sh $(INITDIR)/harddrake
 	mv $(SBINDEST)/service_harddrake $(DATADIR)/harddrake/
+	ln -s $(SBINDEST)/{XFdrake,drakx11}
+	ln -s $(SBINDEST)/{diskdrake,drakdisk}
 	ln -s $(SBINDEST)/{drakclock,clock.pl}
+	ln -s $(SBINDEST)/{harddrake2,drakhardware}
+	ln -s $(SBINDEST)/{keyboarddrake,drakkeyboard}
+	ln -s $(SBINDEST)/{localedrake,draklocale}
+	ln -s $(SBINDEST)/{logdrake,draklog}
+	ln -s $(SBINDEST)/{mousedrake,drakmouse}
+	ln -s $(SBINDEST)/{net_monitor,draknet_monitor}
+	ln -s $(SBINDEST)/{printerdrake,drakprinter}
