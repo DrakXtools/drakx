@@ -113,6 +113,8 @@ sub zero_MBR {
     my ($hd) = @_;
     #- force the standard partition type for the architecture
     my $type = arch() eq "alpha" ? "bsd" : arch() =~ /^sparc/ ? "sun" : arch() eq "ppc" ? "mac" : "dos";
+    #- override standard mac type on PPC for IBM machines to dos
+    $type = "dos" if (arch() =~ /ppc/ && detect_devices::get_mac_model() =~ /^IBM/);
     require("partition_table_$type.pm");
     bless $hd, "partition_table_$type";
     $hd->{primary} = $hd->clear_raw();

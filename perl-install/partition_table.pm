@@ -327,7 +327,8 @@ sub assign_device_numbers {
     my $start = 1; 
     
     #- on PPC we need to assign device numbers to the holes too - big FUN!
-    if (arch() =~ /ppc/) {
+    #- not if it's an IBM machine using a DOS partition table though
+    if (arch() =~ /ppc/ && detect_devices::get_mac_model() !~ /^IBM/) {
 	#- first sort the normal parts
 	$hd->{primary}{normal} = [sort { $a->{start} <=> $b->{start} } @{$hd->{primary}{normal}} ];
     
