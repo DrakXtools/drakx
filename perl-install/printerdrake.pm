@@ -902,7 +902,7 @@ port before you print a test page. Otherwise the printer
 will not work. Your connection type setting will be ignored
 by the driver."));
 		    }
-		    $printer->{currentqueue}{'connect'} = 'file:/dev/oki4drv';
+		    $printer->{currentqueue}{'connect'} = 'file:/dev/null';
 		    # Start the oki4daemon
 		    printer::start_service_on_boot('oki4daemon');
 		    printer::start_service('oki4daemon');
