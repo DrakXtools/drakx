@@ -96,6 +96,7 @@ sub readScannerDB {
 	    add2hash($card->{flags}, $c->{flags});
 	    add2hash($card, $c);
 	},
+	ASK => sub { $card->{ask} = $val; },
 	SERVER => sub { $card->{server} = $val; },
 	DRIVER => sub { $card->{driver} = $val; },
 	UNSUPPORTED => sub { $card->{flags}{unsupported} = 1 },
@@ -210,6 +211,9 @@ sub updateScannerDBfromSane {
 
 #-----------------------------------------------
 # $Log$
+# Revision 1.6  2002/03/10 15:26:00  yduret
+# added ASK support for more interactiveness during configuration
+#
 # Revision 1.5  2002/02/18 17:34:31  yduret
 # update
 #
