@@ -217,10 +217,16 @@ sub set_monitors {
 	raw_import_section($raw_monitor, $monitor, \@monitor_fields);
     } \@raw_monitors, \@monitors;
 }
-sub get_monitor {
-    my ($raw_X) = @_;
-    $raw_X->get_monitors or _new_monitor_sections($raw_X, 1);
-    first($raw_X->get_monitors);
+sub get_or_new_monitors {
+    my ($raw_X, $nb_new) = @_;
+    my @monitors = $raw_X->get_monitors;
+
+    #- ensure we have exactly $nb_new monitors;
+    if ($nb_new > @monitors) {
+	@monitors, ({}) x ($nb_new - @monitors);
+    } else {
+	splice(@monitors, 0, $nb_new);
+    }
 }
 sub _new_monitor_sections {
     my ($raw_X, $nb_new) = @_;

@@ -136,16 +136,16 @@ sub choose {
 
 
 sub choices {
-    my ($_raw_X, $resolution_wanted, $card, $monitor) = @_;
+    my ($_raw_X, $resolution_wanted, $card, $monitors) = @_;
     $resolution_wanted ||= {};
 
     my ($prefered_depth, @resolutions) = allowed($card);
 
-    @resolutions = filter_using_HorizSync($monitor->{HorizSync}, @resolutions) if $monitor->{HorizSync};
+    @resolutions = filter_using_HorizSync($monitors->[0]{HorizSync}, @resolutions) if $monitors->[0]{HorizSync};
     @resolutions = filter_using_VideoRam($card->{VideoRam}, @resolutions) if $card->{VideoRam};
 
     my $x_res = do {
-	my $res = $resolution_wanted->{X} || ($monitor->{ModelName} =~ /^Flat Panel (\d+x\d+)$/ ? $1 : size2default_resolution($monitor->{size} || 14));
+	my $res = $resolution_wanted->{X} || ($monitors->[0]{ModelName} =~ /^Flat Panel (\d+x\d+)$/ ? $1 : size2default_resolution($monitors->[0]{size} || 14));
 	my $x_res = first(split 'x', $res);
 	#- take the first available resolution <= the wanted resolution
 	max map { if_($_->{X} <= $x_res, $_->{X}) } @resolutions;
@@ -167,9 +167,9 @@ sub choices {
 }
 
 sub configure {
-    my ($in, $raw_X, $card, $monitor, $b_auto) = @_;
+    my ($in, $raw_X, $card, $monitors, $b_auto) = @_;
 
-    my ($default_resolution, @resolutions) = choices($raw_X, $raw_X->get_resolution, $card, $monitor);
+    my ($default_resolution, @resolutions) = choices($raw_X, $raw_X->get_resolution, $card, $monitors);
 
     if ($b_auto) {
 	#- use $default_resolution
@@ -189,11 +189,11 @@ sub configure {
 }
 
 sub configure_auto_install {
-    my ($raw_X, $card, $monitor, $old_X) = @_;
+    my ($raw_X, $card, $monitors, $old_X) = @_;
 
     my $resolution_wanted = { X => $old_X->{resolution_wanted}, Depth => $old_X->{default_depth} };
 
-    my ($default_resolution) = choices($raw_X, $resolution_wanted, $card, $monitor);
+    my ($default_resolution) = choices($raw_X, $resolution_wanted, $card, $monitors);
     $default_resolution or die "you selected an unusable depth";
 
     $raw_X->set_resolution($default_resolution);

@@ -30,47 +30,53 @@ my @HorizSync_ranges = (
 	"31.5-94.0",
 );
 
-
-sub from_raw_X {
-    my ($raw_X) = @_;
-
-    my $monitor = $raw_X->get_monitor;
-    if (!$monitor->{HorizSync}) {
-	put_in_hash($monitor, getinfoFromDDC());
-    }
-    $monitor;
-}
-
 sub configure {
-    my ($in, $raw_X, $b_auto) = @_;
+    my ($in, $raw_X, $nb_monitors, $o_ddc_info, $b_auto) = @_;
 
-    my $monitor = from_raw_X($raw_X);
-    choose($in, $monitor, $b_auto) or return;
-    $raw_X->set_monitors($monitor);
-    $monitor;
+    my $monitors = [ $raw_X->get_or_new_monitors($nb_monitors) ];
+    if ($o_ddc_info) {
+	put_in_hash($monitors->[0], $o_ddc_info);
+    }
+    my $head_nb = 1;
+    foreach my $monitor (@$monitors) {
+	choose($in, $monitor, @$monitors > 1 ? $head_nb++ : 0, $b_auto) or return;
+    }
+    $raw_X->set_monitors(@$monitors);
+    $monitors;
 }
 
 sub configure_auto_install {
     my ($raw_X, $old_X) = @_;
 
-    my $old_monitor = $old_X->{monitor} || {};
-    my %rename = (vsyncrange => 'VertRefresh', hsyncrange => 'HorizSync');
-    foreach (keys %rename) {
-	my $v = $old_monitor->{$_} or next;
-	$old_monitor->{$rename{$_}} = $v;
+    if ($old_X->{monitor}) {
+	#- keep compatibility
+	$old_X->{monitor}{VertRefresh} = $old_X->{monitor}{vsyncrange};
+	$old_X->{monitor}{HorizSync} = $old_X->{monitor}{hsyncrange};
+
+	#- new name
+	$old_X->{monitors} = [ delete $old_X->{monitor} ];
     }
 
-    my $monitor = from_raw_X($raw_X);
-    put_in_hash($monitor, $old_monitor);
+    my $monitors = [ $raw_X->get_or_new_monitors($old_X->{monitors} ? @{$old_X->{monitors}} : 1) ];
+    mapn {
+	my ($monitor, $auto_install_monitor) = @_;
+	put_in_hash($monitor, $auto_install_monitor);
+    } $monitors, $old_X->{monitors} if $old_X->{monitors};
 
-    my $monitors = monitors();
-    configure_automatic($monitor, $monitors) or put_in_hash($monitor, { HorizSync => '31.5-35.1', VertRefresh => '50-61' });
-    $raw_X->set_monitors($monitor);
-    $monitor;
+    if (!$monitors->[0]{HorizSync}) {
+	put_in_hash($monitors->[0], getinfoFromDDC());
+    }
+
+    my $monitors_db = monitors_db();
+    foreach my $monitor (@$monitors) {
+	configure_automatic($monitor, $monitors_db) or put_in_hash($monitor, { HorizSync => '31.5-35.1', VertRefresh => '50-61' });
+    }
+    $raw_X->set_monitors(@$monitors);
+    $monitors;
 }
 
 sub choose {
-    my ($in, $monitor, $b_auto) = @_;
+    my ($in, $monitor, $head_nb, $b_auto) = @_;
 
     my $monitors_db = monitors_db();
 
@@ -98,7 +104,7 @@ sub choose {
     };
 
     $in->ask_from_({ title => N("Monitor"),
-		     messages => N("Choose a monitor"), 
+		     messages => $head_nb ? N("Choose a monitor for head #%d", $head_nb) : N("Choose a monitor"), 
 		     interactive_help_id => 'configureX_monitor' 
 		   },
 		  [ { val => \$merged_name, separator => '|', 
@@ -112,8 +118,8 @@ sub choose {
     if ($merged_name eq "Plug'n Play") {
 	local $::noauto = 0; #- hey, you asked for plug'n play, so i do probe!
 	delete @$monitor{'VendorName', 'ModelName', 'EISA_ID'};
-	put_in_hash($monitor, getinfoFromDDC());
-	if (configure_automatic($monitor, $monitors_db)) {
+	put_in_hash($monitor, getinfoFromDDC()) if $head_nb <= 1;
+	if ($head_nb > 1 || configure_automatic($monitor, $monitors_db)) {
 	    $monitor->{VendorName} = "Plug'n Play";
 	} else {
 	    $in->ask_warn('', N("Plug'n Play probing failed. Please select the correct monitor"));

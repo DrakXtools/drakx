@@ -22,16 +22,18 @@ sub info {
     my $title = $card->{use_DRI_GLX} ? N("XFree %s with 3D hardware acceleration", $xf_ver) : 
                                        N("XFree %s", $xf_ver);
     my $keyboard = eval { $raw_X->get_keyboard } || {};
-    my $monitor = eval { $raw_X->get_monitor } || {};
+    my @monitors = eval { $raw_X->get_monitors };
     my $device = eval { $raw_X->get_device } || {};
     my $mouse = eval { first($raw_X->get_mice) } || {};
 
     $info .= N("Keyboard layout: %s\n", $keyboard->{XkbLayout});
     $info .= N("Mouse type: %s\n", $mouse->{Protocol});
     $info .= N("Mouse device: %s\n", $mouse->{Device}) if $::expert;
-    $info .= N("Monitor: %s\n", $monitor->{ModelName});
-    $info .= N("Monitor HorizSync: %s\n", $monitor->{HorizSync}) if $::expert;
-    $info .= N("Monitor VertRefresh: %s\n", $monitor->{VertRefresh}) if $::expert;
+    foreach my $monitor (@monitors) {
+	$info .= N("Monitor: %s\n", $monitor->{ModelName});
+	$info .= N("Monitor HorizSync: %s\n", $monitor->{HorizSync}) if $::expert;
+	$info .= N("Monitor VertRefresh: %s\n", $monitor->{VertRefresh}) if $::expert;
+    }
     $info .= N("Graphics card: %s\n", $device->{VendorName} . ' ' . $device->{BoardName});
     $info .= N("Graphics memory: %s kB\n", $device->{VideoRam}) if $device->{VideoRam};
     if (my $resolution = eval { $raw_X->get_resolution }) {

@@ -17,7 +17,7 @@ sub configure_monitor {
     my ($in, $raw_X) = @_;
 
     my $before = $raw_X->prepare_write;
-    Xconfig::monitor::configure($in, $raw_X) or return;
+    Xconfig::monitor::configure($in, $raw_X, int($raw_X->get_devices)) or return;
     if ($raw_X->prepare_write ne $before) {
 	$raw_X->write;
 	'config_changed';
@@ -30,9 +30,9 @@ sub configure_resolution {
     my ($in, $raw_X) = @_;
 
     my $card = Xconfig::card::from_raw_X($raw_X);
-    my $monitor = Xconfig::monitor::from_raw_X($raw_X);
+    my $monitors = [ $raw_X->get_monitors ];
     my $before = $raw_X->prepare_write;
-    Xconfig::resolution_and_depth::configure($in, $raw_X, $card, $monitor) or return;
+    Xconfig::resolution_and_depth::configure($in, $raw_X, $card, $monitors) or return;
     if ($raw_X->prepare_write ne $before) {
 	$raw_X->write;
 	'config_changed';
@@ -45,11 +45,11 @@ sub configure_resolution {
 sub configure_everything_auto_install {
     my ($raw_X, $do_pkgs, $old_X, $options) = @_;
     my $X = {};
-    $X->{monitor} = Xconfig::monitor::configure_auto_install($raw_X, $old_X) or return;
-    $options->{VideoRam_probed} = $X->{monitor}{VideoRam_probed};
+    $X->{monitors} = Xconfig::monitor::configure_auto_install($raw_X, $old_X) or return;
+    $options->{VideoRam_probed} = $X->{monitors}[0]{VideoRam_probed};
     $X->{card} = Xconfig::card::configure_auto_install($raw_X, $do_pkgs, $old_X, $options) or return;
     Xconfig::screen::configure($raw_X) or return;
-    $X->{resolution} = Xconfig::resolution_and_depth::configure_auto_install($raw_X, $X->{card}, $X->{monitor}, $old_X);
+    $X->{resolution} = Xconfig::resolution_and_depth::configure_auto_install($raw_X, $X->{card}, $X->{monitors}, $old_X);
 
     &write($raw_X, $X);
 
@@ -61,11 +61,13 @@ sub configure_everything {
     my ($in, $raw_X, $do_pkgs, $auto, $options) = @_;
     my $X = {};
     my $ok = 1;
-    $ok &&= $X->{monitor} = Xconfig::monitor::configure($in, $raw_X, $auto);
-    $options->{VideoRam_probed} = $X->{monitor}{VideoRam_probed};
+
+    my $ddc_info = Xconfig::monitor::getinfoFromDDC();
+    $options->{VideoRam_probed} = $ddc_info->{VideoRam_probed};
     $ok &&= $X->{card} = Xconfig::card::configure($in, $raw_X, $do_pkgs, $auto, $options);
+    $ok &&= $X->{monitors} = Xconfig::monitor::configure($in, $raw_X, int($raw_X->get_devices), $ddc_info, $auto);
     $ok &&= Xconfig::screen::configure($raw_X);
-    $ok &&= $X->{resolution} = Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitor}, $auto);
+    $ok &&= $X->{resolution} = Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitors}, $auto);
     $ok &&= Xconfig::test::test($in, $raw_X, $X->{card}, '', 'skip_badcard') if !$auto;
 
     if (!$ok) {
@@ -86,7 +88,7 @@ sub configure_chooser_raw {
 
     my $update_texts = sub {
 	$texts{card} = $X->{card} && $X->{card}{BoardName} || N("Custom");
-	$texts{monitor} = $X->{monitor} && $X->{monitor}{ModelName} || N("Custom");
+	$texts{monitors} = $X->{monitors} && $X->{monitors}[0]{ModelName} || N("Custom");
 	$texts{resolution} = Xconfig::resolution_and_depth::to_string($X->{resolution});
 
 	$texts{$_} =~ s/(.{20}).*/$1.../ foreach keys %texts; #- ensure not too long
@@ -101,7 +103,7 @@ sub configure_chooser_raw {
 	    $b_modified = 1;
 	    $update_texts->();
 
-	    if (member($field, 'card', 'monitor')) {
+	    if (member($field, 'card', 'monitors')) {
 		Xconfig::screen::configure($raw_X);
 		$raw_X->set_resolution($X->{resolution}) if $X->{resolution};
 	    }
@@ -115,15 +117,17 @@ sub configure_chooser_raw {
 		    { label => N("Graphic Card"), val => \$texts{card}, clicked => sub { 
 			  $may_set->('card', Xconfig::card::configure($in, $raw_X, $do_pkgs, 0, $options));
 		      } },
-		    { label => N("Monitor"), val => \$texts{monitor}, clicked => sub { 
-			  $may_set->('monitor', Xconfig::monitor::configure($in, $raw_X));
+		    { label => N("Monitor"), val => \$texts{monitors}, clicked => sub { 
+			  use Data::Dumper;
+			  print Dumper($raw_X->get_devices);
+			  $may_set->('monitors', Xconfig::monitor::configure($in, $raw_X, int($raw_X->get_devices)));
 		      } },
-		    { label => N("Resolution"), val => \$texts{resolution}, disabled => sub { !$X->{card} || !$X->{monitor} },
+		    { label => N("Resolution"), val => \$texts{resolution}, disabled => sub { !$X->{card} || !$X->{monitors} },
 		      clicked => sub {
-			  $may_set->('resolution', Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitor}));
+			  $may_set->('resolution', Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitors}));
 		      } },
 		        if_(Xconfig::card::check_bad_card($X->{card}) || $::isStandalone,
-		     { val => N("Test"), disabled => sub { !$X->{card} || !$X->{monitor} },
+		     { val => N("Test"), disabled => sub { !$X->{card} || !$X->{monitors} },
 		       clicked => sub { 
 			  $ok = Xconfig::test::test($in, $raw_X, $X->{card}, 'auto', 0);
 		      } },
@@ -141,7 +145,7 @@ sub configure_chooser {
 
     my $X = {
 	card => scalar eval { Xconfig::card::from_raw_X($raw_X) },
-	monitor => $raw_X->get_monitors && Xconfig::monitor::from_raw_X($raw_X),
+	monitors => [ $raw_X->get_monitors ],
 	resolution => scalar eval { $raw_X->get_resolution },
     };
     my $before = $raw_X->prepare_write;
@@ -198,7 +202,7 @@ sub export_to_install_X {
     $::o->{X}{resolution_wanted} = $X->{resolution}{X};
     $::o->{X}{default_depth} = $X->{resolution}{Depth};
     $::o->{X}{bios_vga_mode} = $X->{resolution}{bios};
-    $::o->{X}{monitor} = $X->{monitor} if $X->{monitor}{manually_chosen} && $X->{monitor}{vendor} ne "Plug'n Play";
+    $::o->{X}{monitors} = $X->{monitors} if $X->{monitors}[0]{manually_chosen} && $X->{monitors}[0]{vendor} ne "Plug'n Play";
     $::o->{X}{card} = $X->{card} if $X->{card}{manually_chosen};
     $::o->{X}{Xinerama} = 1 if $X->{card}{Xinerama};
 }
