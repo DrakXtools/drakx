@@ -15,7 +15,8 @@ foreach (@ARGV) {
     $klang = $1 if /--kde_lang=(.*)/;
     $country = $1 if /--kde_country=(.*)/;
 }
-if ($klang) {
+if (defined $klang) {
+    $klang or exit;
     my $lang = lang::kde_lang_country2lang($klang, $country);
     lang::write('', $lang, $>, 'dont_touch_kde_files') if $apply;
 
