@@ -43,7 +43,7 @@ If you do not know, choose 'use PPPoE'"),
                        pre => sub {
                            $wiz->{var}{adsl}{type} = $l{sagem}; # debug
                            $wiz->{var}{adsl}{type} ||= find { $netc->{autodetect}{adsl}{$_} } keys %l;
-                           print "\n\ntype is \"$wiz->{var}{adsl}{type}\"\n\n";
+                           print qq(\n\ntype is "$wiz->{var}{adsl}{type}"\n\n);
                        },
                        post => sub {
                            $wiz->{var}{adsl}{type} = find { $l{$_} eq $wiz->{var}{adsl}{type} } keys %l;
