@@ -4811,7 +4811,7 @@ sub interactive_mode() {
 	
     $my_win = ugtk2->new('drakbackup');
     $window1 = $my_win->{window};
-    unless ($::isEmbedded) {
+    unless (0 == 0) {
 		$my_win->{rwindow}->set_position('center');
 		$my_win->{rwindow}->set_title(N("Drakbackup"));
 		$window1->set_size_request($winwidth, $winht);
