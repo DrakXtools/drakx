@@ -24,11 +24,8 @@ xhost+: %: %.c
 ddcprobe/ddcxinfos:
 	$(MAKE) -C ddcprobe ddcxinfos
 
-$(BASE)/compss: $(BASE)/hdlists $(BASE)/hdlist.cz
-	./gencompss `cat $< | perl -pe 's|^(\S*).*|'$(BASE)'/$$1|' ` > $@ 
-
-$(BASE)/depslist: $(BASE)/hdlists $(BASE)/hdlist.cz
-	gendepslist2 -o $@ `cat $< | perl -pe 's|^(\S*).*|'$(BASE)'/$$1|' `
+$(BASE)/compss $(BASE)/depslist.ordered: $(BASE)/hdlists $(BASE)/hdlist.cz
+	genbasefiles $(BASE) `cat $< | perl -pe 's|^(\S*).*|'$(BASE)'/$$1|' `
 
 $(BASE)/filelist: $(RPMS)
 #	genfilelist $(ROOTDEST)/Mandrake/RPMS* >$@
