@@ -22,7 +22,7 @@
 
 /*
  * This contains stuff related to probing:
- * (1) any (actually SCSI and NET only) devices (autoprobe for PCI)
+ * (1) any (actually only SCSI, NET, USB Controllers) devices (autoprobe for PCI and USB)
  * (2) IDE media
  * (3) SCSI media
  * (4) ETH devices
@@ -39,12 +39,16 @@
 #include <sys/socket.h>
 #include <net/if.h>
 #include <sys/ioctl.h>
+#include <sys/mount.h>
 #include "stage1.h"
 
 #include "log.h"
 #include "frontend.h"
 #include "modules.h"
 #include "pci-resource/pci-ids.h"
+#ifdef ENABLE_USB
+#include "usb-resource/usb-ids.h"
+#endif
 
 #include "probing.h"
 
@@ -61,9 +65,14 @@ struct media_info {
 
 static void warning_insmod_failed(enum insmod_return r)
 {
-	if (r != INSMOD_OK
-	    && !(IS_AUTOMATIC && r == INSMOD_FAILED_FILE_NOT_FOUND))
-		stg1_error_message("Warning, installation of driver failed. (please include msg from <Alt-F3> for bugreports)");
+	if (IS_AUTOMATIC && r == INSMOD_FAILED_FILE_NOT_FOUND)
+		return;
+	if (r != INSMOD_OK) {
+		if (r == INSMOD_FAILED_FILE_NOT_FOUND)
+			stg1_error_message("This floppy doesn't contain the driver.");
+		else
+			stg1_error_message("Warning, installation of driver failed. (please include msg from <Alt-F3> for bugreports)");
+	}
 }
 
 #ifndef DISABLE_NETWORK
@@ -116,37 +125,47 @@ char * get_net_intf_description(char * intf_name)
 
 static void probe_that_type(enum driver_type type)
 {
-	if (IS_EXPERT)
+	if (IS_EXPERT) {
 		ask_insmod(type);
-	else { 
-		/* ---- PCI probe */
+		return;
+	}
+
+
+	/* ---- PCI probe ---------------------------------------------- */
+	{
 		FILE * f;
 		int len = 0;
 		char buf[200];
 		struct pci_module_map * pcidb = NULL;
 
-		f = fopen("/proc/bus/pci/devices", "rb");
-    
-		if (!f) {
-			log_message("PCI: could not open proc file");
-			return;
-		}
-
 		switch (type) {
-		case SCSI_ADAPTERS:
 #ifndef DISABLE_MEDIAS
+		case SCSI_ADAPTERS:
 			pcidb = scsi_pci_ids;
 			len   = scsi_num_ids;
-#endif
 			break;
-		case NETWORK_DEVICES:
+#endif
 #ifndef DISABLE_NETWORK
+#ifndef DISABLE_PCINET
+		case NETWORK_DEVICES:
 			pcidb = eth_pci_ids;
 			len   = eth_num_ids;
-#endif
 			break;
+#endif
+#endif
+#ifdef ENABLE_USB
+		case USB_CONTROLLERS:
+			pcidb = usb_pci_ids;
+			len   = usb_num_ids;
+			break;
+#endif
 		default:
-			return;
+			goto end_pci_probe;
+		}
+
+		if (!(f = fopen("/proc/bus/pci/devices", "rb"))) {
+			log_message("PCI: could not open proc file");
+			goto end_pci_probe;
 		}
 
 		while (1) {
@@ -186,12 +205,96 @@ static void probe_that_type(enum driver_type type)
 							net_discovered_interface(NULL);
 					}
 #endif
+#ifdef ENABLE_USB
+					if (type == USB_CONTROLLERS) {
+						stg1_info_message("About to load driver for usb controller `%s'.", pcidb[i].module);
+						warning_insmod_failed(my_insmod(pcidb[i].module, USB_CONTROLLERS, NULL));
+					}
+#endif
 				}
 			}
 		}
-
 		fclose(f);
+	end_pci_probe:
 	}
+
+
+#ifdef ENABLE_USB
+	/* ---- USB probe ---------------------------------------------- */
+	{
+		static int already_probed_usb_controllers = 0;
+		static int already_mounted_usbdev = 0;
+
+		FILE * f;
+		int len = 0;
+		char buf[200];
+		struct usb_module_map * usbdb = NULL;
+
+		switch (type) {
+#ifdef ENABLE_USBNET
+		case NETWORK_DEVICES:
+			usbdb = usbnet_usb_ids;
+			len   = usbnet_usb_num_ids;
+			break;
+#endif
+		default:
+			goto end_usb_probe;
+		}
+
+		if (!already_probed_usb_controllers) {
+			already_probed_usb_controllers = 1;
+			probe_that_type(USB_CONTROLLERS);
+		}
+
+		if (!already_mounted_usbdev) {
+			already_mounted_usbdev = 1;
+			if (mount("/proc/bus/usb", "/proc/bus/usb", "usbdevfs", 0, NULL)) {
+				log_message("USB: couldn't mount /proc/bus/usb");
+				goto end_usb_probe;
+			}
+			wait_message("Waiting for USB stuff to show up.");
+			sleep(2); /* sucking background work */
+			remove_wait_message();
+		}
+
+		if (!(f = fopen("/proc/bus/usb/devices", "rb"))) {
+			log_message("USB: could not open proc file");
+			goto end_usb_probe;
+		}
+
+		while (1) {
+			int i, vendor, id;
+
+			if (!fgets(buf, sizeof(buf), f)) break;
+			
+			if (strstr(buf, "Keyboard")) {
+				my_insmod("usbkbd", ANY_DRIVER_TYPE, NULL);
+				my_insmod("keybdev", ANY_DRIVER_TYPE, NULL);
+			}
+
+			if (sscanf(buf, "P:  Vendor=%x ProdID=%x", &vendor, &id) != 2)
+				continue;
+
+			for (i = 0; i < len; i++) {
+				if (usbdb[i].vendor == vendor && usbdb[i].id == id) {
+					log_message("USB: device %04x %04x is \"%s\" (%s)", vendor, id, usbdb[i].name, usbdb[i].module);
+#ifdef ENABLE_USBNET
+					if (type == NETWORK_DEVICES) {
+						stg1_info_message("About to load driver for usb network device:\n \n%s", usbdb[i].name);
+						prepare_intf_descr(usbdb[i].name);
+						warning_insmod_failed(my_insmod(usbdb[i].module, NETWORK_DEVICES, NULL));
+						if (intf_descr_for_discover) /* for modules providing more than one net intf */
+							net_discovered_interface(NULL);
+					}
+#endif
+
+				}
+			}
+		}
+		fclose(f);
+	end_usb_probe:
+	}
+#endif
 }
 
 
@@ -470,10 +573,13 @@ int net_device_available(char * device) {
 char ** get_net_devices(void)
 {
 	char * devices[] = {
-		"eth0", "eth1", "eth2", "eth3",
+		"eth0", "eth1", "eth2", "eth3", "eth4", "eth5",
 		"tr0",
 		"plip0", "plip1", "plip2",
 		"fddi0",
+#ifdef ENABLE_USBNET
+		"usb0", "usb1", "usb2", "usb3",
+#endif
 		NULL
 	};
 	char ** ptr = devices;

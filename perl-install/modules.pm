@@ -114,11 +114,15 @@ if_(arch() !~ /alpha/ && arch() !~ /sparc/,
   "parport_pc" => "parport_pc",
   "sunrpc" => "sunrpc",
   "pci-scan" => "pci-scan",
-  "usbcore" => "usbcore",
   "ppp" => "Point to Point driver",
   "ppp_generic" => "Point to Point generic driver",
   "ppp_async" => "ppp_async",
   "slhc" => "slhc",
+}],
+[ 'usbnet', {
+  "pegasus" => "pegasus",
+  "kaweth" => "kaweth",
+  "usbnet" => "usbnet",
 }],
 [ 'isdn', {
    "hisax" => "hisax",
@@ -366,6 +370,7 @@ if_(arch() !~ /^sparc/,
 ),
 }],
 [ 'usb', {
+  "usbcore" => "usbcore",
   "usb-uhci" => "USB Controller (uhci)",
   "usb-ohci" => "USB Controller (ohci)",
   "usb-ohci-hcd" => "USB (ohci-hcd)",
@@ -414,7 +419,6 @@ BusLogic seagate fdomain g_NCR5380 tmscsim
 my @skip_modules_on_stage1 = (
   qw(sktr tmspci ibmtr abyss), # alt token ring
   qw(old_tulip rtl8139), # doesn't exist in 2.4
-  qw(kaweth pegasus), # usb net
   if_(arch() =~ /alpha|ppc/, qw(sb1000)),
   "apa1480_cb",
   "imm",

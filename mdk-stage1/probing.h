@@ -24,7 +24,7 @@
 
 enum media_type { CDROM, DISK, FLOPPY, TAPE, UNKNOWN_MEDIA };
 
-enum driver_type { SCSI_ADAPTERS, NETWORK_DEVICES, ANY_DRIVER_TYPE };
+enum driver_type { SCSI_ADAPTERS, NETWORK_DEVICES, USB_CONTROLLERS, ANY_DRIVER_TYPE };
 
 void get_medias(enum media_type media, char *** names, char *** models);
 char ** get_net_devices(void);

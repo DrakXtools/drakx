@@ -43,7 +43,7 @@ top_dir = .
 include $(top_dir)/Makefile.common
 
 
-DEFS = -DVERSION=\"$(VERSION)\" #-DSPAWN_SHELL
+DEFS = -DVERSION=\"$(VERSION)\" -DSPAWN_SHELL
 
 COMPILE = $(CC) $(DEFS) $(CFLAGS)
 
@@ -122,6 +122,9 @@ STAGE1OBJS-NETWORK = $(subst .c,-NETWORK.o,$(STAGE1SRC) $(NETWORKSRC))
 NETWORK_DEFS = -DDISABLE_CDROM -DDISABLE_DISK
 
 
+STAGE1OBJS-USBNET = $(subst .c,-USBNET.o,$(STAGE1SRC) $(NETWORKSRC))
+
+
 STAGE1OBJS-FULL = $(subst .c,-FULL.o,$(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC))
 
 
@@ -141,13 +144,13 @@ endif
 BINS = init stage1-full
 
 ifeq (i386, $(ARCH))
-BINS += stage1-cdrom stage1-disk stage1-network
+BINS += stage1-cdrom stage1-disk stage1-network stage1-usbnet
 endif
 
 ifneq (ia64, $(ARCH))
 DIRS = dietlibc
 endif
-DIRS += mar pci-resource bzlib $(INSMOD) slang newt ppp/pppd rp-pppoe/src
+DIRS += mar pci-resource usb-resource bzlib $(INSMOD) slang newt ppp/pppd rp-pppoe/src
 ifeq (i386,$(ARCH))
 DIRS += pcmcia
 endif
@@ -160,6 +163,9 @@ PCMCIA_LIB = $($(L)_PCMCIA_LIB)
 PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
 
+
+USBNET_DEFS_GEN = -DENABLE_USB -DENABLE_USBNET
+USBNET_DEFS = $(USBNET_DEFS_GEN) -DDISABLE_PCINET
 
 all: dirs $(BINS)
 
@@ -184,6 +190,10 @@ stage1-network: $(STAGE1OBJS-NETWORK) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) 
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
+stage1-usbnet: $(STAGE1OBJS-USBNET) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(STAGE1_LIBC)
+	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
+	$(STRIPCMD) $@
+
 stage1-full: $(STAGE1OBJS-FULL) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(PCMCIA_LIB) $(STAGE1_LIBC)
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
@@ -201,8 +211,11 @@ $(STAGE1OBJS-DISK): %-DISK.o: %.c
 $(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c
 	$(COMPILE) $(INCLUDES) $(NETWORK_DEFS) -c $< -o $@
 
+$(STAGE1OBJS-USBNET): %-USBNET.o: %.c
+	$(COMPILE) $(INCLUDES) $(NETWORK_DEFS) $(USBNET_DEFS) -c $< -o $@
+
 $(STAGE1OBJS-FULL): %-FULL.o: %.c
-	$(COMPILE) $(INCLUDES) $(PCMCIA_DEFS) -c $< -o $@
+	$(COMPILE) $(INCLUDES) $(USBNET_DEFS_GEN) $(PCMCIA_DEFS) -c $< -o $@
 
 .c.o:
 	$(COMPILE) $(INCLUDES) -c $<
@@ -238,3 +251,8 @@ endif
 *-DISK.o: %-DISK.o: %.o
 
 *-NETWORK.o: %-NETWORK.o: %.o
+
+*-USBNET.o: %-USBNET.o: %.o
+
+*-FULL.o: %-FULL.o: %.o
+
