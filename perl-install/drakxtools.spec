@@ -369,13 +369,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %changelog
 * Wed Mar  2 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.35mdk
 - drakboot (pixel):
-  o fix  corrupted "Precise RAM size" field (#13874)
+  o fix corrupted "Precise RAM size" field (#13874)
   o handle boot-as and master-boot (#13846)
-- drakconnect:
-  o workaround buggy kernel (#12609)
+- drakconnect: workaround buggy kernel (#12609)
 - net_applet: refresh every second, and do not reread network conf on
   each refresh (blino, #11467)
-- printerdrake:
+- printerdrake (till):
   o add possibility to add a remote LPD printer in beginner's mode (#13734)
   o fix incorrect display of accentuated characters in PPD options
     also for boolean options (#13928)
