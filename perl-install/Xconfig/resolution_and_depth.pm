@@ -305,7 +305,7 @@ sub choose_gtk {
 
     find { $_->{X} == $chosen_x_res && 
 	   $_->{Y} == $chosen_y_res && 
-	   $_->{Depth} == $chosen_Depth } @resolutions);
+	   $_->{Depth} == $chosen_Depth } @resolutions;
 }
 
 1;
