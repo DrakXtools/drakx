@@ -1397,14 +1397,14 @@ sub get_descr_from_ppd {
     my %ppd;
 
     #- if there is no ppd, this means this is a raw queue.
-    local *F; open F, "$::prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd" or return "|" . N("Unknown model");
-    # "OTHERS|Generic PostScript printer|PostScript (en)";
-    local $_;
-    while (<F>) {
-	/^\*([^\s:]*)\s*:\s*\"([^\"]*)\"/ and do { $ppd{$1} = $2; next };
-	/^\*([^\s:]*)\s*:\s*([^\s\"]*)/   and do { $ppd{$1} = $2; next };
-    }
-    close F;
+    eval {
+	   local $_;
+	   foreach (cat_("$::prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd")) {
+		  # "OTHERS|Generic PostScript printer|PostScript (en)";
+		  /^\*([^\s:]*)\s*:\s*\"([^\"]*)\"/ and do { $ppd{$1} = $2; next };
+		  /^\*([^\s:]*)\s*:\s*([^\s\"]*)/   and do { $ppd{$1} = $2; next };
+	   }
+    } or return "|" . N("Unknown model");
 
     my $descr = ($ppd{NickName} || $ppd{ShortNickName} || $ppd{ModelName});
     # Apply the beautifying rules of poll_ppd_base
@@ -1435,9 +1435,7 @@ sub get_descr_from_ppd {
     my $lang = $ppd{LanguageVersion};
 
     # Remove manufacturer's name from the beginning of the model name
-    if ($make && $model =~ /^$make[\s\-]+([^\s\-].*)$/) {
-	$model = $1;
-    }
+    $model = s/^$make[\s\-]+// if $make;
 
     # Put out the resulting description string
     uc($make) . '|' . $model . '|' . $driver .
