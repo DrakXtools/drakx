@@ -338,6 +338,29 @@ sub create_list {
     };
 }
 
+#- $actions is a ref list of $action
+#- $action is a { kind => $kind, action => sub { ... }, button => Gtk2::Button->new(...) }
+#-   where $kind is one of '', 'modify', 'remove', 'add'
+sub add_modify_remove_action {
+    my ($button, $buttons, $e, $treelist) = @_;
+
+    if (member($button->{kind}, 'modify', 'remove')) {
+	@{$e->{list}} or return;
+    }
+    my $r = $button->{action}->(${$e->{val}});
+    defined $r or return;
+    
+    if ($button->{kind} eq 'add') {
+	${$e->{val}} = $r;
+    } elsif ($button->{kind} eq 'remove') {
+	${$e->{val}} = $e->{list}[0];
+    }
+    ugtk2::gtk_set_treelist($treelist, [ map { may_apply($e->{format}, $_) } @{$e->{list}} ]);
+    $_->{button}->set_sensitive(@{$e->{list}} != ()) foreach 
+      grep { member($_->{kind}, 'modify', 'remove') } @$buttons;
+    1;
+}
+
 sub ask_fromW {
     my ($o, $common, $l, $l2) = @_;
     my $ignore = 0; #-to handle recursivity
@@ -442,39 +465,27 @@ sub ask_fromW {
 	    $e->{formatted_list} = [ map { may_apply($e->{format}, $_) } @{$e->{list}} ];
 
 	    if (my $actions = $e->{add_modify_remove}) {
-		my %buttons;
-		my $do_action = sub {
-		    @{$e->{list}} || $_[0] eq 'Add' or return;
-		    my $r = $actions->{$_[0]}->(${$e->{val}});
-		    defined $r or return;
+		my @buttons = map {
+		    { kind => lc $_, action => $actions->{$_}, button => Gtk2::Button->new(translate($_)) };
+		} N_("Add"), N_("Modify"), N_("Remove");
+		my $modify = find { $_->{kind} eq 'modify' } @buttons;
 
-		    if ($_[0] eq 'Add') {
-			${$e->{val}} = $r;
-		    } elsif ($_[0] eq 'Remove') {
-			${$e->{val}} = $e->{list}[0];
-		    }
-		    $e->{formatted_list} = [ map { may_apply($e->{format}, $_) } @{$e->{list}} ];
-		    my $list = $w->get_model;
-		    $list->clear;
-		    $list->append_set([ 0 => $_ ]) foreach @{$e->{formatted_list}};
-		    $changed->();
-		    $buttons{$_}->set_sensitive(@{$e->{list}} != ()) foreach 'Modify', 'Remove';
+		my $do_action = sub {
+		    my ($button) = @_;
+		    add_modify_remove_action($button, \@buttons, $e, $w) and $changed->();
 		};
-		my @actions = (N_("Add"), N_("Modify"), N_("Remove"));
 
 		($w, $set, $focus_w) = create_treeview_list($e, $may_go_to_next, $changed, 
-							    sub { $do_action->('Modify') if $_[1]->type =~ /^2/ });
+							    sub { $do_action->($modify) if $_[1]->type =~ /^2/ });
 		$e->{saved_default_val} = ${$e->{val}};
 
-		%buttons = map {
-		    my $action = $_;
-		    $action => gtksignal_connect(Gtk2::Button->new(translate($action)),
-						 clicked => sub { $do_action->($action) });
-		} @actions;
+		foreach my $button (@buttons) {
+		    $button->{button}->signal_connect(clicked => sub { $do_action->($button) });
+		}
 		$w->set_size_request(400, -1);
 		$real_w = gtkpack_(Gtk2::HBox->new(0,0),
 				   1, create_scrolled_window($w), 
-				   0, gtkpack__(Gtk2::VBox->new(0,0), map { $buttons{$_} } @actions));
+				   0, gtkpack__(Gtk2::VBox->new(0,0), map { $_->{button} } @buttons));
 		$real_w->set_data(must_grow => 1)
 	    } else {
 
