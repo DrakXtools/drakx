@@ -986,8 +986,9 @@ sub write {
 }
 
 sub bindtextdomain() {
-    my $localedir = "$ENV{SHARE_PATH}/locale";
-    $localedir .= "_special" if $::isInstall;
+    #- if $::prefix is set, search for libDrakX.mo in locale_special
+    #- NB: not using $::isInstall to make it work more easily at install and standalone
+    my $localedir = "$ENV{SHARE_PATH}/locale" . ($::prefix ? "_special" : '');
 
     c::setlocale();
     c::bind_textdomain_codeset('libDrakX', 'UTF-8');
