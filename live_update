@@ -23,7 +23,11 @@ You need to be root to start this program." ;;
     exit 3
 fi
 
-if [ ! -x "/mnt/cdrom/Mandrake/mdkinst/usr/bin/perl-install/live_install" ]; then
+distrib=`pwd`;
+if [ ! -x "$distrib/Mandrake/mdkinst/usr/bin/perl-install/live_install" ]; then
+    distrib="/mnt/cdrom"
+fi
+if [ ! -x "$distrib/Mandrake/mdkinst/usr/bin/perl-install/live_install" ]; then
     if [ -x "$message" ]; then
 	case "$LANG" in
 	    fr*) buttons="Arrêter:0"
@@ -69,5 +73,5 @@ take some time to prepare the system before DrakX screen appears.
 Press CTRL-C to avoid upgrading your system this way."
 fi
 
-cd /mnt/cdrom/Mandrake/mdkinst/usr/bin/perl-install && exec ./live_install
+cd "$distrib/Mandrake/mdkinst/usr/bin/perl-install" && exec ./live_install
 exit 2
