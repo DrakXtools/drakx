@@ -290,6 +290,12 @@ sub install {
 
     if (my @probs = c::rpmRunTransactions($trans, $callbackOpen, $callbackClose, 
 					  $callbackStart, $callbackProgress, $force)) {
+	my %parts;
+	@probs = reverse grep {
+	    if (s/(installing package) .* (needs (?:.*) on the (.*) filesystem)/$1 $2/) {
+		$parts{$3} ? 0 : ($parts{$3} = 1);
+	    } else { 1; }
+	} reverse @probs;
 	die "installation of rpms failed:\n  ", join("\n  ", @probs);
     }
     c::rpmtransFree($trans); 

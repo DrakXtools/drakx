@@ -232,16 +232,10 @@ sub addUser($) {
     my $p = $o->{prefix};
     my @passwd = cat_("$p/etc/passwd");;
 
-    !$u{name} || member($u{name}, map { (split ':')[0] } @passwd) and return;
+    !$u{name} || getpwnam($u{name}) and return;
 
-    unless ($u{uid}) {
-	my @uids = map { (split ':')[2] } @passwd;
-	for ($u{uid} = 500; member($u{uid}, @uids); $u{uid}++) {}    
-    }    
-    unless ($u{gid}) {
-	my @gids = map { (split ':')[2] } cat_("$p/etc/group");
-	for ($u{gid} = 500; member($u{gid}, @gids); $u{gid}++) {}
-    }
+    for ($u{uid} = 500; getpwuid($u{uid}); $u{uid}++) {}
+    for ($u{gid} = 500; getgrgid($u{gid}); $u{gid}++) {}
     $u{home} ||= "/home/$u{name}";
 
     $u{password} = crypt_($u{password}) if $u{password};

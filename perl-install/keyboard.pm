@@ -114,7 +114,7 @@ sub setup($) {
 	log::l("loading keymap $o->[1]");
 	load(cat_($file));
     }
-    eval { run_program::run('xmodmap', "/usr/share/xmodmap/xmodmap.$o->[2]") };
+    eval { run_program::run('xmodmap', "/usr/share/xmodmap/xmodmap.$o->[2]") } unless $::testing;
 }
 
 sub write($$) {

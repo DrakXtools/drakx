@@ -76,7 +76,7 @@ sub ask_many_from_list_refW($$$$$) {
 
 sub ask_from_entries_refW {
     my ($o, $title, $messages, $l, $val, %hcallback) = @_;
-    my $num_champs = @{$l};
+    my $num_fields = @{$l};
     my $ignore = 0; #to handle recursivity 
 
     my $w       = my_gtk->new($title, %$o);
@@ -101,7 +101,7 @@ sub ask_from_entries_refW {
 
     my @updates = mapn { 
 	my ($entry, $ref) = @_;
-	return sub { ${$ref->{val}} = comb_entry($entry, $ref)->get_text };
+	sub { ${$ref->{val}} = comb_entry($entry, $ref)->get_text };
     } \@entries, $val;
 
     my @updates_inv = mapn { 
@@ -111,7 +111,7 @@ sub ask_from_entries_refW {
     } \@entries, $val;
 
 
-    for (my $i = 0; $i < $num_champs; $i++) {
+    for (my $i = 0; $i < $num_fields; $i++) {
 	my $ind = $i; #cos lexical bindings pb !!
 	my $entry = $entries[$i];
 	#changed callback
@@ -122,7 +122,7 @@ sub ask_from_entries_refW {
 		&{$hcallback{changed}}($ind);
 		#update all the value
 		$ignore = 1;
-		foreach (@updates_inv) { &{$_};}
+		&$_ foreach @updates_inv;
 		$ignore = 0;
 	    };
 	};
@@ -139,7 +139,7 @@ sub ask_from_entries_refW {
 	}
 	comb_entry($entry,$val->[$i])->signal_connect(changed => $callback);
 	comb_entry($entry,$val->[$i])->signal_connect(activate => sub {
-				   ($ind == ($num_champs -1)) ?
+				   ($ind == ($num_fields -1)) ?
 				     ($w->{ok}->grab_focus(), ) : (comb_entry($entries[$ind+1],$val->[$ind+1])->grab_focus(),$_[0]->signal_emit_stop("activate")) ;
 			       });
 	comb_entry($entry,$val->[$i])->set_text(${$val->[$i]{val}})  if ${$val->[$i]{val}};
