@@ -66,7 +66,7 @@ our @tree =
                       member($_->{driver}, qw(cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp pwc ultracam usbvideo)) } @devices) },
        0 ],
      [ "CPU", , N("Processors"), "cpu.png", "", sub { detect_devices::getCPUs() }, 0 ],
-     [ "ISDN", , N("ISDN adapters"), "modem.png", "$sbindir/drakconnect", sub { require network::isdn; f(network::isdn::isdn_detect_backend) }, 0 ],
+     [ "ISDN", , N("ISDN adapters"), "modem.png", "$sbindir/drakconnect", sub { require network::isdn; my $isdn = network::isdn::isdn_detect_backend; if_(@$isdn, f(@$isdn)) }, 0 ],
      [ "ETHERNET", , N("Ethernetcard"), "hw_network.png", "$sbindir/drakconnect", sub {
          #- generic NIC detection for USB seems broken (class, subclass, 
          #- protocol report are not accurate) so I'll need to verify against
