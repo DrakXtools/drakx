@@ -132,6 +132,7 @@ you want by clicking on it in the menu on the left. Otherwise,
 choose a mouse type in the menu which you think is the closest
 match for your mouse.
 
+
 In case of a serial mouse, you will also have to tell DrakX
 which serial port it is connected to."),
 
@@ -174,8 +175,10 @@ configureNetworkIP =>
 
   - IP address: if you don't know it, ask your network administrator.
 
+
   - Netmask: \"255.255.255.0\" is generally a good choice. If you are not
 sure, ask your network administrator.
+
 
   - Automatic IP: If your network uses bootp or dhcpd protocol, select 
 this option. If selected, no value is needed in \"IP address\". If you are
@@ -297,6 +300,7 @@ setupBootloaderAddEntry =>
 Normally they are correctly detected during installation. If you don't
 see yours detected, you can add one or more now.
 
+
 If you won't everybody can assess at one of them, you can remove it now
 (a boot disk will be needed to boot it)."),
 
@@ -305,6 +309,7 @@ setupBootloaderGeneral =>
   - Boot device: Sets the name of the device (e.g. a hard disk
 partition) that contains the boot sector. Unless you know specifically
 otherwise, choose \"/dev/hda\".
+
 
   - Linear: Generate linear sector addresses instead of
 sector/head/cylinder addresses. Linear addresses are translated at run
@@ -315,16 +320,19 @@ disk geometry does not work reliably for floppy  disks. When using
 inaccessible disk areas, because 3D sector addresses are not known
 before boot time.
 
+
   - Compact: Tries to merge read requests for adjacent sectors into a
 single read request. This drastically reduces load time and keeps the
 map smaller. Using \"compact\" is especially recommended when booting from
 a floppy disk.
+
 
   - Delay before booting default image: Specifies the number in tenths
 of a second the boot loader should wait before booting the first image.
 This is useful on systems that immediately boot from the hard disk after
 enabling the keyboard. The boot loader doesn't wait if \"delay\" is
 omitted or is set to zero.
+
 
   - Video mode: This specifies the VGA text mode that should be selected
 when booting. The following values are available: 
@@ -359,18 +367,22 @@ miscellaneous =>
 accesses but is only for advanced users, it can ruin your hard drive if
 used incorrectly. Use it only if you know how.
 
+
   - Choose security level: You can choose a security level for your
 system.
     Please refer to the manual for more information.
+
 
   - Precise RAM size if needed: In some cases, Linux is unable to
 correctly detect all the installed RAM on  some systems. If this is the
 case, specify the correct quantity. Note: a difference of 2 or 4 Mb is
 normal.
 
+
   - Removable media automounting: If you would prefer not to manually
 mount removable drives (CD-ROM, Floppy, Zip) by typing \"mount and
 \"umount\", select this option. 
+
 
   - Enable Num Lock at startup: If you want Number Lock enabled after
 booting, select this option (Note: Num Lock will still not work under
