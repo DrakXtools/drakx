@@ -40,7 +40,7 @@ our @tree =
 	 sub {grep { $_->{media_type} =~ 'MULTIMEDIA_AUDIO' } @devices}],
 #	"MULTIMEDIA_AUDIO" => "/usr/bin/X11/sounddrake";
 	["WEBCAM","Webcam", "webcam.png", "", sub {}],
-	["ETHERNET","Ethernetcard", "hw_network.png", "$sbindir/drakconnet", sub {
+	["ETHERNET","Ethernetcard", "hw_network.png", "$sbindir/drakconnect", sub {
 	    #- generic NIC detection for USB seems broken (class, subclass, 
 	    #- protocol report are not accurate) so I'll need to verify against
 	    #- known drivers :-(
