@@ -39,7 +39,7 @@ sub load {
 	dependencies_closure($name);
     } @_;
 
-    @l = difference2([ uniq(@l) ], [ loaded_modules() ]) or return;
+    @l = difference2([ uniq(@l) ], [ map { my $s = $_; $s =~ s/_/-/g; $s, $_ } loaded_modules() ]) or return;
 
     my $network_module = do {
 	my ($network_modules, $other) = partition { module2category($_) =~ m,network/(main|gigabit|usb), } @l;
@@ -127,10 +127,6 @@ sub probe_category {
 	    member($_->{driver}, @modules);
 	}
     } detect_devices::probeall();
-}
-
-sub load_ide() {
-    eval { load("ide-cd") }
 }
 
 
