@@ -249,10 +249,10 @@ sub usb_probe {
 }
 
 sub pcmcia_probe {
-    -e "/var/run/stab" or return ();
+    -e '/var/run/stab' || -e '/var/lib/pcmcia/stab' or return ();
 
     my (@devs, $desc);
-    foreach (cat_("/var/run/stab")) {
+    foreach (cat_('/var/run/stab'), cat_('/var/lib/pcmcia/stab')) {
 	if (/^Socket\s+\d+:\s+(.*)/) {
 	    $desc = $1;
 	} else {
