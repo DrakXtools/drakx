@@ -66,7 +66,6 @@
 # TODO:
 #     - abiword, Koffice, Gnumeric, ...  
 #     - Speedo  and Bitmap (PCF, BDF, and SNF)
-#     - option strong: strong verification with ttmkfdir -c ?
 #                
 # REQUIRE:
 #     - font-tools.*.mdk.i586.rpm
@@ -95,7 +94,6 @@ require_root_capability();
 #   global variables needed by each functions
 my $xlsfonts = 0;
 my $windows  = 0;
-my $strong;
 my $replace;
 my $so      = 1;
 my $gs      = 1;
@@ -124,7 +122,6 @@ foreach (@ARGV) {
     /--list|-l/            and $list_all_font_path = 1, $mode = -1;
     /--xls_fonts/          and $xlsfonts           = 1, $mode = -1;
     /--windows_import|-wi/ and $windows            = 1, $mode = -1;
-    /--strong|-s/          and $strong             = 1, $mode = -1;
     /--replace|-r/         and $replace            = 1, $mode = -1;
     /--application/        and $mode               = 0, next;
     $mode == 0 and push @application, $_;
