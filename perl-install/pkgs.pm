@@ -788,6 +788,41 @@ sub versionCompare($$) {
     }
 }
 
+sub selectPackagesAlreadyInstalled {
+    my ($packages, $prefix) = @_;
+
+    log::l("reading /usr/lib/rpm/rpmrc");
+    c::rpmReadConfigFiles() or die "can't read rpm config files";
+    log::l("\tdone");
+
+    my $db = c::rpmdbOpenForTraversal($prefix) or die "unable to open $prefix/var/lib/rpm/packages.rpm";
+    log::l("opened rpm database for examining existing packages");
+
+    #- this method has only one objectif, check the presence of packages
+    #- already installed and avoid installing them again. this is to be used
+    #- with oem installation, if the database exists, preselect the packages
+    #- installed WHATEVER their version/release (log if a problem is perceived
+    #- is enough).
+    c::rpmdbTraverse($db, sub {
+			 my ($header) = @_;
+			 my $p = $packages->[0]{c::headerGetEntry($header, 'name')};
+
+			 if ($p) {
+			     my $version_cmp = versionCompare(c::headerGetEntry($header, 'version'), packageVersion($p));
+			     my $version_rel_test = $version_cmp > 0 || $version_cmp == 0 &&
+			       versionCompare(c::headerGetEntry($header, 'release'), packageRelease($p)) >= 0;
+			     $version_rel_test or log::l("keeping an older package, avoiding selecting $p->{file}");
+			     packageSetFlagInstalled($p, 1);
+			 }
+		     });
+
+    log::l("before closing db");
+    #- close db, job finished !
+    c::rpmdbClose($db);
+    log::l("done selecting packages to upgrade");
+
+}
+
 sub selectPackagesToUpgrade($$$;$$) {
     my ($packages, $prefix, $base, $toRemove, $toSave) = @_;
 
