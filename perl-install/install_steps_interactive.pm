@@ -750,7 +750,7 @@ sub setRootPassword {
 
     $o->set_help("setRootPassword", 
 		 if_($o->{installClass} =~ "server" || $::expert, "setRootPasswordMd5"),
-		 if_(!$::beginner, "setRootPasswordNIS");
+		 if_(!$::beginner, "setRootPasswordNIS"));
 
     $o->ask_from_entries_refH([_("Set root password"), _("Ok"), if_($o->{security} <= 2 && !$::corporate, _("No password"))],
 			 [ _("Set root password"), "\n" ], [
