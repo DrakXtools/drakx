@@ -106,15 +106,12 @@ my $splash_mode = !$no_bootsplash;
 my $keep_logo = 1;
 
 if (-r $themes{sysconfig}) {
-    my $SYSF;
-    open $SYSF, $themes{sysconfig} or die "Can't open $themes{sysconfig}\n";
-    while (<$SYSF>) {
-        local $_;
+    local $_;
+    while (cat_("$themes{sysconfig}") {
 	/^SPLASH=no/ and $splash_mode = 0;
 	/^THEME=(.*)/ and  -f "$themes{path}$1$themes{boot}{path}bootsplash-$cur_res.jpg" and $themes{default} = $1;
 	/^LOGO_CONSOLE=(.*)/ and $keep_logo = $1 ne 'no';
     }
-    close($SYSF);
 }
 
 my @boot_thms = if_(!$themes{default}, qw(default));
