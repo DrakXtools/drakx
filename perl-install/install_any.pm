@@ -876,7 +876,8 @@ sub loadO {
     } else {
 	-e "$f.pl" and $f .= ".pl" unless -e $f;
 
-	my $fh = -e $f ? do { local *F; open F, $f; *F } : getFile($f) or die _("Error reading file %s", $f);
+	local *F; #- keep it outside the following do else filehandle will be closed before reading.
+	my $fh = -e $f ? do { open F, $f; *F } : getFile($f) or die _("Error reading file %s", $f);
 	{
 	    local $/ = "\0";
 	    no strict;
@@ -884,9 +885,10 @@ sub loadO {
 	    close $fh;
 	    $@ and die;
 	}
-	add2hash_($o ||= {}, $O);
+	$O and add2hash_($o ||= {}, $O);
     }
-    bless $o, ref $O;
+    $O and bless $o, ref $O;
+    $o;
 }
 
 sub generate_automatic_stage1_params {
