@@ -743,22 +743,26 @@ I cannot set up this connection type.")), return;
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''.
 You may also enter the IP address of the gateway if you have one."),
-                    data =>
-                    [ { label => N("Host name"), val => \$netc->{HOSTNAME} },
-                      { label => N("DNS server 1"),  val => \$netc->{dnsServer} },
-                      { label => N("DNS server 2"),  val => \$netc->{dnsServer2} },
-                      { label => N("DNS server 3"),  val => \$netc->{dnsServer3} },
-                      { label => N("Search domain"), val => \$netc->{DOMAINNAME}, 
-                        help => N("By default search domain will be set from the fully-qualified host name") },
-                      { label => N("Gateway (e.g. %s)", $gateway_ex), val => \$netc->{GATEWAY} },
-                      if_(@devices > 1,
-                          { label => N("Gateway device"), val => \$netc->{GATEWAYDEV}, list => \@devices },
-                         ),
-                    ],
+                    data => sub {
+                        [ if_(!$auto_ip, { label => N("Host name"), val => \$netc->{HOSTNAME} }),
+                          { label => N("DNS server 1"),  val => \$netc->{dnsServer} },
+                          { label => N("DNS server 2"),  val => \$netc->{dnsServer2} },
+                          { label => N("DNS server 3"),  val => \$netc->{dnsServer3} },
+                          { label => N("Search domain"), val => \$netc->{DOMAINNAME}, 
+                            help => N("By default search domain will be set from the fully-qualified host name") },
+                          if_(!$auto_ip, { label => N("Gateway (e.g. %s)", $gateway_ex), val => \$netc->{GATEWAY} },
+                              if_(@devices > 1,
+                                  { label => N("Gateway device"), val => \$netc->{GATEWAYDEV}, list => \@devices },
+                                 ),
+                             ),
+                        ],
+                    },
                     complete => sub {
-                        if ($netc->{dnsServer} && !is_ip($netc->{dnsServer})) {
-                            $in->ask_warn('', N("DNS server address should be in format 1.2.3.4"));
-                            return 1;
+                        foreach my $dns (qw(dnsServer dnsServer2 dnsServer3)) {
+                            if ($netc->{$dns} && !is_ip($netc->{$dns})) {
+                                $in->ask_warn(N("Error"), N("DNS server address should be in format 1.2.3.4"));
+                                return 1;
+                            }
                         }
                         if ($netc->{GATEWAY} && !is_ip($netc->{GATEWAY})) {
                             $in->ask_warn('', N("Gateway address should be in format 1.2.3.4"));
