@@ -592,8 +592,9 @@ sub ask_fromW {
     @widgets_always   = map_index { $create_widget->($_, $::i)       } @$l;
     @widgets_advanced = map_index { $create_widget->($_, $::i + @$l) } @$l2;
 
+    $mainw->{box_allow_grow} = !@$l;
     my $pack = create_box_with_title($mainw, @{$common->{messages}});
-    ugtk2::set_main_window_size($mainw) if $mainw->{pop_it} && @$l;
+    ugtk2::set_main_window_size($mainw) if $mainw->{pop_it} && (@$l || $mainw->{box_size} == 200);
 
     my @before_widgets_advanced = (
 	  (map { { grow => 0, real_w => Gtk2::WrappedLabel->new($_) } } @{$common->{advanced_messages}}),
