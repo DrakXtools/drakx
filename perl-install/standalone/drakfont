@@ -293,9 +293,9 @@ sub search_dir_font() {
     !@font_list && $interactive and display_error(N("could not find any font.\n"));
 }
 
-sub search_dir_font_uninstall() {
+sub search_dir_font_uninstall {
+    my ($fn)  = @_;
     my @font_list_tmp;
-    my $fn  = $_;
     if (-d $fn) {
         foreach my $i (all($fn)) {
             push @font_list_tmp, $i if is_a_font($i);
@@ -323,18 +323,18 @@ sub print_list() {
 }
 
 sub dir_created() {
-    -e $drakfont_dir || mkdir_p($drakfont_dir);
-    -e $drakfont_dir . "/Type1"     || mkdir_p($drakfont_dir . "/Type1");
-    -e $drakfont_dir . "/ttf"       || mkdir_p($drakfont_dir . "/ttf");
-    -e $drakfont_dir . "/tmp"       || mkdir_p($drakfont_dir . "/tmp");
-    -e $drakfont_dir . "/tmp/ttf"   || mkdir_p($drakfont_dir . "/tmp/ttf");
-    -e $drakfont_dir . "/tmp/Type1" || mkdir_p($drakfont_dir . "/tmp/Type1");
-    -e $drakfont_dir . "/tmp/tmp"   || mkdir_p($drakfont_dir . "/tmp/tmp");
+    -e $drakfont_dir or mkdir_p($drakfont_dir);
+    -e $drakfont_dir . "/Type1"     or mkdir_p($drakfont_dir . "/Type1");
+    -e $drakfont_dir . "/ttf"       or mkdir_p($drakfont_dir . "/ttf");
+    -e $drakfont_dir . "/tmp"       or mkdir_p($drakfont_dir . "/tmp");
+    -e $drakfont_dir . "/tmp/ttf"   or mkdir_p($drakfont_dir . "/tmp/ttf");
+    -e $drakfont_dir . "/tmp/Type1" or mkdir_p($drakfont_dir . "/tmp/Type1");
+    -e $drakfont_dir . "/tmp/tmp"   or mkdir_p($drakfont_dir . "/tmp/tmp");
 }
 
 sub put_font_dir() {
     my @tmpl;
-    -e "/usr/share/ghostscript" or $gs = 0 && print "ghostscript is not installed on your system...\n";
+    -e "/usr/share/ghostscript" or do { $gs = 0; print "ghostscript is not installed on your system...\n" };
     if (@font_list) {
         dir_created();
         foreach my $i (@font_list) {
@@ -441,11 +441,11 @@ sub remove_gs_fonts() {
 
 sub remove_fonts() {
     my @list_dir;
-    -e $drakfont_dir . "/remove" || mkdir_p($drakfont_dir . "/remove");
+    -e $drakfont_dir . "/remove" or mkdir_p($drakfont_dir . "/remove");
     $interactive and progress($pbar, 1, N("done"));
     
     foreach my $i (@font_list) {
-        $_ = $i;
+        local $_ = $i;
         if (/.pfb$/ || /.gsf$/ || /.pfm$/ || /.pfa$/) {
             system("mv $_ $drakfont_dir/remove ");
         }
@@ -484,8 +484,8 @@ sub license_msg() {
 }
 
 sub backend_mod() {
-    $xlsfonts && system("xlsfonts");
-    $list_all_font_path && system($chkfontpath);
+    $xlsfonts and system("xlsfonts");
+    $list_all_font_path and system($chkfontpath);
 
     if ($windows) {
         license_msg();
@@ -524,7 +524,7 @@ sub create_fontsel() {
     $central_widget = \$font_sel;
 }
 
-sub display_error() {
+sub display_error {
     my ($message) = @_;
     my $error_box;
     $$central_widget->destroy();
