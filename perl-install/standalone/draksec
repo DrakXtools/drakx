@@ -146,7 +146,7 @@ $window->add(my $vbox = gtkshow(new Gtk2::VBox(0, 0)));
 # Create the notebook (for bookmarks at the top)
 my $notebook = create_notebook();
 
-my $common_opts = { col_spacings => 10, row_spacings => 5, homogenous => 1 };
+my $common_opts = { col_spacings => 10, row_spacings => 5 };
 
 ######################## BASIC OPTIONS PAGE ################################
 my ($seclevel_entry, $secadmin_entry);
@@ -207,12 +207,7 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                            }
                                                                                            $entry->set_text(to_i18n($msec->get_function_value($opt)));
                                                                                            set_help_tip($entry, $default, $opt);
-                                                                                           [ gtkset_size_request(gtkpack_(Gtk2::HBox->new,
-                                                                                                                          0, new_wrapped_label($i), 
-                                                                                                                          1, $values{$i}
-                                                                                                                         ), 50, -1
-                                                                                                                )
-                                                                                           ]
+                                                                                           [ new_wrapped_label($i), resize($values{$i}) ];
                                                                                        } sort map { $fields{$_} || $_ } $msec->list_functions($domain))),
                                                           [ 'never', 'automatic' ],
                                                          )
