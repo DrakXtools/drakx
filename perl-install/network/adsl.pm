@@ -98,6 +98,7 @@ sub sagem_set_parameters {
     my %l = map { $_ => sprintf("%08s", $netc->{$_}) } qw(vci vpi Encapsulation);
     foreach my $cfg_file (qw(/etc/analog/adiusbadsl.conf /etc/eagle-usb/eagle-usb.conf)) {
         substInFile {
+            s/Linetype.*\n/=Linetype=0000000A\n/; #- use CMVs
             s/VCI=.*\n/VCI=$l{vci}\n/;
             s/VPI=.*\n/VPI=$l{vpi}\n/;
             s/Encapsulation=.*\n/Encapsulation=$l{Encapsulation}\n/;
