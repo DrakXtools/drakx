@@ -18,6 +18,8 @@ sub unknown {
 # NEVER, NEVER alter CLASS_ID or you'll harddrake2 service to detect changes
 # in hw configuration ... :-(
 
+my @devices = detect_devices::probeall(1);
+
 our @tree =
     (
 	["FLOPPY","Floppy", "floppy.png", "",\&detect_devices::floppies],
@@ -27,11 +29,11 @@ our @tree =
 #	["CDBURNER","Cd burners", "cd.png", "", \&detect_devices::burners],
 
 	["VIDEO","Videocard", "video.png", "$sbindir/XFdrake", 
-	 sub {grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ 'DISPLAY_VGA' } detect_devices::probeall(1) }],
+	 sub {grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ 'DISPLAY_VGA' } @devices }],
 	["TV","Tvcard", "tv.png", "/usr/bin/XawTV", 
-	 sub {grep { $_->{media_type} =~ 'MULTIMEDIA_VIDEO' } detect_devices::probeall(1)}],
+	 sub {grep { $_->{media_type} =~ 'MULTIMEDIA_VIDEO' } @devices}],
 	["AUDIO","Soundcard", "sound.png", "$bindir/aumix", 
-	 sub {grep { $_->{media_type} =~ 'MULTIMEDIA_AUDIO' } detect_devices::probeall(1)}],
+	 sub {grep { $_->{media_type} =~ 'MULTIMEDIA_AUDIO' } @devices}],
 #	"MULTIMEDIA_AUDIO" => "/usr/bin/X11/sounddrake";
 	["WEBCAM","Webcam", "webcam.png", "", sub {}],
 	["ETHERNET","Ethernetcard", "hw_network.png", "$sbindir/draknet", sub {
@@ -41,15 +43,13 @@ our @tree =
 	    my @usbnet = qw/CDCEther catc kaweth pegasus usbnet/;
 	    # should be taken from detect_devices.pm or modules.pm. it's identical
 	    
-	    grep { $_->{media_type} =~ /^NETWORK/ || 
-				member($_->{driver}, @usbnet)
-			 } detect_devices::probeall(1)}],
+	    grep { $_->{media_type} =~ /^NETWORK/ || member($_->{driver}, @usbnet) } @devices}],
 #	["","Tokenring cards", "Ethernetcard.png", "", \&detect_devices::getNet],
 #	["","FDDI cards", "Ethernetcard.png", "", \&detect_devices::getNet],
 #	["","Modem", "Modem.png", "", \&detect_devices::getNet],
 #	["","Isdn", "", "", \&detect_devices::getNet]
 
-	["BRIDGE","Bridge", "memory.png", "", sub {grep { $_->{media_type} =~ 'BRIDGE' } detect_devices::probeall(1)}],
+	["BRIDGE","Bridge", "memory.png", "", sub {grep { $_->{media_type} =~ 'BRIDGE' } @devices}],
 # 	["","Cpu", "cpu.png", "", sub {}],
 #	["","Memory", "memory.png", "", sub {}],
 	["UNKNOWN","Unknown/Others", "unknown.png", "" , \&unknown],
