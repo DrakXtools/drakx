@@ -146,7 +146,7 @@ sub setupBootloader {
 	$b->{vga} ||= 'Normal';
 	if (arch !~ /ppc/) {
 	$in->ask_from_entries_refH('', _("Bootloader main options"), [
-{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], },
+{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },
     arch() =~ /sparc/ ? (
 { label => _("Bootloader installation"), val => \$silo_install_lang, list => \@silo_install_lang },
 ) : (
@@ -177,7 +177,7 @@ sub setupBootloader {
 				) or return 0;
 	} else {
 	$in->ask_from_entries_refH('', _("Bootloader main options"), [
-	{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], },	
+	{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },	
 	{ label => _("Init Message"), val => \$b->{initmsg} },
 	{ label => _("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab))], not_edit => !$::expert },
 	{ label => _("Open Firmware Delay"), val => \$b->{delay} },
