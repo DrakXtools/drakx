@@ -751,6 +751,7 @@ sub ask_browse_tree_info_refW {
 sub wait_messageW($$$) {
     my ($o, $title, $messages) = @_;
 
+    local $my_gtk::pop_it = 1;
     my $w = my_gtk->new($title, %$o, grab => 1);
     gtkadd($w->{window}, my $hbox = new Gtk::HBox(0,0));
     $hbox->pack_start(my $box = new Gtk::VBox(0,0), 1, 1, 10);  
