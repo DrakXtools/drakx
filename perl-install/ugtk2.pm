@@ -2,7 +2,7 @@ package ugtk2;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $wm_icon $force_center_at_pos $force_focus $grab $border); #- leave it on one line, for automatic removal of the line at package creation
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $wm_icon $force_focus $grab $border); #- leave it on one line, for automatic removal of the line at package creation
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -969,19 +969,18 @@ sub _create_window {
 	require install_gtk; #- for perl_checker
 	install_gtk::handle_unsafe_mouse($::o, $w);
 	$w->signal_connect(key_press_event => \&install_gtk::special_shortcuts);
-    }
 
-    if ($force_center_at_pos) {
+	#- force center at a weird position, this can't be handled by position_policy
+	#- because center-on-parent is a window manager hint, and we don't have a WM
 	my ($wi, $he);
-
 	$w->signal_connect(size_allocate => sub {
 	    my (undef, $event) = @_;
 	    my @w_size = $event->values;
 	    return if $w_size[2] == $wi && $w_size[3] == $he; #BUG
 	    (undef, undef, $wi, $he) = @w_size;
-	    
-	    my ($X, $Y, $Wi, $He) = @$force_center_at_pos;
-            $w->set_uposition(max(0, $X + ($Wi - $wi) / 2), max(0, $Y + ($He - $he) / 2));
+
+            $w->set_uposition(max(0, $::rootwidth - ($::windowwidth + $wi) / 2), 
+			      max(0, $::logoheight + ($::windowheight - $he) / 2));
 	});
     }
 

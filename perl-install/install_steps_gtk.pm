@@ -141,7 +141,6 @@ sub new($$) {
     install_gtk::create_steps_window($o);
 
     $ugtk2::grab = 1;
-    $ugtk2::force_center_at_pos = [ $::rootwidth - $::windowwidth, $::logoheight, $::windowwidth, $::windowheight ];
 
     $o = (bless {}, ref($type) || $type)->SUPER::new($o);
     $o->interactive::gtk::new;
