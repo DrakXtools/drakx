@@ -508,15 +508,11 @@ sub choosePackages {
     $min_size < $availableC or die _("Your system does not have enough space left for installation or upgrade (%d > %d)", $min_size, $availableC);
 
     my $min_mark = $::expert ? 3 : 4;
-    my $def_mark = 4; #-TODO: was 59, 59 is for packages that need gl hw acceleration.
 
     my $b = pkgs::saveSelected($packages);
-    pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $def_mark, 0);
-    my $def_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
-    log::l("default size (level $def_mark) is : " . formatXiB($def_size));
     my $level = pkgs::setSelectedFromCompssList($packages, { map { $_ => 1 } map { @{$compssUsers->{$_}{flags}} } @{$o->{compssUsersSorted}} }, $min_mark, 0);
     my $max_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
-    log::l("max size (level $min_mark) is : " . formatXiB($def_size));
+    log::l("max size (level $min_mark) is : " . formatXiB($max_size));
     pkgs::restoreSelected($b);
 
     $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) if !$::corporate;
@@ -529,10 +525,6 @@ sub choosePackages {
     install_any::warnAboutNaughtyServers($o);
 }
 
-sub chooseSizeToInstall {
-    my ($o, $packages, $min, $def, $max, $availableC) = @_;
-    min($def, $availableC * 0.7);
-}
 sub choosePackagesTree {
     my ($o, $packages, $limit_to_medium) = @_;
 
@@ -581,6 +573,12 @@ The format is the same as auto_install generated floppies."),
 sub chooseGroups {
     my ($o, $packages, $compssUsers, $min_level, $individual, $max_size) = @_;
 
+    #- for all groups available, determine package which belongs to each one.
+    #- this will enable getting the size of each groups more quickly due to
+    #- limitation of current implementation.
+    #- use an empty state for each one (no flag update should be propagated).
+    
+#- OLD VERSION
     my $b = pkgs::saveSelected($packages);
     install_any::unselectMostPackages($o);
     pkgs::setSelectedFromCompssList($packages, {}, $min_level, $max_size);
@@ -617,13 +615,13 @@ sub chooseGroups {
     } @groups;
 
 #    @groups = grep { $size{$_} = round_down($size{$_} / sqr(1024), 10) } @groups; #- don't display the empty or small one (eg: because all packages are below $min_level)
-    my ($all, $size);
+    my ($all, $size, $unselect_all);
     my $available_size = install_any::getAvailableSpace($o) / sqr(1024);
     my $size_to_display = sub { 
 	my $lsize = $system_size + $compute_size->(map { @{$compssUsers->{$_}{flags}} } grep { $val{$_} } @groups);
 
 	#- if a profile is deselected, deselect everything (easier than deselecting the profile packages)
-	$size > $lsize and install_any::unselectMostPackages($o);
+	$unselect_all ||= $size > $lsize;
 	$size = $lsize;
 	_("Total size: %d / %d MB", pkgs::correctSize($size / sqr(1024)), $available_size);
     };
@@ -646,6 +644,7 @@ sub chooseGroups {
 
     log::l("compssUsersChoice: " . (!$val{$_} && "not ") . "selected [$_] as [$o->{compssUsers}{$_}{label}]") foreach keys %val;
 
+    $unselect_all and install_any::unselectMostPackages($o);
     #- if no group have been chosen, ask for using base system only, or no X, or normal.
     unless ($o->{isUpgrade} || grep { $val{$_} } keys %val) {
 	my $docs = !$o->{excludedocs};	
@@ -674,7 +673,7 @@ Please choose the minimal installation you want:"),
 	    install_any::setDefaultPackages($o, 'clean');
 	    $o->{compssUsersChoice}{X} = $X;
 	}
-	install_any::unselectMostPackages($o);
+	$unselect_all or install_any::unselectMostPackages($o);
     }
     1;
 }
