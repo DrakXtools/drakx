@@ -360,7 +360,7 @@ sub set_default_options {
 	put_in_hash($options, { 'iocharset=' => $iocharset });
     }
     if (isThisFs('iso9660', $part) || $is_auto) {
-	put_in_hash($options, { user => 1, noexec => 0, });
+	put_in_hash($options, { user => 1, noexec => 0, 'iocharset=' => $iocharset });
     }
     if (isThisFs('reiserfs', $part)) {
 	$options->{notail} = 1;
