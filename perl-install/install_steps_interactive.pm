@@ -898,7 +898,7 @@ been released after the distribution has been made available.
 You will get security fixes or bug fixes, but you need to have an
 Internet connection configured to proceed.
 
-Do you want to continue ?")) || return;
+Do you want to install the updates ?")) || return;
 
     #- bring all interface up for installing crypto packages.
     install_interactive::upNetwork($o);
