@@ -455,7 +455,7 @@ sub main {
 
 #-    c::unlimit_core() unless $::testing;
 
-    my ($cfg, $patch, $oem, @auto);
+    my ($cfg, $patch, @auto);
     my %cmdline; map { 
 	my ($n, $v) = split '=';
 	$cmdline{$n} = $v || 1;
@@ -476,7 +476,7 @@ sub main {
     map_each {
 	my ($n, $v) = @_;
 	my $f = ${{
-	    oem       => sub { $oem = $v },
+	    oem       => sub { $::oem = $v },
 	    lang      => sub { $o->{lang} = $v },
 	    flang     => sub { $o->{lang} = $v ; push @auto, 'selectLanguage' },
 	    method    => sub { $o->{method} = $v },
@@ -603,7 +603,7 @@ sub main {
     if ($o->{meta_class} eq 'desktop') {
 	$o->{installClass} = 'normal';
     }
-    if ($oem) {
+    if ($::oem) {
 	$o->{partitioning}{use_existing_root} = 1;
 	$o->{partitioning}{auto_allocate} = 1;
 	$o->{compssListLevel} = 50;
