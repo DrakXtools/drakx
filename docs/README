@@ -250,8 +250,9 @@ be minimalistic)
 in stage2.
 
 
-To install a module, use modprobe which is in /usr/bin. It's a perl wrapper
-around /usr/bin/insmod. It uses the dependencies found in
+To manually install a module during install, switch to console #2
+and type "modprobe <modulename>". The modprobe program is a perl
+wrapper around /usr/bin/insmod. It uses the dependencies found in
 /modules/modules.dep (stage1).
 
 /usr/bin/insmod is a wrapper around /usr/bin/insmod_. It just extracts the
@@ -271,6 +272,43 @@ then, on another computer:
 % DISPLAY=test_machine:0 xwd -root | convert - screenshot.png
 
 ********************************************************************************
+* Auto install *****************************************************************
+********************************************************************************
+A powerful auto-install system is available. It allows performing
+an install without any human interaction.
+
+To feed automatic parameters to the stage1 part (the textmode
+part - might not be necessary for you if you plan to do
+cdrom-based auto-installs, but mostly highly needed when doing
+network installs), please refer to ../mdk-stage1/doc/TECH-INFOS.
+
+About the stage2 part (the actual installer, at the time you're
+(usually) running in graphical mode), please refer to the nice
+documentation written by David Eastcott. Either install the
+package "drakx-autoinstall-doc" from contrib, or browse:
+
+http://members.shaw.ca/mandrake/drakx/9.0/HTML/
+
+The previous document will explain you how to setup the contents
+of the auto_inst.cfg file. Note that you have 3 alternatives for
+providing this file:
+- from a floppy disk; use "kickstart=floppy" as kernel parameter,
+  as explained in the document
+- from the installation volume itself; put the file in the
+  "Mandrake/base" directory of the installation volume; use
+  "kickstart" only, or "kickstart=filename" to specify another
+  filename than auto_inst.cfg
+- specified by the network; setup your DHCP server to provide the
+  "bootfile" parameter, this file will be used as the
+  "auto_inst.cfg" file, in the case you also provide the
+  "netauto" boot parameter
+
+In any case, if the specified file ends with -IP or -IP.pl, IP
+will be substituted by the IP address of the machine, when doing
+a network install. Might be useful so that you can control all
+your auto installs from your server.
+
+********************************************************************************
 * Miscellaneous ****************************************************************
 ********************************************************************************
 >  o Media access methods: nfs, ftp, http, hd, cdrom
@@ -278,22 +316,27 @@ then, on another computer:
 >    - What exactly each stage does
 
 init loads stage1
-stage1 loads stage2, on various medium type
+stage1 loads stage2, from various medium type
 
 stage2 is too big to fit on a floppy, that's why stage1 exists
 
 >    - How each stage relates to the various media access methods
 
-stage1 knows only how to access to the media is compiled for. It contains only
-the kernel modules needed for that media. For eg, the nfs/ftp/http stage1
-doesn't contain scsi modules nor ide.
+stage1 knows only how to access to the media is compiled for. It
+contains only the kernel modules needed for that media. For eg,
+the nfs/ftp/http stage1 (network.img floppy) doesn't contain scsi
+modules nor ide.
 
 >    - How one stage terminates and another begins. i.e., How does
 >      stage1 find, mount, and launch stage2?
 
-/sbin/init just starts /sbin/stage1
-/sbin/stage1 takes care of mounting stage2 (in ramdisk if necessary)
-  then it runs /usr/bin/runinstall2
+  /sbin/init just starts /sbin/stage1, and monitors its
+execution; it's here to cleanly umount the partitions when stage1
+or stage2 dies/finished
+
+  /sbin/stage1 takes care of mounting stage2 (in ramdisk if
+necessary) then it execs /usr/bin/runinstall2 (thus, stage2
+replaces stage1, and init then monitors stage2)
 
 >  o Text and Graphic mode installers
 >    - Architectural overview of each
