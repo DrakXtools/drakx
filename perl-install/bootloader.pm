@@ -151,11 +151,8 @@ sub add_entry($$) {
 sub add_kernel($$$$$) {
     my ($prefix, $lilo, $kernelVersion, $specific, $v) = @_;
     my $ext = $specific && "-$specific"; $specific =~ s/\d+\.\d+|hack//;
-    my $kname = "vmlinuz";
-    if (arch() =~ /ppc/) { 
-    	$kname = "vmlinux";
-    }
-	my ($vmlinuz, $image, $initrdImage) = ("$kname-$kernelVersion$specific", "/boot/$kname$ext", "/boot/initrd$ext.img");    
+    my $kname = arch() =~ /ppc/ ? "vmlinux" : "vmlinuz";
+    my ($vmlinuz, $image, $initrdImage) = ("$kname-$kernelVersion$specific", "/boot/$kname$ext", "/boot/initrd$ext.img");    
     -e "$prefix/boot/$vmlinuz" or log::l("unable to find kernel image $prefix/boot/$vmlinuz"), return;
     {
 	my $f = "initrd-$kernelVersion$specific.img";
@@ -324,11 +321,12 @@ wait %d seconds for default boot.
 			label => $oldSecure || $oldSMP ? "linux-${_}up" : "linux-${_}nonfb",
 			root  => "/dev/$root",
 		       }) if $oldSecure || $oldSMP || $vga_fb;
-	    add_kernel($prefix, $lilo, $oldVersion, $_,
+	    my $entry = add_kernel($prefix, $lilo, $oldVersion, $_,
 		       {
 			label => "failsafe-$_",
 			root  => "/dev/$root",
-		       })->{append} .= " failsafe" unless $lilo->{password};
+		       });
+	    $entry->{append} .= " failsafe" if $entry && !$lilo->{password};
 	}
     }
 
