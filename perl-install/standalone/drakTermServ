@@ -43,7 +43,7 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use strict;
 
 use interactive;
-use my_gtk qw(:helpers :wrappers);
+use ugtk2 qw(:helpers :wrappers :create);
 use common;
 use run_program;
 
@@ -70,7 +70,7 @@ my $server_ip = get_ip_from_sys();
 
 #- make sure terminal server and friends are installed
 my $ts = system("rpm -qa | grep terminal-server > /dev/null");
-if ($ts == 256) { 
+if ($ts == 255) { #BUG: 256
 	if ($ENV{'DISPLAY'}) {
 		system("urpmi --X terminal-server > /dev/null");
 	} else {
@@ -108,39 +108,39 @@ if ("@ARGV" =~ /--stop/) {
 }
 
 if ("@ARGV" =~ /--adduser/) {
-	die "$0 $ARGV[0] requires a username...\n" if $#ARGV<1;
+	die "$0 $ARGV[0] requires a username...\n" if $#ARGV < 1;
 	my $cmd_line = 1;
 	adduser($cmd_line, $ARGV[1]);
 	exit(0);	
 }
 
 if ("@ARGV" =~ /--deluser/) {
-	die "$0 $ARGV[0] requires a username...\n" if $#ARGV<1;
+	die "$0 $ARGV[0] requires a username...\n" if $#ARGV < 1;
 	my $cmd_line = 1;
 	deluser($cmd_line, $ARGV[1]);
 	exit(0);	
 }
 
 if ("@ARGV" =~ /--addclient/) {
-	die "$0 $ARGV[0] requires hostname, MAC address, IP, nbi-image...\n" if $#ARGV<4;
+	die "$0 $ARGV[0] requires hostname, MAC address, IP, nbi-image...\n" if $#ARGV < 4;
 	my $cmd_line = 1;
 	addclient($cmd_line, $ARGV[1], $ARGV[2], $ARGV[3], $ARGV[4]);
 	exit(0);	
 }
 
 if ("@ARGV" =~ /--delclient/) {
-	die "$0 $ARGV[0] requires hostname...\n" if $#ARGV<1;
+	die "$0 $ARGV[0] requires hostname...\n" if $#ARGV < 1;
 	my $cmd_line = 1;
 	delclient($cmd_line, $ARGV[1], $ARGV[2], $ARGV[3]);
 	exit(0);	
 }
 
 read_conf_file();	
-interactive_mode() if $#ARGV<1;
+interactive_mode() if $#ARGV < 1;
 
 sub read_conf_file {
 	if (-e $cfg_file) {
-		open (CONF_FILE, "<". $cfg_file) || print "You must be root to read configuration file. \n";
+		open (CONF_FILE, "<" . $cfg_file) || print "You must be root to read configuration file. \n";
 		while (<CONF_FILE>) {
 			next unless /\S/;
 			next if /^#/;
@@ -193,20 +193,20 @@ ca::ctrlaltdel:/sbin/reboot -f
 x:5:respawn:/usr/X11R6/bin/X -ac -query $server_ip\n";
 
 	my $inittab_file = "/etc/inittab\$\$IP=$client_ip\$\$";
-	open(INITTAB, "> $inittab_file") || warn ("Can't open $inittab_file!");
+	open(INITTAB, "> $inittab_file") || warn("Can't open $inittab_file!");
 	print INITTAB $inittab;
 	close INITTAB	
 }
 
 sub cursor_wait {
 	# turn the cursor to a watch
-	$window1->{rwindow}->window->set_cursor(new Gtk::Gdk::Cursor(150));	
+	$window1->{rwindow}->window->set_cursor(new Gtk2::Gdk::Cursor(150));	
 	Gtk->main_iteration while Gtk->events_pending;
 }
 
 sub cursor_norm {
 	# restore normal cursor
-	$window1->{rwindow}->window->set_cursor(new Gtk::Gdk::Cursor(68));
+	$window1->{rwindow}->window->set_cursor(new Gtk2::Gdk::Cursor(68));
 	Gtk->main_iteration while Gtk->events_pending;
 }
 
@@ -216,11 +216,13 @@ sub display_error {
     my $error_box;
     ${$central_widget}->destroy();
     gtkpack($status_box,
-	    $error_box = gtkpack_(new Gtk::VBox(0,0),
-		  1, new Gtk::Label($message),
-				  0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
-					    gtksignal_connect(new Gtk::Button(N("OK")), clicked => 
-							      sub { ${$central_widget}->destroy(); create_fontsel() }),
+	    $error_box = gtkpack_(new Gtk2::VBox(0,0),
+		  1, new Gtk2::Label($message),
+				  0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
+					    gtksignal_connect(new Gtk2::Button(N("OK")), clicked => sub {
+						${$central_widget}->destroy(); 
+						create_fontsel();
+					    }),
 					    ),
 				  )
 	    );
@@ -230,140 +232,137 @@ sub display_error {
 sub interactive_mode {
     my $font_sel;
 #    $interactive = 1;
-    $window1 = my_gtk->new('drakTermServ');
-    $window1->{rwindow}->signal_connect (delete_event => sub { my_gtk->exit(0) });
+    $window1 = ugtk2->new('drakTermServ');
+    $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     unless ($::isEmbedded) {
-        $window1->{rwindow}->set_position(1);
+        $window1->{rwindow}->set_position('center');
         $window1->{rwindow}->set_title(N("Mandrake Terminal Server Configuration"));
     }
     $window1->{rwindow}->set_border_width(5);
-    my ($pix_user_map, $pix_user_mask) = gtkcreate_png("ic82-network-40");    
-    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("drakTS.620x57");
 
     gtkadd($window1->{window},
-	   gtkpack_(new Gtk::VBox(0,2),
-		    if_(!$::isEmbedded, 0,  new Gtk::Pixmap($pix_u_map, $pix_u_mask)),
-		    1, gtkpack_(new Gtk::HBox(0,2),
-			     1, gtkpack_(new Gtk::VBox(0,2),
-					1, gtkpack ($status_box = new Gtk::VBox(0,5),
-						$main_box = new Gtk::VBox(0,10),
-					),
-					1, gtkpack_(new Gtk::HBox(0,2),
-						0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-							gtksignal_connect(new Gtk::Button(N("Enable Server")), clicked 	=>
-								sub { ${$central_widget}->destroy(); 
-									$windows = 1;
-									cursor_wait(); 
-									enable_ts();
-									cursor_norm();
-								}),
-							gtksignal_connect(new Gtk::Button(N("Disable Server")), clicked => 
-								sub { ${$central_widget}->destroy(); 
-									cursor_wait();
-									disable_ts();
-									cursor_norm(); 
-								}),
-						),
-						0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-							gtksignal_connect(new Gtk::Button(N("Start Server")), clicked =>
-								sub {  ${$central_widget}->destroy(); 
-									$windows = 0; 
-									cursor_wait();	
-									start_ts();
-									cursor_norm();
-								}),
-							gtksignal_connect(new Gtk::Button(N("Stop Server")), clicked 	=>
-								sub { ${$central_widget}->destroy(); 
-									cursor_wait();
-									stop_ts();
-									cursor_norm();
-								}),
+	   gtkpack_(new Gtk2::VBox(0,2),
+		    if_(!$::isEmbedded, 0,  gtkcreate_img("drakTS.620x57")),
+		    1, gtkpack_(new Gtk2::HBox(0,2),
+				1, gtkpack_(new Gtk2::VBox(0,2),
+					    1, gtkpack($status_box = new Gtk2::VBox(0,5),
+						       $main_box = new Gtk2::VBox(0,10),
+						       ),
+					    1, gtkpack_(new Gtk2::HBox(0,2),
+							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new(), 'end'),
+								  gtksignal_connect(new Gtk2::Button(N("Enable Server")), clicked => sub {
+								      ${$central_widget}->destroy(); 
+								      $windows = 1;
+								      cursor_wait(); 
+								      enable_ts();
+								      cursor_norm();
+								  }),
+								  gtksignal_connect(new Gtk2::Button(N("Disable Server")), clicked => sub {
+								      ${$central_widget}->destroy(); 
+								      cursor_wait();
+								      disable_ts();
+								      cursor_norm(); 
+								  }),
+								  ),
+							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new(), 'end'),
+								  gtksignal_connect(new Gtk2::Button(N("Start Server")), clicked => sub { 
+								      ${$central_widget}->destroy(); 
+								      $windows = 0; 
+								      cursor_wait();	
+								      start_ts();
+								      cursor_norm();
+								  }),
+								  gtksignal_connect(new Gtk2::Button(N("Stop Server")), clicked => sub {
+								      ${$central_widget}->destroy(); 
+								      cursor_wait();
+								      stop_ts();
+								      cursor_norm();
+								  }),
+								  ),
+							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new(), 'end'),
+								  gtksignal_connect(new Gtk2::Button(N("Etherboot Floppy/ISO")), clicked => sub { 
+								      ${$central_widget}->destroy();
+								      $windows = 1; 
+								      make_boot();
+								  }),
+								  gtksignal_connect(new Gtk2::Button(N("Net Boot Images")), clicked => sub {
+								      ${$central_widget}->destroy();
+								      make_nbi();
+								  }),
+								  ),
+							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new(), 'end'),
+								  gtksignal_connect(new Gtk2::Button(N("Add/Del Users")), clicked => sub {
+								      ${$central_widget}->destroy();
+								      $windows = 0;
+								      maintain_users();
+								  }),
+								  gtksignal_connect(new Gtk2::Button(N("Add/Del Clients")), clicked => sub { ${$central_widget}->destroy(); maintain_clients() }),
+								  ),
+							1, new Gtk2::HBox(0,2),
+							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new(), 'end'),
+								  gtksignal_connect(new Gtk2::Button(N("Help")),clicked => sub {
+								      ${$central_widget}->destroy();
+								      help();
+								  }),
+								  gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub {
+								      write_conf_file();
+								      $::isEmbedded and kill 'USR1', $::CCPID;
+								      Gtk->main_quit();
+								  }),
+								  ),
 							),
-						0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-							gtksignal_connect(new Gtk::Button(N("Etherboot Floppy/ISO")), clicked 	=>
-								sub { ${$central_widget}->destroy(); $windows = 1; make_boot() }),
-							gtksignal_connect(new Gtk::Button(N("Net Boot Images")), clicked => 
-								sub { ${$central_widget}->destroy(); make_nbi() }),
-						),
-						0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-							gtksignal_connect(new Gtk::Button(N("Add/Del Users")), clicked =>
-								sub {  ${$central_widget}->destroy(); $windows = 0; maintain_users() }),
-							gtksignal_connect(new Gtk::Button(N("Add/Del Clients")), clicked 	=>
-								sub { ${$central_widget}->destroy(); maintain_clients()}),
-						),     
-						1, new Gtk::HBox(0,2),
-						0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-							gtksignal_connect(new Gtk::Button(N("Help")),clicked =>
-								sub { ${$central_widget}->destroy(); help() }),
-							gtksignal_connect(new Gtk::Button(N("Close")), clicked => 
-								sub { write_conf_file();
-									$::isEmbedded and kill 'USR1', $::CCPID;
-									Gtk->main_quit() 
-								}
-							),
-						),
-					),
+					    ),
 				),
-			),
-		),
-	);
+		    ),
+	   );
     $central_widget = \$main_box;
     $window1->{rwindow}->show_all;
     $window1->{rwindow}->realize;
     $window1->{rwindow}->show_all();    
 
     $window1->main;
-    my_gtk->exit(0);
+    ugtk2->exit(0);
 }
 
 sub about {
-    my $text = new Gtk::Text(undef, undef);
-    my $about_box;
-    gtkpack($status_box,
-	    $about_box = gtkpack_(new Gtk::VBox(0,10),
-	       1, gtkpack_(new Gtk::HBox(0,0),
-			   1, gtktext_insert(gtkset_editable($text, 1), "
+    text_view(N("
  Copyright (C) 2002 by MandrakeSoft 
 	Stew Benedict sbenedict\@mandrakesoft.com
 
- This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2, or (at your option)
- any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+") . $::license . N("
 
  Thanks:
 	- LTSP Project http://www.ltsp.org
 	- Michael Brown <mbrown\@fensystems.co.uk>
 
-"),
-			   0, new Gtk::VScrollbar($text->vadj),
+"));
+}
+
+sub text_view {
+    my ($text) = @_;
+    my $box;
+    gtkpack($status_box,
+	    $box = gtkpack_(new Gtk2::VBox(0,10),
+	       1, gtkpack_(new Gtk2::HBox(0,0),
+			   1, create_scrolled_window(gtktext_insert(
+#								    gtkset_editable(
+										    new Gtk2::TextView,
+#										    1)
+								    [ [ $text ] ])
+						     ),
 			   ),
-				  0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
-					    gtksignal_connect(new Gtk::Button(N("OK")), clicked => 
-							      sub { ${$central_widget}->destroy(); create_fontsel() }),
-					    ),
-				  )
+				 0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
+					   gtksignal_connect(new Gtk2::Button(N("OK")), clicked => 
+							     sub { ${$central_widget}->destroy() }),
+					   ),
+				 )
 	    );
-    $central_widget = \$about_box;
+    $central_widget = \$box;
     $status_box->show_all();
 }
 
 sub help {
-    my $text = new Gtk::Text(undef, undef);
-    my $help_box;
-    gtkpack($status_box,
-	    $help_box = gtkpack_(new Gtk::VBox(0,10),
-	       1, gtkpack_(new Gtk::HBox(0,0),
-			   1, gtktext_insert(gtkset_editable($text, 1), "drakTermServ Overview
+    text_view(N("drakTermServ Overview
 			   
         - Create Etherboot Enabled Boot Images:
         		To boot a kernel via etherboot, a special kernel/initrdrd image must be created.
@@ -461,17 +460,7 @@ sub help {
         			/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0
  
 
-"),
-			   0, new Gtk::VScrollbar($text->vadj),
-			   ),
-				 0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
-					   gtksignal_connect(new Gtk::Button(N("OK")), clicked => 
-							     sub { ${$central_widget}->destroy() }),
-					   ),
-				 )
-	    );
-    $central_widget = \$help_box;
-    $status_box->show_all();
+"));
 }
 
 sub make_boot {
@@ -479,30 +468,30 @@ sub make_boot {
 	my $boot_box;
 	my $rom_path = "/usr/lib/etherboot";
 	my @nics = all("/usr/lib/etherboot/lzrom");
-	my $list_nics = new Gtk::List();
+	my $list_nics = new Gtk2::List();
 	my $nic;
 	
 	foreach (@nics) {
 		my $t = $_;
-		$list_nics->add(gtkshow(gtksignal_connect(new Gtk::ListItem($t), 
+		$list_nics->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($t), 
 		select => sub { $nic = $t })));
 	}
 	$list_nics->set_selection_mode('single');
     
 	gtkpack($status_box,
-		$boot_box = gtkpack_(new Gtk::VBox(0,10),
-			0, gtkadd(new Gtk::HBox(0,10),
-				new Gtk::HBox(0,5),
-				createScrolledWindow($list_nics),
-				gtkadd(new Gtk::VBox(1,10),
-					new Gtk::HBox(0,20),
-					gtksignal_connect(new Gtk::Button(N("Boot Floppy")), clicked => 
+		$boot_box = gtkpack_(new Gtk2::VBox(0,10),
+			0, gtkadd(new Gtk2::HBox(0,10),
+				new Gtk2::HBox(0,5),
+				create_scrolled_window($list_nics),
+				gtkadd(new Gtk2::VBox(1,10),
+					new Gtk2::HBox(0,20),
+					gtksignal_connect(new Gtk2::Button(N("Boot Floppy")), clicked => 
 						sub { write_eb_image($nic, $rom_path, "floppy") }),
-					gtksignal_connect(new Gtk::Button(N("Boot ISO")), clicked => 
+					gtksignal_connect(new Gtk2::Button(N("Boot ISO")), clicked => 
 						sub { write_eb_image($nic, $rom_path, "iso") }),
-					new Gtk::HBox(0,20),
+					new Gtk2::HBox(0,20),
 				),
-				new Gtk::HBox(0,5),
+				new Gtk2::HBox(0,5),
 			),
 		),
 	);
@@ -528,21 +517,21 @@ sub make_nbi {
 		"via-rhine", "winbond-840", "xircom_cb", "xircom_tulip_cb", "yellowfin");
 	
 	#- kernel/module info in tree view
-	my $tree_kernels = new Gtk::Tree();
+	my $tree_kernels = new Gtk2::Tree();
 	
 	foreach (@kernels){
 		my $t = $_;
-		my $t_kernel = new_with_label Gtk::TreeItem($t);
+		my $t_kernel = new_with_label Gtk2::TreeItem($t);
 		gtksignal_connect($t_kernel, select => sub { $kernel = $t;
 								$nic = '' });
 		$tree_kernels->append($t_kernel);
 		
-		my $k_detail = new Gtk::Tree();
+		my $k_detail = new Gtk2::Tree();
 		$t_kernel->set_subtree($k_detail);
 		
 		foreach (@nics) {
 			my $m = $_;
-			my $k_det_nic = new_with_label Gtk::TreeItem($m);
+			my $k_det_nic = new_with_label Gtk2::TreeItem($m);
 			gtksignal_connect($k_det_nic, select => sub { $nic = $m;
 								$kernel = $t });
 			$k_detail->append($k_det_nic);
@@ -551,24 +540,24 @@ sub make_nbi {
 	}	
 
 	# existing nbi images in list
-	my $list_nbis = new Gtk::List();
+	my $list_nbis = new Gtk2::List();
 	my @nbis = grep(/\.nbi/, all("/var/lib/tftpboot"));
 	my $nbi;
 	
 	foreach (@nbis) {
 		my $t = $_;
-		$list_nbis->add(gtkshow(gtksignal_connect(new Gtk::ListItem($t), 
+		$list_nbis->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($t), 
 				select => sub { $nbi = $t })));
 	}
 	$list_nbis->set_selection_mode('single');		
 				
 	gtkpack($status_box,
-		$nbi_box = gtkpack_(new Gtk::VBox(1,10),
-			0, gtkadd(new Gtk::HBox(0,10),
-				createScrolledWindow($tree_kernels),
-				gtkadd(new Gtk::VBox(1,10),
-					gtksignal_connect(new Gtk::Button(N("Build Whole Kernel -->")), clicked => 
-						sub { if ($kernel) { 
+		$nbi_box = gtkpack_(new Gtk2::VBox(1,10),
+			0, gtkadd(new Gtk2::HBox(0,10),
+				create_scrolled_window($tree_kernels),
+				gtkadd(new Gtk2::VBox(1,10),
+					gtksignal_connect(new Gtk2::Button(N("Build Whole Kernel -->")), clicked => 
+						sub { if ($kernel) {
 								$in->ask_warn('',N("This will take a few minutes."));
 								cursor_wait();
 								system("/usr/bin/mknbi-set -k /boot/$kernel");
@@ -576,7 +565,7 @@ sub make_nbi {
 								@nbis = grep(/\.nbi/, all("/var/lib/tftpboot"));
 								foreach (@nbis) {
 									my $t = $_;
-									$list_nbis->add(gtkshow(gtksignal_connect(new Gtk::ListItem($t), 
+									$list_nbis->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($t), 
 									select => sub { $nbi = $t })));
 								}
 								cursor_norm(); 
@@ -584,42 +573,42 @@ sub make_nbi {
 								$in->ask_warn('',N("No kernel selected!")) if !($kernel); 
 							}
 						}),
-					gtksignal_connect(new Gtk::Button(N("Build Single NIC -->")), clicked => 
+					gtksignal_connect(new Gtk2::Button(N("Build Single NIC -->")), clicked => 
 						sub { if ($nic) {
 								system("/usr/bin/mknbi-set -k /boot/$kernel -r $nic");
 								$list_nbis->clear_items();
 								@nbis = grep(/\.nbi/, all("/var/lib/tftpboot"));
 								foreach (@nbis) {
 									my $t = $_;
-									$list_nbis->add(gtkshow(gtksignal_connect(new Gtk::ListItem($t), 
+									$list_nbis->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($t), 
 									select => sub { $nbi = $t })));
 								} 
 							} else {
 								$in->ask_warn('',N("No nic selected!"));
 							}
 						}),
-					gtksignal_connect(new Gtk::Button(N("Build All Kernels -->")), clicked => 
-						sub { $in->ask_warn('',N("This will take a few minutes."));
+					gtksignal_connect(new Gtk2::Button(N("Build All Kernels -->")), clicked => sub {
+					                $in->ask_warn('',N("This will take a few minutes."));
 							cursor_wait();
 							system("/usr/bin/mknbi-set");
 							$list_nbis->clear_items();
 							@nbis = grep(/\.nbi/, all("/var/lib/tftpboot"));
 							foreach (@nbis) {
 								my $t = $_;
-								$list_nbis->add(gtkshow(gtksignal_connect(new Gtk::ListItem($t), 
+								$list_nbis->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($t), 
 								select => sub { $nbi = $t })));
 							}
 							cursor_norm(); 
 						}),
-					new Gtk::HBox(1,1),
-					gtksignal_connect(new Gtk::Button(N("<-- Delete")), clicked => 
+					new Gtk2::HBox(1,1),
+					gtksignal_connect(new Gtk2::Button(N("<-- Delete")), clicked => 
 						sub { my $nbi = "/var/lib/tftpboot/" . $nbi;
 							my $result = unlink($nbi) || warn("Can't delete $nbi...");
 							if ($result eq 1) {
 								$list_nbis->remove_items($list_nbis->selection);
 							}
 						}),
-					gtksignal_connect(new Gtk::Button(N("Delete All NBIs")), clicked => 
+					gtksignal_connect(new Gtk2::Button(N("Delete All NBIs")), clicked => 
 						sub { cursor_wait(); 
 							foreach (grep(/\.nbi/, all("/var/lib/tftpboot"))) {
 								my $nbi = "/var/lib/tftpboot/" . $_;
@@ -631,9 +620,9 @@ sub make_nbi {
 							$list_nbis->clear_items();
 							cursor_norm();
 						}),	
-					new Gtk::HBox(1,1),
+					new Gtk2::HBox(1,1),
 				),
-				createScrolledWindow($list_nbis),
+				create_scrolled_window($list_nbis),
 			),),
 	);
 	
@@ -650,52 +639,52 @@ sub maintain_users {
 	#- use /homes to filter system daemons
 	my @homes = all("/home");
 	
-	my $list_sys_users = new Gtk::List();
+	my $list_sys_users = new Gtk2::List();
 	my $sys_user;
 	
 	foreach (@sys_users) {		
 		my ($s_label, $dummy) = split(/:/, $_, 2);
 		if (grep(/$s_label/, @homes)) {
-			$list_sys_users->add(gtkshow(gtksignal_connect(new Gtk::ListItem($s_label), 
+			$list_sys_users->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($s_label), 
 				select => sub { $sys_user = $s_label })));
 		}
 	}
 	$list_sys_users->set_selection_mode('single');
   
-	my $list_ts_users =  new Gtk::List();
+	my $list_ts_users =  new Gtk2::List();
 	my $ts_user;
 	
 	foreach (@ts_users) {
 		my ($t_label, $dummy) = split(/:/, $_, 2);
 		my @system_entry = grep(/$t_label/, @sys_users); 
 		$t_label = $t_label . " !!!" if ($_ ne $system_entry[0]);
-		$list_ts_users->add(gtkshow(gtksignal_connect(new Gtk::ListItem($t_label), 
+		$list_ts_users->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($t_label), 
 		select => sub { $ts_user = $t_label })));
 	}
 	$list_ts_users->set_selection_mode('single');
 	
 	gtkpack($status_box,
-		$user_box = gtkpack_(new Gtk::VBox(0,10),
-			0, gtkadd(new Gtk::Label(N("!!! Indicates the password in the system database is different than\n the one in the Terminal Server database.\nDelete/re-add the user to the Terminal Server to enable login."))),
-			0, gtkadd(new Gtk::HBox(0,20),
-				createScrolledWindow($list_sys_users),
-				gtkadd(new Gtk::VBox(1,10),
-					new Gtk::HBox(0,10),
-					gtksignal_connect(new Gtk::Button(N("Add User -->")), clicked => 
+		$user_box = gtkpack_(new Gtk2::VBox(0,10),
+			0, gtkadd(new Gtk2::Label(N("!!! Indicates the password in the system database is different than\n the one in the Terminal Server database.\nDelete/re-add the user to the Terminal Server to enable login."))),
+			0, gtkadd(new Gtk2::HBox(0,20),
+				create_scrolled_window($list_sys_users),
+				gtkadd(new Gtk2::VBox(1,10),
+					new Gtk2::HBox(0,10),
+					gtksignal_connect(new Gtk2::Button(N("Add User -->")), clicked => 
 						sub { my $result = adduser(0, $sys_user);
 							if ($result eq 0) { 
-								$list_ts_users->add(gtkshow(gtksignal_connect(new Gtk::ListItem($sys_user), 
+								$list_ts_users->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($sys_user), 
 								select => sub { $ts_user = $sys_user;
 								$list_ts_users->show() })));
 							}
 						}),
-					gtksignal_connect(new Gtk::Button(N("<-- Del User")), clicked => 
+					gtksignal_connect(new Gtk2::Button(N("<-- Del User")), clicked => 
 						sub { deluser(0, $ts_user);
 							$list_ts_users->remove_items($list_ts_users->selection);
 						}),
-					new Gtk::HBox(0,10),
+					new Gtk2::HBox(0,10),
 				),
-				createScrolledWindow($list_ts_users),
+				create_scrolled_window($list_ts_users),
 			),),
 	);
 	
@@ -710,30 +699,30 @@ sub maintain_clients {
 	my $client;
 	
 	#- client info in tree view
-	my $tree_clients = new Gtk::Tree();
+	my $tree_clients = new Gtk2::Tree();
 	foreach my $key(keys(%clients)){
 		my $t = $key;
-		my $t_client = new_with_label Gtk::TreeItem($t);
+		my $t_client = new_with_label Gtk2::TreeItem($t);
 		gtksignal_connect($t_client, select => sub { $client = $t });
 		$tree_clients->append($t_client);
 		
-		my $c_detail = new Gtk::Tree();
+		my $c_detail = new Gtk2::Tree();
 		$t_client->set_subtree($c_detail);
 		
-		my $c_det_hw = new_with_label Gtk::TreeItem($clients{$key}{hardware});
+		my $c_det_hw = new_with_label Gtk2::TreeItem($clients{$key}{hardware});
 		$c_detail->append($c_det_hw);
 		$c_det_hw->show();
 
-		my $c_det_ip = new_with_label Gtk::TreeItem($clients{$key}{address});
+		my $c_det_ip = new_with_label Gtk2::TreeItem($clients{$key}{address});
 		$c_detail->append($c_det_ip);
 		$c_det_ip->show();
 		
-		my $c_det_type = new_with_label Gtk::TreeItem(N("type: %s", $clients{$key}{type}));
+		my $c_det_type = new_with_label Gtk2::TreeItem(N("type: %s", $clients{$key}{type}));
 		$c_detail->append($c_det_type);
 		$c_det_type->show();
 		
 		if ($clients{$key}{filename}) {
-			my $c_det_nbi = new_with_label Gtk::TreeItem($clients{$key}{filename});
+			my $c_det_nbi = new_with_label Gtk2::TreeItem($clients{$key}{filename});
 			$c_detail->append($c_det_nbi);
 			$c_det_nbi->show();
 		}		
@@ -741,18 +730,18 @@ sub maintain_clients {
 	$tree_clients->set_selection_mode('single');
 
 	#- entry boxes for client data entry
-	my $label_host = new Gtk::Label("Client Name:");
+	my $label_host = new Gtk2::Label("Client Name:");
 	$label_host->set_justify('left');
-	my $entry_host = new Gtk::Entry(20);
-	my $label_mac = new Gtk::Label("MAC Address:");
+	my $entry_host = new Gtk2::Entry(20);
+	my $label_mac = new Gtk2::Label("MAC Address:");
 	$label_mac->set_justify('left');
-	my $entry_mac = new Gtk::Entry(20);
-	my $label_ip = new Gtk::Label("IP Address:");
+	my $entry_mac = new Gtk2::Entry(20);
+	my $label_ip = new Gtk2::Label("IP Address:");
 	$label_ip->set_justify('left');
-	my $entry_ip = new Gtk::Entry(20);
-	my $label_nbi = new Gtk::Label("Kernel Netboot Image:");
+	my $entry_ip = new Gtk2::Entry(20);
+	my $label_nbi = new Gtk2::Label("Kernel Netboot Image:");
 	$label_nbi->set_justify('left');
-	my $entry_nbi = new Gtk::Combo();
+	my $entry_nbi = new Gtk2::Combo();
 
 	my @images = grep(/\.nbi/, all("/var/lib/tftpboot/"));
 	my $have_nbis = @images;
@@ -771,22 +760,22 @@ sub maintain_clients {
 	my $is_thin = 0;
 			 
 	gtkpack($status_box,
-		$client_box = gtkpack_(new Gtk::VBox(1,10),
-			0, gtkadd(new Gtk::HBox(0,5),
-				gtkadd(new Gtk::VBox(0,5),
+		$client_box = gtkpack_(new Gtk2::VBox(1,10),
+			0, gtkadd(new Gtk2::HBox(0,5),
+				gtkadd(new Gtk2::VBox(0,5),
 					gtkadd($label_host), gtkadd($entry_host),
 					gtkadd($label_mac), gtkadd($entry_mac),
 					gtkadd($label_ip), gtkadd($entry_ip),
 					gtkadd($label_nbi), gtkadd($entry_nbi),
 				),
-				gtkadd(new Gtk::VBox(1,10),
-					gtkadd(new Gtk::HBox(0,1),
-						gtksignal_connect($check_thin = new Gtk::CheckButton(N("Thin Client")), clicked =>
+				gtkadd(new Gtk2::VBox(1,10),
+					gtkadd(new Gtk2::HBox(0,1),
+						gtksignal_connect($check_thin = new Gtk2::CheckButton(N("Thin Client")), clicked =>
 							sub { invbool \$is_thin }),
-						$check_allow_thin = new Gtk::CheckButton(N("Allow Thin Clients")),
+						$check_allow_thin = new Gtk2::CheckButton(N("Allow Thin Clients")),
 					), 
-#					new Gtk::HBox(1,1),
-					gtksignal_connect(new Gtk::Button(N("Add Client -->")), clicked => 
+#					new Gtk2::HBox(1,1),
+					gtksignal_connect(new Gtk2::Button(N("Add Client -->")), clicked => 
 						sub { my $hostname = $entry_host->get_text();
 							my $mac = $entry_mac->get_text();
 							my $ip = $entry_ip->get_text();
@@ -796,29 +785,29 @@ sub maintain_clients {
 								my $result = addclient(0, $hostname, $mac, $ip, $nbi, $is_thin);
 								
 								if ($result eq 0) {
-									my $t_client = new_with_label Gtk::TreeItem($hostname);
+									my $t_client = new_with_label Gtk2::TreeItem($hostname);
 									gtksignal_connect($t_client, select => sub { $client = $hostname });
 									$tree_clients->append($t_client);
 		
-									my $c_detail = new Gtk::Tree();
+									my $c_detail = new Gtk2::Tree();
 									$t_client->set_subtree($c_detail);
 		
-									my $c_det_hw = new_with_label Gtk::TreeItem($mac);
+									my $c_det_hw = new_with_label Gtk2::TreeItem($mac);
 									$c_detail->append($c_det_hw);
 									$c_det_hw->show();
 								
-									my $c_det_ip = new_with_label Gtk::TreeItem($ip);
+									my $c_det_ip = new_with_label Gtk2::TreeItem($ip);
 									$c_detail->append($c_det_ip);
 									$c_det_ip->show();
 									
 									my $client_type = "type: fat";
 									$client_type = "type: thin" if ($is_thin eq 1);
-									my $c_det_type = new_with_label Gtk::TreeItem($client_type);
+									my $c_det_type = new_with_label Gtk2::TreeItem($client_type);
 									$c_detail->append($c_det_type);
 									$c_det_type->show();
 									
 									if ($nbi) {
-										my $c_det_nbi = new_with_label Gtk::TreeItem($nbi);
+										my $c_det_nbi = new_with_label Gtk2::TreeItem($nbi);
 										$c_detail->append($c_det_nbi);
 										$c_det_nbi->show();
 									}
@@ -829,7 +818,7 @@ sub maintain_clients {
 								}		
 							}
 						}),
-					gtksignal_connect(new Gtk::Button(N("<-- Edit Client")), clicked => 
+					gtksignal_connect(new Gtk2::Button(N("<-- Edit Client")), clicked => 
 						sub { $entry_host->set_text($client);
 								$entry_mac->set_text($clients{$client}{hardware});
 								$entry_ip->set_text($clients{$client}{address});
@@ -845,17 +834,17 @@ sub maintain_clients {
 									$tree_clients->remove_items($tree_clients->selection);
 								}
 						}),
-					gtksignal_connect(new Gtk::Button(N("Delete Client")), clicked => 
+					gtksignal_connect(new Gtk2::Button(N("Delete Client")), clicked => 
 						sub { my $result = delclient(0, $client);
 							if ($result eq 0) {
 								$tree_clients->remove_items($tree_clients->selection);
 							}
 						}),
-					gtksignal_connect(new Gtk::Button(N("dhcpd Config...")), clicked => 
+					gtksignal_connect(new Gtk2::Button(N("dhcpd Config...")), clicked => 
 						sub { ${$central_widget}->destroy(); dhcpd_config() }),
-#					new Gtk::HBox(1,1),
+#					new Gtk2::HBox(1,1),
 				),
-				createScrolledWindow($tree_clients),
+				create_scrolled_window($tree_clients),
 			),),
 	);
 
@@ -901,65 +890,65 @@ sub dhcpd_config {
 	my @nservers;
 						
 	#- entry boxes for data entry
-	my $box_subnet = new Gtk::HBox(0,0);
-	my $label_subnet = new Gtk::Label(N("Subnet:"));
+	my $box_subnet = new Gtk2::HBox(0,0);
+	my $label_subnet = new Gtk2::Label(N("Subnet:"));
 	$label_subnet->set_justify('right');
-	my $entry_subnet = new Gtk::Entry(20);	
+	my $entry_subnet = new Gtk2::Entry(20);	
 	$box_subnet->pack_end($entry_subnet, 0, 0, 10);
 	$box_subnet->pack_end($label_subnet, 0, 0, 10);
 	
-	my $box_netmask = new Gtk::HBox(0,0);
-	my $label_netmask = new Gtk::Label(N("Netmask:"));
+	my $box_netmask = new Gtk2::HBox(0,0);
+	my $label_netmask = new Gtk2::Label(N("Netmask:"));
 	$label_netmask->set_justify('left');
-	my $entry_netmask = new Gtk::Entry(20);
+	my $entry_netmask = new Gtk2::Entry(20);
 	$box_netmask->pack_end($entry_netmask, 0, 0, 10);
 	$box_netmask->pack_end($label_netmask, 0, 0, 10);
 	
-	my $box_routers = new Gtk::HBox(0,0);
-	my $label_routers = new Gtk::Label(N("Routers:"));
+	my $box_routers = new Gtk2::HBox(0,0);
+	my $label_routers = new Gtk2::Label(N("Routers:"));
 	$label_routers->set_justify('left');
-	my $entry_routers = new Gtk::Entry(20);
+	my $entry_routers = new Gtk2::Entry(20);
 	$box_routers->pack_end($entry_routers, 0, 0, 10);
 	$box_routers->pack_end($label_routers, 0, 0, 10);
 	
-	my $box_subnet_mask = new Gtk::HBox(0,0);
-	my $label_subnet_mask = new Gtk::Label(N("Subnet Mask:"));
+	my $box_subnet_mask = new Gtk2::HBox(0,0);
+	my $label_subnet_mask = new Gtk2::Label(N("Subnet Mask:"));
 	$label_subnet_mask->set_justify('left');
-	my $entry_subnet_mask = new Gtk::Entry();
+	my $entry_subnet_mask = new Gtk2::Entry();
 	$box_subnet_mask->pack_end($entry_subnet_mask, 0, 0, 10);
 	$box_subnet_mask->pack_end($label_subnet_mask, 0, 0, 10);
 	
-	my $box_broadcast = new Gtk::HBox(0,0);
-	my $label_broadcast = new Gtk::Label(N("Broadcast Address:"));
+	my $box_broadcast = new Gtk2::HBox(0,0);
+	my $label_broadcast = new Gtk2::Label(N("Broadcast Address:"));
 	$label_broadcast->set_justify('left');
-	my $entry_broadcast = new Gtk::Entry(20);
+	my $entry_broadcast = new Gtk2::Entry(20);
 	$box_broadcast->pack_end($entry_broadcast, 0, 0, 10);
 	$box_broadcast->pack_end($label_broadcast, 0, 0, 10);
 	
-	my $box_domain = new Gtk::HBox(0,0);
-	my $label_domain = new Gtk::Label(N("Domain Name:"));
+	my $box_domain = new Gtk2::HBox(0,0);
+	my $label_domain = new Gtk2::Label(N("Domain Name:"));
 	$label_domain->set_justify('left');
-	my $entry_domain = new Gtk::Entry(20);
+	my $entry_domain = new Gtk2::Entry(20);
 	$box_domain->pack_end($entry_domain, 0, 0, 10);
 	$box_domain->pack_end($label_domain, 0, 0, 10);
 	
-	my $box_name_servers = new Gtk::HBox(0,0);
-	my $box_name_servers_entry = new Gtk::VBox(0,0);
-	my $label_name_servers = new Gtk::Label(N("Name Servers:"));
+	my $box_name_servers = new Gtk2::HBox(0,0);
+	my $box_name_servers_entry = new Gtk2::VBox(0,0);
+	my $label_name_servers = new Gtk2::Label(N("Name Servers:"));
 	$label_name_servers->set_justify('left');
-	my $entry_name_server1 = new Gtk::Entry();
-	my $entry_name_server2 = new Gtk::Entry();
-	my $entry_name_server3 = new Gtk::Entry();
+	my $entry_name_server1 = new Gtk2::Entry();
+	my $entry_name_server2 = new Gtk2::Entry();
+	my $entry_name_server3 = new Gtk2::Entry();
 	$box_name_servers_entry->pack_start($entry_name_server1, 0, 0, 0);
 	$box_name_servers_entry->pack_start($entry_name_server2, 0, 0, 0);
 	$box_name_servers_entry->pack_start($entry_name_server3, 0, 0, 0);
 	$box_name_servers->pack_end($box_name_servers_entry, 0, 0, 10);
 	$box_name_servers->pack_end($label_name_servers, 0, 0, 10);
 
-	my $label_ip_range_start = new Gtk::Label(N("IP Range Start:"));
-	my $label_ip_range_end = new Gtk::Label(N("IP Range End:"));
-	my $entry_ip_range_start = new Gtk::Entry(15);
-	my $entry_ip_range_end = new Gtk::Entry(15);
+	my $label_ip_range_start = new Gtk2::Label(N("IP Range Start:"));
+	my $label_ip_range_end = new Gtk2::Label(N("IP Range End:"));
+	my $entry_ip_range_start = new Gtk2::Entry(15);
+	my $entry_ip_range_end = new Gtk2::Entry(15);
 	
 	#- grab some default entries from the running system
 	
@@ -987,7 +976,7 @@ sub dhcpd_config {
 	chop(@resolve);
 	
 	foreach (@resolve) {
-		@ifvalues = split(/ /, $_);
+		@ifvalues = split / /;
 		if (($ifvalues[0] =~ /nameserver/) && ($i lt 4)){
 			$nservers[$i] = $ifvalues[1]; $i++;
 		}
@@ -998,8 +987,8 @@ sub dhcpd_config {
 	$entry_name_server3->set_text($nservers[3]);
 	
 	gtkpack($status_box, 
-		$dhcpd_box = gtkpack_(new Gtk::HBox(1,10),
-			0, gtkadd((new Gtk::VBox),
+		$dhcpd_box = gtkpack_(new Gtk2::HBox(1,10),
+			0, gtkadd((new Gtk2::VBox),
 				gtkadd($box_subnet),
 				gtkadd($box_netmask),
 				gtkadd($box_routers),
@@ -1008,25 +997,25 @@ sub dhcpd_config {
 				gtkadd($box_domain),
 				gtkadd($box_name_servers),
 			),
-			0, gtkadd(new Gtk::VBox(0,0),
-				new Gtk::Label(N("dhcpd Server Configuration")."\n\n".
+			0, gtkadd(new Gtk2::VBox(0,0),
+				new Gtk2::Label(N("dhcpd Server Configuration")."\n\n".
 					N("Most of these values were extracted\nfrom your running system.\nYou can modify as needed.")),
-				new Gtk::HSeparator,
-				gtkadd((new Gtk::HBox),
-					new Gtk::Label(N("Dynamic IP Address Pool:")),
+				new Gtk2::HSeparator,
+				gtkadd((new Gtk2::HBox),
+					new Gtk2::Label(N("Dynamic IP Address Pool:")),
 				),
-				gtkadd((new Gtk::HBox(0,0)),
-					gtkadd((new Gtk::VBox),
+				gtkadd((new Gtk2::HBox(0,0)),
+					gtkadd((new Gtk2::VBox),
 						gtkadd($label_ip_range_start),
 						gtkadd($entry_ip_range_start),
 					),
-					gtkadd((new Gtk::VBox),
+					gtkadd((new Gtk2::VBox),
 						gtkadd($label_ip_range_end),
 						gtkadd($entry_ip_range_end),
 					),
 				),
-				gtkadd(new Gtk::HBox),
-				gtksignal_connect(new Gtk::Button(N("Write Config")), clicked => 
+				gtkadd(new Gtk2::HBox),
+				gtksignal_connect(new Gtk2::Button(N("Write Config")), clicked => 
 						sub { write_dhcpd_config(
 							$entry_subnet->get_text(),
 							$entry_netmask->get_text(),
@@ -1040,7 +1029,7 @@ sub dhcpd_config {
 							$entry_ip_range_start->get_text(),
 							$entry_ip_range_end->get_text(),						
 						) }),
-				new Gtk::HBox(0,10),
+				new Gtk2::HBox(0,10),
 			),
 		),
 	);	
@@ -1133,7 +1122,7 @@ sub write_eb_image {
 			$result = system("cat $rom_path/boot1a.bin $rom_path/lzrom/$nic > /dev/fd0") if $result;
 			if ($result) {
 				$in->ask_warn('',N("Couldn't access the floppy!"))
-			} else { 
+			} else {
 				$in->ask_warn('',N("Floppy can be removed now"))
 			}
 		} else {
@@ -1192,7 +1181,7 @@ sub enable_ts {
 	$buff_index = toggle_chkconfig("on", "tftp", $buff_index);	
 	$buff_index = service_change("xinetd", "restart", $buff_index);
 	$buff[$buff_index] = "\n\tDone!";	
-	
+
 	if ($cmd_line == 1){
 		print "@buff\n";
 		return;
@@ -1285,21 +1274,7 @@ sub stop_ts {
 }
 
 sub show_status {
-	#- just a generic routine to display an array of text in the GUI screen
-	my @buff = @_;
-	
-	my $text = new Gtk::Text(undef, undef);
-	my $status_t_box;
-	gtkpack($status_box,
-	    $status_t_box = gtkpack_(new Gtk::VBox(0,10),
-	       1, gtkpack_(new Gtk::HBox(0,0),
-			   1, gtktext_insert(gtkset_editable($text, 1), "@buff"),
-			),
-			),
-	);
-			   
-	$central_widget = \$status_t_box;		   
-	$status_box->show_all();	
+    text_view("@buff");
 }
 
 sub adduser {
