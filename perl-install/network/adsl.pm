@@ -197,7 +197,8 @@ usepeerdns
 defaultroute
 user "$adsl->{login}"
 ));
-	modules::add_alias($_->[0], $_->[1]) foreach  ['char-major-108', 'ppp_generic'],
+	modules::add_alias($_->[0], $_->[1]) foreach  ['speedtch', 'off'],
+	                                              ['char-major-108', 'ppp_generic'],
 						      ['tty-ldisc-3', 'ppp_async'],
 						      ['tty-ldisc-13', 'n_hdlc'],
 						      ['tty-ldisc-14', 'ppp_synctty'],
