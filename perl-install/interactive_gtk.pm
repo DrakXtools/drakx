@@ -32,9 +32,31 @@ sub ask_warn {
     local $my_gtk::pop_it = 1;
     &interactive::ask_warn;
 }
+
+sub create_boxradio {
+    my ($e, $may_go_to_next, $changed) = @_;
+    my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
+
+    my $boxradio = gtkpack2__(new Gtk::VBox(0, 0),
+			      my @radios = gtkradio(@l, ''));
+    $boxradio->show;
+    mapn {
+	my ($txt, $w) = @_;
+	$w->signal_connect(clicked => sub {
+ 	    ${$e->{val}} = $txt;
+	    &$changed;
+        });
+    } $e->{list}, \@radios;
+
+    $boxradio, sub {
+	my ($v) = @_;
+	mapn { $_[0]->set_active($_[1] eq $v) } \@radios, $e->{list};
+    }
+}
+
 sub create_clist {
     my ($e, $may_go_to_next, $changed) = @_;
-    my (@widgets, $curr);
+    my $curr;
     my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
 
     my $list = new Gtk::CList(1);
@@ -358,7 +380,9 @@ sub ask_from_entries_refW {
 	    } elsif ($e->{type} eq 'treelist') {
 		($w, $set) = create_ctree($e, $may_go_to_next, $changed);
 	    } else {
-		($w, $set) = create_clist($e, $may_go_to_next, $changed);
+		($w, $set) = $::isWizard ?
+		    create_boxradio($e, $may_go_to_next, $changed) :
+		    create_clist($e, $may_go_to_next, $changed);
 	    }
 	    if (@$l == 1) {
 		#- i'm the only one, double click means accepting

@@ -151,11 +151,10 @@ sub selectInstallClass1 {
     $::live || @$l == 1 and return $o->SUPER::selectInstallClass1($verif, $l, $def, $l2, $def2);
 
     my $w = my_gtk->new('');
-    my ($radio, $focused);
+    my $focused;
     gtkadd($w->{window},
 	   gtkpack($o->create_box_with_title(_("Please, choose one of the following classes of installation:")),
-		   (my @radios = map { $radio = new Gtk::RadioButton($_, $radio ? $radio : ()); 
-			 $radio->set_active($_ eq $def); $radio } @$l),
+		   (my @radios = gtkradio(@$l, $def)),
 		   gtkadd(create_hbox(),
 			  map { my $v = $_; 
 				my $b = new Gtk::Button(translate($_));
