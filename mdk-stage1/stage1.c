@@ -407,6 +407,23 @@ int mandrake_move_post(void)
         }
         fclose(f);
 
+        // need to create the few devices needed to start up stage2 in a decent manner, we can't symlink or they will keep CD busy
+        // we need only the ones before mounting /dev as devfs
+        if (scall(mkdir(SLASH_LOCATION "/dev", 0755), "mkdir"))
+                return RETURN_ERROR;
+        if (scall(!(f = fopen(IMAGE_LOCATION LIVE_LOCATION "devices", "rb")), "fopen"))
+                return RETURN_ERROR;
+        while (fgets(buf, sizeof(buf), f)) {
+                char name[500], path[500], type;
+                int major, minor;
+                sscanf(buf, "%s %c %d %d", name, &type, &major, &minor);
+                sprintf(path, "%s%s", SLASH_LOCATION, name);
+                log_message("move: creating device %s %c %d %d", path, type, major, minor);
+                if (scall(mknod(path, type == 'c' ? S_IFCHR : S_IFBLK, makedev(major, minor)), "mknod"))
+                        return RETURN_ERROR;
+        }
+        fclose(f);
+
         log_message("move: pivot_rooting");
         // trick so that kernel won't try to mount the root device when initrd exits
         if (scall((fd = open("/proc/sys/kernel/real-root-dev", O_WRONLY)) < 0, "open"))
