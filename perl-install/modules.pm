@@ -175,7 +175,7 @@ sub write_preload_conf {
 
 sub append_to_modules_loaded_at_startup {
     my ($file, @l) = @_;
-    my $l = join '|', map { '^\s*'.$_.'\s*$' } @l;
+    my $l = join '|', map { '^\s*' . $_ . '\s*$' } @l;
     log::l("to put in $file ", join(", ", @l));
 
     substInFile { 
