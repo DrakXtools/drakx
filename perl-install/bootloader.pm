@@ -296,11 +296,12 @@ wait %d seconds for default boot.
 		label => $isSecure || $isSMP ? 'linux-up' : 'linux-nonfb',
 		root  => "/dev/$root",
 	       }) if $isSecure || $isSMP || $vga_fb;
-    add_kernel($prefix, $lilo, $kernelVersion, '',
+    my $entry = add_kernel($prefix, $lilo, $kernelVersion, '',
 	       {
 		label => 'failsafe',
 		root  => "/dev/$root",
-	       })->{append} .= " failsafe" unless $lilo->{password};
+	       });
+    $entry->{append} .= " failsafe" if $entry && !$lilo->{password};
 
     #- manage older kernel if installed.
     foreach (qw(2.2 hack)) {
