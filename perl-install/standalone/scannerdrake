@@ -158,7 +158,7 @@ sub installfirmware {
     while (1) {
 	# Tell user about firmware installation
 	$in->ask_from('Scannerdrake',
-		      N("It is possible that your %s needs its Firmware to be uploaded everytime when it is turned on.", removeverticalbar($model)) . " " .
+		      N("It is possible that your %s needs its firmware to be uploaded everytime when it is turned on.", removeverticalbar($model)) . " " .
 		      N("If this is the case, you can make this be done automatically.") . " " .
 		      N("To do so, you need to supply the firmware file for your scanner so that it can be installed.") . " " .
 		      N("You find the file on the CD or floppy coming with the scanner, on the manufacturer's home page, or on your Windows partition."),

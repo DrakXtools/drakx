@@ -349,7 +349,7 @@ sub build_notebook {
 			   join('',
                        map { $_->[0] . ": \x{200e}" . $_->[1] . "\n" } (
                                                                   [ N("Vendor"), split('\|', $info->{description}) ],
-                                                                  [ N("Descripton"), reverse split('\|', $info->{description}) ],
+                                                                  [ N("Description"), reverse split('\|', $info->{description}) ],
                                                                   [ N("Media class"), $info->{media_type} ],
                                                                   [ N("Module name"), $module ], 
                                                                   [ N("Mac Address"), c::get_hw_address($interface) ],
