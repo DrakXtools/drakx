@@ -170,16 +170,18 @@ sub test_for_bad_drives {
     log::l("test_for_bad_drives($hd->{file})");
     my $sector = $hd->{geom}{sectors} - 1;
     
+    sub error { die "$_[0] error: $_[1]" }
 
-    local *F; openit($hd, *F, 2) or die "can't open device";
+    local *F; openit($hd, *F, 2) or error(openit($hd, *F, 0) ? 'write' : 'read', "can't open device");
 
     my $seek = sub {
-	c::lseek_sector(fileno(F), $sector, 0) or die "seeking to sector $sector failed";
+	c::lseek_sector(fileno(F), $sector, 0) or error('read', "seeking to sector $sector failed");
     };
     my $tmp;
 
-    &$seek; sysread F, $tmp, $SECTORSIZE or die "test_for_bad_drives: can't even read ($!)";
-    &$seek; syswrite F, $tmp or die "test_for_bad_drives: can't even write ($!)";
+    &$seek; sysread F, $tmp, $SECTORSIZE or error('read', "can't even read ($!)");
+    return if $hd->{readonly} || $::testing;
+    &$seek; syswrite F, $tmp or error('write', "can't even write ($!)");
 
     my $tmp2;
     &$seek; sysread F, $tmp2, $SECTORSIZE or die "test_for_bad_drives: can't even read again ($!)";
@@ -187,7 +189,6 @@ sub test_for_bad_drives {
 _("Something bad is happening on your drive. 
 A test to check the integrity of data has failed. 
 It means writing anything on the disk will end up with random trash");
-    1;
 }
 
 1;
