@@ -64,13 +64,12 @@ sub set {
     log::l("authentication::set $kind with $val");
 
     if ($kind eq 'LDAP') {
+	$in->do_pkgs->install(qw(openldap-clients nss_ldap pam_ldap autofs));
 
 	my $domain = $netc->{LDAPDOMAIN} || do {
 	    my $s = run_program::rooted_get_stdout($::prefix, 'ldapsearch', '-x', '-h', $val, '-b', '', '-s', 'base', '+');
 	    first($s =~ /namingContexts: (.+)/);
 	} or log::l("no ldap domain found on server $val"), return;
-
-	$in->do_pkgs->install(qw(openldap-clients nss_ldap pam_ldap autofs));
 
 	set_nsswitch_priority('ldap');
 	set_pam_authentication('ldap');
@@ -116,7 +115,7 @@ sub pam_modules() {
     'pam_ldap', 'pam_winbind', 'pam_mkhomedir';
 }
 sub pam_module_from_path { 
-    $_[0] && $_[0] =~ m|/lib/security/(pam_.*)\.so| && $1;
+    $_[0] && $_[0] =~ m|(/lib/security/)?(pam_.*)\.so| && $2;
 }
 sub pam_module_to_path { 
     "/lib/security/$_[0].so";
