@@ -148,7 +148,7 @@ sub l2language       { exists $langs{$_[0]} && $langs{$_[0]}[5] }
 sub list_langs {
     my (%options) = @_;
     my @l = keys %langs;
-    $options{exclude_non_installed} ? grep { -e "/usr/share/locale/".l2locale($_)."/LC_CTYPE" } @l : @l;
+    $options{exclude_non_installed} ? grep { -e "/usr/share/locale/" . l2locale($_) . "/LC_CTYPE" } @l : @l;
 }
 
 sub text_direction_rtl() { N("default:LTR") eq "default:RTL" }
@@ -411,7 +411,7 @@ sub c2locale { exists $countries{$_[0]} && $countries{$_[0]}[1] }
 sub list_countries {
     my (%options) = @_;
     my @l = keys %countries;
-    $options{exclude_non_installed} ? grep { -e "/usr/share/locale/".c2locale($_)."/LC_CTYPE" } @l : @l;
+    $options{exclude_non_installed} ? grep { -e "/usr/share/locale/" . c2locale($_) . "/LC_CTYPE" } @l : @l;
 }
 
 #- this list is built with the following command on the compile cluster:

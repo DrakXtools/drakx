@@ -430,7 +430,7 @@ sub setPackages {
 			useMedium($prev_asked_medium);
 			last SUPPL;
 		    }
-		    my $tmphdlistfile = pkgs::urpmidir($o->{prefix})."/hdlist$medium_name.cz";
+		    my $tmphdlistfile = pkgs::urpmidir($o->{prefix}) . "/hdlist$medium_name.cz";
 		    open(my $f2, ">", $tmphdlistfile);
 		    local $_;
 		    while (<$f>) { syswrite($f2, $_) }
@@ -712,7 +712,7 @@ sub install_urpmi {
 	$packages->import_needed_pubkeys($medium->{pubkey}, db => $db, callback => sub {
 					     my (undef, undef, $_k, $id, $imported) = @_;
 					     if ($id) {
-						 log::l(($imported ? "imported" : "found")." key=$id for medium $medium->{descr}");
+						 log::l(($imported ? "imported" : "found") . " key=$id for medium $medium->{descr}");
 						 $medium->{key_ids}{$id} = undef;
 					     }
 					 });
@@ -747,7 +747,7 @@ sub install_urpmi {
 			my $arch = $_->arch;
 			my $ldir = $dir;
 			$ldir =~ s|/([^/]*)%{ARCH}|/./$1$arch|; $ldir =~ s|%{ARCH}|$arch|g;
-			print $LIST "$ldir/".$_->filename."\n";
+			print $LIST "$ldir/" . $_->filename . "\n";
 		    }
 		} else {
 		    #- need to use another method here to build list file.

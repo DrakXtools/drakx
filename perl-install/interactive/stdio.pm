@@ -155,7 +155,7 @@ Your choice? ");
     }
     my ($callback_error) = $common->{callbacks}{$i == 2 ? 'canceled' : 'complete'}->();
     $callback_error and goto ask_fromW_begin;
-    return !($i == 2);
+    return $i != 2;
 }
 
 sub wait_messageW {

@@ -304,7 +304,7 @@ sub unselectPackage($$;$) {
     $pkg->flag_selected or return;
 
     my $state = $packages->{state} ||= {};
-    log::l("removing selection on package ".$pkg->fullname);
+    log::l("removing selection on package " . $pkg->fullname);
     my @l = $packages->disable_selected($packages->{rpmdb}, $state, $pkg);
     log::l("   removed selection on package " . $pkg->fullname . "gives " . join(',', map { scalar $_->fullname } @l));
     if ($o_otherOnly) {
@@ -330,7 +330,7 @@ sub unselectAllPackages($) {
 	if ($_->flag_base || $_->flag_installed && $_->flag_selected) {
 	    #- keep track of package that should be kept selected.
 	    $keep_selected{$_->id} = $_;
-	    log::l("...keeping ".$_->fullname);
+	    log::l("...keeping " . $_->fullname);
 	} else {
 	    #- deselect all packages except base or packages that need to be upgraded.
 	    $_->set_flag_required(0);
@@ -557,7 +557,7 @@ sub read_rpmsrate {
 			    log::l("can't handle complicate flags for packages appearing twice ($_)");
 			    $fatal_error++;
 			}
-			log::l("package $_ appearing twice with different rates ($rate != ".$p->rate.")") if $rate != $p->rate;
+			log::l("package $_ appearing twice with different rates ($rate != " . $p->rate . ")") if $rate != $p->rate;
 			$p->set_rate($rate);
 			$p->set_rflags("$m3[0]||$m4[0]");
 		    } else {
@@ -1094,7 +1094,7 @@ sub install($$$;$$) {
 		    if ($retry_pkg) {
 			log::l("opened rpm database for retry transaction of 1 package only");
 			$trans->add($retry_pkg, $isUpgrade && allowedToUpgrade($retry_pkg->name))
-			    or log::l("add failed for ".$retry_pkg->fullname);
+			    or log::l("add failed for " . $retry_pkg->fullname);
 		    } else {
 			log::l("opened rpm database for transaction of " . int(@transToInstall) .
 			       " new packages, still $nb after that to do");
@@ -1102,7 +1102,7 @@ sub install($$$;$$) {
 			  foreach @transToInstall;
 		    }
 
-		    my @checks = $trans->check; @checks and log::l("check failed : ".join("\n               ", @checks));
+		    my @checks = $trans->check; @checks and log::l("check failed : " . join("\n               ", @checks));
 		    $trans->order or die "error ordering package list: " . c::rpmErrorString();
 		    $trans->set_script_fd(fileno $LOG);
 
@@ -1172,7 +1172,7 @@ sub install($$$;$$) {
 		foreach (@transToInstall) {
 		    if (!$_->flag_installed && packageMedium($packages, $_)->{selected} && !exists($ignoreBadPkg{$_->name})) {
 			push @badPackages, $_;
-			log::l("bad package ".$_->fullname);
+			log::l("bad package " . $_->fullname);
 		    } else {
 			$_->free_header;
 		    }
@@ -1185,7 +1185,7 @@ sub install($$$;$$) {
 		my $name;
 		if (!$retry_pkg->flag_installed && packageMedium($packages, $retry_pkg)->{selected} && !exists($ignoreBadPkg{$retry_pkg->name})) {
 		    if ($retry_count) {
-			log::l("retrying installing package ".$retry_pkg->fullname." alone in a transaction");
+			log::l("retrying installing package " . $retry_pkg->fullname . " alone in a transaction");
 			--$retry_count;
 		    } else {
 			log::l("bad package " . $retry_pkg->fullname . " unable to be installed");

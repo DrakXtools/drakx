@@ -169,7 +169,7 @@ my %menu_options = (
 my @menu_items = 
     (
      [ N("/_File"), undef, undef, undef, '<Branch>' ],
-     [ N("/_File").N("/_Quit"), N("<control>Q"), \&quit_global, undef, '<StockItem>', 'gtk-quit' ],
+     [ N("/_File") . N("/_Quit"), N("<control>Q"), \&quit_global, undef, '<StockItem>', 'gtk-quit' ],
      [ join('', @{$menu_options{PRINTERS_DETECTION}}), undef, 
        sub { $options{PRINTERS_DETECTION} = $check_boxes{PRINTERS_DETECTION}->get_active }, undef, '<CheckItem>' ],
      [ join('', @{$menu_options{MODEMS_DETECTION}}), undef,
@@ -177,8 +177,8 @@ my @menu_items =
      [ join('', @{$menu_options{JAZZ_DETECTION}}), undef,
        sub { $options{JAZZ_DETECTION} = $check_boxes{JAZZ_DETECTION}->get_active }, undef, '<CheckItem>' ],
      [ $menus{help}, undef, undef, undef, '<Branch>' ],
-     [ $menus{help}.N("/_Help"), undef, sub { unless (fork()) { exec("drakhelp --id harddrake") } }, undef, '<Item>' ],
-     [ $menus{help}.N("/_Fields description"), undef, sub {
+     [ $menus{help} . N("/_Help"), undef, sub { unless (fork()) { exec("drakhelp --id harddrake") } }, undef, '<Item>' ],
+     [ $menus{help} . N("/_Fields description"), undef, sub {
            if ($current_device) {
                create_dialog(N("Harddrake help"), 
                              N("Description of the fields:\n\n")
@@ -194,8 +194,8 @@ my @menu_items =
        },
        undef, '<Item>'
      ],
-     [ $menus{help}.N("/_Report Bug"), undef, sub { unless (fork()) { exec("drakbug --report harddrake2 &") } }, undef, '<Item>' ],
-     [ $menus{help}.N("/_About..."), undef, sub {
+     [ $menus{help} . N("/_Report Bug"), undef, sub { unless (fork()) { exec("drakbug --report harddrake2 &") } }, undef, '<Item>' ],
+     [ $menus{help} . N("/_About..."), undef, sub {
            create_dialog(N("About Harddrake"), 
 #-PO: Do not alter the <span ..> and </span> tags
                          N("This is HardDrake, a Mandrakelinux hardware configuration tool.\n<span foreground=\"royalblue3\">Version:</span> %s
@@ -422,7 +422,7 @@ foreach (@classes) {
 
         my $custom_id = harddrake::data::custom_id($_, $title);
         foreach my $field (qw(devfs_device device)) {
-            $_->{$field} = '/dev/'.$_->{$field} if $_->{$field};
+            $_->{$field} = "/dev/$_->{$field}" if $_->{$field};
         }
         $tree_model->append_set($parent_iter, [ 1 => $custom_id, 2 => $index++ ]);
         push @data, [ $_, $Ident ];

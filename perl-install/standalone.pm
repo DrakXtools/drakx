@@ -172,14 +172,14 @@ $SIG{SEGV} = sub { my $progname = $0; $progname =~ s|.*/||; exec("drakbug --inci
 
 sub import {
     ($standalone_name = $0) =~ s|.*/||;
-    c::openlog($standalone_name."[$$]");
+    c::openlog($standalone_name . "[$$]");
     explanations('### Program is starting ###');
 
     eval "*common::$_ = *$_" foreach @common_functs;
 
     foreach my $f (@builtin_functs) {
-	eval "*$_"."::$f = *$f" foreach @drakx_modules;
-	eval "*".caller()."::$f = *$f";
+	eval "*$_" . "::$f = *$f" foreach @drakx_modules;
+	eval "*" . caller() . "::$f = *$f";
     }
 }
 

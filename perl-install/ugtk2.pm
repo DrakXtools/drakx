@@ -236,7 +236,7 @@ sub gtkpowerpack {
 	}
 	#- Get and pack the widget (create it if necessary to  a label...)
 	my $widget = ref($_[0]) ? shift : Gtk2::WrappedLabel->new(shift);
-	my $pack_call = 'pack_'.($attr{pack_end} ? 'end' : 'start');
+	my $pack_call = 'pack_' . ($attr{pack_end} ? 'end' : 'start');
 	$box->$pack_call($widget, $attr{expand}, $attr{fill}, $attr{padding});
 	$widget->show;
     }
@@ -1181,7 +1181,7 @@ sub _ask_dir {
     $f->selection_entry->get_parent->hide;
     $f->ok_button->signal_connect(clicked => sub {
 				      my ($model, $iter) = $f->dir_list->get_selection->get_selected;
-				      $o->{retval} .= '/'.$model->get($iter, 0) if $model;
+				      $o->{retval} .= '/' . $model->get($iter, 0) if $model;
 				  });
 }
 

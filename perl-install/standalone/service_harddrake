@@ -16,7 +16,7 @@ use Storable qw(store retrieve);
 
 my $invert_do_it = $ARGV[0] eq 'X11' ? 1 : 0;
 my ($hw_sysconfdir, $timeout) = ("/etc/sysconfig/harddrake2", $invert_do_it ? 600 : 25);
-my $last_boot_config = $hw_sysconfdir."/previous_hw";
+my $last_boot_config = "$hw_sysconfdir/previous_hw";
 
 $last_boot_config .= '_X11' if $invert_do_it;
 
