@@ -221,9 +221,9 @@ sub createXconf {
     symlink("/tmp/stage2/etc/im_palette.pal", "etc/im_palette.pal");
 
 if (arch() =~ /^ia64/) {
-     require Xconfigurator;
-     my ($card) = Xconfigurator::probe_cards();
-     Xconfigurator::add_to_card__using_Cards($card, $card->{type}) if $card && $card->{type};
+     require Xconfig::card;
+     my ($card) = Xconfig::card::probe();
+     Xconfig::card::add_to_card__using_Cards($card, $card->{type}) if $card && $card->{type};
      output($file, <<END);
 
 Section "Files"

@@ -36,7 +36,7 @@ sub new($$) {
     unless ($::testing) {
 	if ($ENV{DISPLAY} eq ":0" && !$::live) {
 	    my $f = "/tmp/Xconf";
-	    install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{wacom}[0]);
+	    install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{mouse}{wacom}[0]);
 	    devices::make("/dev/kbd");
 
 	    local (*T1, *T2);
@@ -67,9 +67,9 @@ sub new($$) {
 	    };
 	    my @servers = qw(FBDev VGA16); #-)
 	    if (arch() eq "alpha") {
-		require Xconfigurator;
-		my ($card) = Xconfigurator::probe_cards();
-		Xconfigurator::add_to_card__using_Cards($card, $card->{type}) if $card && $card->{type};
+		require Xconfig::card;
+		my ($card) = Xconfig::card::probe();
+		Xconfig::card::add_to_card__using_Cards($card, $card->{type}) if $card && $card->{type};
 		@servers = $card->{server} || "TGA";
 		#-@servers = qw(SVGA 3DLabs TGA) 
 	    } elsif (arch() =~ /^sparc/) {
