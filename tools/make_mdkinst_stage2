@@ -57,12 +57,12 @@ for i in /usr/share/keymaps /usr/share/xmodmap; do
     rm -rf $STAGE2TMP/$i
 done
 
-
+eval `find $STAGE2TMP | perl -MMDK::Common -lne '-l or $s += round_up(-s, 1024); $i++; END { print "size=",int($s/1024),";inodes=$i" }'`;
 	
 mkdir -p $MNTPOINT 2>/dev/null
 for i in $MNTPOINT $STAGE2; do $SUDO umount $i 2>/dev/null ; done
-dd if=/dev/zero of=$STAGE2 bs=1k count=$[ `du -s $STAGE2TMP | cut -f1` + 1024 + 200 ]
-$MKE2FS -N 1100 $STAGE2
+dd if=/dev/zero of=$STAGE2 bs=1k count=$[ $size + 1024 + 200 ]
+$MKE2FS -N $[$inodes + 50] $STAGE2
 $SUDO mount -t ext2 $STAGE2 $MNTPOINT -o loop
 
 rmdir $MNTPOINT/lost+found
