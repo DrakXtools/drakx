@@ -139,7 +139,7 @@ my %kind_names = (
     InputDevice => [ qw(Identifier Driver Protocol Device Type Mode XkbModel XkbLayout XkbDisable Emulate3Buttons Emulate3Timeout) ],
     ServerLayout => [ qw(Identifier) ],
 );
-my @want_string = qw(Identifier DeviceName VendorName ModelName BoardName Driver Device Chipset Monitor Protocol XkbModel XkbLayout Load);
+my @want_string = qw(Identifier DeviceName VendorName ModelName BoardName Driver Device Chipset Monitor Protocol XkbModel XkbLayout Load BusID);
 
 %kind_names = map_each { lc $::a => [ map { lc } @$::b ] } %kind_names;
 @want_string = map { lc } @want_string;
