@@ -165,7 +165,6 @@ $window1->{window}->add(
                                                                ),
                                                    )
                                           ),
-                                 0, Gtk2::HSeparator->new,
                                  0, gtkpack(Gtk2::HButtonBox->new,
                                             gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { 
                                                                   exec("drakhelp --id internet-connection") unless fork() }),
