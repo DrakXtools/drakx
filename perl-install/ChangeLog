@@ -1,3 +1,146 @@
+2001/03/29  dam's  <damien@mandrakesoft.com>
+
+	* tinyfirewall.pm: bad message at the end if kernel2.4
+
+	* netconnect.pm: added missing Device in Ethx when saving/loading
+
+	* standalone/draknet: translation
+
+2001/03/28  dam's  <damien@mandrakesoft.com>
+
+	* standalone/tinyfirewall: typo
+
+	* interactive_gtk.pm: corrected pixel shit if embedded
+
+	* standalone/draksec: embedded mode
+
+	* standalone/draknet: corrected gtkpng in gtkwpm
+	added translation
+
+	* bootlook.pm: cute button box
+
+	* tinyfirewall.pm: workaround to make it work if kernel 2.4
+
+2001/03/28  fcrozat
+
+	* share/rpmsrate: gmc is back in standard GNOME install, for people with
+	existing home
+
+2001/03/28  François Pons  <fpons@mandrakesoft.com>
+
+	* standalone/mousedrake, mouse.pm, standalone/XFdrake: fixed for
+	standalone XFdrake and mousedrake (multi-mouse and
+	correct probe (USB)).
+
+	* Xconfig.pm: re-fix mouse fix.
+	fixed wrong mouse probe.
+	fixed for standalone XFdrake and mousedrake (multi-mouse and
+	correct probe (USB)).
+
+	* Xconfigurator.pm: restore multi mouse support for XF3.
+
+2001/03/28  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/hr.po, share/po/ca.po, share/po/tr.po: Updated Catalan, Danish,
+	Finnish, Croatian and Turkish files
+
+	* share/po/sk.po, share/po/ko.po: Updated Finnish, Korean and Slovak files
+
+	* share/po/az.po: Updated Azeri and Danish files
+
+	* share/po/fi.po: Updated Catalan, Danish, Finnish, Croatian and Turkish
+	files
+	Updated Finnish, Korean and Slovak files
+
+	* share/po/da.po: Updated Catalan, Danish, Finnish, Croatian and Turkish
+	files
+	Updated Azeri and Danish files
+
+2001/03/28  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: add fstab in the log
+
+	* interactive_gtk.pm: better default_size setting
+
+	* commands.pm: fix typo
+	add fstab in the log
+
+	* install_gtk.pm (test_mouse): ensure the test mouse is not too big
+
+2001/03/28  warly
+
+	* share/rpmsrate: add some commercial apps
+
+2001/03/27  dam's  <damien@mandrakesoft.com>
+
+	* bootlook.pm: added kill USR2 before main
+
+	* share/help.png: changed help button
+
+	* share/help.xpm: changed help
+
+	* tinyfirewall.pm: workaround to make it xork.
+
+2001/03/27  François Pons  <fpons@mandrakesoft.com>
+
+	* mdk-stage1/init-data/msgboot-graphicallogo.img.bz2: update boot image.
+
+	* Xconfigurator.pm: fixed mouse support for XF3, only one mouse supported
+	currently.
+
+2001/03/27  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/nfsmount.c: force 8192 bytes for nfs transfers
+
+2001/03/27  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/i18n_compssUsers, share/po/vi.po, share/po/fi.po,
+	share/po/br.po, share/po/DrakX.pot, share/po/ko.po, share/po/ja.po,
+	share/po/wa.po, share/po/de.po, share/po/id.po: Updated Vietnamese,
+	Indonesian, Japanese, Korean and Walloon files
+	changed i18n_compssUsers to make "path" i18n'able
+
+2001/03/27  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm: warnAboutNaughtyServers
+	(setPackages): default profiles selection to GNOME, KDE, CONFIG
+
+	* install_steps_interactive.pm: warnAboutNaughtyServers
+	(summary): fix displaying of printer configured
+
+	* pkgs.pm: warnAboutNaughtyServers
+
+	* install_steps_gtk.pm (installPackages): catch the no png file exception
+	(in case warly is dumb again)
+
+	* my_gtk.pm: try to fix displaying in draksec
+	(create_box_with_title): save the box_size in field "box_size"
+
+	* install2.pm, any.pm: remove use of Bastille. get back to the good state
+	we had :)
+
+	* interactive_gtk.pm: try to fix displaying in draksec
+
+	* share/rpmsrate: move back Bastille-Curses-module to CONFIG
+	  - cleanup LOCALES"zh_*": when there is LOCALES"zh_*", there is
+	LOCALES"zh"
+	  - raise WindowMaker
+	  - add xfce
+	  - am-utils is a server
+	  - raise some stuff in CONFIG to have stuff there
+	  - remove drakxtools from CONFIG (DrakConf requires drakxtools)
+	  - DrakConf from 5 to 4
+
+	* lang.pm (langsLANGUAGE): give the list of languages
+
+2001/03/27  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* install_steps_interactive.pm: change verbage on bootloader warning
+
+2001/03/27  siegel
+
+	* share/po/de.po: minor typo-fixes
+
 2001/03/27  dam's  <damien@mandrakesoft.com>
 
 	* share/help.png: changed help button
