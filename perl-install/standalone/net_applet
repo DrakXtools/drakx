@@ -65,12 +65,12 @@ gtkadd(my $icon = Gtk2::TrayIcon->new("Net_Applet"),
       );
 $eventbox->signal_connect(button_press_event => sub {
 			      if ($_[1]->button == 1) {
-				  is_running('net_monitor') or netMonitor()
+				  is_running('net_monitor') or netMonitor();
 			      }
                               $_[1]->button == 3 && $menu and $menu->popup(undef, undef, undef, undef, $_[1]->button, $_[1]->time);
                           });
 my ($opt) = @ARGV;
-if ($opt eq '--force' || $opt eq '-f') { setAutoStart('TRUE') };
+if ($opt eq '--force' || $opt eq '-f') { setAutoStart('TRUE') }
 
 shouldStart() or die "$onstartupfile should be set to TRUE or use net_applet --force";
 
@@ -93,7 +93,7 @@ sub is_running {
 sub shouldStart() {
     my %p = getVarsFromSh($onstartupfile);
     my $ret = $p{AUTOSTART} eq 'FALSE' ? 0 : 1;
-    $ret
+    $ret;
 }
 sub md5file {
     my @md5;
@@ -107,7 +107,7 @@ sub md5file {
 }
 sub netMonitor() {
     system("/usr/sbin/net_monitor&");
-    checkNetwork()
+    checkNetwork();
 }
 sub checkNetwork() {
     my $netcnx = {};
@@ -118,7 +118,7 @@ sub checkNetwork() {
     go2State($gw_address ? 'connected' : $gw_intf ? 'disconnected' : 'notconfigured', $gw_intf);
 
     my $new_md5 = md5file($prog_name);
-    if ($new_md5 ne $current_md5) { exec($prog_name) };
+    if ($new_md5 ne $current_md5) { exec($prog_name) }
 }
 sub getIP {
     my ($interface) = shift;
@@ -158,11 +158,11 @@ sub setState {
     $menu->append(gtksignal_connect(gtkset_active($checkmi = Gtk2::CheckMenuItem->new_with_label(N("Always launch on startup")), shouldStart()), toggled => sub { setAutoStart(uc(bool2text($checkmi->get_active))) }));
     $checkmi->show;
     $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label(N("Quit"))), activate => sub { mainQuit() }));
-    $menu
+    $menu;
 }
 sub mainQuit() {
      Glib::Source->remove($timeout) if $timeout;
-     Gtk2->main_quit
+     Gtk2->main_quit;
 }
 sub setAutoStart {
     my $state = shift;
