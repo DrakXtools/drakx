@@ -208,8 +208,8 @@ sub selectPackage {
     #- is only used for unselection, not selection)
     my $state = $packages->{state} ||= {};
     $state->{selected} = {};
-    $state->{requested} = packageRequest($packages, $pkg) or return;
-    $packages->resolve_requested($packages->{rpmdb}, $state, no_flag_update => $otherOnly, keep_state => $otherOnly,
+    $packages->resolve_requested($packages->{rpmdb}, $state, packageRequest($packages, $pkg) || {},
+				 no_flag_update => $otherOnly, keep_state => $otherOnly,
 				 callback_choices => \&packageCallbackChoices);
 
     if ($base || $otherOnly) {
@@ -231,21 +231,9 @@ sub unselectPackage($$;$) {
     $pkg->flag_base and return;
     $pkg->flag_selected or return;
 
-    #- try to unwind selection (requested or required) by keeping
-    #- rpmdb is right place.
-    #TODO
-    if ($otherOnly) {
-	$otherOnly->{$pkg->id} = undef;
-    } else {
-	$pkg->set_flag_requested(0);
-	$pkg->set_flag_required(0);
-
-	#- clear state.
-	my $state = $packages->{state} ||= {};
-	$state->{selected} = { $pkg->id };
-	$state->{requested} = {};
-	$packages->resolve_requested($packages->{rpmdb}, $state, keep_state => 1);
-    }
+    my $state = $packages->{state} ||= {};
+    $state->{unselected} = $otherOnly || {};
+    $packages->resolve_unrequested($packages->{rpmdb}, $state, { $pkg->id => undef }, no_flag_update => $otherOnly);
     1;
 }
 sub togglePackageSelection($$;$) {
@@ -271,8 +259,7 @@ sub unselectAllPackages($) {
     if (%selected && %{$packages->{state} || {}}) {
 	my $state = $packages->{state} ||= {};
 	$state->{selected} = \%selected;
-	$state->{requested} = {};
-	$packages->resolve_requested($packages->{rpmdb}, $state, keep_state => 1);
+	$packages->resolve_requested($packages->{rpmdb}, $state, {}, keep_state => 1);
     }
 }
 sub unselectAllPackagesIncludingUpgradable($) {
@@ -288,8 +275,7 @@ sub unselectAllPackagesIncludingUpgradable($) {
     if (%selected && %{$packages->{state} || {}}) {
 	my $state = $packages->{state} ||= {};
 	$state->{selected} = \%selected;
-	$state->{requested} = {};
-	$packages->resolve_requested($packages->{rpmdb}, $state, keep_state => 1);
+	$packages->resolve_requested($packages->{rpmdb}, $state, {}, keep_state => 1);
     }
 }
 
@@ -572,10 +558,9 @@ sub setSelectedFromCompssList {
 	#- selecting $p. the packages are not selected.
 	my $state = $packages->{state} ||= {};
 	$state->{selected} = {};
-	$state->{requested} = packageRequest($packages, $p) || {};
 
-	$packages->resolve_requested($packages->{rpmdb}, $state, no_flag_update => 1,
-				     callback_choices => \&packageCallbackChoices);
+	$packages->resolve_requested($packages->{rpmdb}, $state, packageRequest($packages, $p) || {},
+				     no_flag_update => 1, callback_choices => \&packageCallbackChoices);
 
 	#- this enable an incremental total size.
 	my $old_nb = $nb;
@@ -586,8 +571,7 @@ sub setSelectedFromCompssList {
 	if ($max_size && $nb > $max_size) {
 	    $nb = $old_nb;
 	    $min_level = $p->rate;
-	    $state->{requested} = {}; #- ensure no newer package will be selected.
-	    $packages->resolve_requested($packages->{rpmdb}, $state, keep_state => 1); #- FIXME INCOMPLETE TODO
+	    $packages->resolve_requested($packages->{rpmdb}, $state, {}, keep_state => 1); #- FIXME INCOMPLETE TODO
 	    last;
 	}
 
@@ -801,10 +785,10 @@ sub selectPackagesToUpgrade {
 
     my $state = $packages->{state} ||= {};
     $state->{selected} = {};
-    $state->{requested} = {};
 
-    $packages->resolve_packages_to_upgrade($packages->{rpmdb}, $state, requested => undef);
-    $packages->resolve_requested($packages->{rpmdb}, $state, callback_choices => \&packageCallbackChoices);
+    $packages->resolve_requested($packages->{rpmdb}, $state,
+				 $packages->request_packages_to_upgrade($packages->{rpmdb}, $state, {}, requested => undef) || {},
+				 callback_choices => \&packageCallbackChoices);
 }
 
 sub allowedToUpgrade { $_[0] !~ /^(kernel|kernel22|kernel2.2|kernel-secure|kernel-smp|kernel-linus|kernel-linus2.2|hackkernel|kernel-enterprise)$/ }
