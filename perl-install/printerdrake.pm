@@ -208,21 +208,46 @@ sub auto_detect {
     detect_devices::whatPrinter();
 }
 
+sub wizard_welcome {
+    my ($in) = @_;
+    if ($in) {
+	$in->ask_warn(_("Local Printer"),
+		      _("
+Welcome to the Printer Setup Wizard
+
+This wizard will help you to install your printer(s) connected to this computer.
+Please plug in your printer(s) on this computer and turn it/them on. Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now.
+Note that some computers can crash during the printer auto-detection, use the \"Expert Mode\" of printerdrake to do a printer installation without auto-tection. You also need the \"Expert Mode\" when you want to set up printing on a remote printer when printerdrake does not list it automatically."));
+    }
+}
+
+sub wizard_congratulations {
+    my ($in) = @_;
+    if ($in) {
+	$in->ask_warn(_("Local Printer"),
+		      _("
+Congratulations, your printer is now installed and configured!
+
+You can print using the \"Print\" command of your application (usually in the \"File\" menu).
+
+If you want to add, remove, or rename a printer, or if you want to change the default option settings (paper input tray, printout quality, ...), select \"Printer\" in the \"Hardware\" section of the Mandrake Control Center."))
+    }
+}
 
 sub setup_local {
     my ($printer, $in) = @_;
     my (@port, @str, $device);
     my $queue = $printer->{OLD_QUEUE};
-    my $do_auto_detect =
+    my $do_auto_detect = ((!$::expert) or
 	$in->ask_yesorno(_("Auto-Detection of Printers"), 
 			 _("Printerdrake is able to auto-detect your locally connected parallel and USB printers for you, but note that on some systems the auto-detection CAN FREEZE YOUR SYSTEM AND EVEN CORRUPT YOUR FILE SYSTEMS! So do it ON YOUR OWN RISK!
 
-For local printers auto-detection is not really necessary, because they are external devices where you can easily see on their labels which models you have, but if you really want to auto-detect them, connect them and turn them on now and click \"Yes\", otherwise click \"No\"."),0);
+For local printers auto-detection is not really necessary, because they are external devices where you can easily see on their labels which models you have, but if you really want to auto-detect them, connect them and turn them on now and click \"Yes\", otherwise click \"No\"."),0));
     my @parport;
     my $menuentries;
+    $in->set_help('setupLocal') if $::isInstall;
     if ($do_auto_detect) {
 	@parport = auto_detect($in);
-	$in->set_help('setupLocal') if $::isInstall;
 	for my $p (@parport) {
 	    if ($p->{val}{DESCRIPTION}) {
 		my $menustr = $p->{val}{DESCRIPTION};
@@ -249,7 +274,7 @@ For local printers auto-detection is not really necessary, because they are exte
 		$menuentries->{$menustr} = $p->{port};
 	    }
 	}
-	if ($::expert || !@str) {
+	if ($::expert) {
 	    @port = detect_devices::whatPrinterPort();
 	    for my $q (@port) {
 		if (@str) {
@@ -294,6 +319,7 @@ For local printers auto-detection is not really necessary, because they are exte
     my @menuentrieslist = sort { $menuentries->{$a} cmp $menuentries->{$b} }
     keys(%{$menuentries});
     my $menuchoice = "";
+    my $oldmenuchoice = "";
     if (($printer->{configured}{$queue}) &&
 	($printer->{currentqueue}{'connect'} =~ m/^file:/)) {
 	$device = $printer->{currentqueue}{'connect'};
@@ -304,43 +330,85 @@ For local printers auto-detection is not really necessary, because they are exte
 		last;
 	    }
 	}
+    } else {
+	$device = "";
     }
     if (($menuchoice eq "") && (@menuentrieslist > -1)) {
 	$menuchoice = $menuentrieslist[0];
+	$oldmenuchoice = $menuchoice;
+	if ($device eq "") {
+	    $device = $menuentries->{$menuchoice};
+	}
     }
     if ($in) {
 	$::expert or $in->set_help('configurePrinterDev') if $::isInstall;
-	return if !$in->ask_from(_("Local Printer"),
-				 ($do_auto_detect ?
-				  ($::expert ?
-				   (@str ?
+	if ($#menuentrieslist < 0) { # No menu entry
+	    if ($::expert) {
+		$device = $in->ask_from_entry
+		    (_("Local Printer"),
+		     _("No local printer found! To manually install a printer enter a device name/file name in the input line (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."),
+		     { 
+			 complete => sub {
+			     unless ($menuchoice ne "") {
+				 $in->ask_warn('', _("You must enter a device or file name!"));
+				 return (1,0);
+			     }
+			     return 0;
+			 }
+		     });
+		if ($device eq "") {
+		    return 0;
+		}
+	    } else {
+		$in->ask_warn(_("Local Printer"), _("No local printer found!"));
+		return 0;
+	    }
+	} elsif (($#menuentrieslist == 0) && (!$::expert)) { # only one menu 
+	                                                    # entry
+	    return if !$in->ask_yesorno(_("Local Printer"),
+					_("Detected %s, do you want to set it up?", $menuentrieslist[0]), 1);
+	} else {
+	    return if !$in->ask_from_(
+	    {title => _("Local Printer"),
+	     messages => (($do_auto_detect ?
+			  ($::expert ?
+			   (@str ?
 _("Here is a list of all auto-detected printers. ") : ()) . 
-_("Please choose the desired printer/printer port or enter a device name/file name in the input line") :
-				   (@str ?
+_("Please choose the printer you want to set up or enter a device name/file name in the input line") :
+			   (@str ?
 _("Here is a list of all auto-detected printers. ") : ()) . 
-_("Please choose the desired printer/printer port.\n\n")) :
-				  ($::expert ?
+_("Please choose the printer you want to set up.")) :
+			  ($::expert ?
 _("Please choose the port where your printer is connected to or enter a device name/file name in the input line") :
-_("Please choose the port where your printer is connected to.\n\n"))) .
-				  ($::expert ?
-_(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...).\n\n") :
-				   ()). (join "\n", @str), [
-{ label => _("Your choice"), val => \$menuchoice, list => \@menuentrieslist, not_edit => !$::expert } ],
-        complete => sub {
-            unless ($menuchoice ne "") {
-	        $in->ask_warn('', _("You must choose/enter a printer/device!"));
-	        return (1,0);
-            }
-            return 0;
-        }
+_("Please choose the port where your printer is connected to."))) .
+			 ($::expert ?
+_(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...).") :
+			  ())), 
+             callbacks => {
+		 complete => sub {
+		     unless ($menuchoice ne "") {
+			 $in->ask_warn('', _("You must choose/enter a printer/device!"));
+			 return (1,0);
+		     }
+		     return 0;
+		 },
+		 changed => sub {
+		     if ($oldmenuchoice ne $menuchoice) {
+			 $device = $menuentries->{$menuchoice};
+			 $oldmenuchoice = $menuchoice;
+		     }
+		     return 0;
+		 }
+	     }},
+            [
+	     ($::expert ? 
+	      { val => \$device } : ()),
+	     { val => \$menuchoice, list => \@menuentrieslist, 
+	       not_edit => !$::expert, format => \&translate,
+	       allow_empty_list => $::expert }
+	    ]
         );
-    }
-
-    #- Get the device file name according to what was chosen from the menu
-    if ($menuentries->{$menuchoice}) {
-	$device = $menuentries->{$menuchoice};
-    } else {
-	$device = $menuchoice;
+	}
     }
 
     #- if CUPS is the spooler, make sure that CUPS knows the device
@@ -2042,7 +2110,7 @@ sub main {
 			{title => _("Printerdrake"),
 			 messages =>
 			     ($noprinters ? "" :
-			      _("The following printers are configured. Double-click on one of them to modify it, to set it as default, or to get information about it.")),
+			      _("he following printers are configured. Double-click on a printer to change its settings; to make it the default printer; or to view information about it.")),
 			 cancel => (""),
 			 ok => (""),
 			},
@@ -2068,7 +2136,7 @@ sub main {
 				      $menuchoice = "\@refresh";
 				      1;
 				  },
-				  val => _("Refresh printer list (to get all remote CUPS printers visible)") } : ()),
+				  val => _("Refresh printer list (to display all available remote CUPS printers)") } : ()),
 			  ( $::expert ?
 			    { clicked_may_quit =>
 				  sub {
@@ -2160,7 +2228,8 @@ sub main {
 	    #- on "Add printer"
 	    #$menuchoice = "\@addprinter";
 	    #- Do all the configuration steps for a new queue
-	    choose_printer_type($printer, $in) or next;
+	    $printer->{TYPE} = "LOCAL";
+	    !$::expert or choose_printer_type($printer, $in) or next;
 	    if ($printer->{TYPE} eq 'CUPS') {
 		setup_remote_cups_server($printer, $in);
 		$continue = ($::expert || !$::isInstall || $menushown ||
@@ -2171,13 +2240,13 @@ sub main {
 	    #- printerdrake
 	    $continue = 1;
 	    setup_printer_connection($printer, $in) or next;
-	    choose_printer_name($printer, $in) or next;
+	    !$::expert or choose_printer_name($printer, $in) or next;
 	    get_db_entry($printer, $in);
-	    choose_model($printer, $in) or next;
+	    !$::expert or choose_model($printer, $in) or next;
 	    get_printer_info($printer, $in) or next;
-	    setup_options($printer, $in) or next;
+	    !$::expert or setup_options($printer, $in) or next;
 	    configure_queue($printer, $in);
-	    setasdefault($printer, $in);
+	    !$::expert or setasdefault($printer, $in);
 	    $cursorpos = 
 		$printer->{configured}{$printer->{QUEUE}}{'queuedata'}{'menuentry'} . 
 		($printer->{QUEUE} eq $printer->{DEFAULT} ? 

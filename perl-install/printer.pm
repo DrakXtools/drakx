@@ -225,7 +225,7 @@ sub wait_for_cups {
 	    last;
 	}
     }
-    return cupsready;
+    return $cupsready;
 }
 
 sub assure_device_is_available_for_cups {
