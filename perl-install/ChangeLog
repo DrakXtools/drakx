@@ -1,3 +1,90 @@
+2005/01/21  Pixel  <pixel at mandrakesoft.com>
+
+	* raid.pm: 
+	  - don't write /etc/mdadm.conf when no raid
+	  - use option "auto=yes" in mdadm.conf to ensure mdadm will create
+	/dev/mdX devices when needed
+	(those are not there when using udev and neither kernel raid autostart
+	nor initrd created the raid)
+
+	* keyboard.pm, standalone/keyboarddrake: minimal XkbModel support
+
+2005/01/20  Pixel  <pixel at mandrakesoft.com>
+
+	* commands.pm: add lspcidrake
+
+	* network/shorewall.pm, network/ethernet.pm, standalone/drakconnect:
+	restore previous network::ethernet::get_eth_cards_names() behaviour
+	(i got hit by { map ... }; being a block and not a hash ref)
+
+	* rescue/dirs: not useful anymore (maybe others are unneeded too?)
+
+	* rescue/tree/etc/rc.sysinit: we want /mnt at the root of the rescue
+
+2005/01/20  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/sound.pm: snd-azx was renamed as snd-hda-intel in ALSA's CVS,
+	so let's prepare
+	ground for future
+
+	* modules/interactive.pm (load_category__prompt_for_more)
+	  - fix missing help for SCSI
+	  - display it too for non SCSI disks that're handled as SCSI ones
+	(USB, Firewire, SATA, raid ...)
+	move SATA in its own category
+
+	* modules.pm (append_to_modules_loaded_at_startup_for_all_kernels)
+	introduce it
+	(wrapper around append_to_modules_loaded_at_startup())
+	move SATA in its own category
+
+	* install_any.pm (default_packages) simplify through
+	modules::append_to_modules_loaded_at_startup_for_all_kernels()
+	(default_packages) handle buggy laptops that're unusable without
+	laoding acerhk module
+
+	* install_steps.pm, install_steps_interactive.pm: move SATA in its own
+	category
+
+2005/01/19  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/drakconnect: adapt to new
+	network::ethernet::get_eth_cards_names() prototype
+
+	* standalone/keyboarddrake: use ->ask_from instead of ->ask_from_listf
+	(keeping the same GUI behaviour)
+
+2005/01/19  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/sound.pm (switch) add hint for translator
+
+	* drakxtools.spec: 10.2-0.12mdk
+
+2005/01/18  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/eu.po, share/po/uz.po, share/po/am.po, share/po/uz@Latn.po:
+	updated Basque files;
+	corrected "<control>X" translations for non-latin keyboards
+
+	* share/po/gl.po: corrected "default:LTR" translation
+
+2005/01/18  Pixel  <pixel at mandrakesoft.com>
+
+	* mdk-stage1/rescue-gui.c: VERSION is now DISTRIB_VERSION
+
+	* mdk-stage1/Makefile: include gi/Makefile.config to have DISTRIB_DESCR
+	defined
+
+	* commands.pm: fix *old* typo
+
+	* mygtk2.pm: fix broken focus during install
+
+	* pkgs.pm: fix generating compssUsers.flat (was broken because of the
+	CAT_xxx switch)
+
+	* install_any.pm: auto_install compatibility: CAT_SYSTEM used to be
+	selected by default
+
 2005/01/18  Pixel  <pixel at mandrakesoft.com>
 
 	* install_any.pm: auto_install compatibility: CAT_SYSTEM used to be
@@ -43664,7 +43751,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.999 2005/01/12 17:36:53 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1000 2005/01/18 13:32:45 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
