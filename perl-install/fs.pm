@@ -478,7 +478,7 @@ sub set_default_options {
 			      });
     }
     if (isThisFs('ntfs', $part)) {
-	put_in_hash($options, { ro => 1, 'umask=0' => $opts{security} < 3, 'iocharset=' => $opts{iocharset} });
+	put_in_hash($options, { ro => 1, 'umask=0' => $opts{security} < 3, 'nls=' => $opts{iocharset} });
     }
     if (member('iso9660', split(':', $part->{type})) || isThisFs('auto', $part)) {
 	put_in_hash($options, { user => 1, noexec => 0, 'iocharset=' => $opts{iocharset} });
