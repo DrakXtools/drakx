@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-12-16 15:32+0100\n"
+"POT-Creation-Date: 1999-12-16 17:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -735,8 +735,8 @@ msgid "Choose the new size"
 msgstr ""
 
 #: ../diskdrake.pm_.c:531 ../install_steps_graphical.pm_.c:287
-#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:322
-#: ../install_steps_gtk.pm_.c:371
+#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:327
+#: ../install_steps_gtk.pm_.c:376
 msgid "MB"
 msgstr ""
 
@@ -1488,80 +1488,80 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:259 ../install_steps_gtk.pm_.c:287
+#: ../install_steps_graphical.pm_.c:259 ../install_steps_gtk.pm_.c:292
 msgid "You must have a swap partition"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:261 ../install_steps_gtk.pm_.c:289
+#: ../install_steps_graphical.pm_.c:261 ../install_steps_gtk.pm_.c:294
 msgid ""
 "You don't have a swap partition\n"
 "\n"
 "Continue anyway?"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:287 ../install_steps_gtk.pm_.c:322
+#: ../install_steps_graphical.pm_.c:287 ../install_steps_gtk.pm_.c:327
 msgid "Choose the size you want to install"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:371
+#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:376
 msgid "Total size: "
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:346 ../install_steps_gtk.pm_.c:383
+#: ../install_steps_graphical.pm_.c:346 ../install_steps_gtk.pm_.c:388
 #, c-format
 msgid "Version: %s\n"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:347 ../install_steps_gtk.pm_.c:384
+#: ../install_steps_graphical.pm_.c:347 ../install_steps_gtk.pm_.c:389
 #, c-format
 msgid "Size: %d KB\n"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:462 ../install_steps_gtk.pm_.c:499
+#: ../install_steps_graphical.pm_.c:462 ../install_steps_gtk.pm_.c:504
 msgid "Choose the packages you want to install"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:465 ../install_steps_gtk.pm_.c:502
+#: ../install_steps_graphical.pm_.c:465 ../install_steps_gtk.pm_.c:507
 msgid "Info"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:473 ../install_steps_gtk.pm_.c:510
+#: ../install_steps_graphical.pm_.c:473 ../install_steps_gtk.pm_.c:515
 #: ../install_steps_interactive.pm_.c:80
 msgid "Install"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:492 ../install_steps_gtk.pm_.c:529
+#: ../install_steps_graphical.pm_.c:492 ../install_steps_gtk.pm_.c:534
 #: ../install_steps_interactive.pm_.c:249
 msgid "Installing"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:499 ../install_steps_gtk.pm_.c:536
+#: ../install_steps_graphical.pm_.c:499 ../install_steps_gtk.pm_.c:541
 msgid "Please wait, "
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:501 ../install_steps_gtk.pm_.c:538
+#: ../install_steps_graphical.pm_.c:501 ../install_steps_gtk.pm_.c:543
 msgid "Time remaining "
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:502 ../install_steps_gtk.pm_.c:539
+#: ../install_steps_graphical.pm_.c:502 ../install_steps_gtk.pm_.c:544
 msgid "Total time "
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:507 ../install_steps_gtk.pm_.c:544
+#: ../install_steps_graphical.pm_.c:507 ../install_steps_gtk.pm_.c:549
 #: ../install_steps_interactive.pm_.c:249
 msgid "Preparing installation"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:528 ../install_steps_gtk.pm_.c:559
+#: ../install_steps_graphical.pm_.c:528 ../install_steps_gtk.pm_.c:564
 #, c-format
 msgid "Installing package %s"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:584
+#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:589
 msgid "Go on anyway?"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:584
+#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:589
 msgid "There was an error ordering packages:"
 msgstr ""
 
@@ -1570,32 +1570,40 @@ msgid "Use existing configuration for X11?"
 msgstr ""
 
 #: ../install_steps_gtk.pm_.c:258
-msgid "TODO"
+msgid ""
+"WARNING!\n"
+"\n"
+"DrakX now needs to resize your Windows partition. Be careful: this operation "
+"is\n"
+"dangerous. If you have not already done so, you should first run scandisk "
+"(and\n"
+"optionally run defrag) on this partition and backup your data.\n"
+"When sure, press Ok."
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:271
+#: ../install_steps_gtk.pm_.c:276
 msgid "Automatic resizing failed"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:319
+#: ../install_steps_gtk.pm_.c:324
 #, c-format
 msgid "Going to install %d MB. You can choose to install more programs"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:320
+#: ../install_steps_gtk.pm_.c:325
 msgid "You will be able to choose more precisely in next step"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:532
+#: ../install_steps_gtk.pm_.c:537
 msgid "Estimating"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:554
+#: ../install_steps_gtk.pm_.c:559
 #, c-format
 msgid "%d packages"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:554
+#: ../install_steps_gtk.pm_.c:559
 msgid ", %U MB"
 msgstr ""
 
