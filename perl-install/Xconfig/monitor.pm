@@ -176,7 +176,7 @@ sub getinfoFromDDC() {
     local $_;
     while (($_ = shift @l) ne "\n") {
 	my ($depth, $x, $y) = split;
-	$depth = int(log($depth) / log(2));
+	$depth = int(log($depth) / log(2)) if $depth;
 	
 	push @Modes, [ $x, $y, $depth ];
     }
