@@ -406,7 +406,7 @@ sub row_setting_dialog {
 }
 
 sub get_user_or_group {
-    my $what = @_;
+    my ($what) = @_;
     my @users;
      
     local $_;
