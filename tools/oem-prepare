@@ -370,7 +370,7 @@ sub read_rpmsrate {
 		      map { packageById($packages, $_) } packageDepsId($p);
 
 		    my @m3 = ((grep { !/^\d$/ } @m), @m2);
-		    if (@m3 == 1 && $m3[0] eq 'INSTALL') {
+		    if (@m3 >= 1 && $m3[0] eq 'INSTALL' || @m3 >=2 && $m3[1] eq 'INSTALL') {
 			push @{$packages->{needToCopy} ||= []}, $_;
 			next; #- don't need to put INSTALL flag for a package.
 		    }
