@@ -61,7 +61,7 @@ sub create_boxradio {
 }
 
 sub create_clist {
-    my ($e, $may_go_to_next, $changed) = @_;
+    my ($e, $may_go_to_next, $changed, $double_click) = @_;
     my $curr;
     my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
 
@@ -123,6 +123,7 @@ sub create_clist {
 	${$e->{val}} = $e->{list}[$curr = $row];
 	&$changed;
     });
+    $list->signal_connect(button_press_event => $double_click) if $double_click;
 
     $list, sub {
 	my ($v) = @_;
@@ -133,7 +134,7 @@ sub create_clist {
 }
 
 sub create_ctree {
-    my ($e, $may_go_to_next, $changed) = @_;
+    my ($e, $may_go_to_next, $changed, $double_click) = @_;
     my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
 
     my $sep = quotemeta $e->{separator};
@@ -243,6 +244,7 @@ sub create_ctree {
 	}
 	1;
     });
+    $tree->signal_connect(button_press_event => sub { &$double_click if $curr->row->is_leaf }) if $double_click;
 
     $tree->set_row_height($tree->style->font->ascent + $tree->style->font->descent + 1);
 
@@ -253,7 +255,7 @@ sub create_ctree {
 }
 
 sub create_list {
-    my ($e, $may_go_to_next, $changed) = @_;
+    my ($e, $may_go_to_next, $changed, $double_click) = @_;
     my $l = $e->{list};
     my $list = new Gtk::List();
     $list->set_selection_mode('browse');
@@ -288,6 +290,8 @@ sub create_list {
 	${$e->{val}} = $l->[$list->child_position($row)];
 	&$changed;
     });
+    $list->signal_connect(button_press_event => $double_click) if $double_click;
+
     $list, sub { 
 	my ($v) = @_;
 	eval { 
@@ -383,19 +387,21 @@ sub ask_from_entries_refW {
 	    $set = sub { $adj->set_value($_[0]) };
 	    $get = sub { $adj->get_value };
 	} elsif ($e->{type} =~ /list/) {
+
+	    my $quit_if_double_click = 
+	      #- i'm the only one, double click means accepting
+	      @$l == 1 ? 
+		sub { if ($_[1]{type} =~ /^2/) { $mainw->{retval} = 1; Gtk->main_quit } } : ''; 
+
+	    my @para = ($e, $may_go_to_next, $changed, $quit_if_double_click);
+
 	    if ($e->{help}) {
 		#- used only when needed, as key bindings are dropped by List (CList does not seems to accepts Tooltips).
-		($w, $set) = create_list($e, $may_go_to_next, $changed);
+		($w, $set) = create_list(@para);
 	    } elsif ($e->{type} eq 'treelist') {
-		($w, $set) = create_ctree($e, $may_go_to_next, $changed);
+		($w, $set) = create_ctree(@para);
 	    } else {
-		($w, $set) = $::isWizard ?
-		    create_boxradio($e, $may_go_to_next, $changed) :
-		    create_clist($e, $may_go_to_next, $changed);
-	    }
-	    if (@$l == 1) {
-		#- i'm the only one, double click means accepting
-		$w->signal_connect(button_press_event => sub { if ($_[1]{type} =~ /^2/) { $mainw->{retval} = 1; Gtk->main_quit } });
+		($w, $set) = $::isWizard ? create_boxradio(@para) : create_clist(@para);
 	    }
 	    if (@{$e->{list}} > 4) {
 		$has_scroll = 1;
