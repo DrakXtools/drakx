@@ -3,7 +3,7 @@ package network::netconnect;
 
 use diagnostics;
 use strict;
-use vars qw($isdn_init @isdndata %isdnid2type);
+use vars qw($isdn_init @isdndata);
 
 use common qw(:common :file :functional :system);
 use log;

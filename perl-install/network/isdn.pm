@@ -69,9 +69,16 @@ sub isdn_write_config_backend {
     my ($isdn, $light) = @_;
     if ($light) {
 	modules::mergein_conf("$prefix/etc/modules.conf");
-	@c = any::setup_thiskind($in, 'isdn', !$::expert, 1);
-	modules::add_alias("ippp0", $c[0]{driver});
-	isdn_detect_backend($isdn);
+	if ($netc->{autodetect}{isdn}{id}) {
+	    @c = any::setup_thiskind($in, 'isdn', !$::expert, 1);
+	    modules::add_alias("ippp0", $c[0]{driver});
+	    isdn_detect_backend($isdn);
+	} else {
+	    my $a="";
+	    defined $isdn->{$_} and $a .= "$_=" . $isdn->{$_} . " " foreach qw(type protocol mem io io0 io1 irq);
+	    modules::set_options($isdn->{driver}, $a);
+	}
+
 
 	$::isStandalone and modules::write_conf($prefix);
 	foreach my $f ('ioptions1B', 'ioptions2B') {
@@ -220,7 +227,6 @@ sub isdn_detect {
 	    isdn_ask($isdn, $netc, _("I have detected an ISDN PCI Card, but I don't know the type. Please select one PCI card on the next screen.")) or return;
 	} else {
 	  isdn_detect_step_1:
-	    print "plop isdn protocol\n";
 	    $isdn->{protocol}=isdn_ask_protocol() or return;
 	  isdn_detect_step_2:
 	    isdn_ask_info($isdn, $netc) or goto isdn_detect_step_1;
@@ -246,10 +252,11 @@ sub isdn_detect_backend {
 	$isdn->{$_} = sprintf("%0x", $isdn->{$_}) foreach ('vendor', 'id');
 	$isdn->{card_type} = 'pci';
 	($isdn->{type}) = $isdn->{options} =~ /type=(\d+)/;
-	if ($c->{options} !~ /protocol/ && $isdn->{protocol}) {
-	    $c->{options} .= "protocol=" . $isdn->{protocol};
+	if ($c->{options} !~ /protocol=/ && $isdn->{protocol} =~ /\d/) {
+	    modules::set_options($c->{driver}, $c->{options} . " protocol=" . $isdn->{protocol});
 	}
-	$c->{options} =~ /protocol=(\w+)/ and $isdn->{protocol} = $1;
+	$c->{options} =~ /protocol=(\d)/ and $isdn->{protocol} = $1;
+	print "plop " . $c->{options} . "\n";
     }
 }
 
