@@ -5,6 +5,21 @@
 
 	* install_steps_interactive.pm: avoid asking for minimal install for
 	upgrade.
+
+	* crypto.pm: fix incomplete prefix for update mirror when adding an entry
+	for urpmi.
+
+	* pkgs.pm: use rpm version comparison function.
+
+	* c/stuff.xs.pm: added rpmvercmp.
+
+2002/01/09  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: fixed too many package selected for No X or With X
+	option of minimal installation.
+
+	* install_steps_interactive.pm: avoid asking for minimal install for
+	upgrade.
 	fixed stupid.
 
 	* crypto.pm: fix incomplete prefix for update mirror when adding an entry
