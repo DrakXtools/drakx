@@ -88,12 +88,15 @@ sub get_geometry($) {
     my %geom; @geom{qw(heads sectors cylinders start)} = unpack "CCSL", $g;
     $geom{totalcylinders} = $geom{cylinders};
 
+    my $total;
     #- $geom{cylinders} is no good (only a ushort, that means less than 2^16 => at best 512MB)
-    if (my $total = c::total_sectors(fileno F)) {
+    if ($total = c::total_sectors(fileno F)) {
 	$geom{cylinders} = int $total / $geom{heads} / $geom{sectors};
+    } else {
+	$total = $geom{heads} * $geom{sectors} * $geom{cylinders}
     }
 
-    { geom => \%geom, totalsectors => $geom{heads} * $geom{sectors} * $geom{cylinders} };
+    { geom => \%geom, totalsectors => $total };
 }
 
 sub openit($$;$) { sysopen $_[1], $_[0]{file}, $_[2] || 0; }
@@ -110,10 +113,29 @@ sub kernel_read($) {
     common::sync(); sleep(1);
 }
 
+sub raw_removed {
+    my ($hd, $raw) = @_;
+}
+sub can_raw_add {
+    my ($hd) = @_;
+    $_->{size} || $_->{type} or return 1 foreach @{$hd->{primary}{raw}};
+    0;
+}
+sub raw_add {
+    my ($hd, $raw, $part) = @_;
+
+    foreach (@$raw) {
+	$_->{size} || $_->{type} and next;
+	$_ = $part;
+	return;
+    }
+    die "raw_add: partition table already full";
+}
+
 sub zero_MBR {
     my ($hd) = @_;
     #- force the standard partition type for the architecture
-    my $type = arch() eq "alpha" ? "bsd" : arch() =~ /^sparc/ ? "sun" : arch() eq "ppc" ? "mac" : "dos";
+    my $type = arch() =~ /ia64/ ? 'gpt' : arch() eq "alpha" ? "bsd" : arch() =~ /^sparc/ ? "sun" : arch() eq "ppc" ? "mac" : "dos";
     #- override standard mac type on PPC for IBM machines to dos
     $type = "dos" if (arch() =~ /ppc/ && detect_devices::get_mac_model() =~ /^IBM/);
     require("partition_table_$type.pm");
