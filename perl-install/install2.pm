@@ -154,7 +154,7 @@ $o = $::o = {
                  DBENTRY      => "PostScript",
                  PAPERSIZE    => "legal",
                  CRLF         => 0,
-                 AUTOSENDEOF  => 0,
+                 AUTOSENDEOF  => 1,
 
                  DEVICE       => "/dev/lp0",
 

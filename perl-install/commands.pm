@@ -514,7 +514,7 @@ sub  install_cpio($$) {
     run_program::run("cd $dir ; bzip2 -cd $cpio | cpio -id $name $name/*");
 
     #- not found, cache result
-    $cached_failed_install_cpio{"$dir $name"} = ! -e "$dir/$name";
+    return if $cached_failed_install_cpio{"$dir $name"} = ! -e "$dir/$name";
     "$dir/$name";
 }
 

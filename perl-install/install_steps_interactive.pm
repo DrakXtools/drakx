@@ -546,7 +546,7 @@ _("Color depth options") => { val => \$o->{printer}{BITSPERPIXEL}, type => 'list
 	install_steps::printerConfig($o);
 	$o->{printer}{complete} = 0;
 	
-	$action = ${{reverse %action}}{$o->ask_from_list('', _("Do you want to test the printer?"),
+	$action = ${{reverse %action}}{$o->ask_from_list('', _("Do you want to test printing?"),
 							 [ map { $action{$_} } @action ], $action{'done'})};
 
 	my $pidlpd;
@@ -567,7 +567,7 @@ _("Color depth options") => { val => \$o->{printer}{BITSPERPIXEL}, type => 'list
 
 	    run_program::rooted($o->{prefix}, "lpr", "-P$o->{printer}{QUEUE}", $_) foreach @testpages;
 
-	    $action = $o->ask_yesorno('', _("Is it correct?"), 1) ? 'done' : 'change';
+	    $action = $o->ask_yesorno('', _("Is this correct?"), 1) ? 'done' : 'change';
 	}
     } while ($action ne 'done');
     $o->{printer}{complete} = 1;
