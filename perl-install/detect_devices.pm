@@ -694,15 +694,17 @@ sub raidAutoStartIoctl {
 
 sub raidAutoStartRaidtab {
     my (@parts) = @_;
+    $::isInstall or return;
     require raid;
     #- faking a raidtab, it seems to be working :-)))
     #- (choosing any inactive md)
     raid::inactivate_all();
     foreach (@parts) {
 	my ($nb) = grep { !raid::is_active("md$_") } 0..7;
-	output("/etc/raidtab", "raiddev /dev/md$nb\n  device " . devices::make($_->{device}) . "\n");
-	run_program::run('raidstart', devices::make("md$nb"));
+	output("/tmp/raidtab", "raiddev /dev/md$nb\n  device " . devices::make($_->{device}) . "\n");
+	run_program::run('raidstart', '-c', "/tmp/raidtab", devices::make("md$nb"));
     }
+    unlink "/tmp/raidtab";
 }
 
 sub raidAutoStart {
