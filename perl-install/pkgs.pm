@@ -376,6 +376,8 @@ sub psUpdateHdlistsDeps {
 	-e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
 	install_any::getAndSaveFile("Mandrake/base/$hdlist", $newf) or die "no $hdlist found";
 	symlinkf $newf, "/tmp/$hdlist";
+	install_any::getAndSaveFile("Mandrake/base/synthesis.$hdlist",
+				    "$prefix/var/lib/urpmi/synthesis.hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2"));
 	++$medium;
     }
 
