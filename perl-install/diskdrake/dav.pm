@@ -82,7 +82,7 @@ sub options {
 sub mount_point { 
     my ($in, $dav, $all_hds) = @_;
     my $proposition = $dav->{device} =~ /(\w+)/ ? "/mnt/$1" : "/mnt/dav";
-    diskdrake::interactive::Mount_point_raw_hd($in, $dav, $all_hds, [$proposition] );
+    diskdrake::interactive::Mount_point_raw_hd($in, $dav, $all_hds, $proposition);
 }
 
 sub format_dav_info {

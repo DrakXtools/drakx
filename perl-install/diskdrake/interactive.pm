@@ -586,14 +586,14 @@ Remove the loopback first")), return 1;
     }
 }
 sub Mount_point_raw_hd {
-    my ($in, $part, $all_hds, $propositions) = @_;
+    my ($in, $part, $all_hds, @propositions) = @_;
 
-    my $mntpoint = $part->{mntpoint};
+    my $mntpoint = $part->{mntpoint} || shift @propositions;
     $in->ask_from(
         '',
         _("Where do you want to mount %s?", $part->{device}),
 	[ { label => _("Mount point"), val => \$mntpoint, 
-	    list => [ if_($mntpoint, $mntpoint), '', @$propositions ], 
+	    list => [ if_($mntpoint, $mntpoint), '', @propositions ], 
 	    not_edit => 0 } ],
 	complete => sub {
 	    $part->{mntpoint} eq $mntpoint || check_mntpoint($in, $mntpoint, {}, $part, $all_hds) or return 1;

@@ -56,7 +56,7 @@ sub raw_hd_mount_point {
     my ($in, $raw_hd) = @_;
     my ($default) = $raw_hd->{device} =~ m|([^/]+)$|;
     $default =~ s/\s+/-/g;
-    diskdrake::interactive::Mount_point_raw_hd($in, $raw_hd, $all_hds, [ "/mnt/$default" ]);
+    diskdrake::interactive::Mount_point_raw_hd($in, $raw_hd, $all_hds, "/mnt/$default");
 }
 
 sub per_entry_info_box {
