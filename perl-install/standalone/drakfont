@@ -419,8 +419,10 @@ sub create_fontsel {
 
 sub display_error {
     my $message = @_;
+    my $label;
     ${$central_widget}->destroy();
-    gtkpack($font_box, $message);
+    gtkpack($font_box, $label = new Gtk::Label($message));
+    $central_widget = \$message;
 }
 
 sub interactive_mode {
@@ -449,7 +451,7 @@ sub interactive_mode {
 				0, _("DrakFont"),
 				0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
 					  gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=>
-							    sub { gtkdestroy($central_widget); $windows = 1; license() }),
+							    sub { ${$central_widget}->destroy(); $windows = 1; license() }),
 					  gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked =>
 							    sub {  }),
 					  gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked => sub { Gtk->main_quit() }),
@@ -462,7 +464,7 @@ sub interactive_mode {
 			       )
 		   ),
 	  );
-    $central_widget = $font_sel;
+    $central_widget = \$font_sel;
     $window1->show_all;
     $window1->realize;
     $window1->show_all();
@@ -527,14 +529,14 @@ sub import_status {
     my $table;
     gtkpack($font_box,
 	    $table = create_packtable({ col_spacings => 30, row_spacings => 20},
-   if_($windows, [_("Search Fonts on your System"), $pbar = new_with_adjustment Gtk::ProgressBar($adj), gtkset_sensitive($check1 = new Gtk::CheckButton(), 0)]),
+   [_("Search Fonts on your System"), $pbar = new_with_adjustment Gtk::ProgressBar($adj), gtkset_sensitive($check1 = new Gtk::CheckButton(), 0)],
    ["Supress Doublons ", $pbar1 = new_with_adjustment Gtk::ProgressBar($adj1), gtkset_sensitive($check2 = new Gtk::CheckButton(), 0)],
    ["Install Fonts ", $pbar2 = new_with_adjustment Gtk::ProgressBar($adj2), gtkset_sensitive($check3 = new Gtk::CheckButton(), 0)],
    ["Post Install Fonts ", $pbar3 = new_with_adjustment Gtk::ProgressBar($adj3), gtkset_sensitive($check4 = new Gtk::CheckButton(), 0)],
 			    ),
 	   );
     $central_widget = \$table;
-#    $font_box->show_all();
+    $font_box->show_all();
 #    my $timer  = Gtk->timeout_add(  5, \&progress_timeout );
 #    my $timer1 = Gtk->timeout_add( 10, \&progress_timeout1 );
 #    my $timer2 = Gtk->timeout_add( 15, \&progress_timeout2 );
