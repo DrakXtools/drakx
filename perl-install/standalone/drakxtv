@@ -140,8 +140,12 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
     }
 }
 
-
-if ( grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' } detect_devices::probeall(1)) {
+my @devices = detect_devices::probeall(1);
+if (grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' } @devices) {
+    if (($< == 0) && (grep { $_->{driver} eq 'bttv' } @devices)) {
+	   use harddrake::bttv;
+	   bttv::config($in);
+    }
     scan4channels();
     $in->exit(0);
 } else {
