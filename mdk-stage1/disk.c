@@ -58,7 +58,7 @@ static enum return_type try_with_device(char *dev_name)
 	char device_fullname[50];
 	char location_full[500];
 
-	char * disk_own_mount = "/tmp/disk";
+	char * disk_own_mount = "/tmp/hdimage";
 
 	int major, minor, blocks;
 	char name[100];
