@@ -695,22 +695,22 @@ sub configurePrinter {
     $o->do_pkgs->install('foomatic', 'printer-utils','printer-testpages',
 			 if_($o->do_pkgs->is_installed('gimp'), 'gimpprint'));
     
-    require printer;
-    eval { add2hash($o->{printer} ||= {}, printer::getinfo($o->{prefix})) }; #- get existing configuration.
+    require printer::main;
+    eval { add2hash($o->{printer} ||= {}, printer::main::getinfo($o->{prefix})) }; #- get existing configuration.
 
-    require printerdrake;
-    printerdrake::install_spooler($o->{printer}, $o); #- not interactive...
+    require printer::printerdrake;
+    printer::printerdrake::install_spooler($o->{printer}, $o); #- not interactive...
 
     foreach (values %{$o->{printer}{configured} || {}}) {
 	log::l("configuring printer queue " . $_->{queuedata}{queue} || $_->{QUEUE});
 	#- when copy is so adulée (sorry french taste :-)
 	#- and when there are some configuration in one place and in another place...
 	$o->{printer}{currentqueue} = {};
-	printer::copy_printer_params($_->{queuedata}, $o->{printer}{currentqueue});
-	printer::copy_printer_params($_, $o->{printer});
+	printer::main::copy_printer_params($_->{queuedata}, $o->{printer}{currentqueue});
+	printer::main::copy_printer_params($_, $o->{printer});
 	#- setup all configured queues, which is not the case interactively where
 	#- only the working queue is setup on configuration.
-	printer::configure_queue($o->{printer});
+	printer::main::configure_queue($o->{printer});
     }
 }
 
