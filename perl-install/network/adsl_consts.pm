@@ -316,6 +316,14 @@ our %adsl_data = (
                    method => 'pppoe',
                   },
 
+                  N("Czech Republic") . "|Cesky Telecom" =>
+                  {
+                   vpi => 8,
+                   vci => 48,
+                   Encapsulation => 6,
+                   method => 'pppoa',
+                  },
+
                   N("Denmark") . "|Any" =>
                   {
                    vpi => 0,
@@ -472,6 +480,8 @@ our %adsl_data = (
                    vpi => 8,
                    vci => 30,
                    Encapsulation => 6,
+                   dnsServer2 => '192.115.106.10',
+                   dnsServer3 => '192.115.106.11',
                    method => 'pppoa',
                   },
 
@@ -746,6 +756,14 @@ our %adsl_data = (
                    method => 'pppoa',
                   },
 
+                  N("Switzerland") . "|Tiscali.ch" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoa',
+                  },
+
                   N("Thailand") . "|Asianet" =>
                   {
                    vpi => 0,
@@ -753,6 +771,16 @@ our %adsl_data = (
                    Encapsulation => 1,
                    dnsServer2 => '203.144.225.242',
                    dnsServer3 => '203.144.225.72',
+                   method => 'pppoe',
+                  },
+
+                  N("Tunisia") . "|Planet.tn" =>
+                  {
+                   vpi => 0,
+                   vci => 23,
+                   Encapsulation => 5,
+                   dnsServer2 => '193.95.93.77',
+                   dnsServer3 => '193.95.66.10',
                    method => 'pppoe',
                   },
 
