@@ -125,6 +125,22 @@ sub install2::handleMoveKey {
     my $o = $::o;
 
     lomount_clp("always_i18n_$o->{locale}{lang}", '/usr');
+
+    require detect_devices;
+    require fsedit;
+    require fs;
+
+    my @keys = grep { $_->{usb_media_type} && index($_->{usb_media_type}, 'Mass Storage|') == 0 && $_->{media_type} eq 'hd' } detect_devices::get();
+
+    foreach my $hd (@keys) {
+	$hd->{file} = devices::make($hd->{device});
+	fsedit::use_proc_partitions($hd);
+    }
+
+    my @parts = fsedit::get_fstab(@keys);
+    each_index { $_->{mntpoint} = '/mnt/key' . ($::i || '') } @parts;
+
+    fs::mount_part($_) foreach @parts;
 }
 
 sub install2::startMove {
