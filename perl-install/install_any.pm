@@ -321,6 +321,12 @@ sub setPackages {
 	if ($::auto_install && !$o->{compssUsersChoice}) {
 	    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}{flags}} } @{$o->{compssUsersSorted}};
 	}
+	if (!$::auto_install) {
+	    #- by default, choose:
+	    $o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG';
+	    $o->{compssUsersChoice}{$_} = 1 
+	      foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
+	}
 	$o->{compssUsersChoice}{TV} = 1 if grep { $_->{driver} eq 'bttv' } detect_devices::probeall();
 	$o->{compssUsersChoice}{SYSTEM} = 1;
 	$o->{compssUsersChoice}{BURNER} = 1 if detect_devices::burners();
@@ -341,7 +347,7 @@ sub setPackages {
 	    pkgs::packageByName($o->{packages}, "locales-$_") or next;
 	    push @{$o->{default_packages}}, "locales-$_";
 	}
-	foreach (lang::langs($o->{langs})) {
+	foreach (lang::langsLANGUAGE($o->{langs})) {
 	    $o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
 	}
 	#- for the first time, select package to upgrade.
