@@ -378,7 +378,7 @@ sub tell_kernel {
 	    } elsif ($action eq 'del') {
 		$force_reboot ||= !c::del_partition(fileno $F, $part_number);
 	    }
-	    log::l("tell kernel $action ($part_number $o_start $o_size), rebootNeeded is now " . bool2text($hd->{rebootNeeded}));
+	    log::l("tell kernel $action ($hd->{device} $part_number $o_start $o_size), rebootNeeded is now " . bool2text($hd->{rebootNeeded}));
 	}
     }
     if ($force_reboot) {
@@ -387,7 +387,7 @@ sub tell_kernel {
 	    syscall_('umount', $_->{real_mntpoint}) or log::l(N("error unmounting %s: %s", $_->{real_mntpoint}, $!));
 	}
 	$hd->{rebootNeeded} = !ioctl($F, c::BLKRRPART(), 0);
-	log::l("tell kernel force_reboot, rebootNeeded is now $hd->{rebootNeeded}.");
+	log::l("tell kernel force_reboot ($hd->{device}), rebootNeeded is now $hd->{rebootNeeded}.");
 
 	foreach (@magic_parts) {
 	    syscall_('mount', $_->{real_mntpoint}, $_->{fs_type}, c::MS_MGC_VAL()) or log::l(N("mount failed: ") . $!);
