@@ -30,6 +30,7 @@
 #include <dirent.h>
 #include <sys/types.h>
 #include <bzlib.h>
+#include <sys/mount.h>
 #include "stage1.h"
 #include "log.h"
 #include "mount.h"
@@ -157,7 +158,6 @@ void set_param_valued(char *param_name, char *param_value)
 
 void set_param(int i)
 {
-	log_message("setting param %d", i);
 	stage1_mode |= i;
 	if (i == MODE_RESCUE) {
 		set_param_valued("special_stage2", "rescue");
@@ -167,7 +167,6 @@ void set_param(int i)
 
 void unset_param(int i)
 {
-	log_message("unsetting param %d", i);
 	stage1_mode &= ~i;
 }
 
@@ -204,6 +203,38 @@ int ramdisk_possible(void)
 		log_message("warning, ramdisk is not possible due to low mem!");
 		return 0;
 	}
+}
+
+
+static void save_stuff_for_rescue(void)
+{
+	void save_this_file(char * file) {
+		char buf[5000];
+		int fd_r, fd_w, i;
+		char location[100];
+
+		if ((fd_r = open(file, O_RDONLY)) < 0) {
+			log_message("can't open %s for read", file);
+			return;
+		}
+		strcpy(location, STAGE2_LOCATION);
+		strcat(location, file);
+		if ((fd_w = open(location, O_WRONLY)) < 0) {
+			log_message("can't open %s for write", location);
+			close(fd_r);
+			return;
+		}
+		if ((i = read(fd_r, buf, sizeof(buf))) <= 0) {
+			log_message("can't read from %s", file);
+			close(fd_r); close(fd_w);
+			return;
+		}
+		if (write(fd_w, buf, i) != i)
+			log_message("can't write %d bytes to %s", i, location);
+		close(fd_r); close(fd_w);
+		log_message("saved file %s for rescue (%d bytes)", file, i);
+	}
+	save_this_file("/etc/resolv.conf");
 }
 
 
@@ -258,13 +289,19 @@ enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 	BZ2_bzclose(st2); /* opened by gzdopen, but also closes the associated fd */
 	close(ram_fd);
 
-	if (IS_RESCUE)
-		return RETURN_OK; /* fucksike, I lost several hours wondering why the kernel won't see the rescue if it is alreay mounted */
-
 	if (my_mount(ramdisk, STAGE2_LOCATION, "ext2"))
 		return RETURN_ERROR;
 
 	set_param(MODE_RAMDISK);
+
+	if (IS_RESCUE) {
+		save_stuff_for_rescue();
+		if (umount(STAGE2_LOCATION)) {
+			log_perror(ramdisk);
+			return RETURN_ERROR;
+		}
+		return RETURN_OK; /* fucksike, I lost several hours wondering why the kernel won't see the rescue if it is alreay mounted */
+	}
 
 	return RETURN_OK;
 }
