@@ -31,7 +31,7 @@ sub auto_detect {
 }
 
 
-sub setup_local($$$) {
+sub setup_local {
     my ($printer, $in) = @_;
 
     my $queue = $printer->{OLD_QUEUE};
@@ -89,7 +89,7 @@ complete => sub {
     1;
 }
 
-sub setup_lpd($$$) {
+sub setup_lpd {
     my ($printer, $in) = @_;
 
     my $uri;
@@ -136,7 +136,7 @@ complete => sub {
     1;
 }
 
-sub setup_smb($$$) {
+sub setup_smb {
     my ($printer, $in) = @_;
 
     my $uri;
@@ -225,7 +225,7 @@ complete => sub {
     1;
 }
 
-sub setup_ncp($$$) {
+sub setup_ncp {
     my ($printer, $in) = @_;
 
     my $uri;
@@ -294,7 +294,7 @@ complete => sub {
     1;
 }
 
-sub setup_socket($$$) {
+sub setup_socket {
     my ($printer, $in) = @_;
     my ($hostname, $port);
 
@@ -342,7 +342,7 @@ complete => sub {
     1;
 }
 
-sub setup_uri($$$) {
+sub setup_uri {
     my ($printer, $in) = @_;
 
     return if !$in->ask_from_entries_refH(_("Printer Device URI"),
@@ -378,7 +378,7 @@ complete => sub {
     1;
 }
 
-sub setup_postpipe($$$) {
+sub setup_postpipe {
     my ($printer, $in) = @_;
 
     my $uri;
@@ -412,7 +412,7 @@ complete => sub {
     1;
 }
 
-sub setup_gsdriver($$$;$) {
+sub setup_gsdriver {
     my ($printer, $in, $upNetwork) = @_;
     #- Read the printer driver database if necessary
     if ((keys %printer::thedb) == 0) {
@@ -682,7 +682,7 @@ Does it work properly?"), 1) and last;
     $printer->{complete} = 1;
 }
 
-sub setup_default_spooler ($$$) {
+sub setup_default_spooler {
     my ($printer, $in) = @_;
     $printer->{SPOOLER} ||= 'cups';
     my $str_spooler = 
@@ -693,19 +693,19 @@ sub setup_default_spooler ($$$) {
 			    ) or return;
     $printer->{SPOOLER} = $printer::spooler{$str_spooler};
     # Install the spooler if not done yet
-    install_spooler($printer);
+    install_spooler($printer, $in);
     # Get the queues of this spooler
     printer::read_configured_queues($printer);
     return $printer->{SPOOLER};
 }
 
-sub install_spooler ($$) {
+sub install_spooler {
     # installs the default spooler and start its daemon
     # TODO: Automatically transfer queues between LPRng and LPD,
     #       Turn off /etc/printcap writing in CUPS when LPD or
     #       LPRng is used (perhaps better to be done in CUPS/LPD/LPRng
     #       start-up scripts?)
-    my ($printer) = @_;
+    my ($printer, $in) = @_;
     if (!$::testing) {
 	if ($printer->{SPOOLER} eq "cups") {
 	    $in->do_pkgs->install(('cups', 'xpp', 'qtcups', 'kups',
@@ -716,14 +716,14 @@ sub install_spooler ($$) {
 	    sleep 1;
 	} elsif ($printer->{SPOOLER} eq "lpd") {
 	    # "lpr" conflicts with "LPRng", remove "LPRng"
-	    $in->do_pkgs->remove('LPRng');
+	    $in->do_pkgs->remove_nodeps('LPRng');
 	    $in->do_pkgs->install('lpr');
 	    # Start daemon
 	    printer::start_service("lpd");
 	    sleep 1;
 	} elsif ($printer->{SPOOLER} eq "lprng") {
 	    # "LPRng" conflicts with "lpr", remove "lpr"
-	    $in->do_pkgs->remove('lpr');
+	    $in->do_pkgs->remove_nodeps('lpr');
 	    $in->do_pkgs->install('LPRng');
 	    # Start daemon
 	    printer::start_service("lpd");
@@ -742,8 +742,8 @@ sub main {
     # printerdrake does not work without foomatic, and for more convenience
     # we install some more stuff
     if (!$::testing) {
-	$in->do_pkgs->install(('foomatic', 'printer-utils', 'printer-testpages',
-		   (printer::installed("gimp") ? 'gimpprint' : ())));
+	$in->do_pkgs->install(('foomatic', 'printer-utils','printer-testpages',
+		   ($in->do_pkgs->is_installed("gimp") ? 'gimpprint' : ())));
     }
 
     # only experts should be asked for the spooler
@@ -751,7 +751,7 @@ sub main {
 
     # If we have chosen a spooler, install it.
     if (($printer->{SPOOLER}) && ($printer->{SPOOLER} ne '')) {
-	install_spooler($printer);
+	install_spooler($printer, $in);
     }
 
     my ($queue, $continue) = ('', 1);

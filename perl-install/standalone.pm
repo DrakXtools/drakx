@@ -36,9 +36,22 @@ sub install_if {
 sub remove {
     my ($o, @l) = @_;
     $o->{in}->suspend;
-    my $ret = system('rpm', '-e ', @l);
+    my $ret = system('rpm', '-e', @l);
     $o->{in}->resume;
     $ret;
+}
+
+sub remove_nodeps {
+    my ($o, @l) = @_;
+    $o->{in}->suspend;
+    my $ret = system('rpm', '-e', '--nodeps', @l);
+    $o->{in}->resume;
+    $ret;
+}
+
+sub is_installed {
+    my ($o, $pkg) = @_;
+    system('rpm', '-q', $pkg) == 0;
 }
 
 1;
