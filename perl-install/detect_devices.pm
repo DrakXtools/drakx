@@ -16,6 +16,7 @@ use c;
 #-#####################################################################################
 my @netdevices = map { my $l = $_; map { "$l$_" } (0..3) } qw(eth tr plip fddi);
 my %serialprobe = ();
+my $usb_interface = undef;
 
 #-######################################################################################
 #- Functions
@@ -243,7 +244,25 @@ sub whatPrinter() {
 }
 
 sub whatPrinterPort() {
-    grep { tryWrite($_)} qw(/dev/lp0 /dev/lp1 /dev/lp2);
+    grep { tryWrite($_)} qw(/dev/lp0 /dev/lp1 /dev/lp2 /dev/usb/usblp0);
+}
+
+sub probeUSB {
+    require pci_probing::main;
+    require modules;
+    defined($usb_interface) and return $usb_interface;
+    if (($usb_interface) = grep { /usb-/ } map { $_->[1] } pci_probing::main::probe('')) {
+	eval { modules::load($usb_interface, "SERIAL_USB") };
+	if ($@) {
+	    $usb_interface = '';
+	} else {
+	    modules::load("usbkbd");
+	    modules::load("keybdev");
+	}
+    } else {
+	$usb_interface = '';
+    }
+    $usb_interface;
 }
 
 sub probeSerialDevices {
@@ -268,6 +287,7 @@ sub probeSerialDevices {
     close F;
 
     foreach (values %serialprobe) {
+	$_->{DESCRIPTION} =~ /modem/i and $_->{CLASS} = 'MODEM'; #- hack to make sure a modem is detected.
 	log::l("probed $_->{DESCRIPTION} of class $_->{CLASS} on device $_->{DEVICE}");
     }
 }

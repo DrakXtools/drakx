@@ -69,7 +69,6 @@ sub askChangeMedium($$) {
     my ($method, $medium) = @_;
     my $allow;
     do {
-	local $::no_theme_change = 1; #- avoid changing theme here!
 	eval { $allow = changeMedium($method, $medium) };
     } while ($@); #- really it is not allowed to die in changeMedium!!! or install will cores with rpmlib!!!
     $allow;
@@ -233,9 +232,16 @@ sub getAvailableSpace {
     #- 50mb may be a good choice to avoid almost all problem of insuficient space left...
     my $minAvailableSize = 50 * sqr(1024);
 
-    int getAvailableSpace_raw($o->{fstab}) * 512 / 1.07 - $minAvailableSize;
+    int (getAvailableSpace_mounted($o->{prefix}) || getAvailableSpace_raw($o->{fstab})) * 512 / 1.07 - $minAvailableSize;
 }
 
+sub getAvailableSpace_mounted {
+    my ($prefix) = @_;
+    my $buf = ' ' x 20000;
+    syscall_('statfs', "$prefix/usr", $buf) or return;
+    my (undef, $blocksize, $size, undef, $free, undef) = unpack "L2L4", $buf;
+    ($free || 1) * $blocksize / 512;
+}
 sub getAvailableSpace_raw {
     my ($fstab) = @_;
 

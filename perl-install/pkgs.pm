@@ -177,7 +177,7 @@ sub invCorrectSize { min($_[0], (sqrt(sqr($B) + 4 * $A * ($_[0] - $C)) - $B) / 2
 
 sub selectedSize {
     my ($packages) = @_;
-    int (sum map { packageSize($_) } grep { packageFlagSelected($_) } values %{$packages->[0]});
+    int (sum map { packageSize($_) - ($_->{installedCumulSize} || 0) } grep { packageFlagSelected($_) } values %{$packages->[0]});
 }
 sub correctedSelectedSize { correctSize(selectedSize($_[0]) / sqr(1024)) }
 
@@ -703,9 +703,21 @@ sub selectPackagesToUpgrade($$$;$$) {
     #- used for package that are not correctly updated.
     #- should only be used when nothing else can be done correctly.
     my %upgradeNeedRemove = (
-#			     'compat-glibc' => 1,
-#			     'compat-libs' => 1,
+			     'libstdc++' => 1,
+			     'compat-glibc' => 1,
+			     'compat-libs' => 1,
 			    );
+
+    #- these package are not named as ours, need to be translated before working.
+    #- a version may follow to setup a constraint 'installed version greater than'.
+    my %otherPackageToRename = (
+				'qt' => [ 'qt2', '2.0' ],
+				'qt1x' => [ 'qt' ],
+			       );
+    #- generel purpose for forcing upgrade of package whatever version is.
+    my %packageNeedUpgrade = (
+			      'lilo' => 1, #- this package has been misnamed in 7.0.
+			     );
 
     #- help removing package which may have different release numbering
     my %toRemove; map { $toRemove{$_} = 1 } @{$toRemove || []};
@@ -715,11 +727,17 @@ sub selectPackagesToUpgrade($$$;$$) {
     #- the 'installed' property will make a package unable to be selected, look at select.
     c::rpmdbTraverse($db, sub {
 			 my ($header) = @_;
-			 my $p = $packages->[0]{c::headerGetEntry($header, 'name')};
 			 my $otherPackage = (c::headerGetEntry($header, 'release') !~ /mdk\w*$/ &&
 					     (c::headerGetEntry($header, 'name'). '-' .
 					      c::headerGetEntry($header, 'version'). '-' .
 					      c::headerGetEntry($header, 'release')));
+			 my $renaming = $otherPackage && $otherPackageToRename{c::headerGetEntry($header, 'name')};
+			 my $name = $renaming &&
+			   (!$renaming->[1] || versionCompare(c::headerGetEntry($header, 'version'), $renaming->[1]) >= 0) &&
+			     $renaming->[0];
+			 $name and $packageNeedUpgrade{$name} = 1; #- keep in mind to force upgrading this package.
+			 my $p = $packages->[0]{$name || c::headerGetEntry($header, 'name')};
+
 			 if ($p) {
 			     my $version_cmp = versionCompare(c::headerGetEntry($header, 'version'), packageVersion($p));
 			     my $version_rel_test = $version_cmp > 0 || $version_cmp == 0 &&
@@ -755,6 +773,9 @@ sub selectPackagesToUpgrade($$$;$$) {
 
 	#- skip if not installed (package not found in current install).
 	$skipThis ||= ($count == 0);
+
+	#- make sure to upgrade package that have to be upgraded.
+	$packageNeedUpgrade{packageName($p)} and $skipThis = 0;
 
 	#- select the package if it is already installed with a lower version or simply not installed.
 	unless ($skipThis) {

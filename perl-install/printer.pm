@@ -291,7 +291,7 @@ sub getinfo($) {
 			QUEUE        => "lp",
 			SPOOLDIR     => "/var/spool/lpd/lp",
 			DBENTRY      => "PostScript",
-			PAPERSIZE    => "letter",
+			PAPERSIZE    => "",
 			ASCII_TO_PS  => undef,
 			CRLF         => undef,
 			NUP          => 1,
@@ -685,6 +685,17 @@ sub configure_queue($) {
 	#- cheating to get the input filter!
 	print PRINTCAP "\t:if=$_->{IF}:\n";
 	print PRINTCAP "\n";
+    }
+
+    my $useUSB = 0;
+    foreach (values %{$entry->{configured}}) {
+	$useUSB ||= $_->{DEVICE} =~ /usb/;
+    }
+    if ($useUSB) {
+	my $f = "$prefix/etc/sysconfig/usb";
+	my %usb = getVarsFromSh($f);
+	$usb{PRINTER} = "yes";
+	setVarsInSh($f, \%usb);
     }
 }
 

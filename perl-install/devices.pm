@@ -84,6 +84,7 @@ sub entry {
 	     @{ ${{"fd"     => [ c::S_IFBLK(), 2,  0 ],
 		   "hidbp-mse-" => [ c::S_IFCHR(), 10, 32 ],
 		   "lp"     => [ c::S_IFCHR(), 6,  0 ],
+		   "usb/usblp" => [ c::S_IFCHR(), 180, 0 ],
 		   "loop"   => [ c::S_IFBLK(), 7,  0 ],
 		   "md"     => [ c::S_IFBLK(), 9,  0 ],
 		   "nst"    => [ c::S_IFCHR(), 9, 128],

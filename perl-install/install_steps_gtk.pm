@@ -588,7 +588,10 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
 If you don't have it, press Cancel to avoid installation from this Cd-Rom.", pkgs::mediumDescr($o->{packages}, $medium));
 
 	#- if not using a cdrom medium, always abort.
-	$method eq 'cdrom' && $o->ask_okcancel('', $msg);
+	$method eq 'cdrom' and do {
+	    local $my_gtk::grab = 1;
+	    $o->ask_okcancel('', $msg);
+	};
     };
     catch_cdie { $o->install_steps::installPackages($packages); }
       sub {
@@ -770,7 +773,6 @@ sub create_steps_window {
 			$w->set_name($t);
 			$w->set_usize(0, 7);
 			gtksignal_connect($w, clicked => sub {
-			    $::no_theme_change and return; #- no theme wanted!
 			    $::setstep or return; #- just as setstep s
 			    install_theme($o, $t); die "theme_changed\n" 
 			});

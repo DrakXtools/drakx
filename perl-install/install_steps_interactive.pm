@@ -621,16 +621,19 @@ sub printerConfig {
     require printer;
     require printerdrake;
 
+    log::l("clicked=$clicked\n");
     if ($::beginner && !$clicked) {
         printerdrake::auto_detect($o) or return;
     }
+    log::l("after clicked=$clicked\n");
 
     #- bring interface up for installing ethernet packages but avoid ppp by default,
     #- else the guy know what he is doing...
-    $o->upNetwork('pppAvoided');
+    #$o->upNetwork('pppAvoided');
 
     eval { add2hash($o->{printer} ||= {}, printer::getinfo($o->{prefix})) };
-    printerdrake::main($o->{printer}, $o, sub { $o->pkg_install($_[0]) });
+    $o->{printer}{PAPERSIZE} = $o->{lang} eq 'en' ? 'letter' : 'a4';
+    printerdrake::main($o->{printer}, $o, sub { $o->pkg_install($_[0]) }, sub { $o->upNetwork('pppAvoided') });
 }
 
 #------------------------------------------------------------------------------

@@ -17,6 +17,7 @@ sub auto_detect {
     my ($in) = @_;
     {
 	my $w = $in->wait_message(_("Test ports"), _("Detecting devices..."));
+	detect_devices::probeUSB() and eval { modules::load("printer"); sleep(1); };
 	eval { modules::load("parport_pc"); modules::load("parport_probe"); modules::load("lp"); };
     }
     my $b = before_leaving { eval { modules::unload("parport_probe") } };
@@ -112,8 +113,8 @@ _("Password") => {val => \$printer->{NCPPASSWD}, hidden => 1} ],
     1;
 }
 
-sub setup_gsdriver($$$) {
-    my ($printer, $in, $install) = @_;
+sub setup_gsdriver($$$;$) {
+    my ($printer, $in, $install, $upNetwork) = @_;
     my $action;
     my @action = qw(ascii ps both done);
     my %action = (
@@ -148,6 +149,7 @@ sub setup_gsdriver($$$) {
 	my %depth_to_col  = reverse %col_to_depth;
 	my $is_uniprint = $db_entry{GSDRIVER} eq "uniprint";
 
+	$printer->{PAPERSIZE} ||= "letter";
 	$printer->{RESOLUTION} = @res ? $res[0] || "Default" : "Default" unless member($printer->{RESOLUTION}, @res);
 	$printer->{ASCII_TO_PS} = $db_entry{GSDRIVER} eq 'POSTSCRIPT' unless defined($printer->{ASCII_TO_PS});
 	$printer->{CRLF} = $db_entry{DESCR} =~ /HP/ unless defined($printer->{CRLF});
@@ -207,6 +209,7 @@ _("Extra Text options") => \$printer->{TEXTONLYOPTIONS},
 	    {
 		my $w = $in->wait_message('', _("Printing test page(s)..."));
 
+		$upNetwork and do { &$upNetwork(); undef $upNetwork; sleep(1) };
 		printer::restart_queue(printer::default_queue($printer->{QUEUE}));
 		@lpq_output = printer::print_pages(printer::default_queue($printer->{QUEUE}), @testpages);
 	    }
@@ -226,8 +229,8 @@ Does it work properly?"), 1) ? 'done' : 'change';
 }
 
 #- Program entry point.
-sub main($$$) {
-    my ($printer, $in, $install) = @_;
+sub main($$$;$) {
+    my ($printer, $in, $install, $upNetwork) = @_;
     my ($queue, $continue) = ('', 1);
 
     while ($continue) {
@@ -293,7 +296,7 @@ _("Printer Connection") => { val => \$printer->{str_type}, not_edit => 1, list =
 	}
 
 	#- configure ghostscript driver to be used.
-	if (!$continue && setup_gsdriver($printer, $in, $install)) {
+	if (!$continue && setup_gsdriver($printer, $in, $install, $printer->{TYPE} ne 'LOCAL' && $upNetwork)) {
 	    delete $printer->{OLD_QUEUE}
 		if $printer->{QUEUE} ne $printer->{OLD_QUEUE} && $printer->{configured}{$printer->{QUEUE}};
 	    $continue = !$::beginner;

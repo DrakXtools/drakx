@@ -163,7 +163,7 @@ $o = $::o = {
                  QUEUE        => "lp",
                  SPOOLDIR     => "/var/spool/lpd/lp",
                  DBENTRY      => "PostScript",
-                 PAPERSIZE    => "letter",
+                 PAPERSIZE    => "",
                  CRLF         => 0,
                  AUTOSENDEOF  => 1,
 
@@ -387,12 +387,11 @@ sub miscellaneous {
         });
 	
 	my $f = "$o->{prefix}/etc/sysconfig/usb";
-	setVarsInSh($f, { 
-            MOUSE => bool2yesno($o->{mouse}{device} eq "usbmouse"),
-	    KBD => bool2yesno(int grep { /^keybdev\.c: Adding keyboard/ } detect_devices::syslog()),
-	    ZIP => bool2yesno(-d "/proc/scsi/usb"),
-	    getVarsFromSh($f),
-	});
+	my %usb = getVarsFromSh($f);
+	$usb{MOUSE} = bool2yesno($o->{mouse}{device} eq "usbmouse");
+	$usb{KBD} = bool2yesno(int grep { /^keybdev\.c: Adding keyboard/ } detect_devices::syslog());
+	$usb{ZIP} = bool2yesno(-d "/proc/scsi/usb");
+	setVarsInSh($f, \%usb);
 
 	install_any::fsck_option();
     } 'doInstallStep';
