@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-05-16 21:39+0200\n"
+"POT-Creation-Date: 2001-06-02 17:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -313,7 +313,7 @@ msgstr ""
 msgid "Test again"
 msgstr ""
 
-#: ../../Xconfigurator.pm_.c:1394 ../../bootlook.pm_.c:220
+#: ../../Xconfigurator.pm_.c:1394 ../../bootlook.pm_.c:238
 msgid "Quit"
 msgstr ""
 
@@ -858,7 +858,7 @@ msgid "Choose the window manager to run:"
 msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-#: ../../bootloader.pm_.c:262 ../../bootloader.pm_.c:605
+#: ../../bootloader.pm_.c:262 ../../bootloader.pm_.c:608
 #, c-format
 msgid ""
 "Welcome to %s the operating system chooser!\n"
@@ -870,48 +870,48 @@ msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:806
+#: ../../bootloader.pm_.c:809
 msgid "Welcome to GRUB the operating system chooser!"
 msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:809
+#: ../../bootloader.pm_.c:812
 #, c-format
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:812
+#: ../../bootloader.pm_.c:815
 msgid "Press enter to boot the selected OS, 'e' to edit the"
 msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:815
+#: ../../bootloader.pm_.c:818
 msgid "commands before booting, or 'c' for a command-line."
 msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:818
+#: ../../bootloader.pm_.c:821
 #, c-format
 msgid "The highlighted entry will be booted automatically in %d seconds."
 msgstr ""
 
-#: ../../bootloader.pm_.c:822
+#: ../../bootloader.pm_.c:825
 msgid "not enough room in /boot"
 msgstr ""
 
 #. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
 #. -PO: so you may need to put them in English or in a different language if MS-windows doesn't exist in your language
-#: ../../bootloader.pm_.c:915
+#: ../../bootloader.pm_.c:918
 msgid "Desktop"
 msgstr ""
 
 #. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
-#: ../../bootloader.pm_.c:917
+#: ../../bootloader.pm_.c:920
 msgid "Start Menu"
 msgstr ""
 
@@ -1039,7 +1039,11 @@ msgstr ""
 msgid "System mode"
 msgstr ""
 
-#: ../../bootlook.pm_.c:218 ../../standalone/draknet_.c:88
+#: ../../bootlook.pm_.c:228
+msgid "Default Runlevel"
+msgstr ""
+
+#: ../../bootlook.pm_.c:236 ../../standalone/draknet_.c:88
 #: ../../standalone/draknet_.c:120 ../../standalone/draknet_.c:184
 #: ../../standalone/draknet_.c:302 ../../standalone/draknet_.c:396
 #: ../../standalone/draknet_.c:473 ../../standalone/draknet_.c:509
@@ -1047,7 +1051,7 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: ../../bootlook.pm_.c:220 ../../install_steps_gtk.pm_.c:576
+#: ../../bootlook.pm_.c:238 ../../install_steps_gtk.pm_.c:576
 #: ../../interactive.pm_.c:114 ../../interactive.pm_.c:269
 #: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:357
 #: ../../my_gtk.pm_.c:360 ../../my_gtk.pm_.c:617
@@ -1058,15 +1062,15 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: ../../bootlook.pm_.c:297
+#: ../../bootlook.pm_.c:315
 msgid "can not open /etc/inittab for reading: $!"
 msgstr ""
 
-#: ../../bootlook.pm_.c:351
+#: ../../bootlook.pm_.c:369
 msgid "can not open /etc/sysconfig/autologin for reading: $!"
 msgstr ""
 
-#: ../../bootlook.pm_.c:417 ../../standalone/drakboot_.c:47
+#: ../../bootlook.pm_.c:435 ../../standalone/drakboot_.c:47
 msgid "Installation of LILO failed. The following error occured:"
 msgstr ""
 
@@ -4047,7 +4051,7 @@ msgid ""
 "You may need to change your Open Firmware boot-device to\n"
 " enable the bootloader.  If you don't see the bootloader prompt at\n"
 " reboot, hold down Command-Option-O-F at reboot and enter:\n"
-" setenv boot-device $of_boot,\\\\tbxi\n"
+" setenv boot-device $of_boot,\\\\:tbxi\n"
 " Then type: shut-down\n"
 "At your next boot you should see the bootloader prompt."
 msgstr ""
