@@ -301,7 +301,7 @@ INTERFACE=`/usr/sbin/adictrl -i`
 '/sbin/route del default
 /usr/bin/startmodem
 ',
-"# et pour le stop on se touche c'est du beta...
+"# stop is still beta...
 echo 'not yet implemented, still beta software'
 ", $netc->{adsltype}) }
 
