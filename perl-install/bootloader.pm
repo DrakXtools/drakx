@@ -424,7 +424,9 @@ sub dev2prompath { #- SPARC only
     $dev;
 }
 
-sub get_kernels_and_labels() {
+sub get_kernels_and_labels {
+    my ($b_prefer_24) = @_;
+
     my $dir = "$::prefix/boot";
     my @l = grep { /^vmlinuz-/ } all($dir);
     my @kernels = grep { ! -l "$dir/$_" } @l;
@@ -441,7 +443,7 @@ sub get_kernels_and_labels() {
 	  { complete_version => $_, /(.*mdk)(.*)/ ? (ext => $2, version => $1) : (version => $_) };
       } @kernels;
 
-    if (-e "$::prefix/usr/lib/lsb") {
+    if ($b_prefer_24) {
 	my ($kernel_24, $other) = partition { $_->{ext} eq '' && $_->{version} =~ /^\Q2.4/ } @kernels;
 	@kernels = (@$kernel_24, @$other);
     }

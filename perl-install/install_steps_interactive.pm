@@ -528,13 +528,6 @@ sub chooseGroups {
 
 	$o->reallyChooseGroups($size_to_display, $individual, \%val) or return;
 
-	if ($val{'Development|LSB'}) {
-	    $o->ask_okcancel('', 
-N("Due to incompatibilities of the 2.6 series kernel with the LSB runtime
-tests, the 2.4 series kernel will be installed as the default to insure
-compliance under the \"LSB\" group selection."), 1) or next;
-	}
-
 	last if $::testing || pkgs::correctSize($size / sqr(1024)) < $available_size;
        
 	$o->ask_warn('', N("Selected size is larger than available space"));	
