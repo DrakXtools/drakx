@@ -930,6 +930,7 @@ sub summary {
 	push @l, {
 	    group => N("Hardware"),
 	    label => N("Sound card"),
+	    val => sub {},
 	    clicked => sub {
 	        if ($o->ask_yesorno('', N("Do you have an ISA sound card?"))) {
 	    	  $o->do_pkgs->install('sndconfig');
