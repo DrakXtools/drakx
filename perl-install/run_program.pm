@@ -71,9 +71,8 @@ sub raw {
 	    kill 9, $pid;
 	    return;
 	}
-	$ok or return;
 
-	if ($stdout_raw && ref($stdout_raw)) {
+	if ($stdout_raw && ref($stdout_raw)) {	    
 	    if (ref($stdout_raw) eq 'ARRAY') { 
 		@$stdout_raw = cat_($stdout);
 	    } else { 
@@ -89,7 +88,7 @@ sub raw {
 	    }
 	    unlink $stderr;
 	}
-	1;
+	$ok;
     } else {
 	if ($stderr && $stderr eq 'STDERR') {
 	} elsif ($stderr) {
