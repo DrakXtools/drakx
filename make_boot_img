@@ -65,13 +65,10 @@ sub initrd {
     install_s("$instdir/$install", "$mnt/sbin/stage1");
 
     my $ftype = $type =~ /^(all)$/ ? "pcmcia" : $type;
-#    if ($ftype eq "pcmcia") {
-#	 unlink "$mnt/sbin/sh";
-#	 _ "$sudo cp -a tools/$arch/sh $mnt/sbin";
-#	 _ "$sudo cp -a /etc/pcmcia $mnt/etc";
-#	 _ "$sudo patch -p0 -d $mnt/etc < $instdir/pcmcia_config.patch";
-#    }
-#    _ "$sudo cp -f install_${ftype}_modules/* $mnt/modules/" if -d "install_${ftype}_modules";
+    if ($ftype eq "pcmcia") {
+	 _ "$sudo cp -a /etc/pcmcia $mnt/etc";
+	 _ "$sudo patch -p0 -d $mnt/etc < $instdir/pcmcia_config.patch";
+    }
     _ "$sudo cp -f modules$I/${ltype}_modules.mar $mnt/modules/modules$I.mar" if $type !~ /blank/;
     _ "$sudo cp -f modules$I/modules.dep $mnt/modules/";
     _ "$sudo umount $mnt";

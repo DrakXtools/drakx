@@ -46,6 +46,10 @@
 #include "mount.h"
 #include "insmod-busybox/insmod.h"
 
+#ifdef ENABLE_PCMCIA
+#include "pcmcia/pcmcia.h"
+#endif
+
 #ifndef DISABLE_CDROM
 #include "cdrom.h"
 #endif
@@ -167,6 +171,27 @@ static void expert_third_party_modules(void)
 	return expert_third_party_modules();
 }
 
+
+static void handle_pcmcia(void)
+{
+#ifdef ENABLE_PCMCIA
+	char * pcmcia_adapter;
+	pcmcia_adapter = pcmcia_probe();
+	if (!pcmcia_adapter) {
+		log_message("no pcmcia adapter found");
+		return;
+	}
+	my_insmod("pcmcia_core", ANY_DRIVER_TYPE, NULL);
+	my_insmod(pcmcia_adapter, ANY_DRIVER_TYPE, NULL);
+	my_insmod("ds", ANY_DRIVER_TYPE, NULL);
+	
+        /* call to cardmgr takes time, let's use the wait message */
+	wait_message("Enabling PCMCIA extension cards...");
+	log_message("cardmgr rc: %d", cardmgr_call());
+	remove_wait_message();
+#endif
+}
+
 static enum return_type method_select_and_prepare(void)
 {
 	enum return_type results;
@@ -254,6 +279,8 @@ int main(int argc, char **argv, char **env)
 
 	if (IS_EXPERT)
 		expert_third_party_modules();
+
+	handle_pcmcia();
 
 	ret = method_select_and_prepare();
 

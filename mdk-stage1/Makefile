@@ -118,23 +118,16 @@ endif
 BINS = init stage1-cdrom stage1-disk stage1-network stage1-full
 
 
-#ifeq (i386, $(ARCH))
-#BINS += stage1-all stage1-cdrom stage1-network stage1-hd stage1-pcmcia
-#endif
-#
-#ifeq (ia64, $(ARCH))
-#BINS += stage1-all
-#endif
-#
-#ifeq (alpha, $(ARCH))
-#BINS += stage1-all
-#endif
-#
-#ifeq (sparc, $(ARCH))
-#BINS += stage1-all
-#endif
-
 DIRS = dietlibc mar insmod-busybox pci-resource
+ifeq (i386,$(ARCH))
+DIRS += pcmcia
+endif
+
+
+ifeq (i386,$(ARCH))
+PCMCIA_LIB = pcmcia/libpcmcia.a
+PCMCIA_DEFS = -DENABLE_PCMCIA
+endif
 
 
 all: dirs $(BINS)
@@ -160,11 +153,7 @@ stage1-network: $(STAGE1OBJS-NETWORK) $(GLIBC_STAGE1_OWN_LIBS) $(STAGE1_OTHER_LI
 	$(CC) $(GLIBC_LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
-stage1-pcmcia: $(STAGE1OBJS-PCMCIA) $(GLIBC_STAGE1_OWN_LIBS) $(STAGE1_OTHER_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK)
-	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
-	$(STRIPCMD) $@
-
-stage1-full: $(STAGE1OBJS) $(GLIBC_STAGE1_OWN_LIBS) $(STAGE1_OTHER_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK)
+stage1-full: $(STAGE1OBJS) $(GLIBC_STAGE1_OWN_LIBS) $(STAGE1_OTHER_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(PCMCIA_LIB)
 	$(CC) $(GLIBC_LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
@@ -179,7 +168,7 @@ $(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c .depend
 	$(COMPILE) $(GLIBC_INCLUDES) $(NETWORK_DEFS) -c $< -o $@
 
 .c.o: .depend
-	$(COMPILE) $(GLIBC_INCLUDES) -c $<
+	$(COMPILE) $(GLIBC_INCLUDES) $(PCMCIA_DEFS) -c $<
 
 
 clean: 

@@ -67,7 +67,7 @@ rm -rf modules ; install -d modules
     create_marfile cdrom_modules.mar    $CDROM_MODULES
     create_marfile hd_modules.mar       $HD_MODULES
     create_marfile hdreiser_modules.mar $HDREISER_MODULES
-    create_marfile pcmcia_modules.mar   $PCMCIA_MODULES
+    create_marfile pcmcia_modules.mar   $PCMCIA_MODULES $PCMCIA_INSTALLMODULES
     create_marfile other_modules.mar    $BIG_MODULES
     create_marfile all_modules.mar      $ALL_MODULES
 [ "$ARCH" == "i386" ] && {
