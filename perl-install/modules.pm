@@ -372,10 +372,10 @@ sub module_of_type__4update_kernel {
 }
 sub module_of_type {
     my ($type) = @_;
-    my $alias = $type_aliases{$type};
+    my $alias = $type_aliases{$type} || $type;
     grep { $drivers{$_}{type} =~ /^(($type)|$alias)$/ } keys %drivers;
 }
-sub module2text { $drivers{$_[0]}{text} }
+sub module2text { $drivers{$_[0]}{text} or log::l("trying to get text of unknown module $_[0]"), return $_[0] }
 
 sub get_alias {
     my ($alias) = @_;
