@@ -147,17 +147,27 @@ sub add_entry($$) {
 sub add_kernel {
     my ($prefix, $lilo, $version, $ext, $root, $v) = @_;
 
+    #- new versions of yaboot don't handle symlinks
+    my $ppcext = $ext;
+    if (arch() =~ /ppc/) {
+	$ext = "-$version";
+    }
+
     log::l("adding vmlinuz$ext as vmlinuz-$version");
     -e "$prefix/boot/vmlinuz-$version" or log::l("unable to find kernel image $prefix/boot/vmlinuz-$version"), return;
     my $image = "/boot/vmlinuz" . ($ext ne "-$version" &&
 				   symlinkf("vmlinuz-$version", "$prefix/boot/vmlinuz$ext") ? $ext : "-$version");
-
     my $initrd = eval { 
 	mkinitrd($prefix, $version, "/boot/initrd-$version.img");
 	"/boot/initrd" . ($ext ne "-$version" &&
 			  symlinkf("initrd-$version.img", "$prefix/boot/initrd$ext.img") ? $ext : "-$version") . ".img";
     };
     my $label = $ext =~ /-(default)/ ? $1 : "linux$ext";
+
+    #- more yaboot concessions - PPC
+    if (arch() =~ /ppc/) {
+	$label = $ppcext =~ /-(default)/ ? $1 : "linux$ppcext";
+    }
 
     add2hash($v,
 	     {
@@ -266,6 +276,8 @@ sub suggest {
     my $root = isLoopback($root_part) ? "loop7" : $root_part->{device};
     my $boot = fsedit::get_root($fstab, 'boot')->{device};
     my $partition = first($boot =~ /\D*(\d*)/);
+    #- PPC xfs module requires enlarged initrd
+    my $xfsroot = isThisFs("xfs", $root_part);
 
     require c; c::initSilo() if arch() =~ /sparc/;
 
@@ -290,6 +302,7 @@ sub suggest {
 	 enableofboot => 1,
 	 enablecdboot => 1,
 	 useboot => $boot,
+	 xfsroot => $xfsroot,
 	} :
 	{
 	 bootUnsafe => $unsafe,
@@ -524,6 +537,8 @@ sub install_yaboot($$$) {
 		} else {
 		    print F "\tinitrd=$of_dev,$_->{initrd}" if $_->{initrd};
 		}
+		#- xfs module on PPC requires larger initrd - say 6MB?
+		print F "\tinitrd-size=6144" if $lilo->{xfsroot};
 		print F "\tappend=\"$_->{append}\"" if $_->{append};
 		print F "\tread-write" if $_->{'read-write'};
 		print F "\tread-only" if !$_->{'read-write'};
