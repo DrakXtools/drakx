@@ -101,7 +101,6 @@ sub test {
 	}
     }
 
-    $::noShadow = 1;
     open(my $F, "|perl 2>/dev/null");
     printf $F q(
         use lib qw(%s);
@@ -155,7 +154,6 @@ sub test {
     unlink "$::prefix/$f", "$::prefix/$f-4";
     unlink "/tmp/.X11-unix/X9" if $::prefix;
     kill 2, $pid;
-    $::noShadow = 0;
 
     $rc;
 }
