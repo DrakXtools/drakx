@@ -81,43 +81,46 @@ sub write_conf {
 sub write_resolv_conf {
     my ($file, $netc) = @_;
 
-    #- get the list of used dns.
-    my %used_dns; @used_dns{$netc->{dnsServer}, $netc->{dnsServer2}, $netc->{dnsServer3}} = (1, 2, 3);
+    my %new = (
+        search => [ grep { $_ } uniq(@$netc{'DOMAINNAME', 'DOMAINNAME2'}) ],
+        nameserver => [ grep { $_ } uniq(@$netc{'dnsServer', 'dnsServer2', 'dnsServer3'}) ],
+    );
 
-    if (!$netc->{DOMAINNAME} && !$netc->{DOMAINNAME2} && !%used_dns) {
-	unlink($file);
-	log::l("neither domain name nor dns server are configured");
-	return 0;
+    my (%prev, @unknown);
+    foreach (cat_($file)) {
+	s/\s+$//;
+	s/^[#\s]*//;
+
+	if (my ($key, $val) = /^(search|nameserver)\s+(.*)$/) {
+	    push @{$prev{$key}}, $val;
+	} elsif (/^ppp temp entry$/) {
+	} elsif (/\S/) {
+	    push @unknown, $_;
+	}
     }
-
-    my (%search, %dns, @unknown);
-    local *F; open F, $file;
-    local $_;
-#-    my $options;
-    while (<F>) {
-#-	if (/^[\s]*(options\s+[^#]*).*$/) { $options = $1; $options =~ s/timeout:\d+/timeout:1/; next }
-	/^[#\s]*search\s+(.*?)\s*$/ and $search{$1} = $., next;
-	/^[#\s]*nameserver\s+(.*?)\s*$/ and $dns{$1} = $., next;
-	/^.*# ppp temp entry\s*$/ and next;
-	/^[#\s]*(\S.*?)\s*$/ and push @unknown, $1;
-    }
-#-    $options ||= "options timeout:1";
-
-    close F;
     unlink $file;  #- workaround situation when /etc/resolv.conf is an absolute link to /etc/ppp/resolv.conf or whatever
-    open F, ">$file" or die "cannot write $file: $!";
-    print F "# search $_\n" foreach grep { $_ ne "$netc->{DOMAINNAME} $netc->{DOMAINNAME2}" } sort { $search{$a} <=> $search{$b} } keys %search;
-    print F "search $netc->{DOMAINNAME} $netc->{DOMAINNAME2}\n" if $netc->{DOMAINNAME} || $netc->{DOMAINNAME2};
-#-    print F "$options\n\n";
-    print F "# nameserver $_\n" foreach grep { ! exists $used_dns{$_} } sort { $dns{$a} <=> $dns{$b} } keys %dns;
-    print F "nameserver $_\n" foreach  sort { $used_dns{$a} <=> $used_dns{$b} } grep { $_ } keys %used_dns;
-    print F "\n";
-    print F "# $_\n" foreach @unknown;
-    print F "\n";
-    print F "# ppp temp entry\n";
 
-    #-res_init();		# reinit the resolver so DNS changes take affect
-    1;
+    if (@{$new{search}} || @{$new{nameserver}}) {
+	$prev{$_} = [ difference2($prev{$_} || [], $new{$_}) ] foreach keys %new;
+
+	my @search = do {
+	    my @new = if_(@{$new{search}}, "search " . join(' ', @{$new{search}}) . "\n");
+	    my @old = if_(@{$prev{search}}, "# search " . join(' ', @{$prev{search}}) . "\n");
+	    @new, @old;
+	};
+	my @nameserver = do {
+	    my @new = map { "nameserver $_\n" } @{$new{nameserver}};
+	    my @old = map { "# nameserver $_\n" } @{$prev{nameserver}};
+	    @new, @old;
+	};
+	output($file, @search, @nameserver, (map { "# $_\n" } @unknown), "\n# ppp temp entry\n");
+
+	#-res_init();		# reinit the resolver so DNS changes take affect
+	1;
+    } else {
+	log::l("neither domain name nor dns server are configured");
+	0;
+    }
 }
 
 sub write_interface_conf {
