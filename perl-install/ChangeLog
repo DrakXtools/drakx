@@ -1,3 +1,219 @@
+2001/12/04  François Pons  <fpons@mandrakesoft.com>
+
+	* mdk-stage1/modules.c: fixed gégé sucking.
+
+2001/12/04  sdupont
+
+	* standalone/drakbackup: update...
+
+2001/12/03  dam's  <damien@mandrakesoft.com>
+
+	* Xconfigurator.pm: removed use gtk
+
+2001/12/03  François Pons  <fpons@mandrakesoft.com>
+
+	* tools/updatehdlist: initial revision, simple way to update a local set
+	of medium from /RPMS.
+
+2001/12/03  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/modules.c: typo of last commit (unused variable -> could not
+	compile)
+
+2001/12/03  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/DrakX.pot, share/po/hu.po, share/po/es.po: updated Hungarian
+	and Spanish files
+
+2001/12/03  sdupont
+
+	* standalone/drakbackup: update
+	option step.
+	write other file content.
+	restore gi.
+
+2001/12/02  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/DrakX.pot, share/po/es.po, share/po/fr.po, share/po/bg.po,
+	share/po/ga.po, share/po/sr.po, share/po/de.po, share/po/et.po,
+	share/po/tr.po, share/po/eu.po, share/po/az.po, share/po/ru.po,
+	share/po/pt_BR.po, share/po/hr.po, share/po/ko.po, share/po/cy.po,
+	share/po/nl.po, share/po/ja.po, share/po/wa.po, share/po/sv.po,
+	share/po/is.po, share/po/hu.po, share/po/it.po, share/po/id.po,
+	share/po/pl.po, share/po/fi.po, share/po/no.po, share/po/th.po,
+	share/po/el.po, share/po/sk.po, share/po/lt.po, share/po/ar.po,
+	share/po/sl.po, share/po/vi.po, share/po/br.po, share/po/ca.po,
+	share/po/gl.po, share/po/lv.po, share/po/uk.po, share/po/eo.po,
+	share/po/ro.po, share/po/bs.po, share/po/da.po, share/po/zh_TW.po,
+	share/po/cs.po, share/po/af.po: updated pot file
+
+2001/12/01  sdupont
+
+	* standalone/drakbackup: do not include browser cache.
+
+2001/11/30  François Pons  <fpons@mandrakesoft.com>
+
+	* docs/spec-DrakX-8.0.html: added spec (forgotten for quite a long)
+
+2001/11/30  gbeauchesne
+
+	* partition_table_gpt.pm: 
+	  - cleanups from mainline
+
+	* modules.pm: Suckiness fixes from mainline (gc):
+	  - Do parse /proc/modules in reverse order
+	  - Fix "convert old scsi_hostadapter's to new probeall" scheme
+
+	* bootloader.pm: 
+	  - Don't forget to link the initrd to the real image in /boot/efi/ too
+	  - Remove DEBUG printouts in install_efi_boot_menu
+
+2001/11/30  Pixel  <pixel@mandrakesoft.com>
+
+	* network/smb.pm, any.pm, Makefile.drakxtools, standalone/diskdrake,
+	Makefile.config, diskdrake.pm: fileshare should be ok, handle diskdrake
+	--fileshare, fix smb import
+
+2001/11/30  sdupont
+
+	* pixmaps/backup_left2.png: drakbackup pixmap
+
+	* standalone/drakbackup: backend mode-> ok for hd
+	we can use drakbackup !.
+	todo :
+		backend mode:
+			- net
+			- cd
+	
+		advanced mode:
+			- device detection (cd writer)
+	
+		wizard:
+			- end of this step.
+	
+		gi:
+			- option step in adnanced step to choice
+			for example tar.gz or tar.gz2 ...
+	update
+	restore step 1 & 2.
+	adv step -> ok
+	todo: wizard ...
+	little update!
+	
+	variables correction in advanced step.
+	wizard user question, sys question & daemon
+
+2001/11/29  Chmouel Boudjnah  <chmouel@mandrakesoft.com>
+
+	* share/rpmsrate: Remove linux_logo
+
+2001/11/29  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* modules.pm: add wvlan_cs
+
+	* mdk-stage1/modules.c: remove unneeded handling of "alias
+	scsi_hostadapter"
+
+	* mdk-stage1/stage1.c: add another expert_third_party_modules at the end
+	of enabling-pcmcia-stuff
+
+2001/11/29  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake.pm: remove the export tree for nfs/smb feature, remove some
+	test code
+	tentative version with export/import nfs/smb tree (committed to have it
+	in CVS as the export tree is already deprecated)
+
+	* standalone/fileshareset: 
+	  - allow root to export everything
+	  - remove empty mntpoint (from smb)
+
+2001/11/29  sdupont
+
+	* standalone/drakbackup: just update....
+	advanced: users correction during save.
+	user pass, user login, path to save local or on host
+	          combo for network protocol.
+	wizrad:   already to do!
+	CDRW burn:     todo: devices detection (see to_fond_cd).
+	code cleaning.
+
+	* standalone/drakfont: cleanning code.
+
+2001/11/28  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* modules.pm: 
+	  - fix pixel sucks of not parsing /proc/modules in
+	reverse order
+	  - be more in sync regarding names of pcmcia drivers
+
+	* any.pm: add modules.conf in report.bug
+
+2001/11/28  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/zh_CN.po, share/po/zh_TW.po: updated Chinese file
+
+2001/11/28  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm (read_conf): fix "convert old scsi_hostadapter's to new
+	probeall"
+
+	* standalone/drakbackup: make check_what_user works
+
+	* standalone/fileshareset: better description
+	gr_mem in getgrent is space separated, not comma separated
+	add samba handling. Should be finished now :)
+
+2001/11/28  sdupont
+
+	* pixmaps/backup_bot2.png, pixmaps/quit.png: drakbackup pixmaps.
+
+	* standalone/drakbackup: no important changement!
+	clean code
+	update!
+	for gc & Warly: some fixes, correction of advanced, wizard and after
+	advanced steps.
+	the user have a better gestion during advanced step, the protocols ftp,
+	sftp, scp, rsync
+	are now include in advanced step..... etc ;-)
+	todo: when checkbuttonbox are clicked for user choice set it to 0 or 1
+	juste after.
+	clean code.
+	new after advanced step, correction of checkbuttons problems & new
+	pixmaps.
+
+2001/11/27  dam's  <damien@mandrakesoft.com>
+
+	* share/logo-mandrake.png: updated, cooker style
+
+2001/11/27  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: avoid problem of array reference badly evaluated.
+
+2001/11/27  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* tools/mailchangelog.pl: beurk
+	changelog is at linux-mandrake not mandrakesoft
+
+	* install_steps.pm: i810 -> no FB at boot
+
+2001/11/27  Pixel  <pixel@mandrakesoft.com>
+
+	* partition_table_gpt.pm (generate_guid): cleanup
+
+	* any.pm (setupBootloader): s/last/return/
+
+2001/11/27  sdupont
+
+	* standalone/drakbackup: advanced step...
+	update.
+	advanced mode ... and ...
+	read and use user list correctly, advanced step user list.
+
+	* pixmaps/hd.png, pixmaps/net.png, pixmaps/cdrom.png: pixmaps for
+	drakbackup.
+
 2001/11/26  Chmouel Boudjnah  <chmouel@mandrakesoft.com>
 
 	* tools/i386/netboot/stage2.rtl8139: add rtl8139 netboot file that works
