@@ -103,7 +103,6 @@ sub init {
 
     mkdir "/etc/$_" foreach qw(X11);
     touch '/etc/modules.conf';
-    touch '/etc/mtab';
 
     #- these files need be writable but we need a sensible first contents
     system("cp /image/etc/$_ /etc") foreach qw(passwd passwd- group sudoers fstab);
@@ -180,6 +179,7 @@ sub init {
 	install2::handleI18NClp();
     }
 
+    output('/etc/mtab', '');
     touch '/var/run/rebootctl';
 
 drakx_stuff:
