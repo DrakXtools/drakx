@@ -49,7 +49,7 @@ my $in = vnew interactive('su');
 
 begin:
 $::isEmbedded and kill USR2, $::CCPID;
-printerdrake::main($printer, $in, sub { $in->standalone::pkgs_install(@_) });
+printerdrake::main($printer, $in, 1, sub { $in->standalone::pkgs_install(@_) });
 
 $::isEmbedded ? kill(USR1, $::CCPID) : $in->exit(0);
 goto begin;
