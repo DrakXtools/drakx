@@ -625,6 +625,7 @@ sub setPackages {
 sub copy_rpms_on_disk {
     my ($o) = @_;
     mkdir "$o->{prefix}/$_", 0755 foreach qw(var var/ftp var/ftp/pub var/ftp/pub/Mandrakelinux var/ftp/pub/Mandrakelinux/media);
+    my $wait_w;
     local *changeMedium = sub {
 	my ($method, $medium) = @_;
 	my $name = pkgs::mediumDescr($o->{packages}, $medium);
@@ -636,8 +637,10 @@ sub copy_rpms_on_disk {
 		cat_("/proc/mounts") =~ m,(/dev/\S+)\s+(/mnt/cdrom|/tmp/image),
 		    and ($cdrom, my $mountpoint) = ($1, $2);
 		ejectCdrom($cdrom, $mountpoint);
+		undef $wait_w;
 		$r = $o->ask_okcancel('', N("Change your Cd-Rom!
 Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.", $name), 1);
+		$wait_w = $o->wait_message(N("Please wait"), N("Copying in progress"));
 	    }
 	    return $r;
 	} else {
@@ -653,7 +656,7 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
 	#- display the progress bar only for non-cdrom installation methods
 	$pid = fork();
 	if (!$pid && defined $pid) { #- child
-	    my ($wait_w, $wait_message) = fs::format::wait_message($o); #- nb, this is only called when interactive
+	    ($wait_w, my $wait_message) = fs::format::wait_message($o); #- nb, this is only called when interactive
 	    $wait_message->(N("Copying in progress"));
 	    #- from commands.pm. TODO: factorize, possibly in MDK::Common.
 	    my $f; $f = sub {
@@ -683,7 +686,6 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
 	    $current_medium = $k;
 	}
 	log::l("copying /tmp/image/$m->{rpmsdir} to $o->{prefix}/var/ftp/pub/Mandrakelinux/media");
-	my $wait_w;
 	unless ($copy_has_progress_bar) { $wait_w = $o->wait_message(N("Please wait"), N("Copying in progress")) }
 	eval {
 	    cp_af("/tmp/image/$m->{rpmsdir}", "$o->{prefix}/var/ftp/pub/Mandrakelinux/media");
