@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 13mdk
+Release: 14mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -261,8 +261,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Tue Aug 20 2002 nathan <nathan@mandrakesoft.com> 1.1.9-14mdk
-- adding draksplash
+* Wed Aug 21 2002 Pixel <pixel@mandrakesoft.com> 1.1.9-14mdk
+- fix dangling waiting watch mousecursor (well, please test!)
+- adding draksplash (nathan)
 
 * Mon Aug 19 2002 Pixel <pixel@mandrakesoft.com> 1.1.9-13mdk
 - snapshot (including better XFdrake)
