@@ -271,7 +271,8 @@ foreach (@classes) {
             my $i = $_;
             $_->{bus_id} = join ':', map { if_($i->{$_} ne "65535",  sprintf("%lx", $i->{$_})) } qw(vendor id subvendor subid);
             $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_}) } qw(pci_bus pci_device pci_function);
-            delete $_->{driver} if $Ident =~ /^ATA_STORAGE|BRIDGE|SMB_CONTROLLER$/ || $_->{description} =~ /3Com.*5610/;
+            # do not display unknown driver for system bridges that're managed by kernel core:
+            delete $_->{driver} if $_->{driver} eq "unknown" && ($Ident =~ /^ATA_STORAGE|BRIDGE|SMB_CONTROLLER$/ || $_->{description} =~ /3Com.*5610/);
         }
         # split description into manufacturer/description
         ($_->{Vendor}, $_->{description}) = split(/\|/, $_->{description}) if $_->{description};
