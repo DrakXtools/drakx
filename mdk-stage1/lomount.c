@@ -131,10 +131,7 @@ lomount(char *loopfile, char *where)
 	flag = MS_MGC_VAL;
 	flag |= MS_RDONLY;
 
-	if (my_insmod("loop", ANY_DRIVER_TYPE, NULL)) {
-		log_message("can't lomount without loop.o kernel driver");
-		return 1;
-	}
+	my_insmod("loop", ANY_DRIVER_TYPE, NULL);
 
 	if (set_loop(loopdev, loopfile)) {
 		log_message("set_loop failed on %s (%s)\n", loopdev, strerror(errno));

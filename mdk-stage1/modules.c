@@ -264,7 +264,9 @@ int my_insmod(const char * mod_name, enum driver_type type, char * options)
 			}
 		}
 #endif
-	}
+	} else
+		log_message("warning, insmod failed (%s %s)", mod_name, options);
+	
 	return i;
 
 }
@@ -283,8 +285,8 @@ static enum return_type insmod_with_options(char * mod, enum driver_type type)
 	strcat(options, mod);
 	strcat(options, " ");
 	strcat(options, answers[0]); // because my_insmod will eventually modify the string
-
-	if (my_insmod(mod, type, answers[0]))  {
+	
+	if (my_insmod(mod, type, answers[0])) {
 		error_message("Insmod failed.");
 		return RETURN_ERROR;
 	}

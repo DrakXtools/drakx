@@ -192,7 +192,7 @@ int main(int argc, char **argv, char **env)
 	handle_env(env);
 	spawn_shell();
 	if (load_modules_dependencies())
-		fatal_error("could not open and parse modules dependencies");
+		log_message("warning, could not open and parse modules dependencies");
 	init_frontend();
 
 	ret = method_select_and_prepare();
