@@ -494,7 +494,7 @@ sub main {
     }
     $o->{interactive} ||= 'gtk' if !$::auto_install;
  
-    if ($o->{interactive} eq "gtk" && availableMemory < 22 * 1024) {
+    if ($o->{interactive} eq "gtk" && availableMemory() < 22 * 1024) {
  	log::l("switching to newt install cuz not enough memory");
  	$o->{interactive} = "newt";
     }
