@@ -443,7 +443,8 @@ sub make_boot_frame() {
 	#$boot_conf_frame{widgets}{button}{annul}->signal_connect(clicked => sub { show_act( \%first ) } );
 	#- made a preview
 	$boot_conf_frame{widgets}{button}{prev}->signal_connect(clicked => sub {
-	  unless (-f $first{widgets}{label}{file}->get) {
+	  my $w = $first{widgets}{label}{file};
+	  unless (-f $w->get_text) {
 	    $in->ask_warn(N("Notice"), N("You must choose an image file first!"));
 	    return 0;
 	  }
