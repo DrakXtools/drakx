@@ -35,20 +35,48 @@ sub check {
     $class->raw_check($in, 'samba-client', '/usr/bin/nmblookup');
 }
 
+sub smbclient {
+    my ($server) = @_;
+    my $name  = $server->{name} || $server->{ip};
+    my $ip    = $server->{ip} ? "-I $server->{ip}" : '';
+    my $group = $server->{group} ? " -W $server->{group}" : '';
+
+    my $U = $server->{username} ? "$server->{domain}/$server->{username}%$server->{password}" : '%';
+    `smbclient -U $U -L $name $ip$group`;
+}
+
 sub find_servers {
     my (undef, @l) = `nmblookup "*"`;
     s/\s.*\n// foreach @l;
     my @servers = grep { network::network::is_ip($_) } @l;
     my %servers;
     $servers{$_}{ip} = $_ foreach @servers;
-    my ($ip);
+    my ($ip, $browse);
     foreach (`nmblookup -A @servers`) {
-	if (my $nb = /^Looking up status of (\S+)/ .. /^$/) {
-	    if ($nb == 1) {
-		$ip = $1;
-	    } else {
-		/<00>/ or next;
-		$servers{$ip}{/<GROUP>/ ? 'group' : 'name'} ||= lc first(/(\S+)/);
+	my $nb = /^Looking up status of (\S+)/ .. /^$/ or next;
+	if ($nb == 1) {
+	    $ip = $1;
+	} elsif (/<00>/) {
+	    $servers{$ip}{/<GROUP>/ ? 'group' : 'name'} ||= lc first(/(\S+)/);
+	} elsif (/__MSBROWSE__/) {
+	    $browse ||= $servers{$ip};
+	}
+    }
+    if ($browse) {
+	my %l;
+	foreach (smbclient($browse)) {
+	    my $nb = /^\s*Workgroup/ .. /^$/;
+	    $nb > 2 or next;
+	    my ($group, $name) = split(' ', lc($_));
+
+	    # already done
+	    next if grep { $group eq $_->{group} } values %servers;
+
+	    $l{$name} = $group;
+	}
+	if (my @l = keys %l) {
+	    foreach (`nmblookup @l`) {
+		$servers{$1} = { name => $2, group => $l{$2} } if /(\S+)\s+([^<]+)<00>/;
 	    }
 	}
     }
@@ -58,13 +86,8 @@ sub find_servers {
 sub find_exports {
     my ($class, $server) = @_;
     my @l;
-    my $name  = $server->{name} || $server->{ip};
-    my $ip    = $server->{ip} ? "-I $server->{ip}" : '';
-    my $group = $server->{group} ? " -W $server->{group}" : '';
 
-    my $U = $server->{username} ? "$server->{domain}/$server->{username}%$server->{password}" : '%';
-
-    foreach (`smbclient -U $U -L $name $ip$group`) {
+    foreach (smbclient($server)) {
 	chomp;
 	s/^\t//;
 	/NT_STATUS_/ and die $_;
@@ -74,7 +97,6 @@ sub find_exports {
 	      if $type eq 'Disk' && $name !~ /\$$/ && $name !~ /NETLOGON|SYSVOL/;
 	}
     }
-
     @l;
 }
 
