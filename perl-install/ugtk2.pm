@@ -1052,7 +1052,7 @@ sub ask_browse_tree_info {
     $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 2));
     $tree->set_headers_visible(0);
     $tree->set_rules_hint(1);
-    $textcolumn->set_minmax_width(200);
+    #TODO CHANGE METHOD WHICH DOES NOT EXISTS $textcolumn->set_minmax_width(200);
 
     gtkadd($w->{window}, 
 	   gtkpack_(Gtk2::VBox->new(0,5),
@@ -1065,7 +1065,8 @@ sub ask_browse_tree_info {
 		    0, my $box1 = Gtk2::HBox->new(0,15),
 		    0, my $box2 = Gtk2::HBox->new(0,10),
 		   ));
-    gtkpack__($box2, my $toolbar = Gtk2::Toolbar->new('horizontal', 'icons'));
+    #gtkpack__($box2, my $toolbar = Gtk2::Toolbar->new('horizontal', 'icons'));
+    gtkpack__($box2, my $toolbar = Gtk2::Toolbar->new());
 
     my @l = ([ $common->{ok}, 1 ], if_($common->{cancel}, [ $common->{cancel}, 0 ]));
     @l = reverse @l if !$::isInstall;
@@ -1290,17 +1291,17 @@ sub ask_browse_tree_info_given_widgets {
 	}
     };
 
-    $w->{renderer}->signal_connect(toggled => sub {
-                                  my ($cell, $path_str) = @_;
-                                  my $path = Gtk2::TreePath->new_from_string($path_str);
-                                  
-                                  # get toggled iter
-                                  my $iter = $w->{tree_model}->get_iter($path);
-                                  
-                                  # set new value
-#                                  $set_state->($iter, $w->{tree_model}->get($iter, 1) ^ 1);
-                                  $toggle->(0);
-                              });
+    $w->{renderer} and $w->{renderer}->signal_connect(toggled => sub {
+							  my ($cell, $path_str) = @_;
+							  my $path = Gtk2::TreePath->new_from_string($path_str);
+
+							  # get toggled iter
+							  my $iter = $w->{tree_model}->get_iter($path);
+
+							  # set new value
+							  #                                  $set_state->($iter, $w->{tree_model}->get($iter, 1) ^ 1);
+							  $toggle->(0);
+						      });
 
     $w->{tree}->signal_connect(key_press_event => sub {
 	my $c = chr($_[1]->keyval & 0xff);
@@ -1331,11 +1332,13 @@ sub ask_browse_tree_info_given_widgets {
 	0;
     });
     $w->{tree}->signal_connect(button_press_event => sub {  #- not too good, but CellRendererPixbuf doesn't have the needed signals :(
+				   eval {
 	my ($path, $column) = $w->{tree}->get_path_at_pos($_[1]->x, $_[1]->y);
 	if ($path && $column) {
 	    $column->{is_pix} and $mouse_toggle_pending = $w->{tree_model}->get($path, 0);
 	}
-    });
+    }; #- there is a die for the line above about a variable not of type Gtk2::TreeIter where is_pix and tree_model are reference.
+			       });
     $common->{rebuild_tree}->();
     &$update_size;
     my $_b = before_leaving { $clear_all_caches->() };
