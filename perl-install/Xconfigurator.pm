@@ -718,6 +718,8 @@ sub testFinalConfig {
 	use interactive_gtk;
         use my_gtk qw(:wrappers);
 
+        $::isStandalone = 1;
+
         lang::bindtextdomain();
 
 	$ENV{DISPLAY} = ":9";
