@@ -262,7 +262,8 @@ unplug it, remove write protection, and then plug it again.")),
 
     mkdir '/home/.sysconf';
     my $sysconf = '/home/.sysconf/' . machine_ident();
-    if (!-d $sysconf) {
+    if (!-d $sysconf || cat_('/proc/cmdline') =~ /\bcleankey\b/) {
+        rm_rf $sysconf;
         mkdir $sysconf;
         foreach (chomp_(cat_('/image/move/keyfiles'))) {
             mkdir_p("$sysconf/" . dirname($_));
