@@ -30,7 +30,7 @@ my %mice =
  [ [ 'psaux' ],
    [ [ 2, 'ps/2', 'PS/2', __("Standard") ],
      [ 5, 'ps/2', 'MouseManPlusPS/2', __("Logitech MouseMan+") ],
-     [ 5, 'imps2', 'IMPS/2', __("Microsoft IntelliMouse") ],
+     [ 5, 'imps2', 'IMPS/2', __("Generic PS2 Wheel Mouse") ],
      [ 5, 'ps/2', 'GlidePointPS/2', __("GlidePoint") ],
      '',
      [ 5, 'ps/2', 'ThinkingMousePS/2', __("Kensington Thinking Mouse") ],
