@@ -84,7 +84,7 @@ my $activefw = activefw->new(sub {
       $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
       $msg->get_member eq "Attack";
 });
-my $interactive_ids = $activefw->get_interactive;
+my $interactive_cb;
 
 checkNetwork();
 cronNetwork();
@@ -166,8 +166,9 @@ sub setState {
         $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label($name)), activate => sub { $launch->($interface) }));
     }
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
-    $menu->append(gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Interactive intrusion detection")), $interactive_ids),
-                                            toggled => sub { $activefw->set_interactive(to_bool($_[0]->get_active)) })));
+    $menu->append($interactive_cb = gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Interactive intrusion detection")),
+                                                                            $activefw->get_interactive),
+                                                              toggled => sub { $activefw->set_interactive(to_bool($_[0]->get_active)) })));
     $menu->append(gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Always launch on startup")), shouldStart()),
                                             toggled => sub { setAutoStart(uc(bool2text($_[0]->get_active))) })));
     $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label(N("Quit"))), activate => sub { mainQuit() }));
@@ -202,6 +203,7 @@ sub handle_attack {
 
     $ugtk2::wm_icon = "/usr/lib/libDrakX/icons/drakfirewall.png";
     my $w = ugtk2->new(N("Active Firewall : intrusion detected"));
+    my ($yes, $no);
 
     gtkadd($w->{window},
            gtknew('VBox', spacing => 5, children_loose => [
@@ -214,11 +216,16 @@ sub handle_attack {
                    ])
                ]),
                gtknew('HButtonBox', layout => 'edge', children_loose => [
-                   gtknew('Button', text => N("No"),
+                   $no = gtknew('Button', text => N("No"),
                           clicked => sub { $activefw->blacklist($seq, 0); Gtk2->main_quit }),
-                   my $ok = gtknew('Button', text => N("Yes"),
+                   $yes = gtknew('Button', text => N("Yes"),
                                    clicked => sub { $activefw->blacklist($seq, 1); Gtk2->main_quit })
                ]),
+               gtknew('CheckButton', text => N("Always blacklist (do not ask again)"), toggled => sub {
+                   my $interactive = !$_[0]->get_active;
+                   $no->set_sensitive($interactive);
+                   $interactive_cb->set_active($interactive);
+               }),
                gtkadd(Gtk2::Expander->new(N("Attack details")),
                       gtknew('HBox', children => [
                           0, gtknew('Label', text => "     "),
@@ -235,6 +242,6 @@ sub handle_attack {
                           ])
                       ])),
            ]));
-    $ok->grab_focus;
+    $yes->grab_focus;
     $w->main;
 }
