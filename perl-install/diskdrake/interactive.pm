@@ -1110,7 +1110,9 @@ sub warn_if_renumbered {
     my $l = delete $hd->{partitionsRenumbered};
     return if is_empty_array_ref($l);
 
-    my @l = map { N("partition %s is now known as %s", @$_) } @$l;
+    my @l = map { 
+	my ($old, $new) = @$_;
+	N("partition %s is now known as %s", $old, $new) } @$l;
     $in->ask_warn('', join("\n", 'Partitions have been renumbered: ', @l));
 }
 
@@ -1193,7 +1195,7 @@ sub format_hd_info {
     $info .= N("Device: ") . "$hd->{device}\n";
     $info .= N("Read-only") . "\n" if $hd->{readonly};
     $info .= N("Size: %s\n", formatXiB($hd->{totalsectors}, 512)) if $hd->{totalsectors};
-    $info .= N("Geometry: %s cylinders, %s heads, %s sectors\n", @{$hd->{geom}}{qw(cylinders heads sectors)}) if $::expert && $hd->{geom};
+    $info .= N("Geometry: %s cylinders, %s heads, %s sectors\n", $hd->{geom}{cylinders}, $hd->{geom}{heads}, $hd->{geom}{sectors}) if $::expert && $hd->{geom};
     $info .= N("Info: ") . ($hd->{info} || $hd->{media_type}) . "\n" if $::expert && ($hd->{info} || $hd->{media_type});
     $info .= N("LVM-disks %s\n", join ", ", map { $_->{device} } @{$hd->{disks}}) if isLVM($hd) && $hd->{disks};
     $info .= N("Partition table type: %s\n", $1) if $::expert && ref($hd) =~ /_([^_]+)$/;
