@@ -41,7 +41,6 @@ sub find_free_loop_raw {
     my ($o_chloop) = @_;
     foreach (0..7) {
 	my $dev = make(($o_chloop && 'ch') . "loop$_");
-        log::l("trying $dev");
 	sysopen(my $F, $dev, 2) or next;
 	!ioctl($F, c::LOOP_GET_STATUS(), my $_tmp) && $! == 6 or next; #- 6 == ENXIO
 	return $dev;
