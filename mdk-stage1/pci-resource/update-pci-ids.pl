@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+use MDK::Common;
+
 -x "../mar/mar" or die "\t*FAILED* Sorry, need ../mar/mar binary\n";
 
 require '/usr/bin/merge2pcitable.pl';
@@ -20,9 +22,14 @@ struct pci_module_map {
 my %t = ( network => [ 'network' ],
 	  medias => [ 'hd', 'cdrom' ]
 	);
-my %sanity_check = ( network => [ '3c59x', 'eepro100', 'e100', 'tulip', 'via-rhine', 'ne2k-pci', '8139too', 'tlan' ],
-		     medias => [ 'aic7xxx', 'advansys', 'ncr53c8xx', 'sym53c8xx', 'initio' ],
-		   );
+my %sanity_check = 
+  arch() =~ /ia64/ ?
+  ( network => [ '3c59x', 'eepro100', 'e100', 'tulip', 'via-rhine', 'ne2k-pci', '8139too' ],
+    medias => [ 'aic7xxx', 'advansys', 'sym53c8xx', 'initio' ],
+  ) :
+  ( network => [ '3c59x', 'eepro100', 'e100', 'tulip', 'via-rhine', 'ne2k-pci', '8139too', 'tlan' ],
+    medias => [ 'aic7xxx', 'advansys', 'ncr53c8xx', 'sym53c8xx', 'initio' ],
+  );
 
 foreach $type (keys %t) {
     print STDERR $type;
