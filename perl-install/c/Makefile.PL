@@ -9,13 +9,15 @@ $libs .= ' -lrpm -lrpmio -lz' if $ENV{C_RPM};
 
 my $pcmcia_dir = $ENV{C_DRAKX} && $Config{archname} =~ /i.86/ ? '../../mdk-stage1/pcmcia' : '';
 
+symlink "$pcmcia_dir/pcmcia_probe.c", "pcmcia_probe.c";
+
 WriteMakefile(
     'NAME'	=> 'stuff',
     'OPTIMIZE'  => '-Os',
     'MAKEFILE'  => 'Makefile_c',
-    'OBJECT'    => "stuff.o smp.o sbus.o silo.o " . ($pcmcia_dir && "$pcmcia_dir/pcmcia_probe.o"),
+    'OBJECT'    => "stuff.o smp.o sbus.o silo.o" . ($pcmcia_dir && " pcmcia_probe.o"),
     'VERSION_FROM' => 'stuff.pm', # finds $VERSION
     'LIBS'	=> [$libs],   # e.g., '-lm' 
     'DEFINE'	=> '',     # e.g., '-DHAVE_SOMETHING' 
-    'INC'	=> "-I/usr/include/rpm `gtk-config --cflags` `glib-config --cflags`" . ($pcmcia_dir && " -I$pcmcia_dir"), 
+    'INC'	=> "-I/usr/include/rpm `gtk-config --cflags` `glib-config --cflags`" . ($pcmcia_dir && " -I$pcmcia_dir -I$pcmcia_dir/.."), 
 );
