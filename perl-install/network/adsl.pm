@@ -32,15 +32,6 @@ If you don't know, choose 'use pppoe'"), $l) or return;
 	$netcnx->{type} = "adsl_$type";
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
     }
-    #- use pppoe for Sagem modem, but NET_DEVICE is now ADIModem instead of ethx.
-    if ($type =~ /Sagem/) {
-	$in->do_pkgs->install(qw(rp-pppoe adiusbadsl));
-	$netcnx->{type} = "adsl_pppoe";
-	$netcnx->{adsl_pppoe} = {};
-	modules::add_alias('ADIModem', 'adiusbadsl');
-	$netc->{$_} = 'ADIModem' foreach qw(NET_DEVICE NET_INTERFACE);
-	adsl_conf($netcnx->{adsl_pppoe}, $netc, $intf, $type) or goto conf_adsl_step1;
-    }
     if ($type eq 'dhcp') {
 	$in->do_pkgs->install(qw(dhcpcd));
 	go_ethernet($netc, $intf, 'dhcp', '', '', $first_time) or goto conf_adsl_step1;
@@ -50,6 +41,13 @@ If you don't know, choose 'use pppoe'"), $l) or return;
 	$netcnx->{type} = "adsl_$type";
 	$netcnx->{"adsl_$type"} = {};
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
+    }
+    if ($type =~ /Sagem/) {
+	$type = 'sagem';
+	$in->do_pkgs->install(qw(adiusbadsl));
+	$netcnx->{type} = "adsl_$type";
+	$netcnx->{adsl_$type} = {};
+	adsl_conf($netcnx->{adsl_$type}, $netc, $intf, $type) or goto conf_adsl_step1;
     }
     if ($type =~ /speedtouch/) {
 	$type = 'speedtouch';
@@ -126,6 +124,26 @@ defaultroute
 	} "$prefix/etc/ppp/pppoe.conf";
     }
 
+    if ($adsl_type eq 'sagem') {
+	output("$prefix/etc/ppp/peers/adsl",
+qq(noauth
+noipdefault
+pty "/usr/sbin/pppoa -I `/usr/sbin/adictrl -s; /usr/sbin/adictrl -i`"
+sync
+kdebug 1
+noaccomp
+nopcomp
+noccp
+novj
+holdoff 4
+maxfail 25
+persist
+usepeerdns
+defaultroute
+user "$adsl->{login}"
+));
+    }
+
     if ($adsl_type eq 'speedtouch') {
 	$netc->{vpivci} =~ /(\d+)_(\d+)/;
 	output("$prefix/etc/ppp/peers/adsl", 
@@ -160,9 +178,9 @@ http://www.speedtouchdsl.com/dvrreg_lx.htm
 and copy the mgmt.o in /usr/share/speedtouch"));
     }
 
-if ($adsl_type eq 'eci') {
-    $netc->{vpivci} =~ /(\d+)_(\d+)/;
-    output("$prefix/etc/ppp/peers/adsl", 
+    if ($adsl_type eq 'eci') {
+	$netc->{vpivci} =~ /(\d+)_(\d+)/;
+	output("$prefix/etc/ppp/peers/adsl", 
 qq(debug
 kdebug 1
 noipdefault
@@ -181,11 +199,11 @@ usepeerdns
 noauth
 lcp-echo-interval 0
 ));
-    modules::add_alias($_->[0], $_->[1]) foreach  ['char-major-108', 'ppp_generic'],
-						  ['tty-ldisc-14', 'ppp_synctty'],
-						  ['tty-ldisc-13', 'n_hdlc'];
-    $::isStandalone and modules::write_conf($prefix);
-}
+	modules::add_alias($_->[0], $_->[1]) foreach  ['char-major-108', 'ppp_generic'],
+						      ['tty-ldisc-14', 'ppp_synctty'],
+						      ['tty-ldisc-13', 'n_hdlc'];
+	$::isStandalone and modules::write_conf($prefix);
+    }
 
     if ($adsl_type eq 'pptp') {
 	write_cnx_script($netc, "adsl",
