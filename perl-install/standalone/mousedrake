@@ -48,6 +48,7 @@ $mouse->{device} =
 		     [ mouse::serial_ports ]) || goto begin if $mouse->{type} eq 'serial';
 
 mouse::write_conf($mouse);
+-e "/var/lock/subsys/gpm" and system "service", "gpm", "restart";
 
 $::isEmbedded ? kill(USR1, $::CCPID) : $in->exit(0);
 goto begin;
