@@ -438,8 +438,6 @@ sub easy_dhcp {
 			HOSTNAME => "localhost.localdomain",
 			DOMAINNAME => "localdomain",
 		       });
-
-    configureNetwork2($in, $::prefix, $netc, $intf);
     1;
 }
 
