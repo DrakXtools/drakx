@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX for Mandrake Linux 9.0\n"
-"POT-Creation-Date: 2002-09-13 22:00+0200\n"
-"PO-Revision-Date: 2002-09-12 22:47+0700\n"
+"POT-Creation-Date: 2002-09-20 11:43+0200\n"
+"PO-Revision-Date: 2002-09-22 13:12+0700\n"
 "Last-Translator: Trinh Minh Thanh <tmthanh@linuxmail.org>\n"
 "Language-Team: Gnome-Vi Team <Gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -171,7 +171,7 @@ msgid "Test"
 msgstr "Chạy thử"
 
 #: ../../Xconfig/main.pm_.c:118 ../../diskdrake/dav.pm_.c:67
-#: ../../diskdrake/interactive.pm_.c:381 ../../diskdrake/removable.pm_.c:25
+#: ../../diskdrake/interactive.pm_.c:385 ../../diskdrake/removable.pm_.c:25
 #: ../../diskdrake/removable_gtk.pm_.c:16 ../../diskdrake/smbnfs_gtk.pm_.c:86
 msgid "Options"
 msgstr "Tùy chọn"
@@ -183,14 +183,14 @@ msgstr "Tùy chọn"
 #: ../../interactive/newt.pm_.c:195 ../../interactive/newt.pm_.c:197
 #: ../../interactive/stdio.pm_.c:39 ../../interactive/stdio.pm_.c:143
 #: ../../interactive/stdio.pm_.c:144 ../../my_gtk.pm_.c:159
-#: ../../my_gtk.pm_.c:287 ../../my_gtk.pm_.c:310 ../../security/main.pm_.c:246
+#: ../../my_gtk.pm_.c:287 ../../my_gtk.pm_.c:310 ../../security/main.pm_.c:166
 #: ../../standalone/drakbackup_.c:3974 ../../standalone/drakbackup_.c:4069
 #: ../../standalone/drakbackup_.c:4088
 msgid "Ok"
 msgstr "OK"
 
 #: ../../Xconfig/main.pm_.c:122 ../../diskdrake/dav.pm_.c:28
-#: ../../harddrake/ui.pm_.c:96 ../../printerdrake.pm_.c:3203
+#: ../../harddrake/ui.pm_.c:96 ../../printerdrake.pm_.c:3207
 #: ../../standalone/draksplash_.c:122 ../../standalone/logdrake_.c:225
 msgid "Quit"
 msgstr "Thoát"
@@ -226,7 +226,7 @@ msgstr "Nhà SX"
 
 #: ../../Xconfig/monitor.pm_.c:109
 msgid "Plug'n Play probing failed. Please choose a precise monitor"
-msgstr "Không dò tìm được Plug'n Play. Hãy chọn chính xác monitor"
+msgstr "Không dò tìm được Plug 'n' Play. Hãy chọn chính xác monitor"
 
 #: ../../Xconfig/monitor.pm_.c:114
 msgid ""
@@ -298,7 +298,7 @@ msgstr "Card đồ họa: %s"
 #: ../../interactive/stdio.pm_.c:39 ../../interactive/stdio.pm_.c:143
 #: ../../my_gtk.pm_.c:158 ../../my_gtk.pm_.c:162 ../../my_gtk.pm_.c:287
 #: ../../network/netconnect.pm_.c:42 ../../printerdrake.pm_.c:2169
-#: ../../security/main.pm_.c:295 ../../standalone/drakautoinst_.c:203
+#: ../../security/main.pm_.c:216 ../../standalone/drakautoinst_.c:203
 #: ../../standalone/drakbackup_.c:3928 ../../standalone/drakbackup_.c:3961
 #: ../../standalone/drakbackup_.c:3987 ../../standalone/drakbackup_.c:4014
 #: ../../standalone/drakbackup_.c:4041 ../../standalone/drakbackup_.c:4101
@@ -307,10 +307,10 @@ msgstr "Card đồ họa: %s"
 #: ../../standalone/drakconnect_.c:147 ../../standalone/drakconnect_.c:289
 #: ../../standalone/drakconnect_.c:537 ../../standalone/drakconnect_.c:679
 #: ../../standalone/drakfloppy_.c:235 ../../standalone/drakfont_.c:970
-#: ../../standalone/drakgw_.c:532 ../../standalone/logdrake_.c:225
+#: ../../standalone/drakgw_.c:560 ../../standalone/logdrake_.c:225
 #: ../../ugtk.pm_.c:296
 msgid "Cancel"
-msgstr "Hủy"
+msgstr "Bỏ qua"
 
 #: ../../Xconfig/test.pm_.c:30
 msgid "Test of the configuration"
@@ -498,7 +498,7 @@ msgstr "Thời gian trễ trước khi khởi động ảnh mặc định"
 
 #: ../../any.pm_.c:170 ../../any.pm_.c:789
 #: ../../diskdrake/smbnfs_gtk.pm_.c:179
-#: ../../install_steps_interactive.pm_.c:1094 ../../network/modem.pm_.c:48
+#: ../../install_steps_interactive.pm_.c:1097 ../../network/modem.pm_.c:48
 #: ../../printerdrake.pm_.c:865 ../../printerdrake.pm_.c:980
 #: ../../standalone/drakbackup_.c:3530 ../../standalone/drakconnect_.c:624
 #: ../../standalone/drakconnect_.c:649
@@ -506,7 +506,7 @@ msgid "Password"
 msgstr "Mật khẩu"
 
 #: ../../any.pm_.c:171 ../../any.pm_.c:790
-#: ../../install_steps_interactive.pm_.c:1095
+#: ../../install_steps_interactive.pm_.c:1098
 msgid "Password (again)"
 msgstr "Nhập lại mật khẩu"
 
@@ -539,17 +539,17 @@ msgstr "Hiển thị dung lượng RAM theo MB"
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
-"Tuỳ chọn ``Tùy chọn dòng lệnh hạn chế'' nghĩa là không cho sử dụng nếu không "
+"Tùy chọn ``Tùy chọn dòng lệnh hạn chế'' nghĩa là không cho sử dụng nếu không "
 "có mật khẩu"
 
 #: ../../any.pm_.c:184 ../../any.pm_.c:765
-#: ../../diskdrake/interactive.pm_.c:1191
-#: ../../install_steps_interactive.pm_.c:1089
+#: ../../diskdrake/interactive.pm_.c:1195
+#: ../../install_steps_interactive.pm_.c:1092
 msgid "Please try again"
 msgstr "Hãy thử lại"
 
 #: ../../any.pm_.c:184 ../../any.pm_.c:765
-#: ../../install_steps_interactive.pm_.c:1089
+#: ../../install_steps_interactive.pm_.c:1092
 msgid "The passwords do not match"
 msgstr "Mật khẩu không khớp nhau"
 
@@ -586,10 +586,10 @@ msgid ""
 "On which drive are you booting?"
 msgstr ""
 "Bạn đã quyết định cài đặt trình nạp khởi động lên\n"
-"một phân vùng. Như vậy có nghĩa là ổ đĩa khởi động đã có một trình nạp khởi "
+"một phân vùng. Như vậy có nghĩa là đĩa khởi động đã có một trình nạp khởi "
 "động rồi (vd: System Commander).\n"
 "\n"
-"Bạn đang khởi động từ ổ đĩa nào ?"
+"Bạn đang khởi động từ đĩa nào ?"
 
 #: ../../any.pm_.c:248
 msgid ""
@@ -608,7 +608,7 @@ msgstr "Thêm"
 #: ../../any.pm_.c:258 ../../any.pm_.c:777 ../../diskdrake/dav.pm_.c:68
 #: ../../diskdrake/hd_gtk.pm_.c:153 ../../diskdrake/removable.pm_.c:27
 #: ../../diskdrake/smbnfs_gtk.pm_.c:88 ../../interactive/http.pm_.c:153
-#: ../../printerdrake.pm_.c:3203 ../../standalone/drakbackup_.c:2774
+#: ../../printerdrake.pm_.c:3207 ../../standalone/drakbackup_.c:2774
 msgid "Done"
 msgstr "Hoàn thành"
 
@@ -668,7 +668,7 @@ msgstr "Không an toàn"
 msgid "Label"
 msgstr "Nhãn"
 
-#: ../../any.pm_.c:311 ../../any.pm_.c:321 ../../harddrake/v4l.pm_.c:201
+#: ../../any.pm_.c:311 ../../any.pm_.c:321 ../../harddrake/v4l.pm_.c:200
 msgid "Default"
 msgstr "Mặc định"
 
@@ -935,7 +935,7 @@ msgstr "Cho phép mọi người dùng"
 msgid "No sharing"
 msgstr "Không chia sẻ"
 
-#: ../../any.pm_.c:988 ../../install_any.pm_.c:1199 ../../standalone.pm_.c:59
+#: ../../any.pm_.c:988 ../../install_any.pm_.c:1199 ../../standalone.pm_.c:66
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr "Gói tin %s cần được cài đặt. Bạn có muốn cài đặt nó không?"
@@ -945,7 +945,7 @@ msgid ""
 "You can export using NFS or Samba. Please select which you'd like to use."
 msgstr "Có thể dùng NFS hay SAMBA để xuất ra. Hãy chọn cái mà bạn thích dùng."
 
-#: ../../any.pm_.c:999 ../../install_any.pm_.c:1204 ../../standalone.pm_.c:64
+#: ../../any.pm_.c:999 ../../install_any.pm_.c:1204 ../../standalone.pm_.c:71
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr "Thiếu gói tin bắt buộc %s"
@@ -1031,7 +1031,7 @@ msgid ""
 "There are already some restrictions, and more automatic checks are run every "
 "night."
 msgstr ""
-"Đã có một số hạn chế và các thêm kiểm tra tự động sẽ được chạy mọi ngày vào "
+"Đã có một số hạn chế và các thêm kiểm tra tự động sẽ được chạy hàng ngày vào "
 "ban đêm."
 
 #: ../../any.pm_.c:1086
@@ -1208,7 +1208,7 @@ msgstr "Màn hình truyền thống Gtk+"
 
 #: ../../bootlook.pm_.c:95
 msgid "Launch Aurora at boot time"
-msgstr "Chạy Aurora lúc khởi động"
+msgstr "Chạy Aurora khi khởi động"
 
 #: ../../bootlook.pm_.c:98
 msgid "Lilo/grub mode"
@@ -1234,36 +1234,27 @@ msgstr ""
 msgid "Create new theme"
 msgstr "Tạo theme mới"
 
-#: ../../bootlook.pm_.c:193
+#: ../../bootlook.pm_.c:192
 #, c-format
 msgid "Backup %s to %s.old"
 msgstr "Sao lưu %s thành %s.old"
 
-#: ../../bootlook.pm_.c:194 ../../bootlook.pm_.c:197 ../../bootlook.pm_.c:200
-#: ../../bootlook.pm_.c:230 ../../bootlook.pm_.c:232 ../../bootlook.pm_.c:242
-#: ../../bootlook.pm_.c:251 ../../bootlook.pm_.c:258
-#: ../../diskdrake/dav.pm_.c:77 ../../diskdrake/hd_gtk.pm_.c:116
-#: ../../diskdrake/interactive.pm_.c:340 ../../diskdrake/interactive.pm_.c:355
-#: ../../diskdrake/interactive.pm_.c:469 ../../diskdrake/interactive.pm_.c:474
-#: ../../diskdrake/smbnfs_gtk.pm_.c:45 ../../fsedit.pm_.c:239
-#: ../../install_steps.pm_.c:75 ../../install_steps_interactive.pm_.c:67
-#: ../../interactive/http.pm_.c:119 ../../interactive/http.pm_.c:120
-#: ../../standalone/draksplash_.c:34
-msgid "Error"
-msgstr "Lỗi"
-
-#: ../../bootlook.pm_.c:194
-msgid "unable to backup lilo message"
-msgstr "Không thể sao lưu thông điệp của LiLo"
-
-#: ../../bootlook.pm_.c:196
+#: ../../bootlook.pm_.c:195
 #, c-format
 msgid "Copy %s to %s"
 msgstr "Sao chép %s sang %s"
 
-#: ../../bootlook.pm_.c:197
-msgid "can't change lilo message"
-msgstr "không thể thay đổi thông điệp của LiLo"
+#: ../../bootlook.pm_.c:200 ../../bootlook.pm_.c:230 ../../bootlook.pm_.c:232
+#: ../../bootlook.pm_.c:242 ../../bootlook.pm_.c:251 ../../bootlook.pm_.c:258
+#: ../../diskdrake/dav.pm_.c:77 ../../diskdrake/hd_gtk.pm_.c:116
+#: ../../diskdrake/interactive.pm_.c:213 ../../diskdrake/interactive.pm_.c:344
+#: ../../diskdrake/interactive.pm_.c:359 ../../diskdrake/interactive.pm_.c:473
+#: ../../diskdrake/interactive.pm_.c:478 ../../diskdrake/smbnfs_gtk.pm_.c:45
+#: ../../fsedit.pm_.c:239 ../../install_steps.pm_.c:75
+#: ../../install_steps_interactive.pm_.c:67 ../../interactive/http.pm_.c:119
+#: ../../interactive/http.pm_.c:120 ../../standalone/draksplash_.c:34
+msgid "Error"
+msgstr "Lỗi"
 
 #: ../../bootlook.pm_.c:200
 msgid "Lilo message not found"
@@ -1329,11 +1320,11 @@ msgid ""
 "Click on Configure to launch the setup wizard."
 msgstr ""
 "Hiện thời bạn đang dùng %s làm Trình Quản Lý Khởi Động.\n"
-"Nhấn  lên Cấu hình để chạy đồ thuật cho thiết lập."
+"Nhấn lên Cấu Hình để chạy đồ thuật cho thiết lập."
 
 #: ../../bootlook.pm_.c:269 ../../standalone/drakbackup_.c:2429
 #: ../../standalone/drakbackup_.c:2439 ../../standalone/drakbackup_.c:2449
-#: ../../standalone/drakbackup_.c:2457 ../../standalone/drakgw_.c:526
+#: ../../standalone/drakbackup_.c:2457 ../../standalone/drakgw_.c:554
 msgid "Configure"
 msgstr "Cấu hình"
 
@@ -1509,12 +1500,12 @@ msgstr ""
 msgid "New"
 msgstr "Mới"
 
-#: ../../diskdrake/dav.pm_.c:63 ../../diskdrake/interactive.pm_.c:388
+#: ../../diskdrake/dav.pm_.c:63 ../../diskdrake/interactive.pm_.c:392
 #: ../../diskdrake/smbnfs_gtk.pm_.c:81
 msgid "Unmount"
 msgstr "Thôi gắn kết"
 
-#: ../../diskdrake/dav.pm_.c:64 ../../diskdrake/interactive.pm_.c:385
+#: ../../diskdrake/dav.pm_.c:64 ../../diskdrake/interactive.pm_.c:389
 #: ../../diskdrake/smbnfs_gtk.pm_.c:82
 msgid "Mount"
 msgstr "Gắn kết"
@@ -1523,8 +1514,8 @@ msgstr "Gắn kết"
 msgid "Server"
 msgstr "Máy chủ"
 
-#: ../../diskdrake/dav.pm_.c:66 ../../diskdrake/interactive.pm_.c:379
-#: ../../diskdrake/interactive.pm_.c:568 ../../diskdrake/interactive.pm_.c:595
+#: ../../diskdrake/dav.pm_.c:66 ../../diskdrake/interactive.pm_.c:383
+#: ../../diskdrake/interactive.pm_.c:572 ../../diskdrake/interactive.pm_.c:599
 #: ../../diskdrake/removable.pm_.c:24 ../../diskdrake/removable_gtk.pm_.c:15
 #: ../../diskdrake/smbnfs_gtk.pm_.c:85
 msgid "Mount point"
@@ -1542,13 +1533,13 @@ msgstr "URL phải bắt đầu bằng http:// hoặc https://"
 msgid "Server: "
 msgstr "Máy chủ:"
 
-#: ../../diskdrake/dav.pm_.c:110 ../../diskdrake/interactive.pm_.c:440
-#: ../../diskdrake/interactive.pm_.c:1089
-#: ../../diskdrake/interactive.pm_.c:1164
+#: ../../diskdrake/dav.pm_.c:110 ../../diskdrake/interactive.pm_.c:444
+#: ../../diskdrake/interactive.pm_.c:1093
+#: ../../diskdrake/interactive.pm_.c:1168
 msgid "Mount point: "
 msgstr "Điểm gắn kết:"
 
-#: ../../diskdrake/dav.pm_.c:111 ../../diskdrake/interactive.pm_.c:1170
+#: ../../diskdrake/dav.pm_.c:111 ../../diskdrake/interactive.pm_.c:1174
 #, c-format
 msgid "Options: %s"
 msgstr "Tùy chọn: %s"
@@ -1557,9 +1548,9 @@ msgstr "Tùy chọn: %s"
 msgid "Please make a backup of your data first"
 msgstr "Trước hết, bạn hãy sao lưu dữ liệu"
 
-#: ../../diskdrake/hd_gtk.pm_.c:94 ../../diskdrake/interactive.pm_.c:934
-#: ../../diskdrake/interactive.pm_.c:943
-#: ../../diskdrake/interactive.pm_.c:1009
+#: ../../diskdrake/hd_gtk.pm_.c:94 ../../diskdrake/interactive.pm_.c:938
+#: ../../diskdrake/interactive.pm_.c:947
+#: ../../diskdrake/interactive.pm_.c:1013
 msgid "Read carefully!"
 msgstr "Hãy đọc kỹ!"
 
@@ -1579,7 +1570,7 @@ msgstr "Đồ thuật"
 
 #: ../../diskdrake/hd_gtk.pm_.c:184 ../../diskdrake/removable_gtk.pm_.c:24
 msgid "Choose action"
-msgstr "Chọn hoạt động"
+msgstr "Chọn hành động"
 
 #: ../../diskdrake/hd_gtk.pm_.c:188
 msgid ""
@@ -1630,7 +1621,7 @@ msgstr "SunOS"
 msgid "Swap"
 msgstr "Swap"
 
-#: ../../diskdrake/hd_gtk.pm_.c:324 ../../diskdrake/interactive.pm_.c:1105
+#: ../../diskdrake/hd_gtk.pm_.c:324 ../../diskdrake/interactive.pm_.c:1109
 msgid "Empty"
 msgstr "Trống"
 
@@ -1644,12 +1635,12 @@ msgstr "Khác"
 msgid "Filesystem types:"
 msgstr "Kiểu hệ thống tập tin:"
 
-#: ../../diskdrake/hd_gtk.pm_.c:345 ../../diskdrake/interactive.pm_.c:402
+#: ../../diskdrake/hd_gtk.pm_.c:345 ../../diskdrake/interactive.pm_.c:406
 msgid "Create"
 msgstr "Tạo"
 
-#: ../../diskdrake/hd_gtk.pm_.c:345 ../../diskdrake/interactive.pm_.c:380
-#: ../../diskdrake/interactive.pm_.c:531 ../../diskdrake/removable.pm_.c:26
+#: ../../diskdrake/hd_gtk.pm_.c:345 ../../diskdrake/interactive.pm_.c:384
+#: ../../diskdrake/interactive.pm_.c:535 ../../diskdrake/removable.pm_.c:26
 #: ../../diskdrake/removable.pm_.c:49 ../../diskdrake/removable_gtk.pm_.c:17
 msgid "Type"
 msgstr "Kiểu"
@@ -1659,7 +1650,7 @@ msgstr "Kiểu"
 msgid "Use ``%s'' instead"
 msgstr "Dùng ``%s'' thay thế"
 
-#: ../../diskdrake/hd_gtk.pm_.c:347 ../../diskdrake/interactive.pm_.c:389
+#: ../../diskdrake/hd_gtk.pm_.c:347 ../../diskdrake/interactive.pm_.c:393
 msgid "Delete"
 msgstr "Xóa"
 
@@ -1667,7 +1658,7 @@ msgstr "Xóa"
 msgid "Use ``Unmount'' first"
 msgstr "Dùng ``Thôi gắn kết'' trước tiên"
 
-#: ../../diskdrake/hd_gtk.pm_.c:352 ../../diskdrake/interactive.pm_.c:518
+#: ../../diskdrake/hd_gtk.pm_.c:352 ../../diskdrake/interactive.pm_.c:522
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
@@ -1685,60 +1676,60 @@ msgstr "Chọn phân vùng khác"
 msgid "Exit"
 msgstr "Thoát ra"
 
-#: ../../diskdrake/interactive.pm_.c:221
+#: ../../diskdrake/interactive.pm_.c:225
 msgid "Toggle to expert mode"
 msgstr "Chuyển sang chế độ Chuyên gia"
 
-#: ../../diskdrake/interactive.pm_.c:221
+#: ../../diskdrake/interactive.pm_.c:225
 msgid "Toggle to normal mode"
 msgstr "Chuyển sang chế độ bình thường"
 
-#: ../../diskdrake/interactive.pm_.c:221
+#: ../../diskdrake/interactive.pm_.c:225
 msgid "Undo"
 msgstr "Hoàn tác"
 
-#: ../../diskdrake/interactive.pm_.c:240
+#: ../../diskdrake/interactive.pm_.c:244
 msgid "Continue anyway?"
 msgstr "Vẫn tiếp tục bằng bất cứ giá nào?"
 
-#: ../../diskdrake/interactive.pm_.c:245
+#: ../../diskdrake/interactive.pm_.c:249
 msgid "Quit without saving"
 msgstr "Thoát mà không lưu lại"
 
-#: ../../diskdrake/interactive.pm_.c:245
+#: ../../diskdrake/interactive.pm_.c:249
 msgid "Quit without writing the partition table?"
 msgstr "Thoát mà không ghi bảng phân vùng?"
 
-#: ../../diskdrake/interactive.pm_.c:250
+#: ../../diskdrake/interactive.pm_.c:254
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "Bạn có muốn lưu các thay đổi của /etc/fstab?"
 
-#: ../../diskdrake/interactive.pm_.c:263
+#: ../../diskdrake/interactive.pm_.c:267
 msgid "Auto allocate"
 msgstr "Phân chia tự động"
 
-#: ../../diskdrake/interactive.pm_.c:263
+#: ../../diskdrake/interactive.pm_.c:267
 msgid "Clear all"
 msgstr "Xóa hết"
 
-#: ../../diskdrake/interactive.pm_.c:263
+#: ../../diskdrake/interactive.pm_.c:267
 #: ../../install_steps_interactive.pm_.c:214
 msgid "More"
 msgstr "Thêm"
 
-#: ../../diskdrake/interactive.pm_.c:267
+#: ../../diskdrake/interactive.pm_.c:271
 msgid "Hard drive information"
 msgstr "Thông tin đĩa cứng"
 
-#: ../../diskdrake/interactive.pm_.c:298
+#: ../../diskdrake/interactive.pm_.c:302
 msgid "All primary partitions are used"
 msgstr "Toàn bộ các phân vùng chính được sử dụng"
 
-#: ../../diskdrake/interactive.pm_.c:299
+#: ../../diskdrake/interactive.pm_.c:303
 msgid "I can't add any more partition"
 msgstr "Không thể thêm phân vùng nào nữa"
 
-#: ../../diskdrake/interactive.pm_.c:300
+#: ../../diskdrake/interactive.pm_.c:304
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
 "partition"
@@ -1746,31 +1737,31 @@ msgstr ""
 "Để có thêm phân vùng, hãy xoá một phân vùng để có thể tạo một phân vùng mở "
 "rộng"
 
-#: ../../diskdrake/interactive.pm_.c:310
+#: ../../diskdrake/interactive.pm_.c:314
 msgid "Save partition table"
 msgstr "Lưu bảng phân vùng"
 
-#: ../../diskdrake/interactive.pm_.c:311
+#: ../../diskdrake/interactive.pm_.c:315
 msgid "Restore partition table"
 msgstr "Khôi phục bảng phân vùng"
 
-#: ../../diskdrake/interactive.pm_.c:312
+#: ../../diskdrake/interactive.pm_.c:316
 msgid "Rescue partition table"
 msgstr "Bảng phân vùng cứu giải"
 
-#: ../../diskdrake/interactive.pm_.c:314
+#: ../../diskdrake/interactive.pm_.c:318
 msgid "Reload partition table"
 msgstr "Nạp lại bảng phân vùng"
 
-#: ../../diskdrake/interactive.pm_.c:319
+#: ../../diskdrake/interactive.pm_.c:323
 msgid "Removable media automounting"
 msgstr "Tự động gắn kết phương tiện tháo lắp"
 
-#: ../../diskdrake/interactive.pm_.c:328 ../../diskdrake/interactive.pm_.c:348
+#: ../../diskdrake/interactive.pm_.c:332 ../../diskdrake/interactive.pm_.c:352
 msgid "Select file"
 msgstr "Chọn tập tin"
 
-#: ../../diskdrake/interactive.pm_.c:335
+#: ../../diskdrake/interactive.pm_.c:339
 msgid ""
 "The backup partition table has not the same size\n"
 "Still continue?"
@@ -1778,11 +1769,11 @@ msgstr ""
 "Bảng phân vùng sao lưu không có cùng kích thước\n"
 "Vẫn tiếp tục?"
 
-#: ../../diskdrake/interactive.pm_.c:349 ../../harddrake/sound.pm_.c:200
+#: ../../diskdrake/interactive.pm_.c:353 ../../harddrake/sound.pm_.c:200
 msgid "Warning"
 msgstr "Cảnh báo"
 
-#: ../../diskdrake/interactive.pm_.c:350
+#: ../../diskdrake/interactive.pm_.c:354
 msgid ""
 "Insert a floppy in drive\n"
 "All data on this floppy will be lost"
@@ -1790,71 +1781,71 @@ msgstr ""
 "Nạp đĩa mềm vào ổ\n"
 "Mọi dữ liệu trên đĩa sẽ bị mất"
 
-#: ../../diskdrake/interactive.pm_.c:361
+#: ../../diskdrake/interactive.pm_.c:365
 msgid "Trying to rescue partition table"
 msgstr "Đang cố gắng cứu bảng phân vùng"
 
-#: ../../diskdrake/interactive.pm_.c:367
+#: ../../diskdrake/interactive.pm_.c:371
 msgid "Detailed information"
 msgstr "Thông tin chi tiết"
 
-#: ../../diskdrake/interactive.pm_.c:382 ../../diskdrake/interactive.pm_.c:662
+#: ../../diskdrake/interactive.pm_.c:386 ../../diskdrake/interactive.pm_.c:666
 msgid "Resize"
 msgstr "Đặt lại kích thước"
 
-#: ../../diskdrake/interactive.pm_.c:383 ../../diskdrake/interactive.pm_.c:715
+#: ../../diskdrake/interactive.pm_.c:387 ../../diskdrake/interactive.pm_.c:719
 msgid "Move"
 msgstr "Chuyển"
 
-#: ../../diskdrake/interactive.pm_.c:384
+#: ../../diskdrake/interactive.pm_.c:388
 msgid "Format"
 msgstr "Format"
 
-#: ../../diskdrake/interactive.pm_.c:386
+#: ../../diskdrake/interactive.pm_.c:390
 msgid "Add to RAID"
 msgstr "Thêm vào RAID"
 
-#: ../../diskdrake/interactive.pm_.c:387
+#: ../../diskdrake/interactive.pm_.c:391
 msgid "Add to LVM"
 msgstr "Thêm vào LVM"
 
-#: ../../diskdrake/interactive.pm_.c:390
+#: ../../diskdrake/interactive.pm_.c:394
 msgid "Remove from RAID"
 msgstr "Gỡ bỏ khỏi RAID"
 
-#: ../../diskdrake/interactive.pm_.c:391
+#: ../../diskdrake/interactive.pm_.c:395
 msgid "Remove from LVM"
 msgstr "Gỡ bỏ khỏi LVM"
 
-#: ../../diskdrake/interactive.pm_.c:392
+#: ../../diskdrake/interactive.pm_.c:396
 msgid "Modify RAID"
 msgstr "Thay đổi RAID"
 
-#: ../../diskdrake/interactive.pm_.c:393
+#: ../../diskdrake/interactive.pm_.c:397
 msgid "Use for loopback"
 msgstr "Dùng cho loopback"
 
-#: ../../diskdrake/interactive.pm_.c:433
+#: ../../diskdrake/interactive.pm_.c:437
 msgid "Create a new partition"
 msgstr "Tạo phân vùng mới"
 
-#: ../../diskdrake/interactive.pm_.c:436
+#: ../../diskdrake/interactive.pm_.c:440
 msgid "Start sector: "
 msgstr "Sector bắt đầu: "
 
-#: ../../diskdrake/interactive.pm_.c:438 ../../diskdrake/interactive.pm_.c:815
+#: ../../diskdrake/interactive.pm_.c:442 ../../diskdrake/interactive.pm_.c:819
 msgid "Size in MB: "
 msgstr "Kích thước theo MB: "
 
-#: ../../diskdrake/interactive.pm_.c:439 ../../diskdrake/interactive.pm_.c:816
+#: ../../diskdrake/interactive.pm_.c:443 ../../diskdrake/interactive.pm_.c:820
 msgid "Filesystem type: "
 msgstr "Kiểu hệ thống tập tin: "
 
-#: ../../diskdrake/interactive.pm_.c:444
+#: ../../diskdrake/interactive.pm_.c:448
 msgid "Preference: "
 msgstr "Tùy thích: "
 
-#: ../../diskdrake/interactive.pm_.c:469
+#: ../../diskdrake/interactive.pm_.c:473
 msgid ""
 "You can't create a new partition\n"
 "(since you reached the maximal number of primary partitions).\n"
@@ -1864,33 +1855,33 @@ msgstr ""
 "(vì bạn đã tạo tối đa số lượng phân vùng chính).\n"
 "Đầu tiên, hãy bỏ một phân vùng chính và tạo phân vùng mở rộng."
 
-#: ../../diskdrake/interactive.pm_.c:499
+#: ../../diskdrake/interactive.pm_.c:503
 msgid "Remove the loopback file?"
 msgstr "Có gỡ bỏ tập tin loopback không?"
 
-#: ../../diskdrake/interactive.pm_.c:529
+#: ../../diskdrake/interactive.pm_.c:533
 msgid "Change partition type"
 msgstr "Thay đổi kiểu phân vùng"
 
-#: ../../diskdrake/interactive.pm_.c:530 ../../diskdrake/removable.pm_.c:48
+#: ../../diskdrake/interactive.pm_.c:534 ../../diskdrake/removable.pm_.c:48
 msgid "Which filesystem do you want?"
 msgstr "Hệ thống tập tin nào bạn muốn?"
 
-#: ../../diskdrake/interactive.pm_.c:536
+#: ../../diskdrake/interactive.pm_.c:540
 msgid "Switching from ext2 to ext3"
 msgstr "Chuyển từ ext2 sang ext3"
 
-#: ../../diskdrake/interactive.pm_.c:566
+#: ../../diskdrake/interactive.pm_.c:570
 #, c-format
 msgid "Where do you want to mount loopback file %s?"
 msgstr "Bạn muốn gắn kết tập tin loopback %s vào đâu?"
 
-#: ../../diskdrake/interactive.pm_.c:567
+#: ../../diskdrake/interactive.pm_.c:571
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Bạn muốn gắn kết thiết bị %s vào đâu?"
 
-#: ../../diskdrake/interactive.pm_.c:573
+#: ../../diskdrake/interactive.pm_.c:577
 msgid ""
 "Can't unset mount point as this partition is used for loop back.\n"
 "Remove the loopback first"
@@ -1898,135 +1889,135 @@ msgstr ""
 "Không thể bỏ thiết lập điểm gắn kết vì phân vùng này dùng để loopback.\n"
 "Hãy gỡ bỏ loopback trước"
 
-#: ../../diskdrake/interactive.pm_.c:594
+#: ../../diskdrake/interactive.pm_.c:598
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "Bạn muốn gắn kết %s vào đâu?"
 
-#: ../../diskdrake/interactive.pm_.c:618
+#: ../../diskdrake/interactive.pm_.c:622
 msgid "Computing FAT filesystem bounds"
 msgstr "Đang tính toán phạm vi hệ thống tập tin FAT"
 
-#: ../../diskdrake/interactive.pm_.c:618 ../../diskdrake/interactive.pm_.c:677
+#: ../../diskdrake/interactive.pm_.c:622 ../../diskdrake/interactive.pm_.c:681
 #: ../../install_interactive.pm_.c:133
 msgid "Resizing"
 msgstr "Đang lập lại kích thước"
 
-#: ../../diskdrake/interactive.pm_.c:650
+#: ../../diskdrake/interactive.pm_.c:654
 msgid "This partition is not resizeable"
 msgstr "Phân vùng này không thể lập lại kích thước"
 
-#: ../../diskdrake/interactive.pm_.c:655
+#: ../../diskdrake/interactive.pm_.c:659
 msgid "All data on this partition should be backed-up"
 msgstr "Mọi dữ liệu trên phân vùng này nên được sao lưu"
 
-#: ../../diskdrake/interactive.pm_.c:657
+#: ../../diskdrake/interactive.pm_.c:661
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr "Sau khi lập lại kích thước phân vùng %s, mọi dữ liệu trên đó sẽ bị mất"
 
-#: ../../diskdrake/interactive.pm_.c:662
+#: ../../diskdrake/interactive.pm_.c:666
 msgid "Choose the new size"
 msgstr "Chọn kích thước mới"
 
-#: ../../diskdrake/interactive.pm_.c:663
+#: ../../diskdrake/interactive.pm_.c:667
 msgid "New size in MB: "
 msgstr "Kích thước mới theo MB: "
 
-#: ../../diskdrake/interactive.pm_.c:716
+#: ../../diskdrake/interactive.pm_.c:720
 msgid "Which disk do you want to move it to?"
 msgstr "Bạn muốn chuyển nó tới đĩa nào?"
 
-#: ../../diskdrake/interactive.pm_.c:717
+#: ../../diskdrake/interactive.pm_.c:721
 msgid "Sector"
 msgstr "Sector"
 
-#: ../../diskdrake/interactive.pm_.c:718
+#: ../../diskdrake/interactive.pm_.c:722
 msgid "Which sector do you want to move it to?"
 msgstr "Bạn muốn chuyển nó tới sector nào?"
 
-#: ../../diskdrake/interactive.pm_.c:721
+#: ../../diskdrake/interactive.pm_.c:725
 msgid "Moving"
 msgstr "Đang chuyển"
 
-#: ../../diskdrake/interactive.pm_.c:721
+#: ../../diskdrake/interactive.pm_.c:725
 msgid "Moving partition..."
 msgstr "Đang chuyển phân vùng..."
 
-#: ../../diskdrake/interactive.pm_.c:738
+#: ../../diskdrake/interactive.pm_.c:742
 msgid "Choose an existing RAID to add to"
 msgstr "Hãy chọn RAID đang tồn tại để thêm vào"
 
-#: ../../diskdrake/interactive.pm_.c:739 ../../diskdrake/interactive.pm_.c:756
+#: ../../diskdrake/interactive.pm_.c:743 ../../diskdrake/interactive.pm_.c:760
 msgid "new"
 msgstr "mới"
 
-#: ../../diskdrake/interactive.pm_.c:754
+#: ../../diskdrake/interactive.pm_.c:758
 msgid "Choose an existing LVM to add to"
 msgstr "Hãy chọn LVM đang tồn tại để thêm vào"
 
-#: ../../diskdrake/interactive.pm_.c:759
+#: ../../diskdrake/interactive.pm_.c:763
 msgid "LVM name?"
 msgstr "Tên LVM?"
 
-#: ../../diskdrake/interactive.pm_.c:800
+#: ../../diskdrake/interactive.pm_.c:804
 msgid "This partition can't be used for loopback"
 msgstr "Phân vùng này không thể dùng cho loopback"
 
-#: ../../diskdrake/interactive.pm_.c:813
+#: ../../diskdrake/interactive.pm_.c:817
 msgid "Loopback"
 msgstr "Loopback"
 
-#: ../../diskdrake/interactive.pm_.c:814
+#: ../../diskdrake/interactive.pm_.c:818
 msgid "Loopback file name: "
 msgstr "Tên tập tin loopback: "
 
-#: ../../diskdrake/interactive.pm_.c:819
+#: ../../diskdrake/interactive.pm_.c:823
 msgid "Give a file name"
 msgstr "Đặt tên file"
 
-#: ../../diskdrake/interactive.pm_.c:822
+#: ../../diskdrake/interactive.pm_.c:826
 msgid "File already used by another loopback, choose another one"
 msgstr "Tập tin đã được loopback khác dùng, hãy chọn tập tin khác"
 
-#: ../../diskdrake/interactive.pm_.c:823
+#: ../../diskdrake/interactive.pm_.c:827
 msgid "File already exists. Use it?"
 msgstr "Tập tin đang tồn tại. Có dùng không?"
 
-#: ../../diskdrake/interactive.pm_.c:846
+#: ../../diskdrake/interactive.pm_.c:850
 msgid "Mount options"
 msgstr "Tùy chọn gắn kết"
 
-#: ../../diskdrake/interactive.pm_.c:853
+#: ../../diskdrake/interactive.pm_.c:857
 msgid "Various"
 msgstr "Khác nhau"
 
-#: ../../diskdrake/interactive.pm_.c:917 ../../standalone/drakfloppy_.c:104
+#: ../../diskdrake/interactive.pm_.c:921 ../../standalone/drakfloppy_.c:104
 msgid "device"
 msgstr "thiết bị"
 
-#: ../../diskdrake/interactive.pm_.c:918
+#: ../../diskdrake/interactive.pm_.c:922
 msgid "level"
 msgstr "Mức độ"
 
-#: ../../diskdrake/interactive.pm_.c:919
+#: ../../diskdrake/interactive.pm_.c:923
 msgid "chunk size"
 msgstr "Kích thước bó"
 
-#: ../../diskdrake/interactive.pm_.c:934
+#: ../../diskdrake/interactive.pm_.c:938
 msgid "Be careful: this operation is dangerous."
 msgstr "Hãy thận trọng: thao tác này nguy hiểm."
 
-#: ../../diskdrake/interactive.pm_.c:949
+#: ../../diskdrake/interactive.pm_.c:953
 msgid "What type of partitioning?"
 msgstr "Kiểu phân vùng nào?"
 
-#: ../../diskdrake/interactive.pm_.c:965
+#: ../../diskdrake/interactive.pm_.c:969
 #, c-format
 msgid "The package %s is needed. Install it?"
 msgstr "Cần gói tin %s. Cài đặt nó không?"
 
-#: ../../diskdrake/interactive.pm_.c:979
+#: ../../diskdrake/interactive.pm_.c:983
 msgid ""
 "Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
 "1024).\n"
@@ -2038,7 +2029,7 @@ msgstr ""
 "Hoặc bạn dùng LILO thì nó sẽ không làm việc, hoặc bạn không dùng LILO thì "
 "không cần /boot"
 
-#: ../../diskdrake/interactive.pm_.c:983
+#: ../../diskdrake/interactive.pm_.c:987
 msgid ""
 "The partition you've selected to add as root (/) is physically located "
 "beyond\n"
@@ -2049,7 +2040,7 @@ msgstr ""
 "cylinder thứ 1024 của đĩa cứng , và bạn không có phân vùng /boot.\n"
 "Nếu định dùng trình khởi động LILO, thận trọng thêm một phân vùng /boot"
 
-#: ../../diskdrake/interactive.pm_.c:989
+#: ../../diskdrake/interactive.pm_.c:993
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
@@ -2060,44 +2051,44 @@ msgstr ""
 "boot.\n"
 "Vì vậy, hãy thận trọng thêm phân vùng /boot"
 
-#: ../../diskdrake/interactive.pm_.c:1009
+#: ../../diskdrake/interactive.pm_.c:1013
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Bảng phân vùng của drive %s sắp được ghi lên đĩa!"
 
-#: ../../diskdrake/interactive.pm_.c:1013
+#: ../../diskdrake/interactive.pm_.c:1017
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Bạn cần khởi động lại trước khi thay đổi có tác dụng"
 
-#: ../../diskdrake/interactive.pm_.c:1024
+#: ../../diskdrake/interactive.pm_.c:1028
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr "Sau khi format phân vùng %s, mọi dữ liệu trên đó sẽ bị mất"
 
-#: ../../diskdrake/interactive.pm_.c:1026
+#: ../../diskdrake/interactive.pm_.c:1030
 msgid "Formatting"
 msgstr "Đang format"
 
-#: ../../diskdrake/interactive.pm_.c:1027
+#: ../../diskdrake/interactive.pm_.c:1031
 #, c-format
 msgid "Formatting loopback file %s"
 msgstr "Đang format tập tin loopback %s"
 
-#: ../../diskdrake/interactive.pm_.c:1028
+#: ../../diskdrake/interactive.pm_.c:1032
 #: ../../install_steps_interactive.pm_.c:459
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Đang format phân vùng %s"
 
-#: ../../diskdrake/interactive.pm_.c:1039
+#: ../../diskdrake/interactive.pm_.c:1043
 msgid "Hide files"
 msgstr "Các tập tin ẩn"
 
-#: ../../diskdrake/interactive.pm_.c:1039
+#: ../../diskdrake/interactive.pm_.c:1043
 msgid "Move files to the new partition"
 msgstr "Chuyển các tập tin sang phân vùng mới"
 
-#: ../../diskdrake/interactive.pm_.c:1040
+#: ../../diskdrake/interactive.pm_.c:1044
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -2106,83 +2097,83 @@ msgstr ""
 "Thư mục %s đang chứa một số dữ liệu\n"
 "(%s)"
 
-#: ../../diskdrake/interactive.pm_.c:1051
+#: ../../diskdrake/interactive.pm_.c:1055
 msgid "Moving files to the new partition"
 msgstr "Di chuyển các tập tin sang phân vùng mới"
 
-#: ../../diskdrake/interactive.pm_.c:1055
+#: ../../diskdrake/interactive.pm_.c:1059
 #, c-format
 msgid "Copying %s"
 msgstr "Sao chép %s"
 
-#: ../../diskdrake/interactive.pm_.c:1059
+#: ../../diskdrake/interactive.pm_.c:1063
 #, c-format
 msgid "Removing %s"
 msgstr "Gỡ bỏ %s"
 
-#: ../../diskdrake/interactive.pm_.c:1069
+#: ../../diskdrake/interactive.pm_.c:1073
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "bây giờ phân vùng %s được coi là %s"
 
-#: ../../diskdrake/interactive.pm_.c:1090
-#: ../../diskdrake/interactive.pm_.c:1149
+#: ../../diskdrake/interactive.pm_.c:1094
+#: ../../diskdrake/interactive.pm_.c:1153
 msgid "Device: "
 msgstr "Thiết bị:"
 
-#: ../../diskdrake/interactive.pm_.c:1091
+#: ../../diskdrake/interactive.pm_.c:1095
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "Tên ổ đĩa trong DOS: %s (chỉ là phỏng đoán)\n"
 
-#: ../../diskdrake/interactive.pm_.c:1095
-#: ../../diskdrake/interactive.pm_.c:1103
-#: ../../diskdrake/interactive.pm_.c:1168
+#: ../../diskdrake/interactive.pm_.c:1099
+#: ../../diskdrake/interactive.pm_.c:1107
+#: ../../diskdrake/interactive.pm_.c:1172
 msgid "Type: "
 msgstr "Kiểu:"
 
-#: ../../diskdrake/interactive.pm_.c:1099
+#: ../../diskdrake/interactive.pm_.c:1103
 msgid "Name: "
 msgstr "Tên:"
 
-#: ../../diskdrake/interactive.pm_.c:1107
+#: ../../diskdrake/interactive.pm_.c:1111
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Bắt đầu: sector %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1108
+#: ../../diskdrake/interactive.pm_.c:1112
 #, c-format
 msgid "Size: %s"
 msgstr "Kích thước: %s"
 
-#: ../../diskdrake/interactive.pm_.c:1110
+#: ../../diskdrake/interactive.pm_.c:1114
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s sector"
 
-#: ../../diskdrake/interactive.pm_.c:1112
+#: ../../diskdrake/interactive.pm_.c:1116
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Cylinder %d đến %d\n"
 
-#: ../../diskdrake/interactive.pm_.c:1113
+#: ../../diskdrake/interactive.pm_.c:1117
 msgid "Formatted\n"
 msgstr "Đã format\n"
 
-#: ../../diskdrake/interactive.pm_.c:1114
+#: ../../diskdrake/interactive.pm_.c:1118
 msgid "Not formatted\n"
 msgstr "Chưa format\n"
 
-#: ../../diskdrake/interactive.pm_.c:1115
+#: ../../diskdrake/interactive.pm_.c:1119
 msgid "Mounted\n"
 msgstr "Đã được gắn kết\n"
 
-#: ../../diskdrake/interactive.pm_.c:1116
+#: ../../diskdrake/interactive.pm_.c:1120
 #, c-format
 msgid "RAID md%s\n"
 msgstr "RAID md%s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1118
+#: ../../diskdrake/interactive.pm_.c:1122
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2191,7 +2182,7 @@ msgstr ""
 "Tập tin Loopback:\n"
 "    %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1119
+#: ../../diskdrake/interactive.pm_.c:1123
 msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
@@ -2199,27 +2190,27 @@ msgstr ""
 "Phân vùng được khởi động mặc định\n"
 "    (cho MS-DOS khởi động, không cho lilo)\n"
 
-#: ../../diskdrake/interactive.pm_.c:1121
+#: ../../diskdrake/interactive.pm_.c:1125
 #, c-format
 msgid "Level %s\n"
 msgstr "Mức %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1122
+#: ../../diskdrake/interactive.pm_.c:1126
 #, c-format
 msgid "Chunk size %s\n"
 msgstr "Kích thước bó %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1123
+#: ../../diskdrake/interactive.pm_.c:1127
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "Đĩa RAID %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1125
+#: ../../diskdrake/interactive.pm_.c:1129
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Tên tập tin Loopback: %s"
 
-#: ../../diskdrake/interactive.pm_.c:1128
+#: ../../diskdrake/interactive.pm_.c:1132
 msgid ""
 "\n"
 "Chances are, this partition is\n"
@@ -2231,7 +2222,7 @@ msgstr ""
 "một phân vùng của đĩa, có lẽ bạn nên\n"
 "để nó riêng ra.\n"
 
-#: ../../diskdrake/interactive.pm_.c:1131
+#: ../../diskdrake/interactive.pm_.c:1135
 msgid ""
 "\n"
 "This special Bootstrap\n"
@@ -2243,61 +2234,61 @@ msgstr ""
 "đặc biệt để\n"
 "khởi động kép hệ thống của bạn.\n"
 
-#: ../../diskdrake/interactive.pm_.c:1150
+#: ../../diskdrake/interactive.pm_.c:1154
 msgid "Read-only"
 msgstr "Chỉ Đọc"
 
-#: ../../diskdrake/interactive.pm_.c:1151
+#: ../../diskdrake/interactive.pm_.c:1155
 #, c-format
 msgid "Size: %s\n"
 msgstr "Kích thước: %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1152
+#: ../../diskdrake/interactive.pm_.c:1156
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geometry: %s cylinders, %s heads, %s sectors\n"
 
-#: ../../diskdrake/interactive.pm_.c:1153
+#: ../../diskdrake/interactive.pm_.c:1157
 msgid "Info: "
 msgstr "Thông tin: "
 
-#: ../../diskdrake/interactive.pm_.c:1154
+#: ../../diskdrake/interactive.pm_.c:1158
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "Các đĩa LVM %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1155
+#: ../../diskdrake/interactive.pm_.c:1159
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Kiểu bảng phân vùng: %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1156
+#: ../../diskdrake/interactive.pm_.c:1160
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "trên channel %d id %d\n"
 
-#: ../../diskdrake/interactive.pm_.c:1186
+#: ../../diskdrake/interactive.pm_.c:1190
 msgid "Filesystem encryption key"
 msgstr "Khóa mã hóa hệ thống tập tin"
 
-#: ../../diskdrake/interactive.pm_.c:1187
+#: ../../diskdrake/interactive.pm_.c:1191
 msgid "Choose your filesystem encryption key"
 msgstr "Chọn khóa mã hóa hệ thống tập tin"
 
-#: ../../diskdrake/interactive.pm_.c:1190
+#: ../../diskdrake/interactive.pm_.c:1194
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr "Khóa mã hóa này đơn giản quá ( phải có độ dài ít nhất %d ký tự)"
 
-#: ../../diskdrake/interactive.pm_.c:1191
+#: ../../diskdrake/interactive.pm_.c:1195
 msgid "The encryption keys do not match"
 msgstr "Các khóa mã hóa không khớp nhau"
 
-#: ../../diskdrake/interactive.pm_.c:1194
+#: ../../diskdrake/interactive.pm_.c:1198
 msgid "Encryption key"
 msgstr "Khóa mã hóa"
 
-#: ../../diskdrake/interactive.pm_.c:1195
+#: ../../diskdrake/interactive.pm_.c:1199
 msgid "Encryption key (again)"
 msgstr "Khóa mã hoá (nhập lại)"
 
@@ -2792,23 +2783,23 @@ msgstr "chính"
 msgid "secondary"
 msgstr "phụ"
 
-#: ../../harddrake/v4l.pm_.c:15 ../../harddrake/v4l.pm_.c:65
+#: ../../harddrake/v4l.pm_.c:14 ../../harddrake/v4l.pm_.c:64
 msgid "Auto-detect"
 msgstr "Dò tìm Tự động"
 
-#: ../../harddrake/v4l.pm_.c:66 ../../harddrake/v4l.pm_.c:186
+#: ../../harddrake/v4l.pm_.c:65 ../../harddrake/v4l.pm_.c:185
 msgid "Unknown|Generic"
 msgstr "Không xác định|Chuẩn chung"
 
-#: ../../harddrake/v4l.pm_.c:98
+#: ../../harddrake/v4l.pm_.c:97
 msgid "Unknown|CPH05X (bt878) [many vendors]"
 msgstr "Không xác định|CPH05X (bt878) [nhiều nhà SX]"
 
-#: ../../harddrake/v4l.pm_.c:99
+#: ../../harddrake/v4l.pm_.c:98
 msgid "Unknown|CPH06X (bt878) [many vendors]"
 msgstr "Không xác định|CPH06X (bt878) [nhiều nhà SX]"
 
-#: ../../harddrake/v4l.pm_.c:210
+#: ../../harddrake/v4l.pm_.c:209
 msgid ""
 "For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-"
 "detect the rights parameters.\n"
@@ -2820,31 +2811,31 @@ msgstr ""
 "Nếu như card của bạn không dò ra được, bạn có thể bắt dùng đúng loại card và "
 "chỉnh sóng tại đây. Chỉ việc chọn các thông số của card khi cần."
 
-#: ../../harddrake/v4l.pm_.c:213
+#: ../../harddrake/v4l.pm_.c:212
 msgid "Card model:"
 msgstr "Card loại: "
 
-#: ../../harddrake/v4l.pm_.c:214
+#: ../../harddrake/v4l.pm_.c:213
 msgid "Tuner type:"
 msgstr "Chỉnh sóng loại :"
 
-#: ../../harddrake/v4l.pm_.c:215
+#: ../../harddrake/v4l.pm_.c:214
 msgid "Number of capture buffers:"
 msgstr "Số của capture buffers :"
 
-#: ../../harddrake/v4l.pm_.c:215
+#: ../../harddrake/v4l.pm_.c:214
 msgid "number of capture buffers for mmap'ed capture"
 msgstr "số các capture buffer cho mmap'ed capture"
 
-#: ../../harddrake/v4l.pm_.c:217
+#: ../../harddrake/v4l.pm_.c:216
 msgid "PLL setting:"
 msgstr "Thiết lập PLL :"
 
-#: ../../harddrake/v4l.pm_.c:218
+#: ../../harddrake/v4l.pm_.c:217
 msgid "Radio support:"
 msgstr "Hỗ trợ Radio:"
 
-#: ../../harddrake/v4l.pm_.c:218
+#: ../../harddrake/v4l.pm_.c:217
 msgid "enable radio support"
 msgstr "bật hỗ trợ radio"
 
@@ -5890,8 +5881,8 @@ msgstr "Chuột"
 msgid "Timezone"
 msgstr "Múi giờ"
 
-#: ../../install_steps_interactive.pm_.c:1023 ../../printerdrake.pm_.c:2985
-#: ../../printerdrake.pm_.c:3074
+#: ../../install_steps_interactive.pm_.c:1023 ../../printerdrake.pm_.c:2989
+#: ../../printerdrake.pm_.c:3078
 msgid "Printer"
 msgstr "Máy in"
 
@@ -5904,78 +5895,78 @@ msgstr "Card ISDN"
 msgid "Sound card"
 msgstr "Card âm thanh"
 
-#: ../../install_steps_interactive.pm_.c:1032
+#: ../../install_steps_interactive.pm_.c:1033
 msgid "TV card"
 msgstr "Card TV"
 
-#: ../../install_steps_interactive.pm_.c:1072
-#: ../../install_steps_interactive.pm_.c:1097
-#: ../../install_steps_interactive.pm_.c:1101
+#: ../../install_steps_interactive.pm_.c:1075
+#: ../../install_steps_interactive.pm_.c:1100
+#: ../../install_steps_interactive.pm_.c:1104
 msgid "LDAP"
 msgstr "LDAP"
 
-#: ../../install_steps_interactive.pm_.c:1073
-#: ../../install_steps_interactive.pm_.c:1097
-#: ../../install_steps_interactive.pm_.c:1110
+#: ../../install_steps_interactive.pm_.c:1076
+#: ../../install_steps_interactive.pm_.c:1100
+#: ../../install_steps_interactive.pm_.c:1113
 msgid "NIS"
 msgstr "NIS"
 
-#: ../../install_steps_interactive.pm_.c:1074
-#: ../../install_steps_interactive.pm_.c:1097
-#: ../../install_steps_interactive.pm_.c:1118
-#: ../../install_steps_interactive.pm_.c:1124
+#: ../../install_steps_interactive.pm_.c:1077
+#: ../../install_steps_interactive.pm_.c:1100
+#: ../../install_steps_interactive.pm_.c:1121
+#: ../../install_steps_interactive.pm_.c:1127
 msgid "Windows Domain"
 msgstr "Miền Windows"
 
-#: ../../install_steps_interactive.pm_.c:1075
-#: ../../install_steps_interactive.pm_.c:1097
+#: ../../install_steps_interactive.pm_.c:1078
+#: ../../install_steps_interactive.pm_.c:1100
 msgid "Local files"
 msgstr "Các tập tin cục bộ"
 
-#: ../../install_steps_interactive.pm_.c:1084
-#: ../../install_steps_interactive.pm_.c:1085 ../../steps.pm_.c:24
+#: ../../install_steps_interactive.pm_.c:1087
+#: ../../install_steps_interactive.pm_.c:1088 ../../steps.pm_.c:24
 msgid "Set root password"
 msgstr "Thiết lập mật khẩu root"
 
-#: ../../install_steps_interactive.pm_.c:1086
+#: ../../install_steps_interactive.pm_.c:1089
 msgid "No password"
 msgstr "Không có mật khẩu"
 
-#: ../../install_steps_interactive.pm_.c:1091
+#: ../../install_steps_interactive.pm_.c:1094
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Mật khẩu này đơn giản quá ( phải gồm ít nhất %d ký tự)"
 
-#: ../../install_steps_interactive.pm_.c:1097 ../../network/modem.pm_.c:49
+#: ../../install_steps_interactive.pm_.c:1100 ../../network/modem.pm_.c:49
 #: ../../standalone/drakconnect_.c:625 ../../standalone/logdrake_.c:173
 msgid "Authentication"
 msgstr "Xác nhận"
 
-#: ../../install_steps_interactive.pm_.c:1105
+#: ../../install_steps_interactive.pm_.c:1108
 msgid "Authentication LDAP"
 msgstr "Chứng thực "
 
-#: ../../install_steps_interactive.pm_.c:1106
+#: ../../install_steps_interactive.pm_.c:1109
 msgid "LDAP Base dn"
 msgstr "LDAP Base dn"
 
-#: ../../install_steps_interactive.pm_.c:1107
+#: ../../install_steps_interactive.pm_.c:1110
 msgid "LDAP Server"
 msgstr "Máy chủ LDAP"
 
-#: ../../install_steps_interactive.pm_.c:1113
+#: ../../install_steps_interactive.pm_.c:1116
 msgid "Authentication NIS"
 msgstr "Chứng thực NIS"
 
-#: ../../install_steps_interactive.pm_.c:1114
+#: ../../install_steps_interactive.pm_.c:1117
 msgid "NIS Domain"
 msgstr "Miền NIS"
 
-#: ../../install_steps_interactive.pm_.c:1115
+#: ../../install_steps_interactive.pm_.c:1118
 msgid "NIS Server"
 msgstr "Máy chủ NIS"
 
-#: ../../install_steps_interactive.pm_.c:1121
+#: ../../install_steps_interactive.pm_.c:1124
 msgid ""
 "For this to work for a W2K PDC, you will probably need to have the admin "
 "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
@@ -6003,19 +5994,19 @@ msgstr ""
 "thống.\n"
 "Lệnh 'wbinfo -t' sẽ kiểm tra việc bảo mật chứng thực đã tốt chưa."
 
-#: ../../install_steps_interactive.pm_.c:1123
+#: ../../install_steps_interactive.pm_.c:1126
 msgid "Authentication Windows Domain"
 msgstr "Chứng Thực Miền Windows"
 
-#: ../../install_steps_interactive.pm_.c:1125
+#: ../../install_steps_interactive.pm_.c:1128
 msgid "Domain Admin User Name"
 msgstr "Tên Người Quản Trị Miền"
 
-#: ../../install_steps_interactive.pm_.c:1126
+#: ../../install_steps_interactive.pm_.c:1129
 msgid "Domain Admin Password"
 msgstr "Mật Khẩu Quản Trị Miền"
 
-#: ../../install_steps_interactive.pm_.c:1161
+#: ../../install_steps_interactive.pm_.c:1164
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -6045,19 +6036,19 @@ msgstr ""
 "Nếu bạn muốn tạo một đĩa mềm khởi động, nạp một đĩa mềm vào ổ đĩa mềm\n"
 "thứ nhất và nhấn \"OK\"."
 
-#: ../../install_steps_interactive.pm_.c:1177
+#: ../../install_steps_interactive.pm_.c:1180
 msgid "First floppy drive"
 msgstr "ổ đĩa mềm thứ nhất"
 
-#: ../../install_steps_interactive.pm_.c:1178
+#: ../../install_steps_interactive.pm_.c:1181
 msgid "Second floppy drive"
 msgstr "ổ đĩa mềm thứ hai"
 
-#: ../../install_steps_interactive.pm_.c:1179 ../../printerdrake.pm_.c:2515
+#: ../../install_steps_interactive.pm_.c:1182 ../../printerdrake.pm_.c:2515
 msgid "Skip"
 msgstr "Cho qua"
 
-#: ../../install_steps_interactive.pm_.c:1184
+#: ../../install_steps_interactive.pm_.c:1187
 #, c-format
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
@@ -6083,7 +6074,7 @@ msgstr ""
 "sự cố.Bạn có muốn tạo một đĩa mềm khởi động cho hệ thống không?\n"
 "%s"
 
-#: ../../install_steps_interactive.pm_.c:1190
+#: ../../install_steps_interactive.pm_.c:1193
 msgid ""
 "\n"
 "\n"
@@ -6097,28 +6088,28 @@ msgstr ""
 "việc tạo một đĩa mềm khởi động 1.44 Mb có thể thất bại,\n"
 "vì XFS cần một ổ đĩa rất lớn)."
 
-#: ../../install_steps_interactive.pm_.c:1198
+#: ../../install_steps_interactive.pm_.c:1201
 msgid "Sorry, no floppy drive available"
 msgstr "Xin lỗi, hiện thời không có ổ đĩa mềm nào"
 
-#: ../../install_steps_interactive.pm_.c:1202
+#: ../../install_steps_interactive.pm_.c:1205
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr "Chọn ổ đĩa mềm bạn muốn dùng để tạo đĩa khởi động"
 
-#: ../../install_steps_interactive.pm_.c:1206
+#: ../../install_steps_interactive.pm_.c:1209
 #, c-format
 msgid "Insert a floppy in %s"
 msgstr "Nạp đĩa mềm vào %s"
 
-#: ../../install_steps_interactive.pm_.c:1209
+#: ../../install_steps_interactive.pm_.c:1212
 msgid "Creating bootdisk..."
 msgstr "Đang tạo đĩa khởi động"
 
-#: ../../install_steps_interactive.pm_.c:1216
+#: ../../install_steps_interactive.pm_.c:1219
 msgid "Preparing bootloader..."
 msgstr "Đang chuẩn bị trình khởi động"
 
-#: ../../install_steps_interactive.pm_.c:1227
+#: ../../install_steps_interactive.pm_.c:1230
 msgid ""
 "You appear to have an OldWorld or Unknown\n"
 " machine, the yaboot bootloader will not work for you.\n"
@@ -6130,11 +6121,11 @@ msgstr ""
 "Tiếp tục cài đặt, nhưng bạn sẽ cần phải\n"
 " sử dụng BootX để khởi động máy tính."
 
-#: ../../install_steps_interactive.pm_.c:1233
+#: ../../install_steps_interactive.pm_.c:1236
 msgid "Do you want to use aboot?"
 msgstr "Bạn có muốn sử dụng aboot không?"
 
-#: ../../install_steps_interactive.pm_.c:1236
+#: ../../install_steps_interactive.pm_.c:1239
 msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
@@ -6142,15 +6133,15 @@ msgstr ""
 "Lỗi khi cài đặt aboot, \n"
 "Cố gắng cài đặt kể cả khi nó có thể phá hỏng phân vùng đầu tiên?"
 
-#: ../../install_steps_interactive.pm_.c:1243
+#: ../../install_steps_interactive.pm_.c:1246
 msgid "Installing bootloader"
 msgstr "Đang cài đặt trình nạp khởi động"
 
-#: ../../install_steps_interactive.pm_.c:1249
+#: ../../install_steps_interactive.pm_.c:1252
 msgid "Installation of bootloader failed. The following error occured:"
 msgstr "Không cài đặt được trình khởi động. Xảy ra lỗi như sau:"
 
-#: ../../install_steps_interactive.pm_.c:1257
+#: ../../install_steps_interactive.pm_.c:1260
 #, c-format
 msgid ""
 "You may need to change your Open Firmware boot-device to\n"
@@ -6168,17 +6159,17 @@ msgstr ""
 " Rồi gõ: shut-down\n"
 "Lần khởi động tiếp theo, bạn sẽ nhìn thấy dấu nhắc của trình khởi động."
 
-#: ../../install_steps_interactive.pm_.c:1291
+#: ../../install_steps_interactive.pm_.c:1294
 #: ../../standalone/drakautoinst_.c:79
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Nạp một đĩa mềm trắng vào ổ %s"
 
-#: ../../install_steps_interactive.pm_.c:1295
+#: ../../install_steps_interactive.pm_.c:1298
 msgid "Creating auto install floppy..."
 msgstr "Đang tạo đĩa mềm cài đặt tự động"
 
-#: ../../install_steps_interactive.pm_.c:1306
+#: ../../install_steps_interactive.pm_.c:1309
 msgid ""
 "Some steps are not completed.\n"
 "\n"
@@ -6188,7 +6179,7 @@ msgstr ""
 "\n"
 "Bạn thực sự muốn thoát ra bây giờ?"
 
-#: ../../install_steps_interactive.pm_.c:1317
+#: ../../install_steps_interactive.pm_.c:1320
 #, c-format
 msgid ""
 "Congratulations, installation is complete.\n"
@@ -6220,15 +6211,15 @@ msgstr ""
 "Thông tin cấu hình hệ thống có sẵn trong chương sau cài đặt của\n"
 "hướng dẫn sử dụng chính (Official Mandrake Linux User's Guide)."
 
-#: ../../install_steps_interactive.pm_.c:1330
+#: ../../install_steps_interactive.pm_.c:1333
 msgid "http://www.mandrakelinux.com/en/90errata.php3"
 msgstr "http://www.mandrakelinux.com/en/90errata.php3"
 
-#: ../../install_steps_interactive.pm_.c:1335
+#: ../../install_steps_interactive.pm_.c:1338
 msgid "Generate auto install floppy"
 msgstr "Tạo đĩa mềm cài đặt tự động"
 
-#: ../../install_steps_interactive.pm_.c:1337
+#: ../../install_steps_interactive.pm_.c:1340
 msgid ""
 "The auto install can be fully automated if wanted,\n"
 "in that case it will take over the hard drive!!\n"
@@ -6242,15 +6233,15 @@ msgstr ""
 "\n"
 "Có thể bạn thích diễn lại quá trình cài đặt.\n"
 
-#: ../../install_steps_interactive.pm_.c:1342
+#: ../../install_steps_interactive.pm_.c:1345
 msgid "Automated"
 msgstr "Tự động"
 
-#: ../../install_steps_interactive.pm_.c:1342
+#: ../../install_steps_interactive.pm_.c:1345
 msgid "Replay"
 msgstr "Diễn lại"
 
-#: ../../install_steps_interactive.pm_.c:1345
+#: ../../install_steps_interactive.pm_.c:1348
 msgid "Save packages selection"
 msgstr "Lưu lựa chọn các gói"
 
@@ -6283,7 +6274,7 @@ msgstr "Chọn một tập tin"
 msgid "Advanced"
 msgstr "Nâng cao"
 
-#: ../../interactive.pm_.c:321 ../../security/main.pm_.c:220
+#: ../../interactive.pm_.c:321 ../../security/main.pm_.c:103
 msgid "Basic"
 msgstr "Cơ bản"
 
@@ -6983,11 +6974,23 @@ msgstr ""
 "Về giải pháp tường lửa mạnh và chuyên dụng, hãy quan tâm tới phân phối\n"
 "tường lửa bảo mật chuyên dụng của Mandrake."
 
-#: ../../network/drakfirewall.pm_.c:147
+#: ../../network/drakfirewall.pm_.c:135
+msgid ""
+"drakfirewall configurator\n"
+"\n"
+"Make sure you have configured your Network/Internet access with\n"
+"drakconnect before going any further."
+msgstr ""
+"Chương trình cấu hình Drakfirewall\n"
+"\n"
+"Hãy bảo đảm là bạn đã cấu hình truy cập Mạng/Internet bằng\n"
+"drakconnect trước đó."
+
+#: ../../network/drakfirewall.pm_.c:152
 msgid "Which services would you like to allow the Internet to connect to?"
 msgstr "Dịch vụ nào mà bạn muốn cho phép Internet kết nối đến?"
 
-#: ../../network/drakfirewall.pm_.c:148
+#: ../../network/drakfirewall.pm_.c:153
 msgid ""
 "You can enter miscellaneous ports. \n"
 "Valid examples are: 139/tcp 139/udp.\n"
@@ -6997,7 +7000,7 @@ msgstr ""
 "Ví dụ hợp lệ là: 139/tcp 139/udp.\n"
 "Hãy xem /etc/services để biết thêm thông tin."
 
-#: ../../network/drakfirewall.pm_.c:154
+#: ../../network/drakfirewall.pm_.c:159
 #, c-format
 msgid ""
 "Invalid port given: %s.\n"
@@ -7008,11 +7011,11 @@ msgstr ""
 "Định dạng đúng phải là \"port/tcp\" hay \"port/udp\", \n"
 "nơi mà port từ 1 đến 65535."
 
-#: ../../network/drakfirewall.pm_.c:162
+#: ../../network/drakfirewall.pm_.c:167
 msgid "Everything (no firewall)"
 msgstr "Mọi thứ (không có tường lửa)"
 
-#: ../../network/drakfirewall.pm_.c:164
+#: ../../network/drakfirewall.pm_.c:169
 msgid "Other ports"
 msgstr "Các cổng khác"
 
@@ -7032,7 +7035,7 @@ msgstr ""
 "Không dò tìm được adapter mạng ethernet.\n"
 "Không thể thiết lập kiểu kết nối này."
 
-#: ../../network/ethernet.pm_.c:92 ../../standalone/drakgw_.c:236
+#: ../../network/ethernet.pm_.c:92 ../../standalone/drakgw_.c:238
 msgid "Choose the network interface"
 msgstr "Chọn giao diện mạng"
 
@@ -7367,7 +7370,7 @@ msgstr "Chọn lý lịch để cấu hình"
 msgid "Use auto detection"
 msgstr "Dùng chức năng dò tìm tự động"
 
-#: ../../network/netconnect.pm_.c:168 ../../printerdrake.pm_.c:3199
+#: ../../network/netconnect.pm_.c:168 ../../printerdrake.pm_.c:3203
 #: ../../standalone/drakconnect_.c:274 ../../standalone/drakconnect_.c:277
 #: ../../standalone/drakfloppy_.c:146
 msgid "Expert Mode"
@@ -7526,6 +7529,7 @@ msgid "IP address"
 msgstr "Địa chỉ IP"
 
 #: ../../network/network.pm_.c:310 ../../standalone/drakconnect_.c:468
+#: ../../standalone/drakgw_.c:295
 msgid "Netmask"
 msgstr "Mặt nạ mạng"
 
@@ -7602,11 +7606,11 @@ msgstr "Máy chủ ủy nhiệm nên là http://..."
 msgid "Url should begin with 'ftp:' or 'http:'"
 msgstr "URL nên bắt đầu bằng 'fpt:' hay 'http:'"
 
-#: ../../network/shorewall.pm_.c:24
+#: ../../network/shorewall.pm_.c:25
 msgid "Firewalling configuration detected!"
 msgstr "Phát hiện ra cấu hình tường lửa!"
 
-#: ../../network/shorewall.pm_.c:25
+#: ../../network/shorewall.pm_.c:26
 msgid ""
 "Warning! An existing firewalling configuration has been detected. You may "
 "need some manual fix after installation."
@@ -7797,7 +7801,7 @@ msgstr "LPD - Daemon in ấn theo tuyến"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - In, không xếp hàng"
 
-#: ../../printer.pm_.c:34 ../../printer.pm_.c:1144
+#: ../../printer.pm_.c:34 ../../printer.pm_.c:1181
 msgid "CUPS"
 msgstr "CUPS"
 
@@ -7849,102 +7853,102 @@ msgstr "Hãy nhập thiết bị in URI"
 msgid "Pipe job into a command"
 msgstr "Pipe (đặt ống dẫn) vào trong lệnh"
 
-#: ../../printer.pm_.c:328 ../../printer.pm_.c:370 ../../printer.pm_.c:552
+#: ../../printer.pm_.c:346 ../../printer.pm_.c:388 ../../printer.pm_.c:570
 msgid "Unknown Model"
 msgstr "Model không xác định"
 
-#: ../../printer.pm_.c:754 ../../printer.pm_.c:945 ../../printer.pm_.c:1337
-#: ../../printerdrake.pm_.c:2305 ../../printerdrake.pm_.c:3462
+#: ../../printer.pm_.c:791 ../../printer.pm_.c:982 ../../printer.pm_.c:1374
+#: ../../printerdrake.pm_.c:2305 ../../printerdrake.pm_.c:3471
 msgid "Unknown model"
 msgstr "Kiểu không xác định"
 
-#: ../../printer.pm_.c:782
+#: ../../printer.pm_.c:819
 msgid "Local Printers"
 msgstr "Các máy in cục bộ"
 
-#: ../../printer.pm_.c:784 ../../printer.pm_.c:1145
+#: ../../printer.pm_.c:821 ../../printer.pm_.c:1182
 msgid "Remote Printers"
 msgstr "Các máy in ở xa"
 
-#: ../../printer.pm_.c:791 ../../printerdrake.pm_.c:417
+#: ../../printer.pm_.c:828 ../../printerdrake.pm_.c:417
 #, c-format
 msgid " on parallel port \\/*%s"
 msgstr " ở cổng song song \\/*%s"
 
-#: ../../printer.pm_.c:794 ../../printerdrake.pm_.c:419
+#: ../../printer.pm_.c:831 ../../printerdrake.pm_.c:419
 #, c-format
 msgid ", USB printer \\/*%s"
 msgstr ", máy in USB \\/*%s"
 
-#: ../../printer.pm_.c:799
+#: ../../printer.pm_.c:836
 #, c-format
 msgid ", multi-function device on parallel port \\/*%s"
 msgstr ", thiết bị đa năng ở cổng song song \\/*%s"
 
-#: ../../printer.pm_.c:802
+#: ../../printer.pm_.c:839
 msgid ", multi-function device on USB"
 msgstr ", thiết bị đa năng trên USB"
 
-#: ../../printer.pm_.c:804
+#: ../../printer.pm_.c:841
 msgid ", multi-function device on HP JetDirect"
 msgstr ", thiết bị đa năng trên HP JetDirect"
 
-#: ../../printer.pm_.c:806
+#: ../../printer.pm_.c:843
 msgid ", multi-function device"
 msgstr ", thiết bị đa năng"
 
-#: ../../printer.pm_.c:809
+#: ../../printer.pm_.c:846
 #, c-format
 msgid ", printing to %s"
 msgstr ", đang in tới %s"
 
-#: ../../printer.pm_.c:811
+#: ../../printer.pm_.c:848
 #, c-format
 msgid " on LPD server \"%s\", printer \"%s\""
 msgstr " trên máy chủ LPD \"%s\", máy in \"%s\""
 
-#: ../../printer.pm_.c:813
+#: ../../printer.pm_.c:850
 #, c-format
 msgid ", TCP/IP host \"%s\", port %s"
 msgstr ", TCP/IP chủ \"%s\", cổng %s"
 
-#: ../../printer.pm_.c:817
+#: ../../printer.pm_.c:854
 #, c-format
 msgid " on SMB/Windows server \"%s\", share \"%s\""
 msgstr " trên máy chủ SMB/Windows \"%s\", chia sẻ \"%s\""
 
-#: ../../printer.pm_.c:821
+#: ../../printer.pm_.c:858
 #, c-format
 msgid " on Novell server \"%s\", printer \"%s\""
 msgstr " trên máy chủ Novell \"%s\", máy in \"%s\""
 
-#: ../../printer.pm_.c:823
+#: ../../printer.pm_.c:860
 #, c-format
 msgid ", using command %s"
 msgstr ", dùng trong lệnh %s"
 
-#: ../../printer.pm_.c:942 ../../printerdrake.pm_.c:1701
+#: ../../printer.pm_.c:979 ../../printerdrake.pm_.c:1701
 msgid "Raw printer (No driver)"
 msgstr "Máy in Raw (không có driver)"
 
-#: ../../printer.pm_.c:1114
+#: ../../printer.pm_.c:1151
 #, c-format
 msgid "(on %s)"
 msgstr "(trên %s)"
 
-#: ../../printer.pm_.c:1116
+#: ../../printer.pm_.c:1153
 msgid "(on this machine)"
 msgstr "(trên máy tính này)"
 
-#: ../../printer.pm_.c:1141
+#: ../../printer.pm_.c:1178
 #, c-format
 msgid "On CUPS server \"%s\""
 msgstr "Trên máy chủ CUPS \"%s\""
 
-#: ../../printer.pm_.c:1147 ../../printerdrake.pm_.c:3119
-#: ../../printerdrake.pm_.c:3130 ../../printerdrake.pm_.c:3351
-#: ../../printerdrake.pm_.c:3403 ../../printerdrake.pm_.c:3429
-#: ../../printerdrake.pm_.c:3604 ../../printerdrake.pm_.c:3606
+#: ../../printer.pm_.c:1184 ../../printerdrake.pm_.c:3123
+#: ../../printerdrake.pm_.c:3134 ../../printerdrake.pm_.c:3360
+#: ../../printerdrake.pm_.c:3412 ../../printerdrake.pm_.c:3438
+#: ../../printerdrake.pm_.c:3613 ../../printerdrake.pm_.c:3615
 msgid " (Default)"
 msgstr " (Mặc định)"
 
@@ -7970,11 +7974,11 @@ msgstr ""
 msgid "Printer auto-detection (Local, TCP/Socket, and SMB printers)"
 msgstr "Tự động phát hiện máy in (cục bộ, TCP/Socket và SMB)"
 
-#: ../../printerdrake.pm_.c:84 ../../printerdrake.pm_.c:3183
+#: ../../printerdrake.pm_.c:84 ../../printerdrake.pm_.c:3187
 msgid "CUPS configuration"
 msgstr "Cấu hình CUPS"
 
-#: ../../printerdrake.pm_.c:85 ../../printerdrake.pm_.c:3184
+#: ../../printerdrake.pm_.c:85 ../../printerdrake.pm_.c:3188
 msgid "Specify CUPS server"
 msgstr "Chỉ định máy chủ CUPS"
 
@@ -8038,15 +8042,15 @@ msgstr "Cấu hình CUPS tự động"
 #: ../../printerdrake.pm_.c:1696 ../../printerdrake.pm_.c:2248
 #: ../../printerdrake.pm_.c:2401 ../../printerdrake.pm_.c:2460
 #: ../../printerdrake.pm_.c:2533 ../../printerdrake.pm_.c:2554
-#: ../../printerdrake.pm_.c:2747 ../../printerdrake.pm_.c:2788
-#: ../../printerdrake.pm_.c:2793 ../../printerdrake.pm_.c:2827
-#: ../../printerdrake.pm_.c:2832 ../../printerdrake.pm_.c:2869
-#: ../../printerdrake.pm_.c:2922 ../../printerdrake.pm_.c:2942
-#: ../../printerdrake.pm_.c:2956 ../../printerdrake.pm_.c:2990
-#: ../../printerdrake.pm_.c:3036 ../../printerdrake.pm_.c:3054
-#: ../../printerdrake.pm_.c:3143 ../../printerdrake.pm_.c:3217
-#: ../../printerdrake.pm_.c:3519 ../../printerdrake.pm_.c:3574
-#: ../../printerdrake.pm_.c:3627 ../../standalone/printerdrake_.c:57
+#: ../../printerdrake.pm_.c:2747 ../../printerdrake.pm_.c:2792
+#: ../../printerdrake.pm_.c:2797 ../../printerdrake.pm_.c:2831
+#: ../../printerdrake.pm_.c:2836 ../../printerdrake.pm_.c:2873
+#: ../../printerdrake.pm_.c:2926 ../../printerdrake.pm_.c:2946
+#: ../../printerdrake.pm_.c:2960 ../../printerdrake.pm_.c:2994
+#: ../../printerdrake.pm_.c:3040 ../../printerdrake.pm_.c:3058
+#: ../../printerdrake.pm_.c:3147 ../../printerdrake.pm_.c:3226
+#: ../../printerdrake.pm_.c:3528 ../../printerdrake.pm_.c:3583
+#: ../../printerdrake.pm_.c:3636 ../../standalone/printerdrake_.c:57
 msgid "Printerdrake"
 msgstr "Printerdrake"
 
@@ -8163,8 +8167,8 @@ msgstr ""
 "được cài đặt."
 
 #: ../../printerdrake.pm_.c:279 ../../printerdrake.pm_.c:291
-#: ../../printerdrake.pm_.c:361 ../../printerdrake.pm_.c:3165
-#: ../../printerdrake.pm_.c:3290
+#: ../../printerdrake.pm_.c:361 ../../printerdrake.pm_.c:3169
+#: ../../printerdrake.pm_.c:3299
 msgid "Add a new printer"
 msgstr "Thêm máy in mới"
 
@@ -9030,7 +9034,7 @@ msgstr ""
 msgid "Did it work properly?"
 msgstr "Trang in thử có tốt không?"
 
-#: ../../printerdrake.pm_.c:2307 ../../printerdrake.pm_.c:3464
+#: ../../printerdrake.pm_.c:2307 ../../printerdrake.pm_.c:3473
 msgid "Raw printer"
 msgstr "máy in Raw"
 
@@ -9177,7 +9181,7 @@ msgstr "In trên máy in \"%s\""
 
 #: ../../printerdrake.pm_.c:2395 ../../printerdrake.pm_.c:2398
 #: ../../printerdrake.pm_.c:2399 ../../printerdrake.pm_.c:2400
-#: ../../printerdrake.pm_.c:3448 ../../standalone/drakTermServ_.c:248
+#: ../../printerdrake.pm_.c:3457 ../../standalone/drakTermServ_.c:248
 #: ../../standalone/drakbackup_.c:1562 ../../standalone/drakbackup_.c:4210
 #: ../../standalone/drakbug_.c:130 ../../standalone/drakfont_.c:705
 #: ../../standalone/drakfont_.c:1014
@@ -9232,8 +9236,8 @@ msgstr ""
 "\", có thể chuyển qua lại giữa các chữ cái tên của drive trong trường nằm "
 "tại góc trên - phải của danh sách file."
 
-#: ../../printerdrake.pm_.c:2461 ../../printerdrake.pm_.c:2923
-#: ../../printerdrake.pm_.c:3218
+#: ../../printerdrake.pm_.c:2461 ../../printerdrake.pm_.c:2927
+#: ../../printerdrake.pm_.c:3227
 msgid "Reading printer data..."
 msgstr "Đang đọc dữ liệu máy in..."
 
@@ -9483,59 +9487,59 @@ msgstr ""
 "\n"
 "Bạn có muốn bật lại chức năng khởi chạy tự động của hệ thống in ấn không?"
 
-#: ../../printerdrake.pm_.c:2748 ../../printerdrake.pm_.c:2789
-#: ../../printerdrake.pm_.c:2828 ../../printerdrake.pm_.c:2870
-#: ../../printerdrake.pm_.c:2991
+#: ../../printerdrake.pm_.c:2748 ../../printerdrake.pm_.c:2793
+#: ../../printerdrake.pm_.c:2832 ../../printerdrake.pm_.c:2874
+#: ../../printerdrake.pm_.c:2995
 msgid "Checking installed software..."
 msgstr "Đang kiểm tra phần mềm đã cài đặt..."
 
-#: ../../printerdrake.pm_.c:2794
+#: ../../printerdrake.pm_.c:2798
 msgid "Removing LPRng..."
 msgstr "Đang gỡ bỏ LPRng..."
 
-#: ../../printerdrake.pm_.c:2833
+#: ../../printerdrake.pm_.c:2837
 msgid "Removing LPD..."
 msgstr "Đang gỡ bỏ LPD..."
 
-#: ../../printerdrake.pm_.c:2906
+#: ../../printerdrake.pm_.c:2910
 msgid "Select Printer Spooler"
 msgstr "Chọn Spooler Máy In"
 
-#: ../../printerdrake.pm_.c:2907
+#: ../../printerdrake.pm_.c:2911
 msgid "Which printing system (spooler) do you want to use?"
 msgstr "Bạn muốn sử dụng hệ thống in ấn (spooler) nào?"
 
-#: ../../printerdrake.pm_.c:2943
+#: ../../printerdrake.pm_.c:2947
 #, c-format
 msgid "Configuring printer \"%s\"..."
 msgstr "Đang cấu hình máy in \"%s\" ..."
 
-#: ../../printerdrake.pm_.c:2957
+#: ../../printerdrake.pm_.c:2961
 msgid "Installing Foomatic..."
 msgstr "Đang cài đặt Foomatic ..."
 
-#: ../../printerdrake.pm_.c:3027 ../../printerdrake.pm_.c:3068
-#: ../../printerdrake.pm_.c:3465 ../../printerdrake.pm_.c:3538
+#: ../../printerdrake.pm_.c:3031 ../../printerdrake.pm_.c:3072
+#: ../../printerdrake.pm_.c:3474 ../../printerdrake.pm_.c:3547
 msgid "Printer options"
 msgstr "Các tùy chọn máy in"
 
-#: ../../printerdrake.pm_.c:3037
+#: ../../printerdrake.pm_.c:3041
 msgid "Preparing Printerdrake..."
 msgstr "Đang chuẩn bị Printerdrake..."
 
-#: ../../printerdrake.pm_.c:3055 ../../printerdrake.pm_.c:3628
+#: ../../printerdrake.pm_.c:3059 ../../printerdrake.pm_.c:3637
 msgid "Configuring applications..."
 msgstr "Cấu hình ứng dụng ..."
 
-#: ../../printerdrake.pm_.c:3075
+#: ../../printerdrake.pm_.c:3079
 msgid "Would you like to configure printing?"
 msgstr "Bạn có muốn cấu hình in ấn không?"
 
-#: ../../printerdrake.pm_.c:3087
+#: ../../printerdrake.pm_.c:3091
 msgid "Printing system: "
 msgstr "Hệ thống in ấn: "
 
-#: ../../printerdrake.pm_.c:3147
+#: ../../printerdrake.pm_.c:3151
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; to view information about it; "
@@ -9546,7 +9550,7 @@ msgstr ""
 "lập: làm nó thành máy in mặc định, xem thông tin máy in, hoặc lập một máy in "
 "sẵn có dùng với Star Office/OpenOffice.org/GIMP."
 
-#: ../../printerdrake.pm_.c:3148
+#: ../../printerdrake.pm_.c:3152
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; or to view information about "
@@ -9556,30 +9560,30 @@ msgstr ""
 "đổi các thiết lập, để lập nó là máy in mặc định, hay để xem thông tin máy in "
 "đó."
 
-#: ../../printerdrake.pm_.c:3175
+#: ../../printerdrake.pm_.c:3179
 msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr ""
 "Làm mới lại danh sách máy in (để hiển thị toàn bộ các máy in CUPS ở xa hiện "
 "có)"
 
-#: ../../printerdrake.pm_.c:3193
+#: ../../printerdrake.pm_.c:3197
 msgid "Change the printing system"
 msgstr "Thay đổi hệ thống in"
 
-#: ../../printerdrake.pm_.c:3198 ../../standalone/drakconnect_.c:277
+#: ../../printerdrake.pm_.c:3202 ../../standalone/drakconnect_.c:277
 msgid "Normal Mode"
 msgstr "Chế độ bình thường"
 
-#: ../../printerdrake.pm_.c:3358 ../../printerdrake.pm_.c:3408
-#: ../../printerdrake.pm_.c:3621
+#: ../../printerdrake.pm_.c:3367 ../../printerdrake.pm_.c:3417
+#: ../../printerdrake.pm_.c:3630
 msgid "Do you want to configure another printer?"
 msgstr "Bạn có muốn cấu hình một máy in khác?"
 
-#: ../../printerdrake.pm_.c:3443
+#: ../../printerdrake.pm_.c:3452
 msgid "Modify printer configuration"
 msgstr "Thay đổi cấu hình máy in"
 
-#: ../../printerdrake.pm_.c:3445
+#: ../../printerdrake.pm_.c:3454
 #, c-format
 msgid ""
 "Printer %s\n"
@@ -9588,102 +9592,102 @@ msgstr ""
 "Máy in %s\n"
 "Bạn muốn thay đổi gì trên máy in này?"
 
-#: ../../printerdrake.pm_.c:3449
+#: ../../printerdrake.pm_.c:3458
 msgid "Do it!"
 msgstr "Hãy thực hiện!"
 
-#: ../../printerdrake.pm_.c:3454 ../../printerdrake.pm_.c:3509
+#: ../../printerdrake.pm_.c:3463 ../../printerdrake.pm_.c:3518
 msgid "Printer connection type"
 msgstr "Kiểu kết nối máy in"
 
-#: ../../printerdrake.pm_.c:3455 ../../printerdrake.pm_.c:3513
+#: ../../printerdrake.pm_.c:3464 ../../printerdrake.pm_.c:3522
 msgid "Printer name, description, location"
 msgstr "Tên, mô tả, vị trí của máy in"
 
-#: ../../printerdrake.pm_.c:3457 ../../printerdrake.pm_.c:3531
+#: ../../printerdrake.pm_.c:3466 ../../printerdrake.pm_.c:3540
 msgid "Printer manufacturer, model, driver"
 msgstr "Hãng sản xuất, kiểu, driver của máy in"
 
-#: ../../printerdrake.pm_.c:3458 ../../printerdrake.pm_.c:3532
+#: ../../printerdrake.pm_.c:3467 ../../printerdrake.pm_.c:3541
 msgid "Printer manufacturer, model"
 msgstr "Hãng sản xuất, kiểu của máy in"
 
-#: ../../printerdrake.pm_.c:3467 ../../printerdrake.pm_.c:3542
+#: ../../printerdrake.pm_.c:3476 ../../printerdrake.pm_.c:3551
 msgid "Set this printer as the default"
 msgstr "Thiết lập máy in này làm mặc định"
 
-#: ../../printerdrake.pm_.c:3469 ../../printerdrake.pm_.c:3547
+#: ../../printerdrake.pm_.c:3478 ../../printerdrake.pm_.c:3556
 msgid "Add this printer to Star Office/OpenOffice.org/GIMP"
 msgstr "Bổ sung máy in này vào Star Office/OpenOffice.org/GIMP"
 
-#: ../../printerdrake.pm_.c:3470 ../../printerdrake.pm_.c:3556
+#: ../../printerdrake.pm_.c:3479 ../../printerdrake.pm_.c:3565
 msgid "Remove this printer from Star Office/OpenOffice.org/GIMP"
 msgstr "Bỏ máy in này ra khỏi Star Office/OpenOffice.org/GIMP"
 
-#: ../../printerdrake.pm_.c:3471 ../../printerdrake.pm_.c:3565
+#: ../../printerdrake.pm_.c:3480 ../../printerdrake.pm_.c:3574
 msgid "Print test pages"
 msgstr "Trang in thử "
 
-#: ../../printerdrake.pm_.c:3472 ../../printerdrake.pm_.c:3567
+#: ../../printerdrake.pm_.c:3481 ../../printerdrake.pm_.c:3576
 msgid "Know how to use this printer"
 msgstr "Để biết sử dụng máy in này"
 
-#: ../../printerdrake.pm_.c:3474 ../../printerdrake.pm_.c:3569
+#: ../../printerdrake.pm_.c:3483 ../../printerdrake.pm_.c:3578
 msgid "Remove printer"
 msgstr "Bỏ máy in"
 
-#: ../../printerdrake.pm_.c:3520
+#: ../../printerdrake.pm_.c:3529
 #, c-format
 msgid "Removing old printer \"%s\"..."
 msgstr "Đang gỡ bỏ máy in cũ \"%s\"..."
 
-#: ../../printerdrake.pm_.c:3545
+#: ../../printerdrake.pm_.c:3554
 msgid "Default printer"
 msgstr "Máy in mặc định"
 
-#: ../../printerdrake.pm_.c:3546
+#: ../../printerdrake.pm_.c:3555
 #, c-format
 msgid "The printer \"%s\" is set as the default printer now."
 msgstr "Bây giờ, máy in \"%s\" được thiết lập làm mặc định."
 
-#: ../../printerdrake.pm_.c:3550 ../../printerdrake.pm_.c:3553
+#: ../../printerdrake.pm_.c:3559 ../../printerdrake.pm_.c:3562
 msgid "Adding printer to Star Office/OpenOffice.org/GIMP"
 msgstr "Bổ sung máy in vào Star Office/OpenOffice.org/GIMP"
 
-#: ../../printerdrake.pm_.c:3551
+#: ../../printerdrake.pm_.c:3560
 #, c-format
 msgid ""
 "The printer \"%s\" was successfully added to Star Office/OpenOffice.org/GIMP."
 msgstr "Máy in \"%s\" đã được bổ sung vào Star Office/OpenOffice.org/GIMP."
 
-#: ../../printerdrake.pm_.c:3554
+#: ../../printerdrake.pm_.c:3563
 #, c-format
 msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
 msgstr "Bổ sung máy in \"%s\" vào Star Office/OpenOffice.org/GIMP thất bại."
 
-#: ../../printerdrake.pm_.c:3559 ../../printerdrake.pm_.c:3562
+#: ../../printerdrake.pm_.c:3568 ../../printerdrake.pm_.c:3571
 msgid "Removing printer from Star Office/OpenOffice.org/GIMP"
 msgstr "Bỏ máy in ra khỏi Star Office/OpenOffice.org/GIMP"
 
-#: ../../printerdrake.pm_.c:3560
+#: ../../printerdrake.pm_.c:3569
 #, c-format
 msgid ""
 "The printer \"%s\" was successfully removed from Star Office/OpenOffice.org/"
 "GIMP."
 msgstr "Máy in \"%s\" đã được bỏ ra khỏi Star Office/OpenOffice.org/GIMP."
 
-#: ../../printerdrake.pm_.c:3563
+#: ../../printerdrake.pm_.c:3572
 #, c-format
 msgid ""
 "Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP."
 msgstr "Bỏ máy in \"%s\" ra khỏi Star Office/OpenOffice.org/GIMP thất bại."
 
-#: ../../printerdrake.pm_.c:3571
+#: ../../printerdrake.pm_.c:3580
 #, c-format
 msgid "Do you really want to remove the printer \"%s\"?"
 msgstr "Bạn thực sự muốn bỏ máy in \"%s\"?"
 
-#: ../../printerdrake.pm_.c:3575
+#: ../../printerdrake.pm_.c:3584
 #, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Đang gỡ bỏ máy in \"%s\" ..."
@@ -9829,25 +9833,27 @@ msgstr ""
 "được gửi tới người dùng này (tên người dùng hay\n"
 "\t       email)"
 
-#: ../../security/main.pm_.c:66
+#: ../../security/main.pm_.c:65
 msgid "Security Level:"
 msgstr "Mức độ bảo mật:"
 
-#: ../../security/main.pm_.c:74
+#: ../../security/main.pm_.c:99
 msgid "Security Alerts:"
 msgstr "Cảnh Báo Bảo Mật:"
 
-#: ../../security/main.pm_.c:83
+#: ../../security/main.pm_.c:101
 msgid "Security Administrator:"
 msgstr "Người Quản Trị Bảo Mật:"
 
-#: ../../security/main.pm_.c:114 ../../security/main.pm_.c:150
-#, c-format
-msgid " (default: %s)"
-msgstr " (mặc định: %s)"
+#: ../../security/main.pm_.c:114
+msgid "Network Options"
+msgstr "Tùy Chọn Mạng"
 
-#: ../../security/main.pm_.c:118 ../../security/main.pm_.c:154
-#: ../../security/main.pm_.c:179
+#: ../../security/main.pm_.c:114
+msgid "System Options"
+msgstr "Tùy Chọn Hệ Thống"
+
+#: ../../security/main.pm_.c:119 ../../security/main.pm_.c:148
 msgid ""
 "The following options can be set to customize your\n"
 "system security. If you need explanations, click on Help.\n"
@@ -9855,23 +9861,24 @@ msgstr ""
 "Các tùy chọn sau đây có thể lập để tùy chỉnh bảo mật\n"
 "của hệ thống. Nếu cần sự giải thích, nhấn lên Trợ Giúp (Help).\n"
 
-#: ../../security/main.pm_.c:226
-msgid "Network Options"
-msgstr "Tùy Chọn Mạng"
+#: ../../security/main.pm_.c:137
+#, c-format
+msgid " (default: %s)"
+msgstr " (mặc định: %s)"
 
-#: ../../security/main.pm_.c:235
-msgid "System Options"
-msgstr "Tùy Chọn Hệ Thống"
+#: ../../security/main.pm_.c:161
+msgid "Periodic Checks 2"
+msgstr "Kiểm tra theo giai đoạn 2"
 
-#: ../../security/main.pm_.c:242
+#: ../../security/main.pm_.c:162
 msgid "Periodic Checks"
 msgstr "Kiểm tra theo giai đoạn"
 
-#: ../../security/main.pm_.c:256
+#: ../../security/main.pm_.c:176
 msgid "Please wait, setting security level..."
 msgstr "Hãy đợi, đang thiết lập mức bảo mật..."
 
-#: ../../security/main.pm_.c:262
+#: ../../security/main.pm_.c:182
 msgid "Please wait, setting security options..."
 msgstr "Hãy đợi, đang thiết lập tùy chọn bảo mật..."
 
@@ -10492,15 +10499,15 @@ msgstr ""
 "để tăng tính cạnh tranh, nếu bạn muốn hỗ trợ phát triển Mandrake Linux, hãy "
 "tham gia MandrakeClub!"
 
-#: ../../standalone.pm_.c:42
+#: ../../standalone.pm_.c:49
 msgid "Installing packages..."
 msgstr "Đang cài đặt các gói tin ..."
 
-#: ../../standalone/XFdrake_.c:147
+#: ../../standalone/XFdrake_.c:148
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "Hãy thoát ra rồi dùng Ctrl-Alt-BackSpace"
 
-#: ../../standalone/XFdrake_.c:151
+#: ../../standalone/XFdrake_.c:152
 #, c-format
 msgid "Please relog into %s to activate the changes"
 msgstr "Hãy đăng nhập lại vào %s để thay đổi có tác dụng"
@@ -10717,7 +10724,7 @@ msgstr ""
 "\n"
 "Các thông số có sẵn cho việc cài đặt tự động nằm ở các mục ở bên trái"
 
-#: ../../standalone/drakautoinst_.c:239 ../../standalone/drakgw_.c:480
+#: ../../standalone/drakautoinst_.c:239 ../../standalone/drakgw_.c:508
 #: ../../standalone/scannerdrake_.c:119
 msgid "Congratulations!"
 msgstr "Chúc mừng!"
@@ -13027,6 +13034,9 @@ msgid ""
 "With that feature, other computers on your local network will be able to use "
 "this computer's Internet connection.\n"
 "\n"
+"Make sure you have configured your Network/Internet access using drakconnect "
+"before going any further.\n"
+"\n"
 "Note: you need a dedicated Network Adapter to set up a Local Area Network "
 "(LAN)."
 msgstr ""
@@ -13034,24 +13044,27 @@ msgstr ""
 "Với tính năng đó, các máy khác trong mạng cục bộ có thể sử dụng kết nối "
 "Internet của máy tính này.\n"
 "\n"
-"Lưu ý: bạn cần một Adapter mạng dành cho việc thiết lập một mạng cục bộ "
+"Hãy bảo đảm là bạn đã cấu hình truy cập Mạng/Internet bằng drakconnect trước "
+"đó.\n"
+"\n"
+"Lưu ý: bạn cần một bộ điều hợp mạng dành cho việc thiết lập mạng cục bộ "
 "(LAN)."
 
-#: ../../standalone/drakgw_.c:211
+#: ../../standalone/drakgw_.c:213
 #, c-format
 msgid "Interface %s (using module %s)"
 msgstr "Giao diện %s (đang dùng module %s)"
 
-#: ../../standalone/drakgw_.c:212
+#: ../../standalone/drakgw_.c:214
 #, c-format
 msgid "Interface %s"
 msgstr "Giao diện %s"
 
-#: ../../standalone/drakgw_.c:220
+#: ../../standalone/drakgw_.c:222
 msgid "No network adapter on your system!"
 msgstr "Không có adapter mạng trong hệ thống của bạn!"
 
-#: ../../standalone/drakgw_.c:221
+#: ../../standalone/drakgw_.c:223
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
 "hardware configuration tool."
@@ -13059,11 +13072,11 @@ msgstr ""
 "Không có adapter mạng ethernet được tìm thấy trong hệ thống. Hãy chạy công "
 "cụ cấu hình phần cứng."
 
-#: ../../standalone/drakgw_.c:227
+#: ../../standalone/drakgw_.c:229
 msgid "Network interface"
 msgstr "Giao diện mạng"
 
-#: ../../standalone/drakgw_.c:228
+#: ../../standalone/drakgw_.c:230
 #, c-format
 msgid ""
 "There is only one configured network adapter on your system:\n"
@@ -13078,17 +13091,17 @@ msgstr ""
 "\n"
 "Chuẩn bị thiết lập mạng cục bộ của bạn với adapter đó."
 
-#: ../../standalone/drakgw_.c:237
+#: ../../standalone/drakgw_.c:239
 msgid ""
 "Please choose what network adapter will be connected to your Local Area "
 "Network."
 msgstr "Hãy chọn adapter mạng nào sẽ được kết nối vào mạng cục bộ của bạn. "
 
-#: ../../standalone/drakgw_.c:255
+#: ../../standalone/drakgw_.c:265
 msgid "Network interface already configured"
 msgstr "Giao diện mạng đã được cấu hình"
 
-#: ../../standalone/drakgw_.c:256
+#: ../../standalone/drakgw_.c:266
 #, c-format
 msgid ""
 "Warning, the network adapter (%s) is already configured.\n"
@@ -13103,15 +13116,15 @@ msgstr ""
 "\n"
 "Có thể thực hiện bằng tay nếu bạn biết rõ cách làm."
 
-#: ../../standalone/drakgw_.c:261
+#: ../../standalone/drakgw_.c:271
 msgid "Automatic reconfiguration"
 msgstr "Tự động cấu hình lại"
 
-#: ../../standalone/drakgw_.c:262
+#: ../../standalone/drakgw_.c:272
 msgid "Show current interface configuration"
 msgstr "Hiển thị cấu hình giao diện hiện thời"
 
-#: ../../standalone/drakgw_.c:264
+#: ../../standalone/drakgw_.c:274
 #, c-format
 msgid ""
 "Current configuration of `%s':\n"
@@ -13128,12 +13141,15 @@ msgstr ""
 "Quy kết IP: %s\n"
 "Driver: %s"
 
-#: ../../standalone/drakgw_.c:276
+#: ../../standalone/drakgw_.c:287
 msgid ""
 "I can keep your current configuration and assume you already set up a DHCP "
-"server; in that case please verify I correctly read the C-Class Network that "
-"you use for your local network; I will not reconfigure it and I will not "
-"touch your DHCP server configuration.\n"
+"server; in that case please verify I correctly read the Network that you use "
+"for your local network; I will not reconfigure it and I will not touch your "
+"DHCP server configuration.\n"
+"\n"
+"The default DNS entry is the Caching Nameserver configured on the firewall. "
+"You can replace that with your ISP DNS IP, for example.\n"
 "\n"
 "Else, I can reconfigure your interface and (re)configure a DHCP server for "
 "you.\n"
@@ -13141,49 +13157,90 @@ msgid ""
 msgstr ""
 "Có thể giữ cấu hình hiện thời và cho rằng server DHCP đã được thiết lập, "
 "trong trường hợpđó, hãy xác minh là Mạng Hạng C được đọc chính xác để dùng "
-"cho mạng cục bộ. Sẽ không cấu hình lại và cũng không đụng đến cấuhình server "
-"DHCP.\n"
+"cho mạng cục bộ. Sẽ không cấu hình lại và cũng không đụng đến cấu hình "
+"server DHCP.\n"
+"\n"
+"Mục nhập DNS mặc định là việc cach máy chủ tên đã cấu hình trên tường lửa. "
+"Bạn có thể thay thế nó bằng IP của DNS do ISP của bạn cấp (ví  dụ).\n"
 "\n"
 "Nếu không thì có thể cấu hình lại giao diện và cấu hình một server DHCP để "
 "dùng.\n"
 "\n"
 
-#: ../../standalone/drakgw_.c:281
-msgid "C-Class Local Network"
-msgstr "Mạng Cục Bộ Hạng C"
+#: ../../standalone/drakgw_.c:294
+msgid "Local Network adress"
+msgstr "Địa Chỉ Mạng Cục Bộ"
 
-#: ../../standalone/drakgw_.c:282
+#: ../../standalone/drakgw_.c:298
+msgid ""
+"DHCP Server Configuration.\n"
+"\n"
+"Here you can select different options for the DHCP server configuration.\n"
+"If you don't know the meaning of an option, simply leave it as it is.\n"
+"\n"
+msgstr ""
+"Cấu Hình Máy Chủ DHCP.\n"
+"\n"
+"Tại đây có thể chọn các tùy chọn khác nhau cho cấu hình máy chủ DHCP.\n"
+"Nếu không biết ý nghĩa của tùy chọn nào đó, hãy để nguyên nó như vậy.\n"
+"\n"
+
+#: ../../standalone/drakgw_.c:304
 msgid "(This) DHCP Server IP"
 msgstr "IP của server DHCP (này)"
 
-#: ../../standalone/drakgw_.c:283
-msgid "Re-configure interface and DHCP server"
-msgstr "Cấu hình lại giao diện và server DHCP"
+#: ../../standalone/drakgw_.c:305
+msgid "The DNS Server IP"
+msgstr "IP của máy chủ DHCP"
 
-#: ../../standalone/drakgw_.c:290
+#: ../../standalone/drakgw_.c:306
+msgid "The internal domain name"
+msgstr "Tên miền nội bộ"
+
+#: ../../standalone/drakgw_.c:307
+msgid "The DHCP start range"
+msgstr "Chuỗi bắt đầu của DHCP"
+
+#: ../../standalone/drakgw_.c:308
+msgid "The DHCP end range"
+msgstr "Chuỗi kết thúc của DHCP"
+
+#: ../../standalone/drakgw_.c:309
+msgid "The default lease (in seconds)"
+msgstr "Kênh thuê mặc định (theo giây)"
+
+#: ../../standalone/drakgw_.c:310
+msgid "The maximum lease (in seconds)"
+msgstr "Kênh thuê tối đa (theo giây)"
+
+#: ../../standalone/drakgw_.c:311
+msgid "Re-configure interface and DHCP server"
+msgstr "Cấu hình lại giao diện và máy chủ DHCP"
+
+#: ../../standalone/drakgw_.c:318
 msgid "The Local Network did not finish with `.0', bailing out."
 msgstr "Mạng Cục Bộ đã không kết thúc với `.0', hết bảo lãnh."
 
-#: ../../standalone/drakgw_.c:301
+#: ../../standalone/drakgw_.c:329
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
 msgstr ""
 "Khả năng xung đột địa chỉ LAN được tìm ra trong cấu hình hiện thời của %s!\n"
 
-#: ../../standalone/drakgw_.c:311
+#: ../../standalone/drakgw_.c:339
 msgid "Configuring..."
 msgstr "Đang cấu hình..."
 
-#: ../../standalone/drakgw_.c:312
+#: ../../standalone/drakgw_.c:340
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Đang cấu hình các script, cài đặt phần mềm, khởi chạy các server..."
 
-#: ../../standalone/drakgw_.c:348
+#: ../../standalone/drakgw_.c:376
 #, c-format
 msgid "Problems installing package %s"
 msgstr "Các trục trặc cài đặt gói %s"
 
-#: ../../standalone/drakgw_.c:481
+#: ../../standalone/drakgw_.c:509
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
@@ -13193,23 +13250,23 @@ msgstr ""
 "Bây giờ bạn có thể chia sẻ kết nối Internet với các máy tính khác trong mạng "
 "cục bộ của bạn, sử dụng cấu hình mạng tự động (DHCP)."
 
-#: ../../standalone/drakgw_.c:500
+#: ../../standalone/drakgw_.c:528
 msgid "The setup has already been done, but it's currently disabled."
 msgstr "Đã hoàn thành xong cài đặt, nhưng hiện tại nó không được hoạt động."
 
-#: ../../standalone/drakgw_.c:501
+#: ../../standalone/drakgw_.c:529
 msgid "The setup has already been done, and it's currently enabled."
 msgstr "Đã hoàn thành xong cài đặt, và hiện thời nó được hoạt động."
 
-#: ../../standalone/drakgw_.c:502
+#: ../../standalone/drakgw_.c:530
 msgid "No Internet Connection Sharing has ever been configured."
 msgstr "Chưa có một chia sẻ kết nối Internet nào được cấu hình."
 
-#: ../../standalone/drakgw_.c:507
+#: ../../standalone/drakgw_.c:535
 msgid "Internet connection sharing configuration"
 msgstr "Cấu hình chia sẻ kết nối Internet"
 
-#: ../../standalone/drakgw_.c:514
+#: ../../standalone/drakgw_.c:542
 #, c-format
 msgid ""
 "Welcome to the Internet Connection Sharing utility!\n"
@@ -14322,3 +14379,9 @@ msgstr "Đa phương tiện - Ghi CD"
 #: ../../share/compssUsers:999
 msgid "Scientific Workstation"
 msgstr "Trạm làm việc khoa học"
+
+#~ msgid "unable to backup lilo message"
+#~ msgstr "Không thể sao lưu thông điệp của LiLo"
+
+#~ msgid "can't change lilo message"
+#~ msgstr "không thể thay đổi thông điệp của LiLo"
