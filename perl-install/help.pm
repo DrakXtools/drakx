@@ -214,7 +214,7 @@ must have one printer with such a name; but you can give
 several names, separated by '|' characters, to a printer.
 So, if you prefer to have a more meaningful name you just have
 to put it first, eg: \"My Printer|lp\".
-The printer having \"lp\" in its name will be the default printer.
+The printer having \"lp\" in its name(s) will be the default printer.
 
 
 If your printer is directly connected to your computer, select

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2000-01-09 21:03+0100\n"
+"POT-Creation-Date: 2000-01-14 14:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -766,8 +766,8 @@ msgid "Choose the new size"
 msgstr ""
 
 #: ../diskdrake.pm_.c:534 ../install_steps_graphical.pm_.c:287
-#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:317
-#: ../install_steps_gtk.pm_.c:361
+#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:318
+#: ../install_steps_gtk.pm_.c:362
 msgid "MB"
 msgstr ""
 
@@ -1123,7 +1123,13 @@ msgstr ""
 #: ../help.pm_.c:210
 msgid ""
 "Linux can deal with many types of printer. Each of these\n"
-"types require a different setup.\n"
+"types require a different setup. Note however that the print\n"
+"spooler uses 'lp' as the default printer name; so you\n"
+"must have one printer with such a name; but you can give\n"
+"several names, separated by '|' characters, to a printer.\n"
+"So, if you prefer to have a more meaningful name you just have\n"
+"to put it first, eg: \"My Printer|lp\".\n"
+"The printer having \"lp\" in its name(s) will be the default printer.\n"
 "\n"
 "\n"
 "If your printer is directly connected to your computer, select\n"
@@ -1145,7 +1151,7 @@ msgid ""
 "for a NetWare printer, except that you need no workgroup information."
 msgstr ""
 
-#: ../help.pm_.c:233
+#: ../help.pm_.c:239
 msgid ""
 "You can now enter the root password for your Linux-Mandrake\n"
 "system. The password must be entered twice to verify that both\n"
@@ -1163,19 +1169,19 @@ msgid ""
 "effort."
 msgstr ""
 
-#: ../help.pm_.c:249
+#: ../help.pm_.c:255
 msgid ""
 "To enable a more secure system, you should select \"Use shadow file\" and\n"
 "\"Use MD5 passwords\"."
 msgstr ""
 
-#: ../help.pm_.c:253
+#: ../help.pm_.c:259
 msgid ""
 "If your network uses NIS, select \"Use NIS\". If you don't know, ask your\n"
 "network administrator."
 msgstr ""
 
-#: ../help.pm_.c:257
+#: ../help.pm_.c:263
 msgid ""
 "You may now create one or more \"regular\" user account(s), as\n"
 "opposed to the \"privileged\" user account, root. You can create\n"
@@ -1199,7 +1205,7 @@ msgid ""
 "and maintenance purposes."
 msgstr ""
 
-#: ../help.pm_.c:276
+#: ../help.pm_.c:282
 msgid ""
 "It is strongly recommended that you answer \"Yes\" here. If you install\n"
 "Microsoft Windows at a later date it will overwrite the boot sector.\n"
@@ -1207,7 +1213,7 @@ msgid ""
 "boot into Linux any more."
 msgstr ""
 
-#: ../help.pm_.c:282
+#: ../help.pm_.c:288
 msgid ""
 "You need to indicate where you wish\n"
 "to place the information required to boot to Linux.\n"
@@ -1217,13 +1223,13 @@ msgid ""
 "drive (MBR)\"."
 msgstr ""
 
-#: ../help.pm_.c:290
+#: ../help.pm_.c:296
 msgid ""
 "Unless you know specifically otherwise, the usual choice is \"/dev/hda\"\n"
 "(the master drive on the primary channel)."
 msgstr ""
 
-#: ../help.pm_.c:294
+#: ../help.pm_.c:300
 msgid ""
 "LILO (the LInux LOader) can boot Linux and other operating systems.\n"
 "Normally they are correctly detected during installation. If you don't\n"
@@ -1235,7 +1241,7 @@ msgid ""
 "it now (a boot disk will be needed to boot it)."
 msgstr ""
 
-#: ../help.pm_.c:303
+#: ../help.pm_.c:309
 msgid ""
 "LILO main options are:\n"
 "  - Boot device: Sets the name of the device (e.g. a hard disk\n"
@@ -1272,7 +1278,7 @@ msgid ""
 "    * <number>:  use the corresponding text mode."
 msgstr ""
 
-#: ../help.pm_.c:338
+#: ../help.pm_.c:344
 msgid ""
 "Now it's time to configure the X Window System, which is the\n"
 "core of the Linux GUI (Graphical User Interface). For this purpose,\n"
@@ -1287,19 +1293,19 @@ msgid ""
 "change them, as many times as necessary."
 msgstr ""
 
-#: ../help.pm_.c:351
+#: ../help.pm_.c:357
 msgid ""
 "If something is wrong in X configuration, use these options to correctly\n"
 "configure the X Window System."
 msgstr ""
 
-#: ../help.pm_.c:355
+#: ../help.pm_.c:361
 msgid ""
 "If you prefer to use a graphical login, select \"Yes\". Otherwise, select\n"
 "\"No\"."
 msgstr ""
 
-#: ../help.pm_.c:359
+#: ../help.pm_.c:365
 msgid ""
 "You can now select some miscellaneous options for you system.\n"
 "\n"
@@ -1329,7 +1335,7 @@ msgid ""
 "X)."
 msgstr ""
 
-#: ../help.pm_.c:387
+#: ../help.pm_.c:393
 msgid ""
 "Your system is going to reboot.\n"
 "\n"
@@ -1528,71 +1534,71 @@ msgid ""
 "Continue anyway?"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:287 ../install_steps_gtk.pm_.c:317
+#: ../install_steps_graphical.pm_.c:287 ../install_steps_gtk.pm_.c:318
 msgid "Choose the size you want to install"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:361
+#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:362
 msgid "Total size: "
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:346 ../install_steps_gtk.pm_.c:373
+#: ../install_steps_graphical.pm_.c:346 ../install_steps_gtk.pm_.c:374
 #: ../standalone/rpmdrake_.c:136
 #, c-format
 msgid "Version: %s\n"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:347 ../install_steps_gtk.pm_.c:374
+#: ../install_steps_graphical.pm_.c:347 ../install_steps_gtk.pm_.c:375
 #: ../standalone/rpmdrake_.c:137
 #, c-format
 msgid "Size: %d KB\n"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:462 ../install_steps_gtk.pm_.c:489
+#: ../install_steps_graphical.pm_.c:462 ../install_steps_gtk.pm_.c:490
 msgid "Choose the packages you want to install"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:465 ../install_steps_gtk.pm_.c:492
+#: ../install_steps_graphical.pm_.c:465 ../install_steps_gtk.pm_.c:493
 msgid "Info"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:473 ../install_steps_gtk.pm_.c:500
+#: ../install_steps_graphical.pm_.c:473 ../install_steps_gtk.pm_.c:501
 #: ../install_steps_interactive.pm_.c:81 ../standalone/rpmdrake_.c:161
 msgid "Install"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:492 ../install_steps_gtk.pm_.c:519
+#: ../install_steps_graphical.pm_.c:492 ../install_steps_gtk.pm_.c:520
 #: ../install_steps_interactive.pm_.c:317
 msgid "Installing"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:499 ../install_steps_gtk.pm_.c:526
+#: ../install_steps_graphical.pm_.c:499 ../install_steps_gtk.pm_.c:527
 msgid "Please wait, "
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:501 ../install_steps_gtk.pm_.c:528
+#: ../install_steps_graphical.pm_.c:501 ../install_steps_gtk.pm_.c:529
 msgid "Time remaining "
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:502 ../install_steps_gtk.pm_.c:529
+#: ../install_steps_graphical.pm_.c:502 ../install_steps_gtk.pm_.c:530
 msgid "Total time "
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:507 ../install_steps_gtk.pm_.c:534
+#: ../install_steps_graphical.pm_.c:507 ../install_steps_gtk.pm_.c:535
 #: ../install_steps_interactive.pm_.c:317
 msgid "Preparing installation"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:528 ../install_steps_gtk.pm_.c:549
+#: ../install_steps_graphical.pm_.c:528 ../install_steps_gtk.pm_.c:550
 #, c-format
 msgid "Installing package %s"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:574
+#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:575
 msgid "Go on anyway?"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:574
+#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:575
 msgid "There was an error ordering packages:"
 msgstr ""
 
@@ -1616,31 +1622,31 @@ msgstr ""
 msgid "Automatic resizing failed"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:312
+#: ../install_steps_gtk.pm_.c:313
 msgid ""
 "Now that you've selected desired groups, please choose \n"
 "how many packages you want, ranging from minimal to full \n"
 "installation of each selected groups."
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:315
+#: ../install_steps_gtk.pm_.c:316
 msgid "You will be able to choose more precisely in next step"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:372
+#: ../install_steps_gtk.pm_.c:373
 msgid "Bad package"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:522
+#: ../install_steps_gtk.pm_.c:523
 msgid "Estimating"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:544
+#: ../install_steps_gtk.pm_.c:545
 #, c-format
 msgid "%d packages"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:544
+#: ../install_steps_gtk.pm_.c:545
 msgid ", %U MB"
 msgstr ""
 
