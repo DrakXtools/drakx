@@ -38,7 +38,7 @@ if ($::expert) {
 
 my $xkb = keyboard::keyboard2full_xkb($keyboard);
 system('setxkbmap', '-option', '') if $xkb->{XkbOptions}; #- need re-initialised other toggles are cumulated
-system('setxkbmap', $xkb->{XkbLayout}, -model => $xkb->{XkbModel}, -option => $xkb->{XkbOptions} || '', -compat => $xkb->{XkbCompat} || '');
+system('setxkbmap', $xkb->{XkbLayout}, '-model' => $xkb->{XkbModel}, '-option' => $xkb->{XkbOptions} || '', '-compat' => $xkb->{XkbCompat} || '');
 eval {
     my $xfree_conf = Xconfig::xfree->read;
     $xfree_conf->set_keyboard($xkb);
