@@ -2080,7 +2080,7 @@ sub main {
 				  val => ($::expert ? _("Normal Mode") :
 					  _("Expert Mode")) } : ()),
 			  { clicked_may_quit =>
-			    sub { $menuchoice = _("\@quit"); 1; },
+			    sub { $menuchoice = "\@quit"; 1; },
 			    val => _("Quit") },
 			  ]
 		    );

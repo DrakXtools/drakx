@@ -493,10 +493,10 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	my $c = $_;
 	my $widget_temp;
 	if (-e "$prefix/etc/sysconfig/network-scripts/ifcfg-eth$c") {
-	    $widget_temp = gtksignal_connect(new Gtk::Button(ethisup($c) ? _("desactivate now") : _("activate now")),
+	    $widget_temp = gtksignal_connect(new Gtk::Button(ethisup($c) ? _("deactivate now") : _("activate now")),
 					     clicked => sub {
 						 system("/sbin/if".(ethisup($c)?"down":"up")." eth$c");
-						 gtkbuttonset($_[0], ethisup($c)?_("desactivate now"):_("activate now"));
+						 gtkbuttonset($_[0], ethisup($c)?_("deactivate now"):_("activate now"));
 					     });
 	} else {
 	    $widget_temp = _("This interface has not been configured yet.\nLaunch the configuration wizard in the main window");

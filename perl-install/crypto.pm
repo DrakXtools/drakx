@@ -14,7 +14,7 @@ my %url2land = (
 		be => _("Belgium"),
 		cz => _("Czech Republic"),
 		de => _("Germany"),
-		gr => _("Grece"),
+		gr => _("Greece"),
 		no => _("Norway"),
 		se => _("Sweden"),
 	       );
@@ -24,7 +24,7 @@ my %land2tzs = (
 		_("Belgium") => [ 'Europe/Brussels', 'Europe/Paris', 'Europe/Berlin' ],
 		_("Czech Republic") => [ 'Europe/Prague', 'Europe/Berlin' ],
 		_("Germany") => [ 'Europe/Berlin', 'Europe/Prague' ],
-		_("Grece") => [ 'Europe/Athens', 'Europe/Prague' ],
+		_("Greece") => [ 'Europe/Athens', 'Europe/Prague' ],
 		_("Norway") => [ 'Europe/Oslo', 'Europe/Stockholm' ],
 		_("Sweden") => [ 'Europe/Stockholm', 'Europe/Oslo' ],
 		_("United States") => [ 'America/New_York', 'Canada/Atlantic', 'Asia/Tokyo', 'Australia/Sydney', 'Europe/Paris' ],
