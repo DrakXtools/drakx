@@ -67,3 +67,5 @@ substInFile {
     #- /lib is ro, for the moment we don't save, we'll see later if we may want to save (using /var/dev-state for example)
     s|.*lib/dev-state.*||;
 } "$::prefix/etc/devfsd.conf";
+
+system("chroot $::prefix pango-querymodules > $::prefix/etc/pango/pango.modules");
