@@ -4199,7 +4199,7 @@ msgstr "Dette passordet er for enkelt (må være minst %d tegn langt)"
 msgid "No password"
 msgstr "Intet passord"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "Sett root-passord"
@@ -4644,11 +4644,6 @@ msgstr "Port mus"
 #, c-format
 msgid "Please choose your type of mouse."
 msgstr "Vennligst velg din musetype."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Upgrade"
-msgstr "Oppgrader"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -7244,8 +7239,8 @@ msgid "Exit install"
 msgstr "Avslutt installering"
 
 #: ../../steps.pm:1
-#, c-format
-msgid "Install system updates"
+#, fuzzy, c-format
+msgid "Install updates"
 msgstr "Installer systemeoppdateringer"
 
 #: ../../steps.pm:1
@@ -7272,6 +7267,11 @@ msgstr "Konfigurer nettverk"
 #, c-format
 msgid "Add a user"
 msgstr "Legg til en bruker"
+
+#: ../../steps.pm:1
+#, fuzzy, c-format
+msgid "Root password"
+msgstr "Intet passord"
 
 #: ../../steps.pm:1
 #, c-format
@@ -16745,13 +16745,13 @@ msgstr "Sikkerhetsnivå"
 
 #: ../../standalone/draksec:1
 #, fuzzy, c-format
-msgid "(default value: %s)"
-msgstr " (Standard)"
+msgid "Security Level:"
+msgstr "Sikkerhetsnivå"
 
 #: ../../standalone/draksec:1
 #, fuzzy, c-format
-msgid "Security Level:"
-msgstr "Sikkerhetsnivå"
+msgid "(default value: %s)"
+msgstr " (Standard)"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -16776,7 +16776,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 
 #: ../../standalone/draksound:1
@@ -18533,6 +18533,9 @@ msgstr "Personlig finans"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programmer for å håndtere dine finanser, så som gnucash"
+
+#~ msgid "Upgrade"
+#~ msgstr "Oppgrader"
 
 #~ msgid "Do you want to configure another printer?"
 #~ msgstr "Ønsker du å konfigurere enda en skriver?"

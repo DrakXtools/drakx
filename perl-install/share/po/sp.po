@@ -4513,7 +4513,7 @@ msgstr "Ова лозинка jе сувишe jедноставнa (треба дa има бар %d знакова)"
 msgid "No password"
 msgstr "Без лозинке"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "Унеси root лозинку"
@@ -4957,11 +4957,6 @@ msgstr "Порт за миша"
 #, c-format
 msgid "Please choose your type of mouse."
 msgstr "Изаберитe тип миша."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Upgrade"
-msgstr "Ажурирање"
 
 #: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
@@ -7625,8 +7620,8 @@ msgid "Exit install"
 msgstr "Излаз из инсталације"
 
 #: ../../steps.pm:1
-#, c-format
-msgid "Install system updates"
+#, fuzzy, c-format
+msgid "Install updates"
 msgstr "Инсталирај системске update-ове"
 
 #: ../../steps.pm:1
@@ -7653,6 +7648,11 @@ msgstr "Подеси мрежу"
 #, c-format
 msgid "Add a user"
 msgstr "Додај корисника"
+
+#: ../../steps.pm:1
+#, fuzzy, c-format
+msgid "Root password"
+msgstr "Без лозинке"
 
 #: ../../steps.pm:1
 #, c-format
@@ -17686,17 +17686,17 @@ msgid "Security Alerts:"
 msgstr "Сигурносни аларми:"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
-msgid "(default value: %s)"
-msgstr " (подразумевана вредност: %s)"
-
-#: ../../standalone/draksec:1
 #, c-format
 msgid "Security Level:"
 msgstr "Ниво сигурности:"
 
 #: ../../standalone/draksec:1
-#, c-format
+#, fuzzy, c-format
+msgid "(default value: %s)"
+msgstr " (подразумевана вредност: %s)"
+
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
 msgid ""
 "Standard: This is the standard security recommended for a computer that will "
 "be used to connect\n"
@@ -17718,7 +17718,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 "Стандардни: Ово је стандардна сигурност која се препоручује за рачунаре који "
 "ће се повезивати\n"
@@ -19552,6 +19552,9 @@ msgstr "Личне финансиje"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Програми за управљaње вaшим финансиjамa, као што jе gnucash"
+
+#~ msgid "Upgrade"
+#~ msgstr "Ажурирање"
 
 #~ msgid "192.168.100.0/255.255.255.0\n"
 #~ msgstr "192.168.100.0/255.255.255.0\n"
