@@ -356,7 +356,8 @@ sub insmod {
 	$_ = $1 if m!.*/([^/]*)\.o!;
 	unless (-r ($f = "/lib/modules/$_.o")) {
 	    $f = "/tmp/$_.o";
-	    my $cz = "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz"; -e $cz or $cz .= "2";
+	    my $cz = "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz";
+	    -e $cz or $cz .= '-'.c::kernel_version();
 	    if (-e $cz) {
 		eval {
 		    require packdrake;
