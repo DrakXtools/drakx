@@ -1236,11 +1236,11 @@ Section "ServerLayout"
     InputDevice "Mouse2" "SendCoreEvents"
 ';
     foreach (1..@{$o->{wacom}}) {
-	print G '
+	print G qq(
     InputDevice "Stylus$_" "AlwaysCore"
     InputDevice "Eraser$_" "AlwaysCore"
     InputDevice "Cursor$_" "AlwaysCore"
-';
+);
     }
     print G '
     InputDevice "Keyboard1" "CoreKeyboard"
