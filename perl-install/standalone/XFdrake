@@ -85,8 +85,9 @@ if ($list{NVIDIA_GLX}) {
 	$ext and $ext = "-$ext";
 	$list{"NVIDIA_kernel-$version-$release$ext"} or die "no NVIDIA kernel for current kernel";
 	$select{"NVIDIA_kernel-$version-$release$ext"} = 1;
-	foreach (`rpm -q kernel kernel-smp kernel-entreprise kernel22 kernel22-smp kernel22-secure`) {
-	    ($ext, $version, $release) = /kernel[^-]*(-[^-]*)-([^-]*)-([^-]*mdk)/;
+	foreach (`rpm -qa kernel-2* kernel-smp-2* kernel-enterprise-2* kernel-secure-2* kernel kernel-smp kernel-entreprise kernel22 kernel22-smp kernel22-secure`) {
+	    ($ext, $version, $release) = /kernel[^-]*(-\D[^-]*)-([^-]*)-([^-]*mdk)?/;
+	    $release or ($version, $release) = $version =~ /(.*?)\.(\d+mdk)/;
 	    $list{"NVIDIA_kernel-$version-$release$ext"} and $select{"NVIDIA_kernel-$version-$release$ext"} = 1;
 	}
 	$allowNVIDIA_rpms = [ keys(%select), "NVIDIA_GLX" ];
