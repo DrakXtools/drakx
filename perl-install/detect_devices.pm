@@ -463,7 +463,7 @@ sub getSerialModem {
 
 sub getModem {
     my ($modules_conf) = @_;
-    getSerialModem($modules_conf, {}), matching_driver('www\.linmodems\.org'),
+    getSerialModem($modules_conf, {}), matching_driver__regexp('www\.linmodems\.org'),
       grep { member($_->{driver}, qw(snd-atiixp-modem snd-intel8x0m)) } probeall();
 }
 
@@ -685,11 +685,11 @@ sub probeall() {
     require sbus_probing::main;
     pci_probe(), usb_probe(), firewire_probe(), pcmcia_probe(), sbus_probing::main::probe();
 }
-sub matching_desc {
+sub matching_desc__regexp {
     my ($regexp) = @_;
     grep { $_->{description} =~ /$regexp/i } probeall();
 }
-sub matching_driver {
+sub matching_driver__regexp {
     my ($regexp) = @_;
     grep { $_->{driver} =~ /$regexp/i } probeall();
 }
@@ -777,10 +777,10 @@ sub isLaptop() {
     arch() =~ /ppc/ ? 
       get_mac_model() =~ /Book/ :
       dmidecode()->{isLaptop}
-	|| (matching_desc('C&T.*655[45]\d') || matching_desc('C&T.*68554') ||
-	    matching_desc('Neomagic.*Magic(Media|Graph)') ||
-	    matching_desc('ViRGE.MX') || matching_desc('S3.*Savage.*[IM]X') ||
-	    matching_desc('ATI.*(Mobility|LT)'))
+	|| (matching_desc__regexp('C&T.*655[45]\d') || matching_desc__regexp('C&T.*68554') ||
+	    matching_desc__regexp('Neomagic.*Magic(Media|Graph)') ||
+	    matching_desc__regexp('ViRGE.MX') || matching_desc__regexp('S3.*Savage.*[IM]X') ||
+	    matching_desc__regexp('ATI.*(Mobility|LT)'))
 	|| cat_('/proc/cpuinfo') =~ /\bmobile\b/i;
 }
 

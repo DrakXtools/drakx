@@ -853,22 +853,22 @@ sub setupBootloaderBefore {
     }
 
     #- check for valid fb mode to enable a default boot with frame buffer.
-    my $vga = $o->{allowFB} && (!detect_devices::matching_desc('3D Rage LT') &&
-                                !detect_devices::matching_desc('Rage Mobility [PL]') &&
-                                !detect_devices::matching_desc('i740') &&
-                                !detect_devices::matching_desc('Matrox') &&
-                                !detect_devices::matching_desc('Tseng.*ET6\d00') &&
-                                !detect_devices::matching_desc('SiS.*SG86C2.5') &&
-                                !detect_devices::matching_desc('SiS.*559[78]') &&
-                                !detect_devices::matching_desc('SiS.*300') &&
-                                !detect_devices::matching_desc('SiS.*540') &&
-                                !detect_devices::matching_desc('SiS.*6C?326') &&
-                                !detect_devices::matching_desc('SiS.*6C?236') &&
-                                !detect_devices::matching_desc('Voodoo [35]|Voodoo Banshee') && #- 3d acceleration seems to bug in fb mode
-                                !detect_devices::matching_desc('828[14][05].* CGC') #- i810 & i845 now have FB support during install but we disable it afterwards
+    my $vga = $o->{allowFB} && (!detect_devices::matching_desc__regexp('3D Rage LT') &&
+                                !detect_devices::matching_desc__regexp('Rage Mobility [PL]') &&
+                                !detect_devices::matching_desc__regexp('i740') &&
+                                !detect_devices::matching_desc__regexp('Matrox') &&
+                                !detect_devices::matching_desc__regexp('Tseng.*ET6\d00') &&
+                                !detect_devices::matching_desc__regexp('SiS.*SG86C2.5') &&
+                                !detect_devices::matching_desc__regexp('SiS.*559[78]') &&
+                                !detect_devices::matching_desc__regexp('SiS.*300') &&
+                                !detect_devices::matching_desc__regexp('SiS.*540') &&
+                                !detect_devices::matching_desc__regexp('SiS.*6C?326') &&
+                                !detect_devices::matching_desc__regexp('SiS.*6C?236') &&
+                                !detect_devices::matching_desc__regexp('Voodoo [35]|Voodoo Banshee') && #- 3d acceleration seems to bug in fb mode
+                                !detect_devices::matching_desc__regexp('828[14][05].* CGC') #- i810 & i845 now have FB support during install but we disable it afterwards
                                );
-    my $force_vga = $o->{allowFB} && (detect_devices::matching_desc('SiS.*630') || #- SiS 630 need frame buffer.
-                                      detect_devices::matching_desc('GeForce.*Integrated') #- needed for fbdev driver (hack).
+    my $force_vga = $o->{allowFB} && (detect_devices::matching_desc__regexp('SiS.*630') || #- SiS 630 need frame buffer.
+                                      detect_devices::matching_desc__regexp('GeForce.*Integrated') #- needed for fbdev driver (hack).
                                      );
 
     #- propose the default fb mode for kernel fb, if aurora or bootsplash is installed.

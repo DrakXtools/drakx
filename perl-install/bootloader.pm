@@ -789,7 +789,7 @@ sub method_choices {
 
     grep {
 	!(/lilo/ && isLoopback($root_part))
-	  && !(/lilo-graphic/ && detect_devices::matching_desc('ProSavageDDR'))
+	  && !(/lilo-graphic/ && detect_devices::matching_desc__regexp('ProSavageDDR'))
 	  && !(/grub/ && isRAID($root_part));
     } method_choices_raw();
 }

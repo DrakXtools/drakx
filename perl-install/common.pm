@@ -86,7 +86,7 @@ sub availableRamMB()  {
     my $s = MDK::Common::System::availableRamMB();
     #- HACK HACK: if i810 and memsize
     require detect_devices;
-    return $s - 1 if $s == 128 && detect_devices::matching_driver('^Card:Intel 810$');
+    return $s - 1 if $s == 128 && detect_devices::matching_driver__regexp('^Card:Intel 810$');
     $s;
 }
 

@@ -596,20 +596,20 @@ sub setDefaultPackages {
     $o->{rpmsrate_flags_chosen}{CDCOM} = 1 if any { $_->{descr} =~ /commercial/i } values %{$o->{packages}{mediums}};
     $o->{rpmsrate_flags_chosen}{TV} = 1 if detect_devices::getTVcards();
     $o->{rpmsrate_flags_chosen}{'3D'} = 1 if 
-      detect_devices::matching_desc('Matrox.* G[245][05]0') ||
-      detect_devices::matching_desc('Rage X[CL]') ||
-      detect_devices::matching_desc('3D Rage (?:LT|Pro)') ||
-      detect_devices::matching_desc('Voodoo [35]') ||
-      detect_devices::matching_desc('Voodoo Banshee') ||
-      detect_devices::matching_desc('8281[05].* CGC') ||
-      detect_devices::matching_desc('Rage 128') ||
-      detect_devices::matching_desc('Radeon ') || #- all Radeon card are now 3D with 4.3.0
-      detect_devices::matching_desc('[nN]Vidia.*T[nN]T2') || #- TNT2 cards
-      detect_devices::matching_desc('[nN][vV]idia.*NV[56]') ||
-      detect_devices::matching_desc('[nN][vV]idia.*Vanta') ||
-      detect_devices::matching_desc('[nN][vV]idia.*[gG]e[fF]orce') || #- GeForce cards
-      detect_devices::matching_desc('[nN][vV]idia.*NV1[15]') ||
-      detect_devices::matching_desc('[nN][vV]idia.*Quadro');
+      detect_devices::matching_desc__regexp('Matrox.* G[245][05]0') ||
+      detect_devices::matching_desc__regexp('Rage X[CL]') ||
+      detect_devices::matching_desc__regexp('3D Rage (?:LT|Pro)') ||
+      detect_devices::matching_desc__regexp('Voodoo [35]') ||
+      detect_devices::matching_desc__regexp('Voodoo Banshee') ||
+      detect_devices::matching_desc__regexp('8281[05].* CGC') ||
+      detect_devices::matching_desc__regexp('Rage 128') ||
+      detect_devices::matching_desc__regexp('Radeon ') || #- all Radeon card are now 3D with 4.3.0
+      detect_devices::matching_desc__regexp('[nN]Vidia.*T[nN]T2') || #- TNT2 cards
+      detect_devices::matching_desc__regexp('[nN][vV]idia.*NV[56]') ||
+      detect_devices::matching_desc__regexp('[nN][vV]idia.*Vanta') ||
+      detect_devices::matching_desc__regexp('[nN][vV]idia.*[gG]e[fF]orce') || #- GeForce cards
+      detect_devices::matching_desc__regexp('[nN][vV]idia.*NV1[15]') ||
+      detect_devices::matching_desc__regexp('[nN][vV]idia.*Quadro');
 
 
     my @locale_pkgs = map { pkgs::packagesProviding($o->{packages}, 'locales-' . $_) } lang::langsLANGUAGE($o->{locale}{langs});
