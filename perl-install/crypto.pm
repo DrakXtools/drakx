@@ -30,12 +30,13 @@ sub require2package { $deps{$_[0]} || $_[0] }
 sub mirror2text($) { $mirrors{$_[0]} && "$mirrors{$_[0]}[0] ($_[0])" }
 sub mirrorstext() { map { mirror2text($_) } keys %mirrors }
 sub text2mirror($) { first($_[0] =~ /\((.*)\)$/) }
-sub ftp($) { ftp::new($_[0], "$mirrors{$_[0]}[1]/$::VERSION") }
+sub dir { $mirrors{$_[0]}[1] . '/' . (arch() !~ /i386/ && arch() . '/') . $::VERSION }
+sub ftp($) { ftp::new($_[0], dir($_[0])) }
 
 sub getFile($$) {
     my ($file, $host) = @_;
-    log::l("getting crypto file $file on directory $host:$mirrors{$host}[1]/$::VERSION with login $mirrors{$host}[2]");
-    my ($ftp, $retr) = ftp::new($_[1], "$mirrors{$host}[1]/$::VERSION",
+    log::l("getting crypto file $file on directory " . dir($host) . " with login $mirrors{$host}[2]");
+    my ($ftp, $retr) = ftp::new($host, dir($host),
 				$mirrors{$host}[2] ? $mirrors{$host}[2] : (),
 				$mirrors{$host}[3] ? $mirrors{$host}[3] : ()
 			       );
