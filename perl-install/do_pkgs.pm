@@ -15,14 +15,14 @@ sub new {
 }
 
 sub ensure_is_installed {
-    my ($do, $pkg, $file, $b_auto) = @_;
+    my ($do, $pkg, $o_file, $b_auto) = @_;
 
-    if (! -e "$::prefix$file") {
+    if (! $o_file || ! -e "$::prefix$o_file") {
 	$do->{in}->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
 	  or return if !$b_auto;
-	$do->install($pkg);
+	$do->install($pkg) or return;
     }
-    if (! -e "$::prefix$file") {
+    if ($o_file && ! -e "$::prefix$o_file") {
 	$do->{in}->ask_warn('', N("Mandatory package %s is missing", $pkg));
 	return;
     }
