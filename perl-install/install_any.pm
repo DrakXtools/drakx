@@ -13,7 +13,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :system :functional);
+use common qw(:common :system :functional :file);
 use commands;
 use run_program;
 use partition_table qw(:types);
@@ -271,4 +271,26 @@ sub enableMD5 {
 	}
 	print;
     }
+}
+
+sub lnx4win_postinstall {
+    my ($prefix) = @_;
+    my $dir = "/dos/lnx4win";
+    my $kernel = "$dir/vmlinuz";
+    rename $kernel, "$kernel.old";
+    commands::cp("-f", "$prefix/boot/vmlinuz", $kernel);
+
+    unlink "$dir/size.txt";
+    unlink "$dir/swapfile.txt";
+    symlinkf "/initrd/dos", "$prefix/mnt/dos";
+}
+
+sub killCardServices {
+    my $pid = chop_(cat_("/tmp/cardmgr.pid"));
+    $pid and kill(15, $pid); #- send SIGTERM
+}
+
+sub unlockCdroms {
+    ioctl detect_devices::tryOpen($_), c::CDROM_LOCKDOOR(), 0
+      foreach detect_devices::cdroms();
 }

@@ -267,7 +267,12 @@ sub setupSCSI {
 
 #------------------------------------------------------------------------------
 sub partitionDisks {
-    return if $o->{lnx4win} || $o->{isUpgrade};
+    return
+      $o->{fstab} = [
+	{ device => "loop7", mntpoint => "/", isFormatted => 1, isMounted => 1 },
+	{ device => "/initrd/dos/lnx4win/swapfile", mntpoint => "swap", isFormatted => 1, isMounted => 1 },
+      ] if $o->{lnx4win};
+    return if $o->{isUpgrade};
 
     $::o->{steps}{formatPartitions}{done} = 0;
     eval { fs::umount_all($o->{fstab}, $o->{prefix}) } if $o->{fstab} && !$::testing;
@@ -294,17 +299,16 @@ sub partitionDisks {
 }
 
 sub formatPartitions {
-    return if $o->{lnx4win} || $o->{isUpgrade};
+    unless ($o->{lnx4win} || $o->{isUpgrade}) {
+	$o->choosePartitionsToFormat($o->{fstab});
 
-    $o->choosePartitionsToFormat($o->{fstab});
-
-    unless ($::testing) {
-	$o->formatPartitions(@{$o->{fstab}});
-	fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
+	unless ($::testing) {
+	    $o->formatPartitions(@{$o->{fstab}});
+	    fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
+	}
     }
     mkdir "$o->{prefix}/$_", 0755 foreach 
       qw(dev etc etc/sysconfig etc/sysconfig/console etc/sysconfig/network-scripts
-	etc/sysconfig/network-scripts
 	home mnt root tmp var var/tmp var/lib var/lib/rpm);
 }
 
@@ -543,9 +547,8 @@ sub main {
     fs::write($o->{prefix}, $o->{fstab});
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
 
-    run_program::run("/usr/bin/postinstall2") if $o->{lnx4win};
-
-    killCardServices();
+    install_any::lnx4win_postinstall() if $o->{lnx4win};
+    install_any::killCardServices();
 
     log::l("installation complete, leaving");
     print "\n" x 30;
@@ -559,11 +562,6 @@ sub main {
 
 	print Data::Dumper->Dump([$o], ['$o']), "\0";
     }
-}
-
-sub killCardServices {
-    my $pid = chop_(cat_("/tmp/cardmgr.pid"));
-    $pid and kill(15, $pid); #- send SIGTERM
 }
 
 #-######################################################################################

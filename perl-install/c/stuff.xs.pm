@@ -17,6 +17,7 @@ print '
 #include <linux/fs.h>
 #include <linux/hdreg.h>
 #include <linux/vt.h>
+#include <linux/cdrom.h>
 #include <net/if.h>
 #include <net/route.h>
 
@@ -549,7 +550,7 @@ headerGetEntry_string_list(h, query)
   [ qw(int S_IFCHR S_IFBLK KDSKBENT KT_SPEC NR_KEYS MAX_NR_KEYMAPS BLKRRPART TIOCSCTTY
        HDIO_GETGEO BLKGETSIZE
        MS_MGC_VAL MS_RDONLY O_NONBLOCK SECTORSIZE WNOHANG
-       VT_ACTIVATE VT_WAITACTIVE VT_GETSTATE
+       VT_ACTIVATE VT_WAITACTIVE VT_GETSTATE CDROM_LOCKDOOR
        ) ],
 );
 push @macros, [ qw(int RPMTAG_NAME RPMTAG_GROUP RPMTAG_SIZE RPMTAG_VERSION RPMTAG_SUMMARY RPMTAG_DESCRIPTION RPMTAG_RELEASE RPMTAG_ARCH RPMTAG_FILENAMES RPMTAG_OBSOLETES) ]
