@@ -786,7 +786,7 @@ Modifying the fields below will override this configuration."),
                           N("The following protocols can be used to configure an ethernet connection. Please choose the one you want to use")
                     },
                     data => sub {
-                        [ { val => \$auto_ip, type => "list", list => [ values %l10n_lan_protocols ] } ];
+                        [ { val => \$auto_ip, type => "list", list => [ sort values %l10n_lan_protocols ] } ];
                     },
                     post => sub {
                         $auto_ip = $auto_ip ne $l10n_lan_protocols{static} || 0;
