@@ -219,7 +219,7 @@ sub boot_img_i386 {
 
     _ "$sudo mount -t vfat -o umask=0 $img $mnt -o loop";
     _ "cat $kernel > $mnt/vmlinuz";
-    bmp_to_msg('isolinux-graphic-simple.bmp', "$mnt/boot.msg", '397,190,14,6', 27, 27);
+    _ "lilo-bmp2mdk file:isolinux-graphic-simple.bmp >$mnt/boot.msg";
 
     output("$mnt/help.msg", syslinux_msg('help.msg.xml'));
     output("$mnt/advanced.msg", syslinux_msg('advanced.msg.xml'));
