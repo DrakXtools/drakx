@@ -32,8 +32,7 @@ function create_modules() {
     /sbin/depmod -F $kernel_path/boot/System.map* -e *.o | perl -pe 's/\\\n//' \
 	| perl -ne 's/\.o//g; s/[ \t]+/ /g; print if /: /' > modules.dep
     perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
-    ls *.o               | packdrake -b9s modules.cz 400000
-    mv modules.cz "../modules.cz$kern"
+    ls *.o | packdrake -b9s "../modules.cz-$kern" 400000
     create_marfile network_modules.mar  $NETWORK_MODULES $GENERIC_MODULES
     create_marfile cdrom_modules.mar    $CDROM_MODULES $GENERIC_MODULES
     create_marfile hd_modules.mar       $HD_MODULES $GENERIC_MODULES
@@ -43,6 +42,15 @@ function create_modules() {
     rm -f $ALL_MODULES $PCMCIA_COREMODULES $NOT_USEFULL_IN_STAGE1 # leave in the directory non-install1 used modules
 }
 
+[ -e $ALL_KERNELS/.main ] && main=$(cat $ALL_KERNELS/.main)
+[ -n "$main" -a -e $ALL_KERNELS/$main ] || {
+    pushd . >/dev/null
+    cd $ALL_KERNELS
+    main=$(echo 2.* | sed 's/.* //')
+    echo "Choosing $main"
+    echo $main > .main
+    popd >/dev/null
+}
 
 ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
 
@@ -87,22 +95,27 @@ fi
 GIBASEDIR=`pwd`
 
 rm -rf all.modules ; mkdir all.modules
-rm -rf $ALL_KERNELS/cardmgr
 for i in $ALL_KERNELS/*; do
-	[ -d $ALL_KERNELS/cardmgr ] || mkdir $ALL_KERNELS/cardmgr
 	kern=`basename $i`
 	[ -e $i/cardmgr ] && (
 	    cd $i/cardmgr
 	    echo "int main(int argc, char **argv) { cardmgr_main(argc, argv); }" > main.c
-	    gcc -o cardmgr *.o main.c
-	    cp cardmgr $GIBASEDIR/$ALL_KERNELS/cardmgr/cardmgr$kern
+	    gcc -o cardmgr-$kern *.o main.c
 	)
-	( mkdir all.modules/$kern ; cd all.modules/$kern
-	create_modules ../../$i $kern ; cd ../.. )
+	(
+	    mkdir all.modules/$kern
+	    cd all.modules/$kern
+	    if [ "$kern" = "$main" ]; then
+		create_modules ../../$i $kern
+	    else
+		echo "$kern ($main)"
+		create_modules ../../$i $kern 2>/dev/null
+	    fi
+	)
 done
 
 
-# v=kernel-2.2.17-BOOT3.tar.bz2
+# v=kernel-2.4.2-BOOT2.tar.bz2
 # scp kenobi:~chmou/work/kernel/archive/$v /tmp
 # cd ~/gi/kernel ; rm -rf * ; tar xfI /tmp/$v 
 # cd ~/gi ; ./update_kernel ; rm -f network.rdz ; ./make_boot_img network.rdz network ; scp vmlinuz network.rdz kenobi:/tftpboot ; cp -f ~/gi/modules/modules.cz /export/Mandrake/mdkinst/lib/modules.cz
