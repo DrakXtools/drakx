@@ -24,10 +24,10 @@ autoirpm autoirpm-icons numlock
 
 my %by_lang = (
   ar    => [ 'acon' ],
-  ja    => [ 'rxvt-CLE' ],
-  ko    => [ 'rxvt-CLE' ],
-  zh_CN => [ 'rxvt-CLE' ],
-  'zh_TW.Big5' => [ 'rxvt-CLE' ],
+  ja    => [ 'rxvt-CLE', 'fonts-ttf-japanese' ],
+  ko    => [ 'rxvt-CLE', 'fonts-ttf-korean' ],
+  zh_CN => [ 'rxvt-CLE', 'fonts-ttf-gb2312' ],
+  'zh_TW.Big5' => [ 'rxvt-CLE', 'fonts-ttf-big5' ],
 );
 
 my @prefered = qw(perl-GTK);
