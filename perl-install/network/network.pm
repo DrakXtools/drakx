@@ -423,6 +423,9 @@ sub configureNetwork2 {
     my ($in, $_prefix, $netc, $intf) = @_;
     my $etc = "$::prefix/etc";
     if (!$::testing) {
+        require network::ethernet;
+        network::ethernet::update_iftab();
+
         $netc->{wireless_eth} and $in->do_pkgs->ensure_binary_is_installed('wireless-tools', 'iwconfig', 'auto');
         write_conf("$etc/sysconfig/network", $netc);
         write_resolv_conf("$etc/resolv.conf", $netc) unless $netc->{DHCP};
