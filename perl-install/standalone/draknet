@@ -180,7 +180,7 @@ my $label4 = new Gtk::Label($netcnx->{type});
 $table1->attach($label4, 1, 2, 0, 1, 'fill', 'fill',0,0);
 my $label5 = new Gtk::Label($netcnx->{type} eq 'lan' ? _("Gateway:") : _("Interface:"));
 $table1->attach($label5, 0, 1, 1, 2, 'fill', 'fill',0,0);
-my $label6 = new Gtk::Label($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netc->{NET_INTERFACE});
+my $label6 = new Gtk::Label($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
 $table1->attach($label6, 1, 2, 1, 2, 'fill', 'fill',0,0);
 my $c=connected();
 my $label7 = new Gtk::Label(_("Status:"));
@@ -389,7 +389,7 @@ sub update {
     $label_host->set ($h);
     $label4->set($netcnx->{type});
     $label5->set($netcnx->{type} eq 'lan' ? _("Gateway:") : _("Interface:"));
-    $label6->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netc->{NET_INTERFACE});
+    $label6->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
     my $c = connected();
     $label8->set($c ? _("Connected") : _("Not connected"));
     $button2->child->set($c ? _("Disconnect...") : _("Connect..."));
