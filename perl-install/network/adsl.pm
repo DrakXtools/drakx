@@ -116,6 +116,8 @@ defaultroute
 	substInFile {
 	    s/ETH=.*\n/ETH=$netc->{NET_DEVICE}\n/;
 	    s/USER=.*\n/USER=$adsl->{login}\n/;
+	    s/DNS1=.*\n/DNS1=$netc->{dnsServer2}/;
+	    s/DNS2=.*\n/DNS2=$netc->{dnsServer3}/;
 	} "$prefix/etc/ppp/pppoe.conf";
     }
 
