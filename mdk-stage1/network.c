@@ -468,7 +468,7 @@ static enum return_type configure_network(struct interface_info * intf)
 	if (dnshostname) {
 		if (intf->boot_proto == BOOTPROTO_STATIC)
 			hostname = strdup(dnshostname);
-		domain = strchr(strdup(hostname), '.') + 1;
+		domain = strchr(strdup(dnshostname), '.') + 1;
 		log_message("got hostname and domain from dns entry, %s and %s", dnshostname, domain);
 		return RETURN_OK;
 	}
