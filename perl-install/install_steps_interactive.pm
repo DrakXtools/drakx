@@ -433,8 +433,11 @@ sub choosePackages {
     $min_size < $availableC or die _("Your system has not enough space left for installation or upgrade (%d > %d)", $min_size, $availableC);
 
     my $min_mark = $::beginner ? 25 : $::expert ? 0 : 1;
+    my $def_mark = 49;
 
     my $b = pkgs::saveSelected($packages);
+    pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $def_mark, 0, $o->{installClass});
+    my $def_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
     my ($ind, $level) = pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
     my $max_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
     pkgs::restoreSelected($b);
@@ -461,7 +464,7 @@ sub choosePackages {
 	    $o->set_help('empty');
 	    $o->ask_from_listf('', _("Select the size you want to install"), sub { _ ($text[$_[1]], $_[0]) }, \@l, $l[1]) * sqr(1024);
 	} else {
-	    $o->chooseSizeToInstall($packages, $min_size, $max_size, $availableC, $individual) || goto &choosePackages;
+	    $o->chooseSizeToInstall($packages, $min_size, $def_size, $max_size, $availableC, $individual) || goto &choosePackages;
 	}
     });
     if (!$size2install) { #- special case for desktop
@@ -475,8 +478,8 @@ sub choosePackages {
 }
 
 sub chooseSizeToInstall {
-    my ($o, $packages, $min, $max, $availableC) = @_;
-    $availableC * 0.7;
+    my ($o, $packages, $min, $def, $max, $availableC) = @_;
+    min($def, $availableC * 0.7);
 }
 sub choosePackagesTree {}
 
