@@ -154,7 +154,12 @@ sub setPackages {
     my $w = $o->wait_message('', _("Searching for available packages"));
     $o->SUPER::setPackages($install_classes);
 }
-
+#------------------------------------------------------------------------------
+sub findPackagesToUpgrade {
+    my ($o) = @_;
+    my $w = $o->wait_message('', _("Finding package to upgrade"));
+    $o->SUPER::findPackagesToUpgrade();
+}
 #------------------------------------------------------------------------------
 sub configureNetwork($) {
     my ($o, $first_time) = @_;

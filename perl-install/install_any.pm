@@ -124,13 +124,21 @@ sub setPackages($$) {
 	push @{$o->{base}}, "kernel-pcmcia-cs" if $o->{pcmcia};
     }
 
-    do {
-	my $p = $o->{packages}{$_} or log::l("missing base package $_"), next;
-	pkgs::select($o->{packages}, $p, 1);
-    } foreach @{$o->{base}};
+    unless ($o->{isUpgrade}) {
+	do {
+	    my $p = $o->{packages}{$_} or log::l("missing base package $_"), next;
+	    pkgs::select($o->{packages}, $p, 1);
+	} foreach @{$o->{base}};
+    }
 
     pkgs::setShowFromCompss($o->{compss}, $o->{installClass}, $o->{lang});
     ($o->{packages_}{ind}, $o->{packages_}{select_level}) = pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang});
+}
+
+sub findPackagesToUpgrade($) {
+    my ($o) = @_;
+
+    pkgs::findPackagesToUpgrade($o->{packages}, $o->{prefix});
 }
 
 sub addToBeDone(&$) {

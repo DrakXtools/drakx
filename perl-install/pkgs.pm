@@ -136,9 +136,9 @@ sub psUsingHdlist() {
 
 	$packages{$name} = {
              name => $name, header => $header, selected => 0, deps => [],
-	     version => c::headerGetEntry($header, 'version'),
-	     release => c::headerGetEntry($header, 'release'),
-	     size    => c::headerGetEntry($header, 'size'),
+	     version   => c::headerGetEntry($header, 'version'),
+	     release   => c::headerGetEntry($header, 'release'),
+	     size      => c::headerGetEntry($header, 'size'),
         };
     }
     log::l("psUsingHdlist read " . scalar keys(%packages) . " headers");
@@ -286,6 +286,78 @@ sub getHeader($) {
 	$p->{header} = c::rpmReadPackageHeader(fileno $f);
     }
     $p->{header};
+}
+
+sub findPackagesToUpgrade($$) {
+    my ($packages, $prefix) = @_;
+
+    log::l("reading /usr/lib/rpm/rpmrc");
+    c::rpmReadConfigFiles() or die "can't read rpm config files";
+    log::l("\tdone");
+
+    my $db = c::rpmdbOpenForTraversal($prefix) or die "unable to open $prefix/var/lib/rpm/packages.rpm";
+    my %installedFilesToRemove; #- files installed but not present in the package to upgrade -> to remove.
+
+    #- mark all files which are not in /etc/rc.d/ for packages which are already installed.
+    c::rpmdbTraverse($db, sub {
+			 my ($header) = @_;
+			 my @filenames = c::headerGetEntry($header, 'filenames');
+			 @installedFilesToRemove{grep { $_ !~ m@/etc/rc.d/@ } @filenames} = ();
+		     });
+
+    #- find new packages to upgrade.
+    foreach (values %$packages) {
+	my $p = $_;
+	my $skipThis = 0;
+	$skipThis ||= 1 if c::rpmdbNameTraverse($db, $p->{name}, sub {
+						    my ($header) = @_;
+						    $skipThis ||= (c::headerGetEntry($header, 'version') ge $p->{version});
+						}) == 0; #- skip if not installed (package not found in current install).
+	#- select the package if it is already installed with a lower version or simply not installed.
+	pkgs::select($packages, $p) unless ($skipThis || $p->{selected});
+    }
+
+    #- unmark all files for all packages marked for upgrade.
+    foreach (values %$packages) {
+	my $p = $_;
+
+	if ($p->{selected}) {
+	    my @availFiles = $p->{filename} ? c::headerGetEntry($p->{header}, 'filename') : ();
+	    map { delete $installedFilesToRemove{$_} } grep { $_ !~ m@/etc/rc.d/@ } @availFiles;
+	}
+    }
+
+    #- select packages which contains marked files, then unmark on selection.
+    foreach (values %$packages) {
+	my $p = $_;
+
+	unless ($p->{selected}) {
+	    my @availFiles = $p->{filename} ? c::headerGetEntry($p->{header}, 'filename') : ();
+	    my $toSelect = 0;
+	    map { if (exists $installedFilesToRemove{$_}) {
+		$toSelect = 1; delete $installedFilesToRemove{$_} } } grep { $_ !~ m@/etc/rc.d/@ } @availFiles;
+	    pkgs::select($packages, $p) if ($toSelect);
+	}
+    }
+
+    #- select packages which obseletes other package, TODO.
+
+    #- consistency check: deselect all packages with a version lower to already existing.
+    foreach (values %$packages) {
+	my $p = $_;
+	my $skipThis = 0;
+	if ($p->{selected}) {
+	    c::rpmdbNameTraverse($db, $p->{name}, sub {
+				     my ($header) = @_;
+				     $skipThis ||= (c::headerGetEntry($header, 'version') ge $p->{version});
+				 });
+	    #- unselect the package if it is already installed with a greater or equal version.
+	    pkgs::unselect($packages, $p) if ($skipThis);
+	}
+    }
+
+    #- close db, job finished !
+    c::rpmdbClose($db);
 }
 
 sub install($$) {

@@ -12,9 +12,27 @@ use common qw(:common);
 $resolution_wanted = "1024x768";
 @resolutions = qw(640x480 800x600 1024x768 1152x864 1280x1024 1600x1200);
 
-@svgaservers = qw(SVGA Rage128);
-@accelservers = qw(S3 Mach32 Mach8 8514 P9000 AGX W32 Mach64 I128 S3V 3DLabs);
-@allservers = (qw(Mono VGA16), @svgaservers, @accelservers);
+%serversdriver = (
+    'SVGA'      => "svga",
+    'Rage128'   => "svga",
+    'S3'        => "accel",
+    'Mach32'    => "accel",
+    'Mach8'     => "accel",
+    '8514'      => "accel",
+    'P9000'     => "accel",
+    'AGX'       => "accel",
+    'W32'       => "accel",
+    'Mach64'    => "accel",
+    'I128'      => "accel",
+    'S3V'       => "accel",
+    '3DLabs'    => "accel",
+    'Mono'      => "vga2",
+    'VGA16'     => "vga16",
+    'FBDev'     => "fbdev",
+);
+@svgaservers = grep { $serversdriver{$_} eq "svga" } keys(%serversdriver);#-qw(SVGA Rage128);
+@accelservers = grep { $serversdriver{$_} eq "accel" } keys(%serversdriver);#-qw(S3 Mach32 Mach8 8514 P9000 AGX W32 Mach64 I128 S3V 3DLabs);
+@allservers = keys(%serversdrivers);#-(qw(Mono VGA16), @svgaservers, @accelservers);
 
 { #- @monitorSize2resolution
     my %l = my @l = ( #- size in inch
