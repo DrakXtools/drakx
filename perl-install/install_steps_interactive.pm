@@ -26,7 +26,7 @@ use printer;
 1;
 
 #-######################################################################################
-#- misc functions
+#- In/Out Steps Functions
 #-######################################################################################
 sub errorInStep($$) {
     my ($o, $err) = @_;
@@ -88,7 +88,6 @@ sub rebootNeeded($) {
 
     install_steps::rebootNeeded($o);
 }
-#------------------------------------------------------------------------------
 sub choosePartitionsToFormat($$) {
     my ($o, $fstab) = @_;
 
@@ -111,11 +110,15 @@ sub formatPartitions {
 	}
     }
 }
+#------------------------------------------------------------------------------
+#-choosePackage
+#------------------------------------------------------------------------------
+#-mouse
 
+#------------------------------------------------------------------------------
 sub configureNetwork($) {
     my ($o, $first_time) = @_;
     my $r = '';
-
     if ($o->{intf}) {
 	if ($first_time) {
 	    my @l = (
@@ -154,7 +157,45 @@ sub configureNetwork($) {
     }
     install_steps::configureNetwork($o);
 }
-	
+
+sub configureNetworkIntf {
+    my ($o, $intf) = @_;
+    delete $intf->{NETWORK};
+    delete $intf->{BROADCAST};
+    my @fields = qw(IPADDR NETMASK);
+    $o->ask_from_entries_ref(_("Configuring network device %s", $intf->{DEVICE}),
+_("Please enter the IP configuration for this machine.
+Each item should be entered as an IP address in dotted-decimal
+notation (for example, 1.2.3.4)."),
+			     [ _("IP address:"), _("Netmask:")],
+			     [ \$intf->{IPADDR}, \$intf->{NETMASK}],
+			     complete => sub {
+				 for (my $i = 0; $i < @fields; $i++) {
+				     unless (network::is_ip($intf->{$fields[$i]})) {
+					 $o->ask_warn('', _("IP address should be in format 1.2.3.4"));
+					 return (1,$i);
+				     }
+				     return 0;
+				 }
+			     }
+			    );
+}
+
+sub configureNetworkNet {
+    my ($o, $netc, @devices) = @_;
+
+    $o->ask_from_entries_ref(_("Configuring network"),
+_("Please enter your host name.
+Your host name should be a fully-qualified host name,
+such as ``mybox.mylab.myco.com''.
+Also give the gateway if you have one"),
+			     [_("Host name:"), _("DNS server:"), _("Gateway:"), _("Gateway device:")],
+			     [(map { \$netc->{$_}} qw(HOSTNAME dnsServer GATEWAY)), 
+				      {val => \$netc->{GATEWAYDEV}, list => \@devices}]
+			    );
+}
+
+#------------------------------------------------------------------------------
 sub timeConfig {
     my ($o, $f) = @_;
 
@@ -163,6 +204,8 @@ sub timeConfig {
     install_steps::timeConfig($o,$f);
 }
 
+#------------------------------------------------------------------------------
+#-sub servicesConfig {}
 #------------------------------------------------------------------------------
 sub printerConfig($) {
     my ($o) = @_;
@@ -186,7 +229,7 @@ name and directory should be used for this queue?"),
 				 { 
 				     $o->{printer}{SPOOLDIR} 
 				       = "$printer::spooldir$o->{printer}{QUEUE}" unless $_[0];
-				 }, 
+				 },
 				);
     }
     
@@ -206,14 +249,14 @@ name and directory should be used for this queue?"),
 	    push @port, "/dev/$_" if open LP, ">/dev/$_"
 	}
 	eval { modules::unload("lp") };
-	@port =("lp0", "lp1", "lp2");
+#	@port =("lp0", "lp1", "lp2");
 	$o->{printer}{DEVICE}    = $port[0] if $port[0];
 
 
 	return if !$o->ask_from_entries_ref(_("Local Printer Device"),
 					    _("What device is your printer connected to  \n(note that /dev/lp0 is equivalent to LPT1:)?\n"),
 					    [_("Printer Device:")],
-					    [{val => \$o->{printer}{DEVICE}, list => \@port, is_edit => 1}],
+					    [{val => \$o->{printer}{DEVICE}, list => \@port }],
 					   );
 	#TAKE A GOODDEFAULT TODO
 
@@ -341,6 +384,63 @@ wish to access and any applicable user name and password."),
 }
 
 
+#------------------------------------------------------------------------------
+sub setRootPassword($) {
+    my ($o) = @_;
+    $o->{superuser} ||= {};
+    $o->{superuser}{password2} ||= $o->{superuser}{password};
+    my $sup = $o->{superuser};
+
+    $o->ask_from_entries_ref(_("Set root password"),
+			 _("Set root password"),
+			 [_("Password"), _("Password (again)")],
+			 [\$sup->{password}, \$sup->{password2}],
+			 complete => sub {
+			     $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("You must enter the same password"), _("Please try again") ]), return (1,1);
+			     (length $sup->{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,0);
+			     return 0
+			 }
+			);
+    install_steps::setRootPassword($o);
+}
+
+#------------------------------------------------------------------------------
+#-addUser	
+#------------------------------------------------------------------------------
+sub addUser($) {
+    my ($o) = @_;
+    $o->{user} ||= {};
+    $o->{user}{password2} ||= $o->{user}{password};
+    my $sup = $o->{user};
+    my @fields = qw(name password password2 realname);
+
+    my @shells = install_any::shells($o);
+    @shells = qw( /bin/bash /nide);
+
+    $o->ask_from_entries_ref(_("Add user"),
+			     _("Enter a user"),
+			     [_("User name"), _("Password"), _("Password (again)"), _("Real name"), _("Shell"),],
+			     [(map { \$sup->{$_}} @fields), 
+			      {val => \$sup->{shell}, list => \@shells},
+			     ],
+			     complete => sub {
+			     $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("You must enter the same password"), _("Please try again") ]), return (1,2);
+			     (length $sup->{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,1);
+			     $sup->{name} or $o->ask_warn('', _("Please give a user name")), return (1,0);
+			     $sup->{name} =~ /^[a-z0-9_-]+$/ or $o->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
+			     return 0;
+			 }
+			     
+			    );
+    install_steps::addUser($o);
+    $o->{user} = {};
+    goto &addUser if $::expert;
+}
+
+
+
+
+#------------------------------------------------------------------------------
 sub createBootdisk {
     my ($o, $first_time) = @_;
     my @l = detect_devices::floppies();
@@ -367,6 +467,7 @@ failures. Would you like to create a bootdisk for your system?"), !$o->{mkbootdi
     install_steps::createBootdisk($o);
 }
 
+#------------------------------------------------------------------------------
 sub setupBootloader($) {
     my ($o) = @_;
     my @l = (__("First sector of drive"), __("First sector of boot partition"));
@@ -380,6 +481,7 @@ sub setupBootloader($) {
     install_steps::setupBootloader($o);
 }
 
+#------------------------------------------------------------------------------
 sub exitInstall { 
     my ($o) = @_;
     $o->ask_warn('',
@@ -391,6 +493,10 @@ Information on configuring your system is available in the post
 install chapter of the Official Linux Mandrake User's Guide."));
 }
 
+
+#-######################################################################################
+#- Misc Steps Functions
+#-######################################################################################
 sub loadModule {
     my ($o, $type) = @_;
     my @options;
@@ -426,6 +532,7 @@ Do you want to try again with other parameters?", $l)) or return;
     $l, $m;
 }
 
+#------------------------------------------------------------------------------
 sub load_thiskind {
     my ($o, $type) = @_;
     my $w;
@@ -437,6 +544,7 @@ sub load_thiskind {
 			   });
 }
 
+#------------------------------------------------------------------------------
 sub setup_thiskind {
     my ($o, $type, $auto, $at_least_one) = @_;
     my @l = $o->load_thiskind($type);

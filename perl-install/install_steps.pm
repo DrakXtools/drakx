@@ -24,9 +24,6 @@ use network;
 use fs;
 
 
-my @etc_pass_fields = qw(name password uid gid realname home shell);
-
-
 my $o;
 
 1;
@@ -85,11 +82,9 @@ sub errorInStep($$) {}
 #-######################################################################################
 #- Steps Functions
 #-######################################################################################
-
 #------------------------------------------------------------------------------
 sub selectLanguage {
     $o->{keyboard} ||= keyboard::lang2keyboard($o->{lang});
-    #PAD CHOICE ||=
     selectKeyboard($o);
 }
 #------------------------------------------------------------------------------
@@ -113,7 +108,6 @@ sub rebootNeeded($) {
     exit "true";
 }
 
-#------------------------------------------------------------------------------
 sub choosePartitionsToFormat($$) {
     my ($o, $fstab) = @_;
 
@@ -123,7 +117,6 @@ sub choosePartitionsToFormat($$) {
     }
 }
 
-#------------------------------------------------------------------------------
 sub formatPartitions {
     my $o = shift;
     foreach (@_) {
@@ -136,7 +129,6 @@ sub choosePackages($$$) {
     my ($o, $packages, $compss) = @_;
 }
 
-#------------------------------------------------------------------------------
 sub beforeInstallPackages {
     my ($o) = @_;
 
@@ -207,7 +199,9 @@ sub printerConfig {
 	printer::configure_queue($o->{printer});
     }
 }
+
 #------------------------------------------------------------------------------
+my @etc_pass_fields = qw(name password uid gid realname home shell);
 sub setRootPassword($) {
     my ($o) = @_;
     my %u = %{$o->{superuser}};

@@ -82,15 +82,11 @@ sub ask_from_entries_refW {
     my $w       = my_gtk->new($title, %$o);
     my @entries = map { 
 	if ($_->{type} eq "list") {
-	    if (@{$_->{list}}) {
-		my $depth_combo = new Gtk::Combo;
-		$depth_combo->set_use_arrows_always(1);
-		$depth_combo->entry->set_editable($_->{is_edit});
-		$depth_combo->set_popdown_strings(@{$_->{list}});
-		$depth_combo;
-	    } else {
-		new Gtk::Entry;
-	    }
+	    my $depth_combo = new Gtk::Combo;
+	    $depth_combo->set_use_arrows_always(1);
+	    $depth_combo->entry->set_editable(!$_->{not_edit});
+	    $depth_combo->set_popdown_strings(@{$_->{list}});
+	    $depth_combo;
 	} else {
 	    new Gtk::Entry;
 	}
@@ -130,10 +126,10 @@ sub ask_from_entries_refW {
 	comb_entry($entry,$val->[$i])->signal_connect(changed => $callback);
 	comb_entry($entry,$val->[$i])->signal_connect(activate => sub {
 				   ($ind == ($num_champs -1)) ?
-				     $w->{ok}->grab_focus() : $entries[$ind+1]->grab_focus();
+				     $w->{ok}->grab_focus() : comb_entry($entries[$ind+1],$val->[$ind+1])->grab_focus();
 			       });
 	comb_entry($entry,$val->[$i])->set_text(${$val->[$i]{val}})  if ${$val->[$i]{val}};
-	comb_entry($entry,$val->[$i])->set_visibility(0) if $_[0] =~ /password/i;
+	comb_entry($entry,$val->[$i])->set_visibility(0) if $l->[$i] =~ /password/i;
 #	&{$updates[$i]};
     }
 
@@ -146,21 +142,27 @@ sub ask_from_entries_refW {
 		   $ok
 		   ));
 
+    comb_entry($entries[0],$val->[0])->grab_focus();
     if ($hcallback{complete}) {
 	my $callback = sub {
-	    my ($error, $focus) = &{$hcallback{changed}};
+	    my ($error, $focus) = &{$hcallback{complete}};
 	    #update all the value
 	    $ignore = 1;
 	    foreach (@updates_inv) { &{$_};}
 	    $ignore = 0;
 	    if ($error) {
-		$entries[$focus]->grab_focus();
+		comb_entry($entries[$focus], $val->[$focus])->grab_focus();
+	    } else {
+		return 1;
 	    }
 	};
-	$w->{ok}->signal_connect(activate => $callback)
+	#$w->{ok}->signal_connect(clicked => $callback)
+	$w->main($callback);
+    } else {
+	$w->main();
     }
-    $entries[0]->grab_focus();
-    $w->main();
+
+
 }
 
 
