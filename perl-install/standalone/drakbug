@@ -34,8 +34,8 @@ my ($bugdesc, $bugwrite, $table, $comb_app, $button_pkg, $package, $extra_data, 
 
 foreach (@ARGV) {
     next unless defined $_;
-    /^--report$/ and $prog = shift @ARGV;
-    /^--incident$/ and do { $incident = 1; $prog = shift @ARGV };
+    /^--report$/ && shift @ARGV and $prog = shift @ARGV;
+    /^--incident$/ && shift @ARGV and do { $incident = 1; $prog = shift @ARGV };
 }
 
 my $window = ugtk2->new(N("Mandrakelinux Bug Report Tool"), center => 1);
@@ -154,7 +154,7 @@ gtkadd($window->{window},
 if ($stable_release == 0) {
     if (defined $prog) {
     	update_app($prog); 
-    	$comb_app->entry->set_text($prog);
+    	$comb_app->set_text($prog);
     };
     $comb_app->entry->signal_connect('changed', sub { update_app($comb_app->entry->get_text) });
 } else {
