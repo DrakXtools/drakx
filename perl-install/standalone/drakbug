@@ -29,8 +29,8 @@ use Config;
 
 my ($bugzilla, $wizard_name);
 my $prog;
-my ($incident, $stable_release) = (0, 0);
-my ($bugdesc, $bugwrite, $table, $comb_app, $button_pkg, $package, $extra_data, $summary, $textview, $kversion, $cpuinfo, $lspci);
+my $incident = 0;
+my ($bugdesc, $table, $comb_app, $com_app, $button_pkg, $package, $distrocode, $kernel);
 
 foreach (@ARGV) {
     next unless defined $_;
@@ -69,66 +69,41 @@ my $mandrake_release = chomp_(cat_('/etc/mandrakelinux-release'));
 #- (my $mandrake_version) = $mandrake_release =~ /(\d+\.\d+)/;
 
 if ($mandrake_release =~ /(official|community)/i) {
-    my $anthill = 'http://bugs.mandrakelinux.com';
-    $bugzilla = $anthill . '/drakbug.php?request=1';
-    $stable_release = 1;
-    $wizard_name = "Anthill";
+    $distrocode = $mandrake_release;
+    $distrocode =~ s/^.*?(\d+\.\d+) \((\w+)\).*$/$1-\l$2/;
 } else {
-    $bugzilla = 'http://qa.mandrakesoft.com/enter_bug.cgi';
-    $wizard_name = "Bugzilla wizard";
+    $distrocode = "cooker";
 }
+$bugzilla = 'http://qa.mandrakesoft.com/enter_bug.cgi';
+$wizard_name = "Bugzilla";
 
-if ($stable_release == 0) {
-    $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
-			      [ Gtk2::Label->new(N("Application:")), $comb_app = Gtk2::ComboBox->new_text ],
-			      [ Gtk2::Label->new(N("Package: ")), $package = Gtk2::Entry->new_with_text("...") ], # complain on gtk-perl@ml
-			      [ Gtk2::Label->new(N("Kernel:")), gtkset_editable(Gtk2::Entry->new_with_text($kernel_release), 0) ],
-			      [ Gtk2::Label->new(N("Release: ")), gtkset_editable(Gtk2::Entry->new_with_text($mandrake_release), 0) ]
-                             );
-    $comb_app->set_popdown_strings("", sort(@generic_tool));
-} else {
-    $table = create_packtable({ col_spacings => 5, row_spacings => 5 },
-			      [Gtk2::Label->new(N("Application Name\nor Full Path:")), 
-			       gtkpack_(Gtk2::HBox->new(0,5),
-					1, $comb_app = gtkset_editable(Gtk2::Entry->new, 1), 
-					0, $button_pkg = Gtk2::Button->new(N("Find Package")),
-				       )],
-			      [ Gtk2::Label->new(N("Package: ")), $package = gtkset_editable(Gtk2::Entry->new_with_text("..."), 0) ],
-			      [ Gtk2::Label->new(N("Release: ")), gtkset_editable(Gtk2::Entry->new_with_text($mandrake_release), 0) ],
-			      [ Gtk2::Label->new(N("Summary: ")), $summary = gtkset_editable(Gtk2::Entry->new_with_text(""), 1) ]
-			     );
-    
-    $textview = Gtk2::TextView->new;
-    
-    $extra_data = gtkpack_(Gtk2::VBox->new(0,1),
-			   0, Gtk2::Label->new(N("Bug Description/System Information")),
-			   1, create_scrolled_window(gtktext_insert($textview,  N("YOUR TEXT HERE"), editable => 1, visible => 1)),
-			   0, gtkpack_(Gtk2::HBox->new(0,20),
-				       0, Gtk2::HBox->new(0,0),
-				       1, $kversion = Gtk2::CheckButton->new(N("Submit kernel version")),
-				       1, $cpuinfo = Gtk2::CheckButton->new(N("Submit cpuinfo")),
-				       1, $lspci = Gtk2::CheckButton->new(N("Submit lspci")),
-				      ),
-			   0, Gtk2::HSeparator->new,		
-			  );
-    $kversion->set_active(1);
-    $cpuinfo->set_active(1);
-    $lspci->set_active(1);
-}
+$table = create_packtable({ col_spacings => 5, row_spacings => 10 },
+		          [ Gtk2::Label->new(N("Select Mandrakesoft Tool:")), $comb_app = Gtk2::ComboBox->new_text ],
+                          [ Gtk2::Label->new(N("or Application Name\n(or Full Path):")), 
+			  gtkpack_(Gtk2::HBox->new(0,5),
+				   1, $com_app = gtkset_editable(Gtk2::Entry->new, 1), 
+				   0, $button_pkg = Gtk2::Button->new(N("Find Package")),
+				  )],
+			  [ Gtk2::Label->new(N("Package: ")), $package = Gtk2::Entry->new_with_text("...") ], # complain on gtk-perl@ml
+			  [ Gtk2::Label->new(N("Kernel:")), gtkset_editable(Gtk2::Entry->new_with_text($kernel_release), 0) ]
+                         );
+$comb_app->set_popdown_strings("", sort(@generic_tool));
 
 gtkadd($window->{window},
        gtkpack_(Gtk2::VBox->new(0,5),
+                0, gtkpack(Gtk2::HBox->new(0,0),
+		           gtkpack(gtkset_justify(Gtk2::WrappedLabel->new(formatAlaTeX(N("%s", $mandrake_release))), "left")),
+			 ),
+		0, gtkpack(Gtk2::HSeparator->new),
 		0, gtkadd($table),
-		1, gtkadd($extra_data),
 		0, gtkpack(Gtk2::HBox->new(0,0),
-			   gtkpack(gtkset_justify(Gtk2::WrappedLabel->new(formatAlaTeX(N("To submit a bug report, click on the report button.\nThis will open  a web browser window on %s\n where you'll find a form to fill in.  The information displayed above will be \ntransferred to that server.", $wizard_name))), "left")),
+			   gtkpack(gtkset_justify(Gtk2::WrappedLabel->new(formatAlaTeX(N("To submit a bug report, click on the report button.  \nThis will open a web browser window on %s where you'll find a form to fill in.  The information displayed above will be transferred to that server.  \nThings useful to include in your report are the output of lspci, kernel version, and /proc/cpuinfo.", $wizard_name))), "left")),
 			  ),
 		0, gtkpack(Gtk2::HSeparator->new),
 		0, gtkpack_(Gtk2::HBox->new(0,0),
 			    0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { system("drakhelp --id drakbug &") }),
 			    1, Gtk2::Label->new(""),
 			    0, gtksignal_connect(Gtk2::Button->new(N("Report")), clicked => sub {
-						     if ($stable_release == 0) { 
 							 my $options = "mdkbugreport=1";
 							 $options .= "&incident=1" if $incident;
 							 my $p = $package->get_text;
@@ -136,34 +111,31 @@ gtkadd($window->{window},
 							 my $app = $comb_app->entry->get_text;
 							 my $component = if_(member($app, @all_drakxtools), $app) || $mdk_app->{$app};
 							 $options .= "&product=$product" if $product;
-							 $options .= "&component=$component" if $component;
+							 # this could probably be cleaner but whatever, it works (vdanen)
+							 if ($component eq "scannerdrake" && $product ne "drakxtools") {
+							     $component = $product;
+							 }
+							 $options .= "&component=$component";
 							 $options .= "&version=$version" if $version;
-							 $options .= "&kernel=$kernel_release";
+							 $options .= "&distro_code=$distrocode";
+							 $options .= "&kernel=$kernel_release" if $kernel_release;
 							 print($bugzilla . "?" . $options . "\n");
 							 connect_bugzilla($bugzilla . "?" . $options);
-						      } else {
-							  # anthill variant - we'll create a text file, then connect to upload
-							  my $check = write_anthill_file(); 
-							  connect_bugzilla($bugzilla) if !$check;
-						      }
 						 }
 						),
 			    0, gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
 			   )));
 
-if ($stable_release == 0) {
-    if (defined $prog) {
-    	update_app($prog); 
-    	$comb_app->set_text($prog);
-    };
-    $comb_app->entry->signal_connect('changed', sub { update_app($comb_app->entry->get_text) });
-} else {
-    $window->{window}->set_size_request(600, 460);
-    $button_pkg->signal_connect('clicked', sub { 
-				    my $pkg_name = get_pkg_name($comb_app->get_text);
+if (defined $prog) {
+    update_app($prog); 
+    $comb_app->set_text($prog);
+};
+$comb_app->entry->signal_connect('changed', sub { update_app($comb_app->entry->get_text) });
+
+$button_pkg->signal_connect('clicked', sub { 
+				    my $pkg_name = get_package($com_app->get_text);
 				    $package->set_text($pkg_name);
 				});
-}
 
 $window->{window}->show_all;
 $window->main;
@@ -206,27 +178,11 @@ sub get_package {
     $rpm_package;
 }
 
-sub get_pkg_name {
-    my ($executable) = @_;
-    my $which_app = chomp_(`which '$executable' 2> /dev/null`);
-    my $rpm_package;
-    if ($which_app eq "") {
-	$rpm_package = chomp_(`rpm -q '$executable' --qf '%{NAME}' 2>&1`);
-    } else {
-	$rpm_package = chomp_(`rpm -qf '$which_app' --qf '%{NAME}' 2>&1`);
-    }
-    $rpm_package = chomp_(`rpm -qf '$executable' --qf '%{NAME}' 2>&1`) if $rpm_package =~ /not installed$/;
-    $rpm_package = (split(/-2/, $rpm_package))[0] if $rpm_package =~ /^kernel/;
-    $rpm_package ||= N("NOT FOUND");
-    $rpm_package;
-}
-
 sub connect_bugzilla {
     my ($url) = @_;
-    if (!$stable_release) {
-	my $_w = create_dialog(N("Please wait"), N("connecting to %s...", $wizard_name)); 
-	sleep(3);
-    }
+# let's not force people to click ok in order to launch the browser (vdanen)
+#	my $_w = create_dialog(N("Please wait"), N("connecting to %s...", $wizard_name)); 
+#	sleep(3);
     exec $ENV{BROWSER},$url if exists $ENV{BROWSER};
     my @browser = qw(mozilla konqueror galeon);
     foreach (@browser) {
@@ -234,63 +190,4 @@ sub connect_bugzilla {
     }
     create_dialog(N("Error"), N("No browser available! Please install one"));
 }
-
-sub write_anthill_file() {
-    my $buffer = $textview->get_buffer;
-    my $siter = $buffer->get_start_iter;
-    my $eiter = $buffer->get_end_iter; 
-    $bugdesc = $buffer->get_text($siter, $eiter, 0);
-    
-    #- create anthill upload file in specified format
-    my $file;
-    open($file, "> /tmp/drakbug.report") or return 1;
-    print $file "--- BEGIN DRAKBUG REPORT ---\n";
-    print $file "%product: $mandrake_release\n";
-    my $version = arch();
-    $version = "x86" if $version =~ /^i.86/;
-    print $file "%version: $version\n";
-    my $pkg_name = $package->get_text;
-    if ($pkg_name eq "..." || $pkg_name eq "") {
-	my $_w = create_dialog(N("Error"), N("Please enter a package name."));
-	return 1;
-    }
-    print $file "%component: $pkg_name\n";
-    my $summary_text = $summary->get_text;
-    if ($summary_text eq "") {
-	my $_w = create_dialog(N("Error"), N("Please enter summary text."));
-	return 1;
-    }
-    
-    print $file "%summary: $summary_text\n";
-    print $file "%description:\n";
-    
-    #- gave me fits wanted to wrap what was wrapped in the GUI
-    #- plus include user's \n
-    my @buglist = split("\n", $bugdesc);
-    foreach my $bugdesc (@buglist) {
-	if (length($bugdesc) > 77) {
-	    $bugwrite = $bugdesc;
-	    select($file);
-	    local $~ = "PFORMAT";
-	    write $file;
-	    select(STDOUT);
-	    $bugwrite = '';
-	} else {
-	    print $file "   $bugdesc\n";
-	}
-    }
-    
-    print $file "-" x 80 . "\n";
-    print $file "Kernel: $kernel_release\n" . "Uname: " . `uname -a` . "\n" if $kversion->get_active;
-    print $file "Cpuinfo: \n" . cat_("/proc/cpuinfo") if $cpuinfo->get_active;
-    print $file "Lspci Output:\n" . `lspci` if $lspci->get_active;
-    print $file "--- END DRAKBUG REPORT ---\n";
-    close $file or return 1;
-    return 0
-}
-
-format PFORMAT =
-~~ ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-$bugwrite
-.
 
