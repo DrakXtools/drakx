@@ -189,7 +189,6 @@ my %pll_lst =
 sub config {
     my ($in) = @_;
     my %conf = (gbuffers => 4, card => $default, tuner => -1, radio => 0, pll => -1);
-#    return unless (grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' } detect_devices::probeall(1));
     if ($in->ask_from("BTTV configuration", _("For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-detect the rights parameters.
 If your card is misdetected, you can force the right tuner and card types here. Just select your tv card parameters if needed"),
 				  [
