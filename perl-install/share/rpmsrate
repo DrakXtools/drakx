@@ -606,7 +606,7 @@ SYSTEM
   5 lshw OpenIPMI dmidecode
 
   5 HIGH_SECURITY libsafe kernel-secure lads
-  5 BIGMEM kernel-enterprise
+  5 BIGMEM kernel-i686-up-4GB
   5 SMP kernel-smp
   5 PCMCIA pcmcia-cs
   5 USB hotplug
@@ -665,7 +665,7 @@ PRINTER
 
 INSTALL
   NOCOPY
-    5 kernel kernel-smp kernel-enterprise
+    5 kernel kernel-smp kernel-i686-up-4GB
       raidtools lvm2 reiserfsprogs jfsprogs xfsprogs 
       alsa-utils
     4 XFree86 brltty
