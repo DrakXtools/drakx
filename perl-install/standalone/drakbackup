@@ -72,7 +72,7 @@
 # 
 # REQUIRE:      cron if daemon
 #               cdrecord & mkisofs
-#		ftp || perl Net::FTP
+#		perl Net::FTP
 #		ssh-askpass
 #
 # PBS persistants:
@@ -84,7 +84,7 @@
 #
 #
 # TODO:
-#		4 - change NET::FTP to ftp cmds.  
+#		4 - print ftp problem for user. 
 #	        6 - calcul disk space.
 #		   use quota.
 #               7 - ssh & rsync -> expect or .identity.pub/authorized_keys 
@@ -252,7 +252,8 @@ my $passwd_user= '';
 my $save_device_tape = ();
 my $cdrw_erase = 0;
 my $no_critical_sys = 1;
-
+my $send_mail = 0;
+my $user_mail;
 
 foreach (@ARGV) {
     /--default/ and $default = 1, $mode=-1;
@@ -307,6 +308,7 @@ sub save_conf_file {
 		     "HOST_PATH=$host_path\n",
 		     "NET_PROTO=$net_proto\n",
 		     "CD_TIME=$cd_time\n",
+		     "USER_MAIL=$user_mail\n",		     
 		     "DAEMON_TIME_SPACE=$when_space\n",
 		     "CDRW_DEVICE=$cd_devive\n",
 		     "LOGIN=$login_user\n",
@@ -315,6 +317,7 @@ sub save_conf_file {
 		     );
     $no_critical_sys and push @cfg_list, "NO_CRITICAL_SYS\n" ; 
     $no_critical_sys or push @cfg_list, "CRITICAL_SYS\n" ; 
+    $send_mail and push @cfg_list, "SEND_MAIL\n";
     $backup_sys_versions and push @cfg_list, "SYS_INCREMENTAL_BACKUPS\n" ; 
     $backup_user_versions and push @cfg_list, "USER_INCREMENTAL_BACKUPS\n" ; 
     $backup_other_versions  and push @cfg_list, "OTHER_INCREMENTAL_BACKUPS\n" ; 
@@ -386,7 +389,7 @@ sub save_cron_files {
 sub read_conf_file {
     read_passwd();
     if (-e $cfg_file) {
-        open ( CONF_FILE, "<"."$cfg_file") || die;
+        open ( CONF_FILE, "<"."$cfg_file") || print "You must be root to read configuration file. \n" ;
         while (<CONF_FILE>) {
 	    next unless /\S/;
 	    next if /^#/;
@@ -419,7 +422,9 @@ sub read_conf_file {
 	    if (/^REMEMBER_PASS/)  { $remember_pass = 1; }
 	    if (/^LOGIN/)          { s/^LOGIN=//gi;  $login_user  = $_; $remember_pass = 1; }
 	    if (/^PASSWD/)         { s/^PASSWD=//gi; $passwd_user = $_; $remember_pass = 1; }
+	    if (/^USER_MAIL/)      { s/^USER_MAIL=//gi; $user_mail= $_; }		     
 	    if (/^USE_NET_FTP/)    { $where_net_ftp = 1;  }
+	    if (/^SEND_MAIL/)      { $send_mail = 1;  }
 	    if (/^USE_NET_SSH/)    { $where_net_ssh = 1;  }
 	    if (/^TAPE_DEVICE/)    { s/TAPE_DEVICE=//gi; $save_device_tape = $_;}
 	    if (/^CDRW_ERASE/)     { $cdrw_erase = 1;}
@@ -428,6 +433,7 @@ sub read_conf_file {
 	    if (/^OTHER_INCREMENTAL_BACKUPS/) { $backup_other_versions = 1;}
 	    if (/^NO_CRITICAL_SYS/)  { $no_critical_sys = 1;}
 	    if (/^CRITICAL_SYS/)  { $no_critical_sys = 0;}
+
 	}
 	read_cron_files();
 	$cfg_file_exist = 1;
@@ -475,6 +481,12 @@ sub ssh_client {
 #         close S;
 }
 
+sub send_mail {
+    my ($result) = @_;
+    my $date_ = `date`;
+    system("mail $user_mail -s 'DrakBackup report on $date_' < $save_path/$result "); 
+}
+
 sub build_backup_files {
     my $path_name;
     my $tar_cmd;
@@ -491,6 +503,7 @@ sub build_backup_files {
     my @list_other_;
     my @dir_content = ();
     my $file_date;
+    my $results;
 
     read_conf_file();
     the_time();    
@@ -529,6 +542,8 @@ sub build_backup_files {
  system("$tar_cmd_sys -f $save_path/backup_incr_sys$the_time.$tar_ext -T $save_path/list_incr_sys$the_time.txt");
  push @file_list_to_send_by_ftp, "$save_path/backup_incr_sys$the_time.$tar_ext";
  push @file_list_to_send_by_ftp, "$save_path/list_incr_sys$the_time.txt";
+ $results .= "\nfile: $save_path/backup_incr_sys$the_time.$tar_ext\n";
+ $results .= cat_("$save_path/list_incr_sys$the_time.txt");
 		    }
 		}
   		elsif (grep /^backup\_base\_sys/,  @dir_content) { 
@@ -542,17 +557,21 @@ sub build_backup_files {
   system("$tar_cmd_sys -f $save_path/backup_incr_sys$the_time.$tar_ext -T $save_path/list_incr_sys$the_time.txt");
   push @file_list_to_send_by_ftp, "$save_path/backup_incr_sys$the_time.$tar_ext";
   push @file_list_to_send_by_ftp, "$save_path/list_incr_sys$the_time.txt";
+  $results .= "\nfile: $save_path/backup_incr_sys$the_time.$tar_ext\n";
+  $results .= cat_("$save_path/list_incr_sys$the_time.txt");
 		    }
 		   }
 		else { 
   system("$tar_cmd_sys -f $save_path/backup_base_sys$the_time.$tar_ext @sys_files"); 
   push @file_list_to_send_by_ftp, "$save_path/backup_base_sys$the_time.$tar_ext";
+  $results .= "\nfile: $save_path/backup_base_sys$the_time.$tar_ext\n";
 		}
 	    }
 	    else {
 #  system("cd $save_path && rm -f backup_sys* backup_base_sys* backup_incr_sys*");
   system("$tar_cmd_sys -f $save_path/backup_sys$the_time.$tar_ext @sys_files");
   push @file_list_to_send_by_ftp, "$save_path/backup_sys$the_time.$tar_ext";
+  $results .= "\nfile: $save_path/backup_sys$the_time.$tar_ext\n";
 	    }
 	}
 	
@@ -563,6 +582,7 @@ sub build_backup_files {
   system("cd $save_path && rm -f backup_other* ");
   system("$tar_cmd_other -f $save_path/backup_other$the_time.$tar_ext @list_other");
   push @file_list_to_send_by_ftp, "$save_path/backup_other$the_time.$tar_ext";
+  $results .= "\nfile: $save_path/backup_other$the_time.$tar_ext\n";
 	    foreach (@list_other) { push @list_other_, $_ . "\n"; }
 	    output_p( $save_path . '/list_other', @list_other_);    
 	}
@@ -586,6 +606,8 @@ sub build_backup_files {
  system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext -T $save_path/list_incr_user_$user$the_time.txt");
  push @file_list_to_send_by_ftp, "$save_path/backup_incr_user_$user$the_time.$tar_ext";
  push @file_list_to_send_by_ftp, "$save_path/list_incr_user_$user$the_time.txt";
+ $results .= " \nfile: $save_path/backup_incr_user_$user$the_time.$tar_ext";
+ $results .= cat_("$save_path/list_incr_user_$user$the_time.txt");
 			}
 		    }
 		    elsif (grep /^backup\_base\_user\_$user\_/, @dir_content) { 
@@ -599,16 +621,20 @@ sub build_backup_files {
  system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext -T $save_path/list_incr_user_$user$the_time.txt");
  push @file_list_to_send_by_ftp, "$save_path/backup_incr_user_$user$the_time.$tar_ext";
  push @file_list_to_send_by_ftp, "$save_path/list_incr_user_$user$the_time.txt";
+ $results .= "\nfile: $save_path/backup_incr_user_$user$the_time.$tar_ext";
+ $results .= cat_("$save_path/list_incr_user_$user$the_time.txt");
 			}
 		    }
 		    else {
 			system("$tar_cmd_user -f $save_path/backup_base_user_$user$the_time.$tar_ext $path_name");
 			push @file_list_to_send_by_ftp, "$save_path/backup_base_user_$user$the_time.$tar_ext";
+			$results .= "\nfile: $save_path/backup_base_user_$user$the_time.$tar_ext";
 		    }
 		} else {
 		    system("cd $save_path && rm -f backup_user_$_* backup_base_user_$_* backup_incr_user_$_*");
 		    system("$tar_cmd_user -f $save_path/backup_user_$_$the_time.$tar_ext $path_name");
 		    push @file_list_to_send_by_ftp, "$save_path/backup_user_$_$the_time.$tar_ext";
+		    $results .= "\nfile: $save_path/backup_user_$user$the_time.$tar_ext";
 		}
 	    }
 	}
@@ -622,7 +648,10 @@ sub build_backup_files {
     if ($where_net_ftp) {
 	ftp_client();
     }
-    if ($where_cd)      { }
+    if ($where_cd) { 
+    }
+    output_p( $save_path . "/results/results$the_time", $results);    
+    $send_mail and send_mail("/results/results$the_time");
 }
 
 sub list_remove {
@@ -1044,7 +1073,7 @@ sub advanced_where_cd {
 	 0, gtkpack_(new Gtk::HBox(0,10),
 	   0, gtkset_sensitive(new Gtk::Label(_(" Please check if you want to include\n install boot on your CD.")),  $where_cd),
 	   1, new Gtk::VBox(0, 5),
-	   0, gtkset_sensitive(my $check_cd_with_install_boot = new Gtk::CheckButton(), $where_cd),
+ 	   0, gtkset_sensitive(my $check_cd_with_install_boot = new Gtk::CheckButton(), $where_cd),
 		     ),
 	 0, new Gtk::VBox(0, 5),
 	 0, gtkpack_(new Gtk::HBox(0,10),
@@ -1300,13 +1329,20 @@ sub advanced_options{
 				 0, gtkpack_(new Gtk::VBox(0,10),
 					     0, gtkset_sensitive(my $check_tar_bz2  = new Gtk::CheckButton( _(" Use Tar and bzip2  ( very slow) [please be careful if you\n (un)select this option all your old backups will be deleted ]") ), 0),
 			 0, gtkset_sensitive(my $check_backupignore = new Gtk::CheckButton( _(" Use .backupignore files")), 0),
+				 0, gtkpack_(new Gtk::HBox(0,10),
+					     0, my $check_mail = new Gtk::CheckButton( _("Send mail after each backup to :")),
+					     1, new Gtk::HBox(0,10),
+					     0, my $mail_entry = new Gtk::Entry(),
 					     ),
-				 ),
+					     ),
+				    ),
 	    );
-    foreach ([$check_tar_bz2, \$comp_mode], [$check_backupignore, \$backupignore]) {
+    foreach ([$check_tar_bz2, \$comp_mode], [$check_backupignore, \$backupignore], [$check_mail, \$send_mail]) {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
 	}
+    $mail_entry->set_text( $user_mail );
+    $mail_entry->signal_connect( 'changed', sub { $user_mail = $mail_entry->get_text()});
     $custom_help = "options";
     $current_widget = \&advanced_options;
     $previous_widget =\&advanced_box;
