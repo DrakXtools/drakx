@@ -251,6 +251,9 @@ enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attr
 	char ** net_devices = NULL; /* fucking compiler */
 #endif
 
+	if (module_already_present(mod_name))
+		return INSMOD_OK;
+
 	log_message("have to insmod %s", mod_name);
 
 	if (disable_modules) {
