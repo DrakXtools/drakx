@@ -191,7 +191,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 										    $button->get_active and $function->()
 										});
 							      my $b;
-                                         if ($_->[1] ne "") { $b = gtkcreate_img($_->[1]) } else { $b = () };
+                                         if ($_->[1] ne "") { $b = gtkcreate_img($_->[1]) } else { undef $b };
 							      gtksignal_connect(gtkadd($button,
 										       gtkpack__(new Gtk2::VBox(0,3),
 												 $b,
