@@ -349,6 +349,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %changelog
 * Fri Nov 12 2004 Rafael Garcia-Suarez <rgarciasuarez@mandrakesoft.com> 10.2-0.2mdk
 - Rebuild for new perl
+- drakauth (pixel):
+  o correctly restore pam.d/system-auth when setting "local" authentication 
+  o no use_first_pass on "auth sufficient pam_unix.so" line for pam_castella
+- localedrake: switch zh_CN to GBK (Funda Wang)
+- logdrake: speed it up
 
 * Wed Nov 10 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.1mdk
 - drakauth: add SmartCard authentication (pixel)
