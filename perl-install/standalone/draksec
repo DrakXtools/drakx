@@ -42,6 +42,9 @@ $ugtk2::wm_icon = "/usr/share/mcc/themes/default/draksec-mdk.png";
 my ($w, %fields);
 
 ############################    I18N     ###################################
+
+my @help;
+
 my %translations = (
 	'ALL'     => N("ALL"),
 	'LOCAL'   => N("LOCAL"),
@@ -137,13 +140,33 @@ sub new_nonedit_combo {
     Gtk2::ComboBox->new_with_strings([ to_i18n(@$string_list) ], to_i18n($o_default_value));
 }
 
-my $tip;
+sub register_help_page {
+     my ($domain) = @_;
+     push @help,
+       ([ 
+         [ $domain . "\n\n", 
+           {
+            justification => 'center',
+            scale => Gtk2::Pango->PANGO_SCALE_LARGE,
+            weight => Gtk2::Pango->PANGO_WEIGHT_BOLD, 
+           },
+         ],
+         [ N("Description of the fields:\n\n"), ],
+        ],
+       );
+}
 
-sub set_help_tip {
-     my ($entry, $default, $opt) = @_;
+
+sub register_help_entry {
+     my ($label, $default, $opt) = @_;
      my $help = $security::help::help{$opt};
-     my $tips ||= Gtk2::Tooltips->new;
-     gtkset_tip($tips, $entry, formatAlaTeX($help) . "\n" . N("(default value: %s)", to_i18n($default)));
+     push @{$help[-1]},
+       ([
+         formatAlaTeX($label) . ":\n",
+         {  foreground => "royalblue3" },
+        ],
+        [ join("\n", formatAlaTeX($help), N("(default value: %s)", to_i18n($default)), "\n") ]
+       );
 }
 
 my $msec = new security::msec;
@@ -206,13 +229,12 @@ my @yesno_choices    = qw(yes no default ignore);
 my @alllocal_choices = qw(ALL LOCAL NONE default);
 my @all_choices = (@yesno_choices, @alllocal_choices);
 my %options_values;
-my $help_msg = N("The following options can be set to customize your\nsystem security. If you need an explanation, look at the help tooltip.\n");
 
 foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ]) {
     my ($domain, $label) = @$_;
+    register_help_page($label);
     my %values;
     gtkappend_page($notebook, gtkshow(gtkpack_(Gtk2::VBox->new,
-                                            0, Gtk2::Label->new($help_msg),
                                             1, create_scrolled_window(create_packtable($common_opts,
                                                                                        map {
                                                                                            my $i = $_;
@@ -228,7 +250,7 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                                $entry = $values{$i};
                                                                                            }
                                                                                            $entry->set_text(to_i18n($msec->get_function_value($opt)));
-                                                                                           set_help_tip($entry, $default, $opt);
+                                                                                           register_help_entry($i, $default, $opt);
                                                                                            [ Gtk2::WrappedLabel->new($i), resize($values{$i}) ];
                                                                                        } sort map { $fields{$_} || $_ } $msec->list_functions($domain),
                                                                                       ),
@@ -243,18 +265,20 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
 ######################## PERIODIC CHECKS ###################################
 my %security_checks_value;
 
+my $check_string = N("Periodic Checks");
+
+register_help_page($check_string);
 gtkappend_page($notebook, gtkshow(gtkpack_(Gtk2::VBox->new,
-                                        0, Gtk2::Label->new($help_msg),
                                         1, create_scrolled_window(create_packtable($common_opts,
                                                                                    map {
                                                                                        my $i = $_;
                                                                                        my $opt = $inv_fields{$i} || $i;
                                                                                        $security_checks_value{$i} = new_nonedit_combo([ 'yes', 'no', 'default' ], $msec->get_check_value($opt));
                                                                                        my $entry = $security_checks_value{$i}->entry;
-                                                                                       set_help_tip($entry, $msec->get_check_default($opt), $opt);
+                                                                                       register_help_entry($i, $msec->get_check_default($opt), $opt);
                                                                                        [ gtkshow(Gtk2::WrappedLabel->new($i)), resize($security_checks_value{$i}) ];
                                                                                    } sort map { $fields{$_} || $_ } $msec->list_checks)))),
-                       Gtk2::Label->new(N("Periodic Checks")));
+                       Gtk2::Label->new($check_string));
 
 
 ####################### OK CANCEL BUTTONS ##################################
@@ -310,9 +334,29 @@ gtkpack_($vbox,
                             }
                             },
                             undef, undef, '',
-                            [ N("Help"), sub { unless (fork()) { exec("drakhelp --id draksec") } } ],
+                            [ N("Help"), sub {
+                                  my $text = Gtk2::TextView->new;
+                                  create_dialog(N("Help"), 
+                                                gtktext_insert($text,
+                                                               [
+                                                                # -1 b/c of main page:
+                                                                @{$help[$notebook->get_current_page-1]}
+                                                               ]
+                                                              ),
+                                                { use_markup => 1,
+                                                  if_(!$::isEmbedded, transient => $w->{window}),
+                                                  height => 400,
+                                                  width => 600,
+                                                  scroll => 1,
+                                                },
+                                               );
+                              } ],
                            ),
         );
+
+$notebook->signal_connect("switch-page" => sub { $oc->{buttons}{N("Help")}->set_sensitive($_[2]) });
+
+$oc->{buttons}{N("Help")}->set_sensitive(0);
 $oc->{cancel}->can_default(1);
 $oc->{cancel}->grab_default;
 
