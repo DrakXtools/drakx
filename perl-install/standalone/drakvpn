@@ -968,6 +968,6 @@ sub ask_info2 {
                      { label => N("Encryption algorithm"), val => \$proposal_remote_section->{2}[1], type => 'entry' },
                      { label => N("Hash algorithm"), val => \$proposal_remote_section->{3}[1], type => 'entry' },
                      { label => N("Authentication method"), val => \$proposal_remote_section->{4}[1], type => 'entry' },
-                     { label => N("DH group"), val => \$proposal_remote_section->{5}[1], type => 'entry' },
+                     { label => N("DH group"), val => \$proposal_remote_section->{5}[1], list => [ qw(modp768 modp1024 modp1536) ], },
                    ]);
 }
