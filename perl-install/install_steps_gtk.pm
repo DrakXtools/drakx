@@ -610,11 +610,12 @@ sub summary_prompt {
 
     my $set_entry_labels;
     my @table;
-    my %group;
+    my $group;
     foreach my $e (@$l) {
-	$group{$e->{group}} ||= do {
-	    push @table, [ gtkpack__(Gtk2::HBox->new(0, 0), $e->{group}), '' ];
-	};
+	if ($group ne $e->{group}) {
+	    $group = $e->{group};
+	    push @table, [ gtkpack__(Gtk2::HBox->new(0, 0), $group), '' ];
+	}
 	$e->{widget} = Gtk2::Label->new;
 	$e->{widget}->set_property(wrap => 1);
 	$e->{widget}->set_size_request($::real_windowwidth * 0.72, -1);
