@@ -607,8 +607,10 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	finish_frontend();
 	return 0;
 #else
-	if (getenv("DEBUGSTAGE1"))
+	if (getenv("DEBUGSTAGE1")) {
+		set_param(MODE_DEBUGSTAGE1);
 		set_param(MODE_TESTING);
+        }
 
 	if (!IS_TESTING) {
 		mkdir(SLASH_LOCATION, 0755);
