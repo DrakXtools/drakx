@@ -77,6 +77,47 @@ sub compute_headerCRC32 {
     crc32(pack($main_format, @$info{@$main_fields}));
 }
 
+sub read_header {
+    my ($sector, $F) = @_;
+    my $tmp;
+
+    c::lseek_sector(fileno($F), $sector, 0) or die "reading of partition in sector $sector failed";
+
+    sysread $F, $tmp, psizeof($main_format) or die "error while reading partition table in sector $sector";
+    my %info; @info{@$main_fields} = unpack $main_format, $tmp;
+    
+    $info{magic} eq $magic or die "bad magic number";
+    $info{myLBA} == $sector or die "myLBA is not the same";
+    $info{headerSize} == psizeof($main_format) or die "bad partition table header size";
+    $info{partitionEntrySize} == psizeof($partitionEntry_format) or die "bad partitionEntrySize";
+    $info{revision} <= $current_revision or log::l("oops, this is a new GPT revision ($info{revision} > $current_revision)");
+
+    $info{headerCRC32} == compute_headerCRC32(\%info) or die "bad partition table checksum";
+    \%info
+}
+
+sub read_partitionEntries {
+    my ($info, $F) = @_;
+    my $tmp;
+
+    c::lseek_sector(fileno($F), $info->{partitionEntriesLBA}, 0) or die "can't seek to sector partitionEntriesLBA";
+    sysread $F, $tmp, psizeof($partitionEntry_format) * $info->{nbPartitions} or die "error while reading partition table in sector $info->{partitionEntriesLBA}";
+    $info->{partitionEntriesCRC32} == crc32($tmp) or die "bad partition entries checksum";
+
+    c::lseek_sector(fileno($F), $info->{partitionEntriesLBA}, 0) or die "can't seek to sector partitionEntriesLBA";
+    my %gpt_types_rev = reverse %gpt_types;
+    my @pt = 
+      map {
+	sysread $F, $tmp, psizeof($partitionEntry_format) or die "error while reading partition table in sector $info->{partitionEntriesLBA}";
+	my %h; @h{@$partitionEntry_fields} = unpack $partitionEntry_format, $tmp;
+	$h{size} = $h{ending} - $h{start};
+	$h{type} = $gpt_types_rev{$h{gpt_type}};
+	$h{type} = 0x100 if !defined $h{type};
+	\%h;
+    } (1 .. $info->{nbPartitions});
+    \@pt;
+}
+
 sub read {
     my ($hd, $sector) = @_;
     my $tmp;
@@ -88,91 +129,105 @@ sub read {
     my $myLBA = $l[0]{start};
 
     local *F; partition_table_raw::openit($hd, *F) or die "failed to open device";
-    c::lseek_sector(fileno(F), $myLBA, 0) or die "reading of partition in sector $sector failed";
+    my $info1 = eval { read_header($myLBA, *F) };
+    my $info2 = eval { read_header($info1->{alternateLBA} || $l[0]{start} + $l[0]{size} - 1, *F) }; #- what about using $hd->{totalsectors} ???
+    my $info = $info1 || { %$info2, myLBA => $info2->{alternateLBA}, alternateLBA => $info2->{myLBA}, partitionEntriesLBA => $info2->{alternateLBA} + 1 } or die;
+    my $pt = $info1 && $info2 ? 
+	eval { $info1 && read_partitionEntries($info1, *F) } || read_partitionEntries($info2, *F) :
+	read_partitionEntries($info, *F);
+    $hd->raw_removed($pt);
 
-    sysread F, $tmp, psizeof($main_format) or die "error while reading partition table in sector $sector";
-    my %info; @info{@$main_fields} = unpack $main_format, $tmp;
-    
-    $info{magic} eq $magic or die "bad magic number";
-    $info{myLBA} == $myLBA or die "myLBA is not the same";
-    $info{headerSize} == psizeof($main_format) or die "bad partition table header size";
-    $info{partitionEntrySize} == psizeof($partitionEntry_format) or die "bad partitionEntrySize";
-    $info{revision} <= $current_revision or log::l("oops, this is a new GPT revision ($info{revision} > $current_revision)");
-
-    $info{headerCRC32} == compute_headerCRC32(\%info) or die "bad partition table checksum";
-
-    c::lseek_sector(fileno(F), $info{partitionEntriesLBA}, 0) or die "can't seek to sector partitionEntriesLBA";
-    sysread F, $tmp, psizeof($partitionEntry_format) * $info{nbPartitions} or die "error while reading partition table in sector $sector";
-    $info{partitionEntriesCRC32} == crc32($tmp) or die "bad partition entries checksum";
-
-    c::lseek_sector(fileno(F), $info{partitionEntriesLBA}, 0) or die "can't seek to sector partitionEntriesLBA";
-    my %gpt_types_rev = reverse %gpt_types;
-    my @pt = 
-      grep { $_->{size} && $_->{type} } #- compress empty partitions as kernel skip them
-      map {
-	sysread F, $tmp, psizeof($partitionEntry_format) or die "error while reading partition table in sector $sector";
-	my %h; @h{@$partitionEntry_fields} = unpack $partitionEntry_format, $tmp;
-	$h{size} = $h{ending} - $h{start};
-	$h{type} = $gpt_types_rev{$h{gpt_type}};
-	$h{type} = 0x100 if !defined $h{type};
-	\%h;
-    } (1 .. $info{nbPartitions});
-
-    [ @pt ], \%info;
+    $pt, $info;
 }
 
 # write the partition table (and extended ones)
 # for each entry, it uses fields: start, size, type, active
 sub write {
-    my ($hd, undef, $pt, $info) = @_;
+    my ($hd, $sector, $pt, $info) = @_;
 
-    local *F;
-    partition_table_raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
-    
     foreach (@$pt) {
 	$_->{ending} = $_->{start} + $_->{size};
 	$_->{gpt_type} = $gpt_types{$_->{type}} || $_->{gpt_type} || $gpt_types{0x83};
     }
+    my $partitionEntries = join('', map {
+	pack($partitionEntry_format, @$_{@$partitionEntry_fields})	
+    } (@$pt, ({}) x ($info->{nbPartitions} - @$pt)));
 
-    $info->{csum} = compute_crc($info);
+    $info->{partitionEntriesCRC32} = crc32($partitionEntries);
+    $info->{headerCRC32} = compute_headerCRC32($info);
 
+    my $info2 = { %$info, 
+		  myLBA => $info->{alternateLBA}, alternateLBA => $info->{myLBA}, 
+		  partitionEntriesLBA => $info->{alternateLBA} - psizeof($partitionEntry_format) * $info->{nbPartitions} / 512,
+		};
+    $info2->{headerCRC32} = compute_headerCRC32($info2);
+
+    {
+	# write the PMBR
+	my $pmbr = partition_table_dos::clear_raw();
+	$pmbr->{raw}[0] = { type => 0xee, local_start => $info->{myLBA}, size => $info->{alternateLBA} - $info->{myLBA} + 1 };
+	partition_table_dos::write($hd, $sector, $pmbr->{raw});
+    }
+
+    local *F;
+    partition_table_raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
+    
     c::lseek_sector(fileno(F), $info->{myLBA}, 0) or return 0;
     #- pad with 0's
     syswrite F, pack($main_format, @$info{@$main_fields}) . "\0" x 512, 512 or return 0;
 
-    c::lseek_sector(fileno(F), $info->{myLBA}, 0) or return 0;
+    c::lseek_sector(fileno(F), $info->{alternateLBA}, 0) or return 0;
+    #- pad with 0's
+    syswrite F, pack($main_format, @$info2{@$main_fields}) . "\0" x 512, 512 or return 0;
+
+    c::lseek_sector(fileno(F), $info->{partitionEntriesLBA}, 0) or return 0;
+    syswrite F, $partitionEntries or return 0;
     
+    c::lseek_sector(fileno(F), $info2->{partitionEntriesLBA}, 0) or return 0;
+    syswrite F, $partitionEntries or return 0;
 
     common::sync();
     1;
 }
 
+sub raw_removed {
+    my ($hd, $raw) = @_;
+    @$raw = grep { $_->{size} && $_->{type} } @$raw;
+}
+sub can_raw_add {
+    my ($hd) = @_;
+    @{$hd->{primary}{raw}} < $hd->{primary}{info}{nbPartitions};
+}
+sub raw_add {
+    my ($hd, $raw, $part) = @_;
+    $hd->can_raw_add or die "raw_add: partition table already full";
+    push @$raw, $part;
+}
+
 sub info {
     my ($hd) = @_;
+    my $nb_sect = 32;
 
     #- build a default suitable partition table,
     #- checksum will be built when writing on disk.
-    my $info = {
+    {
 	magic => $magic,
-	revision => $current_revision
+	revision => $current_revision,
+	headerSize => psizeof($main_format),
+	myLBA => 1,
+	alternateLBA => $hd->{totalsectors} - 1,
+	firstUsableLBA => $nb_sect + 2,
+	lastUsableLBA => $hd->{totalsectors} - $nb_sect - 2,
+	guid => 'TODO',
+        partitionEntriesLBA => 2,
+	nbPartitions => $nb_sect * 512 / psizeof($partitionEntry_format),
+	partitionEntrySize => psizeof($partitionEntry_format),
     };
-
-    $info;
 }
 
 sub clear_raw {
     my ($hd) = @_;
-    my $pt = { raw => [ ({}) x 128 ], info => info($hd) };
-
-    #- handle special case for partition 2 which is whole disk.
-    $pt->{raw}[2] = {
-	type => 5, #- the whole disk type.
-	flags => 0,
-	start_cylinder => 0,
-	size => $hd->{geom}{cylinders} * $hd->cylinder_size(),
-    };
-
-    $pt;
+    { raw => [], info => info($hd) };
 }
 
 1;
