@@ -29,20 +29,22 @@ sub ask_parameters {
 	delete $authentication->{$_} if $_ ne $kind;
     }
 
-    my $val = $authentication->{$kind} ||= '';
+    if ($kind eq 'AD') {
+	$authentication->{subkind} = $in->ask_from_list('', "text explaining SFU vs Winbind", [ 'SFU', 'winbind' ]) or return;
+    }
 
     if ($kind eq 'LDAP') {
-	$val ||= 'ldap.' . $netc->{DOMAINNAME};
+	$authentication->{LDAP_server} ||= 'ldap.' . $netc->{DOMAINNAME};
 	$netc->{LDAPDOMAIN} ||= domain_to_ldap_domain($netc->{DOMAINNAME});
 	$in->ask_from('',
 		     N("Authentication LDAP"),
 		     [ { label => N("LDAP Base dn"), val => \$netc->{LDAPDOMAIN} },
-		       { label => N("LDAP Server"), val => \$val },
+		       { label => N("LDAP Server"), val => \$authentication->{LDAP_server} },
 		     ]) or return;
-    } elsif ($kind eq 'AD') {
-	$val ||= $netc->{DOMAINNAME};
-	$authentication->{AD_server} ||= 'kerberos.' . $val;
-	$authentication->{AD_users_db} ||= 'cn=users,' . domain_to_ldap_domain($val);
+    } elsif ($kind eq 'AD' && $authentication->{subkind} eq 'SFU') {
+	$authentication->{AD_domain} ||= $netc->{DOMAINNAME};
+	$authentication->{AD_server} ||= 'kerberos.' . $authentication->{AD_domain};
+	$authentication->{AD_users_db} ||= 'cn=users,' . domain_to_ldap_domain($authentication->{AD_domain});
 
 	my %sub_kinds = my @sub_kinds = (
 	    simple => N("simple"), 
@@ -51,12 +53,12 @@ sub ask_parameters {
 	    kerberos => N("security layout (SASL/Kerberos)"),
 	);
 
-	my $AD_user = $authentication->{AD_user} =~ /(.*)\@\Q$val\E$/ ? $1 : $authentication->{AD_user};
+	my $AD_user = $authentication->{AD_user} =~ /(.*)\@\Q$authentication->{AD_domain}\E$/ ? $1 : $authentication->{AD_user};
 	my $anonymous = $AD_user;
 
 	$in->ask_from('',
 		     N("Authentication Active Directory"),
-		     [ { label => N("Domain"), val => \$val },
+		     [ { label => N("Domain"), val => \$authentication->{AD_domain} },
 		       { label => N("Server"), val => \$authentication->{AD_server} },
 		       { label => N("LDAP users database"), val => \$authentication->{AD_users_db} },
 		       { label => N("Use Anonymous BIND "), val => \$anonymous, type => 'bool' },
@@ -65,29 +67,37 @@ sub ask_parameters {
 		       { label => N("Encryption"), val => \$authentication->{sub_kind}, list => [ map { $_->[0] } group_by2(@sub_kinds) ], format => sub { $sub_kinds{$_[0]} } },
 		     ]) or return;
 	$authentication->{AD_user} = !$AD_user || $authentication->{sub_kind} eq 'anonymous' ? '' : 
-	                             $AD_user =~ /@/ ? $AD_user : "$AD_user\@$val";
+	                             $AD_user =~ /@/ ? $AD_user : "$AD_user\@$authentication->{AD_domain}";
 	$authentication->{AD_password} = '' if !$authentication->{AD_user};
 
 
     } elsif ($kind eq 'NIS') { 
-	$val ||= 'broadcast';
+	$authentication->{NIS_server} ||= 'broadcast';
+	$netc->{NISDOMAIN} ||= $netc->{DOMAINNAME};
 	$in->ask_from('',
 		     N("Authentication NIS"),
-		     [ { label => N("NIS Domain"), val => \ ($netc->{NISDOMAIN} ||= $netc->{DOMAINNAME}) },
-		       { label => N("NIS Server"), val => \$val, list => ["broadcast"], not_edit => 0 },
+		     [ { label => N("NIS Domain"), val => \$netc->{NISDOMAIN} },
+		       { label => N("NIS Server"), val => \$authentication->{NIS_server}, list => ["broadcast"], not_edit => 0 },
 		     ]) or return;
-    } elsif ($kind eq 'winbind') {
+    } elsif ($kind eq 'winbind' || $kind eq 'AD' && $authentication->{subkind} eq 'winbind') {
 	#- maybe we should browse the network like diskdrake --smb and get the 'doze server names in a list 
 	#- but networking isn't setup yet necessarily
-	$in->ask_warn('', N("For this to work for a W2K PDC, you will probably need to have the admin run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add and reboot the server.\nYou will also need the username/password of a Domain Admin to join the machine to the Windows(TM) domain.\nIf networking is not yet enabled, Drakx will attempt to join the domain after the network setup step.\nShould this setup fail for some reason and domain authentication is not working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows(tm) Domain, and Admin Username/Password, after system boot.\nThe command 'wbinfo -t' will test whether your authentication secrets are good."));
+	$in->ask_warn('', N("For this to work for a W2K PDC, you will probably need to have the admin run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add and reboot the server.\nYou will also need the username/password of a Domain Admin to join the machine to the Windows(TM) domain.\nIf networking is not yet enabled, Drakx will attempt to join the domain after the network setup step.\nShould this setup fail for some reason and domain authentication is not working, run 'smbpasswd -j DOMAIN -U USER%%PASSWORD' using your Windows(tm) Domain, and Admin Username/Password, after system boot.\nThe command 'wbinfo -t' will test whether your authentication secrets are good."))
+	  if $kind eq 'winbind';
+
+	$authentication->{AD_domain} ||= $netc->{DOMAINNAME} if $kind eq 'AD';
+	$netc->{WINDOMAIN} ||= $netc->{DOMAINNAME};
 	$in->ask_from('',
-			N("Authentication Windows Domain"),
-			[ { label => N("Windows Domain"), val => \ ($netc->{WINDOMAIN} ||= $netc->{DOMAINNAME}) },
-			  { label => N("Domain Admin User Name"), val => \$val },
+		      $kind eq 'AD' ? N("Authentication Active Directory") : N("Authentication Windows Domain"),
+		        [ if_($kind eq 'AD', 
+			  { label => N("Domain"), val => \$authentication->{AD_domain} }
+			     ),
+			  { label => N("Windows Domain"), val => \$netc->{WINDOMAIN} },
+			  { label => N("Domain Admin User Name"), val => \$authentication->{winuser} },
 			  { label => N("Domain Admin Password"), val => \$authentication->{winpass}, hidden => 1 },
 			]) or return;
     }
-    $authentication->{$kind} = $val;
+    $authentication->{$kind} ||= 1;
     1;
 }
 
@@ -97,23 +107,22 @@ sub set {
     any::enableShadow() if $authentication->{shadow};    
 
     my $kind = authentication::to_kind($authentication);
-    my $val = $authentication->{$kind};
 
-    log::l("authentication::set $kind with $val");
+    log::l("authentication::set $kind");
 
     if ($kind eq 'LDAP') {
 	$in->do_pkgs->install(qw(openldap-clients nss_ldap pam_ldap autofs));
 
 	my $domain = $netc->{LDAPDOMAIN} || do {
-	    my $s = run_program::rooted_get_stdout($::prefix, 'ldapsearch', '-x', '-h', $val, '-b', '', '-s', 'base', '+');
+	    my $s = run_program::rooted_get_stdout($::prefix, 'ldapsearch', '-x', '-h', $authentication->{LDAP_server}, '-b', '', '-s', 'base', '+');
 	    first($s =~ /namingContexts: (.+)/);
-	} or log::l("no ldap domain found on server $val"), return;
+	} or log::l("no ldap domain found on server $authentication->{LDAP_server}"), return;
 
 	set_nsswitch_priority('ldap');
 	set_pam_authentication('ldap');
 
 	update_ldap_conf(
-			 host => $val,
+			 host => $authentication->{LDAP_server},
 			 base => $domain,
 			 port => 636,
 			 ssl => 'on',
@@ -121,7 +130,7 @@ sub set {
 			 nss_base_passwd => "ou=People,$domain",
 			 nss_base_group => "ou=Group,$domain",
 			);
-    } elsif ($kind eq 'AD') {
+    } elsif ($kind eq 'AD' && $authentication->{subkind} eq 'SFU') {
 	$in->do_pkgs->install(qw(nss_ldap pam_krb5 libsasl2-plug-gssapi));
 
 	set_nsswitch_priority('ldap');
@@ -137,7 +146,7 @@ sub set {
 
 	update_ldap_conf(
 			 host => $authentication->{AD_server},
-			 base => domain_to_ldap_domain($val),
+			 base => domain_to_ldap_domain($authentication->{AD_domain}),
 			 nss_base_shadow => "$authentication->{AD_users_db}?one",
 			 nss_base_passwd => "$authentication->{AD_users_db}?one",
 			 nss_base_group => "$authentication->{AD_users_db}?one",
@@ -170,11 +179,11 @@ sub set {
     } elsif ($kind eq 'NIS') {
 	$in->do_pkgs->install(qw(ypbind autofs));
 	my $domain = $netc->{NISDOMAIN};
-	$domain || $val ne "broadcast" or die N("Can't use broadcast with no NIS domain");
-	my $t = $domain ? "domain $domain" . ($val ne "broadcast" && " server") : "ypserver";
+	$domain || $authentication->{NIS_server} ne "broadcast" or die N("Can't use broadcast with no NIS domain");
+	my $t = $domain ? "domain $domain" . ($authentication->{NIS_server} ne "broadcast" && " server") : "ypserver";
 	substInFile {
 	    $_ = "#~$_" unless /^#/;
-	    $_ .= "$t $val\n" if eof;
+	    $_ .= "$t $authentication->{NIS_server}\n" if eof;
 	} "$::prefix/etc/yp.conf";
 
 	set_nsswitch_priority('nis');
@@ -184,11 +193,13 @@ sub set {
 	    run_program::rooted($::prefix, 'nisdomainname', $domain);
 	    run_program::rooted($::prefix, 'service', 'ypbind', 'restart');
 	}) if !$::isInstall; #- TODO: also do it during install since nis can be useful to resolve domain names. Not done because 9.2-RC
-    } elsif ($kind eq 'winbind') {
-	my $domain = $netc->{WINDOMAIN};
-	$domain =~ tr/a-z/A-Z/;
+    } elsif ($kind eq 'winbind' || $kind eq 'AD' && $authentication->{subkind} eq 'SFU') {
+	my $domain = uc $netc->{WINDOMAIN};
 
-	$in->do_pkgs->install(qw(samba-winbind samba-common));
+	configure_krb5_for_AD($authentication) if $kind eq 'AD';
+
+	$in->do_pkgs->install('samba-winbind', if_($kind eq 'AD', 'pam_krb5'));
+	set_nsswitch_priority('winbind');
 	set_pam_authentication('winbind');
 
 	require network::smb;
@@ -198,7 +209,7 @@ sub set {
 	
 	#- defer running smbpassword until the network is up
 	$when_network_is_up->(sub {
-	    run_program::rooted($::prefix, 'smbpasswd', '-j', $domain, '-U', $val . '%' . $authentication->{winpass});
+	    run_program::rooted($::prefix, 'smbpasswd', '-j', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
 	});
     }
 }
@@ -340,7 +351,7 @@ sub update_ldap_conf {
 sub configure_krb5_for_AD {
     my ($authentication) = @_;
 
-    my $uc_domain = uc $authentication->{AD};
+    my $uc_domain = uc $authentication->{AD_domain};
     my $krb5_conf_file = "$::prefix/etc/krb5.conf";
 
     krb5_conf_update($krb5_conf_file,
@@ -355,11 +366,11 @@ sub configure_krb5_for_AD {
  $uc_domain = {
   kdc = $authentication->{AD_server}:88
   admin_server = $authentication->{AD_server}:749
-  default_domain = $authentication->{AD}
+  default_domain = $authentication->{AD_domain}
  }
 EOF
 		    domain_realm => <<EOF,
- .$authentication->{AD} = $uc_domain
+ .$authentication->{AD_domain} = $uc_domain
 EOF
 		    kdc => <<'EOF',
  profile = /etc/kerberos/krb5kdc/kdc.conf
