@@ -596,7 +596,12 @@ sub next_start {
 sub load {
     my ($hd, $file, $b_force) = @_;
 
-    open(my $F, $file) or die N("Error reading file %s", $file);
+    my $F;
+    if (ref $file) {
+	$F = $file;
+    } else {
+	open($F, $file) or die N("Error reading file %s", $file);
+    }
 
     my $h;
     {

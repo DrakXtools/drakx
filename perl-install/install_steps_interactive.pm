@@ -499,8 +499,8 @@ The format is the same as auto_install generated files."),
     if ($choice eq 'Load') {
 	while (1) {
 	    log::l("load package selection");
-	    my ($_h, $file) = install_any::media_browser($o, '', 'package_list.pl') or return;
-	    my $O = eval { install_any::loadO(undef, $file) };
+	    my ($_h, $fh) = install_any::media_browser($o, '', 'package_list.pl') or return;
+	    my $O = eval { install_any::loadO(undef, $fh) };
 	    if ($@) {
 		$o->ask_okcancel('', N("Bad file")) or return;
 	    } else {

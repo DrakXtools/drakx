@@ -371,17 +371,17 @@ sub More {
 sub ReadFromFile {
     my ($in, $hd) = @_;
 
-    my ($h, $file) = ('', '');
+    my ($h, $file, $fh);
     if ($::isStandalone) {
 	$file = $in->ask_file(N("Select file")) or return;
     } else {
 	undef $h; #- help perl_checker
 	my $name = $hd->{device}; $name =~ s!/!_!g;
-	($h, $file) = install_any::media_browser($in, '', "part_$name") or return;
+	($h, $fh) = install_any::media_browser($in, '', "part_$name") or return;
     }
 
     eval {
-    catch_cdie { partition_table::load($hd, $file) }
+    catch_cdie { partition_table::load($hd, $file || $fh) }
       sub {
 	  $@ =~ /bad totalsectors/ or return;
 	  $in->ask_yesorno('',

@@ -1169,15 +1169,15 @@ sub getAndSaveAutoInstallFloppies {
 sub g_default_packages {
     my ($o) = @_;
 
-    my ($_h, $file) = media_browser($o, 'save', 'package_list.pl') or return;
+    my ($_h, $fh) = media_browser($o, 'save', 'package_list.pl') or return;
 
     require Data::Dumper;
     my $str = Data::Dumper->Dump([ { default_packages => pkgs::selected_leaves($o->{packages}) } ], ['$o']);
     $str =~ s/ {8}/\t/g;
-    output($file, 
-	   "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl'\n",
-	   "# before testing.  To use it, boot with ``linux defcfg=floppy''\n",
-	   $str, "\0");
+    print $fh
+	   "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl'\n" .
+	   "# before testing.  To use it, boot with ``linux defcfg=floppy''\n" .
+	   $str . "\0";
 }
 
 sub loadO {
@@ -1202,10 +1202,14 @@ sub loadO {
 	};
 	$o = loadO($O, $f);
     } else {
-	-e "$f.pl" and $f .= ".pl" unless -e $f;
-
 	my $fh;
-	if (-e $f) { open $fh, $f } else { $fh = getFile($f) or die N("Error reading file %s", $f) }
+	if (ref $f) {
+	    $fh = $f;
+	} else {
+	    -e "$f.pl" and $f .= ".pl" unless -e $f;
+
+	    if (-e $f) { open $fh, $f } else { $fh = getFile($f) or die N("Error reading file %s", $f) }
+	}
 	{
 	    local $/ = "\0";
 	    no strict;
@@ -1552,7 +1556,12 @@ sub media_browser {
 		if (-e $file && $save) {
 		    $in->ask_yesorno('', N("File already exists. Overwrite it?")) or next;
 		}
-		return $h, $file if $save || -e $file;
+		if ($save) {
+		    return $h, $file;
+		} else {
+		    my $fh;
+		    open($fh, $file) and return $h, $fh;
+		}
 	    }
 	    undef $h; #- help perl
 	} else {
