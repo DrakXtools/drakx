@@ -229,6 +229,15 @@ sub real_main {
           }
       };
 
+      my $delete_gateway_settings = sub {
+          my ($device) = @_;
+          #- delete gateway settings if gateway device is invalid or matches the reconfigured device
+          if (!$netc->{GATEWAYDEV} || !exists $eth_intf{$netc->{GATEWAYDEV}} || $netc->{GATEWAYDEV} eq $device) {
+              delete $netc->{GATEWAY};
+              delete $netc->{GATEWAYDEV};
+          }
+      };
+
 
       # main wizard:
       my $wiz;
@@ -858,6 +867,8 @@ If you do not know, choose 'use PPPoE'"),
                             $ethntf->{DEVICE} = "`/usr/sbin/fctStartAdsl -i`";
                             $ethntf->{MII_NOT_SUPPORTED} = "yes";
                         }
+                        #- delete gateway settings if gateway device is invalid or if reconfiguring the gateway interface
+                        exists $intf->{$ntf_name} and $delete_gateway_settings->($ntf_name);
                         # process static/dhcp ethernet devices:
                         if (exists($intf->{$ntf_name}) && member($adsl_type, qw(manual dhcp))) {
                             $ethntf->{TYPE} = "ADSL";
@@ -1072,10 +1083,7 @@ notation (for example, 1.2.3.4).")),
                         if ($auto_ip) {
                             $in->do_pkgs->install($netc->{dhcp_client});
                             #- delete gateway settings if gateway device is invalid or if reconfiguring the gateway interface to dhcp
-                            if (!$netc->{GATEWAYDEV} || !exists $eth_intf{$netc->{GATEWAYDEV}} || $netc->{GATEWAYDEV} eq $ntf_name) {
-                                delete $netc->{GATEWAY};
-                                delete $netc->{GATEWAYDEV};
-                            }
+                            $delete_gateway_settings->($ntf_name);
                         }
                         return $is_wireless ? "wireless" : "static_hostname";
                     },
