@@ -517,6 +517,10 @@ to avoid installation from this Cd-Rom image.", $medium_msg{$medium});
 	      $o->ask_yesorno('', [
 _("There was an error ordering packages:"), $1, _("Go on anyway?") ], 1) and return 1;
 	      ${$_[0]} = "already displayed";
+	  } elsif ($@ =~ /^error installing package list: (.*)/) {
+	      $o->ask_yesorno('', [
+_("There was an error installing packages:"), $1, _("Go on anyway?") ], 1) and return 1;
+	      ${$_[0]} = "already displayed";
 	  }
 	  0;
       };

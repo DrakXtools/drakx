@@ -319,7 +319,7 @@ sub psUsingHdlists {
 	chomp;
 	s/\s*#.*$//;
 	/^\s*$/ and next;
-	m/^hdlist(.*)\.cz\s*(.*)$/ or die "invalid hdlist filename $_";
+	m/^hdlist(.*)\.cz2?\s*(.*)$/ or die "invalid hdlist filename $_";
 	push @hdlists, [ $_, $1, $2 ];
     }
 
@@ -925,7 +925,7 @@ sub install($$$;$$) {
 
 	my @badpkgs = map { $_->{file} } grep { !packageFlagInstalled($_) } @transToInstall;
 	@badpkgs > 0 and
-	  cdie _("The following packages have not been installed because of errors: %s", join("\n", @badpkgs)), sub {
+	  cdie "error installing package list: " . join("\n", @badpkgs), sub {
 	      &$close();
 	      c::rpmdbClose($db);
 	  };
