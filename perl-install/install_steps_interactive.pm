@@ -1018,6 +1018,18 @@ sub summary {
 	},
     };
 
+    $::o->{miscellaneous} ||= {};
+    push @l, {
+	group => N("Network & Internet"),
+	label => N("Proxies"),
+	val => sub { $::o->{miscellaneous}{http_proxy} || $::o->{miscellaneous}{ftp_proxy} ? N("configured") : N("not configured") },
+	clicked => sub { 
+	    require network::network;
+         network::network::miscellaneous_choose($o, $::o->{miscellaneous});
+         network::network::proxy_configure($::o->{miscellaneous}) if $::testing;
+	},
+    };
+
     push @l, {
 	group => N("Security"),
 	label => N("Security Level"),
@@ -1071,7 +1083,7 @@ sub summary {
     };
 
     my $check_complete = sub {
-	$o->{raw_X} || !pkgs::packageByName($o->{packages}, 'XFree86')->flag_installed ||
+	$o->{raw_X} || !$::testing && !pkgs::packageByName($o->{packages}, 'XFree86')->flag_installed ||
 	$o->ask_yesorno('', N("You have not configured X. Are you sure you really want this?"));
     };
 
