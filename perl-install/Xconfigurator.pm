@@ -136,13 +136,6 @@ sub readMonitorsDB {
     }
 }
 
-sub rewriteInittab {
-    my ($runlevel) = @_;
-    my $f = "$prefix/etc/inittab";
-    -r $f or log::l("missing inittab!!!"), return;
-    substInFile { s/^(id:)[35](:initdefault:)\s*$/$1$runlevel$2\n/ } $f;
-}
-
 sub keepOnlyLegalModes {
     my ($card, $monitor) = @_;
     my $mem = 1024 * ($card->{memory} || ($card->{server} eq 'FBDev' ? 2048 : 99999));
@@ -1195,7 +1188,7 @@ Current configuration is:
 	    my $run = exists $o->{xdm} ? $o->{xdm} : $::auto || $in->ask_yesorno(_("X at startup"),
 _("I can set up your computer to automatically start X upon booting.
 Would you like X to start when you reboot?"), 1);
-	    rewriteInittab($run ? 5 : 3) unless $::testing;
+	    any::runlevel($prefix, $run ? 5 : 3) unless $::testing;
 	}
 	run_program::rooted($prefix, "chkconfig", "--del", "gpm") if $o->{mouse}{device} =~ /ttyS/ && !$::isStandalone;
     }

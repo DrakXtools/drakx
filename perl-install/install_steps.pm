@@ -765,7 +765,7 @@ sub configureXAfter {
     if ($o->{X}{card}{server} eq 'FBDev') {
 	unless (install_any::setupFB($o, Xconfigurator::getVGAMode($o->{X}))) {
 	    log::l("disabling automatic start-up of X11 if any as setup framebuffer failed");
-	    Xconfigurator::rewriteInittab(3) unless $::testing; #- disable automatic start-up of X11 on error.
+	    any::runlevel($o->{prefix}, 3) unless $::testing; #- disable automatic start-up of X11 on error.
 	}
     }
     if ($o->{X}{default_depth} >= 16 && $o->{X}{card}{default_wres} >= 1024) {

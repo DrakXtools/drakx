@@ -781,4 +781,15 @@ sub write_passwd_user {
     } "$prefix/etc/passwd";
 }
 
+sub runlevel {
+    my ($prefix, $runlevel) = @_;
+    my $f = "$prefix/etc/inittab";
+    -r $f or log::l("missing inittab!!!"), return;
+    if ($runlevel) {
+	substInFile { s/^id:\d:initdefault:\s*$/id:$runlevel:initdefault:\n/ } $f;
+    } else {
+	cat_($f) =~ /^id:(\d):initdefault:\s*$/ && $1;
+    }
+}
+
 1;
