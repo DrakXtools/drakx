@@ -425,4 +425,30 @@ sub wait_message {
 
 sub kill {}
 
+
+
+sub helper_separator_tree_to_tree {
+    my ($separator, $list, $formatted_list) = @_;
+    my $sep = quotemeta $separator;
+    my $tree = {};
+    
+    each_index {
+	my @l = split $sep;
+	my $leaf = pop @l;
+	my $node = $tree;
+	foreach (@l) {
+	    $node = $node->{$_} ||= do {
+		my $r = {};
+		push @{$node->{_order_}}, $_;
+		$r;
+	    };
+	}
+	push @{$node->{_leaves_}}, [ $leaf, $list->[$::i] ];
+	();
+    } @$formatted_list;
+
+    $tree;
+}
+
+
 1;
