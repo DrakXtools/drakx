@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 11mdk
+Release: 12mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -317,6 +317,21 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Feb 26 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-12mdk
+- drakbackup: use ATAPI:/dev/hdX for both 2.4/2.6 compatibility (stew)
+- drakconnect wizard:
+  o do not ask for apply settings since most just have been written
+  o only write ether config for lan...
+  o install needed packages for pppoa, pppoe, pptp
+- drakTermServ (stew):
+  o really filter symlinked kernels. nohup the dm restart
+  o don't let any kernel symlinks be visible for making NBIs
+- harddrake-ui package: requires sane-backends so that scanner
+  detection works smoothly (#8305)
+- localedrake: use xim by default for CJK languages for which we don't
+  ship good enough native gtk2 input methods (pablo)
+
+
 * Wed Feb 25 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-11mdk
 - harddrake service: 
   o look at sound cards changes on bootstrapping
