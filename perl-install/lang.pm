@@ -314,7 +314,7 @@ sub set {
 	    eval {
 		require packdrake;
 		my $packer = new packdrake("$ENV{SHARE_PATH}/locale.cz2", quiet => 1);
-		$packer->extract_archive("$ENV{SHARE_PATH}/locale", "UTF-8", split(":", $languages{$lang}[3]));
+		$packer->extract_archive("$ENV{SHARE_PATH}/locale", split(":", $languages{$lang}[3]));
 	    };
 	}
 
