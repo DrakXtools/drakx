@@ -191,7 +191,7 @@ sub list_fontpath() {
 
 sub chk_empty_xfs_path() {
     foreach my $tmp_path (@installed_fonts_path) {
-        if (every { /^fonts/ || /^type/ } all($tmp_path))) {
+        if (every { /^fonts/ || /^type/ } all($tmp_path)) {
             system("chkfontpath -r $tmp_path ")
               or print "PERL::system command failed during chkfontpath\n";
         }
@@ -284,14 +284,7 @@ sub search_dir_font() {
 
 sub search_dir_font_uninstall {
     my ($fn)  = @_;
-    my @font_list_tmp;
-    if (-d $fn) {
-        @font_list_tmp = grep { is_a_font($_) } all($fn);
-    } else {
-        push @font_list_tmp, $fn if is_a_font($fn);
-    }
-    @font_list = uniq(@font_list, @installed_fonts_full_path);
-    print "Fonts to uninstal: " . $_ . "\n" foreach @font_list;
+    print "Fonts to uninstal: " . $_ . "\n" foreach uniq(@font_list, -d $fn ? (grep { is_a_font($_) } all($fn)) : if_(is_a_font($fn), $fn));
 }
 
 sub search_dir_font_uninstall_gi() {
@@ -367,7 +360,7 @@ sub put_font_dir() {
         }
 
         if (!$so && $gs) {
-            convert_ttf_fonts([ glob("$/drakfont_dir/tmp/tmp/*.ttf") ], 1);
+            convert_ttf_fonts([ glob("$drakfont_dir/tmp/tmp/*.ttf") ], 1);
             system("cd $drakfont_dir/tmp/tmp && mv *.gsf *.pfb *.pfm ../Type1");
             system("cd $drakfont_dir/tmp/Type1 && $type1inst");
             interactive_progress($pbar2, 0.1, N("type1inst building"));
