@@ -461,16 +461,18 @@ sub ask_from_entries_refW {
 		   1, $create_widgets->(@widgets_always),
 		   if_($common->{ok} || $::isWizard, 
 		       0, $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @$l2 ? $advanced_button : ())));
+    my @adv = map { warp_text($_) } @{$common->{advanced_messages}};
+    $total_size += @adv;
     $advanced_pack = 
       gtkpack_(new Gtk::VBox(0,0),
 	       0, '',
-	       (map {; 0, new Gtk::Label($_) } map { warp_text($_) } @{$common->{advanced_messages}}),
+	       (map {; 0, new Gtk::Label($_) } @adv),
 	       0, new Gtk::HSeparator,
 	       1, $create_widgets->(@widgets_advanced));
 
     $pack->pack_start($advanced_pack, 1, 1, 0);
     gtkadd($mainw->{window}, $pack);
-    $mainw->{window}->set_usize(0, min($total_size > 10 ? 350 : 200, $::windowheight - 60)) if $has_scroll;
+    $mainw->{window}->set_usize(0, min($total_size >= 10 ? 350 : 200, $::windowheight - 60)) if $has_scroll;
     $set_advanced->(0);
     (@widgets ? $widgets[0]{w} : $common->{focus_cancel} ? $mainw->{cancel} : $mainw->{ok})->grab_focus();
 
