@@ -421,7 +421,7 @@ int in_reboot(void)
                 int i = read(fd, buf, sizeof(buf));
                 close(fd);
                 if (strstr(buf, "halt"))
-                        reboot_magic = BMAGIC_HALT;
+                        reboot_magic = BMAGIC_POWEROFF;
                 return i > 0;
         }
         return 0;
@@ -562,11 +562,11 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
                 if (reboot_magic == BMAGIC_REBOOT) {
                         printf("automatic reboot in 10 seconds\n");
                         sleep(10);
-                        reboot(0xfee1dead, 672274793, reboot_magic);
                 } else {
-                        printf("you can safely turn your computer off\n");
-                        /* if I ask kernel to do BMAGIC_POWEROFF, it panics :( */
+                        printf("automatic poweroff in 15 seconds\n");
+                        sleep(15);
                 }
+                reboot(0xfee1dead, 672274793, reboot_magic);
 	} else {
 		printf("you may safely reboot or halt your system\n");
 	}
