@@ -90,7 +90,8 @@ sub removeXiBSuffix {
     $_;
 }
 sub formatXiB {
-    my ($newnb, $newbase) = (@_, 1);
+    my ($newnb, $newbase) = @_;
+    $newbase ||= 1;
     my ($nb, $base);
     my $decr = sub { 
 	($nb, $base) = ($newnb, $newbase);
