@@ -1569,7 +1569,6 @@ Do you really want to configure printing on this
 machine?",
 			   $printer::shortspooler_inv{$spooler},
 			   $securitystr))) {
-	print "##### secyes\n";
         printer::add_spooler_to_security_level($spooler, $security);
 	my $service;
 	if (($spooler eq "lpr") || ($spooler eq "lprng")) {
