@@ -205,8 +205,8 @@ use lib qw(/usr/lib/libDrakX);
 use interactive;
 
 my \$in = interactive->vnew;
-my $res = \$in->ask_okcancel(\$ARGV[0], \$ARGV[1], 1);
-$in->exit($res);
+my \$res = \$in->ask_okcancel(\$ARGV[0], \$ARGV[1], 1);
+\$in->exit(\$res);
 EOF
 
 chmod +x $RPM_BUILD_ROOT{%_datadir/harddrake/*,%_sysconfdir/X11/xinit.d/harddrake2}
