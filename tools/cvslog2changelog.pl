@@ -59,9 +59,9 @@ BEGIN {
     %users = (
 	      'gc'      => 'Guillaume Cottenceau  <gc@mandrakesoft.com>',
 	      'fpons'   => 'François Pons  <fpons@mandrakesoft.com>',
-	      'pablo'   => 'Pablo Saratxaga <pablo@mandrakesoft.com>',
-	      'damien'  => 'dam\'s <dams@idm.fr>',
-	      'install' => 'DrakX <install@mandrakesoft.com>',
+	      'pablo'   => 'Pablo Saratxaga  <pablo@mandrakesoft.com>',
+	      'damien'  => 'dam\'s  <dams@idm.fr>',
+	      'install' => 'DrakX  <install@mandrakesoft.com>',
 	      'prigaux' => 'Pixel  <pixel@mandrakesoft.com>',
 	      'flepied' => 'Frederic Lepied  <flepied@mandrakesoft.com>',
 	      'chmouel' => 'Chmouel Boudjnah  <chmouel@mandrakesoft.com>',
