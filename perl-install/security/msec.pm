@@ -148,16 +148,14 @@ sub apply_functions {
 sub apply_checks {
     my ($msec) = @_;
     my @list =  sort $msec->raw_checks_list;
-    touch($msec->{checks}{values_file}) if !-e $msec->{checks}{values_file};
-    substInFile {
-        foreach my $check (@list) { s/^$check.*\n// }
-        if (eof) {
-            print "\n", join("\n", map { 
-                my $value = $msec->get_check_value($_);
-                if_($value ne 'default', $_ . '=' . $value);
-            } @list), "\n";
-        }
-    } $msec->{checks}{values_file};
+    setVarsInSh($msec->{checks}{values_file},
+		{
+		    map {
+			my $value = $msec->get_check_value($_);
+			if_($value ne 'default', $_ => $value);
+		    } @list
+		}
+	       );
 }
 
 sub reload {
