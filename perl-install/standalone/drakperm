@@ -323,7 +323,7 @@ sub row_setting_dialog {
                                 $user  = $users->entry->get_text;
                                 $group = $groups->entry->get_text;
                             }
-			    $perms = sprintf("%o", eval(join('', "0b",
+			    $perms = sprintf("%03o", eval(join('', "0b",
 							     (map { $perms{$_}->get_active || 0 } reverse @bits),
 							     (map { my $owner = $_;map_index { $perms{$owner}{$_}->get_active || 0 } @rights } @owners))));
                             # create new item if needed (that is when adding a new one) at end of list
