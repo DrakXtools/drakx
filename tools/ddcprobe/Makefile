@@ -18,6 +18,9 @@ LDFLAGS	+= -L. -lint10 -lx86emu
 OBJS	= ddcxinfos.o vesamode.o vbe.o
 LIBS	= libint10.a libx86emu.a
 endif
+ifeq (ppc,$(ARCH))
+OBJS	= ddcxinfos.o vesamode.o of.o minifind.o
+endif
 ifeq (,$(OBJS))
 OBJS	= not_handled.o
 endif
