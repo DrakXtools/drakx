@@ -1,3 +1,305 @@
+2002/07/25  alus
+
+	* share/po/pl.po: fix
+	fix
+	one entry more clearly :)
+
+2002/07/25  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* standalone/logdrake: 
+	  - don't display services that are not installed
+	  - word wrap string correctly
+	  - cleanup
+
+2002/07/25  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: added log.
+	small code changes for upgrade.
+
+	* tools/syncrpms: no more use rpmtools.pm.
+
+	* mdk-stage1/init-data/msgboot-graphicallogo.img.bz2: new logo (simplified
+	for 9.0).
+
+2002/07/25  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/nl.po, share/po/id.po, share/po/vi.po: updated po files
+
+2002/07/25  Pixel  <pixel@mandrakesoft.com>
+
+	* my_gtk.pm: use a function icon_paths instead of @icon_paths
+	=> this ensure that $ENV{SHARE_PATH} value (used in @icon_paths) is set
+	independently of the loading order of the modules
+
+	* install_steps_interactive.pm: fix loading ide-cd (big thanks to rcc
+	<rickscafe.casablanca@gmx.net> you did
+	all the work to resolve the pb)
+	=> this fixes ide burner detection
+	Help "perl -cw" not reporting any warning
+	  - for mac free partition, use $freepart instead of $freepart_device,
+	$freepart_size ...
+	  - replace $timezone::ntp_servers by a function
+
+	* bootloader.pm: let the bootloader::mkinitrd error be seen by the GUI
+
+	* install_steps_newt.pm: please "perl -cw"
+
+	* verify_c: adapt to stuff.xs.pl instead of stuff.xs.pm
+
+	* partition_table.pm: add 0x35 partition table id meaning JFS (under OS/2)
+	(thank to Mika Laitio)
+
+	* fs.pm: noreturn is now exported, no need to
+	MDK::Common::Various::noreturn()
+
+	* common.pm: remove internal_error (which is now in MDK::Common)
+
+	* partition_table/mac.pm, timezone.pm: Help "perl -cw" not reporting any
+	warning
+	  - for mac free partition, use $freepart instead of $freepart_device,
+	$freepart_size ...
+	  - replace $timezone::ntp_servers by a function
+
+2002/07/25  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* drakxtools.spec: 12mdk
+	final batch of changes
+	11mdk
+
+	* harddrake/TODO: still less things to do
+	update
+
+	* c/stuff.xs.pl: don't copy struct pciusb_entries on the stack
+
+	* standalone/service_harddrake: merge timeout and cancel cases
+	simplify:
+	  - we don't need to set media_type, we don't use it
+	  - mouse and mass storage media use the same key, let merge their code
+	path
+
+	* interactive/newt.pm: typo fix
+
+	* Makefile.drakxtools: fix pixel "i do not need to test" fscking bug that
+	broke drakxtools
+	build :-)
+
+	* harddrake/ui.pm: remove all gtk's "no callback/signal to disconnect"
+	warnings
+	add a fields data structure:
+	  - put together field translation and field description
+	  - this enable to get rid of %reverse_fields usage & creation
+	  - this ensure all field names & translations are marked translatables
+	for gettext
+	  - move $wait declaration around its usage and explicit its destruction
+	  - remove usb debugging message needed to trace the null description
+	  bug i fixed in ldetect
+	  - simplify the device fields rendering "because of" the above
+	  - simplify the help window creation/display/destruction (only one
+	  statement left)
+	  - explicitely call interactive->exit
+	handle both old device name and new devfs name
+
+	* share/po/fr.po: update french translation
+
+	* harddrake/data.pm: only do one probeall here (there's still many in
+	detect_devices,
+	probing caching should go there)
+
+	* Makefile: use spec_test rather than test
+
+2002/07/24  alus
+
+	* share/po/pl.po: fixes
+	the last untranslated entry
+
+2002/07/24  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/cdrom.c, mdk-stage1/disk.c, mdk-stage1/tools.c,
+	mdk-stage1/stage1.h, mdk-stage1/tools.h, mdk-stage1/frontend.h,
+	mdk-stage1/probing.h, mdk-stage1/stdio-frontend.c,
+	mdk-stage1/newt-frontend.c, mdk-stage1/probing.c: enhance (complicate?
+	;p) device detection so that scsi and usb
+	detection are done only when no ide cdrom with mandrake install
+	is detected (speed up), have usb keyboard modules installed
+	before any interactive question, honour "noauto" (skip usb
+	detection and insmod'ing)
+
+2002/07/24  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/sp.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/bs.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/fr.po,
+	share/po/it.po, share/po/nl.po, share/po/eu.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/lv.po, share/po/hu.po: updated po files
+
+2002/07/24  Pixel  <pixel@mandrakesoft.com>
+
+	* Makefile, Makefile.drakxtools: add PMS_DIRS in Makefile.config and use
+	it everywhere
+	(cleaning some ugly stuff in Makefile.drakxtools while doing so)
+	=> now adding a new directory only need to be done at one place
+
+	* Xconfig/xfree3.pm, Xconfig/xfreeX.pm, mouse.pm, Xconfig/xfree4.pm,
+	Xconfig/parse.pm: new XFree handling library
+	  - only keyboard and mice functions are done, but adding the others is
+	quite easy
+	  - so for now only used in mousedrake
+	  - but keyboarddrake and (of course) XFdrake will come
+
+	* Makefile.config: add Xconfig
+	add PMS_DIRS in Makefile.config and use it everywhere
+	(cleaning some ugly stuff in Makefile.drakxtools while doing so)
+	=> now adding a new directory only need to be done at one place
+
+	* standalone/keyboarddrake: use Xconfig::xfree to set the XkbLayout
+	(better should&will come)
+
+	* c/stuff.xs.pl, c/Makefile, c/stuff.xs.pm: rename stuff.xs.pm to
+	stuff.xs.pl (since it's a prog, not a module)
+	(it helps for not having stuff.xs.pm in PMS)
+
+	* Xconfig/xfree.pm (get_both): fix returning one element (eg:
+	get_keyboard)
+	new XFree handling library
+	  - only keyboard and mice functions are done, but adding the others is
+	quite easy
+	  - so for now only used in mousedrake
+	  - but keyboarddrake and (of course) XFdrake will come
+
+	* log.pm: when testing, log on STDERR
+
+2002/07/24  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/data.pm: don't account scanners as unknown devices
+
+	* harddrake/ui.pm: scanners support:
+	  - split scannerdrake:val into vendor and description
+	  - don't display bogus "val:%HASH"
+
+2002/07/23  alus
+
+	* share/po/pl.po: fuzzy cheched
+
+2002/07/23  Christian Belisle  <cbelisle@mandrakesoft.com>
+
+	* security.pm: removal
+
+2002/07/23  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* security/msec.pm: 
+	  - fix typo: s/%%options;/%%options/
+
+2002/07/23  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: manage correctly unselectPackage and use perl-URPM >= 0.50.
+
+2002/07/23  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/probing.c: s/usb/moreprofessional/ thanks to vdanen
+
+2002/07/23  Pixel  <pixel@mandrakesoft.com>
+
+	* share/po/help-eu.pot: rebuild after replacing \" by "
+
+	* any.pm, interactive.pm: use fuzzy_pidofs (to detect if kwin is running)
+
+	* detect_devices.pm: handle computers with no /proc/scsi/scsi
+
+	* .cvsignore, share/modparm.lst, Makefile: modparm.lst is not used anymore
+	(modinfo -p)
+
+2002/07/23  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* share/po/fr.po: further translations update
+	update french translation
+
+	* drakxtools.spec: 10mdk changes
+	final changes batch
+	9mdk
+	g Move 2: partition table: hierarchy
+	  - Big Move 1: interactive::* hierarchy
+
+	* partition_table_dos.pm, partition_table/dos.pm, partition_table_mac.pm,
+	partition_table/sun.pm, partition_table/gpt.pm, partition_table_raw.pm,
+	partition_table_lvm_PV.pm, partition_table_empty.pm, standalone.pm,
+	partition_table_sun.pm, partition_table_bsd.pm, install_interactive.pm,
+	partition_table/raw.pm, partition_table.pm, any.pm,
+	partition_table/mac.pm, partition_table/bsd.pm, bootloader.pm,
+	diskdrake/hd_gtk.pm, partition_table/empty.pm, fsedit.pm,
+	partition_table/lvm_PV.pm, partition_table_gpt.pm: g Move 2: partition
+	table: hierarchy
+
+	* Makefile.config, install_steps.pm, install_steps_interactive.pm,
+	diskdrake/interactive.pm, Makefile.drakxtools, install_any.pm: g Move 2:
+	partition table: hierarchy
+	  - Big Move 1: interactive::* hierarchy
+
+	* harddrake/ui.pm: remove dead code
+	remove dead args
+	about and help windows: only show "OK" button, cancel one has no
+	purpose here
+
+	* detect_devices.pm: remove '-' before description for IBM eide hard disks
+	g Move 2: partition table: hierarchy
+
+	* standalone/service_harddrake: faster service startup
+
+	* interactive_newt.pm, interactive.pm, standalone/drakautoinst,
+	install_steps_stdio.pm, standalone/tinyfirewall, Xconfigurator.pm,
+	standalone/drakboot, standalone/diskdrake, standalone/mousedrake,
+	install_steps_newt.pm, printerdrake.pm, interactive_gtk.pm,
+	install_steps_gtk.pm, interactive/http.pm, interactive/stdio.pm,
+	interactive/newt.pm, services.pm, standalone/drakconnect,
+	standalone/drakgw, interactive/gtk.pm, interactive_http.pm,
+	interactive_stdio.pm, standalone/drakxtv: 
+	  - Big Move 1: interactive::* hierarchy
+
+	* Makefile: check make got correct tag from spec file
+	fast build: new target (fastsrpm = cvstag localsrpm)
+	g Move 2: partition table: hierarchy
+	  - Big Move 1: interactive::* hierarchy
+
+	* harddrake/data.pm: s/drakconnet/drakconnect
+
+	* harddrake/TODO: update
+
+2002/07/22  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm, mouse.pm, install2.pm, detect_devices.pm: when $::noauto,
+	hardwire no probing in detect_devices::probeall to ensure no probing is
+	never done
+
+	* share/po/help-fr.pot, share/po/help-de.pot, share/po/help-eu.pot,
+	help.pm, share/po/.cvsignore, share/po/Makefile, share/po/help-es.pot,
+	share/po/help-it.pot: 
+	  - update help.pm based on the xml manual
+	  - this fixes entities sticked together with no space in between
+	  - this also implies a few bad line-wrapping changes,
+	    but it needs to be done to have a clean state
+	    (we don't have one since 8.2beta where i updated things by hand)
+	  - put help-*.pot in CVS so that the files based on the xml manual can
+	be updated
+	  independently from DrakX.pot & .po's
+
+	* Newt/Makefile, resize_fat/Makefile, c/Makefile: ensure things build as
+	they should when perl is upgraded on compilation box
+	(using a nice scheme: make || make)
+
+2002/07/22  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer.pm, printerdrake.pm: Adapted printerdrake to CUPS 1.1.15 and
+	Perl 5.8.0 (for Foomatic).
+	Let network also be started during installation when LPRng or PDQ is the
+	spooler, so that the user can install queues to remote printers.
+
 2002/07/22  Damien Chaumette  <dchaumette@mandrakesoft.com>
 
 	* network/tools.pm: hide password in adsl configuration
