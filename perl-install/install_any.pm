@@ -655,7 +655,8 @@ sub g_auto_install {
     }
 
     local $o->{partitioning}{auto_allocate} = !$replay;
-    local $o->{autoExitInstall} = !$replay;
+    $o->{autoExitInstall} = !$replay;
+    $o->{interactiveSteps} = [ 'doPartitionDisks', 'formatPartitions'] if $replay;
 
     #- deep copy because we're modifying it below
     $o->{users} = [ @{$o->{users} || []} ];
@@ -673,12 +674,7 @@ sub g_auto_install {
 # You should check the syntax of this file before using it in an auto-install.
 # You can do this with 'perl -cw auto_inst.cfg.pl' or by executing this file
 # (note the '#!/usr/bin/perl -cw' on the first line).
-", 
-	 Data::Dumper->Dump([$o], ['$o']), if_($replay, 
-qq(\npackage install_steps_auto_install;), q(
-$graphical = 1;
-push @graphical_steps, 'doPartitionDisks', 'formatPartitions';
-)), "\0");
+", Data::Dumper->Dump([$o], ['$o']), "\0");
     $str =~ s/ {8}/\t/g; #- replace all 8 space char by only one tabulation, this reduces file size so much :-)
     $str;
 }
