@@ -581,7 +581,7 @@ sub installPackages {
     my $advertize = sub {
 	$show_advertising ? $_->hide : $_->show foreach $msg, $progress, $text;
 	gtkdestroy($advertising) if $advertising;
-	if ($show_advertising) {
+	if ($show_advertising && $_[0]) {
 	    $change_time = time();
 	    my $f = $install_any::advertising_images[$i++ % @install_any::advertising_images];
 	    log::l("advertising $f");
@@ -594,7 +594,7 @@ sub installPackages {
     $cancel->signal_connect(clicked => sub { $pkgs::cancel_install = 1 });
     $details->signal_connect(clicked => sub {
 	invbool \$show_advertising;
-	$advertize->();
+	$advertize->(1);
     });
     $advertize->();
 
@@ -615,7 +615,7 @@ sub installPackages {
 	    my $p = pkgs::packageByName($o->{packages}, $name);
 	    $last_size = c::headerGetEntry(pkgs::packageHeader($p), 'size');
 	    $text->set((split /\n/, c::headerGetEntry(pkgs::packageHeader($p), 'summary'))[0] || '');
-	    $advertize->() if $show_advertising && $total_size > 20 * sqr(1024) && time() - $change_time > 20;
+	    $advertize->(1) if $show_advertising && $total_size > 20 * sqr(1024) && time() - $change_time > 20;
 	    $w->flush;
 	} elsif ($m =~ /^Progressing installing package/) {
 	    $progress->update($_[2] ? $_[1] / $_[2] : 0);
