@@ -438,10 +438,12 @@ sub write_conf {
     &write($do_pkgs, $mouse);
     $modules_conf->write if $mouse->{device} eq "usbmouse" && !$::testing;
 
-    require Xconfig::xfree;
-    my $xfree_conf = Xconfig::xfree->read;
-    set_xfree_conf($mouse, $xfree_conf, $b_keep_auxmouse_unchanged);
-    $xfree_conf->write;
+    eval {
+	require Xconfig::xfree;
+	my $xfree_conf = Xconfig::xfree->read;
+	set_xfree_conf($mouse, $xfree_conf, $b_keep_auxmouse_unchanged);
+	$xfree_conf->write;
+    }
 }
 
 sub change_mouse_live {
