@@ -719,7 +719,7 @@ sub selectCountry {
 		  [ if_(@best, { val => \$country, type => 'list', format => \&lang::c2name,
 				 list => \@best, sort => 1 }),
 		    { val => \$ext_country, type => 'list', format => \&lang::c2name,
-		      list => [ difference2(\@countries, \@best) ], advanced => @best }
+		      list => [ difference2(\@countries, \@best) ], advanced => scalar(@best) }
 		  ]) or return;
 
     $locale->{country} = $other || !@best ? $ext_country : $country;
