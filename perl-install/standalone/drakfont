@@ -10,6 +10,7 @@
 #         - Features
 #                 - Install fonts from any directory
 #                 - Get windows fonts on any vfat partitions
+#                 - Get fonts on any partitions.
 #                 - UN-installation of any fonts (even if not installed through drakfont)
 #         - Support
 #               - Xfs
@@ -18,7 +19,9 @@
 #               - abiword
 #               - Koffice, Gnumeric, ... studying
 #               - all fonts supported by printer
-#                          ( aliases by RENDER in Xfree86 .... -> later )
+#               - anti-aliases by RENDER in Xfree86 .... 
+# 				supported by KDE.
+# 				will be supported by gnome 1.2.
 # Visual Interface:
 #         Window interface:
 #           - Fontselectiondialog widget
@@ -39,7 +42,20 @@
 #                 check-button. (by default all check)
 #           - Printer Application Fonts Support...
 #                 check-button. (by default all check)
-
+#
+# TODO:
+#     - abiword, Koffice, Gnumeric, ...  
+#     - Speedo  and Bitmap (PCF, BDF, and SNF)
+#                
+# REQUIRE:
+#     - font-tools.*.mdk.i586.rpm
+#
+# USING:
+#    -  pfm2afm:   by Ken Borgendale: Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)
+#    -  type1inst: by James Macnicol: type1inst generates files fonts.dir fonts.scale & Fontmap.
+#    -  ttf2pt1:   by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  convert ttf font files to afm and pfb fonts
+#
+#
 # directory to install fonts /usr/X11R6/lib/X11/fonts/
 # -->> /usr/X11R6/lib/X11/fonts/drakfont
 
@@ -524,6 +540,7 @@ sub help {
         - Features
                 - Install fonts from any directory
                 - Get windows fonts on any vfat partitions
+                - Get fonts on any partitions.
                 - UN-installation of any fonts (even if not installed through drakfont)
         - Support
               - Xfs
@@ -532,7 +549,9 @@ sub help {
               - abiword
               - Koffice, Gnumeric, ... studying
               - all fonts supported by printer
-                         ( aliases by RENDER in Xfree86 .... -> later )
+              - anti-aliases by RENDER in Xfree86 .... 
+				supported by KDE.
+				will be supported by gnome 1.2.
 Visual Interface:
         Window interface:
           - Fontselectiondialog widget
@@ -551,7 +570,18 @@ Visual Interface:
         Expert additional switch
           - option support:   ghostscript, Staroffice, etc...
                 check-button. (by default all check)
-          - Printer Application Fonts Support..."),
+          - Printer Application Fonts Support...
+
+________________________ ABOUT ____________________________ 
+
+
+ USING:
+    -  pfm2afm:   by Ken Borgendale: Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)
+    -  type1inst: by James Macnicol: type1inst generates files fonts.dir fonts.scale & Fontmap.
+    -  ttf2pt1:   by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  convert ttf font files to afm and pfb fonts
+
+
+"),
 			   0, new Gtk::VScrollbar($text->vadj),
 			   ),
 			     0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
