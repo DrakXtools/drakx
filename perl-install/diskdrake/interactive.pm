@@ -164,7 +164,7 @@ struct all_hds {
 
 
 sub main {
-    my ($in, $all_hds) = @_;
+    my ($in, $all_hds, $_nowizard, $do_force_reload) = @_;
 
     if ($in->isa('interactive::gtk')) {
 	require diskdrake::hd_gtk;
@@ -204,7 +204,13 @@ sub main {
 			    messages => format_part_info($current_hd, $current_part),
 			   },
 			   [ { val => \$a, list => $actions, format => \&translate, type => 'list', sort => 0, gtk => { use_boxradio => 0 } } ]) or last;
-	    $actions{$a}();
+	    my $v = eval { $actions{$a}() };
+	    if (my $err = $@) {
+		$in->ask_warn(N("Error"), formatError($err));		
+	    }
+	    if ($v eq 'force_reload') {
+		$all_hds = $do_force_reload->();
+	    }
 	    $current_hd = $current_part = '' if !is_part_existing($current_part, $all_hds);	    
 	} else {
 	    $choose_part->();
@@ -317,21 +323,19 @@ sub Auto_allocate {
 sub More {
     my ($in, $hd) = @_;
 
+    my $r;
     $in->ask_from('', '',
 	    [
 	     { val => N("Save partition table"),    clicked_may_quit => sub { SaveInFile($in, $hd);   1 } },
 	     { val => N("Restore partition table"), clicked_may_quit => sub { ReadFromFile($in, $hd); 1 } },
 	     { val => N("Rescue partition table"),  clicked_may_quit => sub { Rescuept($in, $hd);     1 } },
-	         if_($::isInstall, 
-	     { val => N("Reload partition table"), clicked => sub { 
-		   $::o->{all_hds} = fsedit::empty_all_hds();
-		   die "setstep doPartitionDisks\n" if $::setstep;
-	       } }),
+	         if_($::isInstall || 1, 
+	     { val => N("Reload partition table"), clicked_may_quit => sub { $r = 'force_reload'; 1 } }),
 	         if_($::isInstall, 
 	     { text => N("Removable media automounting"), val => \$::o->{useSupermount}, type => 'bool' },
 		 ),
 	    ],
-    );
+    ) && $r;
 }
 
 sub ReadFromFile {

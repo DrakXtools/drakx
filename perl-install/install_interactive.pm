@@ -8,6 +8,7 @@ use partition_table qw(:types);
 use partition_table::raw;
 use detect_devices;
 use install_steps;
+use install_any;
 use devices;
 use fsedit;
 use log;
@@ -40,10 +41,15 @@ sub partition_with_diskdrake {
     $o->set_help('partition_with_diskdrake');
     do {
 	$ok = 1;
+	my $do_force_reload = sub {
+	    $o->{all_hds} = fsedit::empty_all_hds();
+	    install_any::getHds($o, $o);
+	    $o->{all_hds};
+	};
 	require diskdrake::interactive;
 	{
 	    local $::expert = $::expert;
-	    diskdrake::interactive::main($o, $all_hds, $nowizard);
+	    diskdrake::interactive::main($o, $all_hds, $nowizard, $do_force_reload);
 	}
 	if (delete $o->{wizard}) {
 	    partitionWizard($o, 'nodiskdrake') or redo;
@@ -246,13 +252,12 @@ sub partitionWizard {
     if (my $sol = $o->ask_from_listf('', N("The DrakX Partitioning wizard found the following solutions:"), sub { $_[0][1] }, \@solutions)) {
 	log::l("partitionWizard calling solution $sol->[1]");
 	my $ok = eval { $sol->[2]->() };
-	die if $@ =~ /setstep/;
 	$@ and $o->ask_warn('', N("Partitioning failed: %s", $@));
 	$ok or goto &partitionWizard;
+	1;
     } else {
-	$nodiskdrake ? return : die "setstep setupSCSI\n";
+	0;
     }
-    1;
 }
 
 sub upNetwork {

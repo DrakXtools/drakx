@@ -20,7 +20,7 @@ use fsedit;
 use fs;
 
 my ($width, $height, $minwidth) = (400, 50, 5);
-my ($all_hds, $in, $current_kind, $current_entry, $update_all);
+my ($all_hds, $in, $do_force_reload, $current_kind, $current_entry, $update_all);
 my ($w, @notebook, $done_button);
 
 =begin
@@ -48,7 +48,7 @@ notebook current_kind[]
 =cut
 
 sub main {
-    ($in, $all_hds, my $nowizard) = @_;
+    ($in, $all_hds, my $nowizard, $do_force_reload) = @_;
 
     @notebook = ();
 
@@ -115,8 +115,10 @@ sub try_ {
 
     my $v = eval { $f->($in, @args, $all_hds) };
     if (my $err = $@) {
-	$err =~ /setstep/ and die '';
-    	$in->ask_warn(N("Error"), formatError($err));
+	$in->ask_warn(N("Error"), formatError($err));
+    }
+    if ($v eq 'force_reload') {	
+	$all_hds = $do_force_reload->();
     }
 
     $current_entry = '' if !diskdrake::interactive::is_part_existing($current_entry, $all_hds);
