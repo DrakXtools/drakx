@@ -23,6 +23,7 @@ my $in = vnew interactive('su');
 begin:
 my ($mouse) = mouse::detect() unless $::noauto;
 
+$::isEmbedded and kill USR2, $::CCPID;
 if (!$mouse || !$::auto) {
     $mouse ||= mouse::fullname2mouse("serial|Generic 2 Button Mouse");
     my $name = $in->ask_from_treelistf('', _("Please, choose the type of your mouse."), '|',
