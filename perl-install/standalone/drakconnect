@@ -43,7 +43,6 @@ use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_pro
 use POSIX ":sys_wait_h";
 
 my $xpm_path = "/usr/share/libDrakX/pixmaps";
-local $_ = join '', @ARGV;
 
 my ($netcnx, $netc, $intf)  = ({}, {}, {});
 my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'lan');
@@ -65,7 +64,7 @@ MDK::Common::Globals::init(
 	      connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg"
 	     );
 
-
+local $_ = join '', @ARGV;
 /--skip-wizard/ and goto manage;
 /--add/ and add_intf();
 /--del/ and del_intf();
