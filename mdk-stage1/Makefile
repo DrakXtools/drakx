@@ -236,6 +236,10 @@ tar-mkinitrd_helper: clean
 	tar cfj mkinitrd_helper.tar.bz2 mkinitrd_helper-subdir --exclude CVS
 	rm -rf mkinitrd_helper-subdir
 
+rescue-gui: rescue-gui.o frontend-common.o $(FRONTEND_LINK) $(STAGE1_LIBC)
+	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
+	$(STRIPCMD) $@
+
 
 .depend:
 	$(CPP) $(CFLAGS) -M $(ALLSRC) > .depend

@@ -1,5 +1,4 @@
 #!/usr/bin/perl
-
 #
 # Guillaume Cottenceau (gc@mandrakesoft.com)
 #
@@ -15,9 +14,13 @@
 
 
 sub cat_ { local *F; open F, $_[0] or $_[1] ? die "cat of file $_[0] failed: $!\n" : return; my @l = <F>; wantarray ? @l : join '', @l }
+sub chomp_ { my @l = map { my $l = $_; chomp $l; $l } @_; wantarray ? @l : $l[0] }
 
 
-#- start
+my @mounts = cat_('/proc/mounts');
+grep { (split)[1] =~ m|^/mnt$| } @mounts and print("/mnt is already mounted (according to /proc/mounts)\n"), exit 0;
+
+
 system('drvinst'); #- class2text seems broken, I can't detect easily only modules for SCSI storage :-(
 
 print "\nPlease wait, trying to find your root device...\n";
@@ -38,8 +41,10 @@ M: foreach (@parts) {
     for my $fs ('ext3', 'ext2', 'reiserfs', 'xfs', 'jfs') {
 	my $where = $target;
 	if (!system("mount -t $fs $dev $where 2>/dev/null")) {
-	    if (-f "$where/etc/fstab") {
-		print "Found a probable root partition on $dev (type $fs)\n";
+	    if (-r "$where/etc/fstab" && -r "$where/etc/mandrake-release") {
+		print "=> found a Mandrake root partition on $dev\n=> type $fs, version `",
+		      chomp_(cat_ "$where/etc/mandrake-release"),
+		      "'\n";
 		@fstab = cat_("$where/etc/fstab");
 		$root = $dev;
 		last M;
@@ -52,7 +57,7 @@ M: foreach (@parts) {
 }
 
 if ($root) {
-    print "\nMounting other partition from fstab on $target...\n";
+    print "\nMounting other partitions from fstab on $target...\n";
     foreach (@fstab) {
 	my ($dev, $where, $type, $opts) = split;
 	next if (!$type || $dev eq 'none' || $opts =~ /noauto/ ||
@@ -63,17 +68,24 @@ if ($root) {
 	$opts = join(',', grep { !/codepage=/ && !/iocharset/ } split(',', $opts)); #- vfat opts, we don't have the modules in rescue
 	$where = "$target$where";
 	-d $where || mkdir($where) or die "couldn't create $where\n";
-	print "Mounting $dev on $where type $type\n";
+	print "\t$dev on $where type $type\n";
 	system("mount -t $type $dev $where -o $opts");
     }
-    print "Your partitions are mounted on $target.\n".
-	  "For example you can use 'chroot $target' to simulate your system.\n".
-	  "(you can reinstall lilo that way if necessary).\n\n";
+    print "\nYour system is ready on $target.\n\n";
+} else {
+    die "Could not find your root device :-(.\n";
 }
+
 
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.4  2001/10/24 22:34:01  gc
+#- - add a GUI to the rescue
+#-   - provide guessmounts with better efficiency and output, go to console, and reboot
+#-   - provide install_bootloader which runs lilo from /mnt if it seems safe
+#- - add lsparts to rescue, which prints partitions with detected types
+#-
 #- Revision 1.3  2001/09/07 18:22:54  gc
 #- ext3, xfs, jfs
 #-

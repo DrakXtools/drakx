@@ -1,0 +1,47 @@
+#!/usr/bin/perl
+#
+# Guillaume Cottenceau (gc@mandrakesoft.com)
+#
+# Copyright 2001 MandrakeSoft
+#
+# This software may be freely redistributed under the terms of the GNU
+# public license.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+
+
+sub cat_ { local *F; open F, $_[0] or $_[1] ? die "cat of file $_[0] failed: $!\n" : return; my @l = <F>; wantarray ? @l : join '', @l }
+sub chomp_ { my @l = map { my $l = $_; chomp $l; $l } @_; wantarray ? @l : $l[0] }
+
+system('guessmounts') and die;
+
+#- this is dangerous, try to take care
+my @mounts = cat_('/proc/mounts');
+grep { (split)[1] =~ m|^/mnt$| } @mounts or die "Your root device isn't mounted on /mnt (according to /proc/mounts)\n";
+-x '/mnt/sbin/lilo' or die "/mnt/sbin/lilo isn't executable, exiting.\n";
+-r '/mnt/etc/lilo.conf' or die "/mnt/etc/lilo.conf isn't readable, exiting.\n";
+cat_('/mnt/etc/mandrake-release') =~ /Mandrake/ or die "/mnt/etc/mandrake-release doesn't contain 'Mandrake', exiting.\n";
+
+print "About to re-install Boot Loader of following Mandrake distro:\n\t",
+  chomp_(cat_ "/mnt/etc/mandrake-release"),
+  "\n=> ok? <press Enter to continue, 'n' and Enter to cancel> ";
+<STDIN> =~ /^n/i and exit 0;
+
+exec '/mnt/sbin/lilo', '-r', '/mnt';
+
+die "error: couldn't exec /mnt/sbin/lilo.\n";
+
+
+#-------------------------------------------------
+#- $Log$
+#- Revision 1.1  2001/10/24 22:34:01  gc
+#- - add a GUI to the rescue
+#-   - provide guessmounts with better efficiency and output, go to console, and reboot
+#-   - provide install_bootloader which runs lilo from /mnt if it seems safe
+#- - add lsparts to rescue, which prints partitions with detected types
+#-
+#-
+#-

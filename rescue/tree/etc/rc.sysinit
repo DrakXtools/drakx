@@ -41,11 +41,6 @@ grep -q oem /proc/cmdline && exec /etc/oem -f
 /sbin/ifconfig lo 127.0.0.1 netmask 255.0.0.0
 /sbin/route add 127.0.0.1 lo
 
-if ! grep -q noguessmounts /proc/cmdline; then
-    echo "I will try now to guess your mountpoints;"
-    echo -e "If any problems, reboot and enter \\033[1;37mrescue noguessmounts\\033[0;39m to disable this."
-    echo ""
-    guessmounts
-    echo "Press <enter> to continue"
-    read
+if ! grep -q expert /proc/cmdline; then
+    rescue-gui
 fi

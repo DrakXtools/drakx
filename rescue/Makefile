@@ -7,7 +7,7 @@ ROOTDEST = /export
 install: rescue_stage2.bz2
 	cp -f $< $(ROOTDEST)/Mandrake/base
 
-rescue_stage2.bz2: kernel_read_part list list.$(ARCH) drvinst guessmounts make_rescue_img
+rescue_stage2.bz2: kernel_read_part list list.$(ARCH) drvinst guessmounts lsparts make_rescue_img
 	./make_rescue_img
 
 clean: 

@@ -360,3 +360,7 @@ enum return_type ask_from_entries(char *msg, char ** questions, char *** answers
 			return RETURN_OK;
 	}
 }
+
+
+void suspend_to_console(void) {}
+void resume_from_suspend(void) {}

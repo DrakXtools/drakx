@@ -41,6 +41,8 @@ enum return_type ask_from_list(char *msg, char ** elems, char ** choice);
 enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_comments, char ** choice);
 enum return_type ask_from_entries(char *msg, char ** questions, char *** answers, int entry_size, void (*callback_func)(char ** strings));
 
+void suspend_to_console(void);
+void resume_from_suspend(void);
 
 void verror_message(char *msg, va_list ap);
 void vinfo_message(char *msg, va_list ap);

@@ -86,6 +86,10 @@ _ "cp ../all.modules/$main/modules.dep $tmp/modules";
 
 installown("drvinst", "/usr/bin");
 installown("guessmounts", "/usr/bin");
+installown("install_bootloader", "/usr/bin");
+installown("lsparts", "/usr/bin");
+_ "cd ../mdk-stage1 && make rescue-gui";
+installown("../mdk-stage1/rescue-gui", "/usr/bin");
 
 __ "strip $tmp/{lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
 

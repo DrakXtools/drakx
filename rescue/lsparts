@@ -1,0 +1,124 @@
+#!/usr/bin/perl
+#
+# Main author Pascal Rigaux (pixel@mandrakesoft.com)
+# Put together by Guillaume Cottenceau (gc@mandrakesoft.com)
+#
+# Copyright 1999,2000,2001 MandrakeSoft
+#
+# This software may be freely redistributed under the terms of the GNU
+# public license.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+#
+# This code is extracted from DrakX, the Mandrake Linux graphical installer.
+#   http://www.mandrakelinux.com/drakx/
+# Open development rulz, find CVS here:
+#   http://www.mandrakelinux.com/cgi-bin/cvsweb.cgi/gi/
+#
+# Detects partition types using signatures
+#
+
+sub cat_ { local *F; open F, $_[0] or $_[1] ? die "cat of file $_[0] failed: $!\n" : return; my @l = <F>; wantarray ? @l : join '', @l }
+
+sub arch() {
+    my $t = `uname -m`;
+    chomp $t;
+    $t;
+}
+
+# from Perl Cookbook / Pleac
+# http://pleac.sourceforge.net/pleac_perl/numbers.html#AEN121
+sub commify {
+    my $text = reverse $_[0];
+    $text =~ s/(\d\d\d)(?=\d)(?!\d*\.)/$1,/g;
+    return scalar reverse $text;
+}
+
+my @partitions_signatures = (
+    [ 0x8e, 0, "HM\1\0" ],
+    [ 0x83, 0x438, "\x53\xEF" ],
+    [ 0x183, 0x10034, "ReIsErFs" ],
+    [ 0x183, 0x10034, "ReIsEr2Fs" ],
+    [ 0x283, 0, 'XFSB', 0x200, 'XAGF', 0x400, 'XAGI' ],
+    [ 0x383, 0x8000, 'JFS1' ],
+    [ 0x82, 4086, "SWAP-SPACE" ],
+    [ 0x82, 4086, "SWAPSPACE2" ],
+    [ 0x7,  0x1FE, "\x55\xAA", 0x3, "NTFS" ],
+    [ 0xc,  0x1FE, "\x55\xAA", 0x52, "FAT32" ],
+arch() !~ /^sparc/ ? (
+    [ 0x6,  0x1FE, "\x55\xAA", 0x36, "FAT" ],
+) : (),
+);
+
+sub typeFromMagic {
+    my $f = shift;
+    local *F; sysopen F, $f, 0 or return;
+
+    my $tmp;
+  M: foreach (@partitions_signatures) {
+	my ($name, @l) = @$_;
+	while (@l) {
+	    my ($offset, $signature) = splice(@l, 0, 2);
+	    sysseek(F, $offset, 0) or next M;
+	    sysread(F, $tmp, length $signature);
+	    $tmp eq $signature or next M;
+	}
+	return $name;
+    }
+    return -1;
+}
+
+my %type2name = (
+		 0x1 => 'DOS 12-bit FAT',
+		 0x4 => 'DOS 16-bit FAT (up to 32M)',
+		 0x5 => 'DOS 3.3+ Extended Partition',
+		 0x6 => 'DOS FAT16',
+		 0x7 => 'NTFS (or HPFS)',
+		 0xb => 'Win98 FAT32',
+		 0xc => 'Win98 FAT32, LBA-mapped',
+		 0xe => 'Win95: DOS 16-bit FAT, LBA-mapped',
+		 0xf => 'Win95: Extended partition, LBA-mapped',
+		 0x82 => 'Linux Swap',
+		 0x83 => 'Ext2',
+		 0x183 => 'ReiserFS',
+		 0x283 => 'XFS',
+		 0x383 => 'JFS',
+		 0x85 => 'Linux extended partition',
+		 0x87 => 'NTFS volume set',
+		 0x8e => 'Linux LVM',
+		 -1 => 'unknown'
+		);
+
+
+my $params = join '', @ARGV;
+
+$params =~ /-h/ and die "usage: lsparts [-v]\n";
+$params =~ /-v/ and $verbose = 1;
+
+
+my (undef, undef, @parts) = cat_('/proc/partitions');
+
+P: foreach (@parts) {
+    my (undef, undef, $blocks, $dev) = split or next;
+    my %skip_conditions = (
+			   "Skipping <$dev> because too little blocks ($blocks)" => ($blocks <= 1),
+			   "Skipping <$dev> because doesn't end with a number (e.g. seems to not be a partition)" => ($dev !~ /\d$/),
+			  );
+    $skip_conditions{$_} and ($verbose and print(STDERR $_, "\n")), next P foreach keys %skip_conditions;
+    my $type = typeFromMagic("/dev/$dev");
+    $type and printf "$dev: %6s Mbytes, type <0x%x> (%s)\n", commify($blocks >> 10), $type, $type2name{$type};
+}
+
+
+#-------------------------------------------------
+#- $Log$
+#- Revision 1.1  2001/10/24 22:34:01  gc
+#- - add a GUI to the rescue
+#-   - provide guessmounts with better efficiency and output, go to console, and reboot
+#-   - provide install_bootloader which runs lilo from /mnt if it seems safe
+#- - add lsparts to rescue, which prints partitions with detected types
+#-
+#
