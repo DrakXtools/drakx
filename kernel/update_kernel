@@ -24,12 +24,14 @@ function create_modules() {
     perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
 
     /sbin/modinfo -f '%{filename} %{description}\n' *.o | perl -lne 'print "$1\t$2" if /(.*?)\.o "(.*)"/' > modules.description
+}
 
+function create_modules_mar() {
     echo -n "packdrake $kern: "
     ls *.o | packdrake -b9s "modules.cz" 400000
     echo "done"
     mv modules.cz ../modules.cz-$kern
-    for i in network cdrom hd usb other pcmcia all; do
+    for i in network network_gigabit_usb cdrom hd hd_usb pcmcia all; do
 	modules_var="${i}_modules"
 	eval "create_marfile ${i}_modules.mar \$$modules_var"
     done
@@ -63,8 +65,6 @@ fi
 
 ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
 
-eval `perl modules.pl images`
-
 if [ "$ARCH" == "i386" ]; then
     for i in $ALL_KERNELS/*/boot/vmlinuz*; do
 	#disable any existing resolution!!!
@@ -87,14 +87,27 @@ for i in $ALL_KERNELS/*; do
 	(
 	    mkdir all.modules/$kern
 	    cd all.modules/$kern
-	    if [ "$kern" = "$main" ]; then
-		create_modules ../../$i $kern
-	    else
-		echo "$kern ($main)"
-		create_modules ../../$i $kern 2>/dev/null
-	    fi
+
+	    create_modules ../../$i $kern
 	) || exit 1
 done
 cp -f all.modules/$main/modules.description .
+
+eval `perl modules.pl images`
+
+for i in $ALL_KERNELS/*; do
+	kern=`basename $i`
+	(
+	    cd all.modules/$kern
+
+	    if [ "$kern" = "$main" ]; then
+		create_modules_mar ../../$i $kern
+	    else
+		echo "$kern ($main)"
+		create_modules_mar ../../$i $kern 2>/dev/null
+	    fi
+	) || exit 1
+done
+
 
 ./check_mar.pl
