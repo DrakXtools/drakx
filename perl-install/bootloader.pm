@@ -1070,7 +1070,7 @@ sub write_lilo {
 	    push @entry_conf, $entry->{'read-write'} ? "read-write" : "read-only";
 	    push @entry_conf, grep { $entry->{$_} } qw(optional);
 	} else {
-	    delete $entry->{unsafe} if !$entry->{table}; #- we can't have both
+	    delete $entry->{unsafe} if $entry->{table}; #- we can't have both
 	    push @entry_conf, map { "$_=$entry->{$_}" } grep { $entry->{$_} } qw(table boot-as);
 	    push @entry_conf, grep { $entry->{$_} } qw(unsafe master-boot);
 		
