@@ -201,7 +201,7 @@ my %countries = (
 'FM' => [ N("Micronesia"),     'en_US', '4' ], #
 'FO' => [ N("Faroe Islands"),  'fo_FO', '1' ],
 'FR' => [ N("France"),         'fr_FR', '1' ],
-'GA' => [ N("Gabon"),          'fr_GA', '3' ], #
+'GA' => [ N("Gabon"),          'fr_FR', '3' ], #
 'GB' => [ N("United Kingdom"), 'en_GB', '1' ],
 'GD' => [ N("Grenada"),        'en_US', '5' ], #
 'GE' => [ N("Georgia"),        'ka_GE', '2' ],
@@ -223,7 +223,7 @@ my %countries = (
 'HM' => [ N("Heard and McDonald Islands"), 'en_US', '?' ], #
 'HN' => [ N("Honduras"),       'es_HN', '5' ],
 'HR' => [ N("Croatia"),        'hr_HR', '1' ],
-'HT' => [ N("Haiti"),          'fr_HT', '5' ],
+'HT' => [ N("Haiti"),          'fr_FR', '5' ], #
 'HU' => [ N("Hungary"),        'hu_HU', '1' ],
 'ID' => [ N("Indonesia"),      'id_ID', '2' ],
 'IE' => [ N("Ireland"),        'en_IE', '1' ],
@@ -239,7 +239,7 @@ my %countries = (
 'JP' => [ N("Japan"),          'ja_JP', '2' ],
 'KE' => [ N("Kenya"),          'en_ZW', '3' ], #
 'KG' => [ N("Kyrgyzstan"),     'en_US', '2' ], #
-'KH' => [ N("Cambodia"),       'kh_KH', '2' ],
+'KH' => [ N("Cambodia"),       'en_US', '2' ], # kh_KH not released yet
 'KI' => [ N("Kiribati"),       'en_US', '3' ], #
 'KM' => [ N("Comoros"),        'en_US', '2' ], #
 'KN' => [ N("Saint Kitts and Nevis"), 'en_US', '?' ], #
@@ -247,7 +247,7 @@ my %countries = (
 'KR' => [ N("Korea"),          'ko_KR', '2' ],
 'KW' => [ N("Kuwait"),         'ar_KW', '2' ],
 'KY' => [ N("Cayman Islands"), 'en_US', '5' ], #
-'KZ' => [ N("Kazakhstan"),     'kk_KZ', '2' ],
+'KZ' => [ N("Kazakhstan"),     'ru_RU', '2' ], #
 'LA' => [ N("Laos"),           'lo_LA', '2' ],
 'LB' => [ N("Lebanon"),        'ar_LB', '2' ],
 'LC' => [ N("Saint Lucia"),    'en_US', '5' ], #
@@ -376,7 +376,9 @@ sub list_countries {
     $options{exclude_non_installed} ? grep { -e "/usr/share/locale/".c2locale($_)."/LC_CTYPE" } @l : @l;
 }
 
-our @locales = qw(af_ZA am_ET ar_EG az_AZ be_BY bg_BG br_FR bs_BA ca_ES cs_CZ cy_GB da_DK de_AT de_BE de_CH de_DE el_GR en_AU en_CA en_GB en_IE en_NZ en_US en_ZA eo_XX es_AR es_ES es_MX et_EE eu_ES fa_IR fi_FI fr_BE fr_CA fr_CH fr_FR ga_IE gl_ES he_IL hi_IN hr_HR hu_HU hy_AM id_ID is_IS it_CH it_IT ja_JP ka_GE kl_GL ko_KR lt_LT lv_LV mi_NZ mk_MK ms_MY mt_MT nl_BE nl_NL nn_NO no_NO pl_PL pt_BR pt_PT ro_RO ru_RU sk_SK sl_SI sp_YU sr_YU sv_SE ta_IN tg_TJ th_TH tr_TR uk_UA uz_UZ vi_VN wa_BE zh_CN zh_TW);
+#- this list is built with 'cd /usr/share/i18n/locales ; echo ??_??'
+#- plus sp_YU, eo_XX, mn_MN, lo_LA, ph_PH
+our @locales = qw(af_ZA am_ET ar_AE ar_BH ar_DZ ar_EG ar_IN ar_IQ ar_JO ar_KW ar_LB ar_LY ar_MA ar_OM ar_QA ar_SA ar_SD ar_SY ar_TN ar_YE az_AZ be_BY bg_BG bn_BD bn_IN br_FR bs_BA ca_ES cs_CZ cy_GB da_DK de_AT de_BE de_CH de_DE de_LU el_GR en_AU en_BW en_CA en_DK en_GB en_HK en_IE en_IN en_NZ en_PH en_SG en_US en_ZA en_ZW es_AR es_BO es_CL es_CO es_CR es_DO es_EC es_ES es_GT es_HN es_MX es_NI es_PA es_PE es_PR es_PY es_SV es_US es_UY es_VE et_EE eu_ES fa_IR fi_FI fo_FO fr_BE fr_CA fr_CH fr_FR fr_LU ga_IE gd_GB gl_ES gv_GB he_IL hi_IN hr_HR hu_HU hy_AM id_ID is_IS it_CH it_IT iw_IL ja_JP ka_GE kl_GL ko_KR kw_GB lt_LT lv_LV mi_NZ mk_MK mr_IN ms_MY mt_MT nl_BE nl_NL nn_NO no_NO oc_FR pl_PL pt_BR pt_PT ro_RO ru_RU ru_UA se_NO sk_SK sl_SI sq_AL sr_YU sv_FI sv_SE ta_IN te_IN tg_TJ th_TH ti_ER ti_ET tl_PH tr_TR tt_RU uk_UA ur_PK uz_UZ vi_VN wa_BE yi_US zh_CN zh_HK zh_SG zh_TW sp_YU eo_XX mn_MN lo_LA ph_PH);
 
 sub standard_locale {
     my ($lang, $country, $utf8) = @_;
@@ -558,13 +560,18 @@ sub get_kde_lang {
 
     #- get it using 
     #- echo C $(rpm -qp --qf "%{name}\n" /RPMS/kde-i18n-*  | sed 's/kde-i18n-//')
-    my @valid_kde_langs = qw(C af az bg ca cs da de el en_GB eo es et fi fr he hu is it ja ko lt lv mt nl no no_NY pl pt pt_BR ro ru sl sk sr sv ta th tr uk xh zh_CN.GB2312 zh_TW.Big5);
+    my @valid_kde_langs = qw(C af ar az bg ca cs da de el en_GB eo es et fi fr he hu is it ja ko lt lv mt nb nl nn pl pt pt_BR ro ru sk sl sr sv ta th tr uk xh zh_CN.GB2312 zh_TW.Big5);
     my %valid_kde_langs; @valid_kde_langs{@valid_kde_langs} = ();
 
     my $valid_lang = sub {
 	my ($lang) = @_;
 	#- fast & dirty solution to ensure bad entries do not happen
 	$lang eq 'en' ? 'C' :
+	$lang eq 'en_US' ? 'C' :
+	$lang eq 'no' ? 'nb' :
+	$lang eq 'sp' ? 'sr' :
+	$lang eq 'zh_CN' ? 'zh_CN.GB2312' :
+	$lang eq 'zh_TW' ? 'zh_TW.Big5' :
 	  exists $valid_kde_langs{$lang} ? $lang :
 	  exists $valid_kde_langs{substr($lang, 0, 2)} ? substr($lang, 0, 2) : '';
     };
