@@ -28,8 +28,8 @@ sub busy_pids_and_files() {
 sub remove_simple_daemons {
     my (@busy) = @_;
     foreach (@busy) {
-	$_->{to_restart} = 'kdeinit kicker' if $_->{cmdline} =~ m!\b(kicker)$!;
-	$_->{to_kill} = $_->{cmdline} =~ m!\b(kdesud|kded|kio_uiserver)$!;
+	$_->{to_restart} = 'kdeinit kicker' if $_->{cmdline} =~ m!\b(kicker)\b!;
+	$_->{to_kill} = $_->{cmdline} =~ m!\b(kdesud|kded|kio_uiserver)\b!;
     }
     my @auto_killed = grep { $_->{to_restart} || $_->{to_kill} } @busy;
 
@@ -48,7 +48,7 @@ my $in = interactive->vnew;
 
 my @busy = busy_pids_and_files();
 
-my @needed_processes = (
+my $needed_processes = join('|', map { quotemeta }
 			'init',
 			'xfs',
 			'kdeinit: Running...', 
@@ -56,7 +56,7 @@ my @needed_processes = (
 			'/sbin/devfsd',
 			);
 
-if (find { member($_->{cmdline}, @needed_processes) } @busy) {
+if (find { $_->{cmdline} =~ /^($needed_processes)/ } @busy) {
     exec 'totem' if $in->ask_okcancel('', N("You can only run with no CDROM support"));
     $in->exit(1);
 }
@@ -102,7 +102,7 @@ if (@busy) {
 
 my %file2loop = do {
     my $_w = $in->wait_message('', N("Copying to memory to allow removing the CDROM"));
-    `GIVE_LOOP=1 mdk_move_loop to_memory always always_i18n totem` =~ /(.*?)=(.*)/g;
+    `GIVE_LOOP=1 mdk_move_loop to_memory always always_i18n totem nvidia` =~ /(.*?)=(.*)/g;
 };
 
 ugtk2::gtkset_mousecursor_normal(); #- for restoring a normal in any case
