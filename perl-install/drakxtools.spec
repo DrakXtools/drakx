@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.29mdk
+Release: 0.30mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,8 +314,52 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Aug 19 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.30mdk
+- drakbackup: user definable crontab entry (stew)
+
+- drakconnect:
+  o allow hostname change in mcc (poulpy)
+  o fix up/down interface detection (poulpy)
+  o fix some more previous buttons in drakconnect wizard mode
+  o fix crash on interface enabling/disabling
+  o fix lan changes (#4088)
+
+- drakfloppy:
+  o fix long-standing broken mkbootdisk call bug
+  o sort modules and directories in treeview
+  o save the options & modules list on exit and them restore it on
+    load
+  o try to be more user friendly:
+    * if no error, display a success message, then exit
+    * on error, instead of displaying the raw exit code that has no
+	 meaning for the end user, display in red the log message of
+	 mkbootdisk
+    * remove insane expert button and so called expert frame
+
+- drakpxe: match new pxe dhcp.conf configuration file (francois)
+
+- harddrake2:
+  o display the right fields description when no device is selected
+  o make dialogs be modals and transcient
+
+- diskdrake: (pixel)
+  o fix lvm managment(#4239)
+  o fix underscores being underlines (#4678)
+  o fix interaction with mcc
+
+- fix misc issues with shadow passwords and package managment
+  (francois/pixel)
+
 * Tue Aug 12 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.2-0.29mdk
+- drakconnect: fix message (#4564)
+- drakbackup: (stew)
+  o fix #4381
+  o search for files to restore
+  o fix looping in catalog restore
+  o gui enhancements (fabrice facorat)
+  o deal with users that are deleted from the system (#4541)
 - drakxtools depends on gurpmi
+- lot of misc bug fixes
 
 * Thu Aug  7 2003 Pixel <pixel@mandrakesoft.com> 9.2-0.28mdk
 - drakxservices: xinetd services have a special treatment
