@@ -1,3 +1,42 @@
+2002/03/16  dam's  <damien@mandrakesoft.com>
+
+	* network/ethernet.pm: we now consider dhcp provide GATEWAY and internet
+	connection.
+
+2002/03/16  Pixel  <pixel@mandrakesoft.com>
+
+	* network/ethernet.pm: small cleanup on untested code (need testing:)
+
+2002/03/15  fabman
+
+	* share/po/es.po: updated bad lilo/grub/yaboot translation
+	updated spanish translations
+
+2002/03/15  François Pons  <fpons@mandrakesoft.com>
+
+	* bootloader.pm: force mkinitrd *really* for bootsplash.
+	force initrd regeneration for oem on some case (maybe the cause of
+	bootsplash
+	perturbation, as maintainer don't even known why it is running correctly
+	:-)
+
+	* pkgs.pm: do not try to get synthesis if hdlist is available as an handle
+	on file (typical
+	for updates).
+
+	* share/rpmsrate: remove doublon on NVIDIA_nforce.
+	update to 6mdk for NVIDIA_nforce*
+
+2002/03/15  Pixel  <pixel@mandrakesoft.com>
+
+	* share/po/fr.po: yet again add some dropped entities from drakx-help.xml
+	add the dropped &linux-mandrake; &mandrake-linux; and a few &os-linux;
+
+	* install_steps_interactive.pm: 
+	  - remove obsolete code
+	  - the result is to use directly $availableC instead $size2install
+	which was min($availableC, $max_size)
+
 2002/03/15  dam's  <damien@mandrakesoft.com>
 
 	* share/po/ja.po: reverted ' \n' from pablo because I managed to correct
