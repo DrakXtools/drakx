@@ -1,3 +1,127 @@
+2003/02/27  alafox
+
+	* share/po/ru.po: spellchecked and updated some translations
+
+2003/02/27  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* network/network.pm: corrected HOSTNAME management
+
+2003/02/27  florin
+
+	* standalone/drakgw: read more carefully the existing network
+	configuration
+
+2003/02/27  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm: added mirror url not given.
+	fixed small typo.
+	added cancel button.
+	fixed message displayed.
+	added dialog more precisely.
+	added message box in case of error.
+
+	* share/rpmsrate: moved galaxy-gnome to X from GNOME (lmontel and dadou
+	request)
+
+	* network/adsl.pm: add sagem connection and disconnection script using
+	/etc/ppp/peers/adsl file.
+	probe user and password in /etc/ppp/options.adsl too (as produced by
+	original eagle installation),
+	sagem adsl type connection does not need to configure an ethernet
+	connection.
+
+2003/02/27  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/pci-resource/update-pci-ids.pl: don't forget gigabit network
+	adapters
+
+2003/02/27  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/he.po, share/po/sp.po, share/po/cy.po, share/po/ca.po,
+	share/po/da.po, share/po/ar.po, share/po/tg.po, share/po/bs.po,
+	share/po/uz.po, share/po/ro.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sq.po, share/po/it.po, share/po/nl.po, share/po/eu.po,
+	share/po/es.po, share/po/de.po, share/po/eo.po, share/po/el.po,
+	share/po/cs.po, share/po/bg.po, share/po/lv.po, share/po/hu.po: updated
+	pot file
+
+2003/02/27  Pixel  <pixel@mandrakesoft.com>
+
+	* fsedit.pm: /root on a separate partition gives a warning, not an error
+
+	* network/nfs.pm (check): start portmap if needed
+
+	* install_any.pm: 
+	  - add get_info_from_fstab()
+	  - use it when reading existing fstab (to get for example devfs mount)
+	have locales-xx first in default_packages so that default choosing based
+	on
+	locales works for packages in default_packages
+
+	* pkgs.pm: perl_checker fix
+	enhance packageCallbackChoices and %preferred
+	(uses new URPM::Resolve feature allowing multiple choices)
+
+	* fs.pm, standalone/diskdrake: 
+	  - add get_info_from_fstab()
+	  - use it when reading existing fstab (to get for example devfs mount)
+
+	* interactive/gtk.pm: workaround gtk suckiness (set_text in a combo
+	generates two 'change' signals, one when removing the whole, one for
+	inserting the replacement..)
+
+	* install2.pm: no mouse probe when brltty
+
+	* standalone/drakupdate_fstab: allow removing device "non kudzu flagged"
+	(for harddrake)
+
+	* bootloader.pm: use lilo-like code for selecting mapdrive or not
+	(it was buggy, always generating "map (0x81) (0x80)", even for hd2)
+
+	* share/rpmsrate: 
+	  - don't need to list packages providing a required virtual language
+	(eg: aspell-dictionnary)
+	  - replace ispell with aspell (otherwise people using evolution get
+	both aspell and ispell)
+
+2003/02/27  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/data.pm, printer/office.pm: Make OpenOffice.org opening a GUI
+	printing tool when printing with the "Generic Printer".
+
+	* standalone/scannerdrake: Do not ask for the port when the user has
+	chosen an HP MF device as scanner model.
+
+2003/02/27  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* share/po/fr.po: translate missing translations
+	fix sorting in keybordrake that was broken by bad translator
+
+	* standalone/drakconnect: fix too big internet configuration window
+
+	* standalone/service_harddrake: add ieee1394-controller alias and load
+	ohci1394 when a firewire controller appeared
+	handle configurators with options (eg: "diskdrake --removable=scd0")
+
+	* drakxtools.spec: 9.1-10mdk
+	9.1-10mdk
+	9.1-9mdk
+
+	* standalone/drakperm: make it fit in embedded mode, large enough else
+
+	* harddrake/data.pm: add ieee1394-controller alias and load ohci1394 when
+	a firewire controller appeared
+
+	* standalone/drakgw: fix embedding
+
 2003/02/27  florin
 
 	* standalone/drakgw: read more carefully the existing network
@@ -13316,7 +13440,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.795 2003/02/26 08:35:20 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.796 2003/02/27 14:35:00 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
