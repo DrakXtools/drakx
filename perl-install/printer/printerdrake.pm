@@ -1707,9 +1707,11 @@ list => [ $printer->{currentqueue}{connect},
 	  "smb://",
 	  "ncp://",
 	  "socket://",
+	  "ptal:/mlc:",
+	  "ptal:/hpjd:",
 	  "file:/",
 	  'postpipe:""',
-	  ], not_edit => 0 }, ],
+	  ], not_edit => 0, sort => 0 }, ],
 complete => sub {
     unless ($printer->{currentqueue}{connect} =~ /[^:]+:.+/) {
 	$in->ask_warn(N("Error"), N("A valid URI must be entered!"));
