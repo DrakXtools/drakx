@@ -60,7 +60,7 @@ our @tree =
      [ "VIDEO", , N("Videocard"), "video.png", "$sbindir/XFdrake",  sub { f(grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ /DISPLAY_VGA/ } @devices) }, 1 ],
      [ "TV", , N("Tvcard"), "tv.png", "/usr/bin/XawTV", sub { f(grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} eq 'PCI' || $_->{driver} eq 'usbvision' } @devices) }, 0 ],     
      [ "MULTIMEDIA_OTHER", , N("Other MultiMedia devices"), "multimedia.png", "", sub { f(grep { $_->{media_type} =~ /MULTIMEDIA_OTHER/ } @devices) }, 0 ],
-     [ "AUDIO", , N("Soundcard"), "sound.png", "$sbindir/draksound", sub { f(grep { $_->{media_type} =~ /MULTIMEDIA_AUDIO/ } @devices) }, 0 ],
+     [ "AUDIO", , N("Soundcard"), "sound.png", "$sbindir/draksound", sub { f(grep { $_->{media_type} =~ /MULTIMEDIA_AUDIO/ } @devices) }, 1 ],
      [ "WEBCAM", , N("Webcam"), "webcam.png", "", sub { 
            f(grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} ne 'PCI' || 
                       member($_->{driver}, qw(cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp pwc ultracam usbvideo)) } @devices) },
