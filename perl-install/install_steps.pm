@@ -151,6 +151,8 @@ sub doPartitionDisksAfter {
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}, $o->{raid}) ];
     fsedit::get_root_($o->{fstab}) or die "Oops, no root partition";
 
+    fs::mount_all($fstab, $prefix);
+
     if (my $s = delete $o->{stage1_hd}) {
 	my ($part) = grep { $_->{device} eq $s->{device} } @{$o->{fstab}};
 	$part->{isMounted} ?
