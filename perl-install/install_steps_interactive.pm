@@ -347,7 +347,7 @@ sub choosePackages {
 		my @l = (300, 700, round_up(min($max_size, $availableC) / sqr(1024), 100));
 		$l[2] > $l[1] + 200 or splice(@l, 1, 1); #- not worth proposing too alike stuff
 		$l[1] > $l[0] + 100 or splice(@l, 0, 1);
-		my @text = (__("Minimum (%dMB)"), __("Recommanded (%dMB)"), __("Complete (%dMB)"));
+		my @text = (__("Minimum (%dMB)"), __("Recommended (%dMB)"), __("Complete (%dMB)"));
 		$o->ask_from_listf('', 'TODOMESSAGE', sub { _ ($text[$_[1]], $_[0]) }, \@l) * sqr(1024);
 	    } else {
 		$o->chooseSizeToInstall($packages, $min_size, $max_size, $availableC, $individual) || goto &choosePackages;
