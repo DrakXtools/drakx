@@ -351,6 +351,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o sync with 2.6.3-4mdk
 - firewall: do not write the REDIRECT squid rules if one has only one
   NIC connected to the net zone (florin)
+- harddrake service: switch between nv and nvidia driver if commercial driver
+  isn't installed
 - keyboarddrake: az, tr and tr_f needs XkbOptions 'caps:shift' (pixel)
 - logdrake: fix non first searches (#9115)
 
