@@ -77,8 +77,6 @@ my $desktop_combo = new Gtk2::OptionMenu;
 $desktop_combo->set_popdown_strings(split(' ', `/usr/sbin/chksession -l`));
 $desktop_combo->entry->set_text($auto_mode->{desktop}) if $auto_mode->{desktop};
 
-my $disp_mode = arch() =~ /ppc/ ? N("Yaboot mode") : N("Lilo/grub mode");
-
 my %themes = 	('path' => '/usr/share/bootsplash/themes/',
                 'default' => 'Mandrake',
                 'def_thmb' => '/usr/share/libDrakX/pixmaps/nosplash_thumb.png',
