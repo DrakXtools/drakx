@@ -13,6 +13,8 @@ use devices;
 use modules;
 use fs;
 
+sub max_nb { 31 }
+
 sub nb { 
     my ($nb) = @_;
     first((ref $nb ? $nb->{device} : $nb) =~ /(\d+)/);
@@ -177,6 +179,6 @@ sub is_active {
     cat_("/proc/mdstat") =~ /^$dev /m;
 }
 
-sub inactivate_all() { run_program::run("raidstop", devices::make("md$_")) foreach 0..7 }
+sub inactivate_all() { run_program::run("raidstop", devices::make("md$_")) foreach 0..max_nb() }
 
 1;

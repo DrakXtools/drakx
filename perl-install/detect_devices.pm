@@ -757,7 +757,7 @@ sub raidAutoStartRaidtab {
     #- (choosing any inactive md)
     raid::inactivate_all();
     foreach (@parts) {
-	my $nb = find { !raid::is_active("md$_") } 0..7;
+	my $nb = find { !raid::is_active("md$_") } 0 .. raid::max_nb();
 	output("/tmp/raidtab", "raiddev /dev/md$nb\n  device " . devices::make($_->{device}) . "\n");
 	run_program::run('raidstart', '-c', "/tmp/raidtab", devices::make("md$nb"));
     }
