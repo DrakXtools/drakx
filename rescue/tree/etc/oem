@@ -32,7 +32,7 @@ mkdir "/cdrom";
 open F, "/proc/cmdline";
 while (<F>) {
     /automatic=method:nfs,.*server:([^\s,]*),.*directory:([^\s,]*)/
-      and system "mount", "-r", "-t", "nfs", "$1:$2", "/cdrom";
+      and system "mount", "-r", "-t", "nfs", "$1:$2", "/cdrom", "-o", "nolock";
 }
 close F;
 -e "/cdrom/VERSION"
