@@ -59,9 +59,9 @@ sub configure_everything {
 
     if (!$ok) {
 	($ok) = configure_chooser_raw($in, $raw_X, $do_pkgs, $options, $X, 1);
-    } else {
-	Xconfig::various::various($in, $X->{card}, $options, $auto);
     }
+    $X->{various} ||= Xconfig::various::various($in, $X->{card}, $options, $auto);
+
     $ok = may_write($in, $raw_X, $X, $ok);
     
     $ok && 'config_changed';
@@ -117,6 +117,7 @@ sub configure_chooser_raw {
 			),
 		    { val => _("Options"), icon => "ic82-tape-40", clicked => sub {
 			  Xconfig::various::various($in, $X->{card}, $options);
+			  $X->{various} = 'done';
 		      } },
 		    { val => $::isInstall ? _("Ok") : _("Quit"), icon => "exit", clicked_may_quit => sub { 1 } },
 		   ]);

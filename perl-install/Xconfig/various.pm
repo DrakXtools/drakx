@@ -48,6 +48,7 @@ sub various {
 
     tvout($in, $card, $options);
     choose_xdm($in, $auto);
+    1;
 }
 
 sub choose_xdm {
@@ -59,7 +60,7 @@ sub choose_xdm {
 
 	$xdm = $in->ask_yesorno(_("Graphical interface at startup"),
 _("I can setup your computer to automatically start the graphical interface (XFree) upon booting.
-Would you like XFree to start when you reboot?"), $xdm) or return
+Would you like XFree to start when you reboot?"), $xdm) or return;
     }
     any::runlevel($::prefix, $xdm ? 5 : 3);
 }
