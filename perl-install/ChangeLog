@@ -1,3 +1,368 @@
+2003/02/13  alus
+
+	* share/po/pl.po: updated
+
+2003/02/13  fabman
+
+	* share/po/es.po: updated Spanish translation
+
+2003/02/13  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* share/rpmsrate: added tmdns zcip mandrake-galaxy galaxy-gnome
+
+2003/02/13  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/themes.rc, share/themes-mdk.rc, share/themes-galaxy.rc,
+	share/list, share/themes-mdk-Desktop.rc, install_gtk.pm,
+	share/themes-marble3d.rc, share/install.rc, install_steps_gtk.pm: 
+	  - use nice new gnome theme by ln and fcrozat
+	  - remove old no more used themes
+	  - for doc team, provide an option so that we'll
+	override some colors of the default theme
+	(for B&W printing screeshots)
+
+	* pixmaps/langs/lang-zh_CN.png, pixmaps/langs/lang-sl.png,
+	pixmaps/langs/lang-hy.png, pixmaps/langs/lang-de.png,
+	pixmaps/langs/lang-cy.png, pixmaps/langs/lang-it.png,
+	pixmaps/langs/lang-eu.png, pixmaps/langs/lang-ca.png,
+	pixmaps/langs/lang-sp.png, pixmaps/langs/lang-am.png,
+	pixmaps/langs/lang-nb.png, pixmaps/langs/lang-gd.png,
+	pixmaps/langs/lang-el.png, pixmaps/langs/lang-ia.png,
+	pixmaps/langs/lang-pt_BR.png, pixmaps/langs/lang-sv.png,
+	pixmaps/langs/lang-mi.png, pixmaps/langs/lang-bg.png,
+	pixmaps/langs/lang-fo.png, pixmaps/langs/lang-kw.png,
+	pixmaps/langs/lang-hu.png, pixmaps/langs/lang-ur.png,
+	pixmaps/langs/lang-iu.png, pixmaps/langs/lang-az.png,
+	pixmaps/langs/lang-mt.png, pixmaps/langs/lang-et.png,
+	pixmaps/langs/lang-wa.png, pixmaps/langs/lang-sq.png,
+	pixmaps/langs/lang-he.png, pixmaps/langs/lang-eo.png,
+	pixmaps/langs/lang-ta.png, pixmaps/langs/lang-ga.png,
+	pixmaps/langs/lang-sr.png, pixmaps/langs/lang-lt.png,
+	pixmaps/langs/lang-fa.png, pixmaps/langs/lang-oc.png,
+	pixmaps/langs/lang-ms.png, pixmaps/langs/lang-mk.png,
+	pixmaps/langs/lang-ar.png, pixmaps/langs/lang-lv.png,
+	pixmaps/langs/lang-zh_TW.png, pixmaps/langs/lang-is.png,
+	pixmaps/langs/lang-be.png, pixmaps/langs/lang-fr.png,
+	pixmaps/langs/lang-ro.png, pixmaps/langs/lang-hr.png,
+	pixmaps/langs/lang-en_GB.png, pixmaps/langs/lang-sk.png,
+	pixmaps/langs/lang-uk.png, pixmaps/langs/lang-br.png,
+	pixmaps/langs/lang-en_US.png, pixmaps/langs/lang-bs.png,
+	pixmaps/langs/lang-nl.png, pixmaps/langs/lang-af.png,
+	pixmaps/langs/lang-tr.png, pixmaps/langs/lang-gl.png,
+	pixmaps/langs/lang-pt.png, pixmaps/langs/lang-uz.png,
+	pixmaps/langs/lang-pl.png, pixmaps/langs/lang-id.png,
+	pixmaps/langs/lang-yi.png, pixmaps/langs/lang-fi.png,
+	pixmaps/langs/lang-ka.png, pixmaps/langs/lang-ru.png,
+	pixmaps/langs/lang-nn.png, pixmaps/langs/lang-gv.png,
+	pixmaps/langs/lang-th.png, pixmaps/langs/lang-cs.png,
+	pixmaps/langs/lang-ko.png, pixmaps/langs/lang-tg.png,
+	pixmaps/langs/lang-tt.png, pixmaps/langs/lang-da.png,
+	pixmaps/langs/lang-ja.png, pixmaps/langs/lang-vi.png,
+	pixmaps/langs/lang-es.png: invert video the images since the new theme
+	will be printing black text on white background
+
+	* install2.pm: 
+	  - add option 'theme' to allow specifying a theme
+	  - add option 'doc' to specify that we should override the default
+	theme with values well suited for printing screenshots on a B&W printer
+
+	* ugtk2.pm: remove shape of windows
+
+	* install_any.pm: die if getAndSaveFile failed, so that it will be easier
+	to debug
+	if we have this problem..
+
+	* install_steps_interactive.pm: don't allow going back from
+	accept_licenser to select_language, hence allow removing langs images
+	before downloading huge CJK fonts
+
+	* mdk-stage1/network.c: when detected too little memory in ftp/http,
+	inform user that he/she may try an nfs install
+
+	* lang.pm: don't allow going back from accept_licenser to select_language,
+	hence allow removing langs images before downloading huge CJK fonts
+	gc sux: install_any is not available in drakxtools
+
+2003/02/13  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/no.po: updated Norwegian file
+
+	* share/po/nl.po, share/po/et.po, share/po/fi.po: updated Arabic, Dutch,
+	Estonian and Finnish files
+
+	* share/po/ar.po: updated Arabic, Dutch, Estonian and Finnish files
+	updated Arabic file
+
+2003/02/13  Pixel  <pixel@mandrakesoft.com>
+
+	* share/po/help-de.pot, share/po/help-it.pot, share/po/help-fr.pot,
+	share/po/help-es.pot: minor changes (update from xml)
+	new help from xml
+
+	* network/network.pm, modules/interactive.pm, ugtk2.pm,
+	diskdrake/interactive.pm, services.pm, security/level.pm,
+	diskdrake/hd_gtk.pm, printer/printerdrake.pm: 
+	  - set_help is deprecated
+	  - it is replaced by interactive_help_id on each ask_*
+	  - many set_help do not have any correspondance in help.pm (drakxid-*),
+	those are commented for now
+
+	* install_steps_gtk.pm: 
+	  - set_help is deprecated
+	  - it is replaced by interactive_help_id on each ask_*
+	  - many set_help do not have any correspondance in help.pm (drakxid-*),
+	those are commented for now
+	  - {interactive_help} is a function returning text, it doesn't need to
+	do the help window
+	  - drop global interactive_help during install. Will be done per
+	->ask_*
+
+	* share/po/help_xml2pm.pl: no need for "empty" id anymore
+	  - adapt to new drakx-chapter.xml (esp. handle <variablelist> tags)
+	  - replace __ with N_
+	  - add "our" for "%steps"
+
+	* interactive.pm: fix ask_warn(), really dont make it pop
+	don't force pop_it on ask_warn's
+	  - set_help is deprecated
+	  - it is replaced by interactive_help_id on each ask_*
+	  - many set_help do not have any correspondance in help.pm (drakxid-*),
+	those are commented for now
+	add ask_yesorno_, ask_okcancel_, ask_warn_, ask_from_listf_raw (to allow
+	help)
+
+	* network/modem.pm, network/isdn.pm, network/ethernet.pm, network/adsl.pm,
+	network/tools.pm: 
+	  - set_help is deprecated
+	  - it is replaced by interactive_help_id on each ask_*
+	  - many set_help do not have any correspondance in help.pm (drakxid-*),
+	those are commented for now
+	add CVS $Id
+
+	* help.pm: minor changes (update from xml)
+	no need for "empty" id anymore
+	fix typo (from xml)
+	new help from xml
+
+	* interactive/gtk.pm: fix ask_warn(), really dont make it pop
+	  - set_help is deprecated
+	  - it is replaced by interactive_help_id on each ask_*
+	  - many set_help do not have any correspondance in help.pm (drakxid-*),
+	those are commented for now
+	  - {interactive_help} is a function returning text, it doesn't need to
+	do the help window
+	  - drop global interactive_help during install. Will be done per
+	->ask_*
+
+	* standalone/fileshareset: cleanup
+
+	* Makefile: fix typo
+	use PerlIO-gzip
+
+	* c/Makefile: at last fix the culprit for the dreaded "relocation error"
+	(esp. occured when the glibc changed)
+
+	* harddrake/sound.pm: 
+	  - {interactive_help} is a function returning text, it doesn't need to
+	do the help window
+	  - drop global interactive_help during install. Will be done per
+	->ask_*
+
+	* Xconfig/card.pm, Xconfig/main.pm, Xconfig/resolution_and_depth.pm,
+	Xconfig/monitor.pm: fix and some more Help
+
+	* Xconfig/various.pm, install_interactive.pm, any.pm: fix and some more
+	Help
+	  - set_help is deprecated
+	  - it is replaced by interactive_help_id on each ask_*
+	  - many set_help do not have any correspondance in help.pm (drakxid-*),
+	those are commented for now
+
+	* install_steps_interactive.pm: 
+	  - fix calling configureTimezone
+	  - have country before timezone (gc wants it that way...)
+	  - set_help is deprecated
+	  - it is replaced by interactive_help_id on each ask_*
+	  - many set_help do not have any correspondance in help.pm (drakxid-*),
+	those are commented for now
+	don't use $_total, use $total_ instead
+
+	* standalone/drakboot, commands: make perl_checker happy
+
+	* standalone/drakupdate_fstab: help perl_checker
+
+	* share/list: use PerlIO-gzip
+
+	* network/netconnect.pm: 
+	  - set_help is deprecated
+	  - it is replaced by interactive_help_id on each ask_*
+	  - many set_help do not have any correspondance in help.pm (drakxid-*),
+	those are commented for now
+	add cvs $Id
+
+	* install_steps.pm: have supermount back by default (at least when the
+	security level < 4)
+	  - set_help is deprecated
+	  - it is replaced by interactive_help_id on each ask_*
+	  - many set_help do not have any correspondance in help.pm (drakxid-*),
+	those are commented for now
+
+2003/02/13  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* mouse.pm: Mouse button emulation. Clarify L-Command, add Enter. (Ben
+	Reser)
+
+2003/02/13  Till Kamppeter  <till@mandrakesoft.com>
+
+	* standalone/scannerdrake: Fixed typo.
+	Improved handling and structure of scanner database
+	  - Scanners with multiple ports are supported now
+	  - Fully automatic build of the scanner database, including lines for
+	configuration files
+	  - Fixed "SnapScan" <-> "snapscan" bug
+	  - Some HP scanners had no manufacturer field. Fixed.
+
+	* scanner.pm, handle_configs.pm: Improved handling and structure of
+	scanner database
+	  - Scanners with multiple ports are supported now
+	  - Fully automatic build of the scanner database, including lines for
+	configuration files
+	  - Fixed "SnapScan" <-> "snapscan" bug
+	  - Some HP scanners had no manufacturer field. Fixed.
+
+2003/02/13  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* drakxtools.spec: 9.1-0.29mdk
+	9.1-0.28mdk
+
+	* services.pm (start_service_on_boot) prevent copying this style
+	(do_not_start_service_on_boot) : simplify it
+
+	* scanner.pm: no comment
+	fix drakxtools build
+
+2003/02/12  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps.pm: fix fpons sucks (at least one time).
+	configure profile in order to avoid standalone networking tools to
+	complain
+	about unconfigured device.
+
+	* standalone/drakpxe: updated to find an interface even when no profile
+	are available.
+
+	* pkgs.pm: prefer apache for drakpxe to find the right package.
+
+2003/02/12  gbeauchesne
+
+	* rescue/list, share/list: rpm files are not set to live in /usr/lib/rpm,
+	always.
+
+2003/02/12  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* ugtk2.pm: 
+	  - ensure focus should not be needed anymore
+	  - support XSetInputFocus hackery
+
+	* mdk-stage1/stdio-frontend.c: compile with -W
+
+	* lang.pm: clean
+	add missing pango rendering modules
+	in ramdisk, do download additional fonts if needed (fixes problems with
+	CJK languages and namely #1098)
+
+	* share/fonts.tar.bz2: CJK fonts can now be pcf.gz, hopefully since they
+	will be too large for ramdisks :(
+
+	* tools/make_mdkinst_stage2, share/list: add missing pango rendering
+	modules
+	in ramdisk, do download additional fonts if needed (fixes problems with
+	CJK languages and namely #1098)
+
+2003/02/12  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/he.po, share/po/sp.po, share/po/cy.po, share/po/ca.po,
+	share/po/da.po, share/po/ar.po, share/po/tg.po, share/po/bs.po,
+	share/po/uz.po, share/po/ro.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sq.po, share/po/it.po, share/po/nl.po, share/po/eu.po,
+	share/po/es.po, share/po/de.po, share/po/eo.po, share/po/el.po,
+	share/po/cs.po, share/po/bg.po, share/po/lv.po, share/po/hu.po: Updated
+	pot file
+
+2003/02/12  Pixel  <pixel@mandrakesoft.com>
+
+	* harddrake/sound.pm: use {interactive_help}
+
+	* any.pm, install_steps_gtk.pm, diskdrake/interactive.pm, run_program.pm,
+	install_steps_auto_install.pm, install_steps_stdio.pm,
+	network/netconnect.pm, modules.pm, raid.pm, install_steps_newt.pm,
+	commands.pm, partition_table.pm: perl_checker compliance ("ref" now need
+	parentheses in many case)
+
+	* interactive.pm, interactive/gtk.pm: allow {interactive_help} per dialog
+	boxes instead of global
+	perl_checker compliance ("ref" now need parentheses in many case)
+
+	* install_steps.pm, install_steps_interactive.pm: rework summary() (esp.
+	to allow a gtk frontend)
+	perl_checker compliance ("ref" now need parentheses in many case)
+
+	* services.pm: cleanup starts_on_boot()
+
+	* install2.pm: rework summary() (esp. to allow a gtk frontend)
+
+	* ugtk2.pm: don't set pop_it when the window is hidden
+	perl_checker compliance ("ref" now need parentheses in many case)
+
+2003/02/12  Till Kamppeter  <till@mandrakesoft.com>
+
+	* scanner.pm, services.pm, standalone/scannerdrake: Scannerdrake vastly
+	improved
+	  - Use auto-detection methods of SANE
+	  - Do not ask the user to configure scanners which are already
+	configured
+	  - Handle systems with more than one scanner correctly
+	  - Added ports of newer scanners (libusb, parallel, ...) to the port
+	selector
+	in manual setup
+	  - Main dialog showing all configured scanners
+	  - Full support for scanner sharing via SANE (server/client)
+	  - Support for USB scanner access via libusb
+
+2003/02/12  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/drakpxe: fix just stupid fpons sucks
+
+	* drakxtools.spec: 9.1-0.27mdk
+
+	* standalone/drakconnect: 
+	  - clean up through ugtk2
+	  - enforce strict mode
+	  - give meaningful names to widget variables
+	  - fix embedding in mcc at last, aka going into expert mode does not
+	fsck up
+	the gui
+	  - display all configuration buttons (both internet and lan) the same
+	way
+	  - fix doble variable declaration to MDK::Common::Globals
+	  - fix non obvious "not a CODE reference" errors when embedded
+	  (fortunately, gc will fix perl-GTK2 if this syntax is still
+	authorized)
+	  - (configure_lan) : fix gtk+-2 port and remove old commented out
+	debugging code
+
+	* standalone/drakperm: perl_checker fixes
+
+	* standalone/draksec: do not enfore default settings
+
 2003/02/11  Frederic Lepied  <flepied@mandrakesoft.com>
 
 	* Makefile.drakxtools: don't take lang subdir in pixmap
@@ -10174,7 +10539,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.779 2003/02/08 22:41:49 gc Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.780 2003/02/12 00:25:21 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
