@@ -193,7 +193,7 @@ lcp-echo-interval 0)
                   pptp_modem =>
                   {
                    server => {
-                              pptp => qq("pty "/usr/sbin/pptp 10.0.0.138 --nolaunchpppd"),
+                              pptp => qq("/usr/sbin/pptp 10.0.0.138 --nolaunchpppd"),
                              },
                   },
                  );
