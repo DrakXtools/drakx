@@ -1274,12 +1274,7 @@ Click on Ok to keep your configuration, or cancel to reconfigure your Internet &
 "), 1) 
                 and do {
                     $netcnx->{type} = 'lan';
-                    # should use write_cnx_file:
-                    output_with_perm("$::prefix$network::tools::connect_file", 0755, qq(ifup eth0
-));
-                    output("$::prefix$network::tools::disconnect_file", 0755, qq(
-ifdown eth0
-));
+                    $netc->{NET_INTERFACE} = 'eth0';
                     $direct_net_install = 1;
                     $use_wizard = 0;
                 };
