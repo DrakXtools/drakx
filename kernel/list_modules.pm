@@ -174,7 +174,7 @@ our %l = (
           qw(snd-ymfpci sonicvibes sscape trident via82cxxx_audio wavefront ymfpci),
       ),
     ],
-    tv => [ qw(bt878 bttv cx8800 dpc7146 ivtv saa7134 zr36067) ],
+    tv => [ qw(bt878 bttv cx8800 cx88-blackbird dpc7146 ivtv saa7134 zr36067) ],
     dvb => [ qw(budget budget-av budget-ci dvb-ttpci hexium_orion hexium_gemini skystar2) ],
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-gemtek-pci radio-maxiradio) ],
