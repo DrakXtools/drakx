@@ -204,6 +204,40 @@ sub detect {
     return @res;
 }
 
+sub get_usb_ids_for_port {
+    my ($port) = @_;
+    my $vendorid;
+    my $productid;
+    if ($port =~ /^\s*libusb:(\d+):(\d+)\s*$/) {
+	# Use "lsusb" to find the USB IDs
+	open DETECT, "LC_ALL=C lsusb -s $1:$2 |";
+	while (my $line = <DETECT>) {
+	    if ($line =~ /ID\s+([0-9a-f]+):(0x[0-9a-f]+)($|\s+)/) {
+		# Scanner connected via scanner.o kernel module
+		$vendorid = "0x$1";
+		$productid = "0x$2";
+		last;
+	    }
+	}
+	close DETECT;
+    } else {
+	# Run "sane-find-scanner" on the port
+	open DETECT, "LC_ALL=C sane-find-scanner -q $port |";
+	while (my $line = <DETECT>) {
+	    if ($line =~ /^\s*found\s+USB\s+scanner/i) {
+		if ($line =~ /vendor=(0x[0-9a-f]+)[^0-9a-f]+.*prod(|uct)=(0x[0-9a-f]+)[^0-9a-f]+/) {
+		    # Scanner connected via scanner.o kernel module
+		    $vendorid = $1;
+		    $productid = $3;
+		    last;
+		}
+	    }
+	}
+	close DETECT;
+    }
+    return ($vendorid, $productid);
+}
+
 sub readScannerDB {
     my ($file) = @_;
     my ($card, %cards);
@@ -306,7 +340,13 @@ sub updateScannerDBfromSane {
 	}
     }
 
-    foreach my $f (glob_("$_sanesrcdir/*.desc")) {
+    my @descfiles;
+    push (@descfiles,
+	  glob_("$_sanesrcdir/doc/descriptions/*.desc"));
+    push (@descfiles,
+	  glob_("$_sanesrcdir/doc/descriptions-external/*.desc"));
+    
+    foreach my $f (@descfiles) {
 	my $F = common::openFileMaybeCompressed($f);
 	$to_add .= "\n# from $f";
 	my ($lineno, $cmd, $val) = 0;
@@ -321,7 +361,7 @@ sub updateScannerDBfromSane {
 		      if (0 && member($name, keys %$scanner::scannerDB)) {
 			  print "#[$name] already in ScannerDB!\n";
 		      } else {
-			  # SANE bug "snapscan" calls itself "SnapScan"
+			  # SANE bug: "snapscan" calls itself "SnapScan"
 			  $backend =~ s/SnapScan/snapscan/g;
 			  $to_add .= "\nNAME $name\nSERVER $backend\nDRIVER $intf\n";
 			  # Go through the configuration lines of
