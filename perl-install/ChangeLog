@@ -1,5 +1,131 @@
 2002/09/06  David Baudens  <baudens@mandrakesoft.com>
 
+	* standalone/icons/hori.png: Re-add old obsolete Aurora image requires by
+	drakboot (can someone explain why? It is stupid)
+	Update icons & remove old Aurora stuff
+
+	* standalone/icons/gmon.png, standalone/icons/categ.png,
+	standalone/icons/verti.png: Re-add completly obsolote Aurora's images
+	needed for drakboot (really, but really stupid requires)
+	Update icons & remove old Aurora stuff
+
+	* standalone/icons/ic82-tape-40.png, standalone/icons/ic-drakfont-48.png,
+	standalone/icons/mdk_logo.png, standalone/icons/ic82-when-40.png,
+	standalone/icons/ic82-moreoption-40.png,
+	standalone/icons/ic82-system-40.png,
+	standalone/icons/ic82-dossier-32.png, standalone/icons/ic82-CD-40.png,
+	standalone/icons/ic82-back-up-32.png,
+	standalone/icons/ic82-where-40.png,
+	standalone/icons/ic82-back-up-16.png,
+	standalone/icons/ic82-network-40.png,
+	standalone/icons/ic82-back-up-48.png,
+	standalone/icons/ic82-discdurwhat-40.png,
+	standalone/icons/ic82-systemeplus-40.png,
+	standalone/icons/ic82-users-40.png, standalone/icons/ic82-others-40.png:
+	Update
+
+	* drakxtools.spec: Update
+	Update
+	Update
+
+2002/09/06  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* my_gtk.pm: 
+	  - fix wizard title and pixmap overlap
+
+2002/09/06  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/isdn.pm: 
+	  - fix typo
+	  - add new screen for ISND detected device. Still have to get back in
+	Expert mode to choose by hand.
+
+	* modules.pm: 
+	  - Fix isdn card detection
+
+2002/09/06  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: fixed to allow changing boot medium.
+
+2002/09/06  Jonathan Gotti  <jgotti@mandrakesoft.com>
+
+	* bootlook.pm: comment old code concerning aurora
+
+2002/09/06  Pixel  <pixel@mandrakesoft.com>
+
+	* mouse.pm: during install, don't probe PS/2 mice when a serial mouse is
+	already found.
+	(otherwise if a PS/2 keyboard is present, a PS/2 is found even if
+	absent, and
+	configuring an auxmouse PS/2 causes the PS/2 keyboard to freeze)
+	(thanks to Nora Etukudo)
+
+	* bootloader.pm (read): cleanup duplicate labels (in case file is
+	corrupted)
+	(get_label): compare labels using 15 first characters (to be compliant
+	with lilo)
+	(add_entry): fix removing duplicate entries
+	(read): fix
+
+2002/09/06  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakbackup, standalone/drakTermServ: QA BugSummer90 fixes
+
+2002/09/06  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/sound.pm: killing debugging prints
+	  - blacklist cs46xx and cs4281 drivers : we won't unload these drivers
+	since they're know to oopses the kernel but just warn the user
+	  - add rooted(), unload() and load() wrapper to check wheter we're in
+	  drakx or in standalone mode
+	  - workaround alsaconf's aliases
+	  - add an help button that describe ALSA and OSS
+	  - display current driver, its type (OSS or ALSA), and the default
+	  driver for the card
+
+	* harddrake/data.pm, harddrake/ui.pm: 
+	  - harddrake::data : consolidate common code in custom_id()
+	  - do some detection in dm stage
+	  - fix bad test
+	  - display better name
+	  - don't list usb mouses as unknown hw
+	  - fix mouse detection (mouse::detect() needed
+	modules::mergein_conf('/etc/modules.conf') first
+	  - don't skip mouse in --test mode
+
+	* standalone/draksound: if there's no sound card, add a note about
+	sndconfig
+
+	* standalone/service_harddrake: 
+	  - harddrake::data : consolidate common code in custom_id()
+	  - do some detection in dm stage
+	  - fix bad test
+	  - display better name
+
+	* standalone/harddrake2: 
+	  - document --test
+	  - mark usage as translatable
+
+	* share/po/fr.po: update french translation
+
+	* harddrake/TODO: update
+
+	* drakxtools.spec: 
+	  - harddrake::data : consolidate common code in custom_id()
+	  - do some detection in dm stage
+	  - fix bad test
+	  - display better name
+	40mdk
+
+2002/09/06  Warly  <warly@mandrakesoft.com>
+
+	* share/rpmsrate: add lisa in KDE in REMOTE_ACCESS
+	remove contrib packages
+	add !CDCOM for OpenOffice.org
+	move mod_php to 5
+
+2002/09/06  David Baudens  <baudens@mandrakesoft.com>
+
 	* standalone/icons/ic82-tape-40.png, standalone/icons/ic-drakfont-48.png,
 	standalone/icons/mdk_logo.png, standalone/icons/ic82-when-40.png,
 	standalone/icons/ic82-moreoption-40.png,
@@ -2456,7 +2582,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.739 2002/09/06 00:02:30 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.740 2002/09/06 13:51:51 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
