@@ -1,14 +1,18 @@
 ROOTDEST    = /export
 DEST        = $(ROOTDEST)/Mandrake/mdkinst
 RPMS        = $(wildcard $(ROOTDEST)/Mandrake/RPMS/*.rpm)
+DIRS	    = ddcprobe pnp_serial
 BASE        = $(ROOTDEST)/Mandrake/base
 
-.PHONY: clean install
+.PHONY: clean install $(DIRS)
 
-all: $(BASE)/depslist $(BASE)/hdlist install
+all: $(BASE)/depslist $(BASE)/hdlist $(DIRS) install 
+
+$(DIRS):
+	make -C $@
 
 install:
-	$(MAKE) gendepslist rpm2header ddcprobe/ddcxinfos
+	$(MAKE) gendepslist rpm2header
 	install make_mdkinst_stage2 gendepslist rpm2header genhdlist $(ROOTDEST)/misc
 
 gendepslist: %: %.cc 
@@ -28,4 +32,5 @@ $(BASE)/hdlist: $(RPMS)
 	./genhdlist $(ROOTDEST)
 
 clean: 
+	for i in $(DIRS); do $(MAKE) -C $$i clean; done
 	rm -rf *~ gendepslist rpm2header ddcprobe/ddcxinfos */*.o
