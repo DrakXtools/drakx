@@ -1,0 +1,66 @@
+#!/usr/bin/perl
+
+use strict;
+use lib qw(/usr/lib/libDrakX);
+use common;
+use detect_devices;
+
+#------------------------------------------------------------------
+# to be moved in MDK::Common as a generalisation of (read|update)_gnomekderc
+# once cooker is unfrozen and major releases are allowed again.
+#
+# but there's a "bug" that prevent factorization: current
+# (read|update)_gnomekderc keep comments ... and minimize intrusions
+
+sub read_all_gnomekderc {
+    my ($file) = @_;
+    my (@a, %h);
+    my ($section, @section);
+    foreach (MDK::Common::File::cat_($file)) {
+	s/#.*//;
+	if (/^\s*\[(.*)\]/) {
+	    # remove all "if $section" tests if options out of sections is needed
+	    push @a, [ $section, [ @section ] ] if $section;
+	    $section = $1;
+	    $h{$section} = { };
+	    @section = ();
+	} elsif (/^\s*(.*?)=(.*)/) {
+	    push @section, $1;
+	    $h{$section}{$1} = $2;
+	}
+    }
+    push @a, [ $section, [ @section ] ] if $section;
+    \@a, \%h;
+}
+
+# lost comment but keep sections & options order:
+sub update_all_gnomekderc {
+    my ($file, $list, $hvalues) = @_;
+    output($file, map {
+	my ($section, $items) = @$_;
+	"\n[$section]\n", map { $_ . "=" . $hvalues->{$section}{$_} . "\n" } @$items;
+    } @$list);
+}
+#------------------------------------------------------------------
+
+#------------------------------------------------------------------
+# UPS autoconfig:
+
+my $file = "/etc/ups/ups.conf";
+my ($sections, $sec_contents) = read_all_gnomekderc($file);
+
+my @ups_devices = map { $_->[0] } @$sections; #sort values %$sec_contents
+
+foreach my $ups_device (detect_devices::getUPS()) {
+    if (!member($ups_device, @ups_devices)) {
+	my $str = $ups_device->{description};
+	$str =~ s/ /_/g;
+	push @$sections, [ $str, [ qw(driver port) ] ];
+	$sec_contents->{$str} = {
+	    port => 1,
+	    driver => $ups_device->{bus} eq 'USB' ? "/dev/usb/hid/hiddev0" : $ups_device->{device},
+	};
+    }
+}
+
+update_all_gnomekderc($file, $sections, $sec_contents);
