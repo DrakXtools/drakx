@@ -80,9 +80,10 @@ sub gdkpixmap {
 sub gtkadd {
     my $w = shift;
     foreach (@_) {
-	ref $_ or $_ = new Gtk::Label($_);
-	$w->add($_);
-	$_->show;
+	my $l = $_;
+	ref $l or $l = new Gtk::Label($l);
+	$w->add($l);
+	$l->show;
     }
     $w
 }
