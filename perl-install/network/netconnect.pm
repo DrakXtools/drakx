@@ -220,8 +220,7 @@ sub real_main {
               return "multiple_internet_cnx";
           } else {
               $netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0] if $nb == 1;
-              $save_cnx->();
-              return $goto_start_on_boot_ifneeded->()
+              return $save_cnx->();
           }
       };
 
