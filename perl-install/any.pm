@@ -508,18 +508,16 @@ sub autologin {
     my @users = map { $_->{name} } @{$o->{users} || []};
 
     if (@wm > 1 && @users && !$o->{authentication}{NIS} && $o->{security} <= 2) {
-	add2hash_($o, { autologin => $users[0] });
+	my $use_autologin = 1;
 
 	$in->ask_from_(
 		       { title => N("Autologin"),
-			 messages => N("I can set up your computer to automatically log on one user.
-Do you want to use this feature?"),
-			 ok => N("Yes"),
-			 cancel => N("No") },
-		       [ { label => N("Choose the default user:"), val => \$o->{autologin}, list => \@users },
-			 { label => N("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm } ]
-		      )
-	  or delete $o->{autologin};
+			 messages => N("I can set up your computer to automatically log on one user.") },
+		       [ { label => N("Do you want to use this feature?"), val => \$use_autologin, type => 'bool' },
+			 { label => N("Choose the default user:"), val => \$o->{autologin}, list => \@users, disabled => sub { !$use_autologin } },
+			 { label => N("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm, disabled => sub { !$use_autologin } } ]
+		      );
+	delete $o->{autologin} if !$use_autologin;
     } else {
 	delete $o->{autologin};
     }
