@@ -5,20 +5,20 @@ use common;
 use run_program;
 
 
-my %level_list = (
-                  0 => N("Welcome To Crackers"),
-                  1 => N("Poor"),
-                  2 => N("Standard"),
-                  3 => N("High"),
-                  4 => N("Higher"),
-                  5 => N("Paranoid"),
-                  );
-
-sub to_string { $level_list{$_[0]} }
-sub from_string {
-    my %sec_levels = reverse %level_list;
-    $sec_levels{$_[0]} || 2;
+sub level_list {
+    (
+     0 => N("Welcome To Crackers"),
+     1 => N("Poor"),
+     2 => N("Standard"),
+     3 => N("High"),
+     4 => N("Higher"),
+     5 => N("Paranoid"),
+    );
 }
+
+sub to_string { +{ level_list() }->{$_[0]} }
+sub from_string { +{ reverse level_list() }->{$_[0]} || 2 }
+
 sub get_string { to_string(get() || 2) }
 sub get_common_list { map { to_string($_) } (2, 3, 4) }
 
