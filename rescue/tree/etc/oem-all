@@ -552,10 +552,11 @@ foreach my $medium (@media) {
     foreach (@{$packer->{files}}) {
 	$packer->{data}{$_}[0] eq 'f' or next;
 	my ($fullname, $file) = /([^:]*):(.*)/ ? ($1, "$2.rpm") : ($_, "$_.rpm");
-	$files{$fullname} = "$medium->{rpmsdir}/$file";
+	$files{$fullname} = $file;
+	$rpms{$fullname} = $medium->{rpmsdir};
 	#- convert %{ARCH} to effective arch of the given package.
 	my ($arch) = $fullname =~ /\.([^\.\-]*)$/;
-	$files{$fullname} =~ s|%{ARCH}|$arch|g;
+	$rpms{$fullname} =~ s|%{ARCH}|$arch|g;
     }
 }
 
@@ -577,17 +578,18 @@ foreach my $medium (@media) {
     print "Copying packages from medium labeled \"$medium->{descr}\" to hard disk\n";
     foreach my $pkg (@{$packages->{depslist}}) {
 	$files{rpm_fullname($pkg)} or next;
-	my ($arch) = rpm_fullname($pkg) =~ /\.([^\.\-]*)$/;
-	$rpmsdir = $medium->{rpmsdir};
-	$rpmsdir =~ s|%{ARCH}|$arch|g;
-	system "mkdir", "-p", "/hd/$rpmsdir";
-	my $file = "/cdrom/" . $files{rpm_fullname($pkg)};
-	if (-e $file) {
+	my $infile = "/cdrom/" . $rpms{rpm_fullname($pkg)} . "/" . $files{rpm_fullname($pkg)};
+	my $outfile = "/hd/" . $rpms{rpm_fullname($pkg)} . "/" . $files{rpm_fullname($pkg)};
+	if (-r $infile && -s $infile != -s $outfile) {
+	    -d "/hd" . $rpms{rpm_fullname($pkg)} or system "mkdir", "-p", "/hd" . $rpms{rpm_fullname($pkg)};
 	    print "  copying " . rpm_fullname($pkg) . "\n";
-	    system "cp", "-a", $file, "/hd/$rpmsdir";
+	    system "cp", "-a", $infile, $outfile;
 	    if (rpm_fullname($pkg) =~ /mandrake-release/) {
-		system "rpm", "-Uvh", "--root", "/mnt", "--nodeps", "--force", "/hd/" . $files{rpm_fullname($pkg)};
+		system "rpm", "-Uvh", "--root", "/mnt", "--nodeps", "--force", $outfile;
 	    }
+	    #- clean to say everything is done.
+	    delete $files{rpm_fullname($pkg)};
+	    delete $rpms{rpm_fullname($pkg)};
 	}
     }
 }
