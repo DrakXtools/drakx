@@ -128,33 +128,47 @@ sub subpart_from_wild_device_name {
     my ($dev) = @_;
 
     if ($dev =~ /^LABEL=(.*)/) {
-	{ device_LABEL => $1 };
-    } elsif ($dev =~ m,^/(tmp|dev)/,) {
-	my %part;
-	($part{major}, $part{minor}) = unmakedev((stat "$::prefix$dev")[6]);
-
-	if (my $symlink = readlink("$::prefix$dev")) {
-	    if ($symlink =~ m|^[^/]+$|) {
-		$part{device_alias} = $dev;
-		$dev = $symlink;
-	    }
-	}
-	$dev =~ s,^/(tmp|dev)/,,;
-
-	my $is_devfs = $dev =~ m!/(disc|part\d+)$!;
-	$part{$is_devfs ? 'devfs_device' : 'device'} = $dev;
-	\%part;
+	return { device_LABEL => $1 };
+    } elsif ($dev eq 'none') {
+    } elsif ($dev =~ m!^(\w+):/\w!) {
+	#- nfs
+    } elsif ($dev =~ m!^//\w!) {
+	#- smb
+    } elsif ($dev =~ m!^http://!) {
+	#- http
     } else {
-	if ($dev eq 'none') {
-	} elsif ($dev =~ m!^(\w+):/\w!) {
-	    #- nfs
-	} elsif ($dev =~ m!^//\w!) {
-	    #- smb
+	if ($dev !~ m!^/! && -e "$::prefix/dev/$dev") {
+	    $dev = "/dev/$dev";
+	}
+	if ($dev =~ m!^/(tmp|dev)/(.*)!) {
+	    my %part;
+	    ($part{major}, $part{minor}) = unmakedev((stat "$::prefix$dev")[6]);
+
+	    if (my $symlink = readlink("$::prefix$dev")) {
+		if ($symlink =~ m|^[^/]+$|) {
+		    $part{device_alias} = $dev;
+		    $dev = $symlink;
+		}
+	    }
+	    $dev =~ s!/(tmp|dev)/!!;
+
+	    my $is_devfs = $dev =~ m!/(disc|part\d+)$!;
+	    $part{$is_devfs ? 'devfs_device' : 'device'} = $dev;
+	    return \%part;
 	} else {
 	    log::l("part_from_wild_device_name: unknown device $dev");
 	}
-	{ device => $dev };
     }
+    #- default
+    { device => $dev };
+}
+
+sub device2part {
+    my ($dev, $fstab) = @_;
+    my $subpart = fs::subpart_from_wild_device_name($dev);
+    my $part = find { fsedit::is_same_hd($subpart, $_) } @$fstab;
+    log::l("fs::device2part: unknown device <<$dev>>") if !$part;
+    $part;
 }
 
 sub add2all_hds {
