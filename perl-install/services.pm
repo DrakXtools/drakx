@@ -329,22 +329,10 @@ sub is_service_running ($) {
     return (($? >> 8) != 0) ? 0 : 1;
 }
 
-sub starts_on_boot ($) {
+sub starts_on_boot {
     my ($service) = @_;
-    local *F; 
-    open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
-	"/bin/sh -c \"export LC_ALL=C; /sbin/chkconfig --list $service 2>&1\" |" or
-	    return 0;
-    while (my $line = <F>) {
-	chomp $line;
-	if (($line =~ /:on/) || # service with init script
-	    ($line =~ /^\s*$service\s+on\s*$/)) { # xinetd service
-	    close F;
-	    return 1;
-	}
-    }
-    close F;
-    return 0;
+    my (undef, $on_services) = services($::prefix);
+    member($service, @$on_services);
 }
 
 sub start_service_on_boot ($) {
