@@ -25,7 +25,7 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 
 use common;
 use interactive;
-use network;
+use network::network;
 use log;
 use c;
 
@@ -49,7 +49,7 @@ $::direct = grep { /-direct/ } @ARGV;
 #- get network configuration.
 my $netc = {};
 my $intf = {};
-network::read_all_conf('', $netc, $intf);
+network::network::read_all_conf('', $netc, $intf);
 
 my $in = 'interactive'->vnew('su');
 $::Wizard_title = N("PXE Server Configuration");

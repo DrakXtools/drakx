@@ -7,11 +7,11 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use common;
 use interactive;
 use any;
-use network;
+use network::network;
 
 my $netc = {};
 my $intf = {};
-network::read_all_conf('', $netc, $intf);
+read_all_conf('', $netc, $intf);
 
 my $in = 'interactive'->vnew('su');
 

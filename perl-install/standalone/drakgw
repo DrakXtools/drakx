@@ -28,7 +28,7 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use common;
 use detect_devices;
 use interactive;
-use network;
+use network::network;
 use log;
 use c;
 use network::netconnect;
@@ -253,7 +253,7 @@ I am about to setup your Local Area Network with that adapter.", $format->($devi
     defined $device or quit_global($in, 0);
 }
 log::explanations("Choosing network device: $device");
-my $conf = network::read_interface_conf("/etc/sysconfig/network-scripts/ifcfg-$device");
+my $conf = read_interface_conf("/etc/sysconfig/network-scripts/ifcfg-$device");
 
 my $server_ip = $conf->{IPADDR} ||= network::network::read_dhcpd_conf()->{option_routers}[0] ||= "192.168.1.1";
 my $lan_address = $server_ip =~ m/(.*)\.(.*)/ && $1 ? "$1.0" : "192.168.1.0";

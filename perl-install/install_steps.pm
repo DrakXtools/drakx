@@ -322,8 +322,8 @@ sub beforeInstallPackages {
     #- some packages need such files for proper installation.
     install_any::write_fstab($o);
 
-    require network;
-    network::add2hosts("$o->{prefix}/etc/hosts", "localhost.localdomain", "127.0.0.1");
+    require network::network;
+    network::network::add2hosts("$o->{prefix}/etc/hosts", "localhost.localdomain", "127.0.0.1");
 
     log::l("setting excludedocs to $o->{excludedocs}");
     substInFile { s/%_excludedocs.*//; $_ .= "%_excludedocs yes\n" if eof && $o->{excludedocs} } "$o->{prefix}/etc/rpm/macros";
@@ -618,8 +618,8 @@ sub selectMouse($) {
 #------------------------------------------------------------------------------
 sub configureNetwork {
     my ($o) = @_;
-    require network;
-    network::configureNetwork2($o, $o->{prefix}, $o->{netc}, $o->{intf});
+    require network::network;
+    network::network::configureNetwork2($o, $o->{prefix}, $o->{netc}, $o->{intf});
     if ($o->{method} =~ /ftp|http|nfs/) {
 	$o->{netcnx}{type} = 'lan';
 	foreach ("up", "down") {

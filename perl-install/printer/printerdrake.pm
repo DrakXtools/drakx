@@ -5,7 +5,7 @@ use strict;
 
 use common;
 use modules;
-use network;
+use network::network;
 use log;
 use interactive;
 use printer::main;
@@ -1247,7 +1247,7 @@ sub setup_smb {
 	} else {
 	    die qq(The "smb://" URI must at least contain the server name and the share name!\n);
 	}
-	if (network::is_ip($smbserver)) {
+	if (is_ip($smbserver)) {
 	    $smbserverip = $smbserver;
 	    $smbserver = "";
 	}
@@ -1336,7 +1336,7 @@ sub setup_smb {
 	     not_edit => 1, format => \&translate, sort => 0,
 	     allow_empty_list => 1, type => 'combo' }) ],
 	 complete => sub {
-	     if (!network::is_ip($smbserverip) && $smbserverip ne "") {
+	     if (!is_ip($smbserverip) && $smbserverip ne "") {
 		 $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
 		 return (1,1);
 	     }

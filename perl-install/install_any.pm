@@ -873,9 +873,9 @@ sub generate_automatic_stage1_params {
 	if ($intf->{BOOTPROTO} eq 'dhcp') {
 	    push @ks, "network:dhcp";
 	} else {
-	    require network;
+	    require network::network;
 	    push @ks, "network:static", "ip:$intf->{IPADDR}", "netmask:$intf->{NETMASK}", "gateway:$o->{netc}{GATEWAY}";
-	    my @dnss = network::dnsServers($o->{netc});
+	    my @dnss = network::network::dnsServers($o->{netc});
 	    push @ks, "dns:$dnss[0]" if @dnss;
 	}
     }

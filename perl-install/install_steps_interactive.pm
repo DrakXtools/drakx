@@ -860,7 +860,7 @@ sub summaryBefore {
     $o->configurePrinter(0);
     install_any::preConfigureTimezone($o);
     #- get back network configuration.
-    require network;
+    require network::network;
     eval {
 	network::network::read_all_conf($o->{prefix}, $o->{netc} ||= {}, $o->{intf} ||= {}, $o->{netcnx} ||= {});
     };

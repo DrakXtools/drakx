@@ -242,8 +242,8 @@ sub summary {
 sub configureNetwork {
     my ($_clicked, $_ent_number, $auto) = @_;
     #- get current configuration of network device.
-    require network;
-    eval { network::read_all_conf($o->{prefix}, $o->{netc}, $o->{intf}) };
+    require network::network;
+    eval { network::network::read_all_conf($o->{prefix}, $o->{netc}, $o->{intf}) };
     installStepsCall($o, $auto, 'configureNetwork') if !$o->{isUpgrade};
 }
 #------------------------------------------------------------------------------
@@ -450,16 +450,16 @@ sub main {
 	#- get stage1 network configuration if any.
 	log::l('found /tmp/network');
 	$o->{netc} ||= {};
-	add2hash($o->{netc}, network::read_conf('/tmp/network'));
+	add2hash($o->{netc}, network::network::read_conf('/tmp/network'));
 	if (my ($file) = glob_('/tmp/ifcfg-*')) {
 	    log::l("found network config file $file");
-	    my $l = network::read_interface_conf($file);
+	    my $l = network::network::read_interface_conf($file);
 	    $o->{intf} ||= { $l->{DEVICE} => $l };
 	}
 	if (-e '/etc/resolv.conf') {
 	    my $file = '/etc/resolv.conf';
 	    log::l("found network config file $file");
-	    add2hash($o->{netc}, network::read_resolv_conf($file));
+	    add2hash($o->{netc}, network::network::read_resolv_conf($file));
 	}
     }
 

@@ -1077,8 +1077,8 @@ sub set_authentication {
 	    $_ = "#~$_" unless /^#/;
 	    $_ .= "$t $nis\n" if eof;
 	} "$::prefix/etc/yp.conf";
-	require network;
-	network::write_conf("$::prefix/etc/sysconfig/network", $netc);
+	require network::network;
+	network::network::write_conf("$::prefix/etc/sysconfig/network", $netc);
 
 	$when_network_is_up->(sub {
 	    run_program::rooted($::prefix, 'nisdomainname', $domain);

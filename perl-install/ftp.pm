@@ -2,7 +2,7 @@ package ftp; # $Id$
 
 use Net::FTP;
 
-use network;
+use network::network;
 use log;
 
 my %hosts;
@@ -31,7 +31,7 @@ sub new {
 
 	my $ftp;
 	foreach (1..10) {
-	    $ftp = Net::FTP->new(network::resolv($host), %options) or die;
+	    $ftp = Net::FTP->new(resolv($host), %options) or die;
 	    $ftp && $ftp->login($o_login, $o_password) and last;
 
 	    log::l("ftp login failed, sleeping before trying again");

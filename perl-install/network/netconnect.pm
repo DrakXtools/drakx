@@ -181,7 +181,7 @@ If you don't want to use the auto detection, deselect the checkbox.
     }
 
     my $success = 1;
-    network::configureNetwork2($in, $prefix, $netc, $intf);
+    network::network::configureNetwork2($in, $prefix, $netc, $intf);
     my $network_configured = 1;
     
   step_2_2:
@@ -213,7 +213,7 @@ Test your connection via net_monitor or mcc. If your connection doesn't work, yo
     undef $::Wizard_finished;
     
   step_5:
-    $network_configured or network::configureNetwork2($in, $prefix, $netc, $intf);
+    $network_configured or network::network::configureNetwork2($in, $prefix, $netc, $intf);
 
     my $connect_cmd;
     if ($netcnx->{type} =~ /modem/ || $netcnx->{type} =~ /isdn_external/) {

@@ -1,7 +1,7 @@
 package http; # $Id$
 
 use IO::Socket;
-use network;
+use network::network;
 
 
 my $sock;
@@ -14,7 +14,7 @@ sub getFile {
     $url =~ m|/XXX$| and return; #- force closing connection.
 
     my ($host, $port, $path) = $url =~ m,^http://([^/:]+)(?::(\d+))?(/\S*)?$,;
-    $host = network::resolv($host);
+    $host = resolv($host);
 
     $sock = IO::Socket::INET->new(PeerAddr => $host,
 				  PeerPort => $port || 80,
