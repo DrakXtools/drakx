@@ -59,12 +59,20 @@ static int get_int_response(void)
 	return i;
 }
 
+static char * get_string_response(void)
+{
+	char s[50];
+	fflush(stdout);
+	scanf(" %50s", s);
+	return strdup(s);
+}
+
 static void blocking_msg(char *type, char *fmt, va_list args)
 {
 	printf(type);
 	vprintf(fmt, args);
 	get_any_response();
-	printf("\n");
+//	printf("\n");
 }
 
 void error_message(char *msg, ...)
@@ -80,7 +88,7 @@ void info_message(char *msg, ...)
 	va_list args;
 	va_start(args, msg);
 	va_end(args);
-	blocking_msg("> Info! ", msg, args);
+	blocking_msg("> Notice: ", msg, args);
 }
 
 void wait_message(char *msg, ...)
@@ -108,7 +116,7 @@ void init_progression(char *msg, int size)
 	size_progress = size;
 	actually_drawn = 0;
 	printf("%s\n[", msg);
-	for (i=0; i<40; i++)
+	for (i=0; i<60; i++)
 		printf(".");
 	printf("]\033[G[");		/* only works on ANSI-compatibles */
 	fflush(stdout);
@@ -116,7 +124,7 @@ void init_progression(char *msg, int size)
 
 void update_progression(int current_size)
 {
-	while ((int)((current_size*40)/size_progress) > actually_drawn) {
+	while ((int)((current_size*60)/size_progress) > actually_drawn) {
 		printf("*");
 		actually_drawn++;
 	}
@@ -201,4 +209,36 @@ enum return_type ask_yes_no(char *msg)
 	else if (j == 2)
 		return RETURN_BACK;
 	else return RETURN_ERROR;
+}
+
+
+enum return_type ask_from_entries(char *msg, char ** questions, char *** answers, int entry_size)
+{
+	int j, i = 0;
+
+	printf("> %s (`-' for void answer)\n", msg);
+
+	while (questions && *questions) {
+		printf("(%d) %s\n", i, *questions);
+		i++;
+		questions++;
+	}
+
+	*answers = (char **) malloc(sizeof(char *) * i);
+
+	while (1) {
+		int r;
+		for (j = 0 ; j < i ; j++) {
+			printf("(%d) ? ", j);
+			(*answers)[j] = get_string_response();
+			if (!strcmp((*answers)[j], "-"))
+				(*answers)[j] = strdup("");
+		}
+		printf("(0) Cancel (1) Accept (2) Re-enter answers\n? ");
+		r = get_int_response();
+		if (r == 0)
+			return RETURN_BACK;
+		if (r == 1)
+			return RETURN_OK;
+	}
 }

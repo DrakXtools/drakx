@@ -202,3 +202,35 @@ enum return_type ask_yes_no(char *msg)
 		return RETURN_BACK;
 	else return RETURN_ERROR;
 }
+
+enum return_type ask_from_entries(char *msg, char ** questions, char *** answers, int entry_size)
+{
+	struct newtWinEntry entries[50];
+	int j, i = 0;
+	int rc;
+
+	while (questions && *questions) {
+		entries[i].text = *questions;
+		entries[i].flags = NEWT_FLAG_SCROLL;
+		i++;
+		questions++;
+	}
+	entries[i].text = NULL;
+	entries[i].value = NULL;
+
+	*answers = (char **) malloc(sizeof(char *) * i);
+
+	for (j = 0 ; j < i ; j++) {
+		entries[j].value = &((*answers)[j]);
+		*(entries[j].value) = NULL;
+	}
+
+	rc = newtWinEntries("Please fill entries...", msg, 52, 5, 5, entry_size, entries, "Ok", "Cancel", NULL); 
+
+	if (rc == 3)
+		return RETURN_BACK;
+	if (rc != 1)
+		return RETURN_ERROR;
+	
+	return RETURN_OK;
+}

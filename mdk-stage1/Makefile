@@ -19,14 +19,13 @@
  #
  #*****************************************************************************
 
-VERSION = 7.2cooker
+VERSION = 8.0b
 
 
 ARCH := $(patsubst i%86,i386,$(shell uname -m))
 ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
 
- #- We can leave "-g" forever since stripping will remove everything
 CFLAGS = -Os -Wall -Werror -fomit-frame-pointer
 INCLUDES = -I.
 DEFS = -D_GNU_SOURCE=1 -DVERSION=\"$(VERSION)\"
@@ -57,15 +56,43 @@ FRONTEND_OBJS = $(subst .c,.o,$($(F)_FRONTEND_SRC))
 FRONTEND_LIBS = $($(F)_FRONTEND_LIBS)
 
 
- #- stage1 itself (minus stage1.c)
-STAGE1SRC = log.c tools.c modules.c probing.c cdrom.c disk.c network.c mount.c
+STAGE1_OWN_LIBS = insmod-busybox/libinsmod.a mar/libmar.a
 
-STAGE1OBJS = $(subst .c,.o,$(STAGE1SRC)) $(FRONTEND_OBJS) insmod-busybox/libinsmod.a mar/libmar.a $(FRONTEND_LIBS) /usr/lib/libz.a
+STAGE1_OTHER_LIBS = /usr/lib/libz.a
+
+STAGE1_NETWORK_LIBS = /usr/lib/libresolv.a
+
+
+ #- stage1 itself
+STAGE1SRC = stage1.c log.c tools.c modules.c probing.c mount.c
+CDROMSRC = cdrom.c
+DISKSRC = disk.c
+NETWORKSRC = network.c dns.c
+
+ALLSRC = $(INITSRC) $(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC)
+
+
+STAGE1OBJS = $(subst .c,.o,$(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC))
+
+STAGE1OBJS_UTILS = $(FRONTEND_OBJS) $(STAGE1_OWN_LIBS) $(FRONTEND_LIBS) $(STAGE1_OTHER_LIBS)
+
+
+STAGE1OBJS-CDROM = $(subst .c,-CDROM.o,$(STAGE1SRC) $(CDROMSRC))
+
+CDROM_DEFS = -DDISABLE_DISK -DDISABLE_NETWORK
+
+
+STAGE1OBJS-DISK = $(subst .c,-DISK.o,$(STAGE1SRC) $(DISKSRC))
+
+DISK_DEFS = -DDISABLE_CDROM -DDISABLE_NETWORK
+
+
+STAGE1OBJS-NETWORK = $(subst .c,-NETWORK.o,$(STAGE1SRC) $(NETWORKSRC))
+
+NETWORK_DEFS = -DDISABLE_CDROM -DDISABLE_DISK
 
 
 
-
-ALLSRC = $(INITSRC) $(STAGE1SRC) stage1.c
 
 
 ifeq (i386, $(ARCH))
@@ -81,7 +108,7 @@ LDFLAGS_STAGE1 = -static
 endif
 
 
-BINS = init stage1-network
+BINS = init stage1-full # stage1-cdrom stage1-network
 
 
 #ifeq (i386, $(ARCH))
@@ -115,29 +142,50 @@ init: $(INITOBJS)
 	$(CC) $(LDFLAGS_INIT) -o $@ $(INITOBJS)
 	strip -s $@
 
-stage1-network: stage1-network.o $(STAGE1OBJS) $(NETOBJS)
-	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
+stage1-cdrom: dirs $(STAGE1OBJS-CDROM) $(STAGE1OBJS_UTILS)
+	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS-CDROM) $(STAGE1OBJS_UTILS)
 	strip -s $@
 
-stage1-network-diet: $(STAGE1OBJS) stage1-network.o $(NETOBJS)
-	gcc -nostdlib -o $@ ../../../tmp/dietlibc/start.o $^ ../../../tmp/dietlibc/dietlibc.a
+stage1-network: dirs $(STAGE1OBJS-NETWORK) $(STAGE1OBJS_UTILS)
+	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS-NETWORK) $(STAGE1OBJS_UTILS) $(STAGE1_NETWORK_LIBS)
 	strip -s $@
 
-test: stage1-network.o $(STAGE1OBJS) $(NETOBJS)
-	$(CC) -o st1 $^
+stage1-disk: dirs $(STAGE1OBJS-DISK) $(STAGE1OBJS_UTILS)
+	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS-DISK) $(STAGE1OBJS_UTILS)
+	strip -s $@
+
+stage1-pcmcia: dirs $(STAGE1OBJS-PCMIA) $(STAGE1OBJS_UTILS)
+	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS-PCMIA) $(STAGE1OBJS_UTILS)
+	strip -s $@
+
+stage1-full: dirs $(STAGE1OBJS) $(STAGE1OBJS_UTILS)
+	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS) $(STAGE1OBJS_UTILS) $(STAGE1_NETWORK_LIBS)
+	strip -s $@
+
+
+#stage1-network-diet: $(STAGE1OBJS) stage1-network.o $(NETOBJS)
+#	 gcc -nostdlib -o $@ ../../../tmp/dietlibc/start.o $^ ../../../tmp/dietlibc/dietlibc.a
+#	 strip -s $@
+
+
+$(STAGE1OBJS-CDROM): %-CDROM.o: %.c
+	$(COMPILE) $(CDROM_DEFS) -c $< -o $@
+
+$(STAGE1OBJS-DISK): %-DISK.o: %.c
+	$(COMPILE) $(DISK_DEFS) -c $< -o $@
+
+$(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c
+	$(COMPILE) $(NETWORK_DEFS) -c $< -o $@
 
 .c.o:
 	$(COMPILE) -c $<
-
-stage1-network.o: stage1.c
-	$(COMPILE) -c $< -o $@
 
 
 clean: 
 	@for n in $(DIRS); do \
 		(cd $$n; make clean) \
 	done
-	rm -f *.o .depend *.rdz *.img $(BINS) st1
+	rm -f *.o .depend *.rdz *.img $(BINS)
 
 deps:
 	$(CPP) $(CFLAGS) -DHAVE_CONFIG_H -M $(ALLSRC) > .depend

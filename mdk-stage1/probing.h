@@ -38,7 +38,7 @@ enum media_query_type { QUERY_NAME, QUERY_MODEL };
 enum driver_type { SCSI_ADAPTERS, NETWORK_DEVICES };
 
 
-void pci_probing(enum driver_type type);
+void probe_that_type(enum driver_type type);
 void get_medias(enum media_type media, char *** names, char *** models);
 char ** get_net_devices(void);
 

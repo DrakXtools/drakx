@@ -36,10 +36,11 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <sys/types.h>
 #include <sys/socket.h>
 #include <net/if.h>
 #include <sys/ioctl.h>
+#include "stage1.h"
+
 #include "log.h"
 #include "frontend.h"
 #include "modules.h"
@@ -48,17 +49,17 @@
 #include "probing.h"
 
 
-void pci_probing(enum driver_type type)
+void probe_that_type(enum driver_type type)
 {
 	if (IS_EXPERT)
 		ask_insmod(type);
 	else { 
-		/* do it automatically */
+		/* probe for PCI devices */
 		char * mytype;
 		FILE * f;
-		int len;
-		char buf[100];
-		struct pci_module_map * pcidb;
+		int len = 0;
+		char buf[200];
+		struct pci_module_map * pcidb = NULL;
 
 		if (type == SCSI_ADAPTERS)
 			mytype = "SCSI";
@@ -76,12 +77,16 @@ void pci_probing(enum driver_type type)
 
 		switch (type) {
 		case SCSI_ADAPTERS:
+#ifndef DISABLE_MEDIAS
 			pcidb = scsi_pci_ids;
 			len   = scsi_num_ids;
+#endif
 			break;
 		case NETWORK_DEVICES:
+#ifndef DISABLE_NETWORK
 			pcidb = eth_pci_ids;
 			len   = eth_num_ids;
+#endif
 			break;
 		default:
 			return;
@@ -90,23 +95,28 @@ void pci_probing(enum driver_type type)
 		while (1) {
 			int i, garb, vendor, device;
 		
-			if (!fgets(buf,100,f)) break;
+			if (!fgets(buf, sizeof(buf), f)) break;
 		
 			sscanf(buf, "%x %04x%04x", &garb, &vendor, &device);
  
 			for (i = 0; i < len; i++) {
 				if (pcidb[i].vendor == vendor && pcidb[i].device == device) {
 					log_message("PCI: found suggestion for %s (%s)", pcidb[i].name, pcidb[i].module);
+#ifndef DISABLE_MEDIAS
 					if (type == SCSI_ADAPTERS) {
 						/* insmod takes time, let's use the wait message */
 						wait_message("Installing %s driver for %s", mytype, pcidb[i].name);
 						my_insmod(pcidb[i].module);
 						remove_wait_message();
-					} else if (type == NETWORK_DEVICES) {
+					}
+#endif
+#ifndef DISABLE_NETWORK
+					if (type == NETWORK_DEVICES) {
 						/* insmod is quick, let's use the info message */
 						info_message("Found %s driver for %s", mytype, pcidb[i].name);
 						my_insmod(pcidb[i].module);
 					}
+#endif
 				}
 			}
 		}
@@ -114,6 +124,7 @@ void pci_probing(enum driver_type type)
 }
 
 
+#ifndef DISABLE_MEDIAS
 static struct media_info * medias = NULL;
 
 static void find_media(void)
@@ -125,7 +136,7 @@ static void find_media(void)
         int fd;
 
 	if (!medias)
-		pci_probing(SCSI_ADAPTERS);
+		probe_that_type(SCSI_ADAPTERS);
 	else
 		free(medias); /* that does not free the strings, by the way */
 
@@ -194,7 +205,6 @@ static void find_media(void)
 		tmp[count].bus = IDE;
 		count++;
     	}
-
 
 
 	/* ----------------------------------------------- */
@@ -318,7 +328,6 @@ static void find_media(void)
 	end_scsi:
 	}
 
-    
 	/* ----------------------------------------------- */
 	tmp[count].name = NULL;
 	count++;
@@ -357,8 +366,10 @@ void get_medias(enum media_type media, char *** names, char *** models)
 	*models = (char **) malloc(sizeof(char *) * count);
 	memcpy(*models, tmp_models, sizeof(char *) * count);
 }
+#endif /* DISABLE_MEDIAS */
 
 
+#ifndef DISABLE_NETWORK
 int net_device_available(char * device) {
 	struct ifreq req;
 	int s;
@@ -392,8 +403,11 @@ char ** get_net_devices(void)
 	char * tmp[50];
 	char ** results;
 	int i = 0;
+	static int already_probed = 0;
 
-	pci_probing(NETWORK_DEVICES);
+	if (!already_probed)
+		probe_that_type(NETWORK_DEVICES);
+	already_probed = 1;
 
 	while (ptr && *ptr) {
 		if (net_device_available(*ptr)) {
@@ -409,3 +423,4 @@ char ** get_net_devices(void)
 	
 	return results;
 }
+#endif /* DISABLE_NETWORK */

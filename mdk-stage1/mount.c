@@ -31,6 +31,7 @@
 #include "mount.h"
 
 
+#ifndef DISABLE_MEDIAS
 /* WARNING: this won't work if the argument is not /dev/ based */
 static int ensure_dev_exists(char *dev)
 {
@@ -93,6 +94,7 @@ static int ensure_dev_exists(char *dev)
 	
 	return 0;
 }
+#endif /* DISABLE_MEDIAS */
 
 
 /* mounts, creating the device if needed+possible */
@@ -103,12 +105,14 @@ int my_mount(char *dev, char *location, char *fs)
 	struct stat buf;
 	int rc;
 
+#ifndef DISABLE_MEDIAS
 	rc = ensure_dev_exists(dev);
 
 	if (rc != 0) {
 		log_message("could not create required device file");
 		return -1;
 	}
+#endif
 
 	log_message("mounting %s on %s as type %s", dev, location, fs);
 
@@ -131,6 +135,7 @@ int my_mount(char *dev, char *location, char *fs)
 
 	flags = MS_MGC_VAL;
 
+#ifndef DISABLE_MEDIAS
 	if (!strcmp(fs, "vfat")) {
 		my_insmod("vfat");
 		opts = "check=relaxed";
@@ -140,6 +145,7 @@ int my_mount(char *dev, char *location, char *fs)
 		my_insmod("isofs");
 		flags |= MS_RDONLY;
 	}
+#endif
 
 	rc = mount(dev, location, fs, flags, opts);
 

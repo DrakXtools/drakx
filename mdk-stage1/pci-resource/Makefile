@@ -13,12 +13,12 @@
  # along with this program; if not, write to the Free Software
  # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  #
- # Portions from Erik Troan (ewt@redhat.com) Copyright 1996 Red Hat Software 
- #
  #*****************************************************************************
 
 
-pci-ids.h: ../../perl-install/pci_probing/pcitable
+all: pci-ids.h
+
+pci-ids.h: ../../perl-install/pci_probing/pcitable update-pci-ids.pl
 	make -C ../../perl-install/pci_probing
 	perl update-pci-ids.pl > $@
 

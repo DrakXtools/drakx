@@ -39,9 +39,18 @@
 #include "frontend.h"
 #include "modules.h"
 #include "tools.h"
+
+#ifndef DISABLE_CDROM
 #include "cdrom.h"
+#endif
+
+#ifndef DISABLE_NETWORK
 #include "network.h"
+#endif
+
+#ifndef DISABLE_DISK
 #include "disk.h"
+#endif
 
 
 /* globals */
@@ -98,11 +107,17 @@ void spawn_shell(void)
 
 enum return_type method_select_and_prepare(void)
 {
+#ifndef DISABLE_DISK
 	char * disk_install = "Hard disk";
+#endif
+#ifndef DISABLE_CDROM
 	char * cdrom_install = "CDROM drive";
+#endif
+#ifndef DISABLE_NETWORK
 	char * network_nfs_install = "NFS server";
 	char * network_ftp_install = "FTP server";
 	char * network_http_install = "HTTP server";
+#endif
 	enum return_type results;
 	char * choice;
 	char * means[10];
@@ -127,16 +142,28 @@ enum return_type method_select_and_prepare(void)
 	if (results != RETURN_OK)
 		return results;
 
+	results = RETURN_ERROR;
+
+#ifndef DISABLE_CDROM
 	if (!strcmp(choice, cdrom_install))
 		results = cdrom_prepare();
-	else if (!strcmp(choice, disk_install))
+#endif
+        
+#ifndef DISABLE_DISK
+	if (!strcmp(choice, disk_install))
 		results = disk_prepare();
-	else if (!strcmp(choice, network_nfs_install))
+#endif
+	
+#ifndef DISABLE_NETWORK
+	if (!strcmp(choice, network_nfs_install))
 		results = nfs_prepare();
-	else if (!strcmp(choice, network_ftp_install))
+	
+	if (!strcmp(choice, network_ftp_install))
 		results = ftp_prepare();
-	else if (!strcmp(choice, network_http_install))
+	
+	if (!strcmp(choice, network_http_install))
 		results = http_prepare();
+#endif
 
 	if (results != RETURN_OK)
 		method_select_and_prepare();
@@ -162,6 +189,7 @@ int main(int argc, char **argv)
 		fatal_error("could not open and parse modules dependencies");
 	init_frontend();
 
+#ifndef DISABLE_CDROM
 	if (IS_CDROM) {
 		/* try as automatic as possible with cdrom bootdisk */
 		ret = cdrom_prepare();
@@ -169,6 +197,7 @@ int main(int argc, char **argv)
 			ret = method_select_and_prepare();
 	}
 	else
+#endif
 		ret = method_select_and_prepare();
 
 	finish_frontend();

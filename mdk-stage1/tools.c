@@ -250,7 +250,7 @@ enum return_type load_ramdisk(void)
 
 	end_progression();
 
-	gzclose(st2);
+	gzclose(st2); /* opened by gzdopen, but also closes the associated fd */
 	close(ram_fd);
 
 	if (IS_RESCUE)

@@ -19,6 +19,9 @@ struct pci_module_map {
 my %t = (scsi => 'scsi', eth => 'net');
 
 foreach (keys %t) {
+    print "#ifndef DISABLE_NETWORK\n" if ($_ eq 'eth');
+    print "#ifndef DISABLE_MEDIAS\n" if ($_ eq 'scsi');
+
     print "
 struct pci_module_map ${_}_pci_ids[] = {
 ";
@@ -36,6 +39,8 @@ struct pci_module_map ${_}_pci_ids[] = {
 print "
 };
 int ${_}_num_ids=sizeof(${_}_pci_ids)/sizeof(struct pci_module_map);
-"
+";
+
+    print "#endif\n";
 
 }
