@@ -23,7 +23,6 @@ use keyboard;
 use fs;
 use log;
 use printer;
-1;
 
 #-######################################################################################
 #- In/Out Steps Functions
@@ -56,6 +55,7 @@ sub selectKeyboard($) {
 						 _("Which keyboard do you have?"),
 						 [ keyboard::list() ],
 						 keyboard::keyboard2text($o->{keyboard})));
+    $o->{keyboard_force} = 1;
     install_steps::selectKeyboard($o);
 }
 #------------------------------------------------------------------------------
@@ -394,7 +394,7 @@ wish to access and any applicable user name and password."),
 sub setRootPassword($) {
     my ($o) = @_;
     $o->{superuser} ||= {};
-    $o->{superuser}{password2} ||= $o->{superuser}{password};
+    $o->{superuser}{password2} ||= $o->{superuser}{password} ||= "";
     my $sup = $o->{superuser};
 
     $o->ask_from_entries_ref(_("Set root password"),
@@ -416,7 +416,7 @@ sub setRootPassword($) {
 sub addUser($) {
     my ($o) = @_;
     $o->{user} ||= {};
-    $o->{user}{password2} ||= $o->{user}{password};
+    $o->{user}{password2} ||= $o->{user}{password} ||= "";
     my $u = $o->{user};
     my @fields = qw(realname name password password2);
 
@@ -570,3 +570,8 @@ sub setup_thiskind {
 	push @l, \@r;
     }
 }
+
+#-######################################################################################
+#- Wonderful perl :(
+#-######################################################################################
+1; # 
