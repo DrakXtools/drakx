@@ -608,13 +608,27 @@ sub populate_notebook {
 sub save {
     my ($netc, $p, $apply_button) = @_;
 
-    foreach (keys %$p) {
-	save_notebook($netc, $p->{$_}{intf}, $p->{$_}{gui}) or return;
-	$p->{$_}{intf}{save} ? $p->{$_}{intf}{save}->() : apply($netc, $p->{$_}{intf});
-    }
+    my $dialog = _create_dialog(N("Please wait"));
+    gtkpack($dialog->vbox,
+            gtkshow(Gtk2::Label->new(N("Please Wait... Applying the configuration"))));
+    $dialog->show_all;
+    gtkset_mousecursor_wait();
 
-    system("/etc/rc.d/init.d/network restart");
+    Glib::Timeout->add(200, sub {
+                           gtkflush();
+                           foreach (keys %$p) {
+                               save_notebook($netc, $p->{$_}{intf}, $p->{$_}{gui}) or return;
+                               $p->{$_}{intf}{save} ? $p->{$_}{intf}{save}->() : apply($netc, $p->{$_}{intf});
+                           }
+                           
+                           system("/etc/rc.d/init.d/network restart");
+                           $dialog->response(0);
+                       });
+    $dialog->run;
+
     $apply_button->set_sensitive(0);
+    gtkset_mousecursor_normal();
+    $dialog->destroy;
 }
 
 sub save_notebook {
