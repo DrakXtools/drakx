@@ -803,9 +803,9 @@ sub setRootPassword {
 
     return if $o->{security} < 1 && !$clicked;
 
-    $o->set_help("setRootPassword", 
-		 if_($::expert, "setRootPasswordMd5"),
-		 if_($::expert, "setRootPasswordNIS"));
+    $::isInstall and $o->set_help("setRootPassword", 
+				  if_($::expert, "setRootPasswordMd5"),
+				  if_($::expert, "setRootPasswordNIS"));
 
     $o->ask_from_entries_refH_powered(
         {
@@ -826,12 +826,11 @@ sub setRootPassword {
   ),
 			 ]) or return;
 
-    $o->{authentication}{NIS} &&= $nis;
-    $o->ask_from_entries_refH('',
-			     _("Authentification NIS"),
-			     [ { label => _("NIS Domain"), val => \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
-			       { label => _("NIS Server"), val => \$o->{authentication}{NIS}, list => ["broadcast"], not_edit => 0 },
-			     ]) if $nis;
+    if ($nis) { $o->ask_from_entries_refH('',
+				     _("Authentification NIS"),
+				     [ { label => _("NIS Domain"), val => \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
+				       { label => _("NIS Server"), val => \$o->{authentication}{NIS}, list => ["broadcast"], not_edit => 0 },
+				     ]); } else { $o->{authentication}{NIS} = ''; }
     install_steps::setRootPassword($o);
 }
 
