@@ -2,7 +2,7 @@ package install_steps; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw(@filesToSaveForUpgrade @filesNewerToUseAfterUpgrade @ISA);
+use vars qw(@filesToSaveForUpgrade @filesNewerToUseAfterUpgrade);
 
 #-######################################################################################
 #- misc imports
@@ -21,6 +21,8 @@ use pkgs;
 use any;
 use log;
 use fs;
+
+our @ISA = qw(do_pkgs);
 
 @filesToSaveForUpgrade = qw(
 /etc/ld.so.conf /etc/fstab /etc/hosts /etc/conf.modules /etc/modules.conf

@@ -8,6 +8,7 @@ use strict;
 #-######################################################################################
 use MDK::Common::Func;
 use common;
+use do_pkgs;
 
 #- minimal example using interactive:
 #
@@ -77,6 +78,8 @@ use common;
 #-######################################################################################
 #- OO Stuff
 #-######################################################################################
+our @ISA = qw(do_pkgs);
+
 sub new($) {
     my ($type) = @_;
 
@@ -118,12 +121,6 @@ sub suspend {}
 sub resume {}
 sub end {}
 sub exit { exit($_[0]) }
-
-sub do_pkgs {
-    my ($in) = @_;
-    require do_pkgs;
-    do_pkgs->vnew($in);
-}
 
 #-######################################################################################
 #- Interactive functions

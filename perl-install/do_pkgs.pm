@@ -1,14 +1,17 @@
 package do_pkgs; # $Id$
+
+sub do_pkgs {
+    my ($in) = @_;
+    ($::isInstall ? 'do_pkgs_during_install' : 'do_pkgs_standalone')->new($in);
+}
+
+################################################################################
+package do_pkgs_common;
 use common;
 
 sub new {
     my ($type, $in) = @_;
     bless { in => $in }, $type;
-}
-
-sub vnew {
-    my ($_type, $in) = @_;
-    ($::isInstall ? 'do_pkgs_during_install' : 'do_pkgs_standalone')->new($in);
 }
 
 sub ensure_is_installed {
@@ -36,7 +39,7 @@ package do_pkgs_during_install;
 use run_program;
 use common;
 
-our @ISA = qw(do_pkgs);
+our @ISA = qw(do_pkgs_common);
 
 sub new {
     my ($type, $in) = @_;
@@ -118,7 +121,7 @@ use run_program;
 use common;
 use log;
 
-our @ISA = qw(do_pkgs);
+our @ISA = qw(do_pkgs_common);
 
 sub install {
     my ($do, @l) = @_;
