@@ -425,7 +425,7 @@ want to use the default host name."),
 }
 
 sub miscellaneous_choose {
-    my ($in, $u, $clicked, $no_track_net) = @_;
+    my ($in, $u, $clicked, $_no_track_net) = @_;
 #    $in->set_help('configureNetworkProxy') if $::isInstall;
 
     $in->ask_from('',
