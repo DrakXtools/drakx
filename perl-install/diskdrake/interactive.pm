@@ -469,12 +469,19 @@ sub part_possible_actions {
     }
 }
 
+#- in case someone use diskdrake only to create partitions, 
+#- ie without assigning a mount point,
+#- do not suggest mount points anymore
+my $do_suggest_mount_point = 1;
+
 sub Create {
     my ($in, $hd, $part, $all_hds) = @_;
     my ($def_start, $def_size, $max) = ($part->{start}, $part->{size}, $part->{start} + $part->{size});
 
     $part->{maxsize} = $part->{size}; $part->{size} = 0;
-    if (!fsedit::suggest_part($part, $all_hds)) {
+    if (fsedit::suggest_part($part, $all_hds)) {
+	$part->{mntpoint} = '' if !$do_suggest_mount_point;
+    } else {
 	$part->{size} = $part->{maxsize};
 	fs::type::suggest_fs_type($part, 'ext3');
     }
@@ -516,6 +523,7 @@ sub Create {
         }, complete => sub {
 	    $part->{size} = from_Mb($mb_size, min_partition_size($hd), $max - $part->{start}); #- need this to be able to get back the approximation of using MB
 	    put_in_hash($part, fs::type::type_name2subpart($type_name));
+	    $do_suggest_mount_point = 0 if !$part->{mntpoint};
 	    $part->{mntpoint} = '' if isNonMountable($part);
 	    $part->{mntpoint} = 'swap' if isSwap($part);
 	    fs::mount_options::set_default($part, ignore_is_removable => 1);
