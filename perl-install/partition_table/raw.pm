@@ -101,22 +101,27 @@ sub keep_non_duplicates {
 }
 
 sub get_geometries {
-    my ($hds) = @_;
+    my (@hds) = @_;
 
-    foreach my $hd (@$hds) {
-	my $h = get_geometry($hd->{file}) or log::l("An error occurred while getting the geometry of block device $hd->{file}: $!"), next;
-	add2hash_($hd, $h);
-    }
+    @hds = grep {
+	if (my $h = get_geometry($_->{file})) {
+	    add2hash_($_, $h);
+	    1;
+	} else {
+	    log::l("An error occurred while getting the geometry of block device $_->{file}: $!");
+	    0;
+	}
+    } @hds;
 
     my %id2hd = keep_non_duplicates(map {
-	my $F = openit($_) or die "failed to open device $_->{device}";
+	my $F = openit($_) or log::l("failed to open device $_->{device}");
 	my $tmp;
-	if (c::lseek_sector(fileno($F), 0, 0x1b8) && sysread($F, $tmp, 4)) {
+	if ($F && c::lseek_sector(fileno($F), 0, 0x1b8) && sysread($F, $tmp, 4)) {
 	    [ sprintf('0x%08x', unpack('V', $tmp)), $_ ];
 	} else {
 	    ();
 	}
-    } @$hds);
+    } @hds);
 
 
     my %id2edd = keep_non_duplicates(map { [ chomp_(cat_("$_/mbr_signature")), $_ ] } glob("/sys/firmware/edd/int13_dev*"));
@@ -136,6 +141,8 @@ sub get_geometries {
 	    $hd->{geom} = $geom if $geom;
 	}
     }
+
+    @hds;
 }
 
 sub get_geometry {
