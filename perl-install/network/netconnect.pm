@@ -12,8 +12,6 @@ use network::network;
 use network::tools;
 use MDK::Common::Globals "network", qw($in);
 
-my %conf;
-
 sub detect {
     my ($auto_detect, $o_class) = @_;
     my %l = (
@@ -116,7 +114,6 @@ sub get_subwizard {
 
       modules::mergein_conf("$::prefix/etc/modules.conf");
 
-      $netc->{autodetection} = 0;
       $netc->{autodetect} = {};
 
       my $first_modem = sub { first(grep { $_->{device} =~ m!^/dev! } values %{$netc->{autodetect}{modem}}) };
@@ -133,7 +130,7 @@ sub get_subwizard {
       };
 
       my $lan_detect = sub {
-          detect($netc->{autodetect}, 'lan') if !$::isInstall;
+          detect($netc->{autodetect}, 'lan');
           modules::interactive::load_category($in, 'network/main|gigabit|usb|pcmcia', !$::expert, 1);
           @all_cards = network::ethernet::get_eth_cards();
           foreach my $card (@all_cards) {
@@ -188,25 +185,22 @@ sub get_subwizard {
                    welcome => 
                    {
                     pre => sub {
-                        if (!$::isInstall) {
-                            $conf{$_} = 0 foreach qw(adsl cable isdn lan modem winmodem);
-                        }
+                        # keep b/c of translations in case they can be reused somewhere else:
+                        N("(detected on port %s)"), 
+                          #-PO: here, "(detected)" string will be appended to eg "ADSL connection"
+                          N("(detected %s)"), N("(detected)");
                         my @connections = 
-                          (
-                           [ #-PO: here, "(detected)" string will be appended to eg "ADSL connection"
-                            N("Modem connection"), N("(detected on port %s)", join('', map { if_($_->{device}, $_->{device}) }
-                                                                                   values %{$netc->{autodetect}{modem}})), "modem" ],
-                           [ N("ISDN connection"),  N("(detected %s)", join(', ', map { $_->{description} } values %{$netc->{autodetect}{isdn}})), "isdn" ],
-                           [ N("ADSL connection"),  N("(detected)"), "adsl" ],
-                           [ N("Cable connection"), N("(detected)"), "cable" ],
-                           [ N("LAN connection"),   N("(detected)"), "lan" ],
+                          ([ N("Modem connection"),  "modem" ],
+                           [ N("ISDN connection"),   "isdn"  ],
+                           [ N("ADSL connection"),   "adsl"  ],
+                           [ N("Cable connection"),  "cable" ],
+                           [ N("LAN connection"),    "lan"   ],
                            # if we ever want to split out wireless connection, we'd to split out modules between network/main and network/wlan:
-                           if_(0, [ N("Wireless connection"),   N("(detected)"), "lan" ]),
+                           if_(0, [ N("Wireless connection"), "lan" ]),
                           );
                         
                         foreach (@connections) {
-                            my ($str, $extra_str, $type) = @$_;
-                            my $string = join('', $str, if_($conf{$type}, " - ", $extra_str));
+                            my ($string, $type) = @$_;
                             $connections{$string} = $type;
                         }
                         @connection_list = ({ val => \$cnx_type, type => 'list', list => [ map { $_->[0] } @connections ], });
@@ -215,19 +209,6 @@ sub get_subwizard {
                     name => N("Choose the connection you want to configure"),
                     interactive_help_id => 'configureNetwork',
                     data => \@connection_list,
-                    changed => sub {
-                        return if !$netc->{autodetection};
-                        my $c = 0;
-                        #-      $conf{adsl} and $c++;
-                        $conf{cable} and $c++;
-                        my $a = keys(%{$netc->{autodetect}{lan}});
-                        0 < $a && $a <= $c and $conf{lan} = undef;
-                    },
-                    complete => sub {
-                        # at least one connection type must be choosen
-                        return 0 if !$::isInstall;
-                        return !any { $conf{$_} } keys %conf;
-                    },
                     post => sub {
                         load_conf($netcnx, $netc, $intf) if $::isInstall;  # :-(
                         $type = $netcnx->{type} = $connections{$cnx_type};
@@ -293,7 +274,7 @@ sub get_subwizard {
                    isdn =>
                    {
                     pre=> sub {
-                        detect($netc->{autodetect}, 'isdn') if !$::isInstall && !$netc->{autodetection};
+                        detect($netc->{autodetect}, 'isdn');
                         # FIXME: offer to pick any card from values %{$netc->{autodetect}{isdn}}
                         $isdn = top(values %{$netc->{autodetect}{isdn}});
                       isdn_step_1:
@@ -310,7 +291,7 @@ sub get_subwizard {
                             $netcnx->{isdn_internal} = isdn_read_config($netcnx->{isdn_internal});
                             isdn_detect($netcnx->{isdn_internal}, $netc) or goto isdn_step_1;
                         } else {
-                            detect($netc->{autodetect}, 'modem') if !$::isInstall && !$netc->{autodetection};
+                            detect($netc->{autodetect}, 'modem');
                             $netc->{isdntype} = 'isdn_external';
                             $netcnx->{isdn_external}{device} = $first_modem->();
                             $netcnx->{isdn_external} = isdn_read_config($netcnx->{isdn_external});
@@ -362,7 +343,7 @@ Take a look at http://www.linmodems.org"),
                    modem =>
                    {
                     pre => sub {
-                        detect($netc->{autodetect}, 'modem') if !$::isInstall;
+                        detect($netc->{autodetect}, 'modem');
                     },
                     name => N("Select the modem to configure:"),
                     data => sub {
@@ -377,7 +358,7 @@ Take a look at http://www.linmodems.org"),
                         my %relocations = (ltmodem => $in->do_pkgs->check_kernel_module_packages('ltmodem'));
                         my $type;
                         
-                        detect($netc->{autodetect}, 'lan') if !$::isInstall && !$netc->{autodetection};
+                        detect($netc->{autodetect}, 'lan');
                         
                         foreach (map { $_->{description} } values %{$netc->{autodetect}{modem}}) {
                             /Hcf/ and $type = "hcfpcimodem";
