@@ -132,7 +132,7 @@ defaultroute
 	output("$prefix/etc/ppp/peers/adsl", 
 qq(noauth
 noipdefault
-pty "/usr/bin/pppoa3 -vpi $1 -vci $2"
+pty "/usr/sbin/pppoa3 -c -vpi $1 -vci $2"
 sync
 kdebug 1
 noaccomp
