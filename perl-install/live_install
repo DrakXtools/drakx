@@ -42,10 +42,10 @@ if [ -x "/tmp/drakx/mdkinst/usr/bin/perl-install/live_install2" ]; then
 
     for i in MonitorsDB CardsNames Cards+
     do
-	if [ -e /usr/X11R6/lib/X11/$i ]; then
-	    /bin/mv /usr/X11R6/lib/X11/$i /tmp/drakx/mdkinst
+	if [ -e /usr/share/ldetect-lst/$i ]; then
+	    /bin/mv /usr/share/ldetect-lst/X11/$i /tmp/drakx/mdkinst
 	fi
-	/bin/cp -a /tmp/drakx/mdkinst/usr/X11R6/lib/X11/$i /usr/X11R6/lib/X11/$i
+	/bin/cp -a /tmp/drakx/mdkinst/usr/share/ldetect-lst/X11/$i /usr/share/ldetect-lst/X11/$i
     done
 
     # gtk ressource for live.

@@ -185,9 +185,11 @@ sub pci_probe {
 }
 
 sub usb_probe {
+    -e "/proc/bus/usb/devices" or return ();
+
     map {
 	my %l;
-	@l{qw(vendor id driver description)} = split "\t";
+	@l{qw(vendor id type driver description)} = split "\t";
 	$l{$_} = hex $l{$_} foreach qw(vendor id);
 	$l{bus} = 'USB';
 	\%l
@@ -233,20 +235,6 @@ sub syslog {
     `dmesg`;
 }
 
-sub hasUsb {
-    my ($class, $prot) = @_;
-    foreach (cat_("/proc/bus/usb/devices")) {
-	if (/^P/ .. /^I/) {
-	    my ($c, $p) = /Cls=(\d+).*Prot=(\d+)/;
-	    $c == $class && ($prot < 0 || $prot == $p) and log::l("found usb $c $p"), return 1;
-	}
-    }
-    0;
-}
-sub hasUsbKeyboard { hasUsb(3, 1) }
-sub hasUsbMouse { hasUsb(3, 2) }
-sub hasUsbZip { hasUsb(8, -1) }
-
 sub hasSMP { c::detectSMP() }
 
 sub hasUltra66 {
@@ -276,6 +264,10 @@ sub whatParport() {
     }
     @res;
 }
+
+sub usbMice      { grep { $_->{type} =~ /\|Mouse/ } usb_probe() }
+sub usbKeyboards { grep { $_->{type} =~ /\|Keyboard/ } usb_probe() }
+sub usbZips      { grep { $_->{type} =~ /Mass Storage\|/ } usb_probe() }
 
 sub whatUsbport() {
     my ($i, $elem, @res) = (0, {});

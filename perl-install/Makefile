@@ -16,7 +16,7 @@ tar-drakxtools: clean
 	$(MAKE) -C ../tools clean
 	cd .. ; rm -rf drakxtools ; cp -af perl-install drakxtools ; cp -af tools/ddcprobe tools/serial_probe drakxtools	
 	cd ../drakxtools ; rm -rf install* pkgs.pm ftp.pm t.pm */CVS ; mv Makefile.drakxtools Makefile ; mv -f standalone/* .
-	cd .. ; tar cfI drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile Makefile.config share/MonitorsDB share/Cards+ share/CardsNames Newt c ddcprobe serial_probe share/po sbus_probing resize_fat share/diskdrake.rc share/isdndb.net $(STANDALONEPMS) icons *.pm)
+	cd .. ; tar cfI drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile Makefile.config Newt c ddcprobe serial_probe share/po sbus_probing resize_fat share/diskdrake.rc share/isdndb.net $(STANDALONEPMS) icons *.pm)
 	cd .. ; rm -rf drakxtools
 
 $(DIRS):
@@ -118,9 +118,7 @@ endif
 	cd share ; cp -a modparm.lst $(DEST)/usr/share
 	cd share ; cp -a consolefonts $(DEST)/usr/share
 	cd share ; cp template.in/*.in $(DEST)/usr/share
-	cd share ; cp MonitorsDB Cards+ CardsNames $(DEST)/usr/X11R6/lib/X11
 	cd share ; cp *.xpm $(DEST)/usr/share
-	cd share ; cp isdndb.net $(DEST)/usr/share/isdn_db.txt
 	cd share ; cp -a themes $(DEST)/usr/share/gtk
 	cd share ; cp compssUsers compssUsers.desktop rpmsrate $(ROOTDEST)/Mandrake/base
 

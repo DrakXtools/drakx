@@ -215,15 +215,19 @@ sub detect() {
         detect_devices::hasMousePS2("psaux") and return fullname2mouse("PS/2|Standard", unsafe => 1), $wacom;
     }
 
-    if (modules::get_alias("usb-interface") && detect_devices::hasUsbMouse()) {
-	eval { 
-	    modules::load("usbmouse");
-	    modules::load("mousedev");
-	};
-	!$@ && detect_devices::tryOpen("usbmouse") and return fullname2mouse("USB|Generic"), $wacom;
-	eval { 
-	    modules::unload("mousedev");
-	    modules::unload("usbmouse");
+    if (modules::get_alias("usb-interface")) {
+	if (my (@l) = detect_devices::usbMice()) {
+	    log::l("found usb mouse $_->{driver} $_->{description} ($_->{type})") foreach @l;
+	    eval { 
+		modules::load("usbmouse");
+		modules::load("mousedev");
+	    };
+	    !$@ && detect_devices::tryOpen("usbmouse") and 
+	      return fullname2mouse($l[0]{driver} =~ /Mouse:(.*)/ ? $1 : "USB|Generic"), $wacom;
+	    eval { 
+		modules::unload("mousedev");
+		modules::unload("usbmouse");
+	    }
 	}
     }
 

@@ -497,7 +497,7 @@ sub load_raw {
 		require fs; fs::mount('/proc/bus/usb', '/proc/bus/usb', 'usbdevfs');
 		#- ensure keyboard is working, the kernel must do the job the BIOS was doing
 		sleep 2;
-		load_multi("usbkbd", "keybdev") if detect_devices::hasUsbKeyboard();
+		load_multi("usbkbd", "keybdev") if detect_devices::usbKeyboards();
 	    }
 	}
     }
@@ -612,7 +612,7 @@ sub load_thiskind {
     } get_that_type($type),
       $type =~ /scsi/ && arch() !~ /sparc/ ? 
 	(map { +{ driver => $_, description => $_, try => 1 } }
-	 detect_devices::hasUsbZip() ? "usb-storage" : (), "imm", "ppa") : ();
+	 detect_devices::usbZips() ? "usb-storage" : (), "imm", "ppa") : ();
 }
 
 sub get_that_type {

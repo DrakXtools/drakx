@@ -8,6 +8,7 @@ use common qw(:common :file :functional :system);
 use install_any;
 use commands;
 use run_program;
+use detect_devices;
 use log;
 use pkgs;
 use fs;
