@@ -75,43 +75,40 @@
 #		perl Net::FTP
 #		ssh-askpass
 #
-# PBS persistants:
+# PBS :
 #		selection des sources a inclure dans le backup cd. 
 #
 #
-# WARNING:      ne pas ecraser les fichiers /etc/passwd fstab 
-#               after a other install
-#
-#
+# WARNING:      do not overwrite /etc/passwd fstab group
+#               
 # TODO:
-#		4 - print ftp problem for user. 
-#	        6 - calcul disk space.
+#		1 - print ftp problem for user. 
+#	        2 - calcul disk space.
 #		   use quota.
-#               7 - ssh & rsync -> expect or .identity.pub/authorized_keys 
-#		8 - write on cd
-#		9 - cd writer detection  -> cdrw: /sys/dev/cdrom/info  /scsi/host0/bus0/target4/lun0 
+#               3 - ssh & rsync -> expect or .identity.pub/authorized_keys 
+#		4 - write on cd
+#		5 - cd writer detection  -> cdrw: /sys/dev/cdrom/info  /scsi/host0/bus0/target4/lun0 
 #			/proc/sys/dev/cdrom/
-#		10- total backup.( all partitions wanted, windows partitions for example!)
+#		6 - total backup.( all partitions wanted, windows partitions for example!)
 #		    dump use for total backup.
-#		11- send mail with results.
-#		12- custom deamon
-#		13- placer README dans $save_path -> prevenir des danger de supprimer la premier version
+#		7 - custom deamon
+#		8 - placer README dans $save_path -> prevenir des danger de supprimer la premier version
 #		    explain configuration file variables (mainly for non X users)
-#		13bis -  option mode update tar u ....
-#		14- webdav
-#	        15- backend : --resore_all, --restore_sys, --restore_users
+#		9 - webdav
+#	        10- backend : --resore_all, --restore_sys, --restore_users
 #			  --build_cd_autoinst 	
 #			  --backup_now --backup_default_now
-#		16- tape device support
-#		17- cpio use !!
-#		18- boot floppy disk (with dialog)
-#		19- build autoboot with backup and install cd 
-#		20- use .backupignore like on CVS
-#		21- afficher les modif dans un fichier texte du meme nom 
+#		11- tape device support
+#		 
+#		12- cpio use !!
+#		13- boot floppy disk (with dialog)
+#		14- build autoboot with backup and install cd 
+#		15- use .backupignore like on CVS
+#		16- afficher les modif dans un fichier texte du meme nom 
 #			pour afficher durant le restore.
-#		22- futur: could be possible to restore a specific file 
+#		17- futur: could be possible to restore a specific file 
 #			or directory at specific date. 
-#		23- possible all files each time from directory.
+#		18- possible all files each time from directory.
 #		               
 # DONE TODAY:
 #________________________________________________________________
@@ -469,6 +466,10 @@ sub ftp_client {
 }
 
 sub ssh_client {
+#    foreach (@file_list_to_send_by_ftp) {
+	system("scp @file_list_to_send_by_ftp root\@petra:.");
+#    }
+
 #  $res = Net::SSLeay::write($ssl, $msg);  # Perl knows how long $msg is
 #         die_if_ssl_error("ssl write");
 #         shutdown S, 1;  # Half close --> No more output, sends EOF to server
@@ -606,7 +607,7 @@ sub build_backup_files {
  system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext -T $save_path/list_incr_user_$user$the_time.txt");
  push @file_list_to_send_by_ftp, "$save_path/backup_incr_user_$user$the_time.$tar_ext";
  push @file_list_to_send_by_ftp, "$save_path/list_incr_user_$user$the_time.txt";
- $results .= " \nfile: $save_path/backup_incr_user_$user$the_time.$tar_ext";
+ $results .= " \nfile: $save_path/backup_incr_user_$user$the_time.$tar_ext\n";
  $results .= cat_("$save_path/list_incr_user_$user$the_time.txt");
 			}
 		    }
@@ -621,20 +622,20 @@ sub build_backup_files {
  system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext -T $save_path/list_incr_user_$user$the_time.txt");
  push @file_list_to_send_by_ftp, "$save_path/backup_incr_user_$user$the_time.$tar_ext";
  push @file_list_to_send_by_ftp, "$save_path/list_incr_user_$user$the_time.txt";
- $results .= "\nfile: $save_path/backup_incr_user_$user$the_time.$tar_ext";
+ $results .= "\nfile: $save_path/backup_incr_user_$user$the_time.$tar_ext\n";
  $results .= cat_("$save_path/list_incr_user_$user$the_time.txt");
 			}
 		    }
 		    else {
 			system("$tar_cmd_user -f $save_path/backup_base_user_$user$the_time.$tar_ext $path_name");
 			push @file_list_to_send_by_ftp, "$save_path/backup_base_user_$user$the_time.$tar_ext";
-			$results .= "\nfile: $save_path/backup_base_user_$user$the_time.$tar_ext";
+			$results .= "\nfile: $save_path/backup_base_user_$user$the_time.$tar_ext\n";
 		    }
 		} else {
 		    system("cd $save_path && rm -f backup_user_$_* backup_base_user_$_* backup_incr_user_$_*");
 		    system("$tar_cmd_user -f $save_path/backup_user_$_$the_time.$tar_ext $path_name");
 		    push @file_list_to_send_by_ftp, "$save_path/backup_user_$_$the_time.$tar_ext";
-		    $results .= "\nfile: $save_path/backup_user_$user$the_time.$tar_ext";
+		    $results .= "\nfile: $save_path/backup_user_$user$the_time.$tar_ext\n";
 		}
 	    }
 	}
@@ -1330,7 +1331,7 @@ sub advanced_options{
 					     0, gtkset_sensitive(my $check_tar_bz2  = new Gtk::CheckButton( _(" Use Tar and bzip2  ( very slow) [please be careful if you\n (un)select this option all your old backups will be deleted ]") ), 0),
 			 0, gtkset_sensitive(my $check_backupignore = new Gtk::CheckButton( _(" Use .backupignore files")), 0),
 				 0, gtkpack_(new Gtk::HBox(0,10),
-					     0, my $check_mail = new Gtk::CheckButton( _("Send mail after each backup to :")),
+					     0, my $check_mail = new Gtk::CheckButton( _("Send mail report after each backup to :")),
 					     1, new Gtk::HBox(0,10),
 					     0, my $mail_entry = new Gtk::Entry(),
 					     ),
@@ -2045,6 +2046,7 @@ sub restore_find_net {
 						      $box_where_net->destroy(); 
 						      if ($previous_function ) {
 							  message_underdevel();
+#							  advanced_where_net_ftp(\&$previous_function);
 						      } else {
 							  advanced_where_net_ftp();
 						      }}),
@@ -2161,7 +2163,7 @@ sub restore_step2 {
 		     0, gtkset_sensitive(my $restore_path_entry = new Gtk::Entry(), $restore_other_path),
 		     ),
          0, gtkset_sensitive(my $check_backup_bef_restore = new Gtk::CheckButton(_("do new backup before restore (only for incremental backups.)")), $backup_sys_versions || $backup_user_versions  ),
-	 0, gtkset_sensitive(my $check_remove_user_dir = new Gtk::CheckButton(_("Remove users directories before restore.")), $sys_exist),
+	 0, gtkset_sensitive(my $check_remove_user_dir = new Gtk::CheckButton(_("Remove initials directories before restore.")), $sys_exist),
 	 1, new Gtk::VBox(0,10),
 	 ),
 	    );
@@ -2730,12 +2732,12 @@ sub build_backup_cd_select_data {
 								gtkset_active($b, 0);
 							    }
 							    $b->signal_connect(toggled => sub {
-								if ($check_data_to_backup_cd{$name}[1] ) {
-								    $check_data_to_backup_cd{$name}[1] = 0;
-								    if (!member( /$name$/, @list_to_build_on_cd) ) {
+								if (!$check_data_to_backup_cd{$name}[1] ) {
+								    $check_data_to_backup_cd{$name}[1] = 1;
+								    if (!grep ( /$name$/, @list_to_build_on_cd) ) {
 									push @list_to_build_on_cd, $name;}
 								} else {
-								    $check_data_to_backup_cd{$name}[1] = 1;
+								    $check_data_to_backup_cd{$name}[1] = 0;
 								    foreach (@list_to_build_on_cd) {
 									if ($name ne $_) {
 									    push @user_list_tmp, $_;
