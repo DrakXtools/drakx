@@ -4,7 +4,6 @@ use diagnostics;
 use strict;
 use common;
 use log;
-use install_any;
 
 #- key: lang name (locale name for some (~5) special cases needing
 #-      extra distinctions)
