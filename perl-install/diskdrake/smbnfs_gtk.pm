@@ -104,7 +104,7 @@ sub set_export_icon {
     my ($entry, $w) = @_;
     $entry ||= {};
     my $icon = $icons{$entry->{isMounted} ? 'mounted' : $entry->{mntpoint} ? 'has_mntpoint' : 'default'};
-    my_gtk::ctree_set_icon($tree, $w, @$icon);
+    ugtk::ctree_set_icon($tree, $w, @$icon);
 }
 
 sub update {
@@ -147,7 +147,7 @@ sub import_ctree {
 	my $name = $server->{name} || $server->{ip};
 	$servers_displayed{$name} ||= do {
 	    my $w = $tree->insert_node(undef, undef, [$name], 5, (undef) x 4, 0, 0);
-	    my_gtk::ctree_set_icon($tree, $w, @{$icons{server}});
+	    ugtk::ctree_set_icon($tree, $w, @{$icons{server}});
 	    $wservers{$w->{_gtk}} = $server;
 	    $w;
 	};
