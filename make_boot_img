@@ -90,7 +90,7 @@ sub boot_img_i386 {
     __ "$sudo umount $mnt 2>/dev/null";
     my $automatic = "";
 
-    if ($type eq "hd") {
+    if ($type eq "hd" || $type eq "hdreiser") {
 	_ "bunzip2 -c $instdir/init-data/msgboot.img.bz2 > $img";
 	$automatic = "automatic=method:disk";
     } elsif ($type eq "all") {
