@@ -361,7 +361,7 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
     delete $ENV{DURING_INSTALL};
     run_program::rooted($o->{prefix}, 'ldconfig') or die "ldconfig failed!";
     log::l("Install took: ", formatTimeRaw(time - $time));
-    log_sizes($o);
+    install_any::log_sizes($o);
 }
 
 sub afterInstallPackages($) {
