@@ -39,7 +39,7 @@ sub start_not_running_service ($) {
     }
 }
 
-sub wait_for_cups {
+sub wait_for_cups() {
     # CUPS needs some time to come up. Wait up to 30 seconds, checking
     # whether CUPS is ready.
     my $cupsready = 0;

@@ -59,8 +59,8 @@ sub configure {
 		$configfilecontent =~
 		    s/\n/\nCurrent-Printer: $printer->{DEFAULT}\n/s;
 	    } else {
-		$configfilecontent =~ /^\s*Current\-Printer\s*:\s*(\S+)\s*$/m;
-		if (!isprinterconfigured($1, $configfilecontent)) {
+		if ($configfilecontent =~ /^\s*Current\-Printer\s*:\s*(\S+)\s*$/m &&
+              !isprinterconfigured($1, $configfilecontent)) {
 		    $configfilecontent =~
 			s/(Current\-Printer\s*:\s*)\S+/$1$printer->{DEFAULT}/;
 		}
@@ -82,7 +82,7 @@ sub addcupsremoteto {
     if ($printer->{SPOOLER} eq "cups" && 
 	(-x "$::prefix/usr/bin/curl" || -x "$::prefix/usr/bin/wget")) {
 	foreach my $listentry (@printerlist) {
-	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
+	    next if $listentry !~ /^([^\|]+)\|([^\|]+)$/;
 	    my $q = $1;
 	    next if $q ne $queue;
 	    my $server = $2;
@@ -174,13 +174,11 @@ sub makeprinterentry {
     if ($ppd =~ /CUPS\s*\+\s*GIMP\s*\-\s*Print/im) {
 	# Native CUPS driver
 	$gimpprintqueue = 1;
-	$ppd =~ /\s*\*ModelName:\s*\"(\S+)\"\s*$/im;
-	$gimpprintdriver = $1;
+	$gimpprintdriver = $1 if $ppd =~ /\s*\*ModelName:\s*\"(\S+)\"\s*$/im;
     } elsif ($ppd =~ /Foomatic\s*\+\s*gimp\s*\-\s*print/im) {
 	# GhostScript + Foomatic driver
 	$gimpprintqueue = 1;
-	$ppd =~
-	    /\-sModel=((escp2|pcl|bjc|lexmark)\-[^\s\"\']*)/im;
+	$ppd =~ /\-sModel=((escp2|pcl|bjc|lexmark)\-[^\s\"']*)/im and
 	$gimpprintdriver = $1;
     }
     if ($gimpprintqueue) {
@@ -211,7 +209,7 @@ sub makeprinterentry {
     return $configfile;
 }
 
-sub findconfigfiles {
+sub findconfigfiles() {
     my @configfilenames = (if_(-d "$::prefix/usr/lib/gimp/1.2", ".gimp-1.2/printrc"),
                            if_(-d "$::prefix/usr/lib/gimp/1.3", ".gimp-1.3/printrc"));
     return () unless @configfilenames;

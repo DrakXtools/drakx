@@ -31,7 +31,7 @@ sub get_printer {
     return undef;
 }
 
-sub printer_type($) { "LOCAL" }
+sub printer_type() { "LOCAL" }
 
 sub get_spooler () {
     if (-f "$::prefix$FOOMATIC_DEFAULT_SPOOLER") {

@@ -8,7 +8,7 @@ use common;
 
 
 #------------------------------------------------------------------------------
-sub lpstat_v {
+sub lpstat_v() {
     map {
 	if (my ($queuename, $uri) = m/^\s*device\s+for\s+([^:\s]+):\s*(\S+)\s*$/) {
 	    +{ queuename => $queuename, uri => $uri, if_($uri =~ m!^ipp://([^/:]+)[:/]!, ipp => $1) };

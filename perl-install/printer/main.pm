@@ -63,10 +63,10 @@ sub spooler {
 sub printer_type($) {
     my ($printer) = @_;
     for ($printer->{SPOOLER}) {
-	/cups/  && return @printer_type_inv{qw(LOCAL LPD SOCKET SMB), if_($::expert, qw(URI))};
-	/lpd/   && return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP), if_($::expert, qw(POSTPIPE URI))};
-	/lprng/ && return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP), if_($::expert, qw(POSTPIPE URI))};
-	/pdq/   && return @printer_type_inv{qw(LOCAL LPD SOCKET), if_($::expert, qw(URI))};
+	/cups/  and return @printer_type_inv{qw(LOCAL LPD SOCKET SMB), if_($::expert, qw(URI))};
+	/lpd/   and return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP), if_($::expert, qw(POSTPIPE URI))};
+	/lprng/ and return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP), if_($::expert, qw(POSTPIPE URI))};
+	/pdq/   and return @printer_type_inv{qw(LOCAL LPD SOCKET), if_($::expert, qw(URI))};
     }
 }
 
@@ -271,9 +271,10 @@ sub read_configured_queues($) {
 	    if ($printer->{SPOOLER} eq "cups") {
 		$printer->{OLD_QUEUE} = $QUEUES[$i]{queuedata}{queue};
 		my $descr = get_descr_from_ppd($printer);
-		$descr =~ m/^([^\|]*)\|([^\|]*)(\|.*|)$/;
-		$printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{make} ||= $1;
-		$printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{model} ||= $2;
+		if ($descr =~ m/^([^\|]*)\|([^\|]*)(\|.*|)$/) {
+              $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{make} ||= $1;
+              $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{model} ||= $2;
+          }
 		# Read out which PPD file was originally used to set up this
 		# queue
 		local *F;
@@ -302,7 +303,7 @@ sub read_configured_queues($) {
 	# Fill in "options" field
 	if (my $args = $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{args}) {
 	    my @options;
-	    foreach my $arg (@{$args}) {
+	    foreach my $arg (@$args) {
 		push(@options, "-o");
 		my $optstr = $arg->{name} . "=" . $arg->{default};
 		push(@options, $optstr);
@@ -332,17 +333,17 @@ sub make_menuentry {
     my $connection;
     if ($connect =~ m!^(file|parallel):/dev/lp(\d+)$!) {
 	my $number = $2;
-	$connection = N(" on parallel port \#%s", $number);
+	$connection = N(" on parallel port #%s", $number);
     } elsif ($connect =~ m!^(file|usb):/dev/usb/lp(\d+)$!) {
 	my $number = $2;
-	$connection = N(", USB printer \#%s", $number);
+	$connection = N(", USB printer #%s", $number);
     } elsif ($connect =~ m!^usb://!) {
 	$connection = N(", USB printer");
     } elsif ($connect =~ m!^ptal:/(.+)$!) {
 	my $ptaldevice = $1;
 	if ($ptaldevice =~ /^mlc:par:(\d+)$/) {
 	    my $number = $1;
-	    $connection = N(", multi-function device on parallel port \#%s",
+	    $connection = N(", multi-function device on parallel port #%s",
 			    $number);
 	} elsif ($ptaldevice =~ /^mlc:usb:/) {
 	    $connection = N(", multi-function device on USB");
@@ -520,7 +521,7 @@ sub read_printer_db(;$) {
     $entry->{driver} = "raw";
     $entry->{make} = "";
     $entry->{model} = N("Unknown model");
-    map { $thedb{$entry->{ENTRY}}{$_} = $entry->{$_} } keys %$entry;
+    $thedb{$entry->{ENTRY}}{$_} = $entry->{$_} foreach keys %$entry;
 
     #- Load CUPS driver database if CUPS is used as spooler
     if ($spooler && $spooler eq "cups") {
@@ -716,24 +717,24 @@ sub read_location {
 
     my ($cupsd_conf_ptr, $path) = @_;
 
-    my @result = ();
-    if (grep(m!^\s*<Location\s+$path\s*>!, @{$cupsd_conf_ptr})) {
+    my @result;
+    if (grep { m!^\s*<Location\s+$path\s*>! } @$cupsd_conf_ptr) {
 	my $location_start = -1;
 	my $location_end = -1;
 	# Go through all the lines, bail out when start and end line found
 	for (my $i = 0; 
-	     ($i <= $#{$cupsd_conf_ptr}) and ($location_end == -1);
+	     $i <= $#{$cupsd_conf_ptr} and $location_end == -1;
 	     $i++) {
 	    if ($cupsd_conf_ptr->[$i] =~ m!^\s*<\s*Location\s+$path\s*>!) {
 		# Start line of block
 		$location_start = $i;
-	    } elsif (($cupsd_conf_ptr->[$i] =~ 
-		      m!^\s*<\s*/Location\s*>!) and
-		     ($location_start != -1)) {
+	    } elsif ($cupsd_conf_ptr->[$i] =~ 
+		      m!^\s*<\s*/Location\s*>! &&
+		     $location_start != -1) {
 		# End line of block
 		$location_end = $i;
 		last;
-	    } elsif (($location_start >= 0) and ($location_end < 0)) {
+	    } elsif ($location_start >= 0 && $location_end < 0) {
 		# Inside the location block
 		push(@result, $cupsd_conf_ptr->[$i]);
 	    }
@@ -759,20 +760,20 @@ sub rip_location {
 
     my ($cupsd_conf_ptr, $path) = @_;
 
-    my @location = ();
+    my @location;
     my $location_start = -1;
     my $location_end = -1;
-    if (grep(m!^\s*<Location\s+$path\s*>!, @{$cupsd_conf_ptr})) {
+    if (grep { m!^\s*<Location\s+$path\s*>! } @$cupsd_conf_ptr) {
 	# Go through all the lines, bail out when start and end line found
 	for (my $i = 0; 
-	     ($i <= $#{$cupsd_conf_ptr}) and ($location_end == -1);
+	     $i <= $#{$cupsd_conf_ptr} and $location_end == -1;
 	     $i++) {
 	    if ($cupsd_conf_ptr->[$i] =~ m!^\s*<\s*Location\s+$path\s*>!) {
 		# Start line of block
 		$location_start = $i;
-	    } elsif (($cupsd_conf_ptr->[$i] =~ 
-		      m!^\s*<\s*/Location\s*>!) and
-		     ($location_start != -1)) {
+	    } elsif ($cupsd_conf_ptr->[$i] =~ 
+		      m!^\s*<\s*/Location\s*>! &&
+		     $location_start != -1) {
 		# End line of block
 		$location_end = $i;
 		last;
@@ -780,7 +781,7 @@ sub rip_location {
 	}
 	# Rip out the block and store it seperately
 	@location = 
-	    splice(@{$cupsd_conf_ptr},$location_start,
+	    splice(@$cupsd_conf_ptr, $location_start,
 		   $location_end - $location_start + 1);
     } else {
 	# If there is no location block, create one
@@ -799,7 +800,7 @@ sub insert_location {
 
     my ($cupsd_conf_ptr, $location_start, @location) = @_;
 
-    splice(@{$cupsd_conf_ptr}, $location_start,0,@location);
+    splice(@$cupsd_conf_ptr, $location_start,0,@location);
 }
 
 sub add_to_location {
@@ -887,7 +888,7 @@ sub broadcastaddress {
 	$address =~ s/\*$/255.255/;
     } elsif ($address =~ /^\d+\.\d+\.\d+\.\*$/) {
 	$address =~ s/\*$/255/;
-    } elsif ($address =~ /^(\d+)\.(\d+)\.(\d+)\.(\d+)\/(\d+)$/) {
+    } elsif ($address =~ m!^(\d+)\.(\d+)\.(\d+)\.(\d+)/(\d+)$!) {
 	my $numadr = ($1 << 24) + ($2 << 16) + ($3 << 8) + $4;
 	my $mask = ((1 << $5) - 1) << (32 - $5);
 	my $broadcast = $numadr | (~$mask);
@@ -897,7 +898,7 @@ sub broadcastaddress {
 	    (($broadcast & (255 << 8)) >> 8) . '.' .
 	    ($broadcast & 255);
     } elsif ($address =~
-	     /^(\d+)\.(\d+)\.(\d+)\.(\d+)\/(\d+)\.(\d+)\.(\d+)\.(\d+)$/) {
+	     m!^(\d+)\.(\d+)\.(\d+)\.(\d+)/(\d+)\.(\d+)\.(\d+)\.(\d+)$!) {
 	my $numadr = ($1 << 24) + ($2 << 16) + ($3 << 8) + $4;
 	my $mask = ($5 << 24) + ($6 << 16) + ($7 << 8) + $8;
 	my $broadcast = $numadr | (~$mask);
@@ -931,9 +932,9 @@ sub localprintersshared {
 
     my ($printer) = @_;
 
-    return (($printer->{cupsconfig}{keys}{Browsing} !~ /off/i) &&
-	    ($printer->{cupsconfig}{keys}{BrowseInterval} != 0) &&
-	    ($#{$printer->{cupsconfig}{keys}{BrowseAddress}} >= 0));
+    return ($printer->{cupsconfig}{keys}{Browsing} !~ /off/i &&
+	    $printer->{cupsconfig}{keys}{BrowseInterval} != 0 &&
+	    $#{$printer->{cupsconfig}{keys}{BrowseAddress}} >= 0);
 }
 
 sub remotebroadcastsaccepted {
@@ -953,18 +954,18 @@ sub remotebroadcastsaccepted {
     }
 
     my $havedenyall = 
-	(join('', @{$printer->{cupsconfig}{keys}{BrowseDeny}}) =~
-	 /All/im);
+	join('', @{$printer->{cupsconfig}{keys}{BrowseDeny}}) =~
+	 /All/im;
     my $havedenylocal = 
-	(join('', @{$printer->{cupsconfig}{keys}{BrowseDeny}}) =~
-	 /\@LOCAL/im);
+	join('', @{$printer->{cupsconfig}{keys}{BrowseDeny}}) =~
+	 /\@LOCAL/im;
     my $orderallowdeny =
-	($printer->{cupsconfig}{keys}{BrowseOrder} =~
-	 /allow\s*,\s*deny/i);
+	$printer->{cupsconfig}{keys}{BrowseOrder} =~
+	 /allow\s*,\s*deny/i;
     my $haveallowremote = 0;
-    for my $allowline (@{$printer->{cupsconfig}{keys}{BrowseAllow}}) {
+    foreach my $allowline (@{$printer->{cupsconfig}{keys}{BrowseAllow}}) {
 	next if 
-	    ($allowline =~ /^\s*(localhost|0*127\.0+\.0+\.0*1|none)\s*$/i);
+	    $allowline =~ /^\s*(localhost|0*127\.0+\.0+\.0*1|none)\s*$/i;
 	$haveallowremote = 1;
     }
 
@@ -1018,7 +1019,7 @@ sub clientnetworks {
     my $haveallowedhostwithoutbrowseaddress = 0;
     my $haveallowedhostwithoutbrowseallow = 0;
     # Go through all "Allow From" lines
-    for my $line (@{$printer->{cupsconfig}{root}{AllowFrom}}) {
+    foreach my $line (@{$printer->{cupsconfig}{root}{AllowFrom}}) {
 	if ($line =~ /^\s*(localhost|0*127\.0+\.0+\.0*1)\s*$/i) {
 	    # Line pointing to localhost
 	    $haveallowfromlocalhost = 1;
@@ -1039,12 +1040,12 @@ sub clientnetworks {
     }
     my $havebrowseaddresswithoutallowedhost = 0;
     # Go through all "BrowseAdress" lines
-    for my $line (@{$printer->{cupsconfig}{keys}{BrowseAddress}}) {
+    foreach my $line (@{$printer->{cupsconfig}{keys}{BrowseAddress}}) {
 	if ($line =~ /^\s*(localhost|0*127\.0+\.0+\.0*1)\s*$/i) {
 	    # Skip lines pointing to localhost
 	} elsif ($line =~ /^\s*(none)\s*$/i) {
 	    # Skip "Allow From None" lines
-	} elsif (!member($line, map {broadcastaddress($_)} @sharehosts)) {
+	} elsif (!member($line, map { broadcastaddress($_) } @sharehosts)) {
 	    # Line pointing to remote server
 	    push(@sharehosts, networkaddress($line));
 	    if ($printer->{cupsconfig}{localprintersshared}) {
@@ -1054,7 +1055,7 @@ sub clientnetworks {
     }
     my $havebrowseallowwithoutallowedhost = 0;
     # Go through all "BrowseAllow" lines
-    for my $line (@{$printer->{cupsconfig}{keys}{BrowseAllow}}) {
+    foreach my $line (@{$printer->{cupsconfig}{keys}{BrowseAllow}}) {
 	if ($line =~ /^\s*(localhost|0*127\.0+\.0+\.0*1)\s*$/i) {
 	    # Skip lines pointing to localhost
 	} elsif ($line =~ /^\s*(none)\s*$/i) {
@@ -1086,12 +1087,12 @@ sub makesharehostlist {
 
     my @sharehostlist; 
     my %sharehosthash;
-    for my $host (@{$printer->{cupsconfig}{clientnetworks}}) {
+    foreach my $host (@{$printer->{cupsconfig}{clientnetworks}}) {
 	if ($host =~ /\@LOCAL/i) {
 	    $sharehosthash{$host} = N("Local network(s)");
 	} elsif ($host =~ /\@IF\((.*)\)/i) {
 	    $sharehosthash{$host} = N("Interface \"%s\"", $1);
-	} elsif ($host =~ /(\/|^\*|\*$|^\.)/) {
+	} elsif ($host =~ m!(/|^\*|\*$|^\.)!) {
 	    $sharehosthash{$host} = N("Network %s", $host);
 	} else {
 	    $sharehosthash{$host} = N("Host %s", $host);
@@ -1114,7 +1115,7 @@ sub makebrowsepolllist {
 
     my @browsepolllist; 
     my %browsepollhash;
-    for my $host (@{$printer->{cupsconfig}{BrowsePoll}}) {
+    foreach my $host (@{$printer->{cupsconfig}{BrowsePoll}}) {
 	my ($ip, $port);
 	if ($host =~ /^([^:]+):([^:]+)$/) {
 	    $ip = $1;
@@ -1139,11 +1140,11 @@ sub is_network_ip {
 
     my ($address) = @_;
 
-    ($address =~ /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/) ||
-	($address =~ /^(\d+\.){1,3}\*$/) ||
-	($address =~ /^(\d+)\.(\d+)\.(\d+)\.(\d+)\/(\d+)$/) ||
-	($address =~
-	 /^(\d+)\.(\d+)\.(\d+)\.(\d+)\/(\d+)\.(\d+)\.(\d+)\.(\d+)$/);
+    $address =~ /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/ ||
+	$address =~ /^(\d+\.){1,3}\*$/ ||
+	$address =~ m!^(\d+)\.(\d+)\.(\d+)\.(\d+)/(\d+)$! ||
+	$address =~
+	 m!^(\d+)\.(\d+)\.(\d+)\.(\d+)/(\d+)\.(\d+)\.(\d+)\.(\d+)$!;
 
 }
 
@@ -1268,8 +1269,8 @@ sub write_cups_config {
 					  'BrowseOrder Deny,Allow');
 	}
     } else {
-	if (($printer->{cupsconfig}{localprintersshared}) ||
-	    ($#{$printer->{cupsconfig}{BrowsePoll}} >= 0)) {
+	if ($printer->{cupsconfig}{localprintersshared} ||
+	    $#{$printer->{cupsconfig}{BrowsePoll}} >= 0) {
 	    # Deny all broadcasts, but leave all "BrowseAllow" lines
 	    # untouched
 	    handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
@@ -1296,10 +1297,10 @@ sub write_cups_config {
 	    "Allow From 127.0.0.1\n" .
 	    (@localips ?
 	     "Allow From " .
-	     join("\nAllow From ", @localips).
+	     join("\nAllow From ", @localips) .
 	     "\n" : "") .
 	    ($printer->{cupsconfig}{localprintersshared} &&
-	     ($#{$printer->{cupsconfig}{clientnetworks}} >= 0) ?
+	     $#{$printer->{cupsconfig}{clientnetworks}} >= 0 ?
 	     "Allow From " .
 	     join("\nAllow From ", 
 		  grep {
@@ -1315,8 +1316,8 @@ sub write_cups_config {
 	if ($#{$printer->{cupsconfig}{clientnetworks}} >= 0) {
 	    handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
 					  'BrowseAddress ' .
-					  join ("\nBrowseAddress ",
-						map {broadcastaddress($_)}
+					  join("\nBrowseAddress ",
+						map { broadcastaddress($_) }
 						@{$printer->{cupsconfig}{clientnetworks}}));
 	} else {
 	    handle_configs::comment_directive($printer->{cupsconfig}{cupsd_conf},
@@ -1326,7 +1327,7 @@ sub write_cups_config {
 	if ($#{$printer->{cupsconfig}{clientnetworks}} >= 0) {
 	    handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
 					  'BrowseAllow ' .
-					  join ("\nBrowseAllow ", 
+					  join("\nBrowseAllow ", 
 						@{$printer->{cupsconfig}{clientnetworks}}));
 	} else {
 	    handle_configs::comment_directive($printer->{cupsconfig}{cupsd_conf},
@@ -1338,7 +1339,7 @@ sub write_cups_config {
     if ($#{$printer->{cupsconfig}{BrowsePoll}} >= 0) {
 	handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
 				      'BrowsePoll ' .
-				      join ("\nBrowsePoll ", 
+				      join("\nBrowsePoll ", 
 					    @{$printer->{cupsconfig}{BrowsePoll}}));
 	# "Browsing" must be on for "BrowsePoll" to work
 	handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
@@ -1381,7 +1382,7 @@ sub read_printers_conf {
 	chomp;
 	/^\s*#/ and next;
 	if (/^\s*<(?:DefaultPrinter|Printer)\s+([^>]*)>/) { $current = { mode => 'cups', QUEUE => $1, } }
-	elsif (/\s*<\/Printer>/) { $current->{QUEUE} && $current->{DeviceURI} or next; #- minimal check of synthax.
+	elsif (m!\s*</Printer>!) { $current->{QUEUE} && $current->{DeviceURI} or next; #- minimal check of synthax.
 				   add2hash($printer->{configured}{$current->{QUEUE}} ||= {}, $current); $current = undef }
 	elsif (/\s*(\S*)\s+(.*)/) { $current->{$1} = $2 }
     }
@@ -1439,7 +1440,7 @@ sub ppd_entry_str {
 	} elsif ($descr =~ /Foomatic/i) {
 	    $descr =~ s/Foomatic/GhostScript/i;
 	} elsif ($descr =~ /CUPS\+GIMP-print/i) {
-	    $descr =~ s/CUPS\+GIMP-print/CUPS \+ GIMP-Print/i;
+	    $descr =~ s/CUPS\+GIMP-print/CUPS + GIMP-Print/i;
 	} elsif ($descr =~ /Series CUPS/i) {
 	    $descr =~ s/Series CUPS/Series, CUPS/i;
 	} elsif ($descr !~ /(PostScript|GhostScript|CUPS|Foomatic)/i) {
@@ -1448,19 +1449,19 @@ sub ppd_entry_str {
 	# Split model and driver
 	$descr =~ s/\s*Series//i;
 	$descr =~ s/\((.*?(PostScript|PS.*).*?)\)/$1/i;
-	if (($descr =~
-	     /^\s*(Generic\s*PostScript\s*Printer)\s*,?\s*(.*)$/i) ||
-	    ($descr =~
-	     /^\s*(PostScript\s*Printer)\s*,?\s*(.*)$/i) ||
-	    ($descr =~ /^([^,]+[^,\s])\s*,?\s*(Foomatic.*)$/i) ||
-	    ($descr =~ /^([^,]+[^,\s])\s*,?\s*(GhostScript.*)$/i) ||
-	    ($descr =~ /^([^,]+[^,\s])\s*,?\s*(CUPS.*)$/i) ||
-	    ($descr =~ /^([^,]+[^,\s])\s*,?\s+(PS.*)$/i) ||
-	    ($descr =~
-	     /^([^,]+[^,\s])\s*,?\s*(\(v?\.?\s*\d\d\d\d\.\d\d\d\).*)$/i) ||
-	    ($descr =~ /^([^,]+[^,\s])\s*,?\s*(v\d+\.\d+.*)$/i) ||
-	    ($descr =~ /^([^,]+[^,\s])\s*,?\s*(PostScript.*)$/i) ||
-	    ($descr =~ /^([^,]+)\s*,?\s*(.+)$/)) {
+	if ($descr =~
+	     /^\s*(Generic\s*PostScript\s*Printer)\s*,?\s*(.*)$/i ||
+	    $descr =~
+	     /^\s*(PostScript\s*Printer)\s*,?\s*(.*)$/i ||
+	    $descr =~ /^([^,]+[^,\s])\s*,?\s*(Foomatic.*)$/i ||
+	    $descr =~ /^([^,]+[^,\s])\s*,?\s*(GhostScript.*)$/i ||
+	    $descr =~ /^([^,]+[^,\s])\s*,?\s*(CUPS.*)$/i ||
+	    $descr =~ /^([^,]+[^,\s])\s*,?\s+(PS.*)$/i ||
+	    $descr =~
+	     /^([^,]+[^,\s])\s*,?\s*(\(v?\.?\s*\d\d\d\d\.\d\d\d\).*)$/i ||
+	    $descr =~ /^([^,]+[^,\s])\s*,?\s*(v\d+\.\d+.*)$/i ||
+	    $descr =~ /^([^,]+[^,\s])\s*,?\s*(PostScript.*)$/i ||
+	    $descr =~ /^([^,]+)\s*,?\s*(.+)$/) {
 	    $model = $1;
 	    $driver = $2;
 	    $model =~ s/[\-\s,]+$//;
@@ -1468,7 +1469,7 @@ sub ppd_entry_str {
 	    $driver =~ s/(PostScript)(.*)(PostScript)/$1$2/i;
 	    $driver =~ 
 	      s/^\s*(\(?v?\.?\s*\d\d\d\d\.\d\d\d\)?|v\d+\.\d+)([,\s]*)(.*?)\s*$/$3$2$1/i;
-	    $driver =~ s/,\s*\(/ \(/g;
+	    $driver =~ s/,\s*\(/ (/g;
 	    $driver =~ s/[\-\s,]+$//;
 	    $driver =~ s/^[\-\s,]+//;
 	    $driver =~ s/\s+/ /g;
@@ -1486,7 +1487,7 @@ sub ppd_entry_str {
     # name (do not do this with manufacturer names which contain
     # odd characters)
     $model =~ s/^$mf[\s\-]+//i 
-	if ($mf and ($mf !~ /[\\\/\(\)\[\]\|\.\$\@\%\*\?]/));
+	if $mf && $mf !~ m![\\/\(\)\[\]\|\.\$\@\%\*\?]!;
     # Clean some manufacturer's names
     $mf = clean_manufacturer_name($mf);
     # Rename Canon "BJC XXXX" models into "BJC-XXXX" so that the 
@@ -1507,7 +1508,7 @@ sub ppd_entry_str {
     # Try again to remove manufacturer's name from the beginning of the 
     # model name, this with the cleaned manufacturer name
     $model =~ s/^$mf[\s\-]+//i 
-	if ($mf and ($mf !~ /[\\\/\(\)\[\]\|\.\$\@\%\*\?]/));
+	if $mf && $mf !~ m![\\/\(\)\[\]\|\.\$\@\%\*\?]!;
     # Put out the resulting description string
     uc($mf) . '|' . $model . '|' . $driver .
       ($lang && " (" . lc(substr($lang, 0, 2)) . ")");
@@ -1552,9 +1553,9 @@ sub ppd_devid_data {
 	@content = cat_($ppd) or return ("", "");
     }
     my ($devidmake, $devidmodel);
-    ($_ =~ /^\*Manufacturer:\s*\"(.*)\"\s*$/ and $devidmake = $1) 
+    /^\*Manufacturer:\s*\"(.*)\"\s*$/ and $devidmake = $1
 	foreach @content;
-    ($_ =~ /^\*Product:\s*\"\(?(.*?)\)?\"\s*$/ and $devidmodel = $1) 
+    /^\*Product:\s*\"\(?(.*?)\)?\"\s*$/ and $devidmodel = $1 
 	foreach @content;
     return ($devidmake, $devidmodel);
 }
@@ -1579,28 +1580,27 @@ sub poll_ppd_base {
 	    if ($ppd eq "raw") { next }
 	    $ppd && $mf && $descr and do {
 		my $key = ppd_entry_str($mf, $descr, $lang);
-		$key =~ /^[^\|]+\|([^\|]+)\|(.*)$/;
-		my ($model, $driver) = ($1, $2);
+		my ($model, $driver) = ($1, $2) if $key =~ /^[^\|]+\|([^\|]+)\|(.*)$/;
 		# Clean some manufacturer's names
 		$mf = clean_manufacturer_name($mf);
 		# Remove language tag
 		$driver =~ s/\s*\([a-z]{2}(|_[A-Z]{2})\)\s*$//;
 		# Recommended Foomatic PPD? Extract "(recommended)"
 		my $isrecommended = 
-		    ($driver =~ s/\s+\(recommended\)\s*$//i);
+		    $driver =~ s/\s+\(recommended\)\s*$//i;
 		# Remove trailing white space
 		$driver =~ s/\s+$//;
 		# For Foomatic: Driver with "GhostScript + "
 		my $fullfoomaticdriver = $driver;
 		# Foomatic PPD? Extract driver name
 		my $isfoomatic = 
-		    ($driver =~ s/^\s*(GhostScript|Foomatic)\s*\+\s*//i);
+		    $driver =~ s/^\s*(GhostScript|Foomatic)\s*\+\s*//i;
 		# Foomatic PostScript driver?
-		$isfoomatic ||= ($descr =~ /Foomatic/i);
+		$isfoomatic ||= $descr =~ /Foomatic/i;
 		# Native CUPS?
-		my $isnativecups = ($driver =~ /CUPS/i);
+		my $isnativecups = $driver =~ /CUPS/i;
 		# Native PostScript
-		my $isnativeps = (!$isfoomatic and !$isnativecups);
+		my $isnativeps = !$isfoomatic and !$isnativecups;
 		# Key without language tag (key as it was produced for the
 		# entries from the Foomatic XML database)
 		my $keynolang = $key;
@@ -1629,24 +1629,21 @@ sub poll_ppd_base {
 		    #    and the new entry is a "recommended" driver other
 		    #    then "Foomatic + Postscript"
 		    if (defined($thedb{$key})) {
-			next unless (lc($thedb{$key}{driver}) ne
-				     lc($driver));
-			next unless (($isnativeps &&
-				      ($thedb{$key}{driver} =~ 
-				       /^PostScript$/i)) ||
-				     (($thedb{$key}{driver} ne "PPD") &&
-				      $isrecommended) ||
-				     (($thedb{$key}{driver} eq "PPD") &&
-				      ($driver ne "PostScript") &&
-				      $isrecommended));
+			next if lc($thedb{$key}{driver}) eq
+				     lc($driver);
+			next unless $isnativeps &&
+				      $thedb{$key}{driver} =~ /^PostScript$/i ||
+                          $thedb{$key}{driver} ne "PPD" && $isrecommended ||
+                          $thedb{$key}{driver} eq "PPD" && $isrecommended && $driver ne "PostScript";
+				      
 			# Remove the old entry
 			delete $thedb{$key};
 		    }
-		} elsif (((defined 
-			   $thedb{"$mf|$model|$fullfoomaticdriver"}) ||
-			  (defined 
-			   $thedb{"$mf|$model|$fullfoomaticdriver (recommended)"})) && 
-			 ($isfoomatic)) {
+		} elsif ((defined 
+			   $thedb{"$mf|$model|$fullfoomaticdriver"} ||
+			  defined 
+			   $thedb{"$mf|$model|$fullfoomaticdriver (recommended)"}) && 
+			 $isfoomatic) {
 		    # Expert mode: There is already an entry for the
 		    # same printer/driver combo produced by the
 		    # Foomatic XML database, so do not make a second
@@ -1654,11 +1651,11 @@ sub poll_ppd_base {
 		    next;
 		} elsif (defined
 			 $thedb{"$mf|$model|PostScript (recommended)"} &&
-			 ($isnativeps)) {
+			 $isnativeps) {
 		    # Expert mode: "Foomatic + Postscript" driver is
 		    # recommended and this is a PostScript PPD? Make
 		    # this PPD the recommended one
-		    for (keys 
+		    foreach (keys 
 		         %{$thedb{"$mf|$model|PostScript (recommended)"}}) {
 			$thedb{"$mf|$model|PostScript"}{$_} =
 			  $thedb{"$mf|$model|PostScript (recommended)"}{$_};
@@ -1668,7 +1665,7 @@ sub poll_ppd_base {
 		    if (!$isrecommended) {
 			$key .= " (recommended)";
 		    }
-		} elsif (($driver =~ /PostScript/i) &&
+		} elsif ($driver =~ /PostScript/i &&
 			 $isrecommended && $isfoomatic &&
 			 (my @foundkeys = grep {
 			     /^$mf\|$model\|/ && !/CUPS/i &&
@@ -1678,17 +1675,17 @@ sub poll_ppd_base {
 		    # recommended and there was a PostScript PPD? Make
 		    # the PostScript PPD the recommended one
 		    my $firstfound = $foundkeys[0];
-		    if (!(grep {/\(recommended\)/} @foundkeys)) {
+		    if (!(grep { /\(recommended\)/ } @foundkeys)) {
 			# Do it only if none of the native PostScript
 			# PPDs for this printer is already "recommended"
-			for (keys %{$thedb{$firstfound}}) {
+			foreach (keys %{$thedb{$firstfound}}) {
 			    $thedb{"$firstfound (recommended)"}{$_} =
 				$thedb{$firstfound}{$_};
 			}
 			delete $thedb{$firstfound};
 		    }
 		    $key =~ s/\s*\(recommended\)//;
-		} elsif (($driver !~ /PostScript/i) &&
+		} elsif ($driver !~ /PostScript/i &&
 			 $isrecommended && $isfoomatic &&
 			 (my @foundkeys = grep {
 			     /^$mf\|$model\|.*\(recommended\)/ && 
@@ -1702,7 +1699,7 @@ sub poll_ppd_base {
 			# Remove the "recommended" tag
 			my $destkey = $sourcekey;
 			$destkey =~ s/\s+\(recommended\)\s*$//i;
-			for (keys %{$thedb{$sourcekey}}) {
+			foreach (keys %{$thedb{$sourcekey}}) {
 			    $thedb{$destkey}{$_} = $thedb{$sourcekey}{$_};
 			}
 			delete $thedb{$sourcekey};
@@ -1787,10 +1784,10 @@ sub configure_queue($) {
     # Check whether a USB printer is configured and activate USB printing if so
     my $useUSB = 0;
     foreach (values %{$printer->{configured}}) {
-	$useUSB ||= (($_->{queuedata}{connect} =~ /usb/i) || 
-	    ($_->{DeviceURI} =~ /usb/i));
+	$useUSB ||= $_->{queuedata}{connect} =~ /usb/i || 
+	    $_->{DeviceURI} =~ /usb/i;
     }
-    $useUSB ||= ($printer->{currentqueue}{connect} =~ /usb/i);
+    $useUSB ||= $printer->{currentqueue}{connect} =~ /usb/i;
     if ($useUSB) {
 	my $f = "$::prefix/etc/sysconfig/usb";
 	my %usb = getVarsFromSh($f);
@@ -1853,11 +1850,11 @@ sub restart_queue($) {
 
     # Restart the daemon(s)
     for ($printer->{SPOOLER}) {
-	/cups/ && do {
+	/cups/ and do {
 	    #- restart cups.
 	    printer::services::restart("cups");
 	    last };
-	/lpr|lprng/ && do {
+	/lpr|lprng/ and do {
 	    #- restart lpd.
 	    foreach ("/var/spool/lpd/$queue/lock", "/var/spool/lpd/lpd.lock") {
 		my $pidlpd = (cat_("$::prefix$_"))[0];
@@ -1922,8 +1919,7 @@ sub help_output {
     open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . sprintf($spoolers{$spooler}{help}, $queue);
     my $helptext = join("", <F>);
     close F;
-    $helptext = "Option list not available!\n" 
-	if (!$helptext || $helptext eq "");
+    $helptext ||= "Option list not available!\n";
     return $helptext;
 }
 
@@ -2031,7 +2027,7 @@ sub autodetectionentry_for_uri {
 	my $make = $1;
 	my $model = $2;
 	my $serial = $4;
-	if ($make and $model) {
+	if ($make && $model) {
 	    $make =~ s/\%20/ /g;
 	    $model =~ s/\%20/ /g;
 	    $serial =~ s/\%20/ /g;
@@ -2041,17 +2037,17 @@ sub autodetectionentry_for_uri {
 	    my $smodel = handle_configs::searchstr($model);
 	    foreach my $p (@autodetected) {
 		next if $p->{port} !~ /usb/i;
-		next if ((!$p->{val}{MANUFACTURER} or
-			  ($p->{val}{MANUFACTURER} ne $make)) and
-			 (!$p->{val}{DESCRIPTION} or
-			  ($p->{val}{DESCRIPTION} !~ /^\s*$smake\s+/)));
-		next if ((!$p->{val}{MODEL} or
-			  ($p->{val}{MODEL} ne $model)) and
-			 (!$p->{val}{DESCRIPTION} or
-			  ($p->{val}{DESCRIPTION} !~ /\s+$smodel\s*$/)));
-		next if ($serial and
-			 (!$p->{val}{SERIALNUMBER} or
-			  ($p->{val}{SERIALNUMBER} ne $serial)));
+		next if ((!$p->{val}{MANUFACTURER} ||
+                    $p->{val}{MANUFACTURER} ne $make) &&
+                   (!$p->{val}{DESCRIPTION} ||
+                    $p->{val}{DESCRIPTION} !~ /^\s*$smake\s+/));
+		next if ((!$p->{val}{MODEL} ||
+			  $p->{val}{MODEL} ne $model) &&
+			 (!$p->{val}{DESCRIPTION} ||
+			  $p->{val}{DESCRIPTION} !~ /\s+$smodel\s*$/));
+		next if ($serial &&
+			 (!$p->{val}{SERIALNUMBER} ||
+			  $p->{val}{SERIALNUMBER} ne $serial));
 		return $p;
 	    }
 	}
@@ -2062,18 +2058,17 @@ sub autodetectionentry_for_uri {
 	if ($ptaldevice =~ /^par:(\d+)$/) {
 	    my $device = "/dev/lp$1";
 	    foreach my $p (@autodetected) {
-		next if (!$p->{port} or
-			 ($p->{port} ne $device));
+		next if !$p->{port} ||
+			 $p->{port} ne $device;
 		return $p;
 	    }
 	} else {
-	    $ptaldevice =~ /^usb:(.*)$/;
-	    my $model = $1;
+	    my $model = $1 if $ptaldevice =~ /^usb:(.*)$/;
 	    $model =~ s/_/ /g;
 	    my $device = "";
 	    foreach my $p (@autodetected) {
-		next if (!$p->{val}{MODEL} or
-			 ($p->{val}{MODEL} ne $model));
+		next if !$p->{val}{MODEL} ||
+			 $p->{val}{MODEL} ne $model;
 		return $p;
 	    }
 	}
@@ -2083,8 +2078,8 @@ sub autodetectionentry_for_uri {
 	my $device = $uri;
 	$device =~ s/^(file|parallel|usb|serial)://;
 	foreach my $p (@autodetected) {
-	    next if (!$p->{port} or
-		     ($p->{port} ne $device));
+	    next if !$p->{port} ||
+		     $p->{port} ne $device;
 	    return $p;
 	}
     }
@@ -2113,14 +2108,14 @@ sub configure_hpoj {
 	while (<PTALINIT>) {
 	    if (m!sub main!) {
 		last;
-	    } elsif (m!^[^\#]!) {
+	    } elsif (m!^[^#]!) {
 		# Make the subroutines also working during installation
 		if ($::isInstall) {
 		    s!\$::prefix!\$hpoj_prefix!g;
-		    s!prefix=\"/usr\"!prefix=\"$::prefix/usr\"!g;
-		    s!etcPtal=\"/etc/ptal\"!etcPtal=\"$::prefix/etc/ptal\"!g;
-		    s!varLock=\"/var/lock\"!varLock=\"$::prefix/var/lock\"!g;
-		    s!varRunPrefix=\"/var/run\"!varRunPrefix=\"$::prefix/var/run\"!g;
+		    s!prefix="/usr"!prefix="$::prefix/usr"!g;
+		    s!etcPtal="/etc/ptal"!etcPtal="$::prefix/etc/ptal"!g;
+		    s!varLock="/var/lock"!varLock="$::prefix/var/lock"!g;
+		    s!varRunPrefix="/var/run"!varRunPrefix="$::prefix/var/run"!g;
 		}
 		push @ptalinitfunctions, $_;
 	    }
@@ -2165,12 +2160,11 @@ sub configure_hpoj {
     if ($device =~ /usb/) {
 	$bus = "usb";
     } elsif ($device =~ /par/ ||
-	     $device =~ /\/dev\/lp/ ||
+	     $device =~ m!/dev/lp! ||
 	     $device =~ /printers/) {
 	$bus = "par";
 	$address_arg = printer::detect::parport_addr($device);
-	$address_arg =~ /^\s*-base\s+(\S+)/;
-	eval "$base_address = $1";
+	eval "$base_address = $1" if $address_arg =~ /^\s*-base\s+(\S+)/;
     } elsif ($device =~ /socket/) {
 	$bus = "hpjd";
 	$hostname = $model;
@@ -2442,13 +2436,12 @@ EOF
     my $mtoolsfmconf;
     if (-f "$::prefix/etc/mtoolsfm.conf") {
 	$mtoolsfmconf = cat_("$::prefix/etc/mtoolsfm.conf") or die "can't read MToolsFM config in $::prefix/etc/mtoolsfm.conf: $!";
-	$mtoolsfmconf =~ m/^\s*DRIVES\s*=\s*\"([A-Za-z ]*)\"/m;
-	my $alloweddrives = lc($1);
+	my $alloweddrives = lc($1) if $mtoolsfmconf =~ m/^\s*DRIVES\s*=\s*\"([A-Za-z ]*)\"/m;
 	foreach my $letter ("p", "q", "r", "s") {
          $alloweddrives .= $letter if $alloweddrives !~ /$letter/;
 	}
-	$mtoolsfmconf =~ s/^\s*DRIVES\s*=\s*\"[A-Za-z ]*\"/DRIVES=\"$alloweddrives\"/m;
-	$mtoolsfmconf =~ s/^\s*LEFTDRIVE\s*=\s*\"[^\"]*\"/LEFTDRIVE=\"p\"/m;
+	$mtoolsfmconf =~ s/^\s*DRIVES\s*=\s*"[A-Za-z ]*"/DRIVES="$alloweddrives"/m;
+	$mtoolsfmconf =~ s/^\s*LEFTDRIVE\s*=\s*"[^"]*"/LEFTDRIVE="p"/m;
     } else {
 	$mtoolsfmconf = <<'EOF';
 # MToolsFM config file. comments start with a hash sign.

@@ -95,7 +95,7 @@ sub whatUsbport() {
 	    };
 	    close $PORT;
 	    # Remove non-printable characters
-	    $idstr =~ tr/[\x00-\x1f]/\./;
+	    $idstr =~ tr/[\x00-\x1f]/./;
 	    # If we do not find any item in the ID string, we try to read
 	    # it again
 	    my $itemfound = 0;
@@ -136,7 +136,7 @@ sub whatUsbport() {
 	    }
 	    # Nothing found? Try again if not in the third attempt,
 	    # in the third attempt always accept.
-	    next if !$itemfound && ($j < 3);
+	    next if !$itemfound && $j < 3;
 	    # Was there a manufacturer and a model in the string?
 	    if ($manufacturer eq "" || $model eq "") {
 		$manufacturer = "";
@@ -203,7 +203,7 @@ sub whatNetPrinter {
 
 	    undef $modelinfo;
 
-	} elsif ($line =~ m/^\s*(\d+)\/\S+\s+open\s+/i) {
+	} elsif ($line =~ m!^\s*(\d+)/\S+\s+open\s+!i) {
 	    next if $ip eq "";
 	    $port = $1;
 	    
@@ -260,7 +260,7 @@ sub getNetworkInterfaces {
 	if ($readline =~ /^(\S+)\s/) {
 	    my $dev = $1;
 	    if ($dev ne "lo") {
-		push (@interfaces, $dev);
+		push @interfaces, $dev;
 	    }
 	}
     }
@@ -291,7 +291,7 @@ sub getIPsOfLocalMachine {
 	if ($readline =~ /^(\S+)\s/) {
 	    my $dev = $1;
 	    # ... for a real network (not lo = localhost)
-	    $dev_is_realnet = ($dev ne 'lo');
+	    $dev_is_realnet = $dev ne 'lo';
 	    # delete previous address
 	    $current_ip = "";
 	}

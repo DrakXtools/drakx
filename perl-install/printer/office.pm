@@ -44,8 +44,7 @@ sub configureoffice {
     # Do we have Star Office installed?
     my $configfilename = find_config_file($suite);
     return 1 unless $configfilename;
-    $configfilename =~ m!$suites->{$suite}{file_name}!;
-    my $configprefix = $1;
+    my $configprefix = $1 if $configfilename =~ m!$suites->{$suite}{file_name}!;
     # Load Star Office printer config file
     my $configfilecontent = cat_("$::prefix$configfilename");
     # Update remote CUPS queues
@@ -53,7 +52,7 @@ sub configureoffice {
 	(-x "$::prefix/usr/bin/curl" || -x "$::prefix/usr/bin/wget")) {
 	my @printerlist = printer::cups::get_remote_queues();
 	foreach my $listentry (@printerlist) {
-	    next unless ($listentry =~ /^([^\|]+)\|([^\|]+)$/);
+	    next unless $listentry =~ /^([^\|]+)\|([^\|]+)$/;
 	    my $queue = $1;
 	    my $server = $2;
 	    if (-x "$::prefix/usr/bin/wget") {
@@ -119,8 +118,7 @@ sub add_cups_remote_to_office {
     # Do we have Star Office installed?
     my $configfilename = find_config_file($suite);
     return 1 unless $configfilename;
-    $configfilename =~ m!$suites->{$suite}{file_name}!;
-    my $configprefix = $1;
+    my $configprefix = $1 if $configfilename =~ m!$suites->{$suite}{file_name}!;
     # Load Star Office printer config file
     my $configfilecontent = cat_("$::prefix$configfilename");
     # Update remote CUPS queues
@@ -128,7 +126,7 @@ sub add_cups_remote_to_office {
 	(-x "$::prefix/usr/bin/curl" || -x "$::prefix/usr/bin/wget")) {
 	my @printerlist = printer::cups::get_remote_queues();
 	foreach my $listentry (@printerlist) {
-	    next unless ($listentry =~ /^([^\|]+)\|([^\|]+)$/);
+	    next unless $listentry =~ /^([^\|]+)\|([^\|]+)$/;
 	    my $q = $1;
 	    next if $q ne $queue;
 	    my $server = $2;
@@ -169,8 +167,7 @@ sub remove_printer_from_office {
     # Do we have Star Office installed?
     my $configfilename = find_config_file($suite);
     return 1 unless $configfilename;
-    $configfilename =~ m!$suites->{$suite}{file_name}!;
-    my $configprefix = $1;
+    my $configprefix = $1 if $configfilename =~ m!$suites->{$suite}{file_name}!;
     # Load Star Office printer config file
     my $configfilecontent = cat_("$::prefix$configfilename");
     # Remove the printer entry
@@ -186,8 +183,7 @@ sub remove_local_printers_from_office {
     # Do we have Star Office installed?
     my $configfilename = find_config_file($suite);
     return 1 unless $configfilename;
-    $configfilename =~ m!$suites->{$suite}{file_name}!;
-    my $configprefix = $1;
+    my $configprefix = $1 if $configfilename =~ m!$suites->{$suite}{file_name}!;
     # Load Star Office printer config file
     my $configfilecontent = cat_("$::prefix$configfilename");
     # Remove the printer entries

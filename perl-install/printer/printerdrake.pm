@@ -229,15 +229,15 @@ If some of these measures lead to problems for you, turn this option off, but th
 			       messages => N("Choose the network or host on which the local printers should be made available:"),
 			       callbacks => {
 				   complete => sub {
-				       if (($hostchoice eq 
-					    N("IP address of host/network:")) &&
+				       if ($hostchoice eq 
+					    N("IP address of host/network:") &&
 					   $ip =~ /^\s*$/) {
 					   
 					   $in->ask_warn('', N("Host/network IP address missing."));
 					   return (1,1);
 				       }
-				       if (($hostchoice eq 
-					    N("IP address of host/network:")) &&
+				       if ($hostchoice eq 
+					    N("IP address of host/network:") &&
 					   !printer::main::is_network_ip($ip)) {
 					   
 					   $in->ask_warn('', 
@@ -257,7 +257,7 @@ N("Examples for correct IPs:\n") .
 					   $address = $ip;
 				       } else {
 					   ($address) =
-					       grep {$hostchoice =~ /$_/} 
+					       grep { $hostchoice =~ /$_/ } 
 					       @interfaces;
 					   $address = "\@IF($address)";
 				       }
@@ -287,7 +287,7 @@ N("Examples for correct IPs:\n") .
 				 disabled => sub {
 				     $hostchoice ne 
 					 N("IP address of host/network:");
-			         }},
+			         } },
 			       ],
 			     )) {
 			    # OK was clicked, insert new item into the list
@@ -296,9 +296,9 @@ N("Examples for correct IPs:\n") .
 				     $address);
 			    } else {
 				@{$printer->{cupsconfig}{clientnetworks}} =
-				    map {($_ eq
+				    map { ($_ eq
 					  $sharehosts->{invhash}{$choice} ?
-					  $address : $_)}
+					  $address : $_) }
 				        @{$printer->{cupsconfig}{clientnetworks}};
 			    }
 			    # Refresh list of hosts
@@ -312,7 +312,7 @@ N("Examples for correct IPs:\n") .
 			}
 		    } elsif ($buttonclicked eq "remove") {
 			@{$printer->{cupsconfig}{clientnetworks}} =
-			    grep {$_ ne $sharehosts->{invhash}{$choice}}
+			    grep { $_ ne $sharehosts->{invhash}{$choice} }
 			    @{$printer->{cupsconfig}{clientnetworks}};
 			# Refresh list of hosts
 			$sharehosts = 
@@ -462,9 +462,9 @@ N("Examples for correct IPs:\n") .
 				     $address);
 			    } else {
 				@{$printer->{cupsconfig}{BrowsePoll}} =
-				    map {($_ eq
+				    map { ($_ eq
 					  $browsepoll->{invhash}{$choice} ?
-					  $address : $_)}
+					  $address : $_) }
 				        @{$printer->{cupsconfig}{BrowsePoll}};
 			    }
 			    # Refresh list of hosts
@@ -476,7 +476,7 @@ N("Examples for correct IPs:\n") .
 			}
 		    } elsif ($buttonclicked eq "remove") {
 			@{$printer->{cupsconfig}{BrowsePoll}} =
-			    grep {$_ ne $browsepoll->{invhash}{$choice}}
+			    grep { $_ ne $browsepoll->{invhash}{$choice} }
 			    @{$printer->{cupsconfig}{BrowsePoll}};
 			# Refresh list of hosts
 			$browsepoll = 
@@ -686,7 +686,7 @@ sub configure_new_printers {
 		$queue =~ s/(\d)$/$1_/;
 		my $i = 1;
 		while ($printer->{configured}{"$queue$i"}) {
-		    $i ++;
+		    $i++;
 		}
 		$queue .= $i;
 	    }
@@ -716,7 +716,7 @@ sub configure_new_printers {
 		$printer->{DBENTRY} = N("Raw printer (No driver)");
 		# Info about what was detected
 		my $info = N("(") . if_($p->{val}{DESCRIPTION},
-					$p->{val}{DESCRIPTION} . N(" on ")).
+					$p->{val}{DESCRIPTION} . N(" on ")) .
 					$p->{port} . N(")");
 		# Remove wait message
 		undef $_w;
@@ -740,7 +740,7 @@ Printerdrake could not determine which model your printer %s is. Please choose t
 			$queue =~ s/(\d)$/$1_/;
 			my $i = 1;
 			while ($printer->{configured}{"$queue$i"}) {
-			    $i ++;
+			    $i++;
 			}
 			$queue .= $i;
 		    }
@@ -764,7 +764,7 @@ Printerdrake could not determine which model your printer %s is. Please choose t
 	    }
 	}
 	# Delete some variables
-	foreach (qw(OLD_QUEUE QUEUE TYPE str_type DBENTRY ARGS OLD_CHOICE)){
+	foreach (qw(OLD_QUEUE QUEUE TYPE str_type DBENTRY ARGS OLD_CHOICE)) {
 	    $printer->{$_} = "";
 	}
 	$printer->{currentqueue} = {};
@@ -935,9 +935,9 @@ sub setup_local_autoscan {
 	    if ($p->{val}{DESCRIPTION}) {
 		my $menustr = $p->{val}{DESCRIPTION};
 		if ($p->{port} =~ m!^/dev/lp(\d+)$!) {
-		    $menustr .= N(" on parallel port \#%s", $1);
+		    $menustr .= N(" on parallel port #%s", $1);
 		} elsif ($p->{port} =~ m!^/dev/usb/lp(\d+)$!) {
-		    $menustr .= N(", USB printer \#%s", $1);
+		    $menustr .= N(", USB printer #%s", $1);
 		} elsif ($p->{port} =~ m!^socket://([^:]+):(\d+)$!) {
 		    $menustr .= N(", network printer \"%s\", port %s", $1, $2);
 		} elsif ($p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!) {
@@ -949,9 +949,9 @@ sub setup_local_autoscan {
 	    } else {
 		my $menustr;
 		if ($p->{port} =~ m!^/dev/lp(\d+)$!) {
-		    $menustr = N("Printer on parallel port \#%s", $1);
+		    $menustr = N("Printer on parallel port #%s", $1);
 		} elsif ($p->{port} =~ m!^/dev/usb/lp(\d+)$!) {
-		    $menustr = N("USB printer \#%s", $1);
+		    $menustr = N("USB printer #%s", $1);
 		} elsif ($p->{port} =~ m!^socket://([^:]+):(\d+)$!) {
 		    $menustr .= N("Network printer \"%s\", port %s", $1, $2);
 		} elsif ($p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!) {
@@ -972,9 +972,9 @@ sub setup_local_autoscan {
 		}
 		my $menustr;
 		if ($q =~ m!^/dev/lp(\d+)$!) {
-		    $menustr = N("Printer on parallel port \#%s", $1);
+		    $menustr = N("Printer on parallel port #%s", $1);
 		} elsif ($q =~ m!^/dev/usb/lp(\d+)$!) {
-		    $menustr = N("USB printer \#%s", $1);
+		    $menustr = N("USB printer #%s", $1);
 		}
 		$menustr .= " ($q)" if $::expert;
 		$menuentries->{$menustr} = $q;
@@ -989,10 +989,10 @@ sub setup_local_autoscan {
 	$printer->{MORETHANONE} = $#autodetected > 0;
 	my $m;
 	for ($m = 0; $m <= 2; $m++) {
-	    my $menustr = N("Printer on parallel port \#%s", $m);
+	    my $menustr = N("Printer on parallel port #%s", $m);
 	    $menustr .= " (/dev/lp$m)" if $::expert;
 	    $menuentries->{$menustr} = "/dev/lp$m";
-	    $menustr = N("USB printer \#%s", $m);
+	    $menustr = N("USB printer #%s", $m);
 	    $menustr .= " (/dev/usb/lp$m)" if $::expert;
 	    $menuentries->{$menustr} = "/dev/usb/lp$m";
 	}
@@ -1009,7 +1009,7 @@ sub setup_local_autoscan {
 	    if ($secondinlist && !$firstinlist) { return 1 };
 	}
 	return $first cmp $second;
-    } keys(%{$menuentries});
+    } keys(%$menuentries);
     my $menuchoice = "";
     my $oldmenuchoice = "";
     my $device;
@@ -1147,9 +1147,10 @@ sub setup_lpd {
     if ($printer->{configured}{$queue} &&
 	$printer->{currentqueue}{connect} =~ m/^lpd:/) {
 	$uri = $printer->{currentqueue}{connect};
-	$uri =~ m!^\s*lpd://([^/]+)/([^/]+)/?\s*$!;
-	$remotehost = $1;
-	$remotequeue = $2;
+	if ($uri =~ m!^\s*lpd://([^/]+)/([^/]+)/?\s*$!) {
+         $remotehost = $1;
+         $remotequeue = $2;
+     }
     } else {
 	$remotehost = "";
 	$remotequeue = "lp";
@@ -1218,8 +1219,7 @@ sub setup_smb {
     if ($printer->{configured}{$queue} &&
 	$printer->{currentqueue}{connect} =~ m/^smb:/) {
 	$uri = $printer->{currentqueue}{connect};
-	$uri =~ m!^\s*smb://(.*)$!;
-	my $parameters = $1;
+	my $parameters = $1 if $uri =~ m!^\s*smb://(.*)$!;
 	# Get the user's login and password from the URI
 	if ($parameters =~ m!([^@]*)@([^@]+)!) {
 	    my $login = $1;
@@ -1268,9 +1268,10 @@ sub setup_smb {
 	@autodetected = printer::detect::net_smb_detect();
 	foreach my $p (@autodetected) {
 	    my $menustr;
-	    $p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!;
-	    my $server = $1;
-	    my $share = $2;
+	    if ($p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!) {
+             my $server = $1;
+             my $share = $2;
+         }
 	    if ($p->{val}{DESCRIPTION}) {
 		$menustr = $p->{val}{DESCRIPTION};
 		$menustr .= N(", printer \"%s\" on server \"%s\"",
@@ -1287,7 +1288,7 @@ sub setup_smb {
 	}
 	@menuentrieslist = sort {
 	    $menuentries->{$a} cmp $menuentries->{$b};
-	} keys(%{$menuentries});
+	} keys(%$menuentries);
 	if ($printer->{configured}{$queue} &&
 	    $printer->{currentqueue}{connect} =~ m/^smb:/ &&
 	    $menuchoice eq "") {
@@ -1308,10 +1309,11 @@ sub setup_smb {
 	    $autodetect = 0;
 	} elsif ($menuchoice eq "") {
 	    $menuchoice = $menuentrieslist[0];
-	    $menuentries->{$menuentrieslist[0]} =~
-		m!^smb://([^/:]+)/([^/:]+)$!;
-	    $smbserver = $1;
-	    $smbshare = $2;
+	    if ($menuentries->{$menuentrieslist[0]} =~
+		m!^smb://([^/:]+)/([^/:]+)$!) {
+             $smbserver = $1;
+             $smbshare = $2;
+         }
 	}
 	$oldmenuchoice = $menuchoice;
     }
@@ -1373,9 +1375,10 @@ Do you really want to continue setting up this printer as you are doing now?"), 
 	 changed => sub {
 	     return 0 if !$autodetect;
 	     if ($oldmenuchoice ne $menuchoice) {
-		 $menuentries->{$menuchoice} =~ m!^smb://([^/:]+)/([^/:]+)$!;
-		 $smbserver = $1;
-		 $smbshare = $2;
+		 if ($menuentries->{$menuchoice} =~ m!^smb://([^/:]+)/([^/:]+)$!) {
+               $smbserver = $1;
+               $smbshare = $2;
+           }
 		 $oldmenuchoice = $menuchoice;
 	     }
 	     return 0;
@@ -1504,9 +1507,10 @@ sub setup_socket {
 	@autodetected = printer::detect::net_detect();
 	foreach my $p (@autodetected) {
 	    my $menustr;
-	    $p->{port} =~ m!^socket://([^:]+):(\d+)$!;
-	    my $host = $1;
-	    my $port = $2;
+	    if ($p->{port} =~ m!^socket://([^:]+):(\d+)$!) {
+             my $host = $1;
+             my $port = $2;
+         }
 	    if ($p->{val}{DESCRIPTION}) {
 		$menustr = $p->{val}{DESCRIPTION};
 		$menustr .= N(", host \"%s\", port %s",
@@ -1522,7 +1526,7 @@ sub setup_socket {
 	}
 	@menuentrieslist = sort { 
 	    $menuentries->{$a} cmp $menuentries->{$b};
-	} keys(%{$menuentries});
+	} keys(%$menuentries);
 	if ($printer->{configured}{$queue} &&
 	    $printer->{currentqueue}{connect} =~ m!^(socket:|ptal:/hpjd:)! &&
 	    $menuchoice eq "") {
@@ -1543,9 +1547,10 @@ sub setup_socket {
 	    $autodetect = 0;
 	} elsif ($menuchoice eq "") {
 	    $menuchoice = $menuentrieslist[0];
-	    $menuentries->{$menuentrieslist[0]} =~ m!^socket://([^:]+):(\d+)$!;
-	    $remotehost = $1;
-	    $remoteport = $2;
+	    if ($menuentries->{$menuentrieslist[0]} =~ m!^socket://([^:]+):(\d+)$!) {
+             $remotehost = $1;
+             $remoteport = $2;
+         }
 	}
 	$oldmenuchoice = $menuchoice;
     }
@@ -1571,10 +1576,11 @@ sub setup_socket {
 		 changed => sub {
 		     return 0 if !$autodetect;
 		     if ($oldmenuchoice ne $menuchoice) {
-			 $menuentries->{$menuchoice} =~ m!^socket://([^:]+):(\d+)$!;
-			 $remotehost = $1;
-			 $remoteport = $2;
-			 $oldmenuchoice = $menuchoice;
+                   if ($menuentries->{$menuchoice} =~ m!^socket://([^:]+):(\d+)$!) {
+                       $remotehost = $1;
+                       $remoteport = $2;
+                   }
+                   $oldmenuchoice = $menuchoice;
 		     }
 		     return 0;
 		 }
@@ -1724,8 +1730,7 @@ sub setup_postpipe {
     if ($printer->{configured}{$queue} &&
 	$printer->{currentqueue}{connect} =~ m/^postpipe:/) {
 	$uri = $printer->{currentqueue}{connect};
-	$uri =~ m!^\s*postpipe:\"(.*)\"$!;
-	$commandline = $1;
+	$commandline = $1 if $uri =~ m!^\s*postpipe:\"(.*)\"$!;
     } else {
 	$commandline = "";
     }
@@ -1759,7 +1764,7 @@ sub setup_common {
     my $ptaldevice = "";
     my $isHPOJ = 0;
     my $_w;
-    if ($device =~ /^\/dev\// || $device =~ /^socket:\/\//) {
+    if ($device =~ m!^/dev/! || $device =~ m!^socket://!) {
 	# Ask user whether he has a multi-function device when he didn't
 	# do auto-detection or when auto-detection failed
 	my $searchunknown = N("Unknown model");
@@ -1782,7 +1787,7 @@ sub setup_common {
 					   /usr/bin/xojpanel))) {
 		$_w = $in->wait_message(N("Printerdrake"),
 					   N("Installing HPOJ package..."))
-		    if (!$printer->{noninteractive});
+		    if !$printer->{noninteractive};
 		$in->do_pkgs->install('hpoj', 'xojpanel');
 	    }
 	    # Configure and start HPOJ
@@ -1790,7 +1795,7 @@ sub setup_common {
 	    $_w = $in->wait_message
 		(N("Printerdrake"),
 		 N("Checking device and configuring HPOJ..."))
-		if (!$printer->{noninteractive});
+		if !$printer->{noninteractive};
 	    $ptaldevice = printer::main::configure_hpoj
 		($device, @autodetected);
 	    
@@ -1811,7 +1816,7 @@ sub setup_common {
 			$_w = $in->wait_message
 			    (N("Printerdrake"),
 			     N("Installing SANE packages..."))
-			    if (!$printer->{noninteractive});
+			    if !$printer->{noninteractive};
 			$in->do_pkgs->install('sane-backends',
 					      'sane-frontends',
 					      'xsane', 'libsane-hpoj0',
@@ -1837,7 +1842,7 @@ sub setup_common {
 			$_w = $in->wait_message
 			    (N("Printerdrake"),
 			     N("Installing mtools packages..."))
-			    if (!$printer->{noninteractive});
+			    if !$printer->{noninteractive};
 			$in->do_pkgs->install('mtools', 'mtoolsfm');
 		    }
 		    # Configure mtools/MToolsFM for photo card access
@@ -1872,7 +1877,7 @@ sub setup_common {
 	    $_w = $in->wait_message
 		(N("Printerdrake"),
 		 N("Checking device and configuring HPOJ..."))
-		if (!$printer->{noninteractive} && !defined($_w));
+		if !$printer->{noninteractive} && !defined($_w);
 	} else {
 	    # make the DeviceURI from $device.
 	    $printer->{currentqueue}{connect} = $device;
@@ -1909,16 +1914,16 @@ sub setup_common {
 	my $_w = $in->wait_message
 	    (N("Printerdrake"),
 	     N("Making printer port available for CUPS..."))
-	    if (!$printer->{noninteractive});
+	    if !$printer->{noninteractive};
 	printer::main::assure_device_is_available_for_cups($ptaldevice ||
 							   $device);
     }
 
     #- Read the printer driver database if necessary
-    if ((keys %printer::main::thedb) == 0) {
+    if (keys %printer::main::thedb == 0) {
 	my $_w = $in->wait_message
 	    (N("Printerdrake"), N("Reading printer database..."))
-	    if (!$printer->{noninteractive});
+	    if !$printer->{noninteractive};
         printer::main::read_printer_db($printer->{SPOOLER});
     }
 
@@ -1938,14 +1943,14 @@ sub setup_common {
 	    $descr = "$descrmake|$automodel";
 	} else {
 	    $descr = $autodescr;
-	    $descr =~ s/ /\|/;
+	    $descr =~ s/ /|/;
 	}
 	# Remove manufacturer's name from the beginning of the
 	# description (do not do this with manufacturer names which
 	# contain odd characters)
-	$descr =~ s/^$descrmake\|\s*$descrmake\s*/$descrmake\|/i
-	    if ($descrmake and 
-		($descrmake !~ /[\\\/\(\)\[\]\|\.\$\@\%\*\?]/));
+	$descr =~ s/^$descrmake\|\s*$descrmake\s*/$descrmake|/i
+	    if $descrmake && 
+           $descrmake !~ m![\\/\(\)\[\]\|\.\$\@\%\*\?]!;
 	# Clean up the description from noise which makes the best match
 	# difficult
 	$descr =~ s/\s+[Ss]eries//i;
@@ -2019,7 +2024,7 @@ sub setup_common {
 			$matched = 0;
 		    }
 		}
-		if ($matched && ($des || ($mfg && $mdl))) {
+		if ($matched && ($des || $mfg && $mdl)) {
 		    # Full match to known auto-detection data
 		    $printer->{DBENTRY} = $entry;
 		    $matchlength = 1000;
@@ -2033,8 +2038,7 @@ sub setup_common {
 	    # Foomatic database or of thr PPD file
 	    my $dbmakemodel;
 	    if ($::expert) {
-		$entry =~ m/^(.*)\|[^\|]*$/;
-		$dbmakemodel = $1;
+		$dbmakemodel = $1 if $entry =~ m/^(.*)\|[^\|]*$/;
 	    } else {
 		$dbmakemodel = $entry;
 	    }
@@ -2068,7 +2072,7 @@ sub setup_common {
 	    if (!member($descr, @badsearchterms)) {
 		my $searchterm = $descr;
 		my $lsearchterm = length($searchterm);
-		$searchterm =~ s/([\\\/\(\)\[\]\|\.\$\@\%\*\?])/\\$1/g;
+		$searchterm =~ s!([\\/\(\)\[\]\|\.\$\@\%\*\?])!\\$1!g;
 		if ($lsearchterm > $matchlength &&
 		    $dbmakemodel =~ m!$searchterm!i) {
 		    $matchlength = $lsearchterm;
@@ -2078,7 +2082,7 @@ sub setup_common {
 	    if (!member($dbmakemodel, @badsearchterms)) {
 		my $searchterm = $dbmakemodel;
 		my $lsearchterm = length($searchterm);
-		$searchterm =~ s/([\\\/\(\)\[\]\|\.\$\@\%\*\?])/\\$1/g;
+		$searchterm =~ s!([\\/\(\)\[\]\|\.\$\@\%\*\?])!\\$1!g;
 		if ($lsearchterm > $matchlength &&
 		    $descr =~ m!$searchterm!i) {
 		    $matchlength = $lsearchterm;
@@ -2093,8 +2097,7 @@ sub setup_common {
 		bestMatchSentence($descr, keys %printer::main::thedb);
 	    # If the manufacturer was not guessed correctly, discard the
 	    # guess.
-	    $printer->{DBENTRY} =~ /^([^\|]+)\|/;
-	    my $guessedmake = lc($1);
+	    my $guessedmake = lc($1) if $printer->{DBENTRY} =~ /^([^\|]+)\|/;
 	    if ($guessedmake !~ /Generic/i &&
 		$descr !~ /$guessedmake/i &&
 		($guessedmake ne "hp" ||
@@ -2155,15 +2158,15 @@ N("Every printer needs a name (for example \"printer\"). The Description and Loc
 sub get_db_entry {
     my ($printer, $in) = @_;
     #- Read the printer driver database if necessary
-    if ((keys %printer::main::thedb) == 0) {
+    if (keys %printer::main::thedb == 0) {
 	my $_w = $in->wait_message(N("Printerdrake"),
 				   N("Reading printer database..."))
-	    if (!$printer->{noninteractive});
+	    if $printer->{noninteractive};
 	printer::main::read_printer_db($printer->{SPOOLER});
     }
     my $_w = $in->wait_message(N("Printerdrake"),
 			       N("Preparing printer database..."))
-	if (!$printer->{noninteractive});
+	if !$printer->{noninteractive};
     my $queue = $printer->{OLD_QUEUE};
     if ($printer->{configured}{$queue}) {
 	# The queue was already configured
@@ -2211,9 +2214,10 @@ sub get_db_entry {
 	    } elsif ($printer->{configured}{$queue}{queuedata}{ppd}) {
 		my $makemodel =
 		    printer::main::get_descr_from_ppd($printer);
-		$makemodel =~ m!^([^\|]+)\|([^\|]+)(|\|.*)$!;
-		$make = $1;
-		$model = $2;
+		if ($makemodel =~ m!^([^\|]+)\|([^\|]+)(|\|.*)$!) {
+              $make = $1;
+              $model = $2;
+          }
 	    }
 	    foreach my $key (keys %printer::main::thedb) {
 		if ($::expert &&
@@ -2243,8 +2247,7 @@ sub get_db_entry {
 		bestMatchSentence($matchstr, keys %printer::main::thedb);
 	    # If the manufacturer was not guessed correctly, discard the
 	    # guess.
-	    $printer->{DBENTRY} =~ /^([^\|]+)\|/;
-	    my $guessedmake = lc($1);
+	    my $guessedmake = lc($1) if $printer->{DBENTRY} =~ /^([^\|]+)\|/;
 	    if ($matchstr !~ /$guessedmake/i &&
 		($guessedmake ne "hp" ||
 		 $matchstr !~ /Hewlett[\s-]+Packard/i))
@@ -2299,7 +2302,7 @@ sub choose_model {
     my ($printer, $in) = @_;
 #    $in->set_help('chooseModel') if $::isInstall;
     #- Read the printer driver database if necessary
-    if ((keys %printer::main::thedb) == 0) {
+    if (keys %printer::main::thedb == 0) {
 	my $_w = $in->wait_message(N("Printerdrake"),
 				  N("Reading printer database..."));
         printer::main::read_printer_db($printer->{SPOOLER});
@@ -2444,14 +2447,15 @@ sub get_printer_info {
 		    return 0;
 		}
 		# Set device permissions
-		$printer->{currentqueue}{connect} =~ 
-		    /^\s*(file|parallel|usb):(\S*)\s*$/;
-		if ($printer->{SPOOLER} eq 'cups') {
-		    set_permissions($2, '660', 'lp', 'sys');
-		} elsif ($printer->{SPOOLER} eq 'pdq') {
-		    set_permissions($2, '666');
-		} else {
-		    set_permissions($2, '660', 'lp', 'lp');
+		if ($printer->{currentqueue}{connect} =~ 
+		    /^\s*(file|parallel|usb):(\S*)\s*$/) {
+              if ($printer->{SPOOLER} eq 'cups') {
+                  set_permissions($2, '660', 'lp', 'sys');
+              } elsif ($printer->{SPOOLER} eq 'pdq') {
+                  set_permissions($2, '666');
+              } else {
+                  set_permissions($2, '660', 'lp', 'lp');
+              }
 		}
 		# This is needed to have the device not blocked by the
 		# spooler backend.
@@ -2597,10 +2601,10 @@ You should make sure that the page size and the ink type/printing mode (if avail
 	    my $optshortdefault = $printer->{ARGS}[$i]{default};
 	    # Should the option only show when the "Advanced" button was
 	    # clicked?
-	    my $advanced = ((defined($printer->{ARGS}[$i]{group}) and
+	    my $advanced = ((defined($printer->{ARGS}[$i]{group}) &&
 			     ($printer->{ARGS}[$i]{group} !~
-			      /^(|General|.*install.*)$/i)) or
-			    (!($printer->{ARGS}[$i]{group}) and
+			      /^(|General|.*install.*)$/i)) ||
+			    (!($printer->{ARGS}[$i]{group}) &&
 			     !member($printer->{ARGS}[$i]{name},
 				     @simple_options)) ? 1 : 0);
 	    # Group header
@@ -2685,15 +2689,13 @@ You should make sure that the page size and the ink type/printing mode (if avail
 		    }
 		} elsif ($printer->{currentqueue}{ppd}) {
 		    if ($printer->{DBENTRY}) {
-			$printer->{DBENTRY} =~ /^[^\|]*\|[^\|]*\|(.*)$/;
-			$driver = $1;
+			$driver = $1 if $printer->{DBENTRY} =~ /^[^\|]*\|[^\|]*\|(.*)$/;
 		    } else {
 			$driver = printer::main::get_descr_from_ppd($printer);
 			if ($driver =~ /^[^\|]*\|[^\|]*$/) { # No driver info
 			    $driver = "PPD";
 			} else {
-			    $driver =~ /^[^\|]*\|[^\|]*\|(.*)$/;
-			    $driver = $1;
+			    $driver = $1 if $driver =~ /^[^\|]*\|[^\|]*\|(.*)$/;
 			}
 		    }
 		}
@@ -2704,8 +2706,8 @@ You should make sure that the page size and the ink type/printing mode (if avail
 	}
 	# Do not show the options setup dialog when installing a new printer
 	# in recommended mode without "Manual configuration" turned on.
-	if ((!$printer->{NEW} or $::expert or $printer->{MANUAL}) and
-	    (!$printer->{noninteractive})) {
+	if ((!$printer->{NEW} || $::expert || $printer->{MANUAL}) &&
+	    !$printer->{noninteractive}) {
 	    return 0 if !$in->ask_from(
 		 $windowtitle,
 		 N("Printer default settings"),
@@ -2852,11 +2854,11 @@ Note: the photo test page can take a rather long time to get printed and on lase
 		$in->do_pkgs->install('ImageMagick');
 	    }
 	    # set up list of pages to print
-	    $options{standard} && push @testpages, $stdtestpage;
-	    $options{altletter} && push @testpages, $altlttestpage;
-	    $options{alta4} && push @testpages, $alta4testpage;
-	    $options{photo} && push @testpages, $phototestpage;
-	    $options{ascii} && push @testpages, $asciitestpage;
+	    $options{standard} and push @testpages, $stdtestpage;
+	    $options{altletter} and push @testpages, $altlttestpage;
+	    $options{alta4} and push @testpages, $alta4testpage;
+	    $options{photo} and push @testpages, $phototestpage;
+	    $options{ascii} and push @testpages, $asciitestpage;
 	    # print the stuff
 	    @lpq_output = printer::main::print_pages($printer, @testpages);
 	}
@@ -2948,7 +2950,7 @@ N("This command you can also use in the \"Printing command\" field of the printi
 (!$raw ?
 N("
 The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -Z option=setting -Z switch" : "lpr -Z option=setting -Z switch")) .
-N("To get a list of the options available for the current printer click on the \"Print option list\" button.") . $scanning . $photocard . $hp11000fw: $scanning . $photocard . $hp11000fw);
+N("To get a list of the options available for the current printer click on the \"Print option list\" button.") . $scanning . $photocard . $hp11000fw : $scanning . $photocard . $hp11000fw);
     } elsif ($spooler eq "lpd") {
 	$dialogtext =
 N("To print a file from the command line (terminal window) use the command \"%s <file>\".
@@ -3469,7 +3471,7 @@ sub configure_queue {
     my $_w = $in->wait_message(N("Printerdrake"),
 			       N("Configuring printer \"%s\"...",
 				 $printer->{currentqueue}{queue}))
-	if (!$printer->{noninteractive});
+	if !$printer->{noninteractive};
     $printer->{complete} = 1;
     my $retval = printer::main::configure_queue($printer);
     $printer->{complete} = 0;
@@ -3568,7 +3570,7 @@ sub main {
         # Get the default printer (Done before non-interactive queue setup,
         # so that former default is not lost)
         assure_default_printer_is_set($printer, $in);
-	my $nodefault = (!$printer->{DEFAULT});
+	my $nodefault = !$printer->{DEFAULT};
 
         # Non-interactive setup of newly detected printers (This is done
 	# only when not in expert mode, so we always have a spooler defined
@@ -3596,7 +3598,7 @@ sub main {
     # Main loop: During installation we only enter it when the user has
     # clicked on the "Configure" button in the "Summary" step. We do not
     # call it during the preparation of the "Summary" screen.
-    if (!$::isInstall || ($install_step == 1)) {
+    if (!$::isInstall || $install_step == 1) {
 
 	# Ask for a spooler when none is defined yet
 	$printer->{SPOOLER} ||= 
@@ -3745,16 +3747,16 @@ sub main {
 		    my $spooler =
 			$spoolers{$printer->{SPOOLER}}{short_name};
 		    if ($::expert) {
-			map { 
+			foreach (keys(%{$printer->{configured}})) { 
 			    $printer->{configured}{$_}{queuedata}{menuentry} =~ 
 				s/^/$spooler!/;
-			} keys(%{$printer->{configured}});
+			}
 			$cursorpos =~ s/^/$spooler!/;
 		    } else {
-			map { 
+			foreach (keys(%{$printer->{configured}})) { 
 			    $printer->{configured}{$_}{queuedata}{menuentry} =~ 
 				s/^$spooler!//;
-			} keys(%{$printer->{configured}});
+			}
 			$cursorpos =~ s/^$spooler!//;
 		    }
 		    next;
@@ -3843,14 +3845,14 @@ sub main {
 				goto step_0;
 			    };
 		      step_3:
-			if ($::expert or $printer->{MANUAL} or
+			if ($::expert || $printer->{MANUAL} ||
 			    $printer->{MORETHANONE}) {
 			    choose_printer_name($printer, $in) or
 				goto step_2;
 			}
 			get_db_entry($printer, $in);
 		      step_3_9:
-			if (!$::expert and !$printer->{MANUAL}) {
+			if (!$::expert && !$printer->{MANUAL}) {
 			    is_model_correct($printer, $in) or do {
 				goto step_3 if $printer->{MORETHANONE};
 				goto step_2;
@@ -3859,7 +3861,7 @@ sub main {
 		      step_4:
 			# Remember DB entry for "Previous" button in wizard
 		    my $dbentry = $printer->{DBENTRY};
-			if ($::expert or $printer->{MANUAL} or
+			if ($::expert || $printer->{MANUAL} ||
 			    $printer->{MANUALMODEL}) { 
 			    choose_model($printer, $in) or do {
 				# Restore DB entry
@@ -3900,15 +3902,15 @@ sub main {
 		    wizard_welcome($printer, $in, $upNetwork) or next;
 		    !$::expert or choose_printer_type($printer, $in) or next;
 		    setup_printer_connection($printer, $in, $upNetwork) or next;
-		    if ($::expert or $printer->{MANUAL} or
+		    if ($::expert || $printer->{MANUAL} ||
 			$printer->{MORETHANONE}) {
 			choose_printer_name($printer, $in) or next;
 		    }
 		    get_db_entry($printer, $in);
-		    if (!$::expert and !$printer->{MANUAL}) {
+		    if (!$::expert && !$printer->{MANUAL}) {
 			is_model_correct($printer, $in) or next;
 		    }
-		    if ($::expert or $printer->{MANUAL} or
+		    if ($::expert || $printer->{MANUAL} ||
 			$printer->{MANUALMODEL}) { 
 			choose_model($printer, $in) or next;
 		    }
@@ -3939,21 +3941,21 @@ sub main {
 		    # Here we must regenerate the menu entry, because the
 		    # parameters can be changed.
 		    printer::main::make_menuentry($printer,$queue);
-		      $printer->{configured}{$queue}{queuedata}{menuentry} =~
-			  /!([^!]+)$/;
-		      $infoline = $1 .
-			  ($queue eq $printer->{DEFAULT} ? N(" (Default)") : '') .
-			  ($printer->{configured}{$queue}{queuedata}{desc} ?
-			   ", Descr.: $printer->{configured}{$queue}{queuedata}{desc}" : '') .
-			   ($printer->{configured}{$queue}{queuedata}{loc} ?
-			    ", Loc.: $printer->{configured}{$queue}{queuedata}{loc}" : '') .
-			    ($::expert ?
-			     ", Driver: $printer->{configured}{$queue}{queuedata}{driver}" : '');
+              if ($printer->{configured}{$queue}{queuedata}{menuentry} =~
+                  /!([^!]+)$/) {
+                  $infoline = $1 .
+                    ($queue eq $printer->{DEFAULT} ? N(" (Default)") : '') .
+                      ($printer->{configured}{$queue}{queuedata}{desc} ?
+                       ", Descr.: $printer->{configured}{$queue}{queuedata}{desc}" : '') .
+                         ($printer->{configured}{$queue}{queuedata}{loc} ?
+                          ", Loc.: $printer->{configured}{$queue}{queuedata}{loc}" : '') .
+                            ($::expert ?
+                             ", Driver: $printer->{configured}{$queue}{queuedata}{driver}" : '');
+              }
 		  } else {
 		      # The parameters of a remote CUPS queue cannot be
 		      # changed, so we can simply take the menu entry.
-		      $cursorpos =~ /!([^!]+)$/;
-		      $infoline = $1;
+                $infoline = $1 if $cursorpos =~ /!([^!]+)$/;
 		  }
 		if ($in->ask_from_(
 		    { title => N("Modify printer configuration"),
@@ -4106,8 +4108,8 @@ What do you want to modify on this printer?",
 			} else {
 			    my $s1 = N(" (Default)");
 			    my $s2 = $s1;
-			    $s2 =~ s/\(/\\\(/;
-			    $s2 =~ s/\)/\\\)/;
+			    $s2 =~ s/\(/\\(/;
+			    $s2 =~ s/\)/\\)/;
 			    $cursorpos .= $s1 if $printer->{QUEUE} eq $printer->{DEFAULT} && $cursorpos !~ /$s2/;
 			}
 		    }
@@ -4122,7 +4124,7 @@ What do you want to modify on this printer?",
 		undef $_w;
 	    }
 	    # Delete some variables
-	    foreach (qw(OLD_QUEUE QUEUE TYPE str_type DBENTRY ARGS OLD_CHOICE)){
+	    foreach (qw(OLD_QUEUE QUEUE TYPE str_type DBENTRY ARGS OLD_CHOICE)) {
 		$printer->{$_} = "";
 	    }
 	    $printer->{currentqueue} = {};
