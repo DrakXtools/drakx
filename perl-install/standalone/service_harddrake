@@ -39,11 +39,7 @@ foreach (@harddrake::data::tree) {
     my %ID = map {
 	   my $i = $_;
 	   my $name = do {
-		  if ($item eq "Mouse") {
-			 $i->{media_type} = "MOUSE";
-			 $i->{device};
-		  } elsif (defined $i->{device}) {
-			 $i->{media_type} = "MASS_STORAGE_MEDIA";
+		  if (defined $i->{device}) {
 			 $i->{device};
 		  } else {
 			 join ':', map { $i->{$_} } qw(vendor id subvendor subid);
