@@ -81,7 +81,7 @@ sub get_subwizard {
       my $mouse = $o_mouse ||= {};
       my $intf  = $o_intf  ||= {};
       my $first_time = $o_first_time || 0;
-      my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @cards, @all_cards, @devices, %eth_intf);
+      my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @all_cards, @devices, %eth_intf);
       my (%connections, @connection_list);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my ($adsl_type, $adsl_protocol, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
@@ -136,7 +136,6 @@ sub get_subwizard {
           detect($netc->{autodetect}, 'lan') if !$::isInstall;
           modules::interactive::load_category($in, 'network/main|gigabit|usb|pcmcia', !$::expert, 1);
           @all_cards = network::ethernet::get_eth_cards();
-          @cards = map { $_->[0] } @all_cards;
           foreach my $card (@all_cards) {
               modules::remove_alias($card->[1]);
               modules::add_alias($card->[0], $card->[1]);
