@@ -34,7 +34,7 @@ sub load_category {
     my @l;
     {
 	my $w;
-	my $wait_message = sub { $w = wait_load_module($in, $category, @_) };
+	my $wait_message = sub { undef $w; $w = wait_load_module($in, $category, @_) };
 	@l = modules::load_category($category, $wait_message);
 	undef $w; #- help perl_checker
     }
