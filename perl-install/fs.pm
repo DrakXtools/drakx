@@ -298,14 +298,6 @@ sub mount_options {
     \%non_defaults, \@user_implies;
 }
 
-# simple function
-# use mount_options_unpack + mount_options_pack for advanced stuff
-sub add_options(\$@) {
-    my ($option, @options) = @_;
-    my %l; @l{split(',', $$option), @options} = (); delete $l{defaults};
-    $$option = join(',', keys %l) || "defaults";
-}
-
 sub mount_options_unpack {
     my ($part) = @_;
     my $packed_options = $part->{options};
@@ -804,17 +796,6 @@ sub umount_part {
 	}
     }
     $part->{isMounted} = 0;
-}
-
-sub mount_all($;$$) {
-    my ($fstab, $prefix) = @_;
-
-    log::l("mounting all filesystems");
-
-    #- order mount by alphabetical order, that way / < /home < /home/httpd...
-    foreach (sort { $a->{mntpoint} cmp $b->{mntpoint} } grep { isSwap($_) || $_->{mntpoint} && isTrueFS($_) } @$fstab) {
-	mount_part($_, $prefix);
-    }
 }
 
 sub umount_all($;$) {
