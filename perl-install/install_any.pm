@@ -564,10 +564,6 @@ sub install_urpmi {
     foreach (sort { $a->{medium} <=> $b->{medium} } values %$mediums) {
 	my $name = $_->{fakemedium};
 	if ($_->{ignored} || $_->{selected}) {
-	    my $mask = umask 077;
-	    open(my $LIST, ">$prefix/var/lib/urpmi/list.$name") or log::l("failed to write list.$name");
-	    umask $mask;
-
 	    my $dir = ($_->{prefix} || ${{ nfs => "file://mnt/nfs", 
 					   disk => "file:/" . hdInstallPath(),
 					   ftp => $ENV{URLPREFIX},
@@ -575,24 +571,32 @@ sub install_urpmi {
 					   cdrom => "removable://mnt/cdrom" }}{$method} ||
 		       #- for live_update or live_install script.
 		       readlink "/tmp/image/Mandrake" =~ m,^(\/.*)\/Mandrake\/*$, && "removable:/$1") . "/$_->{rpmsdir}";
+	    my $need_list = $dir =~ m|^[^:]*://[^/:\@]*:[^/:\@]+\@|; #- use list file only if a password is visible
 
-	    #- build list file using internal data, synthesis file should exists.
-	    if ($_->{end} > $_->{start}) {
-		#- WARNING this method of build only works because synthesis (or hdlist)
-		#-         has been read.
-		foreach (@{$packages->{depslist}}[$_->{start} .. $_->{end}]) {
-		    print $LIST "$dir/".$_->filename."\n";
+	    #- build a list file if needed.
+	    if ($need_list) {
+		my $mask = umask 077;
+		open(my $LIST, ">$prefix/var/lib/urpmi/list.$name") or log::l("failed to write list.$name");
+		umask $mask;
+
+		#- build list file using internal data, synthesis file should exists.
+		if ($_->{end} > $_->{start}) {
+		    #- WARNING this method of build only works because synthesis (or hdlist)
+		    #-         has been read.
+		    foreach (@{$packages->{depslist}}[$_->{start} .. $_->{end}]) {
+			print $LIST "$dir/".$_->filename."\n";
+		    }
+		} else {
+		    #- need to use another method here to build synthesis.
+		    open(my $F, "parsehdlist '$prefix/var/lib/urpmi/hdlist.$name.cz' |");
+		    local $_; 
+		    while (<$F>) {
+			print $LIST "$dir/$_";
+		    }
+		    close $F;
 		}
-	    } else {
-		#- need to use another method here to build synthesis.
-		open(my $F, "parsehdlist '$prefix/var/lib/urpmi/hdlist.$name.cz' |");
-		local $_; 
-		while (<$F>) {
-		    print $LIST "$dir/$_";
-		}
-		close $F;
+		close $LIST;
 	    }
-	    close $LIST;
 
 	    #- build synthesis file if there are still not existing (ie not copied from mirror).
 	    if (-s "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz" <= 32) {
@@ -606,10 +610,10 @@ sub install_urpmi {
 	    $qname =~ s/(\s)/\\$1/g; $qdir =~ s/(\s)/\\$1/g;
 
 	    #- output new urpmi.cfg format here.
-	    push @cfg, "$qname " . ($dir !~ /^(ftp|http)/ && $qdir) . " {
+	    push @cfg, "$qname " . ($dir !~ /^(ftp|http)/ && $qdir) . ($need_list ? "" : $dir) . " {
   hdlist: hdlist.$name.cz
-  with_hdlist: ../base/" . ($_->{update} ? "hdlist.cz" : $_->{hdlist}) . "
-  list: list.$name" . ($dir =~ /removable:/ && "
+  with_hdlist: ../base/" . ($_->{update} ? "hdlist.cz" : $_->{hdlist}) . ($need_list ? "
+  list: list.$name" : "") . ($dir =~ /removable:/ && "
   removable: /dev/cdrom") . ($_->{update} && "
   update") . "
 }
@@ -1163,11 +1167,10 @@ sub check_kernel_module_packages {
     if (!$ext_name || pkgs::packageByName($do->{o}{packages}, $ext_name)) {
 	my @rpms;
 	foreach my $p (@{$do->{o}{packages}{depslist}}) {
-	    my ($ext, $version, $release) = $p->name =~ /kernel[^-]*(-smp|-enterprise|-secure)?(?:-(\d+\.\d+\.\d+)\.(\d+mdk))?$/
+	    my ($ext, $version_release) = $p->name =~ /kernel[^\-]*(-smp|-enterprise|-secure)?(?:-([^\-]+))?$/
 	      or next;
 	    $p->flag_available or next;
-	    $version or ($version, $release) = ($p->version, $p->release);
-	    my $name = "$base_name$version-$release$ext";
+	    my $name = "$base_name$ext-$version_release";
 	    pkgs::packageByName($do->{o}{packages}, $name) or next;
 	    push @rpms, $name;
 	}
