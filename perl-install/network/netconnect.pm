@@ -451,6 +451,7 @@ DOMAINNAME2=$netc->{DOMAINNAME2}"
 	      ["$prefix/etc/isdn/isdn2B.conf", "isdn2B"],
 	      ["$prefix/etc/resolv.conf", "resolv"],
 	      ["$prefix/etc/ppp/peers/adsl", "speedtouch"],
+	      ["$prefix/etc/ppp/peers/adsl", "eci"],
 	    ) {
 	my $file = "$prefix/etc/sysconfig/network-scripts/net_" . $_->[1] . "." . $a;
 	-e ($_->[0]) and cp_af($_->[0], $file) and chmod 0755, $file;
@@ -474,6 +475,7 @@ sub set_profile {
 	      ["$prefix/etc/isdn/isdn2B.conf", "isdn2B"],
 	      ["$prefix/etc/resolv.conf", "resolv"],
 	      ["$prefix/etc/ppp/peers/adsl", "speedtouch"],
+	      ["$prefix/etc/ppp/peers/adsl", "eci"],
 	    ) {
 	my $c = "$prefix/etc/sysconfig/network-scripts/net_" . $_->[1] . "." . $profile;
 	-e ($c) and cp_af($c, $_->[0]);

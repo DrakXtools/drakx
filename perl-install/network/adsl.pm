@@ -19,7 +19,7 @@ sub configure {
     my $type = $in->ask_from_list_(_("Connect to the Internet"),
 				   _("The most common way to connect with adsl is pppoe.
 Some connections use pptp, a few ones use dhcp.
-If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("use dhcp"), __("Alcatel speedtouch usb")]) or return;
+If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("use dhcp"), __("Alcatel speedtouch usb"), __("ECI Hi-Focus")]) or return;
     $type =~ s/use //;
     if ($type eq 'pppoe') {
 	$in->do_pkgs->install("rp-$type");
@@ -51,7 +51,15 @@ If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("u
 	$netcnx->{"adsl_$type"}{vpivci} = '';
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
     }
-    $type =~ /speedtouch/ or $netconnect::need_restart_network = 1;
+    if ($type =~ /ECI/) {
+	$type = 'eci';
+	$in->do_pkgs->install(qw(eciadsl));
+	$netcnx->{type} = "adsl_$type";
+	$netcnx->{"adsl_$type"} = {};
+	$netcnx->{"adsl_$type"}{vpivci} = '';
+	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
+    }
+    $type =~ /speedtouch|eci/ or $netconnect::need_restart_network = 1;
     1;
 }
 
@@ -83,7 +91,7 @@ sub adsl_conf {
   adsl_conf_step_1:
     adsl_ask_info ($adsl, $netc, $intf) or return;
   adsl_conf_step_2:
-    $adsl_type eq 'speedtouch' or conf_network_card($netc, $intf, 'static' , '10.0.0.10') or goto adsl_conf_step_1;
+    $adsl_type =~ /speedtouch|eci/ or conf_network_card($netc, $intf, 'static' , '10.0.0.10') or goto adsl_conf_step_1;
     adsl_conf_backend($adsl, $netc, $adsl_type);
     1;
 }
@@ -100,7 +108,7 @@ persist
 noauth
 usepeerdns
 defaultroute
-') if $adsl_type =~ /pptp|pppoe|speedtouch/;
+') if $adsl_type =~ /pptp|pppoe|speedtouch|eci/;
 
     write_secret_backend($adsl->{login}, $adsl->{passwd});
 
@@ -145,6 +153,33 @@ http://www.alcatel.com/consumer/dsl/dvrreg_lx.htm
 and copy the mgmt.o in /usr/share/speedtouch'));
     }
 
+if ($adsl_type eq 'eci') {
+    $netc->{vpivci} =~ /(\d+)_(\d+)/;
+    output("$prefix/etc/ppp/peers/adsl", 
+qq{debug
+kdebug 1
+noipdefault
+defaultroute
+pty "/usr/local/bin/pppoeci -v 1 -vpi 8 -vci 35"
+sync
+noaccomp
+nopcomp
+noccp
+novj
+holdoff 10
+user "$adsl->{login}"
+linkname eciadsl
+maxfail 10
+usepeerdns
+noauth
+lcp-echo-interval 0
+});
+    modules::add_alias($_->[0], $_->[1]) foreach (['char-major-108', 'ppp_generic'],
+						  ['tty-ldisc-14', 'ppp_synctty'],
+						  ['tty-ldisc-13', 'n_hdlc']);
+    $::isStandalone and modules::write_conf($prefix);
+}
+
     if ($adsl_type eq 'pptp') {
 	write_cnx_script($netc, "adsl",
 "/sbin/route del default
@@ -164,7 +199,14 @@ LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /usr/sbin/adsl-start $netc->{NET_DEVICE
 /usr/share/speedtouch/speedtouch.sh start
 ',
 '/usr/share/speedtouch/speedtouch.sh stop
-', $netc->{adsltype}) }
+', $netc->{adsltype}) } elsif ($adsl_type eq 'eci') {
+    write_cnx_script($netc, 'adsl',
+'/sbin/route del default
+/usr/bin/startmodem
+',
+"# et pour le stop on se touche c'est du beta...
+echo 'not yet implemented, still beta software'
+", $netc->{adsltype}) }
 
     $netc->{NET_INTERFACE}='ppp0';
 }
