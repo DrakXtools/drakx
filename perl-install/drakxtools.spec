@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 12mdk
+Release: 13mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,24 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Oct  1 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-13mdk
+- diskdrake: don't die when device-mapper is missing (eg on 2.4
+  kernel) (pixel, #11834)
+- drakconnect : call the scripts in
+  /etc/sysconfig/network-scripts/hostname.d like the network scripts
+  are doing when changing the hostname (fredl)
+- drakups:
+  o add --wizard option in order to directly run the wizard
+  o do not show banner when embedded
+- harddrake:
+  o list tablets with mice
+  o fix UPS devices listed in both "UPS" and "unknown" classes
+  o provide more data on UPS
+- localedrake:
+  o set KDE in m17n emvironment if needed
+  o split its menu entry in two (one for user config, one for system
+    embedded in mcc)
+
 * Thu Sep 30 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-12mdk
 - disable the new gtk smart search which display an entry box (pixel)
 - preload nvram on laptops
