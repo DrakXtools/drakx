@@ -2,7 +2,7 @@ package modules;
 
 use vars qw(%loaded %drivers);
 
-use common qw(:common :file);
+use common qw(:common :file :system);
 use detect_devices;
 use run_program;
 use log;
@@ -411,12 +411,20 @@ sub read_conf($;$) {
 
 sub write_conf {
     my ($file) = @_;
+
+    #- remove the post-install supermount stuff. We may have to add some more
+    substInFile { $_ = '' if /post-install supermount/ } $file;
+
     my $written = read_conf($file);
 
     my %net = detect_devices::net2module();
     while (my ($k, $v) = each %net) { add_alias($k, $v) }
 
     add_alias('scsi_hostadapter', 'ide-scsi') if detect_devices::getIDEBurners();
+    $conf{supermount}{"post-install"} = 
+      join " ; ", 
+	map { "modprobe $_" } 
+	grep { $conf{$_}{alias} && $conf{$_}{alias} =~ /scsi_hostadapter/ } keys %conf;
 
     local *F;
     open F, ">> $file" or die("cannot write module config file $file: $!\n");
