@@ -266,7 +266,7 @@ sub afterInstallPackages($) {
     install_any::kdeicons_postinstall($o->{prefix});
 
     substInFile { s/^(GreetString)=.*/$1=Welcome to [HOSTNAME]/ } "$o->{prefix}/usr/share/config/kdmrc";
-    substInFile { s/^(UserView)=false/$1=true/ } "$o->{prefix}/usr/share/config/kdmrc" if $o->{security} < 3;    
+    substInFile { s/^(UserView)=false/$1=true/ } "$o->{prefix}/usr/share/config/kdmrc" if $o->{security} < 3;
     run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
 
     #- move some file after an upgrade that may be seriously annoying.

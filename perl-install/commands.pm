@@ -502,6 +502,30 @@ sub lspci {
 }
 sub dmesg { print cat_("/tmp/syslog"); }
 
+sub sort {
+    my ($n, $h) = getopts(\@_, qw(nh));
+    $h and die "usage: sort [-n] [<file>]\n";
+    local *F; @_ ? open(F, $_[0]) || die "error: can't open file $_[0]\n" : (*F = *STDIN);
+    if ($n) {
+	print sort { $a <=> $b } <F>;
+    } else {
+	print sort <F>;
+    }
+}
+
+sub du {
+    my ($s, $h) = getopts(\@_, qw(sh));
+    $h || !$s and die "usage: du -s [<directories>]\n";
+
+    my $f; $f = sub {
+	my ($e) = @_;
+	my $s = (lstat($e))[12];
+	$s += sum map { &$f($_) } glob_("$e/*") if !-l $e && -d $e;
+	$s;
+    };
+    print &$f($_) >> 1, "\t$_\n" foreach @_ ? @_ : glob_("*");
+}
+
 #my %cached_failed_install_cpio;
 #- double space between sub and install_cpio cuz install_cpio is not a shell command
 sub  install_cpio($$;@) {

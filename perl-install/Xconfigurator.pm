@@ -2,7 +2,7 @@ package Xconfigurator;
 
 use diagnostics;
 use strict;
-use vars qw($in $install $resolution_wanted @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1 %lines @options %xkb_options);
+use vars qw($in $install $isLaptop $resolution_wanted @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1 %lines @options %xkb_options);
 
 use pci_probing::main;
 use common qw(:common :file :functional :system);
@@ -71,7 +71,7 @@ sub readCardsDB {
 	/^$/ and next;
 	/^END/ and last;
 
-	($cmd, $val) = /(\S+)\s*(.*)/ or log::l("bad line $lineno ($_)"), next;
+	($cmd, $val) = /(\S+)\s*(.*)/ or next; #log::l("bad line $lineno ($_)"), next;
 
 	my $f = $fs->{$cmd};
 
@@ -140,6 +140,7 @@ sub cardConfigurationAuto() {
 	($card->{identifier}, $_) = @$c;
 	$card->{type} = $1 if /Card:(.*)/;
 	$card->{server} = $1 if /Server:(.*)/;
+	$card->{flags}{needVideoRam} &&= /86c368/;
 	push @{$card->{lines}}, @{$lines{$card->{identifier}} || []};
     }
     $card;
@@ -412,8 +413,9 @@ sub autoDefaultDepth($$) {
 }
 
 sub autoDefaultResolution {
-    my ($size, $isLaptop) = @_;
-    !$size && $isLaptop and return "1024x768";
+    return "1024x768" if $isLaptop;
+
+    my ($size) = @_;
     $monitorSize2resolution[round($size || 14)] || #- assume a small monitor (size is in inch)
       $monitorSize2resolution[-1]; #- no corresponding resolution for this size. It means a big monitor, take biggest we have
 }
@@ -555,7 +557,7 @@ Try with another video card or monitor")), return;
     #- remove unusable resolutions (based on the video memory size and the monitor hsync rate)
     keepOnlyLegalModes($card, $o->{monitor});
 
-    my $res = $o->{resolution_wanted} || autoDefaultResolution($o->{monitor}{size}, );
+    my $res = $o->{resolution_wanted} || autoDefaultResolution($o->{monitor}{size});
     my $wres = first(split 'x', $res);
     my $depth = eval { $card->{default_depth} || autoDefaultDepth($card, $wres) };
 
@@ -759,7 +761,7 @@ sub main {
 
 	$o->{monitor} = monitorConfiguration($o->{monitor}, $o->{card}{server} eq 'FBDev');
     }
-    my $ok = resolutionsConfiguration($o, auto => $::auto, noauto => $::noauto, isLaptop => $isLaptop);
+    my $ok = resolutionsConfiguration($o, auto => $::auto, noauto => $::noauto);
 
     $ok &&= testFinalConfig($o, $::auto, $::skiptest);
 

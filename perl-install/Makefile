@@ -34,7 +34,7 @@ verify_c:
 	./verify_c $(PMS)
 
 install_pms: $(DIRS)
-	for i in `perl -ne 's/sub (\w+?)_? {.*/$$1/ and print' commands.pm`; do ln -sf commands $(DEST)/usr/bin/$$i; done
+	for i in `perl -ne 's/sub (\w+?)_? {.*/$$1/ and print' commands.pm` sync; do ln -sf commands $(DEST)/usr/bin/$$i; done
 
 	install -d $(DESTREP4PMS)
 	for i in $(PMS); do \

@@ -545,7 +545,7 @@ sub main {
     $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin" unless $::g_auto_install;
 
     $o->{interactive} ||= 'gtk';
-    if ($o->{interactive} eq "gtk" && availableMemory < 24 * 1024) {
+    if ($o->{interactive} eq "gtk" && availableMemory < 22 * 1024) {
 	log::l("switching to newt install cuz not enough memory");
 	$o->{interactive} = "newt";
     }
