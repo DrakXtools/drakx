@@ -1070,7 +1070,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 				     my $check_obsoletes = sub {
 					 my ($header) = @_;
 					 (!$v || eval(versionCompare(c::headerGetEntry($header, 'version'), $v) . $o . 0)) &&
-					   (!$r || version_compare(c::headerGetEntry($header, 'version'), $v) != 0 ||
+					   (!$r || versionCompare(c::headerGetEntry($header, 'version'), $v) != 0 ||
 					    eval(versionCompare(c::headerGetEntry($header, 'release'), $r) . $o . 0)) or return;
 					 ++$obsoleted;
 				     };
