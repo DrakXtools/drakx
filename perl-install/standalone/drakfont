@@ -572,6 +572,8 @@ sub interactive_mode {
 					  ),
 				1, new Gtk::VBox(0,0),
 				1, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+					  gtksignal_connect(new Gtk::Button(_("About")), clicked => sub { 
+					       ${$central_widget}->destroy(); about() }),
 					  gtksignal_connect(new Gtk::Button(_("             Help           ")), clicked => sub { 
 					       ${$central_widget}->destroy(); help() }),
 					  gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub { Gtk->main_quit() }),
@@ -610,6 +612,57 @@ sub license {
     $central_widget = \$license_box;
     $font_box->show_all();
 }
+
+
+sub about {
+    my $text = new Gtk::Text(undef, undef);
+    my $about_box;
+    gtkpack($font_box,
+	    $about_box = gtkpack_(new Gtk::VBox(0,10),
+	       1, gtkpack_(new Gtk::HBox(0,0),
+			   1, gtktext_insert(gtkset_editable($text, 1), "
+ Copyright (C) 2001 by MandrakeSoft (sdupont\@mandrakesoft.com)
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2, or (at your option)
+ any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+ Thanks:
+    -  pfm2afm:   
+	 by Ken Borgendale:
+	    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)
+    -  type1inst:
+	 by James Macnicol: 
+	    type1inst generates files fonts.dir fonts.scale & Fontmap.
+    -  ttf2pt1:   
+	  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  
+             Convert ttf font files to afm and pfb fonts
+
+
+"),
+			   0, new Gtk::VScrollbar($text->vadj),
+			   ),
+				  0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+					    gtksignal_connect(new Gtk::Button(_("OK")), clicked => 
+							      sub { ${$central_widget}->destroy(); create_fontsel() }),
+					    ),
+				  )
+	    );
+    $central_widget = \$about_box;
+    $font_box->show_all();
+}
+
+
 
 sub help {
     my $text = new Gtk::Text(undef, undef);
@@ -660,20 +713,6 @@ Visual Interface:
           - option support:   ghostscript, Staroffice, etc...
                 check-button. (by default all check)
           - Printer Application Fonts Support...
-
-________________________ ABOUT ____________________________ 
-
-
- USING:
-    -  pfm2afm:   
-	 by Ken Borgendale:
-	    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)
-    -  type1inst:
-	 by James Macnicol: 
-	    type1inst generates files fonts.dir fonts.scale & Fontmap.
-    -  ttf2pt1:   
-	  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  
-             Convert ttf font files to afm and pfb fonts
 
 
 "),
