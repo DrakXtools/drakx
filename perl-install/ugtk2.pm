@@ -526,8 +526,8 @@ sub gtktext_append { gtktext_insert(@_, append => 1) }
 sub gtktext_insert {
     my ($textview, $t, %opts) = @_;
     my $buffer = $textview->get_buffer;
-    $opts{append} or $buffer->set_text('', -1);
     if (ref($t) eq 'ARRAY') {
+        $opts{append} or $buffer->set_text('', -1);
         foreach my $token (@$t) {
             my ($iter1, $iter2);
             my $c = $buffer->get_char_count;
