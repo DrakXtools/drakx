@@ -931,7 +931,7 @@ sub selectPackagesToUpgrade {
 
 sub allowedToUpgrade { $_[0] !~ /^(kernel|kernel22|kernel2.2|kernel-secure|kernel-smp|kernel-linus|kernel-linus2.2|hackkernel|kernel-enterprise)$/ }
 
-sub supplCDMountPoint { $::o->{mainmethod} eq 'cdrom' ? "/tmp/image" : "/mnt/cdrom" }
+sub supplCDMountPoint() { $::o->{mainmethod} eq 'cdrom' ? "/tmp/image" : "/mnt/cdrom" }
 
 sub installTransactionClosure {
     my ($packages, $id2pkg) = @_;
