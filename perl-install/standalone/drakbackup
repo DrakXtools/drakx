@@ -92,7 +92,7 @@ my @tape_devices;
 my $in;
 
 # config. FILES -> Default PATH  & Global variables.
-my @user_list;
+my @user_list = $ENV{USER};
 my $cfg_dir = "/etc/drakxtools/drakbackup/";
 my $cfg_file = $cfg_dir . "drakbackup.conf";
 my $log_file = "/var/log/drakbackup";
@@ -132,7 +132,6 @@ if ($ENV{USER} ne 'root' && $ENV{HOME} ne '/root') {
 	$log_file = $cfg_dir . "drakbackup.log";
 	$nonroot_user = 1;
 	$conf{NO_SYS_FILES} = 1;
-	@user_list = $ENV{USER};
 } else {
 	$user_home = "/root";
 	$conf{PATH_TO_SAVE} = "/var/lib/drakbackup";
@@ -434,7 +433,7 @@ sub read_conf_file() {
 		upgrade_conf_file() if $conf_version !~ /^USE_HD=1/;
 		%conf = getVarsFromSh($cfg_file);
 		@other_files = conf_to_list($conf{OTHER_FILES});
-		@user_list = conf_to_list($conf{HOME_FILES});
+		@user_list = conf_to_list($conf{HOME_FILES}) if exists($conf{HOME_FILES});
 		@sys_files = conf_to_list($conf{SYS_FILES}) if exists($conf{SYS_FILES});
 		$backup_daemon = 1 if exists($conf{DAEMON_TIME_SPACE});
 		$conf{PASSWD} = $host_passwd if $conf{REMEMBER_PASS} != 1;
@@ -1610,7 +1609,7 @@ sub advanced_what() {
 		Gtk2::Label->new(N("Other")),
 		Gtk2::HBox->new(0, 5)
 	));
-    gtkset_sensitive($button_what_sys, !$conf{NO_SYS_FILES});
+    gtkset_sensitive($button_what_sys, !$nonroot_user);
     fonction_env(\$box_what, \&advanced_what, \&advanced_box);
     $up_box->show_all;
 }
@@ -2376,6 +2375,7 @@ sub wizard()   {
     my $user_string = N("Backup Users");
 	$user_string .= N(" (Default is all users)") if !$nonroot_user;
 	if (!$conf{NO_USER_FILES} && !$manual_user) {
+		all_user_list() if @user_list_all == ();
 		@user_list = @user_list_all;
 	} elsif (!$manual_user) {
 		@user_list = ();
@@ -2387,7 +2387,7 @@ sub wizard()   {
 			1, gtkpack_(Gtk2::VBox->new(0, 15),	
 				1, Gtk2::VBox->new(0, 5),
 				0, N("Please choose what you want to backup"),
-				0, my $check_wizard_sys = Gtk2::CheckButton->new(N("Backup System")),
+				0, gtkset_sensitive(my $check_wizard_sys = Gtk2::CheckButton->new(N("Backup System")), !$nonroot_user),
 				0, my $check_wizard_user = Gtk2::CheckButton->new($user_string),
 				0, gtksignal_connect(Gtk2::Button->new(N("Select user manually")), clicked => sub {
 					$manual_user = 1;
@@ -2398,7 +2398,7 @@ sub wizard()   {
 			),
 			1, Gtk2::VBox->new(0, 5),	
 		),
-	);
+	);	
     foreach ([$check_wizard_sys, \$conf{NO_SYS_FILES}], [$check_wizard_user, \$conf{NO_USER_FILES}]) {
 		my $ref = $_->[1];
 		gtksignal_connect(gtkset_active($_->[0], !$$ref), toggled => sub { 
