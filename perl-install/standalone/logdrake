@@ -447,10 +447,12 @@ my $initdir = "/etc/init.d";
 		   { label => "load ", val => \$load, type => 'range', min => 1, max => 50 },
 		  ]) or goto step_service;
 
-    $cron .= q@
+    $cron .= sprintf(<<'EOF', $load);
 #- load
 my ($load) = split ' ', first(cat_("/proc/loadavg"));
-$r .= "Load is huge: $load\n" if ($load >@ . "$load);\n\n";
+$r .= "Load is huge: $load\n" if ($load > %s);
+
+EOF
     
   step_output:
 #    $::Wizard_no_previous = 1;
@@ -462,11 +464,11 @@ $r .= "Load is huge: $load\n" if ($load >@ . "$load);\n\n";
 		   { label => "Email", val => \$email},
 		  ]) or goto step_load;
 
-    $cron .= q@#- report it@;
-    $cron .= q@
-$email = @. "'" . "$email" . "'" . ";\n\n";
+    $cron .= q(#- report it);
+    $cron .= q(
+$email = ) . "'" . "$email" . "'" . ";\n\n";
 
-	$cron .= q!
+	$cron .= q(
 open F, '|/usr/sbin/sendmail -oi -t';
 
 print F
@@ -475,7 +477,7 @@ From: root@localhost
 To: ), "$email\n";
 print F $r;
 
-# EOF!;
+# EOF);
 	output "$cron_hourly", $cron;
 	chmod 0755, $cron_hourly;
         
