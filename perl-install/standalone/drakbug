@@ -86,7 +86,7 @@ $package->set_text("...");
 $table->attach(my $kernel_rel = new Gtk::Entry(), 1, 2, 2, 3, 'fill', 'fill',0,0);
 $kernel_rel->set_text($kernel_release);
 $table->attach(my $mdk_rel = new Gtk::Entry(), 1, 2, 3, 4, 'fill', 'fill',0,0);
-$mdk_rel->set_text(mdk_rel());
+$mdk_rel->set_text(mandrake_release());
 
 gtkpack2__(
 	   gtkpack2__(my $vbx = new Gtk::VBox(0,5),
@@ -167,7 +167,7 @@ sub get_package {
 }
 
 sub parse_release {
-    my ($rel) = mdk_rel() =~ /release\s(\S+\s\(.*\))/;
+    my ($rel) = mandrake_release() =~ /release\s(\S+\s\(.*\))/;
     $rel;
 }
 

@@ -7,7 +7,7 @@ use any;
 
 my %other = (
     'rpm -qa' => join('', sort `rpm -qa`),
-    'mandrake version' => mdk_rel(),
+    'mandrake version' => mandrake_release(),
     'df' => join('', `df`),
 );
 

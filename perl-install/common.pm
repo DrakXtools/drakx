@@ -9,7 +9,7 @@ use vars qw(@ISA @EXPORT $SECTORSIZE);
 
 @ISA = qw(Exporter);
 # no need to export ``_''
-@EXPORT = qw($SECTORSIZE N N_ translate untranslate formatXiB removeXiBSuffix formatTime setVirtual makedev unmakedev salt set_permissions files_exist set_alternative);
+@EXPORT = qw($SECTORSIZE N N_ translate untranslate formatXiB removeXiBSuffix formatTime setVirtual makedev unmakedev salt set_permissions files_exist set_alternative mandrake_release);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
@@ -242,8 +242,8 @@ sub set_permissions {
 	or die "Could not start chmod!";
 }
 
-sub mdk_rel {
-    chomp_(cat_("/etc/mandrake-release")
+sub mandrake_release {
+    chomp_(cat_("/etc/mandrake-release"))
 }
 
 1;
