@@ -1244,15 +1244,15 @@ sub advanced_where{
 					  1, gtksignal_connect(my $button_where_net = new Gtk::Button(), clicked => sub { 
 #					      $box_where->destroy(); advanced_where_net(); }),
 					      $box_where->destroy(); advanced_where_net_ftp(); }),
-					  1, gtksignal_connect(my $button_where_cd = new Gtk::Button(),  clicked => sub { 
-					      ${$central_widget}->destroy(); 
-					      if (require_rpm("mkisofs", "cdrecord", "toto")) { advanced_where_cd(); }
-					      else { 
-						  print "have to install @list_of_rpm_to_install...\n";
-						  ${$central_widget}->destroy();
-						  install_rpm(\&advanced_where);
-						  }
-					  }),
+#					  1, gtksignal_connect(my $button_where_cd = new Gtk::Button(),  clicked => sub { 
+#					      ${$central_widget}->destroy(); 
+#					      if (require_rpm("mkisofs", "cdrecord", "toto")) { advanced_where_cd(); }
+#					      else { 
+#						  print "have to install @list_of_rpm_to_install...\n";
+#						  ${$central_widget}->destroy();
+#						  install_rpm(\&advanced_where);
+#						  }
+#					  }),
 					  1, gtksignal_connect(my $button_where_hd = new Gtk::Button(),  clicked => sub { 
 					      ${$central_widget}->destroy(); advanced_where_hd(); }),
 #					  1, gtksignal_connect(my $button_where_tape = new Gtk::Button(),  clicked => sub { 
@@ -1267,11 +1267,11 @@ sub advanced_where{
 				   new Gtk::Label(_("Network")),
 				   new Gtk::HBox(0, 5)
 				   ));
-    $button_where_cd->add(gtkpack(new Gtk::HBox(0,10),
-				  new Gtk::Pixmap($pix_cd_map, $pix_cd_mask),
-				  new Gtk::Label(_("CDROM / DVDROM")),
-				  new Gtk::HBox(0, 5)
-				  ));
+#     $button_where_cd->add(gtkpack(new Gtk::HBox(0,10),
+# 				  new Gtk::Pixmap($pix_cd_map, $pix_cd_mask),
+# 				  new Gtk::Label(_("CDROM / DVDROM")),
+# 				  new Gtk::HBox(0, 5)
+# 				  ));
     $button_where_hd->add(gtkpack(new Gtk::HBox(0,10),
 				  new Gtk::Pixmap($pix_hd_map, $pix_hd_mask),
 				  new Gtk::Label(_("HardDrive / NFS")),
