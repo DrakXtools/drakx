@@ -831,7 +831,7 @@ sub summaryBefore {
     install_any::preConfigureTimezone($o);
     #- get back network configuration.
     require network;
-    eval { network::read_all_conf($o->{prefix}, $o->{netc} ||= {}, $o->{intf} ||= {}) };
+    eval { network::network::read_all_conf($o->{prefix}, $o->{netc} ||= {}, $o->{intf} ||= {}) };
     log::l("summaryBefore: network configuration: $@");
 }
 
