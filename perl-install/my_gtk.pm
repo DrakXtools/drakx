@@ -405,6 +405,7 @@ sub ask_browse_tree_info_given_widgets {
     
     my $set_node_state_flat = sub {
 	my ($node, $state) = @_;
+	$state eq 'XXX' and return;
 	$pix{$state} ||= [ gtkcreate_png($state) ];
 	$w->{tree}->node_set_pixmap($node, 1, $pix{$state}[0], $pix{$state}[1]);
     };
