@@ -176,7 +176,7 @@ sub fullname2mouse {
 	my $l = raw2mouse($type, $_);
 	$name eq $l->{name} and return { %$l, %opts };
     }
-    if ($name eq '1 Button') {
+    if ($name eq '1 Button' || $name eq '1 button') {
 	$name = "Generic 2 Button Mouse";
 	goto search;
     }
