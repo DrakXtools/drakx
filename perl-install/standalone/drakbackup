@@ -46,6 +46,19 @@
 #
 #  don't forget to build floppy boot
 #
+#
+#________________________________________________________________
+#
+# TODO:
+#     view list of data to include on cd
+# DONE:
+#     incremental backups have depends whith replace options.
+#     gtklist not maximized.
+#     restore mode.
+#     view date during restore
+#     view size of file, date & hours during backup on CD
+#________________________________________________________________
+
 
 
 
@@ -56,6 +69,7 @@ use standalone;
 use my_gtk qw(:helpers :wrappers);
 use common;
 use strict;
+use Time::localtime;
 
 my $in = 'interactive'->vnew('', 'default');
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
@@ -123,6 +137,12 @@ my $pbar;
 my $pbar1;
 my $pbar2;
 my $pbar3;
+my $the_time;
+my @user_list_to_restore2 = ();
+my @data_backuped = ();
+my $box_tail; 
+my $label_tail;
+my @user_list_to_build_on_cd = (); 
 
 # config. FILES -> Default PATH  & Global variables.
 my @sys_files = ("/etc");
@@ -137,6 +157,8 @@ my $backup_sys = 1;
 my $backup_user = 1;
 my $backup_daemon = 1;
 my $backup_sys_versions = 0;
+my $backup_user_versions = 0;
+my $backup_other_versions = 0;
 my $what_no_browser = 1;
 my $cdrw = 0;
 my $net_proto= '';
@@ -162,8 +184,8 @@ my $auth_choice = 0;
 my $remember_pass = 0;
 my $passwd_user= '';
 my $save_device_tape = ();
-my $backup_incremental = 0;
 my $cdrw_erase = 0;
+
 
 foreach (@ARGV) {
     /--default/ and $default = 1, $mode=-1;
@@ -190,6 +212,22 @@ sub read_passwd {
     $DEBUG and print "home_files: ".$_."\n" foreach (@user_list);
 }
 
+
+
+sub the_time {
+    $the_time = "_";
+    $the_time .= localtime->year() + 1900;
+    $the_time .= localtime->mon() +1;
+    $the_time .= localtime->mday();
+    $the_time .= "_";
+    if (localtime->hour() <= 10 ) { $the_time .= "0"; }
+    $the_time .= localtime->hour();
+    if (localtime->min() <= 10 ) { $the_time .= "0"; }
+    $the_time .= localtime->min();
+
+    
+ }
+
 sub save_conf_file {
     my @cfg_list = ( "SYS_FILES=@sys_files\n",
 		     "HOME_FILES=@user_list\n", 
@@ -204,8 +242,10 @@ sub save_conf_file {
 		     "TAPE_DEVICE=$save_device_tape\n",
 		     "HOST_NAME=$host_name\n"
 		     );
+    $backup_sys_versions and push @cfg_list, "SYS_INCREMENTAL_BACKUPS\n" ; 
+    $backup_user_versions and push @cfg_list, "USER_INCREMENTAL_BACKUPS\n" ; 
+    $backup_other_versions  and push @cfg_list, "OTHER_INCREMENTAL_BACKUPS\n" ; 
     $cdrw_erase and push @cfg_list, "CDRW_ERASE\n" ; 
-    $backup_incremental and push @cfg_list, "INCREMENTAL_BACKUPS\n" ; 
     $where_net_ftp and push @cfg_list, "USE_NET_FTP\n" ; 
     $where_net_ssh and push @cfg_list, "USE_NET_SSH\n" ; 
     $remember_pass and push @cfg_list, "LOGIN=$login_user\n" ; 
@@ -224,7 +264,6 @@ sub save_conf_file {
     $where_net and  push @cfg_list, "USE_NET\n" ;
     $cdrw and push @cfg_list, "CDRW\n"; 
     $what_no_browser or push @cfg_list, "BROWSER_CACHE\n" ;
-    $backup_sys_versions or push @cfg_list, "NO_SYS_VERSIONS\n" ;
     $option_replace and push @cfg_list, "OPTION_REPLACE\n" ;
     $backup_sys or push @cfg_list,  "NO_SYS_FILES\n";
     if ($comp_mode) {push @cfg_list, "OPTION_COMP=TAR.BZ2\n"} 
@@ -275,7 +314,6 @@ sub read_conf_file {
 	    if (/^NO_SYS_FILES/)   { $backup_sys = 0;}
 	    if (/^NO_USER_FILES/)  { $backup_user = 0;}
 	    if (/^OPTION_COMP/)    { s/^OPTION_COMP=//gi; /TAR.GZ/ and  $comp_mode = 0; /TAR.BZ2/ and $comp_mode = 1; }
-	    if (/^NO_SYS_VERSIONS/){ $backup_sys_versions = 0;  }
 	    if (/^BROWSER_CACHE/)  { $what_no_browser = 0; }
 	    if (/^CDRW/)           { $cdrw = 1; }
 	    if (/^NET_PROTO/)      { s/^NET_PROTO=//gi; $net_proto = $_; }
@@ -300,8 +338,10 @@ sub read_conf_file {
 	    if (/^USE_NET_FTP/)    { $where_net_ftp = 1;  }
 	    if (/^USE_NET_SSH/)    { $where_net_ssh = 1;  }
 	    if (/^TAPE_DEVICE/)    { s/TAPE_DEVICE=//gi; $save_device_tape = $_;}
-	    if (/^INCREMENTAL_BACKUPS/) { $backup_incremental = 1;}
 	    if (/^CDRW_ERASE/)     { $cdrw_erase = 1;}
+	    if (/^SYS_INCREMENTAL_BACKUPS/)   { $backup_sys_versions = 1;}
+	    if (/^USER_INCREMENTAL_BACKUPS/)  { $backup_user_versions = 1;}
+	    if (/^OTHER_INCREMENTAL_BACKUPS/) { $backup_other_versions = 1;}
 	}
 	read_cron_files();
 	$cfg_file_exist = 1;
@@ -334,8 +374,10 @@ sub build_backup_files {
     my $path_name;
     my $tar_cmd;
     my $tar_ext;
+    my $vartemp;
     my @list_other_;
-    
+
+    the_time();    
     -d  $save_path or mkdir_p($save_path);
     if ($comp_mode) { $tar_cmd = "tar cv --use-compress-program /usr/bin/bzip2 "; $tar_ext = "tar.bz2" }
     else { $tar_cmd = "tar cvz "; $tar_ext = "tar.gz"}
@@ -346,12 +388,12 @@ sub build_backup_files {
     if ($where_hd) {
 	print "backup_sys @sys_files\n";
 	$interactive and progress($pbar, 0.5, _("Backup system files..."));
-	$backup_sys and system("$tar_cmd -f $save_path/backup_sys.$tar_ext @sys_files");
+	$backup_sys and system("$tar_cmd -f $save_path/backup_sys$the_time.$tar_ext @sys_files");
 	$interactive and progress($pbar, 0.5, _("Backup system files..."));
 	$interactive and progress($pbar3, 0.3, _("Hard Disk Backup files..."));
 	print "backup_other @list_other\n";
 	if (@list_other) {
-	    system("$tar_cmd -f $save_path/backup_other.$tar_ext @list_other");
+	    system("$tar_cmd -f $save_path/backup_other$the_time.$tar_ext @list_other");
 	    foreach (@list_other) {
 		push @list_other_, $_ . "\n";
 	    }
@@ -361,10 +403,12 @@ sub build_backup_files {
 	$interactive and progress($pbar3, 0.3, _("Hard Disk Backup Progress..."));
 	if ($backup_user) {
 	    foreach (@user_list) {
+		$vartemp = $_;
 		$path_name = return_path($_);
 		print "path of user: $path_name\n";
-		$what_no_browser or system("$tar_cmd  -f $save_path/backup_user_$_.$tar_ext $path_name");
-		$what_no_browser and system("$tar_cmd --exclude NewCache --exclude Cache --exclude cache -f $save_path/backup_user_$_.$tar_ext $path_name");
+		print "the time:".$the_time."\n";
+		$what_no_browser or system("$tar_cmd  -f $save_path/backup_user_$vartemp$the_time.$tar_ext $path_name");
+		$what_no_browser and system("$tar_cmd --exclude NewCache --exclude Cache --exclude cache -f $save_path/backup_user_$vartemp$the_time.$tar_ext $path_name");
 	    }
 	}
 	$interactive and progress($pbar2, 1, _("Backup Other files..."));
@@ -437,15 +481,19 @@ sub advanced_what_sys {
 				     1, _("\nPlease check all options that you need.\n"),
 				     1, _("This options can backup and restore all files on your /etc directory.\n"),
 				     0, my $check_what_sys = new Gtk::CheckButton( _("Backup your System files. (~ 2Mo)")),
-				     0, my $check_what_versions = new Gtk::CheckButton( _("Need to restore any versions [beta]") ),
+				     0, my $check_what_versions = new Gtk::CheckButton( _("Use incremental backup  (do not replace old backups)") ),
 				     0, _("With this option you will be able to restore any version\n of your /etc directory."),
 				     1, new Gtk::VBox(0, 15),
 				     ),
 	    );
-    foreach ([$check_what_sys, \$backup_sys], [$check_what_versions, \$backup_sys_versions]) {
+    foreach ([$check_what_sys, \$backup_sys]) {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
 	}
+    gtksignal_connect(gtkset_active($check_what_versions, $backup_sys_versions), toggled => sub {
+	$backup_sys_versions = $backup_sys_versions ? 0 : 1;
+	$backup_sys_versions and $option_replace = 0; 
+    });
     $custom_help = "";
     $current_widget = \&advanced_what_sys;
     $previous_widget =\&advanced_what;
@@ -463,7 +511,7 @@ sub advanced_what_user {
 				      0, _("Please check all user that you want to include inb your backup."),
 				      0, new Gtk::HSeparator,
 				      1, createScrolledWindow( 
-						gtkpack(new Gtk::VBox(0,0),
+						gtkpack__(new Gtk::VBox(0,0),
 							map { my $name = $_;
 							      my @user_list_tmp;
 							      my $b = new Gtk::CheckButton($name); 
@@ -487,14 +535,18 @@ sub advanced_what_user {
 							      $b } (@all_user_list) 
 							),
 							       ),
-				      0, new Gtk::HSeparator,
 				      0, my $check_what_browser = new Gtk::CheckButton( _(" do not include the browser cache") ),
+				      0, my $check_what_user_versions = new Gtk::CheckButton( _("Use Incremental Backups  (do not replace old backups)") ),
 				      ),
 	    );
     foreach ([$check_what_browser, \$what_no_browser]) {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
 	}
+    gtksignal_connect(gtkset_active($check_what_user_versions, $backup_user_versions), toggled => sub {
+	$backup_user_versions = $backup_user_versions ? 0 : 1;
+	$backup_user_versions and $option_replace = 0; 
+    });
     $custom_help = "";
     if ($previous_function) { $previous_widget =\&$previous_function; $next_widget =\&$previous_function; }
     else { $previous_widget =\&advanced_what; }
@@ -518,8 +570,15 @@ sub advanced_what_other {
 					    gtksignal_connect(new Gtk::Button(_("Add")), clicked => sub {filedialog()  }),
 					    gtksignal_connect(new Gtk::Button(_("Remove Selected")), clicked => \&list_remove, $list_other),
 					    ),
+				  0, new Gtk::HSeparator,
+				  0, my $check_what_other_versions = new Gtk::CheckButton( _("Use Incremental Backups  (do not replace old backups)") ),
 				       ),
 	    );
+    gtksignal_connect(gtkset_active($check_what_other_versions, $backup_other_versions), toggled => sub {
+	$backup_other_versions = $backup_other_versions ? 0 : 1;
+	$backup_other_versions and $option_replace = 0; 
+    });
+
     $custom_help = "";
     $current_widget = \&advanced_what_other;
     $previous_widget =\&advanced_what;
@@ -989,16 +1048,23 @@ sub advanced_options{
 				 0, new Gtk::HSeparator,
 				 0, gtkpack_(new Gtk::VBox(0,10),
 					     0, my $check_tar_bz2  = new Gtk::CheckButton( _(" Use Tar and bzip2  ( very slow)") ),
-					     0, my $check_replace = new Gtk::CheckButton( _(" Replace (no update backup files)")),
+ 					     0, my $check_replace = new Gtk::CheckButton( _(" Replace (cancel all incrementals backups.)")),
 					     0, gtkset_sensitive(my $check_backupignore = new Gtk::CheckButton( _(" Use .backupignore files")), 0),
-					     0, my $check_incremental = new Gtk::CheckButton( _(" Incremental backups") ),
 					     ),
 				 ),
 	    );
-    foreach ([$check_tar_bz2, \$comp_mode], [$check_replace, \$option_replace], [$check_backupignore, \$backupignore], [$check_incremental, \$backup_incremental ]) {
+    foreach ([$check_tar_bz2, \$comp_mode], [$check_replace, \$option_replace], [$check_backupignore, \$backupignore]) {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
 	}
+    gtksignal_connect(gtkset_active($check_replace, $option_replace ), toggled => sub { 
+	$option_replace = $option_replace  ? 0 : 1; 
+	if ($option_replace) {
+	    $backup_sys_versions = 0;
+	    $backup_user_versions = 0;
+	    $backup_other_versions = 0;
+	}
+    });
     $custom_help = "options";
     $current_widget = \&advanced_options;
     $previous_widget =\&advanced_box;
@@ -1213,7 +1279,14 @@ sub find_backup_to_restore {
 	s/^backup_user_//gi;
 	s/.tar.gz$//gi;
 	s/.tar.bz2$//gi;
-	push @user_backuped ,$_;	
+	my @user_date = split(/\_20/,$_ );
+	my @user_date2 = split(/\_/,$user_date[1] );
+# 	print "user :".$user_date[0]."\n";
+# 	print "date: 20".$user_date2[0]."\n";
+# 	print "heure: ".$user_date2[1]."\n";
+# 	print "$user_date[0],  date: 20$user_date2[0], time: $user_date2[1] \n";
+	my $to_put = "  $user_date[0],  (date: 20$user_date2[0], hour: $user_date2[1])";
+	push @user_backuped , $to_put;
     }
 }
 
@@ -1259,12 +1332,14 @@ sub system_state {
     else {$system_state = _("No configuration please click Wizard or Advanced.\n")}
 }
 
+
 sub restore_state {
     $restore_state = _("List of data to restore:\n\n");
     if ($restore_sys) { $restore_state .= "- Restore System Files.\n" }
     if ($restore_user) { 
 	$restore_state .= "- Restore Users Files: \n" ;
-	$restore_state .= "\t\t$_\n" foreach @user_list_to_restore ;
+	$restore_state .= "\t\t$_\n" foreach @user_list_to_restore2 ;
+	push @user_list_to_restore, (split(',', $_))[0] foreach @user_list_to_restore2 ;
     }
     if ($restore_other) { 
 	$restore_state .= "- Restore Other Files: \n";
@@ -1326,31 +1401,37 @@ sub restore_step_other {
 my %check_user_to_restore;
 sub restore_step_user {
     my $retore_step_user;
+    @user_list_to_restore2 = @user_backuped;
+
     gtkpack($advanced_box,
 	    $retore_step_user = gtkpack_(new Gtk::VBox(0,10),
 		     0, new Gtk::VBox(0,10),
 		     0, _("User list to restore "),
-		     1, createScrolledWindow( gtkpack(new Gtk::VBox(0,0),
-						      map { my $name = $_;
-							    my $b = new Gtk::CheckButton($name); 
-							    if ( grep /^$name$/, @user_list_to_restore)  {
-								gtkset_active($b, 1);
-							    } else {
-								gtkset_active($b, 0);
-							    }
-							    $b->signal_connect(toggled => sub { 
-								if ($check_user_to_restore{$name}[1] ) {
-								    $check_user_to_restore{$name}[1] = 1;
-								    if (!member($name, @user_list_to_restore) ) {
-									push @user_list_to_restore, $name;}
-								} else {
-								    $check_user_to_restore{$name}[1] = 0;
-								    my @user_list_tmp = grep(!/^$name$/,@user_list_to_restore );
-								    @user_list_to_restore = @user_list_tmp;
-								}
-							    });
-							    $b } (@user_backuped) 
-						      ),
+		     1, createScrolledWindow( gtkpack__(new Gtk::VBox(0,0),
+							map { my @name_l = split(/,/, $_);
+							      my $name_complet = $_;
+							      my $name  = $name_l[0];
+#							      print "$name\n";
+							      my $b = new Gtk::CheckButton($name_complet); 
+							      if ( grep /$name_complet/, @user_list_to_restore2)  {
+								  gtkset_active($b, 1);
+							      } else {
+								  gtkset_active($b, 0);
+							      }
+							      $b->signal_connect(toggled => sub { 
+#								  @name_l = split(/,/, $_);
+								  if ($check_user_to_restore{$name_complet}[1] ) {
+								      $check_user_to_restore{$name_complet}[1] = 1;
+								      if (!member(/$name_complet/, @user_list_to_restore2) ) {
+									  push @user_list_to_restore2, $name_complet;}
+								  } else {
+								      $check_user_to_restore{$name_complet}[1] = 0;
+								      my @user_list_tmp = grep(!/$name_complet/,@user_list_to_restore2 );
+								      @user_list_to_restore2 = @user_list_tmp;
+								  }
+							      });
+							      $b } (@user_backuped) 
+							),
 					      ),
 					 ),
 	    );
@@ -1431,7 +1512,7 @@ sub restore_box {
     my $check_restore_other;
     find_backup_to_restore();
     button_box_restore_main();
-    @user_list_to_restore = @user_backuped;
+#    @user_list_to_restore = @user_backuped;
 
     $DEBUG and print "other_backuped : $other_backuped \nsys_backuped : $sys_backuped \nuser_backuped : @user_backuped\n";
     if ($other_backuped || $sys_backuped || @user_backuped) {
@@ -1770,6 +1851,50 @@ sub progress {
     Gtk->main_iteration while Gtk->events_pending;
 }
 
+
+sub find_backup_to_put_on_cd {
+    my @list_backup_tmp;
+    my @data_backuped_tmp;
+    @data_backuped = ();
+    -d $save_path and my @list_backup = all($save_path);
+    foreach (grep /^backup_other/, @list_backup) {
+	$other_backuped = 1;
+	chomp;
+	my $tail  = (split(' ',`du $save_path/$_` ))[0] ;
+	s/^backup_other//gi;
+	s/.tar.gz$//gi;
+	s/.tar.bz2$//gi;
+	my @user_date = split(/\_20/,$_ );
+	my @user_date2 = split(/\_/,$user_date[1] );
+	my $to_put = "  other_data,          (tail: $tail ko, date: 20$user_date2[0], hour: $user_date2[1])";
+	push @data_backuped , $to_put;
+    }
+    foreach (grep /^backup_sys/, @list_backup) {
+	$sys_backuped = 1;
+	chomp;
+	my $tail  = (split(' ',`du $save_path/$_` ))[0] ;
+	s/^backup_other//gi;
+	s/.tar.gz$//gi;
+	s/.tar.bz2$//gi;
+	my @user_date = split(/\_20/,$_ );
+	my @user_date2 = split(/\_/,$user_date[1] );
+	my $to_put = "  system,          (tail: $tail ko, date: 20$user_date2[0], hour: $user_date2[1])";
+	push @data_backuped , $to_put;
+    }
+    foreach (grep /^backup_user_/, @list_backup) {
+	chomp;
+	my $tail  = (split(' ',`du $save_path/$_` ))[0] ;
+	s/^backup_user_//gi;
+	s/.tar.gz$//gi;
+	s/.tar.bz2$//gi;
+	my @user_date = split(/\_20/,$_ );
+	my @user_date2 = split(/\_/,$user_date[1] );
+	my $to_put = "  $user_date[0],          (tail: $tail ko, date: 20$user_date2[0], hour: $user_date2[1])";
+	push @data_backuped , $to_put;
+    }
+}
+
+
 sub build_backup_status {
     my $table;
     $pbar =   new Gtk::ProgressBar;
@@ -1830,37 +1955,53 @@ sub build_backup_box_progress {
 #    build_backup_files(); 
 }
 
+
+sub aff_total_tail {
+    $label_tail->set("toto");
+#    print "build on cd : $_\n" foreach @user_list_to_build_on_cd;
+    my @toto = (split (' ', $_))[0]  foreach @user_list_to_build_on_cd;
+    print "build on cd : $_\n" foreach @toto;
+    print "end\n";
+}
+
 my %check_data_to_backup_cd;
 sub build_backup_cd_select_data {
     my $retore_step_user;
-    my @data_backuped;
+    find_backup_to_put_on_cd();
+    @user_list_to_build_on_cd = @data_backuped;
+#    my @data_backuped =  ("user: seb   date: 10/12/2001   16000 Ko", "user: john   date: 10/12/2001   16000 Ko", "user: co   date: 10/12/2001   16000 Ko");
 
     gtkpack($advanced_box,
 	    $retore_step_user = gtkpack_(new Gtk::VBox(0,10),
 		     0, new Gtk::VBox(0,10),
 		     0, _(" Data list to include on CDROM. "),
-		     1, createScrolledWindow( gtkpack(new Gtk::VBox(0,0),
+		     1, createScrolledWindow( gtkpack__(new Gtk::VBox(0,0),
 						      map { my $name = $_;
 							    my $b = new Gtk::CheckButton($name); 
-							    if ( grep /^$name$/, @user_list_to_restore)  {
+							    if ( grep /^$name$/, @user_list_to_build_on_cd)  {
 								gtkset_active($b, 1);
 							    } else {
 								gtkset_active($b, 0);
 							    }
-							    $b->signal_connect(toggled => sub { 
+							    $b->signal_connect(toggled => sub {
 								if ($check_data_to_backup_cd{$name}[1] ) {
 								    $check_data_to_backup_cd{$name}[1] = 1;
-								    if (!member($name, @user_list_to_restore) ) {
-									push @user_list_to_restore, $name;}
+								    if (!member($name, @user_list_to_build_on_cd) ) {
+									push @user_list_to_build_on_cd, $name;}
 								} else {
 								    $check_data_to_backup_cd{$name}[1] = 0;
-								    my @user_list_tmp = grep(!/^$name$/,@user_list_to_restore );
-								    @user_list_to_restore = @user_list_tmp;
+								    my @user_list_tmp = grep(!/^$name$/,@user_list_to_build_on_cd );
+								    @user_list_to_build_on_cd = @user_list_tmp;
 								}
+								aff_total_tail();
 							    });
 							    $b } (@data_backuped) 
 						      ),
 					      ),
+		      0, new Gtk::HSeparator,
+		      0, $label_tail = new Gtk::Label("total tail: 55Mo"),
+		      0, new Gtk::HSeparator,
+#		      1, my $labelo = new Gtk::Label 
 					 ),
 	    );
 #    if ($restore_other) { $next_widget = \&restore_step_other;}
@@ -1910,15 +2051,15 @@ sub build_backup_cd_box {
 		     ),
 	 0, new Gtk::VBox(0, 5),
 	 0, gtkpack_(new Gtk::HBox(0,10),
-		     0, gtkset_sensitive(new Gtk::Label(_("Please check if you want to include install boot on your CD.")),  0),
-		     1, new Gtk::VBox(0, 5),
-		     0, gtkset_sensitive(my $check_cd_with_install_boot = new Gtk::CheckButton(), $where_cd),
-		     ),
-	 0, new Gtk::VBox(0, 5),
-	 0, gtkpack_(new Gtk::HBox(0,10),
 		     0, gtkset_sensitive(new Gtk::Label(_("Please enter your CD Writer device name (ex: 0,1,0)")),  $where_cd),
 		     1, new Gtk::VBox(0, 5),
 		     0, gtkset_usize(gtkset_sensitive($cd_devive_entry = new Gtk::Entry(), $where_cd), 100, 20),
+		     ),
+	 0, new Gtk::VBox(0, 5),
+	 0, gtkpack_(new Gtk::HBox(0,10),
+		     0, gtkset_sensitive(new Gtk::Label(_("Please check if you want to include install boot on your CD.")),  0),
+		     1, new Gtk::VBox(0, 5),
+		     0, gtkset_sensitive(my $check_cd_with_install_boot = new Gtk::CheckButton(), 0),
 		     ),
 	 ),
 	    );
@@ -1930,13 +2071,16 @@ sub build_backup_cd_box {
 	$where_cd = $where_cd ? 0 : 1;
 	${$central_widget}->destroy();
 	$current_widget->();
+	if($where_cd) { $next_widget = \&build_backup_cd_select_data;}
+	else { $next_widget = \&build_backup_cd_box;}
     });
     gtksignal_connect(gtkset_active($check_cdrw, $cdrw), toggled => sub { 
 	$cdrw = $cdrw ? 0 : 1;
 	${$central_widget}->destroy();
 	$current_widget->();
     });
-    $next_widget = \&build_backup_cd_select_data;
+    if($where_cd) { $next_widget = \&build_backup_cd_select_data;}
+    else { $next_widget = \&build_backup_cd_box;}
     $cd_devive_entry->set_text( $cd_devive );
     $cd_devive_entry->signal_connect( 'changed', sub { $cd_devive = $cd_devive_entry->get_text(); });
     $combo_where_cd_time->entry->set_text($cd_time);
@@ -1962,6 +2106,7 @@ sub build_backup_box {
 					0, new Gtk::VBox(0, 5),	
 					1, gtksignal_connect(new Gtk::Button(_(" Backup Now on CDROM ")), 
 							     clicked => sub { ${$central_widget}->destroy(); 
+									      $where_cd = 1;
 									      build_backup_cd_box();
 									  }),
 					0, new Gtk::VBox(0, 5),	
