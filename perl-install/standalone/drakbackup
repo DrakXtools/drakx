@@ -283,7 +283,7 @@ sub all_user_list() {
 
 sub the_time() {
     my ($sec, $min, $hour, $day, $month, $year) = localtime(time());
-    $the_time = sprintf("_%d%02d%02d_%02d%02d%02d", $year + 1900, $month + 1, $day, $hour, $min, $sec);
+    sprintf("_%d%02d%02d_%02d%02d%02d", $year + 1900, $month + 1, $day, $hour, $min, $sec);
 }
 
 sub get_tape_info() {
@@ -1012,7 +1012,7 @@ sub build_backup_files() {
 		
 	$interactive and cursor_wait();
     read_conf_file();
-    the_time();    
+    $the_time = the_time();    
     $conf{SEND_MAIL} and complete_results();
     -d  $conf{PATH_TO_SAVE} or mkdir_p($conf{PATH_TO_SAVE});
 	
@@ -2831,7 +2831,7 @@ sub restore_aff_backup_problems() {
     my $text = new Gtk2::TextView;
     my $restore_pbs_state = N("List of data corrupted:\n\n");
     $restore_pbs_state .= "\t\t$_\n" foreach @files_corrupted;
-    $restore_pbs_state .= N("Please uncheck or remove it for the next time.");
+    $restore_pbs_state .= N("Please uncheck or remove it on next time.");
     gtktext_insert($text, [ [ $restore_pbs_state ] ]);
     button_box_restore_main();    
 
