@@ -139,7 +139,6 @@ sub getPackages {
 	log::l("no updates available, bailing out");
 	return;
     }
-    my $fpubkey = getFile("base/pubkey", $mirror);
     
     #- extract hdlist of crypto, then depslist.
     require pkgs;
