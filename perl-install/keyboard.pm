@@ -420,8 +420,11 @@ sub keyboard2full_xkb {
     $XkbLayout ? {
 	XkbLayout => join(',', if_($keyboard->{GRP_TOGGLE}, 'us'), $XkbLayout),
 	XkbModel => $XkbModel,
-	XkbOptions => $keyboard->{GRP_TOGGLE} ? "grp:$keyboard->{GRP_TOGGLE}" : '',
-	XkbCompat => $keyboard->{GRP_TOGGLE} ? "default+group_led" : '',
+	XkbOptions => $keyboard->{GRP_TOGGLE} ? 
+		  join(',', 
+		       if_($keyboard->{GRP_TOGGLE} eq 'rwin_toggle', 'compose:rwin'), 
+		       "grp:$keyboard->{GRP_TOGGLE}", 
+		       'grp_led:scroll') : '',
     } : { XkbDisable => '' };
 }
 
