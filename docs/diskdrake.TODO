@@ -1,0 +1,14 @@
+text version
+
+save/restore partitions in a file
+
+display the information about the correspondance color2type
+
+have ``undo''
+
+handle the `luke' case (main extended partition must be extended)
+
+ajouter une verif apres fdiskReadPartitionTable pour s'assurer qu'on se 
+trompe pas sur la facon de calculer le start_cyl, end_cyl...
+Pas possible de le faire dans fdiskReadPartitionTable car start est relatif dans les etendues
+

@@ -26,7 +26,8 @@ sub imageGetFile {
 }
 
 sub versionString {
-    my $kernel = $::o->{packages}->{kernel} or die "I couldn't find the kernel package!";
+    my $kernel = $::o->{packages}->{kernel};
+    $kernel && $kernel->{header} or die "I couldn't find the kernel package!";
     
     c::headerGetEntry($kernel->{header}, 'version') . "-" .
     c::headerGetEntry($kernel->{header}, 'release');

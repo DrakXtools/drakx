@@ -22,8 +22,6 @@ my $o;
 1;
 
 
-sub warn {}
-
 sub new($$) {
     my ($type, $o_) = @_;
 
@@ -38,6 +36,8 @@ sub leavingStep($$) {
     my ($o, $step) = @_;
     log::l("step `$step' finished");
 }
+
+sub errorInStep($$) {}
 
 sub chooseLanguage($) {
     $o->{default}->{lang};

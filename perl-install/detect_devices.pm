@@ -40,7 +40,7 @@ sub hasSCSI() {
     log::l("scsi devices are available");
     $scsiDeviceAvailable = 1;
 }
-sub hasIDE() { 1 }
+sub hasIDE() { -e "/proc/ide" }
 sub hasDAC960() { 1 }
 
 sub hasCompaqSmartArray() {
@@ -81,8 +81,6 @@ sub getSCSI() {
 
 sub getIDE() {
     my @idi;
-
-    -r "/proc/ide" or die "sorry, /proc/ide not available, seems like you have a pre-2.2 kernel\n => not handled yet :(";
 
     # Great. 2.2 kernel, things are much easier and less error prone. 
     foreach my $d (glob_('/proc/ide/hd*')) {

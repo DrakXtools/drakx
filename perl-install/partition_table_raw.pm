@@ -93,9 +93,9 @@ sub write($$$) {
 	compute_CHS($hd, $_);
 	local $_->{start} = $_->{local_start} || 0;
 	$_->{active} ||= 0; $_->{type} ||= 0; $_->{size} ||= 0; # for no warning
-	syswrite F, pack($format, @$_{@fields}) or return 0;
+	syswrite F, pack($format, @$_{@fields}), psizeof($format) or return 0;
     }
-    syswrite F, $magic or return 0;
+    syswrite F, $magic, length $magic or return 0;
     1;
 }
 sub zero_MBR($) { &write($_[0], 0, [ {} x $nb_primary ]); }

@@ -52,7 +52,7 @@ verify_c:
 	./verify_c $(PMS)
 
 gendepslist: %: %.cc
-	$(CXX) -I/usr/include/rpm $(CFLAGS) $< -lrpm -ldb -lz -o $@
+	$(CXX) -I/usr/include/rpm $(CFLAGS) $< -lrpm -ldb1 -lz -o $@
 
 depslist: gendepslist
 	./gendepslist $(ROOTDEST)/Mandrake/base/depslist /tmp/rhimage/Mandrake/RPMS/*.rpm
@@ -88,6 +88,7 @@ get_needed_files: $(SO_FILES)
 	install -d $(DEST)/usr/bin
 	install -d $(DEST)/usr/lib
 	install -d $(DEST)/usr/share
+	install -d $(ROOTDEST)/Mandrake/base
 	install -s $(LOCALFILES) $(DEST)/usr/bin
 
 	for i in `cat /tmp/list`; do \
@@ -138,7 +139,7 @@ full_stage2:
 stage2:
 	$(MAKE) install_pms
 	cd $(ROOTDEST) ; tar cfz /tmp/instimage-full.tgz Mandrake
-	cd $(ROOTDEST) ; tar cfz /tmp/instimage-light.tgz Mandrake/base/depslist Mandrake/instimage/usr/[bl]*
+	cd $(ROOTDEST) ; tar cfz /tmp/instimage-light.tgz Mandrake/base/compss Mandrake/instimage/usr/[bl]*
 
 	@#rm -rf /mnt/initrd/*
 	@#cp -a $(DEST)/* /mnt/initrd

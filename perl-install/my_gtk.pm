@@ -6,8 +6,11 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    all => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_adjustment gtksignal_connect gtkpack gtkpack_ gtkappend gtkadd gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy) ],
+    helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_adjustment create_box_with_title) ],
+    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkappend gtkadd gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy) ],
+    ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list ) ],
 );
+$EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
 use Gtk;
@@ -25,7 +28,6 @@ sub new {
     my ($type, $title, @opts) = @_;
 
     Gtk->init;
-    parse Gtk::Rc "$ENV{HOME}/etc/any/Gtkrc";
     my $o = bless { @opts }, $type;
     $o->{window} = $o->_create_window($title);
     $o;
@@ -136,9 +138,9 @@ sub create_okcancel($;$$) {
 
 sub create_box_with_title($@) {
     my $o = shift;
-    $o->{box} = gtkpack(new Gtk::VBox(0,0),
-		       map({ new Gtk::Label("  $_  ") } @_),
-		       new Gtk::HSeparator,
+    $o->{box} = gtkpack_(new Gtk::VBox(0,0),
+			 0, map({ new Gtk::Label("  $_  ") } @_),
+			 0, new Gtk::HSeparator,
 		       )
 }
 
@@ -227,7 +229,7 @@ sub ask_warn       { my $w = my_gtk->new(shift @_); $w->_ask_warn(@_); main($w);
 sub ask_yesorno    { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Yes"), _("No")); main($w); }
 sub ask_okcancel   { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Is it ok?"), _("Ok"), _("Cancel")); main($w); }
 sub ask_from_entry { my $w = my_gtk->new(shift @_); $w->_ask_from_entry(@_); main($w); }
-sub ask_from_list  { my $w = my_gtk->new(shift @_); $w->_ask_from_list(pop @_, @_); main($w); }
+sub ask_from_list  { my $w = my_gtk->new(shift @_); $w->_ask_from_list(@_); main($w); }
 
 sub _ask_from_entry($$@) {
     my ($o, @msgs) = @_;
@@ -243,19 +245,19 @@ sub _ask_from_entry($$@) {
 	  );
     $entry->grab_focus();
 }
-sub _ask_from_list($$$@) {
-    my ($o, $l, @msgs) = @_;
+sub _ask_from_list($$$$) {
+    my ($o, $messages, $l, $def) = @_;
     my $list = new Gtk::List;
     my ($first_time, $starting_word) = (1, '');
     my (@widgets, $timeout);
-    my @sorted = sort @$l;
     $list->signal_connect(select_child => sub {
-	$o->{retval} = $sorted[$list->child_position($_[1])];
+	$o->{retval} = $l->[$list->child_position($_[1])];
 	Gtk->main_quit;
     });
-    for (my $i = 0; $i < @sorted; $i++) {
+    for (my $i = 0; $i < @$l; $i++) {
 	my $focused = $i;
-	my $w = new Gtk::ListItem($sorted[$i]);
+	$def = $i if $l->[$i] eq $def;
+	my $w = new Gtk::ListItem($l->[$i]);
 	my $id = $w->signal_connect(key_press_event => sub {
              my ($w, $e)= @_;
 	     my $c = chr $e->{keyval};
@@ -271,12 +273,12 @@ sub _ask_from_list($$$@) {
 		   my $curr = $focused + bool($starting_word eq '' || $starting_word eq $c);
 		   $starting_word .= $c unless $starting_word eq $c;
 	
-		   my $j; for ($j = 0; $j < @sorted; $j++) {
-		       $sorted[($j + $curr) % @sorted] =~ /^$starting_word/i and last;
+		   my $j; for ($j = 0; $j < @$l; $j++) {
+		       $l->[($j + $curr) % @$l] =~ /^$starting_word/i and last;
 		   }
-		   $j == @sorted ?
+		   $j == @$l ?
 		     $starting_word = '' :
-		     $widgets[($j + $curr) % @sorted]->grab_focus;
+		     $widgets[($j + $curr) % @$l]->grab_focus;
 	
 		   $w->{timeout} = $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 } );
 	     }
@@ -287,11 +289,11 @@ sub _ask_from_list($$$@) {
     }
     gtkadd($list, @widgets);
     gtkadd($o->{window}, 
-	   gtkpack($o->create_box_with_title(@msgs), 
+	   gtkpack($o->create_box_with_title(@$messages), 
 		   @widgets > 15 ? 
 		     gtkset_usize(createScrolledWindow($list), 0, 300) : 
 		     $list));
-    $widgets[0]->grab_focus;
+    $widgets[$def]->grab_focus;
 }
 
 sub _ask_warn($@) {

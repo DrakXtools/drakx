@@ -36,7 +36,7 @@ sub write($) {
 
     sysseek $fs->{fd}, $fs->{fat_offset}, 0 or die "write_fat: seek failed";
     foreach (1..$fs->{nb_fats}) {
-	syswrite $fs->{fd}, $fs->{fat}, $fs->{fat_size} or die "write_fat: write failed";
+	syswrite $fs->{fd}, $fs->{fat} or die "write_fat: write failed";
     }
 }
 

@@ -9,6 +9,7 @@ use install_any;
 use log;
 use smp;
 use fs;
+use lang;
 
 my @skipThesesPackages = qw(XFree86-8514 XFree86-AGX XFree86-FBDev XFree86-Mach32 XFree86-Mach64 
 	XFree86-Mach8 XFree86-Mono XFree86-P9000 XFree86-S3 XFree86-S3V
@@ -31,9 +32,11 @@ sub select($$;$) {
     my @l = @{$p->{deps}};
     while (@l) {
 	my $n = shift @l;
+	$n =~ /|/ and $n = first(split '\|', $n); #TODO better handling of choice
 	my $i = Package($packages, $n);
 	$i->{base} = $base;
-	push @l, @{$i->{deps}} unless $i->{selected};
+	$i->{deps} or log::l("missing deps for $n");
+	push @l, @{$i->{deps} || []} unless $i->{selected};
 	$i->{selected}++ unless $i->{selected} == -1;
     }
 }
@@ -56,7 +59,7 @@ sub unselect($$) {
 
 	$i->{selected} <= 0 and next;
 	if (--$i->{selected} == 0) {
-	    push @$l, @{$i->{deps}};
+	    push @$l, @{$i->{deps} || []};
 	}
     }
 
@@ -221,6 +224,17 @@ sub init_db {
     $isUpgrade ? c::rpmdbRebuild($prefix) : c::rpmdbInit($prefix, 0644) or die "creation/rebuilding of rpm database failed: ", c::rpmErrorString();
 }
 
+sub getHeader($) {
+    my ($p) = @_;
+
+    unless ($p->{header}) {
+	local *F;
+	open F, $p->{file} or die "error opening package $p->{name} (file $p->{file})";
+	$p->{header} = c::rpmReadPackageHeader(fileno F);
+    }
+    $p->{header};
+}
+
 sub install {
     my ($prefix, $toInstall, $isUpgrade, $force) = @_;
 
@@ -232,11 +246,7 @@ sub install {
     my ($total, $nb);
 
     foreach my $p (@$toInstall) {
-	local *F;
-	open F, $p->{file} or die "error opening package $p->{name} (file $p->{file})";
-	$p->{header} = c::rpmReadPackageHeader(fileno F);
-
-	c::rpmtransAddPackage($trans, $p->{header}, $p->{file}, $isUpgrade);
+	c::rpmtransAddPackage($trans, getHeader($p), $p->{file}, $isUpgrade);
 	$nb++;
 	$total += $p->{size};
     }

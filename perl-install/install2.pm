@@ -224,18 +224,9 @@ sub setupBootloader {
     $o->{isUpgrade} or modules::read_conf("$o->{prefix}/etc/conf.modules");
     $o->setupBootloader;
 }
+sub configureX { $o->setupXfree }
+sub exitInstall { $o->exitInstall }
 
-sub configureX { $o->setupXfree; }
-
-sub exitInstall { 
-    $o->warn( 
-_"Congratulations, installation is complete.
-Remove the boot media and press return to reboot.
-For information on fixes which are available for this release of Linux Mandrake,
-consult the Errata available from http://www.linux-mandrake.com/.
-Information on configuring your system is available in the post
-install chapter of the Official Linux Mandrake User's Guide.");
-}
 
 sub main {
     $SIG{__DIE__} = sub { chomp $_[0]; log::l("ERROR: $_[0]") };
@@ -271,8 +262,10 @@ sub main {
 
     for (my $step = $o->{steps}->{first}; $step ne 'done'; $step = getNextStep($step)) {
 	$o->enteringStep($step);
-	eval { &{$install2::{$step}}() };
-	$@ and $o->warn($@);
+	#eval { 
+	    &{$install2::{$step}}();
+	#};
+	$o->errorInStep($@) if $@;
 	$o->leavingStep($step);
     }
     killCardServices();

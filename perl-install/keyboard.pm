@@ -86,7 +86,7 @@ sub read($) {
 
     foreach (<F>) {
 	($_) = /^KEYTABLE=(.*)/ or log::l("unrecognized entry in keyboard configuration file ($_)"), next;
-	s/\"//g; 
+	s/^\s*"(.*)"\s*$/$1/;
 	s/\.[^.]*//; # remove extension
 	return basename($_);
     }
