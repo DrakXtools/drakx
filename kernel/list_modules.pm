@@ -117,7 +117,7 @@ our %l = (
 	   qw(snd-cs4281 snd-emu10k1),
 	   qw(snd-ens1370 snd-ens1371 snd-es18xx snd-es968 snd-es1938 snd-es1968 snd-es1688),
         qw(snd-fm801 snd-hdsp snd-ice1712 snd-intel8x0 snd-korg1212 snd-maestro3),
-	   qw(snd-nm256 snd-rme96 snd-rme32 snd-opl3sa2 snd-sb16 nd-sgalaxy snd-sonicvibes),
+	   qw(snd-nm256 snd-rme96 snd-rme32 snd-opl3sa2 snd-sb16 snd-sgalaxy snd-sonicvibes),
         qw(snd-trident snd-usb-audio snd-via686 snd-via8233 snd-wavefront snd-ymfpci),
       ),
     ],
