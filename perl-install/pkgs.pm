@@ -500,10 +500,8 @@ sub psUsingHdlist {
 	    }
 	};
 	if (-s $newsf) {
-	    log::l("parse_synthesis");
 	    ($m->{start}, $m->{end}) = $packages->parse_synthesis($newsf, callback => $callback);
 	} elsif (-s $newf) {
-	    log::l("parse_hdlist");
 	    ($m->{start}, $m->{end}) = $packages->parse_hdlist($newf, callback => $callback);
 	} else {
 	    delete $packages->{mediums}{$medium_name};
