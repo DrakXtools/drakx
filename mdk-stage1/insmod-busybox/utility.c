@@ -91,6 +91,11 @@ void errorMsg(const char *s, ...)
 	fflush(stdout);
 }
 
+extern void logperror(char *s)
+{
+		perror(s);
+}
+
 void fatalError(const char *s, ...)
 {
 	va_list p;
@@ -113,6 +118,11 @@ extern void errorMsg(const char *s, ...)
 	va_start(p, s);
 	vlog_message(s, p);
 	va_end(p);
+}
+
+extern void logperror(char *s)
+{
+		log_perror(s);
 }
 
 extern void fatalError(const char *s, ...)

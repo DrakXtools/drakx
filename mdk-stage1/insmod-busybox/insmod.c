@@ -607,31 +607,6 @@ static char m_fullName[BUFSIZ + 1] = "\0";
 /*======================================================================*/
 
 
-static int findNamedModule(const char *fileName, struct stat *statbuf,
-						   void *userDate)
-{
-	char *fullName = (char *) userDate;
-
-
-	if (fullName[0] == '\0')
-		return (FALSE);
-	else {
-		char *tmp = strrchr(fileName, '/');
-
-		if (tmp == NULL)
-			tmp = (char *) fileName;
-		else
-			tmp++;
-		if (check_wildcard_match(tmp, fullName) == TRUE) {
-			/* Stop searching if we find a match */
-			memcpy(m_filename, fileName, strlen(fileName)+1);
-			return (FALSE);
-		}
-	}
-	return (TRUE);
-}
-
-
 /*======================================================================*/
 
 struct obj_file *arch_new_file(void)
@@ -1456,7 +1431,7 @@ static int old_get_kernel_symbols(const char *m_name)
 	ks = k = xmalloc(nks * sizeof(*ks));
 
 	if (get_kernel_syms(ks) != nks) {
-		perror("inconsistency with get_kernel_syms -- is someone else "
+		logperror("inconsistency with get_kernel_syms -- is someone else "
 			   "playing with modules?");
 		free(ks);
 		return 0;
@@ -2781,27 +2756,8 @@ extern int insmod_main( int argc, char **argv)
 	if (argc <= 1)
 		my_usage();
 
-	/* Parse any options */
-	while (--argc > 0 && **(++argv) == '-') {
-		while (*(++(*argv))) {
-			switch (**argv) {
-			case 'f':			/* force loading */
-				flag_force_load = 1;
-				break;
-			case 'k':			/* module loaded by kerneld, auto-cleanable */
-				flag_autoclean = 1;
-				break;
-			case 'x':			/* do not export externs */
-				flag_export = 0;
-				break;
-			default:
-				my_usage();
-			}
-		}
-	}
+	argv++; argc--;
 
-	if (argc <= 0)
-		my_usage();
 	/* Grab the module name */
 	if ((tmp = strrchr(*argv, '/')) != NULL) {
 		tmp++;
@@ -2818,25 +2774,15 @@ extern int insmod_main( int argc, char **argv)
 
 	/* Get a filedesc for the module */
 	if ((fp = fopen(*argv, "r")) == NULL) {
-		/* Hmpf.  Could not open it. Search through _PATH_MODULES to find a module named m_name */
-		if (recursiveAction(_PATH_MODULES, TRUE, FALSE, FALSE,
-							findNamedModule, 0, m_fullName) == FALSE) 
-		{
-			if (m_filename[0] == '\0'
-				|| ((fp = fopen(m_filename, "r")) == NULL)) 
-			{
-				errorMsg("No module named '%s' found in '%s'", m_fullName, _PATH_MODULES);
-				return -1;
-			}
-		} else
-			fatalError("No module named '%s' found in '%s'", m_fullName, _PATH_MODULES);
+		errorMsg("Module %s not found", *argv);
+		return -1;
 	} else
 		memcpy(m_filename, *argv, strlen(*argv));
 
 
 	if ((f = obj_load(fp)) == NULL) {
-		perror("Could not load the module\n");
-		return -1;
+		logperror("Could not load the module");
+		goto out;
 	}
 
 	if (get_modinfo_value(f, "kernel_version") == NULL)
