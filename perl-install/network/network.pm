@@ -71,7 +71,7 @@ sub write_conf {
 		     FORWARD_IPV4 => "false",
 		     HOSTNAME => "localhost.localdomain",
 		    });
-   ($netc->{DOMAINNAME}) = ($netc->{HOSTNAME} =~ /\.(.*)/);
+   ($netc->{DOMAINNAME}) ||= ($netc->{HOSTNAME} =~ /\.(.*)/);
 
     setVarsInSh($file, $netc, qw(NETWORKING FORWARD_IPV4 DHCP_HOSTNAME HOSTNAME DOMAINNAME GATEWAY GATEWAYDEV NISDOMAIN));
 }
