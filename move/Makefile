@@ -136,6 +136,6 @@ clean:
 	fi
 
 check_dirs:
-	for i in `cat data/*.dirs`; do grep $(DEST_LIVETREE)$$i/ data/*.list; done ||:
+	for i in `cat data/*.dirs`; do grep "^$$i/" `echo data/*.list | sed s/always_i18n.list//` && echo "$$i"; done ||:
 
 # perl tools/busy-files-accesses --no-link --no-dir --full-dirs 'data/always.dirs data/boot.dirs data/totem.dirs' --already-have data/always.list
