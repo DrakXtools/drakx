@@ -13,22 +13,41 @@ in chooseResolutions: display the graphic card found
 
 diskdrake should warn if nb_ide_parts > 63, nb_scsi_parts > 15
 
+RAID upgrades
 
 -choices--------------------------------------------------------------------------------
-tree for choosing things like timezone, monitors, graphic cards, modules, keyboard? ...
+horizontal sub-steps
 
-index/compress hdlist?
+firewall configuration (instant firewalling?)
+
+install in 800x600
+- need handling of both 640x480 (mostly for VGA16) and 800x600
+
+tree for choosing things like timezone, monitors, graphic cards, modules, mice, keyboard? ...
+
+index/compress hdlist? (for multi-cd)
+! for multi-cd live is mandatory
+
+widget for displaying fdisk (dindinx)
+
+on laptop, configure the MMU to use swap not very often
+
+rescue: 
+- small modification for stage1 to get the rescue stage2
+- create a stage2 with many tools (fdisk, bash...)
+the rescue could be on another cd (if multi-cd)
+! care must be taken about modules (if ide is in module...)
 
 checkboxes in groups based on compssList (and availableSpace?)
 
 PPPoE install and configuration (SuSE includes it, DHCP-like)
 
+loopback partitions (even root one)
+
 standalone applications for configuration (netdrake, authentificationconf, soundcard)
 
 feature missing: cancel installation
-
 crypto: add a cancel & progress bar while downloading
-
 error handling (like reading hdlist)
 
 diskdrake in text mode
@@ -45,8 +64,7 @@ sound config
 grub, chos, gag
 
 enable the testing of the mouse type (under X) (wheel)
-
-using setxkb, enable the testing of the keyboard
+possibility to specify the mouse
 
 ----
 paride in stage1
@@ -64,6 +82,8 @@ auto ppp-configure with free provider
 
 
 -easy fixes-----------------------------------------------------------------------------
+in ok_cancel, focus has 3 states, should be 2 (ask dindinx)
+
 configure DHCP for newbies if ethernet & DHCP card available
 
 rpmdrake proposition for cdrom labels
@@ -164,6 +184,10 @@ eg: SIS6326 needs "no_bitblt" "no_bltimage" and 24bpp instead of 32bpp
 
 
 -(?)---------------------------------------------------------------------------------
+(?)using setxkb, enable the testing of the keyboard
+
+(?)XFdrake does not handle fbdev
+
 (?) Xconfiguration: if "can't open fixed font", relaunch xfs.
 
 (?) Je viens de faire une installation sur une machine où seul Be était

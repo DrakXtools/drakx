@@ -494,6 +494,7 @@ sub load_thiskind($;&$) {
 
     my %devs; foreach (@devs) {
 	my ($text, $mod) = @$_;
+	$mod =~ /unknown|ignore/ and log::l("skipping $text, no module available (if you know one, please mail bugs\@linux-mandrake.com)"), next;
 	$devs{$mod}++ and log::l("multiple $mod devices found"), next;
 	log::l("found driver for $mod");
 	&$f($text, $mod) if $f;

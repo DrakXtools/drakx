@@ -7,4 +7,4 @@ Newt: %: %.xs
 
 clean:
 	test ! -e Makefile_c || $(MAKE) -f Makefile_c clean
-	rm -f *~
+	rm -f *~ *.o
