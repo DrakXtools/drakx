@@ -143,13 +143,14 @@ sub conf_network_card_backend {
 	    if_($interface_state =~ /inet addr|Bcast|Mask|Interrupt|Base address/ && $a, [$interface, $saved_driver]);
 	} @all_cards, @unconfigured_interfaces;
     }
-    my ($device) = $interface =~ /eth[0-9]+/ or die("the interface is not an ethx");
-    $netc->{NET_DEVICE} = $device; #- one consider that there is only ONE Internet connection device..
-
-    @{$intf->{$device}}{qw(DEVICE BOOTPROTO   NETMASK     NETWORK ONBOOT)} = ($device, $type, '255.255.255.0', $netadr, 'yes');
-
-    $intf->{$device}{IPADDR} = $ipadr if $ipadr;
-    $device;
+    $interface =~ /eth[0-9]+/ or die("the interface is not an ethx");
+    
+    $netc->{NET_DEVICE} = $interface; #- one consider that there is only ONE Internet connection device..
+    
+    @{$intf->{$interface}}{qw(DEVICE BOOTPROTO   NETMASK     NETWORK ONBOOT)} = ($interface, $type, '255.255.255.0', $netadr, 'yes');
+    
+    $intf->{$interface}{IPADDR} = $ipadr if $ipadr;
+    $interface;
 }
 
 sub go_ethernet {
