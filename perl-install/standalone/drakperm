@@ -216,7 +216,6 @@ sub save_perm() {
 sub row_setting_dialog {
     my ($iter) = @_;
     
-    my %perms;
     my $dlg         = new Gtk2::Dialog();
     $dlg->set_transient_for($w->{rwindow}) unless $::isEmbedded;
     $dlg->set_modal(1);
@@ -225,15 +224,8 @@ sub row_setting_dialog {
     my $cancel      = Gtk2::Button->new_from_stock('gtk-cancel');
     my $browse = new Gtk2::Button(N("browse"));
     my $file        = new Gtk2::Entry;
-    my $usr_hbox   = new Gtk2::HBox(0,5);
-    my $usr_vbox   = new Gtk2::VBox(0,5);
     my $usr_check  = new Gtk2::CheckButton(N("Current user"));
-    my $hb_rights  = new Gtk2::HBox(0,15);
-    my $vb_rights  = new Gtk2::VBox(0,15);
-    my $F_rights    = new Gtk2::Frame(N("Permissions"));
-    my $F_usr       = new Gtk2::Frame(N("Property"));
-    my $vb_specials = new Gtk2::VBox(0,5);
-    my $sticky = new Gtk2::CheckButton(N("sticky-bit"));
+    my $sticky = new Gtk2::CheckButton(N("Sticky-bit"));
     my $suid   = new Gtk2::CheckButton(N("Set-UID"));
     my $gid    = new Gtk2::CheckButton(N("Set-GID"));
     my $rght = $treeModel->get($iter, 3) if $iter;
@@ -248,50 +240,28 @@ sub row_setting_dialog {
     
     my %checks = ('read' => {
                              label => N("Read"),
-                             tip => N("Enable \"%s\" to read the file"),
+                             tip => { map { $_ => N("Enable \"%s\" to read the file", $_) } keys %rights },
                             },
                   'write' => {
                               label => N("Write"),
-                              tip => N("Enable \"%s\" to write the file"),
+                              tip => { map { $_ => N("Enable \"%s\" to write the file", $_) } keys %rights },
                              },
                   'execute' => {
                                 label => N("Execute"),
-                                tip => N("Enable \"%s\" to execute the file")
-                               }
+                                tip => { map { $_ => N("Enable \"%s\" to execute the file", $_) } keys %rights },
+                               },
+                  '' => { label => '', tip => '' },
                  );
     $tips->set_tip($sticky, N("Used for directory:\n only owner of directory or file in this directory can delete it"));
     $tips->set_tip($suid, N("Use owner id for execution"));
     $tips->set_tip($gid, N("Use group id for execution"));
     $tips->set_tip($usr_check, N("When checked, owner and group won't be changed"));
 
-    $vb_rights->add(new Gtk2::Label($checks{$_}{label})) foreach @check;
-    $hb_rights->add($vb_rights);
-
-    foreach my $r (keys %rights) {
-     $perms{$r} = { get_right($rights{$r}) };
-     my $vbox = gtkadd(Gtk2::VBox->new(0,5), Gtk2::Label->new($rights_labels{$r}));
-     foreach my $c (@check) {
-         $c eq '' and next;
-         my $active = $perms{$r}{$c};
-         $perms{$r}{$c} = Gtk2::CheckButton->new;
-         $tips->set_tip($perms{$r}{$c}, N("Used for directory:\n only owner of directory or file in this directory can delete it"));
-         $perms{$r}{$c}->set_active($active);
-         $vbox->add($perms{$r}{$c});
-     }
-     $hb_rights->add($vbox);
-    }
-    
-    $vb_specials->add(new Gtk2::Label(' '));
-    $vb_specials->add($suid);
-    $vb_specials->add($gid);
-    $vb_specials->add($sticky);
-    $hb_rights->add($vb_specials);
-    
     #- dlg widgets settings
     my %s_right = get_right($s);
-    $s_right{execute} and $sticky->set_active(1);
-    $s_right{write} and $gid->set_active(1);
-    $s_right{read} and $suid->set_active(1);
+    $sticky->set_active($s_right{execute});
+    $gid->set_active($s_right{write});
+    $suid->set_active($s_right{read});
      
     $file->set_text($treeModel->get($iter, 0)) if $iter;
 
@@ -327,6 +297,7 @@ sub row_setting_dialog {
                                                 $file_dlg->destroy;
                                                });
                     });
+    my %perms;
     $ok->signal_connect(clicked => sub {
                             unless ($iter) {
                                 $iter = Gtk2::TreeIter->new;
@@ -353,29 +324,58 @@ sub row_setting_dialog {
                         $groups->set_sensitive(!$bool);
                         $users->set_sensitive(!$bool);
                     });
-     
-     
-    $usr_vbox->add($usr_check);
-    $usr_vbox->add($usr_hbox);
-     
-    $usr_hbox->add(new Gtk2::Label(N("User :")));
-    $usr_hbox->add($users);
-    $usr_hbox->add(new Gtk2::Label(N("Group :")));
-    $usr_hbox->add($groups);
-     
-    $F_rights->add($hb_rights);
-    $F_usr->add($usr_vbox);
-     
+
     gtkpack_($dlg->vbox,
-             0, gtkadd(new Gtk2::Frame(N("Path")),
-                   gtkpack_(Gtk2::HBox->new(0,5),
-                            1, $file,
-                            0, $browse
-                           )
-                  ),
-              0, $F_usr,
-              1, $F_rights
-             );
+             0, gtkadd(Gtk2::Frame->new(N("Path")),
+                       gtkpack_(Gtk2::HBox->new(0,5),
+                                1, $file,
+                                0, $browse
+                               )
+                      ),
+             0, gtkadd(Gtk2::Frame->new(N("Property")),
+                       gtkadd(Gtk2::VBox->new(0,5),
+                              $usr_check,
+                              gtkadd(Gtk2::HBox->new(0,5),
+                                     Gtk2::Label->new(N("User :")),
+                                     $users,
+                                     Gtk2::Label->new(N("Group :")),
+                                     $groups,
+                                    ),
+                             ),
+                      ),
+             1, gtkadd(Gtk2::Frame->new(N("Permissions")),
+                       gtkpack(Gtk2::HBox->new(0,15),
+                               gtkadd(Gtk2::VBox->new(0,15),
+                                      map { gtkset_tip($tips, Gtk2::Label->new($checks{$_}{label}), $checks{$_}{tip}) } @check,
+                                     ),
+                               (map {
+                                   my $owner = $_;
+                                   $perms{$owner} = { get_right($rights{$owner}) };
+                                   my $vbox = gtkadd(Gtk2::VBox->new(0,5), 
+                                                     Gtk2::Label->new($rights_labels{$owner}),
+                                                     map {
+                                                         my $c = $_;
+                                                         my $active = $perms{$owner}{$c};
+                                                         $perms{$owner}{$c} = Gtk2::CheckButton->new;
+                                                         $tips->set_tip($perms{$owner}{$c},
+                                                                        $checks{$c}{tip}{$owner},
+                                                                       );
+                                                         gtkset_active($perms{$owner}{$c}, $active);
+                                                     } grep { $_ } @check,
+                                                    );
+                                   
+                                   $vbox;
+                               } keys %rights),
+                               gtkpack(Gtk2::VBox->new(0,5),
+                                       Gtk2::Label->new (' '),
+                                       $suid,
+                                       $gid,
+                                       $sticky,
+                                      ),
+                              ),
+                      ),
+            );
+
     gtkadd($dlg->action_area,
            $cancel,
            $ok
