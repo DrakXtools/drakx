@@ -49,7 +49,7 @@ function create_modules() {
 
 rpm=$(rpm -qp --qf '%{name}' /RPMS/kernel-BOOT-*.rpm | perl -pe 's/kernel-BOOT-(.*)\.(.*)/$1-${2}BOOT/')
 if [ -n "$rpm" -a ! -e $ALL_KERNELS/$rpm ]; then
-    rm -rf $ALL_KERNELS/$main
+    [ -n "$main" ] && rm -rf $ALL_KERNELS/$main
     cd $ALL_KERNELS
     rm -rf $rpm ; mkdir $rpm
     cd $rpm
