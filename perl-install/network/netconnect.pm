@@ -80,7 +80,7 @@ sub real_main {
       my $mouse = $o_mouse ||= {};
       my $intf  = $o_intf  ||= {};
       my $first_time = $o_first_time || 0;
-      my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @all_cards, %eth_intf);
+      my ($network_configured, $cnx_type, $type, $interface, @all_cards, %eth_intf);
       my (%connections, @connection_list, $is_wireless);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my ($adsl_type, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
@@ -1275,7 +1275,6 @@ Click on Ok to keep your configuration, or cancel to reconfigure your Internet &
                 and do {
                     $netcnx->{type} = 'lan';
                     $netc->{NET_INTERFACE} = 'eth0';
-                    $direct_net_install = 1;
                     $use_wizard = 0;
                 };
         }
