@@ -393,6 +393,9 @@ sub main {
 	    uml_install => sub { $::uml_install = 1 },
 	    auto_install => sub { $::auto_install = $v },
 	    simple_themes => sub { $o->{simple_themes} = 1 },
+	    theme     => sub { $o->{theme} = $v },
+	    doc       => sub { $o->{doc} = 1 },  #- will be used to know that we're running for the doc team,
+	                                         #- e.g. we want screenshots with a good B&W contrast
 	    useless_thing_accepted => sub { $o->{useless_thing_accepted} = 1 },
 	    alawindows => sub { $o->{security} = 0; $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
 	    fdisk => sub { $o->{partitioning}{fdisk} = 1 },
