@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.2mdk
+Release: 0.3mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -312,6 +312,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed May 21 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.3mdk
+- drakboot, drakconnect, harddrake2, printerdrake: misc cleaning
+- drakconnect: fix #853 (check ip) (poulpy)
+
 * Tue May 20 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.2mdk
 - printerdrake: misc bug fixes
 - drakconnect: fix #763, #2336 (ethX aliases on network card changes)
