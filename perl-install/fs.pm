@@ -171,7 +171,7 @@ sub write_fstab {
 
 	    # handle bloody supermount special case
 	    if ($options =~ /supermount/) {
-		$options = join(",", "dev=$dev", "fs=$type", grep { $_ ne 'supermount' } split(':', $options));
+		$options = join(",", "dev=$dev", "fs=$type", grep { $_ ne 'supermount' } split(',', $options));
 		($dev, $type) = ($mntpoint, 'supermount');
 	    }
 
