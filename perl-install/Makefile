@@ -19,7 +19,7 @@ override CFLAGS  += -pipe
 all: $(SO_FILES) $(DIRS)
 
 tags:
-	etags -o - $(PMS) | perl2etags > TAGS
+	etags -o - $(PMS) | ./perl2etags > TAGS
 
 clean:
 	test ! -e c/Makefile || $(MAKE) -C c clean
@@ -163,10 +163,15 @@ full_stage2:
 stage2:
 	$(MAKE) install_pms
 
-	dd if=/dev/zero of=$(STAGE2) bs=1M count=16
+	dd if=/dev/zero of=$(STAGE2) bs=1M count=12
 	echo y | /sbin/mke2fs $(STAGE2)
 	$(SUDO) mount $(STAGE2) /mnt/stage2 -o loop
+
+#	hack to reduce the STAGE2 image
+	mv $(DEST)/usr/X11R6/bin/XF86_SVGA /tmp
 	$(SUDO) cp -a $(DEST)/* /mnt/stage2
+	mv /tmp/XF86_SVGA $(DEST)/usr/X11R6/bin/
+
 	$(SUDO) umount $(STAGE2)
 	gzip -f -9 $(STAGE2)
 #	cd $(ROOTDEST) ; tar cfz /tmp/instimage-full.tgz Mandrake
