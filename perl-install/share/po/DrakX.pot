@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-02-21 12:50+0100\n"
+"POT-Creation-Date: 2002-02-22 19:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -220,7 +220,7 @@ msgstr ""
 msgid "XFree86 server: %s"
 msgstr ""
 
-#: ../../Xconfigurator.pm_.c:878 ../../printerdrake.pm_.c:2400
+#: ../../Xconfigurator.pm_.c:878 ../../printerdrake.pm_.c:2414
 #: ../../standalone/draknet_.c:275 ../../standalone/draknet_.c:278
 msgid "Expert Mode"
 msgstr ""
@@ -330,7 +330,7 @@ msgstr ""
 msgid "Test again"
 msgstr ""
 
-#: ../../Xconfigurator.pm_.c:1553 ../../printerdrake.pm_.c:2403
+#: ../../Xconfigurator.pm_.c:1553 ../../printerdrake.pm_.c:2417
 #: ../../standalone/logdrake_.c:217
 msgid "Quit"
 msgstr ""
@@ -548,14 +548,14 @@ msgid "Delay before booting default image"
 msgstr ""
 
 #: ../../any.pm_.c:175 ../../any.pm_.c:777
-#: ../../install_steps_interactive.pm_.c:1095 ../../network/modem.pm_.c:48
-#: ../../printerdrake.pm_.c:729 ../../printerdrake.pm_.c:805
+#: ../../install_steps_interactive.pm_.c:1100 ../../network/modem.pm_.c:48
+#: ../../printerdrake.pm_.c:743 ../../printerdrake.pm_.c:819
 #: ../../standalone/draknet_.c:624
 msgid "Password"
 msgstr ""
 
 #: ../../any.pm_.c:176 ../../any.pm_.c:778
-#: ../../install_steps_interactive.pm_.c:1096
+#: ../../install_steps_interactive.pm_.c:1101
 msgid "Password (again)"
 msgstr ""
 
@@ -591,12 +591,12 @@ msgstr ""
 
 #: ../../any.pm_.c:189 ../../any.pm_.c:754
 #: ../../diskdrake/interactive.pm_.c:1132
-#: ../../install_steps_interactive.pm_.c:1090
+#: ../../install_steps_interactive.pm_.c:1095
 msgid "Please try again"
 msgstr ""
 
 #: ../../any.pm_.c:189 ../../any.pm_.c:754
-#: ../../install_steps_interactive.pm_.c:1090
+#: ../../install_steps_interactive.pm_.c:1095
 msgid "The passwords do not match"
 msgstr ""
 
@@ -744,12 +744,12 @@ msgstr ""
 msgid "Do you have any %s interfaces?"
 msgstr ""
 
-#: ../../any.pm_.c:642 ../../any.pm_.c:813 ../../interactive.pm_.c:124
+#: ../../any.pm_.c:642 ../../any.pm_.c:813 ../../interactive.pm_.c:132
 #: ../../my_gtk.pm_.c:1018
 msgid "No"
 msgstr ""
 
-#: ../../any.pm_.c:642 ../../any.pm_.c:812 ../../interactive.pm_.c:124
+#: ../../any.pm_.c:642 ../../any.pm_.c:812 ../../interactive.pm_.c:132
 #: ../../my_gtk.pm_.c:1018
 msgid "Yes"
 msgstr ""
@@ -877,8 +877,8 @@ msgstr ""
 msgid "Real name"
 msgstr ""
 
-#: ../../any.pm_.c:776 ../../printerdrake.pm_.c:728
-#: ../../printerdrake.pm_.c:804
+#: ../../any.pm_.c:776 ../../printerdrake.pm_.c:742
+#: ../../printerdrake.pm_.c:818
 msgid "User name"
 msgstr ""
 
@@ -916,8 +916,8 @@ msgstr ""
 msgid "You can choose other languages that will be available after install"
 msgstr ""
 
-#: ../../any.pm_.c:839 ../../install_steps_interactive.pm_.c:715
-#: ../../standalone/drakxtv_.c:43
+#: ../../any.pm_.c:839 ../../install_steps_interactive.pm_.c:720
+#: ../../standalone/drakxtv_.c:45
 msgid "All"
 msgstr ""
 
@@ -925,7 +925,7 @@ msgstr ""
 msgid "Allow all users"
 msgstr ""
 
-#: ../../any.pm_.c:926 ../../install_steps_interactive.pm_.c:515
+#: ../../any.pm_.c:926 ../../install_steps_interactive.pm_.c:520
 msgid "Custom"
 msgstr ""
 
@@ -965,16 +965,16 @@ msgstr ""
 msgid "Poor"
 msgstr ""
 
-#: ../../any.pm_.c:1008
-msgid "Low"
+#: ../../any.pm_.c:1008 ../../mouse.pm_.c:31
+msgid "Standard"
 msgstr ""
 
 #: ../../any.pm_.c:1009
-msgid "Medium"
+msgid "High"
 msgstr ""
 
 #: ../../any.pm_.c:1010
-msgid "High"
+msgid "Higher"
 msgstr ""
 
 #: ../../any.pm_.c:1011
@@ -996,43 +996,44 @@ msgstr ""
 
 #: ../../any.pm_.c:1018
 msgid ""
-"Few improvements for this security level, the main one is that there are\n"
-"more security warnings and checks."
+"This is the standard security recommended for a computer that will be used "
+"to connect to the Internet as a client."
+msgstr ""
+
+#: ../../any.pm_.c:1019
+msgid ""
+"There are already some restrictions, and more automatic checks are run every "
+"night."
 msgstr ""
 
 #: ../../any.pm_.c:1020
 msgid ""
-"This is the standard security recommended for a computer that will be used\n"
-"to connect to the Internet as a client. There are now security checks. "
-msgstr ""
-
-#: ../../any.pm_.c:1022
-msgid ""
 "With this security level, the use of this system as a server becomes "
 "possible.\n"
 "The security is now high enough to use the system as a server which accept\n"
-"connections from many clients. "
+"connections from many clients. Note: if your machine is only a client on the "
+"Internet, you should better choose a lower level."
 msgstr ""
 
-#: ../../any.pm_.c:1025
+#: ../../any.pm_.c:1023
 msgid ""
 "Based on the previous level, but the system is entirely closed.\n"
 "Security features are at their maximum."
 msgstr ""
 
-#: ../../any.pm_.c:1031
+#: ../../any.pm_.c:1029
 msgid "Choose security level"
 msgstr ""
 
-#: ../../any.pm_.c:1034
+#: ../../any.pm_.c:1032
 msgid "Security level"
 msgstr ""
 
-#: ../../any.pm_.c:1036
+#: ../../any.pm_.c:1034
 msgid "Use libsafe for servers"
 msgstr ""
 
-#: ../../any.pm_.c:1037
+#: ../../any.pm_.c:1035
 msgid ""
 "A library which defends against buffer overflow and format string attacks."
 msgstr ""
@@ -1186,11 +1187,11 @@ msgstr ""
 
 #: ../../bootlook.pm_.c:160 ../../diskdrake/smbnfs_gtk.pm_.c:85
 #: ../../install_steps_gtk.pm_.c:463 ../../install_steps_gtk.pm_.c:521
-#: ../../install_steps_interactive.pm_.c:590 ../../interactive.pm_.c:134
-#: ../../interactive.pm_.c:309 ../../interactive.pm_.c:341
+#: ../../install_steps_interactive.pm_.c:595 ../../interactive.pm_.c:142
+#: ../../interactive.pm_.c:317 ../../interactive.pm_.c:349
 #: ../../interactive_stdio.pm_.c:141 ../../my_gtk.pm_.c:687
 #: ../../my_gtk.pm_.c:690 ../../my_gtk.pm_.c:1019
-#: ../../network/netconnect.pm_.c:47 ../../printerdrake.pm_.c:1554
+#: ../../network/netconnect.pm_.c:47 ../../printerdrake.pm_.c:1568
 #: ../../standalone/drakautoinst_.c:204 ../../standalone/drakbackup_.c:2251
 #: ../../standalone/drakbackup_.c:2276 ../../standalone/drakbackup_.c:2297
 #: ../../standalone/drakbackup_.c:2318 ../../standalone/drakbackup_.c:2336
@@ -1248,7 +1249,7 @@ msgstr ""
 msgid "Screenshots will be available after install in %s"
 msgstr ""
 
-#: ../../crypto.pm_.c:12 ../../crypto.pm_.c:26 ../../standalone/drakxtv_.c:39
+#: ../../crypto.pm_.c:12 ../../crypto.pm_.c:26 ../../standalone/drakxtv_.c:41
 msgid "France"
 msgstr ""
 
@@ -1284,7 +1285,7 @@ msgstr ""
 msgid "Netherlands"
 msgstr ""
 
-#: ../../crypto.pm_.c:21 ../../crypto.pm_.c:35 ../../standalone/drakxtv_.c:39
+#: ../../crypto.pm_.c:21 ../../crypto.pm_.c:35 ../../standalone/drakxtv_.c:41
 msgid "Italy"
 msgstr ""
 
@@ -1315,7 +1316,7 @@ msgstr ""
 #: ../../diskdrake/hd_gtk.pm_.c:116 ../../diskdrake/interactive.pm_.c:325
 #: ../../diskdrake/interactive.pm_.c:340 ../../diskdrake/smbnfs_gtk.pm_.c:45
 #: ../../install_steps.pm_.c:72 ../../install_steps_interactive.pm_.c:67
-#: ../../install_steps_interactive.pm_.c:350 ../../interactive_http.pm_.c:119
+#: ../../install_steps_interactive.pm_.c:355 ../../interactive_http.pm_.c:119
 #: ../../interactive_http.pm_.c:120 ../../standalone/diskdrake_.c:84
 msgid "Error"
 msgstr ""
@@ -1461,7 +1462,7 @@ msgid "Clear all"
 msgstr ""
 
 #: ../../diskdrake/interactive.pm_.c:259
-#: ../../install_steps_interactive.pm_.c:202
+#: ../../install_steps_interactive.pm_.c:207
 msgid "More"
 msgstr ""
 
@@ -1809,7 +1810,7 @@ msgid "Formatting loopback file %s"
 msgstr ""
 
 #: ../../diskdrake/interactive.pm_.c:970
-#: ../../install_steps_interactive.pm_.c:459
+#: ../../install_steps_interactive.pm_.c:464
 #, c-format
 msgid "Formatting partition %s"
 msgstr ""
@@ -1885,7 +1886,7 @@ msgstr ""
 
 #: ../../diskdrake/interactive.pm_.c:1054
 #, c-format
-msgid "Cylinder %d to cylinder %d\n"
+msgid "Cylinder %d to %d\n"
 msgstr ""
 
 #: ../../diskdrake/interactive.pm_.c:1055
@@ -3156,8 +3157,8 @@ msgid "Error reading file %s"
 msgstr ""
 
 #: ../../install_gtk.pm_.c:84 ../../install_steps_gtk.pm_.c:327
-#: ../../interactive.pm_.c:119 ../../interactive.pm_.c:134
-#: ../../interactive.pm_.c:309 ../../interactive.pm_.c:341
+#: ../../interactive.pm_.c:127 ../../interactive.pm_.c:142
+#: ../../interactive.pm_.c:317 ../../interactive.pm_.c:349
 #: ../../interactive_http.pm_.c:104 ../../interactive_newt.pm_.c:170
 #: ../../interactive_stdio.pm_.c:141 ../../interactive_stdio.pm_.c:142
 #: ../../my_gtk.pm_.c:686 ../../my_gtk.pm_.c:1019 ../../my_gtk.pm_.c:1041
@@ -3385,7 +3386,7 @@ msgid ""
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:159 ../../install_steps_interactive.pm_.c:218
+#: ../../install_steps_gtk.pm_.c:159 ../../install_steps_interactive.pm_.c:223
 msgid "Install Class"
 msgstr ""
 
@@ -3428,15 +3429,15 @@ msgstr ""
 msgid "Percentage of packages to install"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:291 ../../install_steps_interactive.pm_.c:701
+#: ../../install_steps_gtk.pm_.c:291 ../../install_steps_interactive.pm_.c:706
 msgid "Package Group Selection"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:322 ../../install_steps_interactive.pm_.c:716
+#: ../../install_steps_gtk.pm_.c:322 ../../install_steps_interactive.pm_.c:721
 msgid "Individual package selection"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:345 ../../install_steps_interactive.pm_.c:641
+#: ../../install_steps_gtk.pm_.c:345 ../../install_steps_interactive.pm_.c:646
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr ""
@@ -3504,8 +3505,8 @@ msgstr ""
 msgid "Show automatically selected packages"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:462 ../../install_steps_interactive.pm_.c:240
-#: ../../install_steps_interactive.pm_.c:244
+#: ../../install_steps_gtk.pm_.c:462 ../../install_steps_interactive.pm_.c:245
+#: ../../install_steps_interactive.pm_.c:249
 msgid "Install"
 msgstr ""
 
@@ -3521,11 +3522,11 @@ msgstr ""
 msgid "Minimal install"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:486 ../../install_steps_interactive.pm_.c:549
+#: ../../install_steps_gtk.pm_.c:486 ../../install_steps_interactive.pm_.c:554
 msgid "Choose the packages you want to install"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:502 ../../install_steps_interactive.pm_.c:783
+#: ../../install_steps_gtk.pm_.c:502 ../../install_steps_interactive.pm_.c:788
 msgid "Installing"
 msgstr ""
 
@@ -3551,18 +3552,18 @@ msgstr ""
 msgid "Installing package %s"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:656 ../../install_steps_interactive.pm_.c:179
-#: ../../install_steps_interactive.pm_.c:807
+#: ../../install_steps_gtk.pm_.c:656 ../../install_steps_interactive.pm_.c:184
+#: ../../install_steps_interactive.pm_.c:812
 #: ../../standalone/drakautoinst_.c:203
 msgid "Accept"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:656 ../../install_steps_interactive.pm_.c:179
-#: ../../install_steps_interactive.pm_.c:807
+#: ../../install_steps_gtk.pm_.c:656 ../../install_steps_interactive.pm_.c:184
+#: ../../install_steps_interactive.pm_.c:812
 msgid "Refuse"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:657 ../../install_steps_interactive.pm_.c:808
+#: ../../install_steps_gtk.pm_.c:657 ../../install_steps_interactive.pm_.c:813
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -3573,16 +3574,16 @@ msgid ""
 msgstr ""
 
 #: ../../install_steps_gtk.pm_.c:671 ../../install_steps_gtk.pm_.c:675
-#: ../../install_steps_interactive.pm_.c:820
-#: ../../install_steps_interactive.pm_.c:824
+#: ../../install_steps_interactive.pm_.c:825
+#: ../../install_steps_interactive.pm_.c:829
 msgid "Go on anyway?"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:671 ../../install_steps_interactive.pm_.c:820
+#: ../../install_steps_gtk.pm_.c:671 ../../install_steps_interactive.pm_.c:825
 msgid "There was an error ordering packages:"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:675 ../../install_steps_interactive.pm_.c:824
+#: ../../install_steps_gtk.pm_.c:675 ../../install_steps_interactive.pm_.c:829
 msgid "There was an error installing packages:"
 msgstr ""
 
@@ -3626,11 +3627,17 @@ msgstr ""
 msgid "Do you really want to leave the installation?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:102
+#: ../../install_steps_interactive.pm_.c:101
+msgid ""
+"The characters of your language can't be displayed in console,\n"
+"so the messages will be displayed in english during installation"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:107
 msgid "License agreement"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:103
+#: ../../install_steps_interactive.pm_.c:108
 msgid ""
 "Introduction\n"
 "\n"
@@ -3751,104 +3758,104 @@ msgid ""
 "For any question on this document, please contact MandrakeSoft S.A.  \n"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:199
-#: ../../install_steps_interactive.pm_.c:1026
+#: ../../install_steps_interactive.pm_.c:204
+#: ../../install_steps_interactive.pm_.c:1031
 #: ../../standalone/keyboarddrake_.c:28
 msgid "Keyboard"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:200
+#: ../../install_steps_interactive.pm_.c:205
 msgid "Please choose your keyboard layout."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:201
+#: ../../install_steps_interactive.pm_.c:206
 msgid "Here is the full list of keyboards available"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:218
+#: ../../install_steps_interactive.pm_.c:223
 msgid "Which installation class do you want?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:220
+#: ../../install_steps_interactive.pm_.c:225
 msgid "Install/Update"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:220
+#: ../../install_steps_interactive.pm_.c:225
 msgid "Is this an install or an update?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:229
+#: ../../install_steps_interactive.pm_.c:234
 msgid "Recommended"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:232
-#: ../../install_steps_interactive.pm_.c:235
+#: ../../install_steps_interactive.pm_.c:237
+#: ../../install_steps_interactive.pm_.c:240
 msgid "Expert"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:240
-#: ../../install_steps_interactive.pm_.c:244
+#: ../../install_steps_interactive.pm_.c:245
+#: ../../install_steps_interactive.pm_.c:249
 msgid "Upgrade"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:240
-#: ../../install_steps_interactive.pm_.c:244
+#: ../../install_steps_interactive.pm_.c:245
+#: ../../install_steps_interactive.pm_.c:249
 msgid "Upgrade packages only"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:260
+#: ../../install_steps_interactive.pm_.c:265
 msgid "Please choose the type of your mouse."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:266 ../../standalone/mousedrake_.c:65
+#: ../../install_steps_interactive.pm_.c:271 ../../standalone/mousedrake_.c:65
 msgid "Mouse Port"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:267 ../../standalone/mousedrake_.c:66
+#: ../../install_steps_interactive.pm_.c:272 ../../standalone/mousedrake_.c:66
 msgid "Please choose on which serial port your mouse is connected to."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:275
+#: ../../install_steps_interactive.pm_.c:280
 msgid "Buttons emulation"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:277
+#: ../../install_steps_interactive.pm_.c:282
 msgid "Button 2 Emulation"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:278
+#: ../../install_steps_interactive.pm_.c:283
 msgid "Button 3 Emulation"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:299
+#: ../../install_steps_interactive.pm_.c:304
 msgid "Configuring PCMCIA cards..."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:299
+#: ../../install_steps_interactive.pm_.c:304
 msgid "PCMCIA"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:306
+#: ../../install_steps_interactive.pm_.c:311
 msgid "Configuring IDE"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:306
+#: ../../install_steps_interactive.pm_.c:311
 msgid "IDE"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:321
+#: ../../install_steps_interactive.pm_.c:326
 msgid "no available partitions"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:324
+#: ../../install_steps_interactive.pm_.c:329
 msgid "Scanning partitions to find mount points"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:332
+#: ../../install_steps_interactive.pm_.c:337
 msgid "Choose the mount points"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:351
+#: ../../install_steps_interactive.pm_.c:356
 #, c-format
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
@@ -3859,174 +3866,174 @@ msgid ""
 "Do you agree to loose all the partitions?\n"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:364
+#: ../../install_steps_interactive.pm_.c:369
 msgid ""
 "DiskDrake failed to read correctly the partition table.\n"
 "Continue at your own risk!"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:380
+#: ../../install_steps_interactive.pm_.c:385
 msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
 "system, you'll need to create the bootstrap partition in DiskDrake"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:389
+#: ../../install_steps_interactive.pm_.c:394
 msgid "No root partition found to perform an upgrade"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:390
+#: ../../install_steps_interactive.pm_.c:395
 msgid "Root Partition"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:391
+#: ../../install_steps_interactive.pm_.c:396
 msgid "What is the root partition (/) of your system?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:405
+#: ../../install_steps_interactive.pm_.c:410
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:429
+#: ../../install_steps_interactive.pm_.c:434
 msgid "Choose the partitions you want to format"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:430
+#: ../../install_steps_interactive.pm_.c:435
 msgid "Check bad blocks?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:456
+#: ../../install_steps_interactive.pm_.c:461
 msgid "Formatting partitions"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:458
+#: ../../install_steps_interactive.pm_.c:463
 #, c-format
 msgid "Creating and formatting file %s"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:461
+#: ../../install_steps_interactive.pm_.c:466
 msgid "Not enough swap to fulfill installation, please add some"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:467
+#: ../../install_steps_interactive.pm_.c:472
 msgid "Looking for available packages"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:473
+#: ../../install_steps_interactive.pm_.c:478
 msgid "Finding packages to upgrade"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:490
+#: ../../install_steps_interactive.pm_.c:495
 #, c-format
 msgid ""
 "Your system has not enough space left for installation or upgrade (%d > %d)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:509
+#: ../../install_steps_interactive.pm_.c:514
 #, c-format
 msgid "Complete (%dMB)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:509
+#: ../../install_steps_interactive.pm_.c:514
 #, c-format
 msgid "Minimum (%dMB)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:509
+#: ../../install_steps_interactive.pm_.c:514
 #, c-format
 msgid "Recommended (%dMB)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:564
+#: ../../install_steps_interactive.pm_.c:569
 msgid ""
 "Please choose load or save package selection on floppy.\n"
 "The format is the same as auto_install generated floppies."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:567
+#: ../../install_steps_interactive.pm_.c:572
 msgid "Load from floppy"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:569
+#: ../../install_steps_interactive.pm_.c:574
 msgid "Loading from floppy"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:569
+#: ../../install_steps_interactive.pm_.c:574
 msgid "Package selection"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:574
+#: ../../install_steps_interactive.pm_.c:579
 msgid "Insert a floppy containing package selection"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:586
+#: ../../install_steps_interactive.pm_.c:591
 msgid "Save on floppy"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:654
+#: ../../install_steps_interactive.pm_.c:659
 msgid "Selected size is larger than available space"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:667
+#: ../../install_steps_interactive.pm_.c:672
 msgid "Type of install"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:668
+#: ../../install_steps_interactive.pm_.c:673
 msgid ""
 "You do not have selected any group of packages\n"
 "Please choose the minimal installation you want"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:671
+#: ../../install_steps_interactive.pm_.c:676
 msgid "With X"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:673
+#: ../../install_steps_interactive.pm_.c:678
 msgid "With basic documentation (recommended!)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:674
+#: ../../install_steps_interactive.pm_.c:679
 msgid "Truly minimal install (especially no urpmi)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:758
+#: ../../install_steps_interactive.pm_.c:763
 msgid ""
 "If you have all the CDs in the list below, click Ok.\n"
 "If you have none of those CDs, click Cancel.\n"
 "If only some CDs are missing, unselect them, then click Ok."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:763
+#: ../../install_steps_interactive.pm_.c:768
 #, c-format
 msgid "Cd-Rom labeled \"%s\""
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:783
+#: ../../install_steps_interactive.pm_.c:788
 msgid "Preparing installation"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:792
+#: ../../install_steps_interactive.pm_.c:797
 #, c-format
 msgid ""
 "Installing package %s\n"
 "%d%%"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:838
+#: ../../install_steps_interactive.pm_.c:843
 msgid "Post-install configuration"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:844
+#: ../../install_steps_interactive.pm_.c:849
 #, c-format
 msgid "Please insert the Boot floppy used in drive %s"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:850
+#: ../../install_steps_interactive.pm_.c:855
 #, c-format
 msgid "Please insert the Update Modules floppy in drive %s"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:870
+#: ../../install_steps_interactive.pm_.c:875
 msgid ""
 "You have now the possibility to download software aimed for encryption.\n"
 "\n"
@@ -4065,7 +4072,7 @@ msgid ""
 "USA"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:908
+#: ../../install_steps_interactive.pm_.c:913
 msgid ""
 "You have now the possibility to download updated packages that have\n"
 "been released after the distribution has been made available.\n"
@@ -4076,133 +4083,133 @@ msgid ""
 "Do you want to install the updates ?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:922
+#: ../../install_steps_interactive.pm_.c:927
 msgid "Contacting Mandrake Linux web site to get the list of available mirrors"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:927
+#: ../../install_steps_interactive.pm_.c:932
 msgid "Choose a mirror from which to get the packages"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:936
+#: ../../install_steps_interactive.pm_.c:941
 msgid "Contacting the mirror to get the list of available packages"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:963
+#: ../../install_steps_interactive.pm_.c:968
 msgid "Which is your timezone?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:968
+#: ../../install_steps_interactive.pm_.c:973
 msgid "Hardware clock set to GMT"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:969
+#: ../../install_steps_interactive.pm_.c:974
 msgid "Automatic time synchronization (using NTP)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:976
+#: ../../install_steps_interactive.pm_.c:981
 msgid "NTP Server"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1010
-#: ../../install_steps_interactive.pm_.c:1018 ../../printerdrake.pm_.c:103
+#: ../../install_steps_interactive.pm_.c:1015
+#: ../../install_steps_interactive.pm_.c:1023 ../../printerdrake.pm_.c:103
 msgid "Remote CUPS server"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1011
+#: ../../install_steps_interactive.pm_.c:1016
 msgid "No printer"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1022 ../../steps.pm_.c:27
+#: ../../install_steps_interactive.pm_.c:1027 ../../steps.pm_.c:27
 msgid "Summary"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1025
+#: ../../install_steps_interactive.pm_.c:1030
 msgid "Mouse"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1027
+#: ../../install_steps_interactive.pm_.c:1032
 msgid "Timezone"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1028 ../../printerdrake.pm_.c:2224
-#: ../../printerdrake.pm_.c:2295
+#: ../../install_steps_interactive.pm_.c:1033 ../../printerdrake.pm_.c:2238
+#: ../../printerdrake.pm_.c:2309
 msgid "Printer"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1030
+#: ../../install_steps_interactive.pm_.c:1035
 msgid "ISDN card"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1033
+#: ../../install_steps_interactive.pm_.c:1038
 msgid "Sound card"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1036
+#: ../../install_steps_interactive.pm_.c:1041
 msgid "TV card"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1074
-#: ../../install_steps_interactive.pm_.c:1098
-#: ../../install_steps_interactive.pm_.c:1102
+#: ../../install_steps_interactive.pm_.c:1079
+#: ../../install_steps_interactive.pm_.c:1103
+#: ../../install_steps_interactive.pm_.c:1107
 msgid "LDAP"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1075
-#: ../../install_steps_interactive.pm_.c:1098
-#: ../../install_steps_interactive.pm_.c:1111
+#: ../../install_steps_interactive.pm_.c:1080
+#: ../../install_steps_interactive.pm_.c:1103
+#: ../../install_steps_interactive.pm_.c:1116
 msgid "NIS"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1076
-#: ../../install_steps_interactive.pm_.c:1098
+#: ../../install_steps_interactive.pm_.c:1081
+#: ../../install_steps_interactive.pm_.c:1103
 msgid "Local files"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1085
-#: ../../install_steps_interactive.pm_.c:1086 ../../steps.pm_.c:24
+#: ../../install_steps_interactive.pm_.c:1090
+#: ../../install_steps_interactive.pm_.c:1091 ../../steps.pm_.c:24
 msgid "Set root password"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1087
+#: ../../install_steps_interactive.pm_.c:1092
 msgid "No password"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1092
+#: ../../install_steps_interactive.pm_.c:1097
 #, c-format
 msgid "This password is too simple (must be at least %d characters long)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1098 ../../network/modem.pm_.c:49
+#: ../../install_steps_interactive.pm_.c:1103 ../../network/modem.pm_.c:49
 #: ../../standalone/draknet_.c:625 ../../standalone/logdrake_.c:172
 msgid "Authentication"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1106
+#: ../../install_steps_interactive.pm_.c:1111
 msgid "Authentication LDAP"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1107
+#: ../../install_steps_interactive.pm_.c:1112
 msgid "LDAP Base dn"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1108
+#: ../../install_steps_interactive.pm_.c:1113
 msgid "LDAP Server"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1114
+#: ../../install_steps_interactive.pm_.c:1119
 msgid "Authentication NIS"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1115
+#: ../../install_steps_interactive.pm_.c:1120
 msgid "NIS Domain"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1116
+#: ../../install_steps_interactive.pm_.c:1121
 msgid "NIS Server"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1151
+#: ../../install_steps_interactive.pm_.c:1156
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -4220,19 +4227,19 @@ msgid ""
 "drive and press \"Ok\"."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1167
+#: ../../install_steps_interactive.pm_.c:1172
 msgid "First floppy drive"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1168
+#: ../../install_steps_interactive.pm_.c:1173
 msgid "Second floppy drive"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1169 ../../printerdrake.pm_.c:1816
+#: ../../install_steps_interactive.pm_.c:1174 ../../printerdrake.pm_.c:1830
 msgid "Skip"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1174
+#: ../../install_steps_interactive.pm_.c:1179
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -4246,28 +4253,28 @@ msgid ""
 "failures. Would you like to create a bootdisk for your system?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1183
+#: ../../install_steps_interactive.pm_.c:1188
 msgid "Sorry, no floppy drive available"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1187
+#: ../../install_steps_interactive.pm_.c:1192
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1191
+#: ../../install_steps_interactive.pm_.c:1196
 #, c-format
 msgid "Insert a floppy in %s"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1194
+#: ../../install_steps_interactive.pm_.c:1199
 msgid "Creating bootdisk"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1201
+#: ../../install_steps_interactive.pm_.c:1206
 msgid "Preparing bootloader"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1212
+#: ../../install_steps_interactive.pm_.c:1217
 msgid ""
 "You appear to have an OldWorld or Unknown\n"
 " machine, the yaboot bootloader will not work for you.\n"
@@ -4275,25 +4282,25 @@ msgid ""
 " need to use BootX to boot your machine"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1218
+#: ../../install_steps_interactive.pm_.c:1223
 msgid "Do you want to use aboot?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1221
+#: ../../install_steps_interactive.pm_.c:1226
 msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1228
+#: ../../install_steps_interactive.pm_.c:1233
 msgid "Installing bootloader"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1234
+#: ../../install_steps_interactive.pm_.c:1239
 msgid "Installation of bootloader failed. The following error occured:"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1242
+#: ../../install_steps_interactive.pm_.c:1247
 #, c-format
 msgid ""
 "You may need to change your Open Firmware boot-device to\n"
@@ -4304,25 +4311,25 @@ msgid ""
 "At your next boot you should see the bootloader prompt."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1286
+#: ../../install_steps_interactive.pm_.c:1291
 #: ../../standalone/drakautoinst_.c:81
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1290
+#: ../../install_steps_interactive.pm_.c:1295
 #: ../../standalone/drakautoinst_.c:83
 msgid "Creating auto install floppy"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1301
+#: ../../install_steps_interactive.pm_.c:1306
 msgid ""
 "Some steps are not completed.\n"
 "\n"
 "Do you really want to quit now?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1312
+#: ../../install_steps_interactive.pm_.c:1317
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -4335,11 +4342,11 @@ msgid ""
 "install chapter of the Official Mandrake Linux User's Guide."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1324
+#: ../../install_steps_interactive.pm_.c:1329
 msgid "Generate auto install floppy"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1326
+#: ../../install_steps_interactive.pm_.c:1331
 msgid ""
 "The auto install can be fully automated if wanted,\n"
 "in that case it will take over the hard drive!!\n"
@@ -4348,15 +4355,15 @@ msgid ""
 "You may prefer to replay the installation.\n"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1331
+#: ../../install_steps_interactive.pm_.c:1336
 msgid "Automated"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1331
+#: ../../install_steps_interactive.pm_.c:1336
 msgid "Replay"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1334
+#: ../../install_steps_interactive.pm_.c:1339
 msgid "Save packages selection"
 msgstr ""
 
@@ -4370,23 +4377,27 @@ msgid ""
 "  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
 msgstr ""
 
-#: ../../interactive.pm_.c:86
+#: ../../interactive.pm_.c:87
 msgid "kdesu missing"
 msgstr ""
 
-#: ../../interactive.pm_.c:144
+#: ../../interactive.pm_.c:89 ../../interactive.pm_.c:100
+msgid "consolehelper missing"
+msgstr ""
+
+#: ../../interactive.pm_.c:152
 msgid "Choose a file"
 msgstr ""
 
-#: ../../interactive.pm_.c:306
+#: ../../interactive.pm_.c:314
 msgid "Advanced"
 msgstr ""
 
-#: ../../interactive.pm_.c:307
+#: ../../interactive.pm_.c:315
 msgid "Basic"
 msgstr ""
 
-#: ../../interactive.pm_.c:378
+#: ../../interactive.pm_.c:386
 msgid "Please wait"
 msgstr ""
 
@@ -4464,288 +4475,324 @@ msgstr ""
 msgid "Re-submit"
 msgstr ""
 
-#: ../../keyboard.pm_.c:141 ../../keyboard.pm_.c:175
+#: ../../keyboard.pm_.c:175 ../../keyboard.pm_.c:206
 msgid "Czech (QWERTZ)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:142 ../../keyboard.pm_.c:177
+#: ../../keyboard.pm_.c:176 ../../keyboard.pm_.c:208
 msgid "German"
 msgstr ""
 
-#: ../../keyboard.pm_.c:143
+#: ../../keyboard.pm_.c:177
 msgid "Dvorak"
 msgstr ""
 
-#: ../../keyboard.pm_.c:144 ../../keyboard.pm_.c:184
+#: ../../keyboard.pm_.c:178 ../../keyboard.pm_.c:215
 msgid "Spanish"
 msgstr ""
 
-#: ../../keyboard.pm_.c:145 ../../keyboard.pm_.c:185
+#: ../../keyboard.pm_.c:179 ../../keyboard.pm_.c:216
 msgid "Finnish"
 msgstr ""
 
-#: ../../keyboard.pm_.c:146 ../../keyboard.pm_.c:186
+#: ../../keyboard.pm_.c:180 ../../keyboard.pm_.c:217
 msgid "French"
 msgstr ""
 
-#: ../../keyboard.pm_.c:147 ../../keyboard.pm_.c:211
+#: ../../keyboard.pm_.c:181 ../../keyboard.pm_.c:242
 msgid "Norwegian"
 msgstr ""
 
-#: ../../keyboard.pm_.c:148
+#: ../../keyboard.pm_.c:182
 msgid "Polish"
 msgstr ""
 
-#: ../../keyboard.pm_.c:149 ../../keyboard.pm_.c:219
+#: ../../keyboard.pm_.c:183 ../../keyboard.pm_.c:250
 msgid "Russian"
 msgstr ""
 
-#: ../../keyboard.pm_.c:151 ../../keyboard.pm_.c:221
+#: ../../keyboard.pm_.c:185 ../../keyboard.pm_.c:252
 msgid "Swedish"
 msgstr ""
 
-#: ../../keyboard.pm_.c:152 ../../keyboard.pm_.c:238
+#: ../../keyboard.pm_.c:186 ../../keyboard.pm_.c:267
 msgid "UK keyboard"
 msgstr ""
 
-#: ../../keyboard.pm_.c:153 ../../keyboard.pm_.c:239
+#: ../../keyboard.pm_.c:187 ../../keyboard.pm_.c:268
 msgid "US keyboard"
 msgstr ""
 
-#: ../../keyboard.pm_.c:155
+#: ../../keyboard.pm_.c:189
 msgid "Albanian"
 msgstr ""
 
-#: ../../keyboard.pm_.c:156
+#: ../../keyboard.pm_.c:190
 msgid "Armenian (old)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:157
+#: ../../keyboard.pm_.c:191
 msgid "Armenian (typewriter)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:158
+#: ../../keyboard.pm_.c:192
 msgid "Armenian (phonetic)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:163
+#: ../../keyboard.pm_.c:197
 msgid "Azerbaidjani (latin)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:165
+#: ../../keyboard.pm_.c:199
 msgid "Belgian"
 msgstr ""
 
-#: ../../keyboard.pm_.c:166
+#: ../../keyboard.pm_.c:200
 msgid "Bulgarian (phonetic)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:167
+#: ../../keyboard.pm_.c:201
 msgid "Bulgarian (BDS)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:168
+#: ../../keyboard.pm_.c:202
 msgid "Brazilian (ABNT-2)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:169
+#: ../../keyboard.pm_.c:203
 msgid "Belarusian"
 msgstr ""
 
-#: ../../keyboard.pm_.c:170
+#: ../../keyboard.pm_.c:204
 msgid "Swiss (German layout)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:171
+#: ../../keyboard.pm_.c:205
 msgid "Swiss (French layout)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:176
+#: ../../keyboard.pm_.c:207
 msgid "Czech (QWERTY)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:178
+#: ../../keyboard.pm_.c:209
 msgid "German (no dead keys)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:179
+#: ../../keyboard.pm_.c:210
 msgid "Danish"
 msgstr ""
 
-#: ../../keyboard.pm_.c:180
+#: ../../keyboard.pm_.c:211
 msgid "Dvorak (US)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:181
+#: ../../keyboard.pm_.c:212
 msgid "Dvorak (Norwegian)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:182
+#: ../../keyboard.pm_.c:213
 msgid "Dvorak (Swedish)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:183
+#: ../../keyboard.pm_.c:214
 msgid "Estonian"
 msgstr ""
 
-#: ../../keyboard.pm_.c:187
+#: ../../keyboard.pm_.c:218
 msgid "Georgian (\"Russian\" layout)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:188
+#: ../../keyboard.pm_.c:219
 msgid "Georgian (\"Latin\" layout)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:189
+#: ../../keyboard.pm_.c:220
 msgid "Greek"
 msgstr ""
 
-#: ../../keyboard.pm_.c:190
+#: ../../keyboard.pm_.c:221
 msgid "Hungarian"
 msgstr ""
 
-#: ../../keyboard.pm_.c:191
+#: ../../keyboard.pm_.c:222
 msgid "Croatian"
 msgstr ""
 
-#: ../../keyboard.pm_.c:192
+#: ../../keyboard.pm_.c:223
 msgid "Israeli"
 msgstr ""
 
-#: ../../keyboard.pm_.c:193
+#: ../../keyboard.pm_.c:224
 msgid "Israeli (Phonetic)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:194
+#: ../../keyboard.pm_.c:225
 msgid "Iranian"
 msgstr ""
 
-#: ../../keyboard.pm_.c:195
+#: ../../keyboard.pm_.c:226
 msgid "Icelandic"
 msgstr ""
 
-#: ../../keyboard.pm_.c:196
+#: ../../keyboard.pm_.c:227
 msgid "Italian"
 msgstr ""
 
-#: ../../keyboard.pm_.c:198
+#: ../../keyboard.pm_.c:229
 msgid "Japanese 106 keys"
 msgstr ""
 
-#: ../../keyboard.pm_.c:201
+#: ../../keyboard.pm_.c:232
 msgid "Korean keyboard"
 msgstr ""
 
-#: ../../keyboard.pm_.c:202
+#: ../../keyboard.pm_.c:233
 msgid "Latin American"
 msgstr ""
 
-#: ../../keyboard.pm_.c:203
+#: ../../keyboard.pm_.c:234
 msgid "Lithuanian AZERTY (old)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:205
+#: ../../keyboard.pm_.c:236
 msgid "Lithuanian AZERTY (new)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:206
+#: ../../keyboard.pm_.c:237
 msgid "Lithuanian \"number row\" QWERTY"
 msgstr ""
 
-#: ../../keyboard.pm_.c:207
+#: ../../keyboard.pm_.c:238
 msgid "Lithuanian \"phonetic\" QWERTY"
 msgstr ""
 
-#: ../../keyboard.pm_.c:208
+#: ../../keyboard.pm_.c:239
 msgid "Latvian"
 msgstr ""
 
-#: ../../keyboard.pm_.c:209
+#: ../../keyboard.pm_.c:240
 msgid "Macedonian"
 msgstr ""
 
-#: ../../keyboard.pm_.c:210
+#: ../../keyboard.pm_.c:241
 msgid "Dutch"
 msgstr ""
 
-#: ../../keyboard.pm_.c:212
+#: ../../keyboard.pm_.c:243
 msgid "Polish (qwerty layout)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:213
+#: ../../keyboard.pm_.c:244
 msgid "Polish (qwertz layout)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:214
+#: ../../keyboard.pm_.c:245
 msgid "Portuguese"
 msgstr ""
 
-#: ../../keyboard.pm_.c:215
+#: ../../keyboard.pm_.c:246
 msgid "Canadian (Quebec)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:217
+#: ../../keyboard.pm_.c:248
 msgid "Romanian (qwertz)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:218
+#: ../../keyboard.pm_.c:249
 msgid "Romanian (qwerty)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:220
+#: ../../keyboard.pm_.c:251
 msgid "Russian (Yawerty)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:222
+#: ../../keyboard.pm_.c:253
 msgid "Slovenian"
 msgstr ""
 
-#: ../../keyboard.pm_.c:226
+#: ../../keyboard.pm_.c:254
 msgid "Slovakian (QWERTZ)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:227
+#: ../../keyboard.pm_.c:255
 msgid "Slovakian (QWERTY)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:229
+#: ../../keyboard.pm_.c:257
 msgid "Serbian (cyrillic)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:231
+#: ../../keyboard.pm_.c:259
 msgid "Tamil"
 msgstr ""
 
-#: ../../keyboard.pm_.c:232
+#: ../../keyboard.pm_.c:260
 msgid "Thai keyboard"
 msgstr ""
 
-#: ../../keyboard.pm_.c:234
+#: ../../keyboard.pm_.c:262
 msgid "Tajik keyboard"
 msgstr ""
 
-#: ../../keyboard.pm_.c:235
+#: ../../keyboard.pm_.c:263
 msgid "Turkish (traditional \"F\" model)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:236
+#: ../../keyboard.pm_.c:264
 msgid "Turkish (modern \"Q\" model)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:237
+#: ../../keyboard.pm_.c:266
 msgid "Ukrainian"
 msgstr ""
 
-#: ../../keyboard.pm_.c:240
+#: ../../keyboard.pm_.c:269
 msgid "US keyboard (international)"
 msgstr ""
 
-#: ../../keyboard.pm_.c:241
+#: ../../keyboard.pm_.c:270
 msgid "Vietnamese \"numeric row\" QWERTY"
 msgstr ""
 
-#: ../../keyboard.pm_.c:242
+#: ../../keyboard.pm_.c:271
 msgid "Yugoslavian (latin)"
+msgstr ""
+
+#: ../../keyboard.pm_.c:279
+msgid "Right Alt key"
+msgstr ""
+
+#: ../../keyboard.pm_.c:280
+msgid "Both Shift keys simultaneously"
+msgstr ""
+
+#: ../../keyboard.pm_.c:281
+msgid "Control and Shift keys simultaneously"
+msgstr ""
+
+#: ../../keyboard.pm_.c:282
+msgid "CapsLock key"
+msgstr ""
+
+#: ../../keyboard.pm_.c:283
+msgid "Ctrl and Alt keys simultaneously"
+msgstr ""
+
+#: ../../keyboard.pm_.c:284
+msgid "Alt and Shift keys simultaneously"
+msgstr ""
+
+#: ../../keyboard.pm_.c:285
+msgid "\"Menu\" key"
+msgstr ""
+
+#: ../../keyboard.pm_.c:286
+msgid "Left \"Windows\" key"
+msgstr ""
+
+#: ../../keyboard.pm_.c:287
+msgid "Right \"Windows\" key"
 msgstr ""
 
 #: ../../loopback.pm_.c:32
@@ -4753,21 +4800,17 @@ msgstr ""
 msgid "Circular mounts %s\n"
 msgstr ""
 
-#: ../../lvm.pm_.c:83
+#: ../../lvm.pm_.c:88
 msgid "Remove the logical volumes first\n"
 msgstr ""
 
-#: ../../modules.pm_.c:816
+#: ../../modules.pm_.c:817
 msgid ""
 "PCMCIA support no longer exist for 2.2 kernels. Please use a 2.4 kernel."
 msgstr ""
 
 #: ../../mouse.pm_.c:25
 msgid "Sun - Mouse"
-msgstr ""
-
-#: ../../mouse.pm_.c:31
-msgid "Standard"
 msgstr ""
 
 #: ../../mouse.pm_.c:32
@@ -4894,11 +4937,11 @@ msgstr ""
 msgid "Finish"
 msgstr ""
 
-#: ../../my_gtk.pm_.c:686 ../../printerdrake.pm_.c:1556
+#: ../../my_gtk.pm_.c:686 ../../printerdrake.pm_.c:1570
 msgid "Next ->"
 msgstr ""
 
-#: ../../my_gtk.pm_.c:687 ../../printerdrake.pm_.c:1554
+#: ../../my_gtk.pm_.c:687 ../../printerdrake.pm_.c:1568
 msgid "<- Previous"
 msgstr ""
 
@@ -5375,7 +5418,7 @@ msgstr ""
 msgid "Automatic IP"
 msgstr ""
 
-#: ../../network/network.pm_.c:332 ../../printerdrake.pm_.c:733
+#: ../../network/network.pm_.c:332 ../../printerdrake.pm_.c:747
 msgid "IP address should be in format 1.2.3.4"
 msgstr ""
 
@@ -5643,7 +5686,7 @@ msgid "Pipe job into a command"
 msgstr ""
 
 #: ../../printer.pm_.c:497 ../../printer.pm_.c:688 ../../printer.pm_.c:1010
-#: ../../printerdrake.pm_.c:1633 ../../printerdrake.pm_.c:2653
+#: ../../printerdrake.pm_.c:1647 ../../printerdrake.pm_.c:2667
 msgid "Unknown model"
 msgstr ""
 
@@ -5712,7 +5755,7 @@ msgstr ""
 msgid ", using command %s"
 msgstr ""
 
-#: ../../printer.pm_.c:685 ../../printerdrake.pm_.c:1114
+#: ../../printer.pm_.c:685 ../../printerdrake.pm_.c:1128
 msgid "Raw printer (No driver)"
 msgstr ""
 
@@ -5730,10 +5773,10 @@ msgstr ""
 msgid "On CUPS server \"%s\""
 msgstr ""
 
-#: ../../printer.pm_.c:867 ../../printerdrake.pm_.c:2332
-#: ../../printerdrake.pm_.c:2343 ../../printerdrake.pm_.c:2539
-#: ../../printerdrake.pm_.c:2593 ../../printerdrake.pm_.c:2620
-#: ../../printerdrake.pm_.c:2769 ../../printerdrake.pm_.c:2771
+#: ../../printer.pm_.c:867 ../../printerdrake.pm_.c:2346
+#: ../../printerdrake.pm_.c:2357 ../../printerdrake.pm_.c:2553
+#: ../../printerdrake.pm_.c:2607 ../../printerdrake.pm_.c:2634
+#: ../../printerdrake.pm_.c:2783 ../../printerdrake.pm_.c:2785
 msgid " (Default)"
 msgstr ""
 
@@ -5785,9 +5828,9 @@ msgid ""
 "forget to restart CUPS afterwards (command: \"service cups restart\")."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:107 ../../printerdrake.pm_.c:1706
-#: ../../printerdrake.pm_.c:1712 ../../printerdrake.pm_.c:1713
-#: ../../printerdrake.pm_.c:1714 ../../printerdrake.pm_.c:2639
+#: ../../printerdrake.pm_.c:107 ../../printerdrake.pm_.c:1720
+#: ../../printerdrake.pm_.c:1726 ../../printerdrake.pm_.c:1727
+#: ../../printerdrake.pm_.c:1728 ../../printerdrake.pm_.c:2653
 #: ../../standalone/drakbackup_.c:753 ../../standalone/drakbackup_.c:2445
 #: ../../standalone/drakfont_.c:577 ../../standalone/drakfont_.c:771
 msgid "Close"
@@ -5801,11 +5844,11 @@ msgstr ""
 msgid "The IP address should look like 192.168.1.20"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:117 ../../printerdrake.pm_.c:861
+#: ../../printerdrake.pm_.c:117 ../../printerdrake.pm_.c:875
 msgid "The port number should be an integer!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:124 ../../printerdrake.pm_.c:2730
+#: ../../printerdrake.pm_.c:124 ../../printerdrake.pm_.c:2744
 msgid "Default printer"
 msgstr ""
 
@@ -5813,7 +5856,7 @@ msgstr ""
 msgid "CUPS server IP"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:130 ../../printerdrake.pm_.c:854
+#: ../../printerdrake.pm_.c:130 ../../printerdrake.pm_.c:868
 msgid "Port"
 msgstr ""
 
@@ -5829,8 +5872,8 @@ msgstr ""
 msgid "Test ports"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:221 ../../printerdrake.pm_.c:2376
-#: ../../printerdrake.pm_.c:2481
+#: ../../printerdrake.pm_.c:221 ../../printerdrake.pm_.c:2390
+#: ../../printerdrake.pm_.c:2495
 msgid "Add a new printer"
 msgstr ""
 
@@ -6037,42 +6080,42 @@ msgstr ""
 msgid "Making printer port available for CUPS ..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:587 ../../printerdrake.pm_.c:1017
-#: ../../printerdrake.pm_.c:1110
+#: ../../printerdrake.pm_.c:587 ../../printerdrake.pm_.c:1031
+#: ../../printerdrake.pm_.c:1124
 msgid "Reading printer database ..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:645
+#: ../../printerdrake.pm_.c:659
 msgid "Remote lpd Printer Options"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:646
+#: ../../printerdrake.pm_.c:660
 msgid ""
 "To use a remote lpd printer, you need to supply the hostname of the printer "
 "server and the printer name on that server."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:647
+#: ../../printerdrake.pm_.c:661
 msgid "Remote host name"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:648
+#: ../../printerdrake.pm_.c:662
 msgid "Remote printer name"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:651
+#: ../../printerdrake.pm_.c:665
 msgid "Remote host name missing!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:655
+#: ../../printerdrake.pm_.c:669
 msgid "Remote printer name missing!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:723
+#: ../../printerdrake.pm_.c:737
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:724
+#: ../../printerdrake.pm_.c:738
 msgid ""
 "To print to a SMB printer, you need to provide the SMB host name (Note! It "
 "may be different from its TCP/IP hostname!) and possibly the IP address of "
@@ -6080,35 +6123,35 @@ msgid ""
 "access and any applicable user name, password, and workgroup information."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:725
+#: ../../printerdrake.pm_.c:739
 msgid "SMB server host"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:726
+#: ../../printerdrake.pm_.c:740
 msgid "SMB server IP"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:727
+#: ../../printerdrake.pm_.c:741
 msgid "Share name"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:730
+#: ../../printerdrake.pm_.c:744
 msgid "Workgroup"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:737
+#: ../../printerdrake.pm_.c:751
 msgid "Either the server name or the server's IP must be given!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:741
+#: ../../printerdrake.pm_.c:755
 msgid "Samba share name missing!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:800
+#: ../../printerdrake.pm_.c:814
 msgid "NetWare Printer Options"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:801
+#: ../../printerdrake.pm_.c:815
 msgid ""
 "To print on a NetWare printer, you need to provide the NetWare print server "
 "name (Note! it may be different from its TCP/IP hostname!) as well as the "
@@ -6116,27 +6159,27 @@ msgid ""
 "name and password."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:802
+#: ../../printerdrake.pm_.c:816
 msgid "Printer Server"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:803
+#: ../../printerdrake.pm_.c:817
 msgid "Print Queue Name"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:808
+#: ../../printerdrake.pm_.c:822
 msgid "NCP server name missing!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:812
+#: ../../printerdrake.pm_.c:826
 msgid "NCP queue name missing!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:851
+#: ../../printerdrake.pm_.c:865
 msgid "TCP/Socket Printer Options"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:852
+#: ../../printerdrake.pm_.c:866
 msgid ""
 "To print to a TCP or socket printer, you need to provide the host name of "
 "the printer and optionally the port number. On HP JetDirect servers the port "
@@ -6144,60 +6187,60 @@ msgid ""
 "hardware."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:853
+#: ../../printerdrake.pm_.c:867
 msgid "Printer host name"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:857
+#: ../../printerdrake.pm_.c:871
 msgid "Printer host name missing!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:886 ../../printerdrake.pm_.c:888
+#: ../../printerdrake.pm_.c:900 ../../printerdrake.pm_.c:902
 msgid "Printer Device URI"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:887
+#: ../../printerdrake.pm_.c:901
 msgid ""
 "You can specify directly the URI to access the printer. The URI must fulfill "
 "either the CUPS or the Foomatic specifications. Note that not all URI types "
 "are supported by all the spoolers."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:902
+#: ../../printerdrake.pm_.c:916
 msgid "A valid URI must be entered!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1003
+#: ../../printerdrake.pm_.c:1017
 msgid ""
 "Every printer needs a name (for example \"printer\"). The Description and "
 "Location fields do not need to be filled in. They are comments for the users."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1004
+#: ../../printerdrake.pm_.c:1018
 msgid "Name of printer"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1005
+#: ../../printerdrake.pm_.c:1019
 msgid "Description"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1006
+#: ../../printerdrake.pm_.c:1020
 msgid "Location"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1020
+#: ../../printerdrake.pm_.c:1034
 msgid "Preparing printer database ..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1117
+#: ../../printerdrake.pm_.c:1131
 msgid "Printer model selection"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1118
+#: ../../printerdrake.pm_.c:1132
 msgid "Which printer model do you have?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1119
+#: ../../printerdrake.pm_.c:1133
 msgid ""
 "\n"
 "\n"
@@ -6206,11 +6249,11 @@ msgid ""
 "standing on a wrong model or on \"Raw printer\"."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1197
+#: ../../printerdrake.pm_.c:1211
 msgid "OKI winprinter configuration"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1198
+#: ../../printerdrake.pm_.c:1212
 msgid ""
 "You are configuring an OKI laser winprinter. These printers\n"
 "use a very special communication protocol and therefore they work only when "
@@ -6220,11 +6263,11 @@ msgid ""
 "not work. Your connection type setting will be ignored by the driver."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1241 ../../printerdrake.pm_.c:1268
+#: ../../printerdrake.pm_.c:1255 ../../printerdrake.pm_.c:1282
 msgid "Lexmark inkjet configuration"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1242
+#: ../../printerdrake.pm_.c:1256
 msgid ""
 "The inkjet printer drivers provided by Lexmark only support local printers, "
 "no printers on remote machines or print server boxes. Please connect your "
@@ -6232,7 +6275,7 @@ msgid ""
 "to."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1269
+#: ../../printerdrake.pm_.c:1283
 msgid ""
 "To be able to print with your Lexmark inkjet and this configuration, you "
 "need the inkjet printer drivers provided by Lexmark (http://www.lexmark."
@@ -6245,7 +6288,7 @@ msgid ""
 "program."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1478
+#: ../../printerdrake.pm_.c:1492
 msgid ""
 "Printer default settings\n"
 "\n"
@@ -6255,33 +6298,33 @@ msgid ""
 "printout quality/resolution printing can get substantially slower."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1487
+#: ../../printerdrake.pm_.c:1501
 #, c-format
 msgid "Option %s must be an integer number!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1491
+#: ../../printerdrake.pm_.c:1505
 #, c-format
 msgid "Option %s must be a number!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1496
+#: ../../printerdrake.pm_.c:1510
 #, c-format
 msgid "Option %s out of range!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1533
+#: ../../printerdrake.pm_.c:1547
 #, c-format
 msgid ""
 "Do you want to set this printer (\"%s\")\n"
 "as the default printer?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1550
+#: ../../printerdrake.pm_.c:1564
 msgid "Test pages"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1551
+#: ../../printerdrake.pm_.c:1565
 msgid ""
 "Please select the test pages you want to print.\n"
 "Note: the photo test page can take a rather long time to get printed and on "
@@ -6289,39 +6332,39 @@ msgid ""
 "it is enough to print the standard test page."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1555
+#: ../../printerdrake.pm_.c:1569
 msgid "No test pages"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1556
+#: ../../printerdrake.pm_.c:1570
 msgid "Print"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1558
+#: ../../printerdrake.pm_.c:1572
 msgid "Standard test page"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1561
+#: ../../printerdrake.pm_.c:1575
 msgid "Alternative test page (Letter)"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1564
+#: ../../printerdrake.pm_.c:1578
 msgid "Alternative test page (A4)"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1566
+#: ../../printerdrake.pm_.c:1580
 msgid "Photo test page"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1570
+#: ../../printerdrake.pm_.c:1584
 msgid "Do not print any test page"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1578 ../../printerdrake.pm_.c:1715
+#: ../../printerdrake.pm_.c:1592 ../../printerdrake.pm_.c:1729
 msgid "Printing test page(s)..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1603
+#: ../../printerdrake.pm_.c:1617
 #, c-format
 msgid ""
 "Test page(s) have been sent to the printer.\n"
@@ -6331,21 +6374,21 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1607
+#: ../../printerdrake.pm_.c:1621
 msgid ""
 "Test page(s) have been sent to the printer.\n"
 "It may take some time before the printer starts.\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1614
+#: ../../printerdrake.pm_.c:1628
 msgid "Did it work properly?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1635 ../../printerdrake.pm_.c:2655
+#: ../../printerdrake.pm_.c:1649 ../../printerdrake.pm_.c:2669
 msgid "Raw printer"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1653
+#: ../../printerdrake.pm_.c:1667
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) you can either use "
@@ -6354,15 +6397,15 @@ msgid ""
 "to modify the option settings easily.\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1655
+#: ../../printerdrake.pm_.c:1669
 msgid ""
 "These commands you can also use in the \"Printing command\" field of the "
 "printing dialogs of many applications, but here do not supply the file name "
 "because the file to print is provided by the application.\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1658 ../../printerdrake.pm_.c:1674
-#: ../../printerdrake.pm_.c:1684
+#: ../../printerdrake.pm_.c:1672 ../../printerdrake.pm_.c:1688
+#: ../../printerdrake.pm_.c:1698
 #, c-format
 msgid ""
 "\n"
@@ -6371,7 +6414,7 @@ msgid ""
 "line, e. g. \"%s <file>\". "
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1661 ../../printerdrake.pm_.c:1700
+#: ../../printerdrake.pm_.c:1675 ../../printerdrake.pm_.c:1714
 #, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
@@ -6379,41 +6422,41 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1664
+#: ../../printerdrake.pm_.c:1678
 msgid ""
 "Here is a list of the available printing options for the current printer:\n"
 "\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1669 ../../printerdrake.pm_.c:1679
+#: ../../printerdrake.pm_.c:1683 ../../printerdrake.pm_.c:1693
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
 "<file>\".\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1671 ../../printerdrake.pm_.c:1681
-#: ../../printerdrake.pm_.c:1691
+#: ../../printerdrake.pm_.c:1685 ../../printerdrake.pm_.c:1695
+#: ../../printerdrake.pm_.c:1705
 msgid ""
 "This command you can also use in the \"Printing command\" field of the "
 "printing dialogs of many applications. But here do not supply the file name "
 "because the file to print is provided by the application.\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1676 ../../printerdrake.pm_.c:1686
+#: ../../printerdrake.pm_.c:1690 ../../printerdrake.pm_.c:1700
 msgid ""
 "To get a list of the options available for the current printer click on the "
 "\"Print option list\" button."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1689
+#: ../../printerdrake.pm_.c:1703
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
 "<file>\" or \"%s <file>\".\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1693
+#: ../../printerdrake.pm_.c:1707
 msgid ""
 "You can also use the graphical interface \"xpdq\" for setting options and "
 "handling printing jobs.\n"
@@ -6423,7 +6466,7 @@ msgid ""
 "jams.\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1697
+#: ../../printerdrake.pm_.c:1711
 #, c-format
 msgid ""
 "\n"
@@ -6432,21 +6475,21 @@ msgid ""
 "line, e. g. \"%s <file>\".\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1709 ../../printerdrake.pm_.c:1721
+#: ../../printerdrake.pm_.c:1723 ../../printerdrake.pm_.c:1735
 #, c-format
 msgid "Printing/Scanning on \"%s\""
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1710 ../../printerdrake.pm_.c:1722
+#: ../../printerdrake.pm_.c:1724 ../../printerdrake.pm_.c:1736
 #, c-format
 msgid "Printing on the printer \"%s\""
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1712
+#: ../../printerdrake.pm_.c:1726
 msgid "Print option list"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1734
+#: ../../printerdrake.pm_.c:1748
 #, c-format
 msgid ""
 "Your HP multi-function device was configured automatically to be able to "
@@ -6460,7 +6503,7 @@ msgid ""
 "Do not use \"scannerdrake\" for this device!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1740
+#: ../../printerdrake.pm_.c:1754
 #, c-format
 msgid ""
 "Your HP multi-function device was configured automatically to be able to "
@@ -6473,17 +6516,17 @@ msgid ""
 "Do not use \"scannerdrake\" for this device!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1762 ../../printerdrake.pm_.c:2169
-#: ../../printerdrake.pm_.c:2415 ../../standalone/printerdrake_.c:49
+#: ../../printerdrake.pm_.c:1776 ../../printerdrake.pm_.c:2183
+#: ../../printerdrake.pm_.c:2429 ../../standalone/printerdrake_.c:49
 msgid "Reading printer data ..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1782 ../../printerdrake.pm_.c:1810
-#: ../../printerdrake.pm_.c:1845
+#: ../../printerdrake.pm_.c:1796 ../../printerdrake.pm_.c:1824
+#: ../../printerdrake.pm_.c:1859
 msgid "Transfer printer configuration"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1783
+#: ../../printerdrake.pm_.c:1797
 #, c-format
 msgid ""
 "You can copy the printer configuration which you have done for the spooler %"
@@ -6493,51 +6536,51 @@ msgid ""
 "Not all queues can be transferred due to the following reasons:\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1786
+#: ../../printerdrake.pm_.c:1800
 msgid ""
 "CUPS does not support printers on Novell servers or printers sending the "
 "data into a free-formed command.\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1788
+#: ../../printerdrake.pm_.c:1802
 msgid ""
 "PDQ only supports local printers, remote LPD printers, and Socket/TCP "
 "printers.\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1790
+#: ../../printerdrake.pm_.c:1804
 msgid "LPD and LPRng do not support IPP printers.\n"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1792
+#: ../../printerdrake.pm_.c:1806
 msgid ""
 "In addition, queues not created with this program or \"foomatic-configure\" "
 "cannot be transferred."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1793
+#: ../../printerdrake.pm_.c:1807
 msgid ""
 "\n"
 "Also printers configured with the PPD files provided by their manufacturers "
 "or with native CUPS drivers cannot be transferred."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1794
+#: ../../printerdrake.pm_.c:1808
 msgid ""
 "\n"
 "Mark the printers which you want to transfer and click \n"
 "\"Transfer\"."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1797
+#: ../../printerdrake.pm_.c:1811
 msgid "Do not transfer printers"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1798 ../../printerdrake.pm_.c:1815
+#: ../../printerdrake.pm_.c:1812 ../../printerdrake.pm_.c:1829
 msgid "Transfer"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1811
+#: ../../printerdrake.pm_.c:1825
 #, c-format
 msgid ""
 "A printer named \"%s\" already exists under %s. \n"
@@ -6545,56 +6588,56 @@ msgid ""
 "You can also type a new name or skip this printer."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1819
+#: ../../printerdrake.pm_.c:1833
 msgid "Name of printer should contain only letters, numbers and the underscore"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1824
+#: ../../printerdrake.pm_.c:1838
 #, c-format
 msgid ""
 "The printer \"%s\" already exists,\n"
 "do you really want to overwrite its configuration?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1832
+#: ../../printerdrake.pm_.c:1846
 msgid "New printer name"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1835
+#: ../../printerdrake.pm_.c:1849
 #, c-format
 msgid "Transferring %s ..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1846
+#: ../../printerdrake.pm_.c:1860
 #, c-format
 msgid ""
 "You have transferred your former default printer (\"%s\"), Should it be also "
 "the default printer under the new printing system %s?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1855
+#: ../../printerdrake.pm_.c:1869
 msgid "Refreshing printer data ..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1863 ../../printerdrake.pm_.c:1926
-#: ../../printerdrake.pm_.c:1938
+#: ../../printerdrake.pm_.c:1877 ../../printerdrake.pm_.c:1940
+#: ../../printerdrake.pm_.c:1952
 msgid "Configuration of a remote printer"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1864
+#: ../../printerdrake.pm_.c:1878
 msgid "Starting network ..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1890 ../../printerdrake.pm_.c:1894
-#: ../../printerdrake.pm_.c:1896
+#: ../../printerdrake.pm_.c:1904 ../../printerdrake.pm_.c:1908
+#: ../../printerdrake.pm_.c:1910
 msgid "Configure the network now"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1891
+#: ../../printerdrake.pm_.c:1905
 msgid "Network functionality not configured"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1892
+#: ../../printerdrake.pm_.c:1906
 msgid ""
 "You are going to configure a remote printer. This needs working network "
 "access, but your network is not configured yet. If you go on without network "
@@ -6602,11 +6645,11 @@ msgid ""
 "configuring now. How do you want to proceed?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1895
+#: ../../printerdrake.pm_.c:1909
 msgid "Go on without configuring the network"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1928
+#: ../../printerdrake.pm_.c:1942
 msgid ""
 "The network configuration done during the installation cannot be started "
 "now. Please check whether the network gets accessable after booting your "
@@ -6616,31 +6659,31 @@ msgid ""
 "\"Printer\""
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1929
+#: ../../printerdrake.pm_.c:1943
 msgid ""
 "The network access was not running and could not be started. Please check "
 "your configuration and your hardware. Then try to configure your remote "
 "printer again."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1939
+#: ../../printerdrake.pm_.c:1953
 msgid "Restarting printing system ..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1977
+#: ../../printerdrake.pm_.c:1991
 msgid "high"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1977
+#: ../../printerdrake.pm_.c:1991
 msgid "paranoid"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1978
+#: ../../printerdrake.pm_.c:1992
 #, c-format
 msgid "Installing a printing system in the %s security level"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1979
+#: ../../printerdrake.pm_.c:1993
 #, c-format
 msgid ""
 "You are about to install the printing system %s on a system running in the %"
@@ -6655,11 +6698,11 @@ msgid ""
 "Do you really want to configure printing on this machine?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2011
+#: ../../printerdrake.pm_.c:2025
 msgid "Starting the printing system at boot time"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2012
+#: ../../printerdrake.pm_.c:2026
 #, c-format
 msgid ""
 "The printing system (%s) will not be started automatically when the machine "
@@ -6673,146 +6716,146 @@ msgid ""
 "again?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2035 ../../printerdrake.pm_.c:2063
-#: ../../printerdrake.pm_.c:2093 ../../printerdrake.pm_.c:2126
-#: ../../printerdrake.pm_.c:2229
+#: ../../printerdrake.pm_.c:2049 ../../printerdrake.pm_.c:2077
+#: ../../printerdrake.pm_.c:2107 ../../printerdrake.pm_.c:2140
+#: ../../printerdrake.pm_.c:2243
 msgid "Checking installed software..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2067
+#: ../../printerdrake.pm_.c:2081
 msgid "Removing LPRng..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2097
+#: ../../printerdrake.pm_.c:2111
 msgid "Removing LPD..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2155
+#: ../../printerdrake.pm_.c:2169
 msgid "Select Printer Spooler"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2156
+#: ../../printerdrake.pm_.c:2170
 msgid "Which printing system (spooler) do you want to use?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2187
+#: ../../printerdrake.pm_.c:2201
 #, c-format
 msgid "Configuring printer \"%s\" ..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2200
+#: ../../printerdrake.pm_.c:2214
 msgid "Installing Foomatic ..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2257 ../../printerdrake.pm_.c:2289
-#: ../../printerdrake.pm_.c:2656 ../../printerdrake.pm_.c:2723
+#: ../../printerdrake.pm_.c:2271 ../../printerdrake.pm_.c:2303
+#: ../../printerdrake.pm_.c:2670 ../../printerdrake.pm_.c:2737
 msgid "Printer options"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2266
+#: ../../printerdrake.pm_.c:2280
 msgid "Preparing PrinterDrake ..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2296
+#: ../../printerdrake.pm_.c:2310
 msgid "Would you like to configure printing?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2308
+#: ../../printerdrake.pm_.c:2322
 msgid "Printing system: "
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2356
+#: ../../printerdrake.pm_.c:2370
 msgid "Printerdrake"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2359
+#: ../../printerdrake.pm_.c:2373
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; or to view information about "
 "it."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2385
+#: ../../printerdrake.pm_.c:2399
 msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2394
+#: ../../printerdrake.pm_.c:2408
 msgid "Configure printing system"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2399 ../../standalone/draknet_.c:278
+#: ../../printerdrake.pm_.c:2413 ../../standalone/draknet_.c:278
 msgid "Normal Mode"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2503 ../../printerdrake.pm_.c:2546
-#: ../../printerdrake.pm_.c:2563 ../../printerdrake.pm_.c:2598
-#: ../../printerdrake.pm_.c:2786
+#: ../../printerdrake.pm_.c:2517 ../../printerdrake.pm_.c:2560
+#: ../../printerdrake.pm_.c:2577 ../../printerdrake.pm_.c:2612
+#: ../../printerdrake.pm_.c:2800
 msgid "Do you want to configure another printer?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2634
+#: ../../printerdrake.pm_.c:2648
 msgid "Modify printer configuration"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2636
+#: ../../printerdrake.pm_.c:2650
 #, c-format
 msgid ""
 "Printer %s\n"
 "What do you want to modify on this printer?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2640
+#: ../../printerdrake.pm_.c:2654
 msgid "Do it!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2645 ../../printerdrake.pm_.c:2697
+#: ../../printerdrake.pm_.c:2659 ../../printerdrake.pm_.c:2711
 msgid "Printer connection type"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2646 ../../printerdrake.pm_.c:2701
+#: ../../printerdrake.pm_.c:2660 ../../printerdrake.pm_.c:2715
 msgid "Printer name, description, location"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2648 ../../printerdrake.pm_.c:2716
+#: ../../printerdrake.pm_.c:2662 ../../printerdrake.pm_.c:2730
 msgid "Printer manufacturer, model, driver"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2649 ../../printerdrake.pm_.c:2717
+#: ../../printerdrake.pm_.c:2663 ../../printerdrake.pm_.c:2731
 msgid "Printer manufacturer, model"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2658 ../../printerdrake.pm_.c:2727
+#: ../../printerdrake.pm_.c:2672 ../../printerdrake.pm_.c:2741
 msgid "Set this printer as the default"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2659 ../../printerdrake.pm_.c:2732
+#: ../../printerdrake.pm_.c:2673 ../../printerdrake.pm_.c:2746
 msgid "Print test pages"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2660 ../../printerdrake.pm_.c:2734
+#: ../../printerdrake.pm_.c:2674 ../../printerdrake.pm_.c:2748
 msgid "Know how to use this printer"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2662 ../../printerdrake.pm_.c:2736
+#: ../../printerdrake.pm_.c:2676 ../../printerdrake.pm_.c:2750
 msgid "Remove printer"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2706
+#: ../../printerdrake.pm_.c:2720
 #, c-format
 msgid "Removing old printer \"%s\" ..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2731
+#: ../../printerdrake.pm_.c:2745
 #, c-format
 msgid "The printer \"%s\" is set as the default printer now."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2738
+#: ../../printerdrake.pm_.c:2752
 #, c-format
 msgid "Do you really want to remove the printer \"%s\"?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2740
+#: ../../printerdrake.pm_.c:2754
 #, c-format
 msgid "Removing printer \"%s\" ..."
 msgstr ""
@@ -7211,9 +7254,9 @@ msgstr ""
 
 #: ../../share/advertising/01-gnu.pl_.c:10
 msgid ""
-"Want to get to know the Open Source community? Be a part? To share your "
-"knowledge, and help build tools, join the discussion forums you'll find on "
-"our \"Community\" webpages"
+"Get to know the Open Source community and become a member. Learn, teach, and "
+"help others by joining the many discussion forums that you will find in our "
+"\"Community\" webpages"
 msgstr ""
 
 #: ../../share/advertising/02-internet.pl_.c:9
@@ -7222,21 +7265,21 @@ msgstr ""
 
 #: ../../share/advertising/02-internet.pl_.c:10
 msgid ""
-"Mandrake Linux 8.2 gives you the best choice of software to access all the "
-"Internet has to offer. Surf the web and view animations with Mozilla and "
-"Konqueror, read your mail and handle your personal information with "
-"Evolution and Kmail"
+"Mandrake Linux 8.2 provides the best software to access everything the "
+"Internet has to offer: Surf the web & view animations with Mozilla and "
+"Konqueror, exchange email & organize your personal information with "
+"Evolution and Kmail, and much more"
 msgstr ""
 
 #: ../../share/advertising/03-graphic.pl_.c:9
-msgid "Art and Multimedia"
+msgid "Multimedia and Graphics"
 msgstr ""
 
 #: ../../share/advertising/03-graphic.pl_.c:10
 msgid ""
-"Mandrake Linux 8.2 will let you push your multimedia computer to its limits! "
-"Use the very latest software to play audio files, edit and handle your "
-"images or photos, and play videos"
+"Mandrake Linux 8.2 lets you push your multimedia computer to its limits! Use "
+"the latest software to play music and audio files, edit and organize your "
+"images and photos, watch TV and videos, and much more"
 msgstr ""
 
 #: ../../share/advertising/04-develop.pl_.c:9
@@ -7245,7 +7288,7 @@ msgstr ""
 
 #: ../../share/advertising/04-develop.pl_.c:10
 msgid ""
-"Mandrake Linux 8.2 is the ultimate development platform. Use the full power "
+"Mandrake Linux 8.2 is the ultimate development platform. Discover the power "
 "of the GNU gcc compiler as well as the best Open Source development "
 "environments"
 msgstr ""
@@ -7256,8 +7299,8 @@ msgstr ""
 
 #: ../../share/advertising/05-contcenter.pl_.c:10
 msgid ""
-"Mandrake Linux 8.2 provides a powerful tool to fully customize and configure "
-"your machine"
+"The Mandrake Linux 8.2 Control Center is a one-stop location for fully "
+"customizing and configuring your Mandrake system"
 msgstr ""
 
 #: ../../share/advertising/06-user.pl_.c:9
@@ -7266,8 +7309,9 @@ msgstr ""
 
 #: ../../share/advertising/06-user.pl_.c:10
 msgid ""
-"A total of 11 different user interfaces are provided, including GNOME 1.4, "
-"KDE 2.2.2, Window Maker, ..."
+"Mandrake Linux 8.2 provides 11 different graphical desktop environments and "
+"window managers to choose from including GNOME 1.4, KDE 2.2.2, Window Maker "
+"0.8, and the rest"
 msgstr ""
 
 #: ../../share/advertising/07-server.pl_.c:9
@@ -7276,8 +7320,8 @@ msgstr ""
 
 #: ../../share/advertising/07-server.pl_.c:10
 msgid ""
-"Transform your machine into a powerful server in a few clicks of your mouse: "
-"Web server, mail, firewall, router, file and print server, ..."
+"Transform your machine into a powerful server with just a few clicks of the "
+"mouse: Web server, email, firewall, router, file and print server, ..."
 msgstr ""
 
 #: ../../share/advertising/08-games.pl_.c:9
@@ -7286,8 +7330,8 @@ msgstr ""
 
 #: ../../share/advertising/08-games.pl_.c:10
 msgid ""
-"Mandrake Linux 8.2 provides the best in Open Source games - arcade, action, "
-"strategy, ..."
+"Mandrake Linux 8.2 provides the best Open Source games - arcade, action, "
+"cards, sports, strategy, ..."
 msgstr ""
 
 #: ../../share/advertising/09-MDKcampus.pl_.c:9
@@ -7296,9 +7340,9 @@ msgstr ""
 
 #: ../../share/advertising/09-MDKcampus.pl_.c:10
 msgid ""
-"Want to learn Linux in a simple, quick, and most of all free way? We provide "
-"free training on Linux, as well as a way to test your progress, via our "
-"online training center MandrakeCampus"
+"Would you like to learn Linux simply, quickly, and for free? MandrakeSoft "
+"provides free Linux training, as well as a way to test your progress, at "
+"MandrakeCampus -- our online training center"
 msgstr ""
 
 #: ../../share/advertising/10-MDKexpert.pl_.c:9
@@ -7308,8 +7352,8 @@ msgstr ""
 #: ../../share/advertising/10-MDKexpert.pl_.c:10
 msgid ""
 "Quality support from the Linux Community, and from MandrakeSoft, is just "
-"around the corner! Be an Expert, and you can share your knowledge and help "
-"others at our support website"
+"around the corner. And if you're already a Linux veteran, become an \"Expert"
+"\" and share your knowledge at our support website"
 msgstr ""
 
 #: ../../share/advertising/11-consul.pl_.c:9
@@ -7318,9 +7362,10 @@ msgstr ""
 
 #: ../../share/advertising/11-consul.pl_.c:10
 msgid ""
-"For all your IT projects, our consultants are there to understand your needs "
-"and offer solutions meeting your requirements. MandrakeSoft, from its strong "
-"experience as an editor, brings a true IT alternative"
+"For all of your IT projects, our consultants are ready to analyze your "
+"requirements and offer a customized solution. Benefit from MandrakeSoft's "
+"vast experience as a Linux producer to provide a true IT alternative for "
+"your business organization"
 msgstr ""
 
 #: ../../share/advertising/12-MDKstore.pl_.c:9
@@ -7329,14 +7374,14 @@ msgstr ""
 
 #: ../../share/advertising/12-MDKstore.pl_.c:10
 msgid ""
-"Our full range of Linux solutions, as well as special offers on our products "
-"and other 'goodies', is available on our e-store"
+"A full range of Linux solutions, as well as special offers on products and "
+"'goodies', are available online at our e-store"
 msgstr ""
 
 #: ../../share/advertising/13-Nvert.pl_.c:9
 msgid ""
-"To access to more commercial informations, please contact us on the "
-"following toll free:"
+"For more information on MandrakeSoft's Professional Services and commercial "
+"offerings, please dial the toll-free number that you will find here:"
 msgstr ""
 
 #: ../../share/advertising/13-Nvert.pl_.c:11
@@ -8969,81 +9014,81 @@ msgstr ""
 msgid "Choose the tool you want to use"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:37
+#: ../../standalone/drakxtv_.c:38
 msgid "Canada (cable)"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:37
+#: ../../standalone/drakxtv_.c:38
 msgid "USA (bcast)"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:37
+#: ../../standalone/drakxtv_.c:38
 msgid "USA (cable)"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:37
+#: ../../standalone/drakxtv_.c:38
 msgid "USA (cable-hrc)"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:38
+#: ../../standalone/drakxtv_.c:40
 msgid "China (bcast)"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:38
+#: ../../standalone/drakxtv_.c:40
 msgid "Japan (bcast)"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:38
+#: ../../standalone/drakxtv_.c:40
 msgid "Japan (cable)"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:39
+#: ../../standalone/drakxtv_.c:41
 msgid "East Europe"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:39
+#: ../../standalone/drakxtv_.c:41
 msgid "Ireland"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:39
+#: ../../standalone/drakxtv_.c:41
 msgid "West Europe"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:40
+#: ../../standalone/drakxtv_.c:42
 msgid "Australia"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:40
+#: ../../standalone/drakxtv_.c:42
 msgid "Newzealand"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:41
+#: ../../standalone/drakxtv_.c:43
 msgid "South Africa"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:42
+#: ../../standalone/drakxtv_.c:44
 msgid "Argentina"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:45
+#: ../../standalone/drakxtv_.c:47
 msgid ""
 "Please,\n"
 "type in your tv norm and country"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:47
+#: ../../standalone/drakxtv_.c:49
 msgid "TV norm :"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:48
+#: ../../standalone/drakxtv_.c:50
 msgid "Area :"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:52
+#: ../../standalone/drakxtv_.c:54
 msgid "Scanning for TV channels in progress ..."
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:60
+#: ../../standalone/drakxtv_.c:62
 msgid "Scanning for TV channels"
 msgstr ""
 
