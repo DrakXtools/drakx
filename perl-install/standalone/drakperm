@@ -46,6 +46,7 @@ each_index {
 
 #- widgets settings
 my $combo_perm = new Gtk2::Combo;
+$combo_perm->entry->set_editable(0);
 $combo_perm->set_popdown_strings(sort(keys %perm));
 
 sub add_callback {
