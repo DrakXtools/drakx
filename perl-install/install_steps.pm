@@ -460,9 +460,11 @@ Consoles 1,3,4,7 may also contain interesting information";
 	substInFile { 
 	    s/^(GreetString)=.*/$1=$welcome/;
 	    s/^(Language)=.*/$1=$LANG/;
-	    s/^(StdFont)=.*/$1=*,12,5,$charset,50,0/;
-	    s/^(FailFont)=.*/$1=*,12,5,$charset,75,0/;
-	    s/^(GreetFont)=.*/$1=*,24,5,$charset,50,0/;
+	    if ($charset) {
+		s/^(StdFont)=.*/$1=*,12,5,$charset,50,0/;
+		s/^(FailFont)=.*/$1=*,12,5,$charset,75,0/;
+		s/^(GreetFont)=.*/$1=*,24,5,$charset,50,0/;
+	    }
 	} "$o->{prefix}/usr/share/config/kdm/kdmrc";
 
     }
