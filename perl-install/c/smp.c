@@ -244,7 +244,8 @@ readType()
 
 extern int intelDetectSMP(void);
 
-static int intelDetectSMP_old(void)
+// old detection
+static int intelDetectSMP_mptable(void)
 {
     vm_offset_t paddr;
     int         where;
@@ -483,7 +484,7 @@ int detectSMP(void)
 	return isSMP;
 
 #ifdef __i386__
-    return isSMP = intelDetectSMP();
+    return isSMP = intelDetectSMP() || intelDetectSMP_mptable();
 #elif __sparc__
     return isSMP = sparcDetectSMP();
 #elif __alpha__

@@ -159,8 +159,7 @@ static int dmi_table(int fd, u32 base, int len, int num)
 		dm=(struct dmi_header *)data;
 		
 		if((dm->type == 4) && /*"Central Processor"*/(data[5] == 3)) {
-			if(/*Processor Manufacturer*/(data[7] != 0) &&
-			   (strncmp(dmi_processor_family(data[6]),"Unknown",7) != 0) && (data[6] != 0)) 
+			if(/*Processor Manufacturer*/data[7] != 0) 
 				processor++;
 		}
 
@@ -172,11 +171,6 @@ static int dmi_table(int fd, u32 base, int len, int num)
 	}
 	free(buf);
 	return processor;
-}
-
-int main(int argc, char *argv[])
-{
-	return intelDetectSMP();
 }
 
 int intelDetectSMP(void) {
@@ -215,5 +209,5 @@ int intelDetectSMP(void) {
 		}
 	}
 	close(fd);
-	return processor;
+	return (processor > 1);
 }
