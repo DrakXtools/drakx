@@ -309,7 +309,7 @@ N_("Resolution
 
    You can choose here resolutions and color depth between those available
 for your hardware. Choose the one that best suit your needs (you will be
-able to change that after installation though). Asample of the chosen
+able to change that after installation though). A sample of the chosen
 configuration is shown in the monitor."),
 
 configureX_xfree_and_glx => 
