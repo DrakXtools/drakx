@@ -314,7 +314,7 @@ sub lnx4win_postinstall {
     my $dir = "/dos/lnx4win";
     my $kernel = "$dir/vmlinuz";
     rename $kernel, "$kernel.old";
-    commands::cp("-f", "$prefix/boot/vmlinuz", $kernel);
+    commands::dd("if=$prefix/boot/vmlinuz", "of=$kernel");
 
     unlink "$dir/size.txt";
     unlink "$dir/swapfile.txt";
