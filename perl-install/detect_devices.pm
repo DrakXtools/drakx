@@ -132,7 +132,7 @@ sub get_usb_storage_info_24 {
 	}
 	add2hash($choices[0], $usbs{$host});
     }
-    complete_usb_storage_info(grep { exists $_->{usb_vendor} } @l);
+    complete_usb_storage_info(@l);
 
     @l;
 }
