@@ -210,7 +210,7 @@ END {
     if (defined $^I) {
 	foreach (@args) {
 	    warn "$_: closing children using emacs\n";
-	    system('emacs', '-l', 'unused/migrate-ugtk2-to-mygtk2.el', $_, '-f', 'my-close-children') 
+	    system('emacs', '-q', '-l', 'unused/migrate-ugtk2-to-mygtk2.el', $_, '-f', 'my-close-children') 
 	}
     }
 }
