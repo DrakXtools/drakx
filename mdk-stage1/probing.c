@@ -206,10 +206,8 @@ static void probe_that_type(enum driver_type type)
 					}
 #endif
 #ifdef ENABLE_USB
-					if (type == USB_CONTROLLERS) {
-						stg1_info_message("About to load driver for usb controller `%s'.", pcidb[i].module);
-						warning_insmod_failed(my_insmod(pcidb[i].module, USB_CONTROLLERS, NULL));
-					}
+					if (type == USB_CONTROLLERS)
+						my_insmod(pcidb[i].module, USB_CONTROLLERS, NULL);
 #endif
 				}
 			}
