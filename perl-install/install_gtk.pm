@@ -102,7 +102,7 @@ sub create_help_window {
 	$w->{rwindow}->set_usize($::helpwidth, $::helpheight);
 	$w->sync;
     }
-    my $pixmap = new Gtk::Pixmap(gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/help.xpm"));
+    my $pixmap = gtkxpm($w->{window}, "$ENV{SHARE_PATH}/help.xpm");
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::HBox(0,-2),
 		    0, gtkadd(gtksignal_connect(new Gtk::Button, clicked => sub { create_big_help($o) }), $pixmap),
@@ -193,11 +193,7 @@ sub create_logo_window {
     my $file = $o->{meta_class} eq 'desktop' ? "logo-mandrake-Desktop.xpm" : "logo-mandrake.xpm";
     $o->{meta_class} eq 'firewall' and $file = "logo-mandrake-Firewall.xpm";
     -r $file or $file = "$ENV{SHARE_PATH}/$file";
-    if (-r $file) {
-	my $ww = $w->{window};
-	my @logo = Gtk::Gdk::Pixmap->create_from_xpm($ww->window, $ww->style->bg('normal'), $file);
-	gtkadd($ww, new Gtk::Pixmap(@logo));
-    }
+    -r $file and gtkadd($w->{window}, gtkxpm($w->{window}, $file));
     $o->{logo_window} = $w;
 }
 
