@@ -31,6 +31,7 @@ our %alsa2oss =
      if_(arch() =~ /sparc/,
          "snd-sun-amd7930" => [ "unknown" ],
          "snd-sun-cs4231" => [ "unknown" ],
+         "snd-sun-dbri" => [ "unknown" ],
         ),
      "snd-ad1816a" => [ "ad1816" ], # isa
      "snd-ad1848"  => [ "ad1848", "pss" ], # isa
