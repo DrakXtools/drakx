@@ -67,10 +67,10 @@ sub installPackages() {
 				 qw(hcfpcimodem hsflinmodem ltmodem ipw2100),
 				 qw(nxclient), #- proprietary soft from powerpack
 				 qw(xinput), #- for some mice
-                                 qw(perl-Term-Readline-Gnu binutils emacs-X11 bash-completion),  #- allow debugging move
+                                 qw(perl-Term-Readline-Gnu binutils bash-completion),  #- allow debugging move
                                  qw(openssh-askpass-gnome),  #- openssh-askpass for mountloop doesn't allow to click on ok/cancel buttons
                                  qw(clanbomber freeciv-client freeciv-server crack-attack kdegames),  #- more games
-                                 qw(numlock shorewall clamav unison),
+                                 qw(numlock shorewall clamav unison mozilla),
                                  qw(xawtv zapping),  #- tv apps
                                  qw(scribus scribus-i18n-de scribus-i18n-fr),  #- John Jablonski says it's so much useful
                                                                  ],
@@ -81,7 +81,7 @@ sub installPackages() {
     $compssUsersChoice{qq(LOCALES"$_")} = 1 foreach lang::langsLANGUAGE({ all => 1 });
 
     #- we don't want those
-    foreach (qw(mdkonline)) {
+    foreach (qw(mdkonline quanta)) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_) or die "$_ not there anymore";
 	$pkg->set_rate(0);
     }
@@ -123,7 +123,7 @@ $::prefix = `make get_dest_livetree`;
 print "Making live in $::prefix directory.\n";
 
 eval { fs::umount("$::prefix/proc") };
-#eval { rm_rf($::prefix) };
+eval { rm_rf($::prefix) };
 output_p("$::prefix/etc/fstab", "none /proc proc defaults 0 0\n");
 
 installPackages();
@@ -188,13 +188,6 @@ unlink "$::prefix/usr/share/autostart/$_.desktop" foreach 'klipper', 'korgac', '
 
 update_gnomekderc("$::prefix/usr/share/config/kdesktoprc", ScreenSaver => (Lock => 'true'));
 
-#- remove CD-based applications from simplified menu
-substInFile {
-    foreach my $app (qw(kaudiocreator kscd k3b)) {
-        s|.*command="$app".*||;
-    }
-} "$::prefix/usr/lib/menu/simplified/mandrake_desk";
-
 #- remove "Login Manager" module from kcontrol, rpmdrake stuff
 unlink "$::prefix/usr/lib/menu/$_" foreach qw(kdebase-kdm rpmdrake);
 
@@ -207,6 +200,14 @@ substInFile {
 substInFile {
     s!/es/Starter.html/!/en/Starter.html/!;
 } "$::prefix/usr/share/mdk/mandrakegalaxy/mdkgalaxy-es.html";
+
+substInFile {
+    if (!/mimetypes=/) {
+	chomp;
+	$_ .= ' mimetypes="image/gif;image/jpeg;image/png;image/tiff;image/x-xbm;image/x-xpm;image/bmp;image/fits;image/pcx;image/pix;image/pnm;image/x-bmp"';
+	$_ .= ' kde_opt="InitialPreference=15"' . "\n";
+    }
+} "$::prefix/usr/lib/menu/gqview";
 
 {
     local $ENV{LC_ALL} = 'en_US'; #- update-menus doesn't work when there is no locale (aka locale "C")
