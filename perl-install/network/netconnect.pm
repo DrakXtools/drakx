@@ -508,8 +508,8 @@ Take a look at http://www.linmodems.org"),
                         
                         
                         if (my $driver = $netc->{autodetect}{modem}{$modem_name}{driver}) {
-                            $driver =~ /^Hcf:/ and $type = "hcfpcimodem";
-                            $driver =~ /^Hsf:/ and $type = "hsflinmodem";
+                            $driver =~ /^Hcf:/ and $type = "hcfmodem";
+                            $driver =~ /^Hsf:/ and $type = "hsfmodem";
                             $driver =~ /^LT:/  and $type = "ltmodem";
                             #- we need a better agreement to use list_modules::category2modules('network/slmodem')
                             member($driver, qw(slamr slusb)) and $type = "slmodem";
