@@ -430,7 +430,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		abnormal_termination = 1;
 	} else if (WIFEXITED(wait_status) && WEXITSTATUS(wait_status) == exit_value_proceed) {
 		kill(klog_pid, 9);
-		printf("proceeding...\n");
+		printf("proceeding, please wait...\n");
 		return 0;
         }
 
