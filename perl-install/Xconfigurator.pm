@@ -253,7 +253,7 @@ Do You want to use XFree 3.3 instead of XFree 4.0?"), 1) and $card->{use_xf4} = 
 
     if (!$::isStandalone && $card->{driver} eq "i810") {
 	require modules;
-	modules::load("agpgart"); };
+	eval { modules::load("agpgart"); };
     }
     $card;
 }
@@ -474,7 +474,7 @@ sub autoDefaultDepth($$) {
     my ($card, $wres_wanted) = @_;
     my ($best, $depth);
 
-    return 24 if $card->{identifier} =~ /SiS/; #- assume 24 bit event for 3D acceleration (not enabled currently).
+    return 24 if $card->{identifier} =~ /SiS/; #- assume 24 bit even for 3D acceleration (not enabled currently).
     return 16 if $card->{Utah_glx} || $card->{DRI_glx}; #- assume 16bit as most of them need 16.
     
     for ($card->{server}) {

@@ -574,7 +574,8 @@ sub configurePrinter {
 	$o->{printer}{mode} = $o->ask_from_list_([''], _("What printing system do you want to use?"),
 						 [ 'cups', 'lpr', __("Cancel") ],
 						);
-	$o->{printer}{mode} eq 'Cancel' and $o->{printer}{mode} = undef, return;
+	$o->{printer}{want} = $o->{printer}{mode} ne 'Cancel';
+	$o->{printer}{want} or $o->{printer}{mode} = undef, return;
     }
 
     $o->{printer}{PAPERSIZE} = $o->{lang} eq 'en' ? 'letter' : 'a4';

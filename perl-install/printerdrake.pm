@@ -327,9 +327,8 @@ sub main($$$;$) {
 
     while ($continue) {
 	if ($::beginner || !(scalar keys %{$printer->{configured} || {}})) {
-	    $queue = $printer->{configured}{lp} || $in->ask_yesorno(_("Printer"),
-				      _("Would you like to configure a printer?"),
-				      $printer->{want}) ? 'lp' : 'Done';
+	    $queue = $printer->{want} || $in->ask_yesorno(_("Printer"),
+							  _("Would you like to configure a printer?"), 0) ? 'lp' : 'Done';
 	} else {
 	    $queue = $in->ask_from_list_([''],
 _("Here are the following print queues.
