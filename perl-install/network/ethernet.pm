@@ -85,18 +85,18 @@ sub get_eth_cards() {
 #- output:
 #-  $device : only returned in case $interface was given it's $interface, but filtered by /eth[0-9+]/ : string : /eth[0-9+]/
 sub conf_network_card_backend {
-    my ($netc, $intf, $o_type, $o_interface, $o_ipadr, $o_netadr) = @_;
+    my ($netc, $intf, $type, $interface, $o_ipadr, $o_netadr) = @_;
     #-type =static or dhcp
 
-    $o_interface =~ /eth[0-9]+/ or die("the interface is not an ethx");
+    $interface =~ /eth[0-9]+/ or die("the interface is not an ethx");
     
     # FIXME: this is wrong regarding some wireless interfaces or/and if user play if ifname(1):
-    $netc->{NET_DEVICE} = $o_interface; #- one consider that there is only ONE Internet connection device..
+    $netc->{NET_DEVICE} = $interface; #- one consider that there is only ONE Internet connection device..
     
-    @{$intf->{$o_interface}}{qw(DEVICE BOOTPROTO NETMASK NETWORK ONBOOT)} = ($o_interface, $o_type, '255.255.255.0', $o_netadr, 'yes');
+    @{$intf->{$interface}}{qw(DEVICE BOOTPROTO NETMASK NETWORK ONBOOT)} = ($interface, $type, '255.255.255.0', $o_netadr, 'yes');
     
-    $intf->{$o_interface}{IPADDR} = $o_ipadr if $o_ipadr;
-    $o_interface;
+    $intf->{$interface}{IPADDR} = $o_ipadr if $o_ipadr;
+    $interface;
 }
 
 # automatic net aliases configuration
