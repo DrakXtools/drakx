@@ -95,7 +95,12 @@ __ "strip $tmp/{lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
 
 exit 0 if $ARGV[0];
 
-$size = `du -s $tmp | cut -f1` + 2048; #- add 2MB of free space
+if ($arch =~ /ppc/) {
+    #- xfs module on PPC is 4MB! - need room to unpack it
+    $size = `du -s $tmp | cut -f1` + 4096; #- add 4MB of free space
+} else {
+    $size = `du -s $tmp | cut -f1` + 2048; #- add 2MB of free space
+}
 
 mkdir_p($mnt);
 __ "$sudo umount $rescue 2>/dev/null";
