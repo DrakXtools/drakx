@@ -29,8 +29,10 @@ sub load {
 
     system("packdrake -x /modules/modules.cz* /tmp $name.o");
     -r "/tmp/$name.o" or die "can't find module $name\n";
-    system("/sbin/insmod /tmp/$name.o"); $? and die("insmod $name failed");
+    system("/sbin/insmod /tmp/$name.o");
+    my $retval = $?;
     system("rm /tmp/$name.o");
+    $retval and die("insmod $name failed");
 }
 
 !@ARGV || $ARGV[0] =~ /-h/ and die "usage: modprobe <module> [<options...>]\n";
