@@ -22,11 +22,11 @@ $(DIRS):
 install:
 	@install -d $(ROOTDEST)/misc/auto
 	@install make_mdkinst_stage2 $(ROOTDEST)/misc
+	@cp -rf `perl -Mpackdrake -le 'print $$INC{"packdrake.pm"}'` $(ROOTDEST)/misc || { echo "install rpmtools first!" ; exit 1; }
+	@cp -rf `perl -MURPM -le 'print $$INC{"URPM.pm"}' | sed s/URPM.pm//`URPM* $(ROOTDEST)/misc || { echo "install perl-URPM first!" ; exit 1; }
+	@cp -rf `perl -MURPM -le 'print $$INC{"URPM.pm"}' | sed s/URPM.pm//`auto/URPM $(ROOTDEST)/misc/auto || { echo "install perl-URPM first!" ; exit 1; }
 	@cd /usr/bin ; install packdrake $(ROOTDEST)/misc || { echo "packdrake is missing"; exit 1; }
 	@cd /usr/bin ; install gendistrib rpm2header $(ROOTDEST)/misc || { echo "install rpmtools first!" ; exit 1; }
-	@eval `perl -V:installvendorlib`;  cd $$installvendorlib ;  cp -rf packdrake.pm $(ROOTDEST)/misc || { echo "install rpmtools first!" ; exit 1; }
-	@eval `perl -V:installvendorarch`; cd $$installvendorarch ; cp -rf URPM* $(ROOTDEST)/misc || { echo "install perl-URPM first!" ; exit 1; }
-	@eval `perl -V:installvendorarch`; cd $$installvendorarch/auto ; cp -rf URPM $(ROOTDEST)/misc/auto || { echo "install perl-URPM first!" ; exit 1; }
 	@mkdir -p $(DEST)/usr/bin
 
 xhost+: %: %.c
