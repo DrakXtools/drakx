@@ -510,6 +510,7 @@ sub write_conf {
     }
     my @l = map { "scsi_hostadapter$_\n" } '', 1..$scsi-1 if $scsi;
     push @l, "ide-floppy" if detect_devices::ide_zips();
+    log::l("to put in modules @l");
 
     substInFile { 
 	$_ = '' if /^scsi_hostadapter/;
@@ -534,7 +535,7 @@ sub load_thiskind {
 
     grep {
 	$f->($_->{description}, $_->{driver}) if $f;
-	eval { load($_->{driver}) };
+	eval { load($_->{driver}, $type) };
 	$_->{error} = $@;
 
 	!($@ && $_->{try});
@@ -549,7 +550,7 @@ sub get_that_type {
 
     grep {
 	my $l = $drivers{$_->{driver}};
-	$l && $l->{type} eq $type && detect_devices::check($_);
+	$l && $l->{type} =~ /$type/ && detect_devices::check($_);
     } detect_devices::probeall('', $pcic);
 }
 

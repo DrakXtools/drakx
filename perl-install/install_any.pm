@@ -623,7 +623,7 @@ sub suggest_mount_points {
 	my $d = $handle->{dir};
 	my ($mnt) = grep { -e "$d/$l{$_}" } keys %l;
 	$mnt ||= (stat("$d/.bashrc"))[4] ? '/root' : '/home/user' . ++$user if -e "$d/.bashrc";
-	$mnt ||= (grep { -d $_ && (stat($_))[4] >= 500 } glob_("$d")) && '/home'; 
+	$mnt ||= (grep { -d $_ && (stat($_))[4] >= 500 && -e "$_/.bashrc" } glob_("$d")) && '/home'; 
 
 	next if $uniq && fsedit::mntpoint2part($mnt, \@parts);
 	$part->{mntpoint} = $mnt;

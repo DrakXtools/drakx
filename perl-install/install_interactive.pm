@@ -17,7 +17,29 @@ use devices;
 use modules;
 
 
-sub partitionWizard {
+sub partition_with_diskdrake {
+    my ($o, $hds) = @_;
+    my $ok = 1;
+    do {
+	diskdrake::main($hds, $o->{raid}, interactive_gtk->new, $o->{partitions});
+	delete $o->{wizard} and return partitionWizard($o);
+	my @fstab = fsedit::get_fstab(@$hds);
+	
+	unless (fsedit::get_root(\@fstab)) {
+	    $ok = 0;
+	    $o->ask_okcancel('', _("You must have a root partition.
+For this, create a partition (or click on an existing one).
+Then choose action ``Mount point'' and set it to `/'"), 1) or return;
+	}
+	if (!grep { isSwap($_) } @fstab) {
+	    $o->ask_warn('', _("You must have a swap partition")), $ok=0 if $::beginner;
+	    $ok &&= $::expert || $o->ask_okcancel('', _("You don't have a swap partition\n\nContinue anyway?"));
+	}
+    } until $ok;
+    1;
+}
+
+sub partitionWizardSolutions {
     my ($o, $hds, $fstab, $readonly) = @_;
     my @wizlog;
     my (@solutions, %solutions);
@@ -120,26 +142,7 @@ When sure, press Ok.")) or return;
     }
 
     if (!$readonly && ref($o) =~ /gtk/) { #- diskdrake only available in gtk for now
-	$solutions{diskdrake} =
-	  [ 0, _("Use diskdrake"), sub {
-		my $ok = 1;
-		do {
-		    diskdrake::main($hds, $o->{raid}, interactive_gtk->new, $o->{partitions}); 
-		    my @fstab = fsedit::get_fstab(@$hds);
-
-		    unless (fsedit::get_root(\@fstab)) {
-			$ok = 0;
-			$o->ask_okcancel('', _("You must have a root partition.
-For this, create a partition (or click on an existing one).
-Then choose action ``Mount point'' and set it to `/'"), 1) or return;
-		    }
-		    if (!grep { isSwap($_) } @fstab) {
-			$o->ask_warn('', _("You must have a swap partition")), $ok=0 if $::beginner;
-			$ok &&= $::expert || $o->ask_okcancel('', _("You don't have a swap partition\n\nContinue anyway?"));
-		    }
-		} until $ok;
-		1;
-	    } ];
+	$solutions{diskdrake} = [ 0, _("Use diskdrake"), sub { partition_with_diskdrake($o, $hds) } ];
     }
 
     $solutions{fdisk} =
@@ -158,6 +161,26 @@ When you are done, don't forget to save using `w'", partition_table_raw::descrip
 
     log::l("partitioning wizard log:\n", (map { ">>wizlog>>$_\n" } @wizlog));
     %solutions;
+}
+
+sub partitionWizard {
+    my ($o) = @_;
+
+    my %solutions = partitionWizardSolutions($o, $o->{hds}, $o->{fstab}, $o->{partitioning}{readonly});
+
+    my @solutions = sort { $b->[0] <=> $a->[0] } values %solutions;
+
+    my $level = $::beginner ? 2 : -9999;
+    my @sol = grep { $_->[0] >= $level } @solutions;
+    @solutions = @sol if @sol > 1;
+
+    my $ok; while (!$ok) {
+	my $sol = $o->ask_from_listf('', _("The DrakX Partitioning wizard found the following solutions:"), sub { $_->[1] }, \@solutions) or redo;
+	eval { $ok = $sol->[2]->() };
+	die if $@ =~ /setstep/;
+	$ok &&= !$@;
+	$@ and $o->ask_warn('', _("Partitioning failed: %s", $@));
+    }
 }
 
 #--------------------------------------------------------------------------------

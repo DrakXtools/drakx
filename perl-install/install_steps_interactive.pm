@@ -135,7 +135,7 @@ are you ready to answer that kind of questions?"),
 	delete $o->{installClass};
     } else {
 	my %c = (
-		 normal    => _("Normal"),
+		 normal    => _("Workstation"),
 		 developer => _("Development"),
 		 server    => _("Server"),
 		);
@@ -238,20 +238,10 @@ Continue at your own risk!"));
 			     \&partition_table_raw::description, 
 			     [ install_any::find_root_parts($o->{hds}, $o->{prefix}) ]) or die "setstep exitInstall\n";
 	install_any::use_root_part($o->{fstab}, $p, $o->{prefix});
+    } elsif ($::expert) {
+        install_interactive::partition_with_diskdrake($o, $o->{hds});
     } else {
-	my %solutions = install_interactive::partitionWizard($o, $o->{hds}, $o->{fstab}, $o->{partitioning}{readonly});
-	my @solutions = sort { $b->[0] <=> $a->[0] } values %solutions;
-
-	my $level = $::beginner ? 2 : -9999;
-	my @sol = grep { $_->[0] >= $level } @solutions;
-	@solutions = @sol if @sol > 1;
-
-	my $ok; while (!$ok) {
-	    my $sol = $o->ask_from_listf('', _("The DrakX Partitioning wizard found the following solutions:"), sub { $_->[1] }, \@solutions) or redo;
-	    eval { $ok = $sol->[2]->() };
-	    $ok &&= !$@;
-	    $@ and $o->ask_warn('', _("Partitioning failed: %s", $@));
-	}
+        install_interactive::partitionWizard($o);
     }
 }
 

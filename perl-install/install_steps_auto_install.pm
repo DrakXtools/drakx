@@ -16,7 +16,7 @@ use common qw(:common);
 use install_steps;
 use log;
 
-my $graphical = 1;
+my $graphical = 0;
 
 sub new {
     my ($type, $o) = @_;
