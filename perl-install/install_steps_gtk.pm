@@ -198,7 +198,7 @@ sub selectMouse {
 	    symlinkf($mouse->{device}, "/dev/mouse");
 	    c::setMouseLive($ENV{DISPLAY}, mouse::xmouse2xId($mouse->{XMOUSETYPE}), $mouse->{nbuttons} < 3);
 	}
-	install_gtk::test_mouse($mouse) and return;
+	mouse::test_mouse_install($mouse) and return;
 	$o->SUPER::selectMouse(1);
 	$mouse = $o->{mouse};
     } 
