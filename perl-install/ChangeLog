@@ -1,3 +1,261 @@
+2003/09/03  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* standalone/drakhelp: 
+	  - change to handle documentaion system other than drakxtools one (for
+	instance MandrakeGalaxy)
+
+2003/09/03  François Pons  <fpons at mandrakesoft.com>
+
+	* standalone/drakautoinst: fixed missing import of ugtk2
+
+	* mdk-stage1/init-data/msgboot-graphicallogo.img.bz2: created simple image
+	from 9.2 install isolinux pictures for floppy.
+
+2003/09/03  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* lang.pm: use command line parameter to specify traditional or simplified
+	style
+	for Chinput
+
+2003/09/03  Pixel  <pixel at mandrakesoft.com>
+
+	* pixmaps/mouse_3b_middle.png, pixmaps/mouse_3b_left.png,
+	pixmaps/mouse_3b.xpm, pixmaps/mouse_3b_mini.xpm, pixmaps/mouse_left.xpm,
+	pixmaps/mouse_3b+.png, pixmaps/mouse_3b+_middle.png,
+	pixmaps/mouse_middle.xpm, pixmaps/mouse_3b.png,
+	pixmaps/mouse_2b_right.png, pixmaps/arrow_down.xpm,
+	pixmaps/arrow_up.xpm, pixmaps/mouse_2b_left.png,
+	pixmaps/mouse_right.xpm, pixmaps/mouse_3b+_mini.xpm,
+	pixmaps/mouse_3b+.xpm, pixmaps/arrow_up.png, pixmaps/mouse_2b.png,
+	pixmaps/arrow_down.png, pixmaps/mouse_3b_right.png, mouse.pm: 
+	  - much cleanup in test_mouse()
+	  - new images for mouse test (thanks to Jerome Villette)
+
+	* install_steps_interactive.pm, install_steps_stdio.pm,
+	install_steps_auto_install.pm, install_steps_newt.pm, install_steps.pm: 
+	  - move call to ->charsetChanged from install_steps_interactive to
+	install_steps
+	so that we can use it in install_steps_auto_install_non_interactive
+	  - don't overload ->selectLanguage to call lang::load_console_font(),
+	overload ->charsetChanged instead
+
+	* diskdrake/hd_gtk.pm, diskdrake/interactive.pm: require resize_fat::main
+	when needed (fix bug #5204)
+
+2003/09/03  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Last untranslated string.  Rework banner with
+	title ala rpmdrake.
+	Fix some untranslated strings - Arpad Biro
+
+2003/09/02  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: fixed some errors in license message
+
+2003/09/02  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/09/02  François Pons  <fpons at mandrakesoft.com>
+
+	* install_steps_gtk.pm: fixed duplicate entries in src architecture.
+
+	* pkgs.pm: fixed XFree86-75dpi-fonts not available (seems like a problem
+	with length of
+	rpmsrate computation, strange as it fails now and not before).
+
+2003/09/02  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/eu.po: updated Basque and Farsi files
+	updated po files
+
+	* share/po/fa.po: updated Basque and Farsi files
+
+	* share/po/hu.po: updated po files
+
+	* share/fonts.tar.bz2: updated 12x13 bitmap font (replaced hebrew glyphs
+	with a copy from
+	nachlieli font, under gpl)
+
+	* share/po/fi.po, share/po/pt.po: Updated Finnish and Portuguese files
+
+2003/09/02  Pixel  <pixel at mandrakesoft.com>
+
+	* lang.pm: do not disable arabic completly (tis very ugly to do this,
+	better remove the
+	arabic choice!)
+
+	* fs.pm: add description for option "umask=0" (bug #4310)
+
+	* share/po/Makefile: do not translate in arabic during install since
+	there's no font available
+
+2003/09/02  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: Fixed major number of libsane-hpoj.
+
+	* standalone/printerdrake: Prevent main window crash when queue list gets
+	empty by deleting all
+	print queues.
+
+2003/09/02  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: update french translation
+
+	* share/po/br.po: update
+
+2003/09/01  gbeauchesne
+
+	* drakxtools.spec: Fix lsnsetdrake on AMD64
+
+2003/09/01  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* ugtk2.pm: _ask_file: don't forget to overwrite $o->{window} as well or
+	else
+	it will be ->show'ed as a blank window (#5083)
+
+2003/09/01  keld
+
+	* share/po/da.po: Update
+	soft/urpmi/po/da.po gi/perl-install/share/po/da.po
+
+2003/09/01  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/zh_CN.po, share/po/ru.po, share/po/de.po, share/po/vi.po,
+	share/po/sk.po, share/po/sq.po, share/po/az.po, share/po/da.po,
+	share/po/uk.po: updated Azeri, Albanian, Ucrainian, Vietnamese and
+	Chinese files
+
+	* share/po/pt.po: updated Portuguese file
+
+	* share/po/uz@Cyrl.po, share/po/uz.po, share/po/cs.po: updated Czech and
+	Uzbek files
+
+	* share/po/bs.po, share/po/nb.po: updated Bosnian and Nrowegian files
+
+	* share/po/he.po: updated Hebrew file
+
+2003/09/01  Pixel  <pixel at mandrakesoft.com>
+
+	* pkgs.pm: oops, really kill gconfd silently
+	don't warn when killing /usr/lib/gconfd-2 when runs in background
+
+	* tools/ntp_servers.pl: update to new timezone.pm and adapt to new web
+	page listing ntp servers
+
+	* timezone.pm: update stratum 2 ntp servers
+
+	* install_steps.pm, any.pm: chksession gives GNOME for gnome, not Gnome
+
+2003/09/01  siegel
+
+	* share/po/de.po: updates german translation
+
+2003/09/01  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/printerdrake: do not explicitely reject embedding there, it
+	has to be done in mcc.
+	else, mcc wait forever for rpmdrake to embed in, then display an error
+	dialog explaining that rpmdrake has failled (since it exited before
+	displaying anything in mcc...)
+
+2003/08/31  Pixel  <pixel at mandrakesoft.com>
+
+	* fs.pm: don't check ext3 filesystems nor mount them as ext2 during
+	upgrade (bug #5067)
+
+2003/08/31  tpittich
+
+	* share/po/sk.po: updated slovak translation
+
+2003/08/31  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakedm: in non expert mode, only display the list of
+	*installed* display managers.
+	(interface team request)
+	if no dm is installed, then switch back to expert mode behaviour and
+	display
+	all dm and install them if needed.
+	explanations now work again thanks to pixel, no need to duplicate them
+
+	* share/po/fr.po: fix draksec french translation
+
+	* standalone/drakfloppy: fix dialogs height: replace"small" option by
+	"height" & "weight" ones
+	rationale: make thecommon path be the easiest one to set up (and make
+	the
+	uncommon path be the hardest one to follow)
+
+	* standalone/harddrake2: harddrake2 help dialog: use the new scrolled
+	dialog API for scrolled labels
+	fix dialogs height: replace"small" option by "height" & "weight" ones
+	rationale: make thecommon path be the easiest one to set up (and make
+	the
+	uncommon path be the hardest one to follow)
+
+	* drakxtools.spec: 9.2-6mdk
+	conflicts with older drakxtools doc due to new ctxhelp (drakhelp being
+	broken
+	until ctxhelp module is splited out as perl-MDK-Doc)
+	requires perl-Gtk2 >= 0.95-6mdk for working XSetInputFocus()
+	since we renewed network profiles feature, we shall require netprofile
+	for
+	drakconnect
+
+	* ugtk2.pm (create_dialog) do not scroll labels by default
+	fix dialogs height: replace"small" option by "height" & "weight" ones
+	rationale: make thecommon path be the easiest one to set up (and make
+	the
+	uncommon path be the hardest one to follow)
+
+	* standalone/drakconnect: fix profiles list refreshing
+	fix dialogs height: replace"small" option by "height" & "weight" ones
+	rationale: make thecommon path be the easiest one to set up (and make
+	the
+	uncommon path be the hardest one to follow)
+
+2003/08/30  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: current updates
+
+2003/08/30  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Updated
+
+2003/08/30  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po, share/po/pt.po: updated Estonian and Portuguese files
+
+	* share/po/hu.po: updated Hungarian file
+
+2003/08/30  Pixel  <pixel at mandrakesoft.com>
+
+	* Makefile: since XFree86-VGA16-3.3.6-29mdk is bad, insist on having
+	XFree86-VGA16 28mdk instead
+
+2003/08/30  Till Kamppeter  <till at mandrakesoft.com>
+
+	* standalone/icons/wiz_printerdrake.png: Updated head image for
+	add-printer wizard to have the new printerdrake icon.
+
+	* pixmaps/printer_del.png, pixmaps/printer_conf.png,
+	pixmaps/slpash-drakeprint-2.png, pixmaps/about.png,
+	pixmaps/unselected.png, pixmaps/cups_config.png,
+	pixmaps/printer_add.png, pixmaps/selected.png, pixmaps/refresh.png,
+	pixmaps/redhat-config-users.png, pixmaps/printerdrake.png,
+	pixmaps/printer_default.png, pixmaps/help.png: Re-uploaded binary files
+	added with "cvs add -kb ...".
+	Binary files uploaded without "cvs add -kb ...", removed for re-upload.
+
+2003/08/29  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: set {perImageAppend} to the append= line from the default
+	entry or the first image= entry
+
+	* ugtk2.pm: set_minmax_width was commented which caused the individual
+	package selection
+	tree to be to large (fix bug #4548 #4865)
+
 2003/08/30  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
 
 	* share/po/pl.po: Updated
@@ -20413,7 +20671,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.828 2003/08/28 18:05:09 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.829 2003/08/30 01:04:19 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
