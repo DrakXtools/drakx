@@ -693,12 +693,12 @@ sub write_conf {
     my @l = ();
     push @l, 'ide-floppy' if detect_devices::ide_zips();
     push @l, 'bttv' if grep { $_->{driver} eq 'bttv' } detect_devices::probeall();
-    my $l = join '|', @l;
+    my $l = join '|', map { '^\s*'.$_.'\s*$' } @l;
     log::l("to put in modules ", join(", ", @l));
 
     substInFile { 
-	$_ = '' if /$l/;
-	$_ = join '', map { "$_\n" } @l if eof;
+	$_ = '' if $l && /$l/;
+	$_ .= join '', map { "$_\n" } @l if eof;
     } "$prefix/etc/modules";
 }
 
