@@ -86,7 +86,7 @@ sub real_main {
       my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $need_restart_network);
       my ($isdn, $isdn_name, $isdn_type, %isdn_cards);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
-      my ($module, $auto_ip, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
+      my ($module, $auto_ip, $protocol, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
       my $ethntf = {};
       my $db_path = "$::prefix/usr/share/apps/kppp/Provider";
@@ -865,7 +865,7 @@ Modifying the fields below will override this configuration."),
                    {
                     pre => sub  {
                         $find_lan_module->();
-                        $auto_ip = $l10n_lan_protocols{defined $auto_ip ? ($auto_ip ? 'dhcp' : 'static') : $ethntf->{BOOTPROTO}} || 0;
+                        $protocol = $l10n_lan_protocols{defined $auto_ip ? ($auto_ip ? 'dhcp' : 'static') : $ethntf->{BOOTPROTO}} || 0;
                     },
                     name => sub { 
                         my $_msg = N("Zeroconf hostname resolution");
@@ -873,10 +873,10 @@ Modifying the fields below will override this configuration."),
                           N("The following protocols can be used to configure an ethernet connection. Please choose the one you want to use")
                     },
                     data => sub {
-                        [ { val => \$auto_ip, type => "list", list => [ sort values %l10n_lan_protocols ] } ];
+                        [ { val => \$protocol, type => "list", list => [ sort values %l10n_lan_protocols ] } ];
                     },
                     post => sub {
-                        $auto_ip = $auto_ip ne $l10n_lan_protocols{static} || 0;
+                        $auto_ip = $protocol ne $l10n_lan_protocols{static} || 0;
                         return 'lan_intf';
                     },
                    },
