@@ -48,7 +48,7 @@ sub new($$) {
     my $old = $SIG{__DIE__};
     $SIG{__DIE__} = sub { $_[0] !~ /my_gtk\.pm/ and goto $old };
 
-    $ENV{DISPLAY} = $o->{display} || ":0";
+    $ENV{DISPLAY} ||= $o->{display} || ":0";
     unless ($::testing) {
 	$my_gtk::force_focus = $ENV{DISPLAY} eq ":0";
 
@@ -599,12 +599,12 @@ style "default-font"
 {
    fontset = "$font"
 }
-style "steps"
+style "small-font"
 {
    fontset = "$font2"
 }
 widget "*" style "default-font"
-widget "*Steps*" style "steps"
+widget "*Steps*" style "small-font"
 
 ));
    }

@@ -658,7 +658,7 @@ sub addUser {
     my ($o, $clicked) = @_;
     my $u = $o->{user} ||= {};
     if ($::beginner || $o->{security} < 1) {
-	add2hash_($u, { name => "mandrake", password => "mandrake", realname => "default", icon => translate('automagic') });
+	add2hash_($u, { name => "mandrake", password => "mandrake", realname => "default", icon => 'automagic' });
 	$o->{users} ||= [ $u ];
     }
     $u->{password2} ||= $u->{password} ||= "";
@@ -666,7 +666,9 @@ sub addUser {
     my @fields = qw(realname name password password2);
     my @shells = install_any::shells($o);
 
-    if (($o->{security} >= 2 && !$::beginner || $clicked) && $o->ask_from_entries_refH(
+    if (($o->{security} >= 2 && !$::beginner || $clicked)) {
+	$u->{icon} = translate($u->{icon});
+	if ($o->ask_from_entries_refH(
         [ _("Add user"), _("Accept user"), $o->{security} >= 4 && !@{$o->{users}} ? () : _("Done") ],
         _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @{$o->{users}})) : ''),
         [ 
@@ -696,9 +698,10 @@ sub addUser {
 	    return 0;
 	},
     )) {
-	push @{$o->{users}}, $o->{user};
-	$o->{user} = {};
-	goto &addUser;
+	    push @{$o->{users}}, $o->{user};
+	    $o->{user} = {};
+	    goto &addUser;
+	}
     }
     install_steps::addUser($o);
 }

@@ -9,7 +9,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
     common     => [ qw(__ even odd arch min max sqr sum and_ or_ sign product bool invbool listlength bool2text bool2yesno text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines deref) ],
     functional => [ qw(fold_left compose map_index grep_index map_each grep_each list2kv map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
     file       => [ qw(dirname basename touch all glob_ cat_ output symlinkf chop_ mode typeFromMagic expand_symlinks) ],
-    system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh setVarsInCsh substInFile availableRam availableMemory removeXiBSuffix template2file formatTime unix2dos) ],
+    system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh setVarsInCsh substInFile availableRam availableMemory removeXiBSuffix template2file formatTime unix2dos setVirtual) ],
     constant   => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
@@ -478,6 +478,17 @@ sub typeFromMagic($@) {
 
 sub availableRam()    { sum map { /(\d+)/ } grep { /^(MemTotal):/           } cat_("/proc/meminfo"); }
 sub availableMemory() { sum map { /(\d+)/ } grep { /^(MemTotal|SwapTotal):/ } cat_("/proc/meminfo"); }
+
+sub setVirtual($) {
+    my $vt = '';
+    local *C;
+    sysopen C, "/dev/console", 2 or die "failed to open /dev/console: $!";
+    ioctl(C, c::VT_GETSTATE(), $vt) or die "ioctl VT_GETSTATE failed";
+    ioctl(C, c::VT_ACTIVATE(), $_[0]) or die "ioctl VT_ACTIVATE failed";
+    ioctl(C, c::VT_WAITACTIVE(), $_[0]) or die "ioctl VT_WAITACTIVE failed";
+    unpack "S", $vt;
+}
+
 
 sub removeXiBSuffix($) {
     local $_ = shift;

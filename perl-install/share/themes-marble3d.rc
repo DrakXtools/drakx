@@ -182,6 +182,16 @@ style "background"
 style "steps"
 {
   fg[NORMAL] = { 0.40, 0.30, 0.20 }
+
+  engine "pixmap" {
+    image 
+      {
+	function        = FLAT_BOX
+	recolorable     = TRUE
+	file            = "marble3d-bg1.png"
+	stretch         = FALSE
+      }
+  }
 }
 
 style "stepsReachable"

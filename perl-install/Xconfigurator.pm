@@ -19,16 +19,6 @@ my ($prefix, %monitors);
 
 sub getVGAMode($) { $_[0]->{card}{vga_mode} || $vgamodes{"640x480x16"}; }
 
-sub setVirtual($) {
-    my $vt = '';
-    local *C;
-    sysopen C, "/dev/console", 2 or die "failed to open /dev/console: $!";
-    ioctl(C, c::VT_GETSTATE(), $vt) or die "ioctl VT_GETSTATE failed";
-    ioctl(C, c::VT_ACTIVATE(), $_[0]) or die "ioctl VT_ACTIVATE failed";
-    ioctl(C, c::VT_WAITACTIVE(), $_[0]) or die "ioctl VT_WAITACTIVE failed";
-    unpack "S", $vt;
-}
-
 sub readCardsDB {
     my ($file) = @_;
     my ($card, %cards);

@@ -919,7 +919,7 @@ sub install($$$;$$) {
 	    foreach @transToInstall;
 
 	my $close = sub {
-#	    c::headerFree(delete $_->{header}) foreach @transToInstall;
+	    c::headerFree(delete $_->{header}) foreach @transToInstall;
 	    c::rpmtransFree($trans);
 	};
 
@@ -935,12 +935,12 @@ sub install($$$;$$) {
 	my @probs = c::rpmRunTransactions($trans, $callbackOpen, $callbackClose, \&installCallback, 0);
 	log::l("rpmRunTransactions done");
 
-	my @badpkgs = map { $_->{file} } grep { !packageFlagInstalled($_) } @transToInstall;
-	@badpkgs > 0 and
-	  cdie "error installing package list: " . join("\n", @badpkgs), sub {
-	      &$close();
-	      c::rpmdbClose($db);
-	  };
+	if (my @badpkgs = grep { !packageFlagInstalled($_) } @transToInstall) {
+	    cdie "error installing package list: " . join("\n", map { $_->{file} } @badpkgs), sub {
+		&$close();
+		c::rpmdbClose($db);
+	    };
+	}
 	#- check for uninstalled package, avoid keeping them selected to avoid trying installing them
 	foreach (@transToInstall) {
 	    if (!packageFlagInstalled($_)) {

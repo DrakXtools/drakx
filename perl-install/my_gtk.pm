@@ -327,14 +327,15 @@ sub _create_window($$) {
 
     $w->signal_connect(focus => sub { Gtk->idle_add(sub { $w->ensure_focus($_[0]); 0 }, $_[1]) }) if $w->can('ensure_focus');
 
-    $w->set_events("pointer_motion_mask");
-    my $signal;
-    $signal = $w->signal_connect(motion_notify_event => sub {
-	delete $o->{mouse}{unsafe};
-	log::l("unsetting unsafe mouse");
-	$w->signal_disconnect($signal);
-    }) if $o->{mouse}{unsafe};
-
+    if ($::o->{mouse}{unsafe}) {
+	$w->set_events("pointer_motion_mask");
+	my $signal;
+	$signal = $w->signal_connect(motion_notify_event => sub {
+	    delete $::o->{mouse}{unsafe};
+	    log::l("unsetting unsafe mouse");
+	    $w->signal_disconnect($signal);
+	});
+    }
     $w->signal_connect(key_press_event => sub {
 	my $d = ${{ 65470 => 'help',
 	            65481 => 'next',

@@ -121,7 +121,6 @@ sub setupSCSI {
 #------------------------------------------------------------------------------
 sub doPartitionDisks {
     my ($o, $hds) = @_;
-    return if $::testing;
 
     if ($o->{lnx4win}) {
 	my @l = sort { $a->{device_windobe} cmp $b->{device_windobe} } 
@@ -144,7 +143,9 @@ sub doPartitionDisks {
 
 	push @{$real_part->{loopback}}, $root, $swap;	
     } else {
-	partition_table::write($_) foreach @$hds;
+	unless ($::testing) {
+	    partition_table::write($_) foreach @$hds;
+	}
     }
 }
 sub doPartitionDisksLnx4winDev {}

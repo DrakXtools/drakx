@@ -11,6 +11,7 @@ print '
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/ioctl.h>
+#include <sys/resource.h>
 #include <sys/stat.h>
 #include <sys/utsname.h>
 #include <sys/mount.h>
@@ -127,6 +128,25 @@ total_sectors(fd)
   {
     long s;
     RETVAL = ioctl(fd, BLKGETSIZE, &s) == 0 ? s : 0;
+  }
+  OUTPUT:
+  RETVAL
+
+void
+unlimit_core()
+  CODE:
+  {
+    struct rlimit rlim = { RLIM_INFINITY, RLIM_INFINITY };
+    setrlimit(RLIMIT_CORE, &rlim);
+  }
+
+int
+getlimit_core()
+  CODE:
+  {
+    struct rlimit rlim;
+    getrlimit(RLIMIT_CORE, &rlim);
+    RETVAL = rlim.rlim_cur;
   }
   OUTPUT:
   RETVAL

@@ -145,7 +145,7 @@ $o = $::o = {
 #-    security => 2,
     shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash ksh) ],
     authentication => { md5 => 1, shadow => 1 },
-    lang         => 'en',
+    lang         => 'fr_FR',
     isUpgrade    => 0,
     toRemove     => [],
     toSave       => [],
@@ -334,6 +334,8 @@ sub formatPartitions {
 	install_any::getAndSaveFile("lnx4win/$_", "$d/$_") foreach qw(loadlin.exe linux.pif lnx4win.exe lnx4win.ico);
     }
 
+    chdir "$o->{prefix}";
+
     #-noatime option for ext2 fs on laptops (do not wake up the hd)
     #-	 Do  not  update  inode  access times on this
     #-	 file system (e.g, for faster access  on  the
@@ -489,14 +491,18 @@ sub exitInstall { $o->exitInstall(getNextStep() eq "exitInstall") }
 #-######################################################################################
 sub main {
     $SIG{__DIE__} = sub { chomp(my $err = $_[0]); log::l("warning: $err") };
-    $SIG{SEGV} = sub { my $msg = "segmentation fault: seems like memory is missing as the install crashes"; print "$msg\n"; log::l($msg);
-		       require install_steps_auto_install;
-		       install_steps_auto_install::errorInStep();
-		   };
+#    $SIG{SEGV} = sub { my $msg = "segmentation fault: seems like memory is missing as the install crashes"; print "$msg\n"; log::l($msg);
+#			$o->ask_warn('', $msg);
+#			setVirtual(1);
+#			require install_steps_auto_install;
+#			install_steps_auto_install::errorInStep();
+#		    };
     $ENV{SHARE_PATH} ||= "/usr/share";
     $ENV{DURING_INSTALL} = 1;
 
     $::beginner = $::expert = $::g_auto_install = 0;
+
+    c::unlimit_core();
 
     my ($cfg, $patch);
     my %cmdline; map { 

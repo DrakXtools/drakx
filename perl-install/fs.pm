@@ -349,6 +349,8 @@ sub write_fstab($;$$) {
 	  isTrueFS($_) and ($freq, $passno) = (1, ($_->{mntpoint} eq '/') ? 1 : 2);
 	  isNfs($_) and $dir = '', $options = $_->{options} || 'ro,nosuid,rsize=8192,wsize=8192';
 	  isFat($_) and $options = $_->{options} || "user,exec,umask=0";
+
+	  require fsedit;
 	  isReiserfs($_) && $_ == fsedit::get_root($fstab, 'boot') and add_options($options, "notail");
 
 	  my $dev = isLoopback($_) ?
