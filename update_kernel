@@ -68,18 +68,12 @@ echo "done."
 
 NETWORK_MODULES="  $NETWORK_DRIVERS"
 CDROM_MODULES="    $CD_DRIVERS"
-if [ "$ARCH" == "ppc" ]; then
-    HD_MODULES="       $DOSMODULES $SCSI_DRIVERS $DISK_DRIVERS loop.o isofs.o reiserfs.o hfs.o"
-else
-    HD_MODULES="       $DOSMODULES $SCSI_DRIVERS $DISK_DRIVERS loop.o isofs.o reiserfs.o"
-fi
+HD_MODULES="       $DOSMODULES $SCSI_DRIVERS $DISK_DRIVERS loop.o isofs.o reiserfs.o"
+[ "$ARCH" == "ppc" ] && HD_MODULES="$HDMODULES hfs.o"
 PCMCIA_MODULES="   $DOSMODULES $PCMCIA_DRIVERS"
 BIG_MODULES="      $BIG_DRIVERS"
-if [ "$ARCH" == "ppc" ]; then
-    ALL_MODULES="      $DOSMODULES $ALL_DRIVERS loop.o isofs.o reiserfs.o hfs.o"
-else
-    ALL_MODULES="      $DOSMODULES $ALL_DRIVERS loop.o isofs.o reiserfs.o"
-fi
+ALL_MODULES="      $DOSMODULES $ALL_DRIVERS loop.o isofs.o reiserfs.o"
+[ "$ARCH" == "ppc" ] && ALL_MODULES="$ALL_MODULES hfs.o"
 NOT_USEFULL_IN_STAGE1="nls_*.o parport_probe.o raid*.o serial.o smbfs.o usb-*.o"
 
 GENERIC_MODULES="isa-pnp.o floppy.o"
