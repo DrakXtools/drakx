@@ -249,6 +249,18 @@ sub setAutologin {
 	      { USER => $user, AUTOLOGIN => bool2yesno($user), EXEC => "/usr/X11R6/bin/startx" });
 }
 
+sub rotate_log {
+    my ($f) = @_;
+    if (-e $f) {
+	my $i = 1;
+	for (; -e "$f$i" || -e "$f$i.gz"; $i++) {}
+	rename $f, "$f$i";
+    }
+}
+sub rotate_logs {
+    my ($prefix) = @_;
+    rotate_log("$prefix/root/$_") foreach qw(ddebug.log install.log);
+}
 
 sub writeandclean_ldsoconf {
     my ($prefix) = @_;
