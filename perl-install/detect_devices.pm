@@ -219,7 +219,7 @@ sub hasModem($) {
 }
 
 sub hasMousePS2() {
-    my $t; sysread(tryOpen("psaux"), $t, 256) != 1 || $t ne "\xFE";
+    my $t; sysread(tryOpen("psaux") || return, $t, 256) != 1 || $t ne "\xFE";
 }
 
 #-######################################################################################
