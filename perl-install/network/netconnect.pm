@@ -146,12 +146,12 @@ If you don't want to use the auto detection, deselect the checkbox.
     $conf{isdn} = $netc->{autodetect}{isdn}{driver} ? 1 : 0;
 
     my @l = (
-	  [N("Normal modem connection") . if_($netc->{autodetect}{modem}, " - " . N("detected on port %s", $netc->{autodetect}{modem})), \$conf{modem}],
-	  [N("Winmodem connection") . if_($netc->{autodetect}{winmodem}, " - " . N("detected")), \$conf{winmodem}],
-	  [N("ISDN connection") . if_($netc->{autodetect}{isdn}{description}, " - " . N("detected %s", $netc->{autodetect}{isdn}{description})), \$conf{isdn}],
-	  [N("ADSL connection") . if_($netc->{autodetect}{adsl}, " - " . N("detected")), \$conf{adsl}],
-	  [N("Cable connection") . if_($netc->{autodetect}{cable}, " - " . N("cable connection detected")), \$conf{cable}],
-	  [N("LAN connection") . if_($netc->{autodetect}{lan}, " - " . N("ethernet card(s) detected")), \$conf{lan}]
+	  [ join('', N("Normal modem connection"), if_($netc->{autodetect}{modem}, " - " . N("detected on port %s", $netc->{autodetect}{modem}))), \$conf{modem} ],
+	  [ join('', N("Winmodem connection"), if_($netc->{autodetect}{winmodem}, " - " . N("detected"))), \$conf{winmodem} ],
+	  [ join('', N("ISDN connection"), if_($netc->{autodetect}{isdn}{description}, " - " . N("detected %s", $netc->{autodetect}{isdn}{description}))), \$conf{isdn} ],
+	  [ join('', N("ADSL connection"), if_($netc->{autodetect}{adsl}, " - " . N("detected"))), \$conf{adsl} ],
+	  [ join('', N("Cable connection"), if_($netc->{autodetect}{cable}, " - " . N("cable connection detected"))), \$conf{cable} ],
+	  [ join('', N("LAN connection"), if_($netc->{autodetect}{lan}, " - " . N("ethernet card(s) detected"))), \$conf{lan} ]
 	 );
     eval { $in->ask_from_({ title => N("Network Configuration Wizard"),
 			    messages => N("Choose the connection you want to configure"),
@@ -221,10 +221,10 @@ If you don't want to use the auto detection, deselect the checkbox.
       $success = ask_connect_now($netc->{internet_cnx_choice});
 
   step_3:
-    my $m = $success ? N("Congratulations, the network and Internet configuration is finished.
+    my $m = $success ? join(N("Congratulations, the network and Internet configuration is finished.
 
-") . if_($::isStandalone && $in->isa('interactive_gtk'),
-N("After this is done, we recommend that you restart your X environment to avoid any hostname-related problems.")) : 
+"), if_($::isStandalone && $in->isa('interactive_gtk'),
+N("After this is done, we recommend that you restart your X environment to avoid any hostname-related problems."))) : 
       N("Problems occured during configuration.
 Test your connection via net_monitor or mcc. If your connection doesn't work, you might want to relaunch the configuration.");
     $::Wizard_no_previous = 1;
