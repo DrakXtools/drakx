@@ -101,7 +101,7 @@ sub new_editable_combo {
 sub set_default_tip {
 	my ($entry, $default, $opt) = @_;
      my $help = $security::help::help{$opt};
-	gtkset_tip(new Gtk2::Tooltips, $entry, join("\n", if_($help, $help), if_($default, N("(default value: %s)", $default))));
+	gtkset_tip(new Gtk2::Tooltips, $entry, join("\n", if_($help, formatAlaTeX($help)), if_($default, N("(default value: %s)", $default))));
 }
 
 my $msec = new security::msec;
