@@ -388,7 +388,7 @@ sub build_notebook {
                 $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY};
             }
             if ($intf->{BOOTPROTO} ne 'dhcp') {
-                $_->set_sensitive(0) foreach $gui->{netc}{dhcp_client}, $gui->{intf}{DHCP_TIMEOUT}, $gui->{intf_bool}{PEERDNS}, $gui->{intf_bool}{PEERYP}, $gui->{intf_bool}{PEERNTPD}
+                $_->set_sensitive(0) foreach $gui->{netc}{dhcp_client}, $gui->{intf}{DHCP_TIMEOUT}, $gui->{intf_bool}{PEERDNS}, $gui->{intf_bool}{PEERYP}, $gui->{intf_bool}{PEERNTPD};
             }
 	} else {
 	    $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}, $gui->{netc}{dhcp_client}, $gui->{intf}{DHCP_TIMEOUT}, $gui->{intf_bool}{PEERDNS}, $gui->{intf_bool}{PEERYP}, $gui->{intf_bool}{PEERNTPD};
