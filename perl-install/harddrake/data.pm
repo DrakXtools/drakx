@@ -8,17 +8,17 @@ use class_discard;
 our (@ISA, @EXPORT_OK) = (qw(Exporter), (qw(version tree)));
 our ($version, $sbindir, $bindir) = ("1.1.6", "/usr/sbin", "/usr/bin");
 
+my @devices = detect_devices::probeall(1);
+
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown {
-    grep { ($_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|Printer|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|STORAGE_IDE|BRIDGE|NETWORK/) && ($_->{driver} ne 'scanner') } detect_devices::probeall(1);
+    grep { ($_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|Printer|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|STORAGE_IDE|BRIDGE|NETWORK/) && ($_->{driver} ne 'scanner') } @devices;
 }
 
 
 # tree format ("CLASS_ID", "type", "type_icon", configurator, detect_sub)
 # NEVER, NEVER alter CLASS_ID or you'll harddrake2 service to detect changes
 # in hw configuration ... :-(
-
-my @devices = detect_devices::probeall(1);
 
 our @tree =
     (
