@@ -22,7 +22,7 @@ sub drakx_version {
 
 sub facesdir {
     my ($prefix) = @_;
-    "$prefix/usr/share/faces/";
+    "$prefix/usr/share/mdk/faces/";
 }
 sub face2xpm {
     my ($face, $prefix) = @_;
