@@ -95,9 +95,10 @@ sub init {
 
 drakx_stuff:
     $o->{steps}{startMove} = { reachable => 1, text => "Start Move" };
+    $o->{steps}{handleI18NClp} = { reachable => 1, text => "Handle I18N CLP" };
     $o->{steps}{handleMoveKey} = { reachable => 1, text => "Handle Move Key" };
     $o->{orderedSteps_orig} = $o->{orderedSteps};
-    $o->{orderedSteps} = [ qw(selectLanguage acceptLicense handleMoveKey selectMouse selectKeyboard startMove) ];
+    $o->{orderedSteps} = [ qw(selectLanguage handleI18NClp acceptLicense handleMoveKey selectMouse selectKeyboard startMove) ];
     
     member($_, @ALLOWED_LANGS) or delete $lang::langs{$_} foreach keys %lang::langs;
 }
@@ -121,10 +122,14 @@ sub lomount_clp {
     run_program::run('mount', '-r', $dev, $dir);
 }
 
-sub install2::handleMoveKey {
+sub install2::handleI18NClp {
     my $o = $::o;
 
     lomount_clp("always_i18n_$o->{locale}{lang}", '/usr');
+}
+
+sub install2::handleMoveKey {
+    my $o = $::o;
 
     require detect_devices;
     require fsedit;
