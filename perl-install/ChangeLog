@@ -1,3 +1,14 @@
+2002/02/16  Pixel  <pixel@mandrakesoft.com>
+
+	* lang.pm (country2lang): created
+	(write): ensure it doesn't fail when kdeglobals is not writable (eg: the
+	directory doesn't exist)
+	(list): return the languages in a "specific" order (favours non utf8
+	over utf8)
+	fix call to update_gnomekderc
+
+	* standalone/localedrake: handle --kde_country=<country>
+
 2002/02/16  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* share/po/da.po: updated Danish file
