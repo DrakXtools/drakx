@@ -48,6 +48,7 @@ sub installPackages {
 				 qw(hcfpcimodem hsflinmodem ltmodem), "NVIDIA_nforce-$kernel_version",
 				 qw(xinput), #- for some mice
                                  qw(perl-Term-Readline-Gnu binutils),  #- allow debugging move
+                                 qw(openssh-askpass-gnome),  #- openssh-askpass for mountloop doesn't allow to click on ok/cancel buttons
                                                                  ],
 					    });
 
