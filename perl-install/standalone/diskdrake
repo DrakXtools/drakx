@@ -54,7 +54,7 @@ foreach (@types) {
 	last;
     }
 }
-%options and die "usage: diskdrake [--expert] [--testing] [--{" . join(",", @types) . "}]\n";
+keys %options and die "usage: diskdrake [--expert] [--testing] [--{" . join(",", @types) . "}]\n";
 
 if ($>) {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
