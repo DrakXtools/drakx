@@ -243,7 +243,7 @@ user "$adsl->{login}"
 
            pppoe => {
                      # we do not call directly pppd, rp-pppoe take care of "plugin rp-pppoe.so" peers option and the like
-                     connect => "LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /usr/sbin/adsl-start $netc->{NET_DEVICE} $adsl->{login}",
+                     connect => "LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /usr/sbin/adsl-start",
                      disconnect => qq(/usr/sbin/adsl-stop
 /usr/bin/killall pppoe pppd\n),
                     },
