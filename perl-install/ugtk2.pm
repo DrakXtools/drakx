@@ -941,7 +941,7 @@ sub _create_window {
     my $w = gtknew('Window', 
 		   if_(!$::isInstall && !$::isWizard, border_width => 5),
 		   widget_name => 'Title',
-		   position_policy => !$::isInstall && !$::isStandalone ? 'center_always' : 'center-on-parent',
+		   position_policy => !$::isInstall && !$::isStandalone ? 'center-always' : 'center-on-parent',
 		   if_(!$::isInstall, icon_no_error => wm_icon()),
 
 		   if_($::isInstall, position => [
