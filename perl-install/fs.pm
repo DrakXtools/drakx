@@ -74,14 +74,66 @@ sub mount_options {
 			sync => 'async', noatime => 'atime', noauto => 'auto', ro => 'rw', 
 			user => 'nouser', nodev => 'dev', noexec => 'exec', nosuid => 'suid',
 		       );
+    my @user_implies = qw(noexec nodev nosuid);
+    \%non_defaults, \@user_implies;
+}
+
+sub mount_options_unpack {
+    my ($packed_options, $part) = @_;
+
+    my ($non_defaults, $user_implies) = mount_options();
+
+    my @auto_fs = auto_fs();
     my %per_fs = (
 		  iso9660 => [ qw(unhide) ],
 		  vfat => [ qw(umask=0) ],
 		  nfs => [ 'rsize=8192,wsize=8192' ],
 		 );
-    my @user_implies = qw(noexec nodev nosuid);
-    my @options = keys %non_defaults;
-    my %help = map { $_ => '' } (@options, map { @$_ } values %per_fs);
+    while (my ($fs, $l) = each %per_fs) {
+	isThisFs($fs, $part) || $part->{type} eq 'auto' && member($fs, @auto_fs) or next;
+	$non_defaults->{$_} = 1 foreach @$l;
+    }
+
+    my $defaults = { reverse %$non_defaults };
+    my %options = map { $_ => 0 } keys %$non_defaults;
+    my @unknown;
+    foreach (split(",", $packed_options)) {
+	if ($_ eq 'user') {
+	    $options{$_} = 1 foreach ('user', @$user_implies);
+	} elsif (exists $non_defaults->{$_}) {
+	    $options{$_} = 1;
+	} elsif ($defaults->{$_}) {
+	    $options{$defaults->{$_}} = 0;
+	} else {
+	    push @unknown, $_;
+	}
+    }
+    my $unknown = join(",", @unknown);
+    \%options, $unknown;
+}
+
+sub mount_options_pack {
+    my ($options, $unknown) = @_;
+
+    my ($non_defaults, $user_implies) = mount_options();
+    my @l;
+    if (delete $options->{user}) {
+	push @l, 'user';
+	foreach (@$user_implies) {
+	    if (!delete $options->{$_}) {
+		# overriding
+		$options->{$non_defaults->{$_}} = 1;
+	    }
+	}
+    }
+    push @l, grep { $options->{$_} } keys %$options;
+    push @l, $unknown;
+
+    join(",", @l);
+}
+
+sub mount_options_help {
+    my %help = map { $_ => '' } @_;
     my %short = map { /(.*?)=/ ? ("$1=" => $_) : () } keys %help;
 
     foreach (split(':', $ENV{LANGUAGE}), '') {
@@ -108,7 +160,7 @@ sub mount_options {
 	    }
 	}
     }
-    \%help, \%non_defaults, \%per_fs, \@user_implies;
+    %help;
 }
 
 sub get_mntpoints_from_fstab {
