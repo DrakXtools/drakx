@@ -163,7 +163,7 @@ sub ask_fromW_real {
 		$w->TreeAdd($text, $index, $parents);
 	    };
 
-	    my @data = (undef);
+	    my @data = '';
 	    my $populate; $populate = sub {
 		my ($node, $parents) = @_;
 		if (my $l = $node->{_order_}) {
@@ -175,9 +175,8 @@ sub ask_fromW_real {
 		if (my $l = $node->{_leaves_}) {
 		    foreach (@$l) {
 			my ($leaf, $data) = @$_;
-			my $s = scalar($data);
+			$add_item->($leaf, int(@data), $parents);
 			push @data, $data;
-			$add_item->($leaf, int(@data) - 1, $parents);
 		    }
 		}
 	    };
