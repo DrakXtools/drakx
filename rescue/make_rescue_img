@@ -35,6 +35,10 @@ sub install_lib {
 _ "$sudo rm -rf $tmp" if -e $tmp;
 _ "mkdir $tmp";
 _ 'find . -name "*~" | xargs rm -f';
+foreach (cat_("dirs")) {
+    chomp;
+    commands::mkdir_("-p", "$tmp$_");
+}
 _ "cp -a tree/* $tmp";
 _ "find $tmp -name 'CVS*' | xargs rm -rf";
 _ "cd $tmp; mkdir -p lib tmp modules proc";
@@ -50,10 +54,6 @@ foreach (cat_("list"), cat_(`../tools/specific_arch list`)) {
     chomp;
     install($_);
     chomp, install_lib($_) foreach `ldd $_ 2>/dev/null | grep "=>" | sed -e 's/.*=> //' -e 's/ .*//'`;
-}
-foreach (cat_("dirs")) {
-    chomp;
-    commands::mkdir_("-p", "$tmp$_");
 }
 foreach (cat_("aliases")) {
     chomp; my ($f, $dest) = split;
