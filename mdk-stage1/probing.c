@@ -209,6 +209,9 @@ static void find_media(void)
 	if (fd != -1) {
 		enum { SCSI_TOP, SCSI_HOST, SCSI_VENDOR, SCSI_TYPE } state = SCSI_TOP;
 		char * start, * chptr, * next, * end;
+		char scsi_disk_count = 'a';
+		char scsi_cdrom_count = '0';
+		char scsi_tape_count = '0';
 
 		int i = read(fd, &buf, sizeof(buf));
 		if (i < 1) {
@@ -225,9 +228,6 @@ static void find_media(void)
 		while (*start) {
 			char tmp_model[50];
 			char tmp_name[10];
-			char scsi_disk_count = 'a';
-			char scsi_cdrom_count = '0';
-			char scsi_tape_count = '0';
 
 			chptr = start;
 			while (*chptr != '\n') chptr++;
