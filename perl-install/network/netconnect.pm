@@ -186,7 +186,7 @@ If you don't want to use the auto detection, deselect the checkbox.
   step_2_2:
     eval { if ($netconnect::need_restart_network && $::isStandalone && (!$::expert || $in->ask_yesorno(N("Network configuration"),
 												       N("The network needs to be restarted. Do you want to restart it ?"), 1))) {
-	if (!run_program::rooted($prefix, "/etc/rc.d/init.d/network restart")) {
+	if (!$::testing && !run_program::rooted($prefix, "/etc/rc.d/init.d/network restart")) {
 	    $success = 0;
 	    $in->ask_okcancel(N("Network Configuration"), 
 			      N("A problem occured while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), 0);
