@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.10mdk
+Release: 0.11mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -366,6 +366,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Jan 12 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.11mdk
+- harddrake2: display the menubar and the banner when embedded
+
 * Wed Jan 12 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.10mdk
 - drakbackup, drakTermServ: silent install of terminal-server (urpmi
   --X is deprecated) (rafael)
