@@ -427,7 +427,7 @@ sub test_mouse {
     $draw_rect->(1, 0, [ 0, 0, $width, $height]);
     $draw_text->(_("Please test the mouse"), 2 * $bh - 20);
     $draw_text->(_("To activate the mouse,"), 2 * $bh + 10) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
-    $draw_text->(_("MOVE YOUR WHEEL!"),     2 * $bh + 20) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+    $draw_text->(_("MOVE YOUR WHEEL!"),     2 * $bh + 30) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
  
     $paintButton->($_, 0) foreach 0..2;
     $w->{cancel}->grab_focus;

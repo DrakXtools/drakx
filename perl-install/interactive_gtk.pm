@@ -225,7 +225,7 @@ sub ask_many_from_listW {
 		    my $f = $l->{icons}[$i];
 		    -e $f ? gtkpack_(new Gtk::HBox(0,10), 0, new Gtk::Pixmap(gtkcreate_xpm($w->{window}, $f)), 1, $o) : $o;
 		} @{$l->{labels}});
-	@{$l->{labels}} > 11 ? gtkset_usize(createScrolledWindow($box), @{$l->{icons}} ? 350 : 0, $::windowheight - 200) : $box;
+	@{$l->{labels}} > (@{$l->{icons}} ? 5 : 11) ? gtkset_usize(createScrolledWindow($box), @{$l->{icons}} ? 350 : 0, $::windowheight - 200) : $box;
     } @l;
     gtkadd($w->{window},
 	   gtkpack_(create_box_with_title($w, @$messages),

@@ -32,6 +32,7 @@ Please choose \"Rescue\" if you wish to rescue an already installed version of L
 
 Depend of your knowledge in GNU/Linux, you can choose one of the following levels to install or rescue your
 Linux-Mandrake operating system:
+
 	* Recommanded: if you have never installed a GNU/Linux operating system choose this. Installation will be
 	  be very easy and you will be asked only on few questions.
 
@@ -58,6 +59,7 @@ selectInstallClassCorpo =>
 
 selectInstallClass2 =>
 __("You must now define your machine usage. Choices are:
+
 	* Workstation: this the ideal choice if you intend to use your machine primarily for everyday use, at office or
 	  at home.
 
@@ -88,8 +90,6 @@ Guide (chapter 3, section \"Collective informations on your hardware) for hints
 on retrieving this information from hardware documentation, from the
 manufacturer's Web site (if you have Internet access) or from Microsoft Windows
 (if you have it on your system)."),
-
-setupSCSIChoose => __("Please choose a driver for your SCSI adapter."),
 
 doPartitionDisks => __("At this point, you need to choose where to install your
 Linux-Mandrake operating system on your hard drive. If it is empty or if an
@@ -148,6 +148,7 @@ disk for partitioning by clicking on \"hda\" for the firs IDE drive, \"hdb\" for
 the second or \"sda\" for the first SCSI drive and so on.
 
 To partition the selected hard drive, you can use these options:
+
    * Clear all: this option deletes all partitions available on the selected hard drive.
 
    * Auto allocate:: this option allows you to automatically create Ext2 and swap partitions in free space of your
@@ -173,8 +174,11 @@ To partition the selected hard drive, you can use these options:
 
 For information, you can reach any option using the keyboard: navigate trough the partitions using Tab and Up/Down
         arrows. When a partition is selected, you can use:
+
            * Ctrl-c to create a new partition (when a empty partition is selected)
+
            * Ctrl-d to delete a partition
+
            * Ctrl-m to set the mount point"),
 
 ask_mntpoint_s => __("Above are listed the existing Linux partitions detected on
@@ -194,10 +198,15 @@ For information, each partition is listed as follows: \"Name\", \"Capacity\".
 if it is an SCSI hard drive.
 
 \"Hard drive number\" is always a letter after \"hd\" or \"sd\". With IDE hard drives:
+
    * \"a\" means \"master hard drive on the primary IDE controller\",
-           * \"b\" means \"slave hard drive on the primary IDE controller\",
+
+   * \"b\" means \"slave hard drive on the primary IDE controller\",
+
    * \"c\" means \"master hard drive on the secondary IDE controller\",
+
    * \"d\" means \"slave hard drive on the secondary IDE controller\".
+
 With SCSI hard drives, a \"a\" means \"primary hard drive\", a \"b\" means \"secondary hard drive\", etc..."),
 
 takeOverHdChoose => __("Choose the hard drive you want to erase to install your
@@ -226,10 +235,15 @@ name\" \"Capacity\".
 if it is an SCSI hard drive.
 
 \"Hard drive number\" is always a letter putted after \"hd\" or \"sd\". With IDE hard drives:
+
    * \"a\" means \"master hard drive on the primary IDE controller\",
+
    * \"b\" means \"slave hard drive on the primary IDE controller\",
+
    * \"c\" means \"master hard drive on the secondary IDE controller\",
+
    * \"d\" means \"slave hard drive on the secondary IDE controller\".
+
 With SCSI hard drives, a \"a\" means \"primary hard drive\", a \"b\" means \"secondary hard drive\", etc.
 
 \"Windows name\" is the letter of your hard drive under Windows (the first disk
@@ -388,9 +402,9 @@ will probably want not to start any services that you don't need. Please
 remember that several services can be dangerous if they are enable on a server.
 In general, select only the services that you really need."),
 
-configurePrinter => __("You can configure a local printer (connected to your
-computer) or remote printer (accessible via a Unix, Netware or Microsoft Windows
-network)."),
+configurePrinter => 
+__("You can configure a local printer (connected to your computer) or remote
+printer (accessible via a Unix, Netware or Microsoft Windows network)."),
 
 configurePrinterSystem => __("
 If you wish to be able to print, please choose one printing system between CUPS and LPR.
@@ -404,37 +418,44 @@ LPR is the old printing system used in previous Linux-Mandrake distributions.
 If you don't have printer, click on \"None\"."),
 
 configurePrinterConnected => 
-__("GNU/Linux can deal with many types of printer. Each of these types require a different setup.
+__("GNU/Linux can deal with many types of printer. Each of these types requires
+a different setup.
 
-If your printer is physically connected to your computer, select \"Local printer\".
+If your printer is physically connected to your computer, select \"Local
+printer\".
 
-If you want to access a printer located on a remote Unix machine, select \"Remote printer\".
+If you want to access a printer located on a remote Unix machine, select
+\"Remote printer\".
 
 If you want to access a printer located on a remote Microsoft Windows machine
 (or on Unix machine using SMB protocol), select \"SMB/Windows 95/98/NT\"."),
 
-configurePrinterLocal => __("Please turn on your printer before continue if you
-wish DrakX try to detect it.
+configurePrinterLocal => 
+__("Please turn on your printer before continuing to let DrakX detect it.
 
-You need to enter some informations here.
-   * Name of printer: the print spooler uses \"lp\" as default printer name. So, you need have a printer named \"lp\".
+You have to enter some informations here.
+
+   * Name of printer: the print spooler uses \"lp\" as default printer name. So, you must have a printer named \"lp\".
      If you have only one printer, you can use several names for it. You just need to separate them by a pipe
-     character (a \"|\"). So, if you prefer to have a more meaningful name, you have to put it first, eg: \"My printer|lp\".
+     character (a \"|\"). So, if you prefer a more meaningful name, you have to put it first, eg: \"My printer|lp\".
      The printer having \"lp\" in its name(s) will be the default printer.
 
-   * Description: this optional but can be useful if several printers are connected on your computer or if you allow
+   * Description: this optional but can be useful if several printers are connected to your computer or if you allow
      other computers to access to this printer.
 
-   * Location: if you want to put some informations on where is your printer, put them here (you are free to write what
-     you want)."),
+   * Location: if you want to put some information on your
+     printer location, put it here (you are free to write what
+     you want, for example \"2nd floor\").
+"),
 
-configurePrinterDev => __("Your printer have not been detected. Please enter
-name of device on which it is connected.
+configurePrinterDev => 
+__("Your printer has not been detected. Please enter the name of the device on
+which it is connected.
 
-For information, most of printers are connecter on first paralell port. This one
-is called \"/dev/lp0\" under GNU/Linux and \"LPT1\" under Microsoft Windows."),
+For information, most printers are connected on the first parallel port. This
+one is called \"/dev/lp0\" under GNU/Linux and \"LPT1\" under Microsoft Windows."),
 
-configurePrinterType => __("You now need to select your printer in list above."),
+configurePrinterType => __("You must now select your printer in the above list."),
 
 setRootPassword => __("You can now enter the root password for your
 Linux-Mandrake system. The password must be entered twice to verify that both
@@ -521,7 +542,9 @@ omitted or is set to zero.
 
   - Video mode: This specifies the VGA text mode that should be selected
 when booting. The following values are available: 
+
     * normal: select normal 80x25 text mode.
+
     * <number>:  use the corresponding text mode."),
 
 setupSILOAddEntry =>

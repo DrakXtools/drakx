@@ -307,6 +307,7 @@ sub setPackages($) {
 	  pkgs::readCompssUsers($o->{packages}, $o->{compss});
 
 	my @l = ();
+	push @l, 'xawtv', 'kwintv' if grep { $_->{driver} eq 'bttv' } detect_devices::probeall();
 	push @l, "kapm", "kcmlaptop", "DrakProfile", "DrakSync" if $o->{pcmcia};
 	push @l, "Glide_V5"  if detect_devices::matching_desc('Voodoo 5');
 	push @l, "Glide_V3-DRI"  if detect_devices::matching_desc('Voodoo (3|Banshee)');

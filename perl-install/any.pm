@@ -502,10 +502,7 @@ sub setup_thiskind {
 	my $opt = [ __("Yes"), __("No") ];
 	push @$opt, __("See hardware info") if $::expert;
 	my $r = "Yes";
-	unless ($at_least_one && @l == 0) {
-	    $::o->set_help('setupSCSIChoose') if $::isInstall;
-	    $r = $in->ask_from_list_('', $msg, $opt, "No");
-	}
+	$r = $in->ask_from_list_('', $msg, $opt, "No") unless $at_least_one && @l == 0;
 	if ($r eq "No") { return @l }
 	if ($r eq "Yes") {
 	    push @l, load_module($in, $type) || next;

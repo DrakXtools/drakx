@@ -1,5 +1,14 @@
 2000-09-26  Pixel  <pixel@mandrakesoft.com>
 
+	* install_steps_interactive.pm (selectLanguage): integrate the
+	license (temporary one)
+
+	* modules.pm (write_conf): fix the /etc/modules generation
+
+	* interactive_gtk.pm (ask_many_from_listW): if more than 5 entries
+	in icon format, use scrollbar. In non-icon format, use scrollbar
+	for more than 11 entries.
+
 	* commands.pm (bug): add ddcxinfos
 
 	* pci_probing/pcitable: replace tulip by de4x5 for 2104x cards	

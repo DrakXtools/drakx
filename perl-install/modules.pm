@@ -558,14 +558,15 @@ sub write_conf {
 	    print F "$type $mod $v2\n" if $v2 && $type ne "loaded" && !$written->{$mod}{$type};
 	}
     }
-    my @l = map { "scsi_hostadapter$_\n" } '', 1..$scsi-1 if $scsi;
+    my @l = map { "scsi_hostadapter$_" } '', 1..$scsi-1 if $scsi;
     push @l, 'ide-floppy' if detect_devices::ide_zips();
     push @l, 'bttv' if grep { $_->{driver} eq 'bttv' } detect_devices::probeall();
+    my $l = join '|', @l;
     log::l("to put in modules @l");
 
     substInFile { 
-	$_ = '' if /^scsi_hostadapter/;
-	$_ = join '', @l if eof;
+	$_ = '' if /$l/;
+	$_ = join '', map { "$_\n" } @l if eof;
     } "$prefix/etc/modules";
 }
 
