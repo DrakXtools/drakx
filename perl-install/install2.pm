@@ -374,7 +374,6 @@ sub main {
 	    step      => sub { $o->{steps}{first} = $v },
 	    expert    => sub { $::expert = $v },
 	    meta_class => sub { $o->{meta_class} = $v },
-	    lnx4win   => sub { $o->{lnx4win} = 1 },
 	    readonly  => sub { $o->{partitioning}{readonly} = $v ne "0" },
 	    display   => sub { $o->{display} = $v },
 	    askdisplay => sub { print "Please enter the X11 display to perform the install on ? "; $o->{display} = chomp_(scalar(<STDIN>)) },
@@ -514,7 +513,6 @@ sub main {
     $o->{allowFB} = listlength(cat_("/proc/fb"));
 
     my $VERSION = cat__(install_any::getFile("VERSION")) or do { print "VERSION file missing\n"; sleep 5 };
-    $o->{lnx4win} = 1 if $VERSION =~ /lnx4win/i;
     $o->{meta_class} = 'desktop' if $VERSION =~ /desktop/i;
     $o->{meta_class} = 'firewall' if $VERSION =~ /firewall/i;
     $o->{meta_class} = 'server' if $VERSION =~ /server/i;

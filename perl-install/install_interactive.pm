@@ -226,13 +226,6 @@ sub partitionWizard {
     $o->set_help('doPartitionDisks');
 
     my %solutions = partitionWizardSolutions($o, $o->{all_hds});
-    if ($o->{lnx4win}) {
-	if ($solutions{loopback}) {
-	    %solutions = (loopback => $solutions{loopback});
-	} else {
-	    $o->ask_warn('', N("You don't have enough free space on your Windows partition")) if any { isFat($_) } fsedit::get_all_fstab($o->{all_hds});
-	}
-    }
 
     delete $solutions{diskdrake} if $nodiskdrake;
 
