@@ -471,11 +471,11 @@ iconv(s, from_charset, to_charset)
   iconv_t cd = iconv_open(to_charset, from_charset);
   RETVAL = s;
   if (cd != (iconv_t) (-1)) {
-      int s_len = strlen(RETVAL);
+      size_t s_len = strlen(RETVAL);
       char *buf = alloca(3 * s_len + 10); /* 10 for safety, it should not be needed */
       {
 	  char *ptr = buf;
-	  int ptr_len = 3 * s_len + 10;
+	  size_t ptr_len = 3 * s_len + 10;
 	  if ((iconv(cd, &s, &s_len, &ptr, &ptr_len)) != (size_t) (-1)) {
 	      *ptr = 0;
 	      RETVAL = buf;
