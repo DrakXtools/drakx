@@ -329,7 +329,7 @@ sub selectLanguage {
 
     addToBeDone {
 	unless ($o->{isUpgrade}) {
-	    lang    ::write($o->{prefix});
+	        lang::write($o->{prefix});
             keyboard::write($o->{prefix}, $o->{keyboard});
 	}
     } 'doInstallStep';

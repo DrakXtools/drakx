@@ -15,6 +15,7 @@ use detect_devices;
 use network;
 use modules;
 use lang;
+use pkgs;
 use keyboard;
 use fs;
 use log;
