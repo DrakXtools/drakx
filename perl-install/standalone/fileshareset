@@ -45,7 +45,7 @@ To grant you the rights:
 - or put user "$username" in group "$authorisation_group");
 my $no_export_method = "can't export anything: no nfs, no smb";
 
-my %exit_codes = reverse (
+my %exit_codes = reverse(
   1 => $non_authorised,
   2 => $usage,
 
@@ -94,7 +94,7 @@ if ($modify) {
 	$export->update_server;
     }
 }
-my @mntpoints = grep {$_} uniq(map { map { $_->{mntpoint} } @$_ } @exports);
+my @mntpoints = grep { $_ } uniq(map { map { $_->{mntpoint} } @$_ } @exports);
 print "$_\n" foreach grep { own($_) } @mntpoints;
 
 
@@ -194,7 +194,7 @@ sub read {
     local *F;
     open F, $file or return [];
 
-    my ($prev_raw, $prev_line, %e, @l);
+    my ($prev_raw, $prev_line, @l);
     my $line_nb = 0;
     foreach my $raw (<F>) {
 	$line_nb++;
@@ -254,7 +254,7 @@ sub write {
 }
 
 sub update_server {
-    if (fork) {
+    if (fork()) {
 	system('/usr/sbin/exportfs', '-r');
 	if (system('/sbin/pidof rpc.mountd >/dev/null') != 0 ||
 	    system('/sbin/pidof nfsd >/dev/null') != 0) {
@@ -377,7 +377,7 @@ sub name_mangle {
 }
 
 sub update_server {
-    if (fork) {
+    if (fork()) {
 	system('/usr/bin/killall -HUP smbd 2>/dev/null');
 	if (system('/sbin/pidof smbd >/dev/null') != 0 ||
 	    system('/sbin/pidof nmbd >/dev/null') != 0) {
