@@ -38,12 +38,22 @@ $::noauto = /-noauto/;
 $::skiptest = /-skiptest/;
 $::testing = /-testing/;
 
-my $printer; eval { $printer = printer::getinfo('') };
-/-lpr/ and $printer->{mode} = 'lpr';
-/-cups/ and $printer->{mode} = 'CUPS';
-$printer->{mode} ||= 'CUPS'; #- assume this default if nothing found.
+my $printer;
+# Get what was installed before
+eval { $printer = printer::getinfo('') };
+# Choose the spooler by command line options
+/-cups/ and
+    $printer->{mode} = 'cups' and printer::read_configured_queues($printer);
+/-lpr/ and 
+    $printer->{mode} = 'lpd' and printer::read_configured_queues($printer);
+/-lpd/ and 
+    $printer->{mode} = 'lpd' and printer::read_configured_queues($printer);
+/-lprng/ and 
+    $printer->{mode} = 'lprng' and printer::read_configured_queues($printer);
+/-pdq/ and 
+    $printer->{mode} = 'pdq' and printer::read_configured_queues($printer);
 
-my $in = vnew interactive('su', 'printer');
+my $in = vnew interactive('printer', 'su');
 
 -r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
 
