@@ -334,20 +334,6 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
  - drakfloppy, drakconnect: fix more dialogs height
  - fix requires
 
-* Thu Sep  4 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-6mdk
-- diskdrake: fix #5204 (pixel)
-- drakbackup: fix untranslatable strings, ... (stew)
-- drakboot: default parameters are those of the default target (pixel)
-- drakconnect:
-  o fix #5242: loop on winmodem connection if no windomem but winmodem
-    is selected
-  o offer to select modem device
-- drakedm: in non expert mode, only display the list of *installed* display
-  managers
-- drakfloppy, drakconnect: fix more dialogs height
-- fix requires
-- lsnetdrake: fix it on AMD64 (gwenole)
-
 * Thu Aug 28 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-5mdk
 - drakhelp: add support for contextual help (daouda)
 - explanations are back (pixel)
