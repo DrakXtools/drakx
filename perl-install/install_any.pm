@@ -655,6 +655,7 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
 	log::l($@) if $@;
 	$m->{prefix} = "$o->{prefix}/var/ftp/pub/Mandrakelinux";
 	$m->{method} = 'disk';
+	$m->{with_hdlist} = 'media_info/hdlist.cz'; #- for install_urpmi
     }
     #- now the install will continue as 'disk'
     $o->{method} = 'disk';
