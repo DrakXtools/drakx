@@ -312,13 +312,11 @@ sub gateway {
     my @masked = masked_ip($ip) =~ $ip_regexp;
     $masked[3]  = 1;
     join(".", @masked);
-
 }
 
 sub configureNetworkIntf {
     my ($netc, $in, $intf, $net_device, $skip, $module) = @_;
     my $text;
-    my @wireless_modules = qw(aironet_cs aironet4500_cs hermes airo orinoco_cs orinoco airo_cs netwave_cs ray_cs wavelan_cs wvlan_cs airport 3c59x);
     if (is_wireless_intf($intf, $module)) {
 	$intf->{wireless_eth} = 1;
 	$netc->{wireless_eth} = 1;
