@@ -1,3 +1,31 @@
+2002/09/19  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: try to avoid infinite loop on error to install package.
+
+2002/09/19  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone.pm: when in install mode, log when a **** does a "use
+	standalone"
+
+	* interactive.pm: require log will reliably fail, use require 'log.pm'
+	instead
+
+	* install_steps_interactive.pm: fix titisucks making cards choice in bttv
+	dialog unavailable
+
+	* install2.pm: revert
+
+2002/09/19  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake/interactive.pm: catch error in Done (mainly "reboot needed"),
+	so that fstab can be written
+	even if reboot needed (useful when removing partitions mounted by
+	default)
+
+	* install_steps.pm: 
+	  - do not set type to ext2 when the type is ntfs
+	  - set to ext3 instead of ext2
+
 2002/09/19  Daouda Lo  <daouda@mandrakesoft.com>
 
 	* standalone/drakbug: 
@@ -3806,7 +3834,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.753 2002/09/18 14:47:41 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.754 2002/09/19 13:41:32 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
