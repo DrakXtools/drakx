@@ -395,41 +395,20 @@ usb_probe()
 unsigned int
 getpagesize()
 
-void
-getNetInterfaces()
-  PPCODE:
-    struct ifconf ifc;
-    struct ifreq *ifr;
-    int fd, n;
-    
-    if ((fd = socket (PF_INET, SOCK_DGRAM, 0)) == -1) {
-         perror("getNetInterfaces() >> creating socket");
-         XSRETURN_EMPTY;
-    }
+int
+hasNetDevice(device)
+  char * device
+  CODE:
+    struct ifreq req;
+    int s = socket(AF_INET, SOCK_DGRAM, 0);
+    if (s == -1) { RETVAL = 0; return; }
 
-    // SIOCGIFCOUNT is unimplemented, let\'s call SIOCGIFCONF(0) to get number of interfaces
-    ifc.ifc_len = 0; ifc.ifc_buf = NULL; ifc.ifc_req = NULL;
-    if (ioctl (fd, SIOCGIFCONF, &ifc) == -1) {
-         perror("getNetInterfaces() >> SIOCGIFCONF(0)");
-         XSRETURN_EMPTY;
-    }
+    strcpy(req.ifr_name, device);
 
-    // allocate enough space
-    n = ifc.ifc_len / sizeof (struct ifreq);
-    New (0xbad, ifr, ifc.ifc_len, struct ifreq);
-
-    // Get the network interfaces list
-    ifc.ifc_req = ifr;
-    if (ioctl (fd, SIOCGIFCONF, &ifc) == -1) {
-         perror("getNetInterfaces() >> SIOCGIFCONF()");
-         XSRETURN_EMPTY;
-    }
-
-    EXTEND(SP, n);
-    for (; n; --n, ++ifr)
-         PUSHs(sv_2mortal(newSVpv(ifr->ifr_name, 0)));
-    Safefree (ifc.ifc_req);
-
+    RETVAL = ioctl(s, SIOCGIFFLAGS, &req) == 0;
+    close(s);
+  OUTPUT:
+  RETVAL
 
 int
 addDefaultRoute(gateway)
