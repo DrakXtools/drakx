@@ -56,10 +56,11 @@ sub delete {
 }
 
 sub change_device {
-    my ($md_part, $prev_device) = @_;
-    if ($prev_device ne $md_part->{device}) {
-	inactivate_and_dirty({ device => $prev_device });
-	$_->{raid} = $md_part->{device} foreach @{$md_part->{disks}};
+    my ($md_part, $new_device) = @_;
+    if ($new_device ne $md_part->{device}) {
+	inactivate_and_dirty($md_part);
+	$md_part->{device} = $new_device;
+	$_->{raid} = $new_device foreach @{$md_part->{disks}};
     }
 }
 

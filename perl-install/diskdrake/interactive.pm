@@ -1006,15 +1006,15 @@ sub is_part_existing {
 
 sub modifyRAID {
     my ($in, $raids, $md_part) = @_;
-    my $prev_device = $md_part->{device};
+    my $new_device = $md_part->{device};
     $in->ask_from('', '',
 		  [
-{ label => N("device"), val => \$md_part->{device}, list => [ $md_part->{device}, raid::free_mds($raids) ], sort => 0 },
+{ label => N("device"), val => \$new_device, list => [ $md_part->{device}, raid::free_mds($raids) ], sort => 0 },
 { label => N("level"), val => \$md_part->{level}, list => [ qw(0 1 4 5 linear) ] },
 { label => N("chunk size in KiB"), val => \$md_part->{'chunk-size'} },
 		  ],
 		 ) or return;
-    raid::change_device($md_part, $prev_device);
+    raid::change_device($md_part, $new_device);
     raid::updateSize($md_part); # changing the raid level changes the size available
     1;
 }
